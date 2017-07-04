@@ -1,0 +1,113 @@
+Test-Asn1rt DEFINITIONS AUTOMATIC TAGS ::=
+BEGIN
+  
+  -- NULL
+  Null ::= NULL
+  
+  -- BOOLEAN
+  Boo01 ::= BOOLEAN
+  Boo02 ::= BOOLEAN (TRUE)
+  
+  -- INTEGER
+  Int01 ::= INTEGER
+  Int02 ::= INTEGER (MIN..65535)
+  Int03 ::= INTEGER (-1..MAX)
+  Int04 ::= INTEGER (1..MAX)
+  Int05 ::= INTEGER (0..MAX)
+  Int06 ::= INTEGER (3..6)
+  Int07 ::= INTEGER (4000..4254)
+  Int08 ::= INTEGER (4000..4255)
+  Int09 ::= INTEGER (0..32000)
+  Int10 ::= INTEGER (1..65538)
+  Int11 ::= INTEGER(MIN..65535, ...)
+  Int12 ::= INTEGER (-1..MAX, ...)
+  Int13 ::= INTEGER (3..6, ...)
+  Int14 ::= INTEGER (1..65538, ...)
+  
+  -- REAL
+  Rea01 ::= REAL
+  Rea02 ::= REAL (0.00e0..9.99e-9)
+  
+  -- ENUMERATED
+  Enu01 ::= ENUMERATED {cheese, cake, coffee, tea}
+  Enu02 ::= ENUMERATED {cheese}
+  Enu03 ::= ENUMERATED {cheese, ...}
+  Enu04 ::= ENUMERATED {cheese, ..., cake, coffee, tea}
+  
+  -- OID
+  Oid01 ::= OBJECT IDENTIFIER
+  Oid02 ::= RELATIVE-OID
+  
+  -- BIT STRING
+  Bst01 ::= BIT STRING
+  Bst02 ::= BIT STRING (SIZE (0..24))
+  Bst03 ::= BIT STRING (SIZE (0..24, ...))
+  Bst04 ::= BIT STRING (SIZE (65536..16777216))
+  Bst05 ::= BIT STRING (CONTAINING Enu01)
+  
+  -- OCTET STRING
+  Ost01 ::= OCTET STRING
+  Ost02 ::= OCTET STRING (SIZE (0..24))
+  Ost03 ::= OCTET STRING (SIZE (0..24, ...))
+  Ost04 ::= OCTET STRING (SIZE (65536..16777216))
+  Ost05 ::= OCTET STRING (CONTAINING Enu01)
+  
+  -- String
+  Nus01 ::= NumericString
+  Nus02 ::= NumericString (FROM ("0123"))
+  Prs01 ::= PrintableString
+  Prs02 ::= PrintableString (FROM ("ATCG"))
+  Ias01 ::= IA5String
+  Ias02 ::= IA5String (SIZE (0..24))
+  Ias03 ::= IA5String (SIZE (0..65535, ...))
+  U8s01 ::= UTF8String
+  U8s02 ::= UTF8String (SIZE (0..24))
+  U8s03 ::= UTF8String (SIZE (0..65535, ...))
+  Uns01 ::= UniversalString
+  Uns02 ::= UniversalString (SIZE (0..255, ...))
+  
+  -- date
+  Uti01 ::= UTCTime
+  Gti01 ::= GeneralizedTime
+  
+  -- CHOICE
+  Int24 ::= [APPLICATION 80] EXPLICIT Int04
+  Cho01 ::= CHOICE {
+    boo Boo01,
+    int [10] EXPLICIT Int24,
+    enu Enu01,
+    ...,
+    bst Bst03
+    }
+  
+  -- SEQUENCE
+  Seq01 ::= SEQUENCE {
+    boo Boo01,
+    int [128] Int24 DEFAULT 10,
+    enu Enu01 OPTIONAL,
+    ...,
+    [[ bst Bst01,
+       ost Ost02 ]]
+    }
+  
+  Seq02 ::= SEQUENCE (SIZE (2..5)) OF Ias02
+  
+  -- SET
+  Set01 ::= SET {
+    boo Boo01,
+    int [64] Int04 DEFAULT 10,
+    cho CHOICE {
+      boo Boo01,
+      int Int04,
+      enu Enu01
+      },
+    enu Enu01 OPTIONAL,
+    ...,
+    [[ bst Bst01,
+       ost Ost02 ]]
+    }
+  
+  -- EXTERNAL, EMBEDDED PDV, CHARACTER STRING
+  
+
+END

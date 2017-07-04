@@ -1,0 +1,297 @@
+HardcoreSyntax DEFINITIONS AUTOMATIC TAGS ::=
+
+BEGIN
+  
+  -- basic object definition
+  Nul000 ::= [PRIVATE 1] NULL
+  Nul001 ::= [PRIVATE 2] EXPLICIT Nul000 (NULL)
+  Bool000 ::= [APPLICATION 3] IMPLICIT BOOLEAN
+  Bool001 ::= [APPLICATION 4] EXPLICIT Bool000 (TRUE, ..., FALSE)
+  Int000 ::= [5] INTEGER {un(1), deux(2)}
+  Int001 ::= [6] Int000 (0..10, ..., 20..100)
+  Real000 ::= [7] REAL
+  Real001 ::= [8] Real000 (1.2e-10..1e10, ...)
+  Real002 ::= [8002] Real000 (1e-100|1e-10|1<..<1e100, ..., 2e-50|3e-50)
+  Enum000 ::= [9] ENUMERATED {un, dos, tres}
+  Enum001 ::= [10] Enum000 (un | dos)
+  BStr000 ::= [11] BIT STRING {one(1), two(2), three(3)} (SIZE(0..256))
+  BStr001 ::= [12] BStr000 (SIZE(4)) ('0110'B|'1001'B, ..., '1111'B)
+  BStr002 ::= [13] BStr000 (CONTAINING Real000)
+  OStr000 ::= [14] OCTET STRING (SIZE(0..16))
+  OStr001 ::= [15] OStr000 (CONTAINING Enum001)
+  OStr002 ::= [16] OStr000 (CONTAINING BStr002)
+  Oid000 ::= [17] OBJECT IDENTIFIER
+  Oid001 ::= [18] Oid000 ({0 1 2}|{3 4 5})
+  ROid000 ::= [19] RELATIVE-OID
+  ROid001 ::= [20] ROid000 ({6 7 8}, ...)
+  IA5000 ::= [21] IA5String (SIZE(0..1000))
+  IA5001 ::= [22] IA5000 (FROM("a".."z"))
+  PStr000 ::= [23] PrintableString ("A"|"B"|"AB"|"O")
+  PStr001 ::= [24] PStr000 (SIZE(1))
+  GTim000 ::= [25] GeneralizedTime
+  GTim001 ::= [26] GTim000 ("2016062512+0200"|"20160625124539.5290")
+  UTim000 ::= [27] UTCTime
+  UTim001 ::= [28] UTim000 ("1606251200Z"|"160625123055-0230", ...)
+  SqOf000 ::= [29] SEQUENCE SIZE (1..10) OF Bool001
+  SqOf001 ::= [30] SEQUENCE (SIZE(0..1024, ...)) OF SqOf000
+  StOf000 ::= [31] SET OF bitString002 BStr002 (SIZE (64))
+  Cho000 ::= [PRIVATE 32] CHOICE {
+    cho0 Bool001,
+    cho1 Enum001,
+    cho2 IA5000 (SIZE(10..MAX)),
+    --cho2 IA5000 (SIZE(10..20)),
+    cho3 UTim000,
+    cho4 Cho000
+    }
+  Seq000 ::= [PRIVATE 33] SEQUENCE {
+    seq0 Int001,
+    seq1 OStr001,
+    seq2 SqOf000 (SIZE(2..5)),
+    seq3 Seq000
+    }
+  
+  
+  -- basic value parsing
+  null00 NULL ::= NULL
+  bool00 BOOLEAN ::= TRUE
+  bool01 BOOLEAN ::= FALSE
+  int00 INTEGER ::= -1
+  int01 INTEGER ::= 00
+  int02 INTEGER ::= 1024
+  real00 REAL ::= 25.386e12
+  real01 REAL ::= 1024.E-56
+  real02 REAL ::= -100.00e3
+  real03 REAL ::= {mantissa 25386, base 10, exponent 9}
+  real04 REAL ::= {mantissa 3, base 2, exponent -128}
+  Enum00 ::= ENUMERATED {e0 (0), e1 (1), e2 (2), ..., eX (100), eY (101)}
+  enum00 Enum00 ::= e0
+  enum01 Enum00 ::= eX
+  bs00 BIT STRING ::= '001111100   0011 001110 110 1110001101'B
+  bs01 BIT STRING ::= '0123 4567 89AB  CDEF'H
+  os00 OCTET STRING ::= '001111100   0011 001110 110 1110001101'B
+  os01 OCTET STRING ::= '0123 4567 89AB  CDEF'H
+  oid00 OBJECT IDENTIFIER ::= {root (0) dir (1) subdir (2) file (3) 4 5}
+  oid01 OBJECT IDENTIFIER ::= {itu-t recommendation m test (28) more-test (59)}
+  roid00 RELATIVE-OID ::= {rootdir (0) dir (1) subdir (2) file (3) 4 5}
+  roid01 RELATIVE-OID ::= {test (28) more-test (59) 2569 6533125}
+  utim00 UTCTime ::= "1606251200Z"
+  utim01 UTCTime ::= "160625123055-0230"
+  gtim00 GeneralizedTime ::= "2016062512+0200"
+  gtim01 GeneralizedTime ::= "20160625124539.5290"
+  gtim02 GeneralizedTime ::= "20160625124539,5290Z"
+  str00 IA5String ::= "abcd ""ABCD"" efgh ""EFGH"" 'test' OK;  
+    go-there !"
+  
+  
+  -- content / constraint inheritance
+  Int0 ::= INTEGER {un (1), deux (2), trois (3)}
+  Int1 ::= Int0 (0..10, ...)
+  Int2 ::= Int1 (0..3)
+  
+  
+  -- INTEGER kung-fu
+  deux INTEGER ::= 2
+  dreI-3 INTEGER ::= 3
+  int Int ::= trois
+  Int ::= INTEGER {alpha(-1), beta (deux), trois(dreI-3), four( 4 )}
+  
+  
+  -- parameterization kung-fu
+  Bound ::= INTEGER (1..99)
+  
+  Range {Bound:bound} ::= SEQUENCE {
+    low INTEGER (0..bound),
+    high INTEGER (bound..100),
+    bool BOOLEAN,
+    ...,
+    null NULL
+    }
+  
+  Wrap ::= SEQUENCE {
+    r10 Range {10},
+    r90 Range {90}
+    }
+  
+  Final ::= SEQUENCE {
+    w1 Wrap,
+    w2 Wrap,
+    bool BOOLEAN
+    }
+  
+  Bnd1 {INTEGER:lo} ::= INTEGER (lo..100)
+  Bnd2 ::= Bnd1 {10}
+  Bnd3 ::= Bnd2 (20..30)
+  
+  INT01A {INTEGER:tagconst} ::= [tagconst] IMPLICIT INTEGER (0..tagconst)
+  Int01A ::= INT01A {20}
+  int01A Int01A ::= 8
+
+  int02A Int02A ::= second
+  Int02A ::= INT02A {50, 1, 2, 0, 1000}
+  INT02A {INTEGER:tag, INTEGER:st, INTEGER:nd, INTEGER:lo, INTEGER:hi} ::= [PRIVATE tag] IMPLICIT INTEGER 
+    {zero (0), first (st), second (nd)}
+    (lo..hi, ...)
+  
+  int03 INT03 {500} ::= 100
+  INT03 {Int02A:hi} ::= INTEGER (-1000..hi)
+  
+  bs01A Bs01A ::= {first, second}
+  Bs01A ::= BS01A {1, 2}
+  BS01A {INTEGER:st, INTEGER:nd} ::= BIT STRING {first (st), second (nd)}
+  
+  Unknown01 {Type} ::= [512] Type
+  Int04 ::= Unknown01 {Int01A} --not supported by OSS, but should be processable
+  Int05 ::= Unknown01 {INTEGER} --supported by OSS
+  int04 Int04 ::= 10
+  
+  SeqOf {INTEGER:bound} ::= SEQUENCE (SIZE(0..bound)) OF BOOLEAN
+  SeqOf1 ::= SeqOf{1}
+  SeqOf2 ::= SeqOf{2}
+  SeqOf3 ::= SeqOf{100000}
+  
+  
+  -- CLASS object kung-fu
+  TEST ::= CLASS {
+    &Int INTEGER,
+    &Bool BOOLEAN
+    }
+  
+  test TEST ::= { &Int {0|1}, &Bool {TRUE} }
+
+  Test TEST ::= { {&Int {0|1|2}, &Bool {TRUE|FALSE}} | 
+                  {&Int {3|4}, &Bool {TRUE, ...}} , ... }  
+  
+  WRAP ::= CLASS {
+    &Test TEST,
+    &id INTEGER
+    }
+  
+  TEST1 ::= CLASS {
+    &Int,
+    &truc &Int
+  }
+  
+  TEST2 ::= CLASS {
+    &id [100] INTEGER UNIQUE,
+    &seq [101] SEQUENCE SIZE (2) OF BOOLEAN DEFAULT {FALSE, FALSE},
+    &test10 [102] TEST1 OPTIONAL,
+    &Gratin BIT STRING OPTIONAL,
+    &de OCTET STRING OPTIONAL,
+    &Patates REAL OPTIONAL,
+    &test11 [103] TEST1 DEFAULT {&Int INTEGER (0..10), &truc 1}
+    }
+  WITH SYNTAX {
+     [TESTONE &test11] 
+     WITH ID &id MY IDENTITY 
+     [[[SEQ OF &seq BOOL] TESTZERO &test10] ON MANGE UN &Gratin [DE &de SUPER &Patates AU FROMAGE]]
+    }
+  
+  Bs BIT STRING ::= {'11'B | '00'B, ...}
+  test2 TEST2 ::= { TESTONE {&Int INTEGER, &truc 1} WITH ID 27 MY IDENTITY ON MANGE UN {Bs | '110010'B | '001110'B, ...}  }
+  
+  
+  -- constructed type kung-fu
+  Seq0A ::= [APPLICATION 2563] IMPLICIT SEQUENCE {
+    uint0 INTEGER (0..MAX) OPTIONAL,
+    uint1 INTEGER (0..MAX) OPTIONAL,
+    ...,
+    [[1:neg0 INTEGER (MIN..0),
+        neg1 INTEGER (MIN..0, ...)]],
+    [[2:boo0 BOOLEAN DEFAULT TRUE,
+        boo1 BOOLEAN DEFAULT FALSE]]
+    }
+  
+  Seq1A ::= [PRIVATE 65] EXPLICIT SEQUENCE {
+    COMPONENTS OF [66] Seq0A, -- this tag is (to my understanding) useless
+    bstr0 BIT STRING (SIZE (0..8)) DEFAULT '011011'B,
+    bstr1 BIT STRING {un(1), deux(2), quatre(4)} (SIZE (0..8)) DEFAULT {quatre},
+    seq1 Seq1A OPTIONAL, -- some recursive stuff
+    ...
+    }
+  
+  
+  -- table constraint karate
+  TEST3 ::= CLASS {
+    &index INTEGER UNIQUE,
+    &bool BOOLEAN,
+    &Type
+    }
+  
+  Test3 TEST3 ::= {
+    {&index 1, &bool TRUE,  &Type Real000} |
+    {&index 2, &bool TRUE,  &Type Int000}  |
+    {&index 3, &bool TRUE,  &Type OStr000} |
+    {&index 4, &bool TRUE,  &Type SqOf000} |
+    {&index 5, &bool TRUE,  &Type Cho000}  |
+    {&index 6, &bool FALSE, &Type Seq000}
+    }
+  
+  Seq2A ::= SEQUENCE {
+     myInd  TEST3.&index ({Test3}),
+     myBool TEST3.&bool  ({Test3}{@myInd}),
+     myType TEST3.&Type  ({Test3}{@myInd})
+     }
+    
+  
+  -- cyclic referencing kung-fu
+  Seq00 ::= SEQUENCE {
+    bool BOOLEAN,
+    s00 Seq00 OPTIONAL
+    }
+  
+  Seq01 ::= SEQUENCE {
+    bool BOOLEAN,
+    s02 Seq02 OPTIONAL
+    }
+  
+  Seq02 ::= SEQUENCE {
+    bool BOOLEAN,
+    s01 Seq01
+    }
+  
+  Recur0 ::= SEQUENCE {
+    recur Recur0 OPTIONAL,
+    null NULL
+    }
+  
+  Recur1 ::= SEQUENCE {
+    recur Recur2 OPTIONAL,
+    int INTEGER
+    }
+  
+  Recur2 ::= SEQUENCE {
+    recur Recur1 OPTIONAL,
+    bool BOOLEAN
+    }
+  
+  
+  -- recursive parameterized type, not supported yet
+--  Seq0 {INTEGER:lo, INTEGER:hi} ::= SEQUENCE {
+--    int INTEGER (lo..hi, ...)
+--    seq Seq0 {lo, hi} OPTIONAL
+--    }
+--  Seq1 ::= Seq0 {0, 100}
+  
+  
+  -- (circular) recursive parameterized type, not supported yet
+--  Seq2 {INTEGER:lo, INTEGER:hi} ::= SEQUENCE {
+--    int2 INTEGER (lo..hi, ...),
+--    seq3 Seq3 {lo, hi} OPTIONAL
+--    }
+--  Seq3 {INTEGER:lo, INTEGER:hi} ::= SEQUENCE {
+--    int3 INTEGER (lo..hi),
+--    bool3 BOOLEAN,
+--    seq2 Seq2 {lo, hi} OPTIONAL,
+--    ...
+--    }
+--  Seq4 ::= Seq3 {0, 100}
+  
+  
+  -- ASN.1 wrapper objects
+  ASNWrapper ::= SEQUENCE {
+    ext EXTERNAL,
+    emb EMBEDDED PDV,
+    cst CHARACTER STRING
+    }
+
+END
