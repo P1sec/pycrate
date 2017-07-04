@@ -1,0 +1,1137 @@
+--<OSS.PDU>-- 
+
+CALMmsap { iso (1) standard (0) calm-management (24102) msap (3) asnm-1 (1)} 
+
+DEFINITIONS AUTOMATIC TAGS::=BEGIN
+
+IMPORTS
+
+CIclass, CIstatus, Errors, INsapPrimitivesDown, INsapPrimitivesUp, I-Param, I-ParamNo, KineVectOut, Link-ID, MACaddress, MedID, MedType, UserPriority, NullType FROM CALMllsap {iso(1) standard(0) calm-ll-sap(21218) asnm-1(1)} 
+
+ITS-scuId, ITS-SSI FROM CALMmanagement { iso (1) standard (0) calm-management (24102) local(1) asnm-1 (1)}
+
+IICrequestTX, IICresponseTX, IICrequestRX, IICresponseRX FROM CALMiitsscu { iso (1) standard (0) calm-management (24102) iitsscu (4) asnm-1 (1)} 
+
+GCctx, GCdeleteCmd, GCregServer, GCregServerConf, GCsam, GCsamctx, GCsamctxConf, GCctxTxCmd, GCperiodCmd, CTXrxNot, SAMrxNot, GCupdateServer, GCupdateServerConf, GCderegServer, GCderegServerConf, GCregClient, GCregClientConf, GCupdateClient, GCupdateClientConf, GCderegClient, GCderegClientConf FROM CALMfsap { iso (1) standard (0) calm-management (24102) fsap (5) asnm-1 (1)}
+
+SetIPv6, SetConfIPv6, UpdateIPv6, DeleteIPv6, SetNotIPv6, UpdateNotIPv6, DeleteNotIPv6 FROM CALMipv6{iso(1) standard(0) calm-ipv6(21210) asnm-1(1)}
+
+HostServiceInfo, NFsapPrimitivesDown, NFsapPrimitivesUp, SetFNTP, SetConfFNTP, UpdateFNTP, DeleteFNTP, SetNotFNTP, UpdateNotFNTP, DeleteNotFNTP FROM CALMfntp { iso (1) standard (0) calm-nonip(29281) fntp(1) asnm-1 (1)} 
+
+
+ITS-S-Appl-Reg, ITS-S-Appl-RegConf, ITS-S-Appl-RegFinal FROM CITSapplReq {iso(1) standard(0) cits-applReq (17423) asnm-1 (1)}
+
+;
+
+-- End of IMPORTS
+
+-- GENERIC OBJECT CLASSES
+
+-- Communication-SAP generic OBJECT CLASS
+COMMUPDOWN::=CLASS {
+      &primitiveRef INTEGER(0..255),
+      &Primitive
+	}
+
+-- FA-SAP services up and down
+FASAPDOWN::=COMMUPDOWN
+
+FAsapPrimitivesDown::=SEQUENCE{
+	spRef 	FASAPDOWN.&primitiveRef({FAsapspsdown}),
+	servPrimitive	FASAPDOWN.&Primitive({FAsapspsdown}{@spRef})
+	}
+
+FAsapspsdown FASAPDOWN::={gCsamctxConfFA | gCregServerFA | gCupdateServerFA | gCderegServerFA |  gCregClientFA | gCupdateClientFA | gCderegClientFA, ...} 
+
+gCsamctxConfFA	FASAPDOWN::={&primitiveRef 2, &Primitive GCsamctxConf}
+gCregServerFA	FASAPDOWN::={&primitiveRef 3, &Primitive GCregServer}
+gCupdateServerFA	FASAPDOWN::={&primitiveRef 4, &Primitive GCupdateServer}
+gCderegServerFA	FASAPDOWN::={&primitiveRef 5, &Primitive GCderegServer}
+gCregClientFA	FASAPDOWN::={&primitiveRef 6, &Primitive GCregClient}
+gCupdateClientFA	FASAPDOWN::={&primitiveRef 7, &Primitive GCupdateClient}
+gCderegClientFA	FASAPDOWN::={&primitiveRef 8, &Primitive GCderegClient}
+
+
+FASAPUP::=COMMUPDOWN
+
+FAsapPrimitivesUp::=SEQUENCE{
+	spRef 	FASAPUP.&primitiveRef({FAsapspsup}),
+	servPrimitive	FASAPUP.&Primitive({FAsapspsup}{@spRef})
+	}
+
+FAsapspsup FASAPUP::={gCsamctxFA | gCregServerConfFA | gCupdateServerConfFA | gCderegServerConfFA | gCregClientConfFA | gCupdateClientConfFA | gCderegClientConfFA| gCsamFA | gCctxFA, ...}  
+
+gCsamctxFA	FASAPUP::={&primitiveRef 2, &Primitive GCsamctx}
+gCregServerConfFA	FASAPUP::={&primitiveRef 3, &Primitive GCregServerConf}
+gCupdateServerConfFA	FASAPUP::={&primitiveRef 4, &Primitive GCupdateServerConf}
+gCderegServerConfFA	FASAPUP::={&primitiveRef 5, &Primitive GCderegServerConf}
+gCregClientConfFA	FASAPUP::={&primitiveRef 6, &Primitive GCregClientConf}
+gCupdateClientConfFA	FASAPUP::={&primitiveRef 7, &Primitive GCupdateClientConf}
+gCderegClientConfFA	FASAPUP::={&primitiveRef 8, &Primitive GCderegClientConf}
+gCsamFA	FASAPUP::={&primitiveRef 9, &Primitive GCsam}
+gCctxFA	FASAPUP::={&primitiveRef 10, &Primitive GCctx}
+
+
+
+-- MX-SAP generic OBJECT CLASS
+MXSERV::=CLASS {
+      &mxref INTEGER(0..255),
+      &MXParam
+	}
+
+
+-- MF-SAP Service primitives --
+-- MF-SAP Command.request --
+
+MFSAP-CR::=MXSERV
+
+MF-Command MFSAP-CR::={simFUTcmd | simFLTcmd | gCsamctx | gCsam | gCctx | lDMnotifyCmd | legacyCICmd | stateCInotify | gCperiodCmd | gCctxTxCmd | gCdeleteCmd | iICrequestTX | iICresponseTX | testMF, ...} -- insert simFUTcmd once being defined and activate below
+
+MF-Command-request::=SEQUENCE{
+	commandRef	CommandRef,
+	ref 	MFSAP-CR.&mxref({MF-Command}),
+	command-param	MFSAP-CR.&MXParam({MF-Command}{@ref})
+	}
+
+simFUTcmd	MFSAP-CR::={&mxref 0, &MXParam SimFUTcmd}
+simFLTcmd	MFSAP-CR::={&mxref 1, &MXParam SimFLTcmd}
+gCsamctx	MFSAP-CR::={&mxref 2, &MXParam GCsamctx}
+gCsam	MFSAP-CR::={&mxref 3, &MXParam GCsam}
+gCctx	MFSAP-CR::={&mxref 4, &MXParam GCctx}
+lDMnotifyCmd	MFSAP-CR::={&mxref 5, &MXParam LDMnotify}
+legacyCICmd	MFSAP-CR::={&mxref 6, &MXParam LegacyCIreq}
+stateCInotify	MFSAP-CR::={&mxref 7, &MXParam StateCInotify}
+gCperiodCmd	MFSAP-CR::={&mxref 8, &MXParam GCperiodCmd}
+gCctxTxCmd	MFSAP-CR::={&mxref 9, &MXParam GCctxTxCmd}
+gCdeleteCmd	MFSAP-CR::={&mxref 10, &MXParam GCdeleteCmd}
+iICrequestTX	MFSAP-CR::={&mxref 11, &MXParam IICrequestTX}
+iICresponseTX	MFSAP-CR::={&mxref 12, &MXParam IICresponseTX}
+testMF	MFSAP-CR::={&mxref 255, &MXParam OCTET STRING (SIZE(0..255))}
+
+SimFUTcmd::=FAsapPrimitivesDown 
+
+SimFLTcmd::=NFsapPrimitivesUp
+
+LDMnotify::=SEQUENCE (SIZE(0..255)) OF RadarView
+
+RadarView::=SEQUENCE{
+	peerITS-SSI	ITS-SSI
+	}
+
+LegacyCIreq::=SEQUENCE{
+	cIclass	CIclass,
+	legacyOption	INTEGER(0..255),
+	linkId	Link-ID
+	}
+
+StateCInotify::=SEQUENCE{
+	linkId	Link-ID,
+	cIstatus	CIstatus
+}
+
+-- MF-SAP Command.confirm --
+
+MFSAP-CC ::= MXSERV
+
+MF-CmdConfirm MFSAP-CC::={simFUTcmdConf | simFLTcmdConf | gCsamctxConf | gCsamConf | gCctxConf | lDMnotifyConf | legacyCIConf | stateCInotifyConf | gCperiodCmdConf | gCctxTxCmdConf | gCdeleteCmdConf | iICrequestTXConf | iICresponseTXConf | testMFConf, ...}
+
+MF-Command-confirm::=SEQUENCE{
+	commandRef	CommandRef,
+	ref	MFSAP-CC.&mxref({MF-CmdConfirm}),
+	cmdConfirm-param	MFSAP-CC.&MXParam({MF-CmdConfirm}{@ref}),
+	errStatus	ErrStatus
+	}
+
+simFUTcmdConf	MFSAP-CC::={&mxref 0, &MXParam NullType}
+simFLTcmdConf	MFSAP-CC::={&mxref 1, &MXParam NullType}
+gCsamctxConf	MFSAP-CC::={&mxref 2, &MXParam GCsamctxConf}
+gCsamConf	MFSAP-CC::={&mxref 3, &MXParam NullType}
+gCctxConf	MFSAP-CC::={&mxref 4, &MXParam NullType}
+lDMnotifyConf	MFSAP-CC::={&mxref 5, &MXParam NullType}
+legacyCIConf	MFSAP-CC::={&mxref 6, &MXParam HostServiceInfo}
+stateCInotifyConf	MFSAP-CC::={&mxref 7, &MXParam NullType}
+gCperiodCmdConf	MFSAP-CC::={&mxref 8, &MXParam NullType}
+gCctxTxCmdConf	MFSAP-CC::={&mxref 9, &MXParam NullType}
+gCdeleteCmdConf	MFSAP-CC::={&mxref 10, &MXParam NullType}
+iICrequestTXConf	MFSAP-CC::={&mxref 11, &MXParam NullType}
+iICresponseTXConf	MFSAP-CC::={&mxref 12, &MXParam NullType}
+testMFConf	MFSAP-CC::={&mxref 255, &MXParam NullType}
+
+-- MF-SAP Request.request --
+
+MFSAP-RR::=MXSERV
+
+MF-Request MFSAP-RR::={simFUTreq | simFLTreq | iTS-S-Appl-Reg | gCregServer | gCupdateServer | gCderegServer | gCregClient | gCupdateClient | gCderegClient | lDMregister | sAMrxNot | cTXrxNot | iICrequestRX | iICresponseRX | iTS-S-Appl-ReqFinal | testMFecho, ...} 
+
+MF-Request-request::=SEQUENCE{
+	commandRef	CommandRef,
+	ref	MFSAP-RR.&mxref({MF-Request}),
+	request-param	MFSAP-RR.&MXParam({MF-Request}{@ref})
+	}
+
+simFUTreq	MFSAP-RR::={&mxref 0, &MXParam SimFUTreq}
+simFLTreq	MFSAP-RR::={&mxref 1, &MXParam SimFLTreq}
+iTS-S-Appl-Reg	MFSAP-RR::={&mxref 2, &MXParam ITS-S-Appl-Reg}
+gCregServer	MFSAP-RR::={&mxref 3, &MXParam GCregServer}
+gCupdateServer	MFSAP-RR::={&mxref 4, &MXParam GCupdateServer}
+gCderegServer	MFSAP-RR::={&mxref 5, &MXParam GCderegServer}
+gCregClient	MFSAP-RR::={&mxref 6, &MXParam GCregClient}
+gCupdateClient	MFSAP-RR::={&mxref 7, &MXParam GCupdateClient}
+gCderegClient	MFSAP-RR::={&mxref 8, &MXParam GCderegClient}
+lDMregister	MFSAP-RR::={&mxref 9, &MXParam LDMregister}
+sAMrxNot	MFSAP-RR::={&mxref 10, &MXParam SAMrxNot}
+cTXrxNot	MFSAP-RR::={&mxref 11, &MXParam CTXrxNot}
+iICrequestRX	MFSAP-RR::={&mxref 12, &MXParam IICrequestRX}
+iICresponseRX	MFSAP-RR::={&mxref 13, &MXParam IICresponseRX}
+iTS-S-Appl-ReqFinal	MFSAP-RR::={&mxref 14, &MXParam ITS-S-Appl-RegFinal}
+testMFecho	MFSAP-RR::={&mxref 255, &MXParam TestMFecho}
+
+SimFUTreq::=FAsapPrimitivesUp
+
+SimFLTreq::=NFsapPrimitivesDown
+
+LDMregister::=SEQUENCE{
+	iTS-scuId	ITS-scuId,
+	reference	OCTET STRING (SIZE(0..65535))
+	}
+
+TestMFecho::=SEQUENCE{
+	sap	INTEGER{f (70)} (0..255), -- indicating MF-SAP
+	info	OCTET STRING (SIZE(0..255))
+	}
+
+-- MF-SAP Request.confirm --
+
+MFSAP-RC::=MXSERV
+
+MF-ReqConfirm MFSAP-RC::={simFUTreqConf | simFLTreqConf | iTS-S-Appl-RegConf | gCregServerConf | gCupdateServerConf | gCderegServerConf | gCregClientConf | gCupdateClientConf | gCderegClientConf | lDMregisterConf | sAMrxNotConf | cTXrxNotConf | iICrequestRXConf | iICresponseRXConf | iTS-S-Appl-ReqFinalConf | testMFechoConf, ...}
+
+MF-Request-confirm::=SEQUENCE{
+	commandRef	CommandRef,
+	ref	MFSAP-RC.&mxref({MF-ReqConfirm}),
+	reqConfirm-param	MFSAP-RC.&MXParam({MF-ReqConfirm}{@ref}),
+	errStatus	ErrStatus
+	}
+
+simFUTreqConf	MFSAP-RC::={&mxref 0, &MXParam NULL}
+simFLTreqConf	MFSAP-RC::={&mxref 1, &MXParam NULL}
+iTS-S-Appl-RegConf 	MFSAP-RC::={&mxref 2, &MXParam NULL}
+gCregServerConf	MFSAP-RC::={&mxref 3, &MXParam GCregServerConf}
+gCupdateServerConf	MFSAP-RC::={&mxref 4, &MXParam GCupdateServerConf}
+gCderegServerConf	MFSAP-RC::={&mxref 5, &MXParam GCderegServerConf}
+gCregClientConf	MFSAP-RC::={&mxref 6, &MXParam GCregClientConf}
+gCupdateClientConf	MFSAP-RC::={&mxref 7, &MXParam GCupdateClientConf}
+gCderegClientConf	MFSAP-RC::={&mxref 8, &MXParam GCderegClientConf}
+lDMregisterConf	MFSAP-RC::={&mxref 9, &MXParam ITS-scuId}
+sAMrxNotConf	MFSAP-RC::={&mxref 10, &MXParam NULL}
+cTXrxNotConf	MFSAP-RC::={&mxref 11, &MXParam NULL}
+iICrequestRXConf	MFSAP-RC::={&mxref 12, &MXParam NULL}
+iICresponseRXConf	MFSAP-RC::={&mxref 13, &MXParam NULL}
+iTS-S-Appl-ReqFinalConf	MFSAP-RC::={&mxref 14, &MXParam NULL}
+testMFechoConf	MFSAP-RC::={&mxref 255, &MXParam NULL}
+
+-- MN-SAP Service primitives --
+-- MN-SAP Command.request --
+
+MNSAP-CR::=MXSERV
+
+MN-Command MNSAP-CR::={simNUTcmd | simNLTcmd | fWTset | fWTupdate | fWTdelete | testMN, ...}
+
+MN-Command-request::=SEQUENCE{
+	commandRef	CommandRef,
+	ref	MNSAP-CR.&mxref({MN-Command}),
+	command-param	MNSAP-CR.&MXParam({MN-Command}{@ref})
+	}
+
+simNUTcmd	MNSAP-CR::={&mxref 0, &MXParam SimNUTcmd}
+simNLTcmd	MNSAP-CR::={&mxref 1, &MXParam SimNLTcmd}
+fWTset	MNSAP-CR::={&mxref 2, &MXParam FWTset}
+fWTupdate	MNSAP-CR::={&mxref 3, &MXParam FWTupdate}
+fWTdelete	MNSAP-CR::={&mxref 4, &MXParam FWTdelete}
+testMN	MNSAP-CR::={&mxref 255, &MXParam OCTET STRING (SIZE(0..255))}
+
+SimNUTcmd::=NFsapPrimitivesDown
+
+SimNLTcmd::=INsapPrimitivesUp
+
+FWT::=CLASS {
+      &fwtRef INTEGER(0..255),
+      &Fwt
+	}
+
+FWTset::=SEQUENCE{
+	fwtNo	FWT.&fwtRef({NTprotsSet}),
+	fwt	FWT.&Fwt({NTprotsSet}{@fwtNo})
+	}
+
+NTprotsSet FWT::={fntpset, ...}
+
+FWTupdate::=SEQUENCE{
+	fwtNo	FWT.&fwtRef({NTprotsUpdate}),
+	fwt	FWT.&Fwt({NTprotsUpdate}{@fwtNo})
+	}
+
+NTprotsUpdate FWT::={fntpupdate, ...}
+
+FWTdelete::=SEQUENCE{
+	fwtNo	FWT.&fwtRef({NTprotsDelete}),
+	fwt	FWT.&Fwt({NTprotsDelete}{@fwtNo})
+	}
+
+NTprotsDelete FWT::={fntpdelete, ...}
+
+fntpset	FWT::={&fwtRef 0, &Fwt SetFNTP}
+fntpupdate	FWT::={&fwtRef 1, &Fwt UpdateFNTP}
+fntpdelete	FWT::={&fwtRef 2, &Fwt DeleteFNTP}
+
+-- MN-SAP Command.confirm --
+
+MNSAP-CC::=MXSERV
+
+MN-CmdConfirm MNSAP-CC::={simNUTcmdConf | simNLTcmdConf | fWTsetConf |  fWTupdateConf | fWTdeletConf | testMNConf, ...}
+
+MN-Command-confirm::=SEQUENCE{
+	commandRef	CommandRef,
+	ref	MNSAP-CC.&mxref({MN-CmdConfirm}),
+	cmdConfirm-param	MNSAP-CC.&MXParam({MN-CmdConfirm}{@ref}),
+	errStatus	ErrStatus
+	}
+
+simNUTcmdConf	MNSAP-CC::={&mxref 0, &MXParam NULL}
+simNLTcmdConf	MNSAP-CC::={&mxref 1, &MXParam NULL}
+fWTsetConf	MNSAP-CC::={&mxref 2, &MXParam FWTsetConf}
+fWTupdateConf	MNSAP-CC::={&mxref 3, &MXParam FWTupdateConf}
+fWTdeletConf	MNSAP-CC::={&mxref 4, &MXParam FWTdeleteConf}
+testMNConf	MNSAP-CC::={&mxref 255, &MXParam NULL}
+
+FWTCONF::=CLASS {
+      &fwtRef INTEGER(0..255),
+      &Fwt
+	}
+
+FWTsetConf::=SEQUENCE{
+	fwtNo	FWTCONF.&fwtRef({NTprotsSetConf}),
+	fwt	FWTCONF.&Fwt({NTprotsSetConf}{@fwtNo})
+	}
+
+NTprotsSetConf	FWTCONF::={fntpsetConf, ...}
+
+FWTupdateConf::=SEQUENCE{
+	fwtNo	FWTCONF.&fwtRef({NTprotsUpdateConf}),
+	fwt	FWTCONF.&Fwt({NTprotsUpdateConf}{@fwtNo})
+	}
+
+NTprotsUpdateConf	FWTCONF::={fntpupdateConf, ...}
+
+FWTdeleteConf::=SEQUENCE{
+	fwtNo	FWTCONF.&fwtRef({NTprotsDeleteConf}),
+	fwt	FWTCONF.&Fwt({NTprotsDeleteConf}{@fwtNo})
+	}
+
+NTprotsDeleteConf	FWTCONF::={fntpdeleteConf, ...}
+
+fntpsetConf	FWTCONF::={&fwtRef 0, &Fwt SetConfFNTP}
+fntpupdateConf	FWTCONF::={&fwtRef 1, &Fwt NULL}
+fntpdeleteConf	FWTCONF::={&fwtRef 2, &Fwt NULL}
+
+-- MN-SAP Request.request --
+
+MNSAP-RR::=MXSERV
+
+MN-Request MNSAP-RR::={simNUTreq | simNLTreq | fWTsetNot | fWTupdateNot | fWTdeletNot | vCIcreatePeerMAC | its-ssiPeerNot | testMNecho, ...}
+
+MN-Request-request::=SEQUENCE{
+	commandRef	CommandRef,
+	ref	MNSAP-RR.&mxref({MN-Request}),
+	request-param	MNSAP-RR.&MXParam({MN-Request}{@ref})
+	}
+
+simNUTreq	MNSAP-RR::={&mxref 0, &MXParam SimNUTreq}
+simNLTreq	MNSAP-RR::={&mxref 1, &MXParam SimNLTreq}
+fWTsetNot	MNSAP-RR::={&mxref 2, &MXParam FWTsetNot}
+fWTupdateNot	MNSAP-RR::={&mxref 3, &MXParam FWTupdateNot}
+fWTdeletNot	MNSAP-RR::={&mxref 4, &MXParam FWTdeleteNot}
+vCIcreatePeerMAC	MNSAP-RR::={&mxref 5, &MXParam VCIcreatePeerMAC}
+its-ssiPeerNot	MNSAP-RR::={&mxref 6, &MXParam Its-ssiPeerNot}
+testMNecho	MNSAP-RR::={&mxref 255, &MXParam TestMNecho}
+
+SimNUTreq::=NFsapPrimitivesUp
+
+SimNLTreq::=INsapPrimitivesDown
+
+FWTNOT::=CLASS {
+      &fwtRef INTEGER(0..255),
+      &Fwt
+	}
+
+FWTsetNot::=SEQUENCE{
+	fwtNo	FWTNOT.&fwtRef({NTprotsSetNot}),
+	fwt	FWTNOT.&Fwt({NTprotsSetNot}{@fwtNo})
+	}
+
+NTprotsSetNot FWTNOT::={fntpsetNot, ...}
+
+FWTupdateNot::=SEQUENCE{
+	fwtNo	FWTNOT.&fwtRef({NTprotsUpdateNot}),
+	fwt	FWTNOT.&Fwt({NTprotsUpdateNot}{@fwtNo})
+	}
+
+NTprotsUpdateNot FWTNOT::={fntpupdateNot, ...}
+
+FWTdeleteNot::=SEQUENCE{
+	fwtNo	FWTNOT.&fwtRef({NTprotsDeleteNot}),
+	fwt	FWTNOT.&Fwt({NTprotsDeleteNot}{@fwtNo})
+	}
+
+NTprotsDeleteNot FWTNOT::={fntpdeleteNot, ...}
+
+fntpsetNot	FWTNOT::={&fwtRef 0, &Fwt SetNotFNTP}
+fntpupdateNot	FWTNOT::={&fwtRef 1, &Fwt UpdateNotFNTP}
+fntpdeleteNot	FWTNOT::={&fwtRef 2, &Fwt DeleteNotFNTP}
+
+
+VCIcreatePeerMAC::=SEQUENCE{
+	reference	INTEGER(0..255),
+	linkId	Link-ID,
+	peerMac	MACaddress
+	}
+
+Its-ssiPeerNot::=SEQUENCE{
+	sap	INTEGER(0..255),
+	mACaddress	MACaddress,
+	linkId	Link-ID,
+	its-ssiData	ITS-SSI
+	}
+
+StationType::= INTEGER{
+	mobile	(0),
+	fixed	(1),
+	infrastructure	(2),
+	vehicle	(3),
+	roadside	(4),
+	central	(5),
+	portable	(6),
+	unknown	(255)
+	}(0..255)
+
+StationID::=OCTET STRING (SIZE(4))
+
+TestMNecho::=SEQUENCE{
+	sap	INTEGER{n (78)} (0..255), -- indicating MN-SAP
+	info	OCTET STRING (SIZE(0..255))
+	}
+
+-- MN-SAP Request.confirm --
+
+MNSAP-RC::=MXSERV
+
+MN-ReqConfirm MNSAP-RC::={simNUTreqConf | simNLTreqConf | fWTsetNotConf | fWTupdateNotConf | fWTdeletNotConf | vCIcreatePeerMACConf | its-ssiPeerNotConf | testMNechoConf, ...}
+
+MN-Request-confirm::=SEQUENCE{
+	commandRef	CommandRef,
+	ref	MNSAP-RC.&mxref({MN-ReqConfirm}),
+	reqConfirm-param	MNSAP-RC.&MXParam({MN-ReqConfirm}{@ref}),
+	errStatus	ErrStatus
+	}
+
+simNUTreqConf	MNSAP-RC::={&mxref 0, &MXParam NULL}
+simNLTreqConf	MNSAP-RC::={&mxref 1, &MXParam NULL}
+fWTsetNotConf	MNSAP-RC::={&mxref 2, &MXParam NULL}
+fWTupdateNotConf	MNSAP-RC::={&mxref 3, &MXParam NULL}
+fWTdeletNotConf	MNSAP-RC::={&mxref 4, &MXParam NULL}
+vCIcreatePeerMACConf	MNSAP-RC::={&mxref 5, &MXParam VCIPeerMAC}
+its-ssiPeerNotConf	MNSAP-RC::={&mxref 6, &MXParam NULL}
+testMNechoConf	MNSAP-RC::={&mxref 255, &MXParam NULL}
+
+VCIPeerMAC::=SEQUENCE{
+	reference	INTEGER(0..255),
+	linkId	Link-ID
+	}
+
+
+-- MI-SAP Service primitives --
+-- MI-SAP Command.request --
+
+MISAP-CR::=MXSERV
+
+MI-Command MISAP-CR::={simIUTcmd | regCmd | cIstate | wakeUp | rTScmd | rTSackCmd | cONcmd | rIcmd | manuCmd | vciCmd | monitor | unitDataCmd | testMI |unknownCmd, ...}
+
+MI-Command-request::=SEQUENCE{
+	linkID	Link-ID,
+	commandRef	CommandRef,
+	ref	MISAP-CR.&mxref({MI-Command}),
+	command-param	MISAP-CR.&MXParam({MI-Command}{@ref})
+	}
+
+simIUTcmd	MISAP-CR::={&mxref 0, &MXParam SimIUTcmd}
+regCmd	MISAP-CR::={&mxref 1, &MXParam RegCmd}
+cIstate	MISAP-CR::={&mxref 2, &MXParam CIstateChng}
+wakeUp	MISAP-CR::={&mxref 3, &MXParam WakeUp}
+rTScmd	MISAP-CR::={&mxref 4, &MXParam RTScmd}
+rTSackCmd	MISAP-CR::={&mxref 5, &MXParam RTSackCmd}
+cONcmd	MISAP-CR::={&mxref 6, &MXParam CONcmd}
+rIcmd	MISAP-CR::={&mxref 7, &MXParam RIcmd}
+manuCmd	MISAP-CR::={&mxref 8, &MXParam OCTET STRING}
+vciCmd	MISAP-CR::={&mxref 9, &MXParam VciCmd}
+monitor	MISAP-CR::={&mxref 10, &MXParam Monitor}
+unitDataCmd	MISAP-CR::={&mxref 11, &MXParam UnitData}
+testMI	MISAP-CR::={&mxref 255, &MXParam OCTET STRING (SIZE(0..255))}
+unknownCmd	MISAP-CR::={&mxref 254, &MXParam UnknownCommand}
+
+UnknownCommand::=INTEGER
+
+SimIUTcmd::=INsapPrimitivesDown
+
+RegCmd::=SEQUENCE{
+	scuId	ITS-scuId,
+	medID	MedID
+	}
+
+CIstateChng::=INTEGER{
+	deregister	(0), 
+	activate	(4), 
+	resume	(8),
+	connect	(16),
+	disconnect	(32), 
+	suspend	(64), 
+	inactivate	(128)
+	}(0..255)
+
+WakeUp::=INTEGER(0..255)
+
+RTScmd::=SEQUENCE{
+	reqID	ReqID,
+	priority	UserPriority,
+	seqNo	INTEGER(0..255),
+	status	INTEGER {
+			release	(0),	-- release prioritization
+			request	(16)	-- request prioritization
+		}(0..255)
+	}
+
+ReqID::=SEQUENCE{
+	linkID	Link-ID
+	}
+
+RTSackCmd::=SEQUENCE{
+	priority	UserPriority,
+	seqNo	INTEGER(0..255),
+	status	INTEGER {
+			ignored	(64),	-- request ignored
+			granted	(128)	-- request granted
+		}(0..255)
+	}
+
+CONcmd::=INTEGER{
+	deleteAC	(0), 
+	connect	(1), 
+	disconnect	(255)
+	}(0..255)
+
+RIcmd::=SEQUENCE{
+	linkID	Link-ID,
+	ri	RI
+	}
+
+RI::=OCTET STRING (SIZE(0..65535))
+
+VciCmd::=SEQUENCE{
+	fill	BIT STRING (SIZE(7)),
+	linkID	Link-ID,
+	alive	BOOLEAN OPTIONAL
+	}
+
+Monitor::=SEQUENCE (SIZE(0..255)) OF SEQUENCE{
+	paramNo	INTEGER(0..255),	-- valid parameter number
+	active	INTEGER{
+			stop (0),
+			start (255)
+		}(0..255)
+	} 
+
+UnitData::=SEQUENCE{
+	sourceAddr	Link-ID,
+	destAddr	Link-ID,
+	data		DataUnitData,
+	priority	UserPriority,
+	parameter	ParameterUnitData -- tbd dependent on medium
+	}
+
+DataUnitData::=OCTET STRING (SIZE(0..65535))
+
+ParameterUnitData::=OCTET STRING (SIZE(0..65535))
+
+-- MI-SAP Command.Confirm --
+
+MI-Command-confirm::=SEQUENCE{
+	linkID	Link-ID,
+	commandRef	CommandRef,
+	errStatus	ErrStatus
+	}
+
+-- MI-SAP Request.request --
+
+MISAP-RR::=MXSERV
+
+MI-Request MISAP-RR::={simIUTreq | regReq | prioReg | rTSreq | rTSackReq | rIreq | manuReq | events | posUpdateReq | unitDataReq | testMIecho, ...}
+
+MI-Request-request::=SEQUENCE{
+	linkID	Link-ID,
+	commandRef	CommandRef,
+	ref	MISAP-RR.&mxref({MI-Request}),
+	request-param	MISAP-RR.&MXParam({MI-Request}{@ref})
+	}
+
+simIUTreq	MISAP-RR::={&mxref 0, &MXParam SimIUTreq}
+regReq	MISAP-RR::={&mxref 1, &MXParam RegReq}
+prioReg	MISAP-RR::={&mxref 2, &MXParam PrioReg}
+rTSreq	MISAP-RR::={&mxref 3, &MXParam RTSreq}
+rTSackReq	MISAP-RR::={&mxref 4, &MXParam RTSackReq}
+rIreq	MISAP-RR::={&mxref 5, &MXParam RIreq}
+manuReq	MISAP-RR::={&mxref 6, &MXParam OCTET STRING}
+events	MISAP-RR::={&mxref 7, &MXParam Events21218}
+posUpdateReq	MISAP-RR::={&mxref 8, &MXParam PosUpdateReq}
+unitDataReq	MISAP-RR::={&mxref 9, &MXParam UnitData}
+testMIecho	MISAP-RR::={&mxref 255, &MXParam TestMIecho}
+
+SimIUTreq::=INsapPrimitivesUp
+
+RegReq::=SEQUENCE{
+	medType	MedType
+	}
+
+PrioReg::=SEQUENCE{
+	interferers	Interferers,
+	timeout	INTEGER(0..255)
+	}
+
+Interferers::=SEQUENCE (SIZE(0..255)) OF MedType
+
+RTSreq::=SEQUENCE{
+	priority	UserPriority,
+	seqNo	INTEGER(0..255),
+	status	INTEGER {
+			release	(0),	-- release prioritization
+			request	(16)	-- request prioritization
+		}(0..255)
+	}
+
+RTSackReq::=SEQUENCE{
+	reqID	ReqID,
+	seqNo	INTEGER(0..255),
+	status	INTEGER {
+			ignored	(64),	-- request ignored
+			granted	(128)	-- request granted
+		}(0..255)
+	}
+
+RIreq::=SEQUENCE{
+	medType	MedType,	-- medium for retrieval
+	riAccess	RIaccess	-- request frame details
+	}
+
+RIaccess::=OCTET STRING (SIZE(0..65535))
+
+EVENT21218::=CLASS {
+	&eventRef  INTEGER(0..255),
+	&Event21218
+	}
+
+Events21218::=SEQUENCE{
+	eventNo  EVENT21218.&eventRef({Events-21218}),
+	event    EVENT21218.&Event21218({Events-21218} {@eventNo})
+	}
+
+Events-21218 EVENT21218::={minUserPrio | txQueueThreshold | txQueueFull | vciCreated | vciDeleted | paramMonitor | txQueueLow | vciReset, ...}
+
+
+minUserPrio	EVENT21218::={&eventRef 0, &Event21218 E21218-0}
+-- MinimumUserPriority
+txQueueThreshold	EVENT21218::={&eventRef 1, &Event21218 E21218-1}
+-- TX queue at threshold
+txQueueFull	EVENT21218::={&eventRef 2, &Event21218 E21218-2} -- TX queue full
+vciCreated	EVENT21218::={&eventRef 3, &Event21218 E21218-3} -- VCI created
+vciDeleted	EVENT21218::={&eventRef 4, &Event21218 E21218-4} -- VCI deleted
+paramMonitor	EVENT21218::={&eventRef 5, &Event21218 E21218-5}
+-- Automatic notification
+txQueueLow	EVENT21218::={&eventRef 6, &Event21218 E21218-6}
+-- TX queue below low thresh.
+vciReset	EVENT21218::={&eventRef 7, &Event21218 E21218-7} -- VCI reset
+
+E21218-0::=SEQUENCE{
+	priority	UserPriority,
+	linkID	Link-ID
+	}
+
+E21218-1::=UserPriority
+
+E21218-2::=UserPriority
+
+E21218-3::=Link-ID
+
+E21218-4::=Link-ID
+
+E21218-5::=I-Param
+
+E21218-6::=UserPriority
+
+E21218-7::=Link-ID
+
+PosUpdateReq::=INTEGER(0..65535)	-- 0: Update disabled
+	-- >0: Update interval in ms
+
+TestMIecho::=SEQUENCE{
+	sap	INTEGER{i (73)} (0..255), -- indicating MI-SAP
+	info	OCTET STRING (SIZE(0..255))
+	}
+
+-- MI-SAP Request.confirm --
+
+MI-Request-confirm::=SEQUENCE{
+	linkID	Link-ID,
+	commandRef	CommandRef,
+	errStatus	ErrStatus
+	}
+
+-- MI-SAP Set.request --
+
+MI-Set-request::=SEQUENCE{
+	linkID	Link-ID,
+	commandRef	CommandRef,
+	set-param	SEQUENCE OF I-Param
+	}
+
+-- MI-SAP Set.confirm --
+
+MI-Set-confirm::=SEQUENCE{
+	linkID	Link-ID,
+	commandRef	CommandRef,
+	set-param	Errors -- previously this was SEQUENCE OF Errors, which is wrong.
+	}
+
+-- MI-SAP Get.request --
+
+MI-Get-request::=SEQUENCE{
+	linkID	Link-ID,
+	commandRef	CommandRef,
+	get-param-no	SEQUENCE OF I-ParamNo
+	}
+
+-- MI-SAP Get.confirm --
+
+MI-Get-confirm::=SEQUENCE{
+	linkID	Link-ID,
+	commandRef	CommandRef,
+	get-param	SEQUENCE OF I-Param
+	}
+
+-- SF-SAP Service primitives --
+-- SF-SAP Command.request --
+
+-- activate the following once an SF-Command is defined
+-- SFSAP-CR::=MXSERV
+--
+-- SF-Command-request::=SEQUENCE{
+--	commandRef	CommandRef,
+--	ref	SFSAP-CR.&mxref({SF-Command}),
+--	command-param	SFSAP-CR.&MXParam({SF-Command}{@ref})
+--	}
+--
+-- SF-Command SFSAP-CR::={, ...}
+
+
+-- SF-SAP Command.confirm --
+
+-- activate the following once an SF-CmdConfirm is defined
+-- SFSAP-CC::=MXSERV
+--
+-- SF-Command-confirm::=SEQUENCE{
+--	commandRef	CommandRef,
+--	ref	SFSAP-CC.&mxref({SF-CmdConfirm}),
+--	cmdConfirm-param	SFSAP-CC.&MXParam({SF-CmdConfirm}{@ref}),
+--	errStatus	ErrStatus
+--	}
+--
+-- SF-CmdConfirm SFSAP-CC::={, ...}
+
+
+-- SF-SAP Request.request --
+
+-- activate the following once an SF-Request is defined
+-- SFSAP-RR::=MXSERV
+--
+-- SF-Request-request::=SEQUENCE{
+--	commandRef	CommandRef,
+--	ref	SFSAP-RR.&mxref({SF-Request}),
+--	request-param	SFSAP-RR.&MXParam({SF-Request}{@ref})
+--	}
+--
+-- SF-Request SFSAP-RR::={, ...}
+
+
+-- SF-SAP Request.confirm --
+
+-- activate the following once an SN-ReqConfirm is defined
+-- SFSAP-RC::=MXSERV
+--
+-- SF-Request-confirm::=SEQUENCE{
+--	commandRef	CommandRef,
+--	ref	SFSAP-RC.&mxref({SF-ReqConfirm}),
+--	reqConfirm-param	SFSAP-RC.&MXParam({SF-ReqConfirm}{@ref}),
+--	errStatus	ErrStatus
+--	}
+--
+-- SF-ReqConfirm SFSAP-RC::={, ...}
+
+
+-- SN-SAP Service primitives --
+-- SN-SAP Command.request --
+
+-- activate the following once an SN-Command is defined
+-- SNSAP-CR::=MXSERV
+--
+-- SN-Command-request::=SEQUENCE{
+--	commandRef	CommandRef,
+--	ref	SNSAP-CR.&mxref({SN-Command}),
+--	command-param	SNSAP-CR.&MXParam({SN-Command}{@ref})
+--	}
+-- SN-Command SNSAP-CR::={, ...}
+
+
+-- SN-SAP Command.confirm --
+
+-- activate the following once an SN-CmdConfirm is defined
+-- SNSAP-CC::=MXSERV
+--
+-- SN-Command-confirm::=SEQUENCE{
+--	commandRef	CommandRef,
+--	ref	SNSAP-CC.&mxref({SN-CmdConfirm}),
+--	cmdConfirm-param	SNSAP-CC.&MXParam({SN-CmdConfirm}{@ref}),
+--	errStatus	ErrStatus
+--	}
+--
+-- SN-CmdConfirm SNSAP-CC::={, ...}
+
+
+-- SN-SAP Request.request --
+
+-- activate the following once an SN-Request is defined
+-- SNSAP-RR::=MXSERV
+--
+-- SN-Request-request::=SEQUENCE{
+--	commandRef	CommandRef,
+--	ref	SNSAP-RR.&mxref({SN-Request}),
+--	request-param	SNSAP-RR.&MXParam({SN-Request}{@ref})
+--	}
+--
+-- SN-Request SNSAP-RR::={, ...}
+
+
+-- SN-SAP Request.confirm --
+
+-- activate the following once an SN-ReqConfirm is defined
+-- SNSAP-RC::=MXSERV
+--
+-- SN-Request-confirm::=SEQUENCE{
+--	commandRef	CommandRef,
+--	ref	SNSAP-RC.&mxref({SN-ReqConfirm}),
+--	reqConfirm-param	SNSAP-RC.&MXParam({SN-ReqConfirm}{@ref}),
+--	errStatus	ErrStatus
+--	}
+--
+-- SN-ReqConfirm SNSAP-RC::={, ...}
+
+
+-- SI-SAP Service primitives --
+-- SI-SAP Command.request --
+
+-- activate the following once an SI-Command is defined
+-- SISAP-CR::=MXSERV
+--
+-- SI-Command-request::=SEQUENCE{
+--	linkID	Link-ID,
+--	commandRef	CommandRef,
+--	ref	SISAP-CR.&mxref({SI-Command}),
+--	command-param	SISAP-CR.&MXParam({SI-Command}{@ref})
+--	}
+--
+-- SI-Command SISAP-CR::={, ...}
+
+-- SI-SAP Command.confirm --
+
+-- activate the following once an SI-CmdConfirm is defined
+-- SISAP-CC::=MXSERV
+--
+-- SI-Command-confirm::=SEQUENCE{
+--	linkID	Link-ID,
+--	commandRef	CommandRef,
+--	ref	SISAP-CC.&mxref({SI-CmdConfirm}),
+--	cmdConfirm-param	SISAP-CC.&MXParam({SI-CmdConfirm}{@ref}),
+--	errStatus	ErrStatus
+--	}
+--
+-- SI-CmdConfirm SISAP-CC::={, ...}
+
+
+-- SI-SAP Request.request --
+
+-- activate the following once an SI-Request is defined
+-- SISAP-RR::=MXSERV
+--
+-- SI-Request-request::=SEQUENCE{
+--	linkID	Link-ID,
+--	commandRef	CommandRef,
+--	ref	SISAP-RR.&mxref({SI-Request}),
+--	request-param	SISAP-RR.&MXParam({SI-Request}{@ref})
+--	}
+--
+-- SI-Request SISAP-RR::={, ...}
+
+
+-- SI-SAP Request.confirm --
+
+-- activate the following once an SI-CRqConfirm is defined
+-- SISAP-RC::=MXSERV
+--
+-- SI-Request-confirm::=SEQUENCE{
+--	linkID	Link-ID,
+--	commandRef	CommandRef,
+--	ref	SISAP-RC.&mxref({SI-CmdConfirm}),
+--	reqConfirm-param	SISAP-RC.&MXParam({SI-CmdConfirm}{@ref}),
+--	errStatus	ErrStatus
+--	}
+--
+-- SI-ReqConfirm SISAP-RC::={, ...}
+
+
+-- MS-SAP Service primitives --
+-- MS-SAP Command.request --
+
+MSSAP-CR::=MXSERV
+
+MS-Command-request::=SEQUENCE{
+	commandRef	CommandRef,
+	ref	MSSAP-CR.&mxref({MS-Command}),
+	command-param	MSSAP-CR.&MXParam({MS-Command}{@ref})
+	}
+
+MS-Command MSSAP-CR::={testMS, ...}
+
+testMS	MSSAP-CR::={&mxref 255, &MXParam OCTET STRING (SIZE(0..255))}
+
+-- MS-SAP Command.confirm --
+
+MSSAP-CC::=MXSERV
+
+MS-Command-confirm::=SEQUENCE{
+	commandRef	CommandRef,
+	ref	MSSAP-CC.&mxref({MS-CmdConfirm}),
+	cmdConfirm-param	MSSAP-CC.&MXParam({MS-CmdConfirm}{@ref}),
+	errStatus	ErrStatus
+	}
+
+MS-CmdConfirm MSSAP-CC::={testMSConf, ...}
+
+testMSConf	MSSAP-CC::={&mxref 255, &MXParam NULL}
+
+-- MS-SAP Request.request --
+
+MSSAP-RR::=MXSERV
+
+MS-Request-request::=SEQUENCE{
+	commandRef	CommandRef,
+	ref	MSSAP-RR.&mxref({MS-Request}),
+	request-param	MSSAP-RR.&MXParam({MS-Request}{@ref})
+	}
+
+MS-Request MSSAP-RR::={iTS-S-Appl-ProcS-Reg | iTS-S-Appl-ProcS-ReqFinal | testMSecho, ...}
+
+iTS-S-Appl-ProcS-Reg MSSAP-RR::={&mxref 1, &MXParam ITS-S-Appl-Reg}
+iTS-S-Appl-ProcS-ReqFinal	MSSAP-RR::={&mxref 13, &MXParam ITS-S-Appl-RegFinal}
+testMSecho	MSSAP-RR::={&mxref 255, &MXParam TestMSecho}
+
+TestMSecho::=SEQUENCE{
+	sap	INTEGER{s (83)} (0..255), -- indicating MS-SAP
+	info	OCTET STRING (SIZE(0..255))
+	}
+
+
+-- MS-SAP Request.confirm --
+
+MSSAP-RC::=MXSERV
+
+MS-Request-confirm::=SEQUENCE{
+	commandRef	CommandRef,
+	ref	MSSAP-RC.&mxref({MS-ReqConfirm}),
+	reqConfirm-param	MSSAP-RC.&MXParam({MS-ReqConfirm}{@ref}),
+	errStatus	ErrStatus
+	}
+
+MS-ReqConfirm MSSAP-RC::={iTS-S-Appl-ProcS-RegConf | iTS-S-Appl-ProcS-ReqFinalConf | testMSechoConf, ...}
+
+iTS-S-Appl-ProcS-RegConf	MSSAP-RR::={&mxref 1, &MXParam NULL}
+iTS-S-Appl-ProcS-ReqFinalConf	MSSAP-RR::={&mxref 13, &MXParam NULL}
+testMSechoConf	MSSAP-RR::={&mxref 255, &MXParam NULL}
+
+
+-- MA-SAP service primitives
+-- MA-SAP Command.request --
+
+MASAP-CR::=MXSERV
+
+MA-Command-request::=SEQUENCE{
+	commandRef	CommandRef,
+	ref	MASAP-CR.&mxref({MA-Command}),
+	command-param	MASAP-CR.&MXParam({MA-Command}{@ref})
+	}
+
+MA-Command MASAP-CR::={testMA, ...}
+
+testMA	MASAP-CR::={&mxref 255, &MXParam OCTET STRING (SIZE(0..255))}
+
+-- MA-SAP Command.confirm --
+
+MASAP-CC::=MXSERV
+
+testMAConf	MASAP-CC::={&mxref 255, &MXParam NULL}
+
+MA-Command-confirm::=SEQUENCE{
+	commandRef	CommandRef,
+	ref	MASAP-CC.&mxref({MA-CmdConfirm}),
+	cmdConfirm-param	MASAP-CC.&MXParam({MA-CmdConfirm}{@ref}),
+	errStatus	ErrStatus
+	}
+
+MA-CmdConfirm MASAP-CC::={testMAConf, ...}
+
+-- MA-SAP Request.request --
+
+MASAP-RR::=MXSERV
+
+MA-Request-request::=SEQUENCE{
+	commandRef	CommandRef,
+	ref	MASAP-RR.&mxref({MA-Request}),
+	request-param	MASAP-RR.&MXParam({MA-Request}{@ref})
+	}
+
+MA-Request MASAP-RR::={iTS-S-Appl-Proc-Reg | iTS-S-Appl-Proc-ReqFinal | testMAecho, ...}
+
+iTS-S-Appl-Proc-Reg MASAP-RR::={&mxref 1, &MXParam ITS-S-Appl-Reg}
+iTS-S-Appl-Proc-ReqFinal	MASAP-RR::={&mxref 13, &MXParam ITS-S-Appl-RegFinal}
+testMAecho	MASAP-RR::={&mxref 255, &MXParam TestMAecho}
+
+TestMAecho::=SEQUENCE{
+	sap	INTEGER{a (65)} (0..255), -- indicating MA-SAP
+	info	OCTET STRING (SIZE(0..255))
+	}
+
+-- MA-SAP Request.confirm --
+
+MASAP-RC::=MXSERV
+
+MA-Request-confirm::=SEQUENCE{
+	commandRef	CommandRef,
+	ref	MASAP-RC.&mxref({MA-ReqConfirm}),
+	reqConfirm-param	MASAP-RC.&MXParam({MA-ReqConfirm}{@ref}),
+	errStatus	ErrStatus
+	}
+
+MA-ReqConfirm MASAP-RC::={iTS-S-Appl-Proc-RegConf | iTS-S-Appl-Proc-ReqFinalConf | testMAechoConf, ...}
+
+iTS-S-Appl-Proc-RegConf 	MASAP-RC::={&mxref 1, &MXParam ITS-S-Appl-RegConf}
+iTS-S-Appl-Proc-ReqFinalConf	MASAP-RC::={&mxref 13, &MXParam NULL}
+testMAechoConf	MASAP-RC::={&mxref 255, &MXParam NULL}
+
+
+
+-- SA-SAP service primitives
+-- SA-SAP Command.request --
+
+-- activate the following once an SA-Command is defined
+-- SASAP-CR::=MXSERV
+--
+-- SA-Command-request::=SEQUENCE{
+--	commandRef	CommandRef,
+--	ref	SASAP-CR.&mxref({SA-Command}),
+--	command-param	SASAP-CR.&MXParam({SA-Command}{@ref})
+--	}
+--
+-- SA-Command SASAP-CR::={, ...}
+
+
+-- SA-SAP Command.confirm --
+
+-- activate the following once an SA-CmdConfirm is defined
+-- SASAP-CC::=MXSERV
+--
+-- SA-Command-confirm::=SEQUENCE{
+--	commandRef	CommandRef,
+--	ref	SASAP-CC.&mxref({SA-CmdConfirm}),
+--	cmdConfirm-param	SASAP-CC.&MXParam({SA-CmdConfirm}{@ref}),
+--	errStatus	ErrStatus
+--	}
+--
+-- SA-CmdConfirm SASAP-CC::={, ...}
+
+
+-- SA-SAP Request.request --
+
+-- activate the following once an SA-Request is defined
+-- SASAP-RR::=MXSERV
+--
+-- SA-Request-request::=SEQUENCE{
+--	commandRef	CommandRef,
+--	ref	SASAP-RR.&mxref({SA-Request}),
+--	request-param	SASAP-RR.&MXParam({SA-Request}{@ref})
+--	}
+--
+-- SA-Request MASAP-RR::={, ...}
+
+
+-- SA-SAP Request.confirm --
+
+-- activate the following once an SA-ReqConfirm is defined
+-- SASAP-RC::=MXSERV
+--
+-- SA-Request-confirm::=SEQUENCE{
+--	commandRef	CommandRef,
+--	ref	SASAP-RC.&mxref({SA-Request-confirm}),
+--	reqConfirm-param	SASAP-RC.&MXParam({SA-Request-confirm}{@ref}),
+--	errStatus	ErrStatus
+--	}
+--
+-- SA-ReqConfirm SASAP-RC::={, ...}
+
+
+
+-- General types --
+
+ErrStatus::=INTEGER{
+	success	(0),
+	unspecFailure	(1), -- unspecified failure
+	invalParamNo	(2), -- invalid param no.
+	invalParamVal	(3), -- invalid param value
+	riViolation	(4), -- RI violation
+	cmdReqNo	(5), -- invalid cmd/req no.
+	cmdReqVal	(6), -- invalid cmd/req value
+	accessViolation	(7), -- access violation
+	invalidType	(8), -- invalid cmd/req type
+	sequenceError	(9), -- cmd/req not applicable in the given context
+	nonavailValue	(10), -- value required in cmd/req is not available
+	hardwareFailure	(255) -- unspecified hardware failure
+	} (0..255)
+
+CommandRef::=INTEGER(0..65535)
+
+
+-- Values
+
+
+
+--/*
+--   The ASN.1 specification has been checked for conformance to the ASN.1
+--   standards by OSS ASN.1 Syntax Checker, and by OSS ASN-1STEP
+--*/
+
+END
+

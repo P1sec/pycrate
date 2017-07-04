@@ -1,0 +1,38 @@
+--$Revision: 6.0 $
+--**********************************************************************
+--
+--  PUBMED data definitions
+--
+--**********************************************************************
+
+NCBI-PubMed DEFINITIONS ::=
+BEGIN
+
+EXPORTS Pubmed-entry, Pubmed-url;
+
+IMPORTS PubMedId FROM NCBI-Biblio
+        Medline-entry FROM NCBI-Medline;
+
+Pubmed-entry ::= SEQUENCE {        -- a PubMed entry
+    -- PUBMED records must include the PubMedId
+    pmid PubMedId,
+
+    -- Medline entry information
+    medent Medline-entry OPTIONAL,
+
+    -- Publisher name
+    publisher VisibleString OPTIONAL,
+
+    -- List of URL to publisher cite
+    urls SET OF Pubmed-url OPTIONAL,
+
+    -- Publisher's article identifier
+    pubid VisibleString OPTIONAL
+}
+
+Pubmed-url ::= SEQUENCE {
+    location VisibleString OPTIONAL, -- Location code
+    url VisibleString                -- Selected URL for location
+}
+
+END

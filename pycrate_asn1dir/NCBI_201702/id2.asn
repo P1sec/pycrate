@@ -1,0 +1,506 @@
+--$Revision: 464670 $
+--********************************************************************
+--
+--  Network Id server network access
+--  Vasilchenko 2003
+--
+--
+--*********************************************************************
+--
+--  ID2.asn
+--
+--     messages for id server network access
+--
+--*********************************************************************
+
+NCBI-ID2Access DEFINITIONS ::=
+BEGIN
+
+EXPORTS ID2-Blob-State;
+
+IMPORTS Seq-id, Seq-loc                                 FROM NCBI-Seqloc
+        ID2S-Chunk-Id, ID2S-Seq-annot-Info              FROM NCBI-Seq-split;
+
+
+--*********************************************************************
+-- request types
+--*********************************************************************
+
+-- Requests are sent in packets to allow sending several requests at once
+-- to avoid network latency, without possiblity of deadlock with server.
+-- Server will not start sending replies until it will read the whole packet.
+ID2-Request-Packet ::= SEQUENCE OF ID2-Request
+
+
+ID2-Request ::= SEQUENCE {
+        -- request's serial number, can be used in asynchronic clients
+        -- server should copy it to corresponding field in reply
+        serial-number  INTEGER OPTIONAL,
+
+        params          ID2-Params OPTIONAL,
+
+        request CHOICE {
+                init            NULL,
+                get-packages    ID2-Request-Get-Packages,
+                get-seq-id      ID2-Request-Get-Seq-id,
+                get-blob-id     ID2-Request-Get-Blob-Id,
+                get-blob-info   ID2-Request-Get-Blob-Info,
+                reget-blob      ID2-Request-ReGet-Blob,
+                get-chunks      ID2S-Request-Get-Chunks
+        }
+}
+
+
+-- Request for set of params packages know by server.
+-- Packages can be used to abbreviate parameters of request.
+ID2-Request-Get-Packages ::= SEQUENCE {
+        -- return known packages from this list
+        -- if unset - return all known packages
+        names           SEQUENCE OF VisibleString OPTIONAL,
+
+        -- return packages' names only
+        no-contents     NULL OPTIONAL
+}
+
+-- Requested sequence ID, can be any string or Seq-id.
+-- This request will be replied with one or more ID2-Reply-Get-Seq-id.
+ID2-Request-Get-Seq-id ::= SEQUENCE {
+        seq-id          ID2-Seq-id,
+        seq-id-type     INTEGER {
+                any     (0),    -- return any qualified Seq-id
+                gi      (1),    -- gi is preferred
+                text    (2),    -- text Seq-id (accession etc) is preferred
+                general (4),    -- general Seq-id is preferred
+                all     (127),  -- return all qualified Seq-ids of the sequence
+                label   (128),  -- return a sequence string label as string
+                                -- in general id with db "LABEL"
+                taxid   (256),  -- return a sequence taxonomy ID as integer
+                                -- in general id with db "TAXID"
+                hash    (512)   -- return a sequence hash as integer
+                                -- in general id with db "HASH"
+        } DEFAULT any
+}
+
+
+ID2-Seq-id ::= CHOICE {
+        string          VisibleString,
+        seq-id          Seq-id
+}
+
+
+-- Return blob-id with specified seq-id.
+-- This request with be replied with one or more ID2-Reply-Get-Blob-Id.
+ID2-Request-Get-Blob-Id ::= SEQUENCE {
+        -- id can be supplied by inner request
+        seq-id          ID2-Request-Get-Seq-id,
+
+        -- return id of blob with sequence
+        sources         SEQUENCE OF VisibleString OPTIONAL,
+
+        -- return Blob-Ids with external features on this Seq-id
+        external        NULL OPTIONAL
+}
+
+
+-- Return some information related to the blob.
+-- This request with be replied with one or more of:
+--   ID2-Reply-Get-Blob-Seq-ids - if requested by get-seq-ids field
+--   ID2-Reply-Get-Blob         - if requested by get-data field
+--   ID2S-Reply-Get-Split-Info
+--   ID2S-Reply-Get-Chunk
+-- Last two can be sent in addition to ID2-Reply-Get-Blob
+-- if the blob is split on the server.
+-- The replies are made separate to allow server to create replies easier
+-- from precalculated data. Each of these replies have ID2-Reply-Data field.
+ID2-Request-Get-Blob-Info ::= SEQUENCE {
+        -- id can be supplied by inner request
+        blob-id         CHOICE {
+                -- id can be supplied by inner request
+                blob-id         ID2-Blob-Id,
+
+                -- generate blob-ids from request
+                resolve         SEQUENCE {
+                        request         ID2-Request-Get-Blob-Id,
+                        
+                        -- server will not send blobs listed here
+                        exclude-blobs   SEQUENCE OF ID2-Blob-Id OPTIONAL
+                }
+        },
+
+        -- return in addition list of Seq-ids also resolving to this blob
+        get-seq-ids     NULL OPTIONAL,
+
+        -- level of details requested immediately
+        -- server will send relevant chunks if blob is splitted
+        get-data        ID2-Get-Blob-Details OPTIONAL
+}
+
+
+-- This is similar to FTP reget command.
+-- It may be unsupported by server.
+-- It's defined only for plain blobs (returned in ID2-Reply-Get-Blob)
+-- as all split data comes in small chunks, so reget doesn't make sense.
+ID2-Request-ReGet-Blob ::= SEQUENCE {
+        blob-id         ID2-Blob-Id,
+
+        -- blob split version to resend
+        split-version   INTEGER,
+
+        -- start offset of data to get
+        offset          INTEGER
+}
+
+-- Request for specific chunks.
+-- Server will reply with one or more ID2S-Reply-Get-Chunk.
+ID2S-Request-Get-Chunks ::= SEQUENCE {
+        blob-id         ID2-Blob-Id,
+
+        -- requests for specific chunks of splitted blob
+        chunks          SEQUENCE OF ID2S-Chunk-Id,
+
+        -- blob split version
+        split-version   INTEGER OPTIONAL
+}
+
+
+-- The following structure describes what parts of blob are required
+-- immediately after ID2-Request-Get-Blob-Info in case blob is split.
+-- Seq-entry level will have probably the same values as Entry-complexities.
+ID2-Get-Blob-Details ::= SEQUENCE {
+        -- reference location for details - can be only part of sequence
+        location        Seq-loc OPTIONAL,
+
+        -- Seq-entry level for all data except descriptors (sequnence, annots)
+        seq-class-level INTEGER DEFAULT 1,
+
+        -- Seq-entry level for descriptors
+        descr-level     INTEGER DEFAULT 1,
+
+        -- mask of descriptor types - see Seqdesc for variants' values
+        descr-type-mask INTEGER DEFAULT 0,
+        
+        -- mask of annotation types - see Seq-annot.data for values
+        annot-type-mask INTEGER DEFAULT 0,
+
+        -- mask of feature types - see SeqFeatData for values
+        feat-type-mask  INTEGER DEFAULT 0,
+
+        -- level of sequence data to load
+        sequence-level  ENUMERATED {
+                none     (0), -- not required
+                seq-map  (1), -- at least seq-map
+                seq-data (2)  -- include seq-data
+        } DEFAULT none
+}
+
+
+--*********************************************************************
+-- reply types
+--*********************************************************************
+
+
+ID2-Reply ::= SEQUENCE {
+        -- request's serial number, copy from request
+        serial-number   INTEGER OPTIONAL,
+
+        params          ID2-Params OPTIONAL,
+
+        error           SEQUENCE OF ID2-Error OPTIONAL,
+
+        -- true if this reply is the last one for the request
+        -- false if more replies will follow
+        end-of-reply    NULL OPTIONAL,
+
+        -- reply data moved at the end to make it easier to construct
+        -- the reply data manually from precalculated data
+        reply CHOICE {
+                init            NULL,
+                empty           NULL,
+                get-package     ID2-Reply-Get-Package,
+                get-seq-id      ID2-Reply-Get-Seq-id,
+                get-blob-id     ID2-Reply-Get-Blob-Id,
+                get-blob-seq-ids    ID2-Reply-Get-Blob-Seq-ids,
+                get-blob        ID2-Reply-Get-Blob,
+                reget-blob      ID2-Reply-ReGet-Blob,
+                get-split-info  ID2S-Reply-Get-Split-Info,
+                get-chunk       ID2S-Reply-Get-Chunk
+        },
+
+        -- additional error flag if the reply is broken in the middle
+        -- of transfer.
+        -- 'last-octet-string', and 'nothing' mean that
+        -- client may use ReGet request to get the remaining data.
+        discard         ENUMERATED {
+                reply             (0),  -- whole reply should be discarded
+                last-octet-string (1),  -- all data in embedded ID2-Reply-Data
+                                        -- except last OCTET STRING is correct
+                nothing           (2)   -- all data in embedded ID2-Reply-Data
+                                        -- is correct, but is incomplete
+        } OPTIONAL
+}
+
+
+ID2-Error ::= SEQUENCE {
+        severity        ENUMERATED {
+                -- nothing harmful happened
+                warning             (1) ,
+
+                -- command cannot be completed this time
+                failed-command      (2) ,
+
+                -- connection cannot be reused, reconnect is required
+                failed-connection   (3) ,
+
+                -- server cannot be used for a while
+                failed-server       (4) ,
+
+                -- resolve request gives no data
+                -- probably temporarily (see retry-delay field)
+                no-data             (5) ,
+
+                -- data exists but client doesn't have permission to get it
+                restricted-data     (6) ,
+
+                -- this request type is not supported by server
+                unsupported-command (7) ,
+
+                -- error in request packet, cannot retry
+                invalid-arguments   (8)
+        },
+
+        -- client may retry the request after specified time in seconds 
+        retry-delay INTEGER OPTIONAL,
+
+        message VisibleString OPTIONAL
+}
+
+
+-- Reply to ID2-Request-Get-Packages.
+ID2-Reply-Get-Package ::= SEQUENCE {
+        name            VisibleString,
+
+        params          ID2-Params OPTIONAL
+}
+
+
+-- Reply to ID2-Request-Get-Seq-id.
+ID2-Reply-Get-Seq-id ::= SEQUENCE {
+        -- copy of request
+        request         ID2-Request-Get-Seq-id,
+
+        -- resolved Seq-id
+        -- not set if error occurred
+        seq-id          SEQUENCE OF Seq-id OPTIONAL,
+
+        -- this Seq-id is the last one in the request
+        end-of-reply    NULL OPTIONAL
+}
+
+-- Bit numbers for different blob states,
+-- used in blob-state fields of several replies.
+-- For example, dead & protected blob has blob-state 24 - 3rd and 4th bits set.
+ID2-Blob-State ::= ENUMERATED {
+        live            (0),
+        suppressed-temp (1),
+        suppressed      (2),
+        dead            (3),
+        protected       (4),
+        withdrawn       (5)
+}
+
+
+-- Reply to ID2-Request-Get-Blob-Id.
+ID2-Reply-Get-Blob-Id ::= SEQUENCE {
+        -- requested Seq-id
+        seq-id          Seq-id,
+
+        -- result
+        blob-id         ID2-Blob-Id OPTIONAL,
+
+        -- version of split data
+        -- (0 for non split)
+        split-version   INTEGER DEFAULT 0,
+
+        -- annotation types in this blob
+        -- annotation are unknown if this field is omitted
+        annot-info      SEQUENCE OF ID2S-Seq-annot-Info OPTIONAL,
+
+        -- this Blob-id is the last one in the request
+        end-of-reply    NULL OPTIONAL,
+
+        -- state bits of the blob, 0 or missing means regular live data
+        blob-state      INTEGER OPTIONAL
+}
+
+
+-- Reply to ID2-Request-Get-Blob-Info.
+ID2-Reply-Get-Blob-Seq-ids ::= SEQUENCE {
+        blob-id         ID2-Blob-Id,
+
+        -- list of Seq-id resolving to this Blob-Id
+        -- in compressed format
+        ids             ID2-Reply-Data OPTIONAL
+}
+
+
+-- Reply to ID2-Request-Get-Blob-Info.
+ID2-Reply-Get-Blob ::= SEQUENCE {
+        blob-id         ID2-Blob-Id,
+
+        -- version of split data
+        -- (0 for non split)
+        split-version   INTEGER DEFAULT 0,
+
+        -- whole blob or blob skeleton
+        -- not set if error occurred
+        data            ID2-Reply-Data OPTIONAL,
+
+        -- state bits of the blob, 0 or missing means regular live data
+        blob-state      INTEGER OPTIONAL
+}
+
+
+-- Reply to ID2-Request-Get-Blob-Info.
+ID2S-Reply-Get-Split-Info ::= SEQUENCE {
+        blob-id         ID2-Blob-Id,
+
+        -- version of split data
+        split-version   INTEGER,
+
+        -- blob split info
+        -- not set if error occurred
+        data            ID2-Reply-Data OPTIONAL,
+
+        -- state bits of the blob, 0 or missing means regular live data
+        blob-state      INTEGER OPTIONAL
+}
+
+
+-- Reply to ID2-Request-ReGet-Blob.
+ID2-Reply-ReGet-Blob ::= SEQUENCE {
+        blob-id         ID2-Blob-Id,
+
+        -- version of data split
+        split-version   INTEGER,
+
+        -- offset of data
+        offset          INTEGER,
+
+        -- blob split info
+        -- not set if error occurred
+        data            ID2-Reply-Data OPTIONAL
+}
+
+
+-- Reply to ID2S-Request-Get-Chunks.
+ID2S-Reply-Get-Chunk ::= SEQUENCE {
+        blob-id         ID2-Blob-Id,
+
+        -- id of chunk to send
+        chunk-id        ID2S-Chunk-Id,
+
+        -- chunk data
+        -- not set if error occurred
+        data            ID2-Reply-Data OPTIONAL
+}
+
+
+-- Data packing.
+ID2-Reply-Data ::= SEQUENCE {
+        -- index of negotiated types
+        -- recommended types
+        --   Seq-entry,
+        --   ID2S-Split-Info,
+        --   ID2S-Chunk
+        data-type       INTEGER {
+                seq-entry       (0),
+                seq-annot       (1),
+                id2s-split-info (2),
+                id2s-chunk      (3)
+        } DEFAULT seq-entry,
+
+        -- serialization format (ASN.1 binary, ASN.1 text)
+        -- index of negotiated formats
+        data-format     INTEGER {
+                asn-binary      (0),
+                asn-text        (1),
+                xml             (2)
+        } DEFAULT asn-binary,
+
+        -- post serialization compression (plain, gzip, etc.)
+        -- index of negotiated compressions
+        data-compression INTEGER {
+                none            (0),
+                gzip            (1),
+                nlmzip          (2),
+                bzip2           (3)
+        } DEFAULT none,
+
+        -- data blob
+        data            SEQUENCE OF OCTET STRING
+}
+
+
+-- Data packed within ID2-Reply-Get-Blob-Seq-ids reply.
+ID2-Blob-Seq-ids ::= SEQUENCE OF ID2-Blob-Seq-id
+
+
+ID2-Blob-Seq-id ::= SEQUENCE {
+        seq-id          Seq-id,
+        
+        -- this Seq-id is replaced by sequence in another blob
+        replaced        NULL OPTIONAL
+}
+
+
+--*********************************************************************
+-- utility types
+--*********************************************************************
+
+
+ID2-Blob-Id ::= SEQUENCE {
+        sat             INTEGER,
+        sub-sat         INTEGER {
+                main        (0),
+                snp         (1),
+                snp-graph   (4),
+                cdd         (8),
+                mgc         (16),
+                hprd        (32),
+                sts         (64),
+                trna        (128),
+                exon        (512)
+        } DEFAULT main,
+        sat-key         INTEGER,
+        -- version of blob, optional in some requests
+        version         INTEGER OPTIONAL
+}
+
+
+ID2-Params ::= SEQUENCE OF ID2-Param
+
+
+ID2-Param ::= SEQUENCE {
+        name    VisibleString,
+        value   SEQUENCE OF VisibleString OPTIONAL,
+        type    ENUMERATED {
+                -- no response expected
+                set-value   (1),
+
+                -- this option is for client only
+                -- server replies with its value of param if known
+                -- server omits this param in reply if unknown to server
+                get-value   (2),
+
+                -- no direct response expected,
+                -- but if the param or its value is not supported
+                -- an error is reported and the request is not be completed
+                force-value (3),
+
+                -- use named package
+                -- value should be unset
+                use-package (4)
+        } DEFAULT set-value
+}
+
+END

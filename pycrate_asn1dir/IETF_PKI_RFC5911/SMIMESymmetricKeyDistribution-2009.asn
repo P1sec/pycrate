@@ -1,0 +1,357 @@
+SMIMESymmetricKeyDistribution-2009
+      {iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-9(9)
+      smime(16) modules(0) id-mod-symkeydist-02(36)}
+
+DEFINITIONS IMPLICIT TAGS ::=
+BEGIN
+
+  EXPORTS ALL;
+  IMPORTS
+
+  AlgorithmIdentifier{}, ALGORITHM, DIGEST-ALGORITHM, KEY-WRAP,
+          SMIMECapability{}, SMIMECapabilities{}, SMIME-CAPS
+  FROM AlgorithmInformation-2009 {
+      iso(1) identified-organization(3) dod(6) internet(1) security(5)
+      mechanisms(5) pkix(7) id-mod(0)
+      id-mod-algorithmInformation-02(58)}
+
+  GeneralName
+  FROM PKIX1Implicit-2009 {
+      iso(1) identified-organization(3) dod(6) internet(1) security(5)
+      mechanisms(5) pkix(7) id-mod(0) id-mod-pkix1-implicit-02(59) }
+
+  Certificate
+  FROM PKIX1Explicit-2009 {
+      iso(1) identified-organization(3) dod(6) internet(1) security(5)
+      mechanisms(5) pkix(7) id-mod(0) id-mod-pkix1-explicit-02(51) }
+
+  RecipientInfos, KEKIdentifier,CertificateSet
+  FROM CryptographicMessageSyntax-2009 {
+      iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-9(9)
+      smime(16) modules(0) id-mod-cms-2004-02(41) }
+
+  cap-3DESwrap
+  FROM CryptographicMessageSyntaxAlgorithms-2009 {
+      iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-9(9)
+      smime(16) modules(0) id-mod-cmsalg-2001-02(37) }
+
+  AttributeCertificate
+  FROM PKIXAttributeCertificate-2009 {
+      iso(1) identified-organization(3) dod(6) internet(1) security(5)
+      mechanisms(5) pkix(7) id-mod(0) id-mod-attribute-cert-02(47) }
+
+  CMC-CONTROL, EXTENDED-FAILURE-INFO
+  FROM EnrollmentMessageSyntax-2009 {
+      iso(1) identified-organization(3) dod(6) internet(1) security(5)
+      mechanisms(5) pkix(7) id-mod(0) id-mod-cmc2002-02(53) }
+
+  kwa-aes128-wrap, kwa-aes192-wrap, kwa-aes256-wrap
+  FROM CMSAesRsaesOaep-2009 {
+      iso(1) member-body(2) us(840) rsadsi(113549)
+      pkcs(1) pkcs-9(9) smime(16) modules(0) id-mod-cms-aes-02(38) } ;
+
+  -- This defines the group list (GL symmetric key distribution OID arc
+  id-skd OBJECT IDENTIFIER ::=
+      { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-9(9)
+      smime(16) skd(8) }
+
+  SKD-ControlSet CMC-CONTROL ::= {
+      skd-glUseKEK | skd-glDelete | skd-glAddMember |
+      skd-glDeleteMember | skd-glRekey | skd-glAddOwner |
+      skd-glRemoveOwner | skd-glKeyCompromise |
+      skd-glkRefresh | skd-glaQueryRequest | skd-glProvideCert |
+      skd-glManageCert | skd-glKey, ... }
+
+  -- This defines the GL Use KEK control attribute
+
+  skd-glUseKEK CMC-CONTROL ::=
+      { GLUseKEK IDENTIFIED BY id-skd-glUseKEK }
+
+  id-skd-glUseKEK OBJECT IDENTIFIER ::= { id-skd 1}
+
+  GLUseKEK ::= SEQUENCE {
+      glInfo            GLInfo,
+      glOwnerInfo       SEQUENCE SIZE (1..MAX) OF GLOwnerInfo,
+      glAdministration  GLAdministration DEFAULT managed,
+      glKeyAttributes   GLKeyAttributes OPTIONAL
+  }
+
+  GLInfo ::= SEQUENCE {
+      glName     GeneralName,
+      glAddress  GeneralName
+  }
+
+  GLOwnerInfo ::= SEQUENCE {
+      glOwnerName     GeneralName,
+      glOwnerAddress  GeneralName,
+      certificates    Certificates OPTIONAL
+  }
+
+  GLAdministration ::= INTEGER {
+      unmanaged  (0),
+      managed    (1),
+      closed     (2)
+  }
+
+  --
+  --  The advertised set of algorithm capabilities for the document
+  --
+
+  SKD-Caps SMIME-CAPS ::= {
+      cap-3DESwrap | kwa-aes128-wrap.&smimeCaps |
+      kwa-aes192-wrap.&smimeCaps | kwa-aes256-wrap.&smimeCaps,  ...
+  }
+
+  cap-aes128-cbc KeyWrapAlgorithm ::=
+      { capabilityID kwa-aes128-wrap.&smimeCaps.&id }
+
+  --
+  --  The set of key wrap algorithms supported by this specification
+  --
+
+  KeyWrapAlgorithm ::= SMIMECapability{{SKD-Caps}}
+
+  GLKeyAttributes ::= SEQUENCE {
+      rekeyControlledByGLO       [0] BOOLEAN DEFAULT FALSE,
+      recipientsNotMutuallyAware [1] BOOLEAN DEFAULT TRUE,
+      duration                   [2] INTEGER DEFAULT 0,
+      generationCounter          [3] INTEGER DEFAULT 2,
+      requestedAlgorithm         [4] KeyWrapAlgorithm
+                         DEFAULT cap-aes128-cbc
+  }
+
+  -- This defines the Delete GL control attribute.
+  -- It has the simple type GeneralName.
+
+  skd-glDelete CMC-CONTROL ::=
+      { DeleteGL IDENTIFIED BY id-skd-glDelete }
+
+  id-skd-glDelete OBJECT IDENTIFIER ::= { id-skd 2}
+  DeleteGL ::= GeneralName
+
+  -- This defines the Add GL Member control attribute
+
+  skd-glAddMember CMC-CONTROL ::=
+      { GLAddMember IDENTIFIED BY id-skd-glAddMember }
+
+  id-skd-glAddMember OBJECT IDENTIFIER ::= { id-skd 3}
+  GLAddMember ::= SEQUENCE {
+      glName    GeneralName,
+      glMember  GLMember
+  }
+
+  GLMember ::= SEQUENCE {
+      glMemberName     GeneralName,
+      glMemberAddress  GeneralName OPTIONAL,
+      certificates     Certificates OPTIONAL
+  }
+
+  Certificates ::= SEQUENCE {
+      pKC       [0] Certificate OPTIONAL,
+                    -- See RFC 5280
+      aC        [1] SEQUENCE SIZE (1.. MAX) OF
+                      AttributeCertificate OPTIONAL,
+                    -- See RFC 3281
+      certPath  [2] CertificateSet OPTIONAL
+                    -- From RFC 3852
+  }
+
+  -- This defines the Delete GL Member control attribute
+
+  skd-glDeleteMember CMC-CONTROL ::=
+      { GLDeleteMember IDENTIFIED BY id-skd-glDeleteMember }
+
+  id-skd-glDeleteMember OBJECT IDENTIFIER ::= { id-skd 4}
+
+  GLDeleteMember ::= SEQUENCE {
+      glName            GeneralName,
+      glMemberToDelete  GeneralName
+  }
+
+  -- This defines the Delete GL Member control attribute
+
+  skd-glRekey CMC-CONTROL ::=
+      { GLRekey IDENTIFIED BY id-skd-glRekey }
+
+  id-skd-glRekey OBJECT IDENTIFIER ::= { id-skd 5}
+
+  GLRekey ::= SEQUENCE {
+      glName              GeneralName,
+      glAdministration    GLAdministration OPTIONAL,
+      glNewKeyAttributes  GLNewKeyAttributes OPTIONAL,
+      glRekeyAllGLKeys    BOOLEAN OPTIONAL
+  }
+
+  GLNewKeyAttributes ::= SEQUENCE {
+      rekeyControlledByGLO       [0] BOOLEAN OPTIONAL,
+      recipientsNotMutuallyAware [1] BOOLEAN OPTIONAL,
+      duration                   [2] INTEGER OPTIONAL,
+      generationCounter          [3] INTEGER OPTIONAL,
+      requestedAlgorithm         [4] KeyWrapAlgorithm OPTIONAL
+  }
+
+  -- This defines the Add and Delete GL Owner control attributes
+
+  skd-glAddOwner CMC-CONTROL ::=
+      { GLOwnerAdministration IDENTIFIED BY id-skd-glAddOwner }
+  id-skd-glAddOwner OBJECT IDENTIFIER ::= { id-skd 6}
+
+  skd-glRemoveOwner CMC-CONTROL ::=
+      { GLOwnerAdministration IDENTIFIED BY id-skd-glRemoveOwner }
+
+  id-skd-glRemoveOwner OBJECT IDENTIFIER ::= { id-skd 7}
+
+  GLOwnerAdministration ::= SEQUENCE {
+      glName       GeneralName,
+      glOwnerInfo  GLOwnerInfo
+  }
+
+  -- This defines the GL Key Compromise control attribute.
+  -- It has the simple type GeneralName.
+
+  skd-glKeyCompromise CMC-CONTROL ::=
+      { GLKCompromise IDENTIFIED BY id-skd-glKeyCompromise }
+
+  id-skd-glKeyCompromise OBJECT IDENTIFIER ::= { id-skd 8}
+  GLKCompromise ::= GeneralName
+
+  -- This defines the GL Key Refresh control attribute.
+
+  skd-glkRefresh CMC-CONTROL ::=
+      { GLKRefresh IDENTIFIED BY id-skd-glkRefresh }
+
+  id-skd-glkRefresh OBJECT IDENTIFIER ::= { id-skd 9}
+
+  GLKRefresh ::= SEQUENCE {
+      glName  GeneralName,
+      dates   SEQUENCE SIZE (1..MAX) OF Date
+  }
+
+  Date ::= SEQUENCE {
+      start GeneralizedTime,
+      end   GeneralizedTime OPTIONAL
+  }
+
+  -- This defines the GLA Query Request control attribute.
+
+  skd-glaQueryRequest CMC-CONTROL ::=
+      { GLAQueryRequest IDENTIFIED BY id-skd-glaQueryRequest }
+
+  id-skd-glaQueryRequest OBJECT IDENTIFIER ::= { id-skd 11}
+
+  SKD-QUERY ::= TYPE-IDENTIFIER
+
+  SkdQuerySet SKD-QUERY ::= {skd-AlgRequest, ...}
+  GLAQueryRequest ::= SEQUENCE {
+      glaRequestType   SKD-QUERY.&id ({SkdQuerySet}),
+      glaRequestValue  SKD-QUERY.&Type ({SkdQuerySet}{@glaRequestType})
+  }
+
+  -- This defines the GLA Query Response control attribute.
+
+  skd-glaQueryResponse CMC-CONTROL ::=
+      { GLAQueryResponse IDENTIFIED BY id-skd-glaQueryResponse }
+
+  id-skd-glaQueryResponse OBJECT IDENTIFIER ::= { id-skd 12}
+
+  SKD-RESPONSE ::= TYPE-IDENTIFIER
+
+  SkdResponseSet SKD-RESPONSE ::= {skd-AlgResponse, ...}
+
+  GLAQueryResponse ::= SEQUENCE {
+      glaResponseType   SKD-RESPONSE.&id({SkdResponseSet}),
+      glaResponseValue  SKD-RESPONSE.&Type({SkdResponseSet}{@glaResponseType})}
+
+  -- This defines the GLA Request/Response (glaRR) arc for
+  -- glaRequestType/glaResponseType.
+
+  id-cmc-glaRR OBJECT IDENTIFIER ::=
+      { iso(1) identified-organization(3) dod(6) internet(1) security(5)
+      mechanisms(5) pkix(7) cmc(7) glaRR(99) }
+
+  -- This defines the Algorithm Request
+
+  skd-AlgRequest SKD-QUERY ::= {
+     SKDAlgRequest IDENTIFIED BY id-cmc-gla-skdAlgRequest
+  }
+
+  id-cmc-gla-skdAlgRequest OBJECT IDENTIFIER ::= { id-cmc-glaRR 1 }
+  SKDAlgRequest ::= NULL
+
+  -- This defines the Algorithm Response
+
+  skd-AlgResponse SKD-RESPONSE ::= {
+      SMIMECapability{{SKD-Caps}} IDENTIFIED BY
+          id-cmc-gla-skdAlgResponse
+  }
+
+  id-cmc-gla-skdAlgResponse OBJECT IDENTIFIER ::= { id-cmc-glaRR 2 }
+  -- Note that the response for algorithmSupported request is the
+  -- smimeCapabilities attribute as defined in RFC 3851.
+
+  -- This defines the control attribute to request an updated
+  -- certificate to the GLA.
+
+  skd-glProvideCert CMC-CONTROL ::=
+      { GLManageCert IDENTIFIED BY id-skd-glProvideCert }
+
+  id-skd-glProvideCert OBJECT IDENTIFIER ::= { id-skd 13}
+
+  GLManageCert ::= SEQUENCE {
+      glName    GeneralName,
+      glMember  GLMember
+  }
+
+  -- This defines the control attribute to return an updated
+  -- certificate to the GLA.  It has the type GLManageCert.
+
+  skd-glManageCert CMC-CONTROL ::=
+      { GLManageCert IDENTIFIED BY id-skd-glManageCert }
+
+  id-skd-glManageCert OBJECT IDENTIFIER ::= { id-skd 14}
+
+  -- This defines the control attribute to distribute the GL shared
+  -- KEK.
+
+  skd-glKey CMC-CONTROL ::=
+      { GLKey IDENTIFIED BY id-skd-glKey }
+
+  id-skd-glKey OBJECT IDENTIFIER ::= { id-skd 15}
+
+  GLKey ::= SEQUENCE {
+      glName        GeneralName,
+      glIdentifier  KEKIdentifier,   -- See RFC 3852
+      glkWrapped    RecipientInfos,  -- See RFC 3852
+      glkAlgorithm  KeyWrapAlgorithm,
+      glkNotBefore  GeneralizedTime,
+      glkNotAfter   GeneralizedTime
+  }
+
+  -- This defines the CMC error types
+
+  skd-ExtendedFailures EXTENDED-FAILURE-INFO ::= {
+     SKDFailInfo IDENTIFIED BY id-cet-skdFailInfo
+  }
+
+  id-cet-skdFailInfo  OBJECT IDENTIFIER ::=
+      { iso(1) identified-organization(3) dod(6) internet(1) security(5)
+      mechanisms(5) pkix(7) cet(15) skdFailInfo(1) }
+
+  SKDFailInfo ::= INTEGER {
+      unspecified           (0),
+      closedGL              (1),
+      unsupportedDuration   (2),
+      noGLACertificate      (3),
+      invalidCert           (4),
+      unsupportedAlgorithm  (5),
+      noGLONameMatch        (6),
+      invalidGLName         (7),
+      nameAlreadyInUse      (8),
+      noSpam                (9),
+      deniedAccess          (10),
+      alreadyAMember        (11),
+      notAMember            (12),
+      alreadyAnOwner        (13),
+      notAnOwner            (14) }
+
+END

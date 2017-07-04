@@ -1,0 +1,29 @@
+CALMlegacySupport { iso (1) standard (0) calm-nonip(29281) legacy (2) asnm-1 (1)}  
+
+DEFINITIONS AUTOMATIC TAGS::=BEGIN
+
+IMPORTS
+PortNumber FROM CALMfntp { iso (1) standard (0) calm-nonip(29281) fntp(1) asnm-1 (1)} 
+;
+
+-- End of IMPORTS
+
+-- General types --
+
+Param15628::=SEQUENCE{
+	fill	BIT STRING (SIZE(7)),
+	params	CHOICE{
+	legacyOption	[0] INTEGER(0..255),
+	portPM	[1] PortNumber -- Port number of 15628 Port Manager
+-- 		[2-254]
+	}
+	}
+
+FNTPlpp::=OCTET STRING (SIZE(0..65535))
+
+-- Values
+
+
+-- Dummy values not defined here which cannot be imported. To be replaced by proper type.
+
+END

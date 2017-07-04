@@ -1,0 +1,7 @@
+# ASN.1 files copied from the erlang source code:
+# https://github.com/aerosol/signerl/blob/master/TCAP/asn_src/ANSI/
+#
+# Ordered list of TCAP modules
+# to be loaded sequentially
+TCAP-Remote-Operations-Information-Objects.asn
+TCAPPackage.asn

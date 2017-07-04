@@ -1,0 +1,235 @@
+CALMfntp { iso (1) standard (0) calm-nonip(29281) fntp(1) asnm-1 (1)}  
+
+DEFINITIONS AUTOMATIC TAGS::=BEGIN
+
+IMPORTS
+
+CIstatus, Link-ID, UserPriority FROM CALMllsap {iso(1) standard(0) calm-ll-sap(21218) asnm-1(1)}
+
+ITS-scuId FROM CALMmanagement { iso (1) standard (0) calm-management (24102) local (1) asnm-1 (1)}
+
+COMMUPDOWN FROM CALMmsap { iso (1) standard (0) calm-management (24102) msap (3) asnm-1 (1)}
+
+FNTPlpp FROM CALMlegacySupport { iso (1) standard (0) calm-nonip(29281) legacy (2) asnm-1 (1)} 
+
+ServiceRef FROM CITSapplReq {iso(1) standard(0) cits-applReq (17423) asnm-1 (1)}
+;
+
+-- End of IMPORTS
+
+-- Types
+
+-- PDUs --
+
+   -- FNTP NPDU --
+
+FNTPNPDU::=SEQUENCE{
+	header	FNTPHeader,
+	body	ITSfpdu  -- specific to an ITS-S application / message
+	}
+
+FNTPHeader::=SEQUENCE{
+	sourcePort	PortNumber,
+	destinationPort	PortNumber,
+	options	FntpOptions
+	}
+
+FntpOptions::=SEQUENCE{
+	intForw	FNTPintForwarding OPTIONAL,
+	sec	FNTPsecurity OPTIONAL,
+	hops	FNTPhopCount OPTIONAL,
+	lpp	FNTPlpp OPTIONAL,
+	cip	FNTPCIPheader OPTIONAL,
+	opt5	NULL OPTIONAL,
+	opt6	NULL OPTIONAL,
+	opt7	NULL OPTIONAL
+}
+
+FNTPintForwarding::=SEQUENCE{
+	hostITS-scuId	ITS-scuId,
+	link	Link-ID,
+	counter	FNTPpacketCounter,
+	sourcePort	PortNumber,
+	destinationPort	PortNumber
+	}
+
+FNTPpacketCounter::=INTEGER(0..255)
+
+FNTPsecurity::=OCTET STRING (SIZE(0..65535))
+
+FNTPhopCount::=INTEGER(0..255)
+
+FNTPCIPheader::=SEQUENCE{
+	rxCIP	RXcip, 
+	txCIP	TXcip
+	}
+
+RXcip::=OCTET STRING (SIZE(0..255))
+
+TXcip::=OCTET STRING (SIZE(0..255)) -- may optionally be forwarded to peer ITS station
+
+
+-- Managements SAP service primitives --
+-- Payload definitions for primitives defined in ISO 24102 --
+
+  -- MN-SAP --
+
+    -- FWTxxx --
+
+DeleteFNTP::=SEQUENCE{
+	reference	INTEGER(0..noFNTPfwtEntries)
+	}
+
+DeleteNotFNTP::=SEQUENCE{
+	reference	INTEGER(0..noFNTPfwtEntries)
+	}
+
+SetFNTP::=SEQUENCE{
+	remotePort	PortNumber,
+	linkID	Link-ID,
+	ciStatus	CIstatus,
+	linkPort	PortNumber,
+	serviceInfo	HostServiceInfo, --formerly ServiceNWref
+	priority	UserPriority,
+	timeout	NTtimeout
+	} -- SetConfFNTP will return the reference pointing to the new entry.
+
+SetConfFNTP::=SEQUENCE{
+	reference	INTEGER(0..noFNTPfwtEntries)
+	}
+
+HostServiceInfo::=SEQUENCE{
+	servicePort	PortNumber,
+	hostITSscu	ITS-scuId,
+	servicePriority	UserPriority
+	}
+
+SetNotFNTP::=SEQUENCE{
+	reference	INTEGER(0..noFNTPfwtEntries),
+	remotePort	PortNumber,
+	linkID	Link-ID,
+	ciStatus	CIstatus,
+	linkPort	PortNumber,
+	serviceInfo	HostServiceInfo,
+	priority	UserPriority,
+	timeout	NTtimeout
+	}
+
+UpdateFNTP::=SEQUENCE{
+	fill	BIT STRING (SIZE(1)),
+	reference	INTEGER(0..noFNTPfwtEntries),
+	remotePort	PortNumber OPTIONAL,
+	linkID	Link-ID OPTIONAL,
+	ciStatus	CIstatus OPTIONAL,
+	linkPort	PortNumber OPTIONAL,
+	serviceInfo	HostServiceInfo OPTIONAL,
+	priority	UserPriority OPTIONAL,
+	timeout	NTtimeout OPTIONAL
+	}
+
+UpdateNotFNTP::=SEQUENCE{
+	fill	BIT STRING (SIZE(1)),
+	reference	INTEGER(0..noFNTPfwtEntries),
+	remotePort	PortNumber OPTIONAL,
+	linkID	Link-ID OPTIONAL,
+	ciStatus	CIstatus OPTIONAL,
+	linkPort	PortNumber OPTIONAL,
+	serviceInfo	HostServiceInfo OPTIONAL,
+	priority	UserPriority OPTIONAL,
+	timeout	NTtimeout OPTIONAL
+	}
+
+  -- NF-SAP --
+
+NFSAP ::= COMMUPDOWN
+
+NFsapPrimitivesDown::=SEQUENCE{
+	spRef	NFSAP.&primitiveRef ({NFsapspsdown}),
+	servPrimitive	NFSAP.&Primitive({NFsapspsdown}{@spRef})
+	}
+
+NFsapspsdown NFSAP::={fntpPortRequest | fntpCommRequest, ...}
+
+fntpPortRequest	NFSAP::={&primitiveRef 0, &Primitive NFfntpPortRequest}
+fntpCommRequest	NFSAP::={&primitiveRef 1, &Primitive NFfntpCommRequest}
+
+NFsapPrimitivesUp::=SEQUENCE{
+	spRef	NFSAP.&primitiveRef ({NFsapspsup}),
+	servPrimitive	NFSAP.&Primitive({NFsapspsup}{@spRef})
+	}
+
+NFsapspsup NFSAP::={fntpPortConfirm | fntpCommConfirm | fntpCommIndication, ...}
+
+fntpPortConfirm	NFSAP::={&primitiveRef 0, &Primitive NFfntpPortConfirm}
+fntpCommConfirm	NFSAP::={&primitiveRef 1, &Primitive NFfntpCommConfirm}
+fntpCommIndication	NFSAP::={&primitiveRef 2, &Primitive NFfntpCommIndication}
+
+PortOp::=INTEGER{
+     delete   (0),
+     create   (255)
+     } (0..255)
+
+NFfntpPortRequest::=SEQUENCE{
+	serviceRef	ServiceRef,
+	operation	PortOp,
+	portno	PortNumber,
+	priority	UserPriority
+	}
+
+NFfntpPortConfirm::=SEQUENCE{
+	serviceRef	ServiceRef,
+	servicePort	PortNumber
+	}
+
+NFfntpCommRequest::=SEQUENCE{
+	commRef	INTEGER(0..255),
+	servicePort	PortNumber,
+	remotePort	PortNumber,
+	linkID	Link-ID,
+	data	ITSfpdu,
+	priority	UserPriority,
+	controlField	FntpOptions -- some options do not apply
+	}
+
+NFfntpCommConfirm::=SEQUENCE{
+	commRef	INTEGER(0..255),
+	servicePort	PortNumber,
+	errStatus	FNTPerrorStatus
+	}
+
+FNTPerrorStatus::=INTEGER{
+	success	(0),
+	unspecFailure	(1),
+	ciBusyTX	(2),
+	noForwardInfo	(254),
+	ciSuspend	(255)
+	} (0..255)
+
+NFfntpCommIndication::=SEQUENCE{
+	servicePort	PortNumber,
+	remotePort	PortNumber,
+	linkID	Link-ID,
+	data	ITSfpdu,
+	priority	UserPriority,
+	controlField	FntpOptions 
+	}
+
+-- General types --
+
+PortNumber::=CHOICE{
+	portShort	INTEGER(0..127),
+	portLong	INTEGER(0..32767)
+	}
+
+ITSfpdu::=OCTET STRING(SIZE(0..65535)) -- as defined by application. Details not known to FNTP
+
+
+NTtimeout::=INTEGER(0..65535) -- in s
+
+-- Values
+
+noFNTPfwtEntries	INTEGER::=65535
+
+
+
+END

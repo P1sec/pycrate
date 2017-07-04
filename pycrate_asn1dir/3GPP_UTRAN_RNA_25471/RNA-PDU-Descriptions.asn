@@ -1,0 +1,181 @@
+
+-- **************************************************************
+--
+-- Elementary Procedure definitions
+--
+-- **************************************************************
+
+RNA-PDU-Descriptions { 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+umts-Access (20) modules (3) rna(7) version1 (1) rna-PDU-Descriptions (0)}
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- IE parameter types from other modules.
+--
+-- **************************************************************
+
+IMPORTS
+	Criticality,
+	ProcedureCode
+FROM RNA-CommonDataTypes
+	IurhSetupRequest,
+	IurhSetupResponse,
+	IurhSetupFailure,
+	Connect,
+	DirectTransfer,
+	Disconnect,
+	ConnectionlessTransfer,
+	ErrorIndication,
+	PrivateMessage
+
+FROM RNA-PDU-Contents
+	id-IurhSetup,
+	id-Connect,
+	id-DirectTransfer,
+	id-Disconnect,
+	id-ConnectionlessTransfer,
+	id-ErrorIndication,
+	id-privateMessage
+FROM RNA-Constants;
+
+-- **************************************************************
+--
+-- Interface Elementary Procedure Class
+--
+-- **************************************************************
+
+RNA-ELEMENTARY-PROCEDURE ::= CLASS {
+	&InitiatingMessage			,
+	&SuccessfulOutcome			OPTIONAL,
+	&UnsuccessfulOutcome		OPTIONAL,
+	&procedureCode				ProcedureCode	UNIQUE,
+	&criticality				Criticality		DEFAULT ignore
+}
+
+WITH SYNTAX {
+	INITIATING MESSAGE			&InitiatingMessage
+	[SUCCESSFUL OUTCOME			&SuccessfulOutcome]
+	[UNSUCCESSFUL OUTCOME		&UnsuccessfulOutcome]
+	PROCEDURE CODE				&procedureCode
+	[CRITICALITY				&criticality]
+}
+
+-- **************************************************************
+--
+-- Interface PDU definitions
+--
+-- **************************************************************
+
+RNA-PDU ::= CHOICE {
+	initiatingMessage		InitiatingMessage,
+	successfulOutcome		SuccessfulOutcome,
+	unsuccessfulOutcome		UnsuccessfulOutcome,
+	...
+}
+
+
+InitiatingMessage ::= SEQUENCE {
+	procedureCode	RNA-ELEMENTARY-PROCEDURE.&procedureCode		({RNA-ELEMENTARY-PROCEDURES}),
+	criticality		RNA-ELEMENTARY-PROCEDURE.&criticality		({RNA-ELEMENTARY-PROCEDURES}{@procedureCode}),
+	value			RNA-ELEMENTARY-PROCEDURE.&InitiatingMessage	({RNA-ELEMENTARY-PROCEDURES}{@procedureCode})
+}
+
+SuccessfulOutcome ::= SEQUENCE {
+	procedureCode	RNA-ELEMENTARY-PROCEDURE.&procedureCode		({RNA-ELEMENTARY-PROCEDURES}),
+	criticality		RNA-ELEMENTARY-PROCEDURE.&criticality		({RNA-ELEMENTARY-PROCEDURES}{@procedureCode}),
+	value			RNA-ELEMENTARY-PROCEDURE.&SuccessfulOutcome	({RNA-ELEMENTARY-PROCEDURES}{@procedureCode})
+}
+
+UnsuccessfulOutcome ::= SEQUENCE {
+	procedureCode	RNA-ELEMENTARY-PROCEDURE.&procedureCode			({RNA-ELEMENTARY-PROCEDURES}),
+	criticality		RNA-ELEMENTARY-PROCEDURE.&criticality			({RNA-ELEMENTARY-PROCEDURES}{@procedureCode}),
+	value			RNA-ELEMENTARY-PROCEDURE.&UnsuccessfulOutcome	({RNA-ELEMENTARY-PROCEDURES}{@procedureCode})
+}
+
+-- **************************************************************
+--
+-- Interface Elementary Procedure List
+--
+-- **************************************************************
+
+RNA-ELEMENTARY-PROCEDURES RNA-ELEMENTARY-PROCEDURE ::= {
+	RNA-ELEMENTARY-PROCEDURES-CLASS-1	|
+	RNA-ELEMENTARY-PROCEDURES-CLASS-2	,
+	...
+}
+
+RNA-ELEMENTARY-PROCEDURES-CLASS-1 RNA-ELEMENTARY-PROCEDURE ::= {
+	iurhsetup,
+	...
+}
+
+
+RNA-ELEMENTARY-PROCEDURES-CLASS-2 RNA-ELEMENTARY-PROCEDURE ::= {
+	connect							|
+	directTransfer					|
+	disconnect						|
+	connectionlessTransfer			|
+	errorIndication					|
+	privateMessage,
+	...
+}
+
+-- **************************************************************
+--
+-- Interface Elementary Procedures
+--
+-- **************************************************************
+
+iurhsetup	RNA-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		IurhSetupRequest
+	SUCCESSFUL OUTCOME		IurhSetupResponse
+	UNSUCCESSFUL OUTCOME	IurhSetupFailure
+	PROCEDURE CODE			id-IurhSetup
+	CRITICALITY				reject
+}
+
+
+connect RNA-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		Connect
+	PROCEDURE CODE			id-Connect
+	CRITICALITY				ignore
+}
+
+directTransfer RNA-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		DirectTransfer
+	PROCEDURE CODE			id-DirectTransfer
+	CRITICALITY				ignore
+}
+
+disconnect RNA-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		Disconnect
+	PROCEDURE CODE			id-Disconnect
+	CRITICALITY				ignore
+}
+
+connectionlessTransfer	RNA-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ConnectionlessTransfer
+	PROCEDURE CODE			id-ConnectionlessTransfer
+	CRITICALITY				ignore
+}
+
+
+
+errorIndication RNA-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ErrorIndication
+	PROCEDURE CODE			id-ErrorIndication
+	CRITICALITY				ignore
+}
+
+privateMessage RNA-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		PrivateMessage
+	PROCEDURE CODE			id-privateMessage
+	CRITICALITY				ignore
+}
+
+END

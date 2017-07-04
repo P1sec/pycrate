@@ -1,0 +1,129 @@
+--$Revision: 182653 $
+--**********************************************************************
+--
+--  NCBI Sequence location and identifier elements
+--  by James Ostell, 1990
+--
+--  Version 3.0 - 1994
+--
+--**********************************************************************
+
+NCBI-Seqloc DEFINITIONS ::=
+BEGIN
+
+EXPORTS Seq-id, Seq-loc, Seq-interval, Packed-seqint, Seq-point, Packed-seqpnt,
+        Na-strand, Giimport-id;
+
+IMPORTS Object-id, Int-fuzz, Dbtag, Date FROM NCBI-General
+        Id-pat FROM NCBI-Biblio
+        Feat-id FROM NCBI-Seqfeat;
+
+--*** Sequence identifiers ********************************
+--*
+
+Seq-id ::= CHOICE {
+    local Object-id ,            -- local use
+    gibbsq INTEGER ,             -- Geninfo backbone seqid
+    gibbmt INTEGER ,             -- Geninfo backbone moltype
+    giim Giimport-id ,           -- Geninfo import id
+    genbank Textseq-id ,
+    embl Textseq-id ,
+    pir Textseq-id ,
+    swissprot Textseq-id ,
+    patent Patent-seq-id ,
+    other Textseq-id ,           -- for historical reasons, 'other' = 'refseq'
+    general Dbtag ,              -- for other databases
+    gi INTEGER ,                 -- GenInfo Integrated Database
+    ddbj Textseq-id ,            -- DDBJ
+    prf Textseq-id ,             -- PRF SEQDB
+    pdb PDB-seq-id ,             -- PDB sequence
+    tpg Textseq-id ,             -- Third Party Annot/Seq Genbank
+    tpe Textseq-id ,             -- Third Party Annot/Seq EMBL
+    tpd Textseq-id ,             -- Third Party Annot/Seq DDBJ
+    gpipe Textseq-id ,           -- Internal NCBI genome pipeline processing ID
+    named-annot-track Textseq-id -- Internal named annotation tracking ID
+}
+
+Seq-id-set ::= SET OF Seq-id
+
+
+Patent-seq-id ::= SEQUENCE {
+    seqid INTEGER ,         -- number of sequence in patent
+    cit Id-pat }           -- patent citation
+
+Textseq-id ::= SEQUENCE {
+    name VisibleString OPTIONAL ,
+    accession VisibleString OPTIONAL ,
+    release VisibleString OPTIONAL ,
+    version INTEGER OPTIONAL }
+
+Giimport-id ::= SEQUENCE {
+    id INTEGER ,                     -- the id to use here
+    db VisibleString OPTIONAL ,      -- dbase used in
+    release VisibleString OPTIONAL } -- the release
+
+PDB-seq-id ::= SEQUENCE {
+    mol PDB-mol-id ,           -- the molecule name
+    chain INTEGER DEFAULT 32 , -- a single ASCII character, chain id
+    rel Date OPTIONAL }        -- release date, month and year
+
+PDB-mol-id ::= VisibleString  -- name of mol, 4 chars
+    
+--*** Sequence locations **********************************
+--*
+
+Seq-loc ::= CHOICE {
+    null NULL ,           -- not placed
+    empty Seq-id ,        -- to NULL one Seq-id in a collection
+    whole Seq-id ,        -- whole sequence
+    int Seq-interval ,    -- from to
+    packed-int Packed-seqint ,
+    pnt Seq-point ,
+    packed-pnt Packed-seqpnt ,
+    mix Seq-loc-mix ,
+    equiv Seq-loc-equiv ,  -- equivalent sets of locations
+    bond Seq-bond ,
+    feat Feat-id }         -- indirect, through a Seq-feat
+    
+
+Seq-interval ::= SEQUENCE {
+    from INTEGER ,
+    to INTEGER ,
+    strand Na-strand OPTIONAL ,
+    id Seq-id ,    -- WARNING: this used to be optional
+    fuzz-from Int-fuzz OPTIONAL ,
+    fuzz-to Int-fuzz OPTIONAL }
+
+Packed-seqint ::= SEQUENCE OF Seq-interval
+
+Seq-point ::= SEQUENCE {
+    point INTEGER ,
+    strand Na-strand OPTIONAL ,
+    id Seq-id ,     -- WARNING: this used to be optional
+    fuzz Int-fuzz OPTIONAL }
+
+Packed-seqpnt ::= SEQUENCE {
+    strand Na-strand OPTIONAL ,
+    id Seq-id ,
+    fuzz Int-fuzz OPTIONAL ,
+    points SEQUENCE OF INTEGER }
+
+Na-strand ::= ENUMERATED {          -- strand of nucleic acid
+    unknown (0) ,
+    plus (1) ,
+    minus (2) ,               
+    both (3) ,                -- in forward orientation
+    both-rev (4) ,            -- in reverse orientation
+    other (255) }
+
+Seq-bond ::= SEQUENCE {         -- bond between residues
+    a Seq-point ,           -- connection to a least one residue
+    b Seq-point OPTIONAL }  -- other end may not be available
+
+Seq-loc-mix ::= SEQUENCE OF Seq-loc   -- this will hold anything
+
+Seq-loc-equiv ::= SET OF Seq-loc      -- for a set of equivalent locations
+
+END
+    
+

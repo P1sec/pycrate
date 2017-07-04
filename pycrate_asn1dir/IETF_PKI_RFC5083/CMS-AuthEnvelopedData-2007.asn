@@ -1,0 +1,38 @@
+CMS-AuthEnvelopedData-2007
+     { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
+       pkcs-9(9) smime(16) modules(0) cms-authEnvelopedData(31) }
+
+DEFINITIONS IMPLICIT TAGS ::=
+BEGIN
+
+   -- EXPORTS All
+   -- The types and values defined in this module are exported for use
+   -- in the other ASN.1 modules.  Other applications may use them for
+   -- their own purposes.
+
+   IMPORTS
+
+     -- Imports from RFC 3852 [CMS], Section 12.1
+           AuthAttributes, CMSVersion, EncryptedContentInfo,
+           MessageAuthenticationCode, OriginatorInfo, RecipientInfos,
+           UnauthAttributes
+              FROM CryptographicMessageSyntax2004
+                   { iso(1) member-body(2) us(840) rsadsi(113549)
+                     pkcs(1) pkcs-9(9) smime(16) modules(0)
+                     cms-2004(24) } ;
+
+
+   id-ct-authEnvelopedData OBJECT IDENTIFIER ::= { iso(1)
+       member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-9(9)
+       smime(16) ct(1) 23 }
+
+   AuthEnvelopedData ::= SEQUENCE {
+     version CMSVersion,
+     originatorInfo [0] IMPLICIT OriginatorInfo OPTIONAL,
+     recipientInfos RecipientInfos,
+     authEncryptedContentInfo EncryptedContentInfo,
+     authAttrs [1] IMPLICIT AuthAttributes OPTIONAL,
+     mac MessageAuthenticationCode,
+     unauthAttrs [2] IMPLICIT UnauthAttributes OPTIONAL }
+
+END -- of CMS-AuthEnvelopedData-2007

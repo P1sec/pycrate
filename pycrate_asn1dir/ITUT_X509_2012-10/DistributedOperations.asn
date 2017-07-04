@@ -1,0 +1,238 @@
+DistributedOperations {joint-iso-itu-t ds(5) module(1) distributedOperations(3) 7}
+DEFINITIONS ::=
+BEGIN
+
+-- EXPORTS All 
+-- The types and values defined in this module are exported for use in the other ASN.1
+-- modules contained within these Directory Specifications, and for the use of other 
+-- applications which will use them to access Directory services. Other applications may
+-- use them for their own purposes, but this will not constrain extensions and
+-- modifications needed to maintain or improve the Directory service.
+
+IMPORTS
+
+  -- from Rec. ITU-T X.501 | ISO/IEC 9594-2
+
+  basicAccessControl, commonProtocolSpecification, directoryAbstractService,
+  enhancedSecurity, informationFramework, selectedAttributeTypes, serviceAdministration
+    FROM UsefulDefinitions {joint-iso-itu-t ds(5) module(1) usefulDefinitions(0) 7}
+  
+  DistinguishedName, Name, RDNSequence
+    FROM InformationFramework informationFramework
+
+  MRMapping, SearchRuleId
+    FROM ServiceAdministration serviceAdministration
+
+  AuthenticationLevel
+    FROM BasicAccessControl basicAccessControl
+  
+  OPTIONALLY-PROTECTED{}
+    FROM EnhancedSecurity enhancedSecurity
+
+  -- from Rec. ITU-T X.511 | ISO/IEC 9594-3
+
+  abandon, addEntry, administerPassword, changePassword, CommonResults, compare, 
+  directoryBindError, ldapTransport, linkedLDAP, list, modifyDN, modifyEntry,
+  read, referral, removeEntry, search, SecurityParameters, SimpleCredentials,
+  SpkmCredentials, StrongCredentials, Versions
+    FROM DirectoryAbstractService directoryAbstractService
+
+  -- from Rec. ITU-T X.519 | ISO/IEC 9594-5
+
+  ERROR, id-errcode-dsaReferral, OPERATION
+    FROM CommonProtocolSpecification commonProtocolSpecification
+
+  -- from Rec. ITU-T X.520 | ISO/IEC 9594-6
+
+  PresentationAddress, ProtocolInformation, UnboundedDirectoryString,
+  UniqueIdentifier
+    FROM SelectedAttributeTypes selectedAttributeTypes;
+
+-- errors and parameters 
+
+dsaReferral ERROR ::= {
+  PARAMETER           OPTIONALLY-PROTECTED { DsaReferralData }
+  CODE                id-errcode-dsaReferral }
+
+DsaReferralData ::= SET {
+  reference      [0]  ContinuationReference,
+  contextPrefix  [1]  DistinguishedName OPTIONAL,
+  ...,
+  ...,
+  COMPONENTS OF       CommonResults }
+ 
+--  common arguments and results 
+
+ChainingArguments ::= SET {
+  originator                 [0]  DistinguishedName OPTIONAL,
+  targetObject               [1]  DistinguishedName OPTIONAL,
+  operationProgress          [2]  OperationProgress 
+                               DEFAULT {nameResolutionPhase notStarted},
+  traceInformation           [3]  TraceInformation,
+  aliasDereferenced          [4]  BOOLEAN DEFAULT FALSE,
+  aliasedRDNs                [5]  INTEGER OPTIONAL,
+           -- only present in first edition systems
+  returnCrossRefs            [6]  BOOLEAN DEFAULT FALSE,
+  referenceType              [7]  ReferenceType DEFAULT superior,
+  info                       [8]  DomainInfo OPTIONAL,
+  timeLimit                  [9]  Time OPTIONAL,
+  securityParameters         [10] SecurityParameters DEFAULT {},
+  entryOnly                  [11] BOOLEAN DEFAULT FALSE,
+  uniqueIdentifier           [12] UniqueIdentifier OPTIONAL,
+  authenticationLevel        [13] AuthenticationLevel OPTIONAL,
+  exclusions                 [14] Exclusions OPTIONAL,
+  excludeShadows             [15] BOOLEAN DEFAULT FALSE,
+  nameResolveOnMaster        [16] BOOLEAN DEFAULT FALSE,
+  operationIdentifier        [17] INTEGER OPTIONAL,
+  searchRuleId               [18] SearchRuleId OPTIONAL,
+  chainedRelaxation          [19] MRMapping OPTIONAL,
+  relatedEntry               [20] INTEGER OPTIONAL,
+  dspPaging                  [21] BOOLEAN DEFAULT FALSE,
+  --                         [22] Not to be used
+  --                         [23] Not to be used
+  excludeWriteableCopies     [24] BOOLEAN DEFAULT FALSE,
+  ... }
+
+Time ::= CHOICE {
+  utcTime          UTCTime,
+  generalizedTime  GeneralizedTime,
+  ... }
+
+DomainInfo ::= ABSTRACT-SYNTAX.&Type
+
+ChainingResults ::= SET {
+  info                [0]  DomainInfo OPTIONAL,
+  crossReferences     [1]  SEQUENCE SIZE (1..MAX) OF CrossReference OPTIONAL,
+  securityParameters  [2]  SecurityParameters DEFAULT {},
+  alreadySearched     [3]  Exclusions OPTIONAL,
+  ... }
+
+CrossReference ::= SET {
+  contextPrefix  [0]  DistinguishedName,
+  accessPoint    [1]  AccessPointInformation,
+  ... }
+
+OperationProgress ::= SET {
+  nameResolutionPhase  [0]  ENUMERATED {
+    notStarted  (1),
+    proceeding  (2),
+    completed   (3),
+    ... },
+  nextRDNToBeResolved  [1]  INTEGER OPTIONAL,
+  ... }
+
+TraceInformation ::= SEQUENCE OF TraceItem
+
+TraceItem ::= SET {
+  dsa                [0]  Name,
+  targetObject       [1]  Name OPTIONAL,
+  operationProgress  [2]  OperationProgress,
+  ... }
+
+ReferenceType ::= ENUMERATED {
+  superior               (1),
+  subordinate            (2),
+  cross                  (3),
+  nonSpecificSubordinate (4),
+  supplier               (5),
+  master                 (6),
+  immediateSuperior      (7),
+  self                   (8),
+  ditBridge              (9),
+  ... }
+
+AccessPoint ::= SET {
+  ae-title             [0]  Name,
+  address              [1]  PresentationAddress,
+  protocolInformation  [2]  SET SIZE (1..MAX) OF ProtocolInformation OPTIONAL,
+  --                   [6]  Not to be used
+  ... }
+
+MasterOrShadowAccessPoint ::= SET {
+  COMPONENTS OF          AccessPoint,
+  category          [3]  ENUMERATED {
+    master            (0),
+    shadow            (1),
+    writeableCopy     (2),
+    ... } DEFAULT master,
+  chainingRequired  [5]  BOOLEAN DEFAULT FALSE,
+  ... }
+
+MasterAndShadowAccessPoints ::= SET SIZE (1..MAX) OF MasterOrShadowAccessPoint
+
+AccessPointInformation ::= SET {
+  COMPONENTS OF          MasterOrShadowAccessPoint,
+  additionalPoints  [4]  MasterAndShadowAccessPoints OPTIONAL,
+  ... }
+
+DitBridgeKnowledge ::= SEQUENCE {
+  domainLocalID  UnboundedDirectoryString OPTIONAL,
+  accessPoints   MasterAndShadowAccessPoints,
+  ... }
+
+Exclusions ::= SET SIZE (1..MAX) OF RDNSequence
+
+ContinuationReference ::= SET {
+  targetObject         [0]  Name,
+  aliasedRDNs          [1]  INTEGER OPTIONAL, -- only present in first edition systems
+  operationProgress    [2]  OperationProgress,
+  rdnsResolved         [3]  INTEGER OPTIONAL,
+  referenceType        [4]  ReferenceType,
+  accessPoints         [5]  SET OF AccessPointInformation,
+  entryOnly            [6]  BOOLEAN DEFAULT FALSE,
+  exclusions           [7]  Exclusions OPTIONAL,
+  returnToDUA          [8]  BOOLEAN DEFAULT FALSE,
+  nameResolveOnMaster  [9]  BOOLEAN DEFAULT FALSE,
+  ... }
+
+--  bind unbind operation 
+
+dSABind OPERATION ::= {
+  ARGUMENT     DSABindArgument
+  RESULT       DSABindResult
+  ERRORS       { directoryBindError } }
+
+DSABindArgument  ::=  SET  {
+  credentials  [0]  DSACredentials OPTIONAL,
+  versions     [1]  Versions DEFAULT {v1},
+  ... }
+
+DSACredentials  ::=  CHOICE  {
+  simple             [0]  SimpleCredentials,
+  strong             [1]  StrongCredentials,
+  externalProcedure  [2]  EXTERNAL,
+  spkm               [3]  SpkmCredentials,
+  ... }
+
+DSABindResult  ::=  DSABindArgument
+
+ -- parameterized type for deriving chained operations 
+
+  chained{OPERATION:operation} OPERATION ::= {
+    ARGUMENT             OPTIONALLY-PROTECTED {SET {
+      chainedArgument      ChainingArguments,
+      argument        [0]  operation.&ArgumentType } }
+    RESULT OPTIONALLY-PROTECTED {SET {
+      chainedResult        ChainingResults,
+      result          [0]  operation.&ResultType}}
+    ERRORS
+      {operation.&Errors EXCEPT referral | dsaReferral}
+    CODE                 operation.&operationCode }
+
+ --  chained operations 
+
+chainedRead               OPERATION ::= chained{read}
+chainedCompare            OPERATION ::= chained{compare}
+chainedAbandon            OPERATION ::= abandon
+chainedList               OPERATION ::= chained{list}
+chainedSearch             OPERATION ::= chained{search}
+chainedAddEntry           OPERATION ::= chained{addEntry}
+chainedRemoveEntry        OPERATION ::= chained{removeEntry}
+chainedModifyEntry        OPERATION ::= chained{modifyEntry}
+chainedModifyDN           OPERATION ::= chained{modifyDN}
+chainedChangePassword     OPERATION ::= chained{changePassword}
+chainedAdministerPassword OPERATION ::= chained{administerPassword}
+chainedLdapTransport      OPERATION ::= chained{ldapTransport}
+chainedLinkedLDAP         OPERATION ::= chained{linkedLDAP}
+
+END -- DistributedOperations

@@ -1,0 +1,272 @@
+
+-- **************************************************************
+--
+-- PDU definitions for RNA.
+--
+-- **************************************************************
+
+RNA-PDU-Contents {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+umts-Access (20) modules (3) rna(7) version1 (1) rna-PDU-Contents (1) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- IE parameter types from other modules.
+--
+-- **************************************************************
+
+IMPORTS
+	Cause,
+	CriticalityDiagnostics,
+	RNSAP-Message,
+	BackoffTimer,
+	Iurh-Signalling-Context-ID,
+	HNB-RNL-ID
+
+FROM RNA-IEs
+
+
+	ProtocolExtensionContainer{},
+	ProtocolIE-ContainerList{},
+	ProtocolIE-Container{},
+	ProtocolIE-Single-Container{},
+	PrivateIE-Container{},
+	RNA-PRIVATE-IES,
+	RNA-PROTOCOL-EXTENSION,
+	RNA-PROTOCOL-IES
+FROM RNA-Containers
+
+	id-Cause,
+	id-CriticalityDiagnostics,
+
+	id-RNSAP-Message,
+	id-BackoffTimer,
+
+	id-Iurh-Signalling-Context-ID,
+	id-Senders-HNB-RNL-ID,
+	id-Receivers-HNB-RNL-ID,
+	id-HNB-RNL-ID
+
+
+
+FROM RNA-Constants;
+
+
+-- **************************************************************
+--
+-- Iurh Setup REQUEST
+--
+-- **************************************************************
+
+IurhSetupRequest ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container			{ {IurhSetupRequestIEs} },
+	protocolExtensions		ProtocolExtensionContainer	{ {IurhSetupRequestExtensions} } 	OPTIONAL,
+	...
+}
+
+IurhSetupRequestIEs RNA-PROTOCOL-IES ::= {
+	{ ID id-Senders-HNB-RNL-ID			CRITICALITY reject	TYPE HNB-RNL-ID							PRESENCE mandatory	} |
+	{ ID id-Receivers-HNB-RNL-ID		CRITICALITY reject	TYPE HNB-RNL-ID							PRESENCE mandatory	},
+	...
+}
+
+IurhSetupRequestExtensions RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- Iurh Setup RESPONSE
+--
+-- **************************************************************
+
+IurhSetupResponse ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{ {IurhSetupResponseIEs} },
+	protocolExtensions	ProtocolExtensionContainer	{ {IurhSetupResponseExtensions} } 	OPTIONAL,
+	...
+}
+
+IurhSetupResponseIEs RNA-PROTOCOL-IES ::= {
+	{ ID id-Senders-HNB-RNL-ID			CRITICALITY reject	TYPE HNB-RNL-ID							PRESENCE mandatory } |
+	{ ID id-Receivers-HNB-RNL-ID		CRITICALITY reject	TYPE HNB-RNL-ID							PRESENCE mandatory },
+	...
+}
+
+
+IurhSetupResponseExtensions RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- **************************************************************
+--
+-- Iurh Setup FAILURE
+--
+-- **************************************************************
+
+IurhSetupFailure ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{ {IurhSetupFailureIEs} },
+	protocolExtensions	ProtocolExtensionContainer	{ {IurhSetupFailureExtensions} } 	OPTIONAL,
+	...
+}
+
+IurhSetupFailureIEs RNA-PROTOCOL-IES ::= {
+	{ ID id-Cause						CRITICALITY ignore	TYPE Cause							PRESENCE mandatory }|
+	{ ID id-BackoffTimer				CRITICALITY ignore	TYPE BackoffTimer					PRESENCE optional }|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional }|
+	{ ID id-Senders-HNB-RNL-ID			CRITICALITY reject	TYPE HNB-RNL-ID						PRESENCE mandatory }|
+	{ ID id-Receivers-HNB-RNL-ID		CRITICALITY reject	TYPE HNB-RNL-ID						PRESENCE mandatory },
+	...
+}
+
+
+IurhSetupFailureExtensions RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+
+
+-- **************************************************************
+--
+-- Connect
+--
+-- **************************************************************
+
+Connect ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container			{ {ConnectIEs} },
+	protocolExtensions		ProtocolExtensionContainer	{ {ConnectExtensions} } 	OPTIONAL,
+	...
+}
+
+ConnectIEs RNA-PROTOCOL-IES ::= {
+	{ ID id-Iurh-Signalling-Context-ID		CRITICALITY reject	TYPE Iurh-Signalling-Context-ID			PRESENCE mandatory }|
+	{ ID id-RNSAP-Message					CRITICALITY reject	TYPE RNSAP-Message						PRESENCE optional }|
+	{ ID id-Senders-HNB-RNL-ID				CRITICALITY reject	TYPE HNB-RNL-ID							PRESENCE mandatory }|
+	{ ID id-Receivers-HNB-RNL-ID			CRITICALITY reject	TYPE HNB-RNL-ID							PRESENCE mandatory },
+	...
+}
+
+ConnectExtensions RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- **************************************************************
+--
+-- Direct Transfer
+--
+-- **************************************************************
+
+DirectTransfer ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{ {DirectTransferIEs} },
+	protocolExtensions	ProtocolExtensionContainer	{ {DirectTransferExtensions} } 	OPTIONAL,
+	...
+}
+
+DirectTransferIEs RNA-PROTOCOL-IES ::= {
+	{ ID id-Iurh-Signalling-Context-ID		CRITICALITY reject	TYPE Iurh-Signalling-Context-ID		PRESENCE mandatory } |
+	{ ID id-RNSAP-Message					CRITICALITY reject	TYPE RNSAP-Message					PRESENCE mandatory } |
+	{ ID id-Receivers-HNB-RNL-ID			CRITICALITY reject	TYPE HNB-RNL-ID						PRESENCE mandatory } ,
+	...
+}
+
+DirectTransferExtensions RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+
+-- **************************************************************
+--
+-- Disconnect
+--
+-- **************************************************************
+
+Disconnect ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{ {DisconnectIEs} },
+	protocolExtensions	ProtocolExtensionContainer	{ {DisconnectExtensions} } 	OPTIONAL,
+	...
+}
+
+DisconnectIEs RNA-PROTOCOL-IES ::= {
+	{ ID id-Iurh-Signalling-Context-ID		CRITICALITY reject	TYPE Iurh-Signalling-Context-ID			PRESENCE mandatory } |
+	{ ID id-Cause							CRITICALITY reject	TYPE Cause								PRESENCE mandatory } |
+	{ ID id-RNSAP-Message					CRITICALITY reject	TYPE RNSAP-Message						PRESENCE optional } |
+	{ ID id-Receivers-HNB-RNL-ID			CRITICALITY reject	TYPE HNB-RNL-ID							PRESENCE mandatory },
+	...
+}
+
+DisconnectExtensions RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- Connectionless Transfer
+--
+-- **************************************************************
+
+ConnectionlessTransfer ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{ {ConnectionlessTransferIEs} },
+	protocolExtensions	ProtocolExtensionContainer	{ {ConnectionlessTransferExtensions} } 	OPTIONAL,
+	...
+}
+
+ConnectionlessTransferIEs RNA-PROTOCOL-IES ::= {
+	{ ID id-RNSAP-Message					CRITICALITY reject	TYPE RNSAP-Message					PRESENCE mandatory } |
+	{ ID id-Senders-HNB-RNL-ID				CRITICALITY reject	TYPE HNB-RNL-ID						PRESENCE mandatory } |
+	{ ID id-Receivers-HNB-RNL-ID			CRITICALITY reject	TYPE HNB-RNL-ID						PRESENCE mandatory },
+	...
+}
+
+ConnectionlessTransferExtensions RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+
+-- **************************************************************
+--
+-- ERROR INDICATION
+--
+-- **************************************************************
+
+ErrorIndication ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{ {ErrorIndicationIEs} },
+	protocolExtensions	ProtocolExtensionContainer	{ {ErrorIndicationExtensions} } 	OPTIONAL,
+	...
+}
+
+ErrorIndicationIEs RNA-PROTOCOL-IES ::= {
+	{ ID id-Cause							CRITICALITY ignore	TYPE Cause							PRESENCE optional } |
+	{ ID id-CriticalityDiagnostics			CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional } |
+	{ ID id-Iurh-Signalling-Context-ID		CRITICALITY ignore	TYPE Iurh-Signalling-Context-ID		PRESENCE optional } |
+	{ ID id-Receivers-HNB-RNL-ID			CRITICALITY ignore	TYPE HNB-RNL-ID						PRESENCE mandatory } ,
+	...
+}
+
+ErrorIndicationExtensions RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- PRIVATE MESSAGE
+--
+-- **************************************************************
+
+PrivateMessage ::= SEQUENCE {
+	privateIEs		PrivateIE-Container {{PrivateMessage-IEs}},
+	...
+}
+
+PrivateMessage-IEs RNA-PRIVATE-IES ::= {
+	...
+}
+
+END

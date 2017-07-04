@@ -1,0 +1,65 @@
+--$Revision: 6.3 $
+--****************************************************************
+--
+--  NCBI Project Definition Module
+--  by Jim Ostell and Jonathan Kans, 1998
+--
+--****************************************************************
+
+NCBI-Project DEFINITIONS ::=
+BEGIN
+
+EXPORTS Project, Project-item;
+
+IMPORTS Date FROM NCBI-General
+        PubMedId FROM NCBI-Biblio
+        Seq-id, Seq-loc FROM NCBI-Seqloc
+        Seq-annot, Pubdesc FROM NCBI-Sequence
+        Seq-entry FROM NCBI-Seqset
+        Pubmed-entry FROM NCBI-PubMed;
+
+Project ::= SEQUENCE {
+    descr Project-descr OPTIONAL ,
+    data Project-item }
+
+Project-item ::= CHOICE {
+    pmuid SET OF INTEGER ,
+    protuid SET OF INTEGER ,
+    nucuid SET OF INTEGER ,
+    sequid SET OF INTEGER ,
+    genomeuid SET OF INTEGER ,
+    structuid SET OF INTEGER ,
+    pmid SET OF PubMedId ,
+    protid SET OF Seq-id ,
+    nucid SET OF Seq-id ,
+    seqid SET OF Seq-id ,
+    genomeid SET OF Seq-id ,
+    structid NULL ,
+    pment SET OF Pubmed-entry ,
+    protent SET OF Seq-entry ,
+    nucent SET OF Seq-entry ,
+    seqent SET OF Seq-entry ,
+    genomeent SET OF Seq-entry ,
+    structent NULL ,
+    seqannot SET OF Seq-annot ,
+    loc SET OF Seq-loc ,
+    proj SET OF Project
+}
+
+Project-descr ::= SEQUENCE {
+    id SET OF Project-id ,
+    name VisibleString OPTIONAL ,
+    descr SET OF Projdesc OPTIONAL }
+
+Projdesc ::= CHOICE {
+    pub Pubdesc ,
+    date Date ,
+    comment VisibleString ,
+    title VisibleString
+}
+
+Project-id ::= VisibleString
+
+END
+
+

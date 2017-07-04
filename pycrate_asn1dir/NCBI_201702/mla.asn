@@ -1,0 +1,125 @@
+--$Revision: 209893 $
+--********************************************************************
+--
+--  Network MEDLINE Archive message formats
+--  Ostell 1993
+--
+--
+--*********************************************************************
+--
+--  mla.asn
+--
+--     messages for medline archive data access
+--
+--*********************************************************************
+
+NCBI-MedArchive DEFINITIONS ::=
+BEGIN
+
+IMPORTS Medline-entry FROM NCBI-Medline
+        Medlars-entry FROM NCBI-Medlars
+        Pubmed-entry FROM NCBI-PubMed
+        Medline-si FROM NCBI-Medline
+        Pub FROM NCBI-Pub
+        Title, PubMedId FROM NCBI-Biblio;
+
+        --**********************************
+        -- requests
+        --
+
+Mla-request ::= CHOICE {
+    init [0] NULL,              -- DlInit
+    getmle [1] INTEGER,         -- get MedlineEntry
+    getpub [2] INTEGER,         -- get citation by muid
+    gettitle [3] Title-msg,     -- match titles
+    citmatch [4] Pub,           --
+    fini [5] NULL,              -- DlFini
+    getmriuids [6] INTEGER,     -- Get MUIDs for an MRI
+    getaccuids [7] Medline-si,  -- Get MUIDs for an Accessions
+    uidtopmid [8] INTEGER,      -- get PMID for MUID
+    pmidtouid [9] PubMedId,     -- get MUID for PMID
+    getmlepmid [10] PubMedId,   -- get MedlineEntry by PubMed id
+    getpubpmid [11] PubMedId,   -- get citation by PubMed id
+    citmatchpmid [12] Pub,      -- citation match, PMID on out
+    getmripmids [13] INTEGER,   -- get PMIDs for an MRI
+    getaccpmids [14] Medline-si,-- get PMIDs for an Accessions
+    citlstpmids [15] Pub,       -- generate list of PMID for Pub
+    getmleuid [16] INTEGER,     -- get MedlineEntry by Medline id
+    getmlrpmid [17] PubMedId,   -- get MedlarsEntry by PubMed id
+    getmlruid [18] INTEGER      -- get MedlarsEntry by Medline id
+    }
+
+--**********************************************************************
+--
+--  if request = all
+--	if one row returned
+--	   reply=all, return every column
+--	else 
+--	   reply=ml-jta for each row
+--
+--  if request = not-set, reply=ml-jta
+--
+--  otherwise,
+--	if request != ml-jta
+--	   if column exist, reply=column, else reply=ml-jta
+--
+--**********************************************************************
+
+Title-type ::= ENUMERATED {
+    not-set (0),                -- request=ml-jta (default), reply=not-found
+    name (1),
+    tsub (2),
+    trans (3),
+    jta (4),
+    iso-jta (5),
+    ml-jta (6),
+    coden (7),
+    issn (8),
+    abr (9),
+    isbn (10),
+    all (255)
+    }
+
+Title-msg ::= SEQUENCE {         -- Title match request/response
+    type Title-type,             -- type to get, or type returned
+    title Title                  -- title(s) to look up, or title(s) found
+    }
+
+Title-msg-list ::= SEQUENCE {
+    num INTEGER,                 -- number of titles
+    titles SEQUENCE OF Title-msg
+    }
+
+Error-val ::= ENUMERATED {
+    not-found (0),               -- Entry was not found
+    operational-error (1),       -- A run-time operation error was occurred
+    cannot-connect-jrsrv (2),    -- Cannot connect to Journal server
+    cannot-connect-pmdb (3),     -- Cannot connect to PubMed
+    journal-not-found (4),       -- Journal title not found
+    citation-not-found (5),      -- Volume, Page and Author do not match any
+                                 -- article
+    citation-ambiguous (6),      -- More than one article found
+    citation-too-many (7),       -- Too many article was found
+
+    cannot-connect-searchbackend-jrsrv(8),	-- Cannot connect to searchbackend Journals db
+    cannot-connect-searchbackend-pmdb(9),	-- Cannot connect to searchbackend PubMed db
+    cannot-connect-docsumbackend(10)		-- Cannot connect to docsumbackend
+    }
+
+Mla-back ::= CHOICE {
+    init [0] NULL,                   -- DlInit
+    error [1] Error-val,             -- not found for getmle/getpub/citmatch
+    getmle [2] Medline-entry,        -- got Medline Entry
+    getpub [3] Pub,
+    gettitle [4] Title-msg-list,     -- match titles
+    citmatch [5] INTEGER,            -- citation lookup muid or 0
+    fini [6] NULL,                   -- DlFini
+    getuids [7] SEQUENCE OF INTEGER, -- got a set of MUIDs
+    getpmids [8] SEQUENCE OF INTEGER,-- got a set of PMIDs
+    outuid [9] INTEGER,              -- result muid or 0 if not found
+    outpmid [10] PubMedId,           -- result pmid or 0 if not found
+    getpme [11] Pubmed-entry,        -- got Pubmed Entry
+    getmlr [12] Medlars-entry        -- got Medlars Entry
+    }
+
+END

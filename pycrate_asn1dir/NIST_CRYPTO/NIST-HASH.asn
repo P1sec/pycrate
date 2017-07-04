@@ -1,0 +1,54 @@
+NIST-HASH { joint-iso-ccitt(2) country(16) us(840) organization(1) gov(101) csor(3)
+nistAlgorithm(4) modules(2) } DEFINITIONS IMPLICIT TAGS ::= BEGIN
+
+nistAlgorithms OBJECT IDENTIFIER ::= { joint-iso-ccitt(2) country(16) us(840) 
+organization(1) gov(101) csor(3) nistAlgorithm(4) }
+
+hashAlgs OBJECT IDENTIFIER ::= { nistAlgorithms 2 }
+
+-- SHA-1 (Externally assigned)
+-- SHA-2 family
+
+id-sha256 OBJECT IDENTIFIER ::= { hashAlgs 1 }
+
+id-sha384 OBJECT IDENTIFIER ::= { hashAlgs 2 }
+
+id-sha512 OBJECT IDENTIFIER ::= { hashAlgs 3 }
+
+id-sha224 OBJECT IDENTIFIER ::= { hashAlgs 4 }
+
+id-sha512-224 OBJECT IDENTIFIER ::= { hashAlgs 5 }
+
+id-sha512-256 OBJECT IDENTIFIER ::= { hashAlgs 6 }
+
+-- SHA-3 family
+
+id-sha3-224 OBJECT IDENTIFIER ::= { hashAlgs 7 }
+
+id-sha3-256 OBJECT IDENTIFIER ::= { hashAlgs 8 }
+
+id-sha3-384 OBJECT IDENTIFIER ::= { hashAlgs 9 }
+
+id-sha3-512 OBJECT IDENTIFIER ::= { hashAlgs 10 }
+
+id-shake128 OBJECT IDENTIFIER ::= { hashAlgs 11 }
+
+id-shake256 OBJECT IDENTIFIER ::= { hashAlgs 12 }
+
+-- Keyed-Hash Message Authentication Code (HMAC) Algorithms Registered Objects
+--
+-- The following objects have been registered to support the deployment of HMAC.
+-- HMAC with SHA-1 (Externally assigned)
+-- HMAC with SHA-2 family (Externally assigned)
+-- HMAC with SHA-3 family
+
+id-hmacWithSHA3-224 OBJECT IDENTIFIER ::= { hashAlgs 13 }
+
+id-hmacWithSHA3-256 OBJECT IDENTIFIER ::= { hashAlgs 14 }
+
+id-hmacWithSHA3-384 OBJECT IDENTIFIER ::= { hashAlgs 15 }
+
+id-hmacWithSHA3-512 OBJECT IDENTIFIER ::= { hashAlgs 16 }
+
+END
+

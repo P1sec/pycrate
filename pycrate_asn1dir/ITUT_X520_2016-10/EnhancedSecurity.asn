@@ -1,0 +1,194 @@
+EnhancedSecurity {joint-iso-itu-t ds(5) modules(1) enhancedSecurity(28) 8}
+DEFINITIONS IMPLICIT TAGS ::=
+BEGIN
+
+-- EXPORTS All 
+
+IMPORTS
+
+  -- from Rec. ITU-T X.501 | ISO/IEC 9594-2
+
+  authenticationFramework, basicAccessControl, certificateExtensions, 
+  id-at, id-avc, id-mr, id-oc, informationFramework
+    FROM UsefulDefinitions {joint-iso-itu-t ds(5) module(1) usefulDefinitions(0) 8}
+
+  Attribute{}, ATTRIBUTE, AttributeType, AttributeTypeAndValue, Context, CONTEXT, 
+  Name, OBJECT-CLASS, objectIdentifierMatch, SupportedAttributes, top
+    FROM InformationFramework informationFramework
+
+  -- from Rec. ITU-T X.509 | ISO/IEC 9594-8
+
+  CertificateSerialNumber, HASH{}, SIGNED{}
+    FROM AuthenticationFramework authenticationFramework
+
+  GeneralName, KeyIdentifier
+    FROM CertificateExtensions certificateExtensions ;
+
+
+OPTIONALLY-PROTECTED{Type} ::= CHOICE {
+  unsigned       Type,
+  signed         SIGNED{Type} }
+
+OPTIONALLY-PROTECTED-SEQ{Type} ::= CHOICE {
+  unsigned       Type,
+  signed    [0]  SIGNED{Type} }
+
+attributeValueSecurityLabelContext CONTEXT ::= {
+  WITH SYNTAX    SignedSecurityLabel -- At most one security label context can 
+                                     -- be assigned to an attribute value
+  ID             id-avc-attributeValueSecurityLabelContext }
+
+SignedSecurityLabel ::= SIGNED{SignedSecurityLabelContent}
+
+SignedSecurityLabelContent ::= SEQUENCE {
+  attHash        HASH{AttributeTypeAndValue},
+  issuer         Name OPTIONAL, -- name of labelling authority
+  keyIdentifier  KeyIdentifier OPTIONAL,
+  securityLabel  SecurityLabel,
+  ... }
+
+SecurityLabel ::= SET {
+  security-policy-identifier  SecurityPolicyIdentifier OPTIONAL,
+  security-classification     SecurityClassification OPTIONAL,
+  privacy-mark                PrivacyMark OPTIONAL,
+  security-categories         SecurityCategories OPTIONAL,
+  ... }
+   (ALL EXCEPT ({ -- none, at least one component shall be present --}))
+
+SecurityPolicyIdentifier ::= OBJECT IDENTIFIER
+
+SecurityClassification ::= INTEGER {
+  unmarked      (0),
+  unclassified  (1), 
+  restricted    (2),
+  confidential  (3),
+  secret        (4),
+  top-secret    (5)}
+
+PrivacyMark ::= PrintableString(SIZE (1..MAX))
+
+SecurityCategories ::= SET SIZE (1..MAX) OF SecurityCategory
+
+clearance ATTRIBUTE ::= {
+  WITH SYNTAX  Clearance
+  ID           id-at-clearance }
+
+Clearance ::= SEQUENCE {
+  policyId            OBJECT IDENTIFIER,
+  classList           ClassList DEFAULT {unclassified},
+  securityCategories  SET SIZE (1..MAX) OF SecurityCategory OPTIONAL,
+  ... }
+
+ClassList ::= BIT STRING {
+  unmarked      (0),
+  unclassified  (1),
+  restricted    (2),
+  confidential  (3),
+  secret        (4),
+  topSecret     (5)}
+
+SecurityCategory ::= SEQUENCE {
+  type   [0]  SECURITY-CATEGORY.&id({SecurityCategoriesTable}),
+  value  [1]  EXPLICIT SECURITY-CATEGORY.&Type({SecurityCategoriesTable}{@type}),
+  ... }
+
+SECURITY-CATEGORY ::= TYPE-IDENTIFIER
+
+SecurityCategoriesTable SECURITY-CATEGORY ::= {...}
+
+attributeIntegrityInfo ATTRIBUTE ::= {
+  WITH SYNTAX   AttributeIntegrityInfo
+  SINGLE VALUE  TRUE
+  ID            id-at-attributeIntegrityInfo }
+
+AttributeIntegrityInfo ::= SIGNED{AttributeIntegrityInfoContent}
+
+AttributeIntegrityInfoContent ::= SEQUENCE {
+  scope        Scope,           -- Identifies the attributes protected
+  signer       Signer OPTIONAL, -- Authority or data originators name
+  attribsHash  AttribsHash,     -- Hash value of protected attributes
+  ... } 
+
+Signer ::= CHOICE {
+  thisEntry   [0]  EXPLICIT ThisEntry,
+  thirdParty  [1]  SpecificallyIdentified,
+  ... }
+
+ThisEntry ::= CHOICE {
+  onlyOne   NULL,
+  specific  IssuerAndSerialNumber,
+  ... }
+
+IssuerAndSerialNumber ::= SEQUENCE {
+  issuer  Name,
+  serial  CertificateSerialNumber,
+  ... }
+
+SpecificallyIdentified ::= SEQUENCE {
+  name    GeneralName,
+  issuer  GeneralName OPTIONAL,
+  serial  CertificateSerialNumber OPTIONAL }
+  (WITH COMPONENTS { ..., issuer PRESENT, serial PRESENT } | 
+  (WITH COMPONENTS { ..., issuer ABSENT, serial ABSENT }))
+
+Scope ::= CHOICE {
+  wholeEntry     [0]  NULL, -- Signature protects all attribute values in this entry
+  selectedTypes  [1]  SelectedTypes,
+      -- Signature protects all attribute values of the selected attribute types 
+  ... }
+
+SelectedTypes ::= SEQUENCE SIZE (1..MAX) OF AttributeType
+
+AttribsHash ::= HASH{HashedAttributes}
+
+HashedAttributes ::= SEQUENCE SIZE (1..MAX) OF Attribute{{SupportedAttributes}}
+   -- Attribute type and values with associated context values for the selected Scope
+
+integrityInfo OBJECT-CLASS ::= {
+  SUBCLASS OF   {top}
+  KIND          auxiliary
+  MUST CONTAIN  {attributeIntegrityInfo}
+  ID            id-oc-integrityInfo }
+
+attributeValueIntegrityInfoContext CONTEXT ::= {
+  WITH SYNTAX  AttributeValueIntegrityInfo
+  ID           id-avc-attributeValueIntegrityInfoContext }
+
+AttributeValueIntegrityInfo ::= SIGNED{AttributeValueIntegrityInfoContent}
+
+AttributeValueIntegrityInfoContent ::= SEQUENCE {
+  signer   Signer OPTIONAL, -- Authority or data originators name
+  aVIHash  AVIHash,         -- Hash value of protected attribute
+  ... } 
+
+AVIHash ::= HASH{AttributeTypeValueContexts}
+  -- Attribute type and value with associated context values
+
+AttributeTypeValueContexts ::= SEQUENCE {
+  type         ATTRIBUTE.&id({SupportedAttributes}),
+  value        ATTRIBUTE.&Type({SupportedAttributes}{@type}),
+  contextList  SET SIZE (1..MAX) OF Context OPTIONAL,
+  ... }
+
+-- Object identifier assignments 
+-- object classes 
+
+id-oc-integrityInfo OBJECT IDENTIFIER ::=  {id-oc 40}
+
+-- attributes 
+
+id-at-clearance                           OBJECT IDENTIFIER ::= {id-at 55}
+-- id-at-defaultDirQop                    OBJECT IDENTIFIER ::= {id-at 56}
+id-at-attributeIntegrityInfo              OBJECT IDENTIFIER ::= {id-at 57}
+-- id-at-confKeyInfo                      OBJECT IDENTIFIER ::= {id-at 60}
+
+-- matching rules 
+
+-- id-mr-readerAndKeyIDMatch              OBJECT IDENTIFIER ::= {id-mr 43}
+
+-- contexts
+
+id-avc-attributeValueSecurityLabelContext OBJECT IDENTIFIER ::= {id-avc 3}
+id-avc-attributeValueIntegrityInfoContext OBJECT IDENTIFIER ::= {id-avc 4}
+
+END -- EnhancedSecurity

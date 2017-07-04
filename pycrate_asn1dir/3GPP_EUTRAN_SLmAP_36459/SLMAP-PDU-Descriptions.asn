@@ -1,0 +1,194 @@
+-- **************************************************************
+--
+-- Elementary Procedure definitions
+--
+-- **************************************************************
+
+SLMAP-PDU-Descriptions {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
+eps-Access (21) modules (3) slmap (50) version1 (1) slmap-PDU-Descriptions (0) }
+
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- IE parameter types from other modules.
+--
+-- **************************************************************
+
+IMPORTS
+	Criticality,
+	ProcedureCode,
+	SLMAPTransactionID
+
+FROM SLMAP-CommonDataTypes
+
+
+	ErrorIndication,
+	PrivateMessage,
+	SLMSetupRequest,
+	SLMSetupResponse,
+	SLMSetupFailure,
+	MeasurementRequest,
+	MeasurementResponse,
+	MeasurementFailure,
+	MeasurementUpdate,
+	MeasurementAbort,
+	ResetRequest,
+	ResetAcknowledge
+
+FROM SLMAP-PDU-Contents
+
+
+	id-errorIndication,
+	id-privateMessage,
+	id-measurement,
+	id-slmSetup,
+	id-reset,
+	id-measurementUpdate,
+	id-measurementAbort
+
+FROM SLMAP-Constants;
+
+
+-- **************************************************************
+--
+-- Interface Elementary Procedure Class
+--
+-- **************************************************************
+
+SLMAP-ELEMENTARY-PROCEDURE ::= CLASS {
+	&InitiatingMessage				,
+	&SuccessfulOutcome						OPTIONAL,
+	&UnsuccessfulOutcome					OPTIONAL,
+	&procedureCode			ProcedureCode	UNIQUE,
+	&criticality			Criticality		DEFAULT ignore
+}
+WITH SYNTAX {
+	INITIATING MESSAGE		&InitiatingMessage
+	[SUCCESSFUL OUTCOME		&SuccessfulOutcome]
+	[UNSUCCESSFUL OUTCOME	&UnsuccessfulOutcome]
+	PROCEDURE CODE			&procedureCode
+	[CRITICALITY			&criticality]
+}
+
+-- **************************************************************
+--
+-- Interface PDU Definition
+--
+-- **************************************************************
+
+SLMAP-PDU ::= CHOICE {
+	initiatingMessage	InitiatingMessage,
+	successfulOutcome	SuccessfulOutcome,
+	unsuccessfulOutcome	UnsuccessfulOutcome,
+	...
+}
+
+InitiatingMessage ::= SEQUENCE {
+	procedureCode		SLMAP-ELEMENTARY-PROCEDURE.&procedureCode		({SLMAP-ELEMENTARY-PROCEDURES}),
+	criticality			SLMAP-ELEMENTARY-PROCEDURE.&criticality			({SLMAP-ELEMENTARY-PROCEDURES}{@procedureCode}),
+	slmapTransactionID	SLMAPTransactionID,
+	value				SLMAP-ELEMENTARY-PROCEDURE.&InitiatingMessage	({SLMAP-ELEMENTARY-PROCEDURES}{@procedureCode})
+}
+
+SuccessfulOutcome ::= SEQUENCE {
+	procedureCode		SLMAP-ELEMENTARY-PROCEDURE.&procedureCode		({SLMAP-ELEMENTARY-PROCEDURES}),
+	criticality			SLMAP-ELEMENTARY-PROCEDURE.&criticality			({SLMAP-ELEMENTARY-PROCEDURES}{@procedureCode}),
+	slmapTransactionID	SLMAPTransactionID,
+	value				SLMAP-ELEMENTARY-PROCEDURE.&SuccessfulOutcome	({SLMAP-ELEMENTARY-PROCEDURES}{@procedureCode})
+}
+
+UnsuccessfulOutcome ::= SEQUENCE {
+	procedureCode		SLMAP-ELEMENTARY-PROCEDURE.&procedureCode		({SLMAP-ELEMENTARY-PROCEDURES}),
+	criticality			SLMAP-ELEMENTARY-PROCEDURE.&criticality			({SLMAP-ELEMENTARY-PROCEDURES}{@procedureCode}),
+	slmapTransactionID	SLMAPTransactionID,
+	value				SLMAP-ELEMENTARY-PROCEDURE.&UnsuccessfulOutcome	({SLMAP-ELEMENTARY-PROCEDURES}{@procedureCode})
+}
+
+
+-- **************************************************************
+--
+-- Interface Elementary Procedure List
+--
+-- **************************************************************
+
+SLMAP-ELEMENTARY-PROCEDURES SLMAP-ELEMENTARY-PROCEDURE ::= {
+	SLMAP-ELEMENTARY-PROCEDURES-CLASS-1			|
+	SLMAP-ELEMENTARY-PROCEDURES-CLASS-2			,
+	...
+}
+
+SLMAP-ELEMENTARY-PROCEDURES-CLASS-1 SLMAP-ELEMENTARY-PROCEDURE ::= {
+	measurement					|
+	slmSetup					|
+	reset						,
+	...
+}
+
+SLMAP-ELEMENTARY-PROCEDURES-CLASS-2 SLMAP-ELEMENTARY-PROCEDURE ::= {
+	measurementUpdate				|
+	measurementAbort				|
+	errorIndication					|
+	privateMessage					,
+	...
+}
+
+
+-- **************************************************************
+--
+-- Interface Elementary Procedures
+--
+-- **************************************************************
+
+measurement 			SLMAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MeasurementRequest
+	SUCCESSFUL OUTCOME		MeasurementResponse
+	UNSUCCESSFUL OUTCOME	MeasurementFailure
+	PROCEDURE CODE			id-measurement
+	CRITICALITY				reject
+}
+
+slmSetup 					SLMAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		SLMSetupRequest
+	SUCCESSFUL OUTCOME		SLMSetupResponse
+	UNSUCCESSFUL OUTCOME	SLMSetupFailure
+	PROCEDURE CODE			id-slmSetup
+	CRITICALITY				reject
+}
+
+reset 						SLMAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ResetRequest
+	SUCCESSFUL OUTCOME		ResetAcknowledge
+	PROCEDURE CODE			id-reset
+	CRITICALITY				reject
+}
+
+measurementUpdate SLMAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MeasurementUpdate
+	PROCEDURE CODE			id-measurementUpdate
+	CRITICALITY				ignore
+}
+
+measurementAbort 		SLMAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MeasurementAbort
+	PROCEDURE CODE			id-measurementAbort
+	CRITICALITY				ignore
+}
+
+errorIndication 			SLMAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ErrorIndication
+	PROCEDURE CODE			id-errorIndication
+	CRITICALITY				ignore
+}
+
+privateMessage 				SLMAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		PrivateMessage
+	PROCEDURE CODE			id-privateMessage
+	CRITICALITY				ignore
+}
+
+END

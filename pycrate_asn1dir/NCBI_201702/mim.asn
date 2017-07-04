@@ -1,0 +1,135 @@
+--********************************************************************
+--
+--  MIM data definitions
+--  Brandon Brylawski, 1996.
+--  version 2.1
+--
+--********************************************************************
+
+NCBI-Mim DEFINITIONS ::=
+BEGIN
+
+Mim-entries ::= SEQUENCE OF Mim-entry
+
+Mim-set ::= SEQUENCE {
+	releaseDate Mim-date ,
+	mimEntries SEQUENCE OF Mim-entry }
+
+Mim-entry ::= SEQUENCE {
+	mimNumber VisibleString ,
+	mimType INTEGER {
+		none (0) ,
+		star (1) ,
+		caret (2) ,
+		pound (3) ,
+		plus (4) ,
+		perc (5) } ,
+	title VisibleString ,
+	copyright VisibleString OPTIONAL ,
+	symbol VisibleString OPTIONAL ,
+	locus VisibleString OPTIONAL ,
+	synonyms SEQUENCE OF VisibleString OPTIONAL ,
+	aliases SEQUENCE OF VisibleString OPTIONAL ,
+	included SEQUENCE OF VisibleString OPTIONAL ,
+	seeAlso SEQUENCE OF Mim-cit OPTIONAL ,
+	text SEQUENCE OF Mim-text OPTIONAL ,
+	textfields SEQUENCE OF Mim-text OPTIONAL ,
+	hasSummary BOOLEAN OPTIONAL ,
+	summary SEQUENCE OF Mim-text OPTIONAL ,
+	summaryAttribution SEQUENCE OF Mim-edit-item OPTIONAL ,
+	summaryEditHistory SEQUENCE OF Mim-edit-item OPTIONAL ,
+	summaryCreationDate Mim-edit-item OPTIONAL ,
+	allelicVariants SEQUENCE OF Mim-allelic-variant OPTIONAL ,
+	hasSynopsis BOOLEAN OPTIONAL ,
+	clinicalSynopsis SEQUENCE OF Mim-index-term OPTIONAL ,
+	synopsisAttribution SEQUENCE OF Mim-edit-item OPTIONAL ,
+	synopsisEditHistory SEQUENCE OF Mim-edit-item OPTIONAL ,
+	synopsisCreationDate Mim-edit-item OPTIONAL ,
+	editHistory SEQUENCE OF Mim-edit-item OPTIONAL ,
+	creationDate Mim-edit-item OPTIONAL ,
+	references SEQUENCE OF Mim-reference OPTIONAL ,
+	attribution SEQUENCE OF Mim-edit-item OPTIONAL ,
+	numGeneMaps INTEGER ,
+	medlineLinks Mim-link OPTIONAL ,
+	proteinLinks Mim-link OPTIONAL ,
+	nucleotideLinks Mim-link OPTIONAL ,
+	structureLinks Mim-link OPTIONAL ,
+	genomeLinks Mim-link OPTIONAL }
+
+Mim-text ::= SEQUENCE {
+	label VisibleString ,
+	text VisibleString ,
+	neighbors Mim-link OPTIONAL}
+
+Mim-allelic-variant ::= SEQUENCE {
+	number VisibleString ,
+	name VisibleString  ,
+	aliases SEQUENCE OF VisibleString  OPTIONAL ,
+	mutation SEQUENCE OF Mim-text  OPTIONAL ,
+	description SEQUENCE OF Mim-text OPTIONAL ,
+	snpLinks Mim-link OPTIONAL }
+
+Mim-link ::= SEQUENCE {
+	num INTEGER ,
+	uids VisibleString ,
+	numRelevant INTEGER OPTIONAL }
+
+Mim-author ::= SEQUENCE {
+	name VisibleString ,
+	index INTEGER }
+
+Mim-cit ::= SEQUENCE {
+	number INTEGER ,
+	author VisibleString ,
+	others VisibleString ,
+	year INTEGER }
+
+Mim-reference ::= SEQUENCE {
+	number INTEGER ,
+	origNumber INTEGER OPTIONAL ,
+	type ENUMERATED {
+		not-set (0) ,
+		citation (1) ,
+		book (2) ,
+		personal-communication (3) ,
+		book-citation (4) } OPTIONAL ,
+	authors SEQUENCE OF Mim-author ,
+	primaryAuthor VisibleString ,
+	otherAuthors VisibleString ,
+	citationTitle VisibleString ,
+	citationType INTEGER OPTIONAL ,
+	bookTitle VisibleString OPTIONAL ,
+	editors SEQUENCE OF Mim-author OPTIONAL ,
+	volume VisibleString OPTIONAL ,
+	edition VisibleString OPTIONAL ,
+	journal VisibleString OPTIONAL ,
+	series VisibleString OPTIONAL ,
+	publisher VisibleString OPTIONAL ,
+	place VisibleString OPTIONAL ,
+	commNote VisibleString OPTIONAL ,
+	pubDate Mim-date ,
+	pages SEQUENCE OF Mim-page OPTIONAL ,
+	miscInfo VisibleString OPTIONAL ,
+	pubmedUID INTEGER OPTIONAL ,
+	ambiguous BOOLEAN ,
+	noLink BOOLEAN OPTIONAL }
+
+Mim-index-term ::= SEQUENCE {
+	key VisibleString ,
+	terms SEQUENCE OF VisibleString }
+
+Mim-edit-item ::= SEQUENCE {
+	author VisibleString ,
+	modDate Mim-date }
+
+Mim-date ::= SEQUENCE {
+	year INTEGER ,
+	month INTEGER OPTIONAL ,
+	day INTEGER OPTIONAL }
+
+Mim-page ::= SEQUENCE {
+	from VisibleString ,
+	to VisibleString OPTIONAL }
+
+END
+

@@ -1,0 +1,153 @@
+--$Revision: 98896 $
+--**********************************************************************
+--
+--  NCBI General Data elements
+--  by James Ostell, 1990
+--  Version 3.0 - June 1994
+--
+--**********************************************************************
+
+NCBI-General DEFINITIONS ::=
+BEGIN
+
+EXPORTS Date, Person-id, Object-id, Dbtag, Int-fuzz, User-object, User-field;
+
+-- StringStore is really a VisibleString.  It is used to define very
+--   long strings which may need to be stored by the receiving program
+--   in special structures, such as a ByteStore, but it's just a hint.
+--   AsnTool stores StringStores in ByteStore structures.
+-- OCTET STRINGs are also stored in ByteStores by AsnTool
+-- 
+-- typedef struct bsunit {             /* for building multiline strings */
+   -- Nlm_Handle str;            /* the string piece */
+   -- Nlm_Int2 len_avail,
+       -- len;
+   -- struct bsunit PNTR next; }       /* the next one */
+-- Nlm_BSUnit, PNTR Nlm_BSUnitPtr;
+-- 
+-- typedef struct bytestore {
+   -- Nlm_Int4 seekptr,       /* current position */
+      -- totlen,             /* total stored data length in bytes */
+      -- chain_offset;       /* offset in ByteStore of first byte in curchain */
+   -- Nlm_BSUnitPtr chain,       /* chain of elements */
+      -- curchain;           /* the BSUnit containing seekptr */
+-- } Nlm_ByteStore, PNTR Nlm_ByteStorePtr;
+--
+-- AsnTool incorporates this as a primitive type, so the definition
+--   is here just for completeness
+-- 
+--  StringStore ::= [APPLICATION 1] IMPLICIT OCTET STRING
+--
+
+-- BigInt is really an INTEGER. It is used to warn the receiving code to expect
+--   a value bigger than Int4 (actually Int8). It will be stored in DataVal.bigintvalue
+--
+--   Like StringStore, AsnTool incorporates it as a primitive. The definition would be:
+--   BigInt ::= [APPLICATION 2] IMPLICIT INTEGER
+--
+
+-- Date is used to replace the (overly complex) UTCTtime, GeneralizedTime
+--  of ASN.1
+--  It stores only a date
+--
+
+Date ::= CHOICE {
+    str VisibleString ,        -- for those unparsed dates
+    std Date-std }             -- use this if you can
+
+Date-std ::= SEQUENCE {        -- NOTE: this is NOT a unix tm struct
+    year INTEGER ,             -- full year (including 1900)
+    month INTEGER OPTIONAL ,   -- month (1-12)
+    day INTEGER OPTIONAL ,     -- day of month (1-31)
+    season VisibleString OPTIONAL ,  -- for "spring", "may-june", etc
+    hour INTEGER OPTIONAL ,    -- hour of day (0-23)
+    minute INTEGER OPTIONAL ,  -- minute of hour (0-59)
+    second INTEGER OPTIONAL }  -- second of minute (0-59)
+
+-- Dbtag is generalized for tagging
+-- eg. { "Social Security", str "023-79-8841" }
+-- or  { "member", id 8882224 }
+
+Dbtag ::= SEQUENCE {
+    db VisibleString ,          -- name of database or system
+    tag Object-id }         -- appropriate tag
+
+-- Object-id can tag or name anything
+--
+
+Object-id ::= CHOICE {
+    id INTEGER ,
+    str VisibleString }
+
+-- Person-id is to define a std element for people
+--
+
+Person-id ::= CHOICE {
+    dbtag Dbtag ,               -- any defined database tag
+    name Name-std ,             -- structured name
+    ml VisibleString ,          -- MEDLINE name (semi-structured)
+                                --    eg. "Jones RM"
+    str VisibleString,          -- unstructured name
+    consortium VisibleString }  -- consortium name
+
+Name-std ::= SEQUENCE { -- Structured names
+    last VisibleString ,
+    first VisibleString OPTIONAL ,
+    middle VisibleString OPTIONAL ,
+    full VisibleString OPTIONAL ,    -- full name eg. "J. John Smith, Esq"
+    initials VisibleString OPTIONAL,  -- first + middle initials
+    suffix VisibleString OPTIONAL ,   -- Jr, Sr, III
+    title VisibleString OPTIONAL }    -- Dr., Sister, etc
+
+--**** Int-fuzz **********************************************
+--*
+--*   uncertainties in integer values
+
+Int-fuzz ::= CHOICE {
+    p-m INTEGER ,                    -- plus or minus fixed amount
+    range SEQUENCE {                 -- max to min
+        max INTEGER ,
+        min INTEGER } ,
+    pct INTEGER ,                    -- % plus or minus (x10) 0-1000
+    lim ENUMERATED {                 -- some limit value
+        unk (0) ,                    -- unknown
+        gt (1) ,                     -- greater than
+        lt (2) ,                     -- less than
+        tr (3) ,                     -- space to right of position
+        tl (4) ,                     -- space to left of position
+        circle (5) ,                 -- artificial break at origin of circle
+        other (255) } ,              -- something else
+    alt SET OF INTEGER }             -- set of alternatives for the integer
+
+
+--**** User-object **********************************************
+--*
+--*   a general object for a user defined structured data item
+--*    used by Seq-feat and Seq-descr
+
+User-object ::= SEQUENCE {
+    class VisibleString OPTIONAL ,   -- endeavor which designed this object
+    type Object-id ,                 -- type of object within class
+    data SEQUENCE OF User-field }    -- the object itself
+
+User-field ::= SEQUENCE {
+    label Object-id ,                -- field label
+    num INTEGER OPTIONAL ,           -- required for strs, ints, reals, oss
+    data CHOICE {                    -- field contents
+        str VisibleString ,
+        int INTEGER ,
+        real REAL ,
+        bool BOOLEAN ,
+        os OCTET STRING ,
+        object User-object ,         -- for using other definitions
+        strs SEQUENCE OF VisibleString ,
+        ints SEQUENCE OF INTEGER ,
+        reals SEQUENCE OF REAL ,
+        oss SEQUENCE OF OCTET STRING ,
+        fields SEQUENCE OF User-field ,
+        objects SEQUENCE OF User-object } }
+
+
+
+END
+

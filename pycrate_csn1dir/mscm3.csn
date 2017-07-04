@@ -1,0 +1,100 @@
+<Classmark 3 Value part> ::=
+	< spare bit >
+	{	< Multiband supported : { 000 } >
+			< A5 bits > 
+	|	< Multiband supported : { 101 | 110 } > 
+			< A5 bits >
+			< Associated Radio Capability 2 : bit(4) >
+			< Associated Radio Capability 1 : bit(4) >
+	|	< Multiband supported : { 001 | 010 | 100 } > 
+			< A5 bits >
+			< spare bit >(4)
+			< Associated Radio Capability 1 : bit(4) > }
+	{ 0 | 1 < R Support > }
+	{ 0 | 1 < HSCSD Multi Slot Capability > }
+	< UCS2 treatment: bit >
+	< Extended Measurement Capability : bit >
+	{ 0 | 1 < MS Measurement capability > }
+	{ 0 | 1 < MS Positioning Method Capability > }
+	{ 0 | 1 < ECSD Multi Slot Capability > }
+	{ 0 | 1 < 8-PSK Struct > }
+	{ 0 | 1 < GSM 400 Bands Supported : { 01 | 10 | 11 } >
+			< GSM 400 Associated Radio Capability: bit(4) > }
+	{ 0 | 1 <GSM 850 Associated Radio Capability : bit(4) > }
+	{ 0 | 1 <GSM 1900 Associated Radio Capability : bit(4) > }
+	< UMTS FDD Radio Access Technology Capability : bit >
+	< UMTS 3.84 Mcps TDD Radio Access Technology Capability : bit >
+	< CDMA 2000 Radio Access Technology Capability : bit >
+	{ 0 | 1	< DTM GPRS Multi Slot Class : bit(2) >
+			< Single Slot DTM : bit >
+			{0 | 1< DTM EGPRS Multi Slot Class : bit(2) > } } 
+	{ 0 | 1 < Single Band Support > } 								-- Release 4 starts here.
+	{ 0 | 1 <GSM 750 Associated Radio Capability : bit(4)>}
+	< UMTS 1.28 Mcps TDD Radio Access Technology Capability : bit >
+	< GERAN Feature Package 1 : bit >
+	{ 0 | 1 < Extended DTM GPRS Multi Slot Class : bit(2) >
+			< Extended DTM EGPRS Multi Slot Class : bit(2) > }
+	{ 0 | 1 < High Multislot Capability : bit(2) > }					--Release 5 starts here.
+	0 	-- The value '1' was allocated in an earlier version of the protocol and shall not be used.
+	< GERAN Feature Package 2 : bit >
+	< GMSK Multislot Power Profile : bit (2) >
+	< 8-PSK Multislot Power Profile : bit (2) >
+	{ 0 | 1 < T-GSM 400 Bands Supported : { 01 | 10 | 11 } >		-- Release 6 starts here.
+			< T-GSM 400 Associated Radio Capability: bit(4) > }
+	0	-- The value '1' was allocated in an earlier version of the protocol and shall not be used.
+	< Downlink Advanced Receiver Performance : bit (2)>
+	< DTM Enhancements Capability : bit >
+	{ 0 | 1	< DTM GPRS High Multi Slot Class : bit(3) >
+			< Offset required : bit>
+			{ 0 | 1 < DTM EGPRS High Multi Slot Class : bit(3) > } }
+	< Repeated ACCH Capability : bit >
+	{ 0 | 1 <GSM 710 Associated Radio Capability : bit(4)>} 		-- Release 7 starts here.
+	{ 0 | 1 <T-GSM 810 Associated Radio Capability : bit(4)>}
+	< Ciphering Mode Setting Capability : bit >
+	< Additional Positioning Capabilities : bit >
+	< E-UTRA FDD support : bit >									-- Release 8 starts here
+	< E-UTRA TDD support : bit >
+	< E-UTRA Measurement and Reporting support : bit >
+	< Priority-based reselection support : bit >
+	< UTRA CSG Cells Reporting : bit >							-- Release 9 starts here
+	< VAMOS Level : bit(2) >
+	< TIGHTER Capability : bit(2) >									-- Release 10 starts here
+	< Selective Ciphering of Downlink SACCH : bit >
+	< CS to PS SRVCC from GERAN to UTRA : bit(2) >			 -- Release 11 starts here
+	< CS to PS SRVCC from GERAN to E-UTRA : bit(2)>
+	< GERAN Network Sharing support : bit >
+	< E-UTRA Wideband RSRQ measurements support : bit >
+	< ER Band Support : bit >										 -- Release 12 starts here
+	< UTRA Multiple Frequency Band Indicators support : bit >
+	< E-UTRA Multiple Frequency Band Indicators support: bit >
+	< Extended TSC Set Capability support: bit >
+	< Extended EARFCN value range : bit >						-- Late addition of a release 11 feature
+	< spare bits > ;
+
+< A5 bits > ::= 
+	< A5/7 : bit > < A5/6 : bit > < A5/5 : bit > < A5/4 : bit >  ;
+
+<R Support>::=
+	< R-GSM band Associated Radio Capability : bit(3) > ;
+
+< HSCSD Multi Slot Capability > ::=
+	< HSCSD Multi Slot Class : bit(5) >  ;
+
+< MS Measurement capability > ::=
+	< SMS_VALUE : bit (4) >
+	< SM_VALUE : bit (4) > ;
+
+< MS Positioning Method Capability > ::=
+	< MS Positioning Method : bit(5) > ;
+
+< ECSD Multi Slot Capability > ::=
+	< ECSD Multi Slot Class : bit(5) > ;
+
+ < 8-PSK Struct> ::=
+	< Modulation Capability : bit >
+	{ 0 | 1 < 8-PSK RF Power Capability 1: bit(2) > }
+	{ 0 | 1 < 8-PSK RF Power Capability 2: bit(2) > } ;
+
+< Single Band Support > ::=
+	< GSM Band : bit (4) > ;
+

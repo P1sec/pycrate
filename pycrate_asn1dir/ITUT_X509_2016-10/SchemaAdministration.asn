@@ -1,0 +1,280 @@
+SchemaAdministration {joint-iso-itu-t ds(5) module(1) schemaAdministration(23) 8} 
+DEFINITIONS ::=
+BEGIN
+
+-- EXPORTS All 
+-- The types and values defined in this module are exported for use in the other ASN.1
+-- modules contained within the Directory Specifications, and for the use of other
+-- applications which will use them to access Directory services. Other applications may
+-- use them for their own purposes, but this will not constrain extensions and
+-- modifications needed to maintain or improve the Directory service.
+
+IMPORTS
+
+  -- from Rec. ITU-T X.501 | ISO/IEC 9594-2
+  
+  id-soa, id-soc, informationFramework, ldapSystemSchema, selectedAttributeTypes
+    FROM UsefulDefinitions {joint-iso-itu-t ds(5) module(1) usefulDefinitions(0) 8}
+
+  ATTRIBUTE, AttributeUsage, CONTEXT, DITContentRule, DITStructureRule, MATCHING-RULE, 
+  NAME-FORM, OBJECT-CLASS, ObjectClassKind, objectIdentifierMatch, SYNTAX-NAME
+    FROM InformationFramework informationFramework
+
+  ldapSyntaxes
+    FROM LdapSystemSchema ldapSystemSchema
+
+  -- from Rec. ITU-T X.520 | ISO/IEC 9594-6
+
+  attributeTypeDescription, dITContentRuleDescription, dITStructureRuleDescription,
+  integer, integerFirstComponentMatch, integerMatch, matchingRuleDescription,
+  matchingRuleUseDescription, nameFormDescription, objectClassDescription,
+  objectIdentifierFirstComponentMatch, oid, UnboundedDirectoryString
+    FROM SelectedAttributeTypes selectedAttributeTypes;
+
+subschema OBJECT-CLASS ::= {
+  KIND        auxiliary
+  MAY CONTAIN { dITStructureRules | 
+                nameForms | 
+                dITContentRules |
+                objectClasses |
+                attributeTypes |
+                friends |
+                contextTypes |
+                dITContextUse |
+                matchingRules |
+                matchingRuleUse |
+                ldapSyntaxes }
+  LDAP-NAME   {"subschema"}
+  ID          id-soc-subschema }
+
+dITStructureRules ATTRIBUTE ::= {
+  WITH SYNTAX              DITStructureRuleDescription
+  EQUALITY MATCHING RULE   integerFirstComponentMatch
+  USAGE                    directoryOperation
+  LDAP-SYNTAX              dITStructureRuleDescription.&id
+  LDAP-NAME                {"dITStructureRules"}
+  ID                       id-soa-dITStructureRule }
+
+DITStructureRuleDescription ::= SEQUENCE {
+  COMPONENTS OF DITStructureRule,
+  name         [1]  SET SIZE (1..MAX) OF UnboundedDirectoryString OPTIONAL,
+  description       UnboundedDirectoryString OPTIONAL,
+  obsolete          BOOLEAN DEFAULT FALSE,
+  ... }
+
+dITContentRules ATTRIBUTE ::= {
+  WITH SYNTAX              DITContentRuleDescription
+  EQUALITY MATCHING RULE   objectIdentifierFirstComponentMatch
+  USAGE                    directoryOperation
+  LDAP-SYNTAX              dITContentRuleDescription.&id
+  LDAP-NAME                {"dITContentRules"}
+  ID                       id-soa-dITContentRules }
+
+DITContentRuleDescription ::= SEQUENCE {
+  COMPONENTS OF DITContentRule,
+  name         [4]  SET SIZE (1..MAX) OF UnboundedDirectoryString OPTIONAL,
+  description       UnboundedDirectoryString OPTIONAL,
+  obsolete          BOOLEAN DEFAULT FALSE,
+  ... }
+
+matchingRules ATTRIBUTE ::= {
+  WITH SYNTAX              MatchingRuleDescription
+  EQUALITY MATCHING RULE   objectIdentifierFirstComponentMatch
+  USAGE                    directoryOperation
+  LDAP-SYNTAX              matchingRuleDescription.&id
+  LDAP-NAME                {"matchingRules"}
+  ID                       id-soa-matchingRules }
+
+MatchingRuleDescription ::= SEQUENCE {
+  identifier        MATCHING-RULE.&id,
+  name              SET SIZE (1..MAX) OF UnboundedDirectoryString OPTIONAL,
+  description       UnboundedDirectoryString OPTIONAL,
+  obsolete          BOOLEAN DEFAULT FALSE,
+  information  [0]  UnboundedDirectoryString OPTIONAL, 
+                -- describes the ASN.1 syntax
+  ... }
+
+attributeTypes ATTRIBUTE ::= {
+  WITH SYNTAX              AttributeTypeDescription
+  EQUALITY MATCHING RULE   objectIdentifierFirstComponentMatch
+  USAGE                    directoryOperation
+  LDAP-SYNTAX              attributeTypeDescription.&id
+  LDAP-NAME                {"attributeTypes"}
+  ID                       id-soa-attributeTypes }
+
+AttributeTypeDescription ::= SEQUENCE {
+  identifier        ATTRIBUTE.&id,
+  name              SET SIZE (1..MAX) OF UnboundedDirectoryString OPTIONAL,
+  description       UnboundedDirectoryString OPTIONAL,
+  obsolete          BOOLEAN DEFAULT FALSE,
+  information  [0]  AttributeTypeInformation,
+  ... }
+
+AttributeTypeInformation ::= SEQUENCE {
+  derivation       [0]  ATTRIBUTE.&id             OPTIONAL,
+  equalityMatch    [1]  MATCHING-RULE.&id         OPTIONAL,
+  orderingMatch    [2]  MATCHING-RULE.&id         OPTIONAL,
+  substringsMatch  [3]  MATCHING-RULE.&id         OPTIONAL,
+  attributeSyntax  [4]  UnboundedDirectoryString  OPTIONAL,
+  multi-valued     [5]  BOOLEAN                   DEFAULT TRUE,
+  collective       [6]  BOOLEAN                   DEFAULT FALSE,
+  userModifiable   [7]  BOOLEAN                   DEFAULT TRUE,
+  application           AttributeUsage            DEFAULT userApplications,
+  ... }
+
+objectClasses ATTRIBUTE ::= {
+  WITH SYNTAX              ObjectClassDescription
+  EQUALITY MATCHING RULE   objectIdentifierFirstComponentMatch
+  USAGE                    directoryOperation
+  LDAP-SYNTAX              objectClassDescription.&id
+  LDAP-NAME                {"objectClasses"}
+  ID                       id-soa-objectClasses }
+
+ObjectClassDescription ::= SEQUENCE {
+  identifier        OBJECT-CLASS.&id,
+  name              SET SIZE (1..MAX) OF UnboundedDirectoryString OPTIONAL,
+  description       UnboundedDirectoryString                      OPTIONAL,
+  obsolete          BOOLEAN                                       DEFAULT FALSE,
+  information  [0]  ObjectClassInformation,
+  ... }
+
+ObjectClassInformation ::= SEQUENCE {
+  subclassOf        SET SIZE (1..MAX) OF OBJECT-CLASS.&id OPTIONAL,
+  kind              ObjectClassKind                       DEFAULT structural,
+  mandatories  [3]  SET SIZE (1..MAX) OF ATTRIBUTE.&id    OPTIONAL,
+  optionals    [4]  SET SIZE (1..MAX) OF ATTRIBUTE.&id    OPTIONAL,
+  ... }
+
+nameForms ATTRIBUTE ::= {
+  WITH SYNTAX              NameFormDescription
+  EQUALITY MATCHING RULE   objectIdentifierFirstComponentMatch
+  USAGE                    directoryOperation
+  LDAP-SYNTAX              nameFormDescription.&id
+  LDAP-NAME                {"nameForms"}
+  ID                       id-soa-nameForms }
+
+NameFormDescription ::= SEQUENCE {
+  identifier        NAME-FORM.&id,
+  name              SET SIZE (1..MAX) OF UnboundedDirectoryString OPTIONAL,
+  description       UnboundedDirectoryString                      OPTIONAL,
+  obsolete          BOOLEAN                                       DEFAULT FALSE,
+  information  [0]  NameFormInformation,
+  ... }
+
+NameFormInformation ::= SEQUENCE {
+  subordinate        OBJECT-CLASS.&id,
+  namingMandatories  SET OF ATTRIBUTE.&id,
+  namingOptionals    SET SIZE (1..MAX) OF ATTRIBUTE.&id OPTIONAL,
+  ... }
+
+matchingRuleUse ATTRIBUTE ::= {
+  WITH SYNTAX              MatchingRuleUseDescription
+  EQUALITY MATCHING RULE   objectIdentifierFirstComponentMatch
+  USAGE                    directoryOperation
+  LDAP-SYNTAX              matchingRuleUseDescription.&id
+  LDAP-NAME                {"matchingRuleUse"}
+  ID                       id-soa-matchingRuleUse }
+
+MatchingRuleUseDescription ::= SEQUENCE {
+  identifier        MATCHING-RULE.&id,
+  name              SET SIZE (1..MAX) OF UnboundedDirectoryString OPTIONAL,
+  description       UnboundedDirectoryString                      OPTIONAL,
+  obsolete          BOOLEAN                                       DEFAULT FALSE,
+  information  [0]  SET OF ATTRIBUTE.&id,
+  ... }
+
+structuralObjectClass ATTRIBUTE ::= {
+  WITH SYNTAX             OBJECT IDENTIFIER
+  EQUALITY MATCHING RULE  objectIdentifierMatch
+  SINGLE VALUE            TRUE
+  NO USER MODIFICATION    TRUE
+  USAGE                   directoryOperation
+  LDAP-SYNTAX             oid.&id
+  LDAP-NAME               {"structuralObjectClass"}
+  ID                      id-soa-structuralObjectClass }
+
+governingStructureRule ATTRIBUTE ::= {
+  WITH SYNTAX             INTEGER
+  EQUALITY MATCHING RULE  integerMatch
+  SINGLE VALUE            TRUE
+  NO USER MODIFICATION    TRUE
+  USAGE                   directoryOperation
+  LDAP-SYNTAX             integer.&id
+  LDAP-NAME               {"governingStructureRule"}
+  ID                      id-soa-governingStructureRule }
+
+contextTypes ATTRIBUTE ::= {
+  WITH SYNTAX             ContextDescription
+  EQUALITY MATCHING RULE  objectIdentifierFirstComponentMatch
+  USAGE                   directoryOperation
+  ID                      id-soa-contextTypes }
+
+ContextDescription ::= SEQUENCE {
+  identifier        CONTEXT.&id,
+  name              SET SIZE (1..MAX) OF UnboundedDirectoryString OPTIONAL,
+  description       UnboundedDirectoryString                      OPTIONAL,
+  obsolete          BOOLEAN                                       DEFAULT FALSE,
+  information  [0]  ContextInformation,
+  ... }
+
+ContextInformation ::= SEQUENCE {
+  syntax           UnboundedDirectoryString,
+  assertionSyntax  UnboundedDirectoryString OPTIONAL,
+  ... }
+
+dITContextUse ATTRIBUTE ::= {
+  WITH SYNTAX             DITContextUseDescription
+  EQUALITY MATCHING RULE  objectIdentifierFirstComponentMatch
+  USAGE                   directoryOperation
+  ID                      id-soa-dITContextUse }
+
+DITContextUseDescription ::= SEQUENCE {
+  identifier        ATTRIBUTE.&id,
+  name              SET SIZE (1..MAX) OF UnboundedDirectoryString OPTIONAL,
+  description       UnboundedDirectoryString OPTIONAL,
+  obsolete          BOOLEAN DEFAULT FALSE,
+  information  [0]  DITContextUseInformation,
+  ... }
+
+DITContextUseInformation ::= SEQUENCE {
+  mandatoryContexts  [1]  SET SIZE (1..MAX) OF CONTEXT.&id OPTIONAL,
+  optionalContexts   [2]  SET SIZE (1..MAX) OF CONTEXT.&id OPTIONAL,
+  ... }
+
+friends ATTRIBUTE ::= {
+  WITH SYNTAX             FriendsDescription
+  EQUALITY MATCHING RULE  objectIdentifierFirstComponentMatch
+  USAGE                   directoryOperation
+  ID                      id-soa-friends }
+
+FriendsDescription ::= SEQUENCE {
+  anchor            ATTRIBUTE.&id,
+  name              SET SIZE (1..MAX) OF UnboundedDirectoryString OPTIONAL,
+  description       UnboundedDirectoryString OPTIONAL,
+  obsolete          BOOLEAN DEFAULT FALSE,
+  friends      [0]  SET SIZE (1..MAX) OF ATTRIBUTE.&id,
+  ... }
+
+-- object identifier assignments 
+
+-- schema object classes 
+
+id-soc-subschema OBJECT IDENTIFIER              ::= {id-soc 1}
+
+-- schema operational attributes 
+
+id-soa-dITStructureRule       OBJECT IDENTIFIER ::= {id-soa 1}
+id-soa-dITContentRules        OBJECT IDENTIFIER ::= {id-soa 2}
+id-soa-matchingRules          OBJECT IDENTIFIER ::= {id-soa 4}
+id-soa-attributeTypes         OBJECT IDENTIFIER ::= {id-soa 5}
+id-soa-objectClasses          OBJECT IDENTIFIER ::= {id-soa 6}
+id-soa-nameForms              OBJECT IDENTIFIER ::= {id-soa 7}
+id-soa-matchingRuleUse        OBJECT IDENTIFIER ::= {id-soa 8}
+id-soa-structuralObjectClass  OBJECT IDENTIFIER ::= {id-soa 9}
+id-soa-governingStructureRule OBJECT IDENTIFIER ::= {id-soa 10}
+id-soa-contextTypes           OBJECT IDENTIFIER ::= {id-soa 11}
+id-soa-dITContextUse          OBJECT IDENTIFIER ::= {id-soa 12}
+id-soa-friends                OBJECT IDENTIFIER ::= {id-soa 13}
+
+
+END -- SchemaAdministration

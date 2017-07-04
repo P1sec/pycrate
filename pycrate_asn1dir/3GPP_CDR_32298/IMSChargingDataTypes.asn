@@ -1,0 +1,980 @@
+IMSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) imsChargingDataTypes (4) asn1Module (0) version1 (0)}
+DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+-- EXPORTS everything
+
+IMPORTS
+
+IPAddress,
+LocalSequenceNumber,
+ManagementExtensions,
+NodeAddress,
+MSCAddress,
+MSTimeZone,
+RecordType,
+ServiceContextID,
+ServiceSpecificInfo, 
+SubscriberEquipmentNumber,
+SubscriptionID,
+TimeStamp
+FROM GenericChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) genericChargingDataTypes (0) asn1Module (0) version1 (0)} 
+
+
+
+;
+
+--
+--  IMS RECORDS
+--
+
+IMSRecord ::= CHOICE
+--
+-- Record values 63-69, 82, 89, ,90, 91 are IMS specific
+--
+{
+	sCSCFRecord			[63] SCSCFRecord,
+	pCSCFRecord			[64] PCSCFRecord,
+	iCSCFRecord			[65] ICSCFRecord,
+	mRFCRecord			[66] MRFCRecord,
+	mGCFRecord			[67] MGCFRecord,
+	bGCFRecord			[68] BGCFRecord,
+	aSRecord				[69] ASRecord,
+	eCSCFRecord			[70] ECSCFRecord,
+	iBCFRecord			[82] IBCFRecord,
+	tRFRecord			[89] TRFRecord,
+	tFRecord				[90] TFRecord,
+	aTCFRecord			[91] ATCFRecord
+}
+
+SCSCFRecord		::= SET
+{
+	recordType							[0] RecordType,
+	retransmission						[1] NULL OPTIONAL,
+	sIP-Method							[2] SIP-Method OPTIONAL,
+	role-of-Node							[3] Role-of-Node OPTIONAL,
+	nodeAddress							[4] NodeAddress OPTIONAL,
+	session-Id							[5] Session-Id OPTIONAL,
+	list-Of-Calling-Party-Address		[6] ListOfInvolvedParties OPTIONAL,
+	called-Party-Address					[7] InvolvedParty OPTIONAL,
+	privateUserID						[8] GraphicString OPTIONAL,
+	serviceRequestTimeStamp				[9] TimeStamp OPTIONAL,
+	serviceDeliveryStartTimeStamp		[10] TimeStamp OPTIONAL,
+	serviceDeliveryEndTimeStamp			[11] TimeStamp OPTIONAL,
+	recordOpeningTime					[12] TimeStamp OPTIONAL,
+	recordClosureTime					[13] TimeStamp OPTIONAL,
+	interOperatorIdentifiers				[14] InterOperatorIdentifierList OPTIONAL,
+	localRecordSequenceNumber			[15] LocalSequenceNumber OPTIONAL,
+	recordSequenceNumber					[16] INTEGER OPTIONAL,
+	causeForRecordClosing				[17] CauseForRecordClosing OPTIONAL,
+	incomplete-CDR-Indication			[18] Incomplete-CDR-Indication OPTIONAL,
+	iMS-Charging-Identifier				[19] IMS-Charging-Identifier OPTIONAL,
+	list-Of-SDP-Media-Components			[21] SEQUENCE OF Media-Components-List OPTIONAL,
+	gGSNaddress							[22] NodeAddress OPTIONAL,
+	serviceReasonReturnCode				[23] UTF8String OPTIONAL,
+	list-Of-Message-Bodies				[24] SEQUENCE OF MessageBody OPTIONAL,
+	recordExtensions						[25] ManagementExtensions OPTIONAL,
+	expiresInformation					[26] INTEGER OPTIONAL,
+	list-Of-Associated-URI				[27] ListOfInvolvedParties OPTIONAL,
+	event								[28] UTF8String OPTIONAL,
+	accessNetworkInformation				[29] OCTET STRING OPTIONAL,
+	serviceContextID						[30] ServiceContextID OPTIONAL,
+	list-of-subscription-ID				[31] SEQUENCE OF SubscriptionID OPTIONAL,
+	list-Of-Early-SDP-Media-Components	[32] SEQUENCE OF Early-Media-Components-List OPTIONAL,
+	iMSCommunicationServiceIdentifier	[33] IMSCommunicationServiceIdentifier OPTIONAL,
+	numberPortabilityRouting				[34] NumberPortabilityRouting OPTIONAL,
+	carrierSelectRouting					[35] CarrierSelectRouting OPTIONAL,
+	sessionPriority						[36] SessionPriority OPTIONAL,
+	serviceRequestTimeStampFraction		[37] Milliseconds OPTIONAL,
+	serviceDeliveryStartTimeStampFraction	[38] Milliseconds OPTIONAL,
+	serviceDeliveryEndTimeStampFraction		[39] Milliseconds OPTIONAL,
+	applicationServersInformation			[40] SEQUENCE OF ApplicationServersInformation OPTIONAL,
+	requested-Party-Address					[41] InvolvedParty OPTIONAL,
+	list-Of-Called-Asserted-Identity 		[42] ListOfInvolvedParties OPTIONAL,
+	online-charging-flag						[43] NULL OPTIONAL,
+	realTimeTariffInformation				[44] SEQUENCE OF RealTimeTariffInformation OPTIONAL,
+	userLocationInformation					[47] OCTET STRING OPTIONAL,
+	mSTimeZone 								[48] MSTimeZone OPTIONAL,
+	nNI-Information     						[46] NNI-Information OPTIONAL,
+	fromAddress								[51] OCTET STRING OPTIONAL,
+	iMSEmergencyIndicator					[52] NULL OPTIONAL,
+	transit-IOI-Lists						[53] TransitIOILists OPTIONAL,
+	iMSVisitedNetworkIdentifier				[54] OCTET STRING OPTIONAL,
+	listOfReasonHeader						[55] ListOfReasonHeader OPTIONAL,
+	additionalAccessNetworkInformation		[56] OCTET STRING OPTIONAL, 
+	instanceId								[57] OCTET STRING OPTIONAL, 
+	subscriberEquipmentNumber				[58] SubscriberEquipmentNumber OPTIONAL,
+	routeHeaderReceived						[59] OCTET STRING OPTIONAL,
+	routeHeaderTransmitted					[60] OCTET STRING OPTIONAL,
+	list-Of-AccessNetworkInfoChange			[62] SEQUENCE OF AccessNetworkInfoChange OPTIONAL,
+	listOfCalledIdentityChanges				[63] SEQUENCE OF CalledIdentityChange OPTIONAL,
+	cellularNetworkInformation				[64] OCTET STRING OPTIONAL
+}
+
+PCSCFRecord		::= SET
+{
+	recordType							[0] RecordType,
+	retransmission						[1] NULL OPTIONAL,
+	sIP-Method							[2] SIP-Method OPTIONAL,
+	role-of-Node							[3] Role-of-Node OPTIONAL,
+	nodeAddress							[4] NodeAddress OPTIONAL,
+	session-Id							[5] Session-Id OPTIONAL,
+	list-Of-Calling-Party-Address		[6] ListOfInvolvedParties OPTIONAL,
+	called-Party-Address					[7] InvolvedParty OPTIONAL,
+	serviceRequestTimeStamp				[9] TimeStamp OPTIONAL,
+	serviceDeliveryStartTimeStamp		[10] TimeStamp OPTIONAL,
+	serviceDeliveryEndTimeStamp			[11] TimeStamp OPTIONAL,
+	recordOpeningTime					[12] TimeStamp OPTIONAL,
+	recordClosureTime					[13] TimeStamp OPTIONAL,
+	interOperatorIdentifiers				[14] InterOperatorIdentifiers OPTIONAL,
+	localRecordSequenceNumber			[15] LocalSequenceNumber OPTIONAL,
+	recordSequenceNumber					[16] INTEGER OPTIONAL,
+	causeForRecordClosing				[17] CauseForRecordClosing OPTIONAL, 
+	incomplete-CDR-Indication			[18] Incomplete-CDR-Indication OPTIONAL,
+	iMS-Charging-Identifier				[19] IMS-Charging-Identifier OPTIONAL,
+	list-Of-SDP-Media-Components			[21] SEQUENCE OF Media-Components-List OPTIONAL,
+	gGSNaddress							[22] NodeAddress OPTIONAL,
+	serviceReasonReturnCode				[23] UTF8String OPTIONAL,
+	list-Of-Message-Bodies				[24] SEQUENCE OF MessageBody OPTIONAL,
+	recordExtensions						[25] ManagementExtensions OPTIONAL,
+	expiresInformation					[26] INTEGER OPTIONAL,
+	list-Of-Associated-URI				[27] ListOfInvolvedParties OPTIONAL,
+	event								[28] UTF8String OPTIONAL,
+	accessNetworkInformation				[29] OCTET STRING OPTIONAL,
+	serviceContextID						[30] ServiceContextID OPTIONAL,
+	list-of-subscription-ID				[31] SEQUENCE OF SubscriptionID OPTIONAL,
+	list-Of-Early-SDP-Media-Components 	[32] SEQUENCE OF Early-Media-Components-List OPTIONAL,
+	iMSCommunicationServiceIdentifier	[33] IMSCommunicationServiceIdentifier OPTIONAL,
+	sessionPriority						[36] SessionPriority OPTIONAL,
+	serviceRequestTimeStampFraction		[37] Milliseconds OPTIONAL,
+	serviceDeliveryStartTimeStampFraction	[38] Milliseconds OPTIONAL,
+	serviceDeliveryEndTimeStampFraction		[39] Milliseconds OPTIONAL, 
+	list-of-Requested-Party-Address			[41] ListOfInvolvedParties OPTIONAL,
+	list-Of-Called-Asserted-Identity 		[42] ListOfInvolvedParties OPTIONAL,
+	nNI-Information							[46] NNI-Information OPTIONAL,
+	userLocationInformation					[47] OCTET STRING OPTIONAL,
+	mSTimeZone 								[48] MSTimeZone OPTIONAL,
+	servedPartyIPAddress						[50] ServedPartyIPAddress OPTIONAL,
+	fromAddress								[51] OCTET STRING OPTIONAL,
+	iMSEmergencyIndicator					[52] NULL OPTIONAL,
+	transit-IOI-Lists						[53] TransitIOILists OPTIONAL,
+	iMSVisitedNetworkIdentifier				[54] OCTET STRING OPTIONAL,
+	listOfReasonHeader						[55] ListOfReasonHeader OPTIONAL,
+	additionalAccessNetworkInformation		[56] OCTET STRING OPTIONAL,
+	instanceId								[57] OCTET STRING OPTIONAL, 
+	subscriberEquipmentNumber				[58] SubscriberEquipmentNumber OPTIONAL,
+	routeHeaderReceived						[59] OCTET STRING OPTIONAL,
+	routeHeaderTransmitted					[60] OCTET STRING OPTIONAL,
+	list-Of-AccessNetworkInfoChange			[62] SEQUENCE OF AccessNetworkInfoChange OPTIONAL,
+	listOfCalledIdentityChanges				[63] SEQUENCE OF CalledIdentityChange OPTIONAL,
+	cellularNetworkInformation				[64] OCTET STRING OPTIONAL,
+	initialIMS-Charging-Identifier			[105] IMS-Charging-Identifier OPTIONAL,
+	list-Of-AccessTransferInformation		[106] SEQUENCE OF AccessTransferInformation OPTIONAL,
+	relatedICID								[107] IMS-Charging-Identifier OPTIONAL,
+	relatedICIDGenerationNode				[108] NodeAddress OPTIONAL
+--
+-- list-Of-AccessTransferInformation applies when ATCF collocated with P-CSCF
+--
+}
+	
+ICSCFRecord		::= SET
+{
+	recordType						[0] RecordType,
+	retransmission					[1] NULL OPTIONAL,
+	sIP-Method						[2] SIP-Method OPTIONAL,
+	role-of-Node						[3] Role-of-Node OPTIONAL,
+	nodeAddress						[4] NodeAddress OPTIONAL,
+	session-Id						[5] Session-Id OPTIONAL,
+	list-Of-Calling-Party-Address	[6] ListOfInvolvedParties OPTIONAL,
+	called-Party-Address				[7] InvolvedParty OPTIONAL,
+	serviceRequestTimeStamp			[9] TimeStamp OPTIONAL,
+	interOperatorIdentifiers			[14] InterOperatorIdentifiers OPTIONAL,
+	localRecordSequenceNumber		[15] LocalSequenceNumber OPTIONAL,
+	causeForRecordClosing			[17] CauseForRecordClosing OPTIONAL, 
+	incomplete-CDR-Indication		[18] Incomplete-CDR-Indication OPTIONAL,
+	iMS-Charging-Identifier			[19] IMS-Charging-Identifier OPTIONAL,
+	serviceReasonReturnCode			[23] UTF8String OPTIONAL,
+	recordExtensions					[25] ManagementExtensions OPTIONAL,
+	expiresInformation				[26] INTEGER OPTIONAL,
+	list-Of-Associated-URI			[27] ListOfInvolvedParties OPTIONAL,
+	event							[28] UTF8String OPTIONAL,
+	accessNetworkInformation			[29] OCTET STRING OPTIONAL,
+	serviceContextID					[30] ServiceContextID OPTIONAL,
+	numberPortabilityRouting			[34] NumberPortabilityRouting OPTIONAL,
+	carrierSelectRouting				[35] CarrierSelectRouting OPTIONAL,
+	sessionPriority					[36] SessionPriority OPTIONAL,
+	serviceRequestTimeStampFraction	[37] Milliseconds OPTIONAL,
+	transit-IOI-List					[45] GraphicString OPTIONAL,
+	userLocationInformation			[47] OCTET STRING OPTIONAL,
+	mSTimeZone 						[48] MSTimeZone OPTIONAL,
+	fromAddress						[51] OCTET STRING OPTIONAL,
+	iMSEmergencyIndicator			[52] NULL OPTIONAL, 
+	listOfReasonHeader				[55] ListOfReasonHeader OPTIONAL,
+	additionalAccessNetworkInformation	[56] OCTET STRING OPTIONAL,
+	routeHeaderTransmitted				[60] OCTET STRING OPTIONAL,
+	s-CSCF-Information					[61] S-CSCF-Information OPTIONAL,
+	cellularNetworkInformation			[64] OCTET STRING OPTIONAL
+}
+
+MRFCRecord		::= SET
+{
+	recordType							[0] RecordType,
+	retransmission						[1] NULL OPTIONAL,
+	sIP-Method							[2] SIP-Method OPTIONAL,
+	nodeAddress							[4] NodeAddress OPTIONAL,
+	session-Id							[5] Session-Id OPTIONAL,
+	list-Of-Calling-Party-Address		[6] ListOfInvolvedParties OPTIONAL,
+	called-Party-Address					[7] InvolvedParty OPTIONAL,
+	serviceRequestTimeStamp				[9] TimeStamp OPTIONAL,
+	serviceDeliveryStartTimeStamp		[10] TimeStamp OPTIONAL,
+	serviceDeliveryEndTimeStamp			[11] TimeStamp OPTIONAL,
+	recordOpeningTime					[12] TimeStamp OPTIONAL,
+	recordClosureTime					[13] TimeStamp OPTIONAL,
+	interOperatorIdentifiers				[14] InterOperatorIdentifiers OPTIONAL,
+	localRecordSequenceNumber			[15] LocalSequenceNumber OPTIONAL,
+	recordSequenceNumber					[16] INTEGER OPTIONAL,
+	causeForRecordClosing				[17] CauseForRecordClosing OPTIONAL,
+	incomplete-CDR-Indication			[18] Incomplete-CDR-Indication OPTIONAL,
+	iMS-Charging-Identifier				[19] IMS-Charging-Identifier OPTIONAL,
+	list-Of-SDP-Media-Components			[21] SEQUENCE OF Media-Components-List OPTIONAL,
+	gGSNaddress							[22] NodeAddress OPTIONAL,
+	serviceReasonReturnCode				[23] UTF8String OPTIONAL,
+	recordExtensions						[25] ManagementExtensions OPTIONAL,
+	expiresInformation					[26] INTEGER OPTIONAL,
+	event								[28] UTF8String OPTIONAL,
+	accessNetworkInformation				[29] OCTET STRING OPTIONAL, 
+	serviceContextID						[30] ServiceContextID OPTIONAL,
+	list-of-subscription-ID				[31] SEQUENCE OF SubscriptionID OPTIONAL,
+	list-Of-Early-SDP-Media-Components	[32] SEQUENCE OF Early-Media-Components-List OPTIONAL,
+	sessionPriority						[36] SessionPriority OPTIONAL,
+	serviceRequestTimeStampFraction		[37] Milliseconds OPTIONAL,
+	serviceDeliveryStartTimeStampFraction	[38] Milliseconds OPTIONAL,
+	serviceDeliveryEndTimeStampFraction		[39] Milliseconds OPTIONAL,
+	applicationServersInformation			[40] SEQUENCE OF ApplicationServersInformation OPTIONAL,
+	online-charging-flag						[43] NULL OPTIONAL,
+	transit-IOI-List							[45] GraphicString OPTIONAL,
+	userLocationInformation					[47] OCTET STRING OPTIONAL,
+	mSTimeZone 								[48] MSTimeZone OPTIONAL,
+	fromAddress								[51] OCTET STRING OPTIONAL, 
+	listOfReasonHeader						[55] ListOfReasonHeader OPTIONAL,
+	additionalAccessNetworkInformation		[56] OCTET STRING OPTIONAL,
+	list-Of-AccessNetworkInfoChange			[62] SEQUENCE OF AccessNetworkInfoChange OPTIONAL,
+	cellularNetworkInformation				[64] OCTET STRING OPTIONAL,
+	service-Id								[70] Service-Id OPTIONAL,
+	requested-Party-Address					[71] InvolvedParty OPTIONAL,
+	list-Of-Called-Asserted-Identity			[72] ListOfInvolvedParties OPTIONAL
+}
+
+MGCFRecord		::= SET
+{
+	recordType							[0] RecordType,
+	retransmission						[1] NULL OPTIONAL,
+	sIP-Method							[2] SIP-Method OPTIONAL,
+	role-of-Node							[3] Role-of-Node OPTIONAL,
+	nodeAddress							[4] NodeAddress OPTIONAL,
+	session-Id							[5] Session-Id OPTIONAL,
+	list-Of-Calling-Party-Address		[6] ListOfInvolvedParties OPTIONAL,
+	called-Party-Address					[7] InvolvedParty OPTIONAL,
+	serviceRequestTimeStamp				[9] TimeStamp OPTIONAL,
+	serviceDeliveryStartTimeStamp		[10] TimeStamp OPTIONAL,
+	serviceDeliveryEndTimeStamp			[11] TimeStamp OPTIONAL,
+	recordOpeningTime					[12] TimeStamp OPTIONAL,
+	recordClosureTime					[13] TimeStamp OPTIONAL,
+	interOperatorIdentifiers				[14] InterOperatorIdentifiers OPTIONAL,
+	localRecordSequenceNumber			[15] LocalSequenceNumber OPTIONAL,
+	recordSequenceNumber					[16] INTEGER OPTIONAL,
+	causeForRecordClosing				[17] CauseForRecordClosing OPTIONAL,
+	incomplete-CDR-Indication			[18] Incomplete-CDR-Indication OPTIONAL,
+	iMS-Charging-Identifier				[19] IMS-Charging-Identifier OPTIONAL,
+	list-Of-SDP-Media-Components			[21] SEQUENCE OF Media-Components-List OPTIONAL,
+	serviceReasonReturnCode				[23] UTF8String OPTIONAL,
+	recordExtensions						[25] ManagementExtensions OPTIONAL,
+	expiresInformation					[26] INTEGER OPTIONAL,
+	event								[28] UTF8String OPTIONAL,
+	accessNetworkInformation				[29] OCTET STRING OPTIONAL, 
+	serviceContextID						[30] ServiceContextID OPTIONAL,
+	list-Of-Early-SDP-Media-Components	[32] SEQUENCE OF Early-Media-Components-List OPTIONAL,
+	numberPortabilityRouting				[34] NumberPortabilityRouting OPTIONAL,
+	carrierSelectRouting					[35] CarrierSelectRouting OPTIONAL, 
+	sessionPriority						[36] SessionPriority OPTIONAL,
+	serviceRequestTimeStampFraction		[37] Milliseconds OPTIONAL,
+	serviceDeliveryStartTimeStampFraction	[38] Milliseconds OPTIONAL,
+	serviceDeliveryEndTimeStampFraction		[39] Milliseconds OPTIONAL,
+	realTimeTariffInformation				[44] SEQUENCE OF RealTimeTariffInformation OPTIONAL,
+	transit-IOI-List							[45] GraphicString OPTIONAL,
+	fromAddress								[51] OCTET STRING OPTIONAL,
+	listOfReasonHeader						[55] ListOfReasonHeader OPTIONAL,
+	additionalAccessNetworkInformation		[56] OCTET STRING OPTIONAL, 
+	list-Of-AccessNetworkInfoChange			[62] SEQUENCE OF AccessNetworkInfoChange OPTIONAL,
+	cellularNetworkInformation				[64] OCTET STRING OPTIONAL,
+	trunkGroupID								[80] TrunkGroupID OPTIONAL,
+	bearerService							[81] TransmissionMedium OPTIONAL,
+	iSUPCause								[82] ISUPCause OPTIONAL
+}
+
+BGCFRecord		::= SET
+{
+	recordType							[0] RecordType,
+	retransmission						[1] NULL OPTIONAL,
+	sIP-Method							[2] SIP-Method OPTIONAL,
+	role-of-Node							[3] Role-of-Node OPTIONAL,
+	nodeAddress							[4] NodeAddress OPTIONAL,
+	session-Id							[5] Session-Id OPTIONAL,
+	list-Of-Calling-Party-Address		[6] ListOfInvolvedParties OPTIONAL,
+	called-Party-Address					[7] InvolvedParty OPTIONAL,
+	serviceRequestTimeStamp				[9] TimeStamp OPTIONAL,
+	serviceDeliveryStartTimeStamp		[10] TimeStamp OPTIONAL,
+	serviceDeliveryEndTimeStamp			[11] TimeStamp OPTIONAL,
+	recordOpeningTime					[12] TimeStamp OPTIONAL,
+	recordClosureTime					[13] TimeStamp OPTIONAL,
+	interOperatorIdentifiers				[14] InterOperatorIdentifiers OPTIONAL,
+	localRecordSequenceNumber			[15] LocalSequenceNumber OPTIONAL,
+	recordSequenceNumber					[16] INTEGER OPTIONAL,
+	causeForRecordClosing				[17] CauseForRecordClosing OPTIONAL,
+	incomplete-CDR-Indication			[18] Incomplete-CDR-Indication OPTIONAL,
+	iMS-Charging-Identifier				[19] IMS-Charging-Identifier OPTIONAL,
+	serviceReasonReturnCode				[23] UTF8String OPTIONAL,
+	recordExtensions						[25] ManagementExtensions OPTIONAL,
+	expiresInformation					[26] INTEGER OPTIONAL,
+	event								[28] UTF8String OPTIONAL,
+	accessNetworkInformation				[29] OCTET STRING OPTIONAL,
+	serviceContextID						[30] ServiceContextID OPTIONAL,
+	numberPortabilityRouting				[34] NumberPortabilityRouting OPTIONAL,
+	carrierSelectRouting					[35] CarrierSelectRouting OPTIONAL,
+	sessionPriority						[36] SessionPriority OPTIONAL,
+	serviceRequestTimeStampFraction		[37] Milliseconds OPTIONAL,
+	serviceDeliveryStartTimeStampFraction	[38] Milliseconds OPTIONAL,
+	serviceDeliveryEndTimeStampFraction		[39] Milliseconds OPTIONAL,
+	transit-IOI-List							[45] GraphicString OPTIONAL,
+	nNI-Information     						[46] NNI-Information OPTIONAL,
+	fromAddress								[51] OCTET STRING OPTIONAL,
+	listOfReasonHeader						[55] ListOfReasonHeader OPTIONAL,
+	additionalAccessNetworkInformation		[56] OCTET STRING OPTIONAL,
+	cellularNetworkInformation				[64] OCTET STRING OPTIONAL
+}
+
+ASRecord		::= SET
+{
+	recordType							[0] RecordType,
+	retransmission						[1] NULL OPTIONAL,
+	sIP-Method							[2] SIP-Method OPTIONAL,
+	role-of-Node							[3] Role-of-Node OPTIONAL,
+	nodeAddress							[4] NodeAddress OPTIONAL,
+	session-Id							[5] Session-Id OPTIONAL,
+	list-Of-Calling-Party-Address		[6] ListOfInvolvedParties OPTIONAL,
+	called-Party-Address					[7] InvolvedParty OPTIONAL,
+	serviceRequestTimeStamp				[9] TimeStamp OPTIONAL,
+	serviceDeliveryStartTimeStamp		[10] TimeStamp OPTIONAL,
+	serviceDeliveryEndTimeStamp			[11] TimeStamp OPTIONAL,
+	recordOpeningTime					[12] TimeStamp OPTIONAL,
+	recordClosureTime					[13] TimeStamp OPTIONAL,
+	interOperatorIdentifiers				[14] InterOperatorIdentifiers OPTIONAL,
+	localRecordSequenceNumber			[15] LocalSequenceNumber OPTIONAL,
+	recordSequenceNumber					[16] INTEGER OPTIONAL,
+	causeForRecordClosing				[17] CauseForRecordClosing OPTIONAL, 
+	incomplete-CDR-Indication			[18] Incomplete-CDR-Indication OPTIONAL,
+	iMS-Charging-Identifier				[19] IMS-Charging-Identifier OPTIONAL,
+	list-Of-SDP-Media-Components			[21] SEQUENCE OF Media-Components-List OPTIONAL,
+	gGSNaddress							[22] NodeAddress OPTIONAL,
+	serviceReasonReturnCode				[23] UTF8String OPTIONAL,
+	list-Of-Message-Bodies				[24] SEQUENCE OF MessageBody OPTIONAL,
+	recordExtensions						[25] ManagementExtensions OPTIONAL,
+	expiresInformation					[26] INTEGER OPTIONAL,
+	event								[28] UTF8String OPTIONAL,
+	accessNetworkInformation				[29] OCTET STRING OPTIONAL,
+	serviceContextID						[30] ServiceContextID OPTIONAL,
+	list-of-subscription-ID				[31] SEQUENCE OF SubscriptionID OPTIONAL,
+	list-Of-Early-SDP-Media-Components 	[32] SEQUENCE OF Early-Media-Components-List OPTIONAL,
+	iMSCommunicationServiceIdentifier	[33] IMSCommunicationServiceIdentifier OPTIONAL,
+	numberPortabilityRouting				[34] NumberPortabilityRouting OPTIONAL,
+	carrierSelectRouting						[35] CarrierSelectRouting OPTIONAL,
+	sessionPriority							[36] SessionPriority OPTIONAL,
+	serviceRequestTimeStampFraction			[37] Milliseconds OPTIONAL,
+	serviceDeliveryStartTimeStampFraction	[38] Milliseconds OPTIONAL,
+	serviceDeliveryEndTimeStampFraction		[39] Milliseconds OPTIONAL,
+	list-of-Requested-Party-Address			[41] ListOfInvolvedParties OPTIONAL,
+	online-charging-flag						[43] NULL OPTIONAL,
+	realTimeTariffInformation				[44] SEQUENCE OF RealTimeTariffInformation OPTIONAL,
+	nNI-Information							[46] NNI-Information OPTIONAL,
+	userLocationInformation					[47] OCTET STRING OPTIONAL,
+	mSTimeZone 								[48] MSTimeZone OPTIONAL,
+	fromAddress								[51] OCTET STRING OPTIONAL,
+	transit-IOI-Lists						[53] TransitIOILists OPTIONAL,
+	iMSVisitedNetworkIdentifier				[54] OCTET STRING OPTIONAL,
+	listOfReasonHeader						[55] ListOfReasonHeader OPTIONAL,
+	additionalAccessNetworkInformation		[56] OCTET STRING OPTIONAL,
+	instanceId								[57] OCTET STRING OPTIONAL,
+	subscriberEquipmentNumber				[58] SubscriberEquipmentNumber OPTIONAL, 
+	list-Of-AccessNetworkInfoChange			[62] SEQUENCE OF AccessNetworkInfoChange OPTIONAL,
+	listOfCalledIdentityChanges				[63] SEQUENCE OF CalledIdentityChange OPTIONAL,
+	cellularNetworkInformation				[64] OCTET STRING OPTIONAL,
+	serviceSpecificInfo						[100] SEQUENCE OF ServiceSpecificInfo OPTIONAL,
+	requested-Party-Address					[101] InvolvedParty OPTIONAL,
+	list-Of-Called-Asserted-Identity			[102] ListOfInvolvedParties OPTIONAL,
+	alternateChargedPartyAddress				[103] UTF8String OPTIONAL,
+	outgoingSessionId						[104] Session-Id OPTIONAL,
+	initialIMS-Charging-Identifier			[105] IMS-Charging-Identifier OPTIONAL,
+	list-Of-AccessTransferInformation		[106] SEQUENCE OF AccessTransferInformation OPTIONAL,
+	tADS-Identifier							[109] TADIdentifier OPTIONAL,
+	vlr-Number								[110] MSCAddress OPTIONAL,
+	msc-Address								[111] MSCAddress OPTIONAL
+}
+
+ECSCFRecord		::= SET
+{
+	recordType							[0] RecordType,
+	retransmission						[1] NULL OPTIONAL,
+	sIP-Method							[2] SIP-Method OPTIONAL,
+	role-of-Node							[3] Role-of-Node OPTIONAL,
+	nodeAddress							[4] NodeAddress OPTIONAL,
+	session-Id							[5] Session-Id OPTIONAL,
+	list-Of-Calling-Party-Address		[6] ListOfInvolvedParties OPTIONAL,
+	called-Party-Address					[7] InvolvedParty OPTIONAL,
+	serviceRequestTimeStamp				[9] TimeStamp OPTIONAL,
+	serviceDeliveryStartTimeStamp		[10] TimeStamp OPTIONAL,
+	serviceDeliveryEndTimeStamp			[11] TimeStamp OPTIONAL,
+	recordOpeningTime					[12] TimeStamp OPTIONAL,
+	recordClosureTime					[13] TimeStamp OPTIONAL,
+	interOperatorIdentifiers				[14] InterOperatorIdentifierList OPTIONAL,
+	localRecordSequenceNumber			[15] LocalSequenceNumber OPTIONAL,
+	recordSequenceNumber					[16] INTEGER OPTIONAL,
+	causeForRecordClosing				[17] CauseForRecordClosing OPTIONAL,
+	incomplete-CDR-Indication			[18] Incomplete-CDR-Indication OPTIONAL,
+	iMS-Charging-Identifier				[19] IMS-Charging-Identifier OPTIONAL,
+	list-Of-SDP-Media-Components			[21] SEQUENCE OF Media-Components-List OPTIONAL,
+	gGSNaddress							[22] NodeAddress OPTIONAL,
+	serviceReasonReturnCode				[23] UTF8String OPTIONAL,
+	list-Of-Message-Bodies				[24] SEQUENCE OF MessageBody OPTIONAL,
+	recordExtensions						[25] ManagementExtensions OPTIONAL,
+	expiresInformation					[26] INTEGER OPTIONAL,
+	event								[28] UTF8String OPTIONAL,
+	accessNetworkInformation				[29] OCTET STRING OPTIONAL,
+	serviceContextID						[30] ServiceContextID OPTIONAL,
+	list-of-subscription-ID				[31] SEQUENCE OF SubscriptionID OPTIONAL,
+	list-Of-Early-SDP-Media-Components	[32] SEQUENCE OF Early-Media-Components-List OPTIONAL,
+	iMSCommunicationServiceIdentifier	[33] IMSCommunicationServiceIdentifier OPTIONAL,
+	sessionPriority						[36] SessionPriority OPTIONAL,
+	serviceRequestTimeStampFraction		[37] Milliseconds OPTIONAL,
+	serviceDeliveryStartTimeStampFraction	[38] Milliseconds OPTIONAL,
+	serviceDeliveryEndTimeStampFraction		[39] Milliseconds OPTIONAL,
+	applicationServersInformation			[40] SEQUENCE OF ApplicationServersInformation OPTIONAL,
+	requested-Party-Address					[41] InvolvedParty OPTIONAL,
+	list-Of-Called-Asserted-Identity			[42] ListOfInvolvedParties OPTIONAL,
+	userLocationInformation					[47] OCTET STRING OPTIONAL,
+	mSTimeZone 								[48] MSTimeZone OPTIONAL,
+	fromAddress								[51] OCTET STRING OPTIONAL,
+	transit-IOI-Lists						[53] TransitIOILists OPTIONAL,
+	listOfReasonHeader						[55] ListOfReasonHeader OPTIONAL,
+	additionalAccessNetworkInformation		[56] OCTET STRING OPTIONAL,
+	list-Of-AccessNetworkInfoChange			[62] SEQUENCE OF AccessNetworkInfoChange OPTIONAL,
+	listOfCalledIdentityChanges				[63] SEQUENCE OF CalledIdentityChange OPTIONAL,
+	cellularNetworkInformation				[64] OCTET STRING OPTIONAL
+}
+
+IBCFRecord		::= SET
+{
+	recordType							[0] RecordType,
+	retransmission						[1] NULL OPTIONAL,
+	sIP-Method							[2] SIP-Method OPTIONAL,
+	role-of-Node							[3] Role-of-Node OPTIONAL,
+	nodeAddress							[4] NodeAddress OPTIONAL,
+	session-Id							[5] Session-Id OPTIONAL,
+	list-Of-Calling-Party-Address		[6] ListOfInvolvedParties OPTIONAL,	
+	called-Party-Address					[7] InvolvedParty OPTIONAL,
+	serviceRequestTimeStamp				[9] TimeStamp OPTIONAL,
+	serviceDeliveryStartTimeStamp		[10] TimeStamp OPTIONAL,
+	serviceDeliveryEndTimeStamp			[11] TimeStamp OPTIONAL,
+	recordOpeningTime					[12] TimeStamp OPTIONAL,
+	recordClosureTime					[13] TimeStamp OPTIONAL,
+	interOperatorIdentifiers				[14] InterOperatorIdentifiers OPTIONAL,
+	localRecordSequenceNumber			[15] LocalSequenceNumber OPTIONAL,
+	recordSequenceNumber					[16] INTEGER OPTIONAL,
+	causeForRecordClosing				[17] CauseForRecordClosing OPTIONAL, 
+	incomplete-CDR-Indication			[18] Incomplete-CDR-Indication OPTIONAL,
+	iMS-Charging-Identifier				[19] IMS-Charging-Identifier OPTIONAL,
+	list-Of-SDP-Media-Components			[21] SEQUENCE OF Media-Components-List OPTIONAL, 
+	gGSNaddress							[22] NodeAddress OPTIONAL,
+	serviceReasonReturnCode				[23] UTF8String OPTIONAL,
+	list-Of-Message-Bodies				[24] SEQUENCE OF MessageBody OPTIONAL,
+	recordExtensions						[25] ManagementExtensions OPTIONAL,
+	expiresInformation					[26] INTEGER OPTIONAL,
+	event								[28] UTF8String OPTIONAL,
+	accessNetworkInformation				[29] OCTET STRING OPTIONAL,
+	serviceContextID						[30] ServiceContextID OPTIONAL,
+	list-of-subscription-ID				[31] SEQUENCE OF SubscriptionID OPTIONAL,
+	list-Of-Early-SDP-Media-Components 	[32] SEQUENCE OF Early-Media-Components-List OPTIONAL,
+	iMSCommunicationServiceIdentifier	[33] IMSCommunicationServiceIdentifier OPTIONAL,
+	sessionPriority						[36] SessionPriority OPTIONAL,
+	serviceRequestTimeStampFraction		[37] Milliseconds OPTIONAL,
+	serviceDeliveryStartTimeStampFraction	[38] Milliseconds OPTIONAL,
+	serviceDeliveryEndTimeStampFraction		[39] Milliseconds OPTIONAL,
+	list-of-Requested-Party-Address			[41] ListOfInvolvedParties OPTIONAL,
+	list-Of-Called-Asserted-Identity			[42] ListOfInvolvedParties OPTIONAL,	realTimeTariffInformation				[44] SEQUENCE OF RealTimeTariffInformation OPTIONAL,
+	transit-IOI-List							[45] GraphicString OPTIONAL,
+	nNI-Information							[46] SEQUENCE OF NNI-Information OPTIONAL,
+	userLocationInformation					[47] OCTET STRING OPTIONAL,
+	mSTimeZone								[48] MSTimeZone OPTIONAL,
+	fromAddress								[51] OCTET STRING OPTIONAL,
+	listOfReasonHeader						[55] ListOfReasonHeader OPTIONAL,
+	additionalAccessNetworkInformation		[56] OCTET STRING OPTIONAL,
+	routeHeaderReceived						[59] OCTET STRING OPTIONAL, 
+	list-Of-AccessNetworkInfoChange			[62] SEQUENCE OF AccessNetworkInfoChange OPTIONAL,
+	cellularNetworkInformation				[64] OCTET STRING OPTIONAL,
+	initialIMS-Charging-Identifier			[105] IMS-Charging-Identifier OPTIONAL,
+	list-Of-AccessTransferInformation		[106] SEQUENCE OF AccessTransferInformation OPTIONAL
+--
+-- list-Of-AccessTransferInformation applies when ATCF collocated with IBCF
+--
+}
+
+TRFRecord		::= SET
+{
+	recordType							[0] RecordType,
+	retransmission						[1] NULL OPTIONAL,
+	sIP-Method							[2] SIP-Method OPTIONAL,
+	role-of-Node							[3] Role-of-Node OPTIONAL,
+	nodeAddress							[4] NodeAddress OPTIONAL,
+	session-Id							[5] Session-Id OPTIONAL,
+	list-Of-Calling-Party-Address		[6] ListOfInvolvedParties OPTIONAL,
+	called-Party-Address					[7] InvolvedParty OPTIONAL,
+	serviceRequestTimeStamp				[9] TimeStamp OPTIONAL,
+	serviceDeliveryStartTimeStamp		[10] TimeStamp OPTIONAL,
+	serviceDeliveryEndTimeStamp			[11] TimeStamp OPTIONAL,
+	recordOpeningTime					[12] TimeStamp OPTIONAL,
+	recordClosureTime					[13] TimeStamp OPTIONAL,
+	interOperatorIdentifiers				[14] InterOperatorIdentifierList OPTIONAL,
+	localRecordSequenceNumber			[15] LocalSequenceNumber OPTIONAL,
+	recordSequenceNumber					[16] INTEGER OPTIONAL,
+	causeForRecordClosing				[17] CauseForRecordClosing OPTIONAL,
+	incomplete-CDR-Indication			[18] Incomplete-CDR-Indication OPTIONAL,
+	iMS-Charging-Identifier				[19] IMS-Charging-Identifier OPTIONAL,
+	list-Of-SDP-Media-Components			[21] SEQUENCE OF Media-Components-List OPTIONAL,
+	serviceReasonReturnCode				[23] UTF8String OPTIONAL,
+	list-Of-Message-Bodies				[24] SEQUENCE OF MessageBody OPTIONAL,
+	recordExtensions						[25] ManagementExtensions OPTIONAL,
+	expiresInformation					[26] INTEGER OPTIONAL,
+	event								[28] UTF8String OPTIONAL,
+	serviceContextID						[30] ServiceContextID OPTIONAL,
+	list-of-subscription-ID				[31] SEQUENCE OF SubscriptionID OPTIONAL, 
+	list-Of-Early-SDP-Media-Components 	[32] SEQUENCE OF Early-Media-Components-List OPTIONAL,
+	iMSCommunicationServiceIdentifier	[33] IMSCommunicationServiceIdentifier OPTIONAL,
+	numberPortabilityRouting				[34] NumberPortabilityRouting OPTIONAL,
+	carrierSelectRouting					[35] CarrierSelectRouting OPTIONAL,
+	sessionPriority						[36] SessionPriority OPTIONAL,
+	serviceRequestTimeStampFraction			[37] Milliseconds OPTIONAL,
+	serviceDeliveryStartTimeStampFraction	[38] Milliseconds OPTIONAL,
+	serviceDeliveryEndTimeStampFraction		[39] Milliseconds OPTIONAL,
+	applicationServersInformation			[40] SEQUENCE OF ApplicationServersInformation OPTIONAL,
+	requested-Party-Address					[41] InvolvedParty OPTIONAL,
+	list-Of-Called-Asserted-Identity			[42] ListOfInvolvedParties OPTIONAL,
+	nNI-Information							[46] SEQUENCE OF NNI-Information OPTIONAL,
+	userLocationInformation					[47] OCTET STRING OPTIONAL,
+	mSTimeZone 								[48] MSTimeZone OPTIONAL,
+	transit-IOI-Lists						[53] TransitIOILists OPTIONAL, 
+	listOfReasonHeader						[55] ListOfReasonHeader OPTIONAL,
+	routeHeaderReceived						[59] OCTET STRING OPTIONAL,
+	listOfCalledIdentityChanges				[63] SEQUENCE OF CalledIdentityChange OPTIONAL
+}
+
+ATCFRecord 	::= SET
+{
+	recordType							[0] RecordType,
+	retransmission						[1] NULL OPTIONAL,
+	sIP-Method							[2] SIP-Method OPTIONAL,
+	role-of-Node							[3] Role-of-Node OPTIONAL,
+	nodeAddress							[4] NodeAddress OPTIONAL,
+	session-Id							[5] Session-Id OPTIONAL,
+	list-Of-Calling-Party-Address		[6] ListOfInvolvedParties OPTIONAL,
+	called-Party-Address					[7] InvolvedParty OPTIONAL,
+	serviceRequestTimeStamp				[9] TimeStamp OPTIONAL,
+	serviceDeliveryStartTimeStamp		[10] TimeStamp OPTIONAL,
+	serviceDeliveryEndTimeStamp			[11] TimeStamp OPTIONAL,
+	recordOpeningTime					[12] TimeStamp OPTIONAL,
+	recordClosureTime					[13] TimeStamp OPTIONAL,
+	interOperatorIdentifiers				[14] InterOperatorIdentifiers OPTIONAL,
+	localRecordSequenceNumber			[15] LocalSequenceNumber OPTIONAL,
+	recordSequenceNumber					[16] INTEGER OPTIONAL,
+	causeForRecordClosing				[17] CauseForRecordClosing OPTIONAL, 
+	incomplete-CDR-Indication			[18] Incomplete-CDR-Indication OPTIONAL,
+	iMS-Charging-Identifier				[19] IMS-Charging-Identifier OPTIONAL,
+	list-Of-SDP-Media-Components			[21] SEQUENCE OF Media-Components-List OPTIONAL,
+	gGSNaddress							[22] NodeAddress OPTIONAL,
+	serviceReasonReturnCode				[23] UTF8String OPTIONAL,
+	list-Of-Message-Bodies				[24] SEQUENCE OF MessageBody OPTIONAL,
+	recordExtensions						[25] ManagementExtensions OPTIONAL,
+	expiresInformation					[26] INTEGER OPTIONAL,
+	event								[28] UTF8String OPTIONAL,
+	accessNetworkInformation				[29] OCTET STRING OPTIONAL,
+	serviceContextID						[30] ServiceContextID OPTIONAL,
+	list-of-subscription-ID				[31] SEQUENCE OF SubscriptionID OPTIONAL,
+	list-Of-Early-SDP-Media-Components	[32] SEQUENCE OF Early-Media-Components-List OPTIONAL,
+	iMSCommunicationServiceIdentifier	[33] IMSCommunicationServiceIdentifier OPTIONAL,
+	sessionPriority						[36] SessionPriority OPTIONAL,
+	serviceRequestTimeStampFraction		[37] Milliseconds OPTIONAL,
+	serviceDeliveryStartTimeStampFraction	[38] Milliseconds OPTIONAL,
+	serviceDeliveryEndTimeStampFraction		[39] Milliseconds OPTIONAL,
+	list-of-Requested-Party-Address			[41] ListOfInvolvedParties OPTIONAL,
+	list-Of-Called-Asserted-Identity			[42] ListOfInvolvedParties OPTIONAL,
+	nNI-Information							[46] NNI-Information OPTIONAL,
+	userLocationInformation					[47] OCTET STRING OPTIONAL,
+	mSTimeZone								[48] MSTimeZone OPTIONAL,
+	fromAddress								[51] OCTET STRING OPTIONAL,
+	listOfReasonHeader						[55] ListOfReasonHeader OPTIONAL,
+	additionalAccessNetworkInformation		[56] OCTET STRING OPTIONAL,
+	routeHeaderReceived						[59] OCTET STRING OPTIONAL,
+	routeHeaderTransmitted					[60] OCTET STRING OPTIONAL, 
+	list-Of-AccessNetworkInfoChange			[62] SEQUENCE OF AccessNetworkInfoChange OPTIONAL,
+	listOfCalledIdentityChanges				[63] SEQUENCE OF CalledIdentityChange OPTIONAL,
+	cellularNetworkInformation				[64] OCTET STRING OPTIONAL,
+	initialIMS-Charging-Identifier			[105] IMS-Charging-Identifier OPTIONAL,
+	list-Of-AccessTransferInformation		[106] SEQUENCE OF AccessTransferInformation OPTIONAL
+}
+
+TFRecord		::= SET
+{
+	recordType							[0] RecordType,
+	retransmission						[1] NULL OPTIONAL,
+	sIP-Method							[2] SIP-Method OPTIONAL,
+	role-of-Node							[3] Role-of-Node OPTIONAL,
+	nodeAddress							[4] NodeAddress OPTIONAL,
+	session-Id							[5] Session-Id OPTIONAL,
+	list-Of-Calling-Party-Address		[6] ListOfInvolvedParties OPTIONAL,
+	called-Party-Address					[7] InvolvedParty OPTIONAL,
+	serviceRequestTimeStamp				[9] TimeStamp OPTIONAL,
+	serviceDeliveryStartTimeStamp		[10] TimeStamp OPTIONAL,
+	serviceDeliveryEndTimeStamp			[11] TimeStamp OPTIONAL,
+	recordOpeningTime					[12] TimeStamp OPTIONAL,
+	recordClosureTime					[13] TimeStamp OPTIONAL,
+	interOperatorIdentifiers				[14] InterOperatorIdentifierList OPTIONAL,
+	localRecordSequenceNumber			[15] LocalSequenceNumber OPTIONAL,
+	recordSequenceNumber					[16] INTEGER OPTIONAL,
+	causeForRecordClosing				[17] CauseForRecordClosing OPTIONAL,
+	incomplete-CDR-Indication			[18] Incomplete-CDR-Indication OPTIONAL,
+	iMS-Charging-Identifier				[19] IMS-Charging-Identifier OPTIONAL,
+	list-Of-SDP-Media-Components			[21] SEQUENCE OF Media-Components-List OPTIONAL,
+	serviceReasonReturnCode				[23] UTF8String OPTIONAL,
+	list-Of-Message-Bodies				[24] SEQUENCE OF MessageBody OPTIONAL,
+	recordExtensions						[25] ManagementExtensions OPTIONAL,
+	expiresInformation					[26] INTEGER OPTIONAL,
+	event								[28] UTF8String OPTIONAL,
+	serviceContextID						[30] ServiceContextID OPTIONAL,
+	list-of-subscription-ID				[31] SEQUENCE OF SubscriptionID OPTIONAL,
+	list-Of-Early-SDP-Media-Components	[32] SEQUENCE OF Early-Media-Components-List OPTIONAL,
+	iMSCommunicationServiceIdentifier	[33] IMSCommunicationServiceIdentifier OPTIONAL,
+	numberPortabilityRouting				[34] NumberPortabilityRouting OPTIONAL,
+	carrierSelectRouting					[35] CarrierSelectRouting OPTIONAL,
+	sessionPriority						[36] SessionPriority OPTIONAL,
+	serviceRequestTimeStampFraction		[37] Milliseconds OPTIONAL,
+	serviceDeliveryStartTimeStampFraction	[38] Milliseconds OPTIONAL,
+	serviceDeliveryEndTimeStampFraction		[39] Milliseconds OPTIONAL,
+	applicationServersInformation			[40] SEQUENCE OF ApplicationServersInformation OPTIONAL,
+	requested-Party-Address					[41] InvolvedParty OPTIONAL,
+	list-Of-Called-Asserted-Identity 		[42] ListOfInvolvedParties OPTIONAL,
+	nNI-Information							[46] NNI-Information OPTIONAL,
+	fromAddress								[51] OCTET STRING OPTIONAL,
+	transit-IOI-Lists						[53] TransitIOILists OPTIONAL,
+	listOfReasonHeader						[55] ListOfReasonHeader OPTIONAL,
+	routeHeaderReceived						[59] OCTET STRING OPTIONAL,
+	routeHeaderTransmitted					[60] OCTET STRING OPTIONAL,
+	listOfCalledIdentityChanges				[63] SEQUENCE OF CalledIdentityChange OPTIONAL
+}
+
+--
+--  IMS DATA TYPES
+--
+
+AccessCorrelationID		::= CHOICE
+{
+	gPRS-Charging-Id					[2] INTEGER (0..4294967295),
+	accessNetworkChargingIdentifier	[4] GraphicString
+}
+
+AccessNetworkInfoChange		::= SEQUENCE
+{
+	accessNetworkInformation 			 [0] OCTET STRING OPTIONAL,
+	additionalAccessNetworkInformation	 [1] OCTET STRING OPTIONAL,
+	accessChangeTime                 	 [2] TimeStamp OPTIONAL,
+	cellularNetworkInformation			 [3] OCTET STRING OPTIONAL
+}
+
+AccessTransferType	::= ENUMERATED
+{
+	pSToCS (0),
+	cSToPS (1) ,
+	pSToPS (2),
+	cSToCS (3)
+}
+
+
+AccessTransferInformation		::= SEQUENCE
+{
+	accessTransferType 		 			 [0] AccessTransferType OPTIONAL,
+	accessNetworkInformation 			 [1] OCTET STRING OPTIONAL,
+	additionalAccessNetworkInformation	 [2] OCTET STRING OPTIONAL,
+	inter-UE-Transfer					 [3] NULL OPTIONAL,
+	relatedICID							 [4] IMS-Charging-Identifier OPTIONAL,
+	relatedICIDGenerationNode			 [5] NodeAddress OPTIONAL,
+	accessTransferTime                 	 [6] TimeStamp OPTIONAL,
+	subscriberEquipmentNumber			 [7] SubscriberEquipmentNumber OPTIONAL,
+	instanceId							 [8] OCTET STRING OPTIONAL,
+	cellularNetworkInformation			 [9] OCTET STRING OPTIONAL
+}
+
+ACRInterimLost		::= ENUMERATED
+{
+	no		(0),
+	yes		(1),
+	unknown	(2)
+}
+
+AoCCostInformation		::= SEQUENCE
+{
+	accumulatedCost		[0] REAL,
+	incrementalCost		[1] REAL,
+	currencyCode			[2] INTEGER
+}
+
+AoCInformation ::= SET
+{
+	tariffInformation		[0] TariffInformation OPTIONAL,
+	aoCCostInformation		[1] AoCCostInformation OPTIONAL
+}
+
+ApplicationServersInformation	::= SEQUENCE
+{
+	applicationServersInvolved 			[0] NodeAddress OPTIONAL,
+	applicationProvidedCalledParties		[1] SEQUENCE OF InvolvedParty OPTIONAL,
+	sTatus								[2] Status OPTIONAL
+}
+
+CalledIdentityChange	::= SEQUENCE
+{
+calledIdentity	[0]	InvolvedParty OPTIONAL,
+changeTime		[1] TimeStamp OPTIONAL
+}
+
+CarrierSelectRouting	::= GraphicString
+
+CauseForRecordClosing	::= ENUMERATED
+{
+	serviceDeliveryEndSuccessfully	(0),
+	unSuccessfulServiceDelivery		(1),
+	timeLimit						(3),
+	serviceChange					(4), -- e.g. change in media due to Re-Invite, 
+										 -- Access Transfer
+	managementIntervention			(5)  -- partial record generation reasons to be added
+										 --  Additional codes are for further study
+}
+
+Early-Media-Components-List	::= SEQUENCE
+{
+	sDP-Offer-Timestamp 		[0] TimeStamp OPTIONAL,
+	sDP-Answer-Timestamp		[1] TimeStamp OPTIONAL,
+	sDP-Media-Components		[2] SEQUENCE OF SDP-Media-Component OPTIONAL,
+	mediaInitiatorFlag		[3] NULL OPTIONAL,
+	sDP-Session-Description	[4] SEQUENCE OF GraphicString OPTIONAL,
+	sDP-Type					[5] SDP-Type OPTIONAL
+}
+
+IMS-Charging-Identifier	::= OCTET STRING
+
+IMSCommunicationServiceIdentifier	::= OCTET STRING
+
+Incomplete-CDR-Indication	::= SET 
+{
+	aCRStartLost		[0] BOOLEAN,		-- TRUE if ACR[Start] was lost, FALSE otherwise
+	aCRInterimLost	[1] ACRInterimLost,
+	aCRStopLost		[2] BOOLEAN			-- TRUE if ACR[Stop] was lost, FALSE otherwise
+}
+
+InterOperatorIdentifierList ::= SEQUENCE OF InterOperatorIdentifiers
+
+InterOperatorIdentifiers ::= SEQUENCE
+{
+	originatingIOI	[0] GraphicString OPTIONAL,
+	terminatingIOI	[1] GraphicString OPTIONAL
+}
+
+InvolvedParty ::= CHOICE 
+{
+	sIP-URI		[0] GraphicString, -- refer to rfc3261 [401]
+	tEL-URI		[1] GraphicString,	-- refer to rfc3966 [402]
+		uRN		[2] GraphicString,	-- refer to rfc5031 [407]
+	iSDN-E164 	[3] GraphicString	-- refer to ITU-T Recommendation E.164[308]
+}
+
+ISUPCause	::= SEQUENCE
+{
+	iSUPCauseLocation 		[0] INTEGER OPTIONAL,
+	iSUPCauseValue			[1] INTEGER OPTIONAL,
+	iSUPCauseDiagnostics		[2] OCTET STRING OPTIONAL
+}
+
+ListOfInvolvedParties	::= SEQUENCE OF InvolvedParty
+
+ListOfReasonHeader	::= SEQUENCE OF ReasonHeaderInformation
+
+Media-Components-List	::= SEQUENCE 
+--
+--	MediaInitiatorParty is used to identify the initiator of the media 
+--	multi-participants session e.g. in AS PoC Server
+--
+{
+	sIP-Request-Timestamp 			[0] TimeStamp OPTIONAL,
+	sIP-Response-Timestamp			[1] TimeStamp OPTIONAL,
+	sDP-Media-Components			[2] SEQUENCE OF SDP-Media-Component OPTIONAL,
+	mediaInitiatorFlag				[3] NULL OPTIONAL,
+	sDP-Session-Description			[4] SEQUENCE OF GraphicString OPTIONAL,
+	mediaInitiatorParty				[5] InvolvedParty OPTIONAL,
+	sIP-Request-Timestamp-Fraction	[6] Milliseconds OPTIONAL,
+	sIP-Response-Timestamp-Fraction	[7] Milliseconds OPTIONAL,
+	sDP-Type						[8] SDP-Type OPTIONAL
+}
+
+MessageBody	::= SEQUENCE 
+{
+	content-Type				[0] GraphicString,
+	content-Disposition		[1] GraphicString OPTIONAL,
+	content-Length			[2] INTEGER,
+	originator				[3] InvolvedParty OPTIONAL
+}
+
+Milliseconds	::= INTEGER (0..999)
+
+NNI-Information		::= SEQUENCE
+{
+	sessionDirection		[0] SessionDirection OPTIONAL,
+	nNIType				[1] NNIType OPTIONAL,
+	relationshipMode		[2] RelationshipMode OPTIONAL,
+	neighbourNodeAddress	[3] IPAddress OPTIONAL
+}
+
+NNIType		::= ENUMERATED
+{
+	non-roaming					(0),
+	roaming-without-loopback		(1),
+	roaming-with-loopback		(2)
+}
+
+NumberPortabilityRouting		::= GraphicString
+
+RateElement		::= SEQUENCE
+{
+	unitType				[0] INTEGER,
+	unitValue			[1] REAL,
+	unitCost				[2] REAL,
+	unitQuotaThreshold	[3] REAL
+}
+
+RealTimeTariffInformation ::= CHOICE
+{
+	tariffInformation		[0] TariffInformation,
+	tariffXml				[1] UTF8String 
+}
+
+ReasonHeaderInformation ::= GraphicString
+
+RelationshipMode ::= ENUMERATED
+{
+	trusted		(0),
+	non-trusted	(1)
+}
+
+Role-of-Node	::= ENUMERATED
+{
+	originating	(0),
+	terminating	(1)
+}
+
+S-CSCF-Information	::= SEQUENCE
+{
+	mandatoryCapabilities 	[0] SEQUENCE OF GraphicString OPTIONAL,
+	optionalCapabilities	[1] SEQUENCE OF GraphicString OPTIONAL,
+	serverName 				[2] GraphicString OPTIONAL
+}
+
+SDP-Media-Component ::=  SEQUENCE
+{
+	sDP-Media-Name        			[0] GraphicString OPTIONAL,
+	sDP-Media-Descriptions			[1] SDP-Media-Description OPTIONAL,
+	accessCorrelationID					AccessCorrelationID OPTIONAL, -- not used in MGCF
+									-- [2] is used by gPRS-Charging-Id
+									-- [4] is used by accessNetworkChargingIdentifier
+	localGWInsertedIndication		[5] BOOLEAN OPTIONAL,
+	iPRealmDefaultIndication		[6] BOOLEAN OPTIONAL,
+	transcoderInsertedIndication	[7] BOOLEAN OPTIONAL
+}
+
+SDP-Media-Description	::= SEQUENCE OF GraphicString
+
+ServedPartyIPAddress	::=  IPAddress 
+
+Service-Id	::= GraphicString
+
+Session-Id	::= GraphicString
+--
+-- rfc3261 [401]: example for SIP CALL-ID: f81d4fae-7dec-11d0-a765-00a0c91e6bf6@foo.bar.com
+--
+
+SessionDirection	::= ENUMERATED
+{
+	inbound		(0),
+	outbound		(1)
+}
+
+SessionPriority	::= ENUMERATED
+--
+-- PRIORITY-4 is the highest priority and Priority-0 is the lowest priority.
+--
+{
+	pRIORITY-0 (0),
+	pRIORITY-1 (1),
+	pRIORITY-2 (2),
+	pRIORITY-3 (3),
+	pRIORITY-4 (4)
+}
+
+SIP-Method	::= GraphicString
+
+SDP-Type	::= ENUMERATED
+{
+	sDP-offer	(0),
+	sDP-answer	(1)
+}
+
+Status		::= ENUMERATED
+{
+	fourxx			(0),
+	fivexx			(1),
+	time-out			(2)
+}
+
+TADIdentifier		::= ENUMERATED
+{
+	cS		(0),
+	pS		(1)
+}
+
+TariffInformation ::= SEQUENCE
+{
+	currencyCode			[0] INTEGER,
+	scaleFactor			[1] REAL,
+	rateElements			[2] SEQUENCE OF RateElement OPTIONAL
+}
+
+TransitIOILists ::= SEQUENCE OF GraphicString
+
+TransmissionMedium ::= SEQUENCE
+{
+	tMR	[0] OCTET STRING (SIZE (1)) OPTIONAL, -- required TM, refer to Q.763
+	tMU	[1] OCTET STRING (SIZE (1)) OPTIONAL  -- used TM, refer to Q.763
+}
+
+TrunkGroupID ::= CHOICE
+{
+	incoming	[0] GraphicString,
+	outgoing	[1] GraphicString
+}
+
+END

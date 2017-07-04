@@ -1,0 +1,108 @@
+LdapSystemSchema {joint-iso-itu-t ds(5) module(1) ldapSystemSchema(38) 7}
+DEFINITIONS ::=
+BEGIN
+
+-- EXPORTS All 
+-- The types and values defined in this module are exported for use in the other ASN.1
+-- modules contained within the Directory Specifications, and for the use of other
+-- applications which will use them to access Directory services. Other applications
+-- may use them for their own purposes, but this will not constrain extensions and
+-- modifications needed to maintain or improve the Directory service.
+
+IMPORTS
+
+  -- from Rec. ITU-T X.501 | ISO/IEC 9594-2
+
+  directoryAbstractService, id-lat, id-oat, informationFramework,
+  selectedAttributeTypes
+    FROM UsefulDefinitions {joint-iso-itu-t ds(5) module(1) usefulDefinitions(0) 7}
+ 
+  ATTRIBUTE, DistinguishedName, SYNTAX-NAME
+    FROM InformationFramework informationFramework
+
+  -- from Rec. ITU-T X.511 | ISO/IEC 9594-3
+
+  ub-saslMechanism
+    FROM  DirectoryAbstractService directoryAbstractService
+
+  -- from Rec. ITU-T X.520 | ISO/IEC 9594-6
+
+  directoryString, DirectoryString{}, dn, ia5String, integer, ldapSyntaxDescription,
+  objectIdentifierFirstComponentMatch, oid, UnboundedDirectoryString
+    FROM  SelectedAttributeTypes selectedAttributeTypes;
+
+namingContexts ATTRIBUTE ::= {
+  WITH SYNTAX              DistinguishedName
+  USAGE                    dSAOperation
+  LDAP-SYNTAX              dn.&id
+  LDAP-NAME                {"namingContexts"}
+  ID                       id-lat-namingContexts }
+
+altServer ATTRIBUTE ::= {
+  WITH SYNTAX              IA5String
+  USAGE                    dSAOperation
+  LDAP-SYNTAX              ia5String.&id
+  LDAP-NAME                {"altServer"}
+  ID                       id-lat-altServer }
+
+supportedExtension ATTRIBUTE ::= {
+  WITH SYNTAX              OBJECT IDENTIFIER
+  USAGE                    dSAOperation
+  LDAP-SYNTAX              oid.&id
+  LDAP-NAME                {"supportedExtension"}
+  ID                       id-lat-supportedExtension }
+
+supportedControl ATTRIBUTE ::= {
+  WITH SYNTAX              OBJECT IDENTIFIER
+  USAGE                    dSAOperation
+  LDAP-SYNTAX              oid.&id
+  LDAP-NAME                {"supportedControl"}
+  ID                       id-lat-supportedControl }
+
+supportedSASLMechanisms ATTRIBUTE ::= {
+  WITH SYNTAX              DirectoryString{ub-saslMechanism}
+  USAGE                    dSAOperation
+  LDAP-SYNTAX              directoryString.&id
+  LDAP-NAME                {"supportedSASLMechanisms"}
+  ID                       id-lat-supportedSASLMechanisms }
+
+supportedLDAPVersion ATTRIBUTE ::= {
+  WITH SYNTAX              INTEGER
+  USAGE                    dSAOperation
+  LDAP-SYNTAX              integer.&id
+  LDAP-NAME                {"supportedLDAPVersion"}
+  ID                       id-lat-supportedLDAPVersion }
+
+supportedFeatures ATTRIBUTE ::= {
+  WITH SYNTAX              OBJECT IDENTIFIER
+  USAGE                    dSAOperation
+  LDAP-SYNTAX              oid.&id
+  LDAP-NAME                {"supportedFeatures"}      
+  ID                       id-oat-supportedFeatures }
+
+ldapSyntaxes ATTRIBUTE ::= {
+  WITH SYNTAX              LdapSyntaxDescription
+  EQUALITY MATCHING RULE   objectIdentifierFirstComponentMatch
+  USAGE                    directoryOperation
+  LDAP-SYNTAX              ldapSyntaxDescription.&id
+  LDAP-NAME                {"ldapSyntax"}
+  ID                       id-soa-ldapSyntaxes }
+
+LdapSyntaxDescription ::= SEQUENCE {
+  identifier               SYNTAX-NAME.&id,
+  description              UnboundedDirectoryString OPTIONAL,
+  ... }
+
+-- Attributes 
+
+id-lat-namingContexts                     OBJECT IDENTIFIER ::= {id-lat 5}
+id-lat-altServer                          OBJECT IDENTIFIER ::= {id-lat 6}
+id-lat-supportedExtension                 OBJECT IDENTIFIER ::= {id-lat 7}
+id-lat-supportedControl                   OBJECT IDENTIFIER ::= {id-lat 13}
+id-lat-supportedSASLMechanisms            OBJECT IDENTIFIER ::= {id-lat 14}
+id-lat-supportedLDAPVersion               OBJECT IDENTIFIER ::= {id-lat 15}
+id-soa-ldapSyntaxes                       OBJECT IDENTIFIER ::= {id-lat 16}
+
+id-oat-supportedFeatures                  OBJECT IDENTIFIER ::= {id-oat 5}
+
+END -- LdapSystemSchema

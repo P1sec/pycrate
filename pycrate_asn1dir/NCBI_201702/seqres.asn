@@ -1,0 +1,55 @@
+--$Revision: 6.0 $
+--**********************************************************************
+--
+--  NCBI Sequence Analysis Results (other than alignments)
+--  by James Ostell, 1990
+--
+--**********************************************************************
+
+NCBI-Seqres DEFINITIONS ::=
+BEGIN
+
+EXPORTS Seq-graph;
+
+IMPORTS Seq-loc FROM NCBI-Seqloc;
+
+--*** Sequence Graph ********************************
+--*
+--*   for values mapped by residue or range to sequence
+--*
+
+Seq-graph ::= SEQUENCE {
+    title VisibleString OPTIONAL ,
+    comment VisibleString OPTIONAL ,
+    loc Seq-loc ,                       -- region this applies to
+    title-x VisibleString OPTIONAL ,    -- title for x-axis
+    title-y VisibleString OPTIONAL ,
+    comp INTEGER OPTIONAL ,             -- compression (residues/value)
+    a REAL OPTIONAL ,                   -- for scaling values
+    b REAL OPTIONAL ,                   -- display = (a x value) + b
+    numval INTEGER ,                    -- number of values in graph
+    graph CHOICE {
+        real Real-graph ,
+        int Int-graph ,
+        byte Byte-graph } }
+
+Real-graph ::= SEQUENCE {
+    max REAL ,                          -- top of graph
+    min REAL ,                          -- bottom of graph
+    axis REAL ,                         -- value to draw axis on
+    values SEQUENCE OF REAL }
+
+Int-graph ::= SEQUENCE {
+    max INTEGER ,
+    min INTEGER ,
+    axis INTEGER ,
+    values SEQUENCE OF INTEGER } 
+
+Byte-graph ::= SEQUENCE {              -- integer from 0-255
+    max INTEGER ,
+    min INTEGER ,
+    axis INTEGER ,
+    values OCTET STRING }
+
+END
+

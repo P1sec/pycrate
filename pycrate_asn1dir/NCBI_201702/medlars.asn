@@ -1,0 +1,28 @@
+--$Revision: 6.0 $
+--**********************************************************************
+--
+--  MEDLARS data definitions
+--  Grigoriy Starchenko, 1997
+--
+--**********************************************************************
+
+NCBI-Medlars DEFINITIONS ::=
+BEGIN
+
+EXPORTS Medlars-entry, Medlars-record;
+
+IMPORTS PubMedId FROM NCBI-Biblio;
+
+Medlars-entry ::= SEQUENCE {     -- a MEDLARS entry
+    pmid PubMedId,               -- All entries in PubMed must have it
+    muid INTEGER OPTIONAL,       -- Medline(OCCS) id
+    recs SET OF Medlars-record   -- List of Medlars records
+}
+
+Medlars-record ::= SEQUENCE {
+    code INTEGER,                -- Unit record field type integer form
+    abbr VisibleString OPTIONAL, -- Unit record field type abbreviation form
+    data VisibleString           -- Unit record data
+}
+
+END

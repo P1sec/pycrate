@@ -1,0 +1,28 @@
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- ISO TS 14906 Generic
+--
+-- This ASN.1 was generateds: 30.08.2016
+--
+-- This document contains only the data element needed for the encoding of an IVI message
+-- as defined in ISO TS 19321(2015) 
+--
+-- Published version location:
+-- http://standards.iso.org/iso/14906
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+EfcDsrcGeneric { iso(1) standard(0) 14906 generic(1) version5(5) }
+
+DEFINITIONS AUTOMATIC TAGS ::= BEGIN
+EXPORTS ALL;
+
+AttributeIdList ::= SEQUENCE (SIZE(0.. 127,...)) OF INTEGER(0..127,...)
+
+AttributeList{Container} ::= SEQUENCE (SIZE(0..127,...)) OF Attributes{Container}
+
+Attributes{Container} ::= SEQUENCE {
+	attributeId INTEGER (0..127,...),
+	attributeValue Container
+}
+
+
+END

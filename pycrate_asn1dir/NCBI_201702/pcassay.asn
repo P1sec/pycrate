@@ -1,0 +1,475 @@
+-- $Id: pcassay.asn 282508 2011-05-11 22:47:31Z ywang $
+-- ===========================================================================
+--
+--                            PUBLIC DOMAIN NOTICE
+--               National Center for Biotechnology Information
+--
+--  This software/database is a "United States Government Work" under the
+--  terms of the United States Copyright Act.  It was written as part of
+--  the author's official duties as a United States Government employee and
+--  thus cannot be copyrighted.  This software/database is freely available
+--  to the public for use. The National Library of Medicine and the U.S.
+--  Government have not placed any restriction on its use or reproduction.
+--
+--  Although all reasonable efforts have been taken to ensure the accuracy
+--  and reliability of the software and data, the NLM and the U.S.
+--  Government do not and cannot warrant the performance or results that
+--  may be obtained by using this software or data. The NLM and the U.S.
+--  Government disclaim all warranties, express or implied, including
+--  warranties of performance, merchantability or fitness for any particular
+--  purpose.
+--
+--  Please cite the author in any work or product based on this material.
+--
+-- ===========================================================================
+--
+-- Authors:  NCBI Structure Group
+--
+-- File Description:
+--      ASN.1 definitions for PubChem biological assay data database
+--
+-- ===========================================================================
+
+NCBI-PCAssay DEFINITIONS ::= BEGIN
+
+IMPORTS Pub                              FROM NCBI-Pub
+        BioSource                        FROM NCBI-BioSource 
+        Date, Object-id                  FROM NCBI-General
+        PC-ID, PC-Source, PC-XRefData    FROM NCBI-PCSubstance;
+
+-- EXPORTS ;
+
+
+-- Container for multiple Assay Data Submissions
+PC-AssayContainer ::= SEQUENCE OF PC-AssaySubmit
+
+
+-- Container for Data Depositions and Assay Definitions
+PC-AssaySubmit ::= SEQUENCE {
+    assay             CHOICE {                               -- Assay Description or pre-existing Identifier
+                          aid           INTEGER,             --   Assay Identifier
+                          aid-source    PC-Source,           --   External Assay Identifier
+                          descr         PC-AssayDescription, --   Assay Description (new or updated)
+                          aidver        PC-ID                --   Assay Identifier/Version (for internal use)
+                      },
+    data              SEQUENCE OF PC-AssayResults  OPTIONAL, -- Assay Data Deposition (vector)
+    revoke            SEQUENCE OF INTEGER          OPTIONAL  -- List of SID's whose data is to be suppressed
+}
+
+
+-- Container for multiple Assay Result Sets
+-- PC-AssayResultsSet ::= SEQUENCE OF PC-AssayResults
+
+
+-- Assay Results provided for a given Substance tested, with respect to the results types defined in the 
+--   referenced Assay Description
+PC-AssayResults ::= SEQUENCE {
+    -- Internal/External Tracking Information
+    sid               INTEGER,                               -- Tested Substance ID/Version  [Either valid ID or, 
+                                                             --   if "sid-source" is used, this is a "0" value]
+                                                             --   Note: A valid ID is greater than "0"
+    sid-source        PC-Source                    OPTIONAL, -- External Identifier for this Substance
+                                                             --   Note: May be used in-lieu of "sid"
+                                                             --   Note: This is non-optional if "sid" is "0"
+    version           INTEGER                      OPTIONAL, -- Version identifier for this AID-SID Result
+                                                             --   Note: Incoming data should set this to be "0"
+
+    -- Data Annotation/Qualifier and URL to further Depositor Information
+    comment           VisibleString                OPTIONAL, -- Annotation or qualifier for this Result
+
+    -- Assay Result Data for this Sample
+    --   Note: Users need populate only those "tid"s, for which there is data, in any order.
+    outcome           INTEGER {                              -- Assay Outcome
+                          inactive        (1),               --   Substance is considered Inactive
+                          active          (2),               --   Substance is considered Active
+                          inconclusive    (3),               --   Substance is Inconclusive
+                          unspecified     (4),               --   Substance Outcome is Unspecified
+                          probe           (5)                --   Substance Outcome is Unspecified
+                      }               DEFAULT unspecified,
+    rank              INTEGER                      OPTIONAL, -- Rank of Assay Outcome (for result ordering)
+                                                             --   Note: Larger numbers are more active
+    data              SEQUENCE OF PC-AssayData     OPTIONAL, -- Assay Data Reported for this SID (vector)
+    url               VisibleString                OPTIONAL, -- Depositor provided URL for this Result
+    xref              SEQUENCE OF PC-AnnotatedXRef OPTIONAL, -- annotated Cross-Reference Information
+                                                             -- to be removed, 
+                                                             -- instead regulard TID will be generated
+                                                             -- which are then annotated by xref type
+    date              Date                         OPTIONAL  -- Pubchem Release Date
+
+}
+
+
+-- Assay Readouts/Results for a Tested Substance
+PC-AssayData ::= SEQUENCE {
+    tid               INTEGER,                            -- Assay Result Field Type ID (TID)
+                                                          --   Note: Result Field ID's must be greater than "0"
+    value             CHOICE {                            -- Assay Result, must be the same type as defined for TID
+                          ival    INTEGER,
+                          fval    REAL,
+                          bval    BOOLEAN,
+                          sval    VisibleString
+                      }
+}
+
+
+-- Assay Description provided by an Organization that describes the assay/protocol performed and defines the 
+--   measured end-points and parameters to be stored.  An Assay Description is not a database table.  You can 
+--   define as many Result Definitions as needed and they need not be used by all Substances tested.
+-- Assay Descriptions can be modified on both description text and Result Definitions after initial submission
+-- as desired, and such udpates will be tracked in PubChem
+
+PC-AssayDescription ::= SEQUENCE {
+    -- Internal/External Tracking Information
+    aid               PC-ID,                                 -- Assay Description ID/Version  [Either valid ID
+                                                             --   or, if "aid-source" is used, a "0" dummy value]
+                                                             --   Note: Version is for internal use (only?)
+                                                             --   Note: A valid ID is greater than "0"
+    aid-source        PC-Source                    OPTIONAL, -- External Identifier for this Assay Description
+                                                             --   Note: May be used in-lieu of "aid"
+                                                             --   Note: This is non-optional if "aid" ID is "0"
+
+    -- Assay Description Information
+    name              VisibleString,                         -- Short Assay Name (for display purposes)
+    description       SEQUENCE OF VisibleString    OPTIONAL, -- Description of Assay
+    protocol          SEQUENCE OF VisibleString    OPTIONAL, -- Procedure used to generate results
+    comment           SEQUENCE OF VisibleString    OPTIONAL, -- Comments or additional information
+    xref              SEQUENCE OF PC-AnnotatedXRef OPTIONAL, -- Annotated Cross-Reference Information
+
+    -- Allowed Assay Result Types
+    results           SEQUENCE OF PC-ResultType    OPTIONAL,             -- Result Definitions (vector)
+
+    -- Additional Information
+    pub               SEQUENCE OF Pub                 OPTIONAL, -- Depositor provided publications for this assay
+    revision          INTEGER                         OPTIONAL, -- Revision identifier for textual description
+    target            SEQUENCE OF PC-AssayTargetInfo  OPTIONAL, -- Target information
+    activity-outcome-method  INTEGER  {                         -- Assay Outcome Qualifier
+                               other              (0),          --   All Other Type
+                               screening          (1),          --   Primary Screen Assay
+                               confirmatory       (2),          --   Confirmatory Assay
+                               summary            (3)          --   Probe Summary Assay
+    }                                                 OPTIONAL,
+
+    dr                SEQUENCE OF PC-AssayDRAttr      OPTIONAL, -- Dose-Response Attribution
+    substance-type    INTEGER{
+                         small-molecule                (1),
+                         nucleotide                    (2),
+                         other                         (255)
+                      }   OPTIONAL,                             -- to distinguish the type of substance used in the screening
+
+    -- Grant and project category information
+    grant-number      SEQUENCE OF VisibleString     OPTIONAL,               -- grant proposal number
+                                                                -- required for 'MLSCN' & 'MLPCN' projects
+    project-category  INTEGER{
+                        mlscn    (1),
+                        mlpcn    (2),
+                        mlscn-ap (3),
+                        mlpcn-ap (4),
+                        journal-article (5), -- to be deprecated
+                        assay-vendor (6),
+                        literature-extracted (7), 
+                        literature-author (8), 
+                        literature-publisher (9), 
+                        rnaigi (10),
+                        other    (255)
+                      }                 OPTIONAL,               -- to distinguish projects funded through MLSCN, MLPCN or other
+                                                                -- mlscn: assay depositions from MLSCN screen center
+                                                                -- mlpcn: assay depositions from MLPCN screen center
+                                                                -- mlscn-ap: assay depositions from MLSCN assay provider
+                                                                -- mlpcn-ap: assay depositions from MLPCN assay provider
+                                                                -- required for 'MLSCN' & 'MLPCN' projects
+                                                                -- journal-article: to be deprecated; replaced by option 7,8 & 9 to better characterize data from literature 
+                                                                -- literature-extracted: data from literature, extracted by curators
+                                                                -- literature-author: data from literature, submitted by author of articles
+                                                                -- literature-publisher: data from literature, submitted by journals/publishers
+                                                                -- rnaigi: RNAi screenings from RNAi Global Initiative 
+
+    -- annotation to indicate whether an assay is a panel, e.g. containing multiple components, or belongs to a group    
+    is-panel          BOOLEAN    OPTIONAL,                      -- annotation for panel assay, e.g. to indicate that this assay
+                                                                -- contains multiple members/components. 
+                                                                -- A panel assay can be one assay reporting readouts for
+                                                                -- many targets, or reporting readouts for different
+                                                                -- cell lines, or different organisms
+                                                                -- examples such as bioassay containing kinase profiling data
+                                                                -- or bioassay containing cytoxicity data for multiple cell lines
+                                                                -- or bioassay containing screening data from different stages, 
+                                                                -- such as primary screening, follow ups
+    assay-group       SEQUENCE OF VisibleString   OPTIONAL,     -- annotation for assay gruop information, e.g. this 
+                                                                -- assay belongs to a group of assay associated by 
+                                                                -- a unique name, e.g. the value assigned to 'assay-group',  
+                                                                -- assays belonging to this group can be 
+                                                                -- retrieved using this unique name
+                                                                -- it is depositor's responsibility to make the name 
+                                                                -- distinct if necessary
+                                                                -- this can be used as the mechanism to specify 'related bioassays'
+                                                                -- before hand so it is not necessary to update the descriptions of
+                                                                -- related assays when new group member submitted to PubChem 
+
+    panel-info        PC-AssayPanel     OPTIONAL,               -- for 'panel' type of bioassay only
+                                                                -- store assay panel member information
+    is-mlp-late-stage       BOOLEAN OPTIONAL,                   -- verification for 'late-stage-data' deposition
+    categorized-comment SEQUENCE OF PC-CategorizedComment OPTIONAL
+                                                                -- to report categorized description/comment by associating with a category title 
+}
+
+-- Description for Panel Assay
+-- Describe general information about the panel, and link to information for each panel member 
+PC-AssayPanel ::= SEQUENCE {
+    name      VisibleString,                                    -- short name for the panel, such as 'Kinase Profiling'
+    descr     VisibleString                        OPTIONAL,    -- short description of this panel
+    member    SEQUENCE OF PC-AssayPanelMember      OPTIONAL     -- store panel member information
+}
+
+-- Specific information about each panel member(or component), such as target, cell line name, cross-reference ... 
+PC-AssayPanelMember ::= SEQUENCE {   
+    mid        INTEGER,                                         -- ID for panel member 
+                                                                -- if a kinase panel with 300 kinases, ID will range from 1 to 300  
+                                                                -- TIDs of the same panel member to be grouped based on panel member ID
+    name           VisibleString  OPTIONAL,                          -- short name for this panel member 
+    description     VisibleString  OPTIONAL,                     -- description about specifics of this panel member
+                                                                -- such as about cell line, or target information 
+    protocol       SEQUENCE OF VisibleString    OPTIONAL,       -- Specific procedure used to generate results for the panel member
+    comment        SEQUENCE OF VisibleString    OPTIONAL,       -- Comments or additional information
+    target         SEQUENCE OF PC-AssayTargetInfo  OPTIONAL,    -- often provided for profiling assays across protein families
+    xref           SEQUENCE OF PC-AnnotatedXRef    OPTIONAL,    -- annotated Cross-Reference Information
+    activity-outcome-method  INTEGER  {                         -- Assay Outcome Qualifier
+                               other              (0),          --   All Other Type
+                               screening          (1),          --   Primary Screen Assay
+                               confirmatory       (2),          --   Confirmatory Assay
+                               summary            (3)           --   Probe Summary Assay
+                             }                        OPTIONAL,
+    dr                SEQUENCE OF PC-AssayDRAttr      OPTIONAL,  -- Dose-Response Attribution within the panel member
+    categorized-comment SEQUENCE OF PC-CategorizedComment OPTIONAL
+                                                                -- to report categorized description/comment by associating with a category title 
+} 
+
+-- Definition for Categorized description/comment 
+-- This field is added to provide flexibility for depositors to present textual description/comments in a desirable way 
+-- and to facilitate information validation by the depositor and data exchange with PubChem 
+PC-CategorizedComment ::= SEQUENCE {
+    title     VisibleString,                                    -- title for the description/comment
+    comment   SEQUENCE OF VisibleString                                     -- description/comment content
+}
+
+--  Assay Dose-response attribute information used to define a set of readouts
+--    as being part of a dose-response curve (for curve plotting/analysis)
+PC-AssayDRAttr ::=SEQUENCE {
+    id                INTEGER,                               -- Unique dose-response test set identifier
+                                                             --   Note: A valid ID is greater than "0"
+    descr             VisibleString               OPTIONAL,  -- Dose-Response Curve Description (used as curve title)
+    dn                VisibleString               OPTIONAL,  -- Dose Axis Description (used as axis name)
+    rn                VisibleString               OPTIONAL,  -- Response Axis Description (used as axis name)
+    type              INTEGER {
+                        experimental (0),                    -- dose-response data points measured directly by experiment
+                        calculated   (1)                     -- dose-response data points derived from fitted curve
+                      }          OPTIONAL
+}
+
+
+-- Molecular target information provides by organization describes the functionality of the target, 
+-- facilitates the linking between PubChem bioassays, and the linking between target molecule to other NCBI resources
+PC-AssayTargetInfo ::= SEQUENCE {
+   name                    VisibleString,                     -- Molecular name of target
+   mol-id                  INTEGER,                           -- NCBI database identifier of the target molecule
+   molecule-type           INTEGER {                          -- Assay Target Type
+                               protein            (1),        -- mol-id: NCBI Protein GI 
+                               dna                (2),        -- mol-id: NCBI Nucleotide GI
+                               rna                (3),        -- mol-id: NCBI Nucleotide GI
+                               gene               (4),        -- mol-id: NCBI Gene ID
+                               biosystem          (5),        -- mol-id: NCBI BioSystems ID
+                               other              (255)
+                           }                DEFAULT protein,
+   organism                BioSource               OPTIONAL,  -- Target Organism
+   descr                   VisibleString           OPTIONAL,  -- Target Description  (e.g., cellular functionality and location)
+   comment                 SEQUENCE OF VisibleString           OPTIONAL   -- Comments or Additional Information
+}
+
+-- Annotated Cross-Reference (XRef) Information to allow the XRef to be qualified, as to its meaning or context
+PC-AnnotatedXRef ::= SEQUENCE {
+    xref              PC-XRefData,                    -- Cross-Reference Information
+    comment           VisibleString         OPTIONAL,  -- Annotation qualifier describing Cross-Reference meaning
+    type              INTEGER {
+                         pcit        (1),             -- primary PMID/citation directly associated with the current assay data 
+                         pgene       (2)              -- gene encoding the protein assay target
+                      }                     OPTIONAL
+}
+
+-- Definition of Allowed Result Types for a given Assay
+PC-ResultType ::= SEQUENCE {
+    -- Tracking or Description Information
+    tid               INTEGER,                             -- Assay Result Field Type ID (TID)
+    name              VisibleString,                       -- Result Field Name (short name for display)
+    description       SEQUENCE OF VisibleString  OPTIONAL, -- Result Field Description
+
+    -- Result Data Type and Validation Information
+    type             INTEGER {                             -- Result Data Type
+                         float            (1),
+                         int              (2),
+                         bool             (3),
+                         string           (4)
+                     },
+    constraints      CHOICE {                              -- Allowed Values, used for validating incoming data
+                         -- If type is "float"
+                         fset      SEQUENCE OF REAL,       --   Allowed values must be equal to one of these
+                         fmin      REAL,                   --   Allowed values (x) must be [ fmin <= x ]
+                         fmax      REAL,                   --   Allowed values (x) must be [ x <= fmax ]
+                         frange    PC-RealMinMax,          --   Minimum/Maximum Range [ min <= x <= max ]
+
+                         -- If type is "int"
+                         iset      SEQUENCE OF INTEGER,    --   Allowed values must be equal to one of these
+                         imin      INTEGER,                --   Allowed values (x) must be [ imin <= x ]
+                         imax      INTEGER,                --   Allowed values (x) must be [ x <= imax ]
+                         irange    PC-IntegerMinMax,       --   Minimum/Maximum Range [ min <= x <= max ]
+
+                         -- If type is "string"
+                         sset   SEQUENCE OF VisibleString  --   Allowed values must be equal to one of these
+                     }                           OPTIONAL,
+
+    -- Unit information provides the units for the values reported for this TID.  For example, if the values 
+    --   reported for this TID are a concentration, e.g., micro-molar, setting the unit "um" allows PubChem to 
+    --   know that the value, e.g., "1.3", is actually "1.3 uM".  This also allows PubChem to properly report the 
+    --   units when displaying the reported values for this TID.  If the enumerated units provided below are 
+    --   insufficient, you may represent the units as a string in the optional "sunit" field (see below).
+    unit             INTEGER {                             -- Units for Value
+                         ppt              (1),             -- Parts per Thousand
+                         ppm              (2),             -- Parts per Million
+                         ppb              (3),             -- Parts per Billion
+                         mm               (4),             -- milliM
+                         um               (5),             -- microM
+                         nm               (6),             -- nanoM
+                         pm               (7),             -- picoM
+                         fm               (8),             -- femtoM
+                         mgml             (9),             -- milligrams per mL
+                         ugml            (10),             -- micrograms per mL
+                         ngml            (11),             -- nanograms per mL
+                         pgml            (12),             -- picograms per mL
+                         fgml            (13),             -- femtograms per mL
+                         m               (14),             -- Molar
+                         percent         (15),             -- Percent
+                         ratio           (16),             -- Ratio
+                         sec             (17),             -- Seconds
+                         rsec            (18),             -- Reciprocal Seconds
+                         min             (19),             -- Minutes
+                         rmin            (20),             -- Reciprocal Minutes
+                         day             (21),             -- Days
+                         rday            (22),             -- Reciprocal Days
+                         ml-min-kg       (23),             -- milliliter / minute / kilogram
+                         l-kg            (24),             -- liter / kilogram
+                         hr-ng-ml        (25),             -- hour * nanogram / milliliter
+                         cm-sec          (26),             -- centimeter / second
+                         mg-kg           (27),             -- milligram / kilogram
+                         none           (254),
+                         unspecified    (255)
+                     }                           OPTIONAL,
+  
+    -- ATTENTION: sunit field is DEPRECATED. It is no longer
+    --            supported and remains for legacy data only.
+    sunit            VisibleString               OPTIONAL, -- Unit Type (as a String)
+  
+  
+    -- Value Transform information qualifies the values reported for this TID.  For example, if the values
+    --   reported for this TID are "-Log10 GI50", you may want to consider setting
+    --   the "nlog" value below.  In doing so, PubChem would know that the value, e.g., "5.0" 
+    --   is actually "1.0e-5".  If the transformation applied is not listed, you may represent
+    --   this transformation as a string in the "stransform" (see below) for eventual inclusion 
+    --   in the enumerated transform list below.
+    --
+    --
+    -- ATTENTION: transform field is DEPRECATED. It is no longer
+    --            supported and remains for legacy data only.
+    transform        INTEGER {                              -- Value Type Details
+                         linear           (1),              -- Linear Scale (x)
+                         ln               (2),              -- Natural Log Scale (ln x)
+                         log              (3),              -- Log Base 10 Scale (log10 x)
+                         reciprocal       (4),              -- Reciprocal Scale (1/x)
+                         negative         (5),              -- Negative Linear Scale (-x)
+                         nlog             (6),              -- Negative Log Base 10 Scale (-log10 x)
+                         nln              (7)               -- Negative Natural Log Scane (-ln x)
+			     }                           OPTIONAL,
+  
+    -- ATTENTION: stransform field is DEPRECATED. It is no longer
+    --            supported and remains for legacy data only.
+    stransform       VisibleString               OPTIONAL,  -- Value Transform Type (as a String)
+  
+  
+    tc               PC-ConcentrationAttr        OPTIONAL,  -- Tested concentration attribute
+    ac               BOOLEAN                     OPTIONAL,   -- if true, indicates that this TID field 
+                                                            -- provides active concentration summary by 
+                                                            -- reporting the concentration which produces 
+                                                            -- 50% of the maximum possible biological response
+                                                            -- such as IC50, EC50, AC50, GI50 etc. 
+                                                            -- or by reporting constant parameters such as Ki, 
+                                                            -- that based on which the activity outcome in this assay is called   
+    panel-info       PC-AssayPanelTestResult     OPTIONAL,  -- needed for panel assay only
+                                                            -- each panel member may have a number of TID columns reported
+                                                            -- such TIDs are grouped by panel member ID, see PC-AssayPanelMemberInfo
+    annot            INTEGER {
+                           pmid  (1),                       -- PubMed ID
+                           mmdb  (2),                       -- MMDB ID
+                           url   (3),                       -- indicate  TID data is a url that provides supplementary information
+                           protein-gi (4),                  -- GenBank General ID (GI) for a Protein
+                           nucleotide-gi (5),               -- GenBank General ID (GI) for a Nucleotide 
+                           taxonomy (6),                    -- Taxonomy ID for an Organism
+                           mim(7),                          -- MIM, Mendelian Inheritance in Man, ID 
+                           gene(8),                         -- Entrez Gene ID
+                           probe(9),                        -- Entrez Probe ID
+                           aid (10),                        -- PubChem BioAssay ID, may be used in 'Summary' assay
+                           sid (11),                        -- PubChem Substance ID, may be used in 'Summary' assay 
+                           cid (12),                        -- PubChem Compound ID 
+                           protein-target-gi (13),          -- GenBank General ID (GI) for a Protein target
+                           biosystems-target-id (14),       -- NCBI BioSystems ID 
+                           target-name (15),                -- target name
+                           target-descr (16),               -- brief target description 
+                           target-tax-id (17),              -- NCBI Taxonomy ID for target molecule 
+                           gene-target-id (18),             -- NCBI Gene ID for a gene target 
+                           dna-nucleotide-target-gi (19),   -- GenBank General ID (GI) for a DNA Nucleotide target 
+                           rna-nucleotide-target-gi (20)    -- GenBank General ID (GI) for a RNA Nucleotide target 
+                     }   OPTIONAL                           -- treat substance associated cross-reference as regular TID
+                                                            -- web servers would make a link 
+                                                            -- to the corresponding record in Entrez databases
+                                                            -- treat substance associated target information as regular TID
+                                                            -- for example, for RNAi screening data, each 'substance' may
+                                                            -- correspond to a specific gene target
+}
+
+PC-AssayPanelTestResult ::= SEQUENCE {
+    mid               INTEGER,                              -- panel member ID, see PC-AssayPanelMemberInfo
+                                                            -- track association between a group of TIDs and panel member
+    readout-annot    INTEGER {
+                       regular  (1),                        -- to indicate this TID column is a regular readout
+                       outcome  (2),                        -- to indicate this TID column is  "outcome" of the particular panel member
+                       score(3),                            -- to indicate this TID column reports activity score of the particular panel member
+                                                            -- to be used for neighboring assays
+                       ac       (4)                         -- to indicate this TID column is "active concentration"   
+                                                            -- 'outcome' and 'ac' type of TID are to be used for data analysis 
+                                                            -- across members of panel
+                                                            -- or across multiple assays including other panel assays
+                    }  DEFAULT regular
+
+}
+
+--The concentration attribute is to indicate that the readout under this test result field is biological concentration-response data, the attribute provides the value and unit of the tested concentration
+PC-ConcentrationAttr ::= SEQUENCE {
+    concentration    REAL,
+    unit             INTEGER {                             -- Units for Concentration
+
+                         um               (5)              -- microM
+                     },                       
+   dr-id             INTEGER                     OPTIONAL  -- Dose-Response Attribution ID (if applicable)
+}
+
+
+-- Mininum and Maximum Constraints on an Integer Value (used for validating incoming data)
+PC-IntegerMinMax ::= SEQUENCE {
+    min               INTEGER,                             -- Minimum Value Allowed
+    max               INTEGER                              -- Maximum Value Allowed
+}
+
+
+-- Mininum and Maximum Constraints on a Real Value (used for validating incoming data)
+PC-RealMinMax ::= SEQUENCE {
+    min               REAL,                                -- Minimum Value Allowed
+    max               REAL                                 -- Maximum Value Allowed
+}
+
+
+END

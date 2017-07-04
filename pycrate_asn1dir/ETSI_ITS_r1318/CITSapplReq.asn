@@ -1,0 +1,354 @@
+--<OSS.PDU>--
+ 
+CITSapplReq {iso(1) standard(0) cits-applReq (17423) asnm-1 (1)} 
+
+DEFINITIONS AUTOMATIC TAGS::=BEGIN
+
+-- Warning: Module is still under development
+
+IMPORTS
+DataRate, Directivity, TimeUnit FROM CALMllsap {iso(1) standard(0) calm-ll-sap(21218) asnm-1(1)}
+
+VarLengthNumber2 FROM CITSapplMgmtIDs {iso(1) standard(0) cits-applMgmt (17419) ids (1)}
+
+ITSaid , FlowTypeID FROM CITSapplMgmtApplReg {iso(1) standard(0) cits-applMgmt (17419) applRegistry (2)}
+
+LogicalChannelType, MCgroup, ITSprotocolStackID FROM CITSapplMgmtComm {iso(1) standard(0) cits-applMgmt (17419) comm (3)}
+
+ApplicationID FROM CALMmanagement { iso (1) standard (0) calm-management (24102) local (1) asnm-1 (1)} 
+;
+
+-- End of IMPORTS
+
+-- Types
+
+-- Communication Requirement per communication source identified by FlowNo
+
+-- Used in REQUEST.request service primitive
+
+ITSSappCPReqReg::=SEQUENCE{
+	applicationID	ApplicationID, 
+--ID of ITS-S application process unique in an ITS-SCU
+	rxTxPort	ITSSappRxTxPort,
+	requirements	ITSSappReq
+	}
+
+ITSSappRxTxPort::=SEQUENCE{
+	portNo	ITSSappRxTxPortNo,
+	portType	ITSSappRxTxPortType
+	}
+
+ITSSappRxTxPortNo::=VarLengthNumber2
+
+ITSSappRxTxPortType::=INTEGER{
+	rxPort	(0),
+	txPort	(255)
+	} (0..255)
+
+ServiceRef::=SEQUENCE{
+	itsaid	ITSaid,
+	instance	INTEGER(0..255), -- allows for 256 instances of this app
+	flowNo	FlowNo
+	}
+
+FlowNo::=INTEGER(0..255) -- allows for 256 different flows per app
+
+
+-- Used in REQUEST.confirm service primitive
+ITSSappCPReqConf::=SEQUENCE{
+	applicationID	ApplicationID, 
+	rxTxPort	ITSSappRxTxPort, 
+	confDetails	ITSSappReqConf
+	}
+
+-- Confirmation of presented requirements
+REQSCP::=CLASS {
+	&ref	INTEGER(0..255),
+	&ReqParam
+	}
+
+-- pycrate change: @refNo -> @.refNo
+ITSSappReq::=SEQUENCE OF SEQUENCE{
+	refNo	REQSCP.&ref({Req-SCP}),
+	param	REQSCP.&ReqParam({Req-SCP}{@.refNo})
+	}
+
+REQSCPCONF::=CLASS {
+	&ref	INTEGER(0..255),
+	&ReqConfParam
+	}
+
+-- pycrate change: @refNo -> @.refNo
+ITSSappReqConf::=SEQUENCE OF SEQUENCE{
+	refNo	REQSCPCONF.&ref({ReqConf-SCP}), -- same as in request
+	param	REQSCPCONF.&ReqConfParam({ReqConf-SCP}{@.refNo})
+	}
+
+-- Notification of final decision of ITS-S application process
+ITSSappCPFinal::=SEQUENCE{
+	applicationID	ApplicationID, -- same as in .request
+	final	Logic
+	}
+
+
+--  Requirements
+
+
+Req-SCP REQSCP::={logChannel | destType | destDomain | maxAPDU | contConnect | nxRepeat | storeForward | flowType | commDistance | directivity | multiHop | reduntOp | minThP | maxLat | protocolReq | dataConfidentiality | dataIntegrity | nonReputability | dataAuthentication, ...}
+
+-- Mandatory requirements (only odd ref numbers)
+logChannel	REQSCP::={&ref 0, &ReqParam LogicalChannelType}
+destType	REQSCP::={&ref 2, &ReqParam DestinationType}
+destDomain	REQSCP::={&ref 4, &ReqParam DestDomain}
+maxAPDU	REQSCP::={&ref 6, &ReqParam MaxADU}
+
+DestinationType::=SEQUENCE{
+	fill	BIT STRING (SIZE(7)), -- all bits set to zero
+	type	DestType
+	}
+
+DestType::=CHOICE{
+	addressType	[0] AddressBasedType,
+	geoLocType	[1] GeoLocationBasedType
+	}
+
+AddressBasedType::=SEQUENCE{
+	type	INTEGER{
+			broadCast	(0),
+			multiCast	(1),
+			unicast	(2)
+		}(0..127),
+	mcGroups	SEQUENCE (SIZE(0..255)) OF MCgroup OPTIONAL
+	}
+
+GeoLocationBasedType::=SEQUENCE{
+	type	INTEGER{
+			geoUnicast	(0),
+			geoAnycast	(1),
+			geoMulticast	(2),
+			geoBroadcast	(4)
+		} (0..127),
+	mcGroups	SEQUENCE (SIZE(0..255)) OF MCgroup OPTIONAL
+	}
+
+DestDomain::=INTEGER{
+	stationInternal	(0),
+	linkLocal	(1),
+	siteLocal	(2),
+	itsNWlocal	(4),
+	global	(8)
+	} (0..255)
+
+MaxADU::=INTEGER(0..65535) -- multiples of 100 byte
+
+
+-- Optional requirements (only even ref numbers)
+contConnect	REQSCP::={&ref 1, &ReqParam ContConnect}
+nxRepeat	REQSCP::={&ref 3, &ReqParam NxRepeat}
+storeForward	REQSCP::={&ref 5, &ReqParam StoreForward}
+flowType	REQSCP::={&ref 7, &ReqParam FlowTypeID}
+commDistance	REQSCP::={&ref 9, &ReqParam CommDistance}
+directivity	REQSCP::={&ref 11, &ReqParam Directivity}
+multiHop	REQSCP::={&ref 13, &ReqParam MultiHop}
+reduntOp	REQSCP::={&ref 15, &ReqParam Resilience}
+minThP	REQSCP::={&ref 17, &ReqParam MinThP}
+maxLat	REQSCP::={&ref 19, &ReqParam MaxLat}
+protocolReq	REQSCP::={&ref 21, &ReqParam ProtocolReq}
+dataConfidentiality	REQSCP::={&ref 23, &ReqParam DataConfidentiality}
+dataIntegrity	REQSCP::={&ref 25, &ReqParam DataIntegrity}
+nonReputability	REQSCP::={&ref 27, &ReqParam ReqNonrepudiation}
+dataAuthentication	REQSCP::={&ref 29, &ReqParam DataAuthentication}
+
+ContConnect::=SEQUENCE{
+	duration	TimDurationValue,
+	interrupt	Logic -- true: session may be interrupted
+	} -- three octets in PER
+
+TimDurationValue::=SEQUENCE {
+	value	INTEGER(0..1023), -- valid parameter number (10 bits in PER)
+	unit	TimeUnit
+	} -- 16 bits in PER
+
+NxRepeat::=SEQUENCE{
+	repeat	INTEGER(0..255), -- 0 no repetition, 255 no stop until flow ends
+	interval	TimDurationValue
+	}
+
+StoreForward::=TimDurationValue
+
+CommDistance::=SEQUENCE{
+	minDistance	INTEGER(0..65535), -- m
+	cost	CostObjective
+	}
+
+MultiHop::=SEQUENCE{
+	hops	INTEGER(0..255),
+	cost	CostObjective
+	}
+
+Resilience::=CostObjective -- true: resilience requested
+
+MinThP::=SEQUENCE{
+	minThP	DataRate,
+	cost	CostObjective
+	}
+
+MaxLat::=SEQUENCE{
+	lat	INTEGER{
+	unknown	(0), -- unknown latency
+	any	(1), -- any latency - not further specified
+	ms	(2), -- response within less than 10 ms
+	ms10	(4), -- response within less than 100 ms
+	ms100	(8), -- response within less than 1 second
+	sec	(16), -- response within less than 10 seconds
+	sec10	(32), -- response within less than 1 minute
+	min	(64), -- response within less than 10 minutes
+	min10	(128) -- response within less than 1 hour
+	} (0..255),
+	cost	CostObjective
+	}
+
+ProtocolReq::=ITSprotocolStackID -- this type must be octet aligned.
+
+DataConfidentiality::=ConfValue
+
+DataIntegrity::=ConfValue
+
+ReqNonrepudiation::=ConfValue
+
+DataAuthentication::=ConfValue
+
+
+-- Confirmation requirements and objectives requested
+
+ReqConf-SCP REQSCPCONF::={logChannelConf | destTypeConf | destDomainConf | maxAPDUConf | contConnectConf | nxRepeatConf | storeForwardConf | flowTypeConf | commDistanceConf | directivityConf | multiHopConf | reduntOpConf | minThPConf | maxLatConf | protocolReqConf | dataConfidentialityConf | dataIntegrityConf | nonReputabilityConf | dataAuthenticationConf, ...}
+
+-- Mandatory (only odd ref numbers): ok (TRUE) / nok or possible values
+logChannelConf	REQSCPCONF::={&ref 0, &ReqConfParam Logic}
+destTypeConf	REQSCPCONF::={&ref 2, &ReqConfParam Logic}
+destDomainConf	REQSCPCONF::={&ref 4, &ReqConfParam Logic}
+maxAPDUConf	REQSCPCONF::={&ref 6, &ReqConfParam MaxADU}
+-- Optional (only even ref numbers): ok (TRUE) / nok or possible values
+contConnectConf	REQSCPCONF::={&ref 1, &ReqConfParam ContConnect}
+nxRepeatConf	REQSCPCONF::={&ref 3, &ReqConfParam Logic}
+storeForwardConf	REQSCPCONF::={&ref 5, &ReqConfParam Logic}
+flowTypeConf	REQSCPCONF::={&ref 7, &ReqConfParam Logic}
+commDistanceConf	REQSCPCONF::={&ref 9, &ReqConfParam CommDistance}
+directivityConf	REQSCPCONF::={&ref 11, &ReqConfParam Directivity}
+multiHopConf	REQSCPCONF::={&ref 13, &ReqConfParam Logic}
+reduntOpConf	REQSCPCONF::={&ref 15, &ReqConfParam Logic}
+minThPConf	REQSCPCONF::={&ref 17, &ReqConfParam MinThP}
+maxLatConf	REQSCPCONF::={&ref 19, &ReqConfParam MaxLat}
+protocolReqConf	REQSCPCONF::={&ref 21, &ReqConfParam Logic}
+dataConfidentialityConf	REQSCPCONF::={&ref 23, &ReqConfParam Logic}
+dataIntegrityConf	REQSCPCONF::={&ref 25, &ReqConfParam Logic}
+nonReputabilityConf	REQSCPCONF::={&ref 27, &ReqConfParam Logic}
+dataAuthenticationConf	REQSCPCONF::={&ref 29, &ReqConfParam Logic}
+
+
+-- Policies
+
+POLICYC::=CLASS {
+	&ref	INTEGER(0..255),
+	&PolParam
+	}
+
+-- pycrate change: @refNo -> @.refNo
+Policies::=SEQUENCE OF SEQUENCE{
+	refNo	POLICYC.&ref({Policy}),
+	param	POLICYC.&PolParam({Policy}{@.refNo})
+	}
+
+Policy POLICYC::={mediumCost | locPrivacy | anonymity, ...}
+
+mediumCost	POLICYC::={&ref 0, &PolParam MediumCost}
+locPrivacy	POLICYC::={&ref 1, &PolParam LocPrivacy}
+anonymity	POLICYC::={&ref 2, &PolParam Anonymity}
+
+
+-- Financial policies
+
+MediumCost::=SEQUENCE{
+	fill	BIT STRING (SIZE(2)), -- bits set to zero
+	costClass	CostClass, -- uses 3 bits
+	costAmount	CostAmount OPTIONAL, 
+	timeUnit	CostTimeUnit OPTIONAL, 
+	amountUnit	CostAmountUnit OPTIONAL
+	}
+
+CostClass::=INTEGER{
+	tempUnavailable	(0),
+	noCharge	(1),
+	flatRate	(2),
+	perTime	(3),
+	perAmount	(4),
+	perConnection	(5)
+	} (0..7)
+
+CostAmount::=SEQUENCE{
+	currency	INTEGER(0..1023), -- ISO 4217 three digit numeric code
+	value	CostValue
+	} -- presented in 4 octets
+
+CostValue::=SEQUENCE{
+	main	INTEGER(0..4095), -- in currency unit
+	fraction	INTEGER(0..1023) -- in 1/1000 of currency unit
+	}
+
+CostTimeUnit::=SEQUENCE{
+	value	INTEGER(0..1023), -- valid parameter number (10 bits in PER)
+	fill	BIT STRING (SIZE(1)), -- set to zero, extends TimeUnit size.
+	unit	TimeUnit -- presented in 5 bits
+	} -- 2 octets in PER
+
+CostAmountUnit::=INTEGER{
+	tempUnavailable	(0),
+	kbyte	(1),
+	tkbyte	(2),
+	hkbyte	(4),
+	mbyte	(8),
+	tmbyte	(16),
+	hmbyte	(32),
+	gbyte	(64),
+	tgbyte	(128)
+	} (0..255)
+
+-- Security
+LocPrivacy::=ConfValue
+
+Anonymity::=ConfValue
+
+-- MA-SAP / MF-SAP / MS-SAP functions
+-- Some functions are used in these three SAPs
+
+
+ITS-S-Appl-Reg::= SEQUENCE OF ITSSappCPReqReg -- used in 24102-3
+
+ITS-S-Appl-RegConf::= SEQUENCE OF ITSSappCPReqConf  -- used in 24102-3
+
+ITS-S-Appl-RegFinal::=ITSSappCPFinal
+
+-- General
+Logic::=INTEGER{
+	false	(0),
+	true	(255)
+	} (0..255)
+
+ConfValue::=INTEGER{
+	ok	(0),
+	alternative	(1),
+	nok	(2)
+	} (0..255)
+
+CostObjective::=INTEGER(0..255)
+
+-- values
+
+
+
+
+
+END
+
+
+

@@ -1,0 +1,304 @@
+--$Revision: 413850 $
+--************************************************************************
+--
+-- ASN.1 and XML for the components of a GenBank/EMBL/DDBJ sequence record
+-- The International Nucleotide Sequence Database (INSD) collaboration
+-- Version 1.6, 25 May 2010
+--
+--************************************************************************
+
+INSD-INSDSeq DEFINITIONS ::=
+BEGIN
+
+--  INSDSeq provides the elements of a sequence as presented in the
+--    GenBank/EMBL/DDBJ-style flatfile formats, with a small amount of
+--    additional structure.
+--    Although this single perspective of the three flatfile formats
+--    provides a useful simplification, it hides to some extent the
+--    details of the actual data underlying those formats. Nevertheless,
+--    the XML version of INSD-Seq is being provided with
+--    the hopes that it will prove useful to those who bulk-process
+--    sequence data at the flatfile-format level of detail. Further 
+--    documentation regarding the content and conventions of those formats 
+--    can be found at:
+--
+--    URLs for the DDBJ, EMBL, and GenBank Feature Table Document:
+--    http://www.ddbj.nig.ac.jp/FT/full_index.html
+--    http://www.ebi.ac.uk/embl/Documentation/FT_definitions/feature_table.html
+--    http://www.ncbi.nlm.nih.gov/projects/collab/FT/index.html
+--
+--    URLs for DDBJ, EMBL, and GenBank Release Notes :
+--    ftp://ftp.ddbj.nig.ac.jp/database/ddbj/ddbjrel.txt
+--    http://www.ebi.ac.uk/embl/Documentation/Release_notes/current/relnotes.html
+--    ftp://ftp.ncbi.nih.gov/genbank/gbrel.txt
+--
+--    Because INSDSeq is a compromise, a number of pragmatic decisions have
+--    been made:
+--
+--  In pursuit of simplicity and familiarity a number of fields do not
+--    have full substructure defined here where there is already a
+--    standard flatfile format string. For example:
+--
+--   Dates:      DD-MON-YYYY (eg 10-JUN-2003)
+--
+--   Author:     LastName, Initials  (eg Smith, J.N.)
+--            or Lastname Initials   (eg Smith J.N.)
+--
+--   Journal:    JournalName Volume (issue), page-range (year)
+--            or JournalName Volume(issue):page-range(year)
+--            eg Appl. Environ. Microbiol. 61 (4), 1646-1648 (1995)
+--               Appl. Environ. Microbiol. 61(4):1646-1648(1995).
+--
+--  FeatureLocations are representated as in the flatfile feature table,
+--    but FeatureIntervals may also be provided as a convenience
+--
+--  FeatureQualifiers are represented as in the flatfile feature table.
+--
+--  Primary has a string that represents a table to construct
+--    a third party (TPA) sequence.
+--
+--  other-seqids can have strings with the "vertical bar format" sequence
+--    identifiers used in BLAST for example, when they are non-INSD types.
+--
+--  Currently in flatfile format you only see Accession numbers, but there 
+--    are others, like patents, submitter clone names, etc which will 
+--    appear here
+--
+--  There are also a number of elements that could have been more exactly
+--    specified, but in the interest of simplicity have been simply left as
+--    optional. For example:
+--
+--  All publicly accessible sequence records in INSDSeq format will
+--    include accession and accession.version. However, these elements are 
+--    optional in optional in INSDSeq so that this format can also be used   
+--    for non-public sequence data, prior to the assignment of accessions and 
+--    version numbers. In such cases, records will have only "other-seqids".
+--
+--  sequences will normally all have "sequence" filled in. But contig records
+--    will have a "join" statement in the "contig" slot, and no "sequence".
+--    We also may consider a retrieval option with no sequence of any kind
+--    and no feature table to quickly check minimal values.
+--
+--  Four (optional) elements are specific to records represented via the EMBL
+--    sequence database: INSDSeq_update-release, INSDSeq_create-release,
+--    INSDSeq_entry-version, and INSDSeq_database-reference.
+--
+--  One (optional) element is specific to records originating at the GenBank
+--    and DDBJ sequence databases: INSDSeq_segment.
+--
+--********
+
+INSDSet ::= SEQUENCE OF INSDSeq
+
+INSDSeq ::= SEQUENCE {
+    locus VisibleString OPTIONAL ,
+    length INTEGER ,
+    strandedness VisibleString OPTIONAL ,
+    moltype VisibleString ,
+    topology VisibleString OPTIONAL ,
+    division VisibleString OPTIONAL ,
+    update-date VisibleString OPTIONAL ,
+    create-date VisibleString OPTIONAL ,
+    update-release VisibleString OPTIONAL ,
+    create-release VisibleString OPTIONAL ,
+    definition VisibleString OPTIONAL ,
+    primary-accession VisibleString OPTIONAL ,
+    entry-version VisibleString OPTIONAL ,
+    accession-version VisibleString OPTIONAL ,
+    other-seqids SEQUENCE OF INSDSeqid OPTIONAL ,
+    secondary-accessions SEQUENCE OF INSDSecondary-accn OPTIONAL,
+
+--  INSDSeq_project has been deprecated in favor of INSDSeq_xrefs .
+--  This element may be be removed from a future version of this DTD.
+
+    project VisibleString OPTIONAL ,
+
+    keywords SEQUENCE OF INSDKeyword OPTIONAL ,
+    segment VisibleString OPTIONAL ,
+    source VisibleString OPTIONAL ,
+    organism VisibleString OPTIONAL ,
+    taxonomy VisibleString OPTIONAL ,
+    references SEQUENCE OF INSDReference OPTIONAL ,
+    comment VisibleString OPTIONAL ,
+    comment-set SEQUENCE OF INSDComment OPTIONAL ,
+    struc-comments SEQUENCE OF INSDStrucComment OPTIONAL ,
+    primary VisibleString OPTIONAL ,
+    source-db VisibleString OPTIONAL ,
+    database-reference VisibleString OPTIONAL ,
+    feature-table SEQUENCE OF INSDFeature OPTIONAL ,
+    feature-set SEQUENCE OF INSDFeatureSet OPTIONAL ,
+    sequence VisibleString OPTIONAL ,  -- Optional for contig, wgs, etc.
+    contig VisibleString OPTIONAL ,
+    alt-seq SEQUENCE OF INSDAltSeqData OPTIONAL ,
+
+--  INSDSeq_xrefs provides cross-references from a sequence record
+--  to other database resources. These cross-references are at the
+--  level of the entire record, rather than at the level of a specific
+--  feature. These cross-references can include: BioProject, BioSample,
+--  Sequence Read Archive, etc.
+
+    xrefs SEQUENCE OF INSDXref OPTIONAL
+}
+
+INSDSeqid ::= VisibleString
+
+INSDSecondary-accn ::= VisibleString
+
+INSDKeyword ::= VisibleString
+
+-- INSDReference_position contains a string value indicating the
+-- basepair span(s) to which a reference applies. The allowable
+-- formats are:
+--
+--   X..Y  : Where X and Y are integers separated by two periods,
+--           X >= 1 , Y <= sequence length, and X <= Y 
+--
+--           Multiple basepair spans can exist, separated by a
+--           semi-colon and a space. For example : 10..20; 100..500
+--             
+--   sites : The string literal 'sites', indicating that a reference
+--           provides sequence annotation information, but the specific
+--           basepair spans are either not captured, or were too numerous
+--           to record.
+--
+--           The 'sites' literal string is singly occuring, and
+--            cannot be used in conjunction with any X..Y basepair spans.
+--
+--           'sites' is a convention utilized by GenBank, and might
+--           not be presented in XML provided by EMBL and DDBJ.
+--
+--   References that lack an INSDReference_position element are not
+--   attributed to any particular region of the sequence.
+
+INSDReference ::= SEQUENCE {
+    reference VisibleString ,
+    position VisibleString OPTIONAL ,
+    authors SEQUENCE OF INSDAuthor OPTIONAL ,
+    consortium VisibleString OPTIONAL ,
+    title VisibleString OPTIONAL ,
+    journal VisibleString ,
+    xref SEQUENCE OF INSDXref OPTIONAL ,
+    pubmed INTEGER OPTIONAL ,
+    remark VisibleString OPTIONAL
+}
+
+INSDAuthor ::= VisibleString
+
+-- INSDXref provides a method for referring to records in
+-- other databases. INSDXref_dbname is a string value that
+-- provides the name of the database, and INSDXref_dbname
+-- is a string value that provides the record's identifier
+-- in that database.
+
+INSDXref ::= SEQUENCE {
+    dbname VisibleString ,
+    id VisibleString
+}
+
+INSDComment ::= SEQUENCE {
+    type VisibleString OPTIONAL ,
+    paragraphs SEQUENCE OF INSDCommentParagraph
+}
+
+INSDCommentParagraph ::= VisibleString
+
+INSDStrucComment ::= SEQUENCE {
+    name VisibleString OPTIONAL ,
+    items SEQUENCE OF INSDStrucCommentItem
+}
+
+INSDStrucCommentItem ::= SEQUENCE {
+    tag VisibleString OPTIONAL ,
+    value VisibleString OPTIONAL ,
+    url VisibleString OPTIONAL
+}
+
+-- INSDFeature_operator contains a string value describing
+-- the relationship among a set of INSDInterval within
+-- INSDFeature_intervals. The allowable formats are:
+--
+--   join :  The string literal 'join' indicates that the
+--           INSDInterval intervals are biologically joined
+--           together into a contiguous molecule.
+--
+--   order : The string literal 'order' indicates that the
+--           INSDInterval intervals are in the presented
+--           order, but they are not necessarily contiguous.
+--
+--   Either 'join' or 'order' is required if INSDFeature_intervals
+--   is comprised of more than one INSDInterval .
+
+INSDFeatureSet ::= SEQUENCE {
+    annot-source VisibleString OPTIONAL ,
+    features SEQUENCE OF INSDFeature
+}
+
+INSDFeature ::= SEQUENCE {
+    key VisibleString ,
+    location VisibleString ,
+    intervals SEQUENCE OF INSDInterval OPTIONAL ,
+    operator VisibleString OPTIONAL ,
+    partial5 BOOLEAN OPTIONAL ,
+    partial3 BOOLEAN OPTIONAL ,
+    quals SEQUENCE OF INSDQualifier OPTIONAL ,
+    xrefs SEQUENCE OF INSDXref OPTIONAL
+}
+
+-- INSDInterval_iscomp is a boolean indicating whether
+-- an INSDInterval_from / INSDInterval_to location
+-- represents a location on the complement strand.
+-- When INSDInterval_iscomp is TRUE, it essentially
+-- confirms that a 'from' value which is greater than
+-- a 'to' value is intentional, because the location
+-- is on the opposite strand of the presented sequence.
+
+-- INSDInterval_interbp is a boolean indicating whether
+-- a feature (such as a restriction site) is located
+-- between two adjacent basepairs. When INSDInterval_interbp
+-- is TRUE, the 'from' and 'to' values will differ by
+-- exactly one base for linear molecules. For circular 
+-- molecules, if the inter-basepair position falls between
+-- the last and the first base, then 'from' will be the
+-- final base (equal to the length of the sequence), and
+-- 'to' will have a value of 1.
+
+INSDInterval ::= SEQUENCE {
+    from INTEGER OPTIONAL ,
+    to INTEGER OPTIONAL ,
+    point INTEGER OPTIONAL ,
+    iscomp BOOLEAN OPTIONAL ,
+    interbp BOOLEAN OPTIONAL ,
+    accession VisibleString
+}
+
+INSDQualifier ::= SEQUENCE {
+    name VisibleString ,
+    value VisibleString OPTIONAL
+}
+
+-- INSDAltSeqData provides for sequence representations other than
+-- literal basepair abbreviations (INSDSeq_sequence), such as the
+-- CONTIG/CO linetype of the GenBank and EMBL flatfile formats.
+-- It also accomodates the specification of accession-number ranges,
+-- which are presented on a WGS master record (for the contigs and
+-- and scaffolds of a WGS project).
+
+INSDAltSeqData ::= SEQUENCE {
+    name VisibleString ,  -- e.g., contig, wgs, scaffold, cage, genome
+    items SEQUENCE OF INSDAltSeqItem OPTIONAL
+}
+
+INSDAltSeqItem ::= SEQUENCE {
+    interval INSDInterval OPTIONAL ,
+    isgap BOOLEAN OPTIONAL ,
+    gap-length INTEGER OPTIONAL ,
+    gap-type VisibleString OPTIONAL ,
+    gap-linkage VisibleString OPTIONAL ,
+    gap-comment VisibleString OPTIONAL ,
+    first-accn VisibleString OPTIONAL ,
+    last-accn VisibleString OPTIONAL ,
+    value VisibleString OPTIONAL
+}
+
+END
+

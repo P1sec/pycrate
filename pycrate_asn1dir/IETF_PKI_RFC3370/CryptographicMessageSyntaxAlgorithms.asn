@@ -1,0 +1,133 @@
+
+CryptographicMessageSyntaxAlgorithms
+       { iso(1) member-body(2) us(840) rsadsi(113549)
+         pkcs(1) pkcs-9(9) smime(16) modules(0) cmsalg-2001(16) }
+
+DEFINITIONS IMPLICIT TAGS ::=
+BEGIN
+
+   -- EXPORTS All
+   -- The types and values defined in this module are exported for use
+   -- in the other ASN.1 modules.  Other applications may use them for
+   -- their own purposes.
+
+   IMPORTS
+     -- Imports from RFC 3280 [PROFILE], Appendix A.1
+           AlgorithmIdentifier
+              FROM PKIX1Explicit88 { iso(1)
+                   identified-organization(3) dod(6) internet(1)
+                   security(5) mechanisms(5) pkix(7) mod(0)
+                   pkix1-explicit(18) } ;
+
+   -- Algorithm Identifiers
+
+   sha-1 OBJECT IDENTIFIER ::= { iso(1) identified-organization(3)
+       oiw(14) secsig(3) algorithm(2) 26 }
+
+   md5 OBJECT IDENTIFIER ::= { iso(1) member-body(2) us(840)
+       rsadsi(113549) digestAlgorithm(2) 5 }
+
+   id-dsa OBJECT IDENTIFIER ::=  { iso(1) member-body(2) us(840)
+       x9-57(10040) x9cm(4) 1 }
+
+   id-dsa-with-sha1 OBJECT IDENTIFIER ::=  { iso(1) member-body(2)
+       us(840) x9-57(10040) x9cm(4) 3 }
+
+   rsaEncryption OBJECT IDENTIFIER ::= { iso(1) member-body(2)
+       us(840) rsadsi(113549) pkcs(1) pkcs-1(1) 1 }
+
+   md5WithRSAEncryption OBJECT IDENTIFIER ::= { iso(1)
+       member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-1(1) 4 }
+
+   sha1WithRSAEncryption OBJECT IDENTIFIER ::= { iso(1)
+       member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-1(1) 5 }
+
+   dh-public-number OBJECT IDENTIFIER ::= { iso(1) member-body(2)
+       us(840) ansi-x942(10046) number-type(2) 1 }
+
+   id-alg-ESDH OBJECT IDENTIFIER ::= { iso(1) member-body(2) us(840)
+       rsadsi(113549) pkcs(1) pkcs-9(9) smime(16) alg(3) 5 }
+
+   id-alg-SSDH OBJECT IDENTIFIER ::= { iso(1) member-body(2) us(840)
+       rsadsi(113549) pkcs(1) pkcs-9(9) smime(16) alg(3) 10 }
+
+   id-alg-CMS3DESwrap OBJECT IDENTIFIER ::= { iso(1) member-body(2)
+       us(840) rsadsi(113549) pkcs(1) pkcs-9(9) smime(16) alg(3) 6 }
+
+   id-alg-CMSRC2wrap OBJECT IDENTIFIER ::= { iso(1) member-body(2)
+       us(840) rsadsi(113549) pkcs(1) pkcs-9(9) smime(16) alg(3) 7 }
+
+   des-ede3-cbc OBJECT IDENTIFIER ::= { iso(1) member-body(2)
+       us(840) rsadsi(113549) encryptionAlgorithm(3) 7 }
+
+   rc2-cbc OBJECT IDENTIFIER ::= { iso(1) member-body(2) us(840)
+       rsadsi(113549) encryptionAlgorithm(3) 2 }
+
+   hMAC-SHA1 OBJECT IDENTIFIER ::= { iso(1) identified-organization(3)
+       dod(6) internet(1) security(5) mechanisms(5) 8 1 2 }
+
+   id-PBKDF2 OBJECT IDENTIFIER ::= { iso(1) member-body(2) us(840)
+       rsadsi(113549) pkcs(1) pkcs-5(5) 12 }
+
+   -- Public Key Types
+
+   Dss-Pub-Key ::= INTEGER  -- Y
+
+   RSAPublicKey ::= SEQUENCE {
+     modulus INTEGER,  -- n
+     publicExponent INTEGER }  -- e
+
+   DHPublicKey ::= INTEGER  -- y = g^x mod p
+
+
+   -- Signature Value Types
+
+   Dss-Sig-Value ::= SEQUENCE {
+     r INTEGER,
+     s INTEGER }
+
+   -- Algorithm Identifier Parameter Types
+
+   Dss-Parms ::= SEQUENCE {
+     p INTEGER,
+     q INTEGER,
+     g INTEGER }
+
+   DHDomainParameters ::= SEQUENCE {
+     p INTEGER,  -- odd prime, p=jq +1
+     g INTEGER,  -- generator, g
+     q INTEGER,  -- factor of p-1
+     j INTEGER OPTIONAL,  -- subgroup factor
+     validationParms ValidationParms OPTIONAL }
+
+   ValidationParms ::= SEQUENCE {
+     seed BIT STRING,
+     pgenCounter INTEGER }
+
+   KeyWrapAlgorithm ::= AlgorithmIdentifier
+
+   RC2wrapParameter ::= RC2ParameterVersion
+
+   RC2ParameterVersion ::= INTEGER
+
+   CBCParameter ::= IV
+
+   IV ::= OCTET STRING  -- exactly 8 octets
+
+   RC2CBCParameter ::= SEQUENCE {
+     rc2ParameterVersion INTEGER,
+     iv OCTET STRING  }  -- exactly 8 octets
+   
+   -- pycrate: parameters is of type ANY, which is handled like an OPEN type in pycrate
+   -- its value is defined in the form $type : $value_for_type
+   
+   PBKDF2-params ::= SEQUENCE {
+     salt CHOICE {
+       specified OCTET STRING,
+       otherSource AlgorithmIdentifier },
+     iterationCount INTEGER (1..MAX),
+     keyLength INTEGER (1..MAX) OPTIONAL,
+     prf AlgorithmIdentifier
+       DEFAULT { algorithm hMAC-SHA1, parameters NULL:NULL } }
+
+END -- of CryptographicMessageSyntaxAlgorithms

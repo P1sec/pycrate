@@ -1,0 +1,68 @@
+-- **************************************************************
+--
+-- Constant definitions
+--
+-- **************************************************************
+
+SLMAP-Constants {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) slmap (50) version1 (1) slmap-Constants (4) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+IMPORTS
+	ProcedureCode,
+	ProtocolIE-ID
+FROM SLMAP-CommonDataTypes;
+
+
+
+-- **************************************************************
+--
+-- Elementary Procedures
+--
+-- **************************************************************
+
+id-errorIndication							ProcedureCode ::= 0
+id-privateMessage							ProcedureCode ::= 1
+id-measurement								ProcedureCode ::= 2
+id-slmSetup									ProcedureCode ::= 3
+id-reset									ProcedureCode ::= 4
+id-measurementUpdate						ProcedureCode ::= 5
+id-measurementAbort							ProcedureCode ::= 6
+
+
+-- **************************************************************
+--
+-- Lists
+--
+-- **************************************************************
+
+maxNrOfErrors								INTEGER ::= 256
+maxServCell									INTEGER ::= 5
+maxEARFCN									INTEGER ::= 262143
+maxNoULRTOA									INTEGER ::= 5
+maxNoLMURfBands								INTEGER ::= 256
+maxBWComb									INTEGER ::= 128
+maxBWCombSet								INTEGER ::= 32
+maxSimultaneousBands						INTEGER ::= 4
+
+
+-- **************************************************************
+--
+-- IEs
+--
+-- **************************************************************
+
+id-ESMLC-MeasurementID						ProtocolIE-ID ::= 0
+id-UL-RTOAMeasurementConfiguration			ProtocolIE-ID ::= 1
+id-CriticalityDiagnostics					ProtocolIE-ID ::= 2
+id-UL-RTOAMeasurements						ProtocolIE-ID ::= 3
+id-Cause									ProtocolIE-ID ::= 4
+id-LMU-ID									ProtocolIE-ID ::= 5
+id-LMUInformation							ProtocolIE-ID ::= 6
+id-ESMLC-ID									ProtocolIE-ID ::= 7
+
+END

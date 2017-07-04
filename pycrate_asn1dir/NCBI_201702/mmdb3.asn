@@ -1,0 +1,437 @@
+--$Revision: 240129 $
+--**********************************************************************
+--
+--  Biological Macromolecule 3-D Structure Data Types for MMDB,
+--                A Molecular Modeling Database
+--
+--  Definitions for structural features and biostruc addressing
+--
+--  By Hitomi Ohkawa, Jim Ostell, Chris Hogue and Steve Bryant 
+--
+--  National Center for Biotechnology Information
+--  National Institutes of Health
+--  Bethesda, MD 20894 USA
+--
+--  July, 1996
+--
+--**********************************************************************
+
+MMDB-Features DEFINITIONS ::=
+
+BEGIN
+
+EXPORTS Biostruc-feature-set, Chem-graph-pntrs, Atom-pntrs,
+	Chem-graph-alignment, Chem-graph-interaction, Sphere, 
+	Cone, Cylinder, Brick, Transform, Biostruc-feature-set-id, 
+	Biostruc-feature-id;
+
+IMPORTS Biostruc-id FROM MMDB
+	Molecule-id, Residue-id, Atom-id FROM MMDB-Chemical-graph
+	Model-id, Model-coordinate-set-id FROM MMDB-Structural-model
+	User-object FROM NCBI-General
+	Pub FROM NCBI-Pub;
+
+-- Named model features refer to sets of residues or atoms, or a region in 
+-- the model space.  A few specific feature types are allowed for compatibility
+-- with PDB usage, but the purpose of a named model feature is simply to
+-- associate various types of information with a set of atoms or 
+-- residues, or a spatially-defined region of the model structure.  They also
+-- support association of various properties with each residue or atom of a
+-- set.
+
+-- PDB-derived secondary structure defines a single feature, represented as a
+-- sequence of residue motifs, as are the contents of PDB SITE and
+-- FTNOTE records.  NCBI-assigned core and secondary structure descriptions
+-- are also represented as a sequence of residue motifs.
+
+Biostruc-feature-set ::= SEQUENCE {
+	id		Biostruc-feature-set-id,
+	descr		SEQUENCE OF Biostruc-feature-set-descr OPTIONAL,
+	features	SEQUENCE OF Biostruc-feature }
+
+Biostruc-feature-set-id ::= INTEGER
+
+Biostruc-feature-set-descr ::= CHOICE {
+	name			VisibleString,
+	pdb-comment		VisibleString,
+	other-comment		VisibleString,
+	attribution		Pub }
+
+-- An explicitly specified type in Biostruc-feature allows for
+-- efficient extraction and indexing of feature sets of a specific type. 
+-- Special types are provided for coloring and rendering, as
+-- as needed by molecular graphics programs.
+ 
+Biostruc-feature ::= SEQUENCE {
+	id		Biostruc-feature-id OPTIONAL,
+	name		VisibleString OPTIONAL,
+	type	INTEGER {	helix(1),
+				strand(2),
+				sheet(3),
+				turn(4),
+				site(5),
+				footnote(6),
+				comment(7),      -- new
+				interaction(8),  -- interaction Data
+				subgraph(100),   -- NCBI domain reserved
+				region(101), 
+				core(102),       -- user core definition
+				supercore(103),  -- NCBI reserved
+				color(150),      -- new
+				render(151),     -- new
+				label(152),      -- new
+				transform(153),  -- new
+				camera(154),     -- new
+				script(155),      -- for scripts
+				alignment(200),  -- VAST reserved 
+				similarity(201),
+				multalign(202),  -- multiple alignment
+                indirect(203),   -- new
+				cn3dstate(254),  -- Cn3D reserved
+				other(255) } OPTIONAL,
+	property	CHOICE { 
+				color		Color-prop,
+				render		Render-prop,
+				transform	Transform,
+				camera		Camera,
+				script		Biostruc-script,
+				user		User-object } OPTIONAL,
+	location	CHOICE {
+				subgraph	Chem-graph-pntrs,
+				region		Region-pntrs,   
+				alignment	Chem-graph-alignment,
+				interaction     Chem-graph-interaction,
+				similarity	Region-similarity, 
+				indirect	Other-feature } OPTIONAL } -- new
+
+-- Other-feature allows for specifying location via reference to another
+-- Biostruc-feature and its location.
+
+Other-feature ::= SEQUENCE {
+	biostruc-id		Biostruc-id,
+	set			Biostruc-feature-set-id,
+	feature			Biostruc-feature-id }
+                        
+Biostruc-feature-id ::= INTEGER
+
+-- Atom, residue or molecule motifs describe a substructure defined by a set
+-- of nodes from the chemical graph. PDB secondary structure features are
+-- described as a residue motif, since they are not associated with any one of
+-- the multiple models that may be provided in a PDB file.  NCBI-assigned
+-- secondary structure is represented in the same way, even though it is
+-- model specific, since this allows for simple mapping of the structural 
+-- feature onto a sequence-only representation. This addressing mode may also 
+-- be used to describe features to be associated with particular atoms, 
+-- as, for example, the chemical shift observed in an NMR experiment.
+
+Biostruc-molecule-pntr ::= SEQUENCE {
+	biostruc-id		Biostruc-id,
+	molecule-id		Molecule-id }
+
+Chem-graph-pntrs ::= CHOICE {
+	atoms			Atom-pntrs,
+	residues		Residue-pntrs,
+	molecules		Molecule-pntrs }
+
+Atom-pntrs ::= SEQUENCE {
+	number-of-ptrs		INTEGER,
+	molecule-ids		SEQUENCE OF Molecule-id,
+	residue-ids		SEQUENCE OF Residue-id,
+	atom-ids		SEQUENCE OF Atom-id }
+
+Residue-pntrs ::= CHOICE {
+	explicit		Residue-explicit-pntrs,
+	interval		SEQUENCE OF Residue-interval-pntr }
+
+Residue-explicit-pntrs ::= SEQUENCE {
+	number-of-ptrs		INTEGER,
+	molecule-ids		SEQUENCE OF Molecule-id,
+	residue-ids		SEQUENCE OF Residue-id }
+
+Residue-interval-pntr ::= SEQUENCE {
+	molecule-id		Molecule-id,
+	from			Residue-id,
+	to			Residue-id }
+
+Molecule-pntrs ::= SEQUENCE {
+	number-of-ptrs		INTEGER,
+	molecule-ids		SEQUENCE OF Molecule-id }
+
+-- Region motifs describe features defined by spatial location, such as the
+-- site specified by a coordinate value, or a rgeion within a bounding volume.
+
+Region-pntrs ::= SEQUENCE {
+	model-id	Model-id,
+	region		CHOICE {
+				site		SEQUENCE OF Region-coordinates,
+				boundary	SEQUENCE OF Region-boundary } }
+
+-- Coordinate sites describe a region in space by reference to individual 
+-- coordinates, in a particular model.  These coordinates may be either the
+-- x, y and z values of atomic coordinates, the triangles of a surface mesh, 
+-- or the grid points of a density model. All are addressed in the same manner,
+-- as coordinate indices which give offsets from the beginning of the 
+-- coordinate data arrays.  A coordinate-index of 5, for example, refers to 
+-- the 5th x, y and z values of an atomic coordinate set, the 5th v1, v2, and v3
+-- values of a triangle mesh, or the 5th value in a density grid.
+
+-- PDB SITE and FTNOTE records refer to particular atomic coordinates, and they
+-- are represented as a region motif with addresses of type Region-coordinates.
+-- Any names or descriptions provided by PDB are thus associated with the
+-- indicated sites, in the indicated model. 
+
+Region-coordinates ::= SEQUENCE {
+	model-coord-set-id	Model-coordinate-set-id,
+	number-of-coords	INTEGER OPTIONAL,
+	coordinate-indices	SEQUENCE OF INTEGER OPTIONAL }
+
+-- Region boundaries are defined by regular solids located in the model space.  
+
+Region-boundary ::=	CHOICE {	sphere		Sphere,
+					cone		Cone,
+					cylinder	Cylinder,
+					brick		Brick }
+
+-- A biostruc alignment establishes an equivalence of nodes in the chemical
+-- graphs of two or more biostrucs. This may be mapped to a sequence
+-- alignment in the case of biopolymers.
+-- The 'dimension' component indicates the number of participants
+-- in the alignment.  For pairwise alignments, such as VAST 
+-- structure-structure alignments, the dimension will be always 2, with
+-- biostruc-ids, alignment, and domain each containing two entries for an  
+-- aligned pair.  The 'alignment' component contains a pair of Chem-graph-pntrs
+-- specifying a like number of corresponding residues in each structure.
+-- The 'domain' component specifies a region of each structure considered 
+-- in the alignment.  Only one transform (for the second structure) and
+-- one aligndata (for the pair) are provided for each VAST alignment.
+--
+-- For multiple alignments, a set of components are treated as
+-- parallel arrays of length 'dimension'.
+-- The 'transform' component moves each structure to align it with
+-- the structure specified as the first element in the "parallel" array,
+-- so necessarily the first transform is a NULL transform.
+-- Align-stats are placeholders for scores.
+
+Chem-graph-alignment ::= SEQUENCE {
+	dimension		INTEGER DEFAULT 2,
+	biostruc-ids		SEQUENCE OF Biostruc-id,
+	alignment		SEQUENCE OF Chem-graph-pntrs,
+	domain			SEQUENCE OF Chem-graph-pntrs OPTIONAL, 
+	transform		SEQUENCE OF Transform OPTIONAL,
+	aligndata		SEQUENCE OF Align-stats OPTIONAL }
+
+Chem-graph-interaction ::= SEQUENCE {
+	type	INTEGER {	protein-protein(1),
+				protein-dna(2),
+				protein-rna(3),
+				protein-chemical(4),
+				dna-dna(5),
+				dna-rna(6),
+				dna-chemical(7),     
+				rna-rna(8),  
+				rna-chemical(9), 
+				other(255) } OPTIONAL,
+	distance-threshold RealValue OPTIONAL,
+	interactors SEQUENCE OF Biostruc-molecule-pntr,
+	residue-contacts SEQUENCE OF Chem-graph-pntrs OPTIONAL,
+	atom-contacts SEQUENCE OF Chem-graph-pntrs OPTIONAL,
+	atom-distance SEQUENCE OF RealValue OPTIONAL}
+
+Align-stats ::= SEQUENCE {
+	descr		VisibleString OPTIONAL,
+	scale-factor	INTEGER OPTIONAL,
+	vast-score	INTEGER OPTIONAL,
+	vast-mlogp	INTEGER OPTIONAL,
+	align-res	INTEGER OPTIONAL,
+ 	rmsd		INTEGER OPTIONAL,
+	blast-score	INTEGER OPTIONAL,
+	blast-mlogp	INTEGER OPTIONAL,
+	other-score	INTEGER OPTIONAL }	        
+
+-- A biostruc similarity describes spatial features which are similar between
+-- two or more biostrucs.  Similarities are model dependent, and the model and
+-- coordinate set ids of the biostrucs must be specified.  They do not 
+-- necessarily map to a sequence alignment, as the regions referenced may
+-- be pieces of a surface or grid, and thus not uniquely mapable to particular
+-- chemical components.
+
+Region-similarity ::= SEQUENCE {
+	dimension		INTEGER DEFAULT 2,
+	biostruc-ids		SEQUENCE OF Biostruc-id,
+	similarity		SEQUENCE OF Region-pntrs,
+	transform		SEQUENCE OF Transform }
+
+-- Geometrical primitives are used in the definition of region motifs, and 
+-- also non-atomic coordinates.  Spheres, cones, cylinders and bricks are 
+-- defined by a few points in the model space.
+
+Sphere ::= SEQUENCE { 
+	center			Model-space-point,
+	radius			RealValue }
+
+Cone ::= SEQUENCE { 
+	axis-top		Model-space-point,
+	axis-bottom		Model-space-point,
+	radius-bottom		RealValue }
+
+Cylinder ::= SEQUENCE { 
+	axis-top		Model-space-point,
+	axis-bottom		Model-space-point,
+	radius			RealValue }
+
+-- A brick is defined by the coordinates of eight corners.  These are assumed
+-- to appear in the order 000, 001, 010, 011, 100, 101, 110, 111, where the 
+-- digits 0 and 1 refer to respectively to the x, y and z axes of a unit cube.
+-- Opposite edges are assumed to be parallel. 
+
+Brick ::= SEQUENCE {
+	corner-000		Model-space-point,
+	corner-001		Model-space-point,
+	corner-010		Model-space-point,
+	corner-011		Model-space-point,
+	corner-100		Model-space-point,
+	corner-101		Model-space-point,
+	corner-110		Model-space-point,
+	corner-111		Model-space-point }
+
+Model-space-point ::= SEQUENCE {
+	scale-factor		INTEGER,
+	x			INTEGER,
+	y			INTEGER,
+	z			INTEGER } 
+
+RealValue ::= SEQUENCE {
+	scale-factor		INTEGER,
+	scaled-integer-value	INTEGER }
+
+
+Transform ::=  SEQUENCE {
+            id  INTEGER,
+            moves SEQUENCE OF Move }
+            
+Move ::= CHOICE {
+	rotate		Rot-matrix,
+	translate	Trans-matrix }
+          
+-- A rotation matrix is defined by 9 numbers, given by row, i.e.,
+-- with column indices varying fastest.
+-- Coordinates, as a matrix with columns x, y, an z, are rotated 
+-- via multiplication with the rotation matrix. 
+-- A translation matrix is defined by 3 numbers, which is added to
+-- the rotated coordinates for specified amount of translation. 
+
+Rot-matrix ::= SEQUENCE {
+	scale-factor		INTEGER,
+	rot-11			INTEGER,
+	rot-12			INTEGER,
+	rot-13			INTEGER,
+	rot-21			INTEGER,
+	rot-22			INTEGER,
+	rot-23			INTEGER,
+	rot-31			INTEGER,
+	rot-32			INTEGER,
+	rot-33			INTEGER }
+
+Trans-matrix ::= SEQUENCE {
+	scale-factor		INTEGER,
+	tran-1			INTEGER,
+	tran-2			INTEGER,
+	tran-3			INTEGER }
+
+-- The camera is a position relative to the world coordinates
+-- of the structure referred to by a location.  
+-- this is used to set the initial position of the
+-- camera using OpenGL.  scale is the value used to scale the
+-- other values from floating point to integer
+
+Camera ::= SEQUENCE {
+	x		INTEGER,
+	y		INTEGER,
+	distance	INTEGER,
+	angle		INTEGER,
+	scale		INTEGER,
+    modelview   GL-matrix }
+    
+    
+GL-matrix ::= SEQUENCE {
+	scale		INTEGER,
+	m11			INTEGER,
+	m12			INTEGER,
+	m13			INTEGER,
+	m14			INTEGER,
+	m21			INTEGER,
+	m22			INTEGER,
+	m23			INTEGER,
+	m24			INTEGER,
+	m31			INTEGER,
+	m32			INTEGER,
+	m33			INTEGER,
+	m34			INTEGER,
+	m41			INTEGER,
+	m42			INTEGER,
+	m43			INTEGER,
+	m44			INTEGER }
+
+
+Color-prop ::= SEQUENCE {
+	r		INTEGER OPTIONAL, 
+	g		INTEGER OPTIONAL,
+	b		INTEGER OPTIONAL,
+	name		VisibleString OPTIONAL }
+
+-- Note that Render-prop is compatible with the Annmm specification,
+-- i.e., its numbering schemes do not clash with those in Render-prop.
+
+Render-prop ::= INTEGER {
+	default		(0),  -- Default view
+	wire		(1),  -- use wireframe 
+	space		(2),  -- use spacefill
+	stick		(3),  -- use stick model (thin cylinders)
+	ballNStick	(4),  -- use ball & stick model
+	thickWire	(5),  -- thicker wireframe
+	hide		(9),  -- don't show this
+	name		(10), -- display its name next to it
+	number 		(11), -- display its number next to it 
+	pdbNumber	(12), -- display its PDB number next to it
+	objWireFrame	(150), -- display MMDB surface object as wireframe
+	objPolygons	(151), -- display MMDB surface object as polygons   
+	colorsetCPK	(225), -- color atoms like CPK models
+	colorsetbyChain	(226), -- color each chain different
+	colorsetbyTemp	(227), -- color using isotropic Temp factors 
+	colorsetbyRes	(228), -- color using residue properties
+	colorsetbyLen	(229), -- color changes along chain length
+	colorsetbySStru	(230), -- color by secondary structure
+	colorsetbyHydro (231), -- color by hydrophobicity
+	colorsetbyObject(246), -- color each object differently
+	colorsetbyDomain(247), -- color each domain differently
+	other           (255)  
+	}
+
+--  When a Biostruc-Feature with a Biostruc-script is initiated,
+--  it should play the specified steps one at a time, setting the feature-do
+--  list as the active display.
+--  The camera can be set using a feature-do, 
+--  but it may be moved independently with
+--  camera-move, which specifies how to move
+--  the camera dynamically during the step along the path defined (e.g.,
+--  a zoom, a rotate).
+--  Any value of pause (in 1:10th's of a second) will force a pause
+--  after an image is shown.
+--  If waitevent is TRUE, it will await a mouse or keypress and ignore 
+--  the pause value.
+
+Biostruc-script ::= SEQUENCE OF Biostruc-script-step
+
+Biostruc-script-step ::= SEQUENCE {
+	step-id			Step-id,
+	step-name		VisibleString OPTIONAL, 
+	feature-do		SEQUENCE OF Other-feature OPTIONAL,
+	camera-move		Transform OPTIONAL,
+	pause			INTEGER DEFAULT 10,
+	waitevent		BOOLEAN,
+	extra			INTEGER, 
+	jump			Step-id OPTIONAL }
+
+Step-id ::= INTEGER
+
+END

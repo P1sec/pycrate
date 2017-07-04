@@ -1,0 +1,392 @@
+--<OSS.PDU>-- 
+
+CALMiitsscu { iso (1) standard (0) calm-management (24102) iitsscu (4) asnm-1 (1) version1 (1)} 
+DEFINITIONS AUTOMATIC TAGS::=BEGIN
+
+IMPORTS
+CIaClass, CIclass, CIstatus, Directivity, Link-ID, LLserviceAddr, MACaddress, MedType, NullType FROM CALMllsap {iso(1) standard(0) calm-ll-sap(21218) asnm-1 (1) version1 (1)} 
+
+ITS-scuId, Param24102No, Param24102 FROM CALMmanagement { iso (1) standard (0) calm-management (24102) local (1) asnm-1 (1) version1 (1)}
+
+SimFUTcmd, SimFUTreq, SimFLTcmd, SimNUTcmd, SimNLTcmd, SimIUTcmd, SimFLTreq, SimNUTreq, SimNLTreq, SimIUTreq, ErrStatus, MF-Command-request, MF-Request-request, MN-Command-request, MN-Request-request, MI-Command-request, MI-Request-request, MA-Command-request, MA-Request-request, MS-Command-request, MS-Request-request, MI-Get-request, MI-Set-request, MF-Command-confirm, MF-Request-confirm, MN-Command-confirm, MN-Request-confirm, MI-Command-confirm, MI-Request-confirm, MA-Command-confirm, MA-Request-confirm, MS-Command-confirm, MS-Request-confirm, MI-Get-confirm, MI-Set-confirm FROM CALMmsap {iso (1) standard (0) calm-management (24102) msap (3) asnm-1 (1) version1 (1)} 
+
+-- Details on SecRq and SecRs to be provided by a standard on security
+;
+-- End of IMPORTS
+
+-- Types
+
+-- PDUs --
+-- IIC-Request PDU
+IIC-Request::=SEQUENCE{
+	sourceITS-scuId	ITS-scuId,
+	destinationITS-scuId	ITS-scuId,
+	pduCounter	PduCounter,
+	requestID	RequestID, -- value zero
+	pduRequest	PduRequest,
+	secRq	SecRq
+	}
+
+RequestID::=INTEGER{
+	request	(0)
+	} (0..255)
+
+RefIICP ::= INTEGER { -- Define IICPREQ.ref values range
+	c-alive       (0),
+	c-mfRcmd      (1),
+	c-mfRreq      (2),
+	c-mnRcmd      (3),
+	c-mnRreq      (4),
+	c-miRcmd      (5),
+	c-miRreq      (6),
+	c-miRget      (7),
+	c-miRset      (8),
+	c-mCmd        (9),
+	c-maRcmd      (10),
+	c-maRreq      (11), 
+	c-msRcmd      (12), 
+	c-msRreq      (13),
+	c-simUtIn		(240),
+	c-simUtOut	(241),
+	c-simAutCmd	(242),
+	c-simAutReq	(243),
+	c-simFutCmd   (244),
+	c-simFutReq   (245),
+	c-simNutCmd   (246),
+	c-simNutReq   (247),
+	c-simIutCmd   (248),
+	c-simIutReq   (249),
+	c-simAltCmd	(250),
+	c-simAltReq	(251),
+	c-simFltCmd   (252),
+	c-simFltReq   (253),
+	c-simNltCmd   (254),
+	c-simNltReq   (255)
+} (0..255)
+
+IICPREQ::=CLASS{
+	&ref	RefIICP UNIQUE, -- data type identifier
+	&IICPrequest
+	}
+
+IICPrequests IICPREQ::={aliveRq | mfRcmdRq | mfRreqRq | mnRcmdRq | mnRreqRq | miRcmdRq | miRreqRq | miRgetRq | miRsetRq | mCmdRq | maRcmdRq | maRreqRq | msRcmdRq | msRreqRq | simFutCmdRq | simFutReqRq | simNutCmdRq | simNutReqRq | simIutCmdRq | simIutReqRq | simFltCmdRq | simFltReqRq | simNltCmdRq | simNltReqRq | simUtInRq | simUtOutRq, ...}
+
+PduRequest::=SEQUENCE{
+	reqRef	IICPREQ.&ref({IICPrequests}), -- data type identifier
+	iicpReq	IICPREQ.&IICPrequest({IICPrequests}{@reqRef})
+	}
+
+aliveRq		IICPREQ::={&ref c-alive, &IICPrequest ITS-SCUalive}
+mfRcmdRq	IICPREQ::={&ref c-mfRcmd, &IICPrequest MF-Command-request}
+mfRreqRq	IICPREQ::={&ref c-mfRreq, &IICPrequest MF-Request-request}
+mnRcmdRq	IICPREQ::={&ref c-mnRcmd, &IICPrequest MN-Command-request}
+mnRreqRq	IICPREQ::={&ref c-mnRreq, &IICPrequest MN-Request-request}
+miRcmdRq	IICPREQ::={&ref c-miRcmd, &IICPrequest MI-Command-request}
+miRreqRq	IICPREQ::={&ref c-miRreq, &IICPrequest MI-Request-request}
+miRgetRq	IICPREQ::={&ref c-miRget, &IICPrequest MI-Get-request}
+miRsetRq	IICPREQ::={&ref c-miRset, &IICPrequest MI-Set-request}
+mCmdRq		IICPREQ::={&ref c-mCmd, &IICPrequest McmdRq}
+maRcmdRq	IICPREQ::={&ref c-maRcmd, &IICPrequest MA-Command-request}
+maRreqRq	IICPREQ::={&ref c-maRreq, &IICPrequest MA-Request-request}
+msRcmdRq	IICPREQ::={&ref c-msRcmd, &IICPrequest MS-Command-request}
+msRreqRq	IICPREQ::={&ref c-msRreq, &IICPrequest MS-Request-request}
+-- simAutCmdRq	IICPREQ::={&ref c-simAutCmd, &IICPrequest SimAUTcmd}
+-- simAutReqRq	IICPREQ::={&ref c-simAutReq, &IICPrequest SimAUTreq}
+simFutCmdRq	IICPREQ::={&ref c-simFutCmd, &IICPrequest SimFUTcmd}
+simFutReqRq	IICPREQ::={&ref c-simFutReq, &IICPrequest SimFUTreq}
+simNutCmdRq	IICPREQ::={&ref c-simNutCmd, &IICPrequest SimNUTcmd}
+simNutReqRq	IICPREQ::={&ref c-simNutReq, &IICPrequest SimNUTreq}
+simIutCmdRq	IICPREQ::={&ref c-simIutCmd, &IICPrequest SimIUTcmd}
+simIutReqRq	IICPREQ::={&ref c-simIutReq, &IICPrequest SimIUTreq}
+-- simAltCmdRq	IICPREQ::={&ref c-simAltCmd, &IICPrequest SimALTcmd}
+-- simAltReqRq	IICPREQ::={&ref c-simAltReq, &IICPrequest SimALTreq}
+simFltCmdRq	IICPREQ::={&ref c-simFltCmd, &IICPrequest SimFLTcmd}
+simFltReqRq	IICPREQ::={&ref c-simFltReq, &IICPrequest SimFLTreq}
+simNltCmdRq	IICPREQ::={&ref c-simNltCmd, &IICPrequest SimNLTcmd}
+simNltReqRq	IICPREQ::={&ref c-simNltReq, &IICPrequest SimNLTreq}
+simUtInRq	IICPREQ::={&ref c-simUtIn, &IICPrequest SimUt}
+simUtOutRq	IICPREQ::={&ref c-simUtOut, &IICPrequest SimUt}
+
+
+ITS-SCUalive::=SEQUENCE{
+	message	AliveMessage,
+	its-scuType	ITS-SCUtype
+	}
+
+AliveMessage::= INTEGER{
+	alive (0),
+	delete (1),
+	new (255)
+	} (0..255)
+
+ITS-SCUtype::= INTEGER{
+    unknown (0),
+	host (1), -- multicast address
+	router (2), -- multicast address
+	itsTestSystem (3), -- used in conformance testing
+	itsTestCIunit (4), -- used in conformance testing
+	any (255) -- broadcast address
+	} (0..255)
+	
+SimUt::=SEQUENCE{
+	fill	BIT STRING (SIZE(3)), -- all bits set to '0'
+	action	CHOICE{
+		mfCmdReq	MF-Command-request,
+		mfCmdConf	MF-Command-confirm,
+		mnCmdReq	MN-Command-request,
+		mnCmdConf	MN-Command-confirm,
+		miCmdReq	MI-Command-request,
+		miCmdConf	MI-Command-confirm,
+		maCmdReq	MA-Command-request,
+		maCmdConf	MA-Command-confirm,
+		mfReqReq	MF-Request-request,
+		mfReqConf	MF-Request-confirm,
+		mnReqReq	MN-Request-request,
+		mnReqConf	MN-Request-confirm,
+		miReqReq	MI-Request-request,
+		miReqConf	MI-Request-confirm,
+		maReqReq	MA-Request-request,
+		maReqConf	MA-Request-confirm,
+		miGetReq	MI-Get-request,
+		miGetConf	MI-Get-confirm,
+		miSetReq	MI-Set-request,
+		miSetConf	MI-Set-confirm,
+		mcmdTrigger	McmdRq,
+		mcmdEvent	McmdRs
+--		msCmdReq	MS-Command-request,
+--		msCmdConf	MS-Command-confirm,
+--		msReqReq	MS-Request-request,
+--		msReqConf	MS-Request-confirm
+		}
+	}
+
+
+-- General OBJECT CLASS for management commands
+
+RefMcmdRq ::= INTEGER { -- allows for 256 commands
+	c-pingRq           (0),
+	c-vCIinfoRq        (1),
+	c-vCIupdateRq      (2),
+	c-getParam24102Rq  (3),
+	c-setParam24102Rq  (4),
+	c-testIicpRq       (254),
+	c-testConfigRq     (255)
+} (0..255)
+
+MCMDREQ::=CLASS{
+	&refMcmd	RefMcmdRq UNIQUE, -- allows for 256 commands
+	&Mcmd
+	}
+
+McmdReqs MCMDREQ::={pingRq | vCIinfoRq | vCIupdateRq | getParam24102Rq | setParam24102Rq | testConfigRq, ...}
+
+McmdRq::=SEQUENCE{
+	mCmdRef	MCMDREQ.&refMcmd({McmdReqs}),
+	mcmd	MCMDREQ.&Mcmd ({McmdReqs}{@mCmdRef})
+	}
+
+pingRq	        MCMDREQ::={&refMcmd c-pingRq, &Mcmd PingIICP}
+vCIinfoRq	MCMDREQ::={&refMcmd c-vCIinfoRq, &Mcmd VCI-info-req}
+vCIupdateRq	MCMDREQ::={&refMcmd c-vCIupdateRq, &Mcmd VCI-update-req}
+getParam24102Rq	MCMDREQ::={&refMcmd c-getParam24102Rq, &Mcmd Param24102No}
+setParam24102Rq	MCMDREQ::={&refMcmd c-setParam24102Rq, &Mcmd Param24102}
+testConfigRq	MCMDREQ::={&refMcmd c-testConfigRq, &Mcmd TestConfigIICP}
+
+PingIICP::=OCTET STRING (SIZE(0..255))
+
+VCI-info-req::=SEQUENCE{
+	medType	MedType,
+	ciaClass	CIaClass,
+	ciClass	CIclass
+	}
+
+VCI-update-req::=SEQUENCE (SIZE(0..255)) OF VCI-Info
+
+VCI-Info::=SEQUENCE{
+	linkId	Link-ID,
+	medType	MedType,
+	ciaClass	CIaClass,
+	ciClass	CIclass,
+	status	CIstatus
+	}
+
+TestConfigIICP::=SEQUENCE{
+	location	BIT STRING (SIZE(6)),
+	lowerLayers	BIT STRING (SIZE(1)),
+	testMode	BIT STRING (SIZE(1))
+	}
+
+	
+
+-- IIC-Response PDU
+
+IIC-Response::=SEQUENCE{
+	sourceITS-scuId	ITS-scuId,
+	destinationITS-scuId	ITS-scuId,
+	pduCounter	PduCounter,
+	responseID	ResponseID, -- value 1
+	pduResponse	PduResponse,
+	errorStatus	PduErrStatus,
+	secRs	SecRs
+	}
+
+ResponseID::=INTEGER{
+	response	(1)
+	} (0..255)
+
+
+IICPRES::=CLASS{
+	&ref	RefIICP UNIQUE,
+	&IICPresponse
+	}
+
+IICPresponses IICPRES::={aliveRs | mfRcmdRs | mfRreqRs | mnRcmdRs | mnRreqRs | miRcmdRs | miRreqRs | miRgetRs | miRgetRs | miRsetRs | mCmdRs | maRcmdRs | maRreqRs | msRcmdRs | msRreqRs |  simAutCmdRs | simAutReqRs | simFutCmdRs | simFutReqRs | simNutCmdRs | simNutReqRs | simIutCmdRs | simIutReqRs | simAltCmdRs | simAltReqRs | simFltCmdRs | simFltReqRs | simNltCmdRs | simNltReqRs | simUtInRs | simUtOutRs, ...}
+
+PduResponse::=SEQUENCE{
+	resRef	IICPRES.&ref({IICPresponses}), -- data type identifier
+	iicpRes	IICPRES.&IICPresponse({IICPresponses}{@resRef})
+	}
+
+aliveRs		IICPRES::={&ref c-alive, &IICPresponse ITS-SCUalive}
+mfRcmdRs	IICPRES::={&ref c-mfRcmd, &IICPresponse MF-Command-confirm}
+mfRreqRs	IICPRES::={&ref c-mfRreq, &IICPresponse MF-Request-confirm}
+mnRcmdRs	IICPRES::={&ref c-mnRcmd, &IICPresponse MN-Command-confirm}
+mnRreqRs	IICPRES::={&ref c-mnRreq, &IICPresponse MN-Request-confirm}
+miRcmdRs	IICPRES::={&ref c-miRcmd, &IICPresponse MI-Command-confirm}
+miRreqRs	IICPRES::={&ref c-miRreq, &IICPresponse MI-Request-confirm}
+miRgetRs	IICPRES::={&ref c-miRget, &IICPresponse MI-Get-confirm}
+miRsetRs	IICPRES::={&ref c-miRset, &IICPresponse MI-Set-confirm}
+mCmdRs		IICPRES::={&ref c-mCmd, &IICPresponse McmdRs}
+maRcmdRs	IICPRES::={&ref c-maRcmd, &IICPresponse MA-Command-confirm}
+maRreqRs	IICPRES::={&ref c-maRreq, &IICPresponse MA-Request-confirm}
+msRcmdRs	IICPRES::={&ref c-msRcmd, &IICPresponse MS-Command-confirm}
+msRreqRs	IICPRES::={&ref c-msRreq, &IICPresponse MS-Request-confirm}
+simAutCmdRs	IICPRES::={&ref c-simAutCmd, &IICPresponse NULL}
+simAutReqRs	IICPRES::={&ref c-simAutReq, &IICPresponse NULL}
+simFutCmdRs	IICPRES::={&ref c-simFutCmd, &IICPresponse NULL}
+simFutReqRs	IICPRES::={&ref c-simFutReq, &IICPresponse NULL}
+simNutCmdRs	IICPRES::={&ref c-simNutCmd, &IICPresponse NULL}
+simNutReqRs	IICPRES::={&ref c-simNutReq, &IICPresponse NULL}
+simIutCmdRs	IICPRES::={&ref c-simIutCmd, &IICPresponse NULL}
+simIutReqRs	IICPRES::={&ref c-simIutReq, &IICPresponse NULL}
+simAltCmdRs	IICPRES::={&ref c-simAltCmd, &IICPresponse NULL}
+simAltReqRs	IICPRES::={&ref c-simAltReq, &IICPresponse NULL}
+simFltCmdRs	IICPRES::={&ref c-simFltCmd, &IICPresponse NULL}
+simFltReqRs	IICPRES::={&ref c-simFltReq, &IICPresponse NULL}
+simNltReqRs	IICPRES::={&ref c-simNltReq, &IICPresponse NULL}
+simNltCmdRs	IICPRES::={&ref c-simNltCmd, &IICPresponse NULL}
+simUtInRs	IICPRES::={&ref c-simUtIn, &IICPresponse NULL}
+simUtOutRs	IICPRES::={&ref c-simUtOut, &IICPresponse NULL}
+
+RefMcmdRs ::= INTEGER {
+	c-pingRs           (0),
+	c-vCIinfoRs        (1),
+	c-vCIupdateRs      (2),
+	c-getParam24102Rs  (3),
+	c-setParam24102Rs  (4),
+	c-testIicpRs       (254),
+	c-testConfigRs     (255)
+} (0..255)
+
+MCMDRES::=CLASS{
+	&refMcmd	RefMcmdRs UNIQUE, 
+	&Mcmd
+	}
+
+McmdRess MCMDRES::={pingRs | vCIinfoRs | vCIupdateRs | getParam24102Rs | setParam24102Rs | testConfigRs, ...}
+
+McmdRs::=SEQUENCE{
+	mCmdRef	MCMDRES.&refMcmd({McmdRess}),
+	mcmd	MCMDRES.&Mcmd ({McmdRess}{@mCmdRef})
+	}
+
+pingRs	        MCMDRES::={&refMcmd c-pingRs, &Mcmd PingIICP}
+vCIinfoRs	MCMDRES::={&refMcmd c-vCIinfoRs, &Mcmd VCI-info-res}
+vCIupdateRs	MCMDRES::={&refMcmd c-vCIupdateRs, &Mcmd NULL}
+getParam24102Rs	MCMDRES::={&refMcmd c-getParam24102Rs, &Mcmd Param24102}
+setParam24102Rs	MCMDRES::={&refMcmd c-setParam24102Rs, &Mcmd ErrStatus}
+testConfigRs	MCMDRES::={&refMcmd c-testConfigRs, &Mcmd NullType}
+
+PduErrStatus::=INTEGER{
+	success (0),
+	pduUnknown (1),
+	duplicateITS-scuId (2),
+	invalidAliveMessage (3),
+	invalidITSscuType (4),
+	unspecFailure (255)
+	} (0..255)
+
+VCI-info-res::=SEQUENCE (SIZE(0..255)) OF VCI-Info
+
+-- SECURITY IIC_REQUEST
+RefSECIICPRQ ::= INTEGER {
+	c-secRqRef (0),
+	c-secRq    (1)
+} (0..255)
+
+SECIICPRQ::=CLASS{
+	&ref	RefSECIICPRQ UNIQUE, -- security type identifier
+	&SecIICP
+	}
+
+
+SecIICPRQs SECIICPRQ::={noSecurityRq | octStringRq, ...}
+
+SecRq::=SEQUENCE{
+	secRqRef	SECIICPRQ.&ref({SecIICPRQs}),
+	secRq	SECIICPRQ.&SecIICP({SecIICPRQs}{@secRqRef})
+	}
+
+noSecurityRq   SECIICPRQ::={&ref c-secRqRef, &SecIICP NullType}
+octStringRq    SECIICPRQ::={&ref c-secRq, &SecIICP SecIICPpayload }
+
+-- SECURITY IIC_RESPONSE
+RefSECIICPRS ::= INTEGER {
+	c-secRsRef (0),
+	c-secRs    (1)
+} (0..255)
+SECIICPRS ::= CLASS{
+	&ref	RefSECIICPRS UNIQUE, -- security type identifier
+	&SecIICP
+	}
+SECIICPRSs SECIICPRS::={noSecurityRs | octStringRs, ...}
+
+
+SecRs::=SEQUENCE{
+	secRsRef	SECIICPRS.&ref({SECIICPRSs}),
+	secRs		SECIICPRS.&SecIICP({SECIICPRSs}{@secRsRef})
+	}
+
+noSecurityRs   SECIICPRS::={&ref c-secRsRef, &SecIICP NullType}
+octStringRs    SECIICPRS::={&ref c-secRs, &SecIICP SecIICPpayload }
+
+SecIICPpayload ::= OCTET STRING (SIZE(0..65535))
+-- MF-SAP --
+
+-- MF-COMMANDs --
+
+IICrequestTX::=IIC-Request
+
+IICresponseTX::=IIC-Response
+
+-- MF-REQUESTs --
+
+IICrequestRX::=IIC-Request
+
+IICresponseRX::=IIC-Response
+
+
+-- General types --
+
+PduCounter::=INTEGER(0..65535)
+
+-- Values
+
+version INTEGER(0..255)::=2 -- version of this ASN.1 module
+
+--/*
+--   The ASN.1 specification has been checked for conformance to the ASN.1
+--   standards by OSS ASN.1 Syntax Checker, and by OSS ASN-1STEP
+--*/
+
+END

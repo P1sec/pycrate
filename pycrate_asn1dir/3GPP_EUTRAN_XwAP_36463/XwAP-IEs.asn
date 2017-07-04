@@ -1,0 +1,585 @@
+-- **************************************************************
+--
+-- Information Element Definitions
+--
+-- **************************************************************
+
+XwAP-IEs {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) xwap (8) version1 (1) xwap-IEs (2) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+IMPORTS
+	id-BSSMeasurementResult-Item,
+	id-BSSToReport-Item,
+	id-E-RAB-Item,
+	id-CompleteFailureCauseInformation-Item,
+	id-MeasurementInitiationResult-Item,
+	id-MeasurementFailureCause-Item,
+	id-wLANBandInformation,
+	id-WLANIdentifier-Item,
+	id-WLANIdentifiersToDelete-Item,
+	id-WLANIdentifiersToDeleteExtension-Item,
+
+	maxnoofBands,
+	maxnoofBearers,
+	maxnoofBSSs,
+	maxnoofErrors,
+	maxnoofFailedMeasObjects,
+	maxnoofMobilitySetItems,
+	maxnoofWLANIdentifierItems
+FROM XwAP-Constants
+
+	Criticality,
+	ProcedureCode,
+	ProtocolIE-ID,
+	TriggeringMessage
+FROM XwAP-CommonDataTypes
+
+	ProtocolExtensionContainer{},
+	XWAP-PROTOCOL-EXTENSION,
+	ProtocolIE-SingleContainer{},
+	XWAP-PROTOCOL-IES
+FROM XwAP-Containers;	
+
+-- A
+
+AllocationAndRetentionPriority ::= SEQUENCE {
+	priorityLevel				PriorityLevel,
+	pre-emptionCapability		Pre-emptionCapability,
+	pre-emptionVulnerability	Pre-emptionVulnerability,
+	iE-Extensions				ProtocolExtensionContainer { {AllocationAndRetentionPriority-ExtIEs} } OPTIONAL,
+	...
+}
+
+AllocationAndRetentionPriority-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+AvailableChUtilization ::= SEQUENCE {
+	capacityValue				CapacityValue,
+	iE-Extensions				ProtocolExtensionContainer { { AvailableChUtilization-ExtIEs} } OPTIONAL,
+	...
+}
+
+AvailableChUtilization-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- B
+
+BitRate	::= INTEGER (0..10000000000)
+
+BSSID ::= OCTET STRING (SIZE(6))
+
+BSSLoad ::= SEQUENCE {
+	channelUtilization		ChannelUtilization,
+	stationCount			StationCount		OPTIONAL,
+	iE-Extensions			ProtocolExtensionContainer { {BSSLoad-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+BSSLoad-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+BSS-Item ::= SEQUENCE {
+	bSSID						BSSID,
+	wLANOperatingClass			WLANOperatingClass			OPTIONAL,
+	wLANCountryCode				WLANCountryCode				OPTIONAL,
+	maximumCapacity				BitRate						OPTIONAL,
+	wLANBandInformationList		WLANBandInformationList		OPTIONAL,
+	iE-Extensions				ProtocolExtensionContainer { {BSS-Item-ExtIEs} } OPTIONAL,
+	...
+}
+
+BSS-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+BSSMeasurementResult-List ::= SEQUENCE (SIZE (1..maxnoofBSSs)) OF ProtocolIE-SingleContainer { {BSSMeasurementResult-ItemIEs} }
+
+BSSMeasurementResult-ItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-BSSMeasurementResult-Item	CRITICALITY ignore	TYPE BSSMeasurementResult-Item	PRESENCE mandatory},
+	...
+}
+
+BSSMeasurementResult-Item ::= SEQUENCE {
+	bSSID					BSSID,
+	bSSLoad					BSSLoad					OPTIONAL,
+	wANMetrics				WANMetrics				OPTIONAL,
+	availableChUtilization	AvailableChUtilization	OPTIONAL,
+	iE-Extensions				ProtocolExtensionContainer { {BSSMeasurementResult-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+BSSMeasurementResult-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+BSSToReport-List ::= SEQUENCE (SIZE (1.. maxnoofBSSs)) OF ProtocolIE-SingleContainer { {BSSToReport-ItemIEs} }
+
+BSSToReport-ItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-BSSToReport-Item	CRITICALITY ignore	TYPE BSSToReport-Item 	PRESENCE mandatory}
+}
+
+BSSToReport-Item ::= SEQUENCE {
+	bSSID									BSSID,
+	iE-Extensions							ProtocolExtensionContainer { {BSSToReport-Item-ExtIEs} } OPTIONAL,
+	...
+}
+
+BSSToReport-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- C
+
+CapacityValue ::= INTEGER (0..100)
+
+Cause ::= CHOICE {
+	radioNetwork		CauseRadioNetwork,
+	transport			CauseTransport,
+	protocol			CauseProtocol,
+	misc				CauseMisc,
+	...
+}
+
+CauseMisc ::= ENUMERATED {
+	control-processing-overload,
+	hardware-failure,
+	om-intervention,
+	not-enough-user-plane-processing-resources,
+	unspecified,
+	...
+}
+
+CauseProtocol ::= ENUMERATED {
+	transfer-syntax-error,
+	abstract-syntax-error-reject,
+	abstract-syntax-error-ignore-and-notify,
+	message-not-compatible-with-receiver-state,
+	semantic-error,
+	unspecified,
+	abstract-syntax-error-falsely-constructed-message,
+	...
+}
+
+CauseRadioNetwork ::= ENUMERATED {
+	unknown-eNB-UE-XwAP-ID, 
+	unknown-WT-UE-XwAP-ID, 
+	unknown-pair-of-UE-XwAP-ID,
+	wLAN-not-available,
+	security-failure,
+	reportCharacteristicsEmpty,
+	existing-Measurement-ID,
+	unknown-Measurement-ID,
+	measurement-temporarily-not-available,
+	unspecified,
+	multiple-E-RAB-ID-instances,
+	switch-off-ongoing,
+	not-supported-QCI-value,
+	measurement-not-supported-for-the-object,
+	reduce-load,
+	resource-optimisation,
+	target-not-allowed,
+	no-radio-resources-available,
+	invalid-QoS-combination,
+	procedure-cancelled,
+	radio-connection-with-UE-lost,
+	failure-in-the-radio-interface-procedure,
+	...,
+	no-report-periodicity
+}
+
+CauseTransport ::= ENUMERATED {
+	transport-resource-unavailable,
+	unspecified,
+	...
+}
+
+ChannelUtilization ::= INTEGER (0..255)
+
+CompleteFailureCauseInformation-List ::= SEQUENCE (SIZE (1..maxnoofBSSs)) OF ProtocolIE-SingleContainer { {CompleteFailureCauseInformation-ItemIEs} }
+
+CompleteFailureCauseInformation-ItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-CompleteFailureCauseInformation-Item	CRITICALITY ignore	TYPE CompleteFailureCauseInformation-Item	PRESENCE mandatory}
+}
+
+CompleteFailureCauseInformation-Item ::= SEQUENCE {
+	bSSID									BSSID,
+	measurementFailureCause-List			MeasurementFailureCause-List,
+	iE-Extensions							ProtocolExtensionContainer { { CompleteFailureCauseInformation-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+CompleteFailureCauseInformation-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+CriticalityDiagnostics ::= SEQUENCE {
+	procedureCode					ProcedureCode														OPTIONAL,
+	triggeringMessage				TriggeringMessage													OPTIONAL,
+	procedureCriticality			Criticality															OPTIONAL,
+	iEsCriticalityDiagnostics		CriticalityDiagnostics-IE-List										OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer {{CriticalityDiagnostics-ExtIEs}}		OPTIONAL,
+	...
+}
+
+CriticalityDiagnostics-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+CriticalityDiagnostics-IE-List ::= SEQUENCE (SIZE (1.. maxnoofErrors)) OF CriticalityDiagnostics-IE-Item
+
+CriticalityDiagnostics-IE-Item ::= SEQUENCE {
+	iECriticality			Criticality,
+	iE-ID					ProtocolIE-ID,
+	typeOfError 			TypeOfError,
+	iE-Extensions			ProtocolExtensionContainer {{CriticalityDiagnostics-IE-Item-ExtIEs}}	OPTIONAL,
+	...
+}
+
+CriticalityDiagnostics-IE-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- E
+
+ENB-ID ::= CHOICE {
+	macroENB-ID			BIT STRING (SIZE(20)),
+	otherENB-ID			ProtocolIE-SingleContainer { {OtherENB-IDIEs} },
+	...
+}
+
+E-RAB-ID ::= INTEGER (0..15, ...)
+
+E-RAB-List ::= SEQUENCE (SIZE(1.. maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RAB-ItemIEs} }
+
+E-RAB-ItemIEs 	XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RAB-Item	 CRITICALITY ignore 	TYPE E-RAB-Item 	PRESENCE mandatory },
+	...
+}
+
+E-RAB-Item ::= SEQUENCE {
+	e-RAB-ID					E-RAB-ID,
+	cause						Cause,
+	iE-Extensions				ProtocolExtensionContainer { {E-RAB-Item-ExtIEs} } OPTIONAL,
+	...
+}
+
+E-RAB-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+E-RAB-QoS-Parameters ::= SEQUENCE {
+	qCI								QCI,
+	allocationRetentionPriority		AllocationAndRetentionPriority,
+	gbrQosInformation				GBR-QosInformation					OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { {E-RAB-QoS-Parameters-ExtIEs} }	OPTIONAL,
+	...
+}
+
+E-RAB-QoS-Parameters-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- G
+
+GBR-QosInformation ::= SEQUENCE {
+	e-RAB-MaximumBitrateDL			BitRate,
+	e-RAB-GuaranteedBitrateDL		BitRate,
+	iE-Extensions					ProtocolExtensionContainer { { GBR-QosInformation-ExtIEs} } OPTIONAL,
+	...
+}
+
+GBR-QosInformation-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+Global-ENB-ID ::= SEQUENCE {
+	pLMNidentity			PLMN-Identity,
+	eNB-ID					ENB-ID,
+	iE-Extensions			ProtocolExtensionContainer { {GlobalENB-ID-ExtIEs} }		OPTIONAL,
+	...
+}
+
+GlobalENB-ID-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+GTPtunnelEndpoint ::= SEQUENCE {
+	transportLayerAddress			TransportLayerAddress,
+	gTP-TEID						GTP-TEID,
+	iE-Extensions					ProtocolExtensionContainer { {GTPtunnelEndpoint-ExtIEs} } OPTIONAL,
+	...
+}
+
+GTPtunnelEndpoint-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+GTP-TEID	::= OCTET STRING (SIZE (4))
+
+-- H
+
+HESSID ::= OCTET STRING (SIZE(6))
+
+-- M
+
+Measurement-ID ::= INTEGER (1..4095, ...)
+
+MeasurementInitiationResult-List ::= SEQUENCE (SIZE (1.. maxnoofBSSs)) OF ProtocolIE-SingleContainer { { MeasurementInitiationResult-ItemIEs} }
+
+MeasurementInitiationResult-ItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-MeasurementInitiationResult-Item	CRITICALITY ignore	TYPE MeasurementInitiationResult-Item	PRESENCE mandatory}
+}
+
+MeasurementInitiationResult-Item ::= SEQUENCE {
+	bSSID								BSSID,
+	measurementFailureCause-List		MeasurementFailureCause-List	OPTIONAL,
+	iE-Extensions						ProtocolExtensionContainer { { MeasurementInitiationResult-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+MeasurementInitiationResult-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+MeasurementFailureCause-List ::= SEQUENCE (SIZE (1..maxnoofFailedMeasObjects)) OF ProtocolIE-SingleContainer { { MeasurementFailureCause-ItemIEs} }
+
+MeasurementFailureCause-ItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-MeasurementFailureCause-Item	CRITICALITY ignore	TYPE MeasurementFailureCause-Item		PRESENCE mandatory}
+}
+
+MeasurementFailureCause-Item ::= SEQUENCE {
+	measurementFailedReportCharacteristics			ReportCharacteristics,
+	cause											Cause,
+	iE-Extensions									ProtocolExtensionContainer { { MeasurementFailureCause-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+MeasurementFailureCause-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+MobilitySet ::= SEQUENCE (SIZE (1..maxnoofMobilitySetItems)) OF MobilitySetItem
+
+MobilitySetItem ::= SEQUENCE {
+	bSSID				BSSID				OPTIONAL,
+	sSID				SSID				OPTIONAL,
+	hESSID				HESSID				OPTIONAL,
+	iE-Extensions		ProtocolExtensionContainer	{ { MobilitySetItem-ExtIEs } }	OPTIONAL,
+	...
+}
+
+MobilitySetItem-ExtIEs	XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- O
+OtherENB-IDIEs 	XWAP-PROTOCOL-IES ::= {
+	...
+}
+
+-- P
+
+PartialSuccessIndicator ::= ENUMERATED {
+	partial-success-allowed, ...
+}
+
+PLMN-Identity ::= OCTET STRING (SIZE(3))
+
+Pre-emptionCapability ::= ENUMERATED {
+	shall-not-trigger-pre-emption,
+	may-trigger-pre-emption
+}
+
+Pre-emptionVulnerability ::= ENUMERATED {
+	not-pre-emptable,
+	pre-emptable
+}
+
+PriorityLevel ::= INTEGER { spare (0), highest (1), lowest (14), no-priority (15) } (0..15)
+
+-- Q
+
+QCI ::= INTEGER (0..255)
+
+
+-- R
+
+Registration-Request ::= ENUMERATED {
+	start,
+	stop,
+	...
+}
+
+ReportCharacteristics ::= BIT STRING (SIZE (32))
+
+ReportingPeriodicity ::= ENUMERATED {
+	ms10, ms50, ms100, ms200, ms500, s1, s5, s10, ...
+}
+
+
+-- S
+
+SSID ::= OCTET STRING (SIZE (1..32))
+
+StationCount ::= INTEGER (0..65535)
+
+-- T
+
+TransportLayerAddress ::= BIT STRING (SIZE(1..160, ...))
+
+TypeOfError ::= ENUMERATED {
+	not-understood,
+	missing,
+	...
+}
+
+
+-- U
+
+UE-Identity ::= OCTET STRING (SIZE (6))
+
+UE-XwAP-ID ::= OCTET STRING (SIZE (3))
+
+-- W
+
+WANMetrics ::= SEQUENCE {
+	wAN-Backhaul-Rate-DL		WLAN-Backhaul-Rate,
+	wAN-Backhaul-Rate-UL		WLAN-Backhaul-Rate,
+	wANBackhaulLoad-DL	ChannelUtilization,
+	wANBackhaulLoad-UL	ChannelUtilization,
+	iE-Extensions				ProtocolExtensionContainer { { WANMetrics-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+WANMetrics-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+WLAN-Backhaul-Rate ::= ENUMERATED {r0, r4, r8, r16, r32, r64, r128, r256, r512, r1024, r2048, r4096, r8192, r16384, r32768, r65536, r131072, r262144, r524288, r1048576, r2097152, r4194304, r8388608, r16777216, r33554432, r67108864, r134217728, r268435456, r536870912, r1073741824, r2147483648, r4294967296}
+
+WLANband  ::= ENUMERATED {band2dot4, band5, ...}
+
+WLANBandInformationList ::= SEQUENCE (SIZE (1..maxnoofBands)) OF ProtocolIE-SingleContainer { { WLANBandInformation-ItemIEs} }
+
+WLANBandInformation-ItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-wLANBandInformation	   CRITICALITY ignore	TYPE WLANBandInformation 	PRESENCE mandatory},
+	...
+}
+
+WLANBandInformation ::= CHOICE {
+	band				WLANband,
+	channelnumber		WLANchannelnumber,
+	...
+}
+
+WLANchannelnumber ::= INTEGER (0..255)
+
+WLANOperatingClass ::= INTEGER (0..255)
+
+WLANCountryCode ::= ENUMERATED {
+	unitedStates,
+	europe,
+	japan,
+	global,
+	...
+}
+
+WLANIdentifier-List ::= SEQUENCE (SIZE (1.. maxnoofWLANIdentifierItems)) OF ProtocolIE-SingleContainer { { WLANIdentifier-ItemIEs} }
+
+WLANIdentifier-ItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-WLANIdentifier-Item	CRITICALITY ignore	TYPE WLANIdentifier-Item	PRESENCE mandatory},
+	...
+}
+
+WLANIdentifier-Item ::= SEQUENCE {
+	wLANInformation			WLANInformation,
+	iE-Extensions			ProtocolExtensionContainer { { WLANIdentifier-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+WLANIdentifier-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+WLANIdentifiersToDelete-List ::= SEQUENCE (SIZE (1.. maxnoofWLANIdentifierItems)) OF ProtocolIE-SingleContainer { { WLANIdentifiersToDelete-ItemIEs} }
+
+WLANIdentifiersToDelete-ItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-WLANIdentifiersToDelete-Item	CRITICALITY ignore	TYPE WLANIdentifiersToDelete-Item	PRESENCE mandatory}
+}
+
+WLANIdentifiersToDelete-Item ::= SEQUENCE {
+	bSSID											BSSID,
+	iE-Extensions									ProtocolExtensionContainer { { WLANIdentifiersToDelete-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+WLANIdentifiersToDelete-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+WLANIdentifiersToDeleteExtension-List ::= SEQUENCE (SIZE (1.. maxnoofWLANIdentifierItems)) OF ProtocolIE-SingleContainer { { WLANIdentifiersToDeleteExtension-ItemIEs} }
+
+WLANIdentifiersToDeleteExtension-ItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-WLANIdentifiersToDeleteExtension-Item	CRITICALITY ignore	TYPE WLANIdentifiersToDeleteExtension-Item	PRESENCE mandatory}
+}
+
+WLANIdentifiersToDeleteExtension-Item ::= SEQUENCE {
+	sSID					SSID			OPTIONAL,
+	hESSID					HESSID			OPTIONAL,
+	iE-Extensions			ProtocolExtensionContainer { { WLANIdentifiersToDeleteExtension-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+WLANIdentifiersToDeleteExtension-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+WLANInformation ::= SEQUENCE {
+	bSS-Item		BSS-Item	OPTIONAL,
+	sSID			SSID		OPTIONAL,
+	hESSID			HESSID		OPTIONAL,
+	iE-Extensions	ProtocolExtensionContainer { { WLANInformation-ExtIEs} }	OPTIONAL,
+	...
+}
+
+WLANInformation-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+WLANSecurityInfo ::= SEQUENCE {
+	wT-Security-Key 	BIT STRING (SIZE(256)),
+	iE-Extensions		ProtocolExtensionContainer { { WLANSecurityInfo-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+WLANSecurityInfo-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+WTID ::= CHOICE {
+	wTID-Type1			WTID-Type1,
+	wTID-Type2			WTID-Long-Type2,
+	...
+}
+
+WTID-Type1 ::= SEQUENCE {
+	pLMN-Identity					PLMN-Identity,
+	shortWTID						BIT STRING (SIZE(24)),
+	...
+}
+
+WTID-Long-Type2 ::= BIT STRING (SIZE(48))
+
+
+END

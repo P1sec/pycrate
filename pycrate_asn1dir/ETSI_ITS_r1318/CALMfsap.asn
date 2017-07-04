@@ -1,0 +1,333 @@
+CALMfsap { iso (1) standard (0) calm-management (24102) fsap (5) asnm-1 (1)} 
+
+DEFINITIONS AUTOMATIC TAGS::=BEGIN
+
+IMPORTS
+
+ITSaid FROM CITSapplMgmtApplReg {iso(1) standard(0) cits-applMgmt (17419) applRegistry (2)}
+
+PortNumber FROM CALMfntp { iso (1) standard (0) calm-nonip(29281) fntp(1) asnm-1(1)}
+
+Directivity, LLserviceAddr, MedType, UserPriority FROM CALMllsap {iso(1) standard(0) calm-ll-sap(21218) asnm-1(1)} 
+
+ApplicationID, ITS-scuId, StationID FROM CALMmanagement { iso (1) standard (0) calm-management (24102) local (1) asnm-1(1)}
+
+TransportAddressType, TransportAddress FROM TRANSPORT-ADDRESS-MIB
+
+;
+
+-- End of IMPORTS
+
+-- Types
+
+-- PDUs --
+
+-- SAM --
+
+SAM::=SEQUENCE{
+	fmtID	FmtID, -- value sam
+	version	VersionFSAP, 
+	serverID	StationID,
+	serviceList	ServiceList,
+	channelList	ChannelList,
+	ipServList	IpServList
+	}
+
+FmtID::=INTEGER{
+	sam (0),
+	ctx (1)
+	} (0..15)
+
+VersionFSAP::=INTEGER(0..15)
+
+ServiceList::=SEQUENCE (SIZE(0..noNonipServices))OF NonipService
+
+ChannelList::=SEQUENCE(SIZE(0..noChannels)) OF SessionChannel
+-- Name changed from ServiceChannel to SessionChannel for clarification
+
+IpServList::=SEQUENCE (SIZE(0..noIpServices))OF IpService
+
+NonipService::=SEQUENCE{
+	serviceID	ITSaid,
+	serviceData	ServiceData, 
+	serverPort	PortNumber, -- always transmitted, even if not used
+	sessionChannel	INTEGER(0..noChannels) -- '0':no change of channel
+	}
+
+SessionChannel::= SEQUENCE{
+	serviceChannel	INTEGER(0..255), -- medium-specific channel number
+	medium	MedType, -- identification of access technology
+	schParams	OCTET STRING -- medium-specific parameters
+}
+
+IpService::=SEQUENCE{
+	serviceID	ITSaid,
+	serviceData	IpServiceData,
+	ipInfo	IpInfo,
+	sessionChannel	INTEGER(0..noChannels)
+}
+
+-- CTX --
+
+CTX::=SEQUENCE{
+	fmtID	FmtID, -- value ctx
+	version	VersionFSAP,
+	clientID	StationID,
+	servContextList	ServContextList,
+	ipContextList	IpContextList
+}
+
+ServContextList::=SEQUENCE (SIZE(0..noNonipContexts))OF NonipContext
+
+IpContextList::=SEQUENCE (SIZE(0..noIpContexts))OF IpContext
+
+IpContext::=SEQUENCE{
+	serviceID	ITSaid,
+	contextData	IpContextData, 
+	ipInfo	IpInfo
+}
+
+-- MF-SAP services --
+
+GCctxTxCmd::=SEQUENCE{ 
+	link	LLserviceAddr, -- NT protocol and UC-VCI
+	ctx	CTX
+	}
+
+GCperiodCmd::=SEQUENCE{
+	applicationID	ApplicationID, 
+	bcVCIs	SEQUENCE (SIZE(1..256)) OF LLserviceAddr,
+	gcInterval	GcInterval, -- repetition interval
+	priority	UserPriority, -- of advertisement
+	serviceDataReg	ServiceDataReg -- advertisement details
+	}
+
+GCsamctx::= SEQUENCE{
+	applicationID	ApplicationID, -- unique in the host
+	serverID	StationID, -- of peer station
+	serviceInfo	ServiceInfo,
+	link	LLserviceAddr
+	}
+
+GCsamctxConf::= SEQUENCE{
+	applicationID ApplicationID, -- unique in the host
+	link	LLserviceAddr, -- as received in the GCsamctx
+	port	PortNumber -- dynamically assigned port number to be used in CTX
+	}
+
+GCdeleteCmd::=SEQUENCE{
+	applicationID	ApplicationID
+	}
+
+ServiceInfo::=SEQUENCE{
+	fill	BIT STRING (SIZE(7)),
+	info	CHOICE{
+			nonipService	NonipSAMctx,
+			ipService	IpSAMctx
+		}
+	}
+
+NonipSAMctx::=SEQUENCE{
+	serviceID	ITSaid,
+	providerPort	PortNumber
+	}
+
+IpSAMctx::=SEQUENCE{
+	serviceID	ITSaid,
+	ipInfo	IpInfo
+	}
+
+-- MN-SAP services --
+
+CTXrxNot::=SEQUENCE{
+	link	LLserviceAddr,
+	ctx	CTX
+	}
+
+SAMrxNot::=SEQUENCE{
+	link	LLserviceAddr,
+	sam	SAM
+	}
+
+GCsam::= SEQUENCE{
+	applicationID	ApplicationID,  -- unique in the host
+	serverID	StationID,  -- peer station
+	serviceData	SAMserviceData,
+	link	LLserviceAddr
+}
+
+SAMserviceData::=SEQUENCE{
+	fill	BIT STRING (SIZE(7)),
+	servData	CHOICE	{
+			nonipService	NonipSAM,
+			ipService	IpSAM
+		}
+	}
+
+NonipSAM::=SEQUENCE{
+	serviceID	ITSaid,
+	serviceData	ServiceData,
+	providerPort	PortNumber, 
+	sessionChannel	SessionChannel
+}
+
+IpSAM::=SEQUENCE{
+	serviceID	ITSaid,
+	serviceData	IpServiceData,
+	ipInfo	IpInfo,
+	sessionChannel	SessionChannel
+	}
+
+GCctx::= SEQUENCE{
+	applicationID	ApplicationID, -- unique in the host
+	clientID	StationID, -- peer station
+	serviceContext	CTXserviceData
+	}
+
+CTXserviceData::=SEQUENCE{
+	fill	BIT STRING (SIZE(7)),
+	servData	CHOICE	{
+			nonipContext	NonipContext,
+			ipContext	IpContext
+		}
+	} 
+
+NonipContext::=SEQUENCE{
+	serviceID	ITSaid,
+	contextData	ContextData,
+	userPort	PortNumber
+	}
+
+GCregServer::= SEQUENCE{
+	applicationID	ApplicationID,
+	gCschedule	GCschedule,
+	priority	UserPriority,
+	serviceDataReg	ServiceDataReg
+	}
+
+GCupdateServer::= SEQUENCE{
+	applicationID	ApplicationID,
+	gCschedule	GCschedule,
+	fill	BIT STRING (SIZE(7)),
+	serviceDataReg	SEQUENCE (SIZE(0..1)) OF ServiceDataReg
+	}
+
+GCderegServer::= SEQUENCE{
+	applicationID	ApplicationID
+	}
+
+GCregClient::= SEQUENCE{
+	applicationID	ApplicationID,
+	priority	UserPriority,
+	serviceID	ITSaid,
+	contextData	ContextData
+	}
+
+GCupdateClient::= SEQUENCE{
+	applicationID	ApplicationID,
+	serviceID	ITSaid,
+	contextData	ContextData
+	}
+
+GCderegClient::= SEQUENCE{
+	applicationID	ApplicationID
+	}
+
+GCregServerConf::= SEQUENCE{
+	applicationID	ApplicationID
+	}
+
+GCupdateServerConf::= SEQUENCE{
+	applicationID	ApplicationID
+	}
+
+GCderegServerConf::= SEQUENCE{
+	applicationID	ApplicationID
+	}
+
+GCregClientConf::= SEQUENCE{
+	applicationID	ApplicationID
+	}
+
+GCupdateClientConf::= SEQUENCE{
+	applicationID	ApplicationID
+	}
+
+GCderegClientConf::= SEQUENCE{
+	applicationID	ApplicationID
+	}
+
+
+-- General types --
+ServiceData::=OCTET STRING (SIZE(0..noServiceDataOctets))
+
+ContextData::=OCTET STRING (SIZE(0..noContextDataOctets))
+
+IpServiceData::=OCTET STRING (SIZE(0..noIpServiceDataOctets))
+
+IpContextData::=OCTET STRING (SIZE(0..noIpContextDataOctets))
+
+GCschedule::= SEQUENCE (SIZE(0..255)) OF GCsched
+
+GCsched::= SEQUENCE{
+	medium	MedType,
+	directivity	Directivity,
+	gcInterval	GcInterval
+	}
+
+ServiceDataReg::= SEQUENCE{
+	fill	BIT STRING (SIZE(7)),
+	datareg	CHOICE{
+			nonipData	[0] NonipServiceReg,
+			ipData	[1] IpServiceReg
+		}
+	}
+
+NonipServiceReg::=SEQUENCE{
+	serviceID	ITSaid,
+	serviceData	OCTET STRING (SIZE(0..noServiceDataOctets)),
+	providerPort	PortNumber -- if not used, put PORT_UNK
+}
+
+IpServiceReg::=SEQUENCE{
+	serviceID	ITSaid,
+	serviceData	OCTET STRING (SIZE(0..noIpServiceDataOctets)),
+	ipInfo	IpInfo
+	}
+
+GcInterval::=INTEGER(0..65535) -- in ms
+
+IpInfo::=SEQUENCE{
+	address	IpAddressInfo
+	}
+
+IpAddressInfo::=SEQUENCE{
+	addressType	TransportAddressType,
+	address	TransportAddress
+}
+
+-- Values
+-- to be corrected / confirmed
+
+noNonipServices INTEGER::=255
+
+noChannels INTEGER::=255
+
+noIpServices INTEGER::=255
+
+noNonipContexts INTEGER::=255
+
+noIpContexts INTEGER::=255
+
+noServiceDataOctets INTEGER::=65535
+
+noIpServiceDataOctets INTEGER::=65535
+
+noContextDataOctets INTEGER::=65535
+
+noIpContextDataOctets INTEGER::=65535
+
+versionNoFSAP INTEGER::=0 -- This standard
+
+
+END

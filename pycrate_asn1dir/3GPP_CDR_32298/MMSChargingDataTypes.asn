@@ -1,0 +1,984 @@
+MMSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5)  mmsChargingDataTypes (5) asn1Module (0) version1 (0)}
+
+DEFINITIONS IMPLICIT TAGS	::=
+
+BEGIN
+
+-- EXPORTS everything
+
+IMPORTS	
+
+
+GSNAddress,
+IPAddress,
+LocalSequenceNumber,
+ManagementExtensions,
+MscNo,
+MSISDN, 
+MSTimeZone,
+RecordType,
+TimeStamp
+FROM GenericChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) genericChargingDataTypes (0) asn1Module (0) version1 (0)}
+
+ChargingID,
+PLMN-Id,
+RATType
+FROM GPRSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) gprsChargingDataTypes (2) asn1Module (0) version1 (0)}
+CallReferenceNumber
+FROM MAP-CH-DataTypes {itu-t identified-organization (4) etsi (0) mobileDomain (0)
+gsm-Network (1) modules (3) map-CH-DataTypes (13)  version15 (15)}
+-- from TS 29.002 [214]
+
+;
+
+--
+--  MMS RECORDS
+--
+
+MMSRecordType	::= CHOICE
+--
+-- Record values 30..62 are MMS specific
+--
+{
+	mMO1SRecord				[30] MMO1SRecord,
+	mMO4FRqRecord			[31] MMO4FRqRecord,
+	mMO4FRsRecord			[32] MMO4FRsRecord,
+	mMO4DRecord				[33] MMO4DRecord,
+	mMO1DRecord				[34] MMO1DRecord,
+	mMO4RRecord				[35] MMO4RRecord,
+	mMO1RRecord				[36] MMO1RRecord,
+	mMOMDRecord				[37] MMOMDRecord,
+	mMR4FRecord				[38] MMR4FRecord,
+	mMR1NRqRecord			[39] MMR1NRqRecord,
+	mMR1NRsRecord			[40] MMR1NRsRecord,
+	mMR1RtRqRecord			[41] MMR1RtRecord,
+	mMR1ARecord				[42] MMR1ARecord,
+	mMR4DRqRecord			[43] MMR4DRqRecord,
+	mMR4DRsRecord			[44] MMR4DRsRecord,
+	mMR1RRRecord			[45] MMR1RRRecord,
+	mMR4RRqRecord			[46] MMR4RRqRecord,
+	mMR4RRsRecord			[47] MMR4RRsRecord,
+	mMRMDRecord				[48] MMRMDRecord,
+	mMFRecord				[49] MMFRecord,
+	mMBx1SRecord			[50] MMBx1SRecord,
+	mMBx1VRecord			[51] MMBx1VRecord,
+	mMBx1URecord			[52] MMBx1URecord,
+	mMBx1DRecord			[53] MMBx1DRecord,
+	mM7SRecord				[54] MM7SRecord,
+	mM7DRqRecord			[55] MM7DRqRecord,
+	mM7DRsRecord			[56] MM7DRsRecord,
+	mM7CRecord				[57] MM7CRecord,
+	mM7RRecord				[58] MM7RRecord,
+	mM7DRRqRecord			[59] MM7DRRqRecord,
+	mM7DRRsRecord			[60] MM7DRRsRecord,
+	mM7RRqRecord			[61] MM7RRqRecord,
+	mM7RRsRecord			[62] MM7RRsRecord
+}
+
+MMO1SRecord	::= SET
+{
+	recordType					[0] RecordType,
+	originatorMmsRSAddress		[1] MMSRSAddress,
+	messageID					[2] OCTET STRING,
+	replyChargingID				[3] OCTET STRING OPTIONAL,
+	originatorAddress			[4] MMSAgentAddress,
+	recipientAddresses			[5] MMSAgentAddresses,
+	accessCorrelation			[6] AccessCorrelation OPTIONAL,
+	contentType					[7] ContentType,
+	mmComponentType				[8] MMComponentType OPTIONAL,
+	messageSize					[9] DataVolume,
+	messageClass				[10] MessageClass OPTIONAL,
+	chargeInformation			[11] ChargeInformation OPTIONAL,
+	submissionTime				[12] TimeStamp OPTIONAL, 
+	timeOfExpiry				[13] WaitTime OPTIONAL,
+	earliestTimeOfDelivery		[14] WaitTime OPTIONAL, 
+	durationOfTransmission		[15] INTEGER OPTIONAL,
+	requestStatusCode			[16] RequestStatusCodeType OPTIONAL,
+	deliveryReportRequested		[17] BOOLEAN OPTIONAL,
+	replyCharging				[18] BOOLEAN OPTIONAL,
+	replyDeadline				[19] WaitTime OPTIONAL,
+	replyChargingSize			[20] DataVolume OPTIONAL,
+	priority					[21] PriorityType OPTIONAL,
+	senderVisibility			[22] BOOLEAN OPTIONAL,
+	readReplyRequested			[23] BOOLEAN OPTIONAL,
+	statusText					[24] StatusTextType,
+	recordTimeStamp				[25] TimeStamp,
+	localSequenceNumber			[26] LocalSequenceNumber OPTIONAL,
+	recordExtensions			[27] ManagementExtensions OPTIONAL,
+	mMBoxstorageInformation		[28] MMBoxStorageInformation OPTIONAL,
+	mscfInformation				[29] MSCFInformation OPTIONAL,
+	sGSNPLMNIdentifier			[30] PLMN-Id OPTIONAL,
+	rATType						[31] RATType OPTIONAL,
+	mSTimeZone 					[32] MSTimeZone OPTIONAL
+}
+
+MMO4FRqRecord		::= SET
+{
+	recordType					[0]  RecordType,
+	originatorMmsRSAddress		[1]  MMSRSAddress,
+	recipientMmsRSAddress		[2]  MMSRSAddress,
+	messageID					[3]  OCTET STRING,
+	mms3GPPVersion				[4]  OCTET STRING OPTIONAL,
+	originatorAddress			[5]  MMSAgentAddress,
+	recipientAddresses			[6]  MMSAgentAddresses,
+	contentType					[7]  ContentType, 
+	mmComponentType				[8]  MMComponentType OPTIONAL,
+	messageSize					[9]  DataVolume,	
+	messageClass				[10] MessageClass OPTIONAL,
+	submissionTime				[11] TimeStamp, 
+	timeOfExpiry				[12] WaitTime OPTIONAL,
+	deliveryReportRequested		[13] BOOLEAN,
+	priority					[14] PriorityType OPTIONAL,
+	senderVisibility			[15] BOOLEAN,
+	readReplyRequested			[16] BOOLEAN,
+	acknowledgementRequest		[17] BOOLEAN,
+	forwardCounter				[18] INTEGER OPTIONAL,
+	forwardingAddress			[19] MMSAgentAddresses OPTIONAL,
+	recordTimeStamp				[20] TimeStamp,
+	localSequenceNumber			[21] LocalSequenceNumber OPTIONAL,
+	recordExtensions			[22] ManagementExtensions OPTIONAL
+}
+ 
+MMO4FRsRecord		::= SET
+{
+	recordType					[0]  RecordType,
+	originatorMmsRSAddress		[1]  MMSRSAddress OPTIONAL,
+	recipientMmsRSAddress		[2]  MMSRSAddress,
+	messageID					[3]  OCTET STRING,
+	mms3GPPVersion				[4]  OCTET STRING OPTIONAL,
+	requestStatusCode			[5] RequestStatusCodeType OPTIONAL,
+	statusText					[6] StatusTextType OPTIONAL, 
+	recordTimeStamp				[7] TimeStamp OPTIONAL,
+	localSequenceNumber			[8] LocalSequenceNumber OPTIONAL,
+	recordExtensions			[9] ManagementExtensions OPTIONAL
+}
+
+MMO4DRecord		::= SET
+{
+	recordType					[0]  RecordType,
+	recipientMmsRSAddress		[1]  MMSRSAddress OPTIONAL,
+	originatorMmsRSAddress		[2]  MMSRSAddress OPTIONAL,
+	messageID					[3]  OCTET STRING,
+	mms3GPPVersion				[4]  OCTET STRING OPTIONAL,
+	originatorAddress			[5]  MMSAgentAddress OPTIONAL,
+	recipientAddress			[6]  MMSAgentAddress,
+	mmDateAndTime				[7] TimeStamp,
+	acknowledgementRequest		[8] BOOLEAN,
+	mmStatusCode				[9] MMStatusCodeType,
+	statusText					[10] StatusTextType OPTIONAL, 
+	recordTimeStamp				[11] TimeStamp OPTIONAL,
+	localSequenceNumber			[12] LocalSequenceNumber OPTIONAL,
+	recordExtensions			[13] ManagementExtensions OPTIONAL
+}
+
+MMO1DRecord		::= SET
+{
+	recordType					[0]  RecordType,
+	recipientMmsRSAddress		[1]  MMSRSAddress OPTIONAL,
+	originatorMmsRSAddress		[2]  MMSRSAddress OPTIONAL,
+	accessCorrelation			[3] AccessCorrelation OPTIONAL, 
+	messageID					[4]  OCTET STRING,
+	mms3GPPVersion				[5]  OCTET STRING OPTIONAL,
+	originatorAddress			[6]  MMSAgentAddress OPTIONAL,
+	recipientAddress			[7]  MMSAgentAddress,
+	mmStatusCode				[8] MMStatusCodeType OPTIONAL,
+	recordTimeStamp				[9] TimeStamp OPTIONAL,
+	localSequenceNumber			[10] LocalSequenceNumber OPTIONAL,
+	recordExtensions			[11] ManagementExtensions OPTIONAL,
+	sGSNPLMNIdentifier			[12] PLMN-Id OPTIONAL,
+	rATType						[13] RATType OPTIONAL,
+	mSTimeZone 					[14] MSTimeZone OPTIONAL
+}
+
+MMO4RRecord		::= SET
+{
+	recordType					[0]  RecordType,
+	recipientMmsRSAddress		[1]  MMSRSAddress OPTIONAL,
+	originatorMmsRSAddress		[2]  MMSRSAddress OPTIONAL,
+	messageID					[3]  OCTET STRING,
+	mms3GPPVersion				[4]  OCTET STRING OPTIONAL,
+	originatorAddress			[5]  MMSAgentAddress OPTIONAL,
+	recipientAddresses			[6]  MMSAgentAddresses OPTIONAL,
+	mmDateAndTime				[7] TimeStamp OPTIONAL,
+	acknowledgementRequest		[8] BOOLEAN,
+	readStatus					[9] MMStatusCodeType OPTIONAL,
+	statusText					[10] StatusTextType OPTIONAL, 
+	recordTimeStamp				[11] TimeStamp OPTIONAL,
+	localSequenceNumber		   	[12] LocalSequenceNumber OPTIONAL,
+	recordExtensions			[13] ManagementExtensions OPTIONAL
+}
+
+MMO1RRecord		::= SET
+{
+	recordType					[0]  RecordType,
+	recipientMmsRSAddress		[1]  MMSRSAddress OPTIONAL,
+	originatorMmsRSAddress		[2]  MMSRSAddress OPTIONAL,
+	accessCorrelation			[3] AccessCorrelation OPTIONAL, 
+	messageID					[4]  OCTET STRING,
+	mms3GPPVersion				[5]  OCTET STRING OPTIONAL,
+	originatorAddress			[6]  MMSAgentAddress OPTIONAL,
+	recipientAddress			[7]  MMSAgentAddress OPTIONAL,
+	readStatus					[8] MMStatusCodeType OPTIONAL,
+	recordTimeStamp				[9] TimeStamp OPTIONAL,
+	localSequenceNumber			[10] LocalSequenceNumber OPTIONAL,
+	recordExtensions			[11] ManagementExtensions OPTIONAL,
+	sGSNPLMNIdentifier			[12] PLMN-Id OPTIONAL,
+	rATType						[13] RATType OPTIONAL,
+	mSTimeZone 					[14] MSTimeZone OPTIONAL
+}
+
+MMOMDRecord		::= SET
+{
+	recordType					[0]  RecordType,
+	originatorMmsRSAddress		[1]  MMSRSAddress OPTIONAL,
+	recipientMmsRSAddress		[2]  MMSRSAddress OPTIONAL,
+	messageID					[3]  OCTET STRING,
+	messageSize					[4] DataVolume OPTIONAL,
+	mmStatusCode				[5] MMStatusCodeType OPTIONAL,
+	statusText					[6] StatusTextType OPTIONAL, 
+	recordTimeStamp				[7] TimeStamp OPTIONAL,
+	localSequenceNumber			[8] LocalSequenceNumber OPTIONAL,
+	recordExtensions			[9] ManagementExtensions OPTIONAL
+}
+
+MMR4FRecord		::= SET
+{
+	recordType					[0]  RecordType,
+	recipientMmsRSAddress		[1]  MMSRSAddress,
+	originatorMmsRSAddress		[2]  MMSRSAddress,
+	messageID					[3]  OCTET STRING,
+	mms3GPPVersion				[4]  OCTET STRING OPTIONAL,
+	originatorAddress			[5]  MMSAgentAddress,
+	recipientAddresses			[6]  MMSAgentAddresses,
+	contentType					[7]  ContentType, 
+	mmComponentType				[8]  MMComponentType OPTIONAL,
+	messageSize					[9]  DataVolume,	
+	messageClass				[10] MessageClass OPTIONAL,
+	submissionTime				[11] TimeStamp, 
+	timeOfExpiry				[12] WaitTime OPTIONAL,
+	deliveryReportRequested		[13] BOOLEAN,
+	priority					[14] PriorityType OPTIONAL,
+	senderVisibility			[15] BOOLEAN,
+	readReplyRequested			[16] BOOLEAN,
+	requestStatusCode			[17] RequestStatusCodeType,
+	statusText					[18] StatusTextType,
+	acknowledgementRequest		[19] BOOLEAN,
+	forwardCounter				[20] INTEGER OPTIONAL,
+	forwardingAddress			[21] MMSAgentAddresses OPTIONAL,
+	recordTimeStamp				[22] TimeStamp,
+	localSequenceNumber			[23] LocalSequenceNumber OPTIONAL,
+	recordExtensions			[24] ManagementExtensions OPTIONAL
+}
+
+MMR1NRqRecord		::= SET
+{
+	recordType					[0] RecordType,
+	recipientMmsRSAddress		[1] MMSRSAddress,
+	messageID					[2] OCTET STRING,
+	replyChargingID				[3] OCTET STRING OPTIONAL, 
+	senderAddress				[4] MMSAgentAddress,
+	recipientAddress			[5] MMSAgentAddress,
+	accessCorrelation			[6] AccessCorrelation OPTIONAL, 
+	messageClass				[7] MessageClass OPTIONAL,
+	mmComponentType				[8] MMComponentType OPTIONAL,
+	messageSize					[9] DataVolume,
+	timeOfExpiry				[10] WaitTime OPTIONAL,
+	messageReference 			[11] OCTET STRING,
+	deliveryReportRequested		[12] BOOLEAN OPTIONAL,
+	replyCharging				[13] BOOLEAN OPTIONAL,
+	replyDeadline				[14] WaitTime OPTIONAL,
+	replyChargingSize			[15] DataVolume OPTIONAL,
+	mmStatusCode				[16] MMStatusCodeType OPTIONAL,
+	statusText					[17] StatusTextType OPTIONAL,
+	recordTimeStamp				[18] TimeStamp OPTIONAL, 	
+	localSequenceNumber			[19] LocalSequenceNumber OPTIONAL,
+	recordExtensions			[20] ManagementExtensions OPTIONAL,
+	mscfInformation				[21] MSCFInformation OPTIONAL,
+	vaspID						[22] OCTET STRING OPTIONAL,
+	vasID						[23] OCTET STRING OPTIONAL,
+	sGSNPLMNIdentifier			[24] PLMN-Id OPTIONAL,
+	rATType						[25] RATType OPTIONAL,
+	mSTimeZone 					[26] MSTimeZone OPTIONAL
+}
+
+MMR1NRsRecord		::= SET
+{
+	recordType					[0]  RecordType,
+	recipientMmsRSAddress		[1]  MMSRSAddress,
+	messageID					[2]  OCTET STRING,
+	recipientAddress			[3] MMSAgentAddress,
+	accessCorrelation			[4] AccessCorrelation OPTIONAL, 
+	reportAllowed				[5] BOOLEAN OPTIONAL,
+	mmStatusCode				[6] MMStatusCodeType OPTIONAL,
+	statusText					[7] StatusTextType OPTIONAL, 
+	recordTimeStamp				[8] TimeStamp OPTIONAL,
+	localSequenceNumber			[9] LocalSequenceNumber OPTIONAL,
+	recordExtensions			[10] ManagementExtensions OPTIONAL,
+	sGSNPLMNIdentifier			[11] PLMN-Id OPTIONAL,
+	rATType						[12] RATType OPTIONAL,
+	mSTimeZone 					[13] MSTimeZone OPTIONAL
+}
+
+MMR1RtRecord		::= SET
+{
+	recordType					[0] RecordType,
+	recipientMmsRSAddress		[1] MMSRSAddress,
+	messageID					[2] OCTET STRING,
+	replyChargingID				[3] OCTET STRING OPTIONAL, 
+	senderAddress				[4] MMSAgentAddress OPTIONAL,
+	recipientAddress			[5] MMSAgentAddress,
+	accessCorrelation			[6] AccessCorrelation OPTIONAL, 
+	contentType					[7] ContentType, 
+	mmComponentType				[8] MMComponentType OPTIONAL,
+	messageClass				[9] MessageClass OPTIONAL,
+	submissionTime				[10] TimeStamp, 
+	messageSize					[11] DataVolume OPTIONAL,
+	deliveryReportRequested		[12] BOOLEAN OPTIONAL,
+	priority					[13] PriorityType OPTIONAL,
+	readReplyRequested			[14] BOOLEAN OPTIONAL,
+	mmStatusCode				[15] MMStatusCodeType OPTIONAL,
+	statusText					[16] StatusTextType OPTIONAL,
+	replyDeadline				[17] WaitTime OPTIONAL,
+	replyChargingSize			[18] DataVolume OPTIONAL,
+	durationOfTransmission		[19] INTEGER OPTIONAL,
+	timeOfExpiry				[20] WaitTime OPTIONAL,
+	recordTimeStamp				[21] TimeStamp OPTIONAL, 	
+	localSequenceNumber			[22] LocalSequenceNumber OPTIONAL,
+	recordExtensions			[23] ManagementExtensions OPTIONAL,
+	messageReference 			[24] OCTET STRING,
+	vaspID						[25] OCTET STRING OPTIONAL,
+	vasID						[26] OCTET STRING OPTIONAL,
+	sGSNPLMNIdentifier			[27] PLMN-Id OPTIONAL,
+	rATType						[28] RATType OPTIONAL,
+	mSTimeZone 					[29] MSTimeZone OPTIONAL
+}
+
+MMR1ARecord		::= SET
+{
+	recordType					[0] RecordType,
+	recipientMmsRSAddress		[1] MMSRSAddress,
+	messageID					[2] OCTET STRING,
+	recipientAddress			[3] MMSAgentAddress,
+	accessCorrelation			[4] AccessCorrelation OPTIONAL, 
+	reportAllowed				[5] BOOLEAN OPTIONAL,
+	mmStatusCode				[6] MMStatusCodeType OPTIONAL,
+	statusText					[7] StatusTextType OPTIONAL, 
+	recordTimeStamp				[8] TimeStamp OPTIONAL,
+	localSequenceNumber			[9] LocalSequenceNumber OPTIONAL,
+	recordExtensions			[10] ManagementExtensions OPTIONAL,
+	sGSNPLMNIdentifier			[11] PLMN-Id OPTIONAL,
+	rATType						[12] RATType OPTIONAL,
+	mSTimeZone 					[13] MSTimeZone OPTIONAL
+}
+
+MMR4DRqRecord		::= SET
+{
+	recordType					[0] RecordType,
+	recipientMmsRSAddress		[1] MMSRSAddress,
+	originatorMmsRSAddress		[2] MMSRSAddress,
+	messageID					[3] OCTET STRING,
+	mms3GPPVersion				[4] OCTET STRING OPTIONAL,
+	originatorAddress			[5] MMSAgentAddress,
+	recipientAddress			[6] MMSAgentAddress,
+	mmDateAndTime				[7] TimeStamp OPTIONAL,
+	acknowledgementRequest		[8] BOOLEAN,
+	mmStatusCode				[9] MMStatusCodeType OPTIONAL,
+	statusText					[10] StatusTextType OPTIONAL, 
+	recordTimeStamp				[11] TimeStamp OPTIONAL,
+	localSequenceNumber			[12] LocalSequenceNumber OPTIONAL,
+	recordExtensions			[13] ManagementExtensions OPTIONAL
+}
+
+MMR4DRsRecord		::= SET
+{
+	recordType					[0] RecordType,
+	recipientMmsRSAddress		[1] MMSRSAddress,
+	originatorMmsRSAddress		[2] MMSRSAddress,
+	messageID					[3] OCTET STRING,
+	mms3GPPVersion				[4] OCTET STRING OPTIONAL,
+	requestStatusCode			[5] RequestStatusCodeType OPTIONAL,
+	statusText					[6] StatusTextType OPTIONAL, 
+	recordTimeStamp				[7] TimeStamp OPTIONAL,
+	localSequenceNumber			[8] LocalSequenceNumber OPTIONAL,
+	recordExtensions			[9] ManagementExtensions OPTIONAL
+}
+
+MMR1RRRecord		::= SET
+{
+	recordType					[0] RecordType,
+	recipientMmsRSAddress		[1] MMSRSAddress,
+	messageID					[2] OCTET STRING,
+	recipientAddress			[3] MMSAgentAddress,
+	originatorAddress			[4] MMSAgentAddress,
+	accessCorrelation			[5] AccessCorrelation OPTIONAL, 
+	mmStatusCode				[6] MMStatusCodeType OPTIONAL,
+	statusText					[7] StatusTextType OPTIONAL, 
+	recordTimeStamp				[8] TimeStamp OPTIONAL,
+	localSequenceNumber			[9] LocalSequenceNumber OPTIONAL,
+	recordExtensions			[10] ManagementExtensions OPTIONAL,
+	sGSNPLMNIdentifier			[11] PLMN-Id OPTIONAL,
+	rATType						[12] RATType OPTIONAL,
+	mSTimeZone 					[13] MSTimeZone OPTIONAL
+}
+
+MMR4RRqRecord		::= SET
+{
+	recordType					[0] RecordType,
+	recipientMmsRSAddress		[1] MMSRSAddress,
+	originatorMmsRSAddress		[2] MMSRSAddress,
+	messageID					[3] OCTET STRING,
+	mms3GPPVersion				[4] OCTET STRING OPTIONAL,
+	originatorAddress			[5] MMSAgentAddress,
+	recipientAddress			[6] MMSAgentAddress,
+	mmDateAndTime				[7] TimeStamp OPTIONAL,
+	acknowledgementRequest		[8] BOOLEAN,
+	mmStatusCode				[9] MMStatusCodeType OPTIONAL,
+	statusText					[10] StatusTextType OPTIONAL, 
+	recordTimeStamp				[11] TimeStamp OPTIONAL,
+	localSequenceNumber			[12] LocalSequenceNumber OPTIONAL,
+	recordExtensions			[13] ManagementExtensions OPTIONAL
+}
+
+MMR4RRsRecord		::= SET
+{
+	recordType					[0] RecordType,
+	recipientMmsRSAddress		[1] MMSRSAddress,
+	originatorMmsRSAddress		[2] MMSRSAddress,
+	messageID					[3] OCTET STRING,
+	mms3GPPVersion				[4] OCTET STRING OPTIONAL,
+	requestStatusCode			[5] RequestStatusCodeType OPTIONAL,
+	statusText					[6] StatusTextType OPTIONAL, 
+	recordTimeStamp				[7] TimeStamp OPTIONAL,
+	localSequenceNumber			[8] LocalSequenceNumber OPTIONAL,
+	recordExtensions			[9] ManagementExtensions OPTIONAL
+}
+
+MMRMDRecord		::= SET
+{
+	recordType					[0] RecordType,
+	originatorMmsRSAddress		[1] MMSRSAddress,
+	recipientMmsRSAddress		[2] MMSRSAddress OPTIONAL,
+	messageID					[3] OCTET STRING,
+	messageSize					[4] DataVolume,
+	mmStatusCode				[5] MMStatusCodeType OPTIONAL,
+	statusText					[6] StatusTextType OPTIONAL, 
+	recordTimeStamp				[7] TimeStamp OPTIONAL,
+	localSequenceNumber			[8] LocalSequenceNumber OPTIONAL,
+	recordExtensions			[9] ManagementExtensions OPTIONAL
+}
+
+MMFRecord		::= SET
+{
+	recordType					[0] RecordType,
+	forwardingMmsRSAddress		[1] MMSRSAddress,
+	messageID					[2] OCTET STRING,
+	forwardingAddress			[3] MMSAgentAddress,
+	recipientAddresses			[4] MMSAgentAddresses,
+	chargeInformation			[5] ChargeInformation OPTIONAL,
+	timeOfExpiry				[6] WaitTime OPTIONAL,
+	earliestTimeOfDelivery		[7] WaitTime OPTIONAL, 
+	deliveryReportRequested		[8] BOOLEAN OPTIONAL,
+	readReplyRequested			[9] BOOLEAN OPTIONAL,
+	messageReference 			[10] OCTET STRING,
+	mmStatusCode				[11] MMStatusCodeType OPTIONAL,
+	statusText					[12] StatusTextType OPTIONAL,
+	recordTimeStamp				[13] TimeStamp OPTIONAL,
+	localSequenceNumber			[14] LocalSequenceNumber OPTIONAL,
+	recordExtensions			[15] ManagementExtensions OPTIONAL,
+	mMBoxstorageInformation		[16] MMBoxStorageInformation OPTIONAL
+}
+
+MMBx1SRecord	::= SET
+{
+	recordType				[0]  RecordType,
+	mmsRelayAddress			[1]  IPAddress,
+	managingAddress			[2]  MMSAgentAddress,
+	accessCorrelation		[3]  AccessCorrelation OPTIONAL,
+	contentType				[4]  ContentType OPTIONAL, 
+	messageSize				[5]  DataVolume OPTIONAL,
+	messageReference		[6]  OCTET STRING OPTIONAL,
+	mmState					[7]  OCTET STRING OPTIONAL,
+	mmFlags					[8]  OCTET STRING OPTIONAL,
+	storeStatus				[9]  StoreStatus OPTIONAL,
+	storeStatusText			[10] StatusTextType OPTIONAL,
+	sequenceNumber			[11] INTEGER OPTIONAL,
+	timeStamp				[12] TimeStamp OPTIONAL,
+	recordExtensions		[13] ManagementExtensions OPTIONAL,
+	sGSNPLMNIdentifier		[14] PLMN-Id OPTIONAL,
+	rATType					[15] RATType OPTIONAL,
+	mSTimeZone 				[16] MSTimeZone OPTIONAL
+}
+
+MMBx1VRecord	::= SET
+{
+	recordType					[0] RecordType,
+	mmsRelayAddress				[1] IPAddress,
+	managingAddress				[2] MMSAgentAddress,
+	accessCorrelation			[3] AccessCorrelation OPTIONAL,
+	attributesList				[4] AttributesList OPTIONAL,
+	messageSelection			[5] MessageSelection OPTIONAL,
+	start						[6] INTEGER OPTIONAL,
+	limit						[7] INTEGER OPTIONAL,
+	totalsRequested				[8] BOOLEAN OPTIONAL,
+	quotasRequested				[9] BOOLEAN OPTIONAL,
+	mmListing					[10] AttributesList OPTIONAL,
+	requestStatusCode			[11] RequestStatusCodeType OPTIONAL,
+	statusText					[12] StatusTextType OPTIONAL, 
+	totals						[13] Totals OPTIONAL,
+	quotas						[14] Quotas OPTIONAL,
+	sequenceNumber				[15] INTEGER OPTIONAL,
+	timeStamp					[16] TimeStamp OPTIONAL,
+	recordExtensions			[17] ManagementExtensions OPTIONAL,
+	sGSNPLMNIdentifier			[18] PLMN-Id OPTIONAL,
+	rATType						[19] RATType OPTIONAL,
+	mSTimeZone 					[20] MSTimeZone OPTIONAL
+}
+
+MMBx1URecord	::= SET
+{
+	recordType					[0] RecordType,
+	mmsRelayAddress				[1] IPAddress,
+	managingAddress				[2] MMSAgentAddress,
+	accessCorrelation			[3] AccessCorrelation OPTIONAL,
+	recipientsAddressList		[4] MMSAgentAddresses,
+	messageClass				[5] MessageClass OPTIONAL,
+	uploadTime					[6] TimeStamp OPTIONAL, 
+	timeOfExpiry				[7] WaitTime OPTIONAL,
+	earliestTimeOfDelivery		[8] WaitTime OPTIONAL, 
+	priority					[9] PriorityType OPTIONAL,
+	mmState						[10] OCTET STRING OPTIONAL,
+	mmFlags						[11] OCTET STRING OPTIONAL,
+	contentType					[12] ContentType OPTIONAL, 
+	messageSize					[13] DataVolume OPTIONAL,
+	messageReference			[14] OCTET STRING OPTIONAL,
+	requestStatusCode			[15] RequestStatusCodeType OPTIONAL,
+	statusText					[16] StatusTextType OPTIONAL, 
+	sequenceNumber				[17] INTEGER OPTIONAL,
+	timeStamp					[18] TimeStamp OPTIONAL,
+	recordExtensions			[19] ManagementExtensions OPTIONAL,
+	sGSNPLMNIdentifier			[20] PLMN-Id OPTIONAL,
+	rATType						[21] RATType OPTIONAL,
+	mSTimeZone 					[22] MSTimeZone OPTIONAL
+}
+
+MMBx1DRecord	::= SET
+{
+	recordType					[0] RecordType,
+	mmsRelayAddress				[1] IPAddress,
+	managingAddress				[2] MMSAgentAddress,
+	accessCorrelation			[3] AccessCorrelation OPTIONAL,
+	messageReference			[4] OCTET STRING OPTIONAL,
+	requestStatusCode			[5] RequestStatusCodeType OPTIONAL,
+	statusText					[6] StatusTextType OPTIONAL, 
+	sequenceNumber				[7] INTEGER OPTIONAL,
+	timeStamp					[8] TimeStamp OPTIONAL,
+	recordExtensions			[9] ManagementExtensions OPTIONAL,
+	sGSNPLMNIdentifier			[20] PLMN-Id OPTIONAL,
+	rATType						[21] RATType OPTIONAL,
+	mSTimeZone 					[22] MSTimeZone OPTIONAL
+}
+
+MM7SRecord	::= SET
+{
+	recordType						[0] RecordType,
+	originatorMmsRSAddress			[1] MMSRSAddress,
+	linkedID						[2] OCTET STRING OPTIONAL,
+	vaspID							[3] OCTET STRING,
+	vasID							[4] OCTET STRING,
+	messageID						[5] OCTET STRING,
+	originatorAddress				[6] MMSAgentAddress,
+	recipientAddresses				[7] MMSAgentAddresses,
+	serviceCode						[8] OCTET STRING OPTIONAL,
+	contentType						[9] ContentType, 
+	mmComponentType					[10] MMComponentType OPTIONAL,
+	messageSize						[11] DataVolume,
+	messageClass					[12] MessageClass OPTIONAL,
+	chargeInformation				[13] ChargeInformation OPTIONAL,
+	submissionTime					[14] TimeStamp OPTIONAL, 
+	timeOfExpiry					[15] WaitTime OPTIONAL,
+	earliestTimeOfDelivery			[16] WaitTime OPTIONAL, 
+	deliveryReportRequested			[17] BOOLEAN OPTIONAL,
+	readReplyRequested				[18] BOOLEAN OPTIONAL,
+	replyCharging					[19] BOOLEAN OPTIONAL,
+	replyDeadline					[20] WaitTime OPTIONAL,
+	replyChargingSize				[21] DataVolume OPTIONAL,
+	priority						[22] PriorityType OPTIONAL,
+	messageDistributionIndicator	[23] BOOLEAN OPTIONAL,
+	requestStatusCode				[24] RequestStatusCodeType OPTIONAL,
+	statusText						[25] StatusTextType OPTIONAL,
+	recordTimeStamp					[26] TimeStamp,
+	localSequenceNumber				[27] LocalSequenceNumber OPTIONAL,
+	recordExtensions				[28] ManagementExtensions OPTIONAL,
+	mscfInformation					[29] MSCFInformation OPTIONAL
+}
+
+MM7DRqRecord		::= SET
+{
+	recordType				[0] RecordType,
+	recipientMmsRSAddress	[1] MMSRSAddress,
+	linkedID				[2] OCTET STRING OPTIONAL,
+	replyChargingID			[3] OCTET STRING OPTIONAL, 
+	originatorAddress		[4] MMSAgentAddress,
+	recipientAddress		[5] MMSAgentAddress,
+	mmComponentType			[6] MMComponentType OPTIONAL,
+	messageSize				[7] DataVolume,
+	contentType				[8] ContentType,
+	priority				[9] PriorityType OPTIONAL,
+	recordTimeStamp			[10] TimeStamp OPTIONAL, 	
+	localSequenceNumber		[11] LocalSequenceNumber OPTIONAL,
+	recordExtensions		[12] ManagementExtensions OPTIONAL
+}
+
+MM7DRsRecord		::= SET
+{
+	recordType				[0] RecordType,
+	recipientMmsRSAddress	[1] MMSRSAddress,
+	messageID				[2] OCTET STRING,
+	recipientAddress		[3] MMSAgentAddress,
+	serviceCode				[4] OCTET STRING OPTIONAL,
+	requestStatusCode		[5] RequestStatusCodeType OPTIONAL,
+	statusText				[6] StatusTextType OPTIONAL,
+	recordTimeStamp			[7] TimeStamp OPTIONAL,
+	localSequenceNumber		[8] LocalSequenceNumber OPTIONAL,
+	recordExtensions		[9] ManagementExtensions OPTIONAL
+}
+
+MM7CRecord		::= SET
+{
+	recordType				[0] RecordType,
+	originatorMmsRSAddress	[1] MMSRSAddress,
+	vaspID					[2] OCTET STRING,
+	vasID					[3] OCTET STRING,
+	messageID				[4] OCTET STRING,
+	originatorAddress		[5] MMSAgentAddress,
+	serviceCode				[6] OCTET STRING OPTIONAL,
+	requestStatusCode		[7] RequestStatusCodeType OPTIONAL,
+	statusText				[8] StatusTextType OPTIONAL,
+	recordTimeStamp			[9] TimeStamp OPTIONAL,
+	localSequenceNumber		[10] LocalSequenceNumber OPTIONAL,
+	recordExtensions		[11] ManagementExtensions OPTIONAL
+}
+
+MM7RRecord		::= SET
+{
+	recordType				[0] RecordType,
+	originatorMmsRSAddress	[1] MMSRSAddress,
+	vaspID					[2] OCTET STRING,
+	vasID					[3] OCTET STRING,
+	messageID				[4] OCTET STRING,
+	originatorAddress		[5] MMSAgentAddress,
+	serviceCode				[6] OCTET STRING OPTIONAL,
+	contentType				[7] ContentType,
+	submissionTime			[8] TimeStamp OPTIONAL,
+	timeOfExpiry			[9] WaitTime OPTIONAL,
+	earliestTimeOfDelivery	[10] WaitTime OPTIONAL,
+	requestStatusCode		[11] RequestStatusCodeType OPTIONAL,
+	statusText				[12] StatusTextType OPTIONAL,
+	recordTimeStamp			[13] TimeStamp OPTIONAL,
+	localSequenceNumber		[14] LocalSequenceNumber OPTIONAL,
+	recordExtensions		[15] ManagementExtensions OPTIONAL
+}
+
+MM7DRRqRecord		::= SET
+{
+	recordType				[0] RecordType,
+	recipientMmsRSAddress	[1] MMSRSAddress OPTIONAL,
+	messageID				[2] OCTET STRING,
+	originatorAddress		[3] MMSAgentAddress OPTIONAL,
+	recipientAddress		[4] MMSAgentAddress,
+	mmDateAndTime			[5] TimeStamp OPTIONAL,
+	mmStatusCode			[6] MMStatusCodeType,
+	mmStatusText			[7] StatusTextType OPTIONAL,
+	recordTimeStamp			[8] TimeStamp OPTIONAL,
+	localSequenceNumber		[9] LocalSequenceNumber OPTIONAL,
+	recordExtensions		[10] ManagementExtensions OPTIONAL
+}
+
+MM7DRRsRecord		::= SET
+{
+	recordType				[0] RecordType,
+	recipientMmsRSAddress	[1] MMSRSAddress OPTIONAL,
+	messageID				[2] OCTET STRING,
+	originatorAddress		[3] MMSAgentAddress OPTIONAL,
+	recipientAddress		[4] MMSAgentAddress,
+	requestStatusCode		[5] RequestStatusCodeType OPTIONAL,
+	statusText				[6] StatusTextType OPTIONAL,
+	recordTimeStamp			[7] TimeStamp OPTIONAL,
+	localSequenceNumber		[8] LocalSequenceNumber OPTIONAL,
+	recordExtensions		[9] ManagementExtensions OPTIONAL
+}
+
+MM7RRqRecord		::= SET
+{
+	recordType				[0] RecordType,
+	recipientMmsRSAddress	[1] MMSRSAddress OPTIONAL,
+	messageID				[2] OCTET STRING,
+	originatorAddress		[3] MMSAgentAddress OPTIONAL,
+	recipientAddress		[4] MMSAgentAddress,
+	mmDateAndTime			[5] TimeStamp OPTIONAL,
+	readStatus				[6] MMStatusCodeType,
+	mmStatusText			[7] StatusTextType OPTIONAL,
+	recordTimeStamp			[8] TimeStamp OPTIONAL,
+	localSequenceNumber		[9] LocalSequenceNumber OPTIONAL,
+	recordExtensions		[10] ManagementExtensions OPTIONAL
+}
+
+MM7RRsRecord		::= SET
+{
+	recordType				[0] RecordType,
+	recipientMmsRSAddress	[1] MMSRSAddress OPTIONAL,
+	messageID				[2] OCTET STRING,
+	originatorAddress		[3] MMSAgentAddress OPTIONAL,
+	recipientAddress		[4] MMSAgentAddress,
+	requestStatusCode		[5] RequestStatusCodeType OPTIONAL,
+	statusText				[6] StatusTextType OPTIONAL,
+	recordTimeStamp			[7] TimeStamp OPTIONAL,
+	localSequenceNumber		[8] LocalSequenceNumber OPTIONAL,
+	recordExtensions		[9] ManagementExtensions OPTIONAL
+}
+
+--
+--  MMS DATA TYPES
+--
+
+AccessCorrelation ::= CHOICE
+{
+	circuitSwitched			[0]	CircuitSwitchedAccess,
+	packetSwitched			[1]	PacketSwitchedAccess
+}
+
+AttributesList			::= SEQUENCE
+--
+-- Note: the values below are subject to WAP Forum ongoing standardization
+--
+{
+	messageID		[0]  OCTET STRING,
+	dateAndTime		[1]  TimeStamp,
+	senderAddress	[2]  MMSRSAddress,
+	subject			[3]  OCTET STRING,
+	messageSize		[4]  DataVolume ,
+	mmFlags			[5]  OCTET STRING,
+	mmState			[6]  MMState
+}
+
+ChargeInformation	::= SEQUENCE
+--
+-- one of the two following parameters must be present
+--
+{
+	chargedparty		[0]  ChargedParty OPTIONAL,
+	chargetype			[1]  ChargeType OPTIONAL
+}
+
+ChargedParty	::= ENUMERATED
+{
+	sender				(0),
+	recipient			(1),
+	both				(2),
+	neither				(3),
+	notspecifiedbyVASP	(99)
+}
+
+ChargeType			::= ENUMERATED
+{
+	postpaid				(0),
+	pre-paid				(1)
+}
+
+CircuitSwitchedAccess ::= SEQUENCE 
+{
+	mSCIdentifier			[0]  MscNo,
+	callReferenceNumber		[1]  CallReferenceNumber
+}
+
+ContentType			::= OCTET STRING
+
+DataVolume			::= INTEGER
+--
+-- The volume of data transfered in octets.
+--
+
+DeltaSeconds		::= OCTET STRING (SIZE(8))
+
+MediaComponent	::= SEQUENCE
+{
+	mediaType		[0]  OCTET STRING, 
+	mediaSize		[1]  DataVolume
+}
+ 
+MediaComponents	::= SET OF MediaComponent
+
+MessageClass		::= ENUMERATED
+{
+	personal			(0), 
+	advertisement		(1), 
+	information-service	(2),
+	auto				(3)
+}
+
+MessageSelection ::= INTEGER
+
+MMBoxStorageInformation   	::= SET
+{
+	mmState					[0]  MMState,
+	mmFlag					[1]  OCTET STRING,
+	storeStatus				[2]  StoreStatus,
+	storeStatusText			[3]  StatusTextType,
+	storedMessageReference	[4]  OCTET STRING
+}
+
+MMComponentType		::= SEQUENCE
+{	
+	subject		[0]  SubjectComponent,
+	media		[1]  MediaComponents
+}
+
+MMSAgentAddress		::= SEQUENCE
+--
+-- mMSRecipeintType is only included when this datatype is used to identify recipients.
+--
+{
+	mMSAgentAddressData	[0]  MMSAgentAddressData,
+	mMSRecipientType	[1]  SEQUENCE OF MMSRecipientType OPTIONAL 
+}
+
+MMSAgentAddresses	::= SET OF MMSAgentAddress
+
+MMSAgentAddressData	::= CHOICE
+{
+	eMail-address	[0]  OCTET STRING,
+	mSISDN			[1]  MSISDN,
+	shortCode		[2]  OCTET STRING
+}
+
+MMSRecipientType	::= ENUMERATED
+{
+	tO				(0),
+	cC				(1),
+	bCC				(2)
+}
+
+MMSRSAddress		::= SEQUENCE  
+--
+-- usage of SEQUENCE instead of CHOICE allows both address types to be present at the same time
+--
+{
+	domainName		[0]  OCTET STRING OPTIONAL,
+	iPAddress		[2]  IPAddress OPTIONAL
+}
+
+MMState		::= ENUMERATED
+--
+-- Note: the values below are subject to WAP Forum ongoing standardization
+--
+{
+	draft			(0),
+	sent			(1),
+	new				(2),
+	retrieved		(3),
+	forwarded		(4)
+}
+
+MMStatusCodeType		::= ENUMERATED
+{
+	retrieved					(0),
+	forwarded					(1),
+	expired						(2),
+	rejected					(3),
+	deferred					(4),
+	unrecognised				(5),
+	read						(6),
+	deletedWithoutBeingRead 	(7)
+}
+
+MSCFInformation		::= SET
+{
+	billingInformation		[0]  OCTET STRING OPTIONAL,
+	routeingAddressList		[1]  RouteingAddressList OPTIONAL
+}
+
+PacketSwitchedAccess ::= SEQUENCE 
+{
+	gSNAddress		[0]  GSNAddress,
+	chargingID		[1] ChargingID
+}
+
+PriorityType	::= ENUMERATED
+{
+	low			(0),
+	normal		(1),
+	high		(2)
+}
+
+Quotas	::= SEQUENCE
+{
+	numberOfMessages	[0] INTEGER OPTIONAL,
+	numberOfOctets		[1] INTEGER OPTIONAL
+}
+
+RequestStatusCodeType	::= INTEGER
+--
+-- cause codes 0 to 15 are used as defined for 'CauseForTerm'
+-- (cause for termination) and 16 to 20 are as defined for 'CauseForRecClosing'
+--
+{
+	normalRelease				(0),	-- ok
+	abnormalRelease				(4),	-- error unspecified
+	serviceDenied				(30),
+	messageFormatCorrupt		(31),
+	sendingAddressUnresolved	(32),
+	messageNotFound				(33),
+	networkProblem				(34),
+	contentNotAccepted		 	(35),
+	unsupportedMessage			(36)
+}
+
+RouteingAddress			::= SEQUENCE
+--
+-- usage of SEQUENCE instead of CHOICE allows several address types 
+-- to be present at the same time
+--
+{	
+	eMail-address		[0] OCTET STRING,
+	mSISDN				[1] MSISDN OPTIONAL,
+	shortCode			[2] OCTET STRING OPTIONAL
+}
+
+RouteingAddressList	::= SET OF MMSAgentAddress
+
+StatusTextType		::= OCTET STRING
+
+StoreStatus	::= INTEGER
+--
+-- Note: the values below are subject to WAP Forum ongoing standardization
+--
+{
+	stored							(0),
+	errorTransientFailure			(1),
+	errorTransientMailboxFull		(2),
+	errorTransientNetworkProblems	(3),
+	errorPermanentFailure			(4),
+	errorPermanentPermissionDenied	(5),
+	errorPermanentMessageFormat		(6),
+	errorPermanentMessageNotFound	(7)
+}
+
+SubjectComponent	::= SEQUENCE
+{
+	subjectType		[0] OCTET STRING,  
+	subjectSize 	[1] DataVolume
+}
+
+Totals	::= SEQUENCE
+{
+	numberOfMessages		[0] INTEGER OPTIONAL,
+	numberOfOctets			[1] INTEGER OPTIONAL
+}
+
+WaitTime		::= CHOICE
+{
+	http-date		[0]	TimeStamp,
+	delta-seconds	[1]	DeltaSeconds 
+}
+
+END

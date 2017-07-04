@@ -1,0 +1,130 @@
+NCBI-BlastOutput2 DEFINITIONS ::=
+BEGIN
+
+-- pycrate patch, taken from general.asn
+BigInt ::= [APPLICATION 2] IMPLICIT INTEGER
+
+BlastOutput2 ::= SEQUENCE {
+	report Report OPTIONAL,
+	error  Err OPTIONAL
+}
+
+BlastXML2 ::= SET OF BlastOutput2
+
+Report ::= SEQUENCE {
+	program VisibleString ,		-- BLAST program: blastp, tblastx etc.
+	version VisibleString ,		-- Program version 
+	reference VisibleString ,	-- Steven, David, Tom and others
+	search-target Target,
+	params Parameters,		-- search parameters
+	results Results
+}
+
+Err ::= SEQUENCE {
+	code                    INTEGER,
+	message                 VisibleString OPTIONAL
+}
+
+Target ::= CHOICE {
+	db VisibleString ,			-- BLAST Database name
+	subjects SEQUENCE OF VisibleString 	-- Subject IDs
+}
+
+Results ::=CHOICE {
+    iterations SEQUENCE OF Iteration , 
+                                --  iterative search (psi and delta blast)
+    search Search, 	        --  db search   
+    bl2seq SEQUENCE OF Search   --  bl2seq
+}
+
+Iteration ::= SEQUENCE {
+	iter-num INTEGER,	 -- iteration number (use with psiblast)
+	search Search
+}
+
+Search ::= SEQUENCE {
+	query-id VisibleString OPTIONAL,           -- SeqId of query
+	query-title VisibleString OPTIONAL,        -- Definition line of query
+	query-len INTEGER OPTIONAL ,	           -- length of query sequence
+	query-masking SEQUENCE OF Range OPTIONAL,  -- Masked offsets.
+	hits SEQUENCE OF Hit OPTIONAL,	           -- Hits one for every db sequence
+	stat Statistics OPTIONAL,	           -- search statistics            
+    	message VisibleString OPTIONAL             -- Some (error?) information
+}
+
+Parameters ::= SEQUENCE {
+	matrix VisibleString OPTIONAL ,	    -- Matrix used (-M)
+	expect REAL ,			    -- Expectation threshold (-e)
+	include REAL OPTIONAL ,		    -- Inclusion threshold (-h)
+	sc-match INTEGER OPTIONAL ,	    -- match score for NT (-r)
+	sc-mismatch INTEGER OPTIONAL ,	    -- mismatch score for NT (-q)
+	gap-open INTEGER OPTIONAL,          -- Gap opening cost (-G)
+	gap-extend INTEGER OPTIONAL,	    -- Gap extension cost (-E)
+	filter VisibleString OPTIONAL,      -- Filtering options (-F)
+	pattern VisibleString OPTIONAL,	    -- PHI-BLAST pattern
+    	entrez-query VisibleString OPTIONAL, -- Limit of request to Entrez query
+	cbs INTEGER OPTIONAL,	 	    -- composition-based stats (numbers correspond to
+					    -- numbering in stand-alone application parameter -comp_based_stats).
+	query-gencode INTEGER OPTIONAL,     -- genetic code for query (blastx or tblastx)
+	db-gencode INTEGER OPTIONAL,	    -- genetic code for db or subjects (tblastn or tblastx)
+	bl2seq-mode VisibleString OPTIONAL  -- bl2seq mode 
+}
+
+-- Used to specify start/stop of masking on query.
+Range ::= SEQUENCE {
+	from INTEGER,			-- Beginning of masked range (one-offset)
+	to INTEGER			-- End of masked range (one-offset)
+}
+
+Statistics ::= SEQUENCE {
+	db-num BigInt OPTIONAL,	-- Number of sequences in BLAST db
+	db-len BigInt OPTIONAL, -- Length of BLAST db
+	hsp-len INTEGER ,	-- Effective HSP length
+	eff-space BigInt,	-- Effective search space
+    	kappa REAL,             -- Karlin-Altschul parameter K
+    	lambda REAL,            -- Karlin-Altschul parameter Lambda
+    	entropy REAL            -- Karlin-Altschul parameter H
+}       
+
+-- Description of entries for this (possibly non-redundant) sequence.
+HitDescr ::= SEQUENCE {
+	id VisibleString ,	        -- SeqId of subject
+	accession VisibleString OPTIONAL,     -- accession
+	title VisibleString OPTIONAL,   -- title (definition line) of subject
+	taxid INTEGER OPTIONAL,		-- NCBI taxid (9606 for human)
+	sciname VisibleString OPTIONAL	-- binomial scientific name ("Homo sapiens" for human).  
+}
+
+Hit ::= SEQUENCE {
+	num INTEGER , 			    -- hit number
+	description SEQUENCE OF HitDescr,   -- ID, title, and taxonomy for each entry in the PIG
+	len INTEGER ,			    -- length of subject
+	hsps SEQUENCE OF Hsp OPTIONAL	    -- all HSP regions for the given subject
+}
+
+Hsp ::= SEQUENCE {
+	num INTEGER  ,			-- HSP number
+	bit-score REAL ,		-- score (in bits) of HSP
+	score REAL ,			-- score of HSP
+	evalue REAL ,			-- e-value of HSP
+	identity INTEGER OPTIONAL ,	-- number of identities in HSP
+	positive INTEGER OPTIONAL ,	-- number of positives in HSP
+	density INTEGER OPTIONAL ,	-- score density
+	pattern-from INTEGER OPTIONAL ,	-- start of PHI-BLAST pattern
+	pattern-to INTEGER OPTIONAL ,	-- end of PHI-BLAST pattern
+	query-from INTEGER ,	        -- start of HSP in query
+	query-to INTEGER ,		-- end of HSP
+	query-strand VisibleString OPTIONAL, -- Strand of query (blastn)
+	query-frame INTEGER OPTIONAL ,	-- translation frame of query (blastx, tblastx)
+	hit-from INTEGER,		-- start of HSP in subject
+	hit-to INTEGER ,		-- end of HSP in subject
+	hit-strand VisibleString OPTIONAL, -- Strand of subject (blastn)
+	hit-frame INTEGER OPTIONAL ,	-- translation frame of subject (tblastn, tblastx)
+	align-len INTEGER OPTIONAL ,	-- length of the alignment used
+	gaps INTEGER OPTIONAL ,		-- number of gaps in HSP
+	qseq VisibleString ,		-- alignment string for the query (with gaps)
+	hseq VisibleString,		-- alignment string for subject (with gaps)
+	midline VisibleString OPTIONAL	-- formating middle line
+}
+
+END

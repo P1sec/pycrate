@@ -1,0 +1,6 @@
+RANAP-CommonDataTypes.asn
+RANAP-Constants.asn
+RANAP-Containers.asn
+RANAP-IEs.asn
+RANAP-PDU-Contents.asn
+RANAP-PDU-Descriptions.asn

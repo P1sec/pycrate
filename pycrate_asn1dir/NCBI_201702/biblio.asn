@@ -1,0 +1,249 @@
+--$Revision: 217677 $
+--****************************************************************
+--
+--  NCBI Bibliographic data elements
+--  by James Ostell, 1990
+--
+--  Taken from the American National Standard for
+--      Bibliographic References
+--      ANSI Z39.29-1977
+--  Version 3.0 - June 1994
+--  PubMedId added in 1996
+--  ArticleIds and eprint elements added in 1999
+--
+--****************************************************************
+
+NCBI-Biblio DEFINITIONS ::=
+BEGIN
+
+EXPORTS Cit-art, Cit-jour, Cit-book, Cit-pat, Cit-let, Id-pat, Cit-gen,
+        Cit-proc, Cit-sub, Title, Author, PubMedId, DOI;
+
+IMPORTS Person-id, Date, Dbtag FROM NCBI-General;
+
+    -- Article Ids
+
+ArticleId ::= CHOICE {         -- can be many ids for an article
+	pubmed PubMedId ,      -- see types below
+	medline MedlineUID ,
+	doi DOI ,
+	pii PII ,
+	pmcid PmcID ,
+	pmcpid PmcPid ,
+        pmpid PmPid ,
+        other Dbtag  }    -- generic catch all
+    
+PubMedId ::= INTEGER           -- Id from the PubMed database at NCBI
+MedlineUID ::= INTEGER         -- Id from MEDLINE
+DOI ::= VisibleString          -- Document Object Identifier
+PII ::= VisibleString          -- Controlled Publisher Identifier
+PmcID ::= INTEGER              -- PubMed Central Id
+PmcPid ::= VisibleString       -- Publisher Id supplied to PubMed Central
+PmPid ::= VisibleString        -- Publisher Id supplied to PubMed
+
+ArticleIdSet ::= SET OF ArticleId
+
+    -- Status Dates
+
+PubStatus ::= INTEGER {            -- points of publication
+    received  (1) ,            -- date manuscript received for review
+    accepted  (2) ,            -- accepted for publication
+    epublish  (3) ,            -- published electronically by publisher
+    ppublish  (4) ,            -- published in print by publisher
+    revised   (5) ,            -- article revised by publisher/author
+    pmc       (6) ,            -- article first appeared in PubMed Central
+    pmcr      (7) ,            -- article revision in PubMed Central
+    pubmed    (8) ,            -- article citation first appeared in PubMed
+    pubmedr   (9) ,            -- article citation revision in PubMed
+    aheadofprint (10),         -- epublish, but will be followed by print
+    premedline (11),           -- date into PreMedline status
+    medline    (12),           -- date made a MEDLINE record
+    other    (255) }
+
+PubStatusDate ::= SEQUENCE {   -- done as a structure so fields can be added
+    pubstatus PubStatus ,
+    date Date }                -- time may be added later
+
+PubStatusDateSet ::= SET OF PubStatusDate
+    
+    -- Citation Types
+
+Cit-art ::= SEQUENCE {                  -- article in journal or book
+    title Title OPTIONAL ,              -- title of paper (ANSI requires)
+    authors Auth-list OPTIONAL ,        -- authors (ANSI requires)
+    from CHOICE {                       -- journal or book
+        journal Cit-jour ,
+        book Cit-book ,
+        proc Cit-proc } ,
+    ids ArticleIdSet OPTIONAL }         -- lots of ids
+
+Cit-jour ::= SEQUENCE {             -- Journal citation
+    title Title ,                   -- title of journal
+    imp Imprint }
+
+Cit-book ::= SEQUENCE {              -- Book citation
+    title Title ,                    -- Title of book
+    coll Title OPTIONAL ,            -- part of a collection
+    authors Auth-list,               -- authors
+    imp Imprint }
+
+Cit-proc ::= SEQUENCE {             -- Meeting proceedings
+    book Cit-book ,                 -- citation to meeting
+    meet Meeting }                  -- time and location of meeting
+
+    -- Patent number and date-issue were made optional in 1997 to
+    --   support patent applications being issued from the USPTO
+    --   Semantically a Cit-pat must have either a patent number or
+    --   an application number (or both) to be valid
+
+Cit-pat ::= SEQUENCE {                  -- patent citation
+    title VisibleString ,
+    authors Auth-list,                  -- author/inventor
+    country VisibleString ,             -- Patent Document Country
+    doc-type VisibleString ,            -- Patent Document Type
+    number VisibleString OPTIONAL,      -- Patent Document Number
+    date-issue Date OPTIONAL,           -- Patent Issue/Pub Date
+    class SEQUENCE OF VisibleString OPTIONAL ,      -- Patent Doc Class Code 
+    app-number VisibleString OPTIONAL , -- Patent Doc Appl Number
+    app-date Date OPTIONAL ,            -- Patent Appl File Date
+    applicants Auth-list OPTIONAL ,     -- Applicants
+    assignees Auth-list OPTIONAL ,      -- Assignees
+    priority SEQUENCE OF Patent-priority OPTIONAL , -- Priorities
+    abstract VisibleString OPTIONAL }   -- abstract of patent
+
+Patent-priority ::= SEQUENCE {
+    country VisibleString ,             -- Patent country code
+    number VisibleString ,              -- number assigned in that country
+    date Date }                         -- date of application
+
+Id-pat ::= SEQUENCE {                   -- just to identify a patent
+    country VisibleString ,             -- Patent Document Country
+    id CHOICE {
+        number VisibleString ,          -- Patent Document Number
+        app-number VisibleString } ,    -- Patent Doc Appl Number
+    doc-type VisibleString OPTIONAL }   -- Patent Doc Type
+
+Cit-let ::= SEQUENCE {                  -- letter, thesis, or manuscript
+    cit Cit-book ,                      -- same fields as a book
+    man-id VisibleString OPTIONAL ,     -- Manuscript identifier
+    type ENUMERATED {
+        manuscript (1) ,
+        letter (2) ,
+        thesis (3) } OPTIONAL }
+                                -- NOTE: this is just to cite a
+                                -- direct data submission, see NCBI-Submit
+                                -- for the form of a sequence submission
+Cit-sub ::= SEQUENCE {               -- citation for a direct submission
+    authors Auth-list ,              -- not necessarily authors of the paper
+    imp Imprint OPTIONAL ,			 -- this only used to get date.. will go
+    medium ENUMERATED {              -- medium of submission
+        paper   (1) ,
+        tape    (2) ,
+        floppy  (3) ,
+        email   (4) ,
+        other   (255) } OPTIONAL ,
+    date Date OPTIONAL ,              -- replaces imp, will become required
+    descr VisibleString OPTIONAL }    -- description of changes for public view
+    
+Cit-gen ::= SEQUENCE {      -- NOT from ANSI, this is a catchall
+    cit VisibleString OPTIONAL ,     -- anything, not parsable
+    authors Auth-list OPTIONAL ,
+    muid INTEGER OPTIONAL ,      -- medline uid
+    journal Title OPTIONAL ,
+    volume VisibleString OPTIONAL ,
+    issue VisibleString OPTIONAL ,
+    pages VisibleString OPTIONAL ,
+    date Date OPTIONAL ,
+    serial-number INTEGER OPTIONAL ,   -- for GenBank style references
+    title VisibleString OPTIONAL ,     -- eg. cit="unpublished",title="title"
+	pmid PubMedId OPTIONAL }           -- PubMed Id
+    
+    
+    -- Authorship Group
+Auth-list ::= SEQUENCE {
+        names CHOICE {
+            std SEQUENCE OF Author ,        -- full citations
+            ml SEQUENCE OF VisibleString ,  -- MEDLINE, semi-structured
+            str SEQUENCE OF VisibleString } , -- free for all
+        affil Affil OPTIONAL }        -- author affiliation
+
+Author ::= SEQUENCE {
+    name Person-id ,                        -- Author, Primary or Secondary
+    level ENUMERATED {
+        primary (1),
+        secondary (2) } OPTIONAL ,
+    role ENUMERATED {                   -- Author Role Indicator
+        compiler (1),
+        editor (2),
+        patent-assignee (3),
+        translator (4) } OPTIONAL ,
+    affil Affil OPTIONAL ,
+    is-corr BOOLEAN OPTIONAL }          -- TRUE if corresponding author
+
+Affil ::= CHOICE {
+    str VisibleString ,                 -- unparsed string
+    std SEQUENCE {                      -- std representation
+    affil VisibleString OPTIONAL ,      -- Author Affiliation, Name
+    div VisibleString OPTIONAL ,        -- Author Affiliation, Division
+    city VisibleString OPTIONAL ,       -- Author Affiliation, City
+    sub VisibleString OPTIONAL ,        -- Author Affiliation, County Sub
+    country VisibleString OPTIONAL ,    -- Author Affiliation, Country
+    street VisibleString OPTIONAL ,    -- street address, not ANSI
+    email VisibleString OPTIONAL ,
+    fax VisibleString OPTIONAL ,
+    phone VisibleString OPTIONAL ,
+    postal-code VisibleString OPTIONAL }}
+
+    -- Title Group
+    -- Valid for = A = Analytic (Cit-art)
+    --             J = Journals (Cit-jour)
+    --             B = Book (Cit-book)
+                                                 -- Valid for:
+Title ::= SET OF CHOICE {
+    name VisibleString ,    -- Title, Anal,Coll,Mono    AJB
+    tsub VisibleString ,    -- Title, Subordinate       A B
+    trans VisibleString ,   -- Title, Translated        AJB
+    jta VisibleString ,     -- Title, Abbreviated        J
+    iso-jta VisibleString , -- specifically ISO jta      J
+    ml-jta VisibleString ,  -- specifically MEDLINE jta  J
+    coden VisibleString ,   -- a coden                   J
+    issn VisibleString ,    -- ISSN                      J
+    abr VisibleString ,     -- Title, Abbreviated         B
+    isbn VisibleString }    -- ISBN                       B
+
+Imprint ::= SEQUENCE {                  -- Imprint group
+    date Date ,                         -- date of publication
+    volume VisibleString OPTIONAL ,
+    issue VisibleString OPTIONAL ,
+    pages VisibleString OPTIONAL ,
+    section VisibleString OPTIONAL ,
+    pub Affil OPTIONAL,                     -- publisher, required for book
+    cprt Date OPTIONAL,                     -- copyright date, "    "   "
+    part-sup VisibleString OPTIONAL ,       -- part/sup of volume
+    language VisibleString DEFAULT "ENG" ,  -- put here for simplicity
+    prepub ENUMERATED {                     -- for prepublication citations
+        submitted (1) ,                     -- submitted, not accepted
+        in-press (2) ,                      -- accepted, not published
+        other (255)  } OPTIONAL ,
+    part-supi VisibleString OPTIONAL ,      -- part/sup on issue
+    retract CitRetract OPTIONAL ,           -- retraction info
+    pubstatus PubStatus OPTIONAL ,          -- current status of this publication
+    history PubStatusDateSet OPTIONAL }     -- dates for this record
+
+CitRetract ::= SEQUENCE {
+    type ENUMERATED {                    -- retraction of an entry
+        retracted (1) ,               -- this citation retracted
+        notice (2) ,                  -- this citation is a retraction notice
+        in-error (3) ,                -- an erratum was published about this
+        erratum (4) } ,               -- this is a published erratum
+    exp VisibleString OPTIONAL }      -- citation and/or explanation
+
+Meeting ::= SEQUENCE {
+    number VisibleString ,
+    date Date ,
+    place Affil OPTIONAL }
+
+            
+END
+
+

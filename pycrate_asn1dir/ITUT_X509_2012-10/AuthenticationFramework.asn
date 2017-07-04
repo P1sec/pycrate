@@ -1,0 +1,766 @@
+AuthenticationFramework {joint-iso-itu-t ds(5) module(1) authenticationFramework(7) 7}
+DEFINITIONS ::=
+BEGIN
+
+-- EXPORTS All 
+-- The types and values defined in this module are exported for use in the other ASN.1
+-- modules contained within the Directory Specifications, and for the use of other
+-- applications which will use them to access Directory services. Other applications may
+-- use them for their own purposes, but this will not constrain extensions and
+-- modifications needed to maintain or improve the Directory service.
+
+IMPORTS
+  basicAccessControl, certificateExtensions, id-asx, id-at, id-ldx, id-lsx, id-mr, id-nf,
+  id-oa, id-oc, id-sc, informationFramework, selectedAttributeTypes
+    FROM UsefulDefinitions {joint-iso-itu-t ds(5) module(1) usefulDefinitions(0) 7}
+
+  ATTRIBUTE, DistinguishedName, MATCHING-RULE, Name, NAME-FORM, OBJECT-CLASS,
+  pwdHistory{}, pwdRecentlyExpired{}, pwdHistoryMatch{}, SYNTAX-NAME, top
+    FROM InformationFramework informationFramework
+
+  bitStringMatch, boolean, booleanMatch, caseExactMatch, commonName,
+  directoryString, distinguishedNameMatch, generalizedTime,
+  generalizedTimeMatch, generalizedTimeOrderingMatch, integer, integerMatch,
+  integerOrderingMatch, objectIdentifierMatch, octetString, octetStringMatch,
+  UnboundedDirectoryString, UniqueIdentifier, uri 
+    FROM SelectedAttributeTypes selectedAttributeTypes
+
+  algorithmIdentifierMatch, certificateExactMatch, certificateListExactMatch,
+  certificatePairExactMatch, CertificatePoliciesSyntax, CertPolicyId, GeneralNames, 
+  KeyUsage,
+  CertificateAssertion, CertificateExactAssertion, CertificateListAssertion,
+  CertificateListExactAssertion, CertificatePairAssertion,
+  CertificatePairExactAssertion
+      FROM CertificateExtensions certificateExtensions ;
+
+
+-- parameterized types 
+
+ENCRYPTED{ToBeEnciphered} ::= BIT STRING (CONSTRAINED BY {
+   -- shall be the result of applying an encipherment procedure 
+   -- to the BER-encoded octets of a value of -- ToBeEnciphered } )
+
+HASH{ToBeHashed} ::= SEQUENCE {
+  algorithmIdentifier  AlgorithmIdentifier{{SupportedAlgorithms}},
+  hashValue            BIT STRING (CONSTRAINED BY {
+   -- shall be the result of applying a hashing procedure to the DER-encoded
+   -- octets of a value of -- ToBeHashed } ),
+  ... }
+
+ENCRYPTED-HASH{ToBeSigned} ::= BIT STRING (CONSTRAINED BY {
+  -- shall be the result of applying a hashing procedure to the DER-encoded (see 6.2)
+  -- octets of a value of -- ToBeSigned -- and then applying an encipherment procedure
+  -- to those octets -- } )
+
+SIGNATURE{ToBeSigned} ::= SEQUENCE {
+  algorithmIdentifier  AlgorithmIdentifier{{SupportedAlgorithms}},
+  encrypted            ENCRYPTED-HASH{ToBeSigned},
+  ... }
+
+SIGNED{ToBeSigned} ::= SEQUENCE {
+  toBeSigned    ToBeSigned,
+  COMPONENTS OF SIGNATURE{ToBeSigned},
+  ... }
+
+-- public-key certificate definition 
+
+Certificate ::= SIGNED{TBSCertificate}
+
+TBSCertificate ::= SEQUENCE {
+  version                  [0]  Version DEFAULT v1,
+  serialNumber                  CertificateSerialNumber,
+  signature                     AlgorithmIdentifier{{SupportedAlgorithms}},
+  issuer                        Name,
+  validity                      Validity,
+  subject                       Name,
+  subjectPublicKeyInfo          SubjectPublicKeyInfo,
+  issuerUniqueIdentifier   [1] IMPLICIT UniqueIdentifier OPTIONAL,
+  ...,
+  [[ subjectUniqueIdentifier  [2] IMPLICIT UniqueIdentifier OPTIONAL]],
+  [[ extensions               [3]  Extensions OPTIONAL]]
+}
+
+Version ::= INTEGER {v1(0), v2(1), v3(2)}
+
+CertificateSerialNumber ::= INTEGER
+
+AlgorithmIdentifier{ALGORITHM:SupportedAlgorithms} ::= SEQUENCE {
+  algorithm   ALGORITHM.&id({SupportedAlgorithms}),
+  parameters  ALGORITHM.&Type({SupportedAlgorithms}{@algorithm}) OPTIONAL,
+  ... }
+
+-- Definition of the following information object set is deferred, perhaps to
+-- standardized profiles or to protocol implementation conformance statements. The
+-- set is required to specify a table constraint on the parameters component of
+-- AlgorithmIdentifier.
+
+SupportedAlgorithms ALGORITHM ::= {...}
+
+ALGORITHM ::= CLASS {
+  &Type          OPTIONAL,
+  &id            OBJECT IDENTIFIER UNIQUE }
+WITH SYNTAX {
+  [PARMS        &Type]
+  IDENTIFIED BY &id }
+  
+ecPublicKey ALGORITHM ::= {
+  PARMS       SupportedCurves
+  IDENTIFIED  BY id-ecPublicKey }
+
+--/* The definitions of the following information value set is deferred to referencing
+--specifications having a requirement for specific value sets.*/
+
+SupportedCurves OBJECT IDENTIFIER ::= {dummyCurv, ...}
+
+dummyCurv OBJECT IDENTIFIER ::= {2 5 5}
+
+Validity ::= SEQUENCE {
+  notBefore  Time,
+  notAfter   Time,
+  ... }
+
+SubjectPublicKeyInfo ::= SEQUENCE {
+  algorithm         AlgorithmIdentifier{{SupportedAlgorithms}},
+  subjectPublicKey  BIT STRING,
+  ... }
+
+Time ::= CHOICE {
+  utcTime          UTCTime,
+  generalizedTime  GeneralizedTime }
+
+Extensions ::= SEQUENCE OF Extension
+
+-- For those extensions where ordering of individual extensions within the SEQUENCE is
+-- significant, the specification of those individual extensions shall include the
+-- rules for the significance of the order therein
+
+Extension ::= SEQUENCE {
+  extnId     EXTENSION.&id({ExtensionSet}),
+  critical   BOOLEAN DEFAULT FALSE,
+  extnValue  OCTET STRING
+    (CONTAINING EXTENSION.&ExtnType({ExtensionSet}{@extnId})
+       ENCODED BY der),
+  ... }
+
+der OBJECT IDENTIFIER ::=
+  {joint-iso-itu-t asn1(1) ber-derived(2) distinguished-encoding(1)}
+
+ExtensionSet EXTENSION ::= {...}
+
+EXTENSION ::= CLASS {
+  &id           OBJECT IDENTIFIER UNIQUE,
+  &ExtnType }
+WITH SYNTAX {
+  SYNTAX        &ExtnType
+  IDENTIFIED BY &id }
+
+-- other PKI certificate constructs
+
+Certificates ::= SEQUENCE {
+  userCertificate    Certificate,
+  certificationPath  ForwardCertificationPath OPTIONAL,
+  ... }
+
+ForwardCertificationPath ::= SEQUENCE SIZE (1..MAX) OF CrossCertificates
+
+CrossCertificates ::= SET SIZE (1..MAX) OF Certificate
+
+CertificationPath ::= SEQUENCE {
+  userCertificate    Certificate,
+  theCACertificates  SEQUENCE SIZE (1..MAX) OF CertificatePair OPTIONAL,
+  ... }
+
+PkiPath ::= SEQUENCE SIZE (1..MAX) OF Certificate
+
+-- certificate revocation list (CRL)
+
+CertificateList ::= SIGNED{CertificateListContent}
+
+CertificateListContent ::= SEQUENCE {
+  version              Version OPTIONAL,
+  -- if present, version shall be v2
+  signature            AlgorithmIdentifier{{SupportedAlgorithms}},
+  issuer               Name,
+  thisUpdate           Time,
+  nextUpdate           Time OPTIONAL,
+  revokedCertificates  SEQUENCE OF SEQUENCE {
+    serialNumber         CertificateSerialNumber,
+    revocationDate       Time,
+    crlEntryExtensions   Extensions OPTIONAL,
+    ...} OPTIONAL,
+  ...,
+  ...,
+  crlExtensions   [0]  Extensions OPTIONAL }
+
+-- PKI object classes
+
+pkiUser OBJECT-CLASS ::= {
+  SUBCLASS OF         {top}
+  KIND                auxiliary
+  MAY CONTAIN         {userCertificate}
+  LDAP-NAME           {"pkiUser"}
+  LDAP-DESC           "X.509 PKI User"
+  ID                  id-oc-pkiUser }
+
+pkiCA OBJECT-CLASS ::= {
+  SUBCLASS OF         {top}
+  KIND                auxiliary
+  MAY CONTAIN         {cACertificate |
+                       certificateRevocationList |
+                       authorityRevocationList |
+                       crossCertificatePair}
+  LDAP-NAME           {"pkiCA"}
+  LDAP-DESC           "X.509 PKI Certificate Authority"
+  ID                  id-oc-pkiCA }
+
+cRLDistributionPoint OBJECT-CLASS ::= {
+  SUBCLASS OF         {top}
+  KIND                structural
+  MUST CONTAIN        {commonName}
+  MAY CONTAIN         {certificateRevocationList |
+                       authorityRevocationList |
+                       deltaRevocationList}
+  LDAP-NAME           {"cRLDistributionPoint"}
+  LDAP-DESC           "X.509 CRL distribution point"
+  ID                  id-oc-cRLDistributionPoint }
+
+cRLDistPtNameForm NAME-FORM ::= {
+  NAMES               cRLDistributionPoint
+  WITH ATTRIBUTES     {commonName}
+  ID                  id-nf-cRLDistPtNameForm }
+
+deltaCRL OBJECT-CLASS ::= {
+  SUBCLASS OF         {top}
+  KIND                auxiliary
+  MAY CONTAIN         {deltaRevocationList}
+  LDAP-NAME           {"deltaCRL"}
+  LDAP-DESC           "X.509 delta CRL"
+  ID                  id-oc-deltaCRL }
+
+cpCps OBJECT-CLASS ::= {
+  SUBCLASS OF         {top}
+  KIND                auxiliary
+  MAY CONTAIN         {certificatePolicy |
+                       certificationPracticeStmt}
+  ID                  id-oc-cpCps }
+
+pkiCertPath OBJECT-CLASS ::= {
+  SUBCLASS OF         {top}
+  KIND                auxiliary
+  MAY CONTAIN         {pkiPath}
+  ID                  id-oc-pkiCertPath }
+
+-- PKI directory attributes 
+
+userCertificate ATTRIBUTE ::= {
+  WITH SYNTAX              Certificate
+  EQUALITY MATCHING RULE   certificateExactMatch
+  LDAP-SYNTAX              x509Certificate.&id
+  LDAP-NAME                {"userCertificate"}
+  LDAP-DESC                "X.509 user certificate"
+  ID                       id-at-userCertificate }
+
+cACertificate ATTRIBUTE ::= {
+  WITH SYNTAX              Certificate
+  EQUALITY MATCHING RULE   certificateExactMatch
+  LDAP-SYNTAX              x509Certificate.&id
+  LDAP-NAME                {"cACertificate"}
+  LDAP-DESC                "X.509 CA certificate"
+  ID                       id-at-cAcertificate }
+
+crossCertificatePair ATTRIBUTE ::= {
+  WITH SYNTAX              CertificatePair
+  EQUALITY MATCHING RULE   certificatePairExactMatch
+  LDAP-SYNTAX              x509CertificatePair.&id
+  LDAP-NAME                {"crossCertificatePair"}
+  LDAP-DESC                "X.509 cross certificate pair"
+  ID                       id-at-crossCertificatePair }
+
+CertificatePair ::= SEQUENCE {
+  issuedToThisCA  [0]  Certificate OPTIONAL,
+  issuedByThisCA  [1]  Certificate OPTIONAL,
+  ... }
+  (WITH COMPONENTS { ..., issuedToThisCA PRESENT} |
+   WITH COMPONENTS { ..., issuedByThisCA PRESENT})
+
+certificateRevocationList ATTRIBUTE ::= {
+  WITH SYNTAX              CertificateList
+  EQUALITY MATCHING RULE   certificateListExactMatch
+  LDAP-SYNTAX              x509CertificateList.&id
+  LDAP-NAME                {"certificateRevocationList"}
+  LDAP-DESC                "X.509 certificate revocation list"
+  ID                       id-at-certificateRevocationList }
+
+authorityRevocationList ATTRIBUTE ::= {
+  WITH SYNTAX              CertificateList
+  EQUALITY MATCHING RULE   certificateListExactMatch
+  LDAP-SYNTAX              x509CertificateList.&id
+  LDAP-NAME                {"authorityRevocationList"}
+  LDAP-DESC                "X.509 authority revocation list"
+  ID                       id-at-authorityRevocationList }
+
+deltaRevocationList ATTRIBUTE ::= {
+  WITH SYNTAX              CertificateList
+  EQUALITY MATCHING RULE   certificateListExactMatch
+  LDAP-SYNTAX              x509CertificateList.&id
+  LDAP-NAME                {"deltaRevocationList"}
+  LDAP-DESC                "X.509 delta revocation list"
+  ID                       id-at-deltaRevocationList }
+
+supportedAlgorithms ATTRIBUTE ::= {
+  WITH SYNTAX              SupportedAlgorithm
+  EQUALITY MATCHING RULE   algorithmIdentifierMatch
+  LDAP-SYNTAX              x509SupportedAlgorithm.&id
+  LDAP-NAME                {"supportedAlgorithms"}
+  LDAP-DESC                "X.509 support algorithms"
+  ID                       id-at-supportedAlgorithms }
+
+SupportedAlgorithm ::= SEQUENCE {
+  algorithmIdentifier              AlgorithmIdentifier{{SupportedAlgorithms}},
+  intendedUsage               [0]  KeyUsage OPTIONAL,
+  intendedCertificatePolicies [1]  CertificatePoliciesSyntax OPTIONAL,
+  ... }
+
+certificationPracticeStmt ATTRIBUTE ::= {
+  WITH SYNTAX  InfoSyntax
+  ID           id-at-certificationPracticeStmt }
+
+InfoSyntax ::= CHOICE {
+  content  UnboundedDirectoryString,
+  pointer  SEQUENCE {
+    name     GeneralNames,
+    hash     HASH{HashedPolicyInfo} OPTIONAL,
+    ... },
+  ... }
+
+POLICY ::= TYPE-IDENTIFIER
+
+HashedPolicyInfo ::= POLICY.&Type({Policies})
+
+Policies POLICY ::= {...} -- Defined by implementors 
+
+certificatePolicy ATTRIBUTE ::= {
+  WITH SYNTAX  PolicySyntax
+  ID           id-at-certificatePolicy }
+
+PolicySyntax ::= SEQUENCE {
+  policyIdentifier  PolicyID,
+  policySyntax      InfoSyntax,
+  ... }
+
+PolicyID ::= CertPolicyId
+
+pkiPath ATTRIBUTE ::= {
+  WITH SYNTAX  PkiPath
+  ID           id-at-pkiPath }
+
+userPassword ATTRIBUTE ::= {
+  WITH SYNTAX              OCTET STRING(SIZE (0..MAX))
+  EQUALITY MATCHING RULE   octetStringMatch
+  LDAP-SYNTAX              octetString.&id
+  LDAP-NAME                {"userPassword"}
+  ID                       id-at-userPassword }
+
+userPwd	ATTRIBUTE ::= {
+  WITH SYNTAX              UserPwd
+  EQUALITY MATCHING RULE   userPwdMatch
+  SINGLE VALUE             TRUE
+  LDAP-SYNTAX              userPwdDescription.&id
+  LDAP-NAME                {"userPwd"}
+  ID                       id-at-userPwd }
+
+UserPwd ::= CHOICE {
+  clear                 UTF8String,
+  encrypted             SEQUENCE {	
+    algorithmIdentifier   AlgorithmIdentifier{{SupportedAlgorithms}},
+    encryptedString       OCTET STRING,
+    ...},
+  ...}
+
+-- Operational attributes
+
+pwdStartTime ATTRIBUTE ::= { 
+  WITH SYNTAX              GeneralizedTime 
+  EQUALITY MATCHING RULE   generalizedTimeMatch 
+  ORDERING MATCHING RULE   generalizedTimeOrderingMatch 
+  SINGLE VALUE             TRUE 
+  USAGE                    directoryOperation 
+  LDAP-SYNTAX              generalizedTime.&id
+  LDAP-NAME                {"pwdStartTime"}
+  ID                       id-oa-pwdStartTime } 
+
+pwdExpiryTime ATTRIBUTE ::= { 
+  WITH SYNTAX              GeneralizedTime 
+  EQUALITY MATCHING RULE   generalizedTimeMatch 
+  ORDERING MATCHING RULE   generalizedTimeOrderingMatch 
+  SINGLE VALUE             TRUE 
+  USAGE                    directoryOperation 
+  LDAP-SYNTAX              generalizedTime.&id
+  LDAP-NAME                {"pwdExpiryTime"}
+  ID                       id-oa-pwdExpiryTime } 
+
+pwdEndTime ATTRIBUTE ::= { 
+  WITH SYNTAX              GeneralizedTime 
+  EQUALITY MATCHING RULE   generalizedTimeMatch 
+  ORDERING MATCHING RULE   generalizedTimeOrderingMatch 
+  SINGLE VALUE             TRUE 
+  USAGE                    directoryOperation 
+  LDAP-SYNTAX              generalizedTime.&id
+  LDAP-NAME                {"pwdEndTime"}
+  ID                       id-oa-pwdEndTime } 
+
+pwdFails ATTRIBUTE ::= { 
+  WITH SYNTAX              INTEGER (0..MAX) 
+  EQUALITY MATCHING RULE   integerMatch
+  ORDERING MATCHING RULE   integerOrderingMatch 
+  SINGLE VALUE             TRUE 
+  USAGE                    dSAOperation 
+  LDAP-SYNTAX              integer.&id
+  LDAP-NAME                {"pwdFails"}
+  ID                       id-oa-pwdFails }
+
+pwdFailureTime ATTRIBUTE ::= { 
+  WITH SYNTAX              GeneralizedTime 
+  EQUALITY MATCHING RULE   generalizedTimeMatch
+  ORDERING MATCHING RULE   generalizedTimeOrderingMatch 
+  SINGLE VALUE             TRUE 
+  USAGE                    dSAOperation 
+  LDAP-SYNTAX              generalizedTime.&id
+  LDAP-NAME                {"pwdFailureTime"}
+  ID                       id-oa-pwdFailureTime } 
+
+pwdGracesUsed ATTRIBUTE ::= { 
+  WITH SYNTAX              INTEGER (0..MAX) 
+  EQUALITY MATCHING RULE   integerMatch
+  ORDERING MATCHING RULE   integerOrderingMatch 
+  SINGLE VALUE             TRUE 
+  USAGE                    dSAOperation 
+  LDAP-SYNTAX              integer.&id
+  LDAP-NAME                {"pwdGracesUsed"}
+  ID                       id-oa-pwdGracesUsed } 
+
+userPwdHistory ATTRIBUTE ::=
+                    pwdHistory{userPwd,userPwdHistoryMatch,id-oa-userPwdHistory}
+
+userPwdRecentlyExpired ATTRIBUTE ::=
+                    pwdRecentlyExpired{userPwd,id-oa-userPwdRecentlyExpired}
+
+pwdModifyEntryAllowed ATTRIBUTE ::= { 
+  WITH SYNTAX              BOOLEAN 
+  EQUALITY MATCHING RULE   booleanMatch 
+  SINGLE VALUE             TRUE 
+  USAGE                    directoryOperation 
+  LDAP-SYNTAX              boolean.&id
+  LDAP-NAME                {"pwdModifyEntryAllowed"}
+  ID                       id-oa-pwdModifyEntryAllowed } 
+
+pwdChangeAllowed ATTRIBUTE ::= { 
+  WITH SYNTAX              BOOLEAN
+  EQUALITY MATCHING RULE   booleanMatch 
+  SINGLE VALUE             TRUE 
+  USAGE                    directoryOperation 
+  LDAP-SYNTAX              boolean.&id
+  LDAP-NAME                {"pwdChangeAllowed"}
+  ID                       id-oa-pwdChangeAllowed } 
+
+pwdMaxAge ATTRIBUTE ::= { 
+  WITH SYNTAX              INTEGER (1 .. MAX) 
+  EQUALITY MATCHING RULE   integerMatch 
+  ORDERING MATCHING RULE   integerOrderingMatch
+  SINGLE VALUE             TRUE 
+  USAGE                    directoryOperation 
+  LDAP-SYNTAX              integer.&id
+  LDAP-NAME                {"pwdMaxAge"}
+  ID                       id-oa-pwdMaxAge }
+
+pwdExpiryAge ATTRIBUTE ::= { 
+  WITH SYNTAX              INTEGER (1 .. MAX) 
+  EQUALITY MATCHING RULE   integerMatch 
+  ORDERING MATCHING RULE   integerOrderingMatch 
+  SINGLE VALUE             TRUE 
+  USAGE                    directoryOperation 
+  LDAP-SYNTAX              integer.&id
+  LDAP-NAME                {"pwdExpiryAge"}
+  ID                       id-oa-pwdExpiryAge } 
+
+pwdMinLength ATTRIBUTE ::= { 
+  WITH SYNTAX              INTEGER (0..MAX) 
+  EQUALITY MATCHING RULE   integerMatch 
+  SINGLE VALUE             TRUE 
+  USAGE                    directoryOperation 
+  LDAP-SYNTAX              integer.&id
+  LDAP-NAME                {"pwdMinLength"}
+  ID                       id-oa-pwdMinLength } 
+
+pwdVocabulary ATTRIBUTE ::= { 
+  WITH SYNTAX              PwdVocabulary
+  EQUALITY MATCHING RULE   bitStringMatch
+  SINGLE VALUE             TRUE 
+  USAGE                    directoryOperation 
+  LDAP-SYNTAX              pwdVocabularyDescription.&id
+  LDAP-NAME                {"pwdVocabulary"}
+  ID                       id-oa-pwdVocabulary } 
+
+PwdVocabulary ::=  BIT STRING {
+    noDictionaryWords   (0),
+    noPersonNames       (1),
+    noGeographicalNames (2) }
+
+pwdAlphabet ATTRIBUTE ::= { 
+  WITH SYNTAX              PwdAlphabet 
+  SINGLE VALUE             TRUE 
+  USAGE                    directoryOperation 
+  LDAP-SYNTAX              pwdAlphabetDescription.&id
+  LDAP-NAME                {"pwdAlphabet"}
+  ID                       id-oa-pwdAlphabet } 
+
+PwdAlphabet ::= SEQUENCE OF UTF8String
+
+pwdDictionaries ATTRIBUTE ::= {
+  SUBTYPE OF               uri 
+  USAGE                    directoryOperation 
+  LDAP-SYNTAX              directoryString.&id
+  LDAP-NAME                {"pwdDictionaries"}
+  ID                       id-oa-pwdDictionaries } 
+
+pwdExpiryWarning ATTRIBUTE ::= { 
+  WITH SYNTAX              INTEGER (1..MAX)
+  EQUALITY MATCHING RULE   integerMatch 
+  ORDERING MATCHING RULE   integerOrderingMatch 
+  SINGLE VALUE             TRUE 
+  USAGE                    directoryOperation 
+  LDAP-SYNTAX              integer.&id
+  LDAP-NAME                {"pwdExpiryWarning"}
+  ID                       id-oa-pwdExpiryWarning } 
+
+pwdGraces ATTRIBUTE ::= { 
+  WITH SYNTAX              INTEGER (0..MAX)
+  EQUALITY MATCHING RULE   integerMatch 
+  ORDERING MATCHING RULE   integerOrderingMatch 
+  SINGLE VALUE             TRUE 
+  USAGE                    directoryOperation 
+  LDAP-SYNTAX              integer.&id
+  LDAP-NAME                {"pwdGraces"}
+  ID                       id-oa-pwdGraces } 
+
+pwdFailureDuration ATTRIBUTE ::= { 
+  WITH SYNTAX              INTEGER (0..MAX)
+  EQUALITY MATCHING RULE   integerMatch 
+  ORDERING MATCHING RULE   integerOrderingMatch 
+  SINGLE VALUE             TRUE 
+  USAGE                    directoryOperation 
+  LDAP-SYNTAX              integer.&id
+  LDAP-NAME                {"pwdFailureDuration"}
+  ID                       id-oa-pwdFailureDuration }
+
+pwdLockoutDuration ATTRIBUTE ::= { 
+  WITH SYNTAX              INTEGER (0..MAX)
+  EQUALITY MATCHING RULE   integerMatch 
+  ORDERING MATCHING RULE   integerOrderingMatch 
+  SINGLE VALUE             TRUE 
+  USAGE                    directoryOperation 
+  LDAP-SYNTAX              integer.&id
+  LDAP-NAME                {"pwdLockoutDuration"}
+  ID                       id-oa-pwdLockoutDuration }
+
+pwdMaxFailures ATTRIBUTE ::= { 
+  WITH SYNTAX              INTEGER (1..MAX) 
+  EQUALITY MATCHING RULE   integerMatch 
+  ORDERING MATCHING RULE   integerOrderingMatch 
+  SINGLE VALUE             TRUE 
+  USAGE                    directoryOperation 
+  LDAP-SYNTAX              integer.&id
+  LDAP-NAME                {"pwdMaxFailures"}
+  ID                       id-oa-pwdMaxFailures } 
+
+pwdMaxTimeInHistory ATTRIBUTE ::= { 
+  WITH SYNTAX              INTEGER (1..MAX) 
+  EQUALITY MATCHING RULE   integerMatch 
+  ORDERING MATCHING RULE   integerOrderingMatch 
+  SINGLE VALUE             TRUE 
+  USAGE                    directoryOperation 
+  LDAP-SYNTAX              integer.&id
+  LDAP-NAME                {"pwdMaxTimeInHistory"}
+  ID                       id-oa-pwdMaxTimeInHistory }
+
+pwdMinTimeInHistory ATTRIBUTE ::= { 
+  WITH SYNTAX              INTEGER (0..MAX) 
+  EQUALITY MATCHING RULE   integerMatch 
+  ORDERING MATCHING RULE   integerOrderingMatch 
+  SINGLE VALUE             TRUE 
+  USAGE                    directoryOperation 
+  LDAP-SYNTAX              integer.&id
+  LDAP-NAME                {"pwdMinTimeInHistory"}
+  ID                       id-oa-pwdMinTimeInHistory }
+
+pwdHistorySlots ATTRIBUTE ::= { 
+  WITH SYNTAX              INTEGER (2..MAX) 
+  EQUALITY MATCHING RULE   integerMatch 
+  ORDERING MATCHING RULE   integerOrderingMatch 
+  SINGLE VALUE             TRUE 
+  USAGE                    directoryOperation
+  LDAP-SYNTAX              integer.&id
+  LDAP-NAME                {"pwdHistorySlots"}
+  ID                       id-oa-pwdHistorySlots }
+
+pwdRecentlyExpiredDuration ATTRIBUTE ::= { 
+  WITH SYNTAX              INTEGER (0..MAX)
+  EQUALITY MATCHING RULE   integerMatch 
+  ORDERING MATCHING RULE   integerOrderingMatch 
+  SINGLE VALUE             TRUE 
+  USAGE                    directoryOperation 
+  LDAP-SYNTAX              integer.&id
+  LDAP-NAME                {"pwdRecentlyExpiredDuration"}
+  ID                       id-oa-pwdRecentlyExpiredDuration } 
+
+pwdEncAlg ATTRIBUTE ::= { 
+  WITH SYNTAX              PwdEncAlg 
+  EQUALITY MATCHING RULE   pwdEncAlgMatch 
+  SINGLE VALUE             TRUE 
+  USAGE                    directoryOperation 
+  LDAP-SYNTAX              pwdEncAlgDescription.&id
+  LDAP-NAME                {"pwdEncAlg"}
+  ID                       id-oa-pwdEncAlg }
+
+PwdEncAlg ::= AlgorithmIdentifier{{SupportedAlgorithms}} 
+
+userPwdMatch MATCHING-RULE ::= { 
+  SYNTAX       UserPwd 
+  LDAP-SYNTAX  userPwdDescription.&id
+  LDAP-NAME    {"userPwdMatch"}
+  ID           id-mr-userPwdMatch } 
+
+pwdEncAlgMatch MATCHING-RULE ::= { 
+  SYNTAX       PwdEncAlg
+  LDAP-SYNTAX  pwdEncAlgDescription.&id
+  LDAP-NAME    {"pwdEncAlgMatch"}
+  ID           id-mr-pwdEncAlgMatch } 
+
+userPwdHistoryMatch MATCHING-RULE ::= pwdHistoryMatch{userPwd,id-mr-userPwdHistoryMatch}
+
+-- LDAP syntaxes defined by this Directory Specification
+
+userPwdDescription SYNTAX-NAME ::= {
+  LDAP-DESC         "User Password Description"
+  DIRECTORY SYNTAX  UserPwd
+  ID                id-asx-userPwdDescription }
+
+pwdVocabularyDescription SYNTAX-NAME ::= {
+  LDAP-DESC         "Password Vocabulary Description"
+  DIRECTORY SYNTAX  PwdVocabulary
+  ID                id-asx-pwdVocabularyDescription }
+
+pwdAlphabetDescription SYNTAX-NAME ::= {
+  LDAP-DESC         "Password Alphabet Description"
+  DIRECTORY SYNTAX  PwdAlphabet
+  ID                id-asx-pwdAlphabetDescription }
+
+pwdEncAlgDescription SYNTAX-NAME ::= {
+  LDAP-DESC         "Password Alphabet Description"
+  DIRECTORY SYNTAX  PwdEncAlg
+  ID                id-asx-pwdEncAlgDescription }
+
+-- LDAP syntaxes defined by IETF RFC 4523
+
+x509Certificate SYNTAX-NAME ::= {
+  LDAP-DESC         "X.509 Certificate"
+  DIRECTORY SYNTAX  Certificate
+  ID                id-lsx-x509Certificate }
+
+x509CertificateList SYNTAX-NAME ::= {
+  LDAP-DESC         "X.509 Certificate List"
+  DIRECTORY SYNTAX  CertificateList
+  ID                id-lsx-x509CertificateList }
+
+x509CertificatePair SYNTAX-NAME ::= {
+  LDAP-DESC         "X.509 Certificate Pair"
+  DIRECTORY SYNTAX  CertificatePair
+  ID                id-lsx-x509CertificatePair }
+
+x509SupportedAlgorithm SYNTAX-NAME ::= {
+  LDAP-DESC         "X.509 Supported Algorithm"
+  DIRECTORY SYNTAX  SupportedAlgorithm
+  ID                id-lsx-x509SupportedAlgorithm }
+
+-- object identifier assignments 
+
+-- object classes 
+
+id-oc-cRLDistributionPoint       OBJECT IDENTIFIER ::= {id-oc 19}
+id-oc-pkiUser                    OBJECT IDENTIFIER ::= {id-oc 21}
+id-oc-pkiCA                      OBJECT IDENTIFIER ::= {id-oc 22}
+id-oc-deltaCRL                   OBJECT IDENTIFIER ::= {id-oc 23}
+id-oc-cpCps                      OBJECT IDENTIFIER ::= {id-oc 30}
+id-oc-pkiCertPath                OBJECT IDENTIFIER ::= {id-oc 31}
+
+-- name forms
+
+id-nf-cRLDistPtNameForm          OBJECT IDENTIFIER ::= {id-nf 14}
+
+-- directory attributes
+
+id-at-userPassword               OBJECT IDENTIFIER ::= {id-at 35}
+id-at-userCertificate            OBJECT IDENTIFIER ::= {id-at 36}
+id-at-cAcertificate              OBJECT IDENTIFIER ::= {id-at 37}
+id-at-authorityRevocationList    OBJECT IDENTIFIER ::= {id-at 38}
+id-at-certificateRevocationList  OBJECT IDENTIFIER ::= {id-at 39}
+id-at-crossCertificatePair       OBJECT IDENTIFIER ::= {id-at 40}
+id-at-supportedAlgorithms        OBJECT IDENTIFIER ::= {id-at 52}
+id-at-deltaRevocationList        OBJECT IDENTIFIER ::= {id-at 53}
+id-at-certificationPracticeStmt  OBJECT IDENTIFIER ::= {id-at 68}
+id-at-certificatePolicy          OBJECT IDENTIFIER ::= {id-at 69}
+id-at-pkiPath                    OBJECT IDENTIFIER ::= {id-at 70}
+id-at-userPwd                    OBJECT IDENTIFIER ::= {id-at 85}
+
+-- operational attributes --
+
+id-oa-pwdStartTime               OBJECT IDENTIFIER ::= {id-oa 22}
+id-oa-pwdExpiryTime              OBJECT IDENTIFIER ::= {id-oa 23}
+id-oa-pwdEndTime                 OBJECT IDENTIFIER ::= {id-oa 24}
+id-oa-pwdFails                   OBJECT IDENTIFIER ::= {id-oa 25}
+id-oa-pwdFailureTime             OBJECT IDENTIFIER ::= {id-oa 26}
+id-oa-pwdGracesUsed              OBJECT IDENTIFIER ::= {id-oa 27} 
+id-oa-userPwdHistory             OBJECT IDENTIFIER ::= {id-oa 28}
+id-oa-userPwdRecentlyExpired     OBJECT IDENTIFIER ::= {id-oa 29}
+id-oa-pwdModifyEntryAllowed      OBJECT IDENTIFIER ::= {id-oa 30}
+id-oa-pwdChangeAllowed           OBJECT IDENTIFIER ::= {id-oa 31}
+id-oa-pwdMaxAge                  OBJECT IDENTIFIER ::= {id-oa 32}
+id-oa-pwdExpiryAge               OBJECT IDENTIFIER ::= {id-oa 33}
+id-oa-pwdMinLength               OBJECT IDENTIFIER ::= {id-oa 34}
+id-oa-pwdVocabulary              OBJECT IDENTIFIER ::= {id-oa 35}
+id-oa-pwdAlphabet                OBJECT IDENTIFIER ::= {id-oa 36}
+id-oa-pwdDictionaries            OBJECT IDENTIFIER ::= {id-oa 37}
+id-oa-pwdExpiryWarning           OBJECT IDENTIFIER ::= {id-oa 38} 
+id-oa-pwdGraces                  OBJECT IDENTIFIER ::= {id-oa 39} 
+id-oa-pwdFailureDuration         OBJECT IDENTIFIER ::= {id-oa 40}
+id-oa-pwdLockoutDuration         OBJECT IDENTIFIER ::= {id-oa 41}
+id-oa-pwdMaxFailures             OBJECT IDENTIFIER ::= {id-oa 42} 
+id-oa-pwdMaxTimeInHistory        OBJECT IDENTIFIER ::= {id-oa 43} 
+id-oa-pwdMinTimeInHistory        OBJECT IDENTIFIER ::= {id-oa 44} 
+id-oa-pwdHistorySlots            OBJECT IDENTIFIER ::= {id-oa 45} 
+id-oa-pwdRecentlyExpiredDuration OBJECT IDENTIFIER ::= {id-oa 46}
+id-oa-pwdEncAlg                  OBJECT IDENTIFIER ::= {id-oa 47}
+
+-- matching rules
+
+id-mr-userPwdMatch               OBJECT IDENTIFIER ::= {id-mr 71}
+id-mr-userPwdHistoryMatch        OBJECT IDENTIFIER ::= {id-mr 72}
+id-mr-pwdEncAlgMatch             OBJECT IDENTIFIER ::= {id-mr 73}
+
+-- syntaxes
+
+id-asx-userPwdDescription        OBJECT IDENTIFIER ::= {id-asx 0}
+id-asx-pwdVocabularyDescription  OBJECT IDENTIFIER ::= {id-asx 1}
+id-asx-pwdAlphabetDescription    OBJECT IDENTIFIER ::= {id-asx 2}
+id-asx-pwdEncAlgDescription      OBJECT IDENTIFIER ::= {id-asx 3}
+
+id-lsx-x509Certificate           OBJECT IDENTIFIER ::= {id-lsx 8}
+id-lsx-x509CertificateList       OBJECT IDENTIFIER ::= {id-lsx 9}
+id-lsx-x509CertificatePair       OBJECT IDENTIFIER ::= {id-lsx 10}
+id-lsx-x509SupportedAlgorithm    OBJECT IDENTIFIER ::= {id-lsx 49}
+
+-- pycrate: addition from RFC5912 required
+id-ecPublicKey OBJECT IDENTIFIER ::= {
+    iso(1) member-body(2) us(840) ansi-X9-62(10045) keyType(2) 1 }
+
+END -- AuthenticationFramework

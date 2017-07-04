@@ -1,0 +1,9 @@
+DialoguePDUs.asn
+UnidialoguePDUs.asn
+Remote-Operations-Information-Objects.asn
+Remote-Operations-Generic-ROS-PDUs.asn
+Remote-Operations-Useful-Definitions.asn
+TCAPMessages.asn
+TCAP-Tools.asn
+TCAP-Examples.asn
+TC-Notation-Extensions.asn

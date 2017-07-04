@@ -1,0 +1,181 @@
+ProtocolManagementInformation {iso(1) standard(0) iso15662(15662) protocolManagementInformation(1)} DEFINITIONS AUTOMATIC TAGS ::= BEGIN
+
+ProtocolManagementInformation ::= SEQUENCE{
+	selectionOfCommunicationSysyem	SelectionOfCommunicationSystem OPTIONAL,
+	applicationIdentifiers ApplicationIdentifiers OPTIONAL,
+	address Address OPTIONAL,
+	priority Priority OPTIONAL,
+	security Security OPTIONAL,
+	applicationExecution ApplicationExecution OPTIONAL
+	}
+
+SelectionOfCommunicationSystem ::= SEQUENCE{ --see 4.1
+	responsiveness Responsiveness OPTIONAL,
+	directionality Directionality OPTIONAL,
+	usageEnvironment UsageEnvironment OPTIONAL,
+	serviceArea ServiceArea OPTIONAL,
+	serviceTime ServiceTime OPTIONAL,
+	bandwidth Bandwidth OPTIONAL,
+	connectionCost ConnectionCost OPTIONAL
+	}
+
+ApplicationIdentifiers ::= SEQUENCE{ --see 4.2
+	messageIdentifier EXTERNAL OPTIONAL,
+	messageNumber INTEGER OPTIONAL,
+	timeOfMessageTransmission GeneralizedTime OPTIONAL
+	}
+
+Address ::= SEQUENCE{ --see 4.3
+	addressOfOrigin EXTERNAL OPTIONAL,
+	addressOfDestination EXTERNAL OPTIONAL
+	}
+
+Priority ::= SEQUENCE{ --see 4.4
+	interruptHandling INTEGER{
+	undefined (0),
+	lowPriority (1),
+	middlePriority (2),
+	highPriority (3)},
+	interruptHandlingLevel INTEGER OPTIONAL,
+	queueControl INTEGER{
+		undefined-FIFO (0),
+		lIFO (1),
+		random (2),
+		re-try (3),
+		errorNotification (4)
+		}
+	}
+
+Security ::= BIT STRING { --see 4.5
+	userAuthentication (0),
+	terminalAuthentication (1),
+	dataAuthentication (2),
+	consealment (3)
+	}
+
+ApplicationExecution ::= SEQUENCE{ --see 4.6
+	validTime ValidTime,
+	timeStamp GeneralizedTime,
+	targetArea TargetArea
+	}
+	
+Responsiveness ::= SEQUENCE{ --see 4.1.1
+	responsivenessCode INTEGER{
+		undefined (0),
+		within1Sec (1),
+		within30Sec (2),
+		oneMinute (3),
+		fifteenMinute (4),
+		other (5),
+		error (6)
+		},
+	responsivenessValue UTCTime OPTIONAL
+	}
+
+Directionality ::= INTEGER{ --see 4.1.2
+	undefined (0),
+	unidirectional (1),
+	bidirectional-Symmetric (2),
+	bidirectional-UpLarger (3),
+	bidirectional-DownLarger (4)
+	}
+
+UsageEnvironment ::= SEQUENCE { --see 4.1.3
+	meansOfTransportation BIT STRING{
+		undefined (0),
+		vehicle (1),
+		publicTransport (2),
+		foot (3),
+		bicycle (4),
+		motorCycle (5),
+		moped (6),
+		car (7),
+		truck (8),
+		emergencyVehicle (9),
+		buss (10),
+		tram (11),
+		train (12),
+		ferry (13),
+		taxi (14),
+		other (15)
+		},
+	speed INTEGER{
+		undefined (0),
+		fast (1),
+		middle (2),
+		slow (3),
+		stopped (4),
+		other (5)
+		},
+	speedValue EXTERNAL OPTIONAL
+	}
+	
+ServiceArea ::= SEQUENCE{ --see 4.1.4
+	serviceAreaCode INTEGER{
+		undefined (0),
+		continuous (1),
+		non-continuous (2)
+		},
+	serviceAreaValue EXTERNAL OPTIONAL
+	}
+	
+ServiceTime ::= SEQUENCE{ --see 4.1.5
+	serviceTimeCode INTEGER{
+		undefined (0),
+		start-StopTime (1),
+		startTime (2),
+		stopTime (3),
+		continuous (4)
+		},
+	serviceTimeValue EXTERNAL OPTIONAL
+	}
+
+Bandwidth ::= SEQUENCE{ --see 4.1.6
+	capacityOfTransmissionValue INTEGER OPTIONAL,
+	dataExpressionCode BIT STRING{
+		undefined (0),
+		text (1),
+		audio (2),
+		simpleGraphic (3),
+		stillImage (4),
+		video (5),
+		other (6)
+		}
+	}
+	
+ConnectionCost ::= SEQUENCE{ --see 4.1.7
+	maximumCostRequirement INTEGER{
+		undefined (0),
+		totalCost (1),
+		timeUnitPrice (2),
+		bitUnitPrice (3),
+		other (4)
+		},
+	maximumCostValue EXTERNAL OPTIONAL
+	}
+	
+ValidTime ::= SEQUENCE{ --see 4.6.1
+	validTimeCode INTEGER{
+		undefined (0),
+		duringReceptionOnly (1),
+		timeDesignated (2),
+		untilUpdated (3),
+		other (4)
+		},
+	validTimeValue EXTERNAL OPTIONAL
+	}
+	
+TargetArea ::= SEQUENCE{ --see 4.6.3
+	targetAreaCode INTEGER{
+		undefined (0),
+		spot (1),
+		zone (2),
+		interval (3),
+		region (4),
+		wideArea (5),
+		other (6)
+		},
+	targetAreaValue EXTERNAL OPTIONAL
+	}
+
+END

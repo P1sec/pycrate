@@ -1,0 +1,267 @@
+DSRCData {iso(1) standard(0) dsrc(15628) dsrcData(0) version (1)}
+DEFINITIONS AUTOMATIC TAGS::= BEGIN
+-- IMPORTS
+-- New type definitions shall be imported from other ASN.1 modules as follows:
+-- Type1, Type2 FROM ModuleA;
+-- were:
+-- - Type1 and Type2 shall be replaced with the names of the types to be imported.
+-- - ModuleA shall be replaced the name of the exporting ASN.1 module
+-- EXPORTS everything;
+Action-Request::=SEQUENCE{
+	mode BOOLEAN,
+	eid Dsrc-EID,
+	actionType ActionType,
+	accessCredentials OCTET STRING (SIZE (0..127,...)) OPTIONAL,
+	actionParameter Container OPTIONAL,
+	iid Dsrc-EID OPTIONAL
+	}
+	
+Action-Response::=SEQUENCE{
+	fill BIT STRING (SIZE(1)),
+	eid Dsrc-EID,
+	iid Dsrc-EID OPTIONAL,
+	responseParameter Container OPTIONAL,
+	ret ReturnStatus OPTIONAL
+	}
+	
+ActionType::=INTEGER(0..127,...)
+-- (0..118) Reserved for ISO/CEN use.
+-- Below ActionTypes defined in ISO FDIS 14906
+-- 0 : getStamped
+-- 1 : setStamped
+-- 2 : getSecure
+-- 3 : setSecure
+-- 4 : getInstance
+-- 5 : setInstance
+-- 6 : getNonce
+-- 7 : setNonce
+-- 8 : transferChannel
+-- 9 : copy
+-- 10 : setMMI
+-- 11 : substract
+-- 12 : add
+-- 13 : debit
+-- 14 : credit
+-- 15 : echo
+-- (119-127) Reserved for private use
+
+ApplicationContextMark::=Container -- OCTET STRING (SIZE(0..127,...))
+-- Illustration of an ApplicationContextMark example
+-- can be found in ISO 14906, referred to as an EFC-ContextMark
+
+ApplicationList::=SEQUENCE (SIZE (0..127,...)) OF SEQUENCE {
+	aid DSRCApplicationEntityID,
+	eid Dsrc-EID OPTIONAL,
+	parameter ApplicationContextMark OPTIONAL
+	}
+	
+AttributeIdList::=SEQUENCE (SIZE(0.. 127,...)) OF INTEGER(0..127,...)
+
+AttributeList::=SEQUENCE (SIZE(0..127,...)) OF Attributes
+
+Attributes::=SEQUENCE{
+	attributeId INTEGER (0..127,...),
+	attributeValue Container
+	}
+	
+BeaconID::=SEQUENCE{
+	manufacturerid INTEGER(0..65535),
+	individualid INTEGER(0..134217727)
+	} -- for registration of manufacturerid see www.nen.nl/cen278
+
+BroadcastPool::=SEQUENCE{
+	directoryvalue Directory,
+	content SEQUENCE (SIZE(0..127,...)) OF File
+	}
+	
+BST::=SEQUENCE{
+	rsu BeaconID,
+	time Time,
+	profile Profile,
+	mandApplications ApplicationList,
+	nonmandApplications ApplicationList OPTIONAL,
+	profileList SEQUENCE (SIZE(0..127,...)) OF Profile
+	}
+	
+Container::=CHOICE{
+	integer [0] INTEGER,
+	bitstring [1] BIT STRING,
+	octetstring [2] OCTET STRING (SIZE (0..127, ...)),
+	universalString [3] UniversalString,
+	beaconId [4] BeaconID,
+	t-apdu [5] T-APDUs,
+	dsrcApplicationEntityId[6] DSRCApplicationEntityID,
+	dsrc-Ase-Id [7] Dsrc-EID,
+	attrIdList [8] AttributeIdList,
+	attrList [9] AttributeList,
+	broadcastPool [10] BroadcastPool,
+	directory [11] Directory,
+	file [12] File,
+	fileType [13] FileType,
+	record [14] Record,
+	time [15] Time,
+	vector [16] SEQUENCE (SIZE(0..255)) OF INTEGER(0..127,...),
+-- tags [17..69] are defined in ISO 14906 for CEN DSRC application use
+-- tags [70..86] are reserved for ISO/CEN DSRC application use
+-- tags [87..127] are reserved for private use and intended for the
+-- addressing of the corresponding private attribute identifiers.
+	... -- extension marker
+-- New attributes shall be inserted as:
+-- componentName1 [i] ModuleA.Type1
+-- were
+-- - componentName1 is a name unique within the Container definition
+-- - "i" is the registered tag chosen from the ranges as specified above.
+-- - Type1 is the name of an imported type and
+-- - ModuleA is the name of the module the type Type1 is imported from.
+-- The prefix “ModuleA.” is only required in case of a name conflict,
+-- if the name “Type1” is not also defined in the DSRCData module and not
+-- imported from another module the prefix “ModuleA” should be ommitted.
+	}
+	
+Directory::=SEQUENCE (SIZE(0..127,...)) OF FileName
+
+Dsrc-EID::=INTEGER(0..127, ...)
+
+DSRCApplicationEntityID::=INTEGER{
+	system (0),
+	electronic-fee-collection (1),
+	freight-fleet-management (2),
+	public-transport (3),
+	traffic-traveller-information (4),
+	traffic-control (5),
+	parking-management (6),
+	geographic-road-database (7),
+	medium-range-preinformation (8),
+	man-machine-interface (9),
+	intersystem-interface (10),
+	automatic-vehicle-identification (11),
+	emergency-warning (12),
+	private (13),
+	multi-purpose-payment (14),
+	dsrc-resource-manager (15),
+	after-theft-systems (16),
+	cruise-assist-highway-system (17),
+	multi-purpose-information-system (18),
+	multi-mobile-information-system (19)
+	-- (20..28) are reserved for ISO/CEN-dsrc-applications
+	-- (29..30) are reserved for private use
+	-- 31 is reserved for ISO/CEN-dsrc-applications
+	}(0..31,...)
+-- For the latest standard use of application definition,
+-- refer to Clause 9
+-- As an example, the application "electronic-fee-collection (1)"
+-- is standardised by ISO 14906
+
+Event-Report-Request::=SEQUENCE{
+	mode BOOLEAN,
+	eid Dsrc-EID,
+	eventType EventType,
+	accessCredentials OCTET STRING (SIZE(0..127,...)) OPTIONAL,
+	eventParameter Container OPTIONAL,
+	iid Dsrc-EID OPTIONAL
+	}
+	
+Event-Report-Response::=SEQUENCE{
+	fill BIT STRING (SIZE(2)),
+	eid Dsrc-EID,
+	iid Dsrc-EID OPTIONAL,
+	ret ReturnStatus OPTIONAL
+	}
+	
+EventType::=INTEGER{
+	release (0)
+	-- (1..118) are reserved for ISO/CEN use
+	-- (119..127) are reserved for private use
+	}(0..127,...)
+	
+File::=SEQUENCE (SIZE(0..127,...)) OF Record
+
+FileName::=SEQUENCE{
+	aseID Dsrc-EID,
+	fileID INTEGER(0..127,...)
+	}
+	
+FileType::=NULL
+-- Not defined. This might be defined in future version.
+
+Get-Request::=SEQUENCE{
+	fill BIT STRING (SIZE(1)),
+	eid Dsrc-EID,
+	accessCredentials OCTET STRING (SIZE(0..127,...)) OPTIONAL,
+	iid Dsrc-EID OPTIONAL,
+	attrIdList AttributeIdList OPTIONAL
+	}
+	
+Get-Response::=SEQUENCE{
+fill BIT STRING (SIZE(1)),
+eid Dsrc-EID,
+iid Dsrc-EID OPTIONAL,
+attributelist AttributeList OPTIONAL,
+ret ReturnStatus OPTIONAL
+}
+Initialisation-Request::=BST
+Initialisation-Response::=VST
+NamedFile::=SEQUENCE{
+name FileName,
+file File
+}
+-- NamedFile will be used in T-Kernel with GetBroadcastData-Request,
+-- that might be specified in T-APDU in future version.
+ObeConfiguration::=SEQUENCE{
+equipmentClass INTEGER(0..32767),
+manufacturerID INTEGER(0..65535),
+obeStatus INTEGER(0..65535) OPTIONAL
+}
+Profile::=INTEGER (0..127,...)
+-- (0..118) are reserved for ISO/CEN use,
+-- (119..127) are reserved for private use
+Record::=CHOICE{ simple VisibleString,
+...
+}
+ReturnStatus::=INTEGER{
+noError (0),
+accessDenied (1),
+argumentError (2),
+complexityLimitation (3),
+processingFailure (4),
+processing (5),
+chainingError (6)
+-- (7..99) are reserved for future ISO/CEN use,
+-- (100..127) are reserved for private use
+}(0..127,...)
+Set-Request::=SEQUENCE{
+fill BIT STRING (SIZE(1)),
+mode BOOLEAN,
+eid Dsrc-EID,
+accessCredentials OCTET STRING (SIZE(0..127,...)) OPTIONAL,
+attrList AttributeList,
+iid Dsrc-EID OPTIONAL
+}
+Set-Response::=SEQUENCE{
+fill BIT STRING (SIZE(2)),
+eid Dsrc-EID,
+iid Dsrc-EID OPTIONAL,
+ret ReturnStatus OPTIONAL
+}
+Time::=INTEGER(0..4294967295)
+-- The number of seconds passed since
+-- 1st January 1970, 00:00 (UTC)
+T-APDUs::=CHOICE{
+action-request [0] Action-Request,
+action-response [1] Action-Response,
+event-report-request [2] Event-Report-Request,
+event-report-response [3] Event-Report-Response,
+set-request [4] Set-Request,
+set-response [5] Set-Response,
+get-request [6] Get-Request,
+get-response [7] Get-Response,
+initialisation-request [8] Initialisation-Request,
+initialisation-response [9] Initialisation-Response
+}
+VST::=SEQUENCE{
+fill BIT STRING (SIZE(4)),
+profile Profile,
+applications ApplicationList,
+obeConfiguration ObeConfiguration
+}
+END

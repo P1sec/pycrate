@@ -1,0 +1,114 @@
+MBMSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5)  mbmsChargingDataTypes (8) asn1Module (0) version1 (0)}
+
+DEFINITIONS IMPLICIT TAGS	::=
+
+BEGIN
+
+-- EXPORTS everything 
+
+IMPORTS	
+
+CallDuration,
+Diagnostics,
+GSNAddress,
+LocalSequenceNumber,
+ManagementExtensions,
+MBMSInformation,
+MSISDN,
+RecordType,
+ServiceContextID,
+TimeStamp
+FROM GenericChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) genericChargingDataTypes (0) asn1Module (0) version1 (0)}
+
+IMSI
+FROM MAP-CommonDataTypes {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-CommonDataTypes (18)  version15 (15) }
+-- from TS 29.002 [214]
+
+AccessPointNameNI,
+ChangeOfMBMSCondition,
+NodeID,
+PDPAddress,
+PDPType
+FROM GPRSChargingDataTypes {itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) charging (5) gprsChargingDataTypes (2) asn1Module (0) version1 (0)}
+Media-Components-List
+FROM IMSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) imsChargingDataTypes (4) asn1Module (0) version1 (0)}
+
+;
+
+--
+--  MBMS RECORDS
+--
+
+MBMSRecord	::= CHOICE 
+--
+-- Record values 78..79 are MBMS specific
+-- 
+{
+	sUBBMSCRecord			[78] SUBBMSCRecord,
+	cONTENTBMSCRecord		[79] CONTENTBMSCRecord
+}
+
+SUBBMSCRecord 	::= SET
+{
+	recordType					[0] RecordType,
+	servedIMSI					[1] IMSI,
+	ggsnAddress					[2] GSNAddress OPTIONAL,
+	accessPointNameNI			[3] AccessPointNameNI OPTIONAL,
+	servedPDPAddress			[4] PDPAddress OPTIONAL,
+	listOfTrafficVolumes		[5] SEQUENCE OF ChangeOfMBMSCondition OPTIONAL,
+	recordOpeningTime			[6] TimeStamp,
+	duration					[7] CallDuration,
+	causeForRecClosing			[8] CauseForRecClosing,
+	diagnostics					[9] Diagnostics OPTIONAL,
+	recordSequenceNumber		[10] INTEGER OPTIONAL,
+	nodeID						[11] NodeID OPTIONAL,
+	recordExtensions			[12] ManagementExtensions OPTIONAL,
+	localSequenceNumber			[13] LocalSequenceNumber OPTIONAL,
+	servedMSISDN				[14] MSISDN OPTIONAL,
+	bearerServiceDescription	[15] Media-Components-List OPTIONAL,
+	mbmsInformation				[16] MBMSInformation OPTIONAL,
+	serviceContextID			[17] ServiceContextID OPTIONAL
+}
+
+CONTENTBMSCRecord	::= SET
+{
+	recordType					[0] RecordType,
+	contentProviderId			[1] GraphicString,
+	listofDownstreamNodes		[2] SEQUENCE OF GSNAddress,
+	accessPointNameNI			[3] AccessPointNameNI OPTIONAL,
+	servedPDPAddress			[4] PDPAddress OPTIONAL,
+	listOfTrafficVolumes		[5] SEQUENCE OF ChangeOfMBMSCondition OPTIONAL,
+	recordOpeningTime			[6] TimeStamp,
+	duration					[7] CallDuration,
+	causeForRecClosing			[8] CauseForRecClosing,
+	diagnostics					[9] Diagnostics OPTIONAL,
+	recordSequenceNumber		[10] INTEGER OPTIONAL,
+	nodeID						[11] NodeID OPTIONAL,
+	recordExtensions			[12] ManagementExtensions OPTIONAL,
+	localSequenceNumber			[13] LocalSequenceNumber OPTIONAL,
+	recipientAddressList		[14] SEQUENCE OF MSISDN,
+	bearerServiceDescription	[15] Media-Components-List OPTIONAL,
+	mbmsInformation				[16] MBMSInformation OPTIONAL,
+	serviceContextID			[17] ServiceContextID OPTIONAL,
+	servedpdpPDNType			[18] PDPType OPTIONAL
+}
+
+--
+--  MBMS DATA TYPES
+--
+
+CauseForRecClosing	::= INTEGER
+--
+-- cause codes 0 to 15 are defined as used in 'CauseForTerm' (cause for termination)
+--
+{
+	normalRelease					(0),
+	abnormalRelease					(4),
+	volumeLimit						(16),
+	timeLimit						(17),
+	maxChangeCond					(19),
+	managementIntervention			(20),
+	listofDownstreamNodeChange		(59)
+}
+
+END

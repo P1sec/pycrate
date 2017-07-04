@@ -1,0 +1,295 @@
+--$Revision: 370567 $
+--**********************************************************************
+--
+--  NCBI Sequence Alignment elements
+--  by James Ostell, 1990
+--
+--**********************************************************************
+
+NCBI-Seqalign DEFINITIONS ::=
+BEGIN
+
+EXPORTS Seq-align, Score, Score-set, Seq-align-set;
+
+IMPORTS Seq-id, Seq-loc , Na-strand FROM NCBI-Seqloc
+        User-object, Object-id FROM NCBI-General;
+
+--*** Sequence Alignment ********************************
+--*
+
+Seq-align-set ::= SET OF Seq-align
+
+Seq-align ::= SEQUENCE {
+    type ENUMERATED {
+        not-set (0) ,
+        global (1) ,
+        diags (2) ,     -- unbroken, but not ordered, diagonals
+        partial (3) ,   -- mapping pieces together
+        disc (4) ,      -- discontinuous alignment
+        other (255) } ,
+    dim INTEGER OPTIONAL ,     -- dimensionality
+    score SET OF Score OPTIONAL ,   -- for whole alignment
+    segs CHOICE {                   -- alignment data
+        dendiag SEQUENCE OF Dense-diag ,
+        denseg              Dense-seg ,
+        std     SEQUENCE OF Std-seg ,
+        packed              Packed-seg ,
+        disc                Seq-align-set,
+        spliced             Spliced-seg,
+        sparse              Sparse-seg
+    } ,
+    
+    -- regions of sequence over which align
+    --  was computed
+    bounds SET OF Seq-loc OPTIONAL,
+
+    -- alignment id
+    id SEQUENCE OF Object-id OPTIONAL,
+
+    --extra info
+    ext SEQUENCE OF User-object OPTIONAL
+}
+
+Dense-diag ::= SEQUENCE {         -- for (multiway) diagonals
+    dim INTEGER DEFAULT 2 ,    -- dimensionality
+    ids SEQUENCE OF Seq-id ,   -- sequences in order
+    starts SEQUENCE OF INTEGER ,  -- start OFFSETS in ids order
+    len INTEGER ,                 -- len of aligned segments
+    strands SEQUENCE OF Na-strand OPTIONAL ,
+    scores SET OF Score OPTIONAL }
+
+    -- Dense-seg: the densist packing for sequence alignments only.
+    --            a start of -1 indicates a gap for that sequence of
+    --            length lens.
+    --
+    -- id=100  AAGGCCTTTTAGAGATGATGATGATGATGA
+    -- id=200  AAGGCCTTTTAG.......GATGATGATGA
+    -- id=300  ....CCTTTTAGAGATGATGAT....ATGA
+    --
+    -- dim = 3, numseg = 6, ids = { 100, 200, 300 }
+    -- starts = { 0,0,-1, 4,4,0, 12,-1,8, 19,12,15, 22,15,-1, 26,19,18 }
+    -- lens = { 4, 8, 7, 3, 4, 4 }
+    --
+
+Dense-seg ::= SEQUENCE {          -- for (multiway) global or partial alignments
+    dim INTEGER DEFAULT 2 ,       -- dimensionality
+    numseg INTEGER ,              -- number of segments here
+    ids SEQUENCE OF Seq-id ,      -- sequences in order
+    starts SEQUENCE OF INTEGER ,  -- start OFFSETS in ids order within segs
+    lens SEQUENCE OF INTEGER ,    -- lengths in ids order within segs
+    strands SEQUENCE OF Na-strand OPTIONAL ,
+    scores SEQUENCE OF Score OPTIONAL }  -- score for each seg
+
+Packed-seg ::= SEQUENCE {         -- for (multiway) global or partial alignments
+    dim INTEGER DEFAULT 2 ,       -- dimensionality
+    numseg INTEGER ,              -- number of segments here
+    ids SEQUENCE OF Seq-id ,      -- sequences in order
+    starts SEQUENCE OF INTEGER ,  -- start OFFSETS in ids order for whole alignment
+    present OCTET STRING ,        -- Boolean if each sequence present or absent in
+                                  --   each segment
+    lens SEQUENCE OF INTEGER ,    -- length of each segment
+    strands SEQUENCE OF Na-strand OPTIONAL ,
+    scores SEQUENCE OF Score OPTIONAL }  -- score for each segment
+
+Std-seg ::= SEQUENCE {
+    dim INTEGER DEFAULT 2 ,       -- dimensionality
+    ids SEQUENCE OF Seq-id OPTIONAL ,
+    loc SEQUENCE OF Seq-loc ,
+    scores SET OF Score OPTIONAL }
+
+
+Spliced-seg ::= SEQUENCE {
+    -- product is either protein or transcript (cDNA)
+    product-id Seq-id OPTIONAL,
+    genomic-id Seq-id OPTIONAL,
+
+    -- should be 'plus' or 'minus'
+    product-strand Na-strand OPTIONAL ,
+    genomic-strand Na-strand OPTIONAL ,
+    
+    product-type ENUMERATED {
+        transcript(0),
+        protein(1)
+    },
+
+    -- set of segments involved
+    -- each segment corresponds to one exon
+    -- exons are always in biological order
+    exons SEQUENCE OF Spliced-exon ,
+
+    -- start of poly(A) tail on the transcript
+    -- For sense transcripts:
+    --   aligned product positions < poly-a <= product-length
+    --   poly-a == product-length indicates inferred poly(A) tail at transcript's end
+    -- For antisense transcripts:
+    --   -1 <= poly-a < aligned product positions
+    --   poly-a == -1 indicates inferred poly(A) tail at transcript's start
+    poly-a INTEGER OPTIONAL,
+
+    -- length of the product, in bases/residues
+    -- from this (or from poly-a if present), a 3' unaligned length can be extracted
+    product-length INTEGER OPTIONAL,
+
+    -- alignment descriptors / modifiers
+    -- this provides us a set for extension
+    modifiers SET OF Spliced-seg-modifier OPTIONAL
+}
+
+Spliced-seg-modifier ::= CHOICE {
+    -- protein aligns from the start and the first codon 
+    -- on both product and genomic is start codon
+    start-codon-found BOOLEAN,
+    
+    -- protein aligns to it's end and there is stop codon 
+    -- on the genomic right after the alignment
+    stop-codon-found BOOLEAN
+}
+
+
+-- complete or partial exon
+-- two consecutive Spliced-exons may belong to one exon
+Spliced-exon ::= SEQUENCE {
+    -- product-end >= product-start
+    product-start Product-pos ,
+    product-end Product-pos ,
+
+    -- genomic-end >= genomic-start
+    genomic-start INTEGER ,
+    genomic-end INTEGER ,
+
+    -- product is either protein or transcript (cDNA)
+    product-id Seq-id OPTIONAL ,
+    genomic-id Seq-id OPTIONAL ,
+
+    -- should be 'plus' or 'minus'
+    product-strand Na-strand OPTIONAL ,
+    
+    -- genomic-strand represents the strand of translation
+    genomic-strand Na-strand OPTIONAL ,
+
+    -- basic seqments always are in biologic order
+    parts SEQUENCE OF Spliced-exon-chunk OPTIONAL ,
+
+    -- scores for this exon
+    scores Score-set OPTIONAL ,
+
+    -- splice sites
+    acceptor-before-exon Splice-site OPTIONAL,
+    donor-after-exon Splice-site OPTIONAL,
+    
+    -- flag: is this exon complete or partial?
+    partial BOOLEAN OPTIONAL,
+
+    --extra info
+    ext SEQUENCE OF User-object OPTIONAL
+}
+
+
+Product-pos ::= CHOICE {
+    nucpos INTEGER,
+    protpos Prot-pos
+}
+
+
+-- position on protein (1/3 of amino-acid resolution)
+Prot-pos ::= SEQUENCE {
+    -- amino-acid position (0-based)
+    amin INTEGER ,
+
+    -- position within codon (1-based)
+    -- 0 = not set (meaning 1)
+    frame INTEGER DEFAULT 0
+}
+
+
+-- Spliced-exon-chunk: piece of an exon
+-- lengths are given in nucleotide bases (1/3 of aminoacid when product is a
+-- protein)
+Spliced-exon-chunk ::= CHOICE {
+    -- both sequences represented, product and genomic sequences match
+    match INTEGER ,
+
+    -- both sequences represented, product and genomic sequences do not match
+    mismatch INTEGER ,
+
+    -- both sequences are represented, there is sufficient similarity 
+    -- between product and genomic sequences. Can be used to replace stretches
+    -- of matches and mismatches, mostly for protein to genomic where 
+    -- definition of match or mismatch depends on translation table
+    diag INTEGER ,
+
+     -- insertion in product sequence (i.e. gap in the genomic sequence)
+    product-ins INTEGER ,
+
+     -- insertion in genomic sequence (i.e. gap in the product sequence)
+    genomic-ins INTEGER
+}
+
+
+-- site involved in splice
+Splice-site ::= SEQUENCE {
+    -- typically two bases in the intronic region, always
+    -- in IUPAC format
+    bases VisibleString
+}
+
+
+-- ==========================================================================
+--
+-- Sparse-seg follows the semantics of dense-seg and is more optimal for
+-- representing sparse multiple alignments
+--
+-- ==========================================================================
+
+
+Sparse-seg ::= SEQUENCE {
+    master-id Seq-id OPTIONAL,
+
+    -- pairwise alignments constituting this multiple alignment
+    rows SET OF Sparse-align,
+
+    -- per-row scores
+    row-scores SET OF Score OPTIONAL,
+
+    -- index of extra items
+    ext  SET OF Sparse-seg-ext OPTIONAL
+}
+
+Sparse-align ::= SEQUENCE {
+    first-id Seq-id,
+    second-id Seq-id,
+
+    numseg INTEGER,                      --number of segments
+    first-starts SEQUENCE OF INTEGER ,   --starts on the first sequence [numseg]
+    second-starts SEQUENCE OF INTEGER ,  --starts on the second sequence [numseg]
+    lens SEQUENCE OF INTEGER ,           --lengths of segments [numseg]
+    second-strands SEQUENCE OF Na-strand OPTIONAL ,
+
+    -- per-segment scores
+    seg-scores SET OF Score OPTIONAL
+}
+
+Sparse-seg-ext ::= SEQUENCE {
+    --seg-ext SET OF {
+    --    index INTEGER,
+    --    data User-field
+    -- }
+    index INTEGER
+}
+
+
+
+-- use of Score is discouraged for external ASN.1 specifications
+Score ::= SEQUENCE {
+    id Object-id OPTIONAL ,
+    value CHOICE {
+        real REAL ,
+        int INTEGER
+    }
+}
+
+-- use of Score-set is encouraged for external ASN.1 specifications
+Score-set ::= SET OF Score
+
+END 
+

@@ -1,0 +1,63 @@
+--$Revision: 6.1 $
+--********************************************************************
+--
+--  Direct Submission of Sequence Data
+--  James Ostell, 1991
+--
+--  This is a trial specification for direct submission of sequence
+--    data worked out between NCBI and EMBL
+--  Later revised to reflect work with GenBank and Integrated database
+--
+--  Version 3.0, 1994
+--    This is the official NCBI sequence submission format now.
+--
+--********************************************************************
+
+NCBI-Submit DEFINITIONS ::=
+BEGIN
+
+EXPORTS Seq-submit, Contact-info;
+
+IMPORTS Cit-sub, Author FROM NCBI-Biblio
+        Date, Object-id FROM NCBI-General
+        Seq-annot FROM NCBI-Sequence
+        Seq-id FROM NCBI-Seqloc
+        Seq-entry FROM NCBI-Seqset;
+
+Seq-submit ::= SEQUENCE {
+    sub Submit-block ,
+    data CHOICE {
+        entrys  SET OF Seq-entry ,  -- sequence(s)
+        annots  SET OF Seq-annot ,  -- annotation(s)
+        delete  SET OF Seq-id } } -- deletions of entries
+
+Submit-block ::= SEQUENCE {
+    contact Contact-info ,        -- who to contact
+    cit Cit-sub ,                 -- citation for this submission
+    hup BOOLEAN DEFAULT FALSE ,   -- hold until publish
+    reldate Date OPTIONAL ,       -- release by date
+    subtype INTEGER {             -- type of submission
+        new (1) ,                 -- new data
+        update (2) ,              -- update by author
+        revision (3) ,            -- 3rd party (non-author) update
+        other (255) } OPTIONAL ,
+    tool VisibleString OPTIONAL,  -- tool used to make submission
+    user-tag VisibleString OPTIONAL, -- user supplied id for this submission
+    comment VisibleString OPTIONAL } -- user comments/advice to database
+
+Contact-info ::= SEQUENCE {      -- who to contact to discuss the submission
+    name VisibleString OPTIONAL ,        -- OBSOLETE: will be removed
+    address SEQUENCE OF VisibleString OPTIONAL ,
+    phone VisibleString OPTIONAL ,
+    fax VisibleString OPTIONAL ,
+    email VisibleString OPTIONAL ,
+    telex VisibleString OPTIONAL ,
+    owner-id Object-id OPTIONAL ,         -- for owner accounts
+    password OCTET STRING OPTIONAL ,
+    last-name VisibleString OPTIONAL ,  -- structured to replace name above
+    first-name VisibleString OPTIONAL ,
+    middle-initial VisibleString OPTIONAL ,
+    contact Author OPTIONAL }           -- WARNING: this will replace the above
+
+END
+

@@ -1,0 +1,42 @@
+CMS-AES-CCM-and-AES-GCM
+       { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
+         pkcs-9(9) smime(16) modules(0) cms-aes-ccm-and-gcm(32) }
+
+DEFINITIONS IMPLICIT TAGS ::= 
+BEGIN
+
+   -- EXPORTS All
+
+   -- Object Identifiers
+
+   aes OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16) us(840)
+       organization(1) gov(101) csor(3) nistAlgorithm(4) 1 }
+
+   id-aes128-CCM OBJECT IDENTIFIER ::= { aes 7 }
+
+   id-aes192-CCM OBJECT IDENTIFIER ::= { aes 27 }
+
+   id-aes256-CCM OBJECT IDENTIFIER ::= { aes 47 }
+
+   id-aes128-GCM OBJECT IDENTIFIER ::= { aes 6 }
+
+   id-aes192-GCM OBJECT IDENTIFIER ::= { aes 26 }
+
+   id-aes256-GCM OBJECT IDENTIFIER ::= { aes 46 }
+
+
+   -- Parameters for AigorithmIdentifier
+
+   CCMParameters ::= SEQUENCE {
+     aes-nonce         OCTET STRING (SIZE(7..13)),
+     aes-ICVlen        AES-CCM-ICVlen DEFAULT 12 }
+
+   AES-CCM-ICVlen ::= INTEGER (4 | 6 | 8 | 10 | 12 | 14 | 16)
+
+   GCMParameters ::= SEQUENCE {
+     aes-nonce        OCTET STRING, -- recommended size is 12 octets
+     aes-ICVlen       AES-GCM-ICVlen DEFAULT 12 }
+
+   AES-GCM-ICVlen ::= INTEGER (12 | 13 | 14 | 15 | 16)
+
+END

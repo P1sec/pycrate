@@ -1,0 +1,66 @@
+--$Revision: 6.0 $
+--  *********************************************************************
+--
+--  These are code and conversion tables for NCBI sequence codes
+--  ASN.1 for the sequences themselves are define in seq.asn
+--
+--  Seq-map-table and Seq-code-table REQUIRE that codes start with 0
+--    and increase continuously.  So IUPAC codes, which are upper case
+--    letters will always have 65 0 cells before the codes begin.  This
+--    allows all codes to do indexed lookups for things
+--
+--  Valid names for code tables are:
+--    IUPACna
+--    IUPACaa
+--    IUPACeaa
+--    IUPACaa3     3 letter amino acid codes : parallels IUPACeaa
+--                   display only, not a data exchange type
+--    NCBI2na
+--    NCBI4na
+--    NCBI8na
+--    NCBI8aa
+--    NCBIstdaa
+--     probability types map to IUPAC types for display as characters
+
+NCBI-SeqCode DEFINITIONS ::=
+BEGIN
+
+EXPORTS Seq-code-table, Seq-map-table, Seq-code-set;
+
+Seq-code-type ::= ENUMERATED {              -- sequence representations
+    iupacna (1) ,              -- IUPAC 1 letter nuc acid code
+    iupacaa (2) ,              -- IUPAC 1 letter amino acid code
+    ncbi2na (3) ,              -- 2 bit nucleic acid code
+    ncbi4na (4) ,              -- 4 bit nucleic acid code
+    ncbi8na (5) ,              -- 8 bit extended nucleic acid code
+    ncbipna (6) ,              -- nucleic acid probabilities
+    ncbi8aa (7) ,              -- 8 bit extended amino acid codes
+    ncbieaa (8) ,              -- extended ASCII 1 letter aa codes
+    ncbipaa (9) ,              -- amino acid probabilities
+    iupacaa3 (10) ,            -- 3 letter code only for display
+    ncbistdaa (11) }           -- consecutive codes for std aas, 0-25
+
+Seq-map-table ::= SEQUENCE { -- for tables of sequence mappings 
+    from Seq-code-type ,      -- code to map from
+    to Seq-code-type ,        -- code to map to
+    num INTEGER ,             -- number of rows in table
+    start-at INTEGER DEFAULT 0 ,   -- index offset of first element
+    table SEQUENCE OF INTEGER }  -- table of values, in from-to order
+
+Seq-code-table ::= SEQUENCE { -- for names of coded values
+    code Seq-code-type ,      -- name of code
+    num INTEGER ,             -- number of rows in table
+    one-letter BOOLEAN ,   -- symbol is ALWAYS 1 letter?
+    start-at INTEGER DEFAULT 0 ,   -- index offset of first element
+    table SEQUENCE OF
+        SEQUENCE {
+            symbol VisibleString ,      -- the printed symbol or letter
+            name VisibleString } ,      -- an explanatory name or string
+    comps SEQUENCE OF INTEGER OPTIONAL } -- pointers to complement nuc acid
+
+Seq-code-set ::= SEQUENCE {    -- for distribution
+    codes SET OF Seq-code-table OPTIONAL ,
+    maps SET OF Seq-map-table OPTIONAL }
+
+END
+

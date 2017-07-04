@@ -1,0 +1,6 @@
+RNA-CommonDataTypes.asn
+RNA-Constants.asn
+RNA-Containers.asn
+RNA-IEs.asn
+RNA-PDU-Contents.asn
+RNA-PDU-Descriptions.asn

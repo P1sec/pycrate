@@ -1,0 +1,256 @@
+CMSFirmwareWrapper-2009
+      { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-9(9)
+      smime(16) modules(0) id-mod-cms-firmware-wrap-02(40) }
+
+DEFINITIONS IMPLICIT TAGS ::=
+BEGIN
+
+  IMPORTS
+
+  OTHER-NAME
+  FROM PKIX1Implicit-2009 {
+      iso(1) identified-organization(3) dod(6) internet(1) security(5)
+      mechanisms(5) pkix(7) id-mod(0) id-mod-pkix1-implicit-02(59) }
+
+  EnvelopedData, CONTENT-TYPE, ATTRIBUTE
+  FROM CryptographicMessageSyntax-2009 {
+      iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-9(9)
+      smime(16) modules(0) id-mod-cms-2004-02(41) };
+
+  FirmwareContentTypes CONTENT-TYPE ::= {
+          ct-firmwarePackage | ct-firmwareLoadReceipt |
+          ct-firmwareLoadError,... }
+
+  FirmwareSignedAttrs ATTRIBUTE ::= {
+          aa-firmwarePackageID | aa-targetHardwareIDs |
+          aa-decryptKeyID | aa-implCryptoAlgs | aa-implCompressAlgs |
+          aa-communityIdentifiers | aa-firmwarePackageInfo,... }
+  FirmwareUnsignedAttrs ATTRIBUTE ::= {
+          aa-wrappedFirmwareKey, ... }
+
+  FirmwareOtherNames OTHER-NAME ::= {
+          on-hardwareModuleName, ... }
+
+  -- Firmware Package Content Type and Object Identifier
+
+  ct-firmwarePackage CONTENT-TYPE ::=
+          { FirmwarePkgData IDENTIFIED BY id-ct-firmwarePackage }
+
+  id-ct-firmwarePackage OBJECT IDENTIFIER ::= {
+      iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
+      smime(16) ct(1) 16 }
+
+  FirmwarePkgData ::= OCTET STRING
+
+  -- Firmware Package Signed Attributes and Object Identifiers
+
+  aa-firmwarePackageID ATTRIBUTE ::=
+      { TYPE FirmwarePackageIdentifier IDENTIFIED BY
+          id-aa-firmwarePackageID }
+
+  id-aa-firmwarePackageID OBJECT IDENTIFIER ::= {
+      iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
+      smime(16) aa(2) 35 }
+
+  FirmwarePackageIdentifier ::= SEQUENCE {
+      name PreferredOrLegacyPackageIdentifier,
+      stale PreferredOrLegacyStalePackageIdentifier OPTIONAL }
+
+  PreferredOrLegacyPackageIdentifier ::= CHOICE {
+      preferred PreferredPackageIdentifier,
+      legacy OCTET STRING }
+
+  PreferredPackageIdentifier ::= SEQUENCE {
+      fwPkgID OBJECT IDENTIFIER,
+      verNum INTEGER (0..MAX) }
+
+  PreferredOrLegacyStalePackageIdentifier ::= CHOICE {
+      preferredStaleVerNum INTEGER (0..MAX),
+      legacyStaleVersion OCTET STRING }
+
+  aa-targetHardwareIDs ATTRIBUTE ::=
+      { TYPE TargetHardwareIdentifiers IDENTIFIED BY
+          id-aa-targetHardwareIDs }
+
+  id-aa-targetHardwareIDs OBJECT IDENTIFIER ::= {
+      iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
+      smime(16) aa(2) 36 }
+
+  TargetHardwareIdentifiers ::= SEQUENCE OF OBJECT IDENTIFIER
+
+  aa-decryptKeyID ATTRIBUTE ::=
+          { TYPE DecryptKeyIdentifier IDENTIFIED BY id-aa-decryptKeyID}
+
+  id-aa-decryptKeyID OBJECT IDENTIFIER ::= {
+      iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
+      smime(16) aa(2) 37 }
+
+  DecryptKeyIdentifier ::= OCTET STRING
+
+  aa-implCryptoAlgs ATTRIBUTE ::=
+      { TYPE ImplementedCryptoAlgorithms IDENTIFIED BY
+          id-aa-implCryptoAlgs }
+
+  id-aa-implCryptoAlgs OBJECT IDENTIFIER ::= {
+      iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
+      smime(16) aa(2) 38 }
+
+  ImplementedCryptoAlgorithms ::= SEQUENCE OF OBJECT IDENTIFIER
+
+  aa-implCompressAlgs ATTRIBUTE ::=
+      { TYPE ImplementedCompressAlgorithms IDENTIFIED BY
+          id-aa-implCompressAlgs }
+
+  id-aa-implCompressAlgs OBJECT IDENTIFIER ::= {
+      iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
+      smime(16) aa(2) 43 }
+
+  ImplementedCompressAlgorithms ::= SEQUENCE OF OBJECT IDENTIFIER
+
+  aa-communityIdentifiers ATTRIBUTE ::=
+      { TYPE CommunityIdentifiers IDENTIFIED BY
+          id-aa-communityIdentifiers }
+
+  id-aa-communityIdentifiers OBJECT IDENTIFIER ::= {
+      iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
+      smime(16) aa(2) 40 }
+
+  CommunityIdentifiers ::= SEQUENCE OF CommunityIdentifier
+
+  CommunityIdentifier ::= CHOICE {
+      communityOID OBJECT IDENTIFIER,
+      hwModuleList HardwareModules }
+  HardwareModules ::= SEQUENCE {
+      hwType OBJECT IDENTIFIER,
+      hwSerialEntries SEQUENCE OF HardwareSerialEntry }
+
+  HardwareSerialEntry ::= CHOICE {
+      all NULL,
+      single OCTET STRING,
+      block SEQUENCE {
+          low OCTET STRING,
+          high OCTET STRING
+      }
+  }
+
+  aa-firmwarePackageInfo ATTRIBUTE ::=
+      { TYPE FirmwarePackageInfo IDENTIFIED BY
+          id-aa-firmwarePackageInfo }
+  id-aa-firmwarePackageInfo OBJECT IDENTIFIER ::= {
+      iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
+      smime(16) aa(2) 42 }
+
+  FirmwarePackageInfo ::= SEQUENCE {
+      fwPkgType INTEGER OPTIONAL,
+      dependencies SEQUENCE OF
+      PreferredOrLegacyPackageIdentifier OPTIONAL }
+
+  -- Firmware Package Unsigned Attributes and Object Identifiers
+
+  aa-wrappedFirmwareKey ATTRIBUTE ::=
+      { TYPE WrappedFirmwareKey IDENTIFIED BY
+          id-aa-wrappedFirmwareKey }
+  id-aa-wrappedFirmwareKey OBJECT IDENTIFIER ::= {
+      iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
+      smime(16) aa(2) 39 }
+
+  WrappedFirmwareKey ::= EnvelopedData
+
+  -- Firmware Package Load Receipt Content Type and Object Identifier
+
+  ct-firmwareLoadReceipt CONTENT-TYPE ::=
+      { FirmwarePackageLoadReceipt IDENTIFIED BY
+          id-ct-firmwareLoadReceipt }
+  id-ct-firmwareLoadReceipt OBJECT IDENTIFIER ::= {
+      iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
+      smime(16) ct(1) 17 }
+
+  FirmwarePackageLoadReceipt ::= SEQUENCE {
+      version FWReceiptVersion DEFAULT v1,
+      hwType OBJECT IDENTIFIER,
+      hwSerialNum OCTET STRING,
+      fwPkgName PreferredOrLegacyPackageIdentifier,
+      trustAnchorKeyID OCTET STRING OPTIONAL,
+      decryptKeyID [1] OCTET STRING OPTIONAL }
+
+  FWReceiptVersion ::= INTEGER { v1(1) }
+
+  -- Firmware Package Load Error Report Content Type
+  -- and Object Identifier
+
+  ct-firmwareLoadError CONTENT-TYPE ::=
+      { FirmwarePackageLoadError
+          IDENTIFIED BY id-ct-firmwareLoadError }
+  id-ct-firmwareLoadError OBJECT IDENTIFIER ::= {
+      iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
+      smime(16) ct(1) 18 }
+
+  FirmwarePackageLoadError ::= SEQUENCE {
+      version FWErrorVersion DEFAULT v1,
+      hwType OBJECT IDENTIFIER,
+      hwSerialNum OCTET STRING,
+      errorCode FirmwarePackageLoadErrorCode,
+      vendorErrorCode VendorLoadErrorCode OPTIONAL,
+      fwPkgName PreferredOrLegacyPackageIdentifier OPTIONAL,
+      config [1] SEQUENCE OF CurrentFWConfig OPTIONAL }
+
+  FWErrorVersion ::= INTEGER { v1(1) }
+
+  CurrentFWConfig ::= SEQUENCE {
+      fwPkgType INTEGER OPTIONAL,
+      fwPkgName PreferredOrLegacyPackageIdentifier }
+
+  FirmwarePackageLoadErrorCode ::= ENUMERATED {
+      decodeFailure                (1),
+      badContentInfo               (2),
+      badSignedData                (3),
+      badEncapContent              (4),
+      badCertificate               (5),
+      badSignerInfo                (6),
+      badSignedAttrs               (7),
+      badUnsignedAttrs             (8),
+      missingContent               (9),
+      noTrustAnchor               (10),
+      notAuthorized               (11),
+      badDigestAlgorithm          (12),
+      badSignatureAlgorithm       (13),
+      unsupportedKeySize          (14),
+      signatureFailure            (15),
+      contentTypeMismatch         (16),
+      badEncryptedData            (17),
+      unprotectedAttrsPresent     (18),
+      badEncryptContent           (19),
+      badEncryptAlgorithm         (20),
+      missingCiphertext           (21),
+      noDecryptKey                (22),
+      decryptFailure              (23),
+      badCompressAlgorithm        (24),
+      missingCompressedContent    (25),
+      decompressFailure           (26),
+      wrongHardware               (27),
+      stalePackage                (28),
+      notInCommunity              (29),
+      unsupportedPackageType      (30),
+      missingDependency           (31),
+      wrongDependencyVersion      (32),
+      insufficientMemory          (33),
+      badFirmware                 (34),
+      unsupportedParameters       (35),
+      breaksDependency            (36),
+      otherError                  (99) }
+
+  VendorLoadErrorCode ::= INTEGER
+
+  -- Other Name syntax for Hardware Module Name
+
+  on-hardwareModuleName OTHER-NAME ::=
+          { HardwareModuleName IDENTIFIED BY id-on-hardwareModuleName }
+  id-on-hardwareModuleName OBJECT IDENTIFIER ::= {
+      iso(1) identified-organization(3) dod(6) internet(1) security(5)
+      mechanisms(5) pkix(7) on(8) 4 }
+
+  HardwareModuleName ::= SEQUENCE {
+      hwType OBJECT IDENTIFIER,
+      hwSerialNum OCTET STRING }
+
+END

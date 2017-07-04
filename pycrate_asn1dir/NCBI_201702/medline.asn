@@ -1,0 +1,90 @@
+--$Revision: 6.0 $
+--**********************************************************************
+--
+--  MEDLINE data definitions
+--  James Ostell, 1990
+--
+--  enhanced in 1996 to support PubMed records as well by simply adding
+--    the PubMedId and making MedlineId optional
+--
+--**********************************************************************
+
+NCBI-Medline DEFINITIONS ::=
+BEGIN
+
+EXPORTS Medline-entry, Medline-si;
+
+IMPORTS Cit-art, PubMedId FROM NCBI-Biblio
+        Date FROM NCBI-General;
+
+                                -- a MEDLINE or PubMed entry
+Medline-entry ::= SEQUENCE {
+    uid INTEGER OPTIONAL ,      -- MEDLINE UID, sometimes not yet available if from PubMed
+    em Date ,                   -- Entry Month
+    cit Cit-art ,               -- article citation
+    abstract VisibleString OPTIONAL ,
+    mesh SET OF Medline-mesh OPTIONAL ,
+    substance SET OF Medline-rn OPTIONAL ,
+    xref SET OF Medline-si OPTIONAL ,
+    idnum SET OF VisibleString OPTIONAL ,  -- ID Number (grants, contracts)
+    gene SET OF VisibleString OPTIONAL ,
+    pmid PubMedId OPTIONAL ,               -- MEDLINE records may include the PubMedId
+    pub-type SET OF VisibleString OPTIONAL, -- may show publication types (review, etc)
+    mlfield SET OF Medline-field OPTIONAL ,  -- additional Medline field types
+    status INTEGER {
+	publisher (1) ,      -- record as supplied by publisher
+        premedline (2) ,     -- premedline record
+        medline (3) } DEFAULT medline }  -- regular medline record
+
+Medline-mesh ::= SEQUENCE {
+    mp BOOLEAN DEFAULT FALSE ,       -- TRUE if main point (*)
+    term VisibleString ,                   -- the MeSH term
+    qual SET OF Medline-qual OPTIONAL }    -- qualifiers
+
+Medline-qual ::= SEQUENCE {
+    mp BOOLEAN DEFAULT FALSE ,       -- TRUE if main point
+    subh VisibleString }             -- the subheading
+
+Medline-rn ::= SEQUENCE {       -- medline substance records
+    type ENUMERATED {           -- type of record
+        nameonly (0) ,
+        cas (1) ,               -- CAS number
+        ec (2) } ,              -- EC number
+    cit VisibleString OPTIONAL ,  -- CAS or EC number if present
+    name VisibleString }          -- name (always present)
+
+Medline-si ::= SEQUENCE {       -- medline cross reference records
+    type ENUMERATED {           -- type of xref
+        ddbj (1) ,              -- DNA Data Bank of Japan
+        carbbank (2) ,          -- Carbohydrate Structure Database
+        embl (3) ,              -- EMBL Data Library
+        hdb (4) ,               -- Hybridoma Data Bank
+        genbank (5) ,           -- GenBank
+        hgml (6) ,              -- Human Gene Map Library
+        mim (7) ,               -- Mendelian Inheritance in Man
+        msd (8) ,               -- Microbial Strains Database
+        pdb (9) ,               -- Protein Data Bank (Brookhaven)
+        pir (10) ,              -- Protein Identification Resource
+        prfseqdb (11) ,         -- Protein Research Foundation (Japan)
+        psd (12) ,              -- Protein Sequence Database (Japan)
+        swissprot (13) ,        -- SwissProt
+        gdb (14) } ,            -- Genome Data Base
+    cit VisibleString OPTIONAL }    -- the citation/accession number
+
+Medline-field ::= SEQUENCE {
+    type INTEGER {              -- Keyed type
+	other (0) ,             -- look in line code
+	comment (1) ,           -- comment line
+        erratum (2) } ,         -- retracted, corrected, etc
+    str VisibleString ,         -- the text
+    ids SEQUENCE OF DocRef OPTIONAL }  -- pointers relevant to this text
+
+DocRef ::= SEQUENCE {           -- reference to a document
+    type INTEGER {
+        medline (1) ,
+        pubmed (2) ,
+        ncbigi (3) } ,
+    uid INTEGER }
+
+END
+

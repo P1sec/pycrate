@@ -1,0 +1,191 @@
+--$Revision: 462996 $ 
+--********************************************************************** 
+-- 
+--  NCBI Entrezgene 
+--  by James Ostell, 2001 
+--   
+--  Generic "Gene" object for Entrez Genes 
+--    This object is designed to incorporate a subset of information from 
+--    LocusLink and from records in Entrez Genomes to provide indexing, 
+--    linkage, and a useful summary report in Entrez for "Genes" 
+-- 
+--********************************************************************** 
+ 
+NCBI-Entrezgene DEFINITIONS ::= 
+BEGIN 
+ 
+EXPORTS Entrezgene, Entrezgene-Set, Gene-track, Gene-commentary;
+ 
+IMPORTS Gene-ref FROM NCBI-Gene 
+    Prot-ref FROM NCBI-Protein 
+    BioSource FROM NCBI-BioSource 
+    RNA-ref FROM NCBI-RNA 
+    Dbtag, Date FROM NCBI-General 
+    Seq-loc FROM NCBI-Seqloc 
+    Pub FROM NCBI-Pub; 
+ 
+--******************************************** 
+-- Entrezgene is the "document" indexed in Entrez 
+--  and presented in the full display 
+-- It also contains the Entrez ID and date information 
+--******************************************* 
+Entrezgene ::= SEQUENCE { 
+    track-info Gene-track OPTIONAL , -- not in submission, but in retrieval 
+    type INTEGER {                   -- type of Gene
+        unknown (0) ,
+        tRNA    (1) ,
+        rRNA    (2) ,
+        snRNA   (3) ,
+        scRNA   (4) ,
+        snoRNA  (5) ,
+        protein-coding (6) ,
+        pseudo  (7) ,
+        transposon  (8) ,
+        miscRNA  (9) ,
+        ncRNA (10) ,
+        biological-region (11),
+        other (255) } ,
+    source BioSource , 
+    gene Gene-ref ,                     -- for locus-tag see note 3
+    prot Prot-ref OPTIONAL , 
+    rna RNA-ref OPTIONAL , 
+    summary VisibleString OPTIONAL ,    -- short summary 
+    location SEQUENCE OF Maps OPTIONAL,
+    gene-source Gene-source OPTIONAL ,             -- NCBI source to Entrez 
+    locus SEQUENCE OF Gene-commentary OPTIONAL ,   -- location of gene on chromosome (if known)
+                                                   -- and all information about products
+						   -- (mRNA, proteins and so on)
+    properties SEQUENCE OF Gene-commentary OPTIONAL , 
+    refgene SEQUENCE OF Gene-commentary OPTIONAL , -- NG for this? 
+    homology SEQUENCE OF Gene-commentary OPTIONAL , 
+    comments SEQUENCE OF Gene-commentary OPTIONAL ,
+    unique-keys SEQUENCE OF Dbtag OPTIONAL ,              -- see note 3
+    xtra-index-terms SEQUENCE OF VisibleString OPTIONAL , -- see note 2
+    xtra-properties SEQUENCE OF Xtra-Terms OPTIONAL ,     -- see note 2
+    xtra-iq SEQUENCE OF Xtra-Terms OPTIONAL,              -- see note 2
+    non-unique-keys SEQUENCE OF Dbtag OPTIONAL }
+
+Entrezgene-Set ::= SET OF Entrezgene
+
+Gene-track ::= SEQUENCE { 
+    geneid INTEGER ,     -- required unique document id 
+    status INTEGER {
+        live (0) ,
+        secondary (1) ,   -- synonym with merged
+        discontinued (2)  -- 'deleted', still index and display to public
+    } DEFAULT live ,
+    current-id SEQUENCE OF Dbtag OPTIONAL , -- see note 1 below
+    create-date Date ,   -- date created in Entrez 
+    update-date Date ,   -- last date updated in Entrez 
+    discontinue-date Date OPTIONAL } --
+ 
+Gene-source ::= SEQUENCE { 
+    src VisibleString ,                -- key to the source within NCBI locuslink, Ecoli, etc 
+    src-int INTEGER OPTIONAL ,         -- eg. locuslink id 
+    src-str1 VisibleString OPTIONAL ,  -- eg. chromosome1 
+    src-str2 VisibleString OPTIONAL ,  -- see note 3
+    gene-display BOOLEAN DEFAULT FALSE ,  -- do we have a URL for gene display? 
+    locus-display BOOLEAN DEFAULT FALSE , -- do we have a URL for map/locus display? 
+    extra-terms BOOLEAN DEFAULT FALSE }   -- do we have a URL for extra indexing terms? 
+ 
+Gene-commentary ::= SEQUENCE { 
+    type INTEGER {            -- type of Gene Commentary
+        genomic (1) ,
+        pre-RNA (2) ,
+        mRNA (3) ,
+        rRNA (4) ,
+        tRNA (5) ,
+        snRNA (6) ,
+        scRNA (7) ,
+        peptide (8) ,
+        other-genetic (9) ,
+        genomic-mRNA (10) ,
+        cRNA (11) ,
+        mature-peptide (12) ,
+        pre-protein (13) ,
+        miscRNA  (14) ,
+        snoRNA  (15) ,
+        property  (16) , -- used to display tag/value pair
+	                 -- for this type label is used as property tag, text is used as property value, 
+	                 -- other fields are not used.
+        reference (17), -- currently not used             
+        generif (18), -- to include generif in the main blob             
+        phenotype(19), -- to display phenotype information
+        complex (20), -- used (but not limited) to identify resulting 
+                      -- interaction complexes
+        compound (21), -- pubchem entities
+
+        ncRNA (22), 
+        gene-group (23), -- for relationship sets (such as pseudogene / parent gene)
+        assembly (24),  -- for full assembly accession
+        assembly-unit (25), -- for the assembly unit corresponding to the refseq
+
+        comment (254) ,
+        other (255) } ,
+    heading VisibleString OPTIONAL ,      -- appears above text 
+    label VisibleString OPTIONAL ,        -- occurs to left of text
+                                          -- for protein and RNA types it is a name
+					  -- for property type it is a property tag  
+    text VisibleString OPTIONAL ,         -- block of text 
+					  -- for property type it is a property value  
+    accession VisibleString OPTIONAL ,    -- accession for the gi in the seqloc, see note 3
+    version INTEGER OPTIONAL ,    -- version for the accession above
+    xtra-properties SEQUENCE OF Xtra-Terms OPTIONAL , -- see note 2
+    refs SEQUENCE OF Pub OPTIONAL ,       -- refs for this 
+    source SEQUENCE OF Other-source OPTIONAL ,    -- links and refs 
+    genomic-coords SEQUENCE OF Seq-loc OPTIONAL , -- referenced sequences in genomic coords
+    seqs SEQUENCE OF Seq-loc OPTIONAL ,           -- referenced sequences in non-genomic coords
+    products SEQUENCE OF Gene-commentary OPTIONAL ,
+    properties SEQUENCE OF Gene-commentary OPTIONAL ,
+    comment SEQUENCE OF Gene-commentary OPTIONAL ,
+    create-date Date OPTIONAL ,   
+    update-date Date OPTIONAL ,   
+    rna RNA-ref OPTIONAL } 
+ 
+Other-source ::= SEQUENCE { 
+    src Dbtag OPTIONAL ,                -- key to non-ncbi source 
+    pre-text VisibleString OPTIONAL ,   -- text before anchor 
+    anchor VisibleString OPTIONAL ,     -- text to show as highlight 
+    url VisibleString OPTIONAL ,        -- if present, use this URL not Dbtag and datbase 
+    post-text VisibleString OPTIONAL }  -- text after anchor 
+
+
+Maps::= SEQUENCE {
+        display-str VisibleString ,
+        method CHOICE {
+            proxy VisibleString ,  --url to non mapviewer mapviewing resource
+            map-type ENUMERATED {  -- units used in display-str to query mapviewer 
+                    cyto (0) ,
+                    bp (1) ,
+                    cM (2) ,
+                    cR (3) ,
+                    min (4)}}}
+                        
+Xtra-Terms ::= SEQUENCE {  -- see note 2
+    tag VisibleString ,
+    value VisibleString }
+
+END 
+
+--********************************************************************** 
+-- 
+--  Comments, notes, etc.
+--   
+--  1)  Ignored unless status = secondary.  This is where gene_ids (db = "GeneID")
+--      are placed toward which the interface will direct users.  It is also
+--      available for placing other source-db specific tags (i.e., db = "LocusID").
+--
+--  2)  These 'xtra' objects are for submitting data for Entrez indexing
+--      that might not fit anywhere in the Entrezgene specification but
+--      are considered by the data source submittor to be important.
+--          xtra-index-terms is any string.
+--          xtra-properties are tag/value pairs of properties/feilds as
+--              defined in the Entrez database (i.e.: UNIGENE/Hs.74561)
+--          xtra-iq are tag/value pairs of Entrez database/UID as defined
+--              in the Entrezgene indexing code (i.e.: NUCLEOTIDE/20270626)
+--
+--  3)  Locus-tag and src-str2 are expected to be unique per organism (tax_id).
+--      Protein accessions and the tag-value pairs in unique-keys
+--      are expected to be unique over all organisms.
+--********************************************************************** 
+

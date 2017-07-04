@@ -1,0 +1,255 @@
+--$Revision: 464672 $
+--********************************************************************
+--
+--  Network Id server network access
+--  Vasilchenko 2003
+--
+--
+--*********************************************************************
+--
+--  seqsplit.asn
+--
+--     representation of split sequences
+--
+--*********************************************************************
+
+NCBI-Seq-split DEFINITIONS ::=
+BEGIN
+
+EXPORTS ID2S-Chunk-Id, ID2S-Seq-annot-Info;
+
+IMPORTS Seq-id                                      FROM NCBI-Seqloc
+        Seq-entry                                   FROM NCBI-Seqset
+        Bioseq, Seq-annot, Seq-descr, Seq-literal   FROM NCBI-Sequence
+        Seq-align                                   FROM NCBI-Seqalign;
+
+----------------------------------------------------------------------------
+-- Blob split info types
+----------------------------------------------------------------------------
+
+----------------------------------------------------------------------------
+-- Chunks split description
+
+
+ID2S-Split-Info ::= SEQUENCE {
+        bioseqs-info    SET OF ID2S-Bioseqs-Info OPTIONAL,
+        chunks          SET OF ID2S-Chunk-Info,
+        skeleton        Seq-entry OPTIONAL
+}
+
+
+ID2S-Bioseqs-Info ::= SEQUENCE {
+        info            ID2S-Bioseq-Info,
+        bioseqs         ID2S-Bioseq-Ids
+}
+
+
+ID2S-Bioseq-Info ::= SEQUENCE {
+        gap-count       INTEGER OPTIONAL,
+        seq-map-has-ref BOOLEAN OPTIONAL
+}
+
+
+ID2S-Chunk-Info ::= SEQUENCE {
+        id              ID2S-Chunk-Id,
+        content         SET OF ID2S-Chunk-Content
+}
+
+
+-- Description of information in this chunk
+-- Place means id of Bioseq or Bioseq-set
+ID2S-Chunk-Content ::= CHOICE {
+        -- place of Seq-descrs
+        seq-descr       ID2S-Seq-descr-Info,
+
+        -- locations and types of annotations
+        seq-annot       ID2S-Seq-annot-Info,
+
+        -- place of assembly history
+        seq-assembly    ID2S-Seq-assembly-Info,
+
+        -- place of sequence map
+        seq-map         ID2S-Seq-map-Info,
+        
+        -- place of sequence data
+        seq-data        ID2S-Seq-data-Info,
+
+        -- place of Seq-annots
+        seq-annot-place ID2S-Seq-annot-place-Info,
+
+        -- place of Bioseqs
+        bioseq-place    SET OF ID2S-Bioseq-place-Info,
+
+        -- ids of features
+        feat-ids        SET OF ID2S-Seq-feat-Ids-Info
+}
+
+
+ID2S-Seq-descr-Info ::= SEQUENCE {
+        type-mask       INTEGER, -- mask of Seq-descr types,
+        bioseqs         ID2S-Bioseq-Ids OPTIONAL,
+        bioseq-sets     ID2S-Bioseq-set-Ids OPTIONAL
+}
+
+
+ID2S-Seq-annot-Info ::= SEQUENCE {
+        -- name is set if this is named annot
+        -- name may be empty which differ from unnamed annot
+        name            VisibleString OPTIONAL,
+        align           NULL OPTIONAL,
+        graph           NULL OPTIONAL,
+        feat            SET OF ID2S-Feat-type-Info OPTIONAL,
+        seq-loc         ID2S-Seq-loc OPTIONAL
+}
+
+
+ID2S-Seq-annot-place-Info ::= SEQUENCE {
+        name            VisibleString OPTIONAL,
+        bioseqs         ID2S-Bioseq-Ids OPTIONAL,
+        bioseq-sets     ID2S-Bioseq-set-Ids OPTIONAL
+}
+
+
+ID2S-Seq-feat-Ids-Info ::= SEQUENCE {
+        feat-types      SET OF ID2S-Feat-type-Info OPTIONAL,
+        xref-types      SET OF ID2S-Feat-type-Info OPTIONAL,
+        local-ids       SET OF INTEGER OPTIONAL,
+        local-str-ids   SET OF VisibleString OPTIONAL
+}
+
+
+ID2S-Feat-type-Info ::=  SEQUENCE {
+        type            INTEGER,
+        subtypes        SET OF INTEGER OPTIONAL
+}
+
+
+ID2S-Seq-assembly-Info ::= SEQUENCE {
+        bioseqs         ID2S-Bioseq-Ids
+}
+
+
+ID2S-Seq-map-Info ::= ID2S-Seq-loc
+
+
+ID2S-Seq-data-Info ::= ID2S-Seq-loc
+
+
+ID2S-Bioseq-place-Info ::= SEQUENCE {
+        bioseq-set      INTEGER,
+        seq-ids         ID2S-Bioseq-Ids
+}
+
+
+ID2S-Chunk ::= SEQUENCE {
+        data            SET OF ID2S-Chunk-Data
+}
+
+
+ID2S-Chunk-Data ::= SEQUENCE {
+        -- place of data to insert
+        id              CHOICE {
+                -- Bioseq-set id
+                bioseq-set      INTEGER,
+                -- Bioseq id
+                gi              INTEGER,
+                -- Bioseq id
+                seq-id          Seq-id
+        },
+        -- Seq-descr, for Bioseq and Bioseq-set
+        descr           Seq-descr OPTIONAL,
+        -- Seq-annot, for Bioseq and Bioseq-set
+        annots          SET OF Seq-annot OPTIONAL,
+        -- assembly history Seq-align, for Bioseq
+        assembly        SET OF Seq-align OPTIONAL,
+        -- sequence map, for Bioseq
+        seq-map         SEQUENCE OF ID2S-Sequence-Piece OPTIONAL,
+        -- sequence data, for Bioseq
+        seq-data        SEQUENCE OF ID2S-Sequence-Piece OPTIONAL,
+        -- Bioseq, for Bioseq-set
+        bioseqs         SET OF Bioseq OPTIONAL
+}
+
+
+ID2S-Sequence-Piece ::= SEQUENCE {
+        start           INTEGER,  -- start position on sequence
+        data            SEQUENCE OF Seq-literal
+}
+
+
+----------------------------------------------------------------------------
+-- utility types
+----------------------------------------------------------------------------
+
+
+ID2S-Chunk-Id ::= INTEGER
+
+
+ID2S-Bioseq-set-Ids ::= SET OF INTEGER
+
+
+ID2S-Bioseq-Ids ::= SET OF CHOICE {
+        gi              INTEGER,
+        seq-id          Seq-id,
+        gi-range        ID2S-Gi-Range
+}
+
+
+ID2S-Gi-Range ::= SEQUENCE {
+        start           INTEGER,             -- start gi in this gi range
+        count           INTEGER DEFAULT 1    -- number of sequential gis
+}
+
+
+-- ID2S-Seq-loc is used to represent unordered and unstranded
+-- set of intervals on set of sequences.
+-- It's optimized for compact encoding of several common cases:
+--    Seq-ids of type gi,
+--    intervals covering whole sequences,
+--    whole sequences with sequential gis,
+--    set of intervals on the same sequence (Seq-id sharing).
+ID2S-Seq-loc ::= CHOICE {
+        whole-gi        INTEGER,             -- whole sequence by gi
+        whole-seq-id    Seq-id,              -- whole sequence by Seq-id
+        whole-gi-range  ID2S-Gi-Range,       -- set of whole sequences by gis
+        gi-interval     ID2S-Gi-Interval,    -- interval on sequence by gi
+        seq-id-interval ID2S-Seq-id-Interval,-- interval on sequence by Seq-id
+        gi-ints         ID2S-Gi-Ints,        -- set of intervals on the same gi
+        seq-id-ints     ID2S-Seq-id-Ints,    -- set of intervals on the same id
+        loc-set         SET OF ID2S-Seq-loc  -- combination of locations
+}
+
+
+ID2S-Gi-Interval ::= SEQUENCE {
+        gi              INTEGER,
+        start           INTEGER,
+        length          INTEGER DEFAULT 1
+}
+
+
+ID2S-Seq-id-Interval ::= SEQUENCE {
+        seq-id          Seq-id,
+        start           INTEGER,
+        length          INTEGER DEFAULT 1
+}
+
+
+ID2S-Interval ::= SEQUENCE {
+        start           INTEGER,
+        length          INTEGER DEFAULT 1
+}
+
+
+ID2S-Gi-Ints ::= SEQUENCE {
+        gi              INTEGER,
+        ints            SET OF ID2S-Interval
+}
+
+
+ID2S-Seq-id-Ints ::= SEQUENCE {
+        seq-id          Seq-id,
+        ints            SET OF ID2S-Interval
+}
+
+
+END

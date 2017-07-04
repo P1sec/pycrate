@@ -1,0 +1,8 @@
+PKIX1Explicit88.asn
+PKIX1Implicit88.asn
+PKIXAttributeCertificate.asn
+AttributeCertificateVersion1.asn
+CryptographicMessageSyntax2004.asn
+ERS-88.asn
+# ERS-97: requires some part of the infamous x509-2012
+#ERS-97.asn

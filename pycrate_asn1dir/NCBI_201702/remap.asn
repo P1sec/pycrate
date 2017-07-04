@@ -1,0 +1,72 @@
+--$Id: remap.asn,v 1.2 2004/07/28 13:43:33 jcherry Exp $********************************************
+--
+--  remap.asn
+--   Version 1
+--
+--   API for remapping locations on sequences
+--
+--   Author: Josh Cherry
+--
+--***************************************************************
+
+NCBI-Remap DEFINITIONS ::=
+BEGIN
+
+IMPORTS Seq-loc FROM NCBI-Seqloc;
+
+
+Remap-dt ::= INTEGER                   -- a date/time stamp
+Remap-db-id ::= VisibleString          -- database name
+
+
+  --***************************************
+  --  Remap Request types
+  --***************************************
+       --****************************************
+       -- The basic request wrapper leaves space for a version which
+       --   allow the server to support older clients
+       -- The tool parameter allows us to log the client types for
+       --   debugging and tuning
+       --****************************************
+       
+Remap-request ::= SEQUENCE {           -- a standard request
+  request RMRequest ,                    -- the actual request
+  version INTEGER ,                      -- ASN1 spec version
+  tool VisibleString OPTIONAL }          -- tool making request
+
+RMRequest ::= CHOICE {                   -- request types
+  remap Remap-query ,                    -- do the actual remapping
+  maps-to-builds VisibleString ,         -- what builds can this be mapped to?
+  maps-from-builds VisibleString ,       -- what builds can be mapped to this?
+  all-builds NULL }                      -- all the builds the server knows of
+
+Remap-query ::= SEQUENCE {
+  from-build VisibleString ,             -- build to map from
+  to-build VisibleString ,               -- build to map to
+  locs SEQUENCE OF Seq-loc }             -- the locations to remap
+
+  --**********************************************************
+  -- Replies from the server
+  --  all replies contain the date/time stamp when they were executed
+  --**********************************************************
+
+Remap-reply ::= SEQUENCE {
+  reply RMReply ,                       -- the actual reply
+  dt Remap-dt ,                         -- date/time stamp from server
+  server VisibleString ,                -- server version info
+  msg VisibleString OPTIONAL }          -- possibly a message to the user
+
+RMReply ::= CHOICE {
+  error VisibleString ,                 -- if nothing can be returned
+  remap Remap-result ,                  -- result of actual remapping
+  maps-to-builds SEQUENCE OF VisibleString ,  -- all the builds that the server
+                                              -- knows how to map this build to
+  maps-from-builds SEQUENCE OF VisibleString ,-- all the builds that the server
+                                              -- knows how to map to this build
+  all-builds SEQUENCE OF VisibleString } -- all builds that the server knows of
+
+Remap-result ::= SEQUENCE OF Seq-loc  -- remapped locations
+
+END
+
+

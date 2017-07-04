@@ -1,0 +1,165 @@
+CPDTChargingDataTypes {itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) charging (5) cpdtChargingDataTypes (13) asn1Module (0) version1 (0)}
+DEFINITIONS IMPLICIT TAGS	::=
+
+BEGIN
+
+-- EXPORTS everything 
+
+IMPORTS	
+
+CallDuration, 
+DiameterIdentity,
+Diagnostics, 
+LocalSequenceNumber, 
+ManagementExtensions,
+MSISDN,
+RecordType,
+ServiceContextID,
+SubscriptionID,
+TimeStamp
+FROM GenericChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) genericChargingDataTypes (0) asn1Module (0) version1 (0)}
+
+IMEI,
+IMSI
+FROM MAP-CommonDataTypes {itu-t identified-organization (4) etsi (0) mobileDomain (0)gsm-Network (1) modules (3) map-CommonDataTypes (18) version15 (15)}
+-- from TS 29.002 [214]
+
+AccessPointNameNI,
+APNRateControl,
+ChargingID,
+ChargingCharacteristics,
+ChChSelectionMode,
+DataVolumeGPRS,
+NodeID,
+PLMN-Id,
+ServingPLMNRateControl,
+RATType
+FROM GPRSChargingDataTypes {itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) charging (5) gprsChargingDataTypes (2) asn1Module (0) version1 (0)}
+
+;
+
+
+--
+--  CP data transfer RECORDS
+--
+
+
+CPDTRecord		::= CHOICE 
+--
+-- Record values 105 to 106 are CP data transfer specific
+-- 
+{
+	cPDTSCERecord			[105] 	CPDTSCERecord,
+	cPDTSNNRecord			[106] 	CPDTSNNRecord
+}
+
+
+
+CPDTSCERecord 	::= SET
+{
+	recordType						[0] RecordType,
+	retransmission					[1] NULL OPTIONAL,
+	servedIMSI						[2] IMSI OPTIONAL,
+	servedMSISDN					[3] MSISDN OPTIONAL,
+	chargingID						[4] ChargingID,
+	serviceContextID				[5] ServiceContextID OPTIONAL,
+	nodeID							[6] NodeID OPTIONAL,
+	recordOpeningTime				[7] TimeStamp,
+	duration						[8] CallDuration,
+	accessPointNameNI				[9] AccessPointNameNI OPTIONAL,
+	sCEFID							[10] DiameterIdentity OPTIONAL,
+	chargingCharacteristics			[11] ChargingCharacteristics,
+	chChSelectionMode				[12] ChChSelectionMode OPTIONAL,
+	servingNodeIdentity				[13] DiameterIdentity OPTIONAL,
+	servingPLMNRateControl			[14] ServingPLMNRateControl OPTIONAL,
+	listOfNIDDsubmission			[15] SEQUENCE OF NIDDsubmission OPTIONAL,
+	causeForRecClosing				[16] CauseForRecClosing,
+	diagnostics						[17] Diagnostics OPTIONAL,
+	localSequenceNumber				[18] LocalSequenceNumber OPTIONAL,
+	recordSequenceNumber			[19] INTEGER OPTIONAL,
+	recordExtensions				[20] ManagementExtensions OPTIONAL,
+	externalIdentifier				[21] SubscriptionID OPTIONAL, 
+	aPNRateControl					[22] APNRateControl OPTIONAL,
+	rATType							[23] RATType OPTIONAL,
+	servingNodePLMNIdentifier		[24] PLMN-Id OPTIONAL,
+	servedIMEI						[25] IMEI OPTIONAL
+}
+
+CPDTSNNRecord 	::= SET
+{
+	recordType						[0] RecordType,
+	retransmission					[1] NULL OPTIONAL,
+	servedIMSI						[2] IMSI OPTIONAL,
+	servedMSISDN					[3] MSISDN OPTIONAL,
+	chargingID						[4] ChargingID,
+	serviceContextID				[5] ServiceContextID OPTIONAL,
+	nodeID							[6] NodeID OPTIONAL,
+	recordOpeningTime				[7] TimeStamp,
+	duration						[8] CallDuration,
+	accessPointNameNI				[9] AccessPointNameNI OPTIONAL,
+	sCEFID							[10] DiameterIdentity OPTIONAL,
+	chargingCharacteristics			[11] ChargingCharacteristics,
+	chChSelectionMode				[12] ChChSelectionMode OPTIONAL,
+	servingNodeIdentity				[13] DiameterIdentity OPTIONAL,
+	servingPLMNRateControl			[14] ServingPLMNRateControl OPTIONAL,
+	listOfNIDDsubmission			[15] SEQUENCE OF NIDDsubmission OPTIONAL,
+	causeForRecClosing				[16] CauseForRecClosing,
+	diagnostics						[17] Diagnostics OPTIONAL,
+	localSequenceNumber				[18] LocalSequenceNumber OPTIONAL,
+	recordSequenceNumber			[19] INTEGER OPTIONAL,
+	recordExtensions				[20] ManagementExtensions OPTIONAL,
+	externalIdentifier				[21] SubscriptionID OPTIONAL, 
+	aPNRateControl					[22] APNRateControl OPTIONAL,
+	rATType							[23] RATType OPTIONAL,
+	servingNodePLMNIdentifier		[24] PLMN-Id OPTIONAL,
+	servedIMEI						[25] IMEI OPTIONAL
+}
+
+
+--
+--  CP data transfer DATA TYPES
+--
+
+
+CauseForRecClosing	::= INTEGER
+{
+	normalRelease					(0),
+	abnormalRelease					(1),
+	volumeLimit						(2),
+	timeLimit						(3),
+	maxNIDDsubmissions				(4),
+	servingNodeChange				(5),
+	pLMNChange						(6),
+	servingPLMNRateControlChange	(7),
+	aPNRateControlChange			(8),
+	rATTypeChange					(9),
+	managementIntervention			(10)
+}
+
+
+NIDDsubmission			::= SEQUENCE
+{
+	submissionTimestamp			[0] TimeStamp OPTIONAL,
+	eventTimestamp				[1] TimeStamp OPTIONAL,
+	dataVolumeGPRSUplink		[2] DataVolumeGPRS OPTIONAL,
+	dataVolumeGPRSDownlink		[3] DataVolumeGPRS OPTIONAL,
+	submissionResultCode		[4] SubmissionResultCode OPTIONAL,
+	serviceChangeCondition		[5] ServiceChangeCondition OPTIONAL
+}
+
+ServiceChangeCondition	::= BIT STRING
+{
+	nIDDsubmissionResponseReceipt		(0),
+	nIDDsubmissionResponseSending	(1),
+	nIDDdeliveryToUE				(2),
+	nIDDdeliveryFromUEerror			(3),
+	nIDDsubmissionTimeout			(4)
+}
+
+SubmissionResultCode		::= INTEGER
+-- 
+-- Result-Code AVP and Experimental-Result AVP Values as specified in TS 29.128 [244] 
+-- for MO/MT data transfer
+--
+
+END

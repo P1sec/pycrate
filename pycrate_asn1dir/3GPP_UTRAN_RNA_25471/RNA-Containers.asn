@@ -1,0 +1,151 @@
+
+
+-- **************************************************************
+--
+-- Container definitions
+--
+-- **************************************************************
+
+RNA-Containers {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+umts-Access (20) modules (3) rna(7) version1 (1) rna-Containers (5) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- IE parameter types from other modules.
+--
+-- **************************************************************
+
+IMPORTS
+	Criticality,
+	Presence,
+	PrivateIE-ID,
+	ProtocolIE-ID,
+	maxPrivateIEs,
+	maxProtocolExtensions,
+	maxProtocolIEs
+FROM RNA-CommonDataTypes;
+
+-- **************************************************************
+--
+-- Class Definition for Protocol IEs
+--
+-- **************************************************************
+
+RNA-PROTOCOL-IES ::= CLASS {
+	&id					ProtocolIE-ID		UNIQUE,
+	&criticality		Criticality,
+	&Value,
+	&presence			Presence
+}
+WITH SYNTAX {
+	ID					&id
+	CRITICALITY			&criticality
+	TYPE				&Value
+	PRESENCE			&presence
+}
+
+-- **************************************************************
+--
+-- Class Definition for Protocol Extensions
+--
+-- **************************************************************
+
+RNA-PROTOCOL-EXTENSION ::= CLASS {
+	&id					ProtocolIE-ID UNIQUE,
+	&criticality		Criticality,
+	&Extension,
+	&presence			Presence
+}
+WITH SYNTAX {
+	ID					&id
+	CRITICALITY			&criticality
+	EXTENSION			&Extension
+	PRESENCE			&presence
+}
+
+-- **************************************************************
+--
+-- Class Definition for Private IEs
+--
+-- **************************************************************
+
+RNA-PRIVATE-IES ::= CLASS {
+	&id					PrivateIE-ID,
+	&criticality		Criticality,
+	&Value,
+	&presence			Presence
+}
+WITH SYNTAX {
+	ID					&id
+	CRITICALITY			&criticality
+	TYPE				&Value
+	PRESENCE			&presence
+}
+
+-- **************************************************************
+--
+-- Container for Protocol IEs
+--
+-- **************************************************************
+
+ProtocolIE-Container {RNA-PROTOCOL-IES : IEsSetParam} ::= 
+	SEQUENCE (SIZE (0..maxProtocolIEs)) OF
+		ProtocolIE-Field {{IEsSetParam}}
+
+ProtocolIE-Single-Container {RNA-PROTOCOL-IES : IEsSetParam} ::= 
+	ProtocolIE-Field {{IEsSetParam}}
+
+ProtocolIE-Field {RNA-PROTOCOL-IES : IEsSetParam} ::= SEQUENCE {
+	id					RNA-PROTOCOL-IES.&id				({IEsSetParam}),
+	criticality			RNA-PROTOCOL-IES.&criticality		({IEsSetParam}{@id}),
+	value				RNA-PROTOCOL-IES.&Value				({IEsSetParam}{@id})
+}
+
+-- **************************************************************
+--
+-- Container Lists for Protocol IE Containers
+--
+-- **************************************************************
+
+ProtocolIE-ContainerList {INTEGER : lowerBound, INTEGER : upperBound, RNA-PROTOCOL-IES : IEsSetParam} ::=
+	SEQUENCE (SIZE (lowerBound..upperBound)) OF
+		ProtocolIE-Container {{IEsSetParam}}
+
+-- **************************************************************
+--
+-- Container for Protocol Extensions
+--
+-- **************************************************************
+
+ProtocolExtensionContainer {RNA-PROTOCOL-EXTENSION : ExtensionSetParam} ::= 
+	SEQUENCE (SIZE (1..maxProtocolExtensions)) OF
+		ProtocolExtensionField {{ExtensionSetParam}}
+
+ProtocolExtensionField {RNA-PROTOCOL-EXTENSION : ExtensionSetParam} ::= SEQUENCE {
+	id					RNA-PROTOCOL-EXTENSION.&id				({ExtensionSetParam}),
+	criticality			RNA-PROTOCOL-EXTENSION.&criticality		({ExtensionSetParam}{@id}),
+	extensionValue		RNA-PROTOCOL-EXTENSION.&Extension		({ExtensionSetParam}{@id})
+}
+
+-- **************************************************************
+--
+-- Container for Private IEs
+--
+-- **************************************************************
+
+PrivateIE-Container {RNA-PRIVATE-IES : IEsSetParam } ::= 
+	SEQUENCE (SIZE (1.. maxPrivateIEs)) OF
+		PrivateIE-Field {{IEsSetParam}}
+
+PrivateIE-Field {RNA-PRIVATE-IES : IEsSetParam} ::= SEQUENCE {
+	id					RNA-PRIVATE-IES.&id					({IEsSetParam}),
+	criticality			RNA-PRIVATE-IES.&criticality		({IEsSetParam}{@id}),
+	value				RNA-PRIVATE-IES.&Value				({IEsSetParam}{@id})
+}
+
+END

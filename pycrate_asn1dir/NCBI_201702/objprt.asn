@@ -1,0 +1,59 @@
+--$Revision: 6.0 $
+--********************************************************************
+--
+--  Print Templates
+--  James Ostell, 1993
+--
+--
+--********************************************************************
+
+NCBI-ObjPrt DEFINITIONS ::=
+BEGIN
+
+EXPORTS PrintTemplate, PrintTemplateSet;
+
+PrintTemplate ::= SEQUENCE {
+    name TemplateName ,  -- name for this template
+    labelfrom VisibleString OPTIONAL,    -- ASN.1 path to get label from
+    format PrintFormat }
+
+TemplateName ::= VisibleString
+
+PrintTemplateSet ::= SEQUENCE OF PrintTemplate
+
+PrintFormat ::= SEQUENCE {
+    asn1 VisibleString ,    -- ASN.1 partial path for this
+    label VisibleString OPTIONAL ,   -- printable label
+    prefix VisibleString OPTIONAL,
+    suffix VisibleString OPTIONAL,
+    form PrintForm }
+
+PrintForm ::=   CHOICE {      -- Forms for various ASN.1 components
+    block PrintFormBlock,
+    boolean PrintFormBoolean,
+    enum PrintFormEnum,
+    text PrintFormText,
+    use-template TemplateName,
+    user UserFormat ,
+    null NULL }               -- rarely used
+
+UserFormat ::= SEQUENCE {
+    printfunc VisibleString ,
+    defaultfunc VisibleString OPTIONAL }
+
+PrintFormBlock ::= SEQUENCE {  -- for SEQUENCE, SET
+    separator VisibleString OPTIONAL ,
+    components SEQUENCE OF PrintFormat }
+
+PrintFormBoolean ::= SEQUENCE {
+    true VisibleString OPTIONAL ,
+    false VisibleString OPTIONAL }
+
+PrintFormEnum ::= SEQUENCE {
+    values SEQUENCE OF VisibleString OPTIONAL }
+
+PrintFormText ::= SEQUENCE {
+    textfunc VisibleString OPTIONAL }
+    
+END
+

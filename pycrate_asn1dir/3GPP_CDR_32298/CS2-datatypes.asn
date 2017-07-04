@@ -1,0 +1,28 @@
+-- This module has been extracted from ITU-T Q1228 and edited to contain only required types
+
+CS2-datatypes DEFINITIONS IMPLICIT TAGS ::=
+BEGIN
+    
+    CriticalityType ::= ENUMERATED {
+        ignore (0),
+        abort (1)
+        }
+
+    BothwayThroughConnectionInd ::= ENUMERATED {
+        bothwayPathRequired (0),
+        bothwayPathNotRequired (1)
+        }
+
+    MiscCallInfo ::= SEQUENCE {
+        messageType [0] ENUMERATED {
+            request (0),
+            notification (1)
+            },
+        dpAssignment [1] ENUMERATED {
+            individualLine (0),
+            groupBased (1), officeBased(2)
+            } OPTIONAL
+        }
+
+END
+

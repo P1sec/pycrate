@@ -1,0 +1,74 @@
+--$Id: blastdb.asn 311249 2011-07-11 14:12:16Z camacho $
+--
+-- Notes:
+--
+-- taxonomy: an integer is proposed, which would require some sort of 
+-- table (or network connection) to do the conversions from integer 
+-- to various names.  This could save quite a bit of space for databases 
+-- that are predominantly of one organism (e.g., human in htgs).
+-- I've proposed here that table contain scientific-, common-, and 
+-- blast-names at the advice of Scott Federhen.  Scott also was in 
+-- favor of having the complete lineage in the file, but it seems like 
+-- this would be seldom used and we could have a view with a link back 
+-- to the taxonomy page for anyone needing it. Since one file would 
+-- suffice for all blast databases, it seems like this should be a new file.
+--
+-- memberships: a sequence of integers is proposed.  Each bit of an integer 
+-- would indicate membership in some (virtual) blast database (e.g., pdb, 
+-- swissprot) or some classification (e.g., mRNA, genomic).
+--
+-- links: a sequence of integers is proposed.  Each bit of an integer would 
+-- indicate a link that could be established based upon the gi of the 
+-- database sequence.
+--
+
+NCBI-BlastDL DEFINITIONS ::=
+BEGIN
+
+EXPORTS Blast-def-line-set, Blast-def-line;
+        
+IMPORTS Seq-id, Seq-loc FROM NCBI-Seqloc;
+
+Blast-def-line-set ::= SEQUENCE OF Blast-def-line  -- all deflines for an entry
+
+Blast-def-line ::= SEQUENCE {
+	title VisibleString OPTIONAL,             -- simple title
+	seqid SEQUENCE OF Seq-id,                 -- Regular NCBI Seq-Id
+	taxid  INTEGER OPTIONAL,                  -- taxonomy id
+	memberships SEQUENCE OF INTEGER OPTIONAL, -- bit arrays
+	links SEQUENCE OF INTEGER OPTIONAL,       -- DEPRECATED, replaced by LinkoutDB
+	other-info SEQUENCE OF INTEGER OPTIONAL   -- for future use (probably genomic sequences)
+}
+
+-- This defines the possible sequence filtering algorithms to be used in a
+-- BLAST database
+Blast-filter-program ::= INTEGER {
+    not-set             (0),
+    dust                (10),
+    seg                 (20),
+    windowmasker        (30),
+    repeat              (40),
+    other               (100),
+    max                 (255)
+}
+
+Blast-mask-list ::= SEQUENCE {
+    -- masks for a single sequence should be grouped in a Packed-seqint
+    masks SEQUENCE OF Seq-loc,  
+    -- as of 01/21/2010, this field is set to false always, indicating that the
+    -- entire object (set of Seq-loc) is contained in this object
+    more BOOLEAN
+}
+
+-- Defines the masking information for a set of sequences
+Blast-db-mask-info ::= SEQUENCE {
+    algo-id      INTEGER,
+    algo-program Blast-filter-program,
+    algo-options VisibleString,
+    -- This object was originally created to allow pagination of the sequence
+    -- masks, but this feature was discontinued in 01/21/2010
+    masks        Blast-mask-list
+}
+
+END
+

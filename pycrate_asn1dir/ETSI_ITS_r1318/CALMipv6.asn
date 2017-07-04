@@ -1,0 +1,98 @@
+CALMipv6 { iso(1) standard(0) calm-ipv6(21210) asnm-1(1)} 
+
+DEFINITIONS AUTOMATIC TAGS::=BEGIN 
+
+IMPORTS 
+Link-ID, CIstatus, UserPriority FROM CALMllsap {iso(1) standard(0) calm-ll-sap(21218) asnm-1(1)}
+
+IpAddressInfo FROM CALMfsap { iso (1) standard (0) calm-management (24102) fsap (5) asnm-1 (1)}  
+
+TransportAddressType, TransportAddress FROM TRANSPORT-ADDRESS-MIB;
+-- It needs to be checked whether this ASN.1 module is the correct one.
+
+-- End of IMPORTS
+
+DeleteIPv6::=SEQUENCE	-- used in 24102
+{
+reference	INTEGER(0..65535)
+}
+
+DeleteNotIPv6::=SEQUENCE	-- used in 24102
+{
+reference	INTEGER(0..65535)
+}
+
+SetConfIPv6::=SEQUENCE	-- used in 24102
+{
+reference	INTEGER(0..65535)
+}
+
+SetIPv6::=SEQUENCE	-- used in 24102
+{
+reference	INTEGER(0..65535),
+remoteIP	IpAddressInfo,
+ciid		Link-ID,
+ciStatus	CIstatus,
+localIP		IpAddressInfo,
+priority	UserPriority,
+timeout		IPv6timeout
+}
+
+SetNotIPv6::=SEQUENCE	-- used in 24102
+{
+reference	INTEGER(0..65535),
+remoteIP	IpAddressInfo,
+ciid		Link-ID,
+ciStatus	CIstatus,
+localIP		IpAddressInfo,
+priority	UserPriority,
+timeout		IPv6timeout
+}
+
+UpdateIPv6::=SEQUENCE	-- used in 24102
+{
+fill		[0] BIT STRING (SIZE(2)),
+reference	[1] INTEGER(0..65535),
+remoteIP	[2] IpAddressInfo OPTIONAL,
+ciid		[3] Link-ID OPTIONAL,
+ciStatus	[4] CIstatus OPTIONAL,
+localIP		[5] IpAddressInfo OPTIONAL,
+priority	[6] UserPriority OPTIONAL,
+timeout		[7] IPv6timeout OPTIONAL
+}
+
+UpdateNotIPv6::=SEQUENCE	-- used in 24102
+{
+fill		[0] BIT STRING (SIZE(2)),
+reference	[1] INTEGER(0..65535),
+remoteIP	[2] IpAddressInfo OPTIONAL,
+ciid		[3] Link-ID OPTIONAL,
+ciStatus	[4] CIstatus OPTIONAL,
+localIP		[5] IpAddressInfo OPTIONAL,
+priority	[6] UserPriority OPTIONAL,
+timeout		[7] IPv6timeout OPTIONAL
+}
+
+IPv6timeout::=INTEGER(0..65535)	-- Used in IPv6 forwarding tables; in ms
+
+-- CME-Application-SET::= 
+-- This was used in the previous version of IS21217. 
+-- Needs to be checked how it is used now.
+-- If this is no more used, then IS24102 needs to be changed.
+
+-- IpAddress::=
+-- Part of CME-Application-SET
+-- Is contained in IpAddressInfo
+
+-- SocketID::=
+-- Part of CME-Application-SET
+-- Likely the meaning is the same as for "reference" used above
+
+-- PhysicalInfo::=
+-- Part of CME-Application-SET
+
+-- PortNumber::=
+-- Part of CME-Application-SET
+-- Is contained in IpAddressInfo
+
+END

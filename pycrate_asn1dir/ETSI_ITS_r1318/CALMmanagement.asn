@@ -1,0 +1,152 @@
+--<OSS.PDU>-- 
+
+
+CALMmanagement { iso (1) standard (0) calm-management (24102) local (1) asnm-1 (1)} 
+
+DEFINITIONS AUTOMATIC TAGS::=BEGIN
+
+IMPORTS
+
+CIstatus, Connect, DataRate, DataRatesNW, Directivity, KineVectOut, Link-ID, MACaddress, MedType, PARAMS, UserPriority FROM CALMllsap {iso(1) standard(0) calm-ll-sap(21218) asnm-1(1)} 
+
+ITS-SCUtype FROM CALMiitsscu {iso (1) standard (0) calm-management (24102) iitsscu (4) asnm-1 (1)}
+
+ITSSappCPReqReg, ServiceRef, MediumCost FROM CITSapplReq {iso(1) standard(0) cits-applReq (17423) asnm-1 (1)}
+
+LogicalChannelType FROM CITSapplMgmtComm {iso(1) standard(0) cits-applMgmt (17419) comm (3)} 
+
+;
+
+-- End of IMPORTS
+
+-- Types
+
+ApplReqList::=ITSSappCPReqReg -- from TS 17423
+
+ApplicationID::=SEQUENCE{
+	hostITS-scuId	ITS-scuId,
+	seqNumber	ServiceRef -- unique in the ITS-SCU (host)
+	}
+
+
+CrCiPrioList::=SEQUENCE (SIZE(0..255)) OF CrCiPrioReq
+
+CrCiPrioReq::=SEQUENCE{
+	linkId	Link-ID,	-- requesting CI
+	timeout	INTEGER(0..255),
+	request	CCPrequest,
+	interferer	SEQUENCE OF CCPpotInt -- potential interferers
+	}
+
+CCPrequest::=SEQUENCE (SIZE(0..255)) OF SEQUENCE
+	{
+	reqNo	INTEGER(0..255),
+	priority	UserPriority,
+	status	CCPstatus
+	}
+
+CCPpotInt::=SEQUENCE{
+	linkID	Link-ID,	-- interferer
+	status	CCPstatus
+	}
+
+CCPstatus::=INTEGER{
+	released (0),
+	requestd (16),
+	ignored (64),
+	granted (128)
+	}
+
+ITS-scuId::=INTEGER(0..65535)
+
+ITS-scuList::=SEQUENCE{
+	iTS-scuId	ITS-scuId,
+	its-scuType	ITS-SCUtype,
+	time	GeneralizedTime,
+	uniqueID	PrintableString
+	}
+
+ITS-SSI::=SEQUENCE{
+	stationType	StationType,
+	stationID	StationID,
+	stationPosition	KineVectOut
+	}
+
+MPARAM ::= PARAMS
+
+Param24102::=SEQUENCE{
+	paramNo MPARAM.&paramRef({M-Params}),
+	param	MPARAM.&Parameter({M-Params}{@paramNo})
+	}
+
+M-Params MPARAM::={stationID | minPrioCrossCI | stationPosition | iTS-scuId | vciList | crCiPrioList | timerITS-SSI | its-ssi | applReqList | vCIperformList | talive | iTS-scuList, ...}
+	
+stationID	MPARAM::={&paramRef 0, &Parameter StationID}
+minPrioCrossCI	MPARAM::={&paramRef 1, &Parameter UserPriority}
+stationPosition	MPARAM::={&paramRef 2, &Parameter KineVectOut}
+iTS-scuId	MPARAM::={&paramRef 3, &Parameter ITS-scuId}
+vciList	MPARAM::={&paramRef 4, &Parameter VciList}
+crCiPrioList	MPARAM::={&paramRef 5, &Parameter CrCiPrioList}
+timerITS-SSI	MPARAM::={&paramRef 6, &Parameter INTEGER(0..65535)}
+its-ssi	MPARAM::={&paramRef 7, &Parameter ITS-SSI}
+applReqList	MPARAM::={&paramRef 8, &Parameter ApplReqList}
+vCIperformList	MPARAM::={&paramRef 9, &Parameter VCIperformList}
+talive	MPARAM::={&paramRef 10, &Parameter Talive}
+iTS-scuList	MPARAM::={&paramRef 11, &Parameter ITS-scuList}
+
+
+Param24102No::=INTEGER{
+	stationID	(0),
+	minPrioCrossCI	(1), 
+	stationPosition	(2),
+	iTS-scuId	(3),
+	vciList	(4),
+	crCiPrioList	(5),
+	timerITS-SSI	(6),
+	its-ssi	(7),
+	applReqList	(8),
+	vCIperformList	(9),
+	talive	(10),
+	iTS-scuList	(11)
+	} (0..255)
+
+Talive::=INTEGER(0..65535)	-- time in ms
+
+VciList::=SEQUENCE (SIZE(0..255)) OF VciListEntry
+
+VciListEntry::=SEQUENCE{
+	linkId	Link-ID,
+	medType	MedType,
+	status	CIstatus,
+	connect	Connect,
+	macAddress	MACaddress
+	}
+
+VCIperformList::=SEQUENCE (SIZE(0..255)) OF VCIperformance
+
+VCIperformance::=SEQUENCE{
+	linkId	Link-ID,
+	channelType	LogicalChannelType,
+	channelNo	INTEGER(0..255),
+	minUserPrio	UserPriority,
+	dataRateNW	DataRate,
+	dataRatesNW	DataRatesNW,
+	directivity	Directivity,
+	commRangeRef	INTEGER(0..65535),	-- in 1/10 m
+	cost	MediumCost,
+	reliability	INTEGER(0..255)
+	}
+
+StationID::=OCTET STRING (SIZE(4))
+
+StationType::= INTEGER{
+	mobile	(0), -- vehicle
+	fixed	(1), -- roadside
+	portable	(2),
+	infrastructure	(254), -- central
+	unknown	(255)
+	} (0..255)
+
+
+
+END

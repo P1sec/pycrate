@@ -1,0 +1,39 @@
+-- This module has been extracted from ETS 300 374-1 and edited to contain only required types
+
+CS1-DataTypes DEFINITIONS IMPLICIT TAGS ::=
+BEGIN
+    
+    Duration ::= INTEGER (-2..86400)
+    
+    Integer4 ::= INTEGER (0..2147483647)
+    
+    Interval ::= INTEGER (-1..60000)
+    
+    LegID ::= CHOICE {
+        sendingSideID [0] LegType, -- used in operations sent from SCF to SSF
+        receivingSideID [1] LegType -- used in operations sent from SSF to SCF
+        }
+    -- Indicates a reference to a specific party in a call. OPTIONAL denotes network operator specific use with
+    -- unilateral ID assignment. OPTIONAL for LegID also denotes the following:
+    -- - when only one party exists in the call, this parameter is not needed (as no ambiguity exists).
+    -- - when more than one party exists in the call, one of the following alternatives applies:
+    -- 1) LegID is present and indicates which party is concerned.
+    -- 2) LegID is not present and a default value is assumed (e.g., calling party in the case of the
+    -- ApplyCharging operation).
+    LegType ::= OCTET STRING (SIZE(1))
+    
+    ServiceKey ::= Integer4
+    
+    CallingPartysCategory ::= OCTET STRING (SIZE (1))
+    -- Indicates the type of calling party (e.g. operator, payphone, ordinary subscriber). Refer to
+    -- ETS 300 356-1 [7] for encoding.
+    
+    HighLayerCompatibility ::= OCTET STRING (SIZE(highLayerCompatibilityLength))
+    -- Indicates the teleservice. For encoding, DSS1 (ETS 300 403-1 [8]) is used.
+    highLayerCompatibilityLength INTEGER ::= 2
+    
+    RedirectionInformation ::= OCTET STRING (SIZE (2))
+    -- Indicates redirection information. Refer to ETS 300 356-1 [7] Redirection Information for encoding.
+
+END
+

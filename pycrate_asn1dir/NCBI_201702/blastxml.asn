@@ -1,0 +1,86 @@
+--$Id: blastxml.asn 100080 2007-03-12 16:05:35Z kazimird $
+
+NCBI-BlastOutput DEFINITIONS ::=
+BEGIN
+
+-- pycrate patch, taken from general.asn
+BigInt ::= [APPLICATION 2] IMPLICIT INTEGER
+
+BlastOutput ::= SEQUENCE {
+	program VisibleString ,		-- BLAST program: blastp, tblastx etc.
+	version VisibleString ,		-- Program version 
+	reference VisibleString ,	-- Steven, David, Tom and others
+	db VisibleString ,		-- BLAST Database name
+	query-ID VisibleString ,	-- SeqId of query
+	query-def VisibleString ,	-- Definition line of query
+	query-len INTEGER ,		-- length of query sequence
+	query-seq VisibleString OPTIONAL ,	-- query sequence itself
+	param Parameters,		-- search parameters
+        iterations SEQUENCE OF Iteration,
+        mbstat Statistics OPTIONAL        -- Mega BLAST search statistics
+}
+Iteration ::= SEQUENCE {
+	iter-num INTEGER ,	         -- iteration number
+	query-ID VisibleString OPTIONAL, -- SeqId of query
+	query-def VisibleString OPTIONAL,-- Definition line of query
+	query-len INTEGER OPTIONAL ,	 -- length of query sequence
+	hits SEQUENCE OF Hit OPTIONAL,	 -- Hits one for every db sequence
+	stat Statistics OPTIONAL,	 -- search statistics            
+        message VisibleString OPTIONAL   -- Some (error?) information
+}
+Parameters ::= SEQUENCE {
+	matrix VisibleString OPTIONAL ,	-- Matrix used (-M)
+	expect REAL ,			-- Expectation threshold (-e)
+	include REAL OPTIONAL ,		-- Inclusion threshold (-h)
+	sc-match INTEGER OPTIONAL ,	-- match score for NT (-r)
+	sc-mismatch INTEGER OPTIONAL ,	-- mismatch score for NT (-q)
+	gap-open INTEGER ,		-- Gap opening cost (-G)
+	gap-extend INTEGER ,		-- Gap extension cost (-E)
+	filter VisibleString OPTIONAL,  -- Filtering options (-F)
+	pattern VisibleString OPTIONAL,	-- PHI-BLAST pattern
+        entrez-query VisibleString OPTIONAL -- Limit of request to Entrez query
+}
+
+Statistics ::= SEQUENCE {
+	db-num INTEGER ,		-- Number of sequences in BLAST db
+	db-len BigInt ,	                -- Length of BLAST db
+	hsp-len INTEGER ,		-- Effective HSP length
+	eff-space REAL,			-- Effective search space
+        kappa REAL,                     -- Karlin-Altschul parameter K
+        lambda REAL,                    -- Karlin-Altschul parameter Lambda
+        entropy REAL                    -- Karlin-Altschul parameter H
+}       
+
+Hit ::= SEQUENCE {
+	num INTEGER ,			-- hit number
+	id VisibleString ,		-- SeqId of subject
+	def VisibleString ,		-- definition line of subject
+	accession VisibleString ,       -- accession
+	len INTEGER ,			-- length of subject
+	hsps SEQUENCE OF Hsp OPTIONAL	-- all HSP regions for the given subject
+}
+
+Hsp ::= SEQUENCE {
+	num INTEGER ,			-- HSP number
+	bit-score REAL ,		-- score (in bits) of HSP
+	score REAL ,			-- score of HSP
+	evalue REAL ,			-- e-value of HSP
+	query-from INTEGER ,		-- start of HSP in query
+	query-to INTEGER ,		-- end of HSP
+	hit-from INTEGER,		-- start of HSP in subject
+	hit-to INTEGER ,		-- end of HSP in subject
+	pattern-from INTEGER OPTIONAL ,	-- start of PHI-BLAST pattern
+	pattern-to INTEGER OPTIONAL ,	-- end of PHI-BLAST pattern
+	query-frame INTEGER OPTIONAL ,	-- translation frame of query
+	hit-frame INTEGER OPTIONAL ,	-- translation frame of subject
+	identity INTEGER OPTIONAL ,	-- number of identities in HSP
+	positive INTEGER OPTIONAL ,	-- number of positives in HSP
+	gaps INTEGER OPTIONAL ,		-- number of gaps in HSP
+	align-len INTEGER OPTIONAL ,	-- length of the alignment used
+	density INTEGER OPTIONAL ,	-- score density
+	qseq VisibleString ,		-- alignment string for the query (with gaps)
+	hseq VisibleString,		-- alignment string for subject (with gaps)
+	midline VisibleString OPTIONAL	-- formating middle line
+}
+
+END

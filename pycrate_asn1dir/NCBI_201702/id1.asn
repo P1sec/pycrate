@@ -1,0 +1,101 @@
+--$Revision: 1.12 $
+--********************************************************************
+--
+--  Network Id server network access
+--  Yaschenko 1996
+--
+--
+--*********************************************************************
+--
+--  ID1.asn
+--
+--     messages for id server network access
+--
+--*********************************************************************
+
+NCBI-ID1Access DEFINITIONS ::=
+BEGIN
+
+IMPORTS Seq-id FROM NCBI-Seqloc
+		Seq-entry FROM NCBI-Seqset
+		Seq-hist  FROM NCBI-Sequence;
+
+        --**********************************
+        -- requests
+        --
+
+ID1server-request ::= CHOICE {
+		init NULL ,             -- DlInit
+		getgi Seq-id ,          -- get a gi given a Seq-id
+		getsefromgi ID1server-maxcomplex ,   -- given a gi, get the Seq-entry
+		fini NULL,               -- DlFini
+		getseqidsfromgi	INTEGER, --get all Seq-ids of given gi
+		getgihist	INTEGER, --get an historical list of gis 
+		getgirev	INTEGER, --get a revision history of gi
+		getgistate	INTEGER,  --get a state of gi
+		getsewithinfo	ID1server-maxcomplex,
+		getblobinfo	ID1server-maxcomplex
+}
+
+--  Complexity stuff will be for ID1
+
+ID1server-maxcomplex ::= SEQUENCE {
+		maxplex Entry-complexities ,
+		gi INTEGER ,
+		ent INTEGER OPTIONAL, -- needed when you want to retrieve a given ent
+		sat VisibleString OPTIONAL  -- satellite 0-id,1-dbEST
+}
+
+Entry-complexities ::= INTEGER {
+		entry (0) ,              -- the "natural" entry for this (nuc-prot) 
+		bioseq (1) ,             -- only the bioseq identified
+		bioseq-set (2) ,         -- any seg-set it may be part of
+		nuc-prot (3) ,           -- any nuc-prot it may be part of
+		pub-set (4) 
+}
+
+ID1Seq-hist ::= SEQUENCE {
+	hist Seq-hist
+}
+
+
+ID1server-back ::= CHOICE {
+		init NULL ,                 -- DlInit
+		error INTEGER ,
+		gotgi INTEGER ,                 
+		gotseqentry  Seq-entry,  -- live
+		gotdeadseqentry  Seq-entry,  -- dead
+                fini NULL,                  -- DlFini
+		gistate	INTEGER,
+		ids	SET OF Seq-id,
+		gihist	SET OF ID1Seq-hist,  -- because hand crafted Seq-hist does not follow 
+		                             -- same conventions 
+		girevhist SET OF ID1Seq-hist,
+		gotsewithinfo   ID1SeqEntry-info,
+		gotblobinfo	ID1blob-info	
+}
+
+ID1server-debug ::= SET OF ID1server-back
+
+
+ID1blob-info ::= SEQUENCE {
+		gi INTEGER ,
+		sat INTEGER,
+                sat-key INTEGER,
+                satname VisibleString,
+		suppress	INTEGER,
+		withdrawn	INTEGER,
+		confidential	INTEGER,
+                -- blob-state now contains blob version info.
+                -- it's actually minutes from 01/01/1970
+                -- and it's negative if blob is dead.
+		blob-state	INTEGER,
+                comment         VisibleString OPTIONAL, -- public comment for withdrawn record 
+		extfeatmask	INTEGER	      OPTIONAL  -- mask for external features (SNP,...)
+}
+
+ID1SeqEntry-info ::= SEQUENCE {
+		blob-info	ID1blob-info,
+		blob		Seq-entry OPTIONAL
+}
+END

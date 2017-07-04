@@ -1,0 +1,215 @@
+
+-- **************************************************************
+--
+-- Information Element Definitions
+--
+-- **************************************************************
+
+RNA-IEs {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+umts-Access (20) modules (3) rna(7) version1 (1) rna-IEs (2) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+IMPORTS
+	maxNrOfErrors,
+	id-HNB-Cell-Identifier,
+	id-GlobalRNC-ID
+FROM RNA-Constants
+
+	Criticality,
+	ProcedureCode,
+	ProtocolIE-ID,
+	TriggeringMessage
+FROM RNA-CommonDataTypes
+	ProtocolExtensionContainer{},
+	RNA-PROTOCOL-EXTENSION,
+	RNA-PROTOCOL-IES,
+	ProtocolIE-Single-Container{}
+FROM RNA-Containers;
+
+
+--A
+--B
+BackoffTimer ::= INTEGER(0..3600)
+
+--C
+
+-- **************************************************************
+--
+-- Cause IE
+--
+-- **************************************************************
+
+Cause ::= CHOICE {
+	radioNetwork			CauseRadioNetwork,
+	transport				CauseTransport,
+	protocol				CauseProtocol,
+	misc					CauseMisc,
+	...
+}
+
+CauseRadioNetwork ::= ENUMERATED {
+	normal,
+	connect-failed,
+	network-release,
+	unknown-or-already-allocated-Iurh-Context-ID,
+	unspecificed,
+	...,
+	peer-RNC-not-available
+}
+
+CauseTransport ::= ENUMERATED {
+	transport-resource-unavailable,
+	unspecified,
+	...
+}
+
+CauseProtocol ::= ENUMERATED {
+	transfer-syntax-error,
+	abstract-syntax-error-reject,
+	abstract-syntax-error-ignore-and-notify,
+	message-not-compatible-with-receiver-state,
+	semantic-error,
+	unspecified,
+	abstract-syntax-error-falsely-constructed-message,
+	...
+}
+
+CauseMisc ::= ENUMERATED {
+	processing-overload,
+	hardware-failure,
+	o-and-m-intervention,
+	unspecified,
+	...
+}
+
+CellIdentity ::=		BIT STRING (SIZE (28))
+
+
+
+
+-- **************************************************************
+--
+-- CriticalityDiagnostics
+--
+-- **************************************************************
+
+CriticalityDiagnostics ::= SEQUENCE {
+	procedureCode				ProcedureCode												OPTIONAL,
+	triggeringMessage			TriggeringMessage											OPTIONAL,
+	procedureCriticality		Criticality													OPTIONAL,
+	iEsCriticalityDiagnostics	CriticalityDiagnostics-IE-List	OPTIONAL,
+	iE-Extensions				ProtocolExtensionContainer { {CriticalityDiagnostics-ExtIEs} } 	OPTIONAL,
+	...
+}
+
+CriticalityDiagnostics-IE-List ::= SEQUENCE (SIZE (1..maxNrOfErrors)) OF
+	SEQUENCE {
+		iECriticality			Criticality,
+		iE-ID					ProtocolIE-ID,
+		typeOfError				TypeOfError,
+		iE-Extensions			ProtocolExtensionContainer { {CriticalityDiagnostics-IE-List-ExtIEs} }	OPTIONAL,
+		...
+	}
+
+CriticalityDiagnostics-IE-List-ExtIEs RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+CriticalityDiagnostics-ExtIEs RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+
+--D
+
+--E
+--F
+
+--G
+
+--H
+
+
+HNB-RNL-ID ::= CHOICE {
+	hNB-Identity-as-Global-Cell-Identifier	HNB-Cell-Identifier,
+	...,
+	extension-HNB-RNL-ID		Extension-HNB-RNL-ID
+}
+
+Extension-HNB-RNL-ID ::= ProtocolIE-Single-Container {{ Extension-HNB-RNL-ID-IE }}
+
+Extension-HNB-RNL-ID-IE RNA-PROTOCOL-IES ::= {
+	{ ID id-GlobalRNC-ID	CRITICALITY reject	TYPE GlobalRNC-ID	PRESENCE mandatory },
+	...
+}
+
+HNB-Cell-Identifier	::=	SEQUENCE {
+	pLMN-ID		PLMN-ID,	cell-ID		CellIdentity,
+	iE-Extensions			ProtocolExtensionContainer { { HNB-Cell-Identifier-ExtIEs } }		OPTIONAL,
+	...
+}
+
+HNB-Cell-Identifier-ExtIEs RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+		
+
+--I
+
+Iurh-Signalling-Context-ID	::=	 BIT STRING (SIZE(24))
+
+--J
+--K
+
+--L
+
+
+--M
+--N
+--O
+--P
+PLMN-ID	::= OCTET STRING (SIZE(3))
+
+
+
+--Q
+--R
+
+GlobalRNC-ID	::= SEQUENCE {
+	pLMN-ID			PLMN-ID,
+	rnc-ID			INTEGER (0..65535),
+	iE-Extensions	ProtocolExtensionContainer { { GlobalRNC-ID-ExtIEs } }		OPTIONAL,
+	...
+}
+
+GlobalRNC-ID-ExtIEs RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+RNSAP-Message	::=			OCTET STRING
+
+
+--S
+--T
+
+TypeOfError ::= ENUMERATED {
+	not-understood,
+	missing,
+	...
+}
+
+
+
+--V
+--W
+--X
+--Y
+--Z
+
+
+END

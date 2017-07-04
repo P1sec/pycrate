@@ -1,0 +1,676 @@
+-- $Id: pcsubstance.asn 353134 2012-02-13 19:08:39Z bolton $
+-- ===========================================================================
+--
+--                            PUBLIC DOMAIN NOTICE
+--               National Center for Biotechnology Information
+--
+--  This software/database is a "United States Government Work" under the
+--  terms of the United States Copyright Act.  It was written as part of
+--  the author's official duties as a United States Government employee and
+--  thus cannot be copyrighted.  This software/database is freely available
+--  to the public for use. The National Library of Medicine and the U.S.
+--  Government have not placed any restriction on its use or reproduction.
+--
+--  Although all reasonable efforts have been taken to ensure the accuracy
+--  and reliability of the software and data, the NLM and the U.S.
+--  Government do not and cannot warrant the performance or results that
+--  may be obtained by using this software or data. The NLM and the U.S.
+--  Government disclaim all warranties, express or implied, including
+--  warranties of performance, merchantability or fitness for any particular
+--  purpose.
+--
+--  Please cite the author in any work or product based on this material.
+--
+-- ===========================================================================
+--
+-- Authors:  NCBI Structure Group
+--
+-- File Description:
+--      ASN.1 definitions for PubChem small molecule database
+--
+-- ===========================================================================
+
+NCBI-PCSubstance DEFINITIONS ::= BEGIN
+
+EXPORTS PC-Substance, PC-Compound, PC-Substances, PC-Compounds,
+        PC-Source, PC-ID, PC-InfoData, PC-XRefData;
+
+IMPORTS Pub              FROM NCBI-Pub
+        Date, Object-id  FROM NCBI-General;
+
+
+-- Root Record for Chemical Substance Definition
+PC-Substance ::= SEQUENCE {
+    -- Internal Tracking Information
+    sid            PC-ID,                               -- Substance ID/Version  [Either valid ID or a "0" dummy
+                                                        --   value, if "source" is to be used]
+                                                        --   Note: Version is for internal use (only?)
+                                                        --   Note: A valid ID is greater than "0"
+    source         PC-Source,                           -- Data Source for this Submission
+
+    -- Substance Description Information
+    pub            SEQUENCE OF Pub            OPTIONAL, -- Articles Describing this Substance
+    synonyms       SEQUENCE OF VisibleString  OPTIONAL, -- Substance Names provided by Depositor
+    comment        SEQUENCE OF VisibleString  OPTIONAL, -- Comments and Description provided by Depositor
+    xref           SEQUENCE OF PC-XRefData    OPTIONAL, -- X-Ref/LinkOut Data provided by Depositor
+
+    -- Structure Description
+    compound       PC-Compounds               OPTIONAL  -- Original Deposited Structure Information
+}
+
+
+-- Holder for groups of Substances
+PC-Substances ::= SEQUENCE OF PC-Substance
+
+
+-- ID and Version Description Information
+PC-ID ::= SEQUENCE {
+    id             INTEGER,                             -- Unique "Global" ID
+                                                        --   Note: Must be greater than "0" or, if invalid, "0"
+    version        INTEGER                              -- Incremented when Depositor updates record
+                                                        --   Note: For Internal Use (only?)
+}
+
+
+-- Describes Substance Source, if from another database
+PC-Source ::= CHOICE {
+    individual     Pub,                                 -- Individual Submission
+    db             PC-DBTracking,                       -- External DB Submission
+    mmdb           PC-MMDBSource                        -- MMDB Submission (deprecated)
+}
+
+
+-- External DB Tracking Information
+PC-DBTracking ::= SEQUENCE {
+    name           VisibleString,                       -- Unique Name of External Database
+    source-id      Object-id,                           -- Primary Unique ID used by External DB
+    date           Date                       OPTIONAL, -- External Database Release Date
+    description    VisibleString              OPTIONAL, -- External Database Release Code/Description
+    pub            Pub                        OPTIONAL  -- Data Submission to same DB by original Author
+}
+
+
+-- MMDB Source Record detailing specific location or part of an MMDB Record
+PC-MMDBSource ::= SEQUENCE {
+    mmdb-id        INTEGER,                             -- MMDB Record ID
+                                                        --   Note: Must be greater than "0" or, if invalid, "0"
+    molecule-id    INTEGER,                             -- MMDB Molecule ID
+                                                        --   Note: Must be greater than "0" or, if invalid, "0"
+    molecule-name  SEQUENCE OF VisibleString,           -- MMDB Molecule Name
+    residue-id     INTEGER                    OPTIONAL, -- Residue ID
+                                                        --   Note: Must be greater than "0" or, if invalid, "0"
+    residue-name   VisibleString              OPTIONAL, -- Residue Name
+    atom-id        INTEGER                    OPTIONAL, -- Atom ID
+                                                        --   Note: Must be greater than "0" or, if invalid, "0"
+    atom-name      VisibleString              OPTIONAL  -- Atom Name
+}
+
+
+-- Depositor Provided X-Ref and LinkOut data for Entrez
+PC-XRefData ::= CHOICE {
+        regid            VisibleString,           -- External Database Registry ID
+        rn               VisibleString,           -- Registry Number (e.g., EC Number, CAS Number)
+        mesh             VisibleString,           -- MESH Index Term
+        pmid             INTEGER,                 -- PubMed ID
+                                                  --   Note: Must be greater than "0" or, if invalid, "0"
+        gi               INTEGER,                 -- GenBank General ID
+                                                  --   Note: Please use protein-gi or nucleotide-gi, if possible
+                                                  --   Note: Must be greater than "0" or, if invalid, "0"
+        mmdb             INTEGER,                 -- MMDB ID
+                                                  --   Note: Must be greater than "0" or, if invalid, "0"
+        sid              INTEGER,                 -- PubChem Substance ID
+                                                  --   Note: Must be greater than "0" or, if invalid, "0"
+        cid              INTEGER,                 -- PubChem Compound ID
+                                                  --   Note: Must be greater than "0" or, if invalid, "0"
+        dburl            VisibleString,           -- Depositor Source Database Homepage
+        sburl            VisibleString,           -- Depositor Homepage for a Substance
+        asurl            VisibleString,           -- Depositor Homepage for an Assay
+        protein-gi       INTEGER,                 -- GenBank General ID for a Protein
+                                                  --   Note: Must be greater than "0" or, if invalid, "0"
+        nucleotide-gi    INTEGER,                 -- GenBank General ID for a Nucleotide
+                                                  --   Note: Must be greater than "0" or, if invalid, "0"
+        taxonomy         INTEGER,                 -- Taxonomy ID for an Organism
+                                                  --   Note: Must be greater than "0" or, if invalid, "0"
+        aid              INTEGER,                 -- PubChem BioAssay ID
+                                                  --   Note: Must be greater than "0" or, if invalid, "0"
+        mim              INTEGER,                 -- MIM, Mendelian Inheritance in Man, Number 
+                                                  --   Note: Must be greater than "0" or, if invalid, "0"
+        gene             INTEGER,                 -- Entrez Gene ID
+                                                  --   Note: Must be greater than "0" or, if invalid, "0"
+        probe            INTEGER,                 -- Probe ID
+                                                  --   Note: Must be greater than "0" or, if invalid, "0"
+        biosystem        INTEGER,                 -- BioSystem ID
+                                                  --   Note: Must be greater than "0" or, if invalid, "0"
+        geogse           INTEGER,                 -- Gene Expression Omnibus Series Accession (GEO GSE) ID
+                                                  --   Note: Must be greater than "0" or, if invalid, "0"
+        geogsm           INTEGER,                 -- Gene Expression Omnibus Sample Accession (GEO GSM) ID
+                                                  --   Note: Must be greater than "0" or, if invalid, "0"
+        patent           VisibleString            -- Patent Identifier (e.g., USPTO, EPO, WPO, JPO, CPO)
+}
+
+
+-- Compound Record
+PC-Compound ::= SEQUENCE {
+    -- Tracking Information
+    id             PC-CompoundType,                        -- Compound Qualifier (Type/ID)
+    atoms          PC-Atoms                      OPTIONAL, -- AtomID/Type Information
+    bonds          PC-Bonds                      OPTIONAL, -- BondID/Type/Atom Information
+    stereo         SEQUENCE OF PC-StereoCenter   OPTIONAL, -- StereoCenter Descriptions
+    coords         SEQUENCE OF PC-Coordinates    OPTIONAL, -- 2D/3D Coordinate Sets of Compound
+    charge         INTEGER                       OPTIONAL, -- Provided Total Formal Charge  (Signed Integer)
+    props          SEQUENCE OF PC-InfoData       OPTIONAL, -- Derived (computed) Properties
+    stereogroups   SEQUENCE OF PC-StereoGroup    OPTIONAL, -- Relative stereochemistry groups
+    count          PC-Count                      OPTIONAL, -- Counts of various properties
+    vbalt          PC-Compounds                  OPTIONAL  -- Alternate Valence-Bond Forms
+}
+
+
+-- Holder for groups of Compounds
+PC-Compounds ::= SEQUENCE OF PC-Compound
+
+
+-- Qualification used to describe the type of Compound deposited, standardized, or derived.
+--    Please note that mixtures/cocktails may be specified using previously deposited substances.
+PC-CompoundType ::= SEQUENCE {
+    type        INTEGER {               --  Compound Qualifier or Type
+                    -- For Compound Depositions
+                    deposited           (0),               -- Original Deposited Compound
+                    -- For Standardized Compounds
+                    standardized        (1),               -- Standardized Form of a Deposited Compound
+                    component           (2),               -- Component of a Standardized Compound
+                    neutralized         (3),               -- Neutralized Form of a Standardized Compound
+                    -- For Mixture/Cocktail Depositions
+                    mixture             (4),               -- Substance that is a component of a mixture
+                    -- For Theoretical Compounds
+                    tautomer            (5),               -- Predicted Tautomer Form
+                    pka-state           (6),               -- Predicted Ionized pKa Form
+
+                    unknown           (255)                -- Unknown Compound Type
+                }                                OPTIONAL,
+    id          CHOICE {                --  Compound Namespace and ID  (absent for "deposited" type compounds)
+                    cid        INTEGER,                    --  Standardized Compound
+                    sid        INTEGER,                    --  PubChem Substance (for "mixture" type compounds)
+                    xid        INTEGER                     --  PubChem Theoretical Compound
+                }                                OPTIONAL
+}
+
+
+-- Counts of various properties of a Compound
+PC-Count ::= SEQUENCE {
+    heavy-atom               INTEGER,             -- Total count of non-Hydrogen (Heavy) Atoms
+
+    -- StereoChemistry Counts
+    atom-chiral              INTEGER,             -- Total count of (SP3) Chiral Atoms
+    atom-chiral-def          INTEGER,             -- Total count of Defined (SP3) Chiral Atoms
+    atom-chiral-undef        INTEGER,             -- Total count of Undefined (SP3) Chiral Atoms
+    bond-chiral              INTEGER,             -- Total count of (SP2) Chiral Bonds
+    bond-chiral-def          INTEGER,             -- Total count of (SP2) Defined Chiral Bonds
+    bond-chiral-undef        INTEGER,             -- Total count of (SP2) Undefined Chiral Bonds
+
+    -- Isotopic Counts
+    isotope-atom             INTEGER,             -- Total count of Atoms with Isotopic Information
+
+    -- Discrete Structure Counts
+    covalent-unit            INTEGER,             -- Total count of covalently-bonded units in the record
+    tautomers                INTEGER              -- Number of possible tautomers (Max. 999)
+}
+
+
+-- List of atom identifiers which are in a common stereochemistry group.
+-- All atoms in this group possess the characteristic of the type specified.
+-- The convention adopted is intended to be compatible with MDL's Enhanced
+-- Stereochemical Representation white paper.
+-- An atom can only be member of a single stereo group, and all atoms
+-- in a stereo group must have a stereo descriptor.
+-- Stereogroups only apply to stereocenters that can have parity.
+PC-StereoGroup ::= SEQUENCE {
+    type           INTEGER {
+                       absolute         (1),            -- Absolute configuration is known
+                       or               (2),            -- Relative configuration is known (absolute configuration is unknown)
+                       and              (3),            -- Mixture of stereoisomers
+                       unknown        (255)             -- Unknown configuration type
+                   },
+     aid           SEQUENCE OF INTEGER                  -- Atom Identifiers of atoms in this group
+                                                        --   Note: Atom ID's must be greater than "0"
+}
+
+
+-- Compound Description/Descriptor Data
+PC-InfoData ::= SEQUENCE {
+    urn            PC-Urn,                              -- Universal Resource Name  [for Value Qualification]
+    value          CHOICE {                             -- Data Value
+                          bval     BOOLEAN,                   -- Boolean or Binary
+                          bvec     SEQUENCE OF BOOLEAN,       -- Boolean Vector
+                          ival     INTEGER,                   -- Integer (signed or unsigned)
+                          ivec     SEQUENCE OF INTEGER,       -- Integer Vector
+                          fval     REAL,                      -- Float or Double
+                          fvec     SEQUENCE OF REAL,          -- Double Vector
+                          sval     VisibleString,             -- String
+                          slist    SEQUENCE OF VisibleString, -- List of Strings
+                          date     Date,                      -- Date
+                          binary   OCTET STRING,              -- Binary Data
+                          bitlist  BIT STRING                 -- Bit List (specialized version of Boolean vector)
+                   }
+}
+
+
+-- Universal Resource Name 
+--    Provides explicit source information on derived or calculated data 
+PC-Urn ::= SEQUENCE {
+    label           VisibleString,                       -- Generic Name or Label for Display  [e.g., "Log P"]
+    name            VisibleString              OPTIONAL, -- Qualified Name  [e.g., "XlogP"]
+    datatype        PC-UrnDataType             OPTIONAL, -- Specific Data Type of Value  [e.g., binary]
+    parameters      VisibleString              OPTIONAL, -- Implementation Parameter  [e.g., "metal=0"]
+    implementation  VisibleString              OPTIONAL, -- Implementation Name  [e.g., "E_XlogP"]
+    version         VisibleString              OPTIONAL, -- Implementation Version  [e.g., "3.317"]
+    software        VisibleString              OPTIONAL, -- Implementation Software  [e.g., "Cactvs"]
+    source          VisibleString              OPTIONAL, -- Implementation Organization  [e.g., "xemistry.com"]
+    release         VisibleString              OPTIONAL  -- NCBI Implementation Release  [e.g., "10.25.2005"]
+}
+
+
+-- URN Data Type
+--   Provides the ability to use more specific data types than that directly provided by ASN.1.
+--   Provides for more specific validation of specified data.
+PC-UrnDataType ::= INTEGER {
+        -- Basic Data Types
+        string                         (1),  -- String                             [maps to a VisibleString]
+        stringlist                     (2),  -- List of Strings                    [maps to VisibleString list]
+        int                            (3),  -- 32-Bit Signed Integer              [maps to an INTEGER]
+        intvec                         (4),  -- Vector of 32-Bit Signed Integer    [maps to INTEGER vector]
+        uint                           (5),  -- 32-Bit Unsigned Integer            [maps to an INTEGER]
+        uintvec                        (6),  -- Vector of 32-Bit Unsigned Integer  [maps to INTEGER vector]
+        double                         (7),  -- 64-Bit Float                       [maps to a REAL]
+        doublevec                      (8),  -- Vector of Double                   [maps to REAL vector]
+        bool                           (9),  -- Boolean or Binary value            [maps to a BOOLEAN]
+        boolvec                       (10),  -- Boolean Vector                     [maps to BOOLEAN vector]
+
+        -- Specialized Data Types
+        uint64                        (11),  -- 64-Bit Unsigned Integer (Hex form) [maps to a VisibleString]
+        binary                        (12),  -- Binary Data Blob                   [maps to an OCTET STRING]
+        url                           (13),  -- URL                                [maps to a VisibleString]
+        unicode                       (14),  -- UniCode String                     [maps to a VisibleString]
+        date                          (15),  -- ISO8601 Date                       [maps to a Date]
+        fingerprint                   (16),  -- Binary Fingerprint (Gzip'ped bit   [maps to an OCTET STRING]
+                                             --   list w/ 4-Byte prefix denoting bit list length)
+
+        unknown                      (255)   -- Unknown Data Type               [maps to a set of VisibleString]
+}
+
+
+-- Coordinates for the Compound of a given type
+PC-Coordinates ::= SEQUENCE {
+    type           SEQUENCE OF PC-CoordinateType,          -- Coordinate Type Information (vector)
+    aid            SEQUENCE OF INTEGER,                    -- Conformer Atom IDs (vector)
+                                                           --   (to be kept synchronized with Conformers)
+                                                           --   Note: Atom ID's must be greater than "0"
+    conformers     SEQUENCE OF PC-Conformer      OPTIONAL, -- Conformers for this Coordinate Set
+
+    atomlabels     SEQUENCE OF PC-AtomString     OPTIONAL, -- Atom labels for Conformer Set
+
+    data           SEQUENCE OF PC-InfoData       OPTIONAL  -- Data Associated with these Coordinates
+}
+
+
+-- Drawing/Conformer Definition (in Parallel Arrays, synchronized to aid integer list)
+--   3D coordinates are specified in a right-handed coordinate system. For 2D plots, Y axis leads upwards.
+PC-Conformer ::= SEQUENCE {
+    --  [Note: Parallel Arrays must be kept Synchronized]
+    x              SEQUENCE OF REAL,                       -- X Coordinates (vector)
+    y              SEQUENCE OF REAL,                       -- Y Coordinates (vector)
+    z              SEQUENCE OF REAL              OPTIONAL, -- Z Coordinates (vector)
+
+    style          PC-DrawAnnotations            OPTIONAL, -- Structure Annotations
+
+    data           SEQUENCE OF PC-InfoData       OPTIONAL  -- Data Associated with this Conformer
+}
+
+
+-- Holder for groups of Conformers
+PC-Conformers ::= SEQUENCE OF PC-Conformer
+
+
+-- Coordinate Set Type Distinctions
+PC-CoordinateType ::= INTEGER {
+        twod                (1),  -- 2D Coordinates
+        threed              (2),  -- 3D Coordinates (should also indicate units, below)
+        submitted           (3),  -- Depositor Provided Coordinates
+        experimental        (4),  -- Experimentally Determined Coordinates
+        computed            (5),  -- Computed Coordinates
+        standardized        (6),  -- Standardized Coordinates
+        augmented           (7),  -- Hybrid Original with Computed Coordinates (e.g., explicit H)
+        aligned             (8),  -- Template used to align drawing
+        compact             (9),  -- Drawing uses shorthand forms (e.g., COOH, OCH3, Et, etc.)
+        units-angstroms    (10),  -- (3D) Coordinate units are Angstroms
+        units-nanometers   (11),  -- (3D) Coordinate units are nanometers
+        units-pixel        (12),  -- (2D) Coordinate units are pixels
+        units-points       (13),  -- (2D) Coordinate units are points
+        units-stdbonds     (14),  -- (2D) Coordinate units are standard bond lengths (1.0)
+        units-unknown     (255)   -- Coordinate units are unknown or unspecified
+}
+
+
+-- Drawing Annotations (in Parallel Arrays)
+--    [Note: A pair of atoms can have multiple annotations]
+PC-DrawAnnotations ::= SEQUENCE {
+    --  [Note: Parallel Arrays must be kept Synchronized]
+    annotation     SEQUENCE OF PC-BondAnnotation, -- Bond Annotations (vector)
+    aid1           SEQUENCE OF INTEGER,           -- Atom1 Identifier (vector)
+                                                  --   Note: Atom ID's must be greater than "0"
+    aid2           SEQUENCE OF INTEGER            -- Atom2 Identifier (vector)
+                                                  --   Note: Atom ID's must be greater than "0"
+}
+
+
+-- Atom-Atom Annotation Information
+PC-BondAnnotation ::= INTEGER {
+    crossed        (1),                          -- Double Bond that can be both Cis/Trans
+    dashed         (2),                          -- Hydrogen-Bond (3D Only?)
+    wavy           (3),                          -- Unknown Stereochemistry
+    dotted         (4),                          -- Complex/Fractional
+    wedge-up       (5),                          -- Above-Plane
+    wedge-down     (6),                          -- Below-Plane
+    arrow          (7),                          -- Dative
+    aromatic       (8),                          -- Aromatic
+    resonance      (9),                          -- Resonance
+    bold          (10),                          -- Fat Bond (Non-Specific User Interpreted Information)
+    fischer       (11),                          -- Interpret Bond Stereo using Fischer Conventions
+    closeContact  (12),                          -- Identification of Atom-Atom Close Contacts (3D Only)
+    unknown      (255)                           -- Unspecified or Unknown Atom-Atom Annotation
+}
+
+
+-- Atom Information  (in Parallel Arrays)
+PC-Atoms ::= SEQUENCE {
+    --  [Note: Parallel Arrays must be kept Synchronized]
+    aid            SEQUENCE OF INTEGER,                    -- Atom Identifiers (vector)
+                                                           --   Note: Atom ID's must be greater than "0"
+    element        SEQUENCE OF PC-Element,                 -- Atomic Numbers (vector)
+
+    -- Independent Arrays of ID-Value Pairs  (Technically allows multiple values per Atom)
+    label          SEQUENCE OF PC-AtomString     OPTIONAL, -- Atom labels
+    isotope        SEQUENCE OF PC-AtomInt        OPTIONAL, -- Isotopic Information
+    charge         SEQUENCE OF PC-AtomInt        OPTIONAL, -- Formal Charges
+    radical        SEQUENCE OF PC-AtomRadical    OPTIONAL, -- Radical Information
+    source         SEQUENCE OF PC-AtomSource     OPTIONAL, -- E.g. identity of MMDB "R" groups
+    comment        SEQUENCE OF PC-AtomString     OPTIONAL  -- Atom Comments
+}
+
+
+-- Specification of an Association between an Atom Identifier and Source
+PC-AtomSource ::= SEQUENCE {
+    aid            INTEGER,                      -- Atom Identifier for the R-Group Source
+                                                 --   Note: Atom ID's must be greater than "0"
+    source         PC-MMDBSource                 -- Atom Specific MMDB Record
+}
+
+
+-- Specification of an Association between an Atom Identifier and an Integer Value
+PC-AtomInt ::= SEQUENCE {
+    aid            INTEGER,                      -- Atom Identifier for the Value
+                                                 --   Note: Atom ID's must be greater than "0"
+    value          INTEGER                       -- Value Associated to the ID
+}
+
+
+-- Specification of an Association between an Atom Identifier and a String Value
+PC-AtomString ::= SEQUENCE {
+    aid            INTEGER,                      -- Atom Identifier for the Value
+                                                 --   Note: Atom ID's must be greater than "0"
+    value          VisibleString                 -- Value Associated to the ID
+}
+
+
+-- Rudimentary Atom Electronic Configuration Designation
+PC-AtomRadical ::= SEQUENCE {
+    aid            INTEGER,                      -- Atom Identifier for the Value
+                                                 --   Note: Atom ID's must be greater than "0"
+    type           INTEGER {                     -- Type of Atom Radical
+                       singlet    (1),           -- Open-Shell Singlet
+                       doublet    (2),           -- Open-Shell Doublet
+                       triplet    (3),           -- Open-Shell Triplet
+                       quartet    (4),           -- Open-Shell Quartet
+                       quintet    (5),           -- Open-Shell Quintet
+                       hextet     (6),           -- Open-Shell Hextet
+                       heptet     (7),           -- Open-Shell Quintet
+                       octet      (8),           -- Open-Shell Octet
+                       none     (255)            -- Closed-Shell Singlet
+                   }
+}
+
+
+-- Element Information [which may contain "illegal" element values]
+PC-Element::= INTEGER {
+    -- Illegal Atom Numbers that may be Interpreted to be something else
+    a  (255),                                    -- Unspecified Atom (Asterick)
+    d  (254),                                    -- Dummy Atom
+    r  (253),                                    -- Rgroup Label
+    lp (252),                                    -- Lone Pair
+
+    -- Elements
+    h  (1), he (2), li (3), be (4), b  (5),
+    c  (6), n  (7), o  (8), f  (9), ne(10),
+    na(11), mg(12), al(13), si(14), p (15),
+    s (16), cl(17), ar(18), k (19), ca(20),
+    sc(21), ti(22), v (23), cr(24), mn(25),
+    fe(26), co(27), ni(28), cu(29), zn(30),
+    ga(31), ge(32), as(33), se(34), br(35),
+    kr(36), rb(37), sr(38), y (39), zr(40),
+    nb(41), mo(42), tc(43), ru(44), rh(45),
+    pd(46), ag(47), cd(48), in(49), sn(50),
+    sb(51), te(52), i (53), xe(54), cs(55),
+    ba(56), la(57), ce(58), pr(59), nd(60),
+    pm(61), sm(62), eu(63), gd(64), tb(65),
+    dy(66), ho(67), er(68), tm(69), yb(70),
+    lu(71), hf(72), ta(73), w (74), re(75),
+    os(76), ir(77), pt(78), au(79), hg(80),
+    tl(81), pb(82), bi(83), po(84), at(85),
+    rn(86), fr(87), ra(88), ac(89), th(90),
+    pa(91), u(92),  np(93), pu(94), am(95),
+    cm(96), bk(97), cf(98), es(99), fm(100),
+    md(101), no(102), lr(103), rf(104), db(105),
+    sg(106), bh(107), hs(108), mt(109), ds(110),
+    rg(111)
+}
+
+
+-- Bond Description Information  (in Parallel Arrays)
+PC-Bonds ::= SEQUENCE {
+    --  [Note: Parallel Arrays must be kept Synchronized]
+    aid1           SEQUENCE OF INTEGER,          -- Atom1 Identifier (vector)
+                                                 --   Note: Atom ID's must be greater than "0"
+    aid2           SEQUENCE OF INTEGER,          -- Atom2 Identifier (vector)
+                                                 --   Note: Atom ID's must be greater than "0"
+    order          SEQUENCE OF PC-BondType       -- Bond Type Information (vector)
+}
+
+
+-- Bond Type Information
+PC-BondType ::= INTEGER {
+    single         (1),                          -- Single Bond
+    double         (2),                          -- Double Bond
+    triple         (3),                          -- Triple Bond
+    quadruple      (4),                          -- Quadruple Bond
+    dative         (5),                          -- Dative Bond
+    complex        (6),                          -- Complex Bond
+    ionic          (7),                          -- Ionic Bond
+    unknown      (255)                           -- Unknown/Unspecified Connectivity
+}
+
+
+-- Allowed Stereogenic Center Types
+--   [Using IUPAC Stereogenic Center recommendations and terminology]
+PC-StereoCenter ::= CHOICE {
+    tetrahedral    PC-StereoTetrahedral,         -- Tetrahedral (SP3) StereoCenter
+    planar         PC-StereoPlanar,              -- Planar (SP2) StereoCenter
+    squareplanar   PC-StereoSquarePlanar,        -- Square Planar (SP4) StereoCenter
+    octahedral     PC-StereoOctahedral,          -- Octahedral (OC-6) / Square Pyramid (SPY-5) StereoCenters
+    bipyramid      PC-StereoTrigonalBiPyramid,   -- Trigonal BiPyramid (TBPY-4 and TBPY-5) StereoCenters
+    tshape         PC-StereoTShape,              -- T-Shaped (TS-3) StereoCenters
+    pentagonal     PC-StereoPentagonalBiPyramid  -- Pentagonal BiPyramid (PBPY-7) StereoCenters
+}
+
+
+-- SP3 Tetrahedral StereoCenter, Trigonal Pyramid Stereogenic Center,
+--   Cumulenic StereoCenter (Linear systems of an even number of double bonds),
+--   or Hindered biaryl stereocenter (All biaryls have hindered rotation that
+--   to some extent the ortho-hydrogens prevent coplanarity)
+--   [Using IUPAC Stereogenic Center recommendations and terminology]
+--   [Note: "-1" can be used for the Atom Identifier to represent a lone-pair or implicit hydrogen]
+PC-StereoTetrahedral ::= SEQUENCE {
+    center         INTEGER,                      -- Atom Identifier of Atom Center
+                                                 --   Note: Atom ID's must be greater than "0"
+    above          INTEGER,                      -- Atom Identifier of Atom Above the Plane
+                                                 --   Note: Atom ID's must be greater than "0"
+    top            INTEGER,                      -- Atom Identifier of Atom In-Plane and at the Top
+                                                 --   Note: Atom ID's must be greater than "0"
+    bottom         INTEGER,                      -- Atom Identifier of Atom In-Plane and at the Bottom
+                                                 --   Note: Atom ID's must be greater than "0"
+    below          INTEGER,                      -- Atom Identifier of Atom Below the Plane
+                                                 --   Note: Atom ID's must be greater than "0"
+    parity         INTEGER {                     -- StereoCenter Designation
+                       clockwise          (1),
+                       counterclockwise   (2),
+                       any                (3),
+                       unknown          (255)
+                   }                  OPTIONAL,
+    type           INTEGER {                     -- Type of StereoCenter, Tetrahedral, if not specified
+                       tetrahedral        (1),   -- Tetrahedral StereoCenter
+                       cumulenic          (2),   -- Cumulenic StereoCenter
+                       biaryl             (3)    -- Biaryl StereoCenter
+                   }                  OPTIONAL
+}
+
+
+-- SP2 Planar Stereogenic Center, Cumulenic StereoCenter (Linear systems on an odd
+--   number of double bonds present planar stereochemistry)
+--   [Using IUPAC Stereogenic Center recommendations and terminology]
+--   [Note: "-1" can be used for the Atom Identifier to represent a lone-pair or implicit hydrogen]
+PC-StereoPlanar ::= SEQUENCE {
+    left           INTEGER,                      -- Atom ID of Left Double Bond Atom
+                                                 --   Note: Atom ID's must be greater than "0"
+    ltop           INTEGER,                      -- Atom ID of Top Atom attached to the Left Double Bond Atom
+                                                 --   Note: Atom ID's must be greater than "0"
+    lbottom        INTEGER,                      -- Atom ID of Bottom Atom attached to the Left Double Bond Atom
+                                                 --   Note: Atom ID's must be greater than "0"
+    right          INTEGER,                      -- Atom ID of Right Double Bond Atom
+                                                 --   Note: Atom ID's must be greater than "0"
+    rtop           INTEGER,                      -- Atom ID of Top Atom attached to the Right Double Bond Atom
+                                                 --   Note: Atom ID's must be greater than "0"
+    rbottom        INTEGER,                      -- Atom ID of Bottom Atom attached to the Right Double Bond Atom
+                                                 --   Note: Atom ID's must be greater than "0"
+    parity         INTEGER {                     -- StereoCenter Designation
+                       same             (1),
+                       opposite         (2),
+                       any              (3),
+                       unknown        (255)
+                   }                  OPTIONAL,
+    type           INTEGER {                     -- Type of StereoCenter, SP2 Planar, if not specified
+                       planar           (1),     -- SP2 Planar StereoCenter
+                       cumulenic        (2)      -- Cumulenic StereoCenter
+                   }                  OPTIONAL
+}
+
+
+-- Square Planar (SP4) StereoCenters
+--   [Using IUPAC Stereogenic Center recommendations and terminology]
+--   [Note: "-1" can be used for the Atom Identifier to represent a lone-pair or implicit hydrogen]
+PC-StereoSquarePlanar ::= SEQUENCE {
+    center         INTEGER,                      -- Atom ID of Atom Center
+                                                 --   Note: Atom ID's must be greater than "0"
+    lbelow         INTEGER,                      -- Atom ID of Left Below Plane Atom
+                                                 --   Note: Atom ID's must be greater than "0"
+    rbelow         INTEGER,                      -- Atom ID of Right Below Plane Atom
+                                                 --   Note: Atom ID's must be greater than "0"
+    labove         INTEGER,                      -- Atom ID of Left Above Plane Atom
+                                                 --   Note: Atom ID's must be greater than "0"
+    rabove         INTEGER,                      -- Atom ID of Right Above Plane Atom
+                                                 --   Note: Atom ID's must be greater than "0"
+    parity         INTEGER {                     -- StereoCenter Type
+                       u-shape          (1),     --   U shaped isomer (labove-lbelow-rbelow-rabove)
+                       z-shape          (2),     --   Z shaped isomer (labove-rabove-lbelow-rbelow)
+                       x-shape          (3),     --   X shaped isomer (labove-rbelow-rabove-lbelow)
+                       any              (4),     --   Nonspecific mixture of isomers
+                       unknown        (255)
+                   }                  OPTIONAL
+}
+
+
+-- Octahedral (OC-6) and Square Pyramid (SPY-5) StereoCenters
+--   [Using IUPAC Stereogenic Center recommendations and terminology]
+--   [Note: "-1" can be used for the Atom Identifier to represent a lone-pair or implicit hydrogen]
+PC-StereoOctahedral ::= SEQUENCE {
+    center         INTEGER,                      -- Atom ID of Atom Center
+                                                 --   Note: Atom ID's must be greater than "0"
+    top            INTEGER,                      -- Atom ID of Atom In-Plane and at the Top
+                                                 --   Note: Atom ID's must be greater than "0"
+    bottom         INTEGER,                      -- Atom ID of Atom In-Plane and at the Bottom
+                                                 --   Note: Atom ID's must be greater than "0"
+    labove         INTEGER,                      -- Atom ID of Atom Above the Plane on the Left
+                                                 --   Note: Atom ID's must be greater than "0"
+    lbelow         INTEGER,                      -- Atom ID of Atom Below the Plane on the Left
+                                                 --   Note: Atom ID's must be greater than "0"
+    rabove         INTEGER,                      -- Atom ID of Atom Above the Plane on the Right
+                                                 --   Note: Atom ID's must be greater than "0"
+    rbelow         INTEGER                       -- Atom ID of Atom Below the Plane on the Right
+                                                 --   Note: Atom ID's must be greater than "0"
+}
+
+
+-- Trigonal BiPyramid (TBPY-4 and TBPY-5) StereoCenters
+--   [Using IUPAC Stereogenic Center recommendations and terminology]
+--   [Note: "-1" can be used for the Atom Identifier to represent a lone-pair or implicit hydrogen]
+PC-StereoTrigonalBiPyramid ::= SEQUENCE {
+    center         INTEGER,                      -- Atom ID of Atom Center
+                                                 --   Note: Atom ID's must be greater than "0"
+    above          INTEGER,                      -- Atom ID of Atom Above the Plane
+                                                 --   Note: Atom ID's must be greater than "0"
+    below          INTEGER,                      -- Atom ID of Atom Below the Plane
+                                                 --   Note: Atom ID's must be greater than "0"
+    top            INTEGER,                      -- Atom ID of Atom In-Plane and at the Top
+                                                 --   Note: Atom ID's must be greater than "0"
+    bottom         INTEGER,                      -- Atom ID of Atom In-Plane and at the Bottom
+                                                 --   Note: Atom ID's must be greater than "0"
+    right          INTEGER                       -- Atom ID of Atom In-Plane and to the Right
+                                                 --   Note: Atom ID's must be greater than "0"
+}
+
+
+-- T-Shaped (TS-3) StereoCenters
+--   [Using IUPAC Stereogenic Center recommendations and terminology]
+--   [Note: "-1" can be used for the Atom Identifier to represent a lone-pair or implicit hydrogen]
+PC-StereoTShape ::= SEQUENCE {
+    center         INTEGER,                      -- Atom ID of Atom Center
+                                                 --   Note: Atom ID's must be greater than "0"
+    top            INTEGER,                      -- Atom ID of Atom In-Plane and at the Top
+                                                 --   Note: Atom ID's must be greater than "0"
+    bottom         INTEGER,                      -- Atom ID of Atom In-Plane and at the Bottom
+                                                 --   Note: Atom ID's must be greater than "0"
+    above          INTEGER                       -- Atom ID of Atom Above the Plane
+                                                 --   Note: Atom ID's must be greater than "0"
+}
+
+
+-- Pentagonal BiPyramid (PBPY-7) StereoCenters
+--   [Using IUPAC Stereogenic Center recommendations and terminology]
+--   [Note: "-1" can be used for the Atom Identifier to represent a lone-pair or implicit hydrogen]
+PC-StereoPentagonalBiPyramid ::= SEQUENCE {
+    center         INTEGER,                      -- Atom ID of Atom Center
+                                                 --   Note: Atom ID's must be greater than "0"
+    top            INTEGER,                      -- Atom ID of Atom In-Plane and at the Top
+                                                 --   Note: Atom ID's must be greater than "0"
+    bottom         INTEGER,                      -- Atom ID of Atom In-Plane and at the Bottom
+                                                 --   Note: Atom ID's must be greater than "0"
+    left           INTEGER,                      -- Atom ID of Atom In-Plane and at the Left
+                                                 --   Note: Atom ID's must be greater than "0"
+    labove         INTEGER,                      -- Atom ID of Atom Above the Plane on the Left
+                                                 --   Note: Atom ID's must be greater than "0"
+    lbelow         INTEGER,                      -- Atom ID of Atom Below the Plane on the Left
+                                                 --   Note: Atom ID's must be greater than "0"
+    rabove         INTEGER,                      -- Atom ID of Atom Above the Plane on the Right
+                                                 --   Note: Atom ID's must be greater than "0"
+    rbelow         INTEGER                       -- Atom ID of Atom Below the Plane on the Right
+                                                 --   Note: Atom ID's must be greater than "0"
+}
+
+END

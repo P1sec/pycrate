@@ -1,0 +1,78 @@
+ERS {iso(1) identified-organization(3) dod(6) internet(1)
+       security(5) mechanisms(5) ltans(11) id-mod(0) id-mod-ers(1)
+       id-mod-ers-v1(1) }
+
+DEFINITIONS IMPLICIT TAGS ::=
+BEGIN
+
+   IMPORTS
+
+   AttributeSet{}, ATTRIBUTE
+   FROM PKIX-CommonTypes-2009 {
+       iso(1) identified-organization(3) dod(6) internet(1) security(5)
+       mechanisms(5) pkix(7) id-mod(0) id-mod-pkixCommon-02(57) }
+
+   AlgorithmIdentifier{}, ALGORITHM, DIGEST-ALGORITHM
+   FROM AlgorithmInformation-2009 {
+       iso(1) identified-organization(3) dod(6) internet(1) security(5)
+       mechanisms(5) pkix(7) id-mod(0)
+       id-mod-algorithmInformation-02(58)}
+
+   ContentInfo
+   FROM CryptographicMessageSyntax-2009 {
+       iso(1) member-body(2) us(840) rsadsi(113549)
+       pkcs(1) pkcs-9(9) smime(16) modules(0) id-mod-cms-2004-02(41) } ;
+
+   aa-er-Internal ATTRIBUTE ::=
+       { TYPE EvidenceRecord IDENTIFIED BY id-aa-er-internal }
+   id-aa-er-internal OBJECT IDENTIFIER ::=
+       { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
+       smime(16) id-aa(2) 49 }
+
+   aa-er-External ATTRIBUTE ::=
+       { TYPE EvidenceRecord IDENTIFIED BY id-aa-er-external }
+   id-aa-er-external OBJECT IDENTIFIER ::=
+       { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
+       smime(16) id-aa(2) 50 }
+
+   ltans OBJECT IDENTIFIER ::=
+       {iso(1) identified-organization(3) dod(6) internet(1) security(5)
+       mechanisms(5) ltans(11) }
+
+   EvidenceRecord ::= SEQUENCE {
+       version                   INTEGER { v1(1) } ,
+       digestAlgorithms          SEQUENCE OF AlgorithmIdentifier
+                                     {DIGEST-ALGORITHM, {...}},
+       cryptoInfos               [0] CryptoInfos OPTIONAL,
+       encryptionInfo            [1] EncryptionInfo OPTIONAL,
+       archiveTimeStampSequence  ArchiveTimeStampSequence
+   }
+
+   CryptoInfos ::= SEQUENCE SIZE (1..MAX) OF AttributeSet{{...}}
+
+   ArchiveTimeStampSequence ::= SEQUENCE OF ArchiveTimeStampChain
+   ArchiveTimeStampChain    ::= SEQUENCE OF ArchiveTimeStamp
+
+   ArchiveTimeStamp ::= SEQUENCE {
+      digestAlgorithm [0] AlgorithmIdentifier{DIGEST-ALGORITHM, {...}}
+                              OPTIONAL,
+      attributes      [1] Attributes OPTIONAL,
+      reducedHashtree [2] SEQUENCE OF PartialHashtree OPTIONAL,
+      timeStamp       ContentInfo
+   }
+
+   PartialHashtree ::= SEQUENCE OF OCTET STRING
+
+   Attributes ::= SET SIZE (1..MAX) OF AttributeSet{{...}}
+
+   EncryptionInfo       ::=     SEQUENCE {
+       encryptionInfoType   ENCINFO-TYPE.&id({SupportedEncryptionAlgorithms}),
+       encryptionInfoValue  ENCINFO-TYPE.&Type({SupportedEncryptionAlgorithms}
+                                    {@encryptionInfoType})
+   }
+
+   ENCINFO-TYPE ::= TYPE-IDENTIFIER
+
+   SupportedEncryptionAlgorithms ENCINFO-TYPE ::= {...}
+
+END

@@ -1,0 +1,375 @@
+AlgorithmObjectIdentifiers {joint-iso-itu-t ds(5) module(1) algorithmObjectIdentifiers(8) 8}
+DEFINITIONS ::=
+BEGIN
+
+-- EXPORTS All 
+
+--/* 
+--The values defined in this module are primarily taking from various specifications and
+--collected here for easy reference by other specifcations.
+
+--Wen values are copied form an IETF RFC, the IETF RFC number is shown.
+
+--When values are copied from the NIST Computer Security Objects Register (CSOR),
+--the label CSOR is used.
+--*/ 
+
+IMPORTS
+  algorithm, authenticationFramework
+    FROM UsefulDefinitions {joint-iso-itu-t ds(5) module(1) usefulDefinitions(0) 8}
+
+  ALGORITHM, AlgorithmIdentifier{}, SupportedAlgorithms, SupportedCurves
+    FROM AuthenticationFramework authenticationFramework;
+
+ID ::= OBJECT IDENTIFIER
+
+-- Object identifier allocations
+
+-- Object identifiers allocated by this Specification (but not used)  
+
+nullAlgorithm           ID ::= {algorithm 0}
+encryptionAlgorithm     ID ::= {algorithm 1}
+hashAlgorithm           ID ::= {algorithm 2}
+signatureAlgorithm      ID ::= {algorithm 3}
+
+-- synonyms 
+
+id-ea                   ID ::= encryptionAlgorithm
+id-ha                   ID ::= hashAlgorithm
+id-sa                   ID ::= signatureAlgorithm
+
+-- the following object identifier assignments reserve values assigned to deprecated functions
+
+id-ea-rsa               ID ::= {id-ea 1}
+id-ha-sqMod-n           ID ::= {id-ha 1}
+id-sa-sqMod-nWithRSA    ID ::= {id-sa 1}
+
+-- object identifiers allocated by other organization
+
+us-iso                  ID ::= { iso(1) member-body(2) us(840) }
+ansi-x9-57              ID ::= { us-iso ansi-x9-57(10040) }
+ansi-x9-62              ID ::= { us-iso ansi-x962(10045) }
+ansi-x9-42              ID ::= { us-iso ansi-x942(10046) }
+iso-standard            ID ::= { iso(1) standard(0) }
+iso9797                 ID ::= { iso-standard message-authentication-codes(9797) }
+iso-organization        ID ::= { iso(1) identified-organization(3) }
+certicom                ID ::= { iso-organization certicom(132) }
+certicom-curve          ID ::= { certicom curve(0) }
+teletrust               ID ::= { iso-organization teletrust(36) }
+ecStdCurvesAndGen       ID ::= { teletrust algorithm(3) signaturealgorithm(3) ecSign(2) 8}
+versionOne              ID ::= { ecStdCurvesAndGen ellipticCurve(1) versionOne(1) }
+
+us-joint                ID ::= { joint-iso-itu-t(2) country(16) us(840) }
+usgov                   ID ::= { us-joint organization(1) gov(101) }
+dodAlgorithms           ID ::= { usgov dod(2) infosec(1) algorithms(1) }
+csor                    ID ::= { usgov csor(3) }
+nistAlgorithms          ID ::= { csor nistAlgorithm(4) } -- CSOR
+aes                     ID ::= { nistAlgorithms 1 } -- CSOR
+hashAlgs                ID ::= { nistAlgorithms 2 } -- CSOR
+sigAlgs                 ID ::= { nistAlgorithms 3 } -- CSOR
+
+rsadsi                  ID ::= { iso(1) member-body(2) us(840) rsadsi(113549) }
+pkcs-1                  ID ::= { rsadsi pkcs(1) pkcs-1(1) }
+digestAlgorithm         ID ::= { rsadsi digestAlgorithm(2) }
+
+
+-- Symmetric key algorithm object identifiers
+
+id-aes128-CBC           ID ::= { aes 2 }  -- CSOR
+id-aes192-CBC           ID ::= { aes 22 } -- CSOR
+id-aes256-CBC           ID ::= { aes 42 } -- CSOR
+
+-- AES key wrap algorithms from IETF RFC 3394
+
+id-aes128-wrap          ID ::= { aes 5 }
+id-aes192-wrap          ID ::= { aes 25 }
+id-aes256-wrap          ID ::= { aes 45 } 
+
+-- Pubkic key algorithm object identifiers
+
+rsaEncryption           ID ::= { pkcs-1 rsaEncryption(1)} -- IETF RFC 4055
+id-keyExchangeAlgorithm ID ::= { dodAlgorithms id-keyExchangeAlgorithm(22)}
+                                 -- IETF RFC 3279
+id-dsa                  ID ::= { ansi-x9-57 x9algorithm(4) 1 }   -- IETF RFC 5480
+id-ecPublicKey          ID ::= { ansi-x9-62 keyType(2) 1 }       -- IETF RFC 5480
+id-ecDH                 ID ::= { certicom schemes(1) ecdh(12) }  -- IETF RFC 5480
+id-ecMQV                ID ::= { certicom schemes(1) ecmqv(13) } -- IETF RFC 5480
+dh-public-number        ID ::= { ansi-x9-42 number-type(2) dh-public-number(1) } --IETF RFC 2631
+
+
+-- Hash algorithms object identifiers
+
+-- The OID for SHA hash algorithms are specified in NIST FIPS PUB 180-4
+
+id-sha1                 ID ::= {iso(1) identified-organization(3) oiw(14) secsig(3)
+                                algorithms(2) 26} -- IETF RFC 3279
+id-sha256               ID ::= { hashAlgs 1 } -- CSOR
+id-sha384               ID ::= { hashAlgs 2 } -- CSOR
+id-sha512               ID ::= { hashAlgs 3 } -- CSOR
+id-sha224               ID ::= { hashAlgs 4 } -- CSOR
+id-sha512-224           ID ::= { hashAlgs 5 } -- CSOR
+id-sha512-256           ID ::= { hashAlgs 6 } -- CSOR
+
+hashAlg                 ID ::= {  iso(1) identified-organization(3) dod(6) internet(1)
+                                  private(4) enterprise(1) kudelski(1722)
+                                  cryptography(12) 2 } -- BLAKE2, RFC 7693
+
+-- SIGNATURE ALGORITHM IDS
+
+-- RSASSA-PKCS1-v1_5 signature algorithm object identifiers (From IETF RFC 3447)
+ 
+sha1WithRSAEncryption   ID ::= { pkcs-1 sha1WithRSAEncryption(5) }
+sha256WithRSAEncryption ID ::= { pkcs-1 sha256WithRSAEncryption(11) }
+sha384WithRSAEncryption ID ::= { pkcs-1 sha384WithRSAEncryption(12) }
+sha512WithRSAEncryption ID ::= { pkcs-1 sha512WithRSAEncryption(13) }
+sha224WithRSAEncryption ID ::= { pkcs-1 sha224WithRSAEncryption(14) }
+
+-- RSASSA-PSS signature algorithm object identifiers (From IETF RFC 4055)
+
+id-RSASSA-PSS           ID ::= { pkcs-1 10 }
+id-mgf1                 ID ::= { pkcs-1 8 }
+
+-- DSA algorithms object idntifiers
+
+id-dsa-with-sha1        ID ::= {iso(1) member-body(2) us(840) x9-57(10040) x9algorithm(4)
+                                dsa-with-sha1(3)}
+id-dsa-with-sha224      ID ::= { sigAlgs 1 } -- CSOR
+id-dsa-with-sha256      ID ::= { sigAlgs 2 } -- CSOR 
+
+-- From IETF RFC 5758
+ecdsa-with-SHA224       ID ::= { ansi-x9-62 signatures(4)
+                                                ecdsa-with-SHA2(3) 1 }
+ecdsa-with-SHA256       ID ::= { ansi-x9-62 signatures(4)
+                                                ecdsa-with-SHA2(3) 2 }
+ecdsa-with-SHA384       ID ::= { ansi-x9-62 signatures(4)
+                                                ecdsa-with-SHA2(3) 3 }
+ecdsa-with-SHA512       ID ::= { ansi-x9-62 signatures(4) ecdsa-with-SHA2(3) 4 }
+
+--  Object identifier for curves
+
+-- From IETF RFC 5480
+
+secp192r1       ID ::= { ansi-x9-62 curves(3) prime(1) 1 }
+sect163k1       ID ::= { certicom-curve 1 }
+sect163r2       ID ::= { certicom-curve 15 }
+secp224r1       ID ::= { certicom-curve 33 }
+sect233k1       ID ::= { certicom-curve 26 }
+sect233r1       ID ::= { certicom-curve 27 }
+secp256r1       ID ::= { ansi-x9-62 curves(3) prime(1) 7 }
+sect283k1       ID ::= { certicom-curve 16 }
+sect283r1       ID ::= { certicom-curve 17 }
+secp384r1       ID ::= { certicom-curve 34 }
+sect409k1       ID ::= { certicom-curve 36 }
+sect409r1       ID ::= { certicom-curve 37 }
+secp521r1       ID ::= { certicom-curve 35 }
+sect571k1       ID ::= { certicom-curve 38 }
+sect571r1       ID ::= { certicom-curve 39 }
+
+-- From IETF RFC 5639
+
+brainpoolP160r1 ID ::= { versionOne 1 }
+brainpoolP160t1 ID ::= { versionOne 2 }
+brainpoolP192r1 ID ::= { versionOne 3 }
+brainpoolP192t1 ID ::= { versionOne 4 }
+brainpoolP224r1 ID ::= { versionOne 5 }
+brainpoolP224t1 ID ::= { versionOne 6 }
+brainpoolP256r1 ID ::= { versionOne 7 }
+brainpoolP256t1 ID ::= { versionOne 8 }
+brainpoolP320r1 ID ::= { versionOne 9 }
+brainpoolP320t1 ID ::= { versionOne 10 }
+brainpoolP384r1 ID ::= { versionOne 11 }
+brainpoolP384t1 ID ::= { versionOne 12 }
+brainpoolP512r1 ID ::= { versionOne 13 }
+brainpoolP512t1 ID ::= { versionOne 14 }
+
+X509Curves OBJECT IDENTIFIER ::= { secp192r1 | sect163k1 | sect163r2 | secp224r1 | sect233k1 |
+                                   sect233r1 | secp256r1 | sect283k1 | sect283r1 | secp384r1 |
+                                   sect409k1 | sect409r1 | secp521r1 | sect571k1 | sect571r1 }
+
+-- Object identifiers for Integrity Check Value (ICV) algorithms
+
+id-hmacWithSHA224       ID ::= { digestAlgorithm 8 }  -- IETF RFC 4231
+id-hmacWithSHA256       ID ::= { digestAlgorithm 9 }  -- IETF RFC 4231
+id-hmacWithSHA384       ID ::= { digestAlgorithm 10 } -- IETF RFC 4231
+id-hmacWithSHA512       ID ::= { digestAlgorithm 11 } -- IETF RFC 4231
+
+id-gmac                 ID ::= { iso9797 part3(3) gmac(4) } -- ISO/IEC 9797-3
+
+-- =============== ALGORITHMS ========================================
+
+-- Hashing alogorithms
+
+mD5Algorithm ALGORITHM ::= { 
+  PARMS          NULL
+  IDENTIFIED BY {iso(1) member-body(2) us(840) rsadsi(113549) digestAlgorithm(2) md5(5)}}
+
+-- Note that the MD5 algorithm is not considered secure
+
+sha1Algorithm ALGORITHM ::= {
+  PARMS          NULL
+  IDENTIFIED BY id-sha1 }  
+
+-- Note that the SHA1 algorithm may not be considered secure
+
+sha224 ALGORITHM ::= { -- IETF RFC 5754
+  IDENTIFIED BY id-sha224 }
+
+sha256 ALGORITHM ::= { -- IETF RFC 5754 
+  IDENTIFIED BY id-sha256 }
+
+sha384 ALGORITHM ::= { -- IETF RFC 5754
+ IDENTIFIED BY id-sha384 }
+
+sha512 ALGORITHM ::= { -- IETF RFC 5754
+  IDENTIFIED BY id-sha512 }
+
+HashAlgorithms ALGORITHM ::= {sha1Algorithm |
+                              sha224 |
+                              sha256 |
+                              sha384 |
+                              sha512 }
+
+-- Symmetric encryption algorithms
+
+aes128-CBC ALGORITHM ::= {  -- CSOR 
+  PARMS         AES-InitializationVector
+  IDENTIFIED BY id-aes128-CBC }
+
+aes192-CBC ALGORITHM ::= { -- CSOR
+  PARMS         AES-InitializationVector
+  IDENTIFIED BY id-aes192-CBC }
+
+aes256-CBC ALGORITHM ::= { -- CSOR
+  PARMS         AES-InitializationVector
+  IDENTIFIED BY id-aes256-CBC }
+
+AES-InitializationVector ::= OCTET STRING (SIZE (16))
+
+-- Public key algorithms
+
+rsaEncryptionAlgorithm ALGORITHM ::= { -- IETF RFC 4055
+  PARMS         NULL
+  IDENTIFIED BY rsaEncryption }
+
+keyExchangeAlgorithm ALGORITHM ::= { -- IETF RFC 3279
+  PARMS         KEA-Parms-Id
+  IDENTIFIED BY id-keyExchangeAlgorithm }
+
+KEA-Parms-Id ::= OCTET STRING (SIZE (10))
+
+dsa ALGORITHM ::= { -- IETF RFC 5480
+  PARMS         DSS-Parms
+  IDENTIFIED BY id-dsa }
+
+DSS-Parms ::= SEQUENCE {
+  p   INTEGER,
+  q   INTEGER,
+  g   INTEGER,
+  ... }
+
+ecPublicKey ALGORITHM ::= { -- IETF RFC 5480
+  PARMS         X509Curves
+  IDENTIFIED BY id-ecPublicKey }
+
+ecDH ALGORITHM ::= { -- IETF RFC 5480
+  PARMS         X509Curves
+  IDENTIFIED BY id-ecDH }
+
+ecMQV ALGORITHM ::= { -- IETF RFC 5480
+  PARMS         X509Curves
+  IDENTIFIED BY id-ecMQV }
+
+dh-public-numberAlgorithm ALGORITHM ::= {
+  PARMS         DomainParameters
+  IDENTIFIED BY dh-public-number }
+
+DomainParameters ::= SEQUENCE {
+  p               INTEGER, -- odd prime, p=jq+1
+  g               INTEGER, -- generator, g
+  q               INTEGER, -- factor of p-1
+  j               INTEGER  OPTIONAL, -- subgroup factor
+  validationParms ValidationParms OPTIONAL,
+  ... }
+
+ValidationParms ::= SEQUENCE {
+  seed         BIT STRING,
+  pgenCounter  INTEGER,
+  ... }
+
+-- SIGNATURE ALGORITHMS
+-- RSASSA-PKCS1-v1_5 signature algorithms
+
+sha1WithRSAEncryptionAlgorithm ALGORITHM ::= { -- IETF 7427
+  PARMS         NULL
+  IDENTIFIED BY sha1WithRSAEncryption }
+
+sha224WithRSAEncryptionAlgorithm ALGORITHM ::= { -- IETF RFC 5754
+  PARMS         NULL
+  IDENTIFIED BY sha224WithRSAEncryption }
+
+sha256WithRSAEncryptionAlgorithm ALGORITHM ::= { -- IETF RFC 7427
+  PARMS         NULL
+  IDENTIFIED BY sha256WithRSAEncryption }
+
+sha384WithRSAEncryptionAlgorithm ALGORITHM ::= { -- IETF RFC 7427
+  PARMS         NULL
+  IDENTIFIED BY sha384WithRSAEncryption }
+
+sha512WithRSAEncryptionAlgorithm ALGORITHM ::= { -- IETF RFC 7427
+  PARMS         NULL
+  IDENTIFIED BY sha512WithRSAEncryption }
+
+-- RSASA-PSS algorithms
+
+rSASSA-PSS ALGORITHM ::= {
+  PARMS                 SEQUENCE {
+    hashAlgorithm    [0]  AlgorithmIdentifier {{HashAlgorithms}},
+ -- maskGenAlgorithm [1]  AlgorithmIdentifier {{MaskGenAlgorithms}},
+    saltLength       [2]  INTEGER DEFAULT 20,
+    trailerField     [3]  INTEGER DEFAULT 1 }
+  IDENTIFIED BY         id-RSASSA-PSS }
+
+-- 
+
+-- DSA signature algorithms
+
+dsa-with-sha224 ALGORITHM ::= { -- IETF RFC 5754
+  IDENTIFIED BY id-dsa-with-sha224 }
+
+dsa-with-sha256 ALGORITHM ::= { -- IETF RFC 5754
+  IDENTIFIED BY id-dsa-with-sha256 }
+
+-- ECDSA signature algorithms
+
+ecdsa-with-SHA224-Algorithm ALGORITHM ::= { -- IETF RFC  
+  IDENTIFIED BY ecdsa-with-SHA224 }
+
+ecdsa-with-SHA256-Algorithm ALGORITHM ::= { -- IETF RFC 5758
+  IDENTIFIED BY ecdsa-with-SHA256 }
+
+ecdsa-with-SHA384-Algorithm ALGORITHM ::= { -- IETF RFC 5758
+  IDENTIFIED BY ecdsa-with-SHA384 }
+
+ecdsa-with-SHA512-Algorithm ALGORITHM ::= { -- IETF RFC 5758
+  IDENTIFIED BY ecdsa-with-SHA512 }
+
+
+-- HMAC algorithms
+
+hmacWithSHA224 ALGORITHM ::= {  -- IETF RFC 4231
+  PARMS         NULL
+  IDENTIFIED BY id-hmacWithSHA224 }
+
+hmacWithSHA256 ALGORITHM ::= {  -- IETF RFC 4231
+  PARMS         NULL
+  IDENTIFIED BY id-hmacWithSHA256 }
+
+hmacWithSHA384 ALGORITHM ::= {  -- IETF RFC 4231
+  PARMS         NULL
+  IDENTIFIED BY id-hmacWithSHA384 }
+
+hmacWithSHA512 ALGORITHM ::= {  -- IETF RFC 4231
+  PARMS         NULL
+  IDENTIFIED BY id-hmacWithSHA512 }
+
+END -- AlgorithmObjectIdentifiers

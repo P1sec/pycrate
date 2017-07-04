@@ -1,0 +1,25 @@
+DirectoryOperationalBindingTypes {joint-iso-itu-t ds(5) module(1)
+  directoryOperationalBindingTypes(25) 7}
+DEFINITIONS ::=
+BEGIN
+
+-- EXPORTS All 
+-- The types and values defined in this module are exported for use in the other ASN.1
+-- modules contained within the Directory Specifications, and for the use of other
+-- applications which will use them to access Directory services. Other applications
+-- may use them for their own purposes, but this will not constrain extensions and
+-- modifications
+
+IMPORTS
+
+  -- from Rec. ITU-T X.501 | ISO/IEC 9594-2
+
+  id-ob
+    FROM UsefulDefinitions {joint-iso-itu-t ds(5) module(1)
+      usefulDefinitions(0) 7};
+
+id-op-binding-shadow                     OBJECT IDENTIFIER ::= {id-ob 1}
+id-op-binding-hierarchical               OBJECT IDENTIFIER ::= {id-ob 2}
+id-op-binding-non-specific-hierarchical  OBJECT IDENTIFIER ::= {id-ob 3}
+
+END -- DirectoryOperationalBindingTypes

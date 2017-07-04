@@ -1,0 +1,24 @@
+--$Revision: 6.0 $
+--*********************************************************************
+--
+--  access.asn
+--
+--     messages for data access
+--
+--*********************************************************************
+
+NCBI-Access DEFINITIONS ::=
+BEGIN
+
+EXPORTS Link-set;
+
+    -- links between same class = neighbors
+    -- links between other classes = links
+
+Link-set ::= SEQUENCE {
+    num INTEGER ,                         -- number of links to this doc type
+    uids SEQUENCE OF INTEGER OPTIONAL ,     -- the links
+    weights SEQUENCE OF INTEGER OPTIONAL }  -- the weights
+
+
+END

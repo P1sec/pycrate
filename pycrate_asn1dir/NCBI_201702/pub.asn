@@ -1,0 +1,48 @@
+--$Revision: 6.0 $
+--********************************************************************
+--
+--  Publication common set
+--  James Ostell, 1990
+--
+--  This is the base class definitions for Publications of all sorts
+--
+--  support for PubMedId added in 1996
+--********************************************************************
+
+NCBI-Pub DEFINITIONS ::=
+BEGIN
+
+EXPORTS Pub, Pub-set, Pub-equiv;
+
+IMPORTS Medline-entry FROM NCBI-Medline
+        Cit-art, Cit-jour, Cit-book, Cit-proc, Cit-pat, Id-pat, Cit-gen,
+        Cit-let, Cit-sub, PubMedId FROM NCBI-Biblio;
+
+Pub ::= CHOICE {
+    gen Cit-gen ,        -- general or generic unparsed
+    sub Cit-sub ,        -- submission
+    medline Medline-entry ,
+    muid INTEGER ,       -- medline uid
+    article Cit-art ,
+    journal Cit-jour ,
+    book Cit-book ,
+    proc Cit-proc ,      -- proceedings of a meeting
+    patent Cit-pat ,
+    pat-id Id-pat ,      -- identify a patent
+    man Cit-let ,        -- manuscript, thesis, or letter
+    equiv Pub-equiv,     -- to cite a variety of ways
+	pmid PubMedId }      -- PubMedId
+
+Pub-equiv ::= SET OF Pub   -- equivalent identifiers for same citation
+
+Pub-set ::= CHOICE {
+    pub SET OF Pub ,
+    medline SET OF Medline-entry ,
+    article SET OF Cit-art ,
+    journal SET OF Cit-jour ,
+    book SET OF Cit-book ,
+    proc SET OF Cit-proc ,      -- proceedings of a meeting
+    patent SET OF Cit-pat }
+
+END
+

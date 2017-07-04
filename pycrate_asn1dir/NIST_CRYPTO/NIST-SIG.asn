@@ -1,0 +1,52 @@
+NIST-SIG { joint-iso-ccitt(2) country(16) us(840) organization(1) gov(101) csor(3)
+nistAlgorithm(4) modules(3) } DEFINITIONS IMPLICIT TAGS ::= BEGIN
+
+nistAlgorithms OBJECT IDENTIFIER ::= { joint-iso-ccitt(2) country(16) us(840) 
+organization(1) gov(101) csor(3) nistAlgorithm(4) }
+
+sigAlgs OBJECT IDENTIFIER ::= { nistAlgorithms 3 }
+
+-- DSA with SHA-1 (Externally assigned)
+-- DSA with SHA-2 family
+
+id-dsa-with-sha224 ::= { sigAlgs 1 }
+
+id-dsa-with-sha256 ::= { sigAlgs 2 }
+
+id-dsa-with-sha384 ::= { sigAlgs 3 }
+
+id-dsa-with-sha512 ::= { sigAlgs 4 }
+
+-- DSA with SHA-3 family
+
+id-dsa-with-sha3-224 ::= { sigAlgs 5 }
+
+id-dsa-with-sha3-256 ::= { sigAlgs 6 }
+
+id-dsa-with-sha3-384 ::= { sigAlgs 7 }
+
+id-dsa-with-sha3-512 ::= { sigAlgs 8 }
+
+-- ECDSA with SHA-1 (Externally assigned)
+-- ECDSA with SHA-2 family (Externally assigned)
+-- ECDSA with SHA-3 family
+
+id-ecdsa-with-sha3-224 ::= { sigAlgs 9 }
+
+id-ecdsa-with-sha3-256 ::= { sigAlgs 10 }
+
+id-ecdsa-with-sha3-384 ::= { sigAlgs 11 }
+
+id-ecdsa-with-sha3-512 ::= { sigAlgs 12 }
+
+-- RSA PKCS #1 v1.5 Signature with SHA-1 (Externally assigned)
+-- RSA PKCS #1 v1.5 Signature with SHA-2 family (Externally assigned)
+-- RSA PKCS #1 v1.5 Signature with SHA-3 family
+
+id-rsassa-pkcs1-v1_5-with-sha3-224 ::= { sigAlgs 13 }
+
+id-rsassa-pkcs1-v1_5-with-sha3-256 ::= { sigAlgs 14 }
+
+id-rsassa-pkcs1-v1_5-with-sha3-384 ::= { sigAlgs 15 }
+
+id-rsassa-pkcs1-v1_5-with-sha3-512 ::= { sigAlgs 16 }

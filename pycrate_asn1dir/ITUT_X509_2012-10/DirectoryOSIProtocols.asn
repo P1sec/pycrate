@@ -1,0 +1,176 @@
+DirectoryOSIProtocols {joint-iso-itu-t ds(5) module(1) directoryOSIProtocols(37) 7}
+DEFINITIONS ::=
+BEGIN
+
+-- EXPORTS All 
+-- The types and values defined in this module are exported for use in the other ASN.1
+-- modules contained within these Directory Specifications, and for the use of other
+-- applications which will use them to access Directory services. Other applications may
+-- use them for their own purposes, but this will not constrain extensions and
+-- modifications needed to maintain or improve the Directory service.
+
+IMPORTS
+
+  -- from Rec. ITU-T X.501 | ISO/IEC 9594-2
+
+  commonProtocolSpecification, directoryAbstractService, distributedOperations,
+  directoryShadowAbstractService, id-ac, id-as, id-idm, iDMProtocolSpecification,
+  opBindingManagement, oSIProtocolSpecification
+    FROM UsefulDefinitions {joint-iso-itu-t ds(5) module(1) usefulDefinitions(0) 7}
+
+  dSAOperationalBindingManagementBind, establishOperationalBinding,
+  modifyOperationalBinding, terminateOperationalBinding
+    FROM OperationalBindingManagement opBindingManagement
+
+  -- from Rec. ITU-T X.511 | ISO/IEC 9594-3
+
+  abandon, addEntry, administerPassword, changePassword, compare, directoryBind,
+  list, modifyDN, modifyEntry, read, removeEntry, search
+    FROM DirectoryAbstractService directoryAbstractService
+
+  -- from Rec. ITU-T X.518 | ISO/IEC 9594-4
+
+  chainedAbandon, chainedAddEntry, chainedAdministerPassword, chainedChangePassword,
+  chainedCompare, chainedLdapTransport, chainedLinkedLDAP, chainedList, 
+  chainedModifyDN, chainedModifyEntry, chainedRead,   chainedRemoveEntry, chainedSearch,
+  dSABind
+    FROM DistributedOperations distributedOperations
+
+  -- from Rec. ITU-T X.519 | ISO/IEC 9594-5
+
+  OPERATION
+    FROM CommonProtocolSpecification commonProtocolSpecification
+
+  OSI-PDU{}
+    FROM OSIProtocolSpecification oSIProtocolSpecification
+
+  -- from Rec. ITU-T X.525 | ISO/IEC 9594-9
+
+  coordinateShadowUpdate, dSAShadowBind, requestShadowUpdate, updateShadow
+    FROM DirectoryShadowAbstractService directoryShadowAbstractService;
+
+-- OSI protocols 
+
+DAP-OSI-PDUs ::= OSI-PDU{directoryAccessAC}
+
+DSP-OSI-PDUs ::= OSI-PDU{directorySystemAC}
+
+DOP-OSI-PDUs ::= OSI-PDU{directoryOperationalBindingManagementAC}
+
+ShadowSupplierInitiatedDISP-OSI-PDUs ::= OSI-PDU{shadowSupplierInitiatedAC}
+
+ShadowSupplierInitiatedAsynchronousDISP-OSI-PDUs ::=
+  OSI-PDU{shadowSupplierInitiatedAsynchronousAC}
+
+ShadowConsumerInitiatedDISP-OSI-PDUs ::= OSI-PDU{shadowConsumerInitiatedAC}
+
+ShadowConsumerInitiatedAsynchronousDISP-OSI-PDUs ::=
+  OSI-PDU{shadowConsumerInitiatedAsynchronousAC}
+
+APPLICATION-CONTEXT ::= CLASS {
+  &bind-operation          OPERATION,
+  &Operations              OPERATION,
+  &applicationContextName  OBJECT IDENTIFIER UNIQUE }
+WITH SYNTAX {
+  BIND-OPERATION &bind-operation
+  OPERATIONS &Operations
+  APPLICATION CONTEXT NAME &applicationContextName }
+
+directoryAccessAC APPLICATION-CONTEXT ::= {
+  BIND-OPERATION            directoryBind
+  OPERATIONS                {read |
+                             compare |
+                             abandon |
+                             list |
+                             search |
+                             addEntry |
+                             removeEntry |
+                             modifyEntry |
+                             modifyDN |
+                             administerPassword |
+                             changePassword }
+  APPLICATION CONTEXT NAME  id-ac-directoryAccessAC }
+
+directorySystemAC APPLICATION-CONTEXT ::= {
+  BIND-OPERATION            dSABind
+  OPERATIONS                {chainedRead |
+                             chainedCompare |
+                             chainedAbandon |
+                             chainedList |
+                             chainedSearch |
+                             chainedAddEntry |
+                             chainedRemoveEntry |
+                             chainedModifyEntry |
+                             chainedModifyDN |
+                             chainedAdministerPassword |
+                             chainedChangePassword |
+                             chainedLdapTransport |
+                             chainedLinkedLDAP }
+  APPLICATION CONTEXT NAME  id-ac-directorySystemAC }
+
+shadowSupplierInitiatedAC APPLICATION-CONTEXT ::= {
+  BIND-OPERATION            dSAShadowBind
+  OPERATIONS                {updateShadow |
+                             coordinateShadowUpdate}
+  APPLICATION CONTEXT NAME  id-ac-shadowSupplierInitiatedAC }
+
+shadowConsumerInitiatedAC APPLICATION-CONTEXT ::= {
+  BIND-OPERATION            dSAShadowBind
+  OPERATIONS                {requestShadowUpdate |
+                             updateShadow}
+  APPLICATION CONTEXT NAME  id-ac-shadowConsumerInitiatedAC }
+
+shadowSupplierInitiatedAsynchronousAC APPLICATION-CONTEXT ::= {
+  BIND-OPERATION            dSAShadowBind
+  OPERATIONS                {updateShadow |
+                             coordinateShadowUpdate}
+  APPLICATION CONTEXT NAME  id-ac-shadowSupplierInitiatedAsynchronousAC }
+
+shadowConsumerInitiatedAsynchronousAC APPLICATION-CONTEXT ::= {
+  BIND-OPERATION            dSAShadowBind
+  OPERATIONS                {requestShadowUpdate |
+                             updateShadow}
+  APPLICATION CONTEXT NAME  id-ac-shadowConsumerInitiatedAsynchronousAC }
+
+directoryOperationalBindingManagementAC APPLICATION-CONTEXT ::= {
+  BIND-OPERATION            dSAOperationalBindingManagementBind
+  OPERATIONS                {establishOperationalBinding |
+                             modifyOperationalBinding |
+                             terminateOperationalBinding}
+  APPLICATION CONTEXT NAME  id-ac-directoryOperationalBindingManagementAC }
+
+--  abstract syntaxes 
+
+id-as-directoryAccessAS                       OBJECT IDENTIFIER ::= {id-as 1}
+id-as-directorySystemAS                       OBJECT IDENTIFIER ::= {id-as 2}
+id-as-directoryShadowAS                       OBJECT IDENTIFIER ::= {id-as 3}
+id-as-directoryOperationalBindingManagementAS OBJECT IDENTIFIER ::= {id-as 4}
+-- id-as-directoryReliableShadowAS            OBJECT IDENTIFIER ::= {id-as 5}
+-- id-as-reliableShadowBindingAS              OBJECT IDENTIFIER ::= {id-as 6}
+-- id-as-2or3se                               OBJECT IDENTIFIER ::= {id-as 7}
+id-acseAS                                     OBJECT IDENTIFIER ::=
+  {joint-iso-itu-t association-control(2) abstract-syntax(1) apdus(0) version(1)}
+
+-- application context object identifiers
+
+id-ac-directoryAccessAC                       OBJECT IDENTIFIER ::= {id-ac 1}
+id-ac-directorySystemAC                       OBJECT IDENTIFIER ::= {id-ac 2}
+id-ac-directoryOperationalBindingManagementAC OBJECT IDENTIFIER ::= {id-ac 3}
+id-ac-shadowConsumerInitiatedAC               OBJECT IDENTIFIER ::= {id-ac 4}
+id-ac-shadowSupplierInitiatedAC               OBJECT IDENTIFIER ::= {id-ac 5}
+-- id-ac-reliableShadowSupplierInitiatedAC    OBJECT IDENTIFIER ::= {id-ac 6}
+-- id-ac-reliableShadowConsumerInitiatedAC    OBJECT IDENTIFIER ::= {id-ac 7}
+id-ac-shadowSupplierInitiatedAsynchronousAC   OBJECT IDENTIFIER ::= {id-ac 8}
+id-ac-shadowConsumerInitiatedAsynchronousAC   OBJECT IDENTIFIER ::= {id-ac 9}
+-- id-ac-directoryAccessWith2or3seAC          OBJECT IDENTIFIER ::= {id-ac 10}
+-- id-ac-directorySystemWith2or3seAC          OBJECT IDENTIFIER ::= {id-ac 11}
+-- id-ac-shadowSupplierInitiatedWith2or3seAC  OBJECT IDENTIFIER ::= {id-ac 12}
+-- id-ac-shadowConsumerInitiatedWith2or3seAC  OBJECT IDENTIFIER ::= {id-ac 13}
+-- id-ac-reliableShadowSupplierInitiatedWith2or3seAC
+--                                            OBJECT IDENTIFIER ::= {id-ac 14}
+-- id-ac-reliableShadowConsumerInitiatedWith2or3seAC
+--                                            OBJECT IDENTIFIER ::= {id-ac 15}
+-- id-ac-directoryOperationalBindingManagementWith2or3seAC
+--                                            OBJECT IDENTIFIER ::= {id-ac 16}
+
+END -- DirectoryOSIProtocols

@@ -1,0 +1,234 @@
+MONTEChargingDataTypes {itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) charging (5) mONTEChargingDataType (12) asn1Module (0) version1 (0)}
+DEFINITIONS IMPLICIT TAGS	::=
+
+BEGIN
+
+-- EXPORTS everything 
+
+IMPORTS	
+
+DiameterIdentity,
+LocalSequenceNumber,
+ManagementExtensions,
+RecordType,
+ServiceContextID,
+TimeStamp
+FROM GenericChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) genericChargingDataTypes (0) asn1Module (0) version1 (0)}
+
+
+IMSI
+FROM MAP-CommonDataTypes {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-CommonDataTypes (18)  version15 (15) }
+-- from TS 29.002 [214]
+
+
+NodeID,
+UserCSGInformation
+FROM GPRSChargingDataTypes {itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) charging (5) gprsChargingDataTypes (2) asn1Module (0) version1 (0)}
+
+;
+
+--
+--  Monitoring Event RECORDS
+--
+
+MERecordType		::= CHOICE 
+--
+-- Record values 103..104 are Monitoring Event specific
+-- 
+{
+	mECORecord			[103] MECORecord,
+	mERERecord			[104] MERERecord
+}
+
+MECORecord	::= SET
+{
+	recordType								[0] RecordType,
+	retransmission							[1] NULL OPTIONAL, 	
+	serviceContextID						[2] ServiceContextID OPTIONAL,
+	nodeID									[3] NodeID OPTIONAL,	
+	recordTimeStamp							[4] TimeStamp OPTIONAL,
+	eventTimestamp							[5] TimeStamp OPTIONAL,
+	monitoringEventConfigurationActivity	[6] MonitoringEventConfigurationActivity OPTIONAL,
+	sCEFReferenceID							[7] SCEFReferenceID OPTIONAL,
+	sCEFID									[8] DiameterIdentity OPTIONAL,
+	monitoringType							[9] MonitoringType OPTIONAL,
+	maximumNumberofReports					[10] INTEGER OPTIONAL,
+	monitoringDuration						[11] TimeStamp OPTIONAL,
+	chargeablePartyIdentifier				[12] UTF8String OPTIONAL,
+	monitoredUser							[13] IMSI OPTIONAL,
+	maximumDetectionTime					[14] INTEGER OPTIONAL,
+	localRecordSequenceNumber				[15] LocalSequenceNumber OPTIONAL,
+	reachabilityConfiguration				[16]	ReachabilityConfiguration OPTIONAL,
+	locationType							[17] LocationType OPTIONAL,
+	accuracy								[18] Accuracy OPTIONAL,
+	listofLocations							[19] SEQUENCE OF EPSLocationInfo OPTIONAL,
+	monitoringEventConfigStatus				[20] MonitoringEventConfigStatus OPTIONAL,
+	recordExtensions						[21] ManagementExtensions OPTIONAL
+}
+
+MERERecord	::= SET
+{
+	recordType								[0] RecordType,
+	retransmission							[1] NULL OPTIONAL, 	
+	serviceContextID						[2] ServiceContextID OPTIONAL,
+	nodeID									[3] NodeID OPTIONAL,	
+	recordTimeStamp							[4] TimeStamp OPTIONAL,
+	localRecordSequenceNumber				[5] LocalSequenceNumber OPTIONAL,
+	listofMonitoringEventReportData			[6] SEQUENCE OF MonitoringEventReportData OPTIONAL,	recordExtensions						[7] ManagementExtensions OPTIONAL
+}
+
+--
+--  Monitoring Event DATA TYPES
+--
+
+Accuracy			::= ENUMERATED
+--
+-- Note: value "3" is not used in this specification: it is provided to reflect 
+-- the full list specified in TS 29.336 Accuracy AVP
+--
+
+{
+	cGIECGI				(0),
+	eNB					(1),
+	lATARA				(2),
+	pRA					(3)
+}
+CauseType		::= ENUMERATED
+{
+	radioNetworkLayer		(0),
+	transportLayer			(1),
+	nAS						(2),
+	protocol					(3),
+	miscellaneous			(4)
+}
+
+CommunicationFailureInfo		::= SEQUENCE
+{
+	causeType	[0] CauseType OPTIONAL,
+	s1APCause	[1] INTEGER OPTIONAL,
+	rANAPCause	[2] INTEGER OPTIONAL,
+	bSSGPCause	[3] INTEGER OPTIONAL,
+	gMMCause		[4] INTEGER OPTIONAL,
+	sMCause		[5] INTEGER OPTIONAL
+}
+CurrentLocationRetrieved		::= ENUMERATED
+{
+	activeLocationRetrieval		(0)
+}
+
+EPSLocationInfo		::= SEQUENCE
+--
+-- Only one element is present. 
+--
+{
+	mMELocationInformation	[0] MMELocationInformation OPTIONAL,
+	sGSNLocationInformation	[1] SGSNLocationInformation OPTIONAL
+}
+
+LocationType				::= ENUMERATED
+{
+	currentLocation				(0),
+	lastKnownLocation			(1) 
+}
+
+MMELocationInformation		::= SEQUENCE
+{
+	eUTRANCellGlobalIdentity		[0] OCTET STRING OPTIONAL,
+	trackingAreaIdentity			[1] OCTET STRING OPTIONAL,
+	geographicalInformation		[2] OCTET STRING OPTIONAL,
+	geodeticInformation			[3] OCTET STRING OPTIONAL,
+	currentLocationRetrieved		[4] CurrentLocationRetrieved OPTIONAL,
+	ageOfLocationInformation		[5] INTEGER OPTIONAL,
+	userCSGInformation			[6] UserCSGInformation OPTIONAL,
+	eNodeBID						[7] OCTET STRING OPTIONAL
+}
+
+MonitoringEventConfigStatus		::= SEQUENCE
+{
+	serviceResult	[0] ServiceResult OPTIONAL,
+	sCEFReferenceID	[1] SCEFReferenceID OPTIONAL,
+	sCEFID			[2] DiameterIdentity OPTIONAL
+}
+
+MonitoringEventConfigurationActivity				::= ENUMERATED
+{
+	create				(0),
+	transfer			(1),
+	update				(2),
+	delete				(3)
+}
+
+MonitoringEventReportData		::= SEQUENCE
+{
+	eventTimestamp							[0] TimeStamp OPTIONAL,
+	sCEFReferenceID							[1] SCEFReferenceID OPTIONAL,
+	sCEFID									[2] DiameterIdentity OPTIONAL,
+	monitoringEventReportNumber				[3] INTEGER OPTIONAL,
+	chargeablePartyIdentifier				[4] UTF8String OPTIONAL,
+	monitoredUser							[5] IMSI OPTIONAL,
+	monitoringType							[6] MonitoringType OPTIONAL,
+	reachabilityInformation					[7] ReachabilityType OPTIONAL,
+	reportedLocation							[8] EPSLocationInfo OPTIONAL,
+	communicationFailureInformation 			[9] SEQUENCE OF CommunicationFailureInfo OPTIONAL,
+	listOfNumberOfUEPerLocationReport		[10] SEQUENCE OF NumberOfUEPerLocationReport OPTIONAL
+}
+
+MonitoringType				::= ENUMERATED
+--
+-- Note: value "3" and "4" are not used in this specification: they are provided to reflect the full
+-- list specified in TS 29.336 Monitoring-Type AVP.
+--
+{
+	lossOfConnectivity						(0),
+	ueReachability							(1),
+	locationReporting						(2),
+	changeOfIMSIIMEISVAssociation			(3),
+	roamingStatus							(4),
+	communicationFailure					(5),
+	availabilityAfterDDNFailure				(6),
+	numberOfUEPerLocation					(7)
+}
+
+NumberOfUEPerLocationReport		::= SEQUENCE
+{
+	ePSLocationInformation	[0] EPSLocationInfo OPTIONAL,
+	uECount					[1] INTEGER OPTIONAL
+}
+
+ReachabilityConfiguration		::= SEQUENCE
+{
+	reachabilityType			[0] ReachabilityType OPTIONAL,
+	maximumLatency				[1] INTEGER OPTIONAL,
+	maximumResponseTime			[2] INTEGER OPTIONAL
+}
+
+ReachabilityType			::= ENUMERATED
+{
+	reachabilityforSMS				(0),
+	reachabilityforData				(1) 
+}
+
+SGSNLocationInformation		::= SEQUENCE
+{
+	cellGlobalIdentity			[0] OCTET STRING OPTIONAL,
+	locationAreaIdentity			[1] OCTET STRING OPTIONAL,
+	serviceAreaIdentity			[2] OCTET STRING OPTIONAL,
+	routingAreaIdentity			[3] OCTET STRING OPTIONAL,
+	geographicalInformation		[4] OCTET STRING OPTIONAL,
+	geodeticInformation			[5] OCTET STRING OPTIONAL,
+	currentLocationRetrieved		[6] CurrentLocationRetrieved OPTIONAL,
+	ageOfLocationInformation		[7] INTEGER OPTIONAL,
+	userCSGInformation			[8] UserCSGInformation OPTIONAL
+}
+SCEFReferenceID	::= INTEGER (0..4294967295)
+--
+-- 0..4294967295 is equivalent to 0..2**32-1
+--
+
+ServiceResult		::= SEQUENCE
+{
+	vendorId			[0] INTEGER OPTIONAL,
+	serviceResultCode	[1] INTEGER OPTIONAL
+}
+
+END

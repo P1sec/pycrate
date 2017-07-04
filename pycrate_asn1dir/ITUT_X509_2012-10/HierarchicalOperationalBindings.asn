@@ -1,0 +1,128 @@
+HierarchicalOperationalBindings {joint-iso-itu-t ds(5) module(1)
+  hierarchicalOperationalBindings(20) 7}
+DEFINITIONS ::=
+BEGIN
+
+-- EXPORTS All 
+-- The types and values defined in this module are exported for use in the other ASN.1
+-- modules contained within these Directory Specifications, and for the use of other
+-- applications which will use them to access Directory services. Other applications may
+-- use them for their own purposes, but this will not constrain extensions and
+-- modifications needed to maintain or improve the Directory service.
+
+IMPORTS
+
+  -- from Rec. ITU-T X.501 | ISO/IEC 9594-2
+
+  directoryOperationalBindingTypes, directoryOSIProtocols,
+  distributedOperations, informationFramework, opBindingManagement
+    FROM UsefulDefinitions {joint-iso-itu-t ds(5) module(1) usefulDefinitions(0) 7}
+
+  Attribute{}, DistinguishedName, RelativeDistinguishedName, SupportedAttributes
+    FROM InformationFramework informationFramework
+
+  OPERATIONAL-BINDING
+    FROM OperationalBindingManagement opBindingManagement
+
+  -- from ITU-T Rec. X.518 | ISO/IEC 9594-4
+
+  MasterAndShadowAccessPoints
+    FROM DistributedOperations distributedOperations
+
+  -- from ITU-T Rec. X.519 | ISO/IEC 9594-5
+
+  directorySystemAC
+    FROM DirectoryOSIProtocols directoryOSIProtocols
+
+  id-op-binding-hierarchical, id-op-binding-non-specific-hierarchical
+    FROM DirectoryOperationalBindingTypes directoryOperationalBindingTypes;
+
+-- types 
+
+HierarchicalAgreement ::= SEQUENCE {
+  rdn                [0]  RelativeDistinguishedName,
+  immediateSuperior  [1]  DistinguishedName,
+  ... }
+
+SuperiorToSubordinate ::= SEQUENCE {
+  contextPrefixInfo     [0]  DITcontext,
+  entryInfo             [1]  SET SIZE (1..MAX) OF
+                               Attribute{{SupportedAttributes}} OPTIONAL,
+  immediateSuperiorInfo [2]  SET SIZE (1..MAX) OF
+                               Attribute{{SupportedAttributes}} OPTIONAL,
+  ... }
+
+DITcontext ::= SEQUENCE OF Vertex
+
+Vertex ::= SEQUENCE {
+  rdn           [0]  RelativeDistinguishedName,
+  admPointInfo  [1]  SET SIZE (1..MAX) OF Attribute{{SupportedAttributes}} OPTIONAL,
+  subentries    [2]  SET SIZE (1..MAX) OF SubentryInfo OPTIONAL,
+  accessPoints  [3]  MasterAndShadowAccessPoints OPTIONAL,
+  ... }
+
+SubentryInfo ::= SEQUENCE {
+  rdn   [0]  RelativeDistinguishedName,
+  info  [1]  SET OF Attribute{{SupportedAttributes}},
+  ... }
+
+SubordinateToSuperior ::= SEQUENCE {
+  accessPoints  [0]  MasterAndShadowAccessPoints OPTIONAL,
+  alias         [1]  BOOLEAN DEFAULT FALSE,
+  entryInfo     [2]  SET SIZE (1..MAX) OF Attribute{{SupportedAttributes}} OPTIONAL,
+  subentries    [3]  SET SIZE (1..MAX) OF SubentryInfo OPTIONAL,
+  ... }
+
+SuperiorToSubordinateModification ::= SuperiorToSubordinate (
+  WITH COMPONENTS {..., entryInfo  ABSENT } )
+
+NonSpecificHierarchicalAgreement ::= SEQUENCE {
+  immediateSuperior  [1]  DistinguishedName,
+  ... }
+
+NHOBSuperiorToSubordinate ::= SuperiorToSubordinate (
+  WITH COMPONENTS {..., entryInfo  ABSENT } )
+
+NHOBSubordinateToSuperior ::= SEQUENCE {
+  accessPoints  [0]  MasterAndShadowAccessPoints OPTIONAL,
+  subentries    [3]  SET SIZE (1..MAX) OF SubentryInfo OPTIONAL,
+  ... }
+
+-- operational binding information objects 
+
+hierarchicalOperationalBinding OPERATIONAL-BINDING ::= {
+  AGREEMENT             HierarchicalAgreement
+  APPLICATION CONTEXTS  {{directorySystemAC}}
+  ASYMMETRIC
+    ROLE-A { -- superior DSA
+      ESTABLISHMENT-INITIATOR  TRUE
+      ESTABLISHMENT-PARAMETER  SuperiorToSubordinate
+      MODIFICATION-INITIATOR   TRUE
+      MODIFICATION-PARAMETER   SuperiorToSubordinateModification
+      TERMINATION-INITIATOR    TRUE }
+    ROLE-B { -- subordinate DSA
+      ESTABLISHMENT-INITIATOR  TRUE
+      ESTABLISHMENT-PARAMETER  SubordinateToSuperior
+      MODIFICATION-INITIATOR   TRUE
+      MODIFICATION-PARAMETER   SubordinateToSuperior
+      TERMINATION-INITIATOR    TRUE }
+  ID                    id-op-binding-hierarchical }
+
+nonSpecificHierarchicalOperationalBinding OPERATIONAL-BINDING ::= {
+  AGREEMENT             NonSpecificHierarchicalAgreement
+  APPLICATION CONTEXTS  {{directorySystemAC}}
+  ASYMMETRIC 
+    ROLE-A { -- superior DSA
+      ESTABLISHMENT-PARAMETER  NHOBSuperiorToSubordinate
+      MODIFICATION-INITIATOR   TRUE
+      MODIFICATION-PARAMETER   NHOBSuperiorToSubordinate
+      TERMINATION-INITIATOR    TRUE}
+    ROLE-B { -- subordinate DSA
+      ESTABLISHMENT-INITIATOR  TRUE
+      ESTABLISHMENT-PARAMETER  NHOBSubordinateToSuperior
+      MODIFICATION-INITIATOR   TRUE
+      MODIFICATION-PARAMETER   NHOBSubordinateToSuperior
+      TERMINATION-INITIATOR    TRUE}
+  ID                    id-op-binding-non-specific-hierarchical }
+
+END -- HierarchicalOperationalBindings

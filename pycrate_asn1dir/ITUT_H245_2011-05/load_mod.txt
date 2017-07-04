@@ -1,0 +1,3 @@
+# downloaded from ITU-T ASN.1 module directory
+# http://www.itu.int/ITU-T/recommendations/fl.aspx?lang=1
+MULTIMEDIA-SYSTEM-CONTROL.asn

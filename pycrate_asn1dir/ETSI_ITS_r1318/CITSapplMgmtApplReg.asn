@@ -1,0 +1,413 @@
+CITSapplMgmtApplReg {iso(1) standard(0) cits-applMgmt (17419) applRegistry (2) version1 (1) } 
+DEFINITIONS AUTOMATIC TAGS::=BEGIN
+
+-- Warning: Module is still under development
+
+IMPORTS
+
+VarLengthNumber, VarLengthNumber2 FROM CITSapplMgmtIDs {iso(1) standard(0) cits-applMgmt (17419) ids (1)}
+
+LogicalChannelType FROM CITSapplMgmtComm {iso(1) standard(0) cits-applMgmt (17419) comm (3)} 
+
+ITSSappRxTxPortNo, ITSSappCPReqReg FROM CITSapplReq {iso(1) standard(0) cits-applReq (17423) asnm-1(1)}
+
+Lon, Lat, UserPriority FROM CALMllsap {iso(1) standard(0) calm-ll-sap(21218) asnm-1(1)}
+
+PortNumber FROM CALMfntp { iso (1) standard (0) calm-nonip(29281) fntp(1) asnm-1 (1)} 
+
+;
+
+-- End of IMPORTS
+
+-- Types
+
+-- registration information records for several ITS application objects
+
+
+-- ITS application object registration ITS-AID
+
+
+-- registry record for the whole set of registration information 
+ITSapObRegistry::=SEQUENCE OF ITSapOb
+
+-- for a single ITS application object (ITSapOb)
+ITSapOb::=SEQUENCE {
+	iTSaid	ITSaid,	-- ITS-AID
+	iTSapObName	ITSObName,	-- name of ITS application object
+	iTSapObType	ITSapObType,	-- class or application
+	iTSapObOwner	ITSObOwner,	-- owner of the ITS application
+	iTSapObCert	ITSapObCertificate,	-- information on certificate
+	iTSapObPorts	ITSapObPorts
+	}
+
+ITSapObPorts::=SEQUENCE OF SEQUENCE{
+	portNo	ITSSappRxTxPortNo,
+	rules	SEQUENCE OF ITSapObPort	-- Information per source, see CEN/ISO TS 17423
+	}
+
+ITSapObPort::= SEQUENCE OF ITSapObPortRule -- all rules shall be used at least once per source!
+
+ITSAPOBSR::=CLASS {
+      &ruleRef INTEGER(0..255),
+      &Rule
+	}
+
+ITSapObPortRule::=SEQUENCE{
+	ruleNo	ITSAPOBSR.&ruleRef({ITSapObPortRules}),
+	rule	ITSAPOBSR.&Rule({ITSapObPortRules}{@ruleNo})
+	}
+
+ITSapObPortRules ITSAPOBSR::={iTSapObRxTx | iTSapObLch | iTSapObPn, ...}
+
+iTSapObRxTx	ITSAPOBSR::={&ruleRef 0, &Rule PortRxTx} -- RX or TX port
+iTSapObLch	ITSAPOBSR::={&ruleRef 1, &Rule LogicalChannelPrio} -- TX LCH allowed
+iTSapObPn	ITSAPOBSR::={&ruleRef 2, &Rule PortNumber} -- well-known PortNumber 
+
+PortRxTx::=INTEGER{
+	rxPort	(0),
+	txPort	(255)
+	} (0..255)
+
+LogicalChannelPrio::=SEQUENCE{
+	lch	LogicalChannelType,
+	prio	UserPriority
+	} -- priority of messages of a source may depend on the LCH.
+
+
+ITSObName::=OCTET STRING (SIZE(0..255))
+
+ITSapObType::=INTEGER {
+	appClass	(0),
+	application	(1)
+	} (0..255)
+
+ITSObOwner::=SEQUENCE{
+	ownerName	ITSObOwnerName,
+	ownerType	ITSObOwnerType,
+	ownerOID	OBJECT IDENTIFIER
+	}
+
+ITSObOwnerName::=OCTET STRING (SIZE(0..255))
+
+ITSObOwnerType::=INTEGER{
+	standard	(0),
+	private	(1)
+	} (0..255)
+
+ITSapObPriority::=UserPriority 
+
+ITSapObCertificate::=SEQUENCE {
+	issuingSA	IssuingSA,
+	startDate	CertStartDate,
+	endDate	CertEndDate,
+	status	CertStatus
+	}
+
+IssuingSA::=SEQUENCE {
+	name	SAname,
+	saOID	OBJECT IDENTIFIER
+	}
+
+SAname::=OCTET STRING (SIZE(0..255))
+
+CertStartDate::=SEQUENCE{
+	fill	BIT STRING (SIZE(7)), -- set to zero
+	csd	CHOICE {
+	inactive	[0] NULL, -- indicates that certificate is not issued
+	date	[1] NumericString (SIZE(8)) -- yyyymmdd
+	}
+	}
+
+CertEndDate::=SEQUENCE{
+	fill	BIT STRING (SIZE(6)), -- set to zero
+	ced	CHOICE {
+	inactive	[0] NULL, -- this shall apply if StartDate is set to [0]
+	date	[1] NumericString (SIZE(8)), -- yyyymmdd
+	never	[2] NULL -- indicates that there is no end date
+	}
+	}
+
+CertStatus::=SEQUENCE{
+	fill	BIT STRING (SIZE(6)), -- set to zero
+	cs	CHOICE {
+	active	[0] NULL, -- certificate is issued
+	inactive	[1] NULL, -- certificate is not issued
+	testActiv	[2] NULL, -- ITS application object is in test phase
+	blocked	[3] CertBlocked -- issued certificate is blocked
+	}
+	}
+
+CertBlocked::=SEQUENCE {
+	date	NumericString (SIZE(8)), -- yyyymmdd
+	issuingSA	IssuingSA -- SA who performed black-listing of an ITS-AID
+	}
+
+
+-- ITS message set registration ITS-MsgSetID
+
+
+-- registry record for the whole set of registration information 
+ITSmsgSetRegistry::=SEQUENCE OF ITSmsgSet
+
+-- for a single ITS message set (ITSmsgSet)
+ITSmsgSet::=SEQUENCE {
+	iTSmsID	ITSmsgSetID,	-- ITS-MsgSetID
+	iTSmsName	ITSObName,	-- human-readable name of ITS message set
+	iTSmsOwner	ITSObOwner	-- owner of the ITS message set
+	}
+
+
+-- ITS regulatory region registration
+
+
+-- registry record for the whole set of registration information 
+ITSregRegionRegistry::=SEQUENCE OF ITSregRegion
+-- for a single regulatory region
+ITSregRegion::=SEQUENCE{
+	regID	ITSrrID,
+	regAuthority	ITS-RegPolicyAuthority,
+	fill	BIT STRING (SIZE(7)),
+	regArea	ITS-RParea
+	}
+
+ITS-RegPolicyAuthority::=SEQUENCE{
+	name	ITSObOwnerName,
+	url	URLreg
+	}
+
+URLreg::=OCTET STRING (SIZE(0..256))
+
+ITSRPAREA::=CLASS{
+	&areaRef INTEGER(0..255),
+	&Area
+	}
+
+ITS-RParea::=SEQUENCE{
+	areaTypeNo	ITSRPAREA.&areaRef({ITS-RPareaTypes}),
+	areaType	ITSRPAREA.&Area({ITS-RPareaTypes})
+	}
+
+ITS-RPareaTypes ITSRPAREA::={rpAreaCountryCode | rpAreaGeoPolygon,...}
+
+rpAreaCountryCode	ITSRPAREA::={&areaRef 0, &Area CountryCode}
+rpAreaGeoPolygon	ITSRPAREA::={&areaRef 1, &Area GeoPolygon}
+
+GeoPolygon::=SEQUENCE (SIZE(0..65535)) OF GeoCoordinates 
+
+GeoCoordinates::=SEQUENCE{
+	lat	Lat, -- from ISO 21218
+	long	Lon -- from ISO 21218
+	}
+
+CountryCode::=OCTET STRING (SIZE(3)) -- ISO 3166 Alpha-3 code
+
+
+-- ITS policy region registration
+
+
+-- registry record for the whole set of registration information 
+ITSpolRegionRegistry::=SEQUENCE OF ITSpolRegion
+-- for a single policy region
+ITSpolRegion::=SEQUENCE{
+	polID	ITSprID,
+	polAuthority	ITS-RegPolicyAuthority,
+	fill	BIT STRING (SIZE(7)),
+	polArea	ITS-RParea
+	}
+
+
+-- ITS port number registration
+
+-- registry record for the whole set of registration information 
+ITSportNumberRegistry::=SEQUENCE OF ITSportNumber
+-- for a single port number
+ITSportNumber::=SEQUENCE{
+	pn	PortNumber, -- PN used by transport protocol
+	ntProt	NTprotocol, -- transport protocol identifier
+	itssAp	ItsAppInfo -- RxTx port (sink/source) of ITS application object
+	}
+
+
+ItsAppInfo::=SEQUENCE{
+	itsAid	ITSaid,
+	rxTxPortNo	ITSSappRxTxPortNo
+	}
+
+NTprotocol::=SEQUENCE{
+	name	OCTET STRING (SIZE(0..255)),
+	protRef	ProtocolReference
+	}
+
+ProtocolReference::=SEQUENCE{
+	sdo	OCTET STRING (SIZE(0..255)),
+	docNo	OCTET STRING (SIZE(0..255))
+	}
+
+-- ITS flow type registration
+
+-- registry record for the whole set of registration information 
+ITSflowTypeRegistry::=SEQUENCE OF ITSflowType
+-- for a single flow type
+ITSflowType::=SEQUENCE{
+	id	FlowTypeID, -- Flow type identifier (well-known Flow type)
+	req	ITSSappCPReqReg -- list of requirements
+	}
+
+FlowTypeID::=VarLengthNumber2
+
+
+
+-- ITS logical channel registration
+
+
+-- registry record for the whole set of registration information 
+ITSlchRegistry::=SEQUENCE OF ITSlch
+-- for a single LCH
+ITSlch::=SEQUENCE{
+	lchID	LogicalChannelType,	-- reference ID of LCH
+	lchPurpose	OCTET STRING (SIZE(0..255))	-- Purpose of LCH
+	}
+
+
+
+
+-- ITS station unit registration
+
+
+-- registry record for the whole set of registration information 
+ITSsuRegistry::=SEQUENCE OF ITSsu
+-- for a single ITS-SU
+ITSsu::=SEQUENCE{
+	itssuID	ITSsuID
+	}
+
+
+
+-- ITS station communication unit registration
+
+
+-- registry record for the whole set of registration information 
+ITSscuRegistry::=SEQUENCE OF ITSscu
+-- for a single ITS-SCU
+ITSscu::=SEQUENCE{
+	itsscuID	ITSscuID
+	}
+
+
+-- ITS-S application process provisioner registration
+
+
+-- registry record for the whole set of registration information 
+ITSSappRegistry::=SEQUENCE OF ITSSapPrPr
+-- for a single ITS-S-APP
+ITSSapPrPr::=SEQUENCE{
+	itssappID	ITSSappid,
+	itssapProv	RegEntryOwner
+	}
+
+RegEntryOwner::=SEQUENCE{
+	ownerName	OCTET STRING (SIZE(0..255)),
+	ownerAddress	OCTET STRING (SIZE(0..255)),
+	ownerURL	URLreg
+	}
+
+
+-- ITS equipment manufacturer registration
+
+
+-- registry record for the whole set of registration information 
+ITSemRegistry::=SEQUENCE OF ITSem
+-- for a single ITS equipment manufacturer
+ITSem::=SEQUENCE{
+	itsemID	ITSemID,
+	equipManu	RegEntryOwner
+	}
+
+
+-- ITS application object owner registration
+
+
+-- registry record for the whole set of registration information 
+ITSaooRegistry::=SEQUENCE OF ITSaoo
+-- for a single ITS application object owner
+ITSaoo::=SEQUENCE{
+	itsaooID	ITSaooID,
+	aoo	RegEntryOwner
+	}
+
+
+-- ITS message set owner registration
+
+
+-- registry record for the whole set of registration information 
+Registry::=SEQUENCE OF ITSmso
+-- for a single ITS message set owner
+ITSmso::=SEQUENCE{
+	iTSmsoID	ITSmsoID,
+	mso	RegEntryOwner
+	}
+
+
+-- ITS-S application process developer registration
+
+
+-- registry record for the whole set of registration information 
+ITSSapdRegistry::=SEQUENCE OF ITSSapd
+-- for a single ITS-S application process developer
+ITSSapd::=SEQUENCE{
+	itssapdID	ITSSapdID,
+	ad	RegEntryOwner
+	}
+
+
+-- ID types --
+
+ITSaid::=VarLengthNumber -- used in 24102-5
+
+ITSmsgSetID::=VarLengthNumber
+
+ITSemID::=VarLengthNumber2
+
+ITSsuID::=SEQUENCE{
+	suID	VarLengthNumber,
+	scuID	ITSscuID
+	}
+
+ITSscuID::=SEQUENCE{
+	emID	ITSemID, -- manufacturer ID
+	serialNo	VarLengthNumber -- serial number
+	}
+
+ITSSappid::=VarLengthNumber
+
+ITSrrID::=VarLengthNumber
+
+ITSprID::=VarLengthNumber
+
+ITSaooID::=VarLengthNumber
+
+ITSmsoID::=VarLengthNumber2
+
+ITSSapdID::=VarLengthNumber
+
+
+-- Values
+
+-- OIDs of standards organizations
+-- ISO
+oidISO OBJECT IDENTIFIER::={iso(1) standard(0)}
+-- ETSI
+oidETSI OBJECT IDENTIFIER::={itu-t(0) identified-organization(4) etsi(0)}
+-- IEEE
+oidIEEE OBJECT IDENTIFIER::={iso(1) identified-organization(3) ieee(3)}
+-- CEN
+oidCEN OBJECT IDENTIFIER::={iso(1) identified-organization(3) cen(162)}
+
+fntpRefNo OCTET STRING(SIZE(0..255))::='49534F2032393238312D31'H --"ISO 29281-1"
+
+
+-- version of this module
+version INTEGER(0..255)::=1 
+
+
+END

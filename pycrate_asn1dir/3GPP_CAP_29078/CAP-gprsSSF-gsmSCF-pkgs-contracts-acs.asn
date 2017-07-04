@@ -1,0 +1,281 @@
+-- 8.2	gsmSCF/gprsSSF contracts, packages and ACs
+-- 8.2.1	gprsSSF/gsmSCF ASN.1 module
+CAP-gprsSSF-gsmSCF-pkgs-contracts-acs {itu-t(0) identified-organization(4) etsi(0) mobileDomain(0) umts-network(1) modules(3) cap-gprsSSF-gsmSCF-pkgs-contracts-acs(108) version8(7)}
+DEFINITIONS ::= BEGIN
+
+-- This module specifies the Operation Packages, Contracts, Application Contexts
+-- and Abstract Syntaxes used for the gprsSSF - gsmSCF interface, for the
+-- control of GPRS.
+
+-- The table in subclause 2.1 lists the specifications that contain the modules
+-- that are used by CAP.
+
+IMPORTS
+
+	PARAMETERS-BOUND,
+	cAPSpecificBoundSet
+FROM CAP-classes classes
+-- Elements that exist in cAPSpecificBoundSet in Rel-5 are not changed in Rel-6. As a
+-- result, the value range of data type definitions in Rel-5 are not changed in Rel-6.
+
+	CONTRACT,
+	OPERATION-PACKAGE,
+	OPERATION
+FROM Remote-Operations-Information-Objects ros-InformationObjects
+
+	TCMessage {}
+FROM TCAPMessages tc-Messages
+
+	APPLICATION-CONTEXT,
+	dialogue-abstract-syntax
+FROM TC-Notation-Extensions tc-NotationExtensions
+
+	activityTestGPRS,
+	applyChargingGPRS,
+	applyChargingReportGPRS,
+	cancelGPRS,
+	connectGPRS {},
+	continueGPRS,
+	entityReleasedGPRS {},
+	furnishChargingInformationGPRS {},
+	initialDPGPRS {},
+	releaseGPRS {},
+	eventReportGPRS {},
+	requestReportGPRSEvent {},
+	resetTimerGPRS,
+	sendChargingInformationGPRS {}
+FROM CAP-gprsSSF-gsmSCF-ops-args gprsSSF-gsmSCF-Operations
+
+	id-ac-CAP-gprsSSF-gsmSCF-AC,
+	id-ac-CAP-gsmSCF-gprsSSF-AC,
+-- The APPLICATION-CONTEXT Object Identifiers for CAP V3 for GPRS in Rel-6 are the same as for
+-- CAP V3 for GPRS in Rel-5.
+
+	id-capGprsSsfTogsmScf,
+	id-capGsmScfToGprsSsf,
+-- The CONTRACT Object Identifiers for CAP V3 for GPRS are updated in Rel-6.
+
+	id-as-gprsSSF-gsmSCF-AS,
+	id-as-gsmSCF-gprsSSF-AS,
+-- The ABSTRACT-SYNTAX Object Identifiers for CAP V3 for GPRS are updated in Rel-6.
+
+	id-package-gprsScfActivation,
+	id-package-gprsConnect,
+	id-package-gprsContinue,
+	id-package-gprsRelease,
+	id-package-gprsEventHandling,
+	id-package-gprsExceptionInformation,
+	id-package-gprsTimer,
+	id-package-gprsBilling,
+	id-package-gprsCharging,
+	id-package-gprsChargeAdvice,
+	id-package-gprsActivityTest,
+	id-package-gprsCancel,
+-- The OPERATION-PACKAGE Object Identifiers for CAP V3 for GPRS are updated in Rel-6.
+
+	classes,
+	ros-InformationObjects,
+	tc-Messages,
+	tc-NotationExtensions,
+
+	gprsSSF-gsmSCF-Operations
+-- Object Identifier 'gprsSSF-gsmSCF-Operations' is updated for Rel-6.
+
+FROM CAP-object-identifiers {itu-t(0) identified-organization(4) etsi(0) mobileDomain(0)
+umts-network(1) modules(3) cap-object-identifiers(100) version8(7)}
+
+;
+
+-- Application Contexts
+
+-- The APPLICATION-CONTEXT definitions for CAP V3 for GPRS are updated in Rel-6.
+-- However, the APPLICATION-CONTEXT definitions for CAP V3 for GPRS in Rel-6 use the same
+-- Object Identifier for APPLICATION CONTEXT NAME as CAP V3 for GPRS in Rel-5.
+
+-- Refer to ITU-T Recommendation Q.775 for the formal definition of APPLICATION-CONTEXT.
+-- The structured DIALOGUE MODE is defined in ITU-T Recommendation Q.771; the
+-- dialogue-abstract-syntax ABSTRACT SYNTAX is defined in ITU-T Recommendation Q.775.
+
+cap-gprssf-scfAC APPLICATION-CONTEXT ::= {
+	CONTRACT					capGprsSsfToScf
+	DIALOGUE MODE				structured
+	ABSTRACT SYNTAXES			{dialogue-abstract-syntax |
+								gprsSSF-gsmSCFAbstractSyntax}
+	APPLICATION CONTEXT NAME	id-ac-CAP-gprsSSF-gsmSCF-AC}
+-- 'capGprsSsfToScf' and 'gprsSSF-gsmSCFAbstractSyntax' are defined in the present
+-- module.
+
+cap-gsmscf-gprsssfAC APPLICATION-CONTEXT ::= {
+	CONTRACT					capGsmScfToGprsSsf
+	DIALOGUE MODE				structured
+	ABSTRACT SYNTAXES			{dialogue-abstract-syntax |
+								gsmSCF-gprsSSFAbstractSyntax}
+	APPLICATION CONTEXT NAME	id-ac-CAP-gsmSCF-gprsSSF-AC}
+-- 'capGsmScfToGprsSsf' and 'gsmSCF-gprsSSFAbstractSyntax' are defined in the present
+-- module.
+
+
+-- Contracts
+-- The CONTRACT definitions for CAP V3 for GPRS are updated in Rel-6.
+
+capGprsSsfToScf CONTRACT ::= {
+-- dialogue initiated by gprsSSF with InitialDPGPRS, ApplyChargingReportGPRS,
+-- EntityReleasedGPRS and EventReportGPRS Operations
+	INITIATOR CONSUMER OF		{gprsScfActivationPackage {cAPSpecificBoundSet} |
+								gprsEventHandlingPackage {cAPSpecificBoundSet} |
+								gprsChargingPackage |
+								gprsExceptionInformationPackage {cAPSpecificBoundSet}}
+	RESPONDER CONSUMER OF		{gprsConnectPackage {cAPSpecificBoundSet} |
+								gprsProcessingPackage |
+								gprsReleasePackage {cAPSpecificBoundSet} |
+								gprsEventHandlingPackage {cAPSpecificBoundSet} |
+								gprsTimerPackage |
+								gprsBillingPackage {cAPSpecificBoundSet} |
+								gprsChargingPackage |
+								gprsCancelPackage |
+								gprsChargeAdvicePackage {cAPSpecificBoundSet}}
+	ID							id-capGprsSsfTogsmScf}
+-- The OPERATION-PACKAGEs are defined in the present module.
+
+capGsmScfToGprsSsf CONTRACT ::= {
+-- dialogue initiated by gsmSCF with ApplyChargingGPRS, ActivityTestGPRS,
+-- CancelGPRS, FurnishChargingInformationGPRS, ReleaseGPRS,
+-- RequestReportGPRSEvent and SendChargingInformationGPRS Operations
+	INITIATOR CONSUMER OF		{gprsReleasePackage {cAPSpecificBoundSet} |
+								gprsEventHandlingPackage {cAPSpecificBoundSet} |
+								gprsBillingPackage {cAPSpecificBoundSet} |
+								gprsChargingPackage |
+								gprsActivityTestPackage |
+								gprsCancelPackage |
+								gprsChargeAdvicePackage {cAPSpecificBoundSet}}
+	ID							id-capGsmScfToGprsSsf}
+-- The OPERATION-PACKAGEs are defined in the present module.
+
+
+-- Operation Packages
+
+-- The OPERATION-PACKAGE definitions for CAP V3 for GPRS are updated in Rel-6.
+
+gprsScfActivationPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{initialDPGPRS {bound}}
+	ID					id-package-gprsScfActivation}
+
+gprsConnectPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{connectGPRS {bound}}
+	ID					id-package-gprsConnect}
+
+gprsProcessingPackage OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{continueGPRS }
+	ID					id-package-gprsContinue}
+
+gprsReleasePackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{releaseGPRS {bound}}
+	ID					id-package-gprsRelease}
+
+gprsEventHandlingPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{requestReportGPRSEvent {bound}}
+	SUPPLIER INVOKES	{eventReportGPRS {bound}}
+	ID					id-package-gprsEventHandling}
+
+gprsExceptionInformationPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{entityReleasedGPRS {bound}}
+	ID					id-package-gprsExceptionInformation}
+
+gprsTimerPackage OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{resetTimerGPRS }
+	ID					id-package-gprsTimer}
+
+gprsBillingPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{furnishChargingInformationGPRS {bound}}
+	ID					id-package-gprsBilling}
+
+gprsChargingPackage OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{applyChargingGPRS}
+	SUPPLIER INVOKES	{applyChargingReportGPRS}
+	ID					id-package-gprsCharging}
+
+gprsChargeAdvicePackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{sendChargingInformationGPRS {bound}}
+	ID					id-package-gprsChargeAdvice}
+
+gprsActivityTestPackage OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{activityTestGPRS}
+	ID					id-package-gprsActivityTest}
+
+gprsCancelPackage OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{cancelGPRS }
+	ID					id-package-gprsCancel}
+
+
+-- Abstract Syntaxes
+
+-- The ABSTRACT-SYNTAX definitions for CAP V3 for GPRS are updated in Rel-6.
+
+gprsSSF-gsmSCFAbstractSyntax ABSTRACT-SYNTAX ::= {
+	GenericGprsSSF-gsmSCF-PDUs
+	IDENTIFIED BY	id-as-gprsSSF-gsmSCF-AS}
+-- 'GenericGprsSSF-gsmSCF-PDUs' is defined in the present module.
+
+GenericGprsSSF-gsmSCF-PDUs ::= TCMessage {{GprsSsfToGsmScfInvokable},
+										  {GprsSsfToGsmScfReturnable}}
+-- 'GprsSsfToGsmScfInvokable' and 'GprsSsfToGsmScfReturnable' are defined in the present module.
+
+GprsSsfToGsmScfInvokable OPERATION ::= {
+	activityTestGPRS |
+	applyChargingGPRS |
+	applyChargingReportGPRS |
+	cancelGPRS |
+	connectGPRS {cAPSpecificBoundSet} |
+	entityReleasedGPRS {cAPSpecificBoundSet} |
+	eventReportGPRS {cAPSpecificBoundSet} |
+	furnishChargingInformationGPRS {cAPSpecificBoundSet} |
+	initialDPGPRS {cAPSpecificBoundSet} |
+	releaseGPRS {cAPSpecificBoundSet} |
+	requestReportGPRSEvent {cAPSpecificBoundSet} |
+	resetTimerGPRS |
+	sendChargingInformationGPRS {cAPSpecificBoundSet}}
+
+GprsSsfToGsmScfReturnable OPERATION ::= {
+	activityTestGPRS |
+	applyChargingGPRS |
+	applyChargingReportGPRS |
+	cancelGPRS |
+	connectGPRS {cAPSpecificBoundSet} |
+	continueGPRS |
+	entityReleasedGPRS {cAPSpecificBoundSet} |
+	furnishChargingInformationGPRS {cAPSpecificBoundSet} |
+	initialDPGPRS {cAPSpecificBoundSet} |
+	releaseGPRS {cAPSpecificBoundSet} |
+	requestReportGPRSEvent {cAPSpecificBoundSet} |
+	resetTimerGPRS |
+	sendChargingInformationGPRS {cAPSpecificBoundSet}}
+
+
+gsmSCF-gprsSSFAbstractSyntax ABSTRACT-SYNTAX ::= {
+	GenericGsmSCF-gprsSSF-PDUs
+	IDENTIFIED BY	id-as-gsmSCF-gprsSSF-AS}
+-- 'GenericGsmSCF-gprsSSF-PDUs' is defined in the present module.
+
+GenericGsmSCF-gprsSSF-PDUs ::= TCMessage {{GsmScfToGprsSsfInvokable},
+										  {GsmScfToGprsSsfReturnable}}
+-- 'GsmScfToGprsSsfInvokable' and' GsmScfToGprsSsfReturnable' are defined in the present module.
+
+GsmScfToGprsSsfInvokable OPERATION ::= {
+	activityTestGPRS |
+	applyChargingGPRS |
+	cancelGPRS |
+	furnishChargingInformationGPRS {cAPSpecificBoundSet} |
+	releaseGPRS {cAPSpecificBoundSet} |
+	requestReportGPRSEvent {cAPSpecificBoundSet} |
+	sendChargingInformationGPRS {cAPSpecificBoundSet}}
+
+GsmScfToGprsSsfReturnable OPERATION ::= {
+	activityTestGPRS |
+	applyChargingGPRS |
+	cancelGPRS |
+	furnishChargingInformationGPRS {cAPSpecificBoundSet} |
+	releaseGPRS {cAPSpecificBoundSet} |
+	requestReportGPRSEvent {cAPSpecificBoundSet} |
+	sendChargingInformationGPRS {cAPSpecificBoundSet}}
+
+END

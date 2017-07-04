@@ -1,0 +1,561 @@
+--<OSS.PDU>-- 
+
+CALMllsap {iso(1) standard(0) calm-ll-sap(21218) asnm-1(1)} 
+DEFINITIONS AUTOMATIC TAGS ::=
+BEGIN
+
+-- EXPORTS;
+
+IMPORTS 
+
+ITS-scuId FROM CALMmanagement { iso (1) standard (0) calm-management (24102) local (1) asnm-1 (1)}
+
+ErrStatus, COMMUPDOWN FROM CALMmsap { iso (1) standard (0) calm-management (24102) msap (3) asnm-1 (1)}
+
+MediumCost FROM CITSapplReq {iso(1) standard(0) cits-applReq (17423) asnm-1 (1)} 
+
+LogicalChannelType FROM CITSapplMgmtComm {iso(1) standard(0) cits-applMgmt (17419) comm (3)}
+;
+
+-- End of IMPORTS
+
+Alt::=INTEGER(0..65535) -- Resolution 0,1 m.
+
+CIaClass::=INTEGER{
+	unknown	(0),
+	ciac-1	(1),
+	ciac-2	(2),
+	ciac-3	(3)
+	} (0..255)
+
+CIclass::=INTEGER{
+	unknown	(0),
+	cic-l1	(1),
+	cic-l2	(2),
+	cic-l3	(3),
+	cic-l4	(4),
+	cic-l5	(5),
+	cic-il1	(254),
+	cic-il2	(255)
+	} (0..255)
+
+Link-ID::=SEQUENCE{	-- Link-ID
+	remoteCIID	EUI64,	-- CI in peer ITS-S(s)
+	localCIID	EUI64	-- Unique ID of local CI
+	}
+
+CIstatus::=INTEGER{
+	not-existent	(0),
+	existent	(1),
+	unknown	(2),
+	registered	(4),
+	active	(8),
+	connected	(16),
+	suspended	(64),
+	inactive	(128)
+	} (0..255)
+
+CommProfile::=SEQUENCE (SIZE(0..255)) OF I-Param
+
+Connect::=INTEGER{
+	automatic	(0),
+	manual	(255)
+	} (0..255)
+
+IN-SAPaddress::=INTEGER(0..255)
+
+DataRate::= INTEGER(0..4294967295)	-- in 100 bit/s
+
+DataRatesNW::=SEQUENCE{	-- available to the appl.
+	minimum	DataRate,	-- minimum possible value
+	maximum	DataRate	-- maximum possible value
+	}
+
+Directivity::=SEQUENCE{
+	mode	DirMode,
+	dirPredef	INTEGER(0..255),	-- 0: see dirVar
+			-- >0: predefined direction
+	fill	BIT STRING (SIZE(7)), 
+	dirVar	SEQUENCE (SIZE(0..1)) OF DirVar
+	}
+
+DirMode::=INTEGER{
+	fixed	(0),
+	tracking	(255)
+	} (0..255)
+
+
+DirVar::=SEQUENCE{
+	bsAzimuth	INTEGER(-32768..32767) ,	-- -180 - +180
+	bsElevation	INTEGER(-128..127) ,	-- -90 - +90
+	openHorizontal	INTEGER(0..255) ,	-- 0 - 180
+	openVertical	INTEGER(0..255)	-- 0 - 180
+	}
+
+TxPowMax::=INTEGER(0..255) -- unit, minimum value and step size defined by access technology (medium)
+
+Errors::=SEQUENCE (SIZE(0..255)) OF SingleError
+
+SingleError::=SEQUENCE{
+	paramNo	INTEGER(0..255), -- ref number of parameter
+	errStatus	ErrStatus	-- IS24102-3
+	}
+
+Gs::=INTEGER(0..65535) -- Resolution 0,01 m/s.
+
+KineVectIn::=SEQUENCE{
+	dut	Time48IAT, -- date and universal time
+	lat	Lat, -- latitude
+	lon	Lon, -- longitude
+	alt	Alt, -- altitude / elevation
+	gs	Gs, -- ground speed
+	tta	Tta -- true track angle
+	}
+
+KineVectOut::=SEQUENCE{
+	dut	Time48IAT, -- date and universal time
+	fill	BIT STRING (SIZE(5)), -- used for octet alignment in PER
+	options	SEQUENCE (SIZE(0..5)) OF KineVectOptions -- options
+	}
+
+KineVectOptions::=CHOICE{
+	lat	Lat, -- latitude
+	lon	Lon, -- longitude
+	alt	Alt, -- altitude
+	gs	Gs, -- ground speed
+	tta	Tta -- true track angle
+	}
+
+Lat::=INTEGER(-2147483648..2147483647) -- equals ± pi/2
+
+Lon::=INTEGER(-2147483648..2147483647) -- equals ± pi
+
+LLserviceAddr::=SEQUENCE{  
+	csap	IN-SAPaddress,
+	linkID	Link-ID
+	}
+
+
+MACaddress::=OCTET STRING (SIZE(6))
+
+MediumUsage::=SEQUENCE{
+	receive	INTEGER(0..255),
+	transmit	INTEGER(0..255)
+	}
+
+MedType::=INTEGER{
+	unknown	(0),
+	any	(1),
+	iso21212	(2), -- 2G
+	iso21213	(3), -- 3G
+	iso21214	(4), -- IR
+	iso21215	(5), -- M5
+	iso21216	(6), -- MM
+	iso25112	(7), -- 802.16e
+	iso25113	(8), -- HC-SDMA
+	iso29283	(9), -- 802.20
+	iso17515	(10), -- LTE
+	iso15628	(128), -- DSRC
+	can	(254),
+	ethernet	(255)
+	} (0..255)
+
+MedUseObsTime::=SEQUENCE {
+	value	INTEGER(0..1023), -- valid parameter number (10 bits in PER)
+	unit	TimeUnit
+	} -- 2 octets in PER
+
+TimeUnit::=INTEGER{
+	microseconds	(0),
+	milliseconds	(1),
+	seconds	(2),
+	minutes	(3),
+	hours	(4),
+	days	(5),
+	weeks	(6),
+	months	(7),
+	years	(8)
+	}(0..63) -- 6 bits in PER
+
+Notify::=SEQUENCE (SIZE(0..255)) OF INTEGER(0..255) -- valid parameter number
+
+
+PeerRXpower::=INTEGER(0..255)
+
+PARAMS ::= CLASS {
+      &paramRef INTEGER(0..255),
+      &Parameter
+	}
+
+IPARAM ::= PARAMS
+
+I-Params IPARAM::={errors | commProfile | properties | manuDeviceID | iTS-scuId | medID | localCIID | timeoutReg | macAddress | macAddrTemp | ciClass | ciaClass | ciStatus | notify | medType | regInfo | connect | simPin | providerInfo | minUserPriority | queueLevel | queueLowTh | queueAlarmTh | distancePeer | commRangeRef | timeOfLastRecep | inactTimeLimit | mediumUsage | medUseObsTime | peerMAC | virtualCIs | minPrioCrossCI | rxSens | txPower | txPowMax | peerRXpower | dataRate | dataRateNW | dataRatesNW | dataRateNWreq | directivity | blockLength | freeAirTime | frameLengthMax | kineVectIn | kineVectOut | cost | reliability | logicalChannel, ...}
+
+I-Param::=SEQUENCE{
+	paramNo	IPARAM.&paramRef({I-Params}),
+	parameter	IPARAM.&Parameter({I-Params}{@paramNo})
+	}
+
+errors	IPARAM::={&paramRef 0, &Parameter Errors}
+commProfile	IPARAM::={&paramRef 2, &Parameter CommProfile}
+properties	IPARAM::={&paramRef 3, &Parameter Properties}
+manuDeviceID	IPARAM::={&paramRef 4, &Parameter UTF8String}
+iTS-scuId	IPARAM::={&paramRef 5, &Parameter ITS-scuId}
+medID	IPARAM::={&paramRef 6, &Parameter MedID}
+localCIID	IPARAM::={&paramRef 7, &Parameter EUI64}
+timeoutReg	IPARAM::={&paramRef 8, &Parameter INTEGER(0..255)}
+macAddress	IPARAM::={&paramRef 9, &Parameter MACaddress}
+macAddrTemp	IPARAM::={&paramRef 10, &Parameter MACaddress}
+ciClass	IPARAM::={&paramRef 11, &Parameter CIclass}
+ciaClass	IPARAM::={&paramRef 12, &Parameter CIaClass}
+ciStatus	IPARAM::={&paramRef 13, &Parameter CIstatus}
+notify	IPARAM::={&paramRef 16, &Parameter Notify}
+medType	IPARAM::={&paramRef 17, &Parameter MedType}
+regInfo	IPARAM::={&paramRef 18, &Parameter RegInfo}
+connect	IPARAM::={&paramRef 19, &Parameter Connect}
+simPin	IPARAM::={&paramRef 20, &Parameter SimPin}
+providerInfo	IPARAM::={&paramRef 21, &Parameter ProviderInfo}
+minUserPriority	IPARAM::={&paramRef 22, &Parameter UserPriority}	-- DEFAULT 0
+queueLevel	IPARAM::={&paramRef 23, &Parameter QueueLevel}
+queueLowTh	IPARAM::={&paramRef 24, &Parameter QueueValue}
+queueAlarmTh	IPARAM::={&paramRef 25, &Parameter QueueValue}
+distancePeer	IPARAM::={&paramRef 26, &Parameter Distance}
+commRangeRef	IPARAM::={&paramRef 27, &Parameter Distance}
+timeOfLastRecep	IPARAM::={&paramRef 28, &Parameter Time48IAT}
+  -- 1 ms resolution
+inactTimeLimit	IPARAM::={&paramRef 29, &Parameter INTEGER(0..65535)}
+  -- milliseconds
+mediumUsage	IPARAM::={&paramRef 30, &Parameter MediumUsage}
+medUseObsTime	IPARAM::={&paramRef 31, &Parameter MedUseObsTime}
+peerMAC	IPARAM::={&paramRef 32, &Parameter MACaddress}
+virtualCIs	IPARAM::={&paramRef 33, &Parameter VirtualCIs}
+minPrioCrossCI	IPARAM::={&paramRef 34, &Parameter UserPriority}
+rxSens	IPARAM::={&paramRef 35, &Parameter INTEGER(0..255)}
+txPower	IPARAM::={&paramRef 36, &Parameter INTEGER(0..255)}
+txPowMax	IPARAM::={&paramRef 37, &Parameter TxPowMax}
+peerRXpower	IPARAM::={&paramRef 38, &Parameter PeerRXpower}
+dataRate	IPARAM::={&paramRef 39, &Parameter DataRate}
+dataRateNW	IPARAM::={&paramRef 40, &Parameter DataRate}
+dataRatesNW	IPARAM::={&paramRef 41, &Parameter DataRatesNW}
+dataRateNWreq	IPARAM::={&paramRef 42, &Parameter DataRate}
+directivity	IPARAM::={&paramRef 43, &Parameter Directivity}
+blockLength	IPARAM::={&paramRef 44, &Parameter INTEGER(0..65535)}
+freeAirTime	IPARAM::={&paramRef 45, &Parameter INTEGER(0..255)}
+  -- measured in milliseconds
+frameLengthMax	IPARAM::={&paramRef 46, &Parameter INTEGER(0..255)}
+  -- measured in milliseconds
+kineVectIn	IPARAM::={&paramRef 47, &Parameter KineVectIn}
+kineVectOut	IPARAM::={&paramRef 48, &Parameter KineVectOut}
+cost	IPARAM::={&paramRef 49, &Parameter MediumCost}
+reliability	IPARAM::={&paramRef 50, &Parameter INTEGER(0..255)}
+logicalChannel	IPARAM::={&paramRef 51, &Parameter LogicalChannels}
+
+Time48IAT ::= INTEGER { utcStartOf2004(0), oneMillisecAfterUTCStartOf2004(1) } (0..281474976710655) -- International Atomic Time with one millisecond steps
+
+I-ParamNo::=INTEGER{
+	errors	(0),
+	commProfile	(2),
+	properties	(3),
+	manuDeviceID	(4),
+	iTS-scuId	(5),
+	medID	(6),
+	localCIID	(7),
+	timeoutReg	(8),
+	macAddress	(9),
+	macAddrTemp	(10),
+	ciClass	(11),
+	ciaClass	(12),
+	ciStatus	(13),
+	notify	(16),
+	medType	(17),
+	regInfo	(18),
+	connect	(19),
+	simPin	(20),
+	providerInfo	(21),
+	minUserPriority	(22),
+	queueLevel	(23),
+	queueLowTh	(24),
+	queueAlarmTh	(25),
+	distancePeer	(26),
+	commRangeRef	(27),
+	timeOfLastRecep	(28),
+	inactTimeLimit	(29),
+	mediumUsage	(30),
+	medUseObsTime	(31),
+	peerMAC	(32),
+	virtualCI	(33),
+	minPrioCrossCI	(34),
+	rxSens	(35),
+	txPower	(36),
+	txPowMax	(37),
+	peerRXpower	(38),
+	dataRate	(39),
+	dataRateNW	(40),
+	dataRatesNW	(41),
+	dataRateNWreq	(42),
+	directivity	(43),
+	blockLength	(44),
+	freeAirTime	(45),
+	frameLengthMax	(46),
+	kineVectIn	(47),
+	kineVectOut	(48),
+	cost	(49),
+	reliability	(50),
+	logicalChannel	(51)
+	} (0..255)
+
+SimPin::=OCTET STRING
+
+LogicalChannels::=SEQUENCE (SIZE(0..255)) OF LogicalChannelType
+
+Distance::=INTEGER(0..65535)	-- measured in 1/10 m
+
+MedID::=INTEGER(0..255)
+
+Properties::=SEQUENCE (SIZE(0..255)) OF I-Param -- only selected parameters
+
+ProviderInfo::=SEQUENCE{
+	provName	OCTET STRING (SIZE(0..255)), -- Name of provider
+	apn	OCTET STRING (SIZE(0..255)), -- Name of access point
+	username	OCTET STRING (SIZE(0..255)), -- Log-in name of user
+	password	OCTET STRING (SIZE(0..255)) -- Password for log-in
+	}
+
+QueueLevel::=SEQUENCE{
+	priority	UserPriority,
+	level	QueueValue
+	}
+
+QueueValue::=INTEGER(0..255)
+
+RegInfo::=SEQUENCE{
+	status	RegInfoStatus,
+	limits	RegulatoryScheme
+	}
+
+RegInfoStatus::=INTEGER{
+	notApplicable	(0),
+	invalid	(1),
+	new	(254),
+	valid	(255)
+	} (0..255)
+
+
+
+REGULSCHEME::=CLASS {
+	&regID	INTEGER(0..255),
+	&RegInfo
+	}
+
+
+RegulatoryScheme::=SEQUENCE{
+	reguIdent	REGULSCHEME.&regID({RegulSchemes}),
+	reguInfo	REGULSCHEME.&RegInfo({RegulSchemes}{@reguIdent})
+	}
+
+RegulSchemes REGULSCHEME::={nullRegScheme, ...} -- to be filled
+
+nullRegScheme REGULSCHEME::={&regID 0, &RegInfo NULL} 
+
+
+Tta::=INTEGER(0..65535) -- Resolution 0,1°.
+
+UserPriority::=INTEGER(0..255)
+
+VirtualCIs::=SEQUENCE (SIZE(0..65535))OF RemoteCIID
+
+INSAP ::= COMMUPDOWN
+
+INsapspsdown INSAP::={inUnitdataRq | inDataAckRq | inReplyAckRq | inReplyUpdateRq, ...}
+
+INsapPrimitivesDown::=SEQUENCE{
+	spRef	INSAP.&primitiveRef({INsapspsdown}),
+	servPrimitive	INSAP.&Primitive({INsapspsdown}{@spRef})
+	}
+
+inUnitdataRq	INSAP::={&primitiveRef 0, &Primitive IN-UNITDATA-request}
+inDataAckRq	INSAP::={&primitiveRef 1, &Primitive IN-DATA-ACK-request}
+inReplyAckRq	INSAP::={&primitiveRef 2, &Primitive IN-REPLY-ACK-request}
+inReplyUpdateRq	INSAP::={&primitiveRef 3, &Primitive IN-REPLY-UPDATE-request}
+
+IN-UNITDATA-request::=SEQUENCE{
+	source-addr	LLserviceAddr,
+	dest-addr	LLserviceAddr,
+	data	INdata,
+	priority	UserPriority,
+	accessParams	AccessParameters
+	}
+
+IN-DATA-ACK-request::=SEQUENCE{
+	source-addr	LLserviceAddr,
+	dest-addr	LLserviceAddr,
+	data	INdata,
+	priority	UserPriority,
+	serviceClass	MACServiceClass
+	}
+
+IN-REPLY-ACK-request::=SEQUENCE{
+	source-addr	LLserviceAddr,
+	dest-addr	LLserviceAddr,
+	data	INdata,
+	priority	UserPriority,
+	serviceClass	MACServiceClass
+	}
+
+IN-REPLY-UPDATE-request::=SEQUENCE{
+	source-addr	LLserviceAddr,
+	data	INdata
+	}
+
+INSAPUP::= COMMUPDOWN
+
+INsapspsup INSAP::={inUnitdataInd | inUnitdataStatusInd | inDataAckInd | inDataAckStatusInd | inReplyInd | inReplyStatusInd | inReplyUpdateStatusInd, ...}
+
+INsapPrimitivesUp::=SEQUENCE{
+	spRef	INSAP.&primitiveRef ({INsapspsup}),
+	servPrimitive	INSAP.&Primitive ({INsapspsup}{@spRef})
+	}
+
+inUnitdataInd	INSAP::={&primitiveRef 0, &Primitive IN-UNITDATA-indication}
+inUnitdataStatusInd	INSAP::={&primitiveRef 1, &Primitive IN-UNITDATA-STATUS-indication}
+inDataAckInd	INSAP::={&primitiveRef 2, &Primitive IN-DATA-ACK-indication}
+inDataAckStatusInd	INSAP::={&primitiveRef 3, &Primitive IN-DATA-ACK-STATUS-indication}
+inReplyInd	INSAP::={&primitiveRef 4, &Primitive IN-REPLY-indication}
+inReplyStatusInd	INSAP::={&primitiveRef 5, &Primitive IN-REPLY-STATUS-indication}
+inReplyUpdateStatusInd	INSAP::={&primitiveRef 6, &Primitive IN-REPLY-UPDATE-STATUS-indication}
+
+IN-UNITDATA-indication::=SEQUENCE{
+	source-addr	LLserviceAddr,
+	dest-addr	LLserviceAddr,
+	data	INdata,
+	priority	UserPriority,
+	accessParams	AccessParameters
+	}
+
+IN-UNITDATA-STATUS-indication::=SEQUENCE{
+	source-addr	LLserviceAddr,
+	dest-addr	LLserviceAddr,
+	data	INdata,
+	priority	UserPriority,
+	accessParams	AccessParameters,
+	txStatus	INtxStatus
+	}
+
+IN-DATA-ACK-indication::=SEQUENCE{
+	source-addr	LLserviceAddr,
+	dest-addr	LLserviceAddr,
+	data	INdata,
+	priority	UserPriority,
+	serviceClass	MACServiceClass
+	}
+
+IN-DATA-ACK-STATUS-indication::=SEQUENCE{
+	source-addr	LLserviceAddr,
+	dest-addr	LLserviceAddr,
+	data	INdata,
+	priority	UserPriority,
+	serviceClass	MACServiceClass,
+	status	INtxStatus
+	}
+
+IN-REPLY-indication::=SEQUENCE{
+	source-addr	LLserviceAddr,
+	dest-addr	LLserviceAddr,
+	data	INdata,
+	priority	UserPriority,
+	serviceClass	MACServiceClass
+	}
+
+IN-REPLY-STATUS-indication::=SEQUENCE{
+	source-addr	LLserviceAddr,
+	status	INtxStatus
+	}
+
+IN-REPLY-UPDATE-STATUS-indication::=SEQUENCE{
+	source-addr	LLserviceAddr,
+	data	INdata,
+	priority	UserPriority,
+	accessParams	AccessParameters,
+	txStatus	INtxStatus
+	}
+
+INdata::=OCTET STRING (SIZE(0..65535))
+
+ACCPARAM ::= PARAMS
+
+nullAP ACCPARAM::={&paramRef 0, &Parameter NullType}
+
+AccessParameters::=SEQUENCE{
+	apRef	ACCPARAM.&paramRef ({AccParams}),
+	aParameter	ACCPARAM.&Parameter ({AccParams}{@apRef})
+	}
+
+AccParams ACCPARAM::={nullAP, ...}
+
+NullType::=NULL
+
+MACServiceClass::=INTEGER{
+	macAckNotUsed	(0),
+	macAckUsed	(255)
+	} (0..255)
+
+INtxStatus::=INTEGER{
+	success	(0),
+	queueFull	(1),
+	timeout	(2),
+	priority (3),
+	unspecFailure	(255)
+	} (0..255)
+
+VCIserialNumber::=INTEGER(0..65535)
+
+EUI64::=OCTET STRING (SIZE(8))
+
+LegacyCIID::=SEQUENCE{
+	selector1	OneOCTETones,
+	iTS-scuId	ITS-scuId,
+	selector2	TwoOCTETones,
+	medID	MedID,
+	vciSerialNumber	VCIserialNumber
+	}
+
+RemoteCIID::=EUI64
+
+OneOCTETones::=INTEGER{
+	all	(255)
+	} (0..255)
+
+TwoOCTETones::=INTEGER{
+	all	(65535)
+	} (0..65535)
+
+EUI64MAC48::=SEQUENCE{
+	oui	MACoui,
+	selector2	TwoOCTETones,
+	ext	MACext
+	}
+
+MACoui::=SEQUENCE{
+	uoi1	INTEGER(0..63),
+	ulBit	BOOLEAN,
+	igBIT	BOOLEAN,
+	uoi2	OCTET STRING (SIZE(2))
+	}
+
+MACext::=OCTET STRING (SIZE(3))
+
+MACmcID::=SEQUENCE{
+	ucgc	INTEGER(0..63),
+	mc	INTEGER{all (3)} (0..3),
+	serial	OCTET STRING (SIZE(2))
+	}
+
+
+-- Values
+
+version INTEGER(0..255)::= 2 -- insert version value
+
+
+
+END
+

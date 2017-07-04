@@ -1,0 +1,232 @@
+--$Revision: 6.0 $
+--*********************************************************************
+--
+-- 1990 - J.Ostell
+-- Version 3.0 - June 1994
+--
+--*********************************************************************
+--*********************************************************************
+--
+--  EMBL specific data
+--  This block of specifications was developed by Reiner Fuchs of EMBL
+--  Updated by J.Ostell, 1994
+--
+--*********************************************************************
+
+EMBL-General DEFINITIONS ::=
+BEGIN
+
+EXPORTS EMBL-dbname, EMBL-xref, EMBL-block;
+
+IMPORTS Date, Object-id FROM NCBI-General;
+
+EMBL-dbname ::= CHOICE {
+    code ENUMERATED {
+        embl(0),
+        genbank(1),
+        ddbj(2),
+        geninfo(3),
+        medline(4),
+        swissprot(5),
+        pir(6),
+        pdb(7),
+        epd(8),
+        ecd(9),
+        tfd(10),
+        flybase(11),
+        prosite(12),
+        enzyme(13),
+        mim(14),
+        ecoseq(15),
+        hiv(16) ,
+        other (255) } ,
+    name    VisibleString }
+
+EMBL-xref ::= SEQUENCE {
+    dbname EMBL-dbname,
+    id SEQUENCE OF Object-id }
+
+EMBL-block ::= SEQUENCE {
+    class ENUMERATED {
+        not-set(0),
+        standard(1),
+        unannotated(2),
+        other(255) } DEFAULT standard,
+    div ENUMERATED {
+        fun(0),
+        inv(1),
+        mam(2),
+        org(3),
+        phg(4),
+        pln(5),
+        pri(6),
+        pro(7),
+        rod(8),
+        syn(9),
+        una(10),
+        vrl(11),
+        vrt(12),
+        pat(13),
+        est(14),
+        sts(15),
+        other (255) } OPTIONAL,
+    creation-date Date,
+    update-date Date,
+    extra-acc SEQUENCE OF VisibleString OPTIONAL,
+    keywords SEQUENCE OF VisibleString OPTIONAL,
+    xref SEQUENCE OF EMBL-xref OPTIONAL }
+
+END
+
+--*********************************************************************
+--
+--  SWISSPROT specific data
+--  This block of specifications was developed by Mark Cavanaugh of
+--      NCBI working with Amos Bairoch of SWISSPROT
+--
+--*********************************************************************
+
+SP-General DEFINITIONS ::=
+BEGIN
+
+EXPORTS SP-block;
+
+IMPORTS Date, Dbtag FROM NCBI-General
+        Seq-id FROM NCBI-Seqloc;
+
+SP-block ::= SEQUENCE {         -- SWISSPROT specific descriptions
+    class ENUMERATED {
+        not-set (0) ,
+        standard (1) ,      -- conforms to all SWISSPROT checks
+        prelim (2) ,        -- only seq and biblio checked
+        other (255) } ,
+    extra-acc SET OF VisibleString OPTIONAL ,  -- old SWISSPROT ids
+    imeth BOOLEAN DEFAULT FALSE ,  -- seq known to start with Met
+    plasnm SET OF VisibleString OPTIONAL,  -- plasmid names carrying gene
+    seqref SET OF Seq-id OPTIONAL,         -- xref to other sequences
+    dbref SET OF Dbtag OPTIONAL ,          -- xref to non-sequence dbases
+    keywords SET OF VisibleString OPTIONAL , -- keywords
+    created Date OPTIONAL ,         -- creation date
+    sequpd Date OPTIONAL ,          -- sequence update
+    annotupd Date OPTIONAL }        -- annotation update
+
+END
+
+--*********************************************************************
+--
+--  PIR specific data
+--  This block of specifications was developed by Jim Ostell of
+--      NCBI
+--
+--*********************************************************************
+
+PIR-General DEFINITIONS ::=
+BEGIN
+
+EXPORTS PIR-block;
+
+IMPORTS Seq-id FROM NCBI-Seqloc;
+
+PIR-block ::= SEQUENCE {          -- PIR specific descriptions
+    had-punct BOOLEAN OPTIONAL ,      -- had punctuation in sequence ?
+    host VisibleString OPTIONAL ,
+    source VisibleString OPTIONAL ,     -- source line
+    summary VisibleString OPTIONAL ,
+    genetic VisibleString OPTIONAL ,
+    includes VisibleString OPTIONAL ,
+    placement VisibleString OPTIONAL ,
+    superfamily VisibleString OPTIONAL ,
+    keywords SEQUENCE OF VisibleString OPTIONAL ,
+    cross-reference VisibleString OPTIONAL ,
+    date VisibleString OPTIONAL ,
+    seq-raw VisibleString OPTIONAL ,  -- seq with punctuation
+    seqref SET OF Seq-id OPTIONAL }         -- xref to other sequences
+
+END
+
+--*********************************************************************
+--
+--  GenBank specific data
+--  This block of specifications was developed by Jim Ostell of
+--      NCBI
+--
+--*********************************************************************
+
+GenBank-General DEFINITIONS ::=
+BEGIN
+
+EXPORTS GB-block;
+
+IMPORTS Date FROM NCBI-General;
+
+GB-block ::= SEQUENCE {          -- GenBank specific descriptions
+    extra-accessions SEQUENCE OF VisibleString OPTIONAL ,
+    source VisibleString OPTIONAL ,     -- source line
+    keywords SEQUENCE OF VisibleString OPTIONAL ,
+    origin VisibleString OPTIONAL,
+    date VisibleString OPTIONAL ,       -- OBSOLETE old form Entry Date
+    entry-date Date OPTIONAL ,          -- replaces date
+    div VisibleString OPTIONAL ,        -- GenBank division
+    taxonomy VisibleString OPTIONAL }   -- continuation line of organism
+
+END
+
+--**********************************************************************
+-- PRF specific definition
+--    PRF is a protein sequence database crated and maintained by
+--    Protein Research Foundation, Minoo-city, Osaka, Japan.
+--
+--    Written by A.Ogiwara, Inst.Chem.Res. (Dr.Kanehisa's Lab),
+--            Kyoto Univ., Japan
+--
+--**********************************************************************
+
+PRF-General DEFINITIONS ::=
+BEGIN
+
+EXPORTS PRF-block;
+
+PRF-block ::= SEQUENCE {
+      extra-src       PRF-ExtraSrc OPTIONAL,
+      keywords        SEQUENCE OF VisibleString OPTIONAL
+}
+
+PRF-ExtraSrc ::= SEQUENCE {
+      host    VisibleString OPTIONAL,
+      part    VisibleString OPTIONAL,
+      state   VisibleString OPTIONAL,
+      strain  VisibleString OPTIONAL,
+      taxon   VisibleString OPTIONAL
+}
+
+END
+
+--*********************************************************************
+--
+--  PDB specific data
+--  This block of specifications was developed by Jim Ostell and
+--      Steve Bryant of NCBI
+--
+--*********************************************************************
+
+PDB-General DEFINITIONS ::=
+BEGIN
+
+EXPORTS PDB-block;
+
+IMPORTS Date FROM NCBI-General;
+
+PDB-block ::= SEQUENCE {          -- PDB specific descriptions
+    deposition Date ,         -- deposition date  month,year
+    class VisibleString ,
+    compound SEQUENCE OF VisibleString ,
+    source SEQUENCE OF VisibleString ,
+    exp-method VisibleString OPTIONAL ,  -- present if NOT X-ray diffraction
+    replace PDB-replace OPTIONAL } -- replacement history
+
+PDB-replace ::= SEQUENCE {
+    date Date ,
+    ids SEQUENCE OF VisibleString }   -- entry ids replace by this one
+
+END
+

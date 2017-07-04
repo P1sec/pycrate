@@ -1,0 +1,209 @@
+POCChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) pocChargingDataTypes (7) asn1Module (0) version1 (0)}
+
+DEFINITIONS IMPLICIT TAGS	::=
+
+BEGIN
+
+-- EXPORTS everything 
+
+IMPORTS	
+
+CallDuration,
+LocalSequenceNumber,
+ManagementExtensions,
+NodeAddress,
+RecordType,
+ServiceContextID,
+TimeStamp
+FROM GenericChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) genericChargingDataTypes (0) asn1Module (0) version1 (0)}
+
+GSNAddress, 
+NodeID 
+FROM GPRSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) gprsChargingDataTypes (2) asn1Module (0) version1 (0)}
+
+IMS-Charging-Identifier,
+Incomplete-CDR-Indication,
+InterOperatorIdentifiers,
+InvolvedParty,
+MessageBody,
+Media-Components-List,
+Session-Id,
+SIP-Method
+FROM IMSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) imsChargingDataTypes (4) asn1Module (0) version1 (0)}
+
+;
+
+--
+--  POC RECORDS
+--
+
+POCRecord	::= CHOICE 
+--
+-- Record values 80..81 are PoC specific
+-- 
+{
+	pPFRecord			[80] PPFRecord,
+	cPFRecord			[81] CPFRecord
+}
+
+PPFRecord 	::= SET
+{
+	recordType						[0] RecordType,
+	retransmission					[1] NULL OPTIONAL,
+	sIP-Method						[2] SIP-Method OPTIONAL,
+	nodeAddress						[3] NodeAddress	OPTIONAL,
+	session-Id						[4] Session-Id OPTIONAL,
+	calling-Party-Address			[5] InvolvedParty OPTIONAL,
+	called-Party-Address			[6] InvolvedParty OPTIONAL,
+	servedParty						[7] GraphicString OPTIONAL,
+	serviceRequestTimeStamp			[8] TimeStamp OPTIONAL,
+	serviceDeliveryStartTimeStamp	[9] TimeStamp OPTIONAL,
+	serviceDeliveryEndTimeStamp		[10] TimeStamp OPTIONAL,
+	recordOpeningTime				[11] TimeStamp OPTIONAL,
+	recordClosureTime				[12] TimeStamp OPTIONAL,
+	interOperatorIdentifiers		[13] InterOperatorIdentifiers OPTIONAL,
+	localRecordSequenceNumber		[14] LocalSequenceNumber OPTIONAL,
+	recordSequenceNumber			[15] INTEGER OPTIONAL,
+	causeForRecordClosing			[16] CauseForRecordClosing OPTIONAL,
+	incomplete-CDR-Indication		[17] Incomplete-CDR-Indication OPTIONAL,
+	iMS-Charging-Identifier			[18] IMS-Charging-Identifier OPTIONAL,
+	list-Of-SDP-Media-Components	[19] SEQUENCE OF Media-Components-List OPTIONAL,
+	gGSNaddress						[20] NodeAddress OPTIONAL,
+	serviceReasonReturnCode			[21] UTF8String	OPTIONAL,
+	list-Of-Message-Bodies			[22] SEQUENCE OF MessageBody OPTIONAL,
+	userLocationInfo				[23] OCTET STRING OPTIONAL,
+	poCInformation					[24] POCInformation	OPTIONAL,
+	recordExtensions				[25] ManagementExtensions OPTIONAL,
+	serviceContextID				[26] ServiceContextID OPTIONAL
+}
+
+CPFRecord		::=	SET
+{
+	recordType						[0] RecordType,
+	retransmission					[1] NULL OPTIONAL,
+	sIP-Method						[2] SIP-Method OPTIONAL,
+	nodeAddress						[3] NodeAddress OPTIONAL,
+	session-Id						[4] Session-Id OPTIONAL,
+	calling-Party-Address			[5] InvolvedParty OPTIONAL,
+	called-Party-Address			[6] InvolvedParty OPTIONAL,
+	servedParty						[7] GraphicString OPTIONAL,
+	serviceRequestTimeStamp			[8] TimeStamp OPTIONAL,
+	serviceDeliveryStartTimeStamp	[9] TimeStamp OPTIONAL,
+	serviceDeliveryEndTimeStamp		[10] TimeStamp OPTIONAL,
+	recordOpeningTime				[11] TimeStamp OPTIONAL,
+	recordClosureTime				[12] TimeStamp OPTIONAL,
+	interOperatorIdentifiers		[13] InterOperatorIdentifiers OPTIONAL,
+	localRecordSequenceNumber		[14] LocalSequenceNumber OPTIONAL,
+	recordSequenceNumber			[15] INTEGER OPTIONAL,
+	causeForRecordClosing			[16] CauseForRecordClosing OPTIONAL,
+	incomplete-CDR-Indication		[17] Incomplete-CDR-Indication OPTIONAL,
+	iMS-Charging-Identifier			[18] IMS-Charging-Identifier OPTIONAL,
+	list-Of-SDP-Media-Components	[19] SEQUENCE OF Media-Components-List OPTIONAL,
+	gGSNaddress						[20] NodeAddress OPTIONAL,
+	serviceReasonReturnCode			[21] UTF8String	OPTIONAL,
+	list-Of-Message-Bodies			[22] SEQUENCE OF MessageBody OPTIONAL,
+	userLocationInfo				[23] OCTET STRING OPTIONAL,
+	poCInformation					[24] POCInformation OPTIONAL,
+	recordExtensions				[25] ManagementExtensions OPTIONAL,
+	serviceContextID				[26] ServiceContextID OPTIONAL
+}
+
+--
+--  PoC DATA TYPES
+--
+
+AccessPriority			::= ENUMERATED
+{
+	pre-emptive 		   (0),
+	high			       (1),
+	normal 			 	   (2),
+	low				       (3)
+}
+
+CauseForRecordClosing	::= ENUMERATED
+{
+	normalRelease					(0),
+	abnormalRelease					(1),
+	serviceChange					(2), -- e.g. change in media due to Re-Invite
+	volumeLimit						(3),
+	timeLimit						(4),
+	numberofTalkBurstLimit			(5),
+	maxChangeCond					(6),
+	sessionTypeChange				(7),
+	managementIntervention			(8)
+}
+
+ChangeCondition			::= ENUMERATED
+{
+	serviceChange					(0), -- e.g. change in media due to Re-Invite
+	volumeLimit						(1),
+	timeLimit						(2),
+	numberofTalkBurstLimit			(3),
+	numberofActiveParticipants		(4),
+	tariffTime						(5)
+}
+
+ListofTalkBurstExchange			::= SET
+{
+	number-Of-Talk-Bursts			 [1] INTEGER OPTIONAL,
+	talk-Burst-Volume				 [2] INTEGER OPTIONAL,		-- measured in octets
+	talk-Bursts-Time				 [3] CallDuration OPTIONAL,
+	number-Of-Received-Talk-Bursts	 [4] INTEGER OPTIONAL,
+	received-Talk-Burst-Volume		 [5] INTEGER OPTIONAL,		-- measured in octets
+	received-Talk-Burst-Time		 [6] CallDuration OPTIONAL,
+	changeCondition					 [7] ChangeCondition OPTIONAL,
+	changeTime						 [8] TimeStamp,
+	numberofParticipants			 [9] INTEGER OPTIONAL
+}
+
+ParticipatingType				::=  ENUMERATED
+{
+	normal				(0),
+	nW-PoC-Box			(1),
+	uE-PoC-Box			(2)
+}
+
+POCEventType					::=  ENUMERATED
+{
+	normal					(0),
+ 	instantPersonalAlert				(1),
+ 	pOCGroupAdvertisement				(2),
+	earlySessionSettingup				(3),
+	pOCTalkBurst				(4)
+}
+
+POCInformation			::= SET
+{
+	pOCSessionType				[1] POCSessionType OPTIONAL,
+	numberofParticipants		[2] INTEGER OPTIONAL,
+	listofParticipants			[3] SEQUENCE OF POCParticipant OPTIONAL,
+	listofTalkBurstExchange		[4] SEQUENCE OF ListofTalkBurstExchange OPTIONAL,
+	pOCControllingAddress		[5] UTF8String OPTIONAL,
+	pOCGroupName				[6] UTF8String OPTIONAL,
+	pOCSessionId				[7] UTF8String OPTIONAL,
+	pOCSessionInitiationType	[8] POCSessionInitType OPTIONAL,
+	pOCEventType				[9] POCEventType OPTIONAL
+}
+
+POCParticipant			::= SET
+{
+	called-party-address			[1]	InvolvedParty,
+	participant-access-priority		[2]	AccessPriority OPTIONAL,
+	user-participating-type			[3]	ParticipatingType OPTIONAL
+}
+
+POCSessionInitType		::= ENUMERATED
+{
+	pre-established			(0),
+	on-demand	  			(1)
+}
+
+POCSessionType			::= ENUMERATED
+{
+	one-to-one-session				(0),
+	chat-group-session				(1),
+	pre-arranged-group-session		(2),
+	ad-hoc-group-session			(3)
+}
+
+END

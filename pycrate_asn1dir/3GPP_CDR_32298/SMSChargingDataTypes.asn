@@ -1,0 +1,236 @@
+SMSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5)  smsChargingDataTypes (10) asn1Module (0) version1 (0)}
+
+DEFINITIONS IMPLICIT TAGS	::=
+
+BEGIN
+
+-- EXPORTS everything
+
+IMPORTS	
+
+DataVolume 
+FROM CSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) csChargingDataTypes (1) asn1Module (0) version1 (0)}
+
+DiameterIdentity,
+LocalSequenceNumber,
+ManagementExtensions,
+MessageReference,
+MSISDN, 
+MSTimeZone,
+NodeAddress,
+RecordType,
+SMSResult,
+TimeStamp
+FROM GenericChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) genericChargingDataTypes (0) asn1Module (0) version1 (0)}
+
+PLMN-Id,
+RATType
+FROM GPRSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) gprsChargingDataTypes (2) asn1Module (0) version1 (0)}
+AddressString,
+IMEI,
+IMSI,
+ISDN-AddressString
+FROM MAP-CommonDataTypes {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-CommonDataTypes (18)  version15 (15) }
+-- from TS 29.002 [214]
+
+MessageClass,
+PriorityType
+FROM MMSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5)  mmsChargingDataTypes (5) asn1Module (0) version1 (0)}  
+
+;
+
+
+--
+--  SMS RECORDS
+--
+
+SMSRecordType	::= CHOICE
+--
+-- Record values 93 and 94 are SMS specific.
+-- 
+{
+	sCSMORecord			[93] SCSMORecord, 
+	sCSMTRecord			[94] SCSMTRecord  
+}
+
+SCSMORecord	::= SET
+{
+	recordType					[0] RecordType,
+	sMSNodeAddress				[1] AddressString,
+	originatorInfo				[2] OriginatorInfo OPTIONAL,
+	recipientInfo				[3] RecipientInfo OPTIONAL,
+	servedIMEI					[4] IMEI OPTIONAL,
+	eventtimestamp				[5]	TimeStamp,
+	messageReference			[6] MessageReference,
+	sMTotalNumber 				[7] INTEGER OPTIONAL,
+	sMSequenceNumber 			[8] INTEGER OPTIONAL,
+	messageSize					[9] DataVolume OPTIONAL,
+	messageClass				[10] MessageClass OPTIONAL,
+	sMdeliveryReportRequested	[11] BOOLEAN OPTIONAL,
+	sMDataCodingScheme			[12] INTEGER OPTIONAL,
+	sMMessageType				[13] SMMessageType OPTIONAL,
+	sMReplyPathRequested		[14] NULL OPTIONAL,
+	sMUserDataHeader			[15] OCTET STRING OPTIONAL,
+	userLocationInfo			[16] OCTET STRING OPTIONAL,
+	rATType						[17] RATType OPTIONAL,
+	uETimeZone					[18] MSTimeZone OPTIONAL,
+	sMSResult					[19] SMSResult OPTIONAL,
+	sMDeviceTriggerIndicator	[20] NULL OPTIONAL,
+	sMDeviceTriggerInformation	[21] SMDeviceTriggerInformation OPTIONAL,
+	localSequenceNumber			[22] LocalSequenceNumber OPTIONAL,
+	recordExtensions			[23] ManagementExtensions OPTIONAL
+}
+
+SCSMTRecord	::= SET
+{
+	recordType					[0] RecordType,
+	sMSNodeAddress				[1] AddressString,
+	recipientInfo				[2] RecipientInfo OPTIONAL,
+	originatorInfo				[3] OriginatorInfo OPTIONAL,
+	servedIMEI					[4] IMEI OPTIONAL,
+	submissionTime				[5]	TimeStamp OPTIONAL,
+	eventtimestamp				[6]	TimeStamp,
+	sMPriority					[7]	PriorityType OPTIONAL,
+	messageReference			[8] MessageReference OPTIONAL,
+	sMTotalNumber 				[9] INTEGER OPTIONAL,
+	sMSequenceNumber			[10] INTEGER OPTIONAL,
+	messageSize					[11] DataVolume OPTIONAL,
+	messageClass				[12] MessageClass OPTIONAL,
+	sMdeliveryReportRequested	[13] BOOLEAN OPTIONAL,
+	sMDataCodingScheme			[14] INTEGER OPTIONAL,
+	sMMessageType				[15] SMMessageType OPTIONAL,
+	sMReplyPathRequested		[16] NULL OPTIONAL,
+	sMUserDataHeader			[17] OCTET STRING OPTIONAL,
+	sMSStatus					[18] SMSStatus OPTIONAL,
+	sMDischargeTime				[19] TimeStamp OPTIONAL,
+	userLocationInfo			[20] OCTET STRING OPTIONAL,
+	rATType						[21] RATType OPTIONAL,
+	uETimeZone					[22] MSTimeZone OPTIONAL,
+	sMSResult					[23] SMSResult OPTIONAL,
+	sMDeviceTriggerIndicator	[24] NULL OPTIONAL,
+	sMDeviceTriggerInformation	[25] SMDeviceTriggerInformation OPTIONAL,
+	localSequenceNumber			[26] LocalSequenceNumber OPTIONAL,
+	recordExtensions			[27] ManagementExtensions OPTIONAL
+}
+
+--
+--  SMS DATA TYPES
+--
+
+OriginatorInfo	::= SEQUENCE 
+--
+-- OriginatorInfo is used for information about Originator of a Short Message
+-- 
+{
+	originatorIMSI				[0] IMSI OPTIONAL,
+	originatorMSISDN			[1] MSISDN OPTIONAL,
+	originatorOtherAddress		[2] SMAddressInfo OPTIONAL,
+									-- used if type different from IMSI and MSISDN
+	originatorSCCPAddress		[3] AddressString OPTIONAL,
+	originatorReceivedAddress	[4] SMAddressInfo OPTIONAL,
+	sMOriginatorInterface		[5] SMInterface OPTIONAL,
+	sMOriginatorProtocolID		[6] OCTET STRING OPTIONAL
+}
+
+RecipientInfo	::= SEQUENCE 
+--
+-- RecipientInfo is used for information about Recipient of a Short Message
+-- 
+{
+	recipientIMSI				[0] IMSI OPTIONAL,
+	recipientMSISDN				[1] MSISDN OPTIONAL,
+	recipientOtherAddress		[2] SMAddressInfo OPTIONAL,
+									-- used if type different from IMSI and MSISDN
+	recipientSCCPAddress		[3] AddressString OPTIONAL,
+	recipientReceivedAddress	[4] SMAddressInfo OPTIONAL,
+	sMDestinationInterface		[5] SMInterface OPTIONAL,
+	sMRecipientProtocolID		[6] OCTET STRING OPTIONAL
+}
+
+SMAddressDomain		::= SEQUENCE
+{
+	sMDomainName			[0] GraphicString OPTIONAL,
+	threeGPPIMSI-MCC-MNC	[1] PLMN-Id OPTIONAL
+}
+
+SMAddressInfo		::= SEQUENCE
+{
+	sMAddressType		[0] SMAddressType OPTIONAL,
+	sMAddressData		[1] GraphicString OPTIONAL,
+	sMAddressDomain		[2] SMAddressDomain OPTIONAL 
+}
+
+SMAddressType	::= ENUMERATED
+{
+	emailAddress			(0),
+	mSISDN					(1),
+	iPv4Address				(2),
+	iPv6Address				(3),
+	numericShortCode		(4),
+	alphanumericShortCode	(5),
+	other					(6),
+	iMSI					(7)
+}
+
+SMDeviceTriggerInformation	::= SEQUENCE 
+--
+-- SMDeviceTriggerInformation is used for information on device triggering from T4 
+-- as specified in TS 29.337[231] 
+-- 
+{
+	mTCIWFAddress			[0] NodeAddress OPTIONAL,
+	sMDTReferenceNumber		[1] INTEGER OPTIONAL,
+	sMServingNode			[2] SMServingNode OPTIONAL,
+	sMDTValidityPeriod		[3] INTEGER OPTIONAL,
+	sMDTPriorityIndication	[4] SMDTPriorityIndication OPTIONAL,
+	sMSApplicationPortID	[5] INTEGER OPTIONAL
+}
+
+SMDTPriorityIndication	::= ENUMERATED
+{
+	nonpriority	(0),
+	priority	(1)
+}
+
+SMInterface		::= SEQUENCE
+{
+	interfaceId			[0] GraphicString OPTIONAL,
+	interfaceText		[1] GraphicString OPTIONAL,
+	interfacePort		[2] GraphicString OPTIONAL,
+	interfaceType		[3] SMInterfaceType OPTIONAL
+}
+
+SMInterfaceType	::= ENUMERATED
+{
+	unkown					(0),
+	mobileOriginating		(1),
+	mobileTerminating		(2),
+	applicationOriginating	(3),
+	applicationTerminating	(4),
+	deviceTrigger			(5)
+}
+
+SMMessageType	::= ENUMERATED
+{
+	submission			(0),
+	deliveryReport		(1),
+	sMServiceRequest	(2)
+}
+
+SMServingNode		::= SEQUENCE
+{
+	sGSNName			[0] DiameterIdentity OPTIONAL,
+	sGSNRealm			[1] DiameterIdentity OPTIONAL,
+	sGSNNumber			[2] AddressString OPTIONAL,
+	mMEName				[3] DiameterIdentity OPTIONAL,
+	mMERealm			[4] DiameterIdentity OPTIONAL,
+	mMENumberForMTSMS	[5] AddressString OPTIONAL,
+	mSCNumber			[6] AddressString OPTIONAL,
+	iPSMGWNumber		[7] AddressString OPTIONAL,
+	iPSMGWName			[8] DiameterIdentity OPTIONAL
+}
+
+SMSStatus		::= OCTET STRING (SIZE(1))
+
+
+END

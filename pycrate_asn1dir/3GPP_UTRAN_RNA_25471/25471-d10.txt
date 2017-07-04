@@ -1,0 +1,1610 @@
+﻿3GPP TS 25.471 V13.1.0 (2016-03)
+Technical Specification
+3rd Generation Partnership Project;
+Technical Specification Group Radio Access Network;
+UTRAN Iurh interface 
+Radio Network Subsystem Application Part (RNSAP) 
+User Adaption (RNA) signalling
+(Release 13)
+
+	
+
+The present document has been developed within the 3rd Generation Partnership Project (3GPP TM) and may be further elaborated for the purposes of 3GPP.
+The present document has not been subject to any approval process by the 3GPP Organizational Partners and shall not be implemented.
+This Specification is provided for future development work within 3GPP only. The Organizational Partners accept no liability for any use of this Specification.
+Specifications and Reports for implementation of the 3GPP TM system should be obtained via the 3GPP Organizational Partners' Publications Offices.
+
+
+
+
+Keywords
+UMTS, radio
+
+3GPP
+Postal address
+
+3GPP support office address
+650 Route des Lucioles - Sophia Antipolis
+Valbonne - FRANCE
+Tel.: +33 4 92 94 42 00 Fax: +33 4 93 65 47 16
+Internet
+http://www.3gpp.org
+
+Copyright Notification
+No part may be reproduced except as authorized by written permission.
+The copyright and the foregoing restriction extend to reproduction in all media.
+
+© 2016, 3GPP Organizational Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, TTA, TTC).
+All rights reserved.
+
+UMTS™ is a Trade Mark of ETSI registered for the benefit of its members
+3GPP™ is a Trade Mark of ETSI registered for the benefit of its Members and of the 3GPP Organizational Partners
+LTE™ is a Trade Mark of ETSI registered for the benefit of its Members and of the 3GPP Organizational Partners
+GSM® and the GSM logo are registered and owned by the GSM Association
+
+Contents
+Foreword	6
+1	Scope	6
+2	References	7
+3	Definitions and abbreviations	7
+3.1	Definitions	7
+3.2	Abbreviations	8
+4	General	8
+4.1	Procedure Specification Principles	8
+4.2	Forwards and Backwards Compatibility	9
+4.3	Specification Notations	9
+5	RNA Services	9
+5.1	General	9
+5.2	Parallel Transactions	9
+6	Services expected from the Transport layer	9
+7	Functions of RNA	9
+8	RNA Procedures	10
+8.1	Elementary Procedures	10
+8.2	Iurh Setup	10
+8.2.1	General	10
+8.2.2	Direct Iurh connection	10
+8.2.2.1	Successful operation	10
+8.2.2.2	Unsuccessful operation	10
+8.2.2.3	Abnormal Conditions	11
+8.2.3	Iurh connection via the HNB-GW	11
+8.2.3.1	Successful Operation HNB Originated	11
+8.2.3.2	Unsuccessful Operation HNB Originated	12
+8.2.3.3	Abnormal Conditions – HNB originated	12
+8.2.3.4	Successful Operation HNB-GW Originated	12
+8.2.3.5	Unsuccessful Operation HNB-GW Originated	12
+8.3	Connect	13
+8.3.1	General	13
+8.3.2	Successful Operation	13
+8.3.2.1	HNB Originated – Direct Iurh connection	13
+8.3.2.2	HNB Originated – Iurh connection via the HNB-GW	13
+8.3.2.3	HNB-GW Originated – Iurh connection via the HNB-GW	14
+8.4	Direct Transfer	14
+8.4.1	General	14
+8.4.2	Successful Operation	14
+8.4.2.1	HNB Originated – Direct Iurh connection	14
+8.4.2.2	HNB Originated – Iurh connection via the HNB-GW	14
+8.4.2.3	HNB-GW Originated – Iurh connection via the HNB-GW	15
+8.5	Disconnect	15
+8.5.1	General	15
+8.5.2	Successful Operation	15
+8.5.2.1	HNB Originated – Direct Iurh connection	15
+8.5.2.2	HNB Originated – Iurh connection via the HNB-GW	15
+8.5.2.3	HNB-GW Originated – Iurh connection via the HNB-GW	16
+8.6	Connectionless Transfer	16
+8.6.1	General	16
+8.6.2	Successful Operation	16
+8.6.2.1	HNB Originated – Direct Iurh connection	16
+8.6.2.2	HNB Originated – Iurh connection via the HNB-GW	17
+8.6.2.3	HNB-GW Originated – Iurh connection via the HNB-GW	17
+8.7	Error Indication	17
+8.7.1	General	17
+8.7.2	Successful Operation	18
+8.7.2.1	Direct Iurh Connection	18
+8.7.2.2	Iurh Connection via the HNB-GW	18
+9	Elements for RNA Communication	19
+9.1	Message Functional Definition and Content	19
+9.1.1	General	19
+9.1.2	Message Contents	19
+9.1.2.1	Presence	19
+9.1.2.2	Criticality	19
+9.1.2.3	Range	19
+9.1.2.4	Assigned Criticality	19
+9.1.3	IURH SETUP REQUEST	20
+9.1.4	IURH SETUP RESPONSE	20
+9.1.5	IURH SETUP FAILURE	20
+9.1.6	CONNECT	21
+9.1.7	DIRECT TRANSFER	21
+9.1.8	DISCONNECT	21
+9.1.9	CONNECTIONLESS TRANSFER	22
+9.1.10	ERROR INDICATION	22
+9.2	Information Element Definitions	22
+9.2.0	General	22
+9.2.1	Message Type	23
+9.2.2	Cause	23
+9.2.3	Criticality Diagnostics	24
+9.2.4	RNSAP Message	25
+9.2.5	Iurh Signalling Context ID	25
+9.2.6	PLMN-ID	25
+9.2.7	Cell-ID	26
+9.2.8	Backoff Timer	26
+9.2.9	HNB RNL Identity	26
+9.2.10	HNB Cell Identifier	26
+9.2.11	Global RNC ID	27
+9.3	Message and Information Element Abstract Syntax (with ASN.1)	27
+9.3.0	General	27
+9.3.1	Usage of protocol extension mechanism for non-standard use	27
+9.3.2	Elementary Procedure Definitions	28
+9.3.3	PDU Definitions	31
+9.3.4	Information Element Definitions	36
+9.3.5	Common Definitions	40
+9.3.6	Constant Definitions	41
+9.3.7	Container Definitions	42
+9.4	Message Transfer Syntax	46
+10	Handling of Unknown, Unforeseen or Erroneous Protocol Data	46
+10.1	General	46
+10.2	Transfer Syntax Error	46
+10.3	Abstract Syntax Error	46
+10.3.1	General	46
+10.3.2	Criticality Information	47
+10.3.3	Presence Information	47
+10.3.4	Not comprehended IE/IE group	48
+10.3.4.1	Procedure Code	48
+10.3.4.1A	Type of Message	48
+10.3.4.2	IEs other than the Procedure Code and Type of Message	48
+10.3.5	Missing IE or IE group	49
+10.3.6	IEs or IE groups received in wrong order or with too many occurrences or erroneously present	50
+10.4	Logical Error	51
+10.5	Exceptions	51
+Annex A (informative):	Change history	52
+
+
+Foreword
+This Technical Specification has been produced by the 3rd Generation Partnership Project (3GPP).
+The contents of the present document are subject to continuing work within the TSG and may change following formal TSG approval. Should the TSG modify the contents of the present document, it will be re-released by the TSG with an identifying change of release date and an increase in version number as follows:
+Version x.y.z
+where:
+x	the first digit:
+1	presented to TSG for information;
+2	presented to TSG for approval;
+3	or greater indicates TSG approved document under change control.
+y	the second digit is incremented for all changes of substance, i.e. technical enhancements, corrections, updates, etc.
+z	the third digit is incremented when editorial only changes have been incorporated in the document.
+1	Scope
+The present document specifies the RNSAP User Adaption (RNA) supporting Iurh-connectivity between HNBs as specified in TS 25.467 [3] by adapting the services made available by the Iurh signalling transport layer to the needs of RNSAP. It provides transparent transport for RNSAP messages in connection-oriented and connectionless mode and an Iurh setup function.
+
+2	References
+The following documents contain provisions which, through reference in this text, constitute provisions of the present document.
+-	References are either specific (identified by date of publication, edition number, version number, etc.) or nonspecific.
+-	For a specific reference, subsequent revisions do not apply.
+-	For a non-specific reference, the latest version applies. In the case of a reference to a 3GPP document (including a GSM document), a non-specific reference implicitly refers to the latest version of that document in the same Release as the present document.
+[1]	Void
+[2]	Void
+[3]	3GPP TS 25.467: "UTRAN architecture for 3G Home NodeB"
+[4]	3GPP TS 25.423: "UTRAN Iur interface Radio Network Subsystem Application Part (RNSAP) signalling"
+[5]	3GPP TR 25.921 (version.7.0.0): "Guidelines and Principles for Protocol Description and Error Handling".
+[6]	3GPP TR 21.905: "Vocabulary for 3GPP Specifications".
+[7]	ITU-T Recommendation X.691 (2002-07): "Information technology - ASN.1 encoding rules: Specification of Packed Encoding Rules (PER)".
+[8]	ITU-T Recommendation X.680 (2002-07): "Information technology - Abstract Syntax Notation One (ASN.1): Specification of basic notation".
+[9]	ITU-T Recommendation X.681 (2002-07): "Information technology - Abstract Syntax Notation One (ASN.1): Information object specification".
+[10]	Void
+[11]	Void
+[12]	3GPP TS 25.331: "Radio Resource Control (RRC) Protocol Specification".
+3	Definitions and abbreviations
+3.1	Definitions
+For the purposes of the present document, the terms and definitions given in TR 21.905 [6] and the following apply. A term defined in the present document takes precedence over the definition of the same term, if any, in TR 21.905 [6].
+Elementary Procedure: RNA consists of Elementary Procedures (EPs). An Elementary Procedure is a unit of interaction between HNBs. These EPs are defined separately and are intended to be used to build up complete sequences in a flexible manner. If the independence between some EPs is restricted, it is described under the relevant EP description. Unless otherwise stated by the restrictions, the EPs may be invoked independently of each other as stand alone procedures, which can be active in parallel. 
+An EP consists of an initiating message and possibly a response message. Two kinds of EPs are used:
+-	Class 1: Elementary Procedures with response (success or failure).
+-	Class 2: Elementary Procedures without response.
+For Class 1 EPs, the types of responses can be as follows:
+Successful
+-	A signalling message explicitly indicates that the elementary procedure successfully completed with the receipt of the response.
+Unsuccessful
+-	A signalling message explicitly indicates that the EP failed.
+-	On time supervision expiry (i.e. absence of expected response).
+Class 2 EPs are considered always successful.
+3.2	Abbreviations
+For the purposes of the present document, the abbreviations given in TR 21.905 [6] and the following apply. An abbreviation defined in the present document takes precedence over the definition of the same abbreviation, if any, in TR 21.905 [6].
+EP	Elementary Procedure
+HNB	Home Node B
+PDU	Protocol Data Unit
+RNA	RNSAP User Adaption
+RNS	Radio Network Subsystem
+RNSAP	Radio Network Subsystem Application Part
+SCTP	Stream Control Transmission Protocol
+4	General
+The protocol described in the present document is the protocol between Iurh-connected HNBs providing adaptation of services of the Iurh signalling transport layer to the needs of RNSAP and an Iurh setup function.
+4.1	Procedure Specification Principles
+The principle for specifying the procedure logic is to specify the functional behaviour of the HNBs exactly and completely.
+The following specification principles have been applied for the procedure text in clause 8:
+-	The procedure text discriminates between:
+1)	Functionality which "shall" be executed:
+-	The procedure text indicates that the receiving node "shall" perform a certain function Y under a certain condition. If the receiving node supports procedure X but cannot perform functionality Y requested in the REQUEST message of a Class 1 EP, the receiving node shall respond with the message used to report unsuccessful outcome for this procedure, containing an appropriate cause value.
+2)	Functionality which "shall, if supported" be executed:
+-	The procedure text indicates that the receiving node "shall, if supported," perform a certain function Y under a certain condition. If the receiving node supports procedure X, but does not support functionality Y, the receiving node shall proceed with the execution of the EP, possibly informing the requesting node about the not supported functionality.
+-	Any required inclusion of an optional IE in a response message is explicitly indicated in the procedure text. If the procedure text does not explicitly indicate that an optional IE shall be included in a response message, the optional IE shall not be included.
+4.2	Forwards and Backwards Compatibility
+The forwards and backwards compatibility of the protocol is assured by mechanism where all current and future messages, and IEs or groups of related IEs, include Id and criticality fields that are coded in a standard format that will not be changed in the future. These parts can always be decoded regardless of the standard version.
+4.3	Specification Notations
+For the purposes of the present document, the following notations apply:
+Procedure	When referring to an elementary procedure in the specification the Procedure Name is written with the first letters in each word in upper case characters followed by the word "procedure", e.g. Direct Transfer procedure.
+Message	When referring to a message in the specification the MESSAGE NAME is written with all letters in upper case characters followed by the word "message", e.g. DIRECT TRANSFER message.
+IE	When referring to an information element (IE) in the specification the Information Element Name is written with the first letters in each word in upper case characters and all letters in Italic font followed by the abbreviation "IE", e.g. HNB Identity IE.
+Value of an IE	When referring to the value of an information element (IE) in the specification the "Value" is written as it is specified in subclause 9.2 enclosed by quotation marks, e.g. "Abstract Syntax Error (Reject)".
+5	RNA Services
+5.1	General
+RNA provides the signalling service between Iurh-connected HNBs that is required to fulfil the RNA functions described in Clause 7.
+5.2	Parallel Transactions
+Unless explicitly indicated in the procedure description, at any instance in time one protocol peer shall have a maximum of one ongoing RNA procedure related to a specific connection-oriented signalling Context.
+6	Services expected from the Transport layer
+Following service is expected from the transport layer:
+-	Reliable and in sequence delivery of Signalling data.
+7	Functions of RNA
+The RNA has the following functions:
+-	Transparent transfer of RNSAP messages
+-	Setup of an Iurh connection
+-	Error Handling. This function allows the reporting of general error situations, for which function specific error messages have not been defined.
+These functions are implemented by one or several RNA elementary procedures described in the following clauses.
+8	RNA Procedures
+8.1	Elementary Procedures
+In the following tables, all EPs are divided into Class 1 and Class 2 Procedures.
+Table 1: Class 1
+Elementary ProcedureInitiating MessageSuccessful OutcomeUnsuccessful OutcomeResponse messageResponse messageIurh SetupIURH SETUP REQUESTIURH SETUP RESPONSEIURH SETUP FAILURE
+Table 2: Class 2
+Elementary ProcedureMessageConnectCONNECTDirect TransferDIRECT TRANSFERDisconnectDISCONNECTConnectionless TransferCONNECTIONLESS TRANSFERError IndicationERROR INDICATION
+8.2	Iurh Setup
+8.2.1	General
+The purpose of the Iurh Setup procedure is to establish Iurh connectivity between two HNBs. This procedure resets the Iurh interface by removing all active Iurh signalling contexts.
+8.2.2	Direct Iurh connection
+8.2.2.1	Successful operation
+
+Figure 8.2.2.1.1: Setup Request Procedure: Iurh direct interface Successful Operation
+HNB1 initiates the procedure by sending the IURH SETUP REQUEST message to the candidate HNB2. HNB2 replies with the IURH SETUP RESPONSE message. 
+8.2.2.2	Unsuccessful operation
+
+
+Figure 8.2.2.2.2: Setup Procedure: Direct Interface unsuccessful Operation
+If the candidate HNB2 cannot accept the setup it shall respond with an IURH SETUP FAILURE message with appropriate cause value.
+If the IURH SETUP FAILURE message includes the Backoff Timer IE then HNB1 shall wait at least for the indicated time before reinitiating the Iurh Setup procedure towards HNB2.
+8.2.2.3	Abnormal Conditions
+If the first message received for a specific TNL association is not an IURH SETUP REQUEST, IURH SETUP RESPONSE, or IURH SETUP FAILURE message then this shall be treated as a logical error.
+If HNB1 does not receive either an IURH SETUP RESPONSE message or an IURH SETUP FAILURE message, HNB1 may reinitiate the Iurh Setup procedure towards HNB2, provided that the content of the new IURH SETUP REQUEST message is identical to the content of the previously unacknowledged IURH SETUP REQUEST message.
+If the initiating HNB receives an IURH SETUP REQUEST message from the peer entity on the same Iurh interface then:
+-	in case HNB1 answers with an IURH SETUP RESPONSE message and receives a subsequent IURH SETUP FAILURE message, HNB1 shall consider the Iurh interface as non operational and the procedure as unsuccessfully terminated according to sub clause 8.2.2.2.
+-	in case HNB1 answers with an IURH SETUP FAILURE message and receives a subsequent IURH SETUP RESPONSE message, HNB1 shall ignore the IURH SETUP RESPONSE message and consider the Iurh interface as non operational.
+8.2.3	Iurh connection via the HNB-GW
+8.2.3.1	Successful Operation HNB Originated
+
+Figure 8.2.3.1.1: Iurh Setup procedure – Iurh connection via the HNB-GW – successful case.
+The HNB initiates this procedure by sending the IURH SETUP REQUEST message to the HNB-GW. The HNB-GW shall setup an Iurh interface to the HNB indicated within the Receivers HNB RNL Identity IE and then reply with the IURH SETUP RESPONSE message. 
+8.2.3.2	Unsuccessful Operation HNB Originated
+
+Figure 8.2.3.2.2: Iurh Setup procedure Iurh connection via the HNB-GW– unsuccessful case.
+If the HNB-GW cannot accept the setup or is not able to setup an Iurh interface shall respond with an IURH SETUP FAILURE message with an appropriate cause value.
+If the IURH SETUP FAILURE message includes the Backoff Timer IE, the HNB shall wait at least for the indicated time before reinitiating the Iurh Setup procedure towards the HNB-GW.
+8.2.3.3	Abnormal Conditions – HNB originated
+If the HNB receives neither an IURH SETUP RESPONSE message nor an IURH SETUP FAILURE message, the HNB may reinitiate the Iurh Setup procedure towards the same HNB-GW, provided that the content of the new IURH SETUP REQUEST message is identical to the content of the previously unacknowledged IURH SETUP REQUEST message.
+8.2.3.4	Successful Operation HNB-GW Originated
+
+Figure 8.2.3.4.1: Iurh Setup procedure – Iurh connection via the HNB-GW – successful case.
+The HNB-GW initiates this procedure by sending the IURH SETUP REQUEST message to the HNB. The HNB replies with the IURH SETUP RESPONSE message.
+8.2.3.5	Unsuccessful Operation HNB-GW Originated
+
+Figure 8.2.3.5.1: Iurh Setup procedure Iurh connection via the HNB-GW– unsuccessful case.
+If the HNB cannot accept the setup it shall respond with an IURH SETUP FAILURE message with an appropriate cause value.
+The IURH SETUP FAILURE message may include the Backoff Timer IE.
+8.3	Connect
+8.3.1	General
+This procedure is used to establish signalling resources for a connection oriented data service and to carry the first RNSAP (TS 25.423 [4]) message between Iurh-connected HNBs, the initiating HNB acting as the Serving RNS, the peer HNB acting as the Drift RNS as defined in TS 25.423 [4]. If the HNBs are Iurh-connected via the HNB-GW, separate RNA resources are established between the initiating HNB and the HNB-GW, and the HNB-GW and the receiving HNB.
+8.3.2	Successful Operation
+8.3.2.1	HNB Originated – Direct Iurh connection
+
+Figure 8.3.2.1.1: Connect procedure – direct Iurh connection.
+This procedure is initiated by HNB1 sending the CONNECT message to the HNB2. The CONNECT message may carry the first RNSAP message within the RNSAP Message IE, e.g., the RADIO LINK SETUP REQUEST message defined in TS25.423 [4], from HNB1 to HNB2.
+HNB2 shall store the content of the Iurh Signalling Context ID IE and the Senders HNB RNL Identity IE and use both values to address the corresponding signalling resource at HNB1 for the lifetime of the signalling connection.
+8.3.2.2	HNB Originated – Iurh connection via the HNB-GW
+
+Figure 8.3.2.2.1: Connect procedure – HNB originated – Iurh connection via the HNB-GW.
+This procedure is initiated by the HNB sending the CONNECT message to the HNB-GW. The CONNECT message may carry the first RNSAP message within the RNSAP Message IE, e.g., the RADIO LINK SETUP REQUEST message defined in TS 25.423 [4]. The HNB-GW shall establish RNA resources towards the HNB indicated within the Receivers HNB RNL Identity IE and pass the RNSAP message received from the sending HNB and the Iurh Signalling Context ID to that HNB.
+8.3.2.3	HNB-GW Originated – Iurh connection via the HNB-GW
+
+Figure 8.3.2.3.1: Connect procedure – HNB-GW originated – Iurh connection via the HNB-GW
+This procedure is initiated by the HNB-GW by sending the CONNECT message to the HNB. The Senders HNB RNL Identity IE and the Iurh Signalling Context ID IE, contained in the CONNECT message indicate the originating HNB and the RNA resources established between the originating HNB and the HNB-GW.
+The HNB shall store the content of the Iurh Signalling Context ID IE and the Senders HNB RNL Identity IE and use both values to address the corresponding signalling resource at the originating HNB for the lifetime of the signalling connection.
+8.4	Direct Transfer
+8.4.1	General
+This procedure is used to transport an RNSAP (TS 25.423 [4]) message over an established connection oriented signalling connection between Iurh-connected HNBs. If the HNBs are Iurh-connected via the HNB-GW, the RNSAP message is transported over separate connection oriented signalling resources established between the initiating HNB and the HNB-GW, and the HNB-GW and the receiving HNB.
+8.4.2	Successful Operation
+8.4.2.1	HNB Originated – Direct Iurh connection
+
+Figure 8.4.2.1.1: Direct Transfer procedure – HNB originated – direct Iurh connection.
+HNB1 initiates the procedure by sending the DIRECT TRANSFER message to the HNB2. 
+8.4.2.2	HNB Originated – Iurh connection via the HNB-GW
+
+Figure 8.4.2.2.1: Direct Transfer procedure – HNB originated – Iurh connection via the HNB-GW.
+The HNB initiates this procedure by sending the DIRECT TRANSFER message to the HNB-GW. The HNB-GW shall forward the RNSAP message contained in the DIRECT TRANSFER message to the connection oriented signalling connection identified by the Receivers HNB RNL Identity IE and the Iurh Signalling Context ID IE.
+8.4.2.3	HNB-GW Originated – Iurh connection via the HNB-GW
+
+
+Figure 8.4.2.3.1: Direct Transfer procedure – HNB-GW originated – Iurh connection via the HNB-GW
+This procedure is initiated by the HNB-GW by sending the DIRECT TRANSFER message to the HNB.
+8.5	Disconnect
+8.5.1	General
+This procedure is used to release an established connection oriented signalling connection and may convey an RNSAP (TS 25.423 [4]) message between Iurh-connected HNBs. If the HNBs are Iurh-connected via the HNB-GW, respective connection oriented signalling resources established between the initiating HNB and the HNB-GW, and the HNB-GW and the receiving HNB have to be released.
+8.5.2	Successful Operation
+8.5.2.1	HNB Originated – Direct Iurh connection
+
+Figure 8.5.2.1.1: Disconnect procedure – direct Iurh connection.
+This procedure is initiated by HNB1 by sending the DISCONNECT message to the HNB2. The DISCONNECT message may contain the RNSAP Message IE.
+8.5.2.2	HNB Originated – Iurh connection via the HNB-GW
+
+Figure 8.5.2.2.1: Disconnect procedure – HNB originated – Iurh connection via the HNB-GW.
+This procedure is initiated by the HNB by sending the DISCONNECT message to the HNB-GW. The DISCONNECT message may contain the RNSAP Message IE.
+The HNB shall include within the Iurh Signalling Context ID IE the value of the signalling resource over which the DISCONNECT message is sent to the HNB-GW.
+The HNB-GW shall release the connection oriented signalling connection identified by the Receivers HNB RNL Identity IE and the Iurh Signalling Context ID IE.
+8.5.2.3	HNB-GW Originated – Iurh connection via the HNB-GW
+
+Figure 8.5.2.3.1: Disconnect procedure – HNB-GW originated – Iurh connection via the HNB-GW
+This procedure is initiated by the HNB-GW by sending the DISCONNECT message to the HNB. The DISCONNECT message may contain the RNSAP Message IE.
+8.6	Connectionless Transfer
+8.6.1	General
+This procedure is used to transport a connectionless RNSAP message over an established signalling connection between Iurh-connected HNBs.
+8.6.2	Successful Operation
+8.6.2.1	HNB Originated – Direct Iurh connection
+
+Figure 8.6.2.1.1: Connectionless Transfer procedure – HNB originated – direct Iurh connection.
+This procedure is initiated by HNB1 by sending the CONNECTIONLESS TRANSFER message to the HNB2.
+8.6.2.2	HNB Originated – Iurh connection via the HNB-GW
+
+Figure 8.6.2.2.1: Connectionless Transfer procedure – HNB originated – Iurh connection via the HNB-GW.
+This procedure is initiated by the HNB by sending the CONNECTIONLESS TRANSFER message to the HNB-GW. The HNB-GW shall forward the RNSAP message contained in the CONNECTIONLESS TRANSFER message to the HNB identified by the Receivers HNB RNL Identity.
+8.6.2.3	HNB-GW Originated – Iurh connection via the HNB-GW
+
+Figure 8.6.2.3.1: Connectionless Transfer procedure – HNB-GW originated – Iurh connection via the HNB-GW
+This procedure is initiated by the HNB-GW by sending the CONNECTIONLESS TRANSFER message to the HNB.
+8.7	Error Indication
+8.7.1	General
+The Error Indication procedure is initiated by a node to report detected errors in a received message, provided they cannot be reported by an appropriate failure message.
+In case the Error Indication procedure is triggered over an established connection oriented signalling connection the ERROR INDICATION message shall contain the Iurh Signalling Context ID IE. If the Error Indication procedure is triggered because the value of the Iurh Signalling Context ID IE within an RNA message for connection oriented signalling is not correct, the cause shall be set to appropriate value e.g. “Unknown or already allocated Iurh Signalling Context ID”.
+8.7.2	Successful Operation
+8.7.2.1	Direct Iurh Connection
+
+Figure 8.7.2.1.1: Error Indication procedure – HNB originated – direct Iurh connection.
+When the conditions defined in clause 10 are fulfilled, the Error Indication procedure is initiated by an ERROR INDICATION message sent from the node receiving an erroneous RNA message. This message shall use the same mode of the signalling bearer and the same signalling bearer connection (if connection oriented) as the message that has triggered the procedure.
+8.7.2.2	Iurh Connection via the HNB-GW
+
+
+Figure 8.7.2.2.1: Error Indication procedure – HNB originated – Iurh connection via the HNB-GW.
+
+Figure 8.7.2.2.2: Error Indication procedure – HNB-GW originated – Iurh connection via the HNB-GW
+When the conditions defined in clause 10 are fulfilled, the Error Indication procedure is initiated by an ERROR INDICATION message sent from the node receiving the erroneous RNA message. This message shall use the same mode of the signalling bearer and the same signalling bearer connection (if connection oriented) as the message that triggers the procedure. An ERROR INDICATION message received by the HNB-GW shall be forwarded by the HNB-GW to the sending node. For errors defined in clause 10 that are detected by the HNB-GW the ERROR INDICATION message shall be sent to the sending node, if the message has not been forwarded to the destination HNB. 
+9	Elements for RNA Communication
+9.1	Message Functional Definition and Content
+9.1.1	General
+Section 9.1 presents the contents of RNA messages in tabular format. The corresponding ASN.1 definition is presented in section 9.3. In case there is contradiction between the tabular format in section 9.1 and the ASN.1 definition, the ASN.1 shall take precedence, except for the definition of conditions for the presence of conditional IEs, where the tabular format shall take precedence.
+NOTE: The messages have been defined in accordance to the guidelines specified in TR 25.921 [5].
+For each message there is, a table listing the signalling elements in their order of appearance in the transmitted message.
+9.1.2	Message Contents
+9.1.2.1	Presence
+All information elements in the message descriptions below are marked mandatory, optional or conditional according to table 3
+Table 3: Meaning of abbreviations used in RNA messages
+AbbreviationMeaningMIE's marked as Mandatory (M) will always be included in the message.OIE's marked as Optional (O) may or may not be included in the message.CIE's marked as Conditional (C) will be included in a message only if the condition is satisfied. Otherwise the IE is not included.
+9.1.2.2	Criticality
+Each Information Element or Group of Information Elements may have a criticality information applied to it.
+Following cases are possible.
+Table 4: Meaning of content within "Criticality" column
+AbbreviationMeaning
+–No criticality information is applied explicitly.YESCriticality information is applied. This is usable only for non-repeatable IEs GLOBALThe IE and all its repetitions together have one common criticality information. This is usable only for repeatable IEs.EACHEach repetition of the IE has its own criticality information. It is not allowed to assign different criticality values to the repetitions. This is usable only for repeatable IEs.
+9.1.2.3	Range
+The Range column indicates the allowed number of copies of repetitive IEs/IE groups.
+9.1.2.4	Assigned Criticality
+This column provides the actual criticality information as defined in subclause 10.3.2, if applicable.
+9.1.3	IURH SETUP REQUEST
+This message is sent by a HNB or a HNB-GW to a HNB or a HNB-GW to transfer the initialization information for a TNL association.
+Direction: HNB → HNB, HNB-GW → HNB and HNB → HNB-GW 
+PARAMETERPRESENCERANGEIE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1YESrejectSenders HNB RNL IdentityMHNB RNL Identity
+9.2.9YESrejectReceivers HNB RNL IdentityMHNB RNL Identity
+9.2.9YESreject
+9.1.4	IURH SETUP RESPONSE
+This message is sent by a HNB or a HNB-GW to a HNB or a HNB-GW to transfer the initialization information for a TNL association.
+Direction: HNB → HNB, HNB → HNB-GW and HNB-GW → HNB
+PARAMETERPRESENCERANGE IE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1YESrejectSenders HNB RNL IdentityMHNB RNL Identity
+9.2.9.YESrejectReceivers HNB RNL IdentityMHNB RNL Identity
+9.2.9YESreject
+9.1.5	IURH SETUP FAILURE
+ This message is sent by the HNB to indicate Iurh Setup failure
+Direction: HNB → HNB, HNB → HNB-GW and HNB-GW → HNB
+PARAMETERPRESENCERANGE IE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1YESrejectCauseM9.2.2YESignoreBackoff TimerO9.2.16YESignoreCriticality DiagnosticsO9.2.3YESignoreSenders HNB RNL IdentityMHNB RNL Identity
+9.2.9YESrejectReceivers HNB RNL IdentityMHNB RNL Identity
+9.2.9YESreject
+9.1.6	CONNECT
+This message is sent by either an HNB to a directly Iurh-connected HNB or an HNB to the HNB-GW or the HNB-GW to an HNB to establish a connection oriented signalling connection and to carry an RNSAP message.
+Direction: HNB → HNB and HNB → HNB-GW and HNB-GW → HNB
+PARAMETERPRESENCERANGEIE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1YESignoreIurh Signalling Context IDM9.2.5YESrejectRNSAP MessageO9.2.4YESrejectSenders HNB RNL IdentityMHNB RNL Identity
+9.2.9YESrejectReceivers HNB RNL IdentityMHNB RNL Identity
+9.2.9YESreject
+9.1.7	DIRECT TRANSFER
+This message is sent by either an HNB to a directly Iurh-connected HNB or an HNB to the HNB-GW or the HNB-GW to an HNB to transport a connection-oriented RNSAP message between the two nodes.
+Direction: HNB → HNB and HNB → HNB-GW and HNB-GW → HNB
+PARAMETERPRESENCERANGEIE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1YESignoreIurh Signalling Context IDM9.2.5YESrejectRNSAP MessageM9.2.4YESrejectReceivers HNB RNL IdentityMHNB RNL Identity
+9.2.9YESreject
+9.1.8	DISCONNECT
+This message is sent by either an HNB to a directly Iurh-connected HNB or an HNB to the HNB-GW or the HNB-GW to an HNB to close the signalling connection between the two nodes and may transport an RNSAP message.
+Direction: HNB → HNB and HNB → HNB-GW and HNB-GW → HNB
+PARAMETERPRESENCERANGEIE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1YESignoreIurh Signalling Context IDM9.2.5YESrejectCauseM9.2.2YESrejectRNSAP MessageO9.2.4YESrejectReceivers HNB RNL IdentityMHNB RNL Identity
+9.2.9YESreject
+9.1.9	CONNECTIONLESS TRANSFER
+This message is sent by either an HNB to another HNB or the HNB to the HNB-GW or the HNB-GW to the HNB to transport a connectionless RNSAP message between the two nodes.
+Direction: HNB → HNB and HNB → HNB-GW and HNB-GW → HNB
+PARAMETERPRESENCERANGEIE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1YESignoreRNSAP MessageM9.2.4YESrejectSenders HNB RNL IdentityMHNB RNL Identity
+9.2.9YESrejectReceivers HNB RNL IdentityMHNB RNL Identity
+9.2.9YESreject
+9.1.10	ERROR INDICATION
+This message is sent by either an HNB to another HNB or the HNB to the HNB-GW or the HNB-GW to the HNB to indicate that some error(s) have been detected.
+Direction: HNB → HNB and HNB → HNB-GW and HNB-GW → HNB
+PARAMETERPRESENCERANGE IE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage Type M9.2.1YESignoreCauseO9.2.2YESignoreCriticality DiagnosticsO9.2.3YESignoreIurh Signalling Context IDO9.2.5YESignoreReceivers HNB RNL IdentityMHNB RNL Identity
+9.2.9YESignore
+9.2	Information Element Definitions
+9.2.0	General
+Section 9.2 presents the RNA IE definitions in tabular format. The corresponding ASN.1 definition is presented in section 9.3. In case there is contradiction between the tabular format in section 9.2 and the ASN.1 definition, the ASN.1 shall take precedence, except for the definition of conditions for the presence of conditional elements, where the tabular format shall take precedence.
+When specifying information elements which are to be represented by bitstrings, if not otherwise specifically stated in the semantics description of the concerned IE or elsewhere, the following principle applies with regards to the ordering of bits:
+-	The first bit (leftmost bit) contains the most significant bit (MSB);
+-	The last bit (rightmost bit) contains the least significant bit (LSB);
+-	When importing bitstrings from other specifications, the first bit of the bitstring contains the first bit of the concerned information;
+9.2.1	Message Type
+The Message Type IE uniquely identifies the message being sent. It is mandatory for all messages.
+IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionMessage Type>Procedure CodeMINTEGER (0..255)>Type of Message MENUMERATED (Initiating Message, Successful Outcome, Unsuccessful Outcome, Outcome)
+9.2.2	Cause
+The purpose of the cause information element is to indicate the reason for a particular event for the whole protocol.
+Table 20
+IE/Group NamePresenceRangeIE Type and ReferenceSemantics DescriptionCHOICE Cause Group>Radio Network Layer>>Radio Network Layer CauseMENUMERATED
+(Normal,
+Connect failed,
+Network release,
+Unknown or already allocated Iurh Context ID,
+Unspecified,
+...,
+Peer RNC not available,
+)>Transport Layer >>Transport Layer Cause MENUMERATED
+(Transport Resource Unavailable,
+Unspecified,
+…)>Protocol>>Protocol Cause MENUMERATED
+(Transfer Syntax Error,
+Abstract Syntax Error (Reject),
+Abstract Syntax Error (Ignore and Notify),
+Message not Compatible with Receiver State,
+Semantic Error,
+Unspecified,
+Abstract Syntax Error (Falsely Constructed Message),
+…)>Misc>>Misc Cause MENUMERATED
+(Processing Overload,
+Hardware Failure,
+O&M Intervention,
+Unspecified,
+…)
+The meaning of the different cause values is described in the following table. In general, "not supported" cause values indicate that the concerned capability is missing. On the other hand, "not available" cause values indicate that the concerned capability is present, but insufficient resources were available to perform the requested action.
+Radio Network Layer causeMeaningNormalNo error has occurredConnect failedConnect attempt failedNetwork releaseConnection released by networkUnknown or already allocated Iurh Context IDThe action failed because the Iurh Context ID is either unknown, or (in case of an initiating message) is known and already allocated to an existing context.UnspecifiedSent when none of the above cause values applies but still the cause is Radio Network layer related.Peer RNC not availableThe Iur interface between the HNB-GW and the peer RNC is not available for HNB-RNC connectivity via the HNB-GW.
+Transport Network Layer causeMeaningTransport resource unavailableThe required transport resources are not availableUnspecifiedSent when none of the above cause values applies but still the cause is Transport Network Layer related
+Protocol causeMeaningAbstract Syntax Error (Reject)The received message included an abstract syntax error and the concerned criticality indicated "reject" (see subclause 10.3)Abstract Syntax Error (Ignore and Notify)The received message included an abstract syntax error and the concerned criticality indicated "ignore and notify" (see subclause 10.3)Abstract syntax error (falsely constructed message)The received message contained IEs or IE groups in wrong order or with too many occurrences (see subclause 10.3)Message not Compatible with Receiver StateThe received message was not compatible with the receiver state (see subclause 10.4)Semantic ErrorThe received message included a semantic error (see subclause 10.4)Transfer Syntax ErrorThe received message included a transfer syntax error (see subclause 10.2)UnspecifiedSent when none of the above cause values applies but still the cause is Protocol related
+Miscellaneous causeMeaningHardware FailureHNB hardware failureO&M InterventionOperation and Maintenance intervention related to HNB equipmentProcessing OverloadHNB processing overloadUnspecifiedSent when none of the above cause values applies and the cause is not related to any of the categories Radio Network Layer, Transport Network Layer or Protocol.
+
+9.2.3	Criticality Diagnostics
+The Criticality Diagnostics IE is sent by the HNB when parts of a received message have not been comprehended or were missing, or if the message contained logical errors. When applicable, it contains information about which IEs that was not comprehended or were missing.
+IE/Group NamePresenceRangeIE type and referenceSemantics descriptionCriticality Diagnostics>Procedure CodeOINTEGER (0..255)Procedure Code is to be used if Criticality Diagnostics is part of Error Indication procedure, and not within the response message of the same procedure that caused the error>Triggering Message OENUMERATED(initiating message, successful outcome, unsuccessful outcome)The Triggering Message is used only if the Criticality Diagnostics is part of Error Indication procedure.>Procedure CriticalityOENUMERATED(reject, ignore, notify)This Procedure Criticality is used for reporting the Criticality of the Triggering message (Procedure). Information Element Criticality Diagnostics0 to <maxNrOfErrors>>IE CriticalityMENUMERATED(reject, ignore, notify)The IE Criticality is used for reporting the criticality of the triggering IE. The value '"ignore'" shall not be used.>IE IDMINTEGER (0..65535)The IE Id of the not understood or missing IE >Type of ErrorMENUMERATED(not understood, missing, …)
+Range boundExplanationmaxNrOfErrorsMaximum no. of IE errors allowed to be reported with a single message. The value for maxNrOfErrors is 256.
+9.2.4	RNSAP Message
+This is a container for a RNSAP message as defined in TS 25.423 [4].
+IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionRNSAP messageOCTET STRING
+9.2.5	Iurh Signalling Context ID
+The Iurh Signalling Context ID together with the respective HNB RNL IDs uniquely identifies a particular connection oriented signalling connection between two HNBs. It shall be the same as the Context ID used on the Iuh connection.
+IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionIurh Signalling Context IDBIT STRING(24)
+9.2.6	PLMN-ID
+The PLMN-ID identifies a Public Land Mobile Network.
+IE/Group NamePresenceRangeIE type and referenceSemantics descriptionPLMN-IDOCTET STRING (SIZE (3))	- digits 0 to 9, encoded 0000 to 1001,
+- 1111 used as filler digit, two digits per octet,
+- bits 4 to 1 of octet n encoding digit 2n-1- bits 8 to 5 of octet n encoding digit 2n
+
+-The PLMN identity consists of 3 digits from MCC followed by either 
+- a filler digit plus 2 digits from MNC (in case of 2 digit MNC) or 
+- 3 digits from MNC (in case of a 3 digit MNC).
+9.2.7	Cell-ID
+The Cell-ID identifies uniquely a cell within a PLMN, as defined in TS 25.331 [12].
+Information Element/Group namePresenceRangeType and referenceSemantics descriptionCell-IDBIT STRING (SIZE (28))This information element identifies a cell uniquely within a PLMN.
+9.2.8	Backoff Timer
+The Backoff Timer IE indicates in seconds the minimum duration for which the setup procedure shall not be retried.
+Information Element/Group namePresenceRangeIE Type and referenceSemantics descriptionBackoff TimerINTEGER (0..3600)Value "0"
+ indicates no specified time.
+9.2.9	HNB RNL Identity
+The HNB RNL Identity IE globally identifies a HNB or an RNC.
+IE/Group NamePresenceRange IE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityChoice HNB RNL IdentityM–>Cell Identifier>>HNB Cell IdentifierM9.2.10–>Additional Node Identifier>>Global RNC IDM9.2.11YESreject
+9.2.10	HNB Cell Identifier
+This IE identifies a HNB by its PLMN and cell it serves.
+     IE/Group NamePresence     RangeIE type and referenceSemantics descriptionPLMN-IDM9.2.6Cell-IDM9.2.7
+9.2.11	Global RNC ID
+This IE identifies an RNC by its PLMN and the RNC ID.
+     IE/Group NamePresence     RangeIE type and referenceSemantics descriptionPLMN-IDM9.2.6RNC IDMINTEGER (0..65535)Values greater than 4095 are extended (16bit) RNC Ids.
+9.3	Message and Information Element Abstract Syntax (with ASN.1)
+9.3.0	General
+RNA ASN.1 definition conforms with ITU-T X.680 [8] and ITU-T X.681 [9].
+The ASN.1 definition specifies the structure and content of RNA messages. RNA messages can contain any IEs specified in the object set definitions for that message without the order or number of occurrence being restricted by ASN.1. However, for this version of the standard, a sending entity shall construct a RNA message according to the PDU definitions module and with the following additional rules (Note that in the following IE means an IE in the object set with an explicit id. If one IE needed to appear more than once in one object set, then the different occurrences have different IE ids):
+-	IEs shall be ordered (in an IE container) in the order they appear in object set definitions.
+-	Object set definitions specify how many times IEs may appear. An IE shall appear exactly once if the presence field in an object has value "mandatory". An IE may appear at most once if the presence field in an object has value "optional" or "conditional". If in a tabular format there is multiplicity specified for an IE (i.e. an IE list) then in the corresponding ASN.1 definition the list definition is separated into two parts. The first part defines an IE container list where the list elements reside. The second part defines list elements. The IE container list appears as an IE of its own. For this version of the standard an IE container list may contain only one kind of list elements.
+If a RNA message that is not constructed as defined above is received, this shall be considered as Abstract Syntax Error, and the message shall be handled as defined for Abstract Syntax error in subclause 10.3.6.
+9.3.1	Usage of protocol extension mechanism for non-standard use
+The protocol extension mechanism for non-standard use may be used:
+-	for special operator- (and/or vendor) specific features considered not to be part of the basic functionality, i.e. the functionality required for a complete and high-quality specification in order to guarantee multivendor interoperability.
+-	by vendors for research purposes, e.g. to implement and evaluate new algorithms/features before such features are proposed for standardisation.
+The extension mechanism shall not be used for basic functionality. Such functionality shall be standardised.
+
+9.3.2	Elementary Procedure Definitions
+
+-- **************************************************************
+--
+-- Elementary Procedure definitions
+--
+-- **************************************************************
+
+RNA-PDU-Descriptions { 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+umts-Access (20) modules (3) rna(7) version1 (1) rna-PDU-Descriptions (0)}
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- IE parameter types from other modules.
+--
+-- **************************************************************
+
+IMPORTS
+	Criticality,
+	ProcedureCode
+FROM RNA-CommonDataTypes
+	IurhSetupRequest,
+	IurhSetupResponse,
+	IurhSetupFailure,
+	Connect,
+	DirectTransfer,
+	Disconnect,
+	ConnectionlessTransfer,
+	ErrorIndication,
+	PrivateMessage
+
+FROM RNA-PDU-Contents
+	id-IurhSetup,
+	id-Connect,
+	id-DirectTransfer,
+	id-Disconnect,
+	id-ConnectionlessTransfer,
+	id-ErrorIndication,
+	id-privateMessage
+FROM RNA-Constants;
+
+-- **************************************************************
+--
+-- Interface Elementary Procedure Class
+--
+-- **************************************************************
+
+RNA-ELEMENTARY-PROCEDURE ::= CLASS {
+	&InitiatingMessage			,
+	&SuccessfulOutcome			OPTIONAL,
+	&UnsuccessfulOutcome		OPTIONAL,
+	&procedureCode				ProcedureCode	UNIQUE,
+	&criticality				Criticality		DEFAULT ignore
+}
+
+WITH SYNTAX {
+	INITIATING MESSAGE			&InitiatingMessage
+	[SUCCESSFUL OUTCOME			&SuccessfulOutcome]
+	[UNSUCCESSFUL OUTCOME		&UnsuccessfulOutcome]
+	PROCEDURE CODE				&procedureCode
+	[CRITICALITY				&criticality]
+}
+
+-- **************************************************************
+--
+-- Interface PDU definitions
+--
+-- **************************************************************
+
+RNA-PDU ::= CHOICE {
+	initiatingMessage		InitiatingMessage,
+	successfulOutcome		SuccessfulOutcome,
+	unsuccessfulOutcome		UnsuccessfulOutcome,
+	...
+}
+
+
+InitiatingMessage ::= SEQUENCE {
+	procedureCode	RNA-ELEMENTARY-PROCEDURE.&procedureCode		({RNA-ELEMENTARY-PROCEDURES}),
+	criticality		RNA-ELEMENTARY-PROCEDURE.&criticality		({RNA-ELEMENTARY-PROCEDURES}{@procedureCode}),
+	value			RNA-ELEMENTARY-PROCEDURE.&InitiatingMessage	({RNA-ELEMENTARY-PROCEDURES}{@procedureCode})
+}
+
+SuccessfulOutcome ::= SEQUENCE {
+	procedureCode	RNA-ELEMENTARY-PROCEDURE.&procedureCode		({RNA-ELEMENTARY-PROCEDURES}),
+	criticality		RNA-ELEMENTARY-PROCEDURE.&criticality		({RNA-ELEMENTARY-PROCEDURES}{@procedureCode}),
+	value			RNA-ELEMENTARY-PROCEDURE.&SuccessfulOutcome	({RNA-ELEMENTARY-PROCEDURES}{@procedureCode})
+}
+
+UnsuccessfulOutcome ::= SEQUENCE {
+	procedureCode	RNA-ELEMENTARY-PROCEDURE.&procedureCode			({RNA-ELEMENTARY-PROCEDURES}),
+	criticality		RNA-ELEMENTARY-PROCEDURE.&criticality			({RNA-ELEMENTARY-PROCEDURES}{@procedureCode}),
+	value			RNA-ELEMENTARY-PROCEDURE.&UnsuccessfulOutcome	({RNA-ELEMENTARY-PROCEDURES}{@procedureCode})
+}
+
+-- **************************************************************
+--
+-- Interface Elementary Procedure List
+--
+-- **************************************************************
+
+RNA-ELEMENTARY-PROCEDURES RNA-ELEMENTARY-PROCEDURE ::= {
+	RNA-ELEMENTARY-PROCEDURES-CLASS-1	|
+	RNA-ELEMENTARY-PROCEDURES-CLASS-2	,
+	...
+}
+
+RNA-ELEMENTARY-PROCEDURES-CLASS-1 RNA-ELEMENTARY-PROCEDURE ::= {
+	iurhsetup,
+	...
+}
+
+
+RNA-ELEMENTARY-PROCEDURES-CLASS-2 RNA-ELEMENTARY-PROCEDURE ::= {
+	connect							|
+	directTransfer					|
+	disconnect						|
+	connectionlessTransfer			|
+	errorIndication					|
+	privateMessage,
+	...
+}
+
+-- **************************************************************
+--
+-- Interface Elementary Procedures
+--
+-- **************************************************************
+
+iurhsetup	RNA-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		IurhSetupRequest
+	SUCCESSFUL OUTCOME		IurhSetupResponse
+	UNSUCCESSFUL OUTCOME	IurhSetupFailure
+	PROCEDURE CODE			id-IurhSetup
+	CRITICALITY				reject
+}
+
+
+connect RNA-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		Connect
+	PROCEDURE CODE			id-Connect
+	CRITICALITY				ignore
+}
+
+directTransfer RNA-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		DirectTransfer
+	PROCEDURE CODE			id-DirectTransfer
+	CRITICALITY				ignore
+}
+
+disconnect RNA-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		Disconnect
+	PROCEDURE CODE			id-Disconnect
+	CRITICALITY				ignore
+}
+
+connectionlessTransfer	RNA-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ConnectionlessTransfer
+	PROCEDURE CODE			id-ConnectionlessTransfer
+	CRITICALITY				ignore
+}
+
+
+
+errorIndication RNA-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ErrorIndication
+	PROCEDURE CODE			id-ErrorIndication
+	CRITICALITY				ignore
+}
+
+privateMessage RNA-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		PrivateMessage
+	PROCEDURE CODE			id-privateMessage
+	CRITICALITY				ignore
+}
+
+END
+
+9.3.3	PDU Definitions
+
+-- **************************************************************
+--
+-- PDU definitions for RNA.
+--
+-- **************************************************************
+
+RNA-PDU-Contents {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+umts-Access (20) modules (3) rna(7) version1 (1) rna-PDU-Contents (1) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- IE parameter types from other modules.
+--
+-- **************************************************************
+
+IMPORTS
+	Cause,
+	CriticalityDiagnostics,
+	RNSAP-Message,
+	BackoffTimer,
+	Iurh-Signalling-Context-ID,
+	HNB-RNL-ID
+
+FROM RNA-IEs
+
+
+	ProtocolExtensionContainer{},
+	ProtocolIE-ContainerList{},
+	ProtocolIE-Container{},
+	ProtocolIE-Single-Container{},
+	PrivateIE-Container{},
+	RNA-PRIVATE-IES,
+	RNA-PROTOCOL-EXTENSION,
+	RNA-PROTOCOL-IES
+FROM RNA-Containers
+
+	id-Cause,
+	id-CriticalityDiagnostics,
+
+	id-RNSAP-Message,
+	id-BackoffTimer,
+
+	id-Iurh-Signalling-Context-ID,
+	id-Senders-HNB-RNL-ID,
+	id-Receivers-HNB-RNL-ID,
+	id-HNB-RNL-ID
+
+
+
+FROM RNA-Constants;
+
+
+-- **************************************************************
+--
+-- Iurh Setup REQUEST
+--
+-- **************************************************************
+
+IurhSetupRequest ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container			{ {IurhSetupRequestIEs} },
+	protocolExtensions		ProtocolExtensionContainer	{ {IurhSetupRequestExtensions} } 	OPTIONAL,
+	...
+}
+
+IurhSetupRequestIEs RNA-PROTOCOL-IES ::= {
+	{ ID id-Senders-HNB-RNL-ID			CRITICALITY reject	TYPE HNB-RNL-ID							PRESENCE mandatory	} |
+	{ ID id-Receivers-HNB-RNL-ID		CRITICALITY reject	TYPE HNB-RNL-ID							PRESENCE mandatory	},
+	...
+}
+
+IurhSetupRequestExtensions RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- Iurh Setup RESPONSE
+--
+-- **************************************************************
+
+IurhSetupResponse ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{ {IurhSetupResponseIEs} },
+	protocolExtensions	ProtocolExtensionContainer	{ {IurhSetupResponseExtensions} } 	OPTIONAL,
+	...
+}
+
+IurhSetupResponseIEs RNA-PROTOCOL-IES ::= {
+	{ ID id-Senders-HNB-RNL-ID			CRITICALITY reject	TYPE HNB-RNL-ID							PRESENCE mandatory } |
+	{ ID id-Receivers-HNB-RNL-ID		CRITICALITY reject	TYPE HNB-RNL-ID							PRESENCE mandatory },
+	...
+}
+
+
+IurhSetupResponseExtensions RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- **************************************************************
+--
+-- Iurh Setup FAILURE
+--
+-- **************************************************************
+
+IurhSetupFailure ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{ {IurhSetupFailureIEs} },
+	protocolExtensions	ProtocolExtensionContainer	{ {IurhSetupFailureExtensions} } 	OPTIONAL,
+	...
+}
+
+IurhSetupFailureIEs RNA-PROTOCOL-IES ::= {
+	{ ID id-Cause						CRITICALITY ignore	TYPE Cause							PRESENCE mandatory }|
+	{ ID id-BackoffTimer				CRITICALITY ignore	TYPE BackoffTimer					PRESENCE optional }|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional }|
+	{ ID id-Senders-HNB-RNL-ID			CRITICALITY reject	TYPE HNB-RNL-ID						PRESENCE mandatory }|
+	{ ID id-Receivers-HNB-RNL-ID		CRITICALITY reject	TYPE HNB-RNL-ID						PRESENCE mandatory },
+	...
+}
+
+
+IurhSetupFailureExtensions RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+
+
+-- **************************************************************
+--
+-- Connect
+--
+-- **************************************************************
+
+Connect ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container			{ {ConnectIEs} },
+	protocolExtensions		ProtocolExtensionContainer	{ {ConnectExtensions} } 	OPTIONAL,
+	...
+}
+
+ConnectIEs RNA-PROTOCOL-IES ::= {
+	{ ID id-Iurh-Signalling-Context-ID		CRITICALITY reject	TYPE Iurh-Signalling-Context-ID			PRESENCE mandatory }|
+	{ ID id-RNSAP-Message					CRITICALITY reject	TYPE RNSAP-Message						PRESENCE optional }|
+	{ ID id-Senders-HNB-RNL-ID				CRITICALITY reject	TYPE HNB-RNL-ID							PRESENCE mandatory }|
+	{ ID id-Receivers-HNB-RNL-ID			CRITICALITY reject	TYPE HNB-RNL-ID							PRESENCE mandatory },
+	...
+}
+
+ConnectExtensions RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- **************************************************************
+--
+-- Direct Transfer
+--
+-- **************************************************************
+
+DirectTransfer ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{ {DirectTransferIEs} },
+	protocolExtensions	ProtocolExtensionContainer	{ {DirectTransferExtensions} } 	OPTIONAL,
+	...
+}
+
+DirectTransferIEs RNA-PROTOCOL-IES ::= {
+	{ ID id-Iurh-Signalling-Context-ID		CRITICALITY reject	TYPE Iurh-Signalling-Context-ID		PRESENCE mandatory } |
+	{ ID id-RNSAP-Message					CRITICALITY reject	TYPE RNSAP-Message					PRESENCE mandatory } |
+	{ ID id-Receivers-HNB-RNL-ID			CRITICALITY reject	TYPE HNB-RNL-ID						PRESENCE mandatory } ,
+	...
+}
+
+DirectTransferExtensions RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+
+-- **************************************************************
+--
+-- Disconnect
+--
+-- **************************************************************
+
+Disconnect ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{ {DisconnectIEs} },
+	protocolExtensions	ProtocolExtensionContainer	{ {DisconnectExtensions} } 	OPTIONAL,
+	...
+}
+
+DisconnectIEs RNA-PROTOCOL-IES ::= {
+	{ ID id-Iurh-Signalling-Context-ID		CRITICALITY reject	TYPE Iurh-Signalling-Context-ID			PRESENCE mandatory } |
+	{ ID id-Cause							CRITICALITY reject	TYPE Cause								PRESENCE mandatory } |
+	{ ID id-RNSAP-Message					CRITICALITY reject	TYPE RNSAP-Message						PRESENCE optional } |
+	{ ID id-Receivers-HNB-RNL-ID			CRITICALITY reject	TYPE HNB-RNL-ID							PRESENCE mandatory },
+	...
+}
+
+DisconnectExtensions RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- Connectionless Transfer
+--
+-- **************************************************************
+
+ConnectionlessTransfer ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{ {ConnectionlessTransferIEs} },
+	protocolExtensions	ProtocolExtensionContainer	{ {ConnectionlessTransferExtensions} } 	OPTIONAL,
+	...
+}
+
+ConnectionlessTransferIEs RNA-PROTOCOL-IES ::= {
+	{ ID id-RNSAP-Message					CRITICALITY reject	TYPE RNSAP-Message					PRESENCE mandatory } |
+	{ ID id-Senders-HNB-RNL-ID				CRITICALITY reject	TYPE HNB-RNL-ID						PRESENCE mandatory } |
+	{ ID id-Receivers-HNB-RNL-ID			CRITICALITY reject	TYPE HNB-RNL-ID						PRESENCE mandatory },
+	...
+}
+
+ConnectionlessTransferExtensions RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+
+-- **************************************************************
+--
+-- ERROR INDICATION
+--
+-- **************************************************************
+
+ErrorIndication ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{ {ErrorIndicationIEs} },
+	protocolExtensions	ProtocolExtensionContainer	{ {ErrorIndicationExtensions} } 	OPTIONAL,
+	...
+}
+
+ErrorIndicationIEs RNA-PROTOCOL-IES ::= {
+	{ ID id-Cause							CRITICALITY ignore	TYPE Cause							PRESENCE optional } |
+	{ ID id-CriticalityDiagnostics			CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional } |
+	{ ID id-Iurh-Signalling-Context-ID		CRITICALITY ignore	TYPE Iurh-Signalling-Context-ID		PRESENCE optional } |
+	{ ID id-Receivers-HNB-RNL-ID			CRITICALITY ignore	TYPE HNB-RNL-ID						PRESENCE mandatory } ,
+	...
+}
+
+ErrorIndicationExtensions RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- PRIVATE MESSAGE
+--
+-- **************************************************************
+
+PrivateMessage ::= SEQUENCE {
+	privateIEs		PrivateIE-Container {{PrivateMessage-IEs}},
+	...
+}
+
+PrivateMessage-IEs RNA-PRIVATE-IES ::= {
+	...
+}
+
+END
+
+
+9.3.4	Information Element Definitions
+
+-- **************************************************************
+--
+-- Information Element Definitions
+--
+-- **************************************************************
+
+RNA-IEs {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+umts-Access (20) modules (3) rna(7) version1 (1) rna-IEs (2) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+IMPORTS
+	maxNrOfErrors,
+	id-HNB-Cell-Identifier,
+	id-GlobalRNC-ID
+FROM RNA-Constants
+
+	Criticality,
+	ProcedureCode,
+	ProtocolIE-ID,
+	TriggeringMessage
+FROM RNA-CommonDataTypes
+	ProtocolExtensionContainer{},
+	RNA-PROTOCOL-EXTENSION,
+	RNA-PROTOCOL-IES,
+	ProtocolIE-Single-Container{}
+FROM RNA-Containers;
+
+
+--A
+--B
+BackoffTimer ::= INTEGER(0..3600)
+
+--C
+
+-- **************************************************************
+--
+-- Cause IE
+--
+-- **************************************************************
+
+Cause ::= CHOICE {
+	radioNetwork			CauseRadioNetwork,
+	transport				CauseTransport,
+	protocol				CauseProtocol,
+	misc					CauseMisc,
+	...
+}
+
+CauseRadioNetwork ::= ENUMERATED {
+	normal,
+	connect-failed,
+	network-release,
+	unknown-or-already-allocated-Iurh-Context-ID,
+	unspecificed,
+	...,
+	peer-RNC-not-available
+}
+
+CauseTransport ::= ENUMERATED {
+	transport-resource-unavailable,
+	unspecified,
+	...
+}
+
+CauseProtocol ::= ENUMERATED {
+	transfer-syntax-error,
+	abstract-syntax-error-reject,
+	abstract-syntax-error-ignore-and-notify,
+	message-not-compatible-with-receiver-state,
+	semantic-error,
+	unspecified,
+	abstract-syntax-error-falsely-constructed-message,
+	...
+}
+
+CauseMisc ::= ENUMERATED {
+	processing-overload,
+	hardware-failure,
+	o-and-m-intervention,
+	unspecified,
+	...
+}
+
+CellIdentity ::=		BIT STRING (SIZE (28))
+
+
+
+
+-- **************************************************************
+--
+-- CriticalityDiagnostics
+--
+-- **************************************************************
+
+CriticalityDiagnostics ::= SEQUENCE {
+	procedureCode				ProcedureCode												OPTIONAL,
+	triggeringMessage			TriggeringMessage											OPTIONAL,
+	procedureCriticality		Criticality													OPTIONAL,
+	iEsCriticalityDiagnostics	CriticalityDiagnostics-IE-List	OPTIONAL,
+	iE-Extensions				ProtocolExtensionContainer { {CriticalityDiagnostics-ExtIEs} } 	OPTIONAL,
+	...
+}
+
+CriticalityDiagnostics-IE-List ::= SEQUENCE (SIZE (1..maxNrOfErrors)) OF
+	SEQUENCE {
+		iECriticality			Criticality,
+		iE-ID					ProtocolIE-ID,
+		typeOfError				TypeOfError,
+		iE-Extensions			ProtocolExtensionContainer { {CriticalityDiagnostics-IE-List-ExtIEs} }	OPTIONAL,
+		...
+	}
+
+CriticalityDiagnostics-IE-List-ExtIEs RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+CriticalityDiagnostics-ExtIEs RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+
+--D
+
+--E
+--F
+
+--G
+
+--H
+
+
+HNB-RNL-ID ::= CHOICE {
+	hNB-Identity-as-Global-Cell-Identifier	HNB-Cell-Identifier,
+	...,
+	extension-HNB-RNL-ID		Extension-HNB-RNL-ID
+}
+
+Extension-HNB-RNL-ID ::= ProtocolIE-Single-Container {{ Extension-HNB-RNL-ID-IE }}
+
+Extension-HNB-RNL-ID-IE RNA-PROTOCOL-IES ::= {
+	{ ID id-GlobalRNC-ID	CRITICALITY reject	TYPE GlobalRNC-ID	PRESENCE mandatory },
+	...
+}
+
+HNB-Cell-Identifier	::=	SEQUENCE {
+	pLMN-ID		PLMN-ID,	cell-ID		CellIdentity,
+	iE-Extensions			ProtocolExtensionContainer { { HNB-Cell-Identifier-ExtIEs } }		OPTIONAL,
+	...
+}
+
+HNB-Cell-Identifier-ExtIEs RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+		
+
+--I
+
+Iurh-Signalling-Context-ID	::=	 BIT STRING (SIZE(24))
+
+--J
+--K
+
+--L
+
+
+--M
+--N
+--O
+--P
+PLMN-ID	::= OCTET STRING (SIZE(3))
+
+
+
+--Q
+--R
+
+GlobalRNC-ID	::= SEQUENCE {
+	pLMN-ID			PLMN-ID,
+	rnc-ID			INTEGER (0..65535),
+	iE-Extensions	ProtocolExtensionContainer { { GlobalRNC-ID-ExtIEs } }		OPTIONAL,
+	...
+}
+
+GlobalRNC-ID-ExtIEs RNA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+RNSAP-Message	::=			OCTET STRING
+
+
+--S
+--T
+
+TypeOfError ::= ENUMERATED {
+	not-understood,
+	missing,
+	...
+}
+
+
+
+--V
+--W
+--X
+--Y
+--Z
+
+
+END
+
+9.3.5	Common Definitions
+
+
+-- **************************************************************
+--
+-- Common definitions
+--
+-- **************************************************************
+
+RNA-CommonDataTypes {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+umts-Access (20) modules (3) rna(7) version1 (1) rna-CommonDataTypes (3) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- Extension constants
+--
+-- **************************************************************
+
+maxPrivateIEs									INTEGER ::= 65535
+maxProtocolExtensions							INTEGER ::= 65535
+maxProtocolIEs									INTEGER ::= 65535
+
+-- **************************************************************
+--
+-- Common Data Types
+--
+-- **************************************************************
+Criticality		::= ENUMERATED { reject, ignore, notify }
+
+Presence		::= ENUMERATED { optional, conditional, mandatory }
+
+PrivateIE-ID	::= CHOICE {
+	local				INTEGER (0..65535),
+	global				OBJECT IDENTIFIER
+}
+
+
+ProcedureCode		::= INTEGER (0..255)
+
+
+ProtocolIE-ID		::= INTEGER (0..maxProtocolIEs)
+
+
+TriggeringMessage	::= ENUMERATED { initiating-message, successful-outcome, unsuccessful-outcome, outcome }
+
+END
+
+
+9.3.6	Constant Definitions
+
+
+-- **************************************************************
+--
+-- Constant definitions
+--
+-- **************************************************************
+
+RNA-Constants { 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+umts-Access (20) modules (3) rna(7) version1 (1) rna-Constants (4) } 
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+IMPORTS
+	ProcedureCode,
+	ProtocolIE-ID
+FROM RNA-CommonDataTypes;
+
+
+-- **************************************************************
+--
+-- Elementary Procedures
+--
+-- **************************************************************
+id-IurhSetup						ProcedureCode ::= 1
+id-Connect							ProcedureCode ::= 2
+id-DirectTransfer					ProcedureCode ::= 3
+id-Disconnect						ProcedureCode ::= 4
+id-ConnectionlessTransfer			ProcedureCode ::= 5
+id-ErrorIndication					ProcedureCode ::= 6
+id-privateMessage					ProcedureCode ::= 7
+
+
+-- **************************************************************
+--
+-- Lists
+--
+-- **************************************************************
+maxNrOfErrors						INTEGER ::= 256
+
+
+
+-- **************************************************************
+--
+-- IEs
+--
+-- **************************************************************
+
+id-Cause										ProtocolIE-ID ::= 1
+id-CriticalityDiagnostics						ProtocolIE-ID ::= 2
+id-RNSAP-Message								ProtocolIE-ID ::= 3
+id-BackoffTimer									ProtocolIE-ID ::= 4
+id-Senders-HNB-RNL-ID							ProtocolIE-ID ::= 5
+id-Receivers-HNB-RNL-ID							ProtocolIE-ID ::= 6
+id-Iurh-Signalling-Context-ID					ProtocolIE-ID ::= 7
+id-HNB-RNL-ID									ProtocolIE-ID ::= 8
+id-HNB-Cell-Identifier							ProtocolIE-ID ::= 9
+id-GlobalRNC-ID									ProtocolIE-ID ::= 10
+
+
+
+
+END
+9.3.7	Container Definitions
+
+
+-- **************************************************************
+--
+-- Container definitions
+--
+-- **************************************************************
+
+RNA-Containers {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+umts-Access (20) modules (3) rna(7) version1 (1) rna-Containers (5) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- IE parameter types from other modules.
+--
+-- **************************************************************
+
+IMPORTS
+	Criticality,
+	Presence,
+	PrivateIE-ID,
+	ProtocolIE-ID,
+	maxPrivateIEs,
+	maxProtocolExtensions,
+	maxProtocolIEs
+FROM RNA-CommonDataTypes;
+
+-- **************************************************************
+--
+-- Class Definition for Protocol IEs
+--
+-- **************************************************************
+
+RNA-PROTOCOL-IES ::= CLASS {
+	&id					ProtocolIE-ID		UNIQUE,
+	&criticality		Criticality,
+	&Value,
+	&presence			Presence
+}
+WITH SYNTAX {
+	ID					&id
+	CRITICALITY			&criticality
+	TYPE				&Value
+	PRESENCE			&presence
+}
+
+-- **************************************************************
+--
+-- Class Definition for Protocol Extensions
+--
+-- **************************************************************
+
+RNA-PROTOCOL-EXTENSION ::= CLASS {
+	&id					ProtocolIE-ID UNIQUE,
+	&criticality		Criticality,
+	&Extension,
+	&presence			Presence
+}
+WITH SYNTAX {
+	ID					&id
+	CRITICALITY			&criticality
+	EXTENSION			&Extension
+	PRESENCE			&presence
+}
+
+-- **************************************************************
+--
+-- Class Definition for Private IEs
+--
+-- **************************************************************
+
+RNA-PRIVATE-IES ::= CLASS {
+	&id					PrivateIE-ID,
+	&criticality		Criticality,
+	&Value,
+	&presence			Presence
+}
+WITH SYNTAX {
+	ID					&id
+	CRITICALITY			&criticality
+	TYPE				&Value
+	PRESENCE			&presence
+}
+
+-- **************************************************************
+--
+-- Container for Protocol IEs
+--
+-- **************************************************************
+
+ProtocolIE-Container {RNA-PROTOCOL-IES : IEsSetParam} ::= 
+	SEQUENCE (SIZE (0..maxProtocolIEs)) OF
+		ProtocolIE-Field {{IEsSetParam}}
+
+ProtocolIE-Single-Container {RNA-PROTOCOL-IES : IEsSetParam} ::= 
+	ProtocolIE-Field {{IEsSetParam}}
+
+ProtocolIE-Field {RNA-PROTOCOL-IES : IEsSetParam} ::= SEQUENCE {
+	id					RNA-PROTOCOL-IES.&id				({IEsSetParam}),
+	criticality			RNA-PROTOCOL-IES.&criticality		({IEsSetParam}{@id}),
+	value				RNA-PROTOCOL-IES.&Value				({IEsSetParam}{@id})
+}
+
+-- **************************************************************
+--
+-- Container Lists for Protocol IE Containers
+--
+-- **************************************************************
+
+ProtocolIE-ContainerList {INTEGER : lowerBound, INTEGER : upperBound, RNA-PROTOCOL-IES : IEsSetParam} ::=
+	SEQUENCE (SIZE (lowerBound..upperBound)) OF
+		ProtocolIE-Container {{IEsSetParam}}
+
+-- **************************************************************
+--
+-- Container for Protocol Extensions
+--
+-- **************************************************************
+
+ProtocolExtensionContainer {RNA-PROTOCOL-EXTENSION : ExtensionSetParam} ::= 
+	SEQUENCE (SIZE (1..maxProtocolExtensions)) OF
+		ProtocolExtensionField {{ExtensionSetParam}}
+
+ProtocolExtensionField {RNA-PROTOCOL-EXTENSION : ExtensionSetParam} ::= SEQUENCE {
+	id					RNA-PROTOCOL-EXTENSION.&id				({ExtensionSetParam}),
+	criticality			RNA-PROTOCOL-EXTENSION.&criticality		({ExtensionSetParam}{@id}),
+	extensionValue		RNA-PROTOCOL-EXTENSION.&Extension		({ExtensionSetParam}{@id})
+}
+
+-- **************************************************************
+--
+-- Container for Private IEs
+--
+-- **************************************************************
+
+PrivateIE-Container {RNA-PRIVATE-IES : IEsSetParam } ::= 
+	SEQUENCE (SIZE (1.. maxPrivateIEs)) OF
+		PrivateIE-Field {{IEsSetParam}}
+
+PrivateIE-Field {RNA-PRIVATE-IES : IEsSetParam} ::= SEQUENCE {
+	id					RNA-PRIVATE-IES.&id					({IEsSetParam}),
+	criticality			RNA-PRIVATE-IES.&criticality		({IEsSetParam}{@id}),
+	value				RNA-PRIVATE-IES.&Value				({IEsSetParam}{@id})
+}
+
+END
+
+9.4	Message Transfer Syntax
+RNA shall use the ASN.1 Basic Packed Encoding Rules (BASIC-PER) Aligned Variant as transfer syntax as specified in ITU-T X.691 [7].
+
+10	Handling of Unknown, Unforeseen or Erroneous Protocol Data
+10.1	General
+Protocol Error cases can be divided into three classes:
+- Transfer Syntax Error;
+- Abstract Syntax Error;
+- Logical Error.
+Protocol errors can occur in the following functions within a receiving node:
+
+Figure 10.1.14: Protocol Errors in RNA
+The information stated in subclauses 10.2, 10.3 and 10.4, to be included in the message used when reporting an error, is what at minimum shall be included. Other optional information elements within the message may also be included, if available. This is also valid for the case when the reporting is done with a response message. The latter is an exception to what is stated in subclause 4.1.
+10.2	Transfer Syntax Error
+A Transfer Syntax Error occurs when the receiver is not able to decode the received physical message Transfer syntax errors are always detected in the process of ASN.1 decoding. If a Transfer Syntax Error occurs, the receiver should initiate Error Indication procedure with appropriate cause value for the Transfer Syntax protocol error.
+10.3	Abstract Syntax Error
+10.3.1	General
+An Abstract Syntax Error occurs when the receiving functional RNA entity:
+1.	receives IEs or IE groups that cannot be understood (unknown IE id);
+2.	receives IEs for which the logical range is violated (e.g.: ASN.1 definition: 0 to 15, the logical range is 0 to 10 (values 11 to 15 are undefined), and 12 will be received; this case will be handled as an abstract syntax error using criticality information sent by the originator of the message);
+3.	does not receive IEs or IE groups but according to the specified presence of the concerning object, the IEs or IE groups should have been present in the received message;
+4.	receives IEs or IE groups that are defined to be part of that message in wrong order or with too many occurrences of the same IE or IE group;
+5.	receives IEs or IE groups but according to the conditional presence of the concerning object and the specified condition, the IEs or IE groups should not have been present in the received message.
+Cases 1 and 2 (not comprehended IE/IE group) are handled based on received Criticality information. Case 3 (missing IE/IE group) is handled based on Criticality information and Presence information for the missing IE/IE group specified in the version of the specification used by the receiver. Case 4 (IEs or IE groups in wrong order or with too many occurrences) and Case 5 (erroneously present conditional IEs or IE groups) result in rejecting the procedure.
+If an Abstract Syntax Error occurs, the receiver shall read the remaining message and shall then for each detected Abstract Syntax Error act according to the Criticality Information and Presence Information for the IE/IE group due to which Abstract Syntax Error occurred in accordance with subclauses 10.3.4 and 10.3.5. The handling of cases 4 and 5 is specified in subclause 10.3.6.
+10.3.2	Criticality Information
+In the RNA messages there is criticality information set for individual IEs and/or IE groups. This criticality information instructs the receiver how to act when receiving an IE or an IE group that is not comprehended i.e. the entire item (IE or IE group) which is not (fully or partially) comprehended shall be treated in accordance with its own criticality information as specified in subclause 10.3.4.
+In addition, the criticality information is used in case of the missing IE/IE group abstract syntax error (see subclause 10.3.5).
+The receiving node shall take different actions depending on the value of the Criticality Information. The three possible values of the Criticality Information for an IE/IE group are:
+-	Reject IE;
+-	Ignore IE and Notify Sender;
+-	Ignore IE.
+The following rules restrict when a receiving entity may consider an IE, an IE group or an EP not comprehended (not implemented), and when action based on criticality information is applicable:
+1.	IE or IE group: When one new or modified IE or IE group is implemented for one EP from a standard version, then other new or modified IEs or IE groups specified for that EP in that standard version shall be considered comprehended by the receiving entity (some may still remain unsupported).
+2.	EP: The comprehension of different EPs within a standard version or between different standard versions is not mandated. Any EP that is not supported may be considered not comprehended, even if another EP from that standard version is comprehended, and action based on criticality shall be applied.
+10.3.3	Presence Information
+For many IEs/IE groups which are optional according to the ASN.1 transfer syntax, RNA specifies separately if the presence of these IEs/IE groups is optional or mandatory with respect to HNB application by means of the presence field of the concerning object of class RNA-PROTOCOL-IES, RNA-PROTOCOL-IES-PAIR, RNA-PROTOCOL-EXTENSION or RNA-PRIVATE-IES.
+The presence field of the indicated classes supports three values:
+1.	Optional;
+2.	Conditional;
+3.	Mandatory.
+If an IE/IE group is not included in a received message and the presence of the IE/IE group is mandatory or the presence is conditional and the condition is true according to the version of the specification used by the receiver, an abstract syntax error occurs due to a missing IE/IE group.
+10.3.4	Not comprehended IE/IE group
+10.3.4.1	Procedure Code
+The receiving node shall treat the different types of received criticality information of the Procedure Code according to the following:
+Reject IE:
+-	If a message is received with a Procedure Code IE marked with "Reject IE" which the receiving node does not comprehend, the receiving node shall reject the procedure using the Error Indication procedure.
+Ignore IE and Notify Sender:
+-	If a message is received with a Procedure Code IE marked with "Ignore IE and Notify Sender" which the receiving node does not comprehend, the receiving node shall ignore the procedure and initiate the Error Indication procedure.
+Ignore IE:
+-	If a message is received with a Procedure Code IE marked with "Ignore IE" which the receiving node does not comprehend, the receiving node shall ignore the procedure.
+When using the Error Indication procedure to reject a procedure or to report an ignored procedure it shall include the Procedure Code IE, the Triggering Message IE, and the Procedure Criticality IE in the Criticality Diagnostics IE.
+10.3.4.1A	Type of Message
+When the receiving node cannot decode the Type of Message IE, the Error Indication procedure shall be initiated with an appropriate cause value.
+10.3.4.2	IEs other than the Procedure Code and Type of Message
+The receiving node shall treat the different types of received criticality information of an IE/IE group other than the Procedure Code IE and Type of Message IE according to the following:
+Reject IE:
+-	If a message initiating a procedure is received containing one or more IEs/IE groups marked with "Reject IE" which the receiving node does not comprehend; none of the functional requests of the message shall be executed. The receiving node shall reject the procedure and report the rejection of one or more IEs/IE groups using the message normally used to report unsuccessful outcome of the procedure. In case the information received in the initiating message was insufficient to determine a value for all IEs that are required to be present in the message used to report the unsuccessful outcome of the procedure, the receiving node shall instead terminate the procedure and initiate the Error Indication procedure.
+-	If a message initiating a procedure that does not have a message to report unsuccessful outcome is received containing one or more IEs/IE groups marked with "Reject IE" which the receiving node does not comprehend, the receiving node shall terminate the procedure and initiate the Error Indication procedure.
+-	If a response message is received containing one or more IEs marked with "Reject IE" which the receiving node does no comprehend, the receiving node shall consider the procedure as unsuccessfully terminated and initiate local error handling.
+Ignore IE and Notify Sender:
+-	If a message initiating a procedure is received containing one or more Ies/IE groups marked with "Ignore IE and Notify Sender" which the receiving node does not comprehend, the receiving node shall ignore the content of the not comprehended IEs/IE groups, continue with the procedure as if the not comprehended IEs/IE groups were not received (except for the reporting) using the understood IEs/IE groups, and report in the response message of the procedure that one or more IEs/IE groups have been ignored. In case the information received in the initiating message was insufficient to determine a value for all IEs that are required to be present in the response message, the receiving node shall instead terminate the procedure and initiate the Error Indication procedure.
+-	if a message initiating a procedure that does not have a message to report the outcome of the procedure is received containing one or more IEs/IE groups marked with "Ignore IE and Notify Sender" which the receiving node does not comprehend, the receiving node shall ignore the content of the not comprehended IEs/IE groups, continue with the procedure as if the not comprehended IEs/IE groups were not received (except for the reporting) using the understood IEs/IE groups, and initiate the Error Indication procedure to report that one or more IEs/IE groups have been ignored.
+-	If a response message is received containing one or more IEs/IE groups marked with "Ignore IE and Notify Sender" which the receiving node does not comprehend, the receiving node shall ignore the content of the not comprehended IE/IE groups, continue with the procedure as if the not comprehended IEs/IE groups were not received (except for the reporting) using the understood IEs/IE groups and initiate the Error Indication procedure.
+Ignore IE:
+-	If a message initiating a procedure is received containing one or more IEs/IE groups marked with "Ignore IE" which the receiving node does not comprehend, the receiving node shall ignore the content of the not comprehended IEs/IE groups and continue with the procedure as if the not comprehended IEs/IE groups were not received using only the understood IEs/IE groups.
+-	If a response message is received containing one or more IEs/IE groups marked with "Ignore IE" which the receiving node does not comprehend, the receiving node shall ignore the content of the not comprehended IEs/IE groups and continue with the procedure as if the not comprehended IEs/IE groups were not received using the understood IEs/IE groups.
+When reporting not comprehended IEs/IE groups marked with "Reject IE" or "Ignore IE and Notify Sender" using a response message defined for the procedure, the Information Element Criticality Diagnostics IE shall be included in the Criticality Diagnostics IE for each reported IE/IE group. In the Information Element Criticality Diagnostics IE the Repetition Number IE shall be included and in addition, if the not comprehended IE/IE group is not at message hierarchy level 1 (top level; see annex A) also the Message Structure IE shall be included.
+When reporting not comprehended IEs/IE groups marked with "Reject IE" or "Ignore IE and Notify Sender" using the Error Indication procedure, the Procedure Code IE, the Triggering Message IE, Procedure Criticality IE, and the Information Element Criticality Diagnostics IE shall be included in the Criticality Diagnostics IE for each reported IE/IE group. In the Information Element Criticality Diagnostics IE the Repetition Number IE shall be included and in addition, if the not comprehended IE/IE group is not at message hierarchy level 1 (top level; see annex A) also the Message Structure IE shall be included.
+10.3.5	Missing IE or IE group
+The receiving node shall treat the missing IE/IE group according to the criticality information for the missing IE/IE group in the received message specified in the version of the present document used by the receiver:
+Reject IE:
+-	if a received message initiating a procedure is missing one or more IEs/IE groups with specified criticality "Reject IE"; none of the functional requests of the message shall be executed. The receiving node shall reject the procedure and report the missing IEs/IE groups using the message normally used to report unsuccessful outcome of the procedure. In case the information received in the initiating message was insufficient to determine a value for all IEs that are required to be present in the message used to report the unsuccessful outcome of the procedure, the receiving node shall instead terminate the procedure and initiate the Error Indication procedure.
+-	if a received message initiating a procedure that does not have a message to report unsuccessful outcome is missing one or more IEs/IE groups with specified criticality "Reject IE", the receiving node shall terminate the procedure and initiate the Error Indication procedure.
+-	if a received response message is missing one or more IEs/IE groups with specified criticality "Reject IE", the receiving node shall consider the procedure as unsuccessfully terminated and initiate local error handling.
+Ignore IE and Notify Sender:
+-	if a received message initiating a procedure is missing one or more IEs/IE groups with specified criticality "Ignore IE and Notify Sender", the receiving node shall ignore that those IEs are missing and continue with the procedure based on the other IEs/IE groups present in the message and report in the response message of the procedure that one or more IEs/IE groups were missing. In case the information received in the initiating message was insufficient to determine a value for all IEs that are required to be present in the response message, the receiving node shall instead terminate the procedure and initiate the Error Indication procedure.
+-	if a received message initiating a procedure that does not have a message to report the outcome of the procedure is missing one or more IEs/IE groups with specified criticality "Ignore IE and Notify Sender", the receiving node shall ignore that those IEs are missing and continue with the procedure based on the other IEs/IE groups present in the message and initiate the Error Indication procedure to report that one or more IEs/IE groups were missing.
+-	if a received response message is missing one or more IEs/IE groups with specified criticality "Ignore IE and Notify Sender", the receiving node shall ignore that those IEs are missing and continue with the procedure based on the other IEs/IE groups present in the message and initiate the Error Indication procedure to report that one or more IEs/IE groups were missing.
+Ignore IE:
+-	if a received message initiating a procedure is missing one or more IEs/IE groups with specified criticality "Ignore IE", the receiving node shall ignore that those IEs are missing and continue with the procedure based on the other IEs/IE groups present in the message.
+-	if a received response message is missing one or more IEs/IE groups with specified criticality "Ignore IE", the receiving node shall ignore that those IEs/IE groups are missing and continue with the procedure based on the other IEs/IE groups present in the message.
+When reporting missing IEs/IE groups with specified criticality "Reject IE" or "Ignore IE and Notify Sender" using a response message defined for the procedure, the Information Element Criticality Diagnostics IE shall be included in the Criticality Diagnostics IE for each reported IE/IE group. In the Information Element Criticality Diagnostics IE the Repetition Number IE shall be included and in addition, if the missing IE/IE group is not at message hierarchy level 1 (top level; see annex A) also the Message Structure IE shall be included.
+When reporting missing IEs/IE groups with specified criticality "Reject IE" or "Ignore IE and Notify Sender" using the Error Indication procedure, the Procedure Code IE, the Triggering Message IE, Procedure Criticality IE, and the Information Element Criticality Diagnostics IE shall be included in the Criticality Diagnostics IE for each reported IE/IE group. In the Information Element Criticality Diagnostics IE the Repetition Number IE shall be included and in addition, if the missing IE/IE group is not at message hierarchy level 1 (top level; see annex A) also the Message Structure IE shall be included.
+10.3.6	IEs or IE groups received in wrong order or with too many occurrences or erroneously present
+If a message with IEs or IE groups in wrong order or with too many occurrences is received or if IEs or IE groups with a conditional presence are present when the condition is not met (i.e. erroneously present), the receiving node shall behave according to the following:
+-	If a message initiating a procedure is received containing IEs or IE groups in wrong order or with too many occurrences or erroneously present, none of the functional requests of the message shall be executed. The receiving node shall reject the procedure and report the cause value "Abstract Syntax Error (Falsely Constructed Message)" using the message normally used to report unsuccessful outcome of the procedure. In case the information received in the initiating message was insufficient to determine a value for all IEs that are required to be present in the message used to report the unsuccessful outcome of the procedure, the receiving node shall instead terminate the procedure and initiate the Error Indication procedure.
+-	If a message initiating a procedure that does not have a message to report unsuccessful outcome is received containing IEs or IE groups in wrong order or with too many occurrences or erroneously present, the receiving node shall terminate the procedure and initiate the Error Indication procedure, and use cause value "Abstract Syntax Error (Falsely Constructed Message)".
+-	If a response message is received containing IEs or IE groups in wrong order or with too many occurrences or erroneously present, the receiving node shall consider the procedure as unsuccessfully terminated and initiate local error handling.
+When determining the correct order only the IEs specified in the specification version used by the receiver shall be considered.
+10.4	Logical Error
+Logical error situations occur when a message is comprehended correctly, but the information contained within the message is not valid (i.e. semantic error), or describes a procedure which is not compatible with the state of the receiver. In these conditions, the following behaviour shall be performed (unless otherwise specified) as defined by the class of the elementary procedure, irrespective of the criticality information of the IE's/IE groups containing the erroneous values.
+Class 1:
+Where the logical error occurs in a request message of a class 1 procedure, and the procedure has a message to report this unsuccessful outcome, this message shall be sent with an appropriate cause value. Typical cause values are:
+-	Semantic Error;
+-	Message not compatible with receiver state.
+Where the logical error is contained in a request message of a class 1 procedure, and the procedure does not have a message to report this unsuccessful outcome, the procedure shall be terminated and the Error Indication procedure shall be initiated with an appropriate cause value. The Procedure Code IE and the Triggering Message IE within the Criticality Diagnostics IE shall then be included in order to identify the message containing the logical error.
+Where the logical error exists in a response message of a class 1 procedure, the procedure shall be considered as unsuccessfully terminated and local error handling shall be initiated.
+Class 2:
+Where the logical error occurs in a message of a class 2 procedure, the procedure shall be terminated and the Error Indication procedure shall be initiated with an appropriate cause value. The Procedure Code IE and the Triggering Message IE within the Criticality Diagnostics IE shall then be included in order to identify the message containing the logical error.
+10.5	Exceptions
+The error handling for all the cases described hereafter shall take precedence over any other error handling described in the other subclauses of clause 10.
+-	If any type of error (Transfer Syntax Error, Abstract Syntax Error or Logical Error) is detected in the ERROR INDICATION message, it shall not trigger the Error Indication procedure in the receiving Node but local error handling.
+-	In case a response message or Error Indication message needs to be returned, but the information necessary to determine the receiver of that message is missing, the procedure shall be considered as unsuccessfully terminated and local error handling shall be initiated.
+-	If an error that terminates a procedure occurs, the returned cause value shall reflect the error that caused the termination of the procedure even if one or more abstract syntax errors with criticality “ignore and notify” have earlier occurred within the same procedure.
+
+Annex A (informative):
+Change history
+
+Change historyDateTSG #TSG Doc.CRRevSubject/CommentOldNew50RP-1012950.0.12.0.050RP-1013672.0.02.0.1R3-1103102.0.12.1.0R3-1103412.1.02.2.0R3-1110512.2.02.3.003/201151RP-110184Approved and the version raised to v. 10.0.02.3.010.0.006/201152RP-11068400011Correction of References10.0.010.1.006/201152RP-11069100021Review corrections10.0.010.1.009/201153RP-11119400041RNSAP message in RNA CONNECT message10.1.010.2.009/2012Creation of version 11.0.0 based on version 10.2.010.2.011.0.009/201257RP-12113600051Introduction of connectivity between HNBs and RNCs via the HNB-GW for RNSAP signalling10.2.011.0.012/201258RP-1217370006-Editorial and minor corrections11.0.011.1.003/201359RP-1302110007-Corrections from ASN.1 Review11.1.011.2.009/2014Creation of version 12.0.0 based on version 11.2.011.2.012.0.012/201466RP-14209400084RNA Rapporteur Update12.0.012.1.012/201570Creation of version 13.0.0 based on version 12.1.012.1.013.0.001/2016Typo in the change history table corrected13.0.013.0.103/201671RP-1604490010-RNA Rapporteur Update13.0.113.1.0
+3GPP TS 25.471 V13.1.0 (2016-03)
+45
+Release 13
+
+
+3GPP
+
+3GPP TS 25.471 V13.1.0 (2016-03)
+52
+Release 13
+
+
+3GPP
+

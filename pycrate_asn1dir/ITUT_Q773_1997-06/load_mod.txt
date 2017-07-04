@@ -1,0 +1,7 @@
+# downloaded from ITU-T ASN.1 module database
+# http://www.itu.int/ITU-T/recommendations/rec.aspx?id=4079&showfl=1
+DialoguePDUs.asn
+UnidialoguePDUs.asn
+Remote-Operations-Information-Objects.asn
+Remote-Operations-Generic-ROS-PDUs.asn
+TCAPMessages.asn

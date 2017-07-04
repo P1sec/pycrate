@@ -1,0 +1,6 @@
+PKIX1Explicit88.asn
+PKIX1Implicit88.asn
+PKIXAttributeCertificate.asn
+AttributeCertificateVersion1.asn
+CryptographicMessageSyntax2004.asn
+CMS-AuthEnvelopedData-2007.asn

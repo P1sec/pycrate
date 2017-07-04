@@ -1,0 +1,482 @@
+ExtensionAttributes {joint-iso-itu-t ds(5) module(1) extensionAttributes(41) 8}
+DEFINITIONS ::=
+BEGIN
+
+-- EXPORTS All 
+
+IMPORTS
+
+  -- from Rec. ITU-T X.501 | ISO/IEC 9594-2
+
+  attributeCertificateDefinitions, authenticationFramework, certificateExtensions,
+  extensionAttributes, id-ce, informationFramework
+    FROM UsefulDefinitions {joint-iso-itu-t ds(5) module(1) usefulDefinitions(0) 8}
+ 
+  ATTRIBUTE, SYNTAX-NAME
+    FROM InformationFramework informationFramework
+
+  -- from Rec. ITU-T X.509 | ISO/IEC 9594-8
+
+  EXTENSION
+     FROM AuthenticationFramework authenticationFramework
+
+  aAissuingDistributionPoint, authorityKeyIdentifier, authorizationValidation,
+  baseUpdateTime, basicConstraints, certificateIssuer, certificatePolicies,
+  cRLDistributionPoints, cRLNumber, cRLStreamIdentifier, deltaCRLIndicator, deltaInfo,
+  expiredCertsOnCRL, extKeyUsage, freshestCRL, holdInstructionCode, invalidityDate,
+  issuerAltName, issuingDistributionPoint, keyUsage, nameConstraints, orderedList,
+  policyConstraints, policyMappings, privateKeyUsagePeriod, reasonCode, revokedGroups,
+  statusReferrals, subjectAltName, subjectDirectoryAttributes, subjectKeyIdentifier,
+  toBeRevoked
+     FROM CertificateExtensions certificateExtensions
+
+  acceptableCertPolicies, acceptablePrivilegePolicies, allowedAttributeAssignments,
+  attributeDescriptor, attributeMappings, authorityAttributeIdentifier,
+  basicAttConstraints, delegatedNameConstraints, groupAC, holderNameConstraints,
+  issuedOnBehalfOf, noAssertion, noRevAvail, roleSpecCertIdentifier, singleUse,
+  sOAIdentifier, targetingInformation, timeSpecification, userNotice
+     FROM AttributeCertificateDefinitions attributeCertificateDefinitions ;
+
+ExtensionAttribute ::= SEQUENCE {
+  type            ATTRIBUTE.&id,
+  value           SET SIZE (0..1) OF SEQUENCE {
+    mandatory  [0]  BOOLEAN DEFAULT FALSE,
+    critical   [1]  BOOLEAN DEFAULT FALSE,
+    ext        [2]  EXTENSION.&ExtnType,
+    ... },
+  ... }
+
+extensionSyntax {EXTENSION:extension-attribute} SYNTAX-NAME ::= {
+  --LDAP-DESC         extension-attribute.&ExtnType.&ldap-description
+  LDAP-DESC         extension-attribute.&ldap-description
+  DIRECTORY SYNTAX  SEQUENCE {
+    mandatory    [0]  BOOLEAN DEFAULT FALSE,
+    critical     [1]  BOOLEAN DEFAULT FALSE,
+    ext          [2]  extension-attribute.&ExtnType,
+    ... }
+  ID                extension-attribute.&id }
+
+-- The list of extension attribute types
+
+a-authorityKeyIdentifier ATTRIBUTE ::= {
+  WITH SYNTAX       authorityKeyIdentifier.&ExtnType
+  LDAP-SYNTAX       id-asx-authorityKeyIdentifier
+  LDAP-NAME         {"Authority Key Identifier"}
+  ID                id-ce-a-authorityKeyIdentifier }
+
+a-keyUsage ATTRIBUTE ::= {
+  WITH SYNTAX       keyUsage.&ExtnType
+  LDAP-SYNTAX       id-asx-keyUsage
+  LDAP-NAME         {"Key Usage"}
+  ID                id-ce-a-keyUsage }
+
+a-extKeyUsage ATTRIBUTE ::= {
+  WITH SYNTAX       extKeyUsage.&ExtnType
+  LDAP-SYNTAX       id-asx-extKeyUsage
+  LDAP-NAME         {"Extended Key Usage"}
+  ID                id-ce-a-extKeyUsage }
+
+a-privateKeyUsagePeriod ATTRIBUTE ::= {
+  WITH SYNTAX       privateKeyUsagePeriod.&ExtnType
+  LDAP-SYNTAX       id-asx-privateKeyUsagePeriod
+  LDAP-NAME         {"Private Key Usage Period"}
+  ID                id-ce-a-privateKeyUsagePeriod }
+
+a-certificatePolicies ATTRIBUTE ::= {
+  WITH SYNTAX       certificatePolicies.&ExtnType
+  LDAP-SYNTAX       id-asx-certificatePolicies
+  LDAP-NAME         {"Certificate Policies"}
+  ID                id-ce-a-certificatePolicies }
+
+a-policyMappings ATTRIBUTE ::= {
+  WITH SYNTAX       policyMappings.&ExtnType
+  LDAP-SYNTAX       id-asx-policyMappings
+  LDAP-NAME         {"Policy Mappings"}
+  ID                id-ce-a-policyMappings }
+
+a-authorizationValidation ATTRIBUTE ::= {
+  WITH SYNTAX       authorizationValidation.&ExtnType
+  LDAP-SYNTAX       id-asx-authorizationValidation
+  LDAP-NAME         {"Authorization Validation"}
+  ID                id-ce-a-authorizationValidation }
+
+a-subjectAltName ATTRIBUTE ::= {
+  WITH SYNTAX       subjectAltName.&ExtnType
+  LDAP-SYNTAX       id-asx-subjectAltName
+  LDAP-NAME         {"Subject Alternative Name"}
+  ID                id-ce-a-subjectAltName }
+
+a-issuerAltName ATTRIBUTE ::= {
+  WITH SYNTAX       issuerAltName.&ExtnType
+  LDAP-SYNTAX       id-asx-issuerAltName
+  LDAP-NAME         {"Issuer Alternative Name"}
+  ID                id-ce-a-issuerAltName }
+
+a-subjectDirectoryAttributes ATTRIBUTE ::= {
+  WITH SYNTAX       subjectDirectoryAttributes.&ExtnType
+  LDAP-SYNTAX       id-asx-subjectDirectoryAttributes
+  LDAP-NAME         {"Subject Directory Attributes"}
+  ID                id-ce-a-subjectDirectoryAttributes }
+
+a-basicConstraints ATTRIBUTE ::= {
+  WITH SYNTAX       basicConstraints.&ExtnType
+  LDAP-SYNTAX       id-asx-basicConstraints
+  LDAP-NAME         {"Basic Constraints"}
+  ID                id-ce-a-basicConstraints }
+
+a-nameConstraints ATTRIBUTE ::= {
+  WITH SYNTAX       policyConstraints.&ExtnType
+  LDAP-SYNTAX       id-asx-nameConstraints
+  LDAP-NAME         {"Name Constraints"}
+  ID                id-ce-a-nameConstraints }
+
+a-policyConstraints ATTRIBUTE ::= {
+  WITH SYNTAX       policyConstraints.&ExtnType
+  LDAP-SYNTAX       id-asx-policyConstraints
+  LDAP-NAME         {"Policy Constraints"}
+  ID                id-ce-a-policyConstraints }
+
+a-cRLNumber ATTRIBUTE ::= {
+  WITH SYNTAX       cRLNumber.&ExtnType
+  LDAP-SYNTAX       id-asx-cRLNumber
+  LDAP-NAME         {"CRL Number"}
+  ID                id-ce-a-cRLNumber}
+
+a-statusReferrals ATTRIBUTE ::= {
+  WITH SYNTAX       statusReferrals.&ExtnType
+  LDAP-SYNTAX       id-asx-statusReferrals
+  LDAP-NAME         {"Status Referrals"}
+  ID                id-ce-a-statusReferrals}
+
+a-cRLStreamIdentifier ATTRIBUTE ::= {
+  WITH SYNTAX       cRLStreamIdentifier.&ExtnType
+  LDAP-SYNTAX       id-asx-cRLStreamIdentifier
+  LDAP-NAME         {"CRL stream identifier"}
+  ID                id-ce-a-cRLStreamIdentifier}
+
+a-orderedList ATTRIBUTE ::= {
+  WITH SYNTAX       orderedList.&ExtnType
+  LDAP-SYNTAX       id-asx-orderedList
+  LDAP-NAME         {"Ordered list"}
+  ID                id-ce-a-orderedList}
+
+a-deltaInfo ATTRIBUTE ::= {
+  WITH SYNTAX       deltaInfo.&ExtnType
+  LDAP-SYNTAX       id-asx-deltaInfo
+  LDAP-NAME         {"Delta information"}
+  ID                id-ce-a-deltaInfo}
+
+a-toBeRevoked ATTRIBUTE ::= {
+  WITH SYNTAX       toBeRevoked.&ExtnType
+  LDAP-SYNTAX       id-asx-toBeRevoked
+  LDAP-NAME         {"To be revoked"}
+  ID                id-ce-a-toBeRevoked}
+
+a-revokedGroups ATTRIBUTE ::= {
+  WITH SYNTAX       revokedGroups.&ExtnType
+  LDAP-SYNTAX       id-asx-revokedGroups
+  LDAP-NAME         {"Revoked group of certificates"}
+  ID                id-ce-a-revokedGroups}
+
+a-expiredCertsOnCRL ATTRIBUTE ::= {
+  WITH SYNTAX       expiredCertsOnCRL.&ExtnType
+  LDAP-SYNTAX       id-asx-expiredCertsOnCRL
+  LDAP-NAME         {"Expired certificates on CRL"}
+  ID                id-ce-a-expiredCertsOnCRL}
+
+a-reasonCode ATTRIBUTE ::= {
+  WITH SYNTAX       reasonCode.&ExtnType
+  LDAP-SYNTAX       id-asx-reasonCode
+  LDAP-NAME         {"Reason code"}
+  ID                id-ce-a-reasonCode}
+
+a-holdInstructionCode ATTRIBUTE ::= {
+  WITH SYNTAX       holdInstructionCode.&ExtnType
+  LDAP-SYNTAX       id-asx-holdInstructionCode
+  LDAP-NAME         {"Hold instruction code"}
+  ID                id-ce-a-holdInstructionCode}
+
+a-invalidityDate ATTRIBUTE ::= {
+  WITH SYNTAX       invalidityDate.&ExtnType
+  LDAP-SYNTAX       id-asx-invalidityDate
+  LDAP-NAME         {"Invalidity date"}
+  ID                id-ce-a-invalidityDate}
+
+a-cRLDistributionPoints ATTRIBUTE ::= {
+  WITH SYNTAX       cRLDistributionPoints.&ExtnType
+  LDAP-SYNTAX       id-asx-cRLDistributionPoints
+  LDAP-NAME         {"CRL distribution points"}
+  ID                id-ce-a-cRLDistributionPoints}
+
+a-issuingDistributionPoint ATTRIBUTE ::= {
+  WITH SYNTAX       issuingDistributionPoint.&ExtnType
+  LDAP-SYNTAX       id-asx-issuingDistributionPoint
+  LDAP-NAME         {"Issuing distribution point"}
+  ID                id-ce-a-issuingDistributionPoint}
+
+a-certificateIssuer ATTRIBUTE ::= {
+  WITH SYNTAX       certificateIssuer.&ExtnType
+  LDAP-SYNTAX       id-asx-certificateIssuer
+  LDAP-NAME         {"Certificate issuer"}
+  ID                id-ce-a-certificateIssuer}
+
+a-deltaCRLIndicator ATTRIBUTE ::= {
+  WITH SYNTAX       deltaCRLIndicator.&ExtnType
+  LDAP-SYNTAX       id-asx-deltaCRLIndicator
+  LDAP-NAME         {"Delta CRL indicator"}
+  ID                id-ce-a-deltaCRLIndicator}
+
+a-baseUpdateTime ATTRIBUTE ::= {
+  WITH SYNTAX       baseUpdateTime.&ExtnType
+  LDAP-SYNTAX       id-asx-baseUpdateTime
+  LDAP-NAME         {"Base update time"}
+  ID                id-ce-a-baseUpdateTime}
+
+a-freshestCRL ATTRIBUTE ::= {
+  WITH SYNTAX       freshestCRL.&ExtnType
+  LDAP-SYNTAX       id-asx-freshestCRL
+  LDAP-NAME         {"Freshest CRL"}
+  ID                id-ce-a-freshestCRL}
+
+a-timeSpecification ATTRIBUTE ::= {
+  WITH SYNTAX       timeSpecification.&ExtnType
+  LDAP-SYNTAX       id-asx-timeSpecification
+  LDAP-NAME         {"Time specification"}
+  ID                id-ce-a-timeSpecification}
+
+a-targetingInformation ATTRIBUTE ::= {
+  WITH SYNTAX       targetingInformation.&ExtnType
+  LDAP-SYNTAX       id-asx-targetingInformation
+  LDAP-NAME         {"Targeting information"}
+  ID                id-ce-a-targetingInformation}
+
+a-userNotice ATTRIBUTE ::= {
+  WITH SYNTAX       userNotice.&ExtnType
+  LDAP-SYNTAX       id-asx-userNotice
+  LDAP-NAME         {"User notice"}
+  ID                id-ce-a-userNotice}
+
+a-acceptablePrivilegePolicies ATTRIBUTE ::= {
+  WITH SYNTAX       acceptablePrivilegePolicies.&ExtnType
+  LDAP-SYNTAX       id-asx-acceptablePrivilegePolicies
+  LDAP-NAME         {"Acceptable Privilege Policies"}
+  ID                id-ce-a-acceptablePrivilegePolicies}
+
+a-singleUse ATTRIBUTE ::= {
+  WITH SYNTAX       singleUse.&ExtnType
+  LDAP-SYNTAX       id-asx-singleUse
+  LDAP-NAME         {"Single use"}
+  ID                id-ce-a-singleUse}
+
+a-groupAC ATTRIBUTE ::= {
+  WITH SYNTAX       groupAC.&ExtnType
+  LDAP-SYNTAX       id-asx-groupAC
+  LDAP-NAME         {"Group attribute certificate"}
+  ID                id-ce-a-groupAC}
+
+a-noRevAvail ATTRIBUTE ::= {
+  WITH SYNTAX       noRevAvail.&ExtnType
+  LDAP-SYNTAX       id-asx-noRevAvail
+  LDAP-NAME         {"No revocation information available"}
+  ID                id-ce-a-noRevAvail}
+
+a-sOAIdentifier ATTRIBUTE ::= {
+  WITH SYNTAX       sOAIdentifier.&ExtnType
+  LDAP-SYNTAX       id-asx-sOAIdentifier
+  LDAP-NAME         {"SOA identifier"}
+  ID                id-ce-a-sOAIdentifier}
+
+a-attributeDescriptor ATTRIBUTE ::= {
+  WITH SYNTAX       attributeDescriptor.&ExtnType
+  LDAP-SYNTAX       id-asx-attributeDescriptor
+  LDAP-NAME         {"Attribute descriptor"}
+  ID                id-ce-a-attributeDescriptor}
+
+a-roleSpecCertIdentifier ATTRIBUTE ::= {
+  WITH SYNTAX       roleSpecCertIdentifier.&ExtnType
+  LDAP-SYNTAX       id-asx-roleSpecCertIdentifier
+  LDAP-NAME         {"Role specification certificate identifier"}
+  ID                id-ce-a-roleSpecCertIdentifier}
+
+a-basicAttConstraints ATTRIBUTE ::= {
+  WITH SYNTAX       basicAttConstraints.&ExtnType
+  LDAP-SYNTAX       id-asx-basicAttConstraints
+  LDAP-NAME         {"Basic attribute constraints"}
+  ID                id-ce-a-basicAttConstraints}
+
+a-delegatedNameConstraints ATTRIBUTE ::= {
+  WITH SYNTAX       delegatedNameConstraints.&ExtnType
+  LDAP-SYNTAX       id-asx-delegatedNameConstraints
+  LDAP-NAME         {"Delegated name constraints"}
+  ID                id-ce-a-delegatedNameConstraints}
+
+a-acceptableCertPolicies ATTRIBUTE ::= {
+  WITH SYNTAX       acceptableCertPolicies.&ExtnType
+  LDAP-SYNTAX       id-asx-acceptableCertPolicies
+  LDAP-NAME         {"Acceptable certificate policiesGroup attribute certificate"}
+  ID                id-ce-a-acceptableCertPolicies}
+
+a-authorityAttributeIdentifier ATTRIBUTE ::= {
+  WITH SYNTAX       authorityAttributeIdentifier.&ExtnType
+  LDAP-SYNTAX       id-asx-authorityAttributeIdentifier
+  LDAP-NAME         {"Authority attribute identifier"}
+  ID                id-ce-a-authorityAttributeIdentifier}
+
+a-indirectIssuer ATTRIBUTE ::= {
+  WITH SYNTAX       indirectIssuer.&ExtnType
+  LDAP-SYNTAX       id-asx-indirectIssuer
+  LDAP-NAME         {"Indirect issuer"}
+  ID                id-ce-a-indirectIssuer}
+
+a-issuedOnBehalfOf ATTRIBUTE ::= {
+  WITH SYNTAX       issuedOnBehalfOf.&ExtnType
+  LDAP-SYNTAX       id-asx-issuedOnBehalfOf
+  LDAP-NAME         {"Issued on behalf of"}
+  ID                id-ce-a-issuedOnBehalfOf}
+
+a-noAssertion ATTRIBUTE ::= {
+  WITH SYNTAX       noAssertion.&ExtnType
+  LDAP-SYNTAX       id-asx-noAssertion
+  LDAP-NAME         {"No assertion"}
+  ID                id-ce-a-noAssertion}
+
+a-allowedAttributeAssignments ATTRIBUTE ::= {
+  WITH SYNTAX       allowedAttributeAssignments.&ExtnType
+  LDAP-SYNTAX       id-asx-allowedAttributeAssignments
+  LDAP-NAME         {"Allowed attribute assignments"}
+  ID                id-ce-a-allowedAttributeAssignments}
+
+a-attributeMappings ATTRIBUTE ::= {
+  WITH SYNTAX       attributeMappings.&ExtnType
+  LDAP-SYNTAX       id-asx-attributeMappings
+  LDAP-NAME         {"Attribute mappings"}
+  ID                id-ce-a-attributeMappings}
+
+a-holderNameConstraints ATTRIBUTE ::= {
+  WITH SYNTAX       holderNameConstraints.&ExtnType
+  LDAP-SYNTAX       id-asx-holderNameConstraints
+  LDAP-NAME         {"Holder name constraints"}
+  ID                id-ce-a-holderNameConstraints}
+
+a-aAissuingDistributionPoint ATTRIBUTE ::= {
+  WITH SYNTAX       aAissuingDistributionPoint.&ExtnType
+  LDAP-SYNTAX       id-asx-aAissuingDistributionPoint
+  LDAP-NAME         {"AA issuing distribution point"}
+  ID                id-ce-a-aAissuingDistributionPoint}
+
+-- Object identifier for attribute types
+
+id-ce-a-subjectDirectoryAttributes         OBJECT IDENTIFIER ::= {id-ce 9 1}
+id-ce-a-subjectKeyIdentifier               OBJECT IDENTIFIER ::= {id-ce 14 1}
+id-ce-a-keyUsage                           OBJECT IDENTIFIER ::= {id-ce 15 1}
+id-ce-a-privateKeyUsagePeriod              OBJECT IDENTIFIER ::= {id-ce 16 1}
+id-ce-a-subjectAltName                     OBJECT IDENTIFIER ::= {id-ce 17 1}
+id-ce-a-issuerAltName                      OBJECT IDENTIFIER ::= {id-ce 18 1}
+id-ce-a-basicConstraints                   OBJECT IDENTIFIER ::= {id-ce 19 1}
+id-ce-a-cRLNumber                          OBJECT IDENTIFIER ::= {id-ce 20 1}
+id-ce-a-reasonCode                         OBJECT IDENTIFIER ::= {id-ce 21 1}
+id-ce-a-holdInstructionCode                OBJECT IDENTIFIER ::= {id-ce 23 1}
+id-ce-a-invalidityDate                     OBJECT IDENTIFIER ::= {id-ce 24 1}
+id-ce-a-deltaCRLIndicator                  OBJECT IDENTIFIER ::= {id-ce 27 1}
+id-ce-a-issuingDistributionPoint           OBJECT IDENTIFIER ::= {id-ce 28 1}
+id-ce-a-certificateIssuer                  OBJECT IDENTIFIER ::= {id-ce 29 1}
+id-ce-a-nameConstraints                    OBJECT IDENTIFIER ::= {id-ce 30 1}
+id-ce-a-cRLDistributionPoints              OBJECT IDENTIFIER ::= {id-ce 31 1}
+id-ce-a-certificatePolicies                OBJECT IDENTIFIER ::= {id-ce 32 1}
+id-ce-a-policyMappings                     OBJECT IDENTIFIER ::= {id-ce 33 1}
+id-ce-a-authorityKeyIdentifier             OBJECT IDENTIFIER ::= {id-ce 35 1}
+id-ce-a-policyConstraints                  OBJECT IDENTIFIER ::= {id-ce 36 1}
+id-ce-a-extKeyUsage                        OBJECT IDENTIFIER ::= {id-ce 37 1}
+id-ce-a-authorityAttributeIdentifier       OBJECT IDENTIFIER ::= {id-ce 38 1}
+id-ce-a-roleSpecCertIdentifier             OBJECT IDENTIFIER ::= {id-ce 39 1}
+id-ce-a-cRLStreamIdentifier                OBJECT IDENTIFIER ::= {id-ce 40 1}
+id-ce-a-basicAttConstraints                OBJECT IDENTIFIER ::= {id-ce 41 1}
+id-ce-a-delegatedNameConstraints           OBJECT IDENTIFIER ::= {id-ce 42 1}
+id-ce-a-timeSpecification                  OBJECT IDENTIFIER ::= {id-ce 43 1}
+id-ce-a-cRLScope                           OBJECT IDENTIFIER ::= {id-ce 44 1}
+id-ce-a-statusReferrals                    OBJECT IDENTIFIER ::= {id-ce 45 1}
+id-ce-a-freshestCRL                        OBJECT IDENTIFIER ::= {id-ce 46 1}
+id-ce-a-orderedList                        OBJECT IDENTIFIER ::= {id-ce 47 1}
+id-ce-a-attributeDescriptor                OBJECT IDENTIFIER ::= {id-ce 48 1}
+id-ce-a-userNotice                         OBJECT IDENTIFIER ::= {id-ce 49 1}
+id-ce-a-sOAIdentifier                      OBJECT IDENTIFIER ::= {id-ce 50 1}
+id-ce-a-baseUpdateTime                     OBJECT IDENTIFIER ::= {id-ce 51 1}
+id-ce-a-acceptableCertPolicies             OBJECT IDENTIFIER ::= {id-ce 52 1}
+id-ce-a-deltaInfo                          OBJECT IDENTIFIER ::= {id-ce 53 1}
+id-ce-a-inhibitAnyPolicy                   OBJECT IDENTIFIER ::= {id-ce 54 1}
+id-ce-a-targetingInformation               OBJECT IDENTIFIER ::= {id-ce 55 1}
+id-ce-a-noRevAvail                         OBJECT IDENTIFIER ::= {id-ce 56 1}
+id-ce-a-acceptablePrivilegePolicies        OBJECT IDENTIFIER ::= {id-ce 57 1}
+id-ce-a-toBeRevoked                        OBJECT IDENTIFIER ::= {id-ce 58 1}
+id-ce-a-revokedGroups                      OBJECT IDENTIFIER ::= {id-ce 59 1}
+id-ce-a-expiredCertsOnCRL                  OBJECT IDENTIFIER ::= {id-ce 60 1}
+id-ce-a-indirectIssuer                     OBJECT IDENTIFIER ::= {id-ce 61 1}
+id-ce-a-noAssertion                        OBJECT IDENTIFIER ::= {id-ce 62 1}
+id-ce-a-aAissuingDistributionPoint         OBJECT IDENTIFIER ::= {id-ce 63 1}
+id-ce-a-issuedOnBehalfOf                   OBJECT IDENTIFIER ::= {id-ce 64 1}
+id-ce-a-singleUse                          OBJECT IDENTIFIER ::= {id-ce 65 1}
+id-ce-a-groupAC                            OBJECT IDENTIFIER ::= {id-ce 66 1}
+id-ce-a-allowedAttributeAssignments        OBJECT IDENTIFIER ::= {id-ce 67 1}
+id-ce-a-attributeMappings                  OBJECT IDENTIFIER ::= {id-ce 68 1}
+id-ce-a-holderNameConstraints              OBJECT IDENTIFIER ::= {id-ce 69 1}
+id-ce-a-authorizationValidation            OBJECT IDENTIFIER ::= {id-ce 70 1}
+
+-- The list of object identifiers for LDAP syntaxes
+
+id-asx-subjectDirectoryAttributes          OBJECT IDENTIFIER ::= {id-ce 9 2}
+id-asx-subjectKeyIdentifier                OBJECT IDENTIFIER ::= {id-ce 14 2}
+id-asx-keyUsage                            OBJECT IDENTIFIER ::= {id-ce 15 2}
+id-asx-privateKeyUsagePeriod               OBJECT IDENTIFIER ::= {id-ce 16 2}
+id-asx-subjectAltName                      OBJECT IDENTIFIER ::= {id-ce 17 2}
+id-asx-issuerAltName                       OBJECT IDENTIFIER ::= {id-ce 18 2}
+id-asx-basicConstraints                    OBJECT IDENTIFIER ::= {id-ce 19 2}
+id-asx-cRLNumber                           OBJECT IDENTIFIER ::= {id-ce 20 2}
+id-asx-reasonCode                          OBJECT IDENTIFIER ::= {id-ce 21 2}
+id-asx-holdInstructionCode                 OBJECT IDENTIFIER ::= {id-ce 23 2}
+id-asx-invalidityDate                      OBJECT IDENTIFIER ::= {id-ce 24 2}
+id-asx-deltaCRLIndicator                   OBJECT IDENTIFIER ::= {id-ce 27 2}
+id-asx-issuingDistributionPoint            OBJECT IDENTIFIER ::= {id-ce 28 2}
+id-asx-certificateIssuer                   OBJECT IDENTIFIER ::= {id-ce 29 2}
+id-asx-nameConstraints                     OBJECT IDENTIFIER ::= {id-ce 30 2}
+id-asx-cRLDistributionPoints               OBJECT IDENTIFIER ::= {id-ce 31 2}
+id-asx-certificatePolicies                 OBJECT IDENTIFIER ::= {id-ce 32 2}
+id-asx-policyMappings                      OBJECT IDENTIFIER ::= {id-ce 33 2}
+id-asx-authorityKeyIdentifier              OBJECT IDENTIFIER ::= {id-ce 35 2}
+id-asx-policyConstraints                   OBJECT IDENTIFIER ::= {id-ce 36 2}
+id-asx-extKeyUsage                         OBJECT IDENTIFIER ::= {id-ce 37 2}
+id-asx-authorityAttributeIdentifier        OBJECT IDENTIFIER ::= {id-ce 38 2}
+id-asx-roleSpecCertIdentifier              OBJECT IDENTIFIER ::= {id-ce 39 2}
+id-asx-cRLStreamIdentifier                 OBJECT IDENTIFIER ::= {id-ce 40 2}
+id-asx-basicAttConstraints                 OBJECT IDENTIFIER ::= {id-ce 41 2}
+id-asx-delegatedNameConstraints            OBJECT IDENTIFIER ::= {id-ce 42 2}
+id-asx-timeSpecification                   OBJECT IDENTIFIER ::= {id-ce 43 2}
+id-asx-cRLScope                            OBJECT IDENTIFIER ::= {id-ce 44 2}
+id-asx-statusReferrals                     OBJECT IDENTIFIER ::= {id-ce 45 2}
+id-asx-freshestCRL                         OBJECT IDENTIFIER ::= {id-ce 46 2}
+id-asx-orderedList                         OBJECT IDENTIFIER ::= {id-ce 47 2}
+id-asx-attributeDescriptor                 OBJECT IDENTIFIER ::= {id-ce 48 2}
+id-asx-userNotice                          OBJECT IDENTIFIER ::= {id-ce 49 2}
+id-asx-sOAIdentifier                       OBJECT IDENTIFIER ::= {id-ce 50 2}
+id-asx-baseUpdateTime                      OBJECT IDENTIFIER ::= {id-ce 51 2}
+id-asx-acceptableCertPolicies              OBJECT IDENTIFIER ::= {id-ce 52 2}
+id-asx-deltaInfo                           OBJECT IDENTIFIER ::= {id-ce 53 2}
+id-asx-inhibitAnyPolicy                    OBJECT IDENTIFIER ::= {id-ce 54 2}
+id-asx-targetingInformation                OBJECT IDENTIFIER ::= {id-ce 55 2}
+id-asx-noRevAvail                          OBJECT IDENTIFIER ::= {id-ce 56 2}
+id-asx-acceptablePrivilegePolicies         OBJECT IDENTIFIER ::= {id-ce 57 2}
+id-asx-toBeRevoked                         OBJECT IDENTIFIER ::= {id-ce 58 2}
+id-asx-revokedGroups                       OBJECT IDENTIFIER ::= {id-ce 59 2}
+id-asx-expiredCertsOnCRL                   OBJECT IDENTIFIER ::= {id-ce 60 2}
+id-asx-indirectIssuer                      OBJECT IDENTIFIER ::= {id-ce 61 2}
+id-asx-noAssertion                         OBJECT IDENTIFIER ::= {id-ce 62 2}
+id-asx-aAissuingDistributionPoint          OBJECT IDENTIFIER ::= {id-ce 63 2}
+id-asx-issuedOnBehalfOf                    OBJECT IDENTIFIER ::= {id-ce 64 2}
+id-asx-singleUse                           OBJECT IDENTIFIER ::= {id-ce 65 2}
+id-asx-groupAC                             OBJECT IDENTIFIER ::= {id-ce 66 2}
+id-asx-allowedAttributeAssignments         OBJECT IDENTIFIER ::= {id-ce 67 2}
+id-asx-attributeMappings                   OBJECT IDENTIFIER ::= {id-ce 68 2}
+id-asx-holderNameConstraints               OBJECT IDENTIFIER ::= {id-ce 69 2}
+id-asx-authorizationValidation             OBJECT IDENTIFIER ::= {id-ce 70 2}
+
+
+END -- ExtensionAttributes

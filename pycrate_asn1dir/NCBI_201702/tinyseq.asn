@@ -1,0 +1,34 @@
+--$Revision: 6.1 $
+--**********************************************************************
+--
+--  ASN.1 for a tiny Bioseq in XML
+--    basically a structured FASTA file with a few extras
+--    in this case we drop all modularity of components
+--      All ids are Optional - simpler structure, less checking
+--      Components of organism are hard coded - can't easily add or change
+--      sequence is just string whether DNA or protein
+--  by James Ostell, 2000
+--
+--**********************************************************************
+
+NCBI-TSeq DEFINITIONS ::=
+BEGIN
+
+TSeq ::= SEQUENCE {
+	seqtype ENUMERATED {
+		nucleotide (1),
+		protein (2) },
+	gi INTEGER OPTIONAL,
+	accver VisibleString OPTIONAL,
+	sid VisibleString OPTIONAL,
+	local VisibleString OPTIONAL,
+	taxid INTEGER OPTIONAL,
+	orgname VisibleString OPTIONAL,
+	defline VisibleString,
+	length INTEGER,
+	sequence VisibleString }
+
+TSeqSet ::= SEQUENCE OF TSeq    -- a bunch of them
+
+END
+

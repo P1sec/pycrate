@@ -1,0 +1,66 @@
+ERS {iso(1) identified-organization(3) dod(6)
+         internet(1) security(5) mechanisms(5)
+         ltans(11) id-mod(0) id-mod-ers88(2) id-mod-ers88-v1(1) }
+
+DEFINITIONS IMPLICIT TAGS ::=
+BEGIN
+
+   -- EXPORTS ALL --
+
+   IMPORTS
+
+    -- Imports from RFC 3852 Cryptographic Message Syntax
+   ContentInfo, Attribute
+
+       FROM CryptographicMessageSyntax2004 -- FROM [RFC3852] -- {
+          iso(1) member-body(2) us(840) rsadsi(113549)
+          pkcs(1) pkcs-9(9) smime(16) modules(0) cms-2004(24) }
+
+     -- Imports from RFC 3280 [RFC3280], Appendix A.1
+   AlgorithmIdentifier
+       FROM PKIX1Explicit88 { 
+           iso(1) identified-organization(3) dod(6)
+           internet(1) security(5) mechanisms(5) pkix(7)
+           mod(0) pkix1-explicit(18) }
+   ;
+
+   ltans OBJECT IDENTIFIER ::=
+            { iso(1) identified-organization(3) dod(6) internet(1)
+              security(5) mechanisms(5) ltans(11) }
+
+   EvidenceRecord ::= SEQUENCE {
+      version                   INTEGER { v1(1) } ,
+      digestAlgorithms          SEQUENCE OF AlgorithmIdentifier,
+      cryptoInfos               [0] CryptoInfos OPTIONAL,
+      encryptionInfo            [1] EncryptionInfo OPTIONAL,
+      archiveTimeStampSequence  ArchiveTimeStampSequence
+      }
+
+   CryptoInfos ::= SEQUENCE SIZE (1..MAX) OF Attribute
+
+   ArchiveTimeStamp ::= SEQUENCE {
+     digestAlgorithm [0] AlgorithmIdentifier OPTIONAL,
+     attributes      [1] Attributes OPTIONAL,
+     reducedHashtree [2] SEQUENCE OF PartialHashtree OPTIONAL,
+     timeStamp       ContentInfo}
+
+   PartialHashtree ::= SEQUENCE OF OCTET STRING
+
+   Attributes ::= SET SIZE (1..MAX) OF Attribute
+
+   ArchiveTimeStampChain    ::= SEQUENCE OF ArchiveTimeStamp
+
+   ArchiveTimeStampSequence ::= SEQUENCE OF
+                                ArchiveTimeStampChain
+
+   EncryptionInfo       ::=     SEQUENCE {
+       encryptionInfoType     OBJECT IDENTIFIER,
+       encryptionInfoValue    ANY DEFINED BY encryptionInfoType}
+
+   id-aa-er-internal  OBJECT IDENTIFIER ::= { iso(1) member-body(2)
+      us(840) rsadsi(113549) pkcs(1) pkcs9(9) smime(16) id-aa(2) 49 }
+
+   id-aa-er-external  OBJECT IDENTIFIER ::= { iso(1) member-body(2)
+      us(840) rsadsi(113549) pkcs(1) pkcs9(9) smime(16) id-aa(2) 50 }
+
+END

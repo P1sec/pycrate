@@ -1,0 +1,44 @@
+--$Revision: 6.0 $
+--**********************************************************************
+--
+--  NCBI Sequence Feature Definition Module
+--  by James Ostell, 1994
+--
+--**********************************************************************
+
+NCBI-FeatDef DEFINITIONS ::=
+BEGIN
+
+EXPORTS FeatDef, FeatDefSet, FeatDispGroup, FeatDispGroupSet;
+
+
+FeatDef ::= SEQUENCE {
+    typelabel VisibleString ,	   -- short label for type eg "CDS"
+    menulabel VisibleString ,	   -- label for a menu eg "Coding Region"
+    featdef-key INTEGER ,		   -- unique for this feature definition
+    seqfeat-key INTEGER ,		   -- SeqFeat.data.choice from objfeat.h
+    entrygroup INTEGER ,		   -- Group for data entry
+    displaygroup INTEGER ,		   -- Group for data display
+    molgroup FeatMolType           -- Type of Molecule used for
+}
+
+FeatMolType ::= ENUMERATED {
+	aa (1),  -- proteins
+    na (2),  -- nucleic acids
+    both (3) }  -- both
+
+FeatDefSet ::= SEQUENCE OF FeatDef   -- collections of defintions
+
+FeatDispGroup ::= SEQUENCE {
+	groupkey INTEGER ,
+    groupname VisibleString }
+
+FeatDispGroupSet ::= SEQUENCE OF FeatDispGroup
+
+FeatDefGroupSet ::= SEQUENCE {
+	groups FeatDispGroupSet ,
+	defs FeatDefSet }
+
+END
+
+    

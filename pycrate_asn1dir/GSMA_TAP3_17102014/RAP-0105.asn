@@ -1,0 +1,287 @@
+--
+-- The following ASN.1 specification defines the abstract
+-- syntax for the Rejects and Returns Returned Accounts Procedure.
+--
+-- The specification is structured as follows:
+-- (1) Structure of a RAP batch
+-- (2) Structure of the individual RAP records
+-- (3) RAP data items and groups of data items
+--
+
+RAP-0105 DEFINITIONS IMPLICIT TAGS ::=
+BEGIN
+
+--
+-- NOTE: As the RAP can be used to report rejections of any
+-- valid TAP release this specification does not indicate
+-- explicitly the TAP release to be included.
+--
+-- Please replace XX in FROM TAP-03XX with the appropriate
+-- TAP release version: for example 02, 04, 10, 11, ...
+-- making all TAP fields OPTIONAL
+--
+IMPORTS AbsoluteAmount, AccountingInfo, AuditControlInfo,
+BatchControlInfo, CallEventDetail, DateTimeLong,
+FileSequenceNumber, FileTypeIndicator,
+MessageDescription, MessageDescriptionCode, NetworkInfo,
+Notification, NumberString, OperatorSpecInformation,
+PlmnId, RapFileSequenceNumber, Recipient, ReleaseVersionNumber,
+Sender, SpecificationVersionNumber,
+TapDecimalPlaces, TapCurrency
+-- For TAP releases earlier than TAP3.11
+-- uncomment the following line
+-- ,VasCode, VasDescription, VasShortDescription
+FROM TAP-0312;
+
+--
+-- Structure of a RAP batch
+--
+
+RapDataInterChange ::= CHOICE
+{
+    returnBatch ReturnBatch,
+    acknowledgement Acknowledgement,
+    ...
+}
+
+ReturnBatch ::= [APPLICATION 534] SEQUENCE
+{
+    rapBatchControlInfoRap RapBatchControlInfo,
+    returnDetails ReturnDetailList,
+    rapAuditControlInfo RapAuditControlInfo,
+    ...
+}
+
+Acknowledgement ::= [APPLICATION 535] SEQUENCE
+{
+    sender Sender,
+    recipient Recipient,
+    rapFileSequenceNumber RapFileSequenceNumber,
+    ackFileCreationTimeStamp AckFileCreationTimeStamp,
+    ackFileAvailableTimeStamp AckFileAvailableTimeStamp,
+    fileTypeIndicator FileTypeIndicator OPTIONAL,
+    operatorSpecList OperatorSpecList OPTIONAL,
+    ...
+}
+
+ReturnDetailList ::= [APPLICATION 536] SEQUENCE OF ReturnDetail
+
+ReturnDetail ::= CHOICE
+{
+    stopReturn StopReturn,
+    missingReturn MissingReturn,
+    fatalReturn FatalReturn,
+    severeReturn SevereReturn,
+    ...
+}
+
+--
+-- Structure of the individual RAP records
+--
+
+RapBatchControlInfo ::= [APPLICATION 537] SEQUENCE
+{
+    sender Sender,
+    recipient Recipient,
+    rapFileSequenceNumber RapFileSequenceNumber,
+    rapFileCreationTimeStamp RapFileCreationTimeStamp,
+    rapFileAvailableTimeStamp RapFileAvailableTimeStamp,
+    specificationVersionNumber SpecificationVersionNumber OPTIONAL,
+    releaseVersionNumber ReleaseVersionNumber OPTIONAL,
+    rapSpecificationVersionNumber RapSpecificationVersionNumber,
+    rapReleaseVersionNumber RapReleaseVersionNumber,
+    fileTypeIndicator FileTypeIndicator OPTIONAL,
+    roamingPartner RoamingPartner OPTIONAL,
+    operatorSpecList OperatorSpecList OPTIONAL,
+    tapDecimalPlaces TapDecimalPlaces OPTIONAL,
+    tapCurrency TapCurrency OPTIONAL,
+    ...
+}
+
+StopReturn ::= [APPLICATION 554] SEQUENCE
+{
+    lastSeqNumber LastSeqNumber,
+    operatorSpecList OperatorSpecList OPTIONAL,
+    ...
+}
+
+MissingReturn ::= [APPLICATION 538] SEQUENCE
+{
+    startMissingSeqNumber StartMissingSeqNumber,
+    endMissingSeqNumber EndMissingSeqNumber OPTIONAL,
+    operatorSpecList OperatorSpecList OPTIONAL,
+    ...
+}
+
+FatalReturn ::= [APPLICATION 539] SEQUENCE
+{
+    fileSequenceNumber FileSequenceNumber,
+    transferBatchError TransferBatchError OPTIONAL,
+    notificationError NotificationError OPTIONAL,
+    batchControlError BatchControlError OPTIONAL,
+    accountingInfoError AccountingInfoError OPTIONAL,
+    networkInfoError NetworkInfoError OPTIONAL,
+    -- For TAP releases earlier than TAP3.11
+    -- uncomment the following line
+    -- vASInformationError VASInformationError OPTIONAL,
+    messageDescriptionError MessageDescriptionError OPTIONAL,
+    auditControlInfoError AuditControlInfoError OPTIONAL,
+    operatorSpecList OperatorSpecList OPTIONAL,
+    ...
+}
+
+SevereReturn ::= [APPLICATION 540] SEQUENCE
+{
+    fileSequenceNumber FileSequenceNumber,
+    callEventDetail CallEventDetail,
+    errorDetail ErrorDetailList,
+    operatorSpecList OperatorSpecList OPTIONAL,
+    ...
+}
+
+RapAuditControlInfo ::= [APPLICATION 541] SEQUENCE
+{
+    totalSevereReturnValue TotalSevereReturnValue,
+    returnDetailsCount ReturnDetailsCount,
+    operatorSpecList OperatorSpecList OPTIONAL,
+    totalSevereReturnTax TotalSevereReturnTax OPTIONAL,
+    ...
+}
+
+--
+-- RAP data items and groups of data items
+--
+
+AccountingInfoError ::= [APPLICATION 512] SEQUENCE
+{
+    accountingInfo AccountingInfo,
+    errorDetail ErrorDetailList,
+    ...
+}
+
+AuditControlInfoError ::= [APPLICATION 513] SEQUENCE
+{
+    auditControlInfo AuditControlInfo,
+    errorDetail ErrorDetailList,
+    ...
+}
+
+AckFileAvailableTimeStamp ::= [APPLICATION 515] DateTimeLong
+
+AckFileCreationTimeStamp ::= [APPLICATION 516] DateTimeLong
+
+BatchControlError ::= [APPLICATION 517] SEQUENCE
+{
+    batchControlInfo BatchControlInfo,
+    errorDetail ErrorDetailList,
+    ...
+}
+
+EndMissingSeqNumber ::= [APPLICATION 518] FileSequenceNumber
+
+ErrorCode ::= [APPLICATION 519] INTEGER
+
+ErrorContext ::= [APPLICATION 545] SEQUENCE
+{
+    pathItemId PathItemId,
+    itemOccurrence ItemOccurrence OPTIONAL,
+    itemLevel ItemLevel,
+    ...
+}
+
+ErrorContextList ::= [APPLICATION 549] SEQUENCE OF ErrorContext
+
+ErrorDetail ::= [APPLICATION 521] SEQUENCE
+{
+    errorContext ErrorContextList OPTIONAL,
+    itemOffset ItemOffset OPTIONAL,
+    errorCode ErrorCode,
+    ...
+}
+
+ErrorDetailList ::= [APPLICATION 520] SEQUENCE OF ErrorDetail
+
+ItemLevel ::= [APPLICATION 548] INTEGER
+
+ItemOccurrence ::= [APPLICATION 547] INTEGER
+
+ItemOffset ::= [APPLICATION 524] INTEGER
+
+LastSeqNumber ::= [APPLICATION 555] FileSequenceNumber
+
+MessageDescriptionError ::= [APPLICATION 522] SEQUENCE
+{
+    messageDescriptionInfo MessageDescriptionInfoList,
+    errorDetail ErrorDetailList,
+    ...
+}
+
+MessageDescriptionInfoList ::= [APPLICATION 8] SEQUENCE OF MessageDescriptionInformationDefinition
+
+MessageDescriptionInformationDefinition ::= [APPLICATION 143] SEQUENCE
+{
+    messageDescriptionCode MessageDescriptionCode OPTIONAL,
+    messageDescription MessageDescription OPTIONAL,
+    ...
+}
+
+NetworkInfoError ::= [APPLICATION 523] SEQUENCE
+{
+    networkInfo NetworkInfo,
+    errorDetail ErrorDetailList,
+    ...
+}
+
+NotificationError ::= [APPLICATION 552] SEQUENCE
+{
+    notification Notification,
+    errorDetail ErrorDetailList,
+    ...
+}
+
+OperatorSpecList ::= [APPLICATION 551] SEQUENCE OF OperatorSpecInformation
+
+PathItemId ::= [APPLICATION 546] INTEGER
+
+RapFileAvailableTimeStamp ::= [APPLICATION 525] DateTimeLong
+
+RapFileCreationTimeStamp ::= [APPLICATION 526] DateTimeLong
+
+RapReleaseVersionNumber ::= [APPLICATION 543] INTEGER
+
+RapSpecificationVersionNumber ::= [APPLICATION 544] INTEGER
+
+ReturnDetailsCount ::= [APPLICATION 528] INTEGER
+
+RoamingPartner ::= [APPLICATION 550] PlmnId
+
+StartMissingSeqNumber ::= [APPLICATION 532] FileSequenceNumber
+
+TotalSevereReturnTax ::= [APPLICATION 553] AbsoluteAmount
+
+TotalSevereReturnValue ::= [APPLICATION 533] AbsoluteAmount
+
+TransferBatchError ::= [APPLICATION 542] SEQUENCE
+{
+    errorDetail ErrorDetailList,
+    ...
+}
+
+-- For TAP releases earlier than TAP3.11
+-- uncomment the following 12 lines
+--VasInfoList ::= [APPLICATION 7] SEQUENCE OF VasInformationDefinition
+--VasInformationDefinition ::= [APPLICATION 238] SEQUENCE
+--{
+-- vasCode VasCode OPTIONAL,
+-- vasShortDesc VasShortDescription OPTIONAL,
+-- vasDesc VasDescription OPTIONAL,
+--...
+--}
+--VASInformationError ::= [APPLICATION 527] SEQUENCE
+--{
+-- vasInfo VasInfoList,
+-- errorDetail ErrorDetailList,
+--...
+--}
+
+END

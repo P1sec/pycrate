@@ -1,0 +1,607 @@
+--  ----------------------------------------------------------------------------
+--
+--                            PUBLIC DOMAIN NOTICE
+--                National Center for Biotechnology Information
+--
+--  This software/database is a "United States Government Work" under the terms
+--  of the United States Copyright Act.  It was written as part of the author's
+--  official duties as a United States Government employee and thus cannot be
+--  copyrighted.  This software/database is freely available to the public for
+--  use.  The National Library of Medicine and the U.S. Government have not
+--  placed any restriction on its use or reproduction.
+--
+--  Although all reasonable efforts have been taken to ensure the accuracy and
+--  reliability of the software and data, the NLM and the U.S. Government do not
+--  and cannot warrant the performance or results that may be obtained by using
+--  this software or data.  The NLM and the U.S. Government disclaim all
+--  warranties, express or implied, including warranties of performance,
+--  merchantability or fitness for any particular purpose.
+--
+--  Please cite the authors in any work or product based on this material.
+--
+--  ----------------------------------------------------------------------------
+--
+--  Authors: Tom Madden, Tim Boemker
+--
+--  ASN.1 interface to BLAST.
+--
+--  ----------------------------------------------------------------------------
+
+NCBI-Blast4 DEFINITIONS ::=
+BEGIN
+
+EXPORTS
+    Blast4-ka-block,
+    Blast4-value,
+    Blast4-parameter,
+    Blast4-parameters;
+
+IMPORTS
+    Bioseq                  FROM NCBI-Sequence
+    Seq-data                FROM NCBI-Sequence
+    Bioseq-set              FROM NCBI-Seqset
+    PssmWithParameters      FROM NCBI-ScoreMat
+    Seq-id,
+    Seq-interval,
+    Seq-loc                 FROM NCBI-Seqloc
+    Seq-align,
+    Seq-align-set           FROM NCBI-Seqalign;
+
+-- pycrate patch, taken from general.asn
+BigInt ::= [APPLICATION 2] IMPLICIT INTEGER
+
+--  --------------------------------------------------------------------
+--
+--  Requests
+--
+--  --------------------------------------------------------------------
+
+Blast4-request ::= SEQUENCE {
+    -- Client identifier (email address, organization name, program/script
+    -- name, or any other form of contacting the owner of this request)
+    ident                   VisibleString OPTIONAL,
+
+    -- Payload of the request
+    body                    Blast4-request-body
+}
+
+-- An archive format for results.  the results can be reformatted from
+-- this format also.
+Blast4-archive ::= SEQUENCE {
+    -- Query and options
+    request                 Blast4-request,
+
+    -- Results of search
+    results                 Blast4-get-search-results-reply,
+    messages                SEQUENCE OF Blast4-error OPTIONAL 
+}
+
+Blast4-request-body ::= CHOICE {
+    finish-params           Blast4-finish-params-request,
+    -- Get all available BLAST databases
+    get-databases           NULL,
+    -- Get supported scoring matrices
+    get-matrices            NULL,
+    get-parameters          NULL,
+    get-paramsets           NULL,
+    get-programs            NULL,
+    get-search-results      Blast4-get-search-results-request,
+    get-sequences           Blast4-get-sequences-request,
+    queue-search            Blast4-queue-search-request,
+    get-request-info        Blast4-get-request-info-request,
+    get-sequence-parts      Blast4-get-seq-parts-request,
+    get-windowmasked-taxids NULL,
+    -- Get version and info about some extended methods
+    get-protocol-info	    Blast4-get-protocol-info-request,
+    -- Get search info: status, title and etc.
+    get-search-info	    Blast4-get-search-info-request,
+    -- OLD OK get-databases-ex           NULL
+    get-databases-ex           Blast4-get-databases-ex-request
+
+}
+Blast4-get-databases-ex-request ::= SEQUENCE {
+    params                  Blast4-parameters OPTIONAL
+}	
+-- END ADD EXT INFO
+Blast4-finish-params-request ::= SEQUENCE {
+    program                 VisibleString,
+    service                 VisibleString,
+    paramset                VisibleString OPTIONAL,
+    params                  Blast4-parameters OPTIONAL
+}
+
+-- This type allows the specification of what result types are desired
+Blast4-result-types ::= ENUMERATED {
+    -- Default retrieves the following result types (if available): alignments,
+    -- phi-alignments masks, ka-blocks, search-stats and pssm
+    default                 (63),
+    alignments              (1),
+    phi-alignments          (2),
+    masks                   (4),
+    ka-blocks               (8),
+    search-stats            (16),
+    pssm                    (32),
+    simple-results          (64)
+}
+
+Blast4-get-search-results-request ::= SEQUENCE {
+    -- The request ID of the BLAST search
+    request-id              VisibleString,
+    -- Logical OR of Blast4-result-types, assumes default if absent
+    result-types            INTEGER OPTIONAL
+}
+
+-- If a PSSM is used (ie. for PSI-Blast), it must contain a "query"
+-- for formatting purposes.  Bioseq-set may contain any number of
+-- queries, specified as data.  Seq-loc-list may contain only the
+-- "whole" or "interval" types.  In the case of "whole", any number of
+-- queries may be used; in the case of "interval", there should be
+-- exactly one query.  (This is limited by the BlastObject.)
+
+Blast4-queries ::= CHOICE {
+    pssm                    PssmWithParameters,
+    seq-loc-list            SEQUENCE OF Seq-loc,
+    bioseq-set              Bioseq-set
+}
+
+-- Options have been broken down into three groups as part of the BLAST
+-- API work.  The algorithm options essentially correspond to those
+-- options available via the CBlastOptions class.
+-- For definitions of the names used in the Blast4-parameter structures, see
+-- c++/{include,src}/objects/blast/names.[hc]pp in the NCBI C++ toolkit.
+--   algorithm-options: Options for BLAST (ie. seq comparison) algorithm.
+--   program-options:   Options for controlling program execution and/or 
+--                      database filtering
+--   format-options:    Options for formatting BLAST results, clients should
+--                      use this only if applicable, otherwise they should be
+--                      ignored
+
+Blast4-queue-search-request ::= SEQUENCE {
+    program                 VisibleString,
+    service                 VisibleString,
+    queries                 Blast4-queries,
+    subject                 Blast4-subject,
+    -- This field contains a task description
+    paramset                VisibleString OPTIONAL,
+    algorithm-options       Blast4-parameters OPTIONAL,
+    program-options         Blast4-parameters OPTIONAL,
+    format-options          Blast4-parameters OPTIONAL
+}
+
+-- Request to retrieve the status of a given search
+Blast4-get-search-status-request ::= SEQUENCE {
+    request-id              VisibleString
+}
+
+-- Reply to retrieve the status of a given search
+Blast4-get-search-status-reply ::= SEQUENCE {
+    status                  VisibleString
+}
+
+-- Fetch information about the search request.
+
+Blast4-get-request-info-request ::= SEQUENCE {
+    request-id              VisibleString
+}
+
+Blast4-get-request-info-reply ::= SEQUENCE {
+    database                Blast4-database,
+    program                 VisibleString,
+    service                 VisibleString,
+    created-by              VisibleString,
+    queries                 Blast4-queries,
+    algorithm-options       Blast4-parameters,
+    program-options         Blast4-parameters,
+    format-options          Blast4-parameters OPTIONAL,
+    subjects                Blast4-subject OPTIONAL
+}
+
+-- Fetch the search strategy (i.e.: object used to submit the search)
+Blast4-get-search-strategy-request ::= SEQUENCE {
+    request-id              VisibleString
+}
+
+-- Return the search strategy (i.e.: Blast4-request containing a
+-- Blast4-queue-search-request, an object used to submit the search)
+Blast4-get-search-strategy-reply ::= Blast4-request
+
+-- Fetch sequence data from a BLAST database
+Blast4-get-sequences-request ::= SEQUENCE {
+    -- Name of the BLAST database from which to retrieve the sequence data
+    database                Blast4-database,
+    -- Sequence identifiers for the sequence to get
+    seq-ids                 SEQUENCE OF Seq-id,
+    -- Determines whether the returned Bioseqs should contain the sequence data
+    -- or not
+    skip-seq-data           BOOLEAN DEFAULT FALSE,
+    -- Determines whether or not the defline of the returned Bioseqs should 
+    -- contain only the requested seq id.  This optional field only applies
+    -- to non-redundant BLAST database
+    target-only             BOOLEAN OPTIONAL
+}
+
+-- Fetch parts of sequences from a BLAST database
+Blast4-get-seq-parts-request ::= SEQUENCE {
+    -- Name of the BLAST database from which to retrieve the sequence data
+    database                Blast4-database,
+    -- Allows the specification of ranges of sequence data needed.
+    -- If the sequence(s) interval's end is 0, no data will be fetched. 
+    -- If end is past the length of the sequence, it will be adjusted to the
+    -- end of the sequence (this allows fetching of the first chunk in
+    -- cases where the length is not yet known).
+    seq-locations           SEQUENCE OF Seq-interval
+}
+-- support for version and checking availability of methods
+Blast4-get-protocol-info-request ::= Blast4-parameters
+
+-- variose search information
+Blast4-get-search-info-request   ::= SEQUENCE {
+    request-id              VisibleString,
+    info		    Blast4-parameters OPTIONAL
+}
+--  --------------------------------------------------------------------
+--
+--  Replies
+--
+--  --------------------------------------------------------------------
+
+Blast4-reply ::= SEQUENCE {
+    errors                  SEQUENCE OF Blast4-error OPTIONAL,
+    body                    Blast4-reply-body
+}
+
+Blast4-reply-body ::= CHOICE {
+    finish-params           Blast4-finish-params-reply,
+    get-databases           Blast4-get-databases-reply,
+    get-matrices            Blast4-get-matrices-reply,
+    get-parameters          Blast4-get-parameters-reply,
+    get-paramsets           Blast4-get-paramsets-reply,
+    get-programs            Blast4-get-programs-reply,
+    get-search-results      Blast4-get-search-results-reply,
+    get-sequences           Blast4-get-sequences-reply,
+    queue-search            Blast4-queue-search-reply,
+    get-queries             Blast4-get-queries-reply,
+    get-request-info        Blast4-get-request-info-reply,
+    get-sequence-parts      Blast4-get-seq-parts-reply,
+    get-windowmasked-taxids Blast4-get-windowmasked-taxids-reply,
+    get-protocol-info	    Blast4-get-protocol-info-reply,
+    get-search-info	    Blast4-get-search-info-reply,
+    get-databases-ex        Blast4-get-databases-ex-reply
+}
+
+Blast4-finish-params-reply ::= Blast4-parameters
+
+Blast4-get-windowmasked-taxids-reply ::= SEQUENCE OF INTEGER
+
+Blast4-get-databases-reply ::= SEQUENCE OF Blast4-database-info
+Blast4-get-databases-ex-reply ::= SEQUENCE OF Blast4-database-info
+
+Blast4-get-matrices-reply ::= SEQUENCE OF Blast4-matrix-id
+
+Blast4-get-parameters-reply ::= SEQUENCE OF Blast4-parameter-info
+
+-- Note: Paramsets and tasks represent the same concept: a human readable
+-- description that represents a set of parameters with specific values 
+-- to accomplish a given task
+Blast4-get-paramsets-reply ::= SEQUENCE OF Blast4-task-info
+
+Blast4-get-programs-reply ::= SEQUENCE OF Blast4-program-info
+
+Blast4-get-search-results-reply ::= SEQUENCE {
+    alignments              Seq-align-set OPTIONAL,
+    phi-alignments          Blast4-phi-alignments OPTIONAL,
+
+    -- Masking locations for the query sequence(s). Each element of this set
+    -- corresponds to a single query's translation frame as appropriate.
+    masks                   SEQUENCE OF Blast4-mask OPTIONAL,
+
+    ka-blocks               SEQUENCE OF Blast4-ka-block OPTIONAL,
+    search-stats            SEQUENCE OF VisibleString OPTIONAL,
+    pssm                    PssmWithParameters OPTIONAL,
+    simple-results          Blast4-simple-results OPTIONAL
+}
+
+Blast4-get-sequences-reply ::= SEQUENCE OF Bioseq
+-- Bundles Seq-ids and sequence data to fulfill requests of type
+-- Blast4-get-seq-parts-request
+Blast4-seq-part-data ::= SEQUENCE {
+    -- Sequence identifier
+    id      Seq-id,
+    -- Its sequence data (may be partial)
+    data    Seq-data
+}
+Blast4-get-seq-parts-reply ::= SEQUENCE OF Blast4-seq-part-data
+
+Blast4-queue-search-reply ::= SEQUENCE {
+    request-id              VisibleString OPTIONAL
+}
+
+Blast4-get-queries-reply ::= SEQUENCE {
+    queries                 Blast4-queries
+}
+
+Blast4-get-protocol-info-reply ::= Blast4-parameters
+
+Blast4-get-search-info-reply   ::= SEQUENCE {
+    request-id              VisibleString,
+    info		    Blast4-parameters OPTIONAL
+}
+--  --------------------------------------------------------------------
+--
+--  Errors
+--
+--  --------------------------------------------------------------------
+
+Blast4-error ::= SEQUENCE {
+    -- This is an integer to allow for flexibility, but the values assigned
+    -- should be of type Blast4-error-code
+    code                    INTEGER,
+    message                 VisibleString OPTIONAL
+}
+
+-- This enumeration defines values that are intended to be used with the
+-- Blast4-error::code in a logical AND operation to easily determine whether a
+-- given Blast4-error object contains either a warning or an error
+Blast4-error-flags ::= ENUMERATED {
+    warning                 (1024),
+    error                   (2048)
+}
+
+-- Defines values for use in Blast4-error::code.
+-- Note: warnings should have values greater than 1024 and less than 2048,
+-- errors should have values greater than 2048.
+Blast4-error-code ::= INTEGER {
+    -- A conversion issue was found when converting to/from blast3 from/to 
+    -- blast4 protocol in the blast4 server
+    conversion-warning		(1024),
+
+    -- Indicates internal errors in the blast4 server
+    internal-error          (2048),
+    -- Request type is not implemented in the blast4 server
+    not-implemented         (2049),
+    -- Request type is not allowed in the blast4 server
+    not-allowed             (2050),
+    -- Malformed/invalid requests (e.g.: parsing errors or invalid data in request)
+    bad-request             (2051),
+    -- The RID requested is unknown or it has expired
+    bad-request-id          (2052),
+    -- The search is pending
+    search-pending          (2053)
+}
+
+--  --------------------------------------------------------------------
+--
+--  Other types in alphabetical order
+--
+--  --------------------------------------------------------------------
+
+Blast4-cutoff ::= CHOICE {
+    e-value                 REAL,
+    raw-score               INTEGER
+}
+
+Blast4-database ::= SEQUENCE {
+    name                    VisibleString,
+    type                    Blast4-residue-type
+}
+
+-- Borrowed from seq.asn
+
+Blast4-seqtech ::= INTEGER {
+        unknown (0) ,
+        standard (1) ,          -- standard sequencing
+        est (2) ,               -- Expressed Sequence Tag
+        sts (3) ,               -- Sequence Tagged Site
+        survey (4) ,            -- one-pass genomic sequence
+        genemap (5) ,           -- from genetic mapping techniques
+        physmap (6) ,           -- from physical mapping techniques
+        derived (7) ,           -- derived from other data, not a primary entity
+        concept-trans (8) ,     -- conceptual translation
+        seq-pept (9) ,          -- peptide was sequenced
+        both (10) ,             -- concept transl. w/ partial pept. seq.
+        seq-pept-overlap (11) , -- sequenced peptide, ordered by overlap
+        seq-pept-homol (12) ,   -- sequenced peptide, ordered by homology
+        concept-trans-a (13) ,  -- conceptual transl. supplied by author
+        htgs-1 (14) ,           -- unordered High Throughput sequence contig
+        htgs-2 (15) ,           -- ordered High Throughput sequence contig
+        htgs-3 (16) ,           -- finished High Throughput sequence
+        fli-cdna (17) ,         -- full length insert cDNA
+        htgs-0 (18) ,           -- single genomic reads for coordination
+        htc (19) ,              -- high throughput cDNA
+        wgs (20) ,              -- whole genome shotgun sequencing
+        other (255)             -- use Source.techexp
+}
+
+Blast4-database-info ::= SEQUENCE {
+    database                Blast4-database,
+    description             VisibleString,
+    last-updated            VisibleString,
+    total-length            BigInt,
+    num-sequences           BigInt,
+    seqtech                 Blast4-seqtech,
+    taxid                   INTEGER,
+    extended                Blast4-parameters OPTIONAL
+}
+
+Blast4-frame-type ::= ENUMERATED {
+    notset                  (0),
+    plus1                   (1),
+    plus2                   (2),
+    plus3                   (3),
+    minus1                  (4),
+    minus2                  (5),
+    minus3                  (6)
+}
+
+Blast4-ka-block ::= SEQUENCE {
+    lambda                  REAL,
+    k                       REAL,
+    h                       REAL,
+    gapped                  BOOLEAN
+}
+
+-- Masking locations for a query's frame. The locations field is a single
+-- Seq-loc of type Packed-int, which contains all the masking locations for the
+-- translation frame specified by the frame field.
+-- Notes:
+-- On input (i.e.: when the client specifies masking locations as a
+-- Blast4-parameter), in the case of protein queries, the frame field must 
+-- always be notset, in the case of nucleotide queries (regardless of whether 
+-- the search will translate these or not), the frame must be plus1. Masking 
+-- locations in the translated encoding are not permitted.
+-- On output (i.e.: when blast 4 server encodes these as part of the 
+-- Blast4-get-search-results-reply), the same conventions as above apply for
+-- non-translated protein and nucleotide queries, but in the case of translated
+-- nucleotide queries, the frame field can be specified in any of the
+-- translation frames as appropriate.
+Blast4-mask ::= SEQUENCE {
+    locations               SEQUENCE OF Seq-loc,
+    frame                   Blast4-frame-type
+}
+
+Blast4-matrix-id ::= SEQUENCE {
+    residue-type            Blast4-residue-type,
+    name                    VisibleString
+}
+
+Blast4-parameter ::= SEQUENCE {
+    name                    VisibleString,
+    value                   Blast4-value
+}
+
+Blast4-parameter-info ::= SEQUENCE {
+    name                    VisibleString,
+    type                    VisibleString
+}
+
+-- Self documenting task structure
+Blast4-task-info ::= SEQUENCE {
+    -- Name of this task
+    name                    VisibleString,
+    -- Description of the task
+    documentation           VisibleString
+}
+
+Blast4-program-info ::= SEQUENCE {
+    program                 VisibleString,
+    services                SEQUENCE OF VisibleString
+}
+
+Blast4-residue-type ::= ENUMERATED {
+    unknown                 (0),
+    protein                 (1),
+    nucleotide              (2)
+}
+
+Blast4-strand-type ::= ENUMERATED {
+    forward-strand          (1),
+    reverse-strand          (2),
+    both-strands            (3)
+}
+
+Blast4-subject ::= CHOICE {
+    database                VisibleString,
+    sequences               SEQUENCE OF Bioseq,
+    seq-loc-list            SEQUENCE OF Seq-loc
+}
+
+Blast4-parameters ::= SEQUENCE OF Blast4-parameter
+
+Blast4-phi-alignments ::= SEQUENCE {
+    num-alignments          INTEGER,
+    seq-locs                SEQUENCE OF Seq-loc
+}
+
+Blast4-value ::= CHOICE {
+
+    -- scalar types
+    big-integer             BigInt,
+    bioseq                  Bioseq,
+    boolean                 BOOLEAN,
+    cutoff                  Blast4-cutoff,
+    integer                 INTEGER,
+    matrix                  PssmWithParameters,
+    real                    REAL,
+    seq-align               Seq-align,
+    seq-id                  Seq-id,
+    seq-loc                 Seq-loc,
+    strand-type             Blast4-strand-type,
+    string                  VisibleString,
+
+    -- lists of scalar types
+    big-integer-list        SEQUENCE OF BigInt,
+    bioseq-list             SEQUENCE OF Bioseq,
+    boolean-list            SEQUENCE OF BOOLEAN,
+    cutoff-list             SEQUENCE OF Blast4-cutoff,
+    integer-list            SEQUENCE OF INTEGER,
+    matrix-list             SEQUENCE OF PssmWithParameters,
+    real-list               SEQUENCE OF REAL,
+    seq-align-list          SEQUENCE OF Seq-align,
+    seq-id-list             SEQUENCE OF Seq-id,
+    seq-loc-list            SEQUENCE OF Seq-loc,
+    strand-type-list        SEQUENCE OF Blast4-strand-type,
+    string-list             SEQUENCE OF VisibleString,
+
+    -- imported collection types
+    bioseq-set              Bioseq-set,
+    seq-align-set           Seq-align-set,
+
+    -- Intended to represent user-provided masking locations for a single query
+    -- sequence (name field in Blast4-parameter should be "LCaseMask").
+    -- Multiple Blast4-parameters of this type are needed to specify masking
+    -- locations for multiple queries.
+    query-mask              Blast4-mask
+}
+
+-- Complete set of simple Blast results
+Blast4-simple-results ::= SEQUENCE {
+    all-alignments      SEQUENCE OF Blast4-alignments-for-query
+}
+
+-- Alignments for one query, compiled from the raw SeqAlign results
+Blast4-alignments-for-query ::= SEQUENCE {
+
+    -- Query sequence identifier
+    -- (present if query is not a local id in the SeqAlign)
+    query-id            VisibleString,
+
+    -- All the alignments for this query
+    alignments          SEQUENCE OF Blast4-simple-alignment
+}
+
+-- A single alignment
+Blast4-simple-alignment ::= SEQUENCE {
+
+    -- Subject sequence identifier
+    -- (normally a GI from the SeqAlign)
+    subject-id          VisibleString,
+
+    -- E-Value
+    e-value             REAL,
+
+    -- Bit score
+    bit-score           REAL,
+    
+    -- Number of identities
+    num-identities      INTEGER OPTIONAL,
+
+    -- Number of insertions/deletions
+    num-indels          INTEGER OPTIONAL,
+    
+    -- Full query range covered by this HSP
+    full-query-range    Blast4-range,
+    
+    -- Full subject range covered by this HSP
+    full-subject-range  Blast4-range 
+}
+
+-- Range on a sequence - zero offset
+Blast4-range ::= SEQUENCE {
+    start               INTEGER OPTIONAL,
+    end                 INTEGER OPTIONAL,
+    -- The frame of the range (absent for proteins; -1/1 for nucleotides;
+    -- -1,-2,-3,1,2,3 for translated sequences)
+    strand              INTEGER OPTIONAL
+}
+
+END

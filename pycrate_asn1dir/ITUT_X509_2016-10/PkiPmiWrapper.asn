@@ -1,0 +1,158 @@
+PkiPmiWrapper {joint-iso-itu-t ds(5) module(1) pkiPmiWrapper(42) 8}
+DEFINITIONS ::=
+BEGIN
+
+-- EXPORTS All 
+
+IMPORTS
+
+  -- from Rec. ITU-T X.501 | ISO/IEC 9594-2
+
+  attributeCertificateDefinitions, authenticationFramework, certificateExtensions, id-cmsct, informationFramework, selectedAttributeTypes
+    FROM UsefulDefinitions {joint-iso-itu-t ds(5) module(1) usefulDefinitions(0) 8}
+
+  Attribute{}, ATTRIBUTE, Name
+    FROM InformationFramework informationFramework
+
+  -- from Rec. ITU-T X.509 | ISO/IEC 9594-8
+
+  ALGORITHM, AlgorithmIdentifier{}, Certificate, CertificateList, CertificateSerialNumber, CertAVL,
+  ENCRYPTED-HASH{}, PKCertIdentifier, SIGNATURE{},   TBSCertAVL,
+  Version, AvlSerialNumber, PkiPath, SIGNED
+    FROM AuthenticationFramework authenticationFramework
+
+  CRLReason, SubjectKeyIdentifier
+    FROM CertificateExtensions certificateExtensions
+
+  AttributeCertificate
+    FROM AttributeCertificateDefinitions attributeCertificateDefinitions
+
+  -- from Rec. ITU-T X.520 | ISO/IEC 9594-6
+
+  objectIdentifierMatch, octetStringMatch 
+    FROM SelectedAttributeTypes selectedAttributeTypes ;
+
+WRAPPED-PDU ::= TYPE-IDENTIFIER
+
+PDU-wrapper ::= SIGNED{TBSPDU-wrapper}
+
+TBSPDU-wrapper ::= SEQUENCE  {
+  version               Version DEFAULT v1,
+  signatureAlgorithm    AlgorithmIdentifier {{SupportedSignatureAlgorithms}},
+  certPath         [0]  IMPLICIT PkiPath,
+  signedAttrs      [1]  IMPLICIT SignedAttributes OPTIONAL,
+  conf                  CHOICE {
+    clear            [2]  WrappedPDUInfo,
+    protected        [3]  EncryptedInfo,
+   ... },
+  ... }
+
+SupportedSignatureAlgorithms ALGORITHM ::= {...}
+
+SignedAttributes ::= SET SIZE (1..MAX) OF Attribute{{SupportedSignedAttributes}}
+
+SupportedSignedAttributes ATTRIBUTE ::= { contentType | messageDigest }
+
+WrappedPDUInfo ::= SEQUENCE {
+  pduType      WRAPPED-PDU.&id ({SupportedPduSet}),
+  pduInfo      WRAPPED-PDU.&Type ({SupportedPduSet}{@pduType}),
+  ... }
+
+SupportedPduSet WRAPPED-PDU ::= {...}
+
+EncryptedInfo ::= SEQUENCE {
+  keyAgreement      KeyAgreement,
+  encryptedPduInfo  EncryptedPduInfo,
+  ... }
+
+KeyAgreement ::= SEQUENCE {
+  senderDhInfo       [0] SenderDhInfo,
+  keyEncryptionAlgorithm SEQUENCE {
+    algorithm    ALGORITHM.&id ({SupportedKeyEncryptionAlgorithm}),
+    parameters   ALGORITHM.&Type({SupportedKeyEncryptionAlgorithm}{@.algorithm}),
+    ... },
+  ... }
+
+SupportedKeyEncryptionAlgorithm ALGORITHM ::= {...}
+
+SenderDhInfo ::= CHOICE {
+  senderStaticInfo   [0] SenderStaticInfo,
+  senderDhPublicKey  [1] SenderDhPublicKey,
+  ... }
+
+SenderStaticInfo::= SEQUENCE {
+  issuer       Name,
+  serialNumber CertificateSerialNumber,
+  partyAinfo   UserKeyingMaterial,
+  ... }
+
+SenderDhPublicKey ::= SEQUENCE {
+  algorithm   AlgorithmIdentifier {{SupportedDHPublicKeyAlgorithms}},
+  publicKey   BIT STRING,
+  ... }
+
+SupportedDHPublicKeyAlgorithms ALGORITHM ::= {...}
+
+UserKeyingMaterial ::= OCTET STRING (SIZE (64))
+
+EncryptedPduInfo ::= SEQUENCE {
+  pduType                 WRAPPED-PDU.&id ({SupportedPduSet}),
+  encryptedKey            EncryptedKey OPTIONAL,
+  pduEncryptionAlgorithm  SEQUENCE {
+    algorithm               ALGORITHM.&id ({SymmetricEncryptionAlgorithms}),
+    parameter               ALGORITHM.&Type
+                  ({SymmetricEncryptionAlgorithms}{@.algorithm})} OPTIONAL,
+  encryptedPdu        [0] EncryptedPdu,
+  ... }
+
+EncryptedKey ::= OCTET STRING
+
+SymmetricEncryptionAlgorithms ALGORITHM ::= {...}
+
+EncryptedPdu ::= OCTET STRING
+
+SupportedAttributes ATTRIBUTE ::= {...}
+ 
+AttributeCertificateV2 ::= AttributeCertificate
+
+-- Attribute type specification as defined by IETF RFC 5652
+
+contentType ATTRIBUTE ::= {
+  WITH SYNTAX            WRAPPED-PDU.&id({SupportedPduSet})
+  EQUALITY MATCHING RULE objectIdentifierMatch
+  SINGLE VALUE           TRUE
+  ID                     id-contentType }
+
+id-contentType OBJECT IDENTIFIER ::= { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9) 3 }
+
+messageDigest ATTRIBUTE ::= {
+  WITH SYNTAX            OCTET STRING
+  EQUALITY MATCHING RULE octetStringMatch
+  SINGLE VALUE           TRUE
+  ID                     id-messageDigest }
+
+id-messageDigest OBJECT IDENTIFIER ::= { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9) 4 }
+
+PkiWaError ::= ENUMERATED {
+  unsupportedWrapperVersion           (0),
+  unsupportedSignatureAlgorithm       (1),
+  incompleteCertPath                  (2),
+  certificationPathFailure            (3),
+  invalidSignature                    (4),
+  missingMandatoryAttributes          (5),
+  unwantedAttribute                   (6),
+  unsupportedPduType                  (7),
+  unexpectedPduType                   (8),
+  invalidPduSyntax                    (9),
+  unknownDHpkCetificate               (10),
+  invalidKeyingMaterial               (11),
+  dhAlgorithmMismatch                 (12),
+  invalideDhPublickey                 (13),
+  unsupportedKeyWrappingAlgorithm     (14),
+  keyEncAlgorithmParametersMissing    (15),
+  keyEncAlgorithmParametersNotAllowed (16),
+  invalidParmsForSymEncryptAlgorithms (17),
+  decryptionFailed                    (18),
+  ... }
+
+END -- PkiPmiWrapper

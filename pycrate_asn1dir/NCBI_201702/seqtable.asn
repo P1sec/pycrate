@@ -1,0 +1,226 @@
+--$Revision: 386776 $
+--  ----------------------------------------------------------------------------
+--
+--                            PUBLIC DOMAIN NOTICE
+--                National Center for Biotechnology Information
+--
+--  This software/database is a "United States Government Work" under the terms
+--  of the United States Copyright Act.  It was written as part of the author's
+--  official duties as a United States Government employee and thus cannot be
+--  copyrighted.  This software/database is freely available to the public for
+--  use.  The National Library of Medicine and the U.S. Government have not
+--  placed any restriction on its use or reproduction.
+--
+--  Although all reasonable efforts have been taken to ensure the accuracy and
+--  reliability of the software and data, the NLM and the U.S. Government do not
+--  and cannot warrant the performance or results that may be obtained by using
+--  this software or data.  The NLM and the U.S. Government disclaim all
+--  warranties, express or implied, including warranties of performance,
+--  merchantability or fitness for any particular purpose.
+--
+--  Please cite the authors in any work or product based on this material.
+--
+--  ----------------------------------------------------------------------------
+--
+--  Authors: Mike DiCuccio, Eugene Vasilchenko
+--
+--  ASN.1 interface to table readers
+--
+--  ----------------------------------------------------------------------------
+
+NCBI-SeqTable DEFINITIONS ::=
+
+BEGIN
+
+EXPORTS
+    SeqTable-column-info, SeqTable-column, Seq-table;
+    
+IMPORTS
+    Seq-id, Seq-loc, Seq-interval   FROM NCBI-Seqloc;
+
+
+SeqTable-column-info ::= SEQUENCE {
+    -- user friendly column name, can be skipped
+    title VisibleString OPTIONAL,
+
+    -- identification of the column data in the objects described by the table
+    field-id INTEGER { -- known column data types
+        -- position types
+        location        (0), -- location as Seq-loc
+        location-id     (1), -- location Seq-id
+        location-gi     (2), -- gi
+        location-from   (3), -- interval from
+        location-to     (4), -- interval to
+        location-strand (5), -- location strand
+        location-fuzz-from-lim (6),
+        location-fuzz-to-lim   (7),
+
+        product         (10), -- product as Seq-loc
+        product-id      (11), -- product Seq-id
+        product-gi      (12), -- product gi
+        product-from    (13), -- product interval from
+        product-to      (14), -- product interval to
+        product-strand  (15), -- product strand
+        product-fuzz-from-lim (16),
+        product-fuzz-to-lim   (17),
+        
+        -- main feature fields
+        id-local        (20), -- id.local.id
+        xref-id-local   (21), -- xref.id.local.id
+        partial         (22),
+        comment         (23),
+        title           (24),
+        ext             (25), -- field-name must be "E.xxx", see below
+        qual            (26), -- field-name must be "Q.xxx", see below
+        dbxref          (27), -- field-name must be "D.xxx", see below
+
+        -- various data fields
+        data-imp-key        (30),
+        data-region         (31),
+        data-cdregion-frame (32),
+
+        -- extra fields, see also special values for str below
+        ext-type        (40),
+        qual-qual       (41),
+        qual-val        (42),
+        dbxref-db       (43),
+        dbxref-tag      (44)
+    } OPTIONAL,
+
+    -- any column can be identified by ASN.1 text locator string
+    -- with omitted object type.
+    -- examples:
+    --   "data.gene.locus" for Seq-feat.data.gene.locus
+    --   "data.imp.key" for Seq-feat.data.imp.key
+    --   "qual.qual"
+    --    - Seq-feat.qual is SEQUENCE so several columns are allowed
+    --      see also "Q.xxx" special value for shorter qual representation
+    --   "ext.type.str"
+    --   "ext.data.label.str"
+    --   "ext.data.data.int"
+    --      see also "E.xxx" special value for shorter ext representation
+    -- special values start with capital letter:
+    --   "E.xxx" - ext.data.label.str = xxx, ext.data.data = data
+    --    - Seq-feat.ext.data is SEQUENCE so several columns are allowed
+    --   "Q.xxx" - qual.qual = xxx, qual.val = data
+    --    - Seq-feat.qual is SEQUENCE so several columns are allowed
+    --   "D.xxx" - dbxref.id = xxx, dbxref.tag = data
+    --    - Seq-feat.dbxref is SET so several columns are allowed
+    field-name  VisibleString OPTIONAL
+}
+
+
+CommonString-table ::= SEQUENCE {
+    -- set of possible values
+    strings     SEQUENCE OF UTF8String,
+
+    -- indexes of values
+    indexes     SEQUENCE OF INTEGER
+}
+
+
+CommonBytes-table ::= SEQUENCE {
+    -- set of possible values
+    bytes       SEQUENCE OF OCTET STRING,
+
+    -- indexes of values
+    indexes     SEQUENCE OF INTEGER
+}
+
+
+SeqTable-multi-data ::= CHOICE {
+    -- a set of integers, one per row
+    int         SEQUENCE OF INTEGER,
+    
+    -- a set of reals, one per row
+    real        SEQUENCE OF REAL,
+
+    -- a set of strings, one per row
+    string      SEQUENCE OF UTF8String,
+
+    -- a set of byte arrays, one per row
+    bytes       SEQUENCE OF OCTET STRING,
+
+    -- a set of string with small set of possible values
+    common-string   CommonString-table,
+
+    -- a set of byte arrays with small set of possible values
+    common-bytes    CommonBytes-table,
+
+    -- a set of bits, one per row
+    -- this uses bm::bvector<> as its storage mechanism
+    bit         OCTET STRING,
+
+    -- a set of locations, one per row
+    loc         SEQUENCE OF Seq-loc,
+    id          SEQUENCE OF Seq-id,
+    interval    SEQUENCE OF Seq-interval
+}
+
+
+SeqTable-single-data ::= CHOICE {
+    -- integer
+    int         INTEGER,
+    
+    -- real
+    real        REAL,
+
+    -- string
+    string      UTF8String,
+
+    -- byte array
+    bytes       OCTET STRING,
+
+    -- bit
+    bit         BOOLEAN,
+
+    -- location
+    loc         Seq-loc,
+    id          Seq-id,
+    interval    Seq-interval
+}
+
+
+SeqTable-sparse-index ::= CHOICE {
+    -- indexes of rows with values
+    indexes SEQUENCE OF INTEGER,
+
+    -- bitset of rows with values
+    bit-set OCTET STRING
+}
+
+
+SeqTable-column ::= SEQUENCE {
+    -- column description or reference to previously defined info
+    header      SeqTable-column-info,   -- information about data
+
+    -- row data
+    data        SeqTable-multi-data OPTIONAL,
+
+    -- in case not all rows contain data this field will contain sparse info
+    sparse      SeqTable-sparse-index OPTIONAL,
+
+    -- default value for sparse table, or if row data is too short
+    default     SeqTable-single-data OPTIONAL,
+
+    -- single value for indexes not listed in sparse table
+    sparse-other SeqTable-single-data OPTIONAL
+}
+
+
+Seq-table ::= SEQUENCE {
+    -- type of features in this table, equal to Seq-feat.data variant index
+    feat-type   INTEGER,
+
+    -- subtype of features in this table, defined in header SeqFeatData.hpp
+    feat-subtype INTEGER OPTIONAL,
+
+    -- number of rows
+    num-rows    INTEGER,
+
+    -- data in columns
+    columns     SEQUENCE OF SeqTable-column
+}
+
+
+END

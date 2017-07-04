@@ -1,0 +1,180 @@
+CAP-gsmSCF-gsmSRF-pkgs-contracts-acs {itu-t(0) identified-organization(4) etsi(0) mobileDomain(0) umts-network(1) modules(3) cap-gsmSCF-gsmSRF-pkgs-contracts-acs(104) version8(7)}
+
+DEFINITIONS ::= BEGIN
+
+-- This module specifies the Operation Packages, Contracts, Application Contexts
+-- and Abstract Syntaxes used for the gsmSRF - gsmSCF interface, for the control of
+-- circuit switched calls.
+
+-- The table in subclause 2.1 lists the specifications that contain the modules
+-- that are used by CAP.
+
+IMPORTS
+
+	PARAMETERS-BOUND,
+	cAPSpecificBoundSet
+FROM CAP-classes classes
+-- Elements that exist in cAPSpecificBoundSet in Rel-5 are not changed in Rel-6. As a
+-- result, the value range of data type definitions in Rel-5 are not changed in Rel-6.
+
+	CONTRACT,
+	OPERATION-PACKAGE,
+	OPERATION
+FROM Remote-Operations-Information-Objects ros-InformationObjects
+
+	TCMessage {} 
+FROM TCAPMessages tc-Messages
+
+	APPLICATION-CONTEXT,
+	dialogue-abstract-syntax
+FROM TC-Notation-Extensions tc-NotationExtensions
+
+	playAnnouncement {},
+	promptAndCollectUserInformation {},
+	specializedResourceReport
+FROM CAP-gsmSCF-gsmSRF-ops-args gsmSCF-gsmSRF-Operations-- Object Identifier 'gsmSCF-gsmSRF-Operations' is updated to version8(7) in Rel-6. As
+-- a result, the present module, 'CAP-gsmSCF-gsmSRF-pkgs-contracts-acs', IMPORTS CAP
+-- Operation definitions from CAP-gsmSCF-gsmSRF-ops-args version8(7). Operation
+-- definitions are used in the ABSTRACT SYNTAX definitions and in the OPERATION PACKAGE
+-- definitions.
+
+	activityTest,
+	cancel {},
+	assistRequestInstructions {}
+FROM CAP-gsmSSF-gsmSCF-ops-args gsmSSF-gsmSCF-Operations
+-- Object Identifier 'gsmSSF-gsmSCF-Operations' is updated to version8(7) in Rel-6. AS
+-- a result, the present module, 'CAP-gsmSCF-gsmSRF-pkgs-contracts-acs', IMPORTS CAP
+-- Operation definitions from CAP-gsmSSF-gsmSCF-ops-args version8(7). Operation
+-- definitions are used in the ABSTRACT SYNTAX definitions and in the OPERATION PACKAGE
+-- definitions.
+
+	gsmSRF-scfActivationOfAssistPackage {}
+FROM CAP-gsmSSF-gsmSCF-pkgs-contracts-acs gsmSSF-gsmSCF-Protocol
+-- Object Identifier 'gsmSSF-gsmSCF-Protocol' is updated to version8(7) in Rel-6. As a
+-- result, the present module, 'CAP-gsmSCF-gsmSRF-pkgs-contracts-acs', IMPORTS CAP Operation
+-- Package definitions from CAP-gsmSSF-gsmSCF-pkgs-contracts-acs version8(7). Operation
+-- Package definitions are used in the CONTRACT definitions.
+
+	id-package-specializedResourceControl,
+	id-package-activityTest,
+	id-package-gsmSRF-scfCancel,
+-- The OPERATION-PACKAGE Identifiers for CAP V4 in Rel-6 are the same as for CAP V4 in Rel-5.
+
+	id-ac-gsmSRF-gsmSCF,
+-- The APPLICATION-CONTEXT Identifiers for CAP V4 in Rel-6 are the same as for CAP V4 in Rel-5.
+
+	id-contract-gsmSRF-gsmSCF,
+-- The CONTRACT Identifiers for CAP V4 in Rel-6 are the same as for CAP V4 in Rel-5.
+
+
+	id-as-basic-gsmSRF-gsmSCF,
+-- The ABSTRACT-SYNTAX Identifiers for CAP V4 in Rel-6 are the same as for CAP V4 in Rel-5.
+
+	classes,
+	ros-InformationObjects,
+	tc-Messages,
+	tc-NotationExtensions,
+
+	gsmSCF-gsmSRF-Operations,
+	gsmSSF-gsmSCF-Operations,
+-- Object Identifiers gsmSSF-gsmSCF-Operations and gsmSCF-gsmSRF-Operations are updated
+-- to version8(7) in Rel-6. As a result, the present module, 'CAP-gsmSCF-gsmSRF-pkgs-
+-- contracts-acs', IMPORTS Rel-6 versions of the CAP Operation definitions.
+
+	gsmSSF-gsmSCF-Protocol
+-- Object Identifier gsmSSF-gsmSCF-Protocol is updated to version8(7) in Rel-6. As a result,
+-- the present module IMPORTS Rel-6 versions of the CAP Operation Package definitions.
+
+FROM CAP-object-identifiers {itu-t(0) identified-organization(4) etsi(0) mobileDomain(0)
+umts-network(1) modules(3) cap-object-identifiers(100) version8(7)};
+
+-- Application Contexts
+-- CAP V4 Rel-5 and CAP V4 Rel-6 use the same Application Context version. The CONTRACT
+-- and ABSTRACT SYNTAXES for the call control related Application Contexts, however, are
+-- defined in Rel-6. This is needed to use parameter definitions that are defined in Rel-6.
+
+-- Refer to ITU-T Recommendation Q.775 for the formal definition of APPLICATION-CONTEXT.
+-- The structured DIALOGUE MODE is defined in ITU-T Recommendation Q.771; the
+-- dialogue-abstract-syntax ABSTRACT SYNTAX is defined in ITU-T Recommendation Q.775.
+
+gsmSRF-gsmSCF-ac APPLICATION-CONTEXT ::= {
+	CONTRACT					gsmSRF-gsmSCF-contract
+	DIALOGUE MODE				structured
+	TERMINATION					basic
+	ABSTRACT SYNTAXES			{dialogue-abstract-syntax |
+								gsmSRF-gsmSCF-abstract-syntax}
+	APPLICATION CONTEXT NAME	id-ac-gsmSRF-gsmSCF}
+-- 'gsmSRF-gsmSCF-contract' and 'gsmSRF-gsmSCF-abstract-syntax' are defined in the present
+-- module.
+
+-- Contracts
+-- The CONTRACT definitions are updated for Rel-6, due to the fact that the individual
+-- OPERATION-PACKAGE definitions are updated in Rel-6.
+
+gsmSRF-gsmSCF-contract CONTRACT ::= {
+	INITIATOR CONSUMER OF		{gsmSRF-scfActivationOfAssistPackage {cAPSpecificBoundSet}}
+	RESPONDER CONSUMER OF		{specializedResourceControlPackage {cAPSpecificBoundSet} |
+								activityTestPackage |
+								gsmSRF-scfCancelPackage {cAPSpecificBoundSet} }
+	ID							id-contract-gsmSRF-gsmSCF}
+-- The OPERATION-PACKAGEs are defined in the present module, except for
+-- gsmSRF-scfActivationOfAssistPackage, which is defined in CAP-gsmSSF-gsmSCF-pkgs-contracts-acs.
+
+-- Operation Packages
+-- The OPERATION-PACKAGE definitions are updated for Rel-6, due to the fact that the individual
+-- OPERATION definitions are updated in Rel-6. The OPERATION definitions are IMPORTED from
+-- CAP-gsmSSF-gsmSCF-ops-args and from CAP-gsmSCF-gsmSRF-ops-args.
+
+specializedResourceControlPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{playAnnouncement {bound} |
+						promptAndCollectUserInformation {bound}}
+	SUPPLIER INVOKES	{specializedResourceReport}
+	ID					id-package-specializedResourceControl}
+
+gsmSRF-scfCancelPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{cancel {bound}}
+	ID					id-package-gsmSRF-scfCancel}
+
+activityTestPackage OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{activityTest}
+	ID					id-package-activityTest}
+
+-- Abstract Syntaxes
+
+-- GsmSRFgsmSCFInvokable and GsmSRFgsmSCFReturnable use OPERATION definitions with
+-- version8(7). As a result, BASIC-gsmSRF-gsmSCF-PDUs uses version8(7) OPERATION definitions.
+-- As a subsequent result, gsmSRF-gsmSCF-abstract-syntax uses version8(7) OPERATION
+-- definitions. That ABSTRACT-SYNTAX is used in the gsmSRF-gsmSCF-ac APPLICATION-CONTEXT
+-- definition (CAP from gsmSRF to gsmSCF).
+
+gsmSRF-gsmSCF-abstract-syntax ABSTRACT-SYNTAX ::= {
+	BASIC-gsmSRF-gsmSCF-PDUs
+	IDENTIFIED BY		id-as-basic-gsmSRF-gsmSCF}
+-- 'BASIC-gsmSRF-gsmSCF-PDUs' is defined in the present module.
+
+BASIC-gsmSRF-gsmSCF-PDUs ::= TCMessage {{GsmSRFgsmSCFInvokable},
+										{GsmSRFgsmSCFReturnable}}
+-- 'GsmSRFgsmSCFInvokable' and 'GsmSRFgsmSCFReturnable' are defined in the present module.
+
+GsmSRFgsmSCFInvokable OPERATION ::= {
+	activityTest |
+	assistRequestInstructions {cAPSpecificBoundSet} |
+	cancel {cAPSpecificBoundSet} |
+	playAnnouncement {cAPSpecificBoundSet} |
+	promptAndCollectUserInformation {cAPSpecificBoundSet} |
+	specializedResourceReport
+	}
+-- The OPERATION definitions are IMPORTED from CAP-gsmSSF-gsmSCF-ops-args and from
+-- CAP-gsmSCF-gsmSRF-ops-args.
+
+GsmSRFgsmSCFReturnable OPERATION ::= {
+	activityTest |
+	assistRequestInstructions {cAPSpecificBoundSet} |
+	cancel {cAPSpecificBoundSet} |
+	playAnnouncement {cAPSpecificBoundSet} |
+	promptAndCollectUserInformation {cAPSpecificBoundSet}
+	}
+-- The OPERATION definitions are IMPORTED from CAP-gsmSSF-gsmSCF-ops-args and from
+-- CAP-gsmSCF-gsmSRF-ops-args.
+
+END

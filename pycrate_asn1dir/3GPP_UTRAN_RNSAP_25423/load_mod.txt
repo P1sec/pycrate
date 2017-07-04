@@ -1,0 +1,6 @@
+RNSAP-CommonDataTypes.asn
+RNSAP-Constants.asn
+RNSAP-Containers.asn
+RNSAP-IEs.asn
+RNSAP-PDU-Contents.asn
+RNSAP-PDU-Descriptions.asn

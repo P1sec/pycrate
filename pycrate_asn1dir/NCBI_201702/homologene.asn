@@ -1,0 +1,130 @@
+HomoloGene DEFINITIONS ::=
+BEGIN
+
+IMPORTS Date FROM NCBI-General
+        Seq-loc FROM NCBI-Seqloc
+	Seq-align FROM NCBI-Seqalign;
+
+
+-- HomoloGeneEntry taxid is the tax id of the group node, which can
+-- be the same as the Gene tax id in case of singletons
+
+HG-EntrySet ::= SEQUENCE {
+	entries		SET OF HG-Entry -- homologene entry
+}
+
+
+HG-Entry ::= SEQUENCE {
+	hg-id		INTEGER,
+	version		INTEGER OPTIONAL,
+	title		VisibleString OPTIONAL,
+	caption		VisibleString OPTIONAL,
+	taxid		INTEGER OPTIONAL,
+	genes		SET OF HG-Gene OPTIONAL,
+	cr-date		Date OPTIONAL,
+	up-date		Date OPTIONAL,
+	distances	SET OF HG-Stats OPTIONAL,
+	commentaries	SET OF HG-CommentarySet OPTIONAL,
+	warnings	SET OF VisibleString OPTIONAL,
+	node		HG-Node OPTIONAL
+}
+
+
+HG-Gene ::= SEQUENCE {
+	geneid			INTEGER,
+	otherid			INTEGER OPTIONAL,  							-- internal use only!!!!!
+	symbol			VisibleString OPTIONAL,
+	aliases			SET OF VisibleString OPTIONAL,
+	title				VisibleString,
+	taxid				INTEGER,	 											--taxid of gene node
+	prot-gi			INTEGER OPTIONAL,
+	prot-acc		VisibleString OPTIONAL,
+	prot-len		INTEGER OPTIONAL,
+	nuc-gi			INTEGER OPTIONAL,
+	nuc-acc			VisibleString OPTIONAL,
+	gene-links	SET OF HG-Link OPTIONAL,
+	prot-links	SET OF HG-Link OPTIONAL,
+	domains			SET OF HG-Domain OPTIONAL,
+	chr     		VisibleString OPTIONAL,
+	location		Seq-loc OPTIONAL,        				-- location on the genome
+	locus-tag		VisibleString OPTIONAL
+}
+
+
+HG-Stats ::= SEQUENCE {
+	gi1		INTEGER,
+	gi2		INTEGER,
+	nuc-change	REAL,
+	nuc-change-jc	REAL,
+	prot-change	REAL,
+	ka		REAL,
+	ks		REAL,
+	knr		REAL,
+	knc		REAL,
+	recip-best	BOOLEAN OPTIONAL
+}
+
+
+HG-Commentary ::= SEQUENCE {
+	link			HG-Link,
+	description		VisibleString OPTIONAL, -- main description
+	caption			VisibleString OPTIONAL, -- extra text
+	provider		VisibleString OPTIONAL,
+	other-links		SET OF HG-Link OPTIONAL,
+	other-commentaries	SET OF HG-Commentary OPTIONAL,
+	taxid			INTEGER OPTIONAL,
+	geneid			INTEGER OPTIONAL
+}
+
+HG-CommentarySet ::= SEQUENCE {
+	hg-id		INTEGER OPTIONAL,
+	title		VisibleString,
+	commentaries	SET OF HG-Commentary
+}
+
+HG-CommentaryContainer ::= SET OF HG-CommentarySet
+
+HG-Link ::= SEQUENCE {
+	hypertext	VisibleString,
+	url		VisibleString OPTIONAL
+}
+
+HG-Domain ::= SEQUENCE {
+	begin		INTEGER,
+	end		INTEGER,
+	pssm-id		INTEGER OPTIONAL,	-- entrez uid
+	cdd-id		VisibleString OPTIONAL,
+	cdd-name	VisibleString OPTIONAL
+}
+
+HG-Node ::= SEQUENCE {
+	type		ENUMERATED {
+				family(0),
+				ortholog(1),
+				paralog(2),
+				leaf(3)
+			},
+	id		HG-Node-id,
+	caption		VisibleString OPTIONAL,
+	current-node	BOOLEAN DEFAULT FALSE,
+	children	SET OF HG-Node OPTIONAL,
+	branch-len	INTEGER OPTIONAL
+}
+
+HG-Node-id ::= SEQUENCE {
+	id		INTEGER OPTIONAL,
+	id-type		ENUMERATED {
+				none(0),
+				geneid(1),
+				hid(2)
+			}
+}
+
+HG-Alignment ::= SEQUENCE {
+	hg-id		INTEGER,
+	alignment	Seq-align
+}
+
+HG-AlignmentSet ::= SET OF HG-Alignment
+
+END

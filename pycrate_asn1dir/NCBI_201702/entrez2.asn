@@ -1,0 +1,300 @@
+--$Revision: 1.12 $********************************************
+--
+--  entrez2.asn
+--   Version 1
+--
+--   API to Entrez Engine (1999)
+--   Retrieval of sequence done through ID1 module
+--     Also, SeqId queries
+--   Retrieval of PubMed records through PubMed module
+--   Retrieval of Structures through PubStruct module
+--   Retrieval of Genomes through Genomes module
+--
+--***************************************************************
+
+NCBI-Entrez2 DEFINITIONS ::=
+BEGIN
+
+   --**************************************
+   --  Entrez2 common elements
+   --**************************************
+
+Entrez2-dt ::= INTEGER                   -- a date/time stamp
+Entrez2-db-id ::= VisibleString          -- database name
+Entrez2-field-id ::= VisibleString       -- field name
+Entrez2-link-id ::= VisibleString        -- link name
+
+Entrez2-id-list ::= SEQUENCE  {          -- list of record UIDs
+  db Entrez2-db-id ,                     -- the database
+  num INTEGER ,                          -- number of uids
+  uids OCTET STRING OPTIONAL  }          -- coded uids
+
+       --****************************************
+       -- The structured form of the boolean is the same in a request or
+       --    return so that it easy to modify a query. This means some
+       --    fields are only considered in a return value, like counts
+       --    by term. They are ignored in a request.
+       -- The structured boolean supports specific boolean components,
+       --    an unparsed string in query syntax, and UID lists as
+       --    elements of a boolean. This makes it possible to submit
+       --    a single string, a fully structured query, or a mixture.
+       --    The UID list feature means one can also perform refinements
+       --    on UID lists from links, neighbors, or other operations.
+       --    UID list query now returns a history key for subsequent use.
+       --*****************************************
+
+Entrez2-boolean-exp ::= SEQUENCE {
+  db Entrez2-db-id ,                         -- database for this query
+  exp SEQUENCE OF Entrez2-boolean-element ,  -- the Boolean
+  limits Entrez2-limits OPTIONAL }           -- date bounds
+
+Entrez2-boolean-element ::= CHOICE {
+  str VisibleString ,                       -- unparsed query string
+  op Entrez2-operator ,                     -- logical operator
+  term Entrez2-boolean-term ,               -- fielded term
+  ids Entrez2-id-list ,                     -- list of UIDs - returns history key in reply
+  key VisibleString }                       -- history key for uploaded UID list or other query
+
+       --*****************************************
+       -- the term is both sent and received as parts of
+       --   queries and replies. The attributes can be filled in
+       --   by either, but may be ignored by one or the other. Flags are
+       --   shown if a real value is only of use in the query (Q), only
+       --   in the reply (R), or used in both (B)
+       -- do-not-explode and do-not-translate are only active set by
+       --   by the query. However, they retain those settings in the
+       --   return value so they can be resent with a new query
+       --******************************************
+
+Entrez2-boolean-term ::= SEQUENCE {
+  field Entrez2-field-id ,                  -- B
+  term VisibleString ,                      -- B
+  term-count INTEGER OPTIONAL,              -- R count of records with term
+  do-not-explode BOOLEAN DEFAULT FALSE,     -- Q do not explode term
+  do-not-translate BOOLEAN DEFAULT FALSE}   -- Q do not use synonyms
+  
+Entrez2-operator ::= INTEGER {
+  and (1) ,
+  or (2) ,
+  butnot (3) ,
+  range (4) ,
+  left-paren (5) ,
+  right-paren (6) }
+
+  --***************************************
+  --  Entrez2 Request types
+  --***************************************
+       --****************************************
+       -- The basic request wrapper leaves space for a version which
+       --   allow the server to support older clients
+       -- The tool parameter allows us to log the client types for
+       --   debugging and tuning
+       -- The cookie is a session ID returned by the first Entrez2-reply
+       --****************************************
+       
+Entrez2-request ::= SEQUENCE {           -- a standard request
+  request E2Request ,                    -- the actual request
+  version INTEGER ,                      -- ASN1 spec version
+  tool VisibleString OPTIONAL ,          -- tool making request
+  cookie VisibleString OPTIONAL ,        -- history session cookie
+  use-history BOOLEAN DEFAULT FALSE }    -- request should use history
+
+E2Request ::= CHOICE {                   -- request types
+  get-info NULL ,                        -- ask for info block
+  eval-boolean Entrez2-eval-boolean ,    -- Boolean lookup
+  get-docsum Entrez2-id-list ,           -- get the DocSums
+  get-term-pos Entrez2-term-query,       -- get position in term list
+  get-term-list Entrez2-term-pos ,       -- get Term list by position
+  get-term-hierarchy Entrez2-hier-query, -- get a hierarchy from a term
+  get-links Entrez2-get-links ,          -- get specific links from a UID list
+  get-linked Entrez2-get-links ,         -- get subset of UID list which has links
+  get-link-counts Entrez2-id }           -- get all links from one UID
+
+       --****************************************
+       -- When evaluating a boolean query the counts of hits is always
+       --    returned.
+       -- In addition, you can request the UIDs of the hits or the
+       --    the parsed query in structured form (with counts by term),
+       --    or both.
+       --****************************************
+  
+Entrez2-eval-boolean ::= SEQUENCE {       -- evaluate Boolean query
+  return-UIDs BOOLEAN DEFAULT FALSE,      -- return UID list?
+  return-parse BOOLEAN DEFAULT FALSE,     -- return parsed query?
+  query Entrez2-boolean-exp }             -- the actual query
+
+Entrez2-dt-filter ::= SEQUENCE { 
+  begin-date Entrez2-dt,
+  end-date Entrez2-dt,
+  type-date Entrez2-field-id }
+
+Entrez2-limits ::= SEQUENCE {            -- date limits
+  filter-date Entrez2-dt-filter OPTIONAL,
+  max-UIDs INTEGER OPTIONAL,             -- max UIDs to return in list
+  offset-UIDs INTEGER OPTIONAL}          -- start partway into UID list
+ 
+  
+Entrez2-id ::= SEQUENCE {                -- a single UID
+  db Entrez2-db-id ,
+  uid INTEGER }
+
+Entrez2-term-query ::= SEQUENCE {
+  db Entrez2-db-id ,
+  field Entrez2-field-id ,
+  term VisibleString }
+
+Entrez2-hier-query ::= SEQUENCE {
+  db Entrez2-db-id ,
+  field Entrez2-field-id ,
+  term VisibleString OPTIONAL ,          -- query with either term
+  txid INTEGER OPTIONAL }                -- or Taxonomy ID
+
+Entrez2-term-pos ::= SEQUENCE {          -- request portions of term list
+  db Entrez2-db-id ,
+  field Entrez2-field-id ,
+  first-term-pos INTEGER ,
+  number-of-terms INTEGER OPTIONAL }     -- optional for hierarchy only
+
+Entrez2-get-links ::= SEQUENCE {         -- request links of one type
+  uids Entrez2-id-list ,                 -- docs to link from
+  linktype Entrez2-link-id ,             -- type of link
+  max-UIDS INTEGER OPTIONAL ,            -- maximum number of links to return
+  count-only BOOLEAN OPTIONAL ,          -- return only the counts
+  parents-persist BOOLEAN OPTIONAL }     -- allow original uids in list
+
+  --**********************************************************
+  -- Replies from the Entrez server
+  --  all replies contain the date/time stamp when they were executed
+  --  to do reqular date bounded searches use this value+1 to search
+  --  again later instead of recording the date/time on the client machine
+  --  the cookie allows a simple key string to represent UID lists in the history
+  --**********************************************************
+  
+Entrez2-reply ::= SEQUENCE {
+  reply E2Reply ,                       -- the actual reply
+  dt Entrez2-dt ,                       -- date/time stamp from server
+  server VisibleString ,                -- server version info
+  msg VisibleString OPTIONAL ,          -- possibly a message to the user
+  key VisibleString OPTIONAL ,          -- history key for query
+  cookie VisibleString OPTIONAL }       -- history session cookie
+
+E2Reply ::= CHOICE {
+  error VisibleString ,                 -- if nothing can be returned
+  get-info Entrez2-info ,               -- the database info
+  eval-boolean Entrez2-boolean-reply,   -- result of boolean query
+  get-docsum Entrez2-docsum-list,
+  get-term-pos INTEGER,                 -- position of the term
+  get-term-list Entrez2-term-list,
+  get-term-hierarchy Entrez2-hier-node,
+  get-links Entrez2-link-set,
+  get-linked Entrez2-id-list,
+  get-link-counts Entrez2-link-count-list }
+
+
+
+Entrez2-info ::= SEQUENCE {             -- describes all the databases
+  db-count INTEGER ,                    -- number of databases
+  build-date Entrez2-dt ,               -- build date of databases
+  db-info SEQUENCE OF Entrez2-db-info } -- info by database
+
+Entrez2-db-info ::= SEQUENCE {          -- info for one database
+  db-name Entrez2-db-id ,               -- internal name
+  db-menu VisibleString ,               -- short name for menu
+  db-descr VisibleString ,              -- longer explanatory name
+  doc-count INTEGER ,                   -- total number of records
+  field-count INTEGER ,                 -- number of field types
+  fields SEQUENCE OF Entrez2-field-info,
+  link-count INTEGER ,                  -- number of link types
+  links SEQUENCE OF Entrez2-link-info,
+  docsum-field-count INTEGER,
+  docsum-fields SEQUENCE OF Entrez2-docsum-field-info }
+
+Entrez2-field-info ::= SEQUENCE {       -- info about one field
+  field-name Entrez2-field-id ,         -- the internal name
+  field-menu VisibleString ,            -- short string suitable for menu
+  field-descr VisibleString ,           -- longer, explanatory name
+  term-count INTEGER ,                  -- number of terms in field
+  is-date BOOLEAN OPTIONAL ,
+  is-numerical BOOLEAN OPTIONAL ,
+  single-token BOOLEAN OPTIONAL ,
+  hierarchy-avail BOOLEAN OPTIONAL ,
+  is-rangable BOOLEAN OPTIONAL ,
+  is-truncatable BOOLEAN OPTIONAL }
+
+Entrez2-link-info ::= SEQUENCE {        -- info about one link
+  link-name Entrez2-link-id ,
+  link-menu VisibleString ,
+  link-descr VisibleString ,
+  db-to Entrez2-db-id ,                 -- database it links to
+  data-size INTEGER OPTIONAL }          -- size of link data element    
+
+Entrez2-docsum-field-type ::= INTEGER {
+  string (1) ,
+  int    (2) ,
+  float  (3) ,
+  date-pubmed (4) }
+
+Entrez2-docsum-field-info ::= SEQUENCE {
+  field-name VisibleString,
+  field-description VisibleString,
+  field-type Entrez2-docsum-field-type }
+
+Entrez2-boolean-reply ::= SEQUENCE {
+  count INTEGER ,                       -- records hit
+  uids Entrez2-id-list OPTIONAL,        -- if uids requested
+  query Entrez2-boolean-exp OPTIONAL }  -- if parsed query requested
+
+Entrez2-docsum-list ::= SEQUENCE {
+  count INTEGER ,                       -- number of docsums
+  list SEQUENCE OF Entrez2-docsum }
+
+Entrez2-docsum ::= SEQUENCE {
+  uid INTEGER ,                         -- primary uid (gi, pubmedid)
+  docsum-data SEQUENCE OF Entrez2-docsum-data }
+
+Entrez2-docsum-data::= SEQUENCE {
+  field-name VisibleString,
+  field-value VisibleString }
+
+Entrez2-term-list ::= SEQUENCE {
+  pos INTEGER,                          -- position of first term in list
+  num INTEGER,                          -- number of terms in list
+  list SEQUENCE OF Entrez2-term }
+
+Entrez2-term ::= SEQUENCE {
+  term VisibleString ,
+  txid  INTEGER OPTIONAL,
+  count INTEGER ,                       -- count of records with this term
+  is-leaf-node BOOLEAN OPTIONAL }       -- used for hierarchy only
+
+Entrez2-hier-node ::= SEQUENCE {        -- for hierarchical index
+  cannonical-form VisibleString ,       -- the official name
+  lineage-count INTEGER ,               -- number of strings in lineage
+  lineage SEQUENCE OF Entrez2-term OPTIONAL , -- strings up the lineage
+  child-count INTEGER ,                 -- number of children of this node
+  children SEQUENCE OF Entrez2-term ,   -- the children
+  is-ambiguous BOOLEAN OPTIONAL }       -- used for hierarchy only
+
+
+  
+  
+      --*******************************************
+      -- Links are returned in sets also using OCTET STRINGS
+      --*******************************************
+
+Entrez2-link-set ::= SEQUENCE {          -- set of links
+  ids Entrez2-id-list ,
+  data-size INTEGER OPTIONAL ,           -- size of data elements
+  data OCTET STRING OPTIONAL }           -- coded scores
+
+Entrez2-link-count-list ::= SEQUENCE {   -- all links from 1 uid
+  link-type-count INTEGER ,              -- number of types of links
+  links SEQUENCE OF Entrez2-link-count }
+
+Entrez2-link-count ::= SEQUENCE {        -- link count of one type
+  link-type Entrez2-link-id ,
+  link-count INTEGER }
+
+END
+
+

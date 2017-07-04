@@ -1,0 +1,61 @@
+--$Revision: 525462 $
+--*********************************************************************
+--
+--  biotree.asn
+--
+--     BioTree ASN
+--     Anatoliy Kuznetsov
+--
+--*********************************************************************
+
+NCBI-BioTree DEFINITIONS ::=
+BEGIN
+
+EXPORTS BioTreeContainer, FeatureDictSet, DistanceMatrix;
+
+IMPORTS User-object, User-field FROM NCBI-General;
+
+BioTreeContainer ::= SEQUENCE {
+   treetype  VisibleString OPTIONAL,  -- hint on what kind of tree this is
+   fdict     FeatureDictSet,          -- features dictionary 
+   nodes     NodeSet,                 -- set of nodes with encoded topology   
+   label     VisibleString OPTIONAL,  -- bio-tree label (short name)
+   user      User-object OPTIONAL     -- user defined object
+}
+
+NodeSet ::= SET OF Node
+
+
+Node ::= SEQUENCE {
+   id         INTEGER,             -- node uid
+   parent     INTEGER OPTIONAL,    -- parent node id
+   features   NodeFeatureSet OPTIONAL
+}
+
+
+NodeFeatureSet ::= SET OF NodeFeature
+
+
+NodeFeature ::= SEQUENCE {
+   featureid   INTEGER,
+   value       UTF8String
+}
+
+
+FeatureDictSet ::= SET OF FeatureDescr
+
+
+FeatureDescr ::= SEQUENCE {
+   id    INTEGER,              -- feature id
+   name  VisibleString         -- feature name
+}
+
+
+DistanceMatrix ::= SEQUENCE {
+   labels     SEQUENCE OF VisibleString,  -- n labels
+   distances  SEQUENCE OF REAL            -- n(n-1)/2 pairwise distances
+                                          -- (0, 1)...(0, n), (1, 2)...(1, n)...
+}
+
+
+END

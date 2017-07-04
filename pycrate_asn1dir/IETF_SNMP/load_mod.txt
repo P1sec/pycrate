@@ -1,0 +1,6 @@
+# SNMP modules
+# extracted from IETF RFC 1155, 1156 and 1157
+# MIB are not supported, using old-school ASN.1 MACRO
+RFC1155-SMI.asn
+#RFC1156-MIB.asn
+RFC1157-SNMP.asn

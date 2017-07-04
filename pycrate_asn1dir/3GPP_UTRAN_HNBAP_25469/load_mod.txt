@@ -1,0 +1,6 @@
+HNBAP-CommonDataTypes.asn
+HNBAP-Constants.asn
+HNBAP-Containers.asn
+HNBAP-IEs.asn
+HNBAP-PDU-Contents.asn
+HNBAP-PDU-Descriptions.asn

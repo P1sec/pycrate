@@ -1,0 +1,1396 @@
+--$Revision: 509379 $
+--**********************************************************************
+--
+--  NCBI Sequence Feature elements
+--  by James Ostell, 1990
+--  Version 3.0 - June 1994
+--
+--**********************************************************************
+
+NCBI-Seqfeat DEFINITIONS ::=
+BEGIN
+
+EXPORTS Seq-feat, Feat-id, Genetic-code, ModelEvidenceSupport;
+
+IMPORTS Gene-ref FROM NCBI-Gene
+        Prot-ref FROM NCBI-Protein
+        Org-ref FROM NCBI-Organism
+        Variation-ref FROM NCBI-Variation
+        BioSource FROM NCBI-BioSource
+        RNA-ref FROM NCBI-RNA
+        Seq-id, Seq-loc, Giimport-id FROM NCBI-Seqloc
+        Pubdesc, Numbering, Heterogen FROM NCBI-Sequence
+        Rsite-ref FROM NCBI-Rsite
+        Txinit FROM NCBI-TxInit
+        DOI, PubMedId FROM NCBI-Biblio
+        Pub-set FROM NCBI-Pub
+        Object-id, Dbtag, User-object FROM NCBI-General;
+
+--*** Feature identifiers ********************************
+--*
+
+Feat-id ::= CHOICE {
+    gibb INTEGER ,            -- geninfo backbone
+    giim Giimport-id ,        -- geninfo import
+    local Object-id ,         -- for local software use
+    general Dbtag }           -- for use by various databases
+
+--*** Seq-feat *******************************************
+--*  sequence feature generalization
+
+Seq-feat ::= SEQUENCE {
+    id Feat-id OPTIONAL ,
+    data SeqFeatData ,           -- the specific data
+    partial BOOLEAN OPTIONAL ,    -- incomplete in some way?
+    except BOOLEAN OPTIONAL ,     -- something funny about this?
+    comment VisibleString OPTIONAL ,
+    product Seq-loc OPTIONAL ,    -- product of process
+    location Seq-loc ,            -- feature made from
+    qual SEQUENCE OF Gb-qual OPTIONAL ,  -- qualifiers
+    title VisibleString OPTIONAL ,   -- for user defined label
+    ext User-object OPTIONAL ,    -- user defined structure extension
+    cit Pub-set OPTIONAL ,        -- citations for this feature
+    exp-ev ENUMERATED {           -- evidence for existence of feature
+        experimental (1) ,        -- any reasonable experimental check
+        not-experimental (2) } OPTIONAL , -- similarity, pattern, etc
+    xref SET OF SeqFeatXref OPTIONAL ,   -- cite other relevant features
+    dbxref SET OF Dbtag OPTIONAL ,  -- support for xref to other databases
+    pseudo BOOLEAN OPTIONAL ,     -- annotated on pseudogene?
+    except-text VisibleString OPTIONAL , -- explain if except=TRUE
+    ids SET OF Feat-id OPTIONAL ,       -- set of Ids; will replace 'id' field
+    exts SET OF User-object OPTIONAL , -- set of extensions; will replace 'ext' field
+    support SeqFeatSupport OPTIONAL  -- will replace /experiment, /inference, model-evidence
+}
+
+SeqFeatData ::= CHOICE {
+    gene Gene-ref ,
+    org Org-ref ,
+    cdregion Cdregion ,
+    prot Prot-ref ,
+    rna RNA-ref ,
+    pub Pubdesc ,              -- publication applies to this seq
+    seq Seq-loc ,              -- to annotate origin from another seq
+    imp Imp-feat ,
+    region VisibleString,      -- named region (globin locus)
+    comment NULL ,             -- just a comment
+    bond ENUMERATED {
+        disulfide (1) ,
+        thiolester (2) ,
+        xlink (3) ,
+        thioether (4) ,
+        other (255) } ,
+    site ENUMERATED {
+        active (1) ,
+        binding (2) ,
+        cleavage (3) ,
+        inhibit (4) ,
+        modified (5),
+        glycosylation (6) ,
+        myristoylation (7) ,
+        mutagenized (8) ,
+        metal-binding (9) ,
+        phosphorylation (10) ,
+        acetylation (11) ,
+        amidation (12) ,
+        methylation (13) ,
+        hydroxylation (14) ,
+        sulfatation (15) ,
+        oxidative-deamination (16) ,
+        pyrrolidone-carboxylic-acid (17) ,
+        gamma-carboxyglutamic-acid (18) ,
+        blocked (19) ,
+        lipid-binding (20) ,
+        np-binding (21) ,
+        dna-binding (22) ,
+        signal-peptide (23) ,
+        transit-peptide (24) ,
+        transmembrane-region (25) ,
+        nitrosylation (26) ,
+        other (255) } ,
+    rsite Rsite-ref ,       -- restriction site  (for maps really)
+    user User-object ,      -- user defined structure
+    txinit Txinit ,         -- transcription initiation
+    num Numbering ,         -- a numbering system
+    psec-str ENUMERATED {   -- protein secondary structure
+        helix (1) ,         -- any helix
+        sheet (2) ,         -- beta sheet
+        turn  (3) } ,       -- beta or gamma turn
+    non-std-residue VisibleString ,  -- non-standard residue here in seq
+    het Heterogen ,         -- cofactor, prosthetic grp, etc, bound to seq
+    biosrc BioSource,
+    clone Clone-ref,
+    variation Variation-ref
+}
+
+SeqFeatXref ::= SEQUENCE {       -- both optional because can have one or both
+    id Feat-id OPTIONAL ,        -- the feature copied
+    data SeqFeatData OPTIONAL }  -- the specific data
+
+SeqFeatSupport ::= SEQUENCE {
+  experiment SET OF ExperimentSupport OPTIONAL ,
+  inference SET OF InferenceSupport OPTIONAL ,
+  model-evidence SET OF ModelEvidenceSupport OPTIONAL
+}
+
+EvidenceCategory ::= INTEGER {
+  not-set (0) ,
+  coordinates (1) ,
+  description (2) ,
+  existence (3)
+}
+
+ExperimentSupport ::= SEQUENCE {
+  category EvidenceCategory OPTIONAL ,
+  explanation VisibleString ,
+  pmids SET OF PubMedId OPTIONAL ,
+  dois SET OF DOI OPTIONAL
+}
+
+Program-id ::= SEQUENCE {
+  name VisibleString ,
+  version VisibleString OPTIONAL
+}
+
+EvidenceBasis ::= SEQUENCE {
+  programs SET OF Program-id OPTIONAL ,
+  accessions SET OF Seq-id OPTIONAL
+}
+
+InferenceSupport ::= SEQUENCE {
+  category EvidenceCategory OPTIONAL ,
+  type INTEGER {
+    not-set (0) ,
+    similar-to-sequence (1) ,
+    similar-to-aa (2) ,
+    similar-to-dna (3) ,
+    similar-to-rna (4) ,
+    similar-to-mrna (5) ,
+    similiar-to-est (6) ,
+    similar-to-other-rna (7) ,
+    profile (8) ,
+    nucleotide-motif (9) ,
+    protein-motif (10) ,
+    ab-initio-prediction (11) ,
+    alignment (12) ,
+    other (255)
+  } DEFAULT not-set ,
+  other-type VisibleString OPTIONAL ,
+  same-species BOOLEAN DEFAULT FALSE ,
+  basis EvidenceBasis ,
+  pmids SET OF PubMedId OPTIONAL ,
+  dois SET OF DOI OPTIONAL
+}
+
+ModelEvidenceItem ::= SEQUENCE {
+  id Seq-id ,
+  exon-count INTEGER OPTIONAL ,
+  exon-length INTEGER OPTIONAL ,
+  full-length BOOLEAN DEFAULT FALSE ,
+  supports-all-exon-combo BOOLEAN DEFAULT FALSE
+}
+
+ModelEvidenceSupport ::= SEQUENCE {
+  method VisibleString OPTIONAL ,
+  mrna SET OF ModelEvidenceItem OPTIONAL ,
+  est SET OF ModelEvidenceItem OPTIONAL ,
+  protein SET OF ModelEvidenceItem OPTIONAL ,
+  identification Seq-id OPTIONAL ,
+  dbxref SET OF Dbtag OPTIONAL ,
+  exon-count INTEGER OPTIONAL ,
+  exon-length INTEGER OPTIONAL ,
+  full-length BOOLEAN DEFAULT FALSE ,
+  supports-all-exon-combo BOOLEAN DEFAULT FALSE
+}
+
+--*** CdRegion ***********************************************
+--*
+--*  Instructions to translate from a nucleic acid to a peptide
+--*    conflict means it's supposed to translate but doesn't
+--*
+
+
+Cdregion ::= SEQUENCE {
+    orf BOOLEAN OPTIONAL ,             -- just an ORF ?
+    frame ENUMERATED {
+        not-set (0) ,                  -- not set, code uses one
+        one (1) ,
+        two (2) ,
+        three (3) } DEFAULT not-set ,      -- reading frame
+    conflict BOOLEAN OPTIONAL ,        -- conflict
+    gaps INTEGER OPTIONAL ,            -- number of gaps on conflict/except
+    mismatch INTEGER OPTIONAL ,        -- number of mismatches on above
+    code Genetic-code OPTIONAL ,       -- genetic code used
+    code-break SEQUENCE OF Code-break OPTIONAL ,   -- individual exceptions
+    stops INTEGER OPTIONAL }           -- number of stop codons on above
+
+                    -- each code is 64 cells long, in the order where
+                    -- T=0,C=1,A=2,G=3, TTT=0, TTC=1, TCA=4, etc
+                    -- NOTE: this order does NOT correspond to a Seq-data
+                    -- encoding.  It is "natural" to codon usage instead.
+                    -- the value in each cell is the AA coded for
+                    -- start= AA coded only if first in peptide
+                    --   in start array, if codon is not a legitimate start
+                    --   codon, that cell will have the "gap" symbol for
+                    --   that alphabet.  Otherwise it will have the AA
+                    --   encoded when that codon is used at the start.
+
+Genetic-code ::= SET OF CHOICE {
+    name VisibleString ,               -- name of a code
+    id INTEGER ,                       -- id in dbase
+    ncbieaa VisibleString ,            -- indexed to IUPAC extended
+    ncbi8aa OCTET STRING ,             -- indexed to NCBI8aa
+    ncbistdaa OCTET STRING ,           -- indexed to NCBIstdaa
+    sncbieaa VisibleString ,            -- start, indexed to IUPAC extended
+    sncbi8aa OCTET STRING ,             -- start, indexed to NCBI8aa
+    sncbistdaa OCTET STRING }           -- start, indexed to NCBIstdaa
+
+Code-break ::= SEQUENCE {              -- specific codon exceptions
+    loc Seq-loc ,                      -- location of exception
+    aa CHOICE {                        -- the amino acid
+        ncbieaa INTEGER ,              -- ASCII value of NCBIeaa code
+        ncbi8aa INTEGER ,              -- NCBI8aa code
+        ncbistdaa INTEGER } }           -- NCBIstdaa code
+
+Genetic-code-table ::= SET OF Genetic-code     -- table of genetic codes
+
+--*** Import ***********************************************
+--*
+--*  Features imported from other databases
+--*
+
+Imp-feat ::= SEQUENCE {
+    key VisibleString ,
+    loc VisibleString OPTIONAL ,         -- original location string
+    descr VisibleString OPTIONAL }       -- text description
+
+Gb-qual ::= SEQUENCE {
+    qual VisibleString ,
+    val VisibleString }
+
+
+--*** Clone-ref ***********************************************
+--*
+--*  Specification of clone features
+--*
+
+Clone-ref ::= SEQUENCE {
+    name VisibleString,        -- Official clone symbol
+    library VisibleString OPTIONAL,     -- Library name
+
+    concordant BOOLEAN DEFAULT FALSE, -- OPTIONAL?
+    unique BOOLEAN DEFAULT FALSE, -- OPTIONAL?
+    placement-method INTEGER {
+        end-seq (0),           -- Clone placed by end sequence
+        insert-alignment (1),  -- Clone placed by insert alignment
+        sts (2),               -- Clone placed by STS
+        fish (3),
+        fingerprint (4),
+        end-seq-insert-alignment (5), -- combined end-seq and insert align
+        external (253),           -- Placement provided externally
+        curated (254),            -- Human placed or approved
+        other (255)
+    } OPTIONAL,
+    clone-seq Clone-seq-set OPTIONAL
+}
+
+Clone-seq-set ::= SET OF Clone-seq
+
+
+Clone-seq ::= SEQUENCE {
+    type INTEGER {
+        insert (0),
+        end (1),
+        other (255)
+    },
+    confidence INTEGER {
+        multiple (0),        -- Multiple hits
+        na (1),              -- Unspecified
+        nohit-rep (2),       -- No hits, end flagged repetitive
+        nohitnorep (3),      -- No hits, end not flagged repetitive
+        other-chrm (4),      -- Hit on different chromosome
+        unique (5),
+        virtual (6),         -- Virtual (hasn't been sequenced)
+        multiple-rep (7),    -- Multiple hits, end flagged repetitive
+        multiplenorep (8),   -- Multiple hits, end not flagged repetitive
+        no-hit (9),          -- No hits
+        other (255)
+    } OPTIONAL,
+    location Seq-loc,        -- location on sequence
+    seq Seq-loc OPTIONAL,    -- clone sequence location
+    align-id Dbtag OPTIONAL, -- internal alignment identifier
+    support INTEGER {
+        prototype (0),       -- sequence used to place clone
+        supporting (1),      -- sequence supports placement
+        supports-other(2),   -- supports a different placement
+        non-supporting (3)   -- does not support any placement
+    } OPTIONAL
+}
+
+END
+
+
+--*** Variation-ref ***********************************************
+--*
+--*  Specification of variation features
+--*
+
+NCBI-Variation DEFINITIONS ::=
+BEGIN
+
+EXPORTS Variation-ref, Variation-inst, VariantProperties,
+        Population-data, Phenotype;
+
+IMPORTS Int-fuzz, User-object, Object-id, Dbtag FROM NCBI-General
+        Seq-literal FROM NCBI-Sequence
+        SubSource FROM NCBI-BioSource
+        Seq-loc FROM NCBI-Seqloc
+        Pub FROM NCBI-Pub;
+
+
+-- --------------------------------------------------------------------------
+-- Historically, the dbSNP definitions document data structures used in the
+-- processing and annotation of variations by the dbSNP group.  The intention
+-- is to provide information to clients that reflect internal information
+-- produced during the mapping of SNPs
+-- --------------------------------------------------------------------------
+
+VariantProperties ::= SEQUENCE {
+    version INTEGER,
+
+    -- NOTE:
+    -- The format for most of these values is as an integer
+    -- Unless otherwise noted, these integers represent a bitwise OR (= simple
+    -- sum) of the possible values, and as such, these values represent the
+    -- specific bit flags that may be set for each of the possible attributes
+    -- here.
+
+    resource-link INTEGER {
+        preserved        (1), -- Clinical, Pubmed, Cited, (0x01)
+        provisional      (2), -- Provisional Third Party Annotations (0x02)
+        has3D            (4), -- Has 3D strcture SNP3D table (0x04)
+        submitterLinkout (8), -- SNP->SubSNP->Batch link_out (0x08)
+        clinical        (16), -- Clinical if LSDB, OMIM, TPA, Diagnostic (0x10)
+        genotypeKit     (32)  -- Marker exists on high density genotyping kit
+                              -- (0x20)
+    } OPTIONAL,
+
+    gene-location INTEGER {
+        in-gene         (1), -- Sequence intervals covered by a gene ID but not
+                             -- having an aligned transcript (0x01)
+        near-gene-5     (2), -- Within 2kb of the 5' end of a gene feature
+        near-gene-3     (4), -- Within 0.5kb of the 3' end of a gene feature
+        intron          (8), -- In Intron (0x08)
+        donor          (16), -- In donor splice-site (0x10)
+        acceptor       (32), -- In acceptor splice-site (0x20)
+        utr-5          (64), -- In 5' UTR (0x40)
+        utr-3         (128), -- In 3' UTR (0x80)
+        in-start-codon(256), -- the variant is observed in a start codon
+                             -- (0x100)
+        in-stop-codon (512), -- the variant is observed in a stop codon
+                             -- (0x200)
+        intergenic   (1024), -- variant located between genes (0x400)
+        conserved-noncoding(2048) -- variant is located in a conserved
+                                  -- non-coding region (0x800)
+    } OPTIONAL,
+
+    effect INTEGER {
+        no-change      (0), -- known to cause no functional changes
+                            -- since 0 does not combine with any other bit
+                            -- value, 'no-change' specifically implies that
+                            -- there are no consequences
+        synonymous     (1), -- one allele in the set does not change the encoded
+                            -- amino acid (0x1)
+        nonsense       (2), -- one allele in the set changes to STOP codon
+                            -- (TER).  (0x2)
+        missense       (4), -- one allele in the set changes protein peptide
+                            -- (0x4)
+        frameshift     (8), -- one allele in the set changes all downstream
+                            -- amino acids (0x8)
+
+        up-regulator  (16), -- the variant causes increased transcription
+                            -- (0x10)
+        down-regulator(32), -- the variant causes decreased transcription
+                            -- (0x20)
+        methylation   (64),
+        stop-gain     (128), -- reference codon is not stop codon, but the snp
+                             -- variant allele changes the codon to a
+                             -- terminating codon.
+        stop-loss     (256)  -- reverse of STOP-GAIN: reference codon is a
+                             -- stop codon, but a snp variant allele changes
+                             -- the codon to a non-terminating codon.
+    } OPTIONAL,
+
+    mapping INTEGER {
+        has-other-snp         (1), -- Another SNP has the same mapped positions
+                                   -- on reference assembly (0x01)
+        has-assembly-conflict (2), -- Weight 1 or 2 SNPs that map to different
+                                   -- chromosomes on different assemblies (0x02)
+        is-assembly-specific  (4)  -- Only maps to 1 assembly (0x04)
+    } OPTIONAL,
+
+    -- map-weight captures specificity of placement
+    -- NOTE: This is *NOT* a bitfield
+    map-weight INTEGER {
+        is-uniquely-placed(1),
+        placed-twice-on-same-chrom(2),
+        placed-twice-on-diff-chrom(3),
+        many-placements(10)
+    } OPTIONAL,
+
+    frequency-based-validation INTEGER {
+        is-mutation       (1), -- low frequency variation that is cited in
+                               -- journal or other reputable sources (0x01)
+        above-5pct-all    (2), -- >5% minor allele freq in each and all
+                               -- populations (0x02)
+        above-5pct-1plus  (4), -- >5% minor allele freq in 1+ populations (0x04)
+        validated         (8), -- Bit is set if the variant has a minor allele
+                               -- observed in two or more separate chromosomes
+        above-1pct-all   (16), -- >1% minor allele freq in each and all
+                               -- populations (0x10)
+        above-1pct-1plus (32)  -- >1% minor allele freq in 1+ populations (0x20)
+    } OPTIONAL,
+
+    genotype INTEGER {
+        in-haplotype-set (1), -- Exists in a haplotype tagging set (0x01)
+        has-genotypes    (2)  -- SNP has individual genotype (0x02)
+    } OPTIONAL,
+
+    -- project IDs are IDs from BioProjects
+    -- in order to report information about project relationships, we
+    -- require projects to be registered
+    -- This field in many ways duplicates dbxrefs; however, the
+    -- intention of this field is to more adequately reflect
+    -- ownership and data source
+    --
+    -- 11/9/2010: DO NOT USE
+    -- This field was changed in the spec in a breaking way; using it will
+    -- break clients.  We are officially suppressing / abandoning this field.
+    -- Clients who need to use this should instead place the data in
+    -- Seq-feat.dbxref, using the db name 'BioProject'
+    project-data SET OF INTEGER OPTIONAL,
+
+    quality-check INTEGER {
+        contig-allele-missing   (1), -- Reference sequence allele at the mapped
+                                     -- position is not present in the SNP
+                                     -- allele list, adjusted for orientation
+                                     -- (0x01)
+        withdrawn-by-submitter  (2), -- One member SS is withdrawn by submitter
+                                     -- (0x02)
+        non-overlapping-alleles (4), -- RS set has 2+ alleles from different
+                                     -- submissions and these sets share no
+                                     -- alleles in common (0x04)
+        strain-specific         (8), -- Straing specific fixed difference (0x08)
+        genotype-conflict      (16)  -- Has Genotype Conflict (0x10)
+    } OPTIONAL,
+
+    confidence INTEGER {
+        unknown         (0),
+        likely-artifact (1),
+        other           (255)
+    } OPTIONAL,
+
+    -- has this variant been validated?
+    -- While a boolean flag offers no subtle distinctions of validation
+    -- methods, occasionally it is only known as a single boolean value
+    -- NOTE: this flag is redundant and should be omitted if more comprehensive
+    -- validation information is present
+    other-validation BOOLEAN OPTIONAL,
+
+    -- origin of this allele, if known
+    -- note that these are powers-of-two, and represent bits; thus, we can
+    -- represent more than one state simultaneously through a bitwise OR
+    allele-origin INTEGER {
+        unknown         (0),
+        germline        (1),
+        somatic         (2),
+        inherited       (4),
+        paternal        (8),
+        maternal        (16),
+        de-novo         (32),
+        biparental      (64),
+        uniparental     (128),
+        not-tested      (256),
+        tested-inconclusive (512),
+        not-reported   (1024),
+
+        -- stopper - 2^31
+        other           (1073741824)
+    } OPTIONAL,
+
+    -- observed allele state, if known
+    -- NOTE: THIS IS NOT A BITFIELD!
+    allele-state INTEGER {
+        unknown         (0),
+        homozygous      (1),
+        heterozygous    (2),
+        hemizygous      (3),
+        nullizygous     (4),
+        other           (255)
+    } OPTIONAL,
+
+    -- NOTE:
+    -- 'allele-frequency' here refers to the minor allele frequency of the
+    -- default population
+    allele-frequency REAL OPTIONAL,
+
+    -- is this variant the ancestral allele?
+    is-ancestral-allele BOOLEAN OPTIONAL
+}
+
+Phenotype ::= SEQUENCE {
+    source VisibleString OPTIONAL,
+    term VisibleString OPTIONAL,
+    xref SET OF Dbtag OPTIONAL,
+
+    -- does this variant have known clinical significance?
+    clinical-significance INTEGER {
+        unknown                 (0),
+        untested                (1),
+        non-pathogenic          (2),
+        probable-non-pathogenic (3),
+        probable-pathogenic     (4),
+        pathogenic              (5),
+        drug-response           (6),
+        histocompatibility      (7),
+        other                   (255)
+    } OPTIONAL
+}
+
+Population-data ::= SEQUENCE {
+    -- assayed population (e.g. HAPMAP-CEU)
+    population VisibleString,
+    genotype-frequency REAL OPTIONAL,
+    chromosomes-tested INTEGER OPTIONAL,
+    sample-ids SET OF Object-id OPTIONAL,
+    allele-frequency REAL OPTIONAL,
+
+    -- This field is an explicit bit-field
+    -- Valid values should be a bitwise combination (= simple sum)
+    -- of any of the values below
+    flags INTEGER {
+        is-default-population   (1),
+        is-minor-allele         (2),
+        is-rare-allele          (4)
+    } OPTIONAL
+}
+
+Ext-loc ::= SEQUENCE {
+    id Object-id,
+    location Seq-loc
+}
+
+
+Variation-ref ::= SEQUENCE {
+    -- ids (i.e., SNP rsid / ssid, dbVar nsv/nssv)
+    -- expected values include 'dbSNP|rs12334', 'dbSNP|ss12345', 'dbVar|nsv1'
+    --
+    -- we relate three kinds of IDs here:
+    --  - our current object's id
+    --  - the id of this object's parent, if it exists
+    --  - the sample ID that this item originates from
+    id        Dbtag OPTIONAL,
+    parent-id Dbtag OPTIONAL,
+    sample-id Object-id OPTIONAL,
+    other-ids SET OF Dbtag OPTIONAL,
+
+    -- names and synonyms
+    -- some variants have well-known canonical names and possible accepted
+    -- synonyms
+    name VisibleString OPTIONAL,
+    synonyms SET OF VisibleString OPTIONAL,
+
+    -- tag for comment and descriptions
+    description VisibleString OPTIONAL,
+
+    -- phenotype
+    phenotype SET OF Phenotype OPTIONAL,
+
+    -- sequencing / acuisition method
+    method SET OF INTEGER {
+        unknown             (0),
+        bac-acgh            (1),
+        computational       (2),
+        curated             (3),
+        digital-array       (4),
+        expression-array    (5),
+        fish                (6),
+        flanking-sequence   (7),
+        maph                (8),
+        mcd-analysis        (9),
+        mlpa                (10),
+        oea-assembly        (11),
+        oligo-acgh          (12),
+        paired-end          (13),
+        pcr                 (14),
+        qpcr                (15),
+        read-depth          (16),
+        roma                (17),
+        rt-pcr              (18),
+        sage                (19),
+        sequence-alignment  (20),
+        sequencing          (21),
+        snp-array           (22),
+        snp-genoytyping     (23),
+        southern            (24),
+        western             (25),
+        optical-mapping     (26),
+
+        other               (255)
+    } OPTIONAL,
+
+    -- Note about SNP representation and pretinent fields: allele-frequency,
+    -- population, quality-codes:
+    -- The case of multiple alleles for a SNP would be described by
+    -- parent-feature of type Variation-set.diff-alleles, where the child
+    -- features of type Variation-inst, all at the same location, would
+    -- describe individual alleles.
+
+    -- population data
+    -- DEPRECATED - do not use
+    population-data SET OF Population-data OPTIONAL,
+
+    -- variant properties bit fields
+    variant-prop VariantProperties OPTIONAL,
+
+    -- has this variant been validated?
+    -- DEPRECATED: new field = VariantProperties.other-validation
+    validated BOOLEAN OPTIONAL,
+
+    -- link-outs to GeneTests database
+    -- DEPRECATED - do not use
+    clinical-test SET OF Dbtag OPTIONAL,
+
+    -- origin of this allele, if known
+    -- note that these are powers-of-two, and represent bits; thus, we can
+    -- represent more than one state simultaneously through a bitwise OR
+    -- DEPRECATED: new field = VariantProperties.allele-origin
+    allele-origin INTEGER {
+        unknown         (0),
+        germline        (1),
+        somatic         (2),
+        inherited       (4),
+        paternal        (8),
+        maternal        (16),
+        de-novo         (32),
+        biparental      (64),
+        uniparental     (128),
+        not-tested      (256),
+        tested-inconclusive (512),
+
+        -- stopper - 2^31
+        other           (1073741824)
+    } OPTIONAL,
+
+    -- observed allele state, if known
+    -- DEPRECATED: new field = VariantProperties.allele-state
+    allele-state INTEGER {
+        unknown         (0),
+        homozygous      (1),
+        heterozygous    (2),
+        hemizygous      (3),
+        nullizygous     (4),
+        other           (255)
+    } OPTIONAL,
+
+    -- NOTE:
+    -- 'allele-frequency' here refers to the minor allele frequency of the
+    -- default population
+    -- DEPRECATED: new field = VariantProperties.allele-frequency
+    allele-frequency REAL OPTIONAL,
+
+    -- is this variant the ancestral allele?
+    -- DEPRECATED: new field = VariantProperties.is-ancestral-allele
+    is-ancestral-allele BOOLEAN OPTIONAL,
+
+    -- publication support.
+    -- Note: made this pub instead of pub-equiv, since
+    -- Pub can be pub-equiv and pub-equiv is a set of pubs, but it looks like
+    -- Pub is more often used as top-level container
+    -- DEPRECATED - do not use; use Seq-feat.dbxref instead
+    pub Pub OPTIONAL,
+
+    data CHOICE {
+        unknown NULL,
+        note    VisibleString, --free-form
+        uniparental-disomy NULL,
+
+        -- actual sequence-edit at feat.location
+        instance        Variation-inst,
+
+        -- Set of related Variations.
+        -- Location of the set equals to the union of member locations
+        set SEQUENCE {
+            type INTEGER {
+                unknown     (0),
+                compound    (1), -- complex change at the same location on the
+                                 -- same molecule
+                products    (2), -- different products arising from the same
+                                 -- variation in a precursor, e.g. r.[13g>a,
+                                 -- 13_88del]
+                haplotype   (3), -- changes on the same allele, e.g
+                                 -- r.[13g>a;15u>c]
+                genotype    (4), -- changes on different alleles in the same
+                                 -- genotype, e.g. g.[476C>T]+[476C>T]
+                mosaic      (5), -- different genotypes in the same individual
+                individual  (6), -- same organism; allele relationship unknown,
+                                 -- e.g. g.[476C>T(+)183G>C]
+                population  (7), -- population
+                alleles     (8), -- set represents a set of observed alleles
+                package     (9), -- set represents a package of observations at
+                                 -- a given location, generally containing
+                                 -- asserted + reference
+                other       (255)
+            },
+            variations SET OF Variation-ref,
+            name  VisibleString OPTIONAL
+        },
+
+        -- variant is a complex and undescribed change at the location
+        -- This type of variant is known to occur in dbVar submissions
+        complex NULL
+    },
+
+    consequence SET OF CHOICE {
+        unknown     NULL,
+        splicing    NULL, --some effect on splicing
+        note        VisibleString,  --freeform
+
+        -- Describe resulting variation in the product, e.g. missense,
+        -- nonsense, silent, neutral, etc in a protein, that arises from
+        -- THIS variation.
+        variation   Variation-ref,
+
+        -- see http://www.hgvs.org/mutnomen/recs-prot.html
+        frameshift SEQUENCE {
+            phase INTEGER OPTIONAL,
+            x-length INTEGER OPTIONAL
+        },
+
+        loss-of-heterozygosity SEQUENCE {
+            -- In germline comparison, it will be reference genome assembly
+            -- (default) or reference/normal population. In somatic mutation,
+            -- it will be a name of the normal tissue.
+            reference VisibleString OPTIONAL,
+
+            -- Name of the testing subject type or the testing tissue.
+            test VisibleString OPTIONAL
+        }
+    } OPTIONAL,
+
+    -- Observed location, if different from the parent set or feature.location.
+    -- DEPRECATED - do not use
+    location        Seq-loc OPTIONAL,
+
+    -- reference other locs, e.g. mapped source
+    -- DEPRECATED - do not use
+    ext-locs SET OF Ext-loc OPTIONAL,
+
+    -- DEPRECATED - do not use; use Seq-feat.exts instead
+    ext             User-object OPTIONAL,
+
+    somatic-origin SET OF SEQUENCE {
+        -- description of the somatic origin itself
+        source SubSource OPTIONAL,
+        -- condition related to this origin's type
+        condition SEQUENCE {
+            description VisibleString OPTIONAL,
+            -- reference to BioTerm / other descriptive database
+            object-id SET OF Dbtag OPTIONAL
+        } OPTIONAL
+    } OPTIONAL
+
+}
+
+
+Delta-item ::= SEQUENCE {
+    seq CHOICE {
+        literal Seq-literal,
+        loc Seq-loc,
+        this NULL --same location as variation-ref itself
+    } OPTIONAL,
+
+    -- Multiplier allows representing a tandem, e.g.  ATATAT as AT*3
+    -- This allows describing CNV/SSR where delta=self  with a
+    -- multiplier which specifies the count of the repeat unit.
+
+    multiplier          INTEGER OPTIONAL, --assumed 1 if not specified.
+    multiplier-fuzz     Int-fuzz OPTIONAL,
+
+    action INTEGER {
+
+        -- replace len(seq) positions starting with location.start with seq
+        morph      (0),
+
+        -- go downstream by distance specified by multiplier (upstream if < 0),
+        -- in genomic context.
+        offset     (1),
+
+        -- excise sequence at location
+        -- if multiplier is specified, delete len(location)*multiplier
+        -- positions downstream
+        del-at     (2),
+
+        -- insert seq before the location.start
+        ins-before (3)
+
+    } DEFAULT morph
+}
+
+
+-- Variation instance
+Variation-inst ::= SEQUENCE {
+    type INTEGER {
+        unknown         (0),    -- delta=[]
+        identity        (1),    -- delta=[]
+        inv             (2),    -- delta=[del, ins.seq=
+                                -- RevComp(variation-location)]
+        snv             (3),    -- delta=[morph of length 1]
+                                -- NOTE: this is snV not snP; the latter
+                                -- requires frequency-based validation to be
+                                -- established in VariantProperties
+                                -- the strict definition of SNP is an SNV with
+                                -- an established population frequency of at
+                                -- least 1% in at least 1 popuplation
+        mnp             (4),    -- delta=[morph of length >1]
+        delins          (5),    -- delta=[del, ins]
+        del             (6),    -- delta=[del]
+        ins             (7),    -- delta=[ins]
+        microsatellite  (8),    -- delta=[del, ins.seq= repeat-unit with fuzzy
+                                -- multiplier]
+                                -- variation-location is the microsat expansion
+                                -- on the sequence
+        transposon      (9),    -- delta=[del, ins.seq= known donor or 'this']
+                                -- variation-location is equiv of transposon
+                                -- locs.
+        cnv             (10),   -- delta=[del, ins= 'this' with fuzzy
+                                -- multiplier]
+        direct-copy     (11),   -- delta=[ins.seq= upstream location on the
+                                -- same strand]
+        rev-direct-copy (12),   -- delta=[ins.seq= downstream location on the
+                                -- same strand]
+        inverted-copy   (13),   -- delta=[ins.seq= upstream location on the
+                                -- opposite strand]
+        everted-copy    (14),   -- delta=[ins.seq= downstream location on the
+                                -- opposite strand]
+        translocation   (15),   -- delta=like delins
+        prot-missense   (16),   -- delta=[morph of length 1]
+        prot-nonsense   (17),   -- delta=[del]; variation-location is the tail
+                                -- of the protein being truncated
+        prot-neutral    (18),   -- delta=[morph of length 1]
+        prot-silent     (19),   -- delta=[morph of length 1, same AA as at
+                                -- variation-location]
+        prot-other      (20),   -- delta=any
+
+        other           (255)   -- delta=any
+    },
+
+    -- Sequence that replaces the location, in biological order.
+    delta SEQUENCE OF Delta-item,
+
+    -- 'observation' is used to label items in a Variation-ref package
+    -- This field is explicitly a bit-field, so the bitwise OR (= sum) of any
+    -- of the values may be observed.
+    observation INTEGER {
+        asserted        (1),   -- inst represents the asserted base at a
+                               -- position
+        reference       (2),   -- inst represents the reference base at the
+                               -- position
+        variant         (4)    -- inst represent the observed variant at a
+                               -- given position
+    } OPTIONAL
+}
+
+END
+
+
+--**********************************************************************
+--
+--  NCBI Restriction Sites
+--  by James Ostell, 1990
+--  version 0.8
+--
+--**********************************************************************
+
+NCBI-Rsite DEFINITIONS ::=
+BEGIN
+
+EXPORTS Rsite-ref;
+
+IMPORTS Dbtag FROM NCBI-General;
+
+Rsite-ref ::= CHOICE {
+    str VisibleString ,     -- may be unparsable
+    db  Dbtag }             -- pointer to a restriction site database
+
+END
+
+--**********************************************************************
+--
+--  NCBI RNAs
+--  by James Ostell, 1990
+--  version 0.8
+--
+--**********************************************************************
+
+NCBI-RNA DEFINITIONS ::=
+BEGIN
+
+EXPORTS RNA-ref, Trna-ext, RNA-gen, RNA-qual, RNA-qual-set;
+
+IMPORTS Seq-loc FROM NCBI-Seqloc;
+
+--*** rnas ***********************************************
+--*
+--*  various rnas
+--*
+                         -- minimal RNA sequence
+RNA-ref ::= SEQUENCE {
+    type ENUMERATED {            -- type of RNA feature
+        unknown (0) ,
+        premsg (1) ,
+        mRNA (2) ,
+        tRNA (3) ,
+        rRNA (4) ,
+        snRNA (5) ,              -- will become ncRNA, with RNA-gen.class = snRNA
+        scRNA (6) ,              -- will become ncRNA, with RNA-gen.class = scRNA
+        snoRNA (7) ,             -- will become ncRNA, with RNA-gen.class = snoRNA
+        ncRNA (8) ,              -- non-coding RNA; subsumes snRNA, scRNA, snoRNA
+        tmRNA (9) ,
+        miscRNA (10) ,
+        other (255) } ,
+    pseudo BOOLEAN OPTIONAL ,
+    ext CHOICE {
+        name VisibleString ,        -- for naming "other" type
+        tRNA Trna-ext ,             -- for tRNAs
+        gen RNA-gen } OPTIONAL      -- generic fields for ncRNA, tmRNA, miscRNA
+    }
+
+Trna-ext ::= SEQUENCE {                 -- tRNA feature extensions
+    aa CHOICE {                         -- aa this carries
+        iupacaa INTEGER ,
+        ncbieaa INTEGER ,
+        ncbi8aa INTEGER ,
+        ncbistdaa INTEGER } OPTIONAL ,
+    codon SET OF INTEGER OPTIONAL ,     -- codon(s) as in Genetic-code
+    anticodon Seq-loc OPTIONAL }        -- location of anticodon
+
+RNA-gen ::= SEQUENCE {
+    class VisibleString OPTIONAL ,      -- for ncRNAs, the class of non-coding RNA:
+                                        -- examples: antisense_RNA, guide_RNA, snRNA
+    product VisibleString OPTIONAL ,
+    quals RNA-qual-set OPTIONAL         -- e.g., tag_peptide qualifier for tmRNAs
+}
+
+RNA-qual ::= SEQUENCE {                 -- Additional data values for RNA-gen,
+    qual VisibleString ,                -- in a tag (qual), value (val) format
+    val VisibleString }
+
+RNA-qual-set ::= SEQUENCE OF RNA-qual
+
+END
+
+--**********************************************************************
+--
+--  NCBI Genes
+--  by James Ostell, 1990
+--  version 0.8
+--
+--**********************************************************************
+
+NCBI-Gene DEFINITIONS ::=
+BEGIN
+
+EXPORTS Gene-ref, Gene-nomenclature;
+
+IMPORTS Dbtag FROM NCBI-General;
+
+--*** Gene ***********************************************
+--*
+--*  reference to a gene
+--*
+
+Gene-ref ::= SEQUENCE {
+    locus VisibleString OPTIONAL ,        -- Official gene symbol
+    allele VisibleString OPTIONAL ,       -- Official allele designation
+    desc VisibleString OPTIONAL ,         -- descriptive name
+    maploc VisibleString OPTIONAL ,       -- descriptive map location
+    pseudo BOOLEAN DEFAULT FALSE ,        -- pseudogene
+    db SET OF Dbtag OPTIONAL ,            -- ids in other dbases
+    syn SET OF VisibleString OPTIONAL ,   -- synonyms for locus
+    locus-tag VisibleString OPTIONAL ,    -- systematic gene name (e.g., MI0001, ORF0069)
+    formal-name Gene-nomenclature OPTIONAL
+}
+
+Gene-nomenclature ::= SEQUENCE {
+    status ENUMERATED {
+        unknown (0) ,
+        official (1) ,
+        interim (2)
+    } ,
+    symbol VisibleString OPTIONAL ,
+    name VisibleString OPTIONAL ,
+    source Dbtag OPTIONAL
+}
+
+END
+
+
+--**********************************************************************
+--
+--  NCBI Organism
+--  by James Ostell, 1994
+--  version 3.0
+--
+--**********************************************************************
+
+NCBI-Organism DEFINITIONS ::=
+BEGIN
+
+EXPORTS Org-ref;
+
+IMPORTS Dbtag FROM NCBI-General;
+
+--*** Org-ref ***********************************************
+--*
+--*  Reference to an organism
+--*     defines only the organism.. lower levels of detail for biological
+--*     molecules are provided by the Source object
+--*
+
+Org-ref ::= SEQUENCE {
+    taxname VisibleString OPTIONAL ,   -- preferred formal name
+    common VisibleString OPTIONAL ,    -- common name
+    mod SET OF VisibleString OPTIONAL , -- unstructured modifiers
+    db SET OF Dbtag OPTIONAL ,         -- ids in taxonomic or culture dbases
+    syn SET OF VisibleString OPTIONAL ,  -- synonyms for taxname or common
+    orgname OrgName OPTIONAL }
+
+
+OrgName ::= SEQUENCE {
+    name CHOICE {
+        binomial BinomialOrgName ,         -- genus/species type name
+        virus VisibleString ,              -- virus names are different
+        hybrid MultiOrgName ,              -- hybrid between organisms
+        namedhybrid BinomialOrgName ,      -- some hybrids have genus x species name
+        partial PartialOrgName } OPTIONAL , -- when genus not known
+    attrib VisibleString OPTIONAL ,        -- attribution of name
+    mod SEQUENCE OF OrgMod OPTIONAL ,
+    lineage VisibleString OPTIONAL ,       -- lineage with semicolon separators
+    gcode INTEGER OPTIONAL ,               -- genetic code (see CdRegion)
+    mgcode INTEGER OPTIONAL ,              -- mitochondrial genetic code
+    div VisibleString OPTIONAL ,           -- GenBank division code
+    pgcode INTEGER OPTIONAL }              -- plastid genetic code
+
+
+OrgMod ::= SEQUENCE {
+    subtype INTEGER {
+        strain (2) ,
+        substrain (3) ,
+        type (4) ,
+        subtype (5) ,
+        variety (6) ,
+        serotype (7) ,
+        serogroup (8) ,
+        serovar (9) ,
+        cultivar (10) ,
+        pathovar (11) ,
+        chemovar (12) ,
+        biovar (13) ,
+        biotype (14) ,
+        group (15) ,
+        subgroup (16) ,
+        isolate (17) ,
+        common (18) ,
+        acronym (19) ,
+        dosage (20) ,          -- chromosome dosage of hybrid
+        nat-host (21) ,        -- natural host of this specimen
+        sub-species (22) ,
+        specimen-voucher (23) ,
+        authority (24) ,
+        forma (25) ,
+        forma-specialis (26) ,
+        ecotype (27) ,
+        synonym (28) ,
+        anamorph (29) ,
+        teleomorph (30) ,
+        breed (31) ,
+        gb-acronym (32) ,       -- used by taxonomy database
+        gb-anamorph (33) ,      -- used by taxonomy database
+        gb-synonym (34) ,       -- used by taxonomy database
+        culture-collection (35) ,
+        bio-material (36) ,
+        metagenome-source (37) ,
+        type-material (38) ,
+        old-lineage (253) ,
+        old-name (254) ,
+        other (255) } ,         -- ASN5: old-name (254) will be added to next spec
+    subname VisibleString ,
+    attrib VisibleString OPTIONAL }  -- attribution/source of name
+
+BinomialOrgName ::= SEQUENCE {
+    genus VisibleString ,               -- required
+    species VisibleString OPTIONAL ,    -- species required if subspecies used
+    subspecies VisibleString OPTIONAL }
+
+MultiOrgName ::= SEQUENCE OF OrgName   -- the first will be used to assign division
+
+PartialOrgName ::= SEQUENCE OF TaxElement  -- when we don't know the genus
+
+TaxElement ::= SEQUENCE {
+    fixed-level INTEGER {
+       other (0) ,                     -- level must be set in string
+       family (1) ,
+       order (2) ,
+       class (3) } ,
+    level VisibleString OPTIONAL ,
+    name VisibleString }
+
+END
+
+
+--**********************************************************************
+--
+--  NCBI BioSource
+--  by James Ostell, 1994
+--  version 3.0
+--
+--**********************************************************************
+
+NCBI-BioSource DEFINITIONS ::=
+BEGIN
+
+EXPORTS BioSource, SubSource;
+
+IMPORTS Org-ref FROM NCBI-Organism;
+
+--********************************************************************
+--
+-- BioSource gives the source of the biological material
+--   for sequences
+--
+--********************************************************************
+
+BioSource ::= SEQUENCE {
+    genome INTEGER {         -- biological context
+        unknown (0) ,
+        genomic (1) ,
+        chloroplast (2) ,
+        chromoplast (3) ,
+        kinetoplast (4) ,
+        mitochondrion (5) ,
+        plastid (6) ,
+        macronuclear (7) ,
+        extrachrom (8) ,
+        plasmid (9) ,
+        transposon (10) ,
+        insertion-seq (11) ,
+        cyanelle (12) ,
+        proviral (13) ,
+        virion (14) ,
+        nucleomorph (15) ,
+        apicoplast (16) ,
+        leucoplast (17) ,
+        proplastid (18) ,
+        endogenous-virus (19) ,
+        hydrogenosome (20) ,
+        chromosome (21) ,
+        chromatophore (22) ,
+        plasmid-in-mitochondrion (23) ,
+        plasmid-in-plastid (24)
+      } DEFAULT unknown ,
+    origin INTEGER {
+      unknown (0) ,
+      natural (1) ,                    -- normal biological entity
+      natmut (2) ,                     -- naturally occurring mutant
+      mut (3) ,                        -- artificially mutagenized
+      artificial (4) ,                 -- artificially engineered
+      synthetic (5) ,                  -- purely synthetic
+      other (255)
+    } DEFAULT unknown ,
+    org Org-ref ,
+    subtype SEQUENCE OF SubSource OPTIONAL ,
+    is-focus NULL OPTIONAL ,           -- to distinguish biological focus
+    pcr-primers PCRReactionSet OPTIONAL }
+
+PCRReactionSet ::= SET OF PCRReaction
+
+PCRReaction ::= SEQUENCE {
+    forward PCRPrimerSet OPTIONAL ,
+    reverse PCRPrimerSet OPTIONAL }
+
+PCRPrimerSet ::= SET OF PCRPrimer
+
+PCRPrimer ::= SEQUENCE {
+    seq PCRPrimerSeq OPTIONAL ,
+    name PCRPrimerName OPTIONAL }
+
+PCRPrimerSeq ::= VisibleString
+
+PCRPrimerName ::= VisibleString
+
+SubSource ::= SEQUENCE {
+    subtype INTEGER {
+        chromosome (1) ,
+        map (2) ,
+        clone (3) ,
+        subclone (4) ,
+        haplotype (5) ,
+        genotype (6) ,
+        sex (7) ,
+        cell-line (8) ,
+        cell-type (9) ,
+        tissue-type (10) ,
+        clone-lib (11) ,
+        dev-stage (12) ,
+        frequency (13) ,
+        germline (14) ,
+        rearranged (15) ,
+        lab-host (16) ,
+        pop-variant (17) ,
+        tissue-lib (18) ,
+        plasmid-name (19) ,
+        transposon-name (20) ,
+        insertion-seq-name (21) ,
+        plastid-name (22) ,
+        country (23) ,
+        segment (24) ,
+        endogenous-virus-name (25) ,
+        transgenic (26) ,
+        environmental-sample (27) ,
+        isolation-source (28) ,
+        lat-lon (29) ,          -- +/- decimal degrees
+        collection-date (30) ,  -- DD-MMM-YYYY format
+        collected-by (31) ,     -- name of person who collected the sample
+        identified-by (32) ,    -- name of person who identified the sample
+        fwd-primer-seq (33) ,   -- sequence (possibly more than one; semicolon-separated)
+        rev-primer-seq (34) ,   -- sequence (possibly more than one; semicolon-separated)
+        fwd-primer-name (35) ,
+        rev-primer-name (36) ,
+        metagenomic (37) ,
+        mating-type (38) ,
+        linkage-group (39) ,
+        haplogroup (40) ,
+        whole-replicon (41) ,
+        phenotype (42) ,
+        altitude (43) ,
+        other (255) } ,
+    name VisibleString ,
+    attrib VisibleString OPTIONAL }    -- attribution/source of this name
+
+END
+
+--**********************************************************************
+--
+--  NCBI Protein
+--  by James Ostell, 1990
+--  version 0.8
+--
+--**********************************************************************
+
+NCBI-Protein DEFINITIONS ::=
+BEGIN
+
+EXPORTS Prot-ref;
+
+IMPORTS Dbtag FROM NCBI-General;
+
+--*** Prot-ref ***********************************************
+--*
+--*  Reference to a protein name
+--*
+
+Prot-ref ::= SEQUENCE {
+    name SET OF VisibleString OPTIONAL ,      -- protein name
+    desc VisibleString OPTIONAL ,      -- description (instead of name)
+    ec SET OF VisibleString OPTIONAL , -- E.C. number(s)
+    activity SET OF VisibleString OPTIONAL ,  -- activities
+    db SET OF Dbtag OPTIONAL ,         -- ids in other dbases
+    processed ENUMERATED {             -- processing status
+       not-set (0) ,
+       preprotein (1) ,
+       mature (2) ,
+       signal-peptide (3) ,
+       transit-peptide (4) ,
+       propeptide (5) } DEFAULT not-set }
+
+END
+--********************************************************************
+--
+--  Transcription Initiation Site Feature Data Block
+--  James Ostell, 1991
+--  Philip Bucher, David Ghosh
+--  version 1.1
+--
+--
+--
+--********************************************************************
+
+NCBI-TxInit DEFINITIONS ::=
+BEGIN
+
+EXPORTS Txinit;
+
+IMPORTS Gene-ref FROM NCBI-Gene
+        Prot-ref FROM NCBI-Protein
+        Org-ref FROM NCBI-Organism;
+
+Txinit ::= SEQUENCE {
+    name VisibleString ,    -- descriptive name of initiation site
+    syn SEQUENCE OF VisibleString OPTIONAL ,   -- synonyms
+    gene SEQUENCE OF Gene-ref OPTIONAL ,  -- gene(s) transcribed
+    protein SEQUENCE OF Prot-ref OPTIONAL ,   -- protein(s) produced
+    rna SEQUENCE OF VisibleString OPTIONAL ,  -- rna(s) produced
+    expression VisibleString OPTIONAL ,  -- tissue/time of expression
+    txsystem ENUMERATED {       -- transcription apparatus used at this site
+        unknown (0) ,
+        pol1 (1) ,      -- eukaryotic Pol I
+        pol2 (2) ,      -- eukaryotic Pol II
+        pol3 (3) ,      -- eukaryotic Pol III
+        bacterial (4) ,
+        viral (5) ,
+        rna (6) ,       -- RNA replicase
+        organelle (7) ,
+        other (255) } ,
+    txdescr VisibleString OPTIONAL ,   -- modifiers on txsystem
+    txorg Org-ref OPTIONAL ,  -- organism supplying transcription apparatus
+    mapping-precise BOOLEAN DEFAULT FALSE ,  -- mapping precise or approx
+    location-accurate BOOLEAN DEFAULT FALSE , -- does Seq-loc reflect mapping
+    inittype ENUMERATED {
+        unknown (0) ,
+        single (1) ,
+        multiple (2) ,
+        region (3) } OPTIONAL ,
+    evidence SET OF Tx-evidence OPTIONAL }
+
+Tx-evidence ::= SEQUENCE {
+    exp-code ENUMERATED {
+        unknown (0) ,
+        rna-seq (1) ,   -- direct RNA sequencing
+        rna-size (2) ,  -- RNA length measurement
+        np-map (3) ,    -- nuclease protection mapping with homologous sequence ladder
+        np-size (4) ,   -- nuclease protected fragment length measurement
+        pe-seq (5) ,    -- dideoxy RNA sequencing
+        cDNA-seq (6) ,  -- full-length cDNA sequencing
+        pe-map (7) ,    -- primer extension mapping with homologous sequence ladder
+        pe-size (8) ,   -- primer extension product length measurement
+        pseudo-seq (9) , -- full-length processed pseudogene sequencing
+        rev-pe-map (10) ,   -- see NOTE (1) below
+        other (255) } ,
+    expression-system ENUMERATED {
+        unknown (0) ,
+        physiological (1) ,
+        in-vitro (2) ,
+        oocyte (3) ,
+        transfection (4) ,
+        transgenic (5) ,
+        other (255) } DEFAULT physiological ,
+    low-prec-data BOOLEAN DEFAULT FALSE ,
+    from-homolog BOOLEAN DEFAULT FALSE }     -- experiment actually done on
+                                             --  close homolog
+
+    -- NOTE (1) length measurement of a reverse direction primer-extension
+    --          product (blocked  by  RNA  5'end)  by  comparison with
+    --          homologous sequence ladder (J. Mol. Biol. 199, 587)
+
+END
+

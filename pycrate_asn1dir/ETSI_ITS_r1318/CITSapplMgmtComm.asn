@@ -1,0 +1,28 @@
+CITSapplMgmtComm {iso(1) standard(0) cits-applMgmt (17419) comm (3)} 
+DEFINITIONS AUTOMATIC TAGS::=BEGIN
+
+-- Warning: Module is still under development
+
+IMPORTS
+VarLengthNumber, VarLengthNumber2 FROM CITSapplMgmtIDs {iso(1) standard(0) cits-applMgmt (17419) ids (1)}
+
+;
+
+-- End of IMPORTS
+
+-- Types
+
+LogicalChannelType::=VarLengthNumber2 -- used in 17423, 21218, 24102-1
+
+MCgroup::= VarLengthNumber -- used in 17423
+
+ITSprotocolStackID::= VarLengthNumber -- used in 17423
+
+
+
+-- Values
+
+version INTEGER(0..255)::=1 -- version of this module
+
+
+END

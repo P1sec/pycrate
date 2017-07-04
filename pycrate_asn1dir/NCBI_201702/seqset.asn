@@ -1,0 +1,63 @@
+--$Revision: 279709 $
+--**********************************************************************
+--
+--  NCBI Sequence Collections
+--  by James Ostell, 1990
+--
+--  Version 3.0 - 1994
+--
+--**********************************************************************
+
+NCBI-Seqset DEFINITIONS ::=
+BEGIN
+
+EXPORTS Bioseq-set, Seq-entry;
+
+IMPORTS Bioseq, Seq-annot, Seq-descr FROM NCBI-Sequence
+        Object-id, Dbtag, Date FROM NCBI-General;
+
+--*** Sequence Collections ********************************
+--*
+
+Bioseq-set ::= SEQUENCE {      -- just a collection
+    id Object-id OPTIONAL ,
+    coll Dbtag OPTIONAL ,          -- to identify a collection
+    level INTEGER OPTIONAL ,       -- nesting level
+    class ENUMERATED {
+        not-set (0) ,
+        nuc-prot (1) ,              -- nuc acid and coded proteins
+        segset (2) ,                -- segmented sequence + parts
+        conset (3) ,                -- constructed sequence + parts
+        parts (4) ,                 -- parts for 2 or 3
+        gibb (5) ,                  -- geninfo backbone
+        gi (6) ,                    -- geninfo
+        genbank (7) ,               -- converted genbank
+        pir (8) ,                   -- converted pir
+        pub-set (9) ,               -- all the seqs from a single publication
+        equiv (10) ,                -- a set of equivalent maps or seqs
+        swissprot (11) ,            -- converted SWISSPROT
+        pdb-entry (12) ,            -- a complete PDB entry
+        mut-set (13) ,              -- set of mutations
+        pop-set (14) ,              -- population study
+        phy-set (15) ,              -- phylogenetic study
+        eco-set (16) ,              -- ecological sample study
+        gen-prod-set (17) ,         -- genomic products, chrom+mRNA+protein
+        wgs-set (18) ,              -- whole genome shotgun project
+        named-annot (19) ,          -- named annotation set
+        named-annot-prod (20) ,     -- with instantiated mRNA+protein
+        read-set (21) ,             -- set from a single read
+        paired-end-reads (22) ,     -- paired sequences within a read-set
+        small-genome-set (23) ,     -- viral segments or mitochondrial minicircles
+        other (255) } DEFAULT not-set ,
+    release VisibleString OPTIONAL ,
+    date Date OPTIONAL ,
+    descr Seq-descr OPTIONAL ,
+    seq-set SEQUENCE OF Seq-entry ,
+    annot SET OF Seq-annot OPTIONAL }
+
+Seq-entry ::= CHOICE {
+        seq  Bioseq ,
+        set  Bioseq-set }
+
+END
+

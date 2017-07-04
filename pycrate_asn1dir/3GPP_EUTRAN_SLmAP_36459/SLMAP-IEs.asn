@@ -1,0 +1,270 @@
+-- **************************************************************
+--
+-- Information Element Definitions
+--
+-- **************************************************************
+
+SLMAP-IEs {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) slmap (50) version1 (1) slmap-IEs (2) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+IMPORTS	
+
+	maxNrOfErrors,
+	maxServCell,
+	maxEARFCN,
+	maxNoULRTOA,
+	maxNoLMURfBands,
+	maxBWCombSet,
+	maxBWComb,
+	maxSimultaneousBands
+
+FROM SLMAP-Constants
+
+	Criticality,
+	SLMAPTransactionID,
+	ProcedureCode,
+	ProtocolIE-ID,
+	TriggeringMessage
+FROM SLMAP-CommonDataTypes
+
+	ProtocolExtensionContainer{},
+	ProtocolIE-Single-Container{},
+	SLMAP-PROTOCOL-EXTENSION,
+	SLMAP-PROTOCOL-IES
+FROM SLMAP-Containers;
+
+
+Cause ::= CHOICE {
+	radioNetworkLayer	RadioNetworkLayerCause,
+	protocol			ProtocolCause,
+	misc				MiscCause,
+	...
+}
+
+RadioNetworkLayerCause::= ENUMERATED {
+	unknown-or-already-allocated-slmap-id,
+	rf-frequency-band-not-supported,
+	rf-bandwidth-not-supported,
+	invalid-srs-coniguration,
+	unspecified,
+	...
+}
+
+ProtocolCause ::= ENUMERATED {
+	transfer-syntax-error,
+	abstract-syntax-error-reject,
+	abstract-syntax-error-ignore-and-notify,
+	message-not-compatible-with-receiver-state,
+	semantic-error,
+	abstract-syntax-error-falsely-constructed-message,
+	unspecified,
+	...
+}
+
+MiscCause ::= ENUMERATED {
+	control-processing-overload,
+	processing-resources-not-available,
+	hardware-failure,
+	o-and-m-intervention,
+	unspecified,
+	...
+}
+
+
+CriticalityDiagnostics ::= SEQUENCE {
+	procedureCode					ProcedureCode					OPTIONAL,
+	triggeringMessage				TriggeringMessage				OPTIONAL,
+	procedureCriticality			Criticality						OPTIONAL,
+	slmapTransactionID				SLMAPTransactionID				OPTIONAL,
+	iEsCriticalityDiagnostics		CriticalityDiagnostics-IE-List	OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { {CriticalityDiagnostics-ExtIEs} }	OPTIONAL,
+	...
+}
+
+
+CriticalityDiagnostics-ExtIEs SLMAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+CriticalityDiagnostics-IE-List ::= SEQUENCE (SIZE (1..maxNrOfErrors)) OF
+	SEQUENCE {
+		iECriticality			Criticality,
+		iE-ID					ProtocolIE-ID,
+		typeOfError				TypeOfError,
+		iE-Extensions			ProtocolExtensionContainer { {CriticalityDiagnostics-IE-List-ExtIEs} } OPTIONAL,
+		...
+}
+
+CriticalityDiagnostics-IE-List-ExtIEs SLMAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+TypeOfError ::= ENUMERATED {
+	not-understood,
+	missing,
+	...
+}
+
+
+
+UL-RTOAMeasurementConfiguration ::= SEQUENCE {
+	ulRtoaReferenceTime			BIT STRING (SIZE (64)),
+	searchWindowParameters		SearchWindowParameters						OPTIONAL,
+	numberOfTransmissions		INTEGER (1..500,..., 0),
+	srsConfiguration			SRSConfiguration,
+	...
+}
+
+SearchWindowParameters ::= SEQUENCE {
+	expectedPropagationDelay	INTEGER (1..1200, ...)						OPTIONAL,
+	delayUncertainty			INTEGER (1..100, ...)						OPTIONAL,
+	...
+}
+
+SRSConfiguration ::= SEQUENCE (SIZE (1.. maxServCell)) OF SRSConfigurationForOneCell
+
+SRSConfigurationForOneCell ::= SEQUENCE {
+	pci							PCI,
+	ulEarfcn					EARFCN,
+	ulBandwidth					ChannelBandwidth,
+	ulCyclicPrefixLength		CPLength,
+	srsBandwidthConfig			BandwidthConfig,
+	srsBandwidth				SRSBandwidth,
+	srsAntennaPort				AntennaPort,
+	srsHoppingBandwidth			HoppingBandwidth,
+	srsCyclicShift				CyclicShift,
+	srsConfigIndex				INTEGER (0..1023),
+	srsMaxUpPts					ENUMERATED {true}			OPTIONAL, -- present if TDD
+	transmissionComb			INTEGER (0..1),
+	freqDomainPosition			INTEGER (0..23),
+	groupHoppingEnabled			BOOLEAN,
+	deltaSS						INTEGER (0..29)			OPTIONAL,
+	...
+}
+
+PCI ::= INTEGER (0..503, ...)
+
+EARFCN ::= INTEGER (0..maxEARFCN, ...)
+
+ChannelBandwidth ::= ENUMERATED {
+	n6,
+	n15,
+	n25,
+	n50,
+	n75,
+	n100,
+	...
+}
+
+CPLength ::= ENUMERATED {
+	normal,
+	extended,
+	...
+}
+
+BandwidthConfig ::= ENUMERATED {
+	bw0,
+	bw1,
+	bw2,
+	bw3,
+	bw4,
+	bw5,
+	bw6,
+	bw7,
+	...
+}
+
+SRSBandwidth ::= ENUMERATED {
+	bw0,
+	bw1,
+	bw2,
+	bw3,
+	...
+}
+
+AntennaPort ::= ENUMERATED {
+	an1,
+	an2,
+	an4,
+	...
+}
+
+HoppingBandwidth ::= ENUMERATED {
+	hbw0,
+	hbw1,
+	hbw2,
+	hbw3,
+	...
+}
+
+CyclicShift ::= ENUMERATED {
+	cs0,
+	cs1,
+	cs2,
+	cs3,
+	cs4,
+	cs5,
+	cs6,
+	cs7,
+	...
+}
+
+
+UL-RTOAMeasurements ::= SEQUENCE (SIZE (1.. maxNoULRTOA)) OF UL-RTOAMeasurement
+
+UL-RTOAMeasurement ::= SEQUENCE {
+	ulEarfcn					EARFCN,
+	ulRtoa						INTEGER (1.. 4800, ...),
+	...
+}
+
+LMU-ID ::= INTEGER (0..1048575)
+
+ESMLC-ID ::= INTEGER (0..255)
+
+ESMLC-MeasurementID ::= INTEGER (0.. 65535, ...)
+
+
+LMUInformation ::= SEQUENCE {
+	lmuPosition					LMUPosition						OPTIONAL,
+	listOfRfBands				ListOfRfBands,
+	bWCombinationParameters		BWCombinationParameters			OPTIONAL,
+	...
+}
+
+ListOfRfBands ::= SEQUENCE (SIZE (1.. maxNoLMURfBands)) OF FreqBandIndicator
+
+FreqBandIndicator ::= INTEGER (1.. 256)
+
+BWCombinationParameters ::= SEQUENCE (SIZE (1.. maxBWComb)) OF
+	SupportedBandwidthCombinationSet
+
+
+SupportedBandwidthCombinationSet ::= SEQUENCE (SIZE (1.. maxBWCombSet)) OF
+	BandCombination
+	
+
+
+BandCombination ::= SEQUENCE (SIZE (1.. maxSimultaneousBands)) OF
+	FreqBandIndicator
+
+LMUPosition ::= SEQUENCE {
+	latitudeSign				ENUMERATED {north, south},
+	latitude					INTEGER (0..8388607),
+	longitude					INTEGER (-8388608..8388607),
+	directionOfAltitude			ENUMERATED {height, depth},
+	altitude					INTEGER (0..32767),
+	uncertaintySemi-major		INTEGER (0..127),
+	uncertaintySemi-minor		INTEGER (0..127),
+	orientationOfMajorAxis		INTEGER (0..179),
+	uncertaintyAltitude			INTEGER (0..127),
+	confidence					INTEGER (0..100),
+	...
+}
+
+END

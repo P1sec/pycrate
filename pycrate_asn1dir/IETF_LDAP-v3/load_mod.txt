@@ -1,0 +1,2 @@
+# extracted from RFC 4511
+Lightweight-Directory-Access-Protocol-V3.asn

@@ -1,0 +1,12 @@
+TRANSPORT-ADDRESS-MIB 
+
+DEFINITIONS AUTOMATIC TAGS ::= BEGIN
+
+-- this is only a dummy module to resolve the two elements in IMPORT statements of other modules
+
+TransportAddressType ::= OCTET STRING (SIZE(6))
+
+TransportAddress ::= OCTET STRING (SIZE(6))
+
+END
+

@@ -1,0 +1,7 @@
+DSRCtransferData {iso(1) standard(0) dsrc(15628) dsrctransferData(1) version (1)} 
+DEFINITIONS::= BEGIN
+IMPORTS T-APDUs
+FROM DSRCData {iso(1) standard(0) dsrc(15628) dsrcData(0) version (1)};
+-- EXPORTS everything;
+Message::= T-APDUs -- Message is transferred over the DSRC link;
+END

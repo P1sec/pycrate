@@ -1,0 +1,111 @@
+--$Revision: 6.12 $
+--****************************************************************
+--
+--  NCBI MIME type (chemical/ncbi-asn1-ascii and chemical/ncbi-asn1-binary)
+--  by Jonathan Epstein, February 1996
+--
+--****************************************************************
+
+NCBI-Mime DEFINITIONS ::=
+BEGIN
+
+EXPORTS Ncbi-mime-asn1;
+IMPORTS Biostruc, Biostruc-annot-set FROM MMDB
+    Cdd FROM NCBI-Cdd
+	Seq-entry FROM NCBI-Seqset
+	Seq-annot FROM NCBI-Sequence
+    Medline-entry FROM NCBI-Medline
+    Cn3d-style-dictionary, Cn3d-user-annotations FROM NCBI-Cn3d;
+
+Ncbi-mime-asn1 ::= CHOICE {
+	entrez	Entrez-general,			-- just a structure
+    alignstruc  Biostruc-align,     -- structures & sequences & alignments
+	alignseq	Biostruc-align-seq,	-- sequence alignment
+    strucseq    Biostruc-seq,       -- structure & sequences
+    strucseqs   Biostruc-seqs,      -- structure & sequences & alignments
+    general     Biostruc-seqs-aligns-cdd    -- all-purpose "grab bag"
+	-- others may be added here in the future
+}
+
+-- generic bundle of sequence and alignment info
+Bundle-seqs-aligns ::= SEQUENCE {
+    sequences SET OF Seq-entry OPTIONAL,        -- sequences
+    seqaligns SET OF Seq-annot OPTIONAL,        -- sequence alignments
+    strucaligns Biostruc-annot-set OPTIONAL,    -- structure alignments
+    imports SET OF Seq-annot OPTIONAL,          -- imports (updates in Cn3D)
+    style-dictionary Cn3d-style-dictionary OPTIONAL,    -- Cn3D stuff
+    user-annotations Cn3d-user-annotations OPTIONAL
+}
+
+Biostruc-seqs-aligns-cdd ::= SEQUENCE {
+    seq-align-data CHOICE {
+        bundle Bundle-seqs-aligns,          -- either seqs + alignments
+        cdd Cdd                             -- or CDD (which contains these)
+    },
+    structures SET OF Biostruc OPTIONAL,    -- structures
+    structure-type ENUMERATED {             -- type of structures to load if
+        ncbi-backbone(2),                   -- not present; meanings and
+        ncbi-all-atom(3),                   -- values are same as MMDB's
+        pdb-model(4)                        -- Model-type
+    } OPTIONAL
+}
+
+Biostruc-align ::= SEQUENCE {
+	master	Biostruc,
+	slaves	SET OF Biostruc,
+	alignments	Biostruc-annot-set,	-- structure alignments
+	sequences SET OF Seq-entry,	-- sequences
+	seqalign SET OF Seq-annot,
+	style-dictionary Cn3d-style-dictionary OPTIONAL,
+	user-annotations Cn3d-user-annotations OPTIONAL
+}
+
+Biostruc-align-seq ::= SEQUENCE {	-- display seq structure align only
+	sequences SET OF Seq-entry,	-- sequences
+	seqalign SET OF Seq-annot,
+	style-dictionary Cn3d-style-dictionary OPTIONAL,
+	user-annotations Cn3d-user-annotations OPTIONAL
+}
+
+Biostruc-seq ::= SEQUENCE {	-- display  structure seq added by yanli
+	structure Biostruc,
+	sequences SET OF Seq-entry,
+	style-dictionary Cn3d-style-dictionary OPTIONAL,
+	user-annotations Cn3d-user-annotations OPTIONAL
+}
+
+Biostruc-seqs ::= SEQUENCE { -- display blast alignment along with neighbor's structure added by yanli
+	structure Biostruc,
+	sequences SET OF Seq-entry,	-- sequences
+	seqalign SET OF Seq-annot,
+	style-dictionary Cn3d-style-dictionary OPTIONAL,
+	user-annotations Cn3d-user-annotations OPTIONAL
+}
+
+Entrez-style ::= ENUMERATED {
+	docsum (1),
+	genbank (2) ,
+	genpept (3) ,
+	fasta (4) ,
+	asn1 (5) ,
+	graphic (6) ,
+	alignment (7) ,
+	globalview (8) ,
+	report (9) ,
+	medlars (10) ,
+	embl (11) ,
+	pdb (12) ,
+	kinemage (13) }
+
+Entrez-general ::= SEQUENCE {
+	title VisibleString OPTIONAL,
+	data CHOICE {
+		ml	Medline-entry ,
+		prot	Seq-entry ,
+		nuc	Seq-entry ,
+		genome	Seq-entry ,
+		structure Biostruc ,
+		strucAnnot Biostruc-annot-set } ,
+	style Entrez-style ,
+	location VisibleString OPTIONAL }
+END

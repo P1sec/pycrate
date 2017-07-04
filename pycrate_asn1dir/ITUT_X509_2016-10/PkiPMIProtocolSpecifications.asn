@@ -1,0 +1,507 @@
+PkiPMIProtocolSpecifications {joint-iso-itu-t ds(5) module(1) pkiPMIProtocolSpecifications(43) 8}
+DEFINITIONS ::=
+BEGIN
+
+-- EXPORTS All 
+
+IMPORTS
+
+  -- from Rec. ITU-T X.501 | ISO/IEC 9594-2
+
+  attributeCertificateDefinitions, authenticationFramework, certificateExtensions,
+  id-cmsct, informationFramework, pkiPmiWrapper, selectedAttributeTypes
+    FROM UsefulDefinitions {joint-iso-itu-t ds(5) module(1) usefulDefinitions(0) 8}
+
+  Attribute{}, ATTRIBUTE, Name, SupportedAttributes
+    FROM InformationFramework informationFramework
+
+  -- from Rec. ITU-T X.509 | ISO/IEC 9594-8
+
+  ALGORITHM, AlgorithmIdentifier{}, Certificate, CertificateList, CertificateSerialNumber, CertAVL,
+  ENCRYPTED-HASH{}, PKCertIdentifier, SIGNATURE{},   TBSCertAVL,
+  Version, AvlSerialNumber, PkiPath
+    FROM AuthenticationFramework authenticationFramework
+
+  CRLReason, SubjectKeyIdentifier
+    FROM CertificateExtensions certificateExtensions
+
+  AttributeCertificate
+    FROM AttributeCertificateDefinitions attributeCertificateDefinitions
+
+  PkiWaError, WRAPPED-PDU
+    FROM PkiPmiWrapper pkiPmiWrapper
+
+  -- from Rec. ITU-T X.520 | ISO/IEC 9594-6
+
+  objectIdentifierMatch, octetStringMatch 
+    FROM SelectedAttributeTypes selectedAttributeTypes ;
+
+-- PDU types
+
+AvlPduSet WRAPPED-PDU ::= {
+  certReq |
+  certRsp |
+  addAvlReq |
+  addAvlRsp |
+  replaceAvlReq |
+  replaceAvlRsp |
+  deleteAvlReq |
+  deleteAvlRsp |
+  rejectAVL |
+  certSubscribeReq |
+  certSubscribeRsp |
+  certUnsubscribeReq |
+  certUnsubscribeRsp |
+  certReplaceReq |
+  certReplaceRsp |
+  rejectCAsubscribe,
+  ... }
+
+-- Authorization validation list management
+
+AVMPcommonComponents ::= SEQUENCE {
+  version    AVMPversion DEFAULT v1,
+  timeStamp  GeneralizedTime,
+  sequence   AVMPsequence,
+  ... }
+
+AVMPversion ::= ENUMERATED { v1(1), v2(2), v3(3), ... }
+
+AVMPsequence ::= INTEGER (1..MAX)
+
+certReq WRAPPED-PDU ::= {
+                CertReq
+  IDENTIFIED BY id-certReq }
+
+CertReq ::= SEQUENCE {
+  COMPONENTS OF AVMPcommonComponents,
+  ... }
+
+certRsp WRAPPED-PDU ::= {
+                CertRsp
+  IDENTIFIED BY id-certRsp }
+
+CertRsp ::= SEQUENCE {
+  COMPONENTS OF AVMPcommonComponents,
+  result        CHOICE {
+    success       [0]  CertOK,
+    failure       [1]  CertErr,
+    ... },
+  ... }
+
+CertOK ::= SEQUENCE {
+  dhCert  Certificate,
+  ... }
+
+CertErr ::= SEQUENCE {
+  notOK  CHOICE {
+    wrErr   [0]  PkiWaError,
+    avmpErr [1]  AVMP-error,
+    ... },
+  note   Notifications OPTIONAL,
+  ... }
+
+Notifications ::= SEQUENCE SIZE (1..MAX) OF Attribute {{SupportedAttributes}}
+
+addAvlReq WRAPPED-PDU ::= {
+                AddAvlReq
+  IDENTIFIED BY id-addAvlReq }
+
+AddAvlReq ::= SEQUENCE {
+  COMPONENTS OF AVMPcommonComponents,
+  certlist      CertAVL,
+  ... }
+
+addAvlRsp WRAPPED-PDU ::= {
+                 AddAvlRsp
+  IDENTIFIED BY  id-addAvlRsp }
+
+AddAvlRsp ::= SEQUENCE {
+  COMPONENTS OF AVMPcommonComponents,
+  result        CHOICE {
+    success       [0]  AddAvlOK,
+    failure       [1]  AddAvlErr,
+    ... },
+  ... }
+
+AddAvlOK ::= SEQUENCE {
+  ok     NULL,
+  ... }
+
+AddAvlErr ::= SEQUENCE {
+  notOK  AVMP-error,
+  ... }
+
+replaceAvlReq WRAPPED-PDU ::= {
+                 ReplaceAvlReq
+  IDENTIFIED BY  id-replaceAvlReq }
+
+ReplaceAvlReq ::= SEQUENCE {
+  COMPONENTS OF AVMPcommonComponents,
+  old           AvlSerialNumber OPTIONAL,
+  new           CertAVL,
+  ... }
+
+replaceAvlRsp WRAPPED-PDU ::= {
+                 ReplaceAvlRsp
+  IDENTIFIED BY  id-replaceAvlRsp }
+
+ReplaceAvlRsp ::= SEQUENCE {
+  COMPONENTS OF AVMPcommonComponents,
+  result        CHOICE {
+    success       [0]  RepAvlOK,
+    failure       [1]  RepAvlErr,
+    ... },
+  ... }
+
+RepAvlOK ::= SEQUENCE {
+  ok     NULL,
+  ... }
+
+RepAvlErr ::= SEQUENCE {
+  notOK  AVMP-error,
+  ... }
+
+deleteAvlReq WRAPPED-PDU ::= {
+                 DeleteAvlReq
+  IDENTIFIED BY  id-deleteAvlReq }
+
+DeleteAvlReq ::= SEQUENCE {
+  COMPONENTS OF AVMPcommonComponents,
+  avl-Id        AvlSerialNumber OPTIONAL,
+  ... }
+
+deleteAvlRsp WRAPPED-PDU ::= {
+                 DeleteAvlRsp
+  IDENTIFIED BY  id-deleteAvlRsp }
+
+DeleteAvlRsp ::= SEQUENCE {
+  COMPONENTS OF AVMPcommonComponents,
+  result        CHOICE {
+    success       [0]  DelAvlOK,
+    failure       [1]  DelAvlErr,
+    ... },
+  ... }
+
+DelAvlOK ::= SEQUENCE {
+  ok     NULL,
+  ... }
+
+DelAvlErr ::= SEQUENCE {
+  notOK  AVMP-error,
+  ... }
+
+rejectAVL  WRAPPED-PDU ::= {
+                 RejectAVL
+  IDENTIFIED BY  id-rejectAVL }
+
+RejectAVL ::= SEQUENCE {
+  COMPONENTS OF AVMPcommonComponents,
+  reason        AVMP-error,
+  ... }
+
+-- CA subscription
+
+CASPcommonComponents ::= SEQUENCE {
+  version    CASPversion DEFAULT v1,                                                                              
+  sequence   CASPsequence,
+  ... }
+
+CASPversion ::= ENUMERATED { v1(1), v2(2), v3(3), ... }
+
+CASPsequence ::= INTEGER (1..MAX)
+
+certSubscribeReq WRAPPED-PDU ::= {
+                 CertSubscribeReq
+  IDENTIFIED BY  id-certSubscribeReq }
+
+CertSubscribeReq ::= SEQUENCE {
+  COMPONENTS OF CASPcommonComponents,
+  certs   SEQUENCE (SIZE (1..MAX)) OF SEQUENCE {
+    subject      Name,
+    serialNumber CertificateSerialNumber,
+    ... },
+  ... }
+
+certSubscribeRsp WRAPPED-PDU ::= {
+                 CertSubscribeRsp
+  IDENTIFIED BY  id-certSubscribeRsp }
+
+CertSubscribeRsp ::= SEQUENCE {
+  COMPONENTS OF CASPcommonComponents,
+  result       CHOICE {
+    success       [0]  CertSubscribeOK,
+    failure       [1]  CertSubscribeErr,
+    ... },
+  ... }
+
+CertSubscribeOK ::= SEQUENCE (SIZE (1..MAX)) OF CHOICE {
+  ok       [0] SEQUENCE {
+    cert         Certificate,
+    status       CertStatus,
+    revokeReason CRLReason OPTIONAL,
+    ... },
+  not-ok   [1] SEQUENCE {
+    status       CASP-CertStatusCode,
+    ... },
+  ... }
+
+CertStatus ::= ENUMERATED {
+  good    (0),
+  revoked (1),
+  on-hold (2),
+  expired (3),
+  ... }
+
+CASP-CertStatusCode ::= ENUMERATED {
+  noReason       (1),
+  unknownCert    (2),
+  ... }
+
+CertSubscribeErr ::= SEQUENCE {
+  code       CASP-error, 
+  ... }
+
+certUnsubscribeReq WRAPPED-PDU ::= {
+                 CertUnsubscribeReq
+  IDENTIFIED BY  id-certUnsubscribeReq }
+
+CertUnsubscribeReq ::= SEQUENCE {
+  COMPONENTS OF CASPcommonComponents,
+  certs  SEQUENCE (SIZE (1..MAX)) OF SEQUENCE {
+    subject      Name,
+    serialNumber CertificateSerialNumber,
+    ... },
+  ... }
+
+certUnsubscribeRsp WRAPPED-PDU ::= {
+                 CertUnsubscribeRsp
+  IDENTIFIED BY  id-certUnsubscribeRsp }
+
+CertUnsubscribeRsp ::= SEQUENCE {
+  COMPONENTS OF CASPcommonComponents,
+  result       CHOICE {
+    success       [0]  CertUnsubscribeOK,
+    failure       [1]  CertUnsubscribeErr,
+    ... },
+  ... }
+
+CertUnsubscribeOK ::= SEQUENCE (SIZE (1..MAX)) OF CHOICE {
+  ok       [0] SEQUENCE {
+    subject      Name,
+    serialNumber CertificateSerialNumber,
+    ... },
+  not-ok   [1] SEQUENCE {
+    status       CASP-CertStatusCode,
+    ... },
+  ... }
+ 
+CertUnsubscribeErr ::= SEQUENCE {
+  code         CASP-error, 
+  ... }
+
+certReplaceReq WRAPPED-PDU ::= {
+                 CertReplaceReq
+  IDENTIFIED BY  id-certReplaceReq }
+
+CertReplaceReq ::= SEQUENCE {
+  COMPONENTS OF CASPcommonComponents,
+  certs         SEQUENCE (SIZE (1..MAX)) OF SEQUENCE {
+    old           CertificateSerialNumber,
+    new           Certificate,
+    ... },
+  ... }
+
+certReplaceRsp WRAPPED-PDU ::= {
+                 CertReplaceRsp
+  IDENTIFIED BY  id-certReplaceRsp }
+
+CertReplaceRsp ::= SEQUENCE {
+  COMPONENTS OF CASPcommonComponents,
+  result        CHOICE {
+    success       [0]  CertReplaceOK,
+    failure       [1]  CertReplaceErr,
+    ... },
+  ... }
+
+CertReplaceOK ::= SEQUENCE (SIZE (1..MAX)) OF CHOICE {
+  ok        [0] SEQUENCE {
+    issuer        Name,
+    serialNumber  CertificateSerialNumber,
+    ... },
+  not-ok    [1] SEQUENCE {
+    status        CASP-CertStatusCode,
+    ... },
+  ... }
+
+CertReplaceErr ::= SEQUENCE {
+  code        CHOICE {
+    signedData     [0]  SignedData-error,  
+    envelopedData  [1]  EnvelopedData-error,
+    casp           [2]  CASP-error,
+    ... },
+  ... }
+
+certUpdateReq WRAPPED-PDU ::= {
+                 CertUpdateReq
+  IDENTIFIED BY  id-certUpdateReq }
+
+CertUpdateReq ::= SEQUENCE {
+  COMPONENTS OF CASPcommonComponents,
+  certs  SEQUENCE (SIZE (1..MAX)) OF SEQUENCE {
+    subject      Name,
+    serialNumber CertificateSerialNumber,
+    certStatus   CertStatus,    
+    ... },
+  ... }
+
+certUpdateRsp WRAPPED-PDU ::= {
+                 CertUpdateRsp
+  IDENTIFIED BY  id-certUpdateRsp }
+
+CertUpdateRsp ::= SEQUENCE {
+  COMPONENTS OF CASPcommonComponents,
+  result        CHOICE {
+    success       [0]  CertUpdateOK,
+    failure       [1]  CertUpdateErr,
+    ... },
+  ... }
+
+CertUpdateOK ::= SEQUENCE (SIZE (1..MAX)) OF CHOICE {
+  ok        [0] SEQUENCE {
+    subject       Name,
+    serialNumber  CertificateSerialNumber,
+    ... }, 
+  not-ok    [1] SEQUENCE {
+    status        CASP-CertStatusCode,
+    ... },
+  ... }
+
+CertUpdateErr ::= SEQUENCE {
+  code          CASP-error, 
+  ... }
+
+rejectCAsubscribe  WRAPPED-PDU ::= {
+                 RejectCAsubscribe
+  IDENTIFIED BY  id-rejectCAsubscribe }
+
+RejectCAsubscribe ::= SEQUENCE {
+  COMPONENTS OF CASPcommonComponents,
+  reason        CASP-error,
+  ... }
+
+SignedData-error ::= ENUMERATED {
+  noReason                           (0),
+  signedDataContectTypeExpected      (1),
+  wrongSignedDataVersion             (2),
+  missingContent                     (3),
+  missingContentComponent            (4),
+  invalidContentComponent            (5),
+  unsupportedHashAlgorithm           (6),
+  ... }
+
+EnvelopedData-error ::= ENUMERATED {
+  noReason                           (0),
+  ... }
+
+AVMP-error ::= ENUMERATED {
+  noReason                           (0),
+  unknownAvlEntity                   (1),
+  unknownContentType                 (2),
+  unsupportedAVMPversion             (3),
+  missingContent                     (4),
+  missingContentComponent            (5),
+  invalidContentComponent            (6),
+  sequenceError                      (7),
+  protocolError                      (8),
+  invalidAvlSignature                (9),
+  duplicateAVL                       (10),
+  missingAvlComponent                (11),
+  invalidAvlVersion                  (12),
+  notAllowedForConstrainedAVLEntity  (13),
+  constrainedRequired                (14),
+  nonConstrainedRequired             (15),
+  unsupportedCriticalEntryExtension  (16),
+  unsupportedCriticalExtension       (17),
+  maxAVLsExceeded                    (18),
+  unknownCert                        (19),
+  unknownAVL                         (20),
+  unsupportedScopeRestriction        (21),
+  ... }
+
+
+CASP-error ::= ENUMERATED {
+  noReason                      (0),
+  unknownContentType            (1),
+  unsupportedWLMPversion        (2),
+  missingContent                (3),
+  missingContentComponent       (4),
+  invalidContentComponent       (5),
+  sequenceError                 (6),
+  unknownSubject                (7),
+  unknownCert                   (8),
+  ... }
+
+id-signedData OBJECT IDENTIFIER ::= {iso(1) member-body(2)
+us(840)rsadsi(113549) pkcs(1) pkcs7(7) 2}
+
+id-envelopedData OBJECT IDENTIFIER ::= {iso(1) member-body(2) us(840)
+rsadsi(113549) pkcs(1) pkcs7(7) 3}
+
+id-certReq              OBJECT IDENTIFIER ::= {id-cmsct 0}
+id-certRsp              OBJECT IDENTIFIER ::= {id-cmsct 1}
+id-addAvlReq            OBJECT IDENTIFIER ::= {id-cmsct 2}
+id-addAvlRsp            OBJECT IDENTIFIER ::= {id-cmsct 3}
+id-replaceAvlReq        OBJECT IDENTIFIER ::= {id-cmsct 4}
+id-replaceAvlRsp        OBJECT IDENTIFIER ::= {id-cmsct 5}
+id-updateAvlReq         OBJECT IDENTIFIER ::= {id-cmsct 6}
+id-updateAvlRsp         OBJECT IDENTIFIER ::= {id-cmsct 7}
+id-deleteAvlReq         OBJECT IDENTIFIER ::= {id-cmsct 8}
+id-deleteAvlRsp         OBJECT IDENTIFIER ::= {id-cmsct 9}
+id-rejectAVL            OBJECT IDENTIFIER ::= {id-cmsct 10}
+id-certSubscribeReq     OBJECT IDENTIFIER ::= {id-cmsct 11}
+id-certSubscribeRsp     OBJECT IDENTIFIER ::= {id-cmsct 12}
+id-certUnsubscribeReq   OBJECT IDENTIFIER ::= {id-cmsct 13}
+id-certUnsubscribeRsp   OBJECT IDENTIFIER ::= {id-cmsct 14}
+id-certReplaceReq       OBJECT IDENTIFIER ::= {id-cmsct 15}
+id-certReplaceRsp       OBJECT IDENTIFIER ::= {id-cmsct 16}
+id-certUpdateReq        OBJECT IDENTIFIER ::= {id-cmsct 17}
+id-certUpdateRsp        OBJECT IDENTIFIER ::= {id-cmsct 18}
+id-rejectCAsubscribe    OBJECT IDENTIFIER ::= {id-cmsct 19}
+
+
+-- Trust broker protocol
+
+TBrequest ::= CHOICE {
+  caCert      [0] PKCertIdentifier,
+  subjectCert [1] PKCertIdentifier,
+  ... }
+
+TBresponse ::= CHOICE {
+  success [0]  TBOK,
+  failure [1]  TBerror,
+  ... }
+
+TBOK ::= SEQUENCE {
+  levelOfAssurance  [0]  INTEGER (0..100),
+  confidenceLevel   [1]  INTEGER (0..100),
+  validationTime    [2]  UTCTime,
+  info                   UTF8String  OPTIONAL,
+  ... }
+
+TBerror ::= SEQUENCE {
+  code        ENUMERATED {
+    caCertInvalid        (1), 
+    unknownCert          (2),
+    unknownCertStatus    (3),
+    subjectCertRevoked   (4),
+    incorrectCert        (5),
+    contractExpired      (6),
+    pathValidationFailed (7),
+    timeOut              (8),
+    other                (99),
+    ... },
+  diagnostic  UTF8String OPTIONAL,
+  ... }
+
+END -- PkiPMIProtocolSpecifications

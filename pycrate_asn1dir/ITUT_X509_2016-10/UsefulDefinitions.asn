@@ -1,0 +1,223 @@
+UsefulDefinitions {joint-iso-itu-t ds(5) module(1) usefulDefinitions(0) 8}
+DEFINITIONS ::=
+BEGIN
+
+-- EXPORTS All 
+-- The types and values defined in this module are exported for use in the other ASN.1
+-- modules contained within these Directory Specifications, and for the use of other
+-- applications which will use them to access Directory services. Other applications
+-- may use them for their own purposes, but this will not constrain extensions and
+-- modifications needed to maintain or improve the Directory service.
+
+ID    ::= OBJECT IDENTIFIER
+
+ds ID ::= {joint-iso-itu-t ds(5)}
+
+-- The following definition is for ASN.1 definitions moved from 
+-- Rec. ITU-T X.660 | ISO/IEC 9834-1:
+
+id ID ::= {joint-iso-itu-t registration-procedures(17) module(1) directory-defs(2)}
+
+-- The following defition is for ASN.1 definitions of LDAP schema
+
+internet            ID ::= {iso(1) identified-organization(3) dod(6) internet(1)}
+ldap-dir            ID ::= {internet directory(1)}
+intSecurity         ID ::= {internet security(5)}
+ldap-enterprise     ID ::= {internet private(4) enterprise(1)}
+ldap-x509           ID ::= {ldap-dir x509(15)}
+ldap-openLDAP       ID ::= {ldap-enterprise openLDAP(4203) ldap(1)}
+openLDAP-attributes ID ::= {ldap-openLDAP attributeType(3)}
+openLDAP-controls   ID ::= {ldap-openLDAP controls(10)}
+ldap-wall           ID ::= {ldap-enterprise wahl(1466)}
+ldap-dynExt         ID ::= {ldap-wall 101 119}
+ldap-attr           ID ::= {ldap-wall 101 120}
+ldap-match          ID ::= {ldap-wall 109 114}
+ldap-syntax         ID ::= {ldap-wall 115 121 1}
+cosine              ID ::= {itu-t(0) data(9) pss(2342) ucl(19200300) pilot(100)}
+cosineAttr          ID ::= {cosine pilotAttributeType(1)} 
+
+-- categories of information object 
+
+module                                   ID ::= {ds 1}
+serviceElement                           ID ::= {ds 2}
+applicationContext                       ID ::= {ds 3}
+attributeType                            ID ::= {ds 4}
+attributeSyntaxVendor                    ID ::= {ds 5}
+-- This arc will not be used by these Directory Specifications
+objectClass                              ID ::= {ds 6}
+-- attributeSet                          ID ::= {ds 7}
+algorithm                                ID ::= {ds 8}
+abstractSyntax                           ID ::= {ds 9}
+-- object                                ID ::= {ds 10}
+-- port                                  ID ::= {ds 11}
+dsaOperationalAttribute                  ID ::= {ds 12}
+matchingRule                             ID ::= {ds 13}
+knowledgeMatchingRule                    ID ::= {ds 14}
+nameForm                                 ID ::= {ds 15}
+group                                    ID ::= {ds 16}
+subentry                                 ID ::= {ds 17}
+operationalAttributeType                 ID ::= {ds 18}
+operationalBinding                       ID ::= {ds 19}
+schemaObjectClass                        ID ::= {ds 20}
+schemaOperationalAttribute               ID ::= {ds 21}
+administrativeRoles                      ID ::= {ds 23}
+accessControlAttribute                   ID ::= {ds 24}
+--rosObject                              ID ::= {ds 25}
+--contract                               ID ::= {ds 26}
+--package                                ID ::= {ds 27}
+accessControlSchemes                     ID ::= {ds 28}
+certificateExtension                     ID ::= {ds 29}
+managementObject                         ID ::= {ds 30}
+attributeValueContext                    ID ::= {ds 31}
+-- securityExchange                      ID ::= {ds 32}
+idmProtocol                              ID ::= {ds 33}
+problem                                  ID ::= {ds 34}
+notification                             ID ::= {ds 35}
+matchingRestriction                      ID ::= {ds 36} -- None are currently defined
+controlAttributeType                     ID ::= {ds 37}
+keyPurposes                              ID ::= {ds 38}
+passwordQuality                          ID ::= {ds 39}
+attributeSyntax                          ID ::= {ds 40}
+avRestriction                            ID ::= {ds 41}
+cmsContentType                           ID ::= {ds 42}
+
+-- modules 
+
+usefulDefinitions                        ID ::= {module usefulDefinitions(0) 8}
+informationFramework                     ID ::= {module informationFramework(1) 8}
+directoryAbstractService                 ID ::= {module directoryAbstractService(2) 8}
+distributedOperations                    ID ::= {module distributedOperations(3) 8}
+-- protocolObjectIdentifiers             ID ::= {module protocolObjectIdentifiers(4) 8}
+selectedAttributeTypes                   ID ::= {module selectedAttributeTypes(5) 8}
+selectedObjectClasses                    ID ::= {module selectedObjectClasses(6) 8}
+authenticationFramework                  ID ::= {module authenticationFramework(7) 8}
+algorithmObjectIdentifiers               ID ::= {module algorithmObjectIdentifiers(8) 8}
+directoryObjectIdentifiers               ID ::= {module directoryObjectIdentifiers(9) 8}
+-- upperBounds                           ID ::= {module upperBounds(10) 8}
+-- dap                                   ID ::= {module dap(11) 8}
+-- dsp                                   ID ::= {module dsp(12) 8}
+distributedDirectoryOIDs                 ID ::= {module distributedDirectoryOIDs(13) 8}
+directoryShadowOIDs                      ID ::= {module directoryShadowOIDs(14) 8}
+directoryShadowAbstractService           ID ::= {module
+                                                directoryShadowAbstractService(15) 8}
+-- disp                                  ID ::= {module disp(16) 7}
+-- dop                                   ID ::= {module dop(17) 7}
+opBindingManagement                      ID ::= {module opBindingManagement(18) 8}
+opBindingOIDs                            ID ::= {module opBindingOIDs(19) 8}
+hierarchicalOperationalBindings          ID ::= {module 
+                                                hierarchicalOperationalBindings(20) 8}
+dsaOperationalAttributeTypes             ID ::= {module
+                                                dsaOperationalAttributeTypes(22) 8}
+schemaAdministration                     ID ::= {module schemaAdministration(23) 8}
+basicAccessControl                       ID ::= {module basicAccessControl(24) 8}
+directoryOperationalBindingTypes         ID ::= {module
+                                                directoryOperationalBindingTypes(25) 8}
+certificateExtensions                    ID ::= {module certificateExtensions(26) 8}
+directoryManagement                      ID ::= {module directoryManagement(27) 8}
+enhancedSecurity                         ID ::= {module enhancedSecurity(28) 8}
+-- directorySecurityExchanges            ID ::= {module
+--                                              directorySecurityExchanges (29) 8}
+iDMProtocolSpecification                 ID ::= {module iDMProtocolSpecification(30) 8}
+directoryIDMProtocols                    ID ::= {module directoryIDMProtocols(31) 8}
+attributeCertificateDefinitions          ID ::= {module attributeCertificateDefinitions(32) 8}
+serviceAdministration                    ID ::= {module serviceAdministration(33) 8}
+ldapAttributes                           ID ::= {module ldapAttributes(34) 8}
+commonProtocolSpecification              ID ::= {module
+                                                commonProtocolSpecification(35) 8}
+oSIProtocolSpecification                 ID ::= {module oSIProtocolSpecification(36) 8}
+directoryOSIProtocols                    ID ::= {module directoryOSIProtocols(37) 8}
+ldapSystemSchema                         ID ::= {module ldapSystemSchema(38) 8}
+passwordPolicy                           ID ::= {module passwordPolicy(39) 8}
+pkiPmiExternalDataTypes                  ID ::= {module pkiPmiExternalDataTypes(40) 8}
+extensionAttributes                      ID ::= {module extensionAttributes(41) 8}
+pkiPmiWrapper                            ID ::= {module pkiPmiWrapper(42) 8}
+avlManagement                            ID ::= {module avlManagement(43) 8}
+trustBrokerProtocol                      ID ::= {module trustBrokerProtocol(44) 8}
+
+-- synonyms 
+
+id-oc                                    ID ::= objectClass
+id-at                                    ID ::= attributeType
+id-as                                    ID ::= abstractSyntax
+id-mr                                    ID ::= matchingRule
+id-nf                                    ID ::= nameForm
+id-sc                                    ID ::= subentry
+id-oa                                    ID ::= operationalAttributeType
+id-ob                                    ID ::= operationalBinding
+id-doa                                   ID ::= dsaOperationalAttribute
+id-kmr                                   ID ::= knowledgeMatchingRule
+id-soc                                   ID ::= schemaObjectClass
+id-soa                                   ID ::= schemaOperationalAttribute
+id-ar                                    ID ::= administrativeRoles
+id-aca                                   ID ::= accessControlAttribute
+id-ac                                    ID ::= applicationContext
+-- id-rosObject                          ID ::= rosObject
+-- id-contract                           ID ::= contract
+-- id-package                            ID ::= package
+id-acScheme                              ID ::= accessControlSchemes
+id-ce                                    ID ::= certificateExtension
+id-mgt                                   ID ::= managementObject
+id-avc                                   ID ::= attributeValueContext
+-- id-se                                 ID ::= securityExchange
+id-idm                                   ID ::= idmProtocol
+id-pr                                    ID ::= problem
+id-not                                   ID ::= notification
+id-mre                                   ID ::= matchingRestriction
+id-cat                                   ID ::= controlAttributeType
+id-kp                                    ID ::= keyPurposes
+id-pq                                    ID ::= passwordQuality
+id-ats                                   ID ::= attributeSyntax
+--id-lc                                  ID ::= ldapControl
+id-asx                                   ID ::= attributeSyntax
+id-lsx                                   ID ::= ldap-syntax
+id-ldx                                   ID ::= ldap-x509
+id-lat                                   ID ::= ldap-attr
+id-lmr                                   ID ::= ldap-match
+id-oat                                   ID ::= openLDAP-attributes
+id-coat                                  ID ::= cosineAttr
+id-avr                                   ID ::= avRestriction
+id-cmsct                                 ID ::= cmsContentType
+
+-- LDAP syntax object identifiers
+
+--userpwdMatch                           ID ::= {id-ls 0}
+--userPwdHisoricMatch                    ID ::= {id-ls 1}
+
+-- LDAP control object identifiers
+
+--pwdControl                             ID ::= {id-lc 0}
+--pwdResponse                            ID ::= {id-lc 1}
+
+
+-- obsolete module identifiers 
+
+-- usefulDefinition                      ID ::= {module 0}
+-- informationFramework                  ID ::= {module 1}
+-- directoryAbstractService              ID ::= {module 2}
+-- distributedOperations                 ID ::= {module 3}
+-- protocolObjectIdentifiers             ID ::= {module 4}
+-- selectedAttributeTypes                ID ::= {module 5}
+-- selectedObjectClasses                 ID ::= {module 6}
+-- authenticationFramework               ID ::= {module 7}
+-- algorithmObjectIdentifiers            ID ::= {module 8}
+-- directoryObjectIdentifiers            ID ::= {module 9}
+-- upperBounds                           ID ::= {module 10}
+-- dap                                   ID ::= {module 11}
+-- dsp                                   ID ::= {module 12}
+-- distributedDirectoryObjectIdentifiers ID ::= {module 13}
+
+-- unused module identifiers 
+
+-- directoryShadowOIDs                   ID ::= {module 14}
+-- directoryShadowAbstractService        ID ::= {module 15}
+-- disp                                  ID ::= {module 16}
+-- dop                                   ID ::= {module 17}
+-- opBindingManagement                   ID ::= {module 18}
+-- opBindingOIDs                         ID ::= {module 19}
+-- hierarchicalOperationalBindings       ID ::= {module 20}
+-- dsaOperationalAttributeTypes          ID ::= {module 22}
+-- schemaAdministration                  ID ::= {module 23}
+-- basicAccessControl                    ID ::= {module 24}
+-- operationalBindingOIDs                ID ::= {module 25}
+
+END -- UsefulDefinitions
