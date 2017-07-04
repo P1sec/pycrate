@@ -55,7 +55,7 @@ python setup.py build
 
 It is also possible to recompile all ASN.1 modules, this will take few minutes
 (but if I did not do any mistake, all ASN.1 modules provided in *./pycrate_asn1dir/*
-should have been compiled with the last version nof the compiler):
+should have been compiled with the latest version of the compiler):
 
 ```
 python -m pycrate_asn1c.proc
@@ -135,7 +135,7 @@ The modules here implement various multimedia formats.
 * *MPEG4* with the basic structure used in the MPEG4 file format
 * *MP3* with detailed structures used in the MP3 format, including ID3v1 and ID3v2 tags
 
-Most of the classes here implement complete recipe to parse all of those format in a 
+Most of the classes here implement a complete recipe to parse all of those format in a 
 single shot, by using their *from_char()* method.
 
 
@@ -177,9 +177,37 @@ pycrate_asn1rt
 --------------
 
 This subdirectory contains the ASN.1 runtime, that is loaded and used by the ASN.1 
-specifications that are compiler with the compiler in *pycrate_asn1c*. It supports 
+specifications compiled with the compiler in *pycrate_asn1c*. It supports 
 the PER encoding rules (aligned and not, canonical also), and the BER, CER and 
 DER encoding rules.
+
+
+pycrate_csn1
+------------
+
+This subdirectory contains a CSN.1 to Python translater in the file *trans.py*,
+and a CSN.1 runtime in the file *csnobj.py*, in order to encode and decode CSN.1 
+structures translated to Python objects.
+
+
+pycrate_csn1dir
+---------------
+
+This dubdirectory contains some CSN.1 structures extracted from 3GPP specifications
+(in the .csn files), and translated into Python objects.
+
+
+pycrate_mobile
+--------------
+
+This subdirectory implements several 3GPP NAS protocol formats:
+* *GSMTAP* with the gsmtap header format
+* *MCC_MNC* with dictionnaries for MCC and MNC look-ups
+* *TS24007* with basic formats from the TS 24.007 specification
+* *TS24008_IE* with formats supporting many information elements from TS 24.008
+* *TS24008_MM* with formats for encoding / decoding mobility management messages from TS 24.008
+* *TS24008_GMM* with formats for encoding / decoding GPRS mobility management messages from TS 24.008
+* *TS24301_IE* with formats supporting some information elements from TS 24.301
 
 
 Usage
@@ -189,25 +217,41 @@ Most of the modules have doc strings. I try also to write readable sources and t
 comment them as much as possible for understanding them easily (and to allow also
 myself to understand my own code years after...).
 In a near future, a wiki may be provided to bring examples and methods on how to
-use the different modules (any contribution is welcome on this, too).
-Finally, the code provided in the test/ subdirectory is also representative on
+use the different modules (any contribution on this would be very welcomed, too).
+Finally, the code provided in the *test/* subdirectory is also representative on
 how to use the different modules.
 
 
 ASN.1 usage
 ===========
 
+When a Python module from *pycrate_asn1dir/* is loaded, it creates Python classes
+corresponding to ASN.1 module (all dash characters are converted to underscore).
+Each ASN.1 object has a corresponding Python instance, exposing the following methods:
+* from_asn1() / to_asn1(), which converts ASN.1 textual value to Python value and back
+* from_aper() / to_aper(), which converts aligned PER encoded value to Python value and back
+* from_uper() / to_uper(), which converts unaligned PER
+* from_ber() / to_ber(), which converts BER
+* from_cer() / to_cer(), which converts CER
+* from_der() / to_der(), which converts DER
+
+All the methods useful for working with ASN.1 objects at runtime can be found in 
+the file *pycrate_asn1rt/asnobj.py*.
+
 
 Tools
 =====
 
-Two different tools are provided (yet):
+Three different tools are provided (yet):
 * *pycrate_showmedia.py* parses some media files (jpg, bmp, gif, mp3, png, 
    tiff, mpeg4) and pretty print the file structure on the standard output.
 * *pycrate_asn1compile.py* compiles ASN.1 source file(s) and produce a Python
    source file that makes use of the ASN.1 runtime. This source file is then
    usable to encode / decode any ASN.1 object from the compiled ASN.1 
    specification.
+* *pycrate_berdecode.py* parses any BER/CER/DER encoded binary value of ASN.1 
+   objects and prints the corresponding structure.
+
 
 Examples
 ========
@@ -506,5 +550,5 @@ True
 ```
 
 For more information about the API exposed for each ASN.1 object, you can check
-the docstrings of all ASN.1 objects, and also read the source file *./pycrate_asn1rt/asnobj.py*.
+the docstrings of all ASN.1 objects, and also read the source file *pycrate_asn1rt/asnobj.py*.
 
