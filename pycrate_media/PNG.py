@@ -114,4 +114,3 @@ class PNG(Envelope):
         Buf('sig', desc='PNG signature', val=b'\x89PNG\r\n\x1a\n', bl=64),
         Sequence('PNGBody', hier=1, GEN=PNGChunk())
         )
-

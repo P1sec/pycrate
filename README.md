@@ -279,27 +279,27 @@ $ ./tools/pycrate_showmedia.py ./test/res/xkcd_wireless_signal.png
  <sig [PNG signature] : '\x89PNG\r\n\x1a\n'>
      ### PNGBody ###
       ### PNGChunk ###
-       <len [chunk length] : 13>
-       <type [chunk type] : 'IHDR'>
+       <len : 13>
+       <type : 'IHDR'>
        ### IHDR ###
         <width : 238>
         <height : 415>
         <depth [bit depth] : 8>
-        <color [color type] : 0>
-        <comp [compression method] : 0>
-        <filter [filter method] : 0>
-        <interlace [interlace method] : 0>
-       <crc [chunk CRC32] : 0x7d8cb12e>
+        <color [color type] : 0 (Greyscale)>
+        <comp [compression method] : 0 (inflate/deflate with sliding window)>
+        <filter [filter method] : 0 (no interlace)>
+        <interlace [interlace method] : 0 (no interlace)>
+       <crc : 0x7d8cb12e>
       ### PNGChunk ###
-       <len [chunk length] : 9>
-       <type [chunk type] : 'pHYs'>
-       <data [chunk data] :
+       <len : 9>
+       <type : 'pHYs'>
+       <data :
         00 00 0c 4e 00 00 0c 4e 01                      | '\x00\x00\x0cN\x00\x00\x0cN\x01'>
-       <crc [chunk CRC32] : 0x7f778c23>
+       <crc : 0x7f778c23>
       ### PNGChunk ###
-       <len [chunk length] : 792>
-       <type [chunk type] : 'iCCP'>
-       <data [chunk data] :
+       <len : 792>
+       <type : 'iCCP'>
+       <data :
         50 68 6f 74 6f 73 68 6f 70 20 49 43 43 20 70 72 | 'Photoshop ICC pr'
         6f 66 69 6c 65 00 00 78 da 63 60 60 9e e0 e8 e2 | 'ofile\x00\x00x\xdac``\x9e\xe0\xe8\xe2'
         e4 ca 24 c0 c0 50 50 54 52 e4 1e e4 18 19 11 19 | '\xe4\xca$\xc0\xc0PPTR\xe4\x1e\xe4\x18\x19\x11\x19'
@@ -350,18 +350,18 @@ $ ./tools/pycrate_showmedia.py ./test/res/xkcd_wireless_signal.png
         9f 65 be 10 79 79 f0 75 fe 5b f9 77 17 3e 34 7d | '\x9fe\xbe\x10yy\xf0u\xfe[\xf9w\x17>4}'
         32 fd fc ea eb 82 ef e1 3f 05 7e 9d fa d3 fa cf | '2\xfd\xfc\xea\xeb\x82\xef\xe1?\x05~\x9d\xfa\xd3\xfa\xcf'
         f1 ff 7f 00 0d 00 0f 34                         | '\xf1\xff\x7f\x00\r\x00\x0f4'>
-       <crc [chunk CRC32] : 0xfa96f15d>
+       <crc : 0xfa96f15d>
       ### PNGChunk ###
-       <len [chunk length] : 32>
-       <type [chunk type] : 'cHRM'>
-       <data [chunk data] :
+       <len : 32>
+       <type : 'cHRM'>
+       <data :
         00 00 6e 27 00 00 73 af 00 00 df f2 00 00 83 30 | "\x00\x00n'\x00\x00s\xaf\x00\x00\xdf\xf2\x00\x00\x830"
         00 00 77 43 00 00 c8 0a 00 00 34 95 00 00 2e dc | '\x00\x00wC\x00\x00\xc8\n\x00\x004\x95\x00\x00.\xdc'>
-       <crc [chunk CRC32] : 0x20bf171a>
+       <crc : 0x20bf171a>
       ### PNGChunk ###
-       <len [chunk length] : 21130>
-       <type [chunk type] : 'IDAT'>
-       <data [chunk data] :
+       <len : 21130>
+       <type : 'IDAT'>
+       <data :
         78 da ed bd 79 50 8d fd 1f ff ff bc ce 39 73 4e | 'x\xda\xed\xbdyP\x8d\xfd\x1f\xff\xff\xbc\xce9sN'
         db b4 37 95 32 b4 19 94 06 2d 7e 11 26 b2 fc 10 | '\xdb\xb47\x952\xb4\x19\x94\x06-~\x11&\xb2\xfc\x10'
         46 22 23 61 90 65 ec 3f 64 f9 d9 bf c8 32 f6 41 | 'F"#a\x90e\xec?d\xf9\xd9\xbf\xc82\xf6A'
@@ -427,12 +427,12 @@ $ ./tools/pycrate_showmedia.py ./test/res/xkcd_wireless_signal.png
         91 a3 d8 5b fc e1 cb 51 fd ab fb c9 cc ec ee 21 | '\x91\xa3\xd8[\xfc\xe1\xcbQ\xfd\xab\xfb\xc9\xcc\xec\xee!'
         7d 70 6e f3 18 ce c1 c1 6d 8c 81 44 32 cf 51 ba | '}pn\xf3\x18\xce\xc1\xc1m\x8c\x81D2\xcfQ\xba'
         ...>
-       <crc [chunk CRC32] : 0xa9fbdd38>
+       <crc : 0xa9fbdd38>
       ### PNGChunk ###
-       <len [chunk length] : 0>
-       <type [chunk type] : 'IEND'>
-       <data [chunk data] : >
-       <crc [chunk CRC32] : 0xae426082>
+       <len : 0>
+       <type : 'IEND'>
+       <data : >
+       <crc : 0xae426082>
 ```
 
 It is possible to test the *pycrate_asn1compile.py* tool with some test ASN.1 
