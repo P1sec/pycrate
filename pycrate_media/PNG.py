@@ -35,45 +35,74 @@ from pycrate_core.repr import *
 
 Buf.REPR_MAXLEN = 256
 
+_Colour_dict = {
+    0 : 'Greyscale',
+    2 : 'Truecolour',
+    3 : 'Indexed-colour',
+    4 : 'Greyscale with alpha',
+    6 : 'Truecolour with alpha'
+    }
+_CompMeth_dict = {
+    0 : 'inflate/deflate with sliding window'
+    }
+_FilterMeth_dict = {
+    0 : 'adaptative filtering with 5 basic filter types',
+    }
+_InterMeth_dict = {
+    0 : 'no interlace',
+    1 : 'Adam7 interlace'
+    }
+
 class IHDR(Envelope):
     _GEN = (
-      Uint32('width', bitlen=32),
-      Uint32('height', bitlen=32),
+      Uint32('width'),
+      Uint32('height'),
       Uint8('depth', desc='bit depth'),
-      Uint8('color', desc='color type'),
-      Uint8('comp', desc='compression method'),
-      Uint8('filter', desc='filter method'),
-      Uint8('interlace', desc='interlace method')
+      Uint8('color', desc='color type', dic=_Colour_dict),
+      Uint8('comp', desc='compression method', dic=_CompMeth_dict),
+      Uint8('filter', desc='filter method', dic=_InterMeth_dict),
+      Uint8('interlace', desc='interlace method', dic=_InterMeth_dict)
       )
+
+class PaletteEntry(Envelope):
+    _GEN = (
+        Uint8('Red'),
+        Uint8('Green'),
+        Uint8('Blue')
+        )
+
+class PLTE(Array):
+    _GEN = PaletteEntry()
 
 class PNGChunk(Envelope):
     CHK_CRC = True
     
     _GEN = (
-        Uint32('len', desc='chunk length'),
-        Buf('type', desc='chunk type', bl=32),
-        Buf('data', desc='chunk data', rep=REPR_HD),
-        Uint32('crc', desc='chunk CRC32', rep=REPR_HEX)
+        Uint32('len'),
+        Buf('type', bl=32),
+        Buf('data', rep=REPR_HD),
+        Uint32('crc', rep=REPR_HEX)
         )
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(self[2].get_len)
-        self[2].set_blauto(self._get_bl)
-        self[3].set_valauto(self._set_crc)
-    
-    def _get_bl(self):
-        return 8 * self[0].get_val()
-    
-    def _set_crc(self):
-        return crc32(self[1:3].to_bytes()) & 0xffffffff
+        self[2].set_blauto(lambda: 8*self[0].get_val())
+        self[3].set_valauto(lambda: crc32(self[1:3].to_bytes()) & 0xffffffff)
     
     def _from_char(self, char):
         Envelope._from_char(self, char)
-        if self[1].get_val() == b'IHDR' and self[2].get_bl() == 104:
+        chunk_len, chunk_type = self[0].get_val(), self[1].get_val()
+        if chunk_type == b'IHDR' and chunk_len == 13:
             ihdr = IHDR()
             ihdr.from_bytes(self[2].to_bytes())
             self.replace(self[2], ihdr)
+        elif chunk_type == b'PLTE' and chunk_len % 3 == 0:
+            plte = PLTE()
+            plte.set_num(chunk_len//3)
+            plte.from_bytes(self[2].to_bytes())
+            self.replace(self[2], plte)
+        #
         if self.CHK_CRC:
             crc = self[3].get_val()
             self[3].reautomate()
