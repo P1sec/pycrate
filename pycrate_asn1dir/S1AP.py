@@ -3820,7 +3820,7 @@ class S1AP_IEs:
     
     #-----< BitRate >-----#
     BitRate = INT(name=u'BitRate', mode=MODE_TYPE)
-    BitRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=10000000000L)], ev=None, er=[])
+    BitRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=10000000000)], ev=None, er=[])
     
     #-----< BPLMNs >-----#
     BPLMNs = SEQ_OF(name=u'BPLMNs', mode=MODE_TYPE)
@@ -6379,7 +6379,7 @@ class S1AP_IEs:
     
     #-----< MME-UE-S1AP-ID >-----#
     MME_UE_S1AP_ID = INT(name=u'MME-UE-S1AP-ID', mode=MODE_TYPE)
-    MME_UE_S1AP_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    MME_UE_S1AP_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     
     #-----< M-TMSI >-----#
     M_TMSI = OCT_STR(name=u'M-TMSI', mode=MODE_TYPE)

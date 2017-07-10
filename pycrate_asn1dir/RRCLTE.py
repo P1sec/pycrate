@@ -3292,9 +3292,9 @@ class EUTRA_RRC_Definitions:
     DRB_CountInfo = SEQ(name=u'DRB-CountInfo', mode=MODE_TYPE)
     _DRB_CountInfo_drb_Identity = INT(name=u'drb-Identity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('EUTRA-RRC-Definitions', 'DRB-Identity')))
     _DRB_CountInfo_count_Uplink = INT(name=u'count-Uplink', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _DRB_CountInfo_count_Uplink._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    _DRB_CountInfo_count_Uplink._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     _DRB_CountInfo_count_Downlink = INT(name=u'count-Downlink', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _DRB_CountInfo_count_Downlink._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    _DRB_CountInfo_count_Downlink._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     DRB_CountInfo._cont = ASN1Dict([
         (u'drb-Identity', _DRB_CountInfo_drb_Identity),
         (u'count-Uplink', _DRB_CountInfo_count_Uplink),
@@ -9683,7 +9683,7 @@ class EUTRA_RRC_Definitions:
     SystemInformationBlockType16_r11 = SEQ(name=u'SystemInformationBlockType16-r11', mode=MODE_TYPE)
     _SystemInformationBlockType16_r11_timeInfo_r11 = SEQ(name=u'timeInfo-r11', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __SystemInformationBlockType16_r11_timeInfo_r11_timeInfoUTC_r11 = INT(name=u'timeInfoUTC-r11', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __SystemInformationBlockType16_r11_timeInfo_r11_timeInfoUTC_r11._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=549755813887L)], ev=None, er=[])
+    __SystemInformationBlockType16_r11_timeInfo_r11_timeInfoUTC_r11._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=549755813887)], ev=None, er=[])
     __SystemInformationBlockType16_r11_timeInfo_r11_dayLightSavingTime_r11 = BIT_STR(name=u'dayLightSavingTime-r11', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __SystemInformationBlockType16_r11_timeInfo_r11_dayLightSavingTime_r11._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     __SystemInformationBlockType16_r11_timeInfo_r11_leapSeconds_r11 = INT(name=u'leapSeconds-r11', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)

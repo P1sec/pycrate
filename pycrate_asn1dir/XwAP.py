@@ -1242,7 +1242,7 @@ class XwAP_IEs:
     
     #-----< BitRate >-----#
     BitRate = INT(name=u'BitRate', mode=MODE_TYPE)
-    BitRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=10000000000L)], ev=None, er=[])
+    BitRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=10000000000)], ev=None, er=[])
     
     #-----< BSSID >-----#
     BSSID = OCT_STR(name=u'BSSID', mode=MODE_TYPE)

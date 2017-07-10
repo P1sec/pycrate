@@ -243,10 +243,11 @@ def value_to_defin(v, Obj=None, Gen=None, ind=None):
 def range_to_defin(r, Obj=None):
     # ASN1Range only applied to TYPE_INT, TYPE_REAL and TYPE_STR_*
     if Obj.TYPE == TYPE_INT:
-        return 'ASN1RangeInt(lb={0!r}, ub={1!r})'.format(r.lb, r.ub)
+        return 'ASN1RangeInt(lb={0}, ub={1})'\
+               .format(value_to_defin(r.lb, Obj), value_to_defin(r.ub, Obj))
     elif Obj.TYPE == TYPE_REAL:
-        return 'ASN1RangeReal(lb={0!r}, ub={1!r}, lb_incl={2!r}, ub_incl={3!r})'\
-                .format(tuple(r.lb), tuple(r.ub), r.lb_incl, r.ub_incl)
+        return 'ASN1RangeReal(lb={0}, ub={1}, lb_incl={2!r}, ub_incl={3!r})'\
+                .format(value_to_defin(r.lb, Obj), value_to_defin(r.ub, Obj), r.lb_incl, r.ub_incl)
     elif Obj.TYPE in ASN1Range._TYPE_STR:
         return 'ASN1RangeStr(lb={0!r}, ub={1!r})'.format(r.lb, r.ub)
     else:

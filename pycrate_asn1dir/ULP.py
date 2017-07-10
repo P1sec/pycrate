@@ -1559,7 +1559,7 @@ class Ver2_ULP_Components:
     #-----< LocationData >-----#
     LocationData = SEQ(name=u'LocationData', mode=MODE_TYPE)
     _LocationData_locationAccuracy = INT(name=u'locationAccuracy', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _LocationData_locationAccuracy._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    _LocationData_locationAccuracy._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     _LocationData_locationValue = OCT_STR(name=u'locationValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _LocationData_locationValue._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
     LocationData._cont = ASN1Dict([
@@ -1710,7 +1710,7 @@ class Ver2_ULP_Components:
     __UTRAN_GPSReferenceTime_utran_GPSTimingOfCell_ms_part = INT(name=u'ms-part', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __UTRAN_GPSReferenceTime_utran_GPSTimingOfCell_ms_part._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1023)], ev=None, er=[])
     __UTRAN_GPSReferenceTime_utran_GPSTimingOfCell_ls_part = INT(name=u'ls-part', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __UTRAN_GPSReferenceTime_utran_GPSTimingOfCell_ls_part._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    __UTRAN_GPSReferenceTime_utran_GPSTimingOfCell_ls_part._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     _UTRAN_GPSReferenceTime_utran_GPSTimingOfCell._cont = ASN1Dict([
         (u'ms-part', __UTRAN_GPSReferenceTime_utran_GPSTimingOfCell_ms_part),
         (u'ls-part', __UTRAN_GPSReferenceTime_utran_GPSTimingOfCell_ls_part),
@@ -1754,7 +1754,7 @@ class Ver2_ULP_Components:
     __UTRAN_GPSReferenceTimeResult_set_GPSTimingOfCell_ms_part = INT(name=u'ms-part', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __UTRAN_GPSReferenceTimeResult_set_GPSTimingOfCell_ms_part._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=16383)], ev=None, er=[])
     __UTRAN_GPSReferenceTimeResult_set_GPSTimingOfCell_ls_part = INT(name=u'ls-part', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __UTRAN_GPSReferenceTimeResult_set_GPSTimingOfCell_ls_part._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    __UTRAN_GPSReferenceTimeResult_set_GPSTimingOfCell_ls_part._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     _UTRAN_GPSReferenceTimeResult_set_GPSTimingOfCell._cont = ASN1Dict([
         (u'ms-part', __UTRAN_GPSReferenceTimeResult_set_GPSTimingOfCell_ms_part),
         (u'ls-part', __UTRAN_GPSReferenceTimeResult_set_GPSTimingOfCell_ls_part),
@@ -1865,7 +1865,7 @@ class Ver2_ULP_Components:
     __SET_GANSSReferenceTime_set_GANSSTimingOfCell_ms_part = INT(name=u'ms-part', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __SET_GANSSReferenceTime_set_GANSSTimingOfCell_ms_part._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=80)], ev=None, er=[])
     __SET_GANSSReferenceTime_set_GANSSTimingOfCell_ls_part = INT(name=u'ls-part', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __SET_GANSSReferenceTime_set_GANSSTimingOfCell_ls_part._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    __SET_GANSSReferenceTime_set_GANSSTimingOfCell_ls_part._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     _SET_GANSSReferenceTime_set_GANSSTimingOfCell._cont = ASN1Dict([
         (u'ms-part', __SET_GANSSReferenceTime_set_GANSSTimingOfCell_ms_part),
         (u'ls-part', __SET_GANSSReferenceTime_set_GANSSTimingOfCell_ls_part),

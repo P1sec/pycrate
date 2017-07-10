@@ -117,7 +117,7 @@ class H235_SECURITY_MESSAGES:
     
     #-----< TimeStamp >-----#
     TimeStamp = INT(name=u'TimeStamp', mode=MODE_TYPE)
-    TimeStamp._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295L)], ev=None, er=[])
+    TimeStamp._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295)], ev=None, er=[])
     
     #-----< RandomVal >-----#
     RandomVal = INT(name=u'RandomVal', mode=MODE_TYPE)

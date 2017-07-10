@@ -9120,7 +9120,7 @@ class RANAP_IEs:
     
     #-----< UnsuccessfullyTransmittedDataVolume >-----#
     UnsuccessfullyTransmittedDataVolume = INT(name=u'UnsuccessfullyTransmittedDataVolume', mode=MODE_TYPE)
-    UnsuccessfullyTransmittedDataVolume._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    UnsuccessfullyTransmittedDataVolume._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     
     #-----< TransportLayerAddress >-----#
     TransportLayerAddress = BIT_STR(name=u'TransportLayerAddress', mode=MODE_TYPE)

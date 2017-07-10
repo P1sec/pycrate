@@ -749,7 +749,7 @@ class M3AP_IEs:
     
     #-----< BitRate >-----#
     BitRate = INT(name=u'BitRate', mode=MODE_TYPE)
-    BitRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=10000000000L)], ev=None, er=[])
+    BitRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=10000000000)], ev=None, er=[])
     
     #-----< Cause >-----#
     Cause = CHOICE(name=u'Cause', mode=MODE_TYPE)

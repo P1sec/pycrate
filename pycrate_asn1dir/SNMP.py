@@ -145,15 +145,15 @@ class RFC1155_SMI:
     
     #-----< Counter >-----#
     Counter = INT(name=u'Counter', mode=MODE_TYPE, tag=(1, TAG_APPLICATION, TAG_IMPLICIT))
-    Counter._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    Counter._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     
     #-----< Gauge >-----#
     Gauge = INT(name=u'Gauge', mode=MODE_TYPE, tag=(2, TAG_APPLICATION, TAG_IMPLICIT))
-    Gauge._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    Gauge._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     
     #-----< TimeTicks >-----#
     TimeTicks = INT(name=u'TimeTicks', mode=MODE_TYPE, tag=(3, TAG_APPLICATION, TAG_IMPLICIT))
-    TimeTicks._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    TimeTicks._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     
     #-----< Opaque >-----#
     Opaque = OCT_STR(name=u'Opaque', mode=MODE_TYPE, tag=(4, TAG_APPLICATION, TAG_IMPLICIT))

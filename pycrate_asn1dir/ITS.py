@@ -4007,7 +4007,7 @@ class CALMllsap:
     
     #-----< DataRate >-----#
     DataRate = INT(name=u'DataRate', mode=MODE_TYPE)
-    DataRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    DataRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     
     #-----< DataRatesNW >-----#
     DataRatesNW = SEQ(name=u'DataRatesNW', mode=MODE_TYPE)
@@ -4607,7 +4607,7 @@ class CALMllsap:
     #-----< Time48IAT >-----#
     Time48IAT = INT(name=u'Time48IAT', mode=MODE_TYPE)
     Time48IAT._cont = ASN1Dict([(u'utcStartOf2004', 0), (u'oneMillisecAfterUTCStartOf2004', 1)])
-    Time48IAT._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=281474976710655L)], ev=None, er=[])
+    Time48IAT._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=281474976710655)], ev=None, er=[])
     
     #-----< I-ParamNo >-----#
     I_ParamNo = INT(name=u'I-ParamNo', mode=MODE_TYPE)
@@ -14073,7 +14073,7 @@ class DSRCData:
     
     #-----< Time >-----#
     Time = INT(name=u'Time', mode=MODE_TYPE)
-    Time._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    Time._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     
     #-----< T-APDUs >-----#
     T_APDUs = CHOICE(name=u'T-APDUs', mode=MODE_TYPE)
@@ -20411,7 +20411,7 @@ class ITS_Container:
     
     #-----< StationID >-----#
     StationID = INT(name=u'StationID', mode=MODE_TYPE)
-    StationID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    StationID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     
     #-----< ReferencePosition >-----#
     ReferencePosition = SEQ(name=u'ReferencePosition', mode=MODE_TYPE)
@@ -21049,7 +21049,7 @@ class ITS_Container:
     #-----< TimestampIts >-----#
     TimestampIts = INT(name=u'TimestampIts', mode=MODE_TYPE)
     TimestampIts._cont = ASN1Dict([(u'utcStartOf2004', 0), (u'oneMillisecAfterUTCStartOf2004', 1)])
-    TimestampIts._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4398046511103L)], ev=None, er=[])
+    TimestampIts._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4398046511103)], ev=None, er=[])
     
     #-----< VehicleRole >-----#
     VehicleRole = ENUM(name=u'VehicleRole', mode=MODE_TYPE)

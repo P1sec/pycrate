@@ -113,7 +113,7 @@ class H235_SECURITY_MESSAGES:
     
     #-----< TimeStamp >-----#
     TimeStamp = INT(name=u'TimeStamp', mode=MODE_TYPE)
-    TimeStamp._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295L)], ev=None, er=[])
+    TimeStamp._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295)], ev=None, er=[])
     
     #-----< RandomVal >-----#
     RandomVal = INT(name=u'RandomVal', mode=MODE_TYPE)
@@ -2166,15 +2166,15 @@ class MULTIMEDIA_SYSTEM_CONTROL:
     RSVPParameters = SEQ(name=u'RSVPParameters', mode=MODE_TYPE)
     _RSVPParameters_qosMode = CHOICE(name=u'qosMode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MULTIMEDIA-SYSTEM-CONTROL', 'QOSMode')), opt=True)
     _RSVPParameters_tokenRate = INT(name=u'tokenRate', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _RSVPParameters_tokenRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295L)], ev=None, er=[])
+    _RSVPParameters_tokenRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295)], ev=None, er=[])
     _RSVPParameters_bucketSize = INT(name=u'bucketSize', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _RSVPParameters_bucketSize._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295L)], ev=None, er=[])
+    _RSVPParameters_bucketSize._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295)], ev=None, er=[])
     _RSVPParameters_peakRate = INT(name=u'peakRate', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _RSVPParameters_peakRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295L)], ev=None, er=[])
+    _RSVPParameters_peakRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295)], ev=None, er=[])
     _RSVPParameters_minPoliced = INT(name=u'minPoliced', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _RSVPParameters_minPoliced._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295L)], ev=None, er=[])
+    _RSVPParameters_minPoliced._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295)], ev=None, er=[])
     _RSVPParameters_maxPktSize = INT(name=u'maxPktSize', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _RSVPParameters_maxPktSize._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295L)], ev=None, er=[])
+    _RSVPParameters_maxPktSize._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295)], ev=None, er=[])
     RSVPParameters._cont = ASN1Dict([
         (u'qosMode', _RSVPParameters_qosMode),
         (u'tokenRate', _RSVPParameters_tokenRate),
@@ -2295,13 +2295,13 @@ class MULTIMEDIA_SYSTEM_CONTROL:
     GenericTransportParameters = SEQ(name=u'GenericTransportParameters', mode=MODE_TYPE)
     _GenericTransportParameters_nonStandardData = SEQ(name=u'nonStandardData', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MULTIMEDIA-SYSTEM-CONTROL', 'NonStandardParameter')), opt=True)
     _GenericTransportParameters_averageRate = INT(name=u'averageRate', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _GenericTransportParameters_averageRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295L)], ev=None, er=[])
+    _GenericTransportParameters_averageRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295)], ev=None, er=[])
     _GenericTransportParameters_burst = INT(name=u'burst', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _GenericTransportParameters_burst._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295L)], ev=None, er=[])
+    _GenericTransportParameters_burst._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295)], ev=None, er=[])
     _GenericTransportParameters_peakRate = INT(name=u'peakRate', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _GenericTransportParameters_peakRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295L)], ev=None, er=[])
+    _GenericTransportParameters_peakRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295)], ev=None, er=[])
     _GenericTransportParameters_maxPktSize = INT(name=u'maxPktSize', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _GenericTransportParameters_maxPktSize._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295L)], ev=None, er=[])
+    _GenericTransportParameters_maxPktSize._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295)], ev=None, er=[])
     GenericTransportParameters._cont = ASN1Dict([
         (u'nonStandardData', _GenericTransportParameters_nonStandardData),
         (u'averageRate', _GenericTransportParameters_averageRate),
@@ -2574,7 +2574,7 @@ class MULTIMEDIA_SYSTEM_CONTROL:
     _H262VideoCapability_framesPerSecond = INT(name=u'framesPerSecond', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _H262VideoCapability_framesPerSecond._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
     _H262VideoCapability_luminanceSampleRate = INT(name=u'luminanceSampleRate', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _H262VideoCapability_luminanceSampleRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    _H262VideoCapability_luminanceSampleRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     _H262VideoCapability_videoBadMBsCap = BOOL(name=u'videoBadMBsCap', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     H262VideoCapability._cont = ASN1Dict([
         (u'profileAndLevel-SPatML', _H262VideoCapability_profileAndLevel_SPatML),
@@ -3103,7 +3103,7 @@ class MULTIMEDIA_SYSTEM_CONTROL:
     _IS11172VideoCapability_pictureRate = INT(name=u'pictureRate', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _IS11172VideoCapability_pictureRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
     _IS11172VideoCapability_luminanceSampleRate = INT(name=u'luminanceSampleRate', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _IS11172VideoCapability_luminanceSampleRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    _IS11172VideoCapability_luminanceSampleRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     _IS11172VideoCapability_videoBadMBsCap = BOOL(name=u'videoBadMBsCap', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     IS11172VideoCapability._cont = ASN1Dict([
         (u'constrainedBitstream', _IS11172VideoCapability_constrainedBitstream),
@@ -3401,7 +3401,7 @@ class MULTIMEDIA_SYSTEM_CONTROL:
         ])
     _DataApplicationCapability_application._ext = [u't30fax', u't140', u't38fax', u'genericDataCapability']
     _DataApplicationCapability_maxBitRate = INT(name=u'maxBitRate', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _DataApplicationCapability_maxBitRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    _DataApplicationCapability_maxBitRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     DataApplicationCapability._cont = ASN1Dict([
         (u'application', _DataApplicationCapability_application),
         (u'maxBitRate', _DataApplicationCapability_maxBitRate),
@@ -3681,7 +3681,7 @@ class MULTIMEDIA_SYSTEM_CONTROL:
     GenericCapability = SEQ(name=u'GenericCapability', mode=MODE_TYPE)
     _GenericCapability_capabilityIdentifier = CHOICE(name=u'capabilityIdentifier', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MULTIMEDIA-SYSTEM-CONTROL', 'CapabilityIdentifier')))
     _GenericCapability_maxBitRate = INT(name=u'maxBitRate', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _GenericCapability_maxBitRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    _GenericCapability_maxBitRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     _GenericCapability_collapsing = SEQ_OF(name=u'collapsing', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __GenericCapability_collapsing__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MULTIMEDIA-SYSTEM-CONTROL', 'GenericParameter')))
     _GenericCapability_collapsing._cont = __GenericCapability_collapsing__item_
@@ -3757,9 +3757,9 @@ class MULTIMEDIA_SYSTEM_CONTROL:
     _ParameterValue_unsignedMax = INT(name=u'unsignedMax', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _ParameterValue_unsignedMax._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     _ParameterValue_unsigned32Min = INT(name=u'unsigned32Min', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ParameterValue_unsigned32Min._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    _ParameterValue_unsigned32Min._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     _ParameterValue_unsigned32Max = INT(name=u'unsigned32Max', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ParameterValue_unsigned32Max._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    _ParameterValue_unsigned32Max._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     _ParameterValue_octetString = OCT_STR(name=u'octetString', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _ParameterValue_genericParameter = SEQ_OF(name=u'genericParameter', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ParameterValue_genericParameter__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MULTIMEDIA-SYSTEM-CONTROL', 'GenericParameter')))
@@ -5558,7 +5558,7 @@ class MULTIMEDIA_SYSTEM_CONTROL:
     _H262VideoMode_framesPerSecond = INT(name=u'framesPerSecond', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _H262VideoMode_framesPerSecond._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
     _H262VideoMode_luminanceSampleRate = INT(name=u'luminanceSampleRate', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _H262VideoMode_luminanceSampleRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    _H262VideoMode_luminanceSampleRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     H262VideoMode._cont = ASN1Dict([
         (u'profileAndLevel', _H262VideoMode_profileAndLevel),
         (u'videoBitRate', _H262VideoMode_videoBitRate),
@@ -5624,7 +5624,7 @@ class MULTIMEDIA_SYSTEM_CONTROL:
     _IS11172VideoMode_pictureRate = INT(name=u'pictureRate', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _IS11172VideoMode_pictureRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
     _IS11172VideoMode_luminanceSampleRate = INT(name=u'luminanceSampleRate', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _IS11172VideoMode_luminanceSampleRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    _IS11172VideoMode_luminanceSampleRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     IS11172VideoMode._cont = ASN1Dict([
         (u'constrainedBitstream', _IS11172VideoMode_constrainedBitstream),
         (u'videoBitRate', _IS11172VideoMode_videoBitRate),
@@ -5900,7 +5900,7 @@ class MULTIMEDIA_SYSTEM_CONTROL:
         ])
     _DataMode_application._ext = [u't30fax', u't140', u't38fax', u'genericDataMode']
     _DataMode_bitRate = INT(name=u'bitRate', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _DataMode_bitRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    _DataMode_bitRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     DataMode._cont = ASN1Dict([
         (u'application', _DataMode_application),
         (u'bitRate', _DataMode_bitRate),
@@ -6088,7 +6088,7 @@ class MULTIMEDIA_SYSTEM_CONTROL:
     __ConferenceRequest_requestTerminalCertificate_terminalLabel = SEQ(name=u'terminalLabel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MULTIMEDIA-SYSTEM-CONTROL', 'TerminalLabel')), opt=True)
     __ConferenceRequest_requestTerminalCertificate_certSelectionCriteria = SEQ_OF(name=u'certSelectionCriteria', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MULTIMEDIA-SYSTEM-CONTROL', 'CertSelectionCriteria')), opt=True)
     __ConferenceRequest_requestTerminalCertificate_sRandom = INT(name=u'sRandom', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __ConferenceRequest_requestTerminalCertificate_sRandom._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295L)], ev=None, er=[])
+    __ConferenceRequest_requestTerminalCertificate_sRandom._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295)], ev=None, er=[])
     _ConferenceRequest_requestTerminalCertificate._cont = ASN1Dict([
         (u'terminalLabel', __ConferenceRequest_requestTerminalCertificate_terminalLabel),
         (u'certSelectionCriteria', __ConferenceRequest_requestTerminalCertificate_certSelectionCriteria),
@@ -6386,7 +6386,7 @@ class MULTIMEDIA_SYSTEM_CONTROL:
     _MultilinkResponse_callInformation = SEQ(name=u'callInformation', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __MultilinkResponse_callInformation_dialingInformation = CHOICE(name=u'dialingInformation', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MULTIMEDIA-SYSTEM-CONTROL', 'DialingInformation')))
     __MultilinkResponse_callInformation_callAssociationNumber = INT(name=u'callAssociationNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __MultilinkResponse_callInformation_callAssociationNumber._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    __MultilinkResponse_callInformation_callAssociationNumber._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     _MultilinkResponse_callInformation._cont = ASN1Dict([
         (u'dialingInformation', __MultilinkResponse_callInformation_dialingInformation),
         (u'callAssociationNumber', __MultilinkResponse_callInformation_callAssociationNumber),
@@ -6506,9 +6506,9 @@ class MULTIMEDIA_SYSTEM_CONTROL:
     #-----< ConnectionIdentifier >-----#
     ConnectionIdentifier = SEQ(name=u'ConnectionIdentifier', mode=MODE_TYPE)
     _ConnectionIdentifier_channelTag = INT(name=u'channelTag', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConnectionIdentifier_channelTag._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    _ConnectionIdentifier_channelTag._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     _ConnectionIdentifier_sequenceNumber = INT(name=u'sequenceNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConnectionIdentifier_sequenceNumber._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    _ConnectionIdentifier_sequenceNumber._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     ConnectionIdentifier._cont = ASN1Dict([
         (u'channelTag', _ConnectionIdentifier_channelTag),
         (u'sequenceNumber', _ConnectionIdentifier_sequenceNumber),
@@ -6517,7 +6517,7 @@ class MULTIMEDIA_SYSTEM_CONTROL:
     
     #-----< MaximumBitRate >-----#
     MaximumBitRate = INT(name=u'MaximumBitRate', mode=MODE_TYPE)
-    MaximumBitRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    MaximumBitRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     
     #-----< LogicalChannelRateRequest >-----#
     LogicalChannelRateRequest = SEQ(name=u'LogicalChannelRateRequest', mode=MODE_TYPE)
@@ -7421,9 +7421,9 @@ class MULTIMEDIA_SYSTEM_CONTROL:
     __UserInputIndication_signal_duration._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     __UserInputIndication_signal_rtp = SEQ(name=u'rtp', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     ___UserInputIndication_signal_rtp_timestamp = INT(name=u'timestamp', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    ___UserInputIndication_signal_rtp_timestamp._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    ___UserInputIndication_signal_rtp_timestamp._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     ___UserInputIndication_signal_rtp_expirationTime = INT(name=u'expirationTime', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    ___UserInputIndication_signal_rtp_expirationTime._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    ___UserInputIndication_signal_rtp_expirationTime._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     ___UserInputIndication_signal_rtp_logicalChannelNumber = INT(name=u'logicalChannelNumber', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MULTIMEDIA-SYSTEM-CONTROL', 'LogicalChannelNumber')))
     __UserInputIndication_signal_rtp._cont = ASN1Dict([
         (u'timestamp', ___UserInputIndication_signal_rtp_timestamp),
@@ -11850,7 +11850,7 @@ class H323_MESSAGES:
     
     #-----< BandWidth >-----#
     BandWidth = INT(name=u'BandWidth', mode=MODE_TYPE)
-    BandWidth._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    BandWidth._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     
     #-----< CallReferenceValue >-----#
     CallReferenceValue = INT(name=u'CallReferenceValue', mode=MODE_TYPE)
@@ -11865,7 +11865,7 @@ class H323_MESSAGES:
     
     #-----< TimeToLive >-----#
     TimeToLive = INT(name=u'TimeToLive', mode=MODE_TYPE)
-    TimeToLive._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295L)], ev=None, er=[])
+    TimeToLive._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295)], ev=None, er=[])
     
     #-----< H248PackagesDescriptor >-----#
     H248PackagesDescriptor = OCT_STR(name=u'H248PackagesDescriptor', mode=MODE_TYPE)
@@ -12172,7 +12172,7 @@ class H323_MESSAGES:
     #-----< CallsAvailable >-----#
     CallsAvailable = SEQ(name=u'CallsAvailable', mode=MODE_TYPE)
     _CallsAvailable_calls = INT(name=u'calls', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _CallsAvailable_calls._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    _CallsAvailable_calls._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     _CallsAvailable_group = STR_IA5(name=u'group', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _CallsAvailable_group._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
     _CallsAvailable_carrier = SEQ(name=u'carrier', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H323-MESSAGES', 'CarrierInfo')), opt=True)
@@ -12394,7 +12394,7 @@ class H323_MESSAGES:
         ])
     _CallCreditServiceControl_billingMode._ext = []
     _CallCreditServiceControl_callDurationLimit = INT(name=u'callDurationLimit', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _CallCreditServiceControl_callDurationLimit._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295L)], ev=None, er=[])
+    _CallCreditServiceControl_callDurationLimit._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295)], ev=None, er=[])
     _CallCreditServiceControl_enforceCallDurationLimit = BOOL(name=u'enforceCallDurationLimit', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _CallCreditServiceControl_callStartingPoint = CHOICE(name=u'callStartingPoint', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
     __CallCreditServiceControl_callStartingPoint_alerting = NULL(name=u'alerting', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
@@ -12460,7 +12460,7 @@ class H323_MESSAGES:
     _Content_number16 = INT(name=u'number16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _Content_number16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     _Content_number32 = INT(name=u'number32', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Content_number32._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    _Content_number32._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     _Content_id = CHOICE(name=u'id', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('H323-MESSAGES', 'GenericIdentifier')))
     _Content_alias = CHOICE(name=u'alias', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('H323-MESSAGES', 'AliasAddress')))
     _Content_transport = CHOICE(name=u'transport', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('H323-MESSAGES', 'TransportAddress')))
@@ -12524,7 +12524,7 @@ class H323_MESSAGES:
     _RTPSession_rtcpAddress = SEQ(name=u'rtcpAddress', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H323-MESSAGES', 'TransportChannelInfo')))
     _RTPSession_cname = STR_PRINT(name=u'cname', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _RTPSession_ssrc = INT(name=u'ssrc', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _RTPSession_ssrc._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295L)], ev=None, er=[])
+    _RTPSession_ssrc._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295)], ev=None, er=[])
     _RTPSession_sessionId = INT(name=u'sessionId', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _RTPSession_sessionId._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=255)], ev=None, er=[])
     _RTPSession_associatedSessionIds = SEQ_OF(name=u'associatedSessionIds', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))

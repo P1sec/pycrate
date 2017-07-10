@@ -10010,7 +10010,7 @@ class PCAP_IEs:
     #-----< UTRAN-GANSSReferenceTimeUL >-----#
     UTRAN_GANSSReferenceTimeUL = SEQ(name=u'UTRAN-GANSSReferenceTimeUL', mode=MODE_TYPE)
     _UTRAN_GANSSReferenceTimeUL_ue_GANSSTimingOfCellFrames = INT(name=u'ue-GANSSTimingOfCellFrames', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _UTRAN_GANSSReferenceTimeUL_ue_GANSSTimingOfCellFrames._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=345599999999L)], ev=None, er=[])
+    _UTRAN_GANSSReferenceTimeUL_ue_GANSSTimingOfCellFrames._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=345599999999)], ev=None, er=[])
     _UTRAN_GANSSReferenceTimeUL_gANSS_TimeId = SEQ(name=u'gANSS-TimeId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PCAP-IEs', 'GANSSID')), opt=True)
     _UTRAN_GANSSReferenceTimeUL_gANSS_TimeUncertainty = INT(name=u'gANSS-TimeUncertainty', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _UTRAN_GANSSReferenceTimeUL_gANSS_TimeUncertainty._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
@@ -12893,7 +12893,7 @@ class PCAP_IEs:
     _TUTRANGPS_ms_part = INT(name=u'ms-part', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _TUTRANGPS_ms_part._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=16383)], ev=None, er=[])
     _TUTRANGPS_ls_part = INT(name=u'ls-part', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TUTRANGPS_ls_part._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    _TUTRANGPS_ls_part._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     TUTRANGPS._cont = ASN1Dict([
         (u'ms-part', _TUTRANGPS_ms_part),
         (u'ls-part', _TUTRANGPS_ls_part),
@@ -12967,7 +12967,7 @@ class PCAP_IEs:
     _TUTRANGANSS_ms_part = INT(name=u'ms-part', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _TUTRANGANSS_ms_part._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=16383)], ev=None, er=[])
     _TUTRANGANSS_ls_part = INT(name=u'ls-part', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TUTRANGANSS_ls_part._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    _TUTRANGANSS_ls_part._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     TUTRANGANSS._cont = ASN1Dict([
         (u'ms-part', _TUTRANGANSS_ms_part),
         (u'ls-part', _TUTRANGANSS_ls_part),
@@ -16133,7 +16133,7 @@ class PCAP_IEs:
     #-----< UTRAN-GPSReferenceTime >-----#
     UTRAN_GPSReferenceTime = SEQ(name=u'UTRAN-GPSReferenceTime', mode=MODE_TYPE)
     _UTRAN_GPSReferenceTime_utran_GPSTimingOfCell = INT(name=u'utran-GPSTimingOfCell', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _UTRAN_GPSReferenceTime_utran_GPSTimingOfCell._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2322431999999L)], ev=[], er=[])
+    _UTRAN_GPSReferenceTime_utran_GPSTimingOfCell._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2322431999999)], ev=[], er=[])
     _UTRAN_GPSReferenceTime_uC_ID = SEQ(name=u'uC-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PCAP-IEs', 'UC-ID')), opt=True)
     _UTRAN_GPSReferenceTime_sfn = INT(name=u'sfn', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _UTRAN_GPSReferenceTime_sfn._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4095)], ev=None, er=[])
@@ -16176,7 +16176,7 @@ class PCAP_IEs:
     #-----< UTRAN-GPSReferenceTimeResult >-----#
     UTRAN_GPSReferenceTimeResult = SEQ(name=u'UTRAN-GPSReferenceTimeResult', mode=MODE_TYPE)
     _UTRAN_GPSReferenceTimeResult_ue_GPSTimingOfCell = INT(name=u'ue-GPSTimingOfCell', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _UTRAN_GPSReferenceTimeResult_ue_GPSTimingOfCell._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=37158911999999L)], ev=[], er=[])
+    _UTRAN_GPSReferenceTimeResult_ue_GPSTimingOfCell._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=37158911999999)], ev=[], er=[])
     _UTRAN_GPSReferenceTimeResult_uC_ID = SEQ(name=u'uC-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PCAP-IEs', 'UC-ID')))
     _UTRAN_GPSReferenceTimeResult_sfn = INT(name=u'sfn', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _UTRAN_GPSReferenceTimeResult_sfn._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4095)], ev=None, er=[])
@@ -16219,7 +16219,7 @@ class PCAP_IEs:
     #-----< UTRAN-GANSSReferenceTimeResult >-----#
     UTRAN_GANSSReferenceTimeResult = SEQ(name=u'UTRAN-GANSSReferenceTimeResult', mode=MODE_TYPE)
     _UTRAN_GANSSReferenceTimeResult_ue_GANSSTimingOfCell = INT(name=u'ue-GANSSTimingOfCell', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _UTRAN_GANSSReferenceTimeResult_ue_GANSSTimingOfCell._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=345599999999L)], ev=[], er=[])
+    _UTRAN_GANSSReferenceTimeResult_ue_GANSSTimingOfCell._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=345599999999)], ev=[], er=[])
     _UTRAN_GANSSReferenceTimeResult_ganss_Time_ID = SEQ(name=u'ganss-Time-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PCAP-IEs', 'GANSSID')), opt=True)
     _UTRAN_GANSSReferenceTimeResult_ganssTodUncertainty = INT(name=u'ganssTodUncertainty', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _UTRAN_GANSSReferenceTimeResult_ganssTodUncertainty._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])

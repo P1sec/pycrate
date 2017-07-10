@@ -3394,7 +3394,7 @@ class EnrollmentMessageSyntax_2009:
     
     #-----< BodyPartID >-----#
     BodyPartID = INT(name=u'BodyPartID', mode=MODE_TYPE)
-    BodyPartID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    BodyPartID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     
     #-----< TaggedAttribute >-----#
     TaggedAttribute = SEQ(name=u'TaggedAttribute', mode=MODE_TYPE)

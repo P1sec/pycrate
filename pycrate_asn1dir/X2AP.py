@@ -3004,7 +3004,7 @@ class X2AP_IEs:
     
     #-----< BitRate >-----#
     BitRate = INT(name=u'BitRate', mode=MODE_TYPE)
-    BitRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=10000000000L)], ev=None, er=[])
+    BitRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=10000000000)], ev=None, er=[])
     
     #-----< BroadcastPLMNs-Item >-----#
     BroadcastPLMNs_Item = SEQ_OF(name=u'BroadcastPLMNs-Item', mode=MODE_TYPE)
@@ -6709,7 +6709,7 @@ class X2AP_IEs:
     
     #-----< UE-S1AP-ID >-----#
     UE_S1AP_ID = INT(name=u'UE-S1AP-ID', mode=MODE_TYPE)
-    UE_S1AP_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    UE_S1AP_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     
     #-----< UE-X2AP-ID >-----#
     UE_X2AP_ID = INT(name=u'UE-X2AP-ID', mode=MODE_TYPE)
@@ -13272,9 +13272,9 @@ class X2AP_PDU_Contents:
     E_RABs_SubjectToCounterCheckItem = SEQ(name=u'E-RABs-SubjectToCounterCheckItem', mode=MODE_TYPE)
     _E_RABs_SubjectToCounterCheckItem_e_RAB_ID = INT(name=u'e-RAB-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('X2AP-IEs', 'E-RAB-ID')))
     _E_RABs_SubjectToCounterCheckItem_uL_Count = INT(name=u'uL-Count', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _E_RABs_SubjectToCounterCheckItem_uL_Count._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    _E_RABs_SubjectToCounterCheckItem_uL_Count._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     _E_RABs_SubjectToCounterCheckItem_dL_Count = INT(name=u'dL-Count', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _E_RABs_SubjectToCounterCheckItem_dL_Count._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    _E_RABs_SubjectToCounterCheckItem_dL_Count._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     _E_RABs_SubjectToCounterCheckItem_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('X2AP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __E_RABs_SubjectToCounterCheckItem_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('X2AP-Containers', 'ProtocolExtensionField')))
     ___E_RABs_SubjectToCounterCheckItem_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('X2AP-Containers', 'X2AP-PROTOCOL-EXTENSION'), [u'id']))

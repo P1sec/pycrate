@@ -422,7 +422,7 @@ class MEDIA_GATEWAY_CONTROL:
     
     #-----< TransactionId >-----#
     TransactionId = INT(name=u'TransactionId', mode=MODE_TYPE)
-    TransactionId._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    TransactionId._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     
     #-----< TransactionRequest >-----#
     TransactionRequest = SEQ(name=u'TransactionRequest', mode=MODE_TYPE)
@@ -519,7 +519,7 @@ class MEDIA_GATEWAY_CONTROL:
     
     #-----< ContextID >-----#
     ContextID = INT(name=u'ContextID', mode=MODE_TYPE)
-    ContextID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    ContextID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     
     #-----< ActionRequest >-----#
     ActionRequest = SEQ(name=u'ActionRequest', mode=MODE_TYPE)
@@ -1573,7 +1573,7 @@ class MEDIA_GATEWAY_CONTROL:
     
     #-----< RequestID >-----#
     RequestID = INT(name=u'RequestID', mode=MODE_TYPE)
-    RequestID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    RequestID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     
     #-----< ModemDescriptor >-----#
     ModemDescriptor = SEQ(name=u'ModemDescriptor', mode=MODE_TYPE)
@@ -1638,7 +1638,7 @@ class MEDIA_GATEWAY_CONTROL:
     _ServiceChangeParm_serviceChangeProfile = SEQ(name=u'serviceChangeProfile', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceChangeProfile')), opt=True)
     _ServiceChangeParm_serviceChangeReason = SEQ_OF(name=u'serviceChangeReason', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Value')))
     _ServiceChangeParm_serviceChangeDelay = INT(name=u'serviceChangeDelay', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ServiceChangeParm_serviceChangeDelay._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    _ServiceChangeParm_serviceChangeDelay._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     _ServiceChangeParm_serviceChangeMgcId = CHOICE(name=u'serviceChangeMgcId', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Mid')), opt=True)
     _ServiceChangeParm_timeStamp = SEQ(name=u'timeStamp', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TimeNotation')), opt=True)
     _ServiceChangeParm_nonStandardData = SEQ(name=u'nonStandardData', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'NonStandardData')), opt=True)

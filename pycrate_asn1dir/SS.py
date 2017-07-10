@@ -7256,11 +7256,11 @@ class MAP_MS_DataTypes:
     
     #-----< SubscribedPeriodicRAUTAUtimer >-----#
     SubscribedPeriodicRAUTAUtimer = INT(name=u'SubscribedPeriodicRAUTAUtimer', mode=MODE_TYPE)
-    SubscribedPeriodicRAUTAUtimer._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    SubscribedPeriodicRAUTAUtimer._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     
     #-----< SubscribedPeriodicLAUtimer >-----#
     SubscribedPeriodicLAUtimer = INT(name=u'SubscribedPeriodicLAUtimer', mode=MODE_TYPE)
-    SubscribedPeriodicLAUtimer._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295L)], ev=None, er=[])
+    SubscribedPeriodicLAUtimer._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     
     #-----< CSG-SubscriptionDataList >-----#
     CSG_SubscriptionDataList = SEQ_OF(name=u'CSG-SubscriptionDataList', mode=MODE_TYPE)
