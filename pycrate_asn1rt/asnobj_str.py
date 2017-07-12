@@ -265,9 +265,9 @@ Specific constraints attributes:
                     return
                 else:
                     ldet = self._const_sz.lb
-                    if ASN1CodecPER.ALIGNED and ldet > 16:
-                        # realignment
-                        if ASN1CodecPER._off[-1] % 8:
+                    if ASN1CodecPER.ALIGNED:
+                        if ldet > 16 and ASN1CodecPER._off[-1] % 8:
+                            # realignment
                             GEN.extend( ASN1CodecPER.decode_pad_ws(char) )
                         ASN1CodecPER._off[-1] += ldet
                     V = Buf('V', bl=ldet, rep=REPR_BIN)
@@ -375,9 +375,9 @@ Specific constraints attributes:
                     return
                 else:
                     ldet = self._const_sz.lb
-                    if ASN1CodecPER.ALIGNED and ldet > 16:
-                        # realignment
-                        if ASN1CodecPER._off[-1] % 8:
+                    if ASN1CodecPER.ALIGNED:
+                        if ldet > 16 and ASN1CodecPER._off[-1] % 8:
+                            # realignment
                             ASN1CodecPER.decode_pad(char)
                         ASN1CodecPER._off[-1] += ldet
                     buf = char.get_bytes(ldet)
@@ -480,12 +480,12 @@ Specific constraints attributes:
                     self.__to_per_ws_szunconst(buf, ldet, GEN)
                     return self._struct
                 else:
-                    if ASN1CodecPER.ALIGNED and ldet > 16 and ASN1CodecPER._off[-1] % 8:
-                        # realignment
-                        GEN.extend( ASN1CodecPER.encode_pad_ws() )
-                    GEN.append( Buf('V', val=buf, bl=ldet, rep=REPR_BIN) )
                     if ASN1CodecPER.ALIGNED:
+                        if ldet > 16 and ASN1CodecPER._off[-1] % 8:
+                            # realignment
+                            GEN.extend( ASN1CodecPER.encode_pad_ws() )
                         ASN1CodecPER._off[-1] += ldet
+                    GEN.append( Buf('V', val=buf, bl=ldet, rep=REPR_BIN) )
                     self._struct = Envelope(self._name, GEN=tuple(GEN))
                     return self._struct
         # 4) size is semi-constrained or has no constraint
@@ -567,12 +567,12 @@ Specific constraints attributes:
                     self.__to_per_szunconst(buf, ldet, GEN)
                     return GEN
                 else:
-                    if ASN1CodecPER.ALIGNED and ldet > 16 and ASN1CodecPER._off[-1] % 8:
-                        # realignment
-                        GEN.extend( ASN1CodecPER.encode_pad() )
-                    GEN.append( (T_BYTES, buf, ldet) )
                     if ASN1CodecPER.ALIGNED:
+                        if ldet > 16 and ASN1CodecPER._off[-1] % 8:
+                            # realignment
+                            GEN.extend( ASN1CodecPER.encode_pad() )
                         ASN1CodecPER._off[-1] += ldet
+                    GEN.append( (T_BYTES, buf, ldet) )
                     return GEN
         # 4) size is semi-constrained or has no constraint
         # encoded as unconstrained integer
