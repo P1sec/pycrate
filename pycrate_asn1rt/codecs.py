@@ -760,6 +760,9 @@ class ASN1CodecPER(ASN1Codec):
                 cla._off[-1] += 8*ldet
             return V(), GEN
         else:
+            # shorten char according to ldet
+            lb = char._len_bit
+            char._len_bit = char._cur + 8*ldet
             if cla.ALIGNED:
                 # keep track of the char's cursor to increment the APER offset
                 _cur = char._cur
@@ -767,6 +770,8 @@ class ASN1CodecPER(ASN1Codec):
                 cla._off[-1] += char._cur - _cur
             else:
                 wrapped.from_uper_ws(char)
+            # restore char length
+            char._len_bit = lb
             GEN.append(wrapped._struct)
             val = wrapped._val
             #wrapped._val = None
@@ -793,6 +798,9 @@ class ASN1CodecPER(ASN1Codec):
                 cla._off[-1] += 8*ldet
             return V(), GEN
         else:
+            # shorten char according to ldet
+            lb = char._len_bit
+            char._len_bit = char._cur + 8*ldet
             # decoding a wrapped object
             if cla.ALIGNED:
                 # keep track of the char's cursor to increment the APER offset
@@ -801,6 +809,8 @@ class ASN1CodecPER(ASN1Codec):
                 cla._off[-1] += char._cur - _cur
             else:
                 wrapped.from_uper_ws(char)
+            # restore char length
+            char._len_bit = lb
             GEN.append(wrapped._struct)
             val = wrapped._val
             #wrapped._val = None
@@ -830,6 +840,9 @@ class ASN1CodecPER(ASN1Codec):
                 cla._off[-1] += 8*ldet
             return char.get_bytes(8*ldet)
         else:
+            # shorten char according to ldet
+            lb = char._len_bit
+            char._len_bit = char._cur + 8*ldet
             if cla.ALIGNED:
                 # keep track of the char's cursor to increment the APER offset
                 _cur = char._cur
@@ -837,6 +850,8 @@ class ASN1CodecPER(ASN1Codec):
                 cla._off[-1] += char._cur - _cur
             else:
                 wrapped.from_uper(char)
+            # restore char length
+            char._len_bit = lb
             val = wrapped._val
             #wrapped._val = None
             return val
@@ -859,6 +874,9 @@ class ASN1CodecPER(ASN1Codec):
                 cla._off[-1] += 8*ldet
             return char.get_bytes(8*ldet)
         else:
+            # shorten char according to ldet
+            lb = char._len_bit
+            char._len_bit = char._cur + 8*ldet
             # decoding a wrapped object
             if cla.ALIGNED:
                 # keep track of the char's cursor to increment the APER offset
@@ -867,6 +885,8 @@ class ASN1CodecPER(ASN1Codec):
                 cla._off[-1] += char._cur - _cur
             else:
                 wrapped.from_uper(char)
+            # restore char length
+            char._len_bit = lb
             val = wrapped._val
             #wrapped._val = None
             return val
