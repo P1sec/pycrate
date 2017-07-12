@@ -200,7 +200,7 @@ Alternative single value: Python 2-tuple
             if isinstance(self._val[0], tuple):
                 ident = self._val[0][1]
             else:
-                ident = self._val[0]
+                ident = self._val[0]._name
             const_tr = self._build_const_tr()
             if ident in const_tr:
                 Obj = const_tr[ident]
