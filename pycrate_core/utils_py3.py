@@ -1353,7 +1353,7 @@ def bytes_to_uint_le(buf, bitlen=8):
     
     Args:
         buf (bytes) : bytes string
-        bitlen (integer) : length in bits
+        bitlen (integer) : length in bits, must be a multiple of 8
     
     Returns:
         uint (integer) : unsigned integer value
@@ -1381,7 +1381,7 @@ def uint_le_to_bytes(val, bitlen=8):
     
     Args:
         val (integer) : unsigned integer
-        bitlen (integer) : length in bits
+        bitlen (integer) : length in bits, must be a multiple of 8
     
     Returns:
         buf (bytes) : bytes string
@@ -1962,7 +1962,7 @@ def pack_val(*val):
                     u = v[1]+(1<<v[2])
                     if u < (1<<(v[2]-1)):
                         u = 1<<(v[2]-1)
-                v_bytes = int_le_to_bytes(v[1], v[2])
+                v_bytes = uint_le_to_bytes(u, v[2])
             # a) append pack_val first, if exist
             if pack_fmt is not None:
                 pack_buf = pack(''.join(pack_fmt), *pack_val)
@@ -2460,7 +2460,7 @@ def unpack_val(buf, *val_t):
                     u = v[1]+(1<<v[2])
                     if u < (1<<(v[2]-1)):
                         u = 1<<(v[2]-1)
-                v_bytes = int_le_to_bytes(v[1], v[2])
+                v_bytes = uint_le_to_bytes(u, v[2])
             # a) append pack_val first, if exist
             if pack_fmt is not None:
                 pack_buf = pack(''.join(pack_fmt), *pack_val)
