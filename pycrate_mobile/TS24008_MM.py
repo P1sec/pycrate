@@ -288,8 +288,8 @@ class MMLocationUpdatingReject(Layer3):
 
 class MMLocationUpdatingRequest(Layer3):
     _GEN = tuple(MMHeader(val={'Type':8})._content) + (
-        LocUpdateType(),
         Uint('CKSN', val=0, bl=4, dic=CKSN_dict),
+        LocUpdateType(),
         LAI(),
         MSCm1(),
         Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
@@ -387,5 +387,6 @@ MMTypeClasses = {
     50: MMInformation,
     }
 
-MMTypeInstances = {k: MMTypeClasses[k]() for k in MMTypeClasses}
+def get_mm_msg_instances():
+    return {k: MMTypeClasses[k]() for k in MMTypeClasses}
 

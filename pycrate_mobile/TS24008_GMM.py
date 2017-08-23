@@ -75,7 +75,7 @@ _PS_MM_dict = {
 class GMMHeader(Envelope):
     _GEN = (
         Uint('SkipInd', val=0, bl=4),
-        Uint('ProtDisc', val=5, bl=4, dic=ProtDisc_dict),
+        Uint('ProtDisc', val=8, bl=4, dic=ProtDisc_dict),
         Uint8('Type', val=32, dic=_PS_MM_dict),
         )
 
@@ -134,7 +134,7 @@ class GMMAttachAccept(Layer3):
         Type4TLV('AllocPTMSI', val={'T':0x18, 'V':b'\xf4\0\0\0\0'}, IE=ID(), trans=True),
         Type4TLV('MSIdent', val={'T':0x23, 'V':b'\xf4\0\0\0\0'}, IE=ID(), trans=True),
         Type3TV('GMMCause', val={'T':0x25, 'V':b'\x11'}, bl={'V':8},
-            IE=Uint8('GMMCause', val=0x11, dict=GMMCause_dict), trans=True),
+            IE=Uint8('GMMCause', val=0x11, dic=GMMCause_dict), trans=True),
         Type4TLV('T3302', val={'T':0x2A, 'V':b'\0'}, IE=GPRSTimer(), trans=True),
         Type2('CellNotif', val={'T':0x8C}, trans=True),
         Type4TLV('EquivPLMNList', val={'T':0x4A, 'V':3*b'\0'}, IE=PLMNList(), trans=True),
@@ -172,7 +172,7 @@ class GMMAttachComplete(Layer3):
 
 class GMMAttachReject(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':4})._content) + (
-        Uint8('GMMCause', val=0x11, dict=GMMCause_dict),
+        Uint8('GMMCause', val=0x11, dic=GMMCause_dict),
         Type4TLV('T3302', val={'T':0x2A, 'V':b'\0'}, IE=GPRSTimer(), trans=True),
         Type4TLV('T3346', val={'T':0x3A, 'V':b'\0'}, IE=GPRSTimer(), trans=True)
         )
@@ -188,7 +188,7 @@ class GMMDetachRequestMT(Layer3):
         ForceStdby(),
         DetachTypeMT(),
         Type3TV('GMMCause', val={'T':0x25, 'V':b'\x11'}, bl={'V':8},
-            IE=Uint8('GMMCause', val=0x11, dict=GMMCause_dict), trans=True)
+            IE=Uint8('GMMCause', val=0x11, dic=GMMCause_dict), trans=True)
         )
 
 
@@ -297,7 +297,7 @@ class GMMAuthenticationCipheringResponse(Layer3):
 
 class GMMAuthenticationCipheringFailure(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':28})._content) + (
-        Uint8('GMMCause', val=0x11, dict=GMMCause_dict),
+        Uint8('GMMCause', val=0x11, dic=GMMCause_dict),
         Type4TLV('AUTS', val={'T':0x30, 'V':14*b'\0'}, trans=True)
         )
 
@@ -391,7 +391,7 @@ class GMMRoutingAreaUpdateAccept(Layer3):
             IE=Receive_N_PDU_Number_list_value, trans=True),
         Type3TV('NegoREADYTimer', val={'T':0x17, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer(), trans=True),
         Type3TV('GMMCause', val={'T':0x25, 'V':b'\x11'}, bl={'V':8},
-            IE=Uint8('GMMCause', val=0x11, dict=GMMCause_dict), trans=True),
+            IE=Uint8('GMMCause', val=0x11, dic=GMMCause_dict), trans=True),
         Type4TLV('T3302', val={'T':0x2A, 'V':b'\0'}, IE=GPRSTimer(), trans=True),
         Type2('CellNotif', val={'T':0x8C}, trans=True),
         Type4TLV('EquivPLMNList', val={'T':0x4A, 'V':3*b'\0'}, IE=PLMNList(), trans=True),
@@ -435,7 +435,7 @@ class GMMRoutingAreaUpdateComplete(Layer3):
 
 class GMMRoutingAreaUpdateReject(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':11})._content) + (
-        Uint8('GMMCause', val=0x11, dict=GMMCause_dict),
+        Uint8('GMMCause', val=0x11, dic=GMMCause_dict),
         Uint('spare', val=0, bl=4),
         ForceStdby(),
         Type4TLV('T3302', val={'T':0x2A, 'V':b'\0'}, IE=GPRSTimer(), trans=True),
@@ -450,7 +450,7 @@ class GMMRoutingAreaUpdateReject(Layer3):
 
 class GMMStatus(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':32})._content) + (
-        Uint8('GMMCause', val=0x11, dict=GMMCause_dict),
+        Uint8('GMMCause', val=0x11, dic=GMMCause_dict),
         )
 
 
@@ -507,7 +507,7 @@ class GMMServiceAccept(Layer3):
 
 class GMMServiceReject(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':14})._content) + (
-        Uint8('GMMCause', val=0x11, dict=GMMCause_dict),
+        Uint8('GMMCause', val=0x11, dic=GMMCause_dict),
         Type4TLV('T3346', val={'T':0x3A, 'V':b'\0'}, IE=GPRSTimer(), trans=True)
         )
 
@@ -568,7 +568,9 @@ GMMTypeMTClasses = {
     33: GMMInformation
     }
 
-GMMTypeMOInstances = {k: GMMTypeMOClasses[k]() for k in GMMTypeMOClasses}
+def get_gmm_msg_mo_instances():
+    return {k: GMMTypeMOClasses[k]() for k in GMMTypeMOClasses}
 
-GMMTypeMTInstances = {k: GMMTypeMTClasses[k]() for k in GMMTypeMTClasses}
+def get_gmm_msg_mt_instances():
+    return {k: GMMTypeMTClasses[k]() for k in GMMTypeMTClasses}
 
