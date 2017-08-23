@@ -1525,6 +1525,9 @@ def pack_val(*val):
             type must be TYPE_BYTES, TYPE_UINT, TYPE_UINT_LE, TYPE_INT or TYPE_INT_LE
             value must be a bytes string or an integer, according to type
             bitlen must be an integer over 0
+            
+            warning: for TYPE_UINT_LE and TYPE_INT_LE, bitlen must be a multiple
+            of 8 (hence the value will be byte-aligned)
     
     Returns:
         buf (tuple of (bytes, integer)) : a tuple containing the actual 
