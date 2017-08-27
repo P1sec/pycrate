@@ -1471,74 +1471,92 @@ class ASN1CodecBER(ASN1Codec):
             return [(T_UINT, 0, 1), (T_UINT, l, 7)]
     
     @classmethod
+    def decode_single_ws(cla, char, lundef=False):
+        EOS = False
+        # tag
+        Tag, cl, pc, tval = cla.decode_tag_ws(char)
+        # length
+        Len, lval = cla.decode_len_ws(char)
+        # keep track of the char cursor
+        ccur = char._cur
+        # value
+        if pc == 1:
+            # constructed (can have an undefinite length)
+            if lval == -1:
+                V = cla.decode_all_ws(char, lundef=True)
+            else:
+                char_lb = char._len_bit
+                char._len_bit = char._cur + 8*lval
+                V = cla.decode_all_ws(char, lundef=False)
+                char._len_bit = char_lb
+            TLV = [Tag, cl, pc, tval, Len, lval, V, ccur]
+        else:
+            # primitive
+            if (cl, pc, tval, lval) == (0, 0, 0, 0):
+                # EOC marker
+                TLV = [Tag, cl, pc, tval, Len, lval, 0, ccur]
+                if lundef:
+                    EOS = True
+            else:
+                assert( lval >= 0 )
+                # keep track of the decoded tag and length, and the value boundary
+                TLV = [Tag, cl, pc, tval, Len, lval, (char._cur, char._cur + 8*lval), ccur]
+                char._cur += 8*lval
+        return TLV, EOS
+    
+    @classmethod
     def decode_all_ws(cla, char, lundef=False):
         TLVs = []
         while char._len_bit - char._cur >= 16:
-            # tag
-            Tag, cl, pc, tval = cla.decode_tag_ws(char)
-            # length
-            Len, lval = cla.decode_len_ws(char)
-            # keep track of the char cursor
-            ccur = char._cur
-            # value
-            if pc == 1:
-                # constructed (can have an undefinite length)
-                if lval == -1:
-                    V = cla.decode_all_ws(char, lundef=True)
-                else:
-                    char_lb = char._len_bit
-                    char._len_bit = char._cur + 8*lval
-                    V = cla.decode_all_ws(char, lundef=False)
-                    char._len_bit = char_lb
-                TLVs.append( [Tag, cl, pc, tval, Len, lval, V, ccur] )
-            else:
-                # primitive
-                if (cl, pc, tval, lval) == (0, 0, 0, 0):
-                    # EOC marker
-                    TLVs.append( [Tag, cl, pc, tval, Len, lval, 0, ccur] )
-                    if lundef:
-                        break
-                else:
-                    assert( lval >= 0 )
-                    # keep track of the decoded tag and length, and the value boundary
-                    TLVs.append( [Tag, cl, pc, tval, Len, lval, (char._cur, char._cur + 8*lval), ccur] )
-                    char._cur += 8*lval
+            TLV, EOS = cla.decode_single_ws(char, lundef)
+            TLVs.append( TLV )
+            if EOS:
+                break
         return TLVs
+    
+    @classmethod
+    def decode_single(cla, char, lundef=False):
+        EOS = False
+        # tag
+        cl, pc, tval = cla.decode_tag(char)
+        # length
+        lval = cla.decode_len(char)
+        # keep track of the char cursor
+        ccur = char._cur
+        # value
+        if pc == 1:
+            # constructed (can have an undefinite length)
+            if lval == -1:
+                V = cla.decode_all(char, lundef=True)
+            else:
+                char_lb = char._len_bit
+                char._len_bit = char._cur + 8*lval
+                V = cla.decode_all(char, lundef=False)
+                char._len_bit = char_lb
+            TLV = [cl, pc, tval, lval, V, ccur]
+        else:
+            # primitive
+            if (cl, pc, tval, lval) == (0, 0, 0, 0):
+                # EOC marker
+                TLV = [cl, pc, tval, lval, 0, ccur]
+                if lundef:
+                    EOS = True
+            else:
+                assert( lval >= 0 )
+                # keep track of the decoded tag and length, and the value boundary
+                TLV = [cl, pc, tval, lval, (char._cur, char._cur + 8*lval), ccur]
+                # and jump over the value
+                char._cur += 8*lval
+        return TLV, EOS
     
     @classmethod
     def decode_all(cla, char, lundef=False):
         TLVs = []
         while char._len_bit - char._cur >= 16:
-            # tag
-            cl, pc, tval = cla.decode_tag(char)
-            # length
-            lval = cla.decode_len(char)
-            # keep track of the char cursor
-            ccur = char._cur
-            # value
-            if pc == 1:
-                # constructed (can have an undefinite length)
-                if lval == -1:
-                    V = cla.decode_all(char, lundef=True)
-                else:
-                    char_lb = char._len_bit
-                    char._len_bit = char._cur + 8*lval
-                    V = cla.decode_all(char, lundef=False)
-                    char._len_bit = char_lb
-                TLVs.append( [cl, pc, tval, lval, V, ccur] )
-            else:
-                # primitive
-                if (cl, pc, tval, lval) == (0, 0, 0, 0):
-                    # EOC marker
-                    TLVs.append( [cl, pc, tval, lval, 0, ccur] )
-                    if lundef:
-                        break
-                else:
-                    assert( lval >= 0 )
-                    # keep track of the decoded tag and length, and the value boundary
-                    TLVs.append( [cl, pc, tval, lval, (char._cur, char._cur + 8*lval), ccur] )
-                    # and jump over the value
-                    char._cur += 8*lval
+            TLV, EOS = cla.decode_single(char, lundef)
+            TLVs.append(TLV)
+            if EOS:
+                break
         return TLVs
     
     @classmethod
