@@ -40,7 +40,7 @@ from struct    import pack, unpack
 from pycrate_core.utils  import log, python_version, \
      NoneType, integer_types, bytes_types, str_types, \
      pack_val, uint_to_bytes, bytes_to_uint, decompose_uint_sl, \
-     int_to_bytes, bytes_to_int
+     int_to_bytes, bytes_to_int, uint_to_bitlist
 from pycrate_core.utils  import TYPE_BYTES   as T_BYTES
 from pycrate_core.utils  import TYPE_INT     as T_INT
 from pycrate_core.utils  import TYPE_UINT    as T_UINT
@@ -50,6 +50,8 @@ from pycrate_core.elt    import *
 from pycrate_core.base   import *
 from pycrate_core.charpy import *
 Atom.REPR_MAXLEN = 512
+
+from pycrate_asn1c.utils import clean_text
 
 # -----------------------------------------------------------------------------#
 # asn1-wide Python routines
@@ -353,7 +355,7 @@ def extract_charstr(text=''):
                            re.subn('\s{0,}\n\s{0,}', '', text[1:cur])[0]
 
 #------------------------------------------------------------------------------#
-# integer factorization and rouding routine
+# integer factorization and rounding routine
 #------------------------------------------------------------------------------#
 
 # for PER fragmentation
@@ -413,4 +415,85 @@ def round_p2(val):
     while val > e:
         e <<= 1
     return e
+
+#------------------------------------------------------------------------------#
+# tag matching routine
+#------------------------------------------------------------------------------#
+
+def match_tag(Obj, tag):
+    """Check in case tag (tag_class, tag_value) matches Obj,
+    or some of its content in case Obj is untagged (CHOICE or OPEN / ANY)
+    
+    Returns:
+        0 : no match
+        1 : match
+        2 and more: undetermined cases
+    """
+    if Obj._tagc:
+        # Obj is tagged, check is easy
+        if tag == Obj._tagc[0]:
+            return 1
+    elif Obj.TYPE == TYPE_CHOICE:
+        # Obj is an untagged CHOICE, check is a bit more difficult
+        if tag in Obj._cont_tags:
+            return 1
+        elif Obj._ext is not None:
+            # extensible CHOICE object: that is tricky
+            # in principle, the current tag could be part of it but we cannot
+            # be sure...
+            return 2
+    elif Obj.TYPE in (TYPE_OPEN, TYPE_ANY):
+        # Obj is an untagged OPEN / ANY object: this is a bit more tricky again
+        if Obj._TAB_LUT and Obj._const_tab and Obj._const_tab_at:
+            # a usable table constraint is defined
+            try:
+                ConstObj = Obj._get_tab_obj()
+            except Exception as err:
+                # unable to retrieve a corresponding object in the table
+                return 3
+            else:
+                if ConstObj is not None:
+                    ret = match_tag(ConstObj, tag)
+                    if ret:
+                        return ret
+        elif Obj._const_val:
+            # some objects are defined as value constraint
+            for ConstObj in Obj._const_val.root:
+                ret = match_tag(ConstObj, tag)
+                if ret:
+                    return ret
+            if Obj._const_val.ext is not None:
+                # the value constraint is extensible
+                for ConstObj in Obj._const_val.ext:
+                    ret = match_tag(ConstObj, tag)
+                    if ret:
+                        return ret
+                # the current tag could be part of this value constraint extension
+                # but we cannot be sure, again...
+                return 4
+        elif hasattr(Obj, '_defby') and Obj._defby is not None:
+            # DEFINED BY construction, not supported yet
+            return 5
+    else:
+        # we should never come here
+        assert()
+    return 0
+
+def get_obj_by_tag(ObjOpen, tag):
+    """Check within the value constraint of an OPEN / ANY object ObjOpen 
+    for a given tag (tag_class, tag_value) and return the matching object, 
+    in case the tag correspond 
+    """
+    for ConstObj in ObjOpen._const_val.root:
+        if ConstObj.tagc and tag == ConstObj._tagc[0]:
+            return ConstObj
+        elif ConstObj.TYPE == TYPE_CHOICE and tag in ConstObj._cont_tags:
+            return ConstObj
+    if ObjOpen._const_val.ext:
+        for ConstObj in ObjOpen._const_val.ext:
+            if ConstObj.tagc and tag == ConstObj._tagc[0]:
+                return ConstObj
+            elif ConstObj.TYPE == TYPE_CHOICE and tag in ConstObj._cont_tags:
+                return ConstObj
+    return None
 
