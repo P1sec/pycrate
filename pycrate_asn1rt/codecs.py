@@ -1264,7 +1264,7 @@ class ASN1CodecBER(ASN1Codec):
         '''
         if isinstance(val, bytes_types):
             # primitive object encoding, unless pc is set
-            tag_pc = 0 if pc is None else ps
+            tag_pc = 0 if pc is None else pc
             GEN = cla.encode_tag(tag_cl, tag_pc, tag_val)
             if tag_pc == 1 and cla.ENC_LUNDEF:
                 l = -1
@@ -1421,7 +1421,7 @@ class ASN1CodecBER(ASN1Codec):
                 return -1
             elif ll > cla.DEC_MAXL:
                 # unacceptably long format
-                raise(ASN1BERDecodeErr('length prefix too long, {0!r} bytes'.format(d)))
+                raise(ASN1BERDecodeErr('length prefix too long, {0!r} bytes'.format(ll)))
             else:
                 # long format
                 return char.get_uint(8*ll)
