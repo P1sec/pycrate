@@ -92,18 +92,18 @@ Specific constraints attributes:
     TAG   = 3
     
     _ASN_RE = re.compile('(?:\'([\s01]{0,})\'B)|(?:\'([\s0-9A-F]{0,})\'H)')
+    
     # _ASN_WASC potentially add the ascii representation of the BIT STRING in comment
     # when returned by _to_asn1() 
     _ASN_WASC = True
     
     def _get_val_obj(self, ref):
         if isinstance(ref, str_types) and self._const_cont:
-            try:
-                const_ref = self._const_cont._typeref.called[1]
-            except:
-                raise(ASN1NotSuppErr('{0}: containing constraint with ASN.1 native object'\
-                      .format(self.fullname())))
-            if ref == const_ref:
+            if self._const_cont._typeref:
+                ident = self._const_cont._typeref.called[1]
+            else:
+                ident = self._const_cont.TYPE 
+            if ref == ident:
                 return self._const_cont
             else:
                 raise(ASN1ObjErr('{0}: invalid object reference, {1!r}'\
@@ -134,12 +134,11 @@ Specific constraints attributes:
                 raise(ASN1ObjErr('{0}: value out of size constraint, {1!r}'\
                       .format(self.fullname(), val)))
         elif self._const_cont:
-            try:
-                const_ref = self._const_cont._typeref.called[1]
-            except:
-                raise(ASN1NotSuppErr('{0}: containing constraint with ASN.1 native object'\
-                      .format(self.fullname())))
-            if val[0] != const_ref:
+            if self._const_cont._typeref:
+                ident = self._const_cont._typeref.called[1]
+            else:
+                ident = self._const_cont.TYPE 
+            if val[0] != ident:
                 raise(ASN1ObjErr('{0}: value out of containing constraint, {1!r}'\
                       .format(self.fullname(), val)))
     
@@ -183,17 +182,15 @@ Specific constraints attributes:
                 return txt[:m.end()].strip()
         elif self._const_cont:
             # CHOICE-like value notation
-            try:
-                const_ref = self._const_cont._typeref.called[1]
-            except:
-                raise(ASN1NotSuppErr('{0}: containing constraint with ASN.1 native object'\
-                      .format(self.fullname())))
-            m = re.match('%s\s{0,}:' % const_ref, txt)
+            if self._const_cont._typeref:
+                ident = self._const_cont._typeref.called[1]
+            else:
+                ident = self._const_cont.TYPE 
+            m = re.match('%s\s{0,}:' % ident, txt)
             if m:
                 txt = txt[m.end():].strip()
                 txt = self._const_cont.from_asn1(txt)
                 self._val = (const_ref, self._const_cont._val)
-                #self._const_cont._val = None
                 return txt
         raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'.format(self.fullname(), txt)))
     
@@ -210,17 +207,16 @@ Specific constraints attributes:
                 try:
                     return ret + ' -- %r --' % uint.to_bytes().decode('ascii')
                 except:
-                    return ret + ' -- (non-ascii) --'
+                    return ret
             else:
                 return ret
         elif self._const_cont:
             # CHOICE-like value notation
-            try:
-                const_ref = self._const_cont._typeref.called[1]
-            except:
-                raise(ASN1NotSuppErr('{0}: containing constraint with ASN.1 native object'\
-                      .format(self.fullname())))
-            if self._val[0] == const_ref:
+            if self._const_cont._typeref:
+                ident = self._const_cont._typeref.called[1]
+            else:
+                ident = self._const_cont.TYPE 
+            if self._val[0] == ident:
                 self._const_cont._val = self._val[1]
                 return '%s: %s' % (self._val[0], self._const_cont._to_asn1())
         raise(ASN1ASNEncodeErr('{0}: non-encodable value, {1!r}'\
@@ -334,15 +330,11 @@ Specific constraints attributes:
                                % self._name)
                     self._val = (bytes_to_uint(buf, bl), bl)
                 else:
-                    try:
-                        ref = self._const_cont._typeref.called[1]
-                    except:
-                        raise(ASN1NotSuppErr('{0}: containing constraint with ASN.1 native object'\
-                              .format(self.fullname())))
-                        self._val = (bytes_to_uint(buf, bl), bl)
+                    if self._const_cont._typeref:
+                        ident = self._const_cont._typeref.called[1]
                     else:
-                        self._val = (ref, self._const_cont._val)
-                        #self._const_cont._val = None
+                        ident = self._const_cont.TYPE
+                    self._val = (ident, self._const_cont._val)
         else:
             self._val = (Buf.to_uint(), Buf.get_bl())
     
@@ -435,15 +427,11 @@ Specific constraints attributes:
                                % self._name)
                     self._val = (bytes_to_uint(buf, bl), bl)
                 else:
-                    try:
-                        ref = self._const_cont._typeref.called[1]
-                    except:
-                        raise(ASN1NotSuppErr('{0}: containing constraint with ASN.1 native object'\
-                              .format(self.fullname())))
-                        self._val = (bytes_to_uint(buf, bl), bl)
+                    if self._const_cont._typeref:
+                        ident = self._const_cont._typeref.called[1]
                     else:
-                        self._val = (ref, self._const_cont._val)
-                        #self._const_cont._val = None
+                        ident = self._const_cont.TYPE 
+                    self._val = (ident, self._const_cont._val)
         else:
             self._val = (bytes_to_uint(buf, bl), bl)
     
@@ -747,24 +735,23 @@ Specific constraints attributes:
                            % self._name)
                 self._val = (bytes_to_uint(buf, bl), bl)
             else:
-                char = Charpy(buf)
+                Obj, char = self._const_cont, Charpy(buf)
                 char._len_bit = bl
+                _const_cont_par = Obj._parent
+                Obj._parent = self._parent
                 try:
-                    self._const_cont.from_ber(char)
+                    Obj.from_ber(char, single=False)
                 except:
                     if not self._SILENT:
                         asnlog('BIT_STR.__from_ber_buf: %s, CONTAINING object decoding failed'\
                                % self._name)
                     self._val = (bytes_to_uint(buf, bl), bl)
                 else:
-                    try:
-                        ref = self._const_cont._typeref.called[1]
-                    except:
-                        raise(ASN1NotSuppErr('{0}: containing constraint with ASN.1 native object'\
-                              .format(self.fullname())))
-                        self._val = (bytes_to_uint(buf, bl), bl)
+                    if Obj._typeref:
+                        ident = Obj._typeref.called[1]
                     else:
-                        self._val = (ref, self._const_cont._val)
+                        ident = Obj.TYPE
+                    self._val = (ident, self._const_cont._val)
         else:
             self._val = (bytes_to_uint(buf, bl), bl)
     
@@ -866,18 +853,19 @@ Specific constraints attributes:
     TAG   = 4
     
     _ASN_RE = re.compile('(?:\'([\s01]{0,})\'B)|(?:\'([\s0-9A-F]{0,})\'H)')
+    
     # _ASN_WASC potentially add the ascii representation of the BIT STRING in comment
     # when returned by _to_asn1() 
     _ASN_WASC = True
     
     def _get_val_obj(self, ref):
         if isinstance(ref, str_types) and self._const_cont:
-            try:
-                const_ref = self._const_cont._typeref.called[1]
-            except:
-                raise(ASN1NotSuppErr('{0}: containing constraint with ASN.1 native object'\
-                      .format(self.fullname())))
-            if ref == const_ref:
+        
+            if self._const_cont._typeref:
+                ident = self._const_cont._typeref.called[1]
+            else:
+                ident = self._const_cont.TYPE 
+            if ref == ident:
                 return self._const_cont
             else:
                 raise(ASN1ObjErr('{0}: invalid object reference, {1!r}'\
@@ -903,12 +891,11 @@ Specific constraints attributes:
                 raise(ASN1ObjErr('{0}: value out of size constraint, {1!r}'\
                       .format(self.fullname(), val)))
         else:
-            try:
-                const_ref = self._const_cont._typeref.called[1]
-            except:
-                raise(ASN1NotSuppErr('{0}: containing constraint with ASN.1 native object'\
-                      .format(self.fullname())))
-            if val[0] != const_ref:
+            if self._const_cont._typeref:
+                ident = self._const_cont._typeref.called[1]
+            else:
+                ident = self._const_cont.TYPE 
+            if val[0] != ident:
                 raise(ASN1ObjErr('{0}: value out of containing constraint, {1!r}'\
                       .format(self.fullname(), val)))
     
@@ -938,17 +925,15 @@ Specific constraints attributes:
             return txt[m.end():].strip()
         elif self._const_cont:
             # CHOICE-like value notation
-            try:
-                const_ref = self._const_cont._typeref.called[1]
-            except:
-                raise(ASN1NotSuppErr('{0}: containing constraint with ASN.1 native object'\
-                      .format(self.fullname())))
-            m = re.match('%s\s{0,}:' % const_ref, txt)
+            if self._const_cont._typeref:
+                ident = self._const_cont._typeref.called[1]
+            else:
+                ident = self._const_cont.TYPE 
+            m = re.match('%s\s{0,}:' % ident, txt)
             if m:
                 txt = txt[m.end():].strip()
                 txt = self._const_cont.from_asn1(txt)
                 self._val = (const_ref, self._const_cont._val)
-                #self._const_cont._val = None
                 return txt
         raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'.format(self.fullname(), txt)))
     
@@ -963,17 +948,16 @@ Specific constraints attributes:
                 try:
                     return ret + ' -- %r --' % self._val.decode('ascii')
                 except:
-                    return ret + ' -- (non-ascii) --'
+                    return ret
             else:
                 return ret
         elif self._const_cont:
             # CHOICE-like value notation
-            try:
-                const_ref = self._const_cont._typeref.called[1]
-            except:
-                raise(ASN1NotSuppErr('{0}: containing constraint with ASN.1 native object'\
-                      .format(self.fullname())))
-            if self._val[0] == const_ref:
+            if self._const_cont._typeref:
+                ident = self._const_cont._typeref.called[1]
+            else:
+                ident = self._const_cont.TYPE 
+            if self._val[0] == ident:
                 self._const_cont._val = self._val[1]
                 return '%s: %s' % (self._val[0], self._const_cont._to_asn1())
         raise(ASN1ASNEncodeErr('{0}: non-encodable value, {1!r}'\
@@ -1034,16 +1018,18 @@ Specific constraints attributes:
                 else:
                     self._val, _gen = ASN1CodecPER.decode_const_open_ws(char, self._const_sz)
             else:
+                Obj = self._const_cont
+                _const_cont_par = Obj._parent
+                Obj._parent = self._parent
                 if unconst:
-                    val, _gen = ASN1CodecPER.decode_unconst_open_ws(char, self._const_cont)
+                    val, _gen = ASN1CodecPER.decode_unconst_open_ws(char, Obj)
                 else:
-                    val, _gen = ASN1CodecPER.decode_const_open_ws(char, self._const_sz, self._const_cont)
-                try:
-                    ref = self._const_cont._typeref.called[1]
-                except:
-                    raise(ASN1NotSuppErr('{0}: containing constraint with ASN.1 native object'\
-                          .format(self.fullname())))
-                self._val = (ref, val)
+                    val, _gen = ASN1CodecPER.decode_const_open_ws(char, self._const_sz, Obj)
+                Obj._parent = _const_cont_par
+                if Obj._typeref is not None:
+                    self._val = (Obj._typeref.called[1], val)
+                else:
+                    self._val = (Obj.TYPE, val)
         else:
             if unconst:
                 self._val, _gen = ASN1CodecPER.decode_unconst_open_ws(char)
@@ -1098,16 +1084,18 @@ Specific constraints attributes:
                 else:
                     self._val = ASN1CodecPER.decode_const_open(char, self._const_sz)
             else:
+                Obj = self._const_cont
+                _const_cont_par = Obj._parent
+                Obj._parent = self._parent
                 if unconst:
-                    val = ASN1CodecPER.decode_unconst_open(char, self._const_cont)
+                    val = ASN1CodecPER.decode_unconst_open(char, Obj)
                 else:
-                    val = ASN1CodecPER.decode_const_open(char, self._const_sz, self._const_cont)
-                try:
-                    ref = self._const_cont._typeref.called[1]
-                except:
-                    raise(ASN1NotSuppErr('{0}: containing constraint with ASN.1 native object'\
-                          .format(self.fullname())))
-                self._val = (ref, val)
+                    val = ASN1CodecPER.decode_const_open(char, self._const_sz, Obj)
+                Obj._parent = _const_cont_par
+                if Obj._typeref is not None:
+                    self._val = (Obj._typeref.called[1], val)
+                else:
+                    self._val = (Obj.TYPE, val)
         else:
             if unconst:
                 self._val = ASN1CodecPER.decode_unconst_open(char)
@@ -1323,23 +1311,23 @@ Specific constraints attributes:
                            % self._name)
                 self._val = buf
             else:
-                char = Charpy(buf)
+                Obj, char = self._const_cont, Charpy(buf)
+                _const_cont_par = Obj._parent
+                Obj._parent = self._parent
                 try:
-                    self._const_cont.from_ber(char)
+                    Obj.from_ber(char, single=False)
                 except:
                     if not self._SILENT:
                         asnlog('OCT_STR.__from_ber_buf: %s, CONTAINING object decoding failed'\
                                % self._name)
+                    Obj._parent = _const_cont_par
                     self._val = buf
                 else:
-                    try:
-                        ref = self._const_cont._typeref.called[1]
-                    except:
-                        raise(ASN1NotSuppErr('{0}: containing constraint with ASN.1 native object'\
-                              .format(self.fullname())))
-                        self._val = buf
+                    Obj._parent = _const_cont_par
+                    if Obj._typeref is not None:
+                        self._val = (Obj._typeref.called[1], Obj._val)
                     else:
-                        self._val = (ref, self._const_cont._val)
+                        self._val = (Obj.TYPE, Obj._val)
         else:
             self._val = buf
     
