@@ -89,8 +89,8 @@ class Charpy(object):
         # concatenate the content in _concat at the end of the current instance
         cur = self._cur
         self._cur = 0
-        self._concat.insert(0, (TYPE_BYTES, self.to_bytes(), self._len_bit))
-        self.set_bytes( pack_val(*self._concat) )
+        self._concat.insert(0, (TYPE_BYTES, self._buf, self._len_bit))
+        self.set_bytes( *pack_val(*self._concat) )
         self._concat = []
         self._cur = cur
     
@@ -241,6 +241,7 @@ class Charpy(object):
         Returns:
             None
         """
+        if self._concat: self._pack()
         if bitlen is None or bitlen > self._cur:
             self._cur = 0
         elif bitlen > 0:
@@ -760,7 +761,7 @@ class Charpy(object):
         off_byte, off_bit = self._cur >>3, self._cur % 8
         if off_bit == 0:
             # aligned access
-            return bytes_to_uint(self._buf[off_byte:], bitlen)
+            return bytes_to_uint(self._buf[off_byte:1+off_byte+(bitlen>>3)], bitlen)
         else:
             # unaligned access
             # convert from a fully-aligned byte buffer with an extended length
@@ -801,7 +802,7 @@ class Charpy(object):
         self._cur += bitlen
         if off_bit == 0:
             # aligned access
-            return bytes_to_uint(self._buf[off_byte:], bitlen)
+            return bytes_to_uint(self._buf[off_byte:1+off_byte+(bitlen>>3)], bitlen)
         else:
             # unaligned access
             # convert from a fully-aligned byte buffer with an extended length
@@ -921,7 +922,7 @@ class Charpy(object):
         off_byte, off_bit = self._cur >>3, self._cur % 8
         if off_bit == 0:
             # aligned access
-            val = bytes_to_uint(self._buf[off_byte:], bitlen)
+            val = bytes_to_uint(self._buf[off_byte:1+off_byte+(bitlen>>3)], bitlen)
         else:
             # unaligned access
             # convert from a fully-aligned byte buffer with an extended length
@@ -969,7 +970,7 @@ class Charpy(object):
         self._cur += bitlen
         if off_bit == 0:
             # aligned access
-            val = bytes_to_uint(self._buf[off_byte:], bitlen)
+            val = bytes_to_uint(self._buf[off_byte:1+off_byte+(bitlen>>3)], bitlen)
         else:
             # unaligned access
             # convert from a fully-aligned byte buffer with an extended length
