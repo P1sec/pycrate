@@ -108,7 +108,11 @@ Specific method:
                   .format(self.fullname(), name)))
         #
         if self._mode == MODE_VALUE:
-            if val is None:
+            if name not in self._val:
+                # `name' is not present in the class value
+                # should be an OPTIONAL component
+                return None
+            elif val is None:
                 # return the value for the given identifier
                 return self._val[name]
             elif val == self._val[name]:
@@ -123,19 +127,37 @@ Specific method:
                 values = []
                 # return all the values for the given identifier
                 if self._val.root:
-                    values.extend([v[name] for v in self._val.root])
+                    for v in self._val.root:
+                        try:
+                            values.append(v[name])
+                        except KeyError:
+                            # `name' is not present in the class value
+                            # should be an OPTIONAL component
+                            pass
                 if self._val.ext:
-                    values.extend([v[name] for v in self._val.ext])
+                    for v in self._val.ext:
+                        try:
+                            values.append(v[name])
+                        except KeyError:
+                            # `name' is not present in the class value
+                            # should be an OPTIONAL component
+                            pass
                 return values
             else:
                 if self._val.root:
                     for v in self._val.root:
-                        if v[name] == val:
-                            return v
+                        try:
+                            if v[name] == val:
+                                return v
+                        except KeyError:
+                            pass
                 if self._val.ext:
                     for v in self._val.ext:
-                        if v[name] == val:
-                            return v
+                        try:
+                            if v[name] == val:
+                                return v
+                        except KeyError:
+                            pass
                 return None
     
     # this is very experimental... and may certainly raise() in case of 
