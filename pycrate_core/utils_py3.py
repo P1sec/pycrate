@@ -1962,7 +1962,7 @@ def pack_val(*val):
                     u = v[1]+(1<<v[2])
                     if u < (1<<(v[2]-1)):
                         u = 1<<(v[2]-1)
-                v_bytes = uint_le_to_bytes(u, v[2])
+                v_bytes = int_le_to_bytes(v[1], v[2])
             # a) append pack_val first, if exist
             if pack_fmt is not None:
                 pack_buf = pack(''.join(pack_fmt), *pack_val)
