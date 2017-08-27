@@ -60,9 +60,13 @@ def make_GLOBAL(global_name=None):
         # dict indexed by modules' name and containing modules' objects
         MOD = ASN1Dict()
         
+        # OID lookup table (OID value: OID name)
+        OID = {}
+        
         @classmethod
         def clear(cla):
             cla.MOD.clear()
+            cla.OID.clear()
     
     if isinstance(global_name, str):
         GLOBAL.__name__ = glob_name
