@@ -75,12 +75,19 @@ def init_modules(*args, **kwargs):
             Obj._mod = Mod.__name__
             #
             # setting additional attributes
-            if Obj.TYPE == TYPE_INT and Obj._const_val:
-                Obj._const_val._set_root_bnd()
+            if Obj.TYPE == TYPE_INT:
+                if Obj._cont is not None:
+                    Obj._cont_rev = {Obj._cont[name]: name for name in Obj._cont}
+                if Obj._const_val:
+                    Obj._const_val._set_root_bnd()
             #
             elif Obj.TYPE in TYPES_CONST_SZ:
                 if Obj._const_sz:
                     Obj._const_sz._set_root_bnd()
+                #
+                if Obj.TYPE == TYPE_BIT_STR:
+                    if Obj._cont:
+                        Obj._cont_rev = {Obj._cont[name]: name for name in Obj._cont}
                 #
                 if Obj.TYPE in TYPES_STRING and Obj._const_alpha:
                     Obj._const_alpha._set_root_bnd()
@@ -106,7 +113,7 @@ def init_modules(*args, **kwargs):
                         else:
                             Obj._root.append(name)
                 # set _cont_rev
-                Obj._cont_rev  = {Obj._cont[name] : name for name in Obj._cont}
+                Obj._cont_rev  = {Obj._cont[name]: name for name in Obj._cont}
                 # set _const_ind and _const_ind_dyn
                 if Obj._ext is None:
                     Obj._const_ind = ASN1Set(rr=[ASN1RangeInt(0, len(Obj._root)-1)])
@@ -447,19 +454,19 @@ def bind_all_attrs(Obj):
     bind_attrs(Obj, '_const_val')
     bind_attrs(Obj, '_const_tab', '_const_tab_id', '_const_tab_at')
     if Obj.TYPE == TYPE_INT:
-        bind_attrs(Obj, '_cont')
+        bind_attrs(Obj, '_cont', '_cont_rev')
     elif Obj.TYPE in (TYPE_REAL):
         bind_attrs(Obj, '_cont', '_root', '_root_mand', '_root_opt')
         bind_attrs(Obj, '_ext')
     elif Obj.TYPE == TYPE_ENUM:
         bind_attrs(Obj, '_cont', '_root', '_ext', '_cont_rev', '_const_ind')
     elif Obj.TYPE == TYPE_BIT_STR:
-        bind_attrs(Obj, '_cont')
+        bind_attrs(Obj, '_cont', '_cont_rev')
         bind_attrs(Obj, '_const_sz')
-        bind_attrs(Obj, '_const_cont')
+        bind_attrs(Obj, '_const_cont', '_const_cont_enc')
     elif Obj.TYPE == TYPE_OCT_STR:
         bind_attrs(Obj, '_const_sz')
-        bind_attrs(Obj, '_const_cont')
+        bind_attrs(Obj, '_const_cont', '_const_cont_enc')
     elif Obj.TYPE in TYPES_STRING:
         bind_attrs(Obj, '_const_sz')
         bind_attrs(Obj, '_const_alpha')
