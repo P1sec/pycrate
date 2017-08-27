@@ -520,6 +520,8 @@ class ASN1Obj(Element):
         """
         returns the prototype of the object
         """
+        # TODO: in case of recursive object, this will break Python
+        # TODO: add information on OPTIONAL / DEFAULT components
         if self.TYPE in TYPES_BASIC + TYPES_EXT:
             return self.TYPE
         elif self.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
@@ -570,9 +572,11 @@ class ASN1Obj(Element):
         returns the list of successive objects containing self up to the root one
         in case self is within a constructed or CLASS object
         """
-        chain = [self._parent]
-        while chain[-1] is not None:
-            chain.append( chain[-1]._parent )
+        par   = self._parent
+        chain = []
+        while par is not None:
+            chain.append(par)
+            par = par._parent
         return chain
     
     def in_class(self):
@@ -624,6 +628,7 @@ class ASN1Obj(Element):
         raise(ASN1NotSuppErr(self.fullname()))
     
     def from_asn1(self, txt):
+        txt = clean_text(txt)
         ret = self._from_asn1(txt)
         if self._SAFE_BND:
             self._safechk_bnd(self._val)
