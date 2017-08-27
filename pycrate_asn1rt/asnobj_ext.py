@@ -101,15 +101,14 @@ Alternative single value: Python 2-tuple
     
     def _get_val_obj(self, ref):
         if isinstance(ref, str_types):
-            if ref in _ASN1ObjBasicLUT:
+            const_tr = self._get_const_tr()
+            if ref in const_tr:
+                return const_tr[ref]
+            elif ref in _ASN1ObjBasicLUT:
                 return _ASN1ObjBasicLUT[ref]()
             else:
-                const_tr = self._build_const_tr()
-                try:
-                    return const_tr[ref]
-                except:
-                    raise(ASN1ObjErr('{0}: invalid object reference, {1!r}'\
-                          .format(self.fullname(), ref)))
+                raise(ASN1ObjErr('{0}: invalid object reference, {1!r}'\
+                      .format(self.fullname(), ref)))
         else:
             try:
                 return GLOBAL.MOD[ref[0]][ref[1]]
@@ -192,8 +191,9 @@ Alternative single value: Python 2-tuple
                 else:
                     self._val = (Obj.TYPE, Obj._val)
                 return txt
-        raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'\
-              .format(self.fullname(), txt)))
+            else:
+                # TODO: module.object reference
+                ASN1NotSuppErr('{0}: reference parsing unsupported'.format(self.fullname()))
     
     def _to_asn1(self):
         if isinstance(self._val, bytes_types):
@@ -203,18 +203,13 @@ Alternative single value: Python 2-tuple
             else:
                 return '\'%s\'H' % hexlify(self._val).upper()
         else:
-            if isinstance(self._val[0], tuple):
-                ident = self._val[0][1]
+            if isinstance(self._val[0], str_types):
+                ident = self._val[0]
             else:
-                ident = self._val[0]._name
-            const_tr = self._build_const_tr()
-            if ident in const_tr:
-                Obj = const_tr[ident]
-                Obj._val = self._val[1]
-                return '%s: %s' % (ident, Obj.to_asn1())
-                #Obj._val = None
-        raise(ASN1ASNEncodeErr('{0}: non-encodable value, {1!r}'\
-              .format(self.fullname(), self._val)))
+                ident = '.'.join(self._val[0])
+            Obj = self._get_val_obj(self._val[0])
+            Obj._val = self._val[1]
+            return '%s: %s' % (ident, Obj.to_asn1())
     
     ###
     # conversion between internal value and ASN.1 PER encoding
@@ -247,7 +242,7 @@ Alternative single value: Python 2-tuple
         else:
             if Obj._typeref is not None:
                 val, GEN = ASN1CodecPER.decode_unconst_open_ws(char, wrapped=Obj._tr)
-                self._val = (Obj._typeref.called, val)
+                self._val = (Obj._typeref.called[1], val)
             else:
                 val, GEN = ASN1CodecPER.decode_unconst_open_ws(char, wrapped=Obj)
                 self._val = (Obj.TYPE, val)
@@ -280,7 +275,7 @@ Alternative single value: Python 2-tuple
             self._val = val
         else:
             if Obj._typeref is not None:
-                self._val = (Obj._typeref.called, val)
+                self._val = (Obj._typeref.called[1], val)
             else:
                 self._val = (Obj.TYPE, val)
         return
@@ -324,29 +319,49 @@ Alternative single value: Python 2-tuple
         # select the inner encoding
         tlv = tlv[0]
         Tag, cl, pc, tval, Len, lval = tlv[0:6]
+        tag, Obj = (cl, tval), None
         # try to get a defined object from a table constraint
         if self._TAB_LUT and self._const_tab and self._const_tab_at:
             try:
                 Obj = self._get_tab_obj()
             except Exception as err:
                 if not self._SILENT:
-                    asnlog('OPEN._decode_ber_cont_ws: %s, unable to retrieve a table-looked up object, %s'\
-                           % (self._name, err))
-                Obj = None
-        else:
-            # TODO: another way to provide a (set of) potential defined object(s)
-            # is to look into value constraint self._const_val
-            # if we have multiple, then we would have to bruteforce the decoding 
-            # until a correct one is found !!!
-            Obj = None
+                    asnlog('OPEN._decode_ber_cont_ws: %s, unable to retrieve an object in the table '\
+                           'constraint, err %s' % (self.fullname(), err))
         #
-        if Obj is None or (cl, tval) != Obj._tagc[0]:
-            if self._const_val:
-                asnlog('OPEN._decode_ber_cont_ws: %s, potential type constraint(s) available'\
-                       % self._name)
-            elif hasattr(self, '_defby') and self._defby is not None:
-                asnlog('ANY._decode_ber_cont_ws: %s, DEFINED BY construction unhandled'\
-                       % self._name)
+        elif self._const_val is not None:
+            # another way to provide a (set of) potential defined object(s)
+            # is to look into value constraint self._const_val
+            # we must select the right one according to the decoded tag
+            Obj = get_obj_by_tag(self, tag)
+        #
+        elif hasattr(self, '_defby') and self._defby is not None:
+            # TODO: 3rd way to specify the potential defined object
+            # is to use a DEFINED BY specification (this is old-school)
+            if not self._SILENT:
+                asnlog('OPEN._decode_ber_cont_ws: %s, DEFINED BY lookup not supported' % self.fullname())
+        #
+        decoded = False
+        if Obj is not None:
+            # we found a defined object
+            try:
+                Obj._from_ber_ws(char, [tlv])
+            except Exception as err:
+                # decoding failed, we fall back to the simple buffer decoding
+                asnlog('OPEN._decode_ber_cont_ws: %s, decoding failed for the selected object %s'\
+                       % (self.fullname(), Obj._name))
+            else:
+                # set value
+                if Obj._typeref is not None:
+                    self._val = (Obj._typeref.called[1], Obj._val)
+                else:
+                    self._val = (Obj.TYPE, Obj._val)
+                V = Obj._struct
+                decoded = True
+        #
+        if not decoded:
+            # we did not find a defined object, or failed to decode it
+            # hence we decode this as a simple buffer
             # with BER, we need to absolutely keep track of the decoded tag if
             # we want to be able to re-encode it
             self._val_tag = (cl, pc, tval)
@@ -375,52 +390,62 @@ Alternative single value: Python 2-tuple
         # select the inner encoding
         tlv = tlv[0]
         cl, pc, tval, lval = tlv[0:4]
+        tag, Obj = (cl, tval), None
         # try to get a defined object from a table constraint
         if self._TAB_LUT and self._const_tab and self._const_tab_at:
             try:
                 Obj = self._get_tab_obj()
             except Exception as err:
                 if not self._SILENT:
-                    asnlog('OPEN._decode_ber_cont_ws: %s, unable to retrieve a table-looked up object, %s'\
-                           % (self._name, err))
-                Obj = None
-        else:
-            # TODO: another way to provide a (set of) potential defined object(s)
-            # is to look into value constraint self._const_val
-            # if we have multiple, then we would have to bruteforce the decoding 
-            # until a correct one is found !!!
-            Obj = None
+                    asnlog('OPEN._decode_ber_cont: %s, unable to retrieve an object in the table '\
+                           'constraint (%s)' % (self.fullname(), err))
         #
-        if Obj is None or (cl, tval) != Obj._tagc[0]:
-            if self._const_val:
-                asnlog('OPEN._decode_ber_cont: %s, potential type constraint(s) available'\
-                       % self._name)
-            elif hasattr(self, '_defby') and self._defby is not None:
-                asnlog('ANY._decode_ber_cont: %s, DEFINED BY construction unhandled'\
-                       % self._name)
+        elif self._const_val is not None:
+            # another way to provide a (set of) potential defined object(s)
+            # is to look into value constraint self._const_val
+            # we must select the right one according to the decoded tag
+            Obj = get_obj_by_tag(self, tag)
+        #
+        elif hasattr(self, '_defby') and self._defby is not None:
+            # TODO: 3rd way to specify the potential defined object
+            # is to use a DEFINED BY specification (this is old-school)
+            if not self._SILENT:
+                asnlog('OPEN._decode_ber_cont: %s, DEFINED BY lookup not supported' % self.fullname())
+        #
+        decoded = False
+        if Obj is not None:
+            # we found a defined object
+            try:
+                Obj._from_ber(char, [tlv])
+            except Exception as err:
+                # decoding failed, we fall back to the simple buffer decoding
+                if not self._SILENT:
+                    asnlog('OPEN._decode_ber_cont: %s, decoding failed for the selected object %s'\
+                           % (self.fullname(), Obj._name))
+            else:
+                # set value
+                if Obj._typeref is not None:
+                    self._val = (Obj._typeref.called[1], Obj._val)
+                else:
+                    self._val = (Obj.TYPE, Obj._val)
+                decoded = True
+        #
+        if not decoded:
+            # we did not find a defined object, or failed to decode it
+            # hence we decode this as a simple buffer
             # with BER, we need to absolutely keep track of the decoded tag if
             # we want to be able to re-encode it
-            # hence we use the 10 first bytes to store the tag class, pc and value
+            self._val_tag = (cl, pc, tval)
             if pc == 1:
                 # constructed object
-                val = ASN1CodecBER.scan_tlv_ws(char, tlv)
+                self._val = ASN1CodecBER.scan_tlv_ws(char, tlv)
             elif lval >= 0:
                 # primitive object
-                char._cur = tlv[6][0]
-                val = char.get_bytes(8*lval)
+                char._cur, char._len_bit = tlv[4][0], tlv[4][1]
+                self._val = char.get_bytes(8*lval)
             else:
                 raise(ASN1BERDecodeErr('{0}: invalid OPEN / ANY tag and length, {1!r}, {2!r}'\
                       .format(self.fullname(), (cl, pc, tval), lval)))
-            # grilling t-bones on it
-            self._val = pack('>BBQ', cl, pc, tval) + val
-        else:
-            # defined object
-            Obj._from_ber(char, [tlv])
-            # set value
-            if Obj._typeref is not None:
-                self._val = (Obj._typeref.called, Obj._val)
-            else:
-                self._val = (Obj.TYPE, Obj._val)
     
     def _encode_ber_cont_ws(self):
         if isinstance(self._val, bytes_types):
