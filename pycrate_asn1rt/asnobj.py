@@ -832,20 +832,24 @@ class ASN1Obj(Element):
             tlv = tlv[4]
         if pc == 0:
             # 2a) decode primitive content value
+            # here, tlv is actually a 2-tuple with the value boundaries
             assert( isinstance(tlv, tuple) )
             self._decode_ber_cont(char, tlv)
         else:
-            # 2b) continue decoding constructed content
+            # 2b) decode constructed content
             assert( isinstance(tlv, list) )
             self._decode_ber_cont(char, tlv)
     
-    def from_ber(self, buf):
+    def from_ber(self, buf, single=True):
         if isinstance(buf, bytes_types):
             char = Charpy(buf)
         else:
             char = buf
         # decode the whole char buffer into tag, length and value boundary
-        TLV = ASN1CodecBER.decode_all(char)
+        if single:
+            TLV = ASN1CodecBER.decode_single(char)
+        else:
+            TLV = ASN1CodecBER.decode_all(char)
         char_cur, char_lb = char._cur, char._len_bit
         # decode all value content
         self._from_ber(char, TLV)
@@ -916,10 +920,11 @@ class ASN1Obj(Element):
         #
         if pc == 0:
             # 2a) decode primitive content value
+            # here, tlv is actually a 2-tuple with the value boundaries
             assert( isinstance(tlv, tuple) )
             V = self._decode_ber_cont_ws(char, tlv)
         else:
-            # 2b) continue decoding constructed content
+            # 2b) decode constructed content
             assert( isinstance(tlv, list) )
             V = self._decode_ber_cont_ws(char, tlv)
         #
@@ -942,15 +947,20 @@ class ASN1Obj(Element):
         TLV._name = self._name
         self._struct = TLV
     
-    def from_ber_ws(self, buf):
+    def from_ber_ws(self, buf, single=True):
         if isinstance(buf, bytes_types):
             char = Charpy(buf)
         else:
             char = buf
         # decode the whole char buffer into tag, length and value boundary
-        TLV = ASN1CodecBER.decode_all_ws(char)
+        if single:
+            TLV = ASN1CodecBER.decode_single_ws(char)
+        else:
+            TLV = ASN1CodecBER.decode_all_ws(char)
+        char_cur, char_lb = char._cur, char._len_bit
         # decode all value content
         self._from_ber_ws(char, TLV)
+        char._cur, char._len_bit = char_cur, char_lb
         if self._SAFE_BND:
             self._safechk_bnd(self._val)
     
