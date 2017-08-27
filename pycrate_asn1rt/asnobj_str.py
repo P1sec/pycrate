@@ -43,6 +43,12 @@ try:
 except ImportError:
     _with_datetime = False
 
+try:
+    from time import strptime, asctime
+    _with_time = True
+except ImportError:
+    _with_time = False
+
 
 #------------------------------------------------------------------------------#
 # BIT STRING and OCTET STRING
@@ -2486,9 +2492,31 @@ Single value: Python 7-tuple of str or None
     
     def _to_asn1(self):
         if self._val[5] is None:
-            return '"' + ''.join(self._val[:5] + self._val[-1:]) + '"'
+            s = '"' + ''.join(self._val[:5] + self._val[-1:]) + '"'
+            if _with_time:
+                try:
+                    if s[-2] == 'Z':
+                        i = ' -- %s --' % asctime(strptime(s[1:-2], '%y%m%d%H%M'))
+                    else:
+                        i = ' -- %s --' % asctime(strptime(s[1:-1], '%y%m%d%H%M%Z'))
+                except:
+                    i = ''
+                return s + i
+            else:
+                return s
         else:
-            return '"' + ''.join(self._val) + '"'
+            s = '"' + ''.join(self._val) + '"'
+            if _with_time:
+                try:
+                    if s[-2] == 'Z':
+                        i = ' -- %s --' % asctime(strptime(s[1:-2], '%y%m%d%H%M%S'))
+                    else:
+                        i = ' -- %s --' % asctime(strptime(s[1:-1], '%y%m%d%H%M%S%Z'))
+                except:
+                    i = ''
+                return s + i
+            else:
+                return s
     
     ###
     # ascii encoding of the time string for BER and PER, in the canonical way
