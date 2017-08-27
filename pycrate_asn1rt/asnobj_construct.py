@@ -165,7 +165,7 @@ Specific attributes:
                     # unknown extension
                     if not self._SILENT:
                         asnlog('CHOICE._from_per_ws: %s, unknown extension index %r'\
-                               % (self._name, ind))
+                               % (self.fullname(), ind))
                     ident = '_ext_%r' % ind
                     Cho = None
                 val, _gen = ASN1CodecPER.decode_unconst_open_ws(char, wrapped=Cho)
@@ -224,7 +224,7 @@ Specific attributes:
                     # unknown extension
                     if not self._SILENT:
                         asnlog('CHOICE._from_per: %s, unknown extension index %r'\
-                               % (self._name, ind))
+                               % (self.fullname(), ind))
                     ident = '_ext_%r' % ind
                     Cho = None
                 self._val = (ident, ASN1CodecPER.decode_unconst_open(char, wrapped=Cho))
@@ -393,7 +393,7 @@ Specific attributes:
                 # unknown extension
                 if not self._SILENT:
                     asnlog('CHOICE._decode_ber_cont_ws: %s, unknown extension tag %r'\
-                           % (self._name, (cl, tval)))
+                           % (self.fullname(), (cl, tval)))
                 ident = '_ext_%r%r%r' % (cl, pc, tval)
                 if pc == 1:
                     # constructed object
@@ -464,7 +464,7 @@ Specific attributes:
                 ident = '_ext_%r%r%r' % (cl, pc, tval)
                 if not self._SILENT:
                     asnlog('CHOICE._decode_ber_cont: %s, unknown extension tag %r'\
-                           % (self._name, (cl, tval))) 
+                           % (self.fullname(), (cl, tval))) 
                 if pc == 1:
                     # constructed object
                     val = ASN1CodecBER.scan_tlv(char, tlv)
@@ -855,7 +855,7 @@ class _CONSTRUCT(ASN1Obj):
                         # hence will not be encoded
                         if not self._SILENT:
                             asnlog('_CONSTRUCT._to_per_ws: %s.%s, removing value equal '\
-                                   'to the default one' % (self._name, ident))
+                                   'to the default one' % (self.fullname(), ident))
                         del self._val[ident]
                     else:
                         # component present in the encoding
@@ -919,7 +919,7 @@ class _CONSTRUCT(ASN1Obj):
                         Bm.append(ind)
                     elif not self._SILENT:
                         asnlog('_CONSTRUCT._to_per_ws: %s.%s, invalid unknown extension index'\
-                               % (self._name, ident))
+                               % (self.fullname(), ident))
             #
             # generate the bitmap preambule for extended (group of) components
             # bitmap length is encoded with a normally small value
@@ -978,7 +978,7 @@ class _CONSTRUCT(ASN1Obj):
                         # hence will not be encoded
                         if not self._SILENT:
                             asnlog('_CONSTRUCT._to_per: %s.%s, removing value equal '\
-                                   'to the default one' % (self._name, ident))
+                                   'to the default one' % (self.fullname(), ident))
                         del self._val[ident]
                     else:
                         # component present in the encoding
@@ -1042,7 +1042,7 @@ class _CONSTRUCT(ASN1Obj):
                         Bm.append(ind)
                     elif not self._SILENT:
                         asnlog('_CONSTRUCT._to_per: %s.%s, invalid unknown extension index'\
-                               % (self._name, ident))
+                               % (self.fullname(), ident))
             #
             # generate the bitmap preambule for extended (group of) components
             # bitmap length is encoded with a normally small value
@@ -1348,7 +1348,7 @@ Specific attributes:
             else:
                 if not self._SILENT:
                     asnlog('SEQUENCE._decode_ber_cont_ws: %s, unknown extension tag %r'\
-                           % (self._name, (cl, tval)))
+                           % (self.fullname(), (cl, tval)))
                 ident = '_ext_%r%r%r' % (cl, pc, tval)
                 if pc == 1:
                     # constructed object
@@ -1491,7 +1491,7 @@ Specific attributes:
             else:
                 if not self._SILENT:
                     asnlog('SEQUENCE._decode_ber_cont: %s, unknown extension tag %r'\
-                           % (self._name, (cl, tval)))
+                           % (self.fullname(), (cl, tval)))
                 ident = '_ext_%r%r%r' % (cl, pc, tval)
                 if pc == 1:
                     # constructed object
@@ -1521,7 +1521,7 @@ Specific attributes:
                     # hence will not be encoded
                     if not self._SILENT:
                         asnlog('SEQ._encode_ber_cont_ws: %s.%s, removing value equal '\
-                               'to the default one' % (self._name, ident))
+                               'to the default one' % (self.fullname(), ident))
                     del self._val[ident]
                 else:
                     # component to be encoded
@@ -1569,7 +1569,7 @@ Specific attributes:
                     # hence will not be encoded
                     if not self._SILENT:
                         asnlog('SEQ._encode_ber_cont: %s.%s, removing value equal '\
-                               'to the default one' % (self._name, ident))
+                               'to the default one' % (self.fullname(), ident))
                     del self._val[ident]
                 else:
                     # component to be encoded
@@ -1752,7 +1752,7 @@ Specific attributes:
             elif self._ext is not None:
                 if not self._SILENT:
                     asnlog('SET._decode_ber_cont_ws: %s, unknown extension tag %r'\
-                           % (self._name, (cl, tval)))
+                           % (self.fullname(), (cl, tval)))
                 ident = '_ext_%r%r%r' % (cl, pc, tval)
                 if pc == 1:
                     # constructed object
@@ -1836,7 +1836,7 @@ Specific attributes:
                 # TODO: decode unknown extended component
                 if not self._SILENT:
                     asnlog('SET._decode_ber_cont: %s, unknown extension tag %r'\
-                           % (self._name, (cl, tval)))
+                           % (self.fullname(), (cl, tval)))
                 ident = '_ext_%r%r%r' % (cl, pc, tval)
                 if pc == 1:
                     # constructed object
@@ -1873,7 +1873,7 @@ Specific attributes:
                     # hence will not be encoded
                     if not self._SILENT:
                         asnlog('SET._encode_ber_cont_ws: %s.%s, removing value equal '\
-                               'to the default one' % (self._name, ident))
+                               'to the default one' % (self.fullname(), ident))
                     del self._val[ident]
                 else:
                     # component to be encoded
@@ -1898,7 +1898,7 @@ Specific attributes:
                     # hence will not be encoded
                     if not self._SILENT:
                         asnlog('SET._encode_ber_cont_ws: %s.%s, removing value equal '\
-                               'to the default one' % (self._name, ident))
+                               'to the default one' % (self.fullname(), ident))
                     del self._val[ident]
                 else:
                     # component to be encoded
@@ -1946,7 +1946,7 @@ Specific attributes:
                     # hence will not be encoded
                     if not self._SILENT:
                         asnlog('SET._encode_ber_cont: %s.%s, removing value equal '\
-                               'to the default one' % (self._name, ident))
+                               'to the default one' % (self.fullname(), ident))
                     del self._val[ident]
                 else:
                     # component to be encoded
@@ -1968,7 +1968,7 @@ Specific attributes:
                     # hence will not be encoded
                     if not self._SILENT:
                         asnlog('SET._encode_ber_cont: %s.%s, removing value equal '\
-                               'to the default one' % (self._name, ident))
+                               'to the default one' % (self.fullname(), ident))
                     del self._val[ident]
                 else:
                     # component to be encoded
