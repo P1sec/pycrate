@@ -2584,16 +2584,16 @@ Single value: Python 8-tuple of str or None
     
     def _to_asn1(self):
         if self._val[4] is None:
-            num = self._val[:4]
+            num = list(self._val[:4])
         elif self._val[5] is None:
-            num = self._val[:5]
+            num = list(self._val[:5])
         else:
-            num = self._val[:6]
+            num = list(self._val[:6])
         if self._val[7] is not None:
             # fractionnal part
             if self._val[-1] is not None:
                 # UTC decay
-                num.extend( ['.'] + self._val[7:] )
+                num.extend( ['.'] + list(self._val[7:]) )
             else:
                 num.extend( ['.', self._val[7]] )
         elif self._val[-1] is not None:
