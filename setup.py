@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="pycrate",
-    version="0.1.0",
+    version="0.1",
     
     #packages=find_packages(),
     packages=["pycrate_core",
@@ -12,13 +12,17 @@ setup(
               "pycrate_media",
               "pycrate_asn1c",
               "pycrate_asn1dir",
-              "pycrate_asn1rt"],
+              "pycrate_asn1rt",
+              "pycrate_csn1",
+              "pycrate_csn1dir",
+              "pycrate_mobile",
+              "pycrate_corenet"],
     
     test_suite="test.test_pycrate",
     
     scripts=["tools/pycrate_asn1compile.py",
+             "tools/pycrate_berdecode.py",
              "tools/pycrate_showmedia.py",
-             #"tools/pycrate_stripmedia.py",
              ],
     
     # no dependency yet
@@ -36,6 +40,6 @@ setup(
     description="A software suite to handle various data formats",
     long_description=open("README.md", "r").read(),
     url="https://github.com/mitshell/pycrate/",
-    keywords="protocol format asn1 compiler  encoder decoder",
+    keywords="protocol format asn1 compiler csn1 encoder decoder",
     license="GPLv2+",
     )
