@@ -203,7 +203,16 @@ Specific constraints attributes:
             else:
                 # BSTRING
                 ret = '\'%s\'B' % uint.__bin__()
-            if self._ASN_WASC:
+            if self._cont:
+                # add flags in comment
+                flags = []
+                bl = uint_to_bitlist(*self._val)
+                for i, v in enumerate(bl):
+                    if i in self._cont_rev and v:
+                        flags.append(self._cont_rev[i])
+                return ret + ' -- %s --' % ' | '.join(flags)
+            elif self._ASN_WASC:
+                # eventually add ascii repr
                 try:
                     return ret + ' -- %r --' % uint.to_bytes().decode('ascii')
                 except:
