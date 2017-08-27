@@ -361,10 +361,17 @@ class ASN1Obj(Element):
             raise(ASN1ObjErr('{0}: invalid table constraint @ path, {1!r}'\
                   .format(self.fullname(), self._const_tab_at)))
         try:
-            return self._const_tab(IndIdent, IndVal)[self._const_tab_id]
+            claval = self._const_tab(IndIdent, IndVal)
         except:
             raise(ASN1ObjErr('{0}: unable to select table constraint {1} with value {2!r}'\
                   .format(self.fullname(), IndIdent, IndVal)))
+        else:
+            try:
+                return claval[self._const_tab_id]
+            except:
+                raise(ASN1ObjErr('{0}: unable to select ident {1} within table value'\
+                      .format(self.fullname(), self._const_tab_id)))
+    
     
     #--------------------------------------------------------------------------#
     # user-friendly generic representation
