@@ -1236,7 +1236,16 @@ Specific attributes:
         #
         # 1) init the local value and structure
         self._val, TLV, ind, eoc = {}, [], 0, False
+        if not tlv:
+            # empty tlv, ensure there is no mandatory components
+            if self._root_mand:
+                raise(ASN1BERDecodeErr('{0}: missing mandatory component, {1!r}'\
+                      .format(self.fullname(), self._root_mand)))
+            else:
+                return Envelope('V', GEN=tuple(TLV))
+        #
         Tag, cl, pc, tval, Len, lval = tlv[ind][0:6]
+        tag = (cl, tval)
         #
         # 2) get over all components within the SEQUENCE content 1 by 1
         #    check if it corresponds to the current tlv
@@ -1249,72 +1258,25 @@ Specific attributes:
                 eoc = True
                 break
             #
-            if Comp._tagc:
-                # 2a) tagged component encoded: easy, peasy !
-                if (cl, tval) == Comp._tagc[0]:
+            else:
+                m = match_tag(Comp, tag)
+                if m == 1:
                     next = True
+                elif m > 1:
+                    if not self._SILENT:
+                        asnlog('SEQUENCE._decode_ber_cont_ws: %s, unable to determine '\
+                               'if component %s is present (err %i)' % (self.fullname(), Comp._name, m))
+                    if Comp._name in self._root_mand:
+                        # component is mandatory, so we will still try to decode it
+                        next = True
             #
-            elif Comp.TYPE == TYPE_CHOICE:
-                # 2b) untagged CHOICE: gets more difficult
-                if (cl, tval) in Comp._cont_tags:
-                    # easy, CHOICE component to be decoded
-                    next = True
-                #
-                elif Comp._ext is not None and not self._SILENT:
-                    # that is tricky... CHOICE is extensible,
-                    # in principle, the current tlv could be an unknown
-                    # extension of it
-                    asnlog('SEQUENCE._decode_ber_cont_ws: %s, untagged extensible CHOICE component'\
-                           % self._name)
-            #
-            elif Comp.TYPE in (TYPE_OPEN, TYPE_ANY):
-                # 2c) untagged ANY / OPEN: little bit more difficult again
-                if Comp._const_val:
-                    # 2c1) some object are available as value constraint (root and ext parts)
-                    for CompConst in Comp._const_val.root:
-                        if not CompConst._tagc:
-                            if not self._SILENT:
-                                # too much for me
-                                asnlog('SEQUENCE._decode_ber_cont_ws: %s, untagged OPEN / ANY component '\
-                                       'with untagged constraint value' % self._name)
-                        elif (cl, tval) == CompConst._tagc[0]:
-                            next = True
-                            break
-                    if not next and Comp._const_val.ext is not None:
-                        for CompConst in Comp._const_val.ext:
-                            if not CompConst._tagc:
-                                if not self._SILENT:
-                                    # too much for me
-                                    asnlog('SEQUENCE._decode_ber_cont_ws: %s, untagged OPEN / ANY '\
-                                           'component with untagged constraint extended value' % self._name)
-                            elif (cl, tval) == CompConst._tagc[0]:
-                                next = True
-                                break
-                        if not next and not self._SILENT:
-                            asnlog('SEQUENCE._decode_ber_cont_ws: %s, untagged OPEN / ANY component '\
-                                   'with extensible value constraint' % self._name)
-                elif Comp._const_tab:
-                    # 2c2) some object are availabe as table constraint
-                    try:
-                        CompConst = Comp._get_tab_obj()
-                    except Exception as err:
-                        if not self._SILENT:
-                            asnlog('OPEN._decode_ber_cont_ws: %s, unable to retrieve a defined '\
-                                   'object, %s' % (self._name, err))
-                    else:
-                        if not CompObj._tagc and not self._SILENT:
-                            asnlog('SEQUENCE._decode_ber_cont_ws: %s, untagged OPEN / ANY component '\
-                                   'with untagged looked up value' % self._name)
-                        elif (cl, tval) == CompObj._tagc[0]:
-                            next = True
-            #
-            elif Comp._name in self._root_mand:
-                # 2d) missing mandatory component
+            if not next and Comp._name in self._root_mand:
+                # missing mandatory component
                 raise(ASN1BERDecodeErr('{0}: missing mandatory component, {1}'\
                       .format(self.fullname(), Comp._name)))
             #
             if next:
-                # decode the current component
+                # 3) decode the current component
                 _par = Comp._parent
                 Comp._parent = self
                 Comp._from_ber_ws(char, [tlv[ind]])
@@ -1325,6 +1287,7 @@ Specific attributes:
                 ind += 1
                 if ind < len(tlv):
                     Tag, cl, pc, tval, Len, lval = tlv[ind][0:6]
+                    tag = (cl, tval)
                 else:
                     # no more tlv to consume
                     if Comp._name in self._root_mand and Comp._name != self._root_mand[-1]:
@@ -1333,12 +1296,12 @@ Specific attributes:
                               .format(self.fullname(), self._root_mand[self._root_mand.index(Comp._name):])))
                     break
         #
-        # 3) decode extended extensions
+        # 4) decode unknown provided extensions
         if eoc and ind < len(tlv)-1:
             raise(ASN1BERDecodeErr('{0}: invalid EOC marker in between TLV components'\
                   .format(self.fullname())))
         elif ind < len(tlv)-1 and self._ext is None:
-            raise(ASN1BERDecodeErr('{0}: invalid extension provided, {1!r}'\
+            raise(ASN1BERDecodeErr('{0}: invalid extension to be decoded, {1!r}'\
                   .format(self.fullname(), tlv[ind])))
         while ind < len(tlv)-1:
             Tag, cl, pc, tval, Len, lval = tlv[ind][0:6]
@@ -1378,7 +1341,16 @@ Specific attributes:
         #
         # 1) init the local value and structure
         self._val, ind, eoc = {}, 0, False
+        if not tlv:
+            # empty tlv, ensure there is no mandatory components
+            if self._root_mand:
+                raise(ASN1BERDecodeErr('{0}: missing mandatory component, {1!r}'\
+                      .format(self.fullname(), self._root_mand)))
+            else:
+                return
+        #
         cl, pc, tval, lval = tlv[ind][0:4]
+        tag = (cl, tval)
         #
         # 2) get over all components within the SEQUENCE content 1 by 1
         #    check if it corresponds to the current tlv
@@ -1391,73 +1363,24 @@ Specific attributes:
                 eoc = True
                 break
             #
-            if Comp._tagc:
-                # 2a) tagged component encoded: easy, peasy !
-                if (cl, tval) == Comp._tagc[0]:
+            else:
+                m = match_tag(Comp, tag)
+                if m == 1:
                     next = True
+                elif m > 1:
+                    if not self._SILENT:
+                        asnlog('SEQUENCE._decode_ber_cont: %s, unable to determine '\
+                               'if component %s is present (err %i)' % (self.fullname(), Comp._name, m))
+                    if Comp._name in self._root_mand:
+                        # component is mandatory, so we will still try to decode it
+                        next = True
             #
-            elif Comp.TYPE == TYPE_CHOICE:
-                # 2b) untagged CHOICE: gets more difficult
-                if (cl, tval) in Comp._cont_tags:
-                    # easy, CHOICE component to be decoded
-                    next = True
-                #
-                elif Comp._ext is not None and not self._SILENT:
-                    # that is tricky... CHOICE is extensible,
-                    # in principle, the current tlv could be an unknown
-                    # extension of it
-                    asnlog('SEQUENCE._decode_ber_cont_ws: %s, untagged extensible CHOICE component'\
-                           % self._name)
-            #
-            elif Comp.TYPE in (TYPE_OPEN, TYPE_ANY):
-                # 2c) untagged ANY / OPEN: little bit more difficult again
-                if Comp._const_val:
-                    # 2c1) some object are available as value constraint (root and ext parts)
-                    for CompConst in Comp._const_val.root:
-                        if not CompConst._tagc:
-                            if not self._SILENT:
-                                # too much for me
-                                asnlog('SEQUENCE._decode_ber_cont_ws: %s, untagged OPEN / ANY component '\
-                                       'with untagged constraint value, %s'\
-                                        % (self._name, CompConst._name))
-                        elif (cl, tval) == CompConst._tagc[0]:
-                            next = True
-                            break
-                    if not next and Comp._const_val.ext is not None:
-                        for CompConst in Comp._const_val.ext:
-                            if not CompConst._tagc:
-                                if not self._SILENT:
-                                    # too much for me
-                                    asnlog('SEQUENCE._decode_ber_cont_ws: %s, untagged OPEN / ANY '\
-                                           'component with untagged constraint extended value, %s'\
-                                            % (self._name, CompConst._name))
-                            elif (cl, tval) == CompConst._tagc[0]:
-                                next = True
-                                break
-                        if not next and not self._SILENT:
-                            asnlog('SEQUENCE._decode_ber_cont_ws: %s, untagged OPEN / ANY component '\
-                                   'with extensible value constraint' % self._name)
-                elif Comp._const_tab and Comp._TAB_LUT:
-                    # 2c2) some object are availabe as table constraint
-                    try:
-                        CompConst = Comp._get_tab_obj()
-                    except Exception as err:
-                        if not self._SILENT:
-                            asnlog('OPEN._decode_ber_cont_ws: %s, unable to retrieve a table-looked up '\
-                                   'object, %s' % (self._name, err))
-                    else:
-                        if not CompObj._tagc and not self._SILENT:
-                            asnlog('SEQUENCE._decode_ber_cont_ws: %s, untagged OPEN / ANY component '\
-                                   'with untagged looked up value, %s' % (self._name, CompObj._name))
-                        elif (cl, tval) == CompObj._tagc[0]:
-                            next = True
-            #
-            if not next and Comp._name in self._root_mand:
-                # 2d) missing mandatory component
-                raise(ASN1BERDecodeErr('{0}: missing mandatory component, {1}'\
-                      .format(self.fullname(), Comp._name)))
-            #
-            if next:
+            if not next:
+                if Comp._name in self._root_mand:
+                    # missing mandatory component
+                    raise(ASN1BERDecodeErr('{0}: missing mandatory component, {1}'\
+                          .format(self.fullname(), Comp._name)))
+            else:
                 # 3) decode the current component
                 _par = Comp._parent
                 Comp._parent = self
@@ -1468,6 +1391,7 @@ Specific attributes:
                 ind += 1
                 if ind < len(tlv):
                     cl, pc, tval, lval = tlv[ind][0:4]
+                    tag = (cl, tval)
                 else:
                     # no more tlv to consume
                     if Comp._name in self._root_mand and Comp._name != self._root_mand[-1]:
@@ -1476,12 +1400,12 @@ Specific attributes:
                               .format(self.fullname(), self._root_mand[self._root_mand.index(Comp._name):])))
                     break
         #
-        # 3) decode extended extensions
+        # 4) decode unknown provided extensions
         if eoc and ind < len(tlv)-1:
             raise(ASN1BERDecodeErr('{0}: invalid EOC marker in between TLV components'\
                   .format(self.fullname())))
         elif ind < len(tlv)-1 and self._ext is None:
-            raise(ASN1BERDecodeErr('{0}: invalid extension provided, {1!r}'\
+            raise(ASN1BERDecodeErr('{0}: invalid extension to be decoded, {1!r}'\
                   .format(self.fullname(), tlv[ind])))
         while ind < len(tlv)-1:
             cl, pc, tval, lval = tlv[ind][0:4]
