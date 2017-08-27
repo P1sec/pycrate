@@ -276,7 +276,10 @@ Specific attribute:
         raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'.format(self.fullname(), txt)))
     
     def _to_asn1(self):
-        return repr(self._val)
+        if self._cont and self._val in self._cont_rev:
+            return '%i -- %s --' % (self._val, self._cont_rev[self._val])
+        else:
+            return repr(self._val)
     
     ###
     # conversion between internal value and ASN.1 PER encoding
@@ -1087,7 +1090,10 @@ class _OID(ASN1Obj):
                   .format(self.fullname(), txt)))
     
     def _to_asn1(self):
-        return '{%s}' % ' '.join(map(str, self._val))
+        if self.TYPE == TYPE_OID and self._val in GLOBAL.OID:
+            return '{%s} -- %s --' % (' '.join(map(str, self._val)), GLOBAL.OID[self._val])
+        else:
+            return '{%s}' % ' '.join(map(str, self._val))
     
     ###
     # conversion between internal value and ASN.1 PER encoding
