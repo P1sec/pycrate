@@ -349,32 +349,22 @@ Alternative single value: Python 2-tuple
                        % self._name)
             # with BER, we need to absolutely keep track of the decoded tag if
             # we want to be able to re-encode it
-            # hence we use the 10 first bytes to store the tag class, pc and value
+            self._val_tag = (cl, pc, tval)
             if pc == 1:
                 # constructed object
-                val = ASN1CodecBER.scan_tlv_ws(char, tlv)
+                self._val = ASN1CodecBER.scan_tlv_ws(char, tlv)
                 V = Envelope('V', GEN=(Tag, Len, Buf(ident, val=val, bl=8*len(val), rep=REPR_HEX)))
             elif lval >= 0:
                 # primitive object
-                char._cur = tlv[6][0]
-                Val = Buf(ident, bl=8*lval, rep=REPR_HEX)
+                char._cur, char._len_bit = tlv[6][0], tlv[6][1]
+                Val = Buf('_buf_', bl=8*lval, rep=REPR_HEX)
                 Val._from_char(char)
-                val = Val.to_bytes()
+                self._val = Val.to_bytes()
                 V = Envelope('V', GEN=(Tag, Len, Val))
             else:
                 raise(ASN1BERDecodeErr('{0}: invalid OPEN / ANY tag and length, {1!r}, {2!r}'\
                       .format(self.fullname(), (cl, pc, tval), lval)))
-            # grilling t-bones on it
-            self._val = pack('>BBQ', cl, pc, tval) + val
-        else:
-            # defined object
-            Obj._from_ber_ws(char, [tlv])
-            # set value
-            if Obj._typeref is not None:
-                self._val = (Obj._typeref.called, Obj._val)
-            else:
-                self._val = (Obj.TYPE, Obj._val)
-            V = Obj._struct
+        #
         return V
     
     def _decode_ber_cont(self, char, tlv):
@@ -435,9 +425,9 @@ Alternative single value: Python 2-tuple
     def _encode_ber_cont_ws(self):
         if isinstance(self._val, bytes_types):
             # unknown object re-encoding
-            assert( len(self._val) >= 10 )
-            cl, pc, tval = unpack('>BBQ', self._val[:10])
-            TLV = ASN1CodecBER.encode_tlv_ws(cl, tval, self._val[10:], pc=pc)
+            assert( hasattr(self, '_val_tag') )
+            cl, pc, tval = self._val_tag
+            TLV = ASN1CodecBER.encode_tlv_ws(cl, tval, self._val, pc=pc)
         else:
             if isinstance(self._val[0], ASN1Obj):
                 Obj = self._val[0]
@@ -457,9 +447,9 @@ Alternative single value: Python 2-tuple
     def _encode_ber_cont(self):
         if isinstance(self._val, bytes_types):
             # unknown object re-encoding
-            assert( len(self._val) >= 10 )
-            cl, pc, tval = unpack('>BBQ', self._val[:10])
-            TLV = ASN1CodecBER.encode_tlv_ws(cl, tval, self._val[10:], pc=pc)
+            assert( hasattr(self, '_val_tag') )
+            cl, pc, tval = self._val_tag
+            TLV = ASN1CodecBER.encode_tlv(cl, tval, self._val, pc=pc)
         else:
             if isinstance(self._val[0], ASN1Obj):
                 Obj = self._val[0]
