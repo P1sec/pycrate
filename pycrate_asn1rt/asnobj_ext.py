@@ -117,28 +117,35 @@ Alternative single value: Python 2-tuple
                 raise(ASN1ObjErr('{0}: invalid object reference, {1!r}'\
                       .format(self.fullname(), ref)))
     
-    def _build_const_tr(self):
-        const_tr = {}
-        if self._const_val:
-            try:
-                const_tr.update( {C._typeref.called[1]:C for C in self._const_val.root} )
-            except:
-                raise(ASN1NotSuppErr('{0}: OPEN constraint with ASN.1 native object'
-                      .format(self.fullname())))
-            if self._const_val.ext:
-                try:
-                    const_tr.update( {C._typeref.called[1]:C for C in self._const_val.ext} )
-                except:
-                    raise(ASN1NotSuppErr('{0}: OPEN extended constraint with ASN.1 native object'
-                          .format(self.fullname())))
-        if self._TAB_LUT and self._const_tab and self._const_tab_at:
-            tab_obj = self._get_tab_obj()
-            try:
-                const_tr[tab_obj._typeref.called[1]] = tab_obj
-            except:
-                raise(ASN1NotSuppErr('{0}: OPEN table constraint with ASN.1 native object'
-                      .format(self.fullname())))
-        return const_tr
+    def _get_const_tr(self):
+        if hasattr(self, '__const_tr__'):
+            return self.__const_tr__
+        else:
+            const_tr = {}
+            if self._const_val:
+                # collect all types in the constraint value
+                for C in self._const_val.root:
+                    if C._typeref is not None:
+                        const_tr[C._typeref.called[1]] = C
+                    else:
+                        const_tr[C.TYPE] = C
+                if self._const_val.ext:
+                    for C in self._const_val.ext:
+                        if C._typeref is not None:
+                            const_tr[C._typeref.called[1]] = C
+                        else:
+                            const_tr[C.TYPE] = C
+            if self._TAB_LUT and self._const_tab and self._const_tab_at:
+                # collect all type from the table constraint
+                assert( hasattr(self, '_const_tab_id') )
+                ObjsTab = self._const_tab(self._const_tab_id)
+                for ObjTab in ObjsTab:
+                    if ObjTab._typeref is not None and ObjTab._typeref.called[1] not in const_tr:
+                        const_tr[ObjTab._typeref.called[1]] = ObjTab
+                    elif ObjTab.TYPE not in const_tr:
+                        const_tr[ObjTab.TYPE] = ObjTab
+            self.__const_tr__ = const_tr
+            return const_tr
     
     def _safechk_val(self, val):
         if not isinstance(val, bytes_types):
@@ -173,7 +180,7 @@ Alternative single value: Python 2-tuple
             return txt[m.end():].strip()
         else:
             # we must pick-up a type from a defined constraint
-            const_tr = self._build_const_tr()
+            const_tr = self._get_const_tr()
             m = re.match('\s{0,}:|'.join(const_tr.keys()) + '\s{0,}:', txt)
             if m is not None:
                 ident = m.group().split(':')[0].strip()
@@ -184,7 +191,6 @@ Alternative single value: Python 2-tuple
                     self._val = (Obj._typeref.called, Obj._val)
                 else:
                     self._val = (Obj.TYPE, Obj._val)
-                #Obj._val = None
                 return txt
         raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'\
               .format(self.fullname(), txt)))
