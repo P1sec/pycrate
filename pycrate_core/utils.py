@@ -90,11 +90,28 @@ def bitlist_to_bytelist(bitlist):
             for i in range(0, len(bitlist), 8)]
         return ret
 
-def uint_to_bitlist(uint):
-    pass
+def uint_to_bitlist(uint, bitlen):
+    """Convert an unsigned integer uint of length bitlen to a list of 0 and 1
+    
+    Args:
+        uint (unsigned integer)
+        bitlen (unsigned integer)
+    
+    Returns:
+        bitlist (list of 0 and 1)
+    """
+    # this is crappy
+    bl = list(map(int, bin(uint)[2:]))
+    if len(bl) < bitlen:
+        # extend v
+        bl = [0]*(bitlen-len(bl)) + bl
+    return bl
 
 def bitlist_to_uint(bitlist):
-    pass
+    """not implemented
+    """
+    # TODO
+    assert()
 
 #------------------------------------------------------------------------------#
 # Element definition helping routines
