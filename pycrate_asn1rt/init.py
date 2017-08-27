@@ -200,6 +200,14 @@ def init_modules(*args, **kwargs):
                         # add a specific attribute
                         GSeq._gext = True
                         Obj._ext_group_obj[gid] = GSeq
+            #
+            elif Obj.TYPE == TYPE_OID and Obj._mode == MODE_VALUE:
+                if Obj._val in GLOB.OID and GLOB.OID[Obj._val] != Obj._name:
+                    if not Obj._SILENT:
+                        asnlog('init_modules: different OID objects (%s, %s) with same OID value (%r)'\
+                               % (Obj._name, GLOB.OID[Obj._val], Obj._val))
+                else:
+                    GLOB.OID[Obj._val] = Obj._name
     #
     # lists all objects defined
     Objs = [Obj for Mod in args for Obj in Mod._all_]
