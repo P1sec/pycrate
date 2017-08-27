@@ -223,7 +223,7 @@ Alternative single value: Python 2-tuple
             except Exception as err:
                 if not self._SILENT:
                     asnlog('OPEN._from_per_ws: %s, unable to retrieve a table-looked up object, %s'\
-                           % (self._name, err))
+                           % (self.fullname(), err))
                 Obj = None
         else:
             # TODO: another way to provide a (set of) potential defined object(s)
@@ -235,7 +235,7 @@ Alternative single value: Python 2-tuple
         if Obj is None:
             if self._const_val:
                 asnlog('OPEN._from_per_ws: %s, potential type constraint(s) available'\
-                       % self._name)
+                       % self.fullname())
             #assert( isinstance(val, bytes_types) )
             val, GEN = ASN1CodecPER.decode_unconst_open_ws(char, wrapped=None)
             self._val = val
@@ -257,7 +257,7 @@ Alternative single value: Python 2-tuple
             except Exception as err:
                 if not self._SILENT:
                     asnlog('OPEN._from_per: %s, unable to retrieve a defined object, %s'\
-                           % (self._name, err))
+                           % (self.fullname(), err))
                 Obj = None
         else:
             # TODO: another way to provide a (set of) potential defined object(s)
@@ -270,7 +270,7 @@ Alternative single value: Python 2-tuple
         if Obj is None:
             if self._const_val:
                 asnlog('OPEN._from_per: %s, potential type constraint(s) available'\
-                       % self._name)
+                       % self.fullname())
             assert( isinstance(val, bytes_types) )
             self._val = val
         else:
