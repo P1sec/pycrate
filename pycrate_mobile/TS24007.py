@@ -52,8 +52,18 @@ class Layer3(Envelope):
     def __init__(self, *args, **kw):
         Envelope.__init__(self, *args, **kw)
         # build a list of (tag length, tag value) for the optional part
-        self._opts = [(ie['T'].get_bl(), ie['T'](), ie) for ie in self._content if \
-                      isinstance(ie, (Type1TV, Type2, Type3TV, Type4TLV, Type6TLVE))]
+        # and configure IE set by **kw as non-transparent
+        self._opts = []
+        if 'val' in kw:
+            kw_val = True
+        else:
+            kw_val = False
+        for ie in self._content:
+            if isinstance(ie, (Type1TV, Type2, Type3TV, Type4TLV, Type6TLVE)):
+                T = ie[0]
+                self._opts.append( (T.get_bl(), T(), ie) )
+                if kw_val and ie._name in kw['val']:
+                    ie._trans = False
     
     def reset_opts(self):
         """reset the optional part of the message
@@ -88,15 +98,17 @@ class Layer3(Envelope):
                 self._dec_unk_ie(T8, char)
     
     def _dec_unk_ie(self, T8, char):
-        if T8 & 0xF0:
+        if T8 & 0x80:
             # 1 byte IE
-            log('%s, _dec_unk_ie: unknown 1-byte IE, 0x%x' % (self._name, T8))
+            log('%s, _dec_unk_ie: unknown Type2 IE, 0x%x' % (self._name, T8))
+            self.append( Type2('_T_%i' % T8, val=[T8]) )
         else:
             # Type4TLV IE
             L = char.get_uint(8)
             V = char.get_bytes(8*L)
-            log('%s, _dec_unk_ie: unknown Type4 TLV IE, T: 0x%x, V: 0x%s' \
+            log('%s, _dec_unk_ie: unknown Type4TLV IE, T: 0x%x, V: 0x%s' \
                 % (self._name, T8, hexlify(V)))
+            self.append( Type4TLV('_T_%i' % T8, val=[T8, L, V]) )
     
     def repr(self):
         # element transparency
@@ -112,26 +124,29 @@ class Layer3(Envelope):
         #
         return '<%s%s%s : %s>' % \
                (self._name, desc, trans, ''.join(map(repr, self._content)))
-    
+
 
 class Layer3EPS(Layer3):
     
     def _dec_unk_ie(self, T8, char):
-        if T8 & 0xF0:
+        if T8 & 0x80:
             # 1 byte IE
-            log('%s, _dec_unk_ie: unknown 1-byte IE, 0x%x' % (self._name, T8))
-        elif T8 & 0x70:
+            log('%s, _dec_unk_ie: unknown Type2 IE, 0x%x' % (self._name, T8))
+            self.append( Type2('_T_%i' % T8, val=[T8]) )
+        elif T8 & 0x70 == 0x70:
             # Type6 TLV IE
             L = char.get_uint(16)
             V = char.get_bytes(8*L)
-            log('%s, _from_char: unknown Type6TLV IE, T: 0x%x, V: 0x%s' \
+            log('%s, _dec_unk_ie: unknown Type6TLVE IE, T: 0x%x, V: 0x%s' \
                 % (self._name, T8, hexlify(V)))
+            self.append( Type6TLVE('_T_%i' % T8, val=[T8, L, V]) )
         else:
             # Type4TLV IE
             L = char.get_uint(8)
             V = char.get_bytes(8*L)
-            log('%s, _dec_unk_ie: unknown Type4 TLV IE, T: 0x%x, V: 0x%s' \
+            log('%s, _dec_unk_ie: unknown Type4TLV IE, T: 0x%x, V: 0x%s' \
                 % (self._name, T8, hexlify(V)))
+            self.append( Type4TLV('_T_%i' % T8, val=[T8, L, V]) )
 
 
 class IE(Envelope):
