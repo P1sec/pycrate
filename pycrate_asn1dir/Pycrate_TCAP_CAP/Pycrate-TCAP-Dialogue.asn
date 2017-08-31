@@ -1,0 +1,56 @@
+--############################################################################--
+-- Module Pycrate-TCAP-Dialogue
+--
+-- redefine the EXTERNAL type as used in the TCAP ITU-T Q.773 specification
+-- there, the ITU-T X.208 ASN.1 specification is used which dates back from 1988
+-- and the EXTERNAL type is incompatible with the one from the X.680 spec
+--
+-- Moreover, a lookup table is defined to link OID and Dialogue ASN.1 definition
+-- from the TCAP specifications
+--
+-- Pycrate
+-- Benoit Michau
+-- 2017/08/28
+--############################################################################--
+
+
+Pycrate-TCAP-Dialogue DEFINITIONS IMPLICIT TAGS ::=
+BEGIN
+
+-- EXPORTS everything
+
+-- Transaction Portion fields.
+IMPORTS
+  dialogue-as-id, DialoguePDU
+    FROM DialoguePDUs {itu-t recommendation q 773 modules(2) dialoguePDUs(2) 
+      version1(1)}
+  uniDialogue-as-id, UniDialoguePDU
+    FROM UnidialoguePDUs {itu-t recommendation q 773 modules(2) unidialoguePDUs(3)
+      version1(1)}
+  ;
+
+
+TCAP-DIALOGUE-ENCODING ::= CLASS {
+  &ref OBJECT IDENTIFIER UNIQUE,
+  &Type
+  } WITH SYNTAX { REF &ref TYPE &Type }
+
+Tcap-dialogue-encoding TCAP-DIALOGUE-ENCODING ::= {
+  { REF dialogue-as-id TYPE DialoguePDU } |
+  { REF uniDialogue-as-id TYPE UniDialoguePDU },
+  ...
+}
+
+
+TcapDialogueExternal ::= [UNIVERSAL 8] IMPLICIT SEQUENCE {
+  direct-reference       TCAP-DIALOGUE-ENCODING.&ref ({Tcap-dialogue-encoding}) OPTIONAL,
+  indirect-reference     INTEGER OPTIONAL,
+  data-value-descriptor  ObjectDescriptor OPTIONAL,
+  encoding               CHOICE {
+    single-ASN1-type [0] TCAP-DIALOGUE-ENCODING.&Type ({Tcap-dialogue-encoding}{@direct-reference}),
+    octet-aligned    [1] IMPLICIT OCTET STRING,
+    arbitrary        [2] IMPLICIT BIT STRING
+    }
+  }
+
+END

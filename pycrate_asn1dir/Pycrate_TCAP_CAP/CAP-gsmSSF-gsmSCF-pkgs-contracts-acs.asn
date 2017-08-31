@@ -1,0 +1,545 @@
+CAP-gsmSSF-gsmSCF-pkgs-contracts-acs {itu-t(0) identified-organization(4) etsi(0) mobileDomain(0) umts-network(1) modules(3) cap-gsmSSF-gsmSCF-pkgs-contracts-acs(102) version8(7)}
+
+DEFINITIONS ::= BEGIN
+
+-- This module specifies the Operation Packages, Contracts, Application Contexts
+-- and Abstract Syntaxes used for the gsmSSF - gsmSCF interface, for the control of
+-- circuit switched calls.
+
+-- The table in subclause 2.1 lists the specifications that contain the modules
+-- that are used by CAP.
+
+IMPORTS
+
+	PARAMETERS-BOUND,
+	cAPSpecificBoundSet
+FROM CAP-classes classes
+-- Elements that exist in cAPSpecificBoundSet in Rel-5 are not changed in Rel-6. As a
+-- result, the value range of data type definitions in Rel-5 are not changed in Rel-6.
+
+	CONTRACT,
+	OPERATION-PACKAGE,
+	OPERATION
+FROM Remote-Operations-Information-Objects ros-InformationObjects
+
+	TCMessage {} 
+FROM TCAPMessages tc-Messages
+
+	APPLICATION-CONTEXT,
+	dialogue-abstract-syntax
+FROM TC-Notation-Extensions tc-NotationExtensions
+
+	activityTest,
+	applyCharging {},
+	applyChargingReport {},
+	assistRequestInstructions {},
+	callGap {},
+	callInformationReport {},
+	callInformationRequest {},
+	cancel {},
+	collectInformation {},
+	connect {},
+	connectToResource {},
+	continue,
+	continueWithArgument {},
+	disconnectForwardConnection,
+	disconnectForwardConnectionWithArgument {},
+	disconnectLeg {},
+	entityReleased {},
+	establishTemporaryConnection {},
+	eventReportBCSM {},
+	furnishChargingInformation {},
+	initialDP {},
+	initiateCallAttempt {},
+	moveLeg {},
+	playTone {},
+	releaseCall {},
+	requestReportBCSMEvent {},
+	resetTimer {},
+	sendChargingInformation {},
+	splitLeg {}
+FROM CAP-gsmSSF-gsmSCF-ops-args gsmSSF-gsmSCF-Operations
+-- Object Identifier 'gsmSSF-gsmSCF-Operations' is updated to version8(7) in Rel-6. As
+-- a result, the present module, 'CAP-gsmSSF-gsmSCF-pkgs-contracts-acs', IMPORTS CAP
+-- Operation definitions from CAP-gsmSSF-gsmSCF-ops-args version8(7). Operation
+-- definitions are used in the ABSTRACT SYNTAX definitions and in the OPERATION PACKAGE
+-- definitions.
+	playAnnouncement {},
+	promptAndCollectUserInformation {},
+	specializedResourceReport
+FROM CAP-gsmSCF-gsmSRF-ops-args gsmSCF-gsmSRF-Operations-- Object Identifier 'gsmSCF-gsmSRF-Operations' is updated to version8(7) in Rel-6. AS
+-- a result, the present module, 'CAP-gsmSSF-gsmSCF-pkgs-contracts-acs', IMPORTS CAP
+-- Operation definitions from CAP-gsmSCF-gsmSRF-ops-args version8(7). Operation
+-- definitions are used in the ABSTRACT SYNTAX definitions and in the OPERATION PACKAGE
+-- definitions.
+
+	specializedResourceControlPackage {}
+FROM CAP-gsmSCF-gsmSRF-pkgs-contracts-acs gsmSCF-gsmSRF-Protocol
+-- Object Identifier 'gsmSCF-gsmSRF-Protocol' is updated to version8(7) in Rel-6. As a
+-- result, the present module, 'CAP-gsmSSF-gsmSCF-pkgs-contracts-acs', IMPORTS CAP Operation
+-- Package definitions from CAP-gsmSCF-gsmSRF-pkgs-contracts-acs version8(7). Operation
+-- Package definitions are used in the CONTRACT definitions.
+
+	id-ac-CAP-gsmSSF-scfGenericAC,
+	id-ac-CAP-gsmSSF-scfAssistHandoffAC,
+	id-ac-CAP-scf-gsmSSFGenericAC,
+-- The APPLICATION-CONTEXT Identifiers for CAP V4 in Rel-6 are the same as for CAP V4 in Rel-5.
+
+	id-CAPSsfToScfGeneric,
+	id-CAPAssistHandoffssfToScf,
+	id-CAPScfToSsfGeneric,
+-- The CONTRACT Identifiers for CAP V4 in Rel-6 are the same as for CAP V4 in Rel-5.
+
+	id-as-gsmSSF-scfGenericAS,
+	id-as-scf-gsmSSFGenericAS,
+	id-as-assistHandoff-gsmSSF-scfAS,
+-- The ABSTRACT-SYNTAX Identifiers for CAP V4 in Rel-6 are the same as for CAP V4 in Rel-5.
+
+	id-package-scfActivation,
+	id-package-gsmSRF-scfActivationOfAssist,
+	id-package-assistConnectionEstablishment,
+	id-package-genericDisconnectResource,
+	id-package-nonAssistedConnectionEstablishment,
+	id-package-connect,
+	id-package-callHandling,
+	id-package-bcsmEventHandling,
+	id-package-ssfCallProcessing,
+	id-package-scfCallInitiation,
+	id-package-timer,
+	id-package-billing,
+	id-package-charging,
+	id-package-trafficManagement,
+	id-package-callReport,
+	id-package-signallingControl,
+	id-package-activityTest,
+	id-package-cancel,
+	id-package-cphResponse,
+	id-package-exceptionInform,
+	id-package-playTone,
+-- The OPERATION-PACKAGE Identifiers for CAP V4 in Rel-6 are the same as for CAP V4 in Rel-5.
+
+	classes,
+	ros-InformationObjects,
+	tc-Messages,
+	tc-NotationExtensions, 
+
+	gsmSSF-gsmSCF-Operations,
+	gsmSCF-gsmSRF-Operations,
+-- Object Identifiers gsmSSF-gsmSCF-Operations and gsmSCF-gsmSRF-Operations are updated
+-- to version8(7) in Rel-6. As a result, the present module, 'CAP-gsmSSF-gsmSCF-pkgs-
+-- contracts-acs', IMPORTS Rel-6 versions of the CAP Operation definitions.
+
+	gsmSCF-gsmSRF-Protocol
+-- Object Identifier gsmSCF-gsmSRF-Protocol is updated to version8(7) in Rel-6. As a result,
+-- the present module IMPORTS Rel-6 versions of the CAP Operation Package definitions.
+
+FROM CAP-object-identifiers {itu-t(0) identified-organization(4) etsi(0) mobileDomain(0)
+umts-network(1) modules(3) cap-object-identifiers(100) version8(7)};
+
+-- Application Contexts
+
+-- CAP V4 Rel-5 and CAP V4 Rel-6 use the same Application Context version. The CONTRACT
+-- and ABSTRACT SYNTAXES for the call control related Application Contexts, however, are
+-- defined in Rel-6. This is needed to use parameter definitions that are defined in Rel-6.
+
+-- Refer to ITU-T Recommendation Q.775 for the formal definition of APPLICATION-CONTEXT.
+-- The structured DIALOGUE MODE is defined in ITU-T Recommendation Q.771; the
+-- dialogue-abstract-syntax ABSTRACT SYNTAX is defined in ITU-T Recommendation Q.775.
+
+capssf-scfGenericAC APPLICATION-CONTEXT ::= {
+	CONTRACT					capSsfToScfGeneric
+	DIALOGUE MODE				structured
+	ABSTRACT SYNTAXES			{dialogue-abstract-syntax |
+								gsmSSF-scfGenericAbstractSyntax} 
+	APPLICATION CONTEXT NAME	id-ac-CAP-gsmSSF-scfGenericAC}
+-- 'capSsfToScfGeneric' and 'gsmSSF-scfGenericAbstractSyntax' are defined in the present
+-- module.
+
+capssf-scfAssistHandoffAC APPLICATION-CONTEXT ::= {
+	CONTRACT					capAssistHandoffssfToScf
+	DIALOGUE MODE				structured
+	ABSTRACT SYNTAXES			{dialogue-abstract-syntax |
+								assistHandoff-gsmSSF-scfAbstractSyntax}
+	APPLICATION CONTEXT NAME	id-ac-CAP-gsmSSF-scfAssistHandoffAC}
+-- 'capAssistHandoffssfToScf' and 'assistHandoff-gsmSSF-scfAbstractSyntax' are defined in
+-- the present module.
+
+capscf-ssfGenericAC	APPLICATION-CONTEXT ::= {
+	CONTRACT					capScfToSsfGeneric
+	DIALOGUE MODE				structured
+	ABSTRACT SYNTAXES			{dialogue-abstract-syntax |
+								scf-gsmSSFGenericAbstractSyntax}
+	APPLICATION CONTEXT NAME	id-ac-CAP-scf-gsmSSFGenericAC}
+-- 'capScfToSsfGeneric' and 'scf-gsmSSFGenericAbstractSyntax' are defined in the present
+-- module.
+
+-- Contracts
+-- The CONTRACT definitions are updated for Rel-6, due to the fact that the individual
+-- OPERATION-PACKAGE definitions are updated in Rel-6.
+
+capSsfToScfGeneric CONTRACT ::= {
+-- dialogue initiated by gsmSSF with InitialDP Operation
+	INITIATOR CONSUMER OF		{exceptionInformPackage {cAPSpecificBoundSet} |
+								scfActivationPackage {cAPSpecificBoundSet}}
+	RESPONDER CONSUMER OF		{activityTestPackage |
+								assistConnectionEstablishmentPackage {cAPSpecificBoundSet} |
+								bcsmEventHandlingPackage {cAPSpecificBoundSet} |
+								billingPackage {cAPSpecificBoundSet} |
+								callHandlingPackage {cAPSpecificBoundSet} |
+								callReportPackage {cAPSpecificBoundSet} |
+								cancelPackage {cAPSpecificBoundSet} |
+								chargingPackage {cAPSpecificBoundSet} |
+								connectPackage {cAPSpecificBoundSet} |
+								cphResponsePackage {cAPSpecificBoundSet} |
+								genericDisconnectResourcePackage {cAPSpecificBoundSet} |
+								nonAssistedConnectionEstablishmentPackage {cAPSpecificBoundSet} |
+								playTonePackage {cAPSpecificBoundSet} |
+								signallingControlPackage {cAPSpecificBoundSet} |
+								specializedResourceControlPackage {cAPSpecificBoundSet} |
+								ssfCallProcessingPackage {cAPSpecificBoundSet} |
+								timerPackage {cAPSpecificBoundSet} |
+								trafficManagementPackage {cAPSpecificBoundSet} |
+								scfCallInitiationPackage {cAPSpecificBoundSet}}
+	ID							id-CAPSsfToScfGeneric}
+-- The OPERATION-PACKAGEs are defined in the present module, except for
+-- specializedResourceControlPackage, which is defined in CAP-gsmSCF-gsmSRF-pkgs-contracts-acs.
+
+capAssistHandoffssfToScf CONTRACT ::= {
+-- dialogue initiated by gsmSSF with AssistRequestInstructions
+	INITIATOR CONSUMER OF		{gsmSRF-scfActivationOfAssistPackage {cAPSpecificBoundSet}}
+	RESPONDER CONSUMER OF		{activityTestPackage |
+								cancelPackage {cAPSpecificBoundSet} |
+								genericDisconnectResourcePackage {cAPSpecificBoundSet} |
+								nonAssistedConnectionEstablishmentPackage {cAPSpecificBoundSet} |
+								specializedResourceControlPackage {cAPSpecificBoundSet} |
+								timerPackage {cAPSpecificBoundSet}}
+	ID							id-CAPAssistHandoffssfToScf}
+-- The OPERATION-PACKAGEs are defined in the present module, except for
+-- specializedResourceControlPackage, which is defined in CAP-gsmSCF-gsmSRF-pkgs-contracts-acs.
+
+capScfToSsfGeneric CONTRACT ::= {
+-- dialogue initiated by gsmSCF with InitiateCallAttempt, Generic Case
+	INITIATOR CONSUMER OF		{activityTestPackage |
+								assistConnectionEstablishmentPackage {cAPSpecificBoundSet} |
+								bcsmEventHandlingPackage {cAPSpecificBoundSet} |
+								billingPackage {cAPSpecificBoundSet} |
+								callHandlingPackage {cAPSpecificBoundSet} |
+								callReportPackage {cAPSpecificBoundSet} |
+								cancelPackage {cAPSpecificBoundSet} |
+								chargingPackage {cAPSpecificBoundSet} |
+								connectPackage {cAPSpecificBoundSet} |
+								cphResponsePackage {cAPSpecificBoundSet} |
+								genericDisconnectResourcePackage {cAPSpecificBoundSet} |
+								nonAssistedConnectionEstablishmentPackage {cAPSpecificBoundSet} |
+								playTonePackage {cAPSpecificBoundSet} |
+								scfCallInitiationPackage {cAPSpecificBoundSet} |
+								specializedResourceControlPackage {cAPSpecificBoundSet} |
+								ssfCallProcessingPackage {cAPSpecificBoundSet} |
+								timerPackage {cAPSpecificBoundSet}}
+	RESPONDER CONSUMER OF		{exceptionInformPackage {cAPSpecificBoundSet}}
+	ID							id-CAPScfToSsfGeneric}
+-- The OPERATION-PACKAGEs are defined in the present module, except for
+-- specializedResourceControlPackage, which is defined in CAP-gsmSCF-gsmSRF-pkgs-contracts-acs.
+
+
+-- Operation Packages
+-- The OPERATION-PACKAGE definitions are updated for Rel-6, due to the fact that the individual
+-- OPERATION definitions are updated in Rel-6. The OPERATION definitions are IMPORTED from
+-- CAP-gsmSSF-gsmSCF-ops-args and from CAP-gsmSCF-gsmSRF-ops-args.
+
+scfActivationPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{initialDP {bound}}
+	ID					id-package-scfActivation}
+
+gsmSRF-scfActivationOfAssistPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{assistRequestInstructions {bound}}
+	ID					id-package-gsmSRF-scfActivationOfAssist}
+
+assistConnectionEstablishmentPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{establishTemporaryConnection {bound}}
+	ID					id-package-assistConnectionEstablishment}
+
+genericDisconnectResourcePackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{disconnectForwardConnection |
+						disconnectForwardConnectionWithArgument {bound}}
+	ID					id-package-genericDisconnectResource}
+
+nonAssistedConnectionEstablishmentPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{connectToResource {bound}}
+	ID					id-package-nonAssistedConnectionEstablishment}
+
+connectPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{connect {bound}}
+	ID					id-package-connect}
+
+callHandlingPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{releaseCall {bound}}
+	ID					id-package-callHandling}
+
+bcsmEventHandlingPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{requestReportBCSMEvent {bound}}
+	SUPPLIER INVOKES	{eventReportBCSM {bound}}
+	ID					id-package-bcsmEventHandling}
+
+ssfCallProcessingPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{collectInformation | continueWithArgument {bound} | continue}
+	ID					id-package-ssfCallProcessing}
+
+scfCallInitiationPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{initiateCallAttempt {bound}}
+	ID					id-package-scfCallInitiation}
+
+timerPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{resetTimer {bound}}
+	ID					id-package-timer}
+
+billingPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{furnishChargingInformation {bound}}
+	ID					id-package-billing}
+
+chargingPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{applyCharging {bound}}
+	SUPPLIER INVOKES	{applyChargingReport {bound}}
+	ID					id-package-charging}
+
+trafficManagementPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{callGap {bound}}
+	ID					id-package-trafficManagement}
+
+callReportPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{callInformationRequest {bound}}
+	SUPPLIER INVOKES	{callInformationReport {bound}}
+	ID					id-package-callReport}
+
+signallingControlPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{sendChargingInformation {bound}}
+	ID					id-package-signallingControl}
+
+activityTestPackage OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{activityTest}
+	ID					id-package-activityTest}
+
+cancelPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{cancel {bound}}
+	ID					id-package-cancel}
+
+cphResponsePackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{continueWithArgument {bound} |
+						disconnectLeg {bound} |
+						moveLeg {bound} |
+						splitLeg {bound}}
+	ID					id-package-cphResponse}
+
+exceptionInformPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{entityReleased {bound}}
+	ID					id-package-exceptionInform}
+
+playTonePackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
+	CONSUMER INVOKES	{playTone {bound}}
+	ID					id-package-playTone}
+
+
+-- Abstract Syntaxes
+
+-- SsfToScfGenericInvokable and SsfToScfGenericReturnable use OPERATION definitions with
+-- version8(7). As a result, GenericSSF-gsmSCF-PDUs uses version8(7) OPERATION definitions.
+-- As a subsequent result, gsmSSF-scfGenericAbstractSyntax uses version8(7) OPERATION
+-- definitions. That ABSTRACT-SYNTAX is used in the capssf-scfGenericAC APPLICATION-CONTEXT
+-- definition (CAP from gsmSSF to gsmSCF).
+
+gsmSSF-scfGenericAbstractSyntax ABSTRACT-SYNTAX ::= {
+	GenericSSF-gsmSCF-PDUs
+	IDENTIFIED BY		id-as-gsmSSF-scfGenericAS}
+-- 'GenericSSF-gsmSCF-PDUs' is defined in the present module.
+
+GenericSSF-gsmSCF-PDUs ::= TCMessage {{SsfToScfGenericInvokable},
+									  {SsfToScfGenericReturnable}}
+-- 'SsfToScfGenericInvokable' and 'SsfToScfGenericReturnable' are defined in the present module.
+
+SsfToScfGenericInvokable OPERATION ::= {
+	activityTest |
+	applyCharging {cAPSpecificBoundSet} |
+	applyChargingReport {cAPSpecificBoundSet} |
+	callInformationReport {cAPSpecificBoundSet} |
+	callInformationRequest {cAPSpecificBoundSet} |
+	cancel {cAPSpecificBoundSet} |
+	connect {cAPSpecificBoundSet} |
+	continueWithArgument {cAPSpecificBoundSet} |
+	connectToResource {cAPSpecificBoundSet} |
+	collectInformation |
+	disconnectForwardConnection |
+	disconnectForwardConnectionWithArgument {cAPSpecificBoundSet} |
+	disconnectLeg {cAPSpecificBoundSet} |
+	entityReleased {cAPSpecificBoundSet} |
+	establishTemporaryConnection {cAPSpecificBoundSet} |
+	eventReportBCSM {cAPSpecificBoundSet} |
+	furnishChargingInformation {cAPSpecificBoundSet} |
+	initialDP {cAPSpecificBoundSet} |
+	initiateCallAttempt {cAPSpecificBoundSet} |
+	moveLeg {cAPSpecificBoundSet} |
+	releaseCall {cAPSpecificBoundSet} |
+	requestReportBCSMEvent {cAPSpecificBoundSet} |
+	resetTimer {cAPSpecificBoundSet} |
+	sendChargingInformation {cAPSpecificBoundSet} |
+	splitLeg {cAPSpecificBoundSet} |
+	playAnnouncement {cAPSpecificBoundSet} |
+	playTone {cAPSpecificBoundSet} |
+	promptAndCollectUserInformation {cAPSpecificBoundSet} |
+	specializedResourceReport
+	}
+-- The OPERATION definitions are IMPORTED from CAP-gsmSSF-gsmSCF-ops-args and from
+-- CAP-gsmSCF-gsmSRF-ops-args.
+
+SsfToScfGenericReturnable OPERATION ::= {
+	activityTest |
+	applyCharging {cAPSpecificBoundSet} |
+	applyChargingReport {cAPSpecificBoundSet} |
+	callGap {cAPSpecificBoundSet} |
+	callInformationRequest {cAPSpecificBoundSet} |
+	cancel {cAPSpecificBoundSet} |
+	connect {cAPSpecificBoundSet} |
+	connectToResource {cAPSpecificBoundSet} |
+	collectInformation |
+	continue |
+	continueWithArgument {cAPSpecificBoundSet} |
+	disconnectForwardConnection |
+	disconnectForwardConnectionWithArgument {cAPSpecificBoundSet} |
+	disconnectLeg {cAPSpecificBoundSet} |
+	entityReleased {cAPSpecificBoundSet} |
+	establishTemporaryConnection {cAPSpecificBoundSet} |
+	furnishChargingInformation {cAPSpecificBoundSet} |
+	initialDP {cAPSpecificBoundSet} |
+	initiateCallAttempt {cAPSpecificBoundSet} |
+	moveLeg {cAPSpecificBoundSet} |
+	releaseCall {cAPSpecificBoundSet} |
+	requestReportBCSMEvent {cAPSpecificBoundSet} |
+	resetTimer {cAPSpecificBoundSet} |
+	sendChargingInformation {cAPSpecificBoundSet} |
+	splitLeg {cAPSpecificBoundSet} |
+	playAnnouncement {cAPSpecificBoundSet} |
+	playTone {cAPSpecificBoundSet} |
+	promptAndCollectUserInformation {cAPSpecificBoundSet}
+	}
+-- The OPERATION definitions are IMPORTED from CAP-gsmSSF-gsmSCF-ops-args and from
+-- CAP-gsmSCF-gsmSRF-ops-args.
+
+
+-- AssistHandoffssfToScfInvokable and AssistHandoffssfToScfReturnable use OPERATION definitions
+-- with version8(7). As a result, AssistHandoffsSF-gsmSCF-PDUs uses version8(7) OPERATION
+-- definitions. As a subsequent result, assistHandoff-gsmSSF-scfAbstractSyntax uses version8(7)
+-- OPERATION definitions. That ABSTRACT-SYNTAX is used in the capssf-scfAssistHandoffAC
+-- APPLICATION-CONTEXT definition (CAP from assist gsmSSF to gsmSCF).
+
+assistHandoff-gsmSSF-scfAbstractSyntax ABSTRACT-SYNTAX ::= {
+	AssistHandoffsSF-gsmSCF-PDUs
+	IDENTIFIED BY	id-as-assistHandoff-gsmSSF-scfAS}
+-- 'AssistHandoffsSF-gsmSCF-PDUs' is defined in the present module.
+
+AssistHandoffsSF-gsmSCF-PDUs ::= TCMessage {{AssistHandoffssfToScfInvokable}, 
+											{AssistHandoffssfToScfReturnable}}
+-- 'AssistHandoffssfToScfInvokable' and 'AssistHandoffssfToScfReturnable' are defined in the
+-- present module.
+
+AssistHandoffssfToScfInvokable OPERATION ::= {
+	activityTest |
+	assistRequestInstructions {cAPSpecificBoundSet} |
+	cancel {cAPSpecificBoundSet} |
+	connectToResource {cAPSpecificBoundSet} |
+	disconnectForwardConnection |
+	playAnnouncement {cAPSpecificBoundSet} |
+	promptAndCollectUserInformation {cAPSpecificBoundSet} |
+	resetTimer {cAPSpecificBoundSet} |
+	specializedResourceReport
+	}
+-- The OPERATION definitions are IMPORTED from CAP-gsmSSF-gsmSCF-ops-args and from
+-- CAP-gsmSCF-gsmSRF-ops-args.
+
+AssistHandoffssfToScfReturnable OPERATION ::= {
+	activityTest |
+	assistRequestInstructions {cAPSpecificBoundSet} |
+	cancel {cAPSpecificBoundSet} |
+	connectToResource {cAPSpecificBoundSet} |
+	disconnectForwardConnection |
+	playAnnouncement {cAPSpecificBoundSet} |
+	promptAndCollectUserInformation {cAPSpecificBoundSet} |
+	resetTimer {cAPSpecificBoundSet}
+	}
+-- The OPERATION definitions are IMPORTED from CAP-gsmSSF-gsmSCF-ops-args and from
+-- CAP-gsmSCF-gsmSRF-ops-args.
+
+-- ScfToSsfGenericInvokable and ScfToSsfGenericReturnable use OPERATION definitions
+-- with version8(7). As a result, GenericSCF-gsmSSF-PDUs uses version8(7) OPERATION
+-- definitions. As a subsequent result, scf-gsmSSFGenericAbstractSyntax uses version8(7)
+-- OPERATION definitions. That ABSTRACT-SYNTAX is used in the capscf-ssfGenericAC
+-- APPLICATION-CONTEXT definition (CAP from gsmSCF to gsmSSF).
+scf-gsmSSFGenericAbstractSyntax	ABSTRACT-SYNTAX ::= {
+	GenericSCF-gsmSSF-PDUs
+	IDENTIFIED BY	id-as-scf-gsmSSFGenericAS}
+-- 'GenericSCF-gsmSSF-PDUs' is defined in the present module.
+
+GenericSCF-gsmSSF-PDUs ::= TCMessage {{ScfToSsfGenericInvokable},
+									  {ScfToSsfGenericReturnable}}
+-- 'ScfToSsfGenericInvokable' and 'ScfToSsfGenericReturnable' are defined in the
+-- present module.
+
+ScfToSsfGenericInvokable OPERATION ::= {
+	activityTest |
+	applyCharging {cAPSpecificBoundSet} |
+	applyChargingReport {cAPSpecificBoundSet} |
+	callInformationRequest {cAPSpecificBoundSet} |
+	cancel {cAPSpecificBoundSet} |
+	collectInformation |
+	connect {cAPSpecificBoundSet} |
+	connectToResource {cAPSpecificBoundSet} |
+	continue |
+	continueWithArgument {cAPSpecificBoundSet} |
+	disconnectForwardConnection |
+	disconnectForwardConnectionWithArgument {cAPSpecificBoundSet} |
+	disconnectLeg {cAPSpecificBoundSet} |
+	establishTemporaryConnection {cAPSpecificBoundSet} |
+	furnishChargingInformation {cAPSpecificBoundSet} |
+	initiateCallAttempt {cAPSpecificBoundSet} |
+	moveLeg {cAPSpecificBoundSet} |
+	playTone {cAPSpecificBoundSet} |
+	releaseCall {cAPSpecificBoundSet} |
+	requestReportBCSMEvent {cAPSpecificBoundSet} |
+	resetTimer {cAPSpecificBoundSet} |
+	sendChargingInformation {cAPSpecificBoundSet} |
+	splitLeg {cAPSpecificBoundSet} |
+	playAnnouncement {cAPSpecificBoundSet} |
+	promptAndCollectUserInformation {cAPSpecificBoundSet}
+	}
+-- The OPERATION definitions are IMPORTED from CAP-gsmSSF-gsmSCF-ops-args and from
+-- CAP-gsmSCF-gsmSRF-ops-args.
+
+ScfToSsfGenericReturnable OPERATION ::= {
+	activityTest |
+	applyCharging {cAPSpecificBoundSet} |
+	applyChargingReport {cAPSpecificBoundSet} |
+	callInformationReport {cAPSpecificBoundSet} |
+	callInformationRequest {cAPSpecificBoundSet} |
+	cancel {cAPSpecificBoundSet} |
+	connect {cAPSpecificBoundSet} |
+	connectToResource {cAPSpecificBoundSet} |
+	disconnectForwardConnection |
+	disconnectForwardConnectionWithArgument {cAPSpecificBoundSet} |
+	disconnectLeg {cAPSpecificBoundSet} |
+	entityReleased {cAPSpecificBoundSet} |
+	establishTemporaryConnection {cAPSpecificBoundSet} |
+	eventReportBCSM {cAPSpecificBoundSet} |
+	furnishChargingInformation {cAPSpecificBoundSet} |
+	initiateCallAttempt {cAPSpecificBoundSet} |
+	moveLeg {cAPSpecificBoundSet} |
+	requestReportBCSMEvent {cAPSpecificBoundSet} |
+	resetTimer {cAPSpecificBoundSet} |
+	sendChargingInformation {cAPSpecificBoundSet} |
+	splitLeg {cAPSpecificBoundSet} |
+	playAnnouncement {cAPSpecificBoundSet} |
+	playTone {cAPSpecificBoundSet} |
+	promptAndCollectUserInformation {cAPSpecificBoundSet} |
+	specializedResourceReport
+	}
+-- The OPERATION definitions are IMPORTED from CAP-gsmSSF-gsmSCF-ops-args and from
+-- CAP-gsmSCF-gsmSRF-ops-args.
+
+END
