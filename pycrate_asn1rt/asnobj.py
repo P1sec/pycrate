@@ -355,21 +355,24 @@ class ASN1Obj(Element):
     
     def _get_tab_obj(self):
         try:
-            IndIdent = self.get_obj_by_path(self._const_tab_at)._const_tab_id
-            IndVal = self.get_val_by_path(self._const_tab_at)
+            IndIdent = self._get_obj_by_path(self._const_tab_at)._const_tab_id
+            IndVal = self._get_val_by_path(self._const_tab_at)
         except:
             raise(ASN1ObjErr('{0}: invalid table constraint @ path, {1!r}'\
                   .format(self.fullname(), self._const_tab_at)))
         try:
             claval = self._const_tab(IndIdent, IndVal)
         except:
-            raise(ASN1ObjErr('{0}: unable to select table constraint {1} with value {2!r}'\
-                  .format(self.fullname(), IndIdent, IndVal)))
+            raise(ASN1ObjErr('{0}: invalid identifier {1} for the table constraint'\
+                  .format(self.fullname(), IndIdent)))
+        if claval is None:
+            raise(ASN1ObjErr('{0}: non-existent value {1} for identifier {2} in the table constraint'\
+                  .format(self.fullname(), IndVal, IndIdent)))
         else:
             try:
                 return claval[self._const_tab_id]
             except:
-                raise(ASN1ObjErr('{0}: unable to select ident {1} within table value'\
+                raise(ASN1ObjErr('{0}: non-existent ident {1} within table constraint value'\
                       .format(self.fullname(), self._const_tab_id)))
     
     
@@ -531,11 +534,8 @@ class ASN1Obj(Element):
         else:
             assert()
     
-    def get_obj_by_path(self, path):
-        """
-        select an object by navigating in a relative way into a root object 
-        according to the submitted path
-        """
+    def _get_obj_by_path(self, path):
+        # this is used for solving table constraint lookups
         obj = self
         for p in path:
             if p == '..':
@@ -544,11 +544,8 @@ class ASN1Obj(Element):
                 obj = obj._cont[p]
         return obj
     
-    def get_val_by_path(self, path):
-        """
-        select a value be navigating in a relative way into a root object value
-        according to the submitted path
-        """
+    def _get_val_by_path(self, path):
+        # this is used for solving table constraint lookups
         obj = self
         for p in path:
             if p == '..':
@@ -562,6 +559,8 @@ class ASN1Obj(Element):
         returns the root object containing self in case self is within a 
         constructed or CLASS object
         """
+        # WNG: in case an object from a CLASS has been inserted after a table
+        # constraint lookup, the parent will be incorrect 
         par = self._parent
         while par is not None:
             par = self._parent
@@ -572,6 +571,8 @@ class ASN1Obj(Element):
         returns the list of successive objects containing self up to the root one
         in case self is within a constructed or CLASS object
         """
+        # WNG: in case an object from a CLASS has been inserted after a table
+        # constraint lookup, the parent will be incorrect 
         par   = self._parent
         chain = []
         while par is not None:
