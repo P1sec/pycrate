@@ -1,0 +1,95 @@
+IPAddrAndASCertExtn-2010 { iso(1) identified-organization(3) dod(6)
+            internet(1) security(5) mechanisms(5) pkix(7) mod(0)
+            id-mod-ip-addr-and-as-ident-2(72) }
+   DEFINITIONS EXPLICIT TAGS ::=
+   BEGIN
+      EXPORTS ALL;
+
+      IMPORTS
+
+      -- PKIX specific OIDs and arcs --
+      id-pe
+      FROM PKIX1Explicit-2009 { iso(1) identified-organization(3) dod(6) internet(1)
+          security(5) mechanisms(5) pkix(7) id-mod(0) id-mod-pkix1-explicit-02(51)}
+
+      EXTENSION
+      FROM PKIX-CommonTypes-2009 { iso(1) identified-organization(3) dod(6) internet(1)
+          security(5) mechanisms(5) pkix(7) id-mod(0) id-mod-pkixCommon-02(57)}
+      ;
+
+      --
+      --  Extensions contains the set of extensions defined in this
+      --      module
+      --
+      --  These are intended to be placed in public key certificates
+      --     and thus should be added to the CertExtensions extension
+      --     set in PKIXImplicit-2009 defined for [RFC5280]
+      --
+
+      Extensions EXTENSION ::= {
+         ext-pe-ipAddrBlocks | ext-pe-autonomousSysIds
+      }
+
+      -- IP Address Delegation Extension OID --
+
+      ext-pe-ipAddrBlocks EXTENSION ::= {
+        SYNTAX IPAddrBlocks
+        IDENTIFIED BY id-pe-ipAddrBlocks
+      }
+
+      id-pe-ipAddrBlocks  OBJECT IDENTIFIER ::= { id-pe 7 }
+
+      -- IP Address Delegation Extension Syntax --
+
+      IPAddrBlocks        ::= SEQUENCE OF IPAddressFamily
+
+      IPAddressFamily     ::= SEQUENCE { -- AFI & opt SAFI --
+         addressFamily        OCTET STRING (SIZE (2..3)),
+         ipAddressChoice      IPAddressChoice }
+
+      IPAddressChoice     ::= CHOICE {
+         inherit              NULL, -- inherit from issuer --
+         addressesOrRanges    SEQUENCE OF IPAddressOrRange }
+
+      IPAddressOrRange    ::= CHOICE {
+         addressPrefix        IPAddress,
+         addressRange         IPAddressRange }
+
+      IPAddressRange      ::= SEQUENCE {
+         min                  IPAddress,
+         max                  IPAddress }
+
+      IPAddress           ::= BIT STRING
+
+      -- Autonomous System Identifier Delegation Extension OID --
+
+      ext-pe-autonomousSysIds EXTENSION ::= {
+        SYNTAX ASIdentifiers
+        IDENTIFIED BY id-pe-autonomousSysIds
+      }
+
+      id-pe-autonomousSysIds  OBJECT IDENTIFIER ::= { id-pe 8 }
+
+      -- Autonomous System Identifier Delegation Extension Syntax --
+
+      ASIdentifiers       ::= SEQUENCE {
+          asnum               [0] ASIdentifierChoice OPTIONAL,
+          rdi                 [1] ASIdentifierChoice OPTIONAL }
+          (WITH COMPONENTS {..., asnum PRESENT} |
+           WITH COMPONENTS {..., rdi PRESENT})
+
+      ASIdentifierChoice  ::= CHOICE {
+         inherit              NULL, -- inherit from issuer --
+         asIdsOrRanges        SEQUENCE OF ASIdOrRange }
+
+      ASIdOrRange         ::= CHOICE {
+          id                  ASId,
+          range               ASRange }
+
+      ASRange             ::= SEQUENCE {
+          min                 ASId,
+          max                 ASId }
+
+      ASId                ::= INTEGER
+
+   END

@@ -1,0 +1,47 @@
+BinarySigningTimeModule-2010
+         { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
+           pkcs-9(9) smime(16) modules(0)
+           id-mod-binSigningTime-2009(55) }
+   DEFINITIONS IMPLICIT TAGS ::=
+   BEGIN
+     IMPORTS
+
+     -- From PKIX-CommonTypes-2009 [RFC5912]
+
+     ATTRIBUTE
+       FROM PKIX-CommonTypes-2009
+         { iso(1) identified-organization(3) dod(6) internet(1)
+           security(5) mechanisms(5) pkix(7) id-mod(0)
+           id-mod-pkixCommon-02(57) }
+    ;
+
+     --
+     -- BinaryTime Definition
+     --
+     --  BinaryTime contains the number seconds since
+     --  midnight Jan 1, 1970 UTC.
+     --  Leap seconds are EXCLUDED from the computation.
+     --
+
+     BinaryTime ::= INTEGER (0..MAX)
+
+     --
+     -- Signing Binary Time Attribute
+     --
+     --   The binary signing time should be added to
+     --   SignedAttributeSet and AuthAttributeSet in CMS [RFC5652]
+     --   and to AuthEnvDataAttributeSet in [RFC5083] with the
+     --   new modules in this document, RFC 6268.
+     --
+
+     aa-binarySigningTime ATTRIBUTE ::= {
+       TYPE BinarySigningTime
+       IDENTIFIED BY id-aa-binarySigningTime }
+
+     id-aa-binarySigningTime OBJECT IDENTIFIER ::= { iso(1)
+       member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
+       smime(16) aa(2) 46 }
+
+     BinarySigningTime ::= BinaryTime
+
+   END

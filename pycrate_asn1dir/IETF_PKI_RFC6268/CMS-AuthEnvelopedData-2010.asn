@@ -1,0 +1,59 @@
+CMS-AuthEnvelopedData-2010
+     {iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-9(9)
+     smime(16) modules(0) id-mod-cmsAuthEnvData-2009(57) }
+ DEFINITIONS IMPLICIT TAGS ::=
+ BEGIN
+ IMPORTS
+
+ CMSVersion, EncryptedContentInfoType{},
+   MessageAuthenticationCode, OriginatorInfo, RecipientInfos,
+   CONTENT-TYPE, Attributes{}, ATTRIBUTE, CONTENT-ENCRYPTION,
+   AlgorithmIdentifier{},
+   aa-signingTime, aa-messageDigest, aa-contentType
+ FROM CryptographicMessageSyntax-2010 { iso(1) member-body(2) us(840) rsadsi(113549)
+      pkcs(1) pkcs-9(9) smime(16) modules(0) id-mod-cms-2009(58) }
+
+ ContentEncryptionAlgs
+ FROM CMS-AES-CCM-and-AES-GCM-2009 { iso(1) member-body(2) us(840) rsadsi(113549) 
+     pkcs(1) pkcs-9(9) smime(16) modules(0) id-mod-cms-aes-ccm-gcm-02(44) }
+ ;
+
+ ContentTypes CONTENT-TYPE ::= {ct-authEnvelopedData, ... }
+
+ ct-authEnvelopedData CONTENT-TYPE ::= {
+   TYPE AuthEnvelopedData IDENTIFIED BY id-ct-authEnvelopedData
+ }
+
+ id-ct-authEnvelopedData OBJECT IDENTIFIER ::=
+   {iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-9(9)
+   smime(16) ct(1) 23}
+
+ AuthEnvelopedData ::= SEQUENCE {
+   version CMSVersion,
+   originatorInfo [0] IMPLICIT OriginatorInfo OPTIONAL,
+   recipientInfos RecipientInfos,
+   authEncryptedContentInfo EncryptedContentInfo,
+   authAttrs [1] IMPLICIT AuthAttributes OPTIONAL,
+   mac MessageAuthenticationCode,
+   unauthAttrs [2] IMPLICIT UnauthAttributes OPTIONAL
+ }
+
+ EncryptedContentInfo ::=
+   EncryptedContentInfoType { AuthContentEncryptionAlgorithmIdentifier }
+
+ AuthContentEncryptionAlgorithmIdentifier ::= AlgorithmIdentifier
+   {CONTENT-ENCRYPTION, {AuthContentEncryptionAlgorithmSet}}
+
+ AuthContentEncryptionAlgorithmSet CONTENT-ENCRYPTION ::= {
+   ContentEncryptionAlgs, ...}
+
+ AuthAttributes ::= Attributes{{AuthEnvDataAttributeSet}}
+
+ UnauthAttributes ::= Attributes{{UnauthEnvDataAttributeSet}}
+
+ AuthEnvDataAttributeSet ATTRIBUTE ::= {
+   aa-contentType | aa-messageDigest | aa-signingTime, ... }
+
+ UnauthEnvDataAttributeSet ATTRIBUTE ::= {...}
+
+ END

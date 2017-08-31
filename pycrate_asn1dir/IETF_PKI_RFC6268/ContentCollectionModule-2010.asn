@@ -1,0 +1,59 @@
+ContentCollectionModule-2010
+      { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
+        pkcs-9(9) smime(16) modules(0) id-mod-context-Collect-2009(56) }
+  DEFINITIONS IMPLICIT TAGS ::=
+  BEGIN
+    IMPORTS
+
+    -- From CryptographicMessageSyntax-2010 [RFC6268]
+
+    CONTENT-TYPE, ContentInfo
+      FROM CryptographicMessageSyntax-2010 { iso(1) member-body(2) us(840) 
+         rsadsi(113549) pkcs(1) pkcs-9(9) smime(16) modules(0) id-mod-cms-2009(58) }
+
+    AttributeSet{}, ATTRIBUTE
+      FROM PKIX-CommonTypes-2009 { iso(1) identified-organization(3) dod(6) internet(1)
+          security(5) mechanisms(5) pkix(7) id-mod(0) id-mod-pkixCommon-02(57) }
+    ;
+
+    --
+    --  An object set of all content types defined by this module.
+    --    This is to be added to ContentSet in the CMS module
+    --
+
+    ContentSet CONTENT-TYPE ::= {
+        ct-ContentCollection | ct-ContentWithAttributes, ...
+    }
+
+    --
+    -- Content Collection Content Type and Object Identifier
+    --
+
+    ct-ContentCollection CONTENT-TYPE ::= {
+      TYPE ContentCollection IDENTIFIED BY id-ct-contentCollection }
+
+    id-ct-contentCollection OBJECT IDENTIFIER ::= {
+      iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-9(9)
+      smime(16) ct(1) 19 }
+
+    ContentCollection ::= SEQUENCE SIZE (1..MAX) OF ContentInfo
+
+    --
+    -- Content With Attributes Content Type and Object Identifier
+    --
+
+    ct-ContentWithAttributes CONTENT-TYPE ::= {
+      TYPE ContentWithAttributes IDENTIFIED BY id-ct-contentWithAttrs }
+
+    id-ct-contentWithAttrs OBJECT IDENTIFIER ::= {
+      iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-9(9)
+      smime(16) ct(1) 20 }
+
+    ContentWithAttributes ::= SEQUENCE {
+       content  ContentInfo,
+       attrs    SEQUENCE SIZE (1..MAX) OF AttributeSet
+                                               {{ ContentAttributeSet }}
+    }
+
+     ContentAttributeSet ATTRIBUTE ::= { ... }
+  END

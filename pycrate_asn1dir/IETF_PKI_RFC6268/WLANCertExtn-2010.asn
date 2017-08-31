@@ -1,0 +1,64 @@
+WLANCertExtn-2010
+     { iso(1) identified-organization(3) dod(6) internet(1)
+       security(5) mechanisms(5) pkix(7) id-mod(0)
+       id-mod-wlan-extns-2(73) }
+
+  DEFINITIONS IMPLICIT TAGS ::=
+  BEGIN
+    EXPORTS ALL;
+
+    IMPORTS
+
+    EXTENSION, ATTRIBUTE
+    FROM PKIX-CommonTypes-2009 {iso(1) identified-organization(3) dod(6) internet(1) 
+      security(5) mechanisms(5) pkix(7) id-mod(0) id-mod-pkixCommon-02(57)}
+
+    id-pe, id-kp
+    FROM PKIX1Explicit-2009 { iso(1) identified-organization(3) dod(6) internet(1) 
+      security(5) mechanisms(5) pkix(7) id-mod(0) id-mod-pkix1-explicit-02(51)}
+
+    id-aca
+    FROM PKIXAttributeCertificate-2009 { iso(1) identified-organization(3) dod(6) 
+      internet(1) security(5) mechanisms(5) pkix(7) id-mod(0) id-mod-attribute-cert-02(47)}
+
+    ;
+
+    -- Extended Key Usage Values
+
+    KeyUsageValues OBJECT IDENTIFIER ::= {
+        id-kp-eapOverPPP | id-kp-eapOverLAN
+    }
+
+    id-kp-eapOverPPP  OBJECT IDENTIFIER  ::=  { id-kp 13 }
+
+    id-kp-eapOverLAN  OBJECT IDENTIFIER  ::=  { id-kp 14 }
+
+
+    -- Wireless LAN SSID Extension
+
+
+    ext-pe-wlanSSID EXTENSION ::= {
+      SYNTAX SSIDList
+      IDENTIFIED BY id-pe-wlanSSID
+      CRITICALITY {FALSE}
+    }
+
+    id-pe-wlanSSID  OBJECT IDENTIFIER  ::=  { id-pe 13 }
+
+    SSIDList  ::=  SEQUENCE SIZE (1..MAX) OF SSID
+
+    SSID  ::=  OCTET STRING (SIZE (1..32))
+
+    -- Wireless LAN SSID Attribute Certificate Attribute
+    -- Uses same syntax as the certificate extension: SSIDList
+
+
+     at-aca-wlanSSID ATTRIBUTE ::= {
+       TYPE SSIDList
+       IDENTIFIED BY id-aca-wlanSSID
+     }
+
+
+     id-aca-wlanSSID  OBJECT IDENTIFIER ::= { id-aca 7 }
+
+    END

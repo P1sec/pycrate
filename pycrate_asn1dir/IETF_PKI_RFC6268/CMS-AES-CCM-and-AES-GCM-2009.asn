@@ -1,0 +1,95 @@
+CMS-AES-CCM-and-AES-GCM-2009
+      { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
+      pkcs-9(9) smime(16) modules(0) id-mod-cms-aes-ccm-gcm-02(44) }
+
+DEFINITIONS IMPLICIT TAGS ::=
+BEGIN
+
+  EXPORTS ALL;
+  IMPORTS
+
+  CONTENT-ENCRYPTION, SMIME-CAPS
+  FROM AlgorithmInformation-2009 {
+      iso(1) identified-organization(3) dod(6) internet(1) security(5)
+      mechanisms(5) pkix(7) id-mod(0)
+      id-mod-algorithmInformation-02(58)};
+
+  --  Add this algorithm set to include all of the algorithms defined in
+  --      this document
+
+  ContentEncryptionAlgs CONTENT-ENCRYPTION ::= {
+     cea-aes128-CCM | cea-aes192-CCM | cea-aes256-CCM |
+     cea-aes128-GCM | cea-aes192-GCM | cea-aes256-GCM, ... }
+
+  SMimeCaps SMIME-CAPS ::= {
+     cea-aes128-CCM.&smimeCaps |
+     cea-aes192-CCM.&smimeCaps |
+     cea-aes256-CCM.&smimeCaps |
+     cea-aes128-GCM.&smimeCaps |
+     cea-aes192-GCM.&smimeCaps |
+     cea-aes256-GCM.&smimeCaps,
+     ...
+  }
+
+  --  Defining objects
+
+  aes OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16) us(840)
+      organization(1) gov(101) csor(3) nistAlgorithms(4) 1 }
+
+  cea-aes128-CCM CONTENT-ENCRYPTION ::= {
+          IDENTIFIER id-aes128-CCM
+          PARAMS TYPE CCMParameters ARE required
+          SMIME-CAPS { IDENTIFIED BY id-aes128-CCM }
+  }
+  id-aes128-CCM OBJECT IDENTIFIER ::= { aes 7 }
+
+  cea-aes192-CCM CONTENT-ENCRYPTION ::= {
+          IDENTIFIER id-aes192-CCM
+          PARAMS TYPE CCMParameters ARE required
+          SMIME-CAPS { IDENTIFIED BY id-aes192-CCM }
+  }
+  id-aes192-CCM OBJECT IDENTIFIER ::= { aes 27 }
+
+  cea-aes256-CCM CONTENT-ENCRYPTION ::= {
+          IDENTIFIER id-aes256-CCM
+          PARAMS TYPE CCMParameters ARE required
+          SMIME-CAPS { IDENTIFIED BY id-aes256-CCM }
+  }
+  id-aes256-CCM OBJECT IDENTIFIER ::= { aes 47 }
+
+  cea-aes128-GCM CONTENT-ENCRYPTION ::= {
+          IDENTIFIER id-aes128-GCM
+          PARAMS TYPE GCMParameters ARE required
+          SMIME-CAPS { IDENTIFIED BY id-aes128-GCM }
+  }
+  id-aes128-GCM OBJECT IDENTIFIER ::= { aes 6 }
+
+  cea-aes192-GCM CONTENT-ENCRYPTION ::= {
+          IDENTIFIER id-aes128-GCM
+          PARAMS TYPE GCMParameters ARE required
+          SMIME-CAPS { IDENTIFIED BY id-aes192-GCM }
+  }
+  id-aes192-GCM OBJECT IDENTIFIER ::= { aes 26 }
+
+  cea-aes256-GCM CONTENT-ENCRYPTION ::= {
+          IDENTIFIER id-aes128-GCM
+          PARAMS TYPE GCMParameters ARE required
+          SMIME-CAPS { IDENTIFIED BY id-aes256-GCM }
+  }
+  id-aes256-GCM OBJECT IDENTIFIER ::= { aes 46 }
+
+  -- Parameters for AlgorithmIdentifier
+
+  CCMParameters ::= SEQUENCE {
+      aes-nonce         OCTET STRING (SIZE(7..13)),
+      aes-ICVlen        AES-CCM-ICVlen DEFAULT 12 }
+
+  AES-CCM-ICVlen ::= INTEGER (4 | 6 | 8 | 10 | 12 | 14 | 16)
+
+  GCMParameters ::= SEQUENCE {
+      aes-nonce        OCTET STRING, -- recommended size is 12 octets
+      aes-ICVlen       AES-GCM-ICVlen DEFAULT 12 }
+
+  AES-GCM-ICVlen ::= INTEGER (12 | 13 | 14 | 15 | 16)
+
+END
