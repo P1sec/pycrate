@@ -187,7 +187,7 @@ Alternative single value: Python 2-tuple
                 Obj = const_tr[ident]
                 txt = Obj._from_asn1(txt)
                 if Obj._typeref is not None:
-                    self._val = (Obj._typeref.called, Obj._val)
+                    self._val = (Obj._typeref.called[1], Obj._val)
                 else:
                     self._val = (Obj.TYPE, Obj._val)
                 return txt
@@ -515,7 +515,7 @@ class ANY(OPEN):
 # when a specification requires it
 
 
-class EXT(_CONSTRUCT):
+class EXT(SEQ):
     """
     ASN.1 context switching type EXTERNAL object
     
@@ -551,7 +551,7 @@ class EXT(_CONSTRUCT):
     TAG   = 8
 
 
-class EMB_PDV(_CONSTRUCT):
+class EMB_PDV(SEQ):
     """
     ASN.1 context switching type EMBEDDED PDV object
     
@@ -583,7 +583,7 @@ class EMB_PDV(_CONSTRUCT):
     TAG   = 11
 
 
-class CHAR_STR(_CONSTRUCT):
+class CHAR_STR(SEQ):
     """
     ASN.1 context switching type CHARACTER STRING object
     
