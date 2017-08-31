@@ -206,7 +206,7 @@ def init_modules(*args, **kwargs):
                     if not Obj._SILENT:
                         asnlog('init_modules: different OID objects (%s, %s) with same OID value (%r)'\
                                % (Obj._name, GLOB.OID[Obj._val], Obj._val))
-                else:
+                elif Obj._val is not None:
                     GLOB.OID[Obj._val] = Obj._name
     #
     # lists all objects defined
