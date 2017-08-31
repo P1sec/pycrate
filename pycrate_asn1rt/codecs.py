@@ -1226,8 +1226,9 @@ class ASN1CodecBER(ASN1Codec):
             else:
                 l = len(val)
                 GEN.append( cla.encode_len_ws(l) )
-                if l:
-                    GEN.append( Buf('V', val=val, bl=8*l, rep=REPR_HEX) )
+                #if l:
+                #    GEN.append( Buf('V', val=val, bl=8*l, rep=REPR_HEX) )
+                GEN.append( Buf('V', val=val, bl=8*l, rep=REPR_HEX) )
             return Envelope('TLV', GEN=tuple(GEN))
         elif isinstance(val, (tuple, list)):
             # constructed object encoding
