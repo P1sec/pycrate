@@ -82,22 +82,30 @@ ASN_SPECS_ITUT = {
 # SNMP MIB has an unsupported syntax (because of the use of a MACRO),
 # and many assignment splitted on multi-lines, hence it is not compiled
 ASN_SPECS_IETF = {
-    'LDAP'           : 'IETF_LDAP-v3',
+    'LDAP'           : 'IETF_LDAP_RFC4511',
+    'Kerberos'       : 'IETF_Kerberos_RFC4120',
     'SNMP'           : 'IETF_SNMP', # MIBs and OBJECT-TYPE macro are disabled
     'PKIXAttrCert'   : 'IETF_PKI_RFC3281',  
     'CMSAlgs'        : 'IETF_PKI_RFC3370',
     'PKCS1'          : 'IETF_PKI_RFC3447',
     'CMSAes'         : 'IETF_PKI_RFC3565',
+    #'OAEP'           : 'IETF_PKI_RFC4055', # old-school 1988 ANY object
     'CMSFirmWrap'    : 'IETF_PKI_RFC4108',
     'ERS'            : 'IETF_PKI_RFC4998',
-    'PKIX1'          : 'IETF_PKI_RFC5280',
     'ExtSecServices' : 'IETF_PKI_RFC5035',
     'AuthEnvData'    : 'IETF_PKI_RFC5083',
     'AESCCMGCM'      : 'IETF_PKI_RFC5084',
+    'PKIX1'          : 'IETF_PKI_RFC5280',
+    'PKIXAlgo08'     : 'IETF_PKI_RFC5480',
     'CMS2004'        : 'IETF_PKI_RFC5652',
     'PKIXAttrCert08' : 'IETF_PKI_RFC5755',
     'RFC5911'        : 'IETF_PKI_RFC5911',
     'RFC5912'        : 'IETF_PKI_RFC5912',
+    'AsymKeyPkg'     : 'IETF_PKI_RFC5958',
+    'CMSAndPKIX08'   : 'IETF_PKI_RFC6268',
+    #'PKCS12'         : 'IETF_PKI_RFC7292', # missing other PKCS modules
+    # TODO: Pycrate X509-specific module, gather / combines modules from 5911, 5912 and 6268
+    #'PKI'            : 'Pycrate_PKI',
     }
 
 # GSMA, ETSI and ITU-T core network telecom protocols
@@ -115,6 +123,9 @@ ASN_SPECS_CORE = {
     'SS'        : '3GPP_SS_24080-c00',
     # GSMA spec
     'TAP3'      : 'GSMA_TAP3_17102014',
+    # Pycrate TCAP-specific modules
+    'TCAP_MAP'  : 'Pycrate_TCAP_MAP',
+    'TCAP_CAP'  : 'Pycrate_TCAP_CAP',
     }
 
 # ETSI Intelligent Transport System
@@ -143,6 +154,8 @@ _ASN_SPECS_PROP = {
     'J2735'     : 'J2735',
     # ICAO aeronautic
     'ICAO9303'  : 'ICAO_9303',
+    # some RSA PKCS stuff
+    'PKCS'      : 'RSA_PKCS'
     }
 
 ASN_SPECS = dict()
