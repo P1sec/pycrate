@@ -34,6 +34,10 @@ from math      import log, ceil
 from functools import reduce
 from struct    import pack, unpack
 
+
+from .err                import *
+from pycrate_asn1c.utils import clean_text
+
 # pycrate_core is used for basic library-wide functions / variables
 # (i.e. log(), python_version, integer_types, bytes_types, str_types)
 # and for encoding / decoding routines
@@ -51,7 +55,6 @@ from pycrate_core.base   import *
 from pycrate_core.charpy import *
 Atom.REPR_MAXLEN = 512
 
-from pycrate_asn1c.utils import clean_text
 
 # -----------------------------------------------------------------------------#
 # asn1-wide Python routines
@@ -496,4 +499,90 @@ def get_obj_by_tag(ObjOpen, tag):
             elif ConstObj.TYPE == TYPE_CHOICE and tag in ConstObj._cont_tags:
                 return ConstObj
     return None
+
+#------------------------------------------------------------------------------#
+# selection by path
+#------------------------------------------------------------------------------#
+
+def get_obj_at(Obj, path):
+    """return the object within `Obj' according to the given path
+    
+    Args:
+        Obj: ASN1Obj instance
+        path: list of str
+    
+    Returns:
+        ASN1Obj instance
+    
+    Raises:
+        ASN1Err, if `path' is invalid
+    """
+    for p in path:
+        try:
+            if Obj.TYPE in (TYPE_CHOICE, TYPE_SEQ, TYPE_SET, TYPE_REAL, 
+                            TYPE_EXT, TYPE_EMB_PDV, TYPE_CHAR_STR):
+                Obj = Obj._cont[p]
+            elif Cur.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
+                # p is not used
+                Obj = Obj._cont
+            elif Obj.TYPE in (TYPE_OPEN, TYPE_ANY):
+                Obj = Obj._get_const_tr()[p]
+            elif Obj.TYPE in (TYPE_BIT_STR, TYPE_OCT_STR):
+                # p is not used
+                Obj = Obj._const_cont
+            else:
+                raise()
+        except:
+            raise(ASN1Err('invalid object selection with path {0!r}, from {1}'\
+                  .format(path, p)))
+    return Obj  
+
+def get_val_at(Obj, path):
+    """return the value within `Obj' value according to the given path
+    
+    Args:
+        Obj: ASN1Obj instance
+        path: list of str or int
+    
+    Returns:
+        value of an ASN1Obj instance
+    
+    Raises:
+        ASN1Err, if `Obj' has no defined value or `path' is invalid
+    """
+    if Obj._val is None:
+        raise(ASN1Err('{0} has no defined value'.format(Obj.fullname())))
+    val = Obj._val
+    for p in path:
+        try:
+            if Obj.TYPE in (TYPE_SEQ, TYPE_SET, TYPE_EXT, TYPE_EMB_PDV, TYPE_CHAR_STR):
+                Obj = Obj._cont[p]
+                val = val[p]
+            elif Obj.TYPE == TYPE_REAL:
+                Obj = None
+                if instance(p, integer_types):
+                    val = val[p]
+                elif p == 'mantissa':
+                    val = val[0]
+                elif p == 'base':
+                    val = val[1]
+                elif p == 'exponent':
+                    val = val[2]
+                else:
+                    raise()
+            elif Obj.TYPE in (TYPE_CHOICE, TYPE_ANY, TYPE_OPEN, TYPE_BIT_STR, TYPE_OCT_STR):
+                Obj = get_obj_at(Obj, [p])
+                if p == val[0]:
+                    val = val[1]
+                else:
+                    raise()
+            elif Obj.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
+                Obj = Obj._cont
+                val = val[p]
+            else:
+                raise()
+        except:
+            raise(ASN1Err('invalid value selection with path {0!r}, from {1}'\
+                  .format(path, p)))
+    return val
 
