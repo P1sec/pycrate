@@ -1263,12 +1263,17 @@ Specific attributes:
                 if m == 1:
                     next = True
                 elif m > 1:
-                    if not self._SILENT:
-                        asnlog('SEQUENCE._decode_ber_cont_ws: %s, unable to determine '\
-                               'if component %s is present (err %i)' % (self.fullname(), Comp._name, m))
-                    if Comp._name in self._root_mand:
-                        # component is mandatory, so we will still try to decode it
+                    # hack: in case content is not extensible and Comp is the last
+                    # component of the content, we can consider it present
+                    if Comp._name == self._cont._index[-1] and self._ext is None:
                         next = True
+                    else:
+                        if not self._SILENT:
+                            asnlog('SEQUENCE._decode_ber_cont_ws: %s, unable to determine '\
+                                   'if component %s is present (err %i)' % (self.fullname(), Comp._name, m))
+                        if Comp._name in self._root_mand:
+                            # component is mandatory, so we will still try to decode it
+                            next = True
             #
             if not next and Comp._name in self._root_mand:
                 # missing mandatory component
@@ -1368,12 +1373,17 @@ Specific attributes:
                 if m == 1:
                     next = True
                 elif m > 1:
-                    if not self._SILENT:
-                        asnlog('SEQUENCE._decode_ber_cont: %s, unable to determine '\
-                               'if component %s is present (err %i)' % (self.fullname(), Comp._name, m))
-                    if Comp._name in self._root_mand:
-                        # component is mandatory, so we will still try to decode it
+                    # hack: in case content is not extensible and Comp is the last
+                    # component of the content, we can consider it present
+                    if Comp._name == self._cont._index[-1] and self._ext is None:
                         next = True
+                    else:
+                        if not self._SILENT:
+                            asnlog('SEQUENCE._decode_ber_cont_ws: %s, unable to determine '\
+                                   'if component %s is present (err %i)' % (self.fullname(), Comp._name, m))
+                        if Comp._name in self._root_mand:
+                            # component is mandatory, so we will still try to decode it
+                            next = True
             #
             if not next:
                 if Comp._name in self._root_mand:
