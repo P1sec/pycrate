@@ -190,7 +190,7 @@ Specific constraints attributes:
             if m:
                 txt = txt[m.end():].strip()
                 txt = self._const_cont.from_asn1(txt)
-                self._val = (const_ref, self._const_cont._val)
+                self._val = (ident, self._const_cont._val)
                 return txt
         raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'.format(self.fullname(), txt)))
     
@@ -942,7 +942,7 @@ Specific constraints attributes:
             if m:
                 txt = txt[m.end():].strip()
                 txt = self._const_cont.from_asn1(txt)
-                self._val = (const_ref, self._const_cont._val)
+                self._val = (ident, self._const_cont._val)
                 return txt
         raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'.format(self.fullname(), txt)))
     
