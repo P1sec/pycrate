@@ -211,7 +211,7 @@ Specific attributes:
                     ind = ASN1CodecPER.decode_intunconst(char, 0, name='I')
                 else:
                     # 3) normally-small index value (< 64)
-                    nsv = char.get_uint(6)
+                    ind = char.get_uint(6)
                     if ASN1CodecPER.ALIGNED:
                         ASN1CodecPER._off[-1] += 6
                 if ind < len(self._ext):
@@ -431,7 +431,7 @@ Specific attributes:
                 val = Cho[-1]._val
                 # restore parents and set value
                 for i in range(len(_par)):
-                    Cho[i] = _par[i]
+                    Cho[i]._parent = _par[i]
                 for ident in reversed(path[1:]):
                     val = (ident, val)
                 self._val = (path[0], val)
