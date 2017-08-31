@@ -848,7 +848,7 @@ class ASN1Obj(Element):
             char = buf
         # decode the whole char buffer into tag, length and value boundary
         if single:
-            TLV = ASN1CodecBER.decode_single(char)
+            TLV = [ASN1CodecBER.decode_single(char)[0]]
         else:
             TLV = ASN1CodecBER.decode_all(char)
         char_cur, char_lb = char._cur, char._len_bit
@@ -955,7 +955,7 @@ class ASN1Obj(Element):
             char = buf
         # decode the whole char buffer into tag, length and value boundary
         if single:
-            TLV = ASN1CodecBER.decode_single_ws(char)
+            TLV = [ASN1CodecBER.decode_single_ws(char)[0]]
         else:
             TLV = ASN1CodecBER.decode_all_ws(char)
         char_cur, char_lb = char._cur, char._len_bit
