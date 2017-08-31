@@ -410,20 +410,11 @@ class LAI(Envelope):
         Uint16('LAC', val=0, rep=REPR_HEX)
         )
     
-    def __init__(self, *args, **kw):
-        val = None
-        if 'val' in kw:
-            val = kw['val']
-            del kw['val']
-        Envelope.__init__(self, *args, **kw)
-        if val:
-            if isinstance(val, (tuple, list)):
-                self.encode(val)
-            elif isinstance(val, dict):
-                if 'PLMN' in val:
-                    self[0].encode(val['PLMN'])
-                if 'LAC' in val:
-                    self[1].set_val(val['LAC'])
+    def set_val(self, vals):
+        if isinstance(vals, dict) and 'plmn' in vals and 'lac' in vals:
+            self.encode(vals['plmn'], vals['lac'])
+        else:
+            Envelope.set_val(self, vals)
     
     def encode(self, *args):
         if args:
@@ -502,56 +493,11 @@ class ID(Envelope):
     _IDDigit = IDDigit()
     _IDGroup = IDGroup()
     
-    def __init__(self, *args, **kw):
-        """Initializes an instance of ID
-        
-        Args:
-            *args: nothing or envelope name (str)
-            **kw:
-                name (str): envelope name if no args
-                desc (str): additional envelope description
-                hier (int): envelope hierarchy level
-                trans (bool): envelope transparency
-                type (int): IDTYPE_*
-                ident: see self.encode(ident, type)
-        """
-        # iterator index initialization, required by __iter__()
-        # current iterator index:
-        self._it = 0
-        # saved iterator indexes, when nested iterations happen
-        self._it_saved = [] 
-        
-        # envelope name in kw, or first args
-        if len(args):
-            self._name = str(args[0])
-        elif 'name' in kw:
-            self._name = str(kw['name'])
-
-        # if not provided, it's the class name
+    def set_val(self, vals):
+        if isinstance(vals, dict) and 'type' in vals and 'ident' in vals:
+            self.encode(vals['type'], vals['ident'])
         else:
-            self._name = self.__class__.__name__
-        
-        # envelope description customization
-        if 'desc' in kw:
-            self._desc = str(kw['desc'])
-        
-        # envelope hierarchy
-        if 'hier' in kw:
-            self._hier = kw['hier']
-        
-        # envelope transparency
-        if 'trans' in kw:
-            self._trans = kw['trans']
-        
-        if self._SAFE_STAT:
-            self._chk_hier()
-            self._chk_trans()
-        
-        # content list generation
-        self._content, self._by_id, self._by_name = [], [], []
-        
-        if 'type' in kw and 'ident' in kw:
-            self.encode(kw['type'], kw['ident'])
+            Envelope.set_val(self, vals[0])
     
     def decode(self):
         """returns the mobile identity type and value
