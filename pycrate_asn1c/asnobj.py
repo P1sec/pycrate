@@ -4709,10 +4709,16 @@ class ASN1Obj(object):
             raise(ASN1ProcTextErr(
                   '{0}: value identifier {1}, mode mismatch, {2} instead of VALUE'\
                   .format(self.fullname(), ident, obj._mode)))
-        if (isinstance(type_exp, str_types) and obj._type != type_exp) or \
+        if type_exp == TYPE_ANY and obj._type != type_exp:
+            # ASN.1 1988 old-school construction
+            raise(ASN1NotSuppErr(
+                  '{0}: ASN.1 1988 ANY type assigned with another type\'s value, '\
+                  '{1} of type {2} and value {3}'\
+                  .format(self.fullname(), ident, obj._type, obj._val)))
+        elif (isinstance(type_exp, str_types) and obj._type != type_exp) or \
         (isinstance(type_exp, (tuple, list)) and obj._type not in type_exp):
             raise(ASN1ProcTextErr(
-                  '{0}: value identifier {1}, type mismatch, {2} instead of {3!r}'\
+                  '{0}: value identifier {1}, type mismatch, {2} instead of {3}'\
                   .format(self.fullname(), ident, obj._type, type_exp)))
     
     def _parse_value_null(self, text):
