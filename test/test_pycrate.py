@@ -121,8 +121,12 @@ class TestPycrate(unittest.TestCase):
     # asn1rt
     def test_asn1rt(self):
         print('[<>] testing pycrate_asn1rt')
+        test_rt_base()
         test_rrc3g()
         test_lteran()
+        test_tcap_map()
+        test_tcap_cap()
+        test_X509()
     
     # csn1
     def test_csn1(self):
