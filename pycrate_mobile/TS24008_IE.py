@@ -139,19 +139,6 @@ class BufBCD(Buf):
     _chars = '0123456789*#abc'
     
     def __init__(self, *args, **kw):
-        """Initializes an instance of BufBCD
-        
-        Args:
-            *args: nothing or bufBCD name (str)
-            **kw:
-                name (str): bufBCD name if no args
-                desc (str): additional bufBCD description
-                rep (int in cls.REPR_TYPES): bufBCD representation type 
-                hier (int): bufBCD hierarchy level
-                bl (int): bufBCD length in bits
-                val (digit string): bufBCD value
-                trans (bool): bufBCD transparency
-        """
         # element name in kw, or first args
         if len(args):
             self._name = str(args[0])
@@ -160,36 +147,35 @@ class BufBCD(Buf):
         # if not provided, it's the class name
         else:
             self._name = self.__class__.__name__
-        
         # element description customization
         if 'desc' in kw:
             self._desc = str(kw['desc'])
-        
         # element representation customization
         if 'rep' in kw and kw['rep'] in self.REPR_TYPES:
             self._rep = kw['rep']
-        
         # element hierarchy
         if 'hier' in kw:
             self._hier = kw['hier']
-        
         # element bit length
         if 'bl' in kw:
             self._bl = kw['bl']
-        
         # element value
         if 'val' in kw:
-            self.encode(kw['val'])
-        
+            self.set_val(kw['val'])
         # element transparency
         if 'trans' in kw:
             self._trans = kw['trans']
-        
         if self._SAFE_STAT:
             self._chk_hier()
             self._chk_bl()
             self._chk_val()
             self._chk_trans()
+    
+    def set_val(self, val):
+        if isinstance(val, str):
+            self.encode(val)
+        else:
+            Buf.set_val(self, val)
     
     def decode(self):
         """returns the encoded string of digits
@@ -266,7 +252,7 @@ class BufBCD(Buf):
 class PLMN(Buf):
     """Child of pycrate_core.base.Buf object
     with additional encode() and decode() capabilities in order to handle
-    BCD encoding
+    PLMN encoding
     """
     
     _bl  = 24 # 3 bytes
@@ -274,18 +260,6 @@ class PLMN(Buf):
     _dic = MNC_dict
     
     def __init__(self, *args, **kw):
-        """Initializes an instance of BufBCD
-        
-        Args:
-            *args: nothing or bufBCD name (str)
-            **kw:
-                name (str): bufBCD name if no args
-                desc (str): additional bufBCD description
-                rep (int in cls.REPR_TYPES): bufBCD representation type 
-                hier (int): bufBCD hierarchy level
-                val (digit string): bufBCD value
-                trans (bool): bufBCD transparency
-        """
         # element name in kw, or first args
         if len(args):
             self._name = str(args[0])
@@ -294,32 +268,35 @@ class PLMN(Buf):
         # if not provided, it's the class name
         else:
             self._name = self.__class__.__name__
-        
         # element description customization
         if 'desc' in kw:
             self._desc = str(kw['desc'])
-        
         # element representation customization
         if 'rep' in kw and kw['rep'] in self.REPR_TYPES:
             self._rep = kw['rep']
-        
         # element hierarchy
         if 'hier' in kw:
             self._hier = kw['hier']
-        
+        # element bit length
+        if 'bl' in kw:
+            self._bl = kw['bl']
         # element value
         if 'val' in kw:
-            self.encode(kw['val'])
-        
+            self.set_val( kw['val'] )
         # element transparency
         if 'trans' in kw:
             self._trans = kw['trans']
-        
         if self._SAFE_STAT:
             self._chk_hier()
             self._chk_bl()
             self._chk_val()
             self._chk_trans()
+    
+    def set_val(self, val):
+        if isinstance(val, str_types):
+            self.encode(val)
+        else:
+            Buf.set_val(self, val)
     
     def decode(self):
         """returns the encoded string of digits
@@ -375,7 +352,7 @@ class PLMN(Buf):
             val_repr = self.decode()
             if self._dic and val_repr in self._dic:
                 mccmnc = self._dic[val_repr]
-                val_repr += ' (%s / %s)' % (mccmnc[2], mccmnc[3])
+                val_repr += ' (%s.%s)' % (mccmnc[2], mccmnc[3])
         elif self._rep == REPR_RAW:
             val_repr = repr(self.get_val())
         elif self._rep == REPR_BIN:
@@ -755,56 +732,6 @@ class PriorityLevel(Envelope):
 
 class PLMNList(Array):
     _GEN = PLMN()
-    
-    def __init__(self, *args, **kw):
-        val = None
-        if 'val' in kw:
-            val = kw['val']
-            del kw['val']
-        Array.__init__(self, *args, **kw)
-        if val:
-            self.encode(val)
-    
-    def decode(self):
-        """returns the list of encoded string of digits
-        """
-        plmnl = []
-        for val in self.get_val():
-            if python_version < 3:
-                val = [ord(c) for c in val]
-            ret = []
-            for o in num:
-                msb, lsb = o>>4, o&0xf
-                if lsb == 0xF:
-                    break
-                else:
-                    ret.append( str(lsb) )
-                if msb == 0xF:
-                    break
-                else:
-                    ret.append( str(msb) )
-            plmnl.append( ''.join(ret) )
-        return plmnl
-    
-    def encode(self, plmnl=[]):
-        """encode the list of given PLMN string and store the resulting buffer 
-        in self._val
-        """
-        val = []
-        for plmn in plmnl:
-            if not plmn.isdigit():
-                raise(PycrateErr('{0}: invalid PLMN string to encode, {1!r}'\
-                      .format(self._name, bcd)))
-            if len(plmn) == 5:
-                plmn += 'F'
-            elif len(plmn) != 6:
-                raise(PycrateErr('{0}: invalid PLMN string to encode, {1!r}'\
-                      .format(self._name, bcd)))
-            #
-            plmn = list(plmn)
-            plmn[1::2], plmn[::2] = plmn[::2], plmn[1::2]
-            val.append( unhexlify(''.join(plmn)) )
-        self.set_val(val)
 
 
 #------------------------------------------------------------------------------#
@@ -1027,13 +954,14 @@ class EmergNum(Envelope):
     _GEN = (
         Uint8('Len'),
         Uint('spare', val=0, bl=3),
-        EmergServiceCat()[:5],
-        BufBCD('EmergNum')
+        EmergServiceCat('ServiceCat')[:5],
+        BufBCD('Num')
         )
     
     def __init__(self, *args, **kw):
         Envelope.__init__(self, *args, **kw)
         self[2]._name = 'EmergServiceCat' # otherwise, it says 'slice'
+        self._by_name[2] = 'EmergServiceCat' # otherwise, it says 'slice'
         self[0].set_valauto( lambda: 1 + self[3].get_len() )
         self[3].set_blauto( lambda: 8*(self[0]()-1) )
 
