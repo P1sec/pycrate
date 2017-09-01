@@ -23,3 +23,7 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+
+# Winmerge / gedit backup file
+*.py~
+*.bak
