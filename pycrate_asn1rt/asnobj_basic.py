@@ -279,7 +279,7 @@ Specific attribute:
         if self._cont and self._val in self._cont_rev:
             return '%i -- %s --' % (self._val, self._cont_rev[self._val])
         else:
-            return repr(self._val)
+            return '%i' % self._val
     
     ###
     # conversion between internal value and ASN.1 PER encoding
