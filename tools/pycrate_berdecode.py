@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+﻿#!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate

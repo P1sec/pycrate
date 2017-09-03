@@ -1,10 +1,10 @@
-#!/usr/bin/python
+﻿#!/usr/bin/python
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
 # * Version : 0.1
 # *
-# * Copyright � 2017. Benoit Michau. ANSSI.
+# * Copyright © 2017. Benoit Michau. ANSSI.
 # *
 # * This program is free software: you can redistribute it and/or modify
 # * it under the terms of the GNU General Public License version 2 as published
