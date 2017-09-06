@@ -1337,12 +1337,12 @@ def uint_to_bytes(val, bitlen=1):
         if len_byte == 1:
             return bchr(val)
         else:
-            if isinstance(val, _MPZ_T):
+            if _WITH_MPZ and isinstance(val, _MPZ_T):
                 return int(val).to_bytes(len_byte, 'big')
             else:
                 return val.to_bytes(len_byte, 'big')
     else:
-        if isinstance(val, _MPZ_T):
+        if _WITH_MPZ and isinstance(val, _MPZ_T):
             return int(val<<(8-len_bit)).to_bytes(len_byte+1, 'big')
         else:
             return (val<<(8-len_bit)).to_bytes(len_byte+1, 'big')
@@ -1400,7 +1400,7 @@ def uint_le_to_bytes(val, bitlen=8):
     elif len_byte == 1:
         return bchr(val)
     else:
-        if isinstance(val, _MPZ_T):
+        if _WITH_MPZ and isinstance(val, _MPZ_T):
             return int(val).to_bytes(len_byte, 'little')
         else:
             return val.to_bytes(len_byte, 'little')
