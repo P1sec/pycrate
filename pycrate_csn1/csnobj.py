@@ -86,14 +86,14 @@ class CSN1Obj(Element):
             if self._num != 1:
                 # multiple iteration of the object's value
                 content   = []
-                self_num  = self._num
-                self_val  = self._val
+                _num      = self._num
+                _val      = self._val
                 self._num = 1
-                for val in self_val:
+                for val in _val:
                     self._val = val
                     content.append( self._repr_val() )
-                self._num = self_num
-                self._val = self_val
+                self._num = _num
+                self._val = _val
                 if self._name:
                     ret = '<%s: [%s]>' % (self._name, ', '.join(content))
                 else:
@@ -125,14 +125,14 @@ class CSN1Obj(Element):
             if self._num != 1:
                 # multiple iteration of the object's value
                 content   = []
-                self_num  = self._num
-                self_val  = self._val
+                _num      = self._num
+                _val      = self._val
                 self._num = 1
-                for val in self_val:
+                for val in _val:
                     self._val = val
                     content.append( self._show_val().replace('\n', '\n ') )
-                self._num = self_num
-                self._val = self_val
+                self._num = _num
+                self._val = _val
                 if self._name:
                     ret = '<%s: [%s]>' % (self._name, ',\n'.join(content))
                 else:
