@@ -196,7 +196,7 @@ class CSN1Obj(Element):
             self._val = val
         elif self._num == -1:
             val = []
-            while True:
+            while char.len_bit():
                 try:
                     char_cur = char._cur
                     self._from_char_obj(char)
@@ -709,14 +709,14 @@ class CSN1Ref(CSN1Obj):
     
     def _from_char_obj(self, char):
         obj_val = self._obj._val
-        self._obj._from_char_obj(char)
+        self._obj._from_char(char)
         self._val = self._obj._val
         self._obj._val = obj_val
     
     def _to_pack_obj(self):
         obj_val = self._obj._val
         self._obj._val = self._val
-        ret = self._obj._to_pack_obj()
+        ret = self._obj._to_pack()
         self._obj._val = obj_val
         return ret
     
