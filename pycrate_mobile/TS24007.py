@@ -34,7 +34,7 @@
 
 from binascii import hexlify
 
-from pycrate_core.utils  import PycrateErr, log
+from pycrate_core.utils  import *
 from pycrate_core.elt    import Element, Envelope, REPR_RAW, REPR_HEX, REPR_BIN
 from pycrate_core.base   import *
 from pycrate_core.repr   import *
@@ -50,20 +50,53 @@ class Layer3(Envelope):
     ENV_SEL_TRANS = False
     
     def __init__(self, *args, **kw):
+        if 'val' in kw:
+            val = kw['val']
+            del kw['val']
+        else:
+            val = None
         Envelope.__init__(self, *args, **kw)
         # build a list of (tag length, tag value) for the optional part
-        # and configure IE set by **kw as non-transparent
+        # configure IE set by **kw as non-transparent and set their value
         self._opts = []
-        if 'val' in kw:
-            kw_val = True
+        if val is None:
+            # go faster by just looking for optional IE
+            for ie in self._content:
+                if isinstance(ie, (Type1TV, Type2, Type3TV, Type4TLV, Type6TLVE)):
+                    # optional IE
+                    T = ie[0]
+                    self._opts.append( (T.get_bl(), T(), ie) )
         else:
-            kw_val = False
-        for ie in self._content:
-            if isinstance(ie, (Type1TV, Type2, Type3TV, Type4TLV, Type6TLVE)):
-                T = ie[0]
-                self._opts.append( (T.get_bl(), T(), ie) )
-                if kw_val and ie._name in kw['val']:
-                    ie._trans = False
+            for ie in self._content:
+                if isinstance(ie, (Type1V, Type3V, Type4LV, Type6LVE)) and \
+                val and ie._name in val:
+                    # setting value for non-optional IE
+                    if isinstance(val[ie._name], bytes_types):
+                        # setting raw value
+                        ie['V'].set_val(val[ie._name])
+                    else:
+                        # setting embedded IE structure
+                        ie.set_IE(val=val[ie._name])
+                elif isinstance(ie, (Type1TV, Type3TV, Type4TLV, Type6TLVE)):
+                    # optional IE
+                    T = ie[0]
+                    self._opts.append( (T.get_bl(), T(), ie) )
+                    if val and ie._name in val:
+                        ie._trans = False
+                        if isinstance(val[ie._name], bytes_types):
+                            # setting raw value
+                            ie['V'].set_val(val[ie._name])
+                        else:
+                            # setting embedded IE structure
+                            ie.set_IE(val=val[ie._name])
+                elif isinstance(ie, Type2):
+                    # optional Tag-only IE
+                    self._opts.append( (8, ie[0](), ie) )
+                    if val and ie._name in val:
+                        ie._trans = False
+                elif val and ie._name in val:
+                    ie.set_val(val[ie._name])
+                
     
     def reset_opts(self):
         """reset the optional part of the message
