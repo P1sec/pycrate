@@ -16,7 +16,7 @@ setup(
               "pycrate_csn1",
               "pycrate_csn1dir",
               "pycrate_mobile",
-              #"pycrate_corenet",
+              "pycrate_corenet",
               ],
     test_suite="test.test_pycrate",
     
