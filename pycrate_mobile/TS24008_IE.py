@@ -396,11 +396,11 @@ class LAI(Envelope):
     def encode(self, *args):
         if args:
             self[0].encode(args[0])
-        if len(args) > 1:
-            self[1].set_val(args[1])
+            if len(args) > 1:
+                self[1].set_val(args[1])
     
     def decode(self):
-        return self[0].decode(), self[1].get_val()
+        return (self[0].decode(), self[1].get_val())
 
 
 #------------------------------------------------------------------------------#
@@ -960,8 +960,8 @@ class EmergNum(Envelope):
     
     def __init__(self, *args, **kw):
         Envelope.__init__(self, *args, **kw)
-        self[2]._name = 'EmergServiceCat' # otherwise, it says 'slice'
-        self._by_name[2] = 'EmergServiceCat' # otherwise, it says 'slice'
+        self[2]._name = 'ServiceCat' # otherwise, it says 'slice'
+        self._by_name[2] = 'ServiceCat' # otherwise, it says 'slice'
         self[0].set_valauto( lambda: 1 + self[3].get_len() )
         self[3].set_blauto( lambda: 8*(self[0]()-1) )
 
@@ -1354,30 +1354,23 @@ class RAI(Envelope):
         Uint8('RAC', val=0, rep=REPR_HEX)
         )
     
-    def __init__(self, *args, **kw):
-        val = None
-        if 'val' in kw:
-            val = kw['val']
-            del kw['val']
-        Envelope.__init__(self, *args, **kw)
-        if val:
-            if isinstance(val, (tuple, list)):
-                self.encode(val)
-            elif isinstance(val, dict):
-                if 'PLMN' in val:
-                    self[0].encode(val['PLMN'])
-                if 'LAC' in val:
-                    self[1].set_val(val['LAC'])
-                if 'RAC' in val:
-                    self[2].set_val(val['RAC'])
+    def set_val(self, vals):
+        if isinstance(vals, dict) and \
+        'plmn' in vals and 'lac' in vals and 'rac' in vals:
+            self.encode(vals['plmn'], vals['lac'], vals['rac'])
+        else:
+            Envelope.set_val(self, vals)
     
-    def encode(self, rai=[]):
-        self[0].encode(rai[0])
-        self[1].set_val(rai[1])
-        self[2].set_val(rai[2])
+    def encode(self, *args):
+        if args:
+            self[0].encode(args[0])
+            if len(args) > 1:
+                self[1].set_val(args[1])
+                if len(args) > 2:
+                    self[2].set_val(args[2])
     
     def decode(self):
-        return [self[0].decode(), self[1].get_val(), self[2].get_val()]
+        return (self[0].decode(), self[1].get_val(), self[2].get_val())
 
 
 #------------------------------------------------------------------------------#
@@ -1394,7 +1387,7 @@ _UpdateResult_dict = {
 
 class UpdateResult(Envelope):
     _GEN = (
-        Uint('FollowProc', val=0, bl=1),
+        Uint('FollowOnProc', val=0, bl=1),
         Uint('Result', val=0, bl=3, dic=_UpdateResult_dict)
         )
 
@@ -1413,7 +1406,7 @@ _UpdType_dict = {
 
 class UpdateType(Envelope):
     _GEN = (
-        Uint('FollowProc', val=0, bl=1),
+        Uint('FollowOnReq', val=0, bl=1),
         Uint('Type', val=0, bl=3, dic=_UpdType_dict)
         )
 
