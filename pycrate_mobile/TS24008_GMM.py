@@ -139,6 +139,8 @@ class GMMAttachAccept(Layer3):
         Type2('CellNotif', val={'T':0x8C}, trans=True),
         Type4TLV('EquivPLMNList', val={'T':0x4A, 'V':3*b'\0'}, IE=PLMNList(), trans=True),
         Type1TV('NetFeatSupp', val={'T':0xA, 'V':0}, IE=NetFeatSupp(), trans=True),
+        Type4TLV('EmergNumList', val={'T':0x34, 'V':b'\x02\x01\x00'}, IE=EmergNumList(), trans=True),
+        Type1TV('ReqMSInfo', val={'T':0xA, 'V':0}, IE=ReqMSInfo(), trans=True),
         Type4TLV('T3319', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer(), trans=True),
         Type4TLV('T3323', val={'T':0x38, 'V':b'\0'}, IE=GPRSTimer(), trans=True),
         Type4TLV('T3312Ext', val={'T':0x39, 'V':b'\0'}, IE=GPRSTimer3(), trans=True),
@@ -234,7 +236,7 @@ class GMMDetachAcceptMO(Layer3):
 
 class GMMPTMSIReallocationCommand(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':16})._content) + (
-        Type4LV('AllocPTMSI', val={'V':b'\xf4\0\0\0\0'}, IE=ID(), trans=True),
+        Type4LV('AllocPTMSI', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
         RAI(),
         Uint('spare', val=0, bl=4),
         ForceStdby(),
@@ -262,7 +264,7 @@ class GMMAuthenticationCipheringRequest(Layer3):
         Uint('CiphAlgo', val=0, bl=4, dic=CiphAlgo_dict),
         Uint('ACRef', val=0, bl=4),
         ForceStdby(),
-        Type3TV('RAND', val={'T':0x21, 'V':16*b'\0'}, trans=True),
+        Type3TV('RAND', val={'T':0x21, 'V':16*b'\0'}, bl={'V':128}, trans=True),
         Type1TV('CKSN', val={'T':0x8, 'V':0}, dic=CKSN_dict, trans=True),
         Type4TLV('AUTN', val={'T':0x28, 'V':16*b'\0'}, trans=True),
         Type4TLV('ReplayedMSNetCap', val={'T':0x31, 'V':b'\0\0'},
@@ -283,7 +285,7 @@ class GMMAuthenticationCipheringResponse(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':19})._content) + (
         Uint('spare', val=0, bl=4),
         Uint('ACRef', val=0, bl=4),
-        Type3TV('RES', val={'T':0x22, 'V':4*b'\0'}, trans=True),
+        Type3TV('RES', val={'T':0x22, 'V':4*b'\0'}, bl={'V':32}, trans=True),
         Type4TLV('IMEISV', val={'T':0x23, 'V':b'\x03\0\0\0\0\0\0\0\xf0'}, IE=ID(), trans=True),
         Type4TLV('RESExt', val={'T':0x29, 'V':4*b'\0'}, trans=True),
         Type4TLV('MAC', val={'T':0x43, 'V':4*b'\0'}, trans=True),
@@ -347,7 +349,7 @@ class GMMRoutingAreaUpdateRequest(Layer3):
         Type4LV('MSRACap', val={'V':5*b'\0'}, IE=MS_RA_capability_value_part),
         Type3TV('OldPTMSISign', val={'T':0x19, 'V':b'\0\0\0'}, bl={'V':24}, trans=True),
         Type3TV('ReqREADYTimer', val={'T':0x17, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer(), trans=True),
-        Type3TV('DRXParam', val={'T':0x27, 'V':b'\0\0'}, bl={'V':8}, IE=DRXParam(), trans=True),
+        Type3TV('DRXParam', val={'T':0x27, 'V':b'\0\0'}, bl={'V':16}, IE=DRXParam(), trans=True),
         Type1TV('TMSIStatus', val={'T':0x9, 'V':0}, IE=TMSIStatus(), trans=True),
         Type4TLV('PTMSI', val={'T':0x18, 'V':b'\xf4\0\0\0\0'}, IE=ID(), trans=True),
         Type4TLV('MSNetCap', val={'T':0x31, 'V':b'\0\0'}, IE=MS_network_capability_value_part, trans=True),
