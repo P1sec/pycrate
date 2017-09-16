@@ -35,18 +35,29 @@ from pycrate_csn1dir.rcvnpdunumlist import Receive_N_PDU_Number_list_value
 
 
 def test_msnetcap():
-    Obj = MS_network_capability_value_part
+    Obj = MS_network_capability_value_part.clone()
     buf = unhexlify('e5e034')
     val = [1, 1, 1, 0, 1, 0, 1, 1, [1, 1, 0, 0, 0, 0], 0, 0, 0, 1, 1, 0, 1, 0, 0]
     #
     Obj.from_bytes(buf)
-    rep = Obj.__repr__()
+    rep = Obj.repr()
     assert( Obj.get_val() == val )
     assert( Obj.to_bytes() == buf )
-    
+
+
+def test_mscm3():
+    Obj = Classmark_3_Value_part.clone()
+    # TODO: get a buffer to test against
+
+
+def test_rcvnpdunumlist():
+    Obj = Receive_N_PDU_Number_list_value.clone()
+    # TODO: get a buffer to test against
+
+
 def test_msracap():
-    Obj = MS_RA_capability_value_part
-    buf = b'\x1aSC+%\x9e\xf9\x89\x00@\x00\x9d\xd9\xc63\x12\x00\x80\x01:3,f$\x01\x00\x02`'
+    Obj = MS_RA_capability_value_part.clone()
+    buf = unhexlify('1a53432b259ef9890040009dd9c633120080013a332c662401000260')
     val = [[['0001', # Access capabilities struct 1
            [82,
             [[4,
@@ -96,98 +107,96 @@ def test_msracap():
               1],
              []]]],
           ['1', # more Access capabiities struct
-           [[['0111', # Access capabilities struct 2
-              [51,
-               [[4,
-                 ['0'],
-                 1,
-                 1,
-                 0,
-                 0,
-                 ['0'],
-                 ['1', 2],
-                 0,
-                 1,
-                 1,
-                 0,
-                 0,
-                 0,
-                 1,
-                 ['0'],
-                 0,
-                 ['1', 0],
-                 '0',
-                 0,
-                 0,
-                 0,
-                 1,
-                 0,
-                 0,
-                 ['0'],
-                 0,
-                 0,
-                 ['0'],
-                 0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 1,
-                 0,
-                 1,
-                 1],
-                []]]],
-             ['1', # more Access capabiities struct
-              [[['0100', # Access capabilities struct 3
-                 [51,
-                  [[1,
-                    ['0'],
-                    1,
-                    1,
-                    0,
-                    0,
-                    ['0'],
-                    ['1', 2],
-                    0,
-                    1,
-                    1,
-                    0,
-                    0,
-                    0,
-                    1,
-                    ['0'],
-                    0,
-                    ['1', 0],
-                    '0',
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    ['0'],
-                    0,
-                    0,
-                    ['0'],
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    1,
-                    1],
-                   []]]],
-                ['0']], # no more Access capabiities struct
-               [0, 0, 0, 0]]]], # spare bits
-            []]]], # spare bits
-         []] # spare bits
+           [['0111', # Access capabilities struct 2
+             [51,
+              [[4,
+                ['0'],
+                1,
+                1,
+                0,
+                0,
+                ['0'],
+                ['1', 2],
+                0,
+                1,
+                1,
+                0,
+                0,
+                0,
+                1,
+                ['0'],
+                0,
+                ['1', 0],
+                '0',
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                ['0'],
+                0,
+                0,
+                ['0'],
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                1,
+                1],
+               []]]],
+            ['1', # more Access capabiities struct
+             [['0100', # Access capabilities struct 3
+               [51,
+                [[1,
+                  ['0'],
+                  1,
+                  1,
+                  0,
+                  0,
+                  ['0'],
+                  ['1', 2],
+                  0,
+                  1,
+                  1,
+                  0,
+                  0,
+                  0,
+                  1,
+                  ['0'],
+                  0,
+                  ['1', 0],
+                  '0',
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  ['0'],
+                  0,
+                  0,
+                  ['0'],
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  1,
+                  1],
+                 []]]],
+              ['0']]]]]], # no more Access capabiities struct
+         [[0, 0, 0, 0]]] # spare bits
     #
     Obj.from_bytes(buf)
-    rep = Obj.__repr__()
+    rep = Obj.repr()
     assert( Obj.get_val() == val )
     assert( Obj.to_bytes() == buf )
 
