@@ -251,7 +251,7 @@ class CSN1Obj(Element):
         return pack_val( *self._to_pack() )[0]
     
     # TODO: implement _from_char / _to_pack methods building structures
-    # with Envelope() and Atom() elements
+    # with Envelope() and Atom() elements... hard work
     def from_bytes_ws(self, buf):
         pass
     
@@ -740,12 +740,7 @@ class CSN1SelfRef(CSN1Obj):
     def _repr_val(self):
         global _root_obj
         root_obj_val   = _root_obj._val
-        #
-        # TODO: I can't explain myself why this recursive case requires 
-        # to take only the 1st item of the value...
-        #_root_obj._val = self._val
-        _root_obj._val = self._val[0]
-        #
+        _root_obj._val = self._val
         root_obj_repr  = _root_obj.repr()
         _root_obj._val = root_obj_val
         return root_obj_repr
@@ -753,12 +748,7 @@ class CSN1SelfRef(CSN1Obj):
     def _show_val(self):
         global _root_obj
         root_obj_val   = _root_obj._val
-        #
-        # TODO: I can't explain myself why this recursive case requires 
-        # to take only the 1st item of the value...
-        #_root_obj._val = self._val
-        _root_obj._val = self._val[0]
-        #
+        _root_obj._val = self._val
         root_obj_repr  = _root_obj.show()
         _root_obj._val = root_obj_val
         return root_obj_repr
@@ -769,7 +759,7 @@ class CSN1SelfRef(CSN1Obj):
             raise(CSN1Err('{0}: no root object referenced'.format(self._name)))
         # preserve already existing root object value
         root_obj_val = _root_obj._val
-        _root_obj._from_char_obj(char)
+        _root_obj._from_char(char)
         self._val = _root_obj._val
         # restore initial value
         _root_obj._val = root_obj_val
@@ -781,7 +771,7 @@ class CSN1SelfRef(CSN1Obj):
         # preserve already existing root object value
         root_obj_val = _root_obj._val
         _root_obj._val = self._val
-        ret = _root_obj._to_pack_obj()
+        ret = _root_obj._to_pack()
         # restore initial value
         _root_obj._val = root_obj_val
         return ret
