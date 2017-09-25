@@ -214,7 +214,7 @@ pycrate_corenet
 ---------------
 
 This subdirectory implements a signaling server that supports an Iuh interface
-(including HNBAP and RUA/RANAP) for interfacing with 3G femtocells, and jus enough
+(including HNBAP and RUA/RANAP) for interfacing with 3G femtocells, and just enough
 of IuCS and IuPS stacks to support the attachment and mobility of mobiles connecting
 through the femtocells.
 
