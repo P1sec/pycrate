@@ -104,6 +104,7 @@ and opening an issue with concrete debugging information
 * writing new test cases for more coverage (have a look at the *test/* directory)
 * sending captures / real-world data that can be used for writing new test cases
 * writing new parts of the wiki (have a look at the [pycrate wiki](https://github.com/ANSSI-FR/pycrate/wiki)) 
+
 Getting contributions is extremely important to encourage the continuous development
 of the library, and to confirm the choice made to open-source it.
 
