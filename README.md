@@ -76,9 +76,10 @@ Contact and support
 -------------------
 
 As the unique developper of the library (yet), I am the only person to contact:
-michau \[dot\] benoit \[at\] gmail \[dot\] com
+michau \[dot\] benoit \[at\] gmail \[dot\] com.
 This library is free software, however, specific support requires time and may not
-be always possible. In case you need specific support, consider contributing first.
+be always possible. In case you need specific support, please consider contributing 
+first.
 
 In case you are using this library in any of your project and you find it useful,
 do not hesitate to send me an email. It is always a pleasure to know where 
