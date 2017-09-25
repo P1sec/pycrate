@@ -69,22 +69,42 @@ The whole library is licensed under GPLv2 and is compatible with more recent ver
 of the GPL: all licensed files have an header making it self-explanatory.
 
 
-Contact and support
-==================
+Contributing
+============
 
-As the unique developper of the library, I am the only person to contact:
+Contact and support
+-------------------
+
+As the unique developper of the library (yet), I am the only person to contact:
 michau \[dot\] benoit \[at\] gmail \[dot\] com
+This library is free software, however, specific support requires time and may not
+be always possible. In case you need specific support, consider contributing first.
+
+In case you are using this library in any of your project and you find it useful,
+do not hesitate to send me an email. It is always a pleasure to know where 
+code provided on the Internet can end up...
 
 
 Extending the library
-=====================
+---------------------
 
 If you are willing to extend the library, do not hesitate to contact me by
-email or through the github service. Any patch or submission is very welcome!
-Moreover, in case you are using this library in any of your project and you
-find it useful, do not hesitate to drop me an email.
-It is always a pleasure to know where code provided on the Internet can end 
-up...
+email or preferably through the github service (ideally, open a pull request).
+For important changes, please elaborate about your need and provide some justification.
+Any patch or submission is always very welcome!
+
+
+Other contributions
+-------------------
+
+In case you do not feel like a developer, you can still contribute in many ways:
+* highlighting specific issues in the inner-working of the library,
+and opening an issue with concrete debugging information 
+* writing new test cases for more coverage (have a look at the *test/* directory)
+* sending captures / real-world data that can be used for writing new test cases
+* writing new parts of the wiki (have a look at the [pycrate wiki](https://github.com/ANSSI-FR/pycrate/wiki)) 
+Getting contributions is extremely important to encourage the continuous development
+of the library, and to confirm the choice made to open-source it.
 
 
 Components
