@@ -210,6 +210,15 @@ This subdirectory implements several 3GPP NAS protocol formats:
 * *TS24301_IE* with formats supporting some information elements from TS 24.301
 
 
+pycrate_mobile
+--------------
+
+This subdirectory implements a signaling server that supports an Iuh interface
+(including HNBAP and RUA/RANAP) for interfacing with 3G femtocells, and jus enough
+of IuCS and IuPS stacks to support the attachment and mobility of mobiles connecting
+through the femtocells.
+
+
 Usage
 =====
 
