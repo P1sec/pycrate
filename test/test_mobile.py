@@ -28,6 +28,23 @@
 
 from timeit import timeit
 
-from pycrate_mobile.GSMTAP import *
+from pycrate_mobile.GSMTAP      import *
+from pycrate_mobile.TS24008_IE  import *
+from pycrate_mobile.TS24008_MM  import *
+from pycrate_mobile.TS24008_GMM import *
+from pycrate_mobile.NAS         import *
 
-# TODO
+
+nas_pdu_mo = map(unhexlify, (
+    '05080200f11040005705f44c6a94c033035758a6', # LAUReq
+    '080103e5e004010a0005f4fffa01f700f1104000100c0a53432b259ef989004000081705', # AttachReq
+    ))
+
+
+def test_nas_mo():
+    for pdu in nas_pdu_mo:
+        m, e = parse_L3_MO(pdu)
+        if e != 0:
+            assert()
+        assert( m.to_bytes() == pdu )
+

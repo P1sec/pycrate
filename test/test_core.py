@@ -581,3 +581,7 @@ def test_perf():
     print('test_elt_2: {0:.4f}'.format(Th))
     
     print('[+] core total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te+Tf+Tg+Th))
+
+if __name__ == '__main__':
+    test_perf()
+

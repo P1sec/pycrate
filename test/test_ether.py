@@ -75,3 +75,6 @@ def test_perf_ip(eth_frames=eth_frames):
     Tc = timeit(pkt.to_bytes, number=100)
     print('pkt.to_bytes: {0:.4f}'.format(Tb+Tc))
 
+if __name__ == '__main__':
+    test_perf_ip(eth_frames)
+

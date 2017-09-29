@@ -37,6 +37,7 @@ from test.test_media  import *
 from test.test_ether  import *
 from test.test_csn1   import *
 from test.test_asn1rt import *
+from test.test_mobile import *
 from pycrate_asn1c.proc import compile_text, compile_spec, compile_all, \
                                generate_modules, PycrateGenerator, \
                                GLOBAL, ASN_SPECS
@@ -133,6 +134,11 @@ class TestPycrate(unittest.TestCase):
         print('[<>] testing pycrate_csn1')
         test_msnetcap()
         test_msracap()
+    
+    # mobile
+    def test_mobile(self):
+        print('[<>] testing pycrate_mobile')
+        test_nas_mo()
 
 
 def test_perf_all():
