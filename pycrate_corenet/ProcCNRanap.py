@@ -21,7 +21,7 @@
 # * 02110-1301, USA.
 # *
 # *--------------------------------------------------------
-# * File Name : pycrate_corenet/ProcCNRanap.py
+# * File Name : pycrate_corenet/ProcRANRanap.py
 # * Created : 2017-07-13
 # * Authors : Benoit Michau 
 # *--------------------------------------------------------
@@ -297,6 +297,7 @@ class RANAPIuRelease(RANAPSigProc):
             if self.Iu.GMM.state != 'INACTIVE':
                 self.Iu.GMM.state = 'IDLE'
         #
+        self._log('INF', 'UE disconnected')
         # disconnect the Iu interface to the RNC for the UE
         self.Iu.unset_ran()
         self.Iu.unset_ctx()
@@ -442,7 +443,7 @@ class RANAPRelocationResourceAllocation(RANAPSigProc):
         'suc': ({}, {}),
         'uns': ({}, {})
         }
-    
+
 
 class RANAPRelocationDetect(RANAPSigProc):
     """Relocation Detect: TS 25.413, section 8.8
@@ -711,6 +712,18 @@ class RANAPPaging(RANAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    def send(self):
+        # send the Paging command
+        if self.TRACK_PDU:
+            for pdu in self._snd:
+                self._pdu.append( (time(), 'DL', pdu) ) 
+        # remove from the Iu RANAP procedure stack
+        try:
+            del self.Iu.Proc[self.Code]
+        except:
+            pass
+        return self._snd
 
 
 class RANAPCommonID(RANAPSigProc):
@@ -857,7 +870,7 @@ class RANAPSecurityModeControl(RANAPSigProc):
             if 'Cause' not in self.UEInfo:
                 self._log('WNG', 'rejected without cause')
             else:
-                self._log('WNG', 'rejected with cause %r' % self.UEInfo['Cause'])
+                self._log('WNG', 'rejected with cause %r' % (self.UEInfo['Cause'], ))
             self.success = False
             self.Iu.reset_sec_ctx()
         else:
@@ -866,13 +879,17 @@ class RANAPSecurityModeControl(RANAPSigProc):
             secctx = self.Iu.SEC[self.Iu.SEC['CKSN']]
             try:
                 secctx['UEA'] = self.UEInfo['ChosenEncryptionAlgorithm']
+                uea = secctx['UEA']
             except:
                 secctx['UEA'] = None
+                uea = 0
             try:
                 secctx['UIA'] = self.UEInfo['ChosenIntegrityProtectionAlgorithm']
+                uia = 1 + secctx['UIA']
             except:
                 secctx['UIA'] = None
-            self._log('INF', 'accepted with UEA %r / UIA %i' % (secctx['UEA'], secctx['UIA']))
+                uia = 0
+            self._log('INF', 'accepted with UEA%i / UIA%i' % (uea, uia))
         #
         # remove from the Iu RANAP procedure stack
         try:

@@ -28,10 +28,21 @@
 #*/
 
 from .utils       import *
+from .ProcCNRua   import *
 from .ProcCNRanap import *
 
+# WNG: all procedures that call .require_smc() method need to be set in this LUT
+ProcAbbrLUT = {
+    'MMLocationUpdating'       : 'LU',
+    'MMConnectionEstablishment': 'CON',
+    'RRPagingResponse'         : 'PAG',
+    'GMMAttach'                : 'ATT',
+    'GMMRoutingAreaUpdating'   : 'RAU',
+    'GMMServiceRequest'        : 'SER',
+    }
 
-class _UEIuSigStack(SigStack):
+
+class UEIuSigStack(SigStack):
     
     # to keep track of all RANAP procedures
     TRACK_PROC = True
@@ -41,49 +52,20 @@ class _UEIuSigStack(SigStack):
     # reference to the HNBd
     RNC = None
     
-    #--------------------------------------------------------------------------#
-    # global security policy
-    #--------------------------------------------------------------------------#
-    # this will systematically bypass all auth and smc procedures during 
-    # UE signaling procedures
-    SEC_DISABLED = False
-    #
-    # format of the security context dict self.SEC:
-    # self.SEC is a dict of available 2G / 3G security contexts indexed by CKSN,
-    # and current CKSN in use
-    #
-    # when self.SEC['CKSN'] is not None, the context is enabled at the RNC, e.g.
-    # self.SEC = {'CKSN': 0,
-    #             0: {'CK': b'...', 'IK': b'...', 'UEA': 1, 'UIA': 0, 'CTX': 3},
-    #             ...}
-    # 
-    # a single security context contains:
-    # CK, IK: 16 bytes buffer, keys to be sent to the RNC during the smc procedure
-    # UEA, UIA: algo index, indicated by the RNC at the end of a successful smc procedure
-    # CTX: context of the authentication,
-    #    2 means 2G auth converted to 3G context
-    #    3 means 3G auth and native context
-    
-    #--------------------------------------------------------------------------#
-    # RANAPSecurityModeControl policy
-    #--------------------------------------------------------------------------#
-    # lists of algorithms priority
-    # -> il will be sent as is to the RNC into the SMC
-    # -> the RNC will deal with the UE to select one
-    SMC_UEA = [2, 1, 0] # UEA2, UEA1, UEA0
-    SMC_UIA = [1, 0]    # UIA2, UIA1, UIA0 is not defined in UMTS
-    #
-    # dummy security context in case an SMC has to be run 
-    # but no security context exists
-    SMC_DUMMY = {'CK': 16*b'\0', 'IK': 16*b'\0', 'UEA': None, 'UIA': []}
+    # core network domain (CS or PS)
+    DOM = None
     
     
     def _log(self, logtype, msg):
-        self.UE._log(logtype, '[%s: %i] %s' % (self.__class__.__name__, self.CtxId, msg))
+        self.UE._log(logtype, '[%s: %3i] %s' % (self.__class__.__name__, self.CtxId, msg))
     
     def __init__(self, ued, hnbd, ctx_id):
         self.UE = ued
         self.Server = ued.Server
+        if self.DOM == 'PS':
+            self._cndomind = 'ps-domain'
+        else:
+            self._cndomind = 'cs-domain'
         #
         # dict of ongoing RANAP procedures (indexed by their procedure code)
         self.Proc = {}
@@ -111,48 +93,18 @@ class _UEIuSigStack(SigStack):
         del self.RNC
         self.SEC['CKSN'] = None
     
+    def is_connected(self):
+        return self.RNC is not None
+    
     def set_ctx(self, ctx_id):
         self.CtxId = ctx_id
     
     def unset_ctx(self):
         self.CtxId = -1
     
-    def set_sec_ctx(self, cksn, ctx, vect):
-        if ctx == 3:
-            # 3G sec ctx
-            ctx = {'VEC': vect,
-                   'CTX': ctx,
-                   'CK' : vect[3],
-                   'IK' : vect[4],
-                   'UEA': self.SMC_UEA,
-                   'UIA': self.SMC_UIA}
-        else:
-            # ctx == 2, 2G sec ctx
-            # convert 2G Kc to 3G Ck, Ik
-            CK, IK = conv_C4(vect[2]), conv_C5(vect[2])
-            ctx = {'VEC': vect,
-                   'CTX': ctx,
-                   'CK' : CK,
-                   'IK' : IK,
-                   'UEA': self.SMC_UEA,
-                   'UIA': self.SMC_UIA}
-        self.SEC[cksn]   = ctx
-        self.SEC['CKSN'] = cksn
-    
-    def get_new_cksn(self):
-        for i in range(0, 7):
-            if i not in self.SEC:
-                return i
-        # all CKSN have been used, clear all of them except the current one
-        cur = self.SEC['CKSN']
-        l = list(range(0, 7))
-        if cur is not None:
-            l.remove(cur)
-        [self.SEC.pop(i) for i in l]
-        if cur == 0:
-            return 1
-        else:
-            return 0
+    #--------------------------------------------------------------------------#
+    # RANAP-related methods
+    #--------------------------------------------------------------------------#
     
     def process_ranap(self, buf):
         """process a RANAP PDU buffer sent by the RNC handling the UE connection
@@ -160,6 +112,9 @@ class _UEIuSigStack(SigStack):
         """
         # decode the RANAP PDU
         errcause = None
+        if not ranap_acquire():
+            self._log('ERR', 'unable to acquire the RANAP module')
+            return []
         try:
             PDU_RANAP.from_aper(buf)
         except:
@@ -180,6 +135,7 @@ class _UEIuSigStack(SigStack):
         elif self.DOM == 'PS' and self.UE.TRACE_ASN_RANAP_PS:
             self._log('TRACE_ASN_RANAP_PS_UL', '\n' + PDU_RANAP.to_asn1())
         pdu = PDU_RANAP()
+        ranap_release()
         #
         if pdu[0] == 'initiatingMessage':
             # RNC-initiated procedure, create it through the dispatcher
@@ -259,6 +215,9 @@ class _UEIuSigStack(SigStack):
     
     def _encode_pdu(self, pdus):
         ret = []
+        if not ranap_acquire():
+            self._log('ERR', 'unable to acquire the RANAP module')
+            return ret
         for pdu in pdus:
             try:
                 PDU_RANAP.set_val(pdu)
@@ -271,6 +230,7 @@ class _UEIuSigStack(SigStack):
                 elif self.DOM == 'PS' and self.UE.TRACE_ASN_RANAP_PS:
                     self._log('TRACE_ASN_RANAP_PS_DL', '\n' + PDU_RANAP.to_asn1())
                 ret.append( PDU_RANAP.to_aper() )
+        ranap_release()
         return ret
     
     def init_ranap_proc(self, ProcClass, **kw):
@@ -295,19 +255,57 @@ class _UEIuSigStack(SigStack):
         Proc.encode_pdu('ini', **kw)
         return Proc
     
-    def ret_ranap_dt(self, NAS_PDU):
-        # return a RANAPDirectTransfer with the NAS PDU to be sent
-        RanapProc = self.init_ranap_proc(RANAPDirectTransferCN,
-                                         NAS_PDU=NAS_PDU.to_bytes(),
-                                         SAPI='sapi-0')
-        if RanapProc:
-            return [RanapProc]
-        else:
-            return []
+    def clear(self):
+        # clears all running RANAP CS/PS procedures
+        for code in self.Proc.keys():
+            self.Proc[code].abort()
     
     #--------------------------------------------------------------------------#
-    # helper methods
+    # NAS-related methods
     #--------------------------------------------------------------------------#
+    
+    def ret_ranap_dt(self, NAS_PDU):
+        # return a RANAPDirectTransfer with the NAS PDU to be sent
+        try:
+            naspdu = NAS_PDU.to_bytes()
+        except Exception as err:
+            self._log('ERR', 'unable to encode downlink NAS PDU: %r' % err)
+        else:
+            RanapProc = self.init_ranap_proc(RANAPDirectTransferCN,
+                                             NAS_PDU=naspdu,
+                                             SAPI='sapi-0')
+            if RanapProc:
+                return [RanapProc]
+        return []
+    
+    def trigger_nas(self, RanapProc):
+        # this is used by IuCS/PS procedures to recall an ongoing NAS procedure
+        if RanapProc._cb is None:
+            # no callback set, this is actually useless
+            return []
+        NasProc = RanapProc._cb
+        NasTx = NasProc.postprocess(RanapProc)
+        return self._ret_ranap_proc(NasTx)
+    
+    #--------------------------------------------------------------------------#
+    # SMC and security-related methods
+    #--------------------------------------------------------------------------#
+    
+    def require_smc(self, Proc):
+        # check if a RANAPSecurityModeControl procedure is required
+        if self.SEC_DISABLED or self.SMC_DISABLED:
+            return False
+        #
+        elif ProcAbbrLUT[Proc.Name] in self.SMC_DISABLED_PROC:
+            return False
+        #
+        elif self.SEC['CKSN'] is None or self.SEC['CKSN'] not in self.SEC:
+            # no security context established, cannot run an smc
+            self._log('WNG', 'require_smc: no CKSN set, unable to run an SMC')
+            return False
+        #
+        else:
+            return True
     
     def get_smc_ies(self, cksn=None, newkey=False):
         # if CKSN is None, take the 1st available
@@ -352,21 +350,122 @@ class _UEIuSigStack(SigStack):
         return None
     
     def get_new_cksn(self):
-        ra = range(0, 7)
-        for cksn in ra:
-            if cksn not in self.SEC:
-                # return the 1st CKSN available
-                return cksn
-        # all CKSN are defined
-        if self.SEC['CKSN'] is None:
-            # delete all defined CKSN
-            [self.SEC.__delitem__(i) for i in ra]
-            # return the 1st
-            return 0
+        for i in range(0, 7):
+            if i not in self.SEC:
+                return i
+        # all CKSN have been used, clear all of them except the current one
+        cur = self.SEC['CKSN']
+        l = list(range(0, 7))
+        if cur is not None:
+            l.remove(cur)
+        [self.SEC.__delitem__(i) for i in l]
+        if cur == 0:
+            return 1
         else:
-            # delete all except the one in use
-            ra = list(ra)
-            ra.remove( self.SEC['CKSN'] )
-            [self.SEC.__delitem__(i) for i in ra]
-            return ra[0]
-
+            return 0
+    
+    def set_sec_ctx(self, cksn, ctx, vect):
+        if ctx == 3:
+            # 3G sec ctx
+            ctx = {'VEC': vect,
+                   'CTX': ctx,
+                   'CK' : vect[3],
+                   'IK' : vect[4],
+                   'UEA': self.SMC_UEA,
+                   'UIA': self.SMC_UIA}
+        else:
+            # ctx == 2, 2G sec ctx
+            # convert 2G Kc to 3G Ck, Ik
+            CK, IK = conv_C4(vect[2]), conv_C5(vect[2])
+            ctx = {'VEC': vect,
+                   'CTX': ctx,
+                   'CK' : CK,
+                   'IK' : IK,
+                   'UEA': self.SMC_UEA,
+                   'UIA': self.SMC_UIA}
+        self.SEC[cksn]   = ctx
+        self.SEC['CKSN'] = cksn
+    
+    #--------------------------------------------------------------------------#
+    # network-initiated method (fg task, to be used from the interpreter)
+    #--------------------------------------------------------------------------#
+    
+    def _send_to_rnc(self, buf, connected=True):
+        if self.RNC is None:
+            self._log('WNG', 'no RNC set, unable to send data')
+            return False
+        if not connected:
+            # start a RUAConnectionLessTransfer
+            self.RNC.start_rua_proc(RUAConnectlessTransfer, RANAP_Message=buf)
+            return True
+        elif self.CtxId < 0:
+            self._log('WNG', 'no Iu context-id set, unable to send data in connected mode')
+            return False
+        else:
+            # start a RUADirectTransfer
+            self.RNC.start_rua_proc(RUADirectTransfer, Context_ID=(self.CtxId, 24),
+                                                       RANAP_Message=buf,
+                                                       CN_DomainIndicator=self._cndomind)
+            return True
+    
+    def _send_to_rnc_nasdt(self, naspdu, sapi=0):
+        # prepare the RANAPDirectTransferCN procedure
+        if sapi == 3:
+            sapi = 'sapi-3'
+        else:
+            sapi = 'sapi-0'
+        RanapProc = self.init_ranap_proc(RANAPDirectTransferCN,
+                                         NAS_PDU=naspdu,
+                                         SAPI=sapi)
+        if not RanapProc:
+            return False
+        # encode the RANAP PDU and send it over RUA
+        pdu = self._encode_pdu(RanapProc.send())
+        if not pdu:
+            return False
+        pdu = pdu[0]
+        # send to RNC in connected mode
+        self._send_to_rnc(pdu, connected=True)
+    
+    def _send_to_ue(self, naspdu, sapi=0):
+        if not self.page_block():
+            self._log('ERR', 'unable to page')
+            return False
+        self._send_to_rnc_nasdt(naspdu, sapi)
+    
+    def release(self, cause=('nAS', 83)):
+        """release the Iu link with the given RANAP cause
+        """
+        # prepare the RANAPRelease procedure
+        RanapProc = self.init_ranap_proc(RANAPIuRelease, Cause=cause)
+        if not RanapProc:
+            return
+        # encode the RANAP PDU and send it over RUA
+        pdu = self._encode_pdu(RanapProc.send())
+        if not pdu:
+            return
+        pdu = pdu[0]
+        # send to RNC in connected mode
+        self._send_to_rnc(pdu, connected=True)
+    
+    #--------------------------------------------------------------------------#
+    # Paging helper
+    #--------------------------------------------------------------------------#
+    
+    def _send_paging(self, rnc, IEs):
+        # set the rnc Iu link
+        self.set_ran(rnc)
+        # prepare the RANAPPaging procedure
+        RanapProc = self.init_ranap_proc(RANAPPaging, **IEs)
+        if not RanapProc:
+            return
+        # encode the RANAP PDU and send it over RUA
+        pdu = self._encode_pdu(RanapProc.send())
+        if not pdu:
+            return
+        pdu = pdu[0]
+        # send to RNC in connection-less mode
+        self._send_to_rnc(pdu, connected=False)
+        # unset the rnc Iu link
+        self.unset_ran()
+    

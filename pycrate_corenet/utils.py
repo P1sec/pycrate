@@ -34,7 +34,7 @@ import random
 import re
 #import traceback
 from select    import select
-from threading import Thread
+from threading import Thread, Lock
 from random    import SystemRandom
 from time      import time, sleep
 from datetime  import datetime
@@ -87,9 +87,8 @@ from pycrate_mobile  import TS24008_GMM
 from pycrate_mobile  import NAS
 
 
-
 #------------------------------------------------------------------------------#
-# Global ASN.1 objects
+# ASN.1 objects
 #------------------------------------------------------------------------------#
 
 # actually, all ASN.1 modules are in ASN_GLOBAL
@@ -100,6 +99,78 @@ PDU_S1AP  = S1AP.S1AP_PDU_Descriptions.S1AP_PDU
 PDU_HNBAP = HNBAP.HNBAP_PDU_Descriptions.HNBAP_PDU
 PDU_RUA   = RUA.RUA_PDU_Descriptions.RUA_PDU
 PDU_RANAP = RANAP.RANAP_PDU_Descriptions.RANAP_PDU
+
+# ASN.1 modules are not thread-safe
+# objects' value will be mixed in case a thread ctxt switch occurs between 
+# the fg interpreter and the bg CorenetServer loop, and both accesses the same
+# ASN.1 module
+LOCK_S1AP  = Lock()
+LOCK_HNBAP = Lock()
+LOCK_RUA   = Lock()
+LOCK_RANAP = Lock()
+
+_ACQUIRE_SLEEP = 0.0003
+_ACQUIRE_TO    = 300 # in number of sleep()
+
+def s1ap_acquire():
+    if LOCK_S1AP.locked():
+        # wait for the other thread to end its use of the S1AP module
+        i = 0
+        while LOCK_S1AP.locked():
+            i += 1
+            sleep(_ACQUIRE_SLEEP)
+            if i == _ACQUIRE_TO:
+                return False
+    LOCK_S1AP.acquire()
+    return True
+
+def s1ap_release():
+    LOCK_S1AP.release()
+
+def hnbap_acquire():
+    if LOCK_HNBAP.locked():
+        # wait for the other thread to end its use of the HNBAP module
+        i = 0
+        while LOCK_HNBAP.locked():
+            i += 1
+            sleep(_ACQUIRE_SLEEP)
+            if i == _ACQUIRE_TO:
+                return False
+    LOCK_HNBAP.acquire()
+    return True
+
+def hnbap_release():
+    LOCK_HNBAP.release()
+
+def rua_acquire():
+    if LOCK_RUA.locked():
+        # wait for the other thread to end its use of the RUA module
+        i = 0
+        while LOCK_RUA.locked():
+            i += 1
+            sleep(_ACQUIRE_SLEEP)
+            if i == _ACQUIRE_TO:
+                return False
+    LOCK_RUA.acquire()
+    return True
+
+def rua_release():
+    LOCK_RUA.release()
+
+def ranap_acquire():
+    if LOCK_RANAP.locked():
+        # wait for the other thread to end its use of the RANAP module
+        i = 0
+        while LOCK_RANAP.locked():
+            i += 1
+            sleep(_ACQUIRE_SLEEP)
+            if i == _ACQUIRE_TO:
+                return False
+    LOCK_RANAP.acquire()
+    return True
+
+def ranap_release():
+    LOCK_RANAP.release()
 
 #------------------------------------------------------------------------------#
 # logging facilities

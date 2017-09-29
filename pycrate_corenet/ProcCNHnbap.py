@@ -339,6 +339,8 @@ class HNBAPUERegistration(HNBAPSigProc):
         #
         if errcause is None:
             # procedure successful outcome
+            # both IuCS / IuPS are initialized with the same CtxId established here,
+            # at the HNBAP layer, so we can take the IuCS one safely
             self.encode_pdu('suc', Context_ID=(ue.IuCS.CtxId, 24),
                                                UE_Identity=UEInfo['UE_Identity'])
             self._log('INF', 'UE registered successfully, ctx %i' % ue.IuCS.CtxId)

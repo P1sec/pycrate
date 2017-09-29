@@ -30,7 +30,7 @@
 from .utils       import *
 from .ProcCNRanap import *
 from .ProcCNGMM   import *
-from .HdlrUEIu    import _UEIuSigStack
+from .HdlrUEIu    import UEIuSigStack
 
 #------------------------------------------------------------------------------#
 # UE-related Iu interface handler for the PS domain
@@ -52,6 +52,9 @@ class UEGMMd(SigStack):
     # state: INACTIVE (cannot be paged) <-> ACTIVE <-> IDLE
     state = 'INACTIVE'
     
+    # to bypass the process() server loop with a custom NAS PDU handler
+    RX_HOOK = None
+    
     #--------------------------------------------------------------------------#
     # GMM common parameters
     #--------------------------------------------------------------------------#
@@ -63,7 +66,8 @@ class UEGMMd(SigStack):
     _READY_TIMER        = None
     # Periodic RAU timer: dict {'Unit': uint3, 'Value': uint5}
     # Unit: 0: 2s, 1: 1mn, 2: 6mn, 7: deactivated
-    _RAU_TIMER          = {'Unit': 1, 'Value': 5}
+    #_RAU_TIMER          = {'Unit': 1, 'Value': 5} # 5mn
+    _RAU_TIMER          = {'Unit': 7, 'Value': 0} # deactivated
     # Reattach attempt after a failure timer: dict {'Unit': uint3, 'Value': uint5}
     # Unit: 0: 2s, 1: 1mn, 2: 6mn, 7: deactivated
     _T3302              = {'Unit': 1, 'Value': 2}
@@ -118,7 +122,7 @@ class UEGMMd(SigStack):
     AUTH_IMEI_REQ       = 0
     #
     # re-authentication policy:
-    # this forces an auth procedure every X GMM RAU / X GMM ServiceRequest procedures
+    # this forces an auth procedure every X GMM RAU / SER procedures
     # even if a valid CKSN is provided by the UE
     AUTH_RAU            = 3
     AUTH_SER            = 3
@@ -144,8 +148,11 @@ class UEGMMd(SigStack):
     # 17: 'Network failure',
     # 22: 'Congestion'
     # ...
-    IDENT_IMSI_NOT_ALLOWED = 4
+    IDENT_IMSI_NOT_ALLOWED = 11
     IDENT_IMEI_NOT_ALLOWED = 5
+    #
+    # request IMEISV during an Attach when IMEISV is unknown
+    IDENT_IMEISV_REQ = True
     
     #--------------------------------------------------------------------------#
     # GMMAttach policy
@@ -181,13 +188,15 @@ class UEGMMd(SigStack):
     # if we want to set "Force to StandBy" to force the MS to stop the READY timer 
     # in order to prevent the MS to perform cell updates (must not be enabled in Iu mode)
     DET_FSTDBY          = _FSTDBY
+    # network-initiated detach timer
+    T3322               = 2
     
     #--------------------------------------------------------------------------#
     # GMMRoutingAreaUpdating policy
     #--------------------------------------------------------------------------#
     RAU_FSTDBY          = _FSTDBY
     RAU_RAU_TIMER       = _RAU_TIMER
-    ATT_T3302           = _T3302
+    RAU_T3302           = _T3302
     RAU_T3312_EXT       = _T3312_EXT
     RAU_READY_TIMER     = _READY_TIMER
     RAU_NETFEAT_SUPP    = _NETFEAT_SUPP
@@ -200,13 +209,19 @@ class UEGMMd(SigStack):
     # and there is no follow on request
     RAU_IUREL           = True
     
+    #--------------------------------------------------------------------------#
+    # interpreter-initiated procedure policy
+    #--------------------------------------------------------------------------#
+    # all methods made to be run from the interpreter
+    # schedule resolution for looking at the procedure presence in the stack
+    _INI_SCHED = 0.05
+    
     
     def _log(self, logtype, msg):
         self.Iu._log(logtype, '[GMM] %s' % msg)
     
     def __init__(self, ued, iupsd):
         self.UE = ued
-        self.state = 'INACTIVE'
         self.set_iu(iupsd)
         #
         # stack of ongoing GMM procedures (i.e. common procedures can be run 
@@ -222,6 +237,9 @@ class UEGMMd(SigStack):
         """process a NAS GMM message (NasRx) sent by the UE,
         and return a NAS message (NasTx) response or None
         """
+        if self.RX_HOOK is not None:
+            return self.RX_HOOK(NasRx)
+        #
         ProtDisc, Type = NasRx['ProtDisc'](), NasRx['Type']()
         # 1) check if it is a Detach request
         if Type == 5:
@@ -240,10 +258,10 @@ class UEGMMd(SigStack):
             if Type == 32:
                 self._log('WNG', 'STATUS received with %r' % NasRx['GMMCause'])
                 if self.STAT_CLEAR == 1:
-                    self._log('WNG', 'STATUS, disabling %r' % self.Proc[-1])
+                    #self._log('WNG', 'STATUS, disabling %r' % self.Proc[-1])
                     self.Proc[-1].abort()
                 elif self.STAT_CLEAR == 2:
-                    self._log('WNG', 'STATUS, disabling %r' % self.Proc)
+                    #self._log('WNG', 'STATUS, disabling %r' % self.Proc)
                     self.clear()
                 return None
             #
@@ -295,6 +313,106 @@ class UEGMMd(SigStack):
         """
         for Proc in self.Proc[::-1]:
             Proc.abort()
+    
+    #--------------------------------------------------------------------------#
+    # network-initiated method (fg task, to be used from the interpreter)
+    #--------------------------------------------------------------------------#
+    
+    def _ini_con(self):
+        if not self.Iu.page_block():
+            return False
+        while self.Proc:
+            # wait for GMM common procedures to end
+            sleep(self._INI_SCHED)
+        if not self.Iu.is_connected():
+            # something went wrong during the common procedures
+            return False
+        else:
+            return True
+    
+    def req_ident(self, idtype=NAS.IDTYPE_IMSI):
+        """start an Identity Request procedure toward the UE and wait for the
+        response, or timeout
+        
+        returns True if a response is received, False otherwise
+        
+        if True, the UEInfo from the response is available in self._ini_ret
+        """
+        if not self._ini_con():
+            return False
+        Proc = self.init_proc(GMMIdentification)
+        Proc.set_msg(8, 21, IDType=idtype)
+        try:
+            NasTx = Proc.output().to_bytes()
+        except:
+            self._log('ERR', 'NAS message encoding failed')
+            Proc.abort()
+            return False
+        self.Iu._send_to_ue(NasTx)
+        #
+        # check the procedure stack until our ident procedure is not there anymore
+        while Proc in self.Proc:
+            sleep(self._INI_SCHED)
+        # after the procedure has been removed from the stack, 
+        # we check if a response was received
+        if hasattr(Proc, 'UEInfo'):
+            self._ini_ret = Proc.UEInfo
+            return True
+        else:
+            return False
+    
+    def detach(self, type=1, cause=None):
+        """send a GMM Detach with type and cause (optional) and wait for the
+        response if type != 3, or timeout
+        
+        type: 1, re-attach required
+              2, re-attach not required
+              3, IMSI detach
+        
+        returns True if a response is received, False otherwise
+        
+        if True, the UEInfo from the response is available in self._ini_ret
+        """
+        if not self._ini_con():
+            return False
+        Proc = self.init_proc(GMMDetachCN)
+        if cause is not None:
+            Proc.set_msg(8, 5, DetachTypeMT={'Type': type}, GMMCause=cause)
+        else:
+            Proc.set_msg(8, 5, DetachTypeMT={'Type': type})
+        try:
+            NasTx = Proc.output().to_bytes()
+        except:
+            self._log('ERR', 'NAS message encoding failed')
+            Proc.abort()
+            return False
+        self.Iu._send_to_ue(NasTx)
+        #
+        # check the procedure stack until our detach procedure is not there anymore
+        while Proc in self.Proc:
+            sleep(self._INI_SCHED)
+        # after the procedure has been removed from the stack, 
+        # we check if a response was received
+        if hasattr(Proc, 'UEInfo'):
+            self._ini_ret = Proc.UEInfo
+            return True
+        else:
+            return False
+    
+    def inform(self, **info):
+        """send an GMM information with given info
+        """
+        if not self._ini_con():
+            return False
+        Proc = self.init_proc(GMMInformation)
+        Proc.set_msg(8, 33, **info)
+        try:
+            NasTx = Proc.output().to_bytes()
+        except:
+            self._log('ERR', 'NAS message encoding failed')
+            Proc.abort()
+            return False
+        self.Iu._send_to_ue(NasTx)
 
 
 class UESMd(SigStack):
@@ -309,6 +427,8 @@ class UESMd(SigStack):
     # reference to the IuCSd
     Iu = None
     
+    # to bypass the process() server loop with a custom NAS PDU handler
+    RX_HOOK = None
     
     def _log(self, logtype, msg):
         self.Iu._log(logtype, '[SM] %s' % msg)
@@ -329,6 +449,8 @@ class UESMd(SigStack):
         """process a NAS SM message (NasRx) sent by the UE,
         and return a NAS message (NasTx) response or None
         """
+        if self.RX_HOOK is not None:
+            return self.RX_HOOK(NasRx)
         #
         # returns SM STATUS, cause feature not supported
         return Buf('SM_STATUS', val=b'\x0A\x55\x28', bl=24)
@@ -345,7 +467,7 @@ class UESMd(SigStack):
         pass
 
 
-class UEIuPSd(_UEIuSigStack):
+class UEIuPSd(UEIuSigStack):
     """UE IuPS handler within a CorenetServer instance
     responsible for UE-related RANAP signaling
     """
@@ -356,12 +478,68 @@ class UEIuPSd(_UEIuSigStack):
     # domain
     DOM = 'PS'
     
+    #--------------------------------------------------------------------------#
+    # global security policy
+    #--------------------------------------------------------------------------#
+    # this will systematically bypass all auth and smc procedures during 
+    # UE signaling
+    SEC_DISABLED = False
+    #
+    # format of the security context dict self.SEC:
+    # self.SEC is a dict of available 2G / 3G security contexts indexed by CKSN,
+    # and current CKSN in use
+    #
+    # when self.SEC['CKSN'] is not None, the context is enabled at the RNC, e.g.
+    # self.SEC = {'CKSN': 0,
+    #             0: {'CK': b'...', 'IK': b'...', 'UEA': 1, 'UIA': 0, 'CTX': 3},
+    #             ...}
+    # 
+    # a single security context contains:
+    # CK, IK: 16 bytes buffer, keys to be sent to the RNC during the smc procedure
+    # UEA, UIA: algo index, indicated by the RNC at the end of a successful smc procedure
+    # CTX: context of the authentication,
+    #    2 means 2G auth converted to 3G context
+    #    3 means 3G auth and native context
+    
+    #--------------------------------------------------------------------------#
+    # RANAPSecurityModeControl policy
+    #--------------------------------------------------------------------------#
+    # this will systematically bypass all smc procedures during UE signaling
+    SMC_DISABLED = False
+    # this will bypass the smc procedure into specific UE signaling procedure
+    SMC_DISABLED_PROC = []
+    #
+    # lists of algorithms priority
+    # -> il will be sent as is to the RNC into the SMC
+    # -> the RNC will deal with the UE to select one
+    SMC_UEA = [2, 1, 0] # UEA2, UEA1, UEA0
+    SMC_UIA = [1, 0]    # UIA2, UIA1, UIA0 is not defined in UMTS
+    #
+    # dummy security context in case an SMC has to be run 
+    # but no security context exists
+    SMC_DUMMY = {'CK': 16*b'\0', 'IK': 16*b'\0', 'UEA': None, 'UIA': []}
+    
+    #--------------------------------------------------------------------------#
+    # RANAPPaging policy
+    #--------------------------------------------------------------------------#
+    # if we want to page with the IMSI, instead of the (P)TMSI
+    PAG_IMSI = False
+    #
+    # page_block() parameters:
+    # number of retries when not successful
+    PAG_RETR = 2
+    # timer in sec between retries
+    PAG_WAIT = 2
+    # schedule resolution for looking at the Iu connection state change
+    PAG_SCHED = 0.05
+    
+    
     def __init__(self, ued, hnbd, ctx_id):
         # init GMM and SM sig stacks
         self.GMM = UEGMMd(ued, self)
         self.SM  = UESMd(ued, self)
         # init the Iu interface
-        _UEIuSigStack.__init__(self, ued, hnbd, ctx_id)
+        UEIuSigStack.__init__(self, ued, hnbd, ctx_id)
         # reference the Config from the server
         self.Config = self.Server.ConfigIuPS
         # track states for PDP and MBMS contexts
@@ -429,20 +607,6 @@ class UEIuPSd(_UEIuSigStack):
         #
         return self._ret_ranap_proc(NasTx)
     
-    def trigger_nas(self, RanapProc):
-        # this is used by IuPS procedures to recall ongoing NAS procedure
-        if RanapProc._cb is None:
-            # no callback set, this is actually useless
-            return []
-        NasProc = RanapProc._cb
-        NasTx = NasProc.postprocess(RanapProc)
-        return self._ret_ranap_proc(NasTx)
-    
-    def clear(self):
-        # clears all running RANAP PS procedures
-        for code in self.Proc:
-            self.Proc[code].abort()
-    
     def clear_nas_proc(self):
         # clears all NAS PS procedures
         self.GMM.clear()
@@ -464,7 +628,7 @@ class UEIuPSd(_UEIuSigStack):
                 return True
             elif isinstance(Proc, GMMRoutingAreaUpdating):
                 self.SEC['POL']['RAU'] += 1
-                if self.SEC['POL']['RAU'] % self.GMM.AUTH_RAU == 0:
+                if self.GMM.AUTH_RAU and self.SEC['POL']['RAU'] % self.GMM.AUTH_RAU == 0:
                     self.SEC['CKSN'] = None
                     return True
                 else:
@@ -472,7 +636,7 @@ class UEIuPSd(_UEIuSigStack):
                     return False
             elif isinstance(Proc, GMMServiceRequest):
                 self.SEC['POL']['SER'] += 1
-                if self.SEC['POL']['SER'] % self.GMM.AUTH_SER == 0:
+                if self.GMM.AUTH_SER and self.SEC['POL']['SER'] % self.GMM.AUTH_SER == 0:
                     self.SEC['CKSN'] = None
                     return True
                 else:
@@ -483,16 +647,95 @@ class UEIuPSd(_UEIuSigStack):
                 self.SEC['CKSN'] = cksn
                 return False
     
-    def require_smc(self, Proc):
-        # check if a RANAPSecurityModeControl procedure is required
-        if self.SEC_DISABLED:
-            return False
+    def page(self, cause=None):
+        """sends RANAP Paging command to RNC responsible for the UE RAI
+        
+        cause [RANAP_IEs.PagingCause, ENUMERATED]: str or int (0..5)
+        """
+        # send a RANAPPaging for the PS domain
+        if self.RNC is not None:
+            self._log('DBG', 'paging: UE already connected')
+            return
+        # get the set of RNCs serving the UE RAI
+        rai = (self.UE.PLMN, self.UE.LAC, self.UE.RAC)
+        try:
+            rncs = [self.Server.RAN[rncid] for rncid in self.Server.RAI[rai]]
+        except:
+            self._log('ERR', 'paging: no RNC serving the UE LAI %s.%.4x.%.2x' % rai)
+            return
         #
-        elif self.SEC['CKSN'] is None or self.SEC['CKSN'] not in self.SEC:
-            # no security context established, cannot run an smc
-            self._log('WNG', 'require_smc: no CKSN set, unable to run an SMC')
-            return False
+        # prepare the RANAPPaging IEs
+        IEs = {'CN_DomainIndicator' : self._cndomind,
+               'PermanentNAS_UE_ID' : ('iMSI', NAS.encode_bcd(self.UE.IMSI))}
+        if 'DRXParam' in self.UE.Cap:
+            drx = self.UE.Cap['DRXParam']['DRXCycleLen']()
+            if drx in (6, 7, 8, 9):
+                IEs['DRX_CycleLengthCoefficient'] = drx
+        if not self.PAG_IMSI:
+            IEs['TemporaryUE_ID'] = ('p-TMSI', pack('>I', self.UE.PTMSI))
+        if isinstance(cause, integer_types):
+            try:
+                IEs['PagingCause'] = RANAP.RANAP_IEs.PagingCause._cont_rev[cause]
+            except:
+                pass
+        elif isinstance(cause, str_types):
+            IEs['PagingCause'] = cause
         #
-        else:
+        # start a RANAPPaging procedure on all RNCs
+        for rnc in rncs:
+            self._send_paging(rnc, IEs)
+        self._log('INF', 'paging: ongoing')
+    
+    def page_block(self, cause=None):
+        """Pages the UE and wait for it to connect, or the paging procedure to timeout.
+        Returns True if UE gets connected, False otherwise.
+        
+        cause [RANAP_IEs.PagingCause, ENUMERATED]: str or int (0..5)
+        """
+        # send a RANAPPaging for the PS domain
+        if self.RNC is not None:
+            self._log('DBG', 'paging: UE already connected')
             return True
+        # get the set of RNCs serving the UE RAI
+        rai = (self.UE.PLMN, self.UE.LAC, self.UE.RAC)
+        try:
+            rncs = [self.Server.RAN[rncid] for rncid in self.Server.RAI[rai]]
+        except:
+            self._log('ERR', 'paging: no RNC serving the UE LAI %s.%.4x.%.2x' % rai)
+            return False
+        #
+        # prepare the RANAPPaging IEs
+        IEs = {'CN_DomainIndicator' : self._cndomind,
+               'PermanentNAS_UE_ID' : ('iMSI', NAS.encode_bcd(self.UE.IMSI))}
+        if 'DRXParam' in self.UE.Cap:
+            drx = self.UE.Cap['DRXParam']['DRXCycleLen']()
+            if drx in (6, 7, 8, 9):
+                IEs['DRX_CycleLengthCoefficient'] = drx
+        if not self.PAG_IMSI:
+            IEs['TemporaryUE_ID'] = ('p-TMSI', pack('>I', self.UE.PTMSI))
+        if isinstance(cause, integer_types):
+            try:
+                IEs['PagingCause'] = RANAP.RANAP_IEs.PagingCause._cont_rev[cause]
+            except:
+                pass
+        elif isinstance(cause, str_types):
+            IEs['PagingCause'] = cause
+        #
+        # retries paging as defined in case UE does not connect
+        i = 0
+        while i <= self.PAG_RETR:
+            T0 = time()
+            # start a RANAPPaging procedure on all RNCs
+            for rnc in rncs:
+                self._send_paging(rnc, IEs)
+            # check until UE gets connected or timer expires
+            while not self.is_connected() and time() - T0 < self.PAG_WAIT:
+                sleep(self.PAG_SCHED)
+            if self.is_connected():
+                self._log('INF', 'paging: UE connected')
+                return True
+            else:
+                i += 1
+        self._log('WNG', 'paging: timeout, UE not connected')
+        return False
 

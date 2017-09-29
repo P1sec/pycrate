@@ -93,7 +93,7 @@ class GMMSigProc(NASSigProc):
         self._log('ERR', 'process() not implemented')
         return None
     
-    def postprocess(self, proc=None):
+    def postprocess(self, Proc=None):
         self._log('ERR', 'postprocess() not implemented')
         return None
     
@@ -129,6 +129,71 @@ class GMMSigProc(NASSigProc):
             return None
         else:
             return getattr(self.GMM, self.Timer)
+    
+    #--------------------------------------------------------------------------#
+    # common helpers
+    #--------------------------------------------------------------------------#
+    
+    def _chk_imsi(self):
+        # arriving here means the UE's IMSI was unknown at first
+        # set the IMSI indicated by the UE
+        Server, imsi = self.UE.Server, self.UE.IMSI
+        if not Server.is_imsi_allowed(imsi):
+            self.errcause = self.GMM.IDENT_IMSI_NOT_ALLOWED
+            return False
+        else:
+            # update the PTMSI table
+            Server.PTMSI[self.UE.PTMSI] = imsi
+            #
+            if imsi in Server.UE:
+                # in the meantime, IMSI was obtained from the CS domain connection
+                if self.UE != Server.UE[imsi]:
+                    # there is 2 distincts Iu contexts, that need to be merged
+                    ue = Server.UE[imsi]
+                    if not ue.merge_ps_handler(self.Iu):
+                        # unable to merge to the existing profile
+                        self._log('WNG', 'profile for IMSI %s already exists, '\
+                                  'need to reject for reconnection' % imsi)
+                        # reject so that it will reconnect
+                        # and get the already existing profile
+                        self.errcause = self.GMM.ATT_IMSI_PROV_REJECT
+                        return False
+                    else:
+                        return True
+                else:
+                    return True
+            else:
+                Server.UE[imsi] = self.UE
+                # update the Server UE's tables
+                if imsi in Server.ConfigUE:
+                    # update UE's config with it's dedicated config
+                    self.UE.set_config( Server.ConfigUE[imsi] )
+                elif '*' in Server.ConfigUE:
+                    self.UE.set_config( Server.ConfigUE['*'] )
+                return True
+    
+    def _ret_req_imsi(self):
+        NasProc = self.GMM.init_proc(GMMIdentification)
+        NasProc.set_msg(8, 21, IDType=NAS.IDTYPE_IMSI)
+        return NasProc.output()
+    
+    def _ret_req_imeisv(self):
+        NasProc = self.GMM.init_proc(GMMIdentification)
+        NasProc.set_msg(8, 21, IDType=NAS.IDTYPE_IMEISV)
+        return NasProc.output()
+    
+    def _ret_auth(self):
+        NasProc = self.GMM.init_proc(GMMAuthenticationCiphering)
+        return NasProc.output()
+    
+    def _ret_smc(self, cksn=None, newkey=False):
+        # set a RANAP callback in the Iu stack for triggering an SMC
+        RanapProc = self.Iu.init_ranap_proc(RANAPSecurityModeControl,
+                                            **self.Iu.get_smc_ies(cksn, newkey))
+        RanapProc._cb = self
+        if RanapProc:
+            self.Iu.RanapTx = [RanapProc]
+        return None
 
 
 #------------------------------------------------------------------------------#
@@ -245,13 +310,21 @@ class GMMAttach(GMMSigProc):
             return None
     
     def _process_req(self):
+        #
+        if self.UEInfo['ID'][0] == NAS.IDTYPE_TMSI and self.UE.PTMSI is None:
+            self.UE.PTMSI = self.UEInfo['ID'][1]
+        #
         att_type = self.UEInfo['AttachType']['Type']
+        self._log('INF', 'request type %i (%s) from, old RAI %s.%.4x.%.2x'\
+                  % (att_type(), att_type._dic[att_type()],
+                     self.UEInfo['OldRAI'][0], self.UEInfo['OldRAI'][1], self.UEInfo['OldRAI'][2]))
         # collect capabilities
         self._collect_cap()
         #
-        self._log('INF', 'request type %i (%s) from, old RAI %s.%.4x%.2x'\
-                  % (att_type(), att_type._dic[att_type()],
-                     self.UEInfo['OldRAI'][0], self.UEInfo['OldRAI'][1], self.UEInfo['OldRAI'][2]))
+        if self.UE.IMEISV is None and self.GMM.IDENT_IMEISV_REQ:
+            self._req_imeisv = True
+        else:
+            self._req_imeisv = False
         #
         # check local ID
         if self.UE.IMSI is None:
@@ -259,20 +332,19 @@ class GMMAttach(GMMSigProc):
             # -> we need to get its IMSI before continuing
             # we remove it from the Server's provisory dict of UE
             try:
-                del self.UE.Server._UEpre[self.UE.TMSI]
+                del self.UE.Server._UEpre[self.UE.PTMSI]
             except:
                 pass
             #
             if self.UEInfo['ID'][0] == 1:
                 # IMSI is provided at the NAS layer
-                if not self._set_imsi(self.UEInfo['ID'][1]):
+                self.UE.set_ident_from_ue(*self.UEInfo['ID'])
+                if not self._chk_imsi():
                     # IMSI not allowed
                     return self.output()
             else:
                 # need to request the IMSI, prepare an id request procedure
-                NasProc = self.GMM.init_proc(GMMIdentification)
-                NasProc.set_msg(8, 21, IDType=NAS.IDTYPE_IMSI)
-                return NasProc.output()
+                return self._ret_req_imsi()
         #
         if self.Iu.require_auth(self, cksn=self.UEInfo['CKSN']):
             return self._ret_auth()
@@ -282,70 +354,52 @@ class GMMAttach(GMMSigProc):
             # hence the cksn submitted by the UE is valid
             return self._ret_smc(self.UEInfo['CKSN'], False)
         #
+        if self._req_imeisv:
+            return self._ret_req_imeisv()
+        #
         # otherwise, go directly to postprocess
-        return self.postprocess()  
+        return self.postprocess()
     
-    def _set_imsi(self, imsi):
-        # arriving here means the UE's IMSI was unknown at first
-        # set the IMSI indicated by the UE
-        self.UE.set_ident_from_ue(NAS.IDTYPE_IMSI, imsi)
-        Server = self.UE.Server
-        if not Server.is_imsi_allowed(imsi):
-            self.errcause = self.GMM.IDENT_IMSI_NOT_ALLOWED
-            return False
-        else:
-            if imsi in Server.UE:
-                # a profile already exists for this IMSI
-                self._log('WNG', 'profile for IMSI %s already exists, need to reject for reconnection'\
-                          % imsi)
-                # update the PTMSI table and reject self, so that it will reconnect
-                # and get the already existing profile
-                Server.PTMSI[self.UE.PTMSI] = imsi
-                self.errcause = self.GMM.ATT_IMSI_PROV_REJECT
-                return False
-            else:
-                Server.UE[imsi] = self.UE
-                Server.PTMSI[self.UE.PTMSI] = imsi
-                # update the Server UE's tables
-                if imsi in Server.ConfigUE:
-                    # update UE's config with it's dedicated config
-                    self.UE.set_config( Server.ConfigUE[imsi] )
-                return True
-    
-    def _ret_auth(self):
-        NasProc = self.GMM.init_proc(GMMAuthenticationCiphering)
-        return NasProc.output()
-    
-    def _ret_smc(self, cksn=None, newkey=False):
-        # set a RANAP callback in the Iu stack for triggering an SMC
-        RanapProc = self.Iu.init_ranap_proc(RANAPSecurityModeControl,
-                                            **self.Iu.get_smc_ies(cksn, newkey))
-        RanapProc._cb = self
-        if RanapProc:
-            self.Iu.RanapTx = [RanapProc]
-        return None
-    
-    def postprocess(self, Proc):
+    def postprocess(self, Proc=None):
         if isinstance(Proc, GMMIdentification):
-            # got the UE's IMSI, check if it's allowed
-            if self.UE.IMSI is None or not self._set_imsi(self.UE.IMSI):
-                return self.output()
-            elif self.Iu.require_auth(self):
-                return self._ret_auth()
-            elif self.Iu.require_smc(self):
-                # if we are here, there was no auth procedure,
-                # hence the cksn submitted by the UE is valid
-                return self._ret_smc(self.UEInfo['CKSN'], False)
+            if Proc.IDType == NAS.IDTYPE_IMSI:
+                # got the UE's IMSI, check if it's allowed
+                if self.UE.IMSI is None:
+                    # UE did actually not responded with its IMSI, this is bad !
+                    # error 96: invalid mandatory info
+                    self.errcause = 96
+                    return self.output()
+                elif not self._chk_imsi():
+                    return self.output()
+                elif self.Iu.require_auth(self):
+                    return self._ret_auth()
+                elif self.Iu.require_smc(self):
+                    # if we are here, there was no auth procedure,
+                    # hence the cksn submitted by the UE is valid
+                    return self._ret_smc(self.UEInfo['CKSN'], False)
+                elif self._req_imeisv:
+                    return self._ret_req_imeisv()
+            elif Proc.IDType == NAS.IDTYPE_IMEISV:
+                # got the UE's IMEISV, check if it is allowed
+                if self.UE.IMEISV is None or \
+                not self.UE.Server.is_imeisv_allowed(self.UE.IMEISV):
+                    self.errcause = self.GMM.IDENT_IMEI_NOT_ALLOWED
+                    return self.output()
+        #
         elif isinstance(Proc, GMMAuthenticationCiphering):
             if self.Iu.require_smc(self):
                 # if we are here, the valid cksn is the one established during
                 # the auth procedure
                 return self._ret_smc(Proc.cksn, True)
+            elif self._req_imeisv:
+                return self._ret_req_imeisv()
         elif isinstance(Proc, RANAPSecurityModeControl):
             if not Proc.success:
                 self.abort()
                 return None
             # self.Iu.SEC['CKSN'] has been taken into action as the RRC layer
+            elif self._req_imeisv:
+                return self._ret_req_imeisv()
         elif Proc is not None:
             assert()
         #
@@ -360,6 +414,7 @@ class GMMAttach(GMMSigProc):
                 self.set_msg(8, 4, GMMCause=self.errcause)
             self.encode_msg(8, 4)
             self.ptmsi_realloc = -1
+            self._log('INF', 'reject, %r' % self._nas_tx['GMMCause'])
         else:
             # prepare AttachAccept IEs
             IEs = {'ForceStdby'            : {'Value': self.GMM.ATT_FSTDBY},
@@ -435,11 +490,16 @@ class GMMAttach(GMMSigProc):
             # trigger an IuRelease after the direct transfer
             RanapTx = []
             if nas_tx:
-                RanapProcDT = self.Iu.init_ranap_proc(RANAPDirectTransferCN,
-                                                      NAS_PDU=self._nas_tx.to_bytes(),
-                                                      SAPI='sapi-0')
-                if RanapProcDT:
-                    RanapTx.append( RanapProcDT )
+                try:
+                    naspdu = self._nas_tx.to_bytes()
+                except Exception as err:
+                    self._log('ERR', 'unable to encode downlink NAS PDU: %r' % err)
+                else:
+                    RanapProcDT = self.Iu.init_ranap_proc(RANAPDirectTransferCN,
+                                                          NAS_PDU=naspdu,
+                                                          SAPI='sapi-0')
+                    if RanapProcDT:
+                        RanapTx.append( RanapProcDT )
             # IuRelease with Cause NAS normal-release (83)
             RanapProcRel = self.Iu.init_ranap_proc(RANAPIuRelease, Cause=('nAS', 83))
             if RanapProcRel:
@@ -504,11 +564,16 @@ class GMMDetachUE(GMMSigProc):
             self.encode_msg(8, 6)
             if self.TRACK_PDU:
                 self._pdu.append( (time(), 'DL', self._nas_tx) )
-            RanapProcDT = self.Iu.init_ranap_proc(RANAPDirectTransferCN,
-                                                  NAS_PDU=self._nas_tx.to_bytes(),
-                                                  SAPI='sapi-0')
-            if RanapProcDT:
-                RanapTx.append( RanapProcDT )
+            try:
+                naspdu = self._nas_tx.to_bytes()
+            except Exception as err:
+                self._log('ERR', 'unable to encode downlink NAS PDU: %r' % err)
+            else:
+                RanapProcDT = self.Iu.init_ranap_proc(RANAPDirectTransferCN,
+                                                      NAS_PDU=naspdu,
+                                                      SAPI='sapi-0')
+                if RanapProcDT:
+                    RanapTx.append( RanapProcDT )
         # set an Iu release with Cause NAS normal-release (83)
         RanapProcRel = self.Iu.init_ranap_proc(RANAPIuRelease, Cause=('nAS', 83))
         if RanapProcRel:
@@ -539,6 +604,29 @@ class GMMDetachCN(GMMSigProc):
         (TS24008_GMM.GMMDetachRequestMT, ),
         (TS24008_GMM.GMMDetachAcceptMT, )
         )
+    
+    Timer = 'T3322'
+    
+    
+    def output(self):
+        self.encode_msg(8, 5)
+        # log the NAS msg
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'DL', self._nas_tx) )
+        #
+        self._log('INF', 'request type %r' % self._nas_tx['DetachTypeMT']['Type'])
+        self.init_timer()
+        # send it over RANAP
+        return self._nas_tx
+    
+    def process(self, pdu):
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'UL', pdu) )
+        self.UEInfo = {}
+        #
+        self._log('INF', 'accepted')
+        self.rm_from_gmm_stack()
+        return None
 
 
 class GMMRoutingAreaUpdating(GMMSigProc):
@@ -657,13 +745,29 @@ class GMMRoutingAreaUpdating(GMMSigProc):
             return None
     
     def _process_req(self):
+        #
+        if 'PTMSI' in self.UEInfo and \
+        self.UEInfo['PTMSI'][0] == NAS.IDTYPE_TMSI and self.UE.PTMSI is None:
+            self.UE.PTMSI = self.UEInfo['PTMSI'][1]
+        #
         rau_type = self.UEInfo['UpdateType']['Type']
+        self._log('INF', 'request type %i (%s) from, old RAI %s.%.4x.%.2x'\
+                  % (rau_type(), rau_type._dic[rau_type()],
+                     self.UEInfo['OldRAI'][0], self.UEInfo['OldRAI'][1], self.UEInfo['OldRAI'][2]))
         # collect capabilities
         self._collect_cap()
         #
-        self._log('INF', 'request type %i (%s) from, old RAI %s.%.4x%.2x'\
-                  % (rau_type(), rau_type._dic[rau_type()],
-                     self.UEInfo['OldRAI'][0], self.UEInfo['OldRAI'][1], self.UEInfo['OldRAI'][2]))
+        # check local ID
+        if self.UE.IMSI is None:
+            # UEd was created based on a PTMSI provided at the RRC layer
+            # -> we need to get its IMSI before continuing
+            # we remove it from the Server's provisory dict of UE
+            try:
+                del self.UE.Server._UEpre[self.UE.PTMSI]
+            except:
+                pass
+            # need to request the IMSI, prepare an id request procedure
+            return self._ret_req_imsi()
         #
         if self.Iu.require_auth(self, cksn=self.UEInfo['CKSN']):
             return self._ret_auth()
@@ -674,22 +778,24 @@ class GMMRoutingAreaUpdating(GMMSigProc):
             return self._ret_smc(self.UEInfo['CKSN'], False)
         #
         # otherwise, go directly to postprocess
-        return self.postprocess()  
+        return self.postprocess()
     
-    def _ret_auth(self):
-        NasProc = self.GMM.init_proc(GMMAuthenticationCiphering)
-        return NasProc.output()
-    
-    def _ret_smc(self, cksn=None, newkey=False):
-        # set a RANAP callback in the Iu stack for triggering an SMC
-        RanapProc = self.Iu.init_ranap_proc(RANAPSecurityModeControl,
-                                            **self.Iu.get_smc_ies(cksn, newkey))
-        RanapProc._cb = self
-        if RanapProc:
-            self.Iu.RanapTx = [RanapProc]
-        return None
-    
-    def postprocess(self, Proc):
+    def postprocess(self, Proc=None):
+        if isinstance(Proc, GMMIdentification):
+            # got the UE's IMSI, check if it's allowed
+            if self.UE.IMSI is None:
+                # UE did actually not responded with its IMSI, this is bad !
+                # error 96: invalid mandatory info
+                self.errcause = 96
+                return self.output()
+            elif not self._chk_imsi():
+                return self.output()
+            elif self.Iu.require_auth(self):
+                return self._ret_auth()
+            elif self.Iu.require_smc(self):
+                # if we are here, there was no auth procedure,
+                # hence the cksn submitted by the UE is valid
+                return self._ret_smc(self.UEInfo['CKSN'], False)
         if isinstance(Proc, GMMAuthenticationCiphering):
             if self.Iu.require_smc(self):
                 # if we are here, the valid cksn is the one established during
@@ -707,10 +813,14 @@ class GMMRoutingAreaUpdating(GMMSigProc):
     
     def output(self):
         if self.errcause:
-            # prepare RAUReject IE
-            self.set_msg(8, 11, GMMCause=self.errcause)
+            # prepare RAU Reject IE
+            if self.errcause == self.GMM.ATT_IMSI_PROV_REJECT:
+                self.set_msg(8, 11, GMMCause=self.errcause, T3346=self.GMM.ATT_T3346)
+            else:
+                self.set_msg(8, 11, GMMCause=self.errcause)
             self.encode_msg(8, 11)
             self.ptmsi_realloc = -1
+            self._log('INF', 'reject, %r' % self._nas_tx['GMMCause'])
         else:
             # prepare RAUAccept IEs
             IEs = {'ForceStdby'            : {'Value': self.GMM.RAU_FSTDBY},
@@ -784,11 +894,16 @@ class GMMRoutingAreaUpdating(GMMSigProc):
             # trigger an IuRelease after the direct transfer
             RanapTx = []
             if nas_tx:
-                RanapProcDT = self.Iu.init_ranap_proc(RANAPDirectTransferCN,
-                                                      NAS_PDU=self._nas_tx.to_bytes(),
-                                                      SAPI='sapi-0')
-                if RanapProcDT:
-                    RanapTx.append( RanapProcDT )
+                try:
+                    naspdu = self._nas_tx.to_bytes()
+                except Exception as err:
+                    self._log('ERR', 'unable to encode downlink NAS PDU: %r' % err)
+                else:
+                    RanapProcDT = self.Iu.init_ranap_proc(RANAPDirectTransferCN,
+                                                          NAS_PDU=naspdu,
+                                                          SAPI='sapi-0')
+                    if RanapProcDT:
+                        RanapTx.append( RanapProcDT )
             # IuRelease with Cause NAS normal-release (83)
             RanapProcRel = self.Iu.init_ranap_proc(RANAPIuRelease, Cause=('nAS', 83))
             if RanapProcRel:
@@ -1020,8 +1135,13 @@ class GMMAuthenticationCiphering(GMMSigProc):
     def _process_fail(self):
         if self.UEInfo['GMMCause']() == 21 and 'AUTS' in self.UEInfo:
             # synch failure
-            # resynchronize the SQN and if done successfully, restart an auth procedure
-            ret = self.UE.Server.AUCd.synch_sqn(self.UE.IMSI, self.vect[0], self.UEInfo['AUTS'])
+            # resynchronize the SQN in case the MM stack is not already doing it
+            if self.UE.IuCS is not None and self.UE.IuCS.MM.state == 'ACTIVE' \
+            and hasattr(self.UE.IuCS.MM, '_auth_resynch'):
+                ret = 0
+            else:
+                ret = self.UE.Server.AUCd.synch_sqn(self.UE.IMSI, self.vect[0], self.UEInfo['AUTS'])
+            #
             if ret is None:
                 # something did not work
                 self._log('ERR', 'unable to resynchronize SQN in AuC')
@@ -1036,8 +1156,8 @@ class GMMAuthenticationCiphering(GMMSigProc):
                 self.rm_from_gmm_stack()
                 return self._nas_tx
             #
-            else:
-                # resynch OK
+            else: 
+                # resynch OK: restart an auth procedure
                 self._log('INF', 'USIM SQN resynchronization done')
                 self.rm_from_gmm_stack()
                 # restart a new auth procedure
@@ -1097,11 +1217,11 @@ class GMMIdentification(GMMSigProc):
         self.UEInfo = {}
         self.decode_msg(pdu, self.UEInfo)
         # get the identity IE value
-        idtreq = self._nas_tx['IDType']()
+        self.IDType = self._nas_tx['IDType']()
         #
-        if self.UEInfo['ID'][0] != idtreq:
+        if self.UEInfo['ID'][0] != self.IDType :
             self._log('WNG', 'identity responded not corresponding to type requested '\
-                      '(%i instead of %i)' % (self.UEInfo['ID'][0], idtreq))
+                      '(%i instead of %i)' % (self.UEInfo['ID'][0], self.IDType))
         self._log('INF', 'identity responded, %r' % self._nas_rx['ID'][1])
         self.UE.set_ident_from_ue(*self.UEInfo['ID'])
         #
@@ -1131,6 +1251,19 @@ class GMMInformation(GMMSigProc):
         (TS24008_GMM.GMMInformation, ),
         None
         )
+    
+    def output(self):
+        # build the Information msg, network name and/or time info
+        # have to be set by the caller
+        self.encode_msg(8, 33)
+        # log the NAS msg
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'DL', self._nas_tx) )
+        #
+        self._log('INF', '%r' % self.Encod[(8, 33)])
+        self.rm_from_gmm_stack()
+        # send it
+        return self._nas_tx
 
 
 class GMMServiceRequest(GMMSigProc):
@@ -1162,6 +1295,62 @@ class GMMServiceRequest(GMMSigProc):
         (TS24008_GMM.GMMServiceAccept, TS24008_GMM.GMMServiceReject),
         (TS24008_GMM.GMMServiceRequest, )
         )
+    
+    Decod = {
+        (8, 12): {
+            'CKSN'        : lambda x: x(),
+            'PTMSI'       : lambda x: x[1].decode(),
+            'PDPCtxtStat' : lambda x: {c: x[2]['NSAPI_%i' % c] for c in range(0, 16)},
+            'MBMSCtxtStat': lambda x: {c: x[2]['NSAPI_%i' % c] for c in range(0, 16)},
+            'ULDataStat'  : lambda x: x[2]
+            }
+        }
+    
+    def process(self, pdu):
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'UL', pdu) )
+        self.errcause, self.UEInfo = None, {}
+        self.decode_msg(pdu, self.UEInfo)
+        #
+        if self.Iu.require_auth(self, cksn=self.UEInfo['CKSN']):
+            return self._ret_auth()
+        #
+        if self.Iu.require_smc(self):
+            # if we are here, there was no auth procedure,
+            # hence the cksn submitted by the UE is valid
+            return self._ret_smc(self.UEInfo['CKSN'], False)
+        #
+        return self.postprocess()
+    
+    def postprocess(self, Proc=None):
+        if isinstance(Proc, GMMAuthenticationCiphering):
+            if self.Iu.require_smc(self):
+                # if we are here, the valid cksn is the one established during
+                # the auth procedure
+                return self._ret_smc(Proc.cksn, True)
+        elif isinstance(Proc, RANAPSecurityModeControl):
+            if not Proc.success:
+                self.abort()
+                return None
+            # self.Iu.SEC['CKSN'] has been taken into action as the RRC layer
+        elif Proc is not None:
+            assert()
+        #
+        # TODO: check / activate PDP and MBMS contexts
+        # ...
+        #
+        return self.output()
+    
+    def output(self):
+        self._log('INF', 'accepted')
+        self.set_msg(8, 13)
+        self.encode_msg(8, 13)
+        # log the NAS msg
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'DL', self._nas_tx) )
+        #
+        self.rm_from_gmm_stack()
+        return self._nas_tx
 
 
 # filter_init=1, indicates we are the core network side

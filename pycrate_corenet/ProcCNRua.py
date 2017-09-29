@@ -21,7 +21,7 @@
 # * 02110-1301, USA.
 # *
 # *--------------------------------------------------------
-# * File Name : pycrate_corenet/ProcCNRua.py
+# * File Name : pycrate_corenet/ProcCNRuapy
 # * Created : 2017-07-13
 # * Authors : Benoit Michau 
 # *--------------------------------------------------------

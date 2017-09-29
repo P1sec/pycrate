@@ -51,7 +51,7 @@ class UEd(SigStack):
     # to log UE NAS MM / CC / SMS for all UE
     TRACE_NAS_CS       = False
     # to log UE NAS GMM / SM for all UE
-    TRACE_NAS_PS       = True
+    TRACE_NAS_PS       = False
     # to log UE NAS encrypted EMM / EMM / ESM for all UE
     TRACE_NAS_EMMENC   = False
     TRACE_NAS_EPS      = False
@@ -98,7 +98,7 @@ class UEd(SigStack):
     def _log(self, logtype, msg):
         if logtype[:3] == 'TRA':
             hdr, msg = msg.split('\n', 1)
-            log('[TRA] [UE: %s] %s [%s]\n%s%s%s'\
+            log('[TRA] [UE: %s] %s[%s]\n%s%s%s'\
                 % (self.IMSI, hdr, logtype[6:], TRACE_COLOR_START, msg, TRACE_COLOR_END))
         elif logtype in self.DEBUG:
             log('[%s] [UE: %s] %s' % (logtype, self.IMSI, msg))
@@ -189,6 +189,29 @@ class UEd(SigStack):
             self.S1.unset_ctx()
         del self.RAT
     
+    def merge_cs_handler(self, iucs):
+        if self.IuCS is not None and self.IuCS.MM.state != UEMMd.state:
+            return False
+        else:
+            self.IuCS   = iucs
+            iucs.UE     = self
+            iucs.MM.UE  = self
+            iucs.CC.UE  = self
+            iucs.SMS.UE = self
+            return True
+    
+    def merge_ps_handler(self, iups):
+        if self.IuPS is not None and self.IuPS.GMM.state != UEGMMd.state:
+            print('iups: ', iups, iups.GMM, iups.GMM.state)
+            print('self.IuPS: ', self.IuPS, self.IuPS.GMM, self.IuPS.GMM.state)
+            return False
+        else:
+            self.IuPS   = iups
+            iups.UE     = self
+            iups.GMM.UE = self
+            iups.SM.UE  = self
+            return True
+    
     #--------------------------------------------------------------------------#
     # UE identity
     #--------------------------------------------------------------------------#
@@ -221,7 +244,7 @@ class UEd(SigStack):
             self._log('INF', 'unhandled identity, type %i, ident %s' % (idtype, ident))
     
     def get_new_tmsi(self):
-        # use the Python 
+        # use the Python random generator
         return random.getrandbits(32)
     
     def set_tmsi(self, tmsi):
@@ -267,23 +290,23 @@ class UEd(SigStack):
     def set_plmn(self, plmn):
         if plmn != self.PLMN:
             self.PLMN = plmn
-            self._log('INF', 'moving to PLMN %s' % self.PLMN)
+            self._log('INF', 'locate to PLMN %s' % self.PLMN)
     
     def set_lac(self, lac):
         if lac != self.LAC:
             self.LAC = lac
-            self._log('INF', 'moving to LAC %.4x' % self.LAC)
+            self._log('INF', 'locate to LAC %.4x' % self.LAC)
     
     def set_rac(self, rac):
         if rac != self.RAC:
             self.RAC = rac
-            self._log('INF', 'moving to RAC %.2x' % self.RAC)
+            self._log('INF', 'routing to RAC %.2x' % self.RAC)
         
     def set_tac(self, tac):
         if tac != self.TAC:
             self.TAC = tac
             # TBC
-            self._log('INF', 'movinf to TAC')
+            self._log('INF', 'tracking to TAC')
     
     def set_lai(self, plmn, lac):
         self.set_plmn(plmn)

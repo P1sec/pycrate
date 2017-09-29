@@ -57,14 +57,14 @@ HNBd.TRACE_ASN_RANAP = False
 ENBd.DEBUG = ('ERR', 'WNG', 'INF') #, 'DBG')
 ENBd.TRACE_ASN_S1AP  = False
 # global UE debug level
-UEd.DEBUG  = ('ERR', 'WNG', 'INF', 'DBG')
+UEd.DEBUG  = ('ERR', 'WNG', 'INF') #, 'DBG')
 UEd.TRACE_RANAP_CS   = False
 UEd.TRACE_RANAP_PS   = False
 UEd.TRACE_S1AP       = False
 UEd.TRACE_NAS_CS     = False
-UEd.TRACE_NAS_PS     = True
-UEd.TRACE_NAS_EMMENC = True
-UEd.TRACE_NAS_EPS    = True
+UEd.TRACE_NAS_PS     = False
+UEd.TRACE_NAS_EMMENC = False
+UEd.TRACE_NAS_EPS    = False
 
 
 class CorenetServer(object):
@@ -103,12 +103,14 @@ class CorenetServer(object):
     SERVER_ENB = {} # disabling S1AP server
     #
     # Server scheduler resolution:
-    # This is the resolution (in sec) for the Server to check the list of registered UE,
-    # and check for ongoing NAS procedures potentially in timeout.
-    # This is also applied as a timeout on the main select() loop.
+    # This is the timeout on the main select() loop.
     SCHED_RES = 0.1
-    # This is the flag for enabling the cleaning of NAS procedures on timeout
-    SCHED_UE_TO = True
+    # This is the resolution (in sec) for the Server to start a thread that 
+    # checks the list of registered UE, and checks for ongoing NAS procedures 
+    # potentially in timeout.
+    # If set to 0, no check is made (so, NAS procedures can stall)
+    # It is useless to make it lower than the SCHED_RES.
+    SCHED_UE_TO = 0.5
     
     #--------------------------------------------------------------------------#
     # corenet service handlers
@@ -163,11 +165,17 @@ class CorenetServer(object):
     #
     # This is a flag to allow any RAN equipment to connect the CorenetServer
     # If enabled, HNB and ENB dict will be populated at runtime
-    # If disabled, HNB and ENB keys (PLMN, CellID) needs to be setup
+    # If disabled, HNB and ENB keys (PLMN, CellID) needs to be setup by configuration
     RAN_CONNECT_ANY = True
     #
     # This is the list of accepted PLMN for RAN equipment connecting
     RAN_ALLOWED_PLMN = [PLMN]
+    #
+    # lookup dict to get the set of RAN ids (PLMN, CellId) that serves a given
+    # LAI, RAI and TAI
+    LAI = {}
+    RAI = {}
+    TAI = {}
     
     #--------------------------------------------------------------------------#
     # UE parameters
@@ -199,7 +207,7 @@ class CorenetServer(object):
     # When an non-preconfigured UE attaches the CorenetServer, ConfigUE['*'] is 
     # used to provide a default config and need to be defined.
     # use UE_ATTACH_FILTER = None to disable this permissive filter.
-    UE_ATTACH_FILTER = r'^20869'
+    UE_ATTACH_FILTER = '^20869'
     
     #--------------------------------------------------------------------------#
     # logging and init methods
@@ -228,7 +236,7 @@ class CorenetServer(object):
         # starting the server in background
         self._running = False
         if threaded:
-            self._server = threadit(self.start, **{'serving':serving})
+            self._server = threadit(self.start, serving=serving)
         else:
             self.start(serving=serving)
     
@@ -237,7 +245,6 @@ class CorenetServer(object):
     #--------------------------------------------------------------------------#
     
     def start(self, serving=True):
-        #
         # start SCTP servers, bind() and listen()
         self.SCTPServ   = [] # will be casted to tuple
         if DEBUG_SK:
@@ -259,14 +266,16 @@ class CorenetServer(object):
         #
         # init the dict for storing UE with unknown IMSI at attachment
         self._UEpre = {}
+        # init the UE procedure cleaner holder (with a dummy thread)
+        self._clean_ue_proc = threadit( lambda: 1 )
         #
         # start sub-servers
         if self.AUCd:
-            self.AUCd  = self.AUCd()
+            self.AUCd  = self.__class__.AUCd()
         if self.GTPUd:
-            self.GTPUd = self.GTPUd()
+            self.GTPUd = self.__class__.GTPUd()
         if self.SMSd:
-            self.SMSd  = self.SMSd()
+            self.SMSd  = self.__class__.SMSd()
         #
         if serving:
             # serve connections
@@ -345,12 +354,12 @@ class CorenetServer(object):
                     self.handle_stream_msg(sk)
             #
             # clean-up potential signalling procedures in timeout
-            if self.SCHED_UE_TO:
-                if not skr or time() - T0 > self.SCHED_RES:
-                    # select() timeout or more than `SCHED_RES' seconds since 
-                    # last timeout
-                    self.clean_ue_proc()
-                    T0 = time()
+            if self.SCHED_UE_TO and not self._clean_ue_proc.isAlive() and \
+            time() - T0 > self.SCHED_UE_TO:
+                # select() timeout or more than `SCHED_RES' seconds since 
+                # last timeout
+                self._clean_ue_proc = threadit(self.clean_ue_proc)
+                T0 = time()
     
     def stop(self):
         self._running = False
@@ -359,6 +368,7 @@ class CorenetServer(object):
             self._sk_hnb.close()
         if self._sk_enb:
             self._sk_enb.close()
+        self._clean_ue_proc.join()
         #
         # disconnect all RAN clients
         for cli in self.SCTPCli:
@@ -398,6 +408,12 @@ class CorenetServer(object):
             if sk in self.SCTPCli:
                 self._rem_sk(sk)
                 return None, None
+        except ConnectionError as err:
+            # something went bad with the endpoint
+            self._log('ERR', 'sctp_recv() failed, err: {0}'.format(err))
+            if sk in self.SCTPCli:
+                self._rem_sk(sk)
+                return None, None
         if DEBUG_SK:
             self._skc.append( ('recv', time(), addr, flags, buf, notif) )
         if not buf:
@@ -420,9 +436,13 @@ class CorenetServer(object):
         # select RAN client
         cli = self.RAN[self.SCTPCli[sk]]
         if isinstance(cli, HNBd):
-            self._log('DBG', 'HNB %r closed connection' % (cli.ID,))
+            self._log('DBG', 'HNB %r closed connection' % (cli.ID,))            
+            # remove from the Server location tables
+            self._unset_hnb_loc(cli)
         elif isinstance(cli, ENBd):
             self._log('DBG', 'eNB %r closed connection' % (cli.ID,))
+            # remove from the Server location tables
+            self._unset_enb_loc(cli)
         else:
             assert()
         # update HNB / ENB state
@@ -437,6 +457,7 @@ class CorenetServer(object):
             ppid = socket.htonl(ppid)
         if stream:
             stream = socket.htonl(stream)
+        ret = 0
         try:
             ret = sk.sctp_send(buf, ppid=ppid, stream=stream)
         except Exception as err:
@@ -446,8 +467,84 @@ class CorenetServer(object):
         else:
             if DEBUG_SK:
                 self._skc.append( ('send', time(), buf, ppid, stream) )
+        return ret
     
-    # Connecting an eNodeB
+    def handle_stream_msg(self, sk):
+        buf, notif = self._read_sk(sk)
+        if not buf:
+            # WNG: it may be required to handle SCTP notifications, at some point...
+            return
+        # getting SCTP PPID
+        ppid  = socket.ntohl(notif.ppid)
+        HNBId = self.SCTPCli[sk]
+        hnb   = self.RAN[HNBId]
+        #
+        # PPID is HNBAP or RUA
+        if ppid == SCTP_PPID_HNBAP:
+            if not hnbap_acquire():
+                hnb._log('ERR', 'unable to acquire the HNBAP module')
+                return
+            try:
+                PDU_HNBAP.from_aper(buf)
+            except:
+                self._log('WNG', 'invalid HNBAP PDU: %s' % hexlify(buf).decode('ascii'))
+            pdu = PDU_HNBAP()
+            if hnb.TRACE_ASN_HNBAP:
+                hnb._log('TRACE_ASN_HNBAP_UL', PDU_HNBAP.to_asn1())
+            hnbap_release()
+            ret = hnb.process_hnbap_pdu(pdu)
+        elif ppid == SCTP_PPID_RUA:
+            if not rua_acquire():
+                hnb._log('ERR', 'unable to acquire the RUA module')
+                return
+            try:
+                PDU_RUA.from_aper(buf)
+            except:
+                self._log('WNG', 'invalid RUA PDU: %s' % hexlify(buf).decode('ascii'))
+            pdu = PDU_RUA()
+            if hnb.TRACE_ASN_RUA:
+                hnb._log('TRACE_ASN_RUA_UL', PDU_HNBAP.to_asn1())
+            rua_release()
+            ret = hnb.process_rua_pdu(pdu)
+        else:
+            self._log('ERR', 'invalid SCTP PPID, %i' % ppid)
+            if self.SERVER_HNB['errclo']:
+                self._rem_sk(sk)
+            return
+        #
+        # send available PDU(s) back
+        if ppid == SCTP_PPID_HNBAP:
+            for retpdu in ret:
+                self.send_hnbap_pdu(hnb, retpdu)
+        else:
+            for retpdu in ret:
+                self.send_rua_pdu(hnb, retpdu)
+    
+    def send_hnbap_pdu(self, hnb, pdu):
+        if not hnbap_acquire():
+            hnb._log('ERR', 'unable to acquire the HNBAP module')
+            return
+        PDU_HNBAP.set_val(pdu)
+        if hnb.TRACE_ASN_HNBAP:
+            hnb._log('TRACE_ASN_HNBAP_DL', PDU_HNBAP.to_asn1())
+        ret = self._write_sk(hnb.SK, PDU_HNBAP.to_aper(), ppid=SCTP_PPID_HNBAP)
+        hnbap_release()
+        return ret
+    
+    def send_rua_pdu(self, hnb, pdu):
+        if not rua_acquire():
+            hnb._log('ERR', 'unable to acquire the RUA module')
+            return
+        PDU_RUA.set_val(pdu)
+        if hnb.TRACE_ASN_RUA:
+            hnb._log('TRACE_ASN_RUA_DL', PDU_RUA.to_asn1())
+        ret = self._write_sk(hnb.SK, PDU_RUA.to_aper(), ppid=SCTP_PPID_RUA)
+        rua_release()
+        return ret
+    
+    #--------------------------------------------------------------------------#
+    # eNodeB connection
+    #--------------------------------------------------------------------------#
     # TODO
     
     def handle_new_enb(self):
@@ -466,8 +563,15 @@ class CorenetServer(object):
         pdu = PDU_S1AP()
         # to be completed
     
+    def _set_enb_loc(self, enb):
+        pass
     
-    # Connecting a Home-NodeB
+    def _unset_enb_loc(self, enb):
+        pass
+    
+    #--------------------------------------------------------------------------#
+    # Home-NodeB connection
+    #--------------------------------------------------------------------------#
     
     def _parse_hnbregreq(self, pdu):
         if pdu[0] != 'initiatingMessage':
@@ -495,7 +599,7 @@ class CorenetServer(object):
             CellID = cellid_bstr_to_str(cellid)
             return PLMN, CellID
         except:
-            return None, None
+            return None
     
     def _send_hnbregrej(self, sk, cause):
         IEs = [{'criticality': 'ignore',
@@ -506,10 +610,14 @@ class CorenetServer(object):
                 'procedureCode': 1,
                 'value': (('HNBAP-PDU-Contents', 'HNBRegisterReject'),
                           {'protocolIEs' : IEs})})
-        PDU_HNBAP.set_val(pdu)
-        if HNBd.TRACE_ASN_HNBAP:
-            self._log('TRACE_ASN_HNBAP_DL', PDU_HNBAP.to_asn1())
-        self._write_sk(sk, PDU_HNBAP.to_aper(), ppid=SCTP_PPID_HNBAP)
+        if not hnbap_acquire():
+            self._log('ERR', 'unable to acquire the HNBAP module')
+        else:
+            PDU_HNBAP.set_val(pdu)
+            if HNBd.TRACE_ASN_HNBAP:
+                self._log('TRACE_ASN_HNBAP_DL', PDU_HNBAP.to_asn1())
+            void = self._write_sk(sk, PDU_HNBAP.to_aper(), ppid=SCTP_PPID_HNBAP)
+            hnbap_release()
         if self.SERVER_HNB['errclo']:
             sk.close()
     
@@ -529,6 +637,9 @@ class CorenetServer(object):
                 sk.close()
             return
         #
+        if not hnbap_acquire():
+            self._log('ERR', 'unable to acquire the HNBAP module')
+            return
         try:
             PDU_HNBAP.from_aper(buf)
         except:
@@ -537,6 +648,7 @@ class CorenetServer(object):
         if HNBd.TRACE_ASN_HNBAP:
             self._log('TRACE_ASN_HNBAP_UL', PDU_HNBAP.to_asn1())
         pdu = PDU_HNBAP()
+        hnbap_release()
         #
         # ensure we have a HNBRegisterRequest with PLMN and CellID provided
         HNBId = self._parse_hnbregreq(pdu)
@@ -556,17 +668,17 @@ class CorenetServer(object):
                 return
             else:
                 # creating an entry for this HNB
-                self.RAN[HNBId] = HNBd(self, sk)
-                ret = self.RAN[HNBId].process_hnbap_pdu(pdu)
+                hnb = HNBd(self, sk)
+                self.RAN[HNBId] = hnb
         else:
             if self.RAN[HNBId] is None:
                 # HNB allowed, but not yet connected
-                self.RAN[HNBId] = HNBd(self, sk)
-                ret = self.RAN[HNBId].process_hnbap_pdu(pdu)
+                hnb = HNBd(self, sk)
+                self.RAN[HNBId] = hnb
             elif not self.RAN[HNBId].is_connected():
                 # HNB already connected and disconnected in the past
-                self.RAN[HNBId].__init__(self, sk)
-                ret = self.RAN[HNBId].process_hnbap_pdu(pdu)
+                hnb = self.RAN[HNBId]
+                hnb.__init__(self, sk)
             else:
                 # HNB already connected
                 self._log('ERR', 'HNB %r already connected from address %r'\
@@ -575,66 +687,49 @@ class CorenetServer(object):
                     sk.close()
                 return
         #
+        # process the initial PDU
+        ret = hnb.process_hnbap_pdu(pdu)
         # keep track of the client
         self.SCTPCli[sk] = HNBId
+        # add the hnb LAI / RAI to the Server location tables
+        self._set_hnb_loc(hnb)
+        #
         # send available PDU(s) back
+        if not hnbap_acquire():
+           hnb._log('ERR', 'unable to acquire the HNBAP module')
+           return
         for retpdu in ret:
             PDU_HNBAP.set_val(retpdu)
             if HNBd.TRACE_ASN_HNBAP:
-                self._log('TRACE_ASN_HNBAP_DL', PDU_HNBAP.to_asn1())
-            self._write_sk(sk, PDU_HNBAP.to_aper(), ppid=SCTP_PPID_HNBAP)
+                hnb._log('TRACE_ASN_HNBAP_DL', PDU_HNBAP.to_asn1())
+            void = self._write_sk(sk, PDU_HNBAP.to_aper(), ppid=SCTP_PPID_HNBAP)
+        hnbap_release()
     
-    
-    def handle_stream_msg(self, sk):
-        buf, notif = self._read_sk(sk)
-        if not buf:
-            # WNG: maybe required to handle SCTP notification, at some point
-            return
-        # getting SCTP PPID
-        ppid = socket.ntohl(notif.ppid)
-        # PPID is HNBAP or RUA
-        if ppid == SCTP_PPID_HNBAP:
-            try:
-                PDU_HNBAP.from_aper(buf)
-            except:
-                self._log('WNG', 'invalid HNBAP PDU: %s' % hexlify(buf).decode('ascii'))
-            pdu   = PDU_HNBAP()
-            HNBId = self.SCTPCli[sk]
-            Hnbd  = self.RAN[HNBId]
-            if Hnbd.TRACE_ASN_HNBAP:
-                Hnbd._log('TRACE_ASN_HNBAP_UL', PDU_HNBAP.to_asn1())
-            ret   = Hnbd.process_hnbap_pdu(pdu)
-        elif ppid == SCTP_PPID_RUA:
-            try:
-                PDU_RUA.from_aper(buf)
-            except:
-                self._log('WNG', 'invalid RUA PDU: %s' % hexlify(buf).decode('ascii'))
-            pdu   = PDU_RUA()
-            HNBId = self.SCTPCli[sk]
-            Hnbd  = self.RAN[HNBId]
-            if Hnbd.TRACE_ASN_RUA:
-                Hnbd._log('TRACE_ASN_RUA_UL', PDU_HNBAP.to_asn1())
-            ret   = Hnbd.process_rua_pdu(pdu)
+    def _set_hnb_loc(self, hnb):
+        lai = (hnb.Config['PLMNidentity'], hnb.Config['LAC'])
+        rai = lai + (hnb.Config['RAC'], )
+        if lai in self.LAI:
+            assert( hnb.ID not in self.LAI[lai] )
+            self.LAI[lai].add( hnb.ID )
         else:
-            self._log('ERR', 'invalid SCTP PPID, %i' % ppid)
-            if self.SERVER_HNB['errclo']:
-                self._rem_sk(sk)
-            return
-        #
-        # send available PDU(s) back
-        if ppid == SCTP_PPID_HNBAP:
-            for retpdu in ret:
-                PDU_HNBAP.set_val(retpdu)
-                if Hnbd.TRACE_ASN_HNBAP:
-                    Hnbd._log('TRACE_ASN_HNBAP_DL', PDU_HNBAP.to_asn1())
-                self._write_sk(sk, PDU_HNBAP.to_aper(), ppid=SCTP_PPID_HNBAP)
+            self.LAI[lai] = set( (hnb.ID, ) )
+        if rai in self.RAI:
+            assert( hnb.ID not in self.RAI[rai] )
+            self.RAI[rai].add( hnb.ID )
         else:
-            for retpdu in ret:
-                PDU_RUA.set_val(retpdu)
-                if Hnbd.TRACE_ASN_RUA:
-                    Hnbd._log('TRACE_ASN_RUA_DL', PDU_RUA.to_asn1())
-                self._write_sk(sk, PDU_RUA.to_aper(), ppid=SCTP_PPID_RUA)
+            self.RAI[rai] = set( (hnb.ID, ) )
     
+    def _unset_hnb_loc(self, hnb):
+        lai = (hnb.Config['PLMNidentity'], hnb.Config['LAC'])
+        rai = lai + (hnb.Config['RAC'], )
+        try:
+            self.LAI[lai].remove(hnb.ID)
+        except:
+            self._log('ERR', 'HNB not referenced into the LAI table')
+        try:
+            self.RAI[rai].remove(hnb.ID)
+        except:
+            self._log('ERR', 'HNB not referenced into the RAI table')
     
     #--------------------------------------------------------------------------#
     # UE handler
@@ -668,18 +763,18 @@ class CorenetServer(object):
             tmsi = kw['tmsi']
             if tmsi in self.TMSI:
                 return self.UE[self.TMSI[tmsi]]
-            elif '*' in self.ConfigUE:
+            else:
                 # creating a UEd instance which will request IMSI
-                ued = UEd(self, '', tmsi=tmsi, config=self.ConfigUE['*'])
+                ued = UEd(self, '', tmsi=tmsi)
                 self._UEpre[tmsi] = ued
                 return ued
         elif 'ptmsi' in kw:
             ptmsi = kw['ptmsi']
             if ptmsi in self.PTMSI:
                 return self.UE[self.PTMSI[ptmsi]]
-            elif '*' in self.ConfigUE:
+            else:
                 # creating a UEd instance which will request IMSI
-                ued = UEd(self, '', ptmsi=ptmsi, config=self.ConfigUE['*'])
+                ued = UEd(self, '', ptmsi=ptmsi)
                 self._UEpre[ptmsi] = ued
                 return ued
         return None
@@ -688,12 +783,63 @@ class CorenetServer(object):
         if imsi in self.ConfigUE:
             # preconfigured UE
             return True
-        elif re.match(self.UE_ATTACH_FILTER, imsi):
+        elif re.match(self.UE_ATTACH_FILTER, imsi) and '*' in self.ConfigUE:
             # non-preconfigured UE
             return True
         else:
             return False
     
+    def is_imei_allowed(self, imei):
+        # to be implemented
+        return True
+    
+    def is_imeisv_allowed(self, imeisv):
+        # to be implemented
+        return True
+    
     def clean_ue_proc(self):
-        pass
+        #self._log('DBG', 'clean_ue_proc()')
+        # go over all UE and abort() NAS signalling procedures in timeout
+        T = time()
+        for ue in self.UE.values():
+            if ue.IuCS is not None:
+                if ue.IuCS.MM.Proc:
+                    for P in ue.IuCS.MM.Proc:
+                        if hasattr(P, 'TimerStop') and T > P.TimerStop:
+                            P._log('WNG', 'timeout: aborting')
+                            P.abort()
+            
+                #if ue.IuCS.CC.Proc:
+                #    for P in ue.IuCS.CC.Proc.values():
+                #        if hasattr(P, 'TimerStop') and T > P.TimerStop:
+                #            P._log('WNG', 'timeout: aborting')
+                #            P.abort()
+                
+                #if ue.IuCS.SMS.Proc:
+                #    for P in ue.IuCS.SMS.Proc.values():
+                #        if hasattr(P, 'TimerStop') and T > P.TimerStop:
+                #            P._log('WNG', 'timeout: aborting')
+                #            P.abort()
+            
+            if ue.IuPS is not None:
+            
+                if ue.IuPS.GMM.Proc:
+                    for P in ue.IuPS.GMM.Proc:
+                        if hasattr(P, 'TimerStop') and T > P.TimerStop:
+                            P._log('WNG', 'timeout: aborting')
+                            P.abort()
+                
+                #if ue.IuPS.SM.Proc:
+                #    for P in ue.IuCS.CC.Proc.values():
+                #        if hasattr(P, 'TimerStop') and T > P.TimerStop:
+                #            P._log('WNG', 'timeout: aborting')
+                #            P.abort()
+            
+            #if ue.S1 is not None:
+            #
+                #if ue.S1.EMM.Proc:
+                #    pass
+                
+                #if ue.S1.ESM.Proc:
+                #    pass
 

@@ -231,16 +231,57 @@ class HNBd(SigStack):
                 self.ProcRuaLast = ProcRet.Code
             return snd
     
-    def init_hnbap_proc(self, Proc, **kw):
-        """initialize a HNBAP procedure
+    def init_hnbap_proc(self, ProcClass, **kw):
+        """initialize a CN-initiated HNBAP procedure of class `ProcClass',
+        encode the initiatingMessage PDU with given **kw and return the procedure
         """
-        pass
+        if ProcClass.Code in self.ProcHnbap:
+            self._log('ERR', 'a HNBAP procedure %s is already ongoing, unable to start a new one'\
+                      % ProcClass.__name__)
+            return None
+        Proc = ProcClass(self)
+        # store the procedure
+        self.ProcHnbap[Proc.Code] = Proc
+        if self.TRACK_PROC_HNBAP:
+            # keep track of the procedure
+            self._proc.append( Proc )
+        Proc.encode_pdu('ini', **kw)
+        return Proc
     
-    def init_rua_proc(self, Proc, **kw):
-        """initialize a RUA procedure
+    def init_rua_proc(self, ProcClass, **kw):
+        """initialize a CN-initiated RUA procedure of class `ProcClass',
+        encode the initiatingMessage PDU with given **kw and return the procedure
         """
-        pass
+        if ProcClass.Code in self.ProcHnbap:
+            self._log('ERR', 'a RUA procedure %s is already ongoing, unable to start a new one'\
+                      % ProcClass.__name__)
+            return None
+        Proc = ProcClass(self)
+        if self.TRACK_PROC_RUA:
+            # keep track of the procedure
+            self._proc.append( Proc )
+        Proc.encode_pdu('ini', **kw)
+        return Proc
     
+    def start_hnbap_proc(self, ProcClass, **kw):
+        """initialize a HNBAP procedure and send its initiatingMessage PDU over Iuh
+        """
+        Proc = self.init_hnbap_proc(ProcClass, **kw)
+        if Proc is None:
+            return
+        self.ProcHnbapLast = Proc
+        for pdu in Proc.send():
+            ret = self.Server.send_hnbap_pdu(self, pdu)
+    
+    def start_rua_proc(self, ProcClass, **kw):
+        """initialize a RUA procedure and send its initiatingMessage PDU over Iuh
+        """
+        Proc = self.init_rua_proc(ProcClass, **kw)
+        if Proc is None:
+            return
+        self.ProcRuaLast = Proc
+        for pdu in Proc.send():
+            ret = self.Server.send_rua_pdu(self, pdu)
     
     #--------------------------------------------------------------------------#
     # handling of UE signaling procedures
