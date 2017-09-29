@@ -239,7 +239,32 @@ SubTypeDictLU_dict = {
     12 : TypeUMTSRRC_dict,
     13 : TypeLTERRC_dict
     }
-    
+
+
+"""
+Mapping of the osmocom / wireshark gsmtap header structure
+
+see: http://cgit.osmocom.org/libosmocore/tree/include/osmocom/core/gsmtap.h
+
+struct gsmtap_hdr {
+    uint8_t version;	/*!< version, set to 0x01 currently */
+    uint8_t hdr_len;	/*!< length in number of 32bit words */
+    uint8_t type;		/*!< see GSMTAP_TYPE_* */
+    uint8_t timeslot;	/*!< timeslot (0..7 on Um) */
+
+    uint16_t arfcn;		/*!< ARFCN (frequency) */
+    int8_t signal_dbm;	/*!< signal level in dBm */
+    int8_t snr_db;		/*!< signal/noise ratio in dB */
+
+    uint32_t frame_number;	/*!< GSM Frame Number (FN) */
+
+    uint8_t sub_type;	/*!< Type of burst/channel, see above */
+    uint8_t antenna_nr;	/*!< Antenna Number */
+    uint8_t sub_slot;	/*!< sub-slot within timeslot */
+    uint8_t res;		/*!< reserved for future use (RFU) */
+
+} __attribute__((packed));
+"""
 
 class gsmtap_hdr(Envelope):
     _GEN = (
@@ -251,6 +276,7 @@ class gsmtap_hdr(Envelope):
         Uint('uplink', bl=1),
         Uint('arfcn', bl=14),
         Int8('signal_dbm'),
+        Int8('snr_db'),
         Uint32('frame_number'), # GSM FN
         Uint8('sub_type'), # type of channel
         Uint8('antenna_nr'), # antenna number
