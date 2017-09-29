@@ -1279,9 +1279,9 @@ _NonDRXTimer_dict = {
 class DRXParam(Envelope):
     _GEN = (
         Uint8('SPLIT_PG_CYCLE_CODE', val=0, dic=_SplitPGCycleC_dict),
-        Uint('DRXCycleLen', val=0, bl=3, dic=_DRXCycleLen_dict),
+        Uint('DRXCycleLen', val=0, bl=4, dic=_DRXCycleLen_dict),
         Uint('SPLITonCCCH', val=0, bl=1),
-        Uint('NonDRXTimer', val=0, bl=4, dic=_NonDRXTimer_dict)
+        Uint('NonDRXTimer', val=0, bl=3, dic=_NonDRXTimer_dict)
         )
 
 

@@ -214,7 +214,10 @@ class GMMDetachRequestMO(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMDetachAcceptMT(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':6})._content)
+    _GEN = tuple(GMMHeader(val={'Type':6})._content) + (
+        Uint('spare', val=0, bl=4),
+        ForceStdby()
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -223,10 +226,7 @@ class GMMDetachAcceptMT(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMDetachAcceptMO(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':6})._content) + (
-        Uint('spare', val=0, bl=4),
-        ForceStdby()
-        )
+    _GEN = tuple(GMMHeader(val={'Type':6})._content)
 
 
 #------------------------------------------------------------------------------#
