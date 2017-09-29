@@ -167,11 +167,11 @@ class CSN1Obj(Element):
     # object common API with pycrate_core.elt.Element 
     #--------------------------------------------------------------------------#
     
-    def _from_char_obj(self, char):
-        raise(PycrateErr('not implemented'))
-     
-    def _to_pack_obj(self):
-        raise(PycrateErr('not implemented'))
+    #def _from_char_obj(self, char):
+    #    raise(PycrateErr('not implemented'))
+    # 
+    #def _to_pack_obj(self):
+    #    raise(PycrateErr('not implemented'))
     
     def _from_char(self, char, lref=None):
         global _root_obj
@@ -227,11 +227,28 @@ class CSN1Obj(Element):
         ret = []
         if self._num == 1:
             ret.extend( self._to_pack_obj() )
-        elif self._num > 1 or self._num == -1:
+        elif self._num > 1:
+            # self._val is a list
+            assert( isinstance(self._val, list) and len(self._val) == self._num )
+            _num = self._num
+            _val = self._val
+            self._num = 1
+            for val in _val:
+                self._val = val
+                ret.extend( self._to_pack_obj() )
+            self._num = _num
+            self._val = _val
+        elif self._num == -1:
             # self._val is a list
             assert( isinstance(self._val, list) )
-            for i in range(self._num):
+            _num = self._num
+            _val = self._val
+            self._num = 1
+            for val in _val:
+                self._val = val
                 ret.extend( self._to_pack_obj() )
+            self._num = _num
+            self._val = _val
         else:
             assert()
         #
@@ -239,6 +256,12 @@ class CSN1Obj(Element):
             _root_obj = root_obj
         #
         return ret
+    
+    def get_bl(self):
+        # this is required to support .bin() and .hex()
+        # we use _to_pack() because counting bits for CSN1Alt depends on the
+        # value set and needs value propagation and so on... and it's hard...
+        return sum([p[2] for p in self._to_pack()])
     
     def from_bytes(self, buf):
         if isinstance(buf, bytes_types):
@@ -586,7 +609,6 @@ class CSN1Alt(CSN1Obj):
             else:
                 Obj._val = obj_val
                 break
-    
     
     def _to_pack_obj(self):
         ret = []
