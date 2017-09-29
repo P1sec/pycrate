@@ -628,7 +628,7 @@ class Element(object):
         
         Returns:
             uint (int) : unsigned integer
-        """.format(self.__class__.__name__)
+        """
         return bytes_to_uint(self.to_bytes(), self.get_bl())
     
     def from_int(self, integ, bl=None):
@@ -667,9 +667,7 @@ class Element(object):
         Returns:
             integ (int) : signed integer
         """
-        char = Charpy()
-        char.set_bytes(self.to_bytes(), self.get_bl())
-        return char.to_int()
+        return bytes_to_int(self.to_bytes(), self.get_bl())
     
     if python_version < 3:
         __str__ = to_bytes
@@ -679,18 +677,24 @@ class Element(object):
     #--------------------------------------------------------------------------#
     # representation routines
     #--------------------------------------------------------------------------#
-    # TODO: bin() and hex() must be optimized
-    # creating a Charpy() instance here is overkill
     
     def bin(self):
-        char = Charpy()
-        char.set_bytes(self.to_bytes(), self.get_bl())
-        return char.bin()
+        bl = self.get_bl()
+        if bl == 0:
+            return ''
+        else:
+            bs = bytes_to_bitstr(self.to_bytes())
+            if len(bs) > bl:
+                return bs[:bl]
+            else:
+                return bs
     
     def hex(self):
-        char = Charpy()
-        char.set_bytes(self.to_bytes(), self.get_bl())
-        return char.hex()
+        bl = self.get_bl()
+        if bl == 0:
+            return ''
+        else:
+            return uint_to_hex(bytes_to_uint(self.to_bytes(), bl), bl)
     
     __bin__ = bin
     __hex__ = hex
@@ -1304,7 +1308,7 @@ class Atom(Element):
         else:
             desc = ''
         # type of representation to be used
-        val = self.get_val()
+        val = self()
         if self._rep in (REPR_RAW, REPR_HUM):
             val_repr = repr(val)
         elif self._rep == REPR_BIN:
@@ -1488,11 +1492,7 @@ class Envelope(Element):
         if 'content' in kw:
             #self._log('Envelope.__init__(content):', kw['content'])
             for i in kw['content']:
-                try:
-                    self.__getitem__(i).set_attr(**kw['content'][i])
-                except Exception as err:
-                    raise(EltErr('{0} [__init__] content error for {1}: {2}'\
-                          .format(self._name, i, err)))
+                self.__getitem__(i).set_attr(**kw['content'][i])
         
         # if a val dict is passed as argument
         # broadcast it to given content items
@@ -1540,20 +1540,11 @@ class Envelope(Element):
         elif isinstance(vals, (tuple, list)):
             ind = 0
             for elt in self.__iter__():
-                try:
-                    elt.set_val(vals[ind])
-                except Exception as err:
-                    raise(EltErr('{0} [set_val] index {1!r}: {2}'\
-                          .format(self._name, ind, err)))
-                else:
-                    ind += 1
+                elt.set_val(vals[ind])
+                ind += 1
         elif isinstance(vals, dict):
             for key, val in vals.items():
-                try:
-                    self.__setitem__(key, val)
-                except Exception as err:
-                    raise(EltErr('{0} [set_val] index {1!r}: {2}'\
-                          .format(self._name, key, err)))
+                self.__setitem__(key, val)
         elif self._SAFE_STAT:
             raise(EltErr('{0} [set_val]: vals type is {1}, expecting None, tuple, list or dict'\
                   .format(self._name, type(vals).__name__)))
@@ -1570,10 +1561,7 @@ class Envelope(Element):
         Raises:
             EltErr : if one element within the content raises
         """
-        try:
-            return [elt.get_val() for elt in self.__iter__()]
-        except Exception as err:
-            raise(EltErr('{0} [get_val]: {1}'.format(self._name, err)))
+        return [elt() for elt in self.__iter__()]
     
     def set_bl(self, bl):
         """Set the raw bit length to the given elements of the content of self
@@ -1594,20 +1582,11 @@ class Envelope(Element):
         if isinstance(bl, (tuple, list)):
             ind = 0
             for elt in self.__iter__():
-                try:
-                    elt.set_bl(bl[ind])
-                except Exception as err:
-                    raise(EltErr('{0} [set_bl] index {1!r}: {2}'\
-                          .format(self._name, ind, err)))
-                else:
-                    ind += 1
+                elt.set_bl(bl[ind])
+                ind += 1
         elif isinstance(bl, dict):
             for key, val in bl.items():
-                try:
-                    self.__getitem__(key).set_bl(val)
-                except Exception as err:
-                    raise(EltErr('{0} [set_bl] index {1!r}: {2}'\
-                          .format(self._name, key, err)))
+                self.__getitem__(key).set_bl(val)
         elif self._SAFE_STAT:
             raise(EltErr('{0} [set_bl]: bl type is {1}, expecting tuple, list '\
                          'or dict'.format(self._name, type(bl).__name__)))
@@ -1627,10 +1606,7 @@ class Envelope(Element):
         if self.get_trans():
             return 0
         else:
-            try:
-                return sum([elt.get_bl() for elt in self.__iter__()])
-            except Exception as err:
-                raise(EltErr('{0} [get_bl]: {1}'.format(self._name, err)))
+            return sum([elt.get_bl() for elt in self.__iter__()])
     
     def reautomate(self):
         """Reset all attributes of the elements which have an automation within 
@@ -1670,12 +1646,7 @@ class Envelope(Element):
         # especially if these are int / uint on 8, 16, 32, 64 bits
         if not self.get_trans():
             for elt in self.__iter__():
-                try:
-                    elt._from_char(char)
-                except CharpyErr as err:
-                    raise(CharpyErr('{0} [_from_char]: {1}'.format(self._name, err)))
-                except Exception as err:
-                    raise(EltErr('{0} [_from_char]: {1}'.format(self._name, err)))
+                elt._from_char(char)
     
     #--------------------------------------------------------------------------#
     # copy / cloning routines
@@ -1740,11 +1711,7 @@ class Envelope(Element):
         #
         if 'content' in kw:
             for name, attrs in kw['content'].items():
-                try:
-                    self.__getitem__(name).set_attrs(**attrs)
-                except Exception as err:
-                    raise(EltErr('{0} [set_attrs] content item {1!r}: {2}'\
-                          .format(self._name, name, err)))
+                self.__getitem__(name).set_attrs(**attrs)
         if 'bl' in kw:
             self.set_bl(kw['bl'])
         if 'val' in kw:
@@ -2114,7 +2081,7 @@ class Envelope(Element):
 class Array(Element):
     """
     Class for arrays: special element which acts as a container for a list of
-    values for a given inmutable element (atom, envelope, array, sequence)
+    values for a given immutable element (atom, envelope, array, sequence)
     
     class attribute:
     - GEN: element which is used to build the array template at initialization
@@ -2170,6 +2137,7 @@ class Array(Element):
                  '_tmpl',
                  '_tmpl_val',
                  '_tmpl_bl',
+                 '_tmpl_pack',
                  '_val',
                  '_it',
                  '_it_saved')
@@ -2253,8 +2221,9 @@ class Array(Element):
                       .format(self._name, err)))
         
         # set default value, and values container
-        self._tmpl_val = self._tmpl.get_val()
-        self._tmpl_bl = self._tmpl.get_bl()
+        self._tmpl_val  = self._tmpl()
+        self._tmpl_bl   = self._tmpl.get_bl()
+        self._tmpl_pack = self._tmpl._to_pack()
         self._val = []
         
         # array number of content
@@ -2291,51 +2260,39 @@ class Array(Element):
             self._val = []
         #
         elif isinstance(vals, dict):
+            max_ind = max(vals.keys())
             if self._SAFE_STAT:
                 # ensure the val dict indexes are valid
                 if not all([isinstance(k, integer_types) for k in vals]):
                     raise(EltErr('{0} [set_val] vals keys are not all integers'\
                           .format(self._name)))
-                # ensure all provided values fit in the template
-                try:
-                    [self._tmpl.set_val(v) for v in vals.values() if v != self._tmpl_val]
-                except Exception as err:
-                    raise(EltErr('{0} [set_val] invalid value for the template: {1}'\
-                          .format(self._name, err)))
-                else:
-                    self._tmpl.set_val(None)
-            # get the maximum index from the dict and ensure it does not overflow 
-            # a fixed number of iteration
-            max_ind = max(vals.keys())
-            if self._SAFE_STAT and self._num is not None and max_ind >= self._num:
-                raise(EltErr('{0} [set_val] vals index {1} overflow (max {2})'\
-                      .format(self._name, max_ind, self._num)))
-            # in case the current value self._val does not goes up to the max 
-            # val dict index, just extend it with the default value
+                # ensure the max index does not overflow a fixed max size
+                if self._num is not None and max_ind >= self._num:
+                    raise(EltErr('{0} [set_val] vals index {1} overflow (max {2})'\
+                          .format(self._name, max_ind, self._num)))
+            #
+            # in case the current value self._val does not go up to the max index
+            # just extend it with the default value
             if len(self._val) <= max_ind:
                 self._val.extend( (1+max_ind-len(self._val)) * (self._tmpl_val, ) )
-            # set the given values at given indexes after ensuring they fit in 
-            # the template
             for i, v in vals.items():
-                self._val[i] = v
+                self._tmpl.set_val(v)
+                self._val[i] = self._tmpl()
+            # reset the template's value
+            self._tmpl.set_val(None)
         #
         elif isinstance(vals, (tuple, list)):
-            # ensure the val list is valid
-            if self._SAFE_STAT:
-                # ensure all provided values fit in the template
-                try:
-                    [self._tmpl.set_val(v) for v in vals if v != self._tmpl_val]
-                except Exception as err:
-                    raise(EltErr('{0} [set_val] invalid value for the template: {1}'\
-                          .format(self._name, err)))
-                else:
-                    self._tmpl.set_val(None)
+            if self._SAFE_STAT and self._num is not None and len(vals) != self._num:
                 # ensure vals length does not overflow a fixed number of iteration
-                if self._num is not None and len(vals) > self._num:
-                    raise(EltErr('{0} [set_val] vals length {1} overflow (max {2})'\
-                          .format(self._name, len(vals), self._num)))
-            # set the list of values while ensuring they fit in the template
-            self._val = vals
+                raise(EltErr('{0} [set_val] invalid number of values: {1} instead of {2}'\
+                      .format(self._name, len(vals), self._num)))
+            #
+            self._val = []
+            for v in vals:
+                self._tmpl.set_val(v)
+                self._val.append(self._tmpl())
+            # reset the template's value
+            self._tmpl.set_val(None)
         #
         else:
             raise(EltErr('{0} [set_val]: vals type is {1}, expecting None, tuple, list or dict'\
@@ -2442,13 +2399,15 @@ class Array(Element):
         if self.get_trans():
             return 0
         else:
-            try:
-                return sum([self._tmpl.get_bl() 
-                            if (v != self._tmpl_val and self._tmpl.set_val(v) is None) \
-                            else self._tmpl_bl \
-                            for v in self._val])
-            except Exception as err:
-                raise(EltErr('{0} [get_bl]: {1}'.format(self._name, err)))
+            ret = []
+            for v in self._val:
+                if v == self._tmpl_val:
+                    ret.append(self._tmpl_bl)
+                else:
+                    self._tmpl.set_val(v)
+                    ret.append(self._tmpl.get_bl())
+            self._tmpl.set_val(None)
+            return sum(ret)
     
     def reautomate(self):
         """Reset all attributes of self and its template which have an automation 
@@ -2478,8 +2437,12 @@ class Array(Element):
                 raise(EltErr('{0} [_to_pack] invalid number of values: {1} instead of {2}'\
                       .format(self._name, len(self._val), self._num)))
             pl = []
-            [pl.extend(self._tmpl._to_pack()) for v in self._val \
-             if self._tmpl.set_val(v) is None ]
+            for v in self._val:
+                if v == self._tmpl_val:
+                    pl.extend(self._tmpl_pack)
+                else:
+                    self._tmpl.set_val(v)
+                    pl.extend(self._tmpl._to_pack())
             self._tmpl.set_val(None)
             return pl
         else:
@@ -2507,14 +2470,9 @@ class Array(Element):
         self._val = []
         # 3) consume char and fill in self._val
         if num is not None:
-            try:
-                [self._val.append(self._tmpl.get_val()) for i in range(num) \
-                 if self._tmpl._from_char(char) is None]
-            except CharpyErr as err:
-                raise(CharpyErr('{0} [_from_char]: {1}'.format(self._name, err)))
-            except Exception as err:
-                raise(EltErr('{0} [_from_char]: {1}'.format(self._name, err)))
-            self._tmpl.set_val(None)
+            for i in range(num):
+                self._tmpl._from_char(char)
+                self._val.append(self._tmpl())
         else:
             # there is no predefined limit in the number of iteration
             # consume the charpy instance until its empty and raises
@@ -2526,11 +2484,9 @@ class Array(Element):
                 except CharpyErr as err:
                     char._cur = cur
                     break
-                except Exception as err:
-                    raise(EltErr('{0} [_from_char]: {1}'.format(self._name, err)))
                 else:
-                    self._val.append(self._tmpl.get_val())
-            self._tmpl.set_val(None)
+                    self._val.append(self._tmpl())
+        self._tmpl.set_val(None)
     
     #--------------------------------------------------------------------------#
     # copy / cloning routines
@@ -2601,13 +2557,10 @@ class Array(Element):
             self._chk_trans()
         #
         if 'tmpl' in kw:
-            try:
-                self._tmpl.set_attrs(**kw['tmpl'])
-            except Exception as err:
-                raise(EltErr('{0} [set_attrs] invalid tmpl: {1}'.format(self._name, err)))
-            else:
-                self._tmpl_val = self._tmpl.get_val()
-                self._tmpl_bl  = self._tmpl.get_bl()
+            self._tmpl.set_attrs(**kw['tmpl'])
+            self._tmpl_val  = self._tmpl()
+            self._tmpl_bl   = self._tmpl.get_bl()
+            self._tmpl_pack = self._tmpl._to_pack()
         #
         if 'val' in kw:
             self.set_val(kw['val'])
@@ -2658,17 +2611,15 @@ class Array(Element):
             if self._num is not None and len(self._val) == self._num:
                 raise(EltErr('{0} [append] val length {1} overflow (num {2})'\
                       .format(self._name, 1+len(self._val), self._num)))
-            # ensure the new value fits into the template
-            if val != self._tmpl_val:
-                try:
-                    self._tmpl.set_val(val)
-                except Exception as err:
-                    raise(EltErr('{0} [append] invalid value: {2}'.format(self._name, err)))
-                else:
-                    self._tmpl.set_val(None)
-        #
-        self._val.append(val)
+        # use the template to format the value
+        if val != self._tmpl_val:
+            self._tmpl.set_val(val)
+            self._val.append(self._tmpl())
+            self._tmpl.set_val(None)
+        else:
+            self._val.append(val)
     
+    # here, .count() is the number of iteration in the array
     count = get_num
     
     def extend(self, vals):
@@ -2687,15 +2638,14 @@ class Array(Element):
             if self._num is not None and len(vals) > (self._num-len(self._val)):
                 raise(EltErr('{0} [extend]: val length {1} overflow (num {2})'\
                       .format(self._name, len(self._val)+len(vals), self._num)))
-            # ensure the new values fit into the template
-            try:
-                [self._tmpl.set_val(v) for v in vals if v != self._tmpl_val]
-            except Exception as err:
-                raise(EltErr('{0} [extend] invalid value(s): {1}'.format(self._name, err)))
+        # use the template to format the values
+        for val in vals:
+            if val != self._tmpl_val:
+                self._tmpl.set_val(val)
+                self._val.append(self._tmpl())
             else:
-                self._tmpl.set_val(None)
-        #
-        self._val.extend(vals)
+                self._val.append(val)
+        self._tmpl.set_val(None)
     
     def index(self, val):
         """Provide the index of the first iteration of value `val' within the
@@ -2732,14 +2682,11 @@ class Array(Element):
             if self._num is not None and len(self._val) == self._num:
                 raise(EltErr('{0} [insert] val length {1} overflow (num {2})'\
                       .format(self._name, 1+len(self._val), self._num)))
-            if val != self._tmpl_val:
-                try:
-                    self._tmpl.set_val(val)
-                except Exception as err:
-                    raise(EltErr('{0} [insert] invalid value: {1}'\
-                                 .format(self._name, err)))
-                else:
-                    self._tmpl.set_val(None)
+        # use the template to format the value
+        if val != self._tmpl_val:
+            self._tmpl.set_val(val)
+            val = self._tmpl()
+            self._tmpl.set_val(None)
         try:
             self._val.insert(index, val)
         except Exception as err:
@@ -2803,15 +2750,11 @@ class Array(Element):
             ind = self._val.index(old)
         except:
             raise(EltErr('{0} [replace] invalid old: {1}'.format(self._name, err)))
-        if self._SAFE_STAT:
-            # ensure the new value fits into the template
-            if new != self._tmpl_val:
-                try:
-                    self._tmpl.set_val(new)
-                except Exception as err:
-                    raise(EltErr('{0} [replace] invalid value: {2}'.format(self._name, err)))
-                else:
-                    self._tmpl.set_val(None)
+        # use the template to format the value
+        if new != self._tmpl_val:
+            self._tmpl.set_val(new)
+            new = self._tmpl()
+            self._tmpl.set_val(None)
         del self._val[ind]
         self._val.insert(ind, new)
     
@@ -2819,7 +2762,7 @@ class Array(Element):
         self._it_saved.append(self._it)
         self._it = 0
         return self
-        
+    
     def __next__(self):
         if self._it >= len(self._val) or self._tmpl.get_trans():
             if self._it_saved:
@@ -2839,51 +2782,44 @@ class Array(Element):
     
     def __getitem__(self, key):
         if isinstance(key, integer_types):
+            try:
+                val = self._val[key]
+            except Exception as err:
+                raise(EltErr('{0} [__getitem__] int item: {1}'\
+                      .format(self._name, err)))
             clone = self._tmpl.clone()
-            try:
-                clone._val = self._val[key]
-            except Exception as err:
-                raise(EltErr('{0} [__getitem__] int item: {1}'.format(self._name, err)))
-            else:
-                return clone
+            clone.set_val(val)
+            return clone
         elif isinstance(key, slice):
-            slice_env = Array('slice', GEN=self._tmpl.clone())
             try:
-                slice_env._val = self._val[key]
+                val = self._val[key]
             except Exception as err:
-                raise(EltErr('{0} [__getitem__] slice item: {1}'.format(self._name, err)))
-            else:
-                return slice_env
+                raise(EltErr('{0} [__getitem__] slice item: {1}'\
+                      .format(self._name, err)))
+            slice_env = Array('slice', GEN=self._tmpl.clone())
+            slice_env.set_val(val)
+            return slice_env
         else:
             raise(EltErr('{0} [__getitem__]: array item must be int or slice'.format(self._name)))
     
     def __setitem__(self, key, val):
         if isinstance(key, integer_types):
-            if self._SAFE_STAT:
-                try:
-                    self._tmpl.set_val(val)
-                except Exception as err:
-                    raise(EltErr('{0} [__setitem__] invalid value: {1}'\
-                          .format(self._name, err)))
-                else:
-                    self._tmpl.set_val(None)
+            if val != self._tmpl_val:
+                self._tmpl.set_val(val)
+                val = self._tmpl()
+                self._tmpl.set_val(None)
             try:
                 self._val[key] = val
             except Exception as err:
-                raise(EltErr('{0} [__setitem__] int item: {1}'.format(self._name, err)))
+                raise(EltErr('{0} [__setitem__] int item: {1}'\
+                      .format(self._name, err)))
         elif isinstance(key, slice):
-            if self._SAFE_STAT:
+            for i, k in enumerate(key):
                 try:
-                    [self._tmpl.set_val(v) for v in val if v != self._tmpl_val]
-                except:
-                    raise(EltErr('{0} [__setitem__] invalid value: {1}'\
+                    self.__setitem__(k, val[i])
+                except Exception as err:
+                    raise(EltErr('{0} [__setitem__] slice item: {1}'\
                           .format(self._name, err)))
-                else:
-                    self._tmpl.set_val(None)
-            try:
-                self._val[key] = val
-            except Exception as err:
-                raise(EltErr('{0} [__setitem__] slice item: {1}'.format(self._name, err)))
         else:
             raise(EltErr('{0} [__setitem__]: array item must be int or slice'.format(self._name)))
     
@@ -2979,6 +2915,10 @@ class Sequence(Element):
     
     Sequence provides methods identical to Python list and dict in order to 
     manage Element's instances within its content easily
+    
+    Warning: transparency of certain elements within the Sequence's content is not
+    handled. Elements within the content must not be made transparent (e.g. with 
+    set_trans()), but must be remove()d instead.
     """
     
     # hardcoded class name
@@ -3126,16 +3066,16 @@ class Sequence(Element):
             self._content = []
         #
         elif isinstance(vals, dict):
-            if self._SAFE_STAT and not all([isinstance(k, integer_types) for k in vals]):
-                # ensure the val dict indexes are valid
-                raise(EltErr('{0} [set_val] vals keys are not all integers'\
-                      .format(self._name)))
-            # get the maximum index from the dict and ensure it does not overflow 
-            # a fixed number of iteration
             max_ind = max(vals.keys())
-            if self._SAFE_STAT and self._num is not None and max_ind >= self._num:
-                raise(EltErr('{0} [set_val]: vals index {1} overflow (max {2})'\
-                             .format(self._name, max_ind, self._num)))
+            if self._SAFE_STAT:
+                # ensure the val dict indexes are valid
+                if not all([isinstance(k, integer_types) for k in vals]):
+                    raise(EltErr('{0} [set_val] vals keys are not all integers'\
+                          .format(self._name)))
+                # ensure the max index does not overflow a fixed max size
+                if self._num is not None and max_ind >= self._num:
+                    raise(EltErr('{0} [set_val] vals index {1} overflow (max {2})'\
+                          .format(self._name, max_ind, self._num)))
             # in case the current content self._content does not goes up to the max 
             # val dict index, just extend it with the template element
             if len(self._content) <= max_ind:
@@ -3143,32 +3083,22 @@ class Sequence(Element):
             # set template's clones with given values at given indexes
             for i, v in vals.items():
                 clone = self._tmpl.clone()
-                try:
-                    clone.set_val(vals[i])
-                except Exception as err:
-                    raise(EltErr('{0} [set_val] error for index {1}: {2}'\
-                          .format(self._name, i, err)))
-                else:
-                    self._content[i] = clone
-                    clone._env = self
+                clone.set_val(vals[i])
+                self._content[i] = clone
+                clone._env = self
         #
         elif isinstance(vals, (tuple, list)):
             if self._SAFE_STAT and self._num is not None and len(vals) > self._num:
                 # ensure vals length does not overflow a fixed number of iteration
-                raise(EltErr('{0} [set_val]: vals length {1} overflow (max {2})'\
+                raise(EltErr('{0} [set_val] invalid number of values: {1} instead of {2}'\
                       .format(self._name, len(vals), self._num)))
             self._content, i = [], 0
             for v in vals:
                 clone = self._tmpl.clone()
-                try:
-                    clone.set_val(v)
-                except Exception as err:
-                    raise(EltErr('{0} [set_val] error for index {1}: {2}'\
-                                 .format(self._name, i, err)))
-                else:
-                    self._content.append(clone)
-                    clone._env = self
-                    i += 1
+                clone.set_val(v)
+                self._content.append(clone)
+                clone._env = self
+                i += 1
         #
         else:
             raise(EltErr('{0} [set_val]: vals type is {1}, expecting None, tuple, list or dict'\
@@ -3183,7 +3113,7 @@ class Sequence(Element):
         Returns:
             value (list) : list of values computed
         """
-        return [elt.get_val() for elt in self.__iter__()]  
+        return [elt() for elt in self._content]  
     
     def set_num(self, num=None):
         """Set the raw number of iteration of the template in the sequence's 
@@ -3279,10 +3209,7 @@ class Sequence(Element):
         if self.get_trans():
             return 0
         else:
-            try:
-                return sum([elt.get_bl() for elt in self.__iter__()])
-            except Exception as err:
-                raise(EltErr('{0} [get_bl]: {1}'.format(self._name, err)))
+            return sum([elt.get_bl() for elt in self._content])
     
     def reautomate(self):
         """Reset all attributes of self, its content and its template which have 
@@ -3298,7 +3225,7 @@ class Sequence(Element):
             del self._trans
         if self._numauto is not None and self._num is not None:
             del self._num
-        [elt.reautomate() for elt in self.__iter__() if elt != self._tmpl]
+        [elt.reautomate() for elt in self._content if elt != self._tmpl]
         self._tmpl.reautomate()
     
     #--------------------------------------------------------------------------#
@@ -3343,15 +3270,9 @@ class Sequence(Element):
         if num is not None:
             for i in range(num):
                 clone = self._tmpl.clone()
-                try:
-                    clone._from_char(char)
-                except CharpyErr as err:
-                    raise(CharpyErr('{0} [_from_char]: {1}'.format(self._name, err)))
-                except Exception as err:
-                    raise(EltErr('{0} [_from_char]: {1}'.format(self._name, err)))
-                else:
-                    self._content.append(clone)
-                    clone._env = self
+                clone._from_char(char)
+                self._content.append(clone)
+                clone._env = self
         else:
             # there is no predefined limit in the number of repeated content
             # consume the charpy instance until its empty and raises
@@ -3364,8 +3285,6 @@ class Sequence(Element):
                 except CharpyErr as err:
                     char._cur = cur
                     break
-                except Exception as err:
-                    raise(EltErr('{0} [_from_char]: {1}'.format(self._name, err)))
                 else:
                     self._content.append(clone)
                     clone._env = self
@@ -3411,7 +3330,7 @@ class Sequence(Element):
                 'transauto': self._transauto,
                 'num'      : self._num,
                 'numauto'  : self._numauto,
-                'tmpls'    : self._content.get_attrs_all(),
+                'tmpl'     : self._tmpl.get_attrs_all(),
                 'content'  : [elt.get_attrs_all() for elt in self._content]}
     
     def set_attrs(self, **kw):
@@ -3503,6 +3422,7 @@ class Sequence(Element):
         self._content.append(elt)
         elt._env = self
     
+    # here, .count() is the number of iteration in the sequence
     count = get_num
     
     def extend(self, elts):
@@ -3688,37 +3608,27 @@ class Sequence(Element):
                 slice_env._content = self._content[key]
             except Exception as err:
                 raise(EltErr('{0} [__getitem__] slice item: {1}'.format(self._name, err)))
-            else:
-                return slice_env
+            return slice_env
         else:
-            raise(EltErr('{0} [__getitem__]: sequence item must be int or slice'.format(self._name)))
+            raise(EltErr('{0} [__getitem__]: sequence item must be int or slice'\
+                  .format(self._name)))
     
     def __setitem__(self, key, val):
         if isinstance(key, integer_types):
             try:
-                if self._content[key] == self._tmpl:
-                    self._content[key] = self._tmpl.clone()
-                    self._content[key]._env = self
-                self._content[key].set_val(val)
+                elt = self._content[key]
             except Exception as err:
                 raise(EltErr('{0} [__setitem__] int item: {1}'.format(self._name, err)))
+            if elt == self._tmpl:
+                self._content[key] = self._tmpl.clone()
+            self._content[key].set_val(val)
         elif isinstance(key, slice):
-            try:
-                elts = self._content[key]
-            except Exception as err:
-                raise(EltErr('{0} [__setitem__] slice item: {1}'.format(self._name, err)))
-            ind = 0
-            for elt in elts:
-                if elt == self._tmpl:
-                    self._content[key.start+ind] = self._tmpl.clone()
-                    self._content[key.start+ind] = self
-                    elt = self._content[key.start+ind]
+            for i, k in enumerate(key):
                 try:
-                    elt.set_val(val[ind])
+                    self.__setitem__(k, val[i])
                 except Exception as err:
-                    raise(EltErr('{0} [__setitem__] slice item: {1}'.format(self._name, err)))
-                else:
-                    ind += 1
+                    raise(EltErr('{0} [__setitem__] slice item: {1}'\
+                          .format(self._name, err)))
         else:
             raise(EltErr('{0} [__setitem__]: sequence item must be int or slice'\
                   .format(self._name)))
@@ -3732,18 +3642,16 @@ class Sequence(Element):
                 elt = self._content[key]
             except:
                 raise(EltErr('{0} [__delitem__] int item: {1}'.format(self._name, err)))
-            else:
-                del self._content[key]
-                if elt != self._tmpl:
-                    elt._env = None
+            del self._content[key]
+            if elt != self._tmpl:
+                elt._env = None
         elif isinstance(key, slice):
             try:
                 elts = self._content[key]
             except Exception as err:
                 raise(EltErr('{0} [__delitem__] slice item: {1}'.format(self._name, err)))
-            else:
-                [elt.set_env(None) for elt in elts if elt != self._tmpl]
-                del self._content[key]
+            del self._content[key]
+            [elt.set_env(None) for elt in elts if elt != self._tmpl]
         else:
             raise(EltErr('{0} [__delitem__]: sequence item must be int or slice'\
                   .format(self._name)))
@@ -3781,7 +3689,7 @@ class Sequence(Element):
         #
         return '\n '.join( 
             [self.get_hier_abs()*'    ' + '### %s%s%s ###' % (self._name, desc, trans)] + \
-            [elt.show().replace('\n', '\n ') for elt in self.__iter__()])
+            [elt.show().replace('\n', '\n ') for elt in self._content])
     
     #--------------------------------------------------------------------------#
     # Python built-ins override

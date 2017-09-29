@@ -121,15 +121,11 @@ class Charpy(object):
         Returns:
             bit_str (str): string of 0 and 1
         """
-        if self.len_bit() == 0:
+        bitlen = self.len_bit()
+        if bitlen == 0:
             return ''
-        b = bin(self.to_uint())[2:]
-        # pad with heading zero
-        bitlen = self._len_bit - self._cur
-        if len(b) < bitlen:
-            return (bitlen-len(b))*'0' + b
         else:
-            return b
+            return uint_to_bitstr(self.to_uint(), bitlen)
     
     def hex(self):
         """Provide an hexadecimal representation of the remaining buffer
@@ -137,29 +133,13 @@ class Charpy(object):
         Returns:
             hex_str (str): string of hex character
         """
-        if self.len_bit() == 0:
+        bitlen = self.len_bit()
+        if bitlen == 0:
             return ''
-        uint = self.to_uint()
-        bitlen = self._len_bit - self._cur
-        h = hex(uint)[2:]
-        if h[-1] == 'L':
-            h = h[:-1]
-        dyn = 4*len(h)
-        shift = (bitlen-dyn) % 4
-        if shift:
-            h = hex(uint << (4-shift))[2:]
-            if h[-1] == 'L':
-                h = h[:-1]
-        #
-        niblen = bitlen // 4
-        if bitlen % 4:
-            niblen += 1
-        if len(h) < niblen:
-            return (niblen-len(h))*'0' + h
         else:
-            return h
+            return uint_to_hex(self.to_uint(), bitlen)
     
-    #    _REPR_POS = ('buf', 'bytelist', 'bitlist', 'uint', 'int', 'hex', 'bin')
+    # _REPR_POS = ('buf', 'bytelist', 'bitlist', 'uint', 'int', 'hex', 'bin')
     def repr(self):
         """Provide a printable representation of the remaining buffer
         
@@ -250,15 +230,13 @@ class Charpy(object):
     def forward(self, bitlen=None):
         """Set the charpy instance's cursor foward for the given bit length
         
-        Parameters
-        ----------
-        bitlen : None or unsigned integer
-            if None, set the cursor at the end of the charpy instance
-            else, set the cursor forward for the given number of bits
+        Args:
+            bitlen : None or unsigned integer
+                if None, set the cursor at the end of the charpy instance
+                else, set the cursor forward for the given number of bits
         
-        Returns
-        -------
-        None
+        Returns:
+            None
         """
         if self._concat: self._pack()
         if bitlen is None or bitlen > (self._len_bit - self._cur):

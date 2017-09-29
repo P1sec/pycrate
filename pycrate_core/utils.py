@@ -45,7 +45,7 @@ def log(msg):
     print(msg)
 
 #------------------------------------------------------------------------------#
-# additional bit list functions
+# additional bit list / str functions
 #------------------------------------------------------------------------------#
 
 def bytelist_to_bitlist(bytelist):
@@ -90,28 +90,34 @@ def bitlist_to_bytelist(bitlist):
             for i in range(0, len(bitlist), 8)]
         return ret
 
-def uint_to_bitlist(uint, bitlen):
-    """Convert an unsigned integer uint of length bitlen to a list of 0 and 1
+def bytes_to_bitstr(buf):
+    """Convert a bytes string to a str of 0 and 1
     
     Args:
-        uint (unsigned integer)
-        bitlen (unsigned integer)
+        buf (bytes) : bytes string
     
     Returns:
-        bitlist (list of 0 and 1)
+        bitlstr (str of integer) : str of 0 and 1
+    
+    Raises:
+        KeyError : if `s' is not bytes
     """
-    # this is crappy
-    bl = list(map(int, bin(uint)[2:]))
-    if len(bl) < bitlen:
-        # extend v
-        bl = [0]*(bitlen-len(bl)) + bl
-    return bl
+    bl = 8*len(buf)
+    return uint_to_bitstr(bytes_to_uint(buf, bl), bl)
 
-def bitlist_to_uint(bitlist):
-    """not implemented
+def bitstr_to_bytes(bitstr):
+    """Convert a str of 0 and 1 to a bytes string
+    
+    Args:
+        bitstr (str of integer) : str of 0 and 1
+    
+    Returns:
+        buf (bytes) : bytes string
+    
+    Raises:
+        KeyError : if bitstr contains invalid values
     """
-    # TODO
-    assert()
+    return uint_to_bytes(bitstr_to_uint(bitstr), len(bitstr))
 
 #------------------------------------------------------------------------------#
 # Element definition helping routines
@@ -168,27 +174,55 @@ def decompose_uint_sl(sl=8, val=0):
 # integer functions
 #------------------------------------------------------------------------------#
 
-def bytes_to_int(buf, bitlen=1):
-    """Convert the leftmost bits of a bytes buffer to a signed integer,
-    2's complement representation with most significant bit leftmost
+def uint_to_bitstr(uint, bitlen):
+    """Convert an unsigned integer uint of length bitlen to a str of 0 and 1
     
     Args:
-        buf (bytes) : bytes string
-        bitlen (integer) : length in bits
+        uint (unsigned integer)
+        bitlen (unsigned integer)
     
     Returns:
-        int (integer) : signed integer value
-    
-    Raises:
-        PycrateErr : if `bitlen' is not strictly positive or if `buf' is not 
-        long enough
+        bitstr (str of 0 and 1)
     """
-    uint = bytes_to_uint(buf, bitlen)
-    if uint >= 1<<(bitlen-1):
-        # 2's complement
-        return uint - (1<<bitlen)
-    else:
-        return uint
+    bl = bin(uint)[2:]
+    if len(bl) < bitlen:
+        # extend v
+        bl = '0'*(bitlen-len(bl)) + bl
+    return bl
+
+def bitstr_to_uint(bitstr):
+    """Convert a str of 0 and 1 to an unsigned integer uint
+    
+    Args:
+        bitstr (str of 0 and 1)
+    
+    Returns:
+        uint (unsigned integer)
+    """
+    return int(bitstr, 2)
+
+def uint_to_bitlist(uint, bitlen):
+    """Convert an unsigned integer uint of length bitlen to a list of 0 and 1
+    
+    Args:
+        uint (unsigned integer)
+        bitlen (unsigned integer)
+    
+    Returns:
+        bitlist (list of 0 and 1)
+    """
+    return [0 if b == '0' else 1 for b in uint_to_bitstr(uint, bitlen)]
+
+def bitlist_to_uint(bitlist):
+    """Convert a list of 0 and 1 to an unsigned integer uint
+    
+    Args:
+        bitstr (list of 0 and 1)
+    
+    Returns:
+        uint (unsigned integer)
+    """
+    return int(''.join(['1' if b else '0' for b in bitlist]), 2)
 
 def int_to_bytes(val, bitlen=1):
     """Convert a signed integer to a bytes buffer of given length in bits,
@@ -200,13 +234,138 @@ def int_to_bytes(val, bitlen=1):
     
     Returns:
         buf (bytes) : bytes string
-    
-    Raises:
-        PycrateErr : if `bitlen' is not strictly positive
     """
     if val < 0:
         # 2's complement
-        return uint_to_bytes((1<<bitlen)+val, bitlen )
+        return uint_to_bytes((1<<bitlen)+val, bitlen)
     else:
         return uint_to_bytes(val, bitlen)
+
+def bytes_to_int(buf, bitlen=1):
+    """Convert the leftmost bits of a bytes buffer to a signed integer,
+    2's complement representation with most significant bit leftmost
+    
+    Args:
+        buf (bytes) : bytes string
+        bitlen (integer) : length in bits
+    
+    Returns:
+        val (integer) : signed integer value
+    """
+    uint = bytes_to_uint(buf, bitlen)
+    if uint >= 1<<(bitlen-1):
+        # 2's complement
+        return uint - (1<<bitlen)
+    else:
+        return uint
+
+def int_to_bitstr(val, bitlen):
+    """Convert a signed integer val of length bitlen to a str of 0 and 1
+    
+    Args:
+        val (signed integer)
+        bitlen (unsigned integer)
+    
+    Returns:
+        bitstr (str of 0 and 1)
+    """
+    if val < 0:
+        # 2's complement
+        return uint_to_bitstr((1<<bitlen)+val, bitlen)
+    else:
+        return uint_to_bitstr(val, bitlen)
+
+def bitstr_to_int(bitstr):
+    """Convert a str of 0 and 1 to a signed integer val
+    
+    Args:
+        bitstr (str of 0 and 1)
+    
+    Returns:
+        val (signed integer)
+    """
+    uint = int(bitstr, 2)
+    if uint >= 1<<(bitlen-1):
+        # 2's complement
+        return uint - (1<<bitlen)
+    else:
+        return uint
+
+def int_to_bitlist(val, bitlen):
+    """Convert a signed integer val of length bitlen to a list of 0 and 1
+    
+    Args:
+        val (signed integer)
+        bitlen (unsigned integer)
+    
+    Returns:
+        bitlist (list of 0 and 1)
+    """
+    if val < 0:
+        # 2's complement
+        return uint_to_bitlist((1<<bitlen)+val, bitlen)
+    else:
+        return uint_to_bitlist(val, bitlen)
+
+def bitlist_to_int(bitlist):
+    """Convert a list of 0 and 1 to a signed integer val
+    
+    Args:
+        bitstr (str of 0 and 1)
+    
+    Returns:
+        val (signed integer)
+    """
+    uint = bitlist_to_uint(bitlist)
+    if uint >= 1<<(bitlen-1):
+        # 2's complement
+        return uint - (1<<bitlen)
+    else:
+        return uint
+
+def swap_int(val, bitlen):
+    """Swap the endianness of the signed integer val of length bitlen
+    
+    Args:
+        val (signed integer)
+        bitlen (unsigned integer)
+    
+    Returns:
+        ret (signed integer)
+    """
+    if val < 0:
+        # 2's complement
+        tmp = swap_uint((1<<bitlen)+val, bitlen)
+    else:
+        tmp = swap_uint(val, bitlen)
+    if tmp >= 1<<(bitlen-1):
+        return tmp - (1<<bitlen)
+    else:
+        return tmp
+
+def uint_to_hex(uint, bitlen):
+    """Return the string of hexadecimal character representing the unsigned 
+    integer uint (big-endian)
+    
+    Args:
+        uint (unsigned integer)
+        bitlen (unsigned integer)
+    
+    Returns:
+        hex (str of hex chars)
+    """
+    niblen = bitlen>>2
+    if bitlen % 4:
+        niblen += 1
+        # not nibble-aligned, need to left-shift the uint value
+        uint <<= 4 - (bitlen%4)
+    h = hex(uint)
+    if h[-1] == 'L':
+        h = h[2:-1]
+    else:
+        h = h[2:]
+    if len(h) < niblen:
+        return (niblen-len(h))*'0' + h
+    else:
+        return h
 

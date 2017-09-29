@@ -61,14 +61,13 @@ class Buf(Atom):
             raise(EltErr('{0} [_chk_val]: val type is {1}, expecting {2}'\
                   .format(self._name, type(val).__name__, self.TYPENAMES)))
         elif val is not None and self._bl is not None and self._blauto is None:
-            bytelen, bitlen = self._bl>>3, self._bl%8
+            bytelen = self._bl>>3
+            if self._bl%8:
+                bytelen += 1
             if len(val) < bytelen:
                 raise(EltErr('{0} [_chk_val]: val length underflow, {1} bytes instead of {2}'\
                       .format(self._name, len(val), bytelen)))
-            elif bitlen and len(val) > 1+bytelen:
-                raise(EltErr('{0} [_chk_val]: val length overflow, {1} bytes instead {2} plus {3} bits'\
-                      .format(self._name, len(val), bytelen, bitlen)))
-            elif bitlen == 0 and len(val) > bytelen:
+            elif len(val) > bytelen:
                 raise(EltErr('{0} [_chk_val]: val length overflow, {1} bytes instead of {2}'\
                       .format(self._name, len(val), bytelen)))
     

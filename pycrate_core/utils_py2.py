@@ -1149,7 +1149,7 @@ def bitlist_to_bytes(bitlist):
     if trail:
         [buf.append(BITTOBYTE_LUT[bitlist[i:i+8]]) \
             for i in range(0, len(bitlist)-trail, 8)]
-        buf.append( BITTOBYTE_LUT[bitlist[-trail:] + (8-trail) * (0, )] )
+        buf.append(BITTOBYTE_LUT[bitlist[-trail:] + (8-trail) * (0, )] )
         return b''.join(buf)
     else:
         [buf.append(BITTOBYTE_LUT[bitlist[i:i+8]]) \
@@ -1467,6 +1467,29 @@ def decompose_uint(mul=0x100, val=0):
             val //= mul
             dec.append( int(val % mul) )
         return dec
+
+def swap_uint(uint, bitlen):
+    """Swap the endianness of the unsigned integer uint of length bitlen
+    
+    Args:
+        uint (unsigned integer)
+        bitlen (unsigned integer)
+    
+    Returns:
+        uint (unsigned integer)
+    """
+    if bitlen < 0 or bitlen % 8:
+        raise(PycrateErr('invalid bitlen of little endian uint: {0}'\
+              .format(bitlen)))
+    len_byte, ret = bitlen>>3, []
+    for i in range(len_byte>>1):
+        bi  = 8*i
+        rbi = bitlen-8-bi
+        ret.append( (uint & (0xff<<bi)) << (rbi-bi) )
+        ret.append( (uint & (0xff<<rbi)) >> (rbi-bi) )
+    if len_byte % 2:
+        ret.append( uint & (0xff<<(8*(len_byte>>1))) )
+    return sum(ret)
 
 #------------------------------------------------------------------------------#
 # concatenation
