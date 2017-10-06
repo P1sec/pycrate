@@ -61,7 +61,7 @@ class Atom(Envelope):
         # Atom recursive parsing
         if self[0].get_val() >= 16:
             data = self[2].get_val()
-            sub = AtomSub()
+            sub = AtomSub('data')
             sub._from_char(Charpy(data))
             if sub.get_len() == len(data):
                 self.replace(self[2], sub)
