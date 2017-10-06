@@ -1294,9 +1294,6 @@ class Atom(Element):
     #--------------------------------------------------------------------------#
     
     def repr(self):
-        # special hexdump representation
-        if self._rep == REPR_HD:
-            return '\n'.join(self._repr_hd())
         # element transparency
         if self.get_trans():
             trans = ' [transparent]'
@@ -1313,7 +1310,7 @@ class Atom(Element):
             val_repr = repr(val)
         elif self._rep == REPR_BIN:
             val_repr = '0b' + self.bin()
-        elif self._rep == REPR_HEX:
+        elif self._rep in (REPR_HEX, REPR_HD):
             val_repr = '0x' + self.hex()
         if self.REPR_MAXLEN > 0 and len(val_repr) > self.REPR_MAXLEN:
             val_repr = val_repr[:self.REPR_MAXLEN] + '...'
