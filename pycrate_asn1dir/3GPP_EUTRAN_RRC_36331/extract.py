@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 
-# 1) convert all 36XYZ-$release.doc files to text files in utf-8 format with MS Office
-# 2) use this script to extract all ASN.1 modules
+# 1) convert the 36331-$release.doc file to text files in utf-8 format with MS Office
+# 2) use this script to extract all LTE RRC ASN.1 modules
 
 import codecs
 import re

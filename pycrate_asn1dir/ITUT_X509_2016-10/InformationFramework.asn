@@ -599,25 +599,25 @@ pwdAttribute ATTRIBUTE ::= {
   LDAP-NAME               {"pwdAttribute"}
   ID                      id-at-pwdAttribute }
 
-pwdHistory{ATTRIBUTE:passwordAttribute,MATCHING-RULE:historyMatch,OBJECT IDENTIFIER:id} ATTRIBUTE ::= {
+pwdHistory {ATTRIBUTE:passwordAttribute,MATCHING-RULE:historyMatch,OBJECT IDENTIFIER:id} ATTRIBUTE ::= {
   WITH SYNTAX             PwdHistory{passwordAttribute}
   EQUALITY MATCHING RULE  historyMatch
   USAGE                   directoryOperation 
   ID                      id} 
 
-PwdHistory{ATTRIBUTE:passwordAttribute} ::= SEQUENCE {
+PwdHistory {ATTRIBUTE:passwordAttribute} ::= SEQUENCE {
   time       GeneralizedTime,
   password   passwordAttribute.&Type,
   ...}
 
-pwdRecentlyExpired{ATTRIBUTE:passwordAttribute,OBJECT IDENTIFIER:id} ATTRIBUTE ::= { 
+pwdRecentlyExpired {ATTRIBUTE:passwordAttribute,OBJECT IDENTIFIER:id} ATTRIBUTE ::= { 
   WITH SYNTAX             passwordAttribute.&Type
   EQUALITY MATCHING RULE  passwordAttribute.&equality-match
   SINGLE VALUE            TRUE
   USAGE                   directoryOperation 
   ID                      id} 
 
-pwdHistoryMatch{ATTRIBUTE:passwordAttribute,OBJECT IDENTIFIER:id} MATCHING-RULE ::= { 
+pwdHistoryMatch {ATTRIBUTE:passwordAttribute,OBJECT IDENTIFIER:id} MATCHING-RULE ::= { 
   SYNTAX     passwordAttribute.&Type
   ID         id}
 

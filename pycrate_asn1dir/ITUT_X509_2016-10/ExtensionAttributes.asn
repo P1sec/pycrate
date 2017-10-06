@@ -29,12 +29,14 @@ IMPORTS
   statusReferrals, subjectAltName, subjectDirectoryAttributes, subjectKeyIdentifier,
   toBeRevoked
      FROM CertificateExtensions certificateExtensions
-
+  
+  -- Pycrate: adding indirectIssuer
   acceptableCertPolicies, acceptablePrivilegePolicies, allowedAttributeAssignments,
   attributeDescriptor, attributeMappings, authorityAttributeIdentifier,
   basicAttConstraints, delegatedNameConstraints, groupAC, holderNameConstraints,
   issuedOnBehalfOf, noAssertion, noRevAvail, roleSpecCertIdentifier, singleUse,
-  sOAIdentifier, targetingInformation, timeSpecification, userNotice
+  sOAIdentifier, targetingInformation, timeSpecification, userNotice,
+  indirectIssuer
      FROM AttributeCertificateDefinitions attributeCertificateDefinitions ;
 
 ExtensionAttribute ::= SEQUENCE {
@@ -46,15 +48,16 @@ ExtensionAttribute ::= SEQUENCE {
     ... },
   ... }
 
-extensionSyntax {EXTENSION:extension-attribute} SYNTAX-NAME ::= {
-  --LDAP-DESC         extension-attribute.&ExtnType.&ldap-description
-  LDAP-DESC         extension-attribute.&ldap-description
-  DIRECTORY SYNTAX  SEQUENCE {
-    mandatory    [0]  BOOLEAN DEFAULT FALSE,
-    critical     [1]  BOOLEAN DEFAULT FALSE,
-    ext          [2]  extension-attribute.&ExtnType,
-    ... }
-  ID                extension-attribute.&id }
+-- Pycrate: this does not work, as EXTENSION has no field ldap-description
+--
+--extensionSyntax {EXTENSION:extension-attribute} SYNTAX-NAME ::= {
+--  LDAP-DESC         extension-attribute.&ldap-description
+--  DIRECTORY SYNTAX  SEQUENCE {
+--    mandatory    [0]  BOOLEAN DEFAULT FALSE,
+--    critical     [1]  BOOLEAN DEFAULT FALSE,
+--    ext          [2]  extension-attribute.&ExtnType,
+--    ... }
+--  ID                extension-attribute.&id }
 
 -- The list of extension attribute types
 

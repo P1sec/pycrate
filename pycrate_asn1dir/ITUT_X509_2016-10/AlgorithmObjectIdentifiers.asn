@@ -7,9 +7,9 @@ BEGIN
 --/* 
 --The values defined in this module are primarily taking from various specifications and
 --collected here for easy reference by other specifcations.
-
+--
 --Wen values are copied form an IETF RFC, the IETF RFC number is shown.
-
+--
 --When values are copied from the NIST Computer Security Objects Register (CSOR),
 --the label CSOR is used.
 --*/ 
@@ -371,5 +371,42 @@ hmacWithSHA384 ALGORITHM ::= {  -- IETF RFC 4231
 hmacWithSHA512 ALGORITHM ::= {  -- IETF RFC 4231
   PARMS         NULL
   IDENTIFIED BY id-hmacWithSHA512 }
+
+-- Pycrate addition
+AllAlgorithmsOID ALGORITHM ::= {
+    mD5Algorithm |
+    sha1Algorithm |
+    sha224 |
+    sha256 |
+    sha384 |
+    sha512 |
+    HashAlgorithms |
+    aes128-CBC |
+    aes192-CBC |
+    aes256-CBC |
+    rsaEncryptionAlgorithm |
+    keyExchangeAlgorithm |
+    dsa |
+    ecPublicKey |
+    ecDH |
+    ecMQV |
+    dh-public-numberAlgorithm |
+    sha1WithRSAEncryptionAlgorithm |
+    sha224WithRSAEncryptionAlgorithm |
+    sha256WithRSAEncryptionAlgorithm |
+    sha384WithRSAEncryptionAlgorithm |
+    sha512WithRSAEncryptionAlgorithm |
+    rSASSA-PSS |
+    dsa-with-sha224 |
+    dsa-with-sha256 |
+    ecdsa-with-SHA224-Algorithm |
+    ecdsa-with-SHA256-Algorithm |
+    ecdsa-with-SHA384-Algorithm |
+    ecdsa-with-SHA512-Algorithm |
+    hmacWithSHA224 |
+    hmacWithSHA256 |
+    hmacWithSHA384 |
+    hmacWithSHA512
+    }
 
 END -- AlgorithmObjectIdentifiers

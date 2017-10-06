@@ -17,7 +17,7 @@ IMPORTS
   PresentationAddress
     FROM SelectedAttributeTypes selectedAttributeTypes ;
 
---/* The UserNotice data type is referenced by the userNotice extension. It is copied from IETF RFC 5280 */
+--/* The UserNotice data type is referenced by the userNotice extension. It is copied from IETF RFC 5280 */--
 
 UserNotice ::= SEQUENCE {
   noticeRef     NoticeReference OPTIONAL,
@@ -32,9 +32,9 @@ DisplayText ::= CHOICE {
   bmpString      BMPString(SIZE (1..200)),
   utf8String     UTF8String(SIZE (1..200)) }
 
---/* IETF RFC 5280 defines some extensions not copied from this Specification. The formal specification of these extensions are included here for easy reference, e.g., when using ASN.1 tools. For detailed description, see IETF 5280.*/
+--/* IETF RFC 5280 defines some extensions not copied from this Specification. The formal specification of these extensions are included here for easy reference, e.g., when using ASN.1 tools. For detailed description, see IETF 5280.*/--
 
---/* Authority information access extension*/
+--/* Authority information access extension*/--
 
 authorityInfoAccess EXTENSION ::= {
   SYNTAX         AuthorityInfoAccessSyntax
@@ -46,7 +46,7 @@ AccessDescription ::= SEQUENCE {
   accessMethod    OBJECT IDENTIFIER,
   accessLocation  GeneralName }
 
---/* Subject information access extension*/
+--/* Subject information access extension*/--
 
 subjectInfoAccess EXTENSION ::= {
   SYNTAX         SubjectInfoAccessSyntax
@@ -54,7 +54,7 @@ subjectInfoAccess EXTENSION ::= {
 
 SubjectInfoAccessSyntax ::= SEQUENCE SIZE (1..MAX) OF AccessDescription
 
---/* IETF RFC 5280 (PKIX) object identifier allocation*/
+--/* IETF RFC 5280 (PKIX) object identifier allocation*/--
 
 id-pkix                   OBJECT IDENTIFIER ::= { intSecurity mechanisms(5) pkix(7) }
 
@@ -67,8 +67,8 @@ id-ad-caIssuers           OBJECT IDENTIFIER ::= { id-ad 2 }
 id-ad-ocsp                OBJECT IDENTIFIER ::= { id-ad 1 }
 
 
---/* The following is an abstract of the MTSAbstractService module specified by 
--- Rec. ITU-T Rec. X.411 | ISO/IEC 10021-4.*/
+--/* The following is an abstract of the MTSAbstractService module specified by --
+--Rec. ITU-T Rec. X.411 | ISO/IEC 10021-4.*/--
 
 G3FacsimileNonBasicParameters ::= BIT STRING {
   two-dimensional(8), -- As defined in ITU-T Recommendation T.30

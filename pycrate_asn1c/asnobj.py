@@ -828,7 +828,7 @@ class ASN1Obj(object):
                 raise(ASN1ProcLinkErr('{0}: {1!r}'\
                       .format(self.fullname(), ref)))
             elif cla._type not in (TYPE_CLASS, TYPE_TYPEIDENT, TYPE_ABSSYNT) \
-            or claval._mode != MODE_VALUE:
+            or cla._mode != MODE_VALUE:
                 raise(ASN1ProcTextErr('{0}: {1!r}, invalid object'\
                       .format(self.fullname(), ref)))
             claval = cla._val
@@ -2015,7 +2015,7 @@ class ASN1Obj(object):
                 except KeyError:
                     raise(ASN1ProcTextErr('{0}: ASN1ClassValField into {1}, undefined'\
                           .format(self.fullname(), classvalref)))
-                self._typeref = ASN1RefClassValField((classvalmod, classvalref), [classpath])
+                self._typeref = ASN1RefClassValField((classvalmod, classvalref), classpath)
                 # ensure the last field name is upper case (MODE_TYPE or MODE_SET)
                 if classpath and classpath[-1][0].islower():
                     raise(ASN1ProcTextErr('{0}: invalid mode for CLASS value field reference, {1!r}'\

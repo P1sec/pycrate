@@ -10,6 +10,10 @@ BEGIN
 -- modifications needed to maintain or improve the Directory service.
 
 IMPORTS
+  
+  -- Pycrate addition:
+  AllAlgorithmsOID FROM AlgorithmObjectIdentifiers
+  
   basicAccessControl, certificateExtensions, id-asx, id-at, id-avr, id-ldx, id-lsx,
   id-mr, id-nf, id-oa, id-oc, id-sc, informationFramework, selectedAttributeTypes
     FROM UsefulDefinitions {joint-iso-itu-t ds(5) module(1) usefulDefinitions(0) 8}
@@ -32,7 +36,6 @@ IMPORTS
   CertificateListExactAssertion, CertificatePairAssertion,
   CertificatePairExactAssertion
       FROM CertificateExtensions certificateExtensions ;
-
 
 -- parameterized types 
 
@@ -80,12 +83,15 @@ AlgorithmIdentifier{ALGORITHM:SupportedAlgorithms} ::= SEQUENCE {
   ... }
 
 --/* The definitions of the following information object set is deferred to referencing
--- specifications having a requirement for specific information object sets.*/
+--specifications having a requirement for specific information object sets.*/
 
-SupportedAlgorithms ALGORITHM ::= {...}
+--SupportedAlgorithms ALGORITHM ::= {...}
+
+-- Pycrate addition:
+SupportedAlgorithms ALGORITHM ::= {AllAlgorithmsOID, ...}
 
 --/* The definitions of the following information value set is deferred to referencing
--- specifications having a requirement for specific value sets.*/
+--specifications having a requirement for specific value sets.*/
 
 SupportedCurves OBJECT IDENTIFIER ::= {dummyCurv, ...}
 

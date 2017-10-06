@@ -71,10 +71,8 @@ ASN_SPECS_ITUT = {
     'H235'      : 'ITUT_H235_2014-01',
     'H245'      : 'ITUT_H245_2011-05',
     'H248'      : 'ITUT_H248_2013-03',
-    # directory and security (PKI) services
-    # the 2016-10 version does not compile because of an error in ExtensionAttributes.extensionSyntax
-    #'x509'      : 'ITUT_X509_2016-10',
     'X509'      : 'ITUT_X509_2012-10',
+    'x509_2016' : 'ITUT_X509_2016-10',
     'X520'      : 'ITUT_X520_2016-10',
     }
 
@@ -105,6 +103,7 @@ ASN_SPECS_IETF = {
     'CMSAndPKIX08'   : 'IETF_PKI_RFC6268',
     #'PKCS12'         : 'IETF_PKI_RFC7292', # missing other PKCS modules
     # TODO: Pycrate X509-specific module, gather / combines modules from 5911, 5912 and 6268
+    # and more recent algo params / subject / issuer / extensions OID and values
     #'PKI'            : 'Pycrate_PKI',
     }
 

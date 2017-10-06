@@ -237,6 +237,7 @@ DEFINITIONS
 
         ModifyResponse ::= [APPLICATION 7] LDAPResult
 
+
         AddRequest ::= [APPLICATION 8] SEQUENCE {
              entry           LDAPDN,
              attributes      AttributeList }

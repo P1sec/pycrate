@@ -51,14 +51,14 @@ IMPORTS
      FROM PasswordPolicy passwordPolicy ;
 
 --/*from IETF RFC 3727
-
--- The following import is provided for information only (see clause 7.2.16), it is not 
--- referenced by any ASN.1 construct within these Directory Specifications. Note that
--- the ASN.1 module in RFC 3727 imports from the InformationFramework module of edition
--- 4 of Rec. ITU-T X.501 | ISO/IEC 9594-2. A specification importing from both these
--- Directory Specifications and from RFC 3727 should take corrective actions, e.g.,
--- by making a copy of the ASN.1 module of RFC 3727 and then update the IMPORT statement.
-
+--
+--The following import is provided for information only (see clause 7.2.16), it is not 
+--referenced by any ASN.1 construct within these Directory Specifications. Note that
+--the ASN.1 module in RFC 3727 imports from the InformationFramework module of edition
+--4 of Rec. ITU-T X.501 | ISO/IEC 9594-2. A specification importing from both these
+--Directory Specifications and from RFC 3727 should take corrective actions, e.g.,
+--by making a copy of the ASN.1 module of RFC 3727 and then update the IMPORT statement.
+--
 --  allComponentsMatch, componentFilterMatch, directoryComponentsMatch, presentMatch, rdnMatch
 --    FROM ComponentMatching {iso(1) 2 36 79672281 xed(3) module (0) component-matching(4)} */
 
