@@ -199,10 +199,10 @@ Specific constraints attributes:
             uint = Uint('bs', val=self._val[0], bl=self._val[1])
             if self._val[1] % 4 == 0:
                 # HSTRING
-                ret = '\'%s\'H' % uint.__hex__().upper()
+                ret = '\'%s\'H' % uint_to_hex(*self._val).upper()
             else:
                 # BSTRING
-                ret = '\'%s\'B' % uint.__bin__()
+                ret = '\'%s\'B' % uint_to_bitstr(*self._val)
             if self._cont:
                 # add flags in comment
                 flags = []
@@ -211,10 +211,17 @@ Specific constraints attributes:
                     if i in self._cont_rev and v:
                         flags.append(self._cont_rev[i])
                 return ret + ' -- %s --' % ' | '.join(flags)
-            elif self._ASN_WASC:
-                # eventually add ascii repr
+            elif self._ASN_WASC and self._val[1] % 8 == 0:
+                # eventually add printable repr
                 try:
-                    return ret + ' -- %r --' % uint.to_bytes().decode('ascii')
+                    if python_version < 3:
+                        s = uint_to_bytes(*self._val)
+                    else:
+                        s = uint_to_bytes(*self.val).decode('ascii')
+                    if is_printable(s):
+                        return ret + ' -- %s --' % s
+                    else:
+                        return ret
                 except:
                     return ret
             else:
@@ -954,8 +961,13 @@ Specific constraints attributes:
             else:
                 ret = '\'%s\'H' % hexlify(self._val).upper()
             if self._ASN_WASC:
+                # eventually add printable repr
                 try:
-                    return ret + ' -- %r --' % self._val.decode('ascii')
+                    s = self._val.decode('ascii')
+                    if is_printable(s):
+                        return ret + ' -- %s --' % s
+                    else:
+                        return ret
                 except:
                     return ret
             else:

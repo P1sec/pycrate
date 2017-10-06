@@ -41,10 +41,7 @@ from pycrate_asn1c.utils import clean_text
 # pycrate_core is used for basic library-wide functions / variables
 # (i.e. log(), python_version, integer_types, bytes_types, str_types)
 # and for encoding / decoding routines
-from pycrate_core.utils  import log, python_version, \
-     NoneType, integer_types, bytes_types, str_types, \
-     pack_val, uint_to_bytes, bytes_to_uint, decompose_uint_sl, \
-     int_to_bytes, bytes_to_int, uint_to_bitlist
+from pycrate_core.utils  import *
 from pycrate_core.utils  import TYPE_BYTES   as T_BYTES
 from pycrate_core.utils  import TYPE_INT     as T_INT
 from pycrate_core.utils  import TYPE_UINT    as T_UINT
@@ -356,6 +353,13 @@ def extract_charstr(text=''):
                     # end of charstr
                     return text[1+cur:].strip(), \
                            re.subn('\s{0,}\n\s{0,}', '', text[1:cur])[0]
+
+
+printable_str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'\
+                '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ \t\n\r\x0b\x0c'
+
+def is_printable(w):
+    return all(c in printable_str for c in w)
 
 #------------------------------------------------------------------------------#
 # integer factorization and rounding routine
