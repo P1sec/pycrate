@@ -1,0 +1,16 @@
+################
+# AuC database #
+################
+#
+# file used by ServerAuC.py
+# 
+# csv'style file, with the following fields:
+# IMSI (digits);
+# K (hex, 16-bytes authentication key);
+# 2G algorithm id (int, 0 for Milenage, 1, 2 and 3 for comp128v1, 2 and 3)
+# SQN (int, Milenage authentication counter, -1 if Milenage is not supported)
+# OP (hex, optional, subscriber-specific OP parameter)
+#
+# examples:
+#001010000000001;0123456789abcdef0123456789abcdef;0;1;
+#001010000000002;0123456789abcdef0123456789abcdef;0;1;00112233445566778899aabbccddeeff;
