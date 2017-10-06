@@ -522,7 +522,7 @@ def get_obj_at(Obj, path):
             if Obj.TYPE in (TYPE_CHOICE, TYPE_SEQ, TYPE_SET, TYPE_REAL, 
                             TYPE_EXT, TYPE_EMB_PDV, TYPE_CHAR_STR):
                 Obj = Obj._cont[p]
-            elif Cur.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
+            elif Obj.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
                 # p is not used
                 Obj = Obj._cont
             elif Obj.TYPE in (TYPE_OPEN, TYPE_ANY):

@@ -208,7 +208,7 @@ Specific attributes:
                     ASN1CodecPER._off[-1] += 2
                 if big:
                     # 2) not-small index value (>= 64)
-                    ind = ASN1CodecPER.decode_intunconst(char, 0, name='I')
+                    ind = ASN1CodecPER.decode_intunconst(char, 0)
                 else:
                     # 3) normally-small index value (< 64)
                     ind = char.get_uint(6)
@@ -2212,14 +2212,14 @@ class _CONSTRUCT_OF(ASN1Obj):
             off = 0
             for (fs, fn) in frags:
                 for i in range(fn):
-                    if cla.ALIGNED and ASN1CodecPER._off[-1] % 8:
+                    if ASN1CodecPER.ALIGNED and ASN1CodecPER._off[-1] % 8:
                         GEN.extend( ASN1CodecPER.encode_pad_ws() )
                     GEN.extend( ASN1CodecPER.encode_count_ws(fs) )
                     for j in range(fs):
                         self._cont._val = self._val[off]
                         GEN.append( self._cont._to_per_ws() )
                         off += 1
-            if cla.ALIGNED and ASN1CodecPER._off[-1] % 8:
+            if ASN1CodecPER.ALIGNED and ASN1CodecPER._off[-1] % 8:
                 GEN.extend( ASN1CodecPER.encode_pad_ws() )
             GEN.extend( ASN1CodecPER.encode_count_ws(rem) )
             for i in range(rem):
@@ -2227,7 +2227,7 @@ class _CONSTRUCT_OF(ASN1Obj):
                 GEN.append( self._cont._to_per_ws() )
                 off += 1
         else:
-            if cla.ALIGNED and ASN1CodecPER._off[-1] % 8:
+            if ASN1CodecPER.ALIGNED and ASN1CodecPER._off[-1] % 8:
                 GEN.extend( ASN1CodecPER.encode_pad_ws() )
             GEN.extend( ASN1CodecPER.encode_count_ws(ldet) )
             for i in range(ldet):
@@ -2300,14 +2300,14 @@ class _CONSTRUCT_OF(ASN1Obj):
             off = 0
             for (fs, fn) in frags:
                 for i in range(fn):
-                    if cla.ALIGNED:
+                    if ASN1CodecPER.ALIGNED:
                         GEN.extend( ASN1CodecPER.encode_pas() )
                     GEN.extend( ASN1CodecPER.encode_count(fs) )
                     for j in range(fs):
                         self._cont._val = self._val[off]
                         GEN.extend( self._cont._to_per() )
                         off += 1
-            if cla.ALIGNED and ASN1CodecPER._off[-1] % 8:
+            if ASN1CodecPER.ALIGNED and ASN1CodecPER._off[-1] % 8:
                 GEN.extend( ASN1CodecPER.encode_pad() )
             GEN.extend( ASN1CodecPER.encode_count(rem) )
             for i in range(rem):
@@ -2315,7 +2315,7 @@ class _CONSTRUCT_OF(ASN1Obj):
                 GEN.extend( self._cont._to_per() )
                 off += 1
         else:
-            if cla.ALIGNED and ASN1CodecPER._off[-1] % 8:
+            if ASN1CodecPER.ALIGNED and ASN1CodecPER._off[-1] % 8:
                 GEN.extend( ASN1CodecPER.encode_pad() )
             GEN.extend( ASN1CodecPER.encode_count(ldet) )
             for i in range(ldet):
