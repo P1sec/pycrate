@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.1
+# * Version : 0.2
 # *
 # * Copyright © 2016. Benoit Michau. ANSSI.
 # *
@@ -72,7 +72,7 @@ ASN_SPECS_ITUT = {
     'H245'      : 'ITUT_H245_2011-05',
     'H248'      : 'ITUT_H248_2013-03',
     'X509'      : 'ITUT_X509_2012-10',
-    'X509_2016' : 'ITUT_X509_2016-10',
+    'x509_2016' : 'ITUT_X509_2016-10',
     'X520'      : 'ITUT_X520_2016-10',
     }
 

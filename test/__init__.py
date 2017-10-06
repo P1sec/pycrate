@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.1
+# * Version : 0.2
 # *
 # * Copyright © 2017. Benoit Michau. ANSSI.
 # *
@@ -28,5 +28,5 @@
 #
 __all__ = ['test_core', 'test_media', 'test_ether', 'test_mobile',
            'test_asn1rt', 'test_asn1rt_mod', 'test_pycrate']
-__version__ = '0.1.0'
+__version__ = '0.2.0'
 

@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.1
+# * Version : 0.2
 # *
 # * This program is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU General Public License
@@ -31,4 +31,4 @@ __all__ = ['utils', 'Server', 'ServerAuC',
            'ProcProto', 'ProcCNHnbap', 'ProcCNRua', 'ProcCNRanap',
            'ProcCNMM', 'ProcCNGMM',
            ]
-__version__ = '0.1.0'
+__version__ = '0.2.0'

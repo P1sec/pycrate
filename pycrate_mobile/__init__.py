@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.1
+# * Version : 0.2
 # *
 # * This program is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU General Public License
@@ -29,4 +29,4 @@ __all__ = ['GSMTAP', 'MCC_MNC',
            'TS24007',
            'TS24008_IE', 'TS24008_MM', 'TS24008_GMM', 'TS24008_CC', 'TS24008_SM',
            'TS24301_IE', 'TS24301_NAS', 'TS24301_EMM', 'TS24301_ESM']
-__version__ = '0.1.0'
+__version__ = '0.2.0'
