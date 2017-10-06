@@ -58,8 +58,11 @@ class ASN1Dict(object):
             self.__setitem__(k, v)
     
     def __repr__(self):
-        return '{\n%s\n}' % ',\n'.join(['%s: %s' % (k, repr(self[k]).replace('\n', '\n '))
-                                        for k in self])
+        if not self._dict:
+            return '{}'
+        else:
+            return '{\n%s\n}' % ',\n'.join(['%s: %s' % (k, repr(self[k]).replace('\n', '\n '))
+                                            for k in self])
     
     def __len__(self):
         return len(self._index)
