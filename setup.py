@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="pycrate",
-    version="0.1",
+    version="0.2",
     
     #packages=find_packages(),
     packages=["pycrate_core",
@@ -32,6 +32,7 @@ setup(
     # only compiled .py modules are installed by default
     package_data={
         #'pycrate_asn1dir': ['*.asn', '*.json'],
+        'pycrate_corenet': ['AuC.db'],
         },
     #include_package_data=False,
     

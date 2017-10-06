@@ -8,6 +8,19 @@ It is the glorious successor of [libmich](https://github.com/mitshell/libmich),
 which was started 8 years ago and served well.
 
 
+License
+=======
+
+The whole library is licensed under GPLv2 and is compatible with more recent version
+of the GPL: all licensed files have an header making it self-explanatory.
+
+
+Wiki
+====
+
+Pycrate has a growing [wiki](https://github.com/anssi-fr/pycrate/wiki).
+
+
 Installation
 ============
 
@@ -26,7 +39,8 @@ Dependencies
 ------------
 
 Currently none. Only the Python builtins and few internal modules of Python 
-(e.g. os, system, re) are required.
+(e.g. os, system, re) are required for most of the features.
+The pycrate_corenet part requires pysctp and CryptoMobile.
 
 
 Automatic installation
@@ -62,13 +76,6 @@ python -m pycrate_asn1c.proc
 ```
 
 
-License
-=======
-
-The whole library is licensed under GPLv2 and is compatible with more recent version
-of the GPL: all licensed files have an header making it self-explanatory.
-
-
 Contributing
 ============
 
@@ -78,8 +85,8 @@ Contact and support
 As the unique developper of the library (yet), I am the only person to contact:
 michau \[dot\] benoit \[at\] gmail \[dot\] com.
 This library is free software, however, specific support requires time and may not
-be always possible. In case you need specific support, please consider contributing 
-first.
+be always possible. In case you need specific support, please consider also 
+contributing in one way or another.
 
 In case you are using this library in any of your project and you find it useful,
 do not hesitate to send me an email. It is always a pleasure to know where 
@@ -98,7 +105,7 @@ Any patch or submission is always very welcome!
 Other contributions
 -------------------
 
-In case you do not feel like a developer, you can still contribute in many ways:
+In case you do not want to deep dive in the code, you can still contribute in many ways:
 * highlighting specific issues in the inner-working of the library,
 and opening an issue with concrete debugging information 
 * writing new test cases for more coverage (have a look at the *test/* directory)
