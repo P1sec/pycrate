@@ -183,7 +183,11 @@ class CSN1Obj(Element):
         if lref is not None:
             # shorten the char buffer
             char_lb = char._len_bit
-            char._len_bit = char._cur + lref
+            if isinstance(lref, str_types):
+                # CSN1Bit._type == CSN1T_BSTR
+                char._len_bit = char._cur + bitstr_to_uint(lref)
+            else:
+                char._len_bit = char._cur + lref
             assert( char._len_bit <= char_lb )
         #
         if self._num == 1:
@@ -341,7 +345,7 @@ class CSN1Bit(CSN1Obj):
         if self._type == CSN1T_UINT:
             self._val = char.get_uint(self._bit)
         elif self._type == CSN1T_BSTR:
-            self._val = uint_to_bitstr(char.get_uint(self._bit))
+            self._val = uint_to_bitstr(char.get_uint(self._bit), self._bit)
         else:
             assert()
     
