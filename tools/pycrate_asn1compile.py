@@ -1,10 +1,11 @@
 ﻿#!/usr/bin/python
+
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
 # * Version : 0.2
 # *
-# * Copyright © 2017. Benoit Michau. ANSSI.
+# * Copyright 2017. Benoit Michau. ANSSI.
 # *
 # * This program is free software: you can redistribute it and/or modify
 # * it under the terms of the GNU General Public License version 2 as published
@@ -61,8 +62,10 @@ def main():
                         help='ASN.1 input file(s) or directory')
     #parser.add_argument('-s', dest='spec', type=str,
     #                    help='provide a specification shortname, instead of ASN.1 input file(s)')
-    parser.add_argument('-o', dest='output', type=str, default='out.py',
-                        help='compiled output Python source file')
+    parser.add_argument('-o', dest='output', type=str, default='out',
+                        help='compiled output Python (and json) source file(s)')
+    parser.add_argument('-j', dest='json', action='store_true',
+                        help='output a json file with information on ASN.1 objects dependency')
     parser.add_argument('-fautotags', action='store_true',
                         help='force AUTOMATIC TAGS for all ASN.1 modules')
     parser.add_argument('-fextimpl', action='store_true',
@@ -81,9 +84,9 @@ def main():
         ckw['verifwarn'] = True
     #
     try:
-        ofd = open(args.output, 'w')
+        ofd = open(args.output + '.py', 'w')
     except:
-        print('%s, args error: unable to open output file %s' % (sys.argv[0], args.output))
+        print('%s, args error: unable to create output file %s' % (sys.argv[0], args.output))
         return 0
     else:
         ofd.close()
@@ -133,7 +136,9 @@ def main():
         print('%s, args error: missing ASN.1 input(s) or specification name' % sys.argv[0])
         return 0
     
-    generate_modules(PycrateGenerator, args.output)
+    generate_modules(PycrateGenerator, args.output + '.py')
+    if args.json:
+        generate_modules(JSONDepGraphGenerator, args.output + '.json')
     return 0
 
 if __name__ == '__main__':
