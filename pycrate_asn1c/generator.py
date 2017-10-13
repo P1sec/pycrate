@@ -944,10 +944,18 @@ class JSONDepGraphGenerator(_Generator):
         self.wrl('"nodes": [')
         self.indent += 2
         nodes = []
-        for (mod, name) in GLOBAL.COMP['ORDER'][:-1]:
-            nodes.append('{"id": "%s.%s", "group": %i},' % (mod, name, groups.index(mod)))
+        for mod in GLOBAL.MOD:
+            if '_obj_' in GLOBAL.MOD[mod]:
+                for name in GLOBAL.MOD[mod]['_obj_']:
+                    nodes.append('{"id": "%s.%s", "group": %i},'\
+                                 % (mod, name, groups.index(mod)))
         # remove last coma
-        nodes[-1] = nodes[-1][:-1]
+        #nodes[-1] = nodes[-1][:-1]
+        last_node = nodes[-1]
+        print('last_node:', last_node)
+        del nodes[-1]
+        nodes.append( last_node[:-1] )
+        #
         for l in nodes:
             self.wrl(l)
         #
@@ -969,7 +977,12 @@ class JSONDepGraphGenerator(_Generator):
                     links.append('{"source": "%s.%s", "target": "%s.%s", "value": %i},'\
                                  % (mod, name, tgt[0], tgt[1], self.LINK_FORCE))
         # remove last coma
-        links[-1] = links[-1][:-1]
+        #links[-1] = links[-1][:-1]
+        last_link = links[-1]
+        print('last_link:', last_link)
+        del links[-1]
+        links.append( last_link[:-1] )
+        #
         for l in links:
             self.wrl(l)
         #
