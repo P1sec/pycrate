@@ -52,6 +52,12 @@ from pycrate_csn1dir.msracap        import MS_RA_capability_value_part
 from pycrate_csn1dir.rcvnpdunumlist import Receive_N_PDU_Number_list_value
 
 #------------------------------------------------------------------------------#
+# str shortcuts
+#------------------------------------------------------------------------------#
+
+_str_reserved = 'reserved'
+
+#------------------------------------------------------------------------------#
 # std encoding / decoding routines
 #------------------------------------------------------------------------------#
 
@@ -771,7 +777,7 @@ _LocUpdType_dict = {
     0 : 'Normal location updating',
     1 : 'Periodic updating',
     2 : 'IMSI attach',
-    3 : 'Reserved'
+    3 : _str_reserved
     }
 
 class LocUpdateType(Envelope):
@@ -1085,7 +1091,7 @@ _PresInd_dict = {
     0 : 'presentation allowed',
     1 : 'presentation restricted',
     2 : 'number not available due to interworking',
-    3 : 'reserved'
+    3 : _str_reserved
     }
 _ScreenInd_dict = {
     0 : 'user-provided, not screened',
@@ -1559,6 +1565,323 @@ class UPIntegrityInd(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# Network service access point identifier
+# TS 24.008, 10.5.6.2
+#------------------------------------------------------------------------------#
+
+_NSAPI_dict = {
+    0 : _str_reserved,
+    1 : _str_reserved,
+    2 : _str_reserved,
+    3 : _str_reserved,
+    4 : _str_reserved
+    }
+
+class NSAPI(Envelope):
+    _GEN = (
+        Uint('spare', val=0, bl=4),
+        Uint('Value', val=5, bl=4, dic=_NSAPI_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Packet data protocol address
+# TS 24.008, 10.5.6.4
+#------------------------------------------------------------------------------#
+
+_PDPTypeOrg_dict = {
+    0 : 'ETSI allocated',
+    1 : 'IETF allocated',
+    15 : 'Empty PDP type',
+    }
+_PDPTypeNum0_dict = {
+    0 : 'reserved',
+    1 : 'PPP',
+    }
+_PDPTypeNum1_dict = {
+    33 : 'IPv4',
+    87 : 'IPv6',
+    141 : 'IPv4v6',
+    }
+
+class PDPAddr(Envelope):
+    _GEN = (
+        Uint('spare', val=0, bl=4),
+        Uint('PDPTypeOrg', val=1, bl=4, dic=_PDPTypeOrg_dict),
+        Uint8('PDPType', val=33),
+        Buf('Addr', val=b'', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['PDPType'].set_dicauto(self._set_pdpt_dic)
+        self['Addr'].set_blauto(lambda: None)
+    
+    def _set_pdpt_dic(self):
+        if self['PDPTypeOrg']() == 0:
+            return _PDPTypeNum0_dict
+        elif self['PDPTypeOrg']() == 1:
+            return _PDPTypeNum1_dict
+        else:
+            return None
+    
+    def _set_addr_len(self):
+        to, t = self['PDPTypeOrg'](), self['PDPType']()
+        if to == 1:
+            if t == 33:
+                return 4
+            elif t == 87:
+                return 16
+            elif t == 141:
+                return 20
+        return 0
+
+#------------------------------------------------------------------------------#
+# Quality of service
+# TS 24.008, 10.5.6.5
+#------------------------------------------------------------------------------#
+
+_ReliabClass_dict = {
+    0 : 'subscribed reliability class',
+    1 : 'unused; interpreted as unack GTP, ack LLC and RLC, protected data',
+    2 : 'unack GTP, ack LLC and RLC, protected data',
+    3 : 'unack GTP and LLC, ack RLC, protected data',
+    4 : 'unack GTP, LLC and RLC, protected data',
+    5 : 'unack GTP, LLC and RLC, unprotected data',
+    6 : 'unack GTP and RLC, ack LLC, protected data',
+    7 : _str_reserved,
+    }
+
+_DelayClass_dict = {
+    0 : 'subscribed delay class',
+    1 : 'delay class 1',
+    2 : 'delay class 2',
+    3 : 'delay class 3',
+    4 : 'delay class 4 (best effort)',
+    7 : _str_reserved,
+    }
+
+_PrecedClass_dict = {
+    0 : 'subscribed precedence',
+    1 : 'high priority',
+    2 : 'normal priority',
+    3 : 'low priority',
+    4 : 'normal priority',
+    7 : _str_reserved,
+    }
+
+_PeakTP_dict = {
+    0 : 'subscribed peak throughput',
+    1 : 'Up to 1 000 octet/s',
+    2 : 'Up to 2 000 octet/s',
+    3 : 'Up to 4 000 octet/s',
+    4 : 'Up to 8 000 octet/s',
+    5 : 'Up to 16 000 octet/s',
+    6 : 'Up to 32 000 octet/s',
+    7 : 'Up to 64 000 octet/s',
+    8 : 'Up to 128 000 octet/s',
+    9 : 'Up to 256 000 octet/s',
+    }
+
+_MeanTP_dict = {
+    0 : 'subscribed mean throughput',
+    1 : '100 octet/h',
+    2 : '200 octet/h',
+    3 : '500 octet/h',
+    4 : '1 000 octet/h',
+    5 : '2 000 octet/h',
+    6 : '5 000 octet/h',
+    7 : '10 000 octet/h',
+    8 : '20 000 octet/h',
+    9 : '50 000 octet/h',
+    10: '100 000 octet/h',
+    11: '200 000 octet/h',
+    12: '500 000 octet/h',
+    13: '1 000 000 octet/h',
+    14: '2 000 000 octet/h',
+    15: '5 000 000 octet/h',
+    16: '10 000 000 octet/h',
+    17: '20 000 000 octet/h',
+    18: '50 000 000 octet/h',
+    30: _str_reserved,
+    31: 'Best effort'
+    }
+
+_ErronSDU_dict = {
+    0 : 'Subscribed delivery of erroneous SDUs',
+    1 : 'No detect',
+    2 : 'Erroneous SDUs are delivered',
+    3 : 'Erroneous SDUs are not delivered',
+    7 : _str_reserved
+    }
+
+_DeliverOrd_dict = {
+    0 : 'Subscribed delivery order',
+    1 : 'With delivery order',
+    2 : 'Without delivery order',
+    3 : _str_reserved
+    }
+
+_TraffClass_dict = {
+    0 : 'Subscribed traffic class',
+    1 : 'Conversational class',
+    2 : 'Streaming class',
+    3 : 'Interactive class',
+    4 : 'Background class',
+    7 : _str_reserved
+    }
+
+_SignalInd_dict = {
+    0 : 'Not optimised for signalling',
+    1 : 'Optimised for signalling'
+    }
+
+_SourceStats_dict = {
+    0 : 'unknown',
+    1 : 'speech'
+    }
+
+# TODO: build dicts for DL / UL max / guaranteed throughput
+
+class QoS(Envelope):
+    _GEN = (
+        Uint('spare', val=0, bl=2),
+        Uint('DelayClass', val=0, bl=3, dic=_DelayClass_dict),
+        Uint('ReliabilityClass', val=0, bl=3, dic=_ReliabClass_dict),
+        Uint('PeakThroughput', val=0, bl=4, dic=_PeakTP_dict),
+        Uint('spare', val=0, bl=1),
+        Uint('PrecedenceClass', val=0, bl=3, dic=_PrecedClass_dict),
+        Uint('spare', val=0, bl=3),
+        Uint('MeanThroughput', val=0, bl=5, dic=_MeanTP_dict),
+        Uint('TrafficClass', val=0, bl=3, dic=_TraffClass_dict),
+        Uint('DeliveryOrder', val=0, bl=2, dic=_DeliverOrd_dict),
+        Uint('ErroneousSDU', val=0, bl=3, dic=_ErronSDU_dict),
+        Uint8('MaxSDUSize', val=0),
+        Uint8('MaxULBitrate', val=0),
+        Uint8('MaxDLBitrate', val=0),
+        Uint('ResidualBER', val=0, bl=4),
+        Uint('SDUErrorRatio', val=0, bl=4),
+        Uint('TransferDelay', val=0, bl=6),
+        Uint('TrafficHandlingPriority', val=0, bl=2),
+        Uint8('GuaranteedULBitrate', val=0),
+        Uint8('GuaranteedDLBitrate', val=0),
+        Uint('spare', val=0, bl=3),
+        Uint('SignallingInd', val=0, bl=1, dic=_SignalInd_dict),
+        Uint('SourceStatsDesc', val=0, bl=4, dic=_SourceStats_dict),
+        Uint8('MaxDLBitrateExt', val=0, trans=True),
+        Uint8('GuaranteedDLBitrateExt', val=0, trans=True),
+        Uint8('MaxULBitrateExt', val=0, trans=True),
+        Uint8('GuaranteedULBitrateExt', val=0, trans=True),
+        Uint8('MaxDLBitrateExt2', val=0, trans=True),
+        Uint8('GuaranteedDLBitrateExt2', val=0, trans=True),
+        Uint8('MaxULBitrateExt2', val=0, trans=True),
+        Uint8('GuaranteedULBitrateExt2', val=0, trans=True),
+        )
+    
+    def set_val(self, vals):
+        Envelope.set_val(self, vals)
+        # in case extended values are set, make them non-transparent
+        if vals is None:
+            self._set_trans_dlbrext(True)
+            self._set_trans_ulbrext(True)
+            self._set_trans_dlbrext2(True)
+            self._set_trans_ulbrext2(True)
+        elif isinstance(vals, (tuple, list)):
+            if len(vals) >= 30:
+                self._set_trans_dlbrext(False)
+                self._set_trans_ulbrext(False)
+                self._set_trans_dlbrext2(False)
+                self._set_trans_ulbrext2(False)
+            elif len(vals) >= 28:
+                self._set_trans_dlbrext(False)
+                self._set_trans_ulbrext(False)
+                self._set_trans_dlbrext2(False)
+            elif len(vals) >= 26:
+                self._set_trans_dlbrext(False)
+                self._set_trans_ulbrext(False)
+            elif len(vals) >= 24:
+                self._set_trans_dlbrext(False)
+        elif isinstance(vals, dict):
+            if 'MaxULBitrateExt2' in vals or 'GuaranteedULBitrateExt2' in vals:
+                self._set_trans_dlbrext(False)
+                self._set_trans_ulbrext(False)
+                self._set_trans_dlbrext2(False)
+                self._set_trans_ulbrext2(False)
+            elif 'MaxDLBitrateExt2' in vals or 'GuaranteedDLBitrateExt2' in vals:
+                self._set_trans_dlbrext(False)
+                self._set_trans_ulbrext(False)
+                self._set_trans_dlbrext2(False)
+            elif 'MaxULBitrateExt' in vals or 'GuaranteedULBitrateExt' in vals:
+                self._set_trans_dlbrext(False)
+                self._set_trans_ulbrext(False)
+            elif 'MaxDLBitrateExt' in vals or 'GuaranteedDLBitrateExt' in vals:
+                self._set_trans_dlbrext(False)
+    
+    def _set_trans_dlbrext(self, trans):
+        self['MaxDLBitrateExt'].set_trans(trans)
+        self['GuaranteedDLBitrateExt'].set_trans(trans)
+    
+    def _set_trans_ulbrext(self, trans):
+        self['MaxULBitrateExt'].set_trans(trans)
+        self['GuaranteedULBitrateExt'].set_trans(trans)
+    
+    def _set_trans_dlbrext2(self, trans):
+        self['MaxDLBitrateExt2'].set_trans(trans)
+        self['GuaranteedDLBitrateExt2'].set_trans(trans)
+    
+    def _set_trans_ulbrext2(self, trans):
+        self['MaxULBitrateExt2'].set_trans(trans)
+        self['GuaranteedULBitrateExt2'].set_trans(trans)
+    
+    def _from_char(self, char):
+        # in case long-enough buffer is available, make extended fields non-transparent
+        l = char.len_byte()
+        if l >= 18:
+            self._set_trans_dlbrext(False)
+            self._set_trans_ulbrext(False)
+            self._set_trans_dlbrext2(False)
+            self._set_trans_ulbrext2(False)
+        elif l >= 16:
+            self._set_trans_dlbrext(False)
+            self._set_trans_ulbrext(False)
+            self._set_trans_dlbrext2(False)
+        elif l >= 14:
+            self._set_trans_dlbrext(False)
+            self._set_trans_ulbrext(False)
+        elif l >= 12:
+            self._set_trans_dlbrext(False)
+        Envelope._from_char(self, char)
+
+
+#------------------------------------------------------------------------------#
+# LLC service access point identifier
+# TS 24.008, 10.5.6.6
+#------------------------------------------------------------------------------#
+
+_LLC_SAPI_dict = {
+    0 : 'not assigned',
+    1 : _str_reserved,
+    2 : _str_reserved,
+    4 : _str_reserved,
+    6 : _str_reserved,
+    7 : _str_reserved,
+    8 : _str_reserved,
+    10: _str_reserved,
+    11: _str_reserved,
+    12: _str_reserved,
+    13: _str_reserved,
+    14: _str_reserved,
+    15: _str_reserved
+    }
+
+class LLC_SAPI(Envelope):
+    _GEN = (
+        Uint('spare', val=0, bl=4),
+        Uint('Value', val=0, bl=4, dic=_LLC_SAPI_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
 # PDP Context Status
 # TS 24.008, 10.5.7.1
 #------------------------------------------------------------------------------#
@@ -1587,6 +1910,7 @@ class PDPCtxtStat(Envelope):
         Uint('NSAPI_9', val=0, bl=1, dic=_PDPCtxtStat_dict),
         Uint('NSAPI_8', val=0, bl=1, dic=_PDPCtxtStat_dict)
         )
+
 
 #------------------------------------------------------------------------------#
 # GPRS Timer
