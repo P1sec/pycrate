@@ -2290,7 +2290,7 @@ ASN.1 basic type T61String object
 
 class STR_VID(_String):
     __doc__ = """
-ASN.1 basic type VideotexString object
+ASN.1 basic type VideotextString object
 %s
 """ % _String_docstring
     
