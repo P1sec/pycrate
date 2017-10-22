@@ -232,10 +232,13 @@ pycrate_mobile
 This subdirectory implements several 3GPP NAS protocol formats:
 * *GSMTAP* with the gsmtap header format
 * *MCC_MNC* with dictionnaries for MCC and MNC look-ups
+* *NAS* providing two functions to parse uplink and downlink mobile NAS messages
 * *TS24007* with basic formats from the TS 24.007 specification
 * *TS24008_IE* with formats supporting many information elements from TS 24.008
 * *TS24008_MM* with formats for encoding / decoding mobility management messages from TS 24.008
+* *TS24008_CC* with formats for encoding / decoding call control messages from TS 24.008
 * *TS24008_GMM* with formats for encoding / decoding GPRS mobility management messages from TS 24.008
+* *TS24008_SM* with formats for encoding / decoding GPRS session management messages from TS 24.008
 * *TS24301_IE* with formats supporting some information elements from TS 24.301
 
 
