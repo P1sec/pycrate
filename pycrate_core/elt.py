@@ -1398,7 +1398,7 @@ class Envelope(Element):
     # hardcoded class name
     CLASS = 'Envelope'
     
-    # default value / bl
+    # default transparency
     DEFAULT_TRANS = False
     
     # default attributes value
@@ -1437,7 +1437,7 @@ class Envelope(Element):
                     the content
                 val (None, dict, tuple or list): to broadcast values into the
                     elements within the content, using self.set_val()
-                bl (tuple, list or dict): to broadcasr bl into the elements 
+                bl (tuple, list or dict): to broadcast bl into the elements 
                     within the content, using self.set_bl()
         """
         # iterator index initialization, required by __iter__()
@@ -3076,7 +3076,7 @@ class Sequence(Element):
             # in case the current content self._content does not goes up to the max 
             # val dict index, just extend it with the template element
             if len(self._content) <= max_ind:
-                self._content.extend( (1+max_ind-len(self._val)) * (self._tmpl, ) )
+                self._content.extend( (1+max_ind-len(self._content)) * (self._tmpl, ) )
             # set template's clones with given values at given indexes
             for i, v in vals.items():
                 clone = self._tmpl.clone()
