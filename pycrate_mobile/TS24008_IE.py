@@ -35,7 +35,8 @@
 from binascii import unhexlify
 
 from pycrate_core.utils  import *
-from pycrate_core.elt    import Envelope, Array, REPR_RAW, REPR_HEX, REPR_BIN, REPR_HD, REPR_HUM
+from pycrate_core.elt    import Envelope, Array, Sequence, REPR_RAW, REPR_HEX, \
+                                REPR_BIN, REPR_HD, REPR_HUM
 from pycrate_core.base   import *
 from pycrate_core.repr   import *
 from pycrate_core.charpy import Charpy
@@ -328,12 +329,12 @@ class PLMN(Buf):
         """
         if not plmn.isdigit():
             raise(PycrateErr('{0}: invalid PLMN string to encode, {1!r}'\
-                  .format(self._name, bcd)))
+                  .format(self._name, plmn)))
         if len(plmn) == 5:
             plmn += 'F'
         elif len(plmn) != 6:
             raise(PycrateErr('{0}: invalid PLMN string to encode, {1!r}'\
-                  .format(self._name, bcd)))
+                  .format(self._name, plmn)))
         #
         if python_version > 2:
             plmn = tuple(plmn)
@@ -453,6 +454,7 @@ class IDDigit(Envelope):
         )
 
 class IDGroup(Envelope):
+    ENV_SEL_TRANS = False
     _GEN = (
         Uint('spare', val=0, bl=2),
         Uint('MBMSSessInd', val=0, bl=1),
@@ -471,10 +473,12 @@ class IDGroup(Envelope):
 
 class ID(Envelope):
     
-    _IDNone  = IDNone()
-    _IDTemp  = IDTemp()
-    _IDDigit = IDDigit()
-    _IDGroup = IDGroup()
+    # during encode() / _from_char() methods
+    # specific attributes are created:
+    # self._IDNone  = IDNone()
+    # self._IDTemp  = IDTemp()
+    # self._IDDigit = IDDigit()
+    # self._IDGroup = IDGroup()
     
     def set_val(self, vals):
         if isinstance(vals, dict) and 'type' in vals and 'ident' in vals:
@@ -518,11 +522,15 @@ class ID(Envelope):
             PLMN -string of digits- or None, MBMSSessID -uint8- or None)
         """
         if type == IDTYPE_NONE:
+            if not hasattr(self, '_IDNone'):
+                self._IDNone = IDNone()
             self._content = self._IDNone._content
             self._by_id   = self._IDNone._by_id
             self._by_name = self._IDNone._by_name
         #
         elif type == IDTYPE_TMSI:
+            if not hasattr(self, '_IDTemp'):
+                self._IDTemp = IDTemp()
             self._content = self._IDTemp._content
             self._by_id   = self._IDTemp._by_id
             self._by_name = self._IDTemp._by_name
@@ -532,6 +540,8 @@ class ID(Envelope):
             if not ident.isdigit():
                 raise(PycrateErr('{0}: invalid identity to encode, {1!r}'\
                       .format(self._name, ident)))
+            if not hasattr(self, '_IDDigit'):
+                self._IDDigit = IDDigit()
             self._content = self._IDDigit._content
             self._by_id   = self._IDDigit._by_id
             self._by_name = self._IDDigit._by_name
@@ -546,6 +556,8 @@ class ID(Envelope):
             if not isinstance(ident, (tuple, list)) or len(ident) != 3:
                 raise(PycrateErr('{0}: invalid identity to encode, {1!r}'\
                       .format(self._name, ident)))
+            if not hasattr(self, '_IDGroup'):
+                self._IDGroup = IDGroup()
             self._content = self._IDGroup._content
             self._by_id   = self._IDGroup._by_id
             self._by_name = self._IDGroup._by_name
@@ -570,6 +582,8 @@ class ID(Envelope):
                 raise(EltErr('{0} [_from_char]: {1}'.format(self._name, err)))
             #
             if type == IDTYPE_TMSI:
+                if not hasattr(self, '_IDTemp'):
+                    self._IDTemp = IDTemp()
                 self._content = self._IDTemp._content
                 self._by_id   = self._IDTemp._by_id
                 self._by_name = self._IDTemp._by_name
@@ -578,6 +592,8 @@ class ID(Envelope):
                 self[3]._from_char(char)
             #
             elif type in (IDTYPE_IMSI, IDTYPE_IMEI, IDTYPE_IMEISV):
+                if not hasattr(self, '_IDDigit'):
+                    self._IDDigit = IDDigit()
                 self._content = self._IDDigit._content
                 self._by_id   = self._IDDigit._by_id
                 self._by_name = self._IDDigit._by_name
@@ -587,6 +603,8 @@ class ID(Envelope):
                 self[3]._from_char(char)   
             #
             elif type == IDTYPE_TMGI:
+                if not hasattr(self, '_IDGroup'):
+                    self._IDGroup = IDGroup()
                 self._content = self._IDGroup._content
                 self._by_id   = self._IDGroup._by_id
                 self._by_name = self._IDGroup._by_name
@@ -601,6 +619,8 @@ class ID(Envelope):
                     self[7]._from_char(char)
             #
             else:
+                if not hasattr(self, '_IDNone'):
+                    self._IDNone = IDNone()
                 log('WNG: ID type unhandled, %i' % type)
                 self._content = self._IDNone._content
                 self._by_id   = self._IDNone._by_id
@@ -713,7 +733,7 @@ class MSCm2(Envelope):
 # TS 24.008, 10.5.1.11
 #------------------------------------------------------------------------------#
 
-_PriorityLevel_dict = {
+PriorityLevel_dict = {
     0 : 'no priority applied',
     1 : 'call priority level 4',
     2 : 'call priority level 3',
@@ -727,7 +747,7 @@ _PriorityLevel_dict = {
 class PriorityLevel(Envelope):
     _GEN = (
         Uint('spare', val=0, bl=1),
-        Uint('CallPriority', val=0, bl=3, dic=_PriorityLevel_dict)
+        Uint('CallPriority', val=0, bl=3, dic=PriorityLevel_dict)
         )
 
 
@@ -1043,12 +1063,386 @@ class AuxiliaryStates(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# Backup bearer capability
+# TS 24.008, 10.5.4.4a
+#------------------------------------------------------------------------------#
+
+_RadioChanReq_dict = {
+    0:'reserved',
+    1:'full rate support only MS',
+    2:'dual rate support MS/half rate preferred',
+    3:'dual rate support MS/full rate preferred'
+    }
+
+_BCapCodingStd_dict = {
+    0 : 'GSM standardized coding',
+    1 : _str_reserved
+    }
+
+_TransferMode_dict = {
+    0:'circuit',
+    1:'packet'
+    }
+
+_TransferCap_dict = {
+    0:'speech',
+    1:'unrestricted digital information',
+    2:'3.1 kHz audio, ex PLMN',
+    3:'facsimile group 3',
+    5:'Other ITC (See Octet 5a)',
+    7:'reserved, to be used in the network'
+    }
+
+class _BearerCapOct4(Envelope):
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('Compress', val=0, bl=1),
+        Uint('Structure', val=0, bl=2),
+        Uint('DuplexMode', val=0, bl=1),
+        Uint('Config', val=0, bl=1),
+        Uint('NIRR', val=0, bl=1),
+        Uint('Estab', val=0, bl=1)
+        )
+
+class _BearerCapExt5a(Envelope):
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('OtherITC', val=0, bl=2),
+        Uint('OtherRateAdapt', val=0, bl=2),
+        Uint('spare', val=0, bl=3)
+        )
+
+class _BUBearerCapOct5(Envelope):
+    ENV_SEL_TRANS = False
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('AccessId', val=0, bl=2),
+        Uint('RateAdapt', val=0, bl=2),
+        Uint('SignalAccessProt', val=0, bl=3),
+        _BearerCapExt5a('Ext5a')
+        )
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['Ext5a'].set_transauto(lambda: self[0]() == 1)
+
+class _BearerCapExt6a(Envelope):
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('NumStopBits', val=0, bl=1),
+        Uint('Negotation', val=0, bl=1),
+        Uint('NumDataBits', val=0, bl=1),
+        Uint('UserRate', val=0, bl=4)
+        )
+
+class _BearerCapExt6b(Envelope):
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('IntermedRate', val=0, bl=2),
+        Uint('NICOnTx', val=0, bl=1),
+        Uint('NICOnRx', val=0, bl=1),
+        Uint('Parity', val=0, bl=3)
+        )
+
+class _BearerCapExt6c(Envelope):
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('ConnectElt', val=0, bl=2),
+        Uint('ModemType', val=0, bl=5)
+        )
+
+class _BearerCapExt6d(Envelope):
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('OtherModemType', val=0, bl=2),
+        Uint('FixedNetUserRate', val=0, bl=5)
+        )
+
+class _BearerCapExt6e(Envelope):
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('AcceptableChanCodings', val=0, bl=4),
+        Uint('MaxNumOfTrafficChan', val=0, bl=3)
+        )
+
+class _BearerCapExt6f(Envelope):
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('UIMI', val=0, bl=3),
+        Uint('WantedAirIFUserRate', val=0, bl=4)
+        )
+
+class _BearerCapExt6g(Envelope):
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('AcceptableChanCodingsExt', val=0, bl=3),
+        Uint('AssymetryInd', val=0, bl=2),
+        Uint('spare', val=0, bl=2)
+        )
+
+class _BearerCapOct6(Envelope):
+    ENV_SEL_TRANS = False
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('Layer1Id', val=1, bl=2),
+        Uint('UserInfoLayer1Prot', val=0, bl=4),
+        Uint('Sync', val=0, bl=1),
+        _BearerCapExt6a('Ext6a'),
+        _BearerCapExt6b('Ext6b'),
+        _BearerCapExt6c('Ext6c'),
+        _BearerCapExt6d('Ext6d'),
+        _BearerCapExt6e('Ext6e'),
+        _BearerCapExt6f('Ext6f'),
+        _BearerCapExt6g('Ext6g')
+        )
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['Ext6a'].set_transauto(lambda: self[0]() == 1)
+        self['Ext6b'].set_transauto(lambda: self['Ext6a'].get_trans() or self['Ext6a'][0]() == 1)
+        self['Ext6c'].set_transauto(lambda: self['Ext6b'].get_trans() or self['Ext6b'][0]() == 1)
+        self['Ext6d'].set_transauto(lambda: self['Ext6c'].get_trans() or self['Ext6c'][0]() == 1)
+        self['Ext6e'].set_transauto(lambda: self['Ext6d'].get_trans() or self['Ext6d'][0]() == 1)
+        self['Ext6f'].set_transauto(lambda: self['Ext6e'].get_trans() or self['Ext6e'][0]() == 1)
+        self['Ext6g'].set_transauto(lambda: self['Ext6f'].get_trans() or self['Ext6f'][0]() == 1)
+
+class _BearerCapOct7(Envelope):
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('Layer2Id', val=2, bl=2),
+        Uint('UserInfoLayer2Prot', val=0, bl=5)
+        )
+
+class BackupBearerCap(Envelope):
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('RadioChanReq', val=1, bl=2, dic=_RadioChanReq_dict),
+        Uint('CodingStd', val=0, bl=1, dic=_BCapCodingStd_dict),
+        Uint('TransferMode', val=0, bl=1, dic=_TransferMode_dict),
+        Uint('InfoTransferCap', val=0, bl=3, dic=_TransferCap_dict),
+        _BearerCapOct4('Oct4', trans=True),
+        _BUBearerCapOct5('Oct5', trans=True),
+        _BearerCapOct6('Oct6', trans=True),
+        _BearerCapOct7('Oct7', trans=True)
+        )
+    
+    def _from_char(self, char):
+        Envelope._from_char(self, char)
+        if char.len_byte():
+            self['Oct4'].set_trans(False)
+            self['Oct4']._from_char(char)
+            if char.len_byte():
+                self['Oct5'].set_trans(False)
+                self['Oct5']._from_char(char)
+                if char.len_byte():
+                    self['Oct6'].set_trans(False)
+                    self['Oct6']._from_char(char)
+                    if char.len_byte():
+                        self['Oct7'].set_trans(False)
+                        self['Oct7']._from_char(char)
+
+
+#------------------------------------------------------------------------------#
+# Bearer capability
+# TS 24.008, 10.5.4.5
+#------------------------------------------------------------------------------#
+
+_CTMSupp_dict = {
+    0 : 'CTM text telephony is not supported',
+    1 : 'CTM text telephony is supported'
+    }
+
+_CodingExt3_dict = {
+    0 : 'octet used for extension of information transfer capability',
+    1 : 'octet used for other extension of octet 3'
+    }
+
+_SpeechVersInd_dict = {
+    0 : 'GSM FR v1 (GSM FR)',
+    2 : 'GSM FR v2 (GSM EFR)',
+    4 : 'GSM FR v3 (FR AMR)',
+    6 : 'GSM FR v4',
+    8 : 'GSM FR v5',
+    1 : 'GSM HR v1 (GSM HR)',
+    5 : 'GSM HR v3 (HR AMR)',
+    7 : 'GSM HR v4',
+    11 : 'GSM HR v6',
+    15 : 'no speech version supported for GERAN'
+    }
+
+class _BearerCapExt3a(Envelope):
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('Coding', val=0, bl=1, dic=_CodingExt3_dict),
+        Uint('CTM', val=0, bl=1, dic=_CTMSupp_dict),
+        Uint('spare', val=0, bl=1),
+        Uint('SpeechVersionInd', val=0, bl=4, dic=_SpeechVersInd_dict)
+        )
+
+class _BearerCapExt3bRec(Envelope):
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('Coding', val=0, bl=1, dic=_CodingExt3_dict),
+        Uint('spare', val=0, bl=2),
+        Uint('SpeechVersionInd', val=0, bl=4, dic=_SpeechVersInd_dict)
+        )
+
+class _BearerCapExt3b(Sequence):
+    _GEN = _BearerCapExt3bRec()
+    
+    def _from_char(self, char):
+        # while Ext bit is 1, stack another sequenced element
+        if self.get_trans():
+            return
+        # 1) determine the number of iteration of the template within the sequence
+        num = None
+        # 2) init content
+        self._content = []
+        # 3) consume char and fill in self._content
+        # there is no predefined limit in the number of repeated content
+        # consume the charpy instance until Ext == 1
+        while True:
+            # remember charpy cursor position, to restore it when it raises
+            cur = char._cur
+            clone = self._tmpl.clone()
+            try:
+                clone._from_char(char)
+            except CharpyErr as err:
+                char._cur = cur
+                break
+            else:
+                self._content.append(clone)
+                clone._env = self
+            if clone[0]() == 1:
+                break
+
+class _BearerCapExt5b(Envelope):
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('Hdr', val=0, bl=1),
+        Uint('Multiframe', val=0, bl=1),
+        Uint('Mode', val=0, bl=1),
+        Uint('LLI', val=0, bl=1),
+        Uint('Assignor', val=0, bl=1),
+        Uint('InbNeg', val=0, bl=1),
+        Uint('spare', val=0, bl=1)
+        )
+
+class _BearerCapOct5(Envelope):
+    ENV_SEL_TRANS = False
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('AccessId', val=0, bl=2),
+        Uint('RateAdapt', val=0, bl=2),
+        Uint('SignalAccessProt', val=0, bl=3),
+        _BearerCapExt5a('Ext5a'),
+        _BearerCapExt5b('Ext5b')
+        )
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['Ext5a'].set_transauto(lambda: self[0]() == 1)
+        self['Ext5b'].set_transauto(lambda: self['Ext5a'].get_trans() or self['Ext5a'][0]() == 1)
+
+class BearerCap(Envelope):
+    ENV_SEL_TRANS = False
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('RadioChanReq', val=1, bl=2, dic=_RadioChanReq_dict),
+        Uint('CodingStd', val=0, bl=1, dic=_BCapCodingStd_dict),
+        Uint('TransferMode', val=0, bl=1, dic=_TransferMode_dict),
+        Uint('InfoTransferCap', val=0, bl=3, dic=_TransferCap_dict),
+        _BearerCapExt3a('Ext3a'),
+        _BearerCapExt3b('Ext3b'),
+        _BearerCapOct4('Oct4', trans=True),
+        _BearerCapOct5('Oct5', trans=True),
+        _BearerCapOct6('Oct6', trans=True),
+        _BearerCapOct7('Oct7', trans=True)
+        )
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['Ext3a'].set_transauto(lambda: self[0]() == 1)
+        self['Ext3b'].set_transauto(lambda: self['Ext3a'].get_trans() or self['Ext3a'][0]() == 1)
+    
+    def _from_char(self, char):
+        Envelope._from_char(self, char)
+        if char.len_byte():
+            self['Oct4'].set_trans(False)
+            self['Oct4']._from_char(char)
+            if char.len_byte():
+                self['Oct5'].set_trans(False)
+                self['Oct5']._from_char(char)
+                if char.len_byte():
+                    self['Oct6'].set_trans(False)
+                    self['Oct6']._from_char(char)
+                    if char.len_byte():
+                        self['Oct7'].set_trans(False)
+                        self['Oct7']._from_char(char)
+
+
+#------------------------------------------------------------------------------#
+# Call Control Capabilities
+# TS 24.008, 10.5.4.5a
+#------------------------------------------------------------------------------#
+
+class CCCap(Envelope):
+    _GEN = (
+        Uint('MaxNumSupportedBearers', val=0, bl=4),
+        Uint('MultimediaCAT', val=0, bl=1),
+        Uint('ENICM', val=0, bl=1),
+        Uint('PCP', val=0, bl=1),
+        Uint('DTMF', val=1, bl=1),
+        Uint('spare', val=0, bl=4),
+        Uint('MaxNumSpeechBearers', val=0, bl=4)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Call state
+# TS 24.008, 10.5.4.6
+#------------------------------------------------------------------------------#
+
+_CodingStd_dict = {
+    0 : 'Standardized coding, as described in ITU-T Q.931',
+    1 : 'Reserved for other international standards',
+    2 : 'National standard',
+    3 : 'Standard defined for the GSM PLMNs'
+    }
+
+_CallState_dict = {
+    0 : 'null',
+    2 : 'MM connection pending',
+    34 : 'CC prompt present',
+    35 : 'Wait for network information',
+    36 : 'CC-Establishment present',
+    37 : 'CC-Establishment confirmed',
+    38 : 'Recall present',
+    1 : 'call initiated',
+    3 : 'mobile originating call proceeding',
+    4 : 'call delivered',
+    6 : 'call present',
+    7 : 'call received',
+    8 : 'connect request',
+    9 : 'mobile terminating call confirmed',
+    10 : 'active',
+    11 : 'disconnect request',
+    12 : 'disconnect indication',
+    19 : 'release request',
+    26 : 'mobile originating modify',
+    27 : 'mobile terminating modify',
+    28 : 'connect indication'
+    }
+
+class CallState(Envelope):
+    _GEN = (
+        Uint('CodingStd', val=0, bl=2, dic=_CodingStd_dict),
+        Uint('Value', val=0, bl=6, dic=_CallState_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
 # Called party BCD number
 # TS 24.008, 10.5.4.7
 #------------------------------------------------------------------------------#
-# TODO: for BCDNumber, check the stuff about the Ext bit and following fields...
-# not clear if always present: see TS 24.007, 11.2.2.1
-# TODO: align with CallingPartyBCDNumberStar
+
+# generic BCD number
 
 _BCDType_dict = {
     0 : 'unknown',
@@ -1057,6 +1451,7 @@ _BCDType_dict = {
     3 : 'network specific number',
     4 : 'dedicated access, short code',
     }
+
 _NumPlan_dict = {
     0 : 'unknown',
     1 : 'ISDN / telephony numbering plan (E.164 / E.163)',
@@ -1067,32 +1462,13 @@ _NumPlan_dict = {
     11: 'reserved for CTS',
     }
 
-class BCDNumber(Envelope):
-    _GEN = (
-        Uint('Ext', val=1, bl=1),
-        Uint('Type', val=1, bl=3, dic=_BCDType_dict),
-        Uint('NumberingPlan', val=1, bl=4, dic=_NumPlan_dict),
-        BufBCD('Num')
-        )
-
-CalledPartyBCDNumber = BCDNumber
-
-
-#------------------------------------------------------------------------------#
-# Calling party BCD number
-# TS 24.008, 10.5.4.9
-#------------------------------------------------------------------------------#
-# 2 alternatives for the calling party number format:
-# CallingPartyBCDNumber, CallingPartyBCDNumberStar
-
-CallingPartyBCDNumber = BCDNumber
-
 _PresInd_dict = {
     0 : 'presentation allowed',
     1 : 'presentation restricted',
     2 : 'number not available due to interworking',
     3 : _str_reserved
     }
+
 _ScreenInd_dict = {
     0 : 'user-provided, not screened',
     1 : 'user-provided, verified and passed',
@@ -1100,14 +1476,529 @@ _ScreenInd_dict = {
     3 : 'network provided'
     }
 
-class CallingPartyBCDNumberStar(Envelope):
+class _BCDNumberExt3a(Envelope):
     _GEN = (
         Uint('Ext', val=1, bl=1),
         Uint('PresentationInd', val=0, bl=2, dic=_PresInd_dict),
         Uint('spare', val=0, bl=3),
-        Uint('ScreeningInd', val=1, bl=2, dic=_ScreenInd_dict),
+        Uint('ScreeningInd', val=0, bl=2, dic=_ScreenInd_dict)
+        )
+
+class BCDNumber(Envelope):
+    ENV_SEL_TRANS = False
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('Type', val=1, bl=3, dic=_BCDType_dict),
+        Uint('NumberingPlan', val=1, bl=4, dic=_NumPlan_dict),
+        _BCDNumberExt3a('Ext3a'),
         BufBCD('Num')
         )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['Ext3a'].set_transauto(lambda: self[0]() == 1)
+
+
+class CalledPartyBCDNumber(BCDNumber):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# Called party subaddress
+# TS 24.008, 10.5.4.8
+#------------------------------------------------------------------------------#
+
+# generic sub-address
+
+_SubaddrType_dict = {
+    0 : 'NSAP',
+    2 : 'user defined'
+    }
+
+class Subaddress(Envelope):
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('Type', val=0, bl=3, dic=_SubaddrType_dict),
+        Uint('Odd', val=0, bl=1),
+        Uint('spare', val=0, bl=3),
+        Buf('Addr', val=b'', rep=REPR_HEX)
+        )
+
+class CalledPartySubaddress(Subaddress):
+    pass
+
+#------------------------------------------------------------------------------#
+# Calling party BCD number
+# TS 24.008, 10.5.4.9
+#------------------------------------------------------------------------------#
+
+class CallingPartyBCDNumber(BCDNumber):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# Calling party subaddress
+# TS 24.008, 10.5.4.10
+#------------------------------------------------------------------------------#
+
+class CallingPartySubaddress(Subaddress):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# Cause
+# TS 24.008, 10.5.4.11
+#------------------------------------------------------------------------------#
+
+_Location_dict = {
+    0 : 'User',
+    1 : 'Private network serving the local user',
+    2 : 'Public network serving the local user',
+    4 : 'Public network serving the remote user',
+    5 : 'Private network serving the remote user',
+    10 : 'Network beyond interworking point'
+    }
+
+_CauseClass_dict = {
+    0 : 'normal event',
+    1 : 'normal event',
+    2 : 'resource unavailable',
+    3 : 'service or option not available',
+    4 : 'service or option not implemented',
+    5 : 'invalid message (e.g. parameter out of range)',
+    6 : 'protocol error (e.g. unknown message)',
+    7 : 'interworking'
+    }
+
+_CauseValue_dict = {
+    0 : {
+        1 : 'Unassigned (unallocated) number',
+        3 : 'No route to destination',
+        6 : 'Channel unacceptable',
+        8 : 'Operator determined barring'
+        },
+    1 : {
+        0 : 'Normal call clearing',
+        1 : 'User busy',
+        2 : 'No user responding',
+        3 : 'User alerting, no answer',
+        5 : 'Call rejected',
+        6 : 'Number changed',
+        8 : 'Call rejected due to feature at the destination',
+        9 : 'Pre-emption',
+        10 : 'Non selected user clearing',
+        11 : 'Destination out of order',
+        12 : 'Invalid number format (incomplete number)',
+        13 : 'Facility rejected',
+        14 : 'Response to STATUS ENQUIRY',
+        15 : 'Normal, unspecified'
+        },
+    2 : {
+        2 : 'No circuit/channel available',
+        6 : 'Network out of order',
+        9 : 'Temporary failure',
+        10 : 'Switching equipment congestion',
+        11 : 'Access information discarded',
+        12 : 'requested circuit/channel not available',
+        15 : 'Resources unavailable, unspecified'
+        },
+    3 : {
+        1 : 'Quality of service unavailable',
+        2 : 'Requested facility not subscribed',
+        7 : 'Incoming calls barred within the CUG',
+        9 : 'Bearer capability not authorized',
+        10 : 'Bearer capability not presently available',
+        15 : 'Service or option not available, unspecified'
+        },
+    4 : {
+        1 : 'Bearer service not implemented',
+        4 : 'ACM equal to or greater than ACMmax',
+        5 : 'Requested facility not implemented',
+        6 : 'Only restricted digital information bearer capability is available',
+        15 : 'Service or option not implemented, unspecified'
+        },
+    5 : {
+        1 : 'Invalid transaction identifier value',
+        7 : 'User not member of CUG',
+        8 : 'Incompatible destination',
+        11 : 'Invalid transit network selection',
+        15 : 'Semantically incorrect message'
+        },
+    6 : {
+        0 : 'Invalid mandatory information',
+        1 : 'Message type non-existent or not implemented',
+        2 : 'Message type not compatible with protocol state',
+        3 : 'Information element non-existent or not implemented',
+        4 : 'Conditional IE error',
+        5 : 'Message not compatible with protocol state',
+        6 : 'Recovery on timer expiry',
+        15 : 'Protocol error, unspecified'
+        },
+    7 : {
+        15 : 'Interworking, unspecified'
+        }
+    }
+
+class _CauseExt3a(Envelope):
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('Recommendation', val=0, bl=7)
+        )
+
+class Cause(Envelope):
+    ENV_SEL_TRANS = False
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('CodingStd', val=0, bl=2, dic=_CodingStd_dict),
+        Uint('spare', val=0, bl=1),
+        Uint('Location', val=0, bl=4, dic=_Location_dict),
+        _CauseExt3a('Ext3a'),
+        Uint('Ext', val=1, bl=1),
+        Uint('Class', val=0, bl=3, dic=_CauseClass_dict),
+        Uint('Value', val=0, bl=4),
+        Buf('Diagnostic', val=b'')
+        )
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['Ext3a'].set_transauto(lambda: self[0]() == 1)
+        self['Value'].set_dicauto(lambda: _CauseValue_dict[self['Class']()])
+
+
+#------------------------------------------------------------------------------#
+# Congestion level
+# TS 24.008, 10.5.4.12
+#------------------------------------------------------------------------------#
+
+CongestionLevel_dict = {
+    0 : 'receiver ready',
+    15 : 'receiver not ready'
+    }
+
+
+#------------------------------------------------------------------------------#
+# Connected number
+# TS 24.008, 10.5.4.13
+#------------------------------------------------------------------------------#
+
+class ConnectedNumber(BCDNumber):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# Connected subaddress
+# TS 24.008, 10.5.4.14
+#------------------------------------------------------------------------------#
+
+class ConnectedSubaddress(Subaddress):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# High layer compatibility
+# TS 24.008, 10.5.4.16
+#------------------------------------------------------------------------------#
+
+class _HighLayerCompOct3(Envelope):
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('CodingStd', val=0, bl=2, dic=_CodingStd_dict),
+        Uint('Interpretation', val=0, bl=3),
+        Uint('PresentationMethProtProfile', val=0, bl=2)
+        )
+
+class _HighLayerCompExt4a(Envelope):
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('HighLayerCharIdentExt', val=0, bl=7)
+        )
+
+class _HighLayerCompOct4(Envelope):
+    ENV_SEL_TRANS = False
+    _GEN = (
+        Uint('Ext', val=0, bl=1),
+        Uint('HighLayerCharIdent', bl=7),
+        _HighLayerCompExt4a('Ext4a')
+        )
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['Ext4a'].set_transauto(lambda: self[0]() == 1)
+
+class HighLayerComp(Envelope):
+    _GEN = (
+        _HighLayerCompOct3('Oct3', trans=True),
+        _HighLayerCompOct4('Oct4', trans=True)
+        )
+    
+    def _from_char(self, char):
+        l = char.len_byte()
+        if l > 1:
+            self[0].set_trans(False)
+            self[1].set_trans(False)
+        elif l == 1:
+            self[0].set_trans(False)
+        Envelope._from_char(self, char)
+
+
+#------------------------------------------------------------------------------#
+# Notification indicator
+# TS 24.008, 10.5.4.20
+#------------------------------------------------------------------------------#
+
+_Notification_dict = {
+    0 : 'User suspended',
+    1 : 'User resumed',
+    2 : 'Bearer change'
+    }
+
+class NotificationInd(Envelope):
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('Notification', val=0, bl=7, dic=_Notification_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Progress indicator
+# TS 24.008, 10.5.4.21
+#------------------------------------------------------------------------------#
+
+_Progress_dict = {
+    1 : 'Call is not end-to-end PLMN/ISDN, further call progress information may be available in-band',
+    2 : 'Destination address in non-PLMN/ISDN',
+    3 : 'Origination address in non-PLMN/ISDN',
+    4 : 'Call has returned to the PLMN/ISDN',
+    8 : 'In-band information or appropriate pattern now available',
+    9 : 'In-band multimedia CAT available',
+    32: 'Call is end-to-end PLMN/ISDN',
+    64: 'Queueing'
+    }
+
+class ProgressInd(Envelope):
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('CodingStd', val=0, bl=2, dic=_CodingStd_dict),
+        Uint('spare', val=0, bl=1),
+        Uint('Location', val=0, bl=4, dic=_Location_dict),
+        Uint('Ext', val=1, bl=1),
+        Uint('Progress', val=0, bl=7, dic=_Progress_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Recall type $(CCBS)$
+# TS 24.008, 10.5.4.21a
+#------------------------------------------------------------------------------#
+
+_RecallType_dict = {
+    0 : 'CCBS',
+    7 : _str_reserved
+    }
+
+class RecallType(Envelope):
+    _GEN = (
+        Uint('spare', val=0, bl=5),
+        Uint('Value', val=0, bl=3, dic=_RecallType_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Redirecting party BCD number
+# TS 24.008, 10.5.4.21b
+#------------------------------------------------------------------------------#
+
+class RedirectingPartyBCDNumber(BCDNumber):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# Redirecting party subaddress
+# TS 24.008, 10.5.4.21c
+#------------------------------------------------------------------------------#
+
+class RedirectingPartySubaddress(Subaddress):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# Repeat indicator
+# TS 24.008, 10.5.4.22
+#------------------------------------------------------------------------------#
+
+RepeatInd_dict = {
+    1 : 'Circular for successive selection, mode 1 alternate mode 2',
+    2 : 'Support of fallback, mode 1 preferred, mode 2 selected if setup of mode 1 fails',
+    3 : _str_reserved,
+    4 : 'Service change and fallback, mode 1 alternate mode 2, mode 1 preferred'
+    }
+
+
+#------------------------------------------------------------------------------#
+# Signal
+# TS 24.008, 10.5.4.23
+#------------------------------------------------------------------------------#
+
+_Signal_dict = {
+    0 : 'dial tone on',
+    1 : 'ring back tone on',
+    2 : 'intercept tone on',
+    3 : 'network congestion tone on',
+    4 : 'busy tone on',
+    5 : 'confirm tone on',
+    6 : 'answer tone on',
+    7 : 'call waiting tone on',
+    8 : 'off-hook warning tone on',
+    63 : 'tones off',
+    79 : 'alerting off'
+    }
+
+class Signal(Uint8):
+    _dic = _Signal_dict
+
+
+#------------------------------------------------------------------------------#
+# User-user
+# TS 24.008, 10.5.4.25
+#------------------------------------------------------------------------------#
+
+_UUType_dict = {
+    0 : 'User specific protocol',
+    1 : 'OSI high layer protocols',
+    2 : 'X.244',
+    3 : 'Reserved for system management convergence function',
+    4 : 'IA5 characters',
+    7 : 'rate adaption according to ITU-T V.120',
+    8 : 'user-network call control messages according to ITU-T Q.931',
+    79: '3GPP capability exchange protocol'
+    }
+
+class UserUser(Envelope):
+    _GEN = (
+        Uint8('Type', val=4, dic=_UUType_dict),
+        Buf('Data', val=b'') # should be 32 or 128 bytes
+        )
+
+
+#------------------------------------------------------------------------------#
+# Alerting Pattern $(NIA)$
+# TS 24.008, 10.5.4.26
+#------------------------------------------------------------------------------#
+
+class AlertingPattern(Envelope):
+    _GEN = (
+        Uint('spare', val=0, bl=4),
+        Uint('Value', val=0, bl=4)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Allowed actions $(CCBS)$
+# TS 24.008, 10.5.4.27
+#------------------------------------------------------------------------------#
+
+_CCBSAct_dict = {
+    0 : 'Activation of CCBS not possible',
+    1 : 'Activation of CCBS possible'
+    }
+
+class CCBSAllowedActions(Envelope):
+    _GEN = (
+        Uint('CCBSAct', val=0, bl=1, dic=_CCBSAct_dict),
+        Uint('spare', val=0, bl=7)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Stream Identifier
+# TS 24.008, 10.5.4.28
+#------------------------------------------------------------------------------#
+
+class StreamIdent(Uint8):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# Network Call Control Capabilities
+# TS 24.008, 10.5.4.29
+#------------------------------------------------------------------------------#
+
+class NetCCCap(Envelope):
+    _GEN = (
+        Uint('spare', val=0, bl=7),
+        Uint('MultiCallSupport', val=0, bl=1)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Cause of No CLI
+# TS 24.008, 10.5.4.30
+#------------------------------------------------------------------------------#
+
+_CauseNoCLI_dict = {
+    0 : 'Unavailable',
+    1 : 'Reject by user',
+    2 : 'Interaction with other service',
+    3 : 'Coin line/payphone'
+    }
+
+class CauseNoCLI(Uint8):
+    _dic = _CauseNoCLI_dict
+
+
+#------------------------------------------------------------------------------#
+# Supported codec list
+# TS 24.008, 10.5.4.32
+#------------------------------------------------------------------------------#
+
+_CodecSysID_dict = {
+    0:'GSM',
+    4:'UMTS'
+    }
+
+class _CodecBitmap(Envelope):
+    _GEN = (
+        Uint('TDMA_EFR', val=0, bl=1),
+        Uint('UMTS_AMR2', val=0, bl=1),
+        Uint('UMTS_AMR', val=0, bl=1),
+        Uint('HR_AMR', val=0, bl=1),
+        Uint('FR_AMR', val=0, bl=1),
+        Uint('GSM_EFR', val=0, bl=1),
+        Uint('GSM_HR', val=0, bl=1),
+        Uint('GSM_FR', val=0, bl=1),
+        Uint('reserved', val=0, bl=1),
+        Uint('reserved', val=0, bl=1),
+        Uint('OHR_AMR-WB', val=0, bl=1),
+        Uint('OFR_AMR-WB', val=0, bl=1),
+        Uint('OHR_AMR', val=0, bl=1),
+        Uint('UMTS_AMR-WB', val=0, bl=1),
+        Uint('FR_AMR-WB', val=0, bl=1),
+        Uint('PDC_EFR', val=0, bl=1),
+        Buf('spare', val=b'')
+        )
+
+class CodecSysID(Envelope):
+    _GEN = (
+        Uint8('SysID', val=0, dic=_CodecSysID_dict),
+        Uint8('BMLen'),
+        _CodecBitmap('CodecBM')
+        )
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[1].set_valauto(lambda: self[2].get_len())
+    
+    def _from_char(self, char):
+        self[0]._from_char(char)
+        self[1]._from_char(char)
+        l = self[1]()
+        clen = char._len_bit
+        char._len_bit = char._cur + 8*l
+        if l == 1:
+            for b in self[8:16]:
+                b.set_trans(True)
+        self[2]._from_char(char)
+        char._len_bit = clen
+
+class SupportedCodecs(Sequence):
+    _GEN = CodecSysID()
 
 
 #------------------------------------------------------------------------------#
@@ -1585,6 +2476,62 @@ class NSAPI(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# Protocol configuration options
+# TS 24.008, 10.5.6.3
+#------------------------------------------------------------------------------#
+
+_ProtConfig_dict = {
+    # 3GPP additional parameters
+    0x0001 : 'P-CSCF IPv6 Address Request',
+    0x0002 : 'IM CN Subsystem Signaling Flag',
+    0x0003 : 'DNS Server IPv6 Address Request',
+    0x0004 : 'Policy Control rejection code',
+    0x0005 : 'Selected Bearer Control Mode',
+    0x0006 : 'Reserved',
+    0x0007 : 'DSMIPv6 Home Agent Address',
+    0x0008 : 'DSMIPv6 Home Network Prefix',
+    0x0009 : 'DSMIPv6 IPv4 Home Agent Address',
+    0x000A : 'IP address allocation via NAS signalling',
+    0x000B : 'Reserved',
+    0x000C : 'P-CSCF IPv4 Address',
+    0x000D : 'DNS server IPv4 address request',
+    0x000E : 'MSISDN Request',
+    0x000F : 'IFOM-Support-Request',
+    0x0010 : 'IPv4 Link MTU Request',
+    0x0011 : 'Support of Local address in TFT indicator',
+    0x0012 : 'P-CSCF Re-selection support',
+    0x0013 : 'NBIFOM request indicator',
+    0x0014 : 'NBIFOM mode',
+    0x0015 : 'Non-IP Link MTU Request',
+    0x0016 : 'APN rate control support indicator',
+    
+    # ETSI / IETF protocol identifiers
+    0x8021 : 'IPCP',
+    0xC021 : 'LCP',
+    0xC023 : 'PAP',
+    0xC223 : 'CHAP'
+    }
+
+class ProtConfigElt(Envelope):
+    _GEN = (
+        Uint16('ID', val=0x8021, dic=_ProtConfig_dict),
+        Uint8('Len'),
+        Buf('Cont', val=b'')
+        )
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['Len'].set_valauto(self['Cont'].get_len)
+        self['Cont'].set_blauto(lambda: 8*self['Len'].get_val())
+
+class ProtConfig(Envelope):
+    _GEN = (
+        Uint('Ext', val=1, bl=1),
+        Uint('spare', val=0, bl=4),
+        Uint('Prot', val=0, bl=3, dic={0:'PPP with IP PDP'}),
+        Sequence('Config', GEN=ProtConfigElt())
+        )
+
+#------------------------------------------------------------------------------#
 # Packet data protocol address
 # TS 24.008, 10.5.6.4
 #------------------------------------------------------------------------------#
@@ -1747,27 +2694,27 @@ class QoS(Envelope):
     _GEN = (
         Uint('spare', val=0, bl=2),
         Uint('DelayClass', val=0, bl=3, dic=_DelayClass_dict),
-        Uint('ReliabilityClass', val=0, bl=3, dic=_ReliabClass_dict),
+        Uint('ReliabilityClass', val=0, bl=3, dic=_ReliabClass_dict), # 1
         Uint('PeakThroughput', val=0, bl=4, dic=_PeakTP_dict),
         Uint('spare', val=0, bl=1),
-        Uint('PrecedenceClass', val=0, bl=3, dic=_PrecedClass_dict),
+        Uint('PrecedenceClass', val=0, bl=3, dic=_PrecedClass_dict), # 2
         Uint('spare', val=0, bl=3),
-        Uint('MeanThroughput', val=0, bl=5, dic=_MeanTP_dict),
+        Uint('MeanThroughput', val=0, bl=5, dic=_MeanTP_dict), # 3
         Uint('TrafficClass', val=0, bl=3, dic=_TraffClass_dict),
         Uint('DeliveryOrder', val=0, bl=2, dic=_DeliverOrd_dict),
-        Uint('ErroneousSDU', val=0, bl=3, dic=_ErronSDU_dict),
+        Uint('ErroneousSDU', val=0, bl=3, dic=_ErronSDU_dict), # 4
         Uint8('MaxSDUSize', val=0),
         Uint8('MaxULBitrate', val=0),
         Uint8('MaxDLBitrate', val=0),
         Uint('ResidualBER', val=0, bl=4),
-        Uint('SDUErrorRatio', val=0, bl=4),
+        Uint('SDUErrorRatio', val=0, bl=4), # 8
         Uint('TransferDelay', val=0, bl=6),
-        Uint('TrafficHandlingPriority', val=0, bl=2),
+        Uint('TrafficHandlingPriority', val=0, bl=2), # 9
         Uint8('GuaranteedULBitrate', val=0),
         Uint8('GuaranteedDLBitrate', val=0),
         Uint('spare', val=0, bl=3),
         Uint('SignallingInd', val=0, bl=1, dic=_SignalInd_dict),
-        Uint('SourceStatsDesc', val=0, bl=4, dic=_SourceStats_dict),
+        Uint('SourceStatsDesc', val=0, bl=4, dic=_SourceStats_dict), # 12
         Uint8('MaxDLBitrateExt', val=0, trans=True),
         Uint8('GuaranteedDLBitrateExt', val=0, trans=True),
         Uint8('MaxULBitrateExt', val=0, trans=True),
@@ -1787,19 +2734,19 @@ class QoS(Envelope):
             self._set_trans_dlbrext2(True)
             self._set_trans_ulbrext2(True)
         elif isinstance(vals, (tuple, list)):
-            if len(vals) >= 30:
+            if len(vals) > 29:
                 self._set_trans_dlbrext(False)
                 self._set_trans_ulbrext(False)
                 self._set_trans_dlbrext2(False)
                 self._set_trans_ulbrext2(False)
-            elif len(vals) >= 28:
+            elif len(vals) > 27:
                 self._set_trans_dlbrext(False)
                 self._set_trans_ulbrext(False)
                 self._set_trans_dlbrext2(False)
-            elif len(vals) >= 26:
+            elif len(vals) > 25:
                 self._set_trans_dlbrext(False)
                 self._set_trans_ulbrext(False)
-            elif len(vals) >= 24:
+            elif len(vals) > 23:
                 self._set_trans_dlbrext(False)
         elif isinstance(vals, dict):
             if 'MaxULBitrateExt2' in vals or 'GuaranteedULBitrateExt2' in vals:
@@ -1836,21 +2783,44 @@ class QoS(Envelope):
     def _from_char(self, char):
         # in case long-enough buffer is available, make extended fields non-transparent
         l = char.len_byte()
-        if l >= 18:
+        if l > 18:
             self._set_trans_dlbrext(False)
             self._set_trans_ulbrext(False)
             self._set_trans_dlbrext2(False)
             self._set_trans_ulbrext2(False)
-        elif l >= 16:
+        elif l > 16:
             self._set_trans_dlbrext(False)
             self._set_trans_ulbrext(False)
             self._set_trans_dlbrext2(False)
-        elif l >= 14:
+        elif l > 14:
             self._set_trans_dlbrext(False)
             self._set_trans_ulbrext(False)
-        elif l >= 12:
+        elif l > 12:
             self._set_trans_dlbrext(False)
         Envelope._from_char(self, char)
+
+
+#------------------------------------------------------------------------------#
+# Re-attempt indicator
+# TS 24.008, 10.5.6.5a
+#------------------------------------------------------------------------------#
+
+_EPLMNC_dict = {
+    0 : 'MS is allowed to re-attempt the procedure in an equivalent PLMN',
+    1 : 'MS is not allowed to re-attempt the procedure in an equivalent PLMN'
+    }
+
+_RATC_dict = {
+    0 : 'MS is allowed to re-attempt the procedure in S1 mode',
+    1 : 'MS is not allowed to re-attempt the procedure in S1 mode'
+    }
+
+class ReattemptInd(Envelope):
+    _GEN = (
+        Uint('spare', val=0, bl=6),
+        Uint('EPLMNC', val=0, bl=1, dic=_EPLMNC_dict),
+        Uint('RATC', val=0, bl=1, dic=_RATC_dict)
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -1882,6 +2852,446 @@ class LLC_SAPI(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# SM Cause
+# TS 24.008, 10.5.6.6
+#------------------------------------------------------------------------------#
+
+SMCause_dict = {
+    8 : 'Operator Determined Barring',
+    24 : 'MBMS bearer capabilities insufficient for the service',
+    25 : 'LLC or SNDCP failure(A/Gb mode only)',
+    26 : 'Insufficient resources',
+    27 : 'Missing or unknown APN',
+    28 : 'Unknown PDP address or PDP type',
+    29 : 'User authentication failed',
+    30 : 'Activation rejected by GGSN, Serving GW or PDN GW',
+    31 : 'Activation rejected, unspecified',
+    32 : 'Service option not supported',
+    33 : 'Requested service option not subscribed',
+    34 : 'Service option temporarily out of order',
+    35 : 'NSAPI already used (not sent)',
+    36 : 'Regular deactivation',
+    37 : 'QoS not accepted',
+    38 : 'Network failure',
+    39 : 'Reactivation requested',
+    40 : 'Feature not supported',
+    41 : 'Semantic error in the TFT operation',
+    42 : 'Syntactical error in the TFT operation',
+    43 : 'Unknown PDP context',
+    44 : 'Semantic errors in packet filter(s)',
+    45 : 'Syntactical errors in packet filter(s)',
+    46 : 'PDP context without TFT already activated',
+    47 : 'Multicast group membership time-out',
+    48 : 'Request rejected, BCM violation',
+    50 : 'PDP type IPv4 only allowed',
+    51 : 'PDP type IPv6 only allowed',
+    52 : 'Single address bearers only allowed',
+    56 : 'Collision with network initiated request',
+    60 : 'Bearer handling not supported',
+    65 : 'Maximum number of PDP contexts reached',
+    66 : 'Requested APN not supported in current RAT and PLMN combination',
+    81 : 'Invalid transaction identifier value',
+    95 : 'Semantically incorrect message',
+    96 : 'Invalid mandatory information',
+    97 : 'Message type non-existent or not implemented',
+    98 : 'Message type not compatible with the protocol state',
+    99 : 'Information element non-existent or not implemented',
+    100 : 'Conditional IE error',
+    101 : 'Message not compatible with the protocol state',
+    111 : 'Protocol error, unspecified',
+    112 : 'APN restriction value incompatible with active PDP context',
+    113 : 'Multiple accesses to a PDN connection not allowed'
+    }
+
+class SMCause(Uint8):
+    dic = SMCause_dict
+
+
+#------------------------------------------------------------------------------#
+# Linked TI
+# TS 24.008, 10.5.6.7
+#------------------------------------------------------------------------------#
+# see transaction identifier in TS 24.007, section 11.2.3.1.3
+
+class LinkedTI(Envelope):
+    _GEN = (
+        Uint('Flag', val=0, bl=1, dic={0: 'initiator', 1: 'responder'}),
+        Uint('TIO', val=0, bl=3),
+        Uint('spare', val=0, bl=4),
+        Uint('Ext', val=1, bl=1, trans=True),
+        Uint('TIE', val=0, bl=7, trans=True),
+        Uint8('TI', trans=True) # virtual field to get the TI value easily
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['TI'].set_valauto(self._set_ti)
+    
+    def _set_ti(self):
+        tio = self['TIO']()
+        if tio == 7 and not self['TIE'].get_trans():
+            return self['TIE']()
+        else:
+            return tio
+    
+    def set_val(self, vals):
+        if isinstance(vals, dict) and 'TI' in vals:
+            ti = vals['TI']
+            del vals['TI']
+            if 0 <= ti < 7:
+                self['TIO'].set_val(ti)
+                self['Ext'].set_trans(True)
+                self['TIE'].set_trans(True)
+            elif ti < 128:
+                # extended
+                self['TIO'].set_val(7)
+                self['Ext'].set_trans(False)
+                self['TIE'].set_trans(False)
+                self['TIE'].set_val(ti)
+        Envelope.set_val(self, vals)
+    
+    def _from_char(self, char):
+        if char.len_byte() > 1:
+            self['Ext'].set_trans(False)
+            self['TIE'].set_trans(False)
+        Envelope._from_char(self, char)
+
+
+#------------------------------------------------------------------------------#
+# Tear Down Indicator
+# TS 24.008, 10.5.6.10
+#------------------------------------------------------------------------------#
+
+class TearDownInd(Envelope):
+    _GEN = (
+        Uint('spare', val=0, bl=3),
+        Uint('Value', val=0, bl=1, dic={0:'teardown not requested', 1:'teardown requested'}),
+        )
+
+
+#------------------------------------------------------------------------------#
+# Packet Flow Identifier
+# TS 24.008, 10.5.6.11
+#------------------------------------------------------------------------------#
+
+_PktFlowId_dict = {
+    0: 'Best Effort',
+    1: 'Signaling',
+    2: 'SMS',
+    3: 'TOM8'
+    }
+
+class PacketFlowId(Envelope):
+    _GEN = (
+        Uint('spare', val=0, bl=1),
+        Uint('Value', val=0, bl=7, dic=_PktFlowId_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Traffic Flow Template
+# TS 24.008, 10.5.6.12
+#------------------------------------------------------------------------------#
+
+_TFTOpcode_dict = {
+    0 : 'Ignore this IE',
+    1 : 'Create new TFT',
+    2 : 'Delete existing TFT',
+    3 : 'Add packet filters to existing TFT',
+    4 : 'Replace packet filters in existing TFT',
+    5 : 'Delete packet filters from existing TFT',
+    6 : 'No TFT operation',
+    7 : _str_reserved
+    } 
+
+_PktFilterDir_dict = {
+    0 : 'pre Rel-7 TFT filter',
+    1 : 'downlink only',
+    2 : 'uplink only',
+    3 : 'bidirectional'
+    }
+
+_PktFilterCompType_dict = {
+    16 : 'IPv4 remote address type',
+    17 : 'IPv4 local address type ',
+    32 : 'IPv6 remote address type',
+    33 : 'IPv6 remote address/prefix length type',
+    35 : 'IPv6 local address/prefix length type',
+    48 : 'Protocol identifier/Next header type',
+    64 : 'Single local port type',
+    65 : 'Local port range type',
+    80 : 'Single remote port type',
+    81 : 'Remote port range type',
+    96 : 'Security parameter index type',
+    112 : 'Type of service/Traffic class type',
+    128 : 'Flow label type'
+    }
+
+# if TFT opcode == 0, E == 0 and no pkt filters must be there 
+# if TFT opcode == 5, only pkt filters' id are provided in the pkt filters list
+# TFTPktFilter content if made of a sequence of components
+
+class TFTPktFilterId(Envelope):
+    _GEN = (
+        Uint('spare', val=0, bl=4),
+        Uint('Id', val=0, bl=4)
+        )
+
+class _CompIPv4(Envelope):
+    _GEN = (
+        Buf('Address', bl=32, rep=REPR_HEX),
+        Buf('Netmask', bl=32, rep=REPR_HEX)
+        )
+
+class _CompIPv6(Envelope):
+    _GEN = (
+        Buf('Address', bl=128, rep=REPR_HEX),
+        Buf('Netmask', bl=128, rep=REPR_HEX)
+        )
+
+class _CompIPv6Pref(Envelope):
+    _GEN = (
+        Buf('Address', bl=128, rep=REPR_HEX),
+        Uint8('PrefixLen', val=0)
+        )
+
+class _CompPortRange(Envelope):
+    _GEN = (
+        Uint16('PortLo', val=0),
+        Uint16('PortHi', val=0)
+        )
+
+class _CompTrafficClass(Envelope):
+    _GEN = (
+        Uint8('Class', val=0),
+        Uint8('Mask', val=0)
+        )
+
+class TFTPktFilterComp(Envelope):
+    _ValueLUT = {
+        16 : _CompIPv4('IPv4'),
+        17 : _CompIPv4('IPv4'),
+        32 : _CompIPv6('IPv6'),
+        33 : _CompIPv6Pref('IPv6Pref'),
+        35 : _CompIPv6Pref('IPv6Pref'),
+        48 : Uint8('ProtId'),
+        64 : Uint16('Port'),
+        65 : _CompPortRange('PortRange'),
+        80 : Uint16('Port'),
+        81 : _CompPortRange('PortRange'),
+        96 : Uint32('IPsecSPI'),
+        112 : _CompTrafficClass('TrafficClass'),
+        128 : Uint24('FlowLabel')
+        }
+    _GEN = (
+        Uint8('Type', val=0, dic=_PktFilterCompType_dict),
+        Buf('Value', val=b'', rep=REPR_HEX)
+        )
+        
+    def set_val(self, vals):
+        if isinstance(vals, (tuple, list)) and len(vals) > 1 and \
+        vals[0] in self._ValueLUT and not isinstance(vals[1], bytes_types):
+            # replace Buf with the specific structure
+            self.replace(self[1], self._ValueLUT[vals[0]].clone())
+        elif isinstance(vals, dict) and 'Type' in vals and 'Value' in vals and \
+        vals['Type'] in self._ValueLUT and not isinstance(vals['Value'], bytes_types):
+            # replace Buf with the specific structure
+            self.replace(self[1], self._ValueLUT[vals[0]].clone())
+        Envelope.set_val(self, vals)
+    
+    def _from_char(self, char):
+        self[0]._from_char(char)
+        t = self[0]()
+        if t in self._ValueLUT:
+            self.replace(self[1], self._ValueLUT[t].clone())
+        self[1]._from_char(char)
+
+class TFTPktFilter(Envelope):
+    _Cont = Sequence('Cont', GEN=TFTPktFilterComp())
+    _GEN = (
+        Uint('spare', val=0, bl=2),
+        Uint('Dir', val=0, bl=2, dic=_PktFilterDir_dict),
+        Uint('Id', val=0, bl=4),
+        Uint8('Precedence', val=0),
+        Uint8('Len'),
+        Buf('Cont', val=b'', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self._Cont = self.__class__._Cont.clone()
+        self['Len'].set_valauto(lambda: self['Cont'].get_len())
+        self['Cont'].set_blauto(lambda: 8*self['Len']())
+    
+    def set_val(self, vals):
+        if isinstance(vals, (tuple, list)) and len(vals) > 5 and \
+        not isinstance(vals[5], bytes_types):
+            # replace Cont with the specific structure
+            self.replace(self[5], self._Cont)
+        elif isinstance(vals, dict) and 'Cont' in vals and \
+        not isinstance(vals['Cont'], bytes_types):
+            # replace Cont with the specific structure
+            self.replace(self[5], self._Cont)
+        Envelope.set_val(self, vals)
+    
+    def _from_char(self, char):
+        Envelope._from_char(self, char)
+        # saves char settings
+        ccur, clen, cont_bl = char._cur, char._len_bit, self['Cont'].get_bl()
+        # rewind it to parse again with a sequence of TFTPktFilterComp()
+        char._len_bit = char._cur
+        char._cur -= cont_bl
+        try:
+            self._Cont._from_char(char)
+        except:
+            char._cur, char._len_bit = ccur, clen
+        else:
+            if char._cur == ccur:
+                self.replace(self['Cont'], self._Cont)
+            else:
+                char._cur = ccur
+            char._len_bit = clen
+
+class TFTParameter(Envelope):
+    _GEN = (
+        Uint8('Id', val=0),
+        Uint8('Len'),
+        Buf('Cont', val=b'')
+        )
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['Len'].set_valauto(self['Cont'].get_len)
+        self['Cont'].set_blauto(lambda: 8*self['Len']())
+
+class TFT(Envelope):
+    ENV_SEL_TRANS = False
+    _GEN = (
+        Uint('Opcode', val=0, bl=3, dic=_TFTOpcode_dict),
+        Uint('E', val=0, bl=1, dic={0: 'no parameters list', 1: 'parameters list included'}),
+        Uint('NumPktFilters', bl=4),
+        Sequence('PktFilterIds', GEN=TFTPktFilterId()),
+        Sequence('PktFilters', GEN=TFTPktFilter()),
+        Sequence('Parameters', GEN=TFTParameter())
+        )
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['NumPktFilters'].set_valauto(lambda: self['PktFilterIds'].get_num() if \
+            self['Opcode']() == 5 else self['PktFilters'].get_num())
+        self['PktFilterIds'].set_transauto(lambda: self['Opcode']() != 5)
+        self['PktFilterIds'].set_numauto(lambda: self['NumPktFilters']())
+        self['PktFilters'].set_transauto(lambda: self['Opcode']() == 5)
+        self['PktFilters'].set_numauto(lambda: self['NumPktFilters']())
+        self['Parameters'].set_transauto(lambda: self['E']() == 0)
+        # there is no num automation of the Parameters
+        # hence, all remaining buffer will be consumed when calling _from_char()
+
+
+#------------------------------------------------------------------------------#
+# Temporary mobile group identity (TMGI)
+# TS 24.008, 10.5.6.13
+#------------------------------------------------------------------------------#
+
+class TMGI(Envelope):
+    _GEN = (
+        Uint24('MBMSServID', val=0, rep=REPR_HEX),
+        PLMN()
+        )
+    
+    def set_val(self, vals):
+        if isinstance(vals, (tuple, list)) and len(vals) == 1:
+            self['PLMN'].set_trans(True)  
+        elif isinstance(vals, dict) and 'PLMN' not in vals:
+            self['PLMN'].set_trans(True)  
+        Envelope.set_val(self, vals)
+    
+    def _from_char(self, char):
+        if char.len_bit() < 48:
+            self['PLMN'].set_trans(True)
+        Envelope._from_char(self, char)
+        
+#------------------------------------------------------------------------------#
+# MBMS bearer capabilities
+# TS 24.008, 10.5.6.14
+#------------------------------------------------------------------------------#
+
+class MBMSBearerCap(Envelope):
+    _GEN = (
+        Uint8('MaxDLBitrate', val=0),
+        Uint8('MaxDLBitrateExt', val=0)
+        )
+
+#------------------------------------------------------------------------------#
+# Enhanced network service access point identifier
+# TS 24.008, 10.5.6.16
+#------------------------------------------------------------------------------#
+
+_ENSAPI_dict = {0xff: _str_reserved}
+for i in range(0, 0x7f):
+    _ENSAPI_dict[i] = _str_reserved
+for i in range(0x80, 0xfe):
+    _ENSAPI_dict[i] = 'NSAPI_%i_MBMS' % i
+
+class ENSAPI(Uint8):
+    _dic = _ENSAPI_dict
+
+
+#------------------------------------------------------------------------------#
+# Request type
+# TS 24.008, 10.5.6.17
+#------------------------------------------------------------------------------#
+
+RequestType_dict = {
+    1 : 'Initial request',
+    2 : 'Handover',
+    3 : 'Unused. Interpreted as initial request',
+    4 : 'Emergency',
+    }
+
+
+#------------------------------------------------------------------------------#
+# Notification indicator
+# TS 24.008, 10.5.6.18
+#------------------------------------------------------------------------------#
+
+class NotificationInd(Uint8):
+    _dic = {0:'SRVCC handover cancelled, IMS session re-establishment required'}
+
+
+#------------------------------------------------------------------------------#
+# Connectivity type
+# TS 24.008, 10.5.6.19
+#------------------------------------------------------------------------------#
+
+ConnectivityType_dict = {
+    0 : 'The PDN connection type is not indicated',
+    1 : 'The PDN connection is considered a LIPA PDN connection'
+    }
+
+
+#------------------------------------------------------------------------------#
+# WLAN offload acceptability
+# TS 24.008, 10.5.6.20
+#------------------------------------------------------------------------------#
+
+_UTRANOffAcc_dict = {
+    0 : 'Offloading the traffic of the PDN connection via a WLAN when in Iu mode is not acceptable',
+    1 : 'Offloading the traffic of the PDN connection via a WLAN when in Iu mode is acceptable'
+    }
+
+_EUTRANOffAcc_dict = {
+    0 : 'Offloading the traffic of the PDN connection via a WLAN when in S1 mode is not acceptable',
+    1 : 'Offloading the traffic of the PDN connection via a WLAN when in S1 mode is acceptable'
+    }
+
+class WLANOffloadAccept(Envelope):
+    _GEN = (
+        Uint('spare', val=0, bl=2),
+        Uint('UTRANOffloadAccept', val=0, bl=1, dic=_UTRANOffAcc_dict),
+        Uint('EUTRANOffloadAccept', val=0, bl=1, dic=_EUTRANOffAcc_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
 # PDP Context Status
 # TS 24.008, 10.5.7.1
 #------------------------------------------------------------------------------#
@@ -1909,6 +3319,25 @@ class PDPCtxtStat(Envelope):
         Uint('NSAPI_10', val=0, bl=1, dic=_PDPCtxtStat_dict),
         Uint('NSAPI_9', val=0, bl=1, dic=_PDPCtxtStat_dict),
         Uint('NSAPI_8', val=0, bl=1, dic=_PDPCtxtStat_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Radio Priority
+# TS 24.008, 10.5.7.2 and 10.5.7.5
+#------------------------------------------------------------------------------#
+
+_RadioPrio_dict = {
+    1 : 'priority level 1 (highest)',
+    2 : 'priority level 2',
+    3 : 'priority level 3',
+    4 : 'priority level 4 (lowest)'
+    }
+
+class RadioPriority(Envelope):
+    _GEN = (
+        Uint('spare', val=0, bl=1),
+        Uint('Value', val=0, bl=3, dic=_RadioPrio_dict)
         )
 
 
@@ -1946,25 +3375,6 @@ class GPRSTimer3(Envelope):
     _GEN = (
         Uint('Unit', val=0, bl=3, dic=_GPRSTimer3Unit_dict),
         Uint('Value', val=0, bl=5)
-        )
-
-
-#------------------------------------------------------------------------------#
-# Radio Priority
-# TS 24.008, 10.5.7.5
-#------------------------------------------------------------------------------#
-
-_RadioPrio_dict = {
-    1 : 'priority level 1 (highest)',
-    2 : 'priority level 2',
-    3 : 'priority level 3',
-    4 : 'priority level 4 (lowest)'
-    }
-
-class RadioPriority(Envelope):
-    _GEN = (
-        Uint('spare', val=0, bl=1),
-        Uint('Value', val=0, bl=3, dic=_RadioPrio_dict)
         )
 
 
@@ -2045,4 +3455,3 @@ class DeviceProp(Envelope):
         Uint('spare', val=0, bl=3),
         Uint('LowPriority', val=0, bl=1)
         )
-

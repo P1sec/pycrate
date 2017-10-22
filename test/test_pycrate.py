@@ -138,7 +138,8 @@ class TestPycrate(unittest.TestCase):
     # mobile
     def test_mobile(self):
         print('[<>] testing pycrate_mobile')
-        test_nas_mo()
+        test_nas_mo(nas_pdu_mo)
+        test_nas_mt(nas_pdu_mt)
 
 
 def test_perf_all():

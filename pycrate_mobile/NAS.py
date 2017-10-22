@@ -32,26 +32,30 @@ if python_version < 3:
     from struct import unpack
 
 from .TS24008_MM  import *
-#from .TS24008_CC  import *
+from .TS24008_CC  import *
 #from .TS24008_SMS import *
 from .TS44018_RR import *
 
 from .TS24008_GMM import *
-#from .TS24008_SM  import *
+from .TS24008_SM  import *
 
 #from .TS24008_EMM import *
 #from .TS24008_ESM import *
 
 NASMODispatcher = {
+    3 : CCTypeMOClasses,
     5 : MMTypeClasses,
     6 : RRTypeClasses,
-    8 : GMMTypeMOClasses
+    8 : GMMTypeMOClasses,
+    10: SMTypeClasses
     }
 
 NASMTDispatcher = {
+    3 : CCTypeMTClasses,
     5 : MMTypeClasses,
     6 : RRTypeClasses,
-    8 : GMMTypeMTClasses
+    8 : GMMTypeMTClasses,
+    10: SMTypeClasses
     }
 
 
@@ -69,7 +73,7 @@ def parse_L3_MO(buf):
             # error 111, unspecified protocol error
             return None, 111
     pd &= 0xF
-    if pd == 5:
+    if pd in (3, 5):
         type &= 0x3f
     #elif pd == 8:
     #    pass
@@ -103,7 +107,7 @@ def parse_L3_MT(buf):
             # error 111, unspecified protocol error
             return None, 111
     pd &= 0xF
-    if pd == 5:
+    if pd in (3, 5):
         type &= 0x3f
     #elif pd == 8:
     #    pass
@@ -121,4 +125,3 @@ def parse_L3_MT(buf):
         return None, 96
     #
     return Msg, 0
-

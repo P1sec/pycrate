@@ -119,7 +119,9 @@ class Layer3(Envelope):
             T4, T8, dec = char.to_uint(4), char.to_uint(8), False
             for i, opt in enumerate(opts):
                 # check the list of optional IEs in order
-                if opt[1] in (T4, T8):
+                # opt[0] is the tag length: 4 or 8
+                # opt[1] is the tag value: 0 <= T <= 255
+                if (opt[0] == 4 and opt[1] == T4) or opt[1] == T8:
                     opt[2]._trans = False
                     opt[2]._from_char(char)
                     dec = True
@@ -304,7 +306,7 @@ class Type1TV(IE):
             dic = None
         IE.__init__(self, *args, **kw)
         if dic is not None:
-            self[0]._dic = dic
+            self[1]._dic = dic
 
 
 class Type2(IE):
