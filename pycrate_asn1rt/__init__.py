@@ -28,6 +28,7 @@
 #*/
 #
 __all__ = ['utils', 'err', 'glob', 'dictobj', 'setobj', 'refobj',
-           'asnobj_basic', 'asnobj_str', 'asnobj_construct', 'asnobj_class', 'asnobj_ext']
+           'asnobj_basic', 'asnobj_str', 'asnobj_construct', 'asnobj_class', 'asnobj_ext',
+           'wrapper']
 __version__ = '0.2.0'
 
