@@ -105,9 +105,9 @@ class Ethernet(Envelope):
 
 class VLAN(Envelope):
     _GEN = (
-        Uint('pcp', desc='Priority Code Point', val=0, bl=3),
-        Uint('cfi', desc='Canonical Format Indicator', val=0, bl=1),
-        Uint('vid', desc='VLAN identifier', val=0, bl=12),
+        Uint('pcp', desc='Priority Code Point', bl=3),
+        Uint('cfi', desc='Canonical Format Indicator', bl=1),
+        Uint('vid', desc='VLAN identifier', bl=12),
         Uint16('type', rep=REPR_HEX) # val automated
         )
     def __init__(self, *args, **kwargs):

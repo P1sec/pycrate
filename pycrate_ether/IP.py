@@ -268,7 +268,7 @@ IPv4Preced_dict = {
 
 class IPv4Option(Envelope):
     _GEN = (
-        Uint8('CCN', val=0, dic=IPv4Opt_dict),
+        Uint8('CCN', dic=IPv4Opt_dict),
         Uint8('len'), # trans and val automated
         Buf('val', val=b'') # trans and bl automated
         )
@@ -311,17 +311,17 @@ class IPv4(Envelope):
     _GEN = (
         Uint('vers', val=4, bl=4),
         Uint('hdr_wlen', bl=4), # val automated
-        Uint('precedence', val=0, bl=3, dic=IPv4Preced_dict),
-        Uint('delay', val=0, bl=1, dic={0:'Normal', 1:'Low'}),
-        Uint('throughput', val=0, bl=1, dic={0:'Normal', 1:'High'}),
-        Uint('reliab', val=0, bl=1, dic={0:'Normal', 1:'High'}),
-        Uint('res_1', val=0, bl=2, rep=REPR_BIN),
+        Uint('precedence', bl=3, dic=IPv4Preced_dict),
+        Uint('delay', bl=1, dic={0:'Normal', 1:'Low'}),
+        Uint('throughput', bl=1, dic={0:'Normal', 1:'High'}),
+        Uint('reliab', bl=1, dic={0:'Normal', 1:'High'}),
+        Uint('res_1', bl=2, rep=REPR_BIN),
         Uint16('len'), # val automated, unless initialized to fixed value
-        Uint16('id', val=0),
-        Uint('res_2', val=0, bl=1, rep=REPR_BIN),
-        Uint('DF', val=0, bl=1, dic={0:'may fragment', 1:'do not fragment'}),
-        Uint('MF', val=0, bl=1, dic={0:'last fragment', 1:'more fragment'}),
-        Uint('frag_off', val=0, bl=13),
+        Uint16('id'),
+        Uint('res_2', bl=1, rep=REPR_BIN),
+        Uint('DF', bl=1, dic={0:'may fragment', 1:'do not fragment'}),
+        Uint('MF', bl=1, dic={0:'last fragment', 1:'more fragment'}),
+        Uint('frag_off', bl=13),
         Uint8('TTL', val=24),
         Uint8('proto', dic=IPProt_dict), # val automated, unless initialized to fixed value
         Uint16('hdr_cs', rep=REPR_HEX), # val automated
@@ -387,7 +387,7 @@ class IPv4(Envelope):
 class ICMP(Envelope):
     _GEN = (
         Uint8('type', val=8),
-        Uint8('code', val=0),
+        Uint8('code'),
         Uint16('cs', rep=REPR_HEX), # val automated
         Buf('data', val=b'\0\0coucou')
         )
@@ -406,8 +406,8 @@ class ICMP(Envelope):
 class IPv6(Envelope):
     _GEN = (
         Uint('vers', val=6, bl=4),
-        Uint8('class', val=0),
-        Uint('flow', val=0, bl=20, rep=REPR_HEX),
+        Uint8('class'),
+        Uint('flow', bl=20, rep=REPR_HEX),
         Uint16('plen'), # val automated, unless initialized to fixed value
         Uint8('next', dic=IPProt_dict), # val automated, unless initialized to fixed value
         Uint8('hop_limit', val=24),
@@ -451,8 +451,8 @@ class IPv6(Envelope):
 class UDP(Envelope):
     _CS_OFF = False # for checksum offload
     _GEN = (
-        Uint16('src', val=0),
-        Uint16('dst', val=0),
+        Uint16('src'),
+        Uint16('dst'),
         Uint16('len'), # val automated, unless initialized to fixed value
         Uint16('cs', rep=REPR_HEX) # val automated
         )
@@ -508,24 +508,24 @@ class UDP(Envelope):
 class TCP(Envelope):
     _CS_OFF = False # for checksum offload
     _GEN = (
-        Uint16('src', val=0),
-        Uint16('dst', val=0),
-        Uint32('seq', val=0),
-        Uint32('ack', val=0),
+        Uint16('src'),
+        Uint16('dst'),
+        Uint32('seq'),
+        Uint32('ack'),
         Uint('off', bl=4), # val automated, unless initialized to fixed value
-        Uint('res', val=0, bl=3, rep=REPR_BIN),
-        Uint('NS', val=0, bl=1),
-        Uint('CWR', val=0, bl=1),
-        Uint('ECE', val=0, bl=1),
-        Uint('URG', val=0, bl=1),
-        Uint('ACK', val=0, bl=1),
-        Uint('PSH', val=0, bl=1),
-        Uint('RST', val=0, bl=1),
-        Uint('SYN', val=0, bl=1),
-        Uint('FIN', val=0, bl=1),
+        Uint('res', bl=3, rep=REPR_BIN),
+        Uint('NS', bl=1),
+        Uint('CWR', bl=1),
+        Uint('ECE', bl=1),
+        Uint('URG', bl=1),
+        Uint('ACK', bl=1),
+        Uint('PSH', bl=1),
+        Uint('RST', bl=1),
+        Uint('SYN', bl=1),
+        Uint('FIN', bl=1),
         Uint16('win', val=8192),
         Uint16('cs', rep=REPR_HEX), # val automated
-        Uint16('urg', val=0),
+        Uint16('urg'),
         Buf('opt', val=b'') # bl automated
         )
     def __init__(self, *args, **kwargs):

@@ -302,7 +302,7 @@ class ID3V2Header(Envelope):
         Uint('ExtendedHeader', bl=1),
         Uint('ExperimentalIndicator', bl=1),
         Uint('Footer', bl=1),
-        Uint('Undefined', val=0, bl=4),
+        Uint('Undefined', bl=4),
         Uint32SynchSafe('Size')
         )
 
@@ -314,7 +314,7 @@ class ID3V2Footer(Envelope):
         Uint('ExtendedHeader', bl=1),
         Uint('ExperimentalIndicator', bl=1),
         Uint('Footer', bl=1),
-        Uint('Undefined', val=0, bl=4),
+        Uint('Undefined', bl=4),
         Uint32SynchSafe('Size')
         )
 

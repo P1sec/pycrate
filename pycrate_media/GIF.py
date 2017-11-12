@@ -125,7 +125,7 @@ class LogicalScreenDescriptor(Envelope):
     _GEN = (
         Uint16LE('Width'),
         Uint16LE('Height'),
-        Uint('GlobalColorTableFlag', val=0, bl=1),
+        Uint('GlobalColorTableFlag', bl=1),
         Uint('ColorResolution', bl=3),
         Uint('SortFlag', bl=1),
         Uint('SizeOfGlobalColorTable', bl=3),
@@ -234,7 +234,7 @@ class GraphicControlExtension(Envelope):
         Uint('TransparentColorFlag', bl=1),
         Uint16LE('DelayTime'),
         Uint8('TransparentColorIndex'),
-        Uint8('BlockTerminator', val=0)
+        Uint8('BlockTerminator')
         )
 
 class CommentExtension(Envelope):
@@ -310,4 +310,3 @@ class GIF(Envelope):
             else:
                 raise(Exception('GIF: invalid block marker: {0}'.format(hex(mark))))
         self[-1]._from_char(char)
-

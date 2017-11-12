@@ -236,7 +236,7 @@ class Segment(Envelope):
     _GEN = (
         Uint8('mark', val=0xFF, rep=REPR_HEX),
         Uint8('type', val=0xFE, dic=Segment_dict),
-        Uint16('len', val=0),
+        Uint16('len'),
         Buf('pay'),
         )
     
