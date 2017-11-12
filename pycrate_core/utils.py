@@ -354,6 +354,8 @@ def uint_to_hex(uint, bitlen):
     Returns:
         hex (str of hex chars)
     """
+    if bitlen == 0:
+        return ''
     niblen = bitlen>>2
     if bitlen % 4:
         niblen += 1

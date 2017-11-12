@@ -27,7 +27,7 @@
 # *--------------------------------------------------------
 #*/
 
-__all__ = ['Buf', 'NullTermStr',
+__all__ = ['Buf', 'BufAuto', 'NullTermStr',
            'Uint', 'Uint8', 'Uint16', 'Uint24', 'Uint32', 'Uint48', 'Uint64',
            'Int', 'Int8', 'Int16', 'Int24', 'Int32', 'Int48', 'Int64',
            'UintLE', 'Uint8LE', 'Uint16LE', 'Uint24LE', 'Uint32LE', 'Uint48LE', 'Uint64LE',
@@ -38,7 +38,7 @@ from .charpy import Charpy, CharpyErr
 from .elt    import Atom, EltErr, REPR_RAW, REPR_HEX, REPR_BIN, REPR_HD, REPR_HUM
 
 #------------------------------------------------------------------------------#
-# Basic types
+# Basic types - bytes' buffers
 #------------------------------------------------------------------------------#
 
 class Buf(Atom):
@@ -188,6 +188,80 @@ class Buf(Atom):
             raise(EltErr('{0} [_from_char]: {1}'.format(self._name, err)))
 
 
+class BufAuto(Buf):
+    
+    def get_val(self):
+        """Returns the value of self
+        
+        Args:
+            None
+        
+        Returns:
+            value (bytes) : value computed, default to empty bytes
+        
+        Raises:
+            EltErr : if self._SAFE_DYN is enabled and the value produced 
+                dynamically has not the correct type
+        """
+        # follow the value resolution order:
+        # 1) raw value
+        if self._val is not None:
+            return self._val
+        
+        # 2) value automation
+        elif self._valauto is not None:
+            val = self._valauto()
+            if self._SAFE_DYN:
+                self._chk_val(val)
+            return val
+        
+        # 3) padded value (different from Buf.get_val())
+        bl = self.get_bl()
+        if bl is not None:
+            if bl % 8:
+                return (1+bl>>3) * self.PAD_VAL
+            else:
+                return (bl>>3) * self.PAD_VAL
+        
+        # 4) default value
+        else:
+            return self.DEFAULT_VAL
+    
+    def get_bl(self):
+        """Returns the length in bits of self
+        
+        Args:
+            None
+        
+        Returns:
+            bl (int) : length in bits computed
+                default to class attribute DEFAULT_BL
+        """
+        # follow the value resolution order:
+        # 0) transparency
+        if self.get_trans():
+            return 0
+        
+        # 1) raw bl
+        elif self._bl is not None:
+            return self._bl
+        
+        # 2) bl automation
+        elif self._blauto is not None:
+            bl = self._blauto()
+            if self._SAFE_DYN:
+                self._chk_bl(bl)
+            return bl
+        
+        # 3) no bl defined, return the bl computed from the value set
+        elif self._val is not None or self._valauto is not None:
+            return self._get_bl_from_val()
+        
+        # 4) no bl defined, no value defines, return the default one
+        else:
+            return self.DEFAULT_BL
+
+
 class NullTermStr(Buf):
     
     def _from_char(self, char):
@@ -223,6 +297,10 @@ class NullTermStr(Buf):
             else:
                 char.forward(8*len(val))
 
+
+#------------------------------------------------------------------------------#
+# Basic types - integral values
+#------------------------------------------------------------------------------#
 
 class Uint(Atom):
     TYPES       = flatten(integer_types, )

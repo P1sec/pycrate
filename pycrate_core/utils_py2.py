@@ -1628,12 +1628,14 @@ def pack_val(*val):
                     # a.a) aligned access
                     assert( junc is None )
                     concat.append(pack_buf)
+                    len_bit += pack_len
                 else:
                     # a.b) unaligned access
                     assert( 0 <= junc < 256 )
                     head, buf, trail = bytes_lshift_bnd(pack_buf, pack_len_le, 8-rest_bit)
                     # complete the junction byte and append it 
                     # with the shifted buffer
+                    len_bit += pack_len
                     if buf:
                         # heading bits, buffer and potential trailing bits
                         concat.extend( (chr(junc + head), buf) )
@@ -1642,10 +1644,13 @@ def pack_val(*val):
                         # heading bits and potential trailing bits
                         concat.append( chr(junc + head) )
                         junc = trail
+                    elif not len_bit % 8:
+                        # heading bits only
+                        concat.append( chr(junc + head) )
+                        junc = None
                     else:
                         # no buf and no trailing bits
                         junc += head
-                len_bit += pack_len
                 pack_fmt, pack_val, pack_end, pack_len = None, None, PACK_FMT_BE, 0
             #
             # b) accumulate value into pack_val
@@ -1666,12 +1671,14 @@ def pack_val(*val):
                     # a.a) aligned access
                     assert( junc is None )
                     concat.append(pack_buf)
+                    len_bit += pack_len
                 else:
                     # a.b) unaligned access
                     assert( 0 <= junc < 256 )
                     head, buf, trail = bytes_lshift_bnd(pack_buf, pack_len, 8-rest_bit)
                     # complete the junction byte and append it 
                     # with the shifted buffer
+                    len_bit += pack_len
                     if buf:
                         # heading bits, buffer and potential trailing bits
                         concat.extend( (chr(junc + head), buf) )
@@ -1680,10 +1687,13 @@ def pack_val(*val):
                         # heading bits and potential trailing bits
                         concat.append( chr(junc + head) )
                         junc = trail
+                    elif not len_bit % 8:
+                        # heading bits only
+                        concat.append( chr(junc + head) )
+                        junc = None
                     else:
                         # no buf and no trailing bits
                         junc += head
-                len_bit += pack_len
                 pack_fmt, pack_val, pack_end, pack_len = None, None, PACK_FMT_BE, 0
             #
             # b) accumulate value into pack_val
@@ -1724,6 +1734,7 @@ def pack_val(*val):
                     head, buf, trail = bytes_lshift_bnd(buf, buflen, 8-rest_bit)
                     # complete the junction byte and append it 
                     # with the shifted buffer
+                    len_bit += buflen
                     if buf:
                         # heading bits, buffer and potential trailing bits
                         concat.extend( (chr(junc + head), buf) )
@@ -1732,10 +1743,13 @@ def pack_val(*val):
                         # heading bits and potential trailing bits
                         concat.append( chr(junc + head) )
                         junc = trail
+                    elif not len_bit % 8:
+                        # heading bits only
+                        concat.append( chr(junc + head) )
+                        junc = None
                     else:
                         # no buf and no trailing bits
                         junc += head
-                    len_bit += buflen
                 #
                 pack_fmt, pack_val, pack_end, pack_len = None, None, PACK_FMT_BE, 0
             #
@@ -1763,6 +1777,7 @@ def pack_val(*val):
                                                         v[2], 8-rest_bit)
                 # complete the junction byte and append it 
                 # with the shifted buffer
+                len_bit += v[2]
                 if buf:
                     # heading bits, buffer and potential trailing bits
                     concat.extend( (chr(junc + head), buf) )
@@ -1771,10 +1786,13 @@ def pack_val(*val):
                     # heading bits and potential trailing bits
                     concat.append( chr(junc + head) )
                     junc = trail
+                elif not len_bit % 8:
+                    # heading bits only
+                    concat.append( chr(junc + head) )
+                    junc = None
                 else:
                     # no buf and no trailing bits
                     junc += head
-                len_bit += v[2]
         #
         # 4) standard processing for uint
         elif v[0] == TYPE_UINT:
@@ -2034,6 +2052,7 @@ def pack_val(*val):
                     head, buf, trail = bytes_lshift_bnd(buf, buflen, 8-rest_bit)
                     # complete the junction byte and append it 
                     # with the shifted buffer
+                    len_bit += buflen
                     if buf:
                         # heading bits, buffer and potential trailing bits
                         concat.extend( (chr(junc + head), buf) )
@@ -2042,10 +2061,13 @@ def pack_val(*val):
                         # heading bits and potential trailing bits
                         concat.append( chr(junc + head) )
                         junc = trail
+                    elif not len_bit % 8:
+                        # heading bits only
+                        concat.append( chr(junc + head) )
+                        junc = None
                     else:
                         # no buf and no trailing bits
                         junc += head
-                    len_bit += buflen
                 #
                 pack_fmt, pack_val, pack_end, pack_len = None, None, PACK_FMT_BE, 0
             #
@@ -2062,6 +2084,7 @@ def pack_val(*val):
                 head, buf, trail = bytes_lshift_bnd(v_bytes, v[2], 8-rest_bit)
                 # complete the junction byte and append it 
                 # with the shifted buffer
+                len_bit += v[2]
                 if buf:
                     # heading bits, buffer and potential trailing bits
                     concat.extend( (chr(junc + head), buf) )
@@ -2070,10 +2093,14 @@ def pack_val(*val):
                     # heading bits and potential trailing bits
                     concat.append( chr(junc + head) )
                     junc = trail
+                elif not len_bit % 8:
+                    # heading bits only
+                    concat.append( chr(junc + head) )
+                    junc = None
                 else:
                     # no buf and no trailing bits
                     junc += head
-                len_bit += v[2]
+                
         #
         else:
             raise(PycrateErr('invalid type for packing: {0}'.format(v[0])))

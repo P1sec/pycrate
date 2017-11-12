@@ -554,6 +554,17 @@ class Element(object):
         else:
             return self.DEFAULT_TRANS
     
+    def reautomate(self):
+        """Reset all attributes of the element which have an automation
+        
+        Args:
+            None
+        
+        Returns:
+            None
+        """
+        if self._transauto is not None and self._trans is not None:
+            del self._trans
     
     #--------------------------------------------------------------------------#
     # conversion routines
@@ -1606,7 +1617,7 @@ class Envelope(Element):
             return sum([elt.get_bl() for elt in self.__iter__()])
     
     def reautomate(self):
-        """Reset all attributes of the elements which have an automation within 
+        """Reset all attributes of the element which have an automation within 
         the content of self
         
         Args:
@@ -1638,7 +1649,7 @@ class Envelope(Element):
         """Dispatch the consumption of a Charpy intance to the elements within
         the content
         """
-        # TODO: in cases some ranges of elt within self has a fixed _bl
+        # TODO: in cases some ranges of elt within self have a fixed _bl
         # it would be more efficient to unpack them in a single shot, 
         # especially if these are int / uint on 8, 16, 32, 64 bits
         if not self.get_trans():
@@ -1921,6 +1932,24 @@ class Envelope(Element):
             self._by_id.insert(ind, id(new))
             new.set_env(self)
             new.set_hier(old.get_hier())
+    
+    def clear(self):
+        """Clear the content of self
+        
+        Args:
+            None
+        
+        Returns:
+            None
+        """
+        if python_version < 3:
+            del self._content[:]
+            del self._by_id[:]
+            del self._by_name[:]
+        else:
+            self._content.clear()
+            self._by_id.clear()
+            self._by_name.clear()
     
     def __iter__(self):
         self._it_saved.append(self._it)
@@ -2267,14 +2296,13 @@ class Array(Element):
                 if self._num is not None and max_ind >= self._num:
                     raise(EltErr('{0} [set_val] vals index {1} overflow (max {2})'\
                           .format(self._name, max_ind, self._num)))
-            #
-            # in case the current value self._val does not go up to the max index
+            # in case the current value self._val does not goes up to the max index
             # just extend it with the default value
             if len(self._val) <= max_ind:
                 self._val.extend( (1+max_ind-len(self._val)) * (self._tmpl_val, ) )
             for i, v in vals.items():
                 self._tmpl.set_val(v)
-                self._val[i] = self._tmpl()
+                self._val[i] = self._tmpl.get_val()
             # reset the template's value
             self._tmpl.set_val(None)
         #
@@ -2755,6 +2783,20 @@ class Array(Element):
         del self._val[ind]
         self._val.insert(ind, new)
     
+    def clear(self):
+        """Clear the values of self
+        
+        Args:
+            None
+        
+        Returns:
+            None
+        """
+        if python_version < 3:
+            del self._val[:]
+        else:
+            self._val.clear()
+    
     def __iter__(self):
         self._it_saved.append(self._it)
         self._it = 0
@@ -3077,25 +3119,33 @@ class Sequence(Element):
             # val dict index, just extend it with the template element
             if len(self._content) <= max_ind:
                 self._content.extend( (1+max_ind-len(self._content)) * (self._tmpl, ) )
-            # set template's clones with given values at given indexes
+            # set values at given key indexes
             for i, v in vals.items():
-                clone = self._tmpl.clone()
-                clone.set_val(vals[i])
-                self._content[i] = clone
-                clone._env = self
+                c = self._content[i]
+                if c == self._tmpl:
+                    # in case of tmpl, clone it before assigning the value
+                    c = c.clone()
+                    c._env = self
+                    self._content[i] = c
+                c.set_val(v)
         #
         elif isinstance(vals, (tuple, list)):
             if self._SAFE_STAT and self._num is not None and len(vals) > self._num:
                 # ensure vals length does not overflow a fixed number of iteration
                 raise(EltErr('{0} [set_val] invalid number of values: {1} instead of {2}'\
                       .format(self._name, len(vals), self._num)))
-            self._content, i = [], 0
-            for v in vals:
-                clone = self._tmpl.clone()
-                clone.set_val(v)
-                self._content.append(clone)
-                clone._env = self
-                i += 1
+            # in case the current content self._content does not goes up to the max 
+            # val dict index, just extend it with the template element
+            if len(self._content) < len(vals):
+                self._content.extend( (len(vals)-len(self._content)) * (self._tmpl, ) )
+            for i, v in enumerate(vals):
+                c = self._content[i]
+                if c == self._tmpl:
+                    # in case of tmpl, clone it before assigning the value
+                    c = c.clone()
+                    c._env = self
+                    self._content[i] = c
+                c.set_val(v)
         #
         else:
             raise(EltErr('{0} [set_val]: vals type is {1}, expecting None, tuple, list or dict'\
@@ -3125,7 +3175,7 @@ class Sequence(Element):
         Raises:
             EltErr : if self._SAFE_STAT is enabled and bitlen is not integer
         """
-        if self._num is None:
+        if num is None:
             try:
                 del self._num
             except:
@@ -3136,11 +3186,11 @@ class Sequence(Element):
                       .format(self._name, type(num).__name__)))
             self._num = num
             # clean up extra content if already set
-            if len(self._content) > self._num:
-                del self._content[self._num:]
+            if len(self._content) > num:
+                del self._content[num:]
             # extend content if not already set
-            elif len(self._content) < self._num:
-                self._content.extend( (self._num-len(self._content)) * (self._tmpl, ) )
+            elif len(self._content) < num:
+                self._content.extend( (num-len(self._content)) * (self._tmpl, ) )
     
     def set_numauto(self, numauto=None):
         """Set an automation for the number of iteration of the template in the
@@ -3566,6 +3616,20 @@ class Sequence(Element):
         self._content.insert(ind, new)
         new._env = self
     
+    def clear(self):
+        """Clear the content of self
+        
+        Args:
+            None
+        
+        Returns:
+            None
+        """
+        if python_version < 3:
+            del self._content[:]
+        else:
+            self._content.clear()
+    
     def __iter__(self):
         self._it_saved.append(self._it)
         self._it = 0
@@ -3698,4 +3762,3 @@ class Sequence(Element):
         # PyPy iterator implementation lead to an infinite loop
         # __iter__() calls __len__(), but here, get_bl() calls __iter__()
         __len__ = get_bl
-
