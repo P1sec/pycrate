@@ -331,7 +331,7 @@ class HNBAPUERegistration(HNBAPSigProc):
                 errcause = ('radioNetwork', 'invalid-UE-identity')
             if ue is None:
                 # UE not allowed / configured in the CorenetServer
-                errcause = ('radioNetwork', 'uE-unauthorised')
+                errcause = self.HNB.UEREG_NOTALLOWED_CODE
             else:
                 self.HNB.set_ue_hnbap(ue)
                 if 'UE_Capabilities' in UEInfo:
@@ -346,7 +346,8 @@ class HNBAPUERegistration(HNBAPSigProc):
             self._log('INF', 'UE registered successfully, ctx %i' % ue.IuCS.CtxId)
         else:
             # procedure unsuccessful outcome
-            self.encode_pdu('uns', Cause=errcause)
+            self.encode_pdu('uns', Cause=errcause,
+                                   UE_Identity=UEInfo['UE_Identity'])
             self._log('INF', 'UE not registered successfully')
     
     def send(self):

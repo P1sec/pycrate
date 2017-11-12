@@ -184,7 +184,7 @@ class MMTMSIReallocation(MMSigProc):
         self.tmsi = self.UE.get_new_tmsi()
         if not embedded:
             # prepare IEs
-            self.set_msg(5, 26, LAI={'plmn': self.UE.PLMN, 'lac': self.UE.LAC},
+            self.set_msg(5, 26, LAI={'PLMN': self.UE.PLMN, 'LAC': self.UE.LAC},
                                 ID={'type': NAS.IDTYPE_TMSI, 'ident': self.tmsi})
             self.encode_msg(5, 26)
             # log the NAS msg
@@ -485,15 +485,16 @@ class MMIMSIDetach(MMSigProc):
         self.UEInfo = {}
         self.decode_msg(pdu, self.UEInfo)
         #
-        # abort all other ongoing CS procedures
-        self.Iu.clear_nas_proc()
-        # set MM state
-        self.MM.state = 'INACTIVE'
-        #
         # in case of PS connectivity established, need to clear it too
         if self.UE.IuPS is not None:
             self.UE.IuPS.clear_nas_proc()
             self.UE.IuPS.GMM.state = 'INACTIVE'
+        #
+        # abort all ongoing CS procedures
+        self.rm_from_mm_stack()
+        self.Iu.clear_nas_proc()
+        # set MM state
+        self.MM.state = 'INACTIVE'
         #
         self._log('INF', 'detaching')
         # set a RANAP callback to trigger an Iu release
@@ -796,7 +797,7 @@ class MMLocationUpdating(MMSigProc):
             self._log('INF', 'reject, %r' % self._nas_tx['Cause'])
         else:
             # prepare LUAccept IEs
-            IEs = {'LAI': {'plmn': self.UE.PLMN, 'lac': self.UE.LAC}}
+            IEs = {'LAI': {'PLMN': self.UE.PLMN, 'LAC': self.UE.LAC}}
             # in case we want to realloc a TMSI, we start a TMSIRealloc,
             # but don't forward its output
             if self.MM.LU_TMSI_REALLOC:

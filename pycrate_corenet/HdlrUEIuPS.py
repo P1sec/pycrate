@@ -579,7 +579,7 @@ class UEIuPSd(UEIuSigStack):
         """process a NAS message buffer for the PS domain sent by the mobile
         and return a potential NAS response to be sent back to it
         """
-        NasRx, err = NAS.parse_L3_MO(buf)
+        NasRx, err = NAS.parse_NAS_MO(buf)
         if NasRx is None:
             self._log('WNG', 'invalid PS NAS message: %s' % hexlify(buf).decode('ascii'))
             # returns MM STATUS
@@ -661,7 +661,7 @@ class UEIuPSd(UEIuSigStack):
         try:
             rncs = [self.Server.RAN[rncid] for rncid in self.Server.RAI[rai]]
         except:
-            self._log('ERR', 'paging: no RNC serving the UE LAI %s.%.4x.%.2x' % rai)
+            self._log('ERR', 'paging: no RNC serving the UE RAI %s.%.4x.%.2x' % rai)
             return
         #
         # prepare the RANAPPaging IEs
@@ -701,7 +701,7 @@ class UEIuPSd(UEIuSigStack):
         try:
             rncs = [self.Server.RAN[rncid] for rncid in self.Server.RAI[rai]]
         except:
-            self._log('ERR', 'paging: no RNC serving the UE LAI %s.%.4x.%.2x' % rai)
+            self._log('ERR', 'paging: no RNC serving the UE RAI %s.%.4x.%.2x' % rai)
             return False
         #
         # prepare the RANAPPaging IEs

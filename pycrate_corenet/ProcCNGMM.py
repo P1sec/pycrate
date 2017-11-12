@@ -315,7 +315,7 @@ class GMMAttach(GMMSigProc):
             self.UE.PTMSI = self.UEInfo['ID'][1]
         #
         att_type = self.UEInfo['AttachType']['Type']
-        self._log('INF', 'request type %i (%s) from, old RAI %s.%.4x.%.2x'\
+        self._log('INF', 'request type %i (%s), old RAI %s.%.4x.%.2x'\
                   % (att_type(), att_type._dic[att_type()],
                      self.UEInfo['OldRAI'][0], self.UEInfo['OldRAI'][1], self.UEInfo['OldRAI'][2]))
         # collect capabilities
@@ -423,7 +423,7 @@ class GMMAttach(GMMSigProc):
                    'PeriodicRAUpdateTimer' : self.GMM.ATT_RAU_TIMER,
                    'RadioPrioForTOM8'      : {'Value': self.GMM.ATT_PRIO_TOM8},
                    'RadioPrioForSMS'       : {'Value': self.GMM.ATT_PRIO_SMS},
-                   'RAI'                   : {'plmn': self.UE.PLMN, 'lac': self.UE.LAC, 'rac': self.UE.RAC}
+                   'RAI'                   : {'PLMN': self.UE.PLMN, 'LAC': self.UE.LAC, 'RAC': self.UE.RAC}
                    }
             #
             # READY timer negotiation
@@ -750,7 +750,7 @@ class GMMRoutingAreaUpdating(GMMSigProc):
         self.UEInfo['PTMSI'][0] == NAS.IDTYPE_TMSI and self.UE.PTMSI is None:
             self.UE.PTMSI = self.UEInfo['PTMSI'][1]
         #
-        rau_type = self.UEInfo['UpdateType']['Type']
+        rau_type = self.UEInfo['UpdateType']['Value']
         self._log('INF', 'request type %i (%s) from, old RAI %s.%.4x.%.2x'\
                   % (rau_type(), rau_type._dic[rau_type()],
                      self.UEInfo['OldRAI'][0], self.UEInfo['OldRAI'][1], self.UEInfo['OldRAI'][2]))
@@ -825,9 +825,9 @@ class GMMRoutingAreaUpdating(GMMSigProc):
             # prepare RAUAccept IEs
             IEs = {'ForceStdby'            : {'Value': self.GMM.RAU_FSTDBY},
                    'UpdateResult'          : {'FollowOnProc': self.UEInfo['UpdateType']['FollowOnReq'](),
-                                              'Result': self.UEInfo['UpdateType']['Type']()},
+                                              'Value': self.UEInfo['UpdateType']['Value']()},
                    'PeriodicRAUpdateTimer' : self.GMM.RAU_RAU_TIMER,
-                   'RAI'                   : {'plmn': self.UE.PLMN, 'lac': self.UE.LAC, 'rac': self.UE.RAC}
+                   'RAI'                   : {'PLMN': self.UE.PLMN, 'LAC': self.UE.LAC, 'RAC': self.UE.RAC}
                    }
             #
             # in case we want to realloc a PTMSI, we start a PTMSIRealloc,
@@ -947,7 +947,7 @@ class GMMPTMSIReallocation(GMMSigProc):
         if not embedded:
             # prepare IEs
             self.set_msg(8, 16, AllocPTMSI={'type': NAS.IDTYPE_TMSI, 'ident': self.ptmsi},
-                                RAI       ={'plmn': self.UE.PLMN, 'lac': self.UE.LAC, 'rac': self.UE.RAC},
+                                RAI       ={'PLMN': self.UE.PLMN, 'LAC': self.UE.LAC, 'RAC': self.UE.RAC},
                                 ForceStdby={'Value': self.GMM.REA_FSTDBY})
             self.encode_msg(8, 16)
             # log the NAS msg

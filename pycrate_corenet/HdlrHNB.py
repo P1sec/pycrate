@@ -74,6 +74,12 @@ class HNBd(SigStack):
     UE_IuCS  = {}
     UE_IuPS  = {}
     
+    #--------------------------------------------------------------------------#
+    # UERegistration policy
+    #--------------------------------------------------------------------------#
+    # in case an IMSI is not allowed, send the following reject code (HNBAP-IEs.Cause)
+    UEREG_NOTALLOWED_CODE = ('radioNetwork', 'uE-unauthorised')
+    
     
     def _log(self, logtype, msg):
         """HNBd logging facility

@@ -91,6 +91,9 @@ class AuC:
     # The AuC supports also a per-subscriber OP, to be set optionally in the AuC.db database
     OP =  b'ffffffffffffffff'
     
+    # SQN incrementation when a resynch is required by a USIM card
+    SQN_SYNCH_STEP = 2
+    
     # PLMN restriction for returning 4G vectors
     # provide a list of allowed PLMN, or None for disabling the filter
     #PLMN_FILTER = ['20869']
@@ -389,7 +392,7 @@ class AuC:
             return 1
         
         # resynchronize local SQN value
-        K_ALG2_SQN_OP[2] = SQN_MSi + 1
+        K_ALG2_SQN_OP[2] = SQN_MSi + self.SQN_SYNCH_STEP
         self._save_required = True
         self._log('DBG', '[synch_sqn] IMSI %s, SQN resynchronized to %i' % (IMSI, K_ALG2_SQN_OP[2]))
         return 0

@@ -497,7 +497,7 @@ class UEIuCSd(UEIuSigStack):
     def reset_sec_ctx(self):
         self.SEC.clear()
         self.SEC['CKSN'] = None
-        self.SEC['POL'] = {'LUR': 0, 'CON': 0}
+        self.SEC['POL'] = {'LUR': 0, 'CON': 0, 'PAG': 0}
     
     def _ret_ranap_proc(self, NasTx):
         if NasTx is not None:
@@ -527,7 +527,7 @@ class UEIuCSd(UEIuSigStack):
         """process a NAS message buffer for the CS domain sent by the mobile
         and return a list of RANAP procedure(s) ready to be sent back
         """
-        NasRx, err = NAS.parse_L3_MO(buf)
+        NasRx, err = NAS.parse_NAS_MO(buf)
         if NasRx is None:
             self._log('WNG', 'invalid CS NAS message: %s' % hexlify(buf).decode('ascii'))
             # returns MM STATUS
