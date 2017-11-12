@@ -27,6 +27,7 @@
 #*/
 
 from binascii import *
+from timeit   import timeit
 
 from pycrate_asn1rt.utils            import *
 from pycrate_asn1rt.err              import *
@@ -48,12 +49,19 @@ ASN1Obj._SILENT = True
 ASN1CodecPER.GET_DEFVAL = True
 ASN1CodecPER.CANONICAL  = True
 # print ascii representation in comments when returning the ASN.1 textual encoding
+# set to False to enable the parsing of the ASN.1 syntax generated
 BIT_STR._ASN_WASC = False
 OCT_STR._ASN_WASC = False
 
 
-def test_rt_base():
+def _load_rt_base():
+    try:
+        GLOBAL.clear()
+    except:
+        pass
     from test import test_asn1rt_mod
+
+def _test_rt_base():
     Mod = GLOBAL.MOD['Test-Asn1rt']
     
     # Boo01 ::= BOOLEAN
@@ -1320,7 +1328,11 @@ def test_rt_base():
     assert( Set01._val == S_val )
     
     return 0
-    
+
+def test_rt_base():
+    _load_rt_base()
+    _test_rt_base()
+
 
 pkts_rrc3g = tuple(map(unhexlify, (
     # PagingType1 (PCCH)
@@ -1379,11 +1391,15 @@ pkts_rrc3g_nc = tuple(map(unhexlify, (
     '208803b8fc128a5d43288294528b154728825492883f4b28b3f4d288234f28b395128b435328a5b5528bcd5728bd959289215b288dd5d2888d5f28afd6128b316328a1d6528a356728a636928b856b28be76d289a16f2888371289357328b3d7528831772893f7928a3d7b28b637d288c97f289714c4585858b82180bb2b7510a0160293ecadd4ff9c20',
     )))
 
-def test_rrc3g():
-    GLOBAL.clear()
+def _load_rrc3g():
+    try:
+        GLOBAL.clear()
+    except:
+        pass
     from pycrate_asn1dir import RRC3G
-    #
-    PCCH = RRC3G.Class_definitions.PCCH_Message
+
+def _test_rrc3g():
+    PCCH = GLOBAL.MOD['Class-definitions']['PCCH-Message']
     for p in pkts_rrc3g[:3]:
         PCCH.from_uper(p)
         val = PCCH()
@@ -1400,7 +1416,7 @@ def test_rrc3g():
         PCCH.from_asn1(txt)
         assert( PCCH() == val )
     #
-    DLDCCH = RRC3G.Class_definitions.DL_DCCH_Message
+    DLDCCH = GLOBAL.MOD['Class-definitions']['DL-DCCH-Message']
     for p in pkts_rrc3g[3:14]:
         DLDCCH.from_uper(p)
         val = DLDCCH()
@@ -1417,7 +1433,7 @@ def test_rrc3g():
         DLDCCH.from_asn1(txt)
         assert( DLDCCH() == val )
     #
-    ULDCCH = RRC3G.Class_definitions.UL_DCCH_Message
+    ULDCCH = GLOBAL.MOD['Class-definitions']['UL-DCCH-Message']
     for p in pkts_rrc3g[14:]:
         ULDCCH.from_uper(p)
         val = ULDCCH()
@@ -1453,6 +1469,10 @@ def test_rrc3g():
         DLDCCH.from_asn1(txt)
         assert( DLDCCH() == val )
 
+def test_rrc3g():
+    _load_rrc3g()
+    _test_rrc3g()
+
 
 pkts_s1ap = tuple(map(unhexlify, (
     '0011002d000004003b00080063f310001a2d00003c400a0380656e623161326430004000070000004063f3100089400140',
@@ -1474,12 +1494,16 @@ pkts_x2ap = tuple(map(unhexlify, (
     '0000007b000006000a00020001000540020000000b000800522018000000200017000700522018000102000e004100010000000000303132333435363738393031323334353637383930313233343536373839303120000000000004400e0000010a03e01401a8c000000002020000000f400c000052201800000021800003',
     )))
 
-def test_lteran():
-    GLOBAL.clear()
+def _load_lteran():
+    try:
+        GLOBAL.clear()
+    except:
+        pass
     from pycrate_asn1dir import S1AP
     from pycrate_asn1dir import X2AP
-    #
-    S1PDU = S1AP.S1AP_PDU_Descriptions.S1AP_PDU
+
+def _test_lteran():
+    S1PDU = GLOBAL.MOD['S1AP-PDU-Descriptions']['S1AP-PDU']
     for p in pkts_s1ap:
         S1PDU.from_aper(p)
         val = S1PDU()
@@ -1496,7 +1520,7 @@ def test_lteran():
         S1PDU.from_asn1(txt)
         assert( S1PDU() == val )
     #
-    X2PDU = X2AP.X2AP_PDU_Descriptions.X2AP_PDU
+    X2PDU = GLOBAL.MOD['X2AP-PDU-Descriptions']['X2AP-PDU']
     for p in pkts_x2ap:
         X2PDU.from_aper(p)
         val = X2PDU()
@@ -1513,17 +1537,25 @@ def test_lteran():
         X2PDU.from_asn1(txt)
         assert( X2PDU() == val )
 
+def test_lteran():
+    _load_lteran()
+    _test_lteran()
+
 
 # https://wiki.wireshark.org/SampleCaptures?action=AttachFile&do=view&target=gsm_map_with_ussd_string.pcap
 pkts_tcap_map = tuple(map(unhexlify, (
     '626a48042f3b46026b3a2838060700118605010101a02d602b80020780a109060704000001001302be1a2818060704000001010101a00da00b80099656051124006913f66c26a12402010102013b301c04010f040eaa180da682dd6c31192d36bbdd468007917267415827f2',
     )))
 
-def test_tcap_map():
-    GLOBAL.clear()
+def _load_tcap_map():
+    try:
+        GLOBAL.clear()
+    except:
+        pass
     from pycrate_asn1dir import TCAP_MAP
-    #
-    M = TCAP_MAP.TCAP_MAP_Messages.TCAP_MAP_Message
+
+def _test_tcap_map():
+    M = GLOBAL.MOD['TCAP-MAP-Messages']['TCAP-MAP-Message']
     for p in pkts_tcap_map:
         M.from_ber(p)
         val = M()
@@ -1541,6 +1573,10 @@ def test_tcap_map():
         M.from_asn1(txt)
         assert( M() == val )
 
+def test_tcap_map():
+    _load_tcap_map()
+    _test_tcap_map()
+
 
 # https://wiki.wireshark.org/SampleCaptures?action=AttachFile&do=get&target=camel.pcap
 # https://wiki.wireshark.org/SampleCaptures?action=AttachFile&do=get&target=camel2.pcap
@@ -1557,11 +1593,15 @@ pkts_tcap_cap = tuple(map(unhexlify, (
     '64144904070004006c0ca10a02010302011604028495'
     )))
 
-def test_tcap_cap():
-    GLOBAL.clear()
+def _load_tcap_cap():
+    try:
+        GLOBAL.clear()
+    except:
+        pass
     from pycrate_asn1dir import TCAP_CAP
-    #
-    M = TCAP_CAP.CAP_gsmSSF_gsmSCF_pkgs_contracts_acs.GenericSSF_gsmSCF_PDUs
+
+def _test_tcap_cap():
+    M = GLOBAL.MOD['CAP-gsmSSF-gsmSCF-pkgs-contracts-acs']['GenericSSF-gsmSCF-PDUs']
     for p in pkts_tcap_cap:
         M.from_ber(p)
         val = M()
@@ -1579,17 +1619,25 @@ def test_tcap_cap():
         M.from_asn1(txt)
         assert( M() == val )
 
+def test_tcap_cap():
+    _load_tcap_cap()
+    _test_tcap_cap()
+
 
 pkts_X509 = tuple(map(unhexlify, (
     # https://www.google.fr/
     b'3082078a30820672a0030201020208657d462b1509b3b7300d06092a864886f70d01010b05003049310b300906035504061302555331133011060355040a130a476f6f676c6520496e63312530230603550403131c476f6f676c6520496e7465726e657420417574686f72697479204732301e170d3137303832323136343232355a170d3137313131343136333030305a3066310b30090603550406130255533113301106035504080c0a43616c69666f726e69613116301406035504070c0d4d6f756e7461696e205669657731133011060355040a0c0a476f6f676c6520496e633115301306035504030c0c2a2e676f6f676c652e636f6d3059301306072a8648ce3d020106082a8648ce3d030107034200045d105bb2427733023a751eb73901b97ee50ce862d3c0d1f40cf3ed34e52fd88cd8c0b6f43aec0f26ec458340bd561d73b219887f689f47c537d1f8151b071203a38205223082051e301d0603551d250416301406082b0601050507030106082b06010505070302300b0603551d0f040403020780308203e10603551d11048203d8308203d4820c2a2e676f6f676c652e636f6d820d2a2e616e64726f69642e636f6d82162a2e617070656e67696e652e676f6f676c652e636f6d82122a2e636c6f75642e676f6f676c652e636f6d82142a2e64623833333935332e676f6f676c652e636e82062a2e672e636f820e2a2e6763702e677674322e636f6d82162a2e676f6f676c652d616e616c79746963732e636f6d820b2a2e676f6f676c652e6361820b2a2e676f6f676c652e636c820e2a2e676f6f676c652e636f2e696e820e2a2e676f6f676c652e636f2e6a70820e2a2e676f6f676c652e636f2e756b820f2a2e676f6f676c652e636f6d2e6172820f2a2e676f6f676c652e636f6d2e6175820f2a2e676f6f676c652e636f6d2e6272820f2a2e676f6f676c652e636f6d2e636f820f2a2e676f6f676c652e636f6d2e6d78820f2a2e676f6f676c652e636f6d2e7472820f2a2e676f6f676c652e636f6d2e766e820b2a2e676f6f676c652e6465820b2a2e676f6f676c652e6573820b2a2e676f6f676c652e6672820b2a2e676f6f676c652e6875820b2a2e676f6f676c652e6974820b2a2e676f6f676c652e6e6c820b2a2e676f6f676c652e706c820b2a2e676f6f676c652e707482122a2e676f6f676c656164617069732e636f6d820f2a2e676f6f676c65617069732e636e82142a2e676f6f676c65636f6d6d657263652e636f6d82112a2e676f6f676c65766964656f2e636f6d820c2a2e677374617469632e636e820d2a2e677374617469632e636f6d820a2a2e677674312e636f6d820a2a2e677674322e636f6d82142a2e6d65747269632e677374617469632e636f6d820c2a2e75726368696e2e636f6d82102a2e75726c2e676f6f676c652e636f6d82162a2e796f75747562652d6e6f636f6f6b69652e636f6d820d2a2e796f75747562652e636f6d82162a2e796f7574756265656475636174696f6e2e636f6d82072a2e79742e6265820b2a2e7974696d672e636f6d821a616e64726f69642e636c69656e74732e676f6f676c652e636f6d820b616e64726f69642e636f6d821b646576656c6f7065722e616e64726f69642e676f6f676c652e636e821c646576656c6f706572732e616e64726f69642e676f6f676c652e636e8204672e636f8206676f6f2e676c8214676f6f676c652d616e616c79746963732e636f6d820a676f6f676c652e636f6d8212676f6f676c65636f6d6d657263652e636f6d8218736f757263652e616e64726f69642e676f6f676c652e636e820a75726368696e2e636f6d820a7777772e676f6f2e676c8208796f7574752e6265820b796f75747562652e636f6d8214796f7574756265656475636174696f6e2e636f6d820579742e6265306806082b06010505070101045c305a302b06082b06010505073002861f687474703a2f2f706b692e676f6f676c652e636f6d2f47494147322e637274302b06082b06010505073001861f687474703a2f2f636c69656e7473312e676f6f676c652e636f6d2f6f637370301d0603551d0e04160414bb878d2e10f930b01fdea30a71ebcc9ab46e3b99300c0603551d130101ff04023000301f0603551d230418301680144add06161bbcf668b576f581b6bb621aba5a812f30210603551d20041a3018300c060a2b06010401d6790205013008060667810c01020230300603551d1f042930273025a023a021861f687474703a2f2f706b692e676f6f676c652e636f6d2f47494147322e63726c300d06092a864886f70d01010b050003820101004bb6a5e86b4dd533d6b6b995dadcb29a6685d112d3d7e268d92398deb2098004e4eaafb822f588f584583e39298e44907faa8231d7e32bd764124010b580047f07751786075825ee38f5d370a8fdc69fc0e2e43a816ba16121658d152e00bb1a488b06cd7f53e9962e737a9bdcea99a2b73bfe46c4c3270c3b344ed7d40f23c233ee7918edcf213cc9dc1f7973ae6567f1f00b6fbe8e0756a46721ed6005fafe70261d103d51a24818f4bc7539e7f9d778c0a93e989f9616174c9d801118e992878160d0a70265bcd6cd189ac8ca06437e87241ea3e842f2939a265c117359dc5069ef49abcc20ccd281bfe5dda77bd1d3dd4af482c667d3de2b788b646f60c0',
     )))
 
-def test_X509():
-    GLOBAL.clear()
+def _load_X509():
+    try:
+        GLOBAL.clear()
+    except:
+        pass
     from pycrate_asn1dir import RFC5912
-    #
-    Cert = RFC5912.PKIX1Explicit_2009.Certificate
+
+def _test_X509():
+    Cert = GLOBAL.MOD['PKIX1Explicit-2009']['Certificate']
     for p in pkts_X509:
         Cert.from_der(p)
         val = Cert()
@@ -1606,3 +1654,44 @@ def test_X509():
         Cert.from_asn1(txt)
         assert( Cert() == val )
 
+def test_X509():
+    _load_X509()
+    _test_X509()
+
+
+def test_perf():
+    
+    _load_rt_base()
+    print('[+] ASN.1 base type encoding / decoding (BER, CER, DER, UPER, APER)')
+    Ta = timeit(_test_rt_base, number=12)
+    print('test_rt_base: {0:.4f}'.format(Ta))
+    
+    _load_rrc3g()
+    print('[+] RRC 3G encoding / decoding (UPER)')
+    Tb = timeit(_test_rrc3g, number=5)
+    print('test_rrc3g: {0:.4f}'.format(Tb))
+    
+    _load_lteran()
+    print('[+] LTE S1AP and X2AP encoding / decoding (APER)')
+    Tc = timeit(_test_lteran, number=12)
+    print('test_lteran: {0:.4f}'.format(Tc))
+    
+    _load_tcap_map()
+    print('[+] TCAP MAP encoding / decoding (BER)')
+    Td = timeit(_test_tcap_map, number=75)
+    print('test_tcap_map: {0:.4f}'.format(Td))
+    
+    _load_tcap_cap()
+    print('[+] TCAP CAP encoding / decoding (BER)')
+    Te = timeit(_test_tcap_cap, number=8)
+    print('test_tcap_cap: {0:.4f}'.format(Te))
+    
+    _load_X509()
+    print('[+] X.509 encoding / decoding (DER)')
+    Tf = timeit(_test_X509, number=18)
+    print('test_x509: {0:.4f}'.format(Tf))
+    
+    print('[+] ASN.1 RT total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te+Tf))
+
+if __name__ == '__main__':
+    test_perf()
