@@ -73,9 +73,9 @@ _CS_MM_dict = {
 
 class MMHeader(Envelope):
     _GEN = (
-        Uint('SkipInd', val=0, bl=4),
+        Uint('SkipInd', bl=4),
         Uint('ProtDisc', val=5, bl=4, dic=ProtDisc_dict),
-        Uint('Seqn', val=0, bl=2),
+        Uint('Seqn', bl=2),
         Uint('Type', val=48, bl=6, dic=_CS_MM_dict),
         )
 
@@ -96,10 +96,10 @@ class MMAuthenticationReject(Layer3):
 
 class MMAuthenticationRequest(Layer3):
     _GEN = tuple(MMHeader(val={'Type':18})._content) + (
-        Uint('spare', val=0, bl=4),
-        Uint('CKSN', val=0, bl=4, dic=CKSN_dict),
+        Uint('spare', bl=4),
+        Uint('CKSN', bl=4, dic=CKSN_dict),
         Buf('RAND', val=16*b'\0', bl=128, rep=REPR_HEX),
-        Type4TLV('AUTN', val={'T':0x20, 'V':16*b'\0'}, trans=True)
+        Type4TLV('AUTN', val={'T':0x20, 'V':16*b'\0'}, IE=AUTN())
         )
 
 
@@ -111,7 +111,7 @@ class MMAuthenticationRequest(Layer3):
 class MMAuthenticationResponse(Layer3):
     _GEN = tuple(MMHeader(val={'Type':20})._content) + (
         Buf('RES', val=4*b'\0', bl=32, rep=REPR_HEX),
-        Type4TLV('RESExt', val={'T':0x21, 'V':4*b'\0'}, trans=True)
+        Type4TLV('RESExt', val={'T':0x21, 'V':4*b'\0'})
         )
 
 
@@ -123,7 +123,7 @@ class MMAuthenticationResponse(Layer3):
 class MMAuthenticationFailure(Layer3):
     _GEN = tuple(MMHeader(val={'Type':28})._content) + (
         Uint8('Cause', val=17, dic=RejectCause_dict),
-        Type4TLV('AUTS', val={'T':0x22, 'V':16*b'\0'}, trans=True)
+        Type4TLV('AUTS', val={'T':0x22, 'V':16*b'\0'})
         )
 
 
@@ -134,12 +134,12 @@ class MMAuthenticationFailure(Layer3):
 
 class MMCMReestablishmentRequest(Layer3):
     _GEN = tuple(MMHeader(val={'Type':40})._content) + (
-        Uint('spare', val=0, bl=4),
-        Uint('CKSN', val=0, bl=4, dic=CKSN_dict),
-        Type4LV('MSCm2', val={'V':b'@\x00\x00'}, IE=MSCm2()),
+        Uint('spare', bl=4),
+        Uint('CKSN', bl=4, dic=CKSN_dict),
+        Type4LV('MSCm2', val={'V':b'@\0\0'}, IE=MSCm2()),
         Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
-        Type3TV('LAI', val={'T':0x13, 'V':b'\x00\xf1\x10\x00\x00'}, bl={'V':40}, IE=LAI(), trans=True),
-        Type1TV('DeviceProp', val={'T':0xD, 'V':0}, IE=DeviceProp(), trans=True)
+        Type3TV('LAI', val={'T':0x13, 'V':b'\0\xf1\x10\0\0'}, bl={'V':40}, IE=LAI()),
+        Type1TV('DeviceProp', val={'T':0xD, 'V':0}, IE=DeviceProp())
         )
 
 
@@ -159,8 +159,8 @@ class MMCMServiceAccept(Layer3):
 
 class MMCMServicePrompt(Layer3):
     _GEN = tuple(MMHeader(val={'Type':37})._content) + (
-        Uint('spare', val=0, bl=2),
-        Uint('SAPI', val=0, bl=2),
+        Uint('spare', bl=2),
+        Uint('SAPI', bl=2),
         Uint('PD', val=5, bl=4, dic=ProtDisc_dict)
         )
 
@@ -173,7 +173,7 @@ class MMCMServicePrompt(Layer3):
 class MMCMServiceReject(Layer3):
     _GEN = tuple(MMHeader(val={'Type':34})._content) + (
         Uint8('Cause', val=17, dic=RejectCause_dict),
-        Type4TLV('T3246', val={'T':0x36, 'V':b'\0'}, trans=True)
+        Type4TLV('T3246', val={'T':0x36, 'V':b'\0'})
         )
 
 
@@ -204,13 +204,13 @@ class MMAbort(Layer3):
 
 class MMCMServiceRequest(Layer3):
     _GEN = tuple(MMHeader(val={'Type':36})._content) + (
-        Uint('CKSN', val=0, bl=4, dic=CKSN_dict),
+        Uint('CKSN', bl=4, dic=CKSN_dict),
         Uint('Service', val=1, bl=4, dic=CMService_dict),
-        Type4LV('MSCm2', val={'V':b'@\x00\x00'}, IE=MSCm2()),
+        Type4LV('MSCm2', val={'V':b'@\0\0'}, IE=MSCm2()),
         Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
-        Type1TV('Priority', val={'T':0x8, 'V':0}, IE=PriorityLevel(), trans=True),
-        Type1TV('AddUpdateParams', val={'T':0xC, 'V':0}, IE=AddUpdateParams(), trans=True),
-        Type1TV('DeviceProp', val={'T':0xD, 'V':0}, IE=DeviceProp(), trans=True)
+        Type1TV('Priority', val={'T':0x8, 'V':0}, IE=PriorityLevel()),
+        Type1TV('AddUpdateParams', val={'T':0xC, 'V':0}, IE=AddUpdateParams()),
+        Type1TV('DeviceProp', val={'T':0xD, 'V':0}, IE=DeviceProp())
         )
 
 
@@ -221,7 +221,7 @@ class MMCMServiceRequest(Layer3):
 
 class MMIdentityRequest(Layer3):
     _GEN = tuple(MMHeader(val={'Type':24})._content) + (
-        Uint('spare', val=0, bl=4),
+        Uint('spare', bl=4),
         Uint('IDType', val=IDTYPE_IMSI, bl=4, dic=IDType_dict)
         )
 
@@ -234,9 +234,9 @@ class MMIdentityRequest(Layer3):
 class MMIdentityResponse(Layer3):
     _GEN = tuple(MMHeader(val={'Type':25})._content) + (
         Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
-        Type1TV('PTMSIType', val={'T':0xE, 'V':0}, IE=PTMSIType(), trans=True),
-        Type4TLV('RAI', val={'T':0x1B, 'V':b'\x00\xf1\x10\x00\x00\x00'}, IE=RAI(), trans=True),
-        Type4TLV('PTMSISign', val={'T':0x19, 'V':3*b'\0'}, trans=True)
+        Type1TV('PTMSIType', val={'T':0xE, 'V':0}, IE=PTMSIType()),
+        Type4TLV('RAI', val={'T':0x1B, 'V':b'\0\xf1\x10\0\0\0'}, IE=RAI()),
+        Type4TLV('PTMSISign', val={'T':0x19, 'V':3*b'\0'})
         )
 
 
@@ -260,12 +260,12 @@ class MMIMSIDetachIndication(Layer3):
 class MMLocationUpdatingAccept(Layer3):
     _GEN = tuple(MMHeader(val={'Type':2})._content) + (
         LAI(),
-        Type4TLV('ID', val={'T':0x17 ,'V':b'\xf4\0\0\0\0'}, IE=ID(), trans=True),
-        Type2('FollowOnProceed', val={'T':0xA1}, trans=True),
-        Type2('CTSPerm', val={'T':0xA2}, trans=True),
-        Type4TLV('EquivPLMNList', val={'T':0x4A, 'V':b'\0\0\0'}, IE=PLMNList(), trans=True),
-        Type4TLV('EmergNumList', val={'T':0x34, 'V':b'\x02\x01\x00'}, IE=EmergNumList(), trans=True),
-        Type4TLV('MST3212', val={'T':0x35, 'V':b'\0'}, IE=GPRSTimer3(), trans=True)
+        Type4TLV('ID', val={'T':0x17 ,'V':b'\xf4\0\0\0\0'}, IE=ID()),
+        Type2('FollowOnProceed', val={'T':0xA1}),
+        Type2('CTSPerm', val={'T':0xA2}),
+        Type4TLV('EquivPLMNList', val={'T':0x4A, 'V':b'\0\0\0'}, IE=PLMNList()),
+        Type4TLV('EmergNumList', val={'T':0x34, 'V':b'\x02\x01\0'}, IE=EmergNumList()),
+        Type4TLV('MST3212', val={'T':0x35, 'V':b'\0'}, IE=GPRSTimer3())
         )
 
 
@@ -277,7 +277,7 @@ class MMLocationUpdatingAccept(Layer3):
 class MMLocationUpdatingReject(Layer3):
     _GEN = tuple(MMHeader(val={'Type':4})._content) + (
         Uint8('Cause', val=17, dic=RejectCause_dict),
-        Type4TLV('T3246', val={'T':0x36, 'V':b'\0'}, IE=MMTimer(), trans=True)
+        Type4TLV('T3246', val={'T':0x36, 'V':b'\0'}, IE=MMTimer())
         )
 
 
@@ -288,15 +288,15 @@ class MMLocationUpdatingReject(Layer3):
 
 class MMLocationUpdatingRequest(Layer3):
     _GEN = tuple(MMHeader(val={'Type':8})._content) + (
-        Uint('CKSN', val=0, bl=4, dic=CKSN_dict),
+        Uint('CKSN', bl=4, dic=CKSN_dict),
         LocUpdateType(),
         LAI(),
         MSCm1(),
         Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
-        Type4TLV('MSCm2', val={'T':0x33, 'V':b'@\x00\x00'}, IE=MSCm2(), trans=True),
-        Type1TV('AddUpdateParams', val={'T':0xC, 'V':0}, IE=AddUpdateParams(), trans=True),
-        Type1TV('DeviceProp', val={'T':0xD, 'V':0}, IE=DeviceProp(), trans=True),
-        Type1TV('MSNetFeatSupp', val={'T':0xE, 'V':0}, IE=MSNetFeatSupp(), trans=True),
+        Type4TLV('MSCm2', val={'T':0x33, 'V':b'@\0\0'}, IE=MSCm2()),
+        Type1TV('AddUpdateParams', val={'T':0xC, 'V':0}, IE=AddUpdateParams()),
+        Type1TV('DeviceProp', val={'T':0xD, 'V':0}, IE=DeviceProp()),
+        Type1TV('MSNetFeatSupp', val={'T':0xE, 'V':0}, IE=MSNetFeatSupp()),
         )
 
 
@@ -307,13 +307,13 @@ class MMLocationUpdatingRequest(Layer3):
 
 class MMInformation(Layer3):
     _GEN = tuple(MMHeader(val={'Type':50})._content) + (
-        Type4TLV('NetFullName', val={'T':0x43, 'V':b'\0'}, IE=NetworkName(), trans=True),
-        Type4TLV('NetShortName', val={'T':0x45, 'V':b'\0'}, IE=NetworkName(), trans=True),
-        Type3TV('LocalTimeZone', val={'T':0x46, 'V':b'\0'}, bl={'V':8}, trans=True),
+        Type4TLV('NetFullName', val={'T':0x43, 'V':b'\0'}, IE=NetworkName()),
+        Type4TLV('NetShortName', val={'T':0x45, 'V':b'\0'}, IE=NetworkName()),
+        Type3TV('LocalTimeZone', val={'T':0x46, 'V':b'\0'}, bl={'V':8}, IE=TimeZone()),
         Type3TV('UnivTimeAndTimeZone', val={'T':0x47, 'V':7*b'\0'}, bl={'V':56},
-                IE=TimeZoneTime(), trans=True),
-        Type4TLV('LSAIdentity', val={'T':0x48, 'V':b''}, trans=True),
-        Type4TLV('NetDLSavingTime', val={'T':0x49, 'V':b'\0'}, trans=True)
+                IE=TimeZoneTime()),
+        Type4TLV('LSAIdentity', val={'T':0x48, 'V':b''}),
+        Type4TLV('DLSavingTime', val={'T':0x49, 'V':b'\0'}, IE=DLSavingTime())
         )
 
 

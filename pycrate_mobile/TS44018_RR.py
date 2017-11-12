@@ -259,9 +259,9 @@ APPLICATION INFORMATION
 
 class RRHeader(Envelope):
     _GEN = (
-        Uint('SkipInd', val=0, bl=4),
+        Uint('SkipInd', bl=4),
         Uint('ProtDisc', val=6, bl=4, dic=ProtDisc_dict),
-        Uint('Type', val=0, bl=8, dic=_RRC_dict),
+        Uint('Type', bl=8, dic=_RRC_dict),
         )
 
 #------------------------------------------------------------------------------#
@@ -271,11 +271,11 @@ class RRHeader(Envelope):
 
 class RRPagingResponse(Envelope):
     _GEN = tuple(RRHeader(val={'Type':39})._content) + (
-        Uint('spare', val=0, bl=4),
-        Uint('CKSN', val=0, bl=4, dic=CKSN_dict),
+        Uint('spare', bl=4),
+        Uint('CKSN', bl=4, dic=CKSN_dict),
         Type4LV('MSCm2', val={'V':b'@\x00\x00'}, IE=MSCm2()),
         Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
-        Type1TV('AddUpdateParams', val={'T':0xC, 'V':0}, IE=AddUpdateParams(), trans=True)
+        Type1TV('AddUpdateParams', val={'T':0xC, 'V':0}, IE=AddUpdateParams())
         )
 
 #------------------------------------------------------------------------------#

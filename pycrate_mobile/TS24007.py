@@ -68,8 +68,7 @@ class Layer3(Envelope):
                     self._opts.append( (T.get_bl(), T(), ie) )
         else:
             for ie in self._content:
-                if isinstance(ie, (Type1V, Type3V, Type4LV, Type6LVE)) and \
-                val and ie._name in val:
+                if isinstance(ie, (Type1V, Type3V, Type4LV, Type6LVE)) and ie._name in val:
                     # setting value for non-optional IE
                     if isinstance(val[ie._name], bytes_types):
                         # setting raw value
@@ -81,7 +80,7 @@ class Layer3(Envelope):
                     # optional IE
                     T = ie[0]
                     self._opts.append( (T.get_bl(), T(), ie) )
-                    if val and ie._name in val:
+                    if ie._name in val:
                         ie._trans = False
                         if isinstance(val[ie._name], bytes_types):
                             # setting raw value
@@ -92,11 +91,10 @@ class Layer3(Envelope):
                 elif isinstance(ie, Type2):
                     # optional Tag-only IE
                     self._opts.append( (8, ie[0](), ie) )
-                    if val and ie._name in val:
+                    if ie._name in val:
                         ie._trans = False
-                elif val and ie._name in val:
+                elif ie._name in val:
                     ie.set_val(val[ie._name])
-                
     
     def reset_opts(self):
         """reset the optional part of the message
@@ -159,6 +157,8 @@ class Layer3(Envelope):
         #
         return '<%s%s%s : %s>' % \
                (self._name, desc, trans, ''.join(map(repr, self._content)))
+    
+    __repr__ = repr
 
 
 class Layer3EPS(Layer3):
@@ -186,28 +186,65 @@ class Layer3EPS(Layer3):
 
 class IE(Envelope):
     
-    # do not represent transparent IE
-    REPR_TRANS = False
+    # to decode inner IE, when defined
+    DECODE_INNER = True
     
-    _IE = None
-    _V  = None
+    # _V stores the Value instance, when existing
+    _V = None
+    # _IE_stat stores an instance of an IE class that must be kept as is
+    # when required (during encoding / decoding) it is cloned into _IE
+    _IE_stat = None
+    _IE      = None
     
     def __init__(self, *args, **kw):
         if 'IE' in kw:
             if isinstance(kw['IE'], (Element, CSN1Obj)):
-                self._IE = kw['IE'].clone()
+                self._IE_stat = kw['IE']
             elif self._SAFE_STAT:
                 raise(PycrateErr('IE [__init__]: IE type is {0}, expecting Element'\
                       .format(type(kw['IE']).__name__)))
+            del kw['IE']
         Envelope.__init__(self, *args, **kw)
+        if self[-1]._name == 'V':
+            self._V = self[-1]
+    
+    def set_val(self, vals):
+        ie_val = None
+        if vals is None:
+            self.unset_IE()
+            [elt.set_val(None) for elt in self.__iter__()]
+        elif isinstance(vals, (tuple, list)):
+            ind = 0
+            for elt in self.__iter__():
+                val = vals[ind]
+                if elt._name == 'V' and not isinstance(val, bytes_types):
+                    ie_val = val
+                else:
+                    elt.set_val(val)
+                ind += 1
+        elif isinstance(vals, dict):
+            for key, val in vals.items():
+                if key == 'V' and not isinstance(val, bytes_types):
+                    ie_val = val
+                else:
+                    self.__setitem__(key, val)
+        elif self._SAFE_STAT:
+            raise(EltErr('{0} [set_val]: vals type is {1}, expecting None, tuple, list or dict'\
+                  .format(self._name, type(vals).__name__)))
+        if ie_val is not None:
+            self.set_IE(val=ie_val)
     
     def _from_char(self, char):
+        if self[-1]._name != 'V':
+            # restore the std buffer for handling the value
+            self.unset_IE()
         Envelope._from_char(self, char)
         # in case self._IE is defined, use it to decode char instead of V
-        if self._IE is not None:
+        if self.DECODE_INNER and self._IE_stat is not None:
+            if self._IE is None:
+                self._IE = self._IE_stat.clone()
             iebl = self[-1].get_bl()
-            char_cur = char._cur
-            char_lb  = char._len_bit
+            ccur, clen = char._cur, char._len_bit
             char._cur -= iebl
             char._len_bit = char._cur + iebl
             try:
@@ -220,15 +257,9 @@ class IE(Envelope):
                     log('%s, _from_char: uncorrect decoding for IE, %s'\
                         % (self._name, self._IE._name))
                 else:
-                    # save the V buffer
-                    self._V = self[-1]
-                    # replace it with the IE structure
+                    # replace V with the IE structure
                     self.replace(self[-1], self._IE)
-                    if self[-2]._name == 'L':
-                        # Type4 and Type6
-                        self[-2].set_valauto( self[-1].get_len )
-            char._cur = char_cur
-            char._len_bit = char_lb
+            char._cur, char._len_bit = ccur, clen
     
     def clone(self):
         kw = {}
@@ -238,9 +269,9 @@ class IE(Envelope):
             kw['hier'] = self._hier
         if self._trans != self.__class__._trans:
             kw['trans'] = self._trans
-        if self._IE is not None:
+        if self._IE_stat is not None:
             # additional attribute, compared to Envelope.clone()
-            kw['IE'] = self._IE
+            kw['IE'] = self._IE_stat
         # substitute the Envelope generator with clones of the current 
         # envelope's content
         kw['GEN'] = tuple([elt.clone() for elt in self._content])
@@ -249,30 +280,23 @@ class IE(Envelope):
     # new methods, specific to IE
     
     def set_IE(self, *args, **kw):
-        if self._IE is not None:
-            self._IE.__init__(*args, **kw)
-            assert( self[-1]._name == 'V' )
-            self._V = self[-1]
+        if self._IE_stat is None:
+            return
+        elif self._IE is None:
+            # potentially clone the IE
+            self._IE = self._IE_stat.clone()
+        self._IE.__init__(*args, **kw)
+        if self[-1]._name != self._IE._name:
             self.replace(self[-1], self._IE)
-            if self[-2]._name == 'L':
-                # Type4 and Type6
-                self[-2].set_valauto( self[-1].get_len )
     
-    def unset_IE(self, *args):
-        if self._IE is not None:
-            assert( self._V is not None )
-            self[-1] = self._V
-            if args:
-                self[-1].__init__(val=args[0])
-            if self[-2]._name == 'L':
-                # Type4 and Type6
-                self[-2].set_valauto( self[-1].get_len )
-                self[-1].set_blauto( lambda: 8*self[-2].get_val() )
+    def unset_IE(self):
+        if self[-1]._name != 'V' and self._V is not None:
+            self.replace(self[-1], self._V)
 
 
 class Type1V(IE):
     """The Type1_V IE is a mandatory IE,
-    its content is a single 4 bit indicator 
+    its content is a single 4 bit unsigned int value 
     """
     _GEN = (
         Uint('V', bl=4),
@@ -291,8 +315,9 @@ class Type1V(IE):
 
 class Type1TV(IE):
     """The Type1_TV IE is an optional IE,
-    its content is a 4 bit tag and a 4 bit value
+    its content is a 4 bit tag and a 4 bit unsigned int value
     """
+    DEFAULT_TRANS = True
     _GEN = (
         Uint('T', bl=4),
         Uint('V', bl=4)
@@ -307,12 +332,41 @@ class Type1TV(IE):
         IE.__init__(self, *args, **kw)
         if dic is not None:
             self[1]._dic = dic
+    
+    def set_val(self, vals):
+        ie_val = None
+        if vals is None:
+            [elt.set_val(None) for elt in self.__iter__()]
+        elif isinstance(vals, (tuple, list)):
+            ind = 0
+            for elt in self.__iter__():
+                val = vals[ind]
+                if elt._name == 'V' and not isinstance(val, integer_types):
+                    ie_val = val
+                else:
+                    elt.set_val(val)
+                ind += 1
+        elif isinstance(vals, dict):
+            for key, val in vals.items():
+                if key == 'V' and not isinstance(val, integer_types):
+                    ie_val = val
+                else:
+                    self.__setitem__(key, val)
+        elif self._SAFE_STAT:
+            raise(EltErr('{0} [set_val]: vals type is {1}, expecting None, tuple, list or dict'\
+                  .format(self._name, type(vals).__name__)))
+        if ie_val is not None:
+            # potentially clone the IE and set it according to val
+            if self._IE_stat is not None and self._IE is None:
+                self._IE = self._IE_stat.clone()
+            self.set_IE(val=ie_val)
 
 
 class Type2(IE):
     """The Type2 IE is an optional IE,
     its content is a single 8 bit tag (i.e. a flag)
     """
+    DEFAULT_TRANS = True
     _GEN = (
         Uint8('T'),
         )
@@ -326,10 +380,12 @@ class Type3V(IE):
         Buf('V', rep=REPR_HEX),
         )
 
+
 class Type3TV(IE):
     """The Type3_TV IE is an optional IE,
     its content is a 8 bit tag and a simple buffer
     """
+    DEFAULT_TRANS = True
     _GEN = (
         Uint8('T'),
         Buf('V', rep=REPR_HEX)
@@ -346,14 +402,15 @@ class Type4LV(IE):
         )
     def __init__(self, *args, **kwargs):
         IE.__init__(self, *args, **kwargs)
-        self[0].set_valauto( self[1].get_len )
-        self[1].set_blauto( lambda : 8*self[0]() )
+        self[0].set_valauto(lambda: self[1].get_len())
+        self[1].set_blauto(lambda: 8*self[0]())
 
 
 class Type4TLV(IE):
     """The Type4_TLV IE is an optional IE
     its content is a 8 bit tag, a 8 bit length and a buffer of given length
     """
+    DEFAULT_TRANS = True
     _GEN = (
         Uint8('T'),
         Uint8('L'),
@@ -361,8 +418,8 @@ class Type4TLV(IE):
         )
     def __init__(self, *args, **kwargs):
         IE.__init__(self, *args, **kwargs)
-        self[1].set_valauto( self[2].get_len )
-        self[2].set_blauto( lambda : 8*self[1].get_val() )
+        self[1].set_valauto(lambda: self[2].get_len())
+        self[2].set_blauto(lambda: 8*self[1].get_val())
 
 
 class Type6LVE(IE):
@@ -375,14 +432,15 @@ class Type6LVE(IE):
         )
     def __init__(self, *args, **kwargs):
         IE.__init__(self, *args, **kwargs)
-        self[1].set_valauto( self[2].get_len )
-        self[2].set_blauto( lambda : 8*self[1].get_val() )
+        self[0].set_valauto(lambda: self[1].get_len())
+        self[1].set_blauto(lambda: 8*self[0].get_val())
 
 
 class Type6TLVE(IE):
     """The Type6_TLVE IE is an optional IE only used in EPS
     its content is a 8 bit tag, a 16 bit length and a buffer of given length
     """
+    DEFAULT_TRANS = True
     _GEN = (
         Uint8('T'),
         Uint16('L'),
@@ -390,8 +448,8 @@ class Type6TLVE(IE):
         )
     def __init__(self, *args, **kwargs):
         IE.__init__(self, *args, **kwargs)
-        self[1].set_valauto( self[2].get_len )
-        self[2].set_blauto( lambda : 8*self[1].get_val() )
+        self[1].set_valauto(lambda: self[2].get_len())
+        self[2].set_blauto(lambda: 8*self[1].get_val())
 
 
 #------------------------------------------------------------------------------#
@@ -416,5 +474,3 @@ ProtDisc_dict = {
     13: 'extended ProtDisc',
     14: 'testing',
     }
-
-

@@ -74,7 +74,7 @@ _PS_MM_dict = {
 
 class GMMHeader(Envelope):
     _GEN = (
-        Uint('SkipInd', val=0, bl=4),
+        Uint('SkipInd', bl=4),
         Uint('ProtDisc', val=8, bl=4, dic=ProtDisc_dict),
         Uint8('Type', val=32, dic=_PS_MM_dict),
         )
@@ -87,32 +87,32 @@ class GMMHeader(Envelope):
 class GMMAttachRequest(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':1})._content) + (
         Type4LV('MSNetCap', val={'V':b'\0\0'}, IE=MS_network_capability_value_part),
-        Uint('CKSN', val=0, bl=4, dic=CKSN_dict),
+        Uint('CKSN', bl=4, dic=CKSN_dict),
         AttachType(),
         DRXParam(),
         Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
         RAI('OldRAI'),
         Type4LV('MSRACap', val={'V':5*b'\0'}, IE=MS_RA_capability_value_part),
-        Type3TV('OldPTMSISign', val={'T':0x19, 'V':b'\0\0\0'}, bl={'V':24}, trans=True),
-        Type3TV('ReqREADYTimer', val={'T':0x17, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer(), trans=True),
-        Type1TV('TMSIStatus', val={'T':0x9, 'V':0}, IE=TMSIStatus(), trans=True),
-        Type4TLV('PSLCSCap', val={'T':0x33, 'V':b'\0'}, IE=PSLCSCap(), trans=True),
-        Type4TLV('MSCm2', val={'T':0x11, 'V':b'@\x00\x00'}, IE=MSCm2(), trans=True),
-        Type4TLV('MSCm3', val={'T':0x20, 'V':b''}, IE=Classmark_3_Value_part, trans=True),
-        Type4TLV('SuppCodecs', val={'T':0x40, 'V':b'\0\x01\0'}, IE=SuppCodecList(), trans=True),
-        Type4TLV('UENetCap', val={'T':0x58, 'V':b'\0\0'}, IE=UENetCap(), trans=True),
-        Type4TLV('AddID', val={'T':0x1A, 'V':b'\xf4\0\0\0\0'}, IE=ID(), trans=True),
-        Type4TLV('AddRAI', val={'T':0x1B, 'V':6*b'\0'}, IE=RAI(), trans=True),
-        Type4TLV('VoiceDomPref', val={'T':0x5D, 'V':b'\0'}, IE=VoiceDomPref(), trans=True),
-        Type1TV('DeviceProp', val={'T':0xD, 'V':0}, IE=DeviceProp(), trans=True),
-        Type1TV('PTMSIType', val={'T':0xE, 'V':0}, IE=PTMSIType(), trans=True),
-        Type1TV('MSNetFeatSupp', val={'T':0xC, 'V':0}, IE=MSNetFeatSupp(), trans=True),
-        Type4TLV('OldLAI', val={'T':0x14, 'V':5*b'\0'}, IE=LAI(), trans=True),
-        Type1TV('AddUpdateType', val={'T':0xF, 'V':0}, IE=AddUpdateType(), trans=True),
-        Type4TLV('TMSIBasedNRICont', val={'T':0x10, 'V':b'\0\0'}, IE=NRICont(), trans=True),
-        Type4TLV('T3324', val={'T':0x6A, 'V':b'\0'}, IE=GPRSTimer(), trans=True),
-        Type4TLV('T3312Ext', val={'T':0x39, 'V':b'\0'}, IE=GPRSTimer3(), trans=True),
-        Type4TLV('ExtDRXParam', val={'T':0x6E, 'V':b'\0'}, IE=ExtDRXParam(), trans=True)
+        Type3TV('OldPTMSISign', val={'T':0x19, 'V':b'\0\0\0'}, bl={'V':24}),
+        Type3TV('ReqREADYTimer', val={'T':0x17, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
+        Type1TV('TMSIStatus', val={'T':0x9, 'V':0}, IE=TMSIStatus()),
+        Type4TLV('PSLCSCap', val={'T':0x33, 'V':b'\0'}, IE=PSLCSCap()),
+        Type4TLV('MSCm2', val={'T':0x11, 'V':b'@\0\0'}, IE=MSCm2()),
+        Type4TLV('MSCm3', val={'T':0x20, 'V':b''}, IE=Classmark_3_Value_part),
+        Type4TLV('SuppCodecs', val={'T':0x40, 'V':b'\0\x01\0'}, IE=SuppCodecList()),
+        Type4TLV('UENetCap', val={'T':0x58, 'V':b'\0\0'}, IE=UENetCap()),
+        Type4TLV('AddID', val={'T':0x1A, 'V':b'\xf4\0\0\0\0'}, IE=ID()),
+        Type4TLV('AddRAI', val={'T':0x1B, 'V':6*b'\0'}, IE=RAI()),
+        Type4TLV('VoiceDomPref', val={'T':0x5D, 'V':b'\0'}, IE=VoiceDomPref()),
+        Type1TV('DeviceProp', val={'T':0xD, 'V':0}, IE=DeviceProp()),
+        Type1TV('PTMSIType', val={'T':0xE, 'V':0}, IE=PTMSIType()),
+        Type1TV('MSNetFeatSupp', val={'T':0xC, 'V':0}, IE=MSNetFeatSupp()),
+        Type4TLV('OldLAI', val={'T':0x14, 'V':5*b'\0'}, IE=LAI()),
+        Type1TV('AddUpdateType', val={'T':0xF, 'V':0}, IE=AddUpdateType()),
+        Type4TLV('TMSIBasedNRICont', val={'T':0x10, 'V':b'\0\0'}, IE=NRICont()),
+        Type4TLV('T3324', val={'T':0x6A, 'V':b'\0'}, IE=GPRSTimer()),
+        Type4TLV('T3312Ext', val={'T':0x39, 'V':b'\0'}, IE=GPRSTimer3()),
+        Type4TLV('ExtDRXParam', val={'T':0x6E, 'V':b'\0'}, IE=ExtDRXParam())
         )
 
 
@@ -129,29 +129,29 @@ class GMMAttachAccept(Layer3):
         RadioPriority('RadioPrioForTOM8'),
         RadioPriority('RadioPrioForSMS'),
         RAI(),
-        Type3TV('PTMSISign', val={'T':0x19, 'V':b'\0\0\0'}, bl={'V':24}, trans=True),
-        Type3TV('NegoREADYTimer', val={'T':0x17, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer(), trans=True),
-        Type4TLV('AllocPTMSI', val={'T':0x18, 'V':b'\xf4\0\0\0\0'}, IE=ID(), trans=True),
-        Type4TLV('MSIdent', val={'T':0x23, 'V':b'\xf4\0\0\0\0'}, IE=ID(), trans=True),
+        Type3TV('PTMSISign', val={'T':0x19, 'V':b'\0\0\0'}, bl={'V':24}),
+        Type3TV('NegoREADYTimer', val={'T':0x17, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
+        Type4TLV('AllocPTMSI', val={'T':0x18, 'V':b'\xf4\0\0\0\0'}, IE=ID()),
+        Type4TLV('MSIdent', val={'T':0x23, 'V':b'\xf4\0\0\0\0'}, IE=ID()),
         Type3TV('GMMCause', val={'T':0x25, 'V':b'\x11'}, bl={'V':8},
-            IE=Uint8('GMMCause', val=0x11, dic=GMMCause_dict), trans=True),
-        Type4TLV('T3302', val={'T':0x2A, 'V':b'\0'}, IE=GPRSTimer(), trans=True),
-        Type2('CellNotif', val={'T':0x8C}, trans=True),
-        Type4TLV('EquivPLMNList', val={'T':0x4A, 'V':3*b'\0'}, IE=PLMNList(), trans=True),
-        Type1TV('NetFeatSupp', val={'T':0xA, 'V':0}, IE=NetFeatSupp(), trans=True),
-        Type4TLV('EmergNumList', val={'T':0x34, 'V':b'\x02\x01\x00'}, IE=EmergNumList(), trans=True),
-        Type1TV('ReqMSInfo', val={'T':0xA, 'V':0}, IE=ReqMSInfo(), trans=True),
-        Type4TLV('T3319', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer(), trans=True),
-        Type4TLV('T3323', val={'T':0x38, 'V':b'\0'}, IE=GPRSTimer(), trans=True),
-        Type4TLV('T3312Ext', val={'T':0x39, 'V':b'\0'}, IE=GPRSTimer3(), trans=True),
-        Type4TLV('AddNetFeatSupp', val={'T':0x66, 'V':b'\0'}, IE=AddNetFeatSupp(), trans=True),
-        Type4TLV('T3324', val={'T':0x6A, 'V':b'\0'}, IE=GPRSTimer(), trans=True),
-        Type4TLV('ExtDRXParam', val={'T':0x6E, 'V':b'\0'}, IE=ExtDRXParam(), trans=True),
-        Type1TV('UPIntegrityInd', val={'T':0xC, 'V':0}, IE=UPIntegrityInd(), trans=True),
-        Type4TLV('ReplayedMSNetCap', val={'T':0x31, 'V':b'\0\0'},
-            IE=MS_network_capability_value_part, trans=True),
-        Type4TLV('ReplayedMSRACap', val={'T':0x33, 'V':5*b'\0'},
-            IE=MS_RA_capability_value_part, trans=True)
+            IE=Uint8('GMMCause', val=17, dic=GMMCause_dict)),
+        Type4TLV('T3302', val={'T':0x2A, 'V':b'\0'}, IE=GPRSTimer()),
+        Type2('CellNotif', val={'T':0x8C}),
+        Type4TLV('EquivPLMNList', val={'T':0x4A, 'V':3*b'\0'}, IE=PLMNList()),
+        Type1TV('NetFeatSupp', val={'T':0xA, 'V':0}, IE=NetFeatSupp()),
+        Type4TLV('EmergNumList', val={'T':0x34, 'V':b'\x02\x01\0'}, IE=EmergNumList()),
+        Type1TV('ReqMSInfo', val={'T':0xA, 'V':0}, IE=ReqMSInfo()),
+        Type4TLV('T3319', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer()),
+        Type4TLV('T3323', val={'T':0x38, 'V':b'\0'}, IE=GPRSTimer()),
+        Type4TLV('T3312Ext', val={'T':0x39, 'V':b'\0'}, IE=GPRSTimer3()),
+        Type4TLV('AddNetFeatSupp', val={'T':0x66, 'V':b'\0'}, IE=AddNetFeatSupp()),
+        Type4TLV('T3324', val={'T':0x6A, 'V':b'\0'}, IE=GPRSTimer()),
+        Type4TLV('ExtDRXParam', val={'T':0x6E, 'V':b'\0'}, IE=ExtDRXParam()),
+        Type1TV('UPIntegrityInd', val={'T':0xC, 'V':0}, IE=UPIntegrityInd()),
+        Type4TLV('MSNetCap', val={'T':0x31, 'V':b'\0\0'},
+            IE=MS_network_capability_value_part),
+        Type4TLV('MSRACap', val={'T':0x33, 'V':5*b'\0'},
+            IE=MS_RA_capability_value_part)
         )
 
 
@@ -162,8 +162,8 @@ class GMMAttachAccept(Layer3):
 
 class GMMAttachComplete(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':3})._content) + (
-        Type4TLV('InterRATHOInfo', val={'T':0x27, 'V':b'\0'}, trans=True),
-        Type4TLV('EUTRANInterRATHOInfo', val={'T':0x2B, 'V':b'\0'}, trans=True)
+        Type4TLV('InterRATHOInfo', val={'T':0x27, 'V':b'\0'}),
+        Type4TLV('EUTRANInterRATHOInfo', val={'T':0x2B, 'V':b'\0'})
         )
 
 
@@ -174,9 +174,9 @@ class GMMAttachComplete(Layer3):
 
 class GMMAttachReject(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':4})._content) + (
-        Uint8('GMMCause', val=0x11, dic=GMMCause_dict),
-        Type4TLV('T3302', val={'T':0x2A, 'V':b'\0'}, IE=GPRSTimer(), trans=True),
-        Type4TLV('T3346', val={'T':0x3A, 'V':b'\0'}, IE=GPRSTimer(), trans=True)
+        Uint8('GMMCause', val=17, dic=GMMCause_dict),
+        Type4TLV('T3302', val={'T':0x2A, 'V':b'\0'}, IE=GPRSTimer()),
+        Type4TLV('T3346', val={'T':0x3A, 'V':b'\0'}, IE=GPRSTimer())
         )
 
 
@@ -190,7 +190,7 @@ class GMMDetachRequestMT(Layer3):
         ForceStdby(),
         DetachTypeMT(),
         Type3TV('GMMCause', val={'T':0x25, 'V':b'\x11'}, bl={'V':8},
-            IE=Uint8('GMMCause', val=0x11, dic=GMMCause_dict), trans=True)
+            IE=Uint8('GMMCause', val=17, dic=GMMCause_dict))
         )
 
 
@@ -201,10 +201,10 @@ class GMMDetachRequestMT(Layer3):
 
 class GMMDetachRequestMO(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':5})._content) + (
-        Uint('spare', val=0, bl=4),
+        Uint('spare', bl=4),
         DetachTypeMO(),
-        Type4TLV('AllocPTMSI', val={'T':0x18, 'V':b'\xf4\0\0\0\0'}, IE=ID(), trans=True),
-        Type4TLV('PTMSISign', val={'T':0x19, 'V':b'\0\0\0'}, trans=True)
+        Type4TLV('AllocPTMSI', val={'T':0x18, 'V':b'\xf4\0\0\0\0'}, IE=ID()),
+        Type4TLV('PTMSISign', val={'T':0x19, 'V':b'\0\0\0'})
         )
 
 
@@ -215,7 +215,7 @@ class GMMDetachRequestMO(Layer3):
 
 class GMMDetachAcceptMT(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':6})._content) + (
-        Uint('spare', val=0, bl=4),
+        Uint('spare', bl=4),
         ForceStdby()
         )
 
@@ -238,9 +238,9 @@ class GMMPTMSIReallocationCommand(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':16})._content) + (
         Type4LV('AllocPTMSI', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
         RAI(),
-        Uint('spare', val=0, bl=4),
+        Uint('spare', bl=4),
         ForceStdby(),
-        Type3TV('PTMSISign', val={'T':0x19, 'V':b'\0\0\0'}, bl={'V':24}, trans=True),
+        Type3TV('PTMSISign', val={'T':0x19, 'V':b'\0\0\0'}, bl={'V':24}),
         )
 
 
@@ -260,19 +260,19 @@ class GMMPTMSIReallocationComplete(Layer3):
 
 class GMMAuthenticationCipheringRequest(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':18})._content) + (
-        Uint('IMEISVReq', val=0, bl=4),
-        Uint('CiphAlgo', val=0, bl=4, dic=CiphAlgo_dict),
-        Uint('ACRef', val=0, bl=4),
+        Uint('IMEISVReq', bl=4),
+        Uint('CiphAlgo', bl=4, dic=CiphAlgo_dict),
+        Uint('ACRef', bl=4),
         ForceStdby(),
-        Type3TV('RAND', val={'T':0x21, 'V':16*b'\0'}, bl={'V':128}, trans=True),
-        Type1TV('CKSN', val={'T':0x8, 'V':0}, dic=CKSN_dict, trans=True),
-        Type4TLV('AUTN', val={'T':0x28, 'V':16*b'\0'}, trans=True),
-        Type4TLV('ReplayedMSNetCap', val={'T':0x31, 'V':b'\0\0'},
-            IE=MS_network_capability_value_part, trans=True),
-        Type1TV('IntegAlgo', val={'T':0x9, 'V':0}, dic=IntegAlgo_dict, trans=True),
-        Type4TLV('MAC', val={'T':0x43, 'V':4*b'\0'}, trans=True),
-        Type4TLV('ReplayedMSRACap', val={'T':0x33, 'V':5*b'\0'},
-            IE=MS_RA_capability_value_part, trans=True)
+        Type3TV('RAND', val={'T':0x21, 'V':16*b'\0'}, bl={'V':128}),
+        Type1TV('CKSN', val={'T':0x8, 'V':0}, dic=CKSN_dict),
+        Type4TLV('AUTN', val={'T':0x28, 'V':16*b'\0'}, IE=AUTN()),
+        Type4TLV('MSNetCap', val={'T':0x31, 'V':b'\0\0'},
+            IE=MS_network_capability_value_part),
+        Type1TV('IntegAlgo', val={'T':0x9, 'V':0}, dic=IntegAlgo_dict),
+        Type4TLV('MAC', val={'T':0x43, 'V':4*b'\0'}),
+        Type4TLV('MSRACap', val={'T':0x33, 'V':5*b'\0'},
+            IE=MS_RA_capability_value_part)
         )
 
 
@@ -283,12 +283,12 @@ class GMMAuthenticationCipheringRequest(Layer3):
 
 class GMMAuthenticationCipheringResponse(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':19})._content) + (
-        Uint('spare', val=0, bl=4),
-        Uint('ACRef', val=0, bl=4),
-        Type3TV('RES', val={'T':0x22, 'V':4*b'\0'}, bl={'V':32}, trans=True),
-        Type4TLV('IMEISV', val={'T':0x23, 'V':b'\x03\0\0\0\0\0\0\0\xf0'}, IE=ID(), trans=True),
-        Type4TLV('RESExt', val={'T':0x29, 'V':4*b'\0'}, trans=True),
-        Type4TLV('MAC', val={'T':0x43, 'V':4*b'\0'}, trans=True),
+        Uint('spare', bl=4),
+        Uint('ACRef', bl=4),
+        Type3TV('RES', val={'T':0x22, 'V':4*b'\0'}, bl={'V':32}),
+        Type4TLV('IMEISV', val={'T':0x23, 'V':b'\x03\0\0\0\0\0\0\0\xf0'}, IE=ID()),
+        Type4TLV('RESExt', val={'T':0x29, 'V':4*b'\0'}),
+        Type4TLV('MAC', val={'T':0x43, 'V':4*b'\0'}),
         )
 
 
@@ -299,8 +299,8 @@ class GMMAuthenticationCipheringResponse(Layer3):
 
 class GMMAuthenticationCipheringFailure(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':28})._content) + (
-        Uint8('GMMCause', val=0x11, dic=GMMCause_dict),
-        Type4TLV('AUTS', val={'T':0x30, 'V':14*b'\0'}, trans=True)
+        Uint8('GMMCause', val=17, dic=GMMCause_dict),
+        Type4TLV('AUTS', val={'T':0x30, 'V':14*b'\0'})
         )
 
 
@@ -343,35 +343,35 @@ class GMMIdentityResponse(Layer3):
 
 class GMMRoutingAreaUpdateRequest(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':8})._content) + (
-        Uint('CKSN', val=0, bl=4, dic=CKSN_dict),
+        Uint('CKSN', bl=4, dic=CKSN_dict),
         UpdateType(),
         RAI('OldRAI'),
         Type4LV('MSRACap', val={'V':5*b'\0'}, IE=MS_RA_capability_value_part),
-        Type3TV('OldPTMSISign', val={'T':0x19, 'V':b'\0\0\0'}, bl={'V':24}, trans=True),
-        Type3TV('ReqREADYTimer', val={'T':0x17, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer(), trans=True),
-        Type3TV('DRXParam', val={'T':0x27, 'V':b'\0\0'}, bl={'V':16}, IE=DRXParam(), trans=True),
-        Type1TV('TMSIStatus', val={'T':0x9, 'V':0}, IE=TMSIStatus(), trans=True),
-        Type4TLV('PTMSI', val={'T':0x18, 'V':b'\xf4\0\0\0\0'}, IE=ID(), trans=True),
-        Type4TLV('MSNetCap', val={'T':0x31, 'V':b'\0\0'}, IE=MS_network_capability_value_part, trans=True),
-        Type4TLV('PDPCtxtStat', val={'T':0x32, 'V':b'\0\0'}, IE=PDPCtxtStat(), trans=True),
-        Type4TLV('PSLCSCap', val={'T':0x33, 'V':b'\0'}, IE=PSLCSCap(), trans=True),
-        Type4TLV('MBMSCtxtStat', val={'T':0x35, 'V':b''}, IE=MBMSCtxtStat(), trans=True),
-        Type4TLV('UENetCap', val={'T':0x58, 'V':b'\0\0'}, IE=UENetCap(), trans=True),
-        Type4TLV('AddID', val={'T':0x1A, 'V':b'\xf4\0\0\0\0'}, IE=ID(), trans=True),
-        Type4TLV('AddRAI', val={'T':0x1B, 'V':6*b'\0'}, IE=RAI(), trans=True),
-        Type4TLV('MSCm2', val={'T':0x11, 'V':b'@\x00\x00'}, IE=MSCm2(), trans=True),
-        Type4TLV('MSCm3', val={'T':0x20, 'V':b''}, IE=Classmark_3_Value_part, trans=True),
-        Type4TLV('SuppCodecs', val={'T':0x40, 'V':b'\0\x01\0'}, IE=SuppCodecList(), trans=True),
-        Type4TLV('VoiceDomPref', val={'T':0x5D, 'V':b'\0'}, IE=VoiceDomPref(), trans=True),
-        Type1TV('PTMSIType', val={'T':0xE, 'V':0}, IE=PTMSIType(), trans=True),
-        Type1TV('DeviceProp', val={'T':0xD, 'V':0}, IE=DeviceProp(), trans=True),
-        Type1TV('MSNetFeatSupp', val={'T':0xC, 'V':0}, IE=MSNetFeatSupp(), trans=True),
-        Type4TLV('OldLAI', val={'T':0x14, 'V':5*b'\0'}, IE=LAI(), trans=True),
-        Type1TV('AddUpdateType', val={'T':0xF, 'V':0}, IE=AddUpdateType(), trans=True),
-        Type4TLV('TMSIBasedNRICont', val={'T':0x10, 'V':b'\0\0'}, IE=NRICont(), trans=True),
-        Type4TLV('T3324', val={'T':0x6A, 'V':b'\0'}, IE=GPRSTimer(), trans=True),
-        Type4TLV('T3312Ext', val={'T':0x39, 'V':b'\0'}, IE=GPRSTimer3(), trans=True),
-        Type4TLV('ExtDRXParam', val={'T':0x6E, 'V':b'\0'}, IE=ExtDRXParam(), trans=True)
+        Type3TV('OldPTMSISign', val={'T':0x19, 'V':b'\0\0\0'}, bl={'V':24}),
+        Type3TV('ReqREADYTimer', val={'T':0x17, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
+        Type3TV('DRXParam', val={'T':0x27, 'V':b'\0\0'}, bl={'V':16}, IE=DRXParam()),
+        Type1TV('TMSIStatus', val={'T':0x9, 'V':0}, IE=TMSIStatus()),
+        Type4TLV('PTMSI', val={'T':0x18, 'V':b'\xf4\0\0\0\0'}, IE=ID()),
+        Type4TLV('MSNetCap', val={'T':0x31, 'V':b'\0\0'}, IE=MS_network_capability_value_part),
+        Type4TLV('PDPCtxtStat', val={'T':0x32, 'V':b'\0\0'}, IE=PDPCtxtStat()),
+        Type4TLV('PSLCSCap', val={'T':0x33, 'V':b'\0'}, IE=PSLCSCap()),
+        Type4TLV('MBMSCtxtStat', val={'T':0x35, 'V':b''}, IE=MBMSCtxtStat()),
+        Type4TLV('UENetCap', val={'T':0x58, 'V':b'\0\0'}, IE=UENetCap()),
+        Type4TLV('AddID', val={'T':0x1A, 'V':b'\xf4\0\0\0\0'}, IE=ID()),
+        Type4TLV('AddRAI', val={'T':0x1B, 'V':6*b'\0'}, IE=RAI()),
+        Type4TLV('MSCm2', val={'T':0x11, 'V':b'@\0\0'}, IE=MSCm2()),
+        Type4TLV('MSCm3', val={'T':0x20, 'V':b''}, IE=Classmark_3_Value_part),
+        Type4TLV('SuppCodecs', val={'T':0x40, 'V':b'\0\x01\0'}, IE=SuppCodecList()),
+        Type4TLV('VoiceDomPref', val={'T':0x5D, 'V':b'\0'}, IE=VoiceDomPref()),
+        Type1TV('PTMSIType', val={'T':0xE, 'V':0}, IE=PTMSIType()),
+        Type1TV('DeviceProp', val={'T':0xD, 'V':0}, IE=DeviceProp()),
+        Type1TV('MSNetFeatSupp', val={'T':0xC, 'V':0}, IE=MSNetFeatSupp()),
+        Type4TLV('OldLAI', val={'T':0x14, 'V':5*b'\0'}, IE=LAI()),
+        Type1TV('AddUpdateType', val={'T':0xF, 'V':0}, IE=AddUpdateType()),
+        Type4TLV('TMSIBasedNRICont', val={'T':0x10, 'V':b'\0\0'}, IE=NRICont()),
+        Type4TLV('T3324', val={'T':0x6A, 'V':b'\0'}, IE=GPRSTimer()),
+        Type4TLV('T3312Ext', val={'T':0x39, 'V':b'\0'}, IE=GPRSTimer3()),
+        Type4TLV('ExtDRXParam', val={'T':0x6E, 'V':b'\0'}, IE=ExtDRXParam())
         )
 
 
@@ -386,33 +386,33 @@ class GMMRoutingAreaUpdateAccept(Layer3):
         UpdateResult(),
         GPRSTimer('PeriodicRAUpdateTimer'),
         RAI(),
-        Type3TV('PTMSISign', val={'T':0x19, 'V':b'\0\0\0'}, bl={'V':24}, trans=True),
-        Type4TLV('AllocPTMSI', val={'T':0x18, 'V':b'\xf4\0\0\0\0'}, IE=ID(), trans=True),
-        Type4TLV('MSIdent', val={'T':0x23, 'V':b'\xf4\0\0\0\0'}, IE=ID(), trans=True),
+        Type3TV('PTMSISign', val={'T':0x19, 'V':b'\0\0\0'}, bl={'V':24}),
+        Type4TLV('AllocPTMSI', val={'T':0x18, 'V':b'\xf4\0\0\0\0'}, IE=ID()),
+        Type4TLV('MSIdent', val={'T':0x23, 'V':b'\xf4\0\0\0\0'}, IE=ID()),
         Type4TLV('RcvNPDUNumList', val={'T':0x26, 'V':b'\0\0'},
-            IE=Receive_N_PDU_Number_list_value, trans=True),
-        Type3TV('NegoREADYTimer', val={'T':0x17, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer(), trans=True),
+            IE=Receive_N_PDU_Number_list_value),
+        Type3TV('NegoREADYTimer', val={'T':0x17, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
         Type3TV('GMMCause', val={'T':0x25, 'V':b'\x11'}, bl={'V':8},
-            IE=Uint8('GMMCause', val=0x11, dic=GMMCause_dict), trans=True),
-        Type4TLV('T3302', val={'T':0x2A, 'V':b'\0'}, IE=GPRSTimer(), trans=True),
-        Type2('CellNotif', val={'T':0x8C}, trans=True),
-        Type4TLV('EquivPLMNList', val={'T':0x4A, 'V':3*b'\0'}, IE=PLMNList(), trans=True),
-        Type4TLV('PDPCtxtStat', val={'T':0x32, 'V':b'\0\0'}, IE=PDPCtxtStat(), trans=True),
-        Type1TV('NetFeatSupp', val={'T':0xA, 'V':0}, IE=NetFeatSupp(), trans=True),
-        Type4TLV('EmergNumList', val={'T':0x34, 'V':b'\x02\x01\x00'}, IE=EmergNumList(), trans=True),
-        Type4TLV('MBMSCtxtStat', val={'T':0x35, 'V':b''}, IE=MBMSCtxtStat(), trans=True),
-        Type1TV('ReqMSInfo', val={'T':0xA, 'V':0}, IE=ReqMSInfo(), trans=True),
-        Type4TLV('T3319', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer(), trans=True),
-        Type4TLV('T3323', val={'T':0x38, 'V':b'\0'}, IE=GPRSTimer(), trans=True),
-        Type4TLV('T3312Ext', val={'T':0x39, 'V':b'\0'}, IE=GPRSTimer3(), trans=True),
-        Type4TLV('AddNetFeatSupp', val={'T':0x66, 'V':b'\0'}, IE=AddNetFeatSupp(), trans=True),
-        Type4TLV('T3324', val={'T':0x6A, 'V':b'\0'}, IE=GPRSTimer(), trans=True),
-        Type4TLV('ExtDRXParam', val={'T':0x6E, 'V':b'\0'}, IE=ExtDRXParam(), trans=True),
-        Type1TV('UPIntegrityInd', val={'T':0xC, 'V':0}, IE=UPIntegrityInd(), trans=True),
-        Type4TLV('ReplayedMSNetCap', val={'T':0x31, 'V':b'\0\0'},
-            IE=MS_network_capability_value_part, trans=True),
-        Type4TLV('ReplayedMSRACap', val={'T':0x33, 'V':5*b'\0'},
-            IE=MS_RA_capability_value_part, trans=True)
+            IE=Uint8('GMMCause', val=17, dic=GMMCause_dict)),
+        Type4TLV('T3302', val={'T':0x2A, 'V':b'\0'}, IE=GPRSTimer()),
+        Type2('CellNotif', val={'T':0x8C}),
+        Type4TLV('EquivPLMNList', val={'T':0x4A, 'V':3*b'\0'}, IE=PLMNList()),
+        Type4TLV('PDPCtxtStat', val={'T':0x32, 'V':b'\0\0'}, IE=PDPCtxtStat()),
+        Type1TV('NetFeatSupp', val={'T':0xA, 'V':0}, IE=NetFeatSupp()),
+        Type4TLV('EmergNumList', val={'T':0x34, 'V':b'\x02\x01\0'}, IE=EmergNumList()),
+        Type4TLV('MBMSCtxtStat', val={'T':0x35, 'V':b''}, IE=MBMSCtxtStat()),
+        Type1TV('ReqMSInfo', val={'T':0xA, 'V':0}, IE=ReqMSInfo()),
+        Type4TLV('T3319', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer()),
+        Type4TLV('T3323', val={'T':0x38, 'V':b'\0'}, IE=GPRSTimer()),
+        Type4TLV('T3312Ext', val={'T':0x39, 'V':b'\0'}, IE=GPRSTimer3()),
+        Type4TLV('AddNetFeatSupp', val={'T':0x66, 'V':b'\0'}, IE=AddNetFeatSupp()),
+        Type4TLV('T3324', val={'T':0x6A, 'V':b'\0'}, IE=GPRSTimer()),
+        Type4TLV('ExtDRXParam', val={'T':0x6E, 'V':b'\0'}, IE=ExtDRXParam()),
+        Type1TV('UPIntegrityInd', val={'T':0xC, 'V':0}, IE=UPIntegrityInd()),
+        Type4TLV('MSNetCap', val={'T':0x31, 'V':b'\0\0'},
+            IE=MS_network_capability_value_part),
+        Type4TLV('MSRACap', val={'T':0x33, 'V':5*b'\0'},
+            IE=MS_RA_capability_value_part)
         )
 
 
@@ -424,9 +424,9 @@ class GMMRoutingAreaUpdateAccept(Layer3):
 class GMMRoutingAreaUpdateComplete(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':10})._content) + (
         Type4TLV('RcvNPDUNumList', val={'T':0x26, 'V':b'\0\0'},
-            IE=Receive_N_PDU_Number_list_value, trans=True),
-        Type4TLV('InterRATHOInfo', val={'T':0x27, 'V':b'\0'}, trans=True),
-        Type4TLV('EUTRANInterRATHOInfo', val={'T':0x2B, 'V':b'\0'}, trans=True)
+            IE=Receive_N_PDU_Number_list_value),
+        Type4TLV('InterRATHOInfo', val={'T':0x27, 'V':b'\0'}),
+        Type4TLV('EUTRANInterRATHOInfo', val={'T':0x2B, 'V':b'\0'})
         )
 
 
@@ -437,11 +437,11 @@ class GMMRoutingAreaUpdateComplete(Layer3):
 
 class GMMRoutingAreaUpdateReject(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':11})._content) + (
-        Uint8('GMMCause', val=0x11, dic=GMMCause_dict),
-        Uint('spare', val=0, bl=4),
+        Uint8('GMMCause', val=17, dic=GMMCause_dict),
+        Uint('spare', bl=4),
         ForceStdby(),
-        Type4TLV('T3302', val={'T':0x2A, 'V':b'\0'}, IE=GPRSTimer(), trans=True),
-        Type4TLV('T3346', val={'T':0x3A, 'V':b'\0'}, IE=GPRSTimer(), trans=True)
+        Type4TLV('T3302', val={'T':0x2A, 'V':b'\0'}, IE=GPRSTimer()),
+        Type4TLV('T3346', val={'T':0x3A, 'V':b'\0'}, IE=GPRSTimer())
         )
 
 
@@ -452,7 +452,7 @@ class GMMRoutingAreaUpdateReject(Layer3):
 
 class GMMStatus(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':32})._content) + (
-        Uint8('GMMCause', val=0x11, dic=GMMCause_dict),
+        Uint8('GMMCause', val=17, dic=GMMCause_dict),
         )
 
 
@@ -463,13 +463,13 @@ class GMMStatus(Layer3):
 
 class GMMInformation(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':33})._content) + (
-        Type4TLV('NetFullName', val={'T':0x43, 'V':b'\0'}, IE=NetworkName(), trans=True),
-        Type4TLV('NetShortName', val={'T':0x45, 'V':b'\0'}, IE=NetworkName(), trans=True),
-        Type3TV('LocalTimeZone', val={'T':0x46, 'V':b'\0'}, bl={'V':8}, trans=True),
+        Type4TLV('NetFullName', val={'T':0x43, 'V':b'\0'}, IE=NetworkName()),
+        Type4TLV('NetShortName', val={'T':0x45, 'V':b'\0'}, IE=NetworkName()),
+        Type3TV('LocalTimeZone', val={'T':0x46, 'V':b'\0'}, bl={'V':8}),
         Type3TV('UnivTimeAndTimeZone', val={'T':0x47, 'V':7*b'\0'}, bl={'V':56},
-                IE=TimeZoneTime(), trans=True),
-        Type4TLV('LSAIdentity', val={'T':0x48, 'V':b''}, trans=True),
-        Type4TLV('NetDLSavingTime', val={'T':0x49, 'V':b'\0'}, trans=True)
+                IE=TimeZoneTime()),
+        Type4TLV('LSAIdentity', val={'T':0x48, 'V':b''}),
+        Type4TLV('DLSavingTime', val={'T':0x49, 'V':b'\0'}, IE=DLSavingTime())
         )
 
 
@@ -480,13 +480,13 @@ class GMMInformation(Layer3):
 
 class GMMServiceRequest(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':12})._content) + (
-        Uint('ServiceType', val=0, bl=4, dic=ServiceType_dict),
-        Uint('CKSN', val=0, bl=4, dic=CKSN_dict),
+        Uint('ServiceType', bl=4, dic=ServiceType_dict),
+        Uint('CKSN', bl=4, dic=CKSN_dict),
         Type4LV('PTMSI', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
-        Type4TLV('PDPCtxtStat', val={'T':0x32, 'V':b'\0\0'}, IE=PDPCtxtStat(), trans=True),
-        Type4TLV('MBMSCtxtStat', val={'T':0x35, 'V':b''}, IE=MBMSCtxtStat(), trans=True),
-        Type4TLV('ULDataStat', val={'T':0x36, 'V':b'\0\0'}, IE=ULDataStat(), trans=True),
-        Type1TV('DeviceProp', val={'T':0xD, 'V':0}, IE=DeviceProp(), trans=True)
+        Type4TLV('PDPCtxtStat', val={'T':0x32, 'V':b'\0\0'}, IE=PDPCtxtStat()),
+        Type4TLV('MBMSCtxtStat', val={'T':0x35, 'V':b''}, IE=MBMSCtxtStat()),
+        Type4TLV('ULDataStat', val={'T':0x36, 'V':b'\0\0'}, IE=ULDataStat()),
+        Type1TV('DeviceProp', val={'T':0xD, 'V':0}, IE=DeviceProp())
         )
 
 
@@ -497,8 +497,8 @@ class GMMServiceRequest(Layer3):
 
 class GMMServiceAccept(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':13})._content) + (
-        Type4TLV('PDPCtxtStat', val={'T':0x32, 'V':b'\0\0'}, IE=PDPCtxtStat(), trans=True),
-        Type4TLV('MBMSCtxtStat', val={'T':0x35, 'V':b''}, IE=MBMSCtxtStat(), trans=True),
+        Type4TLV('PDPCtxtStat', val={'T':0x32, 'V':b'\0\0'}, IE=PDPCtxtStat()),
+        Type4TLV('MBMSCtxtStat', val={'T':0x35, 'V':b''}, IE=MBMSCtxtStat()),
         )
 
 
@@ -509,8 +509,8 @@ class GMMServiceAccept(Layer3):
 
 class GMMServiceReject(Layer3):
     _GEN = tuple(GMMHeader(val={'Type':14})._content) + (
-        Uint8('GMMCause', val=0x11, dic=GMMCause_dict),
-        Type4TLV('T3346', val={'T':0x3A, 'V':b'\0'}, IE=GPRSTimer(), trans=True)
+        Uint8('GMMCause', val=17, dic=GMMCause_dict),
+        Type4TLV('T3346', val={'T':0x3A, 'V':b'\0'}, IE=GPRSTimer())
         )
 
 

@@ -1,0 +1,869 @@
+# -*- coding: UTF-8 -*-
+#/**
+# * Software Name : pycrate
+# * Version : 0.2
+# *
+# * Copyright 2017. Benoit Michau. ANSSI.
+# *
+# * This program is free software; you can redistribute it and/or
+# * modify it under the terms of the GNU General Public License
+# * as published by the Free Software Foundation; either version 2
+# * of the License, or (at your option) any later version.
+# * 
+# * This program is distributed in the hope that it will be useful,
+# * but WITHOUT ANY WARRANTY; without even the implied warranty of
+# * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# * GNU General Public License for more details.
+# * 
+# * You should have received a copy of the GNU General Public License
+# * along with this program; if not, write to the Free Software
+# * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+# * 02110-1301, USA.
+# *
+# *--------------------------------------------------------
+# * File Name : pycrate_mobile/TS24301_EMM.py
+# * Created : 2017-10-27
+# * Authors : Benoit Michau 
+# *--------------------------------------------------------
+#*/
+
+#------------------------------------------------------------------------------#
+# 3GPP TS 24.301: NAS protocol for EPS
+# release 13 (da0)
+#------------------------------------------------------------------------------#
+
+from time import time
+
+from pycrate_core.utils import *
+from pycrate_core.elt   import *
+from pycrate_core.base  import *
+
+from .TS24007     import *
+from .TS24008_IE  import *
+from .TS24301_IE  import *
+from .TS24301_ESM import ESMTypeClasses
+
+try:
+    from CryptoMobile import CM
+except:
+    _with_cm = False
+    log('warning: CryptoMobile Python module not found, unable to handle LTE NAS security')
+else:
+    _with_cm = True
+    if hasattr(CM, 'EEA2'):
+        _EIA = {
+            1 : CM.EIA1,
+            2 : CM.EIA2,
+            3 : CM.EIA3
+            }
+        _EEA = {
+            1 : CM.EEA1,
+            2 : CM.EEA2,
+            3 : CM.EEA3
+            }
+    else:
+        _EIA = {
+            1 : CM.EIA1,
+            3 : CM.EIA3
+            }
+        _EEA = {
+            1 : CM.EEA1,
+            3 : CM.EEA3
+            }
+
+
+#------------------------------------------------------------------------------#
+# EPS Mobility Management header
+# TS 24.301, section 9
+#------------------------------------------------------------------------------#
+
+# section 9.8
+_EMM_dict = {
+    # attach / detach
+    65 : "Attach request",
+    66 : "Attach accept",
+    67 : "Attach complete",
+    68 : "Attach reject",
+    69 : "Detach request",
+    70 : "Detach accept",
+    # TAU
+    72 : "Tracking area update request",
+    73 : "Tracking area update accept",
+    74 : "Tracking area update complete",
+    75 : "Tracking area update reject",
+    # serv request
+    76 : "Extended service request",
+    77 : "Control plane service request",
+    78 : "Service reject",
+    79 : "Service accept",
+    # identification / authentication
+    80 : "GUTI reallocation command",
+    81 : "GUTI reallocation complete",
+    82 : "Authentication request",
+    83 : "Authentication response",
+    84 : "Authentication reject",
+    92 : "Authentication failure",
+    85 : "Identity request",
+    86 : "Identity response",
+    93 : "Security mode command",
+    94 : "Security mode complete",
+    95 : "Security mode reject",
+    # misc
+    96 : "EMM status",
+    97 : "EMM information",
+    98 : "Downlink NAS transport",
+    99 : "Uplink NAS transport",
+    100 : "CS Service notification",
+    104 : "Downlink generic NAS transport",
+    105 : "Uplink generic NAS transport"
+    }
+
+class EMMHeader(Envelope):
+    _GEN = (
+        Uint('SecHdr', bl=4, dic=SecHdrType_dict),
+        Uint('ProtDisc', val=7, bl=4, dic=ProtDisc_dict),
+        Uint8('Type', val=96, dic=_EMM_dict)
+        )
+
+class Layer3EMM(Layer3):
+    
+    # to decode inner ESM container, when present
+    DECODE_ESM = True
+    
+    def _from_char(self, char):
+        Layer3._from_char(char)
+        Type = self[2].get_val()
+        if Type in (65, 66, 67, 68, 77):
+            esmc = self['ESMContainer']
+            if not esmc.get_trans():
+                esmbuf = esmc['V'].get_val()
+                
+    
+
+#------------------------------------------------------------------------------#
+# Attach accept
+# TS 24.301, section 8.2.1
+#------------------------------------------------------------------------------#
+
+class EMMAttachAccept(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':66})._content) + (
+        Uint('spare', bl=4),
+        EPSAttachResult(),
+        GPRSTimer('T3412'),
+        Type4LV('TAIList', val={'V':6*b'\0'}, IE=TAIList()),
+        Type6LVE('ESMContainer', val={'V':b'\0\0\0'}),
+        Type4TLV('GUTI', val={'T':0x50, 'V':b'\xf6'+10*b'\0'}, IE=EPSID()),
+        Type3TV('LAI', val={'T':0x13, 'V':5*b'\0'}, bl={'V':40}, IE=LAI()),
+        Type4TLV('ID', val={'T':0x23, 'V':b'\xf4\0\0\0\0'}, IE=ID()),
+        Type3TV('EMMCause', val={'T':0x53, 'V':b'\0'}, bl={'V':8}, IE=EMMCause()),
+        Type3TV('T3402', val={'T':0x17, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
+        Type3TV('T3423', val={'T':0x59, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
+        Type4TLV('EquivPLMNList', val={'T':0x4A, 'V':3*b'\0'}, IE=PLMNList()),
+        Type4TLV('EmergNumList', val={'T':0x34, 'V':b'\x02\x01\0'}, IE=EmergNumList()),
+        Type4TLV('EPSNetFeat', val={'T':0x64, 'V':b'\0\0'}, IE=EPSNetFeat()),
+        Type1TV('AddUpdateRes', val={'T':0xF, 'V':0}, IE=AddUpdateRes()),
+        Type4TLV('T3412Ext', val={'T':0x5E, 'V':b'\0'}, IE=GPRSTimer3()),
+        Type4TLV('T3324', val={'T':0x6A, 'V':b'\0'}, IE=GPRSTimer()),
+        Type4TLV('ExtDRXParam', val={'T':0x6E, 'V':b'\0'}, IE=ExtDRXParam()),
+        Type1TV('SMSServStat', val={'T':0xE, 'V':0}, IE=SMSServStat())
+        )
+
+#------------------------------------------------------------------------------#
+# Attach complete
+# TS 24.301, section 8.2.2
+#------------------------------------------------------------------------------#
+
+class EMMAttachComplete(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':67})._content) + (
+        Type6LVE('ESMContainer', val={'V':b'\0\0\0'}),
+        )
+
+
+#------------------------------------------------------------------------------#
+# Attach reject
+# TS 24.301, section 8.2.3
+#------------------------------------------------------------------------------#
+
+class EMMAttachReject(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':68})._content) + (
+        EMMCause(),
+        Type6TLVE('ESMContainer', val={'T':0x78, 'V':b'\0\0\0'}),
+        Type4TLV('T3346', val={'T':0x5F, 'V':b'\0'}, IE=GPRSTimer()),
+        Type4TLV('T3402', val={'T':0x16, 'V':b'\0'}, IE=GPRSTimer()),
+        Type1TV('ExtEMMCause', val={'T':0xA, 'V':0}, IE=ExtEMMCause())
+        )
+
+
+#------------------------------------------------------------------------------#
+# Attach request
+# TS 24.301, section 8.2.4
+#------------------------------------------------------------------------------#
+
+class EMMAttachRequest(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':65})._content) + (
+        NAS_KSI(),
+        EPSAttachType(),
+        Type4LV('EPSID', val={'V':b'\xf6'+10*b'\0'}, IE=EPSID()),
+        Type4LV('UENetCap', val={'V':b'\0\0'}, IE=UENetCap()),
+        Type6LVE('ESMContainer', val={'V':b'\0\0\0'}),
+        Type3TV('OldPTMSISign', val={'T':0x19, 'V':b'\0\0\0'}, bl={'V':24}),
+        Type4TLV('AddGUTI', val={'T':0x50, 'V':b'\xf6'+10*b'\0'}, IE=EPSID()),
+        Type3TV('OldTAI', val={'T':0x52, 'V':5*b'\0'}, bl={'V':40}, IE=TAI()),
+        Type3TV('DRXParam', val={'T':0x5C, 'V':b'\0\0'}, bl={'V':16}, IE=DRXParam()),
+        Type4TLV('MSNetCap', val={'T':0x31, 'V':b'\0\0'}, IE=MS_network_capability_value_part),
+        Type3TV('OldLAI', val={'T':0x13, 'V':5*b'\0'}, bl={'V':40}, IE=LAI()),
+        Type1TV('TMSIStatus', val={'T':0x9, 'V':0}, IE=TMSIStatus()),
+        Type4TLV('MSCm2', val={'T':0x11, 'V':b'@\0\0'}, IE=MSCm2()),
+        Type4TLV('MSCm3', val={'T':0x20, 'V':b''}, IE=Classmark_3_Value_part),
+        Type4TLV('SuppCodecs', val={'T':0x40, 'V':b'\0\x01\0'}, IE=SuppCodecList()),
+        Type1TV('AddUpdateType', val={'T':0xF, 'V':0}, IE=AddUpdateType()),
+        Type4TLV('VoiceDomPref', val={'T':0x5D, 'V':b'\0'}, IE=VoiceDomPref()),
+        Type1TV('DeviceProp', val={'T':0xD, 'V':0}, IE=DeviceProp()),
+        Type1TV('OldGUTIType', val={'T':0xE, 'V':0}, IE=GUTIType()),
+        Type1TV('MSNetFeatSupp', val={'T':0xC, 'V':0}, IE=MSNetFeatSupp()),
+        Type4TLV('TMSIBasedNRICont', val={'T':0x10, 'V':b'\0\0'}, IE=NRICont()),
+        Type4TLV('T3324', val={'T':0x6A, 'V':b'\0'}, IE=GPRSTimer()),
+        Type4TLV('T3412Ext', val={'T':0x5E, 'V':b'\0'}, IE=GPRSTimer3()),
+        Type4TLV('ExtDRXParam', val={'T':0x6E, 'V':b'\0'}, IE=ExtDRXParam())
+        )
+
+
+#------------------------------------------------------------------------------#
+# Authentication failure 
+# TS 24.301, section 8.2.5
+#------------------------------------------------------------------------------#
+
+class EMMAuthenticationFailure(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':92})._content) + (
+        EMMCause(),
+        Type4TLV('AUTS', val={'T':0x30, 'V':14*b'\0'})
+        )
+
+
+#------------------------------------------------------------------------------#
+# Authentication reject
+# TS 24.301, section 8.2.6
+#------------------------------------------------------------------------------#
+
+class EMMAuthenticationReject(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':84})._content)
+
+
+#------------------------------------------------------------------------------#
+# Authentication request
+# TS 24.301, section 8.2.7
+#------------------------------------------------------------------------------#
+
+class EMMAuthenticationRequest(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':82})._content) + (
+        Uint('spare', bl=4),
+        NAS_KSI(),
+        Buf('RAND', val=16* b'\0', bl=128, rep=REPR_HEX),
+        Type4LV('AUTN', val={'V':16*b'\0'}, IE=AUTN()),
+        )
+
+
+#------------------------------------------------------------------------------#
+# Authentication response
+# TS 24.301, section 8.2.8
+#------------------------------------------------------------------------------#
+
+class EMMAuthenticationResponse(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':83})._content) + (
+        Type4LV('RES', val={'V':8*b'\0'}),
+        )
+
+
+#------------------------------------------------------------------------------#
+# CS service notification
+# TS 24.301, section 8.2.9
+#------------------------------------------------------------------------------#
+
+class EMMCSServiceNotification(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':100})._content) + (
+        PagingIdentity(),
+        Type4TLV('CLI', val={'T':0x60, 'V':b'\x91'}, IE=CallingPartyBCDNumber()),
+        Type3TV('SSCode', val={'T':0x61, 'V':b'\0'}, bl={'V':8}, IE=SSCode()),
+        Type3TV('LCSInd', val={'T':0x62, 'V':b'\x01'}, bl={'V':8}, IE=LCSInd()),
+        Type4TLV('LCSClientId', val={'T':0x63, 'V':b''}, IE=LCSClientId())
+        )
+
+
+#------------------------------------------------------------------------------#
+# Detach accept
+# TS 24.301, 8.2.10
+#------------------------------------------------------------------------------#
+
+class EMMDetachAccept(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':70})._content)
+
+
+#------------------------------------------------------------------------------#
+# Detach request (UE originating detach)
+# TS 24.301, section 8.2.11.1
+#------------------------------------------------------------------------------#
+
+class EMMDetachRequestMO(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':69})._content) + (
+        NAS_KSI(),
+        EPSDetachTypeMO(),
+        Type4LV('EPSID', val={'V':b'\xf6'+10*b'\0'}, IE=EPSID())
+        )
+
+
+#------------------------------------------------------------------------------#
+# Detach request (UE terminated detach)
+# TS 24.301, section 8.2.11.2
+#------------------------------------------------------------------------------#
+
+class EMMDetachRequestMT(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':69})._content) + (
+        Uint('spare', bl=4),
+        EPSDetachTypeMT(),
+        Type3TV('EMMCause', val={'T':0x53, 'V':b'\0'}, bl={'V':8}, IE=EMMCause())
+        )
+
+
+#------------------------------------------------------------------------------#
+# Downlink NAS Transport
+# TS 24.301, section 8.2.12
+#------------------------------------------------------------------------------#
+
+class EMMDLNASTransport(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':98})._content) + (
+        Type4LV('NASContainer', val={'V':b'\0\0'}),
+        )
+
+
+#------------------------------------------------------------------------------#
+# EMM information
+# TS 24.301, section 8.2.13
+#------------------------------------------------------------------------------#
+
+class EMMInformation(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':97})._content) + (
+        Type4TLV('NetFullName', val={'T':0x43, 'V':b'\0'}, IE=NetworkName()),
+        Type4TLV('NetShortName', val={'T':0x45, 'V':b'\0'}, IE=NetworkName()),
+        Type3TV('LocalTimeZone', val={'T':0x46, 'V':b'\0'}, bl={'V':8}, IE=TimeZone()),
+        Type3TV('UnivTimeAndTimeZone', val={'T':0x47, 'V':7*b'\0'}, bl={'V':56},
+                IE=TimeZoneTime()),
+        Type4TLV('DLSavingTime', val={'T':0x49, 'V':b'\0'}, IE=DLSavingTime())
+        )
+
+
+#------------------------------------------------------------------------------#
+# EMM status
+# TS 24.301, section 8.2.14
+#------------------------------------------------------------------------------#
+
+class EMMStatus(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':96})._content) + (
+        EMMCause(),
+        )
+
+
+#------------------------------------------------------------------------------#
+# Extended service request
+# TS 24.301, section 8.2.15
+#------------------------------------------------------------------------------#
+
+class EMMExtServiceRequest(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':76})._content) + (
+        NAS_KSI(),
+        Uint('ServiceType', bl=4, dic=EMMServType_dict),
+        Type4LV('MTMSI', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
+        Type1TV('CSFBResponse', val={'T':0xB, 'V':0}, IE=CSFBResponse()),
+        Type4TLV('EPSBearerCtxtStat', val={'T':0x57, 'V':b'\0\0'}, IE=EPSBearerCtxtStat()),
+        Type1TV('DeviceProp', val={'T':0xD, 'V':0}, IE=DeviceProp())
+        )
+
+
+#------------------------------------------------------------------------------#
+# GUTI reallocation command
+# TS 24.301, section 8.2.16
+#------------------------------------------------------------------------------#
+
+class EMMGUTIReallocCommand(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':80})._content) + (
+        Type4LV('GUTI', val={'V':b'\xf6'+10*b'\0'}, IE=EPSID()),
+        Type4TLV('TAIList', val={'T':0x54, 'V':6*b'\0'}, IE=TAIList())
+        )
+
+
+#------------------------------------------------------------------------------#
+# GUTI reallocation complete
+# TS 24.301, section 8.2.17
+#------------------------------------------------------------------------------#
+
+class EMMGUTIReallocComplete(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':81})._content)
+
+
+#------------------------------------------------------------------------------#
+# Identity request
+# TS 24.301, section 8.2.18
+#------------------------------------------------------------------------------#
+
+class EMMIdentityRequest(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':85})._content) + (   
+        Uint('spare', bl=4),
+        Uint('IDType', val=1, bl=4, dic=IDType_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Identity response
+# TS 24.301, section 8.2.19
+#------------------------------------------------------------------------------#
+
+class EMMIdentityResponse(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':86})._content) + (
+        Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
+        )
+
+
+#------------------------------------------------------------------------------#
+# Security mode command
+# TS 24.301, section 8.2.20
+#------------------------------------------------------------------------------#
+
+class EMMSecurityModeCommand(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':93})._content) + (
+        NASSecAlgo(),
+        Uint('spare', bl=4),
+        NAS_KSI(),
+        Type4LV('UESecCap', val={'V':b'\0\0'}, IE=UESecCap()),
+        Type1TV('IMEISVReq', val={'T':0xC, 'V':0}),
+        Type3TV('NonceUE', val={'T':0x55, 'V':4*b'\0'}, bl={'V':32}),
+        Type3TV('NonceMME', val={'T':0x56, 'V':4*b'\0'}, bl={'V':32})
+        )
+
+
+#------------------------------------------------------------------------------#
+# Security mode complete
+# TS 24.301, section 8.2.21
+#------------------------------------------------------------------------------#
+
+class EMMSecurityModeComplete(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':94})._content) + (
+        Type4TLV('IMEISV', val={'T':0x23, 'V':b'\x03\0\0\0\0\0\0\0\xf0'}, IE=ID()),
+        )
+
+
+#------------------------------------------------------------------------------#
+# Security mode reject
+# TS 24.301, section 8.2.22
+#------------------------------------------------------------------------------#
+
+class EMMSecurityModeReject(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':95})._content) + (
+        EMMCause(),
+        )
+
+
+#------------------------------------------------------------------------------#
+# Security protected NAS message
+# TS 24.301, section 8.2.23
+#------------------------------------------------------------------------------#
+
+if _with_cm:
+    
+    class EMMSecProtNASMessage(Layer3):
+        _GEN = (
+            Uint('SecHdr', val=1, bl=4, dic=SecHdrType_dict),
+            Uint('ProtDisc', val=7, bl=4, dic=ProtDisc_dict),
+            Buf('MAC', val=b'\0\0\0\0', bl=32, rep=REPR_HEX),
+            Uint8('Seqn'),
+            Buf('NASMessage')
+            )
+        
+        def mac_verify(self, key=16*b'\0', dir=0, eia=0):
+            """compute the MAC of the NASMessage using Seqn, key, direction and eia,
+            and verify against the embedded MAC value
+            
+            Args:
+                key: 16 bytes buffer, K_nas_int
+                dir: 0 for uplink, 1 for downlink
+                eia: 0 to 3, reference to EIA algorithm
+            
+            Returns:
+                True if embedded MAC is correct, False otherwise
+            """
+            if eia == 0:
+                return True
+            shdr = self[0]()
+            if shdr == 0:
+                return True
+            elif shdr in (1, 2, 3, 4):
+                try:
+                    EIA = _EIA[eia]
+                except KeyError:
+                    raise(PycrateErr('EMMSecProtNASMessage.mac_verify(): invalid EIA identifier, {0}'\
+                          .format(eia)))
+                mac = EIA(key, self[3](), 0, dir, self[3].to_bytes() + self[4].to_bytes())
+                return mac == self[2].get_val()
+            else:
+                raise(PycrateErr('EMMSecProtNASMessage.mac_verify(): invalid sec hdr value, {0}'\
+                      .format(shdr)))
+        
+        def mac_compute(self, key=16*b'\0', dir=0, eia=0):
+            """compute the MAC of the NASMessage using Seqn, key, direction and eia,
+            and set the embedded MAC value with it
+            
+            Args:
+                key: 16 bytes buffer, K_nas_int
+                dir: 0 for uplink, 1 for downlink
+                eia: 0 to 3, reference to EIA algorithm
+            
+            Returns:
+                None
+            """
+            if eia == 0:
+                self[2].set_val(b'\0\0\0\0')
+            shdr = self[0]()
+            if shdr == 0:
+                self[2].set_val(b'\0\0\0\0')
+            elif shdr in (1, 2, 3, 4):
+                try:
+                    EIA = _EIA[eia]
+                except KeyError:
+                    raise(PycrateErr('EMMSecProtNASMessage.mac_compute(): invalid EIA identifier, {0}'\
+                          .format(eia)))
+                mac = EIA(key, self[3](), 0, dir, self[3].to_bytes() + self[4].to_bytes())
+                self[2].set_val(mac)
+            else:
+                raise(PycrateErr('EMMSecProtNASMessage.mac_compute(): invalid sec hdr value, {0}'\
+                      .format(shdr)))
+        
+        def encrypt(self, key=16*b'\0', dir=0, eea=0):
+            """encrypt the NASMessage in place using Seqn, key, direction and eea,
+            
+            Args:
+                key: 16 bytes buffer, K_nas_enc
+                dir: 0 for uplink, 1 for downlink
+                eea: 0 to 3, reference to EEA algorithm
+            
+            Returns:
+                None
+            """
+            if eea == 0:
+                return
+            shdr = self[0]()
+            if shdr in (0, 1, 3):
+                return
+            elif shdr in (2, 4):
+                try:
+                    EEA = _EEA[eea]
+                except KeyError:
+                    raise(PycrateErr('EMMSecProtNASMessage.encrypt(): invalid EEA identifier, {0}'\
+                          .format(eea)))
+                enc = EEA(key, self[3](), 0, dir, self[4].to_bytes())
+                self[4].set_val(enc)
+            else:
+                raise(PycrateErr('EMMSecProtNASMessage.encrypt(): invalid sec hdr value, {0}'\
+                      .format(shdr)))
+        
+        def decrypt(self, key=16*b'\0', dir=0, eea=0):
+            """decrypt the NASMessage in place using Seqn, key, direction and eea,
+            and decode the NASMessage content
+            
+            Args:
+                key: 16 bytes buffer, K_nas_enc
+                dir: 0 for uplink, 1 for downlink
+                eea: 0 to 3, reference to EEA algorithm
+            
+            Returns:
+                None
+            """
+            if eea == 0:
+                return
+            shdr = self[0]()
+            if shdr in (0, 1, 3):
+                return
+            elif shdr in (2, 4):
+                try:
+                    EEA = _EEA[eea]
+                except KeyError:
+                    raise(PycrateErr('EMMSecProtNASMessage.decrypt(): invalid EEA identifier, {0}'\
+                          .format(eea)))
+                enc = EEA(key, self[3](), 0, dir, self[4].to_bytes())
+                self[4].set_val(enc)
+            else:
+                raise(PycrateErr('EMMSecProtNASMessage.decrypt(): invalid sec hdr value, {0}'\
+                      .format(shdr)))
+
+else:
+    
+    class EMMSecProtNASMessage(Layer3):
+        _GEN = (
+            Uint('SecHdr', val=1, bl=4, dic=SecHdrType_dict),
+            Uint('ProtDisc', val=7, bl=4, dic=ProtDisc_dict),
+            Buf('MAC', val=b'\0\0\0\0', bl=32, rep=REPR_HEX),
+            Uint8('Seqn'),
+            Buf('NASMessage')
+            )
+
+
+#------------------------------------------------------------------------------#
+# Service reject
+# TS 24.301, section 8.2.24
+#------------------------------------------------------------------------------#
+
+class EMMServiceReject(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':78})._content) + (
+        EMMCause(),
+        Type3TV('T3442', val={'T':0x5B, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
+        Type4TLV('T3346', val={'T':0x5C, 'V':b'\0'}, IE=GPRSTimer())
+        )
+
+
+#------------------------------------------------------------------------------#
+# Service request
+# TS 24.301, section 8.2.25
+#------------------------------------------------------------------------------#
+
+class EMMServiceRequest(Layer3):
+    _GEN = (
+        Uint('SecHdr', val=1, bl=4, dic=SecHdrType_dict),
+        Uint('ProtDisc', val=7, bl=4, dic=ProtDisc_dict),
+        Uint('KSI', bl=3, dic={7:'no key available'}),
+        Uint('SeqnShort', bl=5),
+        Buf('MACShort', val=b'\0\0', bl=16, rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Tracking area update accept
+# TS 24.301, section 8.2.26
+#------------------------------------------------------------------------------#
+
+class EMMTrackingAreaUpdateAccept(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':73})._content) + (
+        Uint('spare', bl=4),
+        EPSUpdateResult(),
+        Type3TV('T3412', val={'T':0x5A, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
+        Type4TLV('GUTI', val={'T':0x50, 'V':b'\xf6'+10*b'\0'}, IE=EPSID()),
+        Type4TLV('TAIList', val={'T':0x54, 'V':6*b'\0'}, IE=TAIList()),
+        Type4TLV('EPSBearerCtxtStat', val={'T':0x57, 'V':b'\0\0'}, IE=EPSBearerCtxtStat()),
+        Type3TV('LAI', val={'T':0x13, 'V':5*b'\0'}, bl={'V':40}, IE=LAI()),
+        Type4TLV('ID', val={'T':0x23, 'V':b'\xf4\0\0\0\0'}, IE=ID()),
+        Type3TV('EMMCause', val={'T':0x53, 'V':b'\0'}, bl={'V':8}, IE=EMMCause()),
+        Type3TV('T3402', val={'T':0x17, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
+        Type3TV('T3423', val={'T':0x59, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
+        Type4TLV('EquivPLMNList', val={'T':0x4A, 'V':3*b'\0'}, IE=PLMNList()),
+        Type4TLV('EmergNumList', val={'T':0x34, 'V':b'\x02\x01\0'}, IE=EmergNumList()),
+        Type4TLV('EPSNetFeat', val={'T':0x64, 'V':b'\0\0'}, IE=EPSNetFeat()),
+        Type1TV('AddUpdateRes', val={'T':0xF, 'V':0}, IE=AddUpdateRes()),
+        Type4TLV('T3412Ext', val={'T':0x5E, 'V':b'\0'}, IE=GPRSTimer3()),
+        Type4TLV('T3324', val={'T':0x6A, 'V':b'\0'}, IE=GPRSTimer()),
+        Type4TLV('ExtDRXParam', val={'T':0x6E, 'V':b'\0'}, IE=ExtDRXParam()),
+        Type4TLV('HdrCompConfigStat', val={'T':0x68, 'V':b'\0\0'}, IE=HdrCompConfigStat()),
+        Type1TV('SMSServStat', val={'T':0xE, 'V':0}, IE=SMSServStat())
+        )
+
+
+#------------------------------------------------------------------------------#
+# Tracking area update complete
+# TS 24.301, section 8.2.27
+#------------------------------------------------------------------------------#
+
+class EMMTrackingAreaUpdateComplete(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':74})._content)
+
+
+#------------------------------------------------------------------------------#
+# Tracking area update reject
+# TS 24.301, section 8.2.28
+#------------------------------------------------------------------------------#
+
+class EMMTrackingAreaUpdateReject(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':75})._content) + (
+        EMMCause(),
+        Type4TLV('T3346', val={'T':0x5F, 'V':b'\0'}, IE=GPRSTimer()),
+        Type1TV('ExtEMMCause', val={'T':0xA, 'V':0}, IE=ExtEMMCause())
+        )
+
+
+#------------------------------------------------------------------------------#
+# Tracking area update request
+# TS 24.301, section 8.2.29
+#------------------------------------------------------------------------------#
+
+class EMMTrackingAreaUpdateRequest(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':72})._content) + (
+        NAS_KSI(),
+        EPSUpdateType(),
+        Type4LV('OldGUTI', val={'V':b'\xf6'+10*b'\0'}, IE=EPSID()),
+        Type1TV('Native_NAS_KSI', val={'T':0xB, 'V':0}, IE=NAS_KSI()),
+        Type1TV('GPRS_CKSN', val={'T':0x8, 'V':0}, dic=CKSN_dict),
+        Type3TV('OldPTMSISign', val={'T':0x19, 'V':b'\0\0\0'}, bl={'V':24}),
+        Type4TLV('AddGUTI', val={'T':0x50, 'V':b'\xf6'+10*b'\0'}, IE=EPSID()),
+        Type3TV('NonceUE', val={'T':0x55, 'V':4*b'\0'}, bl={'V':32}),
+        Type4TLV('UENetCap', val={'T':0x58, 'V':b'\0\0'}, IE=UENetCap()),
+        Type3TV('OldTAI', val={'T':0x52, 'V':5*b'\0'}, bl={'V':40}, IE=TAI()),
+        Type3TV('DRXParam', val={'T':0x5C, 'V':b'\0\0'}, bl={'V':16}, IE=DRXParam()),
+        Type1TV('UERACapUpdateNeed', val={'T':0xA, 'V':0}),
+        Type4TLV('EPSBearerCtxtStat', val={'T':0x57, 'V':b'\0\0'}, IE=EPSBearerCtxtStat()),
+        Type4TLV('MSNetCap', val={'T':0x31, 'V':b'\0\0'}, IE=MS_network_capability_value_part),
+        Type3TV('OldLAI', val={'T':0x13, 'V':5*b'\0'}, bl={'V':40}, IE=LAI()),
+        Type1TV('TMSIStatus', val={'T':0x9, 'V':0}, IE=TMSIStatus()),
+        Type4TLV('MSCm2', val={'T':0x11, 'V':b'@\0\0'}, IE=MSCm2()),
+        Type4TLV('MSCm3', val={'T':0x20, 'V':b''}, IE=Classmark_3_Value_part),
+        Type4TLV('SuppCodecs', val={'T':0x40, 'V':b'\0\x01\0'}, IE=SuppCodecList()),
+        Type1TV('AddUpdateType', val={'T':0xF, 'V':0}, IE=AddUpdateType()),
+        Type4TLV('VoiceDomPref', val={'T':0x5D, 'V':b'\0'}, IE=VoiceDomPref()),
+        Type1TV('OldGUTIType', val={'T':0xE, 'V':0}, IE=GUTIType()),
+        Type1TV('DeviceProp', val={'T':0xD, 'V':0}, IE=DeviceProp()),
+        Type1TV('MSNetFeatSupp', val={'T':0xC, 'V':0}, IE=MSNetFeatSupp()),
+        Type4TLV('TMSIBasedNRICont', val={'T':0x10, 'V':b'\0\0'}, IE=NRICont()),
+        Type4TLV('T3324', val={'T':0x6A, 'V':b'\0'}, IE=GPRSTimer()),
+        Type4TLV('T3412Ext', val={'T':0x5E, 'V':b'\0'}, IE=GPRSTimer3()),
+        Type4TLV('ExtDRXParam', val={'T':0x6E, 'V':b'\0'}, IE=ExtDRXParam())
+        )
+
+
+#------------------------------------------------------------------------------#
+# Uplink NAS transport
+# TS 24.301, section 8.2.30
+#------------------------------------------------------------------------------#
+
+class EMMULNASTransport(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':99})._content) + (
+        Type4LV('NASContainer', val={'V':b'\0\0'}),
+        )
+
+
+#------------------------------------------------------------------------------#
+# Downlink generic NAS transport
+# TS 24.301, section 8.2.31
+#------------------------------------------------------------------------------#
+
+class EMMDLGenericNASTransport(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':104})._content) + (
+        Uint8('GenericContType', dic=GenericContType_dict),
+        Type6LVE('GenericContainer', val={'V':b'\0\0'}),
+        Type4TLV('AddInfo', val={'T':0x65, 'V':b'\0'})
+        )
+
+
+#------------------------------------------------------------------------------#
+# Uplink generic NAS transport
+# TS 24.301, section 8.2.32
+#------------------------------------------------------------------------------#
+
+class EMMULGenericNASTransport(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':105})._content) + (
+        Uint8('GenericContType', dic=GenericContType_dict),
+        Type6LVE('GenericContainer', val={'V':b'\0\0'}),
+        Type4TLV('AddInfo', val={'T':0x65, 'V':b'\0'})
+        )
+
+
+#------------------------------------------------------------------------------#
+# Control plane service request
+# TS 24.301, section 8.2.33
+#------------------------------------------------------------------------------#
+
+class EMMCPServiceRequest(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':77})._content) + (
+        NAS_KSI(),
+        CPServiceType(),
+        Type6TLVE('ESMContainer', val={'T':0x78, 'V':b'\0'}),
+        Type4TLV('NASContainer', val={'T':0x67, 'V':b'\0\0'}),
+        Type4TLV('EPSBearerCtxtStat', val={'T':0x57, 'V':b'\0\0'}, IE=EPSBearerCtxtStat()),
+        Type1TV('DeviceProp', val={'T':0xD, 'V':0}, IE=DeviceProp())
+        )
+
+
+#------------------------------------------------------------------------------#
+# Service accept
+# TS 24.301, section 8.2.34
+#------------------------------------------------------------------------------#
+
+class EMMServiceAccept(Layer3):
+    _GEN = tuple(EMMHeader(val={'Type':79})._content) + (
+        Type4TLV('EPSBearerCtxtStat', val={'T':0x57, 'V':b'\0\0'}, IE=EPSBearerCtxtStat()),
+        )
+
+
+#------------------------------------------------------------------------------#
+# EMM dispatcher
+#------------------------------------------------------------------------------#
+# special EMM messages: EMMSecProtNASMessage, EMMServiceRequest
+
+EMMTypeMOClasses = {
+    65 : EMMAttachRequest,
+    66 : EMMAttachAccept,
+    67 : EMMAttachComplete,
+    68 : EMMAttachReject,
+    69 : EMMDetachRequestMO,
+    70 : EMMDetachAccept,
+    72 : EMMTrackingAreaUpdateRequest,
+    73 : EMMTrackingAreaUpdateAccept,
+    74 : EMMTrackingAreaUpdateComplete,
+    75 : EMMTrackingAreaUpdateReject,
+    76 : EMMExtServiceRequest,
+    77 : EMMCPServiceRequest,
+    78 : EMMServiceReject,
+    79 : EMMServiceAccept,
+    80 : EMMGUTIReallocCommand,
+    81 : EMMGUTIReallocComplete,
+    82 : EMMAuthenticationRequest,
+    83 : EMMAuthenticationResponse,
+    84 : EMMAuthenticationReject,
+    92 : EMMAuthenticationFailure,
+    85 : EMMIdentityRequest,
+    86 : EMMIdentityResponse,
+    93 : EMMSecurityModeCommand,
+    94 : EMMSecurityModeComplete,
+    95 : EMMSecurityModeReject,
+    96 : EMMStatus,
+    97 : EMMInformation,
+    98 : EMMDLNASTransport,
+    99 : EMMULNASTransport,
+    100 : EMMCSServiceNotification,
+    104 : EMMDLGenericNASTransport,
+    105 : EMMULGenericNASTransport
+    }
+
+EMMTypeMTClasses = {
+    65 : EMMAttachRequest,
+    66 : EMMAttachAccept,
+    67 : EMMAttachComplete,
+    68 : EMMAttachReject,
+    69 : EMMDetachRequestMT,
+    70 : EMMDetachAccept,
+    72 : EMMTrackingAreaUpdateRequest,
+    73 : EMMTrackingAreaUpdateAccept,
+    74 : EMMTrackingAreaUpdateComplete,
+    75 : EMMTrackingAreaUpdateReject,
+    76 : EMMExtServiceRequest,
+    77 : EMMCPServiceRequest,
+    78 : EMMServiceReject,
+    79 : EMMServiceAccept,
+    80 : EMMGUTIReallocCommand,
+    81 : EMMGUTIReallocComplete,
+    82 : EMMAuthenticationRequest,
+    83 : EMMAuthenticationResponse,
+    84 : EMMAuthenticationReject,
+    92 : EMMAuthenticationFailure,
+    85 : EMMIdentityRequest,
+    86 : EMMIdentityResponse,
+    93 : EMMSecurityModeCommand,
+    94 : EMMSecurityModeComplete,
+    95 : EMMSecurityModeReject,
+    96 : EMMStatus,
+    97 : EMMInformation,
+    98 : EMMDLNASTransport,
+    99 : EMMULNASTransport,
+    100 : EMMCSServiceNotification,
+    104 : EMMDLGenericNASTransport,
+    105 : EMMULGenericNASTransport
+    }
+
+def get_emm_msg_mo_instances():
+    return {k: EMMTypeMOClasses[k]() for k in EMMTypeMOClasses}
+
+def get_emm_msg_mt_instances():
+    return {k: EMMTypeMTClasses[k]() for k in EMMTypeMTClasses}
+

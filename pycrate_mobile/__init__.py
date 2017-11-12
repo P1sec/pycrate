@@ -28,5 +28,6 @@
 __all__ = ['GSMTAP', 'MCC_MNC',
            'TS24007',
            'TS24008_IE', 'TS24008_MM', 'TS24008_GMM', 'TS24008_CC', 'TS24008_SM',
+           'TS23038', 'TS23040_SMS', 'TS24011_PPSMS',
            'TS24301_IE', 'TS24301_NAS', 'TS24301_EMM', 'TS24301_ESM']
 __version__ = '0.2.0'
