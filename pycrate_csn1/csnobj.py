@@ -265,7 +265,10 @@ class CSN1Obj(Element):
         # this is required to support .bin() and .hex()
         # we use _to_pack() because counting bits for CSN1Alt depends on the
         # value set and needs value propagation and so on... and it's hard...
-        return sum([p[2] for p in self._to_pack()])
+        if self._val is None:
+            return 0
+        else:
+            return sum([p[2] for p in self._to_pack()])
     
     def from_bytes(self, buf):
         if isinstance(buf, bytes_types):
@@ -275,7 +278,10 @@ class CSN1Obj(Element):
         self._from_char(char)
     
     def to_bytes(self):
-        return pack_val( *self._to_pack() )[0]
+        if self._val is None:
+            return b''
+        else:
+            return pack_val( *self._to_pack() )[0]
     
     # TODO: implement _from_char / _to_pack methods building structures
     # with Envelope() and Atom() elements... hard work
