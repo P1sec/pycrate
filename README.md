@@ -229,17 +229,25 @@ This dubdirectory contains some CSN.1 structures extracted from 3GPP specificati
 pycrate_mobile
 --------------
 
-This subdirectory implements several 3GPP NAS protocol formats:
-* *GSMTAP* with the gsmtap header format
-* *MCC_MNC* with dictionnaries for MCC and MNC look-ups
-* *NAS* providing two functions to parse uplink and downlink mobile NAS messages
-* *TS24007* with basic formats from the TS 24.007 specification
-* *TS24008_IE* with formats supporting many information elements from TS 24.008
-* *TS24008_MM* with formats for encoding / decoding mobility management messages from TS 24.008
-* *TS24008_CC* with formats for encoding / decoding call control messages from TS 24.008
-* *TS24008_GMM* with formats for encoding / decoding GPRS mobility management messages from TS 24.008
-* *TS24008_SM* with formats for encoding / decoding GPRS session management messages from TS 24.008
-* *TS24301_IE* with formats supporting some information elements from TS 24.301
+This subdirectory implements most of the 3GPP NAS protocol formats:
+* *GSMTAP*: gsmtap header format
+* *MCC_MNC*: dictionnaries for MCC and MNC look-ups
+* *NAS*: provides two functions to parse any uplink and downlink mobile NAS messages
+* *NASLTE*: provides two functions to parse LTE uplink and downlink NAS messages
+* *PPP*: structures for NCP and LCP protocols used for PPP connection estabishment
+* *TS23038*: structures and routines for SMS encoding
+* *TS23040*: structures for the SMS transport protocol
+* *TS24007*: basic structures from the TS 24.007 specification, reused in most of the NAS protocols
+* *TS24008_CC* : structures for call control messages from TS 24.008
+* *TS24008_GMM*: structures for GPRS mobility management messages from TS 24.008
+* *TS24008_IE*: structures for many information elements from TS 24.008
+* *TS24008_MM*: structures for mobility management messages from TS 24.008
+* *TS24008_SM*: structures for GPRS session management messages from TS 24.008
+* *TS24011_PPSMS*: structures for the SMS point-to-point protocol
+* *TS24080_SS*: structures for the Supplementary Services protocol, wrapping some MAP ASN.1 objects
+* *TS24301_EMM*: structures for the EPS mobility management messages from TS 24.301
+* *TS24301_ESM*: structures for the EPS mobility management messages from TS 24.301
+* *TS24301_IE*: structures for many information elements from TS 24.301
 
 
 pycrate_corenet
@@ -257,8 +265,8 @@ Usage
 Most of the modules have doc strings. I try also to write readable sources and to
 comment them as much as possible for understanding them easily (and to allow also
 myself to understand my own code years after...).
-In a near future, a wiki may be provided to bring examples and methods on how to
-use the different modules (any contribution on this would be very welcomed, too).
+A wiki is provided and expanded in time to time, to bring examples and methods on 
+how to use the different modules (any contribution on this would be very welcomed, too).
 Finally, the code provided in the *test/* subdirectory is also representative on
 how to use the different modules.
 
