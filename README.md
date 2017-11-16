@@ -265,7 +265,7 @@ Usage
 Most of the modules have doc strings. I try also to write readable sources and to
 comment them as much as possible for understanding them easily (and to allow also
 myself to understand my own code years after...).
-A wiki is provided and expanded in time to time, to bring examples and methods on 
+A wiki is provided and extended from time to time, to bring examples and methods on 
 how to use the different modules (any contribution on this would be very welcomed, too).
 Finally, the code provided in the *test/* subdirectory is also representative on
 how to use the different modules.
