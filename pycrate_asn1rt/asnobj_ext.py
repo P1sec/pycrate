@@ -154,8 +154,11 @@ Alternative single value: Python 2-tuple
                 self._get_val_obj(val[0])._safechk_val(val[1])
     
     def _safechk_bnd(self, val):
-        # this does not make sense for OPEN objects
-        pass
+        if not isinstance(val, bytes_types):
+            if isinstance(val[0], ASN1Obj):
+                val[0]._safechk_bnd(val[1])
+            else:
+                self._get_val_obj(val[0])._safechk_bnd(val[1])
     
     ###
     # conversion between internal value and ASN.1 syntax
