@@ -2148,8 +2148,6 @@ class _CONSTRUCT_OF(ASN1Obj):
         #self._cont._val = None
     
     def _to_per_ws(self):
-        if not self._val:
-            return []
         GEN, ldet = [], len(self._val)
         if self._const_sz:
             if self._const_sz.ext is not None:
@@ -2238,8 +2236,6 @@ class _CONSTRUCT_OF(ASN1Obj):
         self._struct = Envelope(self._name, GEN=tuple(GEN))
            
     def _to_per(self):
-        if not self._val:
-            return []
         GEN, ldet = [], len(self._val)
         if self._const_sz:
             if self._const_sz.ext is not None:
