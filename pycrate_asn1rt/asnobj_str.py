@@ -61,6 +61,10 @@ ASN.1 basic type BIT STRING object
 Single value: Python 2-tuple of int
     1st int is the unsigned integral value, 2nd int is the length in bits
 
+Alternative single value: Python set of str (from the object's NamedBitList)
+    This is only to be used in set_val() method, and is converted to a Python
+    2-tuple of int when set
+
 Alternative single value: Python 2-tuple
     the 1st item corresponds to a reference to another ASN.1 object, it can be:
         - a str corresponding to an ASN.1 typeref taken from the CONTAINING constraint of self
@@ -142,6 +146,35 @@ Specific constraints attributes:
                 raise(ASN1ObjErr('{0}: value out of containing constraint, {1!r}'\
                       .format(self.fullname(), val)))
     
+    def set_val(self, val):
+        if isinstance(val, set):
+            off = []
+            for name in val:
+                try:
+                    off.append(self._cont[name])
+                except:
+                    raise(ASN1ObjErr('{0}: invalid named value, {1!r}'.format(self.fullname(), val)))
+                moff = max(off)
+                self._val = (sum([1<<(moff-i) for i in off]), 1+moff)
+        else:
+            self._val = val
+        if self._SAFE_VAL:
+            self._safechk_val(self._val)
+        if self._SAFE_BND:
+            self._safechk_bnd(self._val)
+    
+    def get_names(self):
+        """Returns the set of names of the NamedBitList corresponding to the 
+        internal value
+        """
+        names = set()
+        if self._cont is None:
+            return names
+        for off, bit in enumerate(uint_to_bitstr(self._val[0], self._val[1])):
+            if bit == '1':
+                names.add(self._cont_rev[off])
+        return names
+    
     ###
     # conversion between internal value and ASN.1 syntax
     ###
@@ -175,11 +208,11 @@ Specific constraints attributes:
             if m:
                 # named offsets
                 off = set(map(str.strip, m.group(1).split(',')))
-                # converting to integral offsets
-                off = [self._cont[no] for no in off]
-                blen = max(off)
-                self._val = (sum([1<<(blen-i) for i in off]), blen)
-                return txt[:m.end()].strip()
+                # converting to integral offsets (starting from 0)
+                off  = [self._cont[no] for no in off]
+                moff = max(off)
+                self._val = (sum([1<<(moff-i) for i in off]), 1+moff)
+                return txt[m.end():].strip()
         elif self._const_cont:
             # CHOICE-like value notation
             if self._const_cont._typeref:
@@ -199,25 +232,24 @@ Specific constraints attributes:
             uint = Uint('bs', val=self._val[0], bl=self._val[1])
             if self._val[1] % 4 == 0:
                 # HSTRING
-                ret = '\'%s\'H' % uint_to_hex(*self._val).upper()
+                ret = '\'%s\'H' % uint_to_hex(self._val[0], self._val[1]).upper()
             else:
                 # BSTRING
-                ret = '\'%s\'B' % uint_to_bitstr(*self._val)
+                ret = '\'%s\'B' % uint_to_bitstr(self._val[0], self._val[1])
             if self._cont:
                 # add flags in comment
                 flags = []
-                bl = uint_to_bitlist(*self._val)
-                for i, v in enumerate(bl):
-                    if i in self._cont_rev and v:
+                for i, v in enumerate(uint_to_bitstr(self._val[0], self._val[1])):
+                    if i in self._cont_rev and v == '1':
                         flags.append(self._cont_rev[i])
                 return ret + ' -- %s --' % ' | '.join(flags)
             elif self._ASN_WASC and self._val[1] % 8 == 0:
                 # eventually add printable repr
                 try:
                     if python_version < 3:
-                        s = uint_to_bytes(*self._val)
+                        s = uint_to_bytes(self._val[0], self._val[1])
                     else:
-                        s = uint_to_bytes(*self.val).decode('ascii')
+                        s = uint_to_bytes(self._val[0], self._val[1]).decode('ascii')
                     if is_printable(s):
                         return ret + ' -- %s --' % s
                     else:
