@@ -31,6 +31,7 @@ from .utils       import *
 from .ProcCNRua   import *
 from .ProcCNRanap import *
 
+
 # WNG: all procedures that call .require_smc() method need to be set in this LUT
 ProcAbbrLUT = {
     'MMLocationUpdating'       : 'LU',
@@ -55,6 +56,10 @@ class UEIuSigStack(SigStack):
     # core network domain (CS or PS)
     DOM = None
     
+    # for pure RANAP procedure (no NAS trafic, neither RAB-oriented stuff)
+    # should we page the UE to run the procedure successfully when UE is idle
+    RANAP_FORCE_PAGE = False
+     
     
     def _log(self, logtype, msg):
         self.UE._log(logtype, '[%s: %3i] %s' % (self.__class__.__name__, self.CtxId, msg))
@@ -68,33 +73,49 @@ class UEIuSigStack(SigStack):
             self._cndomind = 'cs-domain'
         #
         # dict of ongoing RANAP procedures (indexed by their procedure code)
-        self.Proc = {}
-        # procedure code of the last RANAP procedure emitting a PDU toward the RAN
+        self.Proc     = {}
         self.ProcLast = None
         # list of tracked procedures (requires TRACK_PROC = True)
-        self._proc = []
+        self._proc    = []
         #
         # RANAP callback for NAS stacks
-        self.RanapTx = None
+        self.RanapTx  = None
         #
         # dict of available 2G / 3G security contexts, indexed by CKSN
         # and current CKSN in use
         self.SEC = {}
         self.reset_sec_ctx()
         #
-        self.set_ran(hnbd)
-        self.set_ctx(ctx_id)
+        self.connected = Event()
+        if hnbd is not None:
+            self.set_ran(hnbd)
+            self.set_ctx(ctx_id)
+        else:
+            self.unset_ctx()
     
     def set_ran(self, hnbd):
         self.SEC['CKSN'] = None
         self.RNC = hnbd
+        self.connected.set()
     
     def unset_ran(self):
         del self.RNC
         self.SEC['CKSN'] = None
+        self.connected.clear()
+    
+    def set_ran_unconnected(self, hnbd):
+        # required for paging
+        self.SEC['CKSN'] = None
+        self.RNC = hnbd
+    
+    def unset_ran_unconnected(self):
+        # required for paging
+        del self.RNC
+        self.SEC['CKSN'] = None
     
     def is_connected(self):
-        return self.RNC is not None
+        #return self.RNC is not None
+        return self.connected.is_set()
     
     def set_ctx(self, ctx_id):
         self.CtxId = ctx_id
@@ -111,31 +132,31 @@ class UEIuSigStack(SigStack):
         and return a list with RANAP PDU(s) to be sent back to the RNC
         """
         # decode the RANAP PDU
-        errcause = None
-        if not ranap_acquire():
+        if not asn_ranap_acquire():
             self._log('ERR', 'unable to acquire the RANAP module')
             return []
         try:
             PDU_RANAP.from_aper(buf)
         except:
             # unable to decode APER-encoded buffer
-            self._log('WNG', 'invalid RANAP PDU: %s' % hexlify(buf).decode('ascii'))
+            self._log('WNG', 'invalid RANAP PDU transfer-syntax: %s'\
+                      % hexlify(buf).decode('ascii'))
             # returns a RANAP error ind: protocol, transfer-syntax-error
-            errcause = ('protocol', 97)
-            Proc = RANAPErrorIndCN(self)
-            Proc.encode_pdu('ini', Cause=errcause)
-            if self.TRACK_PROC:
-                # keep track of the procedure
-                self._proc.append( Proc )
-            self.ProcLast = Proc.Code
-            return Proc.send()
+            Proc = self.init_ranap_proc(RANAPErrorIndCN, Cause=('protocol', 97))
+            if Proc is None:
+                return []
+            else:
+                Proc.recv(buf)
+                self.ProcLast = Proc.Code
+                return Proc.send()
         #
         if self.DOM == 'CS' and self.UE.TRACE_ASN_RANAP_CS:
             self._log('TRACE_ASN_RANAP_CS_UL', '\n' + PDU_RANAP.to_asn1())
         elif self.DOM == 'PS' and self.UE.TRACE_ASN_RANAP_PS:
             self._log('TRACE_ASN_RANAP_PS_UL', '\n' + PDU_RANAP.to_asn1())
         pdu = PDU_RANAP()
-        ranap_release()
+        asn_ranap_release()
+        errcause = None
         #
         if pdu[0] == 'initiatingMessage':
             # RNC-initiated procedure, create it through the dispatcher
@@ -146,19 +167,21 @@ class UEIuSigStack(SigStack):
                           % pdu[1]['procedureCode'])
                 # returns a RANAP error ind: protocol, abstract-syntax-error-reject
                 errcause = ('protocol', 100)
-                Proc = RANAPErrorIndCN(self)
-                Proc.encode_pdu('ini', Cause=errcause)
+                Proc = self.init_ranap_proc(RANAPErrorIndCN, Cause=errcause)
+                if Proc is None:
+                    return []
             else:
                 # store the procedure, if no error ind
                 self.Proc[Proc.Code] = Proc
-            if self.TRACK_PROC:
-                # keep track of the procedure
-                self._proc.append( Proc )
+                if self.TRACK_PROC:
+                    # keep track of the procedure
+                    self._proc.append( Proc )
             # process the PDU within the procedure
             Proc.recv( pdu )
             #
             if Proc.Cont['suc'] is not None or errcause is not None:
-                # set the last procedure code
+                # procedure requires a response
+                # set the last procedure code in the RNC handler
                 self.ProcLast = Proc.Code
                 # send back any potential response to the RNC
                 # Proc.send() will take care to clean-up self.Proc
@@ -171,7 +194,6 @@ class UEIuSigStack(SigStack):
                     # all those procedures must have been initiated with self.init_ranap_proc()
                     # hence, they are already set in self.Proc
                     # and tracked in self._proc
-                    # add ProcRet to the stack of ongoing procedure
                     snd.extend( ProcRet.send() )
                     # set the last procedure code
                     self.ProcLast = ProcRet.Code
@@ -186,17 +208,15 @@ class UEIuSigStack(SigStack):
                 self._log('ERR', 'invalid RANAP PDU, %s, code %i' % (pdu[0], pdu[1]['procedureCode']))
                 # returns a RANAP error ind: protocol, message-not-compatible-with-receiver-state
                 errcause = ('protocol', 99)
-                Proc = RANAPErrorIndCN(self)
-                Proc.encode_pdu('ini', Cause=errcause)
-                if self.TRACK_PROC:
-                    # keep track of the procedure
-                    self._proc.append( Proc )
+                Proc = self.init_ranap_proc(RANAPErrorIndCN, Cause=errcause)
+                if Proc is None:
+                    return []
             # process the PDU within the procedure
             Proc.recv( pdu )
             #
             if errcause is not None:
                 # set the last procedure code
-                self.ProcHnbapLast = Proc.Code
+                self.ProcLast = Proc.Code
                 # send back any potential response to the RNC
                 # Proc.send() will take care to clean-up self.Proc
                 return self._encode_pdu(Proc.send())
@@ -207,7 +227,6 @@ class UEIuSigStack(SigStack):
                     # all those procedures must have been initiated with self.init_ranap_proc()
                     # hence, they are already set in self.Proc
                     # and tracked in self._proc
-                    # add ProcRet to the stack of ongoing procedure
                     snd.extend( ProcRet.send() )
                     # set the last procedure code
                     self.ProcLast = ProcRet.Code
@@ -215,7 +234,7 @@ class UEIuSigStack(SigStack):
     
     def _encode_pdu(self, pdus):
         ret = []
-        if not ranap_acquire():
+        if not asn_ranap_acquire():
             self._log('ERR', 'unable to acquire the RANAP module')
             return ret
         for pdu in pdus:
@@ -230,13 +249,16 @@ class UEIuSigStack(SigStack):
                 elif self.DOM == 'PS' and self.UE.TRACE_ASN_RANAP_PS:
                     self._log('TRACE_ASN_RANAP_PS_DL', '\n' + PDU_RANAP.to_asn1())
                 ret.append( PDU_RANAP.to_aper() )
-        ranap_release()
+        asn_ranap_release()
         return ret
     
     def init_ranap_proc(self, ProcClass, **kw):
         """initialize a CN-initiated RANAP procedure of class `ProcClass',
         encode the initiatingMessage PDU with given **kw and return the procedure
         """
+        if not issubclass(ProcClass, RANAPSigProc):
+            self._log('WNG', 'starting a connection-less RANAP procedure '\
+                             'over a RUA connection-oriented transfer')
         if ProcClass.Code in self.Proc:
             self._log('ERR', 'a RANAP procedure %s is already ongoing, unable to start a new one'\
                       % ProcClass.__name__)
@@ -279,7 +301,7 @@ class UEIuSigStack(SigStack):
         return []
     
     def trigger_nas(self, RanapProc):
-        # this is used by IuCS/PS procedures to recall an ongoing NAS procedure
+        # this is used by IuCS/PS RANAP procedures to recall an ongoing NAS procedure
         if RanapProc._cb is None:
             # no callback set, this is actually useless
             return []
@@ -390,23 +412,19 @@ class UEIuSigStack(SigStack):
     # network-initiated method (fg task, to be used from the interpreter)
     #--------------------------------------------------------------------------#
     
-    def _send_to_rnc(self, buf, connected=True):
+    def _send_to_rnc(self, buf):
         if self.RNC is None:
             self._log('WNG', 'no RNC set, unable to send data')
             return False
-        if not connected:
-            # start a RUAConnectionLessTransfer
-            self.RNC.start_rua_proc(RUAConnectlessTransfer, RANAP_Message=buf)
-            return True
         elif self.CtxId < 0:
             self._log('WNG', 'no Iu context-id set, unable to send data in connected mode')
             return False
         else:
             # start a RUADirectTransfer
-            self.RNC.start_rua_proc(RUADirectTransfer, Context_ID=(self.CtxId, 24),
-                                                       RANAP_Message=buf,
-                                                       CN_DomainIndicator=self._cndomind)
-            return True
+            ret = self.RNC.start_rua_proc(RUADirectTransfer, Context_ID=(self.CtxId, 24),
+                                                             RANAP_Message=buf,
+                                                             CN_DomainIndicator=self._cndomind)
+            return True if ret else False
     
     def _send_to_rnc_nasdt(self, naspdu, sapi=0):
         # prepare the RANAPDirectTransferCN procedure
@@ -422,50 +440,311 @@ class UEIuSigStack(SigStack):
         # encode the RANAP PDU and send it over RUA
         pdu = self._encode_pdu(RanapProc.send())
         if not pdu:
+            self._log('ERR', '_send_to_rnc_nasdt: invalid IEs')
             return False
         pdu = pdu[0]
+        # set the last procedure code in the RNC handler
+        self.ProcLast = RanapProc.Code
         # send to RNC in connected mode
-        self._send_to_rnc(pdu, connected=True)
+        return self._send_to_rnc(pdu)
     
     def _send_to_ue(self, naspdu, sapi=0):
         if not self.page_block():
             self._log('ERR', 'unable to page')
             return False
-        self._send_to_rnc_nasdt(naspdu, sapi)
+        return self._send_to_rnc_nasdt(naspdu, sapi)
     
     def release(self, cause=('nAS', 83)):
         """release the Iu link with the given RANAP cause
         """
+        if not self.connected.is_set():
+            # nothing to release
+            self._log('DBG', 'release: UE not connected')
+            return True
         # prepare the RANAPRelease procedure
         RanapProc = self.init_ranap_proc(RANAPIuRelease, Cause=cause)
         if not RanapProc:
-            return
+            return False
         # encode the RANAP PDU and send it over RUA
         pdu = self._encode_pdu(RanapProc.send())
         if not pdu:
-            return
+            self._log('ERR', 'release: invalid IEs')
+            return False
         pdu = pdu[0]
+        # set the last procedure code in the RNC handler
+        self.ProcLast = RanapProc.Code
         # send to RNC in connected mode
-        self._send_to_rnc(pdu, connected=True)
+        return self._send_to_rnc(pdu)
     
-    #--------------------------------------------------------------------------#
-    # Paging helper
-    #--------------------------------------------------------------------------#
-    
-    def _send_paging(self, rnc, IEs):
-        # set the rnc Iu link
-        self.set_ran(rnc)
-        # prepare the RANAPPaging procedure
-        RanapProc = self.init_ranap_proc(RANAPPaging, **IEs)
+    def send_error_ind(self, cause, **IEs):
+        """start a RANAPErrorIndCN with the given RANAP cause
+        
+        IEs can contain any of the optional or extended IEs
+        """
+        if not self.connected.is_set():
+            # RANAP link disconnected
+            if self.RANAP_FORCE_PAGE:
+                # force to connect
+                if not self._net_init_con():
+                    # unable to connect with the UE
+                    return False
+            else:
+                return False
+        # prepare the RANAP procedure
+        IEs['Cause'] = cause
+        RanapProc = self.init_ranap_proc(RANAPErrorIndCN, **IEs)
         if not RanapProc:
-            return
+            return False
         # encode the RANAP PDU and send it over RUA
         pdu = self._encode_pdu(RanapProc.send())
         if not pdu:
-            return
+            self._log('ERR', 'send_error_ind: invalid IEs')
+            return False
         pdu = pdu[0]
-        # send to RNC in connection-less mode
-        self._send_to_rnc(pdu, connected=False)
-        # unset the rnc Iu link
-        self.unset_ran()
+        # set the last procedure code in the Iu handler and remove from the 
+        # procedure stack
+        self.ProcLast = RanapProc.Code
+        try:
+            del self.Proc[RanapProc.Code]
+        except:
+            pass
+        # send to the RNC in connection-oriented signaling
+        return self._send_to_rnc(pdu)
     
+    def send_common_id(self, **IEs):
+        """start a RANAPCommonID with the UE's IMSI
+        
+        IEs can contain any of the extended IEs
+        """
+        if self.UE.IMSI is None:
+            return False
+        if not self.connected.is_set():
+            # RANAP link disconnected
+            if self.RANAP_FORCE_PAGE:
+                # force to connect
+                if not self._net_init_con():
+                    # unable to connect with the UE
+                    return False
+            else:
+                return False
+        # prepare the RANAP procedure
+        IEs['PermanentNAS_UE_ID'] = ('iMSI', NAS.encode_bcd(self.UE.IMSI))
+        RanapProc = self.init_ranap_proc(RANAPCommonID, **IEs)
+        if not RanapProc:
+            return False
+        # encode the RANAP PDU and send it over RUA
+        pdu = self._encode_pdu(RanapProc.send())
+        if not pdu:
+            self._log('ERR', 'send_common_id: invalid IEs')
+            return False
+        pdu = pdu[0]
+        # set the last procedure code in the RNC handler
+        self.ProcLast = RanapProc.Code
+        # send to the RNC in connection-oriented signaling
+        return self._send_to_rnc(pdu)
+    
+    def invoke_trace(self, traceref, **IEs):
+        """start a RANAPCNInvokeTrace with a given trace reference (2 or 3 bytes)
+        
+        IEs can contain any of the optional or extended IEs
+        """
+        if not self.connected.is_set():
+            # RANAP link disconnected
+            if self.RANAP_FORCE_PAGE:
+                # force to connect
+                if not self._net_init_con():
+                    # unable to connect with the UE
+                    return False
+            else:
+                return False
+        # prepare the RANAP procedure
+        IEs['TraceReference'] = traceref
+        RanapProc = self.init_ranap_proc(RANAPCNInvokeTrace, **IEs)
+        if not RanapProc:
+            return False
+        # required for the logging within the procedure
+        RanapProc.TraceReference = traceref
+        # encode the RANAP PDU and send it over RUA
+        pdu = self._encode_pdu(RanapProc.send())
+        if not pdu:
+            self._log('ERR', 'invoke_trace: invalid IEs')
+            return False
+        pdu = pdu[0]
+        # set the last procedure code in the RNC handler
+        self.ProcLast = RanapProc.Code
+        # send to the RNC in connection-oriented signaling
+        return self._send_to_rnc(pdu)
+    
+    def deactivate_trace(self, traceref, triggerid=None):
+        """start a RANAPCNDeactivateTrace with a given trace reference (2 or 3 bytes)
+        and optional trigger id (2 or 3 bytes)
+        """
+        if not self.connected.is_set():
+            # RANAP link disconnected
+            if self.RANAP_FORCE_PAGE:
+                # force to connect
+                if not self._net_init_con():
+                    # unable to connect with the UE
+                    return False
+            else:
+                return False
+        # prepare the RANAP procedure
+        IEs = {'TraceReference': traceref}
+        if isinstance(triggerid, bytes_types):
+            IEs['TriggerID'] = triggerid
+        RanapProc = self.init_ranap_proc(RANAPCNDeactivateTrace, **IEs)
+        if not RanapProc:
+            return False
+        # required for the logging within the procedure
+        RanapProc.TraceReference = traceref
+        # encode the RANAP PDU and send it over RUA
+        pdu = self._encode_pdu(RanapProc.send())
+        if not pdu:
+            self._log('ERR', 'deactivate_trace: invalid IEs')
+            return False
+        pdu = pdu[0]
+        # set the last procedure code in the RNC handler
+        self.ProcLast = RanapProc.Code
+        # send to the RNC in connection-oriented signaling
+        return self._send_to_rnc(pdu)
+    
+    def report_loc_ctrl(self, reqtype={'event':'direct', 'reportArea':'service-area', 'accuracyCode':0},
+                              **IEs):
+        """start a RANAPLocationReportingControl with a given request type
+        RequestType is a sequence of {event (enum), reportArea (enum), accuracyCode (int)}
+        
+        IEs can contain any of the extended IEs
+        """
+        if not self.connected.is_set():
+            # RANAP link disconnected
+            if self.RANAP_FORCE_PAGE:
+                # force to connect
+                if not self._net_init_con():
+                    # unable to connect with the UE
+                    return False
+            else:
+                return False
+        # prepare the RANAP procedure
+        IEs['RequestType'] = reqtype
+        RanapProc = self.init_ranap_proc(RANAPLocationReportingControl, **IEs)
+        if not RanapProc:
+            return False
+        # required for the logging within the procedure
+        RanapProc.RequestType = reqtype
+        # encode the RANAP PDU and send it over RUA
+        pdu = self._encode_pdu(RanapProc.send())
+        if not pdu:
+            self._log('ERR', 'report_loc_ctrl: invalid IEs')
+            return False
+        pdu = pdu[0]
+        # set the last procedure code in the RNC handler
+        self.ProcLast = RanapProc.Code
+        # send to the RNC in connection-oriented signaling
+        return self._send_to_rnc(pdu)
+    
+    def request_loc_data(self, reqtype={'requestedLocationRelatedDataType': 'decipheringKeysUEBasedOTDOA'},
+                               **IEs):
+        """start a RANAPLocationRelatedData with a given request type
+        RequestType is a sequence of {requestedLocationRelatedDataType (enum),
+        requestedGPSAssistanceData (octets, optional)}
+        
+        IEs can contain any of the optional or extended IEs
+        """
+        if not self.connected.is_set():
+            # RANAP link disconnected
+            if self.RANAP_FORCE_PAGE:
+                # force to connect
+                if not self._net_init_con():
+                    # unable to connect with the UE
+                    return False
+            else:
+                return False
+        # prepare the RANAP procedure
+        IEs['LocationRelatedDataRequestType'] = reqtype
+        RanapProc = self.init_ranap_proc(RANAPLocationRelatedData, **IEs)
+        if not RanapProc:
+            return False
+        # encode the RANAP PDU and send it over RUA
+        pdu = self._encode_pdu(RanapProc.send())
+        if not pdu:
+            self._log('ERR', 'request_loc_data: invalid IEs')
+            return False
+        pdu = pdu[0]
+        # set the last procedure code in the RNC handler
+        self.ProcLast = RanapProc.Code
+        # send to the RNC in connection-oriented signaling
+        return self._send_to_rnc(pdu)
+    
+    def report_data_vol(self, rabidlist):
+        """start a RANAPDataVolumeReport for the given list of RAB IDs (uint8)
+        """
+        if not self.connected.is_set():
+            # RANAP link disconnected
+            if self.RANAP_FORCE_PAGE:
+                # force to connect
+                if not self._net_init_con():
+                    # unable to connect with the UE
+                    return False
+            else:
+                return False
+        # IE RAB-DataVolumeReportRequestList is a sequence of ProtocolIE-Container
+        # which is a sequence of ProtocolIE-Field
+        # with {id: 32, crit: reject, val: RAB-DataVolumeReportRequestItem}
+        # IE RAB-DataVolumeReportRequestItem is a sequence {RAB-ID (BIT STRING of size 8)}
+        RIDList = []
+        for rabid in rabidlist:
+            RIDList.append({'id': 32, 'criticality': 'reject',
+                            'value': ('RAB-DataVolumeReportRequestItem', {'rAB-ID': (rabid, 8)})})
+        # prepare the RANAP procedure
+        IEs = {'RAB_DataVolumeReportRequestList': [RIDList]}
+        RanapProc = self.init_ranap_proc(RANAPDataVolumeReport, **IEs)
+        if not RanapProc:
+            return False
+        # encode the RANAP PDU and send it over RUA
+        pdu = self._encode_pdu(RanapProc.send())
+        if not pdu:
+            self._log('ERR', 'report_data_vol: invalid IEs')
+            return False
+        pdu = pdu[0]
+        # set the last procedure code in the RNC handler
+        self.ProcLast = RanapProc.Code
+        # send to the RNC in connection-oriented signaling
+        return self._send_to_rnc(pdu)
+    
+    #--------------------------------------------------------------------------#
+    # to send arbitrary NAS buffers to the UE
+    #--------------------------------------------------------------------------#
+    
+    def send_nas_raw(self, naspdu, sapi=0, rx_hook=lambda x:None, wait_t=1):
+        """Sends whatever bytes, or list of bytes, to the UE as NAS PDU(s)
+        """
+        if not self._net_init_con():
+            return False
+        #
+        self.RX_HOOK = rx_hook
+        if isinstance(naspdu, bytes_types):
+            if not self._send_to_rnc_nasdt(naspdu, sapi=sapi):
+                del self.RX_HOOK
+                return False
+            else:
+                self._log('INF', 'send_nas_raw: 0x%s' % hexlify(naspdu).decode('ascii'))
+                sleep(wait_t)
+        #
+        elif isinstance(naspdu, (tuple, list)):
+            for pdu in naspdu:
+                if not isinstance(pdu, bytes_types):
+                    pass
+                elif not self.connected.is_set():
+                    # poor UE got disconnected, just ask it to reconnect
+                    if not self._net_init_con():
+                        del self.RX_HOOK    
+                        return False
+                elif not self._send_to_rnc_nasdt(pdu, sapi=sapi):
+                    del self.RX_HOOK
+                    return False
+                else:
+                    self._log('INF', 'send_nas_raw: 0x%s' % hexlify(naspdu).decode('ascii'))
+                    sleep(wait_t)
+        #
+        del self.RX_HOOK
+        return True

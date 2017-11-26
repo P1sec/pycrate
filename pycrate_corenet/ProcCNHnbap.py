@@ -331,9 +331,9 @@ class HNBAPUERegistration(HNBAPSigProc):
                 errcause = ('radioNetwork', 'invalid-UE-identity')
             if ue is None:
                 # UE not allowed / configured in the CorenetServer
-                errcause = self.HNB.UEREG_NOTALLOWED_CODE
+                errcause = self.HNB.UEREG_NOTALLOWED
             else:
-                self.HNB.set_ue_hnbap(ue)
+                ctx_id = self.HNB.set_ue_hnbap(ue)
                 if 'UE_Capabilities' in UEInfo:
                     ue.Cap['HNBAP'] = UEInfo['UE_Capabilities']
         #
@@ -341,7 +341,7 @@ class HNBAPUERegistration(HNBAPSigProc):
             # procedure successful outcome
             # both IuCS / IuPS are initialized with the same CtxId established here,
             # at the HNBAP layer, so we can take the IuCS one safely
-            self.encode_pdu('suc', Context_ID=(ue.IuCS.CtxId, 24),
+            self.encode_pdu('suc', Context_ID=(ctx_id, 24),
                                                UE_Identity=UEInfo['UE_Identity'])
             self._log('INF', 'UE registered successfully, ctx %i' % ue.IuCS.CtxId)
         else:
@@ -830,4 +830,3 @@ HNBAPProcGwDispatcher = {
     7 : HNBAPCSGMembershipUpdate,
     11 : HNBAPRelocationComplete
     }
-

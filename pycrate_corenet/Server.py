@@ -474,38 +474,48 @@ class CorenetServer(object):
         if not buf:
             # WNG: it may be required to handle SCTP notifications, at some point...
             return
-        # getting SCTP PPID
-        ppid  = socket.ntohl(notif.ppid)
-        HNBId = self.SCTPCli[sk]
-        hnb   = self.RAN[HNBId]
+        # getting SCTP PPID and HNB handler
+        ppid, hnbid = socket.ntohl(notif.ppid), self.SCTPCli[sk]
+        hnb         = self.RAN[hnbid]
         #
-        # PPID is HNBAP or RUA
         if ppid == SCTP_PPID_HNBAP:
-            if not hnbap_acquire():
+            if not asn_hnbap_acquire():
                 hnb._log('ERR', 'unable to acquire the HNBAP module')
                 return
             try:
                 PDU_HNBAP.from_aper(buf)
             except:
-                self._log('WNG', 'invalid HNBAP PDU: %s' % hexlify(buf).decode('ascii'))
+                hnb._log('WNG', 'invalid HNBAP PDU transfer-syntax: %s'\
+                         % hexlify(buf).decode('ascii'))
+                # send an error ind back
+                hnb.start_hnbap_proc(RANAPErrorIndCN,
+                                     Cause=('protocol', 'transfer-syntax-error'))
+                return
             pdu = PDU_HNBAP()
             if hnb.TRACE_ASN_HNBAP:
                 hnb._log('TRACE_ASN_HNBAP_UL', PDU_HNBAP.to_asn1())
-            hnbap_release()
+            asn_hnbap_release()
             ret = hnb.process_hnbap_pdu(pdu)
+        #
         elif ppid == SCTP_PPID_RUA:
-            if not rua_acquire():
+            if not asn_rua_acquire():
                 hnb._log('ERR', 'unable to acquire the RUA module')
                 return
             try:
                 PDU_RUA.from_aper(buf)
             except:
-                self._log('WNG', 'invalid RUA PDU: %s' % hexlify(buf).decode('ascii'))
+                self._log('WNG', 'invalid RUA PDU transfer-syntax: %s'\
+                          % hexlify(buf).decode('ascii'))
+                # send an error ind back
+                hnb.start_rua_proc(RUAErrorInd,
+                                   Cause=('protocol', 'transfer-syntax-error'))
+                return
             pdu = PDU_RUA()
             if hnb.TRACE_ASN_RUA:
                 hnb._log('TRACE_ASN_RUA_UL', PDU_HNBAP.to_asn1())
-            rua_release()
+            asn_rua_release()
             ret = hnb.process_rua_pdu(pdu)
+        #
         else:
             self._log('ERR', 'invalid SCTP PPID, %i' % ppid)
             if self.SERVER_HNB['errclo']:
@@ -521,25 +531,25 @@ class CorenetServer(object):
                 self.send_rua_pdu(hnb, retpdu)
     
     def send_hnbap_pdu(self, hnb, pdu):
-        if not hnbap_acquire():
+        if not asn_hnbap_acquire():
             hnb._log('ERR', 'unable to acquire the HNBAP module')
             return
         PDU_HNBAP.set_val(pdu)
         if hnb.TRACE_ASN_HNBAP:
             hnb._log('TRACE_ASN_HNBAP_DL', PDU_HNBAP.to_asn1())
         ret = self._write_sk(hnb.SK, PDU_HNBAP.to_aper(), ppid=SCTP_PPID_HNBAP)
-        hnbap_release()
+        asn_hnbap_release()
         return ret
     
     def send_rua_pdu(self, hnb, pdu):
-        if not rua_acquire():
+        if not asn_rua_acquire():
             hnb._log('ERR', 'unable to acquire the RUA module')
             return
         PDU_RUA.set_val(pdu)
         if hnb.TRACE_ASN_RUA:
             hnb._log('TRACE_ASN_RUA_DL', PDU_RUA.to_asn1())
         ret = self._write_sk(hnb.SK, PDU_RUA.to_aper(), ppid=SCTP_PPID_RUA)
-        rua_release()
+        asn_rua_release()
         return ret
     
     #--------------------------------------------------------------------------#
@@ -555,12 +565,22 @@ class CorenetServer(object):
         if not buf:
             # WNG: maybe required to handle SCTP notification, at some point
             return
+            
+        #
+        if not asn_s1ap_acquire():
+            self._log('ERR', 'unable to acquire the S1AP module')
+            return
         try:
             PDU_S1AP.from_aper(buf)
         except:
-            self._log('WNG', 'invalid S1AP PDU: %s' % hexlify(buf).decode('ascii'))
+            self._log('WNG', 'invalid S1AP PDU transfer-syntax: %s'\
+                      % hexlify(buf).decode('ascii'))
+            # return nothing, no need to bother
             return
+        if HNBd.TRACE_ASN_S1AP:
+            self._log('TRACE_ASN_S1AP_UL', PDU_S1AP.to_asn1())
         pdu = PDU_S1AP()
+        asn_s1ap_release()
         # to be completed
     
     def _set_enb_loc(self, enb):
@@ -610,14 +630,14 @@ class CorenetServer(object):
                 'procedureCode': 1,
                 'value': (('HNBAP-PDU-Contents', 'HNBRegisterReject'),
                           {'protocolIEs' : IEs})})
-        if not hnbap_acquire():
+        if not asn_hnbap_acquire():
             self._log('ERR', 'unable to acquire the HNBAP module')
         else:
             PDU_HNBAP.set_val(pdu)
             if HNBd.TRACE_ASN_HNBAP:
                 self._log('TRACE_ASN_HNBAP_DL', PDU_HNBAP.to_asn1())
             void = self._write_sk(sk, PDU_HNBAP.to_aper(), ppid=SCTP_PPID_HNBAP)
-            hnbap_release()
+            asn_hnbap_release()
         if self.SERVER_HNB['errclo']:
             sk.close()
     
@@ -637,18 +657,20 @@ class CorenetServer(object):
                 sk.close()
             return
         #
-        if not hnbap_acquire():
+        if not asn_hnbap_acquire():
             self._log('ERR', 'unable to acquire the HNBAP module')
             return
         try:
             PDU_HNBAP.from_aper(buf)
         except:
-            self._log('WNG', 'invalid HNBAP PDU: %s' % hexlify(buf).decode('ascii'))
+            self._log('WNG', 'invalid HNBAP PDU transfer-syntax: %s'\
+                      % hexlify(buf).decode('ascii'))
+            # return nothing, no need to bother
             return
         if HNBd.TRACE_ASN_HNBAP:
             self._log('TRACE_ASN_HNBAP_UL', PDU_HNBAP.to_asn1())
         pdu = PDU_HNBAP()
-        hnbap_release()
+        asn_hnbap_release()
         #
         # ensure we have a HNBRegisterRequest with PLMN and CellID provided
         HNBId = self._parse_hnbregreq(pdu)
@@ -695,7 +717,7 @@ class CorenetServer(object):
         self._set_hnb_loc(hnb)
         #
         # send available PDU(s) back
-        if not hnbap_acquire():
+        if not asn_hnbap_acquire():
            hnb._log('ERR', 'unable to acquire the HNBAP module')
            return
         for retpdu in ret:
@@ -703,7 +725,7 @@ class CorenetServer(object):
             if HNBd.TRACE_ASN_HNBAP:
                 hnb._log('TRACE_ASN_HNBAP_DL', PDU_HNBAP.to_asn1())
             void = self._write_sk(sk, PDU_HNBAP.to_aper(), ppid=SCTP_PPID_HNBAP)
-        hnbap_release()
+        asn_hnbap_release()
     
     def _set_hnb_loc(self, hnb):
         lai = (hnb.Config['PLMNidentity'], hnb.Config['LAC'])
@@ -821,6 +843,13 @@ class CorenetServer(object):
                 #            P._log('WNG', 'timeout: aborting')
                 #            P.abort()
             
+                #if ue.IuCS.SS.Proc:
+                #    for P in ue.IuCS.SS.Proc.values():
+                #        if hasattr(P, 'TimerStop') and T > P.TimerStop:
+                #            P._log('WNG', 'timeout: aborting')
+                #            P.abort()
+            
+            
             if ue.IuPS is not None:
             
                 if ue.IuPS.GMM.Proc:
@@ -842,4 +871,3 @@ class CorenetServer(object):
                 
                 #if ue.S1.ESM.Proc:
                 #    pass
-

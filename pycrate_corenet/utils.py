@@ -34,7 +34,7 @@ import random
 import re
 #import traceback
 from select    import select
-from threading import Thread, Lock
+from threading import Thread, Lock, Event
 from random    import SystemRandom
 from time      import time, sleep
 from datetime  import datetime
@@ -74,15 +74,18 @@ from pycrate_asn1dir import RRCLTE
 # to drive 3G UE
 from pycrate_mobile  import TS24007
 from pycrate_mobile  import TS24008_IE
+# CS domain
 from pycrate_mobile  import TS24008_MM
+from pycrate_mobile  import TS24008_CC
+from pycrate_mobile  import TS24011_PPSMS
+from pycrate_mobile  import TS24080_SS
+# PS domain
 from pycrate_mobile  import TS24008_GMM
-#from pycrate_mobile  import TS24008_CC
-#from pycrate_mobile  import TS24008_SM
+from pycrate_mobile  import TS24008_SM
 
 # to drive LTE UE
-#from pycrate_mobile  import TS24301_NAS
-#from pycrate_mobile  import TS24301_EMM
-#from pycrate_mobile  import TS24301_ESM
+from pycrate_mobile  import TS24301_EMM
+from pycrate_mobile  import TS24301_ESM
 
 from pycrate_mobile  import NAS
 
@@ -103,74 +106,81 @@ PDU_RANAP = RANAP.RANAP_PDU_Descriptions.RANAP_PDU
 # ASN.1 modules are not thread-safe
 # objects' value will be mixed in case a thread ctxt switch occurs between 
 # the fg interpreter and the bg CorenetServer loop, and both accesses the same
-# ASN.1 module
-LOCK_S1AP  = Lock()
-LOCK_HNBAP = Lock()
-LOCK_RUA   = Lock()
-LOCK_RANAP = Lock()
+# ASN.1 modules / objects
+ASN_READY_S1AP  = Event()
+ASN_READY_HNBAP = Event()
+ASN_READY_RUA   = Event()
+ASN_READY_RANAP = Event()
+ASN_READY_S1AP.set()
+ASN_READY_HNBAP.set()
+ASN_READY_RUA.set()
+ASN_READY_RANAP.set()
 
-_ACQUIRE_SLEEP = 0.0003
-_ACQUIRE_TO    = 300 # in number of sleep()
+ASN_ACQUIRE_TO = 0.01 # in sec
 
-def s1ap_acquire():
-    if LOCK_S1AP.locked():
-        # wait for the other thread to end its use of the S1AP module
-        i = 0
-        while LOCK_S1AP.locked():
-            i += 1
-            sleep(_ACQUIRE_SLEEP)
-            if i == _ACQUIRE_TO:
-                return False
-    LOCK_S1AP.acquire()
-    return True
+def asn_s1ap_acquire():
+    if ASN_READY_S1AP.is_set():
+        ASN_READY_S1AP.clear()
+        return True
+    else:
+        ready = ASN_READY_S1AP.wait(ASN_ACQUIRE_TO)
+        if not ready:
+            # timeout, module is still locked
+            return False
+        else:
+            ASN_READY_S1AP.clear()
+            return True
 
-def s1ap_release():
-    LOCK_S1AP.release()
+def asn_s1ap_release():
+    ASN_READY_S1AP.set()
 
-def hnbap_acquire():
-    if LOCK_HNBAP.locked():
-        # wait for the other thread to end its use of the HNBAP module
-        i = 0
-        while LOCK_HNBAP.locked():
-            i += 1
-            sleep(_ACQUIRE_SLEEP)
-            if i == _ACQUIRE_TO:
-                return False
-    LOCK_HNBAP.acquire()
-    return True
+def asn_hnbap_acquire():
+    if ASN_READY_HNBAP.is_set():
+        ASN_READY_HNBAP.clear()
+        return True
+    else:
+        ready = ASN_READY_HNBAP.wait(ASN_ACQUIRE_TO)
+        if not ready:
+            # timeout, module is still locked
+            return False
+        else:
+            ASN_READY_HNBAP.clear()
+            return True
 
-def hnbap_release():
-    LOCK_HNBAP.release()
+def asn_hnbap_release():
+    ASN_READY_HNBAP.set()
 
-def rua_acquire():
-    if LOCK_RUA.locked():
-        # wait for the other thread to end its use of the RUA module
-        i = 0
-        while LOCK_RUA.locked():
-            i += 1
-            sleep(_ACQUIRE_SLEEP)
-            if i == _ACQUIRE_TO:
-                return False
-    LOCK_RUA.acquire()
-    return True
+def asn_rua_acquire():
+    if ASN_READY_RUA.is_set():
+        ASN_READY_RUA.clear()
+        return True
+    else:
+        ready = ASN_READY_RUA.wait(ASN_ACQUIRE_TO)
+        if not ready:
+            # timeout, module is still locked
+            return False
+        else:
+            ASN_READY_RUA.clear()
+            return True
 
-def rua_release():
-    LOCK_RUA.release()
+def asn_rua_release():
+    ASN_READY_RUA.set()
 
-def ranap_acquire():
-    if LOCK_RANAP.locked():
-        # wait for the other thread to end its use of the RANAP module
-        i = 0
-        while LOCK_RANAP.locked():
-            i += 1
-            sleep(_ACQUIRE_SLEEP)
-            if i == _ACQUIRE_TO:
-                return False
-    LOCK_RANAP.acquire()
-    return True
+def asn_ranap_acquire():
+    if ASN_READY_RANAP.is_set():
+        ASN_READY_RANAP.clear()
+        return True
+    else:
+        ready = ASN_READY_RANAP.wait(ASN_ACQUIRE_TO)
+        if not ready:
+            # timeout, module is still locked
+            return False
+        else:
+            ASN_READY_RANAP.clear()
+            return True
 
-def ranap_release():
-    LOCK_RANAP.release()
+def asn_ranap_release():
+    ASN_READY_RANAP.set()
 
 #------------------------------------------------------------------------------#
 # logging facilities
@@ -394,4 +404,3 @@ class SigProc(object):
 
 # See ProcProto.py for prototype classes for the various mobile network procedures
 # and other Proc*.py for the procedures themselves
-

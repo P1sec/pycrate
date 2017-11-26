@@ -29,7 +29,11 @@
 
 from .utils import *
 
+
 class UES1d(SigStack):
+    
+    # to keep track of all RANAP procedures
+    TRACK_PROC = True
     
     # reference to the UEd
     UE  = None
@@ -37,26 +41,62 @@ class UES1d(SigStack):
     ENB = None
     
     def _log(self, logtype, msg):
-        try:
-            self.UE._log(logtype, '[UES1: %r] %s' % self.ID, msg)
-        except:
-            pass
+        self.UE._log(logtype, '[UES1d:   %3i] %s' % (self.CtxId, msg))
     
-    def __init__(self, ued, enbd, ctx_id):
+    def __init__(self, ued, enbd=None, ctx_id=-1):
         self.UE  = ued
-        self.set_enb(enbd)
-        self.set_ctx(ctx_id)
+        self.Server = ued.Server
+        #
+        # dict of ongoing S1AP procedures (indexed by their procedure code)
+        self.Proc = {}
+        # list of tracked procedures (requires TRACK_PROC = True)
+        self._proc = []
+        #
+        # RANAP callback for NAS stacks
+        self.S1apTx = None
+        #
+        # dict of available LTE security contexts, indexed by KSI
+        # and current KSI in use
+        self.SEC = {}
+        self.reset_sec_ctx()
+        #
+        self.connected = Event()
+        if enbd is not None:
+            self.set_ran(enbd)
+            self.set_ctx(ctx_id)
+        else:
+            self.unset_ctx()
+
+    def set_ran(self, enbd):
+        self.SEC['KSI'] = None
+        self.ENB = enbd
+        self.connected.set()
     
-    def set_enb(self, enbd):
+    def unset_ran(self):
+        del self.ENB
+        self.SEC['KSI'] = None
+        self.connected.clear()
+    
+    def set_ran_unconnected(self, enbd):
+        # required for paging
+        self.SEC['KSI'] = None
         self.ENB = enbd
     
-    def unset_enb(self):
+    def unset_ran_unconnected(self):
+        # required for paging
         del self.ENB
+        self.SEC['KSI'] = None
+    
+    def is_connected(self):
+        #return self.RNC is not None
+        return self.connected.is_set()
     
     def set_ctx(self, ctx_id):
         self.CtxId = ctx_id
     
     def unset_ctx(self):
         self.CtxId = -1
-
-
+    
+    def reset_sec_ctx(self):
+        self.SEC.clear()
+        self.SEC['KSI'] = None

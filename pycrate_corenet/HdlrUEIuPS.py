@@ -55,6 +55,9 @@ class UEGMMd(SigStack):
     # to bypass the process() server loop with a custom NAS PDU handler
     RX_HOOK = None
     
+    # additional time for letting background task happen in priority
+    _WAIT_ADD = 0.005
+    
     #--------------------------------------------------------------------------#
     # GMM common parameters
     #--------------------------------------------------------------------------#
@@ -185,11 +188,10 @@ class UEGMMd(SigStack):
     #--------------------------------------------------------------------------#
     # GMMDetach policy
     #--------------------------------------------------------------------------#
-    # if we want to set "Force to StandBy" to force the MS to stop the READY timer 
-    # in order to prevent the MS to perform cell updates (must not be enabled in Iu mode)
-    DET_FSTDBY          = _FSTDBY
     # network-initiated detach timer
     T3322               = 2
+    #
+    DET_FSTDBY          = _FSTDBY
     
     #--------------------------------------------------------------------------#
     # GMMRoutingAreaUpdating policy
@@ -224,11 +226,13 @@ class UEGMMd(SigStack):
         self.UE = ued
         self.set_iu(iupsd)
         #
-        # stack of ongoing GMM procedures (i.e. common procedures can be run 
+        # ready event, used by foreground tasks (network / interpreter initiated)
+        self.ready = Event()
+        self.ready.set()
         # within specific or CM-oriented procedure)
-        self.Proc = []
+        self.Proc   = []
         # list of tracked procedures (requires TRACK_PROC = True)
-        self._proc = []
+        self._proc  = []
     
     def set_iu(self, iupsd):
         self.Iu = iupsd
@@ -298,11 +302,11 @@ class UEGMMd(SigStack):
             # cause 101: Message not compatible with the protocol state
             return TS24008_GMM.GMMStatus(Cause=101)
     
-    def init_proc(self, ProcClass, encod=None):
+    def init_proc(self, ProcClass, encod=None, gmm_preempt=False):
         """initialize a CN-initiated GMM procedure of class `ProcClass' and 
         given encoder(s), and return the procedure
         """
-        Proc = ProcClass(self, encod=encod)
+        Proc = ProcClass(self, encod=encod, gmm_preempt=gmm_preempt)
         self.Proc.append( Proc )
         if self.TRACK_PROC:
             self._proc.append( Proc )
@@ -318,14 +322,16 @@ class UEGMMd(SigStack):
     # network-initiated method (fg task, to be used from the interpreter)
     #--------------------------------------------------------------------------#
     
-    def _ini_con(self):
+    def _net_init_con(self):
         if not self.Iu.page_block():
             return False
-        while self.Proc:
-            # wait for GMM common procedures to end
-            sleep(self._INI_SCHED)
-        if not self.Iu.is_connected():
-            # something went wrong during the common procedures
+        # need to wait for potential GMM serving / common procedures to happen and end
+        sleep(self._WAIT_ADD)
+        if not self.ready.wait(10):
+            # something is blocking in the serving / common procedures
+            return False
+        elif not self.Iu.connected.is_set():
+            # something went wrong during the serving / common procedures
             return False
         else:
             return True
@@ -338,9 +344,9 @@ class UEGMMd(SigStack):
         
         if True, the UEInfo from the response is available in self._ini_ret
         """
-        if not self._ini_con():
+        if not self._net_init_con():
             return False
-        Proc = self.init_proc(GMMIdentification)
+        Proc = self.init_proc(GMMIdentification, gmm_preempt=True)
         Proc.set_msg(8, 21, IDType=idtype)
         try:
             NasTx = Proc.output().to_bytes()
@@ -348,15 +354,20 @@ class UEGMMd(SigStack):
             self._log('ERR', 'NAS message encoding failed')
             Proc.abort()
             return False
-        self.Iu._send_to_ue(NasTx)
+        if not self.Iu._send_to_ue(NasTx):
+            # something bad happened while sending the message
+            return False
         #
-        # check the procedure stack until our ident procedure is not there anymore
-        while Proc in self.Proc:
-            sleep(self._INI_SCHED)
-        # after the procedure has been removed from the stack, 
-        # we check if a response was received
+        # wait for the procedure to end and release the GMM stack
+        if not self.ready.wait(self.T3370+self._WAIT_ADD):
+            # procedure is stuck, will be aborted in the server loop
+            # WNG: this means the routine for cleaning NAS procedures in timeout 
+            # should be enabled in CorenetServer
+            return False
+        #
+        # check if a response was received
         if hasattr(Proc, 'UEInfo'):
-            self._ini_ret = Proc.UEInfo
+            self._net_init_ret = Proc.UEInfo
             return True
         else:
             return False
@@ -373,9 +384,9 @@ class UEGMMd(SigStack):
         
         if True, the UEInfo from the response is available in self._ini_ret
         """
-        if not self._ini_con():
+        if not self._net_init_con():
             return False
-        Proc = self.init_proc(GMMDetachCN)
+        Proc = self.init_proc(GMMDetachCN, gmm_preempt=True)
         if cause is not None:
             Proc.set_msg(8, 5, DetachTypeMT={'Type': type}, GMMCause=cause)
         else:
@@ -386,15 +397,20 @@ class UEGMMd(SigStack):
             self._log('ERR', 'NAS message encoding failed')
             Proc.abort()
             return False
-        self.Iu._send_to_ue(NasTx)
+        if not self.Iu._send_to_ue(NasTx):
+            # something bad happened while sending the message
+            return False
         #
-        # check the procedure stack until our detach procedure is not there anymore
-        while Proc in self.Proc:
-            sleep(self._INI_SCHED)
-        # after the procedure has been removed from the stack, 
+        # wait for the procedure to end and release the GMM stack
+        if not self.ready.wait(T3322+self._WAIT_ADD):
+            # procedure is stuck, will be aborted in the server loop
+            # WNG: this means the routine for cleaning NAS procedures in timeout 
+            # should be enabled in CorenetServer
+            return False
+        # 
         # we check if a response was received
         if hasattr(Proc, 'UEInfo'):
-            self._ini_ret = Proc.UEInfo
+            self._net_init_ret = Proc.UEInfo
             return True
         else:
             return False
@@ -402,7 +418,7 @@ class UEGMMd(SigStack):
     def inform(self, **info):
         """send an GMM information with given info
         """
-        if not self._ini_con():
+        if not self._net_init_con():
             return False
         Proc = self.init_proc(GMMInformation)
         Proc.set_msg(8, 33, **info)
@@ -412,7 +428,7 @@ class UEGMMd(SigStack):
             self._log('ERR', 'NAS message encoding failed')
             Proc.abort()
             return False
-        self.Iu._send_to_ue(NasTx)
+        return self.Iu._send_to_ue(NasTx)
 
 
 class UESMd(SigStack):
@@ -478,6 +494,9 @@ class UEIuPSd(UEIuSigStack):
     # domain
     DOM = 'PS'
     
+    # to bypass the process_nas() server loop with a custom NAS PDU handler
+    RX_HOOK = None
+    
     #--------------------------------------------------------------------------#
     # global security policy
     #--------------------------------------------------------------------------#
@@ -507,13 +526,16 @@ class UEIuPSd(UEIuSigStack):
     # this will systematically bypass all smc procedures during UE signaling
     SMC_DISABLED = False
     # this will bypass the smc procedure into specific UE signaling procedure
+    # set proc abbreviation in the list: 'ATT', 'RAU', 'SER'
     SMC_DISABLED_PROC = []
     #
     # lists of algorithms priority
     # -> il will be sent as is to the RNC into the SMC
     # -> the RNC will deal with the UE to select one
-    SMC_UEA = [2, 1, 0] # UEA2, UEA1, UEA0
-    SMC_UIA = [1, 0]    # UIA2, UIA1, UIA0 is not defined in UMTS
+    #SMC_UEA = [2, 1, 0] # UEA2, UEA1, UEA0
+    SMC_UEA = [1, 0]
+    #SMC_UIA = [1, 0]    # UIA2, UIA1, UIA0 is not defined in UMTS
+    SMC_UIA = [0]
     #
     # dummy security context in case an SMC has to be run 
     # but no security context exists
@@ -530,11 +552,9 @@ class UEIuPSd(UEIuSigStack):
     PAG_RETR = 2
     # timer in sec between retries
     PAG_WAIT = 2
-    # schedule resolution for looking at the Iu connection state change
-    PAG_SCHED = 0.05
     
     
-    def __init__(self, ued, hnbd, ctx_id):
+    def __init__(self, ued, hnbd=None, ctx_id=-1):
         # init GMM and SM sig stacks
         self.GMM = UEGMMd(ued, self)
         self.SM  = UESMd(ued, self)
@@ -579,6 +599,8 @@ class UEIuPSd(UEIuSigStack):
         """process a NAS message buffer for the PS domain sent by the mobile
         and return a potential NAS response to be sent back to it
         """
+        if self.RX_HOOK:
+            return self.RX_HOOK(buf)
         NasRx, err = NAS.parse_NAS_MO(buf)
         if NasRx is None:
             self._log('WNG', 'invalid PS NAS message: %s' % hexlify(buf).decode('ascii'))
@@ -647,13 +669,40 @@ class UEIuPSd(UEIuSigStack):
                 self.SEC['CKSN'] = cksn
                 return False
     
+    #--------------------------------------------------------------------------#
+    # paging and network-initiated procedures' routines
+    #--------------------------------------------------------------------------#
+    
+    def _get_paging_ies(self, cause):
+        # prepare the RANAPPaging IEs
+        # CN domain and IMSI
+        IEs = {'CN_DomainIndicator' : self._cndomind,
+               'PermanentNAS_UE_ID' : ('iMSI', NAS.encode_bcd(self.UE.IMSI))}
+        # DRX paging cycle
+        if 'DRXParam' in self.UE.Cap:
+            drx = self.UE.Cap['DRXParam']['DRXCycleLen']()
+            if drx in (6, 7, 8, 9):
+                IEs['DRX_CycleLengthCoefficient'] = drx
+        # paging with IMSI instead of P-TMSI
+        if not self.PAG_IMSI:
+            IEs['TemporaryUE_ID'] = ('p-TMSI', pack('>I', self.UE.PTMSI))
+        # paging cause
+        if isinstance(cause, integer_types):
+            try:
+                IEs['PagingCause'] = RANAP.RANAP_IEs.PagingCause._cont_rev[cause]
+            except:
+                pass
+        elif isinstance(cause, str_types):
+            IEs['PagingCause'] = cause
+        return IEs
+     
     def page(self, cause=None):
         """sends RANAP Paging command to RNC responsible for the UE RAI
         
         cause [RANAP_IEs.PagingCause, ENUMERATED]: str or int (0..5)
         """
         # send a RANAPPaging for the PS domain
-        if self.RNC is not None:
+        if self.connected.is_set():
             self._log('DBG', 'paging: UE already connected')
             return
         # get the set of RNCs serving the UE RAI
@@ -664,26 +713,10 @@ class UEIuPSd(UEIuSigStack):
             self._log('ERR', 'paging: no RNC serving the UE RAI %s.%.4x.%.2x' % rai)
             return
         #
-        # prepare the RANAPPaging IEs
-        IEs = {'CN_DomainIndicator' : self._cndomind,
-               'PermanentNAS_UE_ID' : ('iMSI', NAS.encode_bcd(self.UE.IMSI))}
-        if 'DRXParam' in self.UE.Cap:
-            drx = self.UE.Cap['DRXParam']['DRXCycleLen']()
-            if drx in (6, 7, 8, 9):
-                IEs['DRX_CycleLengthCoefficient'] = drx
-        if not self.PAG_IMSI:
-            IEs['TemporaryUE_ID'] = ('p-TMSI', pack('>I', self.UE.PTMSI))
-        if isinstance(cause, integer_types):
-            try:
-                IEs['PagingCause'] = RANAP.RANAP_IEs.PagingCause._cont_rev[cause]
-            except:
-                pass
-        elif isinstance(cause, str_types):
-            IEs['PagingCause'] = cause
-        #
+        IEs = self._get_paging_ies(cause)
         # start a RANAPPaging procedure on all RNCs
         for rnc in rncs:
-            self._send_paging(rnc, IEs)
+            rnc.page(**IEs)
         self._log('INF', 'paging: ongoing')
     
     def page_block(self, cause=None):
@@ -693,7 +726,7 @@ class UEIuPSd(UEIuSigStack):
         cause [RANAP_IEs.PagingCause, ENUMERATED]: str or int (0..5)
         """
         # send a RANAPPaging for the PS domain
-        if self.RNC is not None:
+        if self.connected.is_set():
             self._log('DBG', 'paging: UE already connected')
             return True
         # get the set of RNCs serving the UE RAI
@@ -704,38 +737,24 @@ class UEIuPSd(UEIuSigStack):
             self._log('ERR', 'paging: no RNC serving the UE RAI %s.%.4x.%.2x' % rai)
             return False
         #
-        # prepare the RANAPPaging IEs
-        IEs = {'CN_DomainIndicator' : self._cndomind,
-               'PermanentNAS_UE_ID' : ('iMSI', NAS.encode_bcd(self.UE.IMSI))}
-        if 'DRXParam' in self.UE.Cap:
-            drx = self.UE.Cap['DRXParam']['DRXCycleLen']()
-            if drx in (6, 7, 8, 9):
-                IEs['DRX_CycleLengthCoefficient'] = drx
-        if not self.PAG_IMSI:
-            IEs['TemporaryUE_ID'] = ('p-TMSI', pack('>I', self.UE.PTMSI))
-        if isinstance(cause, integer_types):
-            try:
-                IEs['PagingCause'] = RANAP.RANAP_IEs.PagingCause._cont_rev[cause]
-            except:
-                pass
-        elif isinstance(cause, str_types):
-            IEs['PagingCause'] = cause
-        #
+        IEs = self._get_paging_ies(cause)
         # retries paging as defined in case UE does not connect
         i = 0
         while i <= self.PAG_RETR:
-            T0 = time()
             # start a RANAPPaging procedure on all RNCs
             for rnc in rncs:
-                self._send_paging(rnc, IEs)
+                rnc.page(**IEs)
             # check until UE gets connected or timer expires
-            while not self.is_connected() and time() - T0 < self.PAG_WAIT:
-                sleep(self.PAG_SCHED)
-            if self.is_connected():
+            if self.connected.wait(self.PAG_WAIT):
                 self._log('INF', 'paging: UE connected')
                 return True
             else:
+                # timeout
                 i += 1
         self._log('WNG', 'paging: timeout, UE not connected')
         return False
-
+    
+    # this is used by send_raw() and other network-initiated procedures common to CS and PS
+    # defined in UEIuSigStack in HdlrUEIu.py
+    def _net_init_con(self):
+        return self.GMM._net_init_con()

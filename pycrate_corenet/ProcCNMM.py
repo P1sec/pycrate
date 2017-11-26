@@ -70,11 +70,15 @@ class MMSigProc(NASSigProc):
             log('[TESTING] [%s] [MMSigProc] [%s] %s' % (logtype, self.Name, msg))
     
     else:
-        def __init__(self, mmd, encod=None):
+        def __init__(self, mmd, encod=None, mm_preempt=False):
             self._prepare(encod)
-            self.MM   = mmd
-            self.Iu   = mmd.Iu
-            self.UE   = mmd.UE
+            self.MM = mmd
+            self.Iu = mmd.Iu
+            self.UE = mmd.UE
+            self._mm_preempt = mm_preempt
+            if mm_preempt:
+                # preempt the MM stack
+                self.MM.ready.clear()
             self._log('DBG', 'instantiating procedure')
         
         def _log(self, logtype, msg):
@@ -104,12 +108,18 @@ class MMSigProc(NASSigProc):
             for p in self.MM.Proc[ind+1:]:
                 p.abort()
             del self.MM.Proc[ind:]
+        if self._mm_preempt:
+            # release the MM stack
+            self.MM.ready.set()
         self._log('INF', 'aborting')
     
     def rm_from_mm_stack(self):
         # remove the procedure from the MM stack of procedures
         if self.MM.Proc[-1] == self:
             del self.MM.Proc[-1]
+        if self._mm_preempt:
+            # release the MM stack
+            self.MM.ready.set()
     
     def init_timer(self):
         if self.Timer is not None:
@@ -122,6 +132,10 @@ class MMSigProc(NASSigProc):
             return None
         else:
             return getattr(self.MM, self.Timer)
+    
+    def mm_preempt(self):
+        self._mm_preempt = True
+        self.MM.ready.clear()
     
     #--------------------------------------------------------------------------#
     # common helpers
@@ -206,7 +220,7 @@ class MMTMSIReallocation(MMSigProc):
         #
         # just take the new tmsi in use
         self.UE.set_tmsi(self.tmsi)
-        self._log('INF', 'new TMSI set, %.8x' % self.tmsi)
+        self._log('INF', 'new TMSI set, 0x%.8x' % self.tmsi)
         self.rm_from_mm_stack()
         return None
 
@@ -447,7 +461,7 @@ class MMIdentification(MMSigProc):
             self._log('WNG', 'identity responded not corresponding to type requested '\
                       '(%i instead of %i)' % (self.UEInfo['ID'][0], self.IDType))
         self._log('INF', 'identity responded, %r' % self._nas_rx['ID'][1])
-        self.UE.set_ident_from_ue(*self.UEInfo['ID'])
+        self.UE.set_ident_from_ue(*self.UEInfo['ID'], dom='CS')
         #
         self.rm_from_mm_stack()
         return None
@@ -632,6 +646,8 @@ class MMLocationUpdating(MMSigProc):
     
     def process(self, pdu):
         # got an MMLocationUpdatingRequest
+        # preempt the MM stack
+        self.mm_preempt()
         if self.TRACK_PDU:
             self._pdu.append( (time(), 'UL', pdu) )
         self.errcause, self.UEInfo = None, {}
@@ -664,7 +680,7 @@ class MMLocationUpdating(MMSigProc):
             #
             if self.UEInfo['ID'][0] == 1:
                 # IMSI is provided at the NAS layer
-                self.UE.set_ident_from_ue(*self.UEInfo['ID'])
+                self.UE.set_ident_from_ue(*self.UEInfo['ID'], dom='CS')
                 if not self._chk_imsi():
                     # IMSI not allowed
                     return self.output()
@@ -676,7 +692,7 @@ class MMLocationUpdating(MMSigProc):
         #
         if self.Iu.require_smc(self):
             # if we are here, there was no auth procedure,
-            # hence the cksn submitted by the UE is valid
+            # hence the cksn submitted by the UE is considered valid
             return self._ret_smc(self.UEInfo['CKSN'], False)
         #
         if self._req_imei:
@@ -747,7 +763,7 @@ class MMLocationUpdating(MMSigProc):
                     return self._ret_auth()
                 elif self.Iu.require_smc(self):
                     # if we are here, there was no auth procedure,
-                    # hence the cksn submitted by the UE is valid
+                    # hence the cksn submitted by the UE is considered valid
                     return self._ret_smc(self.UEInfo['CKSN'], False)
                 elif self._req_imei:
                     return self._ret_req_imei()
@@ -771,7 +787,7 @@ class MMLocationUpdating(MMSigProc):
                 self.abort()
                 self._end(nas_tx=False)
                 return None
-            # self.Iu.SEC['CKSN'] has been taken into action as the RRC layer
+            # self.Iu.SEC['CKSN'] has been taken into use at the RRC layer
             elif self._req_imei:
                 return self._ret_req_imei()
         #
@@ -780,7 +796,12 @@ class MMLocationUpdating(MMSigProc):
             self._end(nas_tx=False)
             return None
         #
+        elif Proc == self:
+            # something bad happened with one of the MM common procedure
+            pass
+        #
         elif Proc is not None:
+            self._err = Proc
             assert()
         #
         return self.output()
@@ -887,6 +908,8 @@ class RRPagingResponse(MMSigProc):
         }
     
     def process(self, pdu):
+        # preempt the MM stack
+        self.mm_preempt()
         if self.TRACK_PDU:
             self._pdu.append( (time(), 'UL', pdu) )
         self.UEInfo = {}
@@ -898,7 +921,7 @@ class RRPagingResponse(MMSigProc):
         #
         if self.Iu.require_smc(self):
             # if we are here, there was no auth procedure,
-            # hence the cksn submitted by the UE is valid
+            # hence the cksn submitted by the UE is considered valid
             return self._ret_smc(self.UEInfo['CKSN'], False)
         #
         return self.postprocess()
@@ -913,8 +936,12 @@ class RRPagingResponse(MMSigProc):
             if not Proc.success:
                 self.abort()
                 return None
-            # self.Iu.SEC['CKSN'] has been taken into action as the RRC layer
+            # self.Iu.SEC['CKSN'] has been taken into use at the RRC layer
+        elif Proc == self:
+            # something bad happened with one of the MM common procedure
+            pass
         elif Proc is not None:
+            self._err = Proc
             assert()
         #
         self.rm_from_mm_stack()
@@ -1058,4 +1085,3 @@ MMProcCnDispatcher = {
     41: MMAbort,
     50: MMInformation
     }
-

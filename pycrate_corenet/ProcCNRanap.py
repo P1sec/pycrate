@@ -37,7 +37,7 @@ from .ProcProto import *
 #------------------------------------------------------------------------------#
 
 class RANAPSigProc(LinkSigProc):
-    """RANAP signaling procedure handler
+    """RANAP connection-oriented signaling procedure handler
     
     instance attributes:
         - Name  : procedure name
@@ -67,6 +67,8 @@ class RANAPSigProc(LinkSigProc):
         self.Server = iud.RNC.Server
         if iud.UE:
             self.UE = iud.UE
+        else:
+            self._log('WNG', 'no UEd instance attached')
         #
         # to store PDU traces
         self._pdu = []
@@ -81,9 +83,24 @@ class RANAPSigProc(LinkSigProc):
         self.Iu._log(logtype, '[%s] %s' % (self.Name, msg))
     
     def recv(self, pdu):
+        self._recv(pdu)
+        self._log('ERR', 'recv() not implemented')
+    
+    def _recv(self, pdu):
+        # track the PDU
         if self.TRACK_PDU:
             self._pdu.append( (time(), 'UL', pdu) )
-        self._log('ERR', 'recv() not implemented')
+        # try to decode it and generate an error if failing
+        self.errcause, self.UEInfo = None, {}
+        try:
+            self.decode_pdu(pdu, self.UEInfo)
+        except Exception as err:
+            self._err = err
+            self._log('ERR', 'decode_pdu (%s), sending error indication' % err)
+            # cause: protocol, abstract-syntax-error-reject
+            self.errcause = ('protocol', 100)
+            # send a RANAP error ind
+            self.Iu.send_error_ind(cause=self.errcause)
     
     def send(self):
         self._log('ERR', 'send() not implemented')
@@ -96,13 +113,80 @@ class RANAPSigProc(LinkSigProc):
         if self.Code in self.Iu.Proc:
             del self.Iu.Proc[self.Code]
         self._log('INF', 'aborting')
+
+
+class RANAPConlessSigProc(LinkSigProc):
+    """RANAP connection-less signaling procedure handler
     
+    instance attributes:
+        - Name  : procedure name
+        - RNC   : reference to the HNBd instance connected by Iu
+        - Server: reference to the CorenetServer instance handling the RNC
+        - Desc  : ASN.1 procedure description
+        - Code  : procedure code
+        - Crit  : procedure criticality
+        - Cont  : ASN.1 procedure PDU(s) content
+        - Encod : custom PDU encoders with fixed values
+        - Decod : custom PDU decoders with tranform functions
+    """
+    
+    TRACK_PDU = True
+    
+    def __init__(self, rncd):
+        #
+        self.Name   = self.__class__.__name__
+        self.RNC    = rncd
+        self.Server = rncd.Server
+        #
+        # to store PDU traces
+        self._pdu = []
+        # list of PDU to be sent to the HNB
+        self._snd = []
+        #
+        self._log('DBG', 'instantiating procedure')
+    
+    def _log(self, logtype, msg):
+        self.RNC._log(logtype, '[%s] %s' % (self.Name, msg))
+    
+    def recv(self, pdu):
+        self._recv(pdu)
+        self._log('ERR', 'recv() not implemented')
+    
+    def _recv(self, pdu):
+        # track the PDU
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'UL', pdu) )
+        # try to decode it and generate an error if failing
+        self.errcause, self.RNCInfo = None, {}
+        try:
+            self.decode_pdu(pdu, self.RNCInfo)
+        except Exception as err:
+            self._err = err
+            self._log('ERR', 'decode_pdu (%s), sending error indication' % err)
+            # cause: protocol, abstract-syntax-error-reject
+            self.errcause = ('protocol', 100)
+            # send an error indication to the RNC in connection-less signaling
+            self.RNC.start_ranap_proc(RANAPErrorIndConlessCN, Cause=self.errcause)
+    
+    def send(self):
+        self._log('ERR', 'send() not implemented')
+        return self._snd
+    
+    def trigger(self):
+        return []
+    
+    def abort(self):
+        if self.Code in self.RNC.ProcRanap:
+            del self.RNC.ProcRanap[self.Code]
+        self._log('INF', 'aborting')
+
 
 class RANAPRABAssignment(RANAPSigProc):
     """RAB Assignment: TS 25.413, section 8.2
     
     CN-initiated
     request-response(s)
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -146,6 +230,7 @@ class RANAPRABReleaseRequest(RANAPSigProc):
     
     RNC-initiated
     request only
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -177,6 +262,7 @@ class RANAPIuReleaseRequest(RANAPSigProc):
     
     RNC-initiated
     request only
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -203,31 +289,17 @@ class RANAPIuReleaseRequest(RANAPSigProc):
         }
     
     def recv(self, pdu):
-        if self.TRACK_PDU:
-            self._pdu.append( (time(), 'UL', pdu) )
-        #
-        self.errcause, self.UEInfo = None, {}
-        try:
-            self.decode_pdu(pdu, self.UEInfo)
-        except Exception as err:
-            self._err = err
-            self._log('ERR', 'decode_pdu: %s' % err)
-            self.errcause = ('protocol', 'abstract-syntax-error-reject')
-        #
-        # this will trigger an IuRelease procedure
+        self._recv(pdu)
         # remove from the Iu RANAP procedure stack
         try:
             del self.Iu.Proc[self.Code]
         except:
             pass
+        # this will trigger an IuRelease procedure
     
     def trigger(self):
         if self.errcause:
-            Err = self.Iu.init_ranap_proc(RANAPErrorIndCN, Cause=self.errcause)
-            if Err:
-                return [Err]
-            else:
-                return []
+            return []
         else:
             # copy the cause signaled by the RNC
             IuRel = self.Iu.init_ranap_proc(RANAPIuRelease, Cause=self.UEInfo['Cause'])
@@ -242,6 +314,7 @@ class RANAPIuRelease(RANAPSigProc):
     
     CN-initiated
     request-response
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -276,18 +349,22 @@ class RANAPIuRelease(RANAPSigProc):
         'uns': None
         }
     
+    def send(self):
+        # send the IuRelease request
+        if self.TRACK_PDU:
+            for pdu in self._snd:
+                self._pdu.append( (time(), 'DL', pdu) )
+        # send back the list of PDU to be returned to the HNB
+        return self._snd
+    
     def recv(self, pdu):
         # recv the IuRelease response
-        if self.TRACK_PDU:
-            self._pdu.append( (time(), 'UL', pdu) )
-        #
-        self.errcause, self.UEInfo = None, {}
+        self._recv(pdu)
+        # remove from the Iu RANAP procedure stack
         try:
-            self.decode_pdu(pdu, self.UEInfo)
-        except Exception as err:
-            self._err = err
-            self._log('ERR', 'decode_pdu: %s' % err)
-            self.errcause = ('protocol', 'abstract-syntax-error-reject')
+            del self.Iu.Proc[self.Code]
+        except:
+            pass
         #
         # update mobility state
         if self.Iu.DOM == 'CS':
@@ -302,27 +379,14 @@ class RANAPIuRelease(RANAPSigProc):
         self.Iu.unset_ran()
         self.Iu.unset_ctx()
         self.Iu.SEC['CKSN'] = None
-        #
-        # remove from the Iu RANAP procedure stack
-        try:
-            del self.Iu.Proc[self.Code]
-        except:
-            pass
-    
-    def send(self):
-        # send the IuRelease request
-        if self.TRACK_PDU:
-            for pdu in self._snd:
-                self._pdu.append( (time(), 'DL', pdu) )
-        # send back the list of PDU to be returned to the HNB
-        return self._snd
-    
+
 
 class RANAPRelocationPreparation(RANAPSigProc):
     """Relocation Preparation: TS 25.413, section 8.6
     
     RNC-initiated
     request-accept, request-reject
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -377,6 +441,8 @@ class RANAPRelocationPreparation(RANAPSigProc):
         'suc': ({}, {}),
         'uns': ({}, {})
         }
+    
+    # not implemented
 
 
 class RANAPRelocationResourceAllocation(RANAPSigProc):
@@ -384,6 +450,7 @@ class RANAPRelocationResourceAllocation(RANAPSigProc):
     
     CN-initiated
     request-accept, request-reject
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -443,6 +510,8 @@ class RANAPRelocationResourceAllocation(RANAPSigProc):
         'suc': ({}, {}),
         'uns': ({}, {})
         }
+    
+    # not implemented
 
 
 class RANAPRelocationDetect(RANAPSigProc):
@@ -450,6 +519,7 @@ class RANAPRelocationDetect(RANAPSigProc):
     
     RNC-initiated
     request only
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -474,6 +544,8 @@ class RANAPRelocationDetect(RANAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    # not implemented
 
 
 class RANAPRelocationComplete(RANAPSigProc):
@@ -481,6 +553,7 @@ class RANAPRelocationComplete(RANAPSigProc):
     
     RNC-initiated
     request only
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -507,6 +580,8 @@ class RANAPRelocationComplete(RANAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    # not implemented
 
 
 class RANAPRelocationCancel(RANAPSigProc):
@@ -514,6 +589,7 @@ class RANAPRelocationCancel(RANAPSigProc):
     
     RNC-initiated
     request-response
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -543,6 +619,8 @@ class RANAPRelocationCancel(RANAPSigProc):
         'suc': ({}, {}),
         'uns': None
         }
+    
+    # not implemented
 
 
 class RANAPSRNSContextTransfer(RANAPSigProc):
@@ -550,6 +628,7 @@ class RANAPSRNSContextTransfer(RANAPSigProc):
     
     CN-initiated
     request-response
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -581,6 +660,8 @@ class RANAPSRNSContextTransfer(RANAPSigProc):
         'suc': ({}, {}),
         'uns': None
         }
+    
+    # not implemented
 
 
 class RANAPSRNSDataForwarding(RANAPSigProc):
@@ -588,6 +669,7 @@ class RANAPSRNSDataForwarding(RANAPSigProc):
     
     CN-initiated
     request only
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -612,6 +694,8 @@ class RANAPSRNSDataForwarding(RANAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    # not implemented
 
 
 class RANAPSRNSContextForwardToCN(RANAPSigProc):
@@ -619,6 +703,7 @@ class RANAPSRNSContextForwardToCN(RANAPSigProc):
     
     RNC-initiated
     request only
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -643,6 +728,8 @@ class RANAPSRNSContextForwardToCN(RANAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    # not implemented
 
 
 class RANAPSRNSContextForwardToRNC(RANAPSigProc):
@@ -650,6 +737,7 @@ class RANAPSRNSContextForwardToRNC(RANAPSigProc):
     
     CN-initiated
     request only
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -674,13 +762,16 @@ class RANAPSRNSContextForwardToRNC(RANAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    # not implemented
 
 
-class RANAPPaging(RANAPSigProc):
+class RANAPPaging(RANAPConlessSigProc):
     """Paging: TS 25.413, section 8.15
     
     CN-initiated
     request only
+    connection-less signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -718,9 +809,9 @@ class RANAPPaging(RANAPSigProc):
         if self.TRACK_PDU:
             for pdu in self._snd:
                 self._pdu.append( (time(), 'DL', pdu) ) 
-        # remove from the Iu RANAP procedure stack
+        # remove from the RNC handler RANAP procedure stack
         try:
-            del self.Iu.Proc[self.Code]
+            del self.RNC.ProcRanap[self.Code]
         except:
             pass
         return self._snd
@@ -731,6 +822,7 @@ class RANAPCommonID(RANAPSigProc):
     
     CN-initiated
     request only
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -765,6 +857,19 @@ class RANAPCommonID(RANAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    def send(self):
+        # send the Common ID IEs to the RNC
+        if self.TRACK_PDU:
+            for pdu in self._snd:
+                self._pdu.append( (time(), 'DL', pdu) )
+        # remove from the Iu RANAP procedure stack
+        try:
+            del self.Iu.Proc[self.Code]
+        except:
+            pass
+        self._log('INF', 'sent')
+        return self._snd
 
 
 class RANAPCNInvokeTrace(RANAPSigProc):
@@ -772,6 +877,7 @@ class RANAPCNInvokeTrace(RANAPSigProc):
     
     CN-initiated
     request only
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -802,6 +908,23 @@ class RANAPCNInvokeTrace(RANAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    def send(self):
+        # send the Common ID IEs to the RNC
+        if self.TRACK_PDU:
+            for pdu in self._snd:
+                self._pdu.append( (time(), 'DL', pdu) )
+        # remove from the Iu RANAP procedure stack
+        try:
+            del self.Iu.Proc[self.Code]
+        except:
+            pass
+        try:
+            tracerefl = '0x%s' % hexlify(self.TraceReference).decode('ascii')
+        except:
+            tracerefl = repr(self.TraceReference)
+        self._log('INF', 'sent with trace reference %s' % tracerefl)
+        return self._snd
 
 
 class RANAPSecurityModeControl(RANAPSigProc):
@@ -809,6 +932,7 @@ class RANAPSecurityModeControl(RANAPSigProc):
     
     CN-initiated
     request-accept, request-reject
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -849,18 +973,22 @@ class RANAPSecurityModeControl(RANAPSigProc):
         'uns': ({}, {})
         }
     
+    def send(self):
+        # send the SecurityModeCommand
+        if self.TRACK_PDU:
+            for pdu in self._snd:
+                self._pdu.append( (time(), 'DL', pdu) )
+        # send back the list of PDU to be returned to the HNB
+        return self._snd
+    
     def recv(self, pdu):
         # recv the SMC response
-        if self.TRACK_PDU:
-            self._pdu.append( (time(), 'UL', pdu) )
-        #
-        self.errcause, self.UEInfo = None, {}
+        self._recv(pdu)
+        # remove from the Iu RANAP procedure stack
         try:
-            self.decode_pdu(pdu, self.UEInfo)
-        except Exception as err:
-            self._err = err
-            self._log('ERR', 'decode_pdu: %s' % err)
-            self.errcause = ('protocol', 'abstract-syntax-error-reject')
+            del self.Iu.Proc[self.Code]
+        except:
+            pass
         #
         if self.errcause:
             self._log('WNG', 'error in the response decoding')
@@ -891,32 +1019,14 @@ class RANAPSecurityModeControl(RANAPSigProc):
                 uia = 0
             self._log('INF', 'accepted with UEA%i / UIA%i' % (uea, uia))
         #
-        # remove from the Iu RANAP procedure stack
-        try:
-            del self.Iu.Proc[self.Code]
-        except:
-            pass
-        #
         # signal the result back to the NAS stack if required
         if self._cb:
             self.ret = self.Iu.trigger_nas(self)
             self._cb = None
     
-    def send(self):
-        # send the SecurityModeCommand
-        if self.TRACK_PDU:
-            for pdu in self._snd:
-                self._pdu.append( (time(), 'DL', pdu) )
-        # send back the list of PDU to be returned to the HNB
-        return self._snd
-    
     def trigger(self):
         if self.errcause:
-            Err = self.Iu.init_ranap_proc(RANAPErrorIndCN, Cause=self.errcause)
-            if Err:
-                return [Err]
-            else:
-                return []
+            return []
         elif not self.success:
             # copy the cause signaled by the RNC
             IuRel = self.Iu.init_ranap_proc(RANAPIuRelease, Cause=self.UEInfo['Cause'])
@@ -934,6 +1044,7 @@ class RANAPLocationReportingControl(RANAPSigProc):
     
     CN-initiated
     request only
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -963,6 +1074,19 @@ class RANAPLocationReportingControl(RANAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    def send(self):
+        # send the Common ID IEs to the RNC
+        if self.TRACK_PDU:
+            for pdu in self._snd:
+                self._pdu.append( (time(), 'DL', pdu) )
+        # remove from the Iu RANAP procedure stack
+        try:
+            del self.Iu.Proc[self.Code]
+        except:
+            pass
+        self._log('INF', 'sent with request type %r' % self.RequestType)
+        return self._snd
 
 
 class RANAPLocationReport(RANAPSigProc):
@@ -970,6 +1094,7 @@ class RANAPLocationReport(RANAPSigProc):
     
     RNC-initiated
     request only
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -1002,6 +1127,123 @@ class RANAPLocationReport(RANAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    _PosDataDiscLUT = {
+        0 : 'Positioning Data Set present (non-GANSS methods used)',
+        1 : 'GANSS Positioning Data Set present (GANSS methods used)',
+        2 : 'Additional Positioning Data Set'
+        }
+    _PosMethLUT = {
+        5 : 'Mobile Assisted GPS',
+        6 : 'Mobile Based GPS',
+        7 : 'Conventional GPS',
+        8 : 'U-TDOA',
+        9 : 'OTDOA',
+        10 : 'IPDL',
+        11 : 'RTT',
+        12 : 'Cell ID'
+        }
+    _UsageLUT = {
+        0 : 'Attempted unsuccessfully due to failure or interruption - not used',
+        1 : 'Attempted successfully: results not used to generate location - not used',
+        2 : 'Attempted successfully: results used to verify but not generate location - not used',
+        3 : 'Attempted successfully: results used to generate location',
+        4 : 'Attempted successfully: case where MS supports multiple mobile based positioning methods '\
+            'and the actual method or methods used by the MS cannot be determined'
+        }
+    _GANSSPosMethLUT = {
+        0 : 'MS-Based',
+        1 : 'MS-Assisted',
+        2 : 'Conventional'
+        }
+    _GANSSID = {
+        0 : 'Galileo',
+        1 : 'SBAS',
+        2 : 'Modernized GPS',
+        3 : 'QZSS',
+        4 : 'GLONASS',
+        5 : 'BDS '
+        }
+    _AddPosMethLUT = {
+        1 : 'MS-Assisted',
+        2 : 'Standalone'
+        }
+    _AddID = {
+        0 : 'Barometric Pressure',
+        1 : 'WLAN',
+        3 : 'Bluetooth',
+        4 : 'MBS'
+        }
+    
+    def recv(self, pdu):
+        # recv the data volume report response
+        self._recv(pdu)
+        # remove from the Iu RANAP procedure stack
+        try:
+            del self.Iu.Proc[self.Code]
+        except:
+            pass
+        #
+        # TODO: do something more clever with the location report
+        desc, ueinfo = [], dict(self.UEInfo)
+        if 'RequestType' in ueinfo:
+            del ueinfo['RequestType']
+        if 'AreaIdentity' in ueinfo and ueinfo['AreaIdentity'][0] == 'sAI':
+            desc.append('SAI PLMN %s, LAC 0x%.4x, SAC 0x%.4x'\
+                        % (plmn_buf_to_str(ueinfo['AreaIdentity'][1]['pLMNidentity']),
+                           unpack('>H', ueinfo['AreaIdentity'][1]['lAC'])[0],
+                           unpack('>H', ueinfo['AreaIdentity'][1]['sAC'])[0]))
+            del ueinfo['AreaIdentity']
+        if 'PositionData' in ueinfo:
+            try:
+                desc.extend( self.get_position_data(ueinfo['PositionData']) )
+            except:
+                pass
+            else:
+                del ueinfo['PositionData']
+        if ueinfo:
+            # some more unprocessed values
+            desc.extend(['%s, %r' % (k, v) for (k, v) in ueinfo.items()])
+        self._log('INF', ' | '.join(desc))
+    
+    @classmethod
+    def get_position_data(cls, data):
+        disc, desc = data['positioningDataDiscriminator'][0], []
+        if disc == 0:
+            ds = data['positioningDataSet']
+            pmu = ord(ds[0])
+            pm, pu = pmu>>3, pmu&0x7
+            desc.append('positioning method %i (%s) and usage %i (%s)'\
+                        % (pm, cls._PosMethLUT[pm], pu, cls._UsageLUT[pu]))
+            if len(ds) > 1:
+                pmu = ord(ds[1])
+                pm, pid, pu = pmu>>6, (pmu>>3)&0x7, pmu&0x7
+                desc.append('GANSS positioning method %i (%s), id %i (%s), usage %i (%s)'\
+                            % (pm, cls._GANSSPosMethLUT[pm], pid, cls._GANSSID[pid], pu, cls._UsageLUT[pu]))
+                if len(ds) > 2:
+                    pmu = ord(ds[2])
+                    pm, pid, pu = pmu>>6, (pmu>>3)&0x7, pmu&0x7
+                    desc.append('additional positioning method %i (%s), id %i (%s), usage %i (%s)'\
+                                % (pm, cls._AddPosMethLUT[pm], pid, cls._AddID[pid], pu, cls._UsageLUT[pu]))
+        #
+        elif disc == 1:
+            pmu = ord(ds[1])
+            pm, pid, pu = pmu>>6, (pmu>>3)&0x7, pmu&0x7
+            desc.append('GANSS positioning method %i (%s), id %i (%s), usage %i (%s)'\
+                        % (pm, cls._GANSSPosMethLUT[pm], pid, cls._GANSSID[pid], pu, cls._UsageLUT[pu]))
+            if len(ds) > 2:
+                pmu = ord(ds[2])
+                pm, pid, pu = pmu>>6, (pmu>>3)&0x7, pmu&0x7
+                desc.append('additional positioning method %i (%s), id %i (%s), usage %i (%s)'\
+                            % (pm, cls._AddPosMethLUT[pm], pid, cls._AddID[pid], pu, cls._UsageLUT[pu]))
+        #
+        elif disc == 2:
+            pmu = ord(ds[2])
+            pm, pid, pu = pmu>>6, (pmu>>3)&0x7, pmu&0x7
+            desc.append('additional positioning method %i (%s), id %i (%s), usage %i (%s)'\
+                        % (pm, cls._AddPosMethLUT[pm], pid, cls._AddID[pid], pu, cls._UsageLUT[pu]))
+        #
+        return desc
 
 
 class RANAPDataVolumeReport(RANAPSigProc):
@@ -1009,6 +1251,7 @@ class RANAPDataVolumeReport(RANAPSigProc):
     
     CN-initiated
     request-response
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -1040,6 +1283,25 @@ class RANAPDataVolumeReport(RANAPSigProc):
         'suc': ({}, {}),
         'uns': None
         }
+    
+    def send(self):
+        # send the Common ID IEs to the RNC
+        if self.TRACK_PDU:
+            for pdu in self._snd:
+                self._pdu.append( (time(), 'DL', pdu) )
+        return self._snd
+    
+    def recv(self, pdu):
+        # recv the data volume report response
+        self._recv(pdu)
+        # remove from the Iu RANAP procedure stack
+        try:
+            del self.Iu.Proc[self.Code]
+        except:
+            pass
+        #
+        # TODO: do something with the data volume report
+        self._log('INF', 'success')
 
 
 class RANAPInitialUEMessage(RANAPSigProc):
@@ -1047,6 +1309,7 @@ class RANAPInitialUEMessage(RANAPSigProc):
     
     RNC-initiated
     request only
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -1103,16 +1366,12 @@ class RANAPInitialUEMessage(RANAPSigProc):
         }
     
     def recv(self, pdu):
-        if self.TRACK_PDU:
-            self._pdu.append( (time(), 'UL', pdu) )
-        #
-        self.errcause, self.retnas, self.UEInfo = None, None, {}
+        self._recv(pdu)
+        # remove from the Iu RANAP procedure stack
         try:
-            self.decode_pdu(pdu, self.UEInfo)
-        except Exception as err:
-            self._err = err
-            self._log('ERR', 'decode_pdu: %s' % err)
-            self.errcause = ('protocol', 'abstract-syntax-error-reject')
+            del self.Iu.Proc[self.Code]
+        except:
+            pass
         #
         if self.errcause is None:
             # verification against HNBd parameters and HNBAP / RUA infos:
@@ -1133,13 +1392,8 @@ class RANAPInitialUEMessage(RANAPSigProc):
                 self._log('WNG', 'invalid GlobalRNC-ID, %s' % self.UEInfo['GlobalRNC_ID'])
                 err = True
             if err:
-                self.errcause = ('protocol', 'message-not-compatible-with-receiver-state')
-        #
-        # remove from the Iu RANAP procedure stack
-        try:
-            del self.Iu.Proc[self.Code]
-        except:
-            pass
+                self.errcause = ('radioNetwork', None)
+                # TODO: could have to send a RANAP error ind
         #
         if self.errcause is None:
             # update mobility state
@@ -1152,16 +1406,12 @@ class RANAPInitialUEMessage(RANAPSigProc):
             if 'RAC' in self.UEInfo:
                 self.UE.set_rac(self.UEInfo['RAC'])
             # process the NAS PDU, and get a list (potentially empty) of new
-            # RANAP procedures to be run 
+            # RANAP procedures to be run
             self.ret = self.Iu.process_nas(self.UEInfo['NAS_PDU'])
     
     def trigger(self):
         if self.errcause:
-            Err = self.Iu.init_ranap_proc(RANAPErrorIndCN, Cause=self.errcause)
-            if Err:
-                return [Err]
-            else:
-                return []
+            return []
         else:
             # a new RANAP procedure may have been prepared by the NAS layer
             return self.ret
@@ -1172,6 +1422,7 @@ class RANAPDirectTransferCN(RANAPSigProc):
     
     CN-initiated
     request only
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -1224,6 +1475,7 @@ class RANAPDirectTransferRNC(RANAPSigProc):
     
     RNC-initiated
     request only
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -1266,16 +1518,12 @@ class RANAPDirectTransferRNC(RANAPSigProc):
         }
     
     def recv(self, pdu):
-        if self.TRACK_PDU:
-            self._pdu.append( (time(), 'UL', pdu) )
-        #
-        self.errcause, self.retnas, self.UEInfo = None, None, {}
+        self._recv(pdu)
+        # remove from the Iu RANAP procedure stack
         try:
-            self.decode_pdu(pdu, self.UEInfo)
-        except Exception as err:
-            self._err = err
-            self._log('ERR', 'decode_pdu: %s' % err)
-            self.errcause = ('protocol', 'abstract-syntax-error-reject')
+            del self.Iu.Proc[self.Code]
+        except:
+            pass
         #
         if self.errcause is None:
             # verification against HNBd parameters and HNBAP / RUA infos:
@@ -1299,14 +1547,10 @@ class RANAPDirectTransferRNC(RANAPSigProc):
             self.UEInfo['SAI'][2] != self.RNC.Config['SAC']:
                 self._log('WNG', 'invalid SAC, %.2x' % self.UEInfo['SAI'][2])
                 err = True
-            #if err:
-            #    self.errcause = ('protocol', 'message-not-compatible-with-receiver-state')
-        #
-        # remove from the Iu RANAP procedure stack
-        try:
-            del self.Iu.Proc[self.Code]
-        except:
-            pass
+            if err:
+                # this means the RNC changed its loc config without prior informing the CN
+                self.errcause = ('radioNetwork', None)
+                # TODO: could have to send a RANAP error ind
         #
         if self.errcause is None:
             # process the NAS PDU, and get a list (potentially empty) of new
@@ -1315,21 +1559,18 @@ class RANAPDirectTransferRNC(RANAPSigProc):
     
     def trigger(self):
         if self.errcause:
-            Err = self.Iu.init_ranap_proc(RANAPErrorIndCN, Cause=self.errcause)
-            if Err:
-                return [Err]
-            else:
-                return []
+            return []
         else:
             # new RANAP procedures may have been prepared by the NAS layer
             return self.ret
 
 
-class RANAPOverloadControlCN(RANAPSigProc):
+class RANAPOverloadControlCN(RANAPConlessSigProc):
     """Overload Control: TS 25.413, section 8.25
     
     CN-initiated
     request only
+    connection-less signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -1358,13 +1599,16 @@ class RANAPOverloadControlCN(RANAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    # not implemented
 
 
-class RANAPOverloadControlRNC(RANAPSigProc):
+class RANAPOverloadControlRNC(RANAPConlessSigProc):
     """Overload Control: TS 25.413, section 8.25
     
     RNC-initiated
     request only
+    connection-less signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -1393,13 +1637,16 @@ class RANAPOverloadControlRNC(RANAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    # not implemented
 
 
-class RANAPResetCN(RANAPSigProc):
+class RANAPResetCN(RANAPConlessSigProc):
     """Reset: TS 25.413, section 8.26
     
     CN-initiated
     request only
+    connection-less signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -1435,13 +1682,31 @@ class RANAPResetCN(RANAPSigProc):
         'suc': ({}, {}),
         'uns': None
         }
+    
+    def send(self):
+        # send the Reset to the RNC
+        if self.TRACK_PDU:
+            for pdu in self._snd:
+                self._pdu.append( (time(), 'DL', pdu) )
+        return self._snd
+    
+    def recv(self, pdu):
+        # recv the reset response
+        self._recv(pdu)
+        # remove from the RNC RANAP procedure stack
+        try:
+            del self.RNC.ProcRanap[self.Code]
+        except:
+            pass
+        self._log('INF', 'success')
 
 
-class RANAPResetRNC(RANAPSigProc):
+class RANAPResetRNC(RANAPConlessSigProc):
     """Reset: TS 25.413, section 8.26
     
     RNC-initiated
     request only
+    connection-less signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -1477,13 +1742,59 @@ class RANAPResetRNC(RANAPSigProc):
         'suc': ({}, {}),
         'uns': None
         }
+    
+    def recv(self, pdu):
+        # recv the reset indication
+        self._recv(pdu)
+        if self.errcause is None:
+            self._log('INF', 'cause %r' % self.RNCInfo['Cause'])
+            #
+            # reset all UE connections handled by the RNC handler self.RNC in the
+            # core network domain indicated
+            if self.RNCInfo['CN_DomainIndicator'] == 'ps-domain':
+                for ctx_id, ue in self.RNC.UE_IuPS.items():
+                    ue.IuPS.unset_ran()
+                    ue.IuPS.unset_ctx()
+                self.RNC.UE_IuPS.clear()
+            else:
+                for ctx_id, ue in self.UE_IuCS.items():
+                    ue.IuCS.unset_ran()
+                    ue.IuCS.unset_ctx()
+                self.UE_IuCS.clear()
+      
+    def send(self):
+        if self.errcause is not None:
+            return []
+        else:
+            # prepare response IEs
+            IEs['CN_DomainIndicator'] = self.RNCInfo['CN_DomainIndicator']
+            if 'GlobalRNC_ID' in self.RNCInfo:
+                IEs['GlobalRNC_ID'] = self.RNCInfo['GlobalRNC_ID']
+            if 'GlobalCN_ID' in self.RNCInfo:
+                IEs['GlobalCN_ID'] = self.RNCInfo['GlobalCN_ID']
+            if 'ExtendedRNC_ID' in self.RNCInfo:
+                IEs['ExtendedRNC_ID'] = self.RNCInfo['ExtendedRNC_ID']
+            self.encode_pdu('suc', **IEs)
+            #
+            # send the Reset to the RNC
+            if self.TRACK_PDU:
+                for pdu in self._snd:
+                    self._pdu.append( (time(), 'DL', pdu) )
+            # remove from the RNC RANAP procedure stack
+            try:
+                del self.RNC.ProcRanap[self.Code]
+            except:
+                pass
+            #
+            return self._snd
 
 
-class RANAPErrorIndCN(RANAPSigProc):
+class RANAPErrorIndConlessCN(RANAPConlessSigProc):
     """Error Indication: TS 25.413, section 8.27
     
     CN-initiated
     request only
+    connection-less signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -1517,13 +1828,134 @@ class RANAPErrorIndCN(RANAPSigProc):
         if self.TRACK_PDU:
             self._pdu.append( (time(), 'UL', pdu) )
         #
-        # this means we are not able to process a request received from the RNC
-        # this is handled directly within the IuHdlr instance
+        # the received PDU, if submitted, is for a request from the RNC 
+        # we could not understand and could not processed properly in the 
+        # RANAP dispatcher
+        # this is handled directly within the RNC handler instance
     
     def send(self):
         if self.TRACK_PDU:
             for pdu in self._snd:
                 self._pdu.append( (time(), 'DL', pdu) )
+        # remove from the RNC RANAP procedure stack
+        try:
+            del self.RNC.ProcRanap[self.Code]
+        except:
+            pass
+        # send back the list of PDU to be returned to the HNB
+        return self._snd
+
+
+class RANAPErrorIndConlessRNC(RANAPConlessSigProc):
+    """Error Indication: TS 25.413, section 8.27
+    
+    RNC-initiated
+    request only
+    connection-less signaling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 3: CN_DomainIndicator (O)
+      - 4: Cause (O)
+      - 9: CriticalityDiagnostics (O)
+      - 86: GlobalRNC_ID (O)
+      Extensions:
+      - 96: GlobalCN_ID (O)
+      - 171: ExtendedRNC_ID (O)
+    """
+    
+    # ASN.1 procedure description
+    Desc = RANAP.RANAP_PDU_Descriptions.errorIndication
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+    
+    def recv(self, pdu):
+        self._recv(pdu)
+        # remove from the RNC RANAP procedure stack
+        try:
+            del self.RNC.ProcRanap[self.Code]
+        except:
+            pass
+        #
+        if self.errcause is None:
+            self._log('WNG', 'error indication received: %s.%i' % self.RNCInfo['Cause'])
+            # this means the RNC failed to process the previous msg sent by us to it
+            code = self.RNC.ProcRanapLast
+            # RNC-related procedure
+            try:
+                Proc = self.RNC.ProcRanap[code]
+            except:
+                Proc = None
+            else:
+                # aborting and removing the procedure in the RNC handler
+                Proc.abort()
+
+
+class RANAPErrorIndCN(RANAPSigProc):
+    """Error Indication: TS 25.413, section 8.27
+    
+    CN-initiated
+    request only
+    connection-oriented signaling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 3: CN_DomainIndicator (O)
+      - 4: Cause (O)
+      - 9: CriticalityDiagnostics (O)
+      - 86: GlobalRNC_ID (O)
+      Extensions:
+      - 96: GlobalCN_ID (O)
+      - 171: ExtendedRNC_ID (O)
+    """
+    
+    # ASN.1 procedure description
+    Desc = RANAP.RANAP_PDU_Descriptions.errorIndication
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+    
+    def recv(self, pdu):
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'UL', pdu) )
+        #
+        # the received PDU, if submitted, is for a request from the RNC 
+        # we could not understand and could not processed properly in the 
+        # RANAP dispatcher
+        # this is handled directly within the Iu handler instance
+    
+    def send(self):
+        if self.TRACK_PDU:
+            for pdu in self._snd:
+                self._pdu.append( (time(), 'DL', pdu) )
+        # remove from the Iu RANAP procedure stack
+        try:
+            del self.Iu.Proc[self.Code]
+        except:
+            pass
         # send back the list of PDU to be returned to the HNB
         return self._snd
 
@@ -1533,6 +1965,7 @@ class RANAPErrorIndRNC(RANAPSigProc):
     
     RNC-initiated
     request only
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -1563,40 +1996,33 @@ class RANAPErrorIndRNC(RANAPSigProc):
         }
     
     def recv(self, pdu):
-        if self.TRACK_PDU:
-            self._pdu.append( (time(), 'UL', pdu) )
-        #
-        self.ErrInfo = {}
-        try:
-            self.decode_pdu(pdu, self.ErrInfo)
-        except Exception as err:
-            self._err = err
-            self._log('ERR', 'decode_pdu: %s' % err)
-            # do not respond to an error ind, with another error ind...
-        else:
-            self._log('WNG', 'error indication received: %s.%s' % self.ErrInfo['Cause'])
-            # this means the RNC failed to process the previous msg sent to it
-            code = self.Iu.ProcLast
-            try:
-                Proc = self.Iu.Proc[code]
-            except:
-                pass
-            else:
-                # abort the corresponding running procedure
-                Proc.abort()
-        #
-        # remove from the RNC RANAP procedure stack
+        self._recv(pdu)
+        # remove from the Iu RANAP procedure stack
         try:
             del self.Iu.Proc[self.Code]
         except:
             pass
-    
+        #
+        if self.errcause is None:
+            self._log('WNG', 'error indication received: %s.%i' % self.UEInfo['Cause'])
+            # this means the RNC failed to process the previous msg sent by us to it
+            code = self.Iu.ProcLast
+            # Iu-related procedure
+            try:
+                Proc = self.Iu.Proc[code]
+            except:
+                Proc = None
+            else:
+                # aborting and removing the procedure in the Iu handler
+                Proc.abort()
 
-class RANAPCNDeacivateTrace(RANAPSigProc):
+
+class RANAPCNDeactivateTrace(RANAPSigProc):
     """CN Deactivate Trace: TS 25.413, section 8.28
     
     CN-initiated
     request only
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -1622,13 +2048,31 @@ class RANAPCNDeacivateTrace(RANAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    def send(self):
+        # send the Common ID IEs to the RNC
+        if self.TRACK_PDU:
+            for pdu in self._snd:
+                self._pdu.append( (time(), 'DL', pdu) )
+        # remove from the Iu RANAP procedure stack
+        try:
+            del self.Iu.Proc[self.Code]
+        except:
+            pass
+        try:
+            tracerefl = '0x%s' % hexlify(self.TraceReference)
+        except:
+            tracerefl = repr(self.TraceReference)
+        self._log('INF', 'sent with trace reference %s' % tracerefl)
+        return self._snd
 
 
-class RANAPResetResourceCN(RANAPSigProc):
+class RANAPResetResourceCN(RANAPConlessSigProc):
     """Reset Resource: TS 25.413, section 8.29
     
     CN-initiated
     request-response
+    connection-less signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -1666,13 +2110,32 @@ class RANAPResetResourceCN(RANAPSigProc):
         'suc': ({}, {}),
         'uns': None
         }
+    
+    def send(self):
+        # send the ResetResource to the RNC
+        if self.TRACK_PDU:
+            for pdu in self._snd:
+                self._pdu.append( (time(), 'DL', pdu) )
+        return self._snd
+    
+    def recv(self, pdu):
+        # recv the response
+        self._recv(pdu)
+        # remove from the RNC RANAP procedure stack
+        try:
+            del self.RNC.ProcRanap[self.Code]
+        except:
+            pass
+        #
+        self._log('INF', 'success')
 
 
-class RANAPResetResourceRNC(RANAPSigProc):
+class RANAPResetResourceRNC(RANAPConlessSigProc):
     """Reset Resource: TS 25.413, section 8.29
     
     RNC-initiated
     request-response
+    connection-less signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -1710,6 +2173,80 @@ class RANAPResetResourceRNC(RANAPSigProc):
         'suc': ({}, {}),
         'uns': None
         }
+    
+    def recv(self, pdu):
+        # recv the reset request
+        self._recv(pdu)
+        if self.errcause is None:
+            self._log('INF', 'cause %r' % self.RNCInfo['Cause'])
+            RResList, RResIds = self.RNCInfo['ResetResourceList'], []
+            try:
+                # we expect a single prot container (TODO: to be confirmed)
+                assert(len(RResList) == 1)
+                RResList = RReslist[0]
+                for RRes in RResList:
+                    RResIds.append(RRes['value'][1]['iuSigConId'][0])
+            except:
+                self._log('WNG', 'unexpected formatting of ResetResourceList')
+            #
+            # reset all UE connections handled by the RNC handler self.RNC in the
+            # core network domain indicated
+            if self.RNCInfo['CN_DomainIndicator'] == 'ps-domain':
+                for rres in RResIds:
+                    try:
+                        ue = self.RNC.UE_IuPS[rres]
+                    except:
+                        pass
+                    else:
+                        ue.IuPS.unset_ran()
+                        ue.IuPS.unset_ctx()
+                        del self.RNC.UE_IuPS[rres]
+            else:
+                for rres in RResIds:
+                    try:
+                        ue = self.RNC.UE_IuCS[rres]
+                    except:
+                        pass
+                    else:
+                        ue.IuCS.unset_ran()
+                        ue.IuCS.unset_ctx()
+                        del self.RNC.UE_IuCS[rres]
+            self.RResIds = RResIds
+      
+    def send(self):
+        if self.errcause is not None:
+            # remove from the RNC RANAP procedure stack
+            try:
+                del self.RNC.ProcRanap[self.Code]
+            except:
+                pass
+            return []
+        else:
+            # prepare response IEs
+            IEs['CN_DomainIndicator'] = self.RNCInfo['CN_DomainIndicator']
+            if 'GlobalRNC_ID' in self.RNCInfo:
+                IEs['GlobalRNC_ID'] = self.RNCInfo['GlobalRNC_ID']
+            if 'GlobalCN_ID' in self.RNCInfo:
+                IEs['GlobalCN_ID'] = self.RNCInfo['GlobalCN_ID']
+            if 'ExtendedRNC_ID' in self.RNCInfo:
+                IEs['ExtendedRNC_ID'] = self.RNCInfo['ExtendedRNC_ID']
+            RResAck = []
+            IEs['ResetResourceAckList'] = [RResAck]
+            for rres in self.RResIds:
+                RResAck.append({'id': 78, 'criticality': 'reject',
+                                'value': ('ResetResourceItem', {'iuSigConId': (rres, 24)})})
+            self.encode_pdu('suc', **IEs)
+            #
+            # send the Reset response to the RNC
+            if self.TRACK_PDU:
+                for pdu in self._snd:
+                    self._pdu.append( (time(), 'DL', pdu) )
+            # remove from the RNC RANAP procedure stack
+            try:
+                del self.RNC.ProcRanap[self.Code]
+            except:
+                pass
+            return self._snd
 
 
 class RANAPRABModificationRequest(RANAPSigProc):
@@ -1717,6 +2254,7 @@ class RANAPRABModificationRequest(RANAPSigProc):
     
     RNC-initiated
     request only
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -1741,6 +2279,8 @@ class RANAPRABModificationRequest(RANAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    # not implemented
 
 
 class RANAPLocationRelatedData(RANAPSigProc):
@@ -1748,6 +2288,7 @@ class RANAPLocationRelatedData(RANAPSigProc):
     
     CN-initiated
     request-accept, request-reject
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -1784,13 +2325,44 @@ class RANAPLocationRelatedData(RANAPSigProc):
         'suc': ({}, {}),
         'uns': ({}, {})
         }
+    
+    def send(self):
+        # send the LocationRelatedData request
+        if self.TRACK_PDU:
+            for pdu in self._snd:
+                self._pdu.append( (time(), 'DL', pdu) )
+        return self._snd
+    
+    def recv(self, pdu):
+        # recv the LocationRelatedData response
+        self._recv(pdu)
+        # remove from the Iu RANAP procedure stack
+        try:
+            del self.Iu.Proc[self.Code]
+        except:
+            pass
+        #
+        if self.errcause:
+            self.success = False
+        elif pdu[0] == 'unsuccessfulOutcome':
+            if 'Cause' not in self.UEInfo:
+                self._log('WNG', 'failure, rejected without cause')
+            else:
+                self._log('WNG', 'failure, rejected with cause %r' % (self.UEInfo['Cause'], ))
+            self.success = False
+        else:
+            self.success = True
+            self._log('INF', 'success')
+        #
+        # TODO: do something with the returned info
 
 
-class RANAPInformationTransfer(RANAPSigProc):
+class RANAPInformationTransfer(RANAPConlessSigProc):
     """Information Transfer: TS 25.413, section 8.32
     
     CN-initiated
     request-accept, request-reject
+    connection-less signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -1835,6 +2407,8 @@ class RANAPInformationTransfer(RANAPSigProc):
         'suc': ({}, {}),
         'uns': ({}, {})
         }
+    
+    # not implemented
 
 
 class RANAPUESpecificInformation(RANAPSigProc):
@@ -1842,6 +2416,7 @@ class RANAPUESpecificInformation(RANAPSigProc):
     
     CN-initiated
     request only
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -1866,13 +2441,16 @@ class RANAPUESpecificInformation(RANAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    # not implemented
 
 
-class RANAPDirectInformationTransferCN(RANAPSigProc):
+class RANAPDirectInformationTransferCN(RANAPConlessSigProc):
     """Direct Information Transfer: TS 25.413, section 8.34
     
     CN-initiated
     request only
+    connection-less signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -1900,13 +2478,16 @@ class RANAPDirectInformationTransferCN(RANAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    # not implemented
 
 
-class RANAPDirectInformationTransferRNC(RANAPSigProc):
+class RANAPDirectInformationTransferRNC(RANAPConlessSigProc):
     """Direct Information Transfer: TS 25.413, section 8.34
     
     RNC-initiated
     request only
+    connection-less signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -1934,13 +2515,16 @@ class RANAPDirectInformationTransferRNC(RANAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    # not implemented
 
 
-class RANAPUplinkInformationTransfer(RANAPSigProc):
+class RANAPUplinkInformationTransfer(RANAPConlessSigProc):
     """Uplink Information Transfer: TS 25.413, section 8.35
     
     RNC-initiated
     request-accept, request-reject
+    connection-less signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -1988,6 +2572,8 @@ class RANAPUplinkInformationTransfer(RANAPSigProc):
         'suc': ({}, {}),
         'uns': ({}, {})
         }
+    
+    # not implemented
 
 
 class RANAPMBSMSessionStart(RANAPSigProc):
@@ -1995,6 +2581,7 @@ class RANAPMBSMSessionStart(RANAPSigProc):
     
     CN-initiated
     request-accept, request-reject
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -2047,6 +2634,8 @@ class RANAPMBSMSessionStart(RANAPSigProc):
         'suc': ({}, {}),
         'uns': ({}, {})
         }
+    
+    # not implemented
 
 
 class RANAPMBMSSessionUpdate(RANAPSigProc):
@@ -2054,6 +2643,7 @@ class RANAPMBMSSessionUpdate(RANAPSigProc):
     
     CN-initiated
     request-accept, request-reject
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -2094,6 +2684,8 @@ class RANAPMBMSSessionUpdate(RANAPSigProc):
         'suc': ({}, {}),
         'uns': ({}, {})
         }
+    
+    # not implemented
 
 
 class RANAPMBMSSessionStop(RANAPSigProc):
@@ -2101,6 +2693,7 @@ class RANAPMBMSSessionStop(RANAPSigProc):
     
     CN-initiated
     request-response
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -2131,6 +2724,8 @@ class RANAPMBMSSessionStop(RANAPSigProc):
         'suc': ({}, {}),
         'uns': None
         }
+    
+    # not implemented
 
 
 class RANAPMBMSUELinking(RANAPSigProc):
@@ -2138,6 +2733,7 @@ class RANAPMBMSUELinking(RANAPSigProc):
     
     CN-initiated
     request-response
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -2169,6 +2765,8 @@ class RANAPMBMSUELinking(RANAPSigProc):
         'suc': ({}, {}),
         'uns': None
         }
+    
+    # not implemented
 
 
 class RANAPMBMSRegistration(RANAPSigProc):
@@ -2176,6 +2774,7 @@ class RANAPMBMSRegistration(RANAPSigProc):
     
     RNC-initiated
     request-accept, request-reject
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -2219,6 +2818,8 @@ class RANAPMBMSRegistration(RANAPSigProc):
         'suc': ({}, {}),
         'uns': ({}, {})
         }
+    
+    # not implemented
 
 
 class RANAPMBMSCNDeregistration(RANAPSigProc):
@@ -2226,6 +2827,7 @@ class RANAPMBMSCNDeregistration(RANAPSigProc):
     
     CN-initiated
     request-response
+    connection-less signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -2259,6 +2861,8 @@ class RANAPMBMSCNDeregistration(RANAPSigProc):
         'suc': ({}, {}),
         'uns': None
         }
+    
+    # not implemented
 
 
 class RANAPMBMSRABEstablishmentInd(RANAPSigProc):
@@ -2266,6 +2870,7 @@ class RANAPMBMSRABEstablishmentInd(RANAPSigProc):
     
     RNC-initiated
     request only
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -2290,6 +2895,8 @@ class RANAPMBMSRABEstablishmentInd(RANAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    # not implemented
 
 
 class RANAPMBMSRABRelease(RANAPSigProc):
@@ -2297,6 +2904,7 @@ class RANAPMBMSRABRelease(RANAPSigProc):
     
     RNC-initiated
     request-accept, request-reject
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -2333,6 +2941,8 @@ class RANAPMBMSRABRelease(RANAPSigProc):
         'suc': ({}, {}),
         'uns': ({}, {})
         }
+    
+    # not implemented
 
 
 class RANAPEnhancedRelocationComplete(RANAPSigProc):
@@ -2340,6 +2950,7 @@ class RANAPEnhancedRelocationComplete(RANAPSigProc):
     
     RNC-initiated
     request-accept, request
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -2391,6 +3002,8 @@ class RANAPEnhancedRelocationComplete(RANAPSigProc):
         'suc': ({}, {}),
         'uns': ({}, {})
         }
+    
+    # not implemented
 
 
 class RANAPEnhancedRelocationCompleteConfirm(RANAPSigProc):
@@ -2398,6 +3011,7 @@ class RANAPEnhancedRelocationCompleteConfirm(RANAPSigProc):
     
     RNC-initiated
     request only
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -2422,6 +3036,8 @@ class RANAPEnhancedRelocationCompleteConfirm(RANAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    # not implemented
 
 
 class RANAPSRVCCPreparation(RANAPSigProc):
@@ -2429,6 +3045,7 @@ class RANAPSRVCCPreparation(RANAPSigProc):
     
     RNC-initiated
     request-response
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -2461,6 +3078,8 @@ class RANAPSRVCCPreparation(RANAPSigProc):
         'suc': ({}, {}),
         'uns': None
         }
+    
+    # not implemented
 
 
 class RANAPUERadioCapabilityMatch(RANAPSigProc):
@@ -2468,6 +3087,7 @@ class RANAPUERadioCapabilityMatch(RANAPSigProc):
     
     CN-initiated
     request-response
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -2497,6 +3117,8 @@ class RANAPUERadioCapabilityMatch(RANAPSigProc):
         'suc': ({}, {}),
         'uns': None
         }
+    
+    # not implemented
 
 
 class RANAPUERegistrationQuery(RANAPSigProc):
@@ -2504,6 +3126,7 @@ class RANAPUERegistrationQuery(RANAPSigProc):
     
     RNC-initiated
     request
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -2534,6 +3157,8 @@ class RANAPUERegistrationQuery(RANAPSigProc):
         'suc': ({}, {}),
         'uns': None
         }
+    
+    # not implemented
 
 
 class RANAPRerouteNASRequest(RANAPSigProc):
@@ -2541,6 +3166,7 @@ class RANAPRerouteNASRequest(RANAPSigProc):
     
     CN-initiated
     request only
+    connection-oriented signaling procedure
     
     InitiatingMessage:
       IEs:
@@ -2568,6 +3194,8 @@ class RANAPRerouteNASRequest(RANAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    # not implemented
 
 
 class RANAPPrivateMessageRNC(RANAPSigProc):
@@ -2575,6 +3203,7 @@ class RANAPPrivateMessageRNC(RANAPSigProc):
     
     RNC-initiated
     request only
+    connection-less signaling procedure
     
     InitiatingMessage:
       None
@@ -2596,6 +3225,8 @@ class RANAPPrivateMessageRNC(RANAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    # not implemented
 
 
 class RANAPPrivateMessageCN(RANAPSigProc):
@@ -2603,6 +3234,7 @@ class RANAPPrivateMessageCN(RANAPSigProc):
     
     CN-initiated
     request only
+    connection-less signaling procedure
     
     InitiatingMessage:
       None
@@ -2624,8 +3256,11 @@ class RANAPPrivateMessageCN(RANAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    # not implemented
 
 
+# initializing all RANAP procedures classes
 RANAPRABAssignment.init()
 RANAPRABReleaseRequest.init()
 RANAPIuReleaseRequest.init()
@@ -2653,9 +3288,11 @@ RANAPOverloadControlCN.init()
 RANAPOverloadControlRNC.init()
 RANAPResetCN.init()
 RANAPResetRNC.init()
+RANAPErrorIndConlessCN.init()
+RANAPErrorIndConlessRNC.init()
 RANAPErrorIndCN.init()
 RANAPErrorIndRNC.init()
-RANAPCNDeacivateTrace.init()
+RANAPCNDeactivateTrace.init()
 RANAPResetResourceCN.init()
 RANAPResetResourceRNC.init()
 RANAPRABModificationRequest.init()
@@ -2682,12 +3319,11 @@ RANAPRerouteNASRequest.init()
 RANAPPrivateMessageRNC.init()
 RANAPPrivateMessageCN.init()
 
-# RANAP RNC-initiated procedures dispatcher
+# RANAP RNC-initiated connection-oriented signaling procedures dispatcher
 RANAPProcRncDispatcher = {
     1 : RANAPIuRelease,
     2 : RANAPRelocationPreparation,
     4 : RANAPRelocationCancel,
-    9 : RANAPResetRNC,
     10 : RANAPRABReleaseRequest,
     11 : RANAPIuReleaseRequest,
     12 : RANAPRelocationDetect,
@@ -2695,14 +3331,10 @@ RANAPProcRncDispatcher = {
     18 : RANAPLocationReport,
     19 : RANAPInitialUEMessage,
     20 : RANAPDirectTransferRNC,
-    21 : RANAPOverloadControlRNC,
     22 : RANAPErrorIndRNC,
     24 : RANAPSRNSContextForwardToCN,
     25 : RANAPPrivateMessageRNC,
-    27 : RANAPResetResourceRNC,
     29 : RANAPRABModificationRequest,
-    33 : RANAPUplinkInformationTransfer,
-    34 : RANAPDirectInformationTransferRNC,
     39 : RANAPMBMSRegistration,
     41 : RANAPMBMSRABEstablishmentInd,
     42 : RANAPMBMSRABRelease,
@@ -2712,30 +3344,24 @@ RANAPProcRncDispatcher = {
     48 : RANAPUERegistrationQuery
     }
 
-# RANAP CN-initiated procedures dispatcher
+# RANAP CN-initiated connection-oriented signaling procedures dispatcher
 RANAPProcCnDispatcher = {
     0 : RANAPRABAssignment,
     3 : RANAPRelocationResourceAllocation,
     5 : RANAPSRNSContextTransfer,
     6 : RANAPSecurityModeControl,
     7 : RANAPDataVolumeReport,
-    9 : RANAPResetCN,
-    14 : RANAPPaging,
     15 : RANAPCommonID,
     16 : RANAPCNInvokeTrace,
     17 : RANAPLocationReportingControl,
     20 : RANAPDirectTransferCN,
-    21 : RANAPOverloadControlCN,
     22 : RANAPErrorIndCN,
     23 : RANAPSRNSDataForwarding,
     24 : RANAPSRNSContextForwardToRNC,
     25 : RANAPPrivateMessageCN,
-    26 : RANAPCNDeacivateTrace,
-    27 : RANAPResetResourceCN,
+    26 : RANAPCNDeactivateTrace,
     30 : RANAPLocationRelatedData,
-    31 : RANAPInformationTransfer,
     32 : RANAPUESpecificInformation,
-    34 : RANAPDirectInformationTransferCN,
     35 : RANAPMBSMSessionStart,
     36 : RANAPMBMSSessionUpdate,
     37 : RANAPMBMSSessionStop,
@@ -2745,3 +3371,23 @@ RANAPProcCnDispatcher = {
     49 : RANAPRerouteNASRequest,
     }
 
+# RANAP RNC-initiated connection-less signaling procedures dispatcher
+RANAPConlessProcRncDispatcher = {
+    9 : RANAPResetRNC,
+    21 : RANAPOverloadControlRNC,
+    22 : RANAPErrorIndConlessRNC,
+    27 : RANAPResetResourceRNC,
+    33 : RANAPUplinkInformationTransfer,
+    34 : RANAPDirectInformationTransferRNC,
+    }
+
+# RANAP CN-initiated connection-less signaling procedures dispatcher
+RANAPConlessProcCnDispacther = {
+    9 : RANAPResetCN,
+    14 : RANAPPaging,
+    21 : RANAPOverloadControlCN,
+    22 : RANAPErrorIndConlessCN,
+    27 : RANAPResetResourceCN,
+    31 : RANAPInformationTransfer,
+    34 : RANAPDirectInformationTransferCN,
+    }

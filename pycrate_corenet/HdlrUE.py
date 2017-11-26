@@ -114,6 +114,11 @@ class UEd(SigStack):
         #
         if 'config' in kw:
             self.set_config(kw['config'])
+        #
+        # set handler for IuCS, IuPS and S1 links
+        self.IuCS = UEIuCSd(self)
+        self.IuPS = UEIuPSd(self)
+        self.S1   = UES1d(self)
     
     def set_config(self, config):
         self.MSISDN = config['MSISDN']
@@ -121,18 +126,15 @@ class UEd(SigStack):
         self.USIM   = config['USIM']
     
     def set_ran(self, ran, ctx_id):
-        #
+        # UE going connected
         if ran.__class__.__name__[:3] == 'HNB':
             #
-            if self.S1 is not None and self.S1.ENB is not None:
+            if self.S1.is_connected():
                 # error: already linked with another ran
                 raise(CorenetErr('UE already connected through a S1 link'))
             #
             # IuCS stack
-            if self.IuCS is None:
-                # create a handler
-                self.IuCS = UEIuCSd(self, ran, ctx_id)
-            elif self.IuCS.RNC is None:
+            if not self.IuCS.is_connected():
                 self.IuCS.set_ran(ran)
                 self.IuCS.set_ctx(ctx_id)
             elif self.IuCS.RNC == ran:
@@ -141,10 +143,7 @@ class UEd(SigStack):
                 # error: already linked with another HNB
                 raise(CorenetErr('UE already connected through another IuCS link'))
             # IuPS stack
-            if self.IuPS is None:
-                # create a handler
-                self.IuPS = UEIuPSd(self, ran, ctx_id)
-            elif self.IuPS.RNC is None:
+            if not self.IuPS.is_connected():
                 self.IuPS.set_ran(ran)
                 self.IuPS.set_ctx(ctx_id)
             elif self.IuPS.RNC == ran:
@@ -155,15 +154,12 @@ class UEd(SigStack):
         #
         elif ran.__class__.__name__[:3] == 'ENB':
             #
-            if self.IuCS is not None and self.IuCS.RNC is not None or \
-            self.IuPS is not None and self.IuPS.RNC is not None:
+            if self.IuCS.is_connected() or self.IuPS.is_connected():
                 # error: already linked with another ran
                 raise(CorenetErr('UE already connected through an Iu link'))
             #
             # S1 stack
-            if self.S1 is None:
-                self.S1 = UES1d(self, ran, ctx_id)
-            elif self.S1.ENB is None:
+            if not self.S1.is_connected():
                 self.S1.set_ran(ran)
                 self.S1.set_ctx(ctx_id)
             elif self.S1.ENB == ran:
@@ -178,13 +174,14 @@ class UEd(SigStack):
         self.RAT = ran.RAT
     
     def unset_ran(self):
-        if self.IuCS is not None and self.IuCS.RNC is not None:
+        # UE going IDLE
+        if self.IuCS.is_connected():
             self.IuCS.unset_ran()
             self.IuCS.unset_ctx()
-        if self.IuPS is not None and self.IuPS.RNC is not None:
+        if self.IuPS.is_connected():
             self.IuPS.unset_ran()
             self.IuPS.unset_ctx()
-        if self.S1 is not None and self.S1.ENB is not None:
+        if self.S1.is_connected():
             self.S1.unset_ran()
             self.S1.unset_ctx()
         del self.RAT
@@ -198,6 +195,7 @@ class UEd(SigStack):
             iucs.MM.UE  = self
             iucs.CC.UE  = self
             iucs.SMS.UE = self
+            iucs.SS.UE  = self
             return True
     
     def merge_ps_handler(self, iups):
@@ -216,7 +214,7 @@ class UEd(SigStack):
     # UE identity
     #--------------------------------------------------------------------------#
     
-    def set_ident_from_ue(self, idtype, ident):
+    def set_ident_from_ue(self, idtype, ident, dom='CS'):
         # to be used only to set identities reported by the UE
         if idtype == 1:
             if self.IMSI is None:
@@ -236,10 +234,21 @@ class UEd(SigStack):
                 self._log('WNG', 'IMEISV changed, new %s, old %s' % (ident, self.IMEISV))
                 self.IMEISV = ident
         elif idtype == 4:
-            if self.TMSI is None:
-                self.TMSI = ident
-            elif ident != self.TMSI:
-                self._log('WNG', 'incorrect TMSI, %s instead of %s' % (ident, self.TMSI))
+            if dom == 'CS':
+                if self.TMSI is None:
+                    self.TMSI = ident
+                elif ident != self.TMSI:
+                    self._log('WNG', 'incorrect TMSI, %s instead of %s' % (ident, self.TMSI))
+            elif dom == 'PS':
+                if self.PTMSI is None:
+                    self.PTMSI = ident
+                elif ident != self.PTMSI:
+                    self._log('WNG', 'incorrect P-TMSI, %s instead of %s' % (ident, self.PTMSI))
+            elif dom == 'EPS':
+                if self.MTMSI is None:
+                    self.MTMSI = ident
+                elif ident != self.MTMSI:
+                    self._log('WNG', 'incorrect M-TMSI, %s instead of %s' % (ident, self.MTMSI))
         else:
             self._log('INF', 'unhandled identity, type %i, ident %s' % (idtype, ident))
     
@@ -311,4 +320,3 @@ class UEd(SigStack):
     def set_lai(self, plmn, lac):
         self.set_plmn(plmn)
         self.set_lac(lac)
-

@@ -70,11 +70,14 @@ class GMMSigProc(NASSigProc):
             log('[TESTING] [%s] [GMMSigProc] [%s] %s' % (logtype, self.Name, msg))
     
     else:
-        def __init__(self, gmmd, encod=None):
+        def __init__(self, gmmd, encod=None, gmm_preempt=False):
             self._prepare(encod)
-            self.GMM  = gmmd
-            self.Iu   = gmmd.Iu
-            self.UE   = gmmd.UE
+            self.GMM = gmmd
+            self.Iu  = gmmd.Iu
+            self.UE  = gmmd.UE
+            self._gmm_preempt = gmm_preempt
+            if gmm_preempt:
+                self.GMM.ready.clear()
             self._log('DBG', 'instantiating procedure')
         
         def _log(self, logtype, msg):
@@ -111,12 +114,18 @@ class GMMSigProc(NASSigProc):
             for p in self.GMM.Proc[ind+1:]:
                 p.abort()
             del self.GMM.Proc[ind:]
+        if self._gmm_preempt:
+            # release the GMM stack
+            self.GMM.ready.set()
         self._log('INF', 'aborting')
     
     def rm_from_gmm_stack(self):
         # remove the procedure from the MM stack of procedures
         if self.GMM.Proc[-1] == self:
             del self.GMM.Proc[-1]
+        if self._gmm_preempt:
+            # release the GMM stack
+            self.GMM.ready.set()
     
     def init_timer(self):
         if self.Timer is not None:
@@ -129,6 +138,10 @@ class GMMSigProc(NASSigProc):
             return None
         else:
             return getattr(self.GMM, self.Timer)
+    
+    def gmm_preempt(self):
+        self._gmm_preempt = True
+        self.GMM.ready.clear()
     
     #--------------------------------------------------------------------------#
     # common helpers
@@ -292,6 +305,8 @@ class GMMAttach(GMMSigProc):
     
     def process(self, pdu):
         # got a GMMAttachRequest
+        # preempt the GMM stack
+        self.gmm_preempt()
         if self.TRACK_PDU:
             self._pdu.append( (time(), 'UL', pdu) )
         #
@@ -305,7 +320,7 @@ class GMMAttach(GMMSigProc):
             self.errcause, self.CompInfo = None, {}
             self.decode_msg(pdu, self.CompInfo)
             self.UE.set_ptmsi(self.ptmsi_realloc)
-            self._log('INF', 'new P-TMSI set, %.8x' % self.ptmsi_realloc)
+            self._log('INF', 'new P-TMSI set, 0x%.8x' % self.ptmsi_realloc)
             self._end(nas_tx=False)
             return None
     
@@ -338,7 +353,7 @@ class GMMAttach(GMMSigProc):
             #
             if self.UEInfo['ID'][0] == 1:
                 # IMSI is provided at the NAS layer
-                self.UE.set_ident_from_ue(*self.UEInfo['ID'])
+                self.UE.set_ident_from_ue(*self.UEInfo['ID'], dom='PS')
                 if not self._chk_imsi():
                     # IMSI not allowed
                     return self.output()
@@ -397,10 +412,14 @@ class GMMAttach(GMMSigProc):
             if not Proc.success:
                 self.abort()
                 return None
-            # self.Iu.SEC['CKSN'] has been taken into action as the RRC layer
+            # self.Iu.SEC['CKSN'] has been taken into use at the RRC layer
             elif self._req_imeisv:
                 return self._ret_req_imeisv()
+        elif Proc == self:
+            # something bad happened with one of the GMM common procedure
+            pass
         elif Proc is not None:
+            self._err = Proc
             assert()
         #
         return self.output()
@@ -533,6 +552,8 @@ class GMMDetachUE(GMMSigProc):
         )
     
     def process(self, pdu):
+        # preempt the GMM stack
+        self.gmm_preempt()
         if self.TRACK_PDU:
             self._pdu.append( (time(), 'UL', pdu) )
         self.UEInfo = {}
@@ -546,14 +567,14 @@ class GMMDetachUE(GMMSigProc):
         return ret
     
     def _detach(self):
+        # set GMM state
+        self.GMM.state = 'INACTIVE'
+        self._log('INF', 'detaching')
+        #
         # we only consider GPRS detach here
         self.rm_from_gmm_stack()
-        # abort all ongoing CS procedures
+        # abort all ongoing PS procedures
         self.Iu.clear_nas_proc()
-        # set MM state
-        self.GMM.state = 'INACTIVE'
-        #
-        self._log('INF', 'detaching')
     
     def output(self, poff=False):
         # prepare a stack of RANAP procedure(s)
@@ -727,6 +748,8 @@ class GMMRoutingAreaUpdating(GMMSigProc):
            'ExtDRXParam') 
     
     def process(self, pdu):
+        # preempt the GMM stack
+        self.gmm_preempt()
         if self.TRACK_PDU:
             self._pdu.append( (time(), 'UL', pdu) )
         #
@@ -740,7 +763,7 @@ class GMMRoutingAreaUpdating(GMMSigProc):
             self.errcause, self.CompInfo = None, {}
             self.decode_msg(pdu, self.CompInfo)
             self.UE.set_ptmsi(self.ptmsi_realloc)
-            self._log('INF', 'new P-TMSI set, %.8x' % self.ptmsi_realloc)
+            self._log('INF', 'new P-TMSI set, 0x%.8x' % self.ptmsi_realloc)
             self._end(nas_tx=False)
             return None
     
@@ -805,8 +828,12 @@ class GMMRoutingAreaUpdating(GMMSigProc):
             if not Proc.success:
                 self.abort()
                 return None
-            # self.Iu.SEC['CKSN'] has been taken into action as the RRC layer
+            # self.Iu.SEC['CKSN'] has been taken into use at the RRC layer
+        elif Proc == self:
+            # something bad happened with one of the GMM common procedure
+            pass
         elif Proc is not None:
+            self._err = Proc
             assert()
         #
         return self.output()
@@ -971,7 +998,7 @@ class GMMPTMSIReallocation(GMMSigProc):
         #
         # just take the new ptmsi in use
         self.UE.set_ptmsi(self.ptmsi)
-        self._log('INF', 'new P-TMSI set, %.8x' % self.ptmsi)
+        self._log('INF', 'new P-TMSI set, 0x%.8x' % self.ptmsi)
         self.rm_from_gmm_stack()
         return None
 
@@ -1223,7 +1250,7 @@ class GMMIdentification(GMMSigProc):
             self._log('WNG', 'identity responded not corresponding to type requested '\
                       '(%i instead of %i)' % (self.UEInfo['ID'][0], self.IDType))
         self._log('INF', 'identity responded, %r' % self._nas_rx['ID'][1])
-        self.UE.set_ident_from_ue(*self.UEInfo['ID'])
+        self.UE.set_ident_from_ue(*self.UEInfo['ID'], dom='PS')
         #
         self.rm_from_gmm_stack()
         return None
@@ -1307,6 +1334,8 @@ class GMMServiceRequest(GMMSigProc):
         }
     
     def process(self, pdu):
+        # preempt the GMM stack
+        self.gmm_preempt()
         if self.TRACK_PDU:
             self._pdu.append( (time(), 'UL', pdu) )
         self.errcause, self.UEInfo = None, {}
@@ -1332,8 +1361,12 @@ class GMMServiceRequest(GMMSigProc):
             if not Proc.success:
                 self.abort()
                 return None
-            # self.Iu.SEC['CKSN'] has been taken into action as the RRC layer
+            # self.Iu.SEC['CKSN'] has been taken into use at the RRC layer
+        elif Proc == self:
+            # something bad happened with one of the GMM common procedure
+            pass
         elif Proc is not None:
+            self._err = Proc
             assert()
         #
         # TODO: check / activate PDP and MBMS contexts
@@ -1348,7 +1381,6 @@ class GMMServiceRequest(GMMSigProc):
         # log the NAS msg
         if self.TRACK_PDU:
             self._pdu.append( (time(), 'DL', self._nas_tx) )
-        #
         self.rm_from_gmm_stack()
         return self._nas_tx
 
@@ -1380,4 +1412,3 @@ GMMProcCnDispatcher = {
     21: GMMIdentification,
     33: GMMInformation,
     }
-

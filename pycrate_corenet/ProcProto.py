@@ -358,8 +358,7 @@ class LinkSigProc(SigProc):
         #
         # 5) build the whole PDU
         val = {}
-        if pdu_ies:
-            val['protocolIEs'] = pdu_ies
+        val['protocolIEs'] = pdu_ies
         if pdu_exts:
             val['protocolExtensions'] = pdu_exts
         self._snd.append( (self._ptype_lut[ptype],
@@ -629,4 +628,3 @@ class NASSigProc(SigProc):
         """abort the procedure, e.g. due to a timeout or an error indication
         """
         pass
-
