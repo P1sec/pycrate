@@ -743,7 +743,7 @@ class BufUD(Buf):
             self.set_val(enc)
             self._ENC_BL = 7*cnt
         elif dcs == DCS_UCS:
-            self.set_val(val.encode('utf16'))
+            self.set_val(val.encode('utf-16-be'))
             self._ENC_BL = 0
         else:
             self.set_val(val)
@@ -761,7 +761,7 @@ class BufUD(Buf):
             else:
                 return decode_7b(self.get_val())
         elif dcs == DCS_UCS:
-            return str(self.get_val(), 'utf16')
+            return str(self.get_val(), 'utf-16-be')
         else:
             return self.get_val()
     
