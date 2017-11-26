@@ -239,6 +239,10 @@ ASN.1 basic type INTEGER object
 
 Single value: Python int
 
+Alternative single value: Python str (from the object's NamedNumber)
+    This is only to be used in set_val() method, and is converted to a Python
+    int when set
+
 Specific attribute:
     
     - cont: None or ASN1Dict {ident (str): single value},
@@ -254,6 +258,27 @@ Specific attribute:
     
     def _safechk_val(self, val):
         self._safechk_val_int(val)
+    
+    def set_val(self, val):
+        if isinstance(val, str_types):
+            try:
+                self._val = self._cont[val]
+            except:
+                raise(ASN1ObjErr('{0}: invalid named value, {1!r}'.format(self.fullname(), val)))
+        else:
+            self._val = val
+        if self._SAFE_VAL:
+            self._safechk_val(self._val)
+        if self._SAFE_BND:
+            self._safechk_bnd(self._val)
+    
+    def get_name(self):
+        """Returns the NamedNumber corresponding to the internal value
+        """
+        try:
+            return self._cont_rev[self._val]
+        except:
+            return None
     
     ###
     # conversion between internal value and ASN.1 syntax
