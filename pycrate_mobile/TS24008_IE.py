@@ -816,11 +816,11 @@ class NetworkName(Envelope):
                 # encode it according to the Coding value
                 Coding = self[1]()
                 if Coding == CODTYPE_7B:
-                    enc, bl = encode_7b(Name)
+                    enc, c = encode_7b(Name)
                     self[4]._val = enc
-                    self[3]._val = (8-(bl%8))%8
+                    self[3]._val = (8-((7*c)%8))%8
                 elif Coding == CODTYPE_UCS2:
-                    self[4]._val = Name.encode('utf16')
+                    self[4]._val = Name.encode('utf-16-be')
                     self[3]._val = 0
     
     encode = set_val
@@ -836,7 +836,7 @@ class NetworkName(Envelope):
             return dec
         elif Coding == CODTYPE_UCS2:
             # WNG: this will certainly fail in Python2
-            return self[4].get_val().decode('utf16')
+            return self[4].get_val().decode('utf-16-be')
         else:
             return None
 
