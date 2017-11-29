@@ -999,7 +999,8 @@ class ASN1CodecPER(ASN1Codec):
             # encode the constrained length determinant
             GEN = cla.encode_intconst(ldet, const_sz)
             if cla.ALIGNED:
-                GEN.extend( cla.encode_pad() )
+                if cla._off[-1] % 8:
+                    GEN.extend( cla.encode_pad() )
                 cla._off[-1] += 8*ldet
         else:
             GEN = []
