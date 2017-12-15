@@ -21,19 +21,27 @@
 # * 02110-1301, USA.
 # *
 # *--------------------------------------------------------
-# * File Name : pycrate_asn1c/err.py
+# * File Name : pycrate_asn1rt/err.py
 # * Created : 2016-03-02
 # * Authors : Benoit Michau 
 # *--------------------------------------------------------
 #*/
 
 #------------------------------------------------------------------------------#
-# ASN.1 errors
+# ASN.1 runtime errors
 #------------------------------------------------------------------------------#
 
-# generic ASN.1 error
-class ASN1Err(Exception):
-    pass
+try:
+    from pycrate_core.utils import PycrateErr
+except:
+    print('pycrate_core not found, ASN1Err will not inherit from PycrateErr')
+    # generic ASN.1 error
+    class ASN1Err(Exception):
+        pass
+else:
+    # generic ASN.1 error
+    class ASN1Err(PycrateErr):
+        pass
 
 # error when manipulating an existing ASN1 object
 class ASN1ObjErr(ASN1Err):
@@ -65,21 +73,9 @@ class ASN1BEREncodeErr(ASN1CodecErr):
 class ASN1BERDecodeErr(ASN1CodecErr):
     pass
 
-class ASN1CEREncodeErr(ASN1CodecErr):
-    pass
-
-class ASN1CERDecodeErr(ASN1CodecErr):
-    pass
-
-class ASN1DEREncodeErr(ASN1CodecErr):
-    pass
-
-class ASN1DERDecodeErr(ASN1CodecErr):
-    pass
-
-class ASN1GSEREncodeErr(ASN1CodecErr):
-    pass
-
-class ASN1GSERDecodeErr(ASN1CodecErr):
-    pass
+#class ASN1GSEREncodeErr(ASN1CodecErr):
+#    pass
+#
+#class ASN1GSERDecodeErr(ASN1CodecErr):
+#    pass
 

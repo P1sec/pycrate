@@ -168,10 +168,10 @@ class CSN1Obj(Element):
     #--------------------------------------------------------------------------#
     
     #def _from_char_obj(self, char):
-    #    raise(PycrateErr('not implemented'))
+    #    raise(CSN1Err('not implemented'))
     # 
     #def _to_pack_obj(self):
-    #    raise(PycrateErr('not implemented'))
+    #    raise(CSN1Err('not implemented'))
     
     def _from_char(self, char, lref=None):
         global _root_obj
@@ -307,7 +307,7 @@ class CSN1Obj(Element):
         """Returns a independant instance of self, all internal attributes
         are cloned except value
         """
-        raise(PycrateErr('not implemented'))
+        raise(CSN1Err('not implemented'))
 
 
 class CSN1Bit(CSN1Obj):
