@@ -1,0 +1,12 @@
+Created from pcaps publicly available on https://pcapr.net
+
+attach_sccp_xudts.pcap
+dump.cap
+gprs_ms_log.pcap
+LU.pcap
+sri_sm.pcap
+test.pcap
+tmp.pcap
+
+Created by the following command
+tshark -T ek -x -j tcap -r trace.pcap >> tcapmap.json
