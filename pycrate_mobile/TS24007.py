@@ -75,9 +75,13 @@ class Layer3(Envelope):
                     self._opts.append( (T.get_bl(), T(), ie) )
         else:
             for ie in self._content:
+                if isinstance(ie, (Type1V, Type1TV)):
+                    rawtype = integer_types
+                else:
+                    rawtype = bytes_types
                 if isinstance(ie, (Type1V, Type3V, Type4LV, Type6LVE)) and ie._name in val:
                     # setting value for non-optional IE
-                    if isinstance(val[ie._name], bytes_types):
+                    if isinstance(val[ie._name], rawtype):
                         # setting raw value
                         ie['V'].set_val(val[ie._name])
                     else:
@@ -89,7 +93,7 @@ class Layer3(Envelope):
                     self._opts.append( (T.get_bl(), T(), ie) )
                     if ie._name in val:
                         ie._trans = False
-                        if isinstance(val[ie._name], bytes_types):
+                        if isinstance(val[ie._name], rawtype):
                             # setting raw value
                             ie['V'].set_val(val[ie._name])
                         else:
