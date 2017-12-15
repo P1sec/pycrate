@@ -33,10 +33,10 @@ from timeit import timeit
 #Element._SAFE_DYN  = False
 
 from pycrate_mobile.GSMTAP      import *
-from pycrate_mobile.TS24008_IE  import *
-from pycrate_mobile.TS24008_MM  import *
-from pycrate_mobile.TS24008_GMM import *
 from pycrate_mobile.NAS         import *
+from pycrate_mobile.SIGTRAN     import *
+from pycrate_mobile.SCCP        import *
+
 
 # uplink messages
 nas_pdu_mo = tuple(map(unhexlify, (
@@ -121,6 +121,21 @@ nas_pdu_mt = tuple(map(unhexlify, (
     '0746' # EMM Detach Accept
     )))
 
+# SIGTRAN messages
+sigtran_pdu = tuple(map(unhexlify, (
+    '01000701000000d4000600080000000c011500080000000101020018000200008002000800000001800300080000000101160008000000010101000800000001011300080000000101140008000000010013000800000001011700080000000c010b0072626a4804000000106c62a16002010102012e3058840791198996909949820791198996000033044411330a8189961083993100a73ee8329bfd6681e8e8f41c949e83d4f5391d1406b1dfee73590ea297e774d03d4d4783e2f534bd0c0a83cce53be8fe9693e7a0b41b94a60300000000',
+    '01000101000000740210006a0000012d000001360302000a0100003502020604c336018e0f4b001340470000060003400100000f40060062f2570001003a40080062f25700010001001040151405081162f25700013005f412f000003303301821004f40033500000056400562f2570001000000'
+    )))
+
+# SCCP messages
+sccp_pdu = tuple(map(unhexlify, (
+    '09810305090242c804430a00981e651c480206f7490213b86c12a1100201020201183008800107a403800101', # SCCP Camel (wireshark)
+    '090103070904430a00980242c81464124902ec0f6c0ca10a02010402011604028490',
+    '090003050902420e04434324077ee27cc70461060390e874e972cf0101d102092ff26995033940018805011890002789048d2ad4fe8107394001011c30009f6204000000009f7b020c719f21021004840a0100210b403480000102820201049f5d090000210a33135009279f50090200210a33135009279f82170124bf82180c9f8215037d7b1f9f8219010f', # SCCP ANSI TCAP (wireshark)
+    '090003050702c20102c20105018e560400', # SCCP SCMG (cloudshark)
+    '090003070b04435604010443430a0105018e430a00'
+    )))
+
 
 def test_nas_mo(nas_pdu=nas_pdu_mo):
     for pdu in nas_pdu:
@@ -140,18 +155,44 @@ def test_nas_mt(nas_pdu=nas_pdu_mt):
         m.set_val(v)
         assert( m.to_bytes() == pdu )
 
+def test_sigtran(sigtran_pdu=sigtran_pdu):
+    for pdu in sigtran_pdu:
+        S = SIGTRAN()
+        S.from_bytes(pdu)
+        S.reautomate()
+        v = S.get_val()
+        S.__init__()
+        S.set_val(v)
+        assert( S.to_bytes() == pdu )
+
+def test_sccp(sccp_pdu=sccp_pdu):
+    for pdu in sccp_pdu:
+        m, e = parse_SCCP(pdu)
+        assert( e == 0 )
+        m.reautomate()
+        v = m.get_val()
+        m.set_val(v)
+        assert( m.to_bytes() == pdu)
 
 def test_perf():
     
     print('[+] NAS MO decoding and re-encoding')
-    Ta = timeit(test_nas_mo, number=12)
+    Ta = timeit(test_nas_mo, number=14)
     print('test_nas_mo: {0:.4f}'.format(Ta))
     
     print('[+] NAS MT decoding and re-encoding')
-    Tb = timeit(test_nas_mt, number=22)
+    Tb = timeit(test_nas_mt, number=24)
     print('test_nas_mt: {0:.4f}'.format(Tb))
     
-    print('[+] mobile total time: {0:.4f}'.format(Ta+Tb))
+    print('[+] SIGTRAN decoding and re-encoding')
+    Tc = timeit(test_sigtran, number=300)
+    print('test_sigtran: {0:.4f}'.format(Tc))
+    
+    print('[+] SCCP decoding and re-encoding')
+    Td = timeit(test_sccp, number=100)
+    print('test_sccp: {0:.4f}'.format(Td))
+    
+    print('[+] mobile total time: {0:.4f}'.format(Ta+Tb+Tc+Td))
 
 if __name__ == '__main__':
     test_perf()
