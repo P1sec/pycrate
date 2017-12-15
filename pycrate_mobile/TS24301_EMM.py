@@ -125,20 +125,6 @@ class EMMHeader(Envelope):
         Uint8('Type', val=96, dic=_EMM_dict)
         )
 
-class Layer3EMM(Layer3):
-    
-    # to decode inner ESM container, when present
-    DECODE_ESM = True
-    
-    def _from_char(self, char):
-        Layer3._from_char(char)
-        Type = self[2].get_val()
-        if Type in (65, 66, 67, 68, 77):
-            esmc = self['ESMContainer']
-            if not esmc.get_trans():
-                esmbuf = esmc['V'].get_val()
-                
-    
 
 #------------------------------------------------------------------------------#
 # Attach accept
@@ -477,21 +463,22 @@ if _with_cm:
             Buf('NASMessage')
             )
         
-        def mac_verify(self, key=16*b'\0', dir=0, eia=0):
-            """compute the MAC of the NASMessage using Seqn, key, direction and eia,
-            and verify against the embedded MAC value
+        def mac_verify(self, key=16*b'\0', dir=0, eia=0, seqnoff=0):
+            """compute the MAC of the NASMessage using Seqn plus seqnoff, key, 
+            direction and eia, and verify against the embedded MAC value
             
             Args:
                 key: 16 bytes buffer, K_nas_int
                 dir: 0 for uplink, 1 for downlink
                 eia: 0 to 3, reference to EIA algorithm
+                seqnoff: 0 to 2^32 - 2^8, NAS count offset to add to Seqn
             
             Returns:
                 True if embedded MAC is correct, False otherwise
             """
             if eia == 0:
                 return True
-            shdr = self[0]()
+            shdr = self[0].get_val()
             if shdr == 0:
                 return True
             elif shdr in (1, 2, 3, 4):
@@ -500,27 +487,28 @@ if _with_cm:
                 except KeyError:
                     raise(PycrateErr('EMMSecProtNASMessage.mac_verify(): invalid EIA identifier, {0}'\
                           .format(eia)))
-                mac = EIA(key, self[3](), 0, dir, self[3].to_bytes() + self[4].to_bytes())
+                mac = EIA(key, seqnoff + self[3].get_val(), 0, dir, self[3].to_bytes() + self[4].get_val())
                 return mac == self[2].get_val()
             else:
                 raise(PycrateErr('EMMSecProtNASMessage.mac_verify(): invalid sec hdr value, {0}'\
                       .format(shdr)))
         
-        def mac_compute(self, key=16*b'\0', dir=0, eia=0):
-            """compute the MAC of the NASMessage using Seqn, key, direction and eia,
-            and set the embedded MAC value with it
+        def mac_compute(self, key=16*b'\0', dir=0, eia=0, seqnoff=0):
+            """compute the MAC of the NASMessage using Seqn plus seqnoff, key, 
+            direction and eia, and set the embedded MAC value with it
             
             Args:
                 key: 16 bytes buffer, K_nas_int
                 dir: 0 for uplink, 1 for downlink
                 eia: 0 to 3, reference to EIA algorithm
+                seqnoff: 0 to 2^32 - 2^8, NAS count offset to add to Seqn
             
             Returns:
                 None
             """
             if eia == 0:
                 self[2].set_val(b'\0\0\0\0')
-            shdr = self[0]()
+            shdr = self[0].get_val()
             if shdr == 0:
                 self[2].set_val(b'\0\0\0\0')
             elif shdr in (1, 2, 3, 4):
@@ -529,14 +517,15 @@ if _with_cm:
                 except KeyError:
                     raise(PycrateErr('EMMSecProtNASMessage.mac_compute(): invalid EIA identifier, {0}'\
                           .format(eia)))
-                mac = EIA(key, self[3](), 0, dir, self[3].to_bytes() + self[4].to_bytes())
+                mac = EIA(key, seqnoff + self[3].get_val(), 0, dir, self[3].to_bytes() + self[4].get_val())
                 self[2].set_val(mac)
             else:
                 raise(PycrateErr('EMMSecProtNASMessage.mac_compute(): invalid sec hdr value, {0}'\
                       .format(shdr)))
         
-        def encrypt(self, key=16*b'\0', dir=0, eea=0):
-            """encrypt the NASMessage in place using Seqn, key, direction and eea,
+        def encrypt(self, key=16*b'\0', dir=0, eea=0, seqnoff=0):
+            """encrypt the NASMessage in place using Seqn plus seqnoff, key, 
+            direction and eea,
             
             Args:
                 key: 16 bytes buffer, K_nas_enc
@@ -548,7 +537,7 @@ if _with_cm:
             """
             if eea == 0:
                 return
-            shdr = self[0]()
+            shdr = self[0].get_val()
             if shdr in (0, 1, 3):
                 return
             elif shdr in (2, 4):
@@ -557,15 +546,16 @@ if _with_cm:
                 except KeyError:
                     raise(PycrateErr('EMMSecProtNASMessage.encrypt(): invalid EEA identifier, {0}'\
                           .format(eea)))
-                enc = EEA(key, self[3](), 0, dir, self[4].to_bytes())
-                self[4].set_val(enc)
+                self._dec_msg = self[4].to_bytes()
+                self._enc_msg = EEA(key, seqnoff + self[3].get_val(), 0, dir, self._dec_msg)
+                self[4].set_val(self._enc_msg)
             else:
                 raise(PycrateErr('EMMSecProtNASMessage.encrypt(): invalid sec hdr value, {0}'\
                       .format(shdr)))
         
-        def decrypt(self, key=16*b'\0', dir=0, eea=0):
-            """decrypt the NASMessage in place using Seqn, key, direction and eea,
-            and decode the NASMessage content
+        def decrypt(self, key=16*b'\0', dir=0, eea=0, seqnoff=0):
+            """decrypt the NASMessage in place using Seqn plus seqnoff, key, 
+            direction and eea, and decode the NASMessage content
             
             Args:
                 key: 16 bytes buffer, K_nas_enc
@@ -577,7 +567,7 @@ if _with_cm:
             """
             if eea == 0:
                 return
-            shdr = self[0]()
+            shdr = self[0].get_val()
             if shdr in (0, 1, 3):
                 return
             elif shdr in (2, 4):
@@ -586,8 +576,9 @@ if _with_cm:
                 except KeyError:
                     raise(PycrateErr('EMMSecProtNASMessage.decrypt(): invalid EEA identifier, {0}'\
                           .format(eea)))
-                enc = EEA(key, self[3](), 0, dir, self[4].to_bytes())
-                self[4].set_val(enc)
+                self._enc_msg = self[4].to_bytes()
+                self._dec_msg = EEA(key, seqnoff + self[3].get_val(), 0, dir, self._enc_msg)
+                self[4].set_val(self._dec_msg)
             else:
                 raise(PycrateErr('EMMSecProtNASMessage.decrypt(): invalid sec hdr value, {0}'\
                       .format(shdr)))
@@ -622,15 +613,79 @@ class EMMServiceReject(Layer3):
 # TS 24.301, section 8.2.25
 #------------------------------------------------------------------------------#
 
-class EMMServiceRequest(Layer3):
-    _GEN = (
-        Uint('SecHdr', val=1, bl=4, dic=SecHdrType_dict),
-        Uint('ProtDisc', val=7, bl=4, dic=ProtDisc_dict),
-        Uint('KSI', bl=3, dic={7:'no key available'}),
-        Uint('SeqnShort', bl=5),
-        Buf('MACShort', val=b'\0\0', bl=16, rep=REPR_HEX)
-        )
+if _with_cm:
+    
+    class EMMServiceRequest(Layer3):
+        _GEN = (
+            Uint('SecHdr', val=12, bl=4, dic=SecHdrType_dict),
+            Uint('ProtDisc', val=7, bl=4, dic=ProtDisc_dict),
+            Uint8('Type', val=0, trans=True), # transparent field, only to ease message handling
+            Uint('KSI', bl=3, dic={7:'no key available'}),
+            Uint('SeqnShort', bl=5),
+            Buf('MACShort', val=b'\0\0', bl=16, rep=REPR_HEX)
+            )
+    
+        def mac_verify(self, key=16*b'\0', dir=0, eia=0, seqnoff=0):
+            """compute the MAC of the EMMServiceRequest using SeqnShort plus seqnoff, 
+            key, direction and eia, and verify against the embedded MACShort value
+            
+            Args:
+                key: 16 bytes buffer, K_nas_int
+                dir: 0 for uplink, 1 for downlink
+                eia: 0 to 3, reference to EIA algorithm
+                seqnoff: 0 to 2^32 - 2^5, NAS count offset to add to SeqnShort
+            
+            Returns:
+                True if embedded MACShort is correct, False otherwise
+            """
+            if eia == 0:
+                return True
+            else:
+                try:
+                    EIA = _EIA[eia]
+                except KeyError:
+                    raise(PycrateErr('EMMServiceRequest.mac_verify(): invalid EIA identifier, {0}'\
+                          .format(eia)))
+                mac = EIA(key, seqnoff + self[3].get_val(), 0, dir, self[0:4].to_bytes())
+                if mac[2:4] != self['MACShort'].to_bytes():
+                    return False
+                else:
+                    return True
+        
+        def mac_compute(self, key=16*b'\0', dir=0, eia=0, seqnoff=0):
+            """compute the MAC of the EMMServiceRequest using SeqnShort plus seqnoff, 
+            key, direction and eia, and set the embedded MACShort value with it
+            
+            Args:
+                key: 16 bytes buffer, K_nas_int
+                dir: 0 for uplink, 1 for downlink
+                eia: 0 to 3, reference to EIA algorithm
+                seqnoff: 0 to 2^32 - 2^5, NAS count offset to add to SeqnShort
+            
+            Returns:
+                None
+            """
+            if eia == 0:
+                self[4].set_val(b'\0\0')
+            else:
+                try:
+                    EIA = _EIA[eia]
+                except KeyError:
+                    raise(PycrateErr('EMMServiceRequest.mac_compute(): invalid EIA identifier, {0}'\
+                          .format(eia)))
+                mac = EIA(key, seqnoff + self[3].get_val(), 0, dir, self[0:4].to_bytes())
+                self[4].set_val(mac[2:4])
 
+else:
+    
+    class EMMServiceRequest(Layer3):
+        _GEN = (
+            Uint('SecHdr', val=12, bl=4, dic=SecHdrType_dict),
+            Uint('ProtDisc', val=7, bl=4, dic=ProtDisc_dict),
+            Uint('KSI', bl=3, dic={7:'no key available'}),
+            Uint('SeqnShort', bl=5),
+            Buf('MACShort', val=b'\0\0', bl=16, rep=REPR_HEX)
+            )
 
 #------------------------------------------------------------------------------#
 # Tracking area update accept
