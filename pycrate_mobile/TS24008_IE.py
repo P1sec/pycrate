@@ -98,7 +98,7 @@ def decode_bcd(buf):
 # with additionnal methods: encode(), decode()
 
 class BufBCD(Buf):
-    """Child of pycrate_core.base.Buf object
+    """Subclass of pycrate_core.base.Buf object
     with additional encode() and decode() capabilities in order to handle
     BCD encoding
     """
@@ -1528,7 +1528,7 @@ class CallState(Envelope):
 #------------------------------------------------------------------------------#
 
 # generic BCD number
-# BCDType and NumPlab are extended with values from TS 23.040, section 9.1.2.15
+# BCDType and NumPlan are extended with values from TS 23.040, section 9.1.2.15
 
 _BCDType_dict = {
     0 : 'unknown',
@@ -1544,6 +1544,7 @@ _BCDType_dict = {
 _NumPlan_dict = {
     0 : 'unknown',
     1 : 'ISDN / telephony numbering plan (E.164 / E.163)',
+    2 : 'generic numbering plan',
     3 : 'data numbering plan (X.121)',
     4 : 'telex numbering plan (F.69)',
     5 : 'service center specific',
