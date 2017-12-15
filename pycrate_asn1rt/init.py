@@ -108,9 +108,7 @@ def init_modules(*args, **kwargs):
                 else:
                     Obj._root = []
                     for name in Obj._cont:
-                        if name in Obj._ext:
-                            break
-                        else:
+                        if name not in Obj._ext:
                             Obj._root.append(name)
                 # set _cont_rev
                 Obj._cont_rev  = {Obj._cont[name]: name for name in Obj._cont}

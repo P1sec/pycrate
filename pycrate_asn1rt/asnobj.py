@@ -375,7 +375,6 @@ class ASN1Obj(Element):
                 raise(ASN1ObjErr('{0}: non-existent ident {1} within table constraint value'\
                       .format(self.fullname(), self._const_tab_id)))
     
-    
     #--------------------------------------------------------------------------#
     # user-friendly generic representation
     #--------------------------------------------------------------------------#
@@ -835,11 +834,10 @@ class ASN1Obj(Element):
             # 2a) decode primitive content value
             # here, tlv is actually a 2-tuple with the value boundaries
             assert( isinstance(tlv, tuple) )
-            self._decode_ber_cont(char, tlv)
         else:
             # 2b) decode constructed content
             assert( isinstance(tlv, list) )
-            self._decode_ber_cont(char, tlv)
+        self._decode_ber_cont(char, tlv)
     
     def from_ber(self, buf, single=True):
         if isinstance(buf, bytes_types):
@@ -923,11 +921,10 @@ class ASN1Obj(Element):
             # 2a) decode primitive content value
             # here, tlv is actually a 2-tuple with the value boundaries
             assert( isinstance(tlv, tuple) )
-            V = self._decode_ber_cont_ws(char, tlv)
         else:
             # 2b) decode constructed content
             assert( isinstance(tlv, list) )
-            V = self._decode_ber_cont_ws(char, tlv)
+        V = self._decode_ber_cont_ws(char, tlv)
         #
         # 3) generate the complete TLV structure
         if TL:
