@@ -55,7 +55,14 @@ class Layer3(Envelope):
             del kw['val']
         else:
             val = None
+        if 'sec' in kw:
+            # used within the NAS LTE EMM stack of corenet
+            sec = kw['sec']
+            del kw['nosec']
+        else:
+            sec = None
         Envelope.__init__(self, *args, **kw)
+        self._sec = sec
         # build a list of (tag length, tag value) for the optional part
         # configure IE set by **kw as non-transparent and set their value
         self._opts = []
