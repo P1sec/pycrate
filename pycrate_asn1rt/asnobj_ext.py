@@ -330,7 +330,7 @@ Alternative single value: Python 2-tuple
             except Exception as err:
                 if not self._SILENT:
                     asnlog('OPEN._decode_ber_cont_ws: %s, unable to retrieve an object in the table '\
-                           'constraint, err %s' % (self.fullname(), err))
+                           'constraint (%s)' % (self.fullname(), err))
         #
         elif self._const_val is not None:
             # another way to provide a (set of) potential defined object(s)
@@ -347,12 +347,18 @@ Alternative single value: Python 2-tuple
         decoded = False
         if Obj is not None:
             # we found a defined object
+            char_cur, char_lb = char._cur, char._len_bit
             try:
                 Obj._from_ber_ws(char, [tlv])
             except Exception as err:
                 # decoding failed, we fall back to the simple buffer decoding
-                asnlog('OPEN._decode_ber_cont_ws: %s, decoding failed for the selected object %s'\
-                       % (self.fullname(), Obj._name))
+                # WNG: this may screw some internal references (e.g. _parent attributes)
+                if not self._SILENT:
+                    if Obj._tr:
+                        objname = '%s [%s]' % (Obj._name, Obj._tr._name)
+                    asnlog('OPEN._decode_ber_cont: %s, decoding failed for the selected object %s (%s)'\
+                           % (self.fullname(), objname, err))
+                char._cur, char._len_bit = char_cur, char_lb
             else:
                 # set value
                 if Obj._typeref is not None:
@@ -418,13 +424,18 @@ Alternative single value: Python 2-tuple
         decoded = False
         if Obj is not None:
             # we found a defined object
+            char_cur, char_lb = char._cur, char._len_bit
             try:
                 Obj._from_ber(char, [tlv])
             except Exception as err:
                 # decoding failed, we fall back to the simple buffer decoding
+                # WNG: this may screw some internal references (e.g. _parent attributes)
                 if not self._SILENT:
-                    asnlog('OPEN._decode_ber_cont: %s, decoding failed for the selected object %s'\
-                           % (self.fullname(), Obj._name))
+                    if Obj._tr:
+                        objname = '%s [%s]' % (Obj._name, Obj._tr._name)
+                    asnlog('OPEN._decode_ber_cont: %s, decoding failed for the selected object %s (%s)'\
+                           % (self.fullname(), objname, err))
+                char._cur, char._len_bit = char_cur, char_lb
             else:
                 # set value
                 if Obj._typeref is not None:
@@ -441,7 +452,7 @@ Alternative single value: Python 2-tuple
             self._val_tag = (cl, pc, tval)
             if pc == 1:
                 # constructed object
-                self._val = ASN1CodecBER.scan_tlv_ws(char, tlv)
+                self._val = ASN1CodecBER.scan_tlv(char, tlv)
             elif lval >= 0:
                 # primitive object
                 char._cur, char._len_bit = tlv[4][0], tlv[4][1]
