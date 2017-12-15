@@ -2252,6 +2252,10 @@ ASN.1 basic type OBJECT DESCRIPTOR object
 %s
 """ % _String_docstring
     
+    # TODO: OBJECT DESCRIPTOR is a subtype of GraphicString
+    # as such, it is not supported yet
+    _codec    = None
+    
     TYPE  = TYPE_OBJ_DESC
     TAG   = 7
 
@@ -2431,69 +2435,67 @@ ASN.1 basic type BMPString object
 # UTCTime and GeneralizedTime
 #------------------------------------------------------------------------------#
 
-class _Time(ASN1Obj):
+class _Time(STR_VIS):
     __doc__ = """
-Virtual parent for UTCTime and GeneralizedTime
+Virtual parent for UTCTime and GeneralizedTime, both being actually subtype of
+VisibleString
 """
     
     ###
-    # conversion between internal value and ASN.1 PER encoding
-    # content is actually encoded like the BER one, prefixed with a bytes count
+    # convert the internal tuple value to a string, which then gets 
+    # encoded / decoded like a VisibleString
     ###
     
     def _from_per_ws(self, char):
-        buf, GEN = ASN1CodecPER.decode_unconst_open_ws(char, wrapped=None)
-        self._decode_cont(buf)
-        self._struct = Envelope(self._name, GEN=tuple(GEN))
+        _String._from_per_ws(self, char)
+        self._decode_cont(self._val)
     
     def _from_per(self, char):
-        self._decode_cont( ASN1CodecPER.decode_unconst_open(char, wrapped=None) )
+        _String._from_per(self, char)
+        self._decode_cont(self._val)
     
     def _to_per_ws(self):
-        GEN = ASN1CodecPER.encode_unconst_buf_ws( self._encode_cont(canon=True) )
-        self._struct = Envelope(self._name, GEN=tuple(GEN))
-        return self._struct
+        val = self._val
+        self._val = self._encode_cont(canon=True)
+        ret = _String._to_per_ws(self)
+        self._val = val
+        return ret
     
     def _to_per(self):
-        return ASN1CodecPER.encode_unconst_buf( self._encode_cont(canon=True) )
+        val = self._val
+        self._val = self._encode_cont(canon=True)
+        ret = _String._to_per(self)
+        self._val = val
+        return ret
     
-    ###
-    # conversion between internal value and ASN.1 BER encoding
-    # ascii encoding of the time string
-    ###
+    def _decode_ber_cont_ws(self, char, vs):
+        ret = _String._decode_ber_cont_ws(self, char, vs)
+        self._decode_cont(self._val)
+        return ret
     
-    def _decode_ber_cont_ws(self, char, vbnd):
-        if not isinstance(vbnd, tuple):
-            raise(ASN1BERDecodeErr('{0}: invalid Time constructed structure'\
-                  .format(self.fullname())))
-        char._cur, char._len_bit = vbnd[0], vbnd[1]
-        V = Buf('V', bl=vbnd[1]-vbnd[0])
-        V._from_char(char)
-        self._decode_cont(V.to_bytes())
-        return V
-    
-    def _decode_ber_cont(self, char, vbnd):
-        if not isinstance(vbnd, tuple):
-            raise(ASN1BERDecodeErr('{0}: invalid Time constructed structure'\
-                  .format(self.fullname())))
-        char._cur, char._len_bit = vbnd[0], vbnd[1]
-        self._decode_cont(char.to_bytes(vbnd[1]-vbnd[0]))
+    def _decode_ber_cont(self, char, vs):
+        _String._decode_ber_cont(self, char, vs)
+        self._decode_cont(self._val)
     
     def _encode_ber_cont_ws(self):
+        val = self._val
         if ASN1CodecBER.ENC_TIME_CANON:
-            buf = self._encode_cont(canon=True)
+            self._val = self._encode_cont(canon=True)
         else:
-            buf = self._encode_cont(canon=False)
-        lval = len(buf)
-        return 0, lval, Buf('V', val=buf, bl=8*lval)
+            self._val = self._encode_cont(canon=False)
+        ret = _String._encode_ber_cont_ws(self)
+        self._val = val
+        return ret
     
     def _encode_ber_cont(self):
+        val = self._val
         if ASN1CodecBER.ENC_TIME_CANON:
-            buf = self._encode_cont(canon=True)
+            self._val = self._encode_cont(canon=True)
         else:
-            buf = self._encode_cont(canon=False)
-        lval = len(buf)
-        return 0, lval, [ (T_BYTES, buf, 8*lval) ]
+            self._val = self._encode_cont(canon=False)
+        ret = _String._encode_ber_cont(self)
+        self._val = val
+        return ret
 
 
 class TIME_UTC(_Time):
@@ -2563,9 +2565,8 @@ Single value: Python 7-tuple of str or None
     # ascii encoding of the time string for BER and PER, in the canonical way
     ###
     
-    def _decode_cont(self, buf):
+    def _decode_cont(self, asc):
         try:
-            asc = buf.decode('ascii')
             self._from_asn1('"' + asc + '"')
         except Exception as err:
             raise(ASN1BERDecodeErr('{0}: invalid UTCTime ascii encoding'\
@@ -2579,8 +2580,8 @@ Single value: Python 7-tuple of str or None
                 asc = ''.join(self._val[:5]) + self._val[-1]
         else:
             asc = ''.join(self._val)
-        return asc.encode('ascii')
-
+        return asc
+    
 
 class TIME_GEN(_Time):
     __doc__ = """
@@ -2646,9 +2647,8 @@ Single value: Python 8-tuple of str or None
     # ascii encoding of the time string for BER and PER, in the canonical way
     ###
     
-    def _decode_cont(self, buf):
+    def _decode_cont(self, asc):
         try:
-            asc = buf.decode('ascii')
             self._from_asn1('"' + asc + '"')
         except Exception as err:
             raise(ASN1BERDecodeErr('{0}: invalid GeneralizedTime ascii encoding'\
@@ -2676,11 +2676,14 @@ Single value: Python 8-tuple of str or None
                 else:
                     # keep precision up to minutes
                     dt = datetime(*map(int, asc[:5]))
-                    delta = timedelta(hours=int(self._val[-1][1:3]), minutes=int(self._val[-1][3:5]))
-                    if self._val[-1][0:1] == '-':
-                        dt -= delta
+                    if len(self._val[-1]) == 3:
+                        delta = timedelta(hours=int(self._val[-1][1:3]), minutes=0)
                     else:
+                        delta = timedelta(hours=int(self._val[-1][1:3]), minutes=int(self._val[-1][3:5]))
+                    if self._val[-1][0:1] == '-':
                         dt += delta
+                    else:
+                        dt -= delta
                     asc = [dt.strftime('%Y%m%d%H%M'), asc[5], asc[6], 'Z']
         else:
             if self._val[4] is None:
@@ -2695,5 +2698,5 @@ Single value: Python 8-tuple of str or None
             if self._val[-1] is not None:
                 # UTC decay
                 asc.append( self._val[-1] )
-        return ''.join(asc).encode('ascii')
+        return ''.join(asc)
 
