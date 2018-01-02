@@ -89,7 +89,7 @@ class GMMAttachRequest(Layer3):
         Type4LV('MSNetCap', val={'V':b'\0\0'}, IE=MS_network_capability_value_part),
         Uint('CKSN', bl=4, dic=CKSN_dict),
         AttachType(),
-        DRXParam(),
+        Type3V('DRXParam', val={'V':b'\0\0'}, bl={'V':16}, IE=DRXParam()),
         Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
         RAI('OldRAI'),
         Type4LV('MSRACap', val={'V':5*b'\0'}, IE=MS_RA_capability_value_part),

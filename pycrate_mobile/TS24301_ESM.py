@@ -88,9 +88,9 @@ _ESM_dict = {
 
 class ESMHeader(Envelope):
     _GEN = (
-        Uint('EPSBearerID', bl=4),
+        Uint('EPSBearerId', bl=4),
         Uint('ProtDisc', val=2, bl=4),
-        Uint8('TransID'),
+        Uint8('PTI'),
         Uint8('Type', val=232, dic=_ESM_dict)
         )
 
@@ -130,7 +130,7 @@ class ESMActDediEPSBearerCtxtReject(Layer3):
 class ESMActDediEPSBearerCtxtRequest(Layer3):
     _GEN = tuple(ESMHeader(val={'Type':197})._content) + (
         Uint('spare', bl=4),
-        Uint('LinkedEPSBearerID', bl=4),
+        Uint('LinkedEPSBearerId', bl=4),
         Type4LV('EPSQoS', val={'V':b'\x09'}, IE=EPSQoS()),
         Type4LV('TFT', val={'V':b'\0'}, IE=TFT()),
         Type4TLV('TransId', val={'T':0x5D, 'V':b'\0'}, IE=TransId()),
@@ -222,7 +222,7 @@ class ESMBearerResourceAllocReject(Layer3):
 class ESMBearerResourceAllocRequest(Layer3):
     _GEN = tuple(ESMHeader(val={'Type':212})._content) + (
         Uint('spare', bl=4),
-        Uint('LinkedEPSBearerID', bl=4),
+        Uint('LinkedEPSBearerId', bl=4),
         Type4LV('TFAggregate', val={'V':b'\0'}, IE=TFAggregate()),
         Type4LV('EPSQoS', val={'V':b'\x09'}, IE=EPSQoS()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
@@ -256,7 +256,7 @@ class ESMBearerResourceModifReject(Layer3):
 class ESMBearerResourceModifRequest(Layer3):
     _GEN = tuple(ESMHeader(val={'Type':214})._content) + (
         Uint('spare', bl=4),
-        Uint('LinkedEPSBearerID', bl=4),
+        Uint('LinkedEPSBearerId', bl=4),
         Type4LV('TFAggregate', val={'V':b'\0'}, IE=TFAggregate()),
         Type4TLV('EPSQoS', val={'T':0x5B, 'V':b'\x09'}, IE=EPSQoS()),
         Type3TV('ESMCause', val={'T':0x58, 'V':b'\0'}, bl={'V':8}, IE=ESMCause()),
@@ -455,7 +455,7 @@ class ESMPDNDisconnectReject(Layer3):
 class ESMPDNDisconnectRequest(Layer3):
     _GEN = tuple(ESMHeader(val={'Type':210})._content) + (
         Uint('spare', bl=4),
-        Uint('LinkedEPSBearerID', bl=4),
+        Uint('LinkedEPSBearerId', bl=4),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
         )

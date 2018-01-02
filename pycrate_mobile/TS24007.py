@@ -58,7 +58,7 @@ class Layer3(Envelope):
         if 'sec' in kw:
             # used within the NAS LTE EMM stack of corenet
             sec = kw['sec']
-            del kw['nosec']
+            del kw['sec']
         else:
             sec = None
         Envelope.__init__(self, *args, **kw)

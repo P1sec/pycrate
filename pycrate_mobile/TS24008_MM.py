@@ -291,7 +291,7 @@ class MMLocationUpdatingRequest(Layer3):
         Uint('CKSN', bl=4, dic=CKSN_dict),
         LocUpdateType(),
         LAI(),
-        MSCm1(),
+        Type3V('MSCm1', val={'V':b'\0'}, bl={'V':8}, IE=MSCm1()),
         Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
         Type4TLV('MSCm2', val={'T':0x33, 'V':b'@\0\0'}, IE=MSCm2()),
         Type1TV('AddUpdateParams', val={'T':0xC, 'V':0}, IE=AddUpdateParams()),

@@ -575,7 +575,7 @@ class ID(Envelope):
             else:
                 if not hasattr(self, '_IDNone'):
                     self._IDNone = IDNone()
-                log('WNG: ID type unhandled, %i' % type)
+                log('WNG: ID, type unhandled, %i' % type)
                 self._content = self._IDNone._content
                 self._by_id   = self._IDNone._by_id
                 self._by_name = self._IDNone._by_name

@@ -756,7 +756,7 @@ class TAIList(Envelope):
                       .format(self._name, err)))
         elif isinstance(ptail, dict):
             try:
-                PTaiL = self._PTailListLUT[ptail['Type']](val=ptail)
+                PTaiL = self._PTaiListLUT[ptail['Type']](val=ptail)
             except Exception as err:
                 raise(PycrateErr('{0}: unable to set partial TAI list value, {1}'\
                       .format(self._name, err)))
