@@ -2,14 +2,14 @@
 
 # -*- coding: UTF-8 -*-
 #/**
-# * Sigtran test utility
-# * Script to test pycrate decoding/re-encoding for BER / Sigtran
+# * S1AP test utility
+# * Script to test pycrate decoding/re-encoding for APER
 # * Script is using tshark json pipe input which was generated from real pcap
 # *
 # * Usage:
-# * Use any sigtran or ss7 pcap (trace.pcap)
-# * ./tshark -T ek -x -j tcap -r trace.pcap > trace.json
-# * python test_tcapmap.py
+# * Use any s1ap pcap (trace.pcap)
+# * ./tshark -T ek -x -j s1ap -r trace.pcap > trace.json
+# * python test_s1ap.py
 # *
 # * Copyright 2017 Martin Kacer, H21 lab
 # *
@@ -35,8 +35,8 @@
 # * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA
 # *
 # *--------------------------------------------------------
-# * File Name : test_tcapmap.py
-# * Created : 2017-11-30
+# * File Name : test_s1ap.py
+# * Created : 2017-12-28
 # * Authors : Martin Kacer 
 # *--------------------------------------------------------
 #*/
@@ -46,7 +46,7 @@ import time
 import random
 import traceback
 import binascii
-from pycrate_asn1dir import TCAP_MAP
+from pycrate_asn1dir import S1AP
 
 # Global options to control the script behavior
 option_print_verbose = True       # print verbose decoding output
@@ -55,64 +55,64 @@ option_reencode = True             # re-encode into hex and compare with the hex
 #
 
 
-with open('res/tcapmap_pcapr.json') as f:
+with open('res/s1ap_pcapr.json') as f:
     lines = f.readlines()
     for s in lines:
 
-        i = s.find('"tcap_raw": "')
-        ln = len('"tcap_raw": "')
+        i = s.find('"s1ap_raw": "')
+        ln = len('"s1ap_raw": "')
         if (i > 0):
             #print(s[i:])
             subs = s[i+ln:]
             l = subs.find('"')
-            tcap_hex = subs[0:l]
+            s1ap_hex = subs[0:l]
             
             if (option_print_verbose):
-                print("HEX  IN: " +  tcap_hex)
+                print("HEX  IN: " +  s1ap_hex)
             
             # fuzzing of messages
             if (option_fuzzing_messages):
                 for i in range (0, 1):
-                    if tcap_hex != '':
-                        tcap_hex_f = tcap_hex
-                        position = int(random.randint(0, len(tcap_hex_f))/2)
+                    if s1ap_hex != '':
+                        s1ap_hex_f = s1ap_hex
+                        position = int(random.randint(0, len(s1ap_hex_f))/2)
                         position = position * 2
-                        tcap_hex_f = tcap_hex_f[:position] + format(random.randint(0, 255), '02x') + tcap_hex_f[position + 2:]
-                        tcap_hex = tcap_hex_f
+                        s1ap_hex_f = s1ap_hex_f[:position] + format(random.randint(0, 255), '02x') + s1ap_hex_f[position + 2:]
+                        s1ap_hex = s1ap_hex_f
                     
                     if (option_print_verbose):
-                        print("FUZZ IN: " + tcap_hex)
+                        print("FUZZ IN: " + s1ap_hex)
             
             try:
                 # decode using pycrate
-                tcap = TCAP_MAP.TCAP_MAP_Messages.TCAP_MAP_Message
-                tcap.from_ber(binascii.unhexlify(tcap_hex))
+                s1ap = S1AP.S1AP_PDU_Descriptions.S1AP_PDU
+                s1ap.from_aper(binascii.unhexlify(s1ap_hex))
                 
-                tcap_decoded = tcap.get_val()
+                s1ap_decoded = s1ap.get_val()
                 # verbose output
                 if (option_print_verbose):
-                    print(tcap_decoded)
-                    print(tcap.to_asn1())
+                    print(s1ap_decoded)
+                    print(s1ap.to_asn1())
                 # 
                 
                 # re-encode using pycrate
                 if (option_reencode == True):
-                    tcap.set_val(tcap_decoded)
-                    tcap_hex_out = str(binascii.hexlify(tcap.to_ber()))
+                    s1ap.set_val(s1ap_decoded)
+                    s1ap_hex_out = str(binascii.hexlify(s1ap.to_aper()))
                     if (option_print_verbose):
-                        print("HEX OUT:" + tcap_hex_out)
+                        print("HEX OUT:" + s1ap_hex_out)
                     
                     # decode again and try to check diff
-                    tcap_reencoded = TCAP_MAP.TCAP_MAP_Messages.TCAP_MAP_Message
-                    tcap_reencoded.from_ber(binascii.unhexlify(tcap_hex))
-                    tcap_decoded = str(tcap.get_val())
-                    tcap_reencoded_decoded = str(tcap.get_val())
-                    if (tcap_decoded != tcap_reencoded_decoded):
+                    s1ap_reencoded = S1AP.S1AP_PDU_Descriptions.S1AP_PDU
+                    s1ap_reencoded.from_aper(binascii.unhexlify(s1ap_hex))
+                    s1ap_decoded = str(s1ap.get_val())
+                    s1ap_reencoded_decoded = str(s1ap.get_val())
+                    if (s1ap_decoded != s1ap_reencoded_decoded):
                         print("!!!!!!! Re-encoding error begin !!!!!!!")
-                        print("ENCODED  IN: " + tcap_hex)
-                        print("RE-RENCODED: " + tcap_hex_out)
-                        print(tcap_decoded)
-                        print(tcap_reencoded_decoded)
+                        print("ENCODED  IN: " + s1ap_hex)
+                        print("RE-RENCODED: " + s1ap_hex_out)
+                        print(s1ap_decoded)
+                        print(s1ap_reencoded_decoded)
                         print("!!!!!!! Re-encoding error end !!!!!!!")
                     #
                                                     

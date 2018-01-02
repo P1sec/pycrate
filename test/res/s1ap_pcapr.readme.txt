@@ -1,0 +1,6 @@
+Created from pcaps publicly available on https://pcapr.net
+
+iphone6_volte_limited.pcap
+
+Created by the following command
+tshark -T ek -x -j s1ap -r trace.pcap >> s1ap_pcapr.json

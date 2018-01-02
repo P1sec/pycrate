@@ -9,4 +9,4 @@ test.pcap
 tmp.pcap
 
 Created by the following command
-tshark -T ek -x -j tcap -r trace.pcap >> tcapmap.json
+tshark -T ek -x -j tcap -r trace.pcap >> tcapmap_pcapr.json
