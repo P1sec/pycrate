@@ -813,6 +813,7 @@ def class_syntax_gidbl(gidbl, gidcur):
 
 # -- this is an ASN.1 comment --
 def tokenize_comment(scanner, token)    : return ('COMMENT', token)
+def tokenize_charstr(scanner, token)    : return ('CHARSTR', token)
 #
 # ::= : = , () [] [[]] {} . .. ... .& | UNION ^ INTERSECTION EXCEPT < > @ ! ' "
 def tokenize_definition(scanner, token) : return ('DEFINITION', token)
@@ -869,7 +870,9 @@ def tokenize_hstring(scanner, token)    : return ('HSTR', token)
 
 ASN1Scanner = re.Scanner([
 #
-(r'--', tokenize_comment), # should expand to get the whole comment
+(r'(--).*(\n|(--))', tokenize_comment),
+(r'(/\*).*(\*/)', tokenize_comment),
+(r'".*(?<!")"(?!")', tokenize_charstr),
 #
 (r'::=', tokenize_definition),
 (r':', tokenize_colon),
