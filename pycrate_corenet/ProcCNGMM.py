@@ -35,20 +35,20 @@ from .ProcCNRanap import *
 TESTING = False
 
 #------------------------------------------------------------------------------#
-# NAS GPRS Mobility Management signaling procedure
+# NAS GPRS Mobility Management signalling procedures
 # TS 24.008, version d90
 # Core Network side
 #------------------------------------------------------------------------------#
 
 class GMMSigProc(NASSigProc):
-    """GPRS Mobility Management signaling procedure handler
+    """GPRS Mobility Management signalling procedure handler
     
     instance attributes:
         - Name : procedure name
         - GMM  : reference to the UEGMMd instance running this procedure
         - Iu   : reference to the IuPSd instance connecting the UE
         - Cont : 2-tuple of CN-initiated NAS message(s) and UE-initiated NAS 
-                  message(s)
+                 message(s)
         - Timer: timer in sec. for this procedure
         - Encod: custom NAS message encoders with fixed values
         - Decod: custom NAS message decoders with transform functions
@@ -85,7 +85,7 @@ class GMMSigProc(NASSigProc):
     
     def output(self):
         self._log('ERR', 'output() not implemented')
-        return None
+        return []
     
     def process(self, pdu):
         if self.TRACK_PDU:
@@ -94,18 +94,11 @@ class GMMSigProc(NASSigProc):
         self.decode_msg(pdu, self.UEInfo)
         #
         self._log('ERR', 'process() not implemented')
-        return None
+        return []
     
     def postprocess(self, Proc=None):
         self._log('ERR', 'postprocess() not implemented')
-        return None
-    
-    def _collect_cap(self):
-        if not hasattr(self, 'Cap') or not hasattr(self, 'UEInfo'):
-            return
-        for Cap in self.Cap:
-            if Cap in self.UEInfo:
-                self.UE.Cap[Cap] = self.UEInfo[Cap]
+        return []
     
     def abort(self):
         # abort this procedure, and all procedures started within this one
@@ -120,7 +113,7 @@ class GMMSigProc(NASSigProc):
         self._log('INF', 'aborting')
     
     def rm_from_gmm_stack(self):
-        # remove the procedure from the MM stack of procedures
+        # remove the procedure from the GMM stack of procedures
         if self.GMM.Proc[-1] == self:
             del self.GMM.Proc[-1]
         if self._gmm_preempt:
@@ -147,9 +140,15 @@ class GMMSigProc(NASSigProc):
     # common helpers
     #--------------------------------------------------------------------------#
     
+    def _collect_cap(self):
+        if not hasattr(self, 'Cap') or not hasattr(self, 'UEInfo'):
+            return
+        for Cap in self.Cap:
+            if Cap in self.UEInfo:
+                self.UE.Cap[Cap] = self.UEInfo[Cap]
+    
     def _chk_imsi(self):
         # arriving here means the UE's IMSI was unknown at first
-        # set the IMSI indicated by the UE
         Server, imsi = self.UE.Server, self.UE.IMSI
         if not Server.is_imsi_allowed(imsi):
             self.errcause = self.GMM.IDENT_IMSI_NOT_ALLOWED
@@ -200,13 +199,15 @@ class GMMSigProc(NASSigProc):
         return NasProc.output()
     
     def _ret_smc(self, cksn=None, newkey=False):
-        # set a RANAP callback in the Iu stack for triggering an SMC
+        # initialize a RANAP SMC procedure
         RanapProc = self.Iu.init_ranap_proc(RANAPSecurityModeControl,
                                             **self.Iu.get_smc_ies(cksn, newkey))
-        RanapProc._cb = self
         if RanapProc:
-            self.Iu.RanapTx = [RanapProc]
-        return None
+            # and set a callback to self in it
+            RanapProc._cb = self
+            return [RanapProc]
+        else:
+            return []
 
 
 #------------------------------------------------------------------------------#
@@ -290,27 +291,26 @@ class GMMAttach(GMMSigProc):
         (TS24008_GMM.GMMAttachRequest, TS24008_GMM.GMMAttachComplete)
         )
     
-    Decod = {
-        (8, 1) : {
-            'CKSN'          : lambda x: x(),
-            'ID'            : lambda x: x[1].decode(),
-            'OldRAI'        : lambda x: (x['PLMN'].decode(), x['LAC'](), x['RAC']()),
-            'ReqREADYTimer' : lambda x: {'Unit': x[1]['Unit'](), 'Value': x[1]['Value']()},
-            }
-        }
-    
     Cap = ('MSNetCap', 'DRXParam', 'MSRACap', 'PSLCSCap', 'MSCm2', 'MSCm3', 
            'SuppCodecs', 'UENetCap', 'VoiceDomPref', 'DeviceProp', 'MSNetFeatSupp',
            'ExtDRXParam')
     
+    Decod = {
+        (8, 1) : {
+            'CKSN'          : lambda x: x.get_val(),
+            'ID'            : lambda x: x[1].decode(),
+            'OldRAI'        : lambda x: x.decode(),
+            'ReqREADYTimer' : lambda x: {'Unit': x[1]['Unit'].get_val(), 'Value': x[1]['Value'].get_val()},
+            }
+        }
+    
     def process(self, pdu):
-        # got a GMMAttachRequest
         # preempt the GMM stack
         self.gmm_preempt()
         if self.TRACK_PDU:
             self._pdu.append( (time(), 'UL', pdu) )
         #
-        if pdu['Type']() == 1:
+        if pdu._name == 'GMMAttachRequest':
             # AttachRequest
             self.errcause, self.UEInfo = None, {}
             self.decode_msg(pdu, self.UEInfo)
@@ -319,10 +319,10 @@ class GMMAttach(GMMSigProc):
             # AttachComplete
             self.errcause, self.CompInfo = None, {}
             self.decode_msg(pdu, self.CompInfo)
-            self.UE.set_ptmsi(self.ptmsi_realloc)
-            self._log('INF', 'new P-TMSI set, 0x%.8x' % self.ptmsi_realloc)
-            self._end(nas_tx=False)
-            return None
+            if self.ptmsi_realloc >= 0:
+                self.UE.set_ptmsi(self.ptmsi_realloc)
+                self._log('INF', 'new P-TMSI set, 0x%.8x' % self.ptmsi_realloc)
+            return self._end()
     
     def _process_req(self):
         #
@@ -330,8 +330,9 @@ class GMMAttach(GMMSigProc):
             self.UE.PTMSI = self.UEInfo['ID'][1]
         #
         att_type = self.UEInfo['AttachType']['Type']
+        self.att_type = att_type.get_val()
         self._log('INF', 'request type %i (%s), old RAI %s.%.4x.%.2x'\
-                  % (att_type(), att_type._dic[att_type()],
+                  % (att_type(), att_type._dic[self.att_type],
                      self.UEInfo['OldRAI'][0], self.UEInfo['OldRAI'][1], self.UEInfo['OldRAI'][2]))
         # collect capabilities
         self._collect_cap()
@@ -340,6 +341,17 @@ class GMMAttach(GMMSigProc):
             self._req_imeisv = True
         else:
             self._req_imeisv = False
+        #
+        # check for emergency attach
+        if self.att_type == 4:
+            if self.GMM.ATT_EMERG:
+                self.errcause = self.GMM.ATT_EMERG
+                return self.output()
+            else:
+                # jump directly to the attach accept
+                self.EMM.set_sec_ctx_emerg()
+                # emergency ctx has always ksi 0
+                return self.output()
         #
         # check local ID
         if self.UE.IMSI is None:
@@ -408,16 +420,19 @@ class GMMAttach(GMMSigProc):
                 return self._ret_smc(Proc.cksn, True)
             elif self._req_imeisv:
                 return self._ret_req_imeisv()
+        #
         elif isinstance(Proc, RANAPSecurityModeControl):
             if not Proc.success:
                 self.abort()
-                return None
+                return []
             # self.Iu.SEC['CKSN'] has been taken into use at the RRC layer
             elif self._req_imeisv:
                 return self._ret_req_imeisv()
+        #
         elif Proc == self:
             # something bad happened with one of the GMM common procedure
             pass
+        #
         elif Proc is not None:
             self._err = Proc
             assert()
@@ -425,6 +440,10 @@ class GMMAttach(GMMSigProc):
         return self.output()
     
     def output(self):
+        if self.att_type == 3 and self.GMM.ATT_IMSI:
+            # IMSI attach not supported
+            self.errcause = self.GMM.ATT_IMSI
+        #
         if self.errcause:
             # prepare AttachReject IE
             if self.errcause == self.GMM.ATT_IMSI_PROV_REJECT:
@@ -437,8 +456,8 @@ class GMMAttach(GMMSigProc):
         else:
             # prepare AttachAccept IEs
             IEs = {'ForceStdby'            : {'Value': self.GMM.ATT_FSTDBY},
-                   'AttachResult'          : {'FollowOnProc': self.UEInfo['AttachType']['FollowOnReq'](),
-                                              'Result': self.UEInfo['AttachType']['Type']()},
+                   'AttachResult'          : {'FollowOnProc': self.UEInfo['AttachType']['FollowOnReq'].get_val(),
+                                              'Result': self.att_type},
                    'PeriodicRAUpdateTimer' : self.GMM.ATT_RAU_TIMER,
                    'RadioPrioForTOM8'      : {'Value': self.GMM.ATT_PRIO_TOM8},
                    'RadioPrioForSMS'       : {'Value': self.GMM.ATT_PRIO_SMS},
@@ -455,7 +474,7 @@ class GMMAttach(GMMSigProc):
             # but don't forward its output
             if self.GMM.ATT_PTMSI_REALLOC:
                 NasProc = self.GMM.init_proc(GMMPTMSIReallocation)
-                void = NasProc.output(embedded=True)
+                NasProc.output(embedded=True)
                 IEs['AllocPTMSI'] = {'type': NAS.IDTYPE_TMSI, 'ident': NasProc.ptmsi}
                 self.ptmsi_realloc = NasProc.ptmsi
             else:
@@ -493,39 +512,27 @@ class GMMAttach(GMMSigProc):
         #
         if self.TRACK_PDU:
             self._pdu.append( (time(), 'DL', self._nas_tx) )
+        ret = self.Iu.ret_ranap_dt(self._nas_tx)
         if self.ptmsi_realloc < 0:
-            self._end(nas_tx=True)
+            ret.extend( self._end() )
         else:
             # use the timer of the GMMPTMSIRealloc
             # and wait for a GMMAttachComplete to end the procedure
             self.Timer = NasProc.Timer
             self.init_timer()
         # send Attach reject / accept
-        return self._nas_tx
+        return ret
     
-    def _end(self, nas_tx=True):
+    def _end(self):
+        ret = []
         if self.GMM.ATT_IUREL and \
-        (self.errcause or not self.UEInfo['AttachType']['FollowOnReq']()):
-            # trigger an IuRelease after the direct transfer
-            RanapTx = []
-            if nas_tx:
-                try:
-                    naspdu = self._nas_tx.to_bytes()
-                except Exception as err:
-                    self._log('ERR', 'unable to encode downlink NAS PDU: %r' % err)
-                else:
-                    RanapProcDT = self.Iu.init_ranap_proc(RANAPDirectTransferCN,
-                                                          NAS_PDU=naspdu,
-                                                          SAPI='sapi-0')
-                    if RanapProcDT:
-                        RanapTx.append( RanapProcDT )
-            # IuRelease with Cause NAS normal-release (83)
+        (self.errcause or not self.UEInfo['AttachType']['FollowOnReq'].get_val()):
+            # trigger an IuRelease with Cause NAS normal-release (83)
             RanapProcRel = self.Iu.init_ranap_proc(RANAPIuRelease, Cause=('nAS', 83))
             if RanapProcRel:
-                RanapTx.append( RanapProcRel )
-            if RanapTx:
-                self.Iu.RanapTx = RanapTx
+                ret.append(RanapProcRel)
         self.rm_from_gmm_stack()
+        return ret
 
 
 class GMMDetachUE(GMMSigProc):
@@ -551,21 +558,6 @@ class GMMDetachUE(GMMSigProc):
         (TS24008_GMM.GMMDetachRequestMO, )
         )
     
-    def process(self, pdu):
-        # preempt the GMM stack
-        self.gmm_preempt()
-        if self.TRACK_PDU:
-            self._pdu.append( (time(), 'UL', pdu) )
-        self.UEInfo = {}
-        self.decode_msg(pdu, self.UEInfo)
-        if self.UEInfo['DetachTypeMO']['PowerOff']():
-            # if UE is to power-off, procedure ends here
-            ret = self.output(poff=True)
-        else:
-            ret = self.output()
-        self._detach()
-        return ret
-    
     def _detach(self):
         # set GMM state
         self.GMM.state = 'INACTIVE'
@@ -576,33 +568,35 @@ class GMMDetachUE(GMMSigProc):
         # abort all ongoing PS procedures
         self.Iu.clear_nas_proc()
     
+    def process(self, pdu):
+        # preempt the GMM stack
+        self.gmm_preempt()
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'UL', pdu) )
+        self.UEInfo = {}
+        self.decode_msg(pdu, self.UEInfo)
+        if self.UEInfo['DetachTypeMO']['PowerOff'].get_val():
+            # if UE is to power-off, procedure ends here
+            ret = self.output(poff=True)
+        else:
+            ret = self.output()
+        self._detach()
+        return ret
+    
     def output(self, poff=False):
         # prepare a stack of RANAP procedure(s)
-        RanapTx = []
         if not poff:
             # set a RANAP direct transfer to transport the DetachAccept
             self.set_msg(8, 6, ForceStdby={'Value': self.GMM.DET_FSTDBY})
             self.encode_msg(8, 6)
             if self.TRACK_PDU:
                 self._pdu.append( (time(), 'DL', self._nas_tx) )
-            try:
-                naspdu = self._nas_tx.to_bytes()
-            except Exception as err:
-                self._log('ERR', 'unable to encode downlink NAS PDU: %r' % err)
-            else:
-                RanapProcDT = self.Iu.init_ranap_proc(RANAPDirectTransferCN,
-                                                      NAS_PDU=naspdu,
-                                                      SAPI='sapi-0')
-                if RanapProcDT:
-                    RanapTx.append( RanapProcDT )
+            RanapTxProc = self.Iu.ret_ranap_dt(self._nas_tx)
         # set an Iu release with Cause NAS normal-release (83)
         RanapProcRel = self.Iu.init_ranap_proc(RANAPIuRelease, Cause=('nAS', 83))
         if RanapProcRel:
-            RanapTx.append( RanapProcRel )
-        #
-        if RanapTx:
-            self.Iu.RanapTx = RanapTx
-        return self._nas_tx
+            RanapTxProc.append( RanapProcRel )
+        return RanapTxProc
 
 
 class GMMDetachCN(GMMSigProc):
@@ -628,7 +622,6 @@ class GMMDetachCN(GMMSigProc):
     
     Timer = 'T3322'
     
-    
     def output(self):
         self.encode_msg(8, 5)
         # log the NAS msg
@@ -638,7 +631,7 @@ class GMMDetachCN(GMMSigProc):
         self._log('INF', 'request type %r' % self._nas_tx['DetachTypeMT']['Type'])
         self.init_timer()
         # send it over RANAP
-        return self._nas_tx
+        return self.Iu.ret_ranap_dt(self._nas_tx)
     
     def process(self, pdu):
         if self.TRACK_PDU:
@@ -647,7 +640,7 @@ class GMMDetachCN(GMMSigProc):
         #
         self._log('INF', 'accepted')
         self.rm_from_gmm_stack()
-        return None
+        return []
 
 
 class GMMRoutingAreaUpdating(GMMSigProc):
@@ -735,17 +728,17 @@ class GMMRoutingAreaUpdating(GMMSigProc):
         (TS24008_GMM.GMMRoutingAreaUpdateRequest, TS24008_GMM.GMMRoutingAreaUpdateComplete)
         )
     
-    Decod = {
-        (8, 8) : {
-            'CKSN'          : lambda x: x(),
-            'OldRAI'        : lambda x: (x['PLMN'].decode(), x['LAC'](), x['RAC']()),
-            'ReqREADYTimer' : lambda x: {'Unit': x[1]['Unit'](), 'Value': x[1]['Value']()},
-            }
-        }
-    
     Cap = ('MSRACap', 'DRXParam', 'MSNetCap', 'PSLCSCap', 'UENetCap', 'MSCm2', 
            'MSCm3', 'SuppCodecs', 'VoiceDomPref', 'DeviceProp', 'MSNetFeatSupp',
            'ExtDRXParam') 
+    
+    Decod = {
+        (8, 8) : {
+            'CKSN'          : lambda x: x.get_val(),
+            'OldRAI'        : lambda x: (x['PLMN'].decode(), x['LAC'].get_val(), x['RAC'].get_val()),
+            'ReqREADYTimer' : lambda x: {'Unit': x[1]['Unit'].get_val(), 'Value': x[1]['Value'].get_val()},
+            }
+        }
     
     def process(self, pdu):
         # preempt the GMM stack
@@ -753,7 +746,7 @@ class GMMRoutingAreaUpdating(GMMSigProc):
         if self.TRACK_PDU:
             self._pdu.append( (time(), 'UL', pdu) )
         #
-        if pdu['Type']() == 8:
+        if pdu['Type'].get_val() == 8:
             # RoutingAreaUpdateRequest
             self.errcause, self.UEInfo = None, {}
             self.decode_msg(pdu, self.UEInfo)
@@ -762,10 +755,10 @@ class GMMRoutingAreaUpdating(GMMSigProc):
             # RoutingAreaUpdateComplete
             self.errcause, self.CompInfo = None, {}
             self.decode_msg(pdu, self.CompInfo)
-            self.UE.set_ptmsi(self.ptmsi_realloc)
-            self._log('INF', 'new P-TMSI set, 0x%.8x' % self.ptmsi_realloc)
-            self._end(nas_tx=False)
-            return None
+            if self.ptmsi_realloc >= 0:
+                self.UE.set_ptmsi(self.ptmsi_realloc)
+                self._log('INF', 'new P-TMSI set, 0x%.8x' % self.ptmsi_realloc)
+            return self._end()
     
     def _process_req(self):
         #
@@ -819,19 +812,23 @@ class GMMRoutingAreaUpdating(GMMSigProc):
                 # if we are here, there was no auth procedure,
                 # hence the cksn submitted by the UE is valid
                 return self._ret_smc(self.UEInfo['CKSN'], False)
+        #
         if isinstance(Proc, GMMAuthenticationCiphering):
             if self.Iu.require_smc(self):
                 # if we are here, the valid cksn is the one established during
                 # the auth procedure
                 return self._ret_smc(Proc.cksn, True)
+        #
         elif isinstance(Proc, RANAPSecurityModeControl):
             if not Proc.success:
                 self.abort()
-                return None
+                return []
             # self.Iu.SEC['CKSN'] has been taken into use at the RRC layer
+        #
         elif Proc == self:
             # something bad happened with one of the GMM common procedure
             pass
+        #
         elif Proc is not None:
             self._err = Proc
             assert()
@@ -851,8 +848,8 @@ class GMMRoutingAreaUpdating(GMMSigProc):
         else:
             # prepare RAUAccept IEs
             IEs = {'ForceStdby'            : {'Value': self.GMM.RAU_FSTDBY},
-                   'UpdateResult'          : {'FollowOnProc': self.UEInfo['UpdateType']['FollowOnReq'](),
-                                              'Value': self.UEInfo['UpdateType']['Value']()},
+                   'UpdateResult'          : {'FollowOnProc': self.UEInfo['UpdateType']['FollowOnReq'].get_val(),
+                                              'Value': self.UEInfo['UpdateType']['Value'].get_val()},
                    'PeriodicRAUpdateTimer' : self.GMM.RAU_RAU_TIMER,
                    'RAI'                   : {'PLMN': self.UE.PLMN, 'LAC': self.UE.LAC, 'RAC': self.UE.RAC}
                    }
@@ -905,39 +902,27 @@ class GMMRoutingAreaUpdating(GMMSigProc):
         #
         if self.TRACK_PDU:
             self._pdu.append( (time(), 'DL', self._nas_tx) )
+        ret = self.Iu.ret_ranap_dt(self._nas_tx)
         if self.ptmsi_realloc < 0:
-            self._end(nas_tx=True)
+            ret.extend( self._end() )
         else:
             # use the timer of the GMMPTMSIRealloc
-            # and wait for a GMMRAUComplete to end the procedure
+            # and wait for a GMMAttachComplete to end the procedure
             self.Timer = NasProc.Timer
             self.init_timer()
-        # send RAU reject / accept
-        return self._nas_tx
+        # send Attach reject / accept
+        return ret
     
-    def _end(self, nas_tx=True):
+    def _end(self):
+        ret = []
         if self.GMM.RAU_IUREL and \
-        (self.errcause or not self.UEInfo['UpdateType']['FollowOnReq']()):
-            # trigger an IuRelease after the direct transfer
-            RanapTx = []
-            if nas_tx:
-                try:
-                    naspdu = self._nas_tx.to_bytes()
-                except Exception as err:
-                    self._log('ERR', 'unable to encode downlink NAS PDU: %r' % err)
-                else:
-                    RanapProcDT = self.Iu.init_ranap_proc(RANAPDirectTransferCN,
-                                                          NAS_PDU=naspdu,
-                                                          SAPI='sapi-0')
-                    if RanapProcDT:
-                        RanapTx.append( RanapProcDT )
-            # IuRelease with Cause NAS normal-release (83)
+        (self.errcause or not self.UEInfo['UpdateType']['FollowOnReq'].get_val()):
+            # trigger an IuRelease with Cause NAS normal-release (83)
             RanapProcRel = self.Iu.init_ranap_proc(RANAPIuRelease, Cause=('nAS', 83))
             if RanapProcRel:
-                RanapTx.append( RanapProcRel )
-            if RanapTx:
-                self.Iu.RanapTx = RanapTx
+                ret.append(RanapProcRel)
         self.rm_from_gmm_stack()
+        return ret
 
 
 class GMMPTMSIReallocation(GMMSigProc):
@@ -983,12 +968,12 @@ class GMMPTMSIReallocation(GMMSigProc):
             #
             self.init_timer()
             # send it over RANAP
-            return self._nas_tx
+            return self.Iu.ret_ranap_dt(self._nas_tx)
         else:
             # when the P-TMSI realloc is embedded, there is no realloc complete
             # to expect...
             self.rm_from_gmm_stack()
-            return None
+            return []
     
     def process(self, pdu):
         if self.TRACK_PDU:
@@ -1000,7 +985,7 @@ class GMMPTMSIReallocation(GMMSigProc):
         self.UE.set_ptmsi(self.ptmsi)
         self._log('INF', 'new P-TMSI set, 0x%.8x' % self.ptmsi)
         self.rm_from_gmm_stack()
-        return None
+        return []
 
 
 class GMMAuthenticationCiphering(GMMSigProc):
@@ -1048,12 +1033,12 @@ class GMMAuthenticationCiphering(GMMSigProc):
     
     Decod = {
         (8, 19): {
-            'RES'    : lambda x: x['V'](),
+            'RES'    : lambda x: x['V'].get_val(),
             'IMEISV' : lambda x: x[2].decode(),
-            'RESExt' : lambda x: x['V']()
+            'RESExt' : lambda x: x['V'].get_val()
             },
         (8, 28): {
-            'AUTS'   : lambda x: x['V']()
+            'AUTS'   : lambda x: x['V'].get_val()
             }
         }
     
@@ -1080,7 +1065,7 @@ class GMMAuthenticationCiphering(GMMSigProc):
             # IMSI is not in the AuC db
             self._log('ERR', 'unable to get an authentication vector from AuC')
             self.rm_from_gmm_stack()
-            return None
+            return []
         #
         # prepare IEs
         IEs = {'IMEISVReq'  : self.GMM.AUTH_IMEI_REQ,
@@ -1104,7 +1089,7 @@ class GMMAuthenticationCiphering(GMMSigProc):
         #
         self.init_timer()
         # send it over RANAP
-        return self._nas_tx
+        return self.Iu.ret_ranap_dt(self._nas_tx)
     
     def process(self, pdu):
         if self.TRACK_PDU:
@@ -1112,7 +1097,7 @@ class GMMAuthenticationCiphering(GMMSigProc):
         self.UEInfo = {}
         self.decode_msg(pdu, self.UEInfo)
         #
-        if pdu['Type']() == 19:
+        if pdu['Type'].get_val() == 19:
             return self._process_resp()
         else:
             return self._process_fail()
@@ -1130,10 +1115,10 @@ class GMMAuthenticationCiphering(GMMSigProc):
                           % (hexlify(self.vect[1]).decode('ascii'),
                              hexlify(res).decode('ascii'))) 
                 self.encode_msg(8, 20)
-                rej = True
+                self.success = False
             else:
                 self._log('DBG', '3G authentication accepted')
-                rej = False
+                self.success = True
                 # set a 3G security context
                 self.Iu.set_sec_ctx(self.cksn, 3, self.vect)
         else:
@@ -1144,23 +1129,26 @@ class GMMAuthenticationCiphering(GMMSigProc):
                           % (hexlify(self.vect[1]).decode('ascii'),
                              hexlify(self.UEInfo['RES']).decode('ascii')))
                 self.encode_msg(8, 20)
-                rej = True
+                self.success = False
             else:
                 self._log('DBG', '2G authentication accepted')
-                rej = False
+                self.success = True
                 # set a 2G security context
                 self.Iu.set_sec_ctx(self.cksn, 2, self.vect)
         #
         self.rm_from_gmm_stack()
-        if rej:
-            return self._nas_tx
+        if not self.success:
+            if self.TRACK_PDU:
+                self._pdu.append( (time(), 'DL', self._nas_tx) )
+            return self.Iu.ret_ranap_dt(self._nas_tx)
         else:
             if 'IMEISV' in self.UEInfo:
                 self.UE.set_ident_from_ue(NAS.IDTYPE_IMEISV, self.UEInfo['IMEISV'])
-            return None
+            return []
      
     def _process_fail(self):
-        if self.UEInfo['GMMCause']() == 21 and 'AUTS' in self.UEInfo:
+        self.success = False
+        if self.UEInfo['GMMCause'].get_val() == 21 and 'AUTS' in self.UEInfo:
             # synch failure
             # resynchronize the SQN in case the MM stack is not already doing it
             if self.UE.IuCS is not None and self.UE.IuCS.MM.state == 'ACTIVE' \
@@ -1174,14 +1162,18 @@ class GMMAuthenticationCiphering(GMMSigProc):
                 self._log('ERR', 'unable to resynchronize SQN in AuC')
                 self.encode_msg(8, 20)
                 self.rm_from_gmm_stack()
-                return self._nas_tx
+                if self.TRACK_PDU:
+                    self._pdu.append( (time(), 'DL', self._nas_tx) )
+                return self.Iu.ret_ranap_dt(self._nas_tx)
             #
             elif ret:
                 # USIM did not authenticate correctly
                 self._log('WNG', 'USIM authentication failed for resynch')
                 self.encode_msg(8, 20)
                 self.rm_from_gmm_stack()
-                return self._nas_tx
+                if self.TRACK_PDU:
+                    self._pdu.append( (time(), 'DL', self._nas_tx) )
+                return self.Iu.ret_ranap_dt(self._nas_tx)
             #
             else: 
                 # resynch OK: restart an auth procedure
@@ -1195,7 +1187,7 @@ class GMMAuthenticationCiphering(GMMSigProc):
             # UE refused our auth request...
             self._log('ERR', 'UE rejected AUTN, %s' % self.UEInfo['Cause'])
             self.rm_from_gmm_stack()
-            return None
+            return []
 
 
 class GMMIdentification(GMMSigProc):
@@ -1236,7 +1228,7 @@ class GMMIdentification(GMMSigProc):
         #
         self.init_timer()
         # send it
-        return self._nas_tx
+        return self.Iu.ret_ranap_dt(self._nas_tx)
     
     def process(self, pdu):
         if self.TRACK_PDU:
@@ -1244,7 +1236,7 @@ class GMMIdentification(GMMSigProc):
         self.UEInfo = {}
         self.decode_msg(pdu, self.UEInfo)
         # get the identity IE value
-        self.IDType = self._nas_tx['IDType']()
+        self.IDType = self._nas_tx['IDType'].get_val()
         #
         if self.UEInfo['ID'][0] != self.IDType :
             self._log('WNG', 'identity responded not corresponding to type requested '\
@@ -1253,7 +1245,7 @@ class GMMIdentification(GMMSigProc):
         self.UE.set_ident_from_ue(*self.UEInfo['ID'], dom='PS')
         #
         self.rm_from_gmm_stack()
-        return None
+        return []
 
 
 class GMMInformation(GMMSigProc):
@@ -1290,7 +1282,7 @@ class GMMInformation(GMMSigProc):
         self._log('INF', '%r' % self.Encod[(8, 33)])
         self.rm_from_gmm_stack()
         # send it
-        return self._nas_tx
+        return self.Iu.ret_ranap_dt(self._nas_tx)
 
 
 class GMMServiceRequest(GMMSigProc):
@@ -1325,7 +1317,7 @@ class GMMServiceRequest(GMMSigProc):
     
     Decod = {
         (8, 12): {
-            'CKSN'        : lambda x: x(),
+            'CKSN'        : lambda x: x.get_val(),
             'PTMSI'       : lambda x: x[1].decode(),
             'PDPCtxtStat' : lambda x: {c: x[2]['NSAPI_%i' % c] for c in range(0, 16)},
             'MBMSCtxtStat': lambda x: {c: x[2]['NSAPI_%i' % c] for c in range(0, 16)},
@@ -1360,7 +1352,7 @@ class GMMServiceRequest(GMMSigProc):
         elif isinstance(Proc, RANAPSecurityModeControl):
             if not Proc.success:
                 self.abort()
-                return None
+                return []
             # self.Iu.SEC['CKSN'] has been taken into use at the RRC layer
         elif Proc == self:
             # something bad happened with one of the GMM common procedure
@@ -1382,7 +1374,7 @@ class GMMServiceRequest(GMMSigProc):
         if self.TRACK_PDU:
             self._pdu.append( (time(), 'DL', self._nas_tx) )
         self.rm_from_gmm_stack()
-        return self._nas_tx
+        return self.Iu.ret_ranap_dt(self._nas_tx)
 
 
 # filter_init=1, indicates we are the core network side
@@ -1403,6 +1395,8 @@ GMMProcUeDispatcher = {
     8 : GMMRoutingAreaUpdating,
     12: GMMServiceRequest
     }
+GMMProcUeDispatcherStr = {ProcClass.Cont[1][0]()._name: ProcClass \
+                          for ProcClass in GMMProcUeDispatcher.values()}
 
 # GMM CN-initiated procedures dispatcher
 GMMProcCnDispatcher = {
@@ -1412,3 +1406,6 @@ GMMProcCnDispatcher = {
     21: GMMIdentification,
     33: GMMInformation,
     }
+GMMProcCnDispatcherStr = {ProcClass.Cont[0][0]()._name: ProcClass \
+                          for ProcClass in GMMProcCnDispatcher.values()}
+

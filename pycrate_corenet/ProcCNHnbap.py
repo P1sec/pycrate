@@ -31,13 +31,13 @@ from .utils     import *
 from .ProcProto import *
 
 #------------------------------------------------------------------------------#
-# HNBAP signaling procedure
+# HNBAP signalling procedure
 # TS 25.469, version d10
 # HNB-GW side
 #------------------------------------------------------------------------------#
 
 class HNBAPSigProc(LinkSigProc):
-    """HNBAP signaling procedure handler
+    """HNBAP signalling procedure handler
     
     instance attributes:
         - Name  : procedure name
@@ -62,22 +62,37 @@ class HNBAPSigProc(LinkSigProc):
         # to store PDU traces
         self._pdu = []
         # list of PDU to be sent to the HNB
-        self._snd = []
+        self._pdu_tx = []
         #
         self._log('DBG', 'instantiating procedure')
     
     def _log(self, logtype, msg):
         self.HNB._log(logtype, '[%s] %s' % (self.Name, msg))
     
-    
-    def recv(self, pdu):
+    def _recv(self, pdu_rx):
         if self.TRACK_PDU:
-            self._pdu.append( (time(), 'UL', pdu) )
+            self._pdu.append( (time(), 'UL', pdu_rx) )
+        self.errcause, self.HNBInfo = None, {}
+        try:
+            self.decode_pdu(pdu_rx, self.HNBInfo)
+        except Exception as err:
+            self._err = err
+            self._log('ERR', 'decode_pdu (%s), sending error indication' % err)
+            self.errcause = ('protocol', 'abstract-syntax-error-reject')
+    
+    def recv(self, pdu_rx):
+        self._recv(pdu_rx)
         self._log('ERR', 'recv() not implemented')
+    
+    def _send(self):
+        if self.TRACK_PDU:
+            for pdu in self._pdu_tx:
+                self._pdu.append( (time(), 'DL', pdu) )
+        return self._pdu_tx
     
     def send(self):
         self._log('ERR', 'send() not implemented')
-        return self._snd
+        return self._send()
     
     def trigger(self):
         self._log('ERR', 'trigger() not implemented')
@@ -154,42 +169,19 @@ class HNBAPHNBRegistration(HNBAPSigProc):
         'uns': ({}, {})
         }
     
-    def recv(self, pdu):
-        if self.TRACK_PDU:
-            self._pdu.append( (time(), 'UL', pdu) )
-        #
-        errcause = None
-        self.HNB.Config.clear()
-        # use the PDU to populate the Config of the HNBd
-        try:
-            self.decode_pdu(pdu, self.HNB.Config)
-        except Exception as err:
-            self._err = err
-            self._log('ERR', 'decode_pdu: %s' % err)
-            self.HNB.Config.clear()
-            errcause = ('protocol', 'abstract-syntax-error-reject')
-        #
-        if errcause is None:
-            # procedure successful outcome
-            self.HNB.ID = (self.HNB.Config['PLMNidentity'], self.HNB.Config['CellIdentity'])
+    def recv(self, pdu_rx):
+        self._recv(pdu_rx)
+        if self.errcause:
+            # procedure unsuccessful outcome
+            self.encode_pdu('uns', Cause=self.errcause)
+            self._log('INF', 'HNB not registered successfully')
+        else:
+            self.HNB.Config = cpdict(self.HNBInfo)
+            self.HNB.ID = (self.HNBInfo['PLMNidentity'], self.HNBInfo['CellIdentity'])
             self.encode_pdu('suc', RNC_ID=self.HNB.RNC_ID)
             self._log('INF', 'HNB registered successfully')
-        else:
-            # procedure unsuccessful outcome
-            self.encode_pdu('uns', Cause=errcause)
-            self._log('INF', 'HNB not registered successfully')
     
-    def send(self):
-        if self.TRACK_PDU:
-            for pdu in self._snd:
-                self._pdu.append( (time(), 'DL', pdu) )
-        # remove from the HNB HNBAP procedure stack
-        try:
-            del self.HNB.ProcHnbap[self.Code]
-        except:
-            pass
-        # send back the list of PDU to be returned to the HNB
-        return self._snd
+    send = HNBAPSigProc._send
 
 
 class HNBAPHNBDeregistrationHNB(HNBAPSigProc):
@@ -222,6 +214,13 @@ class HNBAPHNBDeregistrationHNB(HNBAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    def recv(self, pdu_rx):
+        self._recv(pdu_rx)
+        if not self.errcause:
+            # remove the HNB from the Server.LAC / RAC dict
+            self.Server._unset_hnb_loc(self)
+            self._log('INF', 'HNB deregistered')
 
 
 class HNBAPHNBDeregistrationGW(HNBAPSigProc):
@@ -254,6 +253,8 @@ class HNBAPHNBDeregistrationGW(HNBAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    # not implemented
 
 
 class HNBAPUERegistration(HNBAPSigProc):
@@ -301,21 +302,11 @@ class HNBAPUERegistration(HNBAPSigProc):
         'uns': ({}, {})
         }
     
-    def recv(self, pdu):
-        if self.TRACK_PDU:
-            self._pdu.append( (time(), 'UL', pdu) )
-        #
-        errcause, UEInfo = None, {} 
-        try:
-            self.decode_pdu(pdu, UEInfo)
-        except Exception as err:
-            self._err = err
-            self._log('ERR', 'decode_pdu: %s' % err)
-            errcause = ('protocol', 'abstract-syntax-error-reject')
-        #
-        if errcause is None:
+    def recv(self, pdu_rx):
+        self._recv(pdu_rx)
+        if not self.errcause:
             # get the UE identity (IMSI or TMSI)
-            ue, UEId = None, UEInfo['UE_Identity']
+            ue, UEId = None, self.HNBInfo['UE_Identity']
             if UEId[0] == 'iMSI':
                 imsi = TS24008_IE.decode_bcd(UEId[1])
                 ue = self.Server.get_ued(imsi=imsi)
@@ -328,39 +319,27 @@ class HNBAPUERegistration(HNBAPSigProc):
             else:
                 self._log('WNG', 'unsupported UE identity, %r' % UEId)
                 # unsupported UE identity
-                errcause = ('radioNetwork', 'invalid-UE-identity')
+                self.errcause = ('radioNetwork', 'invalid-UE-identity')
+            #
             if ue is None:
                 # UE not allowed / configured in the CorenetServer
-                errcause = self.HNB.UEREG_NOTALLOWED
+                self.errcause = self.HNB.UEREG_NOTALLOWED
             else:
                 ctx_id = self.HNB.set_ue_hnbap(ue)
-                if 'UE_Capabilities' in UEInfo:
-                    ue.Cap['HNBAP'] = UEInfo['UE_Capabilities']
+                if 'UE_Capabilities' in self.HNBInfo:
+                    ue.Cap['HNBAP'] = self.HNBInfo['UE_Capabilities']
         #
-        if errcause is None:
-            # procedure successful outcome
-            # both IuCS / IuPS are initialized with the same CtxId established here,
-            # at the HNBAP layer, so we can take the IuCS one safely
-            self.encode_pdu('suc', Context_ID=(ctx_id, 24),
-                                               UE_Identity=UEInfo['UE_Identity'])
-            self._log('INF', 'UE registered successfully, ctx %i' % ue.IuCS.CtxId)
-        else:
+        if self.errcause:
             # procedure unsuccessful outcome
-            self.encode_pdu('uns', Cause=errcause,
-                                   UE_Identity=UEInfo['UE_Identity'])
+            self.encode_pdu('uns', Cause=self.errcause,
+                                   UE_Identity=self.HNBInfo['UE_Identity'])
             self._log('INF', 'UE not registered successfully')
+        else:
+            self.encode_pdu('suc', Context_ID=(ctx_id, 24),
+                                   UE_Identity=self.HNBInfo['UE_Identity'])
+            self._log('INF', 'UE registered successfully, ctx %i' % ue.IuCS.CtxId)
     
-    def send(self):
-        if self.TRACK_PDU:
-            for pdu in self._snd:
-                self._pdu.append( (time(), 'DL', pdu) )
-        # remove from the HNB HNBAP procedure stack
-        try:
-            del self.HNB.ProcHnbap[self.Code]
-        except:
-            pass
-        # send back the list of PDU to be returned to the HNB
-        return self._snd
+    send = HNBAPSigProc._send
 
 
 class HNBAPUEDeregistrationHNB(HNBAPSigProc):
@@ -394,27 +373,11 @@ class HNBAPUEDeregistrationHNB(HNBAPSigProc):
         'uns': None
         }
     
-    def recv(self, pdu):
-        if self.TRACK_PDU:
-            self._pdu.append( (time(), 'UL', pdu) )
-        #
-        errcause, UEInfo = None, {} 
-        try:
-            self.decode_pdu(pdu, UEInfo)
-        except Exception as err:
-            self._err = err
-            self._log('ERR', 'decode_pdu: %s' % err)
-            errcause = ('protocol', 'abstract-syntax-error-reject')
-        #
-        if errcause is None:
-            # UE RAN should have been unset through RUA / RANAP procedures
-            self.HNB.unset_ue_hnbap(UEInfo['Context_ID'][0])
-        #
-        # remove from the HNB HNBAP procedure stack
-        try:
-            del self.HNB.ProcHnbap[self.Code]
-        except:
-            pass
+    def recv(self, pdu_rx):
+        self._recv(pdu_rx)
+        if not self.errcause:
+            self.HNB.unset_ue_hnbap(self.HNBInfo['Context_ID'][0])
+            # UE IuCS / IuPS handlers should have been unset through RANAP procedures
 
 
 class HNBAPUEDeregistrationGW(HNBAPSigProc):
@@ -447,6 +410,8 @@ class HNBAPUEDeregistrationGW(HNBAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    # not implemented
 
 
 class HNBAPErrorIndHNB(HNBAPSigProc):
@@ -480,34 +445,16 @@ class HNBAPErrorIndHNB(HNBAPSigProc):
         'uns': None
         }
     
-    def recv(self, pdu):
-        if self.TRACK_PDU:
-            self._pdu.append( (time(), 'UL', pdu) )
-        #
-        self.ErrInfo = {}
-        try:
-            self.decode_pdu(pdu, self.ErrInfo)
-        except Exception as err:
-            self._err = err
-            self._log('ERR', 'decode_pdu: %s' % err)
-            # do not respond to an error ind, with another error ind...
-        else:
-            self._log('WNG', 'error indication received: %s.%s' % self.ErrInfo['Cause'])
-            # this means the HNB failed to process the previous msg sent to it
-            code = self.HNB.ProcHnbapLast
+    def recv(self, pdu_rx):
+        self._recv(pdu_rx)
+        if not self.errcause:
+            self._log('WNG', 'error ind received: %s.%s' % self.HNBInfo['Cause'])
+            # if it corresponds to a previously CN-initiated class 1 procedure
+            # abort it
             try:
-                Proc = self.HNB.ProcHnbap[code]
+                self.ProcHnbap[self.HNB.ProcHnbapLast].abort()
             except:
                 pass
-            else:
-                # abort the corresponding running procedure
-                Proc.abort()
-        #
-        # remove from the HNB HNBAP procedure stack
-        try:
-            del self.HNB.ProcHnbap[self.Code]
-        except:
-            pass
 
 
 class HNBAPErrorIndGW(HNBAPSigProc):
@@ -541,19 +488,13 @@ class HNBAPErrorIndGW(HNBAPSigProc):
         'uns': None
         }
     
-    def recv(self, pdu):
-        if self.TRACK_PDU:
-            self._pdu.append( (time(), 'UL', pdu) )
-        #
-        # this means we are not able to process a request received from the HNB
-        # this is handled directly within the HNBHdlr instance
+    errcause = None
     
-    def send(self):
+    def recv(self, pdu_rx):
         if self.TRACK_PDU:
-            for pdu in self._snd:
-                self._pdu.append( (time(), 'DL', pdu) )
-        # send back the list of PDU to be returned to the HNB
-        return self._snd
+            self._pdu.append( (time(), 'UL', pdu_rx) )
+    
+    send = HNBAPSigProc._send
 
 
 class HNBAPCSGMembershipUpdate(HNBAPSigProc):
@@ -586,6 +527,8 @@ class HNBAPCSGMembershipUpdate(HNBAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    # not implemented
 
 
 class HNBAPTNLUpdate(HNBAPSigProc):
@@ -631,6 +574,8 @@ class HNBAPTNLUpdate(HNBAPSigProc):
         'suc': ({}, {}),
         'uns': ({}, {})
         }
+    
+    # not implemented
 
 
 class HNBAPHNBConfigTransfer(HNBAPSigProc):
@@ -667,6 +612,8 @@ class HNBAPHNBConfigTransfer(HNBAPSigProc):
         'suc': ({}, {}),
         'uns': None
         }
+    
+    # not implemented
 
 
 class HNBAPRelocationComplete(HNBAPSigProc):
@@ -698,6 +645,8 @@ class HNBAPRelocationComplete(HNBAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    # not implemented
 
 
 class HNBAPURNTIQuery(HNBAPSigProc):
@@ -734,6 +683,8 @@ class HNBAPURNTIQuery(HNBAPSigProc):
         'suc': ({}, {}),
         'uns': None
         }
+    
+    # not implemented
 
 
 class HNBAPPrivateMessageHNB(HNBAPSigProc):
@@ -762,6 +713,8 @@ class HNBAPPrivateMessageHNB(HNBAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    # not implemented
 
 
 class HNBAPPrivateMessageGW(HNBAPSigProc):
@@ -790,8 +743,11 @@ class HNBAPPrivateMessageGW(HNBAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    # not implemented
 
 
+# initializing all HNBAP procedures classes
 HNBAPHNBRegistration.init()
 HNBAPHNBDeregistrationHNB.init()
 HNBAPUERegistration.init()
@@ -830,3 +786,4 @@ HNBAPProcGwDispatcher = {
     7 : HNBAPCSGMembershipUpdate,
     11 : HNBAPRelocationComplete
     }
+

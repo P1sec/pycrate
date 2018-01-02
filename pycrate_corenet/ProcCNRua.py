@@ -31,13 +31,13 @@ from .utils     import *
 from .ProcProto import *
 
 #------------------------------------------------------------------------------#
-# RUA signaling procedure
+# RUA signalling procedure
 # TS 25.468, version d10
 # HNB-GW side
 #------------------------------------------------------------------------------#
 
 class RUASigProc(LinkSigProc):
-    """RUA signaling procedure handler
+    """RUA signalling procedure handler
     
     instance attributes:
         - Name  : procedure name
@@ -62,24 +62,33 @@ class RUASigProc(LinkSigProc):
         # to store PDU traces
         self._pdu = []
         # list of PDU to be sent to the HNB
-        self._snd = []
+        self._pdu_tx = []
         #
         self._log('DBG', 'instantiating procedure')
     
     def _log(self, logtype, msg):
         self.HNB._log(logtype, '[%s] %s' % (self.Name, msg))
     
-    def recv(self, pdu):
+    def _recv(self, pdu_rx):
         if self.TRACK_PDU:
-            self._pdu.append( (time(), 'UL', pdu) )
+            self._pdu.append( (time(), 'UL', pdu_rx) )
+        self.errcause, self.ConInfo = None, {}
+        try:
+            self.decode_pdu(pdu_rx, self.ConInfo)
+        except Exception as err:
+            self._err = err
+            self._log('ERR', 'decode_pdu (%s), sending error indication' % err)
+            self.errcause = ('protocol', 'abstract-syntax-error-reject')
+    
+    def recv(self, pdu_rx):
+        self._recv(pdu_rx)
         self._log('ERR', 'recv() not implemented')
     
     def send(self):
         if self.TRACK_PDU:
-            for pdu in self._snd:
+            for pdu in self._pdu_tx:
                 self._pdu.append( (time(), 'DL', pdu) )
-        # send back the list of PDU to be returned to the HNB
-        return self._snd
+        return self._pdu_tx
     
     def trigger(self):
         self._log('ERR', 'trigger() not implemented')
@@ -87,7 +96,10 @@ class RUASigProc(LinkSigProc):
     
     def abort(self):
         self._log('INF', 'aborting')
-    
+
+
+# All following RUA procedures have recv() and trigger() methods defined
+# corresponding to HNB-initiated procedures
 
 class RUAConnect(RUASigProc):
     """Connect: TS 25.468, section 8.2
@@ -123,23 +135,12 @@ class RUAConnect(RUASigProc):
         'uns': None
         }
     
-    def recv(self, pdu):
-        if self.TRACK_PDU:
-            self._pdu.append( (time(), 'UL', pdu) )
-        #
-        self.errcause, self.retpdu, self.ConInfo = None, None, {}
-        try:
-            self.decode_pdu(pdu, self.ConInfo)
-        except Exception as err:
-            self._err = err
-            self._log('ERR', 'decode_pdu: %s' % err)
-            self.errcause = ('protocol', 'abstract-syntax-error-reject')
-        #
-        if self.errcause is None:
-            # inform on EC
+    def recv(self, pdu_rx):
+        self._recv(pdu_rx)
+        if not self.errcause:
+            # log EC request
             if self.ConInfo['Establishment_Cause'] == 'emergency-call':
                 self._log('WNG', 'emergency call requested') 
-            #
             # get the UE corresponding to the RUA ctx_id
             ctx_id = self.ConInfo['Context_ID'][0]
             try:
@@ -149,43 +150,33 @@ class RUAConnect(RUASigProc):
                           % self.ConInfo['Context_ID'][0])
                 self.errcause = ('radioNetwork', 'connect-failed')
             else:
+                #
                 # set the Iu context-id and dispatch the RANAP PDU
                 if self.ConInfo['CN_DomainIndicator'] == 'cs-domain':
                     self.HNB.set_ue_iucs(ued, ctx_id)
                     ued.IuCS.set_ran(self.HNB)
                     ued.IuCS.set_ctx(ctx_id)
-                    try:
-                        self.retpdu = ued.IuCS.process_ranap(self.ConInfo['RANAP_Message'])
-                    except Exception as err:
-                        self._log('ERR', 'RANAP processing failed')
-                        self._err = err
-                        self.retpdu = []
+                    self.retpdu = ued.IuCS.process_ranap(self.ConInfo['RANAP_Message'])
                 else:
-                    # self.ConInfo['CN_DomainIndicator'] == 'ps-domain', no other choice
+                    #self.ConInfo['CN_DomainIndicator'] == 'ps-domain'
                     self.HNB.set_ue_iups(ued, ctx_id)
                     ued.IuPS.set_ran(self.HNB)
                     ued.IuPS.set_ctx(ctx_id)
-                    try:
-                        self.retpdu = ued.IuPS.process_ranap(self.ConInfo['RANAP_Message'])
-                    except Exception as err:
-                        self._log('ERR', 'RANAP processing failed')
-                        self._err = err
-                        self.retpdu = []
+                    self.retpdu = ued.IuPS.process_ranap(self.ConInfo['RANAP_Message'])
     
     def trigger(self):
-        if self.errcause is not None:
-            Err = RUAErrorInd(self.HNB)
-            Err.encode_pdu('ini', Cause=self.errcause)
+        if self.errcause:
+            Err = self.HNB.init_rua_proc(RUAErrorInd, Cause=self.errcause)
             return [Err]
         else:
-            RetProc = []
+            Trans = []
             for pdu in self.retpdu:
                 # wrap each RANAP PDU into a RUA direct transfer PDU
-                RetProc.append( RUADirectTransfer(self.HNB) )
-                RetProc[-1].encode_pdu('ini', Context_ID=self.ConInfo['Context_ID'],
-                                              RANAP_Message=pdu,
-                                              CN_DomainIndicator=self.ConInfo['CN_DomainIndicator'])
-            return RetProc
+                Trans.append( self.HNB.init_rua_proc(RUADirectTransfer,
+                                                     Context_ID=self.ConInfo['Context_ID'],
+                                                     RANAP_Message=pdu,
+                                                     CN_DomainIndicator=self.ConInfo['CN_DomainIndicator']) )
+            return Trans
 
 
 class RUADirectTransfer(RUASigProc):
@@ -220,19 +211,9 @@ class RUADirectTransfer(RUASigProc):
         'uns': None
         }
     
-    def recv(self, pdu):
-        if self.TRACK_PDU:
-            self._pdu.append( (time(), 'UL', pdu) )
-        #
-        self.errcause, self.retpdu, self.ConInfo = None, None, {}
-        try:
-            self.decode_pdu(pdu, self.ConInfo)
-        except Exception as err:
-            self._err = err
-            self._log('ERR', 'decode_pdu: %s' % err)
-            self.errcause = ('protocol', 'abstract-syntax-error-reject')
-        #
-        if self.errcause is None:
+    def recv(self, pdu_rx):
+        self._recv(pdu_rx)
+        if not self.errcause:
             # get the UE corresponding to the ctx_id and dispatch the RANAP PDU
             if self.ConInfo['CN_DomainIndicator'] == 'cs-domain':
                 try:
@@ -242,12 +223,7 @@ class RUADirectTransfer(RUASigProc):
                               % self.ConInfo['Context_ID'][0])
                     self.errcause = ('protocol', 'abstract-syntax-error-reject')
                 else:
-                    try:
-                        self.retpdu = ued.IuCS.process_ranap(self.ConInfo['RANAP_Message'])
-                    except Exception as err:
-                        self._log('ERR', 'RANAP processing failed')
-                        self._err = err
-                        self.retpdu = []
+                    self.retpdu = ued.IuCS.process_ranap(self.ConInfo['RANAP_Message'])
             else:
                 try:
                     ued = self.HNB.UE_IuPS[self.ConInfo['Context_ID'][0]]
@@ -256,27 +232,21 @@ class RUADirectTransfer(RUASigProc):
                               % self.ConInfo['Context_ID'][0])
                     self.errcause = ('protocol', 'abstract-syntax-error-reject')
                 else:
-                    try:
-                        self.retpdu = ued.IuPS.process_ranap(self.ConInfo['RANAP_Message'])
-                    except Exception as err:
-                        self._log('ERR', 'RANAP processing failed')
-                        self._err = err
-                        self.retpdu = []
+                    self.retpdu = ued.IuPS.process_ranap(self.ConInfo['RANAP_Message'])
     
     def trigger(self):
-        if self.errcause is not None:
-            Err = RUAErrorInd(self.HNB)
-            Err.encode_pdu('ini', Cause=self.errcause)
+        if self.errcause:
+            Err = self.HNB.init_rua_proc(RUAErrorInd, Cause=self.errcause)
             return [Err]
         else:
-            RetProc = []
+            Trans = []
             for pdu in self.retpdu:
                 # wrap each RANAP PDU into a RUA direct transfer PDU
-                RetProc.append( RUADirectTransfer(self.HNB) )
-                RetProc[-1].encode_pdu('ini', Context_ID=self.ConInfo['Context_ID'],
-                                              RANAP_Message=pdu,
-                                              CN_DomainIndicator=self.ConInfo['CN_DomainIndicator'])
-            return RetProc
+                Trans.append( self.HNB.init_rua_proc(RUADirectTransfer,
+                                                     Context_ID=self.ConInfo['Context_ID'],
+                                                     RANAP_Message=pdu,
+                                                     CN_DomainIndicator=self.ConInfo['CN_DomainIndicator']) )
+            return Trans
 
 
 class RUADisconnect(RUASigProc):
@@ -312,20 +282,9 @@ class RUADisconnect(RUASigProc):
         'uns': None
         }
     
-    def recv(self, pdu):
-        if self.TRACK_PDU:
-            self._pdu.append( (time(), 'UL', pdu) )
-        #
-        self.errcause, self.ConInfo = None, {}
-        try:
-            self.decode_pdu(pdu, self.ConInfo)
-        except Exception as err:
-            self._err = err
-            self._log('ERR', 'decode_pdu: %s' % err)
-            self.errcause = ('protocol', 'abstract-syntax-error-reject')
-        #
-        if self.errcause is None:
-            #
+    def recv(self, pdu_rx):
+        self._recv(pdu_rx)
+        if not self.errcause:
             # get the UE corresponding to the ctx_id and dispatch the RANAP PDU
             if self.ConInfo['CN_DomainIndicator'] == 'cs-domain':
                 try:
@@ -335,15 +294,10 @@ class RUADisconnect(RUASigProc):
                               % self.ConInfo['Context_ID'][0])
                     self.errcause = ('protocol', 'abstract-syntax-error-reject')
                 else:
-                    try:
-                        self.retpdu = ued.IuCS.process_ranap(self.ConInfo['RANAP_Message'])
-                    except Exception as err:
-                        self._log('ERR', 'RANAP processing failed')
-                        self._err = err
-                        self.retpdu = []
-                    # there should be no RANAP answer from the CN
+                    self.retpdu = ued.IuCS.process_ranap(self.ConInfo['RANAP_Message'])
+                    # RANAP_Message should be an IuRelease response
+                    # hence, there should be no RANAP answer from the CN
                     # after receiving an RUA disconnect
-                    # i.e. containing a RANAP IuRelease response
                     assert( self.retpdu == [] )
                     self.HNB.unset_ue_iucs(self.ConInfo['Context_ID'][0])
             else:
@@ -354,22 +308,13 @@ class RUADisconnect(RUASigProc):
                               % self.ConInfo['Context_ID'][0])
                     self.errcause = ('protocol', 'abstract-syntax-error-reject')
                 else:
-                    try:
-                        self.retpdu = ued.IuPS.process_ranap(self.ConInfo['RANAP_Message'])
-                    except Exception as err:
-                        self._log('ERR', 'RANAP processing failed')
-                        self._err = err
-                        self.retpdu = []
-                    # there should be no RANAP answer from the CN
-                    # after receiving an RUA disconnect
-                    # i.e. containing a RANAP IuRelease response
+                    self.retpdu = ued.IuPS.process_ranap(self.ConInfo['RANAP_Message'])
                     assert( self.retpdu == [] )
                     self.HNB.unset_ue_iups(self.ConInfo['Context_ID'][0])
     
     def trigger(self):
         if self.errcause is not None:
-            Err = RUAErrorInd(self.HNB)
-            Err.encode_pdu('ini', Cause=self.errcause)
+            Err = self.HNB.init_rua_proc(RUAErrorInd, Cause=self.errcause)
             return [Err]
         else:
             # nothing to trigger after an RUA disconnect
@@ -406,39 +351,23 @@ class RUAConnectlessTransfer(RUASigProc):
         'uns': None
         }
 
-    def recv(self, pdu):
-        if self.TRACK_PDU:
-            self._pdu.append( (time(), 'UL', pdu) )
-        #
-        self.errcause, self.retpdu, self.ConInfo = None, None, {}
-        try:
-            self.decode_pdu(pdu, self.ConInfo)
-        except Exception as err:
-            self._err = err
-            self._log('ERR', 'decode_pdu: %s' % err)
-            self.errcause = ('protocol', 'abstract-syntax-error-reject')
-        #
-        if self.errcause is None:
+    def recv(self, pdu_rx):
+        self._recv(pdu_rx)
+        if not self.errcause:
             # connection-less transfer, process the RANAP PDU directly in the RNC handler
-            try:
-                self.retpdu = self.HNB.process_ranap(self.ConInfo['RANAP_Message'])
-            except Exception as err:
-                self._log('ERR', 'RANAP processing failed')
-                self._err = err
-                self.retpdu = []
+            self.retpdu = self.HNB.process_ranap(self.ConInfo['RANAP_Message'])
     
     def trigger(self):
         if self.errcause is not None:
-            Err = RUAErrorInd(self.HNB)
-            Err.encode_pdu('ini', Cause=self.errcause)
+            Err = self.HNB.init_rua_proc(RUAErrorInd, Cause=self.errcause)
             return [Err]
         else:
-            RetProc = []
+            Trans = []
             for pdu in self.retpdu:
-                # wrap each RANAP PDU into a RUA direct transfer PDU
-                RetProc.append( RUAConnectlessTransfer(self.HNB) )
-                RetProc[-1].encode_pdu('ini', RANAP_Message=pdu)
-            return RetProc
+                # wrap each RANAP PDU into a RUA connect less transfer PDU
+                Trans.append( self.HNB.init_rua_proc(RUAConnectlessTransfer,
+                                                     RANAP_Message=pdu) )
+            return Trans
 
 
 class RUAErrorInd(RUASigProc):
@@ -472,36 +401,32 @@ class RUAErrorInd(RUASigProc):
         'uns': None
         }
     
-    def recv(self, pdu):
+    # we don't respond to a malformed error ind with another error ind
+    errcause = None
+    
+    def recv(self, pdu_rx):
         if self.TRACK_PDU:
-            self._pdu.append( (time(), 'UL', pdu) )
+            self._pdu.append( (time(), 'UL', pdu_rx) )
         #
-        # WNG: there is no distinction between HNB / GW-initiated error ind 
-        # procedure
+        # WNG: this is the same error ind procedure used for
+        # HNB-initiated and GW-initiated procedure
         #
-        if pdu[0] == 'initiatingMessage' and pdu[1]['procedureCode'] == 1:
-            # error indication sent by the HNB: meaning the HNB failed to process 
-            # our previous msg sent to it
-            # all RUA procedures being initiatingMessage-only, there is nothing
-            # to abort
+        if pdu_rx[0] == 'initiatingMessage' and pdu_rx[1]['procedureCode'] == 1:
+            # HNB-initiated
             self.ErrInfo = {}
             try:
-                self.decode_pdu(pdu, self.ErrInfo)
+                self.decode_pdu(pdu_rx, self.ErrInfo)
             except Exception as err:
                 self._err = err
                 self._log('ERR', 'decode_pdu: %s' % err)
-                # do not respond to an error ind, with another error ind...
+                # don't respond with another error ind
             else:
-                self._log('WNG', 'error indication received: %s.%s' % self.ErrInfo['Cause'])
+                self._log('WNG', 'error ind received: %s.%s' % self.ErrInfo['Cause'])
         #
-        else:
-            # any message sent by the HNB, for which we are going to sent back an error ind
-            # this is handled in the HNBHdlr or in other RUASigProc
-            pass
+        # otherwise: GW-initiated, nothing to do
     
     def trigger(self):
-        # nothing to trigger after an RUA Error
-        # especially, we don't report Error Ind on malformed received Error Ind
+        # nothing to trigger after an error ind
         return []
 
 
@@ -533,6 +458,7 @@ class RUAPrivateMessage(RUASigProc):
         }
 
 
+# initializing all RUA procedures classes
 RUAConnect.init()
 RUADirectTransfer.init()
 RUADisconnect.init()
@@ -549,3 +475,4 @@ RUAProcDispatcher = {
     5 : RUAErrorInd,
     6 : RUAPrivateMessage
     }
+

@@ -170,6 +170,13 @@ class UEGMMd(SigStack):
     ATT_ADDNETFEAT_SUPP = _ADDNETFEAT_SUPP
     ATT_EXTDRX          = _EXTDRX
     #
+    # if 0, enable IMSI attach from PS; if > 0, use it as error code
+    # e.g. 16: MSC temporarily not reachable
+    ATT_IMSI            = 0
+    # if 0, enable emergency attach; if > 0, use it as error code 
+    # e.g. 8: GPRS services and non-GPRS services not allowed
+    ATT_EMERG           = 0
+    #
     # if we want to run a PTMSI Reallocation within the GPRS Attach Accept
     ATT_PTMSI_REALLOC   = True
     # radio priority for TOM8 / SMS (uint3, 1 -highest- to 4 -slowest-)
@@ -182,7 +189,7 @@ class UEGMMd(SigStack):
     # when a UEd with PTMSI was created, that in fact corresponds to a UE
     # already set in Server.UE, we need to reject it after updating Server.PTMSI
     ATT_IMSI_PROV_REJECT = 17
-    # Unit: 0: 2s, 1: 1mn, 2: 6mn, 7: deactivated
+    # timer within AttachReject, Unit: 0: 2s, 1: 1mn, 2: 6mn, 7: deactivated
     ATT_T3346           = {'Unit': 0, 'Value': 2}
     
     #--------------------------------------------------------------------------#
@@ -239,27 +246,27 @@ class UEGMMd(SigStack):
     
     def process(self, NasRx):
         """process a NAS GMM message (NasRx) sent by the UE,
-        and return a NAS message (NasTx) response or None
+        and return a list (potentially empty) of RANAP procedure(s) to be sent
+        back to the RNC
         """
         if self.RX_HOOK is not None:
             return self.RX_HOOK(NasRx)
         #
-        ProtDisc, Type = NasRx['ProtDisc'](), NasRx['Type']()
+        name = NasRx._name
         # 1) check if it is a Detach request
-        if Type == 5:
+        if name == 'GMMDetachRequestMO':
             Proc = GMMDetachUE(self)
             self.Proc.append( Proc )
             if self.TRACK_PROC:
                 self._proc.append(Proc)
             # GMMDetachUE.process() will abort every other ongoing NAS procedures
-            # for the CS domain
-            NasTx = Proc.process(NasRx)
-            return NasTx
+            # for the PS domain
+            return Proc.process(NasRx)
         #
         # 2) check if there is any ongoing GMM procedure
         elif self.Proc:
-            # 2.1) in case of STATUS, disable all ongoing procedures
-            if Type == 32:
+            # 2.1) in case of STATUS, disable ongoing procedure(s)
+            if name == 'GMMStatus':
                 self._log('WNG', 'STATUS received with %r' % NasRx['GMMCause'])
                 if self.STAT_CLEAR == 1:
                     #self._log('WNG', 'STATUS, disabling %r' % self.Proc[-1])
@@ -267,30 +274,30 @@ class UEGMMd(SigStack):
                 elif self.STAT_CLEAR == 2:
                     #self._log('WNG', 'STATUS, disabling %r' % self.Proc)
                     self.clear()
-                return None
+                return []
             #
             # 2.2) in case of expected response
-            elif (ProtDisc, Type) in self.Proc[-1].Filter:
+            elif name in self.Proc[-1].FilterStr:
                 Proc = self.Proc[-1]
-                NasTx = Proc.process(NasRx)
-                while self.Proc and NasTx is None and self.Iu.RanapTx is None:
+                RanapTxProc = Proc.process(NasRx)
+                while self.Proc and not RanapTxProc:
                     # while the top-level NAS procedure has nothing to respond and terminates,
                     # we postprocess() lower-level NAS procedure(s) until we have something
                     # to send, or the stack is empty
                     ProcLower = self.Proc[-1]
-                    NasTx = ProcLower.postprocess(Proc)
+                    RanapTxProc = ProcLower.postprocess(Proc)
                     Proc = ProcLower
-                return NasTx
+                return RanapTxProc
             #
             # 2.3) in case of unexpected NasRx
             else:
-                self._log('WNG', 'unexpected GMM message %r, sending STATUS' % NasRx['Type'])
+                self._log('WNG', 'unexpected %s message, sending STATUS 98' % name)
                 # cause 98: Message type not compatible with the protocol state
-                return TS24008_GMM.GMMStatus(GMMCause=98)
+                return self.Iu.ret_ranap_dt(NAS.GMMStatus(GMMCause=98))
         #
         # 3) start a new UE-initiated procedure
-        elif Type in GMMProcUeDispatcher:
-            Proc = GMMProcUeDispatcher[Type](self)
+        elif name in GMMProcUeDispatcherStr:
+            Proc = GMMProcUeDispatcherStr[name](self)
             self.Proc.append( Proc )
             if self.TRACK_PROC:
                 self._proc.append(Proc)
@@ -298,9 +305,9 @@ class UEGMMd(SigStack):
         #
         # 4) unexpected NasRx
         else:
-            self._log('WNG', 'unexpected GMM message %r, sending STATUS' % NasRx['Type'])
-            # cause 101: Message not compatible with the protocol state
-            return TS24008_GMM.GMMStatus(Cause=101)
+            self._log('WNG', 'unexpected %s message, sending STATUS 96' % name)
+            # cause 96: Invalid mandatory information
+            return self.Iu.ret_ranap_dt(NAS.GMMStatus(Cause=96))
     
     def init_proc(self, ProcClass, encod=None, gmm_preempt=False):
         """initialize a CN-initiated GMM procedure of class `ProcClass' and 
@@ -349,12 +356,12 @@ class UEGMMd(SigStack):
         Proc = self.init_proc(GMMIdentification, gmm_preempt=True)
         Proc.set_msg(8, 21, IDType=idtype)
         try:
-            NasTx = Proc.output().to_bytes()
+            RanapTxProc = Proc.output()
         except:
             self._log('ERR', 'NAS message encoding failed')
             Proc.abort()
             return False
-        if not self.Iu._send_to_ue(NasTx):
+        if not self.Iu._send_to_rnc_ranap(RanapTxProc):
             # something bad happened while sending the message
             return False
         #
@@ -392,12 +399,12 @@ class UEGMMd(SigStack):
         else:
             Proc.set_msg(8, 5, DetachTypeMT={'Type': type})
         try:
-            NasTx = Proc.output().to_bytes()
+            RanapTxProc = Proc.output()
         except:
             self._log('ERR', 'NAS message encoding failed')
             Proc.abort()
             return False
-        if not self.Iu._send_to_ue(NasTx):
+        if not self.Iu._send_to_rnc_ranap(RanapTxProc):
             # something bad happened while sending the message
             return False
         #
@@ -423,12 +430,12 @@ class UEGMMd(SigStack):
         Proc = self.init_proc(GMMInformation)
         Proc.set_msg(8, 33, **info)
         try:
-            NasTx = Proc.output().to_bytes()
+            RanapTxProc = Proc.output()
         except:
             self._log('ERR', 'NAS message encoding failed')
             Proc.abort()
             return False
-        return self.Iu._send_to_ue(NasTx)
+        return self.Iu._send_to_rnc_ranap(RanapTxProc)
 
 
 class UESMd(SigStack):
@@ -446,6 +453,15 @@ class UESMd(SigStack):
     # to bypass the process() server loop with a custom NAS PDU handler
     RX_HOOK = None
     
+    # Packet Data Protocol configuration, per APN
+    # PDP default IuPS QoS (TODO)
+    PDPConfig = {
+        '*'      : {},
+        'corenet': {}
+        }
+    # PDP UE config, per APN, built at runtime
+    PDP = {}
+    
     def _log(self, logtype, msg):
         self.Iu._log(logtype, '[SM] %s' % msg)
     
@@ -453,8 +469,10 @@ class UESMd(SigStack):
         self.UE = ued
         self.set_iu(iupsd)
         #
-        # dict of ongoing SM procedures (indexed by transaction identifier)
+        # dict of ongoing SM procedures (indexed by NSAPI)
         self.Proc = {}
+        # dict of ongoing ESM transactions IEs
+        self.Trans = {}
         # list of tracked procedures (requires TRACK_PROC = True)
         self._proc = []
     
@@ -463,15 +481,16 @@ class UESMd(SigStack):
     
     def process(self, NasRx):
         """process a NAS SM message (NasRx) sent by the UE,
-        and return a NAS message (NasTx) response or None
+        and return a list (potentially empty) of RANAP procedure(s) to be sent
+        back to the RNC
         """
         if self.RX_HOOK is not None:
             return self.RX_HOOK(NasRx)
         #
         # returns SM STATUS, cause feature not supported
-        return Buf('SM_STATUS', val=b'\x0A\x55\x28', bl=24)
+        return self.Iu.ret_ranap_dt(Buf('SMStatus', val=b'\x0A\x55\x28', bl=24))
     
-    def init_proc(self, Proc, **kw):
+    def init_proc(self, Proc, encod=None):
         """initialize a CN-initiated SM procedure of class `ProcClass' and 
         given encoder(s), and return the procedure
         """
@@ -511,21 +530,24 @@ class UEIuPSd(UEIuSigStack):
     # when self.SEC['CKSN'] is not None, the context is enabled at the RNC, e.g.
     # self.SEC = {'CKSN': 0,
     #             0: {'CK': b'...', 'IK': b'...', 'UEA': 1, 'UIA': 0, 'CTX': 3},
-    #             ...}
+    #             ...,
+    #             'POL': {'RAU': 0, 'SER': 0}}
     # 
     # a single security context contains:
     # CK, IK: 16 bytes buffer, keys to be sent to the RNC during the smc procedure
     # UEA, UIA: algo index, indicated by the RNC at the end of a successful smc procedure
     # CTX: context of the authentication,
-    #    2 means 2G auth converted to 3G context
+    #    2 means 2G auth converted to 3G context, in this case, Kc is also available
+    #    in the security context
     #    3 means 3G auth and native context
+    # The POL dict indicates the authentication policy for each procedure
     
     #--------------------------------------------------------------------------#
     # RANAPSecurityModeControl policy
     #--------------------------------------------------------------------------#
     # this will systematically bypass all smc procedures during UE signaling
     SMC_DISABLED = False
-    # this will bypass the smc procedure into specific UE signaling procedure
+    # this will bypass the smc procedure into specific UE signalling procedure
     # set proc abbreviation in the list: 'ATT', 'RAU', 'SER'
     SMC_DISABLED_PROC = []
     #
@@ -564,70 +586,44 @@ class UEIuPSd(UEIuSigStack):
         self.Config = self.Server.ConfigIuPS
         # track states for PDP and MBMS contexts
         self.PDP  = {i: 0 for i in range(16)}
-        self.MBMS = {i: 0 for i in range(16)}
+        self.MBMS = {i: 0 for i in range(16)} # to be confirmed if only 16 ctx
     
     def reset_sec_ctx(self):
         self.SEC.clear()
         self.SEC['CKSN'] = None
         self.SEC['POL'] = {'RAU': 0, 'SER': 0}
     
-    def _ret_ranap_proc(self, NasTx):
-        if NasTx is not None:
-            if self.UE.TRACE_NAS_PS:
-                self._log('TRACE_NAS_PS_DL', '\n' + NasTx.show())
-            if self.RanapTx is None:
-                # no specific RANAP Procedure to be used
-                # wrap the NAS PDU into a RANAPDirectTransfer
-                return self.ret_ranap_dt(NasTx)
-            else:
-                # some specific RANAP Procedure(s) have already been prepared by 
-                # the NAS stack and will embed the NAS PDU in a specific way
-                RanapTx = self.RanapTx
-                self.RanapTx = None
-                return RanapTx
-        elif self.RanapTx:
-            # some specific RANAP Procedure(s) have been prepared by the NAS stack
-            # without embedding NAS_PDU
-            RanapTx = self.RanapTx
-            self.RanapTx = None
-            return RanapTx
-        else:
-            # nothing to return
-            return []
-    
     def process_nas(self, buf):
         """process a NAS message buffer for the PS domain sent by the mobile
-        and return a potential NAS response to be sent back to it
+        and return a list (possibly empty) of RANAP procedure(s) to be sent back 
+        to the RNC
         """
         if self.RX_HOOK:
             return self.RX_HOOK(buf)
         NasRx, err = NAS.parse_NAS_MO(buf)
-        if NasRx is None:
+        if err:
             self._log('WNG', 'invalid PS NAS message: %s' % hexlify(buf).decode('ascii'))
-            # returns MM STATUS
-            NasTx = TS24008_GMM.GMMStatus(Cause=err)
-            if self.UE.TRACE_NAS_PS:
-                self._log('TRACE_NAS_PS_DL', '\n' + NasTx.show())
-            return self.ret_ranap_dt(NasTx)
+            # returns GMM STATUS
+            return self.ret_ranap_dt(NAS.GMMStatus(Cause=err))
         elif self.UE.TRACE_NAS_PS:
             self._log('TRACE_NAS_PS_UL', '\n' + NasRx.show())
         #
-        pd = NasRx['ProtDisc']()
+        pd = NasRx['ProtDisc'].get_val()
         if pd == 8:
-            NasTx = self.GMM.process(NasRx)
+            RanapTxProc = self.GMM.process(NasRx)
         elif pd == 6:
             # Radio Resource Management (e.g. PAGING RESPONSE)
-            NasTx = self.GMM.process(NasRx)
+            RanapTxProc = self.GMM.process(NasRx)
         elif pd == 10:
-            NasTx = self.SM.process(NasRx)
+            RanapTxProc = self.SM.process(NasRx)
         else:
             # invalid PD
             self._log('WNG', 'invalid Protocol Discriminator for PS NAS message, %i' % pd)
             # returns GMM STATUS, with cause message-type non-existent 
             # or not implemented
-            NasTx = TS24008_GMM.GMMStatus(GMMCause=97)
+            RanapTxProc = self.ret_ranap_dt(NAS.GMMStatus(GMMCause=97))
         #
-        return self._ret_ranap_proc(NasTx)
+        return RanapTxProc
     
     def clear_nas_proc(self):
         # clears all NAS PS procedures
@@ -680,7 +676,7 @@ class UEIuPSd(UEIuSigStack):
                'PermanentNAS_UE_ID' : ('iMSI', NAS.encode_bcd(self.UE.IMSI))}
         # DRX paging cycle
         if 'DRXParam' in self.UE.Cap:
-            drx = self.UE.Cap['DRXParam']['DRXCycleLen']()
+            drx = self.UE.Cap['DRXParam'][1]['DRXCycleLen'].get_val()
             if drx in (6, 7, 8, 9):
                 IEs['DRX_CycleLengthCoefficient'] = drx
         # paging with IMSI instead of P-TMSI
@@ -758,3 +754,4 @@ class UEIuPSd(UEIuSigStack):
     # defined in UEIuSigStack in HdlrUEIu.py
     def _net_init_con(self):
         return self.GMM._net_init_con()
+

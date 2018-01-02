@@ -100,10 +100,10 @@ class HNBd(SigStack):
         # init HNB config dict
         self.Config = {}
         #
-        # dict of ongoing RAN procedures (indexed by their procedure code)
-        # they are populated only for request / response procedure
+        # dict of ongoing resquest-response CN-initiated RAN procedures 
+        # indexed by their procedure code
         # RUA has no request-response procedure
-        # RANAP procedure handled here are non-UE related
+        # RANAP procedure handled here are only non-UE related
         self.ProcHnbap = {}
         self.ProcRanap = {}
         # procedure code of the last procedure emitting a pdu toward the RAN
@@ -132,278 +132,82 @@ class HNBd(SigStack):
         return self.SK is not None
     
     #--------------------------------------------------------------------------#
-    # handling of RAN link procedures
+    # handling of HNBAP procedures
     #--------------------------------------------------------------------------#
     
-    def process_hnbap_pdu(self, pdu):
+    def process_hnbap_pdu(self, pdu_rx):
         """process a HNBAP PDU sent by the HNB
         and return a list of HNBAP PDU(s) to be sent back to it
         """
         errcause = None
-        if pdu[0] == 'initiatingMessage':
+        if pdu_rx[0] == 'initiatingMessage':
             # HNB-initiated procedure, instantiate it
             try:
-                Proc = HNBAPProcHnbDispatcher[pdu[1]['procedureCode']](self)
+                Proc = HNBAPProcHnbDispatcher[pdu_rx[1]['procedureCode']](self)
             except:
                 self._log('ERR', 'invalid HNBAP PDU, initiatingMessage, code %i'\
-                          % pdu[1]['procedureCode'])
+                          % pdu_rx[1]['procedureCode'])
                 errcause = ('protocol', 'abstract-syntax-error-reject')
-                Proc = HNBAPErrorIndGW(self)
-                Proc.encode_pdu('ini', Cause=errcause)
+                Proc = self.init_hnbap_proc(HNBAPErrorIndGW, Cause=errcause)
             else:
-                # store the procedure, if no error ind
-                self.ProcHnbap[Proc.Code] = Proc
-            if self.TRACK_PROC_HNBAP:
-                # keep track of the procedure
-                self._proc.append( Proc )
+                if self.TRACK_PROC_HNBAP:
+                    self._proc.append( Proc )
             # process the PDU within the procedure
-            Proc.recv( pdu )
-            if Proc.Cont['suc'] is not None or errcause is not None:
-                # set the last procedure code
+            Proc.recv( pdu_rx )
+            if Proc.Class == 2 and Proc.errcause:
+                Err = self.init_hnbap_proc(HNBAPErrorIndGW, Cause=Proc.errcause)
+                self.ProcHnbapLast = Err.Code
+                return Err.send()
+            elif Proc.Class == 1 or errcause:
                 self.ProcHnbapLast = Proc.Code
-                # send back any potential response to the HNB
-                # Proc.send() will take care to clean-up self.ProcHnbap
                 return Proc.send()
             else:
+                # TODO: check in case some HNBAP would trigger() new HNBAP procedure
                 return []
         #
         else:
             # GW-initiated procedure, transfer the response PDU to it
             try:
-                Proc = self.ProcHnbap[pdu[1]['procedureCode']]
+                Proc = self.ProcHnbap[pdu_rx[1]['procedureCode']]
             except:
                 self._log('ERR', 'invalid HNBAP PDU, %s, code %i'\
-                          % (pdu[0], pdu[1]['procedureCode']))
+                          % (pdu_rx[0], pdu_rx[1]['procedureCode']))
                 errcause = ('protocol', 'message-not-compatible-with-receiver-state')
-                Proc = HNBAPErrorIndGW(self)
-                Proc.encode_pdu('ini', Cause=errcause)
-                if self.TRACK_PROC_HNBAP:
-                    # keep track of the procedure
-                    self._proc.append( Proc )
+                Proc = self.init_hnbap_proc(HNBAPErrorIndGW, Cause=errcause)
             # process the PDU within the procedure
-            Proc.recv( pdu )
-            #
-            if errcause is not None:
-                # set the last procedure code
+            Proc.recv( pdu_rx )
+            if Proc.errcause:
+                Err = self.init_hnbap_proc(HNBAPErrorIndGW, Cause=Proc.errcause)
+                self.ProcHnbapLast = Err.Code
+                return Err.send()
+            elif errcause:
                 self.ProcHnbapLast = Proc.Code
-                # send back error ind to the HNB
-                # Proc.send() will take care to clean-up self.ProcHnbap
                 return Proc.send()
             else:
                 # TODO: check in case some HNBAP would trigger() new HNBAP procedure
                 return []
-    
-    def process_rua_pdu(self, pdu):
-        """process a RUA PDU sent by the HNB
-        and return a list of RUA PDU(s) to be sent back to it
-        """
-        # WNG: RUA is a symmetric protocol with initatingMessage-only procedures
-        errcause = None
-        if pdu[0] != 'initiatingMessage':
-            self._log('ERR', 'invalid PDU, %s, code %i' % (pdu[0], pdu[1]['procedureCode']))
-            errcause = ('protocol', 'abstract-syntax-error-reject')
-            Proc = RUAErrorInd(self)
-            Proc.encode_pdu('ini', Cause=errcause)
-            self.ProcRuaLast = Proc.Code
-        else:
-            try:
-                Proc = RUAProcDispatcher[pdu[1]['procedureCode']](self)
-            except:
-                self._log('ERR', 'invalid PDU, initiatingMessage, code %i'\
-                          % pdu[1]['procedureCode'])
-                errcause = ('protocol', 'abstract-syntax-error-reject')
-                Proc = RUAErrorInd(self)
-                Proc.encode_pdu('ini', Cause=errcause)
-        if self.TRACK_PROC_RUA:
-            # keep track of the procedure
-            self._proc.append( Proc )
-        # process the PDU within the procedure
-        Proc.recv( pdu )
-        if errcause is not None:
-            # set the last procedure code
-            self.ProcRuaLast = Proc.Code
-            # send back error ind to the HNB
-            # Proc.send() will take care to clean-up self.ProcHnbap
-            return Proc.send()
-        else:
-            # potentially create new RUA procedures
-            # as outcome of the one received
-            snd = []
-            for ProcRet in Proc.trigger():
-                if self.TRACK_PROC_RUA:
-                    # keep track of each procedure
-                    self._proc.append( ProcRet )
-                snd.extend( ProcRet.send() )
-                # set the last procedure code
-                self.ProcRuaLast = ProcRet.Code
-            return snd
-    
-    def process_ranap(self, buf):
-        """process a RANAP PDU buffer sent by the HNB in connection-less transfer
-        and return a list of RANAP PDU(s) to be sent back to it
-        """
-        # decode the RANAP PDU
-        if not asn_ranap_acquire():
-            self._log('ERR', 'unable to acquire the RANAP module')
-            return []
-        try:
-            PDU_RANAP.from_aper(buf)
-        except:
-            # unable to decode APER-encoded buffer
-            self._log('WNG', 'invalid RANAP PDU transfer-syntax: %s'\
-                      % hexlify(buf).decode('ascii'))
-            # returns a RANAP error ind: protocol, transfer-syntax-error
-            Proc = self.init_ranap_proc(RANAPErrorIndConlessCN, Cause=('protocol', 97))
-            Proc.recv(buf)
-            self.ProcRanapLast = Proc.Code
-            return self._encode_pdu(Proc.send())
-        #
-        if self.TRACE_ASN_RANAP:
-            self._log('TRACE_ASN_RANAP_UL', '\n' + PDU_RANAP.to_asn1())
-        pdu = PDU_RANAP()
-        asn_ranap_release()
-        errcause = None
-        #
-        if pdu[0] == 'initiatingMessage':
-            # RNC-initiated procedure, create it through the dispatcher
-            try:
-                Proc = RANAPConlessProcRncDispatcher[pdu[1]['procedureCode']](self)
-            except:
-                self._log('ERR', 'invalid connect-less RANAP PDU, initiatingMessage, code %i'\
-                          % pdu[1]['procedureCode'])
-                # returns a RANAP error ind: protocol, abstract-syntax-error-reject
-                errcause = ('protocol', 100)
-                Proc = self.init_ranap_proc(RANAPErrorIndConlessCN, Cause=errcause)
-            else:
-                # store the procedure, if no error ind
-                self.ProcRanap[Proc.Code] = Proc
-                if self.TRACK_PROC_RANAP:
-                    # keep track of the procedure
-                    self._proc.append( Proc )
-            # process the PDU within the procedure
-            Proc.recv( pdu )
-            #
-            if Proc.Cont['suc'] is not None or errcause is not None:
-                # set the last procedure code
-                self.ProcRanapLast = Proc.Code
-                # send back any potential response to the RNC
-                # Proc.send() will take care to clean-up self.Proc
-                return self._encode_pdu(Proc.send())
-            else:
-                # potentially create new RANAP procedures, 
-                # as outcome of the one received
-                snd = []
-                for ProcRet in Proc.trigger():
-                    # all those procedures must have been initiated with self.init_ranap_proc()
-                    # hence, they are already set in self.ProcRanap
-                    # and tracked in self._proc
-                    snd.extend( ProcRet.send() )
-                    # set the last procedure code
-                    self.ProcRanapLast = ProcRet.Code
-                return self._encode_pdu(snd)
-        #
-        else:
-            # CN-initiated procedure, already existing in self.ProcRanap
-            # transfer the PDU to it
-            try:
-                Proc = self.ProcRanap[pdu[1]['procedureCode']]
-            except:
-                self._log('ERR', 'invalid RANAP PDU, %s, code %i' % (pdu[0], pdu[1]['procedureCode']))
-                # returns a RANAP error ind: protocol, message-not-compatible-with-receiver-state
-                errcause = ('protocol', 99)
-                Proc = self.init_ranap_proc(RANAPErrorIndConlessCN, Cause=errcause)
-            # process the PDU within the procedure
-            Proc.recv( pdu )
-            #
-            if errcause is not None:
-                # set the last procedure code
-                self.ProcRanapLast = Proc.Code
-                # send back any potential response to the RNC
-                # Proc.send() will take care to clean-up self.Proc
-                return self._encode_pdu(Proc.send())
-            else:
-                # potentially create new RANAP procedures, as outcome of the one received
-                snd = []
-                for ProcRet in Proc.trigger():
-                    # all those procedures must have been initiated with self.init_ranap_proc()
-                    # hence, they are already set in self.Proc
-                    # and tracked in self._proc
-                    snd.extend( ProcRet.send() )
-                    # set the last procedure code
-                    self.ProcRanapLast = ProcRet.Code
-                return self._encode_pdu(snd)
-    
-    def _encode_pdu(self, pdus):
-        ret, cnt = [], 0
-        if not asn_ranap_acquire():
-            self._log('ERR', 'unable to acquire the RANAP module')
-            return cnt
-        for pdu in pdus:
-            try:
-                PDU_RANAP.set_val(pdu)
-            except Exception as err:
-                self._log('ERR', 'unable to set the RANAP pdu value')
-                self._errpdu = pdu
-            else:
-                self._log('TRACE_ASN_RANAP_DL', '\n' + PDU_RANAP.to_asn1())
-                ret.append( PDU_RANAP.to_aper() )
-        asn_ranap_release()
-        return ret
     
     def init_hnbap_proc(self, ProcClass, **kw):
         """initialize a CN-initiated HNBAP procedure of class `ProcClass',
         encode the initiatingMessage PDU with given **kw and return the procedure
         """
         if ProcClass.Code in self.ProcHnbap:
-            self._log('ERR', 'a HNBAP procedure %s is already ongoing, unable to start a new one'\
+            self._log('ERR', 'a HNBAP procedure %s is already ongoing'\
                       % ProcClass.__name__)
             return None
         Proc = ProcClass(self)
-        # store the procedure
-        self.ProcHnbap[Proc.Code] = Proc
+        if Proc.Code in HNBAPProcGwDispatcher and Proc.Class == 1:
+            # store the procedure, which requires a response from the HNB
+            self.ProcHnbap[Proc.Code] = Proc
         if self.TRACK_PROC_HNBAP:
-            # keep track of the procedure
-            self._proc.append( Proc )
-        Proc.encode_pdu('ini', **kw)
-        return Proc
-    
-    def init_rua_proc(self, ProcClass, **kw):
-        """initialize a CN-initiated RUA procedure of class `ProcClass',
-        encode the initiatingMessage PDU with given **kw and return the procedure
-        """
-        if ProcClass.Code in self.ProcHnbap:
-            self._log('ERR', 'a RUA procedure %s is already ongoing, unable to start a new one'\
-                      % ProcClass.__name__)
-            return None
-        Proc = ProcClass(self)
-        if self.TRACK_PROC_RUA:
-            # keep track of the procedure
-            self._proc.append( Proc )
-        Proc.encode_pdu('ini', **kw)
-        return Proc
-    
-    def init_ranap_proc(self, ProcClass, **kw):
-        """initialize a CN-initiated RANAP connection-less procedure of class `ProcClass',
-        encode the initiatingMessage PDU with given **kw and return the procedure
-        """
-        if not issubclass(ProcClass, RANAPConlessSigProc):
-            self._log('WNG', 'starting a connection-oriented RANAP procedure '\
-                             'over a RUA connection-less transfer')
-        if ProcClass.Code in self.ProcRanap:
-            self._log('ERR', 'a RANAP procedure %s is already ongoing, unable to start a new one'\
-                      % ProcClass.__name__)
-            return None
-        Proc = ProcClass(self)
-        # store the procedure
-        self.ProcRanap[Proc.Code] = Proc
-        if self.TRACK_PROC_RANAP:
-            # keep track of the procedure
             self._proc.append( Proc )
         Proc.encode_pdu('ini', **kw)
         return Proc
     
     def start_hnbap_proc(self, ProcClass, **kw):
-        """initialize a HNBAP procedure and send its initiatingMessage PDU over Iuh
+        """initialize a CN-initiated HNBAP procedure of class `ProcClass',
+        encode the initiatingMessage PDU with given **kw and send the PDU to the
+        HNB
         """
         if not self.is_connected():
             self._log('ERR', 'not connected')
@@ -411,47 +215,88 @@ class HNBd(SigStack):
         Proc = self.init_hnbap_proc(ProcClass, **kw)
         if Proc is None:
             return 0
-        self.ProcHnbapLast, cnt = Proc, 0
+        self.ProcHnbapLast, cnt = Proc.Code, 0
         for pdu in Proc.send():
             if self.Server.send_hnbap_pdu(self, pdu):
                 # send_hnbap_pdu() returns the number of bytes sent over the socket
                 cnt += 1
         return cnt
     
+    #--------------------------------------------------------------------------#
+    # handling of RUA procedures
+    #--------------------------------------------------------------------------#
+    
+    def process_rua_pdu(self, pdu_rx):
+        """process a RUA PDU sent by the HNB
+        and return a list of RUA PDU(s) to be sent back to it
+        """
+        # WNG: RUA is a symmetric protocol with initatingMessage-only procedures
+        errcause = None
+        if pdu_rx[0] != 'initiatingMessage':
+            self._log('ERR', 'invalid RUA PDU, %s, code %i'\
+                      % (pdu_rx[0], pdu_rx[1]['procedureCode']))
+            errcause = ('protocol', 'abstract-syntax-error-reject')
+            Proc = self.init_rua_proc(RUAErrorInd, Cause=errcause)
+        else:
+            try:
+                Proc = RUAProcDispatcher[pdu_rx[1]['procedureCode']](self)
+            except:
+                self._log('ERR', 'invalid RUA PDU, initiatingMessage, code %i'\
+                          % pdu_rx[1]['procedureCode'])
+                errcause = ('protocol', 'abstract-syntax-error-reject')
+                Proc = self.init_rua_proc(RUAErrorInd, Cause=errcause)
+        if self.TRACK_PROC_RUA:
+            self._proc.append( Proc )
+        # process the PDU within the procedure
+        Proc.recv( pdu_rx )
+        if errcause:
+            self.ProcRuaLast = Proc.Code
+            return Proc.send()
+        else:
+            # trig new RUA procedures, as outcome of the one received
+            pdu_tx = []
+            for ProcRet in Proc.trigger():
+                pdu_tx.extend( ProcRet.send() )
+                self.ProcRuaLast = ProcRet.Code
+            return pdu_tx
+    
+    def init_rua_proc(self, ProcClass, **kw):
+        """initialize a CN-initiated RUA procedure of class `ProcClass',
+        encode the initiatingMessage PDU with given **kw and return the procedure
+        """
+        Proc = ProcClass(self)
+        if self.TRACK_PROC_RUA:
+            # keep track of the procedure
+            self._proc.append( Proc )
+        Proc.encode_pdu('ini', **kw)
+        return Proc
+    
     def start_rua_proc(self, ProcClass, **kw):
-        """initialize a RUA procedure and send its initiatingMessage PDU over Iuh
+        """initialize a CN-initiated RUA procedure of class `ProcClass',
+        encode the initiatingMessage PDU with given **kw and send the PDU to the
+        HNB
         """
         if not self.is_connected():
             self._log('ERR', 'not connected')
             return 0
         Proc = self.init_rua_proc(ProcClass, **kw)
-        if Proc is None:
-            return 0
-        self.ProcRuaLast, cnt = Proc, 0
+        self.ProcRuaLast, cnt = Proc.Code, 0
         for pdu in Proc.send():
             if self.Server.send_rua_pdu(self, pdu):
                 # send_rua_pdu() returns the number of bytes sent over the socket
                 cnt += 1
         return cnt
     
-    def start_ranap_proc(self, ProcClass, **kw):
-        """initialize a RANAP connection-less procedure and send its initiatingMessage PDU 
-        over RUA / Iuh
-        """
-        if not self.is_connected():
-            self._log('ERR', 'not connected')
-            return 0
-        #
-        Proc = self.init_ranap_proc(ProcClass, **kw)
-        if Proc is None:
-            return
-        self.ProcRanapLast, cnt, pdus = Proc, 0, []
-        #
-        # encode the RANAP PDU(s)
+    #--------------------------------------------------------------------------#
+    # handling of RANAP procedures
+    #--------------------------------------------------------------------------#    
+    
+    def _encode_ranap_pdu(self, pdus):
+        ret = []
         if not asn_ranap_acquire():
             self._log('ERR', 'unable to acquire the RANAP module')
-            return 0
-        for pdu in Proc.send():
+            return ret
+        for pdu in pdus:
             try:
                 PDU_RANAP.set_val(pdu)
             except Exception as err:
@@ -460,10 +305,122 @@ class HNBd(SigStack):
             else:
                 if self.TRACE_ASN_RANAP:
                     self._log('TRACE_ASN_RANAP_DL', '\n' + PDU_RANAP.to_asn1())
-                pdus.append( PDU_RANAP.to_aper() )
+                ret.append( PDU_RANAP.to_aper() )
+        asn_ranap_release()
+        return ret
+    
+    def process_ranap(self, buf):
+        """process a RANAP PDU buffer sent by the HNB in connection-less transfer
+        and return a list of RANAP PDU buffer(s) to be sent back to it
+        """
+        # decode the RANAP PDU
+        if not asn_ranap_acquire():
+            self._log('ERR', 'unable to acquire the RANAP module')
+            return []
+        try:
+            PDU_RANAP.from_aper(buf)
+        except:
+            asn_ranap_release()
+            self._log('WNG', 'invalid RANAP PDU transfer-syntax: %s'\
+                      % hexlify(buf).decode('ascii'))
+            # error cause: protocol, transfer-syntax-error
+            Proc = self.init_ranap_proc(RANAPErrorIndConlessCN, Cause=('protocol', 97))
+            Proc.recv(buf)
+            self.ProcRanapLast = Proc.Code
+            return self._encode_ranap_pdu(Proc.send())
+        #
+        if self.TRACE_ASN_RANAP:
+            self._log('TRACE_ASN_RANAP_UL', '\n' + PDU_RANAP.to_asn1())
+        pdu_rx = PDU_RANAP()
         asn_ranap_release()
         #
-        for buf in pdus:
+        errcause = None
+        if pdu_rx[0] == 'initiatingMessage':
+            # RNC-initiated procedure, instantiate it
+            try:
+                Proc = RANAPConlessProcRncDispatcher[pdu_rx[1]['procedureCode']](self)
+            except:
+                self._log('ERR', 'invalid connect-less RANAP PDU, initiatingMessage, code %i'\
+                          % pdu_rx[1]['procedureCode'])
+                # error cause: protocol, abstract-syntax-error-reject
+                errcause = ('protocol', 100)
+                Proc = self.init_ranap_proc(RANAPErrorIndConlessCN, Cause=errcause)
+            else:
+                if self.TRACK_PROC_RANAP:
+                    self._proc.append( Proc )
+            # process the PDU within the procedure
+            Proc.recv( pdu_rx )
+            if Proc.Class == 2 and Proc.errcause:
+                Err = self.init_ranap_proc(RANAPErrorIndConlessCN, Cause=Proc.errcause)
+                self.ProcRanapLast = Err.Code
+                return self._encode_ranap_pdu(Err.send())
+            elif Proc.Class == 1 or errcause:
+                self.ProcRanapLast = Proc.Code
+                return self._encode_ranap_pdu(Proc.send())
+            else:
+                pdu_tx = []
+                for ProcRet in Proc.trigger():
+                    pdu_tx.extend( ProcRet.send() )
+                    self.ProcRanapLast = ProcRet.Code
+                return self._encode_ranap_pdu(pdu_tx)
+        #
+        else:
+            # CN-initiated procedure, transfer the PDU to it
+            try:
+                Proc = self.ProcRanap[pdu_rx[1]['procedureCode']]
+            except:
+                self._log('ERR', 'invalid connect-less RANAP PDU, %s, code %i'\
+                          % (pdu_rx[0], pdu_rx[1]['procedureCode']))
+                # error cause: protocol, message-not-compatible-with-receiver-state
+                errcause = ('protocol', 99)
+                Proc = self.init_ranap_proc(RANAPErrorIndConlessCN, Cause=errcause)
+            # process the PDU within the procedure
+            Proc.recv( pdu_rx )
+            if Proc.errcause:
+                Err = self.init_ranap_proc(RANAPErrorIndConlessCN, Cause=Proc.errcause)
+                self.ProcRanapLast = Err.Code
+                return self._encode_ranap_pdu(Err.send())
+            elif errcause:
+                self.ProcRanapLast = Proc.Code
+                return self._encode_ranap_pdu(Proc.send())
+            else:
+                pdu_tx = []
+                for ProcRet in Proc.trigger():
+                    pdu_tx.extend( ProcRet.send() )
+                    self.ProcRanapLast = ProcRet.Code
+                return self._encode_ranap_pdu(pdu_tx)
+    
+    def init_ranap_proc(self, ProcClass, **kw):
+        """initialize a CN-initiated RANAP connection-less procedure of class `ProcClass',
+        encode the initiatingMessage PDU with given **kw and return the procedure
+        """
+        if not issubclass(ProcClass, RANAPConlessSigProc):
+            self._log('WNG', 'starting an invalid procedure over a RUA connection-less transfer')
+        if ProcClass.Code in self.ProcRanap:
+            self._log('ERR', 'a RANAP procedure %s is already ongoing' % ProcClass.__name__)
+            return None
+        Proc = ProcClass(self)
+        if Proc.Code in RANAPConlessProcCnDispacther and Proc.Class == 1:
+            # store the procedure, which requires a response from the HNB
+            self.ProcRanap[Proc.Code] = Proc
+        if self.TRACK_PROC_RANAP:
+            # keep track of the procedure
+            self._proc.append( Proc )
+        Proc.encode_pdu('ini', **kw)
+        return Proc
+        
+    def start_ranap_proc(self, ProcClass, **kw):
+        """initialize a CN-initiated RANAP connection-less procedure of class `ProcClass',
+        encode the initiatingMessage PDU with given **kw and send the PDU to the HNB
+        """
+        if not self.is_connected():
+            self._log('ERR', 'not connected')
+            return 0
+        Proc = self.init_ranap_proc(ProcClass, **kw)
+        if Proc is None:
+            return 0
+        self.ProcRanapLast, cnt = Proc.Code, 0
+        for buf in self._encode_ranap_pdu(Proc.send()):
             cnt += self.start_rua_proc(RUAConnectlessTransfer, RANAP_Message=buf)
         return cnt
     
@@ -508,7 +465,7 @@ class HNBd(SigStack):
             self._log('WNG', 'no UE with IuPS context-id %i to unset' % ctx_id)
     
     #--------------------------------------------------------------------------#
-    # handling of RANAP connection-less signaling procedures
+    # CN-initiated RANAP connection-less signaling procedures
     #--------------------------------------------------------------------------#
     
     def send_error_ind(self, cause, **IEs):
@@ -521,7 +478,7 @@ class HNBd(SigStack):
         # send to the RNC in connection-less signaling
         ret = self.start_ranap_proc(RANAPErrorIndConlessCN, **IEs)
         if not ret:
-            self._log('ERR', 'send_error_ind: invalid IEs')
+            self._log('ERR', 'send_error_ind: error')
         return True if ret else False
     
     def reset(self, dom, cause=('misc', 115), **IEs):
@@ -548,7 +505,7 @@ class HNBd(SigStack):
         # send to the RNC in connection-less signaling
         ret = self.start_ranap_proc(RANAPResetCN, **IEs)
         if not ret:
-            self._log('ERR', 'reset: invalid IEs')
+            self._log('ERR', 'reset: error')
         return True if ret else False
     
     def reset_resource(self, dom, reslist=[], cause=('misc', 115), **IEs):
@@ -595,7 +552,7 @@ class HNBd(SigStack):
         # send to the RNC in connection-less signaling
         ret = self.start_ranap_proc(RANAPResetResourceCN, **IEs)
         if not ret:
-            self._log('ERR', 'reset: invalid IEs')
+            self._log('ERR', 'reset: error')
         return True if ret else False
     
     def page(self, **IEs):
@@ -605,5 +562,6 @@ class HNBd(SigStack):
         """
         ret = self.start_ranap_proc(RANAPPaging, **IEs)
         if not ret:
-            self._log('ERR', 'page: invalid IEs')
+            self._log('ERR', 'page: error')
         return True if ret else False
+

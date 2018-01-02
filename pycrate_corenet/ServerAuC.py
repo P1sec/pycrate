@@ -111,8 +111,6 @@ class AuC:
             SQN : unsigned integer
             OP  : subscriber specific OP, distinct from self.OP, optional field
         """
-        self._log('DBG', 'AuC starting')
-        
         self.db = {}
         try:
             # get 3G authentication database AuC.db
@@ -137,9 +135,11 @@ class AuC:
             self._log('ERR', 'unable to read AuC.db, path: %s' % self.AUC_DB_PATH)
             raise(err)
         self._save_required = False
-        
+        #
         # initiatlize the Milenage algo with the AuC-defined OP
         self.Milenage = Milenage(self.OP)
+        #
+        self._log('DBG', 'AuC started')
     
     def _log(self, logtype='DBG', msg=''):
         if logtype in self.DEBUG:

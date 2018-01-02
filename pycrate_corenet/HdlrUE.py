@@ -52,9 +52,13 @@ class UEd(SigStack):
     TRACE_NAS_CS       = False
     # to log UE NAS GMM / SM for all UE
     TRACE_NAS_PS       = False
-    # to log UE NAS encrypted EMM / EMM / ESM for all UE
-    TRACE_NAS_EMMENC   = False
+    # to log UE LTE NAS (potentially) encrypted EMM / ESM for all UE
+    TRACE_NAS_EPS_ENC  = False
+    # to log UE LTE NAS clear-text EMM / ESM for all UE
     TRACE_NAS_EPS      = False
+    # to log UE LTE NAS containing SMS for all UE
+    TRACE_NAS_EPS_SMS  = False
+    
     
     #--------------------------------------------------------------------------#
     # UE global informations
@@ -66,6 +70,8 @@ class UEd(SigStack):
     IMEISV = None
     # capabilities
     Cap    = {}
+    # security capabilities
+    SecCap = {RAT_GERA: set(), RAT_UTRA: set(), RAT_EUTRA: set()} 
     # temporary identities (TMSI / PTMSI are uint32)
     TMSI   = None
     PTMSI  = None
@@ -111,23 +117,43 @@ class UEd(SigStack):
             self.TMSI = kw['tmsi']
         elif 'ptmsi' in kw:
             self.PTMSI = kw['ptmsi']
-        #
-        if 'config' in kw:
-            self.set_config(kw['config'])
+        elif 'mtmsi' in kw:
+            self.MTMSI = kw['mtmsi']
         #
         # set handler for IuCS, IuPS and S1 links
         self.IuCS = UEIuCSd(self)
         self.IuPS = UEIuPSd(self)
         self.S1   = UES1d(self)
+        #
+        if 'config' in kw:
+            self.set_config(kw['config'])
     
     def set_config(self, config):
         self.MSISDN = config['MSISDN']
-        self.IPAddr = config['IPAddr']
         self.USIM   = config['USIM']
+        #
+        self.IuPS.SM.PDP = {}
+        # TODO: handle config for PDP networks
+        #
+        self.S1.ESM.PDN = {}
+        for apn, pdntype, ipaddr in config['PDN']:
+            #Server.ConfigPDN provides the DNS servers for each APN
+            #UE.S1.ESM.PDNConfig provides the default QoS for each APN
+            if apn not in self.Server.ConfigPDN:
+                self._log('WNG', 'unable to configure PDN connectivity for APN %s, no DNS servers'\
+                          % apn)
+            else:
+                self.S1.ESM.PDN = {apn: {'IP' : (pdntype, ipaddr),
+                                         'DNS': self.Server.ConfigPDN[apn]}}
+                if apn not in self.S1.ESM.PDNConfig:
+                    self._log('WNG', 'unable to configure PDN connectivity for APN %s, '\
+                              'no S1 QoS parameters' % apn)
+                else:
+                    self.S1.ESM.PDN[apn].update( self.S1.ESM.PDNConfig[apn] )
     
-    def set_ran(self, ran, ctx_id):
+    def set_ran(self, ran, ctx_id, sid=None):
         # UE going connected
-        if ran.__class__.__name__[:3] == 'HNB':
+        if ran.__class__.__name__ == 'HNBd':
             #
             if self.S1.is_connected():
                 # error: already linked with another ran
@@ -152,7 +178,7 @@ class UEd(SigStack):
                 # error: already linked with another HNB
                 raise(CorenetErr('UE already connected through another IuPS link'))
         #
-        elif ran.__class__.__name__[:3] == 'ENB':
+        elif ran.__class__.__name__ == 'ENBd':
             #
             if self.IuCS.is_connected() or self.IuPS.is_connected():
                 # error: already linked with another ran
@@ -161,9 +187,9 @@ class UEd(SigStack):
             # S1 stack
             if not self.S1.is_connected():
                 self.S1.set_ran(ran)
-                self.S1.set_ctx(ctx_id)
+                self.S1.set_ctx(ctx_id, sid)
             elif self.S1.ENB == ran:
-                self.S1.set_ctx(ctx_id)
+                self.S1.set_ctx(ctx_id, sid)
             else:
                 # error: already linked with another ENB
                 raise(CorenetErr('UE already connected through another S1 link'))
@@ -186,29 +212,85 @@ class UEd(SigStack):
             self.S1.unset_ctx()
         del self.RAT
     
-    def merge_cs_handler(self, iucs):
-        if self.IuCS is not None and self.IuCS.MM.state != UEMMd.state:
-            return False
-        else:
-            self.IuCS   = iucs
-            iucs.UE     = self
-            iucs.MM.UE  = self
-            iucs.CC.UE  = self
-            iucs.SMS.UE = self
-            iucs.SS.UE  = self
-            return True
+    def merge_cs_handler(self, iucsd):
+        if self.IuCS is not None:
+            if self.IuCS.MM.state == 'ACTIVE':
+                self._log('WNG', 'unable to merge IuCS handler')
+                return False
+            else:
+                self._log('INF', 'merging IuCS handler')
+                # prepend passed proc into s1d
+                iucsd._proc = self.IuCS._proc + iucsd._proc
+                iucsd.MM._proc = self.IuCS.MM._proc + iucsd.MM._proc
+                iucsd.CC._proc = self.IuCS.CC._proc + iucsd.CC._proc
+                iucsd.SMS._proc = self.IuCS.SMS._proc + iucsd.SMS._proc
+                iucsd.SS._proc = self.IuCS.SS._proc + iucsd.SS._proc
+                # merge security contexts
+                for cksn in range(8):
+                    if cksn in self.IuCS.SEC and cksn not in iucsd.SEC:
+                        iucsd.SEC[cksn] = self.IuCS.SEC[cksn]
+        # transfer UE's reference
+        self.IuCS   = iucs
+        iucs.UE     = self
+        iucs.MM.UE  = self
+        iucs.CC.UE  = self
+        iucs.SMS.UE = self
+        iucs.SS.UE  = self
+        return True
     
-    def merge_ps_handler(self, iups):
-        if self.IuPS is not None and self.IuPS.GMM.state != UEGMMd.state:
-            print('iups: ', iups, iups.GMM, iups.GMM.state)
-            print('self.IuPS: ', self.IuPS, self.IuPS.GMM, self.IuPS.GMM.state)
-            return False
-        else:
-            self.IuPS   = iups
-            iups.UE     = self
-            iups.GMM.UE = self
-            iups.SM.UE  = self
-            return True
+    def merge_ps_handler(self, iupsd):
+        if self.IuPS is not None:
+            if self.IuPS.GMM.state == 'ACTIVE':
+                self._log('WNG', 'unable to merge IuPS handler')
+                return False
+            else:
+                self._log('INF', 'merging IuPS handler')
+                # prepend passed proc into s1d
+                iupsd._proc = self.IuPS._proc + iupsd._proc
+                iupsd.GMM._proc = self.IuPS.GMM._proc + iupsd.GMM._proc
+                iupsd.SM._proc = self.IuPS.SM._proc + iupsd.SM._proc
+                # merge security contexts
+                for cksn in range(8):
+                    if cksn in self.IuPS.SEC and cksn not in iupsd.SEC:
+                        iupsd.SEC[cksn] = self.IuPS.SEC[cksn]
+                # merge PDP contexts
+                for ctx in range(16):
+                    if ctx in self.IuPS.PDP and ctx not in iupsd.PDP:
+                        iupsd.PDP[ksi] = self.IuPS.PDP[ctx]
+        # transfer UE's reference
+        self.IuPS   = iups
+        iups.UE     = self
+        iups.GMM.UE = self
+        iups.SM.UE  = self
+        return True
+    
+    def merge_eps_handler(self, s1d):
+        if self.S1 is not None:
+            if self.S1.EMM.state == 'ACTIVE':
+                self._log('WNG', 'unable to merge S1 handler')
+                return False
+            else:
+                self._log('INF', 'merging S1 handler')
+                # prepend passed proc into s1d
+                s1d._proc = self.S1._proc + s1d._proc
+                s1d.EMM._proc = self.S1.EMM._proc + s1d.EMM._proc
+                s1d.ESM._proc = self.S1.ESM._proc + s1d.ESM._proc
+                s1d.SMS._proc = self.S1.SMS._proc + s1d.SMS._proc
+                # merge security contexts
+                for ksi in range(16):
+                    if ksi in self.S1.SEC and ksi not in s1d.SEC:
+                        s1d.SEC[ksi] = self.S1.SEC[ksi]
+                # merge PDP contexts
+                for ctx in range(16):
+                    if ctx in self.S1.PDP and ctx not in s1d.PDP:
+                        s1d.PDP[ctx] = self.S1.PDP[ctx]
+        # transfer UE's reference
+        self.S1    = s1d
+        s1d.UE     = self
+        s1d.EMM.UE = self
+        s1d.ESM.UE = self
+        s1d.SMS.UE = self
+        return True
     
     #--------------------------------------------------------------------------#
     # UE identity
@@ -244,10 +326,11 @@ class UEd(SigStack):
                     self.PTMSI = ident
                 elif ident != self.PTMSI:
                     self._log('WNG', 'incorrect P-TMSI, %s instead of %s' % (ident, self.PTMSI))
-            elif dom == 'EPS':
+        elif idtype == 6:
+            if dom == 'EPS':
                 if self.MTMSI is None:
-                    self.MTMSI = ident
-                elif ident != self.MTMSI:
+                    self.MTMSI = ident[3]
+                elif ident[3] != self.MTMSI:
                     self._log('WNG', 'incorrect M-TMSI, %s instead of %s' % (ident, self.MTMSI))
         else:
             self._log('INF', 'unhandled identity, type %i, ident %s' % (idtype, ident))
@@ -299,24 +382,28 @@ class UEd(SigStack):
     def set_plmn(self, plmn):
         if plmn != self.PLMN:
             self.PLMN = plmn
-            self._log('INF', 'locate to PLMN %s' % self.PLMN)
+            self._log('INF', 'locate on PLMN %s' % self.PLMN)
     
     def set_lac(self, lac):
         if lac != self.LAC:
             self.LAC = lac
-            self._log('INF', 'locate to LAC %.4x' % self.LAC)
+            self._log('INF', 'locate on LAC %.4x' % self.LAC)
     
     def set_rac(self, rac):
         if rac != self.RAC:
             self.RAC = rac
-            self._log('INF', 'routing to RAC %.2x' % self.RAC)
-        
+            self._log('INF', 'route on RAC %.2x' % self.RAC)
+    
     def set_tac(self, tac):
         if tac != self.TAC:
             self.TAC = tac
-            # TBC
-            self._log('INF', 'tracking to TAC')
+            self._log('INF', 'track on TAC %.4x' % self.TAC)
     
     def set_lai(self, plmn, lac):
         self.set_plmn(plmn)
         self.set_lac(lac)
+    
+    def set_tai(self, plmn, tac):
+        self.set_plmn(plmn)
+        self.set_tac(tac)
+

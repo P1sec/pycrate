@@ -35,11 +35,12 @@ import re
 #import traceback
 from select    import select
 from threading import Thread, Lock, Event
-from random    import SystemRandom
+from random    import SystemRandom, randint
 from time      import time, sleep
 from datetime  import datetime
 from binascii  import hexlify, unhexlify
-from struct    import unpack
+from struct    import pack, unpack
+from socket    import ntohl, htonl, ntohs, htons, inet_aton, inet_ntoa
 
 # SCTP support for S1AP / RUA interfaces
 try:
@@ -58,6 +59,10 @@ except ImportError as err:
     raise(err)
 
 from pycrate_core.utils import *
+from pycrate_core.repr  import *
+from pycrate_core.elt   import Element
+Element._SAFE_STAT = True
+Element._SAFE_DYN  = True
 
 log('CorenetServer: loading all ASN.1 and NAS modules, be patient...')
 # import ASN.1 modules
@@ -82,11 +87,12 @@ from pycrate_mobile  import TS24080_SS
 # PS domain
 from pycrate_mobile  import TS24008_GMM
 from pycrate_mobile  import TS24008_SM
-
+#
 # to drive LTE UE
 from pycrate_mobile  import TS24301_EMM
 from pycrate_mobile  import TS24301_ESM
-
+#
+from pycrate_mobile  import TS24007
 from pycrate_mobile  import NAS
 
 
@@ -230,6 +236,7 @@ def threadit(f, *args, **kwargs):
 #------------------------------------------------------------------------------#
 
 # radio access techno identifiers
+RAT_GERA  = 'GERAN'
 RAT_UTRA  = 'UTRAN'
 RAT_EUTRA = 'E-UTRAN'
 
@@ -273,7 +280,7 @@ def cplist(l):
 
 
 #------------------------------------------------------------------------------#
-# ASN.1 object handling facilities
+# various routines
 #------------------------------------------------------------------------------#
 
 def pythonize_name(name):
@@ -301,8 +308,33 @@ def imsi_str_to_buf(s):
 
 
 def cellid_bstr_to_str(bstr):
-    return hexlify(int_to_bytes(*bstr)).decode('ascii')
+    # 20 or 28 bits
+    return hexlify(int_to_bytes(*bstr)).decode('ascii')[:-1]
 
+
+def globenbid_to_hum(seq):
+    return {'pLMNidentity': plmn_buf_to_str(seq['pLMNidentity']),
+            'eNB-ID': (seq['eNB-ID'][0], cellid_bstr_to_str(seq['eNB-ID'][1]))}
+
+
+def supptas_to_hum(seqof):
+    return [{'broadcastPLMNs': [plmn_buf_to_str(plmn) for plmn in sta['broadcastPLMNs']],
+             'tAC': bytes_to_uint(sta['tAC'], 16)} for sta in seqof]
+
+
+def gummei_to_asn(val):
+    return {'servedGroupIDs': [uint_to_bytes(gid, 16) for gid in val['GroupIDs']],
+            'servedMMECs': [uint_to_bytes(mmec, 8) for mmec in val['MMECs']],
+            'servedPLMNs': [plmn_str_to_buf(plmn) for plmn in val['PLMNs']]}
+
+
+def mac_aton(mac='00:00:00:00:00:00'):
+    return unhexlify(mac.replace(':', ''))
+
+
+#------------------------------------------------------------------------------#
+# ASN.1 object handling facilities
+#------------------------------------------------------------------------------#
 
 def print_pduies(desc):
     for ptype in ('InitiatingMessage', 'Outcome', 'SuccessfulOutcome', 'UnsuccessfulOutcome'):
@@ -404,3 +436,4 @@ class SigProc(object):
 
 # See ProcProto.py for prototype classes for the various mobile network procedures
 # and other Proc*.py for the procedures themselves
+

@@ -31,6 +31,8 @@ from .utils       import *
 from .ProcCNRanap import *
 from .ProcCNMM    import *
 from .HdlrUEIu    import UEIuSigStack
+from .HdlrUESMS   import UESMSd
+
 
 #------------------------------------------------------------------------------#
 # UE-related Iu interface handler for the CS domain
@@ -39,7 +41,7 @@ from .HdlrUEIu    import UEIuSigStack
 
 class UEMMd(SigStack):
     """UE MM handler within a UEIuCSd instance
-    responsible for Mobility Management signaling procedures
+    responsible for Mobility Management signalling procedures
     """
     
     TRACK_PROC = True
@@ -167,14 +169,15 @@ class UEMMd(SigStack):
     
     def process(self, NasRx):
         """process a NAS MM message (NasRx) sent by the UE,
-        and return a NAS message (NasTx) response or None
+        and return a list (potentially empty) of RANAP procedure(s) to be sent
+        back to the RNC
         """
         if self.RX_HOOK is not None:
             return self.RX_HOOK(NasRx)
         #
-        ProtDisc, Type = NasRx['ProtDisc'](), NasRx['Type']()
+        name = NasRx._name
         # 1) check if it is a Detach Indication
-        if (ProtDisc, Type) == (5, 1):
+        if name == 'MMIMSIDetachIndication':
             Proc = MMIMSIDetach(self)
             self.Proc.append( Proc )
             if self.TRACK_PROC:
@@ -183,18 +186,10 @@ class UEMMd(SigStack):
             # for the CS domain
             return Proc.process(NasRx)
         #
-        # 2) check if it is a Paging response
-        elif (ProtDisc, Type) == (6, 39):
-            Proc = RRPagingResponse(self)
-            self.Proc.append( Proc )
-            if self.TRACK_PROC:
-                self._proc.append(Proc)
-            return Proc.process(NasRx)
-        #
-        # 3) check if there is any ongoing MM procedure
+        # 2) check if there is any ongoing MM procedure
         elif self.Proc:
-            # 2.1) in case of STATUS, disable all ongoing procedures
-            if Type == 49:
+            # 2.1) in case of STATUS, disable ongoing procedure(s)
+            if name == 'MMStatus':
                 self._log('WNG', 'STATUS received with %r' % NasRx['Cause'])
                 if self.STAT_CLEAR == 1:
                     #self._log('WNG', 'STATUS, disabling %r' % self.Proc[-1])
@@ -202,30 +197,31 @@ class UEMMd(SigStack):
                 elif self.STAT_CLEAR == 2:
                     #self._log('WNG', 'STATUS, disabling %r' % self.Proc)
                     self.clear()
-                return None
+                return []
             #
             # 2.2) in case of expected response
-            elif (ProtDisc, Type) in self.Proc[-1].Filter:
+            elif name in self.Proc[-1].FilterStr:
                 Proc = self.Proc[-1]
-                NasTx = Proc.process(NasRx)
-                while self.Proc and NasTx is None and self.Iu.RanapTx is None:
+                RanapTxProc = Proc.process(NasRx)
+                while self.Proc and not RanapTxProc:
                     # while the top-level NAS procedure has nothing to respond and terminates,
                     # we postprocess() lower-level NAS procedure(s) until we have something
                     # to send, or the stack is empty
                     ProcLower = self.Proc[-1]
-                    NasTx = ProcLower.postprocess(Proc)
+                    RanapTxProc = ProcLower.postprocess(Proc)
                     Proc = ProcLower
-                return NasTx
+                return RanapTxProc
             #
             # 2.3) in case of unexpected NasRx
             else:
-                self._log('WNG', 'unexpected MM message %r, sending STATUS' % NasRx['Type'])
+                self._log('WNG', 'unexpected %s message, sending STATUS 98' % name)
                 # cause 98: Message type not compatible with the protocol state
-                return TS24008_MM.MMStatus(Cause=98)
+                return  self.Iu.ret_ranap_dt(NAS.MMStatus(Cause=98))
         #
-        # 4) start a new UE-initiated procedure
-        elif Type in MMProcUeDispatcher:
-            Proc = MMProcUeDispatcher[Type](self)
+        # 3) start a new UE-initiated procedure
+        elif name in MMProcUeDispatcherStr:
+            # the dispatcher include the support of the RRPagingResponse message
+            Proc = MMProcUeDispatcherStr[name](self)
             self.Proc.append( Proc )
             if self.TRACK_PROC:
                 self._proc.append(Proc)
@@ -233,9 +229,9 @@ class UEMMd(SigStack):
         #
         # 4) unexpected NasRx
         else:
-            self._log('WNG', 'unexpected MM message %r, sending STATUS' % NasRx['Type'])
-            # cause 101: Message not compatible with the protocol state
-            return TS24008_MM.MMStatus(Cause=101)
+            self._log('WNG', 'unexpected %s message, sending STATUS 96' % name)
+            # cause 96: Invalid mandatory information
+            return  self.Iu.ret_ranap_dt(NAS.MMStatus(Cause=96))
     
     def init_proc(self, ProcClass, encod=None, mm_preempt=False):
         """initialize a CN-initiated MM procedure of class `ProcClass' and 
@@ -284,12 +280,12 @@ class UEMMd(SigStack):
         Proc = self.init_proc(MMIdentification, mm_preempt=True)
         Proc.set_msg(5, 24, IDType=idtype)
         try:
-            NasTx = Proc.output().to_bytes()
+            RanapTxProc = Proc.output().to_bytes()
         except:
             self._log('ERR', 'NAS message encoding failed')
             Proc.abort()
             return False
-        if not self.Iu._send_to_ue(NasTx):
+        if not self.Iu._send_to_rnc_ranap(RanapTxProc):
             # something bad happened while sending the message
             return False
         #
@@ -317,17 +313,17 @@ class UEMMd(SigStack):
         Proc = self.init_proc(MMInformation)
         Proc.set_msg(5, 50, **info)
         try:
-            NasTx = Proc.output().to_bytes()
+            RanapTxProc = Proc.output()
         except:
             self._log('ERR', 'NAS message encoding failed')
             Proc.abort()
             return False
-        return self.Iu._send_to_ue(NasTx)
+        return self.Iu._send_to_rnc_ranap(RanapTxProc)
 
 
 class UECCd(SigStack):
     """UE CC handler within a UEIuCSd instance
-    responsible for Call Control signaling procedures
+    responsible for Call Control signalling procedures
     """
     
     TRACK_PROC = True
@@ -357,13 +353,14 @@ class UECCd(SigStack):
     
     def process(self, NasRx):
         """process a NAS CC message (NasRx) sent by the UE,
-        and return a NAS message (NasTx) response or None
+        and return a list (potentially empty) of RANAP procedure(s) to be sent
+        back to the RNC
         """
         if self.RX_HOOK is not None:
             return self.RX_HOOK(NasRx)
         #
         # returns CC STATUS, cause network failure
-        return Buf('CC_STATUS', val=b'\x03\x61\0', bl=24)
+        return self.Iu.ret_ranap_dt(Buf('CCStatus', val=b'\x03\x61\0', bl=24))
     
     def init_proc(self, ProcClass, encod=None):
         """initialize a CN-initiated CC procedure of class `ProcClass' and 
@@ -377,61 +374,9 @@ class UECCd(SigStack):
         pass
 
 
-class UESMSd(SigStack):
-    """UE SMS handler within a UEIuCSd instance
-    responsible for poit-to-point Short Message Service procedures
-    """
-    
-    TRACK_PROC = True
-    
-    # reference to the UEd
-    UE = None
-    # reference to the IuCSd
-    Iu = None
-    
-    # to bypass the process() server loop with a custom NAS PDU handler
-    RX_HOOK = None
-    
-    def _log(self, logtype, msg):
-        self.Iu._log(logtype, '[SMS] %s' % msg)
-    
-    def __init__(self, ued, iucsd):
-        self.UE = ued
-        self.set_iu(iucsd)
-        #
-        # dict of ongoing SMS procedures (indexed by transaction identifier)
-        self.Proc  = {}
-        # list of tracked procedures (requires TRACK_PROC = True)
-        self._proc = []
-    
-    def set_iu(self, iucsd):
-        self.Iu = iucsd
-    
-    def process(self, NasRx):
-        """process a NAS SMS message (NasRx) sent by the UE,
-        and return a NAS message (NasTx) response or None
-        """
-        if self.RX_HOOK is not None:
-            return self.RX_HOOK(NasRx)
-        #
-        # returns SMS CP ERROR, cause network failure
-        return Buf('SMS_CP_ERR', val=b'\x09\x0F\x11', bl=24)
-    
-    def init_proc(self, ProcClass, encod=None):
-        """initialize a CN-initiated SMS procedure of class `ProcClass' and 
-        given encoder(s), and return the procedure
-        """
-        assert() 
-    
-    def clear(self):
-        """abort all running procedures
-        """
-        pass
-
-
 class UESSd(SigStack):
     """UE SS handler within a UEIuCSd instance
-    responsible for Supplementary Service procedures
+    responsible for Supplementary Service signalling procedures
     """
     
     TRACK_PROC = True
@@ -460,14 +405,15 @@ class UESSd(SigStack):
         self.Iu = iucsd
     
     def process(self, NasRx):
-        """process a NAS SMS message (NasRx) sent by the UE,
-        and return a NAS message (NasTx) response or None
+        """process a NAS SS message (NasRx) sent by the UE,
+        and return a list (potentially empty) of RANAP procedure(s) to be sent
+        back to the RNC
         """
         if self.RX_HOOK is not None:
             return self.RX_HOOK(NasRx)
         #
         # returns SSReleaseComplete, cause network failure
-        return Buf('SSReleaseComplete', val=b'\x0B\x2A\x11', bl=24)
+        return self.Iu.ret_ranap_dt(Buf('SSReleaseComplete', val=b'\x0B\x2A\x11', bl=24))
     
     def init_proc(self, ProcClass, encod=None):
         """initialize a CN-initiated SS procedure of class `ProcClass' and 
@@ -483,7 +429,7 @@ class UESSd(SigStack):
 
 class UEIuCSd(UEIuSigStack):
     """UE IuCS handler within a CorenetServer instance
-    responsible for UE-related RANAP signaling
+    responsible for UE-related RANAP signalling
     """
     
     # to keep track of all CS domain RANAP / NAS procedures
@@ -509,21 +455,24 @@ class UEIuCSd(UEIuSigStack):
     # when self.SEC['CKSN'] is not None, the context is enabled at the RNC, e.g.
     # self.SEC = {'CKSN': 0,
     #             0: {'CK': b'...', 'IK': b'...', 'UEA': 1, 'UIA': 0, 'CTX': 3},
-    #             ...}
+    #             ...,
+    #             'POL': {'LUR': 0, 'CON': 0, 'PAG': 0}}
     # 
     # a single security context contains:
     # CK, IK: 16 bytes buffer, keys to be sent to the RNC during the smc procedure
     # UEA, UIA: algo index, indicated by the RNC at the end of a successful smc procedure
     # CTX: context of the authentication,
-    #    2 means 2G auth converted to 3G context
+    #    2 means 2G auth converted to 3G context, in this case, Kc is also available
+    #    in the security context
     #    3 means 3G auth and native context
+    # The POL dict indicates the authentication policy for each procedure
     
     #--------------------------------------------------------------------------#
     # RANAPSecurityModeControl policy
     #--------------------------------------------------------------------------#
     # this will systematically bypass all smc procedures during UE signaling
     SMC_DISABLED = False
-    # this will bypass the smc procedure into specific UE signaling procedure
+    # this will bypass the smc procedure into specific UE signalling procedure
     # set proc abbreviation in the list: 'LU', 'CON', 'PAG'
     SMC_DISABLED_PROC = []
     #
@@ -568,65 +517,42 @@ class UEIuCSd(UEIuSigStack):
         self.SEC['CKSN'] = None
         self.SEC['POL'] = {'LUR': 0, 'CON': 0, 'PAG': 0}
     
-    def _ret_ranap_proc(self, NasTx):
-        if NasTx is not None:
-            if self.UE.TRACE_NAS_CS:
-                self._log('TRACE_NAS_CS_DL', '\n' + NasTx.show())
-            if self.RanapTx is None:
-                # no specific RANAP Procedure to be used
-                # wrap the NAS PDU into a RANAPDirectTransfer
-                return self.ret_ranap_dt(NasTx)
-            else:
-                # some specific RANAP Procedure(s) have already been prepared by 
-                # the NAS stack and will embed the NAS PDU in a specific way
-                RanapTx = self.RanapTx
-                self.RanapTx = None
-                return RanapTx
-        elif self.RanapTx:
-            # some specific RANAP Procedure(s) have been prepared by the NAS stack
-            # without embedding NAS_PDU
-            RanapTx = self.RanapTx
-            self.RanapTx = None
-            return RanapTx
-        else:
-            # nothing to return
-            return []
-    
     def process_nas(self, buf):
         """process a NAS message buffer for the CS domain sent by the mobile
-        and return a list of RANAP procedure(s) ready to be sent back
+        and return a list (possibly empty) of RANAP procedure(s) to be sent back 
+        to the RNC
         """
         if self.RX_HOOK:
             return self.RX_HOOK(buf)
         NasRx, err = NAS.parse_NAS_MO(buf)
-        if NasRx is None:
+        if err:
             self._log('WNG', 'invalid CS NAS message: %s' % hexlify(buf).decode('ascii'))
             # returns MM STATUS
-            NasTx = TS24008_MM.MMStatus(Cause=err)
-            if self.UE.TRACE_NAS_CS:
-                self._log('TRACE_NAS_CS_DL', '\n' + NasTx.show())
-            return self.ret_ranap_dt(NasTx)
+            return self.ret_ranap_dt(NAS.MMStatus(Cause=err))
         elif self.UE.TRACE_NAS_CS:
             self._log('TRACE_NAS_CS_UL', '\n' + NasRx.show())
         #
-        pd = NasRx['ProtDisc']()
+        pd = NasRx['ProtDisc'].get_val()
         if pd in (5, 6):
             # including Radio Resource Management (e.g. PAGING RESPONSE)
-            NasTx = self.MM.process(NasRx)
+            RanapTxProc = self.MM.process(NasRx)
         elif pd == 3:
-            NasTx = self.CC.process(NasRx)
+            RanapTxProc = self.CC.process(NasRx)
         elif pd == 9:
-            NasTx = self.SMS.process(NasRx)
+            SMSTx = self.SMS.process(NasRx)
+            RanapTxProc = []
+            for smscp in SMSTx:
+                RanapTxProc.extend( self.ret_ranap_dt(smscp, sapi=3) )
         elif pd == 11:
-            NasTx = self.SS.process(NasRx)
+            RanapTxProc = self.SS.process(NasRx)
         else:
             # invalid PD
             self._log('WNG', 'invalid Protocol Discriminator for CS NAS message, %i' % pd)
             # returns MM STATUS, with cause message-type non-existent 
             # or not implemented
-            NasTx = TS24008_MM.MMStatus(Cause=97)
+            RanapTxProc = self.ret_ranap_dt(NAS.MMStatus(Cause=97))
         #
-        return self._ret_ranap_proc(NasTx)
+        return RanapTxProc
     
     def clear_nas_proc(self):
         # clears all NAS CS procedures
@@ -687,7 +613,7 @@ class UEIuCSd(UEIuSigStack):
                'PermanentNAS_UE_ID' : ('iMSI', NAS.encode_bcd(self.UE.IMSI))}
         # DRX paging cycle
         if 'DRXParam' in self.UE.Cap:
-            drx = self.UE.Cap['DRXParam']['DRXCycleLen']()
+            drx = self.UE.Cap['DRXParam'][1]['DRXCycleLen'].get_val()
             if drx in (6, 7, 8, 9):
                 IEs['DRX_CycleLengthCoefficient'] = drx
         # paging with IMSI instead of TMSI
@@ -767,3 +693,4 @@ class UEIuCSd(UEIuSigStack):
     # defined in UEIuSigStack in HdlrUEIu.py
     def _net_init_con(self):
         return self.MM._net_init_con()
+

@@ -36,7 +36,7 @@ from .utils import *
 
 class LinkSigProc(SigProc):
     """wrapping class that defines common methods for Iu-based and S1-based
-    signaling procedures; relies heavily on the ASN.1 definitions
+    signalling procedures; relies heavily on the ASN.1 definitions
     """
     
     # to keep track of the PDU(s) exchanged within this procedure
@@ -52,7 +52,7 @@ class LinkSigProc(SigProc):
     # default criticality for encoding ASN.1 undefined IE / Ext
     _criticality_undef = 'ignore'
     
-    # ASN.1 procedure description (HNBAP.HNBAP_PDU_Descriptions.*)
+    # ASN.1 procedure description (e.g. HNBAP.HNBAP_PDU_Descriptions.*)
     Desc = None
     
     # Custom decoders:
@@ -86,8 +86,10 @@ class LinkSigProc(SigProc):
         """
         # 1) get procedure code and criticality from description
         desc = cls.Desc()
-        cls.Code = desc['procedureCode']
-        cls.Crit = desc['criticality']
+        cls.Code  = desc['procedureCode']
+        cls.Crit  = desc['criticality']
+        # class 1: request-response, class 2: request only
+        cls.Class = 2
         
         # 2) retrieve PDU(s) content from description
         # -> get dict of protocolIEs (ident: value's type)
@@ -101,6 +103,9 @@ class LinkSigProc(SigProc):
                       ('Outcome', 'suc'), # this is used in RANAP
                       ('UnsuccessfulOutcome', 'uns')):
             if ptype[0] in desc:
+                if ptype[1] != 'ini':
+                    # request-response procedure
+                    cls.Class = 1
                 encod, decod = cls.Encod[ptype[1]], cls.Decod[ptype[1]]
                 content, cont_ies, cont_exts, mand = desc[ptype[0]], {}, {}, []
                 if 'protocolIEs' in content._cont:
@@ -247,7 +252,7 @@ class LinkSigProc(SigProc):
     
     def encode_pdu(self, ptype, **kw):
         """encode the provided IEs' values from **kw into the PDU of type ptype 
-        ('ini', 'suc' or 'uns') and stack it in self._snd
+        ('ini', 'suc' or 'uns') and stack it in self._pdu_tx
         
         values provided in self.Encod will be set in priority, potentially 
         overriding those in **kw
@@ -361,23 +366,23 @@ class LinkSigProc(SigProc):
         val['protocolIEs'] = pdu_ies
         if pdu_exts:
             val['protocolExtensions'] = pdu_exts
-        self._snd.append( (self._ptype_lut[ptype],
-                           {'procedureCode': self.Code,
-                            'criticality': self.Crit,
-                            'value': (Cont._tr._name, val)}) )
+        self._pdu_tx.append( (self._ptype_lut[ptype],
+                              {'procedureCode': self.Code,
+                               'criticality': self.Crit,
+                               'value': (Cont._tr._name, val)}) )
     
     #--------------------------------------------------------------------------#
     
     def recv(self, pdu):
-        """process the PDU received by the signaling stack
+        """process the PDU received by the signalling stack
         """
         self._log('ERR', 'recv() not implemented')
     
     def send(self):
-        """return a list of PDU(s) to be sent by the signaling stack
+        """return a list of PDU(s) to be sent by the signalling stack
         """
         self._log('ERR', 'send() not implemented')
-        return self._snd
+        return self._pdu_tx
     
     def trigger(self):
         """return a list of new procedure(s) which were created during previous 
@@ -393,14 +398,15 @@ class LinkSigProc(SigProc):
 
 
 #------------------------------------------------------------------------------#
-# NAS signaling procedures
+# NAS signalling procedures
 #------------------------------------------------------------------------------#
 
-_get_first  = lambda x: x[1]
-_get_second = lambda x: x[2]
+tlv_get_first  = lambda x: x[1]
+tlv_get_second = lambda x: x[2]
+tlv_get_cap    = lambda x: (x._V.get_val(), x._IE)
 
 class NASSigProc(SigProc):
-    """wrapping class that defines common methods for NAS signaling procedures
+    """wrapping class that defines common methods for NAS signalling procedures
     """
     
     # to keep track of the NAS message(s) exchanged within this procedure
@@ -422,8 +428,14 @@ class NASSigProc(SigProc):
     # this allows to override values passed at runtime or set static values
     Encod = {}
     
-    # NAS message processing filter, built at class init
-    Filter = []
+    # NAS message processing filter, by (ProtDisc, Type), built at class init
+    Filter = set()
+    # NAS message processing filter, by message name, built at class init
+    FilterStr = set()
+    
+    # list of IE (essentially capabilities), for which we want to get the raw
+    # buffer and the decoded IE value
+    Cap = ()
     
     #--------------------------------------------------------------------------#
     
@@ -433,10 +445,10 @@ class NASSigProc(SigProc):
         NAS message type accepted by the procedure handler, and default .Decod
         attribute to extract only V part of LV / TV / TLV IEs.
         
-        filter_init = 0, builds a Filter with CN-initiated message
-        filter_init = 1, builds a Filter with UE-initiated message
+        filter_init = 0, builds Filter / FilterStr with CN-initiated message
+        filter_init = 1, builds Filter / FilterStr with UE-initiated message
         """
-        ContLUT, Encod, Decod, Filter = {}, {}, {}, []
+        ContLUT, Encod, Decod = {}, {}, {}
         #
         # CN-initiated NAS msg
         if cls.Cont[0] is not None:
@@ -456,11 +468,12 @@ class NASSigProc(SigProc):
                 # build default decoders when not user-defined
                 for ie in mies:
                     if ie._name not in Decod[mid]:
-                        if isinstance(ie, (Type1TV, Type3TV, Type4LV, Type6LVE)):
-                            Decod[mid][ie._name] = _get_first
+                        if ie._name in cls.Cap:
+                            Decod[mid][ie._name] = tlv_get_cap
+                        elif isinstance(ie, (Type1TV, Type3TV, Type4LV, Type6LVE)):
+                            Decod[mid][ie._name] = tlv_get_first
                         elif isinstance(ie, (Type4TLV, Type6TLVE)):
-                            Decod[mid][ie._name] = _get_second
-                
+                            Decod[mid][ie._name] = tlv_get_second
         #
         # UE-initiated NAS msg
         if cls.Cont[1] is not None:
@@ -480,17 +493,23 @@ class NASSigProc(SigProc):
                 # build default decoders when not user-defined
                 for ie in mies:
                     if ie._name not in Decod[mid]:
-                        if isinstance(ie, (Type1TV, Type3TV, Type4LV, Type6LVE)):
-                            Decod[mid][ie._name] = _get_first
+                        if ie._name in cls.Cap:
+                            Decod[mid][ie._name] = tlv_get_cap
+                        elif isinstance(ie, (Type1TV, Type3TV, Type4LV, Type6LVE)):
+                            Decod[mid][ie._name] = tlv_get_first
                         elif isinstance(ie, (Type4TLV, Type6TLVE)):
-                            Decod[mid][ie._name] = _get_second
+                            Decod[mid][ie._name] = tlv_get_second
         #
-        Filter = []
+        cls.ContLUT, cls.Encod, cls.Decod = ContLUT, Encod, Decod
+        #
+        Filter, FilterStr = set(), set()
         if cls.Cont[filter_init] is not None:
-            [Filter.append( (msgclass()['ProtDisc'](), msgclass()['Type']()) ) 
-             for msgclass in cls.Cont[filter_init]]
-        #
-        cls.ContLUT, cls.Encod, cls.Decod, cls.Filter = ContLUT, Encod, Decod, Filter
+            for msgclass in cls.Cont[filter_init]:
+                msg = msgclass()
+                Filter.add( (msg['ProtDisc'](), msg['Type']()) )
+                FilterStr.add( msg._name )
+        if Filter:
+            cls.Filter, cls.FilterStr = Filter, FilterStr
     
     #--------------------------------------------------------------------------#
     
@@ -607,13 +626,13 @@ class NASSigProc(SigProc):
     #--------------------------------------------------------------------------#
     
     def output(self):
-        """return a NAS msg to be sent by the signaling stack
+        """return a NAS msg to be sent by the signalling stack
         """
         self._log('ERR', 'output() not implemented')
         return None
     
     def process(self, msg):
-        """process the NAS msg received by the signaling stack
+        """process the NAS msg received by the signalling stack
         """
         self._log('ERR', 'process() not implemented')
         return None
@@ -628,3 +647,4 @@ class NASSigProc(SigProc):
         """abort the procedure, e.g. due to a timeout or an error indication
         """
         pass
+
