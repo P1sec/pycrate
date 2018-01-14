@@ -1397,7 +1397,7 @@ class PDNAddr(Envelope):
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[2].set_blauto(lambda: self._AddrBlLUT.get(self[1](), None))
+        self[2].set_blauto(lambda: self._AddrBlLUT.get(self[1].get_val(), None))
 
 
 #------------------------------------------------------------------------------#

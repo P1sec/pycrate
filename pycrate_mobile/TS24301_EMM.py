@@ -646,8 +646,9 @@ if _with_cm:
                 except KeyError:
                     raise(PycrateErr('EMMServiceRequest.mac_verify(): invalid EIA identifier, {0}'\
                           .format(eia)))
-                mac = EIA(key, seqnoff + self[3].get_val(), 0, dir, self[0:4].to_bytes())
-                if mac[2:4] != self['MACShort'].to_bytes():
+                msg = self.to_bytes()
+                mac = EIA(key, seqnoff + self['SeqnShort'].get_val(), 0, dir, msg[:2])
+                if mac[2:4] != msg[2:4]:
                     return False
                 else:
                     return True
@@ -673,7 +674,8 @@ if _with_cm:
                 except KeyError:
                     raise(PycrateErr('EMMServiceRequest.mac_compute(): invalid EIA identifier, {0}'\
                           .format(eia)))
-                mac = EIA(key, seqnoff + self[3].get_val(), 0, dir, self[0:4].to_bytes())
+                msg = self.to_bytes()
+                mac = EIA(key, seqnoff + self['SeqnShort'].get_val(), 0, dir, msg[:2])
                 self[4].set_val(mac[2:4])
 
 else:
