@@ -67,6 +67,9 @@ bytes_types = (str, )
 str_types = (str, unicode)
 # NoneType imported from types
 
+# defines bchr() identical to chr()
+bchr = chr
+
 #------------------------------------------------------------------------------#
 # Pycrate generic error
 #------------------------------------------------------------------------------#
