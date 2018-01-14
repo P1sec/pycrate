@@ -42,7 +42,7 @@ from pycrate_core.repr   import *
 from pycrate_core.charpy import Charpy
 
 from .MCC_MNC import MNC_dict
-from .PPP     import LCP, NCP
+from .PPP     import LCP, LCPDataConf, NCP, NCPDataConf, PAP, CHAP
 from .TS23038 import *
 
 #------------------------------------------------------------------------------#
@@ -2614,10 +2614,13 @@ _ProtConfig_dict = {
     }
 
 class ProtConfigElt(Envelope):
+    # when set to True, will decode the content into NCP / LCP / PAP / CHAP
     DECODE_INNER = True
     _ContLUT = {
         0x8021 : NCP,
-        0xC021 : LCP
+        0xC021 : LCP,
+        0xC023 : PAP,
+        0xC223 : CHAP
         }
     
     _GEN = (
@@ -2631,12 +2634,24 @@ class ProtConfigElt(Envelope):
         self[1].set_valauto(lambda: self[2].get_len())
         self[2].set_blauto(lambda: 8*self[1].get_val())
     
+    def set_val(self, val):
+        if isinstance(val, (list, tuple)) and not isinstance(val[2], bytes_types):
+            # eventually replace Cont by a NCP / LCP / PAP / CHAP Envelope
+            if val[0] in self._ContLUT:
+                self.replace(self[2], self._ContLUT[val[0]]('Cont'))
+        elif isinstance(val, dict) and 'ID' in val and 'Cont' in val \
+        and not isinstance(val['Cont'], bytes_types):
+            # eventually replace Cont by a NCP / LCP / PAP / CHAP Envelope
+            if val['ID'] in self._ContLUT:
+                self.replace(self[2], self._ContLUT[val['ID']]('Cont'))
+        Envelope.set_val(self, val)
+        
     def _from_char(self, char):
         self[0]._from_char(char)
         self[1]._from_char(char)
         ident, cont = self[0].get_val(), None
         if self.DECODE_INNER and ident in self._ContLUT:
-            cont = self._ContLUT[ident]()
+            cont = self._ContLUT[ident]('Cont')
             ccur, clen = char._cur, char._len_bit
             char._len_bit = ccur + 8*self[1].get_val()
             try:
