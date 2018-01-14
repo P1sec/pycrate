@@ -3077,6 +3077,10 @@ class Sequence(Element):
         # sequence number of content
         if 'num' in kw:
             self.set_num(kw['num'])
+        
+        # values in the sequence
+        if 'val' in kw:
+            self.set_val(kw['val'])
     
     #--------------------------------------------------------------------------#
     # envelope, hierarchy and selection routines
