@@ -62,9 +62,11 @@ class LCPOpt(Envelope):
 class LCPDataConf(Sequence):
     _GEN = LCPOpt()
 
+
 # for LCP Code Terminate-* and Code-Reject
 class LCPDataRaw(Buf):
     _rep = REPR_HEX
+
 
 # for LCP Code Protocol-Reject
 class LCPDataProtRej(Envelope):
@@ -73,12 +75,14 @@ class LCPDataProtRej(Envelope):
         Buf('RejectedInfo', rep=REPR_HEX)
         )
 
+
 # for LCP Code Echo-* and Discard-Request
 class LCPDataEcho(Envelope):
     _GEN = (
         Uint32('Magic', rep=REPR_HEX),
         Buf('Data', rep=REPR_HEX)
         )
+
 
 # global LCP format
 _LCPCode_dict = {
@@ -152,6 +156,7 @@ class LCP(Envelope):
 # IETF RFC 1332: The PPP Internet Protocol Control Protocol (IPCP)
 # NCP packet format (variant of LCP)
 #------------------------------------------------------------------------------#
+# + RFC1877 (DNS@, NBNS@), RFC3241 (ROHC)
 
 # for NCP Code Configure-*         
 _NCPOptType_dict = {
@@ -234,3 +239,169 @@ class NCP(Envelope):
             self.replace(self[3], Data)
         self[3]._from_char(char)
 
+
+#------------------------------------------------------------------------------#
+# IETF RFC 1334: PPP Authentication Protocols (PAP and CHAP)
+#------------------------------------------------------------------------------#
+
+# PAP Authenticate-Request
+class PAPAuthReq(Envelope):
+    _GEN = (
+        Uint8('PeerIDLen'),
+        Buf('PeerID'),
+        Uint8('PasswdLen'),
+        Buf('Passwd')
+        )
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_len())
+        self[1].set_blauto(lambda: 8*self[0].get_val())
+        self[2].set_valauto(lambda: self[3].get_len())
+        self[3].set_blauto(lambda: 8*self[2].get_val())
+
+
+# PAP Authenticate-Ack and Authentication-Nak
+class _PAPAuthMsg(Envelope):
+    _GEN = (
+        Uint8('MsgLen'),
+        Buf('Msg')
+        )
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_len())
+        self[1].set_blauto(lambda: 8*self[0].get_val())
+
+class PAPAuthAck(_PAPAuthMsg):
+    pass
+
+class PAPAuthNak(_PAPAuthMsg):
+    pass
+
+
+# global PAP format
+_PAPCode_dict = {
+    1 : 'Authenticate-Request',
+    2 : 'Authenticate-Ack',
+    3 : 'Authenticate-Nak',
+    }
+
+class PAP(Envelope):
+    _GEN = (
+        Uint8('Code', val=1, dic=_PAPCode_dict),
+        Uint8('Id'),
+        Uint16('Len'),
+        Buf('Data')
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[2].set_valauto(lambda: self[3].get_len()+4)
+        self[3].set_blauto(lambda: max(0, 8*(self[2].get_val()-4)))
+    
+    def set_val(self, vals):
+        code = None
+        if isinstance(vals, (tuple, list)):
+            data = vals[-1]
+            if not isinstance(data, bytes_types):
+                code = vals[0]
+        elif isinstance(vals, dict) and 'Data' in vals:
+            data = vals['Data']
+            if not isinstance(data, bytes_types):
+                try:
+                    code = vals['Code']
+                except:
+                    code = 1
+        if code == 1:
+            self.replace(self[3], PAPAuthReq('Data'))
+        elif code == 2:
+            self.replace(self[3], PAPAuthAck('Data'))
+        elif code == 3:
+            self.replace(self[3], PAPAuthNak('Data'))
+        Envelope.set_val(self, vals)
+    
+    def _from_char(self, char):
+        self[0]._from_char(char)
+        self[1]._from_char(char)
+        self[2]._from_char(char)
+        code = self[0].get_val()
+        if code == 1:
+            self.replace(self[3], PAPAuthReq('Data'))
+        elif code == 2:
+            self.replace(self[3], PAPAuthAck('Data'))
+        elif code == 3:
+            self.replace(self[3], PAPAuthNak('Data'))
+        self[3]._from_char(char)
+
+
+# CHAP Challenge / Response
+class _CHAPValue(Envelope):
+    _GEN = (
+        Uint8('ValueLen'),
+        Buf('Value', rep=REPR_HEX),
+        Buf('Name')
+        )
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_len())
+        self[1].set_blauto(lambda: 8*self[0].get_val())
+        # Name will be bounded thanks to the Len field in the CHAP header
+
+class CHAPChallenge(_CHAPValue):
+    pass
+
+class CHAPResponse(_CHAPValue):
+    pass
+
+
+# global CHAP format
+_CHAPCode_dict = {
+    1 : 'Challenge',
+    2 : 'Response',
+    3 : 'Success',
+    4 : 'Failure'
+    }
+
+class CHAP(Envelope):
+    _GEN = (
+        Uint8('Code', val=1, dic=_PAPCode_dict),
+        Uint8('Id'),
+        Uint16('Len'),
+        Buf('Data')
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[2].set_valauto(lambda: self[3].get_len()+4)
+        self[3].set_blauto(lambda: max(0, 8*(self[2].get_val()-4)))
+    
+    def set_val(self, vals):
+        code = None
+        if isinstance(vals, (tuple, list)):
+            data = vals[-1]
+            if not isinstance(data, bytes_types):
+                code = vals[0]
+        elif isinstance(vals, dict) and 'Data' in vals:
+            data = vals['Data']
+            if not isinstance(data, bytes_types):
+                try:
+                    code = vals['Code']
+                except:
+                    code = 1
+        if code == 1:
+            self.replace(self[3], CHAPChallenge('Data'))
+        elif code == 2:
+            self.replace(self[3], CHAPResponse('Data'))
+        Envelope.set_val(self, vals)
+    
+    def _from_char(self, char):
+        Envelope._from_char(self, char)
+        code = self[0].get_val()
+        if code == 1:
+            data = CHAPChallenge('Data')
+            data.from_bytes( self[3].get_val() )
+            self.replace(self[3], data)
+        elif code == 2:
+            data = CHAPResponse('Data')
+            data.from_bytes( self[3].get_val() )
+            self.replace(self[3], data)
+        
