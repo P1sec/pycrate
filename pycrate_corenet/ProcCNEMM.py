@@ -152,7 +152,8 @@ class EMMSigProc(NASSigProc):
                 if Cap == 'UENetCap':
                     setseccap = True
         if setseccap:
-            self.EMM.set_sec_ue_cap()
+            self._log('DBG', 'setting UE security capabilities')
+            self.EMM.set_sec_cap()
     
     def _chk_imsi(self):
         # arriving here means the UE's IMSI was unknown at first
@@ -204,6 +205,78 @@ class EMMSigProc(NASSigProc):
             ksi = (ksi[0]<<3) + ksi[1]
         NasProc._set_ksi(ksi, emerg)
         return NasProc.output()
+    
+    def _act_bear(self):
+        # reactivate all PDN connections
+        erablist, ebilist, brdl, brul = [], [], 0, 0
+        for ebi, pdncfg in self.S1.ESM.PDN.items():
+            if 'RAB' in pdncfg:
+                rabcfg = pdncfg['RAB']
+                ebilist.append(ebi)
+                # erab ext IE can be Correlation-ID and/or BearerType
+                erablist.append({
+                        'id': 52,
+                        'criticality': 'reject',
+                        'value': ('E-RABToBeSetupItemCtxtSUReq', {
+                            'e-RAB-ID': ebi,
+                            'e-RABlevelQoSParameters': rabcfg['E-RABlevelQoSParameters'],
+                            'transportLayerAddress': (bytes_to_uint(inet_aton(rabcfg['SGW-TLA']), 32), 32),
+                            'gTP-TEID': uint_to_bytes(rabcfg['SGW-GTP-TEID'], 32),
+                            #'iE-Extensions': [],
+                            })
+                        })
+                brdl += rabcfg['BitrateDL']
+                brul += rabcfg['BitrateUL']
+        if not erablist:
+            # no PDN connection to reactivate
+            return None
+        #
+        # get the current sec context to setup the eNB security layer
+        secctx = self.S1.get_sec_ctx()
+        if secctx and 'UESecCap' in self.UE.Cap:
+            # create the KeNB
+            self._log('DBG', 'NAS UL count for Kenb derivation, %i' % secctx['UL_enb'])
+            Kenb, UESecCap = conv_A3(secctx['Kasme'], secctx['UL_enb']), self.UE.Cap['UESecCap'][1]
+            secctx['Kenb'] = Kenb
+            secctx['NCC']  = 0
+            secctx['NH']   = conv_A4(secctx['Kasme'], Kenb)
+        else:
+            self._log('WNG', 'no active NAS security context, using the null AS security context')
+            Kenb, UESecCap = self.S1.SECAS_NULL_CTX
+        #
+        IEs = {
+            'E_RABToBeSetupListCtxtSUReq': erablist,
+            'UEAggregateMaximumBitrate': {
+                'uEaggregateMaximumBitRateDL': brdl,
+                'uEaggregateMaximumBitRateUL': brul
+                },
+            'SecurityKey': (bytes_to_uint(Kenb, 256), 256),
+            'UESecurityCapabilities': {
+                'encryptionAlgorithms': ((UESecCap[1].get_val()<<15) + \
+                                         (UESecCap[2].get_val()<<14) + \
+                                         (UESecCap[3].get_val()<<13), 16),
+                'integrityProtectionAlgorithms': ((UESecCap[9].get_val()<<15) + \
+                                                  (UESecCap[10].get_val()<<14) + \
+                                                  (UESecCap[11].get_val()<<13), 16)
+                }
+            }
+        #
+        if self.S1.ICS_RADCAP_INCL and 'UERadioCap' in self.UE.Cap:
+            IEs['UERadioCapability'] = self.UE.Cap['UERadioCap'][0]
+        if self.S1.ICS_GUMMEI_INCL:
+            IEs['GUMMEI'] = gummei_to_asn(self.UE.Server.PLMN,
+                                          self.UE.Server.MME_GID,
+                                          self.UE.Server.MME_CODE)
+        if self.S1.ICS_TRACE_ACT:
+            IEs['TraceActivation'] = self.S1.ICS_TRACE_ACT
+        #
+        S1apProc = self.S1.init_s1ap_proc(S1APInitialContextSetup, **IEs)
+        if S1apProc:
+            # pass the info required for setting the GTPU tunnel
+            S1apProc._gtp_add_mobile_ebi = ebilist
+            return S1apProc
+        else:
+            return None
 
 
 #------------------------------------------------------------------------------#
@@ -310,7 +383,7 @@ class EMMAuthentication(EMMSigProc):
         }
     
     def output(self):
-        # get a new KSI (0..15)
+        # get a new KSI (0..6)
         ksi = self.EMM.get_new_ksi()
         # in case a RAND is configured as a class encoder, we use it for 
         # generating the auth vector
@@ -513,7 +586,7 @@ class EMMSecurityModeControl(EMMSigProc):
         # prepare IEs for the SMC 
         IEs = {'NASSecAlgo': {'CiphAlgo': self.secctx['EEA'], 'IntegAlgo': self.secctx['EIA']},
                'NAS_KSI'   : (self.ksi>>3, self.ksi&0x7),
-               'UESecCap'  : self.EMM.get_sec_ue_cap(),
+               'UESecCap'  : self.EMM.get_sec_cap(),
                }
         if self.UE.IMEISV is None and self.EMM.SMC_IMEISV_REQ:
             IEs['IMEISVReq'] = 1
@@ -521,6 +594,8 @@ class EMMSecurityModeControl(EMMSigProc):
         #
         self.set_msg(7, 93, **IEs)
         self.encode_msg(7, 93)
+        if not self._sec:
+            self._nas_tx._sec = False
         if self.TRACK_PDU:
             self._pdu.append( (time(), 'DL', self._nas_tx) )
         self.init_timer()
@@ -531,6 +606,7 @@ class EMMSecurityModeControl(EMMSigProc):
             self._pdu.append( (time(), 'UL', pdu) )
         self.UEInfo = {}
         self.decode_msg(pdu, self.UEInfo)
+        self.rm_from_emm_stack()
         if pdu._name == 'EMMSecurityModeComplete':
             self.success = True
             if 'IMEISV' in self.UEInfo:
@@ -575,7 +651,8 @@ class EMMIdentification(EMMSigProc):
         # build the Id Request msg, Id type has to be set by the caller
         self.set_msg(7, 85)
         self.encode_msg(7, 85)
-        # log the NAS msg
+        if not self._sec:
+            self._nas_tx._sec = False
         if self.TRACK_PDU:
             self._pdu.append( (time(), 'DL', self._nas_tx) )
         #
@@ -730,10 +807,7 @@ class EMMAttach(EMMSigProc):
             # AttachComplete
             self.errcause, self.CompInfo = None, {}
             self.decode_msg(pdu, self.CompInfo)
-            if self.mtmsi_realloc >= 0:
-                self.UE.set_mtmsi(self.mtmsi_realloc)
-                self._log('INF', 'new M-TMSI set, 0x%.8x' % self.mtmsi_realloc)
-            return self._end()
+            return self._process_comp()
     
     def _process_req(self):
         #
@@ -755,11 +829,11 @@ class EMMAttach(EMMSigProc):
                 # jump directly to the smc with EEA0 / EIA0
                 self.EMM.set_sec_ctx_emerg()
                 # emergency ctx has always ksi 0
-                return self._ret_smc(0, emerg=True)
+                return self._ret_smc((0, 0), emerg=True)
         #
         # check local ID
         elif self.UE.IMSI is None:
-            # UEd was created based on a MTMSI provided at the RRC layer
+            # UEd was created based on a S-TMSI provided at the RRC layer
             # -> we need to get its IMSI before continuing
             try:
                 del self.UE.Server._UEpre[self.UE.MTMSI]
@@ -778,30 +852,48 @@ class EMMAttach(EMMSigProc):
         #
         if self.EMM.require_auth(self, ksi=self.UEInfo['NAS_KSI']):
             return self._ret_auth()
-        elif self.EMM.require_smc(self):
-            # no auth procedure, ksi submitted by the UE is valid
-            return self._ret_smc(self.UEInfo['NAS_KSI'])
         else:
-            # otherwise, go directly to postprocess
-            return self.postprocess()
+            # no auth procedure, ksi submitted by the UE is valid
+            # set UL NAS count for further KeNB derivation
+            secctx = self.S1.SEC[self.S1.SEC['KSI']]
+            secctx['UL_enb'] = self._nas_rx._ulcnt
+            if self.EMM.require_smc(self):
+                return self._ret_smc(self.UEInfo['NAS_KSI'])
+            else:
+                # otherwise, go directly to postprocess
+                return self.postprocess()
+    
+    def _process_comp(self):
+        #
+        if self.mtmsi_realloc >= 0:
+            self.UE.set_mtmsi(self.mtmsi_realloc)
+            self._log('INF', 'new M-TMSI set, 0x%.8x' % self.mtmsi_realloc)
+        #
+        # transfer to the ESM stack, which will terminate the ongoing ESM procedure
+        # and shoud return an empty list
+        ret = self.S1.ESM.process_buf(self.CompInfo['ESMContainer'].get_val(),
+                                      sec=self._nas_rx._sec)
+        ret.extend(self._end())
+        return ret
     
     def postprocess(self, Proc=None):
         if isinstance(Proc, EMMIdentification):
-            if Proc.IDType == NAS.IDTYPE_IMSI:
-                # got the UE's IMSI, check if it's allowed
-                if self.UE.IMSI is None:
-                    # UE did actually not responded with its IMSI, this is bad !
-                    # error 96: invalid mandatory info
-                    self.errcause = 96
-                    return self.output()
-                elif not self._chk_imsi():
-                    return self.output()
-            else:
-                assert()
+            assert( Proc.IDType == NAS.IDTYPE_IMSI)
+            # got the UE's IMSI, check if it's allowed
+            if self.UE.IMSI is None:
+                # UE did actually not responded with its IMSI, this is bad !
+                # error 96: invalid mandatory info
+                self.errcause = 96
+                return self.output()
+            elif not self._chk_imsi():
+                return self.output()
             if self.EMM.require_auth(self, ksi=self.UEInfo['NAS_KSI']):
                 return self._ret_auth()
-            elif self.EMM.require_smc(self):
-                return self._ret_smc(self.UEInfo['NAS_KSI'])
+            else:
+                secctx = self.S1.SEC[self.S1.SEC['KSI']]
+                secctx['UL_enb'] = self._nas_rx._ulcnt
+                if self.EMM.require_smc(self):
+                    return self._ret_smc(self.UEInfo['NAS_KSI'])
         #
         elif isinstance(Proc, EMMAuthentication):
             if not Proc.success:
@@ -834,7 +926,7 @@ class EMMAttach(EMMSigProc):
             else:
                 self.set_msg(7, 68, EMMCause=self.errcause)
             self.encode_msg(7, 68)
-            if not self._sec:
+            if not self._nas_rx._sec:
                 self._nas_tx._sec = False
             self.mtmsi_realloc = -1
             self._log('INF', 'reject, %r' % self._nas_tx['EMMCause'])
@@ -876,17 +968,32 @@ class EMMAttach(EMMSigProc):
             #
             if self.EMM.ATT_EPS_NETFEAT_SUPP:
                 IEs['EPSNetFeat'] = self.EMM.ATT_EPS_NETFEAT_SUPP
-            if self.EMM.ATT_T3412_EXT:
-                IEs['T3412Ext'] = self.EMM.ATT_T3412_EXT
-            if self.EMM.ATT_EXTDRX:
-                IEs['ExtDRXParam'] = self.EMM.ATT_EXTDRX
+            #
+            # power saving mode
+            if 'MSNetFeatSupp' in self.UEInfo and self.UEInfo['MSNetFeatSupp'][1].get_val():
+                if self.EMM.ATT_T3412_EXT:
+                    IEs['T3412Ext'] = self.EMM.ATT_T3412_EXT
+                elif 'T3412Ext' in self.UEInfo:
+                    IEs['T3412Ext'] = self.UEInfo['T3412Ext'].get_val()
+            if 'T3324' in self.UEInfo:
+                if self.EMM.ATT_T3324:
+                    IEs['T3324'] = self.EMM.ATT_T3324
+                else:
+                    IEs['T3324'] = self.UEInfo['T3324'].get_val()
+            #
+            if 'ExtDRXParam' in self.UEInfo:
+                if self.EMM.ATT_EXTDRX:
+                    IEs['ExtDRXParam'] = self.EMM.ATT_EXTDRX
+                else:
+                    IEs['ExtDRXParam'] = self['ExtDRXParam'].get_val()
+            #
             if self.EMM.ATT_SMS_SERV_STAT:
                 IEs['SMSServStat'] = self.EMM.ATT_SMS_SERV_STAT
             #
             self.set_msg(7, 66, **IEs)
             self.encode_msg(7, 66)
             #
-            # transfer to the ESM stack, which will populare the ESMContainer in
+            # transfer to the ESM stack, which will populate the ESMContainer in
             # the AttachAccept and setup the proper S1AP procedure
             ret = self.S1.ESM.process_buf(self.UEInfo['ESMContainer'].get_val(), 
                                           sec=self._sec,
@@ -896,11 +1003,10 @@ class EMMAttach(EMMSigProc):
         self.init_timer()
         return ret
     
-    def _end(self, nas_tx):
+    def _end(self):
         ret = []
         if self.EMM.ATT_S1REL:
-            # trigger an S1 UE ctxt release with Cause NAS normal-release (83)
-            S1apProcRel = self.S1.init_s1ap_proc(S1APUEContextRelease, Cause=('nAS', 83))
+            S1apProcRel = self.S1.init_s1ap_proc(S1APUEContextRelease, Cause=('nas', 'normal-release'))
             if S1apProcRel:
                 ret.append(S1apProcRel)
         self.rm_from_emm_stack()
@@ -929,13 +1035,27 @@ class EMMDetachUE(EMMSigProc):
         )
     
     def _detach(self):
-        # set EMM state
-        self.EMM.state = 'INACTIVE'
-        self._log('INF', 'detaching')
-        #
-        self.rm_from_emm_stack()
-        # abort all ongoing PS procedures
-        self.S1.clear_nas_proc()
+        if self.S1.SEC['KSI'] is not None and not self._nas_rx._sec:
+            # security is activated, by the detach request is not protected
+            # this is not acceptable
+            self._log('WNG', 'invalid detach request with no security layer')
+        else:
+            # set EMM state
+            self.EMM.state = 'INACTIVE'
+            self._log('INF', 'detaching')
+            #
+            self.rm_from_emm_stack()
+            # abort all ongoing EPS procedures and PDN ctxt
+            self.S1.clear_nas_proc()
+            self.S1.ESM.pdn_clear()
+            #
+            if self.UE.IMSI is None:
+                # UEd was created based on a S-TMSI provided at the RRC layer
+                # just delete it
+                try:
+                    del self.UE.Server._UEpre[self.UE.MTMSI]
+                except:
+                    pass
     
     def process(self, pdu):
         # preempt the EMM stack
@@ -944,10 +1064,13 @@ class EMMDetachUE(EMMSigProc):
             self._pdu.append( (time(), 'UL', pdu) )
         self.UEInfo = {}
         self.decode_msg(pdu, self.UEInfo)
+        #
         if self.UEInfo['EPSDetachTypeMO']['SwitchOff'].get_val():
             # if UE is to power-off, procedure ends here
             ret = self.output(poff=True)
         else:
+            # TODO: implement require_auth() / require_smc()
+            #
             ret = self.output(poff=False)
         self._detach()
         return ret
@@ -959,7 +1082,7 @@ class EMMDetachUE(EMMSigProc):
             # set a S1ap direct transfer to transport the DetachAccept
             #self.set_msg(7, 70)
             self.encode_msg(7, 70)
-            if not self._sec:
+            if not self._nas_rx._sec:
                 self._nas_tx._sec = False 
             if self.TRACK_PDU:
                 self._pdu.append( (time(), 'DL', self._nas_tx) )
@@ -1075,12 +1198,230 @@ class EMMTrackingAreaUpdate(EMMSigProc):
         (TS24301_EMM.EMMTrackingAreaUpdateRequest, TS24301_EMM.EMMTrackingAreaUpdateComplete)
         )
     
+    Decod = {
+        (7, 72): {
+            'NAS_KSI' : lambda x: (x[0].get_val(), x[1].get_val()),
+            'OldGUTI' : lambda x: x[1].decode(),
+            'OldTAI'  : lambda x: x[1].decode(),
+            'OldLAI'  : lambda x: x[1].decode(),
+            },
+        }
+    
+    Cap = ('UENetCap', 'DRXParam', 'MSNetCap', 'MSCm2', 'MSCm3', 'SuppCodecs',
+           'VoiceDomPref', 'DeviceProp', 'MSNetFeatSupp', 'ExtDRXParam')
+    
+    Timer = 'T3450'
+    
     def process(self, pdu):
-        pass
+        # preempt the EMM stack
+        self.emm_preempt()
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'UL', pdu) )
+        #
+        if pdu._name == 'EMMTrackingAreaUpdateRequest':
+            self.errcause, self.UEInfo = None, {}
+            self.decode_msg(pdu, self.UEInfo)
+            return self._process_req()
+        else:
+            # EMMTrackingAreaUpdateComplete
+            self.errcause, self.CompInfo = None, {}
+            self.decode_msg(pdu, self.CompInfo)
+            return self._process_comp()
+    
+    def _process_req(self):
+        #
+        upd_type = self.UEInfo['EPSUpdateType']
+        self.upd_type = upd_type.get_val()
+        self._log('INF', upd_type.repr())
+        # collect capabilities
+        self._collect_cap()
+        #
+        # check local ID
+        if self.UE.IMSI is None:
+            # UEd was created based on a S-TMSI provided at the RRC layer
+            # -> we need to get its IMSI before continuing
+            try:
+                del self.UE.Server._UEpre[self.UE.MTMSI]
+            except:
+                pass
+            # need to request the IMSI, prepare an id request procedure
+            return self._ret_req_imsi()
+        #
+        elif self.EMM.require_auth(self, ksi=self.UEInfo['NAS_KSI']):
+            return self._ret_auth()
+        else:
+            # no auth procedure, ksi submitted by the UE is valid
+            # set UL NAS count for further KeNB derivation
+            secctx = self.S1.SEC[self.S1.SEC['KSI']]
+            secctx['UL_enb'] = self._nas_rx._ulcnt
+            if self.EMM.require_smc(self):
+                return self._ret_smc(self.UEInfo['NAS_KSI'])
+            else:
+                # otherwise, go directly to postprocess
+                return self.postprocess()
+    
+    def _process_comp(self):
+        if self.mtmsi_realloc >= 0:
+            self.UE.set_mtmsi(self.mtmsi_realloc)
+            self._log('INF', 'new M-TMSI set, 0x%.8x' % self.mtmsi_realloc)
+        return self._end()
+    
+    def postprocess(self, Proc=None):
+        if isinstance(Proc, EMMIdentification):
+            assert( Proc.IDType == NAS.IDTYPE_IMSI)
+            # got the UE's IMSI, check if it's allowed
+            if self.UE.IMSI is None:
+                # UE did actually not responded with its IMSI, this is bad !
+                # error 96: invalid mandatory info
+                self.errcause = 96
+                return self.output()
+            elif not self._chk_imsi():
+                return self.output()
+            if self.EMM.require_auth(self, ksi=self.UEInfo['NAS_KSI']):
+                return self._ret_auth()
+            else:
+                secctx = self.S1.SEC[self.S1.SEC['KSI']]
+                secctx['UL_enb'] = self._nas_rx._ulcnt
+                if self.EMM.require_smc(self):
+                    return self._ret_smc(self.UEInfo['NAS_KSI'])
+        #
+        elif isinstance(Proc, EMMAuthentication):
+            if not Proc.success:
+                self.abort()
+                return []
+            elif self.EMM.require_smc(self):
+                # ksi established during the auth procedure
+                return self._ret_smc(Proc.ksi)
+        #
+        elif isinstance(Proc, EMMSecurityModeControl):
+            if not Proc.success:
+                self.abort()
+                return []
+        #
+        elif Proc != self and Proc is not None:
+            self._err = Proc
+            assert()
+        #
+        return self.output()
     
     def output(self):
-        pass
+        if self.errcause:
+            # prepare TAUReject IE
+            self.set_msg(7, 75, EMMCause=self.errcause)
+            self.encode_msg(7, 75)
+            if not self._nas_rx._sec:
+                self._nas_tx._sec = False
+            self.mtmsi_realloc = -1
+            self._log('INF', 'reject, %r' % self._nas_tx['EMMCause'])
+            ret = self.S1.ret_s1ap_dnt(self._nas_tx)
+            ret.extend(self._end())
+        else:
+            # prepare TAU Accept IEs
+            IEs = {'EPSUpdateResult': (0, 0)} # spare, value
+            #
+            # check EPSBearerCtxtStat, and deactivate PDN not enabled at the UE
+            if 'EPSBearerCtxtStat' in self.UEInfo:
+                EBCtxtStat = self.UEInfo['EPSBearerCtxtStat']
+                EBCtxtStatResp = []
+                for Stat in EBCtxtStat:
+                    uestat = Stat.get_val()
+                    ebi = int(Stat._name[4:])
+                    if uestat == 1 and ebi not in self.S1.ESM.PDN:
+                        self._log('WNG', 'EPS bearer %i activated in the UE but not the network' % ebi)
+                        EBCtxtStatResp.append(0)
+                    elif uestat == 0 and ebi in self.S1.ESM.PDN:
+                        self._log('INF', 'EPS bearer %i activated in the network but not the UE' % ebi)
+                        pdncfg = self.S1.ESM.PDN[ebi]
+                        if pdncfg['state'] == 1:
+                            self.UE.Server.GTPUd.rem_mobile(pdncfg['RAB']['SGW-GTP-TEID'])
+                        del self.S1.ESM.PDN[ebi]
+                        EBCtxtStatResp.append(0)
+                    else:
+                        EBCtxtStatResp.append(uestat)
+                IEs['EPSBearerCtxtStat'] = EBCtxtStatResp
+            #
+            # check UERACapUpdateNeed, and delete UERadCap if needed
+            if 'UERACapUpdateNeed' in self.UEInfo \
+            and self.UEInfo['UERACapUpdateNeed'].get_val() \
+            and 'UERadioCap' in self.UE.Cap:
+                del self.UE.Cap['UERadioCap']
+            #
+            if self.EMM.TAU_T3402 is not None:
+                IEs['T3402'] = self.EMM.TAU_T3402
+            if self.EMM.TAU_T3412 is not None:
+                IEs['T3412'] = self.EMM.TAU_T3412
+            #
+            # in case we want to realloc a GUTI, we start a GUTIRealloc,
+            # but don't forward its output
+            if self.EMM.TAU_GUTI_REALLOC:
+                NasProc = self.EMM.init_proc(EMMGUTIReallocation)
+                NasProc.output(embedded=True)
+                IEs['GUTI'] = {'type': NAS.IDTYPE_GUTI, 'ident': NasProc.guti}
+                self.mtmsi_realloc = NasProc.mtmsi
+            else:
+                self.mtmsi_realloc = -1
+            # 
+            # power saving mode
+            if 'MSNetFeatSupp' in self.UEInfo and self.UEInfo['MSNetFeatSupp'][1].get_val():
+                if self.EMM.ATT_T3412_EXT:
+                    IEs['T3412Ext'] = self.EMM.ATT_T3412_EXT
+                elif 'T3412Ext' in self.UEInfo:
+                    IEs['T3412Ext'] = self.UEInfo['T3412Ext'].get_val()
+            if 'T3324' in self.UEInfo:
+                if self.EMM.ATT_T3324:
+                    IEs['T3324'] = self.EMM.ATT_T3324
+                else:
+                    IEs['T3324'] = self.UEInfo['T3324'].get_val()
+            #
+            if 'ExtDRXParam' in self.UEInfo:
+                if self.EMM.ATT_EXTDRX:
+                    IEs['ExtDRXParam'] = self.EMM.ATT_EXTDRX
+                else:
+                    IEs['ExtDRXParam'] = self['ExtDRXParam'].get_val()
+            #
+            if self.S1.Config['EquivPLMNList'] is not None:
+                IEs['EquivPLMNList'] = self.S1.Config['EquivPLMNList']
+            if isinstance(self.S1.Config['EmergNumList'], bytes_types):
+                IEs['EmergNumList'] = self.S1.Config['EmergNumList']
+            elif self.S1.Config['EmergNumList'] is not None:
+                IEs['EmergNumList'] = [{'ServiceCat': uint_to_bitlist(cat), 'Num': num} for \
+                                       (cat, num) in self.S1.Config['EmergNumList']]
+            if self.EMM.TAU_EPS_NETFEAT_SUPP:
+                IEs['EPSNetFeat'] = self.EMM.TAU_EPS_NETFEAT_SUPP
+            if self.EMM.TAU_SMS_SERV_STAT:
+                IEs['SMSServStat'] = self.EMM.TAU_SMS_SERV_STAT
+            #
+            self._IEs = IEs
+            self.set_msg(7, 73, **IEs)
+            self.encode_msg(7, 73)
+            #
+            if self.upd_type[0]:
+                # reactivate EPS bearers
+                self.BearActProc = self._act_bear()
+            else:
+                self.BearActProc = None
+            #
+            ret = self.S1.ret_s1ap_dnt(self._nas_tx)
+            if self.BearActProc:
+                ret.append(self.BearActProc)
+            if self.mtmsi_realloc >= 0:
+                self.init_timer()
+            else:
+                ret.extend(self._end())
+        #
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'DL', self._nas_tx) )
+        return ret
     
+    def _end(self):
+        ret = []
+        if self.EMM.TAU_S1REL and not self.BearActProc:
+            S1apProcRel = self.S1.init_s1ap_proc(S1APUEContextRelease, Cause=('nas', 'normal-release'))
+            if S1apProcRel:
+                ret.append(S1apProcRel)
+        self.rm_from_emm_stack()
+        return ret
+
 
 #------------------------------------------------------------------------------#
 # EMM connection management procedures (S1 mode only): TS 24.301, section 5.6
@@ -1105,11 +1446,92 @@ class EMMServiceRequest(EMMSigProc):
         )
     
     def process(self, pdu):
-        pass
+        # preempt the EMM stack
+        self.emm_preempt()
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'UL', pdu) )
+        self.errcause, self.UEInfo = None, {}
+        self.decode_msg(pdu, self.UEInfo)
+        #
+        # check local ID
+        if self.UE.IMSI is None:
+            # UEd was created based on a S-TMSI provided at the RRC layer
+            # -> we need to get its IMSI before continuing
+            try:
+                del self.UE.Server._UEpre[self.UE.MTMSI]
+            except:
+                pass
+            # need to request the IMSI, prepare an id request procedure
+            return self._ret_req_imsi()
+        #
+        elif self.EMM.require_auth(self, ksi=(0, self.UEInfo['KSI'].get_val())):
+            return self._ret_auth()
+        else:
+            # no auth procedure, ksi submitted by the UE is valid
+            # set UL NAS count for further KeNB derivation
+            secctx = self.S1.SEC[self.S1.SEC['KSI']]
+            secctx['UL_enb'] = self._nas_rx._ulcnt
+            if self.EMM.require_smc(self) and self.EMM.SER_SMC_ALW:
+                return self._ret_smc((0, self.UEInfo['KSI'].get_val()))
+            else:
+                # otherwise, go directly to postprocess
+                return self.postprocess()
+    
+    def postprocess(self, Proc=None):
+        if isinstance(Proc, EMMIdentification):
+            assert( Proc.IDType == NAS.IDTYPE_IMSI)
+            # got the UE's IMSI, check if it's allowed
+            if self.UE.IMSI is None:
+                # UE did actually not responded with its IMSI, this is bad !
+                # error 96: invalid mandatory info
+                self.errcause = 96
+                return self.output()
+            elif not self._chk_imsi():
+                return self.output()
+            if self.EMM.require_auth(self, ksi=(0, self.UEInfo['KSI'].get_val())):
+                return self._ret_auth()
+            else:
+                secctx = self.S1.SEC[self.S1.SEC['KSI']]
+                secctx['UL_enb'] = self._nas_rx._ulcnt
+                if self.EMM.require_smc(self) and self.EMM.SER_SMC_ALW:
+                    return self._ret_smc((0, self.UEInfo['KSI'].get_val()))
+        #
+        if isinstance(Proc, EMMAuthentication):
+            if not Proc.success:
+                self.abort()
+                return []
+            elif self.EMM.require_smc(self):
+                # ksi established during the auth procedure
+                return self._ret_smc(Proc.ksi)
+        #
+        elif isinstance(Proc, EMMSecurityModeControl):
+            if not Proc.success:
+                self.abort()
+                return []
+        #
+        elif Proc != self and Proc is not None:
+            self._err = Proc
+            assert()
+        #
+        return self.output()
+    
+    def output(self):
+        if self.errcause:
+            self._nas_tx = NAS.EMMStatus(EMMCause=self.errcause)
+            return self.S1.ret_s1ap_dnt(self._nas_tx)
+        #
+        else:
+            # reactivate all PDN connections
+            S1apProc = self._act_bear()
+            self.rm_from_emm_stack()
+            if S1apProc:
+                return [S1apProc]
+            else:
+                return []
 
 
 class EMMExtServiceRequest(EMMSigProc):
-    """Service request procedure: TS 24.301, section 5.6.1
+    """Extended service request procedure: TS 24.301, section 5.6.1
     
     UE-initiated
     
@@ -1132,38 +1554,17 @@ class EMMExtServiceRequest(EMMSigProc):
         )
     
     def process(self, pdu):
-        pass
-
-
-class EMMExtServiceRequest(EMMSigProc):
-    """Service request procedure: TS 24.301, section 5.6.1
-    
-    UE-initiated
-    
-    CN message:
-        None
-    
-    UE message:
-        EMMExtServiceRequest (PD 7, Type 76), IEs:
-        - Type1V    : NAS_KSI
-        - Type1V    : ServiceType
-        - Type4LV   : MTMSI
-        - Type1TV   : CSFBResponse
-        - Type4TLV  : EPSBearerCtxtStat
-        - Type1TV   : DeviceProp
-    """
-    
-    Cont = (
-        None,
-        (TS24301_EMM.EMMExtServiceRequest, )
-        )
-    
-    def process(self, pdu):
-        pass
+        # preempt the EMM stack
+        self.emm_preempt()
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'UL', pdu) )
+        self.UEInfo = {}
+        self.decode_msg(pdu, self.UEInfo)
+        # TODO
 
 
 class EMMCPServiceRequest(EMMSigProc):
-    """Service request procedure: TS 24.301, section 5.6.1
+    """Control-Plane service request procedure: TS 24.301, section 5.6.1
     
     UE-initiated
     
@@ -1186,7 +1587,13 @@ class EMMCPServiceRequest(EMMSigProc):
         )
     
     def process(self, pdu):
-        pass
+        # preempt the EMM stack
+        self.emm_preempt()
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'UL', pdu) )
+        self.UEInfo = {}
+        self.decode_msg(pdu, self.UEInfo)
+        # TODO
 
 
 class EMMDLNASTransport(EMMSigProc):

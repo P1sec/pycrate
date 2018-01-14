@@ -37,7 +37,8 @@ from .HdlrUESMS  import *
 # WNG: all procedures that call .require_smc() method need to be set in this LUT
 ProcAbbrLUT = {
     'EMMAttach'                : 'ATT',
-    'EMMTrackingAreaUpdating'  : 'RAU',
+    'EMMTrackingAreaUpdate'    : 'TAU',
+    'EMMDetachUE'              : 'DET',
     'EMMServiceRequest'        : 'SER',
     'EMMExtServiceRequest'     : 'SER',
     'EMMCPServiceRequest'      : 'SER',
@@ -84,22 +85,32 @@ class UEEMMd(SigStack):
     #--------------------------------------------------------------------------#
     # T3412, periodic TAU timer: dict {'Unit': uint3, 'Value': uint5}
     # Unit: 0: 2s, 1: 1mn, 2: 6mn, 7: deactivated
-    _T3412             = {'Unit': 1, 'Value': 5} # 5mn
-    #_T3412             = {'Unit': 7, 'Value': 0} # deactivated
+    #_T3412             = {'Unit': 2, 'Value': 5} # 30mn
+    _T3412             = {'Unit': 1, 'Value': 1} # deactivated
+    # 
     # Reattach attempt after a failure timer: dict {'Unit': uint3, 'Value': uint5}
     # Unit: 0: 2s, 1: 1mn, 2: 6mn, 7: deactivated
     _T3402              = {'Unit': 1, 'Value': 2} # 2mn
-    # T3412Ext, TAU extended timer: None or dict {'Unit': uint3, 'Value': uint5}
+    #
+    # T3412Ext, power saving mode, TAU extended timer: None or dict {'Unit': uint3, 'Value': uint5}
     # Unit: 0: 10mn, 1: 1h, 2: 10h, 3: 2s, 4: 30s, 5: 1mn, 6: 320h, 7: deactivated
     _T3412_EXT          = None
+    #
+    # T3324, power saving mode, time the UE stays active after idle mode following
+    # Attach or TAU: None or dict {'Unit': uint3, 'Value': uint5}
+    # # Unit: 0: 2s, 1: 1mxn, 2: 6mn, 7: deactivated
+    _T3324              = None
+    #
     # EPS Network features support: if None, not sent, otherwise dict
     # {'CP_CIoT': uint1, 'ERwoPDN': uint1, 'ESR_PS': uint1, 'CS_LCS': uint2,
     #  'EPC_LCS': uint1, 'EMC_BS': uint1, 'IMS_VoPS': uint1, 'EPCO': uint1,
     #  'HC_CP_CIoT': uint1, 'S1U_Data': uint1, 'UP_CIoT': uint1}
     _EPS_NETFEAT_SUPP   = None
+    #
     # Extended DRX support: if None and sent by the UE, value returned it the one
     # from the UE ; otherwise dict {'PTX': uint4, 'eDRX': uint4}
     _EXTDRX             = None
+    #
     # SMS service status: if defined (status cause 0 to 3), denies SMS service 
     # for EPS-only attach
     _SMS_SERV_STAT      = None
@@ -140,8 +151,9 @@ class UEEMMd(SigStack):
     # re-authentication policy:
     # this forces an auth procedure every X EMM TAU / (Ext/CP) SER procedures
     # even if a valid KSI is provided by the UE
-    AUTH_TAU            = 3
-    AUTH_SER            = 3
+    AUTH_TAU            = 1
+    AUTH_SER            = 5
+    AUTH_DET            = 1 # only applied to Detach without UE power off
     
     #--------------------------------------------------------------------------#
     # EMMSecurityModeControl policy
@@ -152,7 +164,8 @@ class UEEMMd(SigStack):
     # set proc abbreviation in the list: 'ATT', 'TAU', 'SER'
     SMC_DISABLED_PROC   = []
     # list of algorithm priorities
-    SMC_EEA_PRIO        = [2, 1, 0]
+    #SMC_EEA_PRIO        = [2, 1, 0]
+    SMC_EEA_PRIO        = [0]
     SMC_EIA_PRIO        = [2, 1]
     #
     # UE security capabilities: add dummy 3G sec cap if GPRS sec cap available
@@ -195,7 +208,8 @@ class UEEMMd(SigStack):
     #--------------------------------------------------------------------------#
     ATT_T3412           = _T3412
     ATT_T3402           = _T3402
-    ATT_T3412_EXT       = _T3412_EXT 
+    ATT_T3412_EXT       = _T3412_EXT
+    ATT_T3324           = _T3324
     ATT_EPS_NETFEAT_SUPP = _EPS_NETFEAT_SUPP
     ATT_EXTDRX          = _EXTDRX
     ATT_SMS_SERV_STAT   = _SMS_SERV_STAT
@@ -208,13 +222,34 @@ class UEEMMd(SigStack):
     # if we want to run a GUTI Reallocation within the EMM Attach Accept
     ATT_GUTI_REALLOC    = True
     # if we want to release the S1 ue context after the procedure ends 
-    ATT_S1REL           = True
+    ATT_S1REL           = False
     #
     # when a UEd with MTMSI was created, that in fact corresponds to a UE
     # already set in Server.UE, we need to reject it after updating Server.MTMSI
     ATT_IMSI_PROV_REJECT = 17
     # timer within Attach Reject, Unit: 0: 2s, 1: 1mn, 2: 6mn, 7: deactivated
     ATT_T3346           = {'Unit': 0, 'Value': 2}
+    
+    #--------------------------------------------------------------------------#
+    # EMMTrackingAreaUpdate policy
+    #--------------------------------------------------------------------------#
+    TAU_T3412           = _T3412
+    TAU_T3402           = _T3402
+    TAU_T3412_EXT       = _T3412_EXT
+    TAU_T3324           = _T3324
+    TAU_EPS_NETFEAT_SUPP = _EPS_NETFEAT_SUPP
+    TAU_EXTDRX          = _EXTDRX
+    TAU_SMS_SERV_STAT   = _SMS_SERV_STAT
+    # if we want to run a GUTI Reallocation within the EMM TAU Accept
+    TAU_GUTI_REALLOC    = True
+    # if we want to release the S1 ue context after the procedure ends 
+    TAU_S1REL           = False
+    
+    #--------------------------------------------------------------------------#
+    # EMMServiceRequest policy
+    #--------------------------------------------------------------------------#
+    # to always start an SMC after a service request, even if no auth happened
+    SER_SMC_ALW         = False
     
     
     def _log(self, logtype, msg):
@@ -236,23 +271,22 @@ class UEEMMd(SigStack):
     def set_s1(self, ues1d):
         self.S1 = ues1d
     
-    def process(self, NasRx, sec):
+    def process(self, NasRx):
         """process a NAS EMM message (NasRx) sent by the UE,
         and return a list (possibly empty) of S1AP procedure(s) to be sent back 
         to the eNB
         
-        sec [bool], indicates if the NasRx message security was correctly checked
+        NasRx has 2 additional attributes (_sec [bool], _ulcnt [uint])
         """
         if self.RX_HOOK is not None:
             return self.RX_HOOK(NasRx)
         #
         name = NasRx._name
         # 1) in case sec check failed, see if request is still to be accepted
-        if not sec and name not in self.SEC_NOTNEED:
+        if not NasRx._sec and name not in self.SEC_NOTNEED:
             # discard the msg
             self._log('INF', 'discarding %s message, failed security check' % name)
             return []
-        NasRx._sec = sec
         #
         # 2) check if it is a Detach Request
         if name == 'EMMDetachRequestMO':
@@ -294,7 +328,7 @@ class UEEMMd(SigStack):
             else:
                 self._log('WNG', 'unexpected %s message, sending STATUS 98' % name)
                 # cause 98: Message type not compatible with the protocol state
-                return self.S1.ret_s1ap_dnt(NAS.EMMStatus(val={'EMMCause':98}, sec=sec))
+                return self.S1.ret_s1ap_dnt(NAS.EMMStatus(val={'EMMCause':98}, sec=NasRx._sec))
         #
         # 3) start a new UE-initiated procedure
         elif name in EMMProcUeDispatcherStr:
@@ -308,7 +342,7 @@ class UEEMMd(SigStack):
         else:
             self._log('WNG', 'unexpected %s message, sending STATUS 96' % name)
             # cause 96: Invalid mandatory information
-            return self.S1.ret_s1ap_dnt(NAS.EMMStatus(val={'EMMCause':96}, sec=sec))
+            return self.S1.ret_s1ap_dnt(NAS.EMMStatus(val={'EMMCause':96}, sec=NasRx._sec))
     
     def init_proc(self, ProcClass, encod=None, emm_preempt=False, **kw):
         """initialize a CN-initiated EMM procedure of class `ProcClass' and 
@@ -324,7 +358,7 @@ class UEEMMd(SigStack):
         """abort all running procedures
         """
         for Proc in self.Proc[::-1]:
-            Proc.abort()     
+            Proc.abort()
     
     #--------------------------------------------------------------------------#
     # SMC and security-related methods
@@ -333,7 +367,7 @@ class UEEMMd(SigStack):
     def require_auth(self, Proc, ksi=None):
         # ksi is a 2-tuple (TSC 0..1, Value 0..7)
         # check if an EMMAuthentication procedure is required
-        if self.S1.NASSEC_DISABLED or self.AUTH_DISABLED:
+        if self.S1.SECNAS_DISABLED or self.AUTH_DISABLED:
             return False
         elif ksi is None or ksi[1] == 7:
             self.S1.SEC['KSI'] = None
@@ -349,9 +383,17 @@ class UEEMMd(SigStack):
             if isinstance(Proc, EMMAttach):
                 # always authenticate within an Attach
                 return True
-            elif isinstance(Proc, EMMTrackingAreaUpdating):
+            elif isinstance(Proc, EMMTrackingAreaUpdate):
                 self.S1.SEC['POL']['TAU'] += 1
                 if self.AUTH_TAU and self.S1.SEC['POL']['TAU'] % self.AUTH_TAU == 0:
+                    self.S1.SEC['KSI'] = None
+                    return True
+                else:
+                    self.S1.SEC['KSI'] = ksi
+                    return False
+            elif isinstance(Proc, EMMDetachUE):
+                self.S1.SEC['POL']['DET'] += 1
+                if self.AUTH_DET and self.S1.SEC['POL']['TAU'] % self.AUTH_DET == 0:
                     self.S1.SEC['KSI'] = None
                     return True
                 else:
@@ -372,7 +414,7 @@ class UEEMMd(SigStack):
     
     def require_smc(self, Proc):
         # check if an EMMSecurityModeControl procedure is required
-        if self.S1.NASSEC_DISABLED or self.SMC_DISABLED:
+        if self.S1.SECNAS_DISABLED or self.SMC_DISABLED:
             return False
         #
         elif ProcAbbrLUT[Proc.Name] in self.SMC_DISABLED_PROC:
@@ -453,7 +495,7 @@ class UEEMMd(SigStack):
                       'CTX'  : ctx,
                       'Kasme': vect[3]}
         #
-        secctx['UL'], secctx['DL']  = 0, 0
+        secctx['UL'], secctx['DL'], secctx['UL_enb'] = 0, 0, 0
         self.S1.SEC[ksi] = secctx
         self.S1.SEC['KSI'] = ksi
     
@@ -465,7 +507,8 @@ class UEEMMd(SigStack):
                   'EEA'    : 0,
                   'EIA'    : 0,
                   'UL'     : 0,
-                  'DL'     : 0}
+                  'DL'     : 0,
+                  'UL_enb' : 0}
         self.S1.SEC[0] = secctx
     
     def set_sec_ctx_smc(self, ksi):
@@ -478,34 +521,44 @@ class UEEMMd(SigStack):
             secctx['Knasenc'] = conv_A7(secctx['Kasme'], 1, secctx['EEA'])[16:32]
             secctx['Knasint'] = conv_A7(secctx['Kasme'], 2, secctx['EIA'])[16:32]
     
-    def set_sec_ue_cap(self):
+    def set_sec_cap(self):
+        # build UESecCap from UENetCap
+        if 'UENetCap' in self.UE.Cap:
+            ueseccap = self.UE.Cap['UENetCap'][0]
+            if len(ueseccap) > 4:
+                # we have more than 3G and 4G sec cap
+                ueseccap = ueseccap[:4]
+            if len(ueseccap) == 4:
+                # void UCS2 support
+                lastoct  = ord(ueseccap[3:4])
+                if lastoct & 0x80:
+                    ueseccap = ueseccap[:3] + bchr(lastoct^0x80)
+                if 'MSNetCap' in self.UE.Cap:
+                    ueseccap += self._get_sec_gea_cap()
+            else:
+                assert( len(ueseccap) == 2 )
+                if self.SMC_SECCAP_W2G and 'MSNetCap' in self.UE.Cap:
+                    ueseccap += b'\0\0'
+                    ueseccap += self._get_sec_gea_cap()
+            UESecCap = NAS.UESecCap()
+            UESecCap.from_bytes(ueseccap)
+            self.UE.Cap['UESecCap'] = (ueseccap, UESecCap)
+    
+    def _get_sec_gea_cap(self):
+        msnetcap = self.UE.Cap['MSNetCap'][1]()
+        v = msnetcap[0]<< 6 # GEA1
+        if isinstance(msnetcap[8], list):
+            # Extended_GEA_bits
+            for i, b in enumerate(msnetcap[8]):
+                v += b << (5-i)
+        # TODO: add GIA sec cap
+        return bchr(v)
+    
+    def get_sec_cap(self):
         if 'UESecCap' not in self.UE.Cap:
             # build UESecCap from UENetCap
             if 'UENetCap' in self.UE.Cap:
-                ueseccap = self.UE.Cap['UENetCap'][0]
-                if len(ueseccap) > 4:
-                    # we have more than 3G and 4G sec cap
-                    ueseccap = ueseccap[:4]
-                if len(ueseccap) == 4:
-                    # void UCS2 support
-                    lastoct  = ord(ueseccap[3:4])
-                    if lastoct & 0x80:
-                        ueseccap = ueseccap[:3] + bchr(lastoct^0x80)
-                    # TODO: add GPRS sec cap if available
-                else:
-                    assert( len(ueseccap) == 2 )
-                    if self.SMC_SECCAP_W2G:
-                        ueseccap += b'\0\0'
-                        # TODO: add GPRS sec cap if available
-                UESecCap = NAS.UESecCap()
-                UESecCap.from_bytes(ueseccap)
-                self.UE.Cap['UESecCap'] = (ueseccap, UESecCap)
-        
-    def get_sec_ue_cap(self):
-        if 'UESecCap' not in self.UE.Cap:
-            # build UESecCap from UENetCap
-            if 'UENetCap' in self.UE.Cap:
-                self.set_sec_ue_cap()
+                self.set_sec_cap()
                 return self.UE.Cap['UESecCap'][0]
             else:
                 # build UESecCap from SMC_DUMMY_SECCAP
@@ -576,22 +629,40 @@ class UEESMd(SigStack):
     # activated to be processed
     SEC_NOTNEED = {'ESMPDNConnectivityRequest'}
     
-    # Packet Data Network configuration, per APN
-    # PDN default S1 QoS
-    PDNConfig = {
-        '*'      : {'QCI'          : 9, # QoS class id (9: internet browsing), NAS + S1 parameter
-                    'PriorityLevel': 15, # no priority (S1 parameter)
-                    'PreemptCap'   : 'shall-not-trigger-pre-emption', # or 'may-trigger-pre-emption' (S1 parameter)
-                    'PreemptVuln'  : 'not-pre-emptable', # 'pre-emptable' (S1 parameter)
+    # default Radio Access Bearer settings for PDN config, per APN
+    # QCI (being LTE + EPS) is copied from the CorenetServer.ConfigPDN at UE init
+    RABConfig = {
+        '*'      : {'PriorityLevel': 15, # no priority
+                    'PreemptCap'   : 'shall-not-trigger-pre-emption', # or 'may-trigger-pre-emption'
+                    'PreemptVuln'  : 'not-pre-emptable', # or 'pre-emptable'
+                    'BitrateDL'    : 100000000, # aggregate max bitrate downlink (b/s)
+                    'BitrateUL'    : 50000000, # aggregate max bitrate uplink (b/s)
                     },
-        'corenet': {'QCI'          : 9, # QoS class id (9: internet browsing), NAS + S1 parameter
-                    'PriorityLevel': 15, # no priority (S1 parameter)
-                    'PreemptCap'   : 'shall-not-trigger-pre-emption', # or 'may-trigger-pre-emption' (S1 parameter)
-                    'PreemptVuln'  : 'not-pre-emptable', # 'pre-emptable' (S1 parameter)
+        'corenet': {'PriorityLevel': 15, # no priority
+                    'PreemptCap'   : 'shall-not-trigger-pre-emption', # or 'may-trigger-pre-emption'
+                    'PreemptVuln'  : 'not-pre-emptable', # 'pre-emptable'
+                    'BitrateDL'    : 100000000, # aggregate max bitrate downlink (b/s)
+                    'BitrateUL'    : 50000000, # aggregate max bitrate uplink (b/s)
                     }
         }
-    # PDN UE config, per APN, built at runtime
-    PDN = {}
+    # when the UE 1st attach it gets a specific PDNConfig dict with a copy of this content
+    # under the key 'RAB'
+    
+    # Protocol config option with authentication
+    # if bypass enabled, the PAP / CHAP authentication will not be checked against
+    # the CorenetServer.PDNConfig and always return authentication success
+    PDN_PAP_BYPASS  = True
+    PDN_CHAP_BYPASS = True
+    
+    #--------------------------------------------------------------------------#
+    # ESMStatus policy
+    #--------------------------------------------------------------------------#
+    # behaviour when receiving ESM STATUS
+    # 0: do nothing,
+    # 1: abort the top ESM procedure for the indicated EPS bearer ID
+    # 2: abort the whole ESM procedure stack for the indicated EPS bearer ID
+    # 3: abort all the ESM procedures stacks
+    STAT_CLEAR = 3
     
     #--------------------------------------------------------------------------#
     # ESMDefaultEPSBearerCtxtAct / ESMDedicatedEPSBearerCtxtAct policy
@@ -622,7 +693,9 @@ class UEESMd(SigStack):
         self.set_s1(ues1d)
         #
         # dict of ongoing ESM procedures (indexed by EPS bearer ID)
-        self.Proc = {i: [] for i in range(16)}
+        self.Proc  = {i: [] for i in range(16)}
+        # dict of configured PDN, indexed by EPS bearer ID
+        self.PDN   = {}
         # dict of ongoing ESM transactions IEs
         self.Trans = {}
         # list of tracked procedures (requires TRACK_PROC = True)
@@ -633,10 +706,10 @@ class UEESMd(SigStack):
     
     def process_buf(self, buf, sec, EMMProc=None):
         """process a NAS ESM message buffer (buf) sent by the UE,
-        if the decoding is correct, return the result or process()
+        if the decoding is correct, return the result of process()
         """
         ESMRx, err = NAS.parse_NASLTE_MO(buf, inner=False)
-        if err: 
+        if err:
             # invalid ESM message
             self._log('WNG', 'invalid EPS NAS ESM message: %s' % hexlify(buf).decode('ascii'))
             ESMTx = NAS.ESMStatus(val={'ESMCause':err}, sec=sec)
@@ -650,14 +723,16 @@ class UEESMd(SigStack):
         #
         elif self.UE.TRACE_NAS_EPS:
             self._log('TRACE_NAS_EPS_UL', '\n' + ESMRx.show())
-        return self.process(ESMRx, sec=sec, EMMProc=EMMProc)
+        ESMRx._sec = sec
+        return self.process(ESMRx, EMMProc=EMMProc)
     
-    def process(self, NasRx, sec, EMMProc=None):
+    def process(self, NasRx, EMMProc=None):
         """process a NAS ESM message (NasRx) sent by the UE,
         and return a list (possibly empty) of S1AP procedure(s) to be sent back 
         to the eNB
         
-        sec [bool], indicates if the NasRx message security was correctly checked
+        NasRx has 2 additional attributes (_sec [bool], _ulcnt [uint])
+        
         EMMProc [EMMSigProc or None], indicates if the NAS ESM message is handled in 
         the context of an EMM procedure 
         """
@@ -666,11 +741,10 @@ class UEESMd(SigStack):
         #
         name = NasRx._name
         # 1) in case sec check failed, see if request is still to be accepted
-        if not sec and name not in self.SEC_NOTNEED:
+        if not NasRx._sec and name not in self.SEC_NOTNEED:
             # discard the msg
             self._log('INF', 'discarding %s message, failed security check' % name)
             return self.S1.ret_s1ap_dnt(self.output_nas_esm(None, EMMProc))
-        NasRx._sec = sec
         #
         # 2) check if there is any ongoing ESM procedure for the given EPS bearer id
         ebi = NasRx[0].get_val()
@@ -685,6 +759,9 @@ class UEESMd(SigStack):
                 elif self.STAT_CLEAR == 2:
                     #self._log('WNG', 'STATUS, disabling %r' % ProcStack)
                     self.clear(ebi)
+                elif self.STAT_CLEAR == 3:
+                    #self._log('WNG', 'STATUS, disabling %r' % self.Proc)
+                    self.clear()
                 return self.S1.ret_s1ap_dnt(self.output_nas_esm(None, EMMProc))
             #
             # 2.2) in case of expected response
@@ -704,12 +781,12 @@ class UEESMd(SigStack):
             else:
                 self._log('WNG', 'unexpected %s message, sending STATUS 98' % name)
                 # cause 98: Message type not compatible with the protocol state
-                ESMTx = NAS.ESMStatus(val={'ESMCause':96}, sec=sec)
+                ESMTx = NAS.ESMStatus(val={'ESMCause':96}, sec=NasRx._sec)
                 return self.S1.ret_s1ap_dnt(self.output_nas_esm(ESMTx, EMMProc))
         #
         # 3) start a new UE-initiated procedure
         elif name in ESMProcUeDispatcherStr:
-            Proc = ESMProcUeDispatcherStr[name](self, sec=sec, ebi=ebi, EMMProc=EMMProc)
+            Proc = ESMProcUeDispatcherStr[name](self, ebi=ebi, EMMProc=EMMProc)
             self.Proc[ebi].append(Proc)
             if self.TRACK_PROC:
                 self._proc.append(Proc)
@@ -719,7 +796,7 @@ class UEESMd(SigStack):
         else:
             self._log('WNG', 'unexpected %s message, sending STATUS 96' % name)
             # cause 96: Invalid mandatory information
-            ESMTx = NAS.ESMStatus(val={'ESMCause':96}, sec=sec)
+            ESMTx = NAS.ESMStatus(val={'ESMCause':96}, sec=NasRx._sec)
             return self.S1.ret_s1ap_dnt(self.output_nas_esm(ESMTx, EMMProc))
     
     def output_nas_esm(self, ESMTx, EMMProc):
@@ -730,8 +807,8 @@ class UEESMd(SigStack):
             else:
                 return None
         elif EMMProc:
-            EMMTx = EMMProc._nas_tx
             ESMTx._sec = False
+            EMMTx = EMMProc._nas_tx
             EMMTx['ESMContainer']['V'].set_val(self.S1.output_nas_sec(ESMTx))
             return EMMTx
         else:
@@ -765,20 +842,118 @@ class UEESMd(SigStack):
             for Proc in self.Proc[ebi][::-1]:
                 Proc.abort()
     
+    def pdn_clear(self, ebi=None):
+        if ebi is None:
+            for ebi, pdncfg in list(self.PDN.items()):
+                self.UE.Server.GTPUd.rem_mobile(pdncfg['RAB']['SGW-GTP-TEID'])
+                del self.PDN[ebi]
+        elif ebi in self.PDN:
+            self.UE.Server.GTPUd.rem_mobile(self.PDN[ebi]['RAB']['SGW-GTP-TEID'])
+            del self.PDN[ebi]
+    
+    def pdn_suspend(self, ebi=None):
+        if ebi is None:
+            for ebi, pdncfg in self.PDN.items():
+                if pdncfg['state'] == 1:
+                    self.UE.Server.GTPUd.rem_mobile(pdncfg['RAB']['SGW-GTP-TEID'])
+                    pdncfg['state'] = 0
+        elif ebi in self.PDN and self.PDN[ebi]['state'] == 1:
+            self.UE.Server.GTPUd.rem_mobile(self.PDN[ebi]['RAB']['SGW-GTP-TEID'])
+            self.PDN[ebi]['state'] = 0
+    
     #--------------------------------------------------------------------------#
     # transaction processing
     #--------------------------------------------------------------------------#
     
     def process_trans(self, trans_id):
+        """process an ESM transaction initiated by the UE, and return a network-initiated
+        procedure with IEs configured and None, or None and the ESM error code
+        """
         try:
             trans = self.Trans[trans_id]
         except:
             # err cause 47: PTI mismatch
             return None, 47
+        #
         if trans['Type'] == 'Default':
-            # need APN
-            # TODO
-            return None, None
+            IEs = {}
+            #
+            # 1) need APN
+            if trans['APN'] is None:
+                # err cause 27: missing APN
+                return None, 27
+            apn = trans['APN'][0][1].get_val()
+            if apn in self.PDNConfig:
+                pdncfg = self.PDNConfig[apn]
+            elif '*' in self.PDNConfig:
+                pdncfg = self.PDNConfig['*']
+            else:
+                # err cause 27: unknown APN
+                return None, 27
+            IEs['APN'] = trans['APN'].get_val()
+            #
+            # 2) check the ue request against pdncfg
+            # 2.1) check the PDN type
+            pdntue  = trans['PDNType'].get_val()
+            pdntnet = pdncfg['PDNAddr'][0]
+            if pdntue == 1:
+                if pdntnet not in (1, 3):
+                    # err cause 51: PDN type IPv6 only allowed
+                    return None, 51
+                else:
+                    IEs['PDNAddr'] = {'Type': 1, 'Addr': inet_aton_cn(1, pdncfg['PDNAddr'][1])}
+                    ipaddr = (1, pdncfg['PDNAddr'][1])
+            elif pdntue == 2:
+                if pdntnet not in (2, 3):
+                    # err cause 50: PDN type IPv4 only allowed
+                    return None, 50
+                else:
+                    IEs['PDNAddr'] = {'Type': 2, 'Addr': inet_aton_cn(2, pdncfg['PDNAddr'][2])}
+                    ipaddr = (2, pdncfg['PDNAddr'][2])
+            elif pdntue == 3:
+                if not 1 <= pdntnet <= 3:
+                    # err cause 111: Protocol error, unspecified
+                    return None, 111
+                else:
+                    IEs['PDNAddr'] = {'Type': pdntnet, 'Addr': inet_aton_cn(*pdncfg['PDNAddr'])}
+                    ipaddr = pdncfg['PDNAddr']
+            else:
+                # err cause 28: Unknown PDN type
+                return None, 28
+            #
+            # 2.2) check the protocol config options
+            if trans['ProtConfig']:
+                IEs['ProtConfig'], pdnaddrreq = self.process_protconfig(pdncfg, trans['ProtConfig'])
+                if not pdnaddrreq:
+                    IEs['PDNAddr'] = b''
+            #
+            if 'NBIFOMContainer' in trans:
+                self._log('WNG', 'NBIFOMContainer IE unsupported')
+            if 'HdrCompConfig' in trans:
+                self._log('WNG', 'HdrCompConfig IE unsupported')
+            if 'ExtProtConfig' in trans:
+                self._log('WNG', 'ExtProtConfig IE unsupported')
+            #
+            # 3) get the default QCI for the given APN
+            IEs['EPSQoS'] = {'QCI': pdncfg.get('QCI', 0x80)}
+            #
+            # 4) get the 1st available EPS bearer ID
+            ebi = 0
+            for i in range(5, 16):
+                if i not in self.PDN:
+                    ebi = i
+                    break
+            if not ebi:
+                # err cause 65: Maximum number of EPS bearers reached
+                return None, 65
+            #
+            # 5) set the default RAB for the given APN / EPS bearer ID
+            self.rab_set_default(ebi, apn, ipaddr, pdncfg)
+            #
+            # initialize an ESMDefaultEPSBearerCtxtAct with the given EPS Bearer ID and IEs
+            return self.init_proc(ESMDefaultEPSBearerCtxtAct, ebi=ebi, encod={(2, 193): IEs}), None
+        
+        #
         elif trans['Type'] == 'Dedicated':
             # TODO
             return None, None
@@ -791,6 +966,219 @@ class UEESMd(SigStack):
         else:
             assert()
     
+    def rab_set_default(self, ebi, apn, ipaddr, pdncfg):
+        pdn = cpdict(pdncfg)
+        pdn['PDNAddr'] = ipaddr
+        pdn['APN'] = apn
+        pdn['RAB'].update({
+            'E-RABlevelQoSParameters': {
+                'qCI': pdncfg['QCI'],
+                'allocationRetentionPriority': {
+                    'priorityLevel': pdncfg['RAB']['PriorityLevel'],
+                    'pre-emptionCapability': pdncfg['RAB']['PreemptCap'],
+                    'pre-emptionVulnerability': pdncfg['RAB']['PreemptVuln']
+                    },
+                },
+            'SGW-TLA': self.UE.Server.get_sgw_addr(),
+            'ENB-TLA': None, # will be updated after eNB setup ERAB
+            'SGW-GTP-TEID': self.UE.Server.get_gtp_teid(), # teid_ul
+            'ENB-GTP-TEID': None, # teid_dl, will be updated after the eNB setup the ERAB
+            })
+        pdn['state'] = 0 # 0: suspended (to GTP tunnel exists), 1: active (GTP tunnel exists)
+        self.PDN[ebi] = pdn
+    
+    #--------------------------------------------------------------------------#
+    # protocol configuration processing
+    #--------------------------------------------------------------------------#
+    
+    def process_protconfig(self, config, request):
+        """process an EPS Protocol Configuration Options request, and returns
+        the response Protocol Configuration Options message, and a bool indicating 
+        if the PDN address for the UE is required in the NAS signalling
+        """
+        if request[2].get_val() != 0:
+            # not PPP with IP PDP
+            return None
+        RespElt, pdnaddrreq = [], False
+        #self._log('DBG', 'config: %r' % config)
+        #self._log('DBG', 'request: %r' % request)
+        for ReqElt in request[3]:
+            pcid = ReqElt[0].get_val()
+            #
+            if pcid == 0x8021:
+                # IPCP
+                if isinstance(ReqElt[2], NAS.NCP) and ReqElt[2][0].get_val() == 1 \
+                and isinstance(ReqElt[2][3], NAS.NCPDataConf):
+                    # NCP config req
+                    ncpreq = []
+                    for NcpOpt in ReqElt[2][3]:
+                        ncpreq.append( NcpOpt[0].get_val() )
+                    NcpOptResp, dnsind = [], 0
+                    if 3 in ncpreq:
+                        # IPv4 addr
+                        ip = None
+                        for ipaddr in config['PDNAddr']:
+                            if ipaddr[0] == 1:
+                                ip = inet_aton_cn(*ipaddr)
+                                break
+                            elif ipaddr[0] == 3:
+                                ip = inet_aton_cn(1, ipaddr[1])
+                                break
+                        if ip is None:
+                            self._log('WNG', 'protocol config element IPCP IPv4 address: '\
+                                      'no config available')
+                        else:
+                            NcpOptResp.append({'Type': 3, 'Data': ip})
+                        ncpreq.remove(3)
+                    if 129 in ncpreq:
+                        # 1st DNS IPv4 addr
+                        dns = None
+                        if 'DNS' in config:
+                            for dnsaddr in config['DNS']:
+                                dnsind += 1
+                                if dnsaddr[0] == 1:
+                                    dns = inet_aton_cn(*dnsaddr)
+                                    break
+                        if dns is None:
+                            self._log('WNG', 'protocol config element IPCP 1st DNS IPv4: '\
+                                      'no config available')
+                        else:
+                            NcpOptResp.append({'Type': 129, 'Data': dns})
+                        ncpreq.remove(129)
+                    if 131 in ncpreq:
+                        # 2nd DNS IPv4 addr
+                        dns = None
+                        if 'DNS' in config:
+                            for dnsaddr in config['DNS'][dnsind:]:
+                                if dnsaddr[0] == 1:
+                                    dns = inet_aton_cn(*dnsaddr)
+                                    break
+                        if dns is None:
+                            self._log('WNG', 'protocol config element IPCP 2nd DNS IPv4: '\
+                                      'no config available')
+                        else:
+                            NcpOptResp.append({'Type': 131, 'Data': dns})
+                        ncpreq.remove(131)
+                    if ncpreq:
+                        self._log('WNG', 'protocol config element IPCP unsupported, types: %r' % ncpreq)
+                    RespElt.append({'ID': 32801,
+                                    'Cont':{'Code': 2, 'Id': ReqElt[2][1].get_val(), 'Data': NcpOptResp}})
+                else:
+                    self._log('WNG', 'protocol config element IPCP invalid: %r' % ReqElt)
+            #
+            elif pcid == 0xC021:
+                # LCP
+                if isinstance(ReqElt[2], NAS.LCP) and ReqElt[2][0].get_val() == 1 \
+                and isinstance(ReqElt[2][3], NAS.LCPDataConf):
+                    # NCP config req
+                    lcpreq = []
+                    for LcpOpt in ReqElt[2][2]:
+                        lcpreq.append( LcpOpt[0].get_val() )
+                    if lcpreq:
+                        # TODO
+                        self._log('ERR', 'protocol config element LCP unsupported: %r' % ReqElt[2])
+                else:
+                    self._log('WNG', 'protocol config element LCP invalid: %r' % ReqElt)
+            #
+            elif pcid == 0xC023:
+                # PAP
+                if isinstance(ReqElt[2], NAS.PAP) and ReqElt[2][0].get_val() == 1:
+                    # PAP req
+                    if self.PDN_PAP_BYPASS:
+                        RespElt.append({'ID': 0xC023,
+                                        'Cont': {'Code': 2, # Ack
+                                                 'Id': ReqElt[2][1].get_val(),
+                                                 'Data':{'Msg': b''}}})
+                    
+                    else:
+                        authreq, ack = ReqElt[2][3], False
+                        peerid, passwd = authreq[1].get_val(), authreq[3].get_val()
+                        if 'PAP' in config and peerid in config['PAP'] and passwd == config['PAP'][peerid]:
+                            RespElt.append({'ID': 0xC023,
+                                            'Cont': {'Code': 2, # Ack
+                                                     'Id': ReqElt[2][1].get_val(),
+                                                     'Data':{'Msg': b''}}})
+                        else:
+                            if 'PAP' not in config:
+                                self._log('WNG', 'protocol config element PAP: no config available')
+                            RespElt.append({'ID': 0xC023,
+                                            'Cont': {'Code': 3, # Nak
+                                                     'Id': ReqElt[2][1].get_val(),
+                                                     'Data':{'Msg': b'you loose'}}})
+                else:
+                    self._log('WNG', 'protocol config element PAP invalid: %r' % ReqElt)
+            #
+            elif pcid == 0xC223:
+                # CHAP
+                if isinstance(ReqElt[2], NAS.CHAP) and ReqElt[2][0].get_val() == 1:
+                    # CHAP req
+                    if self.PDN_CHAP_BYPASS:
+                        RespElt.append({'ID': 0xC223,
+                                        'Cont': {'Code': 3, # success
+                                                 'Id': ReqElt[2][1].get_val(),
+                                                 'Data': b''}})
+                    else:
+                        # TODO
+                        self._log('ERR', 'protocol config element CHAP unsupported')
+                        RespElt.append({'ID': 0xC223,
+                                        'Cont': {'Code': 4, # failure
+                                                 'Id': ReqElt[2][1].get_val(),
+                                                 'Data': b''}})                    
+                else:
+                    self._log('WNG', 'protocol config element CHAP invalid: %r' % ReqElt)
+            #
+            elif pcid == 0x3:
+                # DNS IPv6
+                dns = None
+                if 'DNS' in config:
+                    for dnsaddr in config['DNS']:
+                        if dnsaddr[0] == 2:
+                            dns = inet_aton_cn(*dnsaddr)
+                            break
+                if dns is None:
+                    self._log('WNG', 'protocol config element DNS IPv6: no config available')
+                else:
+                    RespElt.append({'ID': 0x3, 'Cont': dns})
+            elif pcid == 0xA:
+                # IP alloc via NAS
+                pdnaddrreq = True
+            elif pcid == 0xD:
+                # DNS IPv4
+                dns = None
+                if 'DNS' in config:
+                    for dnsaddr in config['DNS']:
+                        if dnsaddr[0] == 1:
+                            dns = inet_aton_cn(*dnsaddr)
+                            break
+                if dns is None:
+                    self._log('WNG', 'protocol config element DNS IPv4: no config available')
+                else:
+                    RespElt.append({'ID': 0xD, 'Cont': dns})
+            elif pcid == 0x10:
+                # IPv4 link MTU
+                if 'MTU' in config:
+                    mtu = config['MTU'][0]
+                    if isinstance(mtu, integer_types) and 0 <= mtu <= 65535:
+                        mtu = pack('>H', mtu)
+                    if isinstance(mtu, bytes_types):
+                        RespElt.append({'ID': 0x10, 'Cont': mtu})
+                else:
+                    self._log('DBG', 'protocol config element IPv4 MTU: no config available')
+            elif pcid == 0x15:
+                # non-IP link MTU
+                if 'MTU' in config:
+                    mtu = config['MTU'][1]
+                    if isinstance(mtu, integer_types) and 0 <= mtu <= 65535:
+                        mtu = pack('>H', mtu)
+                    if isinstance(mtu, bytes_types):
+                        RespElt.append({'ID': 0x15, 'Cont': mtu})
+                else:
+                    self._log('DBG', 'protocol config element non-IP MTU: no config available')
+            else:
+                self._log('WNG', 'protocol config element not supported: %r' % ReqElt)
+        #
+        return {'Config': RespElt}, pdnaddrreq
+
 
 class UES1d(SigStack):
     """UE S1 handler within a CorenetServer instance
@@ -822,20 +1210,19 @@ class UES1d(SigStack):
     # this will systematically bypass all auth and smc procedures,
     # NAS MAC and UL count verification in the uplink
     # and setting of the EMM security header (and encryption) in the downlink
-    NASSEC_DISABLED = False
+    SECNAS_DISABLED = False
     #
     # finer grained NAS security checks:
     # True to drop NAS PDU when NAS MAC verification fails
-    NASSEC_MAC = False
+    SECNAS_MAC = False
     # True to drop NAS PDU when NAS UL count verification fails
-    NASSEC_UL  = False
+    SECNAS_UL  = False
     # WNG: EMM and ESM stacks have further control on accepting or not certain
     # NAS message even if security control have failed
     #
     # this will disable the setting of the EMM security header (and encryption)
     # in the downlink for given NAS message (by name)
-    NASSEC_PDU_NOSEC = {}
-    #
+    SECNAS_PDU_NOSEC = set()
     #
     # format of the security context dict self.SEC:
     # self.SEC is a dict of available 3G / 4G security contexts indexed by KSI,
@@ -861,6 +1248,13 @@ class UES1d(SigStack):
     #    available in the security context
     #    4 means 4G auth and native context
     # The POL dict indicates the authentication policy for each procedure
+    #
+    # in case an E-RAB get activated, but no security context exist
+    # we use this dummy AS security context for the eNB
+    SECAS_NULL_CTX = {
+        'Kenb': 32*b'\0',
+        'UESecCap': get_ueseccap_null_alg_lte()
+        }
     
     #--------------------------------------------------------------------------#
     # S1APPaging policy
@@ -873,6 +1267,17 @@ class UES1d(SigStack):
     PAG_RETR = 2
     # timer in sec between retries
     PAG_WAIT = 2
+    
+    #--------------------------------------------------------------------------#
+    # S1APInitialContextSetup policy
+    #--------------------------------------------------------------------------#
+    # to include UERadioCap in request when available (bool)
+    ICS_RADCAP_INCL = True
+    # to include GUMMEI in request when available (bool)
+    ICS_GUMMEI_INCL = True
+    # to activate traces (None or dict of values to be passed to the TraceActivation IEs)
+    ICS_TRACE_ACT = None
+    
     
     
     def _log(self, logtype, msg):
@@ -917,6 +1322,7 @@ class UES1d(SigStack):
     def unset_ran(self):
         del self.ENB
         self.SEC['KSI'] = None
+        self.clear()
         self.connected.clear()
     
     def set_ran_unconnected(self, enbd):
@@ -944,9 +1350,12 @@ class UES1d(SigStack):
     def reset_sec_ctx(self):
         self.SEC.clear()
         self.SEC['KSI'] = None
-        self.SEC['POL'] = {'TAU': 0, 'SER': 0}
+        self.SEC['POL'] = {'TAU': 0, 'DET': 0, 'SER': 0}
         if 'UESecCap' in self.UE.Cap:
             del self.UE.Cap['UESecCap']
+    
+    def get_sec_ctx(self):
+        return self.SEC.get(self.SEC['KSI'], None)
     
     #--------------------------------------------------------------------------#
     # handling of S1AP procedures
@@ -1060,7 +1469,7 @@ class UES1d(SigStack):
     
     def clear(self):
         # clears all running S1AP procedures
-        for Proc in self.Proc.values():
+        for Proc in list(self.Proc.values()):
             Proc.abort()
     
     #--------------------------------------------------------------------------#
@@ -1083,13 +1492,15 @@ class UES1d(SigStack):
         sh, pd = NasRxSec['SecHdr'].get_val(), NasRxSec['ProtDisc'].get_val()
         if sh == 0:
             # clear-text NAS message
+            NasRxSec._sec   = False
+            NasRxSec._ulcnt = 0
             if self.UE.TRACE_NAS_EPS:
                 self._log('TRACE_NAS_EPS_UL', '\n' + NasRxSec.show())
             if pd == 7:
-                S1apTxProc = self.EMM.process(NasRxSec, sec=False)
+                S1apTxProc = self.EMM.process(NasRxSec)
             else:
                 assert( pd == 2 ) # this won't happen due to parse_NASLTE_MO()
-                S1apTxProc = self.ESM.process(NasRxSec, sec=False)
+                S1apTxProc = self.ESM.process(NasRxSec)
         elif sh == 12:
             # NAS service request
             if self.UE.TRACE_NAS_EPS:
@@ -1099,38 +1510,33 @@ class UES1d(SigStack):
             except Exception as err:
                 self._log('ERR', 'unable to process the NAS EMMServiceRequest security, %s' % err)
                 return self._s1ap_nas_sec_err()
-            if err:
-                if NasRx:
-                    S1apTxProc = self.EMM.process_nas_servreq(NasRx, sec=False)
-                else:
-                    return self._s1ap_nas_sec_err()
+            if not NasRx:
+                return self._s1ap_nas_sec_err()
             else:
-                self.EMM.process_nas_servreq(NasRx, sec=True)
+                S1apTxProc = self.EMM.process(NasRx)
         elif sh in (1, 2, 3, 4) and pd == 7:
             # security-protected NAS message
-            if self.UE.TRACE_NAS_EPS_ENC:
-                self._log('TRACE_NAS_EPS_UL_ENC', '\n' + NasRxSec.show())
+            if self.UE.TRACE_NAS_EPS_SEC:
+                self._log('TRACE_NAS_EPS_UL_SEC', '\n' + NasRxSec.show())
             try:
                 NasRx, err = self.process_nas_sec(NasRxSec, sh)
             except Exception as err:
                 self._log('ERR', 'NAS SEC DL: unable to deprotect the NAS message %s' % err)
                 return self._s1ap_nas_sec_err()
-            if err >= 0x100:
-                # NAS SEC error
-                if NasRx:
-                    if self.UE.TRACE_NAS_EPS:
-                        self._log('TRACE_NAS_EPS_UL', '\n' + NasRx.show())
-                    S1apTxProc = self.EMM.process(NasRx, sec=False)
-                else:
-                    return self._s1ap_nas_sec_err()
-            elif err:
+            if err & 0xff:
+                # non-security related error
                 self._log('WNG', 'invalid EPS NAS inner message')
                 S1apTxProc = self.ret_s1ap_dnt(NAS.EMMStatus(val={'EMMCause':err}, sec=True))
+            elif not NasRx:
+                # deciphering failed
+                return self._s1ap_nas_sec_err()
             else:
+                if self.UE.TRACE_NAS_EPS:
+                    self._log('TRACE_NAS_EPS_UL', '\n' + NasRx.show())
                 if NasRx['ProtDisc'].get_val() == 7:
-                    S1apTxProc = self.EMM.process(NasRx, sec=True)
+                    S1apTxProc = self.EMM.process(NasRx)
                 else:
-                    S1apTxProc = self.ESM.process(NasRx, sec=True)
+                    S1apTxProc = self.ESM.process(NasRx)
         else:
             # cause: invalid mandatory information
             self._log('WNG', 'invalid EPS NAS message: %r' % NasRxSec)
@@ -1148,14 +1554,20 @@ class UES1d(SigStack):
         0x100: NAS KSI unknown
         0x200: MAC verification failed
         0x300: NAS UL count not matching
+        
+        The returned request gets 2 attributes (_sec [bool], _ulcnt [uint])
         """
-        if self.NASSEC_DISABLED:
+        if self.SECNAS_DISABLED:
+            ServReq._sec   = True
+            ServReq._ulcnt = 0
             return ServReq, 0
         #
         ue_ksi, ue_sqn = ServReq['KSI'].get_val(), ServReq['SeqnShort'].get_val()
         if ue_ksi not in self.SEC:
             self._log('WNG', 'NAS SEC: unknown NAS KSI %i in EMMServiceRequest' % ue_ksi)
             self.reset_sec_ctx()
+            ServReq._sec   = False
+            ServReq._ulcnt = ue_sqn # we are missing the MSB...
             return ServReq, 0x100
         else:
             self.SEC['KSI'] = ue_ksi
@@ -1166,23 +1578,29 @@ class UES1d(SigStack):
         verif_sqn = True if ue_sqn == sqnlsb else False
         #
         if not verif_mac:
-            if self.NASSEC_MAC:
+            if self.SECNAS_MAC:
                 self._log('ERR', 'NAS SEC UL: MAC short verif failed, dropping EMMServiceRequest')
                 return None, 0x200
             else:
                 self._log('WNG', 'NAS SEC UL: MAC short verif failed in EMMServiceRequest')
+                ServReq._sec   = False
+                ServReq._ulcnt = sqnmsb + ue_sqn
                 return ServReq, 0x200
         elif not verif_sqn:
-            if self.NASSEC_UL:
+            if self.SECNAS_UL:
                 self._log('ERR', 'NAS SEC UL: UL count verif failed, dropping EMMServiceRequest')
                 return None, 0x300
             else:
                 self._log('WNG', 'NAS SEC UL: UL count verif failed in EMMServiceRequest')
                 # resynch uplink count
+                ServReq._sec   = False
+                ServReq._ulcnt = sqnmsb + ue_sqn
                 secctx['UL'] = sqnmsb + ue_sqn + 1
                 return ServReq, 0x300
         #
-        secctx['UL'] += 1
+        ServReq._sec   = True
+        ServReq._ulcnt = secctx['UL']
+        secctx['UL']  += 1
         return ServReq, 0
     
     def process_nas_sec(self, NasRxSec, sh):
@@ -1195,9 +1613,13 @@ class UES1d(SigStack):
         0x100: NAS KSI unknown
         0x200: MAC verification failed
         0x300: NAS UL count not matching
+        
+        The returned message gets 2 attributes (_sec [bool], _ulcnt [uint])
         """
-        if self.NASSEC_DISABLED:
+        if self.SECNAS_DISABLED:
             # TODO: eventually remove the sec header
+            NasRxSec._sec   = True
+            NasRxSec._ulcnt = 0
             return NasRxSec, 0
         #
         if 'KSI' in NasRxSec._by_name:
@@ -1210,6 +1632,8 @@ class UES1d(SigStack):
                     NasRx, err = NAS.parse_NASLTE_MO(NasRxSec['NASMessage'].get_val(), inner=False)
                     if not err:
                         self._log('WNG', 'NAS SEC UL: unknown NAS KSI %i in %s' % (ue_ksi, NasRx._name))
+                        NasRx._sec   = False
+                        NasRx._ulcnt = 0
                         return NasRx, 0x100
                 # there is nothing we can do here
                 self._log('WNG', 'NAS SEC UL: unknown NAS KSI %i, dropping %s' % (ue_ksi, NasRxSec._name))
@@ -1219,13 +1643,17 @@ class UES1d(SigStack):
                 secctx = self.SEC[ue_ksi]
         else:
             if self.SEC['KSI'] not in self.SEC:
-                # no active KSI: this should not happen
-                self.reset_sec_ctx()
+                # no active KSI: happens when restarting corenet, and UE using a
+                # forgotten sec ctx
                 if sh in (1, 3):
                     # still, decode the inner NASMessage
                     NasRx, err = NAS.parse_NASLTE_MO(NasRxSec['NASMessage'].get_val(), inner=False)
                     if not err:
-                        self._log('WNG', 'NAS SEC UL: unset NAS KSI for processing %s' % NasRx._name)
+                        if self.SEC['KSI'] is not None:
+                            self._log('WNG', 'NAS SEC UL: unset NAS KSI for processing %s' % NasRx._name)
+                            self.reset_sec_ctx()
+                        NasRx._sec   = False
+                        NasRx._ulcnt = 0
                         return NasRx, 0x100
                 self._log('WNG', 'NAS SEC UL:  unset NAS KSI, dropping %s' % NasRxSec._name)
                 return None, 0x100
@@ -1239,22 +1667,29 @@ class UES1d(SigStack):
         #
         err = 0
         if not verif_mac:
-            if self.NASSEC_MAC:
+            if self.SECNAS_MAC:
                 self._log('ERR', 'NAS SEC UL: MAC verif failed, dropping %s' % NasRxSec._name)
                 return None, 0x200
             else:
                 self._log('WNG', 'NAS SEC UL: MAC verif failed in %s' % NasRxSec._name)
-                err = 0x200
+                err   = 0x200
+                sec   = False
+                ulcnt = sqnmsb + ue_sqn
         elif not verif_sqn:
-            if self.NASSEC_UL:
+            if self.SECNAS_UL:
                 self._log('ERR', 'NAS SEC UL: UL count verif failed, dropping %s' % NasRxSec._name)
                 return None, 0x300
             else:
                 self._log('WNG', 'NAS SEC UL: UL count verif failed in %s' % NasRxSec._name)
                 # resynch uplink count
                 secctx['UL'] = sqnmsb + ue_sqn + 1
-                err = 0x300
+                err   = 0x300
+                sec   = False
+                ulcnt = sqnmsb + ue_sqn
         else:
+            self._log('DBG', 'NAS SEC UL: MAC verified, UL count %i' % secctx['UL'])
+            sec   = True
+            ulcnt = secctx['UL']
             secctx['UL'] += 1
         #
         if sh in (2, 4):
@@ -1272,12 +1707,14 @@ class UES1d(SigStack):
                 # decoded part is malformed
                 err += err2
         #
+        NasRx._sec   = sec
+        NasRx._ulcnt = ulcnt
         return NasRx, err
     
     def output_nas_sec(self, NasTx):
         if self.UE.TRACE_NAS_EPS:
             self._log('TRACE_NAS_EPS_DL', '\n' + NasTx.show())
-        if self.NASSEC_DISABLED or NasTx._name in self.NASSEC_PDU_NOSEC or \
+        if self.SECNAS_DISABLED or NasTx._name in self.SECNAS_PDU_NOSEC or \
         NasTx._sec == False:
             sec = False
         else:
@@ -1316,8 +1753,8 @@ class UES1d(SigStack):
                     secctx['DL'] += 1
                     sec = True
         if sec:
-            if self.UE.TRACE_NAS_EPS_ENC:
-                self._log('TRACE_NAS_EPS_DL_ENC', '\n' + NasTxSec.show())
+            if self.UE.TRACE_NAS_EPS_SEC:
+                self._log('TRACE_NAS_EPS_DL_SEC', '\n' + NasTxSec.show())
             try:
                 return NasTxSec.to_bytes()
             except Exception as err:

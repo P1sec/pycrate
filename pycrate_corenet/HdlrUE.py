@@ -53,7 +53,7 @@ class UEd(SigStack):
     # to log UE NAS GMM / SM for all UE
     TRACE_NAS_PS       = False
     # to log UE LTE NAS (potentially) encrypted EMM / ESM for all UE
-    TRACE_NAS_EPS_ENC  = False
+    TRACE_NAS_EPS_SEC  = False
     # to log UE LTE NAS clear-text EMM / ESM for all UE
     TRACE_NAS_EPS      = False
     # to log UE LTE NAS containing SMS for all UE
@@ -132,24 +132,28 @@ class UEd(SigStack):
         self.MSISDN = config['MSISDN']
         self.USIM   = config['USIM']
         #
-        self.IuPS.SM.PDP = {}
+        self.IuPS.SM.PDPConfig = {}
+        # cpdict(self.IuPS.SM.__class__.PDPConfig)
         # TODO: handle config for PDP networks
         #
-        self.S1.ESM.PDN = {}
-        for apn, pdntype, ipaddr in config['PDN']:
-            #Server.ConfigPDN provides the DNS servers for each APN
-            #UE.S1.ESM.PDNConfig provides the default QoS for each APN
+        self.S1.ESM.PDNConfig = {}
+        for pdnconfig in config['PDN']:
+            apn, pdnaddr, apncfg = pdnconfig[0], pdnconfig[1:], {}
+            # Server.ConfigPDN provides the DNS servers for each APN (and some 
+            # more common parameters)
+            # UE.S1.ESM.RABConfig provides the default RAB QoS for each APN
             if apn not in self.Server.ConfigPDN:
-                self._log('WNG', 'unable to configure PDN connectivity for APN %s, no DNS servers'\
-                          % apn)
+                self._log('WNG', 'unable to configure PDN connectivity for APN %s, '\
+                          'no DNS servers' % apn)
+            elif apn not in self.S1.ESM.RABConfig:
+                self._log('WNG', 'unable to configure PDN connectivity for APN %s, '\
+                          'no S1 QoS parameters' % apn)
             else:
-                self.S1.ESM.PDN = {apn: {'IP' : (pdntype, ipaddr),
-                                         'DNS': self.Server.ConfigPDN[apn]}}
-                if apn not in self.S1.ESM.PDNConfig:
-                    self._log('WNG', 'unable to configure PDN connectivity for APN %s, '\
-                              'no S1 QoS parameters' % apn)
-                else:
-                    self.S1.ESM.PDN[apn].update( self.S1.ESM.PDNConfig[apn] )
+                apncfg = cpdict(self.Server.ConfigPDN[apn])
+                apncfg['PDNAddr'] = pdnaddr
+                apncfg['RAB'] = cpdict(self.S1.ESM.RABConfig[apn])
+                apncfg['RAB']['QCI'] = apncfg['QCI']
+                self.S1.ESM.PDNConfig[apn] = apncfg
     
     def set_ran(self, ran, ctx_id, sid=None):
         # UE going connected

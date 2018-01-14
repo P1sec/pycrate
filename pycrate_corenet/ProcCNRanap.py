@@ -357,7 +357,7 @@ class RANAPIuRelease(RANAPSigProc):
         else:
             if self.Iu.GMM.state != 'INACTIVE':
                 self.Iu.GMM.state = 'IDLE'
-        self._log('INF', 'UE disconnected')
+        self._log('INF', 'UE disconnected, cause %r' % (self._NetInfo['Cause'], ))
         #
         # disconnect the Iu interface to the RNC for the UE
         self.Iu.unset_ran()

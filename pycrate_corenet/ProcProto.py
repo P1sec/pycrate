@@ -273,8 +273,7 @@ class LinkSigProc(SigProc):
         """
         # 1) select the correct PDU and content
         Cont, IEs, Extensions, mand = self.Cont[ptype]
-        Encod = self.Encod[ptype]
-        pdu_ies, pdu_exts = [], []
+        self._NetInfo, Encod, pdu_ies, pdu_exts = kw.copy(), self.Encod[ptype], [], []
         #
         # 2) encode the list of IEs' values
         if IEs is not None:
@@ -305,6 +304,8 @@ class LinkSigProc(SigProc):
                                     'value': val})
                 elif ident in mand:
                     self._log('WNG', 'encode_pdu: missing mandatory IE, ident %i' % ident)
+            # sort pdu_ies in order according to 'id'
+            pdu_ies.sort(key=lambda x:x['id'])
         #
         # 3) encode the list of Extensions' values
         if Extensions is not None:
@@ -335,6 +336,8 @@ class LinkSigProc(SigProc):
                                      'extensionValue': val})
                 elif ident in mand:
                     self._log('WNG', 'encode_pdu: missing mandatory Ext, ident %i' % ident)
+            # sort pdu_exts in order according to 'id'
+            pdu_exts.sort(key=lambda x:x['id'])
         #
         # 4) enable also undefined buffer values passed at runtime to be encoded
         for name in kw:

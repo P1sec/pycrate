@@ -216,6 +216,106 @@ class ESMDefaultEPSBearerCtxtAct(ESMSigProc):
         )
     
     Timer = 'T3485'
+    
+    def output(self):
+        self.encode_msg(2, 193)
+        if not self._sec:
+            self._nas_tx._sec = False
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'DL', self._nas_tx) )
+        NasTx = self.ESM.output_nas_esm(self._nas_tx, self._EMMProc)
+        if not NasTx:
+            return []
+        #
+        pdncfg = self.ESM.PDN[self._ebi]
+        if 'RAB' in pdncfg:
+            # only a single E-RAB can will be established.
+            # -> check if we would have to support the establishment of 
+            # several E-RABs with this single procedure
+            #
+            NasTxSec = self.S1.output_nas_sec(NasTx)
+            if not NasTxSec:
+                return self.S1._s1ap_nas_sec_err()
+            #
+            rabcfg = pdncfg['RAB']
+            # set the E-RAB list parameters for S1 with the single (default) RAB
+            # embedding the NAS ESM msg into the 1st E-RAB item
+            # erab ext IE can be Correlation-ID and/or BearerType
+            erablist = [{
+                    'id': 52,
+                    'criticality': 'reject',
+                    'value': ('E-RABToBeSetupItemCtxtSUReq', {
+                        'e-RAB-ID': self._ebi,
+                        'e-RABlevelQoSParameters': rabcfg['E-RABlevelQoSParameters'],
+                        'transportLayerAddress': (bytes_to_uint(inet_aton(rabcfg['SGW-TLA']), 32), 32),
+                        'gTP-TEID': uint_to_bytes(rabcfg['SGW-GTP-TEID'], 32),
+                        'nAS-PDU': NasTxSec,
+                        #'iE-Extensions': [],
+                        })
+                    }]
+            #
+            # get the current sec context to setup the eNB security layer
+            secctx = self.S1.get_sec_ctx()
+            if secctx and 'UESecCap' in self.UE.Cap:
+                # create the KeNB
+                self._log('DBG', 'NAS UL count for Kenb derivation, %i' % secctx['UL_enb'])
+                Kenb, UESecCap = conv_A3(secctx['Kasme'], secctx['UL_enb']), self.UE.Cap['UESecCap'][1]
+                secctx['Kenb'] = Kenb
+                secctx['NCC']  = 0
+                secctx['NH']   = conv_A4(secctx['Kasme'], Kenb)
+            else:
+                self._log('WNG', 'no active NAS security context, using the null AS security context')
+                Kenb, UESecCap = self.S1.SECAS_NULL_CTX
+            #
+            IEs = {
+                'E_RABToBeSetupListCtxtSUReq': erablist,
+                'UEAggregateMaximumBitrate': {
+                    'uEaggregateMaximumBitRateDL': rabcfg['BitrateDL'],
+                    'uEaggregateMaximumBitRateUL': rabcfg['BitrateUL']
+                    },
+                'SecurityKey': (bytes_to_uint(Kenb, 256), 256),
+                'UESecurityCapabilities': {
+                    'encryptionAlgorithms': ((UESecCap[1].get_val()<<15) + \
+                                             (UESecCap[2].get_val()<<14) + \
+                                             (UESecCap[3].get_val()<<13), 16),
+                    'integrityProtectionAlgorithms': ((UESecCap[9].get_val()<<15) + \
+                                                      (UESecCap[10].get_val()<<14) + \
+                                                      (UESecCap[11].get_val()<<13), 16)
+                    }
+                }
+            #
+            if self.S1.ICS_RADCAP_INCL and 'UERadioCap' in self.UE.Cap:
+                IEs['UERadioCapability'] = self.UE.Cap['UERadioCap'][0]
+            if self.S1.ICS_GUMMEI_INCL:
+                IEs['GUMMEI'] = gummei_to_asn(self.UE.Server.PLMN,
+                                              self.UE.Server.MME_GID,
+                                              self.UE.Server.MME_CODE)
+            if self.S1.ICS_TRACE_ACT:
+                IEs['TraceActivation'] = self.S1.ICS_TRACE_ACT
+            #
+            S1apProc = self.S1.init_s1ap_proc(S1APInitialContextSetup, **IEs)
+            if S1apProc:
+                # pass the info required for setting the GTPU tunnel
+                S1apProc._gtp_add_mobile_ebi = [self._ebi]
+                self.init_timer()
+                return [S1apProc]
+            else:
+                return []
+        else:
+            # send the NAS ESM into a NAS direct transfer
+            ret = self.S1.ret_s1ap_dnt(NasTx)
+            if ret:
+                self.init_timer()
+            return ret
+    
+    def process(self, pdu):
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'UL', pdu) )
+        self.UEInfo = {}
+        self.decode_msg(pdu, self.UEInfo)
+        #
+        self.rm_from_esm_stack()
+        return []
 
 
 class ESMDedicatedEPSBearerCtxtAct(ESMSigProc):
@@ -372,6 +472,8 @@ class ESMPDNConnectivityRequest(ESMSigProc):
             },
         }
     
+    Cap = ('DeviceProp', )
+    
     def process(self, pdu):
         if self.TRACK_PDU:
             self._pdu.append( (time(), 'UL', pdu) )
@@ -389,7 +491,6 @@ class ESMPDNConnectivityRequest(ESMSigProc):
             return NasProc.output()
         #
         else:
-            
             self.postprocess()
     
     def postprocess(self, Proc=None):
@@ -406,14 +507,38 @@ class ESMPDNConnectivityRequest(ESMSigProc):
     
     def output(self):
         # process the whole transaction request
-        ret, self.errcause = self.ESM.process_trans(self.UEInfo['PTI'])
+        NasProc, self.errcause = self.ESM.process_trans(self.UEInfo['PTI'])
         # deny request or start an ESNDefaultEPSBearerCtxtAct
         if self.errcause:
-            self.set_msg(2, 209, ESMCause=self.errcause)
+            self.set_msg(2, 209, EPSBearerId=self.UEInfo['EPSBearerId'],
+                                 PTI=self.UEInfo['PTI'],
+                                 ESMCause=self.errcause)
             self.encode_msg(2, 209)
+            if self.TRACK_PDU:
+                self._pdu.append( (time(), 'DL', self._nas_tx) )
+            self.rm_from_esm_stack()
+            #
+            NasTx = self.ESM.output_nas_esm(self._nas_tx, self._EMMProc)
+            if not NasTx:
+                return []
+            else:
+                return self.S1.ret_s1ap_dnt(NasTx)
+            
+            # TODO: infinite loop here !!!
+            
+            
+            
+            
+            
+            
+        #
         else:
-            # TODO
-            pass
+            # associate the new ESM procedure to the EMM procedure associated to self
+            NasProc._EMMProc = self._EMMProc
+            NasProc.set_msg(2, 193, EPSBearerId=NasProc._ebi,
+                                    PTI=self.UEInfo['PTI'])
+            self.rm_from_esm_stack()
+            return NasProc.output()
 
 
 class ESMPDNDisconnectRequest(ESMSigProc):
@@ -543,9 +668,9 @@ class ESMInfoRequest(ESMSigProc):
             self._nas_tx._sec = False
         if self.TRACK_PDU:
             self._pdu.append( (time(), 'DL', self._nas_tx) )
-        nas_tx = self.ESM.output_nas_esm(self._nas_tx, self._EMMProc)
+        NasTx = self.ESM.output_nas_esm(self._nas_tx, self._EMMProc)
         self.init_timer()
-        return self.S1.ret_s1ap_dnt(nas_tx)
+        return self.S1.ret_s1ap_dnt(NasTx)
     
     def process(self, pdu):
         if self.TRACK_PDU:

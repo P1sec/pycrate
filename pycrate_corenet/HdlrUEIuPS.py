@@ -459,8 +459,15 @@ class UESMd(SigStack):
         '*'      : {},
         'corenet': {}
         }
-    # PDP UE config, per APN, built at runtime
-    PDP = {}
+    # when the UE 1st attach it gets a specific PDPConfig dict with a copy of this content
+    # plus specific content from the CorenetServer.ConfigPDP and CorenetServer.ConfigUE
+    
+    # Protocol config option with authentication
+    # if bypass enabled, the PAP / CHAP authentication will not be checked against
+    # the CorenetServer.PDPConfig and always return authentication success
+    PDN_PAP_BYPASS  = True
+    PDN_CHAP_BYPASS = True
+    
     
     def _log(self, logtype, msg):
         self.Iu._log(logtype, '[SM] %s' % msg)
@@ -471,6 +478,8 @@ class UESMd(SigStack):
         #
         # dict of ongoing SM procedures (indexed by NSAPI)
         self.Proc = {}
+        # dict of activated PDP config per PS bearer ID
+        self.PDP = {}
         # dict of ongoing ESM transactions IEs
         self.Trans = {}
         # list of tracked procedures (requires TRACK_PROC = True)

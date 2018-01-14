@@ -98,6 +98,7 @@ class UEIuSigStack(SigStack):
     def unset_ran(self):
         del self.RNC
         self.SEC['CKSN'] = None
+        self.clear()
         self.connected.clear()
     
     def set_ran_unconnected(self, rncd):
@@ -257,7 +258,7 @@ class UEIuSigStack(SigStack):
     
     def clear(self):
         # clears all running RANAP CS/PS procedures
-        for Proc in self.Proc.values():
+        for Proc in list(self.Proc.values()):
             Proc.abort()
     
     #--------------------------------------------------------------------------#

@@ -44,13 +44,12 @@ APRd.ROUTER_MAC_ADDR = 'f4:00:00:01:02:03', the LAN router (1st IP hop) MAC addr
 APRd.ROUTER_IP_ADDR = '192.168.1.1', the LAN router (1st IP hop) IP address
 
 -> some internal network parameters (toward RNC / eNodeB)
-GTPUd.INT_IP        = '10.1.1.1', IP address exposed on the RAN side
-GTPUd.INT_PORT      = 2152, GTPU UDP port to be used by RAN equipments
+GTPUd.GTP_IP        = '10.1.1.1', IP address exposed on the RAN side
+GTPUd.GTP_PORT      = 2152, GTPU UDP port to be used by RAN equipments
 
 -> some mobiles parameters
 APRd.IP_POOL        = {'192.168.1.201', '192.168.1.202'}, the pool of IP addresses to be used by our set of mobiles
 GTPUd.BLACKHOLING   = 0, BLACKHOLE_LAN, BLACKHOLE_WAN or BLACKHOLE_LAN|BLACKHOLE_WAN, 
-                      to filter out all the mobile trafic, no trafic at all, or IP packets to external network only
 GTPUd.WL_ACTIVE     = True or False, to allow specific IP packets to be forwarded to the external network, 
                       bypassing the BLACKHOLING directive
 GTPUd.WL_PORTS      = [('UDP', 53), ('UDP', 123)], to specify to list of IP protocol / port to allow in case WL_ACTIVE is True
@@ -62,13 +61,14 @@ GTPUd.DPI           = True or False, to store packet statistics (protocol / port
 >>> gsn = GTPUd()
 
 -> to start forwarding IP packets between the external interface and the GTP tunnel
-if you want to let the GTPUd manage the attribution of TEID_to_rnc (GTPUd.GTP_TEID_EXT = False)
->>> teid_to_ran = gsn.add_mobile(mobile_ip='192.168.1.201', ran_ip='10.1.1.2', teid_from_ran=0x1)
-if you want to manage teid_to_rnc by yourself and just provide its value to GTPUd (GTPUd.GTP_TEID_EXT = True)
->>> gsn.add_mobile(self, mobile_ip='192.168.1.201', ran_ip='10.1.1.2', teid_from_rnc=0x1, teid_to_rnc=0x2)
+You need to set at least the TEID for uplink and mobile address (2-tuple, with address type: 1 for IPv4, 2 for IPv6):
+>>> gsn.add_mobile(self, teid_ul=0x1, mobile_addr=(1, '192.168.1.201'), ran_ip=None, teid_dl=None)
+You will need to set the downlink parameters in order to relay IP packets from the external interface over GTP:
+>>> gsn.set_mobile_dl(teid_ul=0x1, ran_ip='10.1.1.2', teid_dl=0x3)
+You can also set all parameters when calling add_mobile() method
 
 -> to stop forwading IP packets
->>> gsn.rem_mobile(mobile_ip='192.168.1.201')
+>>> gsn.rem_mobile(teid_ul=0x1)
 
 -> modules that act on GTPU packets can be added to the GTPUd instance, they must be put in the MOD attribute
 Two example modules DNSRESP and TCPSYNACK are provided.
@@ -175,23 +175,23 @@ class ARPd(object):
     #
     # verbosity level: list of log types to display when calling 
     # self._log(logtype, msg)
-    DEBUG  = ('ERR', 'WNG', 'INF', 'DBG')
+    DEBUG           = ('ERR', 'WNG', 'INF', 'DBG')
     #
     # recv() buffer length
-    BUFLEN = 2048
+    BUFLEN          = 2048
     # select() timeout and wait period
-    SELECT_TO    = 0.1
-    SELECT_SLEEP = 0.05
+    SELECT_TO       = 0.1
+    SELECT_SLEEP    = 0.05
     #
     # all Gi interface parameters
     # Our GGSN ethernet parameters (IF, MAC and IP addresses)
     # (and also the MAC address to be used for any mobiles through our GGSN)
-    GGSN_ETH_IF   = 'eth0'
-    GGSN_MAC_ADDR = '08:00:00:01:02:03'
-    GGSN_IP_ADDR  = '192.168.1.100'
+    GGSN_ETH_IF     = 'eth0'
+    GGSN_MAC_ADDR   = '08:00:00:01:02:03'
+    GGSN_IP_ADDR    = '192.168.1.100'
     #
     # the set of IP address to be used by our mobiles
-    IP_POOL = {'192.168.1.201', '192.168.1.202', '192.168.1.203'}
+    IP_POOL         = {'192.168.1.201', '192.168.1.202', '192.168.1.203'}
     #
     # network parameters:
     # subnet prefix 
@@ -301,7 +301,7 @@ class ARPd(object):
                 sleep(self.SELECT_SLEEP)
         self._log('INF', 'ARP resolver stopped')
     
-    def _process_arpbuf(self, buf=bytes()):
+    def _process_arpbuf(self, buf):
         # this is an ARP request or response:
         arpop = ord(buf[21:22])
         # 1) check if it requests for one of our IP
@@ -311,15 +311,14 @@ class ARPd(object):
                 # reply to it with our MAC ADDR
                 try:
                     self.sk_arp.sendto(
-                     b''.join((buf[6:12], self.GGSN_MAC_BUF,  # Ethernet hdr
-                               b'\x08\x06\0\x01\x08\0\x06\x04\0\x02',
-                               self.GGSN_MAC_BUF, buf[38:42], # ARP sender
-                               buf[6:12], buf[28:32],         # ARP target
-                               b'\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'))     
-                     (self.GGSN_ETH_IF, 0x0806))
+                        b''.join((buf[6:12], self.GGSN_MAC_BUF,  # Ethernet hdr
+                                  b'\x08\x06\0\x01\x08\0\x06\x04\0\x02',
+                                  self.GGSN_MAC_BUF, buf[38:42], # ARP sender
+                                  buf[6:12], buf[28:32],         # ARP target
+                                  b'\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0')),    
+                        (self.GGSN_ETH_IF, 0x0806))
                 except Exception as err:
-                    self._log('ERR', 'external network error (sendto) on ARP '\
-                              'response: %s' % err)
+                    self._log('ERR', 'external network error (sendto) on ARP response: %s' % err)
                 else:
                     self._log('DBG', 'ARP response sent for IP: %s' % ipreq)
         # 2) check if it responses something useful for us
@@ -332,7 +331,7 @@ class ARPd(object):
                     self.ARP_RESOLV_TABLE[ipres] = buf[22:28]
                     self._log('DBG', 'got ARP response for new local IP: %s' % ipres)
     
-    def _process_ipbuf(self, buf=b''):
+    def _process_ipbuf(self, buf):
         # this is an random IPv4 packet incoming into our interface: 
         # check if src IP is in our subnet and not already resolved,
         # then store the Ethernet MAC address
@@ -345,7 +344,7 @@ class ARPd(object):
                 self.ARP_RESOLV_TABLE[ipsrc] = buf[6:12]
                 self._log('DBG', 'got MAC address from IPv4 packet for new local IP: %s' % ipsrc)
     
-    def resolve(self, ip='192.168.1.2'):
+    def resolve(self, ip):
         # check if already resolved
         if ip in self.ARP_RESOLV_TABLE:
             return self.ARP_RESOLV_TABLE[ip]
@@ -358,12 +357,12 @@ class ARPd(object):
         else:
             try:
                 self.sk_arp.sendto(
-                 b''.join((self.ROUTER_MAC_BUF, self.GGSN_MAC_BUF, # Ethernet hdr
-                           b'\x08\x06\0\x01\x08\0\x06\x04\0\x01',
-                           self.GGSN_MAC_BUF, self.GGSN_IP_BUF,    # ARP sender
-                           b'\0\0\0\0\0\0', inet_aton(ip),         # ARP target
-                           b'\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'))
-                 (self.GGSN_ETH_IF, 0x0806))
+                    b''.join((self.ROUTER_MAC_BUF, self.GGSN_MAC_BUF, # Ethernet hdr
+                              b'\x08\x06\0\x01\x08\0\x06\x04\0\x01',
+                              self.GGSN_MAC_BUF, self.GGSN_IP_BUF,    # ARP sender
+                              b'\0\0\0\0\0\0', inet_aton(ip),         # ARP target
+                              b'\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0')),
+                    (self.GGSN_ETH_IF, 0x0806))
             except Exception as err:
                 self._log('ERR', 'external network error (sendto) on ARP request: %s' % err)
             else:
@@ -393,12 +392,12 @@ class GTPUd(object):
     GTP-U forwarder
     bridges Ethernet to GTP-U to handle IPv4 data traffic of connected UE.
     
-    This is to be instanciated as a unique handler for all GTP-U tunnels
+    This is to be instantiated as a unique handler for all GTP-U tunnels
     in the corenet mobile core network.
-    Then, it is possible to add or remove GTP tunnel endpoints at will, 
-    for each mobile with methods:
-    .add_mobile(mobile_ip, rnc_ip, teid_from_rnc)
-      -> returns teid_to_rnc for the given mobile
+    To add or remove GTP tunnel endpoints at will for each mobile, 
+    use the methods:
+    .add_mobile(mobile_ip, rnc_ip, teid_ul[, teid_dl])
+      -> returns teid_dl for the given mobile, if not set through the method call
     .rem_mobile(mobile_ip)
       -> returns None 
 
@@ -427,28 +426,20 @@ class GTPUd(object):
     #
     # verbosity level: list of log types to display when calling 
     # self._log(logtype, msg)
-    DEBUG     = ('ERR', 'WNG', 'INF', 'DBG')
+    DEBUG         = ('ERR', 'WNG', 'INF', 'DBG')
     #
     # packet buffer space (over MTU...)
-    BUFLEN    = 1536
+    BUFLEN        = 2048
     # select loop settings
-    SELECT_TO = 0.2
+    SELECT_TO     = 0.1
     #
     # Gi interface, with GGSN ethernet IF and mobile IP address
     EXT_IF        = ARPd.GGSN_ETH_IF
     GGSN_MAC_ADDR = ARPd.GGSN_MAC_ADDR
-    # IPv4 protocol only, to be forwarded
-    EXT_PROT      = 0x0800
     #
     # internal IP interface, for handling GTP-U packets from RNC / eNB
-    INT_IP        = '127.0.1.100'
-    INT_PORT      = 2152
-    #
-    # GTP TEID toward RNC / eNodeBs (for DL traffic)
-    GTP_TEID      = 0
-    GTP_TEID_MAX  = 2**32 - 1
-    # in case the GTP TEID is assigned by an external entity
-    GTP_TEID_EXT  = True
+    GTP_IP        = '127.0.1.100'
+    GTP_PORT      = 2152
     #
     # BLACKHOLING feature
     # to enable the whole traffic: 0
@@ -463,10 +454,11 @@ class GTPUd(object):
     # in case we want to generate traffic statistics (then available in .stats)
     DPI           = True
     #
-    # in case we want to check and drop spoofed IPv4 source address in incoming
-    # GTP-U packet
+    # in case we want to check and drop spoofed IPv4/v6 source address 
+    # in incoming GTP-U packet
     DROP_SPOOF    = True
     #
+    # in case we want to stop the listener when typing CTRL+C
     CATCH_SIGINT = False
     
     def __init__(self):
@@ -474,15 +466,13 @@ class GTPUd(object):
         self.GGSN_MAC_BUF  = mac_aton(self.GGSN_MAC_ADDR)
         #
         # 2 dict for handling mobile GTP-U packets transfers:
-        # key: mobile IPv4 addr (buf)
-        # value: (ran_ip (asc), teid_from_ran (int), teid_to_ran (int))
-        self._mobiles_ip   = {}
-        # key: teid_from_ran (int)
-        # value: mobile IPv4 addr (buf)
+        # key: mobile IPv4 or v6 addr (4 or 16 bytes)
+        # value: teid_ul (uint)
+        self._mobiles_addr = {}
+        # key: teid_ul (uint)
+        # value: [ran_ip (asc), teid_dl (uint), ipaddr, ctx_num (uint)]
+        #   ipaddr: ipv4 (4 bytes), ipv6pref (8 bytes) or ipv6 (16 bytes)
         self._mobiles_teid = {}
-        # global TEID to RAN value, to be incremented from here
-        if not self.GTP_TEID_EXT:
-            self.GTP_TEID  = randint(0, 200000)
         #
         # initialize the traffic statistics
         self.stats         = {}
@@ -490,25 +480,25 @@ class GTPUd(object):
         # initialize the list of modules that can act on GTP-U payloads
         self.MOD           = []
         #
-        # create a RAW PF_PACKET socket on the `Internet` side
-        # python is not convinient to configure dest mac addr 
-        # when using SOCK_DGRAM (or I missed something...), 
-        # so we use SOCK_RAW and build our own ethernet header:
-        self.sk_ext        = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, ntohs(self.EXT_PROT))
-        # configure timeouting and interface binding
-        self.sk_ext.settimeout(0.001)
-        #self.sk_ext.setblocking(0)
-        self.sk_ext.bind((self.EXT_IF, self.EXT_PROT))
-        # put the interface in promiscuous mode
-        set_promisc(self.sk_ext, self.EXT_IF, 1)
+        # create two RAW PF_PACKET sockets on the `Internet` side (1 for IPv4, 1 for IPv6)
+        self.sk_ext_v4     = socket.socket(socket.AF_PACKET, socket.SOCK_RAW)
+        self.sk_ext_v4.settimeout(0.001)
+        #self.sk_ext_v4.setblocking(0)
+        self.sk_ext_v4.bind((self.EXT_IF, 0x0800))
+        set_promisc(self.sk_ext_v4, self.EXT_IF, 1)
         #
-        # create an UDP socket on the RNC / eNB side, on port 2152
+        self.sk_ext_v6     = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, ntohs(0x86dd))
+        self.sk_ext_v6.settimeout(0.001)
+        #self.sk_ext_v6.setblocking(0)
+        self.sk_ext_v6.bind((self.EXT_IF, 0x86dd))
+        set_promisc(self.sk_ext_v6, self.EXT_IF, 1)
+        #
+        # create an UDP socket on the RNC / eNB side
         self.sk_int        = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        # configure timeout, binding and rebinding on same address
         self.sk_int.settimeout(0.001)
         #self.sk_int.setblocking(0)
         self.sk_int.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self.sk_int.bind((self.INT_IP, self.INT_PORT))
+        self.sk_int.bind((self.GTP_IP, self.GTP_PORT))
         #
         # interrupt handler
         if self.CATCH_SIGINT:
@@ -519,7 +509,7 @@ class GTPUd(object):
             signal.signal(signal.SIGINT, sigint_handler)
         #
         # and start listening and transferring packets in background
-        self.sk_list = (self.sk_ext, self.sk_int)
+        self.sk_list = (self.sk_ext_v4, self.sk_ext_v6, self.sk_int)
         self._listening = True
         self._listener_t = threadit(self.listen)
         self._log('INF', 'GTP-U tunnels handler started')
@@ -533,15 +523,17 @@ class GTPUd(object):
             log('[%s] [GTPUd] %s' % (logtype, msg))
     
     def init_stats(self, ip):
-        self.stats[ip] = {
-            'DNS': [],      # IP of DNS servers requested
-            'NTP': [],      # IP of NTP servers requested
-            'resolved': [], # domain name resolved
-            'ICMP': [],     # ICMP endpoint (IP) contacted
-            'TCP': [],      # TCP endpoint (IP, port) contacted
-            'UDP': [],      # UDP endpoint (IP, port) contacted
-            'alien': [],    # other protocol endpoint contacted
+        stats = {
+            'DNS'     : set(), # IP of DNS servers requested
+            'NTP'     : set(), # IP of NTP servers requested
+            'resolved': set(), # domain name resolved
+            'ICMP'    : set(), # ICMP endpoint (IP) contacted
+            'TCP'     : set(), # TCP endpoint (IP, port) contacted
+            'UDP'     : set(), # UDP endpoint (IP, port) contacted
+            'alien'   : set(), # other protocol packets
             }
+        self.stats[ip] = stats
+        return stats
     
     def stop(self):
         # stop ARP resolver
@@ -551,11 +543,12 @@ class GTPUd(object):
             self._listening = False
             sleep(self.SELECT_TO * 2)
             try:
-                # unset promiscuous mode
-                set_promisc(self.sk_ext, self.EXT_IF, 0)
+                set_promisc(self.sk_ext_v4, self.EXT_IF, 0)
+                set_promisc(self.sk_ext_v6, self.EXT_IF, 0)
                 # closing sockets
                 self.sk_int.close()
-                self.sk_ext.close()
+                self.sk_ext_v4.close()
+                self.sk_ext_v6.close()
             except Exception as err:
                 self._log('ERR', 'socket error: %s' % err)
     
@@ -565,148 +558,248 @@ class GTPUd(object):
             r = select(self.sk_list, [], [], self.SELECT_TO)[0]
             # read ext and int sockets until they are empty
             for sk in r:
-                if sk != self.sk_int:
-                    # sk == self.sk_ext
+                #
+                if sk == self.sk_ext_v4:
+                    # DL IPv4
                     try:
                         buf = sk.recvfrom(self.BUFLEN)[0]
                     #except timeout:
-                    #    # nothing to read anymore
-                    #    buf = b''
+                    #    pass
                     except Exception as err:
-                        self._log('ERR', 'external network IF error (recvfrom): %s' % err)
-                        #buf = b''
+                        self._log('ERR', 'sk_ext_v4 IF error (recvfrom): %s' % err)
                     else:
-                        if len(buf) >= 34 and \
-                        buf[:6] == self.GGSN_MAC_BUF and \
-                        buf[12:14] == b'\x08\0' and \
-                        buf[16:20] in self._mobiles_ip:
-                            # transferring over GTP-U after removing the Ethernet header
-                            self.transfer_to_int(buf[14:])
-                            #threadit(self.transfer_to_int, buf[14:])
+                        #self._log('DBG', 'sk_ext_v4, recvfrom()')
+                        if len(buf) >= 34 and buf[:6] == self.GGSN_MAC_BUF \
+                        and buf[30:34] in self._mobiles_addr:
+                            # IPv4 of a mobile, transfer over GTP-U
+                            # after removing the Ethernet header
+                            self.transfer_v4_to_int(buf[14:])
+                            #threadit(self.transfer_v4_to_int, buf[14:])
+                #
+                elif sk == self.sk_ext_v6:
+                    # DL IPv6
+                    try:
+                        buf = sk.recvfrom(self.BUFLEN)[0]
+                    #except timeout:
+                    #    pass
+                    except Exception as err:
+                        self._log('ERR', 'sk_ext_v6 IF error (recvfrom): %s' % err)
+                    else:
+                        #self._log('DBG', 'sk_ext_v6, recvfrom()')
+                        if len(buf) >= 54 and buf[:6] == self.GGSN_MAC_BUF \
+                        and buf[38:54] in self._mobiles_addr:
+                            # IPv6 of a mobile, transfer over GTP-U
+                            # after removing the Ethernet header
+                            self.transfer_v6_to_int(buf[14:])
+                            #threadit(self.transfer_v6_to_int, buf[14:])
+                #
                 else:
-                    # sk == self.int_sk
+                    #sk == self.sk_int
+                    # UL, both IPv4 and IPv6 packets
                     try:
                         buf = sk.recv(self.BUFLEN)
                     #except timeout:
-                    #    # nothing to read anymore
-                    #    buf = b''
+                    #    pass
                     except Exception as err:
-                        self._log('ERR', 'internal network IF error (recv): %s' % err)
-                        #buf = b''
+                        self._log('ERR', 'sk_int IF error (recv): %s' % err)
                     else:
                         self.transfer_to_ext(buf)
                         #threadit(self.transfer_to_ext, buf)
         #
         self._log('INF', 'GTPU handler stopped')
     
-    def transfer_to_ext(self, buf):
-        # if GTP-U TEID in self._mobiles_teid, just forward...
-        # in this direction, there is no reason to filter
-        # except to avoid IP spoofing from malicious mobile 
-        # (damned ! Would it be possible ?!?)
-        #
-        # extract the GTP header
-        try:
-            flags, msgtype, msglen, teid_from_ran = unpack('>BBHI', buf[:8])
-        except:
-            self._log('WNG', 'invalid GTP packet from RAN')
-            return
-        #
-        # in case GTP TEID is not correct, drop it
-        try:
-            mobile_ip = self._mobiles_teid[teid_from_ran]
-        except:
-            self._log('WNG', 'unknown GTP TEID from RAN: 0x%.8x' % teid_from_ran)
-            return
-        #
-        # in case GTP does not contain UP data, drop it
-        if msgtype != 0xff:
-            self._log('WNG', 'unsupported GTP type from RAN: 0x%.2x' % msgtype)
-            return
-        #
-        # get the IP packet: use the length in GTPv1 header to cut the buffer
-        if flags & 0x04:
-            # GTP header extended
-            msglen -= 4
-        ipbuf = buf[-msglen:]
-        #
-        # drop dummy IP packets
-        if len(ipbuf) < 24:
-            self._log('WNG', 'dummy packet from mobile dropped: %s' % hexlify(ipbuf).decode('ascii'))
-            return
-        #
-        # drop packet other than IPv4
-        ipver = ord(ipbuf[0:1]) >> 4
-        if ipver != 4:
-            self._log('WNG', 'unsupported IPv%i packet from UE' % ipver)
-            return
-        #
-        # drop spoofed IP packet
-        if self.DROP_SPOOF and ipbuf[12:16] != mobile_ip:
-            self._log('WNG', 'spoofed IPv4 source address from UE: %s' % inet_ntoa(ipbuf[12:16]))
-            return
-        #
-        ipsrc = inet_ntoa(ipbuf[12:16])
-        ipdst = inet_ntoa(ipbuf[16:20])
-        #
-        # analyze the packet content for statistics
-        if self.DPI:
-            self._analyze(ipsrc, ipbuf)
-        #
-        # possibly process the UL GTP-U payload within modules
-        if self.MOD:
-            try:
-                for mod in self.MOD:
-                    if mod.TYPE == 0:
-                        ipbuf = mod.handle_ul(ipbuf)
-                    else:
-                        mod.handle_ul(ipbuf)
-            except Exception as err:
-                self._log('ERR', 'MOD error: %s' % err)
-        #
-        # resolve the dest MAC addr
-        macdst = self.arpd.resolve(ipdst)
-        #
-        # possibly bypass blackholing rule for allowed ports
-        # check if PROT / PORT is allowed in the whilelist
-        if self.BLACKHOLING:
-            if self.WL_ACTIVE:
-                dst, prot, pay = DPI.get_ip_dst_pay(ipbuf)
-                # TCP:6, UDP:17
-                if prot in (6, 17) and pay:
-                    port = DPI.get_port(pay)
-                    if (self._prot_dict[prot], port) in self.WL_PORTS:
-                        self._transfer_to_ext(macdst, ipbuf)
-                    else:
-                        return
-                else:
-                    return
-            elif macdst != self.arpd.ROUTER_MAC_BUF:
-                if self.BLACKHOLING & BLACKHOLE_LAN:
-                    return
-                else:
-                    self._transfer_to_ext(macdst, ipbuf)
-            else:
-                if self.BLACKHOLING & BLACKHOLE_WAN:
-                    return
-                else:
-                    self._transfer_to_ext(macdst, ipbuf)
+    def resolve_mac(self, ipdst):
+        if len(ipdst) == 4:
+            return self.arpd.resolve(inet_ntoa(ipdst))
         else:
-            self._transfer_to_ext(macdst, ipbuf)
+            # TODO: implement a minimal IPv6 NDP service
+            return self.ROUTER_MAC_BUF
     
-    def _transfer_to_ext(self, macdst, ipbuf):
+    #--------------------------------------------------------------------------#
+    # UL transfer
+    #--------------------------------------------------------------------------#
+    
+    def transfer_to_ext(self, buf):
+        try:
+            # extract the GTP header
+            flags, msgtype, msglen, teid_ul = unpack('>BBHI', buf[:8])
+            # in case GTP TEID is not correct, drop it
+            
+            ran_ip, teid_dl, ipaddr, ctx_num = self._mobiles_teid[teid_ul]
+            # TODO: handle GTP ECHO
+            if msgtype != 0xff:
+                self._log('WNG', 'unsupported GTP type from RAN: 0x%.2x' % msgtype)
+                return
+            # get the IP packet: use the length in the GTP header to cut the buffer
+            if flags & 0x04:
+                # GTP header extended
+                msglen -= 4
+            ipbuf = buf[-msglen:]
+            # get the IP version
+            ipvers = ord(ipbuf[0:1])>>4
+            if ipvers == 4:
+                ipsrc = ipbuf[12:16]
+                ipdst = ipbuf[16:20]
+            elif ipvers == 6:
+                ipsrc = ipbuf[8:24]
+                ipdst = ipbuf[24:40]
+            else:
+                self._log('WNG', 'invalid IP packet from UE, dropping it')
+                return
+        except:
+            self._log('WNG', 'invalid GTP / IP packet from RAN / UE, dropping it')
+            return
+        #
+        if ipvers == 4:
+            if self.DROP_SPOOF and ipsrc != ipaddr:
+                self._log('WNG', 'spoofed IPv4 src addr, teid_ul 0x%.8x' % teid_ul)
+                return
+            if self.DPI:
+                self._analyze(ipvers, inet_ntoa(ipsrc), ipbuf)
+            if self.MOD:
+                try:
+                    for mod in self.MOD:
+                        if mod.TYPE == 0:
+                            ipbuf = mod.handle_ul(ipbuf)
+                        else:
+                            mod.handle_ul(ipbuf)
+                except Exception as err:
+                    self._log('ERR', 'MOD error: %s' % err)
+            # resolve the dest MAC addr
+            macdst = self.resolve_mac(ipdst)
+            # apply blackholing
+            if self.BLACKHOLING:
+                if macdst != self.arpd.ROUTER_MAC_BUF:
+                    if self.BLACKHOLING & BLACKHOLE_LAN:
+                        drop = True
+                    else:
+                        drop = False
+                else:
+                    if self.BLACKHOLING & BLACKHOLE_WAN:
+                        drop = True
+                    else:
+                        drop = False
+                if drop and self.WL_ACTIVE:
+                    ipdst, prot, pay = DPIv4.get_ip_info(ipbuf)
+                    if prot in (6, 17) and pay:
+                        # UDP / TCP
+                        port = DPIv4.get_port(pay)
+                        if (self._prot_dict[prot], port) in self.WL_PORTS:
+                            self._transfer_to_ext_v4(macdst, ipbuf)
+                        else:
+                            return
+            else:
+                self._transfer_to_ext_v4(macdst, ipbuf)
+        #
+        else:
+            #ipvers == 6
+            if len(ipaddr) == 8:
+                # we only have the IPv6 prefix, need to store the full ipv6 addr
+                if self.DROP_SPOOF and ipsrc[:8] != ipaddr:
+                    self._log('WNG', 'spoofed IPv6 src prefix, teid_ul 0x%.8x' % teid_ul)
+                    return
+                # update local db with the full IPv6
+                self._mobiles_teid[teid_ul][2] = ipsrc
+                self._mobiles_addr[ipsrc] = teid_ul
+            elif self.DROP_SPOOF and ipsrc != ipaddr:
+                self._log('WNG', 'spoofed IPv6 src addr, teid_ul 0x%.8x' % teid_ul)
+                return
+            if self.DPI:
+                self._analyze(ipvers, inet_pton(AF_INET6, ipsrc), ipbuf)
+            if self.MOD:
+                try:
+                    for mod in self.MOD:
+                        if mod.TYPE == 0:
+                            ipbuf = mod.handle_ul(ipbuf)
+                        else:
+                            mod.handle_ul(ipbuf)
+                except Exception as err:
+                    self._log('ERR', 'MOD error: %s' % err)
+            # resolve the dest MAC addr
+            macdst = self.resolve_mac(ipdst)
+            # apply blackholing
+            if self.BLACKHOLING:
+                if macdst != self.arpd.ROUTER_MAC_BUF:
+                    if self.BLACKHOLING & BLACKHOLE_LAN:
+                        drop = True
+                    else:
+                        drop = False
+                else:
+                    if self.BLACKHOLING & BLACKHOLE_WAN:
+                        drop = True
+                    else:
+                        drop = False
+                if drop and self.WL_ACTIVE:
+                    ipdst, prot, pay = DPIv6.get_ip_info(ipbuf)
+                    if prot in (6, 17) and pay:
+                        # UDP / TCP
+                        port = DPIv6.get_port(pay)
+                        if (self._prot_dict[prot], port) in self.WL_PORTS:
+                            self._transfer_to_ext_v6(macdst, ipbuf)
+                        else:
+                            return
+            else:
+                self._transfer_to_ext_v6(macdst, ipbuf)
+    
+    def _transfer_to_ext_v4(self, macdst, ipbuf):
         # forward to the external PF_PACKET socket, over the Gi interface
         try:
-            self.ext_sk.sendto(b''.join((macdst, self.GGSN_MAC_BUF, b'\x08\0', ipbuf))
-                               (self.EXT_IF, self.EXT_PROT))
+            self.sk_ext_v4.sendto(b''.join((macdst, self.GGSN_MAC_BUF, b'\x08\0', ipbuf)),
+                                  (self.EXT_IF, 0x0800))
         except Exception as err:
-            self._log('ERR', 'external network IF error (sendto): %s' % err)
-        #else:
-        #    self._log('DBG', 'buffer transferred from GTPU to RAW')
+            self._log('ERR', 'sk_ext_v4 IF error (sendto): %s' % err)
     
-    def transfer_to_int(self, buf):
-        # from .listen():
-        # buf length is guaranteed >= 20 and ipdst in self._mobiles_ip
+    def _transfer_to_ext_v6(self, macdst, ipbuf):
+        # forward to the external PF_PACKET socket, over the Gi interface
+        try:
+            self.sk_ext_v6.sendto(b''.join((macdst, self.GGSN_MAC_BUF, b'\x86\xdd', ipbuf)),
+                                  (self.EXT_IF, 0x86dd))
+        except Exception as err:
+            self._log('ERR', 'sk_ext_v6 IF error (sendto): %s' % err)
+    
+    def _analyze(self, ipvers, ipsrc, ipbuf):
+        #
+        try:
+            stats = self.stats[ipsrc]
+        except:
+            stats = self.init_stats(ipsrc)
+        #
+        if ipvers == 4:
+            dst, prot, pay = DPIv4.get_ip_info(ipbuf)
+            DPI = DPIv4
+        else:
+            dst, prot, pay = DPIv6.get_ip_info(ipbuf)
+            DPI = DPIv6
+        #
+        # UDP
+        if prot == 17 and pay:
+            port = DPI.get_port(pay)
+            stats['UDP'].add((dst, port))
+            # DNS
+            if port == 53:
+                stats['DNS'].add(dst)
+                name = DPI.get_dn_req(pay[8:])
+                stats['resolved'].add(name)
+            elif port == 123:
+                stats['NTP'].add(dst)
+        # TCP
+        elif prot == 6 and pay:
+            port = DPI.get_port(pay)
+            stats['TCP'].add((dst, port))
+        # ICMP
+        elif prot == 1 and pay:
+            stats['ICMP'].add(dst)
+        # alien
+        else:
+            stats['alien'].add(hexlify(ipbuf))
+    
+    #--------------------------------------------------------------------------#
+    # DL transfer
+    #--------------------------------------------------------------------------#
+    
+    def transfer_v4_to_int(self, buf):
+        #self._log('DBG', 'transfer_v4_to_int()')
+        # buf length is guaranteed >= 20 and ipdst in self._mobiles_addr
         #
         if self.MOD:
             # possibly process the DL GTP-U payload within modules
@@ -719,112 +812,133 @@ class GTPUd(object):
             except Exception as err:
                 self._log('ERR', 'MOD error: %s' % err)        
         #
-        ran_ip, teid_from_ran, teid_to_ran = self._mobiles_ip[buf[16:20]]
+        teid_ul = self._mobiles_addr[buf[16:20]]
+        ran_ip, teid_dl, ipaddr, ctx_num = self._mobiles_teid[teid_ul]
+        #
         # prepend GTP header and forward to the RAN IP
-        gtphdr = pack('>BBHI', 0x30, 0xff, len(buf), teid_to_ran)
-        #
-        try:
-            ret = self.int_sk.sendto(gtphdr + buf, (ran_ip, self.INT_PORT))
-        except Exception as err:
-            self._log('ERR', 'internal network IF error (sendto): %s' % err)
-        #else:
-        #    self._log('DBG', '%i bytes transferred from RAW to GTPU' % ret)
-    
-    ###
-    # Now we can add and remove (mobile_IP, TEID_from/to_RAN),
-    # to configure filters and really start forwading packets over GTP
-    
-    def add_mobile(self, mobile_ip='192.168.1.201', ran_ip='10.1.1.1',
-                         teid_from_ran=0x1, teid_to_ran=0x1):
-        try:
-            ip = inet_aton(mobile_ip)
-        except Exception as err:
-            self._log('ERR', 'mobile_ip (%r) has not the correct format: '\
-                      'cannot configure the GTPU handler' % mobile_ip)
-            return
-        if not self.GTP_TEID_EXT:
-            teid_to_ran = self.get_teid_to_ran()
-        self._mobiles_ip[ip] = (ran_ip, teid_from_ran, teid_to_ran)
-        self._mobiles_teid[teid_from_ran] = ip
-        self._log('INF', 'setting GTP tunnel for mobile with IP %s' % mobile_ip)
-        return teid_to_ran
-    
-    def rem_mobile(self, mobile_ip='192.168.1.201'):
-        try:
-            ip = inet_aton(mobile_ip)
-        except Exception as err:
-            self._log('ERR', 'mobile_ip (%r) has not the correct format: '\
-                      'cannot configure the GTPU handler' % mobile_ip)
-            return
-        if ip in self._mobiles_ip:
-            self._log('INF', 'unsetting GTP tunnel for mobile with IP %s' % mobile_ip)
-            ran_ip, teid_from_ran, teid_to_ran = self._mobiles_ip[ip]
-            del self._mobiles_ip[ip]
-        if teid_from_ran in self._mobiles_teid:
-            del self._mobiles_teid[teid_from_ran]
-    
-    def get_teid_to_ran(self):
-        if self.GTP_TEID >= self.GTP_TEID_MAX:
-            self.GTP_TEID = randint(0, 200000)
-        self.GTP_TEID += 1
-        return self.GTP_TEID
-    
-    def _analyze(self, ipsrc, ipbuf):
-        #
-        try:
-            stats = self.stats[ipsrc]
-        except:
-            self.init_stats(ipsrc)
-            stats = self.stats[ipsrc]
-        #
-        dst, prot, pay = DPI.get_ip_dst_pay(ipbuf)
-        # UDP
-        if prot == 17 and pay:
-            port = DPI.get_port(pay)
-            if (dst, port) not in stats['UDP']:
-                stats['UDP'].append((dst, port))
-            # DNS
-            if port == 53:
-                if dst not in stats['DNS']:
-                    stats['DNS'].append(dst)
-                name = DPI.get_dn_req(pay[8:])
-                if name not in stats['resolved']:
-                    stats['resolved'].append(name)
-            elif port == 123 and dst not in stats['NTP']:
-                stats['NTP'].append(dst)
-        # TCP
-        elif prot == 6 and pay:
-            port = DPI.get_port(pay)
-            if (dst, port) not in stats['TCP']:
-                stats['TCP'].append((dst, port))
-        # ICMP
-        elif prot == 1 and pay and dst not in stats['ICMP']:
-            stats['ICMP'].append(dst)
-        # alien
+        if ran_ip and teid_dl is not None:
+            gtphdr = pack('>BBHI', 0x30, 0xff, len(buf), teid_dl)
+            try:
+                ret = self.sk_int.sendto(gtphdr + buf, (ran_ip, self.GTP_PORT))
+            except Exception as err:
+                self._log('ERR', 'sk_int IF error (sendto): %s' % err)
         else:
-            stats['alien'].append(hexlify(ipbuf))
-
-
-class DPI:
+            self._log('WNG', 'teid_ul 0x%.8x, downlink GTP parameters not set' % teid_ul)
     
-    @staticmethod
-    def get_ip_dst_pay(ipbuf):
-        # returns a 3-tuple: dst IP, protocol, payload buffer
-        # get IP header length
-        l = (ord(ipbuf[0:1]) & 0x0F) * 4
-        # get dst IP
-        dst = inet_ntoa(ipbuf[16:20])
-        # get protocol
-        prot = ord(ipbuf[9:10])
+    def transfer_v6_to_int(self, buf):
+        #self._log('DBG', 'transfer_v6_to_int()')
+        # buf length is guaranteed >= 40 and ipdst in self._mobiles_addr
         #
-        return (dst, prot, ipbuf[l:])
+        if self.MOD:
+            # possibly process the DL GTP-U payload within modules
+            try:
+                for mod in self.MOD:
+                    if mod.TYPE == 0:
+                        buf = mod.handle_dl(buf)
+                    else:
+                        mod.handle_dl(buf)
+            except Exception as err:
+                self._log('ERR', 'MOD error: %s' % err)        
+        #
+        teid_ul = self._mobiles_addr[buf[24:40]]
+        ran_ip, teid_dl, ipaddr, ctx_num = self._mobiles_teid[teid_ul]
+        #
+        # prepend GTP header and forward to the RAN IP
+        if ran_ip and teid_dl is not None:
+            gtphdr = pack('>BBHI', 0x30, 0xff, len(buf), teid_dl)
+            try:
+                ret = self.sk_int.sendto(gtphdr + buf, (ran_ip, self.GTP_PORT))
+            except Exception as err:
+                self._log('ERR', 'sk_int IF error (sendto): %s' % err)
+        else:
+            self._log('WNG', 'teid_ul 0x%.8x, downlink GTP parameters not set' % teid_ul)
+    
+    #--------------------------------------------------------------------------#
+    # UE management
+    #--------------------------------------------------------------------------#
+    
+    def add_mobile(self, teid_ul, mobile_addr, ran_ip, teid_dl):
+        if mobile_addr[0] == 1:
+            # IPv4
+            ipbuf = inet_aton_cn(*mobile_addr)
+            if len(ipbuf) != 4:
+                self._log('ERR', 'invalid mobile addr %r' % (mobile_addr, ))
+                return
+        elif mobile_addr[0] == 2:
+            # IPv6 prefix (8 bytes) or IPv6
+            ipbuf = inet_aton_cn(*mobile_addr)
+            if len(ipbuf) not in (8, 16):
+                self._log('ERR', 'invalid mobile addr %r' % (mobile_addr, ))
+                return
+        elif mobile_addr[0] == 3:
+            # IPv4v6
+            self.add_mobile(teid_ul, (1, mobile_addr[1]), ran_ip, teid_dl)
+            self.add_mobile(teid_ul, (2, mobile_addr[2]), ran_ip, teid_dl)
+            return
+        else:
+            self._log('ERR', 'invalid mobile addr %r' % (mobile_addr, ))
+        #
+        if teid_ul in self._mobiles_teid:
+            # just increment the ctx_num
+            self._mobiles_teid[teid_ul][3] += 1
+        else:
+            # insert a new context
+            self._mobiles_teid[teid_ul] = [ran_ip, teid_dl, ipbuf, 1]
+            if len(ipbuf) in (4, 16):
+                self._mobiles_addr[ipbuf] = teid_ul
+        self._log('INF', 'setting GTP-U context for UE with IP %s, teid_ul 0x%.8x'\
+                  % (mobile_addr[1], teid_ul))
+    
+    def set_mobile_dl(self, teid_ul, ran_ip=None, teid_dl=None):
+        # enables to reconfigure the DL parameters (RAN IP, DL TEID)
+        try:
+            ran_ip_ori, teid_dl_ori, ipbuf, ctx_num = self._mobiles_teid[teid_ul]
+        except Exception as err:
+            self._log('ERR', 'invalid teid_ul 0x%.8x' % teid_ul)
+            return
+        else:
+            if ran_ip is None:
+                ran_ip = ran_ip_ori
+            if teid_dl is None:
+                teid_dl = teid_dl_ori
+            self._mobiles_teid[teid_ul] = [ran_ip, teid_dl, ipbuf, ctx_num]
+    
+    def rem_mobile(self, teid_ul):
+        if teid_ul in self._mobiles_teid:
+            mobile_ctx = self._mobiles_teid[teid_ul]
+            if mobile_ctx[-1] > 1:
+                # decrement the number of GTP contexts
+                mobile_ctx[-1] -= 1
+            else:
+                # delete the mobile context
+                del self._mobiles_teid[teid_ul]
+                ipbuf, ipaddr = mobile_ctx[2], None
+                if len(ipbuf) in (4, 16):
+                    try:
+                        del self._mobiles_addr[ipbuf]
+                    except:
+                        pass
+                    else:
+                        if len(ipbuf) == 4:
+                            ipaddr = inet_ntoa(ipbuf)
+                        else:
+                            ipaddr = inet_pton(AF_INET6, ipbuf)
+                self._log('INF', 'deleting GTP-U context for UE with IP %s, teid_ul 0x%.8x'\
+                          % (ipaddr, teid_ul))
+
+
+class _DPI(object):
     
     @staticmethod
     def get_port(pay):
+        """return the port TCP / UDP number
+        """
         return unpack('!H', pay[2:4])[0]
-    
+        
     @staticmethod
-    def get_dn_req(req):
+    def __get_dn_req_py2(req):
+        """return the DNS name requested
+        """
         # remove fixed DNS header and Type / Class
         s = req[12:-4]
         n = []
@@ -833,6 +947,98 @@ class DPI:
             n.append( s[1:1+l] )
             s = s[1+l:]
         return b'.'.join(n)
+    
+    @staticmethod
+    def __get_dn_req_py3(req):
+        """return the DNS name requested
+        """
+        # remove fixed DNS header and Type / Class
+        s = req[12:-4]
+        n = []
+        while len(s) > 1:
+            l = s[0]
+            n.append( s[1:1+l] )
+            s = s[1+l:]
+        return b'.'.join(n)
+    
+    if python_version < 3:
+        get_dn_req = __get_dn_req_py2
+    else:
+        get_dn_req = __get_dn_req_py3
+
+
+class DPIv4(_DPI):
+    
+    @staticmethod
+    def __get_ip_info_py2(ipbuf):
+        """return a 3-tuple: ipdst (asc), protocol (uint), payload (bytes)
+        """
+        # returns a 3-tuple: dst IP, protocol, payload buffer
+        # get IP header length
+        l = (ord(ipbuf[0]) & 0x0F) * 4
+        # get dst IP
+        dst = inet_ntoa(ipbuf[16:20])
+        # get protocol
+        prot = ord(ipbuf[9])
+        #
+        return (dst, prot, ipbuf[l:])
+    
+    @staticmethod
+    def __get_ip_info_py3(ipbuf):
+        """return a 3-tuple: ipdst (asc), protocol (uint), payload (bytes)
+        """
+        # returns a 3-tuple: dst IP, protocol, payload buffer
+        # get IP header length
+        l = (ipbuf[0] & 0x0F) * 4
+        # get dst IP
+        dst = inet_ntoa(ipbuf[16:20])
+        # get protocol
+        prot = ipbuf[9]
+        #
+        return (dst, prot, ipbuf[l:])
+    
+    if python_version < 3:
+        get_ip_info = __get_ip_info_py2
+    else:
+        get_ip_info = __get_ip_info_py3
+
+
+class DPIv6(_DPI):
+    
+    @staticmethod
+    def __get_ip_info_py2(ipbuf):
+        """return a 3-tuple: ipdst (asc), protocol (uint), payload (bytes)
+        """
+        # returns a 3-tuple: dst IP, protocol, payload buffer
+        # get payload length
+        pl = unpack('>H', ipbuf[4:6])[0]
+        # get dst IP
+        dst = inet_ntop(AF_INET6, ipbuf[24:40])
+        # get protocol
+        # TODO: unstack IPv6 opts
+        prot = ord(ipbuf[6])
+        #
+        return (dst, prot, ipbuf[-pl:])
+    
+    @staticmethod
+    def __get_ip_info_py3(ipbuf):
+        """return a 3-tuple: ipdst (asc), protocol (uint), payload (bytes)
+        """
+        # returns a 3-tuple: dst IP, protocol, payload buffer
+        # get payload length
+        pl = unpack('>H', ipbuf[4:6])[0]
+        # get dst IP
+        dst = inet_ntop(AF_INET6, ipbuf[24:40])
+        # get protocol
+        # TODO: unstack IPv6 opts
+        prot = ipbuf[6]
+        #
+        return (dst, prot, ipbuf[-pl:])
+    
+    if python_version < 3:
+        get_ip_info = __get_ip_info_py2
+    else:
+        get_ip_info = __get_ip_info_py3
 
 
 class MOD(object):

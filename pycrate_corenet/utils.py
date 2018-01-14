@@ -40,7 +40,8 @@ from time      import time, sleep
 from datetime  import datetime
 from binascii  import hexlify, unhexlify
 from struct    import pack, unpack
-from socket    import ntohl, htonl, ntohs, htons, inet_aton, inet_ntoa
+from socket    import AF_INET, AF_INET6, AF_PACKET, ntohl, htonl, ntohs, htons, \
+                      inet_aton, inet_ntoa, inet_pton, inet_ntop
 
 # SCTP support for S1AP / RUA interfaces
 try:
@@ -75,6 +76,8 @@ from pycrate_asn1dir import RANAP
 # to decode UE 3G and LTE radio capability
 from pycrate_asn1dir import RRC3G
 from pycrate_asn1dir import RRCLTE
+#
+from pycrate_asn1rt.utils import get_val_at
 
 # to drive 3G UE
 from pycrate_mobile  import TS24007
@@ -187,6 +190,69 @@ def asn_ranap_acquire():
 
 def asn_ranap_release():
     ASN_READY_RANAP.set()
+
+
+def decode_ue_rad_cap(buf):
+    UERadCap = RRCLTE.EUTRA_InterNodeDefinitions.UERadioAccessCapabilityInformation
+    try:
+        UERadCap.from_uper(buf)
+    except:
+        return None
+    uecapinfo = {}
+    try:
+        # ue-RadioAccessCapabilityInfo (OCTET STRING) contains UECapabilityInformation (SEQUENCE)
+        radcapinfo = get_val_at(UERadCap, ('criticalExtensions',
+                                           'c1',
+                                           'ueRadioAccessCapabilityInformation-r8',
+                                           'ue-RadioAccessCapabilityInfo',
+                                           'UECapabilityInformation',
+                                           'criticalExtensions',
+                                           'c1',
+                                           'ueCapabilityInformation-r8'))
+    except:
+        UERadCap._val, uecapinfo
+    # decode each ueCapabilityRAT-Container
+    for caprat in radcapinfo['ue-CapabilityRAT-ContainerList']:
+        rattype = caprat['rat-Type'] # eutra, utra, geran-cs, geran-ps, cdma2000-1XRTT
+        if rattype == 'eutra':
+            UEEUTRACap = RRCLTE.EUTRA_RRC_Definitions.UE_EUTRA_Capability
+            try:
+                UEEUTRACap.from_uper(caprat['ueCapabilityRAT-Container'])
+            except:
+                uecapinfo[rattype] = caprat['ueCapabilityRAT-Container']
+            else:
+                uecapinfo[rattype] = UEEUTRACap._val
+        elif rattype == 'utra':
+            UEUTRACap  = RRC3G.PDU_definitions.InterRATHandoverInfo
+            try:
+                UEUTRACap.from_uper(caprat['ueCapabilityRAT-Container'])
+            except:
+                uecapinfo[rattype] = caprat['ueCapabilityRAT-Container']
+            else:
+                uecapinfo[rattype] = UEUTRACap._val
+        elif rattype == 'geran-cs':
+            m2, m3 = NAS.MSCm2(), NAS.Classmark_3_Value_part.clone()
+            # MSCm2 || MSCm3
+            try:
+                m2.from_bytes(caprat['ueCapabilityRAT-Container'])
+                m3.from_bytes(caprat['ueCapabilityRAT-Container'][m2.get_len():])
+            except:
+                uecapinfo[rattype] = caprat['ueCapabilityRAT-Container']
+            else:
+                uecapinfo[rattype] = (m2, m3)
+        elif rattype == 'geran-ps':
+            mrc = NAS.MS_RA_capability_value_part.clone()
+            try:
+                mrc.from_bytes(caprat['ueCapabilityRAT-Container'])
+            except:
+                uecapinfo[rattype] = caprat['ueCapabilityRAT-Container']
+            else:
+                uecapinfo[rattype] = mrc
+        else:
+            uecapinfo[rattype] = caprat['ueCapabilityRAT-Container']
+    return UERadCap._val, uecapinfo
+    
+    
 
 #------------------------------------------------------------------------------#
 # logging facilities
@@ -307,6 +373,15 @@ def imsi_str_to_buf(s):
     return __IMSI.to_bytes()
 
 
+def get_ueseccap_null_alg():
+    seccap = NAS.UESecCap(val={'EEA0': 1, 'EIA0': 1, 'UEA0': 1})
+    return seccap
+
+def get_ueseccap_null_alg_lte():
+    seccap = NAS.UESecCap(val={'EEA0': 1, 'EIA0': 1})
+    seccap.disable_from('UEA0')
+    return seccap
+
 def cellid_bstr_to_str(bstr):
     # 20 or 28 bits
     return hexlify(int_to_bytes(*bstr)).decode('ascii')[:-1]
@@ -322,15 +397,62 @@ def supptas_to_hum(seqof):
              'tAC': bytes_to_uint(sta['tAC'], 16)} for sta in seqof]
 
 
-def gummei_to_asn(val):
+def gummei_to_asn(plmnid, mmegid, mmec):
+    return {'pLMN-Identity': plmn_str_to_buf(plmnid),
+            'mME-Group-ID' : uint_to_bytes(mmegid, 16),
+            'mME-Code'     : uint_to_bytes(mmec, 8)}
+            
+def served_gummei_to_asn(val):
     return {'servedGroupIDs': [uint_to_bytes(gid, 16) for gid in val['GroupIDs']],
-            'servedMMECs': [uint_to_bytes(mmec, 8) for mmec in val['MMECs']],
-            'servedPLMNs': [plmn_str_to_buf(plmn) for plmn in val['PLMNs']]}
+            'servedMMECs'   : [uint_to_bytes(mmec, 8) for mmec in val['MMECs']],
+            'servedPLMNs'   : [plmn_str_to_buf(plmn) for plmn in val['PLMNs']]}
 
 
 def mac_aton(mac='00:00:00:00:00:00'):
     return unhexlify(mac.replace(':', ''))
 
+def inet_aton_cn(*pdnaddr):
+    if pdnaddr[0] == 1:
+        # IPv4 address
+        try:
+            return inet_aton(pdnaddr[1])
+        except:
+            return pdnaddr[1]
+    elif pdnaddr[0] == 2:
+        # accept 64-bit IPv6 prefix / subnet or full 128-bit IPv6 address
+        ipaddr = pdnaddr[1]
+        if ipaddr.count(':') == 3:
+            # IPv6 prefix / subnet only
+            return pack('>HHHH', *map(lambda x:int(x, 16), ipaddr.split(':')))
+        else:
+            try:
+                return inet_pton(AF_INET6, ipaddr)
+            except:
+                return ipaddr
+    elif pdnaddr[0] == 3:
+        # IPv4v6 addresses
+        try:
+            return inet_aton(pdnaddr[1]) + inet_aton_cn(2, pdnaddr[2])
+        except:
+            return pdnaddr[1]
+    else:
+        # unknown address type
+        return pdnaddr[1]
+
+def inet_ntoa_cn(pdntype, buf):
+    if pdntype == 1:
+        # IPv4 address
+        return (1, inet_ntoa(buf))
+    elif pdntype == 2:
+        # accept 64-bit IPv6 prefix / subnet or full 128-bit IPv6 address
+        if len(buf) == 8:
+            return (2, '%x:%x:%x:%x' % unpack('>HHHH', buf))
+        else:
+            return (2, inet_ntop(AF_INET6, buf))
+    elif pdntype == 3:
+        return (3, inet_ntoa(buf[:4]), inet_ntoa_cn(2, buf[4:])[1])
+    else:
+        return (pdntype, buf)
 
 #------------------------------------------------------------------------------#
 # ASN.1 object handling facilities

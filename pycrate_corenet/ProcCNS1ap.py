@@ -421,6 +421,88 @@ class S1APInitialContextSetup(S1APSigProc):
         'suc': ({}, {}),
         'uns': ({}, {})
         }
+    
+    def send(self):
+        self._enable_gtpu()
+        return self._send()
+    
+    def _enable_gtpu(self):
+        if hasattr(self, '_gtp_add_mobile_ebi'):
+            for erab in self._gtp_add_mobile_ebi:
+                pdncfg = self.S1.ESM.PDN[erab]
+                pdncfg['state'] = 1
+                self.UE.Server.GTPUd.add_mobile(
+                    pdncfg['RAB']['SGW-GTP-TEID'], # teid_ul
+                    pdncfg['PDNAddr'], # mobile_addr
+                    pdncfg['RAB']['ENB-TLA'], # ran_ip (maybe None)
+                    pdncfg['RAB']['ENB-GTP-TEID']) # teid_dl (maybe None)
+        else:
+            self._log('WNG', 'enable_gtpu: no GTP mobile info provided')
+    
+    def _disable_gtpu(self):
+        if hasattr(self, '_gtp_rem_mobile_ebi'):
+            for erab in self._gtp_rem_mobile_ebi:
+                pdncfg = self.S1.ESM.PDN[erab]
+                self.Server.GTPUd.rem_mobile(pdncfg['RAB']['SGW-GTP-TEID'])
+                pdncfg['state'] = 0
+        else:
+            self._log('WNG', 'disable_gtpu: no GTP mobile info provided')
+    
+    def recv(self, pdu):
+        self._recv(pdu)
+        try:
+            del self.S1.Proc[self.Code]
+        except:
+            pass
+        #
+        if self.errcause:
+            self._log('WNG', 'error in the response decoding')
+            self.success = False
+            if hasattr(self, '_gtp_add_mobile_ebi'):
+                self._gtp_rem_mobile_ebi = self._gtp_add_mobile_ebi
+                self._disable_gtpu()
+        #
+        elif pdu[0] == 'unsuccessfulOutcome':
+            try:
+                self._log('WNG', 'failure, rejected with cause %r' % (self.UEInfo['Cause'], ))
+            except:
+                self._log('WNG', 'failure, rejected without cause')
+            self.success = False
+            if hasattr(self, '_gtp_add_mobile_ebi'):
+                self._gtp_rem_mobile_ebi = self._gtp_add_mobile_ebi
+                self._disable_gtpu()
+        #
+        else:
+            self.success = True
+            # E-RAB successfully established, to be completed with eNB IP and TEID
+            for erabsetupitem in self.UEInfo['E_RABSetupListCtxtSURes']:
+                erabsetupitem = erabsetupitem['value'][1]
+                erab = erabsetupitem['e-RAB-ID']
+                if erab in self._gtp_add_mobile_ebi:
+                    pdncfg = self.S1.ESM.PDN[erab]
+                    pdncfg['ENB-TLA'] = inet_ntoa(uint_to_bytes(*erabsetupitem['transportLayerAddress']))
+                    pdncfg['ENB-GTP-TEID'] = bytes_to_uint(erabsetupitem['gTP-TEID'], 32)
+                    self.Server.GTPUd.set_mobile_dl(
+                        pdncfg['RAB']['SGW-GTP-TEID'], # teid_ul
+                        ran_ip=pdncfg['ENB-TLA'],
+                        teid_dl=pdncfg['ENB-GTP-TEID'])
+            # E-RAB failed to established
+            if 'E_RABList' in self.UEInfo:
+                self._gtp_rem_mobile_ebi = []
+                for erabitem in self.UEInfo['E_RABList']:
+                    erabitem = erabitem['value'][1]
+                    erab = erabitem['e-RAB-ID']
+                    if erab in self._gtp_add_mobile_ebi:
+                        self._gtp_rem_mobile_ebi.append(erab)
+                        self._log('INF', 'unable to establish E-RAB %i, cause %r'\
+                                  % (erab, erabitem['cause']))
+                self._disable_gtpu()
+    
+    def abort(self):
+        S1APSigProc.abort(self)
+        if hasattr(self, '_gtp_add_mobile_ebi'):
+            self._gtp_rem_mobile_ebi = self._gtp_add_mobile_ebi
+            self._disable_gtpu()
 
 
 class S1APUEContextReleaseRequest(S1APSigProc):
@@ -455,8 +537,7 @@ class S1APUEContextReleaseRequest(S1APSigProc):
         'uns': None
         }
     
-    def recv(self, pdu):
-        self._recv(pdu)
+    recv = S1APSigProc._recv
     
     def trigger(self):
         # copy the cause signaled by the eNB
@@ -512,10 +593,12 @@ class S1APUEContextRelease(S1APSigProc):
     send = S1APSigProc._send
     
     def _release_s1(self):
+        # suspend all RAB
+        self.S1.ESM.pdn_suspend()
         # update mobility state
         if self.S1.EMM.state != 'INACTIVE':
             self.S1.EMM.state = 'IDLE'
-        self._log('INF', 'UE disconnected')
+        self._log('INF', 'UE disconnected, cause %r' % (self._NetInfo['Cause'], ))
         #
         # disconnect the S1 interface to the eNB for the UE
         self.S1.unset_ran()
@@ -1723,7 +1806,7 @@ class S1APS1Setup(S1APNonUESigProc):
                            self.ENBInfo['Global_ENB_ID']['eNB-ID'][1])
             # prepare the S1SetupResponse
             IEs = cpdict(self.Server.ConfigS1)
-            IEs['ServedGUMMEIs'] = [gummei_to_asn(gummei) for gummei in IEs['GUMMEIs']]
+            IEs['ServedGUMMEIs'] = [served_gummei_to_asn(gummei) for gummei in IEs['GUMMEIs']]
             del IEs['GUMMEIs']
             self.encode_pdu('suc', **IEs)
             self._log('INF', 'eNB S1 setup successfully')
@@ -1989,7 +2072,15 @@ class S1APUECapabilityInfoInd(S1APSigProc):
         'suc': None,
         'uns': None
         }
-
+    
+    def recv(self, pdu):
+        self._recv(pdu)
+        if not self.errcause:
+            # set the UERadioCapability in UE.Cap
+            ueradcap, uecapinfo = decode_ue_rad_cap(self.UEInfo['UERadioCapability'])
+            self.UE.Cap['UERadioCap'] = (self.UEInfo['UERadioCapability'], ueradcap, uecapinfo)
+            if 'UERadioCapabilityForPaging' in self.UEInfo:
+                self.UE.Cap['UERadioCapPaging'] = self.UEInfo['UERadioCapabilityForPaging']
 
 #------------------------------------------------------------------------------#
 # Trace Procedures

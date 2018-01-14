@@ -43,11 +43,12 @@ from .HdlrHNB    import HNBd
 from .HdlrENB    import ENBd
 from .HdlrUE     import UEd
 from .ServerAuC  import AuC
-from .ServerGTPU import GTPUd
+from .ServerGTPU import ARPd, GTPUd, BLACKHOLE_LAN, BLACKHOLE_WAN
 
 
 # to log all the SCTP socket send() / recv() calls
 DEBUG_SK = False
+
 
 # global HNB debug level
 HNBd.DEBUG = ('ERR', 'WNG', 'INF') #, 'DBG')
@@ -64,7 +65,7 @@ UEd.TRACE_RANAP_PS    = False
 UEd.TRACE_NAS_CS      = False
 UEd.TRACE_NAS_PS      = False
 UEd.TRACE_S1AP        = True
-UEd.TRACE_NAS_EPS_ENC = True
+UEd.TRACE_NAS_EPS_SEC = False
 UEd.TRACE_NAS_EPS     = True
 UEd.TRACE_NAS_EPS_SMS = True
 
@@ -94,7 +95,7 @@ class CorenetServer(object):
                   'port'  : 29169,
                   'MAXCLI': SERVER_MAXCLI,
                   'errclo': True}
-    #SERVER_HNB = {} # disabling HNB server
+    SERVER_HNB = {} # disabling HNB server
     # S1AP server
     SERVER_ENB = {'INET'  : socket.AF_INET,
                   'IP'    : '127.0.1.100',
@@ -139,7 +140,7 @@ class CorenetServer(object):
     EQUIV_PLMN = None
     # emergency number lists
     # None or list of 2-tuple [(number_category, number), ...]
-    # number_category is a 5 bit uint set of flags (Police, Ambulance, Fire, Marine, Mountain)
+    # number_category is an uint5 set of flags (Police, Ambulance, Fire, Marine, Mountain)
     # number is a digits string
     EMERG_NUMS = None
     #
@@ -196,17 +197,18 @@ class CorenetServer(object):
     #
     # UE configuration parameters
     ConfigUE = {
-        # $IMSI: {'PDN'   : [($APN -str-, $PDNType -1..3-, $IPAddr -str-), ...], 
+        # $IMSI: {'PDN'   : [($APN -str-, $PDNType -1..3-, $IPAddr -str-, ...), ...], 
         #         'MSISDN': $phone_num -str-,
         #         'USIM'  : $milenage_supported -bool-}
-        # PDN type: 1:IPv4, 2:IPv6, 3:IPv4v6
+        # PDN type: 1:IPv4, 2:IPv6 /64 prefix, 3:IPv4v6 (-> 1 IPv4 + 1 IPv6 /64 prefix)
         '*': {'PDP'   : [],
               'PDN'   : [('*', 1, '192.168.132.199')],
               'MSISDN': '0123456789',
               'USIM'  : True
               },
         '208691664001001': {'PDP'   : [],
-                            'PDN'   : [('*', 1, '192.168.132.201')],
+                            'PDN'   : [('*', 3, '192.168.132.201', '2001:7a8:1161:132'),
+                                       ('corenet', 1, '192.168.132.201')],
                             'MSISDN': '16641001',
                             'USIM'  : True
                             }
@@ -217,9 +219,27 @@ class CorenetServer(object):
         }
     #
     # Packet Data Network config for EPC, per APN
+    # config elements available:
+    # DNS : tuple of DNS server addr (in PDNAddr format style: 
+    #       1->IPv4 2-tuple addr, 2->IPv6 2-tuple addr)
+    # PAP : dict of {peerid : passwd}
+    # CHAP: dict of ???
+    # MTU : 2-tuple (IPv4 link MTU, non-IP link MTU)
     ConfigPDN = {
-        '*'      : {'DNS': ('192.168.253.1', '192.168.253.2')},
-        'corenet': {'DNS': ('192.168.253.1', '192.168.253.2')},
+        '*': {
+            'QCI': 9,
+            'DNS': ((1, '192.168.253.1'),
+                    (1, '192.168.253.2'),
+                    (2, '2001:4860:4860::8888'), # Google DNS server
+                    (2, '2001:4860:4860::8844')),
+            'MTU': (None, None),
+            },
+        'corenet': {
+            'QCI': 9,
+            'DNS': ((1, '192.168.253.1'),
+                    (1, '192.168.253.2')),
+            'MTU': (None, None),
+            },
         }
     #
     # UE, indexed by IMSI, and their UEd handler instance
@@ -303,9 +323,13 @@ class CorenetServer(object):
         # (with a dummy thread, which will be overridden at runtime)
         self._clean_ue_proc = threadit( lambda: 1 )
         #
+        # clear LAI, RAI, TAI dict
         self.LAI.clear()
         self.RAI.clear()
         self.TAI.clear()
+        #
+        # initialize GTP TEID UL counter
+        self.GTP_TEID_UL = randint(1, 200000)
         #
         # start sub-servers
         if self.AUCd:
@@ -1046,7 +1070,7 @@ class CorenetServer(object):
                         if hasattr(P, 'TimerStop') and T > P.TimerStop:
                             P._log('WNG', 'timeout: aborting')
                             P.abort()
-            
+                
                 #if ue.IuCS.CC.Proc:
                 #    for P in ue.IuCS.CC.Proc.values():
                 #        if hasattr(P, 'TimerStop') and T > P.TimerStop:
@@ -1058,7 +1082,7 @@ class CorenetServer(object):
                 #        if hasattr(P, 'TimerStop') and T > P.TimerStop:
                 #            P._log('WNG', 'timeout: aborting')
                 #            P.abort()
-            
+                
                 #if ue.IuCS.SS.Proc:
                 #    for P in ue.IuCS.SS.Proc.values():
                 #        if hasattr(P, 'TimerStop') and T > P.TimerStop:
@@ -1080,11 +1104,23 @@ class CorenetServer(object):
                 #            P._log('WNG', 'timeout: aborting')
                 #            P.abort()
             
-            #if ue.S1 is not None:
-            #
-                #if ue.S1.EMM.Proc:
-                #    pass
+            if ue.S1 is not None:
+            
+                if ue.S1.EMM.Proc:
+                    for P in ue.S1.EMM.Proc:
+                        if hasattr(P, 'TimerStop') and T > P.TimerStop:
+                            P._log('WNG', 'timeout: aborting')
+                            P.abort()
                 
                 #if ue.S1.ESM.Proc:
                 #    pass
+    
+    def get_sgw_addr(self):
+        return self.GTPUd.GTP_IP
+    
+    def get_gtp_teid(self):
+        if self.GTP_TEID_UL > 4294967294:
+            self.GTP_TEID_UL = randint(1, 200000)
+        self.GTP_TEID_UL += 1
+        return self.GTP_TEID_UL
 
