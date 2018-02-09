@@ -838,7 +838,7 @@ Specific attribute:
     
     
     def _safechk_val(self, val):
-        if val not in self._cont:
+        if not isinstance(val, str_types) or val not in self._cont:
             if self._ext is None or not re.match('_ext_[0-9]{1,}', val):
                 raise(ASN1ObjErr('{0}: invalid value, {1!r}'.format(self.fullname(), val)))
     
