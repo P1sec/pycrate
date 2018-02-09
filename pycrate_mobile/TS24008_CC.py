@@ -27,6 +27,57 @@
 # *--------------------------------------------------------
 #*/
 
+__all__ = [
+    'CCAlertingMO',
+    'CCAlertingMT',
+    'CCCallConfirmed',
+    'CCCallProceeding',
+    'CCCongestionControl',
+    'CCConnectAcknowledge',
+    'CCConnectMO',
+    'CCConnectMT',
+    'CCDisconnectMO',
+    'CCDisconnectMT',
+    'CCEmergencySetup',
+    'CCEstablishmentCCBS',
+    'CCEstablishmentConfirmedCCBS',
+    'CCFacilityMO',
+    'CCFacilityMT',
+    'CCHold',
+    'CCHoldAcknowledge',
+    'CCHoldReject',
+    'CCModify',
+    'CCModifyComplete',
+    'CCModifyReject',
+    'CCNotify',
+    'CCProgress',
+    'CCRecallCCBS',
+    'CCReleaseCompleteMO',
+    'CCReleaseCompleteMT',
+    'CCReleaseMO',
+    'CCReleaseMT',
+    'CCRetrieve',
+    'CCRetrieveAcknowledge',
+    'CCRetrieveReject',
+    'CCSetupMO',
+    'CCSetupMT',
+    'CCStartCCBS',
+    'CCStartDTMF',
+    'CCStartDTMFAcknowledge',
+    'CCStartDTMFReject',
+    'CCStatus',
+    'CCStatusEnquiry',
+    'CCStopDTMF',
+    'CCStopDTMFAcknowledge',
+    'CCUserInformation',
+    #
+    'CCTypeMOClasses',
+    'CCTypeMTClasses',
+    'get_cc_msg_mo_instances',
+    'get_cc_msg_mt_instances'
+    ]
+
+
 #------------------------------------------------------------------------------#
 # 3GPP TS 24.008: Mobile radio interface layer 3 specification
 # release 13 (d90)
@@ -86,11 +137,9 @@ _CS_CC_dict = {
 
 class CCHeader(Envelope):
     _GEN = (
-        Uint('TIFlag', bl=1, dic={0: 'initiator', 1: 'responder'}),
-        Uint('TIO', bl=3),
-        Uint('ProtDisc', val=3, bl=4, dic=ProtDisc_dict),
+        TIPD(val={'ProtDisc': 3}),
         Uint('Seqn', bl=2),
-        Uint('Type', val=61, bl=6, dic=_CS_CC_dict),
+        Uint('Type', val=61, bl=6, dic=_CS_CC_dict)
         )
 
 
@@ -100,7 +149,8 @@ class CCHeader(Envelope):
 #------------------------------------------------------------------------------#
 
 class CCAlertingMT(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':1})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':1}),
         Type4TLV('Facility', val={'T':0x1C, 'V':b''}),
         Type4TLV('ProgressInd', val={'T':0x1E, 'V':b'\x80\x80'}, IE=ProgressInd()),
         Type4TLV('UserUser', val={'T':0x7E, 'V':b'\x04'}, IE=UserUser())
@@ -113,7 +163,8 @@ class CCAlertingMT(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCAlertingMO(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':1})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':1}),
         Type4TLV('Facility', val={'T':0x1C, 'V':b''}),
         Type4TLV('UserUser', val={'T':0x7E, 'V':b'\x04'}, IE=UserUser()),
         Type4TLV('SSVersion', val={'T':0x7F, 'V':b''}, IE=SSVersion())
@@ -126,7 +177,8 @@ class CCAlertingMO(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCCallConfirmed(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':8})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':8}),
         Type1TV('RepeatInd', val={'T':0xD, 'V':2}, dic=RepeatInd_dict),
         Type4TLV('BearerCap1', val={'T':0x4, 'V':b'\xa0'}, IE=BearerCap()),
         Type4TLV('BearerCap2', val={'T':0x4, 'V':b'\xa0'}, IE=BearerCap()),
@@ -143,7 +195,8 @@ class CCCallConfirmed(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCCallProceeding(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':2})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':2}),
         Type1TV('RepeatInd', val={'T':0xD, 'V':2}, dic=RepeatInd_dict),
         Type4TLV('BearerCap1', val={'T':0x4, 'V':b'\xa0'}, IE=BearerCap()),
         Type4TLV('BearerCap2', val={'T':0x4, 'V':b'\xa0'}, IE=BearerCap()),
@@ -160,10 +213,11 @@ class CCCallProceeding(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCCongestionControl(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':57})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':57}),
         Uint('spare', bl=4),
-        Uint('CongestionLevel', bl=4, dic=CongestionLevel_dict),
-        Type4TLV('Cause', val={'T':0x8, 'V':b'\x80\x80'}, IE=Cause()),
+        Type1V('CongestionLevel', dic=CongestionLevel_dict),
+        Type4TLV('Cause', val={'T':0x8, 'V':b'\x80\x80'}, IE=Cause())
         )
 
 
@@ -173,7 +227,8 @@ class CCCongestionControl(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCConnectMT(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':7})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':7}),
         Type4TLV('Facility', val={'T':0x1C, 'V':b''}),
         Type4TLV('ProgressInd', val={'T':0x1E, 'V':b'\x80\x80'}, IE=ProgressInd()),
         Type4TLV('ConnectedNumber', val={'T':0x4C, 'V':b'\x91'}, IE=ConnectedNumber()),
@@ -188,12 +243,13 @@ class CCConnectMT(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCConnectMO(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':7})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':7}),
         Type4TLV('Facility', val={'T':0x1C, 'V':b''}),
         Type4TLV('ConnectedSubaddress', val={'T':0X4D, 'V':b'\x80'}, IE=ConnectedSubaddress()),
         Type4TLV('UserUser', val={'T':0x7E, 'V':b'\x04'}, IE=UserUser()),
         Type4TLV('SSVersion', val={'T':0x7F, 'V':b''}, IE=SSVersion()),
-        Type4TLV('StreamIdent', val={'T':0x2D, 'V':b'\0'}, IE=StreamIdent()),
+        Type4TLV('StreamIdent', val={'T':0x2D, 'V':b'\0'}, IE=StreamIdent())
         )
 
 
@@ -203,7 +259,9 @@ class CCConnectMO(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCConnectAcknowledge(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':15})._content)
+    _GEN = (
+        CCHeader(val={'Type':15}),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -212,7 +270,8 @@ class CCConnectAcknowledge(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCDisconnectMT(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':37})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':37}),
         Type4LV('Cause', val={'V':b'\x80\x80'}, IE=Cause()),
         Type4TLV('Facility', val={'T':0x1C, 'V':b''}),
         Type4TLV('ProgressInd', val={'T':0x1E, 'V':b'\x80\x80'}, IE=ProgressInd()),
@@ -227,7 +286,8 @@ class CCDisconnectMT(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCDisconnectMO(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':37})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':37}),
         Type4LV('Cause', val={'V':b'\x80\x80'}, IE=Cause()),
         Type4TLV('Facility', val={'T':0x1C, 'V':b''}),
         Type4TLV('UserUser', val={'T':0x7E, 'V':b'\x04'}, IE=UserUser()),
@@ -241,7 +301,8 @@ class CCDisconnectMO(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCEmergencySetup(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':14})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':14}),
         Type4TLV('BearerCap', val={'T':0x4, 'V':b'\xa0'}, IE=BearerCap()),
         Type4TLV('StreamIdent', val={'T':0x2D, 'V':b'\0'}, IE=StreamIdent()),
         Type4TLV('SupportedCodecs', val={'T':0x40, 'V':b'\0\x01\0'}, IE=SupportedCodecs()),
@@ -255,7 +316,8 @@ class CCEmergencySetup(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCFacilityMT(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':58})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':58}),
         Type4LV('Facility', val={'V':b''}),
         )
 
@@ -266,7 +328,8 @@ class CCFacilityMT(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCFacilityMO(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':58})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':58}),
         Type4LV('Facility', val={'V':b''}),
         Type4TLV('SSVersion', val={'T':0x7F, 'V':b''}, IE=SSVersion())
         )
@@ -278,7 +341,9 @@ class CCFacilityMO(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCHold(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':24})._content)
+    _GEN = (
+        CCHeader(val={'Type':24}),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -287,7 +352,9 @@ class CCHold(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCHoldAcknowledge(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':25})._content)
+    _GEN = (
+        CCHeader(val={'Type':25}),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -296,7 +363,8 @@ class CCHoldAcknowledge(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCHoldReject(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':26})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':26}),
         Type4LV('Cause', val={'V':b'\x80\x80'}, IE=Cause()),
         )
 
@@ -307,7 +375,8 @@ class CCHoldReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCModify(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':23})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':23}),
         Type4LV('BearerCap', val={'V':b'\xa0'}, IE=BearerCap()),
         Type4TLV('LowLayerComp', val={'T':0x7C, 'V':b''}),
         Type4TLV('HighLayerComp', val={'T':0x7D, 'V':b''}, IE=HighLayerComp()),
@@ -322,7 +391,8 @@ class CCModify(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCModifyComplete(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':31})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':31}),
         Type4LV('BearerCap', val={'V':b'\xa0'}, IE=BearerCap()),
         Type4TLV('LowLayerComp', val={'T':0x7C, 'V':b''}),
         Type4TLV('HighLayerComp', val={'T':0x7D, 'V':b''}, IE=HighLayerComp()),
@@ -336,7 +406,8 @@ class CCModifyComplete(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCModifyReject(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':19})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':19}),
         Type4LV('BearerCap', val={'V':b'\xa0'}, IE=BearerCap()),
         Type4LV('Cause', val={'V':b'\x80\x80'}, IE=Cause()),
         Type4TLV('LowLayerComp', val={'T':0x7C, 'V':b''}),
@@ -350,8 +421,9 @@ class CCModifyReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCNotify(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':62})._content) + (
-        NotificationInd(),
+    _GEN = (
+        CCHeader(val={'Type':62}),
+        Type3V('NotificationInd', val={'V':b'\x80'}, bl={'V':8}, IE=NotificationInd()),
         )
 
 
@@ -361,7 +433,8 @@ class CCNotify(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCProgress(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':3})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':3}),
         Type4LV('ProgressInd', val={'V':b'\x80\x80'}, IE=ProgressInd()),
         Type4TLV('UserUser', val={'T':0x7E, 'V':b'\x04'}, IE=UserUser())
         )
@@ -373,7 +446,8 @@ class CCProgress(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCEstablishmentCCBS(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':4})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':4}),
         Type4LV('SetupContainer', val={'V':b''}),
         )
 
@@ -384,7 +458,8 @@ class CCEstablishmentCCBS(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCEstablishmentConfirmedCCBS(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':6})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':6}),
         Type1TV('RepeatInd', val={'T':0xD, 'V':2}, dic=RepeatInd_dict),
         Type4TLV('BearerCap1', val={'T':0x4, 'V':b'\xa0'}, IE=BearerCap()),
         Type4TLV('BearerCap2', val={'T':0x4, 'V':b'\xa0'}, IE=BearerCap()),
@@ -399,7 +474,8 @@ class CCEstablishmentConfirmedCCBS(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCReleaseMT(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':45})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':45}),
         Type4TLV('Cause', val={'T':0x8, 'V':b'\x80\x80'}, IE=Cause()),
         Type4TLV('SecondCause', val={'T':0x8, 'V':b'\x80\x80'}, IE=Cause()),
         Type4TLV('Facility', val={'T':0x1C, 'V':b''}),
@@ -413,7 +489,8 @@ class CCReleaseMT(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCReleaseMO(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':45})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':45}),
         Type4TLV('Cause', val={'T':0x8, 'V':b'\x80\x80'}, IE=Cause()),
         Type4TLV('SecondCause', val={'T':0x8, 'V':b'\x80\x80'}, IE=Cause()),
         Type4TLV('Facility', val={'T':0x1C, 'V':b''}),
@@ -428,8 +505,9 @@ class CCReleaseMO(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCRecallCCBS(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':11})._content) + (
-        RecallType(),
+    _GEN = (
+        CCHeader(val={'Type':11}),
+        Type3V('RecallType', val={'V':b'\0'}, bl={'V':8}, IE=RecallType()),
         Type4LV('Facility', val={'V':b''})
         )
 
@@ -440,7 +518,8 @@ class CCRecallCCBS(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCReleaseCompleteMT(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':42})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':42}),
         Type4TLV('Cause', val={'T':0x8, 'V':b'\x80\x80'}, IE=Cause()),
         Type4TLV('Facility', val={'T':0x1C, 'V':b''}),
         Type4TLV('UserUser', val={'T':0x7E, 'V':b'\x04'}, IE=UserUser())
@@ -453,7 +532,8 @@ class CCReleaseCompleteMT(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCReleaseCompleteMO(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':42})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':42}),
         Type4TLV('Cause', val={'T':0x8, 'V':b'\x80\x80'}, IE=Cause()),
         Type4TLV('Facility', val={'T':0x1C, 'V':b''}),
         Type4TLV('UserUser', val={'T':0x7E, 'V':b'\x04'}, IE=UserUser()),
@@ -467,7 +547,9 @@ class CCReleaseCompleteMO(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCRetrieve(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':28})._content)
+    _GEN = (
+        CCHeader(val={'Type':28}),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -476,7 +558,9 @@ class CCRetrieve(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCRetrieveAcknowledge(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':29})._content)
+    _GEN = (
+        CCHeader(val={'Type':29}),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -485,7 +569,8 @@ class CCRetrieveAcknowledge(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCRetrieveReject(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':30})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':30}),
         Type4LV('Cause', val={'V':b'\x80\x80'}, IE=Cause()),
         )
 
@@ -496,7 +581,8 @@ class CCRetrieveReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCSetupMT(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':5})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':5}),
         Type1TV('RepeatInd', val={'T':0xD, 'V':2}, dic=RepeatInd_dict),
         Type4TLV('BearerCap1', val={'T':0x4, 'V':b'\xa0'}, IE=BearerCap()),
         Type4TLV('BearerCap2', val={'T':0x4, 'V':b'\xa0'}, IE=BearerCap()),
@@ -530,7 +616,8 @@ class CCSetupMT(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCSetupMO(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':5})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':5}),
         Type1TV('RepeatInd', val={'T':0xD, 'V':2}, dic=RepeatInd_dict),
         Type4TLV('BearerCap1', val={'T':0x4, 'V':b'\xa0'}, IE=BearerCap()),
         Type4TLV('BearerCap2', val={'T':0x4, 'V':b'\xa0'}, IE=BearerCap()),
@@ -563,7 +650,8 @@ class CCSetupMO(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCStartCCBS(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':9})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':9}),
         Type4TLV('CCCap', val={'T':0x15, 'V':b'\x01\0'}, IE=CCCap()),
         )
 
@@ -574,7 +662,8 @@ class CCStartCCBS(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCStartDTMF(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':53})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':53}),
         Type3TV('KeypadFacility', val={'T':0x2C, 'V':b'0'}, bl={'V':8}),
         )
 
@@ -585,7 +674,8 @@ class CCStartDTMF(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCStartDTMFAcknowledge(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':54})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':54}),
         Type3TV('KeypadFacility', val={'T':0x2C, 'V':b'0'}, bl={'V':8}),
         )
 
@@ -596,7 +686,8 @@ class CCStartDTMFAcknowledge(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCStartDTMFReject(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':55})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':55}),
         Type4LV('Cause', val={'V':b'\x80\x80'}, IE=Cause()),
         )
 
@@ -607,9 +698,10 @@ class CCStartDTMFReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCStatus(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':61})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':61}),
         Type4LV('Cause', val={'V':b'\x80\x80'}, IE=Cause()),
-        CallState(),
+        Type3V('CallState', val={'V':b'\0'}, bl={'V':8}, IE=CallState()),
         Type4TLV('AuxiliaryStates', val={'T':0x24, 'V':b'\x80'}, IE=AuxiliaryStates())
         )
 
@@ -620,7 +712,9 @@ class CCStatus(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCStatusEnquiry(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':52})._content)
+    _GEN = (
+        CCHeader(val={'Type':52}),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -629,7 +723,9 @@ class CCStatusEnquiry(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCStopDTMF(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':49})._content)
+    _GEN = (
+        CCHeader(val={'Type':49}),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -638,7 +734,9 @@ class CCStopDTMF(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCStopDTMFAcknowledge(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':50})._content)
+    _GEN = (
+        CCHeader(val={'Type':50}),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -647,7 +745,8 @@ class CCStopDTMFAcknowledge(Layer3):
 #------------------------------------------------------------------------------#
 
 class CCUserInformation(Layer3):
-    _GEN = tuple(CCHeader(val={'Type':16})._content) + (
+    _GEN = (
+        CCHeader(val={'Type':16}),
         Type4TLV('UserUser', val={'T':0x7E, 'V':b'\x04'}, IE=UserUser()),
         Type2('MoreData', val={'T':0xA0})
         )

@@ -31,15 +31,20 @@ from pycrate_core.utils import *
 if python_version < 3:
     from struct import unpack
 
+from .TS24008_IE    import *
 from .TS24008_MM    import *
 from .TS24008_CC    import *
-from .TS24011_PPSMS import *
 from .TS24080_SS    import *
 from .TS44018_RR    import *
+
+from .TS24011_PPSMS import *
+from .TS23040_SMS   import *
+from .TS23038       import *
 
 from .TS24008_GMM   import *
 from .TS24008_SM    import *
 
+from .TS24301_IE    import *
 from .TS24301_EMM   import *
 from .TS24301_ESM   import *
 from .NASLTE        import *

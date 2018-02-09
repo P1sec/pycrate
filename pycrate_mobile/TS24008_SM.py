@@ -27,6 +27,36 @@
 # *--------------------------------------------------------
 #*/
 
+__all__ = [
+    'SMActivateMBMSContextAccept',
+    'SMActivateMBMSContextReject',
+    'SMActivateMBMSContextRequest',
+    'SMActivatePDPContextAccept',
+    'SMActivatePDPContextReject',
+    'SMActivatePDPContextRequest',
+    'SMActivateSecondaryPDPContextAccept',
+    'SMActivateSecondaryPDPContextReject',
+    'SMActivateSecondaryPDPContextRequest',
+    'SMDeactivatePDPContextAccept',
+    'SMDeactivatePDPContextRequest',
+    'SMModifyPDPContextAcceptMO',
+    'SMModifyPDPContextAcceptMT',
+    'SMModifyPDPContextReject',
+    'SMModifyPDPContextRequestMO',
+    'SMModifyPDPContextRequestMT',
+    'SMNotification',
+    'SMRequestMBMSContextActivation',
+    'SMRequestMBMSContextActivationReject',
+    'SMRequestPDPContextActivation',
+    'SMRequestPDPContextActivationReject',
+    'SMRequestSecondaryPDPContextActivation',
+    'SMRequestSecondaryPDPContextActivationReject',
+    'SMStatus',
+    #
+    'SMTypeClasses',
+    'get_sm_msg_instances'
+    ]
+
 #------------------------------------------------------------------------------#
 # 3GPP TS 24.008: Mobile radio interface layer 3 specification
 # release 13 (d90)
@@ -74,8 +104,7 @@ _PS_SM_dict = {
 
 class SMHeader(Envelope):
     _GEN = (
-        Uint('TransId', val=0, bl=4), # TODO: this may be extended to 12 bits
-        Uint('ProtDisc', val=10, bl=4, dic=ProtDisc_dict),
+        TIPD(val={'ProtDisc': 10}),
         Uint8('Type', val=85, dic=_PS_SM_dict),
         )
 
@@ -85,16 +114,17 @@ class SMHeader(Envelope):
 #------------------------------------------------------------------------------#
 
 class SMActivatePDPContextRequest(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':65})._content) + (
-        NSAPI(),
-        LLC_SAPI(),
+    _GEN = (
+        SMHeader(val={'Type':65}),
+        Type3V('NSAPI', val={'V':b'\x05'}, bl={'V':8}, IE=NSAPI()),
+        Type3V('LLC_SAPI', val={'V':b'\0'}, bl={'V':8}, IE=LLC_SAPI()),
         Type4LV('QoS', val={'V':11*b'\x00'}, IE=QoS()),
         Type4LV('PDPAddr', val={'V':b'\x00\x01'}, IE=PDPAddr()),
-        Type4TLV('APN', val={'T':0x28, 'V':b'\x00'}, trans=True),
-        Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig(), trans=True),
-        Type1TV('ReqType', val={'T':0xA, 'V':1}, dic=RequestType_dict, trans=True),
-        Type1TV('DeviceProp', val={'T':0xC, 'V':0}, IE=DeviceProp(), trans=True),
-        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\x00'}, trans=True)
+        Type4TLV('APN', val={'T':0x28, 'V':b'\0'}, IE=APN()),
+        Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
+        Type1TV('ReqType', val={'T':0xA, 'V':1}, dic=RequestType_dict),
+        Type1TV('DeviceProp', val={'T':0xC, 'V':0}, IE=DeviceProp()),
+        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\x00'})
         )
 
 
@@ -104,15 +134,16 @@ class SMActivatePDPContextRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class SMActivatePDPContextAccept(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':66})._content) + (
-        LLC_SAPI(),
+    _GEN = (
+        SMHeader(val={'Type':66}),
+        Type3V('LLC_SAPI', val={'V':b'\0'}, bl={'V':8}, IE=LLC_SAPI()),
         Type4LV('QoS', val={'V':11*b'\0'}, IE=QoS()),
         Uint('spare', bl=4),
-        RadioPriority(),
+        Type1V('RadioPriority', dic=RadioPrio_dict),
         Type4TLV('PDPAddr', val={'T':0x2B, 'V':b'\0\x01'}, IE=PDPAddr()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type4TLV('PacketFlowId', val={'T':0x34, 'V':b'\0'}, IE=PacketFlowId()),
-        Type4TLV('SMCause', val={'T':0x39, 'V':b'\0'}, IE=SMCause()),
+        Type4TLV('SMCause', val={'T':0x39, 'V':b'\x6f'}, IE=SMCause()),
         Type1TV('ConType', val={'T':0xB, 'V':0}, dic=ConnectivityType_dict),
         Type1TV('WLANOffloadInd', val={'T':0xC, 'V':0}, IE=WLANOffloadAccept()),
         Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'})
@@ -125,8 +156,9 @@ class SMActivatePDPContextAccept(Layer3):
 #------------------------------------------------------------------------------#
 
 class SMActivatePDPContextReject(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':67})._content) + (
-        SMCause(),
+    _GEN = (
+        SMHeader(val={'Type':67}),
+        Type3V('SMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=SMCause()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer3()),
         Type4TLV('ReattemptInd', val={'T':0x6B, 'V':b'\0'}, IE=ReattemptInd()),
@@ -140,11 +172,12 @@ class SMActivatePDPContextReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class SMActivateSecondaryPDPContextRequest(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':77})._content) + (
-        NSAPI(),
-        LLC_SAPI(),
+    _GEN = (
+        SMHeader(val={'Type':77}),
+        Type3V('NSAPI', val={'V':b'\x05'}, bl={'V':8}, IE=NSAPI()),
+        Type3V('LLC_SAPI', val={'V':b'\0'}, bl={'V':8}, IE=LLC_SAPI()),
         Type4LV('QoS', val={'V':11*b'\0'}, IE=QoS()),
-        Type4LV('LinkedTransId', val={'V':b'\0'}, IE=TransId()),
+        Type4LV('LinkedTI', val={'V':b'\0'}, IE=TI()),
         Type4TLV('TFT', val={'T':0x36, 'V':b'\0'}, IE=TFT()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type1TV('DeviceProp', val={'T':0xC, 'V':0}, IE=DeviceProp()),
@@ -158,11 +191,12 @@ class SMActivateSecondaryPDPContextRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class SMActivateSecondaryPDPContextAccept(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':78})._content) + (
-        LLC_SAPI(),
+    _GEN = (
+        SMHeader(val={'Type':78}),
+        Type3V('LLC_SAPI', val={'V':b'\0'}, bl={'V':8}, IE=LLC_SAPI()),
         Type4LV('QoS', val={'V':11*b'\0'}, IE=QoS()),
         Uint('spare', bl=4),
-        RadioPriority(),
+        Type1V('RadioPriority', dic=RadioPrio_dict),
         Type4TLV('PacketFlowId', val={'T':0x34, 'V':b'\0'}, IE=PacketFlowId()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type1TV('WLANOffloadInd', val={'T':0xC, 'V':0}, IE=WLANOffloadAccept()),
@@ -176,8 +210,9 @@ class SMActivateSecondaryPDPContextAccept(Layer3):
 #------------------------------------------------------------------------------#
 
 class SMActivateSecondaryPDPContextReject(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':79})._content) + (
-        SMCause(),
+    _GEN = (
+        SMHeader(val={'Type':79}),
+        Type3V('SMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=SMCause()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer3()),
         Type4TLV('ReattemptInd', val={'T':0x6B, 'V':b'\0'}, IE=ReattemptInd()),
@@ -191,7 +226,8 @@ class SMActivateSecondaryPDPContextReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class SMRequestPDPContextActivation(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':68})._content) + (
+    _GEN = (
+        SMHeader(val={'Type':68}),
         Type4LV('PDPAddr', val={'V':b'\0\x01'}, IE=PDPAddr()),
         Type4TLV('APN', val={'T':0x28, 'V':b'\0'}, IE=APN()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
@@ -204,8 +240,9 @@ class SMRequestPDPContextActivation(Layer3):
 #------------------------------------------------------------------------------#
 
 class SMRequestPDPContextActivationReject(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':69})._content) + (
-        SMCause(),
+    _GEN = (
+        SMHeader(val={'Type':69}),
+        Type3V('SMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=SMCause()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'})
         )
@@ -216,10 +253,11 @@ class SMRequestPDPContextActivationReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class SMModifyPDPContextRequestMT(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':72})._content) + (
+    _GEN = (
+        SMHeader(val={'Type':72}),
         Uint('spare', bl=4),
-        RadioPriority(),
-        LLC_SAPI(),
+        Type1V('RadioPriority', dic=RadioPrio_dict),
+        Type3V('LLC_SAPI', val={'V':b'\0'}, bl={'V':8}, IE=LLC_SAPI()),
         Type4LV('QoS', val={'V':11*b'\0'}, IE=QoS()),
         Type4TLV('PDPAddr', val={'T':0x2B, 'V':b'\0\x01'}, IE=PDPAddr()),
         Type4TLV('PacketFlowId', val={'T':0x34, 'V':b'\0'}, IE=PacketFlowId()),
@@ -235,7 +273,8 @@ class SMModifyPDPContextRequestMT(Layer3):
 #------------------------------------------------------------------------------#
 
 class SMModifyPDPContextRequestMO(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':74})._content) + (
+    _GEN = (
+        SMHeader(val={'Type':74}),
         Type3TV('LLC_SAPI', val={'T':0x32, 'V':b'\0'}, bl={'V':8}, IE=LLC_SAPI()),
         Type4TLV('QoS', val={'T':0x30, 'V':11*b'\0'}, IE=QoS()),
         Type4TLV('TFT', val={'T':0x31, 'V':b'\0'}, IE=TFT()),
@@ -251,7 +290,8 @@ class SMModifyPDPContextRequestMO(Layer3):
 #------------------------------------------------------------------------------#
 
 class SMModifyPDPContextAcceptMO(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':73})._content) + (
+    _GEN = (
+        SMHeader(val={'Type':73}),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'})
         )
@@ -262,7 +302,8 @@ class SMModifyPDPContextAcceptMO(Layer3):
 #------------------------------------------------------------------------------#
 
 class SMModifyPDPContextAcceptMT(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':75})._content) + (
+    _GEN = (
+        SMHeader(val={'Type':75}),
         Type4TLV('QoS', val={'T':0x30, 'V':11*b'\0'}, IE=QoS()),
         Type3TV('LLC_SAPI', val={'T':0x32, 'V':b'\0'}, bl={'V':8}, IE=LLC_SAPI()),
         Type1TV('RadioPriority', val={'T':0x8, 'V':0}, IE=RadioPriority()),
@@ -278,8 +319,9 @@ class SMModifyPDPContextAcceptMT(Layer3):
 #------------------------------------------------------------------------------#
 
 class SMModifyPDPContextReject(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':76})._content) + (
-        SMCause(),
+    _GEN = (
+        SMHeader(val={'Type':76}),
+        Type3V('SMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=SMCause()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer3()),
         Type4TLV('ReattemptInd', val={'T':0x6B, 'V':b'\0'}, IE=ReattemptInd()),
@@ -292,8 +334,9 @@ class SMModifyPDPContextReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class SMDeactivatePDPContextRequest(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':70})._content) + (
-        SMCause(),
+    _GEN = (
+        SMHeader(val={'Type':70}),
+        Type3V('SMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=SMCause()),
         Type1TV('TearDownInd', val={'T':0x9, 'V':0}, IE=TearDownInd()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type4TLV('MBMSProtConfig', val={'T':0x35, 'V':b'\0'}),
@@ -308,7 +351,8 @@ class SMDeactivatePDPContextRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class SMDeactivatePDPContextAccept(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':71})._content) + (
+    _GEN = (
+        SMHeader(val={'Type':71}),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type4TLV('MBMSProtConfig', val={'T':0x35, 'V':b'\0'})
         )
@@ -320,9 +364,10 @@ class SMDeactivatePDPContextAccept(Layer3):
 #------------------------------------------------------------------------------#
 
 class SMRequestSecondaryPDPContextActivation(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':91})._content) + (
+    _GEN = (
+        SMHeader(val={'Type':91}),
         Type4LV('QoS', val={'V':11*b'\0'}, IE=QoS()),
-        Type4LV('LinkedTransId', val={'V':b'\0'}, IE=TransId()),
+        Type4LV('LinkedTI', val={'V':b'\0'}, IE=TI()),
         Type4TLV('TFT', val={'T':0x36, 'V':b'\0'}, IE=TFT()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type1TV('WLANOffloadInd', val={'T':0xC, 'V':0}, IE=WLANOffloadAccept()),
@@ -336,8 +381,9 @@ class SMRequestSecondaryPDPContextActivation(Layer3):
 #------------------------------------------------------------------------------#
 
 class SMRequestSecondaryPDPContextActivationReject(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':92})._content) + (
-        SMCause(),
+    _GEN = (
+        SMHeader(val={'Type':92}),
+        Type3V('SMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=SMCause()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'})
         )
@@ -349,8 +395,9 @@ class SMRequestSecondaryPDPContextActivationReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class SMNotification(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':93})._content) + (
-        Type4LV('NotificationInd', val={'V':b'\0'}, IE=NotificationInd()),
+    _GEN = (
+        SMHeader(val={'Type':93}),
+        Type4LV('NotificationInd', val={'V':b'\0'}, IE=NotificationInd())
         )
 
 
@@ -360,8 +407,9 @@ class SMNotification(Layer3):
 #------------------------------------------------------------------------------#
 
 class SMStatus(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':85})._content) + (
-        SMCause(),
+    _GEN = (
+        SMHeader(val={'Type':85}),
+        Type3V('SMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=SMCause())
         )
 
 #------------------------------------------------------------------------------#
@@ -370,9 +418,10 @@ class SMStatus(Layer3):
 #------------------------------------------------------------------------------#
 
 class SMActivateMBMSContextRequest(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':86})._content) + (
-        ENSAPI('MBMS_NSAPI'),
-        LLC_SAPI(),
+    _GEN = (
+        SMHeader(val={'Type':86}),
+        Type3V('MBMS_NSAPI', val={'V':b'\0'}, bl={'V':8}, IE=ENSAPI()),
+        Type3V('LLC_SAPI', val={'V':b'\0'}, bl={'V':8}, IE=LLC_SAPI()),
         Type4LV('MBMSBearerCap', val={'V':b'\0'}, IE=MBMSBearerCap()),
         Type4LV('MCastAddr', val={'V':b'\0\x01'}, IE=PDPAddr()),
         Type4LV('APN', val={'V':b'\0'}, IE=APN()),
@@ -387,9 +436,10 @@ class SMActivateMBMSContextRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class SMActivateMBMSContextAccept(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':87})._content) + (
+    _GEN = (
+        SMHeader(val={'Type':87}),
         Type4LV('TMGI', val={'V':b'\0\0\0'}, IE=TMGI()),
-        LLC_SAPI(),
+        Type3V('LLC_SAPI', val={'V':b'\0'}, bl={'V':8}, IE=LLC_SAPI()),
         Type4TLV('MBMSProtConfig', val={'T':0x35, 'V':b'\0'})
         )
 
@@ -400,8 +450,9 @@ class SMActivateMBMSContextAccept(Layer3):
 #------------------------------------------------------------------------------#
 
 class SMActivateMBMSContextReject(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':88})._content) + (
-        SMCause(),
+    _GEN = (
+        SMHeader(val={'Type':88}),
+        Type3V('SMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=SMCause()),
         Type4TLV('MBMSProtConfig', val={'T':0x35, 'V':b'\0'}),
         Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer3()),
         Type4TLV('ReattemptInd', val={'T':0x6B, 'V':b'\0'}, IE=ReattemptInd())
@@ -414,8 +465,9 @@ class SMActivateMBMSContextReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class SMRequestMBMSContextActivation(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':89})._content) + (
-        NSAPI(),
+    _GEN = (
+        SMHeader(val={'Type':89}),
+        Type3V('LinkedNSAPI', val={'V':b'\x05'}, bl={'V':8}, IE=NSAPI()),
         Type4LV('MCastAddr', val={'V':b'\0\x01'}, IE=PDPAddr()),
         Type4LV('APN', val={'V':b'\0'}, IE=APN()),
         Type4TLV('MBMSProtConfig', val={'T':0x35, 'V':b'\0'})
@@ -428,8 +480,9 @@ class SMRequestMBMSContextActivation(Layer3):
 #------------------------------------------------------------------------------#
 
 class SMRequestMBMSContextActivationReject(Layer3):
-    _GEN = tuple(SMHeader(val={'Type':90})._content) + (
-        SMCause(),
+    _GEN = (
+        SMHeader(val={'Type':90}),
+        Type3V('SMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=SMCause()),
         Type4TLV('MBMSProtConfig', val={'T':0x35, 'V':b'\0'})
         )
 

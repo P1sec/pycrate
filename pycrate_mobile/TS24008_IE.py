@@ -44,6 +44,7 @@ from pycrate_core.charpy import Charpy
 from .MCC_MNC import MNC_dict
 from .PPP     import LCP, LCPDataConf, NCP, NCPDataConf, PAP, CHAP
 from .TS23038 import *
+from .TS24007 import ProtDisc_dict
 
 #------------------------------------------------------------------------------#
 # TS 24.008 IE specified with CSN.1
@@ -683,6 +684,19 @@ class MSCm2(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# PD and SAPI $(CCBS)$
+# TS 24.008, 10.5.1.10a
+#------------------------------------------------------------------------------#
+
+class PD_SAPI(Envelope):
+    _GEN = (
+        Uint('spare', bl=2),
+        Uint('SAPI', bl=2),
+        Uint('PD', val=5, bl=4, dic=ProtDisc_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
 # Priority Level
 # TS 24.008, 10.5.1.11
 #------------------------------------------------------------------------------#
@@ -846,7 +860,7 @@ class NetworkName(Envelope):
 # TS 24.008, section 10.5.3.6
 #------------------------------------------------------------------------------#
 
-RejectCause_dict = {
+_RejectCause_dict = {
     2:'IMSI unknown in HLR',
     3:'Illegal MS',
     4:'IMSI unknown in VLR',
@@ -876,6 +890,9 @@ RejectCause_dict = {
     101:'Message not compatible with the protocol state',
     111:'Protocol error, unspecified'
     }
+
+class RejectCause(Uint8):
+    _dic = _RejectCause_dict
 
 
 #------------------------------------------------------------------------------#
@@ -2281,7 +2298,7 @@ class DRXParam(Envelope):
 # TS 24.008, 10.5.5.7
 #------------------------------------------------------------------------------#
 
-_ForceStdby_dict = {
+ForceStdby_dict = {
     0 : 'Force to standby not indicated',
     1 : 'Force to standby indicated'
     }
@@ -2289,7 +2306,7 @@ _ForceStdby_dict = {
 class ForceStdby(Envelope):
     _GEN = (
         Uint('spare', bl=1),
-        Uint('Value', bl=3, dic=_ForceStdby_dict)
+        Uint('Value', bl=3, dic=ForceStdby_dict)
         )
 
 
@@ -2331,6 +2348,9 @@ GMMCause_dict = {
     101: 'Message not compatible with the protocol state',
     111: 'Protocol error, unspecified'
     }
+
+class GMMCause(Uint8):
+    _dic = GMMCause_dict
 
 
 #------------------------------------------------------------------------------#
@@ -2709,7 +2729,8 @@ class PDPAddr(Envelope):
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[2].set_dicauto(self._set_pdpt_dic)
-        self[3].set_blauto(self._set_addr_len)
+        # Addr can be empty, when PDPAddr is used within a request
+        #self[3].set_blauto(self._set_addr_len)
     
     def _set_pdpt_dic(self):
         to = self[1]()
@@ -2720,17 +2741,17 @@ class PDPAddr(Envelope):
         else:
             return None
     
-    def _set_addr_len(self):
-        to, t = self[1](), self[2]()
-        if to == 1:
-            if t == 33:
-                return 32
-            elif t == 87:
-                return 128
-            elif t == 141:
-                return 160
-        return None
-
+    #def _set_addr_len(self):
+    #    to, t = self[1](), self[2]()
+    #    if to == 1:
+    #        if t == 33:
+    #            return 32
+    #        elif t == 87:
+    #            return 128
+    #        elif t == 141:
+    #            return 160
+    #    return None
+    
 #------------------------------------------------------------------------------#
 # Quality of service
 # TS 24.008, 10.5.6.5
@@ -3025,7 +3046,7 @@ SMCause_dict = {
     }
 
 class SMCause(Uint8):
-    dic = SMCause_dict
+    _dic = SMCause_dict
 
 
 #------------------------------------------------------------------------------#
@@ -3476,7 +3497,7 @@ class PDPCtxtStat(Envelope):
 # TS 24.008, 10.5.7.2 and 10.5.7.5
 #------------------------------------------------------------------------------#
 
-_RadioPrio_dict = {
+RadioPrio_dict = {
     1 : 'priority level 1 (highest)',
     2 : 'priority level 2',
     3 : 'priority level 3',
@@ -3486,7 +3507,7 @@ _RadioPrio_dict = {
 class RadioPriority(Envelope):
     _GEN = (
         Uint('spare', bl=1),
-        Uint('Value', bl=3, dic=_RadioPrio_dict)
+        Uint('Value', bl=3, dic=RadioPrio_dict)
         )
 
 

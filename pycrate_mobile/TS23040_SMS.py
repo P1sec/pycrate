@@ -27,6 +27,30 @@
 # *--------------------------------------------------------
 #*/
 
+__all__ = [
+    'SMS_TP',
+    'TP_OA',
+    'TP_DA',
+    'TP_PID',
+    'TP_DCS',
+    'TP_SCTS',
+    'TP_VP',
+    'TP_VPe',
+    'TP_DT',
+    'TP_RA',
+    'TP_UDH',
+    'TP_UD',
+    'TP_PI',
+    'SMS_DELIVER',
+    'SMS_DELIVER_REPORT_RP_ERROR',
+    'SMS_DELIVER_REPORT_RP_ACK',
+    'SMS_SUBMIT',
+    'SMS_SUBMIT_REPORT_RP_ERROR',
+    'SMS_SUBMIT_REPORT_RP_ACK',
+    'SMS_STATUS_REPORT',
+    'SMS_COMMAND'
+    ]
+
 #------------------------------------------------------------------------------#
 # 3GPP TS 23.040: Technical realization of the Short Message Service (SMS)
 # release 13 (d20)
@@ -43,7 +67,15 @@ from .TS24008_IE import BufBCD, _BCDType_dict, _NumPlan_dict
 from .TS24007    import *
 from .TS23038    import *
 
+
 _str_reserved = 'reserved'
+
+
+class SMS_TP(Envelope):
+    """parent class for all SMS TP messages
+    """
+    pass
+
 
 #------------------------------------------------------------------------------#
 # Address fields
@@ -718,6 +750,12 @@ class BufUD(Buf):
     # indicator for GSM 7b encoding length
     _ENC_BL = 0
     
+    def set_val(self, val):
+        if isinstance(val, bytes_types):
+            Buf.set_val(self, val)
+        else:
+            self.encode(val)
+    
     def get_dcs(self):
         try:
             dcs = self.get_env().get_env()['TP_DCS']
@@ -875,7 +913,7 @@ class TP_PI(Envelope):
 #------------------------------------------------------------------------------#
 # Net -> UE
 
-class SMS_DELIVER(Envelope):
+class SMS_DELIVER(SMS_TP):
     _GEN = (
         Uint('TP_SRI', bl=1, dic=_TP_SRI_dict),
         Uint('TP_UDHI', desc='UDH Indicator', bl=1),
@@ -898,7 +936,7 @@ class SMS_DELIVER(Envelope):
 #------------------------------------------------------------------------------#
 # UE -> Net
 
-class SMS_DELIVER_REPORT_RP_ERROR(Envelope):
+class SMS_DELIVER_REPORT_RP_ERROR(SMS_TP):
     ENV_SEL_TRANS = False
     _GEN = (
         Uint('spare', bl=1),
@@ -924,7 +962,7 @@ class SMS_DELIVER_REPORT_RP_ERROR(Envelope):
 #------------------------------------------------------------------------------#
 # UE -> Net
 
-class SMS_DELIVER_REPORT_RP_ACK(Envelope):
+class SMS_DELIVER_REPORT_RP_ACK(SMS_TP):
     ENV_SEL_TRANS = False
     _GEN = (
         Uint('spare', bl=1),
@@ -949,7 +987,7 @@ class SMS_DELIVER_REPORT_RP_ACK(Envelope):
 #------------------------------------------------------------------------------#
 # UE -> Net
 
-class SMS_SUBMIT(Envelope):
+class SMS_SUBMIT(SMS_TP):
     ENV_SEL_TRANS = False
     _GEN = (
         Uint('TP_SRR', bl=1, dic=_TP_SRR_dict),
@@ -981,7 +1019,7 @@ class SMS_SUBMIT(Envelope):
 #------------------------------------------------------------------------------#
 # Net -> UE
 
-class SMS_SUBMIT_REPORT_RP_ERROR(Envelope):
+class SMS_SUBMIT_REPORT_RP_ERROR(SMS_TP):
     ENV_SEL_TRANS = False
     _GEN = (
         Uint('spare', bl=1),
@@ -1008,7 +1046,7 @@ class SMS_SUBMIT_REPORT_RP_ERROR(Envelope):
 #------------------------------------------------------------------------------#
 # Net -> UE
 
-class SMS_SUBMIT_REPORT_RP_ACK(Envelope):
+class SMS_SUBMIT_REPORT_RP_ACK(SMS_TP):
     ENV_SEL_TRANS = False
     _GEN = (
         Uint('spare', bl=1),
@@ -1034,7 +1072,7 @@ class SMS_SUBMIT_REPORT_RP_ACK(Envelope):
 #------------------------------------------------------------------------------#
 # Net -> UE
 
-class SMS_STATUS_REPORT(Envelope):
+class SMS_STATUS_REPORT(SMS_TP):
     ENV_SEL_TRANS = False
     _GEN = (
         Uint('spare', bl=1),
@@ -1067,7 +1105,7 @@ class SMS_STATUS_REPORT(Envelope):
 #------------------------------------------------------------------------------#
 # UE -> Net
 
-class SMS_COMMAND(Envelope):
+class SMS_COMMAND(SMS_TP):
     _GEN = (
         Uint('spare', bl=1),
         Uint('TP_UDHI', desc='UDH Indicator', bl=1),

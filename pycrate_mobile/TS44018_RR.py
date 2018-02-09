@@ -270,9 +270,10 @@ class RRHeader(Envelope):
 #------------------------------------------------------------------------------#
 
 class RRPagingResponse(Envelope):
-    _GEN = tuple(RRHeader(val={'Type':39})._content) + (
+    _GEN = (
+        RRHeader(val={'Type':39}),
         Uint('spare', bl=4),
-        Uint('CKSN', bl=4, dic=CKSN_dict),
+        Type1V('CKSN', dic=CKSN_dict),
         Type4LV('MSCm2', val={'V':b'@\x00\x00'}, IE=MSCm2()),
         Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
         Type1TV('AddUpdateParams', val={'T':0xC, 'V':0}, IE=AddUpdateParams())

@@ -27,6 +27,47 @@
 # *--------------------------------------------------------
 #*/
 
+__all__ = [
+    'EMMAttachAccept',
+    'EMMAttachComplete',
+    'EMMAttachReject',
+    'EMMAttachRequest',
+    'EMMAuthenticationFailure',
+    'EMMAuthenticationReject',
+    'EMMAuthenticationRequest',
+    'EMMAuthenticationResponse',
+    'EMMCPServiceRequest',
+    'EMMCSServiceNotification',
+    'EMMDetachAccept',
+    'EMMDetachRequestMO',
+    'EMMDetachRequestMT',
+    'EMMDLGenericNASTransport',
+    'EMMDLNASTransport',
+    'EMMExtServiceRequest',
+    'EMMGUTIReallocCommand',
+    'EMMGUTIReallocComplete',
+    'EMMIdentityRequest',
+    'EMMIdentityResponse',
+    'EMMInformation',
+    'EMMSecurityModeCommand',
+    'EMMSecurityModeComplete',
+    'EMMSecurityModeReject',
+    'EMMServiceAccept',
+    'EMMServiceReject',
+    'EMMStatus',
+    'EMMTrackingAreaUpdateAccept',
+    'EMMTrackingAreaUpdateComplete',
+    'EMMTrackingAreaUpdateReject',
+    'EMMTrackingAreaUpdateRequest',
+    'EMMULGenericNASTransport',
+    'EMMULNASTransport',
+    #
+    'EMMTypeMOClasses',
+    'EMMTypeMTClasses',
+    'get_emm_msg_mo_instances',
+    'get_emm_msg_mt_instances',
+    ]
+
 #------------------------------------------------------------------------------#
 # 3GPP TS 24.301: NAS protocol for EPS
 # release 13 (da0)
@@ -126,16 +167,32 @@ class EMMHeader(Envelope):
         )
 
 
+class EMMHeaderSec(Envelope):
+    _GEN = (
+        Uint('SecHdr', val=1, bl=4, dic=SecHdrType_dict),
+        Uint('ProtDisc', val=7, bl=4, dic=ProtDisc_dict),
+        )
+
+
+class EMMHeaderServ(Envelope):
+    _GEN = (
+        Uint('SecHdr', val=1, bl=4, dic=SecHdrType_dict),
+        Uint('ProtDisc', val=7, bl=4, dic=ProtDisc_dict),
+        Uint8('Type', val=0, trans=True)
+        )
+
+
 #------------------------------------------------------------------------------#
 # Attach accept
 # TS 24.301, section 8.2.1
 #------------------------------------------------------------------------------#
 
 class EMMAttachAccept(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':66})._content) + (
+    _GEN = (
+        EMMHeader(val={'Type':66}),
         Uint('spare', bl=4),
-        EPSAttachResult(),
-        GPRSTimer('T3412'),
+        Type1V('EPSAttachResult', dic=EPSAttRes_dict),
+        Type3V('T3412', val={'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
         Type4LV('TAIList', val={'V':6*b'\0'}, IE=TAIList()),
         Type6LVE('ESMContainer', val={'V':b'\0\0\0'}),
         Type4TLV('GUTI', val={'T':0x50, 'V':b'\xf6'+10*b'\0'}, IE=EPSID()),
@@ -160,7 +217,8 @@ class EMMAttachAccept(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMAttachComplete(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':67})._content) + (
+    _GEN = (
+        EMMHeader(val={'Type':67}),
         Type6LVE('ESMContainer', val={'V':b'\0\0\0'}),
         )
 
@@ -171,8 +229,9 @@ class EMMAttachComplete(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMAttachReject(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':68})._content) + (
-        EMMCause(),
+    _GEN = (
+        EMMHeader(val={'Type':68}),
+        Type3V('EMMCause', val={'V':b'\x11'}, bl={'V':8}, IE=EMMCause()),
         Type6TLVE('ESMContainer', val={'T':0x78, 'V':b'\0\0\0'}),
         Type4TLV('T3346', val={'T':0x5F, 'V':b'\0'}, IE=GPRSTimer()),
         Type4TLV('T3402', val={'T':0x16, 'V':b'\0'}, IE=GPRSTimer()),
@@ -186,9 +245,10 @@ class EMMAttachReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMAttachRequest(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':65})._content) + (
-        NAS_KSI(),
-        EPSAttachType(),
+    _GEN = (
+        EMMHeader(val={'Type':65}),
+        Type1V('NAS_KSI', IE=NAS_KSI()),
+        Type1V('EPSAttachType', dic=EPSAttType_dict),
         Type4LV('EPSID', val={'V':b'\xf6'+10*b'\0'}, IE=EPSID()),
         Type4LV('UENetCap', val={'V':b'\0\0'}, IE=UENetCap()),
         Type6LVE('ESMContainer', val={'V':b'\0\0\0'}),
@@ -220,8 +280,9 @@ class EMMAttachRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMAuthenticationFailure(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':92})._content) + (
-        EMMCause(),
+    _GEN = (
+        EMMHeader(val={'Type':92}),
+        Type3V('EMMCause', val={'V':b'\x11'}, bl={'V':8}, IE=EMMCause()),
         Type4TLV('AUTS', val={'T':0x30, 'V':14*b'\0'})
         )
 
@@ -232,7 +293,9 @@ class EMMAuthenticationFailure(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMAuthenticationReject(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':84})._content)
+    _GEN = (
+        EMMHeader(val={'Type':84}),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -241,11 +304,12 @@ class EMMAuthenticationReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMAuthenticationRequest(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':82})._content) + (
+    _GEN = (
+        EMMHeader(val={'Type':82}),
         Uint('spare', bl=4),
-        NAS_KSI(),
-        Buf('RAND', val=16* b'\0', bl=128, rep=REPR_HEX),
-        Type4LV('AUTN', val={'V':16*b'\0'}, IE=AUTN()),
+        Type1V('NAS_KSI', IE=NAS_KSI()),
+        Type3V('RAND', val={'V':16*b'\0'}, bl={'V':128}),
+        Type4LV('AUTN', val={'V':16*b'\0'}, IE=AUTN())
         )
 
 
@@ -255,8 +319,9 @@ class EMMAuthenticationRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMAuthenticationResponse(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':83})._content) + (
-        Type4LV('RES', val={'V':8*b'\0'}),
+    _GEN = (
+        EMMHeader(val={'Type':83}),
+        Type4LV('RES', val={'V':8*b'\0'})
         )
 
 
@@ -266,8 +331,9 @@ class EMMAuthenticationResponse(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMCSServiceNotification(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':100})._content) + (
-        PagingIdentity(),
+    _GEN = (
+        EMMHeader(val={'Type':100}),
+        Type3V('PagingIdentity', val={'V':b'\x01'}, bl={'V':8}, IE=PagingIdentity()),
         Type4TLV('CLI', val={'T':0x60, 'V':b'\x91'}, IE=CallingPartyBCDNumber()),
         Type3TV('SSCode', val={'T':0x61, 'V':b'\0'}, bl={'V':8}, IE=SSCode()),
         Type3TV('LCSInd', val={'T':0x62, 'V':b'\x01'}, bl={'V':8}, IE=LCSInd()),
@@ -281,7 +347,9 @@ class EMMCSServiceNotification(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMDetachAccept(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':70})._content)
+    _GEN = (
+        EMMHeader(val={'Type':70}),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -290,9 +358,10 @@ class EMMDetachAccept(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMDetachRequestMO(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':69})._content) + (
-        NAS_KSI(),
-        EPSDetachTypeMO(),
+    _GEN = (
+        EMMHeader(val={'Type':69}),
+        Type1V('NAS_KSI', IE=NAS_KSI()),
+        Type1V('EPSDetachType', IE=EPSDetachTypeMO()),
         Type4LV('EPSID', val={'V':b'\xf6'+10*b'\0'}, IE=EPSID())
         )
 
@@ -303,9 +372,10 @@ class EMMDetachRequestMO(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMDetachRequestMT(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':69})._content) + (
+    _GEN = (
+        EMMHeader(val={'Type':69}),
         Uint('spare', bl=4),
-        EPSDetachTypeMT(),
+        Type1V('EPSDetachType', IE=EPSDetachTypeMT()),
         Type3TV('EMMCause', val={'T':0x53, 'V':b'\0'}, bl={'V':8}, IE=EMMCause())
         )
 
@@ -316,8 +386,9 @@ class EMMDetachRequestMT(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMDLNASTransport(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':98})._content) + (
-        Type4LV('NASContainer', val={'V':b'\0\0'}),
+    _GEN = (
+        EMMHeader(val={'Type':98}),
+        Type4LV('NASContainer', val={'V':b'\0\0'})
         )
 
 
@@ -327,7 +398,8 @@ class EMMDLNASTransport(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMInformation(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':97})._content) + (
+    _GEN = (
+        EMMHeader(val={'Type':97}),
         Type4TLV('NetFullName', val={'T':0x43, 'V':b'\0'}, IE=NetworkName()),
         Type4TLV('NetShortName', val={'T':0x45, 'V':b'\0'}, IE=NetworkName()),
         Type3TV('LocalTimeZone', val={'T':0x46, 'V':b'\0'}, bl={'V':8}, IE=TimeZone()),
@@ -343,8 +415,9 @@ class EMMInformation(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMStatus(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':96})._content) + (
-        EMMCause(),
+    _GEN = (
+        EMMHeader(val={'Type':96}),
+        Type3V('EMMCause', val={'V':b'\x11'}, bl={'V':8}, IE=EMMCause())
         )
 
 
@@ -354,9 +427,10 @@ class EMMStatus(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMExtServiceRequest(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':76})._content) + (
-        NAS_KSI(),
-        Uint('ServiceType', bl=4, dic=EMMServType_dict),
+    _GEN = (
+        EMMHeader(val={'Type':76}),
+        Type1V('NAS_KSI', IE=NAS_KSI()),
+        Type1V('ServiceType', dic=EMMServType_dict),
         Type4LV('MTMSI', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
         Type1TV('CSFBResponse', val={'T':0xB, 'V':0}, IE=CSFBResponse()),
         Type4TLV('EPSBearerCtxtStat', val={'T':0x57, 'V':b'\0\0'}, IE=EPSBearerCtxtStat()),
@@ -370,7 +444,8 @@ class EMMExtServiceRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMGUTIReallocCommand(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':80})._content) + (
+    _GEN = (
+        EMMHeader(val={'Type':80}),
         Type4LV('GUTI', val={'V':b'\xf6'+10*b'\0'}, IE=EPSID()),
         Type4TLV('TAIList', val={'T':0x54, 'V':6*b'\0'}, IE=TAIList())
         )
@@ -382,7 +457,9 @@ class EMMGUTIReallocCommand(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMGUTIReallocComplete(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':81})._content)
+    _GEN = (
+        EMMHeader(val={'Type':81}),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -391,9 +468,10 @@ class EMMGUTIReallocComplete(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMIdentityRequest(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':85})._content) + (   
+    _GEN = (
+        EMMHeader(val={'Type':85}),
         Uint('spare', bl=4),
-        Uint('IDType', val=1, bl=4, dic=IDType_dict)
+        Type1V('IDType', val={'V':IDTYPE_IMSI}, dic=IDType_dict)
         )
 
 
@@ -403,8 +481,9 @@ class EMMIdentityRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMIdentityResponse(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':86})._content) + (
-        Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
+    _GEN = (
+        EMMHeader(val={'Type':86}),
+        Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID())
         )
 
 
@@ -414,10 +493,11 @@ class EMMIdentityResponse(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMSecurityModeCommand(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':93})._content) + (
-        NASSecAlgo(),
+    _GEN = (
+        EMMHeader(val={'Type':93}),
+        Type3V('NASSecAlgo', val={'V':b'\0'}, bl={'V':8}, IE=NASSecAlgo()),
         Uint('spare', bl=4),
-        NAS_KSI(),
+        Type1V('NAS_KSI', IE=NAS_KSI()),
         Type4LV('UESecCap', val={'V':b'\0\0'}, IE=UESecCap()),
         Type1TV('IMEISVReq', val={'T':0xC, 'V':0}),
         Type3TV('NonceUE', val={'T':0x55, 'V':4*b'\0'}, bl={'V':32}),
@@ -431,8 +511,9 @@ class EMMSecurityModeCommand(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMSecurityModeComplete(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':94})._content) + (
-        Type4TLV('IMEISV', val={'T':0x23, 'V':b'\x03\0\0\0\0\0\0\0\xf0'}, IE=ID()),
+    _GEN = (
+        EMMHeader(val={'Type':94}),
+        Type4TLV('IMEISV', val={'T':0x23, 'V':b'\x03\0\0\0\0\0\0\0\xf0'}, IE=ID())
         )
 
 
@@ -442,8 +523,9 @@ class EMMSecurityModeComplete(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMSecurityModeReject(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':95})._content) + (
-        EMMCause(),
+    _GEN = (
+        EMMHeader(val={'Type':95}),
+        Type3V('EMMCause', val={'V':b'\x11'}, bl={'V':8}, IE=EMMCause())
         )
 
 
@@ -456,8 +538,7 @@ if _with_cm:
     
     class EMMSecProtNASMessage(Layer3):
         _GEN = (
-            Uint('SecHdr', val=1, bl=4, dic=SecHdrType_dict),
-            Uint('ProtDisc', val=7, bl=4, dic=ProtDisc_dict),
+            EMMHeaderSec(),
             Buf('MAC', val=b'\0\0\0\0', bl=32, rep=REPR_HEX),
             Uint8('Seqn'),
             Buf('NASMessage')
@@ -478,7 +559,7 @@ if _with_cm:
             """
             if eia == 0:
                 return True
-            shdr = self[0].get_val()
+            shdr = self[0][0].get_val()
             if shdr == 0:
                 return True
             elif shdr in (1, 2, 3, 4):
@@ -487,8 +568,8 @@ if _with_cm:
                 except KeyError:
                     raise(PycrateErr('EMMSecProtNASMessage.mac_verify(): invalid EIA identifier, {0}'\
                           .format(eia)))
-                mac = EIA(key, seqnoff + self[3].get_val(), 0, dir, self[3].to_bytes() + self[4].get_val())
-                return mac == self[2].get_val()
+                mac = EIA(key, seqnoff + self[2].get_val(), 0, dir, self[2].to_bytes() + self[3].get_val())
+                return mac == self[1].get_val()
             else:
                 raise(PycrateErr('EMMSecProtNASMessage.mac_verify(): invalid sec hdr value, {0}'\
                       .format(shdr)))
@@ -507,18 +588,19 @@ if _with_cm:
                 None
             """
             if eia == 0:
-                self[2].set_val(b'\0\0\0\0')
-            shdr = self[0].get_val()
+                self[1].set_val(b'\0\0\0\0')
+                return
+            shdr = self[0][0].get_val()
             if shdr == 0:
-                self[2].set_val(b'\0\0\0\0')
+                self[1].set_val(b'\0\0\0\0')
             elif shdr in (1, 2, 3, 4):
                 try:
                     EIA = _EIA[eia]
                 except KeyError:
                     raise(PycrateErr('EMMSecProtNASMessage.mac_compute(): invalid EIA identifier, {0}'\
                           .format(eia)))
-                mac = EIA(key, seqnoff + self[3].get_val(), 0, dir, self[3].to_bytes() + self[4].get_val())
-                self[2].set_val(mac)
+                mac = EIA(key, seqnoff + self[2].get_val(), 0, dir, self[2].to_bytes() + self[3].get_val())
+                self[1].set_val(mac)
             else:
                 raise(PycrateErr('EMMSecProtNASMessage.mac_compute(): invalid sec hdr value, {0}'\
                       .format(shdr)))
@@ -537,7 +619,7 @@ if _with_cm:
             """
             if eea == 0:
                 return
-            shdr = self[0].get_val()
+            shdr = self[0][0].get_val()
             if shdr in (0, 1, 3):
                 return
             elif shdr in (2, 4):
@@ -546,9 +628,9 @@ if _with_cm:
                 except KeyError:
                     raise(PycrateErr('EMMSecProtNASMessage.encrypt(): invalid EEA identifier, {0}'\
                           .format(eea)))
-                self._dec_msg = self[4].to_bytes()
-                self._enc_msg = EEA(key, seqnoff + self[3].get_val(), 0, dir, self._dec_msg)
-                self[4].set_val(self._enc_msg)
+                self._dec_msg = self[3].to_bytes()
+                self._enc_msg = EEA(key, seqnoff + self[2].get_val(), 0, dir, self._dec_msg)
+                self[3].set_val(self._enc_msg)
             else:
                 raise(PycrateErr('EMMSecProtNASMessage.encrypt(): invalid sec hdr value, {0}'\
                       .format(shdr)))
@@ -567,7 +649,7 @@ if _with_cm:
             """
             if eea == 0:
                 return
-            shdr = self[0].get_val()
+            shdr = self[0][0].get_val()
             if shdr in (0, 1, 3):
                 return
             elif shdr in (2, 4):
@@ -576,9 +658,9 @@ if _with_cm:
                 except KeyError:
                     raise(PycrateErr('EMMSecProtNASMessage.decrypt(): invalid EEA identifier, {0}'\
                           .format(eea)))
-                self._enc_msg = self[4].to_bytes()
-                self._dec_msg = EEA(key, seqnoff + self[3].get_val(), 0, dir, self._enc_msg)
-                self[4].set_val(self._dec_msg)
+                self._enc_msg = self[3].to_bytes()
+                self._dec_msg = EEA(key, seqnoff + self[2].get_val(), 0, dir, self._enc_msg)
+                self[3].set_val(self._dec_msg)
             else:
                 raise(PycrateErr('EMMSecProtNASMessage.decrypt(): invalid sec hdr value, {0}'\
                       .format(shdr)))
@@ -587,8 +669,7 @@ else:
     
     class EMMSecProtNASMessage(Layer3):
         _GEN = (
-            Uint('SecHdr', val=1, bl=4, dic=SecHdrType_dict),
-            Uint('ProtDisc', val=7, bl=4, dic=ProtDisc_dict),
+            EMMHeaderSec(),
             Buf('MAC', val=b'\0\0\0\0', bl=32, rep=REPR_HEX),
             Uint8('Seqn'),
             Buf('NASMessage')
@@ -601,8 +682,9 @@ else:
 #------------------------------------------------------------------------------#
 
 class EMMServiceReject(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':78})._content) + (
-        EMMCause(),
+    _GEN = (
+        EMMHeader(val={'Type':78}),
+        Type3V('EMMCause', val={'V':b'\x11'}, bl={'V':8}, IE=EMMCause()),
         Type3TV('T3442', val={'T':0x5B, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
         Type4TLV('T3346', val={'T':0x5C, 'V':b'\0'}, IE=GPRSTimer())
         )
@@ -617,9 +699,7 @@ if _with_cm:
     
     class EMMServiceRequest(Layer3):
         _GEN = (
-            Uint('SecHdr', val=12, bl=4, dic=SecHdrType_dict),
-            Uint('ProtDisc', val=7, bl=4, dic=ProtDisc_dict),
-            Uint8('Type', val=0, trans=True), # transparent field, only to ease message handling
+            EMMHeaderServ(val={'SecHdr': 12}),
             Uint('KSI', bl=3, dic={7:'no key available'}),
             Uint('SeqnShort', bl=5),
             Buf('MACShort', val=b'\0\0', bl=16, rep=REPR_HEX)
@@ -647,7 +727,7 @@ if _with_cm:
                     raise(PycrateErr('EMMServiceRequest.mac_verify(): invalid EIA identifier, {0}'\
                           .format(eia)))
                 msg = self.to_bytes()
-                mac = EIA(key, seqnoff + self['SeqnShort'].get_val(), 0, dir, msg[:2])
+                mac = EIA(key, seqnoff + self[2].get_val(), 0, dir, msg[:2])
                 if mac[2:4] != msg[2:4]:
                     return False
                 else:
@@ -675,19 +755,19 @@ if _with_cm:
                     raise(PycrateErr('EMMServiceRequest.mac_compute(): invalid EIA identifier, {0}'\
                           .format(eia)))
                 msg = self.to_bytes()
-                mac = EIA(key, seqnoff + self['SeqnShort'].get_val(), 0, dir, msg[:2])
+                mac = EIA(key, seqnoff + self[2].get_val(), 0, dir, msg[:2])
                 self[4].set_val(mac[2:4])
 
 else:
     
     class EMMServiceRequest(Layer3):
         _GEN = (
-            Uint('SecHdr', val=12, bl=4, dic=SecHdrType_dict),
-            Uint('ProtDisc', val=7, bl=4, dic=ProtDisc_dict),
+            EMMHeaderServ(val={'SecHdr': 12}),
             Uint('KSI', bl=3, dic={7:'no key available'}),
             Uint('SeqnShort', bl=5),
             Buf('MACShort', val=b'\0\0', bl=16, rep=REPR_HEX)
             )
+
 
 #------------------------------------------------------------------------------#
 # Tracking area update accept
@@ -695,9 +775,10 @@ else:
 #------------------------------------------------------------------------------#
 
 class EMMTrackingAreaUpdateAccept(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':73})._content) + (
+    _GEN = (
+        EMMHeader(val={'Type':73}),
         Uint('spare', bl=4),
-        EPSUpdateResult(),
+        Type1V('EPSUpdateResult', dic=EPSUpdRes_dict),
         Type3TV('T3412', val={'T':0x5A, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
         Type4TLV('GUTI', val={'T':0x50, 'V':b'\xf6'+10*b'\0'}, IE=EPSID()),
         Type4TLV('TAIList', val={'T':0x54, 'V':6*b'\0'}, IE=TAIList()),
@@ -725,7 +806,9 @@ class EMMTrackingAreaUpdateAccept(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMTrackingAreaUpdateComplete(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':74})._content)
+    _GEN = (
+        EMMHeader(val={'Type':74}),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -734,8 +817,9 @@ class EMMTrackingAreaUpdateComplete(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMTrackingAreaUpdateReject(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':75})._content) + (
-        EMMCause(),
+    _GEN = (
+        EMMHeader(val={'Type':75}),
+        Type3V('EMMCause', val={'V':b'\x11'}, bl={'V':8}, IE=EMMCause()),
         Type4TLV('T3346', val={'T':0x5F, 'V':b'\0'}, IE=GPRSTimer()),
         Type1TV('ExtEMMCause', val={'T':0xA, 'V':0}, IE=ExtEMMCause())
         )
@@ -747,9 +831,10 @@ class EMMTrackingAreaUpdateReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMTrackingAreaUpdateRequest(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':72})._content) + (
-        NAS_KSI(),
-        EPSUpdateType(),
+    _GEN = (
+        EMMHeader(val={'Type':72}),
+        Type1V('NAS_KSI', IE=NAS_KSI()),
+        Type1V('EPSUpdateType', IE=EPSUpdateType()),
         Type4LV('OldGUTI', val={'V':b'\xf6'+10*b'\0'}, IE=EPSID()),
         Type1TV('Native_NAS_KSI', val={'T':0xB, 'V':0}, IE=NAS_KSI()),
         Type1TV('GPRS_CKSN', val={'T':0x8, 'V':0}, dic=CKSN_dict),
@@ -785,8 +870,9 @@ class EMMTrackingAreaUpdateRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMULNASTransport(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':99})._content) + (
-        Type4LV('NASContainer', val={'V':b'\0\0'}),
+    _GEN = (
+        EMMHeader(val={'Type':99}),
+        Type4LV('NASContainer', val={'V':b'\0\0'})
         )
 
 
@@ -796,8 +882,9 @@ class EMMULNASTransport(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMDLGenericNASTransport(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':104})._content) + (
-        Uint8('GenericContType', dic=GenericContType_dict),
+    _GEN = (
+        EMMHeader(val={'Type':104}),
+        Type3V('GenericContType', val={'V':b'\0'}, bl={'V':8}, IE=GenericContType()),
         Type6LVE('GenericContainer', val={'V':b'\0\0'}),
         Type4TLV('AddInfo', val={'T':0x65, 'V':b'\0'})
         )
@@ -809,8 +896,9 @@ class EMMDLGenericNASTransport(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMULGenericNASTransport(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':105})._content) + (
-        Uint8('GenericContType', dic=GenericContType_dict),
+    _GEN = (
+        EMMHeader(val={'Type':105}),
+        Type3V('GenericContType', val={'V':b'\0'}, bl={'V':8}, IE=GenericContType()),
         Type6LVE('GenericContainer', val={'V':b'\0\0'}),
         Type4TLV('AddInfo', val={'T':0x65, 'V':b'\0'})
         )
@@ -822,9 +910,10 @@ class EMMULGenericNASTransport(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMCPServiceRequest(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':77})._content) + (
-        NAS_KSI(),
-        CPServiceType(),
+    _GEN = (
+        EMMHeader(val={'Type':77}),
+        Type1V('NAS_KSI', IE=NAS_KSI()),
+        Type1V('CPServiceType', IE=CPServiceType()),
         Type6TLVE('ESMContainer', val={'T':0x78, 'V':b'\0'}),
         Type4TLV('NASContainer', val={'T':0x67, 'V':b'\0\0'}),
         Type4TLV('EPSBearerCtxtStat', val={'T':0x57, 'V':b'\0\0'}, IE=EPSBearerCtxtStat()),
@@ -838,8 +927,9 @@ class EMMCPServiceRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class EMMServiceAccept(Layer3):
-    _GEN = tuple(EMMHeader(val={'Type':79})._content) + (
-        Type4TLV('EPSBearerCtxtStat', val={'T':0x57, 'V':b'\0\0'}, IE=EPSBearerCtxtStat()),
+    _GEN = (
+        EMMHeader(val={'Type':79}),
+        Type4TLV('EPSBearerCtxtStat', val={'T':0x57, 'V':b'\0\0'}, IE=EPSBearerCtxtStat())
         )
 
 

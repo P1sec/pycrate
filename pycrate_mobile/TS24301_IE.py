@@ -230,7 +230,7 @@ class EPSDetachTypeMO(Envelope):
 
 class EPSDetachTypeMT(Envelope):
     _GEN = (
-        Uint('SwitchOff', bl=1),
+        Uint('spare', bl=1),
         Uint('Type', bl=3, dic=_EPSDetTypeMT_dict)
         )
 
@@ -288,7 +288,7 @@ class EMMCause(Uint8):
 # TS 24.301, 9.9.3.10
 #------------------------------------------------------------------------------#
 
-_EPSAttRes_dict = {
+EPSAttRes_dict = {
     1 : 'EPS only',
     2 : 'combined EPS / IMSI attach'
     }
@@ -296,7 +296,7 @@ _EPSAttRes_dict = {
 class EPSAttachResult(Envelope):
     _GEN = (
         Uint('spare', bl=1),
-        Uint('Value', bl=3, dic=_EPSAttRes_dict)
+        Uint('Value', bl=3, dic=EPSAttRes_dict)
         )
 
 
@@ -305,7 +305,7 @@ class EPSAttachResult(Envelope):
 # TS 24.301, 9.9.3.11
 #------------------------------------------------------------------------------#
 
-_EPSAttType_dict = {
+EPSAttType_dict = {
     1 : 'EPS Attach',
     2 : 'combined EPS / IMSI attach',
     6 : 'EPS emergency attach',
@@ -315,7 +315,7 @@ _EPSAttType_dict = {
 class EPSAttachType(Envelope):
     _GEN = (
         Uint('spare', bl=1),
-        Uint('Value', bl=3, dic=_EPSAttType_dict)
+        Uint('Value', bl=3, dic=EPSAttType_dict)
         )
 
 
@@ -526,7 +526,7 @@ class EPSNetFeat(Envelope):
 # TS 24.301, 9.9.3.13
 #------------------------------------------------------------------------------#
 
-_EPSUpdRes_dict = {
+EPSUpdRes_dict = {
     0 : 'TA updated',
     1 : 'combined TA/LA updated',
     4 : 'TA updated and ISR activated',
@@ -536,7 +536,7 @@ _EPSUpdRes_dict = {
 class EPSUpdateResult(Envelope):
     _GEN = (
         Uint('spare', bl=1),
-        Uint('Value', bl=3, dic=_EPSUpdRes_dict)
+        Uint('Value', bl=3, dic=EPSUpdRes_dict)
         )
 
 
@@ -1126,10 +1126,13 @@ else:
 # TS 24.301, 9.9.3.42
 #------------------------------------------------------------------------------#
 
-GenericContType_dict = {
+_GenericContType_dict = {
     1 : 'LTE Positioning Protocol (LPP) message container',
     2 : 'Location services message container'
     }
+
+class GenericContType(Uint8):
+    _dic = _GenericContType_dict
 
 
 #------------------------------------------------------------------------------#

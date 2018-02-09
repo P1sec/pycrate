@@ -27,6 +27,39 @@
 # *--------------------------------------------------------
 #*/
 
+__all__ = [
+    'GMMAttachAccept',
+    'GMMAttachComplete',
+    'GMMAttachReject',
+    'GMMAttachRequest',
+    'GMMAuthenticationCipheringFailure',
+    'GMMAuthenticationCipheringReject',
+    'GMMAuthenticationCipheringRequest',
+    'GMMAuthenticationCipheringResponse',
+    'GMMDetachAcceptMO',
+    'GMMDetachAcceptMT',
+    'GMMDetachRequestMO',
+    'GMMDetachRequestMT',
+    'GMMIdentityRequest',
+    'GMMIdentityResponse',
+    'GMMInformation',
+    'GMMPTMSIReallocationCommand',
+    'GMMPTMSIReallocationComplete',
+    'GMMRoutingAreaUpdateAccept',
+    'GMMRoutingAreaUpdateComplete',
+    'GMMRoutingAreaUpdateReject',
+    'GMMRoutingAreaUpdateRequest',
+    'GMMServiceAccept',
+    'GMMServiceReject',
+    'GMMServiceRequest',
+    'GMMStatus',
+    #
+    'GMMTypeMOClasses',
+    'GMMTypeMTClasses',
+    'get_gmm_msg_mo_instances',
+    'get_gmm_msg_mt_instances'
+    ]
+
 #------------------------------------------------------------------------------#
 # 3GPP TS 24.008: Mobile radio interface layer 3 specification
 # release 13 (d90)
@@ -85,13 +118,14 @@ class GMMHeader(Envelope):
 #------------------------------------------------------------------------------#
 
 class GMMAttachRequest(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':1})._content) + (
+    _GEN = (
+        GMMHeader(val={'Type':1}),
         Type4LV('MSNetCap', val={'V':b'\0\0'}, IE=MS_network_capability_value_part),
-        Uint('CKSN', bl=4, dic=CKSN_dict),
-        AttachType(),
+        Type1V('CKSN', dic=CKSN_dict),
+        Type1V('AttachType', IE=AttachType()),
         Type3V('DRXParam', val={'V':b'\0\0'}, bl={'V':16}, IE=DRXParam()),
         Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
-        RAI('OldRAI'),
+        Type3V('OldRAI', val={'V':b'\0\xf1\x10\0\0\0'}, bl={'V':48}, IE=RAI()),
         Type4LV('MSRACap', val={'V':5*b'\0'}, IE=MS_RA_capability_value_part),
         Type3TV('OldPTMSISign', val={'T':0x19, 'V':b'\0\0\0'}, bl={'V':24}),
         Type3TV('ReqREADYTimer', val={'T':0x17, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
@@ -122,19 +156,19 @@ class GMMAttachRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMAttachAccept(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':2})._content) + (
-        ForceStdby(),
-        AttachResult(),
-        GPRSTimer('PeriodicRAUpdateTimer'),
-        RadioPriority('RadioPrioForTOM8'),
-        RadioPriority('RadioPrioForSMS'),
-        RAI(),
+    _GEN = (
+        GMMHeader(val={'Type':2}),
+        Type1V('ForceStdby', dic=ForceStdby_dict),
+        Type1V('AttachResult', IE=AttachResult()),
+        Type3V('PeriodicRAUpdateTimer', val={'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
+        Type1V('RadioPriorityTOM8', dic=RadioPrio_dict),
+        Type1V('RadioPrioritySMS', dic=RadioPrio_dict),
+        Type3V('RAI', val={'V':b'\0\xf1\x10\0\0\0'}, bl={'V':48}, IE=RAI()),
         Type3TV('PTMSISign', val={'T':0x19, 'V':b'\0\0\0'}, bl={'V':24}),
         Type3TV('NegoREADYTimer', val={'T':0x17, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
         Type4TLV('AllocPTMSI', val={'T':0x18, 'V':b'\xf4\0\0\0\0'}, IE=ID()),
         Type4TLV('MSIdent', val={'T':0x23, 'V':b'\xf4\0\0\0\0'}, IE=ID()),
-        Type3TV('GMMCause', val={'T':0x25, 'V':b'\x11'}, bl={'V':8},
-            IE=Uint8('GMMCause', val=17, dic=GMMCause_dict)),
+        Type3TV('GMMCause', val={'T':0x25, 'V':b'\x11'}, bl={'V':8}, IE=GMMCause()),
         Type4TLV('T3302', val={'T':0x2A, 'V':b'\0'}, IE=GPRSTimer()),
         Type2('CellNotif', val={'T':0x8C}),
         Type4TLV('EquivPLMNList', val={'T':0x4A, 'V':3*b'\0'}, IE=PLMNList()),
@@ -161,7 +195,8 @@ class GMMAttachAccept(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMAttachComplete(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':3})._content) + (
+    _GEN = (
+        GMMHeader(val={'Type':3}),
         Type4TLV('InterRATHOInfo', val={'T':0x27, 'V':b'\0'}),
         Type4TLV('EUTRANInterRATHOInfo', val={'T':0x2B, 'V':b'\0'})
         )
@@ -173,8 +208,9 @@ class GMMAttachComplete(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMAttachReject(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':4})._content) + (
-        Uint8('GMMCause', val=17, dic=GMMCause_dict),
+    _GEN = (
+        GMMHeader(val={'Type':4}),
+        Type3V('GMMCause', val={'V':b'\x11'}, bl={'V':8}, IE=GMMCause()),
         Type4TLV('T3302', val={'T':0x2A, 'V':b'\0'}, IE=GPRSTimer()),
         Type4TLV('T3346', val={'T':0x3A, 'V':b'\0'}, IE=GPRSTimer())
         )
@@ -186,11 +222,11 @@ class GMMAttachReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMDetachRequestMT(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':5})._content) + (
-        ForceStdby(),
-        DetachTypeMT(),
-        Type3TV('GMMCause', val={'T':0x25, 'V':b'\x11'}, bl={'V':8},
-            IE=Uint8('GMMCause', val=17, dic=GMMCause_dict))
+    _GEN = (
+        GMMHeader(val={'Type':5}),
+        Type1V('ForceStdby', dic=ForceStdby_dict),
+        Type1V('DetachType', IE=DetachTypeMT()),
+        Type3TV('GMMCause', val={'T':0x25, 'V':b'\x11'}, bl={'V':8}, IE=GMMCause())
         )
 
 
@@ -200,9 +236,10 @@ class GMMDetachRequestMT(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMDetachRequestMO(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':5})._content) + (
+    _GEN = (
+        GMMHeader(val={'Type':5}),
         Uint('spare', bl=4),
-        DetachTypeMO(),
+        Type1V('DetachType', IE=DetachTypeMO()),
         Type4TLV('AllocPTMSI', val={'T':0x18, 'V':b'\xf4\0\0\0\0'}, IE=ID()),
         Type4TLV('PTMSISign', val={'T':0x19, 'V':b'\0\0\0'})
         )
@@ -214,9 +251,10 @@ class GMMDetachRequestMO(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMDetachAcceptMT(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':6})._content) + (
+    _GEN = (
+        GMMHeader(val={'Type':6}),
         Uint('spare', bl=4),
-        ForceStdby()
+        Type1V('ForceStdby', dic=ForceStdby_dict)
         )
 
 
@@ -226,7 +264,9 @@ class GMMDetachAcceptMT(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMDetachAcceptMO(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':6})._content)
+    _GEN = (
+        GMMHeader(val={'Type':6}),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -235,11 +275,12 @@ class GMMDetachAcceptMO(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMPTMSIReallocationCommand(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':16})._content) + (
+    _GEN = (
+        GMMHeader(val={'Type':16}),
         Type4LV('AllocPTMSI', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
-        RAI(),
+        Type3V('RAI', val={'V':b'\0\xf1\x10\0\0\0'}, bl={'V':48}, IE=RAI()),
         Uint('spare', bl=4),
-        ForceStdby(),
+        Type1V('ForceStdby', dic=ForceStdby_dict),
         Type3TV('PTMSISign', val={'T':0x19, 'V':b'\0\0\0'}, bl={'V':24}),
         )
 
@@ -250,7 +291,9 @@ class GMMPTMSIReallocationCommand(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMPTMSIReallocationComplete(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':17})._content)
+    _GEN = (
+        GMMHeader(val={'Type':17}),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -259,11 +302,12 @@ class GMMPTMSIReallocationComplete(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMAuthenticationCipheringRequest(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':18})._content) + (
-        Uint('IMEISVReq', bl=4),
-        Uint('CiphAlgo', bl=4, dic=CiphAlgo_dict),
-        Uint('ACRef', bl=4),
-        ForceStdby(),
+    _GEN = (
+        GMMHeader(val={'Type':18}),
+        Type1V('IMEISVReq'),
+        Type1V('CiphAlgo', dic=CiphAlgo_dict),
+        Type1V('ACRef'),
+        Type1V('ForceStdby', dic=ForceStdby_dict),
         Type3TV('RAND', val={'T':0x21, 'V':16*b'\0'}, bl={'V':128}),
         Type1TV('CKSN', val={'T':0x8, 'V':0}, dic=CKSN_dict),
         Type4TLV('AUTN', val={'T':0x28, 'V':16*b'\0'}, IE=AUTN()),
@@ -282,9 +326,10 @@ class GMMAuthenticationCipheringRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMAuthenticationCipheringResponse(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':19})._content) + (
+    _GEN = (
+        GMMHeader(val={'Type':19}),
         Uint('spare', bl=4),
-        Uint('ACRef', bl=4),
+        Type1V('ACRef'),
         Type3TV('RES', val={'T':0x22, 'V':4*b'\0'}, bl={'V':32}),
         Type4TLV('IMEISV', val={'T':0x23, 'V':b'\x03\0\0\0\0\0\0\0\xf0'}, IE=ID()),
         Type4TLV('RESExt', val={'T':0x29, 'V':4*b'\0'}),
@@ -298,8 +343,9 @@ class GMMAuthenticationCipheringResponse(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMAuthenticationCipheringFailure(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':28})._content) + (
-        Uint8('GMMCause', val=17, dic=GMMCause_dict),
+    _GEN = (
+        GMMHeader(val={'Type':28}),
+        Type3V('GMMCause', val={'V':b'\x11'}, bl={'V':8}, IE=GMMCause()),
         Type4TLV('AUTS', val={'T':0x30, 'V':14*b'\0'})
         )
 
@@ -310,7 +356,9 @@ class GMMAuthenticationCipheringFailure(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMAuthenticationCipheringReject(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':20})._content)
+    _GEN = (
+        GMMHeader(val={'Type':20}),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -319,9 +367,10 @@ class GMMAuthenticationCipheringReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMIdentityRequest(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':21})._content) + (
-        ForceStdby(),
-        Uint('IDType', val=1, bl=4, dic=IDType_dict)
+    _GEN = (
+        GMMHeader(val={'Type':21}),
+        Type1V('ForceStdby', dic=ForceStdby_dict),
+        Type1V('IDType', val={'V':IDTYPE_IMSI}, dic=IDType_dict)
         )
 
 
@@ -331,8 +380,9 @@ class GMMIdentityRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMIdentityResponse(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':22})._content) + (
-        Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
+    _GEN = (
+        GMMHeader(val={'Type':22}),
+        Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID())
         )
 
 
@@ -342,10 +392,11 @@ class GMMIdentityResponse(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMRoutingAreaUpdateRequest(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':8})._content) + (
-        Uint('CKSN', bl=4, dic=CKSN_dict),
-        UpdateType(),
-        RAI('OldRAI'),
+    _GEN = (
+        GMMHeader(val={'Type':8}),
+        Type1V('CKSN', dic=CKSN_dict),
+        Type1V('UpdateType', IE=UpdateType()),
+        Type3V('OldRAI', val={'V':b'\0\xf1\x10\0\0\0'}, bl={'V':48}, IE=RAI()),
         Type4LV('MSRACap', val={'V':5*b'\0'}, IE=MS_RA_capability_value_part),
         Type3TV('OldPTMSISign', val={'T':0x19, 'V':b'\0\0\0'}, bl={'V':24}),
         Type3TV('ReqREADYTimer', val={'T':0x17, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
@@ -381,19 +432,19 @@ class GMMRoutingAreaUpdateRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMRoutingAreaUpdateAccept(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':9})._content) + (
-        ForceStdby(),
-        UpdateResult(),
-        GPRSTimer('PeriodicRAUpdateTimer'),
-        RAI(),
+    _GEN = (
+        GMMHeader(val={'Type':9}),
+        Type1V('ForceStdby', dic=ForceStdby_dict),
+        Type1V('UpdateResult', IE=UpdateResult()),
+        Type3V('PeriodicRAUpdateTimer', val={'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
+        Type3V('RAI', val={'V':b'\0\xf1\x10\0\0\0'}, bl={'V':48}, IE=RAI()),
         Type3TV('PTMSISign', val={'T':0x19, 'V':b'\0\0\0'}, bl={'V':24}),
         Type4TLV('AllocPTMSI', val={'T':0x18, 'V':b'\xf4\0\0\0\0'}, IE=ID()),
         Type4TLV('MSIdent', val={'T':0x23, 'V':b'\xf4\0\0\0\0'}, IE=ID()),
         Type4TLV('RcvNPDUNumList', val={'T':0x26, 'V':b'\0\0'},
             IE=Receive_N_PDU_Number_list_value),
         Type3TV('NegoREADYTimer', val={'T':0x17, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
-        Type3TV('GMMCause', val={'T':0x25, 'V':b'\x11'}, bl={'V':8},
-            IE=Uint8('GMMCause', val=17, dic=GMMCause_dict)),
+        Type3TV('GMMCause', val={'T':0x25, 'V':b'\x11'}, bl={'V':8}, IE=GMMCause()),
         Type4TLV('T3302', val={'T':0x2A, 'V':b'\0'}, IE=GPRSTimer()),
         Type2('CellNotif', val={'T':0x8C}),
         Type4TLV('EquivPLMNList', val={'T':0x4A, 'V':3*b'\0'}, IE=PLMNList()),
@@ -422,7 +473,8 @@ class GMMRoutingAreaUpdateAccept(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMRoutingAreaUpdateComplete(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':10})._content) + (
+    _GEN = (
+        GMMHeader(val={'Type':10}),
         Type4TLV('RcvNPDUNumList', val={'T':0x26, 'V':b'\0\0'},
             IE=Receive_N_PDU_Number_list_value),
         Type4TLV('InterRATHOInfo', val={'T':0x27, 'V':b'\0'}),
@@ -436,10 +488,11 @@ class GMMRoutingAreaUpdateComplete(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMRoutingAreaUpdateReject(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':11})._content) + (
-        Uint8('GMMCause', val=17, dic=GMMCause_dict),
+    _GEN = (
+        GMMHeader(val={'Type':11}),
+        Type3V('GMMCause', val={'V':b'\x11'}, bl={'V':8}, IE=GMMCause()),
         Uint('spare', bl=4),
-        ForceStdby(),
+        Type1V('ForceStdby', dic=ForceStdby_dict),
         Type4TLV('T3302', val={'T':0x2A, 'V':b'\0'}, IE=GPRSTimer()),
         Type4TLV('T3346', val={'T':0x3A, 'V':b'\0'}, IE=GPRSTimer())
         )
@@ -451,8 +504,9 @@ class GMMRoutingAreaUpdateReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMStatus(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':32})._content) + (
-        Uint8('GMMCause', val=17, dic=GMMCause_dict),
+    _GEN = (
+        GMMHeader(val={'Type':32}),
+        Type3V('GMMCause', val={'V':b'\x11'}, bl={'V':8}, IE=GMMCause())
         )
 
 
@@ -462,7 +516,8 @@ class GMMStatus(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMInformation(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':33})._content) + (
+    _GEN = (
+        GMMHeader(val={'Type':33}),
         Type4TLV('NetFullName', val={'T':0x43, 'V':b'\0'}, IE=NetworkName()),
         Type4TLV('NetShortName', val={'T':0x45, 'V':b'\0'}, IE=NetworkName()),
         Type3TV('LocalTimeZone', val={'T':0x46, 'V':b'\0'}, bl={'V':8}),
@@ -479,9 +534,10 @@ class GMMInformation(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMServiceRequest(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':12})._content) + (
-        Uint('ServiceType', bl=4, dic=ServiceType_dict),
-        Uint('CKSN', bl=4, dic=CKSN_dict),
+    _GEN = (
+        GMMHeader(val={'Type':12}),
+        Type1V('ServiceType', dic=ServiceType_dict),
+        Type1V('CKSN', dic=CKSN_dict),
         Type4LV('PTMSI', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
         Type4TLV('PDPCtxtStat', val={'T':0x32, 'V':b'\0\0'}, IE=PDPCtxtStat()),
         Type4TLV('MBMSCtxtStat', val={'T':0x35, 'V':b''}, IE=MBMSCtxtStat()),
@@ -496,7 +552,8 @@ class GMMServiceRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMServiceAccept(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':13})._content) + (
+    _GEN = (
+        GMMHeader(val={'Type':13}),
         Type4TLV('PDPCtxtStat', val={'T':0x32, 'V':b'\0\0'}, IE=PDPCtxtStat()),
         Type4TLV('MBMSCtxtStat', val={'T':0x35, 'V':b''}, IE=MBMSCtxtStat()),
         )
@@ -508,8 +565,9 @@ class GMMServiceAccept(Layer3):
 #------------------------------------------------------------------------------#
 
 class GMMServiceReject(Layer3):
-    _GEN = tuple(GMMHeader(val={'Type':14})._content) + (
-        Uint8('GMMCause', val=17, dic=GMMCause_dict),
+    _GEN = (
+        GMMHeader(val={'Type':14}),
+        Type3V('GMMCause', val={'V':b'\x11'}, bl={'V':8}, IE=GMMCause()),
         Type4TLV('T3346', val={'T':0x3A, 'V':b'\0'}, IE=GPRSTimer())
         )
 

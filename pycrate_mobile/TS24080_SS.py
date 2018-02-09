@@ -27,6 +27,17 @@
 # *--------------------------------------------------------
 #*/
 
+__all__ = [
+    'SSReleaseComplete',
+    'SSFacility',
+    'SSRegisterMO',
+    'SSRegisterMT',
+    'SSTypeMOClasses',
+    'SSTypeMTClasses',
+    'get_ss_msg_mo_instances',
+    'get_ss_msg_mt_instances'
+    ]
+
 #------------------------------------------------------------------------------#
 # 3GPP TS 24.080: Mobile radio interface layer 3 
 # Supplementary services specification
@@ -104,9 +115,7 @@ _SS_dict = {
 
 class SSHeader(Envelope):
     _GEN = (
-        Uint('TIFlag', bl=1, dic={0: 'initiator', 1: 'responder'}),
-        Uint('TIO', bl=3),
-        Uint('ProtDisc', val=11, bl=4, dic=ProtDisc_dict),
+        TIPD(val={'ProtDisc': 11}),
         Uint('Seqn', bl=2),
         Uint('Type', val=58, bl=6, dic=_SS_dict)
         )
@@ -118,7 +127,8 @@ class SSHeader(Envelope):
 #------------------------------------------------------------------------------#
 
 class SSFacility(Layer3):
-    _GEN = tuple(SSHeader(val={'Type':58})._content) + (
+    _GEN = (
+        SSHeader(val={'Type':58}),
         Type4LV('Facility', val={'V':b'\0'}, IE=Facility()),
         )
 
@@ -129,8 +139,9 @@ class SSFacility(Layer3):
 #------------------------------------------------------------------------------#
 
 class SSRegisterMT(Layer3):
-    _GEN = tuple(SSHeader(val={'Type':59})._content) + (
-        Type4TLV('Facility', val={'T':0x1C, 'V':b''}, trans=True),
+    _GEN = (
+        SSHeader(val={'Type':59}),
+        Type4TLV('Facility', val={'T':0x1C, 'V':b''}),
         )
 
 
@@ -140,9 +151,10 @@ class SSRegisterMT(Layer3):
 #------------------------------------------------------------------------------#
 
 class SSRegisterMO(Layer3):
-    _GEN = tuple(SSHeader(val={'Type':59})._content) + (
-        Type4TLV('Facility', val={'T':0x1C, 'V':b''}, IE=Facility(), trans=True),
-        Type4TLV('SSVersion', val={'T':0x7F, 'V':b'\0'}, IE=SSVersion(), trans=True)
+    _GEN = (
+        SSHeader(val={'Type':59}),
+        Type4TLV('Facility', val={'T':0x1C, 'V':b''}, IE=Facility()),
+        Type4TLV('SSVersion', val={'T':0x7F, 'V':b'\0'}, IE=SSVersion())
         )
 
 
@@ -152,9 +164,10 @@ class SSRegisterMO(Layer3):
 #------------------------------------------------------------------------------#
 
 class SSReleaseComplete(Layer3):
-    _GEN = tuple(SSHeader(val={'Type':42})._content) + (
-        Type4TLV('Cause', val={'T':0x8, 'V':b'\x80\x80'}, IE=Cause(), trans=True),
-        Type4TLV('Facility', val={'T':0x1C, 'V':b''}, trans=True)
+    _GEN = (
+        SSHeader(val={'Type':42}),
+        Type4TLV('Cause', val={'T':0x8, 'V':b'\x80\x80'}, IE=Cause()),
+        Type4TLV('Facility', val={'T':0x1C, 'V':b''})
         )
 
 

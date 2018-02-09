@@ -74,9 +74,9 @@ def parse_NASLTE_MO(buf, inner=True):
         #
         if inner and shdr in (1, 3):
             # parse clear-text NAS message container
-            cont, err = parse_NASLTE_MO(Msg[4].get_val(), inner=inner)
+            cont, err = parse_NASLTE_MO(Msg[3].get_val(), inner=inner)
             if cont is not None:
-                Msg.replace(Msg[4], cont)
+                Msg.replace(Msg[3], cont)
             return Msg, err
         else:
             return Msg, 0
@@ -98,16 +98,16 @@ def parse_NASLTE_MO(buf, inner=True):
             # EMM
             if python_version < 3:
                 try:
-                    type = ord(buf[1:2])
+                    typ = ord(buf[1:2])
                 except:
                     return None, 111
             else:
                 try:
-                    type = buf[1]
+                    typ = buf[1]
                 except:
                     return None, 111
             try:
-                Msg = EMMTypeMOClasses[type]()
+                Msg = EMMTypeMOClasses[typ]()
             except:
                 # error 97, message type non-existent or not implemented
                 return None, 97
@@ -115,16 +115,16 @@ def parse_NASLTE_MO(buf, inner=True):
             # ESM
             if python_version < 3:
                 try:
-                    type = ord(buf[2:3])
+                    typ = ord(buf[2:3])
                 except:
                     return None, 111
             else:
                 try:
-                    type = buf[2]
+                    typ = buf[2]
                 except:
                     return None, 111
             try:
-                Msg = ESMTypeClasses[type]()
+                Msg = ESMTypeClasses[typ]()
             except:
                 return None, 97
         else:
@@ -137,7 +137,7 @@ def parse_NASLTE_MO(buf, inner=True):
             return None, 96
         #
         if inner and pd == 7:
-            if type in (65, 66, 67, 68, 77):
+            if typ in (65, 66, 67, 68, 77):
                 esmc = Msg['ESMContainer']
                 if not esmc.get_trans():
                     # ESM Container present in Msg
@@ -147,17 +147,17 @@ def parse_NASLTE_MO(buf, inner=True):
                     else:
                         esmc.replace(esmc[-1], cont)
                         #esmc[-2].set_valauto(cont.get_len)
-            elif type in (98, 99):
+            elif typ in (98, 99):
                 # PP-SMS
                 nasc   = Msg['NASContainer']
                 ppsmsb = nasc[1].get_val()
                 try:
-                    pd, type = unpack('>BB', ppsmsb[:2])
+                    pd, typ = unpack('>BB', ppsmsb[:2])
                 except:
                     return Msg, 111
                 pd &= 0xF
-                if pd == 9 and type in (1, 4, 16):
-                    cont = PPSMSCPTypeClasses[type]()
+                if pd == 9 and typ in (1, 4, 16):
+                    cont = PPSMSCPTypeClasses[typ]()
                     try:
                         cont.from_bytes(ppsmsb)
                     except:
@@ -206,9 +206,9 @@ def parse_NASLTE_MT(buf, inner=True):
         #
         if inner and shdr in (1, 3):
             # parse clear-text NAS message container
-            cont, err = parse_NASLTE_MT(Msg[4].get_val(), inner=inner)
+            cont, err = parse_NASLTE_MT(Msg[3].get_val(), inner=inner)
             if cont is not None:
-                Msg.replace(Msg[4], cont)
+                Msg.replace(Msg[3], cont)
             return Msg, err
         else:
             return Msg, 0
@@ -230,16 +230,16 @@ def parse_NASLTE_MT(buf, inner=True):
             # EMM
             if python_version < 3:
                 try:
-                    type = ord(buf[1])
+                    typ = ord(buf[1])
                 except:
                     return None, 111
             else:
                 try:
-                    type = buf[1]
+                    typ = buf[1]
                 except:
                     return None, 111
             try:
-                Msg = EMMTypeMTClasses[type]()
+                Msg = EMMTypeMTClasses[typ]()
             except:
                 # error 97, message type non-existent or not implemented
                 return None, 97
@@ -247,16 +247,16 @@ def parse_NASLTE_MT(buf, inner=True):
             # ESM
             if python_version < 3:
                 try:
-                    type = ord(buf[2])
+                    typ = ord(buf[2])
                 except:
                     return None, 111
             else:
                 try:
-                    type = buf[2]
+                    typ = buf[2]
                 except:
                     return None, 111
             try:
-                Msg = ESMTypeClasses[type]()
+                Msg = ESMTypeClasses[typ]()
             except:
                 return None, 97
         else:
@@ -269,7 +269,7 @@ def parse_NASLTE_MT(buf, inner=True):
             return None, 96
         #
         if inner and pd == 7:
-            if type in (65, 66, 67, 68, 77):
+            if typ in (65, 66, 67, 68, 77):
                 # ESM Container
                 esmc = Msg['ESMContainer']
                 if not esmc.get_trans():
@@ -280,17 +280,17 @@ def parse_NASLTE_MT(buf, inner=True):
                     else:
                         esmc.replace(esmc[-1], cont)
                         #esmc[-2].set_valauto(cont.get_len)
-            elif type in (98, 99):
+            elif typ in (98, 99):
                 # PP-SMS
                 nasc   = Msg['NASContainer']
                 ppsmsb = nasc[1].get_val()
                 try:
-                    pd, type = unpack('>BB', ppsmsb[:2])
+                    pd, typ = unpack('>BB', ppsmsb[:2])
                 except:
                     return Msg, 111
                 pd &= 0xF
-                if pd == 9 and type in (1, 4, 16):
-                    cont = PPSMSCPTypeClasses[type]()
+                if pd == 9 and typ in (1, 4, 16):
+                    cont = PPSMSCPTypeClasses[typ]()
                     try:
                         cont.from_bytes(ppsmsb)
                     except:

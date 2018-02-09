@@ -27,6 +27,24 @@
 # *--------------------------------------------------------
 #*/
 
+__all__ = [
+    'Layer3',
+    'Layer3EPS',
+    'IE',
+    'Type1V',
+    'Type1TV',
+    'Type2',
+    'Type3V',
+    'Type3TV',
+    'Type4LV',
+    'Type4TLV',
+    'Type6LVE',
+    'Type6TLVE',
+    'TI',
+    'TIPD',
+    'ProtDisc_dict'
+    ]
+
 #------------------------------------------------------------------------------#
 # 3GPP TS 24.007: Mobile radio interface signalling layer 3
 # release 13 (d00)
@@ -39,6 +57,7 @@ from pycrate_core.elt    import Element, Envelope, REPR_RAW, REPR_HEX, REPR_BIN
 from pycrate_core.base   import *
 from pycrate_core.repr   import *
 from pycrate_csn1.csnobj import CSN1Obj
+
 
 #------------------------------------------------------------------------------#
 # Components of a standard L3 message
@@ -151,7 +170,7 @@ class Layer3(Envelope):
             L = char.get_uint(8)
             V = char.get_bytes(8*L)
             log('%s, _dec_unk_ie: unknown Type4TLV IE, T: 0x%x, V: 0x%s' \
-                % (self._name, T8, hexlify(V)))
+                % (self._name, T8, hexlify(V).decode('ascii')))
             self.append( Type4TLV('_T_%i' % T8, val=[T8, L, V]) )
     
     def repr(self):
@@ -390,7 +409,7 @@ class Type3V(IE):
     _GEN = (
         Buf('V', rep=REPR_HEX),
         )
-
+    
 
 class Type3TV(IE):
     """The Type3_TV IE is an optional IE,
@@ -468,6 +487,68 @@ class Type6TLVE(IE):
 # TS 24.007, section 11.2.3
 #------------------------------------------------------------------------------#
 
+class TI(Envelope):
+    """Transaction identifier (extendable)
+    TS 24.007, section 11.2.3.1.3
+    """
+    #ENV_SEL_TRANS = False
+    _GEN = (
+        Uint('TIFlag', bl=1, dic={0: 'allocated by sender', 1: 'allocated by receiver'}),
+        Uint('TIO', bl=3),
+        Uint('spare', bl=4),
+        Uint('Ext', val=1, bl=1, trans=True),
+        Uint('TIE', bl=7, trans=True),
+        Uint8('TI', trans=True) # virtual field to get and set the TI value easily
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[5].set_valauto(self._set_ti)
+    
+    def _set_ti(self):
+        tio = self[1].get_val()
+        if tio == 7 and not self[4].get_trans():
+            return self[4].get_val()
+        else:
+            return tio
+    
+    def set_val(self, vals):
+        ti, disp = None, True
+        if isinstance(vals, integer_types):
+            ti = vals
+            disp = False
+        elif isinstance(vals, dict) and 'TI' in vals:
+            ti = vals['TI']
+        if ti is not None:
+            if 0 <= ti < 7:
+                self[1].set_val(ti)
+                self[3].set_trans(True)
+                self[4].set_trans(True)
+                self[4].set_val(None)
+            elif ti < 128:
+                # extended
+                self[1].set_val(7)
+                self[3].set_trans(False)
+                self[4].set_trans(False)
+                self[4].set_val(ti)
+        if disp:
+            Envelope.set_val(self, vals)
+    
+    def _from_char(self, char):
+        self[0]._from_char(char)
+        self[1]._from_char(char)
+        self[2]._from_char(char)
+        if self[1].get_val() == 7 and char.len_byte():
+            self[3].set_trans(False)
+            self[3]._from_char(char)
+            self[4].set_trans(False)
+            self[4]._from_char(char)
+        else:
+            self[3].set_trans(True)
+            self[4].set_trans(True)
+            self[4].set_val(None)
+
+
 ProtDisc_dict = {
     0 : 'GCC',
     1 : 'BCC',
@@ -485,3 +566,17 @@ ProtDisc_dict = {
     13: 'extended ProtDisc',
     14: 'testing',
     }
+
+class TIPD(TI):
+    """Transaction identifier (extendable) and protocol discriminator
+    TS 24.007, section 11.2.3.1
+    """
+    _GEN = (
+        Uint('TIFlag', bl=1, dic={0: 'allocated by sender', 1: 'allocated by receiver'}),
+        Uint('TIO', bl=3),
+        Uint('ProtDisc', bl=4, dic=ProtDisc_dict),
+        Uint('Ext', val=1, bl=1, trans=True),
+        Uint('TIE', bl=7, trans=True),
+        Uint8('TI', trans=True) # virtual field to get and set the TI value easily
+        )
+

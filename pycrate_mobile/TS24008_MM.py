@@ -27,6 +27,34 @@
 # *--------------------------------------------------------
 #*/
 
+__all__ = [
+    'MMIMSIDetachIndication',
+    'MMLocationUpdatingAccept',
+    'MMLocationUpdatingReject',
+    'MMLocationUpdatingRequest',
+    'MMAuthenticationReject',
+    'MMAuthenticationRequest',
+    'MMAuthenticationResponse',
+    'MMAuthenticationFailure',
+    'MMIdentityRequest',
+    'MMIdentityResponse',
+    'MMTMSIReallocationCommand',
+    'MMTMSIReallocationComplete',
+    'MMCMServiceAccept',
+    'MMCMServiceReject',
+    'MMCMServiceAbort',
+    'MMCMServiceRequest',
+    'MMCMServicePrompt',
+    'MMCMReestablishmentRequest',
+    'MMAbort',
+    'MMNull',
+    'MMStatus',
+    'MMInformation',
+    #
+    'MMTypeClasses',
+    'get_mm_msg_instances'
+    ]
+
 #------------------------------------------------------------------------------#
 # 3GPP TS 24.008: Mobile radio interface layer 3 specification
 # release 13 (d90)
@@ -72,7 +100,7 @@ _CS_MM_dict = {
     }
 
 class MMHeader(Envelope):
-    _GEN = (
+    _GEN  = (
         Uint('SkipInd', bl=4),
         Uint('ProtDisc', val=5, bl=4, dic=ProtDisc_dict),
         Uint('Seqn', bl=2),
@@ -86,7 +114,9 @@ class MMHeader(Envelope):
 #------------------------------------------------------------------------------#
 
 class MMAuthenticationReject(Layer3):
-    _GEN = tuple(MMHeader(val={'Type':17})._content)
+    _GEN = (
+        MMHeader(val={'Type':17}),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -95,10 +125,11 @@ class MMAuthenticationReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class MMAuthenticationRequest(Layer3):
-    _GEN = tuple(MMHeader(val={'Type':18})._content) + (
+    _GEN = (
+        MMHeader(val={'Type':18}),
         Uint('spare', bl=4),
-        Uint('CKSN', bl=4, dic=CKSN_dict),
-        Buf('RAND', val=16*b'\0', bl=128, rep=REPR_HEX),
+        Type1V('CKSN', dic=CKSN_dict),
+        Type3V('RAND', val={'V':16*b'\0'}, bl={'V':128}),
         Type4TLV('AUTN', val={'T':0x20, 'V':16*b'\0'}, IE=AUTN())
         )
 
@@ -109,8 +140,9 @@ class MMAuthenticationRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class MMAuthenticationResponse(Layer3):
-    _GEN = tuple(MMHeader(val={'Type':20})._content) + (
-        Buf('RES', val=4*b'\0', bl=32, rep=REPR_HEX),
+    _GEN = (
+        MMHeader(val={'Type':20}),
+        Type3V('RES', val={'V':4*b'\0'}, bl={'V':32}),
         Type4TLV('RESExt', val={'T':0x21, 'V':4*b'\0'})
         )
 
@@ -121,8 +153,9 @@ class MMAuthenticationResponse(Layer3):
 #------------------------------------------------------------------------------#
 
 class MMAuthenticationFailure(Layer3):
-    _GEN = tuple(MMHeader(val={'Type':28})._content) + (
-        Uint8('Cause', val=17, dic=RejectCause_dict),
+    _GEN = (
+        MMHeader(val={'Type':28}),
+        Type3V('RejectCause', val={'V':b'\x11'}, bl={'V':8}, IE=RejectCause()),
         Type4TLV('AUTS', val={'T':0x22, 'V':16*b'\0'})
         )
 
@@ -133,9 +166,10 @@ class MMAuthenticationFailure(Layer3):
 #------------------------------------------------------------------------------#
 
 class MMCMReestablishmentRequest(Layer3):
-    _GEN = tuple(MMHeader(val={'Type':40})._content) + (
+    _GEN = (
+        MMHeader(val={'Type':40}),
         Uint('spare', bl=4),
-        Uint('CKSN', bl=4, dic=CKSN_dict),
+        Type1V('CKSN', dic=CKSN_dict),
         Type4LV('MSCm2', val={'V':b'@\0\0'}, IE=MSCm2()),
         Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
         Type3TV('LAI', val={'T':0x13, 'V':b'\0\xf1\x10\0\0'}, bl={'V':40}, IE=LAI()),
@@ -149,7 +183,9 @@ class MMCMReestablishmentRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class MMCMServiceAccept(Layer3):
-    _GEN = tuple(MMHeader(val={'Type':33})._content)
+    _GEN = (
+        MMHeader(val={'Type':33}),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -158,10 +194,9 @@ class MMCMServiceAccept(Layer3):
 #------------------------------------------------------------------------------#
 
 class MMCMServicePrompt(Layer3):
-    _GEN = tuple(MMHeader(val={'Type':37})._content) + (
-        Uint('spare', bl=2),
-        Uint('SAPI', bl=2),
-        Uint('PD', val=5, bl=4, dic=ProtDisc_dict)
+    _GEN = (
+        MMHeader(val={'Type':37}),
+        Type3V('PD_SAPI', val={'V':b'\0'}, bl={'V':8}, IE=PD_SAPI())
         )
 
 
@@ -171,8 +206,9 @@ class MMCMServicePrompt(Layer3):
 #------------------------------------------------------------------------------#
 
 class MMCMServiceReject(Layer3):
-    _GEN = tuple(MMHeader(val={'Type':34})._content) + (
-        Uint8('Cause', val=17, dic=RejectCause_dict),
+    _GEN = (
+        MMHeader(val={'Type':34}),
+        Type3V('RejectCause', val={'V':b'\x11'}, bl={'V':8}, IE=RejectCause()),
         Type4TLV('T3246', val={'T':0x36, 'V':b'\0'})
         )
 
@@ -183,7 +219,9 @@ class MMCMServiceReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class MMCMServiceAbort(Layer3):
-    _GEN = tuple(MMHeader(val={'Type':35})._content)
+    _GEN = (
+        MMHeader(val={'Type':35}),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -192,8 +230,9 @@ class MMCMServiceAbort(Layer3):
 #------------------------------------------------------------------------------#
 
 class MMAbort(Layer3):
-    _GEN = tuple(MMHeader(val={'Type':41})._content) + (
-        Uint8('Cause', val=17, dic=RejectCause_dict),
+    _GEN = (
+        MMHeader(val={'Type':41}),
+        Type3V('RejectCause', val={'V':b'\x11'}, bl={'V':8}, IE=RejectCause())
         )
 
 
@@ -203,9 +242,10 @@ class MMAbort(Layer3):
 #------------------------------------------------------------------------------#
 
 class MMCMServiceRequest(Layer3):
-    _GEN = tuple(MMHeader(val={'Type':36})._content) + (
-        Uint('CKSN', bl=4, dic=CKSN_dict),
-        Uint('Service', val=1, bl=4, dic=CMService_dict),
+    _GEN = (
+        MMHeader(val={'Type':36}),
+        Type1V('CKSN', dic=CKSN_dict),
+        Type1V('Service', val={'V':1}, dic=CMService_dict),
         Type4LV('MSCm2', val={'V':b'@\0\0'}, IE=MSCm2()),
         Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
         Type1TV('Priority', val={'T':0x8, 'V':0}, IE=PriorityLevel()),
@@ -220,9 +260,10 @@ class MMCMServiceRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class MMIdentityRequest(Layer3):
-    _GEN = tuple(MMHeader(val={'Type':24})._content) + (
+    _GEN = (
+        MMHeader(val={'Type':24}),
         Uint('spare', bl=4),
-        Uint('IDType', val=IDTYPE_IMSI, bl=4, dic=IDType_dict)
+        Type1V('IDType', val={'V':IDTYPE_IMSI}, dic=IDType_dict)
         )
 
 
@@ -232,7 +273,8 @@ class MMIdentityRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class MMIdentityResponse(Layer3):
-    _GEN = tuple(MMHeader(val={'Type':25})._content) + (
+    _GEN = (
+        MMHeader(val={'Type':25}),
         Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
         Type1TV('PTMSIType', val={'T':0xE, 'V':0}, IE=PTMSIType()),
         Type4TLV('RAI', val={'T':0x1B, 'V':b'\0\xf1\x10\0\0\0'}, IE=RAI()),
@@ -246,8 +288,9 @@ class MMIdentityResponse(Layer3):
 #------------------------------------------------------------------------------#
 
 class MMIMSIDetachIndication(Layer3):
-    _GEN = tuple(MMHeader(val={'Type':1})._content) + (
-        MSCm1(),
+    _GEN = (
+        MMHeader(val={'Type':1}),
+        Type3V('MSCm1', val={'V':b'\x40'}, bl={'V':8}, IE=MSCm1()),
         Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID())
         )
 
@@ -258,8 +301,9 @@ class MMIMSIDetachIndication(Layer3):
 #------------------------------------------------------------------------------#
 
 class MMLocationUpdatingAccept(Layer3):
-    _GEN = tuple(MMHeader(val={'Type':2})._content) + (
-        LAI(),
+    _GEN = (
+        MMHeader(val={'Type':2}),
+        Type3V('LAI', val={'V': b'\0\xf1\x10\0\0'}, bl={'V':40}, IE=LAI()),
         Type4TLV('ID', val={'T':0x17 ,'V':b'\xf4\0\0\0\0'}, IE=ID()),
         Type2('FollowOnProceed', val={'T':0xA1}),
         Type2('CTSPerm', val={'T':0xA2}),
@@ -275,8 +319,9 @@ class MMLocationUpdatingAccept(Layer3):
 #------------------------------------------------------------------------------#
 
 class MMLocationUpdatingReject(Layer3):
-    _GEN = tuple(MMHeader(val={'Type':4})._content) + (
-        Uint8('Cause', val=17, dic=RejectCause_dict),
+    _GEN = (
+        MMHeader(val={'Type':4}),
+        Type3V('RejectCause', val={'V':b'\x11'}, bl={'V':8}, IE=RejectCause()),
         Type4TLV('T3246', val={'T':0x36, 'V':b'\0'}, IE=MMTimer())
         )
 
@@ -287,16 +332,17 @@ class MMLocationUpdatingReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class MMLocationUpdatingRequest(Layer3):
-    _GEN = tuple(MMHeader(val={'Type':8})._content) + (
-        Uint('CKSN', bl=4, dic=CKSN_dict),
-        LocUpdateType(),
-        LAI(),
-        Type3V('MSCm1', val={'V':b'\0'}, bl={'V':8}, IE=MSCm1()),
+    _GEN = (
+        MMHeader(val={'Type':8}),
+        Type1V('CKSN', dic=CKSN_dict),
+        Type1V('LocUpdateType', IE=LocUpdateType()),
+        Type3V('LAI', val={'V': b'\0\xf1\x10\0\0'}, bl={'V':40}, IE=LAI()),
+        Type3V('MSCm1', val={'V':b'\x40'}, bl={'V':8}, IE=MSCm1()),
         Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
         Type4TLV('MSCm2', val={'T':0x33, 'V':b'@\0\0'}, IE=MSCm2()),
         Type1TV('AddUpdateParams', val={'T':0xC, 'V':0}, IE=AddUpdateParams()),
         Type1TV('DeviceProp', val={'T':0xD, 'V':0}, IE=DeviceProp()),
-        Type1TV('MSNetFeatSupp', val={'T':0xE, 'V':0}, IE=MSNetFeatSupp()),
+        Type1TV('MSNetFeatSupp', val={'T':0xE, 'V':0}, IE=MSNetFeatSupp())
         )
 
 
@@ -306,7 +352,8 @@ class MMLocationUpdatingRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class MMInformation(Layer3):
-    _GEN = tuple(MMHeader(val={'Type':50})._content) + (
+    _GEN = (
+        MMHeader(val={'Type':50}),
         Type4TLV('NetFullName', val={'T':0x43, 'V':b'\0'}, IE=NetworkName()),
         Type4TLV('NetShortName', val={'T':0x45, 'V':b'\0'}, IE=NetworkName()),
         Type3TV('LocalTimeZone', val={'T':0x46, 'V':b'\0'}, bl={'V':8}, IE=TimeZone()),
@@ -323,8 +370,9 @@ class MMInformation(Layer3):
 #------------------------------------------------------------------------------#
 
 class MMStatus(Layer3):
-    _GEN = tuple(MMHeader(val={'Type':49})._content) + (
-        Uint8('Cause', val=17, dic=RejectCause_dict),
+    _GEN = (
+        MMHeader(val={'Type':49}),
+        Type3V('RejectCause', val={'V':b'\x11'}, bl={'V':8}, IE=RejectCause())
         )
 
 
@@ -334,9 +382,10 @@ class MMStatus(Layer3):
 #------------------------------------------------------------------------------#
 
 class MMTMSIReallocationCommand(Layer3):
-    _GEN = tuple(MMHeader(val={'Type':26})._content) + (
-        LAI(),
-        Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
+    _GEN = (
+        MMHeader(val={'Type':26}),
+        Type3V('LAI', val={'V': b'\0\xf1\x10\0\0'}, bl={'V':40}, IE=LAI()),
+        Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID())
         )
 
 
@@ -346,7 +395,9 @@ class MMTMSIReallocationCommand(Layer3):
 #------------------------------------------------------------------------------#
 
 class MMTMSIReallocationComplete(Layer3):
-    _GEN = tuple(MMHeader(val={'Type':27})._content)
+    _GEN = (
+        MMHeader(val={'Type':27}),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -355,7 +406,9 @@ class MMTMSIReallocationComplete(Layer3):
 #------------------------------------------------------------------------------#
 
 class MMNull(Layer3):
-    _GEN = tuple(MMHeader(val={'Type':48})._content)
+    _GEN = (
+        MMHeader(val={'Type':48}),
+        )
 
 
 #------------------------------------------------------------------------------#

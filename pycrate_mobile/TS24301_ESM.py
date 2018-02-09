@@ -27,6 +27,39 @@
 # *--------------------------------------------------------
 #*/
 
+__all__ = [
+    'ESMActDediEPSBearerCtxtAccept',
+    'ESMActDediEPSBearerCtxtReject',
+    'ESMActDediEPSBearerCtxtRequest',
+    'ESMActDefaultEPSBearerCtxtAccept',
+    'ESMActDefaultEPSBearerCtxtReject',
+    'ESMActDefaultEPSBearerCtxtRequest',
+    'ESMBearerResourceAllocReject',
+    'ESMBearerResourceAllocRequest',
+    'ESMBearerResourceModifReject',
+    'ESMBearerResourceModifRequest',
+    'ESMDataTransport',
+    'ESMDeactEPSBearerCtxtAccept',
+    'ESMDeactEPSBearerCtxtRequest',
+    'ESMDummyMessage',
+    'ESMInformationRequest',
+    'ESMInformationResponse',
+    'ESMModifyEPSBearerCtxtAccept',
+    'ESMModifyEPSBearerCtxtReject',
+    'ESMModifyEPSBearerCtxtRequest',
+    'ESMNotification',
+    'ESMPDNConnectivityReject',
+    'ESMPDNConnectivityRequest',
+    'ESMPDNDisconnectReject',
+    'ESMPDNDisconnectRequest',
+    'ESMRemoteUEReport',
+    'ESMRemoteUEResponse',
+    'ESMStatus',
+    #
+    'ESMTypeClasses',
+    'get_esm_msg_instances'
+    ]
+
 #------------------------------------------------------------------------------#
 # 3GPP TS 24.301: NAS protocol for EPS
 # release 13 (da0)
@@ -101,7 +134,8 @@ class ESMHeader(Envelope):
 #------------------------------------------------------------------------------#
 
 class ESMActDediEPSBearerCtxtAccept(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':198})._content) + (
+    _GEN = (
+        ESMHeader(val={'Type':198}),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
@@ -114,8 +148,9 @@ class ESMActDediEPSBearerCtxtAccept(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMActDediEPSBearerCtxtReject(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':199})._content) + (
-        ESMCause(),
+    _GEN = (
+        ESMHeader(val={'Type':199}),
+        Type3V('ESMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=ESMCause()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
@@ -128,12 +163,13 @@ class ESMActDediEPSBearerCtxtReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMActDediEPSBearerCtxtRequest(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':197})._content) + (
+    _GEN = (
+        ESMHeader(val={'Type':197}),
         Uint('spare', bl=4),
-        Uint('LinkedEPSBearerId', bl=4),
+        Type1V('LinkedEPSBearerId'),
         Type4LV('EPSQoS', val={'V':b'\x09'}, IE=EPSQoS()),
         Type4LV('TFT', val={'V':b'\0'}, IE=TFT()),
-        Type4TLV('TransId', val={'T':0x5D, 'V':b'\0'}, IE=TransId()),
+        Type4TLV('TI', val={'T':0x5D, 'V':b'\0'}, IE=TI()),
         Type4TLV('QoS', val={'T':0x30, 'V':11*b'\0'}, IE=QoS()),
         Type3TV('LLC_SAPI', val={'T':0x32, 'V':b'\0'}, bl={'V':8}, IE=LLC_SAPI()),
         Type1TV('RadioPriority', val={'T':0x8, 'V':0}, IE=RadioPriority()),
@@ -151,7 +187,8 @@ class ESMActDediEPSBearerCtxtRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMActDefaultEPSBearerCtxtAccept(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':194})._content) + (
+    _GEN = (
+        ESMHeader(val={'Type':194}),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
         )
@@ -163,8 +200,9 @@ class ESMActDefaultEPSBearerCtxtAccept(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMActDefaultEPSBearerCtxtReject(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':195})._content) + (
-        ESMCause(),
+    _GEN = (
+        ESMHeader(val={'Type':195}),
+        Type3V('ESMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=ESMCause()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
         )
@@ -176,11 +214,12 @@ class ESMActDefaultEPSBearerCtxtReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMActDefaultEPSBearerCtxtRequest(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':193})._content) + (
+    _GEN = (
+        ESMHeader(val={'Type':193}),
         Type4LV('EPSQoS', val={'V':b'\x09'}, IE=EPSQoS()),
         Type4LV('APN', val={'V':b'\0'}, IE=APN()),
         Type4LV('PDNAddr', val={'V':b'\x01\0\0\0\0',}, IE=PDNAddr()),
-        Type4TLV('TransId', val={'T':0x5D, 'V':b'\0'}, IE=TransId()),
+        Type4TLV('TI', val={'T':0x5D, 'V':b'\0'}, IE=TI()),
         Type4TLV('QoS', val={'T':0x30, 'V':11*b'\0'}, IE=QoS()),
         Type3TV('LLC_SAPI', val={'T':0x32, 'V':b'\0'}, bl={'V':8}, IE=LLC_SAPI()),
         Type1TV('RadioPriority', val={'T':0x8, 'V':0}, IE=RadioPriority()),
@@ -204,8 +243,9 @@ class ESMActDefaultEPSBearerCtxtRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMBearerResourceAllocReject(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':213})._content) + (
-        ESMCause(),
+    _GEN = (
+        ESMHeader(val={'Type':213}),
+        Type3V('ESMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=ESMCause()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer3()),
         Type4TLV('ReattemptInd', val={'T':0x6B, 'V':b'\0'}, IE=ReattemptInd()),
@@ -220,9 +260,10 @@ class ESMBearerResourceAllocReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMBearerResourceAllocRequest(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':212})._content) + (
+    _GEN = (
+        ESMHeader(val={'Type':212}),
         Uint('spare', bl=4),
-        Uint('LinkedEPSBearerId', bl=4),
+        Type1V('LinkedEPSBearerId'),
         Type4LV('TFAggregate', val={'V':b'\0'}, IE=TFAggregate()),
         Type4LV('EPSQoS', val={'V':b'\x09'}, IE=EPSQoS()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
@@ -238,8 +279,9 @@ class ESMBearerResourceAllocRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMBearerResourceModifReject(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':215})._content) + (
-        ESMCause(),
+    _GEN = (
+        ESMHeader(val={'Type':215}),
+        Type3V('ESMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=ESMCause()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer3()),
         Type4TLV('ReattemptInd', val={'T':0x6B, 'V':b'\0'}, IE=ReattemptInd()),
@@ -254,9 +296,10 @@ class ESMBearerResourceModifReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMBearerResourceModifRequest(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':214})._content) + (
+    _GEN = (
+        ESMHeader(val={'Type':214}),
         Uint('spare', bl=4),
-        Uint('LinkedEPSBearerId', bl=4),
+        Type1V('LinkedEPSBearerId'),
         Type4LV('TFAggregate', val={'V':b'\0'}, IE=TFAggregate()),
         Type4TLV('EPSQoS', val={'T':0x5B, 'V':b'\x09'}, IE=EPSQoS()),
         Type3TV('ESMCause', val={'T':0x58, 'V':b'\0'}, bl={'V':8}, IE=ESMCause()),
@@ -274,7 +317,8 @@ class ESMBearerResourceModifRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMDeactEPSBearerCtxtAccept(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':206})._content) + (
+    _GEN = (
+        ESMHeader(val={'Type':206}),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
         )
@@ -286,8 +330,9 @@ class ESMDeactEPSBearerCtxtAccept(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMDeactEPSBearerCtxtRequest(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':205})._content) + (
-        ESMCause(),
+    _GEN = (
+        ESMHeader(val={'Type':205}),
+        Type3V('ESMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=ESMCause()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer3()),
         Type1TV('WLANOffloadInd', val={'T':0xC, 'V':0}, IE=WLANOffloadAccept()),
@@ -302,7 +347,9 @@ class ESMDeactEPSBearerCtxtRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMDummyMessage(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':220})._content)
+    _GEN = (
+        ESMHeader(val={'Type':220}),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -311,7 +358,9 @@ class ESMDummyMessage(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMInformationRequest(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':217})._content)
+    _GEN = (
+        ESMHeader(val={'Type':217}),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -320,10 +369,11 @@ class ESMInformationRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMInformationResponse(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':218})._content) + (
+    _GEN = (
+        ESMHeader(val={'Type':218}),
         Type4TLV('APN', val={'T':0x28, 'V':b'\0'}, IE=APN()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
-        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
         )
 
 
@@ -333,8 +383,9 @@ class ESMInformationResponse(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMStatus(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':232})._content) + (
-        ESMCause(),
+    _GEN = (
+        ESMHeader(val={'Type':232}),
+        Type3V('ESMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=ESMCause())
         )
 
 
@@ -344,7 +395,8 @@ class ESMStatus(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMModifyEPSBearerCtxtAccept(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':202})._content) + (
+    _GEN = (
+        ESMHeader(val={'Type':202}),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
@@ -357,8 +409,9 @@ class ESMModifyEPSBearerCtxtAccept(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMModifyEPSBearerCtxtReject(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':203})._content) + (
-        ESMCause(),
+    _GEN = (
+        ESMHeader(val={'Type':203}),
+        Type3V('ESMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=ESMCause()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
@@ -371,7 +424,8 @@ class ESMModifyEPSBearerCtxtReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMModifyEPSBearerCtxtRequest(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':201})._content) + (
+    _GEN = (
+        ESMHeader(val={'Type':201}),
         Type4TLV('EPSQoS', val={'T':0x5B, 'V':b'\x09'}, IE=EPSQoS()),
         Type4TLV('TFT', val={'T':0x36, 'V':b'\0'}, IE=TFT()),
         Type4TLV('QoS', val={'T':0x30, 'V':11*b'\0'}, IE=QoS()),
@@ -393,7 +447,8 @@ class ESMModifyEPSBearerCtxtRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMNotification(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':219})._content) + (
+    _GEN = (
+        ESMHeader(val={'Type':219}),
         Type4LV('NotificationInd', val={'V':b'\0'}, IE=NotificationInd()),
         )
 
@@ -404,8 +459,9 @@ class ESMNotification(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMPDNConnectivityReject(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':209})._content) + (
-        ESMCause(),
+    _GEN = (
+        ESMHeader(val={'Type':209}),
+        Type3V('ESMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=ESMCause()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer3()),
         Type4TLV('ReattemptInd', val={'T':0x6B, 'V':b'\0'}, IE=ReattemptInd()),
@@ -420,9 +476,10 @@ class ESMPDNConnectivityReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMPDNConnectivityRequest(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':208})._content) + (
-        Uint('PDNType', bl=4, dic=PDNType_dict),
-        Uint('RequestType', bl=4, dic=RequestType_dict),
+    _GEN = (
+        ESMHeader(val={'Type':208}),
+        Type1V('PDNType', dic=PDNType_dict),
+        Type1V('RequestType', dic=RequestType_dict),
         Type1TV('ESMInfoTransferFlag', val={'T':0xD, 'V':0}, IE=ESMInfoTransferFlag()),
         Type4TLV('APN', val={'T':0x28, 'V':b'\0'}, IE=APN()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
@@ -439,8 +496,9 @@ class ESMPDNConnectivityRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMPDNDisconnectReject(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':211})._content) + (
-        ESMCause(),
+    _GEN = (
+        ESMHeader(val={'Type':211}),
+        Type3V('ESMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=ESMCause()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
         )
@@ -453,9 +511,10 @@ class ESMPDNDisconnectReject(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMPDNDisconnectRequest(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':210})._content) + (
+    _GEN = (
+        ESMHeader(val={'Type':210}),
         Uint('spare', bl=4),
-        Uint('LinkedEPSBearerId', bl=4),
+        Type1V('LinkedEPSBearerId'),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
         )
@@ -467,7 +526,8 @@ class ESMPDNDisconnectRequest(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMRemoteUEReport(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':233})._content) + (
+    _GEN = (
+        ESMHeader(val={'Type':233}),
         Type6TLVE('RemoteUEConnected', val={'T':0x79, 'V':b''}, IE=RemoteUECtxtList()),
         Type6TLVE('RemoteUEDisconnected', val={'T':0x7A, 'V':b''}, IE=RemoteUECtxtList()),
         Type4TLV('PKMFAddr', val={'T':0x6F, 'V':b'\0'}, IE=PKMFAddr())
@@ -480,7 +540,9 @@ class ESMRemoteUEReport(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMRemoteUEResponse(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':234})._content)
+    _GEN = (
+        ESMHeader(val={'Type':234}),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -489,7 +551,8 @@ class ESMRemoteUEResponse(Layer3):
 #------------------------------------------------------------------------------#
 
 class ESMDataTransport(Layer3):
-    _GEN = tuple(ESMHeader(val={'Type':235})._content) + (
+    _GEN = (
+        ESMHeader(val={'Type':235}),
         Type6LVE('UserData', val={'V':b''}),
         Type1TV('ReleaseAssistInd', val={'T':0xD, 'V':0}, IE=ReleaseAssistInd())
         )

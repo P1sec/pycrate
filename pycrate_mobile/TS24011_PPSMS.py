@@ -27,6 +27,29 @@
 # *--------------------------------------------------------
 #*/
 
+__all__ = [
+    'SMS_CP',
+    'SMS_RP',
+    #
+    'CP_DATA',
+    'CP_ACK',
+    'CP_ERROR',
+    #
+    'PPSMSCPTypeClasses',
+    'get_ppsmscp_msg_instances',
+    #
+    'RP_DATA_MO',
+    'RP_DATA_MT',
+    'RP_ACK_MO',
+    'RP_ACK_MT',
+    'RP_ERROR_MO',
+    'RP_ERROR_MT',
+    'RP_SMMA',
+    #
+    'PPSMSRPTypeClasses',
+    'get_ppsmsrp_msg_instances'
+    ]
+
 #------------------------------------------------------------------------------#
 # 3GPP TS 24.011: Point-to-Point (PP) Short Message Service (SMS)
 # support on mobile radio interface
@@ -42,6 +65,18 @@ from .TS24008_IE  import BufBCD, _BCDType_dict, _NumPlan_dict
 from .TS23040_SMS import *
 
 
+class SMS_CP(Layer3):
+    """parent class for all SMS CP messages
+    """
+    pass
+
+
+class SMS_RP(Layer3):
+    """parent class for all SMS RP messages
+    """
+    pass
+
+
 #------------------------------------------------------------------------------#
 # CP‑messages
 # TS 24.011, section 8.1
@@ -55,9 +90,7 @@ _SMSPP_CP_dict = {
 
 class CPHeader(Envelope):
     _GEN = (
-        Uint('TIFlag', bl=1, dic={0: 'initiator', 1: 'responder'}),
-        Uint('TIO', bl=3),
-        Uint('ProtDisc', val=9, bl=4, dic=ProtDisc_dict),
+        TIPD(val={'ProtDisc': 9}),
         Uint8('Type', val=1, dic=_SMSPP_CP_dict),
         )
 
@@ -79,25 +112,29 @@ _CPCause_dict = {
     111: 'Protocol error, unspecified',
     }
 
+class CPCause(Uint8):
+    _dic = _CPCause_dict
+
 
 #------------------------------------------------------------------------------#
 # CP‑DATA
 # TS 24.011, section 7.2.1
 #------------------------------------------------------------------------------#
 
-class CP_DATA(Layer3):
-    _GEN = tuple(CPHeader(val={'Type':1})._content) + (
-        Type4LV('CPUserData', val={'V':b''}),
+class CP_DATA(SMS_CP):
+    _GEN = (
+        CPHeader(val={'Type':1}),
+        Type4LV('CPUserData', val={'V':b''})
         )
     
     def _from_char(self, char):
         Layer3._from_char(self, char)
-        L = self['CPUserData'][0]()
+        L = self['CPUserData'][0].get_val()
         if L:
             ccur, clen = char._cur, char._len_bit
             char._cur -= 8*L
             char._len_bit = char._cur + 8*L
-            mti = char.to_uint(8) & 0x3
+            mti = char.to_uint(8) & 0x7
             try:
                 rp = PPSMSRPTypeClasses[mti]()
                 rp._from_char(char)
@@ -128,8 +165,10 @@ class CP_DATA(Layer3):
 # TS 24.011, section 7.2.2
 #------------------------------------------------------------------------------#
 
-class CP_ACK(Layer3):
-    _GEN = tuple(CPHeader(val={'Type':4})._content)
+class CP_ACK(SMS_CP):
+    _GEN = (
+        CPHeader(val={'Type':4}),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -137,9 +176,10 @@ class CP_ACK(Layer3):
 # TS 24.011, section 7.2.3
 #------------------------------------------------------------------------------#
 
-class CP_ERROR(Layer3):
-    _GEN = tuple(CPHeader(val={'Type':1})._content) + (
-        Uint8('CPCause', val=17, dic=_CPCause_dict),
+class CP_ERROR(SMS_CP):
+    _GEN = (
+        CPHeader(val={'Type':16}),
+        Type3V('CPCause', val={'V':b'\x11'}, bl={'V':8}, IE=CPCause())
         )
 
 
@@ -260,7 +300,7 @@ class RPCause(Envelope):
 # TS 24.011, section 7.3.1.1
 #------------------------------------------------------------------------------#
 
-class _RP_DATA(Layer3):
+class _RP_DATA(SMS_RP):
     
     # provide a single TPDU or a dict of MTI:TPDU according to the type of RP
     TPDU = {}
@@ -335,7 +375,7 @@ class RP_DATA_MO(_RP_DATA):
 # TS 24.011, section 7.3.2
 #------------------------------------------------------------------------------#
 
-class RP_SMMA(Layer3):
+class RP_SMMA(SMS_RP):
     _GEN = tuple(RPHeader(val={'MTI':6})._content)
 
 
