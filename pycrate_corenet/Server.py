@@ -50,26 +50,6 @@ from .ServerGTPU import ARPd, GTPUd, BLACKHOLE_LAN, BLACKHOLE_WAN
 DEBUG_SK = False
 
 
-# global HNB debug level
-HNBd.DEBUG = ('ERR', 'WNG', 'INF') #, 'DBG')
-HNBd.TRACE_ASN_HNBAP  = False
-HNBd.TRACE_ASN_RUA    = False
-HNBd.TRACE_ASN_RANAP  = False
-# global eNB debug level
-ENBd.DEBUG = ('ERR', 'WNG', 'INF', 'DBG')
-ENBd.TRACE_ASN_S1AP   = False
-# global UE debug level
-UEd.DEBUG  = ('ERR', 'WNG', 'INF', 'DBG')
-UEd.TRACE_RANAP_CS    = False
-UEd.TRACE_RANAP_PS    = False
-UEd.TRACE_NAS_CS      = False
-UEd.TRACE_NAS_PS      = False
-UEd.TRACE_S1AP        = True
-UEd.TRACE_NAS_EPS_SEC = False
-UEd.TRACE_NAS_EPS     = True
-UEd.TRACE_NAS_EPS_SMS = True
-
-
 class CorenetServer(object):
     
     #--------------------------------------------------------------------------#
@@ -94,14 +74,16 @@ class CorenetServer(object):
                   'IP'    : '10.1.1.1',
                   'port'  : 29169,
                   'MAXCLI': SERVER_MAXCLI,
-                  'errclo': True}
-    SERVER_HNB = {} # disabling HNB server
+                  'errclo': True,
+                  'GTPU'  : '10.1.1.1'}
+    #SERVER_HNB = {} # disabling HNB server
     # S1AP server
     SERVER_ENB = {'INET'  : socket.AF_INET,
-                  'IP'    : '127.0.1.100',
+                  'IP'    : '10.2.1.1',
                   'port'  : 36412,
                   'MAXCLI': SERVER_MAXCLI,
-                  'errclo': False}
+                  'errclo': True,
+                  'GTPU'  : '10.2.1.1'}
     #SERVER_ENB = {} # disabling S1AP server
     #
     # Server scheduler resolution:
@@ -131,7 +113,7 @@ class CorenetServer(object):
     #--------------------------------------------------------------------------#
     #
     # main PLMN served
-    PLMN = '20869'
+    PLMN = '00101'
     # MME GroupID and Code
     MME_GID  = 1
     MME_CODE = 1
@@ -140,24 +122,26 @@ class CorenetServer(object):
     EQUIV_PLMN = None
     # emergency number lists
     # None or list of 2-tuple [(number_category, number), ...]
-    # number_category is an uint5 set of flags (Police, Ambulance, Fire, Marine, Mountain)
+    # number_category is a set of uint5 flags (Police, Ambulance, Fire, Marine, Mountain)
     # number is a digits string
+    #   e.g. [({0, 1, 2}, '112112'), ({3, 4}, '112113')]
     EMERG_NUMS = None
     #
     # S1 connection MME parameters
     ConfigS1    = {
-        'MMEName': 'CorenetMME',
-        'GUMMEIs': [
-            {'PLMNs': [PLMN], 'GroupIDs': [MME_GID], 'MMECs': [MME_CODE]},
-            #{'PLMNs': [PLMN] + EQUIV_PLMN, 'GroupIDs': [MME_GID], 'MMECs': [MME_CODE]},
-            ], # this is converted to a ServedGUMMEIs SEQUENCE at runtime
+        'MMEname': 'CorenetMME',
+        'ServedGUMMEIs' : [
+            {'servedPLMNs'   : [plmn_str_to_buf(PLMN)],
+             'servedGroupIDs': [uint_to_bytes(MME_GID, 16)],
+             'servedMMECs'   : [uint_to_bytes(MME_CODE, 8)]}
+            ],
         'RelativeMMECapacity': 10,
         'EquivPLMNList' : EQUIV_PLMN,
         'EmergNumList'  : EMERG_NUMS,
         }
-    # HNBAP connection GW parameters
+    # HNBAP connection GW parameters (keep it empty)
     ConfigHNBAP = {}
-    # RUA connection GW parameters
+    # RUA connection GW parameters (keep it empty)
     ConfigRUA   = {}
     # RANAP connection IuCS core parameters
     ConfigIuCS  = {
@@ -174,15 +158,19 @@ class CorenetServer(object):
     # HNB and ENB parameters
     #--------------------------------------------------------------------------#
     #
-    # Home-NodeB, eNodeB and Home-eNodeB, indexed by (PLMN, CellId)
+    # Home-NodeB and eNodeB, indexed by (PLMN, CellId)
+    # the RAN dict can be initialized with {(PLMN, CellId): None} at setup
+    # this provide a whitelist of allowed basestations.
     RAN = {}
     #
-    # This is a flag to allow any RAN equipment to connect the CorenetServer
-    # If enabled, HNB and ENB dict will be populated at runtime
-    # If disabled, HNB and ENB keys (PLMN, CellID) needs to be setup by configuration
+    # Otherwise, this is a flag to allow any RAN equipment to connect the server
+    # in case its PLMN is in the RAN_ALLOWED_PLMN list.
+    # If enabled, RAN dict will be populated at runtime
+    # If disabled, RAN keys (PLMN, CellId) needs to be setup by configuration
     RAN_CONNECT_ANY = True
     #
-    # This is the list of accepted PLMN for RAN equipment connecting
+    # This is the list of accepted PLMN for RAN equipment connecting, 
+    # when RAN_CONNECT_ANY is enabled
     RAN_ALLOWED_PLMN = [PLMN]
     #
     # lookup dict to get the set of RAN ids (PLMN, CellId) that serves a given
@@ -200,44 +188,59 @@ class CorenetServer(object):
         # $IMSI: {'PDN'   : [($APN -str-, $PDNType -1..3-, $IPAddr -str-, ...), ...], 
         #         'MSISDN': $phone_num -str-,
         #         'USIM'  : $milenage_supported -bool-}
-        # PDN type: 1:IPv4, 2:IPv6 /64 prefix, 3:IPv4v6 (-> 1 IPv4 + 1 IPv6 /64 prefix)
-        '*': {'PDP'   : [],
-              'PDN'   : [('*', 1, '192.168.132.199')],
+        # PDP type: 0:PPP, 1:IPv4, 2: IPv6 /64 local if, 3: IPv4v6 (-> 1 IPv4 + 1 IPv6 local if)
+        # PDN type: 1:IPv4, 2:IPv6 /64 local if, 3:IPv4v6 (-> 1 IPv4 + 1 IPv6 local if)
+        '*': {'PDP'   : [('*', 1, '192.168.1.199')],
+              'PDN'   : [('*', 1, '192.168.1.199')],
               'MSISDN': '0123456789',
               'USIM'  : True
               },
-        '208691664001001': {'PDP'   : [],
-                            'PDN'   : [('*', 3, '192.168.132.201', '2001:7a8:1161:132'),
-                                       ('corenet', 1, '192.168.132.201')],
-                            'MSISDN': '16641001',
+        '001011000000001': {'PDP'   : [('*', 3, '192.168.1.201', '0:1:0:c9'),
+                                       ('corenet', 1, '192.168.1.201')],
+                            'PDN'   : [('*', 3, '192.168.1.201', '0:1:0:c9'),
+                                       ('corenet', 1, '192.168.1.201')],
+                            'MSISDN': '100001',
+                            'USIM'  : True
+                            },
+        '001011000000002': {'PDP'   : [('*', 3, '192.168.1.202', '0:1:0:ca'),
+                                       ('corenet', 1, '192.168.1.202')],
+                            'PDN'   : [('*', 3, '192.168.1.202', '0:1:0:ca'),
+                                       ('corenet', 1, '192.168.1.202')],
+                            'MSISDN': '100002',
                             'USIM'  : True
                             }
         }
     #
     # Packet Data Protocol config for 2G-3G PS domain, per APN
     ConfigPDP = {
+        '*': {
+            'DNS': ((1, '8.8.8.8'), # Google DNS servers
+                    (1, '8.8.4.4'),
+                    (2, '2001:4860:4860::8888'),
+                    (2, '2001:4860:4860::8844')),
+            'MTU': (None, None),
+            },
+        'corenet': {
+            'DNS': ((1, '8.8.8.8'),
+                    (1, '8.8.4.4')),
+            'MTU': (None, None),
+            },
         }
     #
     # Packet Data Network config for EPC, per APN
-    # config elements available:
-    # DNS : tuple of DNS server addr (in PDNAddr format style: 
-    #       1->IPv4 2-tuple addr, 2->IPv6 2-tuple addr)
-    # PAP : dict of {peerid : passwd}
-    # CHAP: dict of ???
-    # MTU : 2-tuple (IPv4 link MTU, non-IP link MTU)
     ConfigPDN = {
         '*': {
             'QCI': 9,
-            'DNS': ((1, '192.168.253.1'),
-                    (1, '192.168.253.2'),
-                    (2, '2001:4860:4860::8888'), # Google DNS server
+            'DNS': ((1, '8.8.8.8'), # Google DNS servers
+                    (1, '8.8.4.4'),
+                    (2, '2001:4860:4860::8888'),
                     (2, '2001:4860:4860::8844')),
             'MTU': (None, None),
             },
         'corenet': {
             'QCI': 9,
-            'DNS': ((1, '192.168.253.1'),
-                    (1, '192.168.253.2')),
+            'DNS': ((1, '8.8.8.8'),
+                    (1, '8.8.4.4')),
             'MTU': (None, None),
             },
         }
@@ -259,7 +262,7 @@ class CorenetServer(object):
     # When an non-preconfigured UE attaches the CorenetServer, ConfigUE['*'] is 
     # used to provide a default config and need to be defined.
     # use UE_ATTACH_FILTER = None to disable this permissive filter.
-    UE_ATTACH_FILTER = '^20869'
+    UE_ATTACH_FILTER = '^00101'
     
     #--------------------------------------------------------------------------#
     # logging and init methods
@@ -319,6 +322,10 @@ class CorenetServer(object):
         #
         # init the dict for storing UE with unknown IMSI at attachment
         self._UEpre = {}
+        # set the LUT for MSISDN to IMSI translation
+        self.MSISDN = {}
+        for imsi, cfgue in self.ConfigUE.items():
+            self.MSISDN[cfgue['MSISDN']] = imsi
         # init the UE procedure cleaner holder
         # (with a dummy thread, which will be overridden at runtime)
         self._clean_ue_proc = threadit( lambda: 1 )
@@ -329,7 +336,7 @@ class CorenetServer(object):
         self.TAI.clear()
         #
         # initialize GTP TEID UL counter
-        self.GTP_TEID_UL = randint(1, 200000)
+        self._GTP_TEID_UL = randint(1, 200000)
         #
         # start sub-servers
         if self.AUCd:
@@ -338,6 +345,7 @@ class CorenetServer(object):
             self.GTPUd = self.__class__.GTPUd()
         if self.SMSd:
             self.SMSd  = self.__class__.SMSd()
+            self.SMSd.Server = self
         #
         if serving:
             # serve connections
@@ -424,10 +432,14 @@ class CorenetServer(object):
     
     def stop(self):
         self._running = False
+        asn_s1ap_release()
+        asn_hnbap_release()
+        asn_rua_release()
+        asn_ranap_release()
         sleep(self.SCHED_RES + 0.01)
-        if self._sk_hnb:
+        if hasattr(self, '_sk_hnb') and self._sk_hnb:
             self._sk_hnb.close()
-        if self._sk_enb:
+        if hasattr(self, '_sk_enb') and self._sk_enb:
             self._sk_enb.close()
         self._clean_ue_proc.join()
         #
@@ -440,6 +452,7 @@ class CorenetServer(object):
         # stop sub-servers
         self.AUCd.stop()
         self.GTPUd.stop()
+        self.SMSd.stop()
     
     def sctp_handle_notif(self, sk, notif):
         self._log('DBG', 'SCTP notification: type %i, flags %i' % (notif.type, notif.flags))
@@ -696,7 +709,7 @@ class CorenetServer(object):
         except:
             return None
     
-    def _send_s1setuprej(self, sk, sid, cause):
+    def _send_s1setuprej(self, sk, cause):
         IEs = [{'criticality': 'ignore',
                 'id': 2, # id-Cause
                 'value': (('S1AP-IEs', 'Cause'), cause)}]
@@ -711,7 +724,7 @@ class CorenetServer(object):
             PDU_S1AP.set_val(pdu)
             if ENBd.TRACE_ASN_S1AP:
                 self._log('TRACE_ASN_S1AP_DL', PDU_S1AP.to_asn1())
-            self._write_sk(sk, PDU_S1AP.to_aper(), ppid=SCTP_PPID_S1AP, stream=sid)
+            self._write_sk(sk, PDU_S1AP.to_aper(), ppid=SCTP_PPID_S1AP, stream=0)
             asn_s1ap_release()
         if self.SERVER_ENB['errclo']:
             sk.close()
@@ -1077,11 +1090,11 @@ class CorenetServer(object):
                 #            P._log('WNG', 'timeout: aborting')
                 #            P.abort()
                 
-                #if ue.IuCS.SMS.Proc:
-                #    for P in ue.IuCS.SMS.Proc.values():
-                #        if hasattr(P, 'TimerStop') and T > P.TimerStop:
-                #            P._log('WNG', 'timeout: aborting')
-                #            P.abort()
+                if ue.IuCS.SMS.Proc:
+                    for P in tuple(ue.IuCS.SMS.Proc.values()):
+                        if hasattr(P, 'TimerStop') and T > P.TimerStop:
+                            P._log('WNG', 'timeout: aborting')
+                            P.abort()
                 
                 #if ue.IuCS.SS.Proc:
                 #    for P in ue.IuCS.SS.Proc.values():
@@ -1099,7 +1112,7 @@ class CorenetServer(object):
                             P.abort()
                 
                 #if ue.IuPS.SM.Proc:
-                #    for P in ue.IuCS.CC.Proc.values():
+                #    for P in tuple(ue.IuPS.SM.Proc.values()):
                 #        if hasattr(P, 'TimerStop') and T > P.TimerStop:
                 #            P._log('WNG', 'timeout: aborting')
                 #            P.abort()
@@ -1112,15 +1125,34 @@ class CorenetServer(object):
                             P._log('WNG', 'timeout: aborting')
                             P.abort()
                 
-                #if ue.S1.ESM.Proc:
-                #    pass
-    
-    def get_sgw_addr(self):
-        return self.GTPUd.GTP_IP
+                if ue.S1.ESM.Proc:
+                    for P in tuple(ue.S1.ESM.Proc.values()):
+                        if hasattr(P, 'TimerStop') and T > P.TimerStop:
+                            P._log('WNG', 'timeout: aborting')
+                            P.abort()
+                
+                if ue.S1.SMS.Proc:
+                    for P in tuple(ue.S1.SMS.Proc.values()):
+                        if hasattr(P, 'TimerStop') and T > P.TimerStop:
+                            P._log('WNG', 'timeout: aborting')
+                            P.abort()
     
     def get_gtp_teid(self):
-        if self.GTP_TEID_UL > 4294967294:
-            self.GTP_TEID_UL = randint(1, 200000)
-        self.GTP_TEID_UL += 1
-        return self.GTP_TEID_UL
+        if self._GTP_TEID_UL > 4294967294:
+            self._GTP_TEID_UL = randint(1, 200000)
+        self._GTP_TEID_UL += 1
+        return self._GTP_TEID_UL
+    
+    def send_smsrp(self, msisdn, rp_msg):
+        if msisdn not in self.MSISDN:
+            # unknown msisdn
+            self.SMSd.discard_rp(rp_msg, msisdn)
+            return
+        imsi = self.MSISDN[msisdn]
+        if imsi not in self.UE:
+            # UE not attached
+            self.SMSd.discard_rp(rp_msg, msisdn)
+            return
+        ue = self.UE[imsi]
+        return ue.smsrp_downlink(rp_msg)
 

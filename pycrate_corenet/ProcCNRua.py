@@ -27,6 +27,18 @@
 # *--------------------------------------------------------
 #*/
 
+__all__ = [
+    'RUASigProc',
+    'RUAConnect',
+    'RUADirectTransfer',
+    'RUADisconnect',
+    'RUAConnectlessTransfer',
+    'RUAErrorInd',
+    'RUAPrivateMessage',
+    #
+    'RUAProcDispatcher'
+    ]
+
 from .utils     import *
 from .ProcProto import *
 
@@ -154,14 +166,20 @@ class RUAConnect(RUASigProc):
                 # set the Iu context-id and dispatch the RANAP PDU
                 if self.ConInfo['CN_DomainIndicator'] == 'cs-domain':
                     self.HNB.set_ue_iucs(ued, ctx_id)
-                    ued.IuCS.set_ran(self.HNB)
-                    ued.IuCS.set_ctx(ctx_id)
+                    try:
+                        ued.set_ran(self.HNB, ctx_id, dom='CS')
+                    except Exception as err:
+                        self._log('ERR', 'UE connected to several RAN, %r' % err)
+                        return []
                     self.retpdu = ued.IuCS.process_ranap(self.ConInfo['RANAP_Message'])
                 else:
                     #self.ConInfo['CN_DomainIndicator'] == 'ps-domain'
                     self.HNB.set_ue_iups(ued, ctx_id)
-                    ued.IuPS.set_ran(self.HNB)
-                    ued.IuPS.set_ctx(ctx_id)
+                    try:
+                        ued.set_ran(self.HNB, ctx_id, dom='PS')
+                    except Exception as err:
+                        self._log('ERR', 'UE connected to several RAN, %r' % err)
+                        return []
                     self.retpdu = ued.IuPS.process_ranap(self.ConInfo['RANAP_Message'])
     
     def trigger(self):

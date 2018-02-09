@@ -27,6 +27,76 @@
 # *--------------------------------------------------------
 #*/
 
+__all__ = [
+    'S1APSigProc',
+    'S1APNonUESigProc',
+    #
+    'S1APERABSetup',
+    'S1APERABModify',
+    'S1APERABRelease',
+    'S1APERABModificationInd',
+    'S1APInitialContextSetup',
+    'S1APUEContextReleaseRequest',
+    'S1APUEContextRelease',
+    'S1APUEContextModification',
+    'S1APUERadioCapabilityMatch',
+    'S1APUEContextModificationInd',
+    'S1APUEContextSuspend',
+    'S1APUEContextResume',
+    'S1APConnectionEstablishmentInd',
+    'S1APHandoverPreparation',
+    'S1APHandoverResourceAllocation',
+    'S1APHandoverNotification',
+    'S1APPathSwitchRequest',
+    'S1APHandoverCancel',
+    'S1APENBStatusTransfer',
+    'S1APMMEStatusTransfer',
+    'S1APPaging',
+    'S1APInitialUEMessage',
+    'S1APDownlinkNASTransport',
+    'S1APUplinkNASTransport',
+    'S1APNASNonDeliveryInd',
+    'S1APRerouteNASRequest',
+    'S1APResetCN',
+    'S1APResetENB',
+    'S1APErrorIndNonUECN',
+    'S1APErrorIndNonUEENB',
+    'S1APErrorIndCN',
+    'S1APErrorIndENB',
+    'S1APS1Setup',
+    'S1APENBConfigUpdate',
+    'S1APMMEConfigUpdate',
+    'S1APOverloadStart',
+    'S1APOverloadStop',
+    'S1APDownlinkS1CDMA2000Tunnelling',
+    'S1APUplinkS1CDMA2000Tunnelling',
+    'S1APUECapabilityInfoInd',
+    'S1APTraceStart',
+    'S1APTraceFailureInd',
+    'S1APDeactivateTrace',
+    'S1APCellTrafficTrace',
+    'S1APLocationReportingControl',
+    'S1APLocationReportFailure',
+    'S1APLocationReport',
+    'S1APWriteReplaceWarning',
+    'S1APKill',
+    'S1APPWSRestartInd',
+    'S1APPWSFailureInd',
+    'S1APENBDirectInfoTransfer',
+    'S1APMMEDirectInfoTransfer',
+    'S1APENBConfigTransfer',
+    'S1APMMEConfigTransfer',
+    'S1APDownlinkUELPPaTransport',
+    'S1APUplinkUELPPaTransport',
+    'S1APDownlinkNonUELPPaTransport',
+    'S1APUplinkNonUELPPaTransport',
+    #
+    'S1APProcEnbDispatcher',
+    'S1APProcCnDispatcher',
+    'S1APNonUEProcEnbDispatcher',
+    'S1APNonUEProcCnDispatcher'
+    ]
+
 from .utils     import *
 from .ProcProto import *
 
@@ -430,21 +500,23 @@ class S1APInitialContextSetup(S1APSigProc):
         if hasattr(self, '_gtp_add_mobile_ebi'):
             for erab in self._gtp_add_mobile_ebi:
                 pdncfg = self.S1.ESM.PDN[erab]
+                rabcfg = pdncfg['RAB']
                 pdncfg['state'] = 1
                 self.UE.Server.GTPUd.add_mobile(
-                    pdncfg['RAB']['SGW-GTP-TEID'], # teid_ul
+                    rabcfg['SGW-GTP-TEID'], # teid_ul
                     pdncfg['PDNAddr'], # mobile_addr
-                    pdncfg['RAB']['ENB-TLA'], # ran_ip (maybe None)
-                    pdncfg['RAB']['ENB-GTP-TEID']) # teid_dl (maybe None)
+                    (rabcfg['SGW-TLA'], rabcfg['ENB-TLA']), # local gtpu addr, enb gtpu ip (maybe None)
+                    rabcfg['ENB-GTP-TEID']) # teid_dl (maybe None)
         else:
             self._log('WNG', 'enable_gtpu: no GTP mobile info provided')
     
     def _disable_gtpu(self):
         if hasattr(self, '_gtp_rem_mobile_ebi'):
             for erab in self._gtp_rem_mobile_ebi:
-                pdncfg = self.S1.ESM.PDN[erab]
-                self.Server.GTPUd.rem_mobile(pdncfg['RAB']['SGW-GTP-TEID'])
-                pdncfg['state'] = 0
+                if erab in self.S1.ESM.PDN:
+                    pdncfg = self.S1.ESM.PDN[erab]
+                    self.Server.GTPUd.rem_mobile(pdncfg['RAB']['SGW-GTP-TEID'])
+                    pdncfg['state'] = 0
         else:
             self._log('WNG', 'disable_gtpu: no GTP mobile info provided')
     
@@ -479,13 +551,14 @@ class S1APInitialContextSetup(S1APSigProc):
                 erabsetupitem = erabsetupitem['value'][1]
                 erab = erabsetupitem['e-RAB-ID']
                 if erab in self._gtp_add_mobile_ebi:
-                    pdncfg = self.S1.ESM.PDN[erab]
-                    pdncfg['ENB-TLA'] = inet_ntoa(uint_to_bytes(*erabsetupitem['transportLayerAddress']))
-                    pdncfg['ENB-GTP-TEID'] = bytes_to_uint(erabsetupitem['gTP-TEID'], 32)
+                    rabcfg = self.S1.ESM.PDN[erab]['RAB']
+                    rabcfg['ENB-TLA'] = inet_ntoa(uint_to_bytes(*erabsetupitem['transportLayerAddress']))
+                    rabcfg['ENB-GTP-TEID'] = bytes_to_uint(erabsetupitem['gTP-TEID'], 32)
+                    # activate the DL parameters
                     self.Server.GTPUd.set_mobile_dl(
-                        pdncfg['RAB']['SGW-GTP-TEID'], # teid_ul
-                        ran_ip=pdncfg['ENB-TLA'],
-                        teid_dl=pdncfg['ENB-GTP-TEID'])
+                        rabcfg['SGW-GTP-TEID'], # teid_ul
+                        ran_ip=(rabcfg['SGW-TLA'], rabcfg['ENB-TLA']),
+                        teid_dl=rabcfg['ENB-GTP-TEID'])
             # E-RAB failed to established
             if 'E_RABList' in self.UEInfo:
                 self._gtp_rem_mobile_ebi = []
@@ -1238,6 +1311,8 @@ class S1APPaging(S1APNonUESigProc):
         'suc': None,
         'uns': None
         }
+   
+    send = S1APNonUESigProc._send
 
 
 #------------------------------------------------------------------------------#
@@ -1805,9 +1880,7 @@ class S1APS1Setup(S1APNonUESigProc):
             self.ENB.ID = (self.ENBInfo['Global_ENB_ID']['pLMNidentity'],
                            self.ENBInfo['Global_ENB_ID']['eNB-ID'][1])
             # prepare the S1SetupResponse
-            IEs = cpdict(self.Server.ConfigS1)
-            IEs['ServedGUMMEIs'] = [served_gummei_to_asn(gummei) for gummei in IEs['GUMMEIs']]
-            del IEs['GUMMEIs']
+            IEs = self.ENB.get_s1setup_ies_from_cfg()
             self.encode_pdu('suc', **IEs)
             self._log('INF', 'eNB S1 setup successfully')
     
@@ -2081,6 +2154,11 @@ class S1APUECapabilityInfoInd(S1APSigProc):
             self.UE.Cap['UERadioCap'] = (self.UEInfo['UERadioCapability'], ueradcap, uecapinfo)
             if 'UERadioCapabilityForPaging' in self.UEInfo:
                 self.UE.Cap['UERadioCapPaging'] = self.UEInfo['UERadioCapabilityForPaging']
+            #
+            if 'UERadioCapabilityForPaging' in self.UEInfo:
+                self.UE.Cap['UERadioCapPaging'] = (self.UEInfo['UERadioCapabilityForPaging'],
+                                                   None, None)
+            
 
 #------------------------------------------------------------------------------#
 # Trace Procedures

@@ -61,7 +61,8 @@ except ImportError as err:
 
 from pycrate_core.utils import *
 from pycrate_core.repr  import *
-from pycrate_core.elt   import Element
+from pycrate_core.elt   import Element, Envelope
+from pycrate_core.base  import Buf, Uint8
 Element._SAFE_STAT = True
 Element._SAFE_DYN  = True
 
@@ -76,6 +77,8 @@ from pycrate_asn1dir import RANAP
 # to decode UE 3G and LTE radio capability
 from pycrate_asn1dir import RRC3G
 from pycrate_asn1dir import RRCLTE
+# to handle SS messages
+from pycrate_asn1dir import SS
 #
 from pycrate_asn1rt.utils import get_val_at
 
@@ -111,6 +114,7 @@ PDU_S1AP  = S1AP.S1AP_PDU_Descriptions.S1AP_PDU
 PDU_HNBAP = HNBAP.HNBAP_PDU_Descriptions.HNBAP_PDU
 PDU_RUA   = RUA.RUA_PDU_Descriptions.RUA_PDU
 PDU_RANAP = RANAP.RANAP_PDU_Descriptions.RANAP_PDU
+PDU_SS_Facility = SS.SS_Facility.Facility
 
 # ASN.1 modules are not thread-safe
 # objects' value will be mixed in case a thread ctxt switch occurs between 
@@ -277,7 +281,10 @@ TRACE_COLOR_END = '\x1b[0m'
 
 # logging facility
 def log(msg='', withdate=True, tostdio=False, tofile='/tmp/corenet.log'):
-    msg = '[%s] %s\n' % (datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3], msg)
+    if withdate:
+        msg = '[%s] %s\n' % (datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3], msg)
+    else:
+        msg = msg + '\n'
     if tostdio:
         print(msg[:-1])
     if tofile:
@@ -411,12 +418,16 @@ def served_gummei_to_asn(val):
 def mac_aton(mac='00:00:00:00:00:00'):
     return unhexlify(mac.replace(':', ''))
 
-def inet_aton_cn(*pdnaddr):
-    if pdnaddr[0] == 1:
+def inet_aton_cn(*pdnaddr, dom='EPS'):
+    if pdnaddr[0] == 0:
+        # PPP address
+        return pdnaddr[1]
+    elif pdnaddr[0] == 1:
         # IPv4 address
         try:
             return inet_aton(pdnaddr[1])
         except:
+            log('WNG: IPv4 address conversion error, %r' % pdnaddr[1])
             return pdnaddr[1]
     elif pdnaddr[0] == 2:
         # accept 64-bit IPv6 prefix / subnet or full 128-bit IPv6 address
@@ -428,29 +439,62 @@ def inet_aton_cn(*pdnaddr):
             try:
                 return inet_pton(AF_INET6, ipaddr)
             except:
+                log('WNG: IPv6 address conversion error, %r' % pdnaddr[1])
                 return ipaddr
     elif pdnaddr[0] == 3:
         # IPv4v6 addresses
-        try:
-            return inet_aton(pdnaddr[1]) + inet_aton_cn(2, pdnaddr[2])
-        except:
-            return pdnaddr[1]
+        if dom == 'EPS':
+            # PDN address
+            try:
+                return inet_aton_cn(2, pdnaddr[2]) + inet_aton_cn(1, pdnaddr[1])
+            except:
+                log('WNG: IPv4v6 PDN address conversion error, %r' % pdnaddr[1])
+                return pdnaddr[1]
+        else:
+            # PDP address
+            try:
+                return inet_aton_cn(1, pdnaddr[1]) + inet_aton_cn(2, pdnaddr[2])
+            except:
+                log('WNG: IPv4v6 PDP address conversion error, %r' % pdnaddr[1])
+                return pdnaddr[1]
     else:
         # unknown address type
         return pdnaddr[1]
 
-def inet_ntoa_cn(pdntype, buf):
+def inet_ntoa_cn(pdntype, buf, dom='EPS'):
+    if pdntype == 0:
+        # PPP address
+        return (pdntype, buf)
     if pdntype == 1:
         # IPv4 address
-        return (1, inet_ntoa(buf))
+        try:
+            return (1, inet_ntoa(buf))
+        except:
+            log('WNG: IPv4 buffer conversion error, %s' % hexlify(buf).decode('ascii'))
+            return None
     elif pdntype == 2:
-        # accept 64-bit IPv6 prefix / subnet or full 128-bit IPv6 address
+        # accept 64-bit IPv6 local if or full 128-bit IPv6 address
         if len(buf) == 8:
             return (2, '%x:%x:%x:%x' % unpack('>HHHH', buf))
         else:
-            return (2, inet_ntop(AF_INET6, buf))
+            try:
+                return (2, inet_ntop(AF_INET6, buf))
+            except:
+                log('WNG: IPv6 buffer conversion error, %s' % hexlify(buf).decode('ascii'))
+                return None
     elif pdntype == 3:
-        return (3, inet_ntoa(buf[:4]), inet_ntoa_cn(2, buf[4:])[1])
+        if dom == 'EPS':
+            # PDN address
+            try:
+                return (3, inet_ntoa(buf[8:12]), inet_ntoa_cn(2, buf[:8])[1])
+            except:
+                log('WNG: IPv4v6 PDN buffer conversion error, %s' % hexlify(buf).decode('ascii'))
+        else:
+            # PDP address
+            try:
+                return (3, inet_ntoa(buf[:4]), inet_ntop(AF_INET6, buf[4:20]))
+            except:
+                log('WNG: IPv4v6 PDP buffer conversion error, %s' % hexlify(buf).decode('ascii'))
     else:
         return (pdntype, buf)
 
@@ -516,31 +560,30 @@ def print_nasies(nasmsg):
     # go after the header (last field: Type), and print IE type, tag if defined,
     # and name
     # WNG: Type1V (Uint4), Type2 (Uint8), Type3V(Buf) are not wrapped
-    print('%s (PD %i, Type %i), IEs:' % (nasmsg._name, nasmsg['ProtDisc'](), nasmsg['Type']()))
-    pay = False
-    ies = False
-    for f in nasmsg._content:
-        if pay:
-            if isinstance(f, TS24007.IE):
-                ietype = f.__class__.__name__
-            else:
-                iebl = f.get_bl()
-                if iebl == 4:
-                    ietype = 'Type1V'
-                elif iebl == 8:
-                    ietype = 'Type2'
-                else:
-                    ietype = 'Type3V'
-                    assert( iebl >= 16 )
-            if f._trans:
-                print('- %-9s : %s (T: %i)' % (ietype, f._name, f[0]()))
-            else:
-                print('- %-9s : %s' % (ietype, f._name))
-            ies = True
-        if f._name == 'Type':
-            pay = True
-    if not ies:
+    hdr = nasmsg[0]
+    if 'ProtDisc' in hdr._by_name:
+        pd = hdr['ProtDisc'].get_val()
+    else:
+        pd = hdr[0]['ProtDisc'].get_val()
+    typ = hdr['Type'].get_val()
+    print('%s (PD %i, Type %i), IEs:' % (nasmsg._name, pd, typ))
+    #
+    if len(nasmsg._content) == 1:
         print('  None')
+    else:
+        for ie in nasmsg._content[1:]:
+            if ie.get_trans():
+                # optional IE
+                print('- %-9s : %s (T: %i)'\
+                      % (ie.__class__.__name__, ie._name, ie[0].get_val()))
+            elif isinstance(ie, TS24007.IE):
+                # mandatory IE
+                print('- %-9s : %s' % (ie.__class__.__name__, ie._name))
+            elif ie.get_bl() == 4:
+                # uint / spare bits
+                print('- %-9s : %s' % ('Type1V', 'spare'))
+            else:
+                assert()
 
 
 #------------------------------------------------------------------------------#

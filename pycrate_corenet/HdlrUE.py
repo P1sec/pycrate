@@ -48,16 +48,16 @@ class UEd(SigStack):
     TRACE_ASN_RANAP_CS = False
     TRACE_ASN_RANAP_PS = False
     TRACE_ASN_S1AP     = False
-    # to log UE NAS MM / CC / SMS for all UE
+    # to log UE NAS over IuCS (except SMS) for all UE
     TRACE_NAS_CS       = False
-    # to log UE NAS GMM / SM for all UE
+    # to log UE NAS over IuPS for all UE
     TRACE_NAS_PS       = False
     # to log UE LTE NAS (potentially) encrypted EMM / ESM for all UE
     TRACE_NAS_EPS_SEC  = False
     # to log UE LTE NAS clear-text EMM / ESM for all UE
     TRACE_NAS_EPS      = False
-    # to log UE LTE NAS containing SMS for all UE
-    TRACE_NAS_EPS_SMS  = False
+    # to log UE NAS containing SMS for all UE
+    TRACE_NAS_SMS      = False
     
     
     #--------------------------------------------------------------------------#
@@ -124,6 +124,7 @@ class UEd(SigStack):
         self.IuCS = UEIuCSd(self)
         self.IuPS = UEIuPSd(self)
         self.S1   = UES1d(self)
+        self._last_ran = None
         #
         if 'config' in kw:
             self.set_config(kw['config'])
@@ -133,8 +134,22 @@ class UEd(SigStack):
         self.USIM   = config['USIM']
         #
         self.IuPS.SM.PDPConfig = {}
-        # cpdict(self.IuPS.SM.__class__.PDPConfig)
-        # TODO: handle config for PDP networks
+        for pdpconfig in config['PDP']:
+            apn, pdpaddr, apncfg = pdpconfig[0], pdpconfig[1:], {}
+            # Server.ConfigPDP provides the DNS servers for each APN (and some 
+            # more common parameters)
+            # UE.IuPS.SM.RABConfig provides the default RAB QoS for each APN
+            if apn not in self.Server.ConfigPDP:
+                self._log('WNG', 'unable to configure PDP connectivity for APN %s, '\
+                          'no DNS servers' % apn)
+            elif apn not in self.IuPS.SM.RABConfig:
+                self._log('WNG', 'unable to configure PDP connectivity for APN %s, '\
+                          'no IuPS QoS parameters' % apn)
+            else:
+                apncfg = cpdict(self.Server.ConfigPDP[apn])
+                apncfg['Addr'] = pdpaddr
+                apncfg['RAB'] = cpdict(self.IuPS.SM.RABConfig[apn])
+                self.IuPS.SM.PDPConfig[apn] = apncfg
         #
         self.S1.ESM.PDNConfig = {}
         for pdnconfig in config['PDN']:
@@ -150,12 +165,15 @@ class UEd(SigStack):
                           'no S1 QoS parameters' % apn)
             else:
                 apncfg = cpdict(self.Server.ConfigPDN[apn])
-                apncfg['PDNAddr'] = pdnaddr
+                apncfg['Addr'] = pdnaddr
                 apncfg['RAB'] = cpdict(self.S1.ESM.RABConfig[apn])
                 apncfg['RAB']['QCI'] = apncfg['QCI']
                 self.S1.ESM.PDNConfig[apn] = apncfg
     
-    def set_ran(self, ran, ctx_id, sid=None):
+    def set_ran(self, ran, ctx_id, sid=None, dom=None):
+        # TODO: handle properly mobility between RNC / eNB
+        # for Iu reconnection, handle domain correclty, together within ProcCNRua
+        
         # UE going connected
         if ran.__class__.__name__ == 'HNBd':
             #
@@ -163,24 +181,27 @@ class UEd(SigStack):
                 # error: already linked with another ran
                 raise(CorenetErr('UE already connected through a S1 link'))
             #
-            # IuCS stack
-            if not self.IuCS.is_connected():
-                self.IuCS.set_ran(ran)
-                self.IuCS.set_ctx(ctx_id)
-            elif self.IuCS.RNC == ran:
-                self.IuCS.set_ctx(ctx_id)
+            if dom != 'PS':
+                # IuCS stack
+                if not self.IuCS.is_connected():
+                    self.IuCS.set_ran(ran)
+                    self.IuCS.set_ctx(ctx_id)
+                elif self.IuCS.RNC == ran:
+                    self.IuCS.set_ctx(ctx_id)
+                else:
+                    # error: already linked with another HNB
+                    raise(CorenetErr('UE already connected through another IuCS link'))
             else:
-                # error: already linked with another HNB
-                raise(CorenetErr('UE already connected through another IuCS link'))
-            # IuPS stack
-            if not self.IuPS.is_connected():
-                self.IuPS.set_ran(ran)
-                self.IuPS.set_ctx(ctx_id)
-            elif self.IuPS.RNC == ran:
-                self.IuPS.set_ctx(ctx_id)
-            else:
-                # error: already linked with another HNB
-                raise(CorenetErr('UE already connected through another IuPS link'))
+                # IuPS stack
+                if not self.IuPS.is_connected():
+                    self.IuPS.set_ran(ran)
+                    self.IuPS.set_ctx(ctx_id)
+                elif self.IuPS.RNC == ran:
+                    self.IuPS.set_ctx(ctx_id)
+                else:
+                    # error: already linked with another HNB
+                    raise(CorenetErr('UE already connected through another IuPS link'))
+            self._last_ran = self.IuCS
         #
         elif ran.__class__.__name__ == 'ENBd':
             #
@@ -197,6 +218,7 @@ class UEd(SigStack):
             else:
                 # error: already linked with another ENB
                 raise(CorenetErr('UE already connected through another S1 link'))
+            self._last_ran = self.S1
         #
         else:
             assert()
@@ -258,11 +280,11 @@ class UEd(SigStack):
                     if cksn in self.IuPS.SEC and cksn not in iupsd.SEC:
                         iupsd.SEC[cksn] = self.IuPS.SEC[cksn]
                 # merge PDP contexts
-                for ctx in range(16):
-                    if ctx in self.IuPS.PDP and ctx not in iupsd.PDP:
-                        iupsd.PDP[ksi] = self.IuPS.PDP[ctx]
+                for nsapi in range(16):
+                    if nsapi in self.IuPS.SM.PDP and nsapi not in iupsd.SM.PDP:
+                        iupsd.SM.PDP[nsapi] = self.IuPS.SM.PDP[nsapi]
         # transfer UE's reference
-        self.IuPS   = iups
+        self.IuPS   = iupsd
         iups.UE     = self
         iups.GMM.UE = self
         iups.SM.UE  = self
@@ -284,10 +306,10 @@ class UEd(SigStack):
                 for ksi in range(16):
                     if ksi in self.S1.SEC and ksi not in s1d.SEC:
                         s1d.SEC[ksi] = self.S1.SEC[ksi]
-                # merge PDP contexts
-                for ctx in range(16):
-                    if ctx in self.S1.PDP and ctx not in s1d.PDP:
-                        s1d.PDP[ctx] = self.S1.PDP[ctx]
+                # merge PDN contexts
+                for ebi in range(16):
+                    if ebi in self.S1.ESM.PDN and ebi not in s1d.ESM.PDN:
+                        s1d.ESM.PDN[ebi] = self.S1.ESM.PDP[ebi]
         # transfer UE's reference
         self.S1    = s1d
         s1d.UE     = self
@@ -410,4 +432,246 @@ class UEd(SigStack):
     def set_tai(self, plmn, tac):
         self.set_plmn(plmn)
         self.set_tac(tac)
+    
+    #--------------------------------------------------------------------------#
+    # (E)SM protocol configuration options handling
+    #--------------------------------------------------------------------------#
+    
+    def process_protconfig(self, smd, config, request):
+        """process an (E)PS session management Protocol Configuration Options request,
+        
+        return the list of message's elements of the Protocol Configuration Options response, 
+        and a bool indicating if the PDN address for the UE is required in the NAS signalling
+        """
+        RespElt, pdnaddrreq = [], False
+        #
+        if request[2].get_val() != 0:
+            # not PPP with IP PDP
+            smd._log('WNG', 'Protocol Config, not for PPP with IP PDP')
+            return RespElt, pdnaddrreq
+        #
+        #smd._log('DBG', 'Protocol Config, config : %r' % config)
+        #smd._log('DBG', 'Protocol Config, request: %r' % request)
+        for ReqElt in request[3]:
+            pcid = ReqElt[0].get_val()
+            #
+            if pcid == 0x8021:
+                # IPCP
+                if isinstance(ReqElt[2], NAS.NCP) and ReqElt[2][0].get_val() == 1 \
+                and isinstance(ReqElt[2][3], NAS.NCPDataConf):
+                    # NCP config req
+                    ncpreq = []
+                    for NcpOpt in ReqElt[2][3]:
+                        ncpreq.append( NcpOpt[0].get_val() )
+                    NcpOptResp, dnsind = [], 0
+                    if 3 in ncpreq:
+                        # IPv4 addr
+                        ip = None
+                        for ipaddr in config['Addr']:
+                            if ipaddr[0] == 1:
+                                ip = inet_aton_cn(*ipaddr)
+                                break
+                            elif ipaddr[0] == 3:
+                                ip = inet_aton_cn(1, ipaddr[1])
+                                break
+                        if ip is None:
+                            smd._log('WNG', 'Protocol Config, no config available for'\
+                                     'the IPCP IPv4 address request')
+                        else:
+                            NcpOptResp.append({'Type': 3, 'Data': ip})
+                        ncpreq.remove(3)
+                    if 129 in ncpreq:
+                        # 1st DNS IPv4 addr
+                        dns = None
+                        if 'DNS' in config:
+                            for dnsaddr in config['DNS']:
+                                dnsind += 1
+                                if dnsaddr[0] == 1:
+                                    dns = inet_aton_cn(*dnsaddr)
+                                    break
+                        if dns is None:
+                            smd._log('WNG', 'Protocol Config, no config available for'\
+                                     'the IPCP 1st DNS IPv4 request')
+                        else:
+                            NcpOptResp.append({'Type': 129, 'Data': dns})
+                        ncpreq.remove(129)
+                    if 131 in ncpreq:
+                        # 2nd DNS IPv4 addr
+                        dns = None
+                        if 'DNS' in config:
+                            for dnsaddr in config['DNS'][dnsind:]:
+                                if dnsaddr[0] == 1:
+                                    dns = inet_aton_cn(*dnsaddr)
+                                    break
+                        if dns is None:
+                            smd._log('WNG', 'Protocol Config, no config available for'\
+                                     'the IPCP 2nd DNS IPv4 request')
+                        else:
+                            NcpOptResp.append({'Type': 131, 'Data': dns})
+                        ncpreq.remove(131)
+                    if ncpreq:
+                        smd._log('WNG', 'Protocol Config, unsupported IPCP requests, %r' % ncpreq)
+                    RespElt.append({'ID': 32801,
+                                    'Cont':{'Code': 2,
+                                            'Id': ReqElt[2][1].get_val(),
+                                            'Data': NcpOptResp}})
+                else:
+                    smd._log('WNG', 'Protocol Config, invalid IPCP request format, %r' % ReqElt)
+            #
+            elif pcid == 0xC021:
+                # LCP
+                if isinstance(ReqElt[2], NAS.LCP) and ReqElt[2][0].get_val() == 1 \
+                and isinstance(ReqElt[2][3], NAS.LCPDataConf):
+                    # NCP config req
+                    lcpreq = []
+                    for LcpOpt in ReqElt[2][2]:
+                        lcpreq.append( LcpOpt[0].get_val() )
+                    # TODO: handle LCP elements
+                    #
+                    if lcpreq:
+                        smd._log('ERR', 'Protocol Config, unsupported LCP requests, %r' % ReqElt[2])
+                else:
+                    smd._log('WNG', 'Protocol Config, invalid LCP request format, %r' % ReqElt)
+            #
+            elif pcid == 0xC023:
+                # PAP
+                if isinstance(ReqElt[2], NAS.PAP) and ReqElt[2][0].get_val() == 1:
+                    # PAP req
+                    if smd.AUTH_PAP_BYPASS:
+                        RespElt.append({'ID': 0xC023,
+                                        'Cont': {'Code': 2, # Ack
+                                                 'Id': ReqElt[2][1].get_val(),
+                                                 'Data':{'Msg': b''}}})
+                    
+                    else:
+                        authreq, ack = ReqElt[2][3], False
+                        peerid, passwd = authreq[1].get_val(), authreq[3].get_val()
+                        if 'PAP' in config and peerid in config['PAP'] and passwd == config['PAP'][peerid]:
+                            RespElt.append({'ID': 0xC023,
+                                            'Cont': {'Code': 2, # Ack
+                                                     'Id': ReqElt[2][1].get_val(),
+                                                     'Data':{'Msg': b''}}})
+                        else:
+                            if 'PAP' not in config:
+                                smd._log('WNG', 'Protocol Config, no config available for'\
+                                         'the PAP authentication')
+                            RespElt.append({'ID': 0xC023,
+                                            'Cont': {'Code': 3, # Nak
+                                                     'Id': ReqElt[2][1].get_val(),
+                                                     'Data':{'Msg': b'you loose'}}})
+                else:
+                    smd._log('WNG', 'Protocol Config, invalid PAP request format, %r' % ReqElt)
+            #
+            elif pcid == 0xC223:
+                # CHAP
+                if isinstance(ReqElt[2], NAS.CHAP) and ReqElt[2][0].get_val() == 1:
+                    # CHAP req
+                    if smd.AUTH_CHAP_BYPASS:
+                        RespElt.append({'ID': 0xC223,
+                                        'Cont': {'Code': 3, # success
+                                                 'Id': ReqElt[2][1].get_val(),
+                                                 'Data': b''}})
+                    else:
+                        # TODO: handle CHAP auth
+                        smd._log('ERR',  'Protocol Config, unsupported CHAP authentication')
+                        RespElt.append({'ID': 0xC223,
+                                        'Cont': {'Code': 4, # failure
+                                                 'Id': ReqElt[2][1].get_val(),
+                                                 'Data': b''}})                    
+                else:
+                    smd._log('WNG', 'Protocol Config, invalid CHAP request format, %r' % ReqElt)
+            #
+            elif pcid == 0x3:
+                # DNS IPv6
+                dns = None
+                if 'DNS' in config:
+                    for dnsaddr in config['DNS']:
+                        if dnsaddr[0] == 2:
+                            dns = inet_aton_cn(*dnsaddr)
+                            break
+                if dns is None:
+                    smd._log('WNG', 'Protocol Config, no config available for the DNS IPv6 request')
+                else:
+                    RespElt.append({'ID': 0x3, 'Cont': dns})
+            #
+            elif pcid == 0xA:
+                # IP alloc via NAS
+                pdnaddrreq = True
+            #
+            elif pcid == 0xD:
+                # DNS IPv4
+                dns = None
+                if 'DNS' in config:
+                    for dnsaddr in config['DNS']:
+                        if dnsaddr[0] == 1:
+                            dns = inet_aton_cn(*dnsaddr)
+                            break
+                if dns is None:
+                    smd._log('WNG', 'Protocol Config, no config available for the DNS IPv4 request')
+                else:
+                    RespElt.append({'ID': 0xD, 'Cont': dns})
+            #
+            elif pcid == 0x10:
+                # IPv4 link MTU
+                if 'MTU' in config:
+                    mtu = config['MTU'][0]
+                    if isinstance(mtu, integer_types) and 0 <= mtu <= 65535:
+                        mtu = pack('>H', mtu)
+                    if isinstance(mtu, bytes_types):
+                        RespElt.append({'ID': 0x10, 'Cont': mtu})
+                else:
+                    smd._log('DBG', 'Protocol Config, no config available for the IPv4 MTU request')
+            #
+            elif pcid == 0x15:
+                # non-IP link MTU
+                if 'MTU' in config:
+                    mtu = config['MTU'][1]
+                    if isinstance(mtu, integer_types) and 0 <= mtu <= 65535:
+                        mtu = pack('>H', mtu)
+                    if isinstance(mtu, bytes_types):
+                        RespElt.append({'ID': 0x15, 'Cont': mtu})
+                else:
+                    smd._log('DBG', 'Protocol Config, no config available for the non-IP MTU request')
+            #
+            else:
+                smd._log('WNG', 'Protocol Config, unsupported request element, %r' % ReqElt)  
+        #
+        return RespElt, pdnaddrreq
+    
+    #--------------------------------------------------------------------------#
+    # SMS delivery
+    #--------------------------------------------------------------------------#
+    
+    def smsrp_downlink(self, rp_msg):
+        ran, con = self._last_ran, True
+        if ran is None:
+            con = False
+        elif not ran.is_connected():
+            if not ran._net_init_con():
+                con = False
+        if con:
+            # UE connected over `ran'
+            # init the CP procedure
+            CPProc = ran.SMS.init_cpdata(rp_msg)
+            if CPProc:
+                SMSTx = CPProc.output()
+                if len(SMSTx) == 1:
+                    SMSTx = SMSTx[0]
+                    # send the msg toward the hnb / enb
+                    if isinstance(ran , UEIuCSd):
+                        # wrap into a RANAP direct transfer
+                        RanapProc = ran.init_ranap_proc(RANAPDirectTransferCN,
+                                                        NAS_PDU=SMSTx.to_bytes(),
+                                                        SAPI='sapi-3')
+                        if RanapProc and ran._send_to_rnc_ranap([RanapProc]):
+                            return True
+                    elif isinstance(ran, UES1d):
+                        # wrap into an EMM procedure first
+                        EMMProc = ran.EMM.init_proc(EMMDLNASTransport,
+                                                    encod={(7, 98): {'NASContainer': SMSTx.to_bytes()}})
+                        if EMMProc and ran.transmit_s1ap_proc(EMMProc.output()):
+                            return True
+        # unable to send the SMS
+        self.Server.SMSd.discard_rp(rp_msg, self.MSISDN)
+        return False
 

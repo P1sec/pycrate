@@ -27,6 +27,27 @@
 # *--------------------------------------------------------
 #*/
 
+__all__ = [
+    'MMSigProc',
+    'MMIMSIDetach',
+    'MMLocationUpdating',
+    'MMCMForcedRelease',
+    'MMConnectionEstablishment',
+    'MMCMCallReestablishment',
+    'RRPagingResponse',
+    'MMAuthentication',
+    'MMIdentification',
+    'MMTMSIReallocation',
+    'MMMOCMActivity',
+    'MMAbort',
+    'MMInformation',
+    #
+    'MMProcUeDispatcher',
+    'MMProcUeDispatcherStr',
+    'MMProcCnDispatcher',
+    'MMProcCnDispatcherStr'
+    ]
+
 from .utils       import *
 from .ProcProto   import *
 from .ProcCNRanap import *
@@ -236,6 +257,7 @@ class MMTMSIReallocation(MMSigProc):
         (TS24008_MM.MMTMSIReallocationComplete, )
         )
     
+    Init  = (5, 26)
     Timer = 'T3250'
     
     def output(self, embedded=False):
@@ -243,18 +265,21 @@ class MMTMSIReallocation(MMSigProc):
         # hence the output message is not built, only the .tmsi is available
         # but the procedure still runs and waits for the UE response 
         # after all
-        self.tmsi = self.UE.get_new_tmsi()
-        if not embedded:
-            # prepare IEs
+        # Warning, when the TMSI IE is set by hand, it is not taken into account
+        # by MM procedures
+        if 'ID' not in self.Encod[self.Init]:
+            self.tmsi = self.UE.get_new_tmsi()
             self.set_msg(5, 26, LAI={'PLMN': self.UE.PLMN, 'LAC': self.UE.LAC},
                                 ID={'type': NAS.IDTYPE_TMSI, 'ident': self.tmsi})
+        else:
+            self.tmsi = None
+            self.set_msg(5, 26, LAI={'PLMN': self.UE.PLMN, 'LAC': self.UE.LAC})
+        #
+        if not embedded:
             self.encode_msg(5, 26)
-            # log the NAS msg
             if self.TRACK_PDU:
                 self._pdu.append( (time(), 'DL', self._nas_tx) )
-            #
             self.init_timer()
-            # send it over RANAP
             return self.Iu.ret_ranap_dt(self._nas_tx)
         else:
             self.init_timer()
@@ -265,10 +290,12 @@ class MMTMSIReallocation(MMSigProc):
             self._pdu.append( (time(), 'UL', pdu) )
         self.UEInfo = {}
         self.decode_msg(pdu, self.UEInfo)
-        #
         # just take the new tmsi in use
-        self.UE.set_tmsi(self.tmsi)
-        self._log('INF', 'new TMSI set, 0x%.8x' % self.tmsi)
+        if self.tmsi is not None:
+            self.UE.set_tmsi(self.tmsi)
+            self._log('INF', 'new TMSI set, 0x%.8x' % self.tmsi)
+        else:
+            self._log('WNG', 'handcrafted TMSI sent, not updating the local TMSI')
         self.rm_from_mm_stack()
         return []
 
@@ -295,7 +322,7 @@ class MMAuthentication(MMSigProc):
         - Type4TLV  : RESExt (T: 33)
 
         MMAuthenticationFailure (PD 5, Type 28), IEs:
-        - Type2     : Cause
+        - Type3V    : RejectCause
         - Type4TLV  : AUTS (T: 34)
     """
     
@@ -306,25 +333,31 @@ class MMAuthentication(MMSigProc):
          TS24008_MM.MMAuthenticationFailure)
         )
     
-    Timer = 'T3260'
-    
     Decod = {
         (5, 20): {
-            'RES'   : lambda x: x.get_val(),
-            'RESExt': lambda x: x['V'].get_val()
+            'RES'    : lambda x: x[0].get_val(),
+            'RESExt' : lambda x: x[2].get_val()
             },
         (5, 28): {
-            'AUTS'  : lambda x: x['V'].get_val()
+            'AUTS'   : lambda x: x[2].get_val()
             }
         }
+    
+    Init  = (5, 18)
+    Timer = 'T3260'
     
     def output(self):
         # get a new CKSN
         self.cksn = self.Iu.get_new_cksn()
-        # in case a RAND is configured as a class encoder, we use it for 
-        # generating the auth vector
-        if 'RAND' in self.__class__.Encod[(5, 18)]:
-            RAND = self.__class__.Encod[(5, 18)]['RAND']
+        #
+        EncodReq = self.Encod[self.Init]
+        # in case CKSN is handcrafted, just warn (will certainly fail)
+        if 'CKSN' in EncodReq:
+            self._log('WNG', 'handcrafted CKSN (%r), generated CKSN (%i)'\
+                      % (EncodReq['CKSN'], self.cksn))
+        # in case RAND is handcrafted, we use it for generating the auth vector
+        if 'RAND' in EncodReq:
+            RAND = EncodReq['RAND']
         else:
             RAND = None
         #
@@ -372,7 +405,7 @@ class MMAuthentication(MMSigProc):
         if hasattr(self.MM, '_auth_resynch'):
             del self.MM._auth_resynch
         #
-        if pdu['Type'].get_val() == 20:
+        if pdu[0]['Type'].get_val() == 20:
             return self._process_resp()
         else:
             return self._process_fail()
@@ -418,7 +451,7 @@ class MMAuthentication(MMSigProc):
             return []
      
     def _process_fail(self):
-        if self.UEInfo['Cause'].get_val() == 21 and 'AUTS' in self.UEInfo:
+        if self.UEInfo['RejectCause'].get_val() == 21 and 'AUTS' in self.UEInfo:
             # synch failure: resynchronize the SQN
             # set an indicator to avoid the PS stack to do another resynch 
             self.MM._auth_resynch = True
@@ -447,7 +480,7 @@ class MMAuthentication(MMSigProc):
         #
         else:
             # UE refused our auth request...
-            self._log('ERR', 'UE rejected AUTN, %s' % self.UEInfo['Cause'])
+            self._log('ERR', 'UE rejected AUTN, %s' % self.UEInfo['RejectCause'])
             self.rm_from_mm_stack()
             return []
 
@@ -476,25 +509,23 @@ class MMIdentification(MMSigProc):
         (TS24008_MM.MMIdentityResponse, )
         )
     
-    Timer = 'T3270'
-    
     Decod = {
         (5, 25): {
-            'ID'       : lambda x: x[1].decode(),
-            'PTMSIType': lambda x: x[1].get_val(),
-            'RAI'      : lambda x: x[2].decode()
+            'ID'        : lambda x: x[1].decode(),
+            'PTMSIType' : lambda x: x[1].get_val(),
+            'RAI'       : lambda x: x[2].decode()
             }
         }
+    
+    Init  = (5, 24)
+    Timer = 'T3270'
     
     def output(self):
         # build the Id Request msg, Id type has to be set by the caller
         self.encode_msg(5, 24)
-        # log the NAS msg
         if self.TRACK_PDU:
             self._pdu.append( (time(), 'DL', self._nas_tx) )
-        #
         self.init_timer()
-        # send it
         return self.Iu.ret_ranap_dt(self._nas_tx)
     
     def process(self, pdu):
@@ -503,7 +534,7 @@ class MMIdentification(MMSigProc):
         self.UEInfo = {}
         self.decode_msg(pdu, self.UEInfo)
         # get the identity IE value
-        self.IDType = self._nas_tx['IDType'].get_val()
+        self.IDType = self._nas_tx['IDType'][0].get_val()
         #
         if self.UEInfo['ID'][0] != self.IDType:
             self._log('WNG', 'identity responded not corresponding to type requested '\
@@ -526,7 +557,7 @@ class MMIMSIDetach(MMSigProc):
     
     UE message:
         MMIMSIDetachIndication (PD 5, Type 1), IEs:
-        - Type2     : MSCm1
+        - Type3V    : MSCm1
         - Type4LV   : ID
     """
     
@@ -537,7 +568,7 @@ class MMIMSIDetach(MMSigProc):
     
     Decod = {
         (5, 1): {
-            'ID': lambda x: x[1].decode(),
+            'ID' : lambda x: x[1].decode(),
             }
         }
     
@@ -576,7 +607,7 @@ class MMAbort(MMSigProc):
     
     CN message:
         MMAbort (PD 5, Type 41), IEs:
-        - Type2     : Cause
+        - Type3V    : RejectCause
     
     UE message:
         None
@@ -587,14 +618,14 @@ class MMAbort(MMSigProc):
         None
         )
     
+    Init = (5, 41)
+    
     def output(self):
         # build the Abort msg, Cause has to be set by the caller
         self.encode_msg(5, 41)
-        # log the NAS msg
         if self.TRACK_PDU:
             self._pdu.append( (time(), 'DL', self._nas_tx) )
         self.rm_from_mm_stack()
-        # send it
         return self.Iu.ret_ranap_dt(self._nas_tx)
 
 
@@ -622,17 +653,16 @@ class MMInformation(MMSigProc):
         None
         )
     
+    Init = (5, 50)
+    
     def output(self):
         # build the Information msg, network name and/or time info
         # have to be set by the caller
         self.encode_msg(5, 50)
-        # log the NAS msg
         if self.TRACK_PDU:
             self._pdu.append( (time(), 'DL', self._nas_tx) )
-        #
         self._log('INF', '%r' % self.Encod[(5, 50)])
         self.rm_from_mm_stack()
-        # send it
         return self.Iu.ret_ranap_dt(self._nas_tx)
 
 
@@ -657,7 +687,7 @@ class MMLocationUpdating(MMSigProc):
         - Type4TLV  : MST3212 (T: 53)
 
         MMLocationUpdatingReject (PD 5, Type 4), IEs:
-        - Type2     : Cause
+        - Type3V    : RejectCause
         - Type4TLV  : T3246 (T: 54)
     
     UE message:
@@ -665,7 +695,7 @@ class MMLocationUpdating(MMSigProc):
         - Type1V    : CKSN
         - Type1V    : LocUpdateType
         - Type3V    : LAI
-        - Type2     : MSCm1
+        - Type3V    : MSCm1
         - Type4LV   : ID
         - Type4TLV  : MSCm2 (T: 51)
         - Type1TV   : AddUpdateParams (T: 12)
@@ -678,15 +708,15 @@ class MMLocationUpdating(MMSigProc):
         (TS24008_MM.MMLocationUpdatingRequest, )
         )
     
-    Cap = ('MSCm1', 'MSCm2", "AddUpdateParams', 'DeviceProp', 'MSNetFeatSupp') 
-    
     Decod = {
         (5, 8): {
-            'CKSN' : lambda x: x.get_val(),
-            'LAI'  : lambda x: (x['PLMN'].decode(), x['LAC'].get_val()),
+            'CKSN' : lambda x: x[0].get_val(),
+            'LAI'  : lambda x: x[0].decode(),
             'ID'   : lambda x: x[1].decode(),
             }
         }
+    
+    Cap = ('MSCm1', 'MSCm2", "AddUpdateParams', 'DeviceProp', 'MSNetFeatSupp')
     
     def process(self, pdu):
         # got an MMLocationUpdatingRequest
@@ -731,15 +761,15 @@ class MMLocationUpdating(MMSigProc):
             else:
                 return self._ret_req_imsi()
         #
-        if self.Iu.require_auth(self, cksn=self.UEInfo['CKSN']):
+        elif self.Iu.require_auth(self, cksn=self.UEInfo['CKSN']):
             return self._ret_auth()
         #
-        if self.Iu.require_smc(self):
+        elif self.Iu.require_smc(self):
             # if we are here, there was no auth procedure,
             # hence the cksn submitted by the UE is considered valid
             return self._ret_smc(self.UEInfo['CKSN'], False)
         #
-        if self._req_imei:
+        elif self._req_imei:
             return self._ret_req_imei()
         #
         # otherwise, go directly to postprocess
@@ -810,7 +840,7 @@ class MMLocationUpdating(MMSigProc):
                 self.set_msg(5, 4, Cause=self.errcause)
             self.encode_msg(5, 4)
             self.tmsi_realloc = False
-            self._log('INF', 'reject, %r' % self._nas_tx['Cause'])
+            self._log('INF', 'reject, %r' % self._nas_tx['RejectCause'][0])
         else:
             # prepare LUAccept IEs
             IEs = {'LAI': {'PLMN': self.UE.PLMN, 'LAC': self.UE.LAC}}
@@ -818,9 +848,12 @@ class MMLocationUpdating(MMSigProc):
             # but don't forward its output
             if self.MM.LU_TMSI_REALLOC:
                 NasProc = self.MM.init_proc(MMTMSIReallocation)
-                void = NasProc.output(embedded=True)
-                IEs['ID'] = {'type': NAS.IDTYPE_TMSI, 'ident': NasProc.tmsi}
-                self.tmsi_realloc = True
+                NasProc.output(embedded=True)
+                if NasProc.tmsi is not None:
+                    IEs['ID'] = {'type': NAS.IDTYPE_TMSI, 'ident': NasProc.tmsi}
+                    self.tmsi_realloc = True
+                else:
+                    self.tmsi_realloc = False
             else:
                 self.tmsi_realloc = False
             #
@@ -882,10 +915,12 @@ class RRPagingResponse(MMSigProc):
     
     Decod = {
         (6, 39): {
-            'CKSN'           : lambda x: x.get_val(),
-            'ID'             : lambda x: x[1].decode(),
+            'CKSN' : lambda x: x[0].get_val(),
+            'ID'   : lambda x: x[1].decode(),
             }
         }
+    
+    Cap = ('MSCm2", "AddUpdateParams') 
     
     def process(self, pdu):
         # preempt the MM stack
@@ -899,7 +934,7 @@ class RRPagingResponse(MMSigProc):
         if self.Iu.require_auth(self, cksn=self.UEInfo['CKSN']):
             return self._ret_auth()
         #
-        if self.Iu.require_smc(self):
+        elif self.Iu.require_smc(self):
             # if we are here, there was no auth procedure,
             # hence the cksn submitted by the UE is considered valid
             return self._ret_smc(self.UEInfo['CKSN'], False)
@@ -943,7 +978,7 @@ class MMConnectionEstablishment(MMSigProc):
           None
 
         MMCMServiceReject (PD 5, Type 34), IEs:
-        - Type2     : Cause
+        - Type3V    : RejectCause
         - Type4TLV  : T3246 (T: 54)
     
     UE message:
@@ -961,6 +996,95 @@ class MMConnectionEstablishment(MMSigProc):
         (TS24008_MM.MMCMServiceAccept, TS24008_MM.MMCMServiceReject),
         (TS24008_MM.MMCMServiceRequest, )
         )
+    
+    Decod = {
+        (5, 36): {
+            'CKSN' : lambda x: x[0].get_val(),
+            'ID'   : lambda x: x[1].decode(),
+            }
+        }
+    
+    Cap = ('MSCm2", "AddUpdateParams', 'DeviceProp') 
+    
+    def process(self, pdu):
+        # preempt the MM stack
+        self.mm_preempt()
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'UL', pdu) )
+        self.errcause, self.UEInfo, self._smc = None, {}, False
+        self.decode_msg(pdu, self.UEInfo)
+        #
+        if self.Iu.require_auth(self, cksn=self.UEInfo['CKSN']):
+            return self._ret_auth()
+        #
+        elif self.Iu.require_smc(self):
+            # if we are here, there was no auth procedure,
+            # hence the cksn submitted by the UE is considered valid
+            return self._ret_smc(self.UEInfo['CKSN'], False)
+        #
+        return self.postprocess()
+    
+    def postprocess(self, Proc=None):
+        if isinstance(Proc, MMAuthentication):
+            if self.Iu.require_smc(self):
+                # if we are here, the valid cksn is the one established during
+                # the auth procedure
+                return self._ret_smc(Proc.cksn, True)
+        elif isinstance(Proc, RANAPSecurityModeControl):
+            if not Proc.success:
+                self.abort()
+                return []
+            else:
+                self._smc = True
+            # self.Iu.SEC['CKSN'] has been taken into use at the RRC layer
+        elif Proc == self:
+            # something bad happened with one of the MM common procedure
+            pass
+        elif Proc is not None:
+            self._err = Proc
+            assert()
+        #
+        return self.output()
+    
+    def output(self):
+        serv = self.UEInfo['Service'].get_val()
+        if serv in self.MM.CON_REJ:
+            self.errcause = self.MM.CON_REJ[serv]
+            if self.MM.CON_T3246:
+                self.set_msg(5, 34, Cause=self.errcause, T3246=self.MM.CON_T3246)
+            else:
+                self.set_msg(5, 34, Cause=self.errcause)
+            self.encode_msg(5, 34)
+            self._log('INF', 'reject, %r, on request %r'\
+                      % (self._nas_tx['RejectCause'][0], self.UEInfo['Service']))
+        else:
+            if not self._smc:
+                # in case an SMC has been completed, no need to accept explicitely
+                self.encode_msg(5, 33)
+            if 'Priority' in self.UEInfo:
+                self._log('INF', 'accept, request %r / %r'\
+                          % (self.UEInfo['Service'], self.UEInfo['Priority']))
+            else:
+                self._log('INF', 'accept, request %r' % self.UEInfo['Service'])
+        #
+        if self._nas_tx:
+            if self.TRACK_PDU:
+                self._pdu.append( (time(), 'DL', self._nas_tx) )
+            ret = self.Iu.ret_ranap_dt(self._nas_tx)
+        else:
+            ret = []
+        ret.extend( self._end() )
+        return ret
+    
+    def _end(self):
+        ret = []
+        if self.MM.CON_IUREL and self.errcause:
+            # trigger an IuRelease with Cause NAS normal-release (83)
+            RanapProcRel = self.Iu.init_ranap_proc(RANAPIuRelease, Cause=('nAS', 83))
+            if RanapProcRel:
+                ret.append(RanapProcRel)
+        self.rm_from_mm_stack()
+        return ret
 
 
 class MMMOCMActivity(MMSigProc):
@@ -982,6 +1106,15 @@ class MMMOCMActivity(MMSigProc):
         (TS24008_MM.MMCMServicePrompt, ),
         None
         )
+    
+    Init = (5, 37)
+    
+    def output(self):
+        self.encode_msg(5, 37)
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'DL', self._nas_tx) )
+        self.rm_from_mm_stack()
+        return self.Iu.ret_ranap_dt(self._nas_tx)
 
 
 class MMCMCallReestablishment(MMSigProc):
@@ -995,7 +1128,7 @@ class MMCMCallReestablishment(MMSigProc):
           None
 
         MMCMServiceReject (PD 5, Type 34), IEs:
-        - Type2     : Cause
+        - Type3V    : RejectCause
         - Type4TLV  : T3246 (T: 54)
     
     UE message:
@@ -1012,6 +1145,18 @@ class MMCMCallReestablishment(MMSigProc):
         (TS24008_MM.MMCMServiceAccept, TS24008_MM.MMCMServiceReject),
         (TS24008_MM.MMCMReestablishmentRequest, )
         )
+    
+    def process(self, pdu):
+        # preempt the MM stack
+        self.mm_preempt()
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'UL', pdu) )
+        self.errcause, self.UEInfo = None, {}
+        self.decode_msg(pdu, self.UEInfo)
+        # TODO: should return at least an MMServiceReject
+        
+        self.rm_from_mm_stack()
+        return []
 
 
 class MMCMForcedRelease(MMSigProc):
@@ -1032,6 +1177,18 @@ class MMCMForcedRelease(MMSigProc):
         None,
         (TS24008_MM.MMCMServiceAbort, )
         )
+    
+    def process(self, pdu):
+        # preempt the MM stack
+        self.mm_preempt()
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'UL', pdu) )
+        self.UEInfo = {}
+        self.decode_msg(pdu, self.UEInfo)
+        # TODO
+        
+        self.rm_from_mm_stack()
+        return []
 
 
 # filter_init=1, indicates we are the core network side

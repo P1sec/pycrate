@@ -27,6 +27,75 @@
 # *--------------------------------------------------------
 #*/
 
+__all__ = [
+    'RANAPSigProc',
+    'RANAPConlessSigProc',
+    #
+    'RANAPRelocationPreparation',
+    'RANAPRelocationCancel',
+    'RANAPRABReleaseRequest',
+    'RANAPIuReleaseRequest',
+    'RANAPRelocationDetect',
+    'RANAPRelocationComplete',
+    'RANAPLocationReport',
+    'RANAPInitialUEMessage',
+    'RANAPDirectTransferRNC',
+    'RANAPErrorIndRNC',
+    'RANAPSRNSContextForwardToCN',
+    'RANAPPrivateMessageRNC',
+    'RANAPRABModificationRequest',
+    'RANAPMBMSRegistration',
+    'RANAPMBMSRABEstablishmentInd',
+    'RANAPMBMSRABRelease',
+    'RANAPEnhancedRelocationComplete',
+    'RANAPEnhancedRelocationCompleteConfirm',
+    'RANAPSRVCCPreparation',
+    'RANAPUERegistrationQuery',
+    'RANAPRABAssignment',
+    'RANAPIuRelease',
+    'RANAPRelocationResourceAllocation',
+    'RANAPSRNSContextTransfer',
+    'RANAPSecurityModeControl',
+    'RANAPDataVolumeReport',
+    'RANAPCommonID',
+    'RANAPCNInvokeTrace',
+    'RANAPLocationReportingControl',
+    'RANAPDirectTransferCN',
+    'RANAPErrorIndCN',
+    'RANAPSRNSDataForwarding',
+    'RANAPSRNSContextForwardToRNC',
+    'RANAPPrivateMessageCN',
+    'RANAPCNDeactivateTrace',
+    'RANAPLocationRelatedData',
+    'RANAPUESpecificInformation',
+    'RANAPMBSMSessionStart',
+    'RANAPMBMSSessionUpdate',
+    'RANAPMBMSSessionStop',
+    'RANAPMBMSUELinking',
+    'RANAPMBMSCNDeregistration',
+    'RANAPUERadioCapabilityMatch',
+    'RANAPRerouteNASRequest',
+    #
+    'RANAPResetRNC',
+    'RANAPResetCN',
+    'RANAPPaging',
+    'RANAPOverloadControlRNC',
+    'RANAPOverloadControlCN',
+    'RANAPErrorIndConlessRNC',
+    'RANAPErrorIndConlessCN',
+    'RANAPResetResourceRNC',
+    'RANAPResetResourceCN',
+    'RANAPUplinkInformationTransfer',
+    'RANAPInformationTransfer',
+    'RANAPDirectInformationTransferRNC',
+    'RANAPDirectInformationTransferCN',
+    #
+    'RANAPProcRncDispatcher',
+    'RANAPProcCnDispatcher',
+    'RANAPConlessProcRncDispatcher',
+    'RANAPConlessProcCnDispacther'
+    ]
+
 from .utils     import *
 from .ProcProto import *
 
@@ -227,7 +296,148 @@ class RANAPRABAssignment(RANAPSigProc):
         'uns': None
         }
     
-    # not implemented
+    # TODO: currently, only the creation of RAB is handled here
+    # the deletion of RAB should also be implemented at least, to support
+    # the NAS SM procedure DeactivatePDPCtxtReq
+    
+    def send(self):
+        if hasattr(self, '_gtp_add_mobile_nsapi'):
+            self._enable_gtpu()
+        # in case of RAB teardown, we wait for the outcome to disable the GTP tunnels
+        return self._send()
+    
+    def _enable_gtpu(self):
+        if hasattr(self, '_gtp_add_mobile_nsapi'):
+            for nsapi in self._gtp_add_mobile_nsapi:
+                pdpcfg = self.Iu.SM.PDP[nsapi]
+                rabcfg = pdpcfg['RAB']
+                pdpcfg['state'] = 1
+                self.UE.Server.GTPUd.add_mobile(
+                    rabcfg['SGW-GTP-TEID'], # teid_ul
+                    pdpcfg['PDPAddr'], # mobile_addr
+                    (rabcfg['SGW-TLA'], rabcfg['HNB-TLA']), # local gtpu addr, hnb gtpu ip (maybe None)
+                    rabcfg['HNB-GTP-TEID']) # teid_dl (maybe None)
+        else:
+            self._log('WNG', 'enable_gtpu: no GTP mobile info provided')
+    
+    def _disable_gtpu(self):
+        if hasattr(self, '_gtp_rem_mobile_nsapi'):
+            for nsapi in self._gtp_rem_mobile_nsapi:
+                if nsapi in self.Iu.SM.PDP:
+                    pdpcfg = self.Iu.SM.PDP[nsapi]
+                    self.Server.GTPUd.rem_mobile(pdpcfg['RAB']['SGW-GTP-TEID'])
+                    pdpcfg['state'] = 0
+        else:
+            self._log('WNG', 'disable_gtpu: no GTP mobile info provided')
+    
+    def recv(self, pdu):
+        self._recv(pdu)
+        try:
+            del self.Iu.Proc[self.Code]
+        except:
+            pass
+        #
+        if self.errcause:
+            self.success = False
+            self._log('WNG', 'error in the response decoding')
+            if hasattr(self, '_gtp_add_mobile_nsapi'):
+                self._gtp_rem_mobile_nsapi = self._gtp_add_mobile_nsapi
+            if hasattr(self, '_gtp_rem_mobile_nsapi'):
+                self._disable_gtpu()
+        else:
+            self.success = True
+            if hasattr(self, '_gtp_add_mobile_nsapi'):
+                self._gtp_rem_mobile_nsapi = []
+            # TODO: rablists are sequence of sequence of rabitem...
+            # here we go over all 1st level item
+            # and take the 1st item of the previous selection to call it "rabitem"
+            # in case rabitem are sequenced at the 2nd level, we won't see them...
+            #
+            if 'RAB_SetupOrModifiedList' in self.UEInfo:
+                # RAB successfully established, to be completed with eNB IP and TEID
+                for rabitem in self.UEInfo['RAB_SetupOrModifiedList']:
+                    rabitem = rabitem[0]['value'][1]
+                    nsapi   = rabitem['rAB-ID'][0]
+                    if nsapi in self._gtp_add_mobile_nsapi:
+                        rabcfg = self.Iu.SM.PDP[nsapi]['RAB']
+                        tla = rabitem['transportLayerAddress']
+                        if tla[1] == 32:
+                            # raw IPv4 address
+                            rabcfg['HNB-TLA'] = inet_ntoa(uint_to_bytes(*rabitem['transportLayerAddress']))
+                        elif tla[1] == 160:
+                            # X.213 addr
+                            x213pref = tla[0]>>136
+                            if x213pref>>16 == 0x35 and x213pref & 0xffff == 1:
+                                # IPv4 address
+                                rabcfg['HNB-TLA'] = inet_ntoa(uint_to_bytes((tla[0]>>104)&0xffffffff, 32))
+                        if rabcfg['HNB-TLA'] is None:
+                            self._log('WNG', 'no IPv4 TLA provided')
+                            self._gtp_rem_mobile_nsapi.append(nsapi)
+                        else:
+                            if rabitem['iuTransportAssociation'][0] == 'gTP-TEI':
+                                rabcfg['HNB-GTP-TEID'] = bytes_to_uint(rabitem['iuTransportAssociation'][1], 32)
+                                # activate the GTP DL parameters
+                                self.Server.GTPUd.set_mobile_dl(
+                                    rabcfg['SGW-GTP-TEID'], # teid_ul
+                                    ran_ip=(rabcfg['SGW-TLA'], rabcfg['HNB-TLA']),
+                                    teid_dl=rabcfg['HNB-GTP-TEID'])
+                            else:
+                                self._log('WNG', 'no GTP TEID provided')
+                                self._gtp_rem_mobile_nsapi.append(nsapi)
+            #
+            if 'RAB_FailedList' in self.UEInfo:
+                # RAB failed to establish, to be disabled
+                for rabitem in self.UEInfo['RAB_FailedList']:
+                    rabitem = rabitem[0]['value'][1]
+                    nsapi   = rabitem['rAB-ID'][0]
+                    if nsapi in self._gtp_add_mobile_nsapi:
+                        self._gtp_rem_mobile_nsapi.append(nsapi)
+                        self._log('INF', 'unable to establish RAB %i, cause %r'\
+                                  % (nsapi, rabitem['cause']))
+            #
+            if 'RAB_QueueList' in self.UEInfo:
+                self._log('WNG', 'handling of RAB-QueueList not implemented')
+                # TODO
+            #
+            if 'RAB_ReleaseFailedList' in self.UEInfo:
+                # RAB failed to be toredown
+                for rabitem in self.UEInfo['RAB_ReleaseFailedList']:
+                    rabitem = rabitem[0]['value'][1]
+                    nsapi   = rabitem['rAB-ID'][0]
+                    if nsapi in self._gtp_rem_mobile_nsapi:
+                        self._log('INF', 'unable to release RAB %i, cause %r'\
+                                  % (nsapi, rabitem['cause']))
+            #
+            if 'RAB_ReleasedList' in self.UEInfo:
+                # RAB successfully tore down
+                for rabitem in self.UEInfo['RAB_ReleasedList']:
+                    rabitem = rabitem[0]['value'][1]
+                    nsapi   = rabitem['rAB-ID'][0]
+                    if nsapi in self._gtp_rem_mobile_nsapi:
+                        # nothing to do actually
+                        pass
+            #
+            if self._gtp_rem_mobile_nsapi:
+                self._disable_gtpu()
+        #
+        if self._cb:
+            self._ret = self.Iu.trigger_nas(self)
+            self._cb = None
+        else:
+            self._ret = []
+    
+    def trigger(self):
+        if self._ret:
+            # new RANAP procedure prepared by the NAS layer
+            return self._ret
+        else:
+            return []
+    
+    def abort(self):
+        RANAPSigProc.abort(self)
+        if hasattr(self, '_gtp_add_mobile_nsapi'):
+            self._gtp_rem_mobile_nsapi = self._gtp_add_mobile_nsapi
+            self._disable_gtpu()
 
 
 class RANAPRABReleaseRequest(RANAPSigProc):
@@ -355,6 +565,8 @@ class RANAPIuRelease(RANAPSigProc):
             if self.Iu.MM.state != 'INACTIVE':
                 self.Iu.MM.state = 'IDLE'
         else:
+            # suspend all RAB
+            self.Iu.SM.pdp_suspend()
             if self.Iu.GMM.state != 'INACTIVE':
                 self.Iu.GMM.state = 'IDLE'
         self._log('INF', 'UE disconnected, cause %r' % (self._NetInfo['Cause'], ))
@@ -1653,7 +1865,7 @@ class RANAPResetRNC(RANAPConlessSigProc):
         # recv the reset indication
         self._recv(pdu)
         if not self.errcause:
-            self._log('INF', 'cause %r' % self.RNCInfo['Cause'])
+            self._log('INF', 'cause %r' % (self.RNCInfo['Cause'], ))
             # reset all UE connections handled by the RNC handler in the core network 
             # domain indicated
             if self.RNCInfo['CN_DomainIndicator'] == 'ps-domain':
@@ -1762,7 +1974,7 @@ class RANAPErrorIndConlessRNC(RANAPConlessSigProc):
     def recv(self, pdu):
         self._recv(pdu)
         if not self.errcause:
-            self._log('WNG', 'error ind received: %s.%i' % self.RNCInfo['Cause'])
+            self._log('WNG', 'error ind received: %s.%i' % (self.RNCInfo['Cause'], ))
             # if it corresponds to a previously CN-initiated class 1 procedure
             # abort it
             try:
@@ -2006,7 +2218,7 @@ class RANAPResetResourceRNC(RANAPConlessSigProc):
     def recv(self, pdu):
         self._recv(pdu)
         if not self.errcause:
-            self._log('INF', 'cause %r' % self.RNCInfo['Cause'])
+            self._log('INF', 'cause %r' % (self.RNCInfo['Cause'], ))
             RResList, RResIds = self.RNCInfo['ResetResourceList'], []
             try:
                 # we expect a single prot container (TODO: to be confirmed)
@@ -2026,6 +2238,9 @@ class RANAPResetResourceRNC(RANAPConlessSigProc):
                     except:
                         pass
                     else:
+                        ue.IuPS.SM.pdp_suspend()
+                        if ue.IuPS.GMM.state != 'INACTIVE':
+                            ue.IuPS.GMM.state = 'IDLE'
                         ue.IuPS.unset_ran()
                         ue.IuPS.unset_ctx()
                         del self.RNC.UE_IuPS[rres]
@@ -2036,6 +2251,8 @@ class RANAPResetResourceRNC(RANAPConlessSigProc):
                     except:
                         pass
                     else:
+                        if ue.IuCS.MM.state != 'INACTIVE':
+                            ue.IuCS.MM.state = 'IDLE'
                         ue.IuCS.unset_ran()
                         ue.IuCS.unset_ctx()
                         del self.RNC.UE_IuCS[rres]
@@ -2051,7 +2268,7 @@ class RANAPResetResourceRNC(RANAPConlessSigProc):
                 return []
         else:
             # prepare response IEs
-            IEs['CN_DomainIndicator'] = self.RNCInfo['CN_DomainIndicator']
+            IEs = {'CN_DomainIndicator': self.RNCInfo['CN_DomainIndicator']}
             if 'GlobalRNC_ID' in self.RNCInfo:
                 IEs['GlobalRNC_ID'] = self.RNCInfo['GlobalRNC_ID']
             if 'GlobalCN_ID' in self.RNCInfo:

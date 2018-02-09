@@ -30,6 +30,7 @@
 from .utils       import *
 from .ProcCNRanap import *
 from .ProcCNGMM   import *
+from .ProcCNSM    import *
 from .HdlrUEIu    import UEIuSigStack
 
 #------------------------------------------------------------------------------#
@@ -236,7 +237,7 @@ class UEGMMd(SigStack):
         # ready event, used by foreground tasks (network / interpreter initiated)
         self.ready = Event()
         self.ready.set()
-        # within specific or CM-oriented procedure)
+        # stack of ongoing GMM procedures
         self.Proc   = []
         # list of tracked procedures (requires TRACK_PROC = True)
         self._proc  = []
@@ -293,7 +294,7 @@ class UEGMMd(SigStack):
             else:
                 self._log('WNG', 'unexpected %s message, sending STATUS 98' % name)
                 # cause 98: Message type not compatible with the protocol state
-                return self.Iu.ret_ranap_dt(NAS.GMMStatus(GMMCause=98))
+                return self.Iu.ret_ranap_dt(NAS.GMMStatus(val={'GMMCause':98}))
         #
         # 3) start a new UE-initiated procedure
         elif name in GMMProcUeDispatcherStr:
@@ -304,10 +305,13 @@ class UEGMMd(SigStack):
             return Proc.process(NasRx)
         #
         # 4) unexpected NasRx
-        else:
+        elif name != 'GMMStatus':
             self._log('WNG', 'unexpected %s message, sending STATUS 96' % name)
             # cause 96: Invalid mandatory information
-            return self.Iu.ret_ranap_dt(NAS.GMMStatus(Cause=96))
+            return  self.Iu.ret_ranap_dt(NAS.GMMStatus(val={'GMMCause':96}))
+        else:
+            self._log('WNG', 'unexpected STATUS received with %r' % NasRx['GMMCause'][0])
+            return []
     
     def init_proc(self, ProcClass, encod=None, gmm_preempt=False):
         """initialize a CN-initiated GMM procedure of class `ProcClass' and 
@@ -332,110 +336,77 @@ class UEGMMd(SigStack):
     def _net_init_con(self):
         if not self.Iu.page_block():
             return False
-        # need to wait for potential GMM serving / common procedures to happen and end
+        # need to wait for potential MM common procedures to happen and end
         sleep(self._WAIT_ADD)
         if not self.ready.wait(10):
-            # something is blocking in the serving / common procedures
+            # something is blocking in the common procedures
             return False
         elif not self.Iu.connected.is_set():
-            # something went wrong during the serving / common procedures
+            # something went wrong during the common procedures
             return False
         else:
             return True
     
-    def req_ident(self, idtype=NAS.IDTYPE_IMSI):
-        """start an Identity Request procedure toward the UE and wait for the
-        response, or timeout
+    def run_proc(self, ProcClass, **IEs):
+        """run a network-initiated procedure ProcClass in the context of the MM
+        stack, after setting the given IEs in the NAS message to be sent to the 
+        UE
         
-        returns True if a response is received, False otherwise
-        
-        if True, the UEInfo from the response is available in self._ini_ret
+        returns a 2-tuple (success, proc)
+            success is a bool
+            proc is the instance of ProcClass or None
         """
+        if ProcClass.Init is None:
+            self._log('ERR', 'invalid network-initiated procedure %s' % ProcClass.Name)
+            return False, None
         if not self._net_init_con():
-            return False
-        Proc = self.init_proc(GMMIdentification, gmm_preempt=True)
-        Proc.set_msg(8, 21, IDType=idtype)
+            return False, None
+        #
+        Proc = self.init_proc(ProcClass, encod={ProcClass.Init: IEs}, mm_preempt=True)
         try:
             RanapTxProc = Proc.output()
         except:
-            self._log('ERR', 'NAS message encoding failed')
+            self._log('ERR', 'invalid IEs for network-initiated procedure %s' % Proc.Name)
             Proc.abort()
-            return False
+            return False, Proc
         if not self.Iu._send_to_rnc_ranap(RanapTxProc):
             # something bad happened while sending the message
-            return False
+            return False, Proc
         #
-        # wait for the procedure to end and release the GMM stack
-        if not self.ready.wait(self.T3370+self._WAIT_ADD):
+        # check if a response is expected
+        if not hasattr(Proc, 'TimerValue'):
+            return True, Proc
+        elif not self.ready.wait(Proc.TimerValue + self._WAIT_ADD):
             # procedure is stuck, will be aborted in the server loop
             # WNG: this means the routine for cleaning NAS procedures in timeout 
             # should be enabled in CorenetServer
-            return False
+            return False, Proc
         #
-        # check if a response was received
+        # check is a response was received
         if hasattr(Proc, 'UEInfo'):
-            self._net_init_ret = Proc.UEInfo
-            return True
+            return True, Proc
         else:
-            return False
+            return False, Proc
+    
+    def req_ident(self, idtype=NAS.IDTYPE_IMSI):
+        """start a GMM Identification procedure toward the UE and wait for the
+        response or timeout
+        """
+        return self.run_proc(GMMIdentification, IDType=idtype)
     
     def detach(self, type=1, cause=None):
         """send a GMM Detach with type and cause (optional) and wait for the
-        response if type != 3, or timeout
-        
-        type: 1, re-attach required
-              2, re-attach not required
-              3, IMSI detach
-        
-        returns True if a response is received, False otherwise
-        
-        if True, the UEInfo from the response is available in self._ini_ret
+        response (if type != 3) or timeout
         """
-        if not self._net_init_con():
-            return False
-        Proc = self.init_proc(GMMDetachCN, gmm_preempt=True)
         if cause is not None:
-            Proc.set_msg(8, 5, DetachTypeMT={'Type': type}, GMMCause=cause)
+            return self.run_proc(GMMDetachCN, DetachTypeMT={'Type': type}, GMMCause=cause)
         else:
-            Proc.set_msg(8, 5, DetachTypeMT={'Type': type})
-        try:
-            RanapTxProc = Proc.output()
-        except:
-            self._log('ERR', 'NAS message encoding failed')
-            Proc.abort()
-            return False
-        if not self.Iu._send_to_rnc_ranap(RanapTxProc):
-            # something bad happened while sending the message
-            return False
-        #
-        # wait for the procedure to end and release the GMM stack
-        if not self.ready.wait(T3322+self._WAIT_ADD):
-            # procedure is stuck, will be aborted in the server loop
-            # WNG: this means the routine for cleaning NAS procedures in timeout 
-            # should be enabled in CorenetServer
-            return False
-        # 
-        # we check if a response was received
-        if hasattr(Proc, 'UEInfo'):
-            self._net_init_ret = Proc.UEInfo
-            return True
-        else:
-            return False
+            return self.run_proc(GMMDetachCN, DetachTypeMT={'Type': type})
     
     def inform(self, **info):
-        """send an GMM information with given info
+        """send a GMM Information with given info
         """
-        if not self._net_init_con():
-            return False
-        Proc = self.init_proc(GMMInformation)
-        Proc.set_msg(8, 33, **info)
-        try:
-            RanapTxProc = Proc.output()
-        except:
-            self._log('ERR', 'NAS message encoding failed')
-            Proc.abort()
-            return False
-        return self.Iu._send_to_rnc_ranap(RanapTxProc)
+        return self.run_proc(GMMInformation, **info)
 
 
 class UESMd(SigStack):
@@ -453,11 +424,93 @@ class UESMd(SigStack):
     # to bypass the process() server loop with a custom NAS PDU handler
     RX_HOOK = None
     
-    # Packet Data Protocol configuration, per APN
-    # PDP default IuPS QoS (TODO)
-    PDPConfig = {
-        '*'      : {},
-        'corenet': {}
+    # default Radio Access Bearer settings for PDP config, per APN
+    # QCI (being LTE + EPS) is copied from the CorenetServer.ConfigPDN at UE init
+    RABConfig = {
+        '*'      : {
+            ### RAB ItemFirst
+            # RAB-Parameters
+            'TrafficClass'  : 'background',
+                # 'conversational', 'streaming', 'interactive', or 'background'
+            'RAB-AsymmetryIndicator': 'asymmetric-bidirectional',
+                # or 'symmetric-bidirectional', 
+                #    'asymmetric-unidirectional-downlink',
+                #    'asymmetric-unidirectional-uplink'
+            'MaxBitrate'    : [16000000, 8000000], # 0..16000000, (DL, UL)
+                # for more than 16Mb/s (e.g. with HSDPA+)
+                # use the IE-Extension RAB-Parameter-ExtendedMaxBitrateList
+            'DeliveryOrder' : 'delivery-order-not-requested',
+                # or 'delivery-order-not-requested'
+            'MaxSDU-Size'   : 8000, # 0..32768
+            'SDU-Parameters': [{
+                'sDU-ErrorRatio'        : {'mantissa': 1, 'exponent': 4}, # m * 10^-e
+                'residualBitErrorRatio' : {'mantissa': 1, 'exponent': 5}, # m * 10^-e
+                'deliveryOfErroneousSDU': 'no'
+                }],
+            #'TrafficHandlingPriority': 15, # 0..15, optional
+                # TrafficHandlingPriority or AllocationOrRetentionPriority, but not both
+                # 1: highest, 14: lowest, 15: no priority
+            'AllocationOrRetentionPriority': {
+                'priorityLevel' : 15, # 0..15, 1: highest, 14: lowest, 15: no priority
+                'pre-emptionCapability'   : 'shall-not-trigger-pre-emption', # or 'may-trigger-pre-emption'
+                'pre-emptionVulnerability': 'not-pre-emptable', # or 'pre-emptable'
+                'queuingAllowed': 'queueing-not-allowed' # or 'queueing-allowed'
+                }, # optional
+            #'RelocationRequirement': 'none', # or 'lossless', 'realtime', optional
+            #
+            # RAB-Parameters Extensions
+            #'SignallingIndication': 'signalling',
+            #'RAB-Parameter-ExtendedGuaranteedBitrateList': , # 0..16000000, (DL, UL)
+            'RAB-Parameter-ExtendedMaxBitrateList': [42000000], # 16000001..256000000, (DL[, UL])
+            #'SupportedRAB-ParameterBitrateList': , # 1..1000000000, (DL, UL)
+            #
+            # UserPlaneInformation
+            'UserPlaneMode'  : 'transparent-mode',
+            'UP-ModeVersions': (1, 16), # version 1
+            #
+            # extended max bitrate
+            'ExtMaxBitrate'  : 42000000,
+            #
+            ### RAB ItemSecond
+            'DataVolumeReportingIndication': 'do-not-report', # or 'do-report', optional
+            },
+        #
+        'corenet': {
+            ### RAB ItemFirst
+            # RAB-Parameters
+            'TrafficClass'  : 'streaming',
+                # 'conversational', 'streaming', 'interactive', or 'background'
+            'RAB-AsymmetryIndicator': 'asymmetric-bidirectional',
+                # or 'symmetric-bidirectional', 
+                #    'asymmetric-unidirectional-downlink',
+                #    'asymmetric-unidirectional-uplink'
+            'MaxBitrate'    : [16000000, 8000000], # 0..16000000, (DL, UL)
+                # for more than 16Mb/s (e.g. with HSDPA+)
+                # use the IE-Extension RAB-Parameter-ExtendedMaxBitrateList
+            'DeliveryOrder' : 'delivery-order-not-requested',
+            'MaxSDU-Size'   : 8000, # 0..32768
+            'SDU-Parameters': [{
+                'sDU-ErrorRatio'        : {'mantissa': 1, 'exponent': 4}, # m * 10^-e
+                'residualBitErrorRatio' : {'mantissa': 1, 'exponent': 5}, # m * 10^-e
+                'deliveryOfErroneousSDU': 'no'
+                }],
+            'TrafficHandlingPriority': 14, # 0..15, optional
+                # 1: highest, 14: lowest, 15: no priority
+            'AllocationOrRetentionPriority': {
+                'priorityLevel' : 14, # 0..15, 1: highest, 14: lowest, 15: no priority
+                'pre-emptionCapability'   : 'shall-not-trigger-pre-emption', # or 'may-trigger-pre-emption'
+                'pre-emptionVulnerability': 'not-pre-emptable', # or 'pre-emptable'
+                'queuingAllowed': 'queueing-not-allowed' # or 'queueing-allowed'
+                }, # optional
+            'RelocationRequirement': 'none', # or 'lossless', 'realtime', optional
+            #
+            # UserPlaneInformation
+            'UserPlaneMode'  : 'transparent-mode',
+            'UP-ModeVersions': (1, 16), # version 1
+            #
+            ### RAB ItemSecond
+            'DataVolumeReportingIndication': 'do-not-report', # or 'do-report', optional
+            }
         }
     # when the UE 1st attach it gets a specific PDPConfig dict with a copy of this content
     # plus specific content from the CorenetServer.ConfigPDP and CorenetServer.ConfigUE
@@ -465,8 +518,11 @@ class UESMd(SigStack):
     # Protocol config option with authentication
     # if bypass enabled, the PAP / CHAP authentication will not be checked against
     # the CorenetServer.PDPConfig and always return authentication success
-    PDN_PAP_BYPASS  = True
-    PDN_CHAP_BYPASS = True
+    AUTH_PAP_BYPASS  = True
+    AUTH_CHAP_BYPASS = True
+    
+    # TransportLayerAddress format exchanged over RANAP
+    TLA_X213 = False
     
     
     def _log(self, logtype, msg):
@@ -476,12 +532,15 @@ class UESMd(SigStack):
         self.UE = ued
         self.set_iu(iupsd)
         #
-        # dict of ongoing SM procedures (indexed by NSAPI)
-        self.Proc = {}
-        # dict of activated PDP config per PS bearer ID
-        self.PDP = {}
-        # dict of ongoing ESM transactions IEs
+        # dict of ongoing SM procedures, indexed by transaction identifiers
+        # 0..127 : network-initiated, 128..255: UE-initiated
+        self.Proc  = {}
+        # mapping between transaction identifiers and NSAPI (which shall be honored)
         self.Trans = {}
+        # dict of activated PDP config per NSAPI
+        self.PDP   = {}
+        # dict of activated MBMS config per MBMS_NSAPI
+        self.MBMS  = {}
         # list of tracked procedures (requires TRACK_PROC = True)
         self._proc = []
     
@@ -496,19 +555,229 @@ class UESMd(SigStack):
         if self.RX_HOOK is not None:
             return self.RX_HOOK(NasRx)
         #
-        # returns SM STATUS, cause feature not supported
-        return self.Iu.ret_ranap_dt(Buf('SMStatus', val=b'\x0A\x55\x28', bl=24))
+        name = NasRx._name
+        tipd = NasRx[0][0]
+        tif, ti = tipd[0].get_val(), tipd['TI'].get_val()
+        if tif:
+            # ti established by the CN
+            tid = ti
+        else:
+            # ti established by the UE
+            tid = 0x80 + ti
+        # 
+        # 1) check if this is a stack-wide STATUS
+        if ti == 7 and name == 'SMStatus':
+            self._log('WNG', 'STATUS global received with %r' % NasRx['SMCause'])
+            self.clear()
+            return []
+        #
+        # 1) check if there is any ongoing SM procedure for this tid
+        elif ti in self.Proc:
+            ProcStack = self.Proc[ti]
+            #
+            # 2.1) in case of STATUS, disable ongoing procedure(s)
+            if name == 'SMStatus':
+                self._log('WNG', 'STATUS for TI %i received with %r' % (ti, NasRx['SMCause']))
+                self.clear(ti)
+                return []
+            #
+            # 2.2) in case of expected response
+            elif name in ProcStack[-1].FilterStr:
+                Proc = ProcStack[-1]
+                RanapTxProc = Proc.process(NasRx)
+                while ProcStack and not RanapTxProc:
+                    # while the top-level NAS procedure has nothing to respond and terminates,
+                    # we postprocess() lower-level NAS procedure(s) until we have something
+                    # to send, or the stack is empty
+                    ProcLower = ProcStack[-1]
+                    RanapTxProc = ProcLower.postprocess(Proc)
+                    Proc = ProcLower
+                return RanapTxProc
+            #
+            # 2.3) in case of unexpected NasRx
+            else:
+                self._log('WNG', 'unexpected %s message for TI %i, sending STATUS 98' % (ti, name))
+                # cause 98: Message type not compatible with the protocol state
+                return self.Iu.ret_ranap_dt(NAS.SMStatus(val={'SMHeader': {'TIPD': {'TIFlag': (1, 0)[tif],
+                                                                                    'TI'    : ti}},
+                                                              'SMCause':98}))
+        #
+        # 3) start a new UE-initiated procedure
+        elif name in SMProcUeDispatcherStr:
+            Proc = SMProcUeDispatcherStr[name](self, tid=tid)
+            self.Proc[tid] = [ Proc ]
+            if self.TRACK_PROC:
+                self._proc.append(Proc)
+            return Proc.process(NasRx)
+        #
+        # 4) unexpected NasRx
+        elif name != 'SMStatus':
+            self._log('WNG', 'unexpected %s message for TI %i, sending STATUS 96' % (ti, name))
+            # cause 96: Invalid mandatory information
+            return  self.Iu.ret_ranap_dt(NAS.SMStatus(val={'SMHeader': {'TIPD': {'TIFlag': 0,
+                                                                                 'TI'    : 7}},
+                                                           'SMCause':96}))
+        else:
+            self._log('WNG', 'unexpected STATUS for TI %i received with %r' % (ti, NasRx['SMCause'][0]))
+            return []
     
-    def init_proc(self, Proc, encod=None):
+    def init_proc(self, ProcClass, encod=None):
         """initialize a CN-initiated SM procedure of class `ProcClass' and 
         given encoder(s), and return the procedure
         """
-        assert()
+        # get a new ti
+        for ti in range(0, 7):
+            if ti not in self.Proc:
+                break
+        if ti == 7:
+            self._log('WNG', 'no TID available for starting a new procedure')
+            return None
+        Proc = ProcClass(self, tid=ti, encod=encod)
+        self.Proc[ti] = [ Proc ]
+        if self.TRACK_PROC:
+            self._proc.append( Proc )
+        return Proc
     
-    def clear(self):
-        """abort all running procedures
+    def clear(self, ti=None):
+        """abort running procedures
         """
-        pass
+        if ti is None:
+            for ti in self.Proc:
+                for Proc in self.Proc[ti][::-1]:
+                    Proc.abort()
+        elif ti in self.Proc:
+            for Proc in self.Proc[ti][::-1]:
+                Proc.abort()
+    
+    def pdp_clear(self, nsapi=None):
+        if nsapi is None:
+            for nsapi, pdpcfg in list(self.PDP.items()):
+                self.UE.Server.GTPUd.rem_mobile(pdpcfg['RAB']['SGW-GTP-TEID'])
+                del self.PDP[nsapi]
+        elif nsapi in self.PDP:
+            self.UE.Server.GTPUd.rem_mobile(self.PDP[nsapi]['RAB']['SGW-GTP-TEID'])
+            del self.PDP[nsapi]
+    
+    def pdp_suspend(self, nsapi=None):
+        if nsapi is None:
+            for nsapi, pdpcfg in self.PDP.items():
+                if pdpcfg['state'] == 1:
+                    self.UE.Server.GTPUd.rem_mobile(pdpcfg['RAB']['SGW-GTP-TEID'])
+                    pdpcfg['state'] = 0
+        elif nsapi in self.PDP and self.PDP[nsapi]['state'] == 1:
+            self.UE.Server.GTPUd.rem_mobile(self.PDP[nsapi]['RAB']['SGW-GTP-TEID'])
+            self.PDP[nsapi]['state'] = 0
+    
+    def rab_set_default(self, nsapi, tid, apn, pdpaddr, pdpcfg):
+        rabcfg = pdpcfg['RAB']
+        del pdpcfg['RAB']
+        pdp = cpdict(pdpcfg)
+        pdpcfg['RAB'] = rabcfg
+        #
+        pdp['PDPAddr'] = pdpaddr
+        pdp['APN'] = apn
+        pdp['TID'] = tid
+        pdp['RAB'] = {
+            'SGW-TLA': self.UE.Server.SERVER_HNB['GTPU'],
+            'HNB-TLA': None, # hnb gtpu ipn, will be updated after the HNB setup the RAB
+            'SGW-GTP-TEID': self.UE.Server.get_gtp_teid(), # teid_ul
+            'HNB-GTP-TEID': None, # teid_dl, will be updated after the HNB setup the RAB
+            }
+        #
+        # RAB item is a field pair
+        rab_first = {
+            'rAB-ID': (nsapi, 8),
+            'rAB-Parameters': {
+                'trafficClass'   : rabcfg['TrafficClass'],
+                'rAB-AsymmetryIndicator': rabcfg['RAB-AsymmetryIndicator'],
+                'maxBitrate'     : rabcfg['MaxBitrate'],
+                'deliveryOrder'  : rabcfg['DeliveryOrder'],
+                'maxSDU-Size'    : rabcfg['MaxSDU-Size'],
+                'sDU-Parameters' : rabcfg['SDU-Parameters']
+                },
+            'userPlaneInformation': {
+                'userPlaneMode'  : rabcfg['UserPlaneMode'],
+                'uP-ModeVersions': rabcfg['UP-ModeVersions']
+                },
+            'transportLayerInformation': {
+                'iuTransportAssociation': ('gTP-TEI', uint_to_bytes(pdp['RAB']['SGW-GTP-TEID'], 32))
+                }
+            }
+        #
+        if self.TLA_X213:
+            # 0x35: IANA ICP, 0x01: IPv4 addr
+            rab_first['transportLayerInformation']['transportLayerAddress'] = \
+                ((0x35<<152) + (0x01<<136) + (bytes_to_uint(inet_aton(pdp['RAB']['SGW-TLA']), 32)<<104),
+                 160)
+        else:
+            rab_first['transportLayerInformation']['transportLayerAddress'] = \
+                (bytes_to_uint(inet_aton(pdp['RAB']['SGW-TLA']), 32),
+                 32)
+        #
+        if 'SignallingIndication' in rabcfg \
+        or 'RAB-Parameter-ExtendedGuaranteedBitrateList' in rabcfg \
+        or 'RAB-Parameter-ExtendedMaxBitrateList' in rabcfg \
+        or 'SupportedRAB-ParameterBitrateList' in rabcfg:
+            # RAB parameters extensions
+            exts = []
+            if 'SignallingIndication' in rabcfg:
+                exts.append({'id': 116,
+                             'criticality': 'ignore',
+                             'extensionValue': ('SignallingIndication',
+                                                rabcfg['SignallingIndication'])})
+            if 'RAB-Parameter-ExtendedGuaranteedBitrateList' in rabcfg:
+                exts.append({'id': 176,
+                             'criticality': 'reject',
+                             'extensionValue': ('RAB-Parameter-ExtendedGuaranteedBitrateList',
+                                                rabcfg['RAB-Parameter-ExtendedGuaranteedBitrateList'])})
+            if 'RAB-Parameter-ExtendedMaxBitrateList' in rabcfg:
+                exts.append({'id': 177,
+                             'criticality': 'reject',
+                             'extensionValue': ('RAB-Parameter-ExtendedMaxBitrateList',
+                                                rabcfg['RAB-Parameter-ExtendedMaxBitrateList'])})
+            if 'SupportedRAB-ParameterBitrateList' in rabcfg:
+                # TODO: check the diff between the Ext with id 218 and id 219
+                exts.append({'id': 219,
+                             'criticality': 'reject',
+                             'extensionValue': ('SupportedRAB-ParameterBitrateList',
+                                                rabcfg['SupportedRAB-ParameterBitrateList'])})
+            rab_first['rAB-Parameters']['iE-Extensions'] = exts
+        #
+        if 'TrafficHandlingPriority' in rabcfg:
+            rab_first['rAB-Parameters']['trafficHandlingPriority'] = rabcfg['TrafficHandlingPriority']
+        if 'AllocationOrRetentionPriority' in rabcfg:
+            rab_first['rAB-Parameters']['allocationOrRetentionPriority'] = rabcfg['AllocationOrRetentionPriority']
+        if 'RelocationRequirement' in rabcfg:
+            rab_first['rAB-Parameters']['relocationRequirement'] = rabcfg['RelocationRequirement']
+        pdp['RAB']['First'] = rab_first
+        #
+        rab_second = {
+            #'dl-GTP-PDU-SequenceNumber': 0,
+            #'ul-GTP-PDU-SequenceNumber': 0
+            }
+        if pdpaddr[0] == 0:
+            rab_second['pDP-TypeInformation'] = ['ppp']
+        elif pdpaddr[0] == 1:
+            rab_second['pDP-TypeInformation'] = ['ipv4']
+        elif pdpaddr[0] == 2:
+            rab_second['pDP-TypeInformation'] = ['ipv6']
+        elif pdpaddr[0] == 3:
+            rab_second['pDP-TypeInformation'] = ['ipv4', 'ipv6']
+        if 'DataVolumeReportingIndication' in rabcfg:
+            rab_second['dataVolumeReportingIndication'] = rabcfg['DataVolumeReportingIndication']
+        pdp['RAB']['Second'] = rab_second
+        #
+        pdp['state']  = 0 # 0: suspended (no GTP tunnel exist), 1: active (GTP tunnel exists)
+        pdp['linked'] = [] # will be expanded in case secondary ctxt are created
+        self.PDP[nsapi] = pdp
+    
+    #--------------------------------------------------------------------------#
+    # protocol configuration processing
+    #--------------------------------------------------------------------------#
+    
+    def process_protconfig(self, config, request):
+        RespElt, pdpaddrreq = self.UE.process_protconfig(self, config, request)
+        return {'Config': RespElt}, pdpaddrreq
 
 
 class UEIuPSd(UEIuSigStack):
@@ -586,16 +855,14 @@ class UEIuPSd(UEIuSigStack):
     
     
     def __init__(self, ued, hnbd=None, ctx_id=-1):
-        # init GMM and SM sig stacks
-        self.GMM = UEGMMd(ued, self)
-        self.SM  = UESMd(ued, self)
         # init the Iu interface
         UEIuSigStack.__init__(self, ued, hnbd, ctx_id)
         # reference the Config from the server
         self.Config = self.Server.ConfigIuPS
-        # track states for PDP and MBMS contexts
-        self.PDP  = {i: 0 for i in range(16)}
-        self.MBMS = {i: 0 for i in range(16)} # to be confirmed if only 16 ctx
+        #
+        # init GMM and SM sig stacks
+        self.GMM = UEGMMd(ued, self)
+        self.SM  = UESMd(ued, self)
     
     def reset_sec_ctx(self):
         self.SEC.clear()
@@ -613,11 +880,17 @@ class UEIuPSd(UEIuSigStack):
         if err:
             self._log('WNG', 'invalid PS NAS message: %s' % hexlify(buf).decode('ascii'))
             # returns GMM STATUS
-            return self.ret_ranap_dt(NAS.GMMStatus(Cause=err))
-        elif self.UE.TRACE_NAS_PS:
+            return self.ret_ranap_dt(NAS.GMMStatus(val={'GMMCause':err}))
+        #
+        Hdr = NasRx[0]
+        if Hdr[0]._name == 'TIPD':
+            pd = Hdr[0]['ProtDisc'].get_val()
+        else:
+            pd = Hdr['ProtDisc'].get_val()
+        #
+        if self.UE.TRACE_NAS_PS:
             self._log('TRACE_NAS_PS_UL', '\n' + NasRx.show())
         #
-        pd = NasRx['ProtDisc'].get_val()
         if pd == 8:
             RanapTxProc = self.GMM.process(NasRx)
         elif pd == 6:
@@ -630,7 +903,7 @@ class UEIuPSd(UEIuSigStack):
             self._log('WNG', 'invalid Protocol Discriminator for PS NAS message, %i' % pd)
             # returns GMM STATUS, with cause message-type non-existent 
             # or not implemented
-            RanapTxProc = self.ret_ranap_dt(NAS.GMMStatus(GMMCause=97))
+            RanapTxProc = self.ret_ranap_dt(NAS.GMMStatus(val={'GMMCause':97}))
         #
         return RanapTxProc
     
@@ -763,4 +1036,35 @@ class UEIuPSd(UEIuSigStack):
     # defined in UEIuSigStack in HdlrUEIu.py
     def _net_init_con(self):
         return self.GMM._net_init_con()
+    
+    #--------------------------------------------------------------------------#
+    # PS bearers activation
+    #--------------------------------------------------------------------------#
+    
+    def bearer_act(self):
+        # reactivate all PDP connections
+        rablist, nsapilist, brdl, brul = [], [], 0, 0
+        for nsapi, pdpcfg in self.SM.PDP.items():
+            if 'RAB' in pdpcfg:
+                rabcfg = pdpcfg['RAB']
+                nsapilist.append(nsapi)
+                rablist.append([{
+                    'id': 53, # id-RAB-SetupOrModifyItem
+                    'firstCriticality': 'reject',
+                    'firstValue': ('RAB-SetupOrModifyItemFirst', rabcfg['First']),
+                    'secondCriticality': 'ignore',
+                    'secondValue': ('RAB-SetupOrModifyItemSecond', rabcfg['Second'])
+                    }])
+        if not nsapilist:
+            return None
+        #
+        IEs = {'RAB_SetupOrModifyList': rablist}
+        # initiate a RANAPRABAssignment
+        RanapProc = self.init_ranap_proc(RANAPRABAssignment, **IEs)
+        if RanapProc:
+            # pass the info required for setting the GTPU tunnel
+            RanapProc._gtp_add_mobile_nsapi = nsapilist
+            return RanapProc
+        else:
+            return None
 

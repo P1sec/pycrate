@@ -128,8 +128,8 @@ class UEMMd(SigStack):
     # UE-specific T3212 (periodic LUR), should be different from the broadcasted one
     # dict {'Unit': uint3, 'Value': uint5} or None
     # Unit: 0: 10mn, 1: 1h, 2: 10h, 3: 2s, 4: 30s, 5: 1mn, 6: 320h, 7: deactivated
-    #LU_T3212 = {'Unit': 5, 'Value': 5} # 5min
-    LU_T3212 = {'Unit': 1, 'Value': 1} # 1h
+    LU_T3212 = {'Unit': 5, 'Value': 10} # 10min
+    #LU_T3212 = {'Unit': 1, 'Value': 1} # 1h
     # if we want to release the IuCS after the procedure ends 
     # and there is no follow on request
     LU_IUREL = True
@@ -139,6 +139,25 @@ class UEMMd(SigStack):
     LU_IMSI_PROV_REJECT = 17
     # Unit: 0: 2s, 1: 1mn, 2: 6mn, 7: deactivated
     LU_T3246 = {'Unit': 0, 'Value': 2}
+    
+    #--------------------------------------------------------------------------#
+    # MMConnectionEstablishment policy
+    #--------------------------------------------------------------------------#
+    # dict of services rejected with associated cause
+    # otherwise, connection is accepted
+    # 1: Mobile originating call / packet mode connection,
+    # 2: Emergency call,
+    # 4: SMS,
+    # 8: Supplementary service,
+    # 9: Voice group call,
+    # 10: Voice broadcast call,
+    # 11: Location service
+    CON_REJ = {}
+    # when a con estab is rejected, a retry timer wil be sent, if not None
+    # Unit: 0: 2s, 1: 1mn, 2: 6mn, 7: deactivated
+    CON_T3246 = {'Unit': 7, 'Value': 0}
+    # if we want to release the IuCS after the procedure ends on a reject case
+    CON_IUREL = True
     
     #--------------------------------------------------------------------------#
     # interpreter-initiated procedure policy
@@ -190,7 +209,7 @@ class UEMMd(SigStack):
         elif self.Proc:
             # 2.1) in case of STATUS, disable ongoing procedure(s)
             if name == 'MMStatus':
-                self._log('WNG', 'STATUS received with %r' % NasRx['Cause'])
+                self._log('WNG', 'STATUS received with %r' % NasRx['RejectCause'][0])
                 if self.STAT_CLEAR == 1:
                     #self._log('WNG', 'STATUS, disabling %r' % self.Proc[-1])
                     self.Proc[-1].abort()
@@ -216,7 +235,7 @@ class UEMMd(SigStack):
             else:
                 self._log('WNG', 'unexpected %s message, sending STATUS 98' % name)
                 # cause 98: Message type not compatible with the protocol state
-                return  self.Iu.ret_ranap_dt(NAS.MMStatus(Cause=98))
+                return  self.Iu.ret_ranap_dt(NAS.MMStatus(val={'RejectCause':98}))
         #
         # 3) start a new UE-initiated procedure
         elif name in MMProcUeDispatcherStr:
@@ -228,10 +247,13 @@ class UEMMd(SigStack):
             return Proc.process(NasRx)
         #
         # 4) unexpected NasRx
-        else:
+        elif name != 'MMStatus':
             self._log('WNG', 'unexpected %s message, sending STATUS 96' % name)
             # cause 96: Invalid mandatory information
-            return  self.Iu.ret_ranap_dt(NAS.MMStatus(Cause=96))
+            return  self.Iu.ret_ranap_dt(NAS.MMStatus(val={'RejectCause':96}))
+        else:
+            self._log('WNG', 'unexpected STATUS received with %r' % NasRx['RejectCause'][0])
+            return []
     
     def init_proc(self, ProcClass, encod=None, mm_preempt=False):
         """initialize a CN-initiated MM procedure of class `ProcClass' and 
@@ -267,58 +289,77 @@ class UEMMd(SigStack):
         else:
             return True
     
-    def req_ident(self, idtype=NAS.IDTYPE_IMSI):
-        """start an Identity Request procedure toward the UE and wait for the
-        response, or timeout
+    def run_proc(self, ProcClass, **IEs):
+        """run a network-initiated procedure ProcClass in the context of the MM
+        stack, after setting the given IEs in the NAS message to be sent to the 
+        UE
         
-        returns True if a response is received, False otherwise
-        
-        if True, the UEInfo from the response is available in self._net_init_ret
+        returns a 2-tuple (success, proc)
+            success is a bool
+            proc is the instance of ProcClass or None
         """
+        if ProcClass.Init is None:
+            self._log('ERR', 'invalid network-initiated procedure %s' % ProcClass.Name)
+            return False, None
         if not self._net_init_con():
-            return False
-        Proc = self.init_proc(MMIdentification, mm_preempt=True)
-        Proc.set_msg(5, 24, IDType=idtype)
-        try:
-            RanapTxProc = Proc.output().to_bytes()
-        except:
-            self._log('ERR', 'NAS message encoding failed')
-            Proc.abort()
-            return False
-        if not self.Iu._send_to_rnc_ranap(RanapTxProc):
-            # something bad happened while sending the message
-            return False
+            return False, None
         #
-        # wait for the procedure to end and release the MM stack
-        if not self.ready.wait(self.T3270+self._WAIT_ADD):
-            # procedure is stuck, will be aborted in the server loop
-            # WNG: this means the routine for cleaning NAS procedures in timeout 
-            # should be enabled in CorenetServer
-            return False
-        #
-        # check if a response was received
-        if hasattr(Proc, 'UEInfo'):
-            self._net_init_ret = Proc.UEInfo
-            return True
-        else:
-            return False
-    
-    def inform(self, **info):
-        """send an MM information with given info
-        
-        returns True if sending succeeded, False otherwise
-        """
-        if not self._net_init_con():
-            return False
-        Proc = self.init_proc(MMInformation)
-        Proc.set_msg(5, 50, **info)
+        Proc = self.init_proc(ProcClass, encod={ProcClass.Init: IEs}, mm_preempt=True)
         try:
             RanapTxProc = Proc.output()
         except:
-            self._log('ERR', 'NAS message encoding failed')
+            self._log('ERR', 'invalid IEs for network-initiated procedure %s' % Proc.Name)
             Proc.abort()
-            return False
-        return self.Iu._send_to_rnc_ranap(RanapTxProc)
+            return False, Proc
+        if not self.Iu._send_to_rnc_ranap(RanapTxProc):
+            # something bad happened while sending the message
+            return False, Proc
+        #
+        # check if a response is expected
+        if not hasattr(Proc, 'TimerValue'):
+            return True, Proc
+        elif not self.ready.wait(Proc.TimerValue + self._WAIT_ADD):
+            # procedure is stuck, will be aborted in the server loop
+            # WNG: this means the routine for cleaning NAS procedures in timeout 
+            # should be enabled in CorenetServer
+            return False, Proc
+        #
+        # check is a response was received
+        if hasattr(Proc, 'UEInfo'):
+            return True, Proc
+        else:
+            return False, Proc
+    
+    def req_ident(self, idtype=NAS.IDTYPE_IMSI):
+        """start a GMM Identification procedure toward the UE and wait for the
+        response or timeout
+        """
+        return self.run_proc(GMMIdentification, IDType=idtype)
+    
+    def detach(self, type=1, cause=None):
+        """send a GMM Detach with type and cause (optional) and wait for the
+        response (if type != 3) or timeout
+        """
+        if cause is not None:
+            return self.run_proc(GMMDetachCN, DetachTypeMT={'Type': type}, GMMCause=cause)
+        else:
+            return self.run_proc(GMMDetachCN, DetachTypeMT={'Type': type})
+    
+    def inform(self, **info):
+        """send a GMM Information with given info
+        """
+        return self.run_proc(GMMInformation, **info)
+    
+    def req_ident(self, idtype=NAS.IDTYPE_IMSI):
+        """start an MM Identification procedure toward the UE and wait for the
+        response or timeout
+        """
+        return self.run_proc(MMIdentification, IDType=idtype)
+    
+    def inform(self, **info):
+        """send an MM information with given info
+        """
+        return self.run_proc(MMInformation, **info)
 
 
 class UECCd(SigStack):
@@ -502,15 +543,16 @@ class UEIuCSd(UEIuSigStack):
     
     
     def __init__(self, ued, hnbd=None, ctx_id=-1):
+        # init the Iu interface
+        UEIuSigStack.__init__(self, ued, hnbd, ctx_id)
+        # reference the Config from the server
+        self.Config = self.Server.ConfigIuCS
+        #
         # init MM, CC, SMS and SS sig stacks
         self.MM  = UEMMd(ued, self)
         self.CC  = UECCd(ued, self)
         self.SMS = UESMSd(ued, self)
         self.SS  = UESSd(ued, self)
-        # init the Iu interface
-        UEIuSigStack.__init__(self, ued, hnbd, ctx_id)
-        # reference the Config from the server
-        self.Config = self.Server.ConfigIuCS
     
     def reset_sec_ctx(self):
         self.SEC.clear()
@@ -528,11 +570,18 @@ class UEIuCSd(UEIuSigStack):
         if err:
             self._log('WNG', 'invalid CS NAS message: %s' % hexlify(buf).decode('ascii'))
             # returns MM STATUS
-            return self.ret_ranap_dt(NAS.MMStatus(Cause=err))
-        elif self.UE.TRACE_NAS_CS:
+            return self.ret_ranap_dt(NAS.MMStatus(val={'RejectCause':err}))
+        #
+        Hdr = NasRx[0]
+        if Hdr[0]._name == 'TIPD':
+            pd = Hdr[0]['ProtDisc'].get_val()
+        else:
+            pd = Hdr['ProtDisc'].get_val()
+        #
+        if self.UE.TRACE_NAS_CS and pd != 9:
+            # SMS are traced within the SMS stack
             self._log('TRACE_NAS_CS_UL', '\n' + NasRx.show())
         #
-        pd = NasRx['ProtDisc'].get_val()
         if pd in (5, 6):
             # including Radio Resource Management (e.g. PAGING RESPONSE)
             RanapTxProc = self.MM.process(NasRx)
@@ -543,6 +592,10 @@ class UEIuCSd(UEIuSigStack):
             RanapTxProc = []
             for smscp in SMSTx:
                 RanapTxProc.extend( self.ret_ranap_dt(smscp, sapi=3) )
+                #if smscp._name == 'CP_DATA':
+                #    RanapTxProc.extend( self.ret_ranap_dt(smscp, sapi=3) )
+                #else:
+                #    RanapTxProc.extend( self.ret_ranap_dt(smscp, sapi=0) )
         elif pd == 11:
             RanapTxProc = self.SS.process(NasRx)
         else:
@@ -550,7 +603,7 @@ class UEIuCSd(UEIuSigStack):
             self._log('WNG', 'invalid Protocol Discriminator for CS NAS message, %i' % pd)
             # returns MM STATUS, with cause message-type non-existent 
             # or not implemented
-            RanapTxProc = self.ret_ranap_dt(NAS.MMStatus(Cause=97))
+            RanapTxProc = self.ret_ranap_dt(NAS.MMStatus(val={'RejectCause':97}))
         #
         return RanapTxProc
     

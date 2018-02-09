@@ -27,6 +27,28 @@
 # *--------------------------------------------------------
 #*/
 
+__all__ = [
+    'HNBAPSigProc',
+    'HNBAPHNBRegistration',
+    'HNBAPHNBDeregistrationHNB',
+    'HNBAPUERegistration',
+    'HNBAPUEDeregistrationHNB',
+    'HNBAPErrorIndHNB',
+    'HNBAPPrivateMessageHNB',
+    'HNBAPTNLUpdate',
+    'HNBAPHNBConfigTransfer',
+    'HNBAPURNTIQuery',
+    'HNBAPHNBDeregistrationGW',
+    'HNBAPUEDeregistrationGW',
+    'HNBAPErrorIndGW',
+    'HNBAPPrivateMessageGW',
+    'HNBAPCSGMembershipUpdate',
+    'HNBAPRelocationComplete',
+    #
+    'HNBAPProcHnbDispatcher',
+    'HNBAPProcGwDispatcher'
+    ]
+
 from .utils     import *
 from .ProcProto import *
 
@@ -327,7 +349,7 @@ class HNBAPUERegistration(HNBAPSigProc):
             else:
                 ctx_id = self.HNB.set_ue_hnbap(ue)
                 if 'UE_Capabilities' in self.HNBInfo:
-                    ue.Cap['HNBAP'] = self.HNBInfo['UE_Capabilities']
+                    ue.Cap['HNBAP'] = (None, self.HNBInfo['UE_Capabilities'])
         #
         if self.errcause:
             # procedure unsuccessful outcome

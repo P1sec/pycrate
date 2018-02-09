@@ -164,6 +164,10 @@ class LinkSigProc(SigProc):
         """
         # 1) select the correct PDU and content
         ptype = pdu[0][:3]
+        if ptype == 'out':  
+            # some 3G RAN procedure have only 'outcome' pdu
+            # which are changed to 'suc'
+            ptype = 'suc'
         Cont, IEs, Extensions, mand = self.Cont[ptype]
         Decod = self.Decod[ptype]
         #
@@ -174,13 +178,13 @@ class LinkSigProc(SigProc):
         # is not present in the PDU
         #if val['criticality'] != self.Crit:
         #    # this actually happens in real life: must not raise()...
-        #    #raise(HNBAPErr('invalid PDU criticality'))
+        #    #raise(CorenetErr('invalid PDU criticality'))
         #    self._log('WNG', 'decode_pdu: incorrect PDU criticality, %s' % val['criticality'])
         #
         # 3) ensure the PDU content has been properly decoded
         if not isinstance(val['value'], tuple) or \
         val['value'][0] != Cont._tr._name:
-            raise(HNBAPErr('invalid PDU content'))
+            raise(CorenetErr('invalid PDU content'))
         #
         # 4) get the value part of the PDU with IEs and Extensions,
         # and copy the list of mandatory IEs
@@ -201,12 +205,12 @@ class LinkSigProc(SigProc):
                     name = IE['Value']._tr._name
                     # check the ie criticality
                     #if ie['criticality'] != IE['criticality']:
-                    #    #raise(HNBAPErr('invalid IE criticality in PDU, id %i' % ident))
+                    #    #raise(CorenetErr('invalid IE criticality in PDU, id %i' % ident))
                     #    self._log('WNG', 'decode_pdu: incorrect IE %s criticality, %s'\
                     #              % (ident, ie['criticality']))
                     # ensure the value content has been properly decoded
                     if ie['value'][0] != name:
-                        raise(HNBAPErr('invalid IE value in PDU, id %i' % ident))
+                        raise(CorenetErr('invalid IE value in PDU, id %i' % ident))
                     # collect and eventually transform the ie value
                     if ident in Decod[0]:
                         ret[pythonize_name(name)] = Decod[0][ident](ie['value'][1])
@@ -231,12 +235,12 @@ class LinkSigProc(SigProc):
                     name = IE['Extension']._tr._name
                     # check the ie criticality
                     #if ie['criticality'] != IE['criticality']:
-                    #    #raise(HNBAPErr('invalid Extension criticality in PDU, id %i' % ident))
+                    #    #raise(CorenetErr('invalid Extension criticality in PDU, id %i' % ident))
                     #    self._log('WNG', 'decode_pdu: incorrect Extension %s criticality, %s'\
                     #              % (ident, ie['criticality']))
                     # ensure the value content has been properly decoded
                     if ie['extensionValue'][0] != name:
-                        raise(HNBAPErr('invalid Extension value in PDU, id %i' % ident))
+                        raise(CorenetErr('invalid Extension value in PDU, id %i' % ident))
                     # collect and eventually transform the ie value
                     if ident in Decod[1]:
                         ret[pythonize_name(name)] = Decod[1][ident](ie['extensionValue'][1])
@@ -248,7 +252,7 @@ class LinkSigProc(SigProc):
         #
         # 7) if not all mandatory IEs have not been decoded, raise
         if mand:
-            raise(HNBAP('missing mandatory IEs in PDU, %r' % mand))
+            raise(CorenetErr('missing mandatory IEs in PDU, %r' % mand))
     
     def encode_pdu(self, ptype, **kw):
         """encode the provided IEs' values from **kw into the PDU of type ptype 
@@ -347,7 +351,7 @@ class LinkSigProc(SigProc):
                     crit = kw[name][0]
                     val  = kw[name][1]
                 else:
-                    crit = self._criticality_default
+                    crit = self._criticality_undef
                     val = kw[name]
                 pdu_ies.append({'id': ident,
                                 'criticality': crit,
@@ -358,15 +362,14 @@ class LinkSigProc(SigProc):
                     crit = kw[name][0]
                     val  = kw[name][1]
                 else:
-                    crit = self._criticality_default
+                    crit = self._criticality_undef
                     val = kw[name]
                 pdu_exts.append({'id': ident,
                                  'criticality': crit,
                                  'value': val})
         #
         # 5) build the whole PDU
-        val = {}
-        val['protocolIEs'] = pdu_ies
+        val = {'protocolIEs': pdu_ies}
         if pdu_exts:
             val['protocolExtensions'] = pdu_exts
         self._pdu_tx.append( (self._ptype_lut[ptype],
@@ -404,8 +407,9 @@ class LinkSigProc(SigProc):
 # NAS signalling procedures
 #------------------------------------------------------------------------------#
 
-tlv_get_first  = lambda x: x[1]
-tlv_get_second = lambda x: x[2]
+tlv_get_first  = lambda x: x[0]
+tlv_get_second = lambda x: x[1]
+tlv_get_third  = lambda x: x[2]
 tlv_get_cap    = lambda x: (x._V.get_val(), x._IE)
 
 class NASSigProc(SigProc):
@@ -457,8 +461,12 @@ class NASSigProc(SigProc):
         if cls.Cont[0] is not None:
             for i, msgclass in enumerate(cls.Cont[0]):
                 msg  = msgclass()
-                mid  = (msg['ProtDisc'](), msg['Type']())
-                mies = msg[1+msg._by_name.index('Type'):]
+                mhdr = msg[0]
+                if mhdr[0]._name == 'TIPD':
+                    mid = (mhdr[0]['ProtDisc'].get_val(), mhdr['Type'].get_val())
+                else:
+                    mid = (mhdr['ProtDisc'].get_val(), mhdr['Type'].get_val())
+                mies = msg[1:]
                 ContLUT[mid] = (0, i)
                 if mid not in cls.Encod:
                     Encod[mid] = {}
@@ -473,17 +481,23 @@ class NASSigProc(SigProc):
                     if ie._name not in Decod[mid]:
                         if ie._name in cls.Cap:
                             Decod[mid][ie._name] = tlv_get_cap
-                        elif isinstance(ie, (Type1TV, Type3TV, Type4LV, Type6LVE)):
+                        elif isinstance(ie, (Type1V, Type3V)):
                             Decod[mid][ie._name] = tlv_get_first
-                        elif isinstance(ie, (Type4TLV, Type6TLVE)):
+                        elif isinstance(ie, (Type1TV, Type3TV, Type4LV, Type6LVE)):
                             Decod[mid][ie._name] = tlv_get_second
+                        elif isinstance(ie, (Type4TLV, Type6TLVE)):
+                            Decod[mid][ie._name] = tlv_get_third
         #
         # UE-initiated NAS msg
         if cls.Cont[1] is not None:
             for i, msgclass in enumerate(cls.Cont[1]):
                 msg  = msgclass()
-                mid  = (msg['ProtDisc'](), msg['Type']())
-                mies = msg[1+msg._by_name.index('Type'):]
+                mhdr = msg[0]
+                if mhdr[0]._name == 'TIPD':
+                    mid = (mhdr[0]['ProtDisc'].get_val(), mhdr['Type'].get_val())
+                else:
+                    mid = (mhdr['ProtDisc'].get_val(), mhdr['Type'].get_val())
+                mies = msg[1:]
                 ContLUT[mid] = (1, i)
                 if mid not in cls.Encod:
                     Encod[mid] = {}
@@ -498,10 +512,12 @@ class NASSigProc(SigProc):
                     if ie._name not in Decod[mid]:
                         if ie._name in cls.Cap:
                             Decod[mid][ie._name] = tlv_get_cap
-                        elif isinstance(ie, (Type1TV, Type3TV, Type4LV, Type6LVE)):
+                        elif isinstance(ie, (Type1V, Type3V)):
                             Decod[mid][ie._name] = tlv_get_first
-                        elif isinstance(ie, (Type4TLV, Type6TLVE)):
+                        elif isinstance(ie, (Type1TV, Type3TV, Type4LV, Type6LVE)):
                             Decod[mid][ie._name] = tlv_get_second
+                        elif isinstance(ie, (Type4TLV, Type6TLVE)):
+                            Decod[mid][ie._name] = tlv_get_third
         #
         cls.ContLUT, cls.Encod, cls.Decod = ContLUT, Encod, Decod
         #
@@ -509,8 +525,13 @@ class NASSigProc(SigProc):
         if cls.Cont[filter_init] is not None:
             for msgclass in cls.Cont[filter_init]:
                 msg = msgclass()
-                Filter.add( (msg['ProtDisc'](), msg['Type']()) )
-                FilterStr.add( msg._name )
+                mhdr = msg[0]
+                if mhdr[0]._name == 'TIPD':
+                    mid = (mhdr[0]['ProtDisc'].get_val(), mhdr['Type'].get_val())
+                else:
+                    mid = (mhdr['ProtDisc'].get_val(), mhdr['Type'].get_val())
+                Filter.add(mid)
+                FilterStr.add(msg._name)
         if Filter:
             cls.Filter, cls.FilterStr = Filter, FilterStr
     
@@ -522,7 +543,7 @@ class NASSigProc(SigProc):
         self.Name = self.__class__.__name__
         #
         # set empty dicts for the NAS messages of the instance
-        self.Encod = {msgid: {} for msgid in self.__class__.Encod}
+        self.Encod = {mid: {} for mid in self.__class__.Encod}
         #
         if encod:
             for k, v in encod.items():
@@ -543,26 +564,31 @@ class NASSigProc(SigProc):
         select specific IE decoders in self.Decod for the given message
         to potentially transform IE values collected
         """
-        self._nas_rx, payload, ProtDisc = msg, False, -1
-        for ie in msg._content:
-            if payload and not ie.get_trans():
+        self._nas_rx, pd, typ = msg, None, None
+        for ie in msg[0]._content:
+            # header
+            if ie._name == 'TIPD':
+                pd = ie['ProtDisc'].get_val()
+            elif ie._name == 'ProtDisc':
+                pd = ie.get_val()
+            elif ie._name == 'Type':
+                typ = ie.get_val()
+        if pd is None or typ is None:
+            self._log('WNG', 'decode_msg: no ProtDisc / Type found')
+            return
+        try:
+            Decod = self.Decod[(pd, typ)]
+        except:
+            self._log('WNG', 'decode_msg: no decoder dict found')
+            Decod = {}
+        #
+        for ie in msg._content[1:]:
+            if not ie.get_trans():
                 if ie._name in Decod:
                     ret[ie._name] = Decod[ie._name](ie)
                 else:
-                    # this will include potential unknown IE, which name will
-                    # be _T_$tag
+                    # this will include potential unknown IE, which name will be _T_$tag
                     ret[ie._name] = ie
-            elif ie._name == 'ProtDisc':
-                ProtDisc = ie()
-            elif ie._name == 'Type':
-                Type = ie()
-                # entering msg payload after this
-                payload = True
-                # get decoding transforms if defined
-                try:
-                    Decod = self.Decod[(ProtDisc, Type)]
-                except:
-                    Decod = {}
     
     def encode_msg(self, pd, typ):
         """encode the NAS msg from protocol discriminator `pd' and type `typ'
@@ -578,18 +604,20 @@ class NASSigProc(SigProc):
         
         this enables also to add IE that are not part of the original specification
         """
-        # select the instance encoder
+        mid = (pd, typ)
+        # get the instance encoder
         try:
-            Encod = self.Encod[(pd, typ)]
+            Encod = self.Encod[mid]
         except:
+            self._log('WNG', 'encode_msg: no encoder dict found')
             Encod = {}
-        # update it with the class encoder
-        ClaEncod = self.__class__.Encod[(pd, typ)]
+        # get the class encoder and update the instance's one
+        ClaEncod = self.__class__.Encod[mid]
         if ClaEncod:
             Encod.update(ClaEncod)
         #
         # instantiate the msg with those values
-        i, j = self.ContLUT[(pd, typ)]
+        i, j = self.ContLUT[mid]
         self._nas_tx = self.Cont[i][j](val=Encod)
         #
         # add potential unspecified extension

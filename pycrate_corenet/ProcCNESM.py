@@ -27,6 +27,27 @@
 # *--------------------------------------------------------
 #*/
 
+__all__ = [
+    'ESMSigProc',
+    'ESMDefaultEPSBearerCtxtAct',
+    'ESMDedicatedEPSBearerCtxtAct',
+    'ESMEPSBearerCtxtModif',
+    'ESMEPSBearerCtxtDeact',
+    'ESMPDNConnectivityRequest',
+    'ESMPDNDisconnectRequest',
+    'ESMBearerResourceAllocRequest',
+    'ESMBearerResourceModifRequest',
+    'ESMInfoRequest',
+    'ESMNotification',
+    'ESMDataTransportUE',
+    'ESMDataTransportCN',
+    #
+    'ESMProcUeDispatcher',
+    'ESMProcUeDispatcherStr',
+    'ESMProcCnDispatcher',
+    'ESMProcCnDispatcherStr'
+    ]
+
 from .utils      import *
 from .ProcProto  import *
 from .ProcCNS1ap import *
@@ -59,7 +80,7 @@ class ESMSigProc(NASSigProc):
     
     # potential timer
     Timer        = None
-    TimerDefault = 4
+    TimerDefault = 2
     
     if TESTING:
         def __init__(self, encod=None):
@@ -86,8 +107,27 @@ class ESMSigProc(NASSigProc):
     def decode_msg(self, msg, ret):
         NASSigProc.decode_msg(self, msg, ret)
         # add EPSBearerId and PTI into ret
-        ret['EPSBearerId'] = msg[0].get_val()
-        ret['PTI'] = msg[2].get_val()
+        ret['EPSBearerId'] = msg[0][0].get_val()
+        ret['PTI'] = msg[0][2].get_val()
+    
+    def set_msg(self, pd, typ, **kw):
+        """prepare a specific encoder dict for a given NAS message
+        """
+        # select the encoder and duplicate it
+        try:
+            Encod = self.Encod[(pd, typ)]
+        except:
+            return
+        ESMHeader = {}
+        if 'EPSBearerId' in kw:
+            ESMHeader['EPSBearerId'] = kw['EPSBearerId']
+            del kw['EPSBearerId']
+        if 'PTI' in kw:
+            ESMHeader['PTI'] = kw['PTI']
+            del kw['PTI']
+        if ESMHeader:
+            kw['ESMHeader'] = ESMHeader
+        Encod.update(kw)
     
     def output(self):
         self._log('ERR', 'output() not implemented')
@@ -118,7 +158,7 @@ class ESMSigProc(NASSigProc):
         self._log('INF', 'aborting')
     
     def rm_from_esm_stack(self):
-        # remove the procedure from the EMM stack of procedures
+        # remove the procedure from the ESM stack of procedures
         ProcStack = self.ESM.Proc[self._ebi]
         if ProcStack[-1] == self:
             del ProcStack[-1]
@@ -205,7 +245,7 @@ class ESMDefaultEPSBearerCtxtAct(ESMSigProc):
         - Type6TLVE : ExtProtConfig
 
         ESMActDefaultEPSBearerCtxtReject (PD 2, Type 195), IEs:
-        - Type2     : ESMCause
+        - Type3V    : ESMCause
         - Type4TLV  : ProtConfig
         - Type6TLVE : ExtProtConfig
     """
@@ -215,6 +255,7 @@ class ESMDefaultEPSBearerCtxtAct(ESMSigProc):
         (TS24301_ESM.ESMActDefaultEPSBearerCtxtAccept, TS24301_ESM.ESMActDefaultEPSBearerCtxtReject)
         )
     
+    Init  = (2, 193)
     Timer = 'T3485'
     
     def output(self):
@@ -346,7 +387,7 @@ class ESMDedicatedEPSBearerCtxtAct(ESMSigProc):
         - Type6TLVE : ExtProtConfig
 
         ESMActDediEPSBearerCtxtReject (PD 2, Type 199), IEs:
-        - Type2     : ESMCause
+        - Type3V    : ESMCause
         - Type4TLV  : ProtConfig
         - Type4TLV  : NBIFOMContainer
         - Type6TLVE : ExtProtConfig
@@ -357,6 +398,7 @@ class ESMDedicatedEPSBearerCtxtAct(ESMSigProc):
         (TS24301_ESM.ESMActDediEPSBearerCtxtAccept, TS24301_ESM.ESMActDediEPSBearerCtxtReject)
         )
     
+    Init  = (2, 197)
     Timer = 'T3485'
 
 
@@ -387,7 +429,7 @@ class ESMEPSBearerCtxtModif(ESMSigProc):
         - Type6TLVE : ExtProtConfig
 
         ESMModifyEPSBearerCtxtReject (PD 2, Type 203), IEs:
-        - Type2     : ESMCause
+        - Type3V    : ESMCause
         - Type4TLV  : ProtConfig
         - Type4TLV  : NBIFOMContainer
         - Type6TLVE : ExtProtConfig
@@ -398,6 +440,7 @@ class ESMEPSBearerCtxtModif(ESMSigProc):
         (TS24301_ESM.ESMModifyEPSBearerCtxtAccept, TS24301_ESM.ESMModifyEPSBearerCtxtReject)
         )
     
+    Init  = (2, 201)
     Timer = 'T3486'
 
 
@@ -408,7 +451,7 @@ class ESMEPSBearerCtxtDeact(ESMSigProc):
     
     CN message:
         ESMDeactEPSBearerCtxtRequest (PD 2, Type 205), IEs:
-        - Type2     : ESMCause
+        - Type3V    : ESMCause
         - Type4TLV  : ProtConfig
         - Type4TLV  : BackOffTimer
         - Type1TV   : WLANOffloadInd
@@ -426,6 +469,7 @@ class ESMEPSBearerCtxtDeact(ESMSigProc):
         (TS24301_ESM.ESMDeactEPSBearerCtxtAccept, )
         )
     
+    Init  = (2, 205)
     Timer = 'T3495'
 
 
@@ -441,7 +485,7 @@ class ESMPDNConnectivityRequest(ESMSigProc):
 
     CN message:
         ESMPDNConnectivityReject (PD 2, Type 209), IEs:
-        - Type2     : ESMCause
+        - Type3V    : ESMCause
         - Type4TLV  : ProtConfig
         - Type4TLV  : BackOffTimer
         - Type4TLV  : ReattemptInd
@@ -491,7 +535,7 @@ class ESMPDNConnectivityRequest(ESMSigProc):
             return NasProc.output()
         #
         else:
-            self.postprocess()
+            return self.postprocess()
     
     def postprocess(self, Proc=None):
         if isinstance(Proc, ESMInfoRequest):
@@ -508,29 +552,31 @@ class ESMPDNConnectivityRequest(ESMSigProc):
     def output(self):
         # process the whole transaction request
         NasProc, self.errcause = self.ESM.process_trans(self.UEInfo['PTI'])
-        # deny request or start an ESNDefaultEPSBearerCtxtAct
+        # deny request or start an ESMDefaultEPSBearerCtxtAct
         if self.errcause:
-            self.set_msg(2, 209, EPSBearerId=self.UEInfo['EPSBearerId'],
+            self.set_msg(2, 209, EPSBearerId=self._ebi,
                                  PTI=self.UEInfo['PTI'],
                                  ESMCause=self.errcause)
             self.encode_msg(2, 209)
             if self.TRACK_PDU:
                 self._pdu.append( (time(), 'DL', self._nas_tx) )
-            self.rm_from_esm_stack()
+            #
+            if self._EMMProc and self._EMMProc.Name == 'EMMAttach':
+                # reduild an AttachReject with EMMCause 19 (ESM error)
+                self._EMMProc.errcause = 19
+                self._EMMProc.set_msg(7, 68, EMMCause=self.errcause)
+                self._EMMProc.encode_msg(7, 68)
+                if not self._EMMProc._nas_rx._sec:
+                    self._EMMProc._nas_tx._sec = False
+                self._EMMProc.mtmsi_realloc = -1
+                self._EMMProc._log('INF', 'reject, %r' % self._EMMProc._nas_tx['EMMCause'])
             #
             NasTx = self.ESM.output_nas_esm(self._nas_tx, self._EMMProc)
+            self.rm_from_esm_stack()
             if not NasTx:
                 return []
             else:
                 return self.S1.ret_s1ap_dnt(NasTx)
-            
-            # TODO: infinite loop here !!!
-            
-            
-            
-            
-            
-            
         #
         else:
             # associate the new ESM procedure to the EMM procedure associated to self
@@ -549,7 +595,7 @@ class ESMPDNDisconnectRequest(ESMSigProc):
     
     CN message:
         ESMPDNDisconnectReject (PD 2, Type 211), IEs:
-        - Type2     : ESMCause
+        - Type3V    : ESMCause
         - Type4TLV  : ProtConfig
         - Type6TLVE : ExtProtConfig
     
@@ -575,7 +621,7 @@ class ESMBearerResourceAllocRequest(ESMSigProc):
     
     CN message:
         ESMBearerResourceAllocReject (PD 2, Type 213), IEs:
-        - Type2     : ESMCause
+        - Type3V    : ESMCause
         - Type4TLV  : ProtConfig
         - Type4TLV  : BackOffTimer
         - Type4TLV  : ReattemptInd
@@ -608,7 +654,7 @@ class ESMBearerResourceModifRequest(ESMSigProc):
     
     CN message:
         ESMBearerResourceModifReject (PD 2, Type 215), IEs:
-        - Type2     : ESMCause
+        - Type3V    : ESMCause
         - Type4TLV  : ProtConfig
         - Type4TLV  : BackOffTimer
         - Type4TLV  : ReattemptInd
@@ -660,6 +706,7 @@ class ESMInfoRequest(ESMSigProc):
         (TS24301_ESM.ESMInformationResponse, )
         )
     
+    Init  = (2, 217)
     Timer = 'T3489'
     
     def output(self):
@@ -715,7 +762,9 @@ class ESMNotification(ESMSigProc):
         (TS24301_ESM.ESMNotification, ),
         None
         )
-
+    
+    Init = (2, 2019)
+  
 
 class ESMRemoteUEReport(ESMSigProc):
     """Remote UE Report procedure: TS 24.301, section 6.6.3
@@ -777,6 +826,8 @@ class ESMDataTransportCN(ESMSigProc):
         (TS24301_ESM.ESMDataTransport, ),
         None
         )
+    
+    Init = (2, 235)
 
 
 ESMDefaultEPSBearerCtxtAct.init(filter_init=1)

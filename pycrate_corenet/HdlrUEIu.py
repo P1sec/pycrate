@@ -91,6 +91,7 @@ class UEIuSigStack(SigStack):
             self.unset_ctx()
     
     def set_ran(self, rncd):
+        # TODO: handle mobility from 1 RNC to another, and inter-RAT
         self.SEC['CKSN'] = None
         self.RNC = rncd
         self.connected.set()
@@ -260,45 +261,6 @@ class UEIuSigStack(SigStack):
         # clears all running RANAP CS/PS procedures
         for Proc in list(self.Proc.values()):
             Proc.abort()
-    
-    #--------------------------------------------------------------------------#
-    # NAS-related methods
-    #--------------------------------------------------------------------------#
-    
-    def ret_ranap_dt(self, NasTx, sapi=0):
-        """returns a RANAPDirectTransfer procedure initialize with the NAS PDU to 
-        be sent
-        """
-        if self.DOM == 'CS' and self.UE.TRACE_NAS_CS:
-            self._log('TRACE_NAS_CS_DL', '\n' + NasTx.show())
-        elif self.DOM == 'PS' and self.UE.TRACE_NAS_PS:
-            self._log('TRACE_NAS_PS_DL', '\n' + NasTx.show())
-        try:
-            naspdu = NasTx.to_bytes()
-        except Exception as err:
-            self._log('ERR', 'unable to encode the NAS PDU: %r' % err)
-            return []
-        else:
-            if sapi == 3:
-                sapi = 'sapi-3'
-            else:
-                sapi = 'sapi-0'
-            RanapProc = self.init_ranap_proc(RANAPDirectTransferCN,
-                                             NAS_PDU=naspdu,
-                                             SAPI=sapi)
-            if RanapProc:
-                return [RanapProc]
-            else:
-                return []
-    
-    def trigger_nas(self, RanapProc):
-        # this is used by IuCS/PS RANAP procedures to recall an ongoing NAS procedure
-        # e.g. SMC to recall a LUR or Attach
-        if RanapProc._cb is None:
-            # no callback set, this is actually useless
-            return []
-        NasProc = RanapProc._cb
-        return NasProc.postprocess(RanapProc)
     
     #--------------------------------------------------------------------------#
     # SMC and security-related methods
@@ -620,10 +582,49 @@ class UEIuSigStack(SigStack):
         return self._send_to_rnc_ranap([RanapProc])
     
     #--------------------------------------------------------------------------#
+    # NAS-related methods
+    #--------------------------------------------------------------------------#
+    
+    def ret_ranap_dt(self, NasTx, sapi=0):
+        """returns a RANAPDirectTransfer procedure initialize with the NAS PDU to 
+        be sent
+        """
+        if self.DOM == 'CS' and self.UE.TRACE_NAS_CS:
+            self._log('TRACE_NAS_CS_DL', '\n' + NasTx.show())
+        elif self.DOM == 'PS' and self.UE.TRACE_NAS_PS:
+            self._log('TRACE_NAS_PS_DL', '\n' + NasTx.show())
+        try:
+            naspdu = NasTx.to_bytes()
+        except Exception as err:
+            self._log('ERR', 'unable to encode the NAS PDU: %r' % err)
+            return []
+        else:
+            if sapi == 3:
+                sapi = 'sapi-3'
+            else:
+                sapi = 'sapi-0'
+            RanapProc = self.init_ranap_proc(RANAPDirectTransferCN,
+                                             NAS_PDU=naspdu,
+                                             SAPI=sapi)
+            if RanapProc:
+                return [RanapProc]
+            else:
+                return []
+    
+    def trigger_nas(self, RanapProc):
+        # this is used by IuCS/PS RANAP procedures to recall an ongoing NAS procedure
+        # e.g. SMC to recall a LUR or Attach
+        if RanapProc._cb is None:
+            # no callback set, this is actually useless
+            return []
+        NasProc = RanapProc._cb
+        return NasProc.postprocess(RanapProc)
+    
+    #--------------------------------------------------------------------------#
     # to send arbitrary NAS buffers to the UE
     #--------------------------------------------------------------------------#
     
-    def send_nas_raw(self, naspdu, sapi=0, rx_hook=lambda x:None, wait_t=1):
+    def send_nas_raw(self, naspdu, sapi=0, rx_hook=lambda x:[], wait_t=1):
         """Sends whatever bytes, or list of bytes, to the UE as NAS PDU(s)
         """
         if not self._net_init_con():
@@ -654,10 +655,6 @@ class UEIuSigStack(SigStack):
             for pdu in naspdu:
                 ret = self.send_nas_raw(pdu, sapi, rx_hook, wait_t=1)
                 if not ret:
-                    try:
-                        del self.RX_HOOK
-                    except:
-                        pass
                     return False
         #
         del self.RX_HOOK
