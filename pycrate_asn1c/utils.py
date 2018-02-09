@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 # /**
 # * Software Name : pycrate
-# * Version : 0.2
+# * Version : 0.3
 # *
 # * Copyright © 2016. Benoit Michau. ANSSI.
 # *

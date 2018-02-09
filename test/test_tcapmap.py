@@ -16,7 +16,7 @@
 # *
 # *
 # * Software Name : pycrate
-# * Version : 0.2
+# * Version : 0.3
 # *
 # * Copyright 2017 Benoit Michau. ANSSI.
 # *
