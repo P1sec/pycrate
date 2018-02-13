@@ -82,7 +82,7 @@ class AuC:
     DEBUG = ('ERR', 'WNG', 'INF', 'DBG')
     
     AUC_DB_PATH = os.path.dirname(os.path.abspath( __file__ )) + os.sep
-    #AuC_db_path = 'C:\Python27\Lib\sitepackages\pycrate_corenet\'
+    #AUC_DB_PATH = 'C:\Python27\Lib\sitepackages\pycrate_corenet\'
     
     # when rewriting the AuC.db, do a back-up of the last version of the file
     DO_BACKUP = True

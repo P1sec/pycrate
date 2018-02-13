@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.2
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
 # *
@@ -171,9 +171,6 @@ class UEd(SigStack):
                 self.S1.ESM.PDNConfig[apn] = apncfg
     
     def set_ran(self, ran, ctx_id, sid=None, dom=None):
-        # TODO: handle properly mobility between RNC / eNB
-        # for Iu reconnection, handle domain correclty, together within ProcCNRua
-        
         # UE going connected
         if ran.__class__.__name__ == 'HNBd':
             #
@@ -280,6 +277,7 @@ class UEd(SigStack):
                     if cksn in self.IuPS.SEC and cksn not in iupsd.SEC:
                         iupsd.SEC[cksn] = self.IuPS.SEC[cksn]
                 # merge PDP contexts
+                iupsd.SM.PDPConfig = self.SM.PDPConfig
                 for nsapi in range(16):
                     if nsapi in self.IuPS.SM.PDP and nsapi not in iupsd.SM.PDP:
                         iupsd.SM.PDP[nsapi] = self.IuPS.SM.PDP[nsapi]
@@ -307,9 +305,10 @@ class UEd(SigStack):
                     if ksi in self.S1.SEC and ksi not in s1d.SEC:
                         s1d.SEC[ksi] = self.S1.SEC[ksi]
                 # merge PDN contexts
+                s1d.ESM.PDNConfig = self.S1.ESM.PDNConfig
                 for ebi in range(16):
                     if ebi in self.S1.ESM.PDN and ebi not in s1d.ESM.PDN:
-                        s1d.ESM.PDN[ebi] = self.S1.ESM.PDP[ebi]
+                        s1d.ESM.PDN[ebi] = self.S1.ESM.PDN[ebi]
         # transfer UE's reference
         self.S1    = s1d
         s1d.UE     = self
