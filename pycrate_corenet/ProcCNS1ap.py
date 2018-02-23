@@ -1602,6 +1602,17 @@ class S1APResetCN(S1APNonUESigProc):
         'suc': ({}, {}),
         'uns': None
         }
+    
+    send = S1APNonUESigProc._send
+    
+    def recv(self, pdu):
+        self._recv(pdu)
+        try:
+            del self.ENB.Proc[self.Code]
+        except:
+            pass
+        if not self.errcause:
+            self._log('INF', 'success')
 
 
 class S1APResetENB(S1APNonUESigProc):
@@ -1637,6 +1648,43 @@ class S1APResetENB(S1APNonUESigProc):
         'suc': ({}, {}),
         'uns': None
         }
+    
+    def recv(self, pdu):
+        self._recv(pdu)
+        if not self.errcause:
+            if self.ENBInfo['ResetType'][0] == 's1-Interface':
+                # reset all resources
+                self._log('INF', 'complete s1 interface, cause %r' % (self.ENBInfo['Cause'], ))
+                for ue in self.ENB.UE.values():
+                    ue.S1.unset_ran()
+                    ue.S1.unset_ctx()
+                # prepare the reset response
+                self.encode_pdu('suc')
+                
+            else:
+                # reset only listed resources
+                self._log('INF', 'part of s1 interface, cause %r' % (self.ENBInfo['Cause'], ))
+                # get the list of enb-ue-id to reset
+                ue_res_list, ue_ack_list = self.ENBInfo['ResetType'][1], []
+                for res in ue_res_list:
+                    if res['id'] == 91 and res['Value'][0] == 'UE-associatedLogicalS1-ConnectionItem':
+                        conitem = res['Value'][1]
+                        if 'eNB-UE-S1AP-ID' in conitem:
+                            uectx = conitem['eNB-UE-S1AP-ID']
+                        elif 'mME-UE-S1AP-ID' in conitem:
+                            uectx = conitem['mME-UE-S1AP-ID']
+                        else:
+                            uectx = None
+                        if uectx is not None:
+                            if uectx in self.ENB.UE:
+                                ue = self.ENB.UE[enbid]
+                                ue.S1.unset_ran()
+                                ue.S1.unset_ctx()
+                            ue_ack_list.append(res)
+                # prepare the reset response
+                self.encode_pdu('suc', E_associatedLogicalS1_ConnectionListResAck=ue_ack_list)
+    
+    send = S1APNonUESigProc._send
 
 
 class S1APErrorIndNonUECN(S1APNonUESigProc):
@@ -2158,7 +2206,7 @@ class S1APUECapabilityInfoInd(S1APSigProc):
             if 'UERadioCapabilityForPaging' in self.UEInfo:
                 self.UE.Cap['UERadioCapPaging'] = (self.UEInfo['UERadioCapabilityForPaging'],
                                                    None, None)
-            
+
 
 #------------------------------------------------------------------------------#
 # Trace Procedures
@@ -2195,6 +2243,8 @@ class S1APTraceStart(S1APSigProc):
         'suc': None,
         'uns': None
         }
+    
+    send = S1APSigProc._send
 
 
 class S1APTraceFailureInd(S1APSigProc):
@@ -2217,7 +2267,11 @@ class S1APTraceFailureInd(S1APSigProc):
     
     # Custom decoders
     Decod = {
-        'ini': ({}, {}),
+        'ini': ({
+            'E_UTRAN_Trace_ID': lambda x: (plmn_buf_to_str(x[:3]),
+                                           bytes_to_uint(x[3:6], 24), 
+                                           bytes_to_uint(x[6:8], 16)),
+            }, {}),
         'suc': None,
         'uns': None
         }
@@ -2228,6 +2282,16 @@ class S1APTraceFailureInd(S1APSigProc):
         'suc': None,
         'uns': None
         }
+    
+    def recv(self, pdu):
+        self._recv(pdu)
+        if not self.errcause:
+            # just log the failure
+            self._log('INF', 'trace id %s.%.6x.%.4x, cause %r'\
+                      % (self.UEInfo['E_UTRAN_Trace_ID'][0],
+                         self.UEInfo['E_UTRAN_Trace_ID'][1],
+                         self.UEInfo['E_UTRAN_Trace_ID'][2],
+                         self.UEInfo['Cause']))
 
 
 class S1APDeactivateTrace(S1APSigProc):
@@ -2260,6 +2324,8 @@ class S1APDeactivateTrace(S1APSigProc):
         'suc': None,
         'uns': None
         }
+    
+    send = S1APSigProc._send
 
 
 class S1APCellTrafficTrace(S1APSigProc):
@@ -2284,7 +2350,13 @@ class S1APCellTrafficTrace(S1APSigProc):
     
     # Custom decoders
     Decod = {
-        'ini': ({}, {}),
+        'ini': ({
+            'E_UTRAN_Trace_ID': lambda x: (plmn_buf_to_str(x[:3]),
+                                           bytes_to_uint(x[3:6], 24), 
+                                           bytes_to_uint(x[6:8], 16)),
+            'EUTRAN_CGI': lambda x: (plmn_buf_to_str(x['pLMNidentity']),
+                                     cellid_bstr_to_str(x['cell-ID'])),
+            }, {}),
         'suc': None,
         'uns': None
         }
@@ -2295,6 +2367,27 @@ class S1APCellTrafficTrace(S1APSigProc):
         'suc': None,
         'uns': None
         }
+    
+    def recv(self, pdu):
+        self._recv(pdu)
+        if not self.errcause:
+            # convert the TLA
+            if self.UEInfo['TransportLayerAddress'][1] == 32:
+                # IPv4
+                addr = inet_ntoa_cn(1, uint_to_bytes(self.UEInfo['TransportLayerAddress'][0], 32))
+            elif self.UEInfo['TransportLayerAddress'][1] == 128:
+                # IPv6
+                addr = inet_ntoa_cn(2, uint_to_bytes(self.UEInfo['TransportLayerAddress'][0], 128))
+            else:
+                addr = uint_to_bytes(*self.UEInfo['TransportLayerAddress'])
+            # just log the indications
+            self._log('INF', 'trace id %s.%.6x.%.4x, EUTRAN CGI %s.%s, address %s'\
+                      % (self.UEInfo['E_UTRAN_Trace_ID'][0],
+                         self.UEInfo['E_UTRAN_Trace_ID'][1],
+                         self.UEInfo['E_UTRAN_Trace_ID'][2],
+                         self.UEInfo['EUTRAN_CGI'][0],
+                         self.UEInfo['EUTRAN_CGI'][1],
+                         addr))
 
 
 #------------------------------------------------------------------------------#
@@ -2332,6 +2425,8 @@ class S1APLocationReportingControl(S1APSigProc):
         'suc': None,
         'uns': None
         }
+    
+    send = S1APSigProc._send
 
 
 class S1APLocationReportFailure(S1APSigProc):
@@ -2364,6 +2459,12 @@ class S1APLocationReportFailure(S1APSigProc):
         'suc': None,
         'uns': None
         }
+    
+    def recv(self, pdu):
+        self._recv(pdu)
+        if not self.errcause:
+            # just log the failure
+            self._log('INF', 'cause %r' % (self.UEInfo['Cause'], ))
 
 
 class S1APLocationReport(S1APSigProc):
@@ -2387,7 +2488,12 @@ class S1APLocationReport(S1APSigProc):
     
     # Custom decoders
     Decod = {
-        'ini': ({}, {}),
+        'ini': ({
+            'TAI'       : lambda x: (plmn_buf_to_str(x['pLMNidentity']),
+                                     bytes_to_uint(x['tAC'], 16)),
+            'EUTRAN_CGI': lambda x: (plmn_buf_to_str(x['pLMNidentity']),
+                                     cellid_bstr_to_str(x['cell-ID']))
+            }, {}),
         'suc': None,
         'uns': None
         }
@@ -2398,7 +2504,18 @@ class S1APLocationReport(S1APSigProc):
         'suc': None,
         'uns': None
         }
-
+    
+    def recv(self, pdu):
+        self._recv(pdu)
+        if not self.errcause:
+            # just log the failure
+            self._log('INF', 'reqtype %s, TAI %s.%.4x, EUTRAN CGI %s.%s'\
+                      % (self.UEInfo['RequestType'],
+                         self.UEInfo['TAI'][0],
+                         self.UEInfo['TAI'][1],
+                         self.UEInfo['EUTRAN_CGI'][0],
+                         self.UEInfo['EUTRAN_CGI'][1]
+                         ))
 
 #------------------------------------------------------------------------------#
 # Warning Message Transmission Procedures
@@ -2449,6 +2566,26 @@ class S1APWriteReplaceWarning(S1APNonUESigProc):
         'suc': ({}, {}),
         'uns': None
         }
+    
+    send = S1APNonUESigProc._send
+    
+    def recv(self, pdu):
+        self._recv(pdu)
+        try:
+            del self.ENB.Proc[self.Code]
+        except:
+            pass
+        if not self.errcause:
+            msgid, sernum = self.ENBInfo['MessageIdentifier'][0], self.ENBInfo['SerialNumber'][0]
+            if msgid != self._NetInfo['MessageIdentifier'][0]:
+                self._log('MessageIdentifier mismatch: 0x%.4x instead of 0x%.4x'\
+                          % (msgid, self._NetInfo['MessageIdentifier'][0]))
+            elif 'BroadcastCompletedAreaList' not in self.ENBInfo \
+            or not self.ENBInfo['BroadcastCompletedAreaList']:
+                self._log('broadcasting failed')
+            else:
+                self.ENB.WARN[(msgid, sernum)] = self._NetInfo
+                self._log('INF', 'broadcasting warning message')
 
 
 class S1APKill(S1APNonUESigProc):
@@ -2488,6 +2625,17 @@ class S1APKill(S1APNonUESigProc):
         'suc': ({}, {}),
         'uns': None
         }
+    
+    send = S1APNonUESigProc._send
+    
+    def recv(self, pdu):
+        self._recv(pdu)
+        try:
+            del self.ENB.Proc[self.Code]
+        except:
+            pass
+        if not self.errcause:
+            self._log('INF', 'stopped broadcasting warning message')
 
 
 class S1APPWSRestartInd(S1APNonUESigProc):

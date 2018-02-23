@@ -418,7 +418,11 @@ def served_gummei_to_asn(val):
 def mac_aton(mac='00:00:00:00:00:00'):
     return unhexlify(mac.replace(':', ''))
 
-def inet_aton_cn(*pdnaddr, dom='EPS'):
+def inet_aton_cn(*pdnaddr, **kw):
+    """convert a PDN / PDP address tuple to a buffer
+    kw can be:
+        - dom: 'PS' or 'EPS'
+    """
     if pdnaddr[0] == 0:
         # PPP address
         return pdnaddr[1]
@@ -443,7 +447,7 @@ def inet_aton_cn(*pdnaddr, dom='EPS'):
                 return ipaddr
     elif pdnaddr[0] == 3:
         # IPv4v6 addresses
-        if dom == 'EPS':
+        if 'dom' in kw and kw['dom'] == 'EPS':
             # PDN address
             try:
                 return inet_aton_cn(2, pdnaddr[2]) + inet_aton_cn(1, pdnaddr[1])
@@ -462,6 +466,8 @@ def inet_aton_cn(*pdnaddr, dom='EPS'):
         return pdnaddr[1]
 
 def inet_ntoa_cn(pdntype, buf, dom='EPS'):
+    """convert a buffer for a given pdntype and domain to a humane-readable address
+    """
     if pdntype == 0:
         # PPP address
         return (pdntype, buf)

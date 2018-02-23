@@ -28,10 +28,12 @@
 
 __all__ = ['SMSd']
 
-from queue  import Queue, Empty, Full
 from time   import localtime
 from .utils import *
-# -> TS23038 and TS23040_SMS are available under the NAS module
+if python_version < 3:
+    from Queue import Queue, Empty, Full
+else:
+    from queue import Queue, Empty, Full
 
 
 class SMSd(object):
@@ -436,12 +438,18 @@ class SMSd(object):
     #--------------------------------------------------------------------------#
     
     def send_text(self, text, num):
+        """sends a given text (ascii string, that will be converted to SMS 7bit)
+        to a given phone number
+        """
         tp_dcs = self.TP_DCS
         self.TP_DCS = {'Group': 0, 'Charset': 0, 'Class': 0} # GSM 7bit
         self.send_tpud(text, num=num)
         self.TP_DCS = tp_dcs
     
-    def send_tpud(self, *ud, num):
+    def send_tpud(self, ud, num):
+        """sends a given user-data (a buffer, or a tuple of buffers for inserting options)
+        to a given phone number
+        """
         # TODO: implement SMS UD fragmentation into several tp_msg
         try:
             tp_msg = NAS.SMS_DELIVER(val={'TP_MMS': 1, # no more messages
@@ -449,13 +457,16 @@ class SMSd(object):
                                           'TP_PID': self.TP_PID,
                                           'TP_DCS': self.TP_DCS})
             self._set_tp_scts(tp_msg['TP_SCTS'])
-            if len(ud) > 1:
-                # UD header IEs
-                tp_msg['TP_UDHI'].set_val(1)
-                tp_msg['TP_UD']['UDH']['UDH'].set_val(ud[:-1])
-            tp_msg['TP_UD']['UD'].set_val(ud[-1])
+            if isinstance(ud, (list, tuple)):
+                if len(ud) > 1:
+                    # UD header IEs
+                    tp_msg['TP_UDHI'].set_val(1)
+                    tp_msg['TP_UD']['UDH']['UDH'].set_val(ud[:-1])
+                data = ud[-1]
+            else:
+                data = ud
+            tp_msg['TP_UD']['UD'].set_val(data)
         except:
             self._log('WNG', 'invalid TP UD')
         else:
             self._inject_tp(tp_msg, num)
-    
