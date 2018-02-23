@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.2
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
 # *
@@ -275,20 +275,22 @@ class PLMN(Buf):
         """
         if python_version < 3:
             num = [ord(c) for c in self.get_val()]
+            join_init = u''
         else:
             num = self.get_val()
+            join_init = ''
         plmn = []
         [plmn.extend((o>>4, o&0xF)) for o in num]
         if plmn[2] == 15:
             # 3-digits MNC
-            return ''.join((str(plmn[1]), str(plmn[0]), str(plmn[3]),
-                            str(plmn[5]), str(plmn[4])))
+            return join_init.join((str(plmn[1]), str(plmn[0]), str(plmn[3]),
+                                   str(plmn[5]), str(plmn[4])))
         else:
             # 3-digits MNC
-            return ''.join((str(plmn[1]), str(plmn[0]), str(plmn[3]),
-                            str(plmn[5]), str(plmn[4]), str(plmn[2])))
+            return join_init.join((str(plmn[1]), str(plmn[0]), str(plmn[3]),
+                                   str(plmn[5]), str(plmn[4]), str(plmn[2])))
     
-    def encode(self, plmn='00101'):
+    def encode(self, plmn=u'00101'):
         """encode the given PLMN string and store the resulting buffer in 
         self._val
         """
@@ -303,7 +305,9 @@ class PLMN(Buf):
         #
         if python_version > 2:
             plmn = tuple(plmn)
-        self._val = unhexlify(''.join((plmn[1], plmn[0], plmn[5], plmn[2], plmn[4], plmn[3])))
+            self._val = unhexlify(''.join((plmn[1], plmn[0], plmn[5], plmn[2], plmn[4], plmn[3])))
+        else:
+            self._val = unhexlify(str(''.join((plmn[1], plmn[0], plmn[5], plmn[2], plmn[4], plmn[3]))))
     
     def repr(self):
         # special hexdump representation
