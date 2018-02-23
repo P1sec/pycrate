@@ -34,7 +34,9 @@ __all__ = [
     'SMS_DCS',
     'CBS_DCS',
     'encode_7b',
-    'decode_7b'
+    'decode_7b',
+    'encode_7b_cbs',
+    'decode_7b_cbs'
     ]
 
 #------------------------------------------------------------------------------#
@@ -545,7 +547,7 @@ _GSM7bExtLUTInv = {
 
 
 def encode_7b(txt):
-    """translates the unicode txt to a GSM 7 bit characters buffer
+    """translates the unicode string `txt' to a GSM 7 bit characters buffer
     """
     arr, cnt = [], 0
     for c in reversed(txt):
@@ -572,7 +574,7 @@ def encode_7b(txt):
 
 
 def decode_7b(buf):
-    """translates the GSM 7 bit characters buffer buf to an unicode string
+    """translates the GSM 7 bit characters buffer `buf' to an unicode string
     """ 
     if python_version < 3:
         char = Charpy(''.join(reversed(buf)))
@@ -596,4 +598,53 @@ def decode_7b(buf):
         else:
             chars.append(_GSM7bLUT[v])
     return u''.join(reversed(chars))
+
+
+def encode_7b_cbs(txt):
+    """translates the unicode string `txt' into a tuple of page(s) 
+    containing GSM 7 bit characters, ready for broadcast
+    
+    a page is a 2-tuple: 82-bytes buffer, message length (<= 82)
+    """
+    pages, page, cnt = [], [], 0
+    # check the number of 7 bit characters required for txt
+    for c in txt:
+        if c in _GSM7bLUTInv:
+            c_cnt = 1
+        elif c in _GSM7bExtLUTInv:
+            c_cnt = 2
+        else:
+            raise(PycrateErr('invalid GSM 7 bit char: %r' % c))
+        if cnt + c_cnt < 94:
+            page.append(c)
+            cnt += c_cnt
+        else:
+            # encode the current page to pages
+            enc = encode_7b(''.join(page))[0]
+            enc_len = len(enc)
+            if enc_len < 82:
+                enc += (82-enc_len) * b'\0'
+            pages.append( (enc, enc_len) )
+            # restart filling current page
+            page, cnt = [c], c_cnt
+    # pad and append last page
+    if page:
+        last = encode_7b(''.join(page))[0]
+        last_len = len(last)
+        last += (82-last_len) * b'\0'
+        pages.append( (last, last_len) )
+    # return the tuple of pages
+    return tuple(pages)
+
+
+def decode_7b_cbs(pages):
+    """translates a tuple of `pages' containing GSM 7 bit characters to an 
+    unicode string
+    
+    a page is a 2-tuple: 82-bytes buffer, message length (<= 82)
+    """
+    txt = []
+    for page, page_len in pages:
+        txt.append( decode_7b(page[:page_len]) )
+    return u''.join(txt)
 
