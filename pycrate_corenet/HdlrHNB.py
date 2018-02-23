@@ -69,12 +69,6 @@ class HNBd(SigStack):
     # All HNBs clients are given the same RNC-ID (uint16)
     RNC_ID = 0x0010
     
-    # dict to link context-id -> UEd instance
-    # should be the same context-id for HNBAP, IuCS and IuPS
-    UE_HNBAP = {}
-    UE_IuCS  = {}
-    UE_IuPS  = {}
-    
     #--------------------------------------------------------------------------#
     # UERegistration policy
     #--------------------------------------------------------------------------#
@@ -98,7 +92,12 @@ class HNBd(SigStack):
         self.connect(server, sk)
         #
         # init HNB config dict
-        self.Config = {}
+        self.Config = {}    
+        # dict to link context-id -> UEd instance
+        # should be the same context-id for HNBAP, IuCS and IuPS
+        UE_HNBAP = {}
+        UE_IuCS  = {}
+        UE_IuPS  = {}
         #
         # dict of ongoing resquest-response CN-initiated RAN procedures 
         # indexed by their procedure code

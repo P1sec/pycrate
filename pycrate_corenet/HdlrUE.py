@@ -68,10 +68,6 @@ class UEd(SigStack):
     IMSI   = None
     IMEI   = None
     IMEISV = None
-    # capabilities
-    Cap    = {}
-    # security capabilities
-    SecCap = {RAT_GERA: set(), RAT_UTRA: set(), RAT_EUTRA: set()} 
     # temporary identities (TMSI / PTMSI are uint32)
     TMSI   = None
     PTMSI  = None
@@ -119,6 +115,9 @@ class UEd(SigStack):
             self.PTMSI = kw['ptmsi']
         elif 'mtmsi' in kw:
             self.MTMSI = kw['mtmsi']
+        #
+        # init capabilities
+        self.Cap = {}
         #
         # set handler for IuCS, IuPS and S1 links
         self.IuCS = UEIuCSd(self)
