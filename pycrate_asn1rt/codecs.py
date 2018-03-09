@@ -1334,26 +1334,25 @@ class ASN1CodecBER(ASN1Codec):
     
     @classmethod
     def decode_tag(cla, char):
-        # get tag class
-        cl = char.get_uint(2)
-        # get the Primitive/Constructed bit
-        pc = char.get_uint(1)
-        # get the tag value
-        val = char.get_uint(5)
+        # get tag class, Primitive/Constructed bit, value
+        B = char.get_uint(8)
+        cl, pc, val = B >> 6, (B >> 5) & 0x1, B & 0x1f
         if val == 31:
-            # extended value for the tag: each byte, MSB is 1 if another byte
-            # is required, MSB is 0 for the last byte;
+            # extended value for the tag: 
+            # each byte, MSB is 1 if another byte is required, 
+            # MSB is 0 for the last byte;
             # hence, the value is encoded with 7-bits chunks
-            c, d = char.get_uint(1), 0
-            val = char.get_uint(7)
-            while c == 1:
-                c = char.get_uint(1)
+            B = char.get_uint(8)
+            cnt, more, val = 0, B >> 7, B & 0x7f
+            while more:
+                B = char.get_uint(8)
+                more = B >> 7
                 val <<= 7
-                val += char.get_uint(7)
-                d += 1
-                if d == cla.DEC_MAXT:
+                val += B & 0x7f
+                cnt += 1
+                if cnt == cla.DEC_MAXT:
                     raise(ASN1BERDecodeErr('tag too long, more than {0!r} bytes'.format(d)))
-        return cl, pc, val
+        return cl, pc, val    
     
     @classmethod
     def encode_tag_ws(cla, cl, pc, val):
@@ -1394,7 +1393,7 @@ class ASN1CodecBER(ASN1Codec):
                                  Uint('Val', bl=7)))
         Len._from_char(char)
         if Len[0].get_val() == 1:
-            ll = Len[1].get_val() 
+            ll = Len[1].get_val()
             if ll == 0:
                 # undefinite length format
                 # shall only happen for constructed types
@@ -1415,10 +1414,11 @@ class ASN1CodecBER(ASN1Codec):
     
     @classmethod
     def decode_len(cla, char):
-        form = char.get_uint(1)
-        if form == 1:
-            ll = char.get_uint(7)
-            if ll == 0:
+        B = char.get_uint(8)
+        form = B >> 7
+        if form:
+            ll = B & 0x7f
+            if not ll:
                 # undefinite length format
                 return -1
             elif ll > cla.DEC_MAXL:
@@ -1428,7 +1428,7 @@ class ASN1CodecBER(ASN1Codec):
                 # long format
                 return char.get_uint(8*ll)
         else:
-            return char.get_uint(7)
+            return B & 0x7f
     
     @classmethod
     def encode_len_ws(cla, l):
@@ -1607,9 +1607,12 @@ class ASN1CodecBER(ASN1Codec):
 class ASN1CodecCER(ASN1CodecBER):
     pass
 
+
 class ASN1CodecDER(ASN1CodecBER):
     pass
 
+
 class ASN1CodecGSER(ASN1Codec):
+    # TODO: implement this
     pass
 
