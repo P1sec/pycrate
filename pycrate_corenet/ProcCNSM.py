@@ -138,10 +138,13 @@ class SMSigProc(NASSigProc):
     
     def rm_from_sm_stack(self):
         # remove the procedure from the SM stack of procedures
-        if self._tid in self.SM.Proc:
-            ProcStack = self.SM.Proc[self._tid]
-            if ProcStack[-1] == self:
-                del ProcStack[-1]
+        try:
+            if self._tid in self.SM.Proc:
+                ProcStack = self.SM.Proc[self._tid]
+                if ProcStack[-1] == self:
+                    del ProcStack[-1]
+        except:
+            self._log('WNG', 'SM stack corrupted')
     
     def init_timer(self):
         if self.Timer is not None:

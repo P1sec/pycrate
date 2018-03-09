@@ -2669,6 +2669,11 @@ class S1APPWSRestartInd(S1APNonUESigProc):
         'suc': None,
         'uns': None
         }
+    
+    def recv(self, pdu):
+        self._recv(pdu)
+        if not self.errcause:
+            self._log('INF', 'restarting broascasting warning message')
 
 
 class S1APPWSFailureInd(S1APNonUESigProc):
@@ -2700,6 +2705,11 @@ class S1APPWSFailureInd(S1APNonUESigProc):
         'suc': None,
         'uns': None
         }
+    
+    def recv(self, pdu):
+        self._recv(pdu)
+        if not self.errcause:
+            self._log('INF', 'failure broascasting warning message')
 
 
 #------------------------------------------------------------------------------#

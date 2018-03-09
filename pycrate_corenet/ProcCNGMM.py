@@ -132,11 +132,15 @@ class GMMSigProc(NASSigProc):
     
     def rm_from_gmm_stack(self):
         # remove the procedure from the GMM stack of procedures
-        if self.GMM.Proc[-1] == self:
-            del self.GMM.Proc[-1]
-        if self._gmm_preempt:
-            # release the GMM stack
-            self.GMM.ready.set()
+        try:
+            if self.GMM.Proc[-1] == self:
+                del self.GMM.Proc[-1]
+        except:
+            self._log('WNG', 'GMM stack corrupted')
+        else:
+            if self._gmm_preempt:
+                # release the GMM stack
+                self.GMM.ready.set()
     
     def init_timer(self):
         if self.Timer is not None:

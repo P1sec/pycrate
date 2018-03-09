@@ -144,11 +144,15 @@ class EMMSigProc(NASSigProc):
     
     def rm_from_emm_stack(self):
         # remove the procedure from the EMM stack of procedures
-        if self.EMM.Proc[-1] == self:
-            del self.EMM.Proc[-1]
-        if self._emm_preempt:
-            # release the EMM stack
-            self.EMM.ready.set()
+        try:
+            if self.EMM.Proc[-1] == self:
+                del self.EMM.Proc[-1]
+        except:
+            self._log('WNG', 'EMM stack corrupted')
+        else:
+            if self._emm_preempt:
+                # release the EMM stack
+                self.EMM.ready.set()
     
     def init_timer(self):
         if self.Timer is not None:
@@ -917,8 +921,11 @@ class EMMAttach(EMMSigProc):
         else:
             # no auth procedure, ksi submitted by the UE is valid
             # set UL NAS count for further KeNB derivation
-            secctx = self.S1.SEC[self.S1.SEC['KSI']]
-            secctx['UL_enb'] = self._nas_rx._ulcnt
+            try:
+                secctx = self.S1.SEC[self.S1.SEC['KSI']]
+                secctx['UL_enb'] = self._nas_rx._ulcnt
+            except:
+                pass
             if self.EMM.require_smc(self):
                 return self._ret_smc(self.UEInfo['NAS_KSI'])
             else:
@@ -956,8 +963,11 @@ class EMMAttach(EMMSigProc):
             if self.EMM.require_auth(self, ksi=self.UEInfo['NAS_KSI']):
                 return self._ret_auth()
             else:
-                secctx = self.S1.SEC[self.S1.SEC['KSI']]
-                secctx['UL_enb'] = self._nas_rx._ulcnt
+                try:
+                    secctx = self.S1.SEC[self.S1.SEC['KSI']]
+                    secctx['UL_enb'] = self._nas_rx._ulcnt
+                except:
+                    pass
                 if self.EMM.require_smc(self):
                     return self._ret_smc(self.UEInfo['NAS_KSI'])
         #
@@ -1352,10 +1362,10 @@ class EMMTrackingAreaUpdate(EMMSigProc):
         self.upd_type = upd_type.get_val()
         if self.upd_type[1] in (1, 2):
             # combined TA / LA update
-            if 'TMSIStatus' in self.UEInfo or 'TMSIBasedNRICont' in self.UEInfo:
-                self.upd_res = 1
-            else:
-                self.upd_res = 0
+            self.upd_res = 1
+            if 'TMSIStatus' not in self.UEInfo and 'TMSIBasedNRICont' not in self.UEInfo:
+                self._log('INF', 'combined TA/LA requested, but not TMSIStatus neither '\
+                          'TMSIBasedNRICont provided')
         else:
             self.upd_res = 0
         self._log('INF', upd_type.repr())
@@ -1378,8 +1388,11 @@ class EMMTrackingAreaUpdate(EMMSigProc):
         else:
             # no auth procedure, ksi submitted by the UE is valid
             # set UL NAS count for further KeNB derivation
-            secctx = self.S1.SEC[self.S1.SEC['KSI']]
-            secctx['UL_enb'] = self._nas_rx._ulcnt
+            try:
+                secctx = self.S1.SEC[self.S1.SEC['KSI']]
+                secctx['UL_enb'] = self._nas_rx._ulcnt
+            except:
+                pass
             if self.EMM.require_smc(self):
                 return self._ret_smc(self.UEInfo['NAS_KSI'])
             else:
@@ -1410,8 +1423,11 @@ class EMMTrackingAreaUpdate(EMMSigProc):
             if self.EMM.require_auth(self, ksi=self.UEInfo['NAS_KSI']):
                 return self._ret_auth()
             else:
-                secctx = self.S1.SEC[self.S1.SEC['KSI']]
-                secctx['UL_enb'] = self._nas_rx._ulcnt
+                try:
+                    secctx = self.S1.SEC[self.S1.SEC['KSI']]
+                    secctx['UL_enb'] = self._nas_rx._ulcnt
+                except:
+                    pass
                 if self.EMM.require_smc(self):
                     return self._ret_smc(self.UEInfo['NAS_KSI'])
         #
@@ -1610,8 +1626,11 @@ class EMMServiceRequest(EMMSigProc):
         else:
             # no auth procedure, ksi submitted by the UE is valid
             # set UL NAS count for further KeNB derivation
-            secctx = self.S1.SEC[self.S1.SEC['KSI']]
-            secctx['UL_enb'] = self._nas_rx._ulcnt
+            try:
+                secctx = self.S1.SEC[self.S1.SEC['KSI']]
+                secctx['UL_enb'] = self._nas_rx._ulcnt
+            except:
+                pass
             if self.EMM.require_smc(self) and self.EMM.SER_SMC_ALW:
                 return self._ret_smc((0, self.UEInfo['KSI'].get_val()))
             else:
@@ -1632,8 +1651,11 @@ class EMMServiceRequest(EMMSigProc):
             if self.EMM.require_auth(self, ksi=(0, self.UEInfo['KSI'].get_val())):
                 return self._ret_auth()
             else:
-                secctx = self.S1.SEC[self.S1.SEC['KSI']]
-                secctx['UL_enb'] = self._nas_rx._ulcnt
+                try:
+                    secctx = self.S1.SEC[self.S1.SEC['KSI']]
+                    secctx['UL_enb'] = self._nas_rx._ulcnt
+                except:
+                    pass
                 if self.EMM.require_smc(self) and self.EMM.SER_SMC_ALW:
                     return self._ret_smc((0, self.UEInfo['KSI'].get_val()))
         #

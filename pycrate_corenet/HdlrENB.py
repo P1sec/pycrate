@@ -445,7 +445,8 @@ class ENBd(object):
         message will be disabled
         
         mandatory parameters:
-            msg: None or uint16
+            msg: None or uint16, type of warning message
+            sernum: uint16, unique identifier of the message for the given type
         IEs can contain:
             WarningAreaList
         """

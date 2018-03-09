@@ -136,11 +136,15 @@ class MMSigProc(NASSigProc):
     
     def rm_from_mm_stack(self):
         # remove the procedure from the MM stack of procedures
-        if self.MM.Proc[-1] == self:
-            del self.MM.Proc[-1]
-        if self._mm_preempt:
-            # release the MM stack
-            self.MM.ready.set()
+        try:
+            if self.MM.Proc[-1] == self:
+                del self.MM.Proc[-1]
+        except:
+            self._log('WNG', 'MM stack corrupted')
+        else:
+            if self._mm_preempt:
+                # release the MM stack
+                self.MM.ready.set()
     
     def init_timer(self):
         if self.Timer is not None:

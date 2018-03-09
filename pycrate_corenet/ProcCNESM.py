@@ -159,9 +159,12 @@ class ESMSigProc(NASSigProc):
     
     def rm_from_esm_stack(self):
         # remove the procedure from the ESM stack of procedures
-        ProcStack = self.ESM.Proc[self._ebi]
-        if ProcStack[-1] == self:
-            del ProcStack[-1]
+        try:
+            ProcStack = self.ESM.Proc[self._ebi]
+            if ProcStack[-1] == self:
+                del ProcStack[-1]
+        except:
+            self._log('WNG', 'ESM stack corrupted')
     
     def init_timer(self):
         if self.Timer is not None:
@@ -270,9 +273,9 @@ class ESMDefaultEPSBearerCtxtAct(ESMSigProc):
         #
         pdncfg = self.ESM.PDN[self._ebi]
         if 'RAB' in pdncfg:
-            # only a single E-RAB can will be established.
+            # only a single E-RAB will be established.
             # -> check if we would have to support the establishment of 
-            # several E-RABs with this single procedure
+            # several E-RABs within this single procedure
             #
             NasTxSec = self.S1.output_nas_sec(NasTx)
             if not NasTxSec:
