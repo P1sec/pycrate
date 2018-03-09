@@ -243,7 +243,7 @@ Setup-UUIE ::= SEQUENCE {
   multipleCalls                  BOOLEAN,
   maintainConnection             BOOLEAN,
   connectionParameters
-    SEQUENCE-- additional gateway parameters-- {connectionType
+    SEQUENCE -- additional gateway parameters-- {connectionType
                                                   ScnConnectionType,
                                                 numberOfScnConnections
                                                   INTEGER(0..65535),
@@ -1016,7 +1016,7 @@ ICV ::= SEQUENCE {
   algorithmOID  OBJECT IDENTIFIER, -- the algorithm used to compute the 
   
   -- signature
-  icv           BIT STRING-- the computed cryptographic --
+  icv           BIT STRING -- the computed cryptographic --
   -- integrity check value or signature
 }
 
@@ -1037,25 +1037,25 @@ CryptoH323Token ::= CHOICE {
     SEQUENCE {alias      AliasAddress, -- alias of entity generating hash--
               timeStamp  TimeStamp, -- timestamp used in hash--
               token
-                HASHED{EncodedPwdCertToken-- generalID set to --
+                HASHED{EncodedPwdCertToken -- generalID set to --
                       -- "alias" -- }},
   cryptoGKPwdHash
     SEQUENCE {gatekeeperId  GatekeeperIdentifier, -- GatekeeperID of GK generating --
               -- hash
               timeStamp     TimeStamp, -- timestamp used in hash--
               token
-                HASHED{EncodedPwdCertToken-- generalID set to --
+                HASHED{EncodedPwdCertToken -- generalID set to --
                       -- Gatekeeperid -- }},
   cryptoEPPwdEncr
-    ENCRYPTED{EncodedPwdCertToken-- generalID set to --
+    ENCRYPTED{EncodedPwdCertToken -- generalID set to --
              -- Gatekeeperid -- },
   cryptoGKPwdEncr
-    ENCRYPTED{EncodedPwdCertToken-- generalID set to --
+    ENCRYPTED{EncodedPwdCertToken -- generalID set to --
              -- Gatekeeperid -- },
   cryptoEPCert
-    SIGNED{EncodedPwdCertToken-- generalID set to --
+    SIGNED{EncodedPwdCertToken -- generalID set to --
           -- Gatekeeperid -- },
-  cryptoGKCert       SIGNED{EncodedPwdCertToken-- generalID set to alias -- },
+  cryptoGKCert       SIGNED{EncodedPwdCertToken -- generalID set to alias -- },
   cryptoFastStart    SIGNED{EncodedFastStartToken},
   nestedcryptoToken  CryptoToken,
   ...

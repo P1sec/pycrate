@@ -45,65 +45,40 @@ ECKASDH ::=
   CHOICE -- parameters for elliptic curve key agreement scheme Diffie-Hellman
    {
   eckasdhp
-    SEQUENCE-- parameters for elliptic curves of prime field-- {public-key
-                                                                  ECpoint, -- This field contains representation of --
-                                                                -- the ECKAS-DHp public key value. This field contains the 
-                                                                -- initiator's ECKAS-DHp public key value (aP) when this 
-                                                                -- information element is sent from originator to receiver. This 
-                                                                -- field contains the responder's ECKAS-DHp public key value (bP) 
-                                                                -- when this information element is sent back from receiver to 
-                                                                -- originator.
-                                                                modulus
-                                                                  BIT STRING
-                                                                    (SIZE (0..
-                                                                    511)), -- This field contains --
-                                                                -- representation of the ECKAS-DHp public modulus value (p).
-                                                                base
-                                                                  ECpoint, -- This field contains representation of the --
-                                                                -- ECKAS-DHp public base (P).
-                                                                weierstrassA
-                                                                  BIT STRING
-                                                                    (SIZE (0..
-                                                                    511)), -- This field contains --
-                                                                -- representation of the ECKAS-DHp Weierstrass coefficient (a).
-                                                                weierstrassB
-                                                                  BIT STRING
-                                                                    (SIZE (0..
-                                                                    511))-- This field contains --
-                                                                -- representation of the ECKAS-DHp Weierstrass coefficient (b).
+    SEQUENCE -- parameters for elliptic curves of prime field-- {
+        public-key ECpoint, -- This field contains representation of --
+            -- the ECKAS-DHp public key value. This field contains the 
+            -- initiator's ECKAS-DHp public key value (aP) when this 
+            -- information element is sent from originator to receiver. This 
+            -- field contains the responder's ECKAS-DHp public key value (bP) 
+            -- when this information element is sent back from receiver to 
+            -- originator.
+        modulus  BIT STRING (SIZE (0..511)), -- This field contains --
+            -- representation of the ECKAS-DHp public modulus value (p).
+        base ECpoint, -- This field contains representation of the --
+            -- ECKAS-DHp public base (P).
+        weierstrassA BIT STRING (SIZE (0..511)), -- This field contains --
+            -- representation of the ECKAS-DHp Weierstrass coefficient (a).
+        weierstrassB BIT STRING (SIZE (0..511))-- This field contains --
+            -- representation of the ECKAS-DHp Weierstrass coefficient (b).
   },
   eckasdh2
-    SEQUENCE-- parameters for elliptic curves of characteristic 2 -- {public-key
-                                                                        
-                                                                    ECpoint, -- This field contains representation of --
-                                                                    -- the ECKAS-DH2 public key value.
-                                                                    -- This field contains the initiator's ECKAS-DH2 public key value 
-                                                                    -- (aP) when this information element is sent from originator to 
-                                                                    -- receiver. This field contains the responder's ECKAS-DH2 public 
-                                                                    -- key value (bP) when this information element is sent back from 
-                                                                    -- receiver to originator.
-                                                                    fieldSize
-                                                                    
-                                                                    BIT STRING
-                                                                    (SIZE (0..
-                                                                    511)), -- This field contains --
-                                                                    -- representation of the ECKAS-DH2 field size value (m).
-                                                                    base
-                                                                    
-                                                                    ECpoint, -- This field contains representation of the --
-                                                                    -- ECKAS-DH2 public base (P).
-                                                                    weierstrassA
-                                                                    
-                                                                    BIT STRING
-                                                                    (SIZE (0..
-                                                                    511)), -- This field contains --
-                                                                    -- representation of the ECKAS-DH2 Weierstrass coefficient (a).
-                                                                    weierstrassB
-                                                                    
-                                                                    BIT STRING
-                                                                    (SIZE (0..
-                                                                    511))-- This field contains --
-                                                                    -- representation of the ECKAS-DH2 Weierstrass coefficient (b).
+    SEQUENCE -- parameters for elliptic curves of characteristic 2 -- {
+        public-key ECpoint, -- This field contains representation of --
+            -- the ECKAS-DH2 public key value.
+            -- This field contains the initiator's ECKAS-DH2 public key value 
+            -- (aP) when this information element is sent from originator to 
+            -- receiver. This field contains the responder's ECKAS-DH2 public 
+            -- key value (bP) when this information element is sent back from 
+            -- receiver to originator.
+       fieldSize BIT STRING (SIZE (0..511)), -- This field contains --
+            -- representation of the ECKAS-DH2 field size value (m).
+       base ECpoint, -- This field contains representation of the --
+            -- ECKAS-DH2 public base (P).
+       weierstrassA BIT STRING (SIZE (0..511)), -- This field contains --
+            -- representation of the ECKAS-DH2 Weierstrass coefficient (a).
+       weierstrassB BIT STRING (SIZE (0..511))-- This field contains --
+            -- representation of the ECKAS-DH2 Weierstrass coefficient (b).
   },
   ...
 }
@@ -243,32 +218,22 @@ EncodedPwdCertToken ::= TYPE-IDENTIFIER.&Type(PwdCertToken)
 
 CryptoToken ::= CHOICE {
   cryptoEncryptedToken
-    SEQUENCE-- General purpose/application specific token-- {tokenOID
-                                                               OBJECT
-                                                                 IDENTIFIER,
-                                                             token
-                                                               ENCRYPTED
-                                                                 {EncodedGeneralToken}
+    SEQUENCE -- General purpose/application specific token-- {
+        tokenOID OBJECT IDENTIFIER,
+        token ENCRYPTED {EncodedGeneralToken}
   },
   cryptoSignedToken
-    SEQUENCE-- General purpose/application specific token-- {tokenOID
-                                                               OBJECT
-                                                                 IDENTIFIER,
-                                                             token
-                                                               SIGNED
-                                                                 {EncodedGeneralToken}
+    SEQUENCE -- General purpose/application specific token-- {
+        tokenOID OBJECT IDENTIFIER,
+        token SIGNED {EncodedGeneralToken}
   },
   cryptoHashedToken
-    SEQUENCE-- General purpose/application specific token-- {tokenOID
-                                                               OBJECT
-                                                                 IDENTIFIER,
-                                                             hashedVals
-                                                               ClearToken,
-                                                             token
-                                                               HASHED
-                                                                 {EncodedGeneralToken}
+    SEQUENCE -- General purpose/application specific token-- {
+        tokenOID OBJECT IDENTIFIER,
+        hashedVals ClearToken,
+        token HASHED {EncodedGeneralToken}
   },
-  cryptoPwdEncr         ENCRYPTED{EncodedPwdCertToken},
+  cryptoPwdEncr ENCRYPTED {EncodedPwdCertToken},
   ...
 }
 

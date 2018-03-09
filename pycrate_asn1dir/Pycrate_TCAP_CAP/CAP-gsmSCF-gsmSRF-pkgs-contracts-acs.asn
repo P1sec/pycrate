@@ -32,7 +32,8 @@ FROM TC-Notation-Extensions tc-NotationExtensions
 	playAnnouncement {},
 	promptAndCollectUserInformation {},
 	specializedResourceReport
-FROM CAP-gsmSCF-gsmSRF-ops-args gsmSCF-gsmSRF-Operations-- Object Identifier 'gsmSCF-gsmSRF-Operations' is updated to version8(7) in Rel-6. As
+FROM CAP-gsmSCF-gsmSRF-ops-args gsmSCF-gsmSRF-Operations
+-- Object Identifier 'gsmSCF-gsmSRF-Operations' is updated to version8(7) in Rel-6. As
 -- a result, the present module, 'CAP-gsmSCF-gsmSRF-pkgs-contracts-acs', IMPORTS CAP
 -- Operation definitions from CAP-gsmSCF-gsmSRF-ops-args version8(7). Operation
 -- definitions are used in the ABSTRACT SYNTAX definitions and in the OPERATION PACKAGE

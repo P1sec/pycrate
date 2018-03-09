@@ -67,7 +67,8 @@ FROM CAP-gsmSSF-gsmSCF-ops-args gsmSSF-gsmSCF-Operations
 	playAnnouncement {},
 	promptAndCollectUserInformation {},
 	specializedResourceReport
-FROM CAP-gsmSCF-gsmSRF-ops-args gsmSCF-gsmSRF-Operations-- Object Identifier 'gsmSCF-gsmSRF-Operations' is updated to version8(7) in Rel-6. AS
+FROM CAP-gsmSCF-gsmSRF-ops-args gsmSCF-gsmSRF-Operations
+-- Object Identifier 'gsmSCF-gsmSRF-Operations' is updated to version8(7) in Rel-6. AS
 -- a result, the present module, 'CAP-gsmSSF-gsmSCF-pkgs-contracts-acs', IMPORTS CAP
 -- Operation definitions from CAP-gsmSCF-gsmSRF-ops-args version8(7). Operation
 -- definitions are used in the ABSTRACT SYNTAX definitions and in the OPERATION PACKAGE

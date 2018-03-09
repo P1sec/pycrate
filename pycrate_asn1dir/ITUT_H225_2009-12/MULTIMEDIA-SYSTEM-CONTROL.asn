@@ -2609,38 +2609,38 @@ TerminalNumber ::= INTEGER(0..192)
 -- =============================================================================
 ConferenceResponse ::= CHOICE {
   mCTerminalIDResponse
-    SEQUENCE-- response to TCP --
+    SEQUENCE -- response to TCP --
      -- (same as TIP)
     {-- sent by MC only--terminalLabel  TerminalLabel,
                          terminalID     TerminalID,
                          ...},
   terminalIDResponse
-    SEQUENCE-- response to TCS2 or TCI-- {-- same as IIS--terminalLabel
+    SEQUENCE -- response to TCS2 or TCI-- {-- same as IIS--terminalLabel
                                                             TerminalLabel, -- (term->MC)--
                                                           terminalID
                                                             TerminalID,
                                                           ...},
   conferenceIDResponse
-    SEQUENCE-- response to TCS3-- {-- same as IIS--terminalLabel  TerminalLabel, -- (term->MC)--
+    SEQUENCE -- response to TCS3-- {-- same as IIS--terminalLabel  TerminalLabel, -- (term->MC)--
                                                    conferenceID   ConferenceID,
                                                    ...},
   passwordResponse
-    SEQUENCE-- response to TCS1-- {-- same as IIS--terminalLabel  TerminalLabel, -- (term->MC)--
+    SEQUENCE -- response to TCS1-- {-- same as IIS--terminalLabel  TerminalLabel, -- (term->MC)--
                                                    password       Password,
                                                    ...},
   terminalListResponse               SET SIZE (1..256) OF TerminalLabel,
   videoCommandReject                 NULL, -- same as H.230 VCR
   terminalDropReject                 NULL, -- same as H.230 CIR
   makeMeChairResponse
-    CHOICE-- same as H.230 CCR-- {grantedChairToken  NULL, -- same as H.230 CIT--
+    CHOICE -- same as H.230 CCR-- {grantedChairToken  NULL, -- same as H.230 CIT--
                                   deniedChairToken   NULL, -- same as H.230 CCR--
                                   ...},
   ...,
   extensionAddressResponse
-    SEQUENCE-- response to TCS4-- {extensionAddress  TerminalID, -- same as IIS (term->GW)--
+    SEQUENCE -- response to TCS4-- {extensionAddress  TerminalID, -- same as IIS (term->GW)--
                                    ...},
   chairTokenOwnerResponse
-    SEQUENCE-- response to TCA (same as TIR) --
+    SEQUENCE -- response to TCA (same as TIR) --
      -- sent by MC only
     {terminalLabel  TerminalLabel,
      terminalID     TerminalID,
@@ -2986,7 +2986,7 @@ MiscellaneousCommand ::= SEQUENCE {
                         ...},
             recoveryReferencePicture              SEQUENCE OF PictureReference,
             encryptionUpdateCommand
-              SEQUENCE-- for ack'ed key update in H.235V3-- {encryptionSync
+              SEQUENCE -- for ack'ed key update in H.235V3-- {encryptionSync
                                                              
                                                                EncryptionSync,
                                                              multiplePayloadStream

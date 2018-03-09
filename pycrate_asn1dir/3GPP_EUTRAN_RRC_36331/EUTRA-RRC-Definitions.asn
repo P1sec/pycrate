@@ -3394,7 +3394,7 @@ CQI-ReportPeriodic-v1130 ::=	SEQUENCE {
 
 CQI-ReportPeriodic-v1310 ::=	SEQUENCE {
 	cri-ReportConfig-r13			CRI-ReportConfig-r13				OPTIONAL,	-- Need OR
-	simultaneousAckNackAndCQI-Format4-Format5-r13		ENUMERATED {setup}		OPTIONAL-- Need OR
+	simultaneousAckNackAndCQI-Format4-Format5-r13		ENUMERATED {setup}		OPTIONAL -- Need OR
 }
 
 CQI-ReportPeriodic-v1320 ::=	SEQUENCE {
