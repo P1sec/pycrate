@@ -39,6 +39,7 @@ from .TS44018_RR    import *
 
 from .TS24011_PPSMS import *
 from .TS23040_SMS   import *
+from .TS23041_CBS   import *
 from .TS23038       import *
 
 from .TS24008_GMM   import *

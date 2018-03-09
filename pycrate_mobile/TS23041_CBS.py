@@ -28,8 +28,11 @@
 #*/
 
 __all__ = [
-    'CBS_WarningType_dict',
+    'CBSWarningType_dict',
+    'CBSWarningType',
+    'CBSWarningSecurityInfo',
     'CBS_MessageId_dict',
+    'encode_cbs_pages'
     ]
 
 #------------------------------------------------------------------------------#
@@ -37,7 +40,12 @@ __all__ = [
 # release 13 (d30)
 #------------------------------------------------------------------------------#
 
-from .TS23038    import *
+from struct import pack, unpack
+
+from pycrate_core.elt  import *
+from pycrate_core.base import *
+from .TS23038          import *
+from .TS23040_SMS      import TP_SCTS
 
 
 #------------------------------------------------------------------------------#
@@ -45,7 +53,7 @@ from .TS23038    import *
 # TS 23.041, section 9.3.24
 #------------------------------------------------------------------------------#
 
-CBS_WarningType_dict = {
+CBSWarningType_dict = {
     0 : 'Earthquake',
     1 : 'Tsunami',
     2 : 'Earthquake and Tsunami',
@@ -53,6 +61,26 @@ CBS_WarningType_dict = {
     4 : 'Other'
     #5-0x7f: future use
     }
+
+class CBSWarningType(Envelope):
+    _GEN = (
+        Uint('Value', bl=7, dic=CBSWarningType_dict),
+        Uint('EmergencyUserAlert', bl=1),
+        Uint('Popup', bl=1),
+        Uint('pad', bl=7, rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Warning-Security-Information
+# TS 23.041, section 9.3.25
+#------------------------------------------------------------------------------#
+
+class CBSWarningSecurityInfo(Envelope):
+    _GEN = (
+        TP_SCTS(),
+        Buf('DigitalSignature', bl=344, rep=REPR_HEX)
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -85,7 +113,7 @@ CBS_MessageId_dict = {
     #     also EU-Alert Level 3 / Korean Public Alert System (KPAS) Class 1
     4374: 'CMAS CBS for CMAS Severe Alerts with Severity of Extreme, Urgency of Expected, and Certainty of Likely',
     #     also EU-Alert Level 3 / Korean Public Alert System (KPAS) Class 1
-    4375: 'CMAS CBS for CMAS Severe Alerts with Severity of Severe, Urgency of Immediate, and Certainty of Observed'
+    4375: 'CMAS CBS for CMAS Severe Alerts with Severity of Severe, Urgency of Immediate, and Certainty of Observed',
     #     also EU-Alert Level 3 / Korean Public Alert System (KPAS) Class 1
     4376: 'CMAS CBS for CMAS Severe Alerts with Severity of Severe, Urgency of Immediate, and Certainty of Likely',
     #     also EU-Alert Level 3 / Korean Public Alert System (KPAS) Class 1
@@ -108,7 +136,7 @@ CBS_MessageId_dict = {
     #     also EU-Alert Level 3 / Korean Public Alert System (KPAS) Class 1
     4387: 'CMAS CBS for CMAS Severe Alerts with Severity of Extreme, Urgency of Expected, and Certainty of Likely for additional languages',
     #     also EU-Alert Level 3 / Korean Public Alert System (KPAS) Class 1
-    4388: 'CMAS CBS for CMAS Severe Alerts with Severity of Severe, Urgency of Immediate, and Certainty of Observed for additional languages'
+    4388: 'CMAS CBS for CMAS Severe Alerts with Severity of Severe, Urgency of Immediate, and Certainty of Observed for additional languages',
     #     also EU-Alert Level 3 / Korean Public Alert System (KPAS) Class 1
     4389: 'CMAS CBS for CMAS Severe Alerts with Severity of Severe, Urgency of Immediate, and Certainty of Likely for additional languages',
     #     also EU-Alert Level 3 / Korean Public Alert System (KPAS) Class 1
@@ -129,3 +157,21 @@ CBS_MessageId_dict = {
     #45056-65534: future operator specific
     65535: 'reserved', # used with SIM, not settable by MMI
     }
+
+
+#------------------------------------------------------------------------------#
+# Warning Message Content E-UTRAN
+# TS 23.041, section 9.3.35 
+#------------------------------------------------------------------------------#
+
+def encode_cbs_pages(msg, dcs7b=True, char_preamb=''):
+    if dcs7b:
+        pages = encode_7b_cbs(msg, char_preamb)
+    else:
+        pages = encode_cbs(msg)
+    msg = pack('>B', len(pages))
+    for page, page_len in pages:
+        msg += page + pack('>B', page_len)
+    return msg
+
+

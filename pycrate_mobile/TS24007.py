@@ -53,7 +53,7 @@ __all__ = [
 from binascii import hexlify
 
 from pycrate_core.utils  import *
-from pycrate_core.elt    import Element, Envelope, REPR_RAW, REPR_HEX, REPR_BIN
+from pycrate_core.elt    import Element, Envelope, EltErr, REPR_RAW, REPR_HEX, REPR_BIN
 from pycrate_core.base   import *
 from pycrate_core.repr   import *
 from pycrate_csn1.csnobj import CSN1Obj
