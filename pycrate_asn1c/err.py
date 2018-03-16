@@ -43,6 +43,10 @@ else:
     class ASN1Err(PycrateErr):
         pass
 
+# error when manipulating ASN.1 token
+class ASN1TokenizerErr(ASN1Err):
+    pass
+
 # error when processing ASN.1 text
 class ASN1ProcTextErr(ASN1Err):
     pass
