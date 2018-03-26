@@ -533,6 +533,30 @@ class ASN1Obj(Element):
         else:
             assert()
     
+    def get_complexity(self):
+        """
+        returns the number of basic types referenced from self,
+        and the maximum depth possible within self
+        """
+        ref, depth = 0, 0
+        if self.TYPE in TYPES_BASIC + TYPES_EXT:
+            ref += 1
+        elif self.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
+            comp_ref, comp_depth = self._cont.get_complexity()
+            ref += comp_ref
+            depth += 1 + comp_depth
+        elif self.TYPE in (TYPE_CHOICE, TYPE_SEQ, TYPE_SET, TYPE_CLASS):
+            loc_depth = []
+            for (ident, Comp) in self._cont.items():
+                comp_ref, comp_depth = Comp.get_complexity()
+                ref += comp_ref
+                loc_depth.append(comp_depth)
+            if loc_depth:
+                depth += 1 + max(loc_depth)
+        else:
+            assert()
+        return ref, depth
+    
     def _get_obj_by_path(self, path):
         # this is used for solving table constraint lookups
         obj = self
