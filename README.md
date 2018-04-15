@@ -7,12 +7,17 @@ Python library for manipulating various digital formats in an easy way.
 It is the glorious successor of [libmich](https://github.com/mitshell/libmich), 
 which was started 8 years ago and served well.
 
+It provides basically a runtime for encoding and decoding data structures, including
+CSN.1 and ASN.1. Additionally, it features a 3G and LTE mobile core network.
+
 
 License
 =======
 
-The whole library is licensed under GPLv2 and is compatible with more recent version
-of the GPL: all licensed files have an header making it self-explanatory.
+The whole library is licensed under LGPL v2.1 and is compatible with more recent 
+version of the LGPL: all licensed files have an header making it self-explanatory.
+For more details, please report to the 
+[license.txt](https://github.com/anssi-fr/pycrate/license.txt) file.
 
 
 Wiki

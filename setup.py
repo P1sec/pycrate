@@ -42,5 +42,5 @@ setup(
     long_description=open("README.md", "r").read(),
     url="https://github.com/mitshell/pycrate/",
     keywords="protocol format asn1 compiler csn1 encoder decoder mobile core network",
-    license="GPLv2+",
+    license="LGPL v2.1+",
     )
