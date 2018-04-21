@@ -113,7 +113,7 @@ Single value: int 0
         self._val = 0
     
     def _encode_ber_cont_ws(self):
-        return 0, 0, But('V', val=b'', bl=0)
+        return 0, 0, Buf('V', val=b'', bl=0)
     
     def _encode_ber_cont(self):
         return 0, 0, []
