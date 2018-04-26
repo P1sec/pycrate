@@ -154,7 +154,10 @@ Specific constraints attributes:
                     off.append(self._cont[name])
                 except:
                     raise(ASN1ObjErr('{0}: invalid named bit, {1!r}'.format(self.fullname(), val)))
-            moff = max(off)
+            if len(off) == 0:
+                moff = 0
+            else:
+                moff = max(off)
             val  = (sum([1<<(moff-i) for i in off]), 1+moff)
             if self._const_sz and self._const_sz.ext is None \
             and self._const_sz.lb and val[1] < self._const_sz.lb:
