@@ -120,13 +120,16 @@ Specific constraints attributes:
                       .format(self.fullname(), ref)))
     
     def _safechk_val(self, val):
-        if not isinstance(val, tuple) or len(val) != 2:
-            raise(ASN1ObjErr('{0}: invalid value, {1!r}'.format(self.fullname(), val)))
-        if isinstance(val[0], integer_types):
-            if not isinstance(val[1], integer_types):
-                raise(ASN1ObjErr('{0}: invalid value, {1!r}'.format(self.fullname(), val)))
+        if isinstance(val, tuple) and len(val) == 2:
+            if isinstance(val[0], integer_types):
+                # raw value
+                if not isinstance(val[1], integer_types):
+                    raise(ASN1ObjErr('{0}: invalid value, {1!r}'.format(self.fullname(), val)))
+            else:
+                # CONTAINING value
+                self._get_val_obj(val[0])._safechk_val(val[1])
         else:
-            self._get_val_obj(val[0])._safechk_val(val[1])
+            raise(ASN1ObjErr('{0}: invalid value, {1!r}'.format(self.fullname(), val)))
     
     def _safechk_bnd(self, val):
         if isinstance(val[0], integer_types):
@@ -154,8 +157,12 @@ Specific constraints attributes:
                     off.append(self._cont[name])
                 except:
                     raise(ASN1ObjErr('{0}: invalid named bit, {1!r}'.format(self.fullname(), val)))
-            moff = max(off)
-            val  = (sum([1<<(moff-i) for i in off]), 1+moff)
+            if off:
+                moff = max(off)
+                val  = (sum([1<<(moff-i) for i in off]), 1+moff)
+            else:
+                moff = 0
+                val  = (0, 1)
             if self._const_sz and self._const_sz.ext is None \
             and self._const_sz.lb and val[1] < self._const_sz.lb:
                 # need to extend the value to the lower bound of the size constraint
@@ -171,11 +178,15 @@ Specific constraints attributes:
             self._safechk_bnd(self._val)
     
     def get_names(self):
-        """Returns the set of names of the NamedBitList corresponding to the 
-        internal value
+        """Returns the set of names from the NamedBitList corresponding to the 
+        internal value currently set
         """
+        if isinstance(self._val, set):
+            return self._val
         names = set()
-        if self._cont is None:
+        if self._cont is None or not isinstance(self._val, tuple) \
+        or len(self._val) != 2 or not isinstance(self._val[0], integer_types):
+            # self._val has not the correct format
             return names
         for off, bit in enumerate(uint_to_bitstr(self._val[0], self._val[1])):
             if bit == '1':
@@ -370,7 +381,10 @@ Specific constraints attributes:
                 if not self._SILENT:
                     asnlog('BIT_STR.__from_per_ws_buf: %s, specific CONTAINING encoder unhandled'\
                            % self._name)
-                self._val = (Buf.to_uint(), Buf.get_bl())
+                if Buf._bl:
+                    self._val = (Buf.to_uint(), Buf.get_bl())
+                else:
+                    self._val = (0, 0)
             else:
                 char = Charpy(Buf())
                 char._len_bit = Buf.get_bl()
@@ -391,7 +405,10 @@ Specific constraints attributes:
                         ident = self._const_cont.TYPE
                     self._val = (ident, self._const_cont._val)
         else:
-            self._val = (Buf.to_uint(), Buf.get_bl())
+            if Buf._bl:
+                self._val = (Buf.to_uint(), Buf.get_bl())
+            else:
+                self._val = (0, 0)
     
     def _from_per(self, char):
         ldet = None
@@ -467,7 +484,11 @@ Specific constraints attributes:
                 if not self._SILENT:
                     asnlog('BIT_STR.__from_per_buf: %s, specific CONTAINING encoder unhandled'\
                            % self._name)
-                self._val = (bytes_to_uint(buf, bl), bl)
+                if bl:
+                    self._val = (bytes_to_uint(buf, bl), bl)
+                else:
+                    # empty bit string
+                    self._val = (0, 0)
             else:
                 char = Charpy(buf)
                 char._len_bit = bl
@@ -480,7 +501,11 @@ Specific constraints attributes:
                     if not self._SILENT:
                         asnlog('BIT_STR.__from_per_buf: %s, CONTAINING object decoding failed'\
                                % self._name)
-                    self._val = (bytes_to_uint(buf, bl), bl)
+                    if bl:
+                        self._val = (bytes_to_uint(buf, bl), bl)
+                    else:
+                        # empty bit string
+                        self._val = (0, 0)
                 else:
                     if self._const_cont._typeref:
                         ident = self._const_cont._typeref.called[1]
@@ -488,7 +513,11 @@ Specific constraints attributes:
                         ident = self._const_cont.TYPE 
                     self._val = (ident, self._const_cont._val)
         else:
-            self._val = (bytes_to_uint(buf, bl), bl)
+            if bl:
+                self._val = (bytes_to_uint(buf, bl), bl)
+            else:
+                # empty bit string
+                self._val = (0, 0)
     
     def _to_per_ws(self):
         buf, ldet = self.__to_per_ws_buf()
@@ -560,7 +589,11 @@ Specific constraints attributes:
             return buf, 8*len(buf)
         else:
             # 2) value is the standard (uint, bit length)
-            return uint_to_bytes(self._val[0], self._val[1]), self._val[1]
+            if self._val[1]:
+                return uint_to_bytes(self._val[0], self._val[1]), self._val[1]
+            else:
+                # empty bit string
+                return b'', 0
     
     def __to_per_ws_szunconst(self, buf, bl, GEN):
         # size is semi-constrained or unconstrained
@@ -646,7 +679,11 @@ Specific constraints attributes:
             return buf, 8*len(buf)
         else:
             # 2) value is the standard (uint, bit length)
-            return uint_to_bytes(self._val[0], self._val[1]), self._val[1]
+            if self._val[1]:
+                return uint_to_bytes(self._val[0], self._val[1]), self._val[1]
+            else:
+                # empty bit string
+                return b'', 0
     
     def __to_per_szunconst(self, buf, bl, GEN):
         # size is semi-constrained or unconstrained
@@ -788,7 +825,11 @@ Specific constraints attributes:
                 if not self._SILENT:
                     asnlog('BIT_STR.__from_ber_buf: %s, specific CONTAINING encoder unhandled'\
                            % self._name)
-                self._val = (bytes_to_uint(buf, bl), bl)
+                if bl:
+                    self._val = (bytes_to_uint(buf, bl), bl)
+                else:
+                    # empty bit string
+                    self._val = (0, 0)
             else:
                 Obj, char = self._const_cont, Charpy(buf)
                 char._len_bit = bl
@@ -800,7 +841,11 @@ Specific constraints attributes:
                     if not self._SILENT:
                         asnlog('BIT_STR.__from_ber_buf: %s, CONTAINING object decoding failed'\
                                % self._name)
-                    self._val = (bytes_to_uint(buf, bl), bl)
+                    if bl:
+                        self._val = (bytes_to_uint(buf, bl), bl)
+                    else:
+                        # empty bit string
+                        self._val = (0, 0)
                 else:
                     if Obj._typeref:
                         ident = Obj._typeref.called[1]
@@ -808,7 +853,11 @@ Specific constraints attributes:
                         ident = Obj.TYPE
                     self._val = (ident, self._const_cont._val)
         else:
-            self._val = (bytes_to_uint(buf, bl), bl)
+            if bl:
+                self._val = (bytes_to_uint(buf, bl), bl)
+            else:
+                # empty bit string
+                self._val = (0, 0)
     
     def _encode_ber_cont_ws(self):
         buf, bl = self.__to_ber_buf()
@@ -873,7 +922,11 @@ Specific constraints attributes:
             return buf, 8*len(buf)
         else:
             # 2) value is the standard (uint, bit length)
-            return uint_to_bytes(self._val[0], self._val[1]), self._val[1]
+            if self._val[1]:
+                return uint_to_bytes(self._val[0], self._val[1]), self._val[1]
+            else:
+                # empty bit string
+                return b'', 0
 
 
 class OCT_STR(ASN1Obj):
