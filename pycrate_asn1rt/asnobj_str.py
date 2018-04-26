@@ -162,7 +162,7 @@ Specific constraints attributes:
                 val  = (sum([1<<(moff-i) for i in off]), 1+moff)
             else:
                 moff = 0
-                val  = (0, 1)
+                val  = (0, 0)
             if self._const_sz and self._const_sz.ext is None \
             and self._const_sz.lb and val[1] < self._const_sz.lb:
                 # need to extend the value to the lower bound of the size constraint
