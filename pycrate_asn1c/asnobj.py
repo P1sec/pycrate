@@ -5402,25 +5402,31 @@ class ASN1Obj(object):
             self._ref.update( ObjProxy._ref )
         #
         return rest
-    
+
     def _parse_value_open(self, text):
         """
         parses the OPEN TYPE value
-        
-        value is a list of length 2, with an ASN1Obj instance and the 
+
+        value is a list of length 2, with an ASN1Obj instance and the
         corresponding single value
         """
         # ASN1Obj definition: ASN1Obj single value
         #
         # 1) extract the ASN.1 object definition and its value
         colon_offset = search_top_lvl_sep(text, ':')
+
         if len(colon_offset) == 0:
             return self._parse_value_ref(text)
-        elif len(colon_offset) > 1:
-            raise(ASN1ProcTextErr('{0}: invalid OPEN value, {1}'\
-                  .format(self.fullname(), text)))
+        else:
+            try:
+                return self._parse_value_open_impl(text, colon_offset)
+            except ASN1ProcTextErr:
+                raise (ASN1ProcTextErr('{0}: invalid OPEN value, {1}' \
+                                       .format(self.fullname(), text)))
+
+    def _parse_value_open_impl(self, text, colon_offset):
         textobj, textval = text[:colon_offset[0]].strip(), \
-                           text[1+colon_offset[0]:].strip()
+                           text[1 + colon_offset[0]:].strip()
         #
         # 2) setup the container that will receive the value
         val = [None, None]
@@ -5438,15 +5444,15 @@ class ASN1Obj(object):
         _path_trunc(1)
         #
         if rest:
-            raise(ASN1ProcTextErr('{0}: remaining textual definition, {1}'\
-                 .format(self.fullname(), rest)))
+            raise (ASN1ProcTextErr('{0}: remaining textual definition, {1}' \
+                                   .format(self.fullname(), rest)))
         val[0] = Obj.resolve()
         #
         # 5) parse the value according to the object definition and put it in val
         _path_ext([1])
         _path_stack(['val'])
         textval = Obj.parse_value(textval)
-        assert( Obj._val is not None )
+        assert (Obj._val is not None)
         _path_pop()
         _path_trunc(1)
         #
@@ -5456,7 +5462,7 @@ class ASN1Obj(object):
         #
         # 7) transfer references from Obj to self
         if Obj._ref:
-            self._ref.update( Obj._ref )
+            self._ref.update(Obj._ref)
         #
         return textval
     
