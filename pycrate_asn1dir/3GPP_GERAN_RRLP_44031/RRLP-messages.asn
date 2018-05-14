@@ -1,0 +1,30 @@
+-- { RRLP-messages }
+
+RRLP-messages DEFINITIONS AUTOMATIC TAGS ::=
+
+BEGIN
+
+IMPORTS
+	MsrPosition-Req, MsrPosition-Rsp, AssistanceData,
+	ProtocolError, PosCapability-Req, PosCapability-Rsp
+FROM
+	RRLP-Components 	-- { RRLP-Components }
+;
+
+PDU ::= SEQUENCE {
+	referenceNumber			INTEGER (0..7),
+	component				RRLP-Component
+}
+
+RRLP-Component ::= CHOICE {
+	msrPositionReq			MsrPosition-Req,
+	msrPositionRsp			MsrPosition-Rsp,
+	assistanceData			AssistanceData,
+	assistanceDataAck		NULL,
+	protocolError			ProtocolError,
+	...,
+	posCapabilityReq		PosCapability-Req,
+	posCapabilityRsp		PosCapability-Rsp
+}
+
+END

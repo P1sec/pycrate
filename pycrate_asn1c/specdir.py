@@ -5,20 +5,20 @@
 # *
 # * Copyright 2016. Benoit Michau. ANSSI.
 # *
-# * This library is free software; you can redistribute it and/or
-# * modify it under the terms of the GNU Lesser General Public
-# * License as published by the Free Software Foundation; either
-# * version 2.1 of the License, or (at your option) any later version.
-# *
-# * This library is distributed in the hope that it will be useful,
+# * This program is free software; you can redistribute it and/or
+# * modify it under the terms of the GNU General Public License
+# * as published by the Free Software Foundation; either version 2
+# * of the License, or (at your option) any later version.
+# * 
+# * This program is distributed in the hope that it will be useful,
 # * but WITHOUT ANY WARRANTY; without even the implied warranty of
-# * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-# * Lesser General Public License for more details.
-# *
-# * You should have received a copy of the GNU Lesser General Public
-# * License along with this library; if not, write to the Free Software
-# * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, 
-# * MA 02110-1301  USA
+# * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# * GNU General Public License for more details.
+# * 
+# * You should have received a copy of the GNU General Public License
+# * along with this program; if not, write to the Free Software
+# * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+# * 02110-1301, USA.
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_asn1c/specdir.py
@@ -37,6 +37,10 @@
 # from the subdir:
 # $ python ./extract.py
 
+# 3GPP RRLP (2G)
+ASN_SPECS_2G = {
+    'RRLP'      : '3GPP_GERAN_RRLP_44031',
+    }
 
 # 3GPP UTRAN (3G)
 ASN_SPECS_3G = {
@@ -62,6 +66,12 @@ ASN_SPECS_LTE = {
     'M3AP'      : '3GPP_EUTRAN_M3AP_36444',
     'SLmAP'     : '3GPP_EUTRAN_SLmAP_36459',
     'XwAP'      : '3GPP_EUTRAN_XwAP_36463'
+    }
+
+# 3GPP NR (5G)
+ASN_SPECS_5G = {
+    'RRCNR'     : '3GPP_NR_RRC_38331',
+    'F1AP'      : '3GPP_NR_F1AP_38473',
     }
 
 # ITU-T various recommendations
@@ -158,8 +168,10 @@ _ASN_SPECS_PROP = {
     }
 
 ASN_SPECS = dict()
+ASN_SPECS.update( ASN_SPECS_2G )
 ASN_SPECS.update( ASN_SPECS_3G )
 ASN_SPECS.update( ASN_SPECS_LTE )
+ASN_SPECS.update( ASN_SPECS_5G )
 ASN_SPECS.update( ASN_SPECS_ITUT )
 ASN_SPECS.update( ASN_SPECS_IETF )
 ASN_SPECS.update( ASN_SPECS_CORE )
