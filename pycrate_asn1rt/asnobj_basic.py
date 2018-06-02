@@ -130,9 +130,10 @@ Single value: Python bool
     TYPE  = TYPE_BOOL
     TAG   = 1
     
-    _ASN_RE = re.compile('TRUE|FALSE')
-    _ASN_LUT = {'FALSE': False, 'TRUE': True, False: 'FALSE', True: 'TRUE'}
-    _PER_LUT = {0: False, 1: True, False: 0, True: 1}
+    _ASN_RE   = re.compile('TRUE|FALSE')
+    _ASN_LUT  = {'FALSE': False, 'TRUE': True, False: 'FALSE', True: 'TRUE'}
+    _PER_LUT  = {0: False, 1: True}
+    _PER_LUTR = {False: 0, True: 1}
     
     def _safechk_val(self, val):
         if not isinstance(val, bool):
@@ -173,7 +174,7 @@ Single value: Python bool
     
     def _to_per_ws(self):
         self._struct = Envelope(self._name, GEN=(
-                        Uint('V', bl=1, val=self._PER_LUT[self._val], dic={0:'FALSE', 1:'TRUE'}), ))
+                        Uint('V', bl=1, val=self._PER_LUTR[self._val], dic={0:'FALSE', 1:'TRUE'}), ))
         if ASN1CodecPER.ALIGNED:
             ASN1CodecPER._off[-1] += 1
         return self._struct
@@ -181,7 +182,7 @@ Single value: Python bool
     def _to_per(self):
         if ASN1CodecPER.ALIGNED:
             ASN1CodecPER._off[-1] += 1
-        return [(T_UINT, self._PER_LUT[self._val], 1)]
+        return [(T_UINT, self._PER_LUTR[self._val], 1)]
     
     ###
     # conversion between internal value and ASN.1 BER encoding
