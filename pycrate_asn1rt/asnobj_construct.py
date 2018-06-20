@@ -624,7 +624,7 @@ class _CONSTRUCT(ASN1Obj):
     
     def _from_per_ws(self, char):
         GEN, self._val = [], {}
-        if not self._cont:
+        if not self._cont and self._ext is None:
             # empty sequence
             self._struct = Envelope(self._name, GEN=tuple())
             return
@@ -735,7 +735,7 @@ class _CONSTRUCT(ASN1Obj):
     
     def _from_per(self, char):
         GEN, self._val = [], {}
-        if not self._cont:
+        if not self._cont and self._ext is None:
             # empty sequence
             self._struct = Envelope(self._name, GEN=tuple())
             return
@@ -825,7 +825,7 @@ class _CONSTRUCT(ASN1Obj):
     
     def _to_per_ws(self):
         GEN = []
-        if not self._cont:
+        if not self._cont and self._ext is None:
             # empty sequence
             self._struct = Envelope(self._name, GEN=tuple())
             return self._struct
@@ -949,7 +949,7 @@ class _CONSTRUCT(ASN1Obj):
     
     def _to_per(self):
         GEN = []
-        if not self._cont:
+        if not self._cont and self._ext is None:
             # empty sequence
             return GEN
         #
