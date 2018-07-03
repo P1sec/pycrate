@@ -80,9 +80,9 @@ class ENBd(object):
         # init ENB config dict
         self.Config = {}
         # dict to link context-id -> UEd instance
-        UE = {}
+        self.UE = {}
         # dict of warning message id -> warning message IEs
-        WARN = {}
+        self.WARN = {}
         #
         # dict of ongoing S1AP procedures (indexed by their procedure code)
         self.Proc     = {}

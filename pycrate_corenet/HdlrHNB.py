@@ -95,9 +95,9 @@ class HNBd(SigStack):
         self.Config = {}    
         # dict to link context-id -> UEd instance
         # should be the same context-id for HNBAP, IuCS and IuPS
-        UE_HNBAP = {}
-        UE_IuCS  = {}
-        UE_IuPS  = {}
+        self.UE_HNBAP = {}
+        self.UE_IuCS  = {}
+        self.UE_IuPS  = {}
         #
         # dict of ongoing resquest-response CN-initiated RAN procedures 
         # indexed by their procedure code
