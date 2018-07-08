@@ -569,7 +569,7 @@ class EMMAuthentication(EMMSigProc):
         #
         else:
             # UE refused our auth request...
-            self._log('ERR', 'UE rejected AUTN, %s' % self.UEInfo['Cause'])
+            self._log('ERR', 'UE rejected AUTN, %s' % self.UEInfo['EMMCause'])
             self.rm_from_emm_stack()
             return []
 
@@ -632,8 +632,8 @@ class EMMSecurityModeControl(EMMSigProc):
             self.secctx = self.S1.SEC[self.ksi]
         except KeyError:
             # no security ctxt available at all
-            self._log('WNG', 'no security context available, using SMC_DUMMY with KSI %i' % self.ksi)
-            self.S1.SEC[self.ksi] = cpdict(self.EMM.SMC_DUMMY_CTX)
+            self._log('WNG', 'no security context available, using an emergency one with KSI %i' % self.ksi)
+            self.EMM.set_sec_ctx_emerg(self.ksi)
             self.secctx = self.S1.SEC[self.ksi]
         EncodReq = self.Encod[self.Init]
         # in case any of the IEs is handcrafted, we warn (will certainly fail)
@@ -761,7 +761,7 @@ class EMMInformation(EMMSigProc):
             self._nas_tx._sec = False
         if self.TRACK_PDU:
             self._pdu.append( (time(), 'DL', self._nas_tx) )
-        self._log('INF', '%r' % self.Encod[(5, 50)])
+        self._log('INF', '%r' % self.Encod[(7, 97)])
         self.rm_from_emm_stack()
         return self.S1.ret_s1ap_dnt(self._nas_tx)
 
@@ -878,10 +878,10 @@ class EMMAttach(EMMSigProc):
         #
         att_type = self.UEInfo['EPSAttachType']
         self.att_type = att_type.get_val()
-        if self.att_type == 2 and 'TMSIStatus' not in self.UEInfo \
-        and 'TMSIBasedNRICont' not in self.UEInfo:
-            # downgrade to EPS-only attachment
-            self.att_type = 1
+        #if self.att_type == 2 and 'TMSIStatus' not in self.UEInfo \
+        #and 'TMSIBasedNRICont' not in self.UEInfo:
+        #    # downgrade to EPS-only attachment
+        #    self.att_type = 1
         self._log('INF', 'request type %i (%s)' % (self.att_type, att_type._dic[self.att_type]))
         # collect capabilities
         self._collect_cap()
@@ -1460,6 +1460,7 @@ class EMMTrackingAreaUpdate(EMMSigProc):
             self.mtmsi_realloc = -1
             self._log('INF', 'reject, %r' % self._nas_tx['EMMCause'])
             ret = self.S1.ret_s1ap_dnt(self._nas_tx)
+            self.BearActProc = None
             ret.extend(self._end())
         else:
             # prepare TAU Accept IEs
@@ -1659,7 +1660,7 @@ class EMMServiceRequest(EMMSigProc):
                 if self.EMM.require_smc(self) and self.EMM.SER_SMC_ALW:
                     return self._ret_smc((0, self.UEInfo['KSI'].get_val()))
         #
-        if isinstance(Proc, EMMAuthentication):
+        elif isinstance(Proc, EMMAuthentication):
             if not Proc.success:
                 self.abort()
                 return []
@@ -1685,6 +1686,24 @@ class EMMServiceRequest(EMMSigProc):
             return self.S1.ret_s1ap_dnt(self._nas_tx)
         #
         else:
+            if not self.S1.ESM.PDN:
+                if self.EMM.SER_PDN_ALW:
+                    esmd = self.S1.ESM
+                    # in case no PDN were activated, create a minimal one
+                    if esmd.APN_DEFAULT not in esmd.PDNConfig:
+                        self._log('INF', 'no PDN config available')
+                        return []
+                    pdncfg = esmd.PDNConfig[esmd.APN_DEFAULT]
+                    # always use the IPv4 address only
+                    ipaddr, err = esmd._get_pdn_addr(pdncfg, 1)
+                    if err:
+                        return []
+                    esmd.rab_set_default(5, self.S1.ESM.APN_DEFAULT, ipaddr, pdncfg)
+                else:
+                    self._log('WNG', 'no PDN config available')
+                    return []
+            elif self.EMM.SER_RAB_NEVER:
+                return []
             # reactivate all PDN connections
             S1apProc = self.S1.bearer_act()
             if S1apProc:

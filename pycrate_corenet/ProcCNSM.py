@@ -168,6 +168,216 @@ class SMSigProc(NASSigProc):
         for Cap in self.Cap:
             if Cap in self.UEInfo:
                 self.UE.Cap[Cap] = self.UEInfo[Cap]
+    
+    #--------------------------------------------------------------------------#
+    # 2G/3G QoS nightmare
+    #--------------------------------------------------------------------------#
+    
+    def _get_rc_from_rab(self, sdu_params, err_rat, res_ber):
+        # 
+        # (see also TS 23.107)
+        # Reliability Class
+        # 0 0 1	Unused. If received, it shall be interpreted as '010' (Note)
+        # 0 1 0	Unacknowledged GTP; Acknowledged LLC and RLC, Protected data
+        # 0 1 1	Unacknowledged GTP and LLC; Acknowledged RLC, Protected data
+        # 1 0 0	Unacknowledged GTP, LLC, and RLC, Protected data
+        # 1 0 1	Unacknowledged GTP, LLC, and RLC, Unprotected data
+        # 1 1 1	Reserved
+        #
+        if sdu_params['deliveryOfErroneousSDU'] == 'yes':
+            return 5
+        if res_ber <= 0.004:
+            return 5
+        #
+        if err_rat <= 0.000001:
+            return 2
+        elif 0.000001 < err_rat <= 0.0001:
+            return 3
+        else:
+            return 4
+    
+    def _get_mbr_from_rab(self, rabcfg):
+        #
+        # Maximum bit rate for uplink / downlink (octet 8 and 9)
+        # 0 0 0 0 0 0 0 1 	The maximum bit rate is binary coded in 8 bits, using a granularity of 1 kbps
+        # 0 0 1 1 1 1 1 1	giving a range of values from 1 kbps to 63 kbps in 1 kbps increments.
+        # 0 1 0 0 0 0 0 0 	The maximum bit rate is 64 kbps + ((the binary coded value in 8 bits –01000000) * 8 kbps)
+        # 0 1 1 1 1 1 1 1	giving a range of values from 64 kbps to 568 kbps in 8 kbps increments.
+        # 1 0 0 0 0 0 0 0 	The maximum bit rate is 576 kbps + ((the binary coded value in 8 bits –10000000) * 64 kbps)
+        # 1 1 1 1 1 1 1 0	giving a range of values from 576 kbps to 8640 kbps in 64 kbps increments.
+        # 1 1 1 1 1 1 1 1	0kbps
+        #
+        # Maximum bit rate for uplink / downlink (extended, octet 15 and 17)
+        # 0 0 0 0 0 0 0 0	Use the value indicated by the Maximum bit rate for downlink in octet 9.
+        #					For all other values: Ignore the value indicated by the Maximum bit rate for downlink in octet 9
+        #					and use the following value:
+        # 0 0 0 0 0 0 0 1	The maximum bit rate is 8600 kbps + ((the binary coded value in 8 bits) * 100 kbps),
+        # 0 1 0 0 1 0 1 0	giving a range of values from 8700 kbps to 16000 kbps in 100 kbps increments.
+        # 0 1 0 0 1 0 1 1	The maximum bit rate is 16 Mbps + ((the binary coded value in 8 bits - 01001010) * 1 Mbps),
+        # 1 0 1 1 1 0 1 0	giving a range of values from 17 Mbps to 128 Mbps in 1 Mbps increments.
+        # 1 0 1 1 1 0 1 1	The maximum bit rate is 128 Mbps + ((the binary coded value in 8 bits - 10111010) * 2 Mbps),
+        # 1 1 1 1 1 0 1 0	giving a range of values from 130 Mbps to 256 Mbps in 2 Mbps increments.
+        #
+        mbr_dl, mbr_ul = rabcfg['MaxBitrate']
+        if 'RAB-Parameter-ExtendedMaxBitrateList' in rabcfg:
+            if len(rabcfg['RAB-Parameter-ExtendedMaxBitrateList']) >= 2:
+                mbr_dl, mbr_ul = rabcfg['RAB-Parameter-ExtendedMaxBitrateList'][:2]
+            elif len(rabcfg['RAB-Parameter-ExtendedMaxBitrateList']) == 1:
+                mbr_dl = rabcfg['RAB-Parameter-ExtendedMaxBitrateList'][0]
+        #
+        if mbr_dl > 128000000:
+            # 128 Mbps + ((the binary coded value in 8 bits - 10111010) * 2 Mbps)
+            mbr_dl = (0xff, min(0xfe, 0xba + ((mbr_dl-128000000)//2000000)))
+        elif mbr_dl > 16000000:
+            # 16 Mbps + ((the binary coded value in 8 bits - 01001010) * 1 Mbps
+            mbr_dl = (0xff, 0x4a + ((mbr_dl-16000000)//1000000))
+        elif mbr_dl > 8600000:
+            # 8600 kbps + ((the binary coded value in 8 bits) * 100 kbps)
+            mbr_dl = (0xff, (mbr_dl-8600000)//100000)
+        else:
+            mbr_dl = (0x80 + ((mbr_dl-576000)//64000), None)
+        #
+        if mbr_ul > 128000000:
+            # 128 Mbps + ((the binary coded value in 8 bits - 10111010) * 2 Mbps)
+            mbr_ul = (0xff, min(0xfe, 0xba + ((mbr_ul-128000000)//2000000)))
+        elif mbr_ul > 16000000:
+            # 16 Mbps + ((the binary coded value in 8 bits - 01001010) * 1 Mbps
+            mbr_ul = (0xff, 0x4a + ((mbr_ul-16000000)//1000000))
+        elif mbr_ul > 8600000:
+            # 8600 kbps + ((the binary coded value in 8 bits) * 100 kbps)
+            mbr_ul = (0xff, (mbr_ul-8600000)//100000)
+        else:
+            mbr_ul = (0x80 + ((mbr_ul-576000)//64000), None)
+        #
+        return mbr_dl, mbr_ul
+    
+    def _get_rber_from_rab(self, res_ber):
+        #
+        # The Residual BER value consists of 4 bits. The range is from 5*10-2 to 6*10-8. 
+        # 0 0 0 1		5*10-2 
+        # 0 0 1 0		1*10-2 
+        # 0 0 1 1		5*10-3
+        # 0 1 0 0		4*10-3 
+        # 0 1 0 1		1*10-3 
+        # 0 1 1 0		1*10-4 
+        # 0 1 1 1		1*10-5 
+        # 1 0 0 0		1*10-6 
+        # 1 0 0 1		6*10-8 
+        # 1 1 1 1		Reserved
+        #
+        if res_ber <= 0.0001:
+            # 10^-4
+            if res_ber <= 0.000001:
+                # 10^-6
+                if res_ber <= 0.00000006:
+                    # 6.10^-8
+                    return 0b1001
+                else:
+                    return 0b1000
+            else:
+                if res_ber <= 0.00001:
+                    # 10^-5
+                    return 0b0111
+                else:
+                    return 0b0110
+        else:
+            if res_ber <= 0.005:
+                if res_ber <= 0.001:
+                    return 0b0101
+                elif res_ber <= 0.004:
+                    return 0b0100
+                else:
+                    return 0b0011
+            else:
+                if res_ber <= 0.05:
+                    return 0b0001
+                else:
+                    return 0b0010
+    
+    def _get_ser_from_rab(self, err_rat):
+        #
+        # The SDU error ratio value consists of 4 bits. The range is is from 1*10-1 to 1*10-6. 
+        # 0 0 0 1		1*10-2 
+        # 0 0 1 0		7*10-3
+        # 0 0 1 1		1*10-3 
+        # 0 1 0 0		1*10-4 
+        # 0 1 0 1		1*10-5 
+        # 0 1 1 0		1*10-6 
+        # 0 1 1 1		1*10-1
+        # 1 1 1 1		Reserved
+        #
+        if err_rat <= 0.0001:
+            # 10^-4
+            if err_rat <= 0.000001:
+                # 10^-6
+                return 0b0110
+            elif err_rat <= 0.00001:
+                # 10^-5
+                return 0b0101
+            else:
+                return 0b0100
+        else:
+            if err_rat >= 0.1:
+                return 0b0111
+            elif err_rat >= 0.01:
+                return 0b0001
+            elif err_rat >= 0.007:
+                return 0b0010
+            else:
+                return 0b0011
+    
+    RAB_QoS_TrafficClass = {
+        'conversational': 1,
+        'streaming'     : 2,
+        'interactive'   : 3,
+        'background'    : 4
+        }
+    
+    def _get_qos(self, rabcfg):
+        # TS 24.008, 10.5.6.5, QoS
+        sdu_params = rabcfg['SDU-Parameters'][0]
+        err_rat = sdu_params['sDU-ErrorRatio']['mantissa'] \
+                  * (10 ** (- sdu_params['sDU-ErrorRatio']['exponent']))
+        res_ber = sdu_params['residualBitErrorRatio']['mantissa'] \
+                  * (10 ** (- sdu_params['residualBitErrorRatio']['exponent']))
+        #
+        (mbr_dl, mbr_dl_ext), (mbr_ul, mbr_ul_ext) = self._get_mbr_from_rab(rabcfg)
+        #
+        qos = {
+            'DelayClass'        : self.RAB_QoS_TrafficClass.get(rabcfg['TrafficClass'], 4),
+            'ReliabilityClass'  : self._get_rc_from_rab(sdu_params, err_rat, res_ber), # osmo: 3
+            'PeakThroughput'    : 9, # 256 kO/s (-> 2Mb/s) # osmo: 6
+            'PrecedenceClass'   : 2, # normal priority
+            'MeanThroughput'    : 31, # best effort
+            'TrafficClass'      : self.RAB_QoS_TrafficClass.get(rabcfg['TrafficClass'], 4), # osmo: 3
+            'DeliveryOrder'     : 1 if rabcfg['DeliveryOrder'] == 'delivery-order-requested' \
+                                  else 2, # osmo: not requested
+            'ErroneousSDU'      : 2 if rabcfg['SDU-Parameters'][0]['deliveryOfErroneousSDU'] == 'yes' \
+                                  else 3, # osmo: yes
+            'MaxSDUSize'        : 0b10011001, # 1520 octets, otherwise less
+            'MaxULBitrate'      : mbr_ul, # osmo: 63
+            'MaxDLBitrate'      : mbr_dl, # osmo: 63
+            'ResidualBER'       : self._get_rber_from_rab(res_ber), # osmo: 1 (5*10^-2)
+            'SDUErrorRatio'     : self._get_ser_from_rab(err_rat), # osmo: 1 (1*10^-2)
+            'TransferDelay'     : 10, # 100 ms # osmo: 16 (200 ms)
+            #'TrafficHandlingPriority': 0,
+            'GuaranteedULBitrate': 255, # no guarantee
+            'GuaranteedDLBitrate': 255, # no guarantee
+            #'SignallingInd': 0,
+            #'SourceStatsDesc': 0,
+            }
+        #
+        if mbr_dl_ext is not None:
+            qos['MaxDLBitrateExt'] = mbr_dl_ext
+        if mbr_ul_ext is not None:
+            qos['MaxULBitrateExt'] = mbr_ul_ext
+        #
+        # TODO: in order to work,
+        # the pixel 2 expects MaxUL/DLBitrate of 63 (no Ext)
+        # the sgs6 expects ???
+        
+        
+        return qos
 
 
 #------------------------------------------------------------------------------#
@@ -310,31 +520,9 @@ class SMPDPCtxtAct(SMSigProc):
         self.SM.rab_set_default(self.nsapi, self._tid, apn, pdpaddr, pdpcfg)
         # just copy LLC_SAPI
         self.RespIEs['LLC_SAPI'] = (0, self.UEInfo['LLC_SAPI'])
-        # NAS.QoS, reusing some RAB parameters
-        rabcfg = pdpcfg['RAB']
-        self.RespIEs['QoS'] = {
-            'DelayClass': 4, # best effort
-            'ReliabilityClass': 4, # unack GTP, LLC and RLC, protected data
-            'PeakThroughput': 9, # 256 kO/s (-> 2Mb/s)
-            'PrecedenceClass': 2, # normal priority
-            'MeanThroughput': 31, # best effort
-            'TrafficClass': RANAP.RANAP_IEs.TrafficClass._cont[rabcfg['TrafficClass']],
-            'DeliveryOrder': 1 if rabcfg['DeliveryOrder'] == 'delivery-order-requested' else 2,
-            'ErroneousSDU': 2 if rabcfg['SDU-Parameters'][0]['deliveryOfErroneousSDU'] == 'yes' else 3,
-            'MaxSDUSize': 0b10011001, # 1520 octets, see TS 24.008, 10.5.6.5
-            'MaxULBitrate': 0x80 + 55,  # 576 + 55*64  = 4096kb/s
-            'MaxDLBitrate': 0x80 + 119, # 576 + 119*64 = 8192kb/s
-            'ResidualBER': 2+rabcfg['SDU-Parameters'][0]['residualBitErrorRatio']['exponent'],
-            'SDUErrorRatio': rabcfg['SDU-Parameters'][0]['sDU-ErrorRatio']['exponent'],
-            'TransferDelay': 10, # 100 ms
-            #'TrafficHandlingPriority': 0,
-            'GuaranteedULBitrate': 255, # no guarantee
-            'GuaranteedDLBitrate': 255, # no guarantee
-            #'SignallingInd': 0,
-            #'SourceStatsDesc': 0,
-            #'MaxDLBitrateExt': 75, # 16Mb/s, extended value (MaxDLBitrate = 254)
-            #'MaxULBitrateExt': 75, # 16Mb/s, extended value (MaxULBitrate = 254)
-            }
+        #
+        # The QoS is set according to the RAB config
+        self.RespIEs['QoS'] = self._get_qos(pdpcfg['RAB'])
         #
         if 'ReqType' in self.UEInfo:
             self._log('WNG', 'ReqType IE unsupported')

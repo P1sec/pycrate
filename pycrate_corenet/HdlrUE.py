@@ -672,4 +672,29 @@ class UEd(SigStack):
         # unable to send the SMS
         self.Server.SMSd.discard_rp(rp_msg, self.MSISDN)
         return False
-
+    
+    #--------------------------------------------------------------------------#
+    # pretty-print all capabilities
+    #--------------------------------------------------------------------------#
+    
+    def show_cap(self):
+        """returns a string representing all capabilities reported by the UE
+        ready for printing on screen or writing in file
+        """
+        try:
+            from IPython.lib.pretty import pretty
+        except:
+            pretty = repr
+        else:
+            txt = []
+            if self.Cap:
+                for k in self.Cap.keys():
+                    txt.append('<<< Capability : %s >>>' % k)
+                    for c in self.Cap[k][1:]:
+                        if hasattr(c, 'show'):
+                            txt.append(c.show())
+                        else:
+                            txt.append(pretty(c))
+                return '\n\n'.join(txt)
+            else:
+                return ''
