@@ -876,6 +876,18 @@ class RANAPSRNSContextTransfer(RANAPSigProc):
         }
     
     # not implemented
+    send = RANAPSigProc._send
+    
+    def recv(self, pdu):
+        # recv the SRNSContextTransfer response
+        self._recv(pdu)
+        try:
+            del self.Iu.Proc[self.Code]
+        except:
+            pass
+        if not self.errcause:
+            # TODO: do something with the list of RAB contexts
+            self._log('INF', 'success')
 
 
 class RANAPSRNSDataForwarding(RANAPSigProc):

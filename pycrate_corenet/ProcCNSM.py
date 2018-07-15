@@ -186,7 +186,7 @@ class SMSigProc(NASSigProc):
         #
         if sdu_params['deliveryOfErroneousSDU'] == 'yes':
             return 5
-        if res_ber <= 0.004:
+        if res_ber >= 0.004:
             return 5
         #
         if err_rat <= 0.000001:
@@ -225,27 +225,31 @@ class SMSigProc(NASSigProc):
             elif len(rabcfg['RAB-Parameter-ExtendedMaxBitrateList']) == 1:
                 mbr_dl = rabcfg['RAB-Parameter-ExtendedMaxBitrateList'][0]
         #
+        
+        # Warning: it seems QC modems do not like to have a maxed MaxDLBitrate (0xff)
+        # in case the MaxDLBitrateExt is used...
+        #
         if mbr_dl > 128000000:
             # 128 Mbps + ((the binary coded value in 8 bits - 10111010) * 2 Mbps)
-            mbr_dl = (0xff, min(0xfe, 0xba + ((mbr_dl-128000000)//2000000)))
+            mbr_dl = (0xfe, min(0xfe, 0xba + ((mbr_dl-128000000)//2000000)))
         elif mbr_dl > 16000000:
             # 16 Mbps + ((the binary coded value in 8 bits - 01001010) * 1 Mbps
-            mbr_dl = (0xff, 0x4a + ((mbr_dl-16000000)//1000000))
+            mbr_dl = (0xfe, 0x4a + ((mbr_dl-16000000)//1000000))
         elif mbr_dl > 8600000:
             # 8600 kbps + ((the binary coded value in 8 bits) * 100 kbps)
-            mbr_dl = (0xff, (mbr_dl-8600000)//100000)
+            mbr_dl = (0xfe, (mbr_dl-8600000)//100000)
         else:
             mbr_dl = (0x80 + ((mbr_dl-576000)//64000), None)
         #
         if mbr_ul > 128000000:
             # 128 Mbps + ((the binary coded value in 8 bits - 10111010) * 2 Mbps)
-            mbr_ul = (0xff, min(0xfe, 0xba + ((mbr_ul-128000000)//2000000)))
+            mbr_ul = (0xfe, min(0xfe, 0xba + ((mbr_ul-128000000)//2000000)))
         elif mbr_ul > 16000000:
             # 16 Mbps + ((the binary coded value in 8 bits - 01001010) * 1 Mbps
-            mbr_ul = (0xff, 0x4a + ((mbr_ul-16000000)//1000000))
+            mbr_ul = (0xfe, 0x4a + ((mbr_ul-16000000)//1000000))
         elif mbr_ul > 8600000:
             # 8600 kbps + ((the binary coded value in 8 bits) * 100 kbps)
-            mbr_ul = (0xff, (mbr_ul-8600000)//100000)
+            mbr_ul = (0xfe, (mbr_ul-8600000)//100000)
         else:
             mbr_ul = (0x80 + ((mbr_ul-576000)//64000), None)
         #
@@ -360,23 +364,26 @@ class SMSigProc(NASSigProc):
             'ResidualBER'       : self._get_rber_from_rab(res_ber), # osmo: 1 (5*10^-2)
             'SDUErrorRatio'     : self._get_ser_from_rab(err_rat), # osmo: 1 (1*10^-2)
             'TransferDelay'     : 10, # 100 ms # osmo: 16 (200 ms)
-            #'TrafficHandlingPriority': 0,
+            'TrafficHandlingPriority': 1, # should be ignored if not "interactive"
             'GuaranteedULBitrate': 255, # no guarantee
             'GuaranteedDLBitrate': 255, # no guarantee
             #'SignallingInd': 0,
             #'SourceStatsDesc': 0,
             }
         #
-        if mbr_dl_ext is not None:
-            qos['MaxDLBitrateExt'] = mbr_dl_ext
-        if mbr_ul_ext is not None:
-            qos['MaxULBitrateExt'] = mbr_ul_ext
+        if self.SM.PDP_QOS_WEXT:
+            if mbr_dl_ext is not None:
+                qos['MaxDLBitrateExt'] = mbr_dl_ext
+            if mbr_ul_ext is not None:
+                qos['MaxULBitrateExt'] = mbr_ul_ext
         #
         # TODO: in order to work,
         # the pixel 2 expects MaxUL/DLBitrate of 63 (no Ext)
         # the sgs6 expects ???
         
-        
+        if self.SM.PDP_QOS:
+            # set some hardcoded values
+            qos.update(self.SM.PDP_QOS)
         return qos
 
 
@@ -513,8 +520,8 @@ class SMPDPCtxtAct(SMSigProc):
         if 'ProtConfig' in self.UEInfo:
             self.RespIEs['ProtConfig'], pdpaddrreq = self.SM.process_protconfig(
                                                         pdpcfg, self.UEInfo['ProtConfig'])
-            if not pdpaddrreq:
-                del self.RespIEs['PDPAddr']
+            #if not pdpaddrreq:
+            #    del self.RespIEs['PDPAddr']
         #
         # set the PDP config properly
         self.SM.rab_set_default(self.nsapi, self._tid, apn, pdpaddr, pdpcfg)

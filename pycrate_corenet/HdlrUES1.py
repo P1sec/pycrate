@@ -1670,7 +1670,7 @@ class UES1d(SigStack):
         if NasRx:
             chk, err, NasRx._sec, NasRx._ulcnt = self.process_nas_sec_mac(NasRxSec, secctx, NasRx._name)
         else:
-            chk, err, sec, ulcnt = self.process_nas_sec_mac(NasRxSec, secctx, None)
+            chk, err, sec, ulcnt = self.process_nas_sec_mac(NasRxSec, secctx, '_unknown_')
         if not chk:
             return None, err
         else:
@@ -1701,14 +1701,14 @@ class UES1d(SigStack):
         else:
             secctx = self.SEC[self.SEC['KSI']]
         #
-        chk, err, sec, ulcnt = self.process_nas_sec_mac(NasRxSec, secctx, None)
+        chk, err, sec, ulcnt = self.process_nas_sec_mac(NasRxSec, secctx, '_unknown_')
         if not chk:
             return None, err
         #
         if secctx['EEA'] == 0:
             buf = NasRxSec['NASMessage'].get_val()
         else:
-            NasRxSec.decrypt(secctx['Knasenc'], 0, secctx['EEA'], sqnmsb)
+            NasRxSec.decrypt(secctx['Knasenc'], 0, secctx['EEA'], ulcnt & 0xffffff00)
             buf = NasRxSec._dec_msg
         NasRx, err2 = NAS.parse_NASLTE_MO(buf, inner=False)
         if err2:

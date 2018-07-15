@@ -448,8 +448,11 @@ class SMSd(object):
         self.TP_DCS = tp_dcs
     
     def send_tpud(self, ud, num):
-        """sends a given user-data (a buffer, or a tuple of buffers for inserting options)
-        to a given phone number
+        """sends a given user-data (directly the data buffer, or a tuple with 
+        options and the data buffer) to a given phone number
+        
+        each option must be a 2-tuple (Tag, Value) were Tag is an uint8 and Value
+        is a buffer
         """
         # TODO: implement SMS UD fragmentation into several tp_msg
         try:
@@ -462,7 +465,8 @@ class SMSd(object):
                 if len(ud) > 1:
                     # UD header IEs
                     tp_msg['TP_UDHI'].set_val(1)
-                    tp_msg['TP_UD']['UDH']['UDH'].set_val(ud[:-1])
+                    tp_msg['TP_UD']['UDH']['UDH'].set_val(
+                        [{'T': udh[0], 'V': udh[1]} for udh in ud[:-1]])
                 data = ud[-1]
             else:
                 data = ud

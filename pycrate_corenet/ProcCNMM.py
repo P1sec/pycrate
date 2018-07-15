@@ -427,10 +427,10 @@ class MMAuthentication(MMSigProc):
                           % (hexlify(self.vect[1]).decode('ascii'),
                              hexlify(res).decode('ascii'))) 
                 self.encode_msg(5, 17)
-                rej = True
+                self.success = False
             else:
                 self._log('DBG', '3G authentication accepted')
-                rej = False
+                self.success = True
                 # set a 3G security context
                 self.Iu.set_sec_ctx(self.cksn, 3, self.vect)
         else:
@@ -441,20 +441,23 @@ class MMAuthentication(MMSigProc):
                           % (hexlify(self.vect[1]).decode('ascii'),
                              hexlify(self.UEInfo['RES']).decode('ascii')))
                 self.encode_msg(5, 17)
-                rej = True
+                self.success = False
             else:
                 self._log('DBG', '2G authentication accepted')
-                rej = False
+                self.success = True
                 # set a 2G security context
                 self.Iu.set_sec_ctx(self.cksn, 2, self.vect)
         #
         self.rm_from_mm_stack()
-        if rej:
+        if not self.success:
+            if self.TRACK_PDU:
+                self._pdu.append( (time(), 'DL', self._nas_tx) )
             return self.Iu.ret_ranap_dt(self._nas_tx)
         else:
             return []
      
     def _process_fail(self):
+        self.success = False
         if self.UEInfo['RejectCause'].get_val() == 21 and 'AUTS' in self.UEInfo:
             # synch failure: resynchronize the SQN
             # set an indicator to avoid the PS stack to do another resynch 
@@ -465,6 +468,8 @@ class MMAuthentication(MMSigProc):
                 self._log('ERR', 'unable to resynchronize SQN in AuC')
                 self.encode_msg(5, 17)
                 self.rm_from_mm_stack()
+                if self.TRACK_PDU:
+                    self._pdu.append( (time(), 'DL', self._nas_tx) )
                 return self.Iu.ret_ranap_dt(self._nas_tx)
             #
             elif ret:
@@ -472,6 +477,8 @@ class MMAuthentication(MMSigProc):
                 self._log('WNG', 'USIM authentication failed for resynch')
                 self.encode_msg(5, 17)
                 self.rm_from_mm_stack()
+                if self.TRACK_PDU:
+                    self._pdu.append( (time(), 'DL', self._nas_tx) )
                 return self.Iu.ret_ranap_dt(self._nas_tx)
             #
             else:
@@ -806,7 +813,10 @@ class MMLocationUpdating(MMSigProc):
                     return self.output()
         #
         elif isinstance(Proc, MMAuthentication):
-            if self.Iu.require_smc(self):
+            if not Proc.success:
+                self.abort()
+                return []
+            elif self.Iu.require_smc(self):
                 # if we are here, the valid cksn is the one established during
                 # the auth procedure
                 return self._ret_smc(Proc.cksn, True)
@@ -947,7 +957,10 @@ class RRPagingResponse(MMSigProc):
     
     def postprocess(self, Proc=None):
         if isinstance(Proc, MMAuthentication):
-            if self.Iu.require_smc(self):
+            if not Proc.success:
+                self.abort()
+                return []
+            elif self.Iu.require_smc(self):
                 # if we are here, the valid cksn is the one established during
                 # the auth procedure
                 return self._ret_smc(Proc.cksn, True)
@@ -1030,7 +1043,10 @@ class MMConnectionEstablishment(MMSigProc):
     
     def postprocess(self, Proc=None):
         if isinstance(Proc, MMAuthentication):
-            if self.Iu.require_smc(self):
+            if not Proc.success:
+                self.abort()
+                return []
+            elif self.Iu.require_smc(self):
                 # if we are here, the valid cksn is the one established during
                 # the auth procedure
                 return self._ret_smc(Proc.cksn, True)

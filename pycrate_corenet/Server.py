@@ -1025,6 +1025,8 @@ class CorenetServer(object):
                 self._log('WNG', 'attaching an UE without dedicated configuration, IMSI %s' % imsi)
                 self.UE[imsi] = UEd(self, imsi, config=self.ConfigUE['*'])
                 return self.UE[imsi]
+            else:
+                self._log('INF', 'IMSI not allowed, %s' % imsi)
         elif 'tmsi' in kw:
             tmsi = kw['tmsi']
             if tmsi in self.TMSI:

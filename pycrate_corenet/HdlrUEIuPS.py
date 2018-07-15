@@ -443,7 +443,7 @@ class UESMd(SigStack):
                 # or 'delivery-order-not-requested'
             'MaxSDU-Size'   : 8000, # 0..32768
             'SDU-Parameters': [{
-                'sDU-ErrorRatio'        : {'mantissa': 1, 'exponent': 4}, # m * 10^-e
+                'sDU-ErrorRatio'        : {'mantissa': 1, 'exponent': 3}, # m * 10^-e
                 'residualBitErrorRatio' : {'mantissa': 1, 'exponent': 5}, # m * 10^-e
                 'deliveryOfErroneousSDU': 'no'
                 }],
@@ -461,7 +461,7 @@ class UESMd(SigStack):
             # RAB-Parameters Extensions
             #'SignallingIndication': 'signalling',
             #'RAB-Parameter-ExtendedGuaranteedBitrateList': , # 0..16000000, (DL, UL)
-            'RAB-Parameter-ExtendedMaxBitrateList': [42000000], # 16000001..256000000, (DL[, UL])
+            #'RAB-Parameter-ExtendedMaxBitrateList': [42000000], # 16000001..256000000, (DL[, UL])
             #'SupportedRAB-ParameterBitrateList': , # 1..1000000000, (DL, UL)
             #
             # UserPlaneInformation
@@ -469,7 +469,7 @@ class UESMd(SigStack):
             'UP-ModeVersions': (1, 16), # version 1
             #
             # extended max bitrate
-            'ExtMaxBitrate'  : 42000000,
+            #'ExtMaxBitrate'  : 42000000,
             #
             ### RAB ItemSecond
             'DataVolumeReportingIndication': 'do-not-report', # or 'do-report', optional
@@ -523,6 +523,34 @@ class UESMd(SigStack):
     
     # TransportLayerAddress format exchanged over RANAP
     TLA_X213 = False
+    
+    # some hardcoded SM PDP QoS values (to be set within a dict)
+    # otherwise, those values are computed mostly from the RAB config
+    PDP_QOS = {
+        #'DelayClass'        : 4, # 1..4
+        #'ReliabilityClass'  : 2, # 1..5
+        #'PeakThroughput'    : 9, # 1..9 (256kO/s / 2Mb/s)
+        #'PrecedenceClass'   : 2, # 1..3
+        #'MeanThroughput'    : 31, # 1..31 (best effort)
+        #'TrafficClass'      : 3, # 1 (convers) .. 4 (bckgnd)
+        #'DeliveryOrder'     : 2, # 1 (requested) or 2 (not requested)
+        #'ErroneousSDU'      : 2, # 1 (no detect), 2 (yes), 3 (no)
+        #'MaxSDUSize'        : 150, # 150 -> 1500 octets
+        #'MaxULBitrate'      : 63,
+        #'MaxDLBitrate'      : 63,
+        #'ResidualBER'       : 1, # 1 (5.10^-2) .. 9 (6.10^-8)
+        #'SDUErrorRatio'     : 1, # 1 (10^-2) .. 6 (10^-6) or 7 (10^-1)
+        #'TransferDelay'     : 10, # 1..62 (1: 10ms, 10: 100ms, 62: 4s)
+        #'TrafficHandlingPriority': 1, # 1, 2 or 3, should be ignored if not "interactive"
+        #'GuaranteedULBitrate': 255, # no guarantee
+        #'GuaranteedDLBitrate': 255, # no guarantee
+        #'SignallingInd'     : 0, # 0 or 1
+        #'SourceStatsDesc'   : 0, # 0 (unknown) or 1 (speech)
+        #...
+        }
+    
+    # enable the signalling of extended throughput within PDP QoS
+    PDP_QOS_WEXT = True
     
     
     def _log(self, logtype, msg):

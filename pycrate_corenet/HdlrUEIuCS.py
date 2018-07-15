@@ -128,8 +128,9 @@ class UEMMd(SigStack):
     # UE-specific T3212 (periodic LUR), should be different from the broadcasted one
     # dict {'Unit': uint3, 'Value': uint5} or None
     # Unit: 0: 10mn, 1: 1h, 2: 10h, 3: 2s, 4: 30s, 5: 1mn, 6: 320h, 7: deactivated
-    LU_T3212 = {'Unit': 5, 'Value': 10} # 10min
+    #LU_T3212 = {'Unit': 5, 'Value': 10} # 10min
     #LU_T3212 = {'Unit': 1, 'Value': 1} # 1h
+    LU_T3212 = None
     # if we want to release the IuCS after the procedure ends 
     # and there is no follow on request
     LU_IUREL = True

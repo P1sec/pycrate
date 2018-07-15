@@ -654,11 +654,11 @@ class GTPUd(object):
                         # UDP / TCP
                         port = DPIv4.get_port(pay)
                         if (self._prot_dict[prot], port) in self.WL_PORTS:
-                            self._transfer_to_ext_v4(macdst, ipbuf)
+                            self._transfer_v4_to_ext(macdst, ipbuf)
                         else:
                             return
             else:
-                self._transfer_to_ext_v4(macdst, ipbuf)
+                self._transfer_v4_to_ext(macdst, ipbuf)
         #
         else:
             #ipvers == 6
@@ -696,13 +696,13 @@ class GTPUd(object):
                         # UDP / TCP
                         port = DPIv6.get_port(pay)
                         if (self._prot_dict[prot], port) in self.WL_PORTS:
-                            self._transfer_to_ext_v6(macdst, ipbuf)
+                            self._transfer_v6_to_ext(macdst, ipbuf)
                         else:
                             return
             else:
-                self._transfer_to_ext_v6(macdst, ipbuf)
+                self._transfer_v6_to_ext_v6(macdst, ipbuf)
     
-    def _transfer_to_ext_v4(self, macdst, ipbuf):
+    def _transfer_v4_to_ext(self, macdst, ipbuf):
         # forward to the external PF_PACKET socket, over the Gi interface
         try:
             self.sk_ext_v4.sendto(b''.join((macdst, self.EXT_MAC_BUF, b'\x08\0', ipbuf)),
@@ -710,7 +710,7 @@ class GTPUd(object):
         except Exception as err:
             self._log('ERR', 'sk_ext_v4 IF error (sendto): %s' % err)
     
-    def _transfer_to_ext_v6(self, macdst, ipbuf):
+    def _transfer_v6_to_ext(self, macdst, ipbuf):
         # forward to the external PF_PACKET socket, over the Gi interface
         try:
             self.sk_ext_v6.sendto(b''.join((macdst, self.EXT_MAC_BUF, b'\x86\xdd', ipbuf)),
@@ -1079,7 +1079,7 @@ class MOD(object):
 class DNSRESP(MOD):
     '''
     This module answers to any DNS request incoming from UE (UL direction) 
-    with a single or random IP address
+    with a single or random IP address, over IPv4
     
     To be used with GTPUd.BLACKHOLING capability to avoid UE getting real
     DNS responses from servers in parallel
@@ -1093,15 +1093,15 @@ class DNSRESP(MOD):
     # the IPv4 address to answer all requests
     IP_RESP = '192.168.1.50'
     
+    DEBUG = False
+    
     @classmethod
     def handle_ul(self, ipbuf):
         # check if we have an UDP/53 request
-        ip_proto, (udpsrc, udpdst) = ord(ipbuf[9]), unpack('!HH', ipbuf[20:24])
-        if ip_proto != 17:
-            # not UDP
-            return
-        if udpdst != 53:
-            # not DNS
+        ip_vers, ip_proto, (udpsrc, udpdst) = \
+            ord(ipbuf[0:1])>>4, ord(ipbuf[9:10]), unpack('!HH', ipbuf[20:24])
+        if ip_vers != 4 or ip_proto != 53 or udp_dst != 53:
+            # not IPv4, not UDP or not on DNS port 53
             return
         
         # build the UDP / DNS response: invert src / dst UDP ports
@@ -1132,36 +1132,39 @@ class DNSRESP(MOD):
         #
         pkt = Envelope('p', GEN=(iphdr, udp, Buf('dns', val=dnsresp, hier=2)))
         # send back the DNS response
-        self.GTPUd.transfer_to_int(pkt.to_bytes())
+        self.GTPUd.transfer_v4_to_int(pkt.to_bytes())
+        if self.DEBUG:
+            self.GTPUd._log('DBG', '[DNSRESP] DNS response sent')
 
 
 class TCPSYNACK(MOD):
     '''
-    This module answers to TCP SYN request incoming from UE (UL direction) with
-    a TCP SYN-ACK, enabling to get the 1st TCP data packet from the UE
+    This module answers to TCP SYN request incoming from UE (UL direction) 
+    over IPv4 with a TCP SYN-ACK, enabling to get the 1st TCP data packet 
+    from the UE
     
     To be used with GTPUd.BLACKHOLING capability to avoid UE getting SYN-ACK 
     from real servers in parallel
     '''
     TYPE = 1
     
+    DEBUG = False
+    
     @classmethod
     def handle_ul(self, ipbuf):
         # check if we have a TCP SYN
-        ip_proto, ip_pay = ord(ipbuf[9:10]), ipbuf[20:]
-        if ip_proto != 6:
-            # not TCP
-            return
-        if ip_pay[13:14] != b'\x02':
-            # not SYN
+        ip_vers, ip_proto, ip_pay = ord(ipbuf[0:1])>>4, ord(ipbuf[9:10]), ipbuf[20:]
+        if ip_vers != 4 or ip_proto != 6 or ip_pay[13:14] != b'\x02':
+            # not IPv4, not TCP, not SYN
             return
         
         # build the TCP SYN-ACK: invert src / dst ports, seq num (random),
         # ack num (SYN seq num + 1)
         tcpsrc, tcpdst, seq = unpack('!HHI', ip_pay[:8])
-        tcp_synack = TCP(val={'seq': randint(1, 4294967295), 'ack': (1+seq)%4294967296,
-                              'src':tcpdst, 'dst':tcpsrc, 
-                              'SYN':1, 'ACK':1, 'win':0x1000}, hier=1)
+        tcp_synack = TCP(val={'seq': randint(1, 4294967295),
+                              'ack': (1+seq)%4294967296,
+                              'src': tcpdst, 'dst': tcpsrc, 
+                              'SYN': 1, 'ACK': 1, 'win': 0x1000}, hier=1)
         
         # build the IPv4 header: invert src / dst addr
         ipsrc, ipdst = inet_ntoa(ipbuf[12:16]), inet_ntoa(ipbuf[16:20])
@@ -1169,5 +1172,7 @@ class TCPSYNACK(MOD):
         #
         pkt = Envelope('p', GEN=(iphdr, tcp_synack))
         # send back the TCP SYN-ACK
-        self.GTPUd.transfer_to_int(pkt.to_bytes())
+        self.GTPUd.transfer_v4_to_int(pkt.to_bytes())
+        if self.DEBUG:
+            self.GTPUd._log('DBG', '[TCPSYNACK] TCP SYN ACK response sent')
 

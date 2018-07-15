@@ -1763,7 +1763,15 @@ class S1APErrorIndNonUEENB(S1APNonUESigProc):
     def recv(self, pdu):
         self._recv(pdu)
         if not self.errcause:
-            self._log('WNG', 'error ind received: %s.%i' % self.ENBInfo['Cause'])
+            self._log('WNG', 'error ind received: %r' % (self.ENBInfo['Cause'], ))
+            # if it corresponds to an said-unknown UE ID, disconnect the UE instance
+            if self.ENBInfo['Cause'] == ('radioNetwork', 'unknown-enb-ue-s1ap-id') \
+            and 'MME_UE_S1AP_ID' in self.ENBInfo \
+            and self.ENBInfo['MME_UE_S1AP_ID'] in self.ENB.UE:
+                ue = self.ENB.UE[self.ENBInfo['MME_UE_S1AP_ID']]
+                if ue.S1.is_connected():
+                    self._log('INF', 'UE %s to be disconnected' % ue.IMSI)
+                    ue.S1.unset_ran()
             # if it corresponds to a previously CN-initiated class 1 procedure
             # abort it
             try:

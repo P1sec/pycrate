@@ -144,7 +144,7 @@ class ENBd(object):
                 pdu_tx = []
                 for ProcRet in Proc.trigger():
                     pdu_tx.extend( ProcRet.send() )
-                self.ProcLast = ProcRet.Code
+                    self.ProcLast = ProcRet.Code
                 return pdu_tx
         #
         else:
@@ -409,11 +409,11 @@ class ENBd(object):
         """set a warning message to be broacasted by the eNodeB, by using the
         S1APWriteReplaceWarning procedure
         
-        In case of succesful procedure, self.WARN is extended with the warning
+        In case of successful procedure, self.WARN is extended with the warning
         message parameters
         
         mandatory parameters:
-            msg: uint16, type of warning message
+            msgid: uint16, type of warning message
             sernum: uint16, unique identifier of the message for the given type
             rep: 0..4095, repetition duration in sec
             num: 0..65535, number of repetitions

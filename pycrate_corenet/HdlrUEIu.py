@@ -568,7 +568,7 @@ class UEIuSigStack(SigStack):
         # IE RAB-DataVolumeReportRequestList is a sequence of ProtocolIE-Container
         # which is a sequence of ProtocolIE-Field
         # with {id: 32, crit: reject, val: RAB-DataVolumeReportRequestItem}
-        # IE RAB-DataVolumeReportRequestItem is a sequence {RAB-ID (BIT STRING of size 8)}
+        # IE RAB-DataVolumeReportRequestItem is a sequence {RAB-ID (BIT STRING of size 8), iE-Extensions}
         RIDList = []
         for rabid in rabidlist:
             RIDList.append({'id': 32, 'criticality': 'reject',
@@ -576,6 +576,34 @@ class UEIuSigStack(SigStack):
         # prepare the RANAP procedure
         IEs = {'RAB_DataVolumeReportRequestList': [RIDList]}
         RanapProc = self.init_ranap_proc(RANAPDataVolumeReport, **IEs)
+        if not RanapProc:
+            return False
+        # encode the RANAP PDU and send it over RUA
+        return self._send_to_rnc_ranap([RanapProc])
+    
+    def request_srns_ctxt(self, rabidlist):
+        """start a RANAPSRNSContextTransfer for the given list of RAB IDs (uint8)
+        """
+        if not self.connected.is_set():
+            # RANAP link disconnected
+            if self.RANAP_FORCE_PAGE:
+                # force to connect
+                if not self._net_init_con():
+                    # unable to connect with the UE
+                    return False
+            else:
+                return False
+        # IE RAB-DataForwardingList-SRNS-CtxReq is a sequence of ProtocolIE-Container
+        # which is a sequence of ProtocolIE-Field
+        # with {id: 27, crit: reject, val: RAB-DataForwardingItem-SRNS-CtxReq}
+        # IE RAB-DataForwardingItem-SRNS-CtxReq is a sequence {RAB-ID (BIT STRING of size 8), iE-Extensions}
+        RIDList = []
+        for rabid in rabidlist:
+            RIDList.append({'id': 27, 'criticality': 'reject',
+                            'value': ('RAB-DataForwardingItem-SRNS-CtxReq', {'rAB-ID': (rabid, 8)})})
+        # prepare the RANAP procedure
+        IEs = {'RAB_DataForwardingList_SRNS_CtxReq': [RIDList]}
+        RanapProc = self.init_ranap_proc(RANAPSRNSContextTransfer, **IEs)
         if not RanapProc:
             return False
         # encode the RANAP PDU and send it over RUA

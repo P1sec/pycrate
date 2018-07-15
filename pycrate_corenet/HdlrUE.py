@@ -677,7 +677,7 @@ class UEd(SigStack):
     # pretty-print all capabilities
     #--------------------------------------------------------------------------#
     
-    def show_cap(self):
+    def show_cap(self, with_measparams=False):
         """returns a string representing all capabilities reported by the UE
         ready for printing on screen or writing in file
         """
@@ -688,9 +688,36 @@ class UEd(SigStack):
         else:
             txt = []
             if self.Cap:
-                for k in self.Cap.keys():
-                    txt.append('<<< Capability : %s >>>' % k)
-                    for c in self.Cap[k][1:]:
+                for k in self.Cap:
+                    cap = self.Cap[k]
+                    if k == 'UERadioCap' and isinstance(cap[2], dict):
+                        for kb in cap[2]:
+                            # special format:
+                            txt.append('<<< Capability : UERadioCap.%s >>>' % kb)
+                            c = cap[2][kb]
+                            if kb == 'geran-cs' and isinstance(c, tuple):
+                                txt.append(c[0].show())
+                                txt.append(c[1].show())
+                            elif kb == 'utra':
+                                UEUTRACap = RRC3G.PDU_definitions.InterRATHandoverInfo
+                                UEUTRACap.set_val(c)
+                                txt.append(UEUTRACap.to_asn1())
+                            elif kb == 'eutra':
+                                UEEUTRACap = RRCLTE.EUTRA_RRC_Definitions.UE_EUTRA_Capability
+                                if not with_measparams:
+                                    meas_params_to_asn1_patch()
+                                UEEUTRACap.set_val(c)
+                                txt.append(UEEUTRACap.to_asn1())
+                                if not with_measparams:
+                                    meas_params_to_asn1_restore()
+                            #
+                            elif hasattr(c, 'show'):
+                                txt.append(c.show())
+                            else:
+                                txt.append(pretty(c))
+                    else:
+                        txt.append('<<< Capability : %s >>>' % k)
+                        c = cap[1]
                         if hasattr(c, 'show'):
                             txt.append(c.show())
                         else:

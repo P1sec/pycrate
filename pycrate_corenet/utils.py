@@ -214,7 +214,7 @@ def decode_ue_rad_cap(buf):
                                            'c1',
                                            'ueCapabilityInformation-r8'))
     except:
-        UERadCap._val, uecapinfo
+        return UERadCap._val, uecapinfo
     # decode each ueCapabilityRAT-Container
     for caprat in radcapinfo['ue-CapabilityRAT-ContainerList']:
         rattype = caprat['rat-Type'] # eutra, utra, geran-cs, geran-ps, cdma2000-1XRTT
@@ -237,13 +237,20 @@ def decode_ue_rad_cap(buf):
         elif rattype == 'geran-cs':
             m2, m3 = NAS.MSCm2(), NAS.Classmark_3_Value_part.clone()
             # MSCm2 || MSCm3
-            try:
-                m2.from_bytes(caprat['ueCapabilityRAT-Container'])
-                m3.from_bytes(caprat['ueCapabilityRAT-Container'][m2.get_len():])
-            except:
-                uecapinfo[rattype] = caprat['ueCapabilityRAT-Container']
+            buf = caprat['ueCapabilityRAT-Container']
+            if buf[0:1] != b'\x33':
+                uecapinfo[rattype] = buf
             else:
-                uecapinfo[rattype] = (m2, m3)
+                m2_len = ord(buf[1:2])
+                buf_m2 = buf[2:2+m2_len]
+                buf_m3 = buf[2+m2_len:]
+                try:
+                    m2.from_bytes(buf_m2)
+                    m3.from_bytes(buf_m3)
+                except:
+                    uecapinfo[rattype] = caprat['ueCapabilityRAT-Container']
+                else:
+                    uecapinfo[rattype] = (m2, m3)
         elif rattype == 'geran-ps':
             mrc = NAS.MS_RA_capability_value_part.clone()
             try:
@@ -253,10 +260,47 @@ def decode_ue_rad_cap(buf):
             else:
                 uecapinfo[rattype] = mrc
         else:
+            # TODO: could be cdma2000_1XRTT
             uecapinfo[rattype] = caprat['ueCapabilityRAT-Container']
     return UERadCap._val, uecapinfo
-    
-    
+
+
+# special handling for hiding MeasParameters reported in UERadioCapability
+
+def _seq_to_asn1_bypass():
+    return '{ -- removed for brevity -- }'
+
+
+def _get_mp_from_eutra_cap():
+    mp_list = []
+    par = RRCLTE.EUTRA_RRC_Definitions.UE_EUTRA_Capability
+    mp_list.append(par._cont['measParameters'])
+    par = par._cont['nonCriticalExtension']._cont['nonCriticalExtension']._cont['nonCriticalExtension']
+    mp_list.append(par._cont['measParameters-v1020'])
+    par = par._cont['nonCriticalExtension']._cont['nonCriticalExtension']._cont['nonCriticalExtension']
+    mp_list.append(par._cont['measParameters-v1130'])
+    par = par._cont['nonCriticalExtension']._cont['nonCriticalExtension']._cont['nonCriticalExtension']
+    mp_list.append(par._cont['measParameters-v11a0'])
+    par = par._cont['nonCriticalExtension']
+    mp_list.append(par._cont['measParameters-v1250'])
+    par = par._cont['nonCriticalExtension']._cont['nonCriticalExtension']._cont['nonCriticalExtension']._cont['nonCriticalExtension']
+    mp_list.append(par._cont['measParameters-v1310'])
+    return mp_list
+
+
+_RRCLTE_MPList = _get_mp_from_eutra_cap()
+_RRCLTE_MPList_to_asn1 = [mp._to_asn1 for mp in _RRCLTE_MPList]
+
+
+def meas_params_to_asn1_patch():
+    for mp in _RRCLTE_MPList:
+        mp._to_asn1 = _seq_to_asn1_bypass
+
+
+def meas_params_to_asn1_restore():
+    for i, mp in enumerate(_RRCLTE_MPList):
+        mp._to_asn1 = _RRCLTE_MPList_to_asn1[i]
+
 
 #------------------------------------------------------------------------------#
 # logging facilities

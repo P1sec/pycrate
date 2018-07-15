@@ -437,7 +437,10 @@ class GMMAttach(GMMSigProc):
                     return self.output()
         #
         elif isinstance(Proc, GMMAuthenticationCiphering):
-            if self.Iu.require_smc(self):
+            if not Proc.success:
+                self.abort()
+                return []
+            elif self.Iu.require_smc(self):
                 # if we are here, the valid cksn is the one established during
                 # the auth procedure
                 return self._ret_smc(Proc.cksn, True)
@@ -836,7 +839,10 @@ class GMMRoutingAreaUpdating(GMMSigProc):
                 return self._ret_smc(self.UEInfo['CKSN'], False)
         #
         if isinstance(Proc, GMMAuthenticationCiphering):
-            if self.Iu.require_smc(self):
+            if not Proc.success:
+                self.abort()
+                return []
+            elif self.Iu.require_smc(self):
                 # if we are here, the valid cksn is the one established during
                 # the auth procedure
                 return self._ret_smc(Proc.cksn, True)
@@ -1222,7 +1228,7 @@ class GMMAuthenticationCiphering(GMMSigProc):
         #
         else:
             # UE refused our auth request...
-            self._log('ERR', 'UE rejected AUTN, %s' % self.UEInfo['Cause'])
+            self._log('ERR', 'UE rejected AUTN, %s' % self.UEInfo['GMMCause'])
             self.rm_from_gmm_stack()
             return []
 
@@ -1377,7 +1383,10 @@ class GMMServiceRequest(GMMSigProc):
     
     def postprocess(self, Proc=None):
         if isinstance(Proc, GMMAuthenticationCiphering):
-            if self.Iu.require_smc(self):
+            if not Proc.success:
+                self.abort()
+                return []
+            elif self.Iu.require_smc(self):
                 # if we are here, the valid cksn is the one established during
                 # the auth procedure
                 return self._ret_smc(Proc.cksn, True)
