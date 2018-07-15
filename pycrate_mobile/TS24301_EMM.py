@@ -613,6 +613,7 @@ if _with_cm:
                 key: 16 bytes buffer, K_nas_enc
                 dir: 0 for uplink, 1 for downlink
                 eea: 0 to 3, reference to EEA algorithm
+                seqnoff: 0 to 2^24 by step of 0x100
             
             Returns:
                 None
@@ -643,6 +644,7 @@ if _with_cm:
                 key: 16 bytes buffer, K_nas_enc
                 dir: 0 for uplink, 1 for downlink
                 eea: 0 to 3, reference to EEA algorithm
+                seqnoff: 0 to 2^24 by step of 0x100
             
             Returns:
                 None

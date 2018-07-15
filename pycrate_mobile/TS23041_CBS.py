@@ -165,13 +165,29 @@ CBS_MessageId_dict = {
 #------------------------------------------------------------------------------#
 
 def encode_cbs_pages(msg, dcs7b=True, char_preamb=''):
+    """translates the unicode string `msg' into a buffer containing page(s)
+    ready for broadcast
+    
+    dcs7b: True, encode in GSM 7 bit characters
+           False, encode in UCS-2
+    char_preamb: to add a potential prefix for specifying the language of the 
+        message (e.g. "EN", "FR" or "DE")
+    """
     if dcs7b:
-        pages = encode_7b_cbs(msg, char_preamb)
+        # char_preamb should be 2 chars (e.g. EN) followed by a CR
+        pages = encode_7b_cbs(char_preamb + '\r' + msg)
     else:
-        pages = encode_cbs(msg)
-    msg = pack('>B', len(pages))
+        # char_preamb should be 2 chars, encoded in GSM 7 bits and padded
+        txt = encode_7b(char_preamb)[0] + msg.encode('utf-16')
+        # check number of pages needed
+        num = len(txt) // 82
+        if len(txt) % 82:
+            num += 1
+        pages = [txt[i*82:(i+1)*82] for i in range(0, num)]
+    
+        
+    buf = [pack('>B', len(pages))]
     for page, page_len in pages:
-        msg += page + pack('>B', page_len)
-    return msg
-
-
+        buf.append(page)
+        buf.append(pack('>B', page_len))
+    return b''.join(buf)

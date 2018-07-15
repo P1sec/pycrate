@@ -623,7 +623,8 @@ def encode_7b_cbs(txt):
             enc = encode_7b(''.join(page))[0]
             enc_len = len(enc)
             if enc_len < 82:
-                enc += (82-enc_len) * b'\0'
+                # padding with CR
+                enc += (82-enc_len) * b'\x0d'
             pages.append( (enc, enc_len) )
             # restart filling current page
             page, cnt = [c], c_cnt
@@ -631,7 +632,7 @@ def encode_7b_cbs(txt):
     if page:
         last = encode_7b(''.join(page))[0]
         last_len = len(last)
-        last += (82-last_len) * b'\0'
+        last += (82-last_len) * b'\x0d'
         pages.append( (last, last_len) )
     # return the tuple of pages
     return tuple(pages)

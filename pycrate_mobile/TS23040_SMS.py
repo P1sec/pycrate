@@ -866,7 +866,7 @@ class TP_UD(Envelope):
         try:
             dcs = self.get_env()['TP_DCS']
         except:
-            return self.DEFAULT_DCS
+            return self[2].DEFAULT_DCS
         else:
             grp, cs = dcs['Group'](), dcs['Charset']()
             if grp in (0, 1, 4, 5, 15):
