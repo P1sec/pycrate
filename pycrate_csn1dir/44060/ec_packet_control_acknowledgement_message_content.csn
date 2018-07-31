@@ -1,0 +1,14 @@
+-- TS 44.060 - d60
+-- 11.2.50 EC Packet Control Acknowledgement
+-- EC Packet Control Acknowledgement message content
+
+< EC Packet Control Acknowledgement message content > ::=		-- RLC/MAC control block format
+	< TLLI : bit (32) >
+	< CTRL_ACK : bit (2) >
+	< DL_CC_EST : bit (4) >
+	< padding bits >;
+
+< EC Packet Control Acknowledgement 11 bit message > ::=		-- 11-bit access burst format
+	< MESSAGE_TYPE : bit (7) == 1110 111 >
+	< DL_CC_EST : bit (4) > ;
+

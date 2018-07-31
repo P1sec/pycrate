@@ -1,0 +1,11 @@
+-- TS 44.060 - d60
+-- 12.36 MBMS Channel Parameters
+-- MBMS Channel Parameters IE
+
+< MBMS Channel Parameters IE >::=
+	{ 0										-- counting is off
+		{ 0 | 1	< MBMS p-t-m channel description : < MBMS p-t-m channel description IE > > 
+				< MBMS Session Parameters List : < MBMS Session Parameters List IE >> }
+	| 1										-- counting is on
+		{ 0 | 1	< MPRACH description : < MPRACH description IE > > } };
+

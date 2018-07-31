@@ -1,0 +1,32 @@
+-- TS 44.060 - d60
+-- 11.2.41 MBMS MS_ID Assignment
+-- MBMS MS_ID Assignment message content
+
+< MBMS MS_ID Assignment message content > ::=
+	< PAGE_MODE : bit (2) >
+	{	{ 0	< Global TFI : < Global TFI IE > >
+		| 10	< TLLI / G-RNTI : bit (32) > }
+		{ 0						-- MS_ID is assigned the first time.
+				< Length of MBMS Bearer Identity : bit (3) >
+			< MBMS Bearer Identity : bit (val (Length of MBMS Bearer Identity)) >
+				< MS_ID : bit (5 - val (Length of MBMS Bearer Identity)) >
+			< Packet Timing Advance : < Packet Timing Advance IE > >
+				{ 0 | 1	< ALPHA : bit (4) > 
+						{ 0 | 1< GAMMA : bit (5) > } 
+			}
+		| 1						-- MS_ID is reassigned.
+			< Current MS_ID Expiry Time : bit (16) >
+			{ 0							-- MS_ID is not redefined.
+			| 1							-- MS_ID is redefined.
+				< Length Indicator of MS_ID : bit (2) >
+				< MS_ID : bit (val (Length Indicator of MS_ID) + 1) > }
+				{ 0 | 1 < Packet Timing Advance : < Packet Timing Advance IE > >
+						{ 0 | 1	< ALPHA : bit (4) > 
+								{ 0 | 1< GAMMA : bit (5) > } 
+						}
+				}
+				< padding bits >
+				! < Non-distribution part error : bit (*) = < no string > > }
+		! < Address information part error : bit (*) = < no string > > }
+	! < Distribution part error : bit (*) = < no string > > ;
+

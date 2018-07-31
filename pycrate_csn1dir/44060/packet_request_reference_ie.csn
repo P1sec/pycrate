@@ -1,0 +1,8 @@
+-- TS 44.060 - d60
+-- 12.11 Packet Request Reference
+-- Packet Request Reference IE
+
+< Packet Request Reference IE > ::=
+	< RANDOM_ACCESS_INFORMATION value : bit (11) >
+	< FRAME_NUMBER : bit (16) > ;
+

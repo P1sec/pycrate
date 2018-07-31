@@ -1,0 +1,86 @@
+-- TS 44.018 - d80
+-- 10.5.2.25d RR Packet Downlink Assignment
+-- RR Packet Downlink Assignment value part
+
+< RR Packet Downlink Assignment value part > ::=
+	< MAC_MODE : bit (2) >
+	< RLC_MODE : bit (1) >
+	< TIMESLOT_ALLOCATION : bit (8) >
+	< Packet Timing Advance : Packet Timing Advance IE >
+	{ 0 | 1	< P0 : bit (4) >
+			0 				-- The value '1' was allocated in an earlier version of the protocol and shall not be used.
+			< PR_MODE : bit (1) > }
+	{ 0 | 1 < Power Control Parameters : Power Control Parameters IE > }
+	{ 0 | 1 < DOWNLINK_TFI_ASSIGNMENT : bit (5) > }
+	0						-- The value '1' was allocated in an earlier version of the protocol and shall not be used.
+	{ null									-- Receiver compatible with earlier release
+	|	{ 0 | 1				-- indicates EGPRS TBF mode, see 3GPP TS 44.060
+			< EGPRS Window Size : < EGPRS Window Size IE >>
+			< LINK_QUALITY_MEASUREMENT_MODE : bit (2) > }
+		{ 0 | 1	< Packet Extended Timing Advance : bit (2) > }
+		{ null | 0 bit** = < no string >	-- Receiver backward compatible
+		| 1 								-- Additions for REL-6
+			{ 1	< Multiple Downlink TBF Assignment : < Multiple Downlink TBF Assignment struct > > } ** 0 
+			{ null | 0 bit** = < no string >	-- Receiver backward compatible with earlier release
+			| 1 								-- Additions for REL-7
+				< FANR: bit (1) >
+				{ 1 
+					{ 0 | 1< NPM Transfer Time : bit (5) > } 
+					< EVENT_BASED_FANR: bit (1) >
+				}** 0 
+				< Downlink EGPRS Level: < EGPRS Level IE > >
+				{ null | 0 bit** = < no string >	-- Receiver backward compatible with earlier version
+				| 1 								-- Additions for REL-8
+					{ 0 | 1	{ 1 < Measurement_Control_E-UTRAN : bit(1) >
+								< E-UTRAN_FREQUENCY_INDEX : bit (3) >
+								{ 1 < E-UTRAN_FREQUENCY_INDEX : bit (3) > } ** 0
+							} ** 0
+					}
+					{ 0 | 1	{ 1< Measurement_Control_UTRAN : bit(1) >
+								< UTRAN_FREQUENCY_INDEX : bit (5) >
+								{ 1 < UTRAN_FREQUENCY_INDEX : bit (5) > } ** 0
+							} ** 0
+					}
+					{ null | 0 bit** = < no string >	-- Receiver backward compatible with earlier version
+					| 1								-- Additions for Rel-9
+						{ 0 		-- EMST is not used
+						| 1	< RLC Entity 2 : < RLC Entity Struct > >
+							{ 0
+							| 1	< RLC Entity 3 : < RLC Entity Struct > > }
+						}
+						{ null | 0 bit** = < no string > -- Receiver backward compatible with earlier version
+						| 1 								-- Additions for Rel-10
+							{ 1 < EMSR Additional PFCs 1 : < Additional PFCs struct > > } ** 0	
+							{ 1 < EMSR Additional PFCs 2 : < Additional PFCs struct > > } ** 0	
+							{ 1 < EMSR Additional PFCs 3 : < Additional PFCs struct > > } ** 0
+						<spare bit>**
+						}	-- End of additions for Rel-10
+					}	-- End of additions for Rel-9
+				}	-- End of additions for Rel-8
+			}	-- End of additions for Rel-7
+		}	-- End of additions for Rel-6
+	} ;	-- End of additions for R99
+
+< Multiple Downlink TBF Assignment struct > ::=
+	{ 0 | 1 < Uplink Control Timeslot : bit (3) > }
+	< TIMESLOT_ALLOCATION : bit (8) >
+	{ 1 < Downlink TBF assignment : < Downlink TBF assignment struct > > } ** 0 ;
+
+< Downlink TBF assignment struct > ::=
+	< PFI : bit (7) > 
+	< RLC_MODE : bit (1) >
+	< DOWNLINK_TFI_ASSIGNMENT : bit (5) >
+	< CONTROL_ACK : bit (1) >
+	{ 0 | 1 < EGPRS Window Size : < EGPRS Window Size IE >> } ;
+
+< RLC Entity Struct > ::=
+	< DOWNLINK_TFI_ASSIGNMENT : bit (5) >
+	< RLC_MODE : bit (1) >
+	{ 0 | 1 < EGPRS Window Size : < EGPRS Window Size IE > > }
+	< PFI : bit (7) >;
+
+< Additional PFCs struct > ::=
+	< DOWNLINK_TFI_ASSIGNMENT : bit (5) >
+ { 0 | 1 < NPM Transfer Time : bit (5) > }
+	< PFI : bit (7) >;
+

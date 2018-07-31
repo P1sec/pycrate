@@ -1,0 +1,21 @@
+-- TS 44.018 - d80
+-- 10.5.2.37h SI 18 Rest Octets
+-- SI 18 Rest Octets
+
+< SI 18 Rest Octets > ::=
+	< SI18_CHANGE_MARK : bit (2) >
+	< SI18_INDEX : bit (3) >
+	< SI18_LAST : bit (1) >
+	< spare bit > * 2
+
+	< Non-GSM Message : < Non-GSM Message struct > > **
+ 	 	 	 	--	The Non-GSM Message struct is repeated until:
+	 	 	 		--	A) val(NR_OF_CONTAINER_OCTETS) = 0, or
+ 	 	 	 		--	B) the SI message is fully used
+	< spare padding > ;
+
+< Non-GSM Message struct > ::=
+	< Non-GSM Protocol Discriminator : bit(3) >
+	< NR_OF_CONTAINER_OCTETS : bit(5) >
+	{ < CONTAINER : bit(8) > } * (val(NR_OF_CONTAINER_OCTETS)) ;
+

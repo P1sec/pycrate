@@ -1,0 +1,14 @@
+-- TS 44.018 - d80
+-- 10.5.2.1c BA List Pref
+-- BA List Pref
+
+< BA List Pref >::=
+	< LENGTH OF BA LIST PREF : bit (8) >
+	{1 < RANGE LIMITS >}**0
+	{1 < BA FREQ : bit (10) >}**0
+	< spare padding >;
+
+< RANGE LIMITS >::=
+	< RANGE LOWER : bit (10) >
+	< RANGE UPPER : bit (10) >;
+

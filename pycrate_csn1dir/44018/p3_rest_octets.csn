@@ -1,0 +1,29 @@
+-- TS 44.018 - d80
+-- 10.5.2.25 P3 Rest Octets
+-- P3 Rest Octets
+
+< P3 Rest Octets > ::=
+	{L | H < CN3 : bit (2) > < CN4 : bit (2) >}
+	{L | H < NLN PCH : bit (2) > < NLN status PCH : bit >}
+	{L | H < Priority1 : Priority >}
+	{L | H < Priority2 : Priority >}
+	{L | H < Priority3 : Priority >}
+	{L | H < Priority4 : Priority >}
+	{ null	| L				-- Receiver compatible with earlier release
+			| H				-- Additions in Release 10
+				< Implicit Reject CS : bit >
+				< Implicit Reject PS : bit >
+	} 
+	{ null	| L				-- Receiver compatible with earlier release
+		    | H				-- Additions in Release 11
+			    < IPA Support : bit >
+	} 
+	{ null	| L				-- Receiver compatible with earlier release
+		    | H				-- Additions in Release 13
+			    < PEO_BCCH_CHANGE_MARK : bit (2) >
+			    < RCC : bit (3) >
+	} 
+	< spare padding > ;
+
+< Priority > ::= < bit(3) > ;
+

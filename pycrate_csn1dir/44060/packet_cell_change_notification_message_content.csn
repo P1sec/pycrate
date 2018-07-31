@@ -1,0 +1,85 @@
+-- TS 44.060 - d60
+-- 11.2.3a Packet Cell Change Notification
+-- Packet Cell Change Notification message content
+
+< Packet Cell Change Notification message content > ::=
+	< Global TFI : < Global TFI IE > >
+	{ 0 < ARFCN : bit (10) >
+		< BSIC : bit (6) >
+	| 10			-- Extension in Rel-6 and an escape bit for future extensions of the message added: 
+		< 3G Target Cell : < 3G Target Cell Struct >> -- Re-selection with a 3G cell as the preferred target cell
+	| 110			-- Extension in Rel-8 for E-UTRAN and an escape bit for future extensions of the message
+		{ 0 | 1	< ARFCN : bit (10) >
+				< BSIC : bit (6) > }
+		{ 0 | 1	< 3G Target Cell : < 3G Target Cell Struct >> }
+		{ 0 | 1	< E-UTRAN Target Cell : < E-UTRAN Target Cell Struct >> }
+		{ 0 | 1	< E-UTRAN CCN Measurement Report : < E-UTRAN CCN Measurement Report struct > > }
+	| 1110			-- Extension in Rel-9 for CSG target cells and an escape bit for future extensions of the message
+		{ 0 
+			< UTRAN CSG Target Cell Measurement Report : < UTRAN CSG Measurement Report IE > >
+		 | 1 
+			< E-UTRAN CSG Target Cell Measurement Report : < E-UTRAN CSG Measurement Report IE > > }
+		{ 0 | 1	< E-UTRAN CCN Measurement Report : < E-UTRAN CCN Measurement Report struct > > }
+	! < Message escape : { 1111 } bit (*) = <no string> > }
+	{ 0< BA_USED : bit > | 1 < PSI3_CHANGE_MARK : bit(2) > }
+	< PMO_USED : bit >
+	< PCCN_SENDING : bit (1) >
+	< CCN Measurement Report : < CCN Measurement Report struct > >
+	{ null | 0 	bit** = < no string >	-- Receiver compatible with earlier release
+	| 1									-- Addition in Rel-6
+		{ 0 | 1 	< 3G_BA_USED : bit > }
+		< 3G CCN Measurement Report : < 3G CCN Measurement Report struct > >
+		{ null | 0	bit ** = < no string >	-- Receiver compatible with earlier release
+		| 1		-- Additions in Rel-10
+			< CSG Discriminator : bit (1) >
+			{ null | 0	bit ** = < no string >	-- Receiver compatible with earlier release
+			| 1		-- Additions in Rel-11
+				{ 0 | 1	< E-UTRAN Target Cell with extended EARFCN :
+						< E-UTRAN Target Cell with extended EARFCN struct >> }
+				{ null | 0	bit ** = < no string >	-- Receiver compatible with earlier release
+				| 1		-- Additions in Rel-12
+					{ 0 | 1 < Downlink_eTFI : bit (3) > }
+	< padding bits > } } } };
+
+< CCN Measurement Report struct > ::=
+	< RXLEV_SERVING_CELL : bit (6) >
+	0 						-- The value '1' was allocated in an earlier version of the protocol and shall not be used.
+	< NUMBER_OF_NC_MEASUREMENTS : bit (3) >
+	{	< FREQUENCY_N : bit (6) >
+		{ 0 | 1 < BSIC_N : bit (6) > }
+		< RXLEV_N : bit (6) > } * (val(NUMBER_OF_NC_MEASUREMENTS)) ;
+
+< 3G Target Cell Struct > ::=
+		{ 0 | 1 < FDD-ARFCN : bit (14) >						-- 3G UTRAN FDD
+				{ 0 | 1 < Bandwidth_FDD : bit (3) > }
+				< SCRAMBLING_CODE : bit (9) > }
+		{ 0 | 1 < TDD-ARFCN : bit (14) >						-- 3G UTRAN TDD
+				{ 0 | 1 < Bandwidth_TDD : bit (3) > }
+				< Cell Parameter : bit (7) >
+				< Sync Case : bit > }
+		< REPORTING_QUANTITY : bit (6) > ; 		-- Measurement Report for 3G target cell
+
+< 3G CCN Measurement Report Struct > ::= 			-- Measurement Report for 3G neighbour cells 
+	< N_3G: bit (3) >
+	{	< 3G_CELL_LIST_INDEX : bit (7) >
+		< REPORTING_QUANTITY : bit (6) > } * (val(N_3G) + 1) ;
+
+< E-UTRAN Target Cell struct > ::=
+	< EARFCN : bit (16) >
+	{ 0 | 1 < Measurement Bandwidth: bit (3) > }
+	< Physical Layer Cell Identity : bit (9) >
+	< REPORTING_QUANTITY : bit (6) > ; 		-- Measurement Report for E-UTRAN target cell
+
+< E-UTRAN CCN Measurement Report struct > ::=		-- Measurement Report for E-UTRAN neighbour cells
+	< 3G_BA_USED : bit >
+	< N_E-UTRAN: bit (2) >
+	{	< E-UTRAN_FREQUENCY_INDEX : bit (3) >
+		< CELL IDENTITY : bit (9) >
+		< REPORTING_QUANTITY : bit (6) > } * (val(N_E-UTRAN) + 1) ;
+
+< E-UTRAN Target Cell with extended EARFCN struct > ::=
+	< EARFCN_extended : bit (18) >
+	{ 0 | 1 < Measurement Bandwidth: bit (3) > }
+	< Physical Layer Cell Identity : bit (9) >
+	< REPORTING_QUANTITY : bit (6) > ; 		-- Measurement Report for E-UTRAN target cell
+

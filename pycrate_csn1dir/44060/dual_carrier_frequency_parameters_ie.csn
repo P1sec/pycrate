@@ -1,0 +1,32 @@
+-- TS 44.060 - d60
+-- 12.8.2 Dual Carrier Frequency Parameters
+-- Dual Carrier Frequency Parameters IE
+
+< Dual Carrier Frequency Parameters IE > ::=
+	< TSC : bit (3) >
+	{ 00 
+		{ 0 | 1 < ARFCN1 : bit (10) > 
+			< ARFCN2 : bit (10) > }	
+	| 01 < Indirect encoding : < Dual Carrier Indirect encoding struct > >
+	| 10 < Direct encoding 1 : < Dual Carrier Direct encoding 1 struct > >
+	| 11 < Direct encoding 2 : < Dual Carrier Direct encoding 2 struct > > } ;
+
+< Dual Carrier Direct encoding 1 struct > ::=
+	{ 0 | 1 < MAIO1 : bit (6) > }
+	{ 0 | 1 < MAIO2 : bit (6) > }
+	< GPRS Mobile Allocation : < GPRS Mobile Allocation IE > > ;
+
+< Dual Carrier Indirect encoding struct > ::=
+	{ 0 | 1 < MAIO1 : bit (6) > }
+	{ 0 | 1 < MAIO2 : bit (6) > }
+	< MA_NUMBER : bit (4) >
+	{ 0 | 1	< CHANGE_MARK_1 : bit (2) >
+			{ 0 | 1 < CHANGE_MARK_2 : bit (2) > } } ;
+
+< Dual Carrier Direct encoding 2 struct > ::=
+	{ 0 | 1 < MAIO1 : bit (6) > }
+	{ 0 | 1 < MAIO2 : bit (6) > }
+	< HSN : bit (6) >
+	< Length of MA Frequency List contents : bit (4) >
+	< MA Frequency List contents : octet (val(Length of MA Frequency List contents) + 3) > ;
+

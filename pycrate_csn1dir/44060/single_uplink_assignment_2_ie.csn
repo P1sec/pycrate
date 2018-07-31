@@ -1,0 +1,29 @@
+-- TS 44.060 - d60
+-- 12.48a.3 Single Uplink Assignment 2
+-- Single Uplink Assignment 2 IE
+
+< Single Uplink Assignment 2 IE > ::=
+	< EGPRS Channel Coding Command : < EGPRS Modulation and Coding Scheme IE > >
+	< RESEGMENT : bit (1) >
+	{ 0 | 1	< Uplink EGPRS Window Size : < EGPRS Window Size IE > > }
+	< Uplink EGPRS Level: < EGPRS Level IE > >
+	{ 0 | 1 	-- '1' indicates that FANR is activated
+		{ 0 		-- SSN-based encoding is selected
+		| 1 		-- Time-based encoding is selected
+			< REPORTED TIMESLOTS_C1 : bit (8) > 			-- Carrier 1 in Downlink Dual Carrier configuration
+			{ 0 | 1 < REPORTED TIMESLOTS C2 : bit (8) > }	-- Carrier 2 in Downlink Dual Carrier configuration
+			< TSH : bit (2) > } }
+	{ 0	 				-- BTTI mode
+	| 1 					-- RTTI mode
+		< RTTI_USF_MODE : bit (1) >
+		-- The Uplink Assignment PDCH Pairs Description IE shall not ne included
+		-- when an RTTI configuration description for downlink TBF(s) is provided in the message
+		{ 0 | 1 < Uplink Assignment PDCH Pairs Description : < PDCH Pairs Description IE > > }
+	} 
+	< Dynamic Allocation 2 : < Dynamic Allocation 2 IE > >
+	{ 0 | 1 < PFI : bit (7) > }
+	< RLC_MODE : bit (1) >
+	{ 0 | 1	< NPM Transfer Time : bit (5) > }
+	{ 0 | 1 < Pulse Format: < Pulse Format IE > > }
+	;
+

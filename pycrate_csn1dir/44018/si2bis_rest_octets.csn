@@ -1,0 +1,7 @@
+-- TS 44.018 - d80
+-- 10.5.2.33 SI 2bis Rest Octets
+-- SI2bis Rest Octets
+
+<SI2bis Rest Octets> ::=
+	<spare padding> ;
+

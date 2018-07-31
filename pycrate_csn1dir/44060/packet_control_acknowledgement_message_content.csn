@@ -1,0 +1,32 @@
+-- TS 44.060 - d60
+-- 11.2.2 Packet Control Acknowledgement
+-- Packet Control Acknowledgement message content
+
+< Packet Control Acknowledgement message content > ::=		-- RLC/MAC control block format
+	< TLLI/G-RNTI : bit (32) >
+	< CTRL_ACK : bit (2) >
+	{	null | 0 bit** = < no string >			-- Receiver backward compatible with earlier version of the protocol
+		| 1										-- Release 5 additions
+			{ 0 | 1 < TN_RRBP : bit (3) > }
+			{ 0 | 1 < G-RNTI extension : bit (4) > }
+			{	null | 0 bit** = < no string >			-- Receiver backward compatible with earlier version of the protocol
+				| 1										-- Release 6 additions
+				{ 0 | 1 < CTRL_ACK_EXTENSION : bit (9) > }
+			< padding bits > } } ;
+
+< Packet Control Acknowledgement 11 bit message > ::=		-- 11-bit access burst format
+	--< MESSAGE_TYPE : bit (9) == 1111 1100 1 >
+	--|	{	< MESSAGE_TYPE : bit (6) == 110111 >
+	{	< MESSAGE_TYPE : bit (9) == 1111 1100 1 >
+	|	< MESSAGE_TYPE : bit (6) == 110111 >
+			< TN_RRBP : bit (3) > }
+	< CTRL_ACK : bit (2) > ;
+
+< Packet Control Acknowledgement 8 bit message > ::=			-- 8-bit access burst format
+	--< MESSAGE_TYPE : bit (6) == 0111 11 >
+	--|	{	< MESSAGE_TYPE : bit (3) == 000>
+	{	< MESSAGE_TYPE : bit (6) == 0111 11 >
+	|	< MESSAGE_TYPE : bit (3) == 000>
+			< TN_RRBP : bit (3) > }
+	< CTRL_ACK : bit (2) > ;
+

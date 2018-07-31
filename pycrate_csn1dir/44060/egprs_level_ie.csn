@@ -1,0 +1,6 @@
+-- TS 44.060 - d60
+-- 12.10f EGPRS Level description
+-- EGPRS Level IE
+
+< EGPRS Level IE > ::= bit (2) ;
+

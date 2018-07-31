@@ -1,0 +1,17 @@
+-- TS 44.018 - d80
+-- 10.5.2.11a DTM Information Details
+-- DTM Information Details value part
+
+< DTM Information Details value part > ::=
+	< MAX_LAPDm : bit (3) >
+	< GPRS_MS_TXPWR_MAX_CCH : bit (5) >
+	< Cell identity: bit (16) >
+	{	null | L			-- Receiver backward compatible with earlier version
+		| H				-- Additions for REL-6 
+			{	0			-- MBMS procedures not supported by the cell if the choice bit is set to '0'
+				| 1			-- MBMS procedures supported by the cell if the choice bit is set to '1'
+				< DEDICATED_MODE_MBMS_NOTIFICATION_SUPPORT: bit > 	
+				< MNCI_SUPPORT: bit >}
+		< spare bit >**
+	};
+

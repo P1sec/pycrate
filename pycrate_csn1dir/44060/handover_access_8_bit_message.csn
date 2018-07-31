@@ -1,0 +1,7 @@
+-- TS 44.060 - d60
+-- 11.2.33 Handover Access (Iu mode only)
+-- Handover Access 8 bit message
+
+< Handover Access 8 bit message > ::=		-- 8-bit access burst format
+	< HANDOVER_REFERENCE_VALUE : bit (8) >;
+

@@ -1,0 +1,13 @@
+-- TS 44.060 - d60
+-- 11.2.15 Packet Queuing Notification
+-- Packet Queueing Notification message content
+
+< Packet Queueing Notification message content > ::=
+	< PAGE_MODE : bit (2) >
+	{	111 < Packet Request Reference : < Packet Request Reference IE > >
+		{	< TQI : bit (16) >
+			< padding bits >
+			! < Non-distribution part error : bit (*) = < no string > > }
+		! < Address information part error : bit (*) = < no string > > }
+	! < Distribution part error : bit (*) = < no string > > ;
+

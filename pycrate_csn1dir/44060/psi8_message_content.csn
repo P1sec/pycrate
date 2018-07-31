@@ -1,0 +1,31 @@
+-- TS 44.060 - d60
+-- 11.2.24 Packet System Information Type 8
+-- PSI8 message content
+
+< PSI8 message content > ::=
+	< PAGE_MODE : bit (2) >
+	< PSI8_CHANGE_MARK : bit (2) >
+	< PSI8_INDEX : bit (3) >
+	< PSI8_COUNT : bit (3) >
+	{ 0 | 1 < CBCH Channel Description : < CBCH Channel Description struct > > }
+	{ 	null | 0	bit** = < no string >
+		| 1								-- Release 4 additions:
+			{ 0 | 1 < Dynamic ARFCN Mapping Description : < Dynamic ARFCN Mapping Description struct > > }
+		< padding bits > }
+	! < Distribution part error : bit (*) = < no string > > ;
+
+< CBCH Channel Description struct > ::=
+	< Channel type and TDMA offset : bit (5) >
+	< TN : bit (3) >
+	< Frequency Parameters : < Frequency Parameters IE > > ;
+
+< Dynamic ARFCN Mapping Description struct > ::=
+	{ 0 | 1 < DM_CHANGE_MARK : bit (4) > }
+	{ 1 < DYNAMIC ARFCN MAPPING > } ** 0 ;
+
+< DYNAMIC ARFCN MAPPING >::=
+	< GSM_Band : bit (4) >
+	< ARFCN_FIRST : bit (10) >								-- Dynamic ARFCN mapping parameters
+	< BAND_OFFSET: bit (10) >
+	< ARFCN_RANGE : bit (7) > ;
+

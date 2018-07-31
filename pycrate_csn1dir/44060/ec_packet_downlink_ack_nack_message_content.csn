@@ -1,0 +1,19 @@
+-- TS 44.060 - d60
+-- 11.2.51 EC Packet Downlink Ack/Nack
+-- EC Packet Downlink Ack/Nack message content
+
+< EC Packet Downlink Ack/Nack message content > ::=
+	< DOWNLINK_TFI : bit (5) >
+	< MS OUT OF MEMORY : bit(1)>
+	{ 0 < EC Ack/Nack Description : < EC Ack/Nack Description IE >>	-- Final Ack Indicator = 0
+	 | 1				-- Final Ack Indicator = 1 }
+	{ 0
+	| 1 {	< EC Channel Quality Report : < EC Channel Quality Report IE > >
+			< DL_CC_EST : bit (4) > } }
+	{ 0 | 1	< EC Channel Request Description : < EC Channel Request Description struct > > }
+	<padding bits >;
+
+< EC Channel Request Description struct > ::=
+	< PRIORITY : bit (1) >
+	< NUMBER_OF_UL_DATA_BLOCKS : bit (4) >;
+

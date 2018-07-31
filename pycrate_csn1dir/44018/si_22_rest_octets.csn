@@ -1,0 +1,29 @@
+-- TS 44.018 - d80
+-- 10.5.2.37n SI 22 Rest Octets
+-- SI 22 Rest Octets
+
+< SI 22 Rest Octets > ::=
+	
+	< SI 22_CHANGE_MARK : bit (2) >
+	< SI 22_INDEX : bit (3) >
+	< SI 22_COUNT : bit (3) >
+	{ 0 | 1	< Network Sharing Information : < Network Sharing Information struct >> }
+	< spare padding > ;
+
+< Network Sharing Information struct > ::=
+	< SI23 Indicator : bit >	
+	< Common_PLMN_Allowed : bit >
+	{ 0		 | 1 < Common_PLMN_PS_ACC : bit(16) > } 
+	< Nb_Additional_PLMNs : bit (2) >
+	{	{ 0 | 1 < MCC : bit (12) > } < MNC : bit (12) >
+		< NCC Permitted : bit (8) >
+		{ 0		-- The previously listed Access Control Class bitmap applies
+		| 1		-- The indicated Access Control Class bitmap applies 
+				< Additional_ACC: bit (16) > }
+		{ 0			-- Domain-specific access control not in use
+		| 1			-- Domain specific access control in use
+			{ 0		-- The previously listed PS Access Control Class bitmap applies 
+			| 1 < PS_ACC: bit(16) > }		-- The indicated PS Access Control Class bitmap applies
+		} 
+	} * ( val (Nb_Additional_PLMNs)+1) ;
+

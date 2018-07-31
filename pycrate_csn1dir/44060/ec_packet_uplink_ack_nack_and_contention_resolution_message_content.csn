@@ -1,0 +1,23 @@
+-- TS 44.060 - d60
+-- 11.2.59 EC Packet Uplink Ack/Nack and Contention Resolution
+-- EC Packet Uplink Ack/Nack and Contention Resolution message content
+
+< EC Packet Uplink Ack/Nack and Contention Resolution message content > ::=
+	< USED_DL_COVERAGE_CLASS : < Used DL Coverage Class IE >>
+	{	< UPLINK_TFI : bit (5) >
+		{	< CONTENTION_RESOLUTION_TLLI : bit (32) >
+			< EC Primary Ack/Nack Description : < EC Primary Ack/Nack Description IE >>
+			< PUANCR Fixed Uplink Allocation : < PUANCR Fixed Uplink Allocation struct > >
+			< RESEGMENT : bit (1) >
+			< padding bits >
+		}
+		! < Non-distribution part error : bit (*) = <no string> >
+	}
+	--! < Address information part error : bit (*) = <no string> > }
+	! < Distribution part error : bit (*) = <no string> > ;
+
+< PUANCR Fixed Uplink Allocation struct > ::= 
+	< START_FIRST_UL_RLC_DATA_BLOCK : bit (4) >
+	{ 1	{ 0	< DELAY_NEXT_UL_RLC_DATA_BLOCK : bit (3) >	-- delay until start of next UL RLC Data block 
+        | 1 } } ** 0; -- next UL RLC Data block starts at first possible occasion after previous UL RLC Data block
+

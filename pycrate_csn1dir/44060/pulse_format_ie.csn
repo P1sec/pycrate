@@ -1,0 +1,36 @@
+-- TS 44.060 - d60
+-- 12.8.3 Pulse Format description
+-- Pulse Format IE
+
+< Pulse Format IE > ::=
+	{ 0 < Pulse Format Coding 1 : bit (3) >
+	| 1 < Pulse Format Coding 2 : < Pulse Format Coding 2 struct > > };
+
+< Pulse Format Coding 2 struct > ::=
+	{ 0	< Pulse Format Bitmap Length: bit (7) >
+		< Pulse Format Bitmap: 
+			bit (val (Pulse Format Bitmap Length) + 1) >
+ 			--& { { 1 | 01 | 00 } ** ! { bit** = <no string> } } >
+	| 1	< Non Hopping Carrier Pulse Format : 1 | 01 | 00 >
+	} ;
+
+< DLMC Frequency Parameters IE > ::=
+	< TSC : bit (3) >
+	{ 00 < ARFCN : bit (10) >
+	| 01 < DLMC Indirect encoding : < DLMC Indirect encoding struct > >
+	| 10 < DLMC Direct encoding 1 : < DLMC Direct encoding 1 struct > >
+	| 11 < DLMC Direct encoding 2 : < DLMC Direct encoding 2 struct > > } ;
+
+< DLMC Indirect encoding struct > ::=
+	< MA_NUMBER : bit (4) >
+	{ 0 | 1	< CHANGE_MARK_1 : bit (2) >
+			{ 0 | 1 < CHANGE_MARK_2 : bit (2) > } } ;
+
+< DLMC Direct encoding 1 struct > ::=
+	< GPRS Mobile Allocation : < GPRS Mobile Allocation IE > > ;
+
+< DLMC Direct encoding 2 struct > ::=
+	< HSN : bit (6) >
+	< Length of MA Frequency List contents : bit (4) >
+	< MA Frequency List contents : octet (val(Length of MA Frequency List contents) + 3) > ;
+

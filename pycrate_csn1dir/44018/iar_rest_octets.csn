@@ -1,0 +1,15 @@
+-- TS 44.018 - d80
+-- 10.5.2.17 IAR Rest Octets
+-- IAR Rest Octets
+
+<IAR Rest Octets> ::=
+		{ 0 | 1 < Extended RA 1 : bit (5) > }
+		{ 0 | 1 < Extended RA 2 : bit (5) > }
+		{ 0 | 1 < Extended RA 3 : bit (5) > }
+		{ 0 | 1 < Extended RA 4 : bit (5) > }
+		{	null		| L		-- Receiver compatible with earlier release
+			| H 				-- Additions in Release 13
+				< RCC : bit (3) >
+		}
+		<spare padding> ;
+

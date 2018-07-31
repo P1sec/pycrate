@@ -1,0 +1,20 @@
+-- TS 44.060 - d60
+-- 12.5a.2 EGPRS BEP Link Quality Measurements Type 2 IE
+-- EGPRS BEP Link Quality Measurements Type 2 IE
+
+<EGPRS BEP Link Quality Measurements Type 2 IE> ::=
+	{ 0 | 1	< GMSK_MEAN_BEP : bit (5) >
+			< GMSK_CV_BEP : bit (3) >}
+	{ 0 | 1	< 8PSK_MEAN_BEP : bit (5) >
+			< 8PSK_CV_BEP : bit (3) > }
+	{ 0 | 1	< QPSK_MEAN_BEP : bit (5) >
+			< QPSK_CV_BEP : bit (3) > }
+	{ 0 | 1	< 16QAM_ NSR_MEAN_BEP : bit (5) >
+			< 16QAM_ NSR_CV_BEP : bit (3) > }
+	{ 0 | 1	< 32QAM_ NSR_MEAN_BEP : bit (5) >
+			< 32QAM_ NSR_CV_BEP : bit (3) > }
+	{ 0 | 1	< 16QAM_HSR_MEAN_BEP : bit (5) >
+			< 16QAM_HSR_CV_BEP : bit (3) > }
+	{ 0 | 1	< 32QAM_HSR_MEAN_BEP : bit (5) >
+			< 32QAM_HSR_CV_BEP : bit (3) > };
+

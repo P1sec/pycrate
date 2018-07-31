@@ -1,0 +1,10 @@
+-- TS 44.060 - d60
+-- 11.2.17c Packet Serving Cell SI
+-- Packet Serving Cell SI message content
+
+< Packet Serving Cell SI message content > ::=
+	< PAGE_MODE : bit (2) >
+	< CONTAINER_DATA : octet ** >
+	< padding bits >
+	! < Distribution part error : bit (*) = < no string > > ;
+

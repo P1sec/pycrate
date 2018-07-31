@@ -1,0 +1,37 @@
+-- TS 44.060 - d60
+-- 11.2.42 Packet MBMS Announcement
+-- PACKET MBMS ANNOUNCEMENT message content
+
+< PACKET MBMS ANNOUNCEMENT message content > ::=
+	< PAGE_MODE : bit (2) >
+	{
+	    < TMGI : < TMGI IE > >
+	    { 0 | 1 < MBMS Session Identity : bit (8) > }
+	    { 0 										-- counting is off
+		    { 0 | 1 < MBMS p-t-m channel description : < MBMS p-t-m channel description struct > > }
+	    | 1										-- counting is on
+		    { 0 | 1 < MPRACH description : < MPRACH description struct > > }
+	    } 
+	    { 0 | 1 < RESTRICTION_TIMER : bit (4) > }
+	    < padding bits >
+	} //		-- truncation at end of message allowed, bits '0' assumed
+	! < Distribution part error : bit (*) = < no string > > ;
+
+< MBMS p-t-m channel description struct > ::=
+	< Estimated Session Duration : bit (8) >
+	{ 0 | 1 < MBMS Radio Bearer Starting Time : bit (16) > }
+	{ 0 | 1 < Frequency Parameters : < Frequency Parameters IE > > }
+	< DL_TIMESLOT_ALLOCATION : bit (8) >
+	< Length of MBMS Bearer Identity : bit (3) >
+	< MBMS Bearer Identity : bit (val (Length of MBMS Bearer Identity)) >
+	{ 0 | 1 < EGPRS Window Size : < EGPRS Window Size IE >> }
+	{ 0 | 1 < NPM Transfer Time : bit (5) > };
+
+< MPRACH description struct > ::=
+	{ 0 | 1 < Frequency Parameters : < Frequency Parameters IE > > }
+	< MPRACH_TIMESLOT : bit (3) >
+	< USF : bit (3) >
+	{ 0 									-- no MPRACH access parameters present
+	| 1										-- MPRACH access parameters present
+		< MPRACH Control Parameters : < MPRACH Control Parameters IE > > } ;
+

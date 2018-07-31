@@ -1,0 +1,10 @@
+-- TS 44.060 - d60
+-- 11.2.45 Packet Physical Information (A/Gb mode only)
+-- Packet Physical information message content
+
+< Packet Physical information message content > ::=		-- RLC/MAC control block format
+	< PAGE_MODE : bit (2) >
+	< Global TFI : < Global TFI IE > > 
+ < TIMING_ADVANCE_VALUE : bit (8) >
+	< padding bits >;									-- truncation at end of message allowed, bits '0' assumed	
+

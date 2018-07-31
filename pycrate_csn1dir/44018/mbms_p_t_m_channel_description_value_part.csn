@@ -1,0 +1,8 @@
+-- TS 44.018 - d80
+-- 10.5.2.58 MBMS p-t-m Channel Description
+-- MBMS p-t-m Channel Description value part
+
+< MBMS p-t-m Channel Description value part > ::=
+	< MBMS p-t-m Channel Description : < MBMS p-t-m Channel Description IE > >
+	< spare bit >**;
+

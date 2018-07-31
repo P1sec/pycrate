@@ -1,0 +1,19 @@
+-- TS 44.060 - d60
+-- 12.10a GPRS Mobile Allocation
+-- GPRS Mobile Allocation IE
+
+< GPRS Mobile Allocation IE > ::=
+	< HSN : bit (6) >
+	{ 0 | 1	< RFL number list : < RFL number list struct > > }
+	{ 0	< MA_LENGTH : bit (6) >
+		< MA_BITMAP : bit (val(MA_LENGTH) + 1) >
+	| 1	{ 0 | 1	< ARFCN index list : < ARFCN index list struct > > } } ;
+
+< RFL number list struct > ::=
+	< RFL_NUMBER : bit (4) >
+	{ 0 | 1	< RFL number list struct > } ;
+
+< ARFCN index list struct > ::=
+	< ARFCN_INDEX : bit (6) >
+	{ 0 | 1	< ARFCN index list struct > } ;
+

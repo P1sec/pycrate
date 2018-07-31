@@ -1,0 +1,21 @@
+-- TS 44.018 - d80
+-- 10.5.2.37e SI 16 Rest Octets
+-- SI16 Rest Octets
+
+<SI16 Rest Octets> ::=	{L | H	<LSA Parameters>}
+							<spare padding> ;
+
+<SI17 Rest Octets> ::=	< SI16 Rest Octets> ;
+
+<LSA Parameters> ::=	<PRIO_THR : bit (3)>
+							<LSA_OFFSET : bit (3)>
+							{0 | 1	<MCC : bit (12)>
+									<MNC : bit (12)> }
+							<LSA ID information>;
+
+<LSA ID information> ::=	<LSA identity>
+							{0 | 1 <LSA ID information>} ;
+
+<LSA identity> ::=		{	0	<LSA_ID : bit (24)>
+								 |1	<ShortLSA_ID : bit (10)>} ;
+

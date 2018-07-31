@@ -1,0 +1,51 @@
+-- TS 44.018 - d80
+-- 10.5.2.44 SI10 rest octets $(ASCI)$
+-- SI10 rest octets
+
+<SI10 rest octets> ::=
+    <BA ind : bit(1)> 
+    { L <spare padding> | H <neighbour information> };
+
+<neighbour information> ::=
+    <first frequency: bit(5)> <cell info>
+    { H <info field> }** L <spare padding>;
+
+<cell info> ::=
+    <bsic : bit(6)> { H <cell parameters> | L };
+
+<cell parameters> ::=
+    <cell barred: H> | L <further cell info>;
+
+--<cell barred> ::= H;
+
+<further cell info> ::=
+    <la different> 
+    <ms txpwr max cch : bit(5)> 
+    <rxlev access min : bit(6)> 
+    <cell reselect offset : bit(6)>
+    <temporary offset : bit(3)>
+    <penalty time : bit(5)> ;
+
+<la different> ::=
+    { H <cell reselect hysteresis : bit(3)> | L };
+
+<info field> ::=
+    <next frequency>** L <differential cell info>;
+
+<next frequency> ::= H;
+
+<differential cell info> ::=
+    { H <BCC : bit(3)> | L <bsic : bit(6)> }
+    { H <diff cell pars> | L };
+
+<diff cell pars> ::=
+    <cell barred: H> | L <further diff cell info>;
+
+<further diff cell info> ::=
+    <la different> 
+    { H <ms txpwr max cch : bit(5)> | L }
+    { H <rxlev access min : bit(6)> | L }
+    { H <cell reselect offset : bit(6)> | L }
+    { H <temporary offset : bit(3)> | L }
+    { H <penalty time : bit(5)> | L };
+

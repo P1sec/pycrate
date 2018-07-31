@@ -1,0 +1,34 @@
+-- TS 44.018 - d80
+-- 9.1.43p EC System information type 1
+-- EC System Information Type 1
+
+< EC System Information Type 1 > ::=
+	< Message Type : bit (3) >
+	< EC SI 1_INDEX : bit (2) >
+	< EC SI 1_COUNT : bit (2) >
+	< EC SI_CHANGE_MARK : bit (5) >
+
+	{ 0 | 1 < EC Cell Channel Description : < EC Cell Channel Description struct >> }
+	< EC Mobile Allocation List : < EC Mobile Allocation List struct > >
+	< Band Indicator : bit (1) >
+	< spare padding > ;
+
+< EC Cell Channel Description struct > ::=
+	< NumberOfOctets : bit (5) >
+	< Frequency List Information : bit ((val(NumberOfOctets) + 1) * 8) > ;
+
+< EC Mobile Allocation List struct > ::= { 1 < EC Mobile Allocation struct > } ** 0 ;
+
+< EC Mobile Allocation struct > ::=
+	< EC_MA_NUMBER : bit (5) >
+	{ 0 | 1 < MAIO : bit (6) > }
+	{ 0		< ARFCN : bit (10) >		-- Single radio frequency channel included in the current MA set
+		| 1		-- Multiple radio frequency channels included in the current MA set
+		{ 0		-- The radio frequency channels of the previous MA set apply to the current MA set
+			| 1		-- The indicated radio frequency channels apply for the current MA set
+			{ 0 | 1 < HSN : bit (6) > }
+			< MA_LENGTH : bit (6) >
+			< MA_BITMAP : bit (val(MA_LENGTH) + 1) >
+		}
+	} ;
+

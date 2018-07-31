@@ -1,0 +1,6 @@
+-- TS 44.060 - d60
+-- 12.16 Temporary Logical Link Identity (TLLI)/G-RNTI
+-- TLLI / G-RNTI IE
+
+< TLLI / G-RNTI IE > ::= bit (32) ;
+

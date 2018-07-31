@@ -1,0 +1,17 @@
+-- TS 44.060 - d60
+-- 12.52 3G Priority Parameters
+-- 3G Priority Parameters IE
+
+< 3G Priority Parameters IE > ::= 
+	{ 0 | 1	< DEFAULT_UTRAN_PRIORITY : bit(3) >
+			< DEFAULT_THRESH_UTRAN: bit(5) > 
+			< DEFAULT_UTRAN_QRXLEVMIN: bit(5) > }
+	{ 1 < Repeated UTRAN Priority Parameters : < Repeated UTRAN Priority Parameters struct > > } ** 0 ;
+
+< Repeated UTRAN Priority Parameters struct > ::=
+	{ 1 < UTRAN_FREQUENCY_INDEX : bit (5) > } ** 0
+	{ 0 | 1 < UTRAN_PRIORITY : bit(3) > }
+	< THRESH_UTRAN_high: bit(5) >
+	{ 0 | 1	< THRESH_UTRAN_low: bit(5) > }
+	{ 0 | 1	< UTRAN_QRXLEVMIN: bit(5) > } ;
+

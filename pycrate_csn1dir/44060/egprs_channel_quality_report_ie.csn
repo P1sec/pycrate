@@ -1,0 +1,9 @@
+-- TS 44.060 - d60
+-- 12.5.1 EGPRS Channel Quality Report
+-- EGPRS Channel Quality Report IE
+
+< EGPRS Channel Quality Report IE> ::=
+	< EGPRS BEP Link Quality Measurements : < EGPRS BEP Link Quality Measurements IE>>	
+	< C_VALUE : bit (6) >
+	< EGPRS Timeslot Link Quality Measurements : <EGPRS Timeslot Link Quality Measurements IE >> ;
+

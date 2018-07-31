@@ -1,0 +1,10 @@
+-- TS 44.060 - d60
+-- 11.2.8 Packet Downlink Dummy Control Block
+-- Packet Downlink Dummy Control Block message content
+
+< Packet Downlink Dummy Control Block message content > ::=
+	< PAGE_MODE : bit (2) >
+	{ 0 | 1 <PERSISTENCE_LEVEL : bit (4) > * 4 }
+	< padding bits >
+	! < Distribution part error : bit (*) = < no string > > ;
+

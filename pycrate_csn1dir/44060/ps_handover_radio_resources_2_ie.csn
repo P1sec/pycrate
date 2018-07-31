@@ -1,0 +1,44 @@
+-- TS 44.060 - d60
+-- 12.42a PS Handover Radio Resources 2
+-- PS Handover Radio Resources 2 IE
+
+< PS Handover Radio Resources 2 IE > ::=
+	{ 0 | 1 < Handover Reference : bit (8) > }
+	< ARFCN : bit (10) >
+	< SI : bit (2) >
+	< NCI : bit (1) >
+	< BSIC : bit (6) >
+	{ 0 | 1 < CCN_ACTIVE : bit (1) > }
+	{ 0 | 1 < 3G_CCN_ACTIVE : bit (1) > }
+	{ 0 | 1 < CCN Support Description : < CCN Support Description struct >> }
+	{ 01		-- Legacy IEs used
+		< Frequency Parameters C1 : < Frequency Parameters IE > >
+		{ 0 | 1 < Frequency Parameters C2 : < Frequency Parameters IE > > }
+	| 10		-- Optimized Dual Carrier frequency parameters used 
+		< Dual Carrier Frequency Parameters: < Dual Carrier Frequency Parameters IE > > 
+	! < Frequency Parameters error: { 00 | 11 } bit(*) = < no string> > } -- reserved for future use
+	< NETWORK_CONTROL_ORDER : bit (2) >
+	{ 0 | 1	< Global Packet Timing Advance : < Global Packet Timing Advance IE > >
+		{ 0 | 1	< Packet Extended Timing Advance : bit (2) > } }						-- Only used in uplink
+	< RLC_RESET : bit (1) > 
+	< EGPRS mode : < EGPRS mode 2 IE > >
+
+	-- Optional extension information:
+	{ 0 | 1	< Extension Length : bit (6) >
+			< bit (val(Extension Length) + 1)
+			& { <Extension Information > ! { bit ** = <no string> } } > } ;
+
+< CCN Support Description struct > ::=
+	< Number_Cells : bit (7) >
+	{ < CCN_SUPPORTED : bit > } * (val(Number_Cells)) ;
+
+< Extension Information > ::=
+	-- Additions for REL-9
+	{ 0 | 1 < MTTI_DOWNLINK_ASSIGNMENT_C1 : bit (1) > }
+	{ 0 | 1 < MTTI_DOWNLINK_ASSIGNMENT_C2 : bit (1) > }
+	{ 0 | 1 < MTTI_UPLINK_ASSIGNMENT_C1 : bit(1) > }
+	{ 0 | 1 < MTTI_UPLINK_ASSIGNMENT_C2 : bit(1) > }
+	-- Additions for REL-11
+	{ < EGPRS Packet Downlink Ack/Nack Type 3 Support : bit(1) > }
+	< spare bit > ** // ;			-- Extension information may be truncated between released versions of the protocol.
+

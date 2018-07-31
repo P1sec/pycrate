@@ -1,0 +1,26 @@
+-- TS 44.060 - d60
+-- 11.2.17 Packet PSI Status
+-- Packet PSI Status message content
+
+< Packet PSI Status message content > ::=
+	< GLOBAL_TFI : < Global TFI IE > >
+	< PBCCH_CHANGE_MARK : bit (3) >
+	< Received PSI Message List : < PSI Message List struct > >
+	< Received Unknown PSI Message List : < Unknown PSI Message List struct > >
+
+	{ null | 0 bit** = < no string >			-- Receiver backward compatible with earlier version
+	| 1										-- Additions for REL-6 :
+		< PS_REL_REQ : bit >
+		< padding bits > } ;
+
+< PSI Message List struct > ::=
+	{ 1	< MESSAGE_TYPE : bit (6) >
+		< PSIX_CHANGE_MARK : bit (2) >
+		{ 0 | 1	< PSIX_COUNT : bit (4) >
+				< Instance bitmap : bit (val(PSIX_COUNT) + 1) > } } ** 0
+	< ADDITIONAL_MSG_TYPE : bit > ;
+
+< Unknown PSI Message List struct > ::=
+	{ 1	< MESSAGE_TYPE : bit (6) > } ** 0
+	< ADDITIONAL_MSG_TYPE : bit > ;
+

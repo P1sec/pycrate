@@ -1,0 +1,8 @@
+-- TS 44.018 - d80
+-- 10.5.2.83 EC Request Reference
+-- EC Request Reference Description
+
+< EC Request Reference Description > ::=
+	< Last TDMA Frame : bit (10) >
+	< Echoed Random Bits : bit (3) > ;
+

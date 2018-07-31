@@ -1,0 +1,45 @@
+-- TS 44.018 - d80
+-- 10.5.2.34 SI 3 Rest Octets
+-- SI3 Rest Octet
+
+<SI3 Rest Octet> ::=
+	<Optional selection parameters>
+	<Optional Power offset>
+	<System Information 2ter Indicator>
+	<Early Classmark Sending Control>
+	<Scheduling if and where>
+	{ L | H	<GPRS Indicator> }
+	<3G Early Classmark Sending Restriction>
+	{ L | H < SI2quater Indicator : < SI2quater Indicator struct > > }
+	<Iu Indicator> 						-- Conditional
+	<System Information 21 Indicator> 	
+	<spare padding> ;
+
+<Optional Selection Parameters> ::= 	L | H <Selection Parameters>;
+
+<Selection Parameters> ::=
+	<CBQ: bit (1)>
+	<CELL_RESELECT_OFFSET: bit (6)>
+	<TEMPORARY_OFFSET: bit (3)>
+	<PENALTY_TIME: bit (5)>;
+
+<Optional Power Offset> ::= 	L | H <Power Offset: bit (2)>;
+
+<System Information 2ter Indicator> ::=		L | H;
+
+<Early Classmark Sending Control> ::= 	L | H;
+
+<Scheduling if and where>::=	L | H <WHERE: bit (3)>;
+
+<GPRS Indicator> ::= 
+	< RA COLOUR : bit (3) >
+	< SI13 POSITION : bit >;
+
+<3G Early Classmark Sending Restriction>::=	L | H;
+
+< SI2quater Indicator struct > ::=	< SI2quater_POSITION : bit > ;
+
+<Iu Indicator> ::= <SI13alt POSITION: bit >;
+
+<System Information 21 Indicator> ::=		L | H < SI21_POSITION : bit > ;
+

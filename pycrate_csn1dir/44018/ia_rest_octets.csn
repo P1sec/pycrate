@@ -1,0 +1,215 @@
+-- TS 44.018 - d80
+-- 10.5.2.16 IA Rest Octets
+-- IA Rest Octets
+
+<IA Rest Octets> ::=
+	{ 	LL	< Compressed_Inter_RAT_HO_INFO_IND : bit >
+				{	null		| L		-- Receiver compatible with earlier release
+					| H 				-- Additions in Release 13
+						< Implicit Reject PS : bit >
+						< PEO_BCCH_CHANGE_MARK : bit (2) >
+						< RCC : bit (3) >
+				}
+		| LH
+				{	00		< EGPRS Packet Uplink Assignment >
+					| 01	< Multiple Blocks Packet Downlink Assignment >
+					| 1		-- reserved for future use (however the value 7C for the first octet shall not be used)
+				}
+				{	null		| L		-- Receiver compatible with earlier release
+					| H 				-- Additions in Release 13
+						< Implicit Reject PS : bit >
+						< PEO_BCCH_CHANGE_MARK : bit (2) >
+						< RCC : bit (3) >
+				}
+		| HL	< Length of frequency parameters : bit (6) >
+				--< Frequency Parameters, before time >
+			    < bit (val(Length of frequency parameters) * 8) &
+			      < Frequency Parameters before time > >
+				< Compressed_Inter_RAT_HO_INFO_IND : bit >
+				{	null		| L		-- Receiver compatible with earlier release
+					| H 				-- Additions in Release 13
+						< Implicit Reject PS : bit >
+						< PEO_BCCH_CHANGE_MARK : bit (2) >
+						< RCC : bit (3) >
+				}
+		| HH	{	00	< Packet Uplink Assignment >
+					| 01	< Packet Downlink Assignment >
+					| 1		< Second Part Packet Assignment > 
+				}
+				{	null		| L		-- Receiver compatible with earlier release
+					| H 				-- Additions in Release 10
+						< Implicit Reject CS : bit >
+						< Implicit Reject PS : bit >
+				}
+				{	null		| L		-- Receiver compatible with earlier release
+					| H 				-- Additions in Release 13
+						< PEO_BCCH_CHANGE_MARK : bit (2) >
+						< RCC : bit (3) >
+				}
+	}
+	<spare padding>;
+
+< EGPRS Packet Uplink Assignment > ::=
+    < Extended RA : bit (5) >
+    { 0 | 1	< Access Technologies Request : Access Technologies Request struct > }
+    { 	1	< TFI_ASSIGNMENT : bit (5) >
+		    < POLLING : bit >
+		    0				-- The value '1' was allocated in an earlier version of the protocol and shall not be used. 
+		    < USF: bit (3) >
+		    < USF_GRANULARITY : bit >
+		    { 0 | 1	< P0 : bit (4) >
+				    < PR_MODE : bit (1) > }
+		    < EGPRS CHANNEL_CODING_COMMAND : < EGPRS Modulation and Coding Scheme IE >>
+		    < TLLI_BLOCK_CHANNEL_CODING : bit (1) >
+		    { 0 | 1 < BEP_PERIOD2 : bit (4) > }
+		    < RESEGMENT : bit (1) >
+		    < EGPRS Window Size : < EGPRS Window Size IE >>
+		    { 0 | 1	< ALPHA : bit (4) > 
+				    < GAMMA : bit (5) > }
+		    { 0 | 1	< TIMING_ADVANCE_INDEX : bit (4) > }
+		    { 0 | 1	< TBF_STARTING_TIME : bit (16) > }
+		    {	null | L 									-- Receiver compatible with earlier release
+			    | H 										-- Additions for Rel-7		
+				    { 0												-- An uplink BTTI TBF is assigned
+					    { 0	-- '0' indicates that FANR is not activated
+					    | 1 	-- '1' indicates that FANR is activated
+						    { 0 		-- SSN-based encoding is selected
+						    | 1 		-- Time-based encoding is selected
+							    < REPORTED TIMESLOTS : bit (8) >
+							    < TSH : bit (2) > } }
+						    | 1											-- An uplink RTTI TBF is assigned
+					    <RTTI USF MODE : bit(1)>				
+					    <PDCH PAIR INDICATION: bit(3) >									
+					    < Additional_USF : bit (3) > * (1-val(RTTI USF MODE)) 
+					    { 0 													-- One PDCH Pair assigned
+						    | 1		< USF2 : bit(3)>							-- Two PDCH Pairs assigned
+								    < Additional_USF2 : bit (3) > * (1-val(RTTI USF MODE)) }
+					    { 0 													-- SSN-based encoding is selected
+						    | 	1 	< REPORTED TIMESLOTS : bit (8) >	-- Time-based encoding is selected
+						     < TSH : bit (2) > }
+				    } 
+		    }
+	    | 0						-- Multi Block Allocation
+		    { 0 | 1	< ALPHA : bit (4) > }
+				    < GAMMA : bit (5) >
+				    < TBF_STARTING_TIME : bit (16) >
+				    < NUMBER OF RADIO BLOCKS ALLOCATED : bit (2) >
+		    { 0 | 1	< P0 : bit (4) >
+				    0 			-- The value '1' was allocated in an earlier version of the protocol and shall not be used.
+				    < PR_MODE : bit (1) > }
+		    {	null | L 												-- Receiver compatible with earlier release
+			    | H 													-- Additions for Rel-6
+					    { 0 | 1 < PFI : bit (7) > }
+		    } 
+    } ;
+
+<Access Technologies Request struct> ::= 
+	-- recursive structure allows any combination of Access technologies
+	< Access Technology Type : bit (4) >
+	{ 0 | 1 <Access Technologies Request struct> } ;
+
+< Packet Uplink Assignment > ::=
+	{ 	1
+			< TFI_ASSIGNMENT : bit (5) >
+			< POLLING : bit >
+			0 				-- The value '1' was allocated in an earlier version of the protocol and shall not be used.
+			< USF: bit (3) >
+			< USF_GRANULARITY : bit >
+			{ 0 | 1	< P0 : bit (4) >
+					< PR_MODE : bit (1) > }
+			< CHANNEL_CODING_COMMAND : bit (2) >
+			< TLLI_BLOCK_CHANNEL_CODING : bit >
+			{ 0 | 1	< ALPHA : bit (4) > }
+			< GAMMA : bit (5) >
+			{ 0 | 1 < TIMING_ADVANCE_INDEX : bit (4) > }
+			{ 0 | 1 < TBF_STARTING_TIME : bit (16) > }
+		| 0																			-- Single Block Allocation
+			{ 0 | 1 < ALPHA : bit (4) > }
+			< GAMMA : bit (5) >
+			0 1 																	-- See note
+			< TBF_STARTING_TIME : bit (16) >
+			{ L | H	< P0 : bit (4) >
+					0 		-- The value '1' was allocated in an earlier version of the protocol and shall not be used.
+					< PR_MODE : bit (1) > }
+	}
+	{ 	null | L 															-- Receiver compatible with earlier release
+		| H 																-- Additions for R99
+			{ 0 | 1 < Extended RA : bit (5) > }
+	}
+	{ 	null | L 														-- Receiver compatible with earlier release
+		| H 															-- Additions for Rel-6
+			{ 0 | 1 < PFI : bit (7) > }
+	} ;
+
+< Packet Downlink Assignment > ::=
+	< TLLI : bit (32) >
+	{ 0 | 1	< TFI_ASSIGNMENT : bit (5) >
+			< RLC_MODE : bit >
+			{ 0 | 1 < ALPHA : bit (4) > }
+			< GAMMA : bit (5) >
+			< POLLING : bit >
+			< TA_VALID : bit (1) > }
+	{ 0 | 1	< TIMING_ADVANCE_INDEX : bit (4) > }
+	{ 0 | 1	< TBF_STARTING_TIME : bit (16) > }
+	{ 0 | 1	< P0 : bit (4) >
+			0 			-- The value '1' was allocated in an earlier version of the protocol and shall not be used.
+			< PR_MODE : bit (1) > }
+			{ 	null | L 												-- Receiver compatible with earlier release
+				| H 													-- Additions for R99
+																		-- indicates EGPRS TBF mode, see 44.060
+					< EGPRS Window Size : < EGPRS Window Size IE >>
+					< LINK_QUALITY_MEASUREMENT_MODE : bit (2) >
+					{ 0 | 1 < BEP_PERIOD2 : bit (4) > }
+			}
+			{ 	null | L 														-- Receiver compatible with earlier release
+				| H 															-- Additions for Rel-6
+					{ 0 | 1 < PFI : bit (7) > }
+			}
+			{ 	null | L														-- Receiver compatible with earlier release
+				| H 															-- Additions for Rel-7
+					{ 0 | 1 < NPM Transfer Time : bit (5) > }
+					{ 0						-- A downlink BTTI TBF is assigned
+						{ 0						-- FANR is not activated for the assigned TBF
+						| 1						-- FANR is activated for the assigned TBF
+							< EVENT_BASED_FANR: bit (1) > }
+					| 1						-- A downlink RTTI TBF is assigned
+						< EVENT_BASED_FANR: bit (1) >
+						< PDCH PAIR INDICATION: bit(3) >
+					}
+					< Downlink EGPRS Level: < EGPRS Level IE > >
+			} ;
+
+< Frequency Parameters before time > ::=
+	{ null 								-- Length of frequency parameters = 0
+	|	0 0
+		< MAIO : bit (6) >
+		--< Mobile Allocation : octet (val (Length of frequency parameters) - 1) >
+		< Mobile Allocation : bit ** >
+	} ;
+
+< Second Part Packet Assignment > ::=
+	{ null	| L 														-- Receiver compatible with earlier release
+			| H															-- Additions for R99
+				{ 0 | 1	< Extended RA : bit (5) > }
+	} ;
+
+< Multiple Blocks Packet Downlink Assignment > ::=
+	< TBF_STARTING_TIME : bit (16) >
+	< NUMBER_OF_ALLOCATED_BLOCKS : bit (4) >
+	{ 	0																	-- Reserved for future use
+		| 1
+			{	0															-- MBMS Assignment (Distribution)
+					< TMGI : < TMGI IE > >
+					{ 0 | 1 < MBMS Session Identity : bit (8) > }
+				| 1															-- MBMS Assignment (Non-distribution)
+					< TLLI / G-RNTI : bit (32) >
+					{ 0 | 1	< Length Indicator of MS_ID : bit (2) >		 
+							< MS_ID : bit (val (Length Indicator of MS_ID)+1) >
+							< PACKET_TIMING_ADVANCE : < Packet Timing Advance IE > >
+							{ 0 | 1	< ALPHA : bit (4) > 
+									{ 0 | 1	< GAMMA : bit (5) > } 
+							}
+					}
+			}
+	} ;
+

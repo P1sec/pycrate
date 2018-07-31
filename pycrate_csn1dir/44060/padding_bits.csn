@@ -1,0 +1,8 @@
+-- TS 44.060 - d60
+-- 11 Message functional definitions and contents
+-- padding bits
+
+< padding bits > ::= { null | 0 < spare padding > ! < Ignore : 1 bit** = < no string > > } ;
+
+< spare padding > ::= L (*) ;
+-- < spare padding > is 0x2b starting on an octet boundary

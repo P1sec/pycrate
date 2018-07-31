@@ -1,0 +1,30 @@
+-- TS 44.018 - d80
+-- 10.5.2.8b Channel Request Description 2
+-- Channel Request Description 2 value part
+
+< Channel Request Description 2 value part > ::=
+	< PACKET_ESTABLISHMENT_CAUSE : bit(2) >
+	< Channel Request Description : Channel Request Description IE >		-- Defined in 3GPP TS 44.060
+	{ 0 | 1 < PFI : bit (7) > }
+	< Multiple TBF Capability : bit >												-- Additions in Rel-6
+	{	null | L			-- Receiver backward compatible with earlier version
+		| H				-- Additions in Rel-7 
+			{	< RLC Non-persistent Mode Capability : bit > 	
+				< Reduced Latency Capability : bit >
+				< Uplink EGPRS2 : bit(2) >
+				< Downlink EGPRS2 : bit(2) > }
+			{ 	null | L		-- Receiver backward compatible with earlier version
+				| H			-- Additions in Rel-9
+					{	< EMST_MS_Capability : bit > }
+					{ 	null | L		-- Receiver backward compatible with earlier version
+						| H			-- Additions in Rel-10
+							{	< EMSR_MS_Capability : bit > }
+							{ 	null | L		-- Receiver backward compatible with earlier version
+								| H			-- Additions in Rel-11
+									{	< FANR_Capability : bit > }
+							}	-- End of aditions for Rel-11
+					} 	-- End of additions for Rel-10
+			}	-- End of additions for Rel-9
+	}	-- End of additions for Rel-7
+	< spare padding > ;
+

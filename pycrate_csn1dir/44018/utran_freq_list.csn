@@ -1,0 +1,10 @@
+-- TS 44.018 - d80
+-- 10.5.2.1d UTRAN Freq List
+-- UTRAN Freq List
+
+< UTRAN Freq List > ::=
+	< LENGTH OF UTRAN FREQ LIST : bit (8) >		-- length following in octets
+	{ 1 < FDD_ARFCN : bit (14) > } ** 0 				-- FDD frequencies
+	{ 1 < TDD_ARFCN : bit (14) > } ** 0 				-- TDD frequencies
+	<spare bit>**;
+

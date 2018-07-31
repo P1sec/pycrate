@@ -1,0 +1,8 @@
+-- TS 44.018 - d80
+-- 10.5.2.62 MBMS Session Identity
+-- MBMS Session Identity value part
+
+< MBMS Session Identity value part > ::=
+	< MBMS_Session_Identity : bit (8) >
+	< spare bit >**;
+

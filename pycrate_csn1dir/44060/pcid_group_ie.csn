@@ -1,0 +1,12 @@
+-- TS 44.060 - d60
+-- 12.57 PCID Group
+-- PCID Group IE
+
+< PCID Group IE > ::=
+	{ 1 < PCID : bit (9) > } ** 0 -- explicit PCID coding
+	{ 0 | 1	< PCID_BITMAP_GROUP : bit (6) > }
+	{ 1 < PCID_Pattern_length : bit (3) >
+		< PCID_Pattern : bit (val(PCID_Pattern_length) + 1) >
+		< PCID_pattern_sense : bit (1) >
+	} ** 0 ;
+

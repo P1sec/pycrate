@@ -1,0 +1,39 @@
+-- TS 44.018 - d80
+-- 10.5.2.33c SI 2n Rest Octets
+-- SI2n Rest Octets
+
+< SI2n Rest Octets > ::=
+	
+	< BA_IND : bit (1) >
+	< SI2n_CHANGE_MARK: bit (2) >
+	< SI2n_INDEX : bit (4) >
+	< SI2n_COUNT : bit (4) >
+	< GSM Neighbour Cell Selection parameters : { 1 < GSM Neighbour Cell Selection params struct > } ** 0 >
+	< spare padding > ;
+
+< GSM Neighbour Cell Selection params struct > ::=
+	< NCELL_LIST_INDEX : bit (6) >
+	{ 0 | 1 	< BSIC : bit (6) > }
+	{ 0 | 1 
+		< CELL_BAR_ACCESS : bit (1) >
+		< SAME_LA_AS_SERVING_CELL : bit (1) >
+
+		{ 0 | 1	< RXLEV_ACCESS_MIN : bit (6) >
+					< MS_TXPWR_MAX_CCH : bit (5) > }
+
+		{ 0 | 1 	< CBQ : bit (1) >
+					< CELL_RESELECT_OFFSET : bit (6) >
+					< TEMPORARY_OFFSET : bit (3) >
+					< PENALTY_TIME : bit (5) > } 
+
+		{ 0 | 1	< POWER_OFFSET : bit (2) > }
+		{ 0 | 1	< GPRS Support Indicator : < GPRS Support Indicator struct > > }
+	} ;
+
+<GPRS Support Indicator struct> ::= 	
+	{	0 													-- GPRS not supported in the cell
+		| 1 													-- GPRS supported in the cell
+			< SAME_RA_AS_SERVING_CELL : bit (1) >
+			< SI13_POSITION : bit (1) >
+	} ;
+

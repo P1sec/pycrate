@@ -1,0 +1,111 @@
+-- TS 44.018 - d80
+-- 10.5.2.25e RR Packet Downlink Assignment Type 2
+-- RR Packet Downlink Assignment Type 2 value part
+
+< RR Packet Downlink Assignment Type 2 value part > ::=
+	< RLC_MODE : bit (1) >
+	{ 0 | 1	< P0_C1 : bit (4) >
+			< PR_MODE_C1 : bit (1) >
+			{ 0 | 1	< P0_C2 : bit (4) >
+					< PR_MODE_C2 : bit (1) > } }
+	{ 0 | 1 < Power Control Parameters C1 : < Power Control Parameters IE > > } 
+	{ 0 | 1 < Power Control Parameters C2 : < Power Control Parameters IE > > } 
+	{ 0 | 1 < DOWNLINK_TFI_ASSIGNMENT : bit (5) > }
+	< EGPRS Window Size : < EGPRS Window Size IE >>
+	< LINK_QUALITY_MEASUREMENT_MODE : bit (2) >
+	{ 0				-- BTTI mode 
+		< FANR: bit (1) >
+		{ 1	< BTTI Multiple Downlink Assignment : < BTTI Multiple Downlink Assignment struct > > } ** 0
+	| 1				-- RTTI mode
+		{ 0					-- Single Carrier Assignment
+			{ 00				-- Default PDCH-pair configuration
+			| 01				-- Unchanged
+			| 10				-- Explicit PDCH pair configuration
+				< DOWNLINK_PDCH_PAIRS_C1 : bit (8) > 
+				< UPLINK_PDCH_PAIRS_C1 : bit (8) >
+			! < PDCH pairs configuration error : { 1 1 } > < bit (*) = < no string >> 		-- reserved
+			}
+			{ 1	< RTTI Multiple Downlink Assignment SC : 
+				< RTTI Multiple Downlink Assignment SC struct > > } ** 0
+		| 1					-- Dual Carrier Assignment
+			{ 00				-- Default PDCH pair configuration
+			| 01				-- Unchanged
+			| 10				-- Explicit PDCH pair configuration
+				< DOWNLINK_PDCH_PAIRS_C1 : bit (8) >
+				< DOWNLINK_PDCH_PAIRS_C2 : bit (8) >
+				< UPLINK_PDCH_PAIRS_C1 : bit (8) >
+				< UPLINK_PDCH_PAIRS_C2 : bit (8) >
+			! < PDCH pairs configuration error : { 1 1 } > < bit (*) = < no string >> 		-- reserved
+			}
+			{ 1	< RTTI Multiple Downlink Assignment DC : 
+				< RTTI Multiple Downlink Assignment DC struct > > } ** 0
+		}
+	}
+	< Downlink EGPRS Level: < EGPRS Level IE > >
+	{ null | 0 bit** = < no string >	-- Receiver backward compatible with earlier version
+	| 1 								-- Additions for REL-8
+		{ 0 | 1	{ 1 < Measurement_Control_E-UTRAN : bit(1) >
+					< E-UTRAN_FREQUENCY_INDEX : bit (3) >
+					{ 1 < E-UTRAN_FREQUENCY_INDEX : bit (3) > } ** 0
+				} ** 0
+		}
+		{ 0 | 1	{ 1< Measurement_Control_UTRAN : bit(1) >
+					< UTRAN_FREQUENCY_INDEX : bit (5) >
+					{ 1 < UTRAN_FREQUENCY_INDEX : bit (5) > } ** 0
+				} ** 0
+		}
+		{ null | 0 bit** = < no string >		-- Receiver backward compatible with earlier release
+		| 1									-- Additions for Rel-99
+			{ 0		-- EMST is not used
+			| 1	< RLC Entity 2 : < RLC Entity Struct > >
+				{ 0
+				| 1	< RLC Entity 3 : < RLC Entity Struct > > }
+			}
+			{ null | 0 bit** = < no string > -- Receiver backward compatible with earlier version
+			| 1 								-- Additions for Rel-10
+				{ 1 < EMSR Additional PFCs 1 : < Additional PFCs struct > > } ** 0	
+				{ 1 < EMSR Additional PFCs 2 : < Additional PFCs struct > > } ** 0
+				{ 1 < EMSR Additional PFCs 3 : < Additional PFCs struct > > } ** 0
+				{ null | 0 bit** = < no string > -- Receiver backward compatible with earlier version
+				| 1 								-- Additions for Rel-11
+					< EGPRS Packet Downlink Ack/Nack Type 3 Support : bit(1) >
+				<spare bit>**
+				}	-- End of additions for Rel-11
+			}	-- End of additions for Rel-10
+		}	-- End of additions for Rel-9
+	} ;	-- End of additions for Rel-8
+
+< BTTI Multiple Downlink Assignment struct > ::=
+	{ 0 | 1 < Uplink Control Timeslot: bit (3) > }
+	{ 0 | 1 < TIMESLOT_ALLOCATION_C1 : bit (8) > }
+	{ 0 | 1 < TIMESLOT_ALLOCATION_C2 : bit (8) > }
+	{ 1 < Downlink TBF assignment : < Downlink TBF assignment 2 struct > > } ** 0 ;
+
+< RTTI Multiple Downlink Assignment SC struct > ::=
+	< RTTI_DOWNLINK_PDCH_PAIR_ASSIGNMENT_SC : bit (4) >
+	{ 1 < Downlink TBF assignment : < Downlink TBF assignment 2 struct > > } ** 0 ;
+
+< RTTI Multiple Downlink Assignment DC struct > ::=
+	< RTTI_DOWNLINK_PDCH_PAIR_ASSIGNMENT_DC : bit (8) >
+	{ 1 < Downlink TBF assignment : < Downlink TBF assignment 2 struct > > } ** 0 ;
+
+< Downlink TBF assignment 2 struct > ::=
+	< PFI : bit (7) >	
+	< RLC_MODE : bit (1) >
+	< TFI Assignment : bit (5) >
+	< CONTROL_ACK : bit (1) >
+	{ 0 | 1 < NPM Transfer Time : bit (5) > }
+	< EVENT_BASED_FANR: bit (1) >
+	{ 0 | 1 < Downlink EGPRS Window Size : < EGPRS Window Size IE > > } ;
+
+< RLC Entity Struct > ::=
+	< DOWNLINK_TFI_ASSIGNMENT : bit (5) >
+	< RLC_MODE : bit (1) >
+	{ 0 | 1 < EGPRS Window Size : < EGPRS Window Size IE > > }
+	< PFI : bit (7) >;
+
+< Additional PFCs struct > ::=
+	< DOWNLINK_TFI_ASSIGNMENT : bit (5) >
+	{ 0 | 1 < NPM Transfer Time : bit (5) > }
+	< PFI : bit (7) >;
+

@@ -1,0 +1,28 @@
+-- TS 44.060 - d60
+-- 11.2.6a EGPRS Packet Downlink Ack/Nack
+-- EGPRS Packet Downlink Ack/Nack message content
+
+< EGPRS Packet Downlink Ack/Nack message content > ::=
+		< DOWNLINK_TFI : bit (5) >
+		< MS OUT OF MEMORY : bit(1)>
+		{ 0 | 1	< EGPRS Channel Quality Report : < EGPRS Channel Quality Report IE > >}
+		{ 0 | 1	< Channel Request Description : < Channel Request Description IE > >}
+		{ 0 | 1	< PFI : bit(7) > }
+		{ 0 | 1 < EPD A/N Extension length index : bit (6) >
+				< bit (val(EPD A/N Extension length index))
+				& { < EPD A/N Extension Info > ! { bit** = <no string> }} > }
+		< EGPRS Ack/Nack Description : < EGPRS Ack/Nack Description IE >>
+		<padding bits > ;
+
+< EPD A/N Extension Info > ::=
+	{ {				-- Rel-5 extension
+		{ 0 | 1 < Iu mode Channel Request Description : < Iu mode Channel Request Description IE > > }
+		{ 0 | 1 < RB Id : bit (5) > }
+		{ 0 | 1 < Timeslot Number : bit (3) > } }
+	 { 				-- Rel-6 extension
+		{ 0 | 1 < Extended Channel Request Description : 	< Extended Channel Request Description IE > > } }
+	 { 				-- Rel-7 extension
+		< EARLY_TBF_ESTABLISHMENT : bit (1) > 
+		{ 0 | 1 < Secondary Dual Carrier Channel Report : < EGPRS Channel Quality Report IE > > } }
+	 < spare bit >** } // ; 		-- Truncation may occur between released versions of the protocol
+

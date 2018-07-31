@@ -1,0 +1,11 @@
+-- TS 44.018 - d80
+-- 9.1.50b System information type 10ter $(ASCI)$
+-- SYSTEM INFORMATION TYPE 10ter
+
+<SYSTEM INFORMATION TYPE 10ter> ::= 	
+ 	< RR short PD : bit >							-- See 3GPP TS 24.007
+	< message type : bit(5) >					-- See 10.4
+	< short layer 2 header : bit(2) >				-- See 3GPP TS 44.006
+	< Cell Channel Description : bit (128) >
+	< SI10ter Rest Octets : bit(32) >;				-- See 10.5.2.71
+

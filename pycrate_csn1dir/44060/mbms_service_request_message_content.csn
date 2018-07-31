@@ -1,0 +1,11 @@
+-- TS 44.060 - d60
+-- 11.2.38 MBMS Service Request
+-- MBMS service request message content
+
+< MBMS service request message content > ::=
+	< TLLI : bit (32) >
+	< TMGI : < TMGI IE > >
+	{ 0 | 1 < MBMS Session Identity : bit (8) > }
+	< MS_ID Request Indication : bit (1) >
+	< padding bits > ;
+

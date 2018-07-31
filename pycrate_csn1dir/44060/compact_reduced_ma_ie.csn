@@ -1,0 +1,9 @@
+-- TS 44.060 - d60
+-- 12.29 COMPACT reduced MA
+-- COMPACT reduced MA IE
+
+< COMPACT reduced MA IE > ::=
+	<Length of Reduced MA bitmap : bit (7) >
+	<Reduced MA bitmap : bit( val( Length of Reduced MA bitmap ) ) >
+	{ 0 | 1 <MAIO_2 : bit(6) >};
+

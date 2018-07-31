@@ -1,0 +1,11 @@
+-- TS 44.060 - d60
+-- 12.32 UTRAN TDD Target cell
+-- UTRAN TDD Target cell IE
+
+< UTRAN TDD Target cell IE > ::=
+	< TDD-ARFCN : bit (14) >
+	< Diversity TDD : bit >
+	{ 0 | 1 < Bandwidth_TDD : bit (3) > }
+	< Cell Parameter : bit (7) >
+	< Sync Case TSTD : bit > ;
+

@@ -1,0 +1,22 @@
+-- TS 44.060 - d60
+-- 11.1.1.1 Distribution messages
+-- Distribution message
+
+< Distribution message > ::=
+	< MESSAGE_TYPE : 1 bit (5) >
+	< Distribution contents >
+	< padding bits > ;
+
+< Distribution message on EC-PACCH > ::=
+	< MESSAGE_TYPE : 1 bit (4) >
+	< Distribution contents >
+	< padding bits > ;
+
+< Distribution contents > ::=
+	< PAGE_MODE : bit (2) >
+	< specific distribution information > ;
+
+< Distribution contents on EC-PACCH > ::=
+	< USED_DL_COVERAGE_CLASS : bit (2) >
+	< specific distribution information > ;
+

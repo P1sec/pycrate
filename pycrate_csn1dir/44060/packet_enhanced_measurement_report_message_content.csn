@@ -1,0 +1,50 @@
+-- TS 44.060 - d60
+-- 11.2.9d Packet Enhanced Measurement Report
+-- PACKET ENHANCED MEASUREMENT REPORT message content
+
+< PACKET ENHANCED MEASUREMENT REPORT message content > ::=
+	< TLLI / G-RNTI : bit (32) >
+	{ < NC Measurement Report : < NC Measurement Report struct > > }
+	{ null | 0	bit ** = < no string >	-- Receiver compatible with earlier release
+	| 1									-- Additions in Rel-5 :
+		{ 0 | 1 < G-RNTI extension : bit (4) > }
+		{ null | 0	bit ** = < no string >	-- Receiver compatible with earlier release
+		| 1									-- Additions in Rel-8 :
+			< BITMAP_LENGTH : bit(7) >
+			{ 0 | 1 < REPORTING_QUANTITY : bit (6) > } * (val(BITMAP_LENGTH) + 1) 
+			{ 0 | 1 < E-UTRAN Measurement Report : < E-UTRAN Measurement Report struct > > }
+			{ null | 0	bit ** = < no string >	-- Receiver compatible with earlier release
+			| 1									-- Additions in Rel-9 :
+				{ 0 | 1 < UTRAN CSG Measurement Report : < UTRAN CSG Measurement Report IE > > }
+				{ 0 | 1 < E-UTRAN CSG Measurement Report : < E-UTRAN CSG Measurement Report IE > > }
+				{ null | 0	bit ** = < no string >	-- Receiver compatible with earlier release
+				| 1									-- Additions in Rel-11 :
+					< SI23_BA_USED : bit >
+		< padding bits > } } } } ;
+
+< NC Measurement Report struct > ::=
+    < NC_MODE : bit (1) >
+    { 0 < BA_USED : bit > < 3G_BA_USED : bit > 
+    | 1 < PSI3_CHANGE_MARK : bit(2) > }
+    < PMO_USED : bit > 
+    < BSIC_Seen : bit >
+    < SCALE : bit >
+    { 0 | 1 < Serving cell data : < Serving cell data struct >> }
+    { 1 < Repeated Invalid_BSIC_Information : < Repeated Invalid_BSIC_Information struct >> } ** 0
+    { 0 | 1 { 0 | 1 < REPORTING_QUANTITY : bit (6) > } ** } ;				-- bitmap type reporting
+
+< Serving cell data struct > ::=
+    < RXLEV_SERVING_CELL : bit (6) >
+    0 ;						-- The value '1' was allocated in an earlier version of the protocol and shall not be used.
+
+    < Repeated Invalid_BSIC_Information struct > ::=
+    < BCCH-FREQ-NCELL : bit (5) >
+    < BSIC : bit (6) >
+    < RXLEV-NCELL : bit (6) > ;
+
+< E-UTRAN Measurement Report struct > ::=
+	< N_E-UTRAN: bit (2) >
+	{	< E-UTRAN_FREQUENCY_INDEX : bit (3) >
+		< CELL IDENTITY : bit (9) >
+		< REPORTING_QUANTITY : bit (6) > } * (val(N_E-UTRAN) + 1) ;
+

@@ -1,0 +1,8 @@
+-- TS 44.018 - d80
+-- 10.5.2.60 MPRACH Description
+-- MPRACH description value part
+
+< MPRACH description value part > ::=
+	< MPRACH description: < MPRACH description IE > >
+	< spare bit >**;
+

@@ -1,0 +1,135 @@
+-- TS 24.008 - d90
+-- 10.5.5.12a MS Radio Access capability
+-- MS RA capability value part
+
+< MS RA capability value part > ::=
+	< MS RA capability value part struct >
+	<spare bits>**; -- may be used for future enhancements
+
+<MS RA capability value part struct >::= --recursive structure allows any number of Access technologies
+	{	{	< Access Technology Type: bit (4) > exclude 1111
+			< Access capabilities : <Access capabilities struct> > }
+	 | 	{	< Access Technology Type: bit (4) == 1111 >	-- structure adding Access technologies with same capabilities
+			< Length : bit (7) > 		-- length in bits of list of Additional access technologies and spare bits
+			< bit (val (Length))
+			& {
+				{ 1 < Additional access technologies: < Additional access technologies struct > > } ** 0
+				<spare bits>**
+			} >
+		 }
+	 }
+	{ 0 | 1 <MS RA capability value part struct> } ;
+
+< Additional access technologies struct > ::=
+	< Access Technology Type : bit (4) >
+	< GMSK Power Class : bit (3) >
+	< 8PSK Power Class : bit (2) > ;
+
+< Access capabilities struct > ::=
+	< Length : bit (7) > -- length in bits of Content and spare bits
+		< bit (val (Length))
+	& { <Access capabilities : <Content>> 
+		<spare bits>**
+		} > ; -- expands to the indicated length
+
+< Content > ::=
+	< RF Power Capability : bit (3) >
+	{ 0 | 1 <A5 bits : <A5 bits> > } 	-- zero means that the same values apply for parameters as in the immediately preceding Access capabilities field within this IE
+	< ES IND : bit >
+	< PS : bit >
+	< VGCS : bit >
+	< VBS : bit >
+	{ 0 | 1 < Multislot capability : Multislot capability struct > } -- zero means that the same values for multislot parameters as given in an earlier Access capabilities field within this IE apply also here
+-- Additions in release 99
+	{ 0 | 1 < 8PSK Power Capability : bit(2) >}
+	< COMPACT Interference Measurement Capability : bit >
+	< Revision Level Indicator : bit >
+	< UMTS FDD Radio Access Technology Capability : bit > 				-- 3G RAT
+	< UMTS 3.84 Mcps TDD Radio Access Technology Capability : bit > 	-- 3G RAT
+	< CDMA 2000 Radio Access Technology Capability : bit > 				-- 3G RAT
+-- Additions in release 4
+	< UMTS 1.28 Mcps TDD Radio Access Technology Capability: bit >	-- 3G RAT
+	< GERAN Feature Package 1 : bit >
+	{ 0 | 1 < Extended DTM GPRS Multi Slot Class : bit(2) >
+			< Extended DTM EGPRS Multi Slot Class : bit(2) > }
+	< Modulation based multislot class support : bit >
+-- Additions in release 5
+	{ 0 | 1 < High Multislot Capability : bit(2) > }
+	0	-- The value '1' was allocated in an earlier version of the protocol and shall not be used.
+< GMSK Multislot Power Profile : bit (2) >
+	< 8-PSK Multislot Power Profile : bit (2) > 
+-- Additions in release 6
+	< Multiple TBF Capability : bit >
+	< Downlink Advanced Receiver Performance : bit(2) >
+	< Extended RLC/MAC Control Message Segmentation Capability : bit >
+	< DTM Enhancements Capability : bit >
+	{ 0 | 1	< DTM GPRS High Multi Slot Class : bit(3) >
+			{ 0 | 1 < DTM EGPRS High Multi Slot Class : bit(3) > } }
+	< PS Handover Capability : bit >
+-- Additions in release 7
+	< DTM Handover Capability : bit >
+	{ 0 | 1 < Multislot Capability Reduction for Downlink Dual Carrier: bit (3) >
+			< Downlink Dual Carrier for DTM Capability : bit> }
+	< Flexible Timeslot Assignment : bit >
+	< GAN PS Handover Capability : bit >
+	< RLC Non-persistent Mode : bit >
+	< Reduced Latency Capability : bit >
+	< Uplink EGPRS2 : bit(2) >	
+	< Downlink EGPRS2 : bit(2) >
+-- Additions in release 8
+	< E-UTRA FDD support : bit > 
+	< E-UTRA TDD support : bit >
+	< GERAN to E-UTRA support in GERAN packet transfer mode: bit(2) >
+	< Priority-based reselection support : bit >
+-- Additions in release 9
+	< Enhanced Flexible Timeslot Assignment : Enhanced Flexible Timeslot Assignment struct>
+	< Indication of Upper Layer PDU Start Capability for RLC UM : bit >
+	< EMST Capability : bit >
+	< MTTI Capability : bit >
+	< UTRA CSG Cells Reporting : bit >
+	< E-UTRA CSG Cells Reporting : bit >
+-- Additions in release 10
+	< DTR Capability : bit >
+	< EMSR Capability : bit >
+	< Fast Downlink Frequency Switching Capability : bit >
+	< TIGHTER Capability : bit(2) >
+-- Additions in release 11
+	< FANR Capability : bit >
+	< IPA Capability : bit>
+	< GERAN Network Sharing support : bit>
+	< E-UTRA Wideband RSRQ measurements support : bit>
+-- Additions in release 12
+	< UTRA Multiple Frequency Band Indicators support : bit >
+	< E-UTRA Multiple Frequency Band Indicators support : bit >
+	{ 0			-- DLMC not supported
+		| 1 < DLMC Capability : DLMC Capability struct > }
+	< Extended TSC Set Capability support : bit >
+-- Late addition of a release 11 feature
+	< Extended EARFCN value range: bit>
+-- Additions in release 13
+	< PCH monitoring support: bit(2)> // ;
+
+< Multislot capability struct > ::=
+	{ 0 | 1 < HSCSD multislot class : bit (5) > }
+	{ 0 | 1 < GPRS multislot class : bit (5) > < GPRS Extended Dynamic Allocation Capability : bit > }
+	{ 0 | 1 < SMS_VALUE : bit (4) > < SM_VALUE : bit (4) > }
+-- Additions in release 99
+	{ 0 | 1 < ECSD multislot class : bit (5) > }
+	{ 0 | 1 < EGPRS multislot class : bit (5) > < EGPRS Extended Dynamic Allocation Capability : bit > }
+	{ 0 | 1	< DTM GPRS Multi Slot Class: bit(2)>
+			<Single Slot DTM : bit>
+			{0 | 1 <DTM EGPRS Multi Slot Class : bit(2)> } } ;
+
+<A5 bits> ::= < A5/1 : bit> <A5/2 : bit> <A5/3 : bit> <A5/4 : bit> <A5/5 : bit> <A5/6 : bit> <A5/7 : bit>; -- bits for circuit mode ciphering algorithms. These fields are not used by the network and may be excluded by the MS.
+
+< Enhanced Flexible Timeslot Assignment struct > ::=
+	{ 0 | 1 	< Alternative EFTA Multislot Class : bit(4) > 
+			< EFTA Multislot Capability Reduction for Downlink Dual Carrier: bit (3) > };
+
+< DLMC Capability struct > ::=
+	{ 0 | 1	< DLMC - Non-contiguous intra-band reception : bit(2) >
+ 			< DLMC - Inter-band reception : bit(1) > }
+	< DLMC - Maximum Bandwidth : bit(2) >
+	< DLMC - Maximum Number of Downlink Timeslots : bit(6) >
+	< DLMC - Maximum Number of Downlink Carriers : bit(3) > ;
+

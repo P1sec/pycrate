@@ -1,0 +1,40 @@
+-- TS 44.018 - d80
+-- 10.5.2.22c NT/N Rest Octets
+-- NTN Rest Octets
+
+< NTN Rest Octets > ::=
+	{0 | 1	< NLN NCH : bit (2) >}
+	<list of Group Call NCH information>
+	{ 	null		| L								-- Receiver compatible with earlier release
+		| H 										-- Additions in Release 6°:
+			{ 0 | 1	< CELL_GLOBAL_COUNT: bit (2) >}
+			< List of Reduced GCR >
+			< List of VSTK_RAND information > 
+	}
+	{ 	null		| L -- Receiver compatible with earlier release
+		 | H 										-- Additions in Release 7°:
+			< List of Emergency information > 
+			{ 0 | 1 < Priority Uplink access : bit(1)> }
+			{ 0 | 1	{ 0|1	<FR AMR Config : bit(4)> }
+					{ 0|1	<HR AMR Config : bit(4)> } 
+			}
+			{ 0 | 1	< SMS Data Confidentiality Ind : bit(1)> 
+					< SMS Guaranteed Privacy Ind : bit(1)>
+			}
+	}
+	<Spare padding>;
+
+< List of Group Call NCH information > ::=
+	{ 0 | 1 < Group Call information > < List of Group Call NCH information > } ;
+
+< List of Emergency information > ::=
+	{ 0 | 1 < Emergency_Ind > < List of Emergency information > } ;
+
+< List of VSTK_RAND information > ::=
+	{ 1	< Segment Id: bit >
+        {0 | 1	< VSTK_RAND: bit (36) >}
+	 } **0;
+
+< List of Reduced GCR > ::=
+	{ 1 < Reduced GCR: bit (28) > } **0;
+

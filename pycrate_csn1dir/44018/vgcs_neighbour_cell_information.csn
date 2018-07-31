@@ -1,0 +1,19 @@
+-- TS 44.018 - d80
+-- 9.1.57 VGCS Neighbour Cell Information message
+-- VGCS Neighbour Cell Information
+
+<VGCS Neighbour Cell Information> ::=
+	<RR short PD : bit>					-- See 3GPP TS 24.007
+ 	<message type : bit(5)>				-- See 10.4
+ 	<short layer 2 header : bit(2)>		-- See 3GPP TS 44.006
+	<SI10bis Sequence : bit (2)>	    -- new sequence number i
+	{ 0 
+		{ 0 | 1 <BSIC : bit (6)> }
+		< Validity Information > } ** 1
+	{ 0 < SI10bis Neighbour Cell Info > } ** 1
+	<spare padding> ;
+
+< Validity Information > ::=
+	{ 0 			-- information for this cell with sequence number i-1 is still valid
+	| 1 < Validity bitmap : bit (3) > } ;
+

@@ -1,0 +1,32 @@
+-- TS 44.060 - d60
+-- 11.2.25c Packet System Information Type 16
+-- PSI16 message content
+
+< PSI16 message content > ::=
+	< PAGE_MODE : bit (2) >
+	< PSI16_CHANGE_MARK : bit (2) >
+	< PSI16_INDEX : bit (3) >
+	< PSI16_COUNT : bit (3) >
+	< GRA_ID_LIST : < GRA ID struct > >
+	< Iu_MODE_NMO_SUPPORT : bit (1) >
+	< CN_DOMAIN_LIST : bit (2) >
+	{	< CN_DOMAIN_IDENTITY : < CN Domain Identity IE > >
+		< CN DOMAIN SPECIFIC DRX CYCLE LENGTH COEFFICIENT : 
+		  < CN Domain Specific DRX Cycle Length Coefficient IE > >
+	} * (1+val(CN_DOMAIN_LIST))
+	{ 0 | 1 < 3G_LAC : bit (16) > }
+	{ 0 | 1 < 3G_RAC : bit (8) > }
+	{ 0 | 1 < GRA_AND CELL UPDATE TIMER : bit (3) > }
+	< padding bits >
+	! < Distribution part error : bit (*) = < no string >> ;
+
+< GRA ID struct > ::=
+	< NUMBER_OF_GRA_IDs : bit (3) >
+	{ < GRA_ID : bit (16) > } * (1 + val(NUMBER_OF_GRA_IDs));
+
+-- from 11.2.10	Packet Paging Request
+< CN Domain Identity IE > ::= bit (2) ;
+
+-- from TS 24.008, 10.5.5.6
+< CN Domain Specific DRX Cycle Length Coefficient IE > ::= bit (4) ;
+

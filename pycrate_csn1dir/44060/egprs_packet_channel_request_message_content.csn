@@ -1,0 +1,51 @@
+-- TS 44.060 - d60
+-- 11.2.5a EGPRS Packet Channel Request
+-- EGPRS Packet channel request message content
+
+< EGPRS Packet channel request message content > ::=
+	< One Phase Access Request :
+		0
+		< MultislotClass : bit (5) >
+		< Priority : bit (2) >
+		< RandomBits : bit (3) > >																	
+	| < Short Access Request :
+		100 -- The value 100 was allocated in an earlier 																						version of the protocol and shall not be used 
+		< NumberOfBlocks : bit (3) >
+		< Priority : bit (2) >
+		< RandomBits : bit (3) > >
+	| < One Phase Access Request by Reduced Latency MS :
+		101
+		< MultislotClassGroup : bit (3) >
+		< Priority : bit (2) >
+		< RandomBits : bit (3) > >
+	| < Two Phase Access Request :
+		110000
+		< Priority : bit (2) > 
+		< RandomBits : bit (3) > > 
+	| < Signalling :
+		110011
+		< RandomBits : bit (5) > >
+	| < One phase Access Request in RLC unack mode :
+		110101
+		< RandomBits : bit (5) > >
+	| < Dedicated Channel Request :
+		110110
+		< RandomBits : bit (5) > >
+	| < Emergency call :
+		110111
+		< RandomBits : bit (5) > >
+	| < Two Phase Access Request by IPA capable MS :
+		111000
+		< Priority : bit (2) >
+		< RandomBits : bit (3) > >
+	| < Signalling by IPA capable MS :
+		111001
+		< RandomBits : bit (5) > >;
+
+< EGPRS PACKET CHANNEL REQUEST message content for PEO One Phase Access Request > ::=
+    < Access Cause : bit (2) >
+    < PEO Priority : bit (1) >
+    < Random Bits : bit (3) >
+    < EGPRS Capability : bit (1) >
+    < Spare : bit (1) > ;
+

@@ -1,0 +1,126 @@
+-- TS 44.060 - d60
+-- 12.48a.6 Multiple Uplink Assignment 2
+-- Multiple Uplink Assignment 2 IE
+
+< Multiple Uplink Assignment 2 IE > ::=
+	{ 0 | 1	< EGPRS Channel Coding Command : < EGPRS Modulation and Coding Scheme IE > > }
+	< RESEGMENT : bit (1) >
+	{ 0 | 1	< Uplink EGPRS Window Size : < EGPRS Window Size IE > > }
+	< EXTENDED_DYNAMIC_ALLOCATION : bit (1) >
+	{ 0 | 1	< P0_C1 : bit (4) > 
+			< PR_MODE_C1 : bit(1) > 
+			{ 0 | 1	< P0_C2 : bit (4) > 
+					< PR_MODE_C2 : bit(1) > } }
+	{ 0 | 1 	-- '1' indicates that FANR is activated
+		{ 0 		-- SSN-based encoding is selected
+		| 1 		-- Time-based encoding is selected
+			< TSH : bit (2) > } }
+	{ 0 | 1 				-- BTTI mode
+		< Global Timeslot description : < Timeslot description 2 struct > > 
+		{ 1 < BTTI Uplink TBF Assignment : < BTTI Uplink TBF Assignment struct > > } ** 0
+	}
+
+	{ 0 | 1 				-- RTTI mode
+		
+		-- The Uplink Assignment PDCH Pairs Description IE shall not ne included
+		-- when an RTTI configuration description for downlink TBF(s) is provided in the message
+		{ 0 | 1 < Uplink Assignment PDCH Pairs Description : < PDCH Pairs Description IE > > }
+
+		< N_PAIRS : bit (3) > 		-- Number minus 1 of the uplink pairs of the PDCH pairs description
+										-- assigned to the TBF
+		{ 0					-- Without power control parameters
+		| 1					-- With power control parameters
+			< ALPHA_C1 : bit (4) >
+			{ 0 | 1 < ALPHA_C2 : bit (4) > }
+			{ 0 | 1	< GAMMA : bit (5) > } * (val (N_PAIRS) + 1) 
+			{ 0 		-- RTTI USF, or no second GAMMA values are given in case of RTTI mode with BTTI USF
+			| 1		-- Second GAMMA values are given in case of RTTI mode with BTTI USF
+				{ 0 | 1 < GAMMA : bit (5) > } * (val (N_PAIRS) + 1)
+			}
+		}
+		{ 1	< RTTI_USF_MODE : bit (1) >
+			< RTTI Uplink TBF Assignment : < RTTI Uplink TBF Assignment struct > >
+	 	} ** 0 
+	} 
+
+	< Uplink EGPRS Level: < EGPRS Level IE > >
+	{ 0 | 1 < Pulse Format: < Pulse Format IE > > }
+	;
+
+< BTTI Uplink TBF Assignment struct > ::=					-- Recursive for multiple BTTI TBFs
+	{ 0 | 1 < PFI : bit (7) > }
+	< RLC_MODE : bit (1) > 
+	< TFI Assignment : bit (5) >
+	{ 0 | 1	< EGPRS Channel Coding Command : < EGPRS Modulation and Coding Scheme IE > > }
+	{ 0 | 1	< Uplink EGPRS Window Size : < EGPRS Window Size IE > > }
+	{ 0 | 1	< NPM Transfer Time : bit (5) > }
+	{ 0 | 1 	-- '1': Time-based encoding FANR is activated
+		< REPORTED TIMESLOTS_C1 : bit (8) > 			-- Carrier 1 in Downlink Dual Carrier configuration
+		{ 0 | 1 < REPORTED TIMESLOTS C2 : bit (8) > }	-- Carrier 2 in Downlink Dual Carrier configuration
+	} 
+	< USF_GRANULARITY : bit (1) >
+
+	< N_TS : bit (4) >					-- Number minus 1 of the timeslots of the Global Timeslot description
+										-- assigned to the TBF
+	{ 0									-- 0: All timeslots in Global Timeslot description are assigned to the TBF
+	| 1									-- 1: Only timeslots in TBF_TIMESLOT_ALLOCATION are assigned to the TBF
+		< TBF_TIMESLOT_ALLOCATION : bit (val (N_TS) + 1) > }
+	{ 0	< USF_C1 : bit (3) >			-- Same USF valid on all timeslots assigned to the TBF on the respective carriers
+		{ 0 | 1 < USF_C2 : bit (3) > }
+	| 1									-- Different USF(s) assigned:
+		< USF : bit (3) >								-- USF for the first assigned timeslot
+		{ 0 | 1 < USF : bit (3) > } * (val (N_TS) + 1)	-- USF for next assigned timeslots (omitted=same as previous)
+	} ;
+
+< RTTI Uplink TBF Assignment struct > ::=				-- Recursive for multiple RTTI TBFs
+	{ 0 | 1 < PFI : bit (7) > }
+	< RLC_MODE : bit (1) > 
+	< TFI Assignment : bit (5) >
+	{ 0 | 1	< EGPRS Channel Coding Command : < EGPRS Modulation and Coding Scheme IE > > }
+	{ 0 | 1	< Uplink EGPRS Window Size : < EGPRS Window Size IE > > }
+	{ 0 | 1	< NPM Transfer Time : bit (5) > }
+	{ 0 | 1 	-- '1': Time-based encoding FANR is activated
+		< REPORTED TIMESLOTS_C1 : bit (8) > 			-- Carrier 1 in Downlink Dual Carrier configuration
+		{ 0 | 1 < REPORTED TIMESLOTS C2 : bit (8) > }	-- Carrier 2 in Downlink Dual Carrier configuration
+	} 
+	< USF_GRANULARITY : bit (1) >
+
+	{ 0										-- The PDCH pairs assigned to the TBF are all the PDCH pairs described
+											-- in the PDCH pairs description
+	| 1	< TBF_UPLINK_PAIRS_ALLOCATION : bit (val (N_PAIRS) + 1) > }
+	{ 0	< USF_C1 : bit (3) >
+		{ 0 | 1 < USF_C2 : bit (3) > } 		-- Same USF valid on all pairs assigned to the TBF on the respective carriers
+	| 1										-- Different USF(s) assigned
+		< USF : bit (3) >										-- USF for the first assigned PDCH pair
+		{ 0 | 1 < USF : bit (3) > } * (val (N_PAIRS))			-- Next assigned PDCH pairs (omitted=same as previous)
+		{ 0 		-- RTTI USF mode
+		| 1		-- BTTI USF mode (second USF)
+			< USF_2 : bit (3) >								-- Second USF for the first assigned PDCH pair
+			{ 0 | 1 < USF_2 : bit (3) > } * (val (N_PAIRS))	-- Next assigned PDCH pairs (omitted=same as previous)
+		}
+	} ;
+
+< Timeslot description 2 struct > ::=
+	{ 0														-- Without power control parameters
+		< MS_TIMESLOT_ALLOCATION_C1 : bit (8) >
+		{ 0 | 1 < MS_TIMESLOT_ALLOCATION_C2 : bit (8) > }
+	| 1														-- With power control parameters
+		< ALPHA_C1 : bit (4) >		
+		{ 0 | 1	< GAMMA_TN0_C1 : bit (5) > } 
+		{ 0 | 1	< GAMMA_TN1_C1 : bit (5) > }
+		{ 0 | 1	< GAMMA_TN2_C1 : bit (5) > }
+		{ 0 | 1	< GAMMA_TN3_C1 : bit (5) > }
+		{ 0 | 1	< GAMMA_TN4_C1 : bit (5) > }
+		{ 0 | 1	< GAMMA_TN5_C1 : bit (5) > }
+		{ 0 | 1	< GAMMA_TN6_C1 : bit (5) > }
+		{ 0 | 1	< GAMMA_TN7_C1 : bit (5) > } 
+		{ 0 | 1 < ALPHA_C2 : bit (4) > }		
+		{ 0 | 1	< GAMMA_TN0_C2 : bit (5) > } 
+		{ 0 | 1	< GAMMA_TN1_C2 : bit (5) > }
+		{ 0 | 1	< GAMMA_TN2_C2 : bit (5) > }
+		{ 0 | 1	< GAMMA_TN3_C2 : bit (5) > }
+		{ 0 | 1	< GAMMA_TN4_C2 : bit (5) > }
+		{ 0 | 1	< GAMMA_TN5_C2 : bit (5) > }
+		{ 0 | 1	< GAMMA_TN6_C2 : bit (5) > }
+		{ 0 | 1	< GAMMA_TN7_C2 : bit (5) > } } ;
+

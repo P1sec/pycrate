@@ -1,0 +1,20 @@
+-- TS 44.060 - d60
+-- 12.3.1 EGPRS Ack/Nack Description
+-- EGPRS Ack/Nack Description IE
+
+< EGPRS Ack/Nack Description IE > ::=
+	0	< EGPRS Ack/Nack Description struct >	-- This IE fills rest of message
+	| 1	< Length L : bit (8) >						-- Value part of this IE is of length L
+		< bit (val(Length L)) & < EGPRS Ack/Nack Description struct > >  ;
+
+< EGPRS Ack/Nack Description struct > ::=
+	< FINAL_ACK_INDICATION : bit (1) >
+	< BEGINNING_OF_WINDOW : bit (1) >
+	< END_OF_WINDOW : bit (1) >
+	< STARTING_SEQUENCE_NUMBER : bit (11) >
+	{ 0 | 1	< COMPRESSED_BITMAP_LENGTH: bit (7) >
+		< COMPRESSED_BITMAP_STARTING_COLOR_CODE: bit (1) >
+		< COMPRESSED_RECEIVED_BLOCK_BITMAP : 
+			bit (val(COMPRESSED_BITMAP_LENGTH)) > }
+	< UNCOMPRESSED_RECEIVED_BLOCK_BITMAP: bit** > ;
+

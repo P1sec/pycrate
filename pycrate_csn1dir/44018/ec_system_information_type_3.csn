@@ -1,0 +1,46 @@
+-- TS 44.018 - d80
+-- 9.1.43r EC System information type 3
+-- EC System Information Type 3
+
+< EC System Information Type 3 > ::=
+	< Message Type : bit (3) >
+	< EC SI 3_INDEX : bit (2) >
+	< EC SI 3_COUNT : bit (2) >
+	< EC SI_CHANGE_MARK : bit (5) >
+	< EC SI 4 Indicator : bit (1) >
+
+	{ 0 | 1 < EC Cell Reselection Parameters : < EC Cell Reselection Parameters struct >> }
+	{ 0 | 1 < EC Neighbour Cell Description : < EC Neighbour Cell Description struct >> }
+	{ 0 | 1 < EC Neighbour Cell Reselection Parameters : < EC Neighbour Cell Reselection Parameters struct >> }
+	< spare padding > ;
+
+< EC Cell Reselection Parameters struct > ::=
+	< CELL_RESELECT_HYSTERESIS : bit (3) >	
+	< CELL_RESELECT_OFFSET : bit (6) >
+	{ 0 | 1 < C1_DELTA_MIN : bit (2) >
+			< C1_DELTA_MAX : bit (3) > } ;
+
+< EC Neighbour Cell Description struct > ::=
+	< NumberOfOctets : bit (5) >
+	< Neighbour Frequency List Information : bit ((val(NumberOfOctets) + 1) * 8) > ;
+
+< EC Neighbour Cell Reselection Parameters struct > ::=
+< Nb_NCELL : bit (5) >
+ {
+		{ 0 | 1
+			{ 0 < BSIC : bit (6) > 
+				| 1 < BSIC : bit (9) > }
+		}
+		< CELL_TYPE : bit (1) >
+		{ 0		-- The previously listed EC Neighbour Cell Reselection Parameters applies
+		| 1		-- The indicated EC Neighbour Cell Reselection Parameters applies
+		{ 0 | 1	< CELL_BAR_ACCESS : bit (1) >
+				< SAME_RA_AS_SERVING_CELL : bit (1) > }
+
+		{ 0 | 1	< EC_RXLEV_ACCESS_MIN : bit (6) >
+				< MS_TXPWR_MAX_CCH : bit (5) > }
+
+		{ 0 | 1 	< CELL_RESELECT_OFFSET : bit (6) > } 
+		}
+	} * (val(Nb_NCELL)+1) ;
+

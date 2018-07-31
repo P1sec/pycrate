@@ -1,0 +1,9 @@
+-- TS 44.060 - d60
+-- 12.47 DTM Handover CS Radio Resources
+-- CS Handover Radio Resources IE
+
+< CS Handover Radio Resources IE > ::=
+	< CS_HANDOVER_RADIO_RESOURCES_LENGTH : bit (7) >
+	< CS_HANDOVER_RADIO_RESOURCES_DATA : octet (val(CS_HANDOVER_RADIO_RESOURCES_LENGTH)) >
+	< padding bits > ;
+

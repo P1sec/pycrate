@@ -1,0 +1,11 @@
+-- TS 44.060 - d60
+-- 12.14 PRACH Control Parameters
+-- PRACH Control Parameters IE
+
+< PRACH Control Parameters IE > ::=
+	< ACC_CONTR_CLASS : bit (16) >
+	< MAX_RETRANS : bit (2) > * 4
+	< S : bit (4) >
+	< TX_INT : bit (4) >
+	{ 0 | 1 < PERSISTENCE_LEVEL : bit (4) > * 4 } ;
+

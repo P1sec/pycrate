@@ -1,0 +1,9 @@
+-- TS 44.060 - d60
+-- 11.2.34 Physical Information (Iu mode only)
+-- Physical information message content
+
+< Physical information message content > ::=		-- RLC/MAC control block format
+	< MESSAGE_TYPE : bit (6) == 010010 >
+	< TIMING_ADVANCE_VALUE : bit (8) >
+	< padding bits > ;									-- truncation at end of message allowed, bits '0' assumed	
+

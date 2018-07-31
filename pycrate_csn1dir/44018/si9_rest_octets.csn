@@ -1,0 +1,31 @@
+-- TS 44.018 - d80
+-- 10.5.2.37a SI 9 Rest Octets
+-- SI9 rest octets
+
+<SI9 rest octets> ::=
+    {L | H <Scheduling info>}
+    <spare padding>;
+
+<Scheduling info> ::=
+    <Info type>
+    <Positions>
+    {0 | 1 <Scheduling info>};
+
+<Info type> ::=
+    0 <Info_type_4: bit (4)>
+    | 1 0	<Info_type_5: bit (5)>
+    | 1 1	<Info_type_6: bit (6)>;
+
+<Positions> ::=
+    <Position>
+    {0 | 1 <Position>};
+
+<Position> ::=
+    --< modulus: bit (4) == 0000 >
+    < modulus: 0000 >
+    < bcch_type: bit (1) >
+    |
+    < modulus: bit (4) exclude 0000 >
+    < relative_position: bit (1 + val(modulus)) > --length depends on modulus
+    < bcch_type: bit (1) > ;
+

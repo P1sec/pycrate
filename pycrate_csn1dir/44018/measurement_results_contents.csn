@@ -1,0 +1,34 @@
+-- TS 44.018 - d80
+-- 10.5.2.20 Measurement Results
+-- Measurement Results Contents
+
+< Measurement Results Contents > ::=
+	{ < BA_USED : bit (1) >
+		< DTX_USED : bit (1) >
+		< RXLEV_FULL_SERVING_CELL : bit (6) >
+		< 3G_BA_USED : bit (1) >
+		< MEAS_VALID : bit (1) >
+		< RXLEV_SUB_SERVING_CELL : bit (6) >
+		< SI23_BA_USED : bit (1) >
+		< RXQUAL_FULL_SERVING_CELL : bit (3) >
+		< RXQUAL_SUB_SERVING_CELL : bit (3) >
+		{{
+			--< NO_NCELL_M : { bit (3) := 111 } >
+			< NO_NCELL_M : { 111 } >
+			0**			-- Padding with zeroes
+		} |
+		{
+			< NO_NCELL_M : { bit (3) exclude 111 } >
+			{ < NCELL Report : < NCELL Report struct >> } * (val (NO_NCELL_M))
+			{ null | 0**			-- Padding with zeroes
+				| 1 < UTRAN_CSG_Measurement_Report : < UTRAN_CSG_Measurement_Report IE > >
+				{ null | 0** }	-- Padding with zeroes
+			} 
+		}}
+	} & octet (16) ;
+
+< NCELL Report struct > ::=
+	< RXLEV-NCELL: bit (6) >
+	< BCCH-FREQ-NCELL : bit (5) >
+	< BSIC-NCELL : bit (6) > ;
+

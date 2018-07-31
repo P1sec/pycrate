@@ -1,0 +1,11 @@
+-- TS 44.060 - d60
+-- 12.51 GSM Priority Parameters
+-- GSM Priority Parameters IE
+
+< GSM Priority Parameters IE > ::=
+	< GERAN_PRIORITY : bit(3) >
+	< THRESH_Priority_Search : bit(4) >
+	< THRESH_GSM_low : bit(4) >
+	< H_PRIO : bit(2) >
+	< T_Reselection : bit(2) >;
+

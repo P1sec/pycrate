@@ -1,0 +1,18 @@
+-- TS 44.060 - d60
+-- 11.2.12 Packet Polling Request
+-- Packet Polling Request message content
+
+< Packet Polling Request message content > ::=
+	< PAGE_MODE : bit (2) >
+	{	{ 0	< Global TFI : < Global TFI IE > >
+		| 10	< TLLI / G-RNTI : bit (32) >
+		| 110	< TQI : bit (16) > }
+		{ < TYPE_OF_ACK : bit (1) >
+			{ null | 0	bit ** = < no string >	-- Receiver compatible with earlier release
+			| 1									-- Additions in Rel-5 :
+				{ 0 | 1 < G-RNTI extension : bit (4) > }
+				< padding bits > }
+			! < Non-distribution part error : bit (*) = < no string > > }
+		! < Address information part error : bit (*) = < no string > > }
+	! < Distribution part error : bit (*) = < no string > > ;
+

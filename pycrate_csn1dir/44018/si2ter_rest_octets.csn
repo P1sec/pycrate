@@ -1,0 +1,44 @@
+-- TS 44.018 - d80
+-- 10.5.2.33a SI 2ter Rest Octets
+-- SI2ter Rest Octets
+
+< SI2ter Rest Octets > ::=
+	{ L | H	< SI2ter_MP_CHANGE_MARK : bit(1) >
+		< SI2ter_3G_CHANGE_MARK : bit(1) >
+		< SI2ter_INDEX : bit(3) >
+		< SI2ter_COUNT : bit(3) >
+		{ 0 | 1	< UTRAN FDD Description : < UTRAN FDD Description struct > > }
+		{ 0 | 1	< UTRAN TDD Description : < UTRAN TDD Description struct > > }
+		{ 0 | 1	< 3G MEASUREMENT Parameters Description : 
+				< 3G MEASUREMENT Parameters Description struct >> }
+		{	null 	| L 												-- Receiver compatible with earlier release
+			| H 														-- Additions in release R5:
+			{ 0 | 1	< 3G Additional Measurement Parameters Description : 
+					< 3G Additional Measurement Parameters Description struct >> }
+		}
+		
+	}
+<spare padding> ;
+
+< UTRAN FDD Description struct >::=						-- 21 bits are available if this structure is present on its own
+	01	< FDD-ARFCN : bit (14) >							-- requires 2+14=16 bits
+																-- The values ’00’, ‘10’ and ‘11’ were used in an earlier version 
+																-- of the protocol and shall not be used.
+	{ 0 | 1 < Bandwidth_FDD : bit (3) > } ;
+
+< UTRAN TDD Description struct >::=						-- 21 bits are available if this structure is present on its own
+	01	< TDD-ARFCN : bit (14) >							-- requires 2+14=16 bits
+																-- The values ’00’, ‘10’ and ‘11’ were used in an earlier version 
+																-- of the protocol and shall not be used.
+	{ 0 | 1 < Bandwidth_TDD : bit (3) > } ;
+
+< 3G MEASUREMENT Parameters Description struct >::=
+	< Qsearch_I : bit (4) >
+	{ 0 | 1	< FDD_Qoffset : bit (4) >						-- FDD Parameters
+			< FDD_Qmin : bit (3) > }
+	{ 0 | 1	< TDD_Qoffset : bit (4) > } ; 				 	-- TDD Parameters
+
+< 3G Additional Measurement Parameters Description struct > ::= 
+	< FDD_Qmin_Offset : bit (3) > 									-- FDD Parameters
+	< FDD_RSCPmin : bit (4) > ;
+

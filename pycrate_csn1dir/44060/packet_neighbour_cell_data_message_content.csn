@@ -1,0 +1,44 @@
+-- TS 44.060 - d60
+-- 11.2.9e Packet Neighbour Cell Data
+-- Packet Neighbour Cell Data message content
+
+< Packet Neighbour Cell Data message content > ::=
+	< PAGE_MODE : bit (2) >
+	{ 0 	< Global TFI : < Global TFI IE > >
+		    {	< CONTAINER_ID : bit (2) >
+			    < spare : bit (1) >
+			    < CONTAINER_INDEX : bit (5) >
+			    { 0 | 1	< ARFCN : bit (10) >
+				        < BSIC : bit (6) > }
+			    < CONTAINER : < Container repetition struct > >
+			    < padding bits >
+			    ! < Non-distribution part error : bit (*) = < no string > >
+		    }
+		    ! < Address information part error : bit (*) = < no string > >
+	}
+	! < Distribution part error : bit (*) = < no string > > ;													-- B) end of PNCD message.
+
+--< Container repetition struct > ::=
+--	{
+--		{	< PD : bit (3) >
+--			< CD_LENGTH : { bit (5) exclude 00000 exclude 11111 } >
+--			< CONTAINER_DATA : octet (val(CD_LENGTH)) >	-- Final container segment. Next container follows.
+--
+--		|	< PD : bit (3) >
+--			< CD_LENGTH : { bit (5) == 11111 } >
+--			< CONTAINER_DATA : octet ** > } **			-- Container continued in next message.
+--
+--		{	< spare : bit (3) >							-- Repetition continues until:
+--			< CD_LENGTH : { bit (5) == 00000 } > }			-- A) val(CD_LENGTH) = 0 or
+--	} // ;													-- B) end of PSCD message.
+
+< Container repetition struct > ::=
+	{
+	    < PD : bit (3) >
+		{	< CD_LENGTH : { bit (5) exclude { 00000 | 11111 } } >
+			< CONTAINER_DATA : octet (val(CD_LENGTH)) >
+		|	< CD_LENGTH : { bit (5) == 11111 } >
+			< CONTAINER_DATA : octet ** > } **
+		{	< CD_LENGTH : { bit (5) == 00000 } > }
+	} // ;
+

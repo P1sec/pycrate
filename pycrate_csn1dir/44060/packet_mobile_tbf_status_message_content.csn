@@ -1,0 +1,13 @@
+-- TS 44.060 - d60
+-- 11.2.9c Packet Mobile TBF Status
+-- Packet Mobile TBF Status message content
+
+< Packet Mobile TBF Status message content > ::=
+	< GLOBAL TFI : < Global TFI IE > >
+	< TBF_CAUSE : bit (3) >
+	{ 0 | 1	< STATUS_MESSAGE_TYPE : bit (6) > }
+	{ null | 0	bit ** = < no string >	-- Receiver compatible with earlier release
+	| 1		-- Additions in Rel-12
+		{ 0 | 1 < Downlink_eTFI : bit (3) > }
+	< padding bits > } ;
+

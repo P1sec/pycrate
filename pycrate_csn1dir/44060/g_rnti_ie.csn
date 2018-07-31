@@ -1,0 +1,8 @@
+-- TS 44.060 - d60
+-- 12.16a GERAN Radio Network Temporary Identity (G-RNTI)
+-- G-RNTI IE
+
+< G-RNTI IE > ::=
+	< S-RNTI : bit (20) >
+	< Serving BSC Identity : bit (12) > ;
+

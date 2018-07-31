@@ -1,0 +1,15 @@
+-- TS 44.018 - d80
+-- 10.5.2.37l SI 13alt Rest Octets
+-- SI 13alt Rest Octets
+
+< SI 13alt Rest Octets > ::=
+
+	< PBCCH Description : < PBCCH Description 2 struct >>
+	< spare padding > ;
+
+< PBCCH Description 2 struct > ::=
+	< PSI1_REPEAT_PERIOD : bit (4) >
+	< Pb : bit (4) >
+	< TN : bit (3) >
+	< PBCCH Frequency Description : < Frequency Parameters IE >> ;					-- Defined in 3GPP TS 44.060
+

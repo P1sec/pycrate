@@ -1,0 +1,54 @@
+-- TS 44.060 - d60
+-- 11.2.16 Packet Resource Request
+-- Packet Resource Request message content
+
+< Packet Resource Request message content > ::=
+	{ 0 | 1 < ACCESS_TYPE : bit (2) > }
+	{	0	< Global TFI : < Global TFI IE > >
+		| 1	< TLLI / G-RNTI : < TLLI / G-RNTI IE > > }
+	{ 0 | 1 < MS Radio Access Capability 2 : < MS Radio Access Capability 2 IE > > }
+	< Channel Request Description : < Channel Request Description IE > >
+	{ 0 | 1 < CHANGE_MARK : bit (2) > }
+	< C_VALUE : bit (6) >
+	{ 0 | 1 < SIGN_VAR : bit (6) > }
+	{ 0 | 1 < I_LEVEL_TN0 : bit (4) > }
+	{ 0 | 1 < I_LEVEL_TN1 : bit (4) > }
+	{ 0 | 1 < I_LEVEL_TN2 : bit (4) > }
+	{ 0 | 1 < I_LEVEL_TN3 : bit (4) > }
+	{ 0 | 1 < I_LEVEL_TN4 : bit (4) > }
+	{ 0 | 1 < I_LEVEL_TN5 : bit (4) > }
+	{ 0 | 1 < I_LEVEL_TN6 : bit (4) > }
+	{ 0 | 1 < I_LEVEL_TN7 : bit (4) > }
+	{	null | 0 bit** = <no string>					-- Receiver backward compatible with earlier version
+		| 1												-- Additional contents for Release 1999
+		{ 0 | 1	< EGPRS BEP Link Quality Measurements : 
+				< EGPRS BEP Link Quality Measurements IE >> }
+		{ 0 | 1	< EGPRS Timeslot Link Quality Measurements : 
+				< EGPRS Timeslot Link Quality Measurements IE >>}
+		{ 0 | 1	< PFI: bit(7) > }
+		< ADDITIONAL MS RAC INFORMATION AVAILABLE : bit (1) >
+		< RETRANSMISSION OF PRR : bit (1) >
+		{	null | 0 bit** = < no string >		-- Receiver backward compatible with earlier version
+			| 1									-- Additions for Rel-5
+			{ 0 | 1	{ 0 | 1	< G-RNTI extension : bit (4) > }
+					< Iu mode Channel Request Description : < Iu mode Channel Request Description IE > > } 
+			{ 0 | 1 < HFN_LSB : bit (1) > } 
+			{	null | 0 bit** = <no string> 	-- Receiver backward compatible with earlier version
+				| 1								-- Additional contents for Release 6
+				{ 0 | 1	< Extended Channel Request Description : 
+						< Extended Channel Request Description IE > > }
+				{	null | 0 bit** = <no string> 	-- Receiver backward compatible with earlier version
+					| 1								-- Additional contents for Release 7
+					< EARLY_TBF_ESTABLISHMENT : bit (1) > 
+					{ 0 | 1	< EGPRS BEP Link Quality Measurements Type 2 : 
+							< EGPRS BEP Link Quality Measurements Type 2 IE > > }
+					{ 0 | 1	< EGPRS Timeslot Link Quality Measurements Type 2 : 
+							<EGPRS Timeslot Link Quality Measurements Type 2 IE > > }
+					{	null | 0 bit** = <no string> 	-- Receiver backward compatible with earlier version
+						| 1								-- Additional contents for Release 10
+						< Low Access Priority Signalling : bit (1) >
+						{ null | 0	bit ** = < no string >	-- Receiver compatible with earlier release
+							| 1		-- Additions in Rel-12
+							{ 0 | 1 < Downlink_eTFI : bit (3) > }
+					< padding bits > } } } } } };
+

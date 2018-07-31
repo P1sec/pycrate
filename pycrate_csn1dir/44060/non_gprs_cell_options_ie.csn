@@ -1,0 +1,32 @@
+-- TS 44.060 - d60
+-- 12.27 Non GPRS Cell Options IE
+-- Non GPRS Cell Options IE
+
+< Non GPRS Cell Options IE > ::=
+	< ATT : bit >									-- Attach/Detach allowed
+	{ 0 | 1 < T3212 : bit (8) > }					-- Time-out value for periodic update
+	< NECI : bit >									-- Half rate support
+	< PWRC : bit >								-- Power Control indicator
+	< DTX : bit (2) >								-- DTX indicator
+	< RADIO-LINK-TIMEOUT : bit (4) >		-- Supervisory timer for RR connection
+	< BS-AG-BLKS-RES : bit (3) >				-- number of blocks reserved for access grant
+	< CCCH-CONF : bit (3) >					-- physical channel configuration for CCCH
+	< BS-PA-MFRMS : bit (3) >					-- number of 51 multiframes between
+													-- transmission of paging messages
+	< MAX-RETRANS : bit (2) >					-- maximum number of retransmissions
+	< TX-INTEGER : bit (4) >					-- number of slots to spread transmission
+	< EC : bit >									-- emergency call allowed
+	< MS-TXPWR-MAX-CCCH : bit (5) >		-- maximum Tx power level
+
+	-- Optional extension information:
+	{ 0 | 1	< Extension Length : bit (6) >
+			< bit (val(Extension Length) + 1)
+			& { <Extension Information > ! { bit ** = <no string> } } > } ;
+
+< Extension Information > ::=
+	< ECSC: bit >								-- Early Classmark Sending Control
+	< 3G ECSR >									-- 3G Early Classmark Sending Restriction
+	< spare bit > ** ;
+
+< 3G ECSR > ::= < 3G Early Classmark Sending Restriction > ;
+

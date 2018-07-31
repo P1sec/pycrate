@@ -1,0 +1,7 @@
+-- TS 44.060 - d60
+-- 12.30 MS Radio Access Capability 2
+-- MS Radio Access Capability 2 IE
+
+< MS Radio Access Capability 2 IE > ::=
+	< MS RA capability : < MS RA capability value part struct > > ;
+

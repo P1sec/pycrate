@@ -1,0 +1,11 @@
+-- TS 44.060 - d60
+-- 12.41 MPRACH Control Parameters
+-- MPRACH Control Parameters IE
+
+< MPRACH Control Parameters IE > ::=
+	{ 0 | 1< ACC_CONTR_CLASS : bit (16) > } 
+	{ 0 | 1< MAX_RETRANS : bit (2) > } 
+	< S : bit (4) >
+	{ 0 | 1 < TX_INT : bit (4) > } 
+	{ 0 | 1 < PERSISTENCE_LEVEL : bit (4) > } ;
+

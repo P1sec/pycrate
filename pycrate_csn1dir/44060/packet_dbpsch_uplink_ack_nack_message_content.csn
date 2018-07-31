@@ -1,0 +1,20 @@
+-- TS 44.060 - d60
+-- 11.2.28a Packet DBPSCH Uplink Ack/Nack
+-- Packet DBPSCH Uplink Ack/Nack message content
+
+< Packet DBPSCH Uplink Ack/Nack message content > ::=
+	{	< MESSAGE_TYPE : bit (6) == 001001 >
+		< RB Id : bit (5) >
+		{ 0 | 1	< CONTENTION_RESOLUTION_TLLI : bit (32) > 
+				{ 0 | 1 < G-RNTI extension : bit (4) > } }
+		{ 0	-- TCH TBF mode
+			{ 0 -- All data blocks acknowledged, no retransmission requested
+			| 1	< STARTING_SEQUENCE_NUMBER : bit (8) >
+				< RECEIVED_BLOCK_BITMAP : bit (128) > }
+		| 1	-- DCCH TBF mode
+			{ 0 -- All data blocks acknowledged, no retransmission requested
+			| 1	< STARTING_SEQUENCE_NUMBER : bit (4) >
+				< RECEIVED_BLOCK_BITMAP : bit (8) > } }
+		< padding bits > 
+		! < DBPSCH message part error : bit (*) = < no string > > } ;
+

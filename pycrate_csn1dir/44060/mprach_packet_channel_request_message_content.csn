@@ -1,0 +1,7 @@
+-- TS 44.060 - d60
+-- 11.2.5c MPRACH Packet Channel Request
+-- MPRACH Packet channel request message content
+
+< MPRACH Packet channel request message content > ::=
+	< Single block MBMS access:	0000		< RandomBits: bit (7) > >;
+

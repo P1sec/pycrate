@@ -1,0 +1,6 @@
+-- TS 44.060 - d60
+-- 12.5.2 EGPRS Window Size
+-- EGPRS Window Size IE
+
+< EGPRS Window Size IE > ::= bit (5) ;
+

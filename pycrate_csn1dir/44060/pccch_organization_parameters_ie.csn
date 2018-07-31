@@ -1,0 +1,10 @@
+-- TS 44.060 - d60
+-- 12.25 PCCCH Organization Parameters
+-- PCCCH Organization Parameters IE
+
+< PCCCH Organization Parameters IE > ::=
+	< BS_PCC_REL : bit >
+	< BS_PBCCH_BLKS : bit (2) >
+	< BS_PAG_BLKS_RES : bit (4) >
+	< BS_PRACH_BLKS : bit (4) > ;
+

@@ -1,0 +1,12 @@
+-- TS 44.060 - d60
+-- 12.63 UTRAN CSG Target cell
+-- UTRAN CSG Target cell IE
+
+< UTRAN CSG Target cell IE > ::=
+		< UTRAN CI : bit (28) >
+		{ 0	| 1	< PLMN-ID : < PLMN-ID struct > > } ;
+
+< PLMN-ID struct > ::=
+	< MCC : bit (12) >
+	< MNC : bit (12) > ;
+

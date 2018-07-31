@@ -1,0 +1,11 @@
+-- TS 44.060 - d60
+-- 11.2.47 Packet Application Information
+-- Packet Application Information message content
+
+< Packet Application Information message content > ::=
+	< PAGE_MODE : bit (2) >
+	{	< Application Type : bit (4) >	-- type of Application
+		< Application Data : octet ** >
+		< padding bits > }
+	! < Distribution part error : bit (*) = < no string > > ;
+

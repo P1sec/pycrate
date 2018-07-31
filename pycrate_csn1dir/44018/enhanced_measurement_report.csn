@@ -1,0 +1,49 @@
+-- TS 44.018 - d80
+-- 9.1.55 ENHANCED MEASUREMENT REPORT
+-- Enhanced Measurement report
+
+<Enhanced Measurement report> ::=
+	< RR short PD : bit >						-- See 3GPP TS 24.007
+	< Message type : bit (5) >					-- See 10.4
+	< Short layer 2 header : bit (2) >			-- See 3GPP TS 44.006
+	< BA_USED : bit >
+	< 3G_BA_USED : bit >
+	< BSIC_Seen : bit >
+	< SCALE : bit >
+	{ 0 | 1 < Serving cell data : < Serving cell data struct >> }
+	{ 1 < Repeated Invalid_BSIC_Information : < Repeated Invalid_BSIC_Information struct >> } ** 0
+	{ 0 | 1 { 0 | 1 < REPORTING_QUANTITY : bit (6) > } ** }				-- bitmap type reporting
+	{ null | L	bit ** = < no string >	-- Receiver compatible with earlier release
+	| H									-- Additions in Rel-8 :
+		< BITMAP_LENGTH : bit(7) >
+		{ 0 | 1 < REPORTING_QUANTITY : bit (6) > } * (val(BITMAP_LENGTH) + 1) 
+		{ 0 | 1 < EUTRAN Measurement Report : < EUTRAN Measurement Report struct > > }
+		{ null | L	bit ** = < no string >	-- Receiver compatible with earlier release
+		| H									-- Additions in Rel-9 :
+			{ 0 | 1 < UTRAN CSG Measurement Report : < UTRAN CSG Measurement Report IE > > }
+			{ null | L	bit ** = < no string >	-- Receiver compatible with earlier release
+			| H									-- Additions in Rel-11 :
+				< SI23_BA_USED : bit > }
+	    }
+	}
+	< spare padding > ;
+
+< Serving cell data struct > ::=
+	< DTX_USED : bit >
+	< RXLEV_VAL : bit (6) >
+	< RX_QUAL_FULL : bit (3) >
+	< MEAN_BEP : bit (5) >
+	< CV_BEP : bit (3) >
+	< NBR_RCVD_BLOCKS : bit (5) > ;
+
+< Repeated Invalid_BSIC_Information struct > ::=
+	< BCCH-FREQ-NCELL : bit (5) >
+	< BSIC : bit (6) >
+	< RXLEV-NCELL : bit (6) > ;
+
+< EUTRAN Measurement Report struct > ::= 
+	< N_EUTRAN: bit (2) >
+	{	< EUTRAN_FREQUENCY_INDEX : bit (3) >
+		< CELL IDENTITY : bit (9) >
+		< REPORTING_QUANTITY : bit (6) > } * (val(N_EUTRAN) + 1 ) ;
+

@@ -1,0 +1,13 @@
+-- TS 44.060 - d60
+-- 12.62 E-UTRAN CSG Target cell
+-- E-UTRAN CSG Target cell IE
+
+< E-UTRAN CSG Target cell IE > ::=
+		<E- UTRAN CI : bit (28) >
+		< Tracking Area Code : bit (16) >
+		{ 0	| 1	< PLMN-ID : < PLMN-ID struct > > } ;
+
+< PLMN-ID struct > ::=
+	< MCC : bit (12) >
+	< MNC : bit (12) > ;
+

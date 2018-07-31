@@ -1,0 +1,7 @@
+-- TS 44.060 - d60
+-- 12.74 EC Packet Timing Advance
+-- EC Packet Timing Advance IE
+
+< EC Packet Timing Advance IE > ::=
+	< TIMING_ADVANCE_VALUE : bit (6) >;
+

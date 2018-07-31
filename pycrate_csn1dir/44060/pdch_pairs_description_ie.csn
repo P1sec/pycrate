@@ -1,0 +1,25 @@
+-- TS 44.060 - d60
+-- 12.5.5 PDCH Pairs Description
+-- PDCH Pairs Description IE
+
+< PDCH Pairs Description IE > ::=
+	{ 0						-- Single Carrier Assignment
+		{ 00					-- Default PDCH pair configuration
+		| 01					-- Unchanged
+		| 10					-- Explicit PDCH pair configuration
+			< DOWNLINK_PDCH_PAIRS_C1 : bit (8) >
+			< UPLINK_PDCH_PAIRS_C1 : bit (8) >
+		! < PDCH pairs configuration error : { 1 1 } bit (*) = < no string > > 		-- reserved
+		}
+	| 1						-- Dual Carrier Assignment
+		{ 00					-- Default PDCH pair configuration
+		| 01					-- Unchanged
+		| 10					-- Explicit PDCH pair configuration
+			< DOWNLINK_PDCH_PAIRS_C1 : bit (8) > 
+			< DOWNLINK_PDCH_PAIRS_C2 : bit (8) >
+			< UPLINK_PDCH_PAIRS_C1 : bit (8) >
+			< UPLINK_PDCH_PAIRS_C2 : bit (8) >
+		! < PDCH pairs configuration error : { 1 1 } bit (*) = < no string > > 		-- reserved
+		}
+	} ;
+

@@ -1,0 +1,19 @@
+-- TS 44.060 - d60
+-- 12.59 Enhanced Cell Reselection Parameters
+-- Enhanced Cell Reselection Parameters IE
+
+< Enhanced Cell Reselection Parameters IE > ::=
+	{ 1	< Repeated E-UTRAN Enhanced Cell Reselection Parameters :
+		< Repeated E-UTRAN Enhanced Cell Reselection Parameters struct >> } ** 0 ;
+
+< Repeated E-UTRAN Enhanced Cell Reselection Parameters struct > ::=
+	{ 1	< E-UTRAN_FREQUENCY_INDEX : bit (3) > } ** 0
+	{ 0										-- reselection based on target cell RSRP (RSRQ checked for suitability)
+		< E-UTRAN_Qmin: bit(4) >
+	| 1										-- reselection based on target cell RSRQ (RSRP checked for suitability)
+		< THRESH_E-UTRAN_high_Q: bit(5) >
+		{ 0 | 1	< THRESH_E-UTRAN_low_Q: bit(5) > }
+		{ 0 | 1	< E-UTRAN_QQUALMIN : bit(4) > }
+		{ 0 | 1	< E-UTRAN_RSRPmin : bit(5) > }
+	} ;
+

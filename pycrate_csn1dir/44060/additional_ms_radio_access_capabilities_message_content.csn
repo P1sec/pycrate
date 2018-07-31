@@ -1,0 +1,15 @@
+-- TS 44.060 - d60
+-- 11.2.32 Additional MS Radio Access Capabilities
+-- Additional MS Radio Access Capabilities message content
+
+< Additional MS Radio Access Capabilities message content > ::=
+	{ 0 < Global TFI : < Global TFI IE > >
+	| 1 < TLLI : < TLLI IE > > }
+	< MS Radio Access Capability 2 : < MS Radio Access Capability 2 IE > >
+	{ null | 0	bit ** = < no string >	-- Receiver compatible with earlier release
+	| 1		-- Additions in Rel-12
+		{ 0 | 1 < Downlink_eTFI : bit (3) > }
+	< padding bits > } ;
+
+< TLLI IE > ::= bit (32) ;
+

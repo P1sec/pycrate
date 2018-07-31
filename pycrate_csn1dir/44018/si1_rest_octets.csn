@@ -1,0 +1,13 @@
+-- TS 44.018 - d80
+-- 10.5.2.32 SI 1 Rest Octets
+-- SI1 Rest Octets
+
+<SI1 Rest Octets> ::=
+	{L |H <NCH Position : bit (5)> }
+	< Band indicator >
+	<spare padding> ;
+
+< Band indicator > ::=
+	< BAND_INDICATOR : bit == L >			-- ARFCN indicates 1800 band
+	| < BAND_INDICATOR : bit == H > ;		-- ARFCN indicates 1900 band
+

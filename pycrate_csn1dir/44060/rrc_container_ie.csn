@@ -1,0 +1,9 @@
+-- TS 44.060 - d60
+-- 12.45b RRC Container
+-- RRC Container IE
+
+< RRC Container IE > ::=
+	< RRC_CONTAINER_LENGTH : bit (8) >
+	< RRC_CONTAINER_DATA : octet (val(RRC_CONTAINER_LENGTH)) >
+	< padding bits > ;
+

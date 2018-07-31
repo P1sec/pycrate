@@ -1,0 +1,26 @@
+-- TS 44.060 - d60
+-- 11.2.46 DTM Handover Command
+-- DTM Handover Command message content
+
+< DTM Handover Command message content > ::=
+	< PAGE_MODE : bit (2) >
+	{	0 < Global TFI : < Global TFI IE > >
+		{	-- Non-distribution part
+			{ 00 < DTM Handover to A/Gb Mode Payload :
+					< DTM Handover to A/Gb mode Payload description struct > >
+			| 01 < DTM Handover to UTRAN Payload : < RRC Container IE > > 
+			! < Message escape : { 10 | 11} bit (*) = < no string > > } -- Extended for future changes
+			< padding bits >
+			! < Non-distribution part error : bit (*) = < no string > > }
+		! < Address information part error : bit (*) = < no string > > }
+	! < Non-distribution part error : bit (*) = < no string > > ;
+
+< DTM Handover to A/Gb mode Payload description struct > ::=
+	--< DTM Handover CS RR Info: < DTM Handover CS Radio Resources IE > >
+	< DTM Handover CS RR Info: < CS Handover Radio Resources IE > >
+	{ 00 < DTM Handover PS RR Info: < DTM Handover PS Radio Resources IE > >
+	| 01 < DTM Handover PS RR 2 Info : < DTM Handover PS Radio Resources 2 IE > > 
+	| 10 < DTM Handover PS RR 3 Info : < DTM Handover PS Radio Resources 3 IE > >
+	! < Message escape : { 11 } bit (*) = <no string > > } 	 -- reserved for future use
+	{ 0 | 1 < NAS Container for PS Handover IE > };
+

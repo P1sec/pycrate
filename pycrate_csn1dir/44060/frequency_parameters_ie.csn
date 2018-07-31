@@ -1,0 +1,27 @@
+-- TS 44.060 - d60
+-- 12.8 Frequency Parameters
+-- Frequency Parameters IE
+
+< Frequency Parameters IE > ::=
+	< TSC : bit (3) >
+	{ 00 < ARFCN : bit (10) >
+	| 01 < Indirect encoding : < Indirect encoding struct > >
+	| 10 < Direct encoding 1 : < Direct encoding 1 struct > >
+	| 11 < Direct encoding 2 : < Direct encoding 2 struct > > } ;
+
+< Indirect encoding struct > ::=
+	< MAIO : bit (6) >
+	< MA_NUMBER : bit (4) >
+	{ 0 | 1	< CHANGE_MARK_1 : bit (2) >
+			{ 0 | 1 < CHANGE_MARK_2 : bit (2) > } } ;
+
+< Direct encoding 1 struct > ::=
+	< MAIO : bit (6) >
+	< GPRS Mobile Allocation : < GPRS Mobile Allocation IE > > ;
+
+< Direct encoding 2 struct > ::=
+	< MAIO : bit (6) >
+	< HSN : bit (6) >
+	< Length of MA Frequency List contents : bit (4) >
+	< MA Frequency List contents : octet (val(Length of MA Frequency List contents) + 3) > ;
+

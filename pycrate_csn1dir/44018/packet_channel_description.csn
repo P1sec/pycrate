@@ -1,0 +1,22 @@
+-- TS 44.018 - d80
+-- 10.5.2.25a Packet Channel Description
+-- Packet Channel Description
+
+< Packet Channel Description > ::=
+	< Channel type : bit (5) >
+	< TN : bit (3) >
+	< TSC : bit (3) >
+	{ 	0
+			{ 	0	< spare bit >
+					< ARFCN : bit (10) >						-- non-hopping RF channel configuraion
+				 | 1 < spare bit >
+					< MAIO : bit (6) >							-- indirect encoding of hopping RF channel configuration
+					< MA_NUMBER_IND : bit >
+					{ 	0	< spare bits : bit (2) >
+						| 1	< CHANGE_MARK_1 : bit (2) > }
+			}
+		| 1
+			< MAIO : bit (6) >								-- direct encoding of hopping RF channel configuration
+			< HSN : bit (6) >
+	};
+

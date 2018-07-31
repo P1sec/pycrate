@@ -1,0 +1,14 @@
+-- TS 44.060 - d60
+-- 11.2.55 EC Packet Power Control/Timing Advance
+-- EC Packet Power Control/Timing Advance message content
+
+< EC Packet Power Control/Timing Advance message content > ::=
+	< USED_DL_COVERAGE_CLASS : < Used DL Coverage Class IE >>
+	{	< Global TFI : < Global TFI IE > >
+		{	{ 0 | 1 < T_AVG_T : bit (5) > }
+			{ 0 | 1 < EC Packet Timing Advance : < EC Packet Timing Advance IE >> }
+			{ 0 | 1 < GAMMA : bit (5) > }
+			< padding bits >
+			! < Non-distribution part error : bit (*) = < no string > > }
+		! < Address information part error : bit (*) = < no string > > }
+	! < Distribution part error : bit (*) = < no string > > ;

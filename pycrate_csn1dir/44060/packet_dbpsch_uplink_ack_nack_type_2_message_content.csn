@@ -1,0 +1,17 @@
+-- TS 44.060 - d60
+-- 11.2.28b Packet DBPSCH Uplink Ack/Nack Type 2
+-- Packet DBPSCH Uplink Ack/Nack Type 2 message content
+
+< Packet DBPSCH Uplink Ack/Nack Type 2 message content > ::=
+	{	< MESSAGE_TYPE : bit (6) == 001001 >	-- The same message type as for Packet DBPSCH Uplink Ack/Nack is 														-- used since these two messages are mutually exclusive.
+		< RB Id : bit (5) >
+		{ 0							-- UDCH TBF mode
+			{ 0 						-- All data blocks acknowledged, no retransmission requested
+			| 1	< FLO Ack/Nack Description : < FLO Ack/Nack Description IE > > }
+		| 1							-- CDCH TBF mode
+			{ 0 						-- All data blocks acknowledged, no retransmission requested
+			| 1	< STARTING_SEQUENCE_NUMBER : bit (4) >
+				< RECEIVED_BLOCK_BITMAP : bit (8) > } }
+		< padding bits > 
+		! < DBPSCH message part error : bit (*) = < no string > > } ;
+

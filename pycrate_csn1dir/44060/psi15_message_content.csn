@@ -1,0 +1,14 @@
+-- TS 44.060 - d60
+-- 11.2.25b Packet System Information 15
+-- PSI15 message content
+
+< PSI15 message content > ::=
+	< PAGE_MODE : bit (2) >
+	{ 0 | 1 < UTRAN Frequency List : < UTRAN Frequency List Description struct >> }
+	< padding bits >
+	! < Distribution part error : bit (*) = < no string >> ;
+
+< UTRAN Frequency List Description struct > ::= 
+	{ 1 < FDD_ARFCN : bit (14) > } ** 0			-- FDD frequencies
+	{ 1 < TDD_ARFCN : bit (14) > } ** 0 ;		-- TDD frequencies
+

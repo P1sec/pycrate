@@ -1,0 +1,31 @@
+-- TS 44.060 - d60
+-- 11.2.52 EC Packet Downlink Assignment
+-- EC Packet Downlink Assignment message content
+
+< EC Packet Downlink Assignment message content > ::=
+	< USED_DL_COVERAGE_CLASS : < Used DL Coverage Class IE > >
+	{	0	< Global TFI : < Global TFI IE > >
+			{	< CONTROL_ACK : bit (1) >
+				{ 0 | 1 < Frequency Parameters : < Frequency Parameters struct > > }
+				< DL_COVERAGE_CLASS : bit (2) >
+				< STARTING_DL_TIMESLOT : bit (3) >
+				< TIMESLOT_MULTIPLICATOR : bit (3) >
+				< DOWNLINK_TFI_ASSIGNMENT : bit (5) >
+				< UL_COVERAGE_CLASS : bit (2) >
+				< STARTING_UL_TIMESLOT_OFFSET : bit (2) >
+				{ 0 | 1	< EC Packet Timing Advance : < EC Packet Timing Advance IE > > }
+				{ 0 | 1	< P0 : bit (4) >
+						< PR_MODE : bit (1) > }
+				{ 0 | 1	< GAMMA : bit (5) >
+						< ALPHA Enable : bit (1) > }
+				< padding bits > //			-- truncation at end of message allowed, bits '0' assumed
+				! < Non-distribution part error : bit (*) = < no string > > }
+			--! < Address information part error : bit (*) = < no string > >
+		! < Message escape : { 1 } bit (*) = <no string> > } 	-- Extended for future changes
+	! < Distribution part error : bit (*) = < no string > > ;
+
+< Frequency Parameters struct > ::=
+	< EC_MA_NUMBER : bit (5) >
+	< TSC : bit (3) >
+	< Primary TSC Set : bit (1) >;
+

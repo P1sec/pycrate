@@ -1,0 +1,35 @@
+-- TS 24.008 - d90
+-- 10.5.5.12 MS network capability
+-- MS network capability value part
+
+<MS network capability value part> ::=
+    <GEA1 bits>
+    <SM capabilities via dedicated channels: bit>
+    <SM capabilities via GPRS channels: bit>
+    <UCS2 support: bit>
+    --<SS Screening Indicator: bit string(2)>
+    <SS Screening Indicator: bit (2)>
+    <SoLSA Capability : bit>
+    <Revision level indicator: bit>
+    <PFC feature mode: bit>
+    <Extended GEA bits>
+    <LCS VA capability: bit>
+    <PS inter-RAT HO from GERAN to UTRAN Iu mode capability: bit>
+    <PS inter-RAT HO from GERAN to E-UTRAN S1 mode capability: bit>
+    <EMM Combined procedures Capability: bit>
+    <ISR support: bit>
+    <SRVCC to GERAN/UTRAN capability: bit>
+    <EPC capability: bit>
+    <NF capability: bit>
+    <GERAN network sharing capability: bit>
+    <User plane integrity protection support: bit>
+    <GIA/4: bit>
+    <GIA/5: bit>
+    <GIA/6: bit>
+    <GIA/7: bit>
+    <Spare bits> // ;
+
+<GEA1 bits> ::= < GEA/1 :bit>;
+
+<Extended GEA bits> ::= <GEA/2:bit><GEA/3:bit>< GEA/4:bit >< GEA/5:bit >< GEA/6:bit ><GEA/7:bit>;
+

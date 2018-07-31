@@ -1,0 +1,16 @@
+-- TS 44.060 - d60
+-- 12.3.2 FLO Ack/Nack Description
+-- FLO Ack/Nack Description IE
+
+< FLO Ack/Nack Description IE > ::=
+		< FLO Ack/Nack Description struct > ;
+
+< FLO Ack/Nack Description struct > ::=
+		< BEGINNING_OF_WINDOW : bit (1) >
+		< END_OF_WINDOW : bit (1) >
+		< STARTING_SEQUENCE_NUMBER : bit (10) >
+		{ 0	< COMPRESSED_BITMAP_LENGTH: bit (7) >
+			< COMPRESSED_BITMAP_STARTING_COLOR_CODE: bit (1) >
+			< COMPRESSED_RECEIVED_BLOCK_BITMAP: bit (val(COMPRESSED_BITMAP_LENGTH)) >
+		| 1	< UNCOMPRESSED_RECEIVED_BLOCK_BITMAP: bit** > } ;
+

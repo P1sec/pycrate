@@ -1,0 +1,13 @@
+-- TS 44.018 - d80
+-- 9.1.49a VGCS Additional Information
+-- VGCS ADDITIONAL INFO
+
+<VGCS ADDITIONAL INFO> 	::=
+    <RR short PD : bit>					-- See 3GPP TS 24.007
+ 	<message type : bit(5)>				-- See sub-clause 10.4
+	<short layer 2 header : bit(2)>		-- See 3GPP TS 44.006
+	<talker identity length : bit(5)>
+	<filler bits : bit(3)>
+	<talker identity : bit (8 * (val (talker identity length))) >
+	<spare padding> ;
+

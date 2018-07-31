@@ -1,0 +1,12 @@
+-- TS 44.018 - d80
+-- 10.5.2.85 EC Packet Channel Description Type 2
+-- EC Packet Channel Description Type 2
+
+< EC Packet Channel Description Type 2 > ::=
+	< QUARTER_HYPERFRAME_INDICATOR : bit (2) >
+	< DL_COVERAGE_CLASS : bit (2) >
+	< UL_COVERAGE_CLASS : bit (2) >
+	< TSC Set : bit (1) >
+	< TSC : bit (3) >
+	< EC_MA_NUMBER : bit (5) > ;
+

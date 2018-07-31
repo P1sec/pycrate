@@ -1,0 +1,67 @@
+-- TS 44.018 - d80
+-- 9.1.43q EC System information type 2
+-- EC System Information Type 2
+
+< EC System Information Type 2 > ::=
+	< Message Type : bit (3) >
+	< EC SI 2_INDEX : bit (2) >
+	< EC SI 2_COUNT : bit (2) >
+	< EC SI_CHANGE_MARK : bit (5) >
+
+	{ 0 | 1 < EC Cell Selection Parameters : < EC Cell Selection Parameters struct >> }
+	{ 0 | 1 < Coverage Class Selection Parameters : < Coverage Class Selection Parameters struct >> }
+	{ 0 | 1 < EC-RACH Control Parameters : < EC-RACH Control Parameters struct >> }
+	{ 0 | 1 < Short RACH Control Parameters : < Short RACH Control Parameters struct >> }
+	{ 0 | 1 < EC Cell Options: < EC Cell Options struct >> }
+	< spare padding > ;
+
+< EC Cell Selection Parameters struct > ::=
+	< Location Area Identification : bit (40) >
+	< Routing Area Code : bit (8) >
+	< Cell Identity : bit (16) >
+	< EC_BS_CC_CHANS : bit (2) >
+	< EC_RXLEV_ACCESS_MIN : bit (6) >		-- used in the path loss criterion C1
+	< MS_TXPWR_MAX_CCH : bit (5) >		-- used in the path loss criterion C1
+	{ 0 | 1	< LB_MS_TXPWR_MAX_CCH : bit (5) > }
+ 	{ 0 | 1	< CELL_SELECTION_RLA_MARGIN : bit (3) > };
+
+< Coverage Class Selection Parameters struct > ::=
+	< DL_CC_Selection: bit (1) >
+	< BT_Threshold_DL: bit (5) >
+	{ 0 | 1	< CC2_Range_DL : bit (5) > }
+	{ 0 | 1	< CC3_Range_DL : bit (5) > }
+	< BT_Threshold_UL: bit (5) >
+	{ 0 | 1	< CC2_Range_UL : bit (5) > }
+	{ 0 | 1	< CC3_Range_UL : bit (5) > } 
+	< BSPWR : bit (6) >
+	{ 0 | 1 < DL_Signal_Strength_Step_Size : bit (2) > } 
+ < EC_Reduced_PDCH_Allocation : bit(1) >;
+
+< EC-RACH Control Parameters struct > ::=
+	< EC_Max_Retrans : bit (2) >
+	< Sm : bit (2) >
+	< Tm : bit (2) >
+	< Access_Timeslots : bit (1) >
+	< CC_Access_Adaptation: bit (2) >
+	< Cell_Bar_Access : bit (1) >
+	{ 0 | 1	< EC_Access_Control_Class : bit (7) > 
+			< Exception_Report_Status : bit (1) > }
+	{ 0 | 1	< BT_Threshold_UL_Margin : bit (3) > } ;
+
+< Short RACH Control Parameters struct > ::=
+	< Max_Retrans : bit (2) >
+	< Tx-integer : bit (4) >
+	< Cell_Bar_Access : bit (1) >
+	{ 0		-- Access Control Class information and Exception Report Status in EC-RACH Control Parameters applies
+		| 1		-- The indicated Access Control Class bitmap and Exception Report Status field applies
+				< Access_Control_Class : bit (16) >
+				< Exception_Report_Status : bit (1) >
+	} ;
+
+< EC Cell Options struct > ::=
+	{ 0 | 1	< ALPHA : bit (4) > }
+	{ 0 | 1	< T3168 : bit (3) > }
+	{ 0 | 1	< T3192 : bit (3) > }
+	{ 0 | 1	< T3226 : bit (3) > }
+	< T3248 : bit (2) > ;
+

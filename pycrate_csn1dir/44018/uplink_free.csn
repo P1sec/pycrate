@@ -1,0 +1,16 @@
+-- TS 44.018 - d80
+-- 9.1.47 Uplink free
+-- UPLINK FREE
+
+<UPLINK FREE> ::=
+    < RR short PD : bit >						-- See 3GPP TS 24.007
+    < message type : bit(5) >					-- See 10.4
+    < short layer 2 header : bit(2) >				-- See 3GPP TS 44.006
+    < Uplink Access Request : bit >
+    { L | H < Uplink Identity Code : bit(6) >}
+    { null | L				 					-- Receiver compatible with earlier release
+        | H					 					-- Additions for Release-7
+        { 0|1	<Emergency_Ind : bit(1)>}
+    }
+    < spare padding > ;
+

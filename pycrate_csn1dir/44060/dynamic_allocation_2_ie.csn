@@ -1,0 +1,39 @@
+-- TS 44.060 - d60
+-- 12.48a.4 Dynamic Allocation 2 
+-- Dynamic Allocation 2 IE
+
+< Dynamic Allocation 2 IE > ::= 
+	< EXTENDED_DYNAMIC_ALLOCATION : bit (1) >
+	{ 0 | 1	< P0_C1 : bit (4) > 
+			< PR_MODE_C1 : bit (1) > 
+			{ 0 | 1	< P0_C2 : bit (4) > 
+					< PR_MODE_C2 : bit (1) > } }
+	< USF_GRANULARITY : bit (1) >
+	{ 0 | 1 < UPLINK_TFI_ASSIGNMENT : bit (5) > }
+	{ 0			-- Allocation without Power Control Parameters
+		< N_USF : bit (4) >
+		{ 0 | 1 < USF : bit (3) > } *( val(N_USF) + 1)
+	| 1			-- Allocation with Power Control Parameters
+		< ALPHA_C1: bit (4) >
+		{ 0 | 1 < ALPHA_C2: bit (4) > }
+		{ 0							-- BTTI mode
+			< N_TS : bit (4) >
+			{ 0 | 1 
+				< USF : bit (3) >
+				< GAMMA: bit (5) > 
+			} * ( val(N_TS) + 1)
+		| 1							-- RTTI mode
+			< N_PAIRS : bit (3) >
+			{ 0 | 1
+				< USF : bit (3) > 
+				< GAMMA : bit (5) > 
+			} * (val(N_PAIRS) + 1) 
+			{ 0 		-- RTTI USF
+			| 1		-- BTTI USF 
+				{ 0 | 1 < USF_2 : bit (3) > 
+					{ 0 | 1 < GAMMA : bit (5) > } 
+				} * (val(N_PAIRS) + 1)
+			}
+		}
+	} ;
+

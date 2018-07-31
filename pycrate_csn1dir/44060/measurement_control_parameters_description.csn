@@ -1,0 +1,14 @@
+-- TS 44.060 - d60
+-- 12.56 Measurement Control Parameters Description
+-- Measurement Control Parameters Description
+
+< Measurement Control Parameters Description> ::=
+	{ 0 | 1	< Measurement_Control_E-UTRAN : bit(1) >
+			< E-UTRAN_FREQUENCY_INDEX : bit (3) >
+			{ 1 < E-UTRAN_FREQUENCY_INDEX : bit (3) > } ** 0
+	}
+	{ 0 | 1	< Measurement_Control_UTRAN : bit(1) >
+			< UTRAN_FREQUENCY_INDEX : bit (5) >
+			{ 1 < UTRAN_FREQUENCY_INDEX : bit (5) > } ** 0
+	} ;
+

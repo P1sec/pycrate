@@ -1,0 +1,28 @@
+-- TS 44.018 - d80
+-- 9.1.65 EC Packet Channel Request
+-- EC PACKET CHANNEL REQUEST message content CC1
+
+< EC PACKET CHANNEL REQUEST message content CC1 > ::=
+ < EC-NumberOfBlocks : bit (3) >
+ < EC Priority : bit (1) >
+ < RandomBits : bit (3) >
+ < Selected DL Coverage Class : bit (3) > ;
+
+< EC PACKET CHANNEL REQUEST message content CC2 > ::=
+ < EC-NumberOfBlocks : bit (3) >
+ < EC Priority : bit (1) >
+ < RandomBits : bit (3) >
+ < Selected DL Coverage Class : bit (3) > ;
+
+< EC PACKET CHANNEL REQUEST message content CC3 > ::=
+ < EC-NumberOfBlocks : bit (3) >
+ < EC Priority : bit (1) >
+ < RandomBits : bit (3) >
+ < Selected DL Coverage Class : bit (3) > ;
+
+< EC PACKET CHANNEL REQUEST message content CC4 > ::=
+ < EC-NumberOfBlocks : bit (3) >
+ < EC Priority : bit (1) >
+ < RandomBits : bit (3) >
+ < Selected DL Coverage Class : bit (3) > ;
+

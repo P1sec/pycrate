@@ -1,0 +1,86 @@
+-- TS 44.060 - d60
+-- 11.2.21b Packet System Information Type 3 quater
+-- PSI3 quater message content
+
+< PSI3 quater message content > ::=
+	< PAGE_MODE : bit (2) >
+	< PSI3_CHANGE_MARK : bit (2) >
+	< PSI3_QUATER_INDEX : bit (4) >
+	< PSI3_QUATER_COUNT : bit (4) >
+	{	{ 0 | 1	< GPRS REP_PRIORITY Description : < GPRS REP PRIORITY Description struct >> }
+		{ 0 | 1	< 3G Neighbour Cells Description : < 3G Neighbour Cells Description struct >> }
+		{ 0 | 1	< 3G MEASUREMENT Parameters Description :
+				< 3G MEASUREMENT PARAMETERS Description struct >> }
+		{ 0 | 1	< 3G Initial Dedicated Mode Reporting Description : 
+				< 3G Initial Dedicated Mode Reporting Description struct >> }
+		{	null | 0 bit** = < no string>									-- Receiver compatible with earlier release
+		 	| 1 															-- Additions in Release 5:
+			{ 0 | 1	< GPRS 3G Additional Measurement Parameters Description : 
+					< GPRS 3G Additional Measurement Parameters Description struct >> }
+			{ 0 | 1	< GPRS 3G Additional Measurement Parameters Description 2: 
+					< GPRS 3G Additional Measurement 		Parameters Description 2 struct >> }
+			{	null | 0	bit** = < no string >				--Receiver compatible with earlier release
+				| 1												--Additions in Release 6:
+					< 3G_CCN_ACTIVE : bit > 
+		    < padding bits > }
+		}
+	} //						-- truncation at end of message allowed, bits '0' assumed	 
+	! < Distribution part error : bit (*) = < no string > > ;
+
+< GPRS REP PRIORITY Description struct > ::=
+	< Number_Cells : bit(7) > 
+	{ < REP_PRIORITY : bit > } * (val(Number_Cells)) ;
+
+< 3G Neighbour Cells Description struct > ::= 
+	{ 0 | 1 < Index_Start_3G : bit (7) > }
+	{ 0 | 1 < Absolute_Index_Start_EMR : bit (7) > }
+	{ 0 | 1 < UTRAN FDD Description : < UTRAN FDD Description struct >> }
+	{ 0 | 1 < UTRAN TDD Description : < UTRAN TDD Description struct >> } ;
+
+< UTRAN FDD Description struct > ::=
+	{ 0 | 1 < Bandwidth_FDD : bit (3) > }
+	{ 1 < Repeated UTRAN FDD Neighbour Cells : < Repeated UTRAN FDD Neighbour Cells struct >> } ** 0 ;
+
+< Repeated UTRAN FDD Neighbour Cells struct > ::=
+	0 < FDD-ARFCN : bit (14) >		-- The value ‘1’ was used in an earlier 
+										-- version of the protocol and shall not be used.
+	< FDD_Indic0 : bit >
+	< NR_OF_FDD_CELLS : bit (5) >
+	< FDD _CELL_INFORMATION Field : bit(p(NR_OF_FDD_CELLS)) > ; 
+
+< UTRAN TDD Description struct > ::=
+	{ 0 | 1 < Bandwidth_TDD : bit (3) > }
+	{ 1 < Repeated UTRAN TDD Neighbour Cells : < Repeated UTRAN TDD Neighbour Cells struct >> } ** 0 ;
+
+< Repeated UTRAN TDD Neighbour Cells struct > ::=
+	0 < TDD-ARFCN : bit (14) >		-- The value ‘1’ was used in an earlier
+										-- version of the protocol and shall not be used.
+	< TDD_Indic0 : bit >
+	< NR_OF_TDD_CELLS : bit (5) >
+	< TDD_CELL_INFORMATION Field : bit(q(NR_OF_TDD_CELLS)) > ; 
+
+< 3G MEASUREMENT PARAMETERS Description struct > ::=
+	< Qsearch_P : bit (4) > 
+	{ 1 ! < Ignore : bit = < no string >> }			-- this bit shall be ignored by the receiver
+													-- for backward compatibility with earlier releases
+	{ 0 | 1	< FDD_GPRS_Qoffset : bit (4) >					-- FDD information
+			< FDD_Qmin : bit (3) > }
+	{ 0 | 1	< TDD_GPRS_Qoffset : bit (4) > } ;					-- TDD information
+
+< 3G Initial Dedicated Mode Reporting Description struct > ::=
+	< 3G_BA_IND : bit >
+	< Qsearch_I : bit (4) > 
+	< Qsearch_C_Initial : bit (1) >
+	{ 0 | 1	< FDD_Qoffset : bit (4) >									-- FDD information
+			< FDD_REP_QUANT : bit (1) >
+			< FDD_MULTIRAT_REPORTING : bit (2) > }
+	{ 0 | 1	< TDD_Qoffset : bit (4) >									-- TDD information
+			< TDD_MULTIRAT_REPORTING : bit (2) > } ;
+
+< GPRS 3G Additional Measurement Parameters Description struct > ::=
+	< FDD_Qmin_Offset : bit (3) >												-- FDD information 
+	< FDD_RSCPmin : bit (4) > ;
+
+< GPRS 3G Additional Measurement Parameters Description 2 struct > ::=
+		{ 0 | 1 < FDD_REPORTING_THRESHOLD_2 : bit (6) > } ;				-- FDD information
+

@@ -1,0 +1,65 @@
+-- TS 44.060 - d60
+-- 12.48a.5 Multiple Downlink Assignment 2
+-- Multiple Downlink Assignment 2 IE
+
+< Multiple Downlink Assignment 2 IE > ::=
+	{ 0 | 1 < Downlink EGPRS Window Size : < EGPRS Window Size IE > > }
+	< LINK_QUALITY_MEASUREMENT_MODE : bit (2) >
+	< Downlink EGPRS Level: < EGPRS Level IE > >
+	{ 0 | 1			-- BTTI mode
+		< FANR: bit (1) >
+		{ 1	< BTTI Multiple Downlink Assignment : < BTTI Multiple Downlink Assignment struct > > } ** 0 
+	}
+	{ 0 | 1 			-- RTTI mode
+		{ 0					-- Single Carrier Assignment
+			{ 00				-- Default PDCH-pair configuration
+			| 01				-- Unchanged 
+			| 10				-- Explicit PDCH pair configuration
+				< DOWNLINK_PDCH_PAIRS_C1 : bit (8) > 
+				< UPLINK_PDCH_PAIRS_C1 : bit (8) >
+			! < PDCH pairs configuration error : { 1 1 } bit (*) = < no string > > 		-- reserved
+			}
+			{ 1	< RTTI Multiple Downlink Assignment SC : < RTTI Multiple Downlink Assignment SC struct > > } ** 0
+		| 1					-- Dual Carrier Assignment
+			{ 00				-- Default PDCH pair configuration
+			| 01				-- Unchanged
+			| 10				-- Explicit PDCH pair configuration
+				< DOWNLINK_PDCH_PAIRS_C1 : bit (8) >
+				< DOWNLINK_PDCH_PAIRS_C2 : bit (8) >
+				< UPLINK_PDCH_PAIRS_C1 : bit (8) >
+				< UPLINK_PDCH_PAIRS_C2 : bit (8) >
+			! < PDCH pairs configuration error : { 1 1 } bit (*) = < no string > > 		-- reserved
+			}
+			{ 1	< RTTI Multiple Downlink Assignment DC : < RTTI Multiple Downlink Assignment DC struct > > } ** 0
+		}
+	} ;
+
+< BTTI Multiple Downlink Assignment struct > ::=
+	< TIMESLOT_ALLOCATION_C1 : bit (8) >
+	{ 0 | 1 < TIMESLOT_ALLOCATION_C2 : bit (8) > }
+	{ 0 | 1 < Uplink Control Timeslot C1 : bit (3) > }
+	{ 0 | 1 < Uplink Control Timeslot C2 : bit (3) > }
+	{ 1 < Downlink TBF assignment : < Downlink TBF assignment 2 struct > > } ** 0 ;
+
+< RTTI Multiple Downlink Assignment SC struct > ::=
+	< RTTI_DOWNLINK_PDCH_PAIR_ASSIGNMENT_SC : bit (4) >
+	{ 0 | 1 < Uplink Control Timeslot C1 : bit (3) > }
+	{ 1 < Downlink TBF assignment : < Downlink TBF assignment 2 struct > > } ** 0 ;
+
+< RTTI Multiple Downlink Assignment DC struct > ::=
+	< RTTI_DOWNLINK_PDCH_PAIR_ASSIGNMENT_DC : bit (8) >
+	{ 0 | 1 < Uplink Control Timeslot C1 : bit (3) > }
+	{ 0 | 1 < Uplink Control Timeslot C2 : bit (3) > }
+	{ 1 < Downlink TBF assignment : < Downlink TBF assignment 2 struct > > } ** 0 ;
+
+< Downlink TBF assignment 2 struct > ::=
+	{ 0 | 1 < PFI : bit (7) > }
+	< RLC_MODE : bit (1) > 
+	{ 0 | 1 < Uplink Control Timeslot C1 : bit (3) > }
+	{ 0 | 1 < Uplink Control Timeslot C2 : bit (3) > }
+	< TFI Assignment : bit (5) >
+	< CONTROL_ACK : bit (1) >
+	{ 0 | 1	< NPM Transfer Time : bit (5) > }
+	< EVENT_BASED_FANR: bit (1) >
+	{ 0 | 1 < Downlink EGPRS Window Size : < EGPRS Window Size IE > > } ;
+

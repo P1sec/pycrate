@@ -1,0 +1,32 @@
+-- TS 44.018 - d80
+-- 10.5.2.37m SI 21 Rest Octets
+-- SI 21 Rest Octets
+
+< SI 21 Rest Octets > ::=
+	< SI 21_CHANGE_MARK : bit (2) >
+	< SI 21_INDEX : bit (3) >
+	< SI 21_COUNT : bit (3) >
+	{ 0 | 1	< EAB Authorization Mask: bit (10) > 
+			< EAB Subcategory : bit (2) > }
+	{ 
+		-- Additions in Release 11 
+		{ 	L | H < Network Sharing EAB Information : < Network Sharing EAB Information struct >> } 
+		< spare padding >
+	} ;	-- truncation according to sub-clause 8.9 is allowed, bits "L" assumed
+
+< Network Sharing EAB Information struct > ::=
+	{ 0 | 1 	< Common PLMN PS EAB Authorization Mask : bit (10) >
+			< Common PLMN PS EAB Subcategory : bit (2) > }
+	< Nb_Additional_PLMNs : bit (2) >
+	{	{ 0		-- The previously listed EAB Authorization Mask/Subcategory apply
+		| 1		-- The indicated EAB Authorization Mask/Subcategory apply
+				< Additional EAB Authorization Mask : bit (10) > 
+				< Additional EAB Subcategory : bit (2) > }
+		{ 0			-- Domain-specific access control for EAB not in use
+		| 1			-- Domain-specific access control for EAB in use
+			{ 0		-- The previously listed PS EAB Authorization Mask/Subcategory apply
+			| 1 	< PS EAB Authorization Mask : bit (10) >	-- The indicated PS EAB Authorization Mask/Subcategory apply
+				< PS EAB Subcategory : bit (2) > }
+			}
+	} * (val(Nb_Additional_PLMNs)+1) ;
+

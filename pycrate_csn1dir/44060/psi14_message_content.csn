@@ -1,0 +1,45 @@
+-- TS 44.060 - d60
+-- 11.2.25a Packet System Information 14
+-- PSI14 message content
+
+< PSI14 message content > ::=
+	< PAGE_MODE : bit (2) >
+	{	0	< CCCH Access Information : < CCCH Access Information struct >> -- This information shall always be included. See sub-clause 1.6.
+
+		| 1	< PBCCH Description : < PBCCH Description struct 2 >> -- This information shall never be included. See sub-clause 1.6.
+		< padding bits > }
+	 ! < Distribution part error : bit (*) = < no string >> ;
+
+< CCCH Access Information struct > ::= 
+	< BCCH_CHANGE_MARK : bit (3) >
+	{ 0 | 1	< SI13_CHANGE_MARK : bit (2) >
+			< SI13 Mobile Allocation : < GPRS Mobile Allocation IE >> }
+	< SPGC_CCCH_SUP : bit >
+	< PRIORITY_ACCESS_THR : bit (3) >
+	< NETWORK_CONTROL_ORDER : bit (2) >
+	< GPRS Cell Options : < GPRS Cell Options IE >>
+	< GPRS Power Control Parameters : < GPRS Power Control Parameters IE >>
+	< SGSNR : bit >
+	{	null | 0	bit **	= < no string >								-- Receiver backward compatible with earlier version
+	 	| 1																-- Additions for Dual Transfer Mode
+		0																-- compatible with earlier version
+		< RAC : bit (8) >
+		< SI_STATUS_IND : bit >
+		{	null | 0	bit **	= < no string >							-- Receiver backward compatible with earlier version
+			| 1															-- Additions for Rel-6 
+ 			{ 0	| 1	< LB_MS_TXPWR_MAX_CCH : bit (5) > } 
+			< SI2n_SUPPORT : bit (2) > 
+		}
+	} ;
+
+< PBCCH Description struct 2 > ::=
+	< PSI1_REPEAT_PERIOD : bit (4) >
+	< Pb : bit (4) >
+	< TN : bit (3) >
+	< PBCCH Frequency Description : < Frequency Parameters IE >>
+	{ null | 0	bit **	= < no string >								-- Receiver backward compatible with earlier version
+	 | 1																	-- Additions for Dual Transfer Mode
+		1 																-- compatible with earlier version
+		< PSI_CHANGED_IND : bit >
+	} ;
+

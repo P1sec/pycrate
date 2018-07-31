@@ -1,0 +1,41 @@
+-- TS 44.060 - d60
+-- 12.53 E-UTRAN Parameters
+-- E-UTRAN Parameters IE
+
+< E-UTRAN Parameters IE > ::= 
+	< E-UTRAN_CCN_ACTIVE : bit >
+	{ 0 | 1	< GPRS E-UTRAN Measurement Parameters :
+			< GPRS E-UTRAN Measurement Parameters struct >> }
+	{ 1 < Repeated E-UTRAN Neighbour Cells : < Repeated E-UTRAN Neighbour Cells struct >> } ** 0
+	{ 1 < Repeated E-UTRAN Not Allowed Cells : < Repeated E-UTRAN Not Allowed Cells struct >> } ** 0
+	{ 1 < Repeated E-UTRAN PCID to TA mapping : < Repeated E-UTRAN PCID to TA mapping struct >> } ** 0 ;
+
+< GPRS E-UTRAN Measurement Parameters struct > ::=
+	< Qsearch_P_E-UTRAN : bit(4) >
+	< E-UTRAN_REP_QUANT : bit >
+	< E-UTRAN_MULTIRAT_REPORTING : bit(2) >
+	{ 0 | 1	< E-UTRAN_FDD_REPORTING_THRESHOLD : bit(3) >
+			{ 0 | 1	< E-UTRAN_FDD_REPORTING_THRESHOLD_2 : bit(6) > }
+			{ 0 | 1	< E-UTRAN_FDD_REPORTING_OFFSET : bit(3) > } }
+	{ 0 | 1	< E-UTRAN_TDD_REPORTING_THRESHOLD : bit(3) > 
+			{ 0 | 1	< E-UTRAN_TDD_REPORTING_THRESHOLD_2 : bit(6) > }
+			{ 0 | 1	< E-UTRAN_TDD_REPORTING_OFFSET : bit(3) > } } ;
+
+< Repeated E-UTRAN Neighbour Cells struct > ::=
+	{ 1 < EARFCN : bit (16) >
+		{ 0 | 1 < Measurement Bandwidth : bit (3) > } } ** 0
+	{ 0 | 1 < E-UTRAN_PRIORITY : bit(3) > }
+	< THRESH_E-UTRAN_high : bit(5) >
+	{ 0 | 1	< THRESH_E-UTRAN_low : bit(5) > }
+	{ 0 | 1	< E-UTRAN_QRXLEVMIN : bit(5) > } ;
+
+< Repeated E-UTRAN Not Allowed Cells struct > ::=
+	< Not Allowed Cells : < PCID Group IE >>
+	{ 1 < E-UTRAN_FREQUENCY_INDEX : bit(3) > } ** 0 ;
+
+< Repeated E-UTRAN PCID to TA mapping struct > ::=
+	{ 1															-- each repetition corresponds to a different TA
+		< PCID to TA mapping : < PCID Group IE >>				-- group of PCIDs belonging to the same TA
+	} ** 0
+	{ 1 < E-UTRAN_FREQUENCY_INDEX : bit(3) > } ** 0 ;
+

@@ -1,0 +1,10 @@
+-- TS 44.060 - d60
+-- 12.31 UTRAN FDD Target cell
+-- UTRAN FDD Target cell IE
+
+< UTRAN FDD Target cell IE > ::=
+	< FDD-ARFCN : bit (14) >
+	< Diversity : bit >
+	{ 0 | 1 < Bandwidth_FDD : bit (3) > }
+	< SCRAMBLING_CODE : bit (9) > ;
+

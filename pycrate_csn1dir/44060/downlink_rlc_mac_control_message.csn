@@ -1,0 +1,83 @@
+-- TS 44.060 - d60
+-- 11.2.0.1 Downlink RLC/MAC messages
+-- Downlink RLC/MAC control message
+
+< Downlink RLC/MAC control message > ::=
+	< MESSAGE_TYPE : bit (6) == 1 00001 >	< Packet Access Reject message content > |
+	< MESSAGE_TYPE : bit (6) == 0 00001 >	< Packet Cell Change Order message content > |
+	< MESSAGE_TYPE : bit (6) == 0 00010 >	< Packet Downlink Assignment message content > |
+	< MESSAGE_TYPE : bit (6) == 0 00011 >	< Packet Measurement Order message content > |
+	< MESSAGE_TYPE : bit (6) == 1 00010 >	< Packet Paging Request message content > |
+	< MESSAGE_TYPE : bit (6) == 1 00011 >	< Packet PDCH Release message content > |
+	< MESSAGE_TYPE : bit (6) == 0 00100 >	< Packet Polling Request message content > |
+	< MESSAGE_TYPE : bit (6) == 0 00101 >	< Packet Power Control/Timing Advance message content > |
+	< MESSAGE_TYPE : bit (6) == 1 00100 >	< Packet PRACH Parameters message content > |
+	< MESSAGE_TYPE : bit (6) == 0 00110 >	< Packet Queueing Notification message content > |
+	< MESSAGE_TYPE : bit (6) == 0 00111 >	< Packet Timeslot Reconfigure message content > |
+	< MESSAGE_TYPE : bit (6) == 0 01000 >	< Packet TBF Release message content > |
+	< MESSAGE_TYPE : bit (6) == 0 01001 >	< Packet Uplink Ack/Nack message content > |	-- PACCH only
+	< MESSAGE_TYPE : bit (6) == 0 01010 >	< Packet Uplink Assignment message content > |
+	< MESSAGE_TYPE : bit (6) == 0 01011 >	< Packet Cell Change Continue message content > |
+	< MESSAGE_TYPE : bit (6) == 0 01100 >	< Packet Neighbour Cell Data message content > |
+	< MESSAGE_TYPE : bit (6) == 0 01101 >	< Packet Serving Cell Data message content > |
+	< MESSAGE_TYPE : bit (6) == 0 01110 >	< Packet DBPSCH Assignment message content > |
+	< MESSAGE_TYPE : bit (6) == 0 01111 >	< Multiple TBF Downlink Assignment message content > |
+	< MESSAGE_TYPE : bit (6) == 0 10000 >	< Multiple TBF Uplink Assignment message content > |
+	< MESSAGE_TYPE : bit (6) == 0 10001 >	< Multiple TBF Timeslot Reconfigure message content > |
+	< MESSAGE_TYPE : bit (6) == 0 10011 >	< MBMS MS_ID Assignment message content > |	-- PACCH only
+	--< MESSAGE_TYPE : bit (6) == 0 10100 >	< MBMS Assignment (Non-distribution) message content > |
+	< MESSAGE_TYPE : bit (6) == 0 10100 >	< MBMS Assignment Non-distribution message content > |
+	< MESSAGE_TYPE : bit (6) == 0 10101 >	< PS Handover Command message content > |	 	-- PACCH only
+	< MESSAGE_TYPE : bit (6) == 0 10110 >	< Packet Physical Information message content > |	 -- PACCH only
+	< MESSAGE_TYPE : bit (6) == 0 10111 >	< DTM Handover Command message content > |	-- PACCH only
+	< MESSAGE_TYPE : bit (6) == 1 00101 >	< Packet Downlink Dummy Control Block message content > |
+	< MESSAGE_TYPE : bit (6) == 1 10001 >	< PSI1 message content > |
+	< MESSAGE_TYPE : bit (6) == 1 10010 >	< PSI2 message content > |
+	< MESSAGE_TYPE : bit (6) == 1 10011 >	< PSI3 message content > |
+	< MESSAGE_TYPE : bit (6) == 1 10100 >	< PSI3 bis message content > |
+	--< MESSAGE_TYPE : bit (6) == 1 10101 >		reserved |			-- this value was allocated in an earlier
+									-- version of the protocol and shall not be used
+	< MESSAGE_TYPE : bit (6) == 1 10110 >	< PSI5 message content > |
+	< MESSAGE_TYPE : bit (6) == 1 10000 >	< PSI6 message content > |
+	< MESSAGE_TYPE : bit (6) == 1 11000 >	< PSI7 message content > |
+	< MESSAGE_TYPE : bit (6) == 1 11001 >	< PSI8 message content > |
+	< MESSAGE_TYPE : bit (6) == 1 10111 >	< PSI13 message content > |
+	< MESSAGE_TYPE : bit (6) == 1 11010 >	< PSI14 message content > |
+	< MESSAGE_TYPE : bit (6) == 1 11100 >	< PSI3 ter message content > |
+	< MESSAGE_TYPE : bit (6) == 1 11101 >	< PSI3 quater message content > |
+	< MESSAGE_TYPE : bit (6) == 1 11110 >	< PSI15 message content > |
+	< MESSAGE_TYPE : bit (6) == 1 01000 >	< PSI16 message content > |
+	< MESSAGE_TYPE : bit (6) == 1 00000 >	< Packet Serving Cell SI message content > |
+	< MESSAGE_TYPE : bit (6) == 1 00111 >	< Packet CS Command message content > |
+	--< MESSAGE_TYPE : bit (6) == 1 01001 >	< Packet CS Release Indication message content > |
+	< MESSAGE_TYPE : bit (6) == 1 01001 >   < Packet CS Release message content > |
+	--< MESSAGE_TYPE : bit (6) == 1 01010 >	< MBMS Assignment (Distribution) message content > |
+	< MESSAGE_TYPE : bit (6) == 1 01010 >	< MBMS Assignment Distribution message content > |
+	< MESSAGE_TYPE : bit (6) == 1 01011 >	< MBMS Neighbouring Cell Information message content >|
+	< MESSAGE_TYPE : bit (6) == 1 01100 >	< Packet MBMS Announcement message content >
+	< MESSAGE_TYPE : bit (6) == 1 01101 > < Packet Application Information message content >
+	! < Unknown message type : { bit (6) = < no string > } < Default downlink message content > > ;
+
+< Default downlink message content > ::=
+	< PAGE_MODE : bit (2) >
+	bit (*) = < no string > ;
+
+< Downlink RLC/MAC control message on EC-PACCH > ::=
+	< MESSAGE_TYPE : bit (5) == 1 0001 >	< EC Packet Access Reject message content > |
+	< MESSAGE_TYPE : bit (5) == 0 0001 >	< EC Packet Downlink Assignment message content > |
+	< MESSAGE_TYPE : bit (5) == 0 0010 >	< EC Packet Polling Request message content > |
+	< MESSAGE_TYPE : bit (5) == 0 0011 >	< EC Packet Power Control/Timing Advance message content > |
+	< MESSAGE_TYPE : bit (5) == 0 0100 >	< EC Packet TBF Release message content > |
+	< MESSAGE_TYPE : bit (5) == 0 0101 >	< EC Packet Uplink Ack/Nack message content > |
+	< MESSAGE_TYPE : bit (5) == 0 0110 >	< EC Packet Uplink Assignment message content > |
+	< MESSAGE_TYPE : bit (5) == 0 0111 >	< EC Packet Uplink Ack/Nack and Contention Resolution message content > |
+	< MESSAGE_TYPE : bit (5) == 1 0010 >	< EC Packet Downlink Dummy Control Block message content >
+	! < Unknown message type : { bit (5) = < no string > } < Default downlink message content on EC-PACCH > > ;
+
+< Default downlink message content on EC-PACCH > ::=
+	< USED_DL_COVERAGE_CLASS : bit (2) >
+	bit (*) = < no string > ;
+
+-- from 11.2.23b, Packet System Information Type 7
+< PSI7 message content > ::= < PSI6 message content > ;
+

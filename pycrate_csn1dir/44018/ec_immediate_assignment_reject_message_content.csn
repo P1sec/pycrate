@@ -1,0 +1,9 @@
+-- TS 44.018 - d80
+-- 9.1.61 EC Immediate Assignment Reject
+-- EC Immediate Assignment Reject message content
+
+< EC Immediate Assignment Reject message content > ::=
+	< Message Type : bit (4) >
+	< Used DL Coverage Class: bit (2) >
+	{ 0 | 1 < EC Page Extension : bit (4) > } ;
+

@@ -1,0 +1,13 @@
+-- TS 44.060 - d60
+-- 12.28 LSA Parameters
+-- LSA Parameters IE
+
+< LSA Parameters IE > ::=
+	< NR_OF_FREQ_OR_CELLS : bit (5) >
+	--{ < LSA ID information : < LSA ID information struct >> * (val(NR_OF_FREQ_OR_CELLS)) };
+	{ < LSA ID information : < LSA ID information struct >> } * (val(NR_OF_FREQ_OR_CELLS));
+
+< LSA ID information struct > ::=
+	{ 1 { 0 < LSA_ID : bit (24) >
+		| 1 < ShortLSA_ID : bit (10) > } } ** 0 ;
+

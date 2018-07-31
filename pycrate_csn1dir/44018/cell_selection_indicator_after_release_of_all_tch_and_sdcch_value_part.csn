@@ -1,0 +1,36 @@
+-- TS 44.018 - d80
+-- 10.5.2.1e Cell selection indicator after release of all TCH and SDCCH IE
+-- Cell Selection Indicator after release of all TCH and SDCCH value part
+
+<Cell Selection Indicator after release of all TCH and SDCCH value part> ::=
+	{	000 	{ 1	<GSM Description : <GSM Description struct >> } ** 0
+		| 001	{ 1	<UTRAN FDD Description : < UTRAN FDD Description struct >> } ** 0
+		| 010	{ 1	<UTRAN TDD Description : < UTRAN TDD Description struct >> } ** 0 
+		| 011	{ 1	<E-UTRAN Description : < E-UTRAN Description struct >> } ** 0
+	};
+
+< GSM Description struct > ::=
+	< Band_Indicator : bit >
+	< ARFCN : bit (10) >
+	< BSIC : bit (6) > ;
+
+< UTRAN FDD Description struct > ::=
+	{ 0 | 1	< Bandwidth_FDD : bit (3) > }
+	< FDD-ARFCN : bit (14) >
+	{ 0 | 1	< FDD_Indic0 : bit >
+			< NR_OF_FDD_CELLS : bit (5) >
+			< FDD_CELL_INFORMATION Field : bit (p(NR_OF_FDD_CELLS)) > } ; 
+
+< UTRAN TDD Description struct > ::=
+	{ 0 | 1	< Bandwidth_TDD : bit (3) > }
+	< TDD-ARFCN : bit (14) >
+	{ 0 | 1	< TDD_Indic0 : bit >
+			< NR_OF_TDD_CELLS : bit (5) >
+			< TDD_CELL_INFORMATION Field : bit (q(NR_OF_TDD_CELLS)) > } ;
+
+< E-UTRAN Description struct > ::=
+	< EARFCN : bit (16) >
+	{ 0 | 1 < Measurement Bandwidth : bit (3) > }
+	{ 0 | 1 < Not Allowed Cells: < PCID Group IE > > } 
+	{ 0 | 1 < TARGET_PCID : bit (9) > };
+

@@ -1,0 +1,18 @@
+-- TS 44.060 - d60
+-- 11.2.26 Packet TBF Release
+-- Packet TBF Release message content
+
+< Packet TBF Release message content > ::=
+	< PAGE_MODE : bit (2) >
+	{	0 < GLOBAL_TFI : Global TFI IE >
+		{	< UPLINK_RELEASE : bit (1) >
+			< DOWNLINK_RELEASE : bit (1) >
+			--< TBF_RELEASE_CAUSE : bit (4) = { 0000 | 0010 } >
+			< TBF_RELEASE_CAUSE : bit (4) >
+			< padding bits >
+			! < Non-distribution part error : bit (*) = < no string > >
+		}
+		! < Address information part error : bit (*) = < no string > >
+	}
+	! < Distribution part error : bit (*) = < no string > > ;
+

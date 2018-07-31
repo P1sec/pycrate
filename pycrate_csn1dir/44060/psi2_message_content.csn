@@ -1,0 +1,77 @@
+-- TS 44.060 - d60
+-- 11.2.19 Packet System Information Type 2
+-- PSI2 message content
+
+< PSI2 message content > ::=
+	< PAGE_MODE : bit (2) >
+	< PSI2_CHANGE_MARK : bit (2) >
+	< PSI2_INDEX : bit (3) >
+	< PSI2_COUNT : bit (3) >
+	{	{ 0 | 1 < Cell Identification : < Cell Identification IE > > }
+		{ 0 | 1 < Non GPRS Cell Options : < Non GPRS Cell Options IE > > }
+		< Reference Frequency Lists : < Reference Frequency Lists struct > >
+		< Cell Allocation : < Cell Allocation Lists struct > >
+		< GPRS Mobile Allocations : < GPRS Mobile Allocations Lists struct > >
+		< PCCCH Description : < PCCCH Description Lists struct > >
+		{	null | 0 bit** = < no string >
+			| 1									-- Release 1999 additions:
+			{ 0 | 1 < COMPACT Control Information : < COMPACT Control Info struct > > }
+			{ 0 | 1 < Additional PSI Messages : < Additional PSI Messages struct > > }
+			< padding bits > } } //	-- truncation at end of message allowed, bits '0' assumed
+	! < Distribution part error : bit (*) = < no string > > ;
+
+< Reference Frequency Lists struct > ::= { 1 < Reference Frequency struct > } ** 0;
+
+< Reference Frequency struct >::=
+	< RFL_NUMBER : bit (4) >
+	< Length of RFL contents : bit (4) >
+	< RFL contents : octet (val(Length of RFL contents) + 3) > ;
+
+< Cell Allocation Lists struct > ::= { 1 < Cell Allocation struct > } ** 0 ;
+
+< Cell Allocation struct > ::=
+	< RFL_NUMBER : bit (4) > ;
+
+< GPRS Mobile Allocations Lists struct > ::= { 1 < GPRS Mobile Allocations struct > } ** 0 ;
+
+< GPRS Mobile Allocations struct > ::=
+	< MA_NUMBER : bit (4) >
+	< GPRS Mobile Allocation : < GPRS Mobile Allocation IE > > ;
+
+< PCCCH Description Lists struct > ::= { 1 < PCCCH Description struct > } ** 0 ;
+
+< PCCCH Description struct > ::=
+	< TSC : bit (3) >
+	{ 0	< Non-hopping PCCCH carriers : < Non-Hopping PCCCH Carriers Lists struct > >
+	| 1	< MA_NUMBER : bit (4) >
+		< Hopping PCCCH carriers : < Hopping PCCCH Carriers Lists struct > > } ;
+
+< Non-hopping PCCCH Carriers Lists struct > ::= { 1 < Non-Hopping PCCCH Carriers struct > } ** 0 ;
+
+< Non-Hopping PCCCH Carriers struct > ::=
+	< ARFCN : bit (10) >
+	< TIMESLOT_ALLOCATION : bit (8) > ;
+
+< Hopping PCCCH Carriers Lists struct > ::= { 1< Hopping PCCCH Carriers struct > } ** 0 ;
+
+< Hopping PCCCH Carriers struct > ::=
+	< MAIO : bit (6) >
+	< TIMESLOT_ALLOCATION : bit (8) > ;
+
+< COMPACT Control Info struct > ::=
+	< Large Cell Operation : bit (1) >
+	{ 0 | 1 < Number of Idle Blocks : < Number of Idle Blocks struct > > }
+	{ 0 | 1 < N_CCCH_NH : bit (4) > } ;
+
+<Number of Idle Blocks struct > ::=
+{ 0 | 1 { < NIB_CCCH_0 : bit (4) > } }
+{ 0 | 1 { < NIB_CCCH_1 : bit (4) > } }
+{ 0 | 1 { < NIB_CCCH_2 : bit (4) > } }
+{ 0 | 1 { < NIB_CCCH_3 : bit (4) > } } ;
+
+< Additional PSI Messages struct > ::=
+	< NON_GSM_INFORMATION : bit(2) > 
+	< PSI8_BROADCAST : bit (1) >
+	< PSI3ter_BROADCAST : bit (1) > 
+	< PSI3quater_BROADCAST : bit (1) > ;
+

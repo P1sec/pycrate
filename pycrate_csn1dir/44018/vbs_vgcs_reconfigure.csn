@@ -1,0 +1,24 @@
+-- TS 44.018 - d80
+-- 9.1.21h VBS/VGCS reconfigure
+-- VBS/VGCS RECONFIGURE
+
+<VBS/VGCS RECONFIGURE> 	::=
+	<RR short PD : bit>					-- See 3GPP TS 24.007
+	<message type : bit(5)>				-- See 10.4
+	<short layer 2 header : bit(2)>		-- See 3GPP TS 44.006
+	<new Group Channel Description>
+	<Starting Time: bit(16)>						
+	<Additional Segment: bit>	
+	{ null | 0 bit** = < no string >};	-- Receiver backward compatible with earlier version
+
+<new Group Channel Description> ::=	
+	<Channel Description : bit(24)>
+	{	0					-- Non hopping case
+		--|1	{	0	<Mobile Allocation : <bit string>>
+		| 1	{	0	<Mobile Allocation : <NAS Type4 LV>>
+ 				| 1	<Frequency Short List : bit(64)>}} ;
+
+<NAS Type4 LV> ::= 
+    <Length: bit (8)>
+    <Value: bit (val(Length) * 8)> ;
+

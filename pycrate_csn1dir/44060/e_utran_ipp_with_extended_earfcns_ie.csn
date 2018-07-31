@@ -1,0 +1,13 @@
+-- TS 44.060 - d60
+-- 12.69 E-UTRAN IPP with extended EARFCNs
+-- E-UTRAN IPP with extended EARFCNs IE
+
+< E-UTRAN IPP with extended EARFCNs IE > ::=
+{ 0 | 1	< DEFAULT_E-UTRAN_PRIORITY : bit(3) > }
+	{ 1	< Repeated Individual E-UTRAN PP with extended EARFCNs: 
+		< Repeated Individual E-UTRAN PP with extended EARFCNs struct >> } ** 0 ;
+
+< Repeated Individual E-UTRAN PP with extended EARFCNs struct > ::=
+	{ 1 < EARFCN_extended : bit (18) > } ** 0
+	< E-UTRAN_PRIORITY : bit(3) > ;
+

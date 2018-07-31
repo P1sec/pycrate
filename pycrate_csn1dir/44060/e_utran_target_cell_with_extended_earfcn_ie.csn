@@ -1,0 +1,9 @@
+-- TS 44.060 - d60
+-- 12.68 E-UTRAN Target Cell with extended EARFCN
+-- E-UTRAN Target cell with extended EARFCN IE
+
+< E-UTRAN Target cell with extended EARFCN IE > ::=
+	< EARFCN_extended : bit (18) >
+	{ 0 | 1 < Measurement Bandwidth: bit (3) > }
+	< Physical Layer Cell Identity : bit (9) > ;
+

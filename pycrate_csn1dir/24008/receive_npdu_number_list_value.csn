@@ -1,0 +1,33 @@
+-- TS 24.008 - d90
+-- 10.5.5.11 Receive N‑PDU Numbers list
+-- Receive NPDU Number list value
+
+< Receive NPDU Number list value > ::=
+    {
+     --< Receive N‑PDU Number -list >
+     < Receive NPDU Number list >
+     < Padding bits >
+    } ;
+
+< Receive NPDU Number list > ::=
+    < sapi : bit (4) >
+    < Receive NPDU Number value : bit (8) >
+    { < Receive NPDU Number list> | < null > } ;
+
+< nsapi > ::=
+    { 0101 } |	-- NSAPI 5
+    { 0110 } | -- NSAPI 6
+    { 0111 } | -- NSAPI 7
+    { 1000 } | -- NSAPI 8
+    { 1001 } | -- NSAPI 9
+    { 1010 } | -- NSAPI 10
+    { 1011 } | -- NSAPI 11
+    { 1100 } | -- NSAPI 12
+    { 1101 } | -- NSAPI 13
+    { 1110 } | -- NSAPI 14
+    { 1111 }; -- NSAPI 15
+
+< Receive NPDU Number value > ::= { 0 | 1} (8) ;
+
+<Padding bits> ::= null | 0000;
+

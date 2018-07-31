@@ -1,0 +1,8 @@
+-- TS 44.018 - d80
+-- 9.1.62 EC Dummy
+-- EC-Dummy message content
+
+< EC-Dummy message content > ::=
+	< Message Type : bit (4) >
+	< Used DL Coverage Class: bit (2) >	< spare padding > ;
+

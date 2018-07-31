@@ -1,0 +1,11 @@
+-- TS 44.060 - d60
+-- 11.2.44 PS Handover Access
+-- PS Handover Access message content 8 bit message
+
+< PS Handover Access message content 8 bit message > ::=	-- 8-bit access burst format
+	< Handover Reference : bit (8) >;
+
+< PS Handover Access message content 11 bit message > ::=	-- 11-bit access burst format
+	< Handover Reference : bit (8) >
+	< spare : bit (3) > ;
+

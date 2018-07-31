@@ -1,0 +1,11 @@
+-- TS 44.060 - d60
+-- 12.9a GPRS Power Control Parameters
+-- GPRS Power Control Parameters IE
+
+< GPRS Power Control Parameters IE > ::=
+	< ALPHA : bit (4) >
+	< T_AVG_W : bit (5) >
+	< T_AVG_T : bit (5) >
+	< PC_MEAS_CHAN : bit >
+	< N_AVG_I : bit (4) > ;
+

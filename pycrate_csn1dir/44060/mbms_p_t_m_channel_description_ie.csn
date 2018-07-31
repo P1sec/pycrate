@@ -1,0 +1,8 @@
+-- TS 44.060 - d60
+-- 12.37 MBMS p-t-m channel description
+-- MBMS p-t-m channel description IE
+
+< MBMS p-t-m channel description IE > ::=
+	{ 0 | 1 < Frequency Parameters : < Frequency Parameters IE > > }
+	< DL_TIMESLOT_ALLOCATION : bit (8) >;
+

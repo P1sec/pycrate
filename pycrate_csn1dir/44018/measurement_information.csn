@@ -1,0 +1,262 @@
+-- TS 44.018 - d80
+-- 9.1.54 MEASUREMENT INFORMATION
+-- Measurement information
+
+<Measurement information> ::=
+	< RR short PD : bit >				-- See 3GPP TS 24.007
+	< Message type : bit (5) >			-- See 10.4
+	< Short layer 2 header : bit (2) >	-- See 3GPP TS 44.006
+	< BA_IND : bit >
+	< 3G_BA_IND : bit >
+	< MP_CHANGE_MARK : bit >
+	< MI_INDEX : bit (4) >
+	< MI_COUNT : bit (4) >
+	< PWRC : bit >
+	< REPORT_TYPE : bit >
+	< REPORTING_RATE : bit >
+	< INVALID_BSIC_REPORTING : bit >
+	{ 0 | 1	< Real Time Difference Description : < Real Time Difference Description struct >> }
+	{ 0 | 1	< BSIC Description : < BSIC Description struct >> }
+	{ 0 | 1	< REPORT PRIORITY Description : < REPORT PRIORITY Description struct >> }
+	{ 0 | 1	< MEASUREMENT Parameters Description : < MEASUREMENT Parameters Description struct >> }
+	{ 0 | 1	< extension length : bit (8) >
+			< spare : bit (val(extension length)+1) > } 		-- used for future extensions of the 2G parameters
+	{ 0 | 1	< 3G Neighbour Cell Description : < 3G Neighbour Cell Description struct >> }
+	{ 0 | 1	< 3G MEASUREMENT Parameters Description : < 3G MEASUREMENT Parameters Description struct >> }
+	{	null | L		-- Receiver compatible with earlier release
+		| H				-- Additions in Rel-5:
+			{ 0 | 1	< 3G ADDITIONAL MEASUREMENT Parameters Description 2 : 
+					< 3G ADDITIONAL MEASUREMENT Parameters Description 2 struct >> }
+			{	null | L		-- Receiver compatible with earlier release
+				| H			-- Additions in Rel-7:
+					{ 0 | 1	< 700_REPORTING_OFFSET : bit (3) >
+							< 700_REPORTING_THRESHOLD : bit (3) > }
+					{ 0 | 1	< 810_REPORTING_OFFSET : bit (3) > 
+							< 810_REPORTING_THRESHOLD : bit (3) > } 
+					{ 	null | L 		-- Receiver compatible with earlier release
+						| H 				-- Additions in Rel-8
+							{ 0 | 1	< 3G Supplementary Parameters Description :
+									< 3G Supplementary Parameters Description struct >> }
+							{ 0 | 1	< E-UTRAN Parameters Description :
+									< E-UTRAN Parameters Description struct >> }
+							{ 0 | 1	< E-UTRAN CSG Description : < E-UTRAN CSG Description struct >> }
+							{	null | L 	-- Receiver compatible with earlier release
+								| H			-- Additions in Rel-9
+									{ 0 | 1	< 3G CSG Description : < 3G CSG Description struct >> }
+									{ 0 | 1	< UTRAN CSG Cells Reporting Description :
+											< UTRAN CSG Cells Reporting Description struct >> }
+										{ null | L -- Receiver compatible with earlier release
+											| H -- Additions in Rel-11
+											{ 0 | 1 < E-UTRAN NC with extended EARFCNs Description :
+													< E-UTRAN NC with extended EARFCNs Description struct >> }
+										}
+							}
+					}
+			} 
+	} 
+	< spare padding > ;
+
+< 3G Neighbour Cell Description struct > ::=
+	{ 0 | 1 < 3G_Wait : bit (3) > }
+	{ 0 | 1 < Index_Start_3G : bit (7) > }
+	{ 0 | 1 < Absolute_Index_Start_EMR : bit (7) > }
+	{ 0 | 1 < UTRAN FDD Description : < UTRAN FDD Description struct >> }
+	{ 0 | 1 < UTRAN TDD Description : < UTRAN TDD Description struct >> }
+	{ 0 | 1 < CDMA2000 Description : < CDMA 2000 Description struct >> } ;
+
+< UTRAN FDD Description struct > ::=
+	{ 0 | 1 < Bandwidth_FDD : bit (3) > }
+	{ 1 < Repeated UTRAN FDD Neighbour Cells : < Repeated UTRAN FDD Neighbour Cells struct >> } ** 0 ;
+
+< Repeated UTRAN FDD Neighbour Cells struct > ::=
+    0 < FDD-ARFCN : bit (14) >		-- The value ‘1’ was used in an earlier version of 
+									-- the protocol and shall not be used.
+    < FDD_Indic0 : bit >
+    < NR_OF_FDD_CELLS : bit (5) >
+    < FDD_CELL_INFORMATION Field : bit(p(NR_OF_FDD_CELLS)) > ; -- p(x) defined in table 9.1.54.1.
+
+< UTRAN TDD Description struct > ::=
+    { 0 | 1 < Bandwidth_TDD : bit (3) > }
+    { 1 < Repeated UTRAN TDD Neighbour Cells : Repeated UTRAN TDD Neighbour Cells struct > } ** 0 ;
+
+< Repeated UTRAN TDD Neighbour Cells struct > ::=
+    0 < TDD-ARFCN : bit (14) >		-- The value ‘1’ was used in an earlier version of 
+									-- the protocol and shall not be used.
+    < TDD_Indic0 : bit >
+    < NR_OF_TDD_CELLS : bit (5) >
+    < TDD_CELL_INFORMATION Field : bit(q(NR_OF_TDD_CELLS)) > ; -- q(x) defined in table 9.1.54.1.
+
+< CDMA 2000 Description struct > ::=
+	< cdma2000 frequency band : bit(5)>
+	< cdma2000 frequency : bit(11)>
+	< number_cdma2000_cells : bit (5) >
+	{ < Pilot PN offset : bit (9) >					-- this information is enough for 1X Common Pilot
+		{ 0 | 1	{	000	{	< TD_MODE : bit (2) > < TD_POWER_LEVEL : bit (3) >}
+								-- additional information for 1X Common Pilot with Transmit Diversity
+					| 001	{	< QOF : bit (2) > < WALSH_LEN_A : bit (3) >
+								< AUX_PILOT_WALSH : bit(val(WALSH_LEN_A)+6) >}
+								-- additional information for 1X Auxiliary Pilot
+					| 010	{	< QOF : bit (2) > < WALSH_LEN_B : bit (3) >
+								< AUX_TD_WALSH : bit (val(WALSH_LEN_B)+6) >
+								< AUX_TD_POWER_LEVEL : bit (2) > <TD_MODE : bit (2) >}
+								-- additional information for 1X Auxiliary Pilot with Transmit Diversity
+					| 011	{	< SR3_PRIM_PILOT : bit (2) > < SR3_PILOT_POWER1 : bit (3) >
+								< SR3_PILOT_POWER2 : bit(3)>}
+								-- additional information for 3X Common Pilot
+					| 110	{	< SR3_PRIM_PILOT : bit (2) > < SR3_PILOT_POWER1 : bit (3) >
+								< SR3_PILOT_POWER2 : bit (3) > < QOF : bit (2) >
+								< WALSH_LEN_C : bit (3) >
+								< AUX_WALSH_LEN : bit(val(WALSH_LEN_C)+6) >
+								{ 0 | 1	< QOF1 : bit (2) > < WALSH_LENGTH1 : bit (3) >
+										< AUX_PILOT_WALSH1 : bit(val(WALSH_LENGTH1)+6) > }
+								{ 0 | 1	< QOF2 : bit (2) > < WALSH_LENGTH2 : bit (3) >
+										< AUX_PILOT_WALSH2 : bit(val(WALSH_LENGTH2)+6)> } 
+							}
+								-- additional information for 3X Auxiliary Pilot
+				}
+		}
+	} * (val(number_cdma2000_cells)) ;
+
+< Real Time Difference Description struct > ::=
+	{ 0 | 1	{ 0 | 1	< BA_Index_Start_RTD : bit (5) > }		--default value=0
+		< RTD Struct : < RTD6 Struct >>
+		{ 0 < RTD Struct : < RTD6 Struct >> } **1 }			-- '0' indicates to increment by 1
+															-- the index of the frequency in the BA (list)
+	{ 0 | 1	{ 0 | 1	< BA_Index_Start_RTD : bit (5) > }		--default value=0
+		< RTD Struct : < RTD12 Struct >>
+		{ 0 < RTD Struct : < RTD12 Struct >> } **1 };		-- '0' indicates to increment by 1
+
+< RTD6 Struct > ::=
+	{ 0 < RTD : bit (6) > } ** 1;		-- Repeat until '1' ; '1' means last RTD for this frequency
+
+< RTD12 Struct > ::=
+	{ 0 < RTD : bit (12) > } ** 1;		-- Repeat until '1' ; '1' means last RTD for this frequency
+
+< BSIC Description struct > ::=
+	{ 0 | 1 < BA_Index_Start_BSIC : bit (5) > }				-- default value=0
+	< BSIC : bit (6) >
+	< Number_Remaining_BSIC: bit (7) >
+	{	< Frequency_Scrolling : bit >						-- 0 means same frequency
+		< BSIC : bit (6) > 
+	} * (val(Number_Remaining_BSIC)) ;
+
+< REPORT PRIORITY Description struct > ::=
+	< Number_Cells : bit (7) >
+	{ < REP_PRIORITY : bit > } * (val(Number_Cells)) ;
+
+< MEASUREMENT PARAMETERS Description struct > ::=
+	{ 0 | 1	< MULTIBAND_REPORTING: bit (2) > }
+	{ 0 | 1	< SERVING_BAND_REPORTING: bit (2) > }
+	< SCALE_ORD : bit (2) >
+	{ 0 | 1	< 900_REPORTING_OFFSET : bit (3) >
+			< 900_REPORTING_THRESHOLD : bit (3) > }
+	{ 0 | 1	< 1800_REPORTING_OFFSET : bit (3) >
+			< 1800_REPORTING_THRESHOLD : bit (3) > }
+	{ 0 | 1	< 400_REPORTING_OFFSET : bit (3) >
+			< 400_REPORTING_THRESHOLD : bit (3) > }
+	{ 0 | 1	< 1900_REPORTING_OFFSET : bit (3) >
+			< 1900_REPORTING_THRESHOLD : bit (3) > }
+	{ 0 | 1	< 850_REPORTING_OFFSET : bit (3) >
+			< 850_REPORTING_THRESHOLD : bit (3) > } ;
+
+< 3G MEASUREMENT PARAMETERS Description struct > ::=
+	< Qsearch_C : bit (4) >
+	{ 1 ! < Ignore : bit = < no string >> }			-- this bit shall be ignored by the receiver
+													-- for backward compatibility with earlier releases
+	< FDD_REP_QUANT : bit (1) >									-- FDD Parameters
+	{ 0 | 1	< FDD_MULTIRAT_REPORTING : bit (2) > }
+	{ 0 | 1	< FDD_REPORTING_OFFSET : bit (3) >
+			< FDD_REPORTING_THRESHOLD : bit (3) > }
+	{ 0 | 1	< TDD_MULTIRAT_REPORTING : bit (2) > }				-- TDD Parameters
+	{ 0 | 1	< TDD_REPORTING_OFFSET : bit (3) >
+			< TDD_REPORTING_THRESHOLD : bit (3) > }
+	{ 0 | 1	< CDMA2000_MULTIRAT_REPORTING : bit (2) > }			-- CDMA2000 Parameters
+	{ 0 | 1	< CDMA2000_REPORTING_OFFSET : bit (3) >
+			< CDMA2000_REPORTING_THRESHOLD : bit (3) > } ;
+
+< 3G ADDITIONAL MEASUREMENT Parameters Description 2 struct > ::=
+	{ 0 | 1 < FDD_REPORTING_THRESHOLD_2 : bit (6) > } ;
+
+< 3G Supplementary Parameters Description struct > ::= 
+	< UTRAN_Start : bit >
+	< UTRAN_Stop : bit >
+	{ 0 | 1	< 3G Measurement Control Parameters Description :
+			< 3G Measurement Control Parameters Description struct >> } ;
+
+< 3G Measurement Control Parameters Description struct > ::= 
+	{ 0 | 1	< DEFAULT_Measurement_Control_UTRAN : bit(1) > }
+	{ 1	< Repeated UTRAN Measurement Control Parameters : 
+		< Repeated UTRAN Measurement Control Parameters struct >> } ** 0 ;
+
+< Repeated UTRAN Measurement Control Parameters struct > ::=
+	{ 1 < UTRAN_FREQUENCY_INDEX : bit(5) > } ** 0
+	< Measurement_Control_UTRAN : bit(1) > ;
+
+< E-UTRAN Parameters Description struct > ::= 
+	< E-UTRAN_Start : bit >
+	< E-UTRAN_Stop : bit >
+	{ 0 | 1	< E-UTRAN Measurement Parameters Description :
+			< E-UTRAN Measurement Parameters Description struct >> }
+	{ 1 < Repeated E-UTRAN Neighbour Cells : < Repeated E-UTRAN Neighbour Cells struct >> } ** 0 
+	{ 1 < Repeated E-UTRAN Not Allowed Cells : < Repeated E-UTRAN Not Allowed Cells struct >> } ** 0
+	{ 0 | 1	< E-UTRAN Measurement Control Parameters Description :
+			< E-UTRAN Measurement Control Parameters Description struct >> } ;
+
+< E-UTRAN Measurement Parameters Description struct > ::=
+	< Qsearch_C_E-UTRAN : bit(4) >
+	< E-UTRAN_REP_QUANT : bit >
+	< E-UTRAN_MULTIRAT_REPORTING : bit(2) >
+	{ 0		{ 0 | 1	< E-UTRAN_FDD_REPORTING_THRESHOLD : bit(3) > 				-- FDD 6 bit reporting
+					{ 0 | 1	< E-UTRAN_FDD_REPORTING_THRESHOLD_2 : bit(6) > }
+					{ 0 | 1	< E-UTRAN_FDD_REPORTING_OFFSET : bit(3) > } }
+			{ 0 | 1	< E-UTRAN_TDD_REPORTING_THRESHOLD : bit(3) > 				-- TDD 6 bit reporting
+					{ 0 | 1	< E-UTRAN_TDD_REPORTING_THRESHOLD_2 : bit(6) > }
+					{ 0 | 1	< E-UTRAN_TDD_REPORTING_OFFSET : bit(3) > } }
+	| 1		{ 0 | 1	< E-UTRAN_FDD_MEASUREMENT_REPORT_OFFSET: bit(6) >		-- FDD 3 bit reporting
+					{ 0 | 1	< E-UTRAN_FDD_REPORTING_THRESHOLD_2 : bit(6) > }
+					{ 0 | 1	< E-UTRAN_FDD_REPORTING_OFFSET : bit(3) > } }
+			{ 0 | 1	< E-UTRAN_TDD_MEASUREMENT_REPORT_OFFSET: bit(6) >		-- TDD 3 bit reporting
+					{ 0 | 1	< E-UTRAN_TDD_REPORTING_THRESHOLD_2 : bit(6) > } 
+					{ 0 | 1	< E-UTRAN_TDD_REPORTING_OFFSET : bit(3) > } }
+			< REPORTING_GRANULARITY : bit(1) > } ;
+
+< Repeated E-UTRAN Neighbour Cells struct > ::=
+	< EARFCN : bit (16) >
+	{ 1 < EARFCN : bit (16) > } ** 0
+	{ 0 | 1 < Measurement Bandwidth : bit (3) > } ;
+
+< Repeated E-UTRAN Not Allowed Cells struct > ::=
+	< Not Allowed Cells : < PCID Group IE >> 
+	{ 1 < E-UTRAN_FREQUENCY_INDEX : bit(3) > } ** 0 ; 
+
+< E-UTRAN Measurement Control Parameters Description struct > ::=
+	{ 0 | 1	< DEFAULT_Measurement_Control_E-UTRAN : bit(1) > }
+	{ 1	< Repeated E-UTRAN Measurement Control Parameters :
+		< Repeated E-UTRAN Measurement Control Parameters struct >> } ** 0 ;
+
+< Repeated E-UTRAN Measurement Control Parameters struct > ::=
+	{ 1 < E-UTRAN_FREQUENCY_INDEX : bit(3) > } ** 0
+	< Measurement_Control_E-UTRAN : bit(1) > ;
+
+< E-UTRAN CSG Description struct > ::= 
+	{ 1	< CSG_PCI_SPLIT : < PCID Group IE >>
+			{ 1	< E-UTRAN_FREQUENCY_INDEX : bit (3) > } ** 0 } ** 0 ;
+
+< 3G CSG Description struct > ::= 
+	{ 1	< CSG_PSC_SPLIT : < PSC Group IE >>
+			{ 1	< UTRAN_FREQUENCY_INDEX : bit (5) > } ** 0 } ** 0
+	{ 1 { 0 < CSG_FDD_UARFCN : bit (14) > | 1 < CSG_TDD_UARFCN : bit (14) > } } ** 0 ;
+
+< UTRAN CSG Cells Reporting Description struct > ::=
+	{ 0 | 1	< UTRAN_CSG_FDD_REPORTING_THRESHOLD : bit(3) >
+			< UTRAN_CSG_FDD_REPORTING_THRESHOLD_2 : bit (6) > }
+	{ 0 | 1	< UTRAN_CSG_TDD_REPORTING_THRESHOLD : bit(3) >} ;
+
+< E-UTRAN NC with extended EARFCNs Description struct > ::=
+	{ 1 < Repeated E-UTRAN NC with extended EARFCNs struct > } ** 0 ;
+
+< Repeated E-UTRAN NC with extended EARFCNs struct > ::=
+	< EARFCN_extended : bit (18) >
+	{ 1 < EARFCN_extended : bit (18) > } ** 0
+	{ 0 | 1 < Measurement Bandwidth : bit (3) > } ;
+

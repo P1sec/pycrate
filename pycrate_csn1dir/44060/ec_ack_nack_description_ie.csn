@@ -1,0 +1,8 @@
+-- TS 44.060 - d60
+-- 12.72 EC Ack/Nack Description
+-- EC Ack/Nack Description IE
+
+< EC Ack/Nack Description IE > ::=
+	< STARTING_SEQUENCE_NUMBER : bit (5) >
+	< RECEIVED_BLOCK_BITMAP : bit (16) >;
+

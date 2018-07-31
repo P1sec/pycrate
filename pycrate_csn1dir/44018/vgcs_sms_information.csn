@@ -1,0 +1,24 @@
+-- TS 44.018 - d80
+-- 9.1.49b VGCS SMS Information
+-- VGCS SMS INFORMATION
+
+<VGCS SMS INFORMATION> 	::=
+	<RR short PD : bit>					-- See 3GPP TS 24.007
+	<message type : bit(5)>				-- See sub-clause 10.4
+	<short layer 2 header : bit(2)>		-- See 3GPP TS 44.006
+	{	0	<Non Segmented_SMS Description : Non Segmented_SMS Description struct> 
+		|1	<Segmented_SMS Description : Segmented_SMS Description struct> }
+	<spare padding>;
+
+<Non Segmented_SMS Description struct> ::=
+	< Length : bit (8) >
+	< SMS Reference Number: bit (4) >
+	< SMS_Final_Content : bit (val(Length)) > ;
+
+<Segmented_SMS Description struct> ::=
+	< SMS Reference Number : bit (4) >
+	< Segment Number : bit (4) >
+	{	0	<SMS_Content:bit **>								-- Not the last Segment
+		|1	< Length : bit (8)>
+			< SMS_Final_Content : bit (val(Length)) > }	;		-- Last segment
+

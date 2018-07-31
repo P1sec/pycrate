@@ -1,0 +1,63 @@
+-- TS 44.018 - d80
+-- 10.5.2.35a SI 6 Rest Octets
+-- SI6 rest octets
+
+<SI6 rest octets> ::=
+	{ L | H <PCH and NCH info>}
+	{ L | H <VBS/VGCS options : bit(2)>}
+	{	< DTM_support : bit == L >
+		|	< DTM_support : bit == H >
+			< RAC : bit (8) >
+			< MAX_LAPDm : bit (3) > }
+	< Band indicator >
+	{ L | H	< GPRS_MS_TXPWR_MAX_CCH : bit (5) > }
+	{ L | H 			-- MBMS procedures supported by the cell
+		< DEDICATED_MODE_MBMS_NOTIFICATION_SUPPORT: bit > 	
+		< MNCI_SUPPORT: bit >}
+		{	L 				-- Receiver compatible with earlier release
+			| H	 			-- Additions in Release 7 :
+				{ 0 | 1 <AMR Config:bit(4)> }
+		}
+	{ H	< Random bit stream : bit **>
+	| L
+	-- Extension must be made in expanding the "L" branch with a new structure including a 'Random bit stream'
+	}
+	< spare padding >;
+
+<PCH and NCH info> ::=
+	<Paging channel restructuring>
+	<NLN SACCH : bit(2)>
+	{0 | 1 <Call priority : bit (3)>}
+	<NLN status SACCH : bit >;
+
+<paging channel restructuring> ::=
+--	1|		-- paging channel is restructured
+--	0		-- paging channel is not restructured
+    < restructured : 0 >
+    | < not restructured : 1 > ;
+
+<VBS/VGCS options> ::=
+	<inband notifications>
+	<inband pagings>;
+
+<inband notifications>::=
+	--0|	--	the network does not provide notification on FACCH so that the mobile should
+	--		inspect the NCH for notifications
+	--1	--	the mobile shall be notified on incoming high priority VBS/VGCS calls through 	
+	--		NOTIFICATION/FACCH, the mobile need not to inspect the NCH
+    < no notification on FACCH : 0 >
+    | < notification on FACCH : 1 > ;
+
+<inband pagings>::=
+	--0|		--	the network does not provide paging information on FACCH so that the mobile
+	--			should inspect the PCH for pagings
+	--1		--	the mobile shall be notified on incoming high priority point-to-point calls
+	--			through NOTIFICATION/FACCH, the mobile need not to inspect the PCH
+    < no paging on FACCH : 0 >
+    | < paging on FACCH : 1 > ;
+
+< Band indicator > ::=
+	--< BAND_INDICATOR : bit == L >			-- ARFCN indicates 1800 band
+	--| < BAND_INDICATOR : bit == H > ;			-- ARFCN indicates 1900 band
+    < BAND INDICATOR 1800 : L >
+    | < BAND INDICATOR 1900 : H > ; 

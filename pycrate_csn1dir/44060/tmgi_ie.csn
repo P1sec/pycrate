@@ -1,0 +1,12 @@
+-- TS 44.060 - d60
+-- 12.33 Temporary Mobile Group Identity (TMGI)
+-- TMGI IE
+
+< TMGI IE > ::=
+	{ 0													-- without MCC and MNC parameters
+		< MBMS SERVICE ID : bit (24) >
+	| 1													-- with MCC and MNC parameters
+		< MBMS SERVICE ID : bit (24) >
+		< MCC : bit (12) >
+		< MNC : bit (12) > } ; 
+

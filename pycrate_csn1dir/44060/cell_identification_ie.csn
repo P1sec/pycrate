@@ -1,0 +1,9 @@
+-- TS 44.060 - d60
+-- 12.23 Cell Identification
+-- Cell Identification IE
+
+< Cell Identification IE > ::=
+	< Location Area Identification IE : octet (5) >			-- 3GPP TS 44.018
+	< RAC : bit (8) >
+	< Cell Identity IE : octet (2) > ;								-- 3GPP TS 44.018
+

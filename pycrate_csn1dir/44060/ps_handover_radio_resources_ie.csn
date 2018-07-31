@@ -1,0 +1,96 @@
+-- TS 44.060 - d60
+-- 12.42 PS Handover Radio Resources
+-- PS Handover Radio Resources IE
+
+< PS Handover Radio Resources IE > ::=
+	{ 0 | 1 < Handover Reference : bit (8) > }
+	< ARFCN : bit (10) >
+	< SI : bit (2) >
+	< NCI : bit (1) >
+	< BSIC : bit (6) >
+	{ 0 | 1 < CCN_ACTIVE : bit (1) > }
+	{ 0 | 1 < 3G_CCN_ACTIVE : bit (1) > }
+	{ 0 | 1 < CCN Support Description : < CCN Support Description struct >> }
+	< Frequency Parameters : < Frequency Parameters IE > >
+	< NETWORK_CONTROL_ORDER : bit (2) >
+	{ 0 | 1	< Global Packet Timing Advance : < Global Packet Timing Advance IE > >
+		{ 0 | 1	< Packet Extended Timing Advance : bit (2) > } }						-- Only used in uplink
+	< EXTENDED_DYNAMIC_ALLOCATION : bit (1) >									-- Only used in uplink
+	< RLC_RESET : bit (1) > 
+	{ 0 | 1 < P0 : bit (4) > 
+		< PR_MODE : bit (1) > }
+	{ 0 | 1 < Uplink Control Timeslot : bit (3) > }
+	{ 0 < GPRS mode : < GPRS mode struct > >
+	 | 1 < EGPRS mode : < EGPRS mode struct > > } ;
+
+< CCN Support Description struct > ::=
+	< Number_Cells : bit (7) >
+	{ < CCN_SUPPORTED : bit > } * (val(Number_Cells)) ;
+
+< GPRS mode struct > ::=
+	-- Uplink TBFs
+	{	{ 0 | 1 < CHANNEL_CODING_COMMAND : bit (2) > }
+		{ 0 | 1 < Global Timeslot description : < Timeslot description struct > >
+			{ 1 < Uplink Assignment : < Uplink TBF Assignment struct > > } ** 0 }
+	-- Downlink TBFs
+		{ 1 < Downlink Assignment : < Downlink Assignment struct > > } ** 0 } ;
+
+< EGPRS mode struct > ::=
+	-- Uplink TBFs
+	{	{ 0 | 1	< EGPRS Window Size : < EGPRS Window Size IE > > }
+		{ 0 | 1	< EGPRS Channel Coding Command : < EGPRS Modulation and Coding Scheme IE > > }
+		{ 0 | 1	< BEP_PERIOD2 : bit(4) > }
+		{ 0 | 1 < Global Timeslot description : < Timeslot description struct > >
+			{ 1 < Uplink Assignment : < Uplink TBF Assignment struct > > } ** 0 } }
+	-- Downlink TBFs
+	{ 0 | 1
+		{ 0 | 1 { 0 | 1 < EGPRS Window Size : < EGPRS Window Size IE > > }
+			< LINK_QUALITY_MEASUREMENT_MODE : bit (2) >
+			{ 0 | 1 < BEP_PERIOD2 : bit(4) > } }
+			{ 1 < Downlink Assignment : < Downlink Assignment struct > > } ** 0 } ;
+
+< Uplink TBF Assignment struct > ::=					-- Recursive for multiple TBFs
+	{ 0 | 1 < PFI : bit (7) > } 
+	< RLC_MODE : bit (1) > 
+	< TFI Assignment : bit (5) >
+	{ 0 | 1	< CHANNEL_CODING_COMMAND : bit (2) > }
+	{ 0 | 1	< EGPRS Channel Coding Command : < EGPRS Modulation and Coding Scheme IE > > }
+	{ 0 | 1	< EGPRS Window Size : < EGPRS Window Size IE > > }
+	< USF_GRANULARITY : bit (1) >
+	{ 0														-- The timeslots assigned to the TBF are all the timeslots assigned
+															-- in the Global Timeslot description
+	| 1	< TBF_TIMESLOT_ALLOCATION : bit (N) > }	-- The timeslots assigned to the TBF are a subset of all the
+																-- timeslots assigned in the Global Timeslot description. Where
+																-- N is the number of timeslots assigned to the MS in the Global 
+																-- Timeslot description
+	{ 0		< USF_ALLOCATION : bit (3) >			-- The same USF is valid on all timeslots assigned to the TBF
+	| 1														-- Different USF(s) assigned
+			< USF_ALLOCATION : bit (3) >					-- USF assignment on the lowest numbered timeslot
+																	-- assigned to the TBF
+			{ 0 | 1 < USF_ALLOCATION : bit (3) > } * (M-1) } ;	-- USFs on subsequent timeslots assigned to the TBF:
+
+< Downlink Assignment struct > ::= 		 -- Recursive for multiple TBFs
+	< TIMESLOT_ALLOCATION : bit (8) >
+	{ < Downlink TBF assignment : < Downlink TBF assignment struct > > } ;
+
+< Downlink TBF assignment struct > ::=
+{ 0 | 1 < PFI : bit (7) > }	
+	< RLC_MODE : bit (1) > 
+	< TFI Assignment : bit (5) >
+	< CONTROL_ACK : bit (1) >
+	{ 0 | 1 < EGPRS Window Size : < EGPRS Window Size IE > > } ;
+
+< Timeslot description struct > ::=
+	{ 0														-- without power control params
+		< MS_TIMESLOT_ALLOCATION : bit (8) >
+	| 1														-- with power control params
+		< ALPHA : bit (4) >		
+		{ 0 | 1	< GAMMA_TN0 : bit (5) > } 
+		{ 0 | 1	< GAMMA_TN1 : bit (5) > }
+		{ 0 | 1	< GAMMA_TN2 : bit (5) > }
+		{ 0 | 1	< GAMMA_TN3 : bit (5) > }
+		{ 0 | 1	< GAMMA_TN4 : bit (5) > }
+		{ 0 | 1	< GAMMA_TN5 : bit (5) > }
+		{ 0 | 1	< GAMMA_TN6 : bit (5) > }
+		{ 0 | 1	< GAMMA_TN7 : bit (5) > } } ;
+

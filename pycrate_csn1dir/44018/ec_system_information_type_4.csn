@@ -1,0 +1,22 @@
+-- TS 44.018 - d80
+-- 9.1.43s EC System information type 4
+-- EC System Information Type 4
+
+< EC System Information Type 4 > ::=
+	< Message Type : bit (3) >
+	< EC SI 4_INDEX : bit (2) >
+	< EC SI 4_COUNT : bit (2) >
+	< EC SI_CHANGE_MARK : bit (5) >
+
+	{ 0 | 1	< Network Sharing Information : < Network Sharing Information struct >> }
+	< spare padding > ;
+
+< Network Sharing Information struct > ::=
+	< Common_PLMN_Allowed : bit (1) >
+	< Nb_Additional_PLMNs : bit (2) >
+	{	{ 0 | 1 < MCC : bit (12) > } < MNC : bit (12) >
+		{ 0 | 1 < NCC Permitted : bit (8) > }
+		{ 0 | 1 < EC_Access_Control_Class : bit (7) >
+				< Exception_Report_Status : bit (1) > }
+	} * ( val (Nb_Additional_PLMNs)+1) ;
+

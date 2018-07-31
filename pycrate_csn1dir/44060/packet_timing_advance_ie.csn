@@ -1,0 +1,9 @@
+-- TS 44.060 - d60
+-- 12.12 Packet Timing Advance
+-- Packet Timing Advance IE
+
+< Packet Timing Advance IE > ::=
+	{ 0 | 1	< TIMING_ADVANCE_VALUE : bit (6) > }
+	{ 0 | 1	< TIMING_ADVANCE_INDEX : bit (4) >
+			< TIMING_ADVANCE_TIMESLOT_NUMBER : bit (3) > } ;
+

@@ -1,0 +1,16 @@
+-- TS 44.060 - d60
+-- 12.60 E-UTRAN CSG Measurement Report
+-- E-UTRAN CSG Measurement Report IE
+
+< E-UTRAN CSG Measurement Report IE > ::=
+	< E-UTRAN CI : bit (28) >
+	< Tracking Area Code : bit (16) >
+	{ 0	| 1	< PLMN-ID : < PLMN-ID struct > > }
+	< CSG-ID : bit (27) >
+	< Access Mode : bit (1) >
+	< REPORTING_QUANTITY : bit (6) > ;
+
+< PLMN-ID struct > ::=
+	< MCC : bit (12) >
+	< MNC : bit (12) > ;
+

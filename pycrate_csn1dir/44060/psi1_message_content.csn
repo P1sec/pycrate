@@ -1,0 +1,28 @@
+-- TS 44.060 - d60
+-- 11.2.18 Packet System Information Type 1
+-- PSI1 message content
+
+< PSI1 message content > ::=
+	< PAGE_MODE : bit (2) >
+	< PBCCH_CHANGE_MARK : bit (3) >
+	< PSI_CHANGE_FIELD : bit (4) >
+	< PSI1_REPEAT_PERIOD : bit (4) >
+	< PSI_COUNT_LR : bit (6) >
+	{ 0 | 1 < PSI_COUNT_HR : bit (4) > }
+	< MEASUREMENT_ORDER: bit (1) >
+	< GPRS Cell Options : < GPRS Cell Options IE > >
+	< PRACH Control Parameters : < PRACH Control Parameters IE > >
+	< PCCCH Organization Parameters : < PCCCH Organization Parameters IE > >
+	< Global Power Control Parameters : < Global Power Control Parameters IE > >
+	< PSI_STATUS_IND : bit >
+	{	null | 0				-- Receiver backward compatible with earlier release
+		| 1					-- Additions in release 99 :
+		< MSCR : bit >
+		< SGSNR : bit >
+		< BAND_INDICATOR : bit >
+		{	null | 0			-- Receiver backward compatible with earlier release
+			| 1				-- Additions in Rel-6 :
+			{ 0 | 1	< LB_MS_TXPWR_MAX_CCH : bit (5) > }
+			< padding bits > } } 
+	! < Distribution part error : bit (*) = < no string > > ;
+

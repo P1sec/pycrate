@@ -1,0 +1,14 @@
+-- TS 44.018 - d80
+-- 9.1.63 EC PAGING REQUEST
+-- EC Paging Request message content
+
+< EC Paging Request message content > ::=
+	< Message Type : bit (4) >
+	< Used DL Coverage Class: bit (2) >
+	{ 0 | 1 < EC Page Extension : bit (4) > } ;
+
+< Mobile Identity struct > ::= 
+	{ 0 < P-TMSI : bit (32) > 
+		| 1	< Number of IMSI Digits : bit (4) >
+			< IMSI Digits : bit (4 * (val(Number of IMSI Digits) + 1)) > } ;
+

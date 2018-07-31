@@ -1,0 +1,31 @@
+-- TS 44.060 - d60
+-- 11.2.3 Packet Cell Change Failure
+-- Packet Cell Change Failure message content
+
+< Packet Cell Change Failure message content > ::=
+	< TLLI / G-RNTI : bit (32) >
+	< ARFCN : bit (10) >
+	< BSIC : bit (6) >
+	< CAUSE : bit (4) >
+	{ null | 0	bit **	= < no string >		-- Receiver compatible with earlier release
+		| 1			-- Additions in release 99 :
+			{ 0 | 1 < UTRAN FDD Target cell: < UTRAN FDD Target cell IE > > }
+			{ 0 | 1 < UTRAN TDD Target cell: < UTRAN TDD Target cell IE > > }
+			{ null | 0	bit ** = < no string >	-- Receiver compatible with earlier release
+			| 1		-- Additions in Rel-5 :
+				{ 0 | 1 < G-RNTI extension : bit (4) > }
+				{ null | 0	bit ** = < no string >	-- Receiver compatible with earlier release
+					| 1		-- Additions in Rel-8 :
+						{ 0 | 1 < E-UTRAN Target cell: < E-UTRAN Target cell IE > > }
+						{ null | 0	bit ** = < no string >	-- Receiver compatible with earlier release
+							| 1		-- Additions in Rel-9 :
+								{ 0 | 1	< UTRAN CSG Target cell:
+										< UTRAN CSG Target cell IE > > }
+								{ 0 | 1	< E-UTRAN CSG Target cell :
+										< E-UTRAN CSG Target cell IE > > }
+								{ null | 0	bit ** = < no string >	-- Receiver compatible with earlier release
+									| 1		-- Additions in Rel-11 :
+										{ 0 | 1 < E-UTRAN Target cell with extended EARFCN : 
+										 	 < E-UTRAN Target cell with extended EARFCN IE > > }
+				< padding bits > } } } } } ;
+

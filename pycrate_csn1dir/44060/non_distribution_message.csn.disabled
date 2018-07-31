@@ -1,0 +1,22 @@
+-- TS 44.060 - d60
+-- 11.1.1.2 Non-distribution messages
+-- Non-distribution message
+
+< Non-distribution message > ::=
+	< MESSAGE_TYPE : 0 bit (5) >
+	< Distribution contents >
+	< Address information > < Non-distribution contents >
+	< padding bits > ;
+
+< Non-distribution message on EC-PACCH > ::=
+	< MESSAGE_TYPE : 0 bit (4) >
+	< Distribution contents >
+	< Address information > < Non-distribution contents >
+	< padding bits > ;
+
+< Address information > ::=
+	0	< Global TFI IE > |	-- see sub-clause 12.10
+	1 0	< TLLI / G-RNTI > |	-- see sub-clause 12.16
+	1 1 0	< TQI > |	-- see sub-clause 12.17
+	1 1 1	< Packet Request Reference IE > ;	-- see sub-clause 12.11
+

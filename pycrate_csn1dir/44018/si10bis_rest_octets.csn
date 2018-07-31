@@ -1,0 +1,41 @@
+-- TS 44.018 - d80
+-- 10.5.2.70 SI10bis Rest Octets
+-- SI10bis Rest Octets
+
+<SI10bis Rest Octets> ::=
+ < SI10bis Sequence : bit (2) >
+ { H 	<Position in SI5 list : bit(5)>
+		 { 0 | 1 < BCCH ARFCN : bit (10) > }
+		 { 0 | 1 < BSIC : bit (6) > }
+		 < SI10bis Neighbour Cell Info > } ** L
+ <spare padding>;
+
+<SI10bis Neighbour Cell Info> ::=
+ < Group Channel Description >
+ { 0 		-- no additional frequency list is included 
+ | 1	{ 0 < Frequency Short List : bit (64) >
+	 --| 1 < Frequency List : <bit string>> } }< CELL_GLOBAL_COUNT : bit (2) >
+	 | 1 < Frequency List : <NAS Type4 LV>> } }< CELL_GLOBAL_COUNT : bit (2) >
+ < B22_COUNT : bit >
+ { 0		-- all following parameters are same as in current cell
+ | 1	{ 0 		-- talker priority not supported
+	 | 1 < Priority Uplink access : bit > }
+		 { 0 | 1	{ 0 | 1 < FR AMR Config : bit (4) > }
+				 { 0 | 1 < HR AMR Config : bit (4) > } }
+		 { 0 | 1	< SMS Data Confidentiality Ind : bit (1) > 
+				 < SMS Guaranteed Privacy Ind : bit (1) >}
+		 { 0 | 1 < Max retrans : bit (2) > < Tx-Integer : bit (4) > }
+	};
+
+<NAS Type4 LV> ::= 
+ <Length: bit (8)>
+ <Value: bit (val(Length) * 8)> ;
+
+<SI10ter Rest Octets> ::=
+	< SI10bis Sequence : bit (2) >
+	{	0	<Position in SI5 list : bit(5) >
+ 		| 1 < BCCH ARFCN : bit (10) > }
+	{ 0 | 1 < BSIC : bit (6) > } 
+	<NCH Position : bit (5)>		-- see SI1 rest octets, 44.018 / 10.5.2.32
+	<spare padding>;
+

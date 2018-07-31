@@ -1,0 +1,59 @@
+-- TS 44.018 - d80
+-- 9.1.21a Notification/FACCH
+-- NOTIFICATION FACCH
+
+<NOTIFICATION FACCH>	::=	
+	<RR short PD : bit>					-- See 3GPP TS 24.007
+ 	<message type : bit(5)>				-- See 10.4
+ 	<short layer 2 header : bit(2)>		-- See 3GPP TS 44.006
+	{	0	<Group Call information>
+		|1	<Paging Information>
+	}
+	{	null | L 		-- Receiver compatible with earlier release
+		| H 			-- Additions in Release 6 :
+			{ 0|1	<CELL_GLOBAL_COUNT : bit (2)>
+					<B22_COUNT : bit> }
+			{ 0|1	<VSTK_RAND : bit (36)> }
+	}
+	{	null	| L 	-- Receiver compatible with earlier release
+		| H 	-- Additions in Release 7 :
+			<Priority Uplink Access : bit (1)> 
+			<Emergency_Ind : bit (1)> 
+			{ 0|1 	<AMR Config : bit (4)> }
+			{ 0|1	<Paging Cause : bit (2)> }
+			{ 0|1	< SMS Data Confidentiality Ind : bit (1)> 
+					< SMS Guaranteed Privacy Ind : bit (1)>
+			} 
+	}
+	<spare padding> ;
+
+<Group Call information> ::=	
+	<Group Call Reference : bit(36)>
+	{0|1 <Group Channel Description>} ;
+
+<Priority Uplink Access> ::=
+	<Priority_Uplink Access:bit==L> 		-- RACH access
+	| <Priority_Uplink Access:bit==H>;		-- Group Channel access
+
+<Emergency_Ind> ::= 
+	<Emergency_Ind:bit==L>					-- emergency mode not set
+	| <Emergency_Ind:bit==H>;				-- emergency mode set
+
+<Group Channel Description> ::=
+	<Channel Description : bit(24)>
+	{	0	
+		--|1	{	0	<Mobile Allocation : <bit string>>
+		|1	{	0	<Mobile Allocation : <NAS Type4 LV>>
+ 				|1	<Frequency Short List : bit(64)>}
+	};
+
+<NAS Type4 LV> ::= 
+ <Length: bit (8)>
+ <Value: bit (val(Length) * 8)> ;
+
+<Paging Information>	::=
+	--<mobile identity : <bit string>>
+	<mobile identity : <NAS Type4 LV>>
+	<channel first: bit(2)>
+	{0|1	<eMLPP priority : bit(3)>} ;
+

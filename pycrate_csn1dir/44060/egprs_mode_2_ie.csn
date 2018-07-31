@@ -1,0 +1,25 @@
+-- TS 44.060 - d60
+-- 12.48a.1 EGPRS mode 2
+-- EGPRS mode 2 IE
+
+< EGPRS mode 2 IE > ::=
+	{ 0 | 1	< BEP_PERIOD2 : bit(4) > } 
+	{ 0 		-- SINGLE TBF ASSIGNMENT
+		{ 0 | 1 					-- Single Downlink TBF
+			< Downlink Assignment : < Single Downlink Assignment 2 IE > >
+		}
+		{ 0 | 1					-- Single Uplink TBF
+			< Uplink Assignment : < Single Uplink Assignment 2 IE > >
+		}
+	| 1 		-- MULTIPLE TBF ASSIGNMENT
+			-- THIS ASSIGNMENT CHOICE SHALL ONLY BE SELECTED BY THE NETWORK 
+			-- FOR ASSIGNING RESOURCES TO A MOBILE STATION SUPPORTING
+			-- MULTIPLE TBF PROCEDURES IN A/GB MODE (see 3GPP TS 24.008)
+		{ 0 | 1					-- Multiple downlink TBF(s)
+			< Multiple Downlink Assignment : < Multiple Downlink Assignment 2 IE > >
+		}
+		{ 0 | 1					-- Multiple uplink TBF(s)
+			< Multiple Uplink Assignment : < Multiple Uplink Assignment 2 IE > >
+		}
+ 	} ;
+

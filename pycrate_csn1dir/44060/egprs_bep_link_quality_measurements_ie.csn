@@ -1,0 +1,10 @@
+-- TS 44.060 - d60
+-- 12.5.3 EGPRS BEP Link Quality Measurements IE
+-- EGPRS BEP Link Quality Measurements IE
+
+<EGPRS BEP Link Quality Measurements IE> ::=
+	{ 0 | 1	< GMSK_MEAN_BEP : bit (5) >
+			< GMSK_CV_BEP : bit (3) >}
+	{ 0 | 1	< 8PSK_MEAN_BEP : bit (5) >
+			< 8PSK_CV_BEP : bit (3) > };
+

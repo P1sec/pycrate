@@ -1,0 +1,12 @@
+-- TS 44.018 - d80
+-- 9.1.21i VBS/VGCS reconfigure2
+-- VBS/VGCS RECONFIGURE2
+
+<VBS/VGCS RECONFIGURE2> 	::=
+	<RR short PD : bit>					-- See 3GPP TS 24.007
+	<message type : bit(5)>				-- See 10.4
+	<short layer 2 header : bit(2)>		-- See 3GPP TS 44.006
+	<new Cell Channel Description : octet (16)> -- See 10.5.2.1b.1
+	<Starting Time: bit(16)>						
+	{ null | 0 bit** = < no string >} ;	-- Receiver backward compatible with earlier version
+

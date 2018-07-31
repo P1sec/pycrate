@@ -1,0 +1,44 @@
+-- TS 44.060 - d60
+-- 11.2.25 Packet System Information 13
+-- PSI13 message content
+
+< PSI13 message content > ::=
+	< PAGE_MODE : bit (2) >
+	< BCCH_CHANGE_MARK : bit (3) >
+	< SI_CHANGE_FIELD : bit (4) >
+	{ 0 | 1	< SI13_CHANGE_MARK : bit (2) >
+			< GPRS Mobile Allocation : < GPRS Mobile Allocation IE > > }
+	{	0								-- PBCCH not present in cell (This shall always be indicated. See sub-clause 1.6):
+			< RAC : bit (8) >
+			< SPGC_CCCH_SUP : bit >
+			< PRIORITY_ACCESS_THR : bit (3) >
+			< NETWORK_CONTROL_ORDER : bit (2) >
+			< GPRS Cell Options : < GPRS Cell Options IE > >
+			< GPRS Power Control Parameters : < GPRS Power Control Parameters IE > >
+		| 1								-- PBCCH present in cell (This shall never be indicated. See sub-clause 1.6):
+			< PSI1_REPEAT_PERIOD : bit (4) >
+			< PBCCH Description : < PBCCH Description struct > > }
+	{	null | 0 bit** = < no string >				-- Receiver compatible with ealier release
+		| 1				-- Additions in release 99 :
+			< SGSNR : bit >
+			{	null | 0 bit** = < no string >			-- Receiver compatible with earlier release
+				| 1				-- Additions in release R4 :
+					< SI_STATUS_IND : bit >		
+					{	null | 0 bit** = < no string >			-- Receiver compatible with earlier release
+						| 1				-- Additions in Rel-6:
+				 			{ 0	| 1	< LB_MS_TXPWR_MAX_CCH : bit (5) > }
+							< SI2n_SUPPORT: bit (2) >		
+							{	null | 0 bit** = < no string >			-- Receiver compatible with earlier release
+								| 1				-- Additions in Rel-11:
+									< SI_CHANGE_ALT : bit >		
+						< padding bits > } } } }
+	! < Distribution part error : bit (*) = < no string > > ;
+
+< PBCCH Description struct > ::=
+	< Pb : bit (4) >
+	< TSC : bit (3) >
+	< TN : bit (3) >
+	{	0										-- default to BCCH carrier
+		| 10	< ARFCN : bit (10) >
+		| 11	< MAIO : bit (6) > } ;
+

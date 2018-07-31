@@ -1,0 +1,144 @@
+-- TS 44.060 - d60
+-- 11.2.20 Packet System Information Type 3
+-- PSI3 message content
+
+< PSI3 message content > ::=
+	< PAGE_MODE : bit (2) >
+	< PSI3_CHANGE_MARK : bit (2) >
+	< PSI3_BIS_COUNT : bit (4) >
+	< Serving Cell parameters : < Serving Cell params struct > >
+	< General Cell Selection parameter : < Gen Cell Sel struct > >
+	< Neighbour Cell parameters : { 1 < Neighbour Cell params struct > } ** 0 >
+	{	null | 0	bit** = < no string >
+		| 1														-- Release 1998 additions:
+		< Serving Cell LSA ID information : < LSA ID information struct > >
+		{ 0 | 1 < LSA Parameters :< LSA Parameters IE >> }
+		{	null | 0	bit** = < no string >
+			| 1														-- Release 1999 additions:
+			0 0			-- The values '01', '10' and '11' were allocated in an earlier version of the protocol
+						-- and shall not be used.
+			{ 0 | 1 < COMPACT Information : < COMPACT Information struct > > }
+			0	-- The value '1' was used in an earlier version of the protocol and shall not be used.
+			{	null | 0	bit** = < no string >
+				| 1														-- Rel-4 additions:
+				{ 0 | 1 < CCN Support Description : < CCN Support Description struct >> }
+				{	null | 0	bit** = < no string >
+					| 1													-- Rel-5 additions:
+					< CELL BAR QUALIFY 3 : bit (2) >				-- Serving cell barring status.
+					< Iu Mode Neighbour Cell Parameters : { 1 < Iu Mode Neighbour Cell params struct > } ** 0 >												--Supplementary information for dual Iu mode and A/Gb mode capable cells
+					< Iu mode Only Neighbour Cell Parameters : 
+						{ 1 < Iu mode Only Neighbour Cell params struct > } ** 0 >
+					< padding bits > } } } }
+	! < Distribution part error : bit (*) = < no string > > ;
+
+< Serving Cell params struct > ::=
+	< CELL_BAR_ACCESS_2 : bit >
+	< EXC_ACC : bit >
+	< GPRS_RXLEV_ACCESS_MIN : bit (6) >
+	< GPRS_MS_TXPWR_MAX_CCH : bit (5) >
+	{ 0 | 1 < HCS Serving Cell parameters : < HCS struct > > } 
+	< MULTIBAND_REPORTING : bit (2) >;
+
+< HCS struct > ::=
+	< PRIORITY_CLASS : bit (3) >
+	< HCS_THR : bit (5) > ;
+
+< Gen Cell Sel struct > ::=
+	< GPRS_CELL_RESELECT_HYSTERESIS : bit (3) >
+	< C31_HYST : bit (1) >
+	< C32_QUAL: bit (1) >
+	1	-- The value '0' was used in an earlier version of the protocol and shall not be used.
+	{ 0 | 1 < T_RESEL : bit (3) > }
+	{ 0 | 1 < RA_RESELECT_HYSTERESIS : bit (3) > } ;
+
+< Neighbour Cell params struct > ::=
+	< START_FREQUENCY : bit (10) >
+	< Cell selection params : < Cell Selection struct > >
+	< NR_OF_REMAINING_CELLS : bit (4) >
+	< FREQ_DIFF_LENGTH : bit (3) >
+	{	< FREQUENCY_DIFF : bit (1 + val(FREQ_DIFF_LENGTH)) >
+		< Cell Selection Params : <Cell Selection struct >> } * (val(NR_OF_REMAINING_CELLS)) ;
+
+< Cell Selection struct > ::=
+	< BSIC : bit (6) >
+	< CELL_BAR_ACCESS_2 : bit >
+	< EXC_ACC : bit >
+	< SAME_RA_AS_SERVING_CELL : bit (1) >
+	{ 0 | 1	< GPRS_RXLEV_ACCESS_MIN : bit (6) >
+			< GPRS_MS_TXPWR_MAX_CCH : bit (5) > }
+	{ 0 | 1	< GPRS_TEMPORARY_OFFSET : bit (3) >
+			< GPRS_PENALTY_TIME : bit (5) > }
+	{ 0 | 1	< GPRS_RESELECT_OFFSET : bit (5) > }
+	{ 0 | 1	< HCS params : < HCS struct > > }
+	{ 0 | 1	< SI13 PBCCH Location : < SI13 PBCCH Location struct > > } ;
+
+< SI13 PBCCH Location struct > ::=
+	{	0	< SI13_LOCATION : bit (1) >
+		| 1	< PBCCH_LOCATION : bit (2) >
+			< PSI1_REPEAT_PERIOD : bit (4) > } ;
+
+< LSA ID information struct > ::=
+	{ 1 {	0	< LSA_ID : bit (24) >
+			| 1	< ShortLSA_ID : bit (10) > } } ** 0 ;
+
+< COMPACT Information struct > ::=
+	< Cell Identification : Cell identification IE>
+	{ 1 < COMPACT Neighbour Cell params struct > } ** 0 ;
+
+< COMPACT Neighbour Cell params struct > ::=
+	< START_FREQUENCY : bit (10) >
+	< COMPACT Cell selection params : < COMPACT Cell Selection struct > >
+	< NR_OF_REMAINING_CELLS : bit (4) >
+	< FREQ_DIFF_LENGTH : bit (3) >
+	{	< FREQUENCY_DIFF : bit (1 + val(FREQ_DIFF_LENGTH)) >
+		< COMPACT Cell selection params : 
+			< COMPACT Cell Selection struct > > } * (val(NR_OF_REMAINING_CELLS));
+
+< COMPACT Cell Selection struct > ::=
+	< BSIC : bit (6) >
+	< CELL_BAR_ACCESS_2 : bit >
+	< EXC_ACC : bit >
+	< SAME_RA_AS_SERVING_CELL : bit (1) >
+	{ 0 | 1	< GPRS_RXLEV_ACCESS_MIN : bit (6) >
+			< GPRS_MS_TXPWR_MAX_CCH : bit (5) > }
+	{ 0 | 1	< GPRS_TEMPORARY_OFFSET : bit (3) >
+			< GPRS_PENALTY_TIME : bit (5) > }
+	{ 0 | 1	< GPRS_RESELECT_OFFSET : bit (5) > }
+	{ 0 | 1	< HCS params : < HCS struct > > }
+	{ 0 | 1	< TIME_GROUP : bit (2) > }
+	{ 0 | 1	< GUAR_CONSTANT_PWR_BLKS : bit (2) >} ;
+
+< CCN Support Description struct > ::=
+    < Number_Cells : bit (7) >
+    { < CCN_SUPPORTED : bit > } * (val(Number_Cells)) ;
+
+< Iu Mode Neighbour Cell Params struct > ::=
+	< NR_OF_REMAINING_CELLS : bit (4) >
+	{ 0 | 1	< Iu Mode Cell Selection Params : 
+				<Iu Mode Cell Selection struct >> } * (val(NR_OF_REMAINING_CELLS));
+
+< Iu Mode Cell Selection struct > ::=
+	< CELL BAR QUALIFY 3 : bit (2) >	
+	{ 0 | 1	< SI13Alt PBCCH Location: < SI13 PBCCH Location struct > > };
+
+< Iu mode Only Neighbour Cell params struct > ::=
+	< START_FREQUENCY : bit (10) >
+	< Iu mode Only Cell selection params : < Iu mode Only Cell Selection struct > >
+	< NR_OF_REMAINING_CELLS : bit (4) >
+	< FREQ_DIFF_LENGTH : bit (3) >
+	{	< FREQUENCY_DIFF : bit (1 + val(FREQ_DIFF_LENGTH)) >
+		< Iu mode Only Cell selection params : 
+			< Iu mode Only Cell Selection struct > >} * (val(NR_OF_REMAINING_CELLS));
+
+< Iu Mode Only Cell Selection struct > ::=
+	< BSIC : bit (6) >
+	< CELL BAR QUALIFY 3 : bit (2) >
+	< SAME_RA_AS_SERVING_CELL : bit (1) >
+	{ 0 | 1	< GPRS_RXLEV_ACCESS_MIN : bit (6) >
+			< GPRS_MS_TXPWR_MAX_CCH : bit (5) > }
+	{ 0 | 1	< GPRS_TEMPORARY_OFFSET : bit (3) >
+			< GPRS_PENALTY_TIME : bit (5) > }
+	{ 0 | 1	< GPRS_RESELECT_OFFSET : bit (5) > }
+	{ 0 | 1	< HCS params : < HCS struct > > }
+	{ 0 | 1	< SI13Alt PBCCH Location : < SI13 PBCCH Location struct > >};
+

@@ -1,0 +1,32 @@
+-- TS 44.060 - d60
+-- 11.2.13 Packet Power Control/Timing Advance
+-- Packet Power Control/Timing Advance message content
+
+< Packet Power Control/Timing Advance message content > ::=
+	< PAGE_MODE : bit (2) >
+	{	0	< Global TFI : < Global TFI IE > >
+		{	0		-- Message escape
+			{	{ 0 | 1 < Global Power Control Parameters : < Global Power Control Parameters IE >> }
+				{ 0	< Global Packet Timing Advance : < Global Packet Timing Advance IE > >
+					< Power Control Parameters : < Power Control Parameters IE > >
+				| 1	{ 0 < Global Packet Timing Advance : < Global Packet Timing Advance IE > >
+					| 1 < Power Control Parameters : < Power Control parameters IE > > } }
+				{ null	| 0 bit** = < no string >	-- Receiver backward compatible with earlier version
+					| 1					-- Additions for R99
+						{ 0 | 1 < Packet Extended Timing Advance : bit (2)> }
+						{ null | 0 bit** = < no string >	-- Receiver backward compatible with earlier version
+							| 1					-- Additions for REL-7
+								{ 0 | 1 	< Carrier Identification : bit (2) > }
+								{ null | 0 bit** = < no string >	-- Receiver backward compatible with earlier version
+									| 1			-- Additions for REL-12
+										{ 0 | 1 	< Carrier Count : bit (4) >
+										< DLMC Carrier Bitmap : bit (val(Carrier Count) + 1) > }
+	                                    < padding bits > }
+	                     }
+	            }
+				! < Non-distribution part error : bit (*) = < no string > >
+			}
+			! < Message escape : 1 bit (*) = <no string> > }
+		! < Address information part error : bit (*) = < no string > > }
+	! < Distribution part error : bit (*) = < no string > > ;
+

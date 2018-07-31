@@ -1,0 +1,424 @@
+-- TS 44.060 - d60
+-- 11.2.31 Packet Timeslot Reconfigure
+-- Packet Timeslot Reconfigure message content
+
+< Packet Timeslot Reconfigure message content > ::=
+	< PAGE_MODE : bit (2) >
+	{ 0	< GLOBAL_TFI : < Global TFI IE > >
+		{ 0		-- Message escape
+			{	< CHANNEL_CODING_COMMAND : bit (2) >
+				< Global Packet Timing Advance : < Global Packet Timing Advance IE > >
+				< DOWNLINK_RLC_MODE : bit (1) >
+				< CONTROL_ACK : bit (1) >
+				{ 0 | 1 < DOWNLINK_TFI_ASSIGNMENT : bit (5) > }
+				{ 0 | 1 < UPLINK_TFI_ASSIGNMENT : bit (5) > }
+				< DOWNLINK_TIMESLOT_ALLOCATION : bit (8) >
+				{ 0 | 1	< Frequency Parameters : < Frequency Parameters IE > > }
+				0				-- The value '1' was allocated in an earlier version of the protocol and shall not be used.
+				< Dynamic Allocation : < Dynamic Allocation struct > >
+				{ null | 0 bit** = < no string >			-- Receiver backward compatible with earlier version
+				| 1						-- Additions for R99
+					{ 0 | 1 < Packet Extended Timing Advance : bit (2) > }
+					{ null | 0 bit** = < no string >		-- Receiver backward compatible with earlier version
+					| 1						-- Additions for Rel-5
+						{ 0 | 1	< RB Id of downlink TBF : bit (5) >
+								< RB Id of uplink TBF: bit (5) > } 
+						{ 0 | 1	< Uplink Control Timeslot : bit (3) > }
+						{ null | 0 bit** = <no string>	-- Receiver backward compatible 
+						| 1 				-- Additions for Rel-6
+							{ 0 | 1 	< PFI of downlink TBF : bit (7) > }
+							{ 0 | 1	< PFI of uplink TBF : bit (7) > } 
+							{ 0 | 1	< UPLINK_RLC_MODE : bit (1) > }
+										{ 0 < EMST_NW_Capability : bit (1) >	-- EMST is not used
+										| 1											-- EMST is used
+											{ 0
+											| 1	< Downlink RLC Entity 2 : < RLC Entity Struct > >
+												{ 0
+												| 1 < Downlink RLC Entity 3 : < RLC Entity Struct > > }
+											}
+											{ 0
+											| 1	< Uplink RLC Entity 2 : < RLC Entity Struct > >
+												{ 0
+												| 1 < Uplink RLC Entity 3 : < RLC Entity Struct > > }
+											}
+										}
+										{ null | 0 bit** = < no string > -- Receiver backward compatible with earlier version
+										| 1 								-- Additions for Rel-10
+											{ 0		-- EMSR is not enabled in downlink
+											| 1		-- EMSR is enabled in downlink
+												{ 1 < EMSR Additional PFCs 1 : < Additional PFCs struct > > } ** 0	
+												{ 1 < EMSR Additional PFCs 2 : < Additional PFCs struct > > } ** 0	
+												{ 1 < EMSR Additional PFCs 3 : < Additional PFCs struct > > } ** 0
+											}
+											{ 0		-- EMSR is not enabled in uplink
+											| 1		-- EMSR is enabled in uplink
+												{ 1 < EMSR Additional PFCs 1 : < Additional PFCs struct > > } ** 0	
+												{ 1 < EMSR Additional PFCs 2 : < Additional PFCs struct > > } ** 0	
+												{ 1 < EMSR Additional PFCs 3 : < Additional PFCs struct > > } ** 0
+											}	
+											{ null | 0 bit** = < no string > -- Receiver backward compatible with earlier version
+											| 1 								-- Additions for Rel-12
+												< Primary TSC Set : bit (1) >
+												{ 0 | 1						-- Secondary DL TSC Value assigned
+													< Secondary DL TSC Set : bit (1) >
+													< Secondary DL TSC Value : bit (3) > }
+									< padding bits > } } } } } 
+				! < Non-distribution part error : bit (*) = < no string > > }
+		| 1				-- Message escape bit used to define EGPRS message contents
+			{ 00 {	{ 0 | 1 < COMPACT reduced MA : < COMPACT reduced MA IE >> }
+					< EGPRS Channel Coding Command : < EGPRS Modulation and Coding Scheme IE >>
+					< RESEGMENT : bit (1) >
+					{ 0 | 1 < DOWNLINK EGPRS Window Size : < EGPRS Window Size IE > > }
+					{ 0 | 1 < UPLINK EGPRS Window Size : < EGPRS Window Size IE > > }
+					< LINK_QUALITY_MEASUREMENT_MODE : bit (2) >
+					< Global Packet Timing Advance : < Global Packet Timing Advance IE > >
+					{ 0 | 1 < Packet Extended Timing Advance : bit (2) > }
+					< DOWNLINK_RLC_MODE : bit (1) >
+					< CONTROL_ACK : bit (1) >
+					{ 0 | 1 < DOWNLINK_TFI_ASSIGNMENT : bit (5) > }
+					{ 0 | 1 < UPLINK_TFI_ASSIGNMENT : bit (5) > }
+					< DOWNLINK_TIMESLOT_ALLOCATION : bit (8) >
+					{ 0 | 1	< Frequency Parameters : < Frequency Parameters IE > > }
+					0			-- The value '1' was allocated in an earlier version of the protocol and shall not be used.
+					< Dynamic Allocation : < Dynamic Allocation struct > >					
+					{ null | 0 bit** = < no string >	-- Receiver backward compatible with earlier version
+					| 1						-- Additions for Rel-5
+						{ 0 | 1	< RB Id of downlink TBF : bit (5) >
+								< RB Id of uplink TBF: bit (5) > }
+						{ 0 | 1	< Uplink Control Timeslot : bit (3) > }
+						{ null | 0 bit** = <no string>	-- Receiver backward compatible 
+						| 1 					-- Additions for Rel-6
+							{ 0 | 1 	< PFI of downlink TBF : bit (7) > }
+							{ 0 | 1	< PFI of uplink TBF : bit (7) > } 
+							{ 0 | 1	< UPLINK_RLC_MODE : bit (1) > }
+								{ null | 0 bit** = < no string > -- Receiver backward compatible with earlier version
+								| 1 			-- Additions for Rel-7
+									{ 0 | 1	< Downlink NPM Transfer Time : bit (5) > }
+									{ 0 | 1	< Uplink NPM Transfer Time : bit (5) > }
+									{ null | 0 bit** = < no string > -- Receiver backward compatible with earlier version
+									| 1 								-- Additions for Rel-9
+										< Indication of Upper Layer PDU Start for RLC UM : bit >
+										< Enhanced Flexible Timeslot Assignment : bit >
+										{ null | 0 bit** = < no string > -- Receiver backward compatible with earlier version
+										| 1 								-- Additions for Rel-12
+											< Primary TSC Set : bit (1) >
+											{ 0 | 1						-- Secondary DL TSC Value assigned
+												< Secondary DL TSC Set : bit (1) >
+												< Secondary DL TSC Value : bit (3) > }					
+								< padding bits > } } } } }
+					! < Non-distribution part error : bit (*) = < no string > > }
+		| 01				-- escape for Downlink Dual Carrier, BTTI using FANR, EGPRS2, RTTI
+				 {	< EGPRS Channel Coding Command : < EGPRS Modulation and Coding Scheme IE >>
+					< RESEGMENT : bit (1) >
+					< Assignment Info : Assignment Info struct >
+					{ 0 | 1 < DOWNLINK EGPRS Window Size : < EGPRS Window Size IE > > }
+					{ 0 | 1 < UPLINK EGPRS Window Size : < EGPRS Window Size IE > > }
+					< LINK_QUALITY_MEASUREMENT_MODE : bit (2) >
+					{ 0 | 1	< BEP_PERIOD2 : bit(4) > }
+					< Global Packet Timing Advance : < Global Packet Timing Advance IE > >
+					{ 0 | 1 < Packet Extended Timing Advance : bit (2) > }
+					< DOWNLINK_RLC_MODE : bit (1) >
+					< CONTROL_ACK : bit (1) >
+					{ 0 | 1 < DOWNLINK_TFI_ASSIGNMENT : bit (5) > }
+					{ 0 						-- BTTI mode
+						< TIMESLOT_ALLOCATION_C1 : bit (8) >
+						{ 0 | 1 < TIMESLOT_ALLOCATION_C2 : bit (8) > }
+					| 1						-- RTTI mode
+						< RTTI_USF_MODE : bit (1) >
+						{ 0						-- Single Carrier Assignment
+							{ 00					-- Default PDCH pair configuration
+							| 01					-- Unchanged
+							| 10					-- Explicit PDCH pair configuration
+								< DOWNLINK_PDCH_PAIRS_C1 : bit (8) > 
+								< UPLINK_PDCH_PAIRS_C1 : bit (8) >
+							! < PDCH pairs configuration error : { 1 1 } > < bit (*) = < no string > > 		-- reserved
+							}
+							< RTTI_DOWNLINK_PDCH_PAIR_ASSIGNMENT_SC : bit (4) >
+						| 1						-- Dual Carrier Assignment
+							{ 00					-- Default PDCH pair configuration
+							| 01					-- Unchanged
+							| 10					-- Explicit PDCH pair configuration
+								< DOWNLINK_PDCH_PAIRS_C1 : bit (8) >
+								< DOWNLINK_PDCH_PAIRS_C2 : bit (8) >
+								< UPLINK_PDCH_PAIRS_C1 : bit (8) >
+								< UPLINK_PDCH_PAIRS_C2 : bit (8) >
+							! < PDCH pairs configuration error : { 1 1 } > < bit (*) = < no string > > 		-- reserved
+							}
+							< RTTI_DOWNLINK_PDCH_PAIR_ASSIGNMENT_DC : bit (8) >
+						}
+					}
+					{	00		-- No frequency parameters included
+						| 01		-- Legacy IEs used
+							{ 0 | 1 < Frequency Parameters C1 : < Frequency Parameters IE > > }
+							{ 0 | 1 < Frequency Parameters C2 : < Frequency Parameters IE > > }
+						| 10		-- Optimized Dual Carrier frequency parameters used 
+							 < Dual Carrier Frequency Parameters : < Dual Carrier Frequency Parameters IE > > 
+						! < Frequency Parameters error: { 11 } > < bit(*) = < no string> > -- reserved for future used
+					}
+					< Dynamic Allocation 2 : < Dynamic Allocation 2 struct > >
+					{ 0 | 1	< Uplink Control Timeslot C1 : bit (3) > }
+					{ 0 | 1	< Uplink Control Timeslot C2 : bit (3) > }
+					{ 0 | 1 < PFI of downlink TBF : bit (7) > }
+					{ 0 | 1	< PFI of uplink TBF : bit (7) > } 
+					{ 0 | 1	< UPLINK_RLC_MODE : bit (1) > }
+					{ 0 | 1	< Downlink NPM Transfer Time : bit (5) > }
+					{ 0 | 1	< Uplink NPM Transfer Time : bit (5) > }
+					{ 0 	-- Fast Ack/Nack Reporting is not activated for the downlink TBF; 
+					| 1		-- Fast Ack/Nack Reporting is activated for the downlink TBF
+						< EVENT_BASED_FANR: bit (1) > }
+					{ 0 		-- Fast Ack/Nack Reporting is not activated for the uplink TBF 
+					| 1 		-- Fast Ack/Nack Reporting is activated for the uplink TBF
+						{ 0 		-- SSN-based encoding is selected
+						| 1 		-- Time-based encoding is selected
+							< REPORTED TIMESLOTS C1 : bit (8) > 			-- carrier 1 in Downlink Dual Carrier 
+																			-- configuration
+							{ 0 | 1 < REPORTED TIMESLOTS C2 : bit (8) > }	-- carrier 2 in Downlink Dual Carrier 
+																			-- configuration
+							< TSH : bit (2) > } }	-- This structure shall be considered only valid if 																				-- an uplink TBF is addressed
+					< Uplink EGPRS Level: < EGPRS Level IE > >
+					< Downlink EGPRS Level: < EGPRS Level IE > >
+					{ 0 | 1 < Pulse Format: < Pulse Format IE > > }
+					{ null | 0 bit** = < no string > -- Receiver backward compatible with earlier version
+					| 1 							 -- Additions for Rel-9
+						< Indication of Upper Layer PDU Start for RLC UM: bit >
+						< Enhanced Flexible Timeslot Assignment : bit >
+						{ 0 < EMST_NW_Capability : bit (1) >	-- EMST is not used
+						| 1										-- EMST is used
+							{ 0
+							| 1	< Downlink RLC Entity 2 : < RLC Entity Struct > >
+								{ 0
+								| 1 < Downlink RLC Entity 3 : < RLC Entity Struct > > }
+							}
+							{ 0
+							| 1	< Uplink RLC Entity 2 : < RLC Entity Struct > >
+								{ 0
+								| 1 < Uplink RLC Entity 3 : < RLC Entity Struct > > }
+							}
+						}
+						{ 0 | 1 < MTTI_DOWNLINK_ASSIGNMENT_C1 : bit (1) > }
+						{ 0 | 1 < MTTI_DOWNLINK_ASSIGNMENT_C2 : bit (1) > }
+						{ 0 | 1 < MTTI_UPLINK_ASSIGNMENT_C1 : bit(1) > }
+						{ 0 | 1 < MTTI_UPLINK_ASSIGNMENT_C2 : bit(1) > }
+						{ null | 0 bit** = < no string > -- Receiver backward compatible with earlier version
+						| 1 							 -- Additions for Rel-10
+							{ 0		-- EMSR is not enabled in downlink
+							| 1		-- EMSR is enabled in downlink
+								{ 1 < EMSR Additional PFCs 1 : < Additional PFCs struct > > } ** 0	
+								{ 1 < EMSR Additional PFCs 2 : < Additional PFCs struct > > } ** 0	
+								{ 1 < EMSR Additional PFCs 3 : < Additional PFCs struct > > } ** 0
+							}
+							{ 0		-- EMSR is not enabled in uplink
+							| 1		-- EMSR is enabled in uplink
+								{ 1 < EMSR Additional PFCs 1 : < Additional PFCs struct > > } ** 0	
+								{ 1 < EMSR Additional PFCs 2 : < Additional PFCs struct > > } ** 0	
+								{ 1 < EMSR Additional PFCs 3 : < Additional PFCs struct > > } ** 0
+							}
+							{ null | 0 bit** = < no string > -- Receiver backward compatible with earlier version
+							| 1 							 -- Additions for Rel-11
+								< EGPRS Packet Downlink Ack/Nack Type 3 Support : bit(1) >
+								{ null | 0 bit** = < no string > -- Receiver backward compatible with earlier version
+								| 1 							 -- Additions for Rel-12
+									< Primary TSC Set : bit (1) >
+									{ 0 | 1						-- Secondary DL TSC Value assigned
+										< Secondary DL TSC Set : bit (1) >
+										< Secondary DL TSC Value : bit (3) > }
+					< padding bits > } } } }
+					! < Non-distribution part error : bit (*) = < no string > > }
+		| 10				-- escape for Downlink Multi Carrier, BTTI using FANR, EGPRS2, RTTI
+				{	< DOWNLINK_RLC_MODE : bit (1) >
+					< CONTROL_ACK : bit (1) >
+					{ 1 < UFPS : < UFPS struct > > } ** 0 
+					< DLMC Measurement Type : bit (1) >
+					< LINK_QUALITY_MEASUREMENT_MODE : bit (2) >
+					{ 0 | 1	< Carrier for Interference Measurements : bit (4) > }
+					< Global Packet Timing Advance : < Global Packet Timing Advance IE > >
+					{ 0 | 1	< Packet Extended Timing Advance : bit (2) > }
+					{ 0 | 1 < PTCCH_CARRIER : bit (4) > } 
+					< PDAN Coding : bit (1) >
+					< Extended SNS : bit (1) >
+					{ 0 | 1 < BEP_PERIOD2 : bit(4) > } 
+					{ 0 | 1	< PFI of downlink TBF : bit (7) > }
+					{ 0 | 1	< Downlink NPM Transfer Time : bit (5) > }
+					{ 0 | 1		-- '1' indicates Fast Ack/Nack Reporting is activated for downlink TBF
+						< EVENT_BASED_FANR: bit (1) > }
+					< Downlink EGPRS Level: < EGPRS Level IE > >
+					< Indication of Upper Layer PDU Start for RLC UM : bit >
+					< EGPRS Packet Downlink Ack/Nack Type 3 Support : bit(1) > 
+					< EGPRS Channel Coding Command : < EGPRS Modulation and Coding Scheme IE >> }
+				{	< RESEGMENT : bit (1) >
+					{ 1 < DLMC UL Carrier Info : < DLMC UL Carrier Info struct > > } ** 0
+					{ 0 | 1	< UPLINK EGPRS Window Size : < EGPRS Window Size IE > > }
+					< UPLINK_TFI_ASSIGNMENT : bit (5) >
+					{ 0 | 1	< PFI of uplink TBF : bit (7) > }
+					{ 0 | 1	< UPLINK_RLC_MODE : bit (1) > }
+					{ 0 | 1	< Uplink NPM Transfer Time : bit (5) > }
+					{ 0 | 1 	-- '1' indicates that FANR is activated
+						{ 0 		-- SSN-based encoding is selected
+						| 1 		-- Time-based encoding is selected
+							< REPORTED TIMESLOTS : bit (8) >	
+							< TSH : bit (2) > } }
+					< Uplink EGPRS Level: < EGPRS Level IE > >
+					{ 0 | 1 < Pulse Format: < Pulse Format IE > > }
+					< Enhanced Flexible Timeslot Assignment : bit >
+					{ 0 | 1	< Uplink Control Timeslot : bit (3) > } }
+			! < Message escape : { 11 } > < bit (*) = <no string> > } } 			-- Extended for future changes
+		! < Address information part error : bit (*) = < no string > > }
+	! < Distribution part error : bit (*) = < no string > > ;
+
+<Dynamic Allocation struct > ::=
+	< EXTENDED_DYNAMIC_ ALLOCATION : bit (1) >
+	{ 0 | 1	< P0 : bit (4) > 
+			< PR_MODE : bit (1) > }
+	< USF_GRANULARITY : bit (1) >
+	0						-- The value '1' was allocated in an earlier version of the protocol and shall not be used.
+	{ 0 | 1 < TBF Starting Time : < Starting Frame Number Description IE > > }
+	{ 0						-- Timeslot Allocation
+		{ 0 | 1 < USF_TN0 : bit (3) > }
+		{ 0 | 1 < USF_TN1 : bit (3) > }
+		{ 0 | 1 < USF_TN2 : bit (3) > }
+		{ 0 | 1 < USF_TN3 : bit (3) > }
+		{ 0 | 1 < USF_TN4 : bit (3) > }
+		{ 0 | 1 < USF_TN5 : bit (3) > }
+		{ 0 | 1 < USF_TN6 : bit (3) > }
+		{ 0 | 1 < USF_TN7 : bit (3) > }
+	| 1						-- Timeslot Allocation with Power Control Parameters
+		< ALPHA : bit (4) >
+		{ 0 | 1	< USF_TN0 : bit (3) >
+				< GAMMA_TN0 : bit (5) > }
+		{ 0 | 1	< USF_TN1 : bit (3) >
+				< GAMMA_TN1 : bit (5) > }
+		{ 0 | 1	< USF_TN2 : bit (3) >
+				< GAMMA_TN2 : bit (5) > }
+		{ 0 | 1	< USF_TN3 : bit (3) >
+				< GAMMA_TN3 : bit (5) > }
+		{ 0 | 1	< USF_TN4 : bit (3) >
+				< GAMMA_TN4 : bit (5) > }
+		{ 0 | 1	< USF_TN5 : bit (3) >
+				< GAMMA_TN5 : bit (5) > }
+		{ 0 | 1	< USF_TN6 : bit (3) >
+				< GAMMA_TN6 : bit (5) > }
+		{ 0 | 1	< USF_TN7 : bit (3) >
+				< GAMMA_TN7 : bit (5) > } } ;
+
+< Dynamic Allocation 2 struct > ::= 
+	< EXTENDED_DYNAMIC_ALLOCATION : bit (1) > 
+	{ 0 | 1	< P0_C1 : bit (4) > 
+			< PR_MODE_C1 : bit (1) > 
+			{ 0 | 1	< P0_C2 : bit (4) > 
+					< PR_MODE_C2 : bit (1) > } }
+	< USF_GRANULARITY : bit (1) >
+	{ 0 | 1 < UPLINK_TFI_ASSIGNMENT : bit (5) > }
+	{ 0			-- Allocation without Power Control Parameters
+		< N_USF : bit (4) >
+		{ 0 | 1 < USF : bit (3) > } *( val(N_USF) + 1)
+	| 1			-- Allocation with Power Control Parameters
+		< ALPHA_C1: bit (4) >
+		{ 0 | 1 < ALPHA_C2: bit (4) > }
+		{ 0							-- BTTI mode
+			< N_TS : bit (4) >
+			{ 0 | 1 
+				< USF : bit (3) >
+				< GAMMA: bit (5) > 
+			} * ( val(N_TS) + 1)
+		| 1							-- RTTI mode
+			< N_PAIRS : bit (3) >
+			{ 0 | 1
+				< USF : bit (3) > 
+				< GAMMA : bit (5) > 
+			} * (val(N_PAIRS) + 1) 
+			{ 0 	-- RTTI USF
+			| 1		-- BTTI USF 
+				{ 0 | 1 < USF_2 : bit (3) > 
+					{ 0 | 1 < GAMMA : bit (5) > } 
+				} * (val(N_PAIRS) + 1)
+			}
+		}
+	} ;
+
+< Assignment Info struct > ::=
+	< Assignment Type : bit (2) >
+	< Carrier ID : bit (1) >;
+
+< RLC Entity Struct > ::=
+	< TFI : bit (5) >
+	< RLC_MODE : bit (1) >
+	{ 0 | 1 < EGPRS Window Size : < EGPRS Window Size IE > > }
+	< PFI : bit (7) >;
+
+< UFPS struct > ::=
+	{ 00				-- Existing UFPS released
+		| 01			-- Existing UFPS remains unchanged (no information provided)
+		| 10			-- Existing UFPS changed/new UFPS provided
+				{ 0		-- Existing DLMC Frequency Parameters unchanged
+					| 1	< DLMC Frequency Parameters : < DLMC Frequency Parameters IE > > }
+				{ 1 < CARRIER_SPECIFIC_INFO : < Carrier Specific Info struct > > } ** 0	
+		| 11	bit (*) = < no string >		-- Reserved
+	};
+
+< Carrier Specific Info struct > ::=
+	{ 00				-- Existing carrier released
+		| 01			-- Existing carrier remains unchanged (no information provided)
+		| 10			-- Existing carrier changed/new carrier provided
+				{ 0					-- BTTI mode
+					{ 0				-- same timeslots as the lowest numbered carrier
+					| 1	< TIMESLOT_ALLOCATION : bit (8) > } 
+				| 1					-- RTTI mode
+					{ 0				-- same PDCH-pairs as the lowest numbered carrier
+					| 1	< DOWNLINK_PDCH_PAIRS_DLMC : bit (8) >
+						< RTTI_DOWNLINK_PDCH_PAIR_ASSIGNMENT_DLMC : bit (4) > }
+				}
+				{ 0 | 1	< MAIO : bit (6) > }
+				{ 0 		-- same P0 and PR_MODE as the lowest numbered carrier
+                | 1	< P0 : bit (4) >
+					< PR_MODE : bit (1) > }
+				{ 0 		-- same DOWNLINK_TFI_ASSIGNMENT as the lowest numbered carrier
+ 		        | 1	< DOWNLINK_TFI_ASSIGNMENT : bit (5) > 
+					{ 0 | 1 < DOWNLINK_eTFI_ASSIGNMENT : bit (3) > } }
+				{ 0 		-- same Power Control Parameters as the lowest numbered carrier
+ 		        | 1	< Power Control Parameters : < Power Control Parameters IE > > }
+				{ 0 		-- EMST is not used on this carrier
+				| 1	-- EMST is used on this carrier
+				    < RLC Entity 2 : < RLC Entity Struct > >
+				    { 0 | 1 < DOWNLINK_eTFI_ASSIGNMENT : bit (3) > }
+				    { 0 | 1	< RLC Entity 3 : < RLC Entity Struct > > } 
+					{ 0 | 1 < DOWNLINK_eTFI_ASSIGNMENT : bit (3) > } }
+				{ 0 		-- EMSR is not used on this carrier
+				| 1	-- EMSR is used on this carrier
+					{ 1 < EMSR Additional PFCs 1 : < Additional PFCs struct > > 
+					    { 0 | 1 < DOWNLINK_eTFI_ASSIGNMENT : bit (3) > } } ** 0	
+					{ 1 < EMSR Additional PFCs 2 : < Additional PFCs struct > > 
+						{ 0 | 1 < DOWNLINK_eTFI_ASSIGNMENT : bit (3) > } } ** 0	
+					{ 1 < EMSR Additional PFCs 3 : < Additional PFCs struct > > 
+						{ 0 | 1 < DOWNLINK_eTFI_ASSIGNMENT : bit (3) > } } ** 0
+				}
+				< Primary TSC Set : bit (1) >
+				{ 0 | 1						-- Secondary DL TSC Value assigned
+				    < Secondary DL TSC Set : bit (1) >
+					< Secondary DL TSC Value : bit (3) > }
+		| 11	bit (*) = < no string >		-- Reserved
+	};
+
+< DLMC UL Carrier Info struct > ::= 
+	{ 00 					-- Assigned carrier released
+		| 01				-- Carrier remains unchanged (no information provided)
+		| 10				-- Assigned carrier modified or new carrier assigned
+			{ 0						-- BTTI mode
+				{ 0	| 1	< UPLINK_TIMESLOT_ALLOCATION : bit (8) > }			-- assigned PDCH
+			| 1						-- RTTI mode
+				{ 0	| 1 < UPLINK_PDCH_PAIRS_DLMC : bit (8) > }					-- assigned PDCH-pairs
+			}
+			< Dynamic Allocation 3 : < Dynamic Allocation 3 IE > >
+			{ 0		-- EMST is not used on this carrier
+				| 1	-- EMST is used on this carrier 
+					< Uplink RLC Entity 2 : < RLC Entity Struct > >
+					{ 0 | 1 < Uplink RLC Entity 3 : < RLC Entity Struct > > } }
+			{ 0 		-- EMSR is not used on this carrier
+				| 1	-- EMSR is used on this carrier
+					{ 1 < EMSR Additional PFCs 1 : < Additional PFCs struct > > } ** 0	
+					{ 1 < EMSR Additional PFCs 2 : < Additional PFCs struct > > } ** 0	
+					{ 1 < EMSR Additional PFCs 3 : < Additional PFCs struct > > } ** 0
+			}
+			< Primary TSC Set : bit (1) >
+		| 11 	bit (*) = < no string >			-- reserved
+	} ; 
+

@@ -1,0 +1,15 @@
+-- TS 44.060 - d60
+-- 12.13 Power Control Parameters
+-- Power Control Parameters IE
+
+< Power Control Parameters IE > ::=
+	< ALPHA : bit (4) >
+	{ 0 | 1 < GAMMA_TN0 : bit (5) > }
+	{ 0 | 1 < GAMMA_TN1 : bit (5) > }
+	{ 0 | 1 < GAMMA_TN2 : bit (5) > }
+	{ 0 | 1 < GAMMA_TN3 : bit (5) > }
+	{ 0 | 1 < GAMMA_TN4 : bit (5) > }
+	{ 0 | 1 < GAMMA_TN5 : bit (5) > }
+	{ 0 | 1 < GAMMA_TN6 : bit (5) > }
+	{ 0 | 1 < GAMMA_TN7 : bit (5) > } ;
+

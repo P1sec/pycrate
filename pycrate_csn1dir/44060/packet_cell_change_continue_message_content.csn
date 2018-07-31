@@ -1,0 +1,15 @@
+-- TS 44.060 - d60
+-- 11.2.2a Packet Cell Change Continue
+-- Packet Cell Change Continue message content
+
+< Packet Cell Change Continue message content > ::=
+	< PAGE_MODE : bit (2) >
+		{ 0 < GLOBAL_TFI : Global TFI IE >
+		{	{ 0 | 1	< ARFCN : bit (10) >
+				< BSIC : bit (6) >
+				< CONTAINER_ID : bit (2) > }
+			< padding bits > 
+			! < Non-distribution part error : bit (*) = < no string > > }
+		! < Address information part error : bit (*) = < no string > > }
+	! < Distribution part error : bit (*) = < no string > > ;
+

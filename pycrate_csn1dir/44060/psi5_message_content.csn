@@ -1,0 +1,76 @@
+-- TS 44.060 - d60
+-- 11.2.23 Packet System Information Type 5
+-- PSI5 message content
+
+< PSI5 message content > ::=
+	< PAGE_MODE : bit (2) >
+	< PSI5_CHANGE_MARK : bit (2) >
+	< PSI5_INDEX : bit (3) >
+	< PSI5_COUNT : bit (3) >
+	{ 0 | 1 < NC Measurement Parameters : < NC Measurement Parameters struct > > }
+	0 						-- The value '1' was allocated in an earlier version of the protocol and shall not be used. 
+	{	null | 0 bit** = <no string>		-- Receiver backward compatible with earlier release
+		| 1									-- Additional contents for R99
+		{ 0 | 1	< ENH Reporting Parameters : < ENH Reporting Parameters struct >> }
+		{	null | 0 bit** = <no string>		-- Receiver compatible with earlier release
+			| 1 									-- Additions in Rel-5:
+			{ 0 | 1	< GPRS 3G Additional Measurement Parameters Description 2 : 
+					< GPRS 3G Additional Measurement Parameters Description 2 struct >> }
+			{	null | 0	bit ** = < no string >			-- Receiver compatible with earlier release
+				| 1										-- Additions in Rel-7 :						
+					{ 0 | 1	< 700_REPORTING_OFFSET : bit (3) > 
+							< 700_REPORTING_THRESHOLD : bit (3) > }
+					{ 0 | 1	< 810_REPORTING_OFFSET : bit (3) > 
+							< 810_REPORTING_THRESHOLD : bit (3) > }
+				< padding bits > } } }
+	! < Distribution part error : bit (*) = < no string > > ;
+
+< NC Measurement Parameters struct > ::=
+	< NETWORK_CONTROL_ORDER : bit (2) >
+	{ 0 | 1	< NC_ NON_DRX_PERIOD : bit (3) >
+			< NC_REPORTING_PERIOD_I : bit (3) >
+			< NC_REPORTING_PERIOD_T : bit (3) > } ;
+
+< ENH Reporting parameters struct > ::=
+	< Report_Type : bit >
+	< REPORTING_RATE : bit >
+	< INVALID_BSIC_REPORTING : bit >
+	{ 0 | 1	< NCC_PERMITTED : bit (8) > } 
+	{ 0 | 1	< GPRS MEASUREMENT Parameters Description : 
+			< GPRS MEASUREMENT Parameters Description struct >> }
+	{ 0 | 1	< GPRS 3G MEASUREMENT Parameters Description : 
+			< GPRS 3G MEASUREMENT Parameters Description struct >> } ;
+
+< GPRS MEASUREMENT PARAMETERS Description struct > ::=
+	{ 0 | 1 < MULTIBAND_REPORTING : bit (2) > }
+	{ 0 | 1 < SERVING_BAND_REPORTING : bit (2) > }
+	{ 0 | 1 < SCALE_ORD : bit (2) > }
+
+	{ 0 | 1	< 900_REPORTING_OFFSET : bit (3) > 
+			< 900_REPORTING_THRESHOLD : bit (3) > }
+
+	{ 0 | 1	< 1800_REPORTING_OFFSET : bit (3) > 
+			< 1800_REPORTING_THRESHOLD : bit (3) > }
+
+	{ 0 | 1	< 400_REPORTING_OFFSET : bit (3) > 
+			< 400_REPORTING_THRESHOLD : bit (3) > }
+
+	{ 0 | 1	< 1900_REPORTING_OFFSET : bit (3) > 
+			< 1900_REPORTING_THRESHOLD : bit (3) > }
+
+	{ 0 | 1	< 850_REPORTING_OFFSET : bit (3) > 
+			< 850_REPORTING_THRESHOLD : bit (3) > } ;
+
+< GPRS 3G MEASUREMENT PARAMETERS Description struct > ::=
+	{ 0 | 1	< FDD_REP_QUANT : bit >												-- FDD Parameters
+			< FDD_MULTIRAT_REPORTING : bit (2) > } 
+	{ 0 | 1	< FDD_REPORTING_OFFSET : bit (3) > 
+			< FDD_REPORTING_THRESHOLD : bit (3) > }
+
+	{ 0 | 1	< TDD_MULTIRAT_REPORTING : bit (2) > }							-- TDD Parameters
+	{ 0 | 1	< TDD_REPORTING_OFFSET : bit (3) > 
+			< TDD_REPORTING_THRESHOLD : bit (3) > } ;
+
+< GPRS 3G Additional Measurement Parameters 2 struct > ::= 
+	{ 0 | 1	< FDD_REPORTING_THRESHOLD_2 : bit (6) > } ;						-- FDD Parameters
+

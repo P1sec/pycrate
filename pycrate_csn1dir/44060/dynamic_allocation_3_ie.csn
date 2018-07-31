@@ -1,0 +1,22 @@
+-- TS 44.060 - d60
+-- 12.65 Dynamic Allocation 3 
+-- Dynamic Allocation 3 IE
+
+< Dynamic Allocation 3 IE > ::= 
+	< EXTENDED_DYNAMIC_ALLOCATION : bit (1) >
+	< USF_GRANULARITY : bit (1) >
+	{ 0 | 1 < ALPHA : bit (4) > }
+	{ 0 | 1 < TSC : bit (3) > }
+	{ 0						-- BTTI mode
+		{ 1 { 0 | 1	< USF : bit (3) >
+					< GAMMA: bit (5) > } } ** 0		-- one instance provided for each assigned PDCH
+	| 1						-- RTTI mode
+		{ 1 { 0	| 1	< USF : bit (3) > 
+				< GAMMA : bit (5) > 
+				{ 0 			-- RTTI USF mode
+				| 1			-- BTTI USF mode
+					{ 0 								-- same BTTI USF for each RTTI block
+					| 1 < USF_2 : bit (3) > } 		-- BTTI USF for the 2nd RTTI block
+				} } } ** 0		-- one instance provided for each assigned PDCH-pair
+	} ;
+

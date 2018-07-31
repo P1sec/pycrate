@@ -1,0 +1,10 @@
+-- TS 44.060 - d60
+-- 12.38 MPRACH description
+-- MPRACH description IE
+
+< MPRACH description IE > ::=
+	{ 0 | 1 < Frequency Parameters : < Frequency Parameters IE > > }
+	< MPRACH_TIMESLOT NUMBER : bit (3) >
+	< USF : bit (3) >
+	{ 0 | 1		< MPRACH Control Parameters : < MPRACH Control Parameters IE > > } ; 
+

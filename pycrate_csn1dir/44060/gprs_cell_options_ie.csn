@@ -1,0 +1,45 @@
+-- TS 44.060 - d60
+-- 12.24 GPRS Cell Options
+-- GPRS Cell Options IE
+
+< GPRS Cell Options IE > ::=
+	< NMO : bit (2) >
+	< T3168 : bit (3) >
+	< T3192 : bit (3) >
+	< DRX_TIMER_MAX : bit (3) >
+	< ACCESS_BURST_TYPE : bit >
+	< CONTROL_ACK_TYPE : bit >
+	< BS_CV_MAX : bit (4) >
+	{ 0 | 1	< PAN_DEC : bit (3) >
+			< PAN_INC : bit (3) >
+			< PAN_MAX : bit (3) > }
+	-- Optional extension information:
+	{ 0 | 1	<Extension Length : bit (6)>
+			< bit (val(Extension Length) + 1)
+			& { <Extension Information > ! { bit ** = <no string> } } > } ;
+
+< Extension Information> ::=
+	{ {	-- R99 extension:
+		{ 0 | 1 -- EGPRS supported by the cell if the choice bit is set to '1'
+				< EGPRS_PACKET_CHANNEL_REQUEST : bit >
+				< BEP_PERIOD : bit (4) > }
+		< PFC_FEATURE_MODE: bit >
+		< DTM_SUPPORT: bit >
+		< BSS_PAGING_COORDINATION: bit > }
+	{	-- REL‑4 extension:
+		< CCN_ACTIVE : bit >
+		< NW_EXT_UTBF : bit > }
+	{	-- REL 6 extension:
+		< MULTIPLE_TBF_CAPABILITY : bit > 
+		< EXT_UTBF_NODATA : bit > 
+		< DTM_ENHANCEMENTS_CAPABILITY : bit >
+		{ 0			-- MBMS procedures not supported by the cell if the choice bit is set to '0'
+		| 1			-- MBMS procedures supported by the cell if the choice bit is set to '1'
+			< DEDICATED_MODE_MBMS_NOTIFICATION_SUPPORT: bit > 	
+			< MNCI_SUPPORT : bit > } }
+	{	-- Rel-7 extension:
+		< REDUCED_LATENCY_ACCESS : bit > }
+	{	-- Rel-10 extension:
+		< NMO_I_ALTERNATE: bit > }
+	< spare bit > ** } // ;			-- Extension information may be truncated between released versions of the protocol.
+

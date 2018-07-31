@@ -1,0 +1,53 @@
+-- TS 44.060 - d60
+-- 12.5a.3 EGPRS Timeslot Link Quality Measurements Type 2 IE
+-- EGPRS Timeslot Link Quality Measurements Type 2 IE
+
+<EGPRS Timeslot Link Quality Measurements Type 2 IE> ::=
+
+{ 0 | 1 < BEP_MEASUREMENTS : BEP Measurement Report Struct >}
+{ 0 | 1 < INTERFERENCE_MEASUREMENTS : Interference Measurement Report Struct >};
+
+< BEP Measurement Report Struct > ::=
+	{ 0 
+	| 1 <REPORTED_MODULATION : bit (2) > 
+		<MEAN_BEP_TN0 : bit (4) >
+	}
+	{ 0 
+	| 1 < REPORTED_MODULATION : bit (2) > 
+		<MEAN_BEP_TN1 : bit (4) >
+	}
+	{ 0 
+	| 1 < REPORTED_MODULATION : bit (2) > 
+		<MEAN_BEP_TN2 : bit (4) >
+	}
+	{ 0 
+	| 1 < REPORTED_MODULATION : bit (2) > 
+		<MEAN_BEP_TN3 : bit (4) >
+	}
+	{ 0 
+	| 1 < REPORTED_MODULATION : bit (2) > 
+		<MEAN_BEP_TN4 : bit (4) >
+	}
+	{ 0 
+	| 1 < REPORTED_MODULATION : bit (2) > 
+		<MEAN_BEP_TN5 : bit (4) >
+	}
+	{ 0 
+	| 1 < REPORTED_MODULATION : bit (2) > 
+		<MEAN_BEP_TN6 : bit (4) >
+	}
+	{ 0 
+	| 1 < REPORTED_MODULATION : bit (2) > 
+		<MEAN_BEP_TN7 : bit (4) >
+	};
+
+< Interference Measurement Report Struct > ::=
+{ 0 | 1 < I_LEVEL_TN0 : bit (4) > }
+{ 0 | 1 < I_LEVEL_TN1 : bit (4) > }
+{ 0 | 1 < I_LEVEL_TN2 : bit (4) > }
+{ 0 | 1 < I_LEVEL_TN3 : bit (4) > }
+{ 0 | 1 < I_LEVEL_TN4 : bit (4) > }
+{ 0 | 1 < I_LEVEL_TN5 : bit (4) > }
+{ 0 | 1 < I_LEVEL_TN6 : bit (4) > }
+{ 0 | 1 < I_LEVEL_TN7 : bit (4) > };
+

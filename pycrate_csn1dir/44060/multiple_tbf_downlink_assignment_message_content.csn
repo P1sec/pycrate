@@ -1,0 +1,128 @@
+-- TS 44.060 - d60
+-- 11.2.7a Multiple TBF Downlink Assignment
+-- Multiple TBF Downlink Assignment message content
+
+< Multiple TBF Downlink Assignment message content > ::=
+	< PAGE_MODE : bit (2) >
+	{ 0 | 1 <PERSISTENCE_LEVEL : bit (4) > * 4 }
+	{	{ 0	< Global TFI : < Global TFI IE > >
+		| 10	{ < TLLI / G-RNTI : <TLLI / G-RNTI IE > > < G-RNTI extension : bit (4) > } }
+		{ 0		-- Message escape
+			{	< Packet Timing Advance : < Packet Timing Advance IE > >
+				{ 0 | 1 < P0 : bit (4) > 
+						< PR_MODE : bit (1) > }
+				{	{ 0 | 1 < Frequency Parameters : < Frequency Parameters IE > > }
+					{ 0 | 1 < Power Control Parameters : < Power Control Parameters IE > > }
+					{ 0 | 1 < TBF Starting Time : < Starting Frame Number Description IE > > }
+					{ 0 | 1 { 0 | 1 < EGPRS Window Size : < EGPRS Window Size IE > > }
+							< LINK_QUALITY_MEASUREMENT_MODE : bit (2) >
+					{ 0 | 1 < BEP_PERIOD2 : bit(4) > }}
+					{ 0 | 1 <Packet Extended Timing Advance : bit (2) > }
+					{ 0 | 1 < Uplink Control Timeslot : bit (3) > }
+					{ 1 < Multiple Downlink TBF Assignment : < Multiple Downlink TBF Assignment struct > > } ** 0
+						{ null | 0 bit** = < no string > -- Receiver backward compatible with earlier version
+						| 1 			-- Additions for REL-7
+							{ 1 { 0 | 1< NPM Transfer Time : bit (5) > } ** 0
+				< padding bits > }} } //					-- truncation at end of message allowed, bits '0' assumed
+				! < Non-distribution part error : bit (*) = < no string > > }
+		| 1		-- Message escape for dual carrier, RTTI, BTTI with FANR activated, EGPRS2
+			{ 00 {	< Packet Timing Advance : < Packet Timing Advance IE > >
+				< Assignment Info : < Assignment Info struct > >
+				{ 0 | 1	< P0_C1 : bit (4) >
+						< PR_MODE_C1 : bit (1) >
+						{ 0 | 1	< P0_C2 : bit (4) >
+								< PR_MODE_C2 : bit (1) > } }
+				{	{ 00		-- No frequency parameters included
+					| 01		-- Legacy IEs used
+						{ 0 | 1 < Frequency Parameters C1 : < Frequency Parameters IE > > }
+						{ 0 | 1 < Frequency Parameters C2 : < Frequency Parameters IE > > }
+					| 10		-- Optimized Dual Carrier frequency parameters used 
+						 < Dual Carrier Frequency Parameters: < Dual Carrier Frequency Parameters IE > > 
+					! < Frequency Parameters error: { 11 } bit(*) = < no string> > } -- reserved for future use
+					{ 0 | 1 < Power Control Parameters C1 : < Power Control Parameters IE > > }
+					{ 0 | 1 < Power Control Parameters C2 : < Power Control Parameters IE > > }
+					{ 0 | 1 { 0 | 1 < EGPRS Window Size : < EGPRS Window Size IE > > }
+							< LINK_QUALITY_MEASUREMENT_MODE : bit (2) >
+							{ 0 | 1 < BEP_PERIOD2 : bit(4) > }}
+					{ 0 | 1 < Packet Extended Timing Advance : bit (2) > }
+					{ 0 | 1 < Uplink Control Timeslot C1 : bit (3) > }
+					{ 0 | 1 < Uplink Control Timeslot C2 : bit (3) > }
+					{ 0 | 1 				-- BTTI mode
+						< FANR: bit (1) >
+						{ 1	< BTTI Multiple Downlink Assignment : 
+							< BTTI Multiple Downlink Assignment struct > > } ** 0 
+					}
+					{ 0 | 1				-- RTTI mode
+						{ 0					-- Single Carrier Assignment
+							{ 00				-- Default PDCH-pair configuration
+							| 01				-- Unchanged
+							| 10				-- Explicit PDCH pair configuration
+								< DOWNLINK_PDCH_PAIRS_C1 : bit (8) > 
+								< UPLINK_PDCH_PAIRS_C1 : bit (8) >
+							! < PDCH pairs configuration error : { 1 1 } bit (*) = < no string > > 		-- reserved
+							}
+							{ 1	< RTTI Multiple Downlink Assignment SC : 
+								< RTTI Multiple Downlink Assignment SC struct > > } ** 0
+						| 1					-- Dual Carrier Assignment
+							{ 00				-- Default PDCH pair configuration
+							| 01				-- Unchanged
+							| 10				-- Explicit PDCH pair configuration
+								< DOWNLINK_PDCH_PAIRS_C1 : bit (8) >
+								< DOWNLINK_PDCH_PAIRS_C2 : bit (8) >
+								< UPLINK_PDCH_PAIRS_C1 : bit (8) >
+								< UPLINK_PDCH_PAIRS_C2 : bit (8) >
+							! < PDCH pairs configuration error : { 1 1 } bit (*) = < no string > > 		-- reserved
+							}
+							{ 1	< RTTI Multiple Downlink Assignment DC : 
+								< RTTI Multiple Downlink Assignment DC struct > > } ** 0
+						}
+					}
+					<Downlink EGPRS Level: < EGPRS Level IE > >
+					{ null | 0 bit** = < no string > -- Receiver backward compatible with earlier version
+					| 1 								-- Additions for Rel-9
+						{ 1 < Indication of Upper Layer PDU Start for RLC UM : bit > } ** 0
+				< padding bits > } } //					-- truncation at end of message allowed, bits '0' assumed
+				! < Non-distribution part error : bit (*) = < no string > > }
+			! < Message escape : { 01 | 10 | 11 } bit (*) = < no string >> } }
+		! < Address information part error : bit (*) = < no string > > }
+	! < Distribution part error : bit (*) = < no string > > ;
+
+< Multiple Downlink TBF Assignment struct > ::=
+	< TIMESLOT_ALLOCATION : bit (8) >
+	{ 1 < Downlink TBF assignment : < Downlink TBF assignment struct > > } ** 0 ;
+
+< BTTI Multiple Downlink Assignment struct > ::=
+	{ 0 | 1 < TIMESLOT_ALLOCATION_C1 : bit (8) > }
+	{ 0 | 1 < TIMESLOT_ALLOCATION_C2 : bit (8) > }
+	{ 1 < Downlink TBF assignment : < Downlink TBF assignment 2 struct > > } ** 0 ;
+
+< RTTI Multiple Downlink Assignment SC struct > ::=
+	< RTTI_DOWNLINK_PDCH_PAIR_ASSIGNMENT_SC : bit (4) >
+	{ 1 < Downlink TBF assignment : < Downlink TBF assignment 2 struct > > } ** 0 ;
+
+< RTTI Multiple Downlink Assignment DC struct > ::=
+	< RTTI_DOWNLINK_PDCH_PAIR_ASSIGNMENT_DC : bit (8) >
+	{ 1 < Downlink TBF assignment : < Downlink TBF assignment 2 struct > > } ** 0 ;
+
+< Downlink TBF assignment struct > ::=
+	{ 0 < RB Id : bit (5) >
+	 | 1 < PFI : bit (7) >	
+		< RLC_MODE : bit (1) > }
+	< TFI Assignment : bit (5) >
+	< CONTROL_ACK : bit (1) >
+	{ 0 | 1 < EGPRS Window Size : < EGPRS Window Size IE > > }
+	{ 0 | 1 < HFN_LSB : bit (1) > } ; 			-- HFN_LSB field used in Iu mode only
+
+< Downlink TBF assignment 2 struct > ::=
+	< PFI : bit (7) >	
+	< RLC_MODE : bit (1) >
+	< TFI Assignment : bit (5) >
+	< CONTROL_ACK : bit (1) >
+	{ 0 | 1 < NPM Transfer Time : bit (5) > }
+	< EVENT_BASED_FANR: bit (1) > 
+	{ 0 | 1 < Downlink EGPRS Window Size : < EGPRS Window Size IE > > } ;
+
+< Assignment Info struct > ::=
+	< Assignment Type : bit (2) >
+	< Carrier ID : bit (1) > ;
+

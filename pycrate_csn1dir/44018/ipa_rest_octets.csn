@@ -1,0 +1,41 @@
+-- TS 44.018 - d80
+-- 10.5.2.78 IPA Rest Octets
+-- IPA Rest Octets
+
+<IPA Rest Octets> ::=
+	{ 0 | 1	< IPA Uplink Assignment struct >}
+	{ 0 | 1	< IPA Downlink Assignment struct >}
+	{ 0 | 1	< IPA Single Block Uplink Assignment struct >}
+	{ null
+		| L		-- Receiver compatible with earlier release
+		| H 	-- Additions in Release 13
+		  < RCC : bit (3) >
+	}
+	<spare padding>;
+
+<IPA Uplink Assignment struct> ::=
+	{ 1	< Random Reference : bit (11) >
+		< FN_OFFSET: bit (8) >
+		< GAMMA : bit (5) >
+		< TIMING_ADVANCE_VALUE : bit (6) >
+		< TFI_ASSIGNMENT : bit (5) >
+		< USF: bit (3) > 
+		< EGPRS_CHANNEL_CODING_COMMAND : bit (4) >
+		< Radio Access Capabilities Request: bit (1) >
+	} ** 0;				--Repeated as many times as necessary, once for each addressed device
+
+< IPA Downlink Assignment struct> ::=
+	{ 1	< TLLI : bit (32) >
+		< TFI_ASSIGNMENT : bit (5) >
+		< GAMMA : bit (5) >
+		{ 0 |1 < TIMING_ADVANCE_VALUE : bit (6) > }
+	} ** 0;				--Repeated as many times as necessary, limited by the space in the message
+
+<IPA Single Block Uplink Assignment struct> ::=
+	{ 1 < Random Reference : bit (11) >
+		< FN_OFFSET: bit (8) >
+		< GAMMA : bit (5) >
+		< TIMING_ADVANCE_VALUE : bit (6) >
+		< STARTING_TIME_OFFSET: bit (6) > 
+	} ** 0;				--Repeated as many times as necessary, limited by the space in the message
+

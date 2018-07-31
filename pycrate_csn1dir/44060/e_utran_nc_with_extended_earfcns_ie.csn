@@ -1,0 +1,16 @@
+-- TS 44.060 - d60
+-- 12.70 E-UTRAN NC with extended EARFCNs
+-- E-UTRAN NC with extended EARFCNs IE
+
+< E-UTRAN NC with extended EARFCNs IE > ::= 
+	{ 1 < Repeated E-UTRAN NC with extended EARFCNs :
+		< Repeated E-UTRAN NC with extended EARFCNs struct >> } ** 0;
+
+< Repeated E-UTRAN NC with extended EARFCNs struct > ::=
+	{ 1 < EARFCN_extended : bit (18) >
+		{ 0 | 1 < Measurement Bandwidth : bit (3) > } } ** 0
+	{ 0 | 1 < E-UTRAN_PRIORITY : bit(3) > }
+	< THRESH_E-UTRAN_high : bit(5) >
+	{ 0 | 1	< THRESH_E-UTRAN_low : bit(5) > }
+	{ 0 | 1	< E-UTRAN_QRXLEVMIN : bit(5) > } ;
+

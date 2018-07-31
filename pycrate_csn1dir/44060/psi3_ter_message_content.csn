@@ -1,0 +1,32 @@
+-- TS 44.060 - d60
+-- 11.2.21a Packet System Information Type 3 ter
+-- PSI3 ter message content
+
+< PSI3 ter message content > ::=
+	< PAGE_MODE : bit (2) >
+	< PSI3_CHANGE_MARK : bit (2) >
+	< PSI3_TER_INDEX : bit (4) >
+	< PSI3_TER_COUNT : bit (4) >
+	{	{ 0 | 1 < Real Time Difference Description : < Real Time Difference Description struct >> }
+		{ 0 | 1 < GPRS REP_PRIORITY Description : < GPRS REP PRIORITY Description struct >> }
+		< padding bits > } //				-- truncation at end of message allowed, bits '0' assumed
+	! < Distribution part error : bit (*) = < no string > > ;
+
+< Real Time Difference Description struct > ::=
+	{ 0 | 1	{ 0 | 1	< Cell_Index_Start_RTD : bit (7) > }	-- default value=0
+			< RTD Struct : < RTD6 Struct >>
+			{ 0 < RTD Struct : < RTD6 Struct >> } **1 }	-- '0' : increment by 1 the index of the GSM Neighbour Cell list
+	{ 0 | 1	{ 0 | 1	< Cell_Index_Start_RTD : bit (7) > }	-- default value=0
+			< RTD Struct : < RTD12 Struct >>
+			{ 0 < RTD Struct : < RTD12 Struct >> } **1 };	-- '0' : increment by 1 the index of the GSM Neighbour Cell list
+
+< RTD6 Struct > ::=
+	{ 0 | 1	< RTD : bit (6) > } ;									--'0' means no RTD for this cell
+
+< RTD12 Struct > ::=
+	{ 0 | 1	< RTD : bit (12) > } ;									-- '0' means no RTD for this cell
+
+< GPRS REP PRIORITY Description struct > ::=
+	< Number_Cells : bit(7) > 
+	{ < REP_PRIORITY : bit > } * (val(Number_Cells)) ;
+

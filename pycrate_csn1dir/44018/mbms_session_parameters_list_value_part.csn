@@ -1,0 +1,8 @@
+-- TS 44.018 - d80
+-- 10.5.2.58a MBMS Session Parameters List
+-- MBMS Session Parameters List value part
+
+< MBMS Session Parameters List value part > ::=
+	< MBMS Session Parameters List : < MBMS Session Parameters List IE > >
+	< spare bit >**;
+

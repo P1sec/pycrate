@@ -1,0 +1,11 @@
+-- TS 44.060 - d60
+-- 12.58 PSC Group
+-- PSC Group IE
+
+< PSC Group IE > ::=
+	{ 1 < PSC : bit (9) > } ** 0				-- explicit PSC coding
+	{ 1 < PSC_Pattern_length : bit (3) >
+		< PSC_Pattern : bit (val(PSC_Pattern_length) + 1) >
+		< PSC_pattern_sense : bit (1) >
+	} ** 0 ;
+

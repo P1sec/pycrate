@@ -1,0 +1,60 @@
+-- TS 44.018 - d80
+-- 10.5.2.35 SI 4 Rest Octets
+-- SI4 Rest Octets
+
+<SI4 Rest Octets> ::=
+	{	<SI4 Rest Octets_O>
+		{	L	<Break indicator> 
+		  | H	<SI4 Rest Octets_S> }
+		<spare padding>
+	} ;					-- truncation according to sub-clause 8.9 is allowed, bits 'L' assumed
+
+<SI4 Rest Octets_O> ::=
+	{	<Optional selection parameters>
+		<Optional Power offset>
+		{ L | H < GPRS Indicator > }
+	} ;					-- truncation according to sub-clause 8.9 is allowed, bits 'L' assumed
+
+<SI4 Rest Octets_S> ::=
+	{ L | H <LSA Parameters> }
+	{ L | H <Cell Identity : bit(16)> }
+	{ L | H <LSA ID information> } 
+	{ L | H < CBQ3 : bit (2) >
+	        { 0 | 1 < SI13alt Position : bit > } } ;
+
+<Break Indicator> ::=	L | H ;
+
+--<SI7 Rest Octets> ::= <SI4 Rest Octets_O><SI4 Rest Octets_S> | <SI4 Rest Octets_S> ;
+
+--<SI8 Rest Octets> ::= <SI4 Rest Octets_O><SI4 Rest Octets_S> | <SI4 Rest Octets_S> ;
+
+<Optional Selection Parameters> ::=
+    L | H <Selection Parameters> ;
+
+<Selection Parameters> ::=
+	<CBQ : bit (1)>
+	<CELL_RESELECT_OFFSET : bit (6)>
+	<TEMPORARY_OFFSET : bit (3)>
+	< PENALTY_TIME : bit (5)> ;
+
+<Optional Power Offset> ::=
+    L | H <Power Offset : bit(2)> ;
+
+<GPRS Indicator> ::=
+	< RA COLOUR : bit (3) >
+	< SI13 POSITION : bit > ;
+
+<LSA Parameters> ::=
+	<PRIO_THR : bit (3)>
+	<LSA_OFFSET : bit (3)>
+	{ 0 | 1 <MCC : bit (12)>
+	        <MNC : bit (12)> } ;
+
+<LSA ID information> ::=
+	<LSA identity>
+	{ 0 | 1 <LSA ID information> } ;
+
+<LSA identity> ::=
+	{ 0 <LSA_ID : bit (24)>
+	 |1 <ShortLSA_ID : bit (10)> } ;
+

@@ -1,0 +1,20 @@
+-- TS 44.060 - d60
+-- 11.2.23a Packet System Information Type 6
+-- PSI6 message content
+
+< PSI6 message content > ::=
+	< PAGE_MODE : bit (2) >
+	< PSI6_CHANGE_MARK : bit (2) >
+	< PSI6_INDEX : bit (3) >
+	< PSI6_COUNT : bit (3) >
+	{	{	< NonGSM Message : < Non-GSM Message struct > > **
+													-- The Non-GSM Message struct is repeated until:
+			{ < spare bit > * 3		00000 }			--	A) val(NR_OF_CONTAINER_OCTETS) = 0, or
+			< padding bits > } //						--	B) the PSI message is fully used
+	! < Distribution part error : bit (*) = < no string > > ;
+
+< NonGSM Message struct > ::= 
+	< NonGSM Protocol Discriminator : bit(3) >
+	< NR_OF_CONTAINER_OCTETS : bit(5) exclude 00000 >
+	{ < CONTAINER : bit(8) > } * (val(NR_OF_CONTAINER_OCTETS)) ;
+

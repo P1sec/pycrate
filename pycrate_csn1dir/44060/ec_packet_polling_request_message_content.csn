@@ -1,0 +1,16 @@
+-- TS 44.060 - d60
+-- 11.2.54 EC Packet Polling Request
+-- EC Packet Polling Request message content
+
+< EC Packet Polling Request message content > ::=
+	< USED_DL_COVERAGE_CLASS : < Used DL Coverage Class IE >>
+	{	0	< Global TFI : < Global TFI IE > >
+			{	< TYPE_OF_ACK : bit (1) >
+				< padding bits >
+				! < Non-distribution part error : bit (*) = < no string > >
+			}
+			--! < Address information part error : bit (*) = < no string > >
+		! < Message escape : { 1 } bit (*) = <no string> >
+	} 	-- Extended for future changes
+	! < Distribution part error : bit (*) = < no string > > ;
+

@@ -1,0 +1,72 @@
+-- TS 44.018 - d80
+-- 10.5.2.37o SI 23 Rest Octets
+-- SI 23 Rest Octets
+
+< SI 23 Rest Octets > ::=
+	< SI 23_BA_IND : bit (1) >
+	< SI 23_CHANGE_MARK : bit (2) >
+	< SI 23_INDEX : bit (3) >
+	< SI 23_COUNT : bit (3) >
+	{ 0 | 1	< IRAT Cell Reselection Information : < IRAT Cell Reselection Information struct >> }
+	< spare padding > ;
+
+< IRAT Cell Reselection Information struct > ::=
+	{ < Priority and UTRAN Parameters Description for the Common PLMN :
+	  < Priority and UTRAN Parameters Description struct >> }
+	{ < Priority and E-UTRAN Parameters Description for the Common PLMN : 
+	  < Priority and E-UTRAN Parameters Description struct >> }
+	< Nb_Additional_PLMNs : bit (2) >		
+	{ < PLMN index : bit (2) >
+		{ < Priority and UTRAN Parameters Description : 
+		  < Priority and UTRAN Parameters Description struct >> }
+		{ < Priority and E-UTRAN Parameters Description : 
+		  < Priority and E-UTRAN Parameters Description struct >> }
+	} * ( val (Nb_Additional_PLMNs)+1) ;
+
+< Priority and UTRAN Parameters Description struct > ::=
+{ 0	-- Inter RAT Cell Reselection information for UTRAN not provided for the corresponding PLMN
+	| 1
+	{ 0		-- UTRAN default threshold information not provided for the corresponding PLMN 
+		| 1
+		{ 0 | 1	< DEFAULT_UTRAN_PRIORITY : bit(3) > }
+		{ 0 | 1	< DEFAULT_THRESH_UTRAN_low : bit(5) > }
+		{ 0 | 1	< DEFAULT_UTRAN_QRXLEVMIN : bit(5) > } }
+	{ 0 | 1 < UTRAN FDD/TDD Description : < UTRAN FDD/TDD Description struct >> }
+} ;
+
+< UTRAN FDD/TDD Description struct > ::=
+	--{ { 0 | 1 < Bandwidth_FDD : bit (3) > } 
+	--  | { 0 | 1 < Bandwidth_TDD : bit (3) > } }
+	{ 0 | 1 < Bandwidth : bit (3) > }
+	{ 1 < Repeated UTRAN FDD/TDD Neighbour Frequency and Priority : 
+	  < Repeated UTRAN FDD/TDD Neighbour Frequency and Priority struct >> } ** 0 ;
+
+< Repeated UTRAN FDD/TDD Neighbour Frequency and Priority struct > ::=
+	{ 1 < UTRAN-ARFCN : bit (14) > } ** 0
+	{ 0 | 1 < UTRAN_PRIORITY : bit(3) > }
+	< THRESH_UTRAN_high : bit(5) >
+	{ 0 | 1	< THRESH_UTRAN_low : bit(5) > }
+	{ 0 | 1	< UTRAN_QRXLEVMIN: bit(5) > } ;
+
+< Priority and E-UTRAN Parameters Description struct > ::= 
+{ 0	-- Inter RAT Cell Reselection information for E-UTRAN not provided for the corresponding PLMN
+	| 1
+	{ 0		-- E-UTRAN threshold information not provided for the corresponding PLMN
+		| 1
+		{ 0 | 1	< DEFAULT_E-UTRAN_PRIORITY: bit(3) > }
+		{ 0 | 1	< DEFAULT_THRESH_E-UTRAN_low: bit(5) > }
+		{ 0 | 1	< DEFAULT_E-UTRAN_QRXLEVMIN : bit(5) > } }
+	{ 1 < Repeated E-UTRAN Neighbour Frequency and Priority : < Repeated E-UTRAN Neighbour Frequency and Priority struct >> } ** 0
+	{ 1 < Repeated E-UTRAN Not Allowed Cells : < Repeated E-UTRAN Not Allowed Cells struct >> } ** 0
+	{ 1 < Repeated E-UTRAN PCID to TA mapping : < Repeated E-UTRAN PCID to TA mapping struct >> } ** 0 
+	{ 0 | 1	< Enhanced Cell Reselection Parameters Description : < Enhanced Cell Reselection Parameters IE >> }
+} ;
+
+< Repeated E-UTRAN Neighbour Frequency and Priority struct > ::=
+	{ 1 < EARFCN_extended : bit (18) >
+			{ 0 | 1 < Measurement Bandwidth : bit (3) > }} ** 0
+	{ 0 | 1 < E-UTRAN_PRIORITY : bit(3) > }
+	< THRESH_E-UTRAN_high: bit(5) >
+	{ 0 | 1	< THRESH_E-UTRAN_low : bit(5) > }
+	{ 0 | 1	< E-UTRAN_QRXLEVMIN : bit(5) > };
+

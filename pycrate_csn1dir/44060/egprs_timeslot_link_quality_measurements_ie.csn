@@ -1,0 +1,37 @@
+-- TS 44.060 - d60
+-- 12.5.4 EGPRS Timeslot Link Quality Measurements IE
+-- EGPRS Timeslot Link Quality Measurements IE
+
+<EGPRS Timeslot Link Quality Measurements IE> ::=
+
+{ 0 | 1< BEP_MEASUREMENTS : BEP Measurement Report Struct >}
+{ 0 | 1 < INTERFERENCE_MEASUREMENTS : Interference Measurement Report Struct >};
+
+< BEP Measurement Report Struct > ::=
+	{ 0 | 1	{ 0 <GMSK_MEAN_BEP _TN0 : bit (4) >
+			| 1 < 8PSK_MEAN_BEP _TN0 : bit (4) >}}
+	{ 0 | 1	{ 0 <GMSK_MEAN_BEP _TN1 : bit (4) >
+			| 1 < 8PSK_MEAN_BEP _TN1 : bit (4) >}}
+	{ 0 | 1	{ 0 <GMSK_MEAN_BEP _TN2 : bit (4) >
+			| 1 < 8PSK_MEAN_BEP _TN2 : bit (4) >}}
+	{ 0 | 1	{ 0 <GMSK_MEAN_BEP _TN3 : bit (4) >
+			| 1 < 8PSK_MEAN_BEP _TN3 : bit (4) >}}
+	{ 0 | 1	{ 0 <GMSK_MEAN_BEP _TN4 : bit (4) >
+			| 1 < 8PSK_MEAN_BEP _TN4 : bit (4) >}}
+	{ 0 | 1	{ 0 <GMSK_MEAN_BEP _TN5 : bit (4) >
+			| 1 < 8PSK_MEAN_BEP _TN5 : bit (4) >}}
+	{ 0 | 1	{ 0 <GMSK_MEAN_BEP _TN6 : bit (4) >
+			| 1 < 8PSK_MEAN_BEP _TN6 : bit (4) >}}
+	{ 0 | 1	{ 0 <GMSK_MEAN_BEP _TN7 : bit (4) >
+			| 1 < 8PSK_MEAN_BEP _TN7 : bit (4) >} };
+
+< Interference Measurement Report Struct > ::=
+{ 0 | 1 < I_LEVEL_TN0 : bit (4) > }
+{ 0 | 1 < I_LEVEL_TN1 : bit (4) > }
+{ 0 | 1 < I_LEVEL_TN2 : bit (4) > }
+{ 0 | 1 < I_LEVEL_TN3 : bit (4) > }
+{ 0 | 1 < I_LEVEL_TN4 : bit (4) > }
+{ 0 | 1 < I_LEVEL_TN5 : bit (4) > }
+{ 0 | 1 < I_LEVEL_TN6 : bit (4) > }
+{ 0 | 1 < I_LEVEL_TN7 : bit (4) > };
+

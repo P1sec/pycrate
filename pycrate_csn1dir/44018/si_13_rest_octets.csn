@@ -1,0 +1,57 @@
+-- TS 44.018 - d80
+-- 10.5.2.37b SI 13 Rest Octets
+-- SI 13 Rest Octets
+
+< SI 13 Rest Octets > ::=
+	{ L | H
+		< BCCH_CHANGE_MARK : bit (3) >
+		< SI_CHANGE_FIELD : bit (4) >
+		{ 0 | 1	< SI13_CHANGE_MARK : bit (2) >
+				< GPRS Mobile Allocation : GPRS Mobile Allocation IE > }	-- Defined in 3GPP TS 44.060
+		{ 0						-- PBCCH not present in cell (This shall always be indicated. See sub-clause 1.8) :
+			< RAC : bit (8) >
+			< SPGC_CCCH_SUP : bit >
+			< PRIORITY_ACCESS_THR : bit (3) >
+			< NETWORK_CONTROL_ORDER : bit (2) >
+			< GPRS Cell Options : GPRS Cell Options IE >					-- Defined in 3GPP TS 44.060
+			< GPRS Power Control Parameters : GPRS Power Control Parameters IE >
+		| 1						-- PBCCH present in cell (This shall never be indicated. See sub-clause 1.8) :
+			< PSI1_REPEAT_PERIOD : bit (4) >
+			< PBCCH Description : PBCCH Description struct >
+		}
+		{ null | L 		-- Receiver compatible with earlier release
+		| H				-- Additions in release 99 :
+			< SGSNR : bit >
+			{ null | L 		-- Receiver compatible with earlier release
+			| H 			-- Additions in release Rel-4:
+				< SI_STATUS_IND : bit > 
+				{ null | L 		-- Receiver compatible with earlier release
+		 		| H 			-- Additions in release Rel-6:
+				{ 0	| 1	< LB_MS_TXPWR_MAX_CCH : bit (5) > }
+				< SI2n_SUPPORT : bit(2) >
+					{ 
+		 				-- Additions in release Rel-11:
+						< SI_CHANGE_ALT >
+		 				-- Additions in release Rel-13:
+						{ 0 | 1 < PEO_DSC : bit (2) > 
+								< RCC : bit (3) > }
+						{ 0 | 1 < C1_DELTA_MIN : bit (2) >
+								< C1_DELTA_MAX : bit (3) > }
+		 				-- Additions in future releases shall be indicated above this line
+					} //		-- truncation according to sub-clause 8.9 is allowed, bits "L" assumed
+				}
+			}
+		}
+	}
+	< spare padding > ;
+
+< PBCCH Description struct > ::=
+	< Pb : bit (4) >
+	< TSC : bit (3) >
+	< TN : bit (3) >
+	{	00 			-- BCCH carrier
+		| 01 	< ARFCN : bit (10) >
+		| 1 	< MAIO : bit (6) > } ;
+
+< SI_CHANGE_ALT > ::=	L | H ;
+

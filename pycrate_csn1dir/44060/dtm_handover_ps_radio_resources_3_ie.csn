@@ -1,0 +1,75 @@
+-- TS 44.060 - d60
+-- 12.64 DTM Handover PS Radio Resources 3
+-- DTM Handover PS Radio Resources 3 IE
+
+< DTM Handover PS Radio Resources 3 IE > ::=
+	< Cell Identification : < Cell Identification IE > >										--- provided by SI/PSI for PS HO
+	< MAX_LAPDm : bit (3) >																--- needed for DTM in new cell
+	< GPRS_MS_TXPWR_MAX_CCH : bit (5) >											--- needed for DTM in new cell
+	< GPRS Cell Options : < GPRS Cell Options IE > >									--- provided by SI/PSI for PS HO 
+	< GPRS Power Control Parameters : < GPRS Power Control Parameters IE > >	--- provided by SI/PSI for PS HO
+	< RLC_RESET : bit (1) >
+	{ 00 < EGPRS mode : < EGPRS mode 2 IE > >
+	! < TBF mode error: { 01 | 10 | 11 } bit(*) = < no string> > } -- reserved for future use
+
+	-- Optional extension information:
+	{ 0 | 1	< Extension Length : bit (8) >
+			< bit (val(Extension Length) + 1)
+			& { <Extension Information > ! { bit ** = <no string> } } > } ;
+
+< Extension Information > ::=
+	{ {		-- Rel-10 extension:
+		{ 0 < EMST_NW_Capability : bit (1) >		-- EMST is not used
+		| 1												-- EMST is used
+			{ 0
+			| 1	< Downlink RLC Entity 2 : < RLC Entity struct> >
+				{ 0
+				| 1 < Downlink RLC Entity 3 : < RLC Entity struct> > }
+			}
+			{ 0
+			| 1	< Uplink RLC Entity 2 : < RLC Entity struct> >
+				{ 0
+				| 1 < Uplink RLC Entity 3 : < RLC Entity struct> > }
+			}
+		}
+		{ 0 | 1 < MTTI_DOWNLINK_ASSIGNMENT_C1 : bit (1) > }
+		{ 0 | 1 < MTTI_DOWNLINK_ASSIGNMENT_C2 : bit (1) > }
+		{ 0 | 1 < MTTI_UPLINK_ASSIGNMENT_C1 : bit(1) > }
+		{ 0 | 1 < MTTI_UPLINK_ASSIGNMENT_C2 : bit(1) > }
+		{ 0		-- EMSR is not enabled in downlink
+		| 1		-- EMSR is enabled in downlink
+			{ 1 < EMSR Additional PFCs 1 : < Additional PFCs struct > > } ** 0	
+			{ 1 < EMSR Additional PFCs 2 : < Additional PFCs struct > > } ** 0	
+			{ 1 < EMSR Additional PFCs 3 : < Additional PFCs struct > > } ** 0
+		}
+		{ 0		-- EMSR is not enabled in uplink
+		| 1		-- EMSR is enabled in uplink
+			{ 1 < EMSR Additional PFCs 1 : < Additional PFCs struct > > } ** 0	
+			{ 1 < EMSR Additional PFCs 2 : < Additional PFCs struct > > } ** 0	
+			{ 1 < EMSR Additional PFCs 3 : < Additional PFCs struct > > } ** 0
+		}
+	}
+	{			-- Rel-11 extension:
+		< EGPRS Packet Downlink Ack/Nack Type 3 Support : bit(1) >
+	}
+	{			-- Rel-12 extension: 
+		{ 0 | 1 						-- Primary DL TSC Value assigned
+			< Primary TSC Set : bit (1) >
+			< Primary TSC Value : bit (3) > }
+		{ 0 | 1						-- Secondary DL TSC Value assigned
+			< Secondary DL TSC Set : bit (1) >
+			< Secondary DL TSC Value : bit (3) > }
+	}
+	< spare bit > ** } // ;			-- Extension information may be truncated between released versions of the protocol.
+
+< RLC Entity struct > ::=
+	< TFI : bit (5) >
+	< RLC_MODE : bit (1) >
+	{ 0 | 1 < EGPRS Window Size : < EGPRS Window Size IE > > }
+	< PFI : bit (7) >;
+
+< Additional PFCs struct > ::=
+	< TFI : bit (5) >
+ { 0 | 1 < NPM Transfer Time : bit (5) > }
+	< PFI : bit (7) >;
+

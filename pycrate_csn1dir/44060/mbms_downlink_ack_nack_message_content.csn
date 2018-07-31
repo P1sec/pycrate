@@ -1,0 +1,34 @@
+-- TS 44.060 - d60
+-- 11.2.6d MBMS Downlink Ack/Nack
+-- MBMS Downlink Ack/Nack message content
+
+< MBMS Downlink Ack/Nack message content > ::=
+	< DOWNLINK_TFI : bit (5) >
+	< MBMS Neighbouring Cell Report : < MBMS Neighbouring Cell Report struct > > -- Neighbouring cell reporting
+	< MS_ID Release Indication : bit (1) >
+	{ 0 | 1	< Extension Bits : Extension Bits IE > }					-- sub-clause 12.26
+	{ 0	< Ack/Nack Description : < Ack/Nack Description IE > > 	-- Ack/Nack information
+	| 1	< MS_OUT_OF_MEMORY : bit (1) >	
+		< EGPRS Ack/Nack Description : < EGPRS Ack/Nack Description IE > > }
+	<padding bits > ;
+
+< MBMS Neighbouring Cell Report struct > ::=
+	{ 0	< BA_USED : bit (1) >
+	| 1	< PSI3_CHANGE_MARK : bit (2) > }
+	< Neighbouring Cell Report : < Neighbouring Cell Report struct > >;
+
+< Neighbouring Cell Report struct > ::=
+	< RXLEV_SERVING_CELL : bit (6) >							-- Serving cell Rx level
+	< RESEL_CRITERIA_FULFILLED : bit (1) >						-- If re-selection criteria are fulfilled, only the
+																-- corresponding neighbouring cell is reported
+	< NUMBER_OF_NEIGHBOURING_CELL_MEASUREMENTS : bit (3) >
+	{	< NCELL_LIST_INDEX_N : bit (7) >						-- Neighbouring cells Rx levels
+		{ 0	| 1	< BSIC_N : bit (6) > }
+		< RXLEV_N : bit (6) >
+		< RESEL_PARAMS_ACQUIRED : bit (1) >
+		{ 0														-- No ptm parameters acquired for that session
+																-- in that cell
+		| 1	< MBMS_PTM_CHANGE_MARK : bit (2) > }				-- Ptm parameters acquired for that session in
+																-- that cell
+	} * (val (NUMBER_OF_NEIGHBOURING_CELL_MEASUREMENTS)) ;
+

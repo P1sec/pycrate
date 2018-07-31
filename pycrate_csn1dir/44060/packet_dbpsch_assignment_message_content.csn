@@ -1,0 +1,62 @@
+-- TS 44.060 - d60
+-- 11.2.5b Packet DBPSCH Assignment
+-- Packet DBPSCH Assignment message content
+
+< Packet DBPSCH Assignment message content > ::=
+	< PAGE_MODE : bit (2) >
+	{ 0 | 1 <PERSISTENCE_LEVEL : bit (4) > * 4 }
+	{	{ 0 < Global TFI : < Global TFI IE > >
+		| 10	< G-RNTI : bit (32) > 
+		| 11	< Packet Request Reference : < Packet Request Reference IE >> }
+		{ 0											-- Message escape
+			{	< CHANNEL_DESCRIPTION : < Channel Description struct >>
+				{ 0 | 1 < TIMING_ADVANCE_VALUE : bit (8) > }
+				< NETWORK_RESPONSE_TIMES : < Network Response Times struct >>
+				< padding bits >					-- truncation at end of message allowed, bits '0' assumed
+				! < Non-distribution part error : bit (*) = < no string > > }
+			! < Message escape : 1 bit (*) = <no string> > }
+		! < Address information part error : bit (*) = < no string > > }
+	! < Distribution part error : bit (*) = < no string > > ;
+
+< Channel Description struct > ::=
+	< CHANNEL_TYPE : bit (6) >
+	< DOWNLINK_TIMESLOT_ALLOCATION : bit (8) >
+	{ 0 															-- Symmetric uplink and downlink timeslot allocation
+	| 1 	< UPLINK_TIMESLOT_ALLOCATION : bit (8) > } -- Asymmetric uplink and downlink timeslot allocation
+	{ 0 | 1 	< USF : bit (3) >
+			< USF_GRANULARITY : bit (1) > }
+	< POWER_COMMAND : < Power Command struct > >
+	{ 0 | 1	< CHANNEL_MODE : bit (8) > }
+	< TSC : bit (3) >
+	{ 0	< MAIO : bit (6) >
+		< HSN : bit (6) >
+	| 1	< ARFCN : bit (10) > } ;
+
+< Network Response Times struct > ::=
+	{ 0	-- Network's response times on SDCCH
+		< RESPONSE_TIME_SDCCH : < Response Time SDCCH struct > > 
+	| 1	-- Network's reponse times on the assigned DBPSCH
+		< RESPONSE_TIME_SACCH : < Response Time SACCH struct >>	-- Network's response time on SACCH
+		{ 0	-- Network's response time on FACCH/F
+			-- i.e. between a request sent on TCH/F or FACCH/F and the corresponding response sent on FACCH/F
+			< RESPONSE_TIME_FACCH_F : < Response Time struct >>
+		| 1	< RESPONSE_TIME_FACCH_H : < Response Time struct >>}};	-- Network's reponse time on FACCH/H
+
+< Response Time SDCCH struct > ::=
+	< TRMIN_SDCCH : bit (1) >		-- Network's minimum response time on SDCCH
+	< TRESP_SDCCH: bit (1) >;		-- Network's maximum response time on SDCCH
+
+< Response Time SACCH struct > ::=
+	< TRMIN_SACCH : bit (1) >		-- Network's minimum response time on SACCH
+	< TRESP_SACCH: bit (1) >;		-- Network's maximum response time on SACCH
+
+< Response Time struct > ::=
+	< TRMIN : bit (6) >
+	< TRESP_MAC_DTM : bit (7) >
+	< TRESP_MAC_Dedicated : bit (7) >;
+
+< Power Command struct > ::=		-- Provides the power level to be used by the mobile station
+	{ 0									-- Normal power control
+	| 1	< FPC_EPC : bit (1) > }		-- Fast or Enhanced Power Control
+	< POWER_LEVEL : bit (8) >;
+

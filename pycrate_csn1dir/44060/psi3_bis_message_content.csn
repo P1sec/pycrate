@@ -1,0 +1,168 @@
+-- TS 44.060 - d60
+-- 11.2.21 Packet System Information Type 3 bis
+-- PSI3 bis message content
+
+< PSI3 bis message content > ::=
+	< PAGE_MODE : bit (2) >
+	< PSI3_CHANGE_MARK : bit (2) >
+	< PSI3_BIS_INDEX : bit (4) >
+	< PSI3_BIS_COUNT : bit (4) >
+	{	< Neighbour cell parameters : { 1 < Neighbour cell params struct > } ** 0 >
+		< Neighbour Cell parameters 2 : { 1 < Neighbour Cell params 2 struct > } ** 0 >
+		{	null | 0	bit** = < no string >
+			| 1													-- Release 1998 additions:
+			{ 0 | 1 < LSA Parameters : < LSA Parameters IE >> }
+			{	null | 0	bit** = < no string >
+				| 1													-- Release 1999 additions:
+				< COMPACT Neighbour Cell Parameters : { 1 < COMPACT Neighbour Cell params 2 struct > } ** 0 >
+				0					-- The value '1' was used in an earlier version of the protocol and shall not be used.
+				{	null | 0	bit** = < no string >
+					| 1														-- Rel-4 additions:
+					{ 0 | 1 < CCN Support Description : < CCN Support Description struct >> }
+					{	null | 0	bit** = < no string >
+						| 1														-- Rel-5 additions:
+						< Iu Mode Neighbour Cell Parameters : { 1 < Iu Mode Neighbour Cell params struct > } ** 0 >												--Supplementary information for dual Iu mode and A/Gb mode capable cells
+						< Iu mode Only Neighbour Cell Parameters : 
+							{ 1 < Iu mode Only Neighbour Cell params struct > } ** 0 >
+						< padding bits > }
+				}
+			}
+		}
+	} //				-- truncation at end of message allowed, bits '0' assumed
+	! < Distribution part error : bit (*) = < no string > > ;
+
+< Neighbour cell params struct > ::=
+	< START_FREQUENCY : bit (10) >
+	< Cell selection params : < Cell Selection struct > >
+	< NR_OF_REMAINING_CELLS : bit (4) >
+	< FREQ_DIFF_LENGTH : bit (3) >
+	{	< FREQUENCY_DIFF : bit (1 + val(FREQ_DIFF_LENGTH)) >
+		< Cell selection params : < Cell Selection struct > > } * (val(NR_OF_REMAINING_CELLS)) ;
+
+< Cell Selection struct > ::=
+	< BSIC : bit (6) >
+	< CELL_BAR_ACCESS_2 : bit >
+	< EXC_ACC : bit >
+	< SAME_RA_AS_SERVING_CELL : bit (1) >
+	{ 0 | 1	< GPRS_RXLEV_ACCESS_MIN : bit (6) >
+			< GPRS_MS_TXPWR_MAX_CCH : bit (5) > }
+	{ 0 | 1	< GPRS_TEMPORARY_OFFSET : bit (3) >
+			< GPRS_PENALTY_TIME : bit (5) > }
+	{ 0 | 1	< GPRS_RESELECT_OFFSET : bit (5) > }
+	{ 0 | 1	< HCS params : < HCS struct > > }
+	{ 0 | 1	< SI13_PBCCH_LOCATION : < SI13_PBCCH_LOCATION struct > > } ;
+
+< SI13_PBCCH_LOCATION struct > ::=
+	{	0	< SI13_LOCATION : bit (1) >
+		| 1	< PBCCH_LOCATION : bit (2) >
+		< PSI1_REPEAT_PERIOD : bit (4) > } ;
+
+< HCS struct > ::=
+	< PRIORITY_CLASS : bit (3) >
+	< HCS_THR : bit (5) > ;
+
+< Neighbour Cell params 2 struct > ::=
+	{	00				-- Message escape
+		{ 1	< NCP2 Repeat struct >
+			< CELL_PARAMS_POINTER : bit (2) > } ** 0			--Up to four pointers to the 'Neigbour parameter set
+		< Neighbour parameter set : < Neighbour parameter set struct > > * (1 + max(val(CELL_PARAMS_POINTER)))
+	!	< Message escape: { 01 | 10 | 11 } bit** = < no string >> } ;		-- Reserved for future use
+
+< NCP2 Repeat struct > ::=
+	{ 1	< START_FREQUENCY : bit (10) >			-- Multiple START FREQ/FREQ DIFF sets may be defined
+		< NCP2 Property struct >
+		{	< NR_OF_REMAINING_CELLS : { bit (4) exclude 0000 } >
+			< FREQ_DIFF_LENGTH : bit (3) >
+			{	< FREQUENCY_DIFF : bit (1 + val(FREQ_DIFF_LENGTH)) >
+				< NCP2 Property struct > } * (val(NR_OF_REMAINING_CELLS))
+			< NCP2 Repeat struct >						-- Repeated recursively
+		| 0000 }										-- Break recursion (NR_OF_REMAINING_CELLS == 0)
+	| 0 } ;												-- End recursion (no more START_FREQUENCY)
+
+< NCP2 Property struct > ::=
+	< SAME_RA_AS_SERVING_CELL : bit (1) >
+	< CELL_BAR_ACCESS_2 : bit >
+	< BCC : bit (3) > ;
+
+< Neighbour parameter set struct > ::=
+	{ 0 | 1 < NCC : bit (3) > }
+	< EXC_ACC : bit >
+	{ 0 | 1 < GPRS_RXLEV_ACCESS_MIN : bit (6) > }
+	{ 0 | 1 < GPRS_MS_TXPWR_MAX_CCH : bit (5) > }
+	{ 0 | 1 < PRIORITY_CLASS : bit (3) > }
+	{ 0 | 1 < HCS_THR : bit (5) >}
+	{ 0 | 1 < SI13_PBCCH_LOCATION : < SI13_PBCCH_LOCATION struct > > }
+	< GPRS_TEMPORARY_OFFSET : bit (3) >
+	< GPRS_PENALTY_TIME : bit (5) >
+	< GPRS_RESELECT_OFFSET : bit (5) > ;
+
+< COMPACT Neighbour Cell params 2 struct > ::=
+	{ 00				-- Message escape
+		{ 1	< COMPACT NCP2 Repeat struct >
+			< CELL_PARAMS_POINTER : bit (2) > } ** 0		-- Up to four pointers to the 'C Neighbour parameter set' 
+		< COMPACT Neighbour parameter set : 
+		  <COMPACT Neighbour parameter set struct > > * (1+ max(val(CELL_PARAMS_POINTER)))
+	!	< Message escape: { 01 | 10 | 11 } bit** = < no string >> } ;		-- Reserved for future use
+
+< COMPACT NCP2 Repeat struct > ::=
+	{ 1	< START_FREQUENCY : bit (10) >			-- Multiple START FREQ/FREQ DIFF sets may be defined
+		< COMPACT NCP2 Property struct >
+		{	< NR_OF_REMAINING_CELLS : { bit (4) exclude 0000 } >
+			< FREQ_DIFF_LENGTH : bit (3) >
+			{	< FREQUENCY_DIFF : bit (1 + val(FREQ_DIFF_LENGTH)) >
+				< COMPACT NCP2 Property struct > } * (val(NR_OF_REMAINING_CELLS))
+			< COMPACT NCP2 Repeat struct >		-- Repeated recursively
+		| 0000 }								-- Break recursion (NR_OF_REMAINING_CELLS == 0)
+	| 0 } ;										-- End recursion (no more START_FREQUENCY)
+
+< COMPACT NCP2 Property struct > ::=
+	< SAME_RA_AS_SERVING_CELL : bit (1) >
+	< CELL_BAR_ACCESS_2 : bit >
+	< BCC : bit (3) > 
+	{ 0 | 1 < TIME_GROUP : bit (2) > };
+
+< COMPACT Neighbour parameter set struct > ::=
+	{ 0 | 1 < NCC : bit (3) > }
+	< EXC_ACC : bit >
+	{ 0 | 1 < GPRS_RXLEV_ACCESS_MIN : bit (6) > }
+	{ 0 | 1 < GPRS_MS_TXPWR_MAX_CCH : bit (5) > }
+	{ 0 | 1 < GPRS_PRIORITY_CLASS : bit (3) > }
+	{ 0 | 1 < GPRS_HCS_THR : bit (5) > }
+	< GPRS_TEMPORARY_OFFSET : bit (3) >
+	< GPRS_PENALTY_TIME : bit (5) >
+	< GPRS_RESELECT_OFFSET : bit (5) >
+	{ 0 | 1 < GUAR_CONSTANT_PWR_BLKS : bit (2) > } ;
+
+< CCN Support Description struct > ::=
+    < Number_Cells : bit (7) >
+    < CCN_SUPPORTED : bit > * (val(Number_Cells)) ;
+
+< Iu mode neighbour cell params struct > ::=
+	< NR_OF_REMAINING_CELLS : bit (4) >
+	{ 0 | 1 < Iu Mode Cell Selection Params : <Iu Mode Cell Selection struct >> } * (val(NR_OF_REMAINING_CELLS));
+
+< Iu Mode Cell Selection struct > ::=
+	< CELL BAR QUALIFY 3 : bit (2) >	
+	{ 0 | 1	< SI13Alt PBCCH Location: < SI13 PBCCH Location struct > > };
+
+< Iu mode Only Neighbour Cell params struct > ::=
+	< START_FREQUENCY : bit (10) >
+	< Iu mode Only Cell selection params : < Iu mode Only Cell Selection struct > >
+	< NR_OF_REMAINING_CELLS : bit (4) >
+	< FREQ_DIFF_LENGTH : bit (3) >
+	{	< FREQUENCY_DIFF : bit (1 + val(FREQ_DIFF_LENGTH)) >
+		< Iu mode Only Cell Selection params : 
+			< Iu mode Only Cell Selection struct > > } * (val(NR_OF_REMAINING_CELLS));
+
+< Iu Mode Only Cell Selection struct > ::=
+	< BSIC : bit (6) >
+	< CELL BAR QUALIFY 3 : bit (2) >
+	< SAME_RA_AS_SERVING_CELL : bit (1) >
+	{ 0 | 1	< GPRS_RXLEV_ACCESS_MIN : bit (6) >
+			< GPRS_MS_TXPWR_MAX_CCH : bit (5) > }
+	{ 0 | 1	< GPRS_TEMPORARY_OFFSET : bit (3) >
+			< GPRS_PENALTY_TIME : bit (5) > }
+	{ 0 | 1	< GPRS_RESELECT_OFFSET : bit (5) > }
+	{ 0 | 1	< HCS params : < HCS struct > > }
+	{ 0 | 1	< SI13Alt PBCCH Location : < SI13 PBCCH Location struct > > };
+

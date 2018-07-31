@@ -1,0 +1,19 @@
+-- TS 44.060 - d60
+-- 11.2.6f EGPRS Packet Downlink Ack/Nack Type 3
+-- EGPRS Packet Downlink Ack/Nack Type 3 message content
+
+< EGPRS Packet Downlink Ack/Nack Type 3 message content > ::=
+		< DOWNLINK_TFI : bit (5) >
+		< MS OUT OF MEMORY : bit(1)>
+		{ 0 | 1	< EGPRS Channel Quality Report : < EGPRS Channel Quality Report Type 2 IE > >}
+		{ 0 | 1 < Secondary Dual Carrier Channel Report : < EGPRS Channel Quality Report Type 2 IE > >} 
+		{ 
+			{ 0 | 1	< Extension Bits : Extension Bits IE > }				-- sub-clause 12.26
+			-- Truncation of the EGPRS Ack/Nack Description is allowed
+			-- if the available space in the message without EGPRS Ack/Nack Description IE
+			-- does not allow for the inclusion of a valid EGPRS Ack/Nack Description IE, i.e. is less than 16 bits.
+			-- In these conditions, the receiver shall assume that no EGPRS Ack/Nack description IE is included.
+			< EGPRS Ack/Nack Description : < EGPRS Ack/Nack Description IE >>
+		} //		-- Truncation allowed (specific conditions apply for the EGPRS Ack/Nack Description - see above)
+		<padding bits > ;
+

@@ -1,0 +1,8 @@
+-- TS 44.060 - d60
+-- 12.54 3G CSG Description
+-- 3G CSG Description IE
+
+< 3G CSG Description IE > ::= 
+	{ 1	< CSG_PSC_SPLIT : < PSC Group IE >>
+			{ 1	< UTRAN_FREQUENCY_INDEX : bit (5) > } ** 0 } ** 0 ;
+

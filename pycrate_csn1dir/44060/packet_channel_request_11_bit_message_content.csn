@@ -1,0 +1,39 @@
+-- TS 44.060 - d60
+-- 11.2.5 Packet Channel Request
+-- Packet channel request 11 bit message content
+
+< Packet channel request 11 bit message content > ::=
+	< One Phase Access Request :	0	< MultislotClass : bit (5) >
+			< Priority : bit (2) >
+			< RandomBits : bit (3) > >
+	| < Short Access Request :	100	-- The value 100 was allocated in an earlier version of the protocol and shall not be used by the mobile station 
+			< NumberOfBlocks : bit (3) >
+			< Priority : bit (2) >
+			< RandomBits : bit (3) > >
+	| < Two Phase Access Request :	110000	< Priority : bit (2) > 
+			< RandomBits : bit (3) > >
+	| < Page Response :	110001	< RandomBits : bit (5) > >
+	| < Cell Update :	110010	< RandomBits : bit (5) > >
+	| < MM Procedure :	110011	< RandomBits : bit (5) > >
+	| < Single Block Without TBF Establishment :	110100	< RandomBits : bit (5) > >
+	| < One Phase Access Request in RLC unack mode :	110101	< RandomBits : bit (5) > >
+	| < Dedicated channel request :	110110	< RandomBits : bit (5) > >
+	| < Emergency call :	110111	< RandomBits : bit (5) > > 
+	| < Single block MBMS access :	111000	< RandomBits : bit (5) > > ;
+
+< Packet channel request 8 bit message content > ::=
+	< One Phase Access Request :	1	< MultislotClass : bit (5) >
+			< RandomBits : bit (2) > >
+	| < Short Access Request :	00	-- The value 00 was allocated in an earlier version of the protocol and shall not be used by the mobile station 
+			< NumberOfBlocks : bit (3) >
+			< RandomBits : bit (3) > >
+	| < Two Phase Access Request :	01000	< RandomBits : bit (3) > >
+	| < Page Response :	01001	< RandomBits : bit (3) > >
+	| < Cell Update :	01010	< RandomBits : bit (3) > >
+	| < MM Procedure :	01011	< RandomBits : bit (3) > >
+	| < Single Block Without TBF Establishment :	01100	< RandomBits : bit (3) > > 
+	| < One phase Access Request in RLC unack mode :	011010	< RandomBits : bit (2) > >
+	| < Dedicated channel request :	011011	< RandomBits : bit (2) > >
+	| < Emergency call :	011100	< RandomBits : bit (2) > > 
+	| < Single block MBMS access :	01111	< RandomBits : bit (3) > >;
+

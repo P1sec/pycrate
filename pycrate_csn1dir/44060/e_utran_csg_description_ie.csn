@@ -1,0 +1,8 @@
+-- TS 44.060 - d60
+-- 12.55 E-UTRAN CSG Description
+-- E-UTRAN CSG Description IE
+
+< E-UTRAN CSG Description IE > ::=
+	{ 1	< CSG_PCI_SPLIT : < PCID Group IE >>
+			{ 1	< E-UTRAN_FREQUENCY_INDEX : bit (3) > } ** 0 } ** 0 ;
+

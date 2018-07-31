@@ -1,0 +1,8 @@
+-- TS 44.060 - d60
+-- 12.26 Extension Bits IE
+-- Extension Bits IE
+
+< Extension Bits IE > ::=
+	< extension length : bit (6) >
+	< spare : bit (val(extension length)+1) > ;
+

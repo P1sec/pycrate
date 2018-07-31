@@ -1,0 +1,65 @@
+-- TS 44.060 - d60
+-- 11.2.40 MBMS Neighbouring Cell Information
+-- MBMS Neighbouring Cell Information message content
+
+< MBMS Neighbouring Cell Information message content > ::=
+	< PAGE_MODE : bit (2) > 
+	{ 1		< NEIGHBOUR_CELL_INDEX : bit (7) >
+			{ 0 | 1 < BSIC : bit (6) > }
+			< MBMS_PTM_CHANGE_MARK : bit (2) >
+			{ 1
+				< Length of MBMS Bearer Identity : bit (3) >
+				< MBMS Bearer Identity : bit (val (Length of MBMS Bearer Identity)) >
+				< Absence cause: bit (2) >
+			} ** 0	-- End of list of MBMS bearers for which no p-t-m channel description is given in the neighbour cell
+		{ 1	< MBMS Frequency List : < MBMS Frequency List struct > > } **0
+		{ 1	< MBMS p-t-m Frequency Parameters : < MBMS p-t-m Frequency Parameters struct > >
+			< DOWNLINK_TIMESLOT_ALLOCATION : bit (8) >			-- default value 
+			{ 1	< Length of Serving MBMS Bearer Identity : bit (3) >
+				< Serving MBMS Bearer Identity : bit (val (Length of Serving MBMS Bearer Identity)) >
+				< Length of Neighbour MBMS Bearer Identity : bit (3) >
+				< Neighbour MBMS Bearer Identity : bit (val (Length of Neighbour MBMS Bearer Identity)) >
+				{ 0 | 1 < EGPRS Window Size : < EGPRS Window Size IE >> }
+				{ 0 | 1	< DOWNLINK_TIMESLOT_ALLOCATION : bit (8) >	}		-- specific value
+				{ 0 | 1	< TIMESLOT_ALLOCATION_UPLINK_FEEDBACK_CHANNEL : bit (3) >	 }
+				{ 0 | 1 < MBMS Radio Bearer Starting Time : < bit (16) > > }
+				< MBMS In-band Signalling Indicator : < MBMS In-band Signalling Indicator IE > >
+				{ 0 | 1 < NPM Transfer Time : bit (5) > }
+			} ** 0	-- End of list of MBMS bearer descriptions sharing the same PDCH (frequency parameters)
+		} ** 0		-- End of list of PDCHs for this cell
+		{ 0 | 1 < PBCCH information : < PBCCH information struct > > }	
+	} ** 0		-- End of list of neighbouring cells
+	{ null | 0 	bit** = < no string >	-- Receiver compatible with earlier release
+	| 1									-- Rel-7 additions
+		{ 1	{ 0 | 1 < USF : bit (3) > 	-- choice bit indicates presence or not of parameters for the MBMS bearer
+			{ 0 | 1	< MPRACH Control Parameters : < MPRACH Control Parameters IE > > } 
+			}
+		} ** 0			-- End of list of MBMS bearers. 
+					-- The list of MBMS bearers is ordered as described by the loops in the earlier releases part.
+	}
+	< padding bits >
+    ! < Distribution part error : bit (*) = < no string > > ;
+
+< PBCCH information struct > ::=
+	< Pb : bit (4) >
+	< TSC : bit (3) > 
+	< TN : bit (3) >
+	{ 00							-- non-hopping PBCCH on BCCH carrier
+	| 01	< ARFCN : bit (10) > 	-- non-hopping PBCCH 
+			| 1						-- hopping PBCCH, frequency parameters from an MBMS bearer description for this cell
+			 	< Length of Neighbour MBMS Bearer Identity : bit (3) >
+			 	< Neighbour MBMS Bearer Identity : bit (val (Length of Neighbour MBMS Bearer Identity)) > 
+	} ;
+
+< MBMS Frequency List struct > ::=
+	< FREQ_LIST_NUMBER : bit (2) >
+	< Length of Frequency List contents : bit (4) >
+	< Frequency List contents : octet (val(Length of Frequency List contents) + 3) > ;
+
+< MBMS p-t-m Frequency Parameters struct > ::=
+	< TSC : bit (3) >
+	{ 0	< ARFCN : bit (10) >						 
+	| 1	< MAIO : bit (6) >
+		< HSN : bit (6) >
+		< FREQ_LIST_NUMBER : bit (2) > } ;
+

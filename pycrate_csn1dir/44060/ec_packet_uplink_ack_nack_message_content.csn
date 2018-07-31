@@ -1,0 +1,42 @@
+-- TS 44.060 - d60
+-- 11.2.57 EC Packet Uplink Ack/Nack
+-- EC Packet Uplink Ack/Nack message content
+
+< EC Packet Uplink Ack/Nack message content > ::=
+	< USED_DL_COVERAGE_CLASS : < Used DL Coverage Class IE >>
+	{	< UPLINK_TFI : bit (5) >
+		{	0 {		-- Final Ack Indicator = 0
+				{ 00	< EC Ack/Nack Description : < EC Ack/Nack Description IE >>
+				 | 01	{	< CONTENTION_RESOLUTION_TLLI : bit (32) >
+							< EC Primary Ack/Nack Description : < EC Primary Ack/Nack Description IE >> }
+				 | 10	{	< CONTENTION_RESOLUTION_rTLLI : bit (4) >
+							< EC Primary Ack/Nack Description : < EC Primary Ack/Nack Description IE >> } }
+				< PUAN Fixed Uplink Allocation : < PUAN Fixed Uplink Allocation struct > >
+				< RESEGMENT : bit (1) >
+				{ 0 | 1	< EGPRS Channel Coding Command : < EGPRS Modulation and Coding Scheme IE >> }
+				{ 0 | 1	< UL_COVERAGE_CLASS : bit (2) >
+						< STARTING_UL_TIMESLOT : bit (3) >
+						< DL_COVERAGE_CLASS : bit (2) >
+						< STARTING_DL_TIMESLOT_OFFSET : bit (2) >
+						< TIMESLOT_MULTIPLICATOR : bit (3) > } }
+	 		| 1 {																			-- Final Ack Indicator = 1
+				{ 0
+				 | 1 < CONTENTION_RESOLUTION_TLLI : bit (32) > }
+	 			{ 0	 							 			-- the mobile station shall not continue monitoring the EC-PACCH
+	 			| 1	{	< T3238 : bit (3) >					-- the mobile station shall continue monitoring the EC-PACCH
+	 					< Initial Waiting Time : bit (2) >
+	 					< EC-PACCH Monitoring Pattern : bit (2) > } } }
+			{ 0 | 1	< EC Packet Timing Advance : < EC Packet Timing Advance IE > > }
+			{ 0 | 1	< GAMMA : bit (5) > 
+					< ALPHA Enable : bit (1) > }
+			< padding bits >
+			! < Non-distribution part error : bit (*) = <no string> > }
+		! < Address information part error : bit (*) = <no string> > }
+	! < Distribution part error : bit (*) = <no string> > ;
+
+< PUAN Fixed Uplink Allocation struct > ::= 
+	{ 0 | 1 < BSN_OFFSET : bit (2) > }
+	< START_FIRST_UL_RLC_DATA_BLOCK : bit (4) >
+	 { 1	{	0	< DELAY_NEXT_UL_RLC_DATA_BLOCK : bit (3) >	-- delay until start of next UL RLC Data block
+			| 1 } } ** 0;	-- next UL RLC Data block starts at first possible occasion after previous UL RLC Data block
+

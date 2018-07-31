@@ -1,0 +1,40 @@
+-- TS 44.060 - d60
+-- 11.2.1 Packet Access Reject
+-- Packet Access Reject message content
+
+< Packet Access Reject message content > ::=
+	< PAGE_MODE : bit (2) >
+	< Reject : < Reject struct > >
+	{   { 1 < Additional Reject: < Reject struct > > } ** 0
+	    { null	 | 0 	bit **	= < no string >	-- Receiver compatible with earlier releases
+			     | 1 			-- Additions in release 5
+			    { 1 < Iu mode Reject: < Iu mode Reject struct > > } ** 0
+			    { null | 0 bit **	= < no string >	-- Receiver compatible with earlier releases
+				     | 1 			-- Additions in release 6
+				    { 1 < A/Gb mode Reject: < A/Gb mode Reject struct > > } ** 0
+				}
+	    < padding bits >
+	    }
+	} //										-- truncation at end of message allowed, bits '0' assumed
+	! < Distribution part error : bit (*) = < no string > > ;
+
+< Reject struct > ::=
+	{ 0	< TLLI / G-RNTI : bit (32) >
+	| 1	{ 0	< Packet Request Reference : < Packet Request Reference IE > >
+		| 1	< Global TFI : < Global TFI IE > > } 
+	}
+	{ 0 | 1	< WAIT_INDICATION : bit (8) >
+			< WAIT _INDICATION_SIZE : bit (1) >
+	}
+	! < Ignore : bit (*) = <no string> > ;
+
+< Iu mode Reject struct > ::=
+	< G-RNTI_extension : bit (4) >
+	--{	0			-- all TBF requests for the MS identified by the G-RNTI in the corresponding Reject structare rejected
+	--| { 1 < RB Id : bit(5) > } ** 0 } ;	-- TBF requests for these RB Ids are rejected
+	 { 1 < RB Id : bit(5) > } ** 0 ;
+
+< A/Gb mode Reject struct > ::=
+	--{	0			-- all TBF requests for the MS identified by the TLLI in the corresponding Reject struct are rejected
+	--| { 1 < PFI : bit (7) > } ** 0 } ;	-- TBF requests for these PFIs are rejected
+    { 1 < PFI : bit (7) > } ** 0 ;

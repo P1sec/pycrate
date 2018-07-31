@@ -1,0 +1,15 @@
+-- TS 44.060 - d60
+-- 11.2.36 Packet CS Command
+-- Packet CS Command message content
+
+< Packet CS Command message content > ::=
+	< PAGE_MODE : bit (2) >
+	{	< GLOBAL_TFI : < Global TFI IE > >
+		{	< spare : bit (2) >
+			< CONTAINER_LENGTH : bit (8) >
+			< CONTAINER_DATA : octet ** >
+			< padding bits >
+			! < Non-distribution part error : bit (*) = < no string > > }
+		! < Address information part error : bit (*) = < no string > > }
+	! < Distribution part error : bit (*) = < no string > > ;
+

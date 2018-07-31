@@ -1,0 +1,9 @@
+-- TS 44.060 - d60
+-- 12.43 NAS Container for PS Handover
+-- NAS Container for PS Handover IE
+
+< NAS Container for PS Handover IE > ::=
+	< NAS_CONTAINER_LENGTH : bit (7) >
+    < NAS_CONTAINER_DATA : octet (val(NAS_CONTAINER_LENGTH)) >
+    < padding bits > ;	
+

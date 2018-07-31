@@ -1,0 +1,10 @@
+-- TS 44.060 - d60
+-- 12.75 EC Channel Quality Report
+-- EC Channel Quality Report IE
+
+< EC Channel Quality Report IE> ::=
+	{ 0 | 1	< GMSK_MEAN_BEP : bit (5) >
+			< GMSK_CV_BEP : bit (3) > }
+	{ 0 | 1	< 8PSK_MEAN_BEP : bit (5) >
+			< 8PSK_CV_BEP : bit (3) > };
+

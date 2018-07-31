@@ -1,0 +1,8 @@
+-- TS 44.018 - d80
+-- 10.5.2.61 Restriction Timer
+-- Restriction Timer value part
+
+< Restriction Timer value part > ::=
+	< RESTRICTION_TIMER : bit (4) >
+	< spare bit >**;
+

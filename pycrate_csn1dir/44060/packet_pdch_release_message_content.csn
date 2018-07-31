@@ -1,0 +1,10 @@
+-- TS 44.060 - d60
+-- 11.2.11 Packet PDCH Release
+-- Packet PDCH Release message content
+
+< Packet PDCH Release message content > ::=
+	< PAGE_MODE : bit (2) >
+	{ 1 < TIMESLOTS_AVAILABLE : bit (8) > }
+	< padding bits >
+	! < Distribution part error : bit (*) = < no string > > ;
+

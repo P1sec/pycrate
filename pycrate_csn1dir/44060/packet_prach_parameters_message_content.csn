@@ -1,0 +1,10 @@
+-- TS 44.060 - d60
+-- 11.2.14 Packet PRACH Parameters
+-- Packet PRACH Parameters message content
+
+< Packet PRACH Parameters message content > ::=
+	< PAGE_MODE : bit (2) >
+	< PRACH Control Parameters : < PRACH Control Parameters IE > >
+	< padding bits >
+	! < Distribution part error : bit (*) = < no string > > ;
+

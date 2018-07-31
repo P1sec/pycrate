@@ -1,0 +1,6 @@
+-- TS 44.060 - d60
+-- 12.71 Used DL Coverage Class
+-- Used DL Coverage Class IE
+
+< Used DL Coverage Class IE > ::= bit (2) ;
+

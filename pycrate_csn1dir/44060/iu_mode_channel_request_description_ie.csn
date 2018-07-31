@@ -1,0 +1,17 @@
+-- TS 44.060 - d60
+-- 12.7a Iu mode Channel Request Description
+-- Iu mode Channel Request Description IE
+
+< Iu mode Channel Request Description IE > ::=
+	< RB Id : bit (5) >
+	< RADIO_PRIORITY : bit (2) >
+	{ 0 | 1 < RLC_BLOCK_COUNT : bit (8) > }
+	{ 0 | 1 < Iu mode Channel Request Description IE > } ;	-- IE to be repeated only when 
+
+< Extended Channel Request Description IE > ::=
+	< PFI : bit (7) >
+	< RADIO_PRIORITY : bit (2) >
+	< RLC_MODE : bit (1) >
+	{ 0 | 1 < LLC_ PDU_TYPE : bit (1) > }
+	{ 0 | 1 < Extended Channel Request Description IE > } ;	-- IE to be repeated only when needed and 
+

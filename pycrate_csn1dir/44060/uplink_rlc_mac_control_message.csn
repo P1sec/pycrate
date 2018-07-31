@@ -1,0 +1,30 @@
+-- TS 44.060 - d60
+-- 11.2.0.2 Uplink RLC/MAC messages
+-- Uplink RLC/MAC control message
+
+< Uplink RLC/MAC control message > ::=
+	< MESSAGE_TYPE : bit (6) == 000000 >	< Packet Cell Change Failure message content > |
+	< MESSAGE_TYPE : bit (6) == 000001 >	< Packet Control Acknowledgement message content > |
+	< MESSAGE_TYPE : bit (6) == 000010 >	< Packet Downlink Ack/Nack message content > |	-- PACCH only
+	< MESSAGE_TYPE : bit (6) == 000011 >	< Packet Uplink Dummy Control Block message content > |
+	< MESSAGE_TYPE : bit (6) == 000100 >	< Packet Measurement Report message content > |
+	< MESSAGE_TYPE : bit (6) == 001010 >	< Packet Enhanced Measurement Report message content > |
+	< MESSAGE_TYPE : bit (6) == 000101 >	< Packet Resource Request message content > |
+	< MESSAGE_TYPE : bit (6) == 000110 >	< Packet Mobile TBF Status message content > |
+	< MESSAGE_TYPE : bit (6) == 000111 >	< Packet PSI Status message content > |
+	< MESSAGE_TYPE : bit (6) == 001000 >	< EGPRS Packet Downlink Ack/Nack message content > |
+	< MESSAGE_TYPE : bit (6) == 010001 >	< EGPRS Packet Downlink Ack/Nack Type 2 message content > |
+	< MESSAGE_TYPE : bit (6) == 010010 >	< EGPRS Packet Downlink Ack/Nack Type 3 message content > |
+	< MESSAGE_TYPE : bit (6) == 001001 >	< Packet Pause message content > |
+	< MESSAGE_TYPE : bit (6) == 001011 >	< Additional MS Radio Access Capabilities message content > |
+	< MESSAGE_TYPE : bit (6) == 001100 >	< Packet Cell Change Notification message content > |
+	< MESSAGE_TYPE : bit (6) == 001101 >	< Packet SI Status message content > |
+	< MESSAGE_TYPE : bit (6) == 001110 >	< Packet CS Request message content > |
+	< MESSAGE_TYPE : bit (6) == 001111 >	< MBMS Service Request message content > |
+ 	< MESSAGE_TYPE : bit (6) == 010000 >	< MBMS Downlink Ack/Nack message content > |
+ 	< MESSAGE_TYPE : bit (6) == 010011 >	< EGPRS Packet Downlink Ack/Nack DLMC message content >;
+
+< Uplink RLC/MAC control message on EC-PACCH > ::=
+	< MESSAGE_TYPE : bit (5) == 00001 >	< EC Packet Control Acknowledgement message content > |
+	< MESSAGE_TYPE : bit (5) == 00010 >	< EC Packet Downlink Ack/Nack message content >;
+

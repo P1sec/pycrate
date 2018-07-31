@@ -1,0 +1,11 @@
+-- TS 44.060 - d60
+-- 12.7 Channel Request Description
+-- Channel Request Description IE
+
+< Channel Request Description IE > ::=
+	< PEAK_THROUGHPUT_CLASS : bit (4) >
+	< RADIO_PRIORITY : bit (2) >
+	< RLC_MODE : bit (1) >
+	< LLC_ PDU_TYPE : bit (1) >
+	< RLC_OCTET_COUNT : bit (16) > ;
+

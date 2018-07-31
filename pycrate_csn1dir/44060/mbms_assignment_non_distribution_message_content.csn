@@ -1,0 +1,45 @@
+-- TS 44.060 - d60
+-- 11.2.39 MBMS Assignment (Non-distribution)
+-- MBMS Assignment Non-distribution message content
+
+< MBMS Assignment Non-distribution message content > ::=
+	< PAGE_MODE : bit (2) >
+	{	{ 0		< Global TFI : < Global TFI IE > >
+		| 10	< TLLI / G-RNTI : bit (32) > }
+		{	-- Non-distribution part
+			{ 0 | 1	< Length Indicator of MS_ID : bit (2) >
+					< MS_ID : bit (val (Length Indicator of MS_ID)+1) >
+					< Packet Timing Advance : < Packet Timing Advance IE > >
+					{ 0 | 1	< ALPHA : bit (4) > 
+							{ 0 | 1< GAMMA : bit (5) > } 
+					}
+			}
+			{ 0 | 1	< TMGI : < TMGI IE > > }
+			{ 0 | 1	< MBMS Session Identity : bit (8) > }
+			{ 00				-- Assignment reject. No point-to-multipoint channel is established for the MBMS session.
+				< Reject cause: bit (2) >
+				{ 0 | 1	< Estimated Session Duration : bit (8) > }
+			| 01				-- A point-to-multipoint channel is established or reassigned for the MBMS session.
+				< MBMS bearer description : < MBMS bearer description struct > > 
+				< Estimated Session Duration : bit (8) > 
+				< MBMS In-band Signalling Indicator : < MBMS In-band Signalling Indicator IE > >
+			| 10					-- The MBMS Bearer Identity is reassigned for the MBMS radio bearer.
+				{ 0 | 1 < MBMS Radio Bearer Starting Time : < bit (16) > > }
+				< Length of MBMS Bearer Identity : bit (3) >
+				< MBMS Bearer Identity : bit (val (Length of MBMS Bearer Identity)) >
+			! < Message escape : { 11} bit (*) = < no string > > } -- Extended for future changes
+			< padding bits > 
+			! < Non-distribution part error : bit (*) = < no string > > }
+		! < Address information part error : bit (*) = < no string > > }
+	! < Distribution part error : bit (*) = < no string > >;
+
+< MBMS bearer description struct > ::=
+	{ 0 | 1 < MBMS Radio Bearer Starting Time :  bit (16) > }
+	{ 0 | 1 < Frequency Parameters : < Frequency Parameters IE > > }
+	< DOWNLINK_TIMESLOT_ALLOCATION : bit (8) >
+	< Length of MBMS Bearer Identity : bit (3) >
+	< MBMS Bearer Identity : bit (val (Length of MBMS Bearer Identity)) >
+	{ 0 | 1 < EGPRS Window Size : < EGPRS Window Size IE > > }
+	{ 0 | 1 < TIMESLOT_ALLOCATION_UPLINK_FEEDBACK_CHANNEL : bit (3) > }
+	{ 0 | 1 < NPM Transfer Time : bit (5) > } ;
+

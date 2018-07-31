@@ -1,0 +1,9 @@
+-- TS 44.060 - d60
+-- 11.2.35 Packet CS Request
+-- Packet CS Request message content
+
+< Packet CS Request message content > ::=
+	< GLOBAL TFI : < Global TFI IE > >
+	< ESTABLISHMENT CAUSE : bit (8) >
+	< padding bits > ;
+

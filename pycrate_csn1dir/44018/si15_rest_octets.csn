@@ -1,0 +1,17 @@
+-- TS 44.018 - d80
+-- 10.5.2.37k SI 15 Rest Octets
+-- SI15 Rest Octets
+
+< SI15 Rest Octets > ::=
+	< SI15_INDEX : bit (2) >
+	< SI15_COUNT : bit (2) >
+	< DM_CHANGE_MARK : bit (4) >
+	< DYNAMIC ARFCN MAPPING Description : { 1 < DYNAMIC ARFCN MAPPING > } ** 0 >
+< spare padding > ;
+
+< DYNAMIC ARFCN MAPPING >::=
+	< GSM_Band : bit (4) >
+	< ARFCN_FIRST : bit (10) >								-- Dynamic ARFCN mapping parameters
+	< BAND_OFFSET: bit (10) >
+	< ARFCN_RANGE : bit (7) > ;
+

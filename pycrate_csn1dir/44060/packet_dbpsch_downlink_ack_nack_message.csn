@@ -1,0 +1,17 @@
+-- TS 44.060 - d60
+-- 11.2.6b Packet DBPSCH Downlink Ack/Nack
+-- Packet DBPSCH Downlink Ack/Nack message
+
+< Packet DBPSCH Downlink Ack/Nack message > ::=
+	< MESSAGE_TYPE : bit (6) == 000010 >
+	< RB Id : bit (5) >
+	{ 0	-- TCH TBF mode
+		{ 0 -- All data blocks acknowledged, no retransmission requested
+		| 1	< STARTING_SEQUENCE_NUMBER : bit (8) >
+			< RECEIVED_BLOCK_BITMAP : bit (128) > }
+	| 1	-- DCCH TBF mode
+		{ 0 -- All data blocks acknowledged, no retransmission requested
+		| 1	< STARTING_SEQUENCE_NUMBER : bit (4) >
+			< RECEIVED_BLOCK_BITMAP : bit (8) > } }
+	<padding bits > ;
+

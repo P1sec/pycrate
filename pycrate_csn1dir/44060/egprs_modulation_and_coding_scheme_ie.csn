@@ -1,0 +1,6 @@
+-- TS 44.060 - d60
+-- 12.10d EGPRS Modulation and coding Scheme description
+-- EGPRS Modulation and Coding Scheme IE
+
+< EGPRS Modulation and Coding Scheme IE > ::= bit (4) ;
+

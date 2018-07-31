@@ -1,0 +1,38 @@
+-- TS 44.060 - d60
+-- 11.2.6 Packet Downlink Ack/Nack
+-- Packet Downlink Ack/Nack message content
+
+< Packet Downlink Ack/Nack message content > ::=
+	< DOWNLINK_TFI : bit (5) >
+	< Ack/Nack Description : < Ack/Nack Description IE > >
+	{ 0 | 1 < Channel Request Description : < Channel Request Description IE > > }
+	< Channel Quality Report : < Channel Quality Report struct > >
+	{ null | 0 bit** = <no string> 					-- Receiver backward compatible with earlier version
+		| 1											-- Additional contents for Release 1999
+		{ 0 | 1 < PFI : bit(7) > }
+		{ null | 0 bit** = < no string > 	-- Receiver backward compatible with earlier version
+			| 1						-- Additions for REL-5
+			{ 0 | 1 < Iu mode Channel Request Description : < Iu mode Channel Request Description IE > > } 
+			{ 0 | 1 < RB Id : bit (5) > }
+			{ 0 | 1 < Timeslot Number : bit (3) > }
+			{ null | 0 bit** = <no string> 	-- Receiver backward compatible with earlier version
+			| 1								-- Additional contents for Release 6
+				{ 0 | 1	< Extended Channel Request Description : 	< Extended Channel Request Description IE > > } }
+				{ null | 0 bit** = <no string> 	-- Receiver backward compatible with earlier version
+					| 1							-- Additional contents for Release 7
+					< EARLY_TBF_ESTABLISHMENT : bit (1) > 
+	< padding bits > } } };
+
+< Channel Quality Report struct > ::=
+	< C_VALUE : bit (6) >
+	< RXQUAL : bit (3) >
+	< SIGN_VAR : bit (6) >
+	{ 0 | 1 < I_LEVEL_TN0 : bit (4) > }
+	{ 0 | 1 < I_LEVEL_TN1 : bit (4) > }
+	{ 0 | 1 < I_LEVEL_TN2 : bit (4) > }
+	{ 0 | 1 < I_LEVEL_TN3 : bit (4) > }
+	{ 0 | 1 < I_LEVEL_TN4 : bit (4) > }
+	{ 0 | 1 < I_LEVEL_TN5 : bit (4) > }
+	{ 0 | 1 < I_LEVEL_TN6 : bit (4) > }
+	{ 0 | 1 < I_LEVEL_TN7 : bit (4) > } ;
+

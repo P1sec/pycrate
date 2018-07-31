@@ -1,0 +1,15 @@
+-- TS 44.060 - d60
+-- 12.61 UTRAN CSG Measurement Report
+-- UTRAN CSG Measurement Report IE
+
+< UTRAN CSG Measurement Report IE > ::=
+	< UTRAN CGI : bit (28) >
+	{ 0	| 1	< PLMN-ID : < PLMN-ID struct > > }
+	< CSG-ID : bit (27) >
+	< Access Mode : bit (1) >
+	< REPORTING_QUANTITY : bit (6) > ;
+
+< PLMN-ID struct > ::=
+	< MCC : bit (12) >
+	< MNC : bit (12) > ;
+

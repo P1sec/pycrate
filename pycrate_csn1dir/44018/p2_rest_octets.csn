@@ -1,0 +1,51 @@
+-- TS 44.018 - d80
+-- 10.5.2.24 P2 Rest Octets
+-- P2 Rest Octets
+
+<P2 Rest Octets> ::=
+	{L | H <CN3: bit (2)>}
+	{L | H <NLN PCH : bit (2)> <NLN status PCH : bit>}
+	{L | H <Priority1 : Priority>}
+	{L | H <Priority2 : Priority>}
+	{L | H <Priority3 : Priority>}
+	< Packet Page Indication 3 : {L | H} >
+	{ null	| L				-- Receiver compatible with earlier release
+			| H	 			-- Additions in Release 6 :
+				{ 0	| 1	-- MBMS parameters included
+					{	0		-- MBMS pre-notification
+						| 1		-- MBMS notification
+							<MBMS Notification 3 : < MBMS Channel Parameters IE > > }
+					{ 0 | 1 < MBMS Information > }
+				}
+	}
+	{ null	| L				-- Receiver compatible with earlier release
+			| H				-- Additions in Release 10
+				< Implicit Reject CS : bit >
+				< Implicit Reject PS : bit >
+	} 
+	{	null		| L				-- Receiver compatible with earlier release
+		| H						-- Additions in Release 11
+			< IPA Support : bit >
+	} 
+	{	null		| L				-- Receiver compatible with earlier release
+		| H						-- Additions in Release 13
+			< PEO_BCCH_CHANGE_MARK : bit (2) >
+			< RCC : bit (3) >
+	} 
+
+	<spare padding>;
+
+<Priority> ::= <bit(3)>;
+
+<MBMS Information> ::=	
+	-- Pre-notifications
+	< MBMS Sessions List : < MBMS Sessions List IE > >
+	-- Notifications: listed per MBMS Channel Parameters
+	-- 1) Notifications with same MBMS Channel Parameters as in Notification 3
+	{	0	-- None
+		| 1	-- Same MBMS Channel Parameters as Notification 3
+			< MBMS Sessions List : < MBMS Sessions List IE > > }
+	-- 2) Notifications with specific MBMS Channels Parameters 
+	{ 	1	< MBMS Channel Parameters : < MBMS Channel Parameters IE > >
+			< MBMS Sessions List : < MBMS Sessions List IE > > } ** 0 ;
+

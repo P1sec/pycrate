@@ -1,0 +1,12 @@
+-- TS 44.018 - d80
+-- 10.5.2.18 IAX Rest Octets
+-- IAX Rest Octets
+
+<IAX Rest Octets> ::=
+		< Compressed_Inter_RAT_HO_INFO_IND : bit >
+		{	null		| L		-- Receiver compatible with earlier release
+			| H 				-- Additions in Release 13
+				< RCC : bit (3) >
+		}
+		<spare padding> ;
+

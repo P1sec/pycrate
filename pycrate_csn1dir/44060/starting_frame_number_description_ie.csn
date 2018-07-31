@@ -1,0 +1,8 @@
+-- TS 44.060 - d60
+-- 12.21 Starting Frame Number Description
+-- Starting Frame Number Description IE
+
+< Starting Frame Number Description IE > ::=
+	{ 0 < Absolute Frame Number Encoding : bit (16) >
+	| 1 < Relative Frame Number Encoding : bit (13) > } ;
+

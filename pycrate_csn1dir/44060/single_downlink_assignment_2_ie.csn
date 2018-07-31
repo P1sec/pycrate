@@ -1,0 +1,44 @@
+-- TS 44.060 - d60
+-- 12.48a.2 Single Downlink Assignment 2
+-- Single Downlink Assignment 2 IE
+
+< Single Downlink Assignment 2 IE > ::=
+	{ 0 | 1 < Downlink EGPRS Window Size : < EGPRS Window Size IE > > }
+	< LINK_QUALITY_MEASUREMENT_MODE : bit (2) >
+	< Downlink EGPRS Level: < EGPRS Level IE > >
+	{ 0 	-- Fast Ack/Nack Reporting is not activated for the downlink TBF; 
+	| 1		-- Fast Ack/Nack Reporting is activated for the downlink TBF
+		< EVENT_BASED_FANR: bit (1) > }
+	{ 0				-- BTTI mode
+		< TIMESLOT_ALLOCATION_C1 : bit (8) >
+		{ 0 | 1 < TIMESLOT_ALLOCATION_C2 : bit (8) > }
+	| 1				-- RTTI mode
+		{ 0					-- Single Carrier Assignment
+			{ 00				-- Default PDCH-pair configuration
+			| 01				-- Unchanged 
+			| 10				-- Explicit PDCH pair configuration
+				< DOWNLINK_PDCH_PAIRS_C1 : bit (8) > 
+				< UPLINK_PDCH_PAIRS_C1 : bit (8) >
+			! < PDCH pairs configuration error : { 1 1 } > < bit (*) = < no string > > 	-- reserved
+			}
+			< RTTI_DOWNLINK_PDCH_PAIR_ASSIGNMENT_SC : bit (4) >
+		| 1					-- Dual Carrier Assignment
+			{ 00				-- Default PDCH pair configuration
+			| 01				-- Unchanged
+			| 10				-- Explicit PDCH pair configuration
+				< DOWNLINK_PDCH_PAIRS_C1 : bit (8) >
+				< DOWNLINK_PDCH_PAIRS_C2 : bit (8) >
+				< UPLINK_PDCH_PAIRS_C1 : bit (8) >
+				< UPLINK_PDCH_PAIRS_C2 : bit (8) >
+			! < PDCH pairs configuration error : { 1 1 } > < bit (*) = < no string > > 	-- reserved
+			}
+			< RTTI_DOWNLINK_PDCH_PAIR_ASSIGNMENT_DC : bit (8) >
+		}
+	}
+	{ 0 | 1 < PFI : bit (7) > }
+	< RLC_MODE : bit (1) > 
+	< DOWNLINK_TFI_ASSIGNMENT : bit (5) >
+	< CONTROL_ACK : bit (1) >
+	{ 0 | 1	< NPM Transfer Time : bit (5) > }
+	;
+

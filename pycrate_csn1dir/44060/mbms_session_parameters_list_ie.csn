@@ -1,0 +1,12 @@
+-- TS 44.060 - d60
+-- 12.40 MBMS Session Parameters List
+-- MBMS Session Parameters List IE
+
+< MBMS Session Parameters List IE > ::=
+	{ 1	< Length of MBMS Bearer Identity : bit (3) > -- Configurations ’000’, ‘110’ and ‘111’ are reserved
+		< MBMS Bearer Identity : bit (val (Length of MBMS Bearer Identity)) >
+		< Estimated Session Duration : bit (8) >
+		{ 0 | 1	< MBMS Radio Bearer Starting Time : bit (16) > }
+		{ 0 | 1	< EGPRS Window Size : < EGPRS Window Size IE >> }
+		{ 0 | 1	< NPM Transfer Time : bit (5) > } } ** 0;
+

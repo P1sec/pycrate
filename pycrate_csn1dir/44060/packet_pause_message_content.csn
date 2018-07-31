@@ -1,0 +1,9 @@
+-- TS 44.060 - d60
+-- 11.2.30a Packet Pause
+-- Packet pause message content
+
+< Packet pause message content > ::=
+	< TLLI : bit (32) >
+	< RAI : bit (48) >
+	< padding bits > ;
+

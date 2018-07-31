@@ -1,0 +1,89 @@
+-- TS 44.018 - d80
+-- 10.5.2.23 P1 Rest Octets
+-- P1 Rest Octets
+
+< P1 Rest Octets > ::=
+	{L | H < NLN PCH : bit (2) > < NLN status PCH : bit >}
+	{L | H < Priority1 : Priority >}
+	{L | H < Priority2 : Priority >}
+	{L | H < Group Call information >}
+	< Packet Page Indication 1 : {L | H} >
+	< Packet Page Indication 2 : {L | H} >
+	{	null	 | L 				-- Receiver compatible with earlier release
+		| H	 					-- Additions in Release 6 :
+			{ 0 | 1
+				{	00		< CELL_GLOBAL_COUNT:bit(2) >
+					| 01	< CELL_GLOBAL_COUNT:bit(2) >
+							< VSTK_RAND : bit (36) >
+					| 10	< Reduced_GCR : bit (28) >
+							< VSTK_RAND : bit (36) >
+					| 11	< CELL_GLOBAL_COUNT:bit(2) >
+							< Reduced_GCR : bit (28) >
+							< VSTK_RAND : bit (36) >
+				}
+			}
+			{ 0 | 1		-- MBMS parameters included 
+				{	0		-- MBMS pre-notification
+					| 1		-- MBMS notification
+						<MBMS Notification 1 : < MBMS Channel Parameters IE > >}
+				{	0		-- MBMS pre-notification
+					| 1		-- MBMS notification
+						<MBMS Notification 2 : { 0 | 1	< MBMS Channel Parameters IE > } > }
+								-- ‘0’indicates that the same MBMS Channel Parameters as for MBMS Notification 1 apply
+				{ 0 | 1 <MBMS Information> }
+			}
+	}
+	{	null 	| L 				-- Receiver compatible with earlier release
+		| H			 			-- Additions in Release 7 :
+			{ 0 | 1 <AMR Config:bit(4)> }
+	}
+	{	null		| L				-- Receiver compatible with earlier release
+		| H						-- Additions in Release 8
+			< Priority Uplink Access : bit >
+			{ 0 | 1 < ETWS Primary Notification : < ETWS Primary Notification struct > > }
+	} 
+	{	null		| L				-- Receiver compatible with earlier release
+		| H						-- Additions in Release 10
+			< Implicit Reject CS : bit >
+			< Implicit Reject PS : bit >
+	} 
+	{	null		| L				-- Receiver compatible with earlier release
+		| H						-- Additions in Release 11
+			< IPA Support : bit >
+	} 
+	{	null		| L				-- Receiver compatible with earlier release
+		| H						-- Additions in Release 13
+			< PEO_BCCH_CHANGE_MARK : bit (2) >
+			< RCC : bit (3) >
+	} 
+
+	< spare padding >;
+
+< Priority > ::= < bit (3) >;
+
+<MBMS Information> ::=	
+	-- Pre-notifications
+	< MBMS Sessions List : < MBMS Sessions List IE > >
+
+							-- Notifications: listed per MBMS Channel Parameters
+							-- 1) Notifications with same MBMS Channel Parameters as in Notification 1 or Notification 2
+	{	0 					-- None
+		| 1	{ 0 | 1 } 		-- 0: same MBMS Channel Parameters as Notification 1. 
+							-- 1: same MBMS Channel Parameters as Notification 2
+				< MBMS Sessions List : < MBMS Sessions List IE > > 
+	}
+							-- 2) Notifications with specific MBMS Channels Parameters
+	{ 1	< MBMS Channel Parameters : < MBMS Channel Parameters IE > > 
+		< MBMS Sessions List : < MBMS Sessions List IE > > 
+	} ** 0 ;
+
+< ETWS Primary Notification struct> ::=
+	{0 		-- First segment of ETWS Primary Notification, number of segments included
+		< Total No Of Segments For ETWS Primary Notification : bit (4) >
+	| 1		-- Not first segment, segment number included
+		< Segment Number : bit (4) >
+	}
+	< PNI: bit (1) >		-- identifier for segments belonging to one and the same ETWS Primary Notification message
+	< Length of segment : bit (7) >	-- length of segment in bits
+	< ETWS Primary Notification Data : bit (val(Length of segment)) >;
+

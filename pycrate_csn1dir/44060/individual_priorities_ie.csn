@@ -1,0 +1,33 @@
+-- TS 44.060 - d60
+-- 12.50 Individual Priorities
+-- Individual priorities IE
+
+< Individual priorities IE > ::=
+	{ 0 |		-- delete all stored individual priorities
+	 1			-- provide individual priorities
+		< GERAN_PRIORITY : bit(3) >
+		{ 0 | 1	< 3G Individual Priority Parameters Description :
+				< 3G Individual Priority Parameters Description struct >> }
+		{ 0 | 1	< E-UTRAN Individual Priority Parameters Description :
+				< E-UTRAN Individual Priority Parameters Description struct >> }
+		{ 0 | 1	< T3230 timeout value : bit (3) > }
+};
+
+< 3G Individual Priority Parameters Description struct > ::=
+	{ 0 | 1	< DEFAULT_UTRAN_PRIORITY : bit(3) > }
+	{ 1	< Repeated Individual UTRAN Priority Parameters : 
+		< Repeated Individual UTRAN Priority Parameters struct >> } ** 0 ;
+
+< Repeated Individual UTRAN Priority Parameters struct > ::=
+	{ 0 { 1 < FDD-ARFCN : bit (14) > } ** 0 | 1 { 1 < TDD-ARFCN : bit (14) > } ** 0 }
+	< UTRAN_PRIORITY : bit(3) > ;
+
+< E-UTRAN Individual Priority Parameters Description struct > ::=
+	{ 0 | 1	< DEFAULT_E-UTRAN_PRIORITY : bit(3) > }
+	{ 1	< Repeated Individual E-UTRAN Priority Parameters : 
+		< Repeated Individual E-UTRAN Priority Parameters struct >> } ** 0 ;
+
+< Repeated Individual E-UTRAN Priority Parameters struct > ::=
+	{ 1 < EARFCN : bit (16) > } ** 0
+	< E-UTRAN_PRIORITY : bit(3) > ;
+

@@ -1,0 +1,65 @@
+-- TS 44.060 - d60
+-- 12.66 DLMC Channel Quality Report
+-- DLMC Channel Quality Report IE
+
+< DLMC Channel Quality Report IE > ::=
+	< C_VALUE : bit (6) >
+	{ 0 | 1 < DLMC Interference Measurements : < DLMC Interference Measurement Report struct >> }
+	{ 1	< DLMC BEP Link Quality Measurements : < DLMC BEP Link Quality Measurements struct >> 
+		{ 0 | 1 < DLMC BEP_MEASUREMENTS : < DLMC BEP Measurements Struct >> } } ** 0;
+
+< DLMC Interference Measurement Report Struct > ::=
+    { 0 | 1 < I_LEVEL_TN0 : bit (4) > }
+    { 0 | 1 < I_LEVEL_TN1 : bit (4) > }
+    { 0 | 1 < I_LEVEL_TN2 : bit (4) > }
+    { 0 | 1 < I_LEVEL_TN3 : bit (4) > }
+    { 0 | 1 < I_LEVEL_TN4 : bit (4) > }
+    { 0 | 1 < I_LEVEL_TN5 : bit (4) > }
+    { 0 | 1 < I_LEVEL_TN6 : bit (4) > }
+    { 0 | 1 < I_LEVEL_TN7 : bit (4) > };
+
+< DLMC BEP Link Quality Measurements struct > ::=
+	{   { 0 | 1	< GMSK_MEAN_BEP : bit (5) >
+				< GMSK_CV_BEP : bit (3) > }
+		{ 0 | 1	< 8PSK_MEAN_BEP : bit (5) >
+				< 8PSK_CV_BEP : bit (3) > }
+		{ 0 | 1	< 16QAM_ NSR_MEAN_BEP : bit (5) >
+				< 16QAM_ NSR_CV_BEP : bit (3) > }
+		{ 0 | 1	< 32QAM_ NSR_MEAN_BEP : bit (5) >
+				< 32QAM_ NSR_CV_BEP : bit (3) > }
+	};	
+
+< DLMC BEP Measurements Struct > ::=
+	{ 0 
+	| 1 <REPORTED_MODULATION : bit (2) > 
+		<MEAN_BEP_TN0 : bit (4) >
+	}
+	{ 0 
+	| 1 < REPORTED_MODULATION : bit (2) > 
+		<MEAN_BEP_TN1 : bit (4) >
+	}
+	{ 0 
+	| 1 < REPORTED_MODULATION : bit (2) > 
+		<MEAN_BEP_TN2 : bit (4) >
+	}
+	{ 0 
+	| 1 < REPORTED_MODULATION : bit (2) > 
+		<MEAN_BEP_TN3 : bit (4) >
+	}
+	{ 0 
+	| 1 < REPORTED_MODULATION : bit (2) > 
+		<MEAN_BEP_TN4 : bit (4) >
+	}
+	{ 0 
+	| 1 < REPORTED_MODULATION : bit (2) > 
+		<MEAN_BEP_TN5 : bit (4) >
+	}
+	{ 0 
+	| 1 < REPORTED_MODULATION : bit (2) > 
+		<MEAN_BEP_TN6 : bit (4) >
+	}
+	{ 0 
+	| 1 < REPORTED_MODULATION : bit (2) > 
+		<MEAN_BEP_TN7 : bit (4) >
+	};
+

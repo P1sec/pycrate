@@ -1,0 +1,75 @@
+-- TS 44.060 - d60
+-- 11.2.10 Packet Paging Request
+-- Packet Paging Request message content
+
+< Packet Paging Request message content > ::=
+	< PAGE_MODE : bit (2) >
+	{ 0 | 1 < PERSISTENCE_LEVEL : bit (4) >* 4}
+	--{ 0 | 1 < NLN(PPCH) : bit (2) > }
+	{ 0 | 1 < NLN PPCH : bit (2) > }
+	{	{ 1 < Repeated Page info : < Repeated Page info struct > > } ** 0
+		{ null	
+		| 0	bit** = < no string >			-- Receiver compatible with earlier release
+		| 1									-- REL-5 additions:
+			{ 1 < Repeated Iu Page info : < Repeated Iu Page info struct > > } ** 0
+			{ null	| 0	bit** = < no string >			-- Receiver compatible with earlier release
+					| 1									-- REL-6 additions:
+						{ 0 | 1	< MBMS Information > }
+						--{ 0 | 1	< NLN status(PPCH) : bit (1) > }
+						{ 0 | 1	< NLN status PPCH : bit (1) > }
+						{ null	| 0	bit** = < no string >			-- Receiver compatible with earlier release
+								| 1									-- REL-8 additions:
+									{ 0 | 1	< ETWS Primary Notification : < ETWS Primary Notification struct > > }
+		< padding bits > } } } }//		-- truncation at end of message allowed, bits '0' assumed
+	! < Distribution part error : bit (*) = < no string > > ;
+
+< Repeated Page info struct > ::=
+	{ 0										-- Page request for TBF establishment
+		{ 0	< PTMSI : bit (32) >
+		| 1	< Length of Mobile Identity contents : bit (4) >
+			< Mobile Identity : octet (val (Length of Mobile Identity contents)) > }
+	| 1											-- Page request for RR conn. establishment
+		{ 0	< TMSI : bit (32) >
+		| 1	< Length of Mobile Identity contents : bit (4) >
+			< Mobile Identity : octet (val (Length of Mobile Identity contents)) > }
+			< CHANNEL_NEEDED : bit (2) >
+		{ 0 | 1 < eMLPP_PRIORITY : bit (3) > } }
+	! < Ignore : bit (*) = <no string> > ;
+
+< Repeated Iu Page info struct > ::=
+	{
+		{ 0	< G-RNTI: bit(32) > 		-- used for a CN page to an MS in RRC connected mode, or a GERAN initiated page			{ 0 | 1 < Page info struct : < Page info struct > > } 	-- only included for a CN page
+		| 1
+			{ 00 	< TMSI : bit (32) >
+			| 01	< PTMSI : bit (32) >
+			| 11	{	< Length of Mobile Identity contents : bit (4) >
+						< Mobile Identity : octet (val (Length of Mobile Identity contents)) > }
+			< Page info struct : < Page info struct > > }
+		{ 0 | 1 < eMLPP_PRIORITY : bit (3) > } }
+	! < Ignore : bit (*) = <no string> > ;
+
+< MBMS Information > ::=
+	{
+		-- Pre-notifications
+		< MBMS Sessions List : < MBMS Sessions List IE > >
+
+		-- Notifications: listed per MBMS Channel Parameters
+		{ 1	< MBMS Channel Parameters : < MBMS Channel Parameters IE > >
+			< MBMS Sessions List : < MBMS Sessions List IE > > } ** 0 }
+	! < Ignore : bit (*) = <no string> > ;
+
+< Page info struct > ::=
+	< PAGING CAUSE : bit (3) > 
+	< CN DOMAIN IDENTITY : bit (2) >
+	{ 0 | 1 < Paging Record Type Identifier : bit (2) > }; -- This field Is only included if the MS is paged using a G-RNTI
+
+< ETWS Primary Notification struct > ::=	
+	{0 		-- First segment of ETWS Primary Notification, number of segments included
+		< Total No Of Segments For ETWS Primary Notification : bit (4) >
+	| 1		-- Not first segment, segment number included
+		< Segment Number : bit (4) >
+	}
+	< PNI: bit (1) >		-- identifier for segments belonging to one and the same ETWS Primary Notification message
+	< Length Of Segment : bit (7) >	-- length of segment in bits
+	< ETWS Primary Notification Data : bit (val(Length Of Segment)) >;
+

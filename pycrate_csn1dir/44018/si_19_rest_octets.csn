@@ -1,0 +1,40 @@
+-- TS 44.018 - d80
+-- 10.5.2.37g SI 19 Rest Octets
+-- SI 19 Rest Octets
+
+< SI 19 Rest Octets > ::=
+			< SI19_CHANGE_MARK : bit (2) >
+			< SI19_INDEX : bit (3) >
+			< SI19_LAST : bit (1) >
+			< COMPACT Neighbour Cell Parameters : < COMPACT Neighbour Cell params struct > >
+			< spare padding >;
+
+< COMPACT Neighbour Cell params struct > ::=
+			{ 1	< START_FREQUENCY : bit (10) >
+				< COMPACT Cell selection params : COMPACT Cell Selection struct >
+				< NR_OF_REMAINING_CELLS : bit (4) >
+				< FREQ_DIFF_LENGTH : bit (3) >
+				--{	< FREQUENCY_DIFF : bit (n) >
+				--	< COMPACT Cell Selection struct > > } * val(NR_OF_REMAINING_CELLS
+				{	< FREQUENCY_DIFF : bit (val(FREQ_DIFF_LENGTH) + 1) >
+					< COMPACT Cell Selection struct > } * (val(NR_OF_REMAINING_CELLS))
+			} ** 0 ;
+
+< COMPACT Cell Selection struct > ::=
+			{ 0 <BCC : bit (3)> | 1 <BSIC : bit (6)> }
+			< CELL_BARRED : bit (1) >
+			0 0				-- The values '01', '10' and '11' were allocated in an 
+							-- earlier version of the protocol and shall not be used.
+			{ < LA Different parameters : < LA Different struct > > }
+			{ 0 | 1	< MS_TXPWR_MAX_CCH : bit (5) > }
+			{ 0 | 1	< RXLEV ACCESS MIN : bit (6) > }
+			{ 0 | 1	< CELL_RESELECT_OFFSET : bit (6) > }
+			--{ 0 | 1	< TEMPORARY_OFFSET: bit (3)
+			{ 0 | 1	< TEMPORARY_OFFSET: bit (3) >
+					< PENALTY_TIME : bit (5) > }
+			{ 0 | 1	< TIME_GROUP : bit (2) > }
+			{ 0 | 1	< GUAR_CONSTANT_PWR_BLKS : bit (2) >} ;
+
+< LA Different struct > ::=
+			{ 0 | 1	< CELL_RESELECT_HYSTERISIS : bit (3) > ;
+

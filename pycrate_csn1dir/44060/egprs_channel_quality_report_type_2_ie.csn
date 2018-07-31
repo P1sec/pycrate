@@ -1,0 +1,9 @@
+-- TS 44.060 - d60
+-- 12.5a.1 EGPRS Channel Quality Report Type 2
+-- EGPRS Channel Quality Report Type 2 IE
+
+< EGPRS Channel Quality Report Type 2 IE> ::=
+	< EGPRS BEP Link Quality Measurements Type 2 : < EGPRS BEP Link Quality Measurements Type 2 IE>> 
+	< C_VALUE : bit (6) >
+	< EGPRS Timeslot Link Quality Measurements Type 2 : <EGPRS Timeslot Link Quality Measurements Type 2 IE >> ;
+

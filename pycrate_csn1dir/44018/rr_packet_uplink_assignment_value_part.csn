@@ -1,0 +1,152 @@
+-- TS 44.018 - d80
+-- 10.5.2.25c RR Packet Uplink Assignment
+-- RR Packet Uplink Assignment value part
+
+< RR Packet Uplink Assignment value part > ::=
+	< CHANNEL_CODING_COMMAND : bit (2) >
+	< TLLI_BLOCK_CHANNEL_CODING : bit (1) >
+	< Packet Timing Advance : Packet Timing Advance IE >
+	{	01		< Dynamic Allocation : Dynamic Allocation struct >
+		--| 10	< reserved >		-- The value '10' was allocated in an earlier version of the protocol and shall not be used.
+		--| 11	< reserved >		-- The value '11' was allocated in an earlier version of the protocol and shall not be used.
+		| 00 	{ 	0 	< Multiple TBF Allocation : Multiple TBF Allocation struct > 
+					| 1 	< Extension > } 
+	}
+	{ 	null										-- Receiver compatible with earlier release
+	|										-- Additions for R99
+		{ 0 | 1	< EGPRS_MCS_MODE : bit (4) >
+				< RESEGMENT : bit (1) >
+				< EGPRS Window Size : < EGPRS Window Size IE >> }
+		{ 0 | 1	< Packet Extended Timing Advance : bit (2) > }
+		{ 	null | 0 bit** = < no string > 			-- Receiver compatible with earlier release
+		| 1 											-- Additions for Rel-7
+			{ 0 | 1	< RLC_MODE : bit (1) > }	-- This field may be present in case of single TBF allocation
+			{ 1 { 0 | 1< NPM Transfer Time : bit (5) > } }** 0
+			< Uplink EGPRS Level: < EGPRS Level IE > > 
+			{ 0 | 1 < Pulse Format: < Pulse Format IE > > }
+			{ 0		-- '0' indicates that FANR is not activated
+			 | 1		-- '1' indicates that FANR is activated
+				{ 0 		-- SSN-based encoding is selected
+				| 1 		-- Time-based encoding is selected
+					< REPORTED TIMESLOTS : bit (8) >
+					< TSH : bit (2) > } }
+			{ null | 0 bit** = < no string >	-- Receiver backward compatible with earlier version
+			| 1 								-- Additions for REL-8
+				{ 0 | 1	{ 1 < Measurement_Control_E-UTRAN : bit(1) >
+							< E-UTRAN_FREQUENCY_INDEX : bit (3) >
+							{ 1 < E-UTRAN_FREQUENCY_INDEX : bit (3) > } ** 0
+						} ** 0
+				}
+				{ 0 | 1	{ 1 < Measurement_Control_UTRAN : bit(1) >
+							< UTRAN_FREQUENCY_INDEX : bit (5) >
+							{ 1 < UTRAN_FREQUENCY_INDEX : bit (5) > } ** 0
+						} ** 0
+				}
+				{ null | 0 bit** = < no string >		-- Receiver backward compatible with earlier version
+				| 1									-- Additions for Rel-9
+					{ 0 < EMST_NW_Capability : bit (1) >		-- EMST is not used
+					| 1 												-- EMST is used
+						< RLC Entity 2 : <RLC Entity Struct> >
+						{ 0
+						| 1 < RLC Entity 3 : <RLC Entity Struct> > }
+					}
+					{ null | 0 bit** = < no string > -- Receiver backward compatible with earlier version
+					| 1 								-- Additions for Rel-10
+						{ 1 < EMSR Additional PFCs 1 : < Additional PFCs struct > > } ** 0	
+						{ 1 < EMSR Additional PFCs 2 : < Additional PFCs struct > > } ** 0	
+						{ 1 < EMSR Additional PFCs 3 : < Additional PFCs struct > > } ** 0
+					<spare bit>**
+					}	-- End of additions for Rel-10
+				}	-- End of additions for Rel-9
+			}	-- End of additions for Rel-8
+		}	-- End of additions for Rel-7
+	} ;	-- End of additions for R99
+
+< Multiple TBF Allocation struct > ::=	
+	< EXTENDED_DYNAMIC_ALLOCATION : bit (1) >
+	{ 0 | 1	< P0 : bit (4) > 
+			< PR_MODE : bit(1) > }
+	{ 0 | 1	< Timeslot description : < Timeslot description struct > >
+			{ 1	< Uplink TBF Assignment : < Uplink TBF Assignment struct > > } ** 0 } ;
+
+< Timeslot description struct > ::=
+	{ 0														-- without power control params
+		{ 0 | 1	< USF_GRANULARITY : bit(1) > }		-- ‘0’ means TS not assigned
+		{ 0 | 1	< USF_GRANULARITY : bit(1) > }
+		{ 0 | 1	< USF_GRANULARITY : bit(1) > }
+		{ 0 | 1	< USF_GRANULARITY : bit(1) > }
+		{ 0 | 1	< USF_GRANULARITY : bit(1) > }
+		{ 0 | 1	< USF_GRANULARITY : bit(1) > }
+		{ 0 | 1	< USF_GRANULARITY : bit(1) > }
+		{ 0 | 1	< USF_GRANULARITY : bit(1) > }
+	| 1													--	with power control params
+		< ALPHA : bit (4) >		
+		{ 0 | 1	< USF_GRANULARITY : bit(1) >	< GAMMA_TN0 : bit (5) > } 
+		{ 0 | 1	< USF_GRANULARITY : bit(1) >	< GAMMA_TN1 : bit (5) > }
+		{ 0 | 1	< USF_GRANULARITY : bit(1) >	< GAMMA_TN2 : bit (5) > }
+		{ 0 | 1	< USF_GRANULARITY : bit(1) >	< GAMMA_TN3 : bit (5) > }
+		{ 0 | 1	< USF_GRANULARITY : bit(1) >	< GAMMA_TN4 : bit (5) > }
+		{ 0 | 1	< USF_GRANULARITY : bit(1) >	< GAMMA_TN5 : bit (5) > }
+		{ 0 | 1	< USF_GRANULARITY : bit(1) >	< GAMMA_TN6 : bit (5) > }
+		{ 0 | 1	< USF_GRANULARITY : bit(1) >	< GAMMA_TN7 : bit (5) > } } ;
+
+< Uplink TBF Assignment struct > ::=					-- Recursive for multiple TBFs
+	< PFI : bit (7) >
+	< RLC_MODE : bit (1) >
+	< UPLINK_TFI_ASSIGNMENT: bit (5) >
+	{ 0 | 1	< CHANNEL_CODING_COMMAND : bit (2) > }
+	{ 0 | 1	< EGPRS Channel Coding Command : < EGPRS Modulation and Coding Scheme IE > > }
+	{ 0 | 1	< EGPRS Window Size : < EGPRS Window Size IE > > }
+	{	0		< USF_ALLOCATION : bit (3) >
+		| 1		{ 1 < USF Assignment: < USF Assignment struct > > } ** 0 } ;
+
+< USF Assignment struct > ::=									-- Recursive for multiple USFs (per TBF)
+	{ 0 | 1	< USF_ALLOCATION: bit (3) > } ;					-- ‘0’ indicates no valid USF for this TS 
+
+<Dynamic Allocation struct > ::=
+	< Extended Dynamic Allocation : bit(1)>
+	{ 0 | 1	< P0 : bit (4) >
+			< PR_MODE : bit (1) > }
+	< USF_GRANULARITY : bit (1) >
+	{ 0 | 1	< UPLINK_TFI_ASSIGNMENT : bit (5) > }
+	0					-- The value '1' was allocated in an earlier version of the protocol and shall not be used.
+	{	0 								-- Timeslot Allocation
+			{ 0 | 1 < USF_TN0 : bit (3) > }
+			{ 0 | 1 < USF_TN1 : bit (3) > }
+			{ 0 | 1 < USF_TN2 : bit (3) > }
+			{ 0 | 1 < USF_TN3 : bit (3) > }
+			{ 0 | 1 < USF_TN4 : bit (3) > }
+			{ 0 | 1 < USF_TN5 : bit (3) > }
+			{ 0 | 1 < USF_TN6 : bit (3) > }
+			{ 0 | 1 < USF_TN7 : bit (3) > }
+		 | 1 							-- Timeslot Allocation with Power Control Parameters
+			< ALPHA : bit (4) >
+			{ 0 | 1	< USF_TN0 : bit (3) >
+					< GAMMA_TN0 : bit (5) > }
+			{ 0 | 1	< USF_TN1 : bit (3) >
+					< GAMMA_TN1 : bit (5) > }
+			{ 0 | 1	< USF_TN2 : bit (3) >
+					< GAMMA_TN2 : bit (5) > }
+			{ 0 | 1	< USF_TN3 : bit (3) >
+					< GAMMA_TN3 : bit (5) > }
+			{ 0 | 1	< USF_TN4 : bit (3) >
+					< GAMMA_TN4 : bit (5) > }
+			{ 0 | 1	< USF_TN5 : bit (3) >
+					< GAMMA_TN5 : bit (5) > }
+			{ 0 | 1	< USF_TN6 : bit (3) >
+					< GAMMA_TN6 : bit (5) > }
+			{ 0 | 1	< USF_TN7 : bit (3) >
+					< GAMMA_TN7 : bit (5) > } 
+	} ;
+
+< RLC Entity Struct > ::=
+	< UPLINK_TFI_ASSIGNMENT : bit (5) >
+	< RLC_MODE : bit (1) >
+	{ 0 | 1 < EGPRS Window Size : < EGPRS Window Size IE > > }
+	< PFI : bit (7) >;
+
+< Additional PFCs struct > ::=
+	< UPLINK_TFI_ASSIGNMENT : bit (5) >
+	{ 0 | 1 < NPM Transfer Time : bit (5) > }
+	< PFI : bit (7) >;
+

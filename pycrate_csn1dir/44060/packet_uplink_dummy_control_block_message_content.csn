@@ -1,0 +1,11 @@
+-- TS 44.060 - d60
+-- 11.2.8b Packet Uplink Dummy Control Block
+-- Packet Uplink Dummy Control Block message content
+
+< Packet Uplink Dummy Control Block message content > ::=
+	< TLLI / G-RNTI : bit (32) >
+	{ null | 0	bit ** = < no string >	-- Receiver compatible with earlier release
+	| 1									-- Additions in Rel-5 :
+		{ 0 | 1 < G-RNTI extension : bit (4) > }
+	< padding bits > } ;
+

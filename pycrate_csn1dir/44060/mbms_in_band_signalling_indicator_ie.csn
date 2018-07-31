@@ -1,0 +1,7 @@
+-- TS 44.060 - d60
+-- 12.45 MBMS In-band Signalling Indicator
+-- MBMS In-band Signalling Indicator IE
+
+< MBMS In-band Signalling Indicator IE > ::=
+	< MBMS In-band Signalling Indicator: bit (1) >;
+

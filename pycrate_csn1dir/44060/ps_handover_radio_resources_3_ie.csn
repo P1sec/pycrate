@@ -1,0 +1,142 @@
+-- TS 44.060 - d60
+-- 12.42b PS Handover Radio Resources 3
+-- PS Handover Radio Resources 3 IE
+
+< PS Handover Radio Resources 3 IE > ::=
+	{ 0 | 1 < Handover Reference : bit (8) > }
+	< SI : bit (2) >
+	< NCI : bit (1) >
+	< BSIC : bit (6) >
+	{ 0 | 1 < CCN_ACTIVE : bit (1) > }
+	{ 0 | 1 < 3G_CCN_ACTIVE : bit (1) > }
+	{ 0 | 1 < CCN Support Description : < CCN Support Description struct >> }
+	{	< DOWNLINK_RLC_MODE : bit (1) >
+		< CONTROL_ACK : bit (1) > 
+		{ 1 < UFPS : < UFPS struct > > } ** 0 
+		< DLMC Measurement Type : bit (1) >
+		< LINK_QUALITY_MEASUREMENT_MODE : bit (2) >
+		{ 0 | 1	< Carrier for Interference Measurements : bit (4) > }
+		< Global Packet Timing Advance : < Global Packet Timing Advance IE > >
+		{ 0 | 1	< Packet Extended Timing Advance : bit (2) > }
+		{ 0 | 1 < PTCCH_CARRIER : bit (4) > } 
+		< PDAN Coding : bit (1) >
+		< Extended SNS : bit (1) >
+		{ 0 | 1 < BEP_PERIOD2 : bit(4) > } 
+		{ 0 | 1	< PFI of downlink TBF : bit (7) > }
+		{ 0 | 1	< Downlink NPM Transfer Time : bit (5) > }
+		{ 0 | 1		-- '1' indicates Fast Ack/Nack Reporting is activated for downlink TBF
+			< EVENT_BASED_FANR: bit (1) > }
+		< Downlink EGPRS Level: < EGPRS Level IE > >
+		< Indication of Upper Layer PDU Start for RLC UM : bit >
+		< EGPRS Packet Downlink Ack/Nack Type 3 Support : bit(1) > 
+		< EGPRS Channel Coding Command : < EGPRS Modulation and Coding Scheme IE >> }
+	{	< RESEGMENT : bit (1) >
+		{ 1 < DLMC UL Carrier Info : < DLMC UL Carrier Info struct > > } ** 0
+		{ 0 | 1	< UPLINK EGPRS Window Size : < EGPRS Window Size IE > > }
+		< UPLINK_TFI_ASSIGNMENT : bit (5) >
+		{ 0 | 1	< PFI of uplink TBF : bit (7) > }
+		{ 0 | 1	< UPLINK_RLC_MODE : bit (1) > }
+		{ 0 | 1	< Uplink NPM Transfer Time : bit (5) > }
+		{ 0 | 1 	-- '1' indicates that FANR is activated
+			{ 0 		-- SSN-based encoding is selected
+			| 1 		-- Time-based encoding is selected
+				< REPORTED TIMESLOTS : bit (8) >	
+				< TSH : bit (2) > } } 
+		< Uplink EGPRS Level: < EGPRS Level IE > >
+		{ 0 | 1 < Pulse Format: < Pulse Format IE > > }
+		{ 0 | 1	< Uplink Control Timeslot : bit (3) > } }
+	< NETWORK_CONTROL_ORDER : bit (2) >
+	< RLC_RESET : bit (1) > ;
+
+< CCN Support Description struct > ::=
+	< Number_Cells : bit (7) >
+	{ < CCN_SUPPORTED : bit > } * (val(Number_Cells)) ;
+
+< UFPS struct > ::=
+	{ 00				-- Existing UFPS released
+		| 01			-- Existing UFPS remains unchanged (no information provided)
+		| 10			-- Existing UFPS changed/new UFPS provided
+				{ 0		-- Existing DLMC Frequency Parameters unchanged
+					| 1	< DLMC Frequency Parameters : < DLMC Frequency Parameters IE > > }
+				{ 1 < CARRIER_SPECIFIC_INFO : < Carrier Specific Info struct > > } ** 0	
+		| 11	bit (*) = < no string >		-- Reserved
+	};
+
+< Carrier Specific Info struct > ::=
+	{ 00				-- Existing carrier released
+		| 01			-- Existing carrier remains unchanged (no information provided)
+		| 10			-- Existing carrier changed/new carrier provided
+				{ 0					-- BTTI mode
+					{ 0				-- same timeslots as the lowest numbered carrier
+						| 1	< TIMESLOT_ALLOCATION : bit (8) > } 
+				| 1					-- RTTI mode
+					{ 0				-- same PDCH-pairs as the lowest numbered carrier
+						| 1	< DOWNLINK_PDCH_PAIRS_DLMC : bit (8) >
+							< RTTI_DOWNLINK_PDCH_PAIR_ASSIGNMENT_DLMC : bit (4) > }
+				}
+				{ 0 | 1	< MAIO : bit (6) > }
+				{ 0 		-- same P0 and PR_MODE as the lowest numbered carrier
+ 		| 1	< P0 : bit (4) >
+					< PR_MODE : bit (1) > }
+				{ 0 		-- same DOWNLINK_TFI_ASSIGNMENT as the lowest numbered carrier
+ 		| 1	< DOWNLINK_TFI_ASSIGNMENT : bit (5) > 
+						{ 0 | 1 < DOWNLINK_eTFI_ASSIGNMENT : bit (3) > } }
+				{ 0 		-- same Power Control Parameters as the lowest numbered carrier
+ 		| 1	< Power Control Parameters : < Power Control Parameters IE > > }
+				{ 0 		-- EMST is not used on this carrier
+					| 1	-- EMST is used on this carrier
+				< RLC Entity 2 : < RLC Entity Struct > >
+				{ 0 | 1 < DOWNLINK_eTFI_ASSIGNMENT : bit (3) > }
+				{ 0 | 1	< RLC Entity 3 : < RLC Entity Struct > > } 
+						{ 0 | 1 < DOWNLINK_eTFI_ASSIGNMENT : bit (3) > } }
+				{ 0 		-- EMSR is not used on this carrier
+					| 1	-- EMSR is used on this carrier
+						{ 1 < EMSR Additional PFCs 1 : < Additional PFCs struct > > 
+					{ 0 | 1 < DOWNLINK_eTFI_ASSIGNMENT : bit (3) > } } ** 0	
+						{ 1 < EMSR Additional PFCs 2 : < Additional PFCs struct > > 
+							{ 0 | 1 < DOWNLINK_eTFI_ASSIGNMENT : bit (3) > } } ** 0	
+						{ 1 < EMSR Additional PFCs 3 : < Additional PFCs struct > > 
+							{ 0 | 1 < DOWNLINK_eTFI_ASSIGNMENT : bit (3) > } } ** 0
+				}
+				< Primary TSC Set : bit (1) >
+				{ 0 | 1						-- Secondary DL TSC Value assigned
+					< Secondary DL TSC Set : bit (1) >
+					< Secondary DL TSC Value : bit (3) > }
+		| 11	bit (*) = < no string >		-- Reserved
+	};
+
+< DLMC UL Carrier Info struct > ::= 
+	{ 00 					-- Assigned carrier released
+		| 01				-- Carrier remains unchanged (no information provided)
+		| 10				-- Assigned carrier modified or new carrier assigned
+			{ 0						-- BTTI mode
+				{ 0	| 1	< UPLINK_TIMESLOT_ALLOCATION : bit (8) > }			-- assigned PDCH
+			| 1						-- RTTI mode
+				{ 0	| 1 < UPLINK_PDCH_PAIRS_DLMC : bit (8) > }					-- assigned PDCH-pairs
+			}
+			< Dynamic Allocation 3 : < Dynamic Allocation 3 IE > > 
+ 			{ 0		-- EMST is not used on this carrier
+				| 1	-- EMST is used on this carrier 
+					< Uplink RLC Entity 2 : < RLC Entity Struct > >
+					{ 0 | 1 < Uplink RLC Entity 3 : < RLC Entity Struct > > } }
+			{ 0 		-- EMSR is not used on this carrier
+				| 1	-- EMSR is used on this carrier
+					{ 1 < EMSR Additional PFCs 1 : < Additional PFCs struct > > } ** 0	
+					{ 1 < EMSR Additional PFCs 2 : < Additional PFCs struct > > } ** 0	
+					{ 1 < EMSR Additional PFCs 3 : < Additional PFCs struct > > } ** 0
+			}
+			< Primary TSC Set : bit (1) >
+		| 11 < bit (*) = < no string > >			-- reserved
+	} ; 
+
+< RLC Entity Struct > ::=
+	< TFI : bit (5) >
+	< RLC_MODE : bit (1) >
+	{ 0 | 1 < EGPRS Window Size : < EGPRS Window Size IE > > }
+	< PFI : bit (7) >;
+
+< Additional PFCs struct > ::=
+	< TFI : bit (5) >
+	{ 0 | 1 < NPM Transfer Time : bit (5) > }
+	< PFI : bit (7) >;
+

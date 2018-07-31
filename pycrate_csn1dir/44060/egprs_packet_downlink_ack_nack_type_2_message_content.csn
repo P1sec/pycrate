@@ -1,0 +1,27 @@
+-- TS 44.060 - d60
+-- 11.2.6e EGPRS Packet Downlink Ack/Nack Type 2
+-- EGPRS Packet Downlink Ack/Nack Type 2 message content
+
+< EGPRS Packet Downlink Ack/Nack Type 2 message content > ::=
+		< DOWNLINK_TFI : bit (5) >
+		< MS OUT OF MEMORY : bit(1)>
+		{ 0 | 1	< EGPRS Channel Quality Report Type 2 : < EGPRS Channel Quality Report Type 2 IE > >}
+		{ 0 | 1	< Channel Request Description : < Channel Request Description IE > >}
+		{ 0 | 1	< PFI : bit(7) > }
+		{ 0 | 1 	< EPD A/N Type 2 Extension length : bit (8) >
+				< bit (val(EPD A/N Type 2 Extension length) + 1)
+				& { < EPD A/N Type 2 Extension Info > ! { bit** = <no string> }} > }
+
+			-- Truncation of the EGPRS Ack/Nack Description is allowed if the mobile station is assigned a downlink
+			-- dual carrier configuration and the available space in the message without EGPRS Ack/Nack Description IE
+			-- does not allow for the inclusion of a valid EGPRS Ack/Nack Description IE, i.e. is less than 16 bits.
+			-- In the same conditions, the receiver shall assume that no EGPRS Ack/Nack description IE is included.
+		{ < EGPRS Ack/Nack Description : < EGPRS Ack/Nack Description IE >> } //
+		<padding bits > ;
+
+< EPD A/N Type 2 Extension Info > ::=
+	{ 0 | 1 < Extended Channel Request Description : 	< Extended Channel Request Description IE > > }
+	< EARLY_TBF_ESTABLISHMENT : bit (1) > 
+	{ 0 | 1 < Secondary Dual Carrier Channel Report : < EGPRS Channel Quality Report Type 2 IE > > } 
+	< spare bit >** // ; 		-- Truncation may occur between released versions of the protocol
+

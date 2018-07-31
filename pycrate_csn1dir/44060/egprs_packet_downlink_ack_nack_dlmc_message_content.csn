@@ -1,0 +1,15 @@
+-- TS 44.060 - d60
+-- 11.2.48 EGPRS Packet Downlink Ack/Nack DLMC
+-- EGPRS Packet Downlink Ack/Nack DLMC message content
+
+< EGPRS Packet Downlink Ack/Nack DLMC message content > ::=
+		< DOWNLINK_TFI : bit (5) >
+		< DOWNLINK_eTFI : bit (3) >
+		< MS OUT OF MEMORY : bit(1)>
+		{ 0 | 1 < DLMC Channel Quality Report IE >}
+		{ 0 | 1 < Channel Request Description IE >}
+		{ 0 | 1	< PFI : bit(7) > }
+		{ 0 | 1 < EGPRS Ack/Nack Description DLMC IE > 
+				{ 0 | 1 < DLMC Channel Quality Report IE > } }
+		<padding bits > ;
+

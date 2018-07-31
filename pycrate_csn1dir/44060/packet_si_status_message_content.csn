@@ -1,0 +1,33 @@
+-- TS 44.060 - d60
+-- 11.2.17b Packet SI Status
+-- Packet SI Status message content
+
+< Packet SI Status message content > ::=
+	< GLOBAL_TFI : < Global TFI IE > >
+	< BCCH_CHANGE_MARK : bit (3) >
+	< Received SI Message List : < SI Message List struct > >
+	< Received Unknown SI Message List : < Unknown SI Message List struct > >
+	{ null | 0 bit** = < no string >		-- Receiver backward compatible with earlier version
+	| 1										-- Additions for REL-6 :
+		< PSCSI_SUPPORT : bit >
+		< PS_REL_REQ : bit >
+		< padding bits > } ;
+
+< SI Message List struct > ::=
+	{ 1	< SI_MESSAGE_TYPE : bit (8) >
+		{	< MESS_REC : bit (2) == 00 > < null >	-- Message type supported but not received
+		|	< MESS_REC : bit (2) == 01 > < null >	-- Message type supported and received, single instance
+		|	< MESS_REC : bit (2) == 10 >			-- Message type supported and partially received, multiple instances
+			< SIX_CHANGE_MARK : bit (3) >
+			< SIX_COUNT : bit (4) >
+			< Instance bitmap : bit (val(SIX_COUNT) + 1) >
+		|	< MESS_REC : bit (2) == 11 >			-- Message type supported and completely received, multiple 
+													-- instances
+			< SIX_CHANGE_MARK : bit (3) > }
+	} ** 0
+	< ADDITIONAL_MSG_TYPE : bit > ;
+
+< Unknown SI Message List struct > ::=
+	{ 1	< SI_MESSAGE_TYPE : bit (8) > } ** 0
+	< ADDITIONAL_MSG_TYPE : bit > ;
+
