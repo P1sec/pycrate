@@ -27,6 +27,7 @@
 # *--------------------------------------------------------
 #*/
 
+from pycrate_core.utils  import *
 from pycrate_core.charpy import *
 
 from .utils import *
@@ -45,45 +46,90 @@ class CSN1Obj(Element):
     internal attributes:
         - name: str, named of the object,
             can be a null-string in case of anonymous object
-        - num : int, number of repetition for the object
-            default is 1, it can be >= 0
-            or == -1, in this case, there is an undefined number of repetition 
-            -> until there is no more buffer to decode, or
-            -> until the object starts with a fixed value and this value is not
-            present anymore in the buffer to decode
-        - lref: int, backward reference to a field into the parent object (which 
-            has to be a list), enforces the length in bits during decoding
+        - num : 
+            int, static number of repetition for the object
+                default is 1, it can be >= 0
+                or -1, for an undefined number of repetitions
+            (x:int, (a:int, b:int) is an alternate possible value in case
+                the number of repetitions is dynamic and depends on another 
+                object, handling is similar to lref
+            In case of undefined number of repetitions, the decoding happens
+            until there is no more buffer to decode, or a fixed value defined in
+            the object is not present anymore in the buffer to decode
+        - lref: (x:int, (a:int, b:int)), enforces the length in bit during 
+            the decoding and potentially the encoding 
+            x: offset into a field in the parent object (which has to be a list)
+               to get the value from
+            a, b: transform in the form x: a*(x+b) to be applied to the 
+                  value of the referred object to get the length of self
     
-    This class must not be used directly, only CSN1Bit, CSN1List, CSN1Alt, CSN1Val,
-    CSN1Ref and CSN1SelfRef.
+    This class must not be used directly, only CSN1Bit, CSN1List, CSN1Alt, 
+    CSN1Val, CSN1Ref, CSN1SelfRef.
     """
+    
+    # in order to disable any csnlog() during the runtime
+    _SILENT = False
     
     #_REPR = 'B' # value always represented with bit-string
     _REPR = 'V' # value represented with their original type (uint -default- or bit-string)
     
+    # for certain CSN.1 structure, there is a distinction between padding bit (L)
+    # and non padding bit (H), where a padding octet is 0x2b
+    # null padding :
+    #Lv = [0, 0, 0, 0, 0, 0, 0, 0]
+    #Lb = '00000000'
+    # 0x2B padding :
+    Lv = [0, 0, 1, 0, 1, 0, 1, 1]
+    Lb = '00101011'
+    
     _name = ''
     _num  = 1
     _lref = None
-    _root = False
+    _par  = None
+    
+    @classmethod
+    def set_pad_null(cls):
+        cls.Lv = [0, 0, 0, 0, 0, 0, 0, 0]
+        cls.Lb = '00000000'
+    
+    @classmethod
+    def set_pad_gsm(cls):
+        cls.Lv = [0, 0, 1, 0, 1, 0, 1, 1]
+        cls.Lb = '00101011'
+    
+    @classmethod
+    def conv_b_pad_gsm(cls, val, off):
+        ret = []
+        for i, c in enumerate(val):
+            if c == cls.Lb[(off+i)%8]:
+                ret.append('L')
+            else:
+                ret.append('H')
+        return ''.join(ret)
     
     def __init__(self, **kw):
         if 'name' in kw and kw['name']:
             self._name = kw['name']
-        if 'root' in kw and kw['root']:
-            self._root = True
-        if 'num' in kw and (kw['num'] == -1 or kw['num'] > 1):
+        if 'num' in kw and kw['num'] != 1:
             self._num  = kw['num']
         if 'lref' in kw and kw['lref'] is not None:
             self._lref = kw['lref']
+        # offset for dealing with L / H bits
+        self._off = 0
     
     def repr(self):
         global _root_obj
-        if self._root:
+        #
+        if self._par is None:
             root_obj  = _root_obj
             _root_obj = self
         #
         if self._val is not None:
-            if self._num != 1:
+            if isinstance(self._num, tuple):
+                num = self._resolve_ref(self._num)
+            else:
+                num = self._num
+            if num != 1:
                 # multiple iteration of the object's value
                 content   = []
                 _num      = self._num
@@ -104,10 +150,10 @@ class CSN1Obj(Element):
                 else:
                     ret = '<%s>' % self._repr_val()
         else:
-            # only print the class name when not value is set
+            # only print the class name when no value is set
             ret = '<%s(%s)>' % (self._name, self.__class__.__name__)
         #
-        if self._root:
+        if self._par is None:
             _root_obj = root_obj
         #
         return ret
@@ -117,12 +163,17 @@ class CSN1Obj(Element):
     def show(self):
         # don't print the class name when values are set
         global _root_obj
-        if self._root:
+        #
+        if self._par is None:
             root_obj  = _root_obj
             _root_obj = self
         #
         if self._val is not None:
-            if self._num != 1:
+            if isinstance(self._num, tuple):
+                num = self._resolve_ref(self._num)
+            else:
+                num = self._num
+            if num != 1:
                 # multiple iteration of the object's value
                 content   = []
                 _num      = self._num
@@ -145,7 +196,7 @@ class CSN1Obj(Element):
         else:
             ret = '<%s(%s)>' % (self._name, self.__class__.__name__)
         #
-        if self._root:
+        if self._par is None:
             _root_obj = root_obj
         #
         return ret
@@ -163,6 +214,33 @@ class CSN1Obj(Element):
     def __call__(self):
         return self._val
     
+    def _resolve_ref(self, ref):
+        """resolves the reference for dynamic values
+        """
+        if ref[0][0] == '#':
+            # reference not converted correclty, unable to process it
+            if not self._SILENT:
+                csnlog('%s: unable to resolve reference, %s' % (self._name, ref[0]))
+            return 0
+        #
+        par = self._par
+        assert( par is not None )
+        for r in ref[0]:
+            if r == -1:
+                par = par._par
+                assert( par is not None )
+            else:
+                # r is uint
+                assert( isinstance(par, (CSN1List, CSN1Alt)) )
+                assert( isinstance(par._val, list) and len(par._val) >= r )
+                val = par._val[r]
+                if isinstance(val, str_types):
+                    # CSN1T_BSTR
+                    return ref[1](int(val, 2))
+                else:
+                    # CSN1T_UINT or custom callback
+                    return ref[1](val)
+    
     #--------------------------------------------------------------------------#
     # object common API with pycrate_core.elt.Element 
     #--------------------------------------------------------------------------#
@@ -173,78 +251,86 @@ class CSN1Obj(Element):
     #def _to_pack_obj(self):
     #    raise(CSN1Err('not implemented'))
     
-    def _from_char(self, char, lref=None):
+    def _from_char(self, char):
         global _root_obj
         #
-        if self._root:
-            root_obj  = _root_obj
+        if self._par is None:
+            root_obj = _root_obj
             _root_obj = self
         #
-        if lref is not None:
-            # shorten the char buffer
+        if self._lref is not None:
+            # dynamic shortage of the char buffer
+            lref = self._resolve_ref(self._lref)
             char_lb = char._len_bit
-            if isinstance(lref, str_types):
-                # CSN1Bit._type == CSN1T_BSTR
-                char._len_bit = char._cur + bitstr_to_uint(lref)
-            else:
-                char._len_bit = char._cur + lref
+            char._len_bit = char._cur + lref
             assert( char._len_bit <= char_lb )
         #
-        if self._num == 1:
+        if isinstance(self._num, tuple):
+            # dynamic number of repetitions
+            num = self._resolve_ref(self._num)
+        else:
+            # static number of repetitions
+            num = self._num
+        if num == 1:
             self._from_char_obj(char)
-        elif self._num > 1:
+        elif num > 1:
             val = []
-            for i in range(self._num):
+            for i in range(num):
                 self._from_char_obj(char)
                 val.append( self._val )
             self._val = val
-        elif self._num == -1:
+        elif num == -1:
+            # infinite number of repetitions
             val = []
             while char.len_bit():
+                char_cur = char._cur
+                #csnlog('%s: char_cur, %i' % (self._name, char_cur))
                 try:
-                    char_cur = char._cur
                     self._from_char_obj(char)
-                except (CharpyErr, CSN1InvalidValueErr):
+                except (CSN1NoCharErr, CSN1InvalidValueErr) as err:
                     # we went to far, have to exit the loop
+                    #csnlog('%s: err, %s' % (self._name, err))
                     char._cur = char_cur
                     break
                 else:
                     val.append( self._val )
+                    #csnlog('%s: val, %r' % (self._name, val))
             self._val = val
+            #csnlog('%s: self._val, %r' % (self._name, self._val))
         else:
             assert()
         #
-        if lref is not None:
+        if self._lref is not None:
             # restore the original char buffer length
             char._len_bit = char_lb
         #
-        if self._root:
+        if self._par is None:
             _root_obj = root_obj
     
     def _to_pack(self):
         global _root_obj
         #
-        if self._root:
+        if self._par is None:
             root_obj  = _root_obj
             _root_obj = self
         #
+        # TODO: check if we want to encode automatically the referred field
+        # in case self._lref is set
+        #
         ret = []
-        if self._num == 1:
+        if isinstance(self._num, tuple):
+            # dynamic number of repetitions
+            num = self._resolve_ref(self._num)
+        else:
+            # static number of repetitions
+            num = self._num
+        if num == 1:
             ret.extend( self._to_pack_obj() )
-        elif self._num > 1:
-            # self._val is a list
-            assert( isinstance(self._val, list) and len(self._val) == self._num )
-            _num = self._num
-            _val = self._val
-            self._num = 1
-            for val in _val:
-                self._val = val
-                ret.extend( self._to_pack_obj() )
-            self._num = _num
-            self._val = _val
-        elif self._num == -1:
+        elif num == -1 or num > 1:
             # self._val is a list
             assert( isinstance(self._val, list) )
+            if num > 1:
+                assert( len(self._val) == num )
             _num = self._num
             _val = self._val
             self._num = 1
@@ -256,7 +342,7 @@ class CSN1Obj(Element):
         else:
             assert()
         #
-        if self._root:
+        if self._par is None:
             _root_obj = root_obj
         #
         return ret
@@ -286,10 +372,10 @@ class CSN1Obj(Element):
     # TODO: implement _from_char / _to_pack methods building structures
     # with Envelope() and Atom() elements... hard work
     def from_bytes_ws(self, buf):
-        pass
+        raise(CSN1Err('not implemented'))
     
     def to_bytes_ws(self, buf):
-        pass
+        raise(CSN1Err('not implemented'))
     
     def _clone_get_kw(self):
         kw = {}
@@ -299,10 +385,8 @@ class CSN1Obj(Element):
             kw['num'] = self._num
         if self._lref != self.__class__._lref:
             kw['lref'] = self._lref
-        if self._root != self.__class__._root:
-            kw['root'] = self._root
         return kw
-     
+    
     def clone(self):
         """Returns a independant instance of self, all internal attributes
         are cloned except value
@@ -316,22 +400,22 @@ class CSN1Bit(CSN1Obj):
     specific internal attributes:
         - bit : number of bits in the bit field (default 1)
         - type: CSN1T_UINT (default) or CSN1T_BSTR, how the value is handled
-        - dict: dictionnary for value representation
+        - dic : dictionnary for value representation
         - val : uint (type CSN1T_UINT) or bit string (type CSN1T_BSTR)
     """
     
     _bit  = 1
     _type = CSN1T_UINT
-    _dict = None
+    _dic  = None
     
     def __init__(self, **kw):
         CSN1Obj.__init__(self, **kw)
-        if 'bit' in kw and kw['bit'] > 1:
+        if 'bit' in kw and kw['bit'] != 1:
             self._bit  = kw['bit']
         if 'type' in kw and kw['type'] != self.__class__._type:
             self._type = kw['type']
         if 'dict' in kw and kw['dict'] is not None:
-            self._dict = kw['dict']
+            self._dic  = kw['dict']
         self._val = None
     
     def _repr_val(self):
@@ -339,8 +423,8 @@ class CSN1Bit(CSN1Obj):
             val = uint_to_bitstr(self._val, self._bit)
         else:
             val = self._val
-        if self._dict and self._val[1] in self._dict:
-            return '%r (%s)' % (val, self._dict[self._val])
+        if self._dic and self._val[1] in self._dic:
+            return '%r (%s)' % (val, self._dic[self._val])
         else:
             # int or bit-string
             return val.__repr__()
@@ -348,18 +432,35 @@ class CSN1Bit(CSN1Obj):
     _show_val = _repr_val
     
     def _from_char_obj(self, char):
-        if self._type == CSN1T_UINT:
-            self._val = char.get_uint(self._bit)
-        elif self._type == CSN1T_BSTR:
-            self._val = uint_to_bitstr(char.get_uint(self._bit), self._bit)
+        if isinstance(self._bit, tuple):
+            # dynamic number of bits
+            bit = self._resolve_ref(self._bit)
         else:
-            assert()
+            # static number of bits
+            bit = self._bit
+        try:
+            self._val = char.get_uint(bit)
+        except CharpyErr:
+            raise(CSN1NoCharErr())
+        else:
+            self._off += bit
+            self._off %= 8
+            if self._type == CSN1T_BSTR:
+                self._val = uint_to_bitstr(self._val, bit)
     
     def _to_pack_obj(self):
-        if self._type == CSN1T_UINT:
-            return [(CSN1T_UINT, self._val, self._bit)]
+        if isinstance(self._bit, tuple):
+            # dynamic number of bits
+            bit = self._resolve_ref(self._bit)
         else:
-            return [(CSN1T_UINT, int(self._val, 2), self._bit)]
+            # static number of bits
+            bit = self._bit
+        self._off += bit
+        self._off %= 8
+        if self._type == CSN1T_UINT:
+            return [(CSN1T_UINT, self._val, bit)]
+        else:
+            return [(CSN1T_UINT, int(self._val, 2), bit)]
     
     def clone(self):
         kw = self._clone_get_kw()
@@ -367,313 +468,8 @@ class CSN1Bit(CSN1Obj):
             kw['bit'] = self._bit
         if self._type != self.__class__._type:
             kw['type'] = self._type
-        if self._dict != self.__class__._dict:
-            kw['dict'] = self._dict
-        return self.__class__(**kw)
-
-
-class CSN1List(CSN1Obj):
-    """Class to handle a CSN.1 list of CSN1Obj instances
-    
-    specific internal attributes:
-        - list: list of CSN1Obj instances
-        - val : list of CSN1Obj values
-    """
-    # ENC_LREF enables to automatically encode length determinant
-    ENC_LREF = True
-    
-    _list  = []
-    
-    def __init__(self, **kw):
-        CSN1Obj.__init__(self, **kw)
-        if 'list' in kw and kw['list']:
-            self._list = kw['list']
-        self._val  = None
-    
-    def _repr_val(self):
-        content = []
-        for i, val in enumerate(self._val):
-            Obj = self._list[i]
-            obj_val  = Obj._val
-            Obj._val = val
-            content.append( Obj.repr() )
-            Obj._val = obj_val
-        if not content:
-            return '[]'
-        else:
-            return '[' + ''.join(content) + ']'
-    
-    def _show_val(self):
-        content = []
-        for i, val in enumerate(self._val):
-            Obj = self._list[i]
-            obj_val  = Obj._val
-            Obj._val = val
-            content.append( Obj.show().replace('\n', '\n ') )
-            Obj._val = obj_val
-        if not content:
-            return '[]'
-        else:
-            return '[\n ' + '\n '.join(content) + ']'
-    
-    def _from_char_obj(self, char):
-        self._val, char_err = [], False
-        for Obj in self._list:
-            obj_val = Obj._val
-            if Obj._lref:
-                lref = self._val[Obj._lref]
-                try:
-                    Obj._from_char(char, lref)
-                except CharpyErr:
-                    char_err = True
-            elif isinstance(Obj, CSN1Val):
-                try:
-                    val = char.get_uint(len(Obj._val))
-                except CharpyErr:
-                    char_err = True
-                else:
-                    if int(Obj._val, 2) != val:
-                        Obj._val = obj_val
-                        raise(CSN1InvalidValueErr())
-            else:
-                try:
-                    Obj._from_char(char)
-                except CharpyErr:
-                    char_err = True
-            #
-            if not char_err:
-                self._val.append( Obj._val )
-                Obj._val = obj_val
-            else:
-                Obj._val = obj_val
-                break
-    
-    def _to_pack_obj(self):
-        ret = []
-        if self.ENC_LREF:
-            ret_cur = []
-            for i, val in enumerate(self._val):
-                ret_cur.append( len(ret) )
-                Obj = self._list[i]
-                if isinstance(Obj, CSN1Val):
-                    ret.append( (CSN1T_UINT, int(Obj._val, 2), len(Obj._val)) )
-                else:
-                    obj_val  = Obj._val
-                    Obj._val = val
-                    ret.extend( Obj._to_pack() )
-                    Obj._val = obj_val
-                    #
-                    if Obj._lref:
-                        # get the length in bits corresponding to the encoded object
-                        obj_len = sum( [e[2] for e in ret[ret_cur[-1]:]] )
-                        # set it to the length object backward in ret
-                        len_val = ret[ret_cur[Obj._lref-1]]
-                        if obj_len >= (1<<len_val[-1]):
-                            raise(CSN1Err('{0}: length prefix overflow, {1}'\
-                                  .format(self._name, obj_len)))
-                        # reassign the object value
-                        ret[ret_cur[Obj._lref-1]] = (len_val[0], obj_len, len_val[2])
-        else:
-            for i, val in enumerate(self._val):
-                Obj = self._list[i]
-                if isinstance(Obj, CSN1Val):
-                    ret.append( (CSN1T_UINT, int(Obj._val, 2), len(Obj._val)) )
-                else:
-                    obj_val  = Obj._val
-                    Obj._val = val
-                    ret.extend( Obj._to_pack_obj() )
-                    Obj._val = obj_val
-        return ret
-    
-    def clone(self):
-        kw = self._clone_get_kw()
-        if self._list:
-            kw['list'] = [Obj.clone() for Obj in self._list]
-        return self.__class__(**kw)
-        
-
-class CSN1Alt(CSN1Obj):
-    """Class to handle a CSN.1 alternative between multiple list of CSN1Obj 
-    instances
-    
-    specific internal attributes:
-        - alt : dict of { bit string : list of CSN1Obj instances }
-        - klen: length of the bit-string required for selecting an alternative
-        - kdic: dictionnary of {key bit-string: alternative name}
-        - val : list of CSN1Obj values
-    """
-    # ENC_LREF enables to automatically encode length determinant
-    ENC_LREF = True
-    
-    _alt  = {}
-    _klen = 1
-    _kdic = None
-    
-    def __init__(self, **kw):
-        CSN1Obj.__init__(self, **kw)
-        if 'alt' in kw and kw['alt']:
-            self._alt = kw['alt']
-        if 'klen' in kw and kw['klen'] != 1:
-            self._klen = kw['klen']
-        if 'kdic' in kw and kw['kdic']:
-            self._kdic = kw['kdic']
-        self._val  = None
-    
-    def _repr_val(self):
-        if not self._val:
-            return '{}'
-        else:
-            k, kval = self._val[0], int(self._val[0], 2)
-            if self._kdic and kval in self._kdic:
-                alt_name = self._kdic[kval]
-            else:
-                alt_name = self._alt[k][0]
-            alt_list = self._alt[k][1]
-            if alt_name:
-                pref = '{%r (%s): [' % (k, alt_name)
-            else:
-                pref = '{%r, [' % k
-            content = []
-            for i, val in enumerate(self._val[1:]):
-                Obj = alt_list[i]
-                obj_val  = Obj._val
-                Obj._val = val
-                content.append( Obj.repr() )
-                Obj._val = obj_val
-            if not content:
-                return pref + ']}'
-            else:
-                return pref + ''.join(content) + ']}'
-    
-    def _show_val(self):
-        if not self._val:
-            return '{}'
-        else:
-            k, kval = self._val[0], int(self._val[0], 2)
-            if self._kdic and kval in self._kdic:
-                alt_name = self._kdic[kval]
-            else:
-                alt_name = self._alt[k][0]
-            alt_list = self._alt[k][1]
-            if alt_name:
-                pref = '{%r (%s): [\n ' % (k, alt_name)
-            else:
-                pref = '{%r, [\n ' % k
-            content = []
-            for i, val in enumerate(self._val[1:]):
-                Obj = alt_list[i]
-                obj_val  = Obj._val
-                Obj._val = val
-                content.append( Obj.show().replace('\n', '\n ') )
-                Obj._val = obj_val
-            if not content:
-                return pref[:-2] + ']}'
-            else:
-                return pref + '\n '.join(content) + ']}'
-    
-    def _from_char_obj(self, char):
-        self._val = []
-        # 
-        # 1) select alternative
-        if '' in self._alt and char.len_bit() > 0:
-            k = ''
-        elif None in self._alt and char.len_bit() == 0:
-            # not entering any alternative
-            #self._val = None
-            return
-        else:
-            k = uint_to_bitstr(char.get_uint(self._klen), self._klen)
-            if k not in self._alt:
-                raise(CSN1Err('{0}: invalid alternative key, {1!r}'.format(self._name, k)))
-        obj_list = self._alt[k][1]
-        self._val.append(k)
-        #
-        # 2) decode alternative
-        char_err = False
-        for Obj in obj_list:
-            obj_val = Obj._val
-            if Obj._lref:
-                lref = self._val[Obj._lref]
-                try:
-                    Obj._from_char(char, lref)
-                except CharpyErr:
-                    char_err = True
-            elif isinstance(Obj, CSN1Val):
-                try:
-                    val = char.get_uint(len(Obj._val))
-                except CharpyErr:
-                    char_err = True
-                else:
-                    if int(Obj._val, 2) != val:
-                        Obj._val = obj_val
-                        raise(CSN1InvalidValueErr())
-            else:
-                try:
-                    Obj._from_char(char)
-                except CharpyErr:
-                    char_err = True
-            #
-            if not char_err:
-                self._val.append( Obj._val )
-                Obj._val = obj_val
-            else:
-                Obj._val = obj_val
-                break
-    
-    def _to_pack_obj(self):
-        ret = []
-        if not self._val and None in self._alt:
-            return ret
-        # encode alternative selector
-        k = self._val[0]
-        assert( isinstance(k, str_types) )
-        ret.append( (CSN1T_UINT, int(k, 2), len(k)) )
-        obj_list = self._alt[k][1]
-        #
-        # encode alternative list
-        if self.ENC_LREF:
-            ret_cur = []
-            for i, val in enumerate(self._val[1:]):
-                ret_cur.append( len(ret) )
-                Obj = obj_list[i]
-                if isinstance(Obj, CSN1Val):
-                    ret.append( (CSN1T_UINT, int(Obj._val, 2), len(Obj._val)) )
-                else:
-                    obj_val  = Obj._val
-                    Obj._val = val
-                    ret.extend( Obj._to_pack() )
-                    Obj._val = obj_val
-                    #
-                    if Obj._lref:
-                        # get the length in bits corresponding to the encoded object
-                        obj_len = sum( [e[2] for e in ret[ret_cur[-1]:]] )
-                        # set it to the length object backward in ret
-                        len_val = ret[ret_cur[Obj._lref-1]]
-                        if obj_len >= (1<<len_val[2]):
-                            raise(CSN1Err('{0}: length prefix overflow, {1}'\
-                                  .format(self._name, obj_len)))
-                        # reassign the object value
-                        ret[ret_cur[Obj._lref-1]] = (len_val[0], obj_len, len_val[2])
-        else:
-            for i, val in enumerate(self._val):
-                Obj = obj_list[i]
-                if isinstance(Obj, CSN1Val):
-                    ret.append( (CSN1T_UINT, int(Obj._val, 2), len(Obj._val)) )
-                else:
-                    obj_val  = Obj._val
-                    Obj._val = val
-                    ret.extend( Obj._to_pack_obj() )
-                    Obj._val = obj_val
-        return ret
-    
-    def clone(self):
-        kw = self._clone_get_kw()
-        if self._alt:
-            kw['alt'] = {k: (self._alt[k][0], [Obj.clone() for Obj in self._alt[k][1]]) for k in self._alt}
-        if self._klen != self.__class__._klen:
-            kw['klen'] = self._klen
-        if self._kdic != self.__class__._kdic:
-            kw['kdic'] = self._kdic
+        if self._dic != self.__class__._dic:
+            kw['dic'] = self._dic
         return self.__class__(**kw)
 
 
@@ -690,6 +486,13 @@ class CSN1Val(CSN1Obj):
         CSN1Obj.__init__(self, **kw)
         if 'val' in kw and kw['val']:
             self._val = kw['val']
+        if 'L' in self._val or 'H' in self._val:
+            # TODO: support mixed padding L/H and non-padding 0/1 values
+            assert( '0' not in self._val )
+            assert( '1' not in self._val )
+            self._pad_gsm = 1
+        else:
+            self._pad_gsm = 0
     
     def _repr_val(self):
         return self._val.__repr__()
@@ -697,17 +500,57 @@ class CSN1Val(CSN1Obj):
     _show_val = _repr_val
     
     def _from_char_obj(self, char):
-        assert()
+        bit = len(self._val)
+        if bit:
+            try:
+                val = char.get_uint(bit)
+            except CharpyErr:
+                raise(CSN1NoCharErr())
+            else:
+                if self._pad_gsm:
+                    # convert val to a bit-string to be compared to self._val
+                    val_p = CSN1Obj.conv_b_pad_gsm(uint_to_bitstr(val, bit), self._off)
+                    if self._val != val_p:
+                        raise(CSN1InvalidValueErr())
+                    else:
+                        self._off += bit
+                        self._off %= 8
+                else:
+                    if int(self._val, 2) != val:
+                        raise(CSN1InvalidValueErr())
+                    else:
+                        self._off += bit
+                        self._off %= 8
     
     def _to_pack_obj(self):
-        assert()
+        bit = len(self._val)
+        if not bit:
+            return []
+        else:
+            if self._pad_gsm:
+                bl = []
+                for i, c in enumerate(self._val):
+                    p = self.Lv[self._off+i]
+                    if c == 'L':
+                        # padding value
+                        bl.append(p)
+                    else:
+                        # non-padding value
+                        bl.append(p^1)
+                self._off += bit
+                self._off %= 8
+                return [(CSN1T_UINT, bitlist_to_uint(bl), bit)]
+            else:
+                self._off += bit
+                self._off %= 8
+                return [(CSN1T_UINT, int(self._val, 2), bit)]
     
     def clone(self):
         kw = self._clone_get_kw()
         if self._val != self.__class__._val:
             kw['val'] = self._val
         return self.__class__(**kw)
-        
+
 
 class CSN1Ref(CSN1Obj):
     """Class to handle a reference to another CSN.1 object
@@ -741,15 +584,30 @@ class CSN1Ref(CSN1Obj):
     
     def _from_char_obj(self, char):
         obj_val = self._obj._val
-        self._obj._from_char(char)
-        self._val = self._obj._val
-        self._obj._val = obj_val
+        obj_off = self._obj._off
+        self._obj._off = self._off
+        try:
+            self._obj._from_char(char)
+        except (CSN1NoCharErr, CSN1InvalidValueErr) as err:
+            self._val = None
+            self._obj._val = obj_val
+            self._obj._off = obj_off
+            raise(err)
+        else:
+            self._val = self._obj._val
+            self._off = self._obj._off
+            self._obj._val = obj_val
+            self._obj._off = obj_off
     
     def _to_pack_obj(self):
         obj_val = self._obj._val
+        obj_off = self._obj._off
         self._obj._val = self._val
+        self._obj._off = self._off
         ret = self._obj._to_pack()
+        self._off = self._obj._off
         self._obj._val = obj_val
+        self._obj._off = obj_off
         return ret
     
     def clone(self):
@@ -758,11 +616,308 @@ class CSN1Ref(CSN1Obj):
         return self.__class__(**kw)
 
 
+class CSN1List(CSN1Obj):
+    """Class to handle a CSN.1 list of CSN1Obj instances
+    
+    specific internal attributes:
+        - list : list of CSN1Obj instances
+        - trunc: enables the list of values to be truncated
+        - val  : list of CSN1Obj values
+    """
+    
+    _list  = []
+    _trunc = False
+    
+    def __init__(self, **kw):
+        CSN1Obj.__init__(self, **kw)
+        if 'list' in kw and kw['list']:
+            self._list = kw['list']
+            for Obj in self._list:
+                Obj._par = self
+        if 'trunc' in kw and kw['trunc']:
+            self._trunc = True
+        self._val  = None
+    
+    def _repr_val(self):
+        content = []
+        for i, val in enumerate(self._val):
+            Obj = self._list[i]
+            obj_val  = Obj._val
+            Obj._val = val
+            content.append( Obj.repr() )
+            Obj._val = obj_val
+        if not content:
+            return '[]'
+        else:
+            return '[' + ''.join(content) + ']'
+    
+    def _show_val(self):
+        content = []
+        for i, val in enumerate(self._val):
+            Obj = self._list[i]
+            obj_val  = Obj._val
+            Obj._val = val
+            content.append( Obj.show().replace('\n', '\n ') )
+            Obj._val = obj_val
+        if not content:
+            return '[]'
+        else:
+            return '[\n ' + '\n '.join(content) + ']'
+    
+    def _from_char_obj(self, char):
+        self._val = []
+        for Obj in self._list:
+            obj_val = Obj._val
+            obj_off = Obj._off
+            Obj._off = self._off
+            try:
+                Obj._from_char(char)
+            except (CSN1NoCharErr, CSN1InvalidValueErr) as err:
+                # TODO: it will be required at some point to handle truncation
+                # properly (e.g. "//" at the end of a CSN1 list)
+                Obj._val = obj_val
+                Obj._off = obj_off
+                if self._trunc:
+                    break
+                else:
+                    raise(err)
+            else:
+                self._val.append( Obj._val )
+                self._off = Obj._off
+                Obj._val = obj_val
+                Obj._off = obj_off
+    
+    def _to_pack_obj(self):
+        ret = []
+        for i, val in enumerate(self._val):
+            Obj = self._list[i]
+            obj_off = Obj._off
+            Obj._off = self._off
+            if isinstance(Obj, CSN1Val):
+                ret.extend( Obj._to_pack() )
+            else:
+                obj_val  = Obj._val
+                Obj._val = val
+                ret.extend( Obj._to_pack() )
+                Obj._val = obj_val
+            self._off = Obj._off
+            Obj._off = obj_off
+        return ret
+    
+    def clone(self):
+        kw = self._clone_get_kw()
+        if self._list:
+            kw['list'] = [Obj.clone() for Obj in self._list]
+        if self._trunc:
+            kw['trunc'] = True
+        return self.__class__(**kw)
+
+
+class CSN1Alt(CSN1Obj):
+    """Class to handle a CSN.1 alternative between multiple list of CSN1Obj 
+    instances
+    
+    specific internal attributes:
+        - alt : dict of { key bit-string : list of CSN1Obj instances }
+        - kdic: dictionnary of {key bit-string : alternative name}
+        - kord: dictionnary of {key length: {set of keys of given length}}
+        - val : list of CSN1Obj values
+    """
+    # ENC_LREF enables to automatically encode length determinant
+    ENC_LREF = True
+    
+    _alt   = {}
+    _kdic  = None
+    _trunc = False
+    
+    def __init__(self, **kw):
+        CSN1Obj.__init__(self, **kw)
+        if 'alt' in kw and kw['alt']:
+            self._alt = kw['alt']
+            for alt in self._alt.values():
+                for Obj in alt[1]:
+                    Obj._par = self
+        if 'kdic' in kw and kw['kdic']:
+            self._kdic = kw['kdic']
+        #
+        keys = [k for k in self._alt if k is not None and len(k) > 0]
+        if any(['L' in k or 'H' in k for k in keys]):
+            # TODO: support mixed padding L/H and non-padding 0/1 keys
+            assert( all(['0' not in k and '1' not in k for k in keys]) )
+            self._pad_gsm = 1
+        else:
+            self._pad_gsm = 0
+        #
+        klen = set([len(k) for k in keys])
+        self._kord = {kl: set([k for k in keys if len(k) == kl]) for kl in klen}
+        self._val  = None
+    
+    def _repr_val(self):
+        if not self._val:
+            return '{}'
+        else:
+            k = self._val[0]
+            if self._kdic and k in self._kdic:
+                alt_name = self._kdic[k]
+            else:
+                alt_name = self._alt[k][0]
+            alt_list = self._alt[k][1]
+            if alt_name:
+                pref = '{%r (%s): [' % (k, alt_name)
+            else:
+                pref = '{%r, [' % k
+            content = []
+            for i, val in enumerate(self._val[1:]):
+                Obj = alt_list[i]
+                obj_val  = Obj._val
+                Obj._val = val
+                content.append( Obj.repr() )
+                Obj._val = obj_val
+            if not content:
+                return pref + ']}'
+            else:
+                return pref + ''.join(content) + ']}'
+    
+    def _show_val(self):
+        if not self._val:
+            return '{}'
+        else:
+            k = self._val[0]
+            if self._kdic and k in self._kdic:
+                alt_name = self._kdic[k]
+            else:
+                alt_name = self._alt[k][0]
+            alt_list = self._alt[k][1]
+            if alt_name:
+                pref = '{%r (%s): [\n ' % (k, alt_name)
+            else:
+                pref = '{%r, [\n ' % k
+            content = []
+            for i, val in enumerate(self._val[1:]):
+                Obj = alt_list[i]
+                obj_val  = Obj._val
+                Obj._val = val
+                content.append( Obj.show().replace('\n', '\n ') )
+                Obj._val = obj_val
+            if not content:
+                return pref[:-2] + ']}'
+            else:
+                return pref + '\n '.join(content) + ']}'
+    
+    def _from_char_obj(self, char):
+        self._val = []
+        # 
+        # 1) select alternative
+        if '' in self._alt and char.len_bit() > 0:
+            k = ''
+        elif None in self._alt and char.len_bit() == 0:
+            # not entering any alternative
+            #self._val = None
+            return
+        else:
+            # start with the shortest to the longest key
+            found = False
+            for kl, keys in self._kord.items():
+                try:
+                    k = uint_to_bitstr(char.to_uint(kl), kl)
+                except CharpyErr:
+                    raise(CSN1NoCharErr())
+                if self._pad_gsm:
+                    # convert k to a bit-string to be compared to keys
+                    k = CSN1Obj.conv_b_pad_gsm(k, self._off)
+                if k in keys:
+                    found = True
+                    char._cur += kl
+                    self._off += kl
+                    self._off %= 8
+                    break
+            if not found:
+                raise(CSN1InvalidValueErr())
+        #
+        obj_list = self._alt[k][1]
+        self._val.append(k)
+        #
+        # 2) decode alternative
+        for Obj in obj_list:
+            obj_val = Obj._val
+            obj_off = Obj._off
+            Obj._off = self._off
+            try:
+                Obj._from_char(char)
+            except (CSN1NoCharErr, CSN1InvalidValueErr) as err:
+                # TODO: it will be required at some point to handle truncation
+                # properly (e.g. "//" at the end of a CSN1 list)
+                Obj._val = obj_val
+                Obj._off = obj_off
+                if self._trunc:
+                    break
+                else:
+                    raise(err)
+            else:
+                self._val.append( Obj._val )
+                self._off = Obj._off
+                Obj._val = obj_val
+                Obj._off = obj_off
+    
+    def _to_pack_obj(self):
+        ret = []
+        if not self._val and None in self._alt:
+            return ret
+        # encode alternative selector
+        k = self._val[0]
+        assert( isinstance(k, str_types) )
+        if k:
+            # TODO: handle L/H keys
+            if self._pad_gsm:
+                bl = []
+                for i, c in enumerate(k):
+                    p = self.Lv[self._off+i]
+                    if c == 'L':
+                        # padding value
+                        bl.append(p)
+                    else:
+                        # non-padding value
+                        bl.append(p^1)
+                ret.append( (CSN1T_UINT, bitlist_to_uint(bl), len(k)) )
+            else:
+                ret.append( (CSN1T_UINT, int(k, 2), len(k)) )
+            self._off += len(k)
+            self._off %= 8
+        obj_list = self._alt[k][1]
+        #
+        # encode alternative list
+        for i, val in enumerate(self._val[1:]):
+            Obj = obj_list[i]
+            obj_off = Obj._off
+            Obj._off = self._off
+            if isinstance(Obj, CSN1Val):
+                ret.extend( Obj._to_pack() )
+            else:
+                obj_val  = Obj._val
+                Obj._val = val
+                ret.extend( Obj._to_pack() )
+                Obj._val = obj_val
+            self._off = Obj._off
+            Obj._off = obj_off
+        return ret
+    
+    def clone(self):
+        kw = self._clone_get_kw()
+        kw['kord'] = self._kord
+        if self._alt:
+            kw['alt'] = {k: (self._alt[k][0], [Obj.clone() for Obj in self._alt[k][1]]) for k in self._alt}
+        if self._kdic != self.__class__._kdic:
+            kw['kdic'] = self._kdic
+        if self._trunc:
+            kw['trunc'] = True
+        return self.__class__(**kw)
+
+
 class CSN1SelfRef(CSN1Obj):
     """Class to handle a reference to the root CSN1 object
     
     specific internal attributes:
-        - val: value according to the roo object
+        - val: value according to the root object
     """
     
     def __init__(self, **kw):

@@ -32,13 +32,18 @@ import re
 from pycrate_core.elt      import Element
 from pycrate_core.utils    import *
 from pycrate_core.utils    import TYPE_UINT as _TYPE_UINT
-from pycrate_asn1c.utils   import scan_for_comments
-from pycrate_asn1c.dictobj import ASN1Dict as CSN1Dict
 
 
 #------------------------------------------------------------------------------#
 # CSN.1 errors
 #------------------------------------------------------------------------------#
+
+def csnlog(msg):
+    '''
+    customizable logging function for the whole csn1 part
+    '''
+    log(msg)
+
 
 # generic CSN.1 error
 class CSN1Err(PycrateErr):
@@ -47,15 +52,54 @@ class CSN1Err(PycrateErr):
 class CSN1InvalidValueErr(CSN1Err):
     pass
 
+class CSN1NoCharErr(CSN1Err):
+    pass
+
 
 #------------------------------------------------------------------------------#
 # text processing
 #------------------------------------------------------------------------------#
 
+def scan_for_comments(text=''):
+    """
+    returns a list of 2-tuple (start offset, end offset) for each CSN.1 comment
+    found in text
+    """
+    ret = []
+    cur = 0
+    next = text.find('--')
+    while next >= 0:
+        cur += next
+        # start of comment
+        start = cur
+        # move cursor forward to reach the end of comment
+        cur += 2
+        # exception for line full of ------------------ sh*t
+        #while text[cur:1+cur] == '-':
+        #    cur += 1
+        while True:
+            # move 1 by 1 and find an end-of-comment or end-of-file
+            if text[cur:1+cur] == '\n' or cur >= len(text):
+                comment = False
+                ret.append((start, cur))
+                cur += 1
+                break
+            #elif text[cur:2+cur] == '--':
+            #    comment = False
+            #    cur += 2
+            #    ret.append((start, cur))
+            #    break
+            else:
+                cur += 1
+        # find the next comment
+        next = text[cur:].find('--')
+    return ret
+
+
 def clean_text(text=''):
     """
     processes text to: 
-        remove ASN.1 comments
+        remove CSN.1 comments
         replace tab with space
         remove duplicated spaces
     """
@@ -91,22 +135,30 @@ def pythonize_name(name=''):
     # do not let name starts with a numeric char
     if name and name[0] in '0123456789':
         name = '_' + name
-    return name
+    return name.lower()
 
 #------------------------------------------------------------------------------#
 # CSN.1 tokens
 #------------------------------------------------------------------------------#
 
-_RE_NAME  = '[a-zA-Z0-9_\-/ \.]{1,}'
+_RE_NAME  = '[0-9a-zA-Z_ \-/\.]{1,}'
+_RE_VAL   = 'val\s{0,}\(\s{0,}(%s)\s{0,}\)' % _RE_NAME
 
-SYNT_RE_NAME = re.compile(
-    '<\s{0,}(%s)\s{0,}>\s{0,}' % _RE_NAME)
-SYNT_RE_REPET = re.compile(
-    '(?:\(\s{0,}(?:([0-9]{1,})|(\*))\s{0,}\))|(?:\*\s{0,}(?:([0-9]{1,})|(\*)))')
-SYNT_RE_VALUE = re.compile(
-    '([01\s]{1,})|([LH\s]{1,})|(null)')
-SYNT_RE_LENREF = re.compile(
-    '\(\s{0,}val\s{0,}\(\s{0,}(%s)\)\s{0,}\)\s{0,}\&' % _RE_NAME)
+SYNT_RE_NAME  = re.compile('<\s{0,}(%s)\s{0,}>' % _RE_NAME)
+SYNT_RE_VALUE = re.compile('([01\s]{1,})|([LH\s]{1,})|(null)')
+SYNT_RE_NOSTR = re.compile('=\s{0,}<\s{0,}no\s{1,}string\s{0,}>')
+
+# {iteration / length} arithmetic expression
+TOK_UINT = 1
+TOK_REF  = 2
+TOK_ADD  = 3
+TOK_SUB  = 4
+TOK_MUL  = 5
+TOK_OPEN = 6
+TOK_CLOS = 7
+
+def arithm_get_expr(m):
+    return m.group()
 
 #------------------------------------------------------------------------------#
 # value conversion
