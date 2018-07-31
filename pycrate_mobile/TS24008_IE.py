@@ -50,10 +50,10 @@ from .TS24007 import ProtDisc_dict
 # TS 24.008 IE specified with CSN.1
 #------------------------------------------------------------------------------#
 
-from pycrate_csn1dir.mscm3          import Classmark_3_Value_part
-from pycrate_csn1dir.msnetcap       import MS_network_capability_value_part
-from pycrate_csn1dir.msracap        import MS_RA_capability_value_part
-from pycrate_csn1dir.rcvnpdunumlist import Receive_N_PDU_Number_list_value
+from pycrate_csn1dir.classmark_3_value_part           import classmark_3_value_part
+from pycrate_csn1dir.ms_network_capability_value_part import ms_network_capability_value_part
+from pycrate_csn1dir.ms_ra_capability_value_part      import ms_ra_capability_value_part
+from pycrate_csn1dir.receive_npdu_number_list_value   import receive_npdu_number_list_value
 
 #------------------------------------------------------------------------------#
 # str shortcuts

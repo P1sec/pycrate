@@ -120,19 +120,19 @@ class GMMHeader(Envelope):
 class GMMAttachRequest(Layer3):
     _GEN = (
         GMMHeader(val={'Type':1}),
-        Type4LV('MSNetCap', val={'V':b'\0\0'}, IE=MS_network_capability_value_part),
+        Type4LV('MSNetCap', val={'V':b'\0\0'}, IE=ms_network_capability_value_part),
         Type1V('CKSN', dic=CKSN_dict),
         Type1V('AttachType', IE=AttachType()),
         Type3V('DRXParam', val={'V':b'\0\0'}, bl={'V':16}, IE=DRXParam()),
         Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
         Type3V('OldRAI', val={'V':b'\0\xf1\x10\0\0\0'}, bl={'V':48}, IE=RAI()),
-        Type4LV('MSRACap', val={'V':5*b'\0'}, IE=MS_RA_capability_value_part),
+        Type4LV('MSRACap', val={'V':5*b'\0'}, IE=ms_ra_capability_value_part),
         Type3TV('OldPTMSISign', val={'T':0x19, 'V':b'\0\0\0'}, bl={'V':24}),
         Type3TV('ReqREADYTimer', val={'T':0x17, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
         Type1TV('TMSIStatus', val={'T':0x9, 'V':0}, IE=TMSIStatus()),
         Type4TLV('PSLCSCap', val={'T':0x33, 'V':b'\0'}, IE=PSLCSCap()),
         Type4TLV('MSCm2', val={'T':0x11, 'V':b'@\0\0'}, IE=MSCm2()),
-        Type4TLV('MSCm3', val={'T':0x20, 'V':b''}, IE=Classmark_3_Value_part),
+        Type4TLV('MSCm3', val={'T':0x20, 'V':b''}, IE=classmark_3_value_part),
         Type4TLV('SuppCodecs', val={'T':0x40, 'V':b'\0\x01\0'}, IE=SuppCodecList()),
         Type4TLV('UENetCap', val={'T':0x58, 'V':b'\0\0'}, IE=UENetCap()),
         Type4TLV('AddID', val={'T':0x1A, 'V':b'\xf4\0\0\0\0'}, IE=ID()),
@@ -183,9 +183,9 @@ class GMMAttachAccept(Layer3):
         Type4TLV('ExtDRXParam', val={'T':0x6E, 'V':b'\0'}, IE=ExtDRXParam()),
         Type1TV('UPIntegrityInd', val={'T':0xC, 'V':0}, IE=UPIntegrityInd()),
         Type4TLV('MSNetCap', val={'T':0x31, 'V':b'\0\0'},
-            IE=MS_network_capability_value_part),
+            IE=ms_network_capability_value_part),
         Type4TLV('MSRACap', val={'T':0x33, 'V':5*b'\0'},
-            IE=MS_RA_capability_value_part)
+            IE=ms_ra_capability_value_part)
         )
 
 
@@ -312,11 +312,11 @@ class GMMAuthenticationCipheringRequest(Layer3):
         Type1TV('CKSN', val={'T':0x8, 'V':0}, dic=CKSN_dict),
         Type4TLV('AUTN', val={'T':0x28, 'V':16*b'\0'}, IE=AUTN()),
         Type4TLV('MSNetCap', val={'T':0x31, 'V':b'\0\0'},
-            IE=MS_network_capability_value_part),
+            IE=ms_network_capability_value_part),
         Type1TV('IntegAlgo', val={'T':0x9, 'V':0}, dic=IntegAlgo_dict),
         Type4TLV('MAC', val={'T':0x43, 'V':4*b'\0'}),
         Type4TLV('MSRACap', val={'T':0x33, 'V':5*b'\0'},
-            IE=MS_RA_capability_value_part)
+            IE=ms_ra_capability_value_part)
         )
 
 
@@ -397,13 +397,13 @@ class GMMRoutingAreaUpdateRequest(Layer3):
         Type1V('CKSN', dic=CKSN_dict),
         Type1V('UpdateType', IE=UpdateType()),
         Type3V('OldRAI', val={'V':b'\0\xf1\x10\0\0\0'}, bl={'V':48}, IE=RAI()),
-        Type4LV('MSRACap', val={'V':5*b'\0'}, IE=MS_RA_capability_value_part),
+        Type4LV('MSRACap', val={'V':5*b'\0'}, IE=ms_ra_capability_value_part),
         Type3TV('OldPTMSISign', val={'T':0x19, 'V':b'\0\0\0'}, bl={'V':24}),
         Type3TV('ReqREADYTimer', val={'T':0x17, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
         Type3TV('DRXParam', val={'T':0x27, 'V':b'\0\0'}, bl={'V':16}, IE=DRXParam()),
         Type1TV('TMSIStatus', val={'T':0x9, 'V':0}, IE=TMSIStatus()),
         Type4TLV('PTMSI', val={'T':0x18, 'V':b'\xf4\0\0\0\0'}, IE=ID()),
-        Type4TLV('MSNetCap', val={'T':0x31, 'V':b'\0\0'}, IE=MS_network_capability_value_part),
+        Type4TLV('MSNetCap', val={'T':0x31, 'V':b'\0\0'}, IE=ms_network_capability_value_part),
         Type4TLV('PDPCtxtStat', val={'T':0x32, 'V':b'\0\0'}, IE=PDPCtxtStat()),
         Type4TLV('PSLCSCap', val={'T':0x33, 'V':b'\0'}, IE=PSLCSCap()),
         Type4TLV('MBMSCtxtStat', val={'T':0x35, 'V':b''}, IE=MBMSCtxtStat()),
@@ -411,7 +411,7 @@ class GMMRoutingAreaUpdateRequest(Layer3):
         Type4TLV('AddID', val={'T':0x1A, 'V':b'\xf4\0\0\0\0'}, IE=ID()),
         Type4TLV('AddRAI', val={'T':0x1B, 'V':6*b'\0'}, IE=RAI()),
         Type4TLV('MSCm2', val={'T':0x11, 'V':b'@\0\0'}, IE=MSCm2()),
-        Type4TLV('MSCm3', val={'T':0x20, 'V':b''}, IE=Classmark_3_Value_part),
+        Type4TLV('MSCm3', val={'T':0x20, 'V':b''}, IE=classmark_3_value_part),
         Type4TLV('SuppCodecs', val={'T':0x40, 'V':b'\0\x01\0'}, IE=SuppCodecList()),
         Type4TLV('VoiceDomPref', val={'T':0x5D, 'V':b'\0'}, IE=VoiceDomPref()),
         Type1TV('PTMSIType', val={'T':0xE, 'V':0}, IE=PTMSIType()),
@@ -442,7 +442,7 @@ class GMMRoutingAreaUpdateAccept(Layer3):
         Type4TLV('AllocPTMSI', val={'T':0x18, 'V':b'\xf4\0\0\0\0'}, IE=ID()),
         Type4TLV('MSIdent', val={'T':0x23, 'V':b'\xf4\0\0\0\0'}, IE=ID()),
         Type4TLV('RcvNPDUNumList', val={'T':0x26, 'V':b'\0\0'},
-            IE=Receive_N_PDU_Number_list_value),
+            IE=receive_npdu_number_list_value),
         Type3TV('NegoREADYTimer', val={'T':0x17, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
         Type3TV('GMMCause', val={'T':0x25, 'V':b'\x11'}, bl={'V':8}, IE=GMMCause()),
         Type4TLV('T3302', val={'T':0x2A, 'V':b'\0'}, IE=GPRSTimer()),
@@ -461,9 +461,9 @@ class GMMRoutingAreaUpdateAccept(Layer3):
         Type4TLV('ExtDRXParam', val={'T':0x6E, 'V':b'\0'}, IE=ExtDRXParam()),
         Type1TV('UPIntegrityInd', val={'T':0xC, 'V':0}, IE=UPIntegrityInd()),
         Type4TLV('MSNetCap', val={'T':0x31, 'V':b'\0\0'},
-            IE=MS_network_capability_value_part),
+            IE=ms_network_capability_value_part),
         Type4TLV('MSRACap', val={'T':0x33, 'V':5*b'\0'},
-            IE=MS_RA_capability_value_part)
+            IE=ms_ra_capability_value_part)
         )
 
 
@@ -476,7 +476,7 @@ class GMMRoutingAreaUpdateComplete(Layer3):
     _GEN = (
         GMMHeader(val={'Type':10}),
         Type4TLV('RcvNPDUNumList', val={'T':0x26, 'V':b'\0\0'},
-            IE=Receive_N_PDU_Number_list_value),
+            IE=receive_npdu_number_list_value),
         Type4TLV('InterRATHOInfo', val={'T':0x27, 'V':b'\0'}),
         Type4TLV('EUTRANInterRATHOInfo', val={'T':0x2B, 'V':b'\0'})
         )

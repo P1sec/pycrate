@@ -235,7 +235,7 @@ def decode_ue_rad_cap(buf):
             else:
                 uecapinfo[rattype] = UEUTRACap._val
         elif rattype == 'geran-cs':
-            m2, m3 = NAS.MSCm2(), NAS.Classmark_3_Value_part.clone()
+            m2, m3 = NAS.MSCm2(), NAS.classmark_3_value_part.clone()
             # MSCm2 || MSCm3
             buf = caprat['ueCapabilityRAT-Container']
             if buf[0:1] != b'\x33':
@@ -252,7 +252,7 @@ def decode_ue_rad_cap(buf):
                 else:
                     uecapinfo[rattype] = (m2, m3)
         elif rattype == 'geran-ps':
-            mrc = NAS.MS_RA_capability_value_part.clone()
+            mrc = NAS.ms_ra_capability_value_part.clone()
             try:
                 mrc.from_bytes(caprat['ueCapabilityRAT-Container'])
             except:
