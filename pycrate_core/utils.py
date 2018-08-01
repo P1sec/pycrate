@@ -37,6 +37,14 @@ else:
 # configure max recursion
 #sys.setrecursionlimit(200)
 
+try:
+    import platform
+except:
+    python_implementation = 'Unknown'
+else:
+    python_implementation = platform.python_implementation()
+    # can be 'CPython' or 'PyPy'
+ 
 #------------------------------------------------------------------------------#
 # library wide logging function
 #------------------------------------------------------------------------------#
