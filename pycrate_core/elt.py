@@ -30,8 +30,6 @@
 __all__ = ['EltErr', 'REPR_RAW', 'REPR_HEX', 'REPR_BIN', 'REPR_HD', 'REPR_HUM',
            'Element', 'Atom', 'Envelope', 'Array', 'Sequence']
 
-import platform
-
 from .utils  import *
 from .charpy import Charpy, CharpyErr
 
@@ -1372,7 +1370,7 @@ class Atom(Element):
     
     __call__ = get_val
     __repr__ = repr
-    if platform.python_implementation() != 'PyPy':
+    if python_implementation != 'PyPy':
         # PyPy iterator implementation leads to an infinite loop
         # __iter__() calls __len__(), but here, get_bl() calls __iter__()
         __len__ = get_bl
@@ -2098,7 +2096,7 @@ class Envelope(Element):
     
     __call__ = get_val
     __repr__ = repr
-    if platform.python_implementation() != 'PyPy':
+    if python_implementation != 'PyPy':
         # PyPy iterator implementation lead to an infinite loop
         # __iter__() calls __len__(), but here, get_bl() calls __iter__()
         __len__ = get_bl
@@ -2921,7 +2919,7 @@ class Array(Element):
     
     __call__ = get_val
     __repr__ = repr
-    if platform.python_implementation() != 'PyPy':
+    if python_implementation != 'PyPy':
         # PyPy iterator implementation lead to an infinite loop
         # __iter__() calls __len__(), but here, get_bl() calls __iter__()
         __len__ = get_bl
@@ -3762,7 +3760,7 @@ class Sequence(Element):
     
     __call__ = get_val
     __repr__ = repr
-    if platform.python_implementation() != 'PyPy':
+    if python_implementation != 'PyPy':
         # PyPy iterator implementation lead to an infinite loop
         # __iter__() calls __len__(), but here, get_bl() calls __iter__()
         __len__ = get_bl
