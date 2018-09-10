@@ -291,6 +291,15 @@ class _SCCPAddr(Envelope):
         self[4].set_transauto(lambda: False if self[0][2].get_val() == 2 else True)
         self[5].set_transauto(lambda: False if self[0][2].get_val() == 3 else True)
         self[6].set_transauto(lambda: False if self[0][2].get_val() == 4 else True)
+    
+    def get_gt(self):
+        # GTInd + SSNInd + PCInd
+        cur = 2 + self[0][2].get_val()
+        try:
+            return self[cur]
+        except:
+            # this is dirty
+            return self[-1]
 
 
 class CallingPartyAddr(Envelope):
@@ -308,6 +317,9 @@ class CallingPartyAddr(Envelope):
         char._len_bit = char._cur + 8*self[0].get_val()
         self[1]._from_char(char)
         char._len_bit = clen
+    
+    def get_gt(self):
+        return self[1].get_gt()
 
 
 class CalledPartyAddr(Envelope):
@@ -325,6 +337,9 @@ class CalledPartyAddr(Envelope):
         char._len_bit = char._cur + 8*self[0].get_val()
         self[1]._from_char(char)
         char._len_bit = clen
+    
+    def get_gt(self):
+        return self[1].get_gt()
 
 
 #------------------------------------------------------------------------------#
