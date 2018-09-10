@@ -208,7 +208,7 @@ class _GlobalTitle0011(Envelope):
                 else:
                     self.__setitem__(key, val)
             if addr is not None:
-                self.get_addr().set_val(val)
+                self.get_addr().set_val(addr)
         else:
             Envelope.set_val(self, vals)
     
@@ -258,7 +258,7 @@ class _GlobalTitle0100(Envelope):
                 else:
                     self.__setitem__(key, val)
             if addr is not None:
-                self.get_addr().set_val(val)
+                self.get_addr().set_val(addr)
         else:
             Envelope.set_val(self, vals)
     
