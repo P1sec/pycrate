@@ -314,8 +314,8 @@ class IPv4(Envelope):
         Uint('precedence', bl=3, dic=IPv4Preced_dict),
         Uint('delay', bl=1, dic={0:'Normal', 1:'Low'}),
         Uint('throughput', bl=1, dic={0:'Normal', 1:'High'}),
-        Uint('reliab', bl=1, dic={0:'Normal', 1:'High'}),
-        Uint('res_1', bl=2, rep=REPR_BIN),
+        Uint('DSC', bl=1, dic={0:'Normal', 1:'High'}),
+        Uint('ECN', bl=2, rep=REPR_BIN),
         Uint16('len'), # val automated, unless initialized to fixed value
         Uint16('id'),
         Uint('res_2', bl=1, rep=REPR_BIN),
