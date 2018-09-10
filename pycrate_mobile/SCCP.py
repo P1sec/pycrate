@@ -198,6 +198,25 @@ class _GlobalTitle0011(Envelope):
         Envelope.__init__(self, *args, **kwargs)
         self[3].set_transauto(lambda: False if self[2].get_val() in (1, 2) else True)
         self[4].set_transauto(lambda: True if self[2].get_val() in (1, 2) else False)
+    
+    def set_val(self, vals):
+        if isinstance(vals, dict):
+            addr = None
+            for key, val in vals.items():
+                if key == 'Addr':
+                    addr = val
+                else:
+                    self.__setitem__(key, val)
+            if addr is not None:
+                self.get_addr().set_val(val)
+        else:
+            Envelope.set_val(self, vals)
+    
+    def get_addr(self):
+        if self[2].get_val() in (1, 2):
+            return self[3]
+        else:
+            return self[4]
 
 
 # GTInd 0100
@@ -229,6 +248,25 @@ class _GlobalTitle0100(Envelope):
         Envelope.__init__(self, *args, **kwargs)
         self[5].set_transauto(lambda: False if self[2].get_val() in (1, 2) else True)
         self[6].set_transauto(lambda: True if self[2].get_val() in (1, 2) else False)
+    
+    def set_val(self, vals):
+        if isinstance(vals, dict):
+            addr = None
+            for key, val in vals.items():
+                if key == 'Addr':
+                    addr = val
+                else:
+                    self.__setitem__(key, val)
+            if addr is not None:
+                self.get_addr().set_val(val)
+        else:
+            Envelope.set_val(self, vals)
+    
+    def get_addr(self):
+        if self[2].get_val() in (1, 2):
+            return self[5]
+        else:
+            return self[6]
 
 
 # SCCP called / calling party address
@@ -291,6 +329,19 @@ class _SCCPAddr(Envelope):
         self[4].set_transauto(lambda: False if self[0][2].get_val() == 2 else True)
         self[5].set_transauto(lambda: False if self[0][2].get_val() == 3 else True)
         self[6].set_transauto(lambda: False if self[0][2].get_val() == 4 else True)
+    
+    def set_val(self, vals):
+        if isinstance(vals, dict):
+            gt = None
+            for key, val in vals.items():
+                if key == 'GT':
+                    gt = val
+                else:
+                    self.__setitem__(key, val)
+            if gt is not None:
+                self.get_gt().set_val(gt)
+        else:
+            Envelope.set_val(self, vals)
     
     def get_gt(self):
         # GTInd + SSNInd + PCInd
