@@ -518,6 +518,29 @@ class ASN1Obj(Element):
             internals['const_tab_at']   = self._const_tab_at
         return internals
     
+    def get_const(self):
+        """
+        returns the dict of constraints that apply to the object
+        """
+        const = {}
+        if self._const_val is not None:
+            const['val'] = self._const_val
+        if self._const_tab is not None:
+            const['tab'] = self._const_tab
+        if hasattr(self, '_const_sz') and self._const_sz is not None:
+            const['sz']       = self._const_sz
+        if hasattr(self, '_const_alpha') and self._const_alpha is not None:
+            const['alpha']    = self._const_alpha
+        if hasattr(self, '_const_cont') and self._const_cont is not None:
+            const['cont']     = self._const_cont
+        if hasattr(self, '_const_cont_enc') and self._const_cont_enc is not None:
+            const['cont_enc'] = self._const_cont_enc
+        if hasattr(self, '_const_tab_id') and self._const_tab_id is not None:
+            const['tab_id']   = self._const_tab_id
+        if hasattr(self, '_const_tab_at') and self._const_tab_at is not None:
+            const['tab_at']   = self._const_tab_at
+        return const
+    
     def get_proto(self):
         """
         returns the prototype of the object
