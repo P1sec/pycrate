@@ -867,6 +867,30 @@ class ASN1Obj(Element):
     # conversion between internal value and ASN.1 BER encoding
     ###
     
+    def __to_ber_codec_set(self):
+        # 0) enables BER length encoding options to be set by field
+        if hasattr(self, '_BER_ENC_LLONG'):
+            ber_enc_llong = ASN1CodecBER.ENC_LLONG
+            ASN1CodecBER.ENC_LLONG = self._BER_ENC_LLONG
+            print('%s: special BER ENC_LLONG %r encoding' % (self._name, ASN1CodecBER.ENC_LLONG))
+        else:
+            ber_enc_llong = None
+        if hasattr(self, '_BER_ENC_LUNDEF'):
+            # this is only for constructed types,
+            # but it is easier to handle it here globally
+            ber_enc_lundef = ASN1CodecBER.ENC_LUNDEF
+            ASN1CodecBER.ENC_LUNDEF = self._BER_ENC_LUNDEF
+            print('%s: special BER ENC_LUNDEF %r encoding' % (self._name, ASN1CodecBER.ENC_LUNDEF))
+        else:
+            ber_enc_lundef = None
+        return (ber_enc_llong, ber_enc_lundef)
+    
+    def __to_ber_codec_unset(self, *ber_enc_args):
+        if ber_enc_llong is not None:
+            ASN1CodecBER.ENC_LLONG = ber_enc_args[0]
+        if ber_enc_lundef is not None:
+            ASN1CodecBER.ENC_LUNDEF = ber_enc_args[1]
+    
     def _from_ber(self, char, TLV):
         # 1) decode the tag chain
         tlv, pc = TLV, 1
@@ -904,38 +928,46 @@ class ASN1Obj(Element):
             self._safechk_bnd(self._val)
     
     def _to_ber(self):
+        # 0) set potential BER codec locals
+        _ber_enc_args = self.__to_ber_codec_set()
+        #
         # 1) encode the most inner TLV part
         pc, lval, V = self._encode_ber_cont()
         if not self._tagc:
             # in case no tag is associated to the object (CHOICE, OPEN / ANY)
             # we only have the inner encoding
-            return V
-        TLV = ASN1CodecBER.encode_tag(self._tagc[-1][0], pc, self._tagc[-1][1])
-        TLV.extend( ASN1CodecBER.encode_len(lval) )
-        TLV.extend( V )
-        if lval == -1:
-            TLV.append( (T_BYTES, b'\0\0', 16) )
-        # 2) encode the outer part of the object, i.e. the rest of the tag chain
-        if len(self._tagc) > 1:
-            GEN = [TLV]
-            if ASN1CodecBER.ENC_LUNDEF:
-                for t in reversed(self._tagc[:-1]):
-                    TL = ASN1CodecBER.encode_tag(t[0], 1, t[1])
-                    TL.extend( ASN1CodecBER.encode_len(-1) )
-                    # append an EOC marker after the value
-                    TLV.append( (T_BYTES, b'\0\0', 16) )
-                    GEN.append(TL)
-            else:
-                lval = sum([f[2] for f in TLV]) >> 3
-                for t in reversed(self._tagc[:-1]):
-                    TL = ASN1CodecBER.encode_tag(t[0], 1, t[1])
-                    TL.extend( ASN1CodecBER.encode_len(lval) )
-                    lval += sum([f[2] for f in TL]) >> 3
-                    GEN.append(TL)
-            # revert and flatten GEN
-            return [i for j in reversed(GEN) for i in j]
+            ret = V
         else:
-            return TLV
+            TLV = ASN1CodecBER.encode_tag(self._tagc[-1][0], pc, self._tagc[-1][1])
+            TLV.extend( ASN1CodecBER.encode_len(lval) )
+            TLV.extend( V )
+            if lval == -1:
+                TLV.append( (T_BYTES, b'\0\0', 16) )
+            # 2) encode the outer part of the object, i.e. the rest of the tag chain
+            if len(self._tagc) > 1:
+                GEN = [TLV]
+                if ASN1CodecBER.ENC_LUNDEF:
+                    for t in reversed(self._tagc[:-1]):
+                        TL = ASN1CodecBER.encode_tag(t[0], 1, t[1])
+                        TL.extend( ASN1CodecBER.encode_len(-1) )
+                        # append an EOC marker after the value
+                        TLV.append( (T_BYTES, b'\0\0', 16) )
+                        GEN.append(TL)
+                else:
+                    lval = sum([f[2] for f in TLV]) >> 3
+                    for t in reversed(self._tagc[:-1]):
+                        TL = ASN1CodecBER.encode_tag(t[0], 1, t[1])
+                        TL.extend( ASN1CodecBER.encode_len(lval) )
+                        lval += sum([f[2] for f in TL]) >> 3
+                        GEN.append(TL)
+                # revert and flatten GEN
+                ret = [i for j in reversed(GEN) for i in j]
+            else:
+                ret = TLV
+        #
+        # 2) restore potential BER encoder globals
+        self.__to_ber_codec_unset(*_ber_enc_args)
+        return ret
     
     def to_ber(self, val=None):
         if val is not None:
@@ -1010,6 +1042,9 @@ class ASN1Obj(Element):
             self._safechk_bnd(self._val)
     
     def _to_ber_ws(self):
+        # 0) set potential BER codec locals
+        _ber_enc_args = self.__to_ber_codec_set()
+        #
         # 1) encode the most inner TLV part
         pc, lval, V = self._encode_ber_cont_ws()
         if not self._tagc:
@@ -1035,21 +1070,24 @@ class ASN1Obj(Element):
                     for t in reversed(self._tagc[:-1]):
                         TLV._name = 'V'
                         TLV = Envelope('TLV', GEN=(ASN1CodecBER.encode_tag_ws(t[0], 1, t[1]),
-                                                      ASN1CodecBER.encode_len_ws(-1),
-                                                      TLV,
-                                                      ASN1CodecBER.encode_tag_ws(0, 0, 0),
-                                                      ASN1CodecBER.encode_len_ws(0)))
+                                                   ASN1CodecBER.encode_len_ws(-1),
+                                                   TLV,
+                                                   ASN1CodecBER.encode_tag_ws(0, 0, 0),
+                                                   ASN1CodecBER.encode_len_ws(0)))
                 else:
                     lval += (TLV[0].get_bl() + TLV[1].get_bl()) >> 3
                     for t in reversed(self._tagc[:-1]):
                         TLV._name = 'V'
                         TLV = Envelope('TLV', GEN=(ASN1CodecBER.encode_tag_ws(t[0], 1, t[1]),
-                                                      ASN1CodecBER.encode_len_ws(lval),
-                                                      TLV))
+                                                   ASN1CodecBER.encode_len_ws(lval),
+                                                   TLV))
                         lval += (TLV[0].get_bl() + TLV[1].get_bl()) >> 3
         # set object name and final struct
         TLV._name = self._name
         self._struct = TLV
+        #
+        # 2) restore potential BER encoder globals
+        self.__to_ber_codec_unset(*_ber_enc_args)
         return TLV
     
     def to_ber_ws(self, val=None):
