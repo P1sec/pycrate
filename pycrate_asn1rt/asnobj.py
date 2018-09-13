@@ -541,44 +541,155 @@ class ASN1Obj(Element):
             const['tab_at']   = self._const_tab_at
         return const
     
-    def get_proto(self):
+    def get_proto(self, w_open=True, print_recurs=False):
         """
         returns the prototype of the object
+        
+        Args:
+            w_open      : bool,
+                          if True, returns the potential content of OPEN objects
+            print_recurs: bool,
+                          if True, prints paths that lead to recursion
+        
+        Returns:
+            type: str if self is of basic type, 
+                  tuple if self is of constructed type
         """
-        # TODO: in case of recursive object, this will break Python
-        # TODO: add information on OPTIONAL / DEFAULT components
-        if self.TYPE in TYPES_BASIC + TYPES_EXT:
+        if not hasattr(self, '__proto_fields'):
+            root = True
+            self.__proto_fields = [self._name]
+        elif self._name == '_item_':
+            # no recursion possible with SEQ OF / SET OF
+            root = False
+        elif self._name in self.__proto_fields:
+            # recursion detected, stop inspecting the content
+            if print_recurs:
+                print('[+] recursion detected: %s, %r' % (self._name, self.__proto_fields))
             return self.TYPE
+        else:
+            root = False
+            self.__proto_fields.append( self._name )
+        #
+        if self.TYPE == TYPE_OPEN:
+            if w_open:
+                cont = ASN1Dict()
+                for (ident, Comp) in self._get_const_tr().items():
+                    Comp.__proto_fields = self.__proto_fields
+                    cont[ident] = Comp.get_proto(w_open, print_recurs)
+                    self.__proto_fields = Comp.__proto_fields
+                    del Comp.__proto_fields
+                ret = (self.TYPE, cont)
+            else:
+                ret = self.TYPE
+        #
+        elif self.TYPE in TYPES_BASIC + TYPES_EXT:
+            # TODO: should check self._const_cont for BIT STRING and OCTET STRING
+            ret = self.TYPE
+        #
         elif self.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
-            return [self._cont.get_proto()]
+            self._cont.__proto_fields = self.__proto_fields
+            ret = (self.TYPE, self._cont.get_proto(w_open, print_recurs))
+            self.__proto_fields = self._cont.__proto_fields
+            del self._cont.__proto_fields
+        #
         elif self.TYPE in (TYPE_CHOICE, TYPE_SEQ, TYPE_SET, TYPE_CLASS):
-            return ASN1Dict([(ident, Comp.get_proto()) for (ident, Comp) in self._cont.items()])
+            # TODO: add information on fields with OPTIONAL or DEFAULT flag
+            cont = ASN1Dict()
+            for (ident, Comp) in self._cont.items():
+                Comp.__proto_fields = self.__proto_fields
+                cont[ident] = Comp.get_proto(w_open, print_recurs)
+                self.__proto_fields = Comp.__proto_fields
+                del Comp.__proto_fields
+            ret = (self.TYPE, cont)
+        #
         else:
             assert()
+        #
+        if root:
+            del self.__proto_fields
+        elif self._name != '_item_':
+            del self.__proto_fields[-1]
+        return ret
     
-    def get_complexity(self):
+    def get_complexity(self, w_open=True, print_recurs=False):
         """
         returns the number of basic types referenced from self,
         and the maximum depth possible within self
+        
+        Args:
+            w_open      : bool,
+                          if True, inspects the potential content of OPEN objects
+            print_recurs: bool,
+                          if True, prints paths that lead to recursion
+        
+        Returns:
+            num, depth: uint, uint
         """
-        ref, depth = 0, 0
-        if self.TYPE in TYPES_BASIC + TYPES_EXT:
-            ref += 1
+        num, depth = 0, 0
+        #
+        if not hasattr(self, '_proto_fields'):
+            root = True
+            self._proto_fields = [self._name]
+        elif self._name == '_item_':
+            # no recursion possible with SEQ OF / SET OF
+            root = False
+        elif self._name in self._proto_fields:
+            # recursion detected, stop inspecting the content
+            if print_recurs:
+                print('[+] recursion detected: %s, %r' % (self._name, self._proto_fields))
+            return 0, 0
+        else:
+            root = False
+            self._proto_fields.append( self._name )
+        #
+        if self.TYPE == TYPE_OPEN:
+            if w_open:
+                loc_depth = []
+                for (ident, Comp) in self._get_const_tr().items():
+                    Comp._proto_fields = self._proto_fields
+                    comp_num, comp_depth = Comp.get_complexity(w_open, print_recurs)
+                    self._proto_fields = Comp._proto_fields
+                    del Comp._proto_fields
+                    num += comp_num
+                    loc_depth.append(comp_depth)
+                if loc_depth:
+                    depth += 1 + max(loc_depth)
+            else:
+                num += 1
+        #
+        elif self.TYPE in TYPES_BASIC + TYPES_EXT:
+            # TODO: should check self._const_cont for BIT STRING and OCTET STRING
+            num += 1
+        #
         elif self.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
-            comp_ref, comp_depth = self._cont.get_complexity()
-            ref += comp_ref
+            self._cont._proto_fields = self._proto_fields
+            comp_num, comp_depth = self._cont.get_complexity(w_open, print_recurs)
+            num += comp_num
             depth += 1 + comp_depth
+            self._proto_fields = self._cont._proto_fields
+            del self._cont._proto_fields
+        #
         elif self.TYPE in (TYPE_CHOICE, TYPE_SEQ, TYPE_SET, TYPE_CLASS):
+            # TODO: add information on fields with OPTIONAL or DEFAULT flag
             loc_depth = []
             for (ident, Comp) in self._cont.items():
-                comp_ref, comp_depth = Comp.get_complexity()
-                ref += comp_ref
+                Comp._proto_fields = self._proto_fields
+                comp_num, comp_depth = Comp.get_complexity(w_open, print_recurs)
+                self._proto_fields = Comp._proto_fields
+                del Comp._proto_fields
+                num += comp_num
                 loc_depth.append(comp_depth)
             if loc_depth:
                 depth += 1 + max(loc_depth)
+        #
         else:
             assert()
-        return ref, depth
+        #
+        if root:
+            del self._proto_fields
+        elif self._name != '_item_':
+            del self._proto_fields[-1]
+        return num, depth
     
     def _get_obj_by_path(self, path):
         # this is used for solving table constraint lookups
@@ -604,27 +715,32 @@ class ASN1Obj(Element):
         """
         returns the root object containing self in case self is within a 
         constructed or CLASS object
+        
+        WARNING: you will not always get the root object you expect...
         """
         # WNG: in case an object from a CLASS has been inserted after a table
-        # constraint lookup, the parent will be incorrect 
-        par = self._parent
-        while par is not None:
-            par = self._parent
-        return par
+        # constraint lookup, the parent will be incorrect
+        obj = self
+        while obj._parent is not None:
+            obj = obj._parent
+        return obj
     
-    def get_root_chain(self):
+    def get_root_path(self):
         """
-        returns the list of successive objects containing self up to the root one
-        in case self is within a constructed or CLASS object
+        returns the list of successive objects' name containing self up to the 
+        root one in case self is within a constructed or CLASS object
+        
+        WARNING: you will not always get the root object you expect...
         """
         # WNG: in case an object from a CLASS has been inserted after a table
-        # constraint lookup, the parent will be incorrect 
-        par   = self._parent
-        chain = []
+        # constraint lookup, the parent will be incorrect
+        path = [self._name]
+        par  = self._parent
         while par is not None:
-            chain.append(par)
+            path.append(par._name)
             par = par._parent
-        return chain
+        path.reverse()
+        return path
     
     def in_class(self):
         """
@@ -638,6 +754,42 @@ class ASN1Obj(Element):
                 par = par._parent
         return False
     
+    def get_at(self, path):
+        """
+        returns the sub-object into self at the given relative path
+        
+        Args:
+            path: list of str
+        
+        Returns:
+            ASN1Obj instance
+        
+        Raises:
+            ASN1Err, if `path' is invalid
+        """
+        Obj, selected = self, []
+        for p in path:
+            selected.append(p)
+            try:
+                if Obj.TYPE in (TYPE_CHOICE, TYPE_SEQ, TYPE_SET, TYPE_REAL, 
+                                TYPE_EXT, TYPE_EMB_PDV, TYPE_CHAR_STR):
+                    Obj = Obj._cont[p]
+                elif Obj.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
+                    # p is not used
+                    Obj = Obj._cont
+                elif Obj.TYPE in (TYPE_OPEN, TYPE_ANY):
+                    Obj = Obj._get_const_tr()[p]
+                elif Obj.TYPE in (TYPE_BIT_STR, TYPE_OCT_STR) \
+                and Obj._const_cont is not None:
+                    # p is not used
+                    Obj = Obj._const_cont
+                else:
+                    # invalid path, go to the exception case
+                    raise()
+            except:
+                raise(ASN1Err('{0}: invalid path {1}'.format(self.fullname(), selected)))
+        return Obj
+    
     #--------------------------------------------------------------------------#
     # internal value access methods
     #--------------------------------------------------------------------------#
@@ -647,6 +799,162 @@ class ASN1Obj(Element):
     
     def get_val(self):
         return self._val
+    
+    def get_val_paths(self, curpath=[], paths=[]):
+        """
+        returns the list of paths of each individual basic value set into self
+        
+        Args:
+            None
+        
+        Returns:
+            list of 2-tuple: (path_to_basic_value, basic_value)
+        """
+        if self._val is None:
+            return []
+        #
+        if self.TYPE in (TYPE_CHOICE, TYPE_ANY, TYPE_OPEN) or \
+        self.TYPE in (TYPE_BIT_STR, TYPE_OCT_STR) and \
+        isinstance(self._val, tuple) and \
+        isinstance(self._val[0], str_types):
+            # value is (component_name, component_value)
+            Comp = self.get_at( [self._val[0]] )
+            _comp_val = Comp._val
+            Comp._val = self._val[1]
+            curpath.append( self._val[0] )
+            _ = Comp.get_val_paths(curpath, paths)
+            del curpath[-1]
+            Comp._val = _comp_val
+        #
+        elif self.TYPE in (TYPE_SEQ, TYPE_SET, TYPE_EXT, TYPE_EMB_PDV, TYPE_CHAR_STR):
+            # value is dict {component_name: component_value)
+            for comp_name in self._cont:
+                if comp_name in self._val:
+                    comp_val = self._val[comp_name]
+                    Comp = self._cont[comp_name]
+                    _comp_val = Comp._val
+                    Comp._val = comp_val
+                    curpath.append( comp_name )
+                    _ = Comp.get_val_paths(curpath, paths)
+                    del curpath[-1]
+                    Comp._val = _comp_val
+        #
+        elif self.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
+            # value is a list of component_value
+            Comp = self._cont
+            _comp_val = Comp._val
+            for i, val in enumerate(self._val):
+                Comp._val = val
+                curpath.append( i )
+                _ = Comp.get_val_paths(curpath, paths)
+                del curpath[-1]
+            Comp._val = _comp_val
+        #
+        elif self.TYPE in TYPES_BASIC:
+            # basic value reached
+            paths.append( (curpath[:], self._val) )
+        #
+        return paths
+    
+    def get_val_at(self, path):
+        """
+        returns the value into self at the given relative path
+        
+        Args:
+            path: list of str or int
+        
+        Returns:
+            value of the corresponding ASN1Obj
+        """
+        if self._val is None:
+            raise(ASN1Err('{0}: no value defined'.format(self.fullname())))
+        Obj, val = self, self._val
+        for p in path:
+            try:
+                if Obj.TYPE in (TYPE_CHOICE, TYPE_ANY, TYPE_OPEN, TYPE_BIT_STR, TYPE_OCT_STR):
+                    Obj = Obj.get_at([p])
+                    if p == val[0]:
+                        val = val[1]
+                    else:
+                        raise()
+                elif Obj.TYPE in (TYPE_SEQ, TYPE_SET, TYPE_EXT, TYPE_EMB_PDV, TYPE_CHAR_STR):
+                    Obj = Obj._cont[p]
+                    val = val[p]
+                elif Obj.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
+                    Obj = Obj._cont
+                    val = val[p]
+                elif Obj.TYPE == TYPE_REAL:
+                    Obj = None
+                    if instance(p, integer_types):
+                        val = val[p]
+                    elif p == 'mantissa':
+                        val = val[0]
+                    elif p == 'base':
+                        val = val[1]
+                    elif p == 'exponent':
+                        val = val[2]
+                    else:
+                        raise()
+                else:
+                    raise()
+            except:
+                raise(ASN1Err('{0}: invalid value path, {1!r}'.format(self.fullname(), path)))
+        return val
+    
+    def set_val_at(self, path, newval):
+        """
+        sets a new value into self at the given relative path
+        
+        Args:
+            path  : list of str or int
+            newval: ASN1Obj value
+        
+        Returns:
+            None
+        """
+        # Warning: all wrapping objects (tuples, dict, list) in the value
+        # need to be re-written
+        if not path:
+            self.set_val(newval)
+            return
+        elif self._val is None:
+            raise(ASN1Err('{0}: no value already defined'.format(self.fullname())))
+        # ensure the path is correct and raise it not
+        _ = self.get_val_at(path)
+        #
+        for i in range(1, 1+len(path)):
+            p = path[-i]
+            parval = self.get_val_at(path[:-i])
+            if isinstance(parval, tuple) and p == parval[0]:
+                # TYPE_CHOICE, TYPE_ANY, TYPE_OPEN, TYPE_BIT_STR, TYPE_OCT_STR
+                parval = (p, newval)
+            elif isinstance(parval, dict) and p in parval:
+                # TYPE_SEQ, TYPE_SET, TYPE_EXT, TYPE_EMB_PDV, TYPE_CHAR_STR
+                parval = dict(parval)
+                parval[p] = newval
+            elif isinstance(parval, list):
+                # TYPE_SEQ_OF, TYPE_SET_OF
+                parval = parval[:]
+                parval[p] = newval
+            elif isinstance(parval, tuple) and len(parval) == 3:
+                # TYPE_REAL
+                parval = list(parval)
+                if instance(p, integer_types):
+                    ind = p
+                elif p == 'mantissa':
+                    ind = 0
+                elif p == 'base':
+                    ind = 1
+                elif p == 'exponent':
+                    ind = 2
+                else:
+                    raise()
+                parval[ind] = newval
+                parval = tuple(parval)
+            else:
+                assert()
+            newval = parval
+        self.set_val(newval)
     
     def set_val(self, val):
         self._val = val
@@ -886,9 +1194,9 @@ class ASN1Obj(Element):
         return (ber_enc_llong, ber_enc_lundef)
     
     def __to_ber_codec_unset(self, *ber_enc_args):
-        if ber_enc_llong is not None:
+        if ber_enc_args[0] is not None:
             ASN1CodecBER.ENC_LLONG = ber_enc_args[0]
-        if ber_enc_lundef is not None:
+        if ber_enc_args[1] is not None:
             ASN1CodecBER.ENC_LUNDEF = ber_enc_args[1]
     
     def _from_ber(self, char, TLV):
