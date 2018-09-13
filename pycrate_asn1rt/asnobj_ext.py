@@ -135,7 +135,7 @@ Alternative single value: Python 2-tuple
                         else:
                             const_tr[C.TYPE] = C
             if self._TAB_LUT and self._const_tab and self._const_tab_at:
-                # collect all type from the table constraint
+                # collect all types from the table constraint
                 assert( hasattr(self, '_const_tab_id') )
                 ObjsTab = self._const_tab(self._const_tab_id)
                 for ObjTab in ObjsTab:
