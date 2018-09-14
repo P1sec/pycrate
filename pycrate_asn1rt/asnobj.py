@@ -555,29 +555,29 @@ class ASN1Obj(Element):
             type: str if self is of basic type, 
                   tuple if self is of constructed type
         """
-        if not hasattr(self, '__proto_fields'):
+        if not hasattr(self, '_proto_fields'):
             root = True
-            self.__proto_fields = [self._name]
+            self._proto_fields = [self._name]
         elif self._name == '_item_':
             # no recursion possible with SEQ OF / SET OF
             root = False
-        elif self._name in self.__proto_fields:
+        elif self._name in self._proto_fields:
             # recursion detected, stop inspecting the content
             if print_recurs:
-                print('[+] recursion detected: %s, %r' % (self._name, self.__proto_fields))
+                print('[+] recursion detected: %s, %r' % (self._name, self._proto_fields))
             return self.TYPE
         else:
             root = False
-            self.__proto_fields.append( self._name )
+            self._proto_fields.append( self._name )
         #
         if self.TYPE == TYPE_OPEN:
             if w_open:
                 cont = ASN1Dict()
                 for (ident, Comp) in self._get_const_tr().items():
-                    Comp.__proto_fields = self.__proto_fields
+                    Comp._proto_fields = self._proto_fields
                     cont[ident] = Comp.get_proto(w_open, print_recurs)
-                    self.__proto_fields = Comp.__proto_fields
-                    del Comp.__proto_fields
+                    self._proto_fields = Comp._proto_fields
+                    del Comp._proto_fields
                 ret = (self.TYPE, cont)
             else:
                 ret = self.TYPE
@@ -587,28 +587,28 @@ class ASN1Obj(Element):
             ret = self.TYPE
         #
         elif self.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
-            self._cont.__proto_fields = self.__proto_fields
+            self._cont._proto_fields = self._proto_fields
             ret = (self.TYPE, self._cont.get_proto(w_open, print_recurs))
-            self.__proto_fields = self._cont.__proto_fields
-            del self._cont.__proto_fields
+            self._proto_fields = self._cont._proto_fields
+            del self._cont._proto_fields
         #
         elif self.TYPE in (TYPE_CHOICE, TYPE_SEQ, TYPE_SET, TYPE_CLASS):
             # TODO: add information on fields with OPTIONAL or DEFAULT flag
             cont = ASN1Dict()
             for (ident, Comp) in self._cont.items():
-                Comp.__proto_fields = self.__proto_fields
+                Comp._proto_fields = self._proto_fields
                 cont[ident] = Comp.get_proto(w_open, print_recurs)
-                self.__proto_fields = Comp.__proto_fields
-                del Comp.__proto_fields
+                self._proto_fields = Comp._proto_fields
+                del Comp._proto_fields
             ret = (self.TYPE, cont)
         #
         else:
             assert()
         #
         if root:
-            del self.__proto_fields
+            del self._proto_fields
         elif self._name != '_item_':
-            del self.__proto_fields[-1]
+            del self._proto_fields[-1]
         return ret
     
     def get_complexity(self, w_open=True, print_recurs=False):
