@@ -810,6 +810,7 @@ class ASN1Obj(Element):
         Returns:
             list of 2-tuple: (path_to_basic_value, basic_value)
         """
+        print(curpath, paths)
         if self._val is None:
             return []
         #
@@ -822,7 +823,7 @@ class ASN1Obj(Element):
             _comp_val = Comp._val
             Comp._val = self._val[1]
             curpath.append( self._val[0] )
-            _ = Comp.get_val_paths(curpath, paths)
+            paths = Comp.get_val_paths(curpath[:], paths[:])
             del curpath[-1]
             Comp._val = _comp_val
         #
@@ -835,7 +836,7 @@ class ASN1Obj(Element):
                     _comp_val = Comp._val
                     Comp._val = comp_val
                     curpath.append( comp_name )
-                    _ = Comp.get_val_paths(curpath, paths)
+                    paths = Comp.get_val_paths(curpath[:], paths[:])
                     del curpath[-1]
                     Comp._val = _comp_val
         #
@@ -846,7 +847,7 @@ class ASN1Obj(Element):
             for i, val in enumerate(self._val):
                 Comp._val = val
                 curpath.append( i )
-                _ = Comp.get_val_paths(curpath, paths)
+                paths = Comp.get_val_paths(curpath[:], paths[:])
                 del curpath[-1]
             Comp._val = _comp_val
         #
@@ -854,7 +855,7 @@ class ASN1Obj(Element):
             # basic value reached
             paths.append( (curpath[:], self._val) )
         #
-        return paths
+        return paths[:]
     
     def get_val_at(self, path):
         """
