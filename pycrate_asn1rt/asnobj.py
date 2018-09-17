@@ -564,7 +564,7 @@ class ASN1Obj(Element):
         elif self._name in self._proto_fields:
             # recursion detected, stop inspecting the content
             if print_recurs:
-                print('[+] recursion detected: %s, %r' % (self._name, self._proto_fields))
+                asnlog('[+] recursion detected: %s, %r' % (self._name, self._proto_fields))
             return self.TYPE
         else:
             root = False
@@ -636,7 +636,7 @@ class ASN1Obj(Element):
         elif self._name in self._proto_fields:
             # recursion detected, stop inspecting the content
             if print_recurs:
-                print('[+] recursion detected: %s, %r' % (self._name, self._proto_fields))
+                asnlog('[+] recursion detected: %s, %r' % (self._name, self._proto_fields))
             return 0, 0
         else:
             root = False
@@ -810,7 +810,6 @@ class ASN1Obj(Element):
         Returns:
             list of 2-tuple: (path_to_basic_value, basic_value)
         """
-        print(curpath, paths)
         if self._val is None:
             return []
         #
@@ -1181,7 +1180,6 @@ class ASN1Obj(Element):
         if hasattr(self, '_BER_ENC_LLONG'):
             ber_enc_llong = ASN1CodecBER.ENC_LLONG
             ASN1CodecBER.ENC_LLONG = self._BER_ENC_LLONG
-            print('%s: special BER ENC_LLONG %r encoding' % (self._name, ASN1CodecBER.ENC_LLONG))
         else:
             ber_enc_llong = None
         if hasattr(self, '_BER_ENC_LUNDEF'):
@@ -1189,7 +1187,6 @@ class ASN1Obj(Element):
             # but it is easier to handle it here globally
             ber_enc_lundef = ASN1CodecBER.ENC_LUNDEF
             ASN1CodecBER.ENC_LUNDEF = self._BER_ENC_LUNDEF
-            print('%s: special BER ENC_LUNDEF %r encoding' % (self._name, ASN1CodecBER.ENC_LUNDEF))
         else:
             ber_enc_lundef = None
         return (ber_enc_llong, ber_enc_lundef)
