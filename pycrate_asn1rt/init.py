@@ -190,6 +190,7 @@ def init_modules(*args, **kwargs):
                         GSeq = Obj.__class__(name='%s_ext_%d' % (Obj._name, gid),
                                              mode=MODE_TYPE)
                         GSeq._cont = ASN1Dict([(i, Obj._cont[i]) for i in idents])
+                        GSeq._parent = Obj
                         GSeq._root = idents
                         GSeq._ext  = None
                         GSeq._root_mand = [i for i in idents if Obj._cont[i]._opt is False and \
