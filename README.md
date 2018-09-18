@@ -87,11 +87,18 @@ Contributing
 Contact and support
 -------------------
 
-As the unique developper of the library (yet), I am the only person to contact:
-michau \[dot\] benoit \[at\] gmail \[dot\] com.
-This library is free software, however, specific support requires time and may not
-be always possible. In case you need specific support, please consider also 
-contributing in one way or another.
+This library is free software, and you are free to use it (or not to use it). 
+In case you encounter a problem with it, first read this readme completely and 
+check the wiki ; moreover many classes, methods and functions are documented with 
+docstrings, and finally you can have a look at the source code.
+
+If after all those steps, you still have a question or you think you found a bug,
+please open an issue. When filling an issue, please provide precise information
+about your case.
+
+Specific support requires time and may not be always possible. 
+In case you require such support, please consider also contributing in one way or 
+another (see below).
 
 In case you are using this library in any of your project and you find it useful,
 do not hesitate to send me an email. It is always a pleasure to know where 
