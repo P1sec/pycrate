@@ -17,13 +17,13 @@ License
 The whole library is licensed under LGPL v2.1 and is compatible with more recent 
 version of the LGPL: all licensed files have an header making it self-explanatory.
 For more details, please report to the 
-[license.txt](https://github.com/anssi-fr/pycrate/license.txt) file.
+[license.txt](https://github.com/p1sec/pycrate/license.txt) file.
 
 
 Wiki
 ====
 
-Pycrate has a growing [wiki](https://github.com/anssi-fr/pycrate/wiki).
+Pycrate has a growing [wiki](https://github.com/p1sec/pycrate/wiki/The-pycrate-wiki).
 
 
 Installation
@@ -115,7 +115,8 @@ In case you do not want to deep dive in the code, you can still contribute in ma
 and opening an issue with concrete debugging information 
 * writing new test cases for more coverage (have a look at the *test/* directory)
 * sending captures / real-world data that can be used for writing new test cases
-* writing new parts of the wiki (have a look at the [pycrate wiki](https://github.com/ANSSI-FR/pycrate/wiki)) 
+* writing new parts of the wiki (have a look at the [pycrate wiki]
+(https://github.com/p1sec/pycrate/wiki/The-pycrate-wiki))
 
 Getting contributions is extremely important to encourage the continuous development
 of the library, and to confirm the choice made to open-source it.
