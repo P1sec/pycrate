@@ -753,6 +753,10 @@ class BufUD(Buf):
     def set_val(self, val):
         if isinstance(val, bytes_types):
             Buf.set_val(self, val)
+            if self.get_dcs() == DCS_7B:
+                self._ENC_BL = 8*len(val)
+            else:
+                self._ENC_BL = 0
         else:
             self.encode(val)
     
