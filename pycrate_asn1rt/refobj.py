@@ -27,7 +27,8 @@
 # *--------------------------------------------------------
 #*/
 
-from .err import ASN1Err 
+from .err  import ASN1Err
+from .glob import GLOBAL
 
 
 RefObj_docstring = """
@@ -106,6 +107,7 @@ class ASN1Ref(object):
         else:
             assert()
 
+
 class ASN1RefType(ASN1Ref):
     __doc__ = """
     Class to handle a reference to a user-defined ASN.1 type object
@@ -121,6 +123,13 @@ class ASN1RefType(ASN1Ref):
             return 'ASN1RefType({0}.{1})'.format(self.called[0], self.called[1])
         else:
             return 'ASN1RefType({0!r})'.format(self.called)
+    
+    def get(self):
+        try:
+            return GLOBAL.MOD[self.called[0]][self.called[1]]
+        except:
+            return None
+
 
 class ASN1RefInstOf(ASN1Ref):
     __doc__ = """
@@ -135,6 +144,7 @@ class ASN1RefInstOf(ASN1Ref):
         # self.called is 2-tuple
         # self.ced_path is empty
         return 'ASN1RefInstOf({0}.{1})'.format(self.called[0], self.called[1])
+
 
 class ASN1RefChoiceComp(ASN1Ref):
     __doc__ = """
@@ -155,6 +165,7 @@ class ASN1RefChoiceComp(ASN1Ref):
             return 'ASN1RefChoiceComp({0}<{1!r})'\
                    .format('<'.join(self.ced_path), self.called)
 
+
 class ASN1RefClassField(ASN1Ref):
     __doc__ = """
     Class to handle a reference to a (chain of) field(s) within a user-defined 
@@ -174,6 +185,7 @@ class ASN1RefClassField(ASN1Ref):
             return 'ASN1RefClassField({0!r}.&{1})'\
                    .format(self.called, '.&'.join(self.ced_path))
 
+
 class ASN1RefClassIntern(ASN1Ref):
     __doc__ = """
     Class to handle an local reference within a user-defined ASN.1 CLASS, 
@@ -189,7 +201,7 @@ class ASN1RefClassIntern(ASN1Ref):
         # self.called is None
         # self.ced_path is not empty
         return 'ASN1RefClassIntern(&{0})'.format('.&'.join(self.ced_path))
-        
+
 
 class ASN1RefClassValField(ASN1Ref):
     __doc__ = """

@@ -518,6 +518,49 @@ class ASN1Obj(Element):
             internals['const_tab_at']   = self._const_tab_at
         return internals
     
+    def get_typeref(self):
+        """
+        returns the ASN.1 object which is the parent type of self 
+        or None if self is defined as a direct subtype of an ASN.1 built-in type
+        """
+        if self._typeref is None:
+            return None
+        else:
+            return self._typeref.get()
+    
+    def get_typeref_list(self):
+        """
+        returns the list of ASN.1 objects which are parent type of self
+        
+        see .get_typeref()
+        """
+        tl, obj = [], self
+        while obj._typeref is not None:
+            par = obj._typeref.get()
+            if par is None:
+                # something went wrong
+                break
+            else:
+                tl.append(par)
+                obj = par
+        return tl
+    
+    def get_type_list(self):
+        """
+        returns the list of object names which are parent of self
+        """
+        tl, obj = [], self
+        while obj._typeref is not None:
+            par = obj._typeref.get()
+            if par is None:
+                # something went wrong
+                break
+            else:
+                tl.append(par._name)
+                obj = par
+        tl.append( self.TYPE )
+        return tl
+    
     def get_const(self):
         """
         returns the dict of constraints that apply to the object
