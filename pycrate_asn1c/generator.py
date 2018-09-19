@@ -952,7 +952,7 @@ class JSONDepGraphGenerator(_Generator):
         # remove last coma
         #nodes[-1] = nodes[-1][:-1]
         last_node = nodes[-1]
-        print('last_node:', last_node)
+        #print('last_node:', last_node)
         del nodes[-1]
         nodes.append( last_node[:-1] )
         #
@@ -979,7 +979,7 @@ class JSONDepGraphGenerator(_Generator):
         # remove last coma
         #links[-1] = links[-1][:-1]
         last_link = links[-1]
-        print('last_link:', last_link)
+        #print('last_link:', last_link)
         del links[-1]
         links.append( last_link[:-1] )
         #

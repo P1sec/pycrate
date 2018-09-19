@@ -113,6 +113,8 @@ def main():
         if not fn:
             print('%s, args error: no ASN.1 inputs found')
             return 0
+        else:
+            ckw['filenames'] = list(fn)
         # read all file content into a single buffer
         txt = []
         for f in fn:
@@ -130,7 +132,7 @@ def main():
                     return 0
                 else:
                     fd.close()
-        compile_text(''.join(txt), **ckw)
+        compile_text(txt, **ckw)
     #
     else:
         print('%s, args error: missing ASN.1 input(s) or specification name' % sys.argv[0])

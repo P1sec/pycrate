@@ -43,6 +43,7 @@ from .generator import PycrateGenerator, JSONDepGraphGenerator
 
 _ASN1DIR_PATH = 'pycrate_asn1dir/'
 
+
 def compile_all(dic=ASN_SPECS, clearing=True, **kwargs):
     """
     compile all ASN.1 modules referenced by `dic'
@@ -63,6 +64,7 @@ def compile_all(dic=ASN_SPECS, clearing=True, **kwargs):
             for flag in item[1][1:]:
                 del kwargs[flag]
 
+
 def compile_spec(name='LDAP-v3', shortname=None, **kwargs):
     if shortname in ASN_SPECS:
         name = ASN_SPECS[shortname]
@@ -73,22 +75,25 @@ def compile_spec(name='LDAP-v3', shortname=None, **kwargs):
     elif shortname:
         asnlog('WNG: specification {0} not found'.format(shortname))
     spec_dir = get_spec_dir(name)
-    spec_files = get_spec_files(spec_dir)
     spec_obj = get_spec_objects(spec_dir)
+    spec_texts, spec_fn = get_spec_files(spec_dir)
+    kwargs['filenames'] = spec_fn
     GLOBAL.clear_comp_ns()
     if spec_obj:
         GLOBAL.COMP['ORDER'] = spec_obj
     else:
         GLOBAL.COMP['ORDER'] = None
     #
-    asnlog('[proc] starting with ASN.1 specification: {0}'.format(name)) 
-    compile_text(u'\n'.join(spec_files), **kwargs)
+    asnlog('[proc] starting with ASN.1 specification: {0}'.format(name))
+    compile_text(spec_files, **kwargs)
+
 
 def get_spec_dir(spec_name):
     import pycrate_asn1c as _asn1c
     path = os.path.dirname(_asn1c.__file__) + os.path.sep + '..' + os.path.sep  + \
            _ASN1DIR_PATH + spec_name + os.path.sep
     return path
+
 
 def get_spec_files(spec_dir):
     load = []
@@ -97,7 +102,6 @@ def get_spec_files(spec_dir):
     except Exception as err:
         asnlog('[proc] unable to open load_mod.txt in {0}'.format(spec_dir))
     else:
-        load = []
         try:
             [load.append(fn.strip()) for fn in fd.readlines() if fn[:1] != '#']
         except Exception as err:
@@ -113,7 +117,7 @@ def get_spec_files(spec_dir):
     if not load:
         raise(ASN1Err('[proc] no ASN.1 spec found in {0}'.format(spec_dir)))
     #
-    spec_files = []
+    spec_texts, spec_fn = [], []
     for fn in load:
         try:
             fd = open('%s%s' % (spec_dir, fn), 'r')
@@ -122,16 +126,18 @@ def get_spec_files(spec_dir):
                   '[proc] unable to open spec file {0}, {1}'.format(fn, err)))
         try:
             if python_version < 3:
-                spec_files.append( fd.read().decode('utf-8') )
+                spec_texts.append( fd.read().decode('utf-8') )
             else:
-                spec_files.append( fd.read() )
+                spec_texts.append( fd.read() )
         except Exception as err:
             fd.close()
             raise(ASN1Err(
                   '[proc] unable to read spec file {0}, {1}'.format(fn, err)))
         else:
             fd.close()
-    return spec_files
+            spec_fn.append(fn)
+    return spec_texts, spec_fn
+
 
 def get_spec_objects(spec_dir):
     try:
@@ -193,15 +199,16 @@ def compile_text(text=u'', **kwargs):
         - $object_name: Python instance of ASN1Obj
     
     kwargs:
+        - filenames: list of filename in case `text' is also a list of texts
         - autotags: force the AUTOMATIC TAGS behavior
         - extimpl: force the EXTENSIBILITY IMPLIED behaviour
         - verifwarn: force warning instead of raising during the verification stage
     """
     if isinstance(text, (list, tuple)):
-        text = u'\n\n'.join(text)
+        if not all([isinstance(t, str_types) for t in text]):
+            raise(ASN1Err('[proc] need only textual definition'))
     elif not isinstance(text, str_types):
         raise(ASN1Err('[proc] need some textual definition'))
-    text = clean_text(text)
     #
     # initialize the basic order in which objects will get compiled
     if GLOBAL.COMP['ORDER']:
@@ -209,7 +216,7 @@ def compile_text(text=u'', **kwargs):
     else:
         GLOBAL.COMP['ORDER'] = []
         with_order = False
-    mods = []
+    mod_names = []
     #
     # disable the cache in ASN1Obj
     ASN1Obj._CACHE_ENABLED = False
@@ -217,15 +224,99 @@ def compile_text(text=u'', **kwargs):
     # build the _IMPL_ module
     build_implicit_mod()
     #
-    # scan the text for all ASN.1 modules defined
+    # 1) scan the text (or list of texts) and extract all ASN.1 modules defined
+    if isinstance(text, (tuple, list)):
+        for i, t in enumerate(text):
+            if 'filenames' in kwargs:
+                try:
+                    kwargs['filename'] = kwargs['filenames'][i] 
+                except:
+                    kwargs['filename'] = None
+            else:
+                kwargs['filename'] = None
+            mod_names.extend( _compile_text_pass(t, with_order, **kwargs) )
+    else:
+        if 'filenames' in kwargs:
+            try:
+                kwargs['filename'] = kwargs['filenames'][0]
+            except:
+                kwargs['filename'] = None
+        else:
+            kwargs['filename'] = None
+        mod_names.extend( _compile_text_pass(text, with_order, **kwargs) )
+    #
+    # 2) All objects being initialized as ASN1Obj instances, we compile them
+    # resolving their types and values
+    #
+    # build the list of objects' name to be resolved
+    remain = GLOBAL.COMP['ORDER'][:]
+    # process all objects until all are compiled
+    while remain:
+        asnlog('--- compilation cycle ---')
+        remain_len = len(remain)
+        compile_modules(remain)
+        if remain_len == len(remain):
+            # compilation is blocked
+            raise(ASN1Err('[proc] unable to compile further, {0} objects remain:\n{1}'\
+                  .format(remain_len,
+                          '\n'.join(['%s.%s' % (i[0], i[1]) for i in remain]))))
+    #
+    # 3) build the specific lists of objects' name
+    types, sets, values = 0, 0, 0
+    for mod_name in mod_names:
+        module = GLOBAL.MOD[mod_name]
+        for obj_name in module:
+            if obj_name[0] != '_':
+                Obj = module[obj_name]
+                if Obj._mode == MODE_TYPE:
+                    module['_type_'].append(obj_name)
+                    types += 1
+                elif Obj._mode == MODE_SET:
+                    module['_set_'].append(obj_name)
+                    sets += 1
+                elif Obj._mode == MODE_VALUE:
+                    module['_val_'].append(obj_name)
+                    values += 1
+                if Obj._type == TYPE_CLASS:
+                    module['_class_'].append(obj_name)
+                if Obj._param is not None:
+                    module['_param_'].append(obj_name)
+    #
+    # enable the cache in ASN1Obj
+    ASN1Obj._CACHE_ENABLED = True
+    #
+    # 4) verify all objects compiled
+    asnlog('--- verifications ---')
+    verify_modules(**kwargs)
+    #
+    asnlog('[proc] ASN.1 modules processed: {0}'.format(mod_names))
+    asnlog('[proc] ASN.1 objects compiled: {0} types, {1} sets, {2} values'\
+           .format(types, sets, values))
+    asnlog('[proc] done')
+
+
+def _compile_text_pass(text, with_order, **kwargs):
+    text = clean_text(text)
+    mod_names = []
+    #
+    if 'filename' in kwargs and kwargs['filename']:
+        fn = ' [%s]' % kwargs['filename']
+    else:
+        fn = ''
+    #
     while True:
+        # process the text until all ASN.1 modules have been extracted
         module = ASN1Dict()
         #
         # 1) scan text for module DEFINITION
         m = SYNT_RE_MODULEDEF.search(text)
         if not m:
             break
-        name, oidstr = module_get_name(text[:m.start()])
+        
+        #print(text[:m.start()])
+        #print(text[m.start():m.start()+100])
+        
+        name, oidstr = module_get_name(text[:m.start()], fn)
         module['_name_'] = name
         if oidstr:
             # setting the complete oid string in module['oidstr'] 
@@ -237,8 +328,8 @@ def compile_text(text=u'', **kwargs):
                 rest = OidDummy.parse_value('{%s}' % oidstr)
             except Exception as err:
                 _path_pop()
-                asnlog('[proc] module {0}: invalid OID value {1}, ignoring it'\
-                       .format(name, oidstr))
+                asnlog('[proc]{0} module {1}: invalid OID value {2}, ignoring it'\
+                       .format(fn, name, oidstr))
                 module['_oid_'] = []
             else:
                 _path_pop()
@@ -251,13 +342,13 @@ def compile_text(text=u'', **kwargs):
         # 2) scan text for module option
         m = re.search('::=', text)
         if not m:
-            raise(ASN1ProcTextErr('[proc] module {0}: symbol ::= not found'\
-                  .format(name)))
+            raise(ASN1ProcTextErr('[proc]{0} module {1}: symbol ::= not found'\
+                  .format(fn, name)))
         module['_tag_'], module['_ext_'] = module_get_option(text[:m.start()])
         if 'autotags' in kwargs and kwargs['autotags']:
             module['_tag_'] = TAG_AUTO
         if 'extimpl' in kwargs and kwargs['extimpl']:
-            module['_ext_'] = 'EXTENSIBILITY IMPLIED'  
+            module['_ext_'] = 'EXTENSIBILITY IMPLIED'
         #asnlog('[proc] module {0} tagging mode: {1}'.format(name, module['_tag_']))
         #asnlog('[proc] module {0} extensibility: {1}'.format(name, module['_ext_']))
         text = text[m.end():]
@@ -267,8 +358,8 @@ def compile_text(text=u'', **kwargs):
         # are not supported
         m = re.search('(^|\s)BEGIN(\s)((.|\n)*?)(\s)END($|\s)', text)
         if not m:
-            raise(ASN1ProcTextErr('[proc] module {0}: BEGIN - END scheme not found'\
-                  .format(name)))
+            raise(ASN1ProcTextErr('[proc]{0} module {1}: BEGIN - END scheme not found'\
+                  .format(fn, name)))
         asnblock = m.group(3)
         text = text[m.end():]
         #
@@ -303,25 +394,25 @@ def compile_text(text=u'', **kwargs):
             Obj = module_extract_assign(lines)
             Obj._mod = name
             if Obj._name in module:
-                raise(ASN1ProcTextErr('[proc] module {0}: duplicate object, {1}'\
-                      .format(name, Obj._name)))
+                raise(ASN1ProcTextErr('[proc]{0} module {1}: duplicate object, {2}'\
+                      .format(fn, name, Obj._name)))
             elif Obj._name in module['_imp_']:
-                raise(ASN1ProcTextErr('[proc] module {0}: duplicate object with import, {1}'\
-                      .format(name, Obj._name)))
+                raise(ASN1ProcTextErr('[proc]{0} module {1}: duplicate object with import, {2}'\
+                      .format(fn, name, Obj._name)))
             module[Obj._name] = Obj
             module['_obj_'].append(Obj._name)
         #
-        asnlog('[proc] module {0} (oid: {1}): {2} ASN.1 assignments found'\
-               .format(name, module['_oid_'], len(module)-12))
+        asnlog('[proc]{0} module {1} (oid: {2}): {3} ASN.1 assignments found'\
+               .format(fn, name, module['_oid_'], len(module)-12))
         # 
         # 8) initalize the module in GLOBAL.MOD
         if name in GLOBAL.MOD:
             # module already compiled and loaded
             if module['_oid_'] and module['_oid_'] == GLOBAL.MOD[name]['_oid_']:
-                asnlog('[proc] module {0}: already compiled'.format(name))
+                asnlog('[proc]{0} module {1}: already compiled'.format(fn, name))
             else:
-                asnlog('[proc] module {0}: already compiled but OID missing '\
-                       'or mismatch'.format(name))
+                asnlog('[proc]{0} module {1}: already compiled but OID missing or mismatch'\
+                       .format(fn, name))
             if with_order:
                 # in case load_obj.txt is provided
                 # remove objects of this module from the compilation ORDER list
@@ -334,58 +425,12 @@ def compile_text(text=u'', **kwargs):
                 # in case load_obj.txt is not provided 
                 GLOBAL.COMP['ORDER'].extend(
                     [[name, obj_name] for obj_name in module['_obj_']] )
-        # 
+        #
         # 9) keep track of the module name
-        mods.append(name)
+        mod_names.append(name)
     #
-    # 10) All objects being initialized as ASN1Obj instances, we compile them
-    # resolving their types and values
-    #
-    # build the list of objects' name to be resolved
-    remain = GLOBAL.COMP['ORDER'][:]
-    # process all objects until all are compiled
-    while remain:
-        asnlog('--- compilation cycle ---')
-        remain_len = len(remain)
-        compile_modules(remain)
-        if remain_len == len(remain):
-            # compilation is blocked
-            raise(ASN1Err('[proc] unable to compile further, {0} objects remain:\n{1}'\
-                  .format(remain_len,
-                          '\n'.join(['%s.%s' % (i[0], i[1]) for i in remain]))))
-    #
-    # 11) build the specific lists of objects' name
-    types, sets, values = 0, 0, 0
-    for mod_name in mods:
-        module = GLOBAL.MOD[mod_name]
-        for obj_name in module:
-            if obj_name[0] != '_':
-                Obj = module[obj_name]
-                if Obj._mode == MODE_TYPE:
-                    module['_type_'].append(obj_name)
-                    types += 1
-                elif Obj._mode == MODE_SET:
-                    module['_set_'].append(obj_name)
-                    sets += 1
-                elif Obj._mode == MODE_VALUE:
-                    module['_val_'].append(obj_name)
-                    values += 1
-                if Obj._type == TYPE_CLASS:
-                    module['_class_'].append(obj_name)
-                if Obj._param is not None:
-                    module['_param_'].append(obj_name)
-    #
-    # enable the cache in ASN1Obj
-    ASN1Obj._CACHE_ENABLED = True
-    #
-    # 12) verify all objects compiled
-    asnlog('--- verifications ---')
-    verify_modules(**kwargs)
-    #
-    asnlog('[proc] ASN.1 modules processed: {0}'.format(mods))
-    asnlog('[proc] ASN.1 objects compiled: {0} types, {1} sets, {2} values'\
-           .format(types, sets, values))
-    asnlog('[proc] done')
+    return mod_names
+
 
 def build_implicit_mod():
     """
@@ -557,11 +602,12 @@ def build_implicit_mod():
     module[TYPE_TYPEIDENT] = _TYPE_IDENTIFIER
     module[TYPE_ABSSYNT]   = _ABSTRACT_SYNTAX
 
-def module_get_name(text=''):
+
+def module_get_name(text, fn):
     # check for the module name
     name_all = SYNT_RE_MODULEREF.findall(text)
     if not name_all:
-        raise(ASN1ProcTextErr('no module name found'))
+        raise(ASN1ProcTextErr('[proc]{0} no module name found'.format(fn)))
     name, oidstr = name_all[-1]
     # clean-up the oid
     if oidstr:
@@ -569,6 +615,7 @@ def module_get_name(text=''):
     else:
         oidstr = None
     return name, oidstr
+
 
 def module_get_option(text=''):
     text = ' %s' % text
@@ -587,6 +634,7 @@ def module_get_option(text=''):
         ext = None
     return tag, ext
 
+
 def module_get_export(text=''):
     # check for export clause
     m = SYNT_RE_MODULEEXP.search(text)
@@ -600,6 +648,7 @@ def module_get_export(text=''):
         return exp, m.end()
     else:
         return None, 0
+
 
 def module_get_import(text=''):
     # check for import clauses (can be from multiple modules)
@@ -653,6 +702,7 @@ def module_get_import(text=''):
         return l, m.end()
     else:
         return None, 0
+
 
 def module_extract_assign(lines):
     """
@@ -708,6 +758,7 @@ def module_extract_assign(lines):
     asnobj_gettype(Obj)
     return Obj
 
+
 def asnobj_getname(Obj):
     text = Obj._text_decl
     m0 = match_typeref(text)
@@ -728,6 +779,7 @@ def asnobj_getname(Obj):
         # object can be MODE_SET or MODE_TYPE
         Obj._text_decl = text[len(Obj._name):].strip()
 
+
 def asnobj_getparnum(Obj):
     # early process formal parameter to determine the number of required
     # actual parameters
@@ -745,6 +797,7 @@ def asnobj_getparnum(Obj):
             Obj._mode = MODE_SET
         else:
             Obj._mode = MODE_TYPE
+
 
 def asnobj_gettype(Obj):
     # early check for native ASN.1 type for MODE_TYPE objects
@@ -764,6 +817,7 @@ def asnobj_gettype(Obj):
         text, const = Obj._parse_type_native(text)
     except:
         pass
+
 
 def asnobj_compile(Obj):
     """
@@ -854,6 +908,7 @@ def asnobj_compile(Obj):
     ObjNew._mod = Obj._mod
     return ObjNew
 
+
 def init_ns_mod(mod_name):
     GLOBAL.clear_comp_ns()
     GLOBAL.COMP['NS']['mod'] = mod_name
@@ -866,7 +921,8 @@ def init_ns_mod(mod_name):
     # tagging and extensibility mode for the module
     GLOBAL.COMP['NS']['tag'] = GLOBAL.MOD[mod_name]['_tag_']
     GLOBAL.COMP['NS']['ext'] = GLOBAL.MOD[mod_name]['_ext_']
-    
+
+
 def compile_modules(remain):
     GLOBAL.ERR.clear()
     mod_name_prev = ''
@@ -904,6 +960,7 @@ def warn(msg, raising=True):
         raise(ASN1ObjErr(msg))
     else:
         asnlog('WNG: %s' % msg)
+
 
 def verify_modules(**kwargs):
     # 1) verify that parameters referrers are correctly implemented
@@ -1070,7 +1127,8 @@ def verify_modules(**kwargs):
                             if not _verify_const_val(val, consts_glob, mod, name, Objs.index(O)):
                                 warn('{0}.{1}: internal object {2}, value outside of the constraint'\
                                 .format(mod, name, Objs.index(O)), raising)
-                
+
+
 def _verify_const_size(val, consts):
     # check if some SIZE constraints are defined
     consts_size = [c for c in consts if c['type'] == CONST_SIZE]
@@ -1089,6 +1147,7 @@ def _verify_const_size(val, consts):
         return True
     else:
         return False
+
 
 def _verify_const_val(val, consts, mod, name, ind):
     # check if some value constraints are defined
@@ -1116,6 +1175,7 @@ def _verify_const_val(val, consts, mod, name, ind):
 
 def generate_modules(generator, destfile='/tmp/gen.py'):
     generator(destfile)
+
 
 def generate_all(dic=ASN_SPECS, destpath=None):
     """
@@ -1152,6 +1212,7 @@ def generate_all(dic=ASN_SPECS, destpath=None):
         fd.write('\'%s\', ' % name)
     fd.write(']\n')
     fd.close()
+
 
 if __name__ == '__main__':
     generate_all()
