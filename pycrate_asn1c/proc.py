@@ -85,7 +85,7 @@ def compile_spec(name='LDAP-v3', shortname=None, **kwargs):
         GLOBAL.COMP['ORDER'] = None
     #
     asnlog('[proc] starting with ASN.1 specification: {0}'.format(name))
-    compile_text(spec_files, **kwargs)
+    compile_text(spec_texts, **kwargs)
 
 
 def get_spec_dir(spec_name):
