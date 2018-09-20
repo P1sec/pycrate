@@ -86,7 +86,7 @@ def main():
     cnt  = 0 
     while char.len_bit() >= 16:
         Obj, V = ASN1CodecBER.decode_tlv_ws(char)
-        print('\n' + 14*'--' + ' object %i' % cnt + 14*'--' + '\n')
+        print('\n' + 14*'--' + ' object %i ' % cnt + 14*'--' + '\n')
         pprint.pprint(V)
         cnt += 1
     return 0
