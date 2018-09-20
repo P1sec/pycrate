@@ -376,6 +376,14 @@ Alternative single value: Python 2-tuple
             self._val_tag = (cl, pc, tval)
             if pc == 1:
                 # constructed object
+                #
+                # char._cur will be updated in scan_tlv()
+                # but we also need to extend char._len_bit according to tlv in some way...
+                # however, the content is constructed and we don't have straight boundaries
+                # as for the primitive case below, hence we extend the char buffer to its 
+                # maximum
+                char._len_bit = 8*len(char._buf)
+                #
                 self._val = ASN1CodecBER.scan_tlv_ws(char, tlv)
                 V = Envelope('V', GEN=(Tag, Len, Buf(ident, val=val, bl=8*len(val), rep=REPR_HEX)))
             elif lval >= 0:
@@ -452,6 +460,14 @@ Alternative single value: Python 2-tuple
             self._val_tag = (cl, pc, tval)
             if pc == 1:
                 # constructed object
+                #
+                # char._cur will be updated in scan_tlv()
+                # but we also need to extend char._len_bit according to tlv in some way...
+                # however, the content is constructed and we don't have straight boundaries
+                # as for the primitive case below, hence we extend the char buffer to its 
+                # maximum
+                char._len_bit = 8*len(char._buf)
+                #
                 self._val = ASN1CodecBER.scan_tlv(char, tlv)
             elif lval >= 0:
                 # primitive object
