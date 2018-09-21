@@ -164,6 +164,13 @@ class ASN1RefChoiceComp(ASN1Ref):
         else:
             return 'ASN1RefChoiceComp({0}<{1!r})'\
                    .format('<'.join(self.ced_path), self.called)
+    
+    def get(self):
+        try:
+            cho = GLOBAL.MOD[self.called[0]][self.called[1]]
+            return cho.get_at(self.ced_path)
+        except:
+            return None
 
 
 class ASN1RefClassField(ASN1Ref):
@@ -184,6 +191,13 @@ class ASN1RefClassField(ASN1Ref):
         else:
             return 'ASN1RefClassField({0!r}.&{1})'\
                    .format(self.called, '.&'.join(self.ced_path))
+    
+    def get(self):
+        try:
+            cla = GLOBAL.MOD[self.called[0]][self.called[1]]
+            return cla.get_at(self.ced_path)
+        except:
+            return None
 
 
 class ASN1RefClassIntern(ASN1Ref):
