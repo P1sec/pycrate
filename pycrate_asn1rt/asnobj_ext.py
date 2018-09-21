@@ -77,10 +77,10 @@ corresponds to reference to a CLASS field which has no defined type
 This is in general associated with a table constraint which can be looked-up
 to provide a defined type according to the encoding / decoding context
 
-Single value: Python bytes
-
-Alternative single value: Python 2-tuple
+Single value: Python 2-tuple
     the 1st item corresponds to a reference to another ASN.1 object, it can be:
+        - a str starting with '_unk_$ind' for unknown content, the 2nd item will then be some bytes
+          $ind is a list of digits, used as a dummy index
         - a str corresponding to an ASN.1 native basic type (TYPE_*, but not constructed one) or 
           a typeref taken from the constraint of self
         - a 2-tuple (module_name, object_name) corresponding to any user-defined ASN.1 object
@@ -147,18 +147,25 @@ Alternative single value: Python 2-tuple
             return const_tr
     
     def _safechk_val(self, val):
-        if not isinstance(val, bytes_types):
+        if isinstance(val, tuple) and len(val) == 2:
             if isinstance(val[0], ASN1Obj):
                 val[0]._safechk_val(val[1])
+            elif isinstance(val[0], str_types):
+                if re.match('_unk_[0-9]{1,}', val[0]):
+                    if not isinstance(val[1], bytes_types):
+                        raise(ASN1ObjErr('{0}: invalid value, {1!r}'.format(self.fullname(), val)))
+                else:
+                    self._get_val_obj(val[0])._safechk_val(val[1])
             else:
-                self._get_val_obj(val[0])._safechk_val(val[1])
+                raise(ASN1ObjErr('{0}: invalid value, {1!r}'.format(self.fullname(), val)))
+        else:
+            raise(ASN1ObjErr('{0}: invalid value, {1!r}'.format(self.fullname(), val)))
     
     def _safechk_bnd(self, val):
-        if not isinstance(val, bytes_types):
-            if isinstance(val[0], ASN1Obj):
-                val[0]._safechk_bnd(val[1])
-            else:
-                self._get_val_obj(val[0])._safechk_bnd(val[1])
+        if isinstance(val[0], ASN1Obj):
+            val[0]._safechk_bnd(val[1])
+        elif val[0][:5] != '_unk_':
+            self._get_val_obj(val[0])._safechk_bnd(val[1])
     
     ###
     # conversion between internal value and ASN.1 syntax
@@ -168,17 +175,21 @@ Alternative single value: Python 2-tuple
         m = self._ASN_RE.match(txt)
         if m:
             grp = m.groups()
+            if hasattr(self, '_val_tag'):
+                ident = '_unk_%i%i%i' % self._val_tag
+            else:
+                ident = '_unk_004'
             if grp[0] is not None:
                 # BSTRING
                 bs = re.subn('\s{1,}', '', grp[0])[0]
-                self.s_val = uint_to_bytes(int(bs, 2), len(bs))
+                self._val = (ident, uint_to_bytes(int(bs, 2), len(bs)))
             else:
                 # HSTRING
                 hs = re.subn('\s{1,}', '', grp[1])[0]
                 if len(hs)%2:
-                    self._val = unhexlify(hs + '0')
+                    self._val = (ident, unhexlify(hs + '0'))
                 else:
-                    self._val = unhexlify(hs)
+                    self._val = (ident, unhexlify(hs))
             return txt[m.end():].strip()
         else:
             # we must pick-up a type from a defined constraint
@@ -195,21 +206,23 @@ Alternative single value: Python 2-tuple
                     self._val = (Obj.TYPE, Obj._val)
                 return txt
             else:
-                # TODO: module.object reference
                 ASN1NotSuppErr('{0}: reference parsing unsupported'.format(self.fullname()))
     
     def _to_asn1(self):
-        if isinstance(self._val, bytes_types):
+        if self._val[0][:5] == '_unk_':
             # HSTRING
             if python_version >= 3:
-                return '\'%s\'H' % hexlify(self._val).decode('ascii').upper()
+                return '\'%s\'H' % hexlify(self._val[1]).decode('ascii').upper()
             else:
-                return '\'%s\'H' % hexlify(self._val).upper()
+                return '\'%s\'H' % hexlify(self._val[1]).upper()
         else:
             if isinstance(self._val[0], str_types):
                 ident = self._val[0]
-            else:
+            elif isinstance(self._val[0], tuple):
                 ident = '.'.join(self._val[0])
+            else:
+                # self._val[0] is an ASN1Obj instance
+                ident = '%s.%s' % (self._val[0]._mod, self._val[0]._name)
             Obj = self._get_val_obj(self._val[0])
             Obj._val = self._val[1]
             return '%s: %s' % (ident, Obj.to_asn1())
@@ -239,9 +252,9 @@ Alternative single value: Python 2-tuple
             if self._const_val:
                 asnlog('OPEN._from_per_ws: %s, potential type constraint(s) available'\
                        % self.fullname())
-            #assert( isinstance(val, bytes_types) )
             val, GEN = ASN1CodecPER.decode_unconst_open_ws(char, wrapped=None)
-            self._val = val
+            assert( isinstance(val, bytes_types) )
+            self._val = ('_unk_004', val)
         else:
             if Obj._typeref is not None:
                 val, GEN = ASN1CodecPER.decode_unconst_open_ws(char, wrapped=Obj._tr)
@@ -275,7 +288,7 @@ Alternative single value: Python 2-tuple
                 asnlog('OPEN._from_per: %s, potential type constraint(s) available'\
                        % self.fullname())
             assert( isinstance(val, bytes_types) )
-            self._val = val
+            self._val = ('_unk_004', val)
         else:
             if Obj._typeref is not None:
                 self._val = (Obj._typeref.called[1], val)
@@ -284,13 +297,14 @@ Alternative single value: Python 2-tuple
         return
     
     def _to_per_ws(self):
-        if isinstance(self._val, bytes_types):
-            GEN = ASN1CodecPER.encode_unconst_buf_ws(self._val)
-            self._struct = Envelope(self._name, GEN=tuple(GEN))
-            return self._struct
-        elif isinstance(self._val[0], ASN1Obj):
+        if isinstance(self._val[0], ASN1Obj):
             Obj = self._val[0]
         else:
+            # isinstance(self._val[0], str_types)
+            if self._val[0][:5] == '_unk_':
+                GEN = ASN1CodecPER.encode_unconst_buf_ws(self._val[1])
+                self._struct = Envelope(self._name, GEN=tuple(GEN))
+                return self._struct
             Obj = self._get_val_obj(self._val[0])
         Obj._val = self._val[1]
         GEN = ASN1CodecPER.encode_unconst_open_ws(Obj)
@@ -299,11 +313,12 @@ Alternative single value: Python 2-tuple
         return self._struct
     
     def _to_per(self):
-        if isinstance(self._val, bytes_types):
-            return ASN1CodecPER.encode_unconst_buf(self._val)
-        elif isinstance(self._val[0], ASN1Obj):
+        if isinstance(self._val[0], ASN1Obj):
             Obj = self._val[0]
         else:
+            # isinstance(self._val[0], str_types)
+            if self._val[0][:5] == '_unk_':
+                return ASN1CodecPER.encode_unconst_buf(self._val[1])
             Obj = self._get_val_obj(self._val[0])
         Obj._val = self._val[1]
         ret = ASN1CodecPER.encode_unconst_open(Obj)
@@ -373,7 +388,6 @@ Alternative single value: Python 2-tuple
             # hence we decode this as a simple buffer
             # with BER, we need to absolutely keep track of the decoded tag if
             # we want to be able to re-encode it
-            self._val_tag = (cl, pc, tval)
             if pc == 1:
                 # constructed object
                 #
@@ -383,15 +397,17 @@ Alternative single value: Python 2-tuple
                 # as for the primitive case below, hence we extend the char buffer to its 
                 # maximum
                 char._len_bit = 8*len(char._buf)
-                #
-                self._val = ASN1CodecBER.scan_tlv_ws(char, tlv)
+                val = ASN1CodecBER.scan_tlv_ws(char, tlv)
+                self._val_tag = (cl, pc, tval)
+                self._val = ('_unk_%i%i%i' % self._val_tag, val)
                 V = Envelope('V', GEN=(Tag, Len, Buf(ident, val=val, bl=8*len(val), rep=REPR_HEX)))
             elif lval >= 0:
                 # primitive object
                 char._cur, char._len_bit = tlv[6][0], tlv[6][1]
                 Val = Buf('_buf_', bl=8*lval, rep=REPR_HEX)
                 Val._from_char(char)
-                self._val = Val.to_bytes()
+                self._val_tag = (cl, pc, tval)
+                self._val = ('_unk_%i%i%i' % self._val_tag, Val.to_bytes())
                 V = Envelope('V', GEN=(Tag, Len, Val))
             else:
                 raise(ASN1BERDecodeErr('{0}: invalid OPEN / ANY tag and length, {1!r}, {2!r}'\
@@ -457,7 +473,6 @@ Alternative single value: Python 2-tuple
             # hence we decode this as a simple buffer
             # with BER, we need to absolutely keep track of the decoded tag if
             # we want to be able to re-encode it
-            self._val_tag = (cl, pc, tval)
             if pc == 1:
                 # constructed object
                 #
@@ -468,50 +483,61 @@ Alternative single value: Python 2-tuple
                 # maximum
                 char._len_bit = 8*len(char._buf)
                 #
-                self._val = ASN1CodecBER.scan_tlv(char, tlv)
+                self._val_tag = (cl, pc, tval)
+                self._val = ('_unk_%i%i%i' % self._val_tag, ASN1CodecBER.scan_tlv(char, tlv))
             elif lval >= 0:
                 # primitive object
                 char._cur, char._len_bit = tlv[4][0], tlv[4][1]
-                self._val = char.get_bytes(8*lval)
+                self._val_tag = (cl, pc, tval)
+                self._val = ('_unk_%i%i%i' % self._val_tag, char.get_bytes(8*lval))
             else:
                 raise(ASN1BERDecodeErr('{0}: invalid OPEN / ANY tag and length, {1!r}, {2!r}'\
                       .format(self.fullname(), (cl, pc, tval), lval)))
     
     def _encode_ber_cont_ws(self):
-        if isinstance(self._val, bytes_types):
-            # unknown object re-encoding
-            assert( hasattr(self, '_val_tag') )
-            cl, pc, tval = self._val_tag
-            TLV = ASN1CodecBER.encode_tlv_ws(cl, tval, self._val, pc=pc)
-        else:
-            if isinstance(self._val[0], ASN1Obj):
-                Obj = self._val[0]
-            else:
-                Obj = self._get_val_obj(self._val[0])
+        if isinstance(self._val[0], ASN1Obj):
+            Obj = self._val[0]
             Obj._val = self._val[1]
             TLV = Obj._to_ber_ws()
+        else:
+            # isinstance(self._val[0], str_bytes)
+            if self._val[0][:5] == '_unk_':
+                try:
+                    cl, pc, tval = int(self._val[0][5:6]), \
+                                   int(self._val[0][6:7]), \
+                                   int(self._val[0][7:])
+                except:
+                    cl, pc, tval = 0, 0, 4
+                TLV = ASN1CodecBER.encode_tlv_ws(cl, tval, self._val[1], pc=pc)
+            else:
+                Obj = self._get_val_obj(self._val[0])
+                Obj._val = self._val[1]
+                TLV = Obj._to_ber_ws()
         if ASN1CodecBER.ENC_LUNDEF:
             return 1, -1, TLV
         else:
-            # TODO: check which one is the more efficient
-            #lval += (TLV[0].get_bl() >> 3) + (TLV[1].get_bl() >> 3) + TLV[1]()
-            #lval = (TLV[0:2].get_bl() >> 3) + TLV[1]()
             lval = TLV.get_bl() >> 3
             return 1, lval, TLV
     
     def _encode_ber_cont(self):
-        if isinstance(self._val, bytes_types):
-            # unknown object re-encoding
-            assert( hasattr(self, '_val_tag') )
-            cl, pc, tval = self._val_tag
-            TLV = ASN1CodecBER.encode_tlv(cl, tval, self._val, pc=pc)
-        else:
-            if isinstance(self._val[0], ASN1Obj):
-                Obj = self._val[0]
-            else:
-                Obj = self._get_val_obj(self._val[0])
+        if isinstance(self._val[0], ASN1Obj):
+            Obj = self._val[0]
             Obj._val = self._val[1]
             TLV = Obj._to_ber()
+        else:
+            # isinstance(self._val[0], str_bytes)
+            if self._val[0][:5] == '_unk_':
+                try:
+                    cl, pc, tval = int(self._val[0][5:6]), \
+                                   int(self._val[0][6:7]), \
+                                   int(self._val[0][7:])
+                except:
+                    cl, pc, tval = 0, 0, 4
+                TLV = ASN1CodecBER.encode_tlv(cl, tval, self._val[1], pc=pc)
+            else:
+                Obj = self._get_val_obj(self._val[0])
+                Obj._val = self._val[1]
+                TLV = Obj._to_ber()
         if ASN1CodecBER.ENC_LUNDEF:
             return 1, -1, TLV
         else:

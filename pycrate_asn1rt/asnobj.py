@@ -111,7 +111,7 @@ Special attributes that exists only for some objects:
 Attributes for object specific constraints:
     
     - const_sz (for BIT STRING, OCTET STRING, *String, SEQUENCE OF, SET OF)
-    - const_ind (for ENUM and CHOICE)
+    - const_ind (for ENUM and CHOICE, constraint on the max index)
     - const_cont (for BIT STRING, OCTET STRING)
     - const_cont_enc (for BIT STRING, OCTET STRING)
     - const_alpha (for *String)

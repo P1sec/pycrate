@@ -112,7 +112,7 @@ def init_modules(*args, **kwargs):
                             Obj._root.append(name)
                 # set _cont_rev
                 Obj._cont_rev  = {Obj._cont[name]: name for name in Obj._cont}
-                # set _const_ind and _const_ind_dyn
+                # set _const_ind
                 if Obj._ext is None:
                     Obj._const_ind = ASN1Set(rr=[ASN1RangeInt(0, len(Obj._root)-1)])
                 elif not Obj._ext:
@@ -128,7 +128,7 @@ def init_modules(*args, **kwargs):
                     Comp._parent = Obj
                 #
                 if Obj.TYPE == TYPE_CHOICE:
-                    # set _root, _const_ind and _const_ind_dyn
+                    # set _root, _const_ind
                     Obj._root, ext = [], []
                     if Obj._ext is not None:
                         ext = Obj._ext

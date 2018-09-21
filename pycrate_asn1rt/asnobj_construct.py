@@ -394,7 +394,7 @@ Specific attributes:
                 if not self._SILENT:
                     asnlog('CHOICE._decode_ber_cont_ws: %s, unknown extension tag %r'\
                            % (self.fullname(), (cl, tval)))
-                ident = '_ext_%r%r%r' % (cl, pc, tval)
+                ident = '_ext_%i%i%i' % (cl, pc, tval)
                 if pc == 1:
                     # constructed object
                     val = ASN1CodecBER.scan_tlv_ws(char, tlv)
@@ -461,7 +461,7 @@ Specific attributes:
             # decode unknown extension, if possible
             if self._ext is not None:
                 # unknown extension
-                ident = '_ext_%r%r%r' % (cl, pc, tval)
+                ident = '_ext_%i%i%i' % (cl, pc, tval)
                 if not self._SILENT:
                     asnlog('CHOICE._decode_ber_cont: %s, unknown extension tag %r'\
                            % (self.fullname(), (cl, tval))) 
@@ -1324,7 +1324,7 @@ Specific attributes:
                 if not self._SILENT:
                     asnlog('SEQUENCE._decode_ber_cont_ws: %s, unknown extension tag %r'\
                            % (self.fullname(), (cl, tval)))
-                ident = '_ext_%r%r%r' % (cl, pc, tval)
+                ident = '_ext_%i%i%i' % (cl, pc, tval)
                 if pc == 1:
                     # constructed object
                     val = ASN1CodecBER.scan_tlv_ws(char, tlv[ind])
@@ -1433,7 +1433,7 @@ Specific attributes:
                 if not self._SILENT:
                     asnlog('SEQUENCE._decode_ber_cont: %s, unknown extension tag %r'\
                            % (self.fullname(), (cl, tval)))
-                ident = '_ext_%r%r%r' % (cl, pc, tval)
+                ident = '_ext_%i%i%i' % (cl, pc, tval)
                 if pc == 1:
                     # constructed object
                     val = ASN1CodecBER.scan_tlv(char, tlv[ind])
@@ -1694,7 +1694,7 @@ Specific attributes:
                 if not self._SILENT:
                     asnlog('SET._decode_ber_cont_ws: %s, unknown extension tag %r'\
                            % (self.fullname(), (cl, tval)))
-                ident = '_ext_%r%r%r' % (cl, pc, tval)
+                ident = '_ext_%i%i%i' % (cl, pc, tval)
                 if pc == 1:
                     # constructed object
                     val = ASN1CodecBER.scan_tlv_ws(char, comp_tlv)
@@ -1778,7 +1778,7 @@ Specific attributes:
                 if not self._SILENT:
                     asnlog('SET._decode_ber_cont: %s, unknown extension tag %r'\
                            % (self.fullname(), (cl, tval)))
-                ident = '_ext_%r%r%r' % (cl, pc, tval)
+                ident = '_ext_%i%i%i' % (cl, pc, tval)
                 if pc == 1:
                     # constructed object
                     val = ASN1CodecBER.scan_tlv(char, comp_tlv)
