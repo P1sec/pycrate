@@ -2306,15 +2306,21 @@ Virtual parent for any ASN.1 *String object
             return 0, len(buf), [ (T_BYTES, buf, 8*len(buf)) ]
 
 
+# Python does not provide a complete support for ISO2022 encoding
+# so here, we use iso2022_jp_2004
+_ISO2022_CODEC = 'iso2022_jp_2004'
+# If you want to disable support for ISO2022 entirely, just set this to None
+#_ISO2022_CODEC = None
+
+
 class OBJ_DESC(_String):
     __doc__ = """
 ASN.1 basic type OBJECT DESCRIPTOR object
 %s
 """ % _String_docstring
     
-    # TODO: OBJECT DESCRIPTOR is a subtype of GraphicString
-    # as such, it is not supported yet
-    _codec    = None
+    # OBJECT DESCRIPTOR is a subtype of GraphicString
+    _codec    = _ISO2022_CODEC
     
     TYPE  = TYPE_OBJ_DESC
     TAG   = 7
@@ -2364,8 +2370,7 @@ ASN.1 basic type TeletexString object
 %s
 """ % _String_docstring
     
-    # TODO: see ISO 2022 for the codec, not supported yet
-    _codec    = None
+    _codec    = _ISO2022_CODEC
     
     TYPE  = TYPE_STR_TELE
     TAG   = 20
@@ -2377,8 +2382,7 @@ ASN.1 basic type T61String object
 %s
 """ % _String_docstring
     
-    # TODO: see ISO 2022 for the codec, not supported yet
-    _codec    = None
+    _codec    = _ISO2022_CODEC
     
     TYPE  = TYPE_STR_T61
     TAG   = 20
@@ -2390,8 +2394,7 @@ ASN.1 basic type VideotextString object
 %s
 """ % _String_docstring
     
-    # TODO: see ISO 2022 for the codec, not supported yet
-    _codec    = None
+    _codec    = _ISO2022_CODEC
     
     TYPE  = TYPE_STR_VID
     TAG   = 21
@@ -2417,8 +2420,7 @@ ASN.1 basic type GraphicString object
 %s
 """ % _String_docstring
     
-    # TODO: see ISO 2022 for the codec, not supported yet
-    _codec    = None
+    _codec    = _ISO2022_CODEC
     
     TYPE  = TYPE_STR_GRAPH
     TAG   = 25
@@ -2458,8 +2460,7 @@ ASN.1 basic type GenericString object
 %s
 """ % _String_docstring
     
-    # TODO: see ISO 2022 for the codec, not supported yet
-    _codec    = None
+    _codec    = _ISO2022_CODEC
     
     TYPE  = TYPE_STR_GENE
     TAG   = 27
