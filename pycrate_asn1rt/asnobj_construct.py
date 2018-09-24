@@ -123,7 +123,7 @@ Specific attributes:
             self._cont[ident]._parent = _par
             #self._cont[ident]._val = None
         else:
-            ret = '%s : \'%s\'H' % (ident, hexlify(self._val[2]))
+            ret = '%s : \'%s\'H' % (ident, hexlify(self._val[1]))
         return ret
     
     ###
