@@ -511,7 +511,7 @@ Specific attributes:
     def _encode_ber_cont_ws(self):
         if self._val[0][:5] == '_ext_':
             # unknown extension re-encoding
-            assert( self._ext is not None )
+            #assert( self._ext is not None )
             cl, pc, tval = int(self._val[0][5:6]), int(self._val[0][6:7]), int(self._val[0][7:])
             TLV = ASN1CodecBER.encode_tlv_ws(cl, tval, self._val[1], pc=pc)
         else:
@@ -533,7 +533,7 @@ Specific attributes:
     def _encode_ber_cont(self):
         if self._val[0][:5] == '_ext_':
             # unknown extension re-encoding
-            assert( self._ext is not None )
+            #assert( self._ext is not None )
             cl, pc, tval = int(self._val[0][5:6]), int(self._val[0][6:7]), int(self._val[0][7:])
             TLV = ASN1CodecBER.encode_tlv(cl, tval, self._val[1], pc=pc)
         else:
@@ -1481,7 +1481,7 @@ Specific attributes:
         #
         if val_ids:
             # encode unknown extended components
-            assert( self._ext is not None )
+            #assert( self._ext is not None )
             for ident in val_ids:
                 assert( ident[0:5] == '_ext_' )
                 cl, pc, tval = int(ident[5:6]), int(ident[6:7]), int(ident[7:])
@@ -1526,7 +1526,7 @@ Specific attributes:
         #
         if val_ids:
             # encode unknown extended components
-            assert( self._ext is not None )
+            #assert( self._ext is not None )
             for ident in val_ids:
                 assert( ident[0:5] == '_ext_' )
                 cl, pc, tval = int(ident[5:6]), int(ident[6:7]), int(ident[7:])
@@ -1859,7 +1859,7 @@ Specific attributes:
         #
         if val_ids:
             # encode unknown extended components
-            assert( self._ext is not None )
+            #assert( self._ext is not None )
             for ident in val_ids:
                 assert( ident[0:5] == '_ext_' )
                 cl, pc, tval = int(ident[5:6]), int(ident[6:7]), int(ident[7:])
@@ -1926,7 +1926,7 @@ Specific attributes:
         #
         if val_ids:
             # encode unknown extended components
-            assert( self._ext is not None )
+            #assert( self._ext is not None )
             for ident in val_ids:
                 assert( ident[0:5] == '_ext_' )
                 cl, pc, tval = int(ident[5:6]), int(ident[6:7]), int(ident[7:])
