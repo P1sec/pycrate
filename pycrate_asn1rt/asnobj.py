@@ -816,12 +816,18 @@ class ASN1Obj(Element):
             try:
                 if Obj.TYPE in (TYPE_CHOICE, TYPE_SEQ, TYPE_SET, TYPE_REAL, 
                                 TYPE_EXT, TYPE_EMB_PDV, TYPE_CHAR_STR):
-                    Obj = Obj._cont[p]
+                    if p[:5] == '_ext_':
+                        break
+                    else:
+                        Obj = Obj._cont[p]
                 elif Obj.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
                     # p is not used
                     Obj = Obj._cont
                 elif Obj.TYPE in (TYPE_OPEN, TYPE_ANY):
-                    Obj = Obj._get_const_tr()[p]
+                    if p[:5] == '_unk_':
+                        break
+                    else:
+                        Obj = Obj._get_const_tr()[p]
                 elif Obj.TYPE in (TYPE_BIT_STR, TYPE_OCT_STR) \
                 and Obj._const_cont is not None:
                     # p is not used
@@ -861,26 +867,40 @@ class ASN1Obj(Element):
         isinstance(self._val, tuple) and \
         isinstance(self._val[0], str_types):
             # value is (component_name, component_value)
-            Comp = self.get_at( [self._val[0]] )
-            _comp_val = Comp._val
-            Comp._val = self._val[1]
             curpath.append( self._val[0] )
-            paths = Comp.get_val_paths(curpath[:], paths[:])
+            if self._val[0][:5] in ('_ext_', '_unk_'):
+                # take care of unknown / extended objects
+                paths.append( (curpath[:], self._val[1]) )
+            else:
+                Comp = self.get_at( [self._val[0]] )
+                _comp_val = Comp._val
+                Comp._val = self._val[1]
+                paths = Comp.get_val_paths(curpath[:], paths[:])
+                Comp._val = _comp_val
             del curpath[-1]
-            Comp._val = _comp_val
         #
         elif self.TYPE in (TYPE_SEQ, TYPE_SET, TYPE_EXT, TYPE_EMB_PDV, TYPE_CHAR_STR):
             # value is dict {component_name: component_value)
+            val_ids = list(self._val.keys())
             for comp_name in self._cont:
-                if comp_name in self._val:
+                if comp_name in val_ids[:]:
+                    curpath.append( comp_name )
                     comp_val = self._val[comp_name]
                     Comp = self._cont[comp_name]
                     _comp_val = Comp._val
                     Comp._val = comp_val
-                    curpath.append( comp_name )
                     paths = Comp.get_val_paths(curpath[:], paths[:])
-                    del curpath[-1]
                     Comp._val = _comp_val
+                    del curpath[-1]
+                    val_ids.remove(comp_name)
+            if val_ids:
+                # take care of remaining unknown / extension objects
+                val_ids.sort()
+                for comp_name in val_ids:
+                    curpath.append( comp_name )
+                    assert( comp_name[:5] in ('_ext_', '_unk_') )
+                    paths.append( (curpath[:], self._val[comp_name][1]) )
+                    del curpath[-1]
         #
         elif self.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
             # value is a list of component_value
