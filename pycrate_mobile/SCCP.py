@@ -300,7 +300,16 @@ _SSN_dict = {
     11 : 'ISDN supplementary services',
     12 : 'reserved for international use',
     13 : 'broadband ISDN edge-to-edge applications',
-    14 : 'TC test responder'
+    14 : 'TC test responder',
+    # from 3GPP TS 29.002 and 23.003
+    142 : '3GPP RANAP',
+    143 : '3GPP RNSAP',
+    145 : '3GPP GMLC (MAP)',
+    146 : '3GPP CAP',
+    147 : '3GPP gsmSCF (MAP) or IM-SSF (MAP) or Presence Network Agent',
+    148 : '3GPP SIWF (MAP)',
+    149 : '3GPP SGSN (MAP)',
+    150 : '3GPP GGSN (MAP)',
     }
 
 
