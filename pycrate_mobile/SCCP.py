@@ -1194,7 +1194,7 @@ class SCCPLongUnitData(SCCPMessage):
 # ITU-T Q.713, section 4.21
 #------------------------------------------------------------------------------#
 
-class SCCPLongUnitData(SCCPMessage):
+class SCCPLongUnitDataService(SCCPMessage):
     _GEN = (
         Uint8('Type', val=20, dic=_SCCPType_dict),
         RetCause(),
@@ -1240,7 +1240,7 @@ SCCPTypeClasses = {
     17 : SCCPExtUnitData,
     18 : SCCPExtUnitDataService,
     19 : SCCPLongUnitData,
-    20 : SCCPLongUnitData
+    20 : SCCPLongUnitDataService,
     }
 
 def get_sccp_msg_instances():
@@ -1395,7 +1395,7 @@ def parse_SCCP(buf):
     except:
         return None, 2
     #
-    # if SCMG, parse it further (UDT/XUDT/LUDT, ProtocolClass 0, both addresses on SSN 1)
+    # if SCMG, parses it further (UDT/XUDT/LUDT, ProtocolClass 0, both addresses on SSN 1)
     try:
         if Msg[0].get_val() in (9, 17, 19) and Msg[1][1].get_val() == 0 and \
         Msg[3][1][0]['RoutingInd'].get_val() == 1 and  Msg[3][1][0]['SSNInd'].get_val() == 1 and Msg[3][1]['SSN'].get_val() == 1 and \
