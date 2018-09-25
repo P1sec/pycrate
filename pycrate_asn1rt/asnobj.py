@@ -591,9 +591,9 @@ class ASN1Obj(Element):
         if self.TYPE in TYPES_BASIC + TYPES_EXT:
             return self.TYPE
         elif self.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
-            return [self._cont.get_proto()]
+            return [self._cont._get_proto_old()]
         elif self.TYPE in (TYPE_CHOICE, TYPE_SEQ, TYPE_SET, TYPE_CLASS):
-            return ASN1Dict([(ident, Comp.get_proto()) for (ident, Comp) in self._cont.items()])
+            return ASN1Dict([(ident, Comp._get_proto_old()) for (ident, Comp) in self._cont.items()])
         else:
             assert()
     
