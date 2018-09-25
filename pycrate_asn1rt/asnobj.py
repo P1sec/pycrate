@@ -584,6 +584,19 @@ class ASN1Obj(Element):
             const['tab_at']   = self._const_tab_at
         return const
     
+    def _get_proto_old(self):
+        # old method, deprecated
+        # TODO: in case of recursive object, this will break Python
+        # TODO: add information on OPTIONAL / DEFAULT components
+        if self.TYPE in TYPES_BASIC + TYPES_EXT:
+            return self.TYPE
+        elif self.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
+            return [self._cont.get_proto()]
+        elif self.TYPE in (TYPE_CHOICE, TYPE_SEQ, TYPE_SET, TYPE_CLASS):
+            return ASN1Dict([(ident, Comp.get_proto()) for (ident, Comp) in self._cont.items()])
+        else:
+            assert()
+    
     def get_proto(self, w_open=True, print_recurs=False):
         """
         returns the prototype of the object
