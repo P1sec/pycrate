@@ -55,8 +55,8 @@ class ASN1CodecPER(ASN1Codec):
     
     _off = [] # stack of offsets in bits, only used with APER
     
-    _CntUndef_LUT = {0:16384, 1:32768, 2:49152, 3:65536,
-                     16384:0, 32768:1, 49152:2, 65536:3}
+    _CntUndef_LUT = {1:16384, 2:32768, 3:49152, 4:65536,
+                     16384:1, 32768:2, 49152:3, 65536:4}
     
     @classmethod
     def decode_pad_ws(cla, char):

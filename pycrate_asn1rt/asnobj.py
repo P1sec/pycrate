@@ -609,7 +609,7 @@ class ASN1Obj(Element):
         
         Returns:
             type: str if self is of basic type, 
-                  tuple if self is of constructed type
+                  2-tuple (type_str, content_dict) if self is of constructed type
         """
         if not hasattr(self, '_proto_fields'):
             root = True
