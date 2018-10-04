@@ -54,6 +54,9 @@ TEST_ASN1C_ALL = False
 
 class TestPycrate(unittest.TestCase):
     
+    def runTest(self):
+        pass
+    
     # core objects
     def test_core(self):
         print('[<>] testing pycrate_core')
