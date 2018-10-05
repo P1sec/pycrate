@@ -4,6 +4,7 @@
 # * Version : 0.3
 # *
 # * Copyright 2016. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -32,12 +33,17 @@ from pycrate_core.base import *
 from pycrate_core.repr import *
 
 # GSMTAP header format:
+# see osmocom project:
 # http://cgit.osmocom.org/libosmocore/tree/include/osmocom/core/gsmtap.h
+# https://cgit.osmocom.org/libosmocore/tree/src/gsmtap_util.c
+# and wireshark project:
+# https://github.com/wireshark/wireshark/blob/master/epan/dissectors/packet-gsmtap.h
+# https://github.com/wireshark/wireshark/blob/master/epan/dissectors/packet-gsmtap.c
 #
-#/* GSMTAP is a generic header format for GSM protocol captures,
+#/* GSMTAP is a generic header format for cellular protocol captures,
 # * it uses the IANA-assigned UDP port number 4729 and carries
-# * payload in various formats of GSM interfaces such as Um MAC
-# * blocks or Um bursts.
+# * payload in various formats of GSM / WCDMA / LTE interfaces such as Um MAC
+# * blocks, Um bursts, RRC or NAS messages.
 # *
 # * Example programs generating GSMTAP data are airprobe
 # * (http://airprobe.org/) or OsmocomBB (http://bb.osmocom.org/)
@@ -51,13 +57,17 @@ Type_dict = {
     0x05 : "TETRA_I1",
     0x06 : "TETRA_I1_BURST",
     0x07 : "WIMAX_BURST",
-    0x08 : "GB_LLC",
-    0x09 : "GB_SNDCP",
+    0x08 : "GPRS_GB_LLC",
+    0x09 : "GPRS_GB_SNDCP",
     0x0a : "GMR1_UM",
     0x0b : "UMTS_RLC_MAC",
     0x0c : "UMTS_RRC",
     0x0d : "LTE_RRC",
-    0x0e : "LTE_MAC"
+    0x0e : "LTE_MAC",
+    0x0f : "LTE_MAC_FRAMED",
+    0x10 : "OSMOCORE_LOG",
+    0x11 : "QUALCOMM_DIAG",
+    0x12 : "LTE_NAS",
     }
 
 TypeUMBurst_dict = {
@@ -220,67 +230,72 @@ TypeUMTSRRC_dict = {
     }
 
 TypeLTERRC_dict = {
-    0x01 : "BCCH",
-    0x02 : "CCCH",
-    0x03 : "DCCH",
-    0x04 : "MCCH",
-    0x05 : "PCCH",
-    0x06 : "DTCH",
-    0x07 : "MTCH"
+    0x00 : "DL_CCCH_Message",
+    0x01 : "DL_DCCH_Message",
+    0x02 : "UL_CCCH_Message",
+    0x03 : "UL_DCCH_Message",
+    0x04 : "BCCH_BCH_Message",
+    0x05 : "BCCH_DL_SCH_Message",
+    0x06 : "PCCH_Message",
+    0x07 : "MCCH_Message"
     }
 
+TypeLTENAS_dict = {
+    0x00 : "NAS_PLAIN",
+    0x01 : "NAS_SEC_HEADER",
+    }
+    
+
 SubTypeDictLU_dict = {
-    1 : TypeUM_dict,
-    3 : TypeUMBurst_dict,
-    5 : TypeTETRA_dict,
-    7 : TypeWiMAXBurst_dict,
-    10 : TypeGMR_dict,
-    11 : TypeUMTSRLC_dict,
-    12 : TypeUMTSRRC_dict,
-    13 : TypeLTERRC_dict
+    0x01 : TypeUM_dict,
+    0x03 : TypeUMBurst_dict,
+    0x05 : TypeTETRA_dict,
+    0x07 : TypeWiMAXBurst_dict,
+    0x0a : TypeGMR_dict,
+    0x0b : TypeUMTSRLC_dict,
+    0x0c : TypeUMTSRRC_dict,
+    0x0d : TypeLTERRC_dict,
+    0x0e : TypeLTENAS_dict
     }
 
 
 """
 Mapping of the osmocom / wireshark gsmtap header structure
 
-see: http://cgit.osmocom.org/libosmocore/tree/include/osmocom/core/gsmtap.h
-
+/* This is the header as it is used by gsmtap-generating software.
+ * It is not used by the wireshark dissector and provided for reference only.
 struct gsmtap_hdr {
-    uint8_t version;	/*!< version, set to 0x01 currently */
-    uint8_t hdr_len;	/*!< length in number of 32bit words */
-    uint8_t type;		/*!< see GSMTAP_TYPE_* */
-    uint8_t timeslot;	/*!< timeslot (0..7 on Um) */
-
-    uint16_t arfcn;		/*!< ARFCN (frequency) */
-    int8_t signal_dbm;	/*!< signal level in dBm */
-    int8_t snr_db;		/*!< signal/noise ratio in dB */
-
-    uint32_t frame_number;	/*!< GSM Frame Number (FN) */
-
-    uint8_t sub_type;	/*!< Type of burst/channel, see above */
-    uint8_t antenna_nr;	/*!< Antenna Number */
-    uint8_t sub_slot;	/*!< sub-slot within timeslot */
-    uint8_t res;		/*!< reserved for future use (RFU) */
-
-} __attribute__((packed));
+	guint8 version;		// version, set to 0x01 currently
+	guint8 hdr_len;		// length in number of 32bit words
+	guint8 type;		// see GSMTAP_TYPE_*
+	guint8 timeslot;	// timeslot (0..7 on Um)
+	guint16 arfcn;		// ARFCN (frequency)
+	gint8 signal_dbm;	// signal level in dBm
+	gint8 snr_db;		// signal/noise ratio in dB
+	guint32 frame_number;	// GSM Frame Number (FN)
+	guint8 sub_type;	// Type of burst/channel, see above
+	guint8 antenna_nr;	// Antenna Number
+	guint8 sub_slot;	// sub-slot within timeslot
+	guint8 res;		// reserved for future use (RFU)
+}
+ */
 """
 
 class gsmtap_hdr(Envelope):
     _GEN = (
-        Uint8('version', val=1),
-        Uint8('hdr_len', val=4), # header length in 32-bit words
+        Uint8('version', val=2),
+        Uint8('hdr_len', val=4),    # header length in 32-bit words
         Uint8('type', val=1, dic=Type_dict),
-        Uint8('timeslot'), # GSM timeslot (0..7)
+        Uint8('timeslot'),          # GSM Um timeslot (0..7)
         Uint('PCS', bl=1),
         Uint('uplink', bl=1),
         Uint('arfcn', bl=14),
         Int8('signal_dbm'),
         Int8('snr_db'),
-        Uint32('frame_number'), # GSM FN
-        Uint8('sub_type'), # type of channel
-        Uint8('antenna_nr'), # antenna number
-        Uint8('sub_slot'), # sub-slot within timeslot
+        Uint32('frame_number'),     # GSM FN
+        Uint8('sub_type'),          # type of burst / channel
+        Uint8('antenna_nr'),        # antenna number
+        Uint8('sub_slot'),          # sub-slot within timeslot
         Uint8('res')
         )
     def __init__(self, *args, **kwargs):
