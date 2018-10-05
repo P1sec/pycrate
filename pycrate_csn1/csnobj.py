@@ -420,10 +420,19 @@ class CSN1Bit(CSN1Obj):
     
     def _repr_val(self):
         if self._REPR == 'B' and self._type == CSN1T_UINT:
-            val = uint_to_bitstr(self._val, self._bit)
+            if isinstance(self._bit, tuple):
+                bit = self._resolve_ref(self._bit)
+            elif self._bit == -1:
+                if hasattr(self, '_valbl'):
+                    bit = self._valbl
+                else:
+                    bit = 0
+            else:
+                bit = self._bit
+            val = uint_to_bitstr(self._val, bit)
         else:
             val = self._val
-        if self._dic and self._val[1] in self._dic:
+        if self._dic and self._val in self._dic:
             return '%r (%s)' % (val, self._dic[self._val])
         else:
             # int or bit-string
@@ -435,6 +444,10 @@ class CSN1Bit(CSN1Obj):
         if isinstance(self._bit, tuple):
             # dynamic number of bits
             bit = self._resolve_ref(self._bit)
+        elif self._bit == -1:
+            # consumes all the remaining bits
+            bit = char.len_bit()
+            self._valbl = bit
         else:
             # static number of bits
             bit = self._bit
@@ -452,6 +465,13 @@ class CSN1Bit(CSN1Obj):
         if isinstance(self._bit, tuple):
             # dynamic number of bits
             bit = self._resolve_ref(self._bit)
+        elif self._bit == -1:
+            # requires to know the length in bits
+            if hasattr(self, '_valbl'):
+                bit = self._valbl
+            else:
+                # do not encode
+                return []
         else:
             # static number of bits
             bit = self._bit
