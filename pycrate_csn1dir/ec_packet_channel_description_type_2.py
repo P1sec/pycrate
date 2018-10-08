@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/ec_packet_channel_description_type_2.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/

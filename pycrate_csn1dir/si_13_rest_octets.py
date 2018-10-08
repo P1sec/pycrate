@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/si_13_rest_octets.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -46,6 +46,10 @@ spare_padding = CSN1Val(name='spare_padding', val='L', num=-1)
 Spare_padding = spare_padding
 Spare_Padding = spare_padding 
 
+si_change_alt = CSN1Alt(name='si_change_alt', alt={
+  'H': ('', []),
+  'L': ('', [])})
+
 pbcch_description_struct = CSN1List(name='pbcch_description_struct', list=[
   CSN1Bit(name='pb', bit=4),
   CSN1Bit(name='tsc', bit=3),
@@ -56,10 +60,6 @@ pbcch_description_struct = CSN1List(name='pbcch_description_struct', list=[
     CSN1Bit(name='arfcn', bit=10)]),
     '1': ('', [
     CSN1Bit(name='maio', bit=6)])})])
-
-si_change_alt = CSN1Alt(name='si_change_alt', alt={
-  'H': ('', []),
-  'L': ('', [])})
 
 si_13_rest_octets = CSN1List(name='si_13_rest_octets', list=[
   CSN1Alt(alt={

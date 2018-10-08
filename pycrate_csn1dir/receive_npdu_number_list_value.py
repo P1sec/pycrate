@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/receive_npdu_number_list_value.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -43,10 +43,6 @@ receive_npdu_number_value = CSN1Alt(name='receive_npdu_number_value', num=8, alt
   '0': ('', []),
   '1': ('', [])})
 
-padding_bits = CSN1Alt(name='padding_bits', alt={
-  '0000': ('', []),
-  None: ('', [])})
-
 nsapi = CSN1Alt(name='nsapi', alt={
   '0101': ('', []),
   '0110': ('', []),
@@ -59,6 +55,10 @@ nsapi = CSN1Alt(name='nsapi', alt={
   '1101': ('', []),
   '1110': ('', []),
   '1111': ('', [])})
+
+padding_bits = CSN1Alt(name='padding_bits', alt={
+  '0000': ('', []),
+  None: ('', [])})
 
 receive_npdu_number_list = CSN1List(name='receive_npdu_number_list', list=[
   CSN1Bit(name='sapi', bit=4),

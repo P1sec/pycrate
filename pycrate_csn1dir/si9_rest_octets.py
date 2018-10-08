@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/si9_rest_octets.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -42,14 +42,6 @@ from pycrate_csn1.csnobj import *
 spare_padding = CSN1Val(name='spare_padding', val='L', num=-1)
 Spare_padding = spare_padding
 Spare_Padding = spare_padding 
-
-info_type = CSN1Alt(name='info_type', alt={
-  '0': ('', [
-  CSN1Bit(name='info_type_4', bit=4)]),
-  '10': ('', [
-  CSN1Bit(name='info_type_5', bit=5)]),
-  '11': ('', [
-  CSN1Bit(name='info_type_6', bit=6)])})
 
 position = CSN1Alt(name='position', alt={
   '0000': ('modulus', [
@@ -106,6 +98,14 @@ positions = CSN1List(name='positions', list=[
     '0': ('', []),
     '1': ('', [
     CSN1Ref(obj=position)])})])
+
+info_type = CSN1Alt(name='info_type', alt={
+  '0': ('', [
+  CSN1Bit(name='info_type_4', bit=4)]),
+  '10': ('', [
+  CSN1Bit(name='info_type_5', bit=5)]),
+  '11': ('', [
+  CSN1Bit(name='info_type_6', bit=6)])})
 
 scheduling_info = CSN1List(name='scheduling_info', list=[
   CSN1Ref(obj=info_type),

@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/si3_rest_octet.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -43,11 +43,19 @@ spare_padding = CSN1Val(name='spare_padding', val='L', num=-1)
 Spare_padding = spare_padding
 Spare_Padding = spare_padding 
 
-selection_parameters = CSN1List(name='selection_parameters', list=[
-  CSN1Bit(name='cbq'),
-  CSN1Bit(name='cell_reselect_offset', bit=6),
-  CSN1Bit(name='temporary_offset', bit=3),
-  CSN1Bit(name='penalty_time', bit=5)])
+si2quater_indicator_struct = CSN1Bit(name='si2quater_indicator_struct')
+
+early_classmark_sending_control = CSN1Alt(name='early_classmark_sending_control', alt={
+  'H': ('', []),
+  'L': ('', [])})
+
+_3g_early_classmark_sending_restriction = CSN1Alt(name='_3g_early_classmark_sending_restriction', alt={
+  'H': ('', []),
+  'L': ('', [])})
+
+gprs_indicator = CSN1List(name='gprs_indicator', list=[
+  CSN1Bit(name='ra_colour', bit=3),
+  CSN1Bit(name='si13_position')])
 
 scheduling_if_and_where = CSN1Alt(name='scheduling_if_and_where', alt={
   'H': ('', [
@@ -59,35 +67,27 @@ system_information_21_indicator = CSN1Alt(name='system_information_21_indicator'
   CSN1Bit(name='si21_position')]),
   'L': ('', [])})
 
-si2quater_indicator_struct = CSN1Bit(name='si2quater_indicator_struct')
+system_information_2ter_indicator = CSN1Alt(name='system_information_2ter_indicator', alt={
+  'H': ('', []),
+  'L': ('', [])})
 
-gprs_indicator = CSN1List(name='gprs_indicator', list=[
-  CSN1Bit(name='ra_colour', bit=3),
-  CSN1Bit(name='si13_position')])
+selection_parameters = CSN1List(name='selection_parameters', list=[
+  CSN1Bit(name='cbq'),
+  CSN1Bit(name='cell_reselect_offset', bit=6),
+  CSN1Bit(name='temporary_offset', bit=3),
+  CSN1Bit(name='penalty_time', bit=5)])
 
 optional_power_offset = CSN1Alt(name='optional_power_offset', alt={
   'H': ('', [
   CSN1Bit(name='power_offset', bit=2)]),
   'L': ('', [])})
 
-_3g_early_classmark_sending_restriction = CSN1Alt(name='_3g_early_classmark_sending_restriction', alt={
-  'H': ('', []),
-  'L': ('', [])})
-
-early_classmark_sending_control = CSN1Alt(name='early_classmark_sending_control', alt={
-  'H': ('', []),
-  'L': ('', [])})
+iu_indicator = CSN1Bit(name='iu_indicator')
 
 optional_selection_parameters = CSN1Alt(name='optional_selection_parameters', alt={
   'H': ('', [
   CSN1Ref(obj=selection_parameters)]),
   'L': ('', [])})
-
-system_information_2ter_indicator = CSN1Alt(name='system_information_2ter_indicator', alt={
-  'H': ('', []),
-  'L': ('', [])})
-
-iu_indicator = CSN1Bit(name='iu_indicator')
 
 si3_rest_octet = CSN1List(name='si3_rest_octet', list=[
   CSN1Ref(obj=optional_selection_parameters),

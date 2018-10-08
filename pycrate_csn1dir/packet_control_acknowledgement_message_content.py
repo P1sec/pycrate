@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/packet_control_acknowledgement_message_content.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -39,6 +39,13 @@ from pycrate_csn1dir.padding_bits import padding_bits
 # add dict for key interpretation with kdic={...} in CSN1Alt init
 
 from pycrate_csn1.csnobj import *
+
+packet_control_acknowledgement_8_bit_message = CSN1List(name='packet_control_acknowledgement_8_bit_message', list=[
+  CSN1Alt(alt={
+    '000': ('message_type', [
+    CSN1Bit(name='tn_rrbp', bit=3)]),
+    '011111': ('message_type', [])}),
+  CSN1Bit(name='ctrl_ack', bit=2)])
 
 packet_control_acknowledgement_11_bit_message = CSN1List(name='packet_control_acknowledgement_11_bit_message', list=[
   CSN1Alt(alt={
@@ -73,11 +80,4 @@ packet_control_acknowledgement_message_content = CSN1List(name='packet_control_a
       CSN1Ref(obj=padding_bits)]),
       None: ('', [])})]),
     None: ('', [])})])
-
-packet_control_acknowledgement_8_bit_message = CSN1List(name='packet_control_acknowledgement_8_bit_message', list=[
-  CSN1Alt(alt={
-    '000': ('message_type', [
-    CSN1Bit(name='tn_rrbp', bit=3)]),
-    '011111': ('message_type', [])}),
-  CSN1Bit(name='ctrl_ack', bit=2)])
 

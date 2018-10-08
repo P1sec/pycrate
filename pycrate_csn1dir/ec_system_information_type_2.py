@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/ec_system_information_type_2.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -62,49 +62,6 @@ ec_cell_options_struct = CSN1List(name='ec_cell_options_struct', list=[
     CSN1Bit(name='t3226', bit=3)])}),
   CSN1Bit(name='t3248', bit=2)])
 
-short_rach_control_parameters_struct = CSN1List(name='short_rach_control_parameters_struct', list=[
-  CSN1Bit(name='max_retrans', bit=2),
-  CSN1Bit(name='tx_integer', bit=4),
-  CSN1Bit(name='cell_bar_access'),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='access_control_class', bit=16),
-    CSN1Bit(name='exception_report_status')])})])
-
-ec_rach_control_parameters_struct = CSN1List(name='ec_rach_control_parameters_struct', list=[
-  CSN1Bit(name='ec_max_retrans', bit=2),
-  CSN1Bit(name='sm', bit=2),
-  CSN1Bit(name='tm', bit=2),
-  CSN1Bit(name='access_timeslots'),
-  CSN1Bit(name='cc_access_adaptation', bit=2),
-  CSN1Bit(name='cell_bar_access'),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='ec_access_control_class', bit=7),
-    CSN1Bit(name='exception_report_status')])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='bt_threshold_ul_margin', bit=3)])})])
-
-ec_cell_selection_parameters_struct = CSN1List(name='ec_cell_selection_parameters_struct', list=[
-  CSN1Bit(name='location_area_identification', bit=40),
-  CSN1Bit(name='routing_area_code', bit=8),
-  CSN1Bit(name='cell_identity', bit=16),
-  CSN1Bit(name='ec_bs_cc_chans', bit=2),
-  CSN1Bit(name='ec_rxlev_access_min', bit=6),
-  CSN1Bit(name='ms_txpwr_max_cch', bit=5),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='lb_ms_txpwr_max_cch', bit=5)])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='cell_selection_rla_margin', bit=3)])})])
-
 coverage_class_selection_parameters_struct = CSN1List(name='coverage_class_selection_parameters_struct', list=[
   CSN1Bit(name='dl_cc_selection'),
   CSN1Bit(name='bt_threshold_dl', bit=5),
@@ -131,6 +88,49 @@ coverage_class_selection_parameters_struct = CSN1List(name='coverage_class_selec
     '1': ('', [
     CSN1Bit(name='dl_signal_strength_step_size', bit=2)])}),
   CSN1Bit(name='ec_reduced_pdch_allocation')])
+
+ec_cell_selection_parameters_struct = CSN1List(name='ec_cell_selection_parameters_struct', list=[
+  CSN1Bit(name='location_area_identification', bit=40),
+  CSN1Bit(name='routing_area_code', bit=8),
+  CSN1Bit(name='cell_identity', bit=16),
+  CSN1Bit(name='ec_bs_cc_chans', bit=2),
+  CSN1Bit(name='ec_rxlev_access_min', bit=6),
+  CSN1Bit(name='ms_txpwr_max_cch', bit=5),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='lb_ms_txpwr_max_cch', bit=5)])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='cell_selection_rla_margin', bit=3)])})])
+
+short_rach_control_parameters_struct = CSN1List(name='short_rach_control_parameters_struct', list=[
+  CSN1Bit(name='max_retrans', bit=2),
+  CSN1Bit(name='tx_integer', bit=4),
+  CSN1Bit(name='cell_bar_access'),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='access_control_class', bit=16),
+    CSN1Bit(name='exception_report_status')])})])
+
+ec_rach_control_parameters_struct = CSN1List(name='ec_rach_control_parameters_struct', list=[
+  CSN1Bit(name='ec_max_retrans', bit=2),
+  CSN1Bit(name='sm', bit=2),
+  CSN1Bit(name='tm', bit=2),
+  CSN1Bit(name='access_timeslots'),
+  CSN1Bit(name='cc_access_adaptation', bit=2),
+  CSN1Bit(name='cell_bar_access'),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='ec_access_control_class', bit=7),
+    CSN1Bit(name='exception_report_status')])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='bt_threshold_ul_margin', bit=3)])})])
 
 ec_system_information_type_2 = CSN1List(name='ec_system_information_type_2', list=[
   CSN1Bit(name='message_type', bit=3),

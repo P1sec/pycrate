@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/individual_priorities.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -60,6 +60,23 @@ repeated_individual_utran_priority_parameters_struct = CSN1List(name='repeated_i
     CSN1Val(name='', val='0')])}),
   CSN1Bit(name='utran_priority', bit=3)])
 
+repeated_individual_e_utran_pp_with_extended_earfcns_description_struct = CSN1List(name='repeated_individual_e_utran_pp_with_extended_earfcns_description_struct', list=[
+  CSN1List(num=-1, list=[
+    CSN1Val(name='', val='1'),
+    CSN1Bit(name='earfcn_extended', bit=18)]),
+  CSN1Val(name='', val='0'),
+  CSN1Bit(name='e_utran_priority', bit=3)])
+
+e_utran_ipp_with_extended_earfcns_description_struct = CSN1List(name='e_utran_ipp_with_extended_earfcns_description_struct', list=[
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='default_e_utran_priority', bit=3)])}),
+  CSN1List(num=-1, list=[
+    CSN1Val(name='', val='1'),
+    CSN1Ref(name='repeated_individual_e_utran_pp_with_extended_earfcns', obj=repeated_individual_e_utran_pp_with_extended_earfcns_description_struct)]),
+  CSN1Val(name='', val='0')])
+
 e_utran_individual_priority_parameters_description_struct = CSN1List(name='e_utran_individual_priority_parameters_description_struct', list=[
   CSN1Alt(alt={
     '0': ('', []),
@@ -78,23 +95,6 @@ _3g_individual_priority_parameters_description_struct = CSN1List(name='_3g_indiv
   CSN1List(num=-1, list=[
     CSN1Val(name='', val='1'),
     CSN1Ref(name='repeated_individual_utran_priority_parameters', obj=repeated_individual_utran_priority_parameters_struct)]),
-  CSN1Val(name='', val='0')])
-
-repeated_individual_e_utran_pp_with_extended_earfcns_description_struct = CSN1List(name='repeated_individual_e_utran_pp_with_extended_earfcns_description_struct', list=[
-  CSN1List(num=-1, list=[
-    CSN1Val(name='', val='1'),
-    CSN1Bit(name='earfcn_extended', bit=18)]),
-  CSN1Val(name='', val='0'),
-  CSN1Bit(name='e_utran_priority', bit=3)])
-
-e_utran_ipp_with_extended_earfcns_description_struct = CSN1List(name='e_utran_ipp_with_extended_earfcns_description_struct', list=[
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='default_e_utran_priority', bit=3)])}),
-  CSN1List(num=-1, list=[
-    CSN1Val(name='', val='1'),
-    CSN1Ref(name='repeated_individual_e_utran_pp_with_extended_earfcns', obj=repeated_individual_e_utran_pp_with_extended_earfcns_description_struct)]),
   CSN1Val(name='', val='0')])
 
 individual_priorities = CSN1Alt(name='individual_priorities', alt={

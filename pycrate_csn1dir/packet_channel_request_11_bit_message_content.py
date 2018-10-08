@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/packet_channel_request_11_bit_message_content.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -38,32 +38,6 @@
 # add dict for key interpretation with kdic={...} in CSN1Alt init
 
 from pycrate_csn1.csnobj import *
-
-packet_channel_request_8_bit_message_content = CSN1Alt(name='packet_channel_request_8_bit_message_content', alt={
-  '00': ('short_access_request', [
-  CSN1Bit(name='numberofblocks', bit=3),
-  CSN1Bit(name='randombits', bit=3)]),
-  '01000': ('two_phase_access_request', [
-  CSN1Bit(name='randombits', bit=3)]),
-  '01001': ('page_response', [
-  CSN1Bit(name='randombits', bit=3)]),
-  '01010': ('cell_update', [
-  CSN1Bit(name='randombits', bit=3)]),
-  '01011': ('mm_procedure', [
-  CSN1Bit(name='randombits', bit=3)]),
-  '01100': ('single_block_without_tbf_establishment', [
-  CSN1Bit(name='randombits', bit=3)]),
-  '011010': ('one_phase_access_request_in_rlc_unack_mode', [
-  CSN1Bit(name='randombits', bit=2)]),
-  '011011': ('dedicated_channel_request', [
-  CSN1Bit(name='randombits', bit=2)]),
-  '011100': ('emergency_call', [
-  CSN1Bit(name='randombits', bit=2)]),
-  '01111': ('single_block_mbms_access', [
-  CSN1Bit(name='randombits', bit=3)]),
-  '1': ('one_phase_access_request', [
-  CSN1Bit(name='multislotclass', bit=5),
-  CSN1Bit(name='randombits', bit=2)])})
 
 packet_channel_request_11_bit_message_content = CSN1Alt(name='packet_channel_request_11_bit_message_content', alt={
   '0': ('one_phase_access_request', [
@@ -93,4 +67,30 @@ packet_channel_request_11_bit_message_content = CSN1Alt(name='packet_channel_req
   CSN1Bit(name='randombits', bit=5)]),
   '111000': ('single_block_mbms_access', [
   CSN1Bit(name='randombits', bit=5)])})
+
+packet_channel_request_8_bit_message_content = CSN1Alt(name='packet_channel_request_8_bit_message_content', alt={
+  '00': ('short_access_request', [
+  CSN1Bit(name='numberofblocks', bit=3),
+  CSN1Bit(name='randombits', bit=3)]),
+  '01000': ('two_phase_access_request', [
+  CSN1Bit(name='randombits', bit=3)]),
+  '01001': ('page_response', [
+  CSN1Bit(name='randombits', bit=3)]),
+  '01010': ('cell_update', [
+  CSN1Bit(name='randombits', bit=3)]),
+  '01011': ('mm_procedure', [
+  CSN1Bit(name='randombits', bit=3)]),
+  '01100': ('single_block_without_tbf_establishment', [
+  CSN1Bit(name='randombits', bit=3)]),
+  '011010': ('one_phase_access_request_in_rlc_unack_mode', [
+  CSN1Bit(name='randombits', bit=2)]),
+  '011011': ('dedicated_channel_request', [
+  CSN1Bit(name='randombits', bit=2)]),
+  '011100': ('emergency_call', [
+  CSN1Bit(name='randombits', bit=2)]),
+  '01111': ('single_block_mbms_access', [
+  CSN1Bit(name='randombits', bit=3)]),
+  '1': ('one_phase_access_request', [
+  CSN1Bit(name='multislotclass', bit=5),
+  CSN1Bit(name='randombits', bit=2)])})
 

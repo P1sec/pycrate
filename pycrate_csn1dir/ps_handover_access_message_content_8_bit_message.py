@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/ps_handover_access_message_content_8_bit_message.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -39,9 +39,9 @@
 
 from pycrate_csn1.csnobj import *
 
+ps_handover_access_message_content_8_bit_message = CSN1Bit(name='ps_handover_access_message_content_8_bit_message', bit=8)
+
 ps_handover_access_message_content_11_bit_message = CSN1List(name='ps_handover_access_message_content_11_bit_message', list=[
   CSN1Bit(name='handover_reference', bit=8),
   CSN1Bit(name='spare', bit=3)])
-
-ps_handover_access_message_content_8_bit_message = CSN1Bit(name='ps_handover_access_message_content_8_bit_message', bit=8)
 

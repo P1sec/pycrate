@@ -25,7 +25,6 @@
 	< MESSAGE_TYPE : bit (6) == 0 10000 >	< Multiple TBF Uplink Assignment message content > |
 	< MESSAGE_TYPE : bit (6) == 0 10001 >	< Multiple TBF Timeslot Reconfigure message content > |
 	< MESSAGE_TYPE : bit (6) == 0 10011 >	< MBMS MS_ID Assignment message content > |	-- PACCH only
-	--< MESSAGE_TYPE : bit (6) == 0 10100 >	< MBMS Assignment (Non-distribution) message content > |
 	< MESSAGE_TYPE : bit (6) == 0 10100 >	< MBMS Assignment Non-distribution message content > |
 	< MESSAGE_TYPE : bit (6) == 0 10101 >	< PS Handover Command message content > |	 	-- PACCH only
 	< MESSAGE_TYPE : bit (6) == 0 10110 >	< Packet Physical Information message content > |	 -- PACCH only
@@ -49,13 +48,11 @@
 	< MESSAGE_TYPE : bit (6) == 1 01000 >	< PSI16 message content > |
 	< MESSAGE_TYPE : bit (6) == 1 00000 >	< Packet Serving Cell SI message content > |
 	< MESSAGE_TYPE : bit (6) == 1 00111 >	< Packet CS Command message content > |
-	--< MESSAGE_TYPE : bit (6) == 1 01001 >	< Packet CS Release Indication message content > |
 	< MESSAGE_TYPE : bit (6) == 1 01001 >   < Packet CS Release message content > |
-	--< MESSAGE_TYPE : bit (6) == 1 01010 >	< MBMS Assignment (Distribution) message content > |
 	< MESSAGE_TYPE : bit (6) == 1 01010 >	< MBMS Assignment Distribution message content > |
-	< MESSAGE_TYPE : bit (6) == 1 01011 >	< MBMS Neighbouring Cell Information message content >|
-	< MESSAGE_TYPE : bit (6) == 1 01100 >	< Packet MBMS Announcement message content >
-	< MESSAGE_TYPE : bit (6) == 1 01101 > < Packet Application Information message content >
+	< MESSAGE_TYPE : bit (6) == 1 01011 >	< MBMS Neighbouring Cell Information message content > |
+	< MESSAGE_TYPE : bit (6) == 1 01100 >	< Packet MBMS Announcement message content > |
+	< MESSAGE_TYPE : bit (6) == 1 01101 >   < Packet Application Information message content >
 	! < Unknown message type : { bit (6) = < no string > } < Default downlink message content > > ;
 
 < Default downlink message content > ::=

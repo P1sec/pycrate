@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/iu_mode_channel_request_description_ie.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -39,18 +39,6 @@
 
 from pycrate_csn1.csnobj import *
 
-iu_mode_channel_request_description_ie = CSN1List(name='iu_mode_channel_request_description_ie', list=[
-  CSN1Bit(name='rb_id', bit=5),
-  CSN1Bit(name='radio_priority', bit=2),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='rlc_block_count', bit=8)])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1SelfRef()])})])
-
 extended_channel_request_description_ie = CSN1List(name='extended_channel_request_description_ie', list=[
   CSN1Bit(name='pfi', bit=7),
   CSN1Bit(name='radio_priority', bit=2),
@@ -59,6 +47,18 @@ extended_channel_request_description_ie = CSN1List(name='extended_channel_reques
     '0': ('', []),
     '1': ('', [
     CSN1Bit(name='llc__pdu_type')])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1SelfRef()])})])
+
+iu_mode_channel_request_description_ie = CSN1List(name='iu_mode_channel_request_description_ie', list=[
+  CSN1Bit(name='rb_id', bit=5),
+  CSN1Bit(name='radio_priority', bit=2),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='rlc_block_count', bit=8)])}),
   CSN1Alt(alt={
     '0': ('', []),
     '1': ('', [

@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/dlmc_channel_quality_report_ie.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -39,39 +39,27 @@
 
 from pycrate_csn1.csnobj import *
 
-dlmc_interference_measurement_report_struct = CSN1List(name='dlmc_interference_measurement_report_struct', list=[
+dlmc_bep_link_quality_measurements_struct = CSN1List(name='dlmc_bep_link_quality_measurements_struct', list=[
   CSN1Alt(alt={
     '0': ('', []),
     '1': ('', [
-    CSN1Bit(name='i_level_tn0', bit=4)])}),
+    CSN1Bit(name='gmsk_mean_bep', bit=5),
+    CSN1Bit(name='gmsk_cv_bep', bit=3)])}),
   CSN1Alt(alt={
     '0': ('', []),
     '1': ('', [
-    CSN1Bit(name='i_level_tn1', bit=4)])}),
+    CSN1Bit(name='_8psk_mean_bep', bit=5),
+    CSN1Bit(name='_8psk_cv_bep', bit=3)])}),
   CSN1Alt(alt={
     '0': ('', []),
     '1': ('', [
-    CSN1Bit(name='i_level_tn2', bit=4)])}),
+    CSN1Bit(name='_16qam__nsr_mean_bep', bit=5),
+    CSN1Bit(name='_16qam__nsr_cv_bep', bit=3)])}),
   CSN1Alt(alt={
     '0': ('', []),
     '1': ('', [
-    CSN1Bit(name='i_level_tn3', bit=4)])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='i_level_tn4', bit=4)])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='i_level_tn5', bit=4)])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='i_level_tn6', bit=4)])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='i_level_tn7', bit=4)])})])
+    CSN1Bit(name='_32qam__nsr_mean_bep', bit=5),
+    CSN1Bit(name='_32qam__nsr_cv_bep', bit=3)])})])
 
 dlmc_bep_measurements_struct = CSN1List(name='dlmc_bep_measurements_struct', list=[
   CSN1Alt(alt={
@@ -115,27 +103,39 @@ dlmc_bep_measurements_struct = CSN1List(name='dlmc_bep_measurements_struct', lis
     CSN1Bit(name='reported_modulation', bit=2),
     CSN1Bit(name='mean_bep_tn7', bit=4)])})])
 
-dlmc_bep_link_quality_measurements_struct = CSN1List(name='dlmc_bep_link_quality_measurements_struct', list=[
+dlmc_interference_measurement_report_struct = CSN1List(name='dlmc_interference_measurement_report_struct', list=[
   CSN1Alt(alt={
     '0': ('', []),
     '1': ('', [
-    CSN1Bit(name='gmsk_mean_bep', bit=5),
-    CSN1Bit(name='gmsk_cv_bep', bit=3)])}),
+    CSN1Bit(name='i_level_tn0', bit=4)])}),
   CSN1Alt(alt={
     '0': ('', []),
     '1': ('', [
-    CSN1Bit(name='_8psk_mean_bep', bit=5),
-    CSN1Bit(name='_8psk_cv_bep', bit=3)])}),
+    CSN1Bit(name='i_level_tn1', bit=4)])}),
   CSN1Alt(alt={
     '0': ('', []),
     '1': ('', [
-    CSN1Bit(name='_16qam__nsr_mean_bep', bit=5),
-    CSN1Bit(name='_16qam__nsr_cv_bep', bit=3)])}),
+    CSN1Bit(name='i_level_tn2', bit=4)])}),
   CSN1Alt(alt={
     '0': ('', []),
     '1': ('', [
-    CSN1Bit(name='_32qam__nsr_mean_bep', bit=5),
-    CSN1Bit(name='_32qam__nsr_cv_bep', bit=3)])})])
+    CSN1Bit(name='i_level_tn3', bit=4)])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='i_level_tn4', bit=4)])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='i_level_tn5', bit=4)])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='i_level_tn6', bit=4)])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='i_level_tn7', bit=4)])})])
 
 dlmc_channel_quality_report_ie = CSN1List(name='dlmc_channel_quality_report_ie', list=[
   CSN1Bit(name='c_value', bit=6),

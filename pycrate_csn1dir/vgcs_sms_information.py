@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/vgcs_sms_information.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -43,11 +43,6 @@ spare_padding = CSN1Val(name='spare_padding', val='L', num=-1)
 Spare_padding = spare_padding
 Spare_Padding = spare_padding 
 
-non_segmented_sms_description_struct = CSN1List(name='non_segmented_sms_description_struct', list=[
-  CSN1Bit(name='length', bit=8),
-  CSN1Bit(name='sms_reference_number', bit=4),
-  CSN1Bit(name='sms_final_content', bit=([0], lambda x: x))])
-
 segmented_sms_description_struct = CSN1List(name='segmented_sms_description_struct', list=[
   CSN1Bit(name='sms_reference_number', bit=4),
   CSN1Bit(name='segment_number', bit=4),
@@ -57,6 +52,11 @@ segmented_sms_description_struct = CSN1List(name='segmented_sms_description_stru
     '1': ('', [
     CSN1Bit(name='length', bit=8),
     CSN1Bit(name='sms_final_content', bit=([1], lambda x: x))])})])
+
+non_segmented_sms_description_struct = CSN1List(name='non_segmented_sms_description_struct', list=[
+  CSN1Bit(name='length', bit=8),
+  CSN1Bit(name='sms_reference_number', bit=4),
+  CSN1Bit(name='sms_final_content', bit=([0], lambda x: x))])
 
 vgcs_sms_information = CSN1List(name='vgcs_sms_information', list=[
   CSN1Bit(name='rr_short_pd'),

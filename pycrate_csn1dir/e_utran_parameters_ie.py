@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/e_utran_parameters_ie.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -39,23 +39,6 @@ from pycrate_csn1dir.pcid_group_ie import pcid_group_ie
 # add dict for key interpretation with kdic={...} in CSN1Alt init
 
 from pycrate_csn1.csnobj import *
-
-repeated_e_utran_not_allowed_cells_struct = CSN1List(name='repeated_e_utran_not_allowed_cells_struct', list=[
-  CSN1Ref(name='not_allowed_cells', obj=pcid_group_ie),
-  CSN1List(num=-1, list=[
-    CSN1Val(name='', val='1'),
-    CSN1Bit(name='e_utran_frequency_index', bit=3)]),
-  CSN1Val(name='', val='0')])
-
-repeated_e_utran_pcid_to_ta_mapping_struct = CSN1List(name='repeated_e_utran_pcid_to_ta_mapping_struct', list=[
-  CSN1List(num=-1, list=[
-    CSN1Val(name='', val='1'),
-    CSN1Ref(name='pcid_to_ta_mapping', obj=pcid_group_ie)]),
-  CSN1Val(name='', val='0'),
-  CSN1List(num=-1, list=[
-    CSN1Val(name='', val='1'),
-    CSN1Bit(name='e_utran_frequency_index', bit=3)]),
-  CSN1Val(name='', val='0')])
 
 gprs_e_utran_measurement_parameters_struct = CSN1List(name='gprs_e_utran_measurement_parameters_struct', list=[
   CSN1Bit(name='qsearch_p_e_utran', bit=4),
@@ -85,6 +68,23 @@ gprs_e_utran_measurement_parameters_struct = CSN1List(name='gprs_e_utran_measure
       '0': ('', []),
       '1': ('', [
       CSN1Bit(name='e_utran_tdd_reporting_offset', bit=3)])})])})])
+
+repeated_e_utran_pcid_to_ta_mapping_struct = CSN1List(name='repeated_e_utran_pcid_to_ta_mapping_struct', list=[
+  CSN1List(num=-1, list=[
+    CSN1Val(name='', val='1'),
+    CSN1Ref(name='pcid_to_ta_mapping', obj=pcid_group_ie)]),
+  CSN1Val(name='', val='0'),
+  CSN1List(num=-1, list=[
+    CSN1Val(name='', val='1'),
+    CSN1Bit(name='e_utran_frequency_index', bit=3)]),
+  CSN1Val(name='', val='0')])
+
+repeated_e_utran_not_allowed_cells_struct = CSN1List(name='repeated_e_utran_not_allowed_cells_struct', list=[
+  CSN1Ref(name='not_allowed_cells', obj=pcid_group_ie),
+  CSN1List(num=-1, list=[
+    CSN1Val(name='', val='1'),
+    CSN1Bit(name='e_utran_frequency_index', bit=3)]),
+  CSN1Val(name='', val='0')])
 
 repeated_e_utran_neighbour_cells_struct = CSN1List(name='repeated_e_utran_neighbour_cells_struct', list=[
   CSN1List(num=-1, list=[

@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/notification_facch.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -42,6 +42,10 @@ from pycrate_csn1.csnobj import *
 spare_padding = CSN1Val(name='spare_padding', val='L', num=-1)
 Spare_padding = spare_padding
 Spare_Padding = spare_padding 
+
+emergency_ind = CSN1Alt(name='emergency_ind', alt={
+  'H': ('', []),
+  'L': ('', [])})
 
 nas_type4_lv = CSN1List(name='nas_type4_lv', list=[
   CSN1Bit(name='length', bit=8),
@@ -69,10 +73,6 @@ paging_information = CSN1List(name='paging_information', list=[
     '0': ('', []),
     '1': ('', [
     CSN1Bit(name='emlpp_priority', bit=3)])})])
-
-emergency_ind = CSN1Alt(name='emergency_ind', alt={
-  'H': ('', []),
-  'L': ('', [])})
 
 group_call_information = CSN1List(name='group_call_information', list=[
   CSN1Bit(name='group_call_reference', bit=36),

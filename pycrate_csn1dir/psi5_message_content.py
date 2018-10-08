@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/psi5_message_content.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -67,6 +67,15 @@ gprs_3g_measurement_parameters_description_struct = CSN1List(name='gprs_3g_measu
     CSN1Bit(name='tdd_reporting_offset', bit=3),
     CSN1Bit(name='tdd_reporting_threshold', bit=3)])})])
 
+nc_measurement_parameters_struct = CSN1List(name='nc_measurement_parameters_struct', list=[
+  CSN1Bit(name='network_control_order', bit=2),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='nc__non_drx_period', bit=3),
+    CSN1Bit(name='nc_reporting_period_i', bit=3),
+    CSN1Bit(name='nc_reporting_period_t', bit=3)])})])
+
 gprs_measurement_parameters_description_struct = CSN1List(name='gprs_measurement_parameters_description_struct', list=[
   CSN1Alt(alt={
     '0': ('', []),
@@ -105,15 +114,6 @@ gprs_measurement_parameters_description_struct = CSN1List(name='gprs_measurement
     '1': ('', [
     CSN1Bit(name='_850_reporting_offset', bit=3),
     CSN1Bit(name='_850_reporting_threshold', bit=3)])})])
-
-nc_measurement_parameters_struct = CSN1List(name='nc_measurement_parameters_struct', list=[
-  CSN1Bit(name='network_control_order', bit=2),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='nc__non_drx_period', bit=3),
-    CSN1Bit(name='nc_reporting_period_i', bit=3),
-    CSN1Bit(name='nc_reporting_period_t', bit=3)])})])
 
 enh_reporting_parameters_struct = CSN1List(name='enh_reporting_parameters_struct', list=[
   CSN1Bit(name='report_type'),

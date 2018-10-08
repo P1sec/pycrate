@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/psi16_message_content.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -40,11 +40,11 @@ from pycrate_csn1dir.padding_bits import padding_bits
 
 from pycrate_csn1.csnobj import *
 
-cn_domain_specific_drx_cycle_length_coefficient_ie = CSN1Bit(name='cn_domain_specific_drx_cycle_length_coefficient_ie', bit=4)
-
 gra_id_struct = CSN1List(name='gra_id_struct', list=[
   CSN1Bit(name='number_of_gra_ids', bit=3),
   CSN1Bit(name='gra_id', bit=16, num=([0], lambda x: x + 1))])
+
+cn_domain_specific_drx_cycle_length_coefficient_ie = CSN1Bit(name='cn_domain_specific_drx_cycle_length_coefficient_ie', bit=4)
 
 cn_domain_identity_ie = CSN1Bit(name='cn_domain_identity_ie', bit=2)
 

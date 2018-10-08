@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/ec_packet_channel_request_message_content_cc1.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -39,13 +39,13 @@
 
 from pycrate_csn1.csnobj import *
 
-ec_packet_channel_request_message_content_cc2 = CSN1List(name='ec_packet_channel_request_message_content_cc2', list=[
+ec_packet_channel_request_message_content_cc3 = CSN1List(name='ec_packet_channel_request_message_content_cc3', list=[
   CSN1Bit(name='ec_numberofblocks', bit=3),
   CSN1Bit(name='ec_priority'),
   CSN1Bit(name='randombits', bit=3),
   CSN1Bit(name='selected_dl_coverage_class', bit=3)])
 
-ec_packet_channel_request_message_content_cc3 = CSN1List(name='ec_packet_channel_request_message_content_cc3', list=[
+ec_packet_channel_request_message_content_cc4 = CSN1List(name='ec_packet_channel_request_message_content_cc4', list=[
   CSN1Bit(name='ec_numberofblocks', bit=3),
   CSN1Bit(name='ec_priority'),
   CSN1Bit(name='randombits', bit=3),
@@ -57,7 +57,7 @@ ec_packet_channel_request_message_content_cc1 = CSN1List(name='ec_packet_channel
   CSN1Bit(name='randombits', bit=3),
   CSN1Bit(name='selected_dl_coverage_class', bit=3)])
 
-ec_packet_channel_request_message_content_cc4 = CSN1List(name='ec_packet_channel_request_message_content_cc4', list=[
+ec_packet_channel_request_message_content_cc2 = CSN1List(name='ec_packet_channel_request_message_content_cc2', list=[
   CSN1Bit(name='ec_numberofblocks', bit=3),
   CSN1Bit(name='ec_priority'),
   CSN1Bit(name='randombits', bit=3),

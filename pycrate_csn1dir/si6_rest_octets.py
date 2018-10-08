@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/si6_rest_octets.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -43,10 +43,6 @@ spare_padding = CSN1Val(name='spare_padding', val='L', num=-1)
 Spare_padding = spare_padding
 Spare_Padding = spare_padding 
 
-inband_notifications = CSN1Alt(name='inband_notifications', alt={
-  '0': ('', []),
-  '1': ('', [])})
-
 band_indicator = CSN1Alt(name='band_indicator', alt={
   'H': ('', []),
   'L': ('', [])})
@@ -56,6 +52,10 @@ inband_pagings = CSN1Alt(name='inband_pagings', alt={
   '1': ('', [])})
 
 paging_channel_restructuring = CSN1Alt(name='paging_channel_restructuring', alt={
+  '0': ('', []),
+  '1': ('', [])})
+
+inband_notifications = CSN1Alt(name='inband_notifications', alt={
   '0': ('', []),
   '1': ('', [])})
 

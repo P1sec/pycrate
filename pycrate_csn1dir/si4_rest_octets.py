@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/si4_rest_octets.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -43,6 +43,25 @@ spare_padding = CSN1Val(name='spare_padding', val='L', num=-1)
 Spare_padding = spare_padding
 Spare_Padding = spare_padding 
 
+selection_parameters = CSN1List(name='selection_parameters', list=[
+  CSN1Bit(name='cbq'),
+  CSN1Bit(name='cell_reselect_offset', bit=6),
+  CSN1Bit(name='temporary_offset', bit=3),
+  CSN1Bit(name='penalty_time', bit=5)])
+
+break_indicator = CSN1Alt(name='break_indicator', alt={
+  'H': ('', []),
+  'L': ('', [])})
+
+optional_power_offset = CSN1Alt(name='optional_power_offset', alt={
+  'H': ('', [
+  CSN1Bit(name='power_offset', bit=2)]),
+  'L': ('', [])})
+
+gprs_indicator = CSN1List(name='gprs_indicator', list=[
+  CSN1Bit(name='ra_colour', bit=3),
+  CSN1Bit(name='si13_position')])
+
 lsa_parameters = CSN1List(name='lsa_parameters', list=[
   CSN1Bit(name='prio_thr', bit=3),
   CSN1Bit(name='lsa_offset', bit=3),
@@ -51,16 +70,6 @@ lsa_parameters = CSN1List(name='lsa_parameters', list=[
     '1': ('', [
     CSN1Bit(name='mcc', bit=12),
     CSN1Bit(name='mnc', bit=12)])})])
-
-selection_parameters = CSN1List(name='selection_parameters', list=[
-  CSN1Bit(name='cbq'),
-  CSN1Bit(name='cell_reselect_offset', bit=6),
-  CSN1Bit(name='temporary_offset', bit=3),
-  CSN1Bit(name='penalty_time', bit=5)])
-
-gprs_indicator = CSN1List(name='gprs_indicator', list=[
-  CSN1Bit(name='ra_colour', bit=3),
-  CSN1Bit(name='si13_position')])
 
 lsa_identity = CSN1Alt(name='lsa_identity', alt={
   '0': ('', [
@@ -80,14 +89,13 @@ lsa_id_information = CSN1List(name='lsa_id_information', list=[
     '1': ('', [
     CSN1SelfRef()])})])
 
-break_indicator = CSN1Alt(name='break_indicator', alt={
-  'H': ('', []),
-  'L': ('', [])})
-
-optional_power_offset = CSN1Alt(name='optional_power_offset', alt={
-  'H': ('', [
-  CSN1Bit(name='power_offset', bit=2)]),
-  'L': ('', [])})
+si4_rest_octets_o = CSN1List(name='si4_rest_octets_o', list=[
+  CSN1Ref(obj=optional_selection_parameters),
+  CSN1Ref(obj=optional_power_offset),
+  CSN1Alt(alt={
+    'H': ('', [
+    CSN1Ref(obj=gprs_indicator)]),
+    'L': ('', [])})])
 
 si4_rest_octets_s = CSN1List(name='si4_rest_octets_s', list=[
   CSN1Alt(alt={
@@ -109,14 +117,6 @@ si4_rest_octets_s = CSN1List(name='si4_rest_octets_s', list=[
       '0': ('', []),
       '1': ('', [
       CSN1Bit(name='si13alt_position')])})]),
-    'L': ('', [])})])
-
-si4_rest_octets_o = CSN1List(name='si4_rest_octets_o', list=[
-  CSN1Ref(obj=optional_selection_parameters),
-  CSN1Ref(obj=optional_power_offset),
-  CSN1Alt(alt={
-    'H': ('', [
-    CSN1Ref(obj=gprs_indicator)]),
     'L': ('', [])})])
 
 si4_rest_octets = CSN1List(name='si4_rest_octets', list=[

@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/ec_paging_request_message_content.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -39,13 +39,6 @@
 
 from pycrate_csn1.csnobj import *
 
-mobile_identity_struct = CSN1Alt(name='mobile_identity_struct', alt={
-  '0': ('', [
-  CSN1Bit(name='p_tmsi', bit=32)]),
-  '1': ('', [
-  CSN1Bit(name='number_of_imsi_digits', bit=4),
-  CSN1Bit(name='imsi_digits', bit=([1], lambda x: 4 * (x + 1)))])})
-
 ec_paging_request_message_content = CSN1List(name='ec_paging_request_message_content', list=[
   CSN1Bit(name='message_type', bit=4),
   CSN1Bit(name='used_dl_coverage_class', bit=2),
@@ -53,4 +46,11 @@ ec_paging_request_message_content = CSN1List(name='ec_paging_request_message_con
     '0': ('', []),
     '1': ('', [
     CSN1Bit(name='ec_page_extension', bit=4)])})])
+
+mobile_identity_struct = CSN1Alt(name='mobile_identity_struct', alt={
+  '0': ('', [
+  CSN1Bit(name='p_tmsi', bit=32)]),
+  '1': ('', [
+  CSN1Bit(name='number_of_imsi_digits', bit=4),
+  CSN1Bit(name='imsi_digits', bit=([1], lambda x: 4 * (x + 1)))])})
 

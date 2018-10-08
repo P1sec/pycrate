@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/frequency_parameters_ie.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -40,12 +40,6 @@ from pycrate_csn1dir.gprs_mobile_allocation_ie import gprs_mobile_allocation_ie
 
 from pycrate_csn1.csnobj import *
 
-direct_encoding_2_struct = CSN1List(name='direct_encoding_2_struct', list=[
-  CSN1Bit(name='maio', bit=6),
-  CSN1Bit(name='hsn', bit=6),
-  CSN1Bit(name='length_of_ma_frequency_list_contents', bit=4),
-  CSN1Bit(name='ma_frequency_list_contents', bit=8, num=([2], lambda x: x + 3))])
-
 indirect_encoding_struct = CSN1List(name='indirect_encoding_struct', list=[
   CSN1Bit(name='maio', bit=6),
   CSN1Bit(name='ma_number', bit=4),
@@ -61,6 +55,12 @@ indirect_encoding_struct = CSN1List(name='indirect_encoding_struct', list=[
 direct_encoding_1_struct = CSN1List(name='direct_encoding_1_struct', list=[
   CSN1Bit(name='maio', bit=6),
   CSN1Ref(name='gprs_mobile_allocation', obj=gprs_mobile_allocation_ie)])
+
+direct_encoding_2_struct = CSN1List(name='direct_encoding_2_struct', list=[
+  CSN1Bit(name='maio', bit=6),
+  CSN1Bit(name='hsn', bit=6),
+  CSN1Bit(name='length_of_ma_frequency_list_contents', bit=4),
+  CSN1Bit(name='ma_frequency_list_contents', bit=8, num=([2], lambda x: x + 3))])
 
 frequency_parameters_ie = CSN1List(name='frequency_parameters_ie', list=[
   CSN1Bit(name='tsc', bit=3),

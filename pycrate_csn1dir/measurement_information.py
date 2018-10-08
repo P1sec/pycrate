@@ -22,72 +22,13 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/measurement_information.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
 # specification: TS 44.018 - d80
 # section: 9.1.54 MEASUREMENT INFORMATION
 # top-level object: Measurement information
-
-# manual edit
-# table 9.1.54.1a
-_TransP = {
-    0 : 0,
-    1 : 10,
-    2 : 19,
-    3 : 28,
-    4 : 36,
-    5 : 44,
-    6 : 52,
-    7 : 60,
-    8 : 67,
-    9 : 74,
-    10: 81,
-    11: 88,
-    12: 95,
-    13: 102,
-    14: 109,
-    15: 116,
-    16: 122
-    }
-
-def trans_p(n):
-    try:
-        return _TransP[n]
-    except:
-        return 0
-
-# table 9.1.54.1b
-_TransQ = {
-    0 : 0,
-    1 : 9,
-    2 : 17,
-    3 : 25,
-    4 : 32,
-    5 : 39,
-    6 : 46,
-    7 : 53,
-    8 : 59,
-    9 : 65,
-    10: 71,
-    11: 77,
-    12: 83,
-    13: 89,
-    14: 95,
-    15: 101,
-    16: 106,
-    17: 111,
-    18: 116,
-    19: 121,
-    20: 126
-    }
-
-def trans_q(n):
-    try:
-        return _TransQ[n]
-    except:
-        return 0
 
 # external references
 from pycrate_csn1dir.pcid_group_ie import pcid_group_ie
@@ -104,120 +45,29 @@ spare_padding = CSN1Val(name='spare_padding', val='L', num=-1)
 Spare_padding = spare_padding
 Spare_Padding = spare_padding 
 
-repeated_e_utran_neighbour_cells_struct = CSN1List(name='repeated_e_utran_neighbour_cells_struct', list=[
-  CSN1Bit(name='earfcn', bit=16),
+repeated_e_utran_measurement_control_parameters_struct = CSN1List(name='repeated_e_utran_measurement_control_parameters_struct', list=[
   CSN1List(num=-1, list=[
     CSN1Val(name='', val='1'),
-    CSN1Bit(name='earfcn', bit=16)]),
+    CSN1Bit(name='e_utran_frequency_index', bit=3)]),
   CSN1Val(name='', val='0'),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='measurement_bandwidth', bit=3)])})])
-
-repeated_utran_tdd_neighbour_cells_struct = CSN1List(name='repeated_utran_tdd_neighbour_cells_struct', list=[
-  CSN1Val(name='', val='0'),
-  CSN1Bit(name='tdd_arfcn', bit=14),
-  CSN1Bit(name='tdd_indic0'),
-  CSN1Bit(name='nr_of_tdd_cells', bit=5),
-  #CSN1Bit(name='tdd_cell_information_field', bit=('# unprocessed: (q(NR_OF_TDD_CELLS))', lambda: 0))])
-  CSN1Bit(name='tdd_cell_information_field', bit=([3], trans_q))])
-
-report_priority_description_struct = CSN1List(name='report_priority_description_struct', list=[
-  CSN1Bit(name='number_cells', bit=7),
-  CSN1Bit(name='rep_priority', num=([0], lambda x: x))])
-
-_3g_additional_measurement_parameters_description_2_struct = CSN1Alt(name='_3g_additional_measurement_parameters_description_2_struct', alt={
-  '0': ('', []),
-  '1': ('', [
-  CSN1Bit(name='fdd_reporting_threshold_2', bit=6)])})
+  CSN1Bit(name='measurement_control_e_utran')])
 
 repeated_utran_fdd_neighbour_cells_struct = CSN1List(name='repeated_utran_fdd_neighbour_cells_struct', list=[
   CSN1Val(name='', val='0'),
   CSN1Bit(name='fdd_arfcn', bit=14),
   CSN1Bit(name='fdd_indic0'),
   CSN1Bit(name='nr_of_fdd_cells', bit=5),
-  #CSN1Bit(name='fdd_cell_information_field', bit=('# unprocessed: (p(NR_OF_FDD_CELLS))', lambda: 0))])
-  CSN1Bit(name='fdd_cell_information_field', bit=([3], trans_p))])
+  CSN1Bit(name='fdd_cell_information_field', bit=('# unprocessed: (p(NR_OF_FDD_CELLS))', lambda: 0))])
 
-cdma_2000_description_struct = CSN1List(name='cdma_2000_description_struct', list=[
-  CSN1Bit(name='cdma2000_frequency_band', bit=5),
-  CSN1Bit(name='cdma2000_frequency', bit=11),
-  CSN1Bit(name='number_cdma2000_cells', bit=5),
-  CSN1List(num=([2], lambda x: x), list=[
-    CSN1Bit(name='pilot_pn_offset', bit=9),
-    CSN1Alt(alt={
-      '0': ('', []),
-      '1': ('', [
-      CSN1Alt(alt={
-        '000': ('', [
-        CSN1List(list=[
-          CSN1Bit(name='td_mode', bit=2),
-          CSN1Bit(name='td_power_level', bit=3)])]),
-        '001': ('', [
-        CSN1List(list=[
-          CSN1Bit(name='qof', bit=2),
-          CSN1Bit(name='walsh_len_a', bit=3),
-          CSN1Bit(name='aux_pilot_walsh', bit=([1], lambda x: x + 6))])]),
-        '010': ('', [
-        CSN1List(list=[
-          CSN1Bit(name='qof', bit=2),
-          CSN1Bit(name='walsh_len_b', bit=3),
-          CSN1Bit(name='aux_td_walsh', bit=([1], lambda x: x + 6)),
-          CSN1Bit(name='aux_td_power_level', bit=2),
-          CSN1Bit(name='td_mode', bit=2)])]),
-        '011': ('', [
-        CSN1List(list=[
-          CSN1Bit(name='sr3_prim_pilot', bit=2),
-          CSN1Bit(name='sr3_pilot_power1', bit=3),
-          CSN1Bit(name='sr3_pilot_power2', bit=3)])]),
-        '110': ('', [
-        CSN1List(list=[
-          CSN1Bit(name='sr3_prim_pilot', bit=2),
-          CSN1Bit(name='sr3_pilot_power1', bit=3),
-          CSN1Bit(name='sr3_pilot_power2', bit=3),
-          CSN1Bit(name='qof', bit=2),
-          CSN1Bit(name='walsh_len_c', bit=3),
-          CSN1Bit(name='aux_walsh_len', bit=([4], lambda x: x + 6)),
-          CSN1Alt(alt={
-            '0': ('', []),
-            '1': ('', [
-            CSN1Bit(name='qof1', bit=2),
-            CSN1Bit(name='walsh_length1', bit=3),
-            CSN1Bit(name='aux_pilot_walsh1', bit=([2], lambda x: x + 6))])}),
-          CSN1Alt(alt={
-            '0': ('', []),
-            '1': ('', [
-            CSN1Bit(name='qof2', bit=2),
-            CSN1Bit(name='walsh_length2', bit=3),
-            CSN1Bit(name='aux_pilot_walsh2', bit=([2], lambda x: x + 6))])})])])})])})])])
-
-utran_tdd_description_struct = CSN1List(name='utran_tdd_description_struct', list=[
+utran_fdd_description_struct = CSN1List(name='utran_fdd_description_struct', list=[
   CSN1Alt(alt={
     '0': ('', []),
     '1': ('', [
-    CSN1Bit(name='bandwidth_tdd', bit=3)])}),
+    CSN1Bit(name='bandwidth_fdd', bit=3)])}),
   CSN1List(num=-1, list=[
     CSN1Val(name='', val='1'),
-    CSN1Ref(name='repeated_utran_tdd_neighbour_cells', obj=repeated_utran_tdd_neighbour_cells_struct)]),
+    CSN1Ref(name='repeated_utran_fdd_neighbour_cells', obj=repeated_utran_fdd_neighbour_cells_struct)]),
   CSN1Val(name='', val='0')])
-
-rtd6_struct = CSN1List(name='rtd6_struct', list=[
-  CSN1List(num=-1, list=[
-    CSN1Val(name='', val='0'),
-    CSN1Bit(name='rtd', bit=6)]),
-  CSN1Val(name='', val='1')])
-
-repeated_e_utran_nc_with_extended_earfcns_struct = CSN1List(name='repeated_e_utran_nc_with_extended_earfcns_struct', list=[
-  CSN1Bit(name='earfcn_extended', bit=18),
-  CSN1List(num=-1, list=[
-    CSN1Val(name='', val='1'),
-    CSN1Bit(name='earfcn_extended', bit=18)]),
-  CSN1Val(name='', val='0'),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='measurement_bandwidth', bit=3)])})])
 
 measurement_parameters_description_struct = CSN1List(name='measurement_parameters_description_struct', list=[
   CSN1Alt(alt={
@@ -255,6 +105,41 @@ measurement_parameters_description_struct = CSN1List(name='measurement_parameter
     CSN1Bit(name='_850_reporting_offset', bit=3),
     CSN1Bit(name='_850_reporting_threshold', bit=3)])})])
 
+bsic_description_struct = CSN1List(name='bsic_description_struct', list=[
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='ba_index_start_bsic', bit=5)])}),
+  CSN1Bit(name='bsic', bit=6),
+  CSN1Bit(name='number_remaining_bsic', bit=7),
+  CSN1List(num=([2], lambda x: x), list=[
+    CSN1Bit(name='frequency_scrolling'),
+    CSN1Bit(name='bsic', bit=6)])])
+
+repeated_utran_tdd_neighbour_cells_struct = CSN1List(name='repeated_utran_tdd_neighbour_cells_struct', list=[
+  CSN1Val(name='', val='0'),
+  CSN1Bit(name='tdd_arfcn', bit=14),
+  CSN1Bit(name='tdd_indic0'),
+  CSN1Bit(name='nr_of_tdd_cells', bit=5),
+  CSN1Bit(name='tdd_cell_information_field', bit=('# unprocessed: (q(NR_OF_TDD_CELLS))', lambda: 0))])
+
+utran_tdd_description_struct = CSN1List(name='utran_tdd_description_struct', list=[
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='bandwidth_tdd', bit=3)])}),
+  CSN1List(num=-1, list=[
+    CSN1Val(name='', val='1'),
+    CSN1Ref(name='repeated_utran_tdd_neighbour_cells', obj=repeated_utran_tdd_neighbour_cells_struct)]),
+  CSN1Val(name='', val='0')])
+
+repeated_e_utran_not_allowed_cells_struct = CSN1List(name='repeated_e_utran_not_allowed_cells_struct', list=[
+  CSN1Ref(name='not_allowed_cells', obj=pcid_group_ie),
+  CSN1List(num=-1, list=[
+    CSN1Val(name='', val='1'),
+    CSN1Bit(name='e_utran_frequency_index', bit=3)]),
+  CSN1Val(name='', val='0')])
+
 _3g_measurement_parameters_description_struct = CSN1List(name='_3g_measurement_parameters_description_struct', list=[
   CSN1Bit(name='qsearch_c', bit=4),
   CSN1Val(name='', val='1'),
@@ -287,6 +172,21 @@ _3g_measurement_parameters_description_struct = CSN1List(name='_3g_measurement_p
     CSN1Bit(name='cdma2000_reporting_offset', bit=3),
     CSN1Bit(name='cdma2000_reporting_threshold', bit=3)])})])
 
+rtd6_struct = CSN1List(name='rtd6_struct', list=[
+  CSN1List(num=-1, list=[
+    CSN1Val(name='', val='0'),
+    CSN1Bit(name='rtd', bit=6)]),
+  CSN1Val(name='', val='1')])
+
+_3g_additional_measurement_parameters_description_2_struct = CSN1Alt(name='_3g_additional_measurement_parameters_description_2_struct', alt={
+  '0': ('', []),
+  '1': ('', [
+  CSN1Bit(name='fdd_reporting_threshold_2', bit=6)])})
+
+report_priority_description_struct = CSN1List(name='report_priority_description_struct', list=[
+  CSN1Bit(name='number_cells', bit=7),
+  CSN1Bit(name='rep_priority', num=([0], lambda x: x))])
+
 e_utran_csg_description_struct = CSN1List(name='e_utran_csg_description_struct', list=[
   CSN1List(num=-1, list=[
     CSN1Val(name='', val='1'),
@@ -297,18 +197,26 @@ e_utran_csg_description_struct = CSN1List(name='e_utran_csg_description_struct',
     CSN1Val(name='', val='0')]),
   CSN1Val(name='', val='0')])
 
-rtd12_struct = CSN1List(name='rtd12_struct', list=[
-  CSN1List(num=-1, list=[
-    CSN1Val(name='', val='0'),
-    CSN1Bit(name='rtd', bit=12)]),
-  CSN1Val(name='', val='1')])
-
-repeated_e_utran_not_allowed_cells_struct = CSN1List(name='repeated_e_utran_not_allowed_cells_struct', list=[
-  CSN1Ref(name='not_allowed_cells', obj=pcid_group_ie),
+e_utran_measurement_control_parameters_description_struct = CSN1List(name='e_utran_measurement_control_parameters_description_struct', list=[
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='default_measurement_control_e_utran')])}),
   CSN1List(num=-1, list=[
     CSN1Val(name='', val='1'),
-    CSN1Bit(name='e_utran_frequency_index', bit=3)]),
+    CSN1Ref(name='repeated_e_utran_measurement_control_parameters', obj=repeated_e_utran_measurement_control_parameters_struct)]),
   CSN1Val(name='', val='0')])
+
+repeated_e_utran_nc_with_extended_earfcns_struct = CSN1List(name='repeated_e_utran_nc_with_extended_earfcns_struct', list=[
+  CSN1Bit(name='earfcn_extended', bit=18),
+  CSN1List(num=-1, list=[
+    CSN1Val(name='', val='1'),
+    CSN1Bit(name='earfcn_extended', bit=18)]),
+  CSN1Val(name='', val='0'),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='measurement_bandwidth', bit=3)])})])
 
 e_utran_measurement_parameters_description_struct = CSN1List(name='e_utran_measurement_parameters_description_struct', list=[
   CSN1Bit(name='qsearch_c_e_utran', bit=4),
@@ -367,29 +275,6 @@ e_utran_measurement_parameters_description_struct = CSN1List(name='e_utran_measu
         CSN1Bit(name='e_utran_tdd_reporting_offset', bit=3)])})])}),
     CSN1Bit(name='reporting_granularity')])})])
 
-repeated_e_utran_measurement_control_parameters_struct = CSN1List(name='repeated_e_utran_measurement_control_parameters_struct', list=[
-  CSN1List(num=-1, list=[
-    CSN1Val(name='', val='1'),
-    CSN1Bit(name='e_utran_frequency_index', bit=3)]),
-  CSN1Val(name='', val='0'),
-  CSN1Bit(name='measurement_control_e_utran')])
-
-e_utran_measurement_control_parameters_description_struct = CSN1List(name='e_utran_measurement_control_parameters_description_struct', list=[
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='default_measurement_control_e_utran')])}),
-  CSN1List(num=-1, list=[
-    CSN1Val(name='', val='1'),
-    CSN1Ref(name='repeated_e_utran_measurement_control_parameters', obj=repeated_e_utran_measurement_control_parameters_struct)]),
-  CSN1Val(name='', val='0')])
-
-e_utran_nc_with_extended_earfcns_description_struct = CSN1List(name='e_utran_nc_with_extended_earfcns_description_struct', list=[
-  CSN1List(num=-1, list=[
-    CSN1Val(name='', val='1'),
-    CSN1Ref(obj=repeated_e_utran_nc_with_extended_earfcns_struct)]),
-  CSN1Val(name='', val='0')])
-
 repeated_utran_measurement_control_parameters_struct = CSN1List(name='repeated_utran_measurement_control_parameters_struct', list=[
   CSN1List(num=-1, list=[
     CSN1Val(name='', val='1'),
@@ -397,15 +282,63 @@ repeated_utran_measurement_control_parameters_struct = CSN1List(name='repeated_u
   CSN1Val(name='', val='0'),
   CSN1Bit(name='measurement_control_utran')])
 
-utran_fdd_description_struct = CSN1List(name='utran_fdd_description_struct', list=[
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='bandwidth_fdd', bit=3)])}),
+cdma_2000_description_struct = CSN1List(name='cdma_2000_description_struct', list=[
+  CSN1Bit(name='cdma2000_frequency_band', bit=5),
+  CSN1Bit(name='cdma2000_frequency', bit=11),
+  CSN1Bit(name='number_cdma2000_cells', bit=5),
+  CSN1List(num=([2], lambda x: x), list=[
+    CSN1Bit(name='pilot_pn_offset', bit=9),
+    CSN1Alt(alt={
+      '0': ('', []),
+      '1': ('', [
+      CSN1Alt(alt={
+        '000': ('', [
+        CSN1List(list=[
+          CSN1Bit(name='td_mode', bit=2),
+          CSN1Bit(name='td_power_level', bit=3)])]),
+        '001': ('', [
+        CSN1List(list=[
+          CSN1Bit(name='qof', bit=2),
+          CSN1Bit(name='walsh_len_a', bit=3),
+          CSN1Bit(name='aux_pilot_walsh', bit=([1], lambda x: x + 6))])]),
+        '010': ('', [
+        CSN1List(list=[
+          CSN1Bit(name='qof', bit=2),
+          CSN1Bit(name='walsh_len_b', bit=3),
+          CSN1Bit(name='aux_td_walsh', bit=([1], lambda x: x + 6)),
+          CSN1Bit(name='aux_td_power_level', bit=2),
+          CSN1Bit(name='td_mode', bit=2)])]),
+        '011': ('', [
+        CSN1List(list=[
+          CSN1Bit(name='sr3_prim_pilot', bit=2),
+          CSN1Bit(name='sr3_pilot_power1', bit=3),
+          CSN1Bit(name='sr3_pilot_power2', bit=3)])]),
+        '110': ('', [
+        CSN1List(list=[
+          CSN1Bit(name='sr3_prim_pilot', bit=2),
+          CSN1Bit(name='sr3_pilot_power1', bit=3),
+          CSN1Bit(name='sr3_pilot_power2', bit=3),
+          CSN1Bit(name='qof', bit=2),
+          CSN1Bit(name='walsh_len_c', bit=3),
+          CSN1Bit(name='aux_walsh_len', bit=([4], lambda x: x + 6)),
+          CSN1Alt(alt={
+            '0': ('', []),
+            '1': ('', [
+            CSN1Bit(name='qof1', bit=2),
+            CSN1Bit(name='walsh_length1', bit=3),
+            CSN1Bit(name='aux_pilot_walsh1', bit=([2], lambda x: x + 6))])}),
+          CSN1Alt(alt={
+            '0': ('', []),
+            '1': ('', [
+            CSN1Bit(name='qof2', bit=2),
+            CSN1Bit(name='walsh_length2', bit=3),
+            CSN1Bit(name='aux_pilot_walsh2', bit=([2], lambda x: x + 6))])})])])})])})])])
+
+rtd12_struct = CSN1List(name='rtd12_struct', list=[
   CSN1List(num=-1, list=[
-    CSN1Val(name='', val='1'),
-    CSN1Ref(name='repeated_utran_fdd_neighbour_cells', obj=repeated_utran_fdd_neighbour_cells_struct)]),
-  CSN1Val(name='', val='0')])
+    CSN1Val(name='', val='0'),
+    CSN1Bit(name='rtd', bit=12)]),
+  CSN1Val(name='', val='1')])
 
 utran_csg_cells_reporting_description_struct = CSN1List(name='utran_csg_cells_reporting_description_struct', list=[
   CSN1Alt(alt={
@@ -417,17 +350,6 @@ utran_csg_cells_reporting_description_struct = CSN1List(name='utran_csg_cells_re
     '0': ('', []),
     '1': ('', [
     CSN1Bit(name='utran_csg_tdd_reporting_threshold', bit=3)])})])
-
-bsic_description_struct = CSN1List(name='bsic_description_struct', list=[
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='ba_index_start_bsic', bit=5)])}),
-  CSN1Bit(name='bsic', bit=6),
-  CSN1Bit(name='number_remaining_bsic', bit=7),
-  CSN1List(num=([2], lambda x: x), list=[
-    CSN1Bit(name='frequency_scrolling'),
-    CSN1Bit(name='bsic', bit=6)])])
 
 _3g_csg_description_struct = CSN1List(name='_3g_csg_description_struct', list=[
   CSN1List(num=-1, list=[
@@ -447,51 +369,16 @@ _3g_csg_description_struct = CSN1List(name='_3g_csg_description_struct', list=[
       CSN1Bit(name='csg_tdd_uarfcn', bit=14)])})]),
   CSN1Val(name='', val='0')])
 
-real_time_difference_description_struct = CSN1List(name='real_time_difference_description_struct', list=[
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Alt(alt={
-      '0': ('', []),
-      '1': ('', [
-      CSN1Bit(name='ba_index_start_rtd', bit=5)])}),
-    CSN1Ref(name='rtd_struct', obj=rtd6_struct),
-    CSN1List(num=-1, list=[
-      CSN1Val(name='', val='0'),
-      CSN1Ref(name='rtd_struct', obj=rtd6_struct)]),
-    CSN1Val(name='', val='1')])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Alt(alt={
-      '0': ('', []),
-      '1': ('', [
-      CSN1Bit(name='ba_index_start_rtd', bit=5)])}),
-    CSN1Ref(name='rtd_struct', obj=rtd12_struct),
-    CSN1List(num=-1, list=[
-      CSN1Val(name='', val='0'),
-      CSN1Ref(name='rtd_struct', obj=rtd12_struct)]),
-    CSN1Val(name='', val='1')])})])
-
-e_utran_parameters_description_struct = CSN1List(name='e_utran_parameters_description_struct', list=[
-  CSN1Bit(name='e_utran_start'),
-  CSN1Bit(name='e_utran_stop'),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Ref(name='e_utran_measurement_parameters_description', obj=e_utran_measurement_parameters_description_struct)])}),
+repeated_e_utran_neighbour_cells_struct = CSN1List(name='repeated_e_utran_neighbour_cells_struct', list=[
+  CSN1Bit(name='earfcn', bit=16),
   CSN1List(num=-1, list=[
     CSN1Val(name='', val='1'),
-    CSN1Ref(name='repeated_e_utran_neighbour_cells', obj=repeated_e_utran_neighbour_cells_struct)]),
-  CSN1Val(name='', val='0'),
-  CSN1List(num=-1, list=[
-    CSN1Val(name='', val='1'),
-    CSN1Ref(name='repeated_e_utran_not_allowed_cells', obj=repeated_e_utran_not_allowed_cells_struct)]),
+    CSN1Bit(name='earfcn', bit=16)]),
   CSN1Val(name='', val='0'),
   CSN1Alt(alt={
     '0': ('', []),
     '1': ('', [
-    CSN1Ref(name='e_utran_measurement_control_parameters_description', obj=e_utran_measurement_control_parameters_description_struct)])})])
+    CSN1Bit(name='measurement_bandwidth', bit=3)])})])
 
 _3g_measurement_control_parameters_description_struct = CSN1List(name='_3g_measurement_control_parameters_description_struct', list=[
   CSN1Alt(alt={
@@ -528,6 +415,58 @@ _3g_neighbour_cell_description_struct = CSN1List(name='_3g_neighbour_cell_descri
     '0': ('', []),
     '1': ('', [
     CSN1Ref(name='cdma2000_description', obj=cdma_2000_description_struct)])})])
+
+e_utran_nc_with_extended_earfcns_description_struct = CSN1List(name='e_utran_nc_with_extended_earfcns_description_struct', list=[
+  CSN1List(num=-1, list=[
+    CSN1Val(name='', val='1'),
+    CSN1Ref(obj=repeated_e_utran_nc_with_extended_earfcns_struct)]),
+  CSN1Val(name='', val='0')])
+
+e_utran_parameters_description_struct = CSN1List(name='e_utran_parameters_description_struct', list=[
+  CSN1Bit(name='e_utran_start'),
+  CSN1Bit(name='e_utran_stop'),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Ref(name='e_utran_measurement_parameters_description', obj=e_utran_measurement_parameters_description_struct)])}),
+  CSN1List(num=-1, list=[
+    CSN1Val(name='', val='1'),
+    CSN1Ref(name='repeated_e_utran_neighbour_cells', obj=repeated_e_utran_neighbour_cells_struct)]),
+  CSN1Val(name='', val='0'),
+  CSN1List(num=-1, list=[
+    CSN1Val(name='', val='1'),
+    CSN1Ref(name='repeated_e_utran_not_allowed_cells', obj=repeated_e_utran_not_allowed_cells_struct)]),
+  CSN1Val(name='', val='0'),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Ref(name='e_utran_measurement_control_parameters_description', obj=e_utran_measurement_control_parameters_description_struct)])})])
+
+real_time_difference_description_struct = CSN1List(name='real_time_difference_description_struct', list=[
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Alt(alt={
+      '0': ('', []),
+      '1': ('', [
+      CSN1Bit(name='ba_index_start_rtd', bit=5)])}),
+    CSN1Ref(name='rtd_struct', obj=rtd6_struct),
+    CSN1List(num=-1, list=[
+      CSN1Val(name='', val='0'),
+      CSN1Ref(name='rtd_struct', obj=rtd6_struct)]),
+    CSN1Val(name='', val='1')])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Alt(alt={
+      '0': ('', []),
+      '1': ('', [
+      CSN1Bit(name='ba_index_start_rtd', bit=5)])}),
+    CSN1Ref(name='rtd_struct', obj=rtd12_struct),
+    CSN1List(num=-1, list=[
+      CSN1Val(name='', val='0'),
+      CSN1Ref(name='rtd_struct', obj=rtd12_struct)]),
+    CSN1Val(name='', val='1')])})])
 
 _3g_supplementary_parameters_description_struct = CSN1List(name='_3g_supplementary_parameters_description_struct', list=[
   CSN1Bit(name='utran_start'),

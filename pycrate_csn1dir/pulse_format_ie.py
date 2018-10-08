@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/pulse_format_ie.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -47,6 +47,12 @@ pulse_format_coding_2_struct = CSN1Alt(name='pulse_format_coding_2_struct', alt=
   '1': ('', [
   CSN1Val(name='non_hopping_carrier_pulse_format', val='00')])})
 
+pulse_format_ie = CSN1Alt(name='pulse_format_ie', alt={
+  '0': ('', [
+  CSN1Bit(name='pulse_format_coding_1', bit=3)]),
+  '1': ('', [
+  CSN1Ref(name='pulse_format_coding_2', obj=pulse_format_coding_2_struct)])})
+
 dlmc_indirect_encoding_struct = CSN1List(name='dlmc_indirect_encoding_struct', list=[
   CSN1Bit(name='ma_number', bit=4),
   CSN1Alt(alt={
@@ -58,18 +64,12 @@ dlmc_indirect_encoding_struct = CSN1List(name='dlmc_indirect_encoding_struct', l
       '1': ('', [
       CSN1Bit(name='change_mark_2', bit=2)])})])})])
 
-pulse_format_ie = CSN1Alt(name='pulse_format_ie', alt={
-  '0': ('', [
-  CSN1Bit(name='pulse_format_coding_1', bit=3)]),
-  '1': ('', [
-  CSN1Ref(name='pulse_format_coding_2', obj=pulse_format_coding_2_struct)])})
-
-dlmc_direct_encoding_1_struct = CSN1Ref(name='dlmc_direct_encoding_1_struct', obj=gprs_mobile_allocation_ie)
-
 dlmc_direct_encoding_2_struct = CSN1List(name='dlmc_direct_encoding_2_struct', list=[
   CSN1Bit(name='hsn', bit=6),
   CSN1Bit(name='length_of_ma_frequency_list_contents', bit=4),
   CSN1Bit(name='ma_frequency_list_contents', bit=8, num=([1], lambda x: x + 3))])
+
+dlmc_direct_encoding_1_struct = CSN1Ref(name='dlmc_direct_encoding_1_struct', obj=gprs_mobile_allocation_ie)
 
 dlmc_frequency_parameters_ie = CSN1List(name='dlmc_frequency_parameters_ie', list=[
   CSN1Bit(name='tsc', bit=3),

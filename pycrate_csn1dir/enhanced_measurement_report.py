@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/enhanced_measurement_report.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -44,6 +44,11 @@ spare_padding = CSN1Val(name='spare_padding', val='L', num=-1)
 Spare_padding = spare_padding
 Spare_Padding = spare_padding 
 
+repeated_invalid_bsic_information_struct = CSN1List(name='repeated_invalid_bsic_information_struct', list=[
+  CSN1Bit(name='bcch_freq_ncell', bit=5),
+  CSN1Bit(name='bsic', bit=6),
+  CSN1Bit(name='rxlev_ncell', bit=6)])
+
 serving_cell_data_struct = CSN1List(name='serving_cell_data_struct', list=[
   CSN1Bit(name='dtx_used'),
   CSN1Bit(name='rxlev_val', bit=6),
@@ -51,11 +56,6 @@ serving_cell_data_struct = CSN1List(name='serving_cell_data_struct', list=[
   CSN1Bit(name='mean_bep', bit=5),
   CSN1Bit(name='cv_bep', bit=3),
   CSN1Bit(name='nbr_rcvd_blocks', bit=5)])
-
-repeated_invalid_bsic_information_struct = CSN1List(name='repeated_invalid_bsic_information_struct', list=[
-  CSN1Bit(name='bcch_freq_ncell', bit=5),
-  CSN1Bit(name='bsic', bit=6),
-  CSN1Bit(name='rxlev_ncell', bit=6)])
 
 eutran_measurement_report_struct = CSN1List(name='eutran_measurement_report_struct', list=[
   CSN1Bit(name='n_eutran', bit=2),

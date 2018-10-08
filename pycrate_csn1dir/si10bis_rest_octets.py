@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/si10bis_rest_octets.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -44,10 +44,6 @@ spare_padding = CSN1Val(name='spare_padding', val='L', num=-1)
 Spare_padding = spare_padding
 Spare_Padding = spare_padding 
 
-nas_type4_lv = CSN1List(name='nas_type4_lv', list=[
-  CSN1Bit(name='length', bit=8),
-  CSN1Bit(name='value', bit=([0], lambda x: 8 * x))])
-
 si10ter_rest_octets = CSN1List(name='si10ter_rest_octets', list=[
   CSN1Bit(name='si10bis_sequence', bit=2),
   CSN1Alt(alt={
@@ -61,6 +57,10 @@ si10ter_rest_octets = CSN1List(name='si10ter_rest_octets', list=[
     CSN1Bit(name='bsic', bit=6)])}),
   CSN1Bit(name='nch_position', bit=5),
   CSN1Ref(obj=spare_padding)])
+
+nas_type4_lv = CSN1List(name='nas_type4_lv', list=[
+  CSN1Bit(name='length', bit=8),
+  CSN1Bit(name='value', bit=([0], lambda x: 8 * x))])
 
 si10bis_neighbour_cell_info = CSN1List(name='si10bis_neighbour_cell_info', list=[
   CSN1Ref(obj=group_channel_description),

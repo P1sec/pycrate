@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/psi3_ter_message_content.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -40,11 +40,6 @@ from pycrate_csn1dir.padding_bits import padding_bits
 
 from pycrate_csn1.csnobj import *
 
-rtd6_struct = CSN1Alt(name='rtd6_struct', alt={
-  '0': ('', []),
-  '1': ('', [
-  CSN1Bit(name='rtd', bit=6)])})
-
 gprs_rep_priority_description_struct = CSN1List(name='gprs_rep_priority_description_struct', list=[
   CSN1Bit(name='number_cells', bit=7),
   CSN1Bit(name='rep_priority', num=([0], lambda x: x))])
@@ -53,6 +48,11 @@ rtd12_struct = CSN1Alt(name='rtd12_struct', alt={
   '0': ('', []),
   '1': ('', [
   CSN1Bit(name='rtd', bit=12)])})
+
+rtd6_struct = CSN1Alt(name='rtd6_struct', alt={
+  '0': ('', []),
+  '1': ('', [
+  CSN1Bit(name='rtd', bit=6)])})
 
 real_time_difference_description_struct = CSN1List(name='real_time_difference_description_struct', list=[
   CSN1Alt(alt={

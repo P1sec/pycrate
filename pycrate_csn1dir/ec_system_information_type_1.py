@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/ec_system_information_type_1.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -42,6 +42,10 @@ from pycrate_csn1.csnobj import *
 spare_padding = CSN1Val(name='spare_padding', val='L', num=-1)
 Spare_padding = spare_padding
 Spare_Padding = spare_padding 
+
+ec_cell_channel_description_struct = CSN1List(name='ec_cell_channel_description_struct', list=[
+  CSN1Bit(name='numberofoctets', bit=5),
+  CSN1Bit(name='frequency_list_information', bit=([0], lambda x: 8 * (x + 1)))])
 
 ec_mobile_allocation_struct = CSN1List(name='ec_mobile_allocation_struct', list=[
   CSN1Bit(name='ec_ma_number', bit=5),
@@ -68,10 +72,6 @@ ec_mobile_allocation_list_struct = CSN1List(name='ec_mobile_allocation_list_stru
     CSN1Val(name='', val='1'),
     CSN1Ref(obj=ec_mobile_allocation_struct)]),
   CSN1Val(name='', val='0')])
-
-ec_cell_channel_description_struct = CSN1List(name='ec_cell_channel_description_struct', list=[
-  CSN1Bit(name='numberofoctets', bit=5),
-  CSN1Bit(name='frequency_list_information', bit=([0], lambda x: 8 * (x + 1)))])
 
 ec_system_information_type_1 = CSN1List(name='ec_system_information_type_1', list=[
   CSN1Bit(name='message_type', bit=3),

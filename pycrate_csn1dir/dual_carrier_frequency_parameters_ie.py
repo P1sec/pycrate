@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/dual_carrier_frequency_parameters_ie.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -39,6 +39,19 @@ from pycrate_csn1dir.gprs_mobile_allocation_ie import gprs_mobile_allocation_ie
 # add dict for key interpretation with kdic={...} in CSN1Alt init
 
 from pycrate_csn1.csnobj import *
+
+dual_carrier_direct_encoding_2_struct = CSN1List(name='dual_carrier_direct_encoding_2_struct', list=[
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='maio1', bit=6)])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='maio2', bit=6)])}),
+  CSN1Bit(name='hsn', bit=6),
+  CSN1Bit(name='length_of_ma_frequency_list_contents', bit=4),
+  CSN1Bit(name='ma_frequency_list_contents', bit=8, num=([3], lambda x: x + 3))])
 
 dual_carrier_indirect_encoding_struct = CSN1List(name='dual_carrier_indirect_encoding_struct', list=[
   CSN1Alt(alt={
@@ -58,19 +71,6 @@ dual_carrier_indirect_encoding_struct = CSN1List(name='dual_carrier_indirect_enc
       '0': ('', []),
       '1': ('', [
       CSN1Bit(name='change_mark_2', bit=2)])})])})])
-
-dual_carrier_direct_encoding_2_struct = CSN1List(name='dual_carrier_direct_encoding_2_struct', list=[
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='maio1', bit=6)])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='maio2', bit=6)])}),
-  CSN1Bit(name='hsn', bit=6),
-  CSN1Bit(name='length_of_ma_frequency_list_contents', bit=4),
-  CSN1Bit(name='ma_frequency_list_contents', bit=8, num=([3], lambda x: x + 3))])
 
 dual_carrier_direct_encoding_1_struct = CSN1List(name='dual_carrier_direct_encoding_1_struct', list=[
   CSN1Alt(alt={

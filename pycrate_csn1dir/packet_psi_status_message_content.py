@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/packet_psi_status_message_content.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -41,13 +41,6 @@ from pycrate_csn1dir.padding_bits import padding_bits
 
 from pycrate_csn1.csnobj import *
 
-unknown_psi_message_list_struct = CSN1List(name='unknown_psi_message_list_struct', list=[
-  CSN1List(num=-1, list=[
-    CSN1Val(name='', val='1'),
-    CSN1Bit(name='message_type', bit=6)]),
-  CSN1Val(name='', val='0'),
-  CSN1Bit(name='additional_msg_type')])
-
 psi_message_list_struct = CSN1List(name='psi_message_list_struct', list=[
   CSN1List(num=-1, list=[
     CSN1Val(name='', val='1'),
@@ -58,6 +51,13 @@ psi_message_list_struct = CSN1List(name='psi_message_list_struct', list=[
       '1': ('', [
       CSN1Bit(name='psix_count', bit=4),
       CSN1Bit(name='instance_bitmap', bit=([1], lambda x: x + 1))])})]),
+  CSN1Val(name='', val='0'),
+  CSN1Bit(name='additional_msg_type')])
+
+unknown_psi_message_list_struct = CSN1List(name='unknown_psi_message_list_struct', list=[
+  CSN1List(num=-1, list=[
+    CSN1Val(name='', val='1'),
+    CSN1Bit(name='message_type', bit=6)]),
   CSN1Val(name='', val='0'),
   CSN1Bit(name='additional_msg_type')])
 

@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/ec_packet_control_acknowledgement_message_content.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -40,13 +40,13 @@ from pycrate_csn1dir.padding_bits import padding_bits
 
 from pycrate_csn1.csnobj import *
 
-ec_packet_control_acknowledgement_11_bit_message = CSN1List(name='ec_packet_control_acknowledgement_11_bit_message', list=[
-  CSN1Val(name='message_type', val='1110111'),
-  CSN1Bit(name='dl_cc_est', bit=4)])
-
 ec_packet_control_acknowledgement_message_content = CSN1List(name='ec_packet_control_acknowledgement_message_content', list=[
   CSN1Bit(name='tlli', bit=32),
   CSN1Bit(name='ctrl_ack', bit=2),
   CSN1Bit(name='dl_cc_est', bit=4),
   CSN1Ref(obj=padding_bits)])
+
+ec_packet_control_acknowledgement_11_bit_message = CSN1List(name='ec_packet_control_acknowledgement_11_bit_message', list=[
+  CSN1Val(name='message_type', val='1110111'),
+  CSN1Bit(name='dl_cc_est', bit=4)])
 

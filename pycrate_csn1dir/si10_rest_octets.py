@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/si10_rest_octets.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -73,22 +73,6 @@ further_diff_cell_info = CSN1List(name='further_diff_cell_info', list=[
     CSN1Bit(name='penalty_time', bit=5)]),
     'L': ('', [])})])
 
-diff_cell_pars = CSN1Alt(name='diff_cell_pars', alt={
-  'H': ('cell_barred', []),
-  'L': ('', [
-  CSN1Ref(obj=further_diff_cell_info)])})
-
-differential_cell_info = CSN1List(name='differential_cell_info', list=[
-  CSN1Alt(alt={
-    'H': ('', [
-    CSN1Bit(name='bcc', bit=3)]),
-    'L': ('', [
-    CSN1Bit(name='bsic', bit=6)])}),
-  CSN1Alt(alt={
-    'H': ('', [
-    CSN1Ref(obj=diff_cell_pars)]),
-    'L': ('', [])})])
-
 further_cell_info = CSN1List(name='further_cell_info', list=[
   CSN1Ref(obj=la_different),
   CSN1Bit(name='ms_txpwr_max_cch', bit=5),
@@ -97,10 +81,10 @@ further_cell_info = CSN1List(name='further_cell_info', list=[
   CSN1Bit(name='temporary_offset', bit=3),
   CSN1Bit(name='penalty_time', bit=5)])
 
-info_field = CSN1List(name='info_field', list=[
-  CSN1Ref(obj=next_frequency, num=-1),
-  CSN1Val(name='', val='L'),
-  CSN1Ref(obj=differential_cell_info)])
+diff_cell_pars = CSN1Alt(name='diff_cell_pars', alt={
+  'H': ('cell_barred', []),
+  'L': ('', [
+  CSN1Ref(obj=further_diff_cell_info)])})
 
 cell_parameters = CSN1Alt(name='cell_parameters', alt={
   'H': ('cell_barred', []),
@@ -113,6 +97,22 @@ cell_info = CSN1List(name='cell_info', list=[
     'H': ('', [
     CSN1Ref(obj=cell_parameters)]),
     'L': ('', [])})])
+
+differential_cell_info = CSN1List(name='differential_cell_info', list=[
+  CSN1Alt(alt={
+    'H': ('', [
+    CSN1Bit(name='bcc', bit=3)]),
+    'L': ('', [
+    CSN1Bit(name='bsic', bit=6)])}),
+  CSN1Alt(alt={
+    'H': ('', [
+    CSN1Ref(obj=diff_cell_pars)]),
+    'L': ('', [])})])
+
+info_field = CSN1List(name='info_field', list=[
+  CSN1Ref(obj=next_frequency, num=-1),
+  CSN1Val(name='', val='L'),
+  CSN1Ref(obj=differential_cell_info)])
 
 neighbour_information = CSN1List(name='neighbour_information', list=[
   CSN1Bit(name='first_frequency', bit=5),

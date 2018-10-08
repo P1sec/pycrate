@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/p1_rest_octets.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -48,6 +48,16 @@ Spare_Padding = spare_padding
 
 priority = CSN1Bit(name='priority', bit=3)
 
+etws_primary_notification_struct = CSN1List(name='etws_primary_notification_struct', list=[
+  CSN1Alt(alt={
+    '0': ('', [
+    CSN1Bit(name='total_no_of_segments_for_etws_primary_notification', bit=4)]),
+    '1': ('', [
+    CSN1Bit(name='segment_number', bit=4)])}),
+  CSN1Bit(name='pni'),
+  CSN1Bit(name='length_of_segment', bit=7),
+  CSN1Bit(name='etws_primary_notification_data', bit=([2], lambda x: x))])
+
 mbms_information = CSN1List(name='mbms_information', list=[
   CSN1Ref(name='mbms_sessions_list', obj=mbms_sessions_list_ie),
   CSN1Alt(alt={
@@ -62,16 +72,6 @@ mbms_information = CSN1List(name='mbms_information', list=[
     CSN1Ref(name='mbms_channel_parameters', obj=mbms_channel_parameters_ie),
     CSN1Ref(name='mbms_sessions_list', obj=mbms_sessions_list_ie)]),
   CSN1Val(name='', val='0')])
-
-etws_primary_notification_struct = CSN1List(name='etws_primary_notification_struct', list=[
-  CSN1Alt(alt={
-    '0': ('', [
-    CSN1Bit(name='total_no_of_segments_for_etws_primary_notification', bit=4)]),
-    '1': ('', [
-    CSN1Bit(name='segment_number', bit=4)])}),
-  CSN1Bit(name='pni'),
-  CSN1Bit(name='length_of_segment', bit=7),
-  CSN1Bit(name='etws_primary_notification_data', bit=([2], lambda x: x))])
 
 p1_rest_octets = CSN1List(name='p1_rest_octets', list=[
   CSN1Alt(alt={

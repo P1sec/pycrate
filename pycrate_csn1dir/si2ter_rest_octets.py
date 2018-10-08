@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/si2ter_rest_octets.py
-# * Created : 2018-07-30
+# * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -43,18 +43,6 @@ spare_padding = CSN1Val(name='spare_padding', val='L', num=-1)
 Spare_padding = spare_padding
 Spare_Padding = spare_padding 
 
-utran_tdd_description_struct = CSN1List(name='utran_tdd_description_struct', list=[
-  CSN1Val(name='', val='01'),
-  CSN1Bit(name='tdd_arfcn', bit=14),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='bandwidth_tdd', bit=3)])})])
-
-_3g_additional_measurement_parameters_description_struct = CSN1List(name='_3g_additional_measurement_parameters_description_struct', list=[
-  CSN1Bit(name='fdd_qmin_offset', bit=3),
-  CSN1Bit(name='fdd_rscpmin', bit=4)])
-
 _3g_measurement_parameters_description_struct = CSN1List(name='_3g_measurement_parameters_description_struct', list=[
   CSN1Bit(name='qsearch_i', bit=4),
   CSN1Alt(alt={
@@ -74,6 +62,18 @@ utran_fdd_description_struct = CSN1List(name='utran_fdd_description_struct', lis
     '0': ('', []),
     '1': ('', [
     CSN1Bit(name='bandwidth_fdd', bit=3)])})])
+
+utran_tdd_description_struct = CSN1List(name='utran_tdd_description_struct', list=[
+  CSN1Val(name='', val='01'),
+  CSN1Bit(name='tdd_arfcn', bit=14),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='bandwidth_tdd', bit=3)])})])
+
+_3g_additional_measurement_parameters_description_struct = CSN1List(name='_3g_additional_measurement_parameters_description_struct', list=[
+  CSN1Bit(name='fdd_qmin_offset', bit=3),
+  CSN1Bit(name='fdd_rscpmin', bit=4)])
 
 si2ter_rest_octets = CSN1List(name='si2ter_rest_octets', list=[
   CSN1Alt(alt={
