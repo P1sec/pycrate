@@ -110,6 +110,8 @@ class CSN1Obj(Element):
     def __init__(self, **kw):
         if 'name' in kw and kw['name']:
             self._name = kw['name']
+        else:
+            self._name = self.__class__.__name__
         if 'num' in kw and kw['num'] != 1:
             self._num  = kw['num']
         if 'lref' in kw and kw['lref'] is not None:
@@ -140,15 +142,9 @@ class CSN1Obj(Element):
                     content.append( self._repr_val() )
                 self._num = _num
                 self._val = _val
-                if self._name:
-                    ret = '<%s: [%s]>' % (self._name, ', '.join(content))
-                else:
-                    ret = '<[%s]>' % ', '.join(content)
+                ret = '<%s: [%s]>' % (self._name, ', '.join(content))
             else:
-                if self._name:
-                    ret = '<%s: %s>' % (self._name, self._repr_val())
-                else:
-                    ret = '<%s>' % self._repr_val()
+                ret = '<%s: %s>' % (self._name, self._repr_val())
         else:
             # only print the class name when no value is set
             ret = '<%s(%s)>' % (self._name, self.__class__.__name__)
@@ -497,7 +493,7 @@ class CSN1Val(CSN1Obj):
     """Class to handle a CSN.1 value
     
     specific internal attributes:
-        - val: bit string
+        - val: bit string or 'null'
     """
     
     _val = ''
@@ -513,6 +509,9 @@ class CSN1Val(CSN1Obj):
             self._pad_gsm = 1
         else:
             self._pad_gsm = 0
+        if self._val[-2:] == '**':
+            self._val = self._val[:-2]
+            self._num = -1
     
     def _repr_val(self):
         return self._val.__repr__()
@@ -520,6 +519,8 @@ class CSN1Val(CSN1Obj):
     _show_val = _repr_val
     
     def _from_char_obj(self, char):
+        if self._val == 'null':
+            return
         bit = len(self._val)
         if bit:
             try:
@@ -543,6 +544,8 @@ class CSN1Val(CSN1Obj):
                         self._off %= 8
     
     def _to_pack_obj(self):
+        if self._val == 'null':
+            return []
         bit = len(self._val)
         if not bit:
             return []
