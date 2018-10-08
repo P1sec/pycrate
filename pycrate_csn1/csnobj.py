@@ -110,8 +110,6 @@ class CSN1Obj(Element):
     def __init__(self, **kw):
         if 'name' in kw and kw['name']:
             self._name = kw['name']
-        else:
-            self._name = self.__class__.__name__
         if 'num' in kw and kw['num'] != 1:
             self._num  = kw['num']
         if 'lref' in kw and kw['lref'] is not None:
@@ -126,6 +124,10 @@ class CSN1Obj(Element):
             root_obj  = _root_obj
             _root_obj = self
         #
+        if self._name:
+            name = '%s (%s)' % (self._name, self.__class__.__name__)
+        else:
+            name = '(%s)' % self.__class__.__name__
         if self._val is not None:
             if isinstance(self._num, tuple):
                 num = self._resolve_ref(self._num)
@@ -142,12 +144,12 @@ class CSN1Obj(Element):
                     content.append( self._repr_val() )
                 self._num = _num
                 self._val = _val
-                ret = '<%s: [%s]>' % (self._name, ', '.join(content))
+                ret = '<%s: [%s]>' % (name, ', '.join(content))
             else:
-                ret = '<%s: %s>' % (self._name, self._repr_val())
+                ret = '<%s: %s>' % (name, self._repr_val())
         else:
             # only print the class name when no value is set
-            ret = '<%s(%s)>' % (self._name, self.__class__.__name__)
+            ret = '<%s>' % name
         #
         if self._par is None:
             _root_obj = root_obj
@@ -164,6 +166,10 @@ class CSN1Obj(Element):
             root_obj  = _root_obj
             _root_obj = self
         #
+        if self._name:
+            name = '%s (%s)' % (self._name, self.__class__.__name__)
+        else:
+            name = '(%s)' % self.__class__.__name__
         if self._val is not None:
             if isinstance(self._num, tuple):
                 num = self._resolve_ref(self._num)
@@ -180,17 +186,11 @@ class CSN1Obj(Element):
                     content.append( self._show_val().replace('\n', '\n ') )
                 self._num = _num
                 self._val = _val
-                if self._name:
-                    ret = '<%s: [%s]>' % (self._name, ',\n'.join(content))
-                else:
-                    ret = '<[%s]>' % ',\n'.join(content)
+                ret = '<%s: [%s]>' % (name, ',\n'.join(content))
             else:
-                if self._name:
-                    ret = '<%s: %s>' % (self._name, self._show_val())
-                else:
-                    ret = '<%s>' % self._show_val()
+                ret = '<%s: %s>' % (name, self._show_val())
         else:
-            ret = '<%s(%s)>' % (self._name, self.__class__.__name__)
+            ret = '<%s>' % name
         #
         if self._par is None:
             _root_obj = root_obj
