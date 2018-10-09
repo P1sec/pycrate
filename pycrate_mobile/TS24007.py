@@ -68,6 +68,10 @@ class Layer3(Envelope):
     
     ENV_SEL_TRANS = False
     
+    # this is to break the decoding routine when an unknown IE is encountered
+    DEC_BREAK_ON_UNK_IE = False
+    
+    
     def __init__(self, *args, **kw):
         if 'val' in kw:
             val = kw['val']
@@ -157,8 +161,12 @@ class Layer3(Envelope):
                     break
             if not dec:
                 # unknown IEI
-                char._cur += 8
-                self._dec_unk_ie(T8, char)
+                if self.DEC_BREAK_ON_UNK_IE:
+                    log('%s, unknown IE remaining, not decoded' % self._name)
+                    break
+                else:
+                    char._cur += 8
+                    self._dec_unk_ie(T8, char)
     
     def _dec_unk_ie(self, T8, char):
         if T8 & 0x80:
