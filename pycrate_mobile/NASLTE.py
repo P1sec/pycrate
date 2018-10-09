@@ -35,7 +35,7 @@ from .TS24301_ESM   import ESMTypeClasses
 from .TS24011_PPSMS import PPSMSCPTypeClasses
 
 
-def parse_NASLTE_MO(buf, inner=True):
+def parse_NASLTE_MO(buf, inner=True, sec_hdr=True):
     """Parses a Mobile Originated LTE NAS message bytes' buffer
     
     Args:
@@ -43,6 +43,8 @@ def parse_NASLTE_MO(buf, inner=True):
         inner: if True, decode NASMessage within security header if possible
                         decode ESMContainer within EMM message if possible
                         decode NASContainer within EMM NAS Transport message if possible
+        sec_hdr: if True, handle the NAS EMM security header
+                 otherwise, just consider the NAS message is in plain text
     
     Returns:
         element, err: 2-tuple
@@ -63,7 +65,7 @@ def parse_NASLTE_MO(buf, inner=True):
     shdr = pd>>4
     pd  &= 0xf
         
-    if shdr in (1, 2, 3, 4):
+    if sec_hdr and shdr in (1, 2, 3, 4):
         # EMM security protected NAS message
         Msg = EMMSecProtNASMessage()
         try:
@@ -81,7 +83,7 @@ def parse_NASLTE_MO(buf, inner=True):
         else:
             return Msg, 0
         
-    elif shdr == 12:
+    elif sec_hdr and shdr == 12:
         # EMM service request message
         Msg = EMMServiceRequest()
         try:
@@ -167,7 +169,7 @@ def parse_NASLTE_MO(buf, inner=True):
         return Msg, 0
 
 
-def parse_NASLTE_MT(buf, inner=True):
+def parse_NASLTE_MT(buf, inner=True, sec_hdr=True):
     """Parses a Mobile Terminated LTE NAS message bytes' buffer
     
     Args:
@@ -175,6 +177,8 @@ def parse_NASLTE_MT(buf, inner=True):
         inner: if True, decode NASMessage within security header if possible
                         decode ESMContainer within EMM message if possible
                         decode NASContainer within EMM NAS Transport message if possible
+        sec_hdr: if True, handle the NAS EMM security header
+                 otherwise, just consider the NAS message is in plain text
     
     Returns:
         element, err: 2-tuple
@@ -195,7 +199,7 @@ def parse_NASLTE_MT(buf, inner=True):
     shdr = pd>>4
     pd  &= 0xf
         
-    if shdr in (1, 2, 3, 4):
+    if sec_hdr and shdr in (1, 2, 3, 4):
         # EMM security protected NAS message
         Msg = EMMSecProtNASMessage()
         try:
@@ -213,7 +217,7 @@ def parse_NASLTE_MT(buf, inner=True):
         else:
             return Msg, 0
         
-    elif shdr == 12:
+    elif sec_hdr and shdr == 12:
         # EMM service request message
         Msg = EMMServiceRequest()
         try:
