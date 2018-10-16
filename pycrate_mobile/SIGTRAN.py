@@ -474,6 +474,11 @@ class Param(Envelope):
 
 
 class SIGTRAN(Envelope):
+    # this enforces the Length field in the Header at decoding
+    # warning RFC 4666: this length must take padding into account, 
+    # otherwise there will be a mismatch with Len fields in following Params
+    _LEN_ENFORCE = True
+    
     _TypeUndef_dict = {}
     _Type_dict = {
         MGMT  : TypeMGMT_dict,
@@ -510,8 +515,11 @@ class SIGTRAN(Envelope):
     
     def _from_char(self, char):
         self[0]._from_char(char)
-        clen = char._len_bit
-        char._len_bit = char._cur + 8*(max(0, self[0][4].get_val()-8))
-        self[1]._from_char(char)
-        char._len_bit = clen
+        if self._LEN_ENFORCE:
+            clen = char._len_bit
+            char._len_bit = char._cur + 8*(max(0, self[0][4].get_val()-8))
+            self[1]._from_char(char)
+            char._len_bit = clen
+        else:
+            self[1]._from_char(char)
 
