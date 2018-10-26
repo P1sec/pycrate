@@ -1,0 +1,180 @@
+TCAP-CAP-Messages DEFINITIONS ::=
+BEGIN
+
+IMPORTS
+
+	cAPSpecificBoundSet
+FROM CAP-classes
+
+	OPERATION
+FROM Remote-Operations-Information-Objects
+
+	TCMessage {}
+FROM TCAPMessages
+
+	activityTestGPRS,
+	applyChargingGPRS,
+	applyChargingReportGPRS,
+	cancelGPRS,
+	connectGPRS {},
+	continueGPRS,
+	entityReleasedGPRS {},
+	furnishChargingInformationGPRS {},
+	initialDPGPRS {},
+	releaseGPRS {},
+	eventReportGPRS {},
+	requestReportGPRSEvent {},
+	resetTimerGPRS,
+	sendChargingInformationGPRS {}
+FROM CAP-gprsSSF-gsmSCF-ops-args
+
+	playAnnouncement {},
+	promptAndCollectUserInformation {},
+	specializedResourceReport
+FROM CAP-gsmSCF-gsmSRF-ops-args
+
+	activityTest,
+	applyCharging {},
+	applyChargingReport {},
+	assistRequestInstructions {},
+	callGap {},
+	callInformationReport {},
+	callInformationRequest {},
+	cancel {},
+	collectInformation {},
+	connect {},
+	connectToResource {},
+	continue,
+	continueWithArgument {},
+	disconnectForwardConnection,
+	disconnectForwardConnectionWithArgument {},
+	disconnectLeg {},
+	entityReleased {},
+	establishTemporaryConnection {},
+	eventReportBCSM {},
+	furnishChargingInformation {},
+	initialDP {},
+	initiateCallAttempt {},
+	moveLeg {},
+	playTone {},
+	releaseCall {},
+	requestReportBCSMEvent {},
+	resetTimer {},
+	sendChargingInformation {},
+	splitLeg {}
+FROM CAP-gsmSSF-gsmSCF-ops-args
+
+;
+
+-- TCMessage{OPERATION:Invokable, OPERATION:Returnable}
+-- here for commodity, we gather all CAP application contexts into a single TCMessage object
+
+
+TCAP-CAP-Message ::= TCMessage {{AllCAPInvokable},
+							    {AllCAPReturnable}}
+
+
+AllCAPInvokable OPERATION ::= {
+    -- CAP-gprsSSF-gsmSCF-pkgs-contracts-acs
+	activityTestGPRS |
+	applyChargingGPRS |
+	applyChargingReportGPRS |
+	cancelGPRS |
+	connectGPRS {cAPSpecificBoundSet} |
+	entityReleasedGPRS {cAPSpecificBoundSet} |
+	eventReportGPRS {cAPSpecificBoundSet} |
+	furnishChargingInformationGPRS {cAPSpecificBoundSet} |
+	initialDPGPRS {cAPSpecificBoundSet} |
+	releaseGPRS {cAPSpecificBoundSet} |
+	requestReportGPRSEvent {cAPSpecificBoundSet} |
+	resetTimerGPRS |
+	sendChargingInformationGPRS {cAPSpecificBoundSet} |
+	-- CAP-gsmSCF-gsmSRF-pkgs-contracts-acs
+	activityTest |
+	assistRequestInstructions {cAPSpecificBoundSet} |
+	cancel {cAPSpecificBoundSet} |
+	playAnnouncement {cAPSpecificBoundSet} |
+	promptAndCollectUserInformation {cAPSpecificBoundSet} |
+	specializedResourceReport |
+	-- CAP-gsmSSF-gsmSCF-pkgs-contracts-acs
+	applyCharging {cAPSpecificBoundSet} |
+	applyChargingReport {cAPSpecificBoundSet} |
+	callInformationReport {cAPSpecificBoundSet} |
+	callInformationRequest {cAPSpecificBoundSet} |
+	connect {cAPSpecificBoundSet} |
+	connectToResource {cAPSpecificBoundSet} |
+	collectInformation |
+	continueWithArgument {cAPSpecificBoundSet} |
+	disconnectForwardConnection |
+	disconnectForwardConnectionWithArgument {cAPSpecificBoundSet} |
+	disconnectLeg {cAPSpecificBoundSet} |
+	entityReleased {cAPSpecificBoundSet} |
+	establishTemporaryConnection {cAPSpecificBoundSet} |
+	eventReportBCSM {cAPSpecificBoundSet} |
+	furnishChargingInformation {cAPSpecificBoundSet} |
+	initialDP {cAPSpecificBoundSet} |
+	initiateCallAttempt {cAPSpecificBoundSet} |
+	moveLeg {cAPSpecificBoundSet} |
+	releaseCall {cAPSpecificBoundSet} |
+	requestReportBCSMEvent {cAPSpecificBoundSet} |
+	resetTimer {cAPSpecificBoundSet} |
+	sendChargingInformation {cAPSpecificBoundSet} |
+	splitLeg {cAPSpecificBoundSet} |
+	playTone {cAPSpecificBoundSet} |
+	specializedResourceReport
+	}
+
+
+AllCAPReturnable OPERATION ::= {
+    -- CAP-gprsSSF-gsmSCF-pkgs-contracts-acs
+	activityTestGPRS |
+	applyChargingGPRS |
+	applyChargingReportGPRS |
+	cancelGPRS |
+	connectGPRS {cAPSpecificBoundSet} |
+	continueGPRS |
+	entityReleasedGPRS {cAPSpecificBoundSet} |
+	furnishChargingInformationGPRS {cAPSpecificBoundSet} |
+	initialDPGPRS {cAPSpecificBoundSet} |
+	releaseGPRS {cAPSpecificBoundSet} |
+	requestReportGPRSEvent {cAPSpecificBoundSet} |
+	resetTimerGPRS |
+	sendChargingInformationGPRS {cAPSpecificBoundSet} |
+	-- CAP-gsmSCF-gsmSRF-pkgs-contracts-acs
+	activityTest |
+	assistRequestInstructions {cAPSpecificBoundSet} |
+	cancel {cAPSpecificBoundSet} |
+	playAnnouncement {cAPSpecificBoundSet} |
+	promptAndCollectUserInformation {cAPSpecificBoundSet} |
+	-- CAP-gsmSSF-gsmSCF-pkgs-contracts-acs
+	applyCharging {cAPSpecificBoundSet} |
+	applyChargingReport {cAPSpecificBoundSet} |
+	callGap {cAPSpecificBoundSet} |
+	callInformationRequest {cAPSpecificBoundSet} |
+	connect {cAPSpecificBoundSet} |
+	connectToResource {cAPSpecificBoundSet} |
+	collectInformation |
+	continue |
+	continueWithArgument {cAPSpecificBoundSet} |
+	disconnectForwardConnection |
+	disconnectForwardConnectionWithArgument {cAPSpecificBoundSet} |
+	disconnectLeg {cAPSpecificBoundSet} |
+	entityReleased {cAPSpecificBoundSet} |
+	establishTemporaryConnection {cAPSpecificBoundSet} |
+	furnishChargingInformation {cAPSpecificBoundSet} |
+	initialDP {cAPSpecificBoundSet} |
+	initiateCallAttempt {cAPSpecificBoundSet} |
+	moveLeg {cAPSpecificBoundSet} |
+	releaseCall {cAPSpecificBoundSet} |
+	requestReportBCSMEvent {cAPSpecificBoundSet} |
+	resetTimer {cAPSpecificBoundSet} |
+	sendChargingInformation {cAPSpecificBoundSet} |
+	splitLeg {cAPSpecificBoundSet} |
+	playTone {cAPSpecificBoundSet} |
+	eventReportBCSM {cAPSpecificBoundSet} |
+	specializedResourceReport
+	}
+
+
+END
+
