@@ -56,7 +56,7 @@ _SCCPType_dict = {
     7 : 'DT2',
     8 : 'AK',
     9 : 'UDT',
-    10 : 'UDTS ',
+    10 : 'UDTS',
     11 : 'ED',
     12 : 'EA',
     13 : 'RSR',
@@ -190,7 +190,7 @@ class _GlobalTitle0011(Envelope):
     _GEN = (
         Uint8('TranslationType'),
         Uint('NumberingPlan', val=1, bl=4, dic=_NumPlan_dict), # 1: ISDN
-        Uint('EncodingScheme', val=1, bl=4), # 1: BCD
+        Uint('EncodingScheme', val=1, bl=4), # 1: BCD odd, 2: BCD even 
         BufBCD('Addr', val=b''), # if BCD encoding
         Buf('Addr', val=b'', rep=REPR_HEX) # otherwise
         )
@@ -314,6 +314,10 @@ _SSN_dict = {
 
 
 class _SCCPAddr(Envelope):
+    
+    # this is to bypass the GT decoding process, and get a simple Buf() instead
+    GT_DONT_DECODE = False
+    
     ENV_SEL_TRANS = False
     _GEN = (
         Envelope('AddrInd', GEN=(
@@ -330,6 +334,7 @@ class _SCCPAddr(Envelope):
         _GlobalTitle0011('GT'),
         _GlobalTitle0100('GT')
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[1].set_transauto(lambda: False if self[0][4].get_val() == 1 else True)
@@ -360,6 +365,18 @@ class _SCCPAddr(Envelope):
         except:
             # this is dirty
             return self[-1]
+    
+    def _from_char(self, char):
+        if not self.GT_DONT_DECODE:
+            Envelope._from_char(self, char)
+        else:
+            self[0]._from_char(char)
+            self[1]._from_char(char)
+            self[2]._from_char(char)
+            del self[3:]
+            gt = Buf('GT')
+            gt._from_char(char)
+            self.append( gt )
 
 
 class CallingPartyAddr(Envelope):
