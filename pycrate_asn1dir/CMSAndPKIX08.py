@@ -6443,1798 +6443,6 @@ class MultipleSignatures_2010:
         SignAttrsHash,
     ]
 
-class PKIX_CommonTypes_2009:
-
-    _name_  = u'PKIX-CommonTypes-2009'
-    _oid_   = [1, 3, 6, 1, 5, 5, 7, 0, 57]
-    
-    _obj_ = [
-        u'ATTRIBUTE',
-        u'MATCHING-RULE',
-        u'AttributeSet',
-        u'SingleAttribute',
-        u'EXTENSION',
-        u'Extensions',
-        u'Extension',
-        u'SECURITY-CATEGORY',
-        u'SecurityCategory',
-        ]
-    _type_ = [
-        u'ATTRIBUTE',
-        u'MATCHING-RULE',
-        u'AttributeSet',
-        u'SingleAttribute',
-        u'EXTENSION',
-        u'Extensions',
-        u'Extension',
-        u'SECURITY-CATEGORY',
-        u'SecurityCategory',
-        ]
-    _set_ = [
-        ]
-    _val_ = [
-        ]
-    _class_ = [
-        u'ATTRIBUTE',
-        u'MATCHING-RULE',
-        u'EXTENSION',
-        u'SECURITY-CATEGORY',
-        ]
-    _param_ = [
-        u'AttributeSet',
-        u'SingleAttribute',
-        u'Extensions',
-        u'Extension',
-        u'SecurityCategory',
-        ]
-    
-    #-----< ATTRIBUTE >-----#
-    ATTRIBUTE = CLASS(name=u'ATTRIBUTE', mode=MODE_TYPE)
-    _ATTRIBUTE_id = OID(name=u'id', mode=MODE_VALUE, uniq=True)
-    _ATTRIBUTE_Type = OPEN(name=u'Type', mode=MODE_TYPE, opt=True)
-    _ATTRIBUTE_equality_match = CLASS(name=u'equality-match', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'MATCHING-RULE')), opt=True)
-    _ATTRIBUTE_minCount = INT(name=u'minCount', mode=MODE_VALUE, default=1)
-    _ATTRIBUTE_maxCount = INT(name=u'maxCount', mode=MODE_VALUE, opt=True)
-    ATTRIBUTE._cont = ASN1Dict([
-        (u'id', _ATTRIBUTE_id),
-        (u'Type', _ATTRIBUTE_Type),
-        (u'equality-match', _ATTRIBUTE_equality_match),
-        (u'minCount', _ATTRIBUTE_minCount),
-        (u'maxCount', _ATTRIBUTE_maxCount),
-        ])
-    
-    #-----< MATCHING-RULE >-----#
-    MATCHING_RULE = CLASS(name=u'MATCHING-RULE', mode=MODE_TYPE)
-    _MATCHING_RULE_ParentMatchingRules = CLASS(name=u'ParentMatchingRules', mode=MODE_SET, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'MATCHING-RULE')), opt=True)
-    _MATCHING_RULE_AssertionType = OPEN(name=u'AssertionType', mode=MODE_TYPE, opt=True)
-    _MATCHING_RULE_uniqueMatchIndicator = CLASS(name=u'uniqueMatchIndicator', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'ATTRIBUTE')), opt=True)
-    _MATCHING_RULE_id = OID(name=u'id', mode=MODE_VALUE, uniq=True)
-    MATCHING_RULE._cont = ASN1Dict([
-        (u'ParentMatchingRules', _MATCHING_RULE_ParentMatchingRules),
-        (u'AssertionType', _MATCHING_RULE_AssertionType),
-        (u'uniqueMatchIndicator', _MATCHING_RULE_uniqueMatchIndicator),
-        (u'id', _MATCHING_RULE_id),
-        ])
-    
-    #-----< AttributeSet >-----#
-    AttributeSet = SEQ(name=u'AttributeSet', mode=MODE_TYPE, param=True)
-    
-    #-----< SingleAttribute >-----#
-    SingleAttribute = SEQ(name=u'SingleAttribute', mode=MODE_TYPE, param=True)
-    
-    #-----< EXTENSION >-----#
-    EXTENSION = CLASS(name=u'EXTENSION', mode=MODE_TYPE)
-    _EXTENSION_id = OID(name=u'id', mode=MODE_VALUE, uniq=True)
-    _EXTENSION_ExtnType = OPEN(name=u'ExtnType', mode=MODE_TYPE)
-    _EXTENSION_Critical = BOOL(name=u'Critical', mode=MODE_SET, default=ASN1Set(rv=[True, False], rr=[], ev=None, er=[]))
-    EXTENSION._cont = ASN1Dict([
-        (u'id', _EXTENSION_id),
-        (u'ExtnType', _EXTENSION_ExtnType),
-        (u'Critical', _EXTENSION_Critical),
-        ])
-    
-    #-----< Extensions >-----#
-    Extensions = SEQ_OF(name=u'Extensions', mode=MODE_TYPE, param=True)
-    
-    #-----< Extension >-----#
-    Extension = SEQ(name=u'Extension', mode=MODE_TYPE, param=True)
-    
-    #-----< SECURITY-CATEGORY >-----#
-    SECURITY_CATEGORY = CLASS(name=u'SECURITY-CATEGORY', mode=MODE_TYPE, typeref=ASN1RefType(('_IMPL_', u'TYPE-IDENTIFIER'), []))
-    
-    #-----< SecurityCategory >-----#
-    SecurityCategory = SEQ(name=u'SecurityCategory', mode=MODE_TYPE, param=True)
-    
-    _all_ = [
-        _ATTRIBUTE_id,
-        _ATTRIBUTE_Type,
-        _ATTRIBUTE_equality_match,
-        _ATTRIBUTE_minCount,
-        _ATTRIBUTE_maxCount,
-        ATTRIBUTE,
-        _MATCHING_RULE_ParentMatchingRules,
-        _MATCHING_RULE_AssertionType,
-        _MATCHING_RULE_uniqueMatchIndicator,
-        _MATCHING_RULE_id,
-        MATCHING_RULE,
-        _EXTENSION_id,
-        _EXTENSION_ExtnType,
-        _EXTENSION_Critical,
-        EXTENSION,
-        SECURITY_CATEGORY,
-    ]
-
-class PKIX_X400Address_2009:
-
-    _name_  = u'PKIX-X400Address-2009'
-    _oid_   = [1, 3, 6, 1, 5, 5, 7, 0, 60]
-    
-    _obj_ = [
-        u'ORAddress',
-        u'BuiltInStandardAttributes',
-        u'CountryName',
-        u'AdministrationDomainName',
-        u'NetworkAddress',
-        u'X121Address',
-        u'TerminalIdentifier',
-        u'PrivateDomainName',
-        u'OrganizationName',
-        u'NumericUserIdentifier',
-        u'PersonalName',
-        u'OrganizationalUnitNames',
-        u'OrganizationalUnitName',
-        u'BuiltInDomainDefinedAttributes',
-        u'BuiltInDomainDefinedAttribute',
-        u'ExtensionAttributes',
-        u'EXTENSION-ATTRIBUTE',
-        u'ExtensionAttribute',
-        u'SupportedExtensionAttributes',
-        u'ea-commonName',
-        u'ea-teletexCommonName',
-        u'ea-teletexOrganizationName',
-        u'ea-teletexPersonalName',
-        u'ea-teletexOrganizationalUnitNames',
-        u'TeletexOrganizationalUnitName',
-        u'ea-pDSName',
-        u'ea-physicalDeliveryCountryName',
-        u'ea-postalCode',
-        u'ea-physicalDeliveryOfficeName',
-        u'ea-physicalDeliveryOfficeNumber',
-        u'ea-extensionORAddressComponents',
-        u'ea-physicalDeliveryPersonalName',
-        u'ea-physicalDeliveryOrganizationName',
-        u'ea-extensionPhysicalDeliveryAddressComponents',
-        u'ea-unformattedPostalAddress',
-        u'ea-streetAddress',
-        u'ea-postOfficeBoxAddress',
-        u'ea-posteRestanteAddress',
-        u'ea-uniquePostalName',
-        u'ea-localPostalAttributes',
-        u'PDSParameter',
-        u'ea-extendedNetworkAddress',
-        u'PresentationAddress',
-        u'ea-terminalType',
-        u'ea-teletexDomainDefinedAttributes',
-        u'TeletexDomainDefinedAttribute',
-        u'ub-match',
-        u'ub-common-name-length',
-        u'ub-country-name-alpha-length',
-        u'ub-country-name-numeric-length',
-        u'ub-domain-defined-attributes',
-        u'ub-domain-defined-attribute-type-length',
-        u'ub-domain-defined-attribute-value-length',
-        u'ub-domain-name-length',
-        u'ub-extension-attributes',
-        u'ub-e163-4-number-length',
-        u'ub-e163-4-sub-address-length',
-        u'ub-generation-qualifier-length',
-        u'ub-given-name-length',
-        u'ub-initials-length',
-        u'ub-integer-options',
-        u'ub-numeric-user-id-length',
-        u'ub-organization-name-length',
-        u'ub-organizational-unit-name-length',
-        u'ub-organizational-units',
-        u'ub-pds-name-length',
-        u'ub-pds-parameter-length',
-        u'ub-pds-physical-address-lines',
-        u'ub-postal-code-length',
-        u'ub-surname-length',
-        u'ub-terminal-id-length',
-        u'ub-unformatted-address-length',
-        u'ub-x121-address-length',
-        ]
-    _type_ = [
-        u'ORAddress',
-        u'BuiltInStandardAttributes',
-        u'CountryName',
-        u'AdministrationDomainName',
-        u'NetworkAddress',
-        u'X121Address',
-        u'TerminalIdentifier',
-        u'PrivateDomainName',
-        u'OrganizationName',
-        u'NumericUserIdentifier',
-        u'PersonalName',
-        u'OrganizationalUnitNames',
-        u'OrganizationalUnitName',
-        u'BuiltInDomainDefinedAttributes',
-        u'BuiltInDomainDefinedAttribute',
-        u'ExtensionAttributes',
-        u'EXTENSION-ATTRIBUTE',
-        u'ExtensionAttribute',
-        u'TeletexOrganizationalUnitName',
-        u'PDSParameter',
-        u'PresentationAddress',
-        u'TeletexDomainDefinedAttribute',
-        ]
-    _set_ = [
-        u'SupportedExtensionAttributes',
-        ]
-    _val_ = [
-        u'ea-commonName',
-        u'ea-teletexCommonName',
-        u'ea-teletexOrganizationName',
-        u'ea-teletexPersonalName',
-        u'ea-teletexOrganizationalUnitNames',
-        u'ea-pDSName',
-        u'ea-physicalDeliveryCountryName',
-        u'ea-postalCode',
-        u'ea-physicalDeliveryOfficeName',
-        u'ea-physicalDeliveryOfficeNumber',
-        u'ea-extensionORAddressComponents',
-        u'ea-physicalDeliveryPersonalName',
-        u'ea-physicalDeliveryOrganizationName',
-        u'ea-extensionPhysicalDeliveryAddressComponents',
-        u'ea-unformattedPostalAddress',
-        u'ea-streetAddress',
-        u'ea-postOfficeBoxAddress',
-        u'ea-posteRestanteAddress',
-        u'ea-uniquePostalName',
-        u'ea-localPostalAttributes',
-        u'ea-extendedNetworkAddress',
-        u'ea-terminalType',
-        u'ea-teletexDomainDefinedAttributes',
-        u'ub-match',
-        u'ub-common-name-length',
-        u'ub-country-name-alpha-length',
-        u'ub-country-name-numeric-length',
-        u'ub-domain-defined-attributes',
-        u'ub-domain-defined-attribute-type-length',
-        u'ub-domain-defined-attribute-value-length',
-        u'ub-domain-name-length',
-        u'ub-extension-attributes',
-        u'ub-e163-4-number-length',
-        u'ub-e163-4-sub-address-length',
-        u'ub-generation-qualifier-length',
-        u'ub-given-name-length',
-        u'ub-initials-length',
-        u'ub-integer-options',
-        u'ub-numeric-user-id-length',
-        u'ub-organization-name-length',
-        u'ub-organizational-unit-name-length',
-        u'ub-organizational-units',
-        u'ub-pds-name-length',
-        u'ub-pds-parameter-length',
-        u'ub-pds-physical-address-lines',
-        u'ub-postal-code-length',
-        u'ub-surname-length',
-        u'ub-terminal-id-length',
-        u'ub-unformatted-address-length',
-        u'ub-x121-address-length',
-        ]
-    _class_ = [
-        u'EXTENSION-ATTRIBUTE',
-        u'SupportedExtensionAttributes',
-        u'ea-commonName',
-        u'ea-teletexCommonName',
-        u'ea-teletexOrganizationName',
-        u'ea-teletexPersonalName',
-        u'ea-teletexOrganizationalUnitNames',
-        u'ea-pDSName',
-        u'ea-physicalDeliveryCountryName',
-        u'ea-postalCode',
-        u'ea-physicalDeliveryOfficeName',
-        u'ea-physicalDeliveryOfficeNumber',
-        u'ea-extensionORAddressComponents',
-        u'ea-physicalDeliveryPersonalName',
-        u'ea-physicalDeliveryOrganizationName',
-        u'ea-extensionPhysicalDeliveryAddressComponents',
-        u'ea-unformattedPostalAddress',
-        u'ea-streetAddress',
-        u'ea-postOfficeBoxAddress',
-        u'ea-posteRestanteAddress',
-        u'ea-uniquePostalName',
-        u'ea-localPostalAttributes',
-        u'ea-extendedNetworkAddress',
-        u'ea-terminalType',
-        u'ea-teletexDomainDefinedAttributes',
-        ]
-    _param_ = [
-        ]
-    
-    #-----< ORAddress >-----#
-    ORAddress = SEQ(name=u'ORAddress', mode=MODE_TYPE)
-    _ORAddress_built_in_standard_attributes = SEQ(name=u'built-in-standard-attributes', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'BuiltInStandardAttributes')))
-    _ORAddress_built_in_domain_defined_attributes = SEQ_OF(name=u'built-in-domain-defined-attributes', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'BuiltInDomainDefinedAttributes')), opt=True)
-    _ORAddress_extension_attributes = SET_OF(name=u'extension-attributes', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'ExtensionAttributes')), opt=True)
-    ORAddress._cont = ASN1Dict([
-        (u'built-in-standard-attributes', _ORAddress_built_in_standard_attributes),
-        (u'built-in-domain-defined-attributes', _ORAddress_built_in_domain_defined_attributes),
-        (u'extension-attributes', _ORAddress_extension_attributes),
-        ])
-    ORAddress._ext = None
-    
-    #-----< BuiltInStandardAttributes >-----#
-    BuiltInStandardAttributes = SEQ(name=u'BuiltInStandardAttributes', mode=MODE_TYPE)
-    _BuiltInStandardAttributes_country_name = CHOICE(name=u'country-name', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'CountryName')), opt=True)
-    _BuiltInStandardAttributes_administration_domain_name = CHOICE(name=u'administration-domain-name', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'AdministrationDomainName')), opt=True)
-    _BuiltInStandardAttributes_network_address = STR_NUM(name=u'network-address', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX-X400Address-2009', 'NetworkAddress')), opt=True)
-    _BuiltInStandardAttributes_terminal_identifier = STR_PRINT(name=u'terminal-identifier', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX-X400Address-2009', 'TerminalIdentifier')), opt=True)
-    _BuiltInStandardAttributes_private_domain_name = CHOICE(name=u'private-domain-name', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKIX-X400Address-2009', 'PrivateDomainName')), opt=True)
-    _BuiltInStandardAttributes_organization_name = STR_PRINT(name=u'organization-name', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX-X400Address-2009', 'OrganizationName')), opt=True)
-    _BuiltInStandardAttributes_numeric_user_identifier = STR_NUM(name=u'numeric-user-identifier', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX-X400Address-2009', 'NumericUserIdentifier')), opt=True)
-    _BuiltInStandardAttributes_personal_name = SET(name=u'personal-name', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX-X400Address-2009', 'PersonalName')), opt=True)
-    _BuiltInStandardAttributes_organizational_unit_names = SEQ_OF(name=u'organizational-unit-names', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX-X400Address-2009', 'OrganizationalUnitNames')), opt=True)
-    BuiltInStandardAttributes._cont = ASN1Dict([
-        (u'country-name', _BuiltInStandardAttributes_country_name),
-        (u'administration-domain-name', _BuiltInStandardAttributes_administration_domain_name),
-        (u'network-address', _BuiltInStandardAttributes_network_address),
-        (u'terminal-identifier', _BuiltInStandardAttributes_terminal_identifier),
-        (u'private-domain-name', _BuiltInStandardAttributes_private_domain_name),
-        (u'organization-name', _BuiltInStandardAttributes_organization_name),
-        (u'numeric-user-identifier', _BuiltInStandardAttributes_numeric_user_identifier),
-        (u'personal-name', _BuiltInStandardAttributes_personal_name),
-        (u'organizational-unit-names', _BuiltInStandardAttributes_organizational_unit_names),
-        ])
-    BuiltInStandardAttributes._ext = None
-    
-    #-----< CountryName >-----#
-    CountryName = CHOICE(name=u'CountryName', mode=MODE_TYPE, tag=(1, TAG_APPLICATION, TAG_EXPLICIT))
-    _CountryName_x121_dcc_code = STR_NUM(name=u'x121-dcc-code', mode=MODE_TYPE)
-    _CountryName_x121_dcc_code._const_sz = ASN1Set(rv=[3], rr=[], ev=None, er=[])
-    _CountryName_iso_3166_alpha2_code = STR_PRINT(name=u'iso-3166-alpha2-code', mode=MODE_TYPE)
-    _CountryName_iso_3166_alpha2_code._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
-    CountryName._cont = ASN1Dict([
-        (u'x121-dcc-code', _CountryName_x121_dcc_code),
-        (u'iso-3166-alpha2-code', _CountryName_iso_3166_alpha2_code),
-        ])
-    CountryName._ext = None
-    
-    #-----< AdministrationDomainName >-----#
-    AdministrationDomainName = CHOICE(name=u'AdministrationDomainName', mode=MODE_TYPE, tag=(2, TAG_APPLICATION, TAG_EXPLICIT))
-    _AdministrationDomainName_numeric = STR_NUM(name=u'numeric', mode=MODE_TYPE)
-    _AdministrationDomainName_numeric._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=16)], ev=None, er=[])
-    _AdministrationDomainName_printable = STR_PRINT(name=u'printable', mode=MODE_TYPE)
-    _AdministrationDomainName_printable._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=16)], ev=None, er=[])
-    AdministrationDomainName._cont = ASN1Dict([
-        (u'numeric', _AdministrationDomainName_numeric),
-        (u'printable', _AdministrationDomainName_printable),
-        ])
-    AdministrationDomainName._ext = None
-    
-    #-----< NetworkAddress >-----#
-    NetworkAddress = STR_NUM(name=u'NetworkAddress', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'X121Address')))
-    
-    #-----< X121Address >-----#
-    X121Address = STR_NUM(name=u'X121Address', mode=MODE_TYPE)
-    X121Address._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    
-    #-----< TerminalIdentifier >-----#
-    TerminalIdentifier = STR_PRINT(name=u'TerminalIdentifier', mode=MODE_TYPE)
-    TerminalIdentifier._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=24)], ev=None, er=[])
-    
-    #-----< PrivateDomainName >-----#
-    PrivateDomainName = CHOICE(name=u'PrivateDomainName', mode=MODE_TYPE)
-    _PrivateDomainName_numeric = STR_NUM(name=u'numeric', mode=MODE_TYPE)
-    _PrivateDomainName_numeric._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    _PrivateDomainName_printable = STR_PRINT(name=u'printable', mode=MODE_TYPE)
-    _PrivateDomainName_printable._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    PrivateDomainName._cont = ASN1Dict([
-        (u'numeric', _PrivateDomainName_numeric),
-        (u'printable', _PrivateDomainName_printable),
-        ])
-    PrivateDomainName._ext = None
-    
-    #-----< OrganizationName >-----#
-    OrganizationName = STR_PRINT(name=u'OrganizationName', mode=MODE_TYPE)
-    OrganizationName._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    
-    #-----< NumericUserIdentifier >-----#
-    NumericUserIdentifier = STR_NUM(name=u'NumericUserIdentifier', mode=MODE_TYPE)
-    NumericUserIdentifier._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
-    
-    #-----< PersonalName >-----#
-    PersonalName = SET(name=u'PersonalName', mode=MODE_TYPE)
-    _PersonalName_surname = STR_PRINT(name=u'surname', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _PersonalName_surname._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=40)], ev=None, er=[])
-    _PersonalName_given_name = STR_PRINT(name=u'given-name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _PersonalName_given_name._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    _PersonalName_initials = STR_PRINT(name=u'initials', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _PersonalName_initials._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=5)], ev=None, er=[])
-    _PersonalName_generation_qualifier = STR_PRINT(name=u'generation-qualifier', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _PersonalName_generation_qualifier._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=3)], ev=None, er=[])
-    PersonalName._cont = ASN1Dict([
-        (u'surname', _PersonalName_surname),
-        (u'given-name', _PersonalName_given_name),
-        (u'initials', _PersonalName_initials),
-        (u'generation-qualifier', _PersonalName_generation_qualifier),
-        ])
-    PersonalName._ext = None
-    
-    #-----< OrganizationalUnitNames >-----#
-    OrganizationalUnitNames = SEQ_OF(name=u'OrganizationalUnitNames', mode=MODE_TYPE)
-    _OrganizationalUnitNames__item_ = STR_PRINT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'OrganizationalUnitName')))
-    OrganizationalUnitNames._cont = _OrganizationalUnitNames__item_
-    OrganizationalUnitNames._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
-    
-    #-----< OrganizationalUnitName >-----#
-    OrganizationalUnitName = STR_PRINT(name=u'OrganizationalUnitName', mode=MODE_TYPE)
-    OrganizationalUnitName._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
-    
-    #-----< BuiltInDomainDefinedAttributes >-----#
-    BuiltInDomainDefinedAttributes = SEQ_OF(name=u'BuiltInDomainDefinedAttributes', mode=MODE_TYPE)
-    _BuiltInDomainDefinedAttributes__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'BuiltInDomainDefinedAttribute')))
-    BuiltInDomainDefinedAttributes._cont = _BuiltInDomainDefinedAttributes__item_
-    BuiltInDomainDefinedAttributes._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
-    
-    #-----< BuiltInDomainDefinedAttribute >-----#
-    BuiltInDomainDefinedAttribute = SEQ(name=u'BuiltInDomainDefinedAttribute', mode=MODE_TYPE)
-    _BuiltInDomainDefinedAttribute_type = STR_PRINT(name=u'type', mode=MODE_TYPE)
-    _BuiltInDomainDefinedAttribute_type._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
-    _BuiltInDomainDefinedAttribute_value = STR_PRINT(name=u'value', mode=MODE_TYPE)
-    _BuiltInDomainDefinedAttribute_value._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
-    BuiltInDomainDefinedAttribute._cont = ASN1Dict([
-        (u'type', _BuiltInDomainDefinedAttribute_type),
-        (u'value', _BuiltInDomainDefinedAttribute_value),
-        ])
-    BuiltInDomainDefinedAttribute._ext = None
-    
-    #-----< ExtensionAttributes >-----#
-    ExtensionAttributes = SET_OF(name=u'ExtensionAttributes', mode=MODE_TYPE)
-    _ExtensionAttributes__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'ExtensionAttribute')))
-    ExtensionAttributes._cont = _ExtensionAttributes__item_
-    ExtensionAttributes._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=256)], ev=None, er=[])
-    
-    #-----< EXTENSION-ATTRIBUTE >-----#
-    EXTENSION_ATTRIBUTE = CLASS(name=u'EXTENSION-ATTRIBUTE', mode=MODE_TYPE)
-    _EXTENSION_ATTRIBUTE_id = INT(name=u'id', mode=MODE_VALUE, uniq=True)
-    _EXTENSION_ATTRIBUTE_id._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=256)], ev=None, er=[])
-    _EXTENSION_ATTRIBUTE_Type = OPEN(name=u'Type', mode=MODE_TYPE)
-    EXTENSION_ATTRIBUTE._cont = ASN1Dict([
-        (u'id', _EXTENSION_ATTRIBUTE_id),
-        (u'Type', _EXTENSION_ATTRIBUTE_Type),
-        ])
-    
-    #-----< ExtensionAttribute >-----#
-    ExtensionAttribute = SEQ(name=u'ExtensionAttribute', mode=MODE_TYPE)
-    _ExtensionAttribute_extension_attribute_type = INT(name=u'extension-attribute-type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE'), [u'id']))
-    __ExtensionAttribute_extension_attribute_type_tab = CLASS(name='_tab_EXTENSION-ATTRIBUTE', mode=MODE_SET, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_0 = STR_PRINT(name=u'Type', mode=MODE_TYPE)
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_0._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_1 = STR_TELE(name=u'Type', mode=MODE_TYPE)
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_1._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_2 = STR_TELE(name=u'Type', mode=MODE_TYPE)
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_2._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_3 = SET(name=u'Type', mode=MODE_TYPE)
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_surname = STR_TELE(name=u'surname', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_surname._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=40)], ev=None, er=[])
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_given_name = STR_TELE(name=u'given-name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_given_name._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_initials = STR_TELE(name=u'initials', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_initials._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=5)], ev=None, er=[])
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_generation_qualifier = STR_TELE(name=u'generation-qualifier', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_generation_qualifier._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=3)], ev=None, er=[])
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_3._cont = ASN1Dict([
-        (u'surname', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_surname),
-        (u'given-name', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_given_name),
-        (u'initials', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_initials),
-        (u'generation-qualifier', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_generation_qualifier),
-        ])
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_3._ext = None
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_4 = SEQ_OF(name=u'Type', mode=MODE_TYPE)
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_4__item_ = STR_TELE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'TeletexOrganizationalUnitName')))
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_4._cont = ____ExtensionAttribute_extension_attribute_type_tab_val_Type_4__item_
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_4._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_5 = STR_PRINT(name=u'Type', mode=MODE_TYPE)
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_5._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_6 = CHOICE(name=u'Type', mode=MODE_TYPE)
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_6_x121_dcc_code = STR_NUM(name=u'x121-dcc-code', mode=MODE_TYPE)
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_6_x121_dcc_code._const_sz = ASN1Set(rv=[3], rr=[], ev=None, er=[])
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_6_iso_3166_alpha2_code = STR_PRINT(name=u'iso-3166-alpha2-code', mode=MODE_TYPE)
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_6_iso_3166_alpha2_code._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_6._cont = ASN1Dict([
-        (u'x121-dcc-code', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_6_x121_dcc_code),
-        (u'iso-3166-alpha2-code', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_6_iso_3166_alpha2_code),
-        ])
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_6._ext = None
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_7 = CHOICE(name=u'Type', mode=MODE_TYPE)
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_7_numeric_code = STR_NUM(name=u'numeric-code', mode=MODE_TYPE)
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_7_numeric_code._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_7_printable_code = STR_PRINT(name=u'printable-code', mode=MODE_TYPE)
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_7_printable_code._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_7._cont = ASN1Dict([
-        (u'numeric-code', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_7_numeric_code),
-        (u'printable-code', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_7_printable_code),
-        ])
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_7._ext = None
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_8 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_9 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_10 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_11 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_12 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_13 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_14 = SET(name=u'Type', mode=MODE_TYPE)
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_printable_address = SEQ_OF(name=u'printable-address', mode=MODE_TYPE, opt=True)
-    _____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_printable_address__item_ = STR_PRINT(name='_item_', mode=MODE_TYPE)
-    _____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_printable_address__item_._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=30)], ev=None, er=[])
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_printable_address._cont = _____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_printable_address__item_
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_printable_address._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=6)], ev=None, er=[])
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_teletex_string = STR_TELE(name=u'teletex-string', mode=MODE_TYPE, opt=True)
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_teletex_string._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=180)], ev=None, er=[])
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_14._cont = ASN1Dict([
-        (u'printable-address', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_printable_address),
-        (u'teletex-string', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_teletex_string),
-        ])
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_14._ext = None
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_15 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_16 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_17 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_18 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_19 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_20 = CHOICE(name=u'Type', mode=MODE_TYPE)
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address = SEQ(name=u'e163-4-address', mode=MODE_TYPE)
-    _____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address_number = STR_NUM(name=u'number', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address_number._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=15)], ev=None, er=[])
-    _____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address_sub_address = STR_NUM(name=u'sub-address', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address_sub_address._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=40)], ev=None, er=[])
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address._cont = ASN1Dict([
-        (u'number', _____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address_number),
-        (u'sub-address', _____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address_sub_address),
-        ])
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address._ext = None
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_psap_address = SEQ(name=u'psap-address', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX-X400Address-2009', 'PresentationAddress')))
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_20._cont = ASN1Dict([
-        (u'e163-4-address', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address),
-        (u'psap-address', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_psap_address),
-        ])
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_20._ext = None
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_21 = INT(name=u'Type', mode=MODE_TYPE)
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_21._cont = ASN1Dict([(u'telex', 3), (u'teletex', 4), (u'g3-facsimile', 5), (u'g4-facsimile', 6), (u'ia5-terminal', 7), (u'videotex', 8)])
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_21._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=256)], ev=None, er=[])
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_22 = SEQ_OF(name=u'Type', mode=MODE_TYPE)
-    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_22__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'TeletexDomainDefinedAttribute')))
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_22._cont = ____ExtensionAttribute_extension_attribute_type_tab_val_Type_22__item_
-    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_22._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
-    __ExtensionAttribute_extension_attribute_type_tab._val = ASN1Set(rv=[dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_0), (u'id', 1)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_1), (u'id', 2)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_2), (u'id', 3)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_3), (u'id', 4)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_4), (u'id', 5)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_5), (u'id', 7)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_6), (u'id', 8)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_7), (u'id', 9)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_8), (u'id', 10)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_9), (u'id', 11)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_10), (u'id', 12)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_11), (u'id', 13)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_12), (u'id', 14)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_13), (u'id', 15)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_14), (u'id', 16)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_15), (u'id', 17)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_16), (u'id', 18)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_17), (u'id', 19)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_18), (u'id', 20)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_19), (u'id', 21)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_20), (u'id', 22)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_21), (u'id', 23)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_22), (u'id', 6)])], rr=[], ev=None, er=[])
-    _ExtensionAttribute_extension_attribute_type._const_tab = __ExtensionAttribute_extension_attribute_type_tab
-    _ExtensionAttribute_extension_attribute_type._const_tab_at = None
-    _ExtensionAttribute_extension_attribute_type._const_tab_id = u'id'
-    _ExtensionAttribute_extension_attribute_value = OPEN(name=u'extension-attribute-value', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE'), [u'Type']))
-    _ExtensionAttribute_extension_attribute_value._const_tab = __ExtensionAttribute_extension_attribute_type_tab
-    _ExtensionAttribute_extension_attribute_value._const_tab_at = ('..', u'extension-attribute-type')
-    _ExtensionAttribute_extension_attribute_value._const_tab_id = u'Type'
-    ExtensionAttribute._cont = ASN1Dict([
-        (u'extension-attribute-type', _ExtensionAttribute_extension_attribute_type),
-        (u'extension-attribute-value', _ExtensionAttribute_extension_attribute_value),
-        ])
-    ExtensionAttribute._ext = None
-    
-    #-----< SupportedExtensionAttributes >-----#
-    SupportedExtensionAttributes = CLASS(name=u'SupportedExtensionAttributes', mode=MODE_SET, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _SupportedExtensionAttributes_val_Type_0 = STR_PRINT(name=u'Type', mode=MODE_TYPE)
-    _SupportedExtensionAttributes_val_Type_0._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _SupportedExtensionAttributes_val_Type_1 = STR_TELE(name=u'Type', mode=MODE_TYPE)
-    _SupportedExtensionAttributes_val_Type_1._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _SupportedExtensionAttributes_val_Type_2 = STR_TELE(name=u'Type', mode=MODE_TYPE)
-    _SupportedExtensionAttributes_val_Type_2._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _SupportedExtensionAttributes_val_Type_3 = SET(name=u'Type', mode=MODE_TYPE)
-    __SupportedExtensionAttributes_val_Type_3_surname = STR_TELE(name=u'surname', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __SupportedExtensionAttributes_val_Type_3_surname._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=40)], ev=None, er=[])
-    __SupportedExtensionAttributes_val_Type_3_given_name = STR_TELE(name=u'given-name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __SupportedExtensionAttributes_val_Type_3_given_name._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    __SupportedExtensionAttributes_val_Type_3_initials = STR_TELE(name=u'initials', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __SupportedExtensionAttributes_val_Type_3_initials._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=5)], ev=None, er=[])
-    __SupportedExtensionAttributes_val_Type_3_generation_qualifier = STR_TELE(name=u'generation-qualifier', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __SupportedExtensionAttributes_val_Type_3_generation_qualifier._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=3)], ev=None, er=[])
-    _SupportedExtensionAttributes_val_Type_3._cont = ASN1Dict([
-        (u'surname', __SupportedExtensionAttributes_val_Type_3_surname),
-        (u'given-name', __SupportedExtensionAttributes_val_Type_3_given_name),
-        (u'initials', __SupportedExtensionAttributes_val_Type_3_initials),
-        (u'generation-qualifier', __SupportedExtensionAttributes_val_Type_3_generation_qualifier),
-        ])
-    _SupportedExtensionAttributes_val_Type_3._ext = None
-    _SupportedExtensionAttributes_val_Type_4 = SEQ_OF(name=u'Type', mode=MODE_TYPE)
-    __SupportedExtensionAttributes_val_Type_4__item_ = STR_TELE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'TeletexOrganizationalUnitName')))
-    _SupportedExtensionAttributes_val_Type_4._cont = __SupportedExtensionAttributes_val_Type_4__item_
-    _SupportedExtensionAttributes_val_Type_4._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
-    _SupportedExtensionAttributes_val_Type_5 = STR_PRINT(name=u'Type', mode=MODE_TYPE)
-    _SupportedExtensionAttributes_val_Type_5._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    _SupportedExtensionAttributes_val_Type_6 = CHOICE(name=u'Type', mode=MODE_TYPE)
-    __SupportedExtensionAttributes_val_Type_6_x121_dcc_code = STR_NUM(name=u'x121-dcc-code', mode=MODE_TYPE)
-    __SupportedExtensionAttributes_val_Type_6_x121_dcc_code._const_sz = ASN1Set(rv=[3], rr=[], ev=None, er=[])
-    __SupportedExtensionAttributes_val_Type_6_iso_3166_alpha2_code = STR_PRINT(name=u'iso-3166-alpha2-code', mode=MODE_TYPE)
-    __SupportedExtensionAttributes_val_Type_6_iso_3166_alpha2_code._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
-    _SupportedExtensionAttributes_val_Type_6._cont = ASN1Dict([
-        (u'x121-dcc-code', __SupportedExtensionAttributes_val_Type_6_x121_dcc_code),
-        (u'iso-3166-alpha2-code', __SupportedExtensionAttributes_val_Type_6_iso_3166_alpha2_code),
-        ])
-    _SupportedExtensionAttributes_val_Type_6._ext = None
-    _SupportedExtensionAttributes_val_Type_7 = CHOICE(name=u'Type', mode=MODE_TYPE)
-    __SupportedExtensionAttributes_val_Type_7_numeric_code = STR_NUM(name=u'numeric-code', mode=MODE_TYPE)
-    __SupportedExtensionAttributes_val_Type_7_numeric_code._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    __SupportedExtensionAttributes_val_Type_7_printable_code = STR_PRINT(name=u'printable-code', mode=MODE_TYPE)
-    __SupportedExtensionAttributes_val_Type_7_printable_code._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    _SupportedExtensionAttributes_val_Type_7._cont = ASN1Dict([
-        (u'numeric-code', __SupportedExtensionAttributes_val_Type_7_numeric_code),
-        (u'printable-code', __SupportedExtensionAttributes_val_Type_7_printable_code),
-        ])
-    _SupportedExtensionAttributes_val_Type_7._ext = None
-    _SupportedExtensionAttributes_val_Type_8 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    _SupportedExtensionAttributes_val_Type_9 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    _SupportedExtensionAttributes_val_Type_10 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    _SupportedExtensionAttributes_val_Type_11 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    _SupportedExtensionAttributes_val_Type_12 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    _SupportedExtensionAttributes_val_Type_13 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    _SupportedExtensionAttributes_val_Type_14 = SET(name=u'Type', mode=MODE_TYPE)
-    __SupportedExtensionAttributes_val_Type_14_printable_address = SEQ_OF(name=u'printable-address', mode=MODE_TYPE, opt=True)
-    ___SupportedExtensionAttributes_val_Type_14_printable_address__item_ = STR_PRINT(name='_item_', mode=MODE_TYPE)
-    ___SupportedExtensionAttributes_val_Type_14_printable_address__item_._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=30)], ev=None, er=[])
-    __SupportedExtensionAttributes_val_Type_14_printable_address._cont = ___SupportedExtensionAttributes_val_Type_14_printable_address__item_
-    __SupportedExtensionAttributes_val_Type_14_printable_address._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=6)], ev=None, er=[])
-    __SupportedExtensionAttributes_val_Type_14_teletex_string = STR_TELE(name=u'teletex-string', mode=MODE_TYPE, opt=True)
-    __SupportedExtensionAttributes_val_Type_14_teletex_string._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=180)], ev=None, er=[])
-    _SupportedExtensionAttributes_val_Type_14._cont = ASN1Dict([
-        (u'printable-address', __SupportedExtensionAttributes_val_Type_14_printable_address),
-        (u'teletex-string', __SupportedExtensionAttributes_val_Type_14_teletex_string),
-        ])
-    _SupportedExtensionAttributes_val_Type_14._ext = None
-    _SupportedExtensionAttributes_val_Type_15 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    _SupportedExtensionAttributes_val_Type_16 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    _SupportedExtensionAttributes_val_Type_17 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    _SupportedExtensionAttributes_val_Type_18 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    _SupportedExtensionAttributes_val_Type_19 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    _SupportedExtensionAttributes_val_Type_20 = CHOICE(name=u'Type', mode=MODE_TYPE)
-    __SupportedExtensionAttributes_val_Type_20_e163_4_address = SEQ(name=u'e163-4-address', mode=MODE_TYPE)
-    ___SupportedExtensionAttributes_val_Type_20_e163_4_address_number = STR_NUM(name=u'number', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___SupportedExtensionAttributes_val_Type_20_e163_4_address_number._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=15)], ev=None, er=[])
-    ___SupportedExtensionAttributes_val_Type_20_e163_4_address_sub_address = STR_NUM(name=u'sub-address', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    ___SupportedExtensionAttributes_val_Type_20_e163_4_address_sub_address._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=40)], ev=None, er=[])
-    __SupportedExtensionAttributes_val_Type_20_e163_4_address._cont = ASN1Dict([
-        (u'number', ___SupportedExtensionAttributes_val_Type_20_e163_4_address_number),
-        (u'sub-address', ___SupportedExtensionAttributes_val_Type_20_e163_4_address_sub_address),
-        ])
-    __SupportedExtensionAttributes_val_Type_20_e163_4_address._ext = None
-    __SupportedExtensionAttributes_val_Type_20_psap_address = SEQ(name=u'psap-address', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX-X400Address-2009', 'PresentationAddress')))
-    _SupportedExtensionAttributes_val_Type_20._cont = ASN1Dict([
-        (u'e163-4-address', __SupportedExtensionAttributes_val_Type_20_e163_4_address),
-        (u'psap-address', __SupportedExtensionAttributes_val_Type_20_psap_address),
-        ])
-    _SupportedExtensionAttributes_val_Type_20._ext = None
-    _SupportedExtensionAttributes_val_Type_21 = INT(name=u'Type', mode=MODE_TYPE)
-    _SupportedExtensionAttributes_val_Type_21._cont = ASN1Dict([(u'telex', 3), (u'teletex', 4), (u'g3-facsimile', 5), (u'g4-facsimile', 6), (u'ia5-terminal', 7), (u'videotex', 8)])
-    _SupportedExtensionAttributes_val_Type_21._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=256)], ev=None, er=[])
-    _SupportedExtensionAttributes_val_Type_22 = SEQ_OF(name=u'Type', mode=MODE_TYPE)
-    __SupportedExtensionAttributes_val_Type_22__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'TeletexDomainDefinedAttribute')))
-    _SupportedExtensionAttributes_val_Type_22._cont = __SupportedExtensionAttributes_val_Type_22__item_
-    _SupportedExtensionAttributes_val_Type_22._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
-    SupportedExtensionAttributes._val = ASN1Set(rv=[dict([(u'Type', _SupportedExtensionAttributes_val_Type_0), (u'id', 1)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_1), (u'id', 2)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_2), (u'id', 3)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_3), (u'id', 4)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_4), (u'id', 5)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_5), (u'id', 7)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_6), (u'id', 8)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_7), (u'id', 9)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_8), (u'id', 10)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_9), (u'id', 11)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_10), (u'id', 12)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_11), (u'id', 13)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_12), (u'id', 14)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_13), (u'id', 15)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_14), (u'id', 16)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_15), (u'id', 17)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_16), (u'id', 18)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_17), (u'id', 19)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_18), (u'id', 20)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_19), (u'id', 21)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_20), (u'id', 22)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_21), (u'id', 23)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_22), (u'id', 6)])], rr=[], ev=[], er=[])
-    
-    #-----< ea-commonName >-----#
-    ea_commonName = CLASS(name=u'ea-commonName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _ea_commonName_val_Type = STR_PRINT(name=u'Type', mode=MODE_TYPE)
-    _ea_commonName_val_Type._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    ea_commonName._val = dict([(u'Type', _ea_commonName_val_Type), (u'id', 1)])
-    
-    #-----< ea-teletexCommonName >-----#
-    ea_teletexCommonName = CLASS(name=u'ea-teletexCommonName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _ea_teletexCommonName_val_Type = STR_TELE(name=u'Type', mode=MODE_TYPE)
-    _ea_teletexCommonName_val_Type._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    ea_teletexCommonName._val = dict([(u'Type', _ea_teletexCommonName_val_Type), (u'id', 2)])
-    
-    #-----< ea-teletexOrganizationName >-----#
-    ea_teletexOrganizationName = CLASS(name=u'ea-teletexOrganizationName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _ea_teletexOrganizationName_val_Type = STR_TELE(name=u'Type', mode=MODE_TYPE)
-    _ea_teletexOrganizationName_val_Type._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    ea_teletexOrganizationName._val = dict([(u'Type', _ea_teletexOrganizationName_val_Type), (u'id', 3)])
-    
-    #-----< ea-teletexPersonalName >-----#
-    ea_teletexPersonalName = CLASS(name=u'ea-teletexPersonalName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _ea_teletexPersonalName_val_Type = SET(name=u'Type', mode=MODE_TYPE)
-    __ea_teletexPersonalName_val_Type_surname = STR_TELE(name=u'surname', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __ea_teletexPersonalName_val_Type_surname._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=40)], ev=None, er=[])
-    __ea_teletexPersonalName_val_Type_given_name = STR_TELE(name=u'given-name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __ea_teletexPersonalName_val_Type_given_name._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    __ea_teletexPersonalName_val_Type_initials = STR_TELE(name=u'initials', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __ea_teletexPersonalName_val_Type_initials._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=5)], ev=None, er=[])
-    __ea_teletexPersonalName_val_Type_generation_qualifier = STR_TELE(name=u'generation-qualifier', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __ea_teletexPersonalName_val_Type_generation_qualifier._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=3)], ev=None, er=[])
-    _ea_teletexPersonalName_val_Type._cont = ASN1Dict([
-        (u'surname', __ea_teletexPersonalName_val_Type_surname),
-        (u'given-name', __ea_teletexPersonalName_val_Type_given_name),
-        (u'initials', __ea_teletexPersonalName_val_Type_initials),
-        (u'generation-qualifier', __ea_teletexPersonalName_val_Type_generation_qualifier),
-        ])
-    _ea_teletexPersonalName_val_Type._ext = None
-    ea_teletexPersonalName._val = dict([(u'Type', _ea_teletexPersonalName_val_Type), (u'id', 4)])
-    
-    #-----< ea-teletexOrganizationalUnitNames >-----#
-    ea_teletexOrganizationalUnitNames = CLASS(name=u'ea-teletexOrganizationalUnitNames', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _ea_teletexOrganizationalUnitNames_val_Type = SEQ_OF(name=u'Type', mode=MODE_TYPE)
-    __ea_teletexOrganizationalUnitNames_val_Type__item_ = STR_TELE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'TeletexOrganizationalUnitName')))
-    _ea_teletexOrganizationalUnitNames_val_Type._cont = __ea_teletexOrganizationalUnitNames_val_Type__item_
-    _ea_teletexOrganizationalUnitNames_val_Type._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
-    ea_teletexOrganizationalUnitNames._val = dict([(u'Type', _ea_teletexOrganizationalUnitNames_val_Type), (u'id', 5)])
-    
-    #-----< TeletexOrganizationalUnitName >-----#
-    TeletexOrganizationalUnitName = STR_TELE(name=u'TeletexOrganizationalUnitName', mode=MODE_TYPE)
-    TeletexOrganizationalUnitName._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
-    
-    #-----< ea-pDSName >-----#
-    ea_pDSName = CLASS(name=u'ea-pDSName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _ea_pDSName_val_Type = STR_PRINT(name=u'Type', mode=MODE_TYPE)
-    _ea_pDSName_val_Type._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    ea_pDSName._val = dict([(u'Type', _ea_pDSName_val_Type), (u'id', 7)])
-    
-    #-----< ea-physicalDeliveryCountryName >-----#
-    ea_physicalDeliveryCountryName = CLASS(name=u'ea-physicalDeliveryCountryName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _ea_physicalDeliveryCountryName_val_Type = CHOICE(name=u'Type', mode=MODE_TYPE)
-    __ea_physicalDeliveryCountryName_val_Type_x121_dcc_code = STR_NUM(name=u'x121-dcc-code', mode=MODE_TYPE)
-    __ea_physicalDeliveryCountryName_val_Type_x121_dcc_code._const_sz = ASN1Set(rv=[3], rr=[], ev=None, er=[])
-    __ea_physicalDeliveryCountryName_val_Type_iso_3166_alpha2_code = STR_PRINT(name=u'iso-3166-alpha2-code', mode=MODE_TYPE)
-    __ea_physicalDeliveryCountryName_val_Type_iso_3166_alpha2_code._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
-    _ea_physicalDeliveryCountryName_val_Type._cont = ASN1Dict([
-        (u'x121-dcc-code', __ea_physicalDeliveryCountryName_val_Type_x121_dcc_code),
-        (u'iso-3166-alpha2-code', __ea_physicalDeliveryCountryName_val_Type_iso_3166_alpha2_code),
-        ])
-    _ea_physicalDeliveryCountryName_val_Type._ext = None
-    ea_physicalDeliveryCountryName._val = dict([(u'Type', _ea_physicalDeliveryCountryName_val_Type), (u'id', 8)])
-    
-    #-----< ea-postalCode >-----#
-    ea_postalCode = CLASS(name=u'ea-postalCode', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _ea_postalCode_val_Type = CHOICE(name=u'Type', mode=MODE_TYPE)
-    __ea_postalCode_val_Type_numeric_code = STR_NUM(name=u'numeric-code', mode=MODE_TYPE)
-    __ea_postalCode_val_Type_numeric_code._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    __ea_postalCode_val_Type_printable_code = STR_PRINT(name=u'printable-code', mode=MODE_TYPE)
-    __ea_postalCode_val_Type_printable_code._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    _ea_postalCode_val_Type._cont = ASN1Dict([
-        (u'numeric-code', __ea_postalCode_val_Type_numeric_code),
-        (u'printable-code', __ea_postalCode_val_Type_printable_code),
-        ])
-    _ea_postalCode_val_Type._ext = None
-    ea_postalCode._val = dict([(u'Type', _ea_postalCode_val_Type), (u'id', 9)])
-    
-    #-----< ea-physicalDeliveryOfficeName >-----#
-    ea_physicalDeliveryOfficeName = CLASS(name=u'ea-physicalDeliveryOfficeName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _ea_physicalDeliveryOfficeName_val_Type = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    ea_physicalDeliveryOfficeName._val = dict([(u'Type', _ea_physicalDeliveryOfficeName_val_Type), (u'id', 10)])
-    
-    #-----< ea-physicalDeliveryOfficeNumber >-----#
-    ea_physicalDeliveryOfficeNumber = CLASS(name=u'ea-physicalDeliveryOfficeNumber', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _ea_physicalDeliveryOfficeNumber_val_Type = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    ea_physicalDeliveryOfficeNumber._val = dict([(u'Type', _ea_physicalDeliveryOfficeNumber_val_Type), (u'id', 11)])
-    
-    #-----< ea-extensionORAddressComponents >-----#
-    ea_extensionORAddressComponents = CLASS(name=u'ea-extensionORAddressComponents', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _ea_extensionORAddressComponents_val_Type = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    ea_extensionORAddressComponents._val = dict([(u'Type', _ea_extensionORAddressComponents_val_Type), (u'id', 12)])
-    
-    #-----< ea-physicalDeliveryPersonalName >-----#
-    ea_physicalDeliveryPersonalName = CLASS(name=u'ea-physicalDeliveryPersonalName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _ea_physicalDeliveryPersonalName_val_Type = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    ea_physicalDeliveryPersonalName._val = dict([(u'Type', _ea_physicalDeliveryPersonalName_val_Type), (u'id', 13)])
-    
-    #-----< ea-physicalDeliveryOrganizationName >-----#
-    ea_physicalDeliveryOrganizationName = CLASS(name=u'ea-physicalDeliveryOrganizationName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _ea_physicalDeliveryOrganizationName_val_Type = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    ea_physicalDeliveryOrganizationName._val = dict([(u'Type', _ea_physicalDeliveryOrganizationName_val_Type), (u'id', 14)])
-    
-    #-----< ea-extensionPhysicalDeliveryAddressComponents >-----#
-    ea_extensionPhysicalDeliveryAddressComponents = CLASS(name=u'ea-extensionPhysicalDeliveryAddressComponents', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _ea_extensionPhysicalDeliveryAddressComponents_val_Type = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    ea_extensionPhysicalDeliveryAddressComponents._val = dict([(u'Type', _ea_extensionPhysicalDeliveryAddressComponents_val_Type), (u'id', 15)])
-    
-    #-----< ea-unformattedPostalAddress >-----#
-    ea_unformattedPostalAddress = CLASS(name=u'ea-unformattedPostalAddress', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _ea_unformattedPostalAddress_val_Type = SET(name=u'Type', mode=MODE_TYPE)
-    __ea_unformattedPostalAddress_val_Type_printable_address = SEQ_OF(name=u'printable-address', mode=MODE_TYPE, opt=True)
-    ___ea_unformattedPostalAddress_val_Type_printable_address__item_ = STR_PRINT(name='_item_', mode=MODE_TYPE)
-    ___ea_unformattedPostalAddress_val_Type_printable_address__item_._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=30)], ev=None, er=[])
-    __ea_unformattedPostalAddress_val_Type_printable_address._cont = ___ea_unformattedPostalAddress_val_Type_printable_address__item_
-    __ea_unformattedPostalAddress_val_Type_printable_address._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=6)], ev=None, er=[])
-    __ea_unformattedPostalAddress_val_Type_teletex_string = STR_TELE(name=u'teletex-string', mode=MODE_TYPE, opt=True)
-    __ea_unformattedPostalAddress_val_Type_teletex_string._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=180)], ev=None, er=[])
-    _ea_unformattedPostalAddress_val_Type._cont = ASN1Dict([
-        (u'printable-address', __ea_unformattedPostalAddress_val_Type_printable_address),
-        (u'teletex-string', __ea_unformattedPostalAddress_val_Type_teletex_string),
-        ])
-    _ea_unformattedPostalAddress_val_Type._ext = None
-    ea_unformattedPostalAddress._val = dict([(u'Type', _ea_unformattedPostalAddress_val_Type), (u'id', 16)])
-    
-    #-----< ea-streetAddress >-----#
-    ea_streetAddress = CLASS(name=u'ea-streetAddress', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _ea_streetAddress_val_Type = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    ea_streetAddress._val = dict([(u'Type', _ea_streetAddress_val_Type), (u'id', 17)])
-    
-    #-----< ea-postOfficeBoxAddress >-----#
-    ea_postOfficeBoxAddress = CLASS(name=u'ea-postOfficeBoxAddress', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _ea_postOfficeBoxAddress_val_Type = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    ea_postOfficeBoxAddress._val = dict([(u'Type', _ea_postOfficeBoxAddress_val_Type), (u'id', 18)])
-    
-    #-----< ea-posteRestanteAddress >-----#
-    ea_posteRestanteAddress = CLASS(name=u'ea-posteRestanteAddress', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _ea_posteRestanteAddress_val_Type = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    ea_posteRestanteAddress._val = dict([(u'Type', _ea_posteRestanteAddress_val_Type), (u'id', 19)])
-    
-    #-----< ea-uniquePostalName >-----#
-    ea_uniquePostalName = CLASS(name=u'ea-uniquePostalName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _ea_uniquePostalName_val_Type = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    ea_uniquePostalName._val = dict([(u'Type', _ea_uniquePostalName_val_Type), (u'id', 20)])
-    
-    #-----< ea-localPostalAttributes >-----#
-    ea_localPostalAttributes = CLASS(name=u'ea-localPostalAttributes', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _ea_localPostalAttributes_val_Type = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
-    ea_localPostalAttributes._val = dict([(u'Type', _ea_localPostalAttributes_val_Type), (u'id', 21)])
-    
-    #-----< PDSParameter >-----#
-    PDSParameter = SET(name=u'PDSParameter', mode=MODE_TYPE)
-    _PDSParameter_printable_string = STR_PRINT(name=u'printable-string', mode=MODE_TYPE, opt=True)
-    _PDSParameter_printable_string._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=30)], ev=None, er=[])
-    _PDSParameter_teletex_string = STR_TELE(name=u'teletex-string', mode=MODE_TYPE, opt=True)
-    _PDSParameter_teletex_string._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=30)], ev=None, er=[])
-    PDSParameter._cont = ASN1Dict([
-        (u'printable-string', _PDSParameter_printable_string),
-        (u'teletex-string', _PDSParameter_teletex_string),
-        ])
-    PDSParameter._ext = None
-    
-    #-----< ea-extendedNetworkAddress >-----#
-    ea_extendedNetworkAddress = CLASS(name=u'ea-extendedNetworkAddress', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _ea_extendedNetworkAddress_val_Type = CHOICE(name=u'Type', mode=MODE_TYPE)
-    __ea_extendedNetworkAddress_val_Type_e163_4_address = SEQ(name=u'e163-4-address', mode=MODE_TYPE)
-    ___ea_extendedNetworkAddress_val_Type_e163_4_address_number = STR_NUM(name=u'number', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___ea_extendedNetworkAddress_val_Type_e163_4_address_number._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=15)], ev=None, er=[])
-    ___ea_extendedNetworkAddress_val_Type_e163_4_address_sub_address = STR_NUM(name=u'sub-address', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    ___ea_extendedNetworkAddress_val_Type_e163_4_address_sub_address._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=40)], ev=None, er=[])
-    __ea_extendedNetworkAddress_val_Type_e163_4_address._cont = ASN1Dict([
-        (u'number', ___ea_extendedNetworkAddress_val_Type_e163_4_address_number),
-        (u'sub-address', ___ea_extendedNetworkAddress_val_Type_e163_4_address_sub_address),
-        ])
-    __ea_extendedNetworkAddress_val_Type_e163_4_address._ext = None
-    __ea_extendedNetworkAddress_val_Type_psap_address = SEQ(name=u'psap-address', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX-X400Address-2009', 'PresentationAddress')))
-    _ea_extendedNetworkAddress_val_Type._cont = ASN1Dict([
-        (u'e163-4-address', __ea_extendedNetworkAddress_val_Type_e163_4_address),
-        (u'psap-address', __ea_extendedNetworkAddress_val_Type_psap_address),
-        ])
-    _ea_extendedNetworkAddress_val_Type._ext = None
-    ea_extendedNetworkAddress._val = dict([(u'Type', _ea_extendedNetworkAddress_val_Type), (u'id', 22)])
-    
-    #-----< PresentationAddress >-----#
-    PresentationAddress = SEQ(name=u'PresentationAddress', mode=MODE_TYPE)
-    _PresentationAddress_pSelector = OCT_STR(name=u'pSelector', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
-    _PresentationAddress_sSelector = OCT_STR(name=u'sSelector', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
-    _PresentationAddress_tSelector = OCT_STR(name=u'tSelector', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
-    _PresentationAddress_nAddresses = SET_OF(name=u'nAddresses', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __PresentationAddress_nAddresses__item_ = OCT_STR(name='_item_', mode=MODE_TYPE)
-    _PresentationAddress_nAddresses._cont = __PresentationAddress_nAddresses__item_
-    _PresentationAddress_nAddresses._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
-    PresentationAddress._cont = ASN1Dict([
-        (u'pSelector', _PresentationAddress_pSelector),
-        (u'sSelector', _PresentationAddress_sSelector),
-        (u'tSelector', _PresentationAddress_tSelector),
-        (u'nAddresses', _PresentationAddress_nAddresses),
-        ])
-    PresentationAddress._ext = None
-    
-    #-----< ea-terminalType >-----#
-    ea_terminalType = CLASS(name=u'ea-terminalType', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _ea_terminalType_val_Type = INT(name=u'Type', mode=MODE_TYPE)
-    _ea_terminalType_val_Type._cont = ASN1Dict([(u'telex', 3), (u'teletex', 4), (u'g3-facsimile', 5), (u'g4-facsimile', 6), (u'ia5-terminal', 7), (u'videotex', 8)])
-    _ea_terminalType_val_Type._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=256)], ev=None, er=[])
-    ea_terminalType._val = dict([(u'Type', _ea_terminalType_val_Type), (u'id', 23)])
-    
-    #-----< ea-teletexDomainDefinedAttributes >-----#
-    ea_teletexDomainDefinedAttributes = CLASS(name=u'ea-teletexDomainDefinedAttributes', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
-    _ea_teletexDomainDefinedAttributes_val_Type = SEQ_OF(name=u'Type', mode=MODE_TYPE)
-    __ea_teletexDomainDefinedAttributes_val_Type__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'TeletexDomainDefinedAttribute')))
-    _ea_teletexDomainDefinedAttributes_val_Type._cont = __ea_teletexDomainDefinedAttributes_val_Type__item_
-    _ea_teletexDomainDefinedAttributes_val_Type._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
-    ea_teletexDomainDefinedAttributes._val = dict([(u'Type', _ea_teletexDomainDefinedAttributes_val_Type), (u'id', 6)])
-    
-    #-----< TeletexDomainDefinedAttribute >-----#
-    TeletexDomainDefinedAttribute = SEQ(name=u'TeletexDomainDefinedAttribute', mode=MODE_TYPE)
-    _TeletexDomainDefinedAttribute_type = STR_TELE(name=u'type', mode=MODE_TYPE)
-    _TeletexDomainDefinedAttribute_type._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
-    _TeletexDomainDefinedAttribute_value = STR_TELE(name=u'value', mode=MODE_TYPE)
-    _TeletexDomainDefinedAttribute_value._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
-    TeletexDomainDefinedAttribute._cont = ASN1Dict([
-        (u'type', _TeletexDomainDefinedAttribute_type),
-        (u'value', _TeletexDomainDefinedAttribute_value),
-        ])
-    TeletexDomainDefinedAttribute._ext = None
-    
-    #-----< ub-match >-----#
-    ub_match = INT(name=u'ub-match', mode=MODE_VALUE)
-    ub_match._val = 128
-    
-    #-----< ub-common-name-length >-----#
-    ub_common_name_length = INT(name=u'ub-common-name-length', mode=MODE_VALUE)
-    ub_common_name_length._val = 64
-    
-    #-----< ub-country-name-alpha-length >-----#
-    ub_country_name_alpha_length = INT(name=u'ub-country-name-alpha-length', mode=MODE_VALUE)
-    ub_country_name_alpha_length._val = 2
-    
-    #-----< ub-country-name-numeric-length >-----#
-    ub_country_name_numeric_length = INT(name=u'ub-country-name-numeric-length', mode=MODE_VALUE)
-    ub_country_name_numeric_length._val = 3
-    
-    #-----< ub-domain-defined-attributes >-----#
-    ub_domain_defined_attributes = INT(name=u'ub-domain-defined-attributes', mode=MODE_VALUE)
-    ub_domain_defined_attributes._val = 4
-    
-    #-----< ub-domain-defined-attribute-type-length >-----#
-    ub_domain_defined_attribute_type_length = INT(name=u'ub-domain-defined-attribute-type-length', mode=MODE_VALUE)
-    ub_domain_defined_attribute_type_length._val = 8
-    
-    #-----< ub-domain-defined-attribute-value-length >-----#
-    ub_domain_defined_attribute_value_length = INT(name=u'ub-domain-defined-attribute-value-length', mode=MODE_VALUE)
-    ub_domain_defined_attribute_value_length._val = 128
-    
-    #-----< ub-domain-name-length >-----#
-    ub_domain_name_length = INT(name=u'ub-domain-name-length', mode=MODE_VALUE)
-    ub_domain_name_length._val = 16
-    
-    #-----< ub-extension-attributes >-----#
-    ub_extension_attributes = INT(name=u'ub-extension-attributes', mode=MODE_VALUE)
-    ub_extension_attributes._val = 256
-    
-    #-----< ub-e163-4-number-length >-----#
-    ub_e163_4_number_length = INT(name=u'ub-e163-4-number-length', mode=MODE_VALUE)
-    ub_e163_4_number_length._val = 15
-    
-    #-----< ub-e163-4-sub-address-length >-----#
-    ub_e163_4_sub_address_length = INT(name=u'ub-e163-4-sub-address-length', mode=MODE_VALUE)
-    ub_e163_4_sub_address_length._val = 40
-    
-    #-----< ub-generation-qualifier-length >-----#
-    ub_generation_qualifier_length = INT(name=u'ub-generation-qualifier-length', mode=MODE_VALUE)
-    ub_generation_qualifier_length._val = 3
-    
-    #-----< ub-given-name-length >-----#
-    ub_given_name_length = INT(name=u'ub-given-name-length', mode=MODE_VALUE)
-    ub_given_name_length._val = 16
-    
-    #-----< ub-initials-length >-----#
-    ub_initials_length = INT(name=u'ub-initials-length', mode=MODE_VALUE)
-    ub_initials_length._val = 5
-    
-    #-----< ub-integer-options >-----#
-    ub_integer_options = INT(name=u'ub-integer-options', mode=MODE_VALUE)
-    ub_integer_options._val = 256
-    
-    #-----< ub-numeric-user-id-length >-----#
-    ub_numeric_user_id_length = INT(name=u'ub-numeric-user-id-length', mode=MODE_VALUE)
-    ub_numeric_user_id_length._val = 32
-    
-    #-----< ub-organization-name-length >-----#
-    ub_organization_name_length = INT(name=u'ub-organization-name-length', mode=MODE_VALUE)
-    ub_organization_name_length._val = 64
-    
-    #-----< ub-organizational-unit-name-length >-----#
-    ub_organizational_unit_name_length = INT(name=u'ub-organizational-unit-name-length', mode=MODE_VALUE)
-    ub_organizational_unit_name_length._val = 32
-    
-    #-----< ub-organizational-units >-----#
-    ub_organizational_units = INT(name=u'ub-organizational-units', mode=MODE_VALUE)
-    ub_organizational_units._val = 4
-    
-    #-----< ub-pds-name-length >-----#
-    ub_pds_name_length = INT(name=u'ub-pds-name-length', mode=MODE_VALUE)
-    ub_pds_name_length._val = 16
-    
-    #-----< ub-pds-parameter-length >-----#
-    ub_pds_parameter_length = INT(name=u'ub-pds-parameter-length', mode=MODE_VALUE)
-    ub_pds_parameter_length._val = 30
-    
-    #-----< ub-pds-physical-address-lines >-----#
-    ub_pds_physical_address_lines = INT(name=u'ub-pds-physical-address-lines', mode=MODE_VALUE)
-    ub_pds_physical_address_lines._val = 6
-    
-    #-----< ub-postal-code-length >-----#
-    ub_postal_code_length = INT(name=u'ub-postal-code-length', mode=MODE_VALUE)
-    ub_postal_code_length._val = 16
-    
-    #-----< ub-surname-length >-----#
-    ub_surname_length = INT(name=u'ub-surname-length', mode=MODE_VALUE)
-    ub_surname_length._val = 40
-    
-    #-----< ub-terminal-id-length >-----#
-    ub_terminal_id_length = INT(name=u'ub-terminal-id-length', mode=MODE_VALUE)
-    ub_terminal_id_length._val = 24
-    
-    #-----< ub-unformatted-address-length >-----#
-    ub_unformatted_address_length = INT(name=u'ub-unformatted-address-length', mode=MODE_VALUE)
-    ub_unformatted_address_length._val = 180
-    
-    #-----< ub-x121-address-length >-----#
-    ub_x121_address_length = INT(name=u'ub-x121-address-length', mode=MODE_VALUE)
-    ub_x121_address_length._val = 16
-    
-    _all_ = [
-        _ORAddress_built_in_standard_attributes,
-        _ORAddress_built_in_domain_defined_attributes,
-        _ORAddress_extension_attributes,
-        ORAddress,
-        _BuiltInStandardAttributes_country_name,
-        _BuiltInStandardAttributes_administration_domain_name,
-        _BuiltInStandardAttributes_network_address,
-        _BuiltInStandardAttributes_terminal_identifier,
-        _BuiltInStandardAttributes_private_domain_name,
-        _BuiltInStandardAttributes_organization_name,
-        _BuiltInStandardAttributes_numeric_user_identifier,
-        _BuiltInStandardAttributes_personal_name,
-        _BuiltInStandardAttributes_organizational_unit_names,
-        BuiltInStandardAttributes,
-        _CountryName_x121_dcc_code,
-        _CountryName_iso_3166_alpha2_code,
-        CountryName,
-        _AdministrationDomainName_numeric,
-        _AdministrationDomainName_printable,
-        AdministrationDomainName,
-        NetworkAddress,
-        X121Address,
-        TerminalIdentifier,
-        _PrivateDomainName_numeric,
-        _PrivateDomainName_printable,
-        PrivateDomainName,
-        OrganizationName,
-        NumericUserIdentifier,
-        _PersonalName_surname,
-        _PersonalName_given_name,
-        _PersonalName_initials,
-        _PersonalName_generation_qualifier,
-        PersonalName,
-        _OrganizationalUnitNames__item_,
-        OrganizationalUnitNames,
-        OrganizationalUnitName,
-        _BuiltInDomainDefinedAttributes__item_,
-        BuiltInDomainDefinedAttributes,
-        _BuiltInDomainDefinedAttribute_type,
-        _BuiltInDomainDefinedAttribute_value,
-        BuiltInDomainDefinedAttribute,
-        _ExtensionAttributes__item_,
-        ExtensionAttributes,
-        _EXTENSION_ATTRIBUTE_id,
-        _EXTENSION_ATTRIBUTE_Type,
-        EXTENSION_ATTRIBUTE,
-        __ExtensionAttribute_extension_attribute_type_tab,
-        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_0,
-        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_1,
-        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_2,
-        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_surname,
-        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_given_name,
-        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_initials,
-        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_generation_qualifier,
-        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_3,
-        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_4__item_,
-        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_4,
-        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_5,
-        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_6_x121_dcc_code,
-        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_6_iso_3166_alpha2_code,
-        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_6,
-        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_7_numeric_code,
-        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_7_printable_code,
-        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_7,
-        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_8,
-        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_9,
-        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_10,
-        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_11,
-        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_12,
-        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_13,
-        _____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_printable_address__item_,
-        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_printable_address,
-        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_teletex_string,
-        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_14,
-        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_15,
-        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_16,
-        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_17,
-        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_18,
-        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_19,
-        _____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address_number,
-        _____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address_sub_address,
-        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address,
-        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_psap_address,
-        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_20,
-        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_21,
-        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_22__item_,
-        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_22,
-        _ExtensionAttribute_extension_attribute_type,
-        _ExtensionAttribute_extension_attribute_value,
-        ExtensionAttribute,
-        SupportedExtensionAttributes,
-        _SupportedExtensionAttributes_val_Type_0,
-        _SupportedExtensionAttributes_val_Type_1,
-        _SupportedExtensionAttributes_val_Type_2,
-        __SupportedExtensionAttributes_val_Type_3_surname,
-        __SupportedExtensionAttributes_val_Type_3_given_name,
-        __SupportedExtensionAttributes_val_Type_3_initials,
-        __SupportedExtensionAttributes_val_Type_3_generation_qualifier,
-        _SupportedExtensionAttributes_val_Type_3,
-        __SupportedExtensionAttributes_val_Type_4__item_,
-        _SupportedExtensionAttributes_val_Type_4,
-        _SupportedExtensionAttributes_val_Type_5,
-        __SupportedExtensionAttributes_val_Type_6_x121_dcc_code,
-        __SupportedExtensionAttributes_val_Type_6_iso_3166_alpha2_code,
-        _SupportedExtensionAttributes_val_Type_6,
-        __SupportedExtensionAttributes_val_Type_7_numeric_code,
-        __SupportedExtensionAttributes_val_Type_7_printable_code,
-        _SupportedExtensionAttributes_val_Type_7,
-        _SupportedExtensionAttributes_val_Type_8,
-        _SupportedExtensionAttributes_val_Type_9,
-        _SupportedExtensionAttributes_val_Type_10,
-        _SupportedExtensionAttributes_val_Type_11,
-        _SupportedExtensionAttributes_val_Type_12,
-        _SupportedExtensionAttributes_val_Type_13,
-        ___SupportedExtensionAttributes_val_Type_14_printable_address__item_,
-        __SupportedExtensionAttributes_val_Type_14_printable_address,
-        __SupportedExtensionAttributes_val_Type_14_teletex_string,
-        _SupportedExtensionAttributes_val_Type_14,
-        _SupportedExtensionAttributes_val_Type_15,
-        _SupportedExtensionAttributes_val_Type_16,
-        _SupportedExtensionAttributes_val_Type_17,
-        _SupportedExtensionAttributes_val_Type_18,
-        _SupportedExtensionAttributes_val_Type_19,
-        ___SupportedExtensionAttributes_val_Type_20_e163_4_address_number,
-        ___SupportedExtensionAttributes_val_Type_20_e163_4_address_sub_address,
-        __SupportedExtensionAttributes_val_Type_20_e163_4_address,
-        __SupportedExtensionAttributes_val_Type_20_psap_address,
-        _SupportedExtensionAttributes_val_Type_20,
-        _SupportedExtensionAttributes_val_Type_21,
-        __SupportedExtensionAttributes_val_Type_22__item_,
-        _SupportedExtensionAttributes_val_Type_22,
-        ea_commonName,
-        _ea_commonName_val_Type,
-        ea_teletexCommonName,
-        _ea_teletexCommonName_val_Type,
-        ea_teletexOrganizationName,
-        _ea_teletexOrganizationName_val_Type,
-        ea_teletexPersonalName,
-        __ea_teletexPersonalName_val_Type_surname,
-        __ea_teletexPersonalName_val_Type_given_name,
-        __ea_teletexPersonalName_val_Type_initials,
-        __ea_teletexPersonalName_val_Type_generation_qualifier,
-        _ea_teletexPersonalName_val_Type,
-        ea_teletexOrganizationalUnitNames,
-        __ea_teletexOrganizationalUnitNames_val_Type__item_,
-        _ea_teletexOrganizationalUnitNames_val_Type,
-        TeletexOrganizationalUnitName,
-        ea_pDSName,
-        _ea_pDSName_val_Type,
-        ea_physicalDeliveryCountryName,
-        __ea_physicalDeliveryCountryName_val_Type_x121_dcc_code,
-        __ea_physicalDeliveryCountryName_val_Type_iso_3166_alpha2_code,
-        _ea_physicalDeliveryCountryName_val_Type,
-        ea_postalCode,
-        __ea_postalCode_val_Type_numeric_code,
-        __ea_postalCode_val_Type_printable_code,
-        _ea_postalCode_val_Type,
-        ea_physicalDeliveryOfficeName,
-        _ea_physicalDeliveryOfficeName_val_Type,
-        ea_physicalDeliveryOfficeNumber,
-        _ea_physicalDeliveryOfficeNumber_val_Type,
-        ea_extensionORAddressComponents,
-        _ea_extensionORAddressComponents_val_Type,
-        ea_physicalDeliveryPersonalName,
-        _ea_physicalDeliveryPersonalName_val_Type,
-        ea_physicalDeliveryOrganizationName,
-        _ea_physicalDeliveryOrganizationName_val_Type,
-        ea_extensionPhysicalDeliveryAddressComponents,
-        _ea_extensionPhysicalDeliveryAddressComponents_val_Type,
-        ea_unformattedPostalAddress,
-        ___ea_unformattedPostalAddress_val_Type_printable_address__item_,
-        __ea_unformattedPostalAddress_val_Type_printable_address,
-        __ea_unformattedPostalAddress_val_Type_teletex_string,
-        _ea_unformattedPostalAddress_val_Type,
-        ea_streetAddress,
-        _ea_streetAddress_val_Type,
-        ea_postOfficeBoxAddress,
-        _ea_postOfficeBoxAddress_val_Type,
-        ea_posteRestanteAddress,
-        _ea_posteRestanteAddress_val_Type,
-        ea_uniquePostalName,
-        _ea_uniquePostalName_val_Type,
-        ea_localPostalAttributes,
-        _ea_localPostalAttributes_val_Type,
-        _PDSParameter_printable_string,
-        _PDSParameter_teletex_string,
-        PDSParameter,
-        ea_extendedNetworkAddress,
-        ___ea_extendedNetworkAddress_val_Type_e163_4_address_number,
-        ___ea_extendedNetworkAddress_val_Type_e163_4_address_sub_address,
-        __ea_extendedNetworkAddress_val_Type_e163_4_address,
-        __ea_extendedNetworkAddress_val_Type_psap_address,
-        _ea_extendedNetworkAddress_val_Type,
-        _PresentationAddress_pSelector,
-        _PresentationAddress_sSelector,
-        _PresentationAddress_tSelector,
-        __PresentationAddress_nAddresses__item_,
-        _PresentationAddress_nAddresses,
-        PresentationAddress,
-        ea_terminalType,
-        _ea_terminalType_val_Type,
-        ea_teletexDomainDefinedAttributes,
-        __ea_teletexDomainDefinedAttributes_val_Type__item_,
-        _ea_teletexDomainDefinedAttributes_val_Type,
-        _TeletexDomainDefinedAttribute_type,
-        _TeletexDomainDefinedAttribute_value,
-        TeletexDomainDefinedAttribute,
-        ub_match,
-        ub_common_name_length,
-        ub_country_name_alpha_length,
-        ub_country_name_numeric_length,
-        ub_domain_defined_attributes,
-        ub_domain_defined_attribute_type_length,
-        ub_domain_defined_attribute_value_length,
-        ub_domain_name_length,
-        ub_extension_attributes,
-        ub_e163_4_number_length,
-        ub_e163_4_sub_address_length,
-        ub_generation_qualifier_length,
-        ub_given_name_length,
-        ub_initials_length,
-        ub_integer_options,
-        ub_numeric_user_id_length,
-        ub_organization_name_length,
-        ub_organizational_unit_name_length,
-        ub_organizational_units,
-        ub_pds_name_length,
-        ub_pds_parameter_length,
-        ub_pds_physical_address_lines,
-        ub_postal_code_length,
-        ub_surname_length,
-        ub_terminal_id_length,
-        ub_unformatted_address_length,
-        ub_x121_address_length,
-    ]
-
-class PKIX1_PSS_OAEP_Algorithms_2009:
-
-    _name_  = u'PKIX1-PSS-OAEP-Algorithms-2009'
-    _oid_   = [1, 3, 6, 1, 5, 5, 7, 0, 54]
-    
-    _obj_ = [
-        u'PublicKeys',
-        u'SignatureAlgs',
-        u'KeyTransportAlgs',
-        u'HashAlgs',
-        u'SMimeCaps',
-        u'pk-rsaSSA-PSS',
-        u'sa-rsaSSA-PSS',
-        u'sa-sha224WithRSAEncryption',
-        u'sha224WithRSAEncryption',
-        u'sa-sha256WithRSAEncryption',
-        u'sha256WithRSAEncryption',
-        u'sa-sha384WithRSAEncryption',
-        u'sha384WithRSAEncryption',
-        u'sa-sha512WithRSAEncryption',
-        u'sha512WithRSAEncryption',
-        u'pk-rsaES-OAEP',
-        u'kta-rsaES-OAEP',
-        u'pkcs-1',
-        u'id-RSAES-OAEP',
-        u'id-mgf1',
-        u'id-pSpecified',
-        u'id-RSASSA-PSS',
-        u'id-sha224',
-        u'mda-sha224',
-        u'id-sha256',
-        u'mda-sha256',
-        u'id-sha384',
-        u'mda-sha384',
-        u'id-sha512',
-        u'mda-sha512',
-        u'EncodingParameters',
-        u'nullOctetString',
-        u'nullParameters',
-        u'HashAlgorithm',
-        u'HashAlgorithms',
-        u'sha1Identifier',
-        u'MaskGenAlgorithm',
-        u'mgf1SHA1',
-        u'PKCS1MGFAlgorithms',
-        u'PSourceAlgorithm',
-        u'PSS-SourceAlgorithms',
-        u'pSpecifiedEmpty',
-        u'RSASSA-PSS-params',
-        u'RSAES-OAEP-params',
-        ]
-    _type_ = [
-        u'EncodingParameters',
-        u'HashAlgorithm',
-        u'MaskGenAlgorithm',
-        u'PSourceAlgorithm',
-        u'RSASSA-PSS-params',
-        u'RSAES-OAEP-params',
-        ]
-    _set_ = [
-        u'PublicKeys',
-        u'SignatureAlgs',
-        u'KeyTransportAlgs',
-        u'HashAlgs',
-        u'SMimeCaps',
-        u'HashAlgorithms',
-        u'PKCS1MGFAlgorithms',
-        u'PSS-SourceAlgorithms',
-        ]
-    _val_ = [
-        u'pk-rsaSSA-PSS',
-        u'sa-rsaSSA-PSS',
-        u'sa-sha224WithRSAEncryption',
-        u'sha224WithRSAEncryption',
-        u'sa-sha256WithRSAEncryption',
-        u'sha256WithRSAEncryption',
-        u'sa-sha384WithRSAEncryption',
-        u'sha384WithRSAEncryption',
-        u'sa-sha512WithRSAEncryption',
-        u'sha512WithRSAEncryption',
-        u'pk-rsaES-OAEP',
-        u'kta-rsaES-OAEP',
-        u'pkcs-1',
-        u'id-RSAES-OAEP',
-        u'id-mgf1',
-        u'id-pSpecified',
-        u'id-RSASSA-PSS',
-        u'id-sha224',
-        u'mda-sha224',
-        u'id-sha256',
-        u'mda-sha256',
-        u'id-sha384',
-        u'mda-sha384',
-        u'id-sha512',
-        u'mda-sha512',
-        u'nullOctetString',
-        u'nullParameters',
-        u'sha1Identifier',
-        u'mgf1SHA1',
-        u'pSpecifiedEmpty',
-        ]
-    _class_ = [
-        u'PublicKeys',
-        u'SignatureAlgs',
-        u'KeyTransportAlgs',
-        u'HashAlgs',
-        u'SMimeCaps',
-        u'pk-rsaSSA-PSS',
-        u'sa-rsaSSA-PSS',
-        u'sa-sha224WithRSAEncryption',
-        u'sa-sha256WithRSAEncryption',
-        u'sa-sha384WithRSAEncryption',
-        u'sa-sha512WithRSAEncryption',
-        u'pk-rsaES-OAEP',
-        u'kta-rsaES-OAEP',
-        u'mda-sha224',
-        u'mda-sha256',
-        u'mda-sha384',
-        u'mda-sha512',
-        u'HashAlgorithms',
-        u'PKCS1MGFAlgorithms',
-        u'PSS-SourceAlgorithms',
-        ]
-    _param_ = [
-        ]
-    
-    #-----< PublicKeys >-----#
-    PublicKeys = CLASS(name=u'PublicKeys', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'PUBLIC-KEY')))
-    _PublicKeys_val_KeyValue_0 = SEQ(name=u'KeyValue', mode=MODE_TYPE, typeref=ASN1RefType(('PKIXAlgs-2009', 'RSAPublicKey')))
-    _PublicKeys_val_Params_0 = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSASSA-PSS-params')))
-    _PublicKeys_val_KeyValue_1 = SEQ(name=u'KeyValue', mode=MODE_TYPE, typeref=ASN1RefType(('PKIXAlgs-2009', 'RSAPublicKey')))
-    _PublicKeys_val_Params_1 = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSAES-OAEP-params')))
-    PublicKeys._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 10)), (u'KeyValue', _PublicKeys_val_KeyValue_0), (u'Params', _PublicKeys_val_Params_0), (u'paramPresence', u'optional'), (u'keyUsage', (99, 6))]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 7)), (u'KeyValue', _PublicKeys_val_KeyValue_1), (u'Params', _PublicKeys_val_Params_1), (u'paramPresence', u'optional'), (u'keyUsage', (3, 3))])], rr=[], ev=[], er=[])
-    
-    #-----< SignatureAlgs >-----#
-    SignatureAlgs = CLASS(name=u'SignatureAlgs', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'SIGNATURE-ALGORITHM')))
-    _SignatureAlgs_val_Params_0 = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSASSA-PSS-params')))
-    __SIGNATURE_ALGORITHM_HashSet_val_Params_0 = NULL(name=u'Params', mode=MODE_TYPE)
-    __SIGNATURE_ALGORITHM_HashSet_val_Params_1 = NULL(name=u'Params', mode=MODE_TYPE)
-    __SIGNATURE_ALGORITHM_HashSet_val_Params_2 = NULL(name=u'Params', mode=MODE_TYPE)
-    __SIGNATURE_ALGORITHM_HashSet_val_Params_3 = NULL(name=u'Params', mode=MODE_TYPE)
-    __SIGNATURE_ALGORITHM_HashSet_val_Params_4 = NULL(name=u'Params', mode=MODE_TYPE)
-    __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_0 = SEQ(name=u'KeyValue', mode=MODE_TYPE, typeref=ASN1RefType(('PKIXAlgs-2009', 'RSAPublicKey')))
-    __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_0 = NULL(name=u'Params', mode=MODE_TYPE)
-    __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_1 = SEQ(name=u'KeyValue', mode=MODE_TYPE, typeref=ASN1RefType(('PKIXAlgs-2009', 'RSAPublicKey')))
-    __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_1 = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSASSA-PSS-params')))
-    SignatureAlgs._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 10)), (u'Params', _SignatureAlgs_val_Params_0), (u'paramPresence', u'required'), (u'HashSet', ASN1Set(rv=[dict([(u'id', (1, 3, 14, 3, 2, 26)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_0), (u'paramPresence', u'preferredAbsent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 4)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_1), (u'paramPresence', u'preferredAbsent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 1)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_2), (u'paramPresence', u'preferredAbsent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 2)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_3), (u'paramPresence', u'preferredAbsent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 3)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_4), (u'paramPresence', u'preferredAbsent')])], rr=[], ev=None, er=[])), (u'PublicKeySet', ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 1)), (u'KeyValue', __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_0), (u'Params', __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_0), (u'paramPresence', u'absent'), (u'keyUsage', (123, 6))]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 10)), (u'KeyValue', __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_1), (u'Params', __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_1), (u'paramPresence', u'optional'), (u'keyUsage', (99, 6))])], rr=[], ev=None, er=[])), (u'smimeCaps', dict([(u'id', (1, 2, 840, 113549, 1, 1, 10))]))])], rr=[], ev=[], er=[])
-    
-    #-----< KeyTransportAlgs >-----#
-    KeyTransportAlgs = CLASS(name=u'KeyTransportAlgs', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'KEY-TRANSPORT')))
-    _KeyTransportAlgs_val_Params_0 = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSAES-OAEP-params')))
-    __KEY_TRANSPORT_PublicKeySet_val_KeyValue_0 = SEQ(name=u'KeyValue', mode=MODE_TYPE, typeref=ASN1RefType(('PKIXAlgs-2009', 'RSAPublicKey')))
-    __KEY_TRANSPORT_PublicKeySet_val_Params_0 = NULL(name=u'Params', mode=MODE_TYPE)
-    __KEY_TRANSPORT_PublicKeySet_val_KeyValue_1 = SEQ(name=u'KeyValue', mode=MODE_TYPE, typeref=ASN1RefType(('PKIXAlgs-2009', 'RSAPublicKey')))
-    __KEY_TRANSPORT_PublicKeySet_val_Params_1 = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSAES-OAEP-params')))
-    __KEY_TRANSPORT_smimeCaps_val_Type = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSAES-OAEP-params')))
-    KeyTransportAlgs._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 7)), (u'Params', _KeyTransportAlgs_val_Params_0), (u'paramPresence', u'required'), (u'PublicKeySet', ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 1)), (u'KeyValue', __KEY_TRANSPORT_PublicKeySet_val_KeyValue_0), (u'Params', __KEY_TRANSPORT_PublicKeySet_val_Params_0), (u'paramPresence', u'absent'), (u'keyUsage', (123, 6))]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 7)), (u'KeyValue', __KEY_TRANSPORT_PublicKeySet_val_KeyValue_1), (u'Params', __KEY_TRANSPORT_PublicKeySet_val_Params_1), (u'paramPresence', u'optional'), (u'keyUsage', (3, 3))])], rr=[], ev=None, er=[])), (u'smimeCaps', dict([(u'Type', __KEY_TRANSPORT_smimeCaps_val_Type), (u'id', (1, 2, 840, 113549, 1, 1, 7))]))])], rr=[], ev=[], er=[])
-    
-    #-----< HashAlgs >-----#
-    HashAlgs = CLASS(name=u'HashAlgs', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM')))
-    _HashAlgs_val_Params_0 = NULL(name=u'Params', mode=MODE_TYPE)
-    _HashAlgs_val_Params_1 = NULL(name=u'Params', mode=MODE_TYPE)
-    _HashAlgs_val_Params_2 = NULL(name=u'Params', mode=MODE_TYPE)
-    _HashAlgs_val_Params_3 = NULL(name=u'Params', mode=MODE_TYPE)
-    HashAlgs._val = ASN1Set(rv=[dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 4)), (u'Params', _HashAlgs_val_Params_0), (u'paramPresence', u'preferredAbsent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 1)), (u'Params', _HashAlgs_val_Params_1), (u'paramPresence', u'preferredAbsent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 2)), (u'Params', _HashAlgs_val_Params_2), (u'paramPresence', u'preferredAbsent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 3)), (u'Params', _HashAlgs_val_Params_3), (u'paramPresence', u'preferredAbsent')])], rr=[], ev=[], er=[])
-    
-    #-----< SMimeCaps >-----#
-    SMimeCaps = CLASS(name=u'SMimeCaps', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'SMIME-CAPS')))
-    _SMimeCaps_val_Type_1 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSAES-OAEP-params')))
-    SMimeCaps._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 10))]), dict([(u'Type', _SMimeCaps_val_Type_1), (u'id', (1, 2, 840, 113549, 1, 1, 7))])], rr=[], ev=[], er=[])
-    
-    #-----< pk-rsaSSA-PSS >-----#
-    pk_rsaSSA_PSS = CLASS(name=u'pk-rsaSSA-PSS', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'PUBLIC-KEY')))
-    _pk_rsaSSA_PSS_val_KeyValue = SEQ(name=u'KeyValue', mode=MODE_TYPE, typeref=ASN1RefType(('PKIXAlgs-2009', 'RSAPublicKey')))
-    _pk_rsaSSA_PSS_val_Params = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSASSA-PSS-params')))
-    pk_rsaSSA_PSS._val = dict([(u'id', (1, 2, 840, 113549, 1, 1, 10)), (u'KeyValue', _pk_rsaSSA_PSS_val_KeyValue), (u'Params', _pk_rsaSSA_PSS_val_Params), (u'paramPresence', u'optional'), (u'keyUsage', (99, 6))])
-    
-    #-----< sa-rsaSSA-PSS >-----#
-    sa_rsaSSA_PSS = CLASS(name=u'sa-rsaSSA-PSS', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'SIGNATURE-ALGORITHM')))
-    _sa_rsaSSA_PSS_val_Params = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSASSA-PSS-params')))
-    sa_rsaSSA_PSS._val = dict([(u'id', (1, 2, 840, 113549, 1, 1, 10)), (u'Params', _sa_rsaSSA_PSS_val_Params), (u'paramPresence', u'required'), (u'HashSet', ASN1Set(rv=[dict([(u'id', (1, 3, 14, 3, 2, 26)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_0), (u'paramPresence', u'preferredAbsent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 4)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_1), (u'paramPresence', u'preferredAbsent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 1)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_2), (u'paramPresence', u'preferredAbsent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 2)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_3), (u'paramPresence', u'preferredAbsent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 3)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_4), (u'paramPresence', u'preferredAbsent')])], rr=[], ev=None, er=[])), (u'PublicKeySet', ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 1)), (u'KeyValue', __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_0), (u'Params', __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_0), (u'paramPresence', u'absent'), (u'keyUsage', (123, 6))]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 10)), (u'KeyValue', __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_1), (u'Params', __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_1), (u'paramPresence', u'optional'), (u'keyUsage', (99, 6))])], rr=[], ev=None, er=[])), (u'smimeCaps', dict([(u'id', (1, 2, 840, 113549, 1, 1, 10))]))])
-    
-    #-----< sa-sha224WithRSAEncryption >-----#
-    sa_sha224WithRSAEncryption = CLASS(name=u'sa-sha224WithRSAEncryption', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'SIGNATURE-ALGORITHM')))
-    _sa_sha224WithRSAEncryption_val_Params = NULL(name=u'Params', mode=MODE_TYPE)
-    sa_sha224WithRSAEncryption._val = dict([(u'id', (1, 2, 840, 113549, 1, 1, 14)), (u'Params', _sa_sha224WithRSAEncryption_val_Params), (u'paramPresence', u'required'), (u'HashSet', ASN1Set(rv=[dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 4)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_0), (u'paramPresence', u'preferredAbsent')])], rr=[], ev=None, er=[])), (u'PublicKeySet', ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 1)), (u'KeyValue', __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_0), (u'Params', __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_0), (u'paramPresence', u'absent'), (u'keyUsage', (123, 6))])], rr=[], ev=None, er=[])), (u'smimeCaps', dict([(u'id', (1, 2, 840, 113549, 1, 1, 14))]))])
-    
-    #-----< sha224WithRSAEncryption >-----#
-    sha224WithRSAEncryption = OID(name=u'sha224WithRSAEncryption', mode=MODE_VALUE)
-    sha224WithRSAEncryption._val = (1, 2, 840, 113549, 1, 1, 14)
-    
-    #-----< sa-sha256WithRSAEncryption >-----#
-    sa_sha256WithRSAEncryption = CLASS(name=u'sa-sha256WithRSAEncryption', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'SIGNATURE-ALGORITHM')))
-    _sa_sha256WithRSAEncryption_val_Params = NULL(name=u'Params', mode=MODE_TYPE)
-    sa_sha256WithRSAEncryption._val = dict([(u'id', (1, 2, 840, 113549, 1, 1, 11)), (u'Params', _sa_sha256WithRSAEncryption_val_Params), (u'paramPresence', u'required'), (u'HashSet', ASN1Set(rv=[dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 1)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_0), (u'paramPresence', u'preferredAbsent')])], rr=[], ev=None, er=[])), (u'PublicKeySet', ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 1)), (u'KeyValue', __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_0), (u'Params', __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_0), (u'paramPresence', u'absent'), (u'keyUsage', (123, 6))])], rr=[], ev=None, er=[])), (u'smimeCaps', dict([(u'id', (1, 2, 840, 113549, 1, 1, 11))]))])
-    
-    #-----< sha256WithRSAEncryption >-----#
-    sha256WithRSAEncryption = OID(name=u'sha256WithRSAEncryption', mode=MODE_VALUE)
-    sha256WithRSAEncryption._val = (1, 2, 840, 113549, 1, 1, 11)
-    
-    #-----< sa-sha384WithRSAEncryption >-----#
-    sa_sha384WithRSAEncryption = CLASS(name=u'sa-sha384WithRSAEncryption', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'SIGNATURE-ALGORITHM')))
-    _sa_sha384WithRSAEncryption_val_Params = NULL(name=u'Params', mode=MODE_TYPE)
-    sa_sha384WithRSAEncryption._val = dict([(u'id', (1, 2, 840, 113549, 1, 1, 12)), (u'Params', _sa_sha384WithRSAEncryption_val_Params), (u'paramPresence', u'required'), (u'HashSet', ASN1Set(rv=[dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 2)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_0), (u'paramPresence', u'preferredAbsent')])], rr=[], ev=None, er=[])), (u'PublicKeySet', ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 1)), (u'KeyValue', __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_0), (u'Params', __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_0), (u'paramPresence', u'absent'), (u'keyUsage', (123, 6))])], rr=[], ev=None, er=[])), (u'smimeCaps', dict([(u'id', (1, 2, 840, 113549, 1, 1, 12))]))])
-    
-    #-----< sha384WithRSAEncryption >-----#
-    sha384WithRSAEncryption = OID(name=u'sha384WithRSAEncryption', mode=MODE_VALUE)
-    sha384WithRSAEncryption._val = (1, 2, 840, 113549, 1, 1, 12)
-    
-    #-----< sa-sha512WithRSAEncryption >-----#
-    sa_sha512WithRSAEncryption = CLASS(name=u'sa-sha512WithRSAEncryption', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'SIGNATURE-ALGORITHM')))
-    _sa_sha512WithRSAEncryption_val_Params = NULL(name=u'Params', mode=MODE_TYPE)
-    sa_sha512WithRSAEncryption._val = dict([(u'id', (1, 2, 840, 113549, 1, 1, 13)), (u'Params', _sa_sha512WithRSAEncryption_val_Params), (u'paramPresence', u'required'), (u'HashSet', ASN1Set(rv=[dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 3)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_0), (u'paramPresence', u'preferredAbsent')])], rr=[], ev=None, er=[])), (u'PublicKeySet', ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 1)), (u'KeyValue', __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_0), (u'Params', __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_0), (u'paramPresence', u'absent'), (u'keyUsage', (123, 6))])], rr=[], ev=None, er=[])), (u'smimeCaps', dict([(u'id', (1, 2, 840, 113549, 1, 1, 13))]))])
-    
-    #-----< sha512WithRSAEncryption >-----#
-    sha512WithRSAEncryption = OID(name=u'sha512WithRSAEncryption', mode=MODE_VALUE)
-    sha512WithRSAEncryption._val = (1, 2, 840, 113549, 1, 1, 13)
-    
-    #-----< pk-rsaES-OAEP >-----#
-    pk_rsaES_OAEP = CLASS(name=u'pk-rsaES-OAEP', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'PUBLIC-KEY')))
-    _pk_rsaES_OAEP_val_KeyValue = SEQ(name=u'KeyValue', mode=MODE_TYPE, typeref=ASN1RefType(('PKIXAlgs-2009', 'RSAPublicKey')))
-    _pk_rsaES_OAEP_val_Params = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSAES-OAEP-params')))
-    pk_rsaES_OAEP._val = dict([(u'id', (1, 2, 840, 113549, 1, 1, 7)), (u'KeyValue', _pk_rsaES_OAEP_val_KeyValue), (u'Params', _pk_rsaES_OAEP_val_Params), (u'paramPresence', u'optional'), (u'keyUsage', (3, 3))])
-    
-    #-----< kta-rsaES-OAEP >-----#
-    kta_rsaES_OAEP = CLASS(name=u'kta-rsaES-OAEP', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'KEY-TRANSPORT')))
-    _kta_rsaES_OAEP_val_Params = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSAES-OAEP-params')))
-    kta_rsaES_OAEP._val = dict([(u'id', (1, 2, 840, 113549, 1, 1, 7)), (u'Params', _kta_rsaES_OAEP_val_Params), (u'paramPresence', u'required'), (u'PublicKeySet', ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 1)), (u'KeyValue', __KEY_TRANSPORT_PublicKeySet_val_KeyValue_0), (u'Params', __KEY_TRANSPORT_PublicKeySet_val_Params_0), (u'paramPresence', u'absent'), (u'keyUsage', (123, 6))]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 7)), (u'KeyValue', __KEY_TRANSPORT_PublicKeySet_val_KeyValue_1), (u'Params', __KEY_TRANSPORT_PublicKeySet_val_Params_1), (u'paramPresence', u'optional'), (u'keyUsage', (3, 3))])], rr=[], ev=None, er=[])), (u'smimeCaps', dict([(u'Type', __KEY_TRANSPORT_smimeCaps_val_Type), (u'id', (1, 2, 840, 113549, 1, 1, 7))]))])
-    
-    #-----< pkcs-1 >-----#
-    pkcs_1 = OID(name=u'pkcs-1', mode=MODE_VALUE)
-    pkcs_1._val = (1, 2, 840, 113549, 1, 1)
-    
-    #-----< id-RSAES-OAEP >-----#
-    id_RSAES_OAEP = OID(name=u'id-RSAES-OAEP', mode=MODE_VALUE)
-    id_RSAES_OAEP._val = (1, 2, 840, 113549, 1, 1, 7)
-    
-    #-----< id-mgf1 >-----#
-    id_mgf1 = OID(name=u'id-mgf1', mode=MODE_VALUE)
-    id_mgf1._val = (1, 2, 840, 113549, 1, 1, 8)
-    
-    #-----< id-pSpecified >-----#
-    id_pSpecified = OID(name=u'id-pSpecified', mode=MODE_VALUE)
-    id_pSpecified._val = (1, 2, 840, 113549, 1, 1, 9)
-    
-    #-----< id-RSASSA-PSS >-----#
-    id_RSASSA_PSS = OID(name=u'id-RSASSA-PSS', mode=MODE_VALUE)
-    id_RSASSA_PSS._val = (1, 2, 840, 113549, 1, 1, 10)
-    
-    #-----< id-sha224 >-----#
-    id_sha224 = OID(name=u'id-sha224', mode=MODE_VALUE)
-    id_sha224._val = (2, 16, 840, 1, 101, 3, 4, 2, 4)
-    
-    #-----< mda-sha224 >-----#
-    mda_sha224 = CLASS(name=u'mda-sha224', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM')))
-    _mda_sha224_val_Params = NULL(name=u'Params', mode=MODE_TYPE)
-    mda_sha224._val = dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 4)), (u'Params', _mda_sha224_val_Params), (u'paramPresence', u'preferredAbsent')])
-    
-    #-----< id-sha256 >-----#
-    id_sha256 = OID(name=u'id-sha256', mode=MODE_VALUE)
-    id_sha256._val = (2, 16, 840, 1, 101, 3, 4, 2, 1)
-    
-    #-----< mda-sha256 >-----#
-    mda_sha256 = CLASS(name=u'mda-sha256', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM')))
-    _mda_sha256_val_Params = NULL(name=u'Params', mode=MODE_TYPE)
-    mda_sha256._val = dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 1)), (u'Params', _mda_sha256_val_Params), (u'paramPresence', u'preferredAbsent')])
-    
-    #-----< id-sha384 >-----#
-    id_sha384 = OID(name=u'id-sha384', mode=MODE_VALUE)
-    id_sha384._val = (2, 16, 840, 1, 101, 3, 4, 2, 2)
-    
-    #-----< mda-sha384 >-----#
-    mda_sha384 = CLASS(name=u'mda-sha384', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM')))
-    _mda_sha384_val_Params = NULL(name=u'Params', mode=MODE_TYPE)
-    mda_sha384._val = dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 2)), (u'Params', _mda_sha384_val_Params), (u'paramPresence', u'preferredAbsent')])
-    
-    #-----< id-sha512 >-----#
-    id_sha512 = OID(name=u'id-sha512', mode=MODE_VALUE)
-    id_sha512._val = (2, 16, 840, 1, 101, 3, 4, 2, 3)
-    
-    #-----< mda-sha512 >-----#
-    mda_sha512 = CLASS(name=u'mda-sha512', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM')))
-    _mda_sha512_val_Params = NULL(name=u'Params', mode=MODE_TYPE)
-    mda_sha512._val = dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 3)), (u'Params', _mda_sha512_val_Params), (u'paramPresence', u'preferredAbsent')])
-    
-    #-----< EncodingParameters >-----#
-    EncodingParameters = OCT_STR(name=u'EncodingParameters', mode=MODE_TYPE)
-    EncodingParameters._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
-    
-    #-----< nullOctetString >-----#
-    nullOctetString = OCT_STR(name=u'nullOctetString', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'EncodingParameters')))
-    nullOctetString._val = b''
-    
-    #-----< nullParameters >-----#
-    nullParameters = NULL(name=u'nullParameters', mode=MODE_VALUE)
-    nullParameters._val = 0
-    
-    #-----< HashAlgorithm >-----#
-    HashAlgorithm = SEQ(name=u'HashAlgorithm', mode=MODE_TYPE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'AlgorithmIdentifier')))
-    _HashAlgorithm_algorithm = OID(name=u'algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM'), [u'id']))
-    __HashAlgorithm_algorithm_tab = CLASS(name='_tab_DIGEST-ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM')))
-    ___HashAlgorithm_algorithm_tab_val_Params_0 = NULL(name=u'Params', mode=MODE_TYPE)
-    ___HashAlgorithm_algorithm_tab_val_Params_1 = NULL(name=u'Params', mode=MODE_TYPE)
-    ___HashAlgorithm_algorithm_tab_val_Params_2 = NULL(name=u'Params', mode=MODE_TYPE)
-    ___HashAlgorithm_algorithm_tab_val_Params_3 = NULL(name=u'Params', mode=MODE_TYPE)
-    ___HashAlgorithm_algorithm_tab_val_Params_4 = NULL(name=u'Params', mode=MODE_TYPE)
-    __HashAlgorithm_algorithm_tab._val = ASN1Set(rv=[dict([(u'id', (1, 3, 14, 3, 2, 26)), (u'Params', ___HashAlgorithm_algorithm_tab_val_Params_0), (u'paramPresence', u'preferredPresent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 4)), (u'Params', ___HashAlgorithm_algorithm_tab_val_Params_1), (u'paramPresence', u'preferredPresent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 1)), (u'Params', ___HashAlgorithm_algorithm_tab_val_Params_2), (u'paramPresence', u'preferredPresent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 2)), (u'Params', ___HashAlgorithm_algorithm_tab_val_Params_3), (u'paramPresence', u'preferredPresent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 3)), (u'Params', ___HashAlgorithm_algorithm_tab_val_Params_4), (u'paramPresence', u'preferredPresent')])], rr=[], ev=None, er=[])
-    _HashAlgorithm_algorithm._const_tab = __HashAlgorithm_algorithm_tab
-    _HashAlgorithm_algorithm._const_tab_at = None
-    _HashAlgorithm_algorithm._const_tab_id = u'id'
-    _HashAlgorithm_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM'), [u'Params']), opt=True)
-    _HashAlgorithm_parameters._const_tab = __HashAlgorithm_algorithm_tab
-    _HashAlgorithm_parameters._const_tab_at = ('..', u'algorithm')
-    _HashAlgorithm_parameters._const_tab_id = u'Params'
-    HashAlgorithm._cont = ASN1Dict([
-        (u'algorithm', _HashAlgorithm_algorithm),
-        (u'parameters', _HashAlgorithm_parameters),
-        ])
-    HashAlgorithm._ext = None
-    
-    #-----< HashAlgorithms >-----#
-    HashAlgorithms = CLASS(name=u'HashAlgorithms', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM')))
-    _HashAlgorithms_val_Params_0 = NULL(name=u'Params', mode=MODE_TYPE)
-    _HashAlgorithms_val_Params_1 = NULL(name=u'Params', mode=MODE_TYPE)
-    _HashAlgorithms_val_Params_2 = NULL(name=u'Params', mode=MODE_TYPE)
-    _HashAlgorithms_val_Params_3 = NULL(name=u'Params', mode=MODE_TYPE)
-    _HashAlgorithms_val_Params_4 = NULL(name=u'Params', mode=MODE_TYPE)
-    HashAlgorithms._val = ASN1Set(rv=[dict([(u'id', (1, 3, 14, 3, 2, 26)), (u'Params', _HashAlgorithms_val_Params_0), (u'paramPresence', u'preferredPresent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 4)), (u'Params', _HashAlgorithms_val_Params_1), (u'paramPresence', u'preferredPresent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 1)), (u'Params', _HashAlgorithms_val_Params_2), (u'paramPresence', u'preferredPresent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 2)), (u'Params', _HashAlgorithms_val_Params_3), (u'paramPresence', u'preferredPresent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 3)), (u'Params', _HashAlgorithms_val_Params_4), (u'paramPresence', u'preferredPresent')])], rr=[], ev=None, er=[])
-    
-    #-----< sha1Identifier >-----#
-    sha1Identifier = SEQ(name=u'sha1Identifier', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'HashAlgorithm')))
-    _parameters_val = NULL(name=u'parameters', mode=MODE_TYPE)
-    sha1Identifier._val = dict([(u'algorithm', (1, 3, 14, 3, 2, 26)), (u'parameters', (_parameters_val, 0))])
-    
-    #-----< MaskGenAlgorithm >-----#
-    MaskGenAlgorithm = SEQ(name=u'MaskGenAlgorithm', mode=MODE_TYPE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'AlgorithmIdentifier')))
-    _MaskGenAlgorithm_algorithm = OID(name=u'algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'ALGORITHM'), [u'id']))
-    __MaskGenAlgorithm_algorithm_tab = CLASS(name='_tab_ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'ALGORITHM')))
-    ___MaskGenAlgorithm_algorithm_tab_val_Params_0 = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'HashAlgorithm')))
-    __MaskGenAlgorithm_algorithm_tab._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 8)), (u'Params', ___MaskGenAlgorithm_algorithm_tab_val_Params_0), (u'paramPresence', u'required')])], rr=[], ev=None, er=[])
-    _MaskGenAlgorithm_algorithm._const_tab = __MaskGenAlgorithm_algorithm_tab
-    _MaskGenAlgorithm_algorithm._const_tab_at = None
-    _MaskGenAlgorithm_algorithm._const_tab_id = u'id'
-    _MaskGenAlgorithm_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'ALGORITHM'), [u'Params']), opt=True)
-    _MaskGenAlgorithm_parameters._const_tab = __MaskGenAlgorithm_algorithm_tab
-    _MaskGenAlgorithm_parameters._const_tab_at = ('..', u'algorithm')
-    _MaskGenAlgorithm_parameters._const_tab_id = u'Params'
-    MaskGenAlgorithm._cont = ASN1Dict([
-        (u'algorithm', _MaskGenAlgorithm_algorithm),
-        (u'parameters', _MaskGenAlgorithm_parameters),
-        ])
-    MaskGenAlgorithm._ext = None
-    
-    #-----< mgf1SHA1 >-----#
-    mgf1SHA1 = SEQ(name=u'mgf1SHA1', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'MaskGenAlgorithm')))
-    _parameters_val_0 = SEQ(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'HashAlgorithm')))
-    mgf1SHA1._val = dict([(u'algorithm', (1, 2, 840, 113549, 1, 1, 8)), (u'parameters', (_parameters_val_0, dict([(u'algorithm', (1, 3, 14, 3, 2, 26)), (u'parameters', (_parameters_val, 0))])))])
-    
-    #-----< PKCS1MGFAlgorithms >-----#
-    PKCS1MGFAlgorithms = CLASS(name=u'PKCS1MGFAlgorithms', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'ALGORITHM')))
-    _PKCS1MGFAlgorithms_val_Params_0 = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'HashAlgorithm')))
-    PKCS1MGFAlgorithms._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 8)), (u'Params', _PKCS1MGFAlgorithms_val_Params_0), (u'paramPresence', u'required')])], rr=[], ev=[], er=[])
-    
-    #-----< PSourceAlgorithm >-----#
-    PSourceAlgorithm = SEQ(name=u'PSourceAlgorithm', mode=MODE_TYPE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'AlgorithmIdentifier')))
-    _PSourceAlgorithm_algorithm = OID(name=u'algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'ALGORITHM'), [u'id']))
-    __PSourceAlgorithm_algorithm_tab = CLASS(name='_tab_ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'ALGORITHM')))
-    ___PSourceAlgorithm_algorithm_tab_val_Params_0 = OCT_STR(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'EncodingParameters')))
-    __PSourceAlgorithm_algorithm_tab._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 9)), (u'Params', ___PSourceAlgorithm_algorithm_tab_val_Params_0), (u'paramPresence', u'required')])], rr=[], ev=None, er=[])
-    _PSourceAlgorithm_algorithm._const_tab = __PSourceAlgorithm_algorithm_tab
-    _PSourceAlgorithm_algorithm._const_tab_at = None
-    _PSourceAlgorithm_algorithm._const_tab_id = u'id'
-    _PSourceAlgorithm_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'ALGORITHM'), [u'Params']), opt=True)
-    _PSourceAlgorithm_parameters._const_tab = __PSourceAlgorithm_algorithm_tab
-    _PSourceAlgorithm_parameters._const_tab_at = ('..', u'algorithm')
-    _PSourceAlgorithm_parameters._const_tab_id = u'Params'
-    PSourceAlgorithm._cont = ASN1Dict([
-        (u'algorithm', _PSourceAlgorithm_algorithm),
-        (u'parameters', _PSourceAlgorithm_parameters),
-        ])
-    PSourceAlgorithm._ext = None
-    
-    #-----< PSS-SourceAlgorithms >-----#
-    PSS_SourceAlgorithms = CLASS(name=u'PSS-SourceAlgorithms', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'ALGORITHM')))
-    _PSS_SourceAlgorithms_val_Params_0 = OCT_STR(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'EncodingParameters')))
-    PSS_SourceAlgorithms._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 9)), (u'Params', _PSS_SourceAlgorithms_val_Params_0), (u'paramPresence', u'required')])], rr=[], ev=[], er=[])
-    
-    #-----< pSpecifiedEmpty >-----#
-    pSpecifiedEmpty = SEQ(name=u'pSpecifiedEmpty', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'PSourceAlgorithm')))
-    _parameters_val_1 = OCT_STR(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'EncodingParameters')))
-    pSpecifiedEmpty._val = dict([(u'algorithm', (1, 2, 840, 113549, 1, 1, 9)), (u'parameters', (_parameters_val_1, b''))])
-    
-    #-----< RSASSA-PSS-params >-----#
-    RSASSA_PSS_params = SEQ(name=u'RSASSA-PSS-params', mode=MODE_TYPE)
-    _RSASSA_PSS_params_hashAlgorithm = SEQ(name=u'hashAlgorithm', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'HashAlgorithm')), default=dict([(u'algorithm', (1, 3, 14, 3, 2, 26)), (u'parameters', (_parameters_val, 0))]))
-    _RSASSA_PSS_params_maskGenAlgorithm = SEQ(name=u'maskGenAlgorithm', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'MaskGenAlgorithm')), default=dict([(u'algorithm', (1, 2, 840, 113549, 1, 1, 8)), (u'parameters', (_parameters_val_0, dict([(u'algorithm', (1, 3, 14, 3, 2, 26)), (u'parameters', (_parameters_val, 0))])))]))
-    _RSASSA_PSS_params_saltLength = INT(name=u'saltLength', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), default=20)
-    _RSASSA_PSS_params_trailerField = INT(name=u'trailerField', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), default=1)
-    RSASSA_PSS_params._cont = ASN1Dict([
-        (u'hashAlgorithm', _RSASSA_PSS_params_hashAlgorithm),
-        (u'maskGenAlgorithm', _RSASSA_PSS_params_maskGenAlgorithm),
-        (u'saltLength', _RSASSA_PSS_params_saltLength),
-        (u'trailerField', _RSASSA_PSS_params_trailerField),
-        ])
-    RSASSA_PSS_params._ext = None
-    
-    #-----< RSAES-OAEP-params >-----#
-    RSAES_OAEP_params = SEQ(name=u'RSAES-OAEP-params', mode=MODE_TYPE)
-    _RSAES_OAEP_params_hashFunc = SEQ(name=u'hashFunc', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'HashAlgorithm')), default=dict([(u'algorithm', (1, 3, 14, 3, 2, 26)), (u'parameters', (_parameters_val, 0))]))
-    _RSAES_OAEP_params_maskGenFunc = SEQ(name=u'maskGenFunc', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'MaskGenAlgorithm')), default=dict([(u'algorithm', (1, 2, 840, 113549, 1, 1, 8)), (u'parameters', (_parameters_val_0, dict([(u'algorithm', (1, 3, 14, 3, 2, 26)), (u'parameters', (_parameters_val, 0))])))]))
-    _RSAES_OAEP_params_pSourceFunc = SEQ(name=u'pSourceFunc', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'PSourceAlgorithm')), default=dict([(u'algorithm', (1, 2, 840, 113549, 1, 1, 9)), (u'parameters', (_parameters_val_1, b''))]))
-    RSAES_OAEP_params._cont = ASN1Dict([
-        (u'hashFunc', _RSAES_OAEP_params_hashFunc),
-        (u'maskGenFunc', _RSAES_OAEP_params_maskGenFunc),
-        (u'pSourceFunc', _RSAES_OAEP_params_pSourceFunc),
-        ])
-    RSAES_OAEP_params._ext = None
-    
-    _all_ = [
-        PublicKeys,
-        _PublicKeys_val_KeyValue_0,
-        _PublicKeys_val_Params_0,
-        _PublicKeys_val_KeyValue_1,
-        _PublicKeys_val_Params_1,
-        SignatureAlgs,
-        _SignatureAlgs_val_Params_0,
-        __SIGNATURE_ALGORITHM_HashSet_val_Params_0,
-        __SIGNATURE_ALGORITHM_HashSet_val_Params_1,
-        __SIGNATURE_ALGORITHM_HashSet_val_Params_2,
-        __SIGNATURE_ALGORITHM_HashSet_val_Params_3,
-        __SIGNATURE_ALGORITHM_HashSet_val_Params_4,
-        __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_0,
-        __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_0,
-        __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_1,
-        __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_1,
-        KeyTransportAlgs,
-        _KeyTransportAlgs_val_Params_0,
-        __KEY_TRANSPORT_PublicKeySet_val_KeyValue_0,
-        __KEY_TRANSPORT_PublicKeySet_val_Params_0,
-        __KEY_TRANSPORT_PublicKeySet_val_KeyValue_1,
-        __KEY_TRANSPORT_PublicKeySet_val_Params_1,
-        __KEY_TRANSPORT_smimeCaps_val_Type,
-        HashAlgs,
-        _HashAlgs_val_Params_0,
-        _HashAlgs_val_Params_1,
-        _HashAlgs_val_Params_2,
-        _HashAlgs_val_Params_3,
-        SMimeCaps,
-        _SMimeCaps_val_Type_1,
-        pk_rsaSSA_PSS,
-        _pk_rsaSSA_PSS_val_KeyValue,
-        _pk_rsaSSA_PSS_val_Params,
-        sa_rsaSSA_PSS,
-        _sa_rsaSSA_PSS_val_Params,
-        sa_sha224WithRSAEncryption,
-        _sa_sha224WithRSAEncryption_val_Params,
-        sha224WithRSAEncryption,
-        sa_sha256WithRSAEncryption,
-        _sa_sha256WithRSAEncryption_val_Params,
-        sha256WithRSAEncryption,
-        sa_sha384WithRSAEncryption,
-        _sa_sha384WithRSAEncryption_val_Params,
-        sha384WithRSAEncryption,
-        sa_sha512WithRSAEncryption,
-        _sa_sha512WithRSAEncryption_val_Params,
-        sha512WithRSAEncryption,
-        pk_rsaES_OAEP,
-        _pk_rsaES_OAEP_val_KeyValue,
-        _pk_rsaES_OAEP_val_Params,
-        kta_rsaES_OAEP,
-        _kta_rsaES_OAEP_val_Params,
-        pkcs_1,
-        id_RSAES_OAEP,
-        id_mgf1,
-        id_pSpecified,
-        id_RSASSA_PSS,
-        id_sha224,
-        mda_sha224,
-        _mda_sha224_val_Params,
-        id_sha256,
-        mda_sha256,
-        _mda_sha256_val_Params,
-        id_sha384,
-        mda_sha384,
-        _mda_sha384_val_Params,
-        id_sha512,
-        mda_sha512,
-        _mda_sha512_val_Params,
-        EncodingParameters,
-        nullOctetString,
-        nullParameters,
-        __HashAlgorithm_algorithm_tab,
-        ___HashAlgorithm_algorithm_tab_val_Params_0,
-        ___HashAlgorithm_algorithm_tab_val_Params_1,
-        ___HashAlgorithm_algorithm_tab_val_Params_2,
-        ___HashAlgorithm_algorithm_tab_val_Params_3,
-        ___HashAlgorithm_algorithm_tab_val_Params_4,
-        _HashAlgorithm_algorithm,
-        _HashAlgorithm_parameters,
-        HashAlgorithm,
-        HashAlgorithms,
-        _HashAlgorithms_val_Params_0,
-        _HashAlgorithms_val_Params_1,
-        _HashAlgorithms_val_Params_2,
-        _HashAlgorithms_val_Params_3,
-        _HashAlgorithms_val_Params_4,
-        sha1Identifier,
-        _parameters_val,
-        __MaskGenAlgorithm_algorithm_tab,
-        ___MaskGenAlgorithm_algorithm_tab_val_Params_0,
-        _MaskGenAlgorithm_algorithm,
-        _MaskGenAlgorithm_parameters,
-        MaskGenAlgorithm,
-        mgf1SHA1,
-        _parameters_val_0,
-        PKCS1MGFAlgorithms,
-        _PKCS1MGFAlgorithms_val_Params_0,
-        __PSourceAlgorithm_algorithm_tab,
-        ___PSourceAlgorithm_algorithm_tab_val_Params_0,
-        _PSourceAlgorithm_algorithm,
-        _PSourceAlgorithm_parameters,
-        PSourceAlgorithm,
-        PSS_SourceAlgorithms,
-        _PSS_SourceAlgorithms_val_Params_0,
-        pSpecifiedEmpty,
-        _parameters_val_1,
-        _RSASSA_PSS_params_hashAlgorithm,
-        _RSASSA_PSS_params_maskGenAlgorithm,
-        _RSASSA_PSS_params_saltLength,
-        _RSASSA_PSS_params_trailerField,
-        RSASSA_PSS_params,
-        _RSAES_OAEP_params_hashFunc,
-        _RSAES_OAEP_params_maskGenFunc,
-        _RSAES_OAEP_params_pSourceFunc,
-        RSAES_OAEP_params,
-    ]
-
 class PKIX1Explicit_2009:
 
     _name_  = u'PKIX1Explicit-2009'
@@ -11511,6 +9719,543 @@ class PKIX1Implicit_2009:
         ubMax,
     ]
 
+class PKIX1_PSS_OAEP_Algorithms_2009:
+
+    _name_  = u'PKIX1-PSS-OAEP-Algorithms-2009'
+    _oid_   = [1, 3, 6, 1, 5, 5, 7, 0, 54]
+    
+    _obj_ = [
+        u'PublicKeys',
+        u'SignatureAlgs',
+        u'KeyTransportAlgs',
+        u'HashAlgs',
+        u'SMimeCaps',
+        u'pk-rsaSSA-PSS',
+        u'sa-rsaSSA-PSS',
+        u'sa-sha224WithRSAEncryption',
+        u'sha224WithRSAEncryption',
+        u'sa-sha256WithRSAEncryption',
+        u'sha256WithRSAEncryption',
+        u'sa-sha384WithRSAEncryption',
+        u'sha384WithRSAEncryption',
+        u'sa-sha512WithRSAEncryption',
+        u'sha512WithRSAEncryption',
+        u'pk-rsaES-OAEP',
+        u'kta-rsaES-OAEP',
+        u'pkcs-1',
+        u'id-RSAES-OAEP',
+        u'id-mgf1',
+        u'id-pSpecified',
+        u'id-RSASSA-PSS',
+        u'id-sha224',
+        u'mda-sha224',
+        u'id-sha256',
+        u'mda-sha256',
+        u'id-sha384',
+        u'mda-sha384',
+        u'id-sha512',
+        u'mda-sha512',
+        u'EncodingParameters',
+        u'nullOctetString',
+        u'nullParameters',
+        u'HashAlgorithm',
+        u'HashAlgorithms',
+        u'sha1Identifier',
+        u'MaskGenAlgorithm',
+        u'mgf1SHA1',
+        u'PKCS1MGFAlgorithms',
+        u'PSourceAlgorithm',
+        u'PSS-SourceAlgorithms',
+        u'pSpecifiedEmpty',
+        u'RSASSA-PSS-params',
+        u'RSAES-OAEP-params',
+        ]
+    _type_ = [
+        u'EncodingParameters',
+        u'HashAlgorithm',
+        u'MaskGenAlgorithm',
+        u'PSourceAlgorithm',
+        u'RSASSA-PSS-params',
+        u'RSAES-OAEP-params',
+        ]
+    _set_ = [
+        u'PublicKeys',
+        u'SignatureAlgs',
+        u'KeyTransportAlgs',
+        u'HashAlgs',
+        u'SMimeCaps',
+        u'HashAlgorithms',
+        u'PKCS1MGFAlgorithms',
+        u'PSS-SourceAlgorithms',
+        ]
+    _val_ = [
+        u'pk-rsaSSA-PSS',
+        u'sa-rsaSSA-PSS',
+        u'sa-sha224WithRSAEncryption',
+        u'sha224WithRSAEncryption',
+        u'sa-sha256WithRSAEncryption',
+        u'sha256WithRSAEncryption',
+        u'sa-sha384WithRSAEncryption',
+        u'sha384WithRSAEncryption',
+        u'sa-sha512WithRSAEncryption',
+        u'sha512WithRSAEncryption',
+        u'pk-rsaES-OAEP',
+        u'kta-rsaES-OAEP',
+        u'pkcs-1',
+        u'id-RSAES-OAEP',
+        u'id-mgf1',
+        u'id-pSpecified',
+        u'id-RSASSA-PSS',
+        u'id-sha224',
+        u'mda-sha224',
+        u'id-sha256',
+        u'mda-sha256',
+        u'id-sha384',
+        u'mda-sha384',
+        u'id-sha512',
+        u'mda-sha512',
+        u'nullOctetString',
+        u'nullParameters',
+        u'sha1Identifier',
+        u'mgf1SHA1',
+        u'pSpecifiedEmpty',
+        ]
+    _class_ = [
+        u'PublicKeys',
+        u'SignatureAlgs',
+        u'KeyTransportAlgs',
+        u'HashAlgs',
+        u'SMimeCaps',
+        u'pk-rsaSSA-PSS',
+        u'sa-rsaSSA-PSS',
+        u'sa-sha224WithRSAEncryption',
+        u'sa-sha256WithRSAEncryption',
+        u'sa-sha384WithRSAEncryption',
+        u'sa-sha512WithRSAEncryption',
+        u'pk-rsaES-OAEP',
+        u'kta-rsaES-OAEP',
+        u'mda-sha224',
+        u'mda-sha256',
+        u'mda-sha384',
+        u'mda-sha512',
+        u'HashAlgorithms',
+        u'PKCS1MGFAlgorithms',
+        u'PSS-SourceAlgorithms',
+        ]
+    _param_ = [
+        ]
+    
+    #-----< PublicKeys >-----#
+    PublicKeys = CLASS(name=u'PublicKeys', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'PUBLIC-KEY')))
+    _PublicKeys_val_KeyValue_0 = SEQ(name=u'KeyValue', mode=MODE_TYPE, typeref=ASN1RefType(('PKIXAlgs-2009', 'RSAPublicKey')))
+    _PublicKeys_val_Params_0 = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSASSA-PSS-params')))
+    _PublicKeys_val_KeyValue_1 = SEQ(name=u'KeyValue', mode=MODE_TYPE, typeref=ASN1RefType(('PKIXAlgs-2009', 'RSAPublicKey')))
+    _PublicKeys_val_Params_1 = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSAES-OAEP-params')))
+    PublicKeys._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 10)), (u'KeyValue', _PublicKeys_val_KeyValue_0), (u'Params', _PublicKeys_val_Params_0), (u'paramPresence', u'optional'), (u'keyUsage', (99, 6))]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 7)), (u'KeyValue', _PublicKeys_val_KeyValue_1), (u'Params', _PublicKeys_val_Params_1), (u'paramPresence', u'optional'), (u'keyUsage', (3, 3))])], rr=[], ev=[], er=[])
+    
+    #-----< SignatureAlgs >-----#
+    SignatureAlgs = CLASS(name=u'SignatureAlgs', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'SIGNATURE-ALGORITHM')))
+    _SignatureAlgs_val_Params_0 = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSASSA-PSS-params')))
+    __SIGNATURE_ALGORITHM_HashSet_val_Params_0 = NULL(name=u'Params', mode=MODE_TYPE)
+    __SIGNATURE_ALGORITHM_HashSet_val_Params_1 = NULL(name=u'Params', mode=MODE_TYPE)
+    __SIGNATURE_ALGORITHM_HashSet_val_Params_2 = NULL(name=u'Params', mode=MODE_TYPE)
+    __SIGNATURE_ALGORITHM_HashSet_val_Params_3 = NULL(name=u'Params', mode=MODE_TYPE)
+    __SIGNATURE_ALGORITHM_HashSet_val_Params_4 = NULL(name=u'Params', mode=MODE_TYPE)
+    __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_0 = SEQ(name=u'KeyValue', mode=MODE_TYPE, typeref=ASN1RefType(('PKIXAlgs-2009', 'RSAPublicKey')))
+    __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_0 = NULL(name=u'Params', mode=MODE_TYPE)
+    __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_1 = SEQ(name=u'KeyValue', mode=MODE_TYPE, typeref=ASN1RefType(('PKIXAlgs-2009', 'RSAPublicKey')))
+    __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_1 = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSASSA-PSS-params')))
+    SignatureAlgs._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 10)), (u'Params', _SignatureAlgs_val_Params_0), (u'paramPresence', u'required'), (u'HashSet', ASN1Set(rv=[dict([(u'id', (1, 3, 14, 3, 2, 26)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_0), (u'paramPresence', u'preferredAbsent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 4)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_1), (u'paramPresence', u'preferredAbsent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 1)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_2), (u'paramPresence', u'preferredAbsent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 2)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_3), (u'paramPresence', u'preferredAbsent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 3)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_4), (u'paramPresence', u'preferredAbsent')])], rr=[], ev=None, er=[])), (u'PublicKeySet', ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 1)), (u'KeyValue', __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_0), (u'Params', __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_0), (u'paramPresence', u'absent'), (u'keyUsage', (123, 6))]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 10)), (u'KeyValue', __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_1), (u'Params', __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_1), (u'paramPresence', u'optional'), (u'keyUsage', (99, 6))])], rr=[], ev=None, er=[])), (u'smimeCaps', dict([(u'id', (1, 2, 840, 113549, 1, 1, 10))]))])], rr=[], ev=[], er=[])
+    
+    #-----< KeyTransportAlgs >-----#
+    KeyTransportAlgs = CLASS(name=u'KeyTransportAlgs', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'KEY-TRANSPORT')))
+    _KeyTransportAlgs_val_Params_0 = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSAES-OAEP-params')))
+    __KEY_TRANSPORT_PublicKeySet_val_KeyValue_0 = SEQ(name=u'KeyValue', mode=MODE_TYPE, typeref=ASN1RefType(('PKIXAlgs-2009', 'RSAPublicKey')))
+    __KEY_TRANSPORT_PublicKeySet_val_Params_0 = NULL(name=u'Params', mode=MODE_TYPE)
+    __KEY_TRANSPORT_PublicKeySet_val_KeyValue_1 = SEQ(name=u'KeyValue', mode=MODE_TYPE, typeref=ASN1RefType(('PKIXAlgs-2009', 'RSAPublicKey')))
+    __KEY_TRANSPORT_PublicKeySet_val_Params_1 = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSAES-OAEP-params')))
+    __KEY_TRANSPORT_smimeCaps_val_Type = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSAES-OAEP-params')))
+    KeyTransportAlgs._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 7)), (u'Params', _KeyTransportAlgs_val_Params_0), (u'paramPresence', u'required'), (u'PublicKeySet', ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 1)), (u'KeyValue', __KEY_TRANSPORT_PublicKeySet_val_KeyValue_0), (u'Params', __KEY_TRANSPORT_PublicKeySet_val_Params_0), (u'paramPresence', u'absent'), (u'keyUsage', (123, 6))]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 7)), (u'KeyValue', __KEY_TRANSPORT_PublicKeySet_val_KeyValue_1), (u'Params', __KEY_TRANSPORT_PublicKeySet_val_Params_1), (u'paramPresence', u'optional'), (u'keyUsage', (3, 3))])], rr=[], ev=None, er=[])), (u'smimeCaps', dict([(u'Type', __KEY_TRANSPORT_smimeCaps_val_Type), (u'id', (1, 2, 840, 113549, 1, 1, 7))]))])], rr=[], ev=[], er=[])
+    
+    #-----< HashAlgs >-----#
+    HashAlgs = CLASS(name=u'HashAlgs', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM')))
+    _HashAlgs_val_Params_0 = NULL(name=u'Params', mode=MODE_TYPE)
+    _HashAlgs_val_Params_1 = NULL(name=u'Params', mode=MODE_TYPE)
+    _HashAlgs_val_Params_2 = NULL(name=u'Params', mode=MODE_TYPE)
+    _HashAlgs_val_Params_3 = NULL(name=u'Params', mode=MODE_TYPE)
+    HashAlgs._val = ASN1Set(rv=[dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 4)), (u'Params', _HashAlgs_val_Params_0), (u'paramPresence', u'preferredAbsent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 1)), (u'Params', _HashAlgs_val_Params_1), (u'paramPresence', u'preferredAbsent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 2)), (u'Params', _HashAlgs_val_Params_2), (u'paramPresence', u'preferredAbsent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 3)), (u'Params', _HashAlgs_val_Params_3), (u'paramPresence', u'preferredAbsent')])], rr=[], ev=[], er=[])
+    
+    #-----< SMimeCaps >-----#
+    SMimeCaps = CLASS(name=u'SMimeCaps', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'SMIME-CAPS')))
+    _SMimeCaps_val_Type_1 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSAES-OAEP-params')))
+    SMimeCaps._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 10))]), dict([(u'Type', _SMimeCaps_val_Type_1), (u'id', (1, 2, 840, 113549, 1, 1, 7))])], rr=[], ev=[], er=[])
+    
+    #-----< pk-rsaSSA-PSS >-----#
+    pk_rsaSSA_PSS = CLASS(name=u'pk-rsaSSA-PSS', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'PUBLIC-KEY')))
+    _pk_rsaSSA_PSS_val_KeyValue = SEQ(name=u'KeyValue', mode=MODE_TYPE, typeref=ASN1RefType(('PKIXAlgs-2009', 'RSAPublicKey')))
+    _pk_rsaSSA_PSS_val_Params = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSASSA-PSS-params')))
+    pk_rsaSSA_PSS._val = dict([(u'id', (1, 2, 840, 113549, 1, 1, 10)), (u'KeyValue', _pk_rsaSSA_PSS_val_KeyValue), (u'Params', _pk_rsaSSA_PSS_val_Params), (u'paramPresence', u'optional'), (u'keyUsage', (99, 6))])
+    
+    #-----< sa-rsaSSA-PSS >-----#
+    sa_rsaSSA_PSS = CLASS(name=u'sa-rsaSSA-PSS', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'SIGNATURE-ALGORITHM')))
+    _sa_rsaSSA_PSS_val_Params = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSASSA-PSS-params')))
+    sa_rsaSSA_PSS._val = dict([(u'id', (1, 2, 840, 113549, 1, 1, 10)), (u'Params', _sa_rsaSSA_PSS_val_Params), (u'paramPresence', u'required'), (u'HashSet', ASN1Set(rv=[dict([(u'id', (1, 3, 14, 3, 2, 26)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_0), (u'paramPresence', u'preferredAbsent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 4)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_1), (u'paramPresence', u'preferredAbsent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 1)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_2), (u'paramPresence', u'preferredAbsent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 2)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_3), (u'paramPresence', u'preferredAbsent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 3)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_4), (u'paramPresence', u'preferredAbsent')])], rr=[], ev=None, er=[])), (u'PublicKeySet', ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 1)), (u'KeyValue', __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_0), (u'Params', __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_0), (u'paramPresence', u'absent'), (u'keyUsage', (123, 6))]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 10)), (u'KeyValue', __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_1), (u'Params', __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_1), (u'paramPresence', u'optional'), (u'keyUsage', (99, 6))])], rr=[], ev=None, er=[])), (u'smimeCaps', dict([(u'id', (1, 2, 840, 113549, 1, 1, 10))]))])
+    
+    #-----< sa-sha224WithRSAEncryption >-----#
+    sa_sha224WithRSAEncryption = CLASS(name=u'sa-sha224WithRSAEncryption', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'SIGNATURE-ALGORITHM')))
+    _sa_sha224WithRSAEncryption_val_Params = NULL(name=u'Params', mode=MODE_TYPE)
+    sa_sha224WithRSAEncryption._val = dict([(u'id', (1, 2, 840, 113549, 1, 1, 14)), (u'Params', _sa_sha224WithRSAEncryption_val_Params), (u'paramPresence', u'required'), (u'HashSet', ASN1Set(rv=[dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 4)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_0), (u'paramPresence', u'preferredAbsent')])], rr=[], ev=None, er=[])), (u'PublicKeySet', ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 1)), (u'KeyValue', __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_0), (u'Params', __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_0), (u'paramPresence', u'absent'), (u'keyUsage', (123, 6))])], rr=[], ev=None, er=[])), (u'smimeCaps', dict([(u'id', (1, 2, 840, 113549, 1, 1, 14))]))])
+    
+    #-----< sha224WithRSAEncryption >-----#
+    sha224WithRSAEncryption = OID(name=u'sha224WithRSAEncryption', mode=MODE_VALUE)
+    sha224WithRSAEncryption._val = (1, 2, 840, 113549, 1, 1, 14)
+    
+    #-----< sa-sha256WithRSAEncryption >-----#
+    sa_sha256WithRSAEncryption = CLASS(name=u'sa-sha256WithRSAEncryption', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'SIGNATURE-ALGORITHM')))
+    _sa_sha256WithRSAEncryption_val_Params = NULL(name=u'Params', mode=MODE_TYPE)
+    sa_sha256WithRSAEncryption._val = dict([(u'id', (1, 2, 840, 113549, 1, 1, 11)), (u'Params', _sa_sha256WithRSAEncryption_val_Params), (u'paramPresence', u'required'), (u'HashSet', ASN1Set(rv=[dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 1)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_0), (u'paramPresence', u'preferredAbsent')])], rr=[], ev=None, er=[])), (u'PublicKeySet', ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 1)), (u'KeyValue', __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_0), (u'Params', __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_0), (u'paramPresence', u'absent'), (u'keyUsage', (123, 6))])], rr=[], ev=None, er=[])), (u'smimeCaps', dict([(u'id', (1, 2, 840, 113549, 1, 1, 11))]))])
+    
+    #-----< sha256WithRSAEncryption >-----#
+    sha256WithRSAEncryption = OID(name=u'sha256WithRSAEncryption', mode=MODE_VALUE)
+    sha256WithRSAEncryption._val = (1, 2, 840, 113549, 1, 1, 11)
+    
+    #-----< sa-sha384WithRSAEncryption >-----#
+    sa_sha384WithRSAEncryption = CLASS(name=u'sa-sha384WithRSAEncryption', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'SIGNATURE-ALGORITHM')))
+    _sa_sha384WithRSAEncryption_val_Params = NULL(name=u'Params', mode=MODE_TYPE)
+    sa_sha384WithRSAEncryption._val = dict([(u'id', (1, 2, 840, 113549, 1, 1, 12)), (u'Params', _sa_sha384WithRSAEncryption_val_Params), (u'paramPresence', u'required'), (u'HashSet', ASN1Set(rv=[dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 2)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_0), (u'paramPresence', u'preferredAbsent')])], rr=[], ev=None, er=[])), (u'PublicKeySet', ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 1)), (u'KeyValue', __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_0), (u'Params', __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_0), (u'paramPresence', u'absent'), (u'keyUsage', (123, 6))])], rr=[], ev=None, er=[])), (u'smimeCaps', dict([(u'id', (1, 2, 840, 113549, 1, 1, 12))]))])
+    
+    #-----< sha384WithRSAEncryption >-----#
+    sha384WithRSAEncryption = OID(name=u'sha384WithRSAEncryption', mode=MODE_VALUE)
+    sha384WithRSAEncryption._val = (1, 2, 840, 113549, 1, 1, 12)
+    
+    #-----< sa-sha512WithRSAEncryption >-----#
+    sa_sha512WithRSAEncryption = CLASS(name=u'sa-sha512WithRSAEncryption', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'SIGNATURE-ALGORITHM')))
+    _sa_sha512WithRSAEncryption_val_Params = NULL(name=u'Params', mode=MODE_TYPE)
+    sa_sha512WithRSAEncryption._val = dict([(u'id', (1, 2, 840, 113549, 1, 1, 13)), (u'Params', _sa_sha512WithRSAEncryption_val_Params), (u'paramPresence', u'required'), (u'HashSet', ASN1Set(rv=[dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 3)), (u'Params', __SIGNATURE_ALGORITHM_HashSet_val_Params_0), (u'paramPresence', u'preferredAbsent')])], rr=[], ev=None, er=[])), (u'PublicKeySet', ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 1)), (u'KeyValue', __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_0), (u'Params', __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_0), (u'paramPresence', u'absent'), (u'keyUsage', (123, 6))])], rr=[], ev=None, er=[])), (u'smimeCaps', dict([(u'id', (1, 2, 840, 113549, 1, 1, 13))]))])
+    
+    #-----< sha512WithRSAEncryption >-----#
+    sha512WithRSAEncryption = OID(name=u'sha512WithRSAEncryption', mode=MODE_VALUE)
+    sha512WithRSAEncryption._val = (1, 2, 840, 113549, 1, 1, 13)
+    
+    #-----< pk-rsaES-OAEP >-----#
+    pk_rsaES_OAEP = CLASS(name=u'pk-rsaES-OAEP', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'PUBLIC-KEY')))
+    _pk_rsaES_OAEP_val_KeyValue = SEQ(name=u'KeyValue', mode=MODE_TYPE, typeref=ASN1RefType(('PKIXAlgs-2009', 'RSAPublicKey')))
+    _pk_rsaES_OAEP_val_Params = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSAES-OAEP-params')))
+    pk_rsaES_OAEP._val = dict([(u'id', (1, 2, 840, 113549, 1, 1, 7)), (u'KeyValue', _pk_rsaES_OAEP_val_KeyValue), (u'Params', _pk_rsaES_OAEP_val_Params), (u'paramPresence', u'optional'), (u'keyUsage', (3, 3))])
+    
+    #-----< kta-rsaES-OAEP >-----#
+    kta_rsaES_OAEP = CLASS(name=u'kta-rsaES-OAEP', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'KEY-TRANSPORT')))
+    _kta_rsaES_OAEP_val_Params = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSAES-OAEP-params')))
+    kta_rsaES_OAEP._val = dict([(u'id', (1, 2, 840, 113549, 1, 1, 7)), (u'Params', _kta_rsaES_OAEP_val_Params), (u'paramPresence', u'required'), (u'PublicKeySet', ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 1)), (u'KeyValue', __KEY_TRANSPORT_PublicKeySet_val_KeyValue_0), (u'Params', __KEY_TRANSPORT_PublicKeySet_val_Params_0), (u'paramPresence', u'absent'), (u'keyUsage', (123, 6))]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 7)), (u'KeyValue', __KEY_TRANSPORT_PublicKeySet_val_KeyValue_1), (u'Params', __KEY_TRANSPORT_PublicKeySet_val_Params_1), (u'paramPresence', u'optional'), (u'keyUsage', (3, 3))])], rr=[], ev=None, er=[])), (u'smimeCaps', dict([(u'Type', __KEY_TRANSPORT_smimeCaps_val_Type), (u'id', (1, 2, 840, 113549, 1, 1, 7))]))])
+    
+    #-----< pkcs-1 >-----#
+    pkcs_1 = OID(name=u'pkcs-1', mode=MODE_VALUE)
+    pkcs_1._val = (1, 2, 840, 113549, 1, 1)
+    
+    #-----< id-RSAES-OAEP >-----#
+    id_RSAES_OAEP = OID(name=u'id-RSAES-OAEP', mode=MODE_VALUE)
+    id_RSAES_OAEP._val = (1, 2, 840, 113549, 1, 1, 7)
+    
+    #-----< id-mgf1 >-----#
+    id_mgf1 = OID(name=u'id-mgf1', mode=MODE_VALUE)
+    id_mgf1._val = (1, 2, 840, 113549, 1, 1, 8)
+    
+    #-----< id-pSpecified >-----#
+    id_pSpecified = OID(name=u'id-pSpecified', mode=MODE_VALUE)
+    id_pSpecified._val = (1, 2, 840, 113549, 1, 1, 9)
+    
+    #-----< id-RSASSA-PSS >-----#
+    id_RSASSA_PSS = OID(name=u'id-RSASSA-PSS', mode=MODE_VALUE)
+    id_RSASSA_PSS._val = (1, 2, 840, 113549, 1, 1, 10)
+    
+    #-----< id-sha224 >-----#
+    id_sha224 = OID(name=u'id-sha224', mode=MODE_VALUE)
+    id_sha224._val = (2, 16, 840, 1, 101, 3, 4, 2, 4)
+    
+    #-----< mda-sha224 >-----#
+    mda_sha224 = CLASS(name=u'mda-sha224', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM')))
+    _mda_sha224_val_Params = NULL(name=u'Params', mode=MODE_TYPE)
+    mda_sha224._val = dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 4)), (u'Params', _mda_sha224_val_Params), (u'paramPresence', u'preferredAbsent')])
+    
+    #-----< id-sha256 >-----#
+    id_sha256 = OID(name=u'id-sha256', mode=MODE_VALUE)
+    id_sha256._val = (2, 16, 840, 1, 101, 3, 4, 2, 1)
+    
+    #-----< mda-sha256 >-----#
+    mda_sha256 = CLASS(name=u'mda-sha256', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM')))
+    _mda_sha256_val_Params = NULL(name=u'Params', mode=MODE_TYPE)
+    mda_sha256._val = dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 1)), (u'Params', _mda_sha256_val_Params), (u'paramPresence', u'preferredAbsent')])
+    
+    #-----< id-sha384 >-----#
+    id_sha384 = OID(name=u'id-sha384', mode=MODE_VALUE)
+    id_sha384._val = (2, 16, 840, 1, 101, 3, 4, 2, 2)
+    
+    #-----< mda-sha384 >-----#
+    mda_sha384 = CLASS(name=u'mda-sha384', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM')))
+    _mda_sha384_val_Params = NULL(name=u'Params', mode=MODE_TYPE)
+    mda_sha384._val = dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 2)), (u'Params', _mda_sha384_val_Params), (u'paramPresence', u'preferredAbsent')])
+    
+    #-----< id-sha512 >-----#
+    id_sha512 = OID(name=u'id-sha512', mode=MODE_VALUE)
+    id_sha512._val = (2, 16, 840, 1, 101, 3, 4, 2, 3)
+    
+    #-----< mda-sha512 >-----#
+    mda_sha512 = CLASS(name=u'mda-sha512', mode=MODE_VALUE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM')))
+    _mda_sha512_val_Params = NULL(name=u'Params', mode=MODE_TYPE)
+    mda_sha512._val = dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 3)), (u'Params', _mda_sha512_val_Params), (u'paramPresence', u'preferredAbsent')])
+    
+    #-----< EncodingParameters >-----#
+    EncodingParameters = OCT_STR(name=u'EncodingParameters', mode=MODE_TYPE)
+    EncodingParameters._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
+    
+    #-----< nullOctetString >-----#
+    nullOctetString = OCT_STR(name=u'nullOctetString', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'EncodingParameters')))
+    nullOctetString._val = b''
+    
+    #-----< nullParameters >-----#
+    nullParameters = NULL(name=u'nullParameters', mode=MODE_VALUE)
+    nullParameters._val = 0
+    
+    #-----< HashAlgorithm >-----#
+    HashAlgorithm = SEQ(name=u'HashAlgorithm', mode=MODE_TYPE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'AlgorithmIdentifier')))
+    _HashAlgorithm_algorithm = OID(name=u'algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM'), [u'id']))
+    __HashAlgorithm_algorithm_tab = CLASS(name='_tab_DIGEST-ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM')))
+    ___HashAlgorithm_algorithm_tab_val_Params_0 = NULL(name=u'Params', mode=MODE_TYPE)
+    ___HashAlgorithm_algorithm_tab_val_Params_1 = NULL(name=u'Params', mode=MODE_TYPE)
+    ___HashAlgorithm_algorithm_tab_val_Params_2 = NULL(name=u'Params', mode=MODE_TYPE)
+    ___HashAlgorithm_algorithm_tab_val_Params_3 = NULL(name=u'Params', mode=MODE_TYPE)
+    ___HashAlgorithm_algorithm_tab_val_Params_4 = NULL(name=u'Params', mode=MODE_TYPE)
+    __HashAlgorithm_algorithm_tab._val = ASN1Set(rv=[dict([(u'id', (1, 3, 14, 3, 2, 26)), (u'Params', ___HashAlgorithm_algorithm_tab_val_Params_0), (u'paramPresence', u'preferredPresent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 4)), (u'Params', ___HashAlgorithm_algorithm_tab_val_Params_1), (u'paramPresence', u'preferredPresent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 1)), (u'Params', ___HashAlgorithm_algorithm_tab_val_Params_2), (u'paramPresence', u'preferredPresent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 2)), (u'Params', ___HashAlgorithm_algorithm_tab_val_Params_3), (u'paramPresence', u'preferredPresent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 3)), (u'Params', ___HashAlgorithm_algorithm_tab_val_Params_4), (u'paramPresence', u'preferredPresent')])], rr=[], ev=None, er=[])
+    _HashAlgorithm_algorithm._const_tab = __HashAlgorithm_algorithm_tab
+    _HashAlgorithm_algorithm._const_tab_at = None
+    _HashAlgorithm_algorithm._const_tab_id = u'id'
+    _HashAlgorithm_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM'), [u'Params']), opt=True)
+    _HashAlgorithm_parameters._const_tab = __HashAlgorithm_algorithm_tab
+    _HashAlgorithm_parameters._const_tab_at = ('..', u'algorithm')
+    _HashAlgorithm_parameters._const_tab_id = u'Params'
+    HashAlgorithm._cont = ASN1Dict([
+        (u'algorithm', _HashAlgorithm_algorithm),
+        (u'parameters', _HashAlgorithm_parameters),
+        ])
+    HashAlgorithm._ext = None
+    
+    #-----< HashAlgorithms >-----#
+    HashAlgorithms = CLASS(name=u'HashAlgorithms', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM')))
+    _HashAlgorithms_val_Params_0 = NULL(name=u'Params', mode=MODE_TYPE)
+    _HashAlgorithms_val_Params_1 = NULL(name=u'Params', mode=MODE_TYPE)
+    _HashAlgorithms_val_Params_2 = NULL(name=u'Params', mode=MODE_TYPE)
+    _HashAlgorithms_val_Params_3 = NULL(name=u'Params', mode=MODE_TYPE)
+    _HashAlgorithms_val_Params_4 = NULL(name=u'Params', mode=MODE_TYPE)
+    HashAlgorithms._val = ASN1Set(rv=[dict([(u'id', (1, 3, 14, 3, 2, 26)), (u'Params', _HashAlgorithms_val_Params_0), (u'paramPresence', u'preferredPresent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 4)), (u'Params', _HashAlgorithms_val_Params_1), (u'paramPresence', u'preferredPresent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 1)), (u'Params', _HashAlgorithms_val_Params_2), (u'paramPresence', u'preferredPresent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 2)), (u'Params', _HashAlgorithms_val_Params_3), (u'paramPresence', u'preferredPresent')]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 3)), (u'Params', _HashAlgorithms_val_Params_4), (u'paramPresence', u'preferredPresent')])], rr=[], ev=None, er=[])
+    
+    #-----< sha1Identifier >-----#
+    sha1Identifier = SEQ(name=u'sha1Identifier', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'HashAlgorithm')))
+    _parameters_val = NULL(name=u'parameters', mode=MODE_TYPE)
+    sha1Identifier._val = dict([(u'algorithm', (1, 3, 14, 3, 2, 26)), (u'parameters', (_parameters_val, 0))])
+    
+    #-----< MaskGenAlgorithm >-----#
+    MaskGenAlgorithm = SEQ(name=u'MaskGenAlgorithm', mode=MODE_TYPE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'AlgorithmIdentifier')))
+    _MaskGenAlgorithm_algorithm = OID(name=u'algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'ALGORITHM'), [u'id']))
+    __MaskGenAlgorithm_algorithm_tab = CLASS(name='_tab_ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'ALGORITHM')))
+    ___MaskGenAlgorithm_algorithm_tab_val_Params_0 = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'HashAlgorithm')))
+    __MaskGenAlgorithm_algorithm_tab._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 8)), (u'Params', ___MaskGenAlgorithm_algorithm_tab_val_Params_0), (u'paramPresence', u'required')])], rr=[], ev=None, er=[])
+    _MaskGenAlgorithm_algorithm._const_tab = __MaskGenAlgorithm_algorithm_tab
+    _MaskGenAlgorithm_algorithm._const_tab_at = None
+    _MaskGenAlgorithm_algorithm._const_tab_id = u'id'
+    _MaskGenAlgorithm_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'ALGORITHM'), [u'Params']), opt=True)
+    _MaskGenAlgorithm_parameters._const_tab = __MaskGenAlgorithm_algorithm_tab
+    _MaskGenAlgorithm_parameters._const_tab_at = ('..', u'algorithm')
+    _MaskGenAlgorithm_parameters._const_tab_id = u'Params'
+    MaskGenAlgorithm._cont = ASN1Dict([
+        (u'algorithm', _MaskGenAlgorithm_algorithm),
+        (u'parameters', _MaskGenAlgorithm_parameters),
+        ])
+    MaskGenAlgorithm._ext = None
+    
+    #-----< mgf1SHA1 >-----#
+    mgf1SHA1 = SEQ(name=u'mgf1SHA1', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'MaskGenAlgorithm')))
+    _parameters_val_0 = SEQ(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'HashAlgorithm')))
+    mgf1SHA1._val = dict([(u'algorithm', (1, 2, 840, 113549, 1, 1, 8)), (u'parameters', (_parameters_val_0, dict([(u'algorithm', (1, 3, 14, 3, 2, 26)), (u'parameters', (_parameters_val, 0))])))])
+    
+    #-----< PKCS1MGFAlgorithms >-----#
+    PKCS1MGFAlgorithms = CLASS(name=u'PKCS1MGFAlgorithms', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'ALGORITHM')))
+    _PKCS1MGFAlgorithms_val_Params_0 = SEQ(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'HashAlgorithm')))
+    PKCS1MGFAlgorithms._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 8)), (u'Params', _PKCS1MGFAlgorithms_val_Params_0), (u'paramPresence', u'required')])], rr=[], ev=[], er=[])
+    
+    #-----< PSourceAlgorithm >-----#
+    PSourceAlgorithm = SEQ(name=u'PSourceAlgorithm', mode=MODE_TYPE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'AlgorithmIdentifier')))
+    _PSourceAlgorithm_algorithm = OID(name=u'algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'ALGORITHM'), [u'id']))
+    __PSourceAlgorithm_algorithm_tab = CLASS(name='_tab_ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'ALGORITHM')))
+    ___PSourceAlgorithm_algorithm_tab_val_Params_0 = OCT_STR(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'EncodingParameters')))
+    __PSourceAlgorithm_algorithm_tab._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 9)), (u'Params', ___PSourceAlgorithm_algorithm_tab_val_Params_0), (u'paramPresence', u'required')])], rr=[], ev=None, er=[])
+    _PSourceAlgorithm_algorithm._const_tab = __PSourceAlgorithm_algorithm_tab
+    _PSourceAlgorithm_algorithm._const_tab_at = None
+    _PSourceAlgorithm_algorithm._const_tab_id = u'id'
+    _PSourceAlgorithm_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'ALGORITHM'), [u'Params']), opt=True)
+    _PSourceAlgorithm_parameters._const_tab = __PSourceAlgorithm_algorithm_tab
+    _PSourceAlgorithm_parameters._const_tab_at = ('..', u'algorithm')
+    _PSourceAlgorithm_parameters._const_tab_id = u'Params'
+    PSourceAlgorithm._cont = ASN1Dict([
+        (u'algorithm', _PSourceAlgorithm_algorithm),
+        (u'parameters', _PSourceAlgorithm_parameters),
+        ])
+    PSourceAlgorithm._ext = None
+    
+    #-----< PSS-SourceAlgorithms >-----#
+    PSS_SourceAlgorithms = CLASS(name=u'PSS-SourceAlgorithms', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'ALGORITHM')))
+    _PSS_SourceAlgorithms_val_Params_0 = OCT_STR(name=u'Params', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'EncodingParameters')))
+    PSS_SourceAlgorithms._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 9)), (u'Params', _PSS_SourceAlgorithms_val_Params_0), (u'paramPresence', u'required')])], rr=[], ev=[], er=[])
+    
+    #-----< pSpecifiedEmpty >-----#
+    pSpecifiedEmpty = SEQ(name=u'pSpecifiedEmpty', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'PSourceAlgorithm')))
+    _parameters_val_1 = OCT_STR(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'EncodingParameters')))
+    pSpecifiedEmpty._val = dict([(u'algorithm', (1, 2, 840, 113549, 1, 1, 9)), (u'parameters', (_parameters_val_1, b''))])
+    
+    #-----< RSASSA-PSS-params >-----#
+    RSASSA_PSS_params = SEQ(name=u'RSASSA-PSS-params', mode=MODE_TYPE)
+    _RSASSA_PSS_params_hashAlgorithm = SEQ(name=u'hashAlgorithm', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'HashAlgorithm')), default=dict([(u'algorithm', (1, 3, 14, 3, 2, 26)), (u'parameters', (_parameters_val, 0))]))
+    _RSASSA_PSS_params_maskGenAlgorithm = SEQ(name=u'maskGenAlgorithm', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'MaskGenAlgorithm')), default=dict([(u'algorithm', (1, 2, 840, 113549, 1, 1, 8)), (u'parameters', (_parameters_val_0, dict([(u'algorithm', (1, 3, 14, 3, 2, 26)), (u'parameters', (_parameters_val, 0))])))]))
+    _RSASSA_PSS_params_saltLength = INT(name=u'saltLength', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), default=20)
+    _RSASSA_PSS_params_trailerField = INT(name=u'trailerField', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), default=1)
+    RSASSA_PSS_params._cont = ASN1Dict([
+        (u'hashAlgorithm', _RSASSA_PSS_params_hashAlgorithm),
+        (u'maskGenAlgorithm', _RSASSA_PSS_params_maskGenAlgorithm),
+        (u'saltLength', _RSASSA_PSS_params_saltLength),
+        (u'trailerField', _RSASSA_PSS_params_trailerField),
+        ])
+    RSASSA_PSS_params._ext = None
+    
+    #-----< RSAES-OAEP-params >-----#
+    RSAES_OAEP_params = SEQ(name=u'RSAES-OAEP-params', mode=MODE_TYPE)
+    _RSAES_OAEP_params_hashFunc = SEQ(name=u'hashFunc', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'HashAlgorithm')), default=dict([(u'algorithm', (1, 3, 14, 3, 2, 26)), (u'parameters', (_parameters_val, 0))]))
+    _RSAES_OAEP_params_maskGenFunc = SEQ(name=u'maskGenFunc', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'MaskGenAlgorithm')), default=dict([(u'algorithm', (1, 2, 840, 113549, 1, 1, 8)), (u'parameters', (_parameters_val_0, dict([(u'algorithm', (1, 3, 14, 3, 2, 26)), (u'parameters', (_parameters_val, 0))])))]))
+    _RSAES_OAEP_params_pSourceFunc = SEQ(name=u'pSourceFunc', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'PSourceAlgorithm')), default=dict([(u'algorithm', (1, 2, 840, 113549, 1, 1, 9)), (u'parameters', (_parameters_val_1, b''))]))
+    RSAES_OAEP_params._cont = ASN1Dict([
+        (u'hashFunc', _RSAES_OAEP_params_hashFunc),
+        (u'maskGenFunc', _RSAES_OAEP_params_maskGenFunc),
+        (u'pSourceFunc', _RSAES_OAEP_params_pSourceFunc),
+        ])
+    RSAES_OAEP_params._ext = None
+    
+    _all_ = [
+        PublicKeys,
+        _PublicKeys_val_KeyValue_0,
+        _PublicKeys_val_Params_0,
+        _PublicKeys_val_KeyValue_1,
+        _PublicKeys_val_Params_1,
+        SignatureAlgs,
+        _SignatureAlgs_val_Params_0,
+        __SIGNATURE_ALGORITHM_HashSet_val_Params_0,
+        __SIGNATURE_ALGORITHM_HashSet_val_Params_1,
+        __SIGNATURE_ALGORITHM_HashSet_val_Params_2,
+        __SIGNATURE_ALGORITHM_HashSet_val_Params_3,
+        __SIGNATURE_ALGORITHM_HashSet_val_Params_4,
+        __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_0,
+        __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_0,
+        __SIGNATURE_ALGORITHM_PublicKeySet_val_KeyValue_1,
+        __SIGNATURE_ALGORITHM_PublicKeySet_val_Params_1,
+        KeyTransportAlgs,
+        _KeyTransportAlgs_val_Params_0,
+        __KEY_TRANSPORT_PublicKeySet_val_KeyValue_0,
+        __KEY_TRANSPORT_PublicKeySet_val_Params_0,
+        __KEY_TRANSPORT_PublicKeySet_val_KeyValue_1,
+        __KEY_TRANSPORT_PublicKeySet_val_Params_1,
+        __KEY_TRANSPORT_smimeCaps_val_Type,
+        HashAlgs,
+        _HashAlgs_val_Params_0,
+        _HashAlgs_val_Params_1,
+        _HashAlgs_val_Params_2,
+        _HashAlgs_val_Params_3,
+        SMimeCaps,
+        _SMimeCaps_val_Type_1,
+        pk_rsaSSA_PSS,
+        _pk_rsaSSA_PSS_val_KeyValue,
+        _pk_rsaSSA_PSS_val_Params,
+        sa_rsaSSA_PSS,
+        _sa_rsaSSA_PSS_val_Params,
+        sa_sha224WithRSAEncryption,
+        _sa_sha224WithRSAEncryption_val_Params,
+        sha224WithRSAEncryption,
+        sa_sha256WithRSAEncryption,
+        _sa_sha256WithRSAEncryption_val_Params,
+        sha256WithRSAEncryption,
+        sa_sha384WithRSAEncryption,
+        _sa_sha384WithRSAEncryption_val_Params,
+        sha384WithRSAEncryption,
+        sa_sha512WithRSAEncryption,
+        _sa_sha512WithRSAEncryption_val_Params,
+        sha512WithRSAEncryption,
+        pk_rsaES_OAEP,
+        _pk_rsaES_OAEP_val_KeyValue,
+        _pk_rsaES_OAEP_val_Params,
+        kta_rsaES_OAEP,
+        _kta_rsaES_OAEP_val_Params,
+        pkcs_1,
+        id_RSAES_OAEP,
+        id_mgf1,
+        id_pSpecified,
+        id_RSASSA_PSS,
+        id_sha224,
+        mda_sha224,
+        _mda_sha224_val_Params,
+        id_sha256,
+        mda_sha256,
+        _mda_sha256_val_Params,
+        id_sha384,
+        mda_sha384,
+        _mda_sha384_val_Params,
+        id_sha512,
+        mda_sha512,
+        _mda_sha512_val_Params,
+        EncodingParameters,
+        nullOctetString,
+        nullParameters,
+        __HashAlgorithm_algorithm_tab,
+        ___HashAlgorithm_algorithm_tab_val_Params_0,
+        ___HashAlgorithm_algorithm_tab_val_Params_1,
+        ___HashAlgorithm_algorithm_tab_val_Params_2,
+        ___HashAlgorithm_algorithm_tab_val_Params_3,
+        ___HashAlgorithm_algorithm_tab_val_Params_4,
+        _HashAlgorithm_algorithm,
+        _HashAlgorithm_parameters,
+        HashAlgorithm,
+        HashAlgorithms,
+        _HashAlgorithms_val_Params_0,
+        _HashAlgorithms_val_Params_1,
+        _HashAlgorithms_val_Params_2,
+        _HashAlgorithms_val_Params_3,
+        _HashAlgorithms_val_Params_4,
+        sha1Identifier,
+        _parameters_val,
+        __MaskGenAlgorithm_algorithm_tab,
+        ___MaskGenAlgorithm_algorithm_tab_val_Params_0,
+        _MaskGenAlgorithm_algorithm,
+        _MaskGenAlgorithm_parameters,
+        MaskGenAlgorithm,
+        mgf1SHA1,
+        _parameters_val_0,
+        PKCS1MGFAlgorithms,
+        _PKCS1MGFAlgorithms_val_Params_0,
+        __PSourceAlgorithm_algorithm_tab,
+        ___PSourceAlgorithm_algorithm_tab_val_Params_0,
+        _PSourceAlgorithm_algorithm,
+        _PSourceAlgorithm_parameters,
+        PSourceAlgorithm,
+        PSS_SourceAlgorithms,
+        _PSS_SourceAlgorithms_val_Params_0,
+        pSpecifiedEmpty,
+        _parameters_val_1,
+        _RSASSA_PSS_params_hashAlgorithm,
+        _RSASSA_PSS_params_maskGenAlgorithm,
+        _RSASSA_PSS_params_saltLength,
+        _RSASSA_PSS_params_trailerField,
+        RSASSA_PSS_params,
+        _RSAES_OAEP_params_hashFunc,
+        _RSAES_OAEP_params_maskGenFunc,
+        _RSAES_OAEP_params_pSourceFunc,
+        RSAES_OAEP_params,
+    ]
+
 class PKIXAlgs_2009:
 
     _name_  = u'PKIXAlgs-2009'
@@ -13318,6 +12063,1261 @@ class PKIXAttributeCertificate_2009:
         ACClearAttrs,
     ]
 
+class PKIX_CommonTypes_2009:
+
+    _name_  = u'PKIX-CommonTypes-2009'
+    _oid_   = [1, 3, 6, 1, 5, 5, 7, 0, 57]
+    
+    _obj_ = [
+        u'ATTRIBUTE',
+        u'MATCHING-RULE',
+        u'AttributeSet',
+        u'SingleAttribute',
+        u'EXTENSION',
+        u'Extensions',
+        u'Extension',
+        u'SECURITY-CATEGORY',
+        u'SecurityCategory',
+        ]
+    _type_ = [
+        u'ATTRIBUTE',
+        u'MATCHING-RULE',
+        u'AttributeSet',
+        u'SingleAttribute',
+        u'EXTENSION',
+        u'Extensions',
+        u'Extension',
+        u'SECURITY-CATEGORY',
+        u'SecurityCategory',
+        ]
+    _set_ = [
+        ]
+    _val_ = [
+        ]
+    _class_ = [
+        u'ATTRIBUTE',
+        u'MATCHING-RULE',
+        u'EXTENSION',
+        u'SECURITY-CATEGORY',
+        ]
+    _param_ = [
+        u'AttributeSet',
+        u'SingleAttribute',
+        u'Extensions',
+        u'Extension',
+        u'SecurityCategory',
+        ]
+    
+    #-----< ATTRIBUTE >-----#
+    ATTRIBUTE = CLASS(name=u'ATTRIBUTE', mode=MODE_TYPE)
+    _ATTRIBUTE_id = OID(name=u'id', mode=MODE_VALUE, uniq=True)
+    _ATTRIBUTE_Type = OPEN(name=u'Type', mode=MODE_TYPE, opt=True)
+    _ATTRIBUTE_equality_match = CLASS(name=u'equality-match', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'MATCHING-RULE')), opt=True)
+    _ATTRIBUTE_minCount = INT(name=u'minCount', mode=MODE_VALUE, default=1)
+    _ATTRIBUTE_maxCount = INT(name=u'maxCount', mode=MODE_VALUE, opt=True)
+    ATTRIBUTE._cont = ASN1Dict([
+        (u'id', _ATTRIBUTE_id),
+        (u'Type', _ATTRIBUTE_Type),
+        (u'equality-match', _ATTRIBUTE_equality_match),
+        (u'minCount', _ATTRIBUTE_minCount),
+        (u'maxCount', _ATTRIBUTE_maxCount),
+        ])
+    
+    #-----< MATCHING-RULE >-----#
+    MATCHING_RULE = CLASS(name=u'MATCHING-RULE', mode=MODE_TYPE)
+    _MATCHING_RULE_ParentMatchingRules = CLASS(name=u'ParentMatchingRules', mode=MODE_SET, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'MATCHING-RULE')), opt=True)
+    _MATCHING_RULE_AssertionType = OPEN(name=u'AssertionType', mode=MODE_TYPE, opt=True)
+    _MATCHING_RULE_uniqueMatchIndicator = CLASS(name=u'uniqueMatchIndicator', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'ATTRIBUTE')), opt=True)
+    _MATCHING_RULE_id = OID(name=u'id', mode=MODE_VALUE, uniq=True)
+    MATCHING_RULE._cont = ASN1Dict([
+        (u'ParentMatchingRules', _MATCHING_RULE_ParentMatchingRules),
+        (u'AssertionType', _MATCHING_RULE_AssertionType),
+        (u'uniqueMatchIndicator', _MATCHING_RULE_uniqueMatchIndicator),
+        (u'id', _MATCHING_RULE_id),
+        ])
+    
+    #-----< AttributeSet >-----#
+    AttributeSet = SEQ(name=u'AttributeSet', mode=MODE_TYPE, param=True)
+    
+    #-----< SingleAttribute >-----#
+    SingleAttribute = SEQ(name=u'SingleAttribute', mode=MODE_TYPE, param=True)
+    
+    #-----< EXTENSION >-----#
+    EXTENSION = CLASS(name=u'EXTENSION', mode=MODE_TYPE)
+    _EXTENSION_id = OID(name=u'id', mode=MODE_VALUE, uniq=True)
+    _EXTENSION_ExtnType = OPEN(name=u'ExtnType', mode=MODE_TYPE)
+    _EXTENSION_Critical = BOOL(name=u'Critical', mode=MODE_SET, default=ASN1Set(rv=[True, False], rr=[], ev=None, er=[]))
+    EXTENSION._cont = ASN1Dict([
+        (u'id', _EXTENSION_id),
+        (u'ExtnType', _EXTENSION_ExtnType),
+        (u'Critical', _EXTENSION_Critical),
+        ])
+    
+    #-----< Extensions >-----#
+    Extensions = SEQ_OF(name=u'Extensions', mode=MODE_TYPE, param=True)
+    
+    #-----< Extension >-----#
+    Extension = SEQ(name=u'Extension', mode=MODE_TYPE, param=True)
+    
+    #-----< SECURITY-CATEGORY >-----#
+    SECURITY_CATEGORY = CLASS(name=u'SECURITY-CATEGORY', mode=MODE_TYPE, typeref=ASN1RefType(('_IMPL_', u'TYPE-IDENTIFIER'), []))
+    
+    #-----< SecurityCategory >-----#
+    SecurityCategory = SEQ(name=u'SecurityCategory', mode=MODE_TYPE, param=True)
+    
+    _all_ = [
+        _ATTRIBUTE_id,
+        _ATTRIBUTE_Type,
+        _ATTRIBUTE_equality_match,
+        _ATTRIBUTE_minCount,
+        _ATTRIBUTE_maxCount,
+        ATTRIBUTE,
+        _MATCHING_RULE_ParentMatchingRules,
+        _MATCHING_RULE_AssertionType,
+        _MATCHING_RULE_uniqueMatchIndicator,
+        _MATCHING_RULE_id,
+        MATCHING_RULE,
+        _EXTENSION_id,
+        _EXTENSION_ExtnType,
+        _EXTENSION_Critical,
+        EXTENSION,
+        SECURITY_CATEGORY,
+    ]
+
+class PKIX_X400Address_2009:
+
+    _name_  = u'PKIX-X400Address-2009'
+    _oid_   = [1, 3, 6, 1, 5, 5, 7, 0, 60]
+    
+    _obj_ = [
+        u'ORAddress',
+        u'BuiltInStandardAttributes',
+        u'CountryName',
+        u'AdministrationDomainName',
+        u'NetworkAddress',
+        u'X121Address',
+        u'TerminalIdentifier',
+        u'PrivateDomainName',
+        u'OrganizationName',
+        u'NumericUserIdentifier',
+        u'PersonalName',
+        u'OrganizationalUnitNames',
+        u'OrganizationalUnitName',
+        u'BuiltInDomainDefinedAttributes',
+        u'BuiltInDomainDefinedAttribute',
+        u'ExtensionAttributes',
+        u'EXTENSION-ATTRIBUTE',
+        u'ExtensionAttribute',
+        u'SupportedExtensionAttributes',
+        u'ea-commonName',
+        u'ea-teletexCommonName',
+        u'ea-teletexOrganizationName',
+        u'ea-teletexPersonalName',
+        u'ea-teletexOrganizationalUnitNames',
+        u'TeletexOrganizationalUnitName',
+        u'ea-pDSName',
+        u'ea-physicalDeliveryCountryName',
+        u'ea-postalCode',
+        u'ea-physicalDeliveryOfficeName',
+        u'ea-physicalDeliveryOfficeNumber',
+        u'ea-extensionORAddressComponents',
+        u'ea-physicalDeliveryPersonalName',
+        u'ea-physicalDeliveryOrganizationName',
+        u'ea-extensionPhysicalDeliveryAddressComponents',
+        u'ea-unformattedPostalAddress',
+        u'ea-streetAddress',
+        u'ea-postOfficeBoxAddress',
+        u'ea-posteRestanteAddress',
+        u'ea-uniquePostalName',
+        u'ea-localPostalAttributes',
+        u'PDSParameter',
+        u'ea-extendedNetworkAddress',
+        u'PresentationAddress',
+        u'ea-terminalType',
+        u'ea-teletexDomainDefinedAttributes',
+        u'TeletexDomainDefinedAttribute',
+        u'ub-match',
+        u'ub-common-name-length',
+        u'ub-country-name-alpha-length',
+        u'ub-country-name-numeric-length',
+        u'ub-domain-defined-attributes',
+        u'ub-domain-defined-attribute-type-length',
+        u'ub-domain-defined-attribute-value-length',
+        u'ub-domain-name-length',
+        u'ub-extension-attributes',
+        u'ub-e163-4-number-length',
+        u'ub-e163-4-sub-address-length',
+        u'ub-generation-qualifier-length',
+        u'ub-given-name-length',
+        u'ub-initials-length',
+        u'ub-integer-options',
+        u'ub-numeric-user-id-length',
+        u'ub-organization-name-length',
+        u'ub-organizational-unit-name-length',
+        u'ub-organizational-units',
+        u'ub-pds-name-length',
+        u'ub-pds-parameter-length',
+        u'ub-pds-physical-address-lines',
+        u'ub-postal-code-length',
+        u'ub-surname-length',
+        u'ub-terminal-id-length',
+        u'ub-unformatted-address-length',
+        u'ub-x121-address-length',
+        ]
+    _type_ = [
+        u'ORAddress',
+        u'BuiltInStandardAttributes',
+        u'CountryName',
+        u'AdministrationDomainName',
+        u'NetworkAddress',
+        u'X121Address',
+        u'TerminalIdentifier',
+        u'PrivateDomainName',
+        u'OrganizationName',
+        u'NumericUserIdentifier',
+        u'PersonalName',
+        u'OrganizationalUnitNames',
+        u'OrganizationalUnitName',
+        u'BuiltInDomainDefinedAttributes',
+        u'BuiltInDomainDefinedAttribute',
+        u'ExtensionAttributes',
+        u'EXTENSION-ATTRIBUTE',
+        u'ExtensionAttribute',
+        u'TeletexOrganizationalUnitName',
+        u'PDSParameter',
+        u'PresentationAddress',
+        u'TeletexDomainDefinedAttribute',
+        ]
+    _set_ = [
+        u'SupportedExtensionAttributes',
+        ]
+    _val_ = [
+        u'ea-commonName',
+        u'ea-teletexCommonName',
+        u'ea-teletexOrganizationName',
+        u'ea-teletexPersonalName',
+        u'ea-teletexOrganizationalUnitNames',
+        u'ea-pDSName',
+        u'ea-physicalDeliveryCountryName',
+        u'ea-postalCode',
+        u'ea-physicalDeliveryOfficeName',
+        u'ea-physicalDeliveryOfficeNumber',
+        u'ea-extensionORAddressComponents',
+        u'ea-physicalDeliveryPersonalName',
+        u'ea-physicalDeliveryOrganizationName',
+        u'ea-extensionPhysicalDeliveryAddressComponents',
+        u'ea-unformattedPostalAddress',
+        u'ea-streetAddress',
+        u'ea-postOfficeBoxAddress',
+        u'ea-posteRestanteAddress',
+        u'ea-uniquePostalName',
+        u'ea-localPostalAttributes',
+        u'ea-extendedNetworkAddress',
+        u'ea-terminalType',
+        u'ea-teletexDomainDefinedAttributes',
+        u'ub-match',
+        u'ub-common-name-length',
+        u'ub-country-name-alpha-length',
+        u'ub-country-name-numeric-length',
+        u'ub-domain-defined-attributes',
+        u'ub-domain-defined-attribute-type-length',
+        u'ub-domain-defined-attribute-value-length',
+        u'ub-domain-name-length',
+        u'ub-extension-attributes',
+        u'ub-e163-4-number-length',
+        u'ub-e163-4-sub-address-length',
+        u'ub-generation-qualifier-length',
+        u'ub-given-name-length',
+        u'ub-initials-length',
+        u'ub-integer-options',
+        u'ub-numeric-user-id-length',
+        u'ub-organization-name-length',
+        u'ub-organizational-unit-name-length',
+        u'ub-organizational-units',
+        u'ub-pds-name-length',
+        u'ub-pds-parameter-length',
+        u'ub-pds-physical-address-lines',
+        u'ub-postal-code-length',
+        u'ub-surname-length',
+        u'ub-terminal-id-length',
+        u'ub-unformatted-address-length',
+        u'ub-x121-address-length',
+        ]
+    _class_ = [
+        u'EXTENSION-ATTRIBUTE',
+        u'SupportedExtensionAttributes',
+        u'ea-commonName',
+        u'ea-teletexCommonName',
+        u'ea-teletexOrganizationName',
+        u'ea-teletexPersonalName',
+        u'ea-teletexOrganizationalUnitNames',
+        u'ea-pDSName',
+        u'ea-physicalDeliveryCountryName',
+        u'ea-postalCode',
+        u'ea-physicalDeliveryOfficeName',
+        u'ea-physicalDeliveryOfficeNumber',
+        u'ea-extensionORAddressComponents',
+        u'ea-physicalDeliveryPersonalName',
+        u'ea-physicalDeliveryOrganizationName',
+        u'ea-extensionPhysicalDeliveryAddressComponents',
+        u'ea-unformattedPostalAddress',
+        u'ea-streetAddress',
+        u'ea-postOfficeBoxAddress',
+        u'ea-posteRestanteAddress',
+        u'ea-uniquePostalName',
+        u'ea-localPostalAttributes',
+        u'ea-extendedNetworkAddress',
+        u'ea-terminalType',
+        u'ea-teletexDomainDefinedAttributes',
+        ]
+    _param_ = [
+        ]
+    
+    #-----< ORAddress >-----#
+    ORAddress = SEQ(name=u'ORAddress', mode=MODE_TYPE)
+    _ORAddress_built_in_standard_attributes = SEQ(name=u'built-in-standard-attributes', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'BuiltInStandardAttributes')))
+    _ORAddress_built_in_domain_defined_attributes = SEQ_OF(name=u'built-in-domain-defined-attributes', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'BuiltInDomainDefinedAttributes')), opt=True)
+    _ORAddress_extension_attributes = SET_OF(name=u'extension-attributes', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'ExtensionAttributes')), opt=True)
+    ORAddress._cont = ASN1Dict([
+        (u'built-in-standard-attributes', _ORAddress_built_in_standard_attributes),
+        (u'built-in-domain-defined-attributes', _ORAddress_built_in_domain_defined_attributes),
+        (u'extension-attributes', _ORAddress_extension_attributes),
+        ])
+    ORAddress._ext = None
+    
+    #-----< BuiltInStandardAttributes >-----#
+    BuiltInStandardAttributes = SEQ(name=u'BuiltInStandardAttributes', mode=MODE_TYPE)
+    _BuiltInStandardAttributes_country_name = CHOICE(name=u'country-name', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'CountryName')), opt=True)
+    _BuiltInStandardAttributes_administration_domain_name = CHOICE(name=u'administration-domain-name', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'AdministrationDomainName')), opt=True)
+    _BuiltInStandardAttributes_network_address = STR_NUM(name=u'network-address', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX-X400Address-2009', 'NetworkAddress')), opt=True)
+    _BuiltInStandardAttributes_terminal_identifier = STR_PRINT(name=u'terminal-identifier', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX-X400Address-2009', 'TerminalIdentifier')), opt=True)
+    _BuiltInStandardAttributes_private_domain_name = CHOICE(name=u'private-domain-name', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKIX-X400Address-2009', 'PrivateDomainName')), opt=True)
+    _BuiltInStandardAttributes_organization_name = STR_PRINT(name=u'organization-name', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX-X400Address-2009', 'OrganizationName')), opt=True)
+    _BuiltInStandardAttributes_numeric_user_identifier = STR_NUM(name=u'numeric-user-identifier', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX-X400Address-2009', 'NumericUserIdentifier')), opt=True)
+    _BuiltInStandardAttributes_personal_name = SET(name=u'personal-name', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX-X400Address-2009', 'PersonalName')), opt=True)
+    _BuiltInStandardAttributes_organizational_unit_names = SEQ_OF(name=u'organizational-unit-names', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX-X400Address-2009', 'OrganizationalUnitNames')), opt=True)
+    BuiltInStandardAttributes._cont = ASN1Dict([
+        (u'country-name', _BuiltInStandardAttributes_country_name),
+        (u'administration-domain-name', _BuiltInStandardAttributes_administration_domain_name),
+        (u'network-address', _BuiltInStandardAttributes_network_address),
+        (u'terminal-identifier', _BuiltInStandardAttributes_terminal_identifier),
+        (u'private-domain-name', _BuiltInStandardAttributes_private_domain_name),
+        (u'organization-name', _BuiltInStandardAttributes_organization_name),
+        (u'numeric-user-identifier', _BuiltInStandardAttributes_numeric_user_identifier),
+        (u'personal-name', _BuiltInStandardAttributes_personal_name),
+        (u'organizational-unit-names', _BuiltInStandardAttributes_organizational_unit_names),
+        ])
+    BuiltInStandardAttributes._ext = None
+    
+    #-----< CountryName >-----#
+    CountryName = CHOICE(name=u'CountryName', mode=MODE_TYPE, tag=(1, TAG_APPLICATION, TAG_EXPLICIT))
+    _CountryName_x121_dcc_code = STR_NUM(name=u'x121-dcc-code', mode=MODE_TYPE)
+    _CountryName_x121_dcc_code._const_sz = ASN1Set(rv=[3], rr=[], ev=None, er=[])
+    _CountryName_iso_3166_alpha2_code = STR_PRINT(name=u'iso-3166-alpha2-code', mode=MODE_TYPE)
+    _CountryName_iso_3166_alpha2_code._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
+    CountryName._cont = ASN1Dict([
+        (u'x121-dcc-code', _CountryName_x121_dcc_code),
+        (u'iso-3166-alpha2-code', _CountryName_iso_3166_alpha2_code),
+        ])
+    CountryName._ext = None
+    
+    #-----< AdministrationDomainName >-----#
+    AdministrationDomainName = CHOICE(name=u'AdministrationDomainName', mode=MODE_TYPE, tag=(2, TAG_APPLICATION, TAG_EXPLICIT))
+    _AdministrationDomainName_numeric = STR_NUM(name=u'numeric', mode=MODE_TYPE)
+    _AdministrationDomainName_numeric._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=16)], ev=None, er=[])
+    _AdministrationDomainName_printable = STR_PRINT(name=u'printable', mode=MODE_TYPE)
+    _AdministrationDomainName_printable._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=16)], ev=None, er=[])
+    AdministrationDomainName._cont = ASN1Dict([
+        (u'numeric', _AdministrationDomainName_numeric),
+        (u'printable', _AdministrationDomainName_printable),
+        ])
+    AdministrationDomainName._ext = None
+    
+    #-----< NetworkAddress >-----#
+    NetworkAddress = STR_NUM(name=u'NetworkAddress', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'X121Address')))
+    
+    #-----< X121Address >-----#
+    X121Address = STR_NUM(name=u'X121Address', mode=MODE_TYPE)
+    X121Address._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    
+    #-----< TerminalIdentifier >-----#
+    TerminalIdentifier = STR_PRINT(name=u'TerminalIdentifier', mode=MODE_TYPE)
+    TerminalIdentifier._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=24)], ev=None, er=[])
+    
+    #-----< PrivateDomainName >-----#
+    PrivateDomainName = CHOICE(name=u'PrivateDomainName', mode=MODE_TYPE)
+    _PrivateDomainName_numeric = STR_NUM(name=u'numeric', mode=MODE_TYPE)
+    _PrivateDomainName_numeric._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    _PrivateDomainName_printable = STR_PRINT(name=u'printable', mode=MODE_TYPE)
+    _PrivateDomainName_printable._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    PrivateDomainName._cont = ASN1Dict([
+        (u'numeric', _PrivateDomainName_numeric),
+        (u'printable', _PrivateDomainName_printable),
+        ])
+    PrivateDomainName._ext = None
+    
+    #-----< OrganizationName >-----#
+    OrganizationName = STR_PRINT(name=u'OrganizationName', mode=MODE_TYPE)
+    OrganizationName._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    
+    #-----< NumericUserIdentifier >-----#
+    NumericUserIdentifier = STR_NUM(name=u'NumericUserIdentifier', mode=MODE_TYPE)
+    NumericUserIdentifier._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    
+    #-----< PersonalName >-----#
+    PersonalName = SET(name=u'PersonalName', mode=MODE_TYPE)
+    _PersonalName_surname = STR_PRINT(name=u'surname', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PersonalName_surname._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=40)], ev=None, er=[])
+    _PersonalName_given_name = STR_PRINT(name=u'given-name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _PersonalName_given_name._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    _PersonalName_initials = STR_PRINT(name=u'initials', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _PersonalName_initials._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=5)], ev=None, er=[])
+    _PersonalName_generation_qualifier = STR_PRINT(name=u'generation-qualifier', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _PersonalName_generation_qualifier._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=3)], ev=None, er=[])
+    PersonalName._cont = ASN1Dict([
+        (u'surname', _PersonalName_surname),
+        (u'given-name', _PersonalName_given_name),
+        (u'initials', _PersonalName_initials),
+        (u'generation-qualifier', _PersonalName_generation_qualifier),
+        ])
+    PersonalName._ext = None
+    
+    #-----< OrganizationalUnitNames >-----#
+    OrganizationalUnitNames = SEQ_OF(name=u'OrganizationalUnitNames', mode=MODE_TYPE)
+    _OrganizationalUnitNames__item_ = STR_PRINT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'OrganizationalUnitName')))
+    OrganizationalUnitNames._cont = _OrganizationalUnitNames__item_
+    OrganizationalUnitNames._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    
+    #-----< OrganizationalUnitName >-----#
+    OrganizationalUnitName = STR_PRINT(name=u'OrganizationalUnitName', mode=MODE_TYPE)
+    OrganizationalUnitName._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    
+    #-----< BuiltInDomainDefinedAttributes >-----#
+    BuiltInDomainDefinedAttributes = SEQ_OF(name=u'BuiltInDomainDefinedAttributes', mode=MODE_TYPE)
+    _BuiltInDomainDefinedAttributes__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'BuiltInDomainDefinedAttribute')))
+    BuiltInDomainDefinedAttributes._cont = _BuiltInDomainDefinedAttributes__item_
+    BuiltInDomainDefinedAttributes._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    
+    #-----< BuiltInDomainDefinedAttribute >-----#
+    BuiltInDomainDefinedAttribute = SEQ(name=u'BuiltInDomainDefinedAttribute', mode=MODE_TYPE)
+    _BuiltInDomainDefinedAttribute_type = STR_PRINT(name=u'type', mode=MODE_TYPE)
+    _BuiltInDomainDefinedAttribute_type._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    _BuiltInDomainDefinedAttribute_value = STR_PRINT(name=u'value', mode=MODE_TYPE)
+    _BuiltInDomainDefinedAttribute_value._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
+    BuiltInDomainDefinedAttribute._cont = ASN1Dict([
+        (u'type', _BuiltInDomainDefinedAttribute_type),
+        (u'value', _BuiltInDomainDefinedAttribute_value),
+        ])
+    BuiltInDomainDefinedAttribute._ext = None
+    
+    #-----< ExtensionAttributes >-----#
+    ExtensionAttributes = SET_OF(name=u'ExtensionAttributes', mode=MODE_TYPE)
+    _ExtensionAttributes__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'ExtensionAttribute')))
+    ExtensionAttributes._cont = _ExtensionAttributes__item_
+    ExtensionAttributes._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=256)], ev=None, er=[])
+    
+    #-----< EXTENSION-ATTRIBUTE >-----#
+    EXTENSION_ATTRIBUTE = CLASS(name=u'EXTENSION-ATTRIBUTE', mode=MODE_TYPE)
+    _EXTENSION_ATTRIBUTE_id = INT(name=u'id', mode=MODE_VALUE, uniq=True)
+    _EXTENSION_ATTRIBUTE_id._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=256)], ev=None, er=[])
+    _EXTENSION_ATTRIBUTE_Type = OPEN(name=u'Type', mode=MODE_TYPE)
+    EXTENSION_ATTRIBUTE._cont = ASN1Dict([
+        (u'id', _EXTENSION_ATTRIBUTE_id),
+        (u'Type', _EXTENSION_ATTRIBUTE_Type),
+        ])
+    
+    #-----< ExtensionAttribute >-----#
+    ExtensionAttribute = SEQ(name=u'ExtensionAttribute', mode=MODE_TYPE)
+    _ExtensionAttribute_extension_attribute_type = INT(name=u'extension-attribute-type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE'), [u'id']))
+    __ExtensionAttribute_extension_attribute_type_tab = CLASS(name='_tab_EXTENSION-ATTRIBUTE', mode=MODE_SET, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_0 = STR_PRINT(name=u'Type', mode=MODE_TYPE)
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_0._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_1 = STR_TELE(name=u'Type', mode=MODE_TYPE)
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_1._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_2 = STR_TELE(name=u'Type', mode=MODE_TYPE)
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_2._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_3 = SET(name=u'Type', mode=MODE_TYPE)
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_surname = STR_TELE(name=u'surname', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_surname._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=40)], ev=None, er=[])
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_given_name = STR_TELE(name=u'given-name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_given_name._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_initials = STR_TELE(name=u'initials', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_initials._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=5)], ev=None, er=[])
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_generation_qualifier = STR_TELE(name=u'generation-qualifier', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_generation_qualifier._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=3)], ev=None, er=[])
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_3._cont = ASN1Dict([
+        (u'surname', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_surname),
+        (u'given-name', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_given_name),
+        (u'initials', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_initials),
+        (u'generation-qualifier', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_generation_qualifier),
+        ])
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_3._ext = None
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_4 = SEQ_OF(name=u'Type', mode=MODE_TYPE)
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_4__item_ = STR_TELE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'TeletexOrganizationalUnitName')))
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_4._cont = ____ExtensionAttribute_extension_attribute_type_tab_val_Type_4__item_
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_4._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_5 = STR_PRINT(name=u'Type', mode=MODE_TYPE)
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_5._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_6 = CHOICE(name=u'Type', mode=MODE_TYPE)
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_6_x121_dcc_code = STR_NUM(name=u'x121-dcc-code', mode=MODE_TYPE)
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_6_x121_dcc_code._const_sz = ASN1Set(rv=[3], rr=[], ev=None, er=[])
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_6_iso_3166_alpha2_code = STR_PRINT(name=u'iso-3166-alpha2-code', mode=MODE_TYPE)
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_6_iso_3166_alpha2_code._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_6._cont = ASN1Dict([
+        (u'x121-dcc-code', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_6_x121_dcc_code),
+        (u'iso-3166-alpha2-code', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_6_iso_3166_alpha2_code),
+        ])
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_6._ext = None
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_7 = CHOICE(name=u'Type', mode=MODE_TYPE)
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_7_numeric_code = STR_NUM(name=u'numeric-code', mode=MODE_TYPE)
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_7_numeric_code._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_7_printable_code = STR_PRINT(name=u'printable-code', mode=MODE_TYPE)
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_7_printable_code._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_7._cont = ASN1Dict([
+        (u'numeric-code', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_7_numeric_code),
+        (u'printable-code', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_7_printable_code),
+        ])
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_7._ext = None
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_8 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_9 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_10 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_11 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_12 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_13 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_14 = SET(name=u'Type', mode=MODE_TYPE)
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_printable_address = SEQ_OF(name=u'printable-address', mode=MODE_TYPE, opt=True)
+    _____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_printable_address__item_ = STR_PRINT(name='_item_', mode=MODE_TYPE)
+    _____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_printable_address__item_._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=30)], ev=None, er=[])
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_printable_address._cont = _____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_printable_address__item_
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_printable_address._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=6)], ev=None, er=[])
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_teletex_string = STR_TELE(name=u'teletex-string', mode=MODE_TYPE, opt=True)
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_teletex_string._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=180)], ev=None, er=[])
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_14._cont = ASN1Dict([
+        (u'printable-address', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_printable_address),
+        (u'teletex-string', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_teletex_string),
+        ])
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_14._ext = None
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_15 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_16 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_17 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_18 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_19 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_20 = CHOICE(name=u'Type', mode=MODE_TYPE)
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address = SEQ(name=u'e163-4-address', mode=MODE_TYPE)
+    _____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address_number = STR_NUM(name=u'number', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address_number._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=15)], ev=None, er=[])
+    _____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address_sub_address = STR_NUM(name=u'sub-address', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address_sub_address._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=40)], ev=None, er=[])
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address._cont = ASN1Dict([
+        (u'number', _____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address_number),
+        (u'sub-address', _____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address_sub_address),
+        ])
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address._ext = None
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_psap_address = SEQ(name=u'psap-address', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX-X400Address-2009', 'PresentationAddress')))
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_20._cont = ASN1Dict([
+        (u'e163-4-address', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address),
+        (u'psap-address', ____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_psap_address),
+        ])
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_20._ext = None
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_21 = INT(name=u'Type', mode=MODE_TYPE)
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_21._cont = ASN1Dict([(u'telex', 3), (u'teletex', 4), (u'g3-facsimile', 5), (u'g4-facsimile', 6), (u'ia5-terminal', 7), (u'videotex', 8)])
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_21._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=256)], ev=None, er=[])
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_22 = SEQ_OF(name=u'Type', mode=MODE_TYPE)
+    ____ExtensionAttribute_extension_attribute_type_tab_val_Type_22__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'TeletexDomainDefinedAttribute')))
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_22._cont = ____ExtensionAttribute_extension_attribute_type_tab_val_Type_22__item_
+    ___ExtensionAttribute_extension_attribute_type_tab_val_Type_22._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    __ExtensionAttribute_extension_attribute_type_tab._val = ASN1Set(rv=[dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_0), (u'id', 1)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_1), (u'id', 2)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_2), (u'id', 3)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_3), (u'id', 4)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_4), (u'id', 5)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_5), (u'id', 7)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_6), (u'id', 8)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_7), (u'id', 9)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_8), (u'id', 10)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_9), (u'id', 11)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_10), (u'id', 12)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_11), (u'id', 13)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_12), (u'id', 14)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_13), (u'id', 15)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_14), (u'id', 16)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_15), (u'id', 17)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_16), (u'id', 18)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_17), (u'id', 19)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_18), (u'id', 20)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_19), (u'id', 21)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_20), (u'id', 22)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_21), (u'id', 23)]), dict([(u'Type', ___ExtensionAttribute_extension_attribute_type_tab_val_Type_22), (u'id', 6)])], rr=[], ev=None, er=[])
+    _ExtensionAttribute_extension_attribute_type._const_tab = __ExtensionAttribute_extension_attribute_type_tab
+    _ExtensionAttribute_extension_attribute_type._const_tab_at = None
+    _ExtensionAttribute_extension_attribute_type._const_tab_id = u'id'
+    _ExtensionAttribute_extension_attribute_value = OPEN(name=u'extension-attribute-value', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE'), [u'Type']))
+    _ExtensionAttribute_extension_attribute_value._const_tab = __ExtensionAttribute_extension_attribute_type_tab
+    _ExtensionAttribute_extension_attribute_value._const_tab_at = ('..', u'extension-attribute-type')
+    _ExtensionAttribute_extension_attribute_value._const_tab_id = u'Type'
+    ExtensionAttribute._cont = ASN1Dict([
+        (u'extension-attribute-type', _ExtensionAttribute_extension_attribute_type),
+        (u'extension-attribute-value', _ExtensionAttribute_extension_attribute_value),
+        ])
+    ExtensionAttribute._ext = None
+    
+    #-----< SupportedExtensionAttributes >-----#
+    SupportedExtensionAttributes = CLASS(name=u'SupportedExtensionAttributes', mode=MODE_SET, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _SupportedExtensionAttributes_val_Type_0 = STR_PRINT(name=u'Type', mode=MODE_TYPE)
+    _SupportedExtensionAttributes_val_Type_0._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    _SupportedExtensionAttributes_val_Type_1 = STR_TELE(name=u'Type', mode=MODE_TYPE)
+    _SupportedExtensionAttributes_val_Type_1._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    _SupportedExtensionAttributes_val_Type_2 = STR_TELE(name=u'Type', mode=MODE_TYPE)
+    _SupportedExtensionAttributes_val_Type_2._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    _SupportedExtensionAttributes_val_Type_3 = SET(name=u'Type', mode=MODE_TYPE)
+    __SupportedExtensionAttributes_val_Type_3_surname = STR_TELE(name=u'surname', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __SupportedExtensionAttributes_val_Type_3_surname._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=40)], ev=None, er=[])
+    __SupportedExtensionAttributes_val_Type_3_given_name = STR_TELE(name=u'given-name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __SupportedExtensionAttributes_val_Type_3_given_name._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    __SupportedExtensionAttributes_val_Type_3_initials = STR_TELE(name=u'initials', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __SupportedExtensionAttributes_val_Type_3_initials._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=5)], ev=None, er=[])
+    __SupportedExtensionAttributes_val_Type_3_generation_qualifier = STR_TELE(name=u'generation-qualifier', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __SupportedExtensionAttributes_val_Type_3_generation_qualifier._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=3)], ev=None, er=[])
+    _SupportedExtensionAttributes_val_Type_3._cont = ASN1Dict([
+        (u'surname', __SupportedExtensionAttributes_val_Type_3_surname),
+        (u'given-name', __SupportedExtensionAttributes_val_Type_3_given_name),
+        (u'initials', __SupportedExtensionAttributes_val_Type_3_initials),
+        (u'generation-qualifier', __SupportedExtensionAttributes_val_Type_3_generation_qualifier),
+        ])
+    _SupportedExtensionAttributes_val_Type_3._ext = None
+    _SupportedExtensionAttributes_val_Type_4 = SEQ_OF(name=u'Type', mode=MODE_TYPE)
+    __SupportedExtensionAttributes_val_Type_4__item_ = STR_TELE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'TeletexOrganizationalUnitName')))
+    _SupportedExtensionAttributes_val_Type_4._cont = __SupportedExtensionAttributes_val_Type_4__item_
+    _SupportedExtensionAttributes_val_Type_4._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _SupportedExtensionAttributes_val_Type_5 = STR_PRINT(name=u'Type', mode=MODE_TYPE)
+    _SupportedExtensionAttributes_val_Type_5._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    _SupportedExtensionAttributes_val_Type_6 = CHOICE(name=u'Type', mode=MODE_TYPE)
+    __SupportedExtensionAttributes_val_Type_6_x121_dcc_code = STR_NUM(name=u'x121-dcc-code', mode=MODE_TYPE)
+    __SupportedExtensionAttributes_val_Type_6_x121_dcc_code._const_sz = ASN1Set(rv=[3], rr=[], ev=None, er=[])
+    __SupportedExtensionAttributes_val_Type_6_iso_3166_alpha2_code = STR_PRINT(name=u'iso-3166-alpha2-code', mode=MODE_TYPE)
+    __SupportedExtensionAttributes_val_Type_6_iso_3166_alpha2_code._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
+    _SupportedExtensionAttributes_val_Type_6._cont = ASN1Dict([
+        (u'x121-dcc-code', __SupportedExtensionAttributes_val_Type_6_x121_dcc_code),
+        (u'iso-3166-alpha2-code', __SupportedExtensionAttributes_val_Type_6_iso_3166_alpha2_code),
+        ])
+    _SupportedExtensionAttributes_val_Type_6._ext = None
+    _SupportedExtensionAttributes_val_Type_7 = CHOICE(name=u'Type', mode=MODE_TYPE)
+    __SupportedExtensionAttributes_val_Type_7_numeric_code = STR_NUM(name=u'numeric-code', mode=MODE_TYPE)
+    __SupportedExtensionAttributes_val_Type_7_numeric_code._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    __SupportedExtensionAttributes_val_Type_7_printable_code = STR_PRINT(name=u'printable-code', mode=MODE_TYPE)
+    __SupportedExtensionAttributes_val_Type_7_printable_code._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    _SupportedExtensionAttributes_val_Type_7._cont = ASN1Dict([
+        (u'numeric-code', __SupportedExtensionAttributes_val_Type_7_numeric_code),
+        (u'printable-code', __SupportedExtensionAttributes_val_Type_7_printable_code),
+        ])
+    _SupportedExtensionAttributes_val_Type_7._ext = None
+    _SupportedExtensionAttributes_val_Type_8 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    _SupportedExtensionAttributes_val_Type_9 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    _SupportedExtensionAttributes_val_Type_10 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    _SupportedExtensionAttributes_val_Type_11 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    _SupportedExtensionAttributes_val_Type_12 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    _SupportedExtensionAttributes_val_Type_13 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    _SupportedExtensionAttributes_val_Type_14 = SET(name=u'Type', mode=MODE_TYPE)
+    __SupportedExtensionAttributes_val_Type_14_printable_address = SEQ_OF(name=u'printable-address', mode=MODE_TYPE, opt=True)
+    ___SupportedExtensionAttributes_val_Type_14_printable_address__item_ = STR_PRINT(name='_item_', mode=MODE_TYPE)
+    ___SupportedExtensionAttributes_val_Type_14_printable_address__item_._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=30)], ev=None, er=[])
+    __SupportedExtensionAttributes_val_Type_14_printable_address._cont = ___SupportedExtensionAttributes_val_Type_14_printable_address__item_
+    __SupportedExtensionAttributes_val_Type_14_printable_address._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=6)], ev=None, er=[])
+    __SupportedExtensionAttributes_val_Type_14_teletex_string = STR_TELE(name=u'teletex-string', mode=MODE_TYPE, opt=True)
+    __SupportedExtensionAttributes_val_Type_14_teletex_string._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=180)], ev=None, er=[])
+    _SupportedExtensionAttributes_val_Type_14._cont = ASN1Dict([
+        (u'printable-address', __SupportedExtensionAttributes_val_Type_14_printable_address),
+        (u'teletex-string', __SupportedExtensionAttributes_val_Type_14_teletex_string),
+        ])
+    _SupportedExtensionAttributes_val_Type_14._ext = None
+    _SupportedExtensionAttributes_val_Type_15 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    _SupportedExtensionAttributes_val_Type_16 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    _SupportedExtensionAttributes_val_Type_17 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    _SupportedExtensionAttributes_val_Type_18 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    _SupportedExtensionAttributes_val_Type_19 = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    _SupportedExtensionAttributes_val_Type_20 = CHOICE(name=u'Type', mode=MODE_TYPE)
+    __SupportedExtensionAttributes_val_Type_20_e163_4_address = SEQ(name=u'e163-4-address', mode=MODE_TYPE)
+    ___SupportedExtensionAttributes_val_Type_20_e163_4_address_number = STR_NUM(name=u'number', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___SupportedExtensionAttributes_val_Type_20_e163_4_address_number._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=15)], ev=None, er=[])
+    ___SupportedExtensionAttributes_val_Type_20_e163_4_address_sub_address = STR_NUM(name=u'sub-address', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ___SupportedExtensionAttributes_val_Type_20_e163_4_address_sub_address._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=40)], ev=None, er=[])
+    __SupportedExtensionAttributes_val_Type_20_e163_4_address._cont = ASN1Dict([
+        (u'number', ___SupportedExtensionAttributes_val_Type_20_e163_4_address_number),
+        (u'sub-address', ___SupportedExtensionAttributes_val_Type_20_e163_4_address_sub_address),
+        ])
+    __SupportedExtensionAttributes_val_Type_20_e163_4_address._ext = None
+    __SupportedExtensionAttributes_val_Type_20_psap_address = SEQ(name=u'psap-address', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX-X400Address-2009', 'PresentationAddress')))
+    _SupportedExtensionAttributes_val_Type_20._cont = ASN1Dict([
+        (u'e163-4-address', __SupportedExtensionAttributes_val_Type_20_e163_4_address),
+        (u'psap-address', __SupportedExtensionAttributes_val_Type_20_psap_address),
+        ])
+    _SupportedExtensionAttributes_val_Type_20._ext = None
+    _SupportedExtensionAttributes_val_Type_21 = INT(name=u'Type', mode=MODE_TYPE)
+    _SupportedExtensionAttributes_val_Type_21._cont = ASN1Dict([(u'telex', 3), (u'teletex', 4), (u'g3-facsimile', 5), (u'g4-facsimile', 6), (u'ia5-terminal', 7), (u'videotex', 8)])
+    _SupportedExtensionAttributes_val_Type_21._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=256)], ev=None, er=[])
+    _SupportedExtensionAttributes_val_Type_22 = SEQ_OF(name=u'Type', mode=MODE_TYPE)
+    __SupportedExtensionAttributes_val_Type_22__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'TeletexDomainDefinedAttribute')))
+    _SupportedExtensionAttributes_val_Type_22._cont = __SupportedExtensionAttributes_val_Type_22__item_
+    _SupportedExtensionAttributes_val_Type_22._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    SupportedExtensionAttributes._val = ASN1Set(rv=[dict([(u'Type', _SupportedExtensionAttributes_val_Type_0), (u'id', 1)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_1), (u'id', 2)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_2), (u'id', 3)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_3), (u'id', 4)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_4), (u'id', 5)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_5), (u'id', 7)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_6), (u'id', 8)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_7), (u'id', 9)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_8), (u'id', 10)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_9), (u'id', 11)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_10), (u'id', 12)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_11), (u'id', 13)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_12), (u'id', 14)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_13), (u'id', 15)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_14), (u'id', 16)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_15), (u'id', 17)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_16), (u'id', 18)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_17), (u'id', 19)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_18), (u'id', 20)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_19), (u'id', 21)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_20), (u'id', 22)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_21), (u'id', 23)]), dict([(u'Type', _SupportedExtensionAttributes_val_Type_22), (u'id', 6)])], rr=[], ev=[], er=[])
+    
+    #-----< ea-commonName >-----#
+    ea_commonName = CLASS(name=u'ea-commonName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _ea_commonName_val_Type = STR_PRINT(name=u'Type', mode=MODE_TYPE)
+    _ea_commonName_val_Type._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    ea_commonName._val = dict([(u'Type', _ea_commonName_val_Type), (u'id', 1)])
+    
+    #-----< ea-teletexCommonName >-----#
+    ea_teletexCommonName = CLASS(name=u'ea-teletexCommonName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _ea_teletexCommonName_val_Type = STR_TELE(name=u'Type', mode=MODE_TYPE)
+    _ea_teletexCommonName_val_Type._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    ea_teletexCommonName._val = dict([(u'Type', _ea_teletexCommonName_val_Type), (u'id', 2)])
+    
+    #-----< ea-teletexOrganizationName >-----#
+    ea_teletexOrganizationName = CLASS(name=u'ea-teletexOrganizationName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _ea_teletexOrganizationName_val_Type = STR_TELE(name=u'Type', mode=MODE_TYPE)
+    _ea_teletexOrganizationName_val_Type._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    ea_teletexOrganizationName._val = dict([(u'Type', _ea_teletexOrganizationName_val_Type), (u'id', 3)])
+    
+    #-----< ea-teletexPersonalName >-----#
+    ea_teletexPersonalName = CLASS(name=u'ea-teletexPersonalName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _ea_teletexPersonalName_val_Type = SET(name=u'Type', mode=MODE_TYPE)
+    __ea_teletexPersonalName_val_Type_surname = STR_TELE(name=u'surname', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ea_teletexPersonalName_val_Type_surname._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=40)], ev=None, er=[])
+    __ea_teletexPersonalName_val_Type_given_name = STR_TELE(name=u'given-name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __ea_teletexPersonalName_val_Type_given_name._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    __ea_teletexPersonalName_val_Type_initials = STR_TELE(name=u'initials', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __ea_teletexPersonalName_val_Type_initials._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=5)], ev=None, er=[])
+    __ea_teletexPersonalName_val_Type_generation_qualifier = STR_TELE(name=u'generation-qualifier', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __ea_teletexPersonalName_val_Type_generation_qualifier._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=3)], ev=None, er=[])
+    _ea_teletexPersonalName_val_Type._cont = ASN1Dict([
+        (u'surname', __ea_teletexPersonalName_val_Type_surname),
+        (u'given-name', __ea_teletexPersonalName_val_Type_given_name),
+        (u'initials', __ea_teletexPersonalName_val_Type_initials),
+        (u'generation-qualifier', __ea_teletexPersonalName_val_Type_generation_qualifier),
+        ])
+    _ea_teletexPersonalName_val_Type._ext = None
+    ea_teletexPersonalName._val = dict([(u'Type', _ea_teletexPersonalName_val_Type), (u'id', 4)])
+    
+    #-----< ea-teletexOrganizationalUnitNames >-----#
+    ea_teletexOrganizationalUnitNames = CLASS(name=u'ea-teletexOrganizationalUnitNames', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _ea_teletexOrganizationalUnitNames_val_Type = SEQ_OF(name=u'Type', mode=MODE_TYPE)
+    __ea_teletexOrganizationalUnitNames_val_Type__item_ = STR_TELE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'TeletexOrganizationalUnitName')))
+    _ea_teletexOrganizationalUnitNames_val_Type._cont = __ea_teletexOrganizationalUnitNames_val_Type__item_
+    _ea_teletexOrganizationalUnitNames_val_Type._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    ea_teletexOrganizationalUnitNames._val = dict([(u'Type', _ea_teletexOrganizationalUnitNames_val_Type), (u'id', 5)])
+    
+    #-----< TeletexOrganizationalUnitName >-----#
+    TeletexOrganizationalUnitName = STR_TELE(name=u'TeletexOrganizationalUnitName', mode=MODE_TYPE)
+    TeletexOrganizationalUnitName._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    
+    #-----< ea-pDSName >-----#
+    ea_pDSName = CLASS(name=u'ea-pDSName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _ea_pDSName_val_Type = STR_PRINT(name=u'Type', mode=MODE_TYPE)
+    _ea_pDSName_val_Type._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    ea_pDSName._val = dict([(u'Type', _ea_pDSName_val_Type), (u'id', 7)])
+    
+    #-----< ea-physicalDeliveryCountryName >-----#
+    ea_physicalDeliveryCountryName = CLASS(name=u'ea-physicalDeliveryCountryName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _ea_physicalDeliveryCountryName_val_Type = CHOICE(name=u'Type', mode=MODE_TYPE)
+    __ea_physicalDeliveryCountryName_val_Type_x121_dcc_code = STR_NUM(name=u'x121-dcc-code', mode=MODE_TYPE)
+    __ea_physicalDeliveryCountryName_val_Type_x121_dcc_code._const_sz = ASN1Set(rv=[3], rr=[], ev=None, er=[])
+    __ea_physicalDeliveryCountryName_val_Type_iso_3166_alpha2_code = STR_PRINT(name=u'iso-3166-alpha2-code', mode=MODE_TYPE)
+    __ea_physicalDeliveryCountryName_val_Type_iso_3166_alpha2_code._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
+    _ea_physicalDeliveryCountryName_val_Type._cont = ASN1Dict([
+        (u'x121-dcc-code', __ea_physicalDeliveryCountryName_val_Type_x121_dcc_code),
+        (u'iso-3166-alpha2-code', __ea_physicalDeliveryCountryName_val_Type_iso_3166_alpha2_code),
+        ])
+    _ea_physicalDeliveryCountryName_val_Type._ext = None
+    ea_physicalDeliveryCountryName._val = dict([(u'Type', _ea_physicalDeliveryCountryName_val_Type), (u'id', 8)])
+    
+    #-----< ea-postalCode >-----#
+    ea_postalCode = CLASS(name=u'ea-postalCode', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _ea_postalCode_val_Type = CHOICE(name=u'Type', mode=MODE_TYPE)
+    __ea_postalCode_val_Type_numeric_code = STR_NUM(name=u'numeric-code', mode=MODE_TYPE)
+    __ea_postalCode_val_Type_numeric_code._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    __ea_postalCode_val_Type_printable_code = STR_PRINT(name=u'printable-code', mode=MODE_TYPE)
+    __ea_postalCode_val_Type_printable_code._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    _ea_postalCode_val_Type._cont = ASN1Dict([
+        (u'numeric-code', __ea_postalCode_val_Type_numeric_code),
+        (u'printable-code', __ea_postalCode_val_Type_printable_code),
+        ])
+    _ea_postalCode_val_Type._ext = None
+    ea_postalCode._val = dict([(u'Type', _ea_postalCode_val_Type), (u'id', 9)])
+    
+    #-----< ea-physicalDeliveryOfficeName >-----#
+    ea_physicalDeliveryOfficeName = CLASS(name=u'ea-physicalDeliveryOfficeName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _ea_physicalDeliveryOfficeName_val_Type = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    ea_physicalDeliveryOfficeName._val = dict([(u'Type', _ea_physicalDeliveryOfficeName_val_Type), (u'id', 10)])
+    
+    #-----< ea-physicalDeliveryOfficeNumber >-----#
+    ea_physicalDeliveryOfficeNumber = CLASS(name=u'ea-physicalDeliveryOfficeNumber', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _ea_physicalDeliveryOfficeNumber_val_Type = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    ea_physicalDeliveryOfficeNumber._val = dict([(u'Type', _ea_physicalDeliveryOfficeNumber_val_Type), (u'id', 11)])
+    
+    #-----< ea-extensionORAddressComponents >-----#
+    ea_extensionORAddressComponents = CLASS(name=u'ea-extensionORAddressComponents', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _ea_extensionORAddressComponents_val_Type = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    ea_extensionORAddressComponents._val = dict([(u'Type', _ea_extensionORAddressComponents_val_Type), (u'id', 12)])
+    
+    #-----< ea-physicalDeliveryPersonalName >-----#
+    ea_physicalDeliveryPersonalName = CLASS(name=u'ea-physicalDeliveryPersonalName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _ea_physicalDeliveryPersonalName_val_Type = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    ea_physicalDeliveryPersonalName._val = dict([(u'Type', _ea_physicalDeliveryPersonalName_val_Type), (u'id', 13)])
+    
+    #-----< ea-physicalDeliveryOrganizationName >-----#
+    ea_physicalDeliveryOrganizationName = CLASS(name=u'ea-physicalDeliveryOrganizationName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _ea_physicalDeliveryOrganizationName_val_Type = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    ea_physicalDeliveryOrganizationName._val = dict([(u'Type', _ea_physicalDeliveryOrganizationName_val_Type), (u'id', 14)])
+    
+    #-----< ea-extensionPhysicalDeliveryAddressComponents >-----#
+    ea_extensionPhysicalDeliveryAddressComponents = CLASS(name=u'ea-extensionPhysicalDeliveryAddressComponents', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _ea_extensionPhysicalDeliveryAddressComponents_val_Type = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    ea_extensionPhysicalDeliveryAddressComponents._val = dict([(u'Type', _ea_extensionPhysicalDeliveryAddressComponents_val_Type), (u'id', 15)])
+    
+    #-----< ea-unformattedPostalAddress >-----#
+    ea_unformattedPostalAddress = CLASS(name=u'ea-unformattedPostalAddress', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _ea_unformattedPostalAddress_val_Type = SET(name=u'Type', mode=MODE_TYPE)
+    __ea_unformattedPostalAddress_val_Type_printable_address = SEQ_OF(name=u'printable-address', mode=MODE_TYPE, opt=True)
+    ___ea_unformattedPostalAddress_val_Type_printable_address__item_ = STR_PRINT(name='_item_', mode=MODE_TYPE)
+    ___ea_unformattedPostalAddress_val_Type_printable_address__item_._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=30)], ev=None, er=[])
+    __ea_unformattedPostalAddress_val_Type_printable_address._cont = ___ea_unformattedPostalAddress_val_Type_printable_address__item_
+    __ea_unformattedPostalAddress_val_Type_printable_address._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=6)], ev=None, er=[])
+    __ea_unformattedPostalAddress_val_Type_teletex_string = STR_TELE(name=u'teletex-string', mode=MODE_TYPE, opt=True)
+    __ea_unformattedPostalAddress_val_Type_teletex_string._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=180)], ev=None, er=[])
+    _ea_unformattedPostalAddress_val_Type._cont = ASN1Dict([
+        (u'printable-address', __ea_unformattedPostalAddress_val_Type_printable_address),
+        (u'teletex-string', __ea_unformattedPostalAddress_val_Type_teletex_string),
+        ])
+    _ea_unformattedPostalAddress_val_Type._ext = None
+    ea_unformattedPostalAddress._val = dict([(u'Type', _ea_unformattedPostalAddress_val_Type), (u'id', 16)])
+    
+    #-----< ea-streetAddress >-----#
+    ea_streetAddress = CLASS(name=u'ea-streetAddress', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _ea_streetAddress_val_Type = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    ea_streetAddress._val = dict([(u'Type', _ea_streetAddress_val_Type), (u'id', 17)])
+    
+    #-----< ea-postOfficeBoxAddress >-----#
+    ea_postOfficeBoxAddress = CLASS(name=u'ea-postOfficeBoxAddress', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _ea_postOfficeBoxAddress_val_Type = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    ea_postOfficeBoxAddress._val = dict([(u'Type', _ea_postOfficeBoxAddress_val_Type), (u'id', 18)])
+    
+    #-----< ea-posteRestanteAddress >-----#
+    ea_posteRestanteAddress = CLASS(name=u'ea-posteRestanteAddress', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _ea_posteRestanteAddress_val_Type = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    ea_posteRestanteAddress._val = dict([(u'Type', _ea_posteRestanteAddress_val_Type), (u'id', 19)])
+    
+    #-----< ea-uniquePostalName >-----#
+    ea_uniquePostalName = CLASS(name=u'ea-uniquePostalName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _ea_uniquePostalName_val_Type = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    ea_uniquePostalName._val = dict([(u'Type', _ea_uniquePostalName_val_Type), (u'id', 20)])
+    
+    #-----< ea-localPostalAttributes >-----#
+    ea_localPostalAttributes = CLASS(name=u'ea-localPostalAttributes', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _ea_localPostalAttributes_val_Type = SET(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'PDSParameter')))
+    ea_localPostalAttributes._val = dict([(u'Type', _ea_localPostalAttributes_val_Type), (u'id', 21)])
+    
+    #-----< PDSParameter >-----#
+    PDSParameter = SET(name=u'PDSParameter', mode=MODE_TYPE)
+    _PDSParameter_printable_string = STR_PRINT(name=u'printable-string', mode=MODE_TYPE, opt=True)
+    _PDSParameter_printable_string._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=30)], ev=None, er=[])
+    _PDSParameter_teletex_string = STR_TELE(name=u'teletex-string', mode=MODE_TYPE, opt=True)
+    _PDSParameter_teletex_string._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=30)], ev=None, er=[])
+    PDSParameter._cont = ASN1Dict([
+        (u'printable-string', _PDSParameter_printable_string),
+        (u'teletex-string', _PDSParameter_teletex_string),
+        ])
+    PDSParameter._ext = None
+    
+    #-----< ea-extendedNetworkAddress >-----#
+    ea_extendedNetworkAddress = CLASS(name=u'ea-extendedNetworkAddress', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _ea_extendedNetworkAddress_val_Type = CHOICE(name=u'Type', mode=MODE_TYPE)
+    __ea_extendedNetworkAddress_val_Type_e163_4_address = SEQ(name=u'e163-4-address', mode=MODE_TYPE)
+    ___ea_extendedNetworkAddress_val_Type_e163_4_address_number = STR_NUM(name=u'number', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___ea_extendedNetworkAddress_val_Type_e163_4_address_number._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=15)], ev=None, er=[])
+    ___ea_extendedNetworkAddress_val_Type_e163_4_address_sub_address = STR_NUM(name=u'sub-address', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ___ea_extendedNetworkAddress_val_Type_e163_4_address_sub_address._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=40)], ev=None, er=[])
+    __ea_extendedNetworkAddress_val_Type_e163_4_address._cont = ASN1Dict([
+        (u'number', ___ea_extendedNetworkAddress_val_Type_e163_4_address_number),
+        (u'sub-address', ___ea_extendedNetworkAddress_val_Type_e163_4_address_sub_address),
+        ])
+    __ea_extendedNetworkAddress_val_Type_e163_4_address._ext = None
+    __ea_extendedNetworkAddress_val_Type_psap_address = SEQ(name=u'psap-address', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX-X400Address-2009', 'PresentationAddress')))
+    _ea_extendedNetworkAddress_val_Type._cont = ASN1Dict([
+        (u'e163-4-address', __ea_extendedNetworkAddress_val_Type_e163_4_address),
+        (u'psap-address', __ea_extendedNetworkAddress_val_Type_psap_address),
+        ])
+    _ea_extendedNetworkAddress_val_Type._ext = None
+    ea_extendedNetworkAddress._val = dict([(u'Type', _ea_extendedNetworkAddress_val_Type), (u'id', 22)])
+    
+    #-----< PresentationAddress >-----#
+    PresentationAddress = SEQ(name=u'PresentationAddress', mode=MODE_TYPE)
+    _PresentationAddress_pSelector = OCT_STR(name=u'pSelector', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    _PresentationAddress_sSelector = OCT_STR(name=u'sSelector', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    _PresentationAddress_tSelector = OCT_STR(name=u'tSelector', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    _PresentationAddress_nAddresses = SET_OF(name=u'nAddresses', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __PresentationAddress_nAddresses__item_ = OCT_STR(name='_item_', mode=MODE_TYPE)
+    _PresentationAddress_nAddresses._cont = __PresentationAddress_nAddresses__item_
+    _PresentationAddress_nAddresses._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
+    PresentationAddress._cont = ASN1Dict([
+        (u'pSelector', _PresentationAddress_pSelector),
+        (u'sSelector', _PresentationAddress_sSelector),
+        (u'tSelector', _PresentationAddress_tSelector),
+        (u'nAddresses', _PresentationAddress_nAddresses),
+        ])
+    PresentationAddress._ext = None
+    
+    #-----< ea-terminalType >-----#
+    ea_terminalType = CLASS(name=u'ea-terminalType', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _ea_terminalType_val_Type = INT(name=u'Type', mode=MODE_TYPE)
+    _ea_terminalType_val_Type._cont = ASN1Dict([(u'telex', 3), (u'teletex', 4), (u'g3-facsimile', 5), (u'g4-facsimile', 6), (u'ia5-terminal', 7), (u'videotex', 8)])
+    _ea_terminalType_val_Type._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=256)], ev=None, er=[])
+    ea_terminalType._val = dict([(u'Type', _ea_terminalType_val_Type), (u'id', 23)])
+    
+    #-----< ea-teletexDomainDefinedAttributes >-----#
+    ea_teletexDomainDefinedAttributes = CLASS(name=u'ea-teletexDomainDefinedAttributes', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'EXTENSION-ATTRIBUTE')))
+    _ea_teletexDomainDefinedAttributes_val_Type = SEQ_OF(name=u'Type', mode=MODE_TYPE)
+    __ea_teletexDomainDefinedAttributes_val_Type__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-X400Address-2009', 'TeletexDomainDefinedAttribute')))
+    _ea_teletexDomainDefinedAttributes_val_Type._cont = __ea_teletexDomainDefinedAttributes_val_Type__item_
+    _ea_teletexDomainDefinedAttributes_val_Type._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    ea_teletexDomainDefinedAttributes._val = dict([(u'Type', _ea_teletexDomainDefinedAttributes_val_Type), (u'id', 6)])
+    
+    #-----< TeletexDomainDefinedAttribute >-----#
+    TeletexDomainDefinedAttribute = SEQ(name=u'TeletexDomainDefinedAttribute', mode=MODE_TYPE)
+    _TeletexDomainDefinedAttribute_type = STR_TELE(name=u'type', mode=MODE_TYPE)
+    _TeletexDomainDefinedAttribute_type._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    _TeletexDomainDefinedAttribute_value = STR_TELE(name=u'value', mode=MODE_TYPE)
+    _TeletexDomainDefinedAttribute_value._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
+    TeletexDomainDefinedAttribute._cont = ASN1Dict([
+        (u'type', _TeletexDomainDefinedAttribute_type),
+        (u'value', _TeletexDomainDefinedAttribute_value),
+        ])
+    TeletexDomainDefinedAttribute._ext = None
+    
+    #-----< ub-match >-----#
+    ub_match = INT(name=u'ub-match', mode=MODE_VALUE)
+    ub_match._val = 128
+    
+    #-----< ub-common-name-length >-----#
+    ub_common_name_length = INT(name=u'ub-common-name-length', mode=MODE_VALUE)
+    ub_common_name_length._val = 64
+    
+    #-----< ub-country-name-alpha-length >-----#
+    ub_country_name_alpha_length = INT(name=u'ub-country-name-alpha-length', mode=MODE_VALUE)
+    ub_country_name_alpha_length._val = 2
+    
+    #-----< ub-country-name-numeric-length >-----#
+    ub_country_name_numeric_length = INT(name=u'ub-country-name-numeric-length', mode=MODE_VALUE)
+    ub_country_name_numeric_length._val = 3
+    
+    #-----< ub-domain-defined-attributes >-----#
+    ub_domain_defined_attributes = INT(name=u'ub-domain-defined-attributes', mode=MODE_VALUE)
+    ub_domain_defined_attributes._val = 4
+    
+    #-----< ub-domain-defined-attribute-type-length >-----#
+    ub_domain_defined_attribute_type_length = INT(name=u'ub-domain-defined-attribute-type-length', mode=MODE_VALUE)
+    ub_domain_defined_attribute_type_length._val = 8
+    
+    #-----< ub-domain-defined-attribute-value-length >-----#
+    ub_domain_defined_attribute_value_length = INT(name=u'ub-domain-defined-attribute-value-length', mode=MODE_VALUE)
+    ub_domain_defined_attribute_value_length._val = 128
+    
+    #-----< ub-domain-name-length >-----#
+    ub_domain_name_length = INT(name=u'ub-domain-name-length', mode=MODE_VALUE)
+    ub_domain_name_length._val = 16
+    
+    #-----< ub-extension-attributes >-----#
+    ub_extension_attributes = INT(name=u'ub-extension-attributes', mode=MODE_VALUE)
+    ub_extension_attributes._val = 256
+    
+    #-----< ub-e163-4-number-length >-----#
+    ub_e163_4_number_length = INT(name=u'ub-e163-4-number-length', mode=MODE_VALUE)
+    ub_e163_4_number_length._val = 15
+    
+    #-----< ub-e163-4-sub-address-length >-----#
+    ub_e163_4_sub_address_length = INT(name=u'ub-e163-4-sub-address-length', mode=MODE_VALUE)
+    ub_e163_4_sub_address_length._val = 40
+    
+    #-----< ub-generation-qualifier-length >-----#
+    ub_generation_qualifier_length = INT(name=u'ub-generation-qualifier-length', mode=MODE_VALUE)
+    ub_generation_qualifier_length._val = 3
+    
+    #-----< ub-given-name-length >-----#
+    ub_given_name_length = INT(name=u'ub-given-name-length', mode=MODE_VALUE)
+    ub_given_name_length._val = 16
+    
+    #-----< ub-initials-length >-----#
+    ub_initials_length = INT(name=u'ub-initials-length', mode=MODE_VALUE)
+    ub_initials_length._val = 5
+    
+    #-----< ub-integer-options >-----#
+    ub_integer_options = INT(name=u'ub-integer-options', mode=MODE_VALUE)
+    ub_integer_options._val = 256
+    
+    #-----< ub-numeric-user-id-length >-----#
+    ub_numeric_user_id_length = INT(name=u'ub-numeric-user-id-length', mode=MODE_VALUE)
+    ub_numeric_user_id_length._val = 32
+    
+    #-----< ub-organization-name-length >-----#
+    ub_organization_name_length = INT(name=u'ub-organization-name-length', mode=MODE_VALUE)
+    ub_organization_name_length._val = 64
+    
+    #-----< ub-organizational-unit-name-length >-----#
+    ub_organizational_unit_name_length = INT(name=u'ub-organizational-unit-name-length', mode=MODE_VALUE)
+    ub_organizational_unit_name_length._val = 32
+    
+    #-----< ub-organizational-units >-----#
+    ub_organizational_units = INT(name=u'ub-organizational-units', mode=MODE_VALUE)
+    ub_organizational_units._val = 4
+    
+    #-----< ub-pds-name-length >-----#
+    ub_pds_name_length = INT(name=u'ub-pds-name-length', mode=MODE_VALUE)
+    ub_pds_name_length._val = 16
+    
+    #-----< ub-pds-parameter-length >-----#
+    ub_pds_parameter_length = INT(name=u'ub-pds-parameter-length', mode=MODE_VALUE)
+    ub_pds_parameter_length._val = 30
+    
+    #-----< ub-pds-physical-address-lines >-----#
+    ub_pds_physical_address_lines = INT(name=u'ub-pds-physical-address-lines', mode=MODE_VALUE)
+    ub_pds_physical_address_lines._val = 6
+    
+    #-----< ub-postal-code-length >-----#
+    ub_postal_code_length = INT(name=u'ub-postal-code-length', mode=MODE_VALUE)
+    ub_postal_code_length._val = 16
+    
+    #-----< ub-surname-length >-----#
+    ub_surname_length = INT(name=u'ub-surname-length', mode=MODE_VALUE)
+    ub_surname_length._val = 40
+    
+    #-----< ub-terminal-id-length >-----#
+    ub_terminal_id_length = INT(name=u'ub-terminal-id-length', mode=MODE_VALUE)
+    ub_terminal_id_length._val = 24
+    
+    #-----< ub-unformatted-address-length >-----#
+    ub_unformatted_address_length = INT(name=u'ub-unformatted-address-length', mode=MODE_VALUE)
+    ub_unformatted_address_length._val = 180
+    
+    #-----< ub-x121-address-length >-----#
+    ub_x121_address_length = INT(name=u'ub-x121-address-length', mode=MODE_VALUE)
+    ub_x121_address_length._val = 16
+    
+    _all_ = [
+        _ORAddress_built_in_standard_attributes,
+        _ORAddress_built_in_domain_defined_attributes,
+        _ORAddress_extension_attributes,
+        ORAddress,
+        _BuiltInStandardAttributes_country_name,
+        _BuiltInStandardAttributes_administration_domain_name,
+        _BuiltInStandardAttributes_network_address,
+        _BuiltInStandardAttributes_terminal_identifier,
+        _BuiltInStandardAttributes_private_domain_name,
+        _BuiltInStandardAttributes_organization_name,
+        _BuiltInStandardAttributes_numeric_user_identifier,
+        _BuiltInStandardAttributes_personal_name,
+        _BuiltInStandardAttributes_organizational_unit_names,
+        BuiltInStandardAttributes,
+        _CountryName_x121_dcc_code,
+        _CountryName_iso_3166_alpha2_code,
+        CountryName,
+        _AdministrationDomainName_numeric,
+        _AdministrationDomainName_printable,
+        AdministrationDomainName,
+        NetworkAddress,
+        X121Address,
+        TerminalIdentifier,
+        _PrivateDomainName_numeric,
+        _PrivateDomainName_printable,
+        PrivateDomainName,
+        OrganizationName,
+        NumericUserIdentifier,
+        _PersonalName_surname,
+        _PersonalName_given_name,
+        _PersonalName_initials,
+        _PersonalName_generation_qualifier,
+        PersonalName,
+        _OrganizationalUnitNames__item_,
+        OrganizationalUnitNames,
+        OrganizationalUnitName,
+        _BuiltInDomainDefinedAttributes__item_,
+        BuiltInDomainDefinedAttributes,
+        _BuiltInDomainDefinedAttribute_type,
+        _BuiltInDomainDefinedAttribute_value,
+        BuiltInDomainDefinedAttribute,
+        _ExtensionAttributes__item_,
+        ExtensionAttributes,
+        _EXTENSION_ATTRIBUTE_id,
+        _EXTENSION_ATTRIBUTE_Type,
+        EXTENSION_ATTRIBUTE,
+        __ExtensionAttribute_extension_attribute_type_tab,
+        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_0,
+        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_1,
+        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_2,
+        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_surname,
+        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_given_name,
+        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_initials,
+        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_3_generation_qualifier,
+        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_3,
+        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_4__item_,
+        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_4,
+        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_5,
+        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_6_x121_dcc_code,
+        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_6_iso_3166_alpha2_code,
+        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_6,
+        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_7_numeric_code,
+        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_7_printable_code,
+        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_7,
+        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_8,
+        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_9,
+        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_10,
+        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_11,
+        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_12,
+        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_13,
+        _____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_printable_address__item_,
+        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_printable_address,
+        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_14_teletex_string,
+        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_14,
+        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_15,
+        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_16,
+        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_17,
+        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_18,
+        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_19,
+        _____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address_number,
+        _____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address_sub_address,
+        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_e163_4_address,
+        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_20_psap_address,
+        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_20,
+        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_21,
+        ____ExtensionAttribute_extension_attribute_type_tab_val_Type_22__item_,
+        ___ExtensionAttribute_extension_attribute_type_tab_val_Type_22,
+        _ExtensionAttribute_extension_attribute_type,
+        _ExtensionAttribute_extension_attribute_value,
+        ExtensionAttribute,
+        SupportedExtensionAttributes,
+        _SupportedExtensionAttributes_val_Type_0,
+        _SupportedExtensionAttributes_val_Type_1,
+        _SupportedExtensionAttributes_val_Type_2,
+        __SupportedExtensionAttributes_val_Type_3_surname,
+        __SupportedExtensionAttributes_val_Type_3_given_name,
+        __SupportedExtensionAttributes_val_Type_3_initials,
+        __SupportedExtensionAttributes_val_Type_3_generation_qualifier,
+        _SupportedExtensionAttributes_val_Type_3,
+        __SupportedExtensionAttributes_val_Type_4__item_,
+        _SupportedExtensionAttributes_val_Type_4,
+        _SupportedExtensionAttributes_val_Type_5,
+        __SupportedExtensionAttributes_val_Type_6_x121_dcc_code,
+        __SupportedExtensionAttributes_val_Type_6_iso_3166_alpha2_code,
+        _SupportedExtensionAttributes_val_Type_6,
+        __SupportedExtensionAttributes_val_Type_7_numeric_code,
+        __SupportedExtensionAttributes_val_Type_7_printable_code,
+        _SupportedExtensionAttributes_val_Type_7,
+        _SupportedExtensionAttributes_val_Type_8,
+        _SupportedExtensionAttributes_val_Type_9,
+        _SupportedExtensionAttributes_val_Type_10,
+        _SupportedExtensionAttributes_val_Type_11,
+        _SupportedExtensionAttributes_val_Type_12,
+        _SupportedExtensionAttributes_val_Type_13,
+        ___SupportedExtensionAttributes_val_Type_14_printable_address__item_,
+        __SupportedExtensionAttributes_val_Type_14_printable_address,
+        __SupportedExtensionAttributes_val_Type_14_teletex_string,
+        _SupportedExtensionAttributes_val_Type_14,
+        _SupportedExtensionAttributes_val_Type_15,
+        _SupportedExtensionAttributes_val_Type_16,
+        _SupportedExtensionAttributes_val_Type_17,
+        _SupportedExtensionAttributes_val_Type_18,
+        _SupportedExtensionAttributes_val_Type_19,
+        ___SupportedExtensionAttributes_val_Type_20_e163_4_address_number,
+        ___SupportedExtensionAttributes_val_Type_20_e163_4_address_sub_address,
+        __SupportedExtensionAttributes_val_Type_20_e163_4_address,
+        __SupportedExtensionAttributes_val_Type_20_psap_address,
+        _SupportedExtensionAttributes_val_Type_20,
+        _SupportedExtensionAttributes_val_Type_21,
+        __SupportedExtensionAttributes_val_Type_22__item_,
+        _SupportedExtensionAttributes_val_Type_22,
+        ea_commonName,
+        _ea_commonName_val_Type,
+        ea_teletexCommonName,
+        _ea_teletexCommonName_val_Type,
+        ea_teletexOrganizationName,
+        _ea_teletexOrganizationName_val_Type,
+        ea_teletexPersonalName,
+        __ea_teletexPersonalName_val_Type_surname,
+        __ea_teletexPersonalName_val_Type_given_name,
+        __ea_teletexPersonalName_val_Type_initials,
+        __ea_teletexPersonalName_val_Type_generation_qualifier,
+        _ea_teletexPersonalName_val_Type,
+        ea_teletexOrganizationalUnitNames,
+        __ea_teletexOrganizationalUnitNames_val_Type__item_,
+        _ea_teletexOrganizationalUnitNames_val_Type,
+        TeletexOrganizationalUnitName,
+        ea_pDSName,
+        _ea_pDSName_val_Type,
+        ea_physicalDeliveryCountryName,
+        __ea_physicalDeliveryCountryName_val_Type_x121_dcc_code,
+        __ea_physicalDeliveryCountryName_val_Type_iso_3166_alpha2_code,
+        _ea_physicalDeliveryCountryName_val_Type,
+        ea_postalCode,
+        __ea_postalCode_val_Type_numeric_code,
+        __ea_postalCode_val_Type_printable_code,
+        _ea_postalCode_val_Type,
+        ea_physicalDeliveryOfficeName,
+        _ea_physicalDeliveryOfficeName_val_Type,
+        ea_physicalDeliveryOfficeNumber,
+        _ea_physicalDeliveryOfficeNumber_val_Type,
+        ea_extensionORAddressComponents,
+        _ea_extensionORAddressComponents_val_Type,
+        ea_physicalDeliveryPersonalName,
+        _ea_physicalDeliveryPersonalName_val_Type,
+        ea_physicalDeliveryOrganizationName,
+        _ea_physicalDeliveryOrganizationName_val_Type,
+        ea_extensionPhysicalDeliveryAddressComponents,
+        _ea_extensionPhysicalDeliveryAddressComponents_val_Type,
+        ea_unformattedPostalAddress,
+        ___ea_unformattedPostalAddress_val_Type_printable_address__item_,
+        __ea_unformattedPostalAddress_val_Type_printable_address,
+        __ea_unformattedPostalAddress_val_Type_teletex_string,
+        _ea_unformattedPostalAddress_val_Type,
+        ea_streetAddress,
+        _ea_streetAddress_val_Type,
+        ea_postOfficeBoxAddress,
+        _ea_postOfficeBoxAddress_val_Type,
+        ea_posteRestanteAddress,
+        _ea_posteRestanteAddress_val_Type,
+        ea_uniquePostalName,
+        _ea_uniquePostalName_val_Type,
+        ea_localPostalAttributes,
+        _ea_localPostalAttributes_val_Type,
+        _PDSParameter_printable_string,
+        _PDSParameter_teletex_string,
+        PDSParameter,
+        ea_extendedNetworkAddress,
+        ___ea_extendedNetworkAddress_val_Type_e163_4_address_number,
+        ___ea_extendedNetworkAddress_val_Type_e163_4_address_sub_address,
+        __ea_extendedNetworkAddress_val_Type_e163_4_address,
+        __ea_extendedNetworkAddress_val_Type_psap_address,
+        _ea_extendedNetworkAddress_val_Type,
+        _PresentationAddress_pSelector,
+        _PresentationAddress_sSelector,
+        _PresentationAddress_tSelector,
+        __PresentationAddress_nAddresses__item_,
+        _PresentationAddress_nAddresses,
+        PresentationAddress,
+        ea_terminalType,
+        _ea_terminalType_val_Type,
+        ea_teletexDomainDefinedAttributes,
+        __ea_teletexDomainDefinedAttributes_val_Type__item_,
+        _ea_teletexDomainDefinedAttributes_val_Type,
+        _TeletexDomainDefinedAttribute_type,
+        _TeletexDomainDefinedAttribute_value,
+        TeletexDomainDefinedAttribute,
+        ub_match,
+        ub_common_name_length,
+        ub_country_name_alpha_length,
+        ub_country_name_numeric_length,
+        ub_domain_defined_attributes,
+        ub_domain_defined_attribute_type_length,
+        ub_domain_defined_attribute_value_length,
+        ub_domain_name_length,
+        ub_extension_attributes,
+        ub_e163_4_number_length,
+        ub_e163_4_sub_address_length,
+        ub_generation_qualifier_length,
+        ub_given_name_length,
+        ub_initials_length,
+        ub_integer_options,
+        ub_numeric_user_id_length,
+        ub_organization_name_length,
+        ub_organizational_unit_name_length,
+        ub_organizational_units,
+        ub_pds_name_length,
+        ub_pds_parameter_length,
+        ub_pds_physical_address_lines,
+        ub_postal_code_length,
+        ub_surname_length,
+        ub_terminal_id_length,
+        ub_unformatted_address_length,
+        ub_x121_address_length,
+    ]
+
 class SecureMimeMessageV3dot1_2009:
 
     _name_  = u'SecureMimeMessageV3dot1-2009'
@@ -13847,4 +13847,4 @@ class _IMPL_:
         ABSTRACT_SYNTAX,
     ]
 
-init_modules(AlgorithmInformation_2009, AttributeCertificateVersion1_2009, BinarySigningTimeModule_2010, CMS_AES_CCM_and_AES_GCM_2009, CMS_AuthEnvelopedData_2010, CompressedDataContent_2010, ContentCollectionModule_2010, CryptographicMessageSyntax_2009, CryptographicMessageSyntax_2010, CryptographicMessageSyntaxAlgorithms_2009, ExtendedSecurityServices_2009, HMAC_2010, IPAddrAndASCertExtn_2010, MultipleSignatures_2010, PKIX_CommonTypes_2009, PKIX_X400Address_2009, PKIX1_PSS_OAEP_Algorithms_2009, PKIX1Explicit_2009, PKIX1Implicit_2009, PKIXAlgs_2009, PKIXAttributeCertificate_2009, SecureMimeMessageV3dot1_2009, WLANCertExtn_2010, _IMPL_)
+init_modules(AlgorithmInformation_2009, AttributeCertificateVersion1_2009, BinarySigningTimeModule_2010, CMS_AES_CCM_and_AES_GCM_2009, CMS_AuthEnvelopedData_2010, CompressedDataContent_2010, ContentCollectionModule_2010, CryptographicMessageSyntax_2009, CryptographicMessageSyntax_2010, CryptographicMessageSyntaxAlgorithms_2009, ExtendedSecurityServices_2009, HMAC_2010, IPAddrAndASCertExtn_2010, MultipleSignatures_2010, PKIX1Explicit_2009, PKIX1Implicit_2009, PKIX1_PSS_OAEP_Algorithms_2009, PKIXAlgs_2009, PKIXAttributeCertificate_2009, PKIX_CommonTypes_2009, PKIX_X400Address_2009, SecureMimeMessageV3dot1_2009, WLANCertExtn_2010, _IMPL_)

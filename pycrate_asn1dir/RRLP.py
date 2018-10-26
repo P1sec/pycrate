@@ -14,6 +14,797 @@ from pycrate_asn1rt.asnobj_class     import *
 from pycrate_asn1rt.asnobj_ext       import *
 from pycrate_asn1rt.init             import init_modules
 
+class MAP_SS_Code:
+
+    _name_  = u'MAP-SS-Code'
+    _oid_   = [0, 4, 0, 0, 1, 3, 15, 16]
+    
+    _obj_ = [
+        u'SS-Code',
+        u'allSS',
+        u'allLineIdentificationSS',
+        u'clip',
+        u'clir',
+        u'colp',
+        u'colr',
+        u'mci',
+        u'allNameIdentificationSS',
+        u'cnap',
+        u'allForwardingSS',
+        u'cfu',
+        u'allCondForwardingSS',
+        u'cfb',
+        u'cfnry',
+        u'cfnrc',
+        u'cd',
+        u'allCallOfferingSS',
+        u'ect',
+        u'mah',
+        u'allCallCompletionSS',
+        u'cw',
+        u'hold',
+        u'ccbs-A',
+        u'ccbs-B',
+        u'mc',
+        u'allMultiPartySS',
+        u'multiPTY',
+        u'allCommunityOfInterest-SS',
+        u'cug',
+        u'allChargingSS',
+        u'aoci',
+        u'aocc',
+        u'allAdditionalInfoTransferSS',
+        u'uus1',
+        u'uus2',
+        u'uus3',
+        u'allBarringSS',
+        u'barringOfOutgoingCalls',
+        u'baoc',
+        u'boic',
+        u'boicExHC',
+        u'barringOfIncomingCalls',
+        u'baic',
+        u'bicRoam',
+        u'allPLMN-specificSS',
+        u'plmn-specificSS-1',
+        u'plmn-specificSS-2',
+        u'plmn-specificSS-3',
+        u'plmn-specificSS-4',
+        u'plmn-specificSS-5',
+        u'plmn-specificSS-6',
+        u'plmn-specificSS-7',
+        u'plmn-specificSS-8',
+        u'plmn-specificSS-9',
+        u'plmn-specificSS-A',
+        u'plmn-specificSS-B',
+        u'plmn-specificSS-C',
+        u'plmn-specificSS-D',
+        u'plmn-specificSS-E',
+        u'plmn-specificSS-F',
+        u'allCallPrioritySS',
+        u'emlpp',
+        u'allLCSPrivacyException',
+        u'universal',
+        u'callSessionRelated',
+        u'callSessionUnrelated',
+        u'plmnoperator',
+        u'serviceType',
+        u'allMOLR-SS',
+        u'basicSelfLocation',
+        u'autonomousSelfLocation',
+        u'transferToThirdParty',
+        ]
+    _type_ = [
+        u'SS-Code',
+        ]
+    _set_ = [
+        ]
+    _val_ = [
+        u'allSS',
+        u'allLineIdentificationSS',
+        u'clip',
+        u'clir',
+        u'colp',
+        u'colr',
+        u'mci',
+        u'allNameIdentificationSS',
+        u'cnap',
+        u'allForwardingSS',
+        u'cfu',
+        u'allCondForwardingSS',
+        u'cfb',
+        u'cfnry',
+        u'cfnrc',
+        u'cd',
+        u'allCallOfferingSS',
+        u'ect',
+        u'mah',
+        u'allCallCompletionSS',
+        u'cw',
+        u'hold',
+        u'ccbs-A',
+        u'ccbs-B',
+        u'mc',
+        u'allMultiPartySS',
+        u'multiPTY',
+        u'allCommunityOfInterest-SS',
+        u'cug',
+        u'allChargingSS',
+        u'aoci',
+        u'aocc',
+        u'allAdditionalInfoTransferSS',
+        u'uus1',
+        u'uus2',
+        u'uus3',
+        u'allBarringSS',
+        u'barringOfOutgoingCalls',
+        u'baoc',
+        u'boic',
+        u'boicExHC',
+        u'barringOfIncomingCalls',
+        u'baic',
+        u'bicRoam',
+        u'allPLMN-specificSS',
+        u'plmn-specificSS-1',
+        u'plmn-specificSS-2',
+        u'plmn-specificSS-3',
+        u'plmn-specificSS-4',
+        u'plmn-specificSS-5',
+        u'plmn-specificSS-6',
+        u'plmn-specificSS-7',
+        u'plmn-specificSS-8',
+        u'plmn-specificSS-9',
+        u'plmn-specificSS-A',
+        u'plmn-specificSS-B',
+        u'plmn-specificSS-C',
+        u'plmn-specificSS-D',
+        u'plmn-specificSS-E',
+        u'plmn-specificSS-F',
+        u'allCallPrioritySS',
+        u'emlpp',
+        u'allLCSPrivacyException',
+        u'universal',
+        u'callSessionRelated',
+        u'callSessionUnrelated',
+        u'plmnoperator',
+        u'serviceType',
+        u'allMOLR-SS',
+        u'basicSelfLocation',
+        u'autonomousSelfLocation',
+        u'transferToThirdParty',
+        ]
+    _class_ = [
+        ]
+    _param_ = [
+        ]
+    
+    #-----< SS-Code >-----#
+    SS_Code = OCT_STR(name=u'SS-Code', mode=MODE_TYPE)
+    SS_Code._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
+    
+    #-----< allSS >-----#
+    allSS = OCT_STR(name=u'allSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    allSS._val = b'\x00'
+    
+    #-----< allLineIdentificationSS >-----#
+    allLineIdentificationSS = OCT_STR(name=u'allLineIdentificationSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    allLineIdentificationSS._val = b'\x10'
+    
+    #-----< clip >-----#
+    clip = OCT_STR(name=u'clip', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    clip._val = b'\x11'
+    
+    #-----< clir >-----#
+    clir = OCT_STR(name=u'clir', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    clir._val = b'\x12'
+    
+    #-----< colp >-----#
+    colp = OCT_STR(name=u'colp', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    colp._val = b'\x13'
+    
+    #-----< colr >-----#
+    colr = OCT_STR(name=u'colr', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    colr._val = b'\x14'
+    
+    #-----< mci >-----#
+    mci = OCT_STR(name=u'mci', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    mci._val = b'\x15'
+    
+    #-----< allNameIdentificationSS >-----#
+    allNameIdentificationSS = OCT_STR(name=u'allNameIdentificationSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    allNameIdentificationSS._val = b'\x18'
+    
+    #-----< cnap >-----#
+    cnap = OCT_STR(name=u'cnap', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    cnap._val = b'\x19'
+    
+    #-----< allForwardingSS >-----#
+    allForwardingSS = OCT_STR(name=u'allForwardingSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    allForwardingSS._val = b' '
+    
+    #-----< cfu >-----#
+    cfu = OCT_STR(name=u'cfu', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    cfu._val = b'!'
+    
+    #-----< allCondForwardingSS >-----#
+    allCondForwardingSS = OCT_STR(name=u'allCondForwardingSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    allCondForwardingSS._val = b'('
+    
+    #-----< cfb >-----#
+    cfb = OCT_STR(name=u'cfb', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    cfb._val = b')'
+    
+    #-----< cfnry >-----#
+    cfnry = OCT_STR(name=u'cfnry', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    cfnry._val = b'*'
+    
+    #-----< cfnrc >-----#
+    cfnrc = OCT_STR(name=u'cfnrc', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    cfnrc._val = b'+'
+    
+    #-----< cd >-----#
+    cd = OCT_STR(name=u'cd', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    cd._val = b'$'
+    
+    #-----< allCallOfferingSS >-----#
+    allCallOfferingSS = OCT_STR(name=u'allCallOfferingSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    allCallOfferingSS._val = b'0'
+    
+    #-----< ect >-----#
+    ect = OCT_STR(name=u'ect', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    ect._val = b'1'
+    
+    #-----< mah >-----#
+    mah = OCT_STR(name=u'mah', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    mah._val = b'2'
+    
+    #-----< allCallCompletionSS >-----#
+    allCallCompletionSS = OCT_STR(name=u'allCallCompletionSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    allCallCompletionSS._val = b'@'
+    
+    #-----< cw >-----#
+    cw = OCT_STR(name=u'cw', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    cw._val = b'A'
+    
+    #-----< hold >-----#
+    hold = OCT_STR(name=u'hold', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    hold._val = b'B'
+    
+    #-----< ccbs-A >-----#
+    ccbs_A = OCT_STR(name=u'ccbs-A', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    ccbs_A._val = b'C'
+    
+    #-----< ccbs-B >-----#
+    ccbs_B = OCT_STR(name=u'ccbs-B', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    ccbs_B._val = b'D'
+    
+    #-----< mc >-----#
+    mc = OCT_STR(name=u'mc', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    mc._val = b'E'
+    
+    #-----< allMultiPartySS >-----#
+    allMultiPartySS = OCT_STR(name=u'allMultiPartySS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    allMultiPartySS._val = b'P'
+    
+    #-----< multiPTY >-----#
+    multiPTY = OCT_STR(name=u'multiPTY', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    multiPTY._val = b'Q'
+    
+    #-----< allCommunityOfInterest-SS >-----#
+    allCommunityOfInterest_SS = OCT_STR(name=u'allCommunityOfInterest-SS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    allCommunityOfInterest_SS._val = b'`'
+    
+    #-----< cug >-----#
+    cug = OCT_STR(name=u'cug', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    cug._val = b'a'
+    
+    #-----< allChargingSS >-----#
+    allChargingSS = OCT_STR(name=u'allChargingSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    allChargingSS._val = b'p'
+    
+    #-----< aoci >-----#
+    aoci = OCT_STR(name=u'aoci', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    aoci._val = b'q'
+    
+    #-----< aocc >-----#
+    aocc = OCT_STR(name=u'aocc', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    aocc._val = b'r'
+    
+    #-----< allAdditionalInfoTransferSS >-----#
+    allAdditionalInfoTransferSS = OCT_STR(name=u'allAdditionalInfoTransferSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    allAdditionalInfoTransferSS._val = b'\x80'
+    
+    #-----< uus1 >-----#
+    uus1 = OCT_STR(name=u'uus1', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    uus1._val = b'\x81'
+    
+    #-----< uus2 >-----#
+    uus2 = OCT_STR(name=u'uus2', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    uus2._val = b'\x82'
+    
+    #-----< uus3 >-----#
+    uus3 = OCT_STR(name=u'uus3', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    uus3._val = b'\x83'
+    
+    #-----< allBarringSS >-----#
+    allBarringSS = OCT_STR(name=u'allBarringSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    allBarringSS._val = b'\x90'
+    
+    #-----< barringOfOutgoingCalls >-----#
+    barringOfOutgoingCalls = OCT_STR(name=u'barringOfOutgoingCalls', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    barringOfOutgoingCalls._val = b'\x91'
+    
+    #-----< baoc >-----#
+    baoc = OCT_STR(name=u'baoc', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    baoc._val = b'\x92'
+    
+    #-----< boic >-----#
+    boic = OCT_STR(name=u'boic', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    boic._val = b'\x93'
+    
+    #-----< boicExHC >-----#
+    boicExHC = OCT_STR(name=u'boicExHC', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    boicExHC._val = b'\x94'
+    
+    #-----< barringOfIncomingCalls >-----#
+    barringOfIncomingCalls = OCT_STR(name=u'barringOfIncomingCalls', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    barringOfIncomingCalls._val = b'\x99'
+    
+    #-----< baic >-----#
+    baic = OCT_STR(name=u'baic', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    baic._val = b'\x9a'
+    
+    #-----< bicRoam >-----#
+    bicRoam = OCT_STR(name=u'bicRoam', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    bicRoam._val = b'\x9b'
+    
+    #-----< allPLMN-specificSS >-----#
+    allPLMN_specificSS = OCT_STR(name=u'allPLMN-specificSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    allPLMN_specificSS._val = b'\xf0'
+    
+    #-----< plmn-specificSS-1 >-----#
+    plmn_specificSS_1 = OCT_STR(name=u'plmn-specificSS-1', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    plmn_specificSS_1._val = b'\xf1'
+    
+    #-----< plmn-specificSS-2 >-----#
+    plmn_specificSS_2 = OCT_STR(name=u'plmn-specificSS-2', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    plmn_specificSS_2._val = b'\xf2'
+    
+    #-----< plmn-specificSS-3 >-----#
+    plmn_specificSS_3 = OCT_STR(name=u'plmn-specificSS-3', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    plmn_specificSS_3._val = b'\xf3'
+    
+    #-----< plmn-specificSS-4 >-----#
+    plmn_specificSS_4 = OCT_STR(name=u'plmn-specificSS-4', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    plmn_specificSS_4._val = b'\xf4'
+    
+    #-----< plmn-specificSS-5 >-----#
+    plmn_specificSS_5 = OCT_STR(name=u'plmn-specificSS-5', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    plmn_specificSS_5._val = b'\xf5'
+    
+    #-----< plmn-specificSS-6 >-----#
+    plmn_specificSS_6 = OCT_STR(name=u'plmn-specificSS-6', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    plmn_specificSS_6._val = b'\xf6'
+    
+    #-----< plmn-specificSS-7 >-----#
+    plmn_specificSS_7 = OCT_STR(name=u'plmn-specificSS-7', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    plmn_specificSS_7._val = b'\xf7'
+    
+    #-----< plmn-specificSS-8 >-----#
+    plmn_specificSS_8 = OCT_STR(name=u'plmn-specificSS-8', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    plmn_specificSS_8._val = b'\xf8'
+    
+    #-----< plmn-specificSS-9 >-----#
+    plmn_specificSS_9 = OCT_STR(name=u'plmn-specificSS-9', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    plmn_specificSS_9._val = b'\xf9'
+    
+    #-----< plmn-specificSS-A >-----#
+    plmn_specificSS_A = OCT_STR(name=u'plmn-specificSS-A', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    plmn_specificSS_A._val = b'\xfa'
+    
+    #-----< plmn-specificSS-B >-----#
+    plmn_specificSS_B = OCT_STR(name=u'plmn-specificSS-B', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    plmn_specificSS_B._val = b'\xfb'
+    
+    #-----< plmn-specificSS-C >-----#
+    plmn_specificSS_C = OCT_STR(name=u'plmn-specificSS-C', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    plmn_specificSS_C._val = b'\xfc'
+    
+    #-----< plmn-specificSS-D >-----#
+    plmn_specificSS_D = OCT_STR(name=u'plmn-specificSS-D', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    plmn_specificSS_D._val = b'\xfd'
+    
+    #-----< plmn-specificSS-E >-----#
+    plmn_specificSS_E = OCT_STR(name=u'plmn-specificSS-E', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    plmn_specificSS_E._val = b'\xfe'
+    
+    #-----< plmn-specificSS-F >-----#
+    plmn_specificSS_F = OCT_STR(name=u'plmn-specificSS-F', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    plmn_specificSS_F._val = b'\xff'
+    
+    #-----< allCallPrioritySS >-----#
+    allCallPrioritySS = OCT_STR(name=u'allCallPrioritySS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    allCallPrioritySS._val = b'\xa0'
+    
+    #-----< emlpp >-----#
+    emlpp = OCT_STR(name=u'emlpp', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    emlpp._val = b'\xa1'
+    
+    #-----< allLCSPrivacyException >-----#
+    allLCSPrivacyException = OCT_STR(name=u'allLCSPrivacyException', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    allLCSPrivacyException._val = b'\xb0'
+    
+    #-----< universal >-----#
+    universal = OCT_STR(name=u'universal', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    universal._val = b'\xb1'
+    
+    #-----< callSessionRelated >-----#
+    callSessionRelated = OCT_STR(name=u'callSessionRelated', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    callSessionRelated._val = b'\xb2'
+    
+    #-----< callSessionUnrelated >-----#
+    callSessionUnrelated = OCT_STR(name=u'callSessionUnrelated', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    callSessionUnrelated._val = b'\xb3'
+    
+    #-----< plmnoperator >-----#
+    plmnoperator = OCT_STR(name=u'plmnoperator', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    plmnoperator._val = b'\xb4'
+    
+    #-----< serviceType >-----#
+    serviceType = OCT_STR(name=u'serviceType', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    serviceType._val = b'\xb5'
+    
+    #-----< allMOLR-SS >-----#
+    allMOLR_SS = OCT_STR(name=u'allMOLR-SS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    allMOLR_SS._val = b'\xc0'
+    
+    #-----< basicSelfLocation >-----#
+    basicSelfLocation = OCT_STR(name=u'basicSelfLocation', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    basicSelfLocation._val = b'\xc1'
+    
+    #-----< autonomousSelfLocation >-----#
+    autonomousSelfLocation = OCT_STR(name=u'autonomousSelfLocation', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    autonomousSelfLocation._val = b'\xc2'
+    
+    #-----< transferToThirdParty >-----#
+    transferToThirdParty = OCT_STR(name=u'transferToThirdParty', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
+    transferToThirdParty._val = b'\xc3'
+    
+    _all_ = [
+        SS_Code,
+        allSS,
+        allLineIdentificationSS,
+        clip,
+        clir,
+        colp,
+        colr,
+        mci,
+        allNameIdentificationSS,
+        cnap,
+        allForwardingSS,
+        cfu,
+        allCondForwardingSS,
+        cfb,
+        cfnry,
+        cfnrc,
+        cd,
+        allCallOfferingSS,
+        ect,
+        mah,
+        allCallCompletionSS,
+        cw,
+        hold,
+        ccbs_A,
+        ccbs_B,
+        mc,
+        allMultiPartySS,
+        multiPTY,
+        allCommunityOfInterest_SS,
+        cug,
+        allChargingSS,
+        aoci,
+        aocc,
+        allAdditionalInfoTransferSS,
+        uus1,
+        uus2,
+        uus3,
+        allBarringSS,
+        barringOfOutgoingCalls,
+        baoc,
+        boic,
+        boicExHC,
+        barringOfIncomingCalls,
+        baic,
+        bicRoam,
+        allPLMN_specificSS,
+        plmn_specificSS_1,
+        plmn_specificSS_2,
+        plmn_specificSS_3,
+        plmn_specificSS_4,
+        plmn_specificSS_5,
+        plmn_specificSS_6,
+        plmn_specificSS_7,
+        plmn_specificSS_8,
+        plmn_specificSS_9,
+        plmn_specificSS_A,
+        plmn_specificSS_B,
+        plmn_specificSS_C,
+        plmn_specificSS_D,
+        plmn_specificSS_E,
+        plmn_specificSS_F,
+        allCallPrioritySS,
+        emlpp,
+        allLCSPrivacyException,
+        universal,
+        callSessionRelated,
+        callSessionUnrelated,
+        plmnoperator,
+        serviceType,
+        allMOLR_SS,
+        basicSelfLocation,
+        autonomousSelfLocation,
+        transferToThirdParty,
+    ]
+
+class MAP_TS_Code:
+
+    _name_  = u'MAP-TS-Code'
+    _oid_   = [0, 4, 0, 0, 1, 3, 19, 16]
+    
+    _obj_ = [
+        u'TeleserviceCode',
+        u'Ext-TeleserviceCode',
+        u'allTeleservices',
+        u'allSpeechTransmissionServices',
+        u'telephony',
+        u'emergencyCalls',
+        u'allShortMessageServices',
+        u'shortMessageMT-PP',
+        u'shortMessageMO-PP',
+        u'allFacsimileTransmissionServices',
+        u'facsimileGroup3AndAlterSpeech',
+        u'automaticFacsimileGroup3',
+        u'facsimileGroup4',
+        u'allDataTeleservices',
+        u'allTeleservices-ExeptSMS',
+        u'allVoiceGroupCallServices',
+        u'voiceGroupCall',
+        u'voiceBroadcastCall',
+        u'allPLMN-specificTS',
+        u'plmn-specificTS-1',
+        u'plmn-specificTS-2',
+        u'plmn-specificTS-3',
+        u'plmn-specificTS-4',
+        u'plmn-specificTS-5',
+        u'plmn-specificTS-6',
+        u'plmn-specificTS-7',
+        u'plmn-specificTS-8',
+        u'plmn-specificTS-9',
+        u'plmn-specificTS-A',
+        u'plmn-specificTS-B',
+        u'plmn-specificTS-C',
+        u'plmn-specificTS-D',
+        u'plmn-specificTS-E',
+        u'plmn-specificTS-F',
+        ]
+    _type_ = [
+        u'TeleserviceCode',
+        u'Ext-TeleserviceCode',
+        ]
+    _set_ = [
+        ]
+    _val_ = [
+        u'allTeleservices',
+        u'allSpeechTransmissionServices',
+        u'telephony',
+        u'emergencyCalls',
+        u'allShortMessageServices',
+        u'shortMessageMT-PP',
+        u'shortMessageMO-PP',
+        u'allFacsimileTransmissionServices',
+        u'facsimileGroup3AndAlterSpeech',
+        u'automaticFacsimileGroup3',
+        u'facsimileGroup4',
+        u'allDataTeleservices',
+        u'allTeleservices-ExeptSMS',
+        u'allVoiceGroupCallServices',
+        u'voiceGroupCall',
+        u'voiceBroadcastCall',
+        u'allPLMN-specificTS',
+        u'plmn-specificTS-1',
+        u'plmn-specificTS-2',
+        u'plmn-specificTS-3',
+        u'plmn-specificTS-4',
+        u'plmn-specificTS-5',
+        u'plmn-specificTS-6',
+        u'plmn-specificTS-7',
+        u'plmn-specificTS-8',
+        u'plmn-specificTS-9',
+        u'plmn-specificTS-A',
+        u'plmn-specificTS-B',
+        u'plmn-specificTS-C',
+        u'plmn-specificTS-D',
+        u'plmn-specificTS-E',
+        u'plmn-specificTS-F',
+        ]
+    _class_ = [
+        ]
+    _param_ = [
+        ]
+    
+    #-----< TeleserviceCode >-----#
+    TeleserviceCode = OCT_STR(name=u'TeleserviceCode', mode=MODE_TYPE)
+    TeleserviceCode._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
+    
+    #-----< Ext-TeleserviceCode >-----#
+    Ext_TeleserviceCode = OCT_STR(name=u'Ext-TeleserviceCode', mode=MODE_TYPE)
+    Ext_TeleserviceCode._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=5)], ev=None, er=[])
+    
+    #-----< allTeleservices >-----#
+    allTeleservices = OCT_STR(name=u'allTeleservices', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    allTeleservices._val = b'\x00'
+    
+    #-----< allSpeechTransmissionServices >-----#
+    allSpeechTransmissionServices = OCT_STR(name=u'allSpeechTransmissionServices', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    allSpeechTransmissionServices._val = b'\x10'
+    
+    #-----< telephony >-----#
+    telephony = OCT_STR(name=u'telephony', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    telephony._val = b'\x11'
+    
+    #-----< emergencyCalls >-----#
+    emergencyCalls = OCT_STR(name=u'emergencyCalls', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    emergencyCalls._val = b'\x12'
+    
+    #-----< allShortMessageServices >-----#
+    allShortMessageServices = OCT_STR(name=u'allShortMessageServices', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    allShortMessageServices._val = b' '
+    
+    #-----< shortMessageMT-PP >-----#
+    shortMessageMT_PP = OCT_STR(name=u'shortMessageMT-PP', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    shortMessageMT_PP._val = b'!'
+    
+    #-----< shortMessageMO-PP >-----#
+    shortMessageMO_PP = OCT_STR(name=u'shortMessageMO-PP', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    shortMessageMO_PP._val = b'"'
+    
+    #-----< allFacsimileTransmissionServices >-----#
+    allFacsimileTransmissionServices = OCT_STR(name=u'allFacsimileTransmissionServices', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    allFacsimileTransmissionServices._val = b'`'
+    
+    #-----< facsimileGroup3AndAlterSpeech >-----#
+    facsimileGroup3AndAlterSpeech = OCT_STR(name=u'facsimileGroup3AndAlterSpeech', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    facsimileGroup3AndAlterSpeech._val = b'a'
+    
+    #-----< automaticFacsimileGroup3 >-----#
+    automaticFacsimileGroup3 = OCT_STR(name=u'automaticFacsimileGroup3', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    automaticFacsimileGroup3._val = b'b'
+    
+    #-----< facsimileGroup4 >-----#
+    facsimileGroup4 = OCT_STR(name=u'facsimileGroup4', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    facsimileGroup4._val = b'c'
+    
+    #-----< allDataTeleservices >-----#
+    allDataTeleservices = OCT_STR(name=u'allDataTeleservices', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    allDataTeleservices._val = b'p'
+    
+    #-----< allTeleservices-ExeptSMS >-----#
+    allTeleservices_ExeptSMS = OCT_STR(name=u'allTeleservices-ExeptSMS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    allTeleservices_ExeptSMS._val = b'\x80'
+    
+    #-----< allVoiceGroupCallServices >-----#
+    allVoiceGroupCallServices = OCT_STR(name=u'allVoiceGroupCallServices', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    allVoiceGroupCallServices._val = b'\x90'
+    
+    #-----< voiceGroupCall >-----#
+    voiceGroupCall = OCT_STR(name=u'voiceGroupCall', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    voiceGroupCall._val = b'\x91'
+    
+    #-----< voiceBroadcastCall >-----#
+    voiceBroadcastCall = OCT_STR(name=u'voiceBroadcastCall', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    voiceBroadcastCall._val = b'\x92'
+    
+    #-----< allPLMN-specificTS >-----#
+    allPLMN_specificTS = OCT_STR(name=u'allPLMN-specificTS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    allPLMN_specificTS._val = b'\xd0'
+    
+    #-----< plmn-specificTS-1 >-----#
+    plmn_specificTS_1 = OCT_STR(name=u'plmn-specificTS-1', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_1._val = b'\xd1'
+    
+    #-----< plmn-specificTS-2 >-----#
+    plmn_specificTS_2 = OCT_STR(name=u'plmn-specificTS-2', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_2._val = b'\xd2'
+    
+    #-----< plmn-specificTS-3 >-----#
+    plmn_specificTS_3 = OCT_STR(name=u'plmn-specificTS-3', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_3._val = b'\xd3'
+    
+    #-----< plmn-specificTS-4 >-----#
+    plmn_specificTS_4 = OCT_STR(name=u'plmn-specificTS-4', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_4._val = b'\xd4'
+    
+    #-----< plmn-specificTS-5 >-----#
+    plmn_specificTS_5 = OCT_STR(name=u'plmn-specificTS-5', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_5._val = b'\xd5'
+    
+    #-----< plmn-specificTS-6 >-----#
+    plmn_specificTS_6 = OCT_STR(name=u'plmn-specificTS-6', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_6._val = b'\xd6'
+    
+    #-----< plmn-specificTS-7 >-----#
+    plmn_specificTS_7 = OCT_STR(name=u'plmn-specificTS-7', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_7._val = b'\xd7'
+    
+    #-----< plmn-specificTS-8 >-----#
+    plmn_specificTS_8 = OCT_STR(name=u'plmn-specificTS-8', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_8._val = b'\xd8'
+    
+    #-----< plmn-specificTS-9 >-----#
+    plmn_specificTS_9 = OCT_STR(name=u'plmn-specificTS-9', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_9._val = b'\xd9'
+    
+    #-----< plmn-specificTS-A >-----#
+    plmn_specificTS_A = OCT_STR(name=u'plmn-specificTS-A', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_A._val = b'\xda'
+    
+    #-----< plmn-specificTS-B >-----#
+    plmn_specificTS_B = OCT_STR(name=u'plmn-specificTS-B', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_B._val = b'\xdb'
+    
+    #-----< plmn-specificTS-C >-----#
+    plmn_specificTS_C = OCT_STR(name=u'plmn-specificTS-C', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_C._val = b'\xdc'
+    
+    #-----< plmn-specificTS-D >-----#
+    plmn_specificTS_D = OCT_STR(name=u'plmn-specificTS-D', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_D._val = b'\xdd'
+    
+    #-----< plmn-specificTS-E >-----#
+    plmn_specificTS_E = OCT_STR(name=u'plmn-specificTS-E', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_E._val = b'\xde'
+    
+    #-----< plmn-specificTS-F >-----#
+    plmn_specificTS_F = OCT_STR(name=u'plmn-specificTS-F', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_F._val = b'\xdf'
+    
+    _all_ = [
+        TeleserviceCode,
+        Ext_TeleserviceCode,
+        allTeleservices,
+        allSpeechTransmissionServices,
+        telephony,
+        emergencyCalls,
+        allShortMessageServices,
+        shortMessageMT_PP,
+        shortMessageMO_PP,
+        allFacsimileTransmissionServices,
+        facsimileGroup3AndAlterSpeech,
+        automaticFacsimileGroup3,
+        facsimileGroup4,
+        allDataTeleservices,
+        allTeleservices_ExeptSMS,
+        allVoiceGroupCallServices,
+        voiceGroupCall,
+        voiceBroadcastCall,
+        allPLMN_specificTS,
+        plmn_specificTS_1,
+        plmn_specificTS_2,
+        plmn_specificTS_3,
+        plmn_specificTS_4,
+        plmn_specificTS_5,
+        plmn_specificTS_6,
+        plmn_specificTS_7,
+        plmn_specificTS_8,
+        plmn_specificTS_9,
+        plmn_specificTS_A,
+        plmn_specificTS_B,
+        plmn_specificTS_C,
+        plmn_specificTS_D,
+        plmn_specificTS_E,
+        plmn_specificTS_F,
+    ]
+
 class MAP_BS_Code:
 
     _name_  = u'MAP-BS-Code'
@@ -11790,538 +12581,6 @@ class MAP_SM_DataTypes:
         maxNumOfAdditionalDispatchers,
     ]
 
-class MAP_SS_Code:
-
-    _name_  = u'MAP-SS-Code'
-    _oid_   = [0, 4, 0, 0, 1, 3, 15, 16]
-    
-    _obj_ = [
-        u'SS-Code',
-        u'allSS',
-        u'allLineIdentificationSS',
-        u'clip',
-        u'clir',
-        u'colp',
-        u'colr',
-        u'mci',
-        u'allNameIdentificationSS',
-        u'cnap',
-        u'allForwardingSS',
-        u'cfu',
-        u'allCondForwardingSS',
-        u'cfb',
-        u'cfnry',
-        u'cfnrc',
-        u'cd',
-        u'allCallOfferingSS',
-        u'ect',
-        u'mah',
-        u'allCallCompletionSS',
-        u'cw',
-        u'hold',
-        u'ccbs-A',
-        u'ccbs-B',
-        u'mc',
-        u'allMultiPartySS',
-        u'multiPTY',
-        u'allCommunityOfInterest-SS',
-        u'cug',
-        u'allChargingSS',
-        u'aoci',
-        u'aocc',
-        u'allAdditionalInfoTransferSS',
-        u'uus1',
-        u'uus2',
-        u'uus3',
-        u'allBarringSS',
-        u'barringOfOutgoingCalls',
-        u'baoc',
-        u'boic',
-        u'boicExHC',
-        u'barringOfIncomingCalls',
-        u'baic',
-        u'bicRoam',
-        u'allPLMN-specificSS',
-        u'plmn-specificSS-1',
-        u'plmn-specificSS-2',
-        u'plmn-specificSS-3',
-        u'plmn-specificSS-4',
-        u'plmn-specificSS-5',
-        u'plmn-specificSS-6',
-        u'plmn-specificSS-7',
-        u'plmn-specificSS-8',
-        u'plmn-specificSS-9',
-        u'plmn-specificSS-A',
-        u'plmn-specificSS-B',
-        u'plmn-specificSS-C',
-        u'plmn-specificSS-D',
-        u'plmn-specificSS-E',
-        u'plmn-specificSS-F',
-        u'allCallPrioritySS',
-        u'emlpp',
-        u'allLCSPrivacyException',
-        u'universal',
-        u'callSessionRelated',
-        u'callSessionUnrelated',
-        u'plmnoperator',
-        u'serviceType',
-        u'allMOLR-SS',
-        u'basicSelfLocation',
-        u'autonomousSelfLocation',
-        u'transferToThirdParty',
-        ]
-    _type_ = [
-        u'SS-Code',
-        ]
-    _set_ = [
-        ]
-    _val_ = [
-        u'allSS',
-        u'allLineIdentificationSS',
-        u'clip',
-        u'clir',
-        u'colp',
-        u'colr',
-        u'mci',
-        u'allNameIdentificationSS',
-        u'cnap',
-        u'allForwardingSS',
-        u'cfu',
-        u'allCondForwardingSS',
-        u'cfb',
-        u'cfnry',
-        u'cfnrc',
-        u'cd',
-        u'allCallOfferingSS',
-        u'ect',
-        u'mah',
-        u'allCallCompletionSS',
-        u'cw',
-        u'hold',
-        u'ccbs-A',
-        u'ccbs-B',
-        u'mc',
-        u'allMultiPartySS',
-        u'multiPTY',
-        u'allCommunityOfInterest-SS',
-        u'cug',
-        u'allChargingSS',
-        u'aoci',
-        u'aocc',
-        u'allAdditionalInfoTransferSS',
-        u'uus1',
-        u'uus2',
-        u'uus3',
-        u'allBarringSS',
-        u'barringOfOutgoingCalls',
-        u'baoc',
-        u'boic',
-        u'boicExHC',
-        u'barringOfIncomingCalls',
-        u'baic',
-        u'bicRoam',
-        u'allPLMN-specificSS',
-        u'plmn-specificSS-1',
-        u'plmn-specificSS-2',
-        u'plmn-specificSS-3',
-        u'plmn-specificSS-4',
-        u'plmn-specificSS-5',
-        u'plmn-specificSS-6',
-        u'plmn-specificSS-7',
-        u'plmn-specificSS-8',
-        u'plmn-specificSS-9',
-        u'plmn-specificSS-A',
-        u'plmn-specificSS-B',
-        u'plmn-specificSS-C',
-        u'plmn-specificSS-D',
-        u'plmn-specificSS-E',
-        u'plmn-specificSS-F',
-        u'allCallPrioritySS',
-        u'emlpp',
-        u'allLCSPrivacyException',
-        u'universal',
-        u'callSessionRelated',
-        u'callSessionUnrelated',
-        u'plmnoperator',
-        u'serviceType',
-        u'allMOLR-SS',
-        u'basicSelfLocation',
-        u'autonomousSelfLocation',
-        u'transferToThirdParty',
-        ]
-    _class_ = [
-        ]
-    _param_ = [
-        ]
-    
-    #-----< SS-Code >-----#
-    SS_Code = OCT_STR(name=u'SS-Code', mode=MODE_TYPE)
-    SS_Code._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
-    
-    #-----< allSS >-----#
-    allSS = OCT_STR(name=u'allSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    allSS._val = b'\x00'
-    
-    #-----< allLineIdentificationSS >-----#
-    allLineIdentificationSS = OCT_STR(name=u'allLineIdentificationSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    allLineIdentificationSS._val = b'\x10'
-    
-    #-----< clip >-----#
-    clip = OCT_STR(name=u'clip', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    clip._val = b'\x11'
-    
-    #-----< clir >-----#
-    clir = OCT_STR(name=u'clir', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    clir._val = b'\x12'
-    
-    #-----< colp >-----#
-    colp = OCT_STR(name=u'colp', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    colp._val = b'\x13'
-    
-    #-----< colr >-----#
-    colr = OCT_STR(name=u'colr', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    colr._val = b'\x14'
-    
-    #-----< mci >-----#
-    mci = OCT_STR(name=u'mci', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    mci._val = b'\x15'
-    
-    #-----< allNameIdentificationSS >-----#
-    allNameIdentificationSS = OCT_STR(name=u'allNameIdentificationSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    allNameIdentificationSS._val = b'\x18'
-    
-    #-----< cnap >-----#
-    cnap = OCT_STR(name=u'cnap', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    cnap._val = b'\x19'
-    
-    #-----< allForwardingSS >-----#
-    allForwardingSS = OCT_STR(name=u'allForwardingSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    allForwardingSS._val = b' '
-    
-    #-----< cfu >-----#
-    cfu = OCT_STR(name=u'cfu', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    cfu._val = b'!'
-    
-    #-----< allCondForwardingSS >-----#
-    allCondForwardingSS = OCT_STR(name=u'allCondForwardingSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    allCondForwardingSS._val = b'('
-    
-    #-----< cfb >-----#
-    cfb = OCT_STR(name=u'cfb', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    cfb._val = b')'
-    
-    #-----< cfnry >-----#
-    cfnry = OCT_STR(name=u'cfnry', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    cfnry._val = b'*'
-    
-    #-----< cfnrc >-----#
-    cfnrc = OCT_STR(name=u'cfnrc', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    cfnrc._val = b'+'
-    
-    #-----< cd >-----#
-    cd = OCT_STR(name=u'cd', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    cd._val = b'$'
-    
-    #-----< allCallOfferingSS >-----#
-    allCallOfferingSS = OCT_STR(name=u'allCallOfferingSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    allCallOfferingSS._val = b'0'
-    
-    #-----< ect >-----#
-    ect = OCT_STR(name=u'ect', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    ect._val = b'1'
-    
-    #-----< mah >-----#
-    mah = OCT_STR(name=u'mah', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    mah._val = b'2'
-    
-    #-----< allCallCompletionSS >-----#
-    allCallCompletionSS = OCT_STR(name=u'allCallCompletionSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    allCallCompletionSS._val = b'@'
-    
-    #-----< cw >-----#
-    cw = OCT_STR(name=u'cw', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    cw._val = b'A'
-    
-    #-----< hold >-----#
-    hold = OCT_STR(name=u'hold', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    hold._val = b'B'
-    
-    #-----< ccbs-A >-----#
-    ccbs_A = OCT_STR(name=u'ccbs-A', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    ccbs_A._val = b'C'
-    
-    #-----< ccbs-B >-----#
-    ccbs_B = OCT_STR(name=u'ccbs-B', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    ccbs_B._val = b'D'
-    
-    #-----< mc >-----#
-    mc = OCT_STR(name=u'mc', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    mc._val = b'E'
-    
-    #-----< allMultiPartySS >-----#
-    allMultiPartySS = OCT_STR(name=u'allMultiPartySS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    allMultiPartySS._val = b'P'
-    
-    #-----< multiPTY >-----#
-    multiPTY = OCT_STR(name=u'multiPTY', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    multiPTY._val = b'Q'
-    
-    #-----< allCommunityOfInterest-SS >-----#
-    allCommunityOfInterest_SS = OCT_STR(name=u'allCommunityOfInterest-SS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    allCommunityOfInterest_SS._val = b'`'
-    
-    #-----< cug >-----#
-    cug = OCT_STR(name=u'cug', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    cug._val = b'a'
-    
-    #-----< allChargingSS >-----#
-    allChargingSS = OCT_STR(name=u'allChargingSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    allChargingSS._val = b'p'
-    
-    #-----< aoci >-----#
-    aoci = OCT_STR(name=u'aoci', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    aoci._val = b'q'
-    
-    #-----< aocc >-----#
-    aocc = OCT_STR(name=u'aocc', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    aocc._val = b'r'
-    
-    #-----< allAdditionalInfoTransferSS >-----#
-    allAdditionalInfoTransferSS = OCT_STR(name=u'allAdditionalInfoTransferSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    allAdditionalInfoTransferSS._val = b'\x80'
-    
-    #-----< uus1 >-----#
-    uus1 = OCT_STR(name=u'uus1', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    uus1._val = b'\x81'
-    
-    #-----< uus2 >-----#
-    uus2 = OCT_STR(name=u'uus2', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    uus2._val = b'\x82'
-    
-    #-----< uus3 >-----#
-    uus3 = OCT_STR(name=u'uus3', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    uus3._val = b'\x83'
-    
-    #-----< allBarringSS >-----#
-    allBarringSS = OCT_STR(name=u'allBarringSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    allBarringSS._val = b'\x90'
-    
-    #-----< barringOfOutgoingCalls >-----#
-    barringOfOutgoingCalls = OCT_STR(name=u'barringOfOutgoingCalls', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    barringOfOutgoingCalls._val = b'\x91'
-    
-    #-----< baoc >-----#
-    baoc = OCT_STR(name=u'baoc', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    baoc._val = b'\x92'
-    
-    #-----< boic >-----#
-    boic = OCT_STR(name=u'boic', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    boic._val = b'\x93'
-    
-    #-----< boicExHC >-----#
-    boicExHC = OCT_STR(name=u'boicExHC', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    boicExHC._val = b'\x94'
-    
-    #-----< barringOfIncomingCalls >-----#
-    barringOfIncomingCalls = OCT_STR(name=u'barringOfIncomingCalls', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    barringOfIncomingCalls._val = b'\x99'
-    
-    #-----< baic >-----#
-    baic = OCT_STR(name=u'baic', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    baic._val = b'\x9a'
-    
-    #-----< bicRoam >-----#
-    bicRoam = OCT_STR(name=u'bicRoam', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    bicRoam._val = b'\x9b'
-    
-    #-----< allPLMN-specificSS >-----#
-    allPLMN_specificSS = OCT_STR(name=u'allPLMN-specificSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    allPLMN_specificSS._val = b'\xf0'
-    
-    #-----< plmn-specificSS-1 >-----#
-    plmn_specificSS_1 = OCT_STR(name=u'plmn-specificSS-1', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    plmn_specificSS_1._val = b'\xf1'
-    
-    #-----< plmn-specificSS-2 >-----#
-    plmn_specificSS_2 = OCT_STR(name=u'plmn-specificSS-2', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    plmn_specificSS_2._val = b'\xf2'
-    
-    #-----< plmn-specificSS-3 >-----#
-    plmn_specificSS_3 = OCT_STR(name=u'plmn-specificSS-3', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    plmn_specificSS_3._val = b'\xf3'
-    
-    #-----< plmn-specificSS-4 >-----#
-    plmn_specificSS_4 = OCT_STR(name=u'plmn-specificSS-4', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    plmn_specificSS_4._val = b'\xf4'
-    
-    #-----< plmn-specificSS-5 >-----#
-    plmn_specificSS_5 = OCT_STR(name=u'plmn-specificSS-5', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    plmn_specificSS_5._val = b'\xf5'
-    
-    #-----< plmn-specificSS-6 >-----#
-    plmn_specificSS_6 = OCT_STR(name=u'plmn-specificSS-6', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    plmn_specificSS_6._val = b'\xf6'
-    
-    #-----< plmn-specificSS-7 >-----#
-    plmn_specificSS_7 = OCT_STR(name=u'plmn-specificSS-7', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    plmn_specificSS_7._val = b'\xf7'
-    
-    #-----< plmn-specificSS-8 >-----#
-    plmn_specificSS_8 = OCT_STR(name=u'plmn-specificSS-8', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    plmn_specificSS_8._val = b'\xf8'
-    
-    #-----< plmn-specificSS-9 >-----#
-    plmn_specificSS_9 = OCT_STR(name=u'plmn-specificSS-9', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    plmn_specificSS_9._val = b'\xf9'
-    
-    #-----< plmn-specificSS-A >-----#
-    plmn_specificSS_A = OCT_STR(name=u'plmn-specificSS-A', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    plmn_specificSS_A._val = b'\xfa'
-    
-    #-----< plmn-specificSS-B >-----#
-    plmn_specificSS_B = OCT_STR(name=u'plmn-specificSS-B', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    plmn_specificSS_B._val = b'\xfb'
-    
-    #-----< plmn-specificSS-C >-----#
-    plmn_specificSS_C = OCT_STR(name=u'plmn-specificSS-C', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    plmn_specificSS_C._val = b'\xfc'
-    
-    #-----< plmn-specificSS-D >-----#
-    plmn_specificSS_D = OCT_STR(name=u'plmn-specificSS-D', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    plmn_specificSS_D._val = b'\xfd'
-    
-    #-----< plmn-specificSS-E >-----#
-    plmn_specificSS_E = OCT_STR(name=u'plmn-specificSS-E', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    plmn_specificSS_E._val = b'\xfe'
-    
-    #-----< plmn-specificSS-F >-----#
-    plmn_specificSS_F = OCT_STR(name=u'plmn-specificSS-F', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    plmn_specificSS_F._val = b'\xff'
-    
-    #-----< allCallPrioritySS >-----#
-    allCallPrioritySS = OCT_STR(name=u'allCallPrioritySS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    allCallPrioritySS._val = b'\xa0'
-    
-    #-----< emlpp >-----#
-    emlpp = OCT_STR(name=u'emlpp', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    emlpp._val = b'\xa1'
-    
-    #-----< allLCSPrivacyException >-----#
-    allLCSPrivacyException = OCT_STR(name=u'allLCSPrivacyException', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    allLCSPrivacyException._val = b'\xb0'
-    
-    #-----< universal >-----#
-    universal = OCT_STR(name=u'universal', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    universal._val = b'\xb1'
-    
-    #-----< callSessionRelated >-----#
-    callSessionRelated = OCT_STR(name=u'callSessionRelated', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    callSessionRelated._val = b'\xb2'
-    
-    #-----< callSessionUnrelated >-----#
-    callSessionUnrelated = OCT_STR(name=u'callSessionUnrelated', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    callSessionUnrelated._val = b'\xb3'
-    
-    #-----< plmnoperator >-----#
-    plmnoperator = OCT_STR(name=u'plmnoperator', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    plmnoperator._val = b'\xb4'
-    
-    #-----< serviceType >-----#
-    serviceType = OCT_STR(name=u'serviceType', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    serviceType._val = b'\xb5'
-    
-    #-----< allMOLR-SS >-----#
-    allMOLR_SS = OCT_STR(name=u'allMOLR-SS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    allMOLR_SS._val = b'\xc0'
-    
-    #-----< basicSelfLocation >-----#
-    basicSelfLocation = OCT_STR(name=u'basicSelfLocation', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    basicSelfLocation._val = b'\xc1'
-    
-    #-----< autonomousSelfLocation >-----#
-    autonomousSelfLocation = OCT_STR(name=u'autonomousSelfLocation', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    autonomousSelfLocation._val = b'\xc2'
-    
-    #-----< transferToThirdParty >-----#
-    transferToThirdParty = OCT_STR(name=u'transferToThirdParty', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
-    transferToThirdParty._val = b'\xc3'
-    
-    _all_ = [
-        SS_Code,
-        allSS,
-        allLineIdentificationSS,
-        clip,
-        clir,
-        colp,
-        colr,
-        mci,
-        allNameIdentificationSS,
-        cnap,
-        allForwardingSS,
-        cfu,
-        allCondForwardingSS,
-        cfb,
-        cfnry,
-        cfnrc,
-        cd,
-        allCallOfferingSS,
-        ect,
-        mah,
-        allCallCompletionSS,
-        cw,
-        hold,
-        ccbs_A,
-        ccbs_B,
-        mc,
-        allMultiPartySS,
-        multiPTY,
-        allCommunityOfInterest_SS,
-        cug,
-        allChargingSS,
-        aoci,
-        aocc,
-        allAdditionalInfoTransferSS,
-        uus1,
-        uus2,
-        uus3,
-        allBarringSS,
-        barringOfOutgoingCalls,
-        baoc,
-        boic,
-        boicExHC,
-        barringOfIncomingCalls,
-        baic,
-        bicRoam,
-        allPLMN_specificSS,
-        plmn_specificSS_1,
-        plmn_specificSS_2,
-        plmn_specificSS_3,
-        plmn_specificSS_4,
-        plmn_specificSS_5,
-        plmn_specificSS_6,
-        plmn_specificSS_7,
-        plmn_specificSS_8,
-        plmn_specificSS_9,
-        plmn_specificSS_A,
-        plmn_specificSS_B,
-        plmn_specificSS_C,
-        plmn_specificSS_D,
-        plmn_specificSS_E,
-        plmn_specificSS_F,
-        allCallPrioritySS,
-        emlpp,
-        allLCSPrivacyException,
-        universal,
-        callSessionRelated,
-        callSessionUnrelated,
-        plmnoperator,
-        serviceType,
-        allMOLR_SS,
-        basicSelfLocation,
-        autonomousSelfLocation,
-        transferToThirdParty,
-    ]
-
 class MAP_SS_DataTypes:
 
     _name_  = u'MAP-SS-DataTypes'
@@ -12956,265 +13215,6 @@ class MAP_SS_DataTypes:
         _EraseCC_EntryRes_ss_Code,
         _EraseCC_EntryRes_ss_Status,
         EraseCC_EntryRes,
-    ]
-
-class MAP_TS_Code:
-
-    _name_  = u'MAP-TS-Code'
-    _oid_   = [0, 4, 0, 0, 1, 3, 19, 16]
-    
-    _obj_ = [
-        u'TeleserviceCode',
-        u'Ext-TeleserviceCode',
-        u'allTeleservices',
-        u'allSpeechTransmissionServices',
-        u'telephony',
-        u'emergencyCalls',
-        u'allShortMessageServices',
-        u'shortMessageMT-PP',
-        u'shortMessageMO-PP',
-        u'allFacsimileTransmissionServices',
-        u'facsimileGroup3AndAlterSpeech',
-        u'automaticFacsimileGroup3',
-        u'facsimileGroup4',
-        u'allDataTeleservices',
-        u'allTeleservices-ExeptSMS',
-        u'allVoiceGroupCallServices',
-        u'voiceGroupCall',
-        u'voiceBroadcastCall',
-        u'allPLMN-specificTS',
-        u'plmn-specificTS-1',
-        u'plmn-specificTS-2',
-        u'plmn-specificTS-3',
-        u'plmn-specificTS-4',
-        u'plmn-specificTS-5',
-        u'plmn-specificTS-6',
-        u'plmn-specificTS-7',
-        u'plmn-specificTS-8',
-        u'plmn-specificTS-9',
-        u'plmn-specificTS-A',
-        u'plmn-specificTS-B',
-        u'plmn-specificTS-C',
-        u'plmn-specificTS-D',
-        u'plmn-specificTS-E',
-        u'plmn-specificTS-F',
-        ]
-    _type_ = [
-        u'TeleserviceCode',
-        u'Ext-TeleserviceCode',
-        ]
-    _set_ = [
-        ]
-    _val_ = [
-        u'allTeleservices',
-        u'allSpeechTransmissionServices',
-        u'telephony',
-        u'emergencyCalls',
-        u'allShortMessageServices',
-        u'shortMessageMT-PP',
-        u'shortMessageMO-PP',
-        u'allFacsimileTransmissionServices',
-        u'facsimileGroup3AndAlterSpeech',
-        u'automaticFacsimileGroup3',
-        u'facsimileGroup4',
-        u'allDataTeleservices',
-        u'allTeleservices-ExeptSMS',
-        u'allVoiceGroupCallServices',
-        u'voiceGroupCall',
-        u'voiceBroadcastCall',
-        u'allPLMN-specificTS',
-        u'plmn-specificTS-1',
-        u'plmn-specificTS-2',
-        u'plmn-specificTS-3',
-        u'plmn-specificTS-4',
-        u'plmn-specificTS-5',
-        u'plmn-specificTS-6',
-        u'plmn-specificTS-7',
-        u'plmn-specificTS-8',
-        u'plmn-specificTS-9',
-        u'plmn-specificTS-A',
-        u'plmn-specificTS-B',
-        u'plmn-specificTS-C',
-        u'plmn-specificTS-D',
-        u'plmn-specificTS-E',
-        u'plmn-specificTS-F',
-        ]
-    _class_ = [
-        ]
-    _param_ = [
-        ]
-    
-    #-----< TeleserviceCode >-----#
-    TeleserviceCode = OCT_STR(name=u'TeleserviceCode', mode=MODE_TYPE)
-    TeleserviceCode._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
-    
-    #-----< Ext-TeleserviceCode >-----#
-    Ext_TeleserviceCode = OCT_STR(name=u'Ext-TeleserviceCode', mode=MODE_TYPE)
-    Ext_TeleserviceCode._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=5)], ev=None, er=[])
-    
-    #-----< allTeleservices >-----#
-    allTeleservices = OCT_STR(name=u'allTeleservices', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    allTeleservices._val = b'\x00'
-    
-    #-----< allSpeechTransmissionServices >-----#
-    allSpeechTransmissionServices = OCT_STR(name=u'allSpeechTransmissionServices', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    allSpeechTransmissionServices._val = b'\x10'
-    
-    #-----< telephony >-----#
-    telephony = OCT_STR(name=u'telephony', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    telephony._val = b'\x11'
-    
-    #-----< emergencyCalls >-----#
-    emergencyCalls = OCT_STR(name=u'emergencyCalls', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    emergencyCalls._val = b'\x12'
-    
-    #-----< allShortMessageServices >-----#
-    allShortMessageServices = OCT_STR(name=u'allShortMessageServices', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    allShortMessageServices._val = b' '
-    
-    #-----< shortMessageMT-PP >-----#
-    shortMessageMT_PP = OCT_STR(name=u'shortMessageMT-PP', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    shortMessageMT_PP._val = b'!'
-    
-    #-----< shortMessageMO-PP >-----#
-    shortMessageMO_PP = OCT_STR(name=u'shortMessageMO-PP', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    shortMessageMO_PP._val = b'"'
-    
-    #-----< allFacsimileTransmissionServices >-----#
-    allFacsimileTransmissionServices = OCT_STR(name=u'allFacsimileTransmissionServices', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    allFacsimileTransmissionServices._val = b'`'
-    
-    #-----< facsimileGroup3AndAlterSpeech >-----#
-    facsimileGroup3AndAlterSpeech = OCT_STR(name=u'facsimileGroup3AndAlterSpeech', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    facsimileGroup3AndAlterSpeech._val = b'a'
-    
-    #-----< automaticFacsimileGroup3 >-----#
-    automaticFacsimileGroup3 = OCT_STR(name=u'automaticFacsimileGroup3', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    automaticFacsimileGroup3._val = b'b'
-    
-    #-----< facsimileGroup4 >-----#
-    facsimileGroup4 = OCT_STR(name=u'facsimileGroup4', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    facsimileGroup4._val = b'c'
-    
-    #-----< allDataTeleservices >-----#
-    allDataTeleservices = OCT_STR(name=u'allDataTeleservices', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    allDataTeleservices._val = b'p'
-    
-    #-----< allTeleservices-ExeptSMS >-----#
-    allTeleservices_ExeptSMS = OCT_STR(name=u'allTeleservices-ExeptSMS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    allTeleservices_ExeptSMS._val = b'\x80'
-    
-    #-----< allVoiceGroupCallServices >-----#
-    allVoiceGroupCallServices = OCT_STR(name=u'allVoiceGroupCallServices', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    allVoiceGroupCallServices._val = b'\x90'
-    
-    #-----< voiceGroupCall >-----#
-    voiceGroupCall = OCT_STR(name=u'voiceGroupCall', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    voiceGroupCall._val = b'\x91'
-    
-    #-----< voiceBroadcastCall >-----#
-    voiceBroadcastCall = OCT_STR(name=u'voiceBroadcastCall', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    voiceBroadcastCall._val = b'\x92'
-    
-    #-----< allPLMN-specificTS >-----#
-    allPLMN_specificTS = OCT_STR(name=u'allPLMN-specificTS', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    allPLMN_specificTS._val = b'\xd0'
-    
-    #-----< plmn-specificTS-1 >-----#
-    plmn_specificTS_1 = OCT_STR(name=u'plmn-specificTS-1', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    plmn_specificTS_1._val = b'\xd1'
-    
-    #-----< plmn-specificTS-2 >-----#
-    plmn_specificTS_2 = OCT_STR(name=u'plmn-specificTS-2', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    plmn_specificTS_2._val = b'\xd2'
-    
-    #-----< plmn-specificTS-3 >-----#
-    plmn_specificTS_3 = OCT_STR(name=u'plmn-specificTS-3', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    plmn_specificTS_3._val = b'\xd3'
-    
-    #-----< plmn-specificTS-4 >-----#
-    plmn_specificTS_4 = OCT_STR(name=u'plmn-specificTS-4', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    plmn_specificTS_4._val = b'\xd4'
-    
-    #-----< plmn-specificTS-5 >-----#
-    plmn_specificTS_5 = OCT_STR(name=u'plmn-specificTS-5', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    plmn_specificTS_5._val = b'\xd5'
-    
-    #-----< plmn-specificTS-6 >-----#
-    plmn_specificTS_6 = OCT_STR(name=u'plmn-specificTS-6', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    plmn_specificTS_6._val = b'\xd6'
-    
-    #-----< plmn-specificTS-7 >-----#
-    plmn_specificTS_7 = OCT_STR(name=u'plmn-specificTS-7', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    plmn_specificTS_7._val = b'\xd7'
-    
-    #-----< plmn-specificTS-8 >-----#
-    plmn_specificTS_8 = OCT_STR(name=u'plmn-specificTS-8', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    plmn_specificTS_8._val = b'\xd8'
-    
-    #-----< plmn-specificTS-9 >-----#
-    plmn_specificTS_9 = OCT_STR(name=u'plmn-specificTS-9', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    plmn_specificTS_9._val = b'\xd9'
-    
-    #-----< plmn-specificTS-A >-----#
-    plmn_specificTS_A = OCT_STR(name=u'plmn-specificTS-A', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    plmn_specificTS_A._val = b'\xda'
-    
-    #-----< plmn-specificTS-B >-----#
-    plmn_specificTS_B = OCT_STR(name=u'plmn-specificTS-B', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    plmn_specificTS_B._val = b'\xdb'
-    
-    #-----< plmn-specificTS-C >-----#
-    plmn_specificTS_C = OCT_STR(name=u'plmn-specificTS-C', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    plmn_specificTS_C._val = b'\xdc'
-    
-    #-----< plmn-specificTS-D >-----#
-    plmn_specificTS_D = OCT_STR(name=u'plmn-specificTS-D', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    plmn_specificTS_D._val = b'\xdd'
-    
-    #-----< plmn-specificTS-E >-----#
-    plmn_specificTS_E = OCT_STR(name=u'plmn-specificTS-E', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    plmn_specificTS_E._val = b'\xde'
-    
-    #-----< plmn-specificTS-F >-----#
-    plmn_specificTS_F = OCT_STR(name=u'plmn-specificTS-F', mode=MODE_VALUE, typeref=ASN1RefType(('MAP-TS-Code', 'TeleserviceCode')))
-    plmn_specificTS_F._val = b'\xdf'
-    
-    _all_ = [
-        TeleserviceCode,
-        Ext_TeleserviceCode,
-        allTeleservices,
-        allSpeechTransmissionServices,
-        telephony,
-        emergencyCalls,
-        allShortMessageServices,
-        shortMessageMT_PP,
-        shortMessageMO_PP,
-        allFacsimileTransmissionServices,
-        facsimileGroup3AndAlterSpeech,
-        automaticFacsimileGroup3,
-        facsimileGroup4,
-        allDataTeleservices,
-        allTeleservices_ExeptSMS,
-        allVoiceGroupCallServices,
-        voiceGroupCall,
-        voiceBroadcastCall,
-        allPLMN_specificTS,
-        plmn_specificTS_1,
-        plmn_specificTS_2,
-        plmn_specificTS_3,
-        plmn_specificTS_4,
-        plmn_specificTS_5,
-        plmn_specificTS_6,
-        plmn_specificTS_7,
-        plmn_specificTS_8,
-        plmn_specificTS_9,
-        plmn_specificTS_A,
-        plmn_specificTS_B,
-        plmn_specificTS_C,
-        plmn_specificTS_D,
-        plmn_specificTS_E,
-        plmn_specificTS_F,
     ]
 
 class RRLP_Components:
@@ -19498,4 +19498,4 @@ class RRLP_messages:
         RRLP_Component,
     ]
 
-init_modules(MAP_BS_Code, MAP_CommonDataTypes, MAP_ER_DataTypes, MAP_ExtensionDataTypes, MAP_LCS_DataTypes, MAP_MS_DataTypes, MAP_OM_DataTypes, MAP_SM_DataTypes, MAP_SS_Code, MAP_SS_DataTypes, MAP_TS_Code, RRLP_Components, RRLP_messages)
+init_modules(MAP_SS_Code, MAP_TS_Code, MAP_BS_Code, MAP_CommonDataTypes, MAP_ER_DataTypes, MAP_ExtensionDataTypes, MAP_LCS_DataTypes, MAP_MS_DataTypes, MAP_OM_DataTypes, MAP_SM_DataTypes, MAP_SS_DataTypes, RRLP_Components, RRLP_messages)

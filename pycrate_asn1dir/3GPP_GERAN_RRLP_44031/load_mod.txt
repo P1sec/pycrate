@@ -1,0 +1,13 @@
+MAP-SS-Code.asn
+MAP-TS-Code.asn
+MAP-BS-Code.asn
+MAP-CommonDataTypes.asn
+MAP-ER-DataTypes.asn
+MAP-ExtensionDataTypes.asn
+MAP-LCS-DataTypes.asn
+MAP-MS-DataTypes.asn
+MAP-OM-DataTypes.asn
+MAP-SM-DataTypes.asn
+MAP-SS-DataTypes.asn
+RRLP-Components.asn
+RRLP-messages.asn

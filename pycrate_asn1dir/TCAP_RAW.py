@@ -14,164 +14,6 @@ from pycrate_asn1rt.asnobj_class     import *
 from pycrate_asn1rt.asnobj_ext       import *
 from pycrate_asn1rt.init             import init_modules
 
-class Remote_Operations_Generic_ROS_PDUs:
-
-    _name_  = u'Remote-Operations-Generic-ROS-PDUs'
-    _oid_   = [2, 4, 6, 0]
-    
-    _obj_ = [
-        u'ROS',
-        u'Invoke',
-        u'ReturnResult',
-        u'ReturnError',
-        u'Reject',
-        u'GeneralProblem',
-        u'InvokeProblem',
-        u'ReturnResultProblem',
-        u'ReturnErrorProblem',
-        u'RejectProblem',
-        u'InvokeId',
-        u'noInvokeId',
-        u'NoInvokeId',
-        u'Errors',
-        u'Bind',
-        u'Unbind',
-        ]
-    _type_ = [
-        u'ROS',
-        u'Invoke',
-        u'ReturnResult',
-        u'ReturnError',
-        u'Reject',
-        u'GeneralProblem',
-        u'InvokeProblem',
-        u'ReturnResultProblem',
-        u'ReturnErrorProblem',
-        u'RejectProblem',
-        u'InvokeId',
-        u'Bind',
-        u'Unbind',
-        ]
-    _set_ = [
-        u'NoInvokeId',
-        u'Errors',
-        ]
-    _val_ = [
-        u'noInvokeId',
-        ]
-    _class_ = [
-        u'Errors',
-        ]
-    _param_ = [
-        u'ROS',
-        u'Invoke',
-        u'ReturnResult',
-        u'ReturnError',
-        u'Errors',
-        u'Bind',
-        u'Unbind',
-        ]
-    
-    #-----< ROS >-----#
-    ROS = CHOICE(name=u'ROS', mode=MODE_TYPE, param=True)
-    
-    #-----< Invoke >-----#
-    Invoke = SEQ(name=u'Invoke', mode=MODE_TYPE, param=True)
-    
-    #-----< ReturnResult >-----#
-    ReturnResult = SEQ(name=u'ReturnResult', mode=MODE_TYPE, param=True)
-    
-    #-----< ReturnError >-----#
-    ReturnError = SEQ(name=u'ReturnError', mode=MODE_TYPE, param=True)
-    
-    #-----< Reject >-----#
-    Reject = SEQ(name=u'Reject', mode=MODE_TYPE)
-    _Reject_invokeId = CHOICE(name=u'invokeId', mode=MODE_TYPE, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
-    _Reject_problem = CHOICE(name=u'problem', mode=MODE_TYPE)
-    __Reject_problem_general = INT(name=u'general', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'GeneralProblem')))
-    __Reject_problem_invoke = INT(name=u'invoke', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeProblem')))
-    __Reject_problem_returnResult = INT(name=u'returnResult', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'ReturnResultProblem')))
-    __Reject_problem_returnError = INT(name=u'returnError', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'ReturnErrorProblem')))
-    _Reject_problem._cont = ASN1Dict([
-        (u'general', __Reject_problem_general),
-        (u'invoke', __Reject_problem_invoke),
-        (u'returnResult', __Reject_problem_returnResult),
-        (u'returnError', __Reject_problem_returnError),
-        ])
-    _Reject_problem._ext = None
-    Reject._cont = ASN1Dict([
-        (u'invokeId', _Reject_invokeId),
-        (u'problem', _Reject_problem),
-        ])
-    Reject._ext = None
-    
-    #-----< GeneralProblem >-----#
-    GeneralProblem = INT(name=u'GeneralProblem', mode=MODE_TYPE)
-    GeneralProblem._cont = ASN1Dict([(u'unrecognizedPDU', 0), (u'mistypedPDU', 1), (u'badlyStructuredPDU', 2)])
-    
-    #-----< InvokeProblem >-----#
-    InvokeProblem = INT(name=u'InvokeProblem', mode=MODE_TYPE)
-    InvokeProblem._cont = ASN1Dict([(u'duplicateInvocation', 0), (u'unrecognizedOperation', 1), (u'mistypedArgument', 2), (u'resourceLimitation', 3), (u'releaseInProgress', 4), (u'unrecognizedLinkedId', 5), (u'linkedResponseUnexpected', 6), (u'unexpectedLinkedOperation', 7)])
-    
-    #-----< ReturnResultProblem >-----#
-    ReturnResultProblem = INT(name=u'ReturnResultProblem', mode=MODE_TYPE)
-    ReturnResultProblem._cont = ASN1Dict([(u'unrecognizedInvocation', 0), (u'resultResponseUnexpected', 1), (u'mistypedResult', 2)])
-    
-    #-----< ReturnErrorProblem >-----#
-    ReturnErrorProblem = INT(name=u'ReturnErrorProblem', mode=MODE_TYPE)
-    ReturnErrorProblem._cont = ASN1Dict([(u'unrecognizedInvocation', 0), (u'errorResponseUnexpected', 1), (u'unrecognizedError', 2), (u'unexpectedError', 3), (u'mistypedParameter', 4)])
-    
-    #-----< RejectProblem >-----#
-    RejectProblem = INT(name=u'RejectProblem', mode=MODE_TYPE)
-    RejectProblem._cont = ASN1Dict([(u'general-unrecognizedPDU', 0), (u'general-mistypedPDU', 1), (u'general-badlyStructuredPDU', 2), (u'invoke-duplicateInvocation', 10), (u'invoke-unrecognizedOperation', 11), (u'invoke-mistypedArgument', 12), (u'invoke-resourceLimitation', 13), (u'invoke-releaseInProgress', 14), (u'invoke-unrecognizedLinkedId', 15), (u'invoke-linkedResponseUnexpected', 16), (u'invoke-unexpectedLinkedOperation', 17), (u'returnResult-unrecognizedInvocation', 20), (u'returnResult-resultResponseUnexpected', 21), (u'returnResult-mistypedResult', 22), (u'returnError-unrecognizedInvocation', 30), (u'returnError-errorResponseUnexpected', 31), (u'returnError-unrecognizedError', 32), (u'returnError-unexpectedError', 33), (u'returnError-mistypedParameter', 34)])
-    
-    #-----< InvokeId >-----#
-    InvokeId = CHOICE(name=u'InvokeId', mode=MODE_TYPE)
-    _InvokeId_present = INT(name=u'present', mode=MODE_TYPE)
-    _InvokeId_absent = NULL(name=u'absent', mode=MODE_TYPE)
-    InvokeId._cont = ASN1Dict([
-        (u'present', _InvokeId_present),
-        (u'absent', _InvokeId_absent),
-        ])
-    InvokeId._ext = None
-    
-    #-----< noInvokeId >-----#
-    noInvokeId = CHOICE(name=u'noInvokeId', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
-    noInvokeId._val = (u'absent', 0)
-    
-    #-----< NoInvokeId >-----#
-    NoInvokeId = CHOICE(name=u'NoInvokeId', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
-    NoInvokeId._val = ASN1Set(rv=[(u'absent', 0)], rr=[], ev=None, er=[])
-    
-    #-----< Errors >-----#
-    Errors = CLASS(name=u'Errors', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')), param=True)
-    
-    #-----< Bind >-----#
-    Bind = CHOICE(name=u'Bind', mode=MODE_TYPE, param=True)
-    
-    #-----< Unbind >-----#
-    Unbind = CHOICE(name=u'Unbind', mode=MODE_TYPE, param=True)
-    
-    _all_ = [
-        _Reject_invokeId,
-        __Reject_problem_general,
-        __Reject_problem_invoke,
-        __Reject_problem_returnResult,
-        __Reject_problem_returnError,
-        _Reject_problem,
-        Reject,
-        GeneralProblem,
-        InvokeProblem,
-        ReturnResultProblem,
-        ReturnErrorProblem,
-        RejectProblem,
-        _InvokeId_present,
-        _InvokeId_absent,
-        InvokeId,
-        noInvokeId,
-        NoInvokeId,
-    ]
-
 class DialoguePDUs:
 
     _name_  = u'DialoguePDUs'
@@ -427,6 +269,512 @@ class UnidialoguePDUs:
         __AUDT_apdu_user_information__item_,
         _AUDT_apdu_user_information,
         AUDT_apdu,
+    ]
+
+class Remote_Operations_Generic_ROS_PDUs:
+
+    _name_  = u'Remote-Operations-Generic-ROS-PDUs'
+    _oid_   = [2, 4, 6, 0]
+    
+    _obj_ = [
+        u'ROS',
+        u'Invoke',
+        u'ReturnResult',
+        u'ReturnError',
+        u'Reject',
+        u'GeneralProblem',
+        u'InvokeProblem',
+        u'ReturnResultProblem',
+        u'ReturnErrorProblem',
+        u'RejectProblem',
+        u'InvokeId',
+        u'noInvokeId',
+        u'NoInvokeId',
+        u'Errors',
+        u'Bind',
+        u'Unbind',
+        ]
+    _type_ = [
+        u'ROS',
+        u'Invoke',
+        u'ReturnResult',
+        u'ReturnError',
+        u'Reject',
+        u'GeneralProblem',
+        u'InvokeProblem',
+        u'ReturnResultProblem',
+        u'ReturnErrorProblem',
+        u'RejectProblem',
+        u'InvokeId',
+        u'Bind',
+        u'Unbind',
+        ]
+    _set_ = [
+        u'NoInvokeId',
+        u'Errors',
+        ]
+    _val_ = [
+        u'noInvokeId',
+        ]
+    _class_ = [
+        u'Errors',
+        ]
+    _param_ = [
+        u'ROS',
+        u'Invoke',
+        u'ReturnResult',
+        u'ReturnError',
+        u'Errors',
+        u'Bind',
+        u'Unbind',
+        ]
+    
+    #-----< ROS >-----#
+    ROS = CHOICE(name=u'ROS', mode=MODE_TYPE, param=True)
+    
+    #-----< Invoke >-----#
+    Invoke = SEQ(name=u'Invoke', mode=MODE_TYPE, param=True)
+    
+    #-----< ReturnResult >-----#
+    ReturnResult = SEQ(name=u'ReturnResult', mode=MODE_TYPE, param=True)
+    
+    #-----< ReturnError >-----#
+    ReturnError = SEQ(name=u'ReturnError', mode=MODE_TYPE, param=True)
+    
+    #-----< Reject >-----#
+    Reject = SEQ(name=u'Reject', mode=MODE_TYPE)
+    _Reject_invokeId = CHOICE(name=u'invokeId', mode=MODE_TYPE, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
+    _Reject_problem = CHOICE(name=u'problem', mode=MODE_TYPE)
+    __Reject_problem_general = INT(name=u'general', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'GeneralProblem')))
+    __Reject_problem_invoke = INT(name=u'invoke', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeProblem')))
+    __Reject_problem_returnResult = INT(name=u'returnResult', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'ReturnResultProblem')))
+    __Reject_problem_returnError = INT(name=u'returnError', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'ReturnErrorProblem')))
+    _Reject_problem._cont = ASN1Dict([
+        (u'general', __Reject_problem_general),
+        (u'invoke', __Reject_problem_invoke),
+        (u'returnResult', __Reject_problem_returnResult),
+        (u'returnError', __Reject_problem_returnError),
+        ])
+    _Reject_problem._ext = None
+    Reject._cont = ASN1Dict([
+        (u'invokeId', _Reject_invokeId),
+        (u'problem', _Reject_problem),
+        ])
+    Reject._ext = None
+    
+    #-----< GeneralProblem >-----#
+    GeneralProblem = INT(name=u'GeneralProblem', mode=MODE_TYPE)
+    GeneralProblem._cont = ASN1Dict([(u'unrecognizedPDU', 0), (u'mistypedPDU', 1), (u'badlyStructuredPDU', 2)])
+    
+    #-----< InvokeProblem >-----#
+    InvokeProblem = INT(name=u'InvokeProblem', mode=MODE_TYPE)
+    InvokeProblem._cont = ASN1Dict([(u'duplicateInvocation', 0), (u'unrecognizedOperation', 1), (u'mistypedArgument', 2), (u'resourceLimitation', 3), (u'releaseInProgress', 4), (u'unrecognizedLinkedId', 5), (u'linkedResponseUnexpected', 6), (u'unexpectedLinkedOperation', 7)])
+    
+    #-----< ReturnResultProblem >-----#
+    ReturnResultProblem = INT(name=u'ReturnResultProblem', mode=MODE_TYPE)
+    ReturnResultProblem._cont = ASN1Dict([(u'unrecognizedInvocation', 0), (u'resultResponseUnexpected', 1), (u'mistypedResult', 2)])
+    
+    #-----< ReturnErrorProblem >-----#
+    ReturnErrorProblem = INT(name=u'ReturnErrorProblem', mode=MODE_TYPE)
+    ReturnErrorProblem._cont = ASN1Dict([(u'unrecognizedInvocation', 0), (u'errorResponseUnexpected', 1), (u'unrecognizedError', 2), (u'unexpectedError', 3), (u'mistypedParameter', 4)])
+    
+    #-----< RejectProblem >-----#
+    RejectProblem = INT(name=u'RejectProblem', mode=MODE_TYPE)
+    RejectProblem._cont = ASN1Dict([(u'general-unrecognizedPDU', 0), (u'general-mistypedPDU', 1), (u'general-badlyStructuredPDU', 2), (u'invoke-duplicateInvocation', 10), (u'invoke-unrecognizedOperation', 11), (u'invoke-mistypedArgument', 12), (u'invoke-resourceLimitation', 13), (u'invoke-releaseInProgress', 14), (u'invoke-unrecognizedLinkedId', 15), (u'invoke-linkedResponseUnexpected', 16), (u'invoke-unexpectedLinkedOperation', 17), (u'returnResult-unrecognizedInvocation', 20), (u'returnResult-resultResponseUnexpected', 21), (u'returnResult-mistypedResult', 22), (u'returnError-unrecognizedInvocation', 30), (u'returnError-errorResponseUnexpected', 31), (u'returnError-unrecognizedError', 32), (u'returnError-unexpectedError', 33), (u'returnError-mistypedParameter', 34)])
+    
+    #-----< InvokeId >-----#
+    InvokeId = CHOICE(name=u'InvokeId', mode=MODE_TYPE)
+    _InvokeId_present = INT(name=u'present', mode=MODE_TYPE)
+    _InvokeId_absent = NULL(name=u'absent', mode=MODE_TYPE)
+    InvokeId._cont = ASN1Dict([
+        (u'present', _InvokeId_present),
+        (u'absent', _InvokeId_absent),
+        ])
+    InvokeId._ext = None
+    
+    #-----< noInvokeId >-----#
+    noInvokeId = CHOICE(name=u'noInvokeId', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
+    noInvokeId._val = (u'absent', 0)
+    
+    #-----< NoInvokeId >-----#
+    NoInvokeId = CHOICE(name=u'NoInvokeId', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
+    NoInvokeId._val = ASN1Set(rv=[(u'absent', 0)], rr=[], ev=None, er=[])
+    
+    #-----< Errors >-----#
+    Errors = CLASS(name=u'Errors', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')), param=True)
+    
+    #-----< Bind >-----#
+    Bind = CHOICE(name=u'Bind', mode=MODE_TYPE, param=True)
+    
+    #-----< Unbind >-----#
+    Unbind = CHOICE(name=u'Unbind', mode=MODE_TYPE, param=True)
+    
+    _all_ = [
+        _Reject_invokeId,
+        __Reject_problem_general,
+        __Reject_problem_invoke,
+        __Reject_problem_returnResult,
+        __Reject_problem_returnError,
+        _Reject_problem,
+        Reject,
+        GeneralProblem,
+        InvokeProblem,
+        ReturnResultProblem,
+        ReturnErrorProblem,
+        RejectProblem,
+        _InvokeId_present,
+        _InvokeId_absent,
+        InvokeId,
+        noInvokeId,
+        NoInvokeId,
+    ]
+
+class Remote_Operations_Information_Objects:
+
+    _name_  = u'Remote-Operations-Information-Objects'
+    _oid_   = [2, 4, 5, 0]
+    
+    _obj_ = [
+        u'OPERATION',
+        u'ERROR',
+        u'OPERATION-PACKAGE',
+        u'CONNECTION-PACKAGE',
+        u'CONTRACT',
+        u'ROS-OBJECT-CLASS',
+        u'Code',
+        u'Priority',
+        u'refuse',
+        u'emptyBind',
+        u'emptyUnbind',
+        ]
+    _type_ = [
+        u'OPERATION',
+        u'ERROR',
+        u'OPERATION-PACKAGE',
+        u'CONNECTION-PACKAGE',
+        u'CONTRACT',
+        u'ROS-OBJECT-CLASS',
+        u'Code',
+        u'Priority',
+        ]
+    _set_ = [
+        ]
+    _val_ = [
+        u'refuse',
+        u'emptyBind',
+        u'emptyUnbind',
+        ]
+    _class_ = [
+        u'OPERATION',
+        u'ERROR',
+        u'OPERATION-PACKAGE',
+        u'CONNECTION-PACKAGE',
+        u'CONTRACT',
+        u'ROS-OBJECT-CLASS',
+        u'refuse',
+        u'emptyBind',
+        u'emptyUnbind',
+        ]
+    _param_ = [
+        ]
+    
+    #-----< OPERATION >-----#
+    OPERATION = CLASS(name=u'OPERATION', mode=MODE_TYPE)
+    _OPERATION_ArgumentType = OPEN(name=u'ArgumentType', mode=MODE_TYPE, opt=True)
+    _OPERATION_argumentTypeOptional = BOOL(name=u'argumentTypeOptional', mode=MODE_VALUE, opt=True)
+    _OPERATION_returnResult = BOOL(name=u'returnResult', mode=MODE_VALUE, default=True)
+    _OPERATION_ResultType = OPEN(name=u'ResultType', mode=MODE_TYPE, opt=True)
+    _OPERATION_resultTypeOptional = BOOL(name=u'resultTypeOptional', mode=MODE_VALUE, opt=True)
+    _OPERATION_Errors = CLASS(name=u'Errors', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')), opt=True)
+    _OPERATION_Linked = CLASS(name=u'Linked', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
+    _OPERATION_synchronous = BOOL(name=u'synchronous', mode=MODE_VALUE, default=False)
+    _OPERATION_alwaysReturns = BOOL(name=u'alwaysReturns', mode=MODE_VALUE, default=True)
+    _OPERATION_InvokePriority = INT(name=u'InvokePriority', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Priority')), opt=True)
+    _OPERATION_ResultPriority = INT(name=u'ResultPriority', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Priority')), opt=True)
+    _OPERATION_operationCode = CHOICE(name=u'operationCode', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Code')), opt=True, uniq=True)
+    OPERATION._cont = ASN1Dict([
+        (u'ArgumentType', _OPERATION_ArgumentType),
+        (u'argumentTypeOptional', _OPERATION_argumentTypeOptional),
+        (u'returnResult', _OPERATION_returnResult),
+        (u'ResultType', _OPERATION_ResultType),
+        (u'resultTypeOptional', _OPERATION_resultTypeOptional),
+        (u'Errors', _OPERATION_Errors),
+        (u'Linked', _OPERATION_Linked),
+        (u'synchronous', _OPERATION_synchronous),
+        (u'alwaysReturns', _OPERATION_alwaysReturns),
+        (u'InvokePriority', _OPERATION_InvokePriority),
+        (u'ResultPriority', _OPERATION_ResultPriority),
+        (u'operationCode', _OPERATION_operationCode),
+        ])
+    
+    #-----< ERROR >-----#
+    ERROR = CLASS(name=u'ERROR', mode=MODE_TYPE)
+    _ERROR_ParameterType = OPEN(name=u'ParameterType', mode=MODE_TYPE, opt=True)
+    _ERROR_parameterTypeOptional = BOOL(name=u'parameterTypeOptional', mode=MODE_VALUE, opt=True)
+    _ERROR_ErrorPriority = INT(name=u'ErrorPriority', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Priority')), opt=True)
+    _ERROR_errorCode = CHOICE(name=u'errorCode', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Code')), opt=True, uniq=True)
+    ERROR._cont = ASN1Dict([
+        (u'ParameterType', _ERROR_ParameterType),
+        (u'parameterTypeOptional', _ERROR_parameterTypeOptional),
+        (u'ErrorPriority', _ERROR_ErrorPriority),
+        (u'errorCode', _ERROR_errorCode),
+        ])
+    
+    #-----< OPERATION-PACKAGE >-----#
+    OPERATION_PACKAGE = CLASS(name=u'OPERATION-PACKAGE', mode=MODE_TYPE)
+    _OPERATION_PACKAGE_Both = CLASS(name=u'Both', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
+    _OPERATION_PACKAGE_Consumer = CLASS(name=u'Consumer', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
+    _OPERATION_PACKAGE_Supplier = CLASS(name=u'Supplier', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
+    _OPERATION_PACKAGE_id = OID(name=u'id', mode=MODE_VALUE, opt=True, uniq=True)
+    OPERATION_PACKAGE._cont = ASN1Dict([
+        (u'Both', _OPERATION_PACKAGE_Both),
+        (u'Consumer', _OPERATION_PACKAGE_Consumer),
+        (u'Supplier', _OPERATION_PACKAGE_Supplier),
+        (u'id', _OPERATION_PACKAGE_id),
+        ])
+    
+    #-----< CONNECTION-PACKAGE >-----#
+    CONNECTION_PACKAGE = CLASS(name=u'CONNECTION-PACKAGE', mode=MODE_TYPE)
+    _CONNECTION_PACKAGE_bind = CLASS(name=u'bind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), default=dict([(u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', -1))])], rr=[], ev=None, er=[])), (u'synchronous', True)]))
+    _CONNECTION_PACKAGE_unbind = CLASS(name=u'unbind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), default=dict([(u'synchronous', True)]))
+    _CONNECTION_PACKAGE_responderCanUnbind = BOOL(name=u'responderCanUnbind', mode=MODE_VALUE, default=False)
+    _CONNECTION_PACKAGE_unbindCanFail = BOOL(name=u'unbindCanFail', mode=MODE_VALUE, default=False)
+    _CONNECTION_PACKAGE_id = OID(name=u'id', mode=MODE_VALUE, opt=True, uniq=True)
+    CONNECTION_PACKAGE._cont = ASN1Dict([
+        (u'bind', _CONNECTION_PACKAGE_bind),
+        (u'unbind', _CONNECTION_PACKAGE_unbind),
+        (u'responderCanUnbind', _CONNECTION_PACKAGE_responderCanUnbind),
+        (u'unbindCanFail', _CONNECTION_PACKAGE_unbindCanFail),
+        (u'id', _CONNECTION_PACKAGE_id),
+        ])
+    
+    #-----< CONTRACT >-----#
+    CONTRACT = CLASS(name=u'CONTRACT', mode=MODE_TYPE)
+    _CONTRACT_connection = CLASS(name=u'connection', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONNECTION-PACKAGE')), opt=True)
+    _CONTRACT_OperationsOf = CLASS(name=u'OperationsOf', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
+    _CONTRACT_InitiatorConsumerOf = CLASS(name=u'InitiatorConsumerOf', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
+    _CONTRACT_InitiatorSupplierOf = CLASS(name=u'InitiatorSupplierOf', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
+    _CONTRACT_id = OID(name=u'id', mode=MODE_VALUE, opt=True, uniq=True)
+    CONTRACT._cont = ASN1Dict([
+        (u'connection', _CONTRACT_connection),
+        (u'OperationsOf', _CONTRACT_OperationsOf),
+        (u'InitiatorConsumerOf', _CONTRACT_InitiatorConsumerOf),
+        (u'InitiatorSupplierOf', _CONTRACT_InitiatorSupplierOf),
+        (u'id', _CONTRACT_id),
+        ])
+    
+    #-----< ROS-OBJECT-CLASS >-----#
+    ROS_OBJECT_CLASS = CLASS(name=u'ROS-OBJECT-CLASS', mode=MODE_TYPE)
+    _ROS_OBJECT_CLASS_Is = CLASS(name=u'Is', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ROS-OBJECT-CLASS')), opt=True)
+    _ROS_OBJECT_CLASS_Initiates = CLASS(name=u'Initiates', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
+    _ROS_OBJECT_CLASS_Responds = CLASS(name=u'Responds', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
+    _ROS_OBJECT_CLASS_InitiatesAndResponds = CLASS(name=u'InitiatesAndResponds', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
+    _ROS_OBJECT_CLASS_id = OID(name=u'id', mode=MODE_VALUE, uniq=True)
+    ROS_OBJECT_CLASS._cont = ASN1Dict([
+        (u'Is', _ROS_OBJECT_CLASS_Is),
+        (u'Initiates', _ROS_OBJECT_CLASS_Initiates),
+        (u'Responds', _ROS_OBJECT_CLASS_Responds),
+        (u'InitiatesAndResponds', _ROS_OBJECT_CLASS_InitiatesAndResponds),
+        (u'id', _ROS_OBJECT_CLASS_id),
+        ])
+    
+    #-----< Code >-----#
+    Code = CHOICE(name=u'Code', mode=MODE_TYPE)
+    _Code_local = INT(name=u'local', mode=MODE_TYPE)
+    _Code_global_ = OID(name=u'global', mode=MODE_TYPE)
+    Code._cont = ASN1Dict([
+        (u'local', _Code_local),
+        (u'global', _Code_global_),
+        ])
+    Code._ext = None
+    
+    #-----< Priority >-----#
+    Priority = INT(name=u'Priority', mode=MODE_TYPE)
+    Priority._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
+    
+    #-----< refuse >-----#
+    refuse = CLASS(name=u'refuse', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    refuse._val = dict([(u'errorCode', (u'local', -1))])
+    
+    #-----< emptyBind >-----#
+    emptyBind = CLASS(name=u'emptyBind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    emptyBind._val = dict([(u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', -1))])], rr=[], ev=None, er=[])), (u'synchronous', True)])
+    
+    #-----< emptyUnbind >-----#
+    emptyUnbind = CLASS(name=u'emptyUnbind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    emptyUnbind._val = dict([(u'synchronous', True)])
+    
+    _all_ = [
+        _OPERATION_ArgumentType,
+        _OPERATION_argumentTypeOptional,
+        _OPERATION_returnResult,
+        _OPERATION_ResultType,
+        _OPERATION_resultTypeOptional,
+        _OPERATION_Errors,
+        _OPERATION_Linked,
+        _OPERATION_synchronous,
+        _OPERATION_alwaysReturns,
+        _OPERATION_InvokePriority,
+        _OPERATION_ResultPriority,
+        _OPERATION_operationCode,
+        OPERATION,
+        _ERROR_ParameterType,
+        _ERROR_parameterTypeOptional,
+        _ERROR_ErrorPriority,
+        _ERROR_errorCode,
+        ERROR,
+        _OPERATION_PACKAGE_Both,
+        _OPERATION_PACKAGE_Consumer,
+        _OPERATION_PACKAGE_Supplier,
+        _OPERATION_PACKAGE_id,
+        OPERATION_PACKAGE,
+        _CONNECTION_PACKAGE_bind,
+        _CONNECTION_PACKAGE_unbind,
+        _CONNECTION_PACKAGE_responderCanUnbind,
+        _CONNECTION_PACKAGE_unbindCanFail,
+        _CONNECTION_PACKAGE_id,
+        CONNECTION_PACKAGE,
+        _CONTRACT_connection,
+        _CONTRACT_OperationsOf,
+        _CONTRACT_InitiatorConsumerOf,
+        _CONTRACT_InitiatorSupplierOf,
+        _CONTRACT_id,
+        CONTRACT,
+        _ROS_OBJECT_CLASS_Is,
+        _ROS_OBJECT_CLASS_Initiates,
+        _ROS_OBJECT_CLASS_Responds,
+        _ROS_OBJECT_CLASS_InitiatesAndResponds,
+        _ROS_OBJECT_CLASS_id,
+        ROS_OBJECT_CLASS,
+        _Code_local,
+        _Code_global_,
+        Code,
+        Priority,
+        refuse,
+        emptyBind,
+        emptyUnbind,
+    ]
+
+class TCAPMessages:
+
+    _name_  = u'TCAPMessages'
+    _oid_   = [0, 0, 17, 773, 2, 1, 3]
+    
+    _obj_ = [
+        u'TCMessage',
+        u'Unidirectional',
+        u'Begin',
+        u'End',
+        u'Continue',
+        u'Abort',
+        u'DialoguePortion',
+        u'OrigTransactionID',
+        u'DestTransactionID',
+        u'P-AbortCause',
+        u'ComponentPortion',
+        u'Component',
+        u'TCInvokeIdSet',
+        ]
+    _type_ = [
+        u'TCMessage',
+        u'Unidirectional',
+        u'Begin',
+        u'End',
+        u'Continue',
+        u'Abort',
+        u'DialoguePortion',
+        u'OrigTransactionID',
+        u'DestTransactionID',
+        u'P-AbortCause',
+        u'ComponentPortion',
+        u'Component',
+        ]
+    _set_ = [
+        u'TCInvokeIdSet',
+        ]
+    _val_ = [
+        ]
+    _class_ = [
+        ]
+    _param_ = [
+        u'TCMessage',
+        u'Unidirectional',
+        u'Begin',
+        u'End',
+        u'Continue',
+        u'ComponentPortion',
+        u'Component',
+        ]
+    
+    #-----< TCMessage >-----#
+    TCMessage = CHOICE(name=u'TCMessage', mode=MODE_TYPE, param=True)
+    
+    #-----< Unidirectional >-----#
+    Unidirectional = SEQ(name=u'Unidirectional', mode=MODE_TYPE, param=True)
+    
+    #-----< Begin >-----#
+    Begin = SEQ(name=u'Begin', mode=MODE_TYPE, param=True)
+    
+    #-----< End >-----#
+    End = SEQ(name=u'End', mode=MODE_TYPE, param=True)
+    
+    #-----< Continue >-----#
+    Continue = SEQ(name=u'Continue', mode=MODE_TYPE, param=True)
+    
+    #-----< Abort >-----#
+    Abort = SEQ(name=u'Abort', mode=MODE_TYPE)
+    _Abort_dtid = OCT_STR(name=u'dtid', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPMessages', 'DestTransactionID')))
+    _Abort_reason = CHOICE(name=u'reason', mode=MODE_TYPE, opt=True)
+    __Abort_reason_p_abortCause = INT(name=u'p-abortCause', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPMessages', 'P-AbortCause')))
+    __Abort_reason_u_abortCause = SEQ(name=u'u-abortCause', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPMessages', 'DialoguePortion')))
+    _Abort_reason._cont = ASN1Dict([
+        (u'p-abortCause', __Abort_reason_p_abortCause),
+        (u'u-abortCause', __Abort_reason_u_abortCause),
+        ])
+    _Abort_reason._ext = None
+    Abort._cont = ASN1Dict([
+        (u'dtid', _Abort_dtid),
+        (u'reason', _Abort_reason),
+        ])
+    Abort._ext = None
+    
+    #-----< DialoguePortion >-----#
+    DialoguePortion = SEQ(name=u'DialoguePortion', mode=MODE_TYPE, tag=(11, TAG_APPLICATION, TAG_EXPLICIT), typeref=ASN1RefType(('Pycrate-TCAP-Dialogue', 'TcapDialogueExternal')))
+    
+    #-----< OrigTransactionID >-----#
+    OrigTransactionID = OCT_STR(name=u'OrigTransactionID', mode=MODE_TYPE, tag=(8, TAG_APPLICATION, TAG_IMPLICIT))
+    OrigTransactionID._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    
+    #-----< DestTransactionID >-----#
+    DestTransactionID = OCT_STR(name=u'DestTransactionID', mode=MODE_TYPE, tag=(9, TAG_APPLICATION, TAG_IMPLICIT))
+    DestTransactionID._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    
+    #-----< P-AbortCause >-----#
+    P_AbortCause = INT(name=u'P-AbortCause', mode=MODE_TYPE, tag=(10, TAG_APPLICATION, TAG_IMPLICIT))
+    P_AbortCause._cont = ASN1Dict([(u'unrecognizedMessageType', 0), (u'unrecognizedTransactionID', 1), (u'badlyFormattedTransactionPortion', 2), (u'incorrectTransactionPortion', 3), (u'resourceLimitation', 4)])
+    P_AbortCause._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
+    
+    #-----< ComponentPortion >-----#
+    ComponentPortion = SEQ_OF(name=u'ComponentPortion', mode=MODE_TYPE, tag=(12, TAG_APPLICATION, TAG_IMPLICIT), param=True)
+    
+    #-----< Component >-----#
+    Component = CHOICE(name=u'Component', mode=MODE_TYPE, param=True)
+    
+    #-----< TCInvokeIdSet >-----#
+    TCInvokeIdSet = CHOICE(name=u'TCInvokeIdSet', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
+    TCInvokeIdSet._val = ASN1Set(rv=[(u'present', -128), (u'present', -127), (u'present', -126), (u'present', -125), (u'present', -124), (u'present', -123), (u'present', -122), (u'present', -121), (u'present', -120), (u'present', -119), (u'present', -118), (u'present', -117), (u'present', -116), (u'present', -115), (u'present', -114), (u'present', -113), (u'present', -112), (u'present', -111), (u'present', -110), (u'present', -109), (u'present', -108), (u'present', -107), (u'present', -106), (u'present', -105), (u'present', -104), (u'present', -103), (u'present', -102), (u'present', -101), (u'present', -100), (u'present', -99), (u'present', -98), (u'present', -97), (u'present', -96), (u'present', -95), (u'present', -94), (u'present', -93), (u'present', -92), (u'present', -91), (u'present', -90), (u'present', -89), (u'present', -88), (u'present', -87), (u'present', -86), (u'present', -85), (u'present', -84), (u'present', -83), (u'present', -82), (u'present', -81), (u'present', -80), (u'present', -79), (u'present', -78), (u'present', -77), (u'present', -76), (u'present', -75), (u'present', -74), (u'present', -73), (u'present', -72), (u'present', -71), (u'present', -70), (u'present', -69), (u'present', -68), (u'present', -67), (u'present', -66), (u'present', -65), (u'present', -64), (u'present', -63), (u'present', -62), (u'present', -61), (u'present', -60), (u'present', -59), (u'present', -58), (u'present', -57), (u'present', -56), (u'present', -55), (u'present', -54), (u'present', -53), (u'present', -52), (u'present', -51), (u'present', -50), (u'present', -49), (u'present', -48), (u'present', -47), (u'present', -46), (u'present', -45), (u'present', -44), (u'present', -43), (u'present', -42), (u'present', -41), (u'present', -40), (u'present', -39), (u'present', -38), (u'present', -37), (u'present', -36), (u'present', -35), (u'present', -34), (u'present', -33), (u'present', -32), (u'present', -31), (u'present', -30), (u'present', -29), (u'present', -28), (u'present', -27), (u'present', -26), (u'present', -25), (u'present', -24), (u'present', -23), (u'present', -22), (u'present', -21), (u'present', -20), (u'present', -19), (u'present', -18), (u'present', -17), (u'present', -16), (u'present', -15), (u'present', -14), (u'present', -13), (u'present', -12), (u'present', -11), (u'present', -10), (u'present', -9), (u'present', -8), (u'present', -7), (u'present', -6), (u'present', -5), (u'present', -4), (u'present', -3), (u'present', -2), (u'present', -1), (u'present', 0), (u'present', 1), (u'present', 2), (u'present', 3), (u'present', 4), (u'present', 5), (u'present', 6), (u'present', 7), (u'present', 8), (u'present', 9), (u'present', 10), (u'present', 11), (u'present', 12), (u'present', 13), (u'present', 14), (u'present', 15), (u'present', 16), (u'present', 17), (u'present', 18), (u'present', 19), (u'present', 20), (u'present', 21), (u'present', 22), (u'present', 23), (u'present', 24), (u'present', 25), (u'present', 26), (u'present', 27), (u'present', 28), (u'present', 29), (u'present', 30), (u'present', 31), (u'present', 32), (u'present', 33), (u'present', 34), (u'present', 35), (u'present', 36), (u'present', 37), (u'present', 38), (u'present', 39), (u'present', 40), (u'present', 41), (u'present', 42), (u'present', 43), (u'present', 44), (u'present', 45), (u'present', 46), (u'present', 47), (u'present', 48), (u'present', 49), (u'present', 50), (u'present', 51), (u'present', 52), (u'present', 53), (u'present', 54), (u'present', 55), (u'present', 56), (u'present', 57), (u'present', 58), (u'present', 59), (u'present', 60), (u'present', 61), (u'present', 62), (u'present', 63), (u'present', 64), (u'present', 65), (u'present', 66), (u'present', 67), (u'present', 68), (u'present', 69), (u'present', 70), (u'present', 71), (u'present', 72), (u'present', 73), (u'present', 74), (u'present', 75), (u'present', 76), (u'present', 77), (u'present', 78), (u'present', 79), (u'present', 80), (u'present', 81), (u'present', 82), (u'present', 83), (u'present', 84), (u'present', 85), (u'present', 86), (u'present', 87), (u'present', 88), (u'present', 89), (u'present', 90), (u'present', 91), (u'present', 92), (u'present', 93), (u'present', 94), (u'present', 95), (u'present', 96), (u'present', 97), (u'present', 98), (u'present', 99), (u'present', 100), (u'present', 101), (u'present', 102), (u'present', 103), (u'present', 104), (u'present', 105), (u'present', 106), (u'present', 107), (u'present', 108), (u'present', 109), (u'present', 110), (u'present', 111), (u'present', 112), (u'present', 113), (u'present', 114), (u'present', 115), (u'present', 116), (u'present', 117), (u'present', 118), (u'present', 119), (u'present', 120), (u'present', 121), (u'present', 122), (u'present', 123), (u'present', 124), (u'present', 125), (u'present', 126), (u'present', 127)], rr=[], ev=None, er=[])
+    
+    _all_ = [
+        _Abort_dtid,
+        __Abort_reason_p_abortCause,
+        __Abort_reason_u_abortCause,
+        _Abort_reason,
+        Abort,
+        DialoguePortion,
+        OrigTransactionID,
+        DestTransactionID,
+        P_AbortCause,
+        TCInvokeIdSet,
     ]
 
 class Pycrate_TCAP_Dialogue:
@@ -1119,352 +1467,4 @@ class TCAP_Messages:
         TCAP_Message,
     ]
 
-class TCAPMessages:
-
-    _name_  = u'TCAPMessages'
-    _oid_   = [0, 0, 17, 773, 2, 1, 3]
-    
-    _obj_ = [
-        u'TCMessage',
-        u'Unidirectional',
-        u'Begin',
-        u'End',
-        u'Continue',
-        u'Abort',
-        u'DialoguePortion',
-        u'OrigTransactionID',
-        u'DestTransactionID',
-        u'P-AbortCause',
-        u'ComponentPortion',
-        u'Component',
-        u'TCInvokeIdSet',
-        ]
-    _type_ = [
-        u'TCMessage',
-        u'Unidirectional',
-        u'Begin',
-        u'End',
-        u'Continue',
-        u'Abort',
-        u'DialoguePortion',
-        u'OrigTransactionID',
-        u'DestTransactionID',
-        u'P-AbortCause',
-        u'ComponentPortion',
-        u'Component',
-        ]
-    _set_ = [
-        u'TCInvokeIdSet',
-        ]
-    _val_ = [
-        ]
-    _class_ = [
-        ]
-    _param_ = [
-        u'TCMessage',
-        u'Unidirectional',
-        u'Begin',
-        u'End',
-        u'Continue',
-        u'ComponentPortion',
-        u'Component',
-        ]
-    
-    #-----< TCMessage >-----#
-    TCMessage = CHOICE(name=u'TCMessage', mode=MODE_TYPE, param=True)
-    
-    #-----< Unidirectional >-----#
-    Unidirectional = SEQ(name=u'Unidirectional', mode=MODE_TYPE, param=True)
-    
-    #-----< Begin >-----#
-    Begin = SEQ(name=u'Begin', mode=MODE_TYPE, param=True)
-    
-    #-----< End >-----#
-    End = SEQ(name=u'End', mode=MODE_TYPE, param=True)
-    
-    #-----< Continue >-----#
-    Continue = SEQ(name=u'Continue', mode=MODE_TYPE, param=True)
-    
-    #-----< Abort >-----#
-    Abort = SEQ(name=u'Abort', mode=MODE_TYPE)
-    _Abort_dtid = OCT_STR(name=u'dtid', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPMessages', 'DestTransactionID')))
-    _Abort_reason = CHOICE(name=u'reason', mode=MODE_TYPE, opt=True)
-    __Abort_reason_p_abortCause = INT(name=u'p-abortCause', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPMessages', 'P-AbortCause')))
-    __Abort_reason_u_abortCause = SEQ(name=u'u-abortCause', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPMessages', 'DialoguePortion')))
-    _Abort_reason._cont = ASN1Dict([
-        (u'p-abortCause', __Abort_reason_p_abortCause),
-        (u'u-abortCause', __Abort_reason_u_abortCause),
-        ])
-    _Abort_reason._ext = None
-    Abort._cont = ASN1Dict([
-        (u'dtid', _Abort_dtid),
-        (u'reason', _Abort_reason),
-        ])
-    Abort._ext = None
-    
-    #-----< DialoguePortion >-----#
-    DialoguePortion = SEQ(name=u'DialoguePortion', mode=MODE_TYPE, tag=(11, TAG_APPLICATION, TAG_EXPLICIT), typeref=ASN1RefType(('Pycrate-TCAP-Dialogue', 'TcapDialogueExternal')))
-    
-    #-----< OrigTransactionID >-----#
-    OrigTransactionID = OCT_STR(name=u'OrigTransactionID', mode=MODE_TYPE, tag=(8, TAG_APPLICATION, TAG_IMPLICIT))
-    OrigTransactionID._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
-    
-    #-----< DestTransactionID >-----#
-    DestTransactionID = OCT_STR(name=u'DestTransactionID', mode=MODE_TYPE, tag=(9, TAG_APPLICATION, TAG_IMPLICIT))
-    DestTransactionID._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
-    
-    #-----< P-AbortCause >-----#
-    P_AbortCause = INT(name=u'P-AbortCause', mode=MODE_TYPE, tag=(10, TAG_APPLICATION, TAG_IMPLICIT))
-    P_AbortCause._cont = ASN1Dict([(u'unrecognizedMessageType', 0), (u'unrecognizedTransactionID', 1), (u'badlyFormattedTransactionPortion', 2), (u'incorrectTransactionPortion', 3), (u'resourceLimitation', 4)])
-    P_AbortCause._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
-    
-    #-----< ComponentPortion >-----#
-    ComponentPortion = SEQ_OF(name=u'ComponentPortion', mode=MODE_TYPE, tag=(12, TAG_APPLICATION, TAG_IMPLICIT), param=True)
-    
-    #-----< Component >-----#
-    Component = CHOICE(name=u'Component', mode=MODE_TYPE, param=True)
-    
-    #-----< TCInvokeIdSet >-----#
-    TCInvokeIdSet = CHOICE(name=u'TCInvokeIdSet', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
-    TCInvokeIdSet._val = ASN1Set(rv=[(u'present', -128), (u'present', -127), (u'present', -126), (u'present', -125), (u'present', -124), (u'present', -123), (u'present', -122), (u'present', -121), (u'present', -120), (u'present', -119), (u'present', -118), (u'present', -117), (u'present', -116), (u'present', -115), (u'present', -114), (u'present', -113), (u'present', -112), (u'present', -111), (u'present', -110), (u'present', -109), (u'present', -108), (u'present', -107), (u'present', -106), (u'present', -105), (u'present', -104), (u'present', -103), (u'present', -102), (u'present', -101), (u'present', -100), (u'present', -99), (u'present', -98), (u'present', -97), (u'present', -96), (u'present', -95), (u'present', -94), (u'present', -93), (u'present', -92), (u'present', -91), (u'present', -90), (u'present', -89), (u'present', -88), (u'present', -87), (u'present', -86), (u'present', -85), (u'present', -84), (u'present', -83), (u'present', -82), (u'present', -81), (u'present', -80), (u'present', -79), (u'present', -78), (u'present', -77), (u'present', -76), (u'present', -75), (u'present', -74), (u'present', -73), (u'present', -72), (u'present', -71), (u'present', -70), (u'present', -69), (u'present', -68), (u'present', -67), (u'present', -66), (u'present', -65), (u'present', -64), (u'present', -63), (u'present', -62), (u'present', -61), (u'present', -60), (u'present', -59), (u'present', -58), (u'present', -57), (u'present', -56), (u'present', -55), (u'present', -54), (u'present', -53), (u'present', -52), (u'present', -51), (u'present', -50), (u'present', -49), (u'present', -48), (u'present', -47), (u'present', -46), (u'present', -45), (u'present', -44), (u'present', -43), (u'present', -42), (u'present', -41), (u'present', -40), (u'present', -39), (u'present', -38), (u'present', -37), (u'present', -36), (u'present', -35), (u'present', -34), (u'present', -33), (u'present', -32), (u'present', -31), (u'present', -30), (u'present', -29), (u'present', -28), (u'present', -27), (u'present', -26), (u'present', -25), (u'present', -24), (u'present', -23), (u'present', -22), (u'present', -21), (u'present', -20), (u'present', -19), (u'present', -18), (u'present', -17), (u'present', -16), (u'present', -15), (u'present', -14), (u'present', -13), (u'present', -12), (u'present', -11), (u'present', -10), (u'present', -9), (u'present', -8), (u'present', -7), (u'present', -6), (u'present', -5), (u'present', -4), (u'present', -3), (u'present', -2), (u'present', -1), (u'present', 0), (u'present', 1), (u'present', 2), (u'present', 3), (u'present', 4), (u'present', 5), (u'present', 6), (u'present', 7), (u'present', 8), (u'present', 9), (u'present', 10), (u'present', 11), (u'present', 12), (u'present', 13), (u'present', 14), (u'present', 15), (u'present', 16), (u'present', 17), (u'present', 18), (u'present', 19), (u'present', 20), (u'present', 21), (u'present', 22), (u'present', 23), (u'present', 24), (u'present', 25), (u'present', 26), (u'present', 27), (u'present', 28), (u'present', 29), (u'present', 30), (u'present', 31), (u'present', 32), (u'present', 33), (u'present', 34), (u'present', 35), (u'present', 36), (u'present', 37), (u'present', 38), (u'present', 39), (u'present', 40), (u'present', 41), (u'present', 42), (u'present', 43), (u'present', 44), (u'present', 45), (u'present', 46), (u'present', 47), (u'present', 48), (u'present', 49), (u'present', 50), (u'present', 51), (u'present', 52), (u'present', 53), (u'present', 54), (u'present', 55), (u'present', 56), (u'present', 57), (u'present', 58), (u'present', 59), (u'present', 60), (u'present', 61), (u'present', 62), (u'present', 63), (u'present', 64), (u'present', 65), (u'present', 66), (u'present', 67), (u'present', 68), (u'present', 69), (u'present', 70), (u'present', 71), (u'present', 72), (u'present', 73), (u'present', 74), (u'present', 75), (u'present', 76), (u'present', 77), (u'present', 78), (u'present', 79), (u'present', 80), (u'present', 81), (u'present', 82), (u'present', 83), (u'present', 84), (u'present', 85), (u'present', 86), (u'present', 87), (u'present', 88), (u'present', 89), (u'present', 90), (u'present', 91), (u'present', 92), (u'present', 93), (u'present', 94), (u'present', 95), (u'present', 96), (u'present', 97), (u'present', 98), (u'present', 99), (u'present', 100), (u'present', 101), (u'present', 102), (u'present', 103), (u'present', 104), (u'present', 105), (u'present', 106), (u'present', 107), (u'present', 108), (u'present', 109), (u'present', 110), (u'present', 111), (u'present', 112), (u'present', 113), (u'present', 114), (u'present', 115), (u'present', 116), (u'present', 117), (u'present', 118), (u'present', 119), (u'present', 120), (u'present', 121), (u'present', 122), (u'present', 123), (u'present', 124), (u'present', 125), (u'present', 126), (u'present', 127)], rr=[], ev=None, er=[])
-    
-    _all_ = [
-        _Abort_dtid,
-        __Abort_reason_p_abortCause,
-        __Abort_reason_u_abortCause,
-        _Abort_reason,
-        Abort,
-        DialoguePortion,
-        OrigTransactionID,
-        DestTransactionID,
-        P_AbortCause,
-        TCInvokeIdSet,
-    ]
-
-class Remote_Operations_Information_Objects:
-
-    _name_  = u'Remote-Operations-Information-Objects'
-    _oid_   = [2, 4, 5, 0]
-    
-    _obj_ = [
-        u'OPERATION',
-        u'ERROR',
-        u'OPERATION-PACKAGE',
-        u'CONNECTION-PACKAGE',
-        u'CONTRACT',
-        u'ROS-OBJECT-CLASS',
-        u'Code',
-        u'Priority',
-        u'refuse',
-        u'emptyBind',
-        u'emptyUnbind',
-        ]
-    _type_ = [
-        u'OPERATION',
-        u'ERROR',
-        u'OPERATION-PACKAGE',
-        u'CONNECTION-PACKAGE',
-        u'CONTRACT',
-        u'ROS-OBJECT-CLASS',
-        u'Code',
-        u'Priority',
-        ]
-    _set_ = [
-        ]
-    _val_ = [
-        u'refuse',
-        u'emptyBind',
-        u'emptyUnbind',
-        ]
-    _class_ = [
-        u'OPERATION',
-        u'ERROR',
-        u'OPERATION-PACKAGE',
-        u'CONNECTION-PACKAGE',
-        u'CONTRACT',
-        u'ROS-OBJECT-CLASS',
-        u'refuse',
-        u'emptyBind',
-        u'emptyUnbind',
-        ]
-    _param_ = [
-        ]
-    
-    #-----< OPERATION >-----#
-    OPERATION = CLASS(name=u'OPERATION', mode=MODE_TYPE)
-    _OPERATION_ArgumentType = OPEN(name=u'ArgumentType', mode=MODE_TYPE, opt=True)
-    _OPERATION_argumentTypeOptional = BOOL(name=u'argumentTypeOptional', mode=MODE_VALUE, opt=True)
-    _OPERATION_returnResult = BOOL(name=u'returnResult', mode=MODE_VALUE, default=True)
-    _OPERATION_ResultType = OPEN(name=u'ResultType', mode=MODE_TYPE, opt=True)
-    _OPERATION_resultTypeOptional = BOOL(name=u'resultTypeOptional', mode=MODE_VALUE, opt=True)
-    _OPERATION_Errors = CLASS(name=u'Errors', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')), opt=True)
-    _OPERATION_Linked = CLASS(name=u'Linked', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
-    _OPERATION_synchronous = BOOL(name=u'synchronous', mode=MODE_VALUE, default=False)
-    _OPERATION_alwaysReturns = BOOL(name=u'alwaysReturns', mode=MODE_VALUE, default=True)
-    _OPERATION_InvokePriority = INT(name=u'InvokePriority', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Priority')), opt=True)
-    _OPERATION_ResultPriority = INT(name=u'ResultPriority', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Priority')), opt=True)
-    _OPERATION_operationCode = CHOICE(name=u'operationCode', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Code')), opt=True, uniq=True)
-    OPERATION._cont = ASN1Dict([
-        (u'ArgumentType', _OPERATION_ArgumentType),
-        (u'argumentTypeOptional', _OPERATION_argumentTypeOptional),
-        (u'returnResult', _OPERATION_returnResult),
-        (u'ResultType', _OPERATION_ResultType),
-        (u'resultTypeOptional', _OPERATION_resultTypeOptional),
-        (u'Errors', _OPERATION_Errors),
-        (u'Linked', _OPERATION_Linked),
-        (u'synchronous', _OPERATION_synchronous),
-        (u'alwaysReturns', _OPERATION_alwaysReturns),
-        (u'InvokePriority', _OPERATION_InvokePriority),
-        (u'ResultPriority', _OPERATION_ResultPriority),
-        (u'operationCode', _OPERATION_operationCode),
-        ])
-    
-    #-----< ERROR >-----#
-    ERROR = CLASS(name=u'ERROR', mode=MODE_TYPE)
-    _ERROR_ParameterType = OPEN(name=u'ParameterType', mode=MODE_TYPE, opt=True)
-    _ERROR_parameterTypeOptional = BOOL(name=u'parameterTypeOptional', mode=MODE_VALUE, opt=True)
-    _ERROR_ErrorPriority = INT(name=u'ErrorPriority', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Priority')), opt=True)
-    _ERROR_errorCode = CHOICE(name=u'errorCode', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Code')), opt=True, uniq=True)
-    ERROR._cont = ASN1Dict([
-        (u'ParameterType', _ERROR_ParameterType),
-        (u'parameterTypeOptional', _ERROR_parameterTypeOptional),
-        (u'ErrorPriority', _ERROR_ErrorPriority),
-        (u'errorCode', _ERROR_errorCode),
-        ])
-    
-    #-----< OPERATION-PACKAGE >-----#
-    OPERATION_PACKAGE = CLASS(name=u'OPERATION-PACKAGE', mode=MODE_TYPE)
-    _OPERATION_PACKAGE_Both = CLASS(name=u'Both', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
-    _OPERATION_PACKAGE_Consumer = CLASS(name=u'Consumer', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
-    _OPERATION_PACKAGE_Supplier = CLASS(name=u'Supplier', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
-    _OPERATION_PACKAGE_id = OID(name=u'id', mode=MODE_VALUE, opt=True, uniq=True)
-    OPERATION_PACKAGE._cont = ASN1Dict([
-        (u'Both', _OPERATION_PACKAGE_Both),
-        (u'Consumer', _OPERATION_PACKAGE_Consumer),
-        (u'Supplier', _OPERATION_PACKAGE_Supplier),
-        (u'id', _OPERATION_PACKAGE_id),
-        ])
-    
-    #-----< CONNECTION-PACKAGE >-----#
-    CONNECTION_PACKAGE = CLASS(name=u'CONNECTION-PACKAGE', mode=MODE_TYPE)
-    _CONNECTION_PACKAGE_bind = CLASS(name=u'bind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), default=dict([(u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', -1))])], rr=[], ev=None, er=[])), (u'synchronous', True)]))
-    _CONNECTION_PACKAGE_unbind = CLASS(name=u'unbind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), default=dict([(u'synchronous', True)]))
-    _CONNECTION_PACKAGE_responderCanUnbind = BOOL(name=u'responderCanUnbind', mode=MODE_VALUE, default=False)
-    _CONNECTION_PACKAGE_unbindCanFail = BOOL(name=u'unbindCanFail', mode=MODE_VALUE, default=False)
-    _CONNECTION_PACKAGE_id = OID(name=u'id', mode=MODE_VALUE, opt=True, uniq=True)
-    CONNECTION_PACKAGE._cont = ASN1Dict([
-        (u'bind', _CONNECTION_PACKAGE_bind),
-        (u'unbind', _CONNECTION_PACKAGE_unbind),
-        (u'responderCanUnbind', _CONNECTION_PACKAGE_responderCanUnbind),
-        (u'unbindCanFail', _CONNECTION_PACKAGE_unbindCanFail),
-        (u'id', _CONNECTION_PACKAGE_id),
-        ])
-    
-    #-----< CONTRACT >-----#
-    CONTRACT = CLASS(name=u'CONTRACT', mode=MODE_TYPE)
-    _CONTRACT_connection = CLASS(name=u'connection', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONNECTION-PACKAGE')), opt=True)
-    _CONTRACT_OperationsOf = CLASS(name=u'OperationsOf', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
-    _CONTRACT_InitiatorConsumerOf = CLASS(name=u'InitiatorConsumerOf', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
-    _CONTRACT_InitiatorSupplierOf = CLASS(name=u'InitiatorSupplierOf', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
-    _CONTRACT_id = OID(name=u'id', mode=MODE_VALUE, opt=True, uniq=True)
-    CONTRACT._cont = ASN1Dict([
-        (u'connection', _CONTRACT_connection),
-        (u'OperationsOf', _CONTRACT_OperationsOf),
-        (u'InitiatorConsumerOf', _CONTRACT_InitiatorConsumerOf),
-        (u'InitiatorSupplierOf', _CONTRACT_InitiatorSupplierOf),
-        (u'id', _CONTRACT_id),
-        ])
-    
-    #-----< ROS-OBJECT-CLASS >-----#
-    ROS_OBJECT_CLASS = CLASS(name=u'ROS-OBJECT-CLASS', mode=MODE_TYPE)
-    _ROS_OBJECT_CLASS_Is = CLASS(name=u'Is', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ROS-OBJECT-CLASS')), opt=True)
-    _ROS_OBJECT_CLASS_Initiates = CLASS(name=u'Initiates', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
-    _ROS_OBJECT_CLASS_Responds = CLASS(name=u'Responds', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
-    _ROS_OBJECT_CLASS_InitiatesAndResponds = CLASS(name=u'InitiatesAndResponds', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
-    _ROS_OBJECT_CLASS_id = OID(name=u'id', mode=MODE_VALUE, uniq=True)
-    ROS_OBJECT_CLASS._cont = ASN1Dict([
-        (u'Is', _ROS_OBJECT_CLASS_Is),
-        (u'Initiates', _ROS_OBJECT_CLASS_Initiates),
-        (u'Responds', _ROS_OBJECT_CLASS_Responds),
-        (u'InitiatesAndResponds', _ROS_OBJECT_CLASS_InitiatesAndResponds),
-        (u'id', _ROS_OBJECT_CLASS_id),
-        ])
-    
-    #-----< Code >-----#
-    Code = CHOICE(name=u'Code', mode=MODE_TYPE)
-    _Code_local = INT(name=u'local', mode=MODE_TYPE)
-    _Code_global_ = OID(name=u'global', mode=MODE_TYPE)
-    Code._cont = ASN1Dict([
-        (u'local', _Code_local),
-        (u'global', _Code_global_),
-        ])
-    Code._ext = None
-    
-    #-----< Priority >-----#
-    Priority = INT(name=u'Priority', mode=MODE_TYPE)
-    Priority._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
-    
-    #-----< refuse >-----#
-    refuse = CLASS(name=u'refuse', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    refuse._val = dict([(u'errorCode', (u'local', -1))])
-    
-    #-----< emptyBind >-----#
-    emptyBind = CLASS(name=u'emptyBind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    emptyBind._val = dict([(u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', -1))])], rr=[], ev=None, er=[])), (u'synchronous', True)])
-    
-    #-----< emptyUnbind >-----#
-    emptyUnbind = CLASS(name=u'emptyUnbind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    emptyUnbind._val = dict([(u'synchronous', True)])
-    
-    _all_ = [
-        _OPERATION_ArgumentType,
-        _OPERATION_argumentTypeOptional,
-        _OPERATION_returnResult,
-        _OPERATION_ResultType,
-        _OPERATION_resultTypeOptional,
-        _OPERATION_Errors,
-        _OPERATION_Linked,
-        _OPERATION_synchronous,
-        _OPERATION_alwaysReturns,
-        _OPERATION_InvokePriority,
-        _OPERATION_ResultPriority,
-        _OPERATION_operationCode,
-        OPERATION,
-        _ERROR_ParameterType,
-        _ERROR_parameterTypeOptional,
-        _ERROR_ErrorPriority,
-        _ERROR_errorCode,
-        ERROR,
-        _OPERATION_PACKAGE_Both,
-        _OPERATION_PACKAGE_Consumer,
-        _OPERATION_PACKAGE_Supplier,
-        _OPERATION_PACKAGE_id,
-        OPERATION_PACKAGE,
-        _CONNECTION_PACKAGE_bind,
-        _CONNECTION_PACKAGE_unbind,
-        _CONNECTION_PACKAGE_responderCanUnbind,
-        _CONNECTION_PACKAGE_unbindCanFail,
-        _CONNECTION_PACKAGE_id,
-        CONNECTION_PACKAGE,
-        _CONTRACT_connection,
-        _CONTRACT_OperationsOf,
-        _CONTRACT_InitiatorConsumerOf,
-        _CONTRACT_InitiatorSupplierOf,
-        _CONTRACT_id,
-        CONTRACT,
-        _ROS_OBJECT_CLASS_Is,
-        _ROS_OBJECT_CLASS_Initiates,
-        _ROS_OBJECT_CLASS_Responds,
-        _ROS_OBJECT_CLASS_InitiatesAndResponds,
-        _ROS_OBJECT_CLASS_id,
-        ROS_OBJECT_CLASS,
-        _Code_local,
-        _Code_global_,
-        Code,
-        Priority,
-        refuse,
-        emptyBind,
-        emptyUnbind,
-    ]
-
-init_modules(Remote_Operations_Generic_ROS_PDUs, DialoguePDUs, UnidialoguePDUs, Pycrate_TCAP_Dialogue, TCAP_Messages, TCAPMessages, Remote_Operations_Information_Objects)
+init_modules(DialoguePDUs, UnidialoguePDUs, Remote_Operations_Generic_ROS_PDUs, Remote_Operations_Information_Objects, TCAPMessages, Pycrate_TCAP_Dialogue, TCAP_Messages)

@@ -2104,279 +2104,6 @@ class NCBI_BlastDL:
         Blast_db_mask_info,
     ]
 
-class NCBI_BlastOutput:
-
-    _name_  = u'NCBI-BlastOutput'
-    _oid_   = []
-    
-    _obj_ = [
-        u'BigInt',
-        u'BlastOutput',
-        u'Iteration',
-        u'Parameters',
-        u'Statistics',
-        u'Hit',
-        u'Hsp',
-        ]
-    _type_ = [
-        u'BigInt',
-        u'BlastOutput',
-        u'Iteration',
-        u'Parameters',
-        u'Statistics',
-        u'Hit',
-        u'Hsp',
-        ]
-    _set_ = [
-        ]
-    _val_ = [
-        ]
-    _class_ = [
-        ]
-    _param_ = [
-        ]
-    
-    #-----< BigInt >-----#
-    BigInt = INT(name=u'BigInt', mode=MODE_TYPE, tag=(2, TAG_APPLICATION, TAG_IMPLICIT))
-    
-    #-----< BlastOutput >-----#
-    BlastOutput = SEQ(name=u'BlastOutput', mode=MODE_TYPE)
-    _BlastOutput_program = STR_VIS(name=u'program', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _BlastOutput_version = STR_VIS(name=u'version', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _BlastOutput_reference = STR_VIS(name=u'reference', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _BlastOutput_db = STR_VIS(name=u'db', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _BlastOutput_query_ID = STR_VIS(name=u'query-ID', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _BlastOutput_query_def = STR_VIS(name=u'query-def', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _BlastOutput_query_len = INT(name=u'query-len', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _BlastOutput_query_seq = STR_VIS(name=u'query-seq', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _BlastOutput_param = SEQ(name=u'param', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-BlastOutput', 'Parameters')))
-    _BlastOutput_iterations = SEQ_OF(name=u'iterations', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __BlastOutput_iterations__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-BlastOutput', 'Iteration')))
-    _BlastOutput_iterations._cont = __BlastOutput_iterations__item_
-    _BlastOutput_mbstat = SEQ(name=u'mbstat', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-BlastOutput', 'Statistics')), opt=True)
-    BlastOutput._cont = ASN1Dict([
-        (u'program', _BlastOutput_program),
-        (u'version', _BlastOutput_version),
-        (u'reference', _BlastOutput_reference),
-        (u'db', _BlastOutput_db),
-        (u'query-ID', _BlastOutput_query_ID),
-        (u'query-def', _BlastOutput_query_def),
-        (u'query-len', _BlastOutput_query_len),
-        (u'query-seq', _BlastOutput_query_seq),
-        (u'param', _BlastOutput_param),
-        (u'iterations', _BlastOutput_iterations),
-        (u'mbstat', _BlastOutput_mbstat),
-        ])
-    BlastOutput._ext = None
-    
-    #-----< Iteration >-----#
-    Iteration = SEQ(name=u'Iteration', mode=MODE_TYPE)
-    _Iteration_iter_num = INT(name=u'iter-num', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Iteration_query_ID = STR_VIS(name=u'query-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Iteration_query_def = STR_VIS(name=u'query-def', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Iteration_query_len = INT(name=u'query-len', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Iteration_hits = SEQ_OF(name=u'hits', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __Iteration_hits__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-BlastOutput', 'Hit')))
-    _Iteration_hits._cont = __Iteration_hits__item_
-    _Iteration_stat = SEQ(name=u'stat', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-BlastOutput', 'Statistics')), opt=True)
-    _Iteration_message = STR_VIS(name=u'message', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    Iteration._cont = ASN1Dict([
-        (u'iter-num', _Iteration_iter_num),
-        (u'query-ID', _Iteration_query_ID),
-        (u'query-def', _Iteration_query_def),
-        (u'query-len', _Iteration_query_len),
-        (u'hits', _Iteration_hits),
-        (u'stat', _Iteration_stat),
-        (u'message', _Iteration_message),
-        ])
-    Iteration._ext = None
-    
-    #-----< Parameters >-----#
-    Parameters = SEQ(name=u'Parameters', mode=MODE_TYPE)
-    _Parameters_matrix = STR_VIS(name=u'matrix', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Parameters_expect = REAL(name=u'expect', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('_IMPL_', 'REAL')))
-    _Parameters_include = REAL(name=u'include', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('_IMPL_', 'REAL')), opt=True)
-    _Parameters_sc_match = INT(name=u'sc-match', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Parameters_sc_mismatch = INT(name=u'sc-mismatch', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Parameters_gap_open = INT(name=u'gap-open', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Parameters_gap_extend = INT(name=u'gap-extend', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Parameters_filter = STR_VIS(name=u'filter', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Parameters_pattern = STR_VIS(name=u'pattern', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Parameters_entrez_query = STR_VIS(name=u'entrez-query', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    Parameters._cont = ASN1Dict([
-        (u'matrix', _Parameters_matrix),
-        (u'expect', _Parameters_expect),
-        (u'include', _Parameters_include),
-        (u'sc-match', _Parameters_sc_match),
-        (u'sc-mismatch', _Parameters_sc_mismatch),
-        (u'gap-open', _Parameters_gap_open),
-        (u'gap-extend', _Parameters_gap_extend),
-        (u'filter', _Parameters_filter),
-        (u'pattern', _Parameters_pattern),
-        (u'entrez-query', _Parameters_entrez_query),
-        ])
-    Parameters._ext = None
-    
-    #-----< Statistics >-----#
-    Statistics = SEQ(name=u'Statistics', mode=MODE_TYPE)
-    _Statistics_db_num = INT(name=u'db-num', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Statistics_db_len = INT(name=u'db-len', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-BlastOutput', 'BigInt')))
-    _Statistics_hsp_len = INT(name=u'hsp-len', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Statistics_eff_space = REAL(name=u'eff-space', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('_IMPL_', 'REAL')))
-    _Statistics_kappa = REAL(name=u'kappa', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('_IMPL_', 'REAL')))
-    _Statistics_lambda_ = REAL(name=u'lambda', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('_IMPL_', 'REAL')))
-    _Statistics_entropy = REAL(name=u'entropy', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('_IMPL_', 'REAL')))
-    Statistics._cont = ASN1Dict([
-        (u'db-num', _Statistics_db_num),
-        (u'db-len', _Statistics_db_len),
-        (u'hsp-len', _Statistics_hsp_len),
-        (u'eff-space', _Statistics_eff_space),
-        (u'kappa', _Statistics_kappa),
-        (u'lambda', _Statistics_lambda_),
-        (u'entropy', _Statistics_entropy),
-        ])
-    Statistics._ext = None
-    
-    #-----< Hit >-----#
-    Hit = SEQ(name=u'Hit', mode=MODE_TYPE)
-    _Hit_num = INT(name=u'num', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Hit_id = STR_VIS(name=u'id', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Hit_def_ = STR_VIS(name=u'def', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Hit_accession = STR_VIS(name=u'accession', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Hit_len = INT(name=u'len', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Hit_hsps = SEQ_OF(name=u'hsps', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __Hit_hsps__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-BlastOutput', 'Hsp')))
-    _Hit_hsps._cont = __Hit_hsps__item_
-    Hit._cont = ASN1Dict([
-        (u'num', _Hit_num),
-        (u'id', _Hit_id),
-        (u'def', _Hit_def_),
-        (u'accession', _Hit_accession),
-        (u'len', _Hit_len),
-        (u'hsps', _Hit_hsps),
-        ])
-    Hit._ext = None
-    
-    #-----< Hsp >-----#
-    Hsp = SEQ(name=u'Hsp', mode=MODE_TYPE)
-    _Hsp_num = INT(name=u'num', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Hsp_bit_score = REAL(name=u'bit-score', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('_IMPL_', 'REAL')))
-    _Hsp_score = REAL(name=u'score', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('_IMPL_', 'REAL')))
-    _Hsp_evalue = REAL(name=u'evalue', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('_IMPL_', 'REAL')))
-    _Hsp_query_from = INT(name=u'query-from', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Hsp_query_to = INT(name=u'query-to', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Hsp_hit_from = INT(name=u'hit-from', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Hsp_hit_to = INT(name=u'hit-to', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Hsp_pattern_from = INT(name=u'pattern-from', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Hsp_pattern_to = INT(name=u'pattern-to', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Hsp_query_frame = INT(name=u'query-frame', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Hsp_hit_frame = INT(name=u'hit-frame', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Hsp_identity = INT(name=u'identity', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Hsp_positive = INT(name=u'positive', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Hsp_gaps = INT(name=u'gaps', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Hsp_align_len = INT(name=u'align-len', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Hsp_density = INT(name=u'density', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Hsp_qseq = STR_VIS(name=u'qseq', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Hsp_hseq = STR_VIS(name=u'hseq', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Hsp_midline = STR_VIS(name=u'midline', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    Hsp._cont = ASN1Dict([
-        (u'num', _Hsp_num),
-        (u'bit-score', _Hsp_bit_score),
-        (u'score', _Hsp_score),
-        (u'evalue', _Hsp_evalue),
-        (u'query-from', _Hsp_query_from),
-        (u'query-to', _Hsp_query_to),
-        (u'hit-from', _Hsp_hit_from),
-        (u'hit-to', _Hsp_hit_to),
-        (u'pattern-from', _Hsp_pattern_from),
-        (u'pattern-to', _Hsp_pattern_to),
-        (u'query-frame', _Hsp_query_frame),
-        (u'hit-frame', _Hsp_hit_frame),
-        (u'identity', _Hsp_identity),
-        (u'positive', _Hsp_positive),
-        (u'gaps', _Hsp_gaps),
-        (u'align-len', _Hsp_align_len),
-        (u'density', _Hsp_density),
-        (u'qseq', _Hsp_qseq),
-        (u'hseq', _Hsp_hseq),
-        (u'midline', _Hsp_midline),
-        ])
-    Hsp._ext = None
-    
-    _all_ = [
-        BigInt,
-        _BlastOutput_program,
-        _BlastOutput_version,
-        _BlastOutput_reference,
-        _BlastOutput_db,
-        _BlastOutput_query_ID,
-        _BlastOutput_query_def,
-        _BlastOutput_query_len,
-        _BlastOutput_query_seq,
-        _BlastOutput_param,
-        __BlastOutput_iterations__item_,
-        _BlastOutput_iterations,
-        _BlastOutput_mbstat,
-        BlastOutput,
-        _Iteration_iter_num,
-        _Iteration_query_ID,
-        _Iteration_query_def,
-        _Iteration_query_len,
-        __Iteration_hits__item_,
-        _Iteration_hits,
-        _Iteration_stat,
-        _Iteration_message,
-        Iteration,
-        _Parameters_matrix,
-        _Parameters_expect,
-        _Parameters_include,
-        _Parameters_sc_match,
-        _Parameters_sc_mismatch,
-        _Parameters_gap_open,
-        _Parameters_gap_extend,
-        _Parameters_filter,
-        _Parameters_pattern,
-        _Parameters_entrez_query,
-        Parameters,
-        _Statistics_db_num,
-        _Statistics_db_len,
-        _Statistics_hsp_len,
-        _Statistics_eff_space,
-        _Statistics_kappa,
-        _Statistics_lambda_,
-        _Statistics_entropy,
-        Statistics,
-        _Hit_num,
-        _Hit_id,
-        _Hit_def_,
-        _Hit_accession,
-        _Hit_len,
-        __Hit_hsps__item_,
-        _Hit_hsps,
-        Hit,
-        _Hsp_num,
-        _Hsp_bit_score,
-        _Hsp_score,
-        _Hsp_evalue,
-        _Hsp_query_from,
-        _Hsp_query_to,
-        _Hsp_hit_from,
-        _Hsp_hit_to,
-        _Hsp_pattern_from,
-        _Hsp_pattern_to,
-        _Hsp_query_frame,
-        _Hsp_hit_frame,
-        _Hsp_identity,
-        _Hsp_positive,
-        _Hsp_gaps,
-        _Hsp_align_len,
-        _Hsp_density,
-        _Hsp_qseq,
-        _Hsp_hseq,
-        _Hsp_midline,
-        Hsp,
-    ]
-
 class NCBI_BlastOutput2:
 
     _name_  = u'NCBI-BlastOutput2'
@@ -2779,6 +2506,279 @@ class NCBI_BlastOutput2:
         _Hsp_hit_frame,
         _Hsp_align_len,
         _Hsp_gaps,
+        _Hsp_qseq,
+        _Hsp_hseq,
+        _Hsp_midline,
+        Hsp,
+    ]
+
+class NCBI_BlastOutput:
+
+    _name_  = u'NCBI-BlastOutput'
+    _oid_   = []
+    
+    _obj_ = [
+        u'BigInt',
+        u'BlastOutput',
+        u'Iteration',
+        u'Parameters',
+        u'Statistics',
+        u'Hit',
+        u'Hsp',
+        ]
+    _type_ = [
+        u'BigInt',
+        u'BlastOutput',
+        u'Iteration',
+        u'Parameters',
+        u'Statistics',
+        u'Hit',
+        u'Hsp',
+        ]
+    _set_ = [
+        ]
+    _val_ = [
+        ]
+    _class_ = [
+        ]
+    _param_ = [
+        ]
+    
+    #-----< BigInt >-----#
+    BigInt = INT(name=u'BigInt', mode=MODE_TYPE, tag=(2, TAG_APPLICATION, TAG_IMPLICIT))
+    
+    #-----< BlastOutput >-----#
+    BlastOutput = SEQ(name=u'BlastOutput', mode=MODE_TYPE)
+    _BlastOutput_program = STR_VIS(name=u'program', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _BlastOutput_version = STR_VIS(name=u'version', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _BlastOutput_reference = STR_VIS(name=u'reference', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _BlastOutput_db = STR_VIS(name=u'db', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _BlastOutput_query_ID = STR_VIS(name=u'query-ID', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _BlastOutput_query_def = STR_VIS(name=u'query-def', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _BlastOutput_query_len = INT(name=u'query-len', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _BlastOutput_query_seq = STR_VIS(name=u'query-seq', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _BlastOutput_param = SEQ(name=u'param', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-BlastOutput', 'Parameters')))
+    _BlastOutput_iterations = SEQ_OF(name=u'iterations', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __BlastOutput_iterations__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-BlastOutput', 'Iteration')))
+    _BlastOutput_iterations._cont = __BlastOutput_iterations__item_
+    _BlastOutput_mbstat = SEQ(name=u'mbstat', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-BlastOutput', 'Statistics')), opt=True)
+    BlastOutput._cont = ASN1Dict([
+        (u'program', _BlastOutput_program),
+        (u'version', _BlastOutput_version),
+        (u'reference', _BlastOutput_reference),
+        (u'db', _BlastOutput_db),
+        (u'query-ID', _BlastOutput_query_ID),
+        (u'query-def', _BlastOutput_query_def),
+        (u'query-len', _BlastOutput_query_len),
+        (u'query-seq', _BlastOutput_query_seq),
+        (u'param', _BlastOutput_param),
+        (u'iterations', _BlastOutput_iterations),
+        (u'mbstat', _BlastOutput_mbstat),
+        ])
+    BlastOutput._ext = None
+    
+    #-----< Iteration >-----#
+    Iteration = SEQ(name=u'Iteration', mode=MODE_TYPE)
+    _Iteration_iter_num = INT(name=u'iter-num', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Iteration_query_ID = STR_VIS(name=u'query-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Iteration_query_def = STR_VIS(name=u'query-def', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Iteration_query_len = INT(name=u'query-len', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Iteration_hits = SEQ_OF(name=u'hits', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __Iteration_hits__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-BlastOutput', 'Hit')))
+    _Iteration_hits._cont = __Iteration_hits__item_
+    _Iteration_stat = SEQ(name=u'stat', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-BlastOutput', 'Statistics')), opt=True)
+    _Iteration_message = STR_VIS(name=u'message', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    Iteration._cont = ASN1Dict([
+        (u'iter-num', _Iteration_iter_num),
+        (u'query-ID', _Iteration_query_ID),
+        (u'query-def', _Iteration_query_def),
+        (u'query-len', _Iteration_query_len),
+        (u'hits', _Iteration_hits),
+        (u'stat', _Iteration_stat),
+        (u'message', _Iteration_message),
+        ])
+    Iteration._ext = None
+    
+    #-----< Parameters >-----#
+    Parameters = SEQ(name=u'Parameters', mode=MODE_TYPE)
+    _Parameters_matrix = STR_VIS(name=u'matrix', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Parameters_expect = REAL(name=u'expect', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('_IMPL_', 'REAL')))
+    _Parameters_include = REAL(name=u'include', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('_IMPL_', 'REAL')), opt=True)
+    _Parameters_sc_match = INT(name=u'sc-match', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Parameters_sc_mismatch = INT(name=u'sc-mismatch', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Parameters_gap_open = INT(name=u'gap-open', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Parameters_gap_extend = INT(name=u'gap-extend', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Parameters_filter = STR_VIS(name=u'filter', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Parameters_pattern = STR_VIS(name=u'pattern', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Parameters_entrez_query = STR_VIS(name=u'entrez-query', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    Parameters._cont = ASN1Dict([
+        (u'matrix', _Parameters_matrix),
+        (u'expect', _Parameters_expect),
+        (u'include', _Parameters_include),
+        (u'sc-match', _Parameters_sc_match),
+        (u'sc-mismatch', _Parameters_sc_mismatch),
+        (u'gap-open', _Parameters_gap_open),
+        (u'gap-extend', _Parameters_gap_extend),
+        (u'filter', _Parameters_filter),
+        (u'pattern', _Parameters_pattern),
+        (u'entrez-query', _Parameters_entrez_query),
+        ])
+    Parameters._ext = None
+    
+    #-----< Statistics >-----#
+    Statistics = SEQ(name=u'Statistics', mode=MODE_TYPE)
+    _Statistics_db_num = INT(name=u'db-num', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Statistics_db_len = INT(name=u'db-len', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-BlastOutput', 'BigInt')))
+    _Statistics_hsp_len = INT(name=u'hsp-len', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Statistics_eff_space = REAL(name=u'eff-space', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('_IMPL_', 'REAL')))
+    _Statistics_kappa = REAL(name=u'kappa', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('_IMPL_', 'REAL')))
+    _Statistics_lambda_ = REAL(name=u'lambda', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('_IMPL_', 'REAL')))
+    _Statistics_entropy = REAL(name=u'entropy', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('_IMPL_', 'REAL')))
+    Statistics._cont = ASN1Dict([
+        (u'db-num', _Statistics_db_num),
+        (u'db-len', _Statistics_db_len),
+        (u'hsp-len', _Statistics_hsp_len),
+        (u'eff-space', _Statistics_eff_space),
+        (u'kappa', _Statistics_kappa),
+        (u'lambda', _Statistics_lambda_),
+        (u'entropy', _Statistics_entropy),
+        ])
+    Statistics._ext = None
+    
+    #-----< Hit >-----#
+    Hit = SEQ(name=u'Hit', mode=MODE_TYPE)
+    _Hit_num = INT(name=u'num', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Hit_id = STR_VIS(name=u'id', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Hit_def_ = STR_VIS(name=u'def', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Hit_accession = STR_VIS(name=u'accession', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Hit_len = INT(name=u'len', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Hit_hsps = SEQ_OF(name=u'hsps', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __Hit_hsps__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-BlastOutput', 'Hsp')))
+    _Hit_hsps._cont = __Hit_hsps__item_
+    Hit._cont = ASN1Dict([
+        (u'num', _Hit_num),
+        (u'id', _Hit_id),
+        (u'def', _Hit_def_),
+        (u'accession', _Hit_accession),
+        (u'len', _Hit_len),
+        (u'hsps', _Hit_hsps),
+        ])
+    Hit._ext = None
+    
+    #-----< Hsp >-----#
+    Hsp = SEQ(name=u'Hsp', mode=MODE_TYPE)
+    _Hsp_num = INT(name=u'num', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Hsp_bit_score = REAL(name=u'bit-score', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('_IMPL_', 'REAL')))
+    _Hsp_score = REAL(name=u'score', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('_IMPL_', 'REAL')))
+    _Hsp_evalue = REAL(name=u'evalue', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('_IMPL_', 'REAL')))
+    _Hsp_query_from = INT(name=u'query-from', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Hsp_query_to = INT(name=u'query-to', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Hsp_hit_from = INT(name=u'hit-from', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Hsp_hit_to = INT(name=u'hit-to', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Hsp_pattern_from = INT(name=u'pattern-from', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Hsp_pattern_to = INT(name=u'pattern-to', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Hsp_query_frame = INT(name=u'query-frame', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Hsp_hit_frame = INT(name=u'hit-frame', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Hsp_identity = INT(name=u'identity', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Hsp_positive = INT(name=u'positive', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Hsp_gaps = INT(name=u'gaps', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Hsp_align_len = INT(name=u'align-len', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Hsp_density = INT(name=u'density', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Hsp_qseq = STR_VIS(name=u'qseq', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Hsp_hseq = STR_VIS(name=u'hseq', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Hsp_midline = STR_VIS(name=u'midline', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    Hsp._cont = ASN1Dict([
+        (u'num', _Hsp_num),
+        (u'bit-score', _Hsp_bit_score),
+        (u'score', _Hsp_score),
+        (u'evalue', _Hsp_evalue),
+        (u'query-from', _Hsp_query_from),
+        (u'query-to', _Hsp_query_to),
+        (u'hit-from', _Hsp_hit_from),
+        (u'hit-to', _Hsp_hit_to),
+        (u'pattern-from', _Hsp_pattern_from),
+        (u'pattern-to', _Hsp_pattern_to),
+        (u'query-frame', _Hsp_query_frame),
+        (u'hit-frame', _Hsp_hit_frame),
+        (u'identity', _Hsp_identity),
+        (u'positive', _Hsp_positive),
+        (u'gaps', _Hsp_gaps),
+        (u'align-len', _Hsp_align_len),
+        (u'density', _Hsp_density),
+        (u'qseq', _Hsp_qseq),
+        (u'hseq', _Hsp_hseq),
+        (u'midline', _Hsp_midline),
+        ])
+    Hsp._ext = None
+    
+    _all_ = [
+        BigInt,
+        _BlastOutput_program,
+        _BlastOutput_version,
+        _BlastOutput_reference,
+        _BlastOutput_db,
+        _BlastOutput_query_ID,
+        _BlastOutput_query_def,
+        _BlastOutput_query_len,
+        _BlastOutput_query_seq,
+        _BlastOutput_param,
+        __BlastOutput_iterations__item_,
+        _BlastOutput_iterations,
+        _BlastOutput_mbstat,
+        BlastOutput,
+        _Iteration_iter_num,
+        _Iteration_query_ID,
+        _Iteration_query_def,
+        _Iteration_query_len,
+        __Iteration_hits__item_,
+        _Iteration_hits,
+        _Iteration_stat,
+        _Iteration_message,
+        Iteration,
+        _Parameters_matrix,
+        _Parameters_expect,
+        _Parameters_include,
+        _Parameters_sc_match,
+        _Parameters_sc_mismatch,
+        _Parameters_gap_open,
+        _Parameters_gap_extend,
+        _Parameters_filter,
+        _Parameters_pattern,
+        _Parameters_entrez_query,
+        Parameters,
+        _Statistics_db_num,
+        _Statistics_db_len,
+        _Statistics_hsp_len,
+        _Statistics_eff_space,
+        _Statistics_kappa,
+        _Statistics_lambda_,
+        _Statistics_entropy,
+        Statistics,
+        _Hit_num,
+        _Hit_id,
+        _Hit_def_,
+        _Hit_accession,
+        _Hit_len,
+        __Hit_hsps__item_,
+        _Hit_hsps,
+        Hit,
+        _Hsp_num,
+        _Hsp_bit_score,
+        _Hsp_score,
+        _Hsp_evalue,
+        _Hsp_query_from,
+        _Hsp_query_to,
+        _Hsp_hit_from,
+        _Hsp_hit_to,
+        _Hsp_pattern_from,
+        _Hsp_pattern_to,
+        _Hsp_query_frame,
+        _Hsp_hit_frame,
+        _Hsp_identity,
+        _Hsp_positive,
+        _Hsp_gaps,
+        _Hsp_align_len,
+        _Hsp_density,
         _Hsp_qseq,
         _Hsp_hseq,
         _Hsp_midline,
@@ -15827,6 +15827,577 @@ class NCBI_ScoreMat:
         PssmWithParameters,
     ]
 
+class NCBI_Seqalign:
+
+    _name_  = u'NCBI-Seqalign'
+    _oid_   = []
+    
+    _obj_ = [
+        u'Seq-align-set',
+        u'Seq-align',
+        u'Dense-diag',
+        u'Dense-seg',
+        u'Packed-seg',
+        u'Std-seg',
+        u'Spliced-seg',
+        u'Spliced-seg-modifier',
+        u'Spliced-exon',
+        u'Product-pos',
+        u'Prot-pos',
+        u'Spliced-exon-chunk',
+        u'Splice-site',
+        u'Sparse-seg',
+        u'Sparse-align',
+        u'Sparse-seg-ext',
+        u'Score',
+        u'Score-set',
+        ]
+    _type_ = [
+        u'Seq-align-set',
+        u'Seq-align',
+        u'Dense-diag',
+        u'Dense-seg',
+        u'Packed-seg',
+        u'Std-seg',
+        u'Spliced-seg',
+        u'Spliced-seg-modifier',
+        u'Spliced-exon',
+        u'Product-pos',
+        u'Prot-pos',
+        u'Spliced-exon-chunk',
+        u'Splice-site',
+        u'Sparse-seg',
+        u'Sparse-align',
+        u'Sparse-seg-ext',
+        u'Score',
+        u'Score-set',
+        ]
+    _set_ = [
+        ]
+    _val_ = [
+        ]
+    _class_ = [
+        ]
+    _param_ = [
+        ]
+    
+    #-----< Seq-align-set >-----#
+    Seq_align_set = SET_OF(name=u'Seq-align-set', mode=MODE_TYPE)
+    _Seq_align_set__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Seq-align')))
+    Seq_align_set._cont = _Seq_align_set__item_
+    
+    #-----< Seq-align >-----#
+    Seq_align = SEQ(name=u'Seq-align', mode=MODE_TYPE)
+    _Seq_align_type = ENUM(name=u'type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Seq_align_type._cont = ASN1Dict([(u'not-set', 0), (u'global', 1), (u'diags', 2), (u'partial', 3), (u'disc', 4), (u'other', 255)])
+    _Seq_align_type._ext = None
+    _Seq_align_dim = INT(name=u'dim', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Seq_align_score = SET_OF(name=u'score', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __Seq_align_score__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Score')))
+    _Seq_align_score._cont = __Seq_align_score__item_
+    _Seq_align_segs = CHOICE(name=u'segs', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __Seq_align_segs_dendiag = SEQ_OF(name=u'dendiag', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___Seq_align_segs_dendiag__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Dense-diag')))
+    __Seq_align_segs_dendiag._cont = ___Seq_align_segs_dendiag__item_
+    __Seq_align_segs_denseg = SEQ(name=u'denseg', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqalign', 'Dense-seg')))
+    __Seq_align_segs_std = SEQ_OF(name=u'std', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___Seq_align_segs_std__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Std-seg')))
+    __Seq_align_segs_std._cont = ___Seq_align_segs_std__item_
+    __Seq_align_segs_packed = SEQ(name=u'packed', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqalign', 'Packed-seg')))
+    __Seq_align_segs_disc = SET_OF(name=u'disc', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqalign', 'Seq-align-set')))
+    __Seq_align_segs_spliced = SEQ(name=u'spliced', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqalign', 'Spliced-seg')))
+    __Seq_align_segs_sparse = SEQ(name=u'sparse', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqalign', 'Sparse-seg')))
+    _Seq_align_segs._cont = ASN1Dict([
+        (u'dendiag', __Seq_align_segs_dendiag),
+        (u'denseg', __Seq_align_segs_denseg),
+        (u'std', __Seq_align_segs_std),
+        (u'packed', __Seq_align_segs_packed),
+        (u'disc', __Seq_align_segs_disc),
+        (u'spliced', __Seq_align_segs_spliced),
+        (u'sparse', __Seq_align_segs_sparse),
+        ])
+    _Seq_align_segs._ext = None
+    _Seq_align_bounds = SET_OF(name=u'bounds', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __Seq_align_bounds__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-loc')))
+    _Seq_align_bounds._cont = __Seq_align_bounds__item_
+    _Seq_align_id = SEQ_OF(name=u'id', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __Seq_align_id__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-General', 'Object-id')))
+    _Seq_align_id._cont = __Seq_align_id__item_
+    _Seq_align_ext = SEQ_OF(name=u'ext', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __Seq_align_ext__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-General', 'User-object')))
+    _Seq_align_ext._cont = __Seq_align_ext__item_
+    Seq_align._cont = ASN1Dict([
+        (u'type', _Seq_align_type),
+        (u'dim', _Seq_align_dim),
+        (u'score', _Seq_align_score),
+        (u'segs', _Seq_align_segs),
+        (u'bounds', _Seq_align_bounds),
+        (u'id', _Seq_align_id),
+        (u'ext', _Seq_align_ext),
+        ])
+    Seq_align._ext = None
+    
+    #-----< Dense-diag >-----#
+    Dense_diag = SEQ(name=u'Dense-diag', mode=MODE_TYPE)
+    _Dense_diag_dim = INT(name=u'dim', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=2)
+    _Dense_diag_ids = SEQ_OF(name=u'ids', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Dense_diag_ids__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-id')))
+    _Dense_diag_ids._cont = __Dense_diag_ids__item_
+    _Dense_diag_starts = SEQ_OF(name=u'starts', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Dense_diag_starts__item_ = INT(name='_item_', mode=MODE_TYPE)
+    _Dense_diag_starts._cont = __Dense_diag_starts__item_
+    _Dense_diag_len = INT(name=u'len', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Dense_diag_strands = SEQ_OF(name=u'strands', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __Dense_diag_strands__item_ = ENUM(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqloc', 'Na-strand')))
+    _Dense_diag_strands._cont = __Dense_diag_strands__item_
+    _Dense_diag_scores = SET_OF(name=u'scores', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __Dense_diag_scores__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Score')))
+    _Dense_diag_scores._cont = __Dense_diag_scores__item_
+    Dense_diag._cont = ASN1Dict([
+        (u'dim', _Dense_diag_dim),
+        (u'ids', _Dense_diag_ids),
+        (u'starts', _Dense_diag_starts),
+        (u'len', _Dense_diag_len),
+        (u'strands', _Dense_diag_strands),
+        (u'scores', _Dense_diag_scores),
+        ])
+    Dense_diag._ext = None
+    
+    #-----< Dense-seg >-----#
+    Dense_seg = SEQ(name=u'Dense-seg', mode=MODE_TYPE)
+    _Dense_seg_dim = INT(name=u'dim', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=2)
+    _Dense_seg_numseg = INT(name=u'numseg', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Dense_seg_ids = SEQ_OF(name=u'ids', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Dense_seg_ids__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-id')))
+    _Dense_seg_ids._cont = __Dense_seg_ids__item_
+    _Dense_seg_starts = SEQ_OF(name=u'starts', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Dense_seg_starts__item_ = INT(name='_item_', mode=MODE_TYPE)
+    _Dense_seg_starts._cont = __Dense_seg_starts__item_
+    _Dense_seg_lens = SEQ_OF(name=u'lens', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Dense_seg_lens__item_ = INT(name='_item_', mode=MODE_TYPE)
+    _Dense_seg_lens._cont = __Dense_seg_lens__item_
+    _Dense_seg_strands = SEQ_OF(name=u'strands', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __Dense_seg_strands__item_ = ENUM(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqloc', 'Na-strand')))
+    _Dense_seg_strands._cont = __Dense_seg_strands__item_
+    _Dense_seg_scores = SEQ_OF(name=u'scores', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __Dense_seg_scores__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Score')))
+    _Dense_seg_scores._cont = __Dense_seg_scores__item_
+    Dense_seg._cont = ASN1Dict([
+        (u'dim', _Dense_seg_dim),
+        (u'numseg', _Dense_seg_numseg),
+        (u'ids', _Dense_seg_ids),
+        (u'starts', _Dense_seg_starts),
+        (u'lens', _Dense_seg_lens),
+        (u'strands', _Dense_seg_strands),
+        (u'scores', _Dense_seg_scores),
+        ])
+    Dense_seg._ext = None
+    
+    #-----< Packed-seg >-----#
+    Packed_seg = SEQ(name=u'Packed-seg', mode=MODE_TYPE)
+    _Packed_seg_dim = INT(name=u'dim', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=2)
+    _Packed_seg_numseg = INT(name=u'numseg', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Packed_seg_ids = SEQ_OF(name=u'ids', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Packed_seg_ids__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-id')))
+    _Packed_seg_ids._cont = __Packed_seg_ids__item_
+    _Packed_seg_starts = SEQ_OF(name=u'starts', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Packed_seg_starts__item_ = INT(name='_item_', mode=MODE_TYPE)
+    _Packed_seg_starts._cont = __Packed_seg_starts__item_
+    _Packed_seg_present = OCT_STR(name=u'present', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Packed_seg_lens = SEQ_OF(name=u'lens', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Packed_seg_lens__item_ = INT(name='_item_', mode=MODE_TYPE)
+    _Packed_seg_lens._cont = __Packed_seg_lens__item_
+    _Packed_seg_strands = SEQ_OF(name=u'strands', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __Packed_seg_strands__item_ = ENUM(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqloc', 'Na-strand')))
+    _Packed_seg_strands._cont = __Packed_seg_strands__item_
+    _Packed_seg_scores = SEQ_OF(name=u'scores', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __Packed_seg_scores__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Score')))
+    _Packed_seg_scores._cont = __Packed_seg_scores__item_
+    Packed_seg._cont = ASN1Dict([
+        (u'dim', _Packed_seg_dim),
+        (u'numseg', _Packed_seg_numseg),
+        (u'ids', _Packed_seg_ids),
+        (u'starts', _Packed_seg_starts),
+        (u'present', _Packed_seg_present),
+        (u'lens', _Packed_seg_lens),
+        (u'strands', _Packed_seg_strands),
+        (u'scores', _Packed_seg_scores),
+        ])
+    Packed_seg._ext = None
+    
+    #-----< Std-seg >-----#
+    Std_seg = SEQ(name=u'Std-seg', mode=MODE_TYPE)
+    _Std_seg_dim = INT(name=u'dim', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=2)
+    _Std_seg_ids = SEQ_OF(name=u'ids', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __Std_seg_ids__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-id')))
+    _Std_seg_ids._cont = __Std_seg_ids__item_
+    _Std_seg_loc = SEQ_OF(name=u'loc', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Std_seg_loc__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-loc')))
+    _Std_seg_loc._cont = __Std_seg_loc__item_
+    _Std_seg_scores = SET_OF(name=u'scores', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __Std_seg_scores__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Score')))
+    _Std_seg_scores._cont = __Std_seg_scores__item_
+    Std_seg._cont = ASN1Dict([
+        (u'dim', _Std_seg_dim),
+        (u'ids', _Std_seg_ids),
+        (u'loc', _Std_seg_loc),
+        (u'scores', _Std_seg_scores),
+        ])
+    Std_seg._ext = None
+    
+    #-----< Spliced-seg >-----#
+    Spliced_seg = SEQ(name=u'Spliced-seg', mode=MODE_TYPE)
+    _Spliced_seg_product_id = CHOICE(name=u'product-id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-id')), opt=True)
+    _Spliced_seg_genomic_id = CHOICE(name=u'genomic-id', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-id')), opt=True)
+    _Spliced_seg_product_strand = ENUM(name=u'product-strand', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqloc', 'Na-strand')), opt=True)
+    _Spliced_seg_genomic_strand = ENUM(name=u'genomic-strand', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqloc', 'Na-strand')), opt=True)
+    _Spliced_seg_product_type = ENUM(name=u'product-type', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Spliced_seg_product_type._cont = ASN1Dict([(u'transcript', 0), (u'protein', 1)])
+    _Spliced_seg_product_type._ext = None
+    _Spliced_seg_exons = SEQ_OF(name=u'exons', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Spliced_seg_exons__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Spliced-exon')))
+    _Spliced_seg_exons._cont = __Spliced_seg_exons__item_
+    _Spliced_seg_poly_a = INT(name=u'poly-a', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Spliced_seg_product_length = INT(name=u'product-length', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Spliced_seg_modifiers = SET_OF(name=u'modifiers', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __Spliced_seg_modifiers__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Spliced-seg-modifier')))
+    _Spliced_seg_modifiers._cont = __Spliced_seg_modifiers__item_
+    Spliced_seg._cont = ASN1Dict([
+        (u'product-id', _Spliced_seg_product_id),
+        (u'genomic-id', _Spliced_seg_genomic_id),
+        (u'product-strand', _Spliced_seg_product_strand),
+        (u'genomic-strand', _Spliced_seg_genomic_strand),
+        (u'product-type', _Spliced_seg_product_type),
+        (u'exons', _Spliced_seg_exons),
+        (u'poly-a', _Spliced_seg_poly_a),
+        (u'product-length', _Spliced_seg_product_length),
+        (u'modifiers', _Spliced_seg_modifiers),
+        ])
+    Spliced_seg._ext = None
+    
+    #-----< Spliced-seg-modifier >-----#
+    Spliced_seg_modifier = CHOICE(name=u'Spliced-seg-modifier', mode=MODE_TYPE)
+    _Spliced_seg_modifier_start_codon_found = BOOL(name=u'start-codon-found', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Spliced_seg_modifier_stop_codon_found = BOOL(name=u'stop-codon-found', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    Spliced_seg_modifier._cont = ASN1Dict([
+        (u'start-codon-found', _Spliced_seg_modifier_start_codon_found),
+        (u'stop-codon-found', _Spliced_seg_modifier_stop_codon_found),
+        ])
+    Spliced_seg_modifier._ext = None
+    
+    #-----< Spliced-exon >-----#
+    Spliced_exon = SEQ(name=u'Spliced-exon', mode=MODE_TYPE)
+    _Spliced_exon_product_start = CHOICE(name=u'product-start', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NCBI-Seqalign', 'Product-pos')))
+    _Spliced_exon_product_end = CHOICE(name=u'product-end', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NCBI-Seqalign', 'Product-pos')))
+    _Spliced_exon_genomic_start = INT(name=u'genomic-start', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Spliced_exon_genomic_end = INT(name=u'genomic-end', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Spliced_exon_product_id = CHOICE(name=u'product-id', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-id')), opt=True)
+    _Spliced_exon_genomic_id = CHOICE(name=u'genomic-id', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-id')), opt=True)
+    _Spliced_exon_product_strand = ENUM(name=u'product-strand', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqloc', 'Na-strand')), opt=True)
+    _Spliced_exon_genomic_strand = ENUM(name=u'genomic-strand', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqloc', 'Na-strand')), opt=True)
+    _Spliced_exon_parts = SEQ_OF(name=u'parts', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __Spliced_exon_parts__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Spliced-exon-chunk')))
+    _Spliced_exon_parts._cont = __Spliced_exon_parts__item_
+    _Spliced_exon_scores = SET_OF(name=u'scores', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqalign', 'Score-set')), opt=True)
+    _Spliced_exon_acceptor_before_exon = SEQ(name=u'acceptor-before-exon', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqalign', 'Splice-site')), opt=True)
+    _Spliced_exon_donor_after_exon = SEQ(name=u'donor-after-exon', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqalign', 'Splice-site')), opt=True)
+    _Spliced_exon_partial = BOOL(name=u'partial', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Spliced_exon_ext = SEQ_OF(name=u'ext', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __Spliced_exon_ext__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-General', 'User-object')))
+    _Spliced_exon_ext._cont = __Spliced_exon_ext__item_
+    Spliced_exon._cont = ASN1Dict([
+        (u'product-start', _Spliced_exon_product_start),
+        (u'product-end', _Spliced_exon_product_end),
+        (u'genomic-start', _Spliced_exon_genomic_start),
+        (u'genomic-end', _Spliced_exon_genomic_end),
+        (u'product-id', _Spliced_exon_product_id),
+        (u'genomic-id', _Spliced_exon_genomic_id),
+        (u'product-strand', _Spliced_exon_product_strand),
+        (u'genomic-strand', _Spliced_exon_genomic_strand),
+        (u'parts', _Spliced_exon_parts),
+        (u'scores', _Spliced_exon_scores),
+        (u'acceptor-before-exon', _Spliced_exon_acceptor_before_exon),
+        (u'donor-after-exon', _Spliced_exon_donor_after_exon),
+        (u'partial', _Spliced_exon_partial),
+        (u'ext', _Spliced_exon_ext),
+        ])
+    Spliced_exon._ext = None
+    
+    #-----< Product-pos >-----#
+    Product_pos = CHOICE(name=u'Product-pos', mode=MODE_TYPE)
+    _Product_pos_nucpos = INT(name=u'nucpos', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Product_pos_protpos = SEQ(name=u'protpos', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqalign', 'Prot-pos')))
+    Product_pos._cont = ASN1Dict([
+        (u'nucpos', _Product_pos_nucpos),
+        (u'protpos', _Product_pos_protpos),
+        ])
+    Product_pos._ext = None
+    
+    #-----< Prot-pos >-----#
+    Prot_pos = SEQ(name=u'Prot-pos', mode=MODE_TYPE)
+    _Prot_pos_amin = INT(name=u'amin', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Prot_pos_frame = INT(name=u'frame', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=0)
+    Prot_pos._cont = ASN1Dict([
+        (u'amin', _Prot_pos_amin),
+        (u'frame', _Prot_pos_frame),
+        ])
+    Prot_pos._ext = None
+    
+    #-----< Spliced-exon-chunk >-----#
+    Spliced_exon_chunk = CHOICE(name=u'Spliced-exon-chunk', mode=MODE_TYPE)
+    _Spliced_exon_chunk_match = INT(name=u'match', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Spliced_exon_chunk_mismatch = INT(name=u'mismatch', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Spliced_exon_chunk_diag = INT(name=u'diag', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Spliced_exon_chunk_product_ins = INT(name=u'product-ins', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Spliced_exon_chunk_genomic_ins = INT(name=u'genomic-ins', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    Spliced_exon_chunk._cont = ASN1Dict([
+        (u'match', _Spliced_exon_chunk_match),
+        (u'mismatch', _Spliced_exon_chunk_mismatch),
+        (u'diag', _Spliced_exon_chunk_diag),
+        (u'product-ins', _Spliced_exon_chunk_product_ins),
+        (u'genomic-ins', _Spliced_exon_chunk_genomic_ins),
+        ])
+    Spliced_exon_chunk._ext = None
+    
+    #-----< Splice-site >-----#
+    Splice_site = SEQ(name=u'Splice-site', mode=MODE_TYPE)
+    _Splice_site_bases = STR_VIS(name=u'bases', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    Splice_site._cont = ASN1Dict([
+        (u'bases', _Splice_site_bases),
+        ])
+    Splice_site._ext = None
+    
+    #-----< Sparse-seg >-----#
+    Sparse_seg = SEQ(name=u'Sparse-seg', mode=MODE_TYPE)
+    _Sparse_seg_master_id = CHOICE(name=u'master-id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-id')), opt=True)
+    _Sparse_seg_rows = SET_OF(name=u'rows', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Sparse_seg_rows__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Sparse-align')))
+    _Sparse_seg_rows._cont = __Sparse_seg_rows__item_
+    _Sparse_seg_row_scores = SET_OF(name=u'row-scores', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __Sparse_seg_row_scores__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Score')))
+    _Sparse_seg_row_scores._cont = __Sparse_seg_row_scores__item_
+    _Sparse_seg_ext = SET_OF(name=u'ext', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __Sparse_seg_ext__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Sparse-seg-ext')))
+    _Sparse_seg_ext._cont = __Sparse_seg_ext__item_
+    Sparse_seg._cont = ASN1Dict([
+        (u'master-id', _Sparse_seg_master_id),
+        (u'rows', _Sparse_seg_rows),
+        (u'row-scores', _Sparse_seg_row_scores),
+        (u'ext', _Sparse_seg_ext),
+        ])
+    Sparse_seg._ext = None
+    
+    #-----< Sparse-align >-----#
+    Sparse_align = SEQ(name=u'Sparse-align', mode=MODE_TYPE)
+    _Sparse_align_first_id = CHOICE(name=u'first-id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-id')))
+    _Sparse_align_second_id = CHOICE(name=u'second-id', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-id')))
+    _Sparse_align_numseg = INT(name=u'numseg', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Sparse_align_first_starts = SEQ_OF(name=u'first-starts', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Sparse_align_first_starts__item_ = INT(name='_item_', mode=MODE_TYPE)
+    _Sparse_align_first_starts._cont = __Sparse_align_first_starts__item_
+    _Sparse_align_second_starts = SEQ_OF(name=u'second-starts', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Sparse_align_second_starts__item_ = INT(name='_item_', mode=MODE_TYPE)
+    _Sparse_align_second_starts._cont = __Sparse_align_second_starts__item_
+    _Sparse_align_lens = SEQ_OF(name=u'lens', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Sparse_align_lens__item_ = INT(name='_item_', mode=MODE_TYPE)
+    _Sparse_align_lens._cont = __Sparse_align_lens__item_
+    _Sparse_align_second_strands = SEQ_OF(name=u'second-strands', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __Sparse_align_second_strands__item_ = ENUM(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqloc', 'Na-strand')))
+    _Sparse_align_second_strands._cont = __Sparse_align_second_strands__item_
+    _Sparse_align_seg_scores = SET_OF(name=u'seg-scores', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __Sparse_align_seg_scores__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Score')))
+    _Sparse_align_seg_scores._cont = __Sparse_align_seg_scores__item_
+    Sparse_align._cont = ASN1Dict([
+        (u'first-id', _Sparse_align_first_id),
+        (u'second-id', _Sparse_align_second_id),
+        (u'numseg', _Sparse_align_numseg),
+        (u'first-starts', _Sparse_align_first_starts),
+        (u'second-starts', _Sparse_align_second_starts),
+        (u'lens', _Sparse_align_lens),
+        (u'second-strands', _Sparse_align_second_strands),
+        (u'seg-scores', _Sparse_align_seg_scores),
+        ])
+    Sparse_align._ext = None
+    
+    #-----< Sparse-seg-ext >-----#
+    Sparse_seg_ext = SEQ(name=u'Sparse-seg-ext', mode=MODE_TYPE)
+    _Sparse_seg_ext_index = INT(name=u'index', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    Sparse_seg_ext._cont = ASN1Dict([
+        (u'index', _Sparse_seg_ext_index),
+        ])
+    Sparse_seg_ext._ext = None
+    
+    #-----< Score >-----#
+    Score = SEQ(name=u'Score', mode=MODE_TYPE)
+    _Score_id = CHOICE(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NCBI-General', 'Object-id')), opt=True)
+    _Score_value = CHOICE(name=u'value', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __Score_value_real = REAL(name=u'real', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('_IMPL_', 'REAL')))
+    __Score_value_int = INT(name=u'int', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Score_value._cont = ASN1Dict([
+        (u'real', __Score_value_real),
+        (u'int', __Score_value_int),
+        ])
+    _Score_value._ext = None
+    Score._cont = ASN1Dict([
+        (u'id', _Score_id),
+        (u'value', _Score_value),
+        ])
+    Score._ext = None
+    
+    #-----< Score-set >-----#
+    Score_set = SET_OF(name=u'Score-set', mode=MODE_TYPE)
+    _Score_set__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Score')))
+    Score_set._cont = _Score_set__item_
+    
+    _all_ = [
+        _Seq_align_set__item_,
+        Seq_align_set,
+        _Seq_align_type,
+        _Seq_align_dim,
+        __Seq_align_score__item_,
+        _Seq_align_score,
+        ___Seq_align_segs_dendiag__item_,
+        __Seq_align_segs_dendiag,
+        __Seq_align_segs_denseg,
+        ___Seq_align_segs_std__item_,
+        __Seq_align_segs_std,
+        __Seq_align_segs_packed,
+        __Seq_align_segs_disc,
+        __Seq_align_segs_spliced,
+        __Seq_align_segs_sparse,
+        _Seq_align_segs,
+        __Seq_align_bounds__item_,
+        _Seq_align_bounds,
+        __Seq_align_id__item_,
+        _Seq_align_id,
+        __Seq_align_ext__item_,
+        _Seq_align_ext,
+        Seq_align,
+        _Dense_diag_dim,
+        __Dense_diag_ids__item_,
+        _Dense_diag_ids,
+        __Dense_diag_starts__item_,
+        _Dense_diag_starts,
+        _Dense_diag_len,
+        __Dense_diag_strands__item_,
+        _Dense_diag_strands,
+        __Dense_diag_scores__item_,
+        _Dense_diag_scores,
+        Dense_diag,
+        _Dense_seg_dim,
+        _Dense_seg_numseg,
+        __Dense_seg_ids__item_,
+        _Dense_seg_ids,
+        __Dense_seg_starts__item_,
+        _Dense_seg_starts,
+        __Dense_seg_lens__item_,
+        _Dense_seg_lens,
+        __Dense_seg_strands__item_,
+        _Dense_seg_strands,
+        __Dense_seg_scores__item_,
+        _Dense_seg_scores,
+        Dense_seg,
+        _Packed_seg_dim,
+        _Packed_seg_numseg,
+        __Packed_seg_ids__item_,
+        _Packed_seg_ids,
+        __Packed_seg_starts__item_,
+        _Packed_seg_starts,
+        _Packed_seg_present,
+        __Packed_seg_lens__item_,
+        _Packed_seg_lens,
+        __Packed_seg_strands__item_,
+        _Packed_seg_strands,
+        __Packed_seg_scores__item_,
+        _Packed_seg_scores,
+        Packed_seg,
+        _Std_seg_dim,
+        __Std_seg_ids__item_,
+        _Std_seg_ids,
+        __Std_seg_loc__item_,
+        _Std_seg_loc,
+        __Std_seg_scores__item_,
+        _Std_seg_scores,
+        Std_seg,
+        _Spliced_seg_product_id,
+        _Spliced_seg_genomic_id,
+        _Spliced_seg_product_strand,
+        _Spliced_seg_genomic_strand,
+        _Spliced_seg_product_type,
+        __Spliced_seg_exons__item_,
+        _Spliced_seg_exons,
+        _Spliced_seg_poly_a,
+        _Spliced_seg_product_length,
+        __Spliced_seg_modifiers__item_,
+        _Spliced_seg_modifiers,
+        Spliced_seg,
+        _Spliced_seg_modifier_start_codon_found,
+        _Spliced_seg_modifier_stop_codon_found,
+        Spliced_seg_modifier,
+        _Spliced_exon_product_start,
+        _Spliced_exon_product_end,
+        _Spliced_exon_genomic_start,
+        _Spliced_exon_genomic_end,
+        _Spliced_exon_product_id,
+        _Spliced_exon_genomic_id,
+        _Spliced_exon_product_strand,
+        _Spliced_exon_genomic_strand,
+        __Spliced_exon_parts__item_,
+        _Spliced_exon_parts,
+        _Spliced_exon_scores,
+        _Spliced_exon_acceptor_before_exon,
+        _Spliced_exon_donor_after_exon,
+        _Spliced_exon_partial,
+        __Spliced_exon_ext__item_,
+        _Spliced_exon_ext,
+        Spliced_exon,
+        _Product_pos_nucpos,
+        _Product_pos_protpos,
+        Product_pos,
+        _Prot_pos_amin,
+        _Prot_pos_frame,
+        Prot_pos,
+        _Spliced_exon_chunk_match,
+        _Spliced_exon_chunk_mismatch,
+        _Spliced_exon_chunk_diag,
+        _Spliced_exon_chunk_product_ins,
+        _Spliced_exon_chunk_genomic_ins,
+        Spliced_exon_chunk,
+        _Splice_site_bases,
+        Splice_site,
+        _Sparse_seg_master_id,
+        __Sparse_seg_rows__item_,
+        _Sparse_seg_rows,
+        __Sparse_seg_row_scores__item_,
+        _Sparse_seg_row_scores,
+        __Sparse_seg_ext__item_,
+        _Sparse_seg_ext,
+        Sparse_seg,
+        _Sparse_align_first_id,
+        _Sparse_align_second_id,
+        _Sparse_align_numseg,
+        __Sparse_align_first_starts__item_,
+        _Sparse_align_first_starts,
+        __Sparse_align_second_starts__item_,
+        _Sparse_align_second_starts,
+        __Sparse_align_lens__item_,
+        _Sparse_align_lens,
+        __Sparse_align_second_strands__item_,
+        _Sparse_align_second_strands,
+        __Sparse_align_seg_scores__item_,
+        _Sparse_align_seg_scores,
+        Sparse_align,
+        _Sparse_seg_ext_index,
+        Sparse_seg_ext,
+        _Score_id,
+        __Score_value_real,
+        __Score_value_int,
+        _Score_value,
+        Score,
+        _Score_set__item_,
+        Score_set,
+    ]
+
 class NCBI_Sequence:
 
     _name_  = u'NCBI-Sequence'
@@ -16660,577 +17231,6 @@ class NCBI_Sequence:
         __Seq_annot_data_seq_table,
         _Seq_annot_data,
         Seq_annot,
-    ]
-
-class NCBI_Seqalign:
-
-    _name_  = u'NCBI-Seqalign'
-    _oid_   = []
-    
-    _obj_ = [
-        u'Seq-align-set',
-        u'Seq-align',
-        u'Dense-diag',
-        u'Dense-seg',
-        u'Packed-seg',
-        u'Std-seg',
-        u'Spliced-seg',
-        u'Spliced-seg-modifier',
-        u'Spliced-exon',
-        u'Product-pos',
-        u'Prot-pos',
-        u'Spliced-exon-chunk',
-        u'Splice-site',
-        u'Sparse-seg',
-        u'Sparse-align',
-        u'Sparse-seg-ext',
-        u'Score',
-        u'Score-set',
-        ]
-    _type_ = [
-        u'Seq-align-set',
-        u'Seq-align',
-        u'Dense-diag',
-        u'Dense-seg',
-        u'Packed-seg',
-        u'Std-seg',
-        u'Spliced-seg',
-        u'Spliced-seg-modifier',
-        u'Spliced-exon',
-        u'Product-pos',
-        u'Prot-pos',
-        u'Spliced-exon-chunk',
-        u'Splice-site',
-        u'Sparse-seg',
-        u'Sparse-align',
-        u'Sparse-seg-ext',
-        u'Score',
-        u'Score-set',
-        ]
-    _set_ = [
-        ]
-    _val_ = [
-        ]
-    _class_ = [
-        ]
-    _param_ = [
-        ]
-    
-    #-----< Seq-align-set >-----#
-    Seq_align_set = SET_OF(name=u'Seq-align-set', mode=MODE_TYPE)
-    _Seq_align_set__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Seq-align')))
-    Seq_align_set._cont = _Seq_align_set__item_
-    
-    #-----< Seq-align >-----#
-    Seq_align = SEQ(name=u'Seq-align', mode=MODE_TYPE)
-    _Seq_align_type = ENUM(name=u'type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Seq_align_type._cont = ASN1Dict([(u'not-set', 0), (u'global', 1), (u'diags', 2), (u'partial', 3), (u'disc', 4), (u'other', 255)])
-    _Seq_align_type._ext = None
-    _Seq_align_dim = INT(name=u'dim', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Seq_align_score = SET_OF(name=u'score', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __Seq_align_score__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Score')))
-    _Seq_align_score._cont = __Seq_align_score__item_
-    _Seq_align_segs = CHOICE(name=u'segs', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __Seq_align_segs_dendiag = SEQ_OF(name=u'dendiag', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___Seq_align_segs_dendiag__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Dense-diag')))
-    __Seq_align_segs_dendiag._cont = ___Seq_align_segs_dendiag__item_
-    __Seq_align_segs_denseg = SEQ(name=u'denseg', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqalign', 'Dense-seg')))
-    __Seq_align_segs_std = SEQ_OF(name=u'std', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___Seq_align_segs_std__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Std-seg')))
-    __Seq_align_segs_std._cont = ___Seq_align_segs_std__item_
-    __Seq_align_segs_packed = SEQ(name=u'packed', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqalign', 'Packed-seg')))
-    __Seq_align_segs_disc = SET_OF(name=u'disc', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqalign', 'Seq-align-set')))
-    __Seq_align_segs_spliced = SEQ(name=u'spliced', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqalign', 'Spliced-seg')))
-    __Seq_align_segs_sparse = SEQ(name=u'sparse', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqalign', 'Sparse-seg')))
-    _Seq_align_segs._cont = ASN1Dict([
-        (u'dendiag', __Seq_align_segs_dendiag),
-        (u'denseg', __Seq_align_segs_denseg),
-        (u'std', __Seq_align_segs_std),
-        (u'packed', __Seq_align_segs_packed),
-        (u'disc', __Seq_align_segs_disc),
-        (u'spliced', __Seq_align_segs_spliced),
-        (u'sparse', __Seq_align_segs_sparse),
-        ])
-    _Seq_align_segs._ext = None
-    _Seq_align_bounds = SET_OF(name=u'bounds', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __Seq_align_bounds__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-loc')))
-    _Seq_align_bounds._cont = __Seq_align_bounds__item_
-    _Seq_align_id = SEQ_OF(name=u'id', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __Seq_align_id__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-General', 'Object-id')))
-    _Seq_align_id._cont = __Seq_align_id__item_
-    _Seq_align_ext = SEQ_OF(name=u'ext', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __Seq_align_ext__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-General', 'User-object')))
-    _Seq_align_ext._cont = __Seq_align_ext__item_
-    Seq_align._cont = ASN1Dict([
-        (u'type', _Seq_align_type),
-        (u'dim', _Seq_align_dim),
-        (u'score', _Seq_align_score),
-        (u'segs', _Seq_align_segs),
-        (u'bounds', _Seq_align_bounds),
-        (u'id', _Seq_align_id),
-        (u'ext', _Seq_align_ext),
-        ])
-    Seq_align._ext = None
-    
-    #-----< Dense-diag >-----#
-    Dense_diag = SEQ(name=u'Dense-diag', mode=MODE_TYPE)
-    _Dense_diag_dim = INT(name=u'dim', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=2)
-    _Dense_diag_ids = SEQ_OF(name=u'ids', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Dense_diag_ids__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-id')))
-    _Dense_diag_ids._cont = __Dense_diag_ids__item_
-    _Dense_diag_starts = SEQ_OF(name=u'starts', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Dense_diag_starts__item_ = INT(name='_item_', mode=MODE_TYPE)
-    _Dense_diag_starts._cont = __Dense_diag_starts__item_
-    _Dense_diag_len = INT(name=u'len', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Dense_diag_strands = SEQ_OF(name=u'strands', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __Dense_diag_strands__item_ = ENUM(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqloc', 'Na-strand')))
-    _Dense_diag_strands._cont = __Dense_diag_strands__item_
-    _Dense_diag_scores = SET_OF(name=u'scores', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __Dense_diag_scores__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Score')))
-    _Dense_diag_scores._cont = __Dense_diag_scores__item_
-    Dense_diag._cont = ASN1Dict([
-        (u'dim', _Dense_diag_dim),
-        (u'ids', _Dense_diag_ids),
-        (u'starts', _Dense_diag_starts),
-        (u'len', _Dense_diag_len),
-        (u'strands', _Dense_diag_strands),
-        (u'scores', _Dense_diag_scores),
-        ])
-    Dense_diag._ext = None
-    
-    #-----< Dense-seg >-----#
-    Dense_seg = SEQ(name=u'Dense-seg', mode=MODE_TYPE)
-    _Dense_seg_dim = INT(name=u'dim', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=2)
-    _Dense_seg_numseg = INT(name=u'numseg', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Dense_seg_ids = SEQ_OF(name=u'ids', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Dense_seg_ids__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-id')))
-    _Dense_seg_ids._cont = __Dense_seg_ids__item_
-    _Dense_seg_starts = SEQ_OF(name=u'starts', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Dense_seg_starts__item_ = INT(name='_item_', mode=MODE_TYPE)
-    _Dense_seg_starts._cont = __Dense_seg_starts__item_
-    _Dense_seg_lens = SEQ_OF(name=u'lens', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Dense_seg_lens__item_ = INT(name='_item_', mode=MODE_TYPE)
-    _Dense_seg_lens._cont = __Dense_seg_lens__item_
-    _Dense_seg_strands = SEQ_OF(name=u'strands', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __Dense_seg_strands__item_ = ENUM(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqloc', 'Na-strand')))
-    _Dense_seg_strands._cont = __Dense_seg_strands__item_
-    _Dense_seg_scores = SEQ_OF(name=u'scores', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __Dense_seg_scores__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Score')))
-    _Dense_seg_scores._cont = __Dense_seg_scores__item_
-    Dense_seg._cont = ASN1Dict([
-        (u'dim', _Dense_seg_dim),
-        (u'numseg', _Dense_seg_numseg),
-        (u'ids', _Dense_seg_ids),
-        (u'starts', _Dense_seg_starts),
-        (u'lens', _Dense_seg_lens),
-        (u'strands', _Dense_seg_strands),
-        (u'scores', _Dense_seg_scores),
-        ])
-    Dense_seg._ext = None
-    
-    #-----< Packed-seg >-----#
-    Packed_seg = SEQ(name=u'Packed-seg', mode=MODE_TYPE)
-    _Packed_seg_dim = INT(name=u'dim', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=2)
-    _Packed_seg_numseg = INT(name=u'numseg', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Packed_seg_ids = SEQ_OF(name=u'ids', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Packed_seg_ids__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-id')))
-    _Packed_seg_ids._cont = __Packed_seg_ids__item_
-    _Packed_seg_starts = SEQ_OF(name=u'starts', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Packed_seg_starts__item_ = INT(name='_item_', mode=MODE_TYPE)
-    _Packed_seg_starts._cont = __Packed_seg_starts__item_
-    _Packed_seg_present = OCT_STR(name=u'present', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Packed_seg_lens = SEQ_OF(name=u'lens', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Packed_seg_lens__item_ = INT(name='_item_', mode=MODE_TYPE)
-    _Packed_seg_lens._cont = __Packed_seg_lens__item_
-    _Packed_seg_strands = SEQ_OF(name=u'strands', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __Packed_seg_strands__item_ = ENUM(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqloc', 'Na-strand')))
-    _Packed_seg_strands._cont = __Packed_seg_strands__item_
-    _Packed_seg_scores = SEQ_OF(name=u'scores', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __Packed_seg_scores__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Score')))
-    _Packed_seg_scores._cont = __Packed_seg_scores__item_
-    Packed_seg._cont = ASN1Dict([
-        (u'dim', _Packed_seg_dim),
-        (u'numseg', _Packed_seg_numseg),
-        (u'ids', _Packed_seg_ids),
-        (u'starts', _Packed_seg_starts),
-        (u'present', _Packed_seg_present),
-        (u'lens', _Packed_seg_lens),
-        (u'strands', _Packed_seg_strands),
-        (u'scores', _Packed_seg_scores),
-        ])
-    Packed_seg._ext = None
-    
-    #-----< Std-seg >-----#
-    Std_seg = SEQ(name=u'Std-seg', mode=MODE_TYPE)
-    _Std_seg_dim = INT(name=u'dim', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=2)
-    _Std_seg_ids = SEQ_OF(name=u'ids', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __Std_seg_ids__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-id')))
-    _Std_seg_ids._cont = __Std_seg_ids__item_
-    _Std_seg_loc = SEQ_OF(name=u'loc', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Std_seg_loc__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-loc')))
-    _Std_seg_loc._cont = __Std_seg_loc__item_
-    _Std_seg_scores = SET_OF(name=u'scores', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __Std_seg_scores__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Score')))
-    _Std_seg_scores._cont = __Std_seg_scores__item_
-    Std_seg._cont = ASN1Dict([
-        (u'dim', _Std_seg_dim),
-        (u'ids', _Std_seg_ids),
-        (u'loc', _Std_seg_loc),
-        (u'scores', _Std_seg_scores),
-        ])
-    Std_seg._ext = None
-    
-    #-----< Spliced-seg >-----#
-    Spliced_seg = SEQ(name=u'Spliced-seg', mode=MODE_TYPE)
-    _Spliced_seg_product_id = CHOICE(name=u'product-id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-id')), opt=True)
-    _Spliced_seg_genomic_id = CHOICE(name=u'genomic-id', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-id')), opt=True)
-    _Spliced_seg_product_strand = ENUM(name=u'product-strand', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqloc', 'Na-strand')), opt=True)
-    _Spliced_seg_genomic_strand = ENUM(name=u'genomic-strand', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqloc', 'Na-strand')), opt=True)
-    _Spliced_seg_product_type = ENUM(name=u'product-type', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Spliced_seg_product_type._cont = ASN1Dict([(u'transcript', 0), (u'protein', 1)])
-    _Spliced_seg_product_type._ext = None
-    _Spliced_seg_exons = SEQ_OF(name=u'exons', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Spliced_seg_exons__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Spliced-exon')))
-    _Spliced_seg_exons._cont = __Spliced_seg_exons__item_
-    _Spliced_seg_poly_a = INT(name=u'poly-a', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Spliced_seg_product_length = INT(name=u'product-length', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Spliced_seg_modifiers = SET_OF(name=u'modifiers', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __Spliced_seg_modifiers__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Spliced-seg-modifier')))
-    _Spliced_seg_modifiers._cont = __Spliced_seg_modifiers__item_
-    Spliced_seg._cont = ASN1Dict([
-        (u'product-id', _Spliced_seg_product_id),
-        (u'genomic-id', _Spliced_seg_genomic_id),
-        (u'product-strand', _Spliced_seg_product_strand),
-        (u'genomic-strand', _Spliced_seg_genomic_strand),
-        (u'product-type', _Spliced_seg_product_type),
-        (u'exons', _Spliced_seg_exons),
-        (u'poly-a', _Spliced_seg_poly_a),
-        (u'product-length', _Spliced_seg_product_length),
-        (u'modifiers', _Spliced_seg_modifiers),
-        ])
-    Spliced_seg._ext = None
-    
-    #-----< Spliced-seg-modifier >-----#
-    Spliced_seg_modifier = CHOICE(name=u'Spliced-seg-modifier', mode=MODE_TYPE)
-    _Spliced_seg_modifier_start_codon_found = BOOL(name=u'start-codon-found', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Spliced_seg_modifier_stop_codon_found = BOOL(name=u'stop-codon-found', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    Spliced_seg_modifier._cont = ASN1Dict([
-        (u'start-codon-found', _Spliced_seg_modifier_start_codon_found),
-        (u'stop-codon-found', _Spliced_seg_modifier_stop_codon_found),
-        ])
-    Spliced_seg_modifier._ext = None
-    
-    #-----< Spliced-exon >-----#
-    Spliced_exon = SEQ(name=u'Spliced-exon', mode=MODE_TYPE)
-    _Spliced_exon_product_start = CHOICE(name=u'product-start', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NCBI-Seqalign', 'Product-pos')))
-    _Spliced_exon_product_end = CHOICE(name=u'product-end', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NCBI-Seqalign', 'Product-pos')))
-    _Spliced_exon_genomic_start = INT(name=u'genomic-start', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Spliced_exon_genomic_end = INT(name=u'genomic-end', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Spliced_exon_product_id = CHOICE(name=u'product-id', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-id')), opt=True)
-    _Spliced_exon_genomic_id = CHOICE(name=u'genomic-id', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-id')), opt=True)
-    _Spliced_exon_product_strand = ENUM(name=u'product-strand', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqloc', 'Na-strand')), opt=True)
-    _Spliced_exon_genomic_strand = ENUM(name=u'genomic-strand', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqloc', 'Na-strand')), opt=True)
-    _Spliced_exon_parts = SEQ_OF(name=u'parts', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __Spliced_exon_parts__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Spliced-exon-chunk')))
-    _Spliced_exon_parts._cont = __Spliced_exon_parts__item_
-    _Spliced_exon_scores = SET_OF(name=u'scores', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqalign', 'Score-set')), opt=True)
-    _Spliced_exon_acceptor_before_exon = SEQ(name=u'acceptor-before-exon', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqalign', 'Splice-site')), opt=True)
-    _Spliced_exon_donor_after_exon = SEQ(name=u'donor-after-exon', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqalign', 'Splice-site')), opt=True)
-    _Spliced_exon_partial = BOOL(name=u'partial', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Spliced_exon_ext = SEQ_OF(name=u'ext', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __Spliced_exon_ext__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-General', 'User-object')))
-    _Spliced_exon_ext._cont = __Spliced_exon_ext__item_
-    Spliced_exon._cont = ASN1Dict([
-        (u'product-start', _Spliced_exon_product_start),
-        (u'product-end', _Spliced_exon_product_end),
-        (u'genomic-start', _Spliced_exon_genomic_start),
-        (u'genomic-end', _Spliced_exon_genomic_end),
-        (u'product-id', _Spliced_exon_product_id),
-        (u'genomic-id', _Spliced_exon_genomic_id),
-        (u'product-strand', _Spliced_exon_product_strand),
-        (u'genomic-strand', _Spliced_exon_genomic_strand),
-        (u'parts', _Spliced_exon_parts),
-        (u'scores', _Spliced_exon_scores),
-        (u'acceptor-before-exon', _Spliced_exon_acceptor_before_exon),
-        (u'donor-after-exon', _Spliced_exon_donor_after_exon),
-        (u'partial', _Spliced_exon_partial),
-        (u'ext', _Spliced_exon_ext),
-        ])
-    Spliced_exon._ext = None
-    
-    #-----< Product-pos >-----#
-    Product_pos = CHOICE(name=u'Product-pos', mode=MODE_TYPE)
-    _Product_pos_nucpos = INT(name=u'nucpos', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Product_pos_protpos = SEQ(name=u'protpos', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NCBI-Seqalign', 'Prot-pos')))
-    Product_pos._cont = ASN1Dict([
-        (u'nucpos', _Product_pos_nucpos),
-        (u'protpos', _Product_pos_protpos),
-        ])
-    Product_pos._ext = None
-    
-    #-----< Prot-pos >-----#
-    Prot_pos = SEQ(name=u'Prot-pos', mode=MODE_TYPE)
-    _Prot_pos_amin = INT(name=u'amin', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Prot_pos_frame = INT(name=u'frame', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=0)
-    Prot_pos._cont = ASN1Dict([
-        (u'amin', _Prot_pos_amin),
-        (u'frame', _Prot_pos_frame),
-        ])
-    Prot_pos._ext = None
-    
-    #-----< Spliced-exon-chunk >-----#
-    Spliced_exon_chunk = CHOICE(name=u'Spliced-exon-chunk', mode=MODE_TYPE)
-    _Spliced_exon_chunk_match = INT(name=u'match', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Spliced_exon_chunk_mismatch = INT(name=u'mismatch', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Spliced_exon_chunk_diag = INT(name=u'diag', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Spliced_exon_chunk_product_ins = INT(name=u'product-ins', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Spliced_exon_chunk_genomic_ins = INT(name=u'genomic-ins', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    Spliced_exon_chunk._cont = ASN1Dict([
-        (u'match', _Spliced_exon_chunk_match),
-        (u'mismatch', _Spliced_exon_chunk_mismatch),
-        (u'diag', _Spliced_exon_chunk_diag),
-        (u'product-ins', _Spliced_exon_chunk_product_ins),
-        (u'genomic-ins', _Spliced_exon_chunk_genomic_ins),
-        ])
-    Spliced_exon_chunk._ext = None
-    
-    #-----< Splice-site >-----#
-    Splice_site = SEQ(name=u'Splice-site', mode=MODE_TYPE)
-    _Splice_site_bases = STR_VIS(name=u'bases', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    Splice_site._cont = ASN1Dict([
-        (u'bases', _Splice_site_bases),
-        ])
-    Splice_site._ext = None
-    
-    #-----< Sparse-seg >-----#
-    Sparse_seg = SEQ(name=u'Sparse-seg', mode=MODE_TYPE)
-    _Sparse_seg_master_id = CHOICE(name=u'master-id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-id')), opt=True)
-    _Sparse_seg_rows = SET_OF(name=u'rows', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Sparse_seg_rows__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Sparse-align')))
-    _Sparse_seg_rows._cont = __Sparse_seg_rows__item_
-    _Sparse_seg_row_scores = SET_OF(name=u'row-scores', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __Sparse_seg_row_scores__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Score')))
-    _Sparse_seg_row_scores._cont = __Sparse_seg_row_scores__item_
-    _Sparse_seg_ext = SET_OF(name=u'ext', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __Sparse_seg_ext__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Sparse-seg-ext')))
-    _Sparse_seg_ext._cont = __Sparse_seg_ext__item_
-    Sparse_seg._cont = ASN1Dict([
-        (u'master-id', _Sparse_seg_master_id),
-        (u'rows', _Sparse_seg_rows),
-        (u'row-scores', _Sparse_seg_row_scores),
-        (u'ext', _Sparse_seg_ext),
-        ])
-    Sparse_seg._ext = None
-    
-    #-----< Sparse-align >-----#
-    Sparse_align = SEQ(name=u'Sparse-align', mode=MODE_TYPE)
-    _Sparse_align_first_id = CHOICE(name=u'first-id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-id')))
-    _Sparse_align_second_id = CHOICE(name=u'second-id', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NCBI-Seqloc', 'Seq-id')))
-    _Sparse_align_numseg = INT(name=u'numseg', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Sparse_align_first_starts = SEQ_OF(name=u'first-starts', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Sparse_align_first_starts__item_ = INT(name='_item_', mode=MODE_TYPE)
-    _Sparse_align_first_starts._cont = __Sparse_align_first_starts__item_
-    _Sparse_align_second_starts = SEQ_OF(name=u'second-starts', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Sparse_align_second_starts__item_ = INT(name='_item_', mode=MODE_TYPE)
-    _Sparse_align_second_starts._cont = __Sparse_align_second_starts__item_
-    _Sparse_align_lens = SEQ_OF(name=u'lens', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Sparse_align_lens__item_ = INT(name='_item_', mode=MODE_TYPE)
-    _Sparse_align_lens._cont = __Sparse_align_lens__item_
-    _Sparse_align_second_strands = SEQ_OF(name=u'second-strands', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __Sparse_align_second_strands__item_ = ENUM(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqloc', 'Na-strand')))
-    _Sparse_align_second_strands._cont = __Sparse_align_second_strands__item_
-    _Sparse_align_seg_scores = SET_OF(name=u'seg-scores', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __Sparse_align_seg_scores__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Score')))
-    _Sparse_align_seg_scores._cont = __Sparse_align_seg_scores__item_
-    Sparse_align._cont = ASN1Dict([
-        (u'first-id', _Sparse_align_first_id),
-        (u'second-id', _Sparse_align_second_id),
-        (u'numseg', _Sparse_align_numseg),
-        (u'first-starts', _Sparse_align_first_starts),
-        (u'second-starts', _Sparse_align_second_starts),
-        (u'lens', _Sparse_align_lens),
-        (u'second-strands', _Sparse_align_second_strands),
-        (u'seg-scores', _Sparse_align_seg_scores),
-        ])
-    Sparse_align._ext = None
-    
-    #-----< Sparse-seg-ext >-----#
-    Sparse_seg_ext = SEQ(name=u'Sparse-seg-ext', mode=MODE_TYPE)
-    _Sparse_seg_ext_index = INT(name=u'index', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    Sparse_seg_ext._cont = ASN1Dict([
-        (u'index', _Sparse_seg_ext_index),
-        ])
-    Sparse_seg_ext._ext = None
-    
-    #-----< Score >-----#
-    Score = SEQ(name=u'Score', mode=MODE_TYPE)
-    _Score_id = CHOICE(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NCBI-General', 'Object-id')), opt=True)
-    _Score_value = CHOICE(name=u'value', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __Score_value_real = REAL(name=u'real', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('_IMPL_', 'REAL')))
-    __Score_value_int = INT(name=u'int', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Score_value._cont = ASN1Dict([
-        (u'real', __Score_value_real),
-        (u'int', __Score_value_int),
-        ])
-    _Score_value._ext = None
-    Score._cont = ASN1Dict([
-        (u'id', _Score_id),
-        (u'value', _Score_value),
-        ])
-    Score._ext = None
-    
-    #-----< Score-set >-----#
-    Score_set = SET_OF(name=u'Score-set', mode=MODE_TYPE)
-    _Score_set__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NCBI-Seqalign', 'Score')))
-    Score_set._cont = _Score_set__item_
-    
-    _all_ = [
-        _Seq_align_set__item_,
-        Seq_align_set,
-        _Seq_align_type,
-        _Seq_align_dim,
-        __Seq_align_score__item_,
-        _Seq_align_score,
-        ___Seq_align_segs_dendiag__item_,
-        __Seq_align_segs_dendiag,
-        __Seq_align_segs_denseg,
-        ___Seq_align_segs_std__item_,
-        __Seq_align_segs_std,
-        __Seq_align_segs_packed,
-        __Seq_align_segs_disc,
-        __Seq_align_segs_spliced,
-        __Seq_align_segs_sparse,
-        _Seq_align_segs,
-        __Seq_align_bounds__item_,
-        _Seq_align_bounds,
-        __Seq_align_id__item_,
-        _Seq_align_id,
-        __Seq_align_ext__item_,
-        _Seq_align_ext,
-        Seq_align,
-        _Dense_diag_dim,
-        __Dense_diag_ids__item_,
-        _Dense_diag_ids,
-        __Dense_diag_starts__item_,
-        _Dense_diag_starts,
-        _Dense_diag_len,
-        __Dense_diag_strands__item_,
-        _Dense_diag_strands,
-        __Dense_diag_scores__item_,
-        _Dense_diag_scores,
-        Dense_diag,
-        _Dense_seg_dim,
-        _Dense_seg_numseg,
-        __Dense_seg_ids__item_,
-        _Dense_seg_ids,
-        __Dense_seg_starts__item_,
-        _Dense_seg_starts,
-        __Dense_seg_lens__item_,
-        _Dense_seg_lens,
-        __Dense_seg_strands__item_,
-        _Dense_seg_strands,
-        __Dense_seg_scores__item_,
-        _Dense_seg_scores,
-        Dense_seg,
-        _Packed_seg_dim,
-        _Packed_seg_numseg,
-        __Packed_seg_ids__item_,
-        _Packed_seg_ids,
-        __Packed_seg_starts__item_,
-        _Packed_seg_starts,
-        _Packed_seg_present,
-        __Packed_seg_lens__item_,
-        _Packed_seg_lens,
-        __Packed_seg_strands__item_,
-        _Packed_seg_strands,
-        __Packed_seg_scores__item_,
-        _Packed_seg_scores,
-        Packed_seg,
-        _Std_seg_dim,
-        __Std_seg_ids__item_,
-        _Std_seg_ids,
-        __Std_seg_loc__item_,
-        _Std_seg_loc,
-        __Std_seg_scores__item_,
-        _Std_seg_scores,
-        Std_seg,
-        _Spliced_seg_product_id,
-        _Spliced_seg_genomic_id,
-        _Spliced_seg_product_strand,
-        _Spliced_seg_genomic_strand,
-        _Spliced_seg_product_type,
-        __Spliced_seg_exons__item_,
-        _Spliced_seg_exons,
-        _Spliced_seg_poly_a,
-        _Spliced_seg_product_length,
-        __Spliced_seg_modifiers__item_,
-        _Spliced_seg_modifiers,
-        Spliced_seg,
-        _Spliced_seg_modifier_start_codon_found,
-        _Spliced_seg_modifier_stop_codon_found,
-        Spliced_seg_modifier,
-        _Spliced_exon_product_start,
-        _Spliced_exon_product_end,
-        _Spliced_exon_genomic_start,
-        _Spliced_exon_genomic_end,
-        _Spliced_exon_product_id,
-        _Spliced_exon_genomic_id,
-        _Spliced_exon_product_strand,
-        _Spliced_exon_genomic_strand,
-        __Spliced_exon_parts__item_,
-        _Spliced_exon_parts,
-        _Spliced_exon_scores,
-        _Spliced_exon_acceptor_before_exon,
-        _Spliced_exon_donor_after_exon,
-        _Spliced_exon_partial,
-        __Spliced_exon_ext__item_,
-        _Spliced_exon_ext,
-        Spliced_exon,
-        _Product_pos_nucpos,
-        _Product_pos_protpos,
-        Product_pos,
-        _Prot_pos_amin,
-        _Prot_pos_frame,
-        Prot_pos,
-        _Spliced_exon_chunk_match,
-        _Spliced_exon_chunk_mismatch,
-        _Spliced_exon_chunk_diag,
-        _Spliced_exon_chunk_product_ins,
-        _Spliced_exon_chunk_genomic_ins,
-        Spliced_exon_chunk,
-        _Splice_site_bases,
-        Splice_site,
-        _Sparse_seg_master_id,
-        __Sparse_seg_rows__item_,
-        _Sparse_seg_rows,
-        __Sparse_seg_row_scores__item_,
-        _Sparse_seg_row_scores,
-        __Sparse_seg_ext__item_,
-        _Sparse_seg_ext,
-        Sparse_seg,
-        _Sparse_align_first_id,
-        _Sparse_align_second_id,
-        _Sparse_align_numseg,
-        __Sparse_align_first_starts__item_,
-        _Sparse_align_first_starts,
-        __Sparse_align_second_starts__item_,
-        _Sparse_align_second_starts,
-        __Sparse_align_lens__item_,
-        _Sparse_align_lens,
-        __Sparse_align_second_strands__item_,
-        _Sparse_align_second_strands,
-        __Sparse_align_seg_scores__item_,
-        _Sparse_align_seg_scores,
-        Sparse_align,
-        _Sparse_seg_ext_index,
-        Sparse_seg_ext,
-        _Score_id,
-        __Score_value_real,
-        __Score_value_int,
-        _Score_value,
-        Score,
-        _Score_set__item_,
-        Score_set,
     ]
 
 class EMBL_General:
@@ -21389,4 +21389,4 @@ class _IMPL_:
         ABSTRACT_SYNTAX,
     ]
 
-init_modules(NCBI_Access, NCBI_Biblio, NCBI_BioTree, NCBI_Blast4, NCBI_BlastDL, NCBI_BlastOutput, NCBI_BlastOutput2, NCBI_Cdd, NCBI_Cn3d, Docsum_3_4, NCBI_Entrez2, NCBI_Entrezgene, NCBI_FeatDef, NCBI_GBSeq, NCBI_General, HomoloGene, NCBI_ID1Access, NCBI_ID2Access, INSD_INSDSeq, NCBI_Medlars, NCBI_Medline, NCBI_Mim, NCBI_MedArchive, MMDB, MMDB_Chemical_graph, MMDB_Structural_model, MMDB_Features, NCBI_Mime, NCBI_ObjPrt, OMSSA, NCBI_PCAssay, NCBI_PCSubstance, NCBI_Project, NCBI_Pub, NCBI_PubMed, NCBI_Remap, NCBI_ScoreMat, NCBI_Sequence, NCBI_Seqalign, EMBL_General, SP_General, PIR_General, GenBank_General, PRF_General, PDB_General, NCBI_SeqCode, NCBI_Seqfeat, NCBI_Variation, NCBI_Rsite, NCBI_RNA, NCBI_Gene, NCBI_Organism, NCBI_BioSource, NCBI_Protein, NCBI_TxInit, NCBI_Seqloc, NCBI_Seqres, NCBI_Seqset, NCBI_Seq_split, NCBI_SeqTable, NCBI_Submit, NCBI_TSeq, _IMPL_)
+init_modules(NCBI_Access, NCBI_Biblio, NCBI_BioTree, NCBI_Blast4, NCBI_BlastDL, NCBI_BlastOutput2, NCBI_BlastOutput, NCBI_Cdd, NCBI_Cn3d, Docsum_3_4, NCBI_Entrez2, NCBI_Entrezgene, NCBI_FeatDef, NCBI_GBSeq, NCBI_General, HomoloGene, NCBI_ID1Access, NCBI_ID2Access, INSD_INSDSeq, NCBI_Medlars, NCBI_Medline, NCBI_Mim, NCBI_MedArchive, MMDB, MMDB_Chemical_graph, MMDB_Structural_model, MMDB_Features, NCBI_Mime, NCBI_ObjPrt, OMSSA, NCBI_PCAssay, NCBI_PCSubstance, NCBI_Project, NCBI_Pub, NCBI_PubMed, NCBI_Remap, NCBI_ScoreMat, NCBI_Seqalign, NCBI_Sequence, EMBL_General, SP_General, PIR_General, GenBank_General, PRF_General, PDB_General, NCBI_SeqCode, NCBI_Seqfeat, NCBI_Variation, NCBI_Rsite, NCBI_RNA, NCBI_Gene, NCBI_Organism, NCBI_BioSource, NCBI_Protein, NCBI_TxInit, NCBI_Seqloc, NCBI_Seqres, NCBI_Seqset, NCBI_Seq_split, NCBI_SeqTable, NCBI_Submit, NCBI_TSeq, _IMPL_)
