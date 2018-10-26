@@ -133,6 +133,7 @@ ASN_SPECS_CORE = {
     # GSMA spec
     'TAP3'      : 'GSMA_TAP3_17102014',
     # Pycrate TCAP-specific modules
+    'TCAP_RAW'  : 'Pycrate_TCAP',
     'TCAP_MAP'  : 'Pycrate_TCAP_MAP',
     'TCAP_CAP'  : 'Pycrate_TCAP_CAP',
     }
