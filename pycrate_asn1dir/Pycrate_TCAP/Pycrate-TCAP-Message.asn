@@ -1,0 +1,15 @@
+TCAP-Messages DEFINITIONS ::=
+BEGIN
+
+IMPORTS
+    
+    TCMessage{}
+    FROM TCAPMessages {itu-t recommendation q 773 modules(2) messages(1) version3(3)}
+;
+
+-- TCMessage{OPERATION:Invokable, OPERATION:Returnable}
+-- here for commodity, we consider no specific operation to keep only with raw TCAP
+
+TCAP-Message ::= TCMessage{{}, {}}
+
+END
