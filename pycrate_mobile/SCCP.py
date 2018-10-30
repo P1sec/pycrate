@@ -760,12 +760,27 @@ class Ptr16(_Ptr):
 
 # constructor for an optional parameter wrapper
 def Optional(param, name, trans=True):
-    """prefix the parameter element `param' with an uint8 as name and make it
-    transparent by default 
+    """prefix the parameter element `param' with an uint8 as name, and eventually
+    an uint8 as len, and make it transparent by default
     """
-    w = Envelope(param._name, GEN=(
-            Uint8('Name', val=name, dic=_SCCPParam_dict),
-            param), trans=True)
+    if param.CLASS == 'Envelope' and param[0]._name == 'Len':
+        # length prefix already present
+        w = Envelope(param._name, GEN=(
+                Uint8('Name', val=name, dic=_SCCPParam_dict),
+                param), trans=True)
+    else:
+        # length prefix to be added
+        class Option(Envelope):
+            _GEN = (
+                Uint8('Name', val=name, dic=_SCCPParam_dict),
+                Uint8('Len'),
+                param
+                )
+            def __init__(self, *args, **kwargs):
+                Envelope.__init__(self, *args, **kwargs)
+                self[1].set_valauto(lambda: self[2].get_len())
+                self.set_trans(True)
+        w = Option(param._name)
     return w
 
 
