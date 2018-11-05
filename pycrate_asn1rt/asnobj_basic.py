@@ -656,7 +656,7 @@ Specific attribute:
                 elif B0 == 66:
                     # NOT-A-NUMBER
                     self._val = (0, None, None)
-                elif BO == 67:
+                elif B0 == 67:
                     # minus zero
                     self._val = ASN1CodecBER.DEC_REALNULL
                 else:
