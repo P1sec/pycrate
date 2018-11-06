@@ -28,7 +28,7 @@
 #*/
 
 __all__ = ['EltErr', 'REPR_RAW', 'REPR_HEX', 'REPR_BIN', 'REPR_HD', 'REPR_HUM',
-           'Element', 'Atom', 'Envelope', 'Array', 'Sequence']
+           'Element', 'Atom', 'Envelope', 'Array', 'Sequence', 'Alt']
 
 from .utils  import *
 from .charpy import Charpy, CharpyErr
@@ -40,6 +40,7 @@ from .charpy import Charpy, CharpyErr
 class EltErr(PycrateErr):
     pass
 
+
 #------------------------------------------------------------------------------#
 # global values for Element representation
 #------------------------------------------------------------------------------#
@@ -49,6 +50,7 @@ REPR_HEX = 1
 REPR_BIN = 2
 REPR_HD  = 3
 REPR_HUM = 4
+
 
 # for hexdump representation
 if python_version < 3:
@@ -114,7 +116,7 @@ else:
 class Element(object):
     """
     Parent class for all atomic (Atom and children from base.py) 
-    and composite (Envelope, Array, Sequence) elements
+    and composite (Envelope, Array, Sequence, Alt) elements
     """
     
     # safety checks against user-provided data
@@ -168,9 +170,10 @@ class Element(object):
         else:
             if self._SAFE_STAT and not isinstance(env, (Envelope,
                                                         Array,
-                                                        Sequence)):
+                                                        Sequence,
+                                                        Alt)):
                     raise(EltErr('{0} [set_env]: env type is {1}, expecting None, '\
-                          'Envelope, Sequence or Array'\
+                          'Envelope, Sequence, Array or Alt'\
                           .format(self._name, type(self._env).__name__)))
             self._env = env
     
@@ -1375,6 +1378,7 @@ class Atom(Element):
         # __iter__() calls __len__(), but here, get_bl() calls __iter__()
         __len__ = get_bl
 
+
 #------------------------------------------------------------------------------#
 # Envelope parent class
 #------------------------------------------------------------------------------#
@@ -1382,7 +1386,7 @@ class Atom(Element):
 class Envelope(Element):
     """
     Class for envelopes: special element which acts as a container for other
-    elements (atom, envelope, array, sequence)
+    elements (atom, envelope, array, sequence, alt)
     
     class attribute:
     - GEN: tuple of elements which is used to build the envelope content at 
@@ -2105,7 +2109,7 @@ class Envelope(Element):
 class Array(Element):
     """
     Class for arrays: special element which acts as a container for a list of
-    values for a given immutable element (atom, envelope, array, sequence)
+    values for a given immutable element (atom, envelope, array, sequence, alt)
     
     class attribute:
     - GEN: element which is used to build the array template at initialization
@@ -2928,7 +2932,8 @@ class Array(Element):
 class Sequence(Element):
     """
     Class for sequences: special element which acts as a container for a list of
-    instances cloned from a mutable template element (atom, envelope, array, sequence)
+    instances cloned from a mutable template element (atom, envelope, array, 
+    sequence, alt)
     
     class attribute:
     - GEN: element which is used to build the sequence template at initialization
@@ -3764,3 +3769,531 @@ class Sequence(Element):
         # PyPy iterator implementation lead to an infinite loop
         # __iter__() calls __len__(), but here, get_bl() calls __iter__()
         __len__ = get_bl
+
+
+class Alt(Element):
+    """
+    Class for alternatives: special element which acts as a container for a list of
+    alternatives between several elements (atom, envelope, array, sequence, alt)
+    
+    class attribute:
+    - GEN: dict of elements which is used to build all alternatives content at 
+    initialization, keys are values that must correspond to the selector element
+    
+    universal attributes:
+    - sel: callback to get the value which is used to select one of the 
+    alternatives
+    - content: dict of selector values and elements cloned from the GEN dict
+    - trans: bool, transparency of the alternative
+    - hier: hierarchical level when placed in an envelope
+    
+    automation attribute:
+    - transauto: callable, to automate the determination of alternative's 
+    transparency
+    
+    contextual attributes:
+    - env: envelope, container of the current alternative
+    
+    Alt provides methods identical to Python list and dict in order to 
+    manage elements within its content easily
+    """
+    
+    # hardcoded class name
+    CLASS = 'Alt'
+    
+    # default transparency
+    DEFAULT_TRANS = False
+    
+    # default element in case of invalid selection value
+    # if set to None, each invalid selection will raise an EltErr
+    DEFAULT_ALT = Envelope('none')
+    
+    # default attributes value
+    _env       = None
+    _hier      = 0
+    _desc      = ''
+    _trans     = None
+    _transauto = None
+    _GEN       = {}
+    _sel       = lambda: None
+    
+    __attrs__ = ('_env',
+                 '_name',
+                 '_desc',
+                 '_hier',
+                 '_trans',
+                 '_transauto',
+                 '_GEN',
+                 '_sel',
+                 '_content')
+    
+    def __init__(self, *args, **kw):
+        """Initializes an instance of Alt
+        
+        Args:
+            *args: nothing or alt name (str)
+            **kw:
+                name (str): alt name if no args
+                desc (str): additional alt description
+                hier (int): alt hierarchy level
+                trans (bool): alt transparency
+                GEN (dict of key, elements): to override the GEN class attribute
+                sel (cb): callable to automate the alternative selection
+                val (None, dict, tuple or list): to broadcast values into the
+                    element selected within the content, using self.set_val()
+                bl (tuple, list or dict): to broadcast bl into the element 
+                    selected within the content, using self.set_bl()
+        """
+        # alt name in kw, or first args
+        if len(args):
+            self._name = str(args[0])
+        elif 'name' in kw:
+            self._name = str(kw['name'])
+        # if not provided, it's the class name
+        else:
+            self._name = self.__class__.__name__
+        
+        # alt description customization
+        if 'desc' in kw:
+            self._desc = str(kw['desc'])
+        
+        # alt hierarchy
+        if 'hier' in kw:
+            self._hier = kw['hier']
+        
+        # alt transparency
+        if 'trans' in kw:
+            self._trans = kw['trans']
+        
+        if 'GEN' in kw:
+            GEN, clo = kw['GEN'], False
+        else:
+            GEN, clo = self._GEN, True
+        
+        if self._SAFE_STAT:
+            self._chk_hier()
+            self._chk_trans()
+            self._chk_gen(GEN)
+        
+        # default alternative
+        if self.__class__.DEFAULT_ALT:
+            self.DEFAULT_ALT = self.__class__.DEFAULT_ALT.clone()
+        
+        # content list generation
+        self._content = {}
+        if clo:
+            self.update({sv: elt.clone() for (sv, elt) in GEN.items()})
+        else:
+            self.update(GEN)
+        
+        # alternative selection callback
+        if 'sel' in kw:
+            self.set_sel( kw['sel'] )
+        
+        # if a val dict is passed as argument
+        # broadcast it to given content items
+        if 'val' in kw:
+            self.set_val( kw['val'] )
+        
+        # if a bl dict is passed as argument
+        # broadcast it to given content items
+        if 'bl' in kw:
+            self.set_bl( kw['bl'] )
+    
+    def _chk_gen(self, gen):
+        if not isinstance(gen, dict) or \
+        not all([isinstance(elt, Element) for elt in gen.values()]):
+            raise(EltErr('{0} [_chk_gen]: invalid alt generator GEN'\
+                  .format(self._name)))
+    
+    #--------------------------------------------------------------------------#
+    # envelope, hierarchy and selection routines
+    #--------------------------------------------------------------------------#
+    # no change from Element
+    
+    #--------------------------------------------------------------------------#
+    # format routines
+    #--------------------------------------------------------------------------#
+    
+    def set_sel(self, cb):
+        """Sets the alternative selection automation for self
+        
+        Args:
+            cb (callable) : automate the alternative selection
+        
+        Returns:
+            None
+        
+        Raises:
+            EltErr : is self._SAFE_STAT enabled and cb is not a callable
+        """
+        if self._SAFE_STAT and not callable(cb):
+            raise(EltErr('{0} [set_sel]: cb type is {1}, expecting callable'\
+                  .format(self._name, type(cb).__name__)))
+        self._sel = cb
+    
+    def get_sel(self):
+        """Gets the key corresponding to the alternative to be selected 
+        """
+        return self._sel()
+    
+    def get_alt(self, sv=None):
+        """Gets the selected alternative, if sv is not None, forces the 
+        alternative selected
+        
+        Args:
+            sv : if not None, is used to force the selection of the alternative
+        
+        Returns:
+            elt : selected alternative element
+        
+        Raises:
+            EltErr : if the selection value is invalid and no DEFAULT_ALT is set
+        """
+        if sv is None:
+            sv = self.get_sel()
+        try:
+            return self._content[sv]
+        except KeyError:
+            if self.DEFAULT_ALT:
+                return self.DEFAULT_ALT
+            else:
+                raise(EltErr('{0} [set_val]: invalid selection value {1!r}'\
+                      .format(self._name, sv)))
+    
+    def set_val(self, val, sv=None):
+        """Sets the value to the selected element of the content of self,
+        if sv is not None, forces the selected element with this given key
+        
+        Args:
+            val : whatever value required by the element targetted in the content
+            sv : if not None, is used to force the selection of the alternative
+                to be set
+        
+        Returns:
+            None
+        
+        Raises:
+            EltErr : if selection value is invalid, or selected element's value 
+                is invalid
+        """
+        self.get_alt(sv).set_val(val)
+    
+    def get_val(self, sv=None):
+        """Returns the list of values of all the elements of the content of self,
+        if sv is not None, forces the selected element with this given key
+        
+        Args:
+            sv : if not None, is used to force the selection of the alternative
+                to get the value from
+        
+        Returns:
+            value : whatever value according to the selected element
+                
+        Raises:
+            EltErr : if selection value is invalid, or the selected element's
+                value is invalid
+        """
+        return self.get_alt(sv).get_val()
+    
+    def set_bl(self, bl):
+        """Sets the raw bit length to the selected element in the content of self,
+        if sv is not None, forces the selected element with this given key
+        
+        Args:
+            bl : whatever bl required by the element targetted in the content
+            sv : if not None, is used to force the selection of the alternative
+                to be set
+        
+        Returns:
+            None
+        
+        Raises:
+            EltErr : if selection value is invalid, or selected element's bit 
+                length is invalid
+        """
+        self.get_alt(sv).set_bl(bl)
+    
+    def get_bl(self, sv=None):
+        """Returns the length in bits of self,
+        if sv is not None, forces the selected element with this given key
+        
+        Args:
+            sv : if not None, is used to force the selection of the alternative
+                to get the bit length from
+        
+        Returns:
+            bl (int) : length in bits
+        
+        Raises:
+            EltErr : if selection value is invalid, or selected element's bit 
+                length is invalid
+        """
+        if self.get_trans():
+            return 0
+        else:
+            return self.get_alt(sv).get_bl()
+    
+    def reautomate(self):
+        """Resets all attributes of the element which have an automation within 
+        the content of self
+        
+        Args:
+            None
+        
+        Returns:
+            None
+        """
+        if self._transauto is not None and self._trans is not None:
+            del self._trans
+        [elt.reautomate() for elt in self._content.values()]
+    
+    #--------------------------------------------------------------------------#
+    # conversion routines
+    #--------------------------------------------------------------------------#
+    
+    def _to_pack(self, sv=None):
+        """Produces a list of tuples (type, val, bl) ready to be packed with 
+        pack_val()
+        """
+        if not self.get_trans():
+            self.get_alt(sv)._to_pack()
+        else:
+            return []
+    
+    def _from_char(self, char, sv=None):
+        """Dispatch the consumption of a Charpy intance to the selected element 
+        within the content
+        """
+        if not self.get_trans():
+            self.get_alt(sv)._from_char(char)
+    
+    #--------------------------------------------------------------------------#
+    # copy / cloning routines
+    #--------------------------------------------------------------------------#
+    
+    def get_attrs(self):
+        """Returns the dictionnary of universal attributes of self and the 
+        elements within its content
+        
+        Args:
+            None
+        
+        Returns:
+            attrs (dict) : dictionnary of attributes
+        """
+        return {'name'   : self._name,
+                'desc'   : self._desc,
+                'hier'   : self._hier,
+                'trans'  : self._trans,
+                'content': {sv: elt.get_attrs() for (sv, elt) in self._content.items()}}
+    
+    def get_attrs_all(self):
+        """Returns the dictionnary of all attributes of self and the elements 
+        within its content
+        
+        Args:
+            None
+        
+        Returns:
+            attrs (dict) : dictionnary of attributes
+        """
+        return {'env'      : self._env,
+                'name'     : self._name,
+                'desc'     : self._desc,
+                'hier'     : self._hier,
+                'trans'    : self._trans,
+                'transauto': self._transauto,
+                'sel'      : self._sel,
+                'content'  : {sv: elt.get_attrs_all() for (sv, elt) in self._content.items()}}
+    
+    def set_attrs(self, **kw):
+        """Updates the attributes of self and the elements within its content
+        
+        Args:
+            kw (dict): dict of attributes and associated values
+                attributes can be name, desc, hier, trans, bl, val and sel
+        
+        Returns:
+            None
+        """
+        if 'name' in kw and isinstance(kw['name'], str):
+            self._name = kw['name']
+        if 'desc' in kw and isinstance(kw['desc'], str) and kw['desc'] != self.__class__._desc:
+            self._desc = str(kw['desc'])
+        if 'hier' in kw and kw['hier'] != self.__class__._hier:
+            self._hier = kw['hier']
+        if 'trans' in kw and kw['trans'] != self.__class__._trans:
+            self._trans = kw['trans']
+        #
+        if self._SAFE_STAT:
+            self._chk_hier()
+            self._chk_trans()
+        #
+        if 'sel' in kw:
+            self.set_sel(kw['sel'])
+        if 'bl' in kw:
+            self.set_bl(kw['bl'])
+        if 'val' in kw:
+            self.set_val(kw['val'])
+    
+    def clone(self):
+        """Produces an independent clone of self
+        
+        Args:
+            None
+        
+        Returns:
+            clone (self.__class__ instance)
+        """
+        kw = {}
+        if self._desc != self.__class__._desc:
+            kw['desc'] = self._desc
+        if self._hier != self.__class__._hier:
+            kw['hier'] = self._hier
+        if self._trans != self.__class__._trans:
+            kw['trans'] = self._trans
+        if self._sel != self.__class__._sel:
+            kw['sel'] = self._sel
+        # substitute the Envelope generator with clones of the current 
+        # envelope's content
+        kw['GEN'] = {sv: elt.clone() for (sv, elt) in self._content.items()}
+        return self.__class__(self._name, **kw)
+    
+    #--------------------------------------------------------------------------#
+    # Python list / dict methods emulation
+    #--------------------------------------------------------------------------#
+    
+    def update(self, elt_alt):
+        """Updates the dict of alternatives element with the content of `elt_alt'
+        
+        Args:
+            elt_alt (dict of {selection valud: element}) : dict of alternatives
+                to update self._content with
+        
+        Returns:
+            None
+        
+        Raises:
+            EltErr : if self._SAFE_STAT is enabled and one of the alternative has
+                an invalid type
+        """
+        for sv, elt in elt_alt.items():
+            if self._SAFE_STAT and not isinstance(elt, Element):
+                raise(EltErr('{0} [update]: alternative arg type is {1}, expecting element'\
+                      .format(self._name, type(elt).__name__)))
+            self._content[sv] = elt
+            elt.set_env(self)
+    
+    def insert(self, sv, elt):
+        """Insert the element `elt' with the given selection value `sv' in the 
+        content of self
+        
+        Args:
+            sv : selectio value
+            elt (element) : element to be inserted
+        
+        Returns:
+            None
+        
+        Raises:
+            EltErr : if self._SAFE_STAT is enabled and the type of `elt' is 
+                not Element, or if selection value is invalid
+        """
+        if self._SAFE_STAT and not isinstance(elt, Element):
+            raise(EltErr('{0} [insert]: arg type is {1}, expecting element'\
+                  .format(self._name, type(elt).__name__)))
+        try:
+            self._content[sv] = elt
+        except Exception as err:
+            raise(EltErr('{0} [insert]: selection value is invalid, {1}'.format(self._name, sv)))
+        else:
+            elt.set_env(self)
+    
+    def index(self, elt):
+        """Provide the selection value of the element `elt' within the content 
+        of self
+        
+        Args:
+            elt (element) : element to be looked-up in the alt
+        
+        Returns:
+            ind (int) : selection value of the element within the envelope
+        
+        Raises:
+            EltErr : element `elt' is not in the content
+        """
+        for sv, alt in self._content.items():
+            if elt == alt:
+                return sv
+        raise(EltErr('{0} [index]: non existent element, {1}'.format(self._name, elt)))
+    
+    def clear(self):
+        """Clears the content of self
+        
+        Args:
+            None
+        
+        Returns:
+            None
+        """
+        self._content.clear()
+    
+    # subscript methods passthrough
+    
+    def __getitem__(self, key, sv=None):
+        return self.get_alt(sv).__getitem__(key)
+    
+    def __setitem__(self, key, val, sv=None):
+        return self.get_alt(sv).__setitem__(key, val)
+    
+    def __delitem(self, key, sv=None):
+        return self.get_alt(sv).__delitem__(key)
+    
+    #--------------------------------------------------------------------------#
+    # representation routines
+    #--------------------------------------------------------------------------#
+    
+    def repr(self):
+        sv, alt = self.get_sel(), self.get_alt()
+        # element transparency
+        if self.get_trans():
+            trans = ' [transparent]'
+        else:
+            trans = ''
+        # additional description
+        if self._desc:
+            desc = ' [%s]' % self._desc
+        else:
+            desc = ''
+        #
+        return '<%s%s%s : %r -> %s' % (self._name, desc, trans, sv, alt.repr()[1:])
+    
+    def show(self):
+        sv, alt = self.get_sel(), self.get_alt()
+        # element transparency
+        if self.get_trans():
+            trans = ' [transparent]'
+        else:
+            trans = ''
+        # additional description
+        if self._desc:
+            desc = ' [%s]' % self._desc
+        else:
+            desc = ''
+        #
+        # TODO: does not work when selected alternative is just a base element
+        return alt.show().replace('### ', '### %s%s%s : %r -> ' % (self._name, desc, trans, sv), 1) 
+    
+    #--------------------------------------------------------------------------#
+    # Python built-ins override
+    #--------------------------------------------------------------------------#
+    
+    __call__ = get_val
+    __repr__ = repr
+    if python_implementation != 'PyPy':
+        # PyPy iterator implementation lead to an infinite loop
+        # __iter__() calls __len__(), but here, get_bl() calls __iter__()
+        __len__ = get_bl
+
+
