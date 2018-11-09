@@ -144,3 +144,22 @@ class pcaprec_hdr(Envelope):
         Uint32LE('len_orig') # actual length of packet
         )
 
+class pcap_hdr_be(Envelope):
+    _GEN = (
+        Uint32('magic_number', val=0xa1b2c3d4, rep=REPR_HEX),
+        Uint16('version_major', val=2),
+        Uint16('version_minor', val=4),
+        Int32('thiszone'), # GMT to local time correction
+        Uint32('sigfigs'), # accuracy of timestamp
+        Uint32('snaplen', val=0xffff), # max length of captured packets
+        Uint32('network', dic=LinkType_dict) # data link type
+        )
+
+class pcaprec_hdr_be(Envelope):
+    _GEN = (
+        Uint32('ts_sec'), # timestamp seconds
+        Uint32('ts_usec'), # timestamp microseconds
+        Uint32('len_incl'), # number of octets of packet saved in file
+        Uint32('len_orig') # actual length of packet
+        )
+
