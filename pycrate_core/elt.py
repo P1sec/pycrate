@@ -165,7 +165,7 @@ class Element(object):
         if env is None:
             try:
                 del self._env
-            except:
+            except Exception:
                 pass
         else:
             if self._SAFE_STAT and not isinstance(env, (Envelope,
@@ -484,7 +484,7 @@ class Element(object):
         if trans is None:
             try:
                 del self._trans
-            except:
+            except Exception:
                 pass
         else:
             if self._SAFE_STAT:
@@ -517,7 +517,7 @@ class Element(object):
         if transauto is None:
             try:
                 del self._transauto
-            except:
+            except Exception:
                 pass
         else:
             if self._SAFE_STAT and not callable(transauto):
@@ -868,7 +868,7 @@ class Atom(Element):
         if val is None:
             try:
                 del self._val
-            except:
+            except Exception:
                 pass
         else:
             if self._SAFE_STAT:
@@ -900,7 +900,7 @@ class Atom(Element):
         if valauto is None:
             try:
                 del self._valauto
-            except:
+            except Exception:
                 pass
         else:
             if self._SAFE_STAT and not callable(valauto):
@@ -953,7 +953,7 @@ class Atom(Element):
         if bl is None:
             try:
                 del self._bl
-            except:
+            except Exception:
                 pass
         else:
             if self._SAFE_STAT:
@@ -987,7 +987,7 @@ class Atom(Element):
         if blauto is None:
             try:
                 del self._blauto
-            except:
+            except Exception:
                 pass
         else:
             if self._SAFE_STAT and not callable(blauto):
@@ -1010,7 +1010,7 @@ class Atom(Element):
         if l is None:
             try:
                 del self._bl
-            except:
+            except Exception:
                 pass
         else:
             if self._SAFE_STAT:
@@ -1068,7 +1068,7 @@ class Atom(Element):
         if dic is None:
             try:
                 del self._dic
-            except:
+            except Exception:
                 pass
         else:
             if self._SAFE_STAT:
@@ -1102,7 +1102,7 @@ class Atom(Element):
         if dicauto is None:
             try:
                 del self._dicauto
-            except:
+            except Exception:
                 pass
         else:
             if self._SAFE_STAT and not callable(dicauto):
@@ -1553,11 +1553,22 @@ class Envelope(Element):
                 elt.set_val(vals[ind])
                 ind += 1
         elif isinstance(vals, dict):
-            for key, val in vals.items():
-                self.__setitem__(key, val)
+            # ordered values is sometimes required, depending of the structure
+            # -> happens in particular when an Alt() is present in the envelope
+            vals_ind = {self._by_name.index(k): v for (k, v) in vals.items() \
+                        if isinstance(k, str_types)}
+            if vals_ind:
+                if len(vals_ind) == len(vals):
+                    vals = vals_ind
+                else:
+                    vals = {k: v for (k, v) in vals.items() \
+                            if isinstance(k, integer_types)}
+                    vals.update(vals_ind)
+            for k in sorted(vals.keys()):
+                self.__setitem__(k, vals[k])
         elif self._SAFE_STAT:
-            raise(EltErr('{0} [set_val]: vals type is {1}, expecting None, tuple, list or dict'\
-                  .format(self._name, type(vals).__name__)))
+            raise(EltErr('{0} [set_val]: vals type is {1}, expecting None, '\
+                  'tuple, list or dict'.format(self._name, type(vals).__name__)))
     
     def get_val(self):
         """Returns the list of values of all the elements of the content of self
@@ -2238,13 +2249,13 @@ class Array(Element):
         if 'tmpl_val' in kw:
             try:
                 self._tmpl.set_val(kw['tmpl_val'])
-            except:
+            except Exception:
                 raise(EltErr('{0} [__init__] set template value error: {1}'\
                       .format(self._name, err)))
         if 'tmpl_bl' in kw:
             try:
                 self._tmpl.set_bl(kw['tmpl_bl'])
-            except:
+            except Exception:
                 raise(EltErr('{0} [__init__] set template bl error: {1}'\
                       .format(self._name, err)))
         
@@ -2351,7 +2362,7 @@ class Array(Element):
         if num is None:
             try:
                 del self._num
-            except:
+            except Exception:
                 pass
         else:
             if self._SAFE_STAT and not isinstance(num, integer_types):
@@ -2382,7 +2393,7 @@ class Array(Element):
         if numauto is None:
             try:
                 del self._numauto
-            except:
+            except Exception:
                 pass
         else:
             if self._SAFE_STAT and not callable(numauto):
@@ -2775,7 +2786,7 @@ class Array(Element):
         """
         try:
             ind = self._val.index(old)
-        except:
+        except Exception:
             raise(EltErr('{0} [replace] invalid old: {1}'.format(self._name, err)))
         # use the template to format the value
         if new != self._tmpl_val:
@@ -3063,14 +3074,14 @@ class Sequence(Element):
         if 'tmpl_val' in kw:
             try:
                 self._tmpl.set_val(kw['tmpl_val'])
-            except:
+            except Exception:
                 raise(EltErr('{0} [__init__] set template value error: {1}'\
                       .format(self._name, err)))
         
         if 'tmpl_bl' in kw:
             try:
                 self._tmpl.set_bl(kw['tmpl_bl'])
-            except:
+            except Exception:
                 raise(EltErr('{0} [__init__] set template bl error: {1}'\
                       .format(self._name, err)))
         
@@ -3185,7 +3196,7 @@ class Sequence(Element):
         if num is None:
             try:
                 del self._num
-            except:
+            except Exception:
                 pass
         else:
             if self._SAFE_STAT and not isinstance(num, integer_types):
@@ -3217,7 +3228,7 @@ class Sequence(Element):
         if numauto is None:
             try:
                 del self._numauto
-            except:
+            except Exception:
                 pass
         else:
             if self._SAFE_STAT and not callable(numauto):
@@ -3612,7 +3623,7 @@ class Sequence(Element):
         """.format(self.__class__.__name__)
         try:
             ind = self._val.index(old)
-        except:
+        except Exception:
             raise(EltErr('{0} [replace] invalid old: {1}'.format(self._name, err)))
         if self._SAFE_STAT and not isinstance(new, Element):
             raise(EltErr('{0} [insert]: elt type is {1}, expecting element'\
@@ -3708,7 +3719,7 @@ class Sequence(Element):
         if isinstance(key, integer_types):
             try:
                 elt = self._content[key]
-            except:
+            except Exception:
                 raise(EltErr('{0} [__delitem__] int item: {1}'.format(self._name, err)))
             del self._content[key]
             if elt != self._tmpl:
@@ -3801,6 +3812,12 @@ class Alt(Element):
     # hardcoded class name
     CLASS = 'Alt'
     
+    # explicit representation behaviour
+    # if True, returns an explicit representation of the alternative including
+    # its selection value
+    # otherwise, returns directly the representation of the selected alternative
+    REPR_EXPL = True
+    
     # default transparency
     DEFAULT_TRANS = False
     
@@ -3815,7 +3832,6 @@ class Alt(Element):
     _trans     = None
     _transauto = None
     _GEN       = {}
-    _sel       = lambda: None
     
     __attrs__ = ('_env',
                  '_name',
@@ -3839,6 +3855,8 @@ class Alt(Element):
                 trans (bool): alt transparency
                 GEN (dict of key, elements): to override the GEN class attribute
                 sel (cb): callable to automate the alternative selection
+                    warning: this cb must always have a single argument which 
+                             is self
                 val (None, dict, tuple or list): to broadcast values into the
                     element selected within the content, using self.set_val()
                 bl (tuple, list or dict): to broadcast bl into the element 
@@ -3866,29 +3884,43 @@ class Alt(Element):
             self._trans = kw['trans']
         
         if 'GEN' in kw:
-            GEN, clo = kw['GEN'], False
+            self._GEN = kw['GEN']
+        
+        # default alternative
+        if 'DEFAULT' in kw:
+            self.DEFAULT_ALT = kw['DEFAULT']
+        elif self.__class__.DEFAULT_ALT:
+            self.DEFAULT_ALT = self.__class__.DEFAULT_ALT.clone()
+        
+        # content is populated with clones from GEN in a lazy way
+        # through calling get_alt()
+        # however, during clone(), content is used to duplicate an existing
+        # instance
+        if 'content' in kw:
+            self._content = kw['content']
         else:
-            GEN, clo = self._GEN, True
+            self._content = {}
         
         if self._SAFE_STAT:
             self._chk_hier()
             self._chk_trans()
-            self._chk_gen(GEN)
+            self._chk_gen(self._GEN)
+            self._chk_gen(self._content)
+            if self.DEFAULT_ALT is not None and \
+            not isinstance(self.DEFAULT_ALT, Element):
+                raise(EltErr('{0} [__init__]: invalid DEFAULT element'\
+                      .format(self._name)))
         
-        # default alternative
-        if self.__class__.DEFAULT_ALT:
-            self.DEFAULT_ALT = self.__class__.DEFAULT_ALT.clone()
-        
-        # content list generation
+        # content is populated with clones from GEN in a lazy way
+        # through calling get_alt()
         self._content = {}
-        if clo:
-            self.update({sv: elt.clone() for (sv, elt) in GEN.items()})
-        else:
-            self.update(GEN)
         
         # alternative selection callback
         if 'sel' in kw:
             self.set_sel( kw['sel'] )
+        else:
+            self._sel = lambda: None
+        # currently, selection callback needs to be set after initialization
         
         # if a val dict is passed as argument
         # broadcast it to given content items
@@ -3903,7 +3935,7 @@ class Alt(Element):
     def _chk_gen(self, gen):
         if not isinstance(gen, dict) or \
         not all([isinstance(elt, Element) for elt in gen.values()]):
-            raise(EltErr('{0} [_chk_gen]: invalid alt generator GEN'\
+            raise(EltErr('{0} [_chk_gen]: invalid alt generator or content'\
                   .format(self._name)))
     
     #--------------------------------------------------------------------------#
@@ -3935,14 +3967,17 @@ class Alt(Element):
     def get_sel(self):
         """Gets the key corresponding to the alternative to be selected 
         """
-        return self._sel()
+        try:
+            return self._sel(self)
+        except:
+            return None
     
-    def get_alt(self, sv=None):
+    def get_alt(self):
         """Gets the selected alternative, if sv is not None, forces the 
         alternative selected
         
         Args:
-            sv : if not None, is used to force the selection of the alternative
+            None
         
         Returns:
             elt : selected alternative element
@@ -3950,89 +3985,64 @@ class Alt(Element):
         Raises:
             EltErr : if the selection value is invalid and no DEFAULT_ALT is set
         """
-        if sv is None:
-            sv = self.get_sel()
-        try:
+        sv = self.get_sel()
+        if sv in self._content:
             return self._content[sv]
-        except KeyError:
-            if self.DEFAULT_ALT:
-                return self.DEFAULT_ALT
-            else:
-                raise(EltErr('{0} [set_val]: invalid selection value {1!r}'\
-                      .format(self._name, sv)))
-    
-    def set_val(self, val, sv=None):
-        """Sets the value to the selected element of the content of self,
-        if sv is not None, forces the selected element with this given key
-        
-        Args:
-            val : whatever value required by the element targetted in the content
-            sv : if not None, is used to force the selection of the alternative
-                to be set
-        
-        Returns:
-            None
-        
-        Raises:
-            EltErr : if selection value is invalid, or selected element's value 
-                is invalid
-        """
-        self.get_alt(sv).set_val(val)
-    
-    def get_val(self, sv=None):
-        """Returns the list of values of all the elements of the content of self,
-        if sv is not None, forces the selected element with this given key
-        
-        Args:
-            sv : if not None, is used to force the selection of the alternative
-                to get the value from
-        
-        Returns:
-            value : whatever value according to the selected element
-                
-        Raises:
-            EltErr : if selection value is invalid, or the selected element's
-                value is invalid
-        """
-        return self.get_alt(sv).get_val()
-    
-    def set_bl(self, bl):
-        """Sets the raw bit length to the selected element in the content of self,
-        if sv is not None, forces the selected element with this given key
-        
-        Args:
-            bl : whatever bl required by the element targetted in the content
-            sv : if not None, is used to force the selection of the alternative
-                to be set
-        
-        Returns:
-            None
-        
-        Raises:
-            EltErr : if selection value is invalid, or selected element's bit 
-                length is invalid
-        """
-        self.get_alt(sv).set_bl(bl)
-    
-    def get_bl(self, sv=None):
-        """Returns the length in bits of self,
-        if sv is not None, forces the selected element with this given key
-        
-        Args:
-            sv : if not None, is used to force the selection of the alternative
-                to get the bit length from
-        
-        Returns:
-            bl (int) : length in bits
-        
-        Raises:
-            EltErr : if selection value is invalid, or selected element's bit 
-                length is invalid
-        """
-        if self.get_trans():
-            return 0
+        elif sv in self._GEN:
+            elt = self._GEN[sv].clone()
+            self.insert(sv, elt)
+            return elt
+        elif self.DEFAULT_ALT is not None:
+            return self.DEFAULT_ALT
         else:
-            return self.get_alt(sv).get_bl()
+            raise(EltErr('{0} [set_val]: invalid selection value {1!r}'\
+                  .format(self._name, sv)))    
+    
+    # standard methods passthrough
+    def set_val(self, val=None):
+        self.get_alt().set_val(val)
+    
+    def _chk_val(self, *args):
+        self.get_alt()._chk_val(*args)
+    
+    def set_valauto(self, valauto=None):
+        self.get_alt().set_valauto(valauto)
+    
+    def get_val(self):
+        return self.get_alt().get_val()
+    
+    def set_bl(self, bl=None):
+        self.get_alt().set_bl(bl)
+    
+    def _chk_bl(self, *args):
+        self.get_alt()._chk_bl(*args)
+    
+    def set_blauto(self, blauto=None):
+        self.get_alt().set_blauto(blauto)
+    
+    def set_len(self, l=None):
+        self.get_alt().set_len(l)
+    
+    def _get_bl_from_val(self):
+        return self.get_alt()._get_bl_from_val()
+    
+    def get_bl(self):
+        return self.get_alt().get_bl()
+    
+    def set_dic(self, dic=None):
+        self.get_alt().set_dic(dic)
+    
+    def _chk_dic(self, *args):
+        self.get_alt()._chk_dic(*args)
+    
+    def set_dicauto(self, dicauto=None):
+        self.get_alt()._chk_dicauto(dicauto)
+    
+    def get_dic(self):
+        return self.get_alt().get_dic()
+    
+    def get_val_dic(self):
+        return self.get_alt().get_val_dic()
     
     def reautomate(self):
         """Resets all attributes of the element which have an automation within 
@@ -4052,21 +4062,21 @@ class Alt(Element):
     # conversion routines
     #--------------------------------------------------------------------------#
     
-    def _to_pack(self, sv=None):
+    def _to_pack(self):
         """Produces a list of tuples (type, val, bl) ready to be packed with 
         pack_val()
         """
         if not self.get_trans():
-            self.get_alt(sv)._to_pack()
+            return self.get_alt()._to_pack()
         else:
             return []
     
-    def _from_char(self, char, sv=None):
+    def _from_char(self, char):
         """Dispatch the consumption of a Charpy intance to the selected element 
         within the content
         """
         if not self.get_trans():
-            self.get_alt(sv)._from_char(char)
+            self.get_alt()._from_char(char)
     
     #--------------------------------------------------------------------------#
     # copy / cloning routines
@@ -4146,18 +4156,21 @@ class Alt(Element):
         Returns:
             clone (self.__class__ instance)
         """
-        kw = {}
+        kw = {
+            'GEN': self._GEN,
+            'DEFAULT': self.DEFAULT_ALT.clone(),
+            'sel': self._sel
+            }
         if self._desc != self.__class__._desc:
             kw['desc'] = self._desc
         if self._hier != self.__class__._hier:
             kw['hier'] = self._hier
         if self._trans != self.__class__._trans:
             kw['trans'] = self._trans
-        if self._sel != self.__class__._sel:
-            kw['sel'] = self._sel
+        if self._content:
+            kw['content'] = {i: e.clone() for (i, e) in self._content.items()}
         # substitute the Envelope generator with clones of the current 
         # envelope's content
-        kw['GEN'] = {sv: elt.clone() for (sv, elt) in self._content.items()}
         return self.__class__(self._name, **kw)
     
     #--------------------------------------------------------------------------#
@@ -4183,7 +4196,7 @@ class Alt(Element):
                 raise(EltErr('{0} [update]: alternative arg type is {1}, expecting element'\
                       .format(self._name, type(elt).__name__)))
             self._content[sv] = elt
-            elt.set_env(self)
+            elt.set_env(self.get_env())
     
     def insert(self, sv, elt):
         """Insert the element `elt' with the given selection value `sv' in the 
@@ -4208,7 +4221,7 @@ class Alt(Element):
         except Exception as err:
             raise(EltErr('{0} [insert]: selection value is invalid, {1}'.format(self._name, sv)))
         else:
-            elt.set_env(self)
+            elt.set_env(self.get_env())
     
     def index(self, elt):
         """Provide the selection value of the element `elt' within the content 
@@ -4255,35 +4268,45 @@ class Alt(Element):
     #--------------------------------------------------------------------------#
     
     def repr(self):
-        sv, alt = self.get_sel(), self.get_alt()
-        # element transparency
-        if self.get_trans():
-            trans = ' [transparent]'
+        if self.REPR_EXPL:
+            sv, alt = self.get_sel(), self.get_alt()
+            # element transparency
+            if self.get_trans():
+                trans = ' [transparent]'
+            else:
+                trans = ''
+            # additional description
+            if self._desc:
+                desc = ' [%s]' % self._desc
+            else:
+                desc = ''
+            #
+            return '<%s%s%s : %r -> %s' % (self._name, desc, trans, sv, alt.repr()[1:])
         else:
-            trans = ''
-        # additional description
-        if self._desc:
-            desc = ' [%s]' % self._desc
-        else:
-            desc = ''
-        #
-        return '<%s%s%s : %r -> %s' % (self._name, desc, trans, sv, alt.repr()[1:])
+            return self.get_alt().repr()
     
     def show(self):
-        sv, alt = self.get_sel(), self.get_alt()
-        # element transparency
-        if self.get_trans():
-            trans = ' [transparent]'
+        if self.REPR_EXPL:
+            sv, alt = self.get_sel(), self.get_alt()
+            # element transparency
+            if self.get_trans():
+                trans = ' [transparent]'
+            else:
+                trans = ''
+            # additional description
+            if self._desc:
+                desc = ' [%s]' % self._desc
+            else:
+                desc = ''
+            #
+            alts = alt.show()
+            if alts[:4] == '### ':
+                return alts.replace('### ', '### %s%s%s : %r -> ' % (self._name, desc, trans, sv), 1)
+            else:
+                # case when the selected alternative is a base element
+                return '### %s%s%s : %r -> . ###\n %s' % (self._name, desc, trans, sv, alts)
         else:
-            trans = ''
-        # additional description
-        if self._desc:
-            desc = ' [%s]' % self._desc
-        else:
-            desc = ''
-        #
-        # TODO: does not work when selected alternative is just a base element
-        return alt.show().replace('### ', '### %s%s%s : %r -> ' % (self._name, desc, trans, sv), 1) 
+            return self.get_alt().show()
     
     #--------------------------------------------------------------------------#
     # Python built-ins override

@@ -122,7 +122,7 @@ class Buf(Atom):
         if bl is None:
             try:
                 del self._bl
-            except:
+            except Exception:
                 pass
         else:
             if self._SAFE_STAT:

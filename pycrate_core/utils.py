@@ -39,7 +39,7 @@ else:
 
 try:
     import platform
-except:
+except ImportError:
     python_implementation = 'Unknown'
 else:
     python_implementation = platform.python_implementation()
@@ -141,7 +141,7 @@ def flatten(*args):
     for a in args:
         try:
             ret.extend(flatten(*a))
-        except:
+        except Exception:
             ret.append(a)
     return tuple(ret)
 

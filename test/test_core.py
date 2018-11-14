@@ -444,7 +444,7 @@ def test_elt_2():
         def _len_v(self):
             return self[4].get_bl() + self[5].get_bl()
     
-    return TestB
+    #return TestB
     t = TestB()
     
     assert( t.get_bl() == 362 )
@@ -480,6 +480,60 @@ def test_elt_2():
     assert( t.get_val() == t1.get_val() )
     
     return t
+
+def test_elt_3():
+    
+    class TLV8(Envelope):
+        _GEN = (
+            Uint8('T'),
+            Uint8('L'),
+            Buf('V', rep=REPR_HEX)
+            )
+        def __init__(self, *args, **kwargs):
+            Envelope.__init__(self, *args, **kwargs)
+            self[1].set_valauto(lambda: self[2].get_len())
+            self[2].set_blauto(lambda: self[0].get_val()<<3)
+            
+    class TLV16(Envelope):
+        _GEN = (
+            Uint16('T'),
+            Uint16('L'),
+            Buf('V', rep=REPR_HEX)
+            )
+        def __init__(self, *args, **kwargs):
+            Envelope.__init__(self, *args, **kwargs)
+            self[1].set_valauto(lambda: self[2].get_len())
+            self[2].set_blauto(lambda: self[0].get_val()<<3)
+    
+    class TLVArray(Envelope):
+        _GEN = (
+            Uint8('Fmt', val=1),
+            Alt('TLVs', GEN={
+                1: Array(GEN=TLV8()),
+                2: Array(GEN=TLV16())},
+                sel=lambda self: self.get_env()[0].get_val())
+            )
+    
+    t1 = TLVArray(val={'Fmt':1, 'TLVs':[{'T':1, 'V':b'aaa'}, {'T':18, 'V':b'BBBB'}]})
+    return t1
+    v1 = [1, [[1, 3, b'aaa'], [18, 4, b'BBBB']]]
+    b1 = b'\x01\x01\x03aaa\x12\x04BBBB'
+    assert( t1.get_val()  == v1 )
+    assert( t1.to_bytes() == b1 )
+    
+    t2 = TLVArray()
+    t2.from_bytes(b1)
+    assert( t2.get_val()  == v1 )
+    assert( t2.to_bytes() == b1 )
+    
+    t3 = TLVArray(val={'Fmt':2, 'TLVs':[{'T':1, 'V':b'aaa'}, {'T':18, 'V':b'BBBB'}]})
+    b3 = b'\x02\x00\x01\x00\x03aaa\x00\x12\x00\x04BBBB'
+    assert( t3.get_val()  == v1 )
+    assert( t3.to_bytes() == b3 )
+    
+    t2.from_bytes(b3)
+    assert( t2.get_val()  == v1 )
+    assert( t2.to_bytes() == b3 )
 
 
 #------------------------------------------------------------------------------#
