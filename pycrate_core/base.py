@@ -99,7 +99,7 @@ class Buf(Atom):
         # 3) padded value (different from Atom.get_val())
         elif self._bl is not None:
             if self._bl % 8:
-                return (1+self._bl>>3) * self.PAD_VAL
+                return (1 + (self._bl>>3)) * self.PAD_VAL
             else:
                 return (self._bl>>3) * self.PAD_VAL
         
@@ -133,7 +133,7 @@ class Buf(Atom):
             # is necessary
             if self._val is not None and self._valauto is None:
                 if bl % 8:
-                    l = 1 + bl>>3
+                    l = 1 + (bl>>3)
                 else:
                     l = bl>>3
                 diff = l - len(self._val)
@@ -188,6 +188,9 @@ class Buf(Atom):
             raise(EltErr('{0} [_from_char]: {1}'.format(self._name, err)))
 
 
+# BufAuto is used when a Buf requires to have its length automatically computed
+# (i.e. in get_bl()) also when building the value (i.e. calling get_val())
+# and not only at parsing (i.e. in _from_char())
 class BufAuto(Buf):
     
     def get_val(self):
@@ -219,7 +222,7 @@ class BufAuto(Buf):
         bl = self.get_bl()
         if bl is not None:
             if bl % 8:
-                return (1+bl>>3) * self.PAD_VAL
+                return (1 + (bl>>3)) * self.PAD_VAL
             else:
                 return (bl>>3) * self.PAD_VAL
         
