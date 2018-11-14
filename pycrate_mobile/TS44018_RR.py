@@ -161,9 +161,9 @@ class RRAdditionalAssignment(Envelope):
 class RRAssignmentCommand(Envelope):
     _GEN = (
         RRHeader(val={'Type':46}),
-        Type3V('FirstChanDescAfter', val={'V':b'\0\0\0'}, bl={'V':24}), #, IE=ChanDesc2()),
-        Type3V('PowerCmd', val={'V':b'\0'}, bl={'V':8}),
-        Type4TLV('FreqListAfter', val={'T':0x5, 'V':b'\0\0'}),
+        Type3V('FirstChanDescAfter', val={'V':b'\0\0\0'}, bl={'V':24}, IE=ChanDesc2()),
+        Type3V('PowerCmd', val={'V':b'\0'}, bl={'V':8}, IE=PowerCmd()),
+        Type4TLV('FreqListAfter', val={'T':0x5, 'V':b'\0\0'}, IE=FreqList()),
         Type3TV('CellChanDesc', val={'V':16*b'\0'}, bl={'V':128}),
         Type4TLV('MultislotAlloc', val={'T':0X10, 'V':b'\0'}),
         Type3TV('ModeChanSet1', val={'T':0x63, 'V':b'\0'}, bl={'V':8}),
