@@ -143,7 +143,7 @@ class RRHeader(Envelope):
 # TS 44.018, section 9.1.1
 #------------------------------------------------------------------------------#
 
-class RRAdditionalAssignment(Envelope):
+class RRAdditionalAssign(Envelope):
     _GEN = (
         RRHeader(val={'Type':59}),
         Type3V('ChanDesc', val={'V':b'\0\0\0'}, bl={'V':24}, IE=ChanDesc()),
@@ -158,76 +158,299 @@ class RRAdditionalAssignment(Envelope):
 # TS 44.018, section 9.1.2
 #------------------------------------------------------------------------------#
 
-class RRAssignmentCommand(Envelope):
+class RRAssignmentCmd(Envelope):
     _GEN = (
         RRHeader(val={'Type':46}),
         Type3V('FirstChanDescAfter', val={'V':b'\0\0\0'}, bl={'V':24}, IE=ChanDesc2()),
         Type3V('PowerCmd', val={'V':b'\0'}, bl={'V':8}, IE=PowerCmd()),
         Type4TLV('FreqListAfter', val={'T':0x5, 'V':b'\0\0'}, IE=FreqList()),
-        Type3TV('CellChanDesc', val={'V':16*b'\0'}, bl={'V':128}),
-        Type4TLV('MultislotAlloc', val={'T':0X10, 'V':b'\0'}),
-        Type3TV('ModeChanSet1', val={'T':0x63, 'V':b'\0'}, bl={'V':8}),
-        Type3TV('ModeChanSet2', val={'T':0x11, 'V':b'\0'}, bl={'V':8}),
-        Type3TV('ModeChanSet3', val={'T':0x13, 'V':b'\0'}, bl={'V':8}),
-        Type3TV('ModeChanSet4', val={'T':0x14, 'V':b'\0'}, bl={'V':8}),
-        Type3TV('ModeChanSet5', val={'T':0x15, 'V':b'\0'}, bl={'V':8}),
-        Type3TV('ModeChanSet6', val={'T':0x16, 'V':b'\0'}, bl={'V':8}),
-        Type3TV('ModeChanSet7', val={'T':0x17, 'V':b'\0'}, bl={'V':8}),
-        Type3TV('ModeChanSet8', val={'T':0x18, 'V':b'\0'}, bl={'V':8}),
-        Type3TV('SecondChanDescAfter', val={'T':0x64, 'V':b'\0\0\0'}, bl={'V':24}),
-        Type3TV('ModeSecondChan', val={'T':0x66, 'V':b'\0'}, bl={'V':8}),
-        
+        Type3TV('CellChan', val={'T':0x62, 'V':16*b'\0'}, bl={'V':128}, IE=CellChan()),
+        Type4TLV('MultislotAlloc', val={'T':0X10, 'V':b'\0'}, IE=MultislotAlloc()),
+        Type3TV('ChanModeSet1', val={'T':0x63, 'V':b'\0'}, bl={'V':8}, IE=ChanMode()),
+        Type3TV('ChanModeSet2', val={'T':0x11, 'V':b'\0'}, bl={'V':8}, IE=ChanMode()),
+        Type3TV('ChanModeSet3', val={'T':0x13, 'V':b'\0'}, bl={'V':8}, IE=ChanMode()),
+        Type3TV('ChanModeSet4', val={'T':0x14, 'V':b'\0'}, bl={'V':8}, IE=ChanMode()),
+        Type3TV('ChanModeSet5', val={'T':0x15, 'V':b'\0'}, bl={'V':8}, IE=ChanMode()),
+        Type3TV('ChanModeSet6', val={'T':0x16, 'V':b'\0'}, bl={'V':8}, IE=ChanMode()),
+        Type3TV('ChanModeSet7', val={'T':0x17, 'V':b'\0'}, bl={'V':8}, IE=ChanMode()),
+        Type3TV('ChanModeSet8', val={'T':0x18, 'V':b'\0'}, bl={'V':8}, IE=ChanMode()),
+        Type3TV('SecondChanDescAfter', val={'T':0x64, 'V':b'\0\0\0'}, bl={'V':24}, IE=ChanDesc()),
+        Type3TV('SecondChanMode', val={'T':0x66, 'V':b'\0'}, bl={'V':8}, IE=ChanMode2()),
+        Type4TLV('MobAllocAfter', val={'T':0x72, 'V':b'\0'}, IE=MobAlloc()),
+        Type3TV('StartingTime', val={'T':0x7C, 'V':b'\0\0'}, bl={'V':16}, IE=StartingTime()),
+        Type4TLV('FreqListBefore', val={'T':0x19, 'V':b'\0\0'}, IE=FreqList()),
+        Type3V('FirstChanDescBefore', val={'V':b'\0\0\0'}, bl={'V':24}, IE=ChanDesc2()),
+        Type3TV('SecondChanDescAfter', val={'T':0x64, 'V':b'\0\0\0'}, bl={'V':24}, IE=ChanDesc()),
+        Type3TV('FreqChanSeqBefore', val={'T':0x1E, 'V':9*b'\0'}, bl={'V':72}, IE=FreqChanSeq()),
+        Type4TLV('MobAllocBefore', val={'T':0x72, 'V':b'\0'}, IE=MobAlloc()),
+        Type1TV('CipherModeSetting', val={'T':0x9, 'V':0}, IE=CipherModeSetting()),
+        Type4TLV('VGCSTargetModeInd', val={'T':0x1, 'V':b'\0'}, IE=VGCSTargetModeInd()),
+        Type4TLV('MultirateConfig', val={'T':0x3, 'V':b'\0\0'}, IE=MultirateConfig()),
+        Type4TLV('VGCSCipherParams', val={'T':0x4, 'V':b'\0'}, IE=VGCSCipherParams()),
+        Type3TV('ExtTSCSetAfter', val={'T':0x6D, 'V':b'\0'}, bl={'V':8}, IE=ExtTSCSet()),
+        Type3TV('ExtTSCSetBefore', val={'T':0x6E, 'V':b'\0'}, bl={'V':8}, IE=ExtTSCSet())
         )
+
+
+#------------------------------------------------------------------------------#
+# ASSIGNMENT COMPLETE
+# TS 44.018, section 9.1.3
+#------------------------------------------------------------------------------#
+
+class RRAssignmentComplete(Envelope):
+    _GEN = (
+        RRHeader(val={'Type':41}),
+        Type3V('RRCause', val={'V':b'\0'}, bl={'V':8}, IE=RRCause()),
+        )
+
+
+#------------------------------------------------------------------------------#
+# ASSIGNMENT FAILURE
+# TS 44.018, section 9.1.4
+#------------------------------------------------------------------------------#
+
+class RRAssignmentFailure(Envelope):
+    _GEN = (
+        RRHeader(val={'Type':47}),
+        Type3V('RRCause', val={'V':b'\0'}, bl={'V':8}, IE=RRCause())
+        )
+
+
+#------------------------------------------------------------------------------#
+# CHANNEL MODE MODIFY
+# TS 44.018, section 9.1.5
+#------------------------------------------------------------------------------#
+
+class RRChannelModeModify(Envelope):
+    _GEN = (
+        RRHeader(val={'Type':16}),
+        Type3V('ChanDesc', val={'V':b'\0\0\0'}, bl={'V':24}, IE=ChanDesc2()),
+        Type3V('ChanMode', val={'V':b'\0'}, bl={'V':8}, IE=ChanMode()),
+        Type4TLV('VGCSTargetModeInd', val={'T':0x1, 'V':b'\0'}, IE=VGCSTargetModeInd()),
+        Type4TLV('MultirateConfig', val={'T':0x3, 'V':b'\0\0'}, IE=MultirateConfig()),
+        Type4TLV('VGCSCipherParams', val={'T':0x4, 'V':b'\0'}, IE=VGCSCipherParams()),
+        Type3TV('ExtTSCSet', val={'T':0x6D, 'V':b'\0'}, bl={'V':8}, IE=ExtTSCSet())
+        )
+
+
+#------------------------------------------------------------------------------#
+# CHANNEL MODE MODIFY ACKNOWLEDGE
+# TS 44.018, section 9.1.6
+#------------------------------------------------------------------------------#
+
+class RRChannelModeModifyAck(Envelope):
+    _GEN = (
+        RRHeader(val={'Type':23}),
+        Type3V('ChanDesc', val={'V':b'\0\0\0'}, bl={'V':24}, IE=ChanDesc2()),
+        Type3V('ChanMode', val={'V':b'\0'}, bl={'V':8}, IE=ChanMode()),
+        Type3TV('ExtTSCSet', val={'T':0x6D, 'V':b'\0'}, bl={'V':8}, IE=ExtTSCSet())
+        )
+
+
+#------------------------------------------------------------------------------#
+# CHANNEL RELEASE
+# TS 44.018, section 9.1.7
+#------------------------------------------------------------------------------#
+
+class RRChannelRelease(Envelope):
+    _GEN = (
+        RRHeader(val={'Type':13}),
+        Type3V('RRCause', val={'V':b'\0'}, bl={'V':8}, IE=RRCause()),
+        Type4TLV('BARange', val={'T':0x73, 'V':4*b'\0'}, IE=BARange()),
+        Type4TLV('GroupChanDesc', val={'T':0x74, 'V':b'\0\0\0'}, IE=GroupChanDesc()),
+        Type1TV('GroupCipherKeyNum', val={'T':0x8, 'V':1}),
+        Type1TV('GPRSResumption', val={'T':0xC, 'V':1}, IE=GPRSResumption()),
+        Type4TLV('BAListPref', val={'T':0x75, 'V':b'\0'}, IE=ba_list_pref),
+        Type4TLV('UTRANFreqList', val={'T':0x76, 'V':b'\0'}, IE=utran_freq_list),
+        Type3TV('CellChan', val={'T':0x62, 'V':16*b'\0'}, bl={'V':128}, IE=CellChan()),
+        Type4TLV('CellSelInd', val={'T':0x77, 'V':b'\0\0'},
+                 IE=cell_selection_indicator_after_release_of_all_tch_and_sdcch_value_part),
+        Type1TV('EnhancedDTMCSRelInd', val={'T':0xA, 'V':0}),
+        Type4TLV('VGCSCipherParams', val={'T':0x4, 'V':b'\0'}, IE=VGCSCipherParams()),
+        Type4TLV('GroupChanDesc2', val={'T':0x78, 'V':11*b'\0'}, IE=GroupChanDesc2()),
+        Type4TLV('TalkerId', val={'T':0x79, 'V':b'\0'}, IE=TalkerId()),
+        Type4TLV('TalkerPriorityStat', val={'T':0x7A, 'V':b'\0'}, IE=TalkerPriorityStat()),
+        Type4TLV('VGCSAMRConfig', val={'T':0x7B, 'V':b'\0'}),
+        Type4TLV('IndivPriorities', val={'T':0x7C, 'V':b'\0'}, IE=individual_priorities)
+        )
+
+
+#------------------------------------------------------------------------------#
+# CHANNEL REQUEST
+# TS 44.018, section 9.1.8
+#------------------------------------------------------------------------------#
+# this is just 1 bytes with an establishment cause and a random reference
+
+
+#------------------------------------------------------------------------------#
+# CIPHERING MODE COMMAND
+# TS 44.018, section 9.1.9
+#------------------------------------------------------------------------------#
+
+class RRCipheringModeCmd(Envelope):
+    _GEN = (
+        RRHeader(val={'Type':53}),
+        Type1V('CipherResp', val={'V':0}, IE=CipherResp()),
+        Type1V('CipherModeSetting', val={'V':0}, IE=CipherModeSetting())
+        )
+
+
+#------------------------------------------------------------------------------#
+# CIPHERING MODE COMPLETE
+# TS 44.018, section 9.1.10
+#------------------------------------------------------------------------------#
+
+class RRCipheringModeComplete(Envelope):
+    _GEN = (
+        RRHeader(val={'Type':50}),
+        Type4TLV('MEId', val={'T':0x17, 'V':b'\0'}, IE=ID())
+        )
+
+
+#------------------------------------------------------------------------------#
+# CLASSMARK CHANGE
+# TS 44.018, section 9.1.11
+#------------------------------------------------------------------------------#
+
+class RRClassmarkChange(Envelope):
+    _GEN = (
+        RRHeader(val={'Type':22}),
+        Type4LV('MSCm2', val={'V':b'@\0\0'}, IE=MSCm2()),
+        Type4TLV('MSCm3', val={'T':0x20, 'V':b''}, IE=classmark_3_value_part)
+        )
+
+
+#------------------------------------------------------------------------------#
+# UTRAN CLASSMARK CHANGE
+# TS 44.018, section 9.1.11a
+#------------------------------------------------------------------------------#
+
+class RRUTRANClassmarkChange(Envelope):
+    _GEN = (
+        RRHeader(val={'Type':96}),
+        Type4LV('UTRANCm', val={'V':b'\0'}) # INTER RAT HANDOVER INFO from TS 25.331
+        )
+
+
+#------------------------------------------------------------------------------#
+# cdma2000 CLASSMARK CHANGE
+# TS 44.018, section 9.1.11b
+#------------------------------------------------------------------------------#
+
+class RRcdma2000ClassmarkChange(Envelope):
+    _GEN = (
+        RRHeader(val={'Type':98}),
+        Type4LV('TerminalInfo', val={'V':b''}),
+        Type4LV('SecurityStat', val={'V':b''}),
+        Type4LV('BandClassInfo', val={'V':b''}),
+        Type4LV('PowerClassInfo', val={'V':b''}),
+        Type4LV('OperatingModeInfo', val={'V':b''}),
+        Type4LV('ServiceOptInfo', val={'V':b''}),
+        Type4LV('MultiplexOptInfo', val={'V':b''}),
+        Type4LV('PowerCtrlInfo', val={'V':b''}),
+        Type4LV('CapInfo', val={'V':b''}),
+        Type4LV('ChannelConfigCapInfo', val={'V':b''}),
+        Type4LV('ExtMultiplexOptInfo', val={'V':b''}),
+        Type4LV('BandSubclassInfo', val={'V':b''}),
+        Type4LV('EncryptionCap', val={'V':b''})
+        )
+
+
+#------------------------------------------------------------------------------#
+# GERAN IU Mode CLASSMARK CHANGE
+# TS 44.018, section 9.1.11d
+#------------------------------------------------------------------------------#
+
+class RRUTRANClassmarkChange(Envelope):
+    _GEN = (
+        RRHeader(val={'Type':101}),
+        Type4LV('GERANIuModeCm', val={'V':14*b'\0'}) # MS GERAN IU MODE RADIO ACCESS CAPABILITY from TS 44.118
+        )
+
+
+#------------------------------------------------------------------------------#
+# CLASSMARK ENQUIRY
+# TS 44.018, section 9.1.12
+#------------------------------------------------------------------------------#
+
+class RRClassmarkEnquiry(Envelope):
+    _GEN = (
+        RRHeader(val={'Type':19}),
+        Type4TLV('CmEnquiryMask', val={'T':0x10, 'V':b'\0'}, IE=CmEnquiryMask())
+        )
+
+
+#------------------------------------------------------------------------------#
+# CONFIGURATION CHANGE COMMAND
+# TS 44.018, section 9.1.12b
+#------------------------------------------------------------------------------#
+
+class RRConfigChangeCmd(Envelope):
+    _GEN = (
+        RRHeader(val={'Type':48}),
+        Type4LV('MultislotAlloc', val={'V':b'\0'}, IE=MultislotAlloc()),
+        Type3TV('ChanModeSet1', val={'T':0x63, 'V':b'\0'}, bl={'V':8}, IE=ChanMode()),
+        Type3TV('ChanModeSet2', val={'T':0x11, 'V':b'\0'}, bl={'V':8}, IE=ChanMode()),
+        Type3TV('ChanModeSet3', val={'T':0x13, 'V':b'\0'}, bl={'V':8}, IE=ChanMode()),
+        Type3TV('ChanModeSet4', val={'T':0x14, 'V':b'\0'}, bl={'V':8}, IE=ChanMode()),
+        Type3TV('ChanModeSet5', val={'T':0x15, 'V':b'\0'}, bl={'V':8}, IE=ChanMode()),
+        Type3TV('ChanModeSet6', val={'T':0x16, 'V':b'\0'}, bl={'V':8}, IE=ChanMode()),
+        Type3TV('ChanModeSet7', val={'T':0x17, 'V':b'\0'}, bl={'V':8}, IE=ChanMode()),
+        Type3TV('ChanModeSet8', val={'T':0x18, 'V':b'\0'}, bl={'V':8}, IE=ChanMode())
+        )
+
+
+#------------------------------------------------------------------------------#
+# CONFIGURATION CHANGE ACK
+# TS 44.018, section 9.1.12c
+#------------------------------------------------------------------------------#
+
+class RRConfigChangeAck(Envelope):
+    _GEN = (
+        RRHeader(val={'Type':49})
+        )
+
+
+#------------------------------------------------------------------------------#
+# CONFIGURATION CHANGE REJECT
+# TS 44.018, section 9.1.12d
+#------------------------------------------------------------------------------#
+
+class RRConfigChangeReject(Envelope):
+    _GEN = (
+        RRHeader(val={'Type':51}),
+        Type3V('RRCause', val={'V':b'\0'}, bl={'V':8}, IE=RRCause()),
+        )
+
+
+#------------------------------------------------------------------------------#
+# DTM ASSIGNMENT COMMAND
+# TS 44.018, section 9.1.12e
+#------------------------------------------------------------------------------#
+
+class RRDTMAssignmentCmd(Envelope):
+    _GEN = (
+        RRHeader(val={'Type':76}),
+        Type3V('CSPowerCmd', val={'V':b'\0'}, bl={'V':8}, IE=PowerCmd()),
+        Type3V('CSChanDesc', val={'V':b'\0\0\0'}, bl={'V':24}, IE=ChanDesc()),
+        Type4LV('GPRSBcastInfo', val={'V':6*b'\0'}, IE=gprs_broadcast_information_value_part),
+        Type3TV('CellChan', val={'T':0x10, 'V':16*b'\0'}, bl={'V':128}, IE=CellChan()),
+        Type3TV('ChanMode', val={'T':0x11, 'V':b'\0'}, bl={'V':8}, IE=ChanMode()),
+        Type4TLV('FreqList', val={'T':0x12, 'V':b'\0\0'}, IE=FreqList()),
+        Type4TLV('MobAlloc', val={'T':0x13, 'V':b'\0'}, IE=MobAlloc()),
+        Type4TLV('PSULAssign', val={'T':0x15, 'V':b'\0'}, IE=rr_packet_uplink_assignment_value_part),
+        Type4TLV('PSDLAssign', val={'T':0x16, 'V':b'\0'}, IE=rr_packet_downlink_assignment_value_part),
+        Type4TLV('MultirateConfig', val={'T':0x17, 'V':b'\0\0'}, IE=MultirateConfig()),
+        Type1TV('CipherModeSetting', val={'T':0x9, 'V':0}, IE=CipherModeSetting()),
+        Type4TLV('MobAllocC2', val={'T':0x18, 'V':b'\0'}, IE=MobAlloc()),
+        Type4TLV('FreqListC2', val={'T':0x19, 'V':b'\0\0'}, IE=FreqList()),
+        Type4TLV('PSDLAssignType2', val={'T':0x16, 'V':b'\0'}, IE=rr_packet_downlink_assignment_type_2_value_part),
+        Type3TV('ChanDescC2', val={'V':b'\0\0'}, bl={'V':16}, IE=ChanDesc3()),
+        Type3TV('ExtTSCSet', val={'T':0x6D, 'V':b'\0'}, bl={'V':8}, IE=ExtTSCSet())
+        )
+
 
 '''
-#------------------------------------------------------------------------------#
-#
-# TS 44.018, section 9.1.
-#------------------------------------------------------------------------------#
-
-class RR(Envelope):
-    _GEN = (
-        RRHeader(val={'Type':}),
-        
-        )
-
-
-#------------------------------------------------------------------------------#
-#
-# TS 44.018, section 9.1.
-#------------------------------------------------------------------------------#
-
-class RR(Envelope):
-    _GEN = (
-        RRHeader(val={'Type':}),
-        
-        )
-
-
-#------------------------------------------------------------------------------#
-#
-# TS 44.018, section 9.1.
-#------------------------------------------------------------------------------#
-
-class RR(Envelope):
-    _GEN = (
-        RRHeader(val={'Type':}),
-        
-        )
-
-
-#------------------------------------------------------------------------------#
-#
-# TS 44.018, section 9.1.
-#------------------------------------------------------------------------------#
-
-class RR(Envelope):
-    _GEN = (
-        RRHeader(val={'Type':}),
-        
-        )
-
-
 #------------------------------------------------------------------------------#
 #
 # TS 44.018, section 9.1.
