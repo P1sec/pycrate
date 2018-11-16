@@ -527,12 +527,7 @@ class ChanDesc2(Envelope):
 # TS 44.018, 10.5.2.5c
 #------------------------------------------------------------------------------#
 
-ChanDescHop_dict = {
-    0 : 'Single RF channel',
-    1 : 'RF hopping channel',
-    }
-
-class ChanDesc(Envelope):
+class ChanDesc3(Envelope):
     _GEN = (
         Uint('TSC', bl=3),
         Uint('HopChan', bl=1, dic=ChanDescHop_dict),

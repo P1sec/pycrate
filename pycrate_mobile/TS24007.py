@@ -349,6 +349,32 @@ class Type1V(IE):
         IE.__init__(self, *args, **kw)
         if dic is not None:
             self[0]._dic = dic
+    
+    def set_val(self, vals):
+        ie_val = None
+        if vals is None:
+            [elt.set_val(None) for elt in self.__iter__()]
+        elif isinstance(vals, (tuple, list)):
+            ind = 0
+            for elt in self.__iter__():
+                val = vals[ind]
+                if elt._name == 'V' and not isinstance(val, integer_types):
+                    ie_val = val
+                else:
+                    elt.set_val(val)
+                ind += 1
+        elif isinstance(vals, dict):
+            for key, val in vals.items():
+                if key == 'V' and not isinstance(val, integer_types):
+                    ie_val = val
+                else:
+                    self.__setitem__(key, val)
+        elif self._SAFE_STAT:
+            raise(EltErr('{0} [set_val]: vals type is {1}, expecting None, tuple, list or dict'\
+                  .format(self._name, type(vals).__name__)))
+        if ie_val is not None:
+            # set IE it according to val
+            self.set_IE(val=ie_val)
 
 
 class Type1TV(IE):
@@ -394,9 +420,7 @@ class Type1TV(IE):
             raise(EltErr('{0} [set_val]: vals type is {1}, expecting None, tuple, list or dict'\
                   .format(self._name, type(vals).__name__)))
         if ie_val is not None:
-            # potentially clone the IE and set it according to val
-            if self._IE_stat is not None and self._IE is None:
-                self._IE = self._IE_stat.clone()
+            # set IE it according to val
             self.set_IE(val=ie_val)
 
 
