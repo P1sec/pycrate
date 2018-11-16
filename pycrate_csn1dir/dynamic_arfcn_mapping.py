@@ -39,9 +39,22 @@
 
 from pycrate_csn1.csnobj import *
 
-dynamic_arfcn_mapping = CSN1List(name='dynamic_arfcn_mapping', list=[
+spare_bit = CSN1Bit(name='spare_bit')
+Spare_bit = spare_bit
+Spare_Bit = spare_bit
+
+dynamic_arfcn_mapping_desc = CSN1List(name='dynamic_arfcn_mapping_desc', list=[
   CSN1Bit(name='gsm_band', bit=4),
   CSN1Bit(name='arfcn_first', bit=10),
   CSN1Bit(name='band_offset', bit=10),
   CSN1Bit(name='arfcn_range', bit=7)])
+
+dynamic_arfcn_mapping = CSN1List(name='dynamic_arfcn_mapping', list=[
+  CSN1Bit(name='length_of_dynamic_arfcn_mapping', bit=8),
+  CSN1List(name='dynamic_arfcn_mapping_description', list=[
+    CSN1List(num=-1, list=[
+      CSN1Val(name='', val='1'),
+      CSN1Ref(obj=dynamic_arfcn_mapping_desc)]),
+    CSN1Val(name='', val='0')]),
+  CSN1Ref(obj=spare_bit, num=-1)])
 

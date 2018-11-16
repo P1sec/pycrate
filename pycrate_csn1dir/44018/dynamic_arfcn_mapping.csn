@@ -4,10 +4,11 @@
 
 < Dynamic ARFCN Mapping >::=
 	< LENGTH OF DYNAMIC ARFCN MAPPING : bit (8) > 		-- length of value part in octets
-	< DYNAMIC ARFCN MAPPING Description : { 1 < DYNAMIC ARFCN MAPPING > } ** 0 >
+	< DYNAMIC ARFCN MAPPING Description : { 1 < DYNAMIC ARFCN MAPPING DESC > } ** 0 >
 	< spare bit >** ;
 
-< DYNAMIC ARFCN MAPPING >::=
+-- patching the name to avoid name clash
+< DYNAMIC ARFCN MAPPING DESC >::=
 	< GSM_Band : bit (4) >
 	< ARFCN_FIRST : bit (10) >
 	< BAND_OFFSET: bit (10) >
