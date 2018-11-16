@@ -38,7 +38,7 @@ from pycrate_core.elt    import Envelope, Array, Sequence, Alt, \
 from pycrate_core.base   import *
 from pycrate_core.repr   import *
 
-from .TS24008_IE import LAI, ID, MSCm2
+from .TS24008_IE import LAI, RAI, ID, MSCm2
 
 #------------------------------------------------------------------------------#
 # TS 44.018 IE specified with CSN.1
@@ -48,14 +48,21 @@ from pycrate_csn1dir.ba_list_pref           import ba_list_pref
 from pycrate_csn1dir.utran_freq_list        import utran_freq_list
 from pycrate_csn1dir.individual_priorities  import individual_priorities
 from pycrate_csn1dir.classmark_3_value_part import classmark_3_value_part
-from pycrate_csn1dir.gprs_broadcast_information_value_part    import gprs_broadcast_information_value_part
-from pycrate_csn1dir.rr_packet_uplink_assignment_value_part   import rr_packet_uplink_assignment_value_part
-from pycrate_csn1dir.rr_packet_downlink_assignment_value_part import rr_packet_downlink_assignment_value_part
+from pycrate_csn1dir.dynamic_arfcn_mapping  import dynamic_arfcn_mapping
+from pycrate_csn1dir.ia_rest_octets         import ia_rest_octets
+from pycrate_csn1dir.ipa_rest_octets        import ipa_rest_octets
+from pycrate_csn1dir.iax_rest_octets        import iax_rest_octets
+from pycrate_csn1dir.iar_rest_octets        import iar_rest_octets
+from pycrate_csn1dir.gprs_broadcast_information_value_part      import gprs_broadcast_information_value_part
+from pycrate_csn1dir.rr_packet_uplink_assignment_value_part     import rr_packet_uplink_assignment_value_part
+from pycrate_csn1dir.rr_packet_downlink_assignment_value_part   import rr_packet_downlink_assignment_value_part
+from pycrate_csn1dir.dtm_information_details_value_part         import dtm_information_details_value_part
+from pycrate_csn1dir.channel_request_description_2_value_part   import channel_request_description_2_value_part
+from pycrate_csn1dir.packet_channel_description                 import packet_channel_description
 from pycrate_csn1dir.rr_packet_downlink_assignment_type_2_value_part import \
     rr_packet_downlink_assignment_type_2_value_part
 from pycrate_csn1dir.cell_selection_indicator_after_release_of_all_tch_and_sdcch_value_part import \
     cell_selection_indicator_after_release_of_all_tch_and_sdcch_value_part
-
 
 
 #------------------------------------------------------------------------------#
@@ -141,11 +148,15 @@ class BARange(Envelope):
 # This is the same structure as FreqList defined in 10.5.2.13,
 # but with a fixed length of 16 bytes
 
-# _FreqListRange is the generic class template for all Range*
-# for range 512 and range 1024, there is a W(parent) selection
+# _FreqListRange is the generic class template for all Range* as defined 
+# in 10.5.2.13
+# For range 512 and range 1024, there is a W(parent) selection
 # which requires some damned numerology !
 # So we build a dict of W_index -> W_parent_index up to index 511 (rank 8),
 # what corresponds to the longest sequence of W (for range 512)
+
+# For all _FreqListRange / _FreqListRangeLong / _FreqListRange1024
+# only Layout and eventually Range need to be set
 
 def __exp_ind(ind):
     l = [i*2 for i in ind]
@@ -162,7 +173,6 @@ def _build_w_parent_dict(rank=8):
     return par
 
 
-# generic class to handle the parsing, decoding and encoding of ranges of ARFCN
 class _FreqListRange(Envelope):
     _Range  = 0
     _Layout = ()
@@ -236,59 +246,39 @@ class _FreqListRange(Envelope):
         raise(PycrateErr('not implemented'))
 
 
-# from 15 (W1 only) to 1013 bits (W1 -> W511), could be 1023 bits
-class CellChanRange512(_FreqListRange):
+# _FreqListRangeLong and _FreqListRange1024 are parent classes as defined in 
+# 10.5.2.13
+class _FreqListRangeLong(_FreqListRange):
     _Range  = 512
-    _Layout = (9, 8, 8, 7, 7, 7, 7, 6, 6, 6, 6, 6, 6, 6, 6, 5, 5)
     
     def _dec_get_w_ind(self, ind):
         return self._Parent[ind]
 
 
-# from 8 (W1 only) to 502 bits (W1 -> W255), could be 1023 bits
-class CellChanRange256(_FreqListRange):
-    _Range  = 256
-    _Layout = (8, 7, 7, 6, 6, 6, 6, 5, 5, 5, 5, 5, 5, 5, 5, 4, 4, 4, 4, 4, 4)
-
-
-# from 8 (W1 only) to 247 bits (W1 to W127), could be 1023 bits
-class CellChanRange128(_FreqListRange):
-    _Range  = 128
-    _Layout = (7, 6, 6, 5, 5, 5, 5, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 
-               3, 3, 3, 3, 3, 3, 3)
-
-
-class FreqListBitmapVar(BitMap):
-    
-    def _decode(self):
-        rrfcns = []
-        rr_uint, rr_bl = self.to_uint(), self.get_bl()
-        for i in range(0, rr_bl):
-            if rr_uint & 1<<(rr_bl-i-1):
-                rrfcns.append(i+1)
-        return rrfcns
-    
-    def _encode(self, rrfcns):
-        # bitmap length is the maximum offset, rounding to the octet boundary
-        rr_uint, rr_bl = 0, max(rrfcns)
-        if rr_bl % 8:
-            rr_bl += -rr_bl % 8
-        for o in rrfcns:
-            rr_uint += 1<<(rr_bl-o-1)
-        self.from_uint(rr_uint)
-
-
-class CellChanAlt2(Envelope):
-    _GEN = (
-        Uint('FmtExt2', bl=2, dic={0: 'range 512', 1: 'range 256', 2: 'range 128', 3: 'variable bit map'}),
-        Uint('OriginARFCN', val=0, bl=10),
-        Alt(GEN={
-            0: CellChanRange512(),
-            1: CellChanRange256(),
-            2: CellChanRange128(),
-            3: FreqListBitmapVar('CellChanBitmapVar')},
-            sel=lambda self: self.get_env()[0].get_val())
+class _FreqListRange1024(_FreqListRangeLong):
+    _Range  = 1024
+    _GEN    = (
+        Uint('F0', val=0, bl=1),
         )
+    
+    def decode(self):
+        """returns the list of ARFCNs set
+        """
+        if self[0].get_val():
+            return [0] + self._decode
+        else:
+            return self._decode()
+    
+    def encode(self, arfcns):
+        """sets a list of ARFCNs
+        """
+        # TODO
+        raise(PycrateErr('not implemented'))
+
+
+# _FreqListAlt2, _FreqListAlt1  and _FreqList are parent classes with common 
+# methods used children classes which have different generators
+class _FreqListAlt2(Envelope):
     
     def decode(self):
         """returns the list of ARFCNs set
@@ -319,31 +309,57 @@ class CellChanAlt2(Envelope):
             pass
 
 
-# from 11 (W1 only) to 1035 bits (W1 -> W264)
-class CellChanRange1024(_FreqListRange):
-    _Range  = 1024
-    _Layout = (10, 9, 9, 8, 8, 8, 8, 7, 7, 7, 7, 7, 7, 7, 7, 7)
-    _GEN    = (
-        Uint('F0', val=0, bl=1),
-        )
-    
-    def _dec_get_w_ind(self, ind):
-        return self._Parent[ind]
+class _FreqListAlt1(Envelope):
     
     def decode(self):
         """returns the list of ARFCNs set
         """
-        if self[0].get_val():
-            return [0] + self._decode
-        else:
-            return self._decode()
+        return self[1].get_alt().decode()
     
     def encode(self, arfcns):
         """sets a list of ARFCNs
         """
-        # TODO
-        raise(PycrateErr('not implemented'))
+        self[1].get_alt().encode(arfcns)
+
+
+class _FreqList(Envelope):
     
+    def decode(self):
+        """returns the list of ARFCNs set
+        """
+        try:
+            return self[2].get_alt().decode()
+        except:
+            return []
+    
+    def encode(self, arfcns):
+        """sets the list of ARFCNs
+        """
+        # TODO: choose the best possible encoding ?!
+        raise(PycrateErr('not implemented'))
+
+
+# FreqListBitmapVar and FreqListBitmap0 are defined in 10.5.2.13
+# but actually used as-is in several places
+class FreqListBitmapVar(BitMap):
+    
+    def _decode(self):
+        rrfcns = []
+        rr_uint, rr_bl = self.to_uint(), self.get_bl()
+        for i in range(0, rr_bl):
+            if rr_uint & 1<<(rr_bl-i-1):
+                rrfcns.append(i+1)
+        return rrfcns
+    
+    def _encode(self, rrfcns):
+        # bitmap length is the maximum offset, rounding to the octet boundary
+        rr_uint, rr_bl = 0, max(rrfcns)
+        if rr_bl % 8:
+            rr_bl += -rr_bl % 8
+        for o in rrfcns:
+            rr_uint += 1<<(rr_bl-o-1)
+        self.from_uint(rr_uint)
+
 
 class FreqListBitmap0(BitMap):
     _bl = 124
@@ -369,7 +385,40 @@ class FreqListBitmap0(BitMap):
         self.set_val(uint_to_bytes(ar_uint, 124))
 
 
-class CellChanAlt1(Envelope):
+# Actual Cell Channel definitions
+class CellChanRange1024(_FreqListRange1024):
+    _Layout = (10, 9, 9, 8, 8, 8, 8, 7, 7, 7, 7, 7, 7, 7, 7, 6)
+
+
+class CellChanRange512(_FreqListRangeLong):
+    _Layout = (9, 8, 8, 7, 7, 7, 7, 6, 6, 6, 6, 6, 6, 6, 6, 5, 5)
+
+
+class CellChanRange256(_FreqListRange):
+    _Range  = 256
+    _Layout = (8, 7, 7, 6, 6, 6, 6, 5, 5, 5, 5, 5, 5, 5, 5, 4, 4, 4, 4, 4, 4)
+
+
+class CellChanRange128(_FreqListRange):
+    _Range  = 128
+    _Layout = (7, 6, 6, 5, 5, 5, 5, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 
+               3, 3, 3, 3, 3, 3, 3)
+
+
+class CellChanAlt2(_FreqListAlt2):
+    _GEN = (
+        Uint('FmtExt2', bl=2, dic={0: 'range 512', 1: 'range 256', 2: 'range 128', 3: 'variable bit map'}),
+        Uint('OriginARFCN', val=0, bl=10),
+        Alt(GEN={
+            0: CellChanRange512(),
+            1: CellChanRange256(),
+            2: CellChanRange128(),
+            3: FreqListBitmapVar('CellChanBitmapVar')},
+            sel=lambda self: self.get_env()[0].get_val())
+        )
+
+
+class CellChanAlt1(_FreqListAlt1):
     _GEN = (
         Uint('FmtExt', bl=1, dic={0:'range 1024'}),
         Alt(GEN={
@@ -377,20 +426,10 @@ class CellChanAlt1(Envelope):
             1: CellChanAlt2()},
             sel=lambda self: self.get_env()[0].get_val())
         )
-    
-    def decode(self):
-        """returns the list of ARFCNs set
-        """
-        return self[1].get_alt().decode()
-    
-    def encode(self, arfcns):
-        """sets a list of ARFCNs
-        """
-        self[1].get_alt().encode(arfcns)
 
 
 # 16 bytes, 128 bits
-class CellChan(Envelope):
+class CellChan(_FreqList):
     _GEN = (
         Uint('Fmt', bl=2, dic={0:'bit map 0', 1:'undefined', 3: 'undefined'}),
         Uint('spare', bl=2),
@@ -400,17 +439,24 @@ class CellChan(Envelope):
             DEFAULT=Buf('undefined', rep=REPR_HEX),
             sel=lambda self: self.get_env()[0].get_val())
         )
-    
-    def decode(self):
-        """returns the list of ARFCNs set
-        """
-        return self[2].get_alt().decode()
-    
-    def encode(self, arfcns):
-        """sets the list of ARFCNs
-        """
-        # TODO: choose the best possible encoding ?!
-        raise(PycrateErr('not implemented'))
+
+
+#------------------------------------------------------------------------------#
+# Cell Description
+# TS 44.018, 10.5.2.2
+#------------------------------------------------------------------------------#
+
+class CellDesc(Envelope):
+    _GEN = (
+        Uint('BCCHARFCN_hi', bl=2),
+        Uint('NCC', bl=3),
+        Uint('BCC', bl=3),
+        Uint8('BCCHARFCN_lo'),
+        Uint16('BCCHARFCN', trans=True) 
+        )
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[4].set_valauto(lambda: self[3].get_val() + (self[0].get_val()<<8)) 
 
 
 #------------------------------------------------------------------------------#
@@ -667,18 +713,24 @@ class FreqChanSeq(Envelope):
 # TS 44.018, 10.5.2.13
 #------------------------------------------------------------------------------#
 
+# from 11 (W1 only) to 1035 bits (W1 -> W264)
+class FreqListRange1024(_FreqListRange):
+    _Layout = (10, 9, 9, 8, 8, 8, 8, 7, 7, 7, 7, 7, 7, 7, 7) + \
+              16  * (6,) + \
+              32  * (5,) + \
+              64  * (4,) + \
+              128 * (3,) + \
+              11  * (2,)
+
+
 # from 15 (W1 only) to 1013 bits (W1 -> W511), could be 1023 bits
 class FreqListRange512(_FreqListRange):
-    _Range  = 512
     _Layout = (9, 8, 8, 7, 7, 7, 7, 6, 6, 6, 6, 6, 6, 6, 6) + \
               16  * (5,) + \
               32  * (4,) + \
               64  * (3,) + \
               128 * (2,) + \
               256 * (1,)
-    
-    def _dec_get_w_ind(self, ind):
-        return self._Parent[ind]
 
 
 # from 8 (W1 only) to 502 bits (W1 -> W255), could be 1023 bits
@@ -700,7 +752,7 @@ class FreqListRange128(_FreqListRange):
               64 * (1,)
 
 
-class FreqListAlt2(Envelope):
+class FreqListAlt2(_FreqListAlt2):
     _GEN = (
         Uint('FmtExt2', bl=2, dic={0: 'range 512', 1: 'range 256', 2: 'range 128', 3: 'variable bit map'}),
         Uint('OriginARFCN', val=0, bl=10),
@@ -711,68 +763,9 @@ class FreqListAlt2(Envelope):
             3: FreqListBitmapVar()},
             sel=lambda self: self.get_env()[0].get_val())
         )
-    
-    def decode(self):
-        """returns the list of ARFCNs set
-        """
-        if self[0].get_val() == 3:
-            # variable bitmap
-            orig_arfcn = self[1].get_val()
-            add_orig_arfcn = lambda x: x+orig_arfcn
-            return list(map(add_orig_arfcn, self[2].get_alt()._decode()))
-        else:
-            # range
-            return [self[1].get_val()] + self[2].get_alt()._decode()
-    
-    def encode(self, arfcns):
-        """sets a list of ARFCNs
-        """
-        arfcns = set(arfcns)
-        try:
-            arfcns.sort()
-            orig_arfcn = arfcns.pop(0)
-            self[1].set_val(orig_arfcn)
-            if self[0].get_val() == 3:
-                # variable bitmap, update every ARFCNs
-                rem_orig_arfcn = lambda x: x-orig_arfcn
-                arfcns = list(map(rem_orig_arfcn, arfcns))
-            self[2].get_alt()._encode(arfcns)
-        except:
-            pass
 
 
-# from 11 (W1 only) to 1035 bits (W1 -> W264)
-class FreqListRange1024(_FreqListRange):
-    _Range  = 1024
-    _Layout = (10, 9, 9, 8, 8, 8, 8, 7, 7, 7, 7, 7, 7, 7, 7) + \
-              16  * (6,) + \
-              32  * (5,) + \
-              64  * (4,) + \
-              128 * (3,) + \
-              11  * (2,)
-    _GEN    = (
-        Uint('F0', val=0, bl=1),
-        )
-    
-    def _dec_get_w_ind(self, ind):
-        return self._Parent[ind]
-    
-    def decode(self):
-        """returns the list of ARFCNs set
-        """
-        if self[0].get_val():
-            return [0] + self._decode
-        else:
-            return self._decode()
-    
-    def encode(self, arfcns):
-        """sets a list of ARFCNs
-        """
-        # TODO
-        raise(PycrateErr('not implemented'))
-    
-
-class FreqListAlt1(Envelope):
+class FreqListAlt1(_FreqList):
     _GEN = (
         Uint('FmtExt', bl=1, dic={0:'range 1024'}),
         Alt(GEN={
@@ -780,20 +773,10 @@ class FreqListAlt1(Envelope):
             1: FreqListAlt2()},
             sel=lambda self: self.get_env()[0].get_val())
         )
-    
-    def decode(self):
-        """returns the list of ARFCNs set
-        """
-        return self[1].get_alt().decode()
-    
-    def encode(self, arfcns):
-        """sets a list of ARFCNs
-        """
-        self[1].get_alt().encode(arfcns)
 
 
 # from 2 to 130 bytes, 16 to 1040 bits
-class FreqList(Envelope):
+class FreqList(_FreqList):
     _GEN = (
         Uint('Fmt', bl=2, dic={0:'bit map 0', 1:'undefined', 3: 'undefined'}),
         Uint('spare', bl=2),
@@ -803,17 +786,66 @@ class FreqList(Envelope):
             DEFAULT=Buf('undefined', rep=REPR_HEX),
             sel=lambda self: self.get_env()[0].get_val())
         )
-    
-    def decode(self):
-        """returns the list of ARFCNs set
-        """
-        return self[2].get_alt().decode()
-    
-    def encode(self, arfcns):
-        """sets the list of ARFCNs
-        """
-        # TODO: choose the best possible encoding ?!
-        raise(PycrateErr('not implemented'))
+
+
+#------------------------------------------------------------------------------#
+# Frequency Short List
+# TS 44.018, 10.5.2.14
+#------------------------------------------------------------------------------#
+# This is the same structure as FreqList defined in 10.5.2.13,
+# but with a fixed length of 9 bytes
+
+class FreqShortListRange1024(_FreqListRange1024):
+    _Layout = (10, 9, 9, 8, 8, 8, 8)
+
+
+class FreqShortListRange512(_FreqListRangeLong):
+    _Layout = (9, 8, 8, 7, 7, 7, 7)
+
+
+class FreqShortListRange256(_FreqListRange):
+    _Range  = 256
+    _Layout = (8, 7, 7, 6, 6, 6, 6, 5)
+
+
+class FreqShortListRange128(_FreqListRange):
+    _Range  = 128
+    _Layout = (7, 6, 6, 5, 5, 5, 5, 4, 4, 4, 4)
+
+
+class FreqShortListAlt2(_FreqListAlt2):
+    _GEN = (
+        Uint('FmtExt2', bl=2, dic={0: 'range 512', 1: 'range 256', 2: 'range 128', 3: 'variable bit map'}),
+        Uint('OriginARFCN', val=0, bl=10),
+        Alt(GEN={
+            0: FreqShortListRange512(),
+            1: FreqShortListRange256(),
+            2: FreqShortListRange128(),
+            3: FreqListBitmapVar('FreqShortListBitmapVar')},
+            sel=lambda self: self.get_env()[0].get_val())
+        )
+
+
+class FreqShortListAlt1(_FreqListAlt1):
+    _GEN = (
+        Uint('FmtExt', bl=1, dic={0:'range 1024'}),
+        Alt(GEN={
+            0: FreqShortListRange1024(),
+            1: FreqShortListAlt2()},
+            sel=lambda self: self.get_env()[0].get_val())
+        )
+
+
+# 9 bytes, 72 bits
+class FreqShortList(_FreqList):
+    _GEN = (
+        Uint('Fmt', val=2, bl=2),
+        Uint('spare', bl=2),
+        Alt(GEN={
+            2: FreqShortListAlt1()},
+            DEFAULT=Buf('undefined', rep=REPR_HEX),
+            sel=lambda self: self.get_env()[0].get_val())
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -859,7 +891,7 @@ class GroupChanDesc(Envelope):
                 Uint('HSN', bl=6)
                 ))},
             sel=lambda self:self.get_env()[3].get_val()),
-        BitMap('MobAllocChan')
+        BitMap('MobileAllocChan')
         )
 
 
@@ -890,8 +922,41 @@ class GroupChanDesc2(Envelope):
         Uint('spare', bl=1),
         Uint('MAIO', bl=6),
         Uint('HSN', bl=6),
-        BitMap('MobAllocChan')
+        BitMap('MobileAllocChan')
         )
+
+
+#------------------------------------------------------------------------------#
+# Handover Reference
+# TS 44.018, 10.5.2.15
+#------------------------------------------------------------------------------#
+
+class HandoverRef(Uint8):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# L2 Pseudo Length
+# TS 44.018, 10.5.2.19
+#------------------------------------------------------------------------------#
+# The length value is automated to sum up the length of all IE within a RR msg
+# after the L2PseudoLength (index 0) and before the RestOctets (index -1)
+
+class L2PseudoLength(Envelope):
+    _excl = ()
+    _GEN  = (
+        Uint('Value', bl=6),
+        Uint('M', val=0, bl=1),
+        Uint('EL', val=1, bl=1)
+        )
+    def __init__(self, *args, **kwargs):
+        if 'excl' in kwargs:
+            self._excl = kwargs['excl']
+            del kwargs['excl']
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(
+            lambda: sum([e.get_bl() for i, e in enumerate(self.get_env()._content) \
+                         if i not in self._excl])>>3 )
 
 
 #------------------------------------------------------------------------------#
@@ -899,8 +964,20 @@ class GroupChanDesc2(Envelope):
 # TS 44.018, 10.5.2.21
 #------------------------------------------------------------------------------#
 
-class MobAlloc(BitMap):
+class MobileAlloc(BitMap):
     pass
+
+
+#------------------------------------------------------------------------------#
+# Mobile Time Difference
+# TS 44.018, 10.5.2.21a
+#------------------------------------------------------------------------------#
+
+class MobileTimeDiff(Envelope):
+    _GEN = (
+        Uint('Value', bl=21),
+        Uint('spare', bl=3)
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -918,6 +995,18 @@ class MultirateConfig(BitMap):
         Uint('spare', bl=1),
         Uint('StartMode', bl=2),
         Buf('ParamsMultirateSpeech', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Mobile Time Difference on Hyperframe level
+# TS 44.018, 10.5.2.21ab
+#------------------------------------------------------------------------------#
+
+class MobileTimeDiffHFLevel(Envelope):
+    _GEN = (
+        Uint('Value', bl=33),
+        Uint('spare', bl=3)
         )
 
 
@@ -945,6 +1034,33 @@ class MultislotAlloc(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# Dedicated Mode or TBF
+# TS 44.018, 10.5.2.26
+#------------------------------------------------------------------------------#
+
+class DedicatedModeOrTBF(Envelope):
+    _GEN = (
+        Uint('NRA', bl=1),
+        Uint('TMA', bl=1),
+        Uint('Downlink', bl=1, dic={0:'UL', 1:'DL'}),
+        Uint('TD', bl=1, dic={0:'dedicated mode', 1:'TBF'})
+        )
+
+
+#------------------------------------------------------------------------------#
+# Page Mode
+# TS 44.018, 10.5.2.26
+#------------------------------------------------------------------------------#
+
+PageMode_dict ={
+    0:'normal paging',
+    1:'extended paging',
+    2:'paging reorganization',
+    3:'same as before'
+    }
+
+
+#------------------------------------------------------------------------------#
 # Power Command
 # TS 44.018, 10.5.2.28
 #------------------------------------------------------------------------------#
@@ -955,6 +1071,35 @@ class PowerCmd(Envelope):
         Uint('EPCMode', bl=1),
         Uint('FPC_EPC', bl=1),
         Uint('PowerLevel', bl=5)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Power Command and access type
+# TS 44.018, 10.5.2.28a
+#------------------------------------------------------------------------------#
+
+class PowerCmdAccType(Envelope):
+    _GEN = (
+        Uint('ATC', bl=1, dic={0:'sending of Handover Access mandatory',
+            1:'sending of Handover Access optional'}),
+        Uint('EPCMode', bl=1),
+        Uint('FPC_EPC', bl=1),
+        Uint('PowerLevel', bl=5)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Request Reference
+# TS 44.018, 10.5.2.30
+#------------------------------------------------------------------------------#
+
+class RequestRef(Envelope):
+    _GEN = (
+        Uint8('RA'),
+        Uint('T1prime', bl=5),
+        Uint('T3', bl=6),
+        Uint('T2', bl=5)
         )
 
 
@@ -1002,6 +1147,53 @@ class StartingTime(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# Synchronization Indication
+# TS 44.018, 10.5.2.39
+#------------------------------------------------------------------------------#
+
+_SI_dict = {
+    0 : 'Non-synchronized',
+    1 : 'Synchronized',
+    2 : 'Pre-synchronised',
+    3 : 'Pseudo-synchronised',
+    }
+
+class SynchInd(Envelope):
+    _GEN = (
+        Uint('NCI', bl=1),
+        Uint('ROT', bl=1),
+        Uint('SI', bl=2, dic=_SI_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Timing Advance
+# TS 44.018, 10.5.2.40
+#------------------------------------------------------------------------------#
+
+class TimingAdvance(Uint8):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# Time Difference
+# TS 44.018, 10.5.2.41
+#------------------------------------------------------------------------------#
+
+class TimeDiff(Uint8):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TLLI
+# TS 44.018, 10.5.2.41a
+#------------------------------------------------------------------------------#
+
+class TLLI(Uint32):
+    pass
+
+
+#------------------------------------------------------------------------------#
 # VGCS Ciphering Parameters
 # TS 44.018, 10.5.2.42b
 #------------------------------------------------------------------------------#
@@ -1041,6 +1233,65 @@ class VGCSTargetModeInd(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# Wait Indication
+# TS 44.018, 10.5.2.43
+#------------------------------------------------------------------------------#
+
+class T3122(Uint8):
+    pass
+
+class T3142(Uint8):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# Suspension Cause
+# TS 44.018, 10.5.2.47
+#------------------------------------------------------------------------------#
+
+class SuspensionCause(Uint8):
+    _dic = {
+        0 : 'Emergency call, mobile originating call or call re-establishment',
+        1 : 'Location Area Update',
+        2 : 'MO Short message service',
+        3 : 'Other procedure which can be completed with an SDCCH',
+        4 : 'MO Voice broadcast or group call',
+        5 : 'Mobile terminating CS connection',
+        6 : 'DTM not supported in the cell'
+        }
+
+
+#------------------------------------------------------------------------------#
+# Service Support
+# TS 44.018, 10.5.2.57
+#------------------------------------------------------------------------------#
+
+_ServiceSupport_dict = {
+    0:'notification not required',
+    1:'notification required'
+    }
+
+class ServiceSupport(Envelope):
+    _GEN = (
+        Uint('spare', bl=6),
+        Uint('MBMSMulticast', bl=1, dic=_ServiceSupport_dict),
+        Uint('MBMSBroadcast', bl=1, dic=_ServiceSupport_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Dedicated Service Information
+# TS 44.018, 10.5.2.59
+#------------------------------------------------------------------------------#
+
+class DedicatedServiceInfo(Envelope):
+    _GEN = (
+        Uint('spare', bl=7),
+        Uint('SIS', bl=1)
+        )
+
+
+#------------------------------------------------------------------------------#
 # Talker Priority Status
 # TS 44.018, 10.5.2.64
 #------------------------------------------------------------------------------#
@@ -1068,6 +1319,61 @@ class TalkerId(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# PS Cause
+# TS 44.018, 10.5.2.67
+#------------------------------------------------------------------------------#
+
+PSCause_dict = {
+    0 : 'DTM multislot capabilities violated',
+    1 : 'No uplink TBF',
+    2 : 'Too m'
+    }
+
+
+#------------------------------------------------------------------------------#
+# Carrier Indication
+# TS 44.018, 10.5.2.69
+#------------------------------------------------------------------------------#
+
+class CarrierInd(Envelope):
+    _GEN = (
+        Uint('spare', bl=2),
+        Uint('CI', bl=1, dic={0:'Carrier 1', 1:'Carrier 2'})      
+        )
+
+
+#------------------------------------------------------------------------------#
+# Feature Indicator
+# TS 44.018, 10.5.2.76
+#------------------------------------------------------------------------------#
+
+class FeatureInd(Envelope):
+    _GEN = (
+        Uint('PEO_BCCH_CHANGE_MARK', bl=2),
+        Uint('CS_IR', bl=1),
+        Uint('PS_IR', bl=1)
+        )
+
+
+#------------------------------------------------------------------------------#
+# PLMN Index
+# TS 44.018, 10.5.2.81
+#------------------------------------------------------------------------------#
+
+PLMNIndex_dict = {
+    1 : 'PLMN identity of the Common PLMN broadcast in SYSTEM INFORMATION TYPE 3/4',
+    2 : 'PLMN identity of the first Additional PLMN in the network sharing information broadcast '\
+        'in SYSTEM INFORMATION TYPE 22',
+    3 : 'PLMN identity of the second Additional PLMN in the network sharing information broadcast broadcast '\
+        'in SYSTEM INFORMATION TYPE 22',
+    4 : 'PLMN identity of the third Additional PLMN in the network sharing information broadcast '\
+        'in SYSTEM INFORMATION TYPE 22',
+    5 : 'PLMN identity of the fourth Additional PLMN in the network sharing information broadcast '\
+        'in SYSTEM INFORMATION TYPE 22'
+    }
+
+
+#------------------------------------------------------------------------------#
 # Extended TSC Set
 # TS 44.018, 10.5.2.82
 #------------------------------------------------------------------------------#
@@ -1080,4 +1386,25 @@ class ExtTSCSet(Envelope):
         Uint('PSSecondTSCAssign', bl=1),
         Uint('CSTSCSet', bl=2)
         )
+
+
+#------------------------------------------------------------------------------#
+# Request Reference Alt
+# TS 44.018, 10.5.2.87
+#------------------------------------------------------------------------------#
+
+class RequestRefAlt(Envelope):
+    _GEN = (
+        Uint('RA_lo', bl=3),
+        Uint('RAType', bl=2),
+        Uint('spare', bl=3),
+        Uint8('RA_hi'),
+        Uint('T1prime', bl=5),
+        Uint('T3', bl=6),
+        Uint('T2', bl=5),
+        Uint16('RA', trans=True)
+        )
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[7].set_valauto(lambda: self[0].get_val() + (self[3].get_val()<<3))
 
