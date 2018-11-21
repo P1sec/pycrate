@@ -1,0 +1,10 @@
+-- TS 44.018 - d80
+-- 9.1.50 System information type 10 $(ASCI)$
+-- SYSTEM INFORMATION TYPE 10
+
+<SYSTEM INFORMATION TYPE 10> ::=	
+	< RR short PD : bit >				-- See 3GPP TS 24.007
+	< message type : bit(5) >			-- See 10.4
+	< short layer 2 header : bit(2) >		-- See 3GPP TS 44.006
+	< SI10 Rest Octets : bit(160) >;		-- See 10.5.2.44
+

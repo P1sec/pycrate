@@ -38,7 +38,8 @@ from pycrate_core.elt    import Envelope, Array, Sequence, Alt, \
 from pycrate_core.base   import *
 from pycrate_core.repr   import *
 
-from .TS24008_IE import LAI, RAI, ID, MSCm2
+from .TS24008_IE import LAI, RAI, ID, MSCm2, BroadcastCallRef, TMGI, AddUpdateParams, \
+    CellId, CKSN_dict
 
 #------------------------------------------------------------------------------#
 # TS 44.018 IE specified with CSN.1
@@ -53,12 +54,43 @@ from pycrate_csn1dir.ia_rest_octets         import ia_rest_octets
 from pycrate_csn1dir.ipa_rest_octets        import ipa_rest_octets
 from pycrate_csn1dir.iax_rest_octets        import iax_rest_octets
 from pycrate_csn1dir.iar_rest_octets        import iar_rest_octets
+from pycrate_csn1dir.notification_facch     import notification_facch
+from pycrate_csn1dir.ntn_rest_octets        import ntn_rest_octets
+from pycrate_csn1dir.vbs_vgcs_reconfigure   import vbs_vgcs_reconfigure
+from pycrate_csn1dir.vbs_vgcs_reconfigure2  import vbs_vgcs_reconfigure2
+from pycrate_csn1dir.p1_rest_octets         import p1_rest_octets
+from pycrate_csn1dir.p2_rest_octets         import p2_rest_octets
+from pycrate_csn1dir.p3_rest_octets         import p3_rest_octets
+from pycrate_csn1dir.si1_rest_octets        import si1_rest_octets
+from pycrate_csn1dir.si2bis_rest_octets     import si2bis_rest_octets
+from pycrate_csn1dir.si2ter_rest_octets     import si2ter_rest_octets
+from pycrate_csn1dir.si2quater_rest_octets  import si2quater_rest_octets
+from pycrate_csn1dir.si2n_rest_octets       import si2n_rest_octets
+from pycrate_csn1dir.si3_rest_octet         import si3_rest_octet
+from pycrate_csn1dir.si4_rest_octets        import si4_rest_octets
+from pycrate_csn1dir.si6_rest_octets        import si6_rest_octets
+from pycrate_csn1dir.si9_rest_octets        import si9_rest_octets
+from pycrate_csn1dir.si_13_rest_octets      import si_13_rest_octets
+from pycrate_csn1dir.si16_rest_octets       import si16_rest_octets, si17_rest_octets
+from pycrate_csn1dir.si_19_rest_octets      import si_19_rest_octets
+from pycrate_csn1dir.si_18_rest_octets      import si_18_rest_octets
+from pycrate_csn1dir.si14_rest_octets       import si14_rest_octets
+from pycrate_csn1dir.si15_rest_octets       import si15_rest_octets
+from pycrate_csn1dir.si_13alt_rest_octets   import si_13alt_rest_octets
+from pycrate_csn1dir.si_21_rest_octets      import si_21_rest_octets
+from pycrate_csn1dir.si_22_rest_octets      import si_22_rest_octets
+from pycrate_csn1dir.si_23_rest_octets      import si_23_rest_octets
 from pycrate_csn1dir.gprs_broadcast_information_value_part      import gprs_broadcast_information_value_part
 from pycrate_csn1dir.rr_packet_uplink_assignment_value_part     import rr_packet_uplink_assignment_value_part
 from pycrate_csn1dir.rr_packet_downlink_assignment_value_part   import rr_packet_downlink_assignment_value_part
 from pycrate_csn1dir.dtm_information_details_value_part         import dtm_information_details_value_part
 from pycrate_csn1dir.channel_request_description_2_value_part   import channel_request_description_2_value_part
 from pycrate_csn1dir.packet_channel_description                 import packet_channel_description
+from pycrate_csn1dir.measurement_results_contents               import measurement_results_contents
+from pycrate_csn1dir.gprs_broadcast_information_value_part      import gprs_broadcast_information_value_part
+from pycrate_csn1dir.mprach_description_value_part              import mprach_description_value_part
+from pycrate_csn1dir.mbms_p_t_m_channel_description_value_part  import mbms_p_t_m_channel_description_value_part
+from pycrate_csn1dir.mbms_session_parameters_list_value_part    import mbms_session_parameters_list_value_part
 from pycrate_csn1dir.rr_packet_downlink_assignment_type_2_value_part import \
     rr_packet_downlink_assignment_type_2_value_part
 from pycrate_csn1dir.cell_selection_indicator_after_release_of_all_tch_and_sdcch_value_part import \
@@ -460,6 +492,57 @@ class CellDesc(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# Cell Options
+# TS 44.018, 10.5.2.3
+#------------------------------------------------------------------------------#
+
+_DTXInd_dict = {
+    0 : 'MS may use uplink discontinuous Tx',
+    1 : 'MS shall use uplink discontinuous Tx',
+    2 : 'MS shall not use uplink discontinuous Tx',
+    }
+
+class CellOpt(Envelope):
+    _GEN = (
+        Uint('DynARFCNMappingInd', bl=1),
+        Uint('PwrCtrlInd', bl=1),
+        Uint('DTXInd', bl=2, dic=_DTXInd_dict),
+        Uint('RadioLinkTimeout', bl=4)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Cell Selection Parameters
+# TS 44.018, 10.5.2.4
+#------------------------------------------------------------------------------#
+
+_CellReselHyst_dict = {
+    0 : '0 dB RXLEV hysteresis for LA re-selection',
+    1 : '2 dB RXLEV hysteresis for LA re-selection',
+    2 : '4 dB RXLEV hysteresis for LA re-selection',
+    3 : '6 dB RXLEV hysteresis for LA re-selection',
+    4 : '8 dB RXLEV hysteresis for LA re-selection',
+    5 : '10 dB RXLEV hysteresis for LA re-selection',
+    6 : '12 dB RXLEV hysteresis for LA re-selection',
+    7 : '14 dB RXLEV hysteresis for LA re-selection',
+    }
+
+_NECI_dict = {
+    0 : 'New establishment causes not supported',
+    1 : 'New establishment causes supported'
+    }
+
+class CellSelParams(Envelope):
+    _GEN = (
+        Uint('CellReselectHyst', bl=3, dic=_CellReselHyst_dict),
+        Uint('MS-TXPWR-MAX-CCH', bl=5),
+        Uint('ACS', bl=1),
+        Uint('NECI', bl=1, dic=_NECI_dict),
+        Uint('RXLEV-ACCESS-MIN', bl=6)
+        )
+
+
+#------------------------------------------------------------------------------#
 # Channel Description
 # TS 44.018, 10.5.2.5
 #------------------------------------------------------------------------------#
@@ -661,11 +744,30 @@ class CmEnquiryMask(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# Channel Needed
+# TS 44.018, 10.5.2.8
+#------------------------------------------------------------------------------#
+
+_ChanNeeded_dict = {
+    0 : 'Any channel',
+    1 : 'SDCCH',
+    2 : 'TCH/F (Full rate)',
+    3 : 'TCH/H or TCH/F (Dual rate)'
+    }
+
+class ChanNeeded(Envelope):
+    _GEN = (
+        Uint('SECOND', bl=2, dic=_ChanNeeded_dict),
+        Uint('FIRST', bl=2, dic=_ChanNeeded_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
 # Cipher Mode Setting
 # TS 44.018, 10.5.2.9
 #------------------------------------------------------------------------------#
 
-_AlgoIdent_dict = {
+_AlgoId_dict = {
     0 : 'A5/1',
     1 : 'A5/2',
     2 : 'A5/3',
@@ -678,7 +780,7 @@ _AlgoIdent_dict = {
 
 class CipherModeSetting(Envelope):
     _GEN = (
-        Uint('AlgoIdent', bl=3, dic=_AlgoIdent_dict),
+        Uint('AlgoId', bl=3, dic=_AlgoId_dict),
         Uint('SC', bl=1, dic={0:'no ciphering', 1:'start ciphering'})
         )
 
@@ -692,6 +794,40 @@ class CipherResp(Envelope):
     _GEN = (
         Uint('spare', bl=3),
         Uint('CR', bl=1, dic={0:'IMEISV shall not be included', 1:'IMEISV shall be included'})
+        )
+
+
+#------------------------------------------------------------------------------#
+# Control Channel Description
+# TS 44.018, 10.5.2.11
+#------------------------------------------------------------------------------#
+
+_CCCHConf_dict = {
+    0 : '1 PHY chan for CCCH, not combined with SDCCH',
+    1 : '1 PHY chan for CCCH, combined with SDCCH',
+    2 : '2 PHY chan for CCCH, combined with SDCCH',
+    4 : '3 PHY chan for CCCH, combined with SDCCH',
+    6 : '4 PHY chan for CCCH, combined with SDCCH',
+}
+
+_CBQ3_dict = {
+    0 : 'Iu mode not supported',
+    1 : 'Iu mode capable MSs barred',
+    2 : 'Iu mode supported, cell not barred',
+    3 : 'Iu mode supported, cell not barred. The network shall not use this value.'
+    }
+
+class CtrlChanDesc(Envelope):
+    _GEN = (
+        Uint('MSCRel', bl=1, dic={0:'release 98 or older', 1:'release 99 onwards'}),
+        Uint('ATT', bl=1, dic={0:'IMSI attach and detach not allowed', 1:'MS shall apply IMSI attach and detach'}),
+        Uint('BS-AG-BLKS-RES', bl=3),
+        Uint('CCCHConf', bl=3, dic=_CCCHConf_dict),
+        Uint('SI22Ind', bl=1, dic={1:'SI22 broadcasted'}),
+        Uint('CBQ3', bl=1, dic=_CBQ3_dict),
+        Uint('spare', bl=2),
+        Uint('BS-PA-MFRMS', bl=3),
+        Uint8('T3212', dic={0:'periodic location updating shall not be used in the cell'})
         )
 
 
@@ -1034,8 +1170,47 @@ class MultislotAlloc(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# Neighbour Cell Description
+# TS 44.018, 10.5.2.22
+#------------------------------------------------------------------------------#
+# coded as the Cell Channel Description information element in 10.5.2.1b
+# except spare bits
+
+class NeighbourCellChan(Envelope):
+    _GEN = (
+        Uint('Fmt', bl=2, dic={0:'bit map 0', 1:'undefined', 3: 'undefined'}),
+        Uint('ExtInd', bl=1, dic={0:'complete BA', 1:'part of BA'}),
+        Uint('BAInd', bl=1, dic={0:'BA(BCCH)', 1:'BA(SACCH)'}),
+        Alt(GEN={
+            0: FreqListBitmap0('CellChanBitmap0'),
+            2: CellChanAlt1()},
+            DEFAULT=Buf('undefined', rep=REPR_HEX),
+            sel=lambda self: self.get_env()[0].get_val())
+        )
+
+
+#------------------------------------------------------------------------------#
+# Neighbour Cell Description 2
+# TS 44.018, 10.5.2.22a
+#------------------------------------------------------------------------------#
+# coded as the Cell Channel Description information element in 10.5.2.1b
+# except some changes in the 1st byte
+
+class NeighbourCellChan2(Envelope):
+    _GEN = (
+        Uint('Fmt', bl=1),
+        Uint('MultibandReport', bl=2),
+        Uint('BAInd', bl=1, dic={0:'BA(BCCH)', 1:'BA(SACCH)'}),
+        Alt(GEN={
+            0: FreqListBitmap0('CellChanBitmap0'),
+            1: CellChanAlt1()},
+            sel=lambda self: self.get_env()[0].get_val())
+        )
+
+
+#------------------------------------------------------------------------------#
 # Dedicated Mode or TBF
-# TS 44.018, 10.5.2.26
+# TS 44.018, 10.5.2.25b
 #------------------------------------------------------------------------------#
 
 class DedicatedModeOrTBF(Envelope):
@@ -1058,6 +1233,15 @@ PageMode_dict ={
     2:'paging reorganization',
     3:'same as before'
     }
+
+
+#------------------------------------------------------------------------------#
+# NCC Permitted
+# TS 44.018, 10.5.2.27
+#------------------------------------------------------------------------------#
+
+class NCCPermitted(BitMap):
+    _bl = 8
 
 
 #------------------------------------------------------------------------------#
@@ -1090,6 +1274,47 @@ class PowerCmdAccType(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# RACH Control Parameters
+# TS 44.018, 10.5.2.29
+#------------------------------------------------------------------------------#
+
+_MaxRetrans_dict = {
+    0 : '1 retransmission max',
+    1 : '2 retransmissions max',
+    2 : '4 retransmissions max',
+    3 : '7 retransmissions max'
+    }
+
+_TxInt_dict = {
+    0 : '3 slots',
+    1 : '4 slots',
+    2 : '5 slots',
+    3 : '6 slots',
+    4 : '7 slots',
+    5 : '8 slots',
+    6 : '9 slots',
+    7 : '10 slots',
+    8 : '11 slots',
+    9 : '12 slots',
+    10 : '14 slots',
+    11 : '16 slots',
+    12 : '20 slots',
+    13 : '25 slots',
+    14 : '32 slots',
+    15 : '50 slots'
+    }
+
+class RACHCtrl(Envelope):
+    _GEN = (
+        Uint('MaxRetrans', bl=2, dic=_MaxRetrans_dict),
+        Uint('TxInt', bl=4, dic=_TxInt_dict),
+        Uint('CELL_BARR_ACCESS', bl=1, dic={0:'cell not barred', 1:'cell barred'}),
+        Uint('CallReestab', bl=1, dic={0:'allowed', 1:'not allowed'}),
+        BitMap('AccessCtrlClass', bl=16)
+        )
+
+
+#------------------------------------------------------------------------------#
 # Request Reference
 # TS 44.018, 10.5.2.30
 #------------------------------------------------------------------------------#
@@ -1100,6 +1325,24 @@ class RequestRef(Envelope):
         Uint('T1prime', bl=5),
         Uint('T3', bl=6),
         Uint('T2', bl=5)
+        )
+
+#------------------------------------------------------------------------------#
+# Random Reference/ Establishment Cause
+# TS 44.018, 10.5.2.30a
+#------------------------------------------------------------------------------#
+
+_EstabCause_dict = {
+    0 : 'Reset emergency talker indication',
+    5 : 'Privilege subscriber request',
+    6 : 'reserved',
+    7 : 'Emergency subscriber request'
+    }
+
+class EstabCauseRandomRef(Envelope):
+    _GEN = (
+        Uint('EstabCause', bl=3, dic=_EstabCause_dict),
+        Uint('RandomRef', bl=5)
         )
 
 
@@ -1190,7 +1433,16 @@ class TimeDiff(Uint8):
 #------------------------------------------------------------------------------#
 
 class TLLI(Uint32):
-    pass
+    _rep = REPR_HEX
+
+
+#------------------------------------------------------------------------------#
+# TMSI / P-TMSI
+# TS 44.018, 10.5.2.42
+#------------------------------------------------------------------------------#
+
+class TMSI(Uint32):
+    _rep = REPR_HEX
 
 
 #------------------------------------------------------------------------------#
@@ -1245,6 +1497,39 @@ class T3142(Uint8):
 
 
 #------------------------------------------------------------------------------#
+# Extended Measurement Results
+# TS 44.018, 10.5.2.45
+#------------------------------------------------------------------------------#
+
+class ExtMeasRes(Envelope):
+    _GEN = (
+        Uint('SeqCodeUsed', bl=1),
+        Uint('DTXUsed', bl=1),
+        Array(GEN=Uint('RXLevel', bl=6))
+        )
+
+
+#------------------------------------------------------------------------------#
+# Extended Measurement Frequency List
+# TS 44.018, 10.5.2.46
+#------------------------------------------------------------------------------#
+# coded as the Cell Channel Description information element in 10.5.2.1b
+# except spare bits
+
+class ExtMeasFreqList(Envelope):
+    _GEN = (
+        Uint('Fmt', bl=2, dic={0:'bit map 0', 1:'undefined', 3: 'undefined'}),
+        Uint('spare', bl=1),
+        Uint('SeqCode', bl=1),
+        Alt(GEN={
+            0: FreqListBitmap0('CellChanBitmap0'),
+            2: CellChanAlt1()},
+            DEFAULT=Buf('undefined', rep=REPR_HEX),
+            sel=lambda self: self.get_env()[0].get_val())
+        )
+
+
+#------------------------------------------------------------------------------#
 # Suspension Cause
 # TS 44.018, 10.5.2.47
 #------------------------------------------------------------------------------#
@@ -1259,6 +1544,31 @@ class SuspensionCause(Uint8):
         5 : 'Mobile terminating CS connection',
         6 : 'DTM not supported in the cell'
         }
+
+
+#------------------------------------------------------------------------------#
+# APDU ID
+# TS 44.018, 10.5.2.48
+#------------------------------------------------------------------------------#
+
+APDUID_dict = {
+    0 : 'RRLP (3GPP TS 44.031) / LCS',
+    1 : 'ETWS (3GPP TS 23.041)'
+    }
+
+
+#------------------------------------------------------------------------------#
+# APDU Flags
+# TS 44.018, 10.5.2.49
+#------------------------------------------------------------------------------#
+
+class APDUFlags(Envelope):
+    _GEN = (
+        Uint('spare', bl=1),
+        Uint('CR', bl=1),
+        Uint('FirstSeg', bl=1, dic={0:'first or only segment', 1:'not first or only segment'}),
+        Uint('LastSeg', bl=1, dic={0:'last or only segment', 1:'not last or only segment'})
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -1292,6 +1602,40 @@ class DedicatedServiceInfo(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# Restriction Timer
+# TS 44.018, 10.5.2.61
+#------------------------------------------------------------------------------#
+
+class RestrictionTimer(Envelope):
+    _GEN = (
+        Uint('Value', bl=4),
+        Uint('spare', bl=4)
+        )
+
+
+#------------------------------------------------------------------------------#
+# MBMS Session Identity
+# TS 44.018, 10.5.2.62
+#------------------------------------------------------------------------------#
+
+class MBMSSessionId(Uint8):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# Reduced group or broadcast call reference
+# TS 44.018, 10.5.2.63
+#------------------------------------------------------------------------------#
+
+class ReducedBroadcastCallRef(Envelope):
+    _GEN = (
+        Uint('Value', bl=27, rep=REPR_HEX),
+        Uint('SF', bl=1, dic={0:'VBS, broadcast call', 1:'VGCS, group call'}),
+        Uint('spare', bl=4),
+        )
+
+
+#------------------------------------------------------------------------------#
 # Talker Priority Status
 # TS 44.018, 10.5.2.64
 #------------------------------------------------------------------------------#
@@ -1314,8 +1658,17 @@ class TalkerId(Envelope):
     _GEN = (
         Uint('spare', bl=4),
         Uint('FillerBits', bl=4),
-        Buf('TalkerId', rep=REPR_HEX)        
+        Buf('Value', rep=REPR_HEX)        
         )
+
+
+#------------------------------------------------------------------------------#
+# Token
+# TS 44.018, 10.5.2.66
+#------------------------------------------------------------------------------#
+
+class Token(Uint32):
+    _rep = REPR_HEX
 
 
 #------------------------------------------------------------------------------#
@@ -1339,6 +1692,36 @@ class CarrierInd(Envelope):
     _GEN = (
         Uint('spare', bl=2),
         Uint('CI', bl=1, dic={0:'Carrier 1', 1:'Carrier 2'})      
+        )
+
+
+#------------------------------------------------------------------------------#
+# Data Identity
+# TS 44.018, 10.5.2.73
+#------------------------------------------------------------------------------#
+
+class DataId(Envelope):
+    _GEN = (
+        Envelope('DataDistrib', GEN=(
+            Uint('TalkersListeners', bl=1),
+            Uint('Dispatchers', bl=1),
+            Uint('NetworkApplication', bl=1))),
+        Uint('DataId', bl=4),
+        Uint('AppInd', bl=1, dic={0:'application-specific data',
+            1:'confirmation of receiving application-specific data'})
+        )
+
+
+#------------------------------------------------------------------------------#
+# Uplink Access Indication
+# TS 44.018, 10.5.2.74
+#------------------------------------------------------------------------------#
+
+class UplinkAccessInd(Envelope):
+    _GEN = (
+        Uint('spare', bl=3),
+        Uint('Value', bl=1, dic={1:'Uplink access for application-specific data on the RACH',
+            0:'Uplink access for application-specific data on the group call channel'})
         )
 
 

@@ -527,6 +527,7 @@ class RestOctets(Type3V):
         # prefixing the parent element
         self[0].set_blauto(lambda: 176 - (self.get_env()[0][0].get_val()<<3))
     
+    '''
     def _from_char(self, char):
         if self[0]._name != 'V':
             # restore the std buffer for handling the value
@@ -562,7 +563,7 @@ class RestOctets(Type3V):
                     # replace V with the IE structure
                     self.replace(self[-1], self._IE)
             char._cur, char._len_bit = ccur, clen
-
+    '''
 
 #------------------------------------------------------------------------------#
 # Imperative part of a standard L3 message

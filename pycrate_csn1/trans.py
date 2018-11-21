@@ -899,8 +899,9 @@ def translate_text(text=u'', **kwargs):
         text (str, or iterable of str): textual CSN.1 definition(s)
     
     Returns:
-        Python objects (2-tuple): dict containing Python CSN.1 objects, and str 
-            containing the corresponding Python source code
+        result (3-tuple): a dict with generated Python objects,
+                          a set of external references and
+                          a text str containing the corresponding Python source code
     """
     if isinstance(text, (list, tuple)):
         text = u'\n\n'.join(text)

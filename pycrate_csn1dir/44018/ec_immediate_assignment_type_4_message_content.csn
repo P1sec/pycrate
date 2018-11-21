@@ -1,0 +1,30 @@
+-- TS 44.018 - d80
+-- 9.1.66 EC IMMEDIATE ASSIGNMENT TYPE 4
+-- EC IMMEDIATE ASSIGNMENT TYPE 4 message content
+
+< EC IMMEDIATE ASSIGNMENT TYPE 4 message content > ::= 
+	< Message Type : bit (4)  >
+	< Used DL Coverage Class : bit (2) >
+	{ 0 | 1 < EC Page Extension : bit (4) > }
+	< EC Request Reference : bit (13) > 
+	< EC Packet Channel Description Type 3 : bit (15) > -- This is a new parameter in EC IA type 3 vs. EC IA type 2.
+	< EC Fixed Uplink Allocation : < EC Fixed Uplink Allocation struct  >>
+	<spare padding> ;
+
+< EC Fixed Uplink Allocation struct > ::= 
+	< Enhanced Access Burst : bit (1) >
+	{ 0 | 1 < Timing Advance : bit (6) > }
+	< STARTING_UL_TIMESLOT: bit (3) >	
+	< Uplink_TFI_Assignment : bit (5) >
+	< STARTING_DL_TIMESLOT_OFFSET: bit (2) >
+	< OVERLAID_CDMA_CODE: bit (2) >
+	{ 0	-- use MCS-1 for uplink packet transfer 
+	| 1 < Assigned MCS : bit (4) > }
+	< GAMMA : bit (5) > 
+	< ALPHA Enable : bit (1) > 
+	{ 0 | 1	< P0 : bit (4) >
+		    < PR_MODE : bit (1) > } 
+	< Start_First_UL_Data_Block : bit (4) > 
+	{ 1 { 0	< Start_FN_Next_Data_Block : bit (3) > 
+	    | 1 }  } ** 0 ; -- no gap between last block and next block
+

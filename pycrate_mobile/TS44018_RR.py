@@ -38,7 +38,6 @@ from pycrate_core.base  import *
 
 from .TS24007    import *
 from .TS44018_IE import *
-from .TS24008_IE import *
 
 
 #------------------------------------------------------------------------------#
@@ -98,7 +97,7 @@ GSMRRType_dict = {
     52:'GPRS SUSPENSION REQUEST',
     53:'CIPHERING MODE COMMAND',
     54:'EXTENDED MEASUREMENT REPORT',
-    54:'SERVICE INFORMATION',
+    #54:'SERVICE INFORMATION',
     55:'EXTENDED MEASUREMENT ORDER',
     56:'APPLICATION INFORMATION',
     57:'IMMEDIATE ASSIGNMENT EXTENDED',
@@ -114,6 +113,7 @@ GSMRRType_dict = {
     68:'SYSTEM INFORMATION TYPE 13 alt',
     69:'SYSTEM INFORMATION TYPE 2 n',
     70:'SYSTEM INFORMATION TYPE 21',
+    71:'SYSTEM INFORMATION TYPE 22',
     72:'DTM ASSIGNMENT FAILURE',
     73:'DTM REJECT',
     74:'DTM REQUEST',
@@ -121,6 +121,7 @@ GSMRRType_dict = {
     76:'DTM ASSIGNMENT COMMAND',
     77:'DTM INFORMATION',
     78:'PACKET NOTIFICATION',
+    79:'SYSTEM INFORMATION TYPE 23',
     96:'UTRAN CLASSMARK CHANGE',
     98:'CDMA2000 CLASSMARK CHANGE',
     99:'INTER SYSTEM TO UTRAN HANDOVER COMMAND',
@@ -446,8 +447,8 @@ class RRDTMAssignmentCmd(Layer3):
         Type1TV('CipherModeSetting', val={'T':0x9, 'V':0}, IE=CipherModeSetting()),
         Type4TLV('MobileAllocC2', val={'T':0x18, 'V':b'\0'}, IE=MobileAlloc()),
         Type4TLV('FreqListC2', val={'T':0x19, 'V':b'\0\0'}, IE=FreqList()),
-        Type4TLV('PSDLAssignType2', val={'T':0x16, 'V':b'\0'}, IE=rr_packet_downlink_assignment_type_2_value_part),
-        Type3TV('ChanDescC2', val={'V':b'\0\0'}, bl={'V':16}, IE=ChanDesc3()),
+        Type4TLV('PSDLAssignType2', val={'T':0x20, 'V':b'\0'}, IE=rr_packet_downlink_assignment_type_2_value_part),
+        Type3TV('ChanDescC2', val={'T':0x21, 'V':b'\0\0'}, bl={'V':16}, IE=ChanDesc3()),
         Type3TV('ExtTSCSet', val={'T':0x6D, 'V':b'\0'}, bl={'V':8}, IE=ExtTSCSet())
         )
 
@@ -746,7 +747,7 @@ class RRImmediateAssignmentExt(Layer3):
 
 #------------------------------------------------------------------------------#
 # IMMEDIATE ASSIGNMENT REJECT
-# TS 44.018, section 9.1.
+# TS 44.018, section 9.1.20
 #------------------------------------------------------------------------------#
 
 class RRImmediateAssignmentReject(Layer3):
@@ -766,115 +767,171 @@ class RRImmediateAssignmentReject(Layer3):
         RestOctets('IARRestOctets', IE=iar_rest_octets)
         )
 
-'''
+
 #------------------------------------------------------------------------------#
-#
-# TS 44.018, section 9.1.
+# MEASUREMENT REPORT
+# TS 44.018, section 9.1.21
 #------------------------------------------------------------------------------#
 
-class RR(Layer3):
+class RRMeasurementReport(Layer3):
     _GEN = (
-        RRHeader(val={'Type':}),
-        
+        RRHeader(val={'Type':21}),
+        Type3V('MeasurementResults', val={'V':16*b'\0'}, bl={'V':128}, IE=measurement_results_contents)
         )
 
 
 #------------------------------------------------------------------------------#
-#
-# TS 44.018, section 9.1.
+# NOTIFICATION/FACCH
+# TS 44.018, section 9.1.21a
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# notification_facch
+
+
+#------------------------------------------------------------------------------#
+# NOTIFICATION/NCH
+# TS 44.018, section 9.1.21b
 #------------------------------------------------------------------------------#
 
-class RR(Layer3):
+class RRNotificationNCH(Layer3):
     _GEN = (
-        RRHeader(val={'Type':}),
-        
-        )
-
-
-
-#------------------------------------------------------------------------------#
-#
-# TS 44.018, section 9.1.
-#------------------------------------------------------------------------------#
-
-class RR(Layer3):
-    _GEN = (
-        RRHeader(val={'Type':}),
-        
+        L2PseudoLength(),
+        RRHeader(val={'Type':32}),
+        RestOctets('NTNRestOctets', IE=ntn_rest_octets),
         )
 
 
 #------------------------------------------------------------------------------#
-#
-# TS 44.018, section 9.1.
+# NOTIFICATION/RESPONSE
+# TS 44.018, section 9.1.21d
 #------------------------------------------------------------------------------#
 
-class RR(Layer3):
+class RRNotificationResponse(Layer3):
     _GEN = (
-        RRHeader(val={'Type':}),
-        
+        RRHeader(val={'Type':38}),
+        Type4LV('MSCm2', val={'V':b'@\x00\x00'}, IE=MSCm2()),
+        Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
+        Type3V('BroadcastCallRef', val={'V':5*b'\0'}, bl={'V':40}, IE=BroadcastCallRef())
         )
 
 
 #------------------------------------------------------------------------------#
-#
-# TS 44.018, section 9.1.
+# PACKET ASSIGNMENT
+# TS 44.018, section 9.1.21f
 #------------------------------------------------------------------------------#
 
-class RR(Layer3):
+class RRPacketAssignment(Layer3):
     _GEN = (
-        RRHeader(val={'Type':}),
-        
+        RRHeader(val={'Type':75}),
+        Type4LV('GPRSBroadcastInfo', val={'V':6*b'\0'}, IE=gprs_broadcast_information_value_part),
+        Type4TLV('PSULAssign', val={'T':0x22, 'V':b'\0'}, IE=rr_packet_uplink_assignment_value_part),
+        Type4TLV('PSDLAssign', val={'T':0x23, 'V':b'\0'}, IE=rr_packet_downlink_assignment_value_part),
+        Type4TLV('FreqListC2', val={'T':0x12, 'V':b'\0\0'}, IE=FreqList()),
+        Type4TLV('MobileAllocC2', val={'T':0x13, 'V':b'\0'}, IE=MobileAlloc()),
+        Type3TV('ChanDescC2', val={'T':0x14, 'V':b'\0\0'}, bl={'V':16}, IE=ChanDesc3()),
+        Type4TLV('PSDLAssignType2', val={'T':0x24, 'V':b'\0'}, IE=rr_packet_downlink_assignment_type_2_value_part),
+        Type3TV('ExtTSCSet', val={'T':0x6D, 'V':b'\0'}, bl={'V':8}, IE=ExtTSCSet())
         )
 
 
 #------------------------------------------------------------------------------#
-#
-# TS 44.018, section 9.1.
+# PACKET NOTIFICATION
+# TS 44.018, section 9.1.21g
 #------------------------------------------------------------------------------#
 
-class RR(Layer3):
+class RRPacketNotification(Layer3):
     _GEN = (
-        RRHeader(val={'Type':}),
-        
+        RRHeader(val={'Type':78}),
+        Type3TV('PTMSI', val={'T':0x10, 'V':4*b'\0'}, bl={'V':32}, IE=TMSI()),
+        Type4TLV('ID', val={'T':0x11, 'V':b'\xf4\0\0\0\0'}, IE=ID())
         )
 
 
 #------------------------------------------------------------------------------#
-#
-# TS 44.018, section 9.1.
+# VBS/VGCS RECONFIGURE
+# TS 44.018, section 9.1.21h
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# vbs_vgcs_reconfigure
+
+
+#------------------------------------------------------------------------------#
+# VBS/VGCS RECONFIGURE 2
+# TS 44.018, section 9.1.21i
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# vbs_vgcs_reconfigure2
+
+
+#------------------------------------------------------------------------------#
+# MBMS ANNOUNCEMENT
+# TS 44.018, section 9.1.21j
 #------------------------------------------------------------------------------#
 
-class RR(Layer3):
+class RRMBMSAnnouncement(Layer3):
     _GEN = (
-        RRHeader(val={'Type':}),
-        
+        RRHeader(val={'Type':22}),
+        Type4LV('TMGI', val={'V':b'\0\0\0'}, IE=TMGI()),
+        Type3TV('MBMSSessionId', val={'T':0x1, 'V':b'\0'}, bl={'V':8}, IE=MBMSSessionId()),
+        Type4TLV('MBMSCountChanDesc', val={'T':0x2, 'V':b'\0'}, IE=mprach_description_value_part),
+        Type4TLV('MBMSPtMChanDesc', val={'T':0x3, 'V':b'\0\0'}, IE=mbms_p_t_m_channel_description_value_part),
+        Type4TLV('MBMSSessionParams', val={'T':0x4, 'V':b'\0\0'}, IE=mbms_session_parameters_list_value_part),
+        Type3TV('RestrictionTimer', val={'T':0x5, 'V':b'\0'}, bl={'V':8}, IE=RestrictionTimer())
         )
 
 
 #------------------------------------------------------------------------------#
-#
-# TS 44.018, section 9.1.
+# PAGING REQUEST TYPE 1
+# TS 44.018, section 9.1.22
 #------------------------------------------------------------------------------#
 
-class RR(Layer3):
+class RRPagingReq1(Layer3):
     _GEN = (
-        RRHeader(val={'Type':}),
-        
+        L2PseudoLength(),
+        RRHeader(val={'Type':33}),
+        Type1V('ChanNeeded', val={'V':0}, IE=ChanNeeded()),
+        Type1V('PageMode', val={'V':0}, dic=PageMode_dict),
+        Type4LV('ID1', val={'V':b'\0'}, IE=ID()),
+        Type4TLV('ID2', val={'T':0x17, 'V':b'\0'}, IE=ID()),
+        RestOctets('P1RestOctets', IE=p1_rest_octets)
         )
 
 
 #------------------------------------------------------------------------------#
-#
-# TS 44.018, section 9.1.
+# PARING REQUEST TYPE 2
+# TS 44.018, section 9.1.23
 #------------------------------------------------------------------------------#
 
-class RR(Layer3):
+class RRPagingReq2(Layer3):
     _GEN = (
-        RRHeader(val={'Type':}),
-        
+        L2PseudoLength(),
+        RRHeader(val={'Type':34}),
+        Type1V('ChanNeeded', val={'V':0}, IE=ChanNeeded()),
+        Type1V('PageMode', val={'V':0}, dic=PageMode_dict),
+        Type3V('ID1', val={'V':4*b'\0'}, bl={'V':32}, IE=TMSI()),
+        Type3V('ID2', val={'V':4*b'\0'}, bl={'V':32}, IE=TMSI()),
+        Type4TLV('ID3', val={'T':0x17, 'V':b'\0'}, IE=ID()),
+        RestOctets('P2RestOctets', IE=p2_rest_octets)
         )
-'''
+
+
+#------------------------------------------------------------------------------#
+# PARING REQUEST TYPE 3
+# TS 44.018, section 9.1.24
+#------------------------------------------------------------------------------#
+
+class RRPagingReq3(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':36}),
+        Type1V('ChanNeeded', val={'V':0}, IE=ChanNeeded()),
+        Type1V('PageMode', val={'V':0}, dic=PageMode_dict),
+        Type3V('ID1', val={'V':4*b'\0'}, bl={'V':32}, IE=TMSI()),
+        Type3V('ID2', val={'V':4*b'\0'}, bl={'V':32}, IE=TMSI()),
+        Type3V('ID3', val={'V':4*b'\0'}, bl={'V':32}, IE=TMSI()),
+        Type3V('ID4', val={'V':4*b'\0'}, bl={'V':32}, IE=TMSI()),
+        RestOctets('P3RestOctets', IE=p3_rest_octets)
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -892,12 +949,909 @@ class RRPagingResponse(Layer3):
         Type1TV('AddUpdateParams', val={'T':0xC, 'V':0}, IE=AddUpdateParams())
         )
 
+
+#------------------------------------------------------------------------------#
+# PARTIAL RELEASE
+# TS 44.018, section 9.1.26
+#------------------------------------------------------------------------------#
+
+class RRPartialRelease(Layer3):
+    _GEN = (
+        RRHeader(val={'Type':10}),
+        Type3V('ChanDesc', val={'V':b'\0\0\0'}, bl={'V':24}, IE=ChanDesc()),
+        )
+
+
+#------------------------------------------------------------------------------#
+# PARTIAL RELEASE COMPLETE
+# TS 44.018, section 9.1.27
+#------------------------------------------------------------------------------#
+
+class RRPartialReleaseComplete(Layer3):
+    _GEN = (
+        RRHeader(val={'Type':15}),
+        )
+
+
+#------------------------------------------------------------------------------#
+# PHYSICAL INFORMATION
+# TS 44.018, section 9.1.28
+#------------------------------------------------------------------------------#
+
+class RRPhysicalInfo(Layer3):
+    _GEN = (
+        RRHeader(val={'Type':45}),
+        Type3V('TimingAdvance', val={'V':b'\0'}, bl={'V':8}, IE=TimingAdvance())
+        )
+
+
+#------------------------------------------------------------------------------#
+# RR STATUS
+# TS 44.018, section 9.1.29
+#------------------------------------------------------------------------------#
+
+class RRStatus(Layer3):
+    _GEN = (
+        RRHeader(val={'Type':18}),
+        Type3V('RRCause', val={'V':b'\0'}, bl={'V':8}, IE=RRCause())
+        )
+
+
+#------------------------------------------------------------------------------#
+# Synchronization channel information
+# TS 44.018, section 9.1.30a
+#------------------------------------------------------------------------------#
+# not a standard L3 message
+
+
+#------------------------------------------------------------------------------#
+# COMPACT Synchronization channel information
+# TS 44.018, section 9.1.30b
+#------------------------------------------------------------------------------#
+# not a standard L3 message
+
+
+#------------------------------------------------------------------------------#
+# EC-SCH INFORMATION
+# TS 44.018, section 9.1.30b
+#------------------------------------------------------------------------------#
+# not a standard L3 message
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 1
+# TS 44.018, section 9.1.31
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo1(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':25}),
+        Type3V('CellChan', val={'V':16*b'\0'}, bl={'V':128}, IE=CellChan()),
+        Type3V('RACHCtrl', val={'V':b'\0\0\0'}, bl={'V':24}, IE=RACHCtrl()),
+        RestOctets('SI1RestOctets', IE=si1_rest_octets)
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 2
+# TS 44.018, section 9.1.32
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo2(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':26}),
+        Type3V('BCCHFreqList', val={'V':16*b'\0'}, bl={'V':128}, IE=NeighbourCellChan()),
+        Type3V('NCCPermitted', val={'V':b'\0'}, bl={'V':8}, IE=NCCPermitted()),
+        Type3V('RACHCtrl', val={'V':b'\0\0\0'}, bl={'V':24}, IE=RACHCtrl())
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 2bis
+# TS 44.018, section 9.1.33
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo2bis(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':2}),
+        Type3V('ExtBCCHFreqList', val={'V':16*b'\0'}, bl={'V':128}, IE=NeighbourCellChan()),
+        Type3V('RACHCtrl', val={'V':b'\0\0\0'}, bl={'V':24}, IE=RACHCtrl()),
+        RestOctets('SI2bisRestOctets', IE=si2bis_rest_octets)
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 2ter
+# TS 44.018, section 9.1.34
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo2ter(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':3}),
+        Type3V('ExtBCCHFreqList', val={'V':16*b'\0'}, bl={'V':128}, IE=NeighbourCellChan2()),
+        RestOctets('SI2terRestOctets', IE=si2ter_rest_octets)
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 2quater
+# TS 44.018, section 9.1.34a
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo2quater(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':7}),
+        RestOctets('SI2quaterRestOctets', IE=si2quater_rest_octets)
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 2n
+# TS 44.018, section 9.1.34b
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo2n(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':69}),
+        RestOctets('SI2nRestOctets', IE=si2n_rest_octets)
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 3
+# TS 44.018, section 9.1.35
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo3(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':27}),
+        Type3V('CellId', val={'V':b'\0\0'}, bl={'V':16}, IE=CellId()),
+        Type3V('LAI', val={'V': b'\0\xf1\x10\0\0'}, bl={'V':40}, IE=LAI()),
+        Type3V('CtrlChanDesc', val={'V':b'\0\0\0'}, bl={'V':24}, IE=CtrlChanDesc()),
+        Type3V('CellOpt', val={'V':b'\0'}, bl={'V':8}, IE=CellOpt()),
+        Type3V('CellSelParams', val={'V':b'\0\0'}, bl={'V':16}, IE=CellSelParams()),
+        Type3V('RACHCtrl', val={'V':b'\0\0\0'}, bl={'V':24}, IE=RACHCtrl()),
+        RestOctets('SI3RestOctets', IE=si3_rest_octet)
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 4
+# TS 44.018, section 9.1.36
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo4(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':28}),
+        Type3V('LAI', val={'V': b'\0\xf1\x10\0\0'}, bl={'V':40}, IE=LAI()),
+        Type3V('CellSelParams', val={'V':b'\0\0'}, bl={'V':16}, IE=CellSelParams()),
+        Type3V('RACHCtrl', val={'V':b'\0\0\0'}, bl={'V':24}, IE=RACHCtrl()),
+        Type3TV('CBCHChanDesc', val={'T':0x64, 'V':b'\0\0\0'}, bl={'V':3}, IE=ChanDesc()),
+        Type4TLV('CBCHMobileAlloc', val={'T':0x72}, IE=MobileAlloc()),
+        RestOctets('SI4RestOctets', IE=si4_rest_octets)
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 5
+# TS 44.018, section 9.1.37
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo5(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':29}),
+        Type3V('BCCHFreqList', val={'V':16*b'\0'}, bl={'V':128}, IE=NeighbourCellChan())
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 5bis
+# TS 44.018, section 9.1.38
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo5bis(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':5}),
+        Type3V('ExtBCCHFreqList', val={'V':16*b'\0'}, bl={'V':128}, IE=NeighbourCellChan())
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 5ter
+# TS 44.018, section 9.1.39
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo5ter(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':6}),
+        Type3V('ExtBCCHFreqList', val={'V':16*b'\0'}, bl={'V':128}, IE=NeighbourCellChan2())
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 6
+# TS 44.018, section 9.1.40
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo6(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':30}),
+        Type3V('CellId', val={'V':b'\0\0'}, bl={'V':16}, IE=CellId()),
+        Type3V('LAI', val={'V': b'\0\xf1\x10\0\0'}, bl={'V':40}, IE=LAI()),
+        Type3V('CellOpt', val={'V':b'\0'}, bl={'V':8}, IE=CellOpt()),
+        Type3V('NCCPermitted', val={'V':b'\0'}, bl={'V':8}, IE=NCCPermitted()),
+        RestOctets('SI6RestOctets', IE=si6_rest_octets)
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 7
+# TS 44.018, section 9.1.41
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo7(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':31}),
+        RestOctets('SI7RestOctets', IE=si4_rest_octets)
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 8
+# TS 44.018, section 9.1.42
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo8(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':24}),
+        RestOctets('SI7RestOctets', IE=si4_rest_octets)
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 9
+# TS 44.018, section 9.1.43
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo9(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':4}),
+        Type3V('RACHCtrl', val={'V':b'\0\0\0'}, bl={'V':24}, IE=RACHCtrl()),
+        RestOctets('SI9RestOctets', IE=si9_rest_octets)
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 13
+# TS 44.018, section 9.1.43a
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo13(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':0}),
+        RestOctets('SI13RestOctets', IE=si_13_rest_octets)
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 16
+# TS 44.018, section 9.1.43d
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo16(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':61}),
+        RestOctets('SI16RestOctets', IE=si16_rest_octets)
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 17
+# TS 44.018, section 9.1.43d
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo17(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':62}),
+        RestOctets('SI17RestOctets', IE=si17_rest_octets)
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 19
+# TS 44.018, section 9.1.43f
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo19(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':65}),
+        RestOctets('SI19RestOctets', IE=si_19_rest_octets)
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 18
+# TS 44.018, section 9.1.43g
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo18(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':64}),
+        RestOctets('SI18RestOctets', IE=si_18_rest_octets)
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 20
+# TS 44.018, section 9.1.43h
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo20(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':66}),
+        RestOctets('SI20RestOctets', IE=si_18_rest_octets)
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 14
+# TS 44.018, section 9.1.43i
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo14(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':1}),
+        RestOctets('SI14RestOctets', IE=si14_rest_octets)
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 15
+# TS 44.018, section 9.1.43j
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo15(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':67}),
+        RestOctets('SI15RestOctets', IE=si15_rest_octets)
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 13alt
+# TS 44.018, section 9.1.43k
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo13alt(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':68}),
+        RestOctets('SI13altRestOctets', IE=si_13alt_rest_octets)
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 21
+# TS 44.018, section 9.1.43m
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo21(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':70}),
+        RestOctets('SI21RestOctets', IE=si_21_rest_octets)
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 22
+# TS 44.018, section 9.1.43n
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo22(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':71}),
+        RestOctets('SI22RestOctets', IE=si_22_rest_octets)
+        )
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 23
+# TS 44.018, section 9.1.43o
+#------------------------------------------------------------------------------#
+
+class RRSystemInfo23(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':79}),
+        RestOctets('SI23RestOctets', IE=si_23_rest_octets)
+        )
+
+
+#------------------------------------------------------------------------------#
+# EC SYSTEM INFORMATION TYPE 1
+# TS 44.018, section 9.1.43p
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# ec_system_information_type_1
+
+
+#------------------------------------------------------------------------------#
+# EC SYSTEM INFORMATION TYPE 2
+# TS 44.018, section 9.1.43q
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# ec_system_information_type_2
+
+
+#------------------------------------------------------------------------------#
+# EC SYSTEM INFORMATION TYPE 3
+# TS 44.018, section 9.1.43r
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# ec_system_information_type_3
+
+
+#------------------------------------------------------------------------------#
+# EC SYSTEM INFORMATION TYPE 4
+# TS 44.018, section 9.1.43s
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# ec_system_information_type_4
+
+
+#------------------------------------------------------------------------------#
+# TALKER INDICATION
+# TS 44.018, section 9.1.44
+#------------------------------------------------------------------------------#
+
+class RRTalkerInd(Layer3):
+    _GEN = (
+        RRHeader(val={'Type':17}),
+        Type4LV('MSCm2', val={'V':b'@\x00\x00'}, IE=MSCm2()),
+        Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
+        Type1TV('CKSN', val={'T':0xB, 'V':7}, dic=CKSN_dict),
+        )
+
+
+#------------------------------------------------------------------------------#
+# PRIORITY UPLINK REQUEST
+# TS 44.018, section 9.1.44a
+#------------------------------------------------------------------------------#
+
+class RRPriorityUplinkReq(Layer3):
+    _GEN = (
+        RRHeader(val={'Type':102}),
+        Type3V('EstabCauseRandomRef', val={'V':b'\0'}, bl={'V':8}, IE=EstabCauseRandomRef()),
+        Type3V('Token', val={'V':4*b'\0'}, bl={'V':32}, IE=Token()),
+        Type3V('ReducedBroadcastCallRef', val={'V':4*b'\0'}, bl={'V':32}, IE=ReducedBroadcastCallRef()),
+        Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
+        )
+
+
+#------------------------------------------------------------------------------#
+# DATA INDICATION
+# TS 44.018, section 9.1.44b
+#------------------------------------------------------------------------------#
+
+class RRDataInd(Layer3):
+    _GEN = (
+        RRHeader(val={'Type':103}),
+        Type3V('ID', val={'V':4*b'\0'}, bl={'V':32}, IE=TMSI()),
+        Type3V('AppData', val={'V':9*b'\0'}, bl={'V':72}),
+        Type3V('DataId', val={'V':b'\0'}, bl={'V':8}, IE=DataId())
+        )
+
+
+#------------------------------------------------------------------------------#
+# DATA INDICATION 2
+# TS 44.018, section 9.1.44c
+#------------------------------------------------------------------------------#
+
+class RRDataInd2(Layer3):
+    _GEN = (
+        RRHeader(val={'Type':104}),
+        Type3V('ID', val={'V':4*b'\0'}, bl={'V':32}, IE=TMSI()),
+        Type3V('ReducedBroadcastCallRef', val={'V':4*b'\0'}, bl={'V':32}, IE=ReducedBroadcastCallRef()),
+        Type3V('AppData', val={'V':9*b'\0'}, bl={'V':72}),
+        Type3V('DataId', val={'V':b'\0'}, bl={'V':8}, IE=DataId())
+        )
+
+
+#------------------------------------------------------------------------------#
+# UPLINK ACCESS
+# TS 44.018, section 9.1.45
+#------------------------------------------------------------------------------#
+# this is just 1 byte with a random reference
+
+
+#------------------------------------------------------------------------------#
+# UPLINK BUSY
+# TS 44.018, section 9.1.46
+#------------------------------------------------------------------------------#
+
+class RRUplinkBusy(Layer3):
+    _GEN = (
+        RRHeader(val={'Type':42}),
+        Type4TLV('TalkerPriorityStat', val={'T':0x31, 'V':b'\0'}, IE=TalkerPriorityStat()),
+        Type3TV('Token', val={'T':0x32, 'V':4*b'\0'}, bl={'V':32}, IE=Token()),
+        Type4TLV('TalkerId', val={'T':0x33, 'V':b'\0'}, IE=TalkerId()),
+        Type1TV('UplinkAccessInd', val={'T':0x8, 'V':0}, IE=UplinkAccessInd())
+        )
+
+
+#------------------------------------------------------------------------------#
+# UPLINK FREE
+# TS 44.018, section 9.1.47
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# uplink_free
+
+
+#------------------------------------------------------------------------------#
+# UPLINK RELEASE
+# TS 44.018, section 9.1.48
+#------------------------------------------------------------------------------#
+
+class RRUplinkRelease(Layer3):
+    _GEN = (
+        RRHeader(val={'Type':14}),
+        Type3V('RRCause', val={'V':b'\0'}, bl={'V':8}, IE=RRCause())
+        )
+
+
+#------------------------------------------------------------------------------#
+# VGCS UPLINK GRANT
+# TS 44.018, section 9.1.49
+#------------------------------------------------------------------------------#
+
+class RRVGCSUplinkGrant(Layer3):
+    _GEN = (
+        RRHeader(val={'Type':9}),
+        Type3V('RequestRef', val={'V':b'\0\0\0'}, bl={'V':24}, IE=RequestRef()),
+        Type3V('TimingAdvance', val={'V':b'\0'}, bl={'V':8}, IE=TimingAdvance())
+        )
+
+
+#------------------------------------------------------------------------------#
+# VGCS ADDITIONAL INFORMATION
+# TS 44.018, section 9.1.49a
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# vgcs_additional_info
+
+
+#------------------------------------------------------------------------------#
+# VGCS SMS INFORMATION
+# TS 44.018, section 9.1.49b
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# vgcs_sms_information
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 10 $(ASCI)$
+# TS 44.018, section 9.1.50
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# system_information_type_10
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 10BIS $(ASCI)$
+# TS 44.018, section 9.1.50a
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# system_information_type_10bis
+
+
+#------------------------------------------------------------------------------#
+# SYSTEM INFORMATION TYPE 10TER $(ASCI)$
+# TS 44.018, section 9.1.50b
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# system_information_type_10ter
+
+
+#------------------------------------------------------------------------------#
+# EXTENDED MEASUREMENT ORDER
+# TS 44.018, section 9.1.51
+#------------------------------------------------------------------------------#
+
+class RRExtMeasurementOrder(Layer3):
+    _GEN = (
+        RRHeader(val={'Type':55}),
+        Type3V('ExtMeasFreqList', val={'V':16*b'\0'}, bl={'V':128}, IE=ExtMeasFreqList())
+        )
+
+
+#------------------------------------------------------------------------------#
+# EXTENDED MEASUREMENT REPORT
+# TS 44.018, section 9.1.52
+#------------------------------------------------------------------------------#
+
+class RRExtMeasurementOrder(Layer3):
+    _GEN = (
+        RRHeader(val={'Type':54}),
+        Type3V('ExtMeasRes', val={'V':16*b'\0'}, bl={'V':128}, IE=ExtMeasRes())
+        )
+
+
+#------------------------------------------------------------------------------#
+# APPLICATION INFORMATION
+# TS 44.018, section 9.1.53
+#------------------------------------------------------------------------------#
+
+class RRApplicationInfo(Layer3):
+    _GEN = (
+        RRHeader(val={'Type':56}),
+        Type1V('APDUFlags', val={'V':0}, IE=APDUFlags()),
+        Type1V('APDUID', val={'V':0}, dic=APDUID_dict),
+        Type4LV('APDUData', val={'V':b'\0'})
+        )
+
+
+#------------------------------------------------------------------------------#
+# MEASUREMENT INFORMATION
+# TS 44.018, section 9.1.54
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# measurement_information
+
+
+#------------------------------------------------------------------------------#
+# ENHANCED MEASUREMENT REPORT
+# TS 44.018, section 9.1.55
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# enhanced_measurement_report
+
+
+#------------------------------------------------------------------------------#
+# SERVICE INFORMATION MESSAGE
+# TS 44.018, section 9.1.56
+#------------------------------------------------------------------------------#
+
+class RRServiceInfo(Layer3):
+    _GEN = (
+        RRHeader(val={'Type':54}),
+        Type3V('TLLI', val={'V':4*b'\0'}, bl={'V':32}, IE=TLLI()),
+        Type3V('RAI', val={'V':b'\0\xf1\x10\0\0\0'}, bl={'V':48}, IE=RAI()),
+        Type3V('ServiceSupport', val={'V':b'\0'}, bl={'V':8}, IE=ServiceSupport())
+        )
+
+
+#------------------------------------------------------------------------------#
+# VGCS NEIGHBOUR CELL INFORMATION MESSAGE
+# TS 44.018, section 9.1.57
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# vgcs_neighbour_cell_information
+
+
+#------------------------------------------------------------------------------#
+# NOTIFY APPLICATION DATA
+# TS 44.018, section 9.1.58
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# notify_application_data
+
+
+#------------------------------------------------------------------------------#
+# EC IMMEDIATE ASSIGNMENT TYPE 1
+# TS 44.018, section 9.1.59
+#------------------------------------------------------------------------------#
+# not implemented
+
+
+#------------------------------------------------------------------------------#
+# EC IMMEDIATE ASSIGNMENT TYPE 2
+# TS 44.018, section 9.1.60
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# ec_immediate_assignment_type_2_message_content
+
+
+#------------------------------------------------------------------------------#
+# EC IMMEDIATE ASSIGNMENT REJECT
+# TS 44.018, section 9.1.61
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# ec_immediate_assignment_reject_message_content
+
+
+#------------------------------------------------------------------------------#
+# EC DUMMY
+# TS 44.018, section 9.1.62
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# ec_dummy_message_content
+
+
+#------------------------------------------------------------------------------#
+# EC PAGING REQUEST
+# TS 44.018, section 9.1.63
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# ec_paging_request_message_content
+
+
+#------------------------------------------------------------------------------#
+# EC DOWNLINK ASSIGNMENT
+# TS 44.018, section 9.1.64
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# ec_downlink_assignment_message_content
+
+
+#------------------------------------------------------------------------------#
+# EC PACKET CHANNEL REQUEST
+# TS 44.018, section 9.1.65
+#------------------------------------------------------------------------------#
+# not a standard L3 message
+
+
+#------------------------------------------------------------------------------#
+# EC IMMEDIATE ASSIGNMENT TYPE 4
+# TS 44.018, section 9.1.66
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# ec_immediate_assignment_type_4_message_content
+
+
+#------------------------------------------------------------------------------#
+# EC DOWNLINK ASSIGNMENT TYPE 2
+# TS 44.018, section 9.1.67
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# ec_downlink_assignment_message_type_2_content
+
+
+#------------------------------------------------------------------------------#
+# EC IMMEDIATE ASSIGNMENT TYPE 3
+# TS 44.018, section 9.1.68
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# ec_immediate_assignment_type_3_message_content
+
+
+#------------------------------------------------------------------------------#
+# EC PAGING INDICATION
+# TS 44.018, section 9.1.69
+#------------------------------------------------------------------------------#
+# This is a special message with short PD and defined in CSN.1 only:
+# ec_paging_request_message_content
+
+
+#------------------------------------------------------------------------------#
+# GPRS INFORMATION
+# TS 44.018, section 9.6.1
+#------------------------------------------------------------------------------#
+# not implemented
+
+
 #------------------------------------------------------------------------------#
 # RRC dispatcher
 #------------------------------------------------------------------------------#
+'''
+GSMRRType_dict = {
+
+    76:'DTM ASSIGNMENT COMMAND',
+    77:'DTM INFORMATION',
+    78:'PACKET NOTIFICATION',
+    79:'SYSTEM INFORMATION TYPE 23',
+    96:'UTRAN CLASSMARK CHANGE',
+    98:'CDMA2000 CLASSMARK CHANGE',
+    99:'INTER SYSTEM TO UTRAN HANDOVER COMMAND',
+    100:'INTER SYSTEM TO CDMA2000 HANDOVER COMMAND',
+    101:'GERAN IU MODE CLASSMARK CHANGE',
+    102:'INTER SYSTEM TO E-UTRAN HANDOVER COMMAND',
+    #102:'PRIORITY UPLINK REQUEST',
+    103:'DATA INDICATION',
+    104:'DATA INDICATION 2',
+    105:'IMMEDIATE PACKET ASSIGNMENT'
+    }
+
+    61:'SYSTEM INFORMATION TYPE 16',
+    62:'SYSTEM INFORMATION TYPE 17',
+    63:'IMMEDIATE ASSIGNMENT',
+    64:'SYSTEM INFORMATION TYPE 18',
+    65:'SYSTEM INFORMATION TYPE 19',
+    66:'SYSTEM INFORMATION TYPE 20',
+    67:'SYSTEM INFORMATION TYPE 15',
+    68:'SYSTEM INFORMATION TYPE 13 alt',
+    69:'SYSTEM INFORMATION TYPE 2 n',
+    70:'SYSTEM INFORMATION TYPE 21',
+    71:'SYSTEM INFORMATION TYPE 22',
+    72:'DTM ASSIGNMENT FAILURE',
+    73:'DTM REJECT',
+    74:'DTM REQUEST',
+    75:'PACKET ASSIGNMENT',
+'''
 
 RRTypeClasses = {
+
+    
+    
+    0  : RRSystemInfo13,
+    1  : RRSystemInfo14,
+    2  : RRSystemInfo2bis,
+    3  : RRSystemInfo2ter,
+    4  : RRSystemInfo9,
+    5  : RRSystemInfo5bis,
+    6  : RRSystemInfo5ter,
+    7  : RRSystemInfo2quater,
+    9  : RRVGCSUplinkGrant,
+    10 : RRPartialRelease,
+    13 : RRChannelRelease,
+    14 : RRUplinkRelease,
+    15 : RRPartialReleaseComplete,
+    16 : RRChannelModeModify,
+    17 : RRTalkerInd,
+    18 : RRStatus,
+    19 : RRClassmarkEnquiry,
+    20 : RRFrequencyRedefinition,
+    21 : RRMeasurementReport,
+    22 : RRClassmarkChange,
+    23 : RRChannelModeModifyAck,
+    24 : RRSystemInfo8,
+    25 : RRSystemInfo1,
+    26 : RRSystemInfo2,
+    27 : RRSystemInfo3,
+    28 : RRSystemInfo4,
+    29 : RRSystemInfo5,
+    30 : RRSystemInfo6,
+    31 : RRSystemInfo7,
+    32 : RRNotificationNCH,
+    33 : RRPagingReq1,
+    34 : RRPagingReq2,
+    36 : RRPagingReq3,
+    38 : RRNotificationResponse,
     39 : RRPagingResponse,
+    40 : RRHandoverFailure,
+    41 : RRAssignmentComplete,
+    42 : RRUplinkBusy,   
+    43 : RRHandoverCmd,
+    44 : RRHandoverComplete,
+    45 : RRPhysicalInfo,
+    46 : RRAssignmentCmd,
+    47 : RRAssignmentFailure,
+    48 : RRConfigChangeCmd,
+    49 : RRConfigChangeAck,
+    50 : RRCipheringModeComplete,
+    51 : RRConfigChangeReject,
+    52 : RRGPRSSuspensionReq,
+    53 : RRCipheringModeCmd,
+    54 : RRExtMeasurementReport,
+    55 : RRExtMeasurementOrder,
+    56 : RRApplicationInfo,
+    57 : RRImmediateAssignmentExt,
+    58 : RRImmediateAssignmentReject,
+    59 : RRAdditionalAssignment,
     }
 
 def get_rr_msg_instances():

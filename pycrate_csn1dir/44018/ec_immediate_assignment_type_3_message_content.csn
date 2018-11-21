@@ -1,0 +1,23 @@
+-- TS 44.018 - d80
+-- 9.1.68 EC IMMEDIATE ASSIGNMENT TYPE 3
+-- EC Immediate Assignment Type 3 message content
+
+< EC Immediate Assignment Type 3 message content > ::=
+	< Message Type : bit (4) >
+	< Used DL Coverage Class : bit (2) >
+	{ 0 | 1 < EC Page Extension : bit (4) > }
+	< Acknowledged Access Request 1 : Acknowldeged Access Request struct >
+	{ 0 | 1 < Acknowledged Access Request 2 : Acknowldeged Access Request struct > }
+	{ 0 | 1 < Acknowledged Access Request 3 : Acknowldeged Access Request struct > }
+	{ 0 | 1 < Acknowledged Access Request 4 : Acknowldeged Access Request struct > }
+	{ 0 | 1 < Acknowledged Access Request 5 : Acknowldeged Access Request struct > }
+	{ 0 | 1 < Acknowledged Access Request 6 : Acknowldeged Access Request struct > }
+	<spare padding> ;
+
+
+< Acknowledged Access Request struct > ::=
+	{ 00 < Short ID : bit (8) > 
+	| 01 < Random ID Low : bit (4) > 
+	| 10 < Random ID High : bit (12) > 
+	| 11 } ; -- Reserved
+

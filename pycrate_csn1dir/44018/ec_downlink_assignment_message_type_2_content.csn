@@ -1,0 +1,24 @@
+-- TS 44.018 - d80
+-- 9.1.67 EC DOWNLINK ASSIGNMENT TYPE 2
+-- EC Downlink Assignment message Type 2 content
+
+< EC Downlink Allocation struct > ::=
+	< Timing Advance : bit (6) > 
+	< STARTING_DL_TIMESLOT : bit (3) >
+	< Downlink_TFI_Assignment : bit (5) >
+	< TIMESLOT_MULIPLICATOR : bit (2) >
+	< STARTING_UL_TIMESLOT_OFFSET : bit (2) >
+	< GAMMA : bit (5) >
+	< ALPHA Enable : bit (1) >
+	{ 0 | 1	< P0 : bit (4) >
+		< PR_MODE : bit (1) > } ;
+
+< EC Downlink Assignment message Type 2 content > ::=
+	< Message Type : bit (4)  >
+	< Used DL Coverage Class: bit (2) >
+	{ 0 | 1 < EC Page Extension : bit (4) > }
+	< TLLI : bit (32)  >
+	< EC Packet Channel Description Type 3 : bit (15) > -- This is a new parameter in EC DA type 2 vs. EC DA type 1. 
+	< EC Downlink Allocation : < EC Downlink Allocation struct >> 
+	<spare padding> ;
+

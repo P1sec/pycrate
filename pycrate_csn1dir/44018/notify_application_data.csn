@@ -1,0 +1,15 @@
+-- TS 44.018 - d80
+-- 9.1.58 NOTIFY APPLICATION DATA
+-- VGCS Neighbour Cell Information
+
+<NOTIFY APPLICATION DATA > ::=
+    <RR short PD : bit>	-- See 3GPP TS 24.007
+	<message type : bit(5)>		-- See sub-clause 10.4
+	<short layer 2 header : bit(2)>	-- See 3GPP TS 44.006
+	<application data : bit(72) >
+	<data identity : bit(8) >
+	{ 0 | 1 <MSISDN length : bit(4)>
+			<MSISDN : bit(8 * val (MSISDN length))>
+	}
+	<spare padding>;
+

@@ -343,6 +343,15 @@ class PLMN(Buf):
 
 
 #------------------------------------------------------------------------------#
+# Cell Identity
+# TS 24.008, 10.5.1.1
+#------------------------------------------------------------------------------#
+
+class CellId(Uint16):
+    _rep = REPR_HEX
+
+
+#------------------------------------------------------------------------------#
 # CKSN
 # TS 24.008, 10.5.1.2
 #------------------------------------------------------------------------------#
@@ -688,6 +697,33 @@ class MSCm2(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# Descriptive group or broadcast call reference
+# TS 24.008, 10.5.1.9
+#------------------------------------------------------------------------------#
+
+PriorityLevel_dict = {
+    0 : 'no priority applied',
+    1 : 'call priority level 4',
+    2 : 'call priority level 3',
+    3 : 'call priority level 2',
+    4 : 'call priority level 1',
+    5 : 'call priority level 0',
+    6 : 'call priority level B',
+    7 : 'call priority level A'
+    }
+
+class BroadcastCallRef(Envelope):
+    _GEN = (
+        Uint('Value', bl=27, rep=REPR_HEX),
+        Uint('SF', bl=1, dic={0:'VBS, broadcast call', 1:'VGCS, group call'}),
+        Uint('AF', bl=1, dic={0:'ACK not required', 1:'ACK required'}),
+        Uint('CallPriority', bl=3, dic=PriorityLevel_dict),
+        Uint('CipheringInfo', bl=4, dic={0:'no ciphering'}),
+        Uint('spare', bl=4)
+        )
+
+
+#------------------------------------------------------------------------------#
 # PD and SAPI $(CCBS)$
 # TS 24.008, 10.5.1.10a
 #------------------------------------------------------------------------------#
@@ -704,17 +740,6 @@ class PD_SAPI(Envelope):
 # Priority Level
 # TS 24.008, 10.5.1.11
 #------------------------------------------------------------------------------#
-
-PriorityLevel_dict = {
-    0 : 'no priority applied',
-    1 : 'call priority level 4',
-    2 : 'call priority level 3',
-    3 : 'call priority level 2',
-    4 : 'call priority level 1',
-    5 : 'call priority level 0',
-    6 : 'call priority level B',
-    7 : 'call priority level A'
-    }
 
 class PriorityLevel(Envelope):
     _GEN = (
