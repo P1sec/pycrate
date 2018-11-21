@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/si10_rest_octets.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -43,12 +43,20 @@ spare_padding = CSN1Val(name='spare_padding', val='L', num=-1)
 Spare_padding = spare_padding
 Spare_Padding = spare_padding 
 
-next_frequency = CSN1Val(name='next_frequency', val='H')
-
 la_different = CSN1Alt(name='la_different', alt={
   'H': ('', [
   CSN1Bit(name='cell_reselect_hysteresis', bit=3)]),
   'L': ('', [])})
+
+next_frequency = CSN1Val(name='next_frequency', val='H')
+
+further_cell_info = CSN1List(name='further_cell_info', list=[
+  CSN1Ref(obj=la_different),
+  CSN1Bit(name='ms_txpwr_max_cch', bit=5),
+  CSN1Bit(name='rxlev_access_min', bit=6),
+  CSN1Bit(name='cell_reselect_offset', bit=6),
+  CSN1Bit(name='temporary_offset', bit=3),
+  CSN1Bit(name='penalty_time', bit=5)])
 
 further_diff_cell_info = CSN1List(name='further_diff_cell_info', list=[
   CSN1Ref(obj=la_different),
@@ -73,14 +81,6 @@ further_diff_cell_info = CSN1List(name='further_diff_cell_info', list=[
     CSN1Bit(name='penalty_time', bit=5)]),
     'L': ('', [])})])
 
-further_cell_info = CSN1List(name='further_cell_info', list=[
-  CSN1Ref(obj=la_different),
-  CSN1Bit(name='ms_txpwr_max_cch', bit=5),
-  CSN1Bit(name='rxlev_access_min', bit=6),
-  CSN1Bit(name='cell_reselect_offset', bit=6),
-  CSN1Bit(name='temporary_offset', bit=3),
-  CSN1Bit(name='penalty_time', bit=5)])
-
 diff_cell_pars = CSN1Alt(name='diff_cell_pars', alt={
   'H': ('cell_barred', []),
   'L': ('', [
@@ -91,13 +91,6 @@ cell_parameters = CSN1Alt(name='cell_parameters', alt={
   'L': ('', [
   CSN1Ref(obj=further_cell_info)])})
 
-cell_info = CSN1List(name='cell_info', list=[
-  CSN1Bit(name='bsic', bit=6),
-  CSN1Alt(alt={
-    'H': ('', [
-    CSN1Ref(obj=cell_parameters)]),
-    'L': ('', [])})])
-
 differential_cell_info = CSN1List(name='differential_cell_info', list=[
   CSN1Alt(alt={
     'H': ('', [
@@ -107,6 +100,13 @@ differential_cell_info = CSN1List(name='differential_cell_info', list=[
   CSN1Alt(alt={
     'H': ('', [
     CSN1Ref(obj=diff_cell_pars)]),
+    'L': ('', [])})])
+
+cell_info = CSN1List(name='cell_info', list=[
+  CSN1Bit(name='bsic', bit=6),
+  CSN1Alt(alt={
+    'H': ('', [
+    CSN1Ref(obj=cell_parameters)]),
     'L': ('', [])})])
 
 info_field = CSN1List(name='info_field', list=[

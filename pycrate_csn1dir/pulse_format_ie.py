@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/pulse_format_ie.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -47,12 +47,6 @@ pulse_format_coding_2_struct = CSN1Alt(name='pulse_format_coding_2_struct', alt=
   '1': ('', [
   CSN1Val(name='non_hopping_carrier_pulse_format', val='00')])})
 
-pulse_format_ie = CSN1Alt(name='pulse_format_ie', alt={
-  '0': ('', [
-  CSN1Bit(name='pulse_format_coding_1', bit=3)]),
-  '1': ('', [
-  CSN1Ref(name='pulse_format_coding_2', obj=pulse_format_coding_2_struct)])})
-
 dlmc_indirect_encoding_struct = CSN1List(name='dlmc_indirect_encoding_struct', list=[
   CSN1Bit(name='ma_number', bit=4),
   CSN1Alt(alt={
@@ -68,6 +62,12 @@ dlmc_direct_encoding_2_struct = CSN1List(name='dlmc_direct_encoding_2_struct', l
   CSN1Bit(name='hsn', bit=6),
   CSN1Bit(name='length_of_ma_frequency_list_contents', bit=4),
   CSN1Bit(name='ma_frequency_list_contents', bit=8, num=([1], lambda x: x + 3))])
+
+pulse_format_ie = CSN1Alt(name='pulse_format_ie', alt={
+  '0': ('', [
+  CSN1Bit(name='pulse_format_coding_1', bit=3)]),
+  '1': ('', [
+  CSN1Ref(name='pulse_format_coding_2', obj=pulse_format_coding_2_struct)])})
 
 dlmc_direct_encoding_1_struct = CSN1Ref(name='dlmc_direct_encoding_1_struct', obj=gprs_mobile_allocation_ie)
 

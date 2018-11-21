@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/ec_packet_channel_request_message_content_cc1.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -45,13 +45,13 @@ ec_packet_channel_request_message_content_cc3 = CSN1List(name='ec_packet_channel
   CSN1Bit(name='randombits', bit=3),
   CSN1Bit(name='selected_dl_coverage_class', bit=3)])
 
-ec_packet_channel_request_message_content_cc4 = CSN1List(name='ec_packet_channel_request_message_content_cc4', list=[
+ec_packet_channel_request_message_content_cc1 = CSN1List(name='ec_packet_channel_request_message_content_cc1', list=[
   CSN1Bit(name='ec_numberofblocks', bit=3),
   CSN1Bit(name='ec_priority'),
   CSN1Bit(name='randombits', bit=3),
   CSN1Bit(name='selected_dl_coverage_class', bit=3)])
 
-ec_packet_channel_request_message_content_cc1 = CSN1List(name='ec_packet_channel_request_message_content_cc1', list=[
+ec_packet_channel_request_message_content_cc4 = CSN1List(name='ec_packet_channel_request_message_content_cc4', list=[
   CSN1Bit(name='ec_numberofblocks', bit=3),
   CSN1Bit(name='ec_priority'),
   CSN1Bit(name='randombits', bit=3),

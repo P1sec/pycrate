@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/dual_carrier_frequency_parameters_ie.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -40,7 +40,7 @@ from pycrate_csn1dir.gprs_mobile_allocation_ie import gprs_mobile_allocation_ie
 
 from pycrate_csn1.csnobj import *
 
-dual_carrier_direct_encoding_2_struct = CSN1List(name='dual_carrier_direct_encoding_2_struct', list=[
+dual_carrier_direct_encoding_1_struct = CSN1List(name='dual_carrier_direct_encoding_1_struct', list=[
   CSN1Alt(alt={
     '0': ('', []),
     '1': ('', [
@@ -49,9 +49,7 @@ dual_carrier_direct_encoding_2_struct = CSN1List(name='dual_carrier_direct_encod
     '0': ('', []),
     '1': ('', [
     CSN1Bit(name='maio2', bit=6)])}),
-  CSN1Bit(name='hsn', bit=6),
-  CSN1Bit(name='length_of_ma_frequency_list_contents', bit=4),
-  CSN1Bit(name='ma_frequency_list_contents', bit=8, num=([3], lambda x: x + 3))])
+  CSN1Ref(name='gprs_mobile_allocation', obj=gprs_mobile_allocation_ie)])
 
 dual_carrier_indirect_encoding_struct = CSN1List(name='dual_carrier_indirect_encoding_struct', list=[
   CSN1Alt(alt={
@@ -72,7 +70,7 @@ dual_carrier_indirect_encoding_struct = CSN1List(name='dual_carrier_indirect_enc
       '1': ('', [
       CSN1Bit(name='change_mark_2', bit=2)])})])})])
 
-dual_carrier_direct_encoding_1_struct = CSN1List(name='dual_carrier_direct_encoding_1_struct', list=[
+dual_carrier_direct_encoding_2_struct = CSN1List(name='dual_carrier_direct_encoding_2_struct', list=[
   CSN1Alt(alt={
     '0': ('', []),
     '1': ('', [
@@ -81,7 +79,9 @@ dual_carrier_direct_encoding_1_struct = CSN1List(name='dual_carrier_direct_encod
     '0': ('', []),
     '1': ('', [
     CSN1Bit(name='maio2', bit=6)])}),
-  CSN1Ref(name='gprs_mobile_allocation', obj=gprs_mobile_allocation_ie)])
+  CSN1Bit(name='hsn', bit=6),
+  CSN1Bit(name='length_of_ma_frequency_list_contents', bit=4),
+  CSN1Bit(name='ma_frequency_list_contents', bit=8, num=([3], lambda x: x + 3))])
 
 dual_carrier_frequency_parameters_ie = CSN1List(name='dual_carrier_frequency_parameters_ie', list=[
   CSN1Bit(name='tsc', bit=3),

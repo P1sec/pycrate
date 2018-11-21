@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/padding_bits.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -43,10 +43,10 @@ spare_padding = CSN1Val(name='spare_padding', val='L', num=-1)
 Spare_padding = spare_padding
 Spare_Padding = spare_padding 
 
-spare_padding = CSN1Val(name='spare_padding', val='L**')
-
 padding_bits = CSN1Alt(name='padding_bits', alt={
   '0': ('', [
   CSN1Ref(obj=spare_padding)]),
   None: ('', [])})
+
+spare_padding = CSN1Val(name='spare_padding', val='L**')
 

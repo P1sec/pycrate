@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/si9_rest_octets.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -92,13 +92,6 @@ position = CSN1Alt(name='position', alt={
   CSN1Bit(name='relative_position', bit=([0], lambda x: x + 1)),
   CSN1Bit(name='bcch_type')])})
 
-positions = CSN1List(name='positions', list=[
-  CSN1Ref(obj=position),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Ref(obj=position)])})])
-
 info_type = CSN1Alt(name='info_type', alt={
   '0': ('', [
   CSN1Bit(name='info_type_4', bit=4)]),
@@ -106,6 +99,13 @@ info_type = CSN1Alt(name='info_type', alt={
   CSN1Bit(name='info_type_5', bit=5)]),
   '11': ('', [
   CSN1Bit(name='info_type_6', bit=6)])})
+
+positions = CSN1List(name='positions', list=[
+  CSN1Ref(obj=position),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Ref(obj=position)])})])
 
 scheduling_info = CSN1List(name='scheduling_info', list=[
   CSN1Ref(obj=info_type),

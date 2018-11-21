@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/individual_priorities_ie.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -39,13 +39,6 @@
 
 from pycrate_csn1.csnobj import *
 
-repeated_individual_e_utran_priority_parameters_struct = CSN1List(name='repeated_individual_e_utran_priority_parameters_struct', list=[
-  CSN1List(num=-1, list=[
-    CSN1Val(name='', val='1'),
-    CSN1Bit(name='earfcn', bit=16)]),
-  CSN1Val(name='', val='0'),
-  CSN1Bit(name='e_utran_priority', bit=3)])
-
 repeated_individual_utran_priority_parameters_struct = CSN1List(name='repeated_individual_utran_priority_parameters_struct', list=[
   CSN1Alt(alt={
     '0': ('', [
@@ -60,16 +53,6 @@ repeated_individual_utran_priority_parameters_struct = CSN1List(name='repeated_i
     CSN1Val(name='', val='0')])}),
   CSN1Bit(name='utran_priority', bit=3)])
 
-e_utran_individual_priority_parameters_description_struct = CSN1List(name='e_utran_individual_priority_parameters_description_struct', list=[
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='default_e_utran_priority', bit=3)])}),
-  CSN1List(num=-1, list=[
-    CSN1Val(name='', val='1'),
-    CSN1Ref(name='repeated_individual_e_utran_priority_parameters', obj=repeated_individual_e_utran_priority_parameters_struct)]),
-  CSN1Val(name='', val='0')])
-
 _3g_individual_priority_parameters_description_struct = CSN1List(name='_3g_individual_priority_parameters_description_struct', list=[
   CSN1Alt(alt={
     '0': ('', []),
@@ -78,6 +61,23 @@ _3g_individual_priority_parameters_description_struct = CSN1List(name='_3g_indiv
   CSN1List(num=-1, list=[
     CSN1Val(name='', val='1'),
     CSN1Ref(name='repeated_individual_utran_priority_parameters', obj=repeated_individual_utran_priority_parameters_struct)]),
+  CSN1Val(name='', val='0')])
+
+repeated_individual_e_utran_priority_parameters_struct = CSN1List(name='repeated_individual_e_utran_priority_parameters_struct', list=[
+  CSN1List(num=-1, list=[
+    CSN1Val(name='', val='1'),
+    CSN1Bit(name='earfcn', bit=16)]),
+  CSN1Val(name='', val='0'),
+  CSN1Bit(name='e_utran_priority', bit=3)])
+
+e_utran_individual_priority_parameters_description_struct = CSN1List(name='e_utran_individual_priority_parameters_description_struct', list=[
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='default_e_utran_priority', bit=3)])}),
+  CSN1List(num=-1, list=[
+    CSN1Val(name='', val='1'),
+    CSN1Ref(name='repeated_individual_e_utran_priority_parameters', obj=repeated_individual_e_utran_priority_parameters_struct)]),
   CSN1Val(name='', val='0')])
 
 individual_priorities_ie = CSN1Alt(name='individual_priorities_ie', alt={

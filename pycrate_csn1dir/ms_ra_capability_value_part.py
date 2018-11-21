@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,13 +22,30 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/ms_ra_capability_value_part.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
 # specification: TS 24.008 - d90
 # section: 10.5.5.12a MS Radio Access capability
 # top-level object: MS RA capability value part
+
+_AccessTechnoType_dict = {
+    0 : 'GSM P',
+    1 : 'GSM E  --note that GSM E covers GSM P',
+    2 : 'GSM R  --note that GSM R covers GSM E and GSM P',
+    3 : 'GSM 1800',
+    4 : 'GSM 1900',
+    5 : 'GSM 450',
+    6 : 'GSM 480',
+    7 : 'GSM 850',
+    8 : 'GSM 750',
+    9 : 'GSM T 380',
+    10 : 'GSM T 410',
+    11 : 'unused',
+    12 : 'GSM 710',
+    13 : 'GSM T 810',
+}
 
 
 
@@ -42,36 +59,6 @@ from pycrate_csn1.csnobj import *
 spare_bits = CSN1Bit(name='spare_bits', num=-1)
 Spare_bits = spare_bits
 Spare_Bits = spare_bits
-
-dlmc_capability_struct = CSN1List(name='dlmc_capability_struct', list=[
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='dlmc_non_contiguous_intra_band_reception', bit=2),
-    CSN1Bit(name='dlmc_inter_band_reception')])}),
-  CSN1Bit(name='dlmc_maximum_bandwidth', bit=2),
-  CSN1Bit(name='dlmc_maximum_number_of_downlink_timeslots', bit=6),
-  CSN1Bit(name='dlmc_maximum_number_of_downlink_carriers', bit=3)])
-
-enhanced_flexible_timeslot_assignment_struct = CSN1Alt(name='enhanced_flexible_timeslot_assignment_struct', alt={
-  '0': ('', []),
-  '1': ('', [
-  CSN1Bit(name='alternative_efta_multislot_class', bit=4),
-  CSN1Bit(name='efta_multislot_capability_reduction_for_downlink_dual_carrier', bit=3)])})
-
-a5_bits = CSN1List(name='a5_bits', list=[
-  CSN1Bit(name='a5_1'),
-  CSN1Bit(name='a5_2'),
-  CSN1Bit(name='a5_3'),
-  CSN1Bit(name='a5_4'),
-  CSN1Bit(name='a5_5'),
-  CSN1Bit(name='a5_6'),
-  CSN1Bit(name='a5_7')])
-
-additional_access_technologies_struct = CSN1List(name='additional_access_technologies_struct', list=[
-  CSN1Bit(name='access_technology_type', bit=4),
-  CSN1Bit(name='gmsk_power_class', bit=3),
-  CSN1Bit(name='_8psk_power_class', bit=2)])
 
 multislot_capability_struct = CSN1List(name='multislot_capability_struct', list=[
   CSN1Alt(alt={
@@ -106,6 +93,36 @@ multislot_capability_struct = CSN1List(name='multislot_capability_struct', list=
       '0': ('', []),
       '1': ('', [
       CSN1Bit(name='dtm_egprs_multi_slot_class', bit=2)])})])})])
+
+dlmc_capability_struct = CSN1List(name='dlmc_capability_struct', list=[
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='dlmc_non_contiguous_intra_band_reception', bit=2),
+    CSN1Bit(name='dlmc_inter_band_reception')])}),
+  CSN1Bit(name='dlmc_maximum_bandwidth', bit=2),
+  CSN1Bit(name='dlmc_maximum_number_of_downlink_timeslots', bit=6),
+  CSN1Bit(name='dlmc_maximum_number_of_downlink_carriers', bit=3)])
+
+a5_bits = CSN1List(name='a5_bits', list=[
+  CSN1Bit(name='a5_1'),
+  CSN1Bit(name='a5_2'),
+  CSN1Bit(name='a5_3'),
+  CSN1Bit(name='a5_4'),
+  CSN1Bit(name='a5_5'),
+  CSN1Bit(name='a5_6'),
+  CSN1Bit(name='a5_7')])
+
+additional_access_technologies_struct = CSN1List(name='additional_access_technologies_struct', list=[
+  CSN1Bit(name='access_technology_type', bit=4),
+  CSN1Bit(name='gmsk_power_class', bit=3),
+  CSN1Bit(name='_8psk_power_class', bit=2)])
+
+enhanced_flexible_timeslot_assignment_struct = CSN1Alt(name='enhanced_flexible_timeslot_assignment_struct', alt={
+  '0': ('', []),
+  '1': ('', [
+  CSN1Bit(name='alternative_efta_multislot_class', bit=4),
+  CSN1Bit(name='efta_multislot_capability_reduction_for_downlink_dual_carrier', bit=3)])})
 
 content = CSN1List(name='content', trunc=True, list=[
   CSN1Bit(name='rf_power_capability', bit=3),
@@ -247,7 +264,8 @@ ms_ra_capability_value_part_struct = CSN1List(name='ms_ra_capability_value_part_
   CSN1Alt(alt={
     '0': ('', []),
     '1': ('', [
-    CSN1SelfRef()])})])
+    CSN1SelfRef()])})],
+  kdic=_AccessTechnoType_dict)
 
 ms_ra_capability_value_part = CSN1List(name='ms_ra_capability_value_part', list=[
   CSN1Ref(obj=ms_ra_capability_value_part_struct),

@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/psi16_message_content.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -40,13 +40,13 @@ from pycrate_csn1dir.padding_bits import padding_bits
 
 from pycrate_csn1.csnobj import *
 
+cn_domain_identity_ie = CSN1Bit(name='cn_domain_identity_ie', bit=2)
+
 gra_id_struct = CSN1List(name='gra_id_struct', list=[
   CSN1Bit(name='number_of_gra_ids', bit=3),
   CSN1Bit(name='gra_id', bit=16, num=([0], lambda x: x + 1))])
 
 cn_domain_specific_drx_cycle_length_coefficient_ie = CSN1Bit(name='cn_domain_specific_drx_cycle_length_coefficient_ie', bit=4)
-
-cn_domain_identity_ie = CSN1Bit(name='cn_domain_identity_ie', bit=2)
 
 psi16_message_content = CSN1List(name='psi16_message_content', list=[
   CSN1Bit(name='page_mode', bit=2),

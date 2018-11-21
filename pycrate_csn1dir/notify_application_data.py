@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. P1sec.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -21,14 +21,14 @@
 # * MA 02110-1301  USA
 # *
 # *--------------------------------------------------------
-# * File Name : pycrate_csn1dir/notification_application_data.py
-# * Created : 2018-10-08
+# * File Name : pycrate_csn1dir/vgcs_neighbour_cell_information.py
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
 # specification: TS 44.018 - d80
 # section: 9.1.58 NOTIFY APPLICATION DATA
-# top-level object: NOTIFY APPLICATION DATA
+# top-level object: VGCS Neighbour Cell Information
 
 
 

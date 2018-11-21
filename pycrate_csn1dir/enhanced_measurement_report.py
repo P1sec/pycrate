@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/enhanced_measurement_report.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -44,6 +44,13 @@ spare_padding = CSN1Val(name='spare_padding', val='L', num=-1)
 Spare_padding = spare_padding
 Spare_Padding = spare_padding 
 
+eutran_measurement_report_struct = CSN1List(name='eutran_measurement_report_struct', list=[
+  CSN1Bit(name='n_eutran', bit=2),
+  CSN1List(num=([0], lambda x: x + 1), list=[
+    CSN1Bit(name='eutran_frequency_index', bit=3),
+    CSN1Bit(name='cell_identity', bit=9),
+    CSN1Bit(name='reporting_quantity', bit=6)])])
+
 repeated_invalid_bsic_information_struct = CSN1List(name='repeated_invalid_bsic_information_struct', list=[
   CSN1Bit(name='bcch_freq_ncell', bit=5),
   CSN1Bit(name='bsic', bit=6),
@@ -56,13 +63,6 @@ serving_cell_data_struct = CSN1List(name='serving_cell_data_struct', list=[
   CSN1Bit(name='mean_bep', bit=5),
   CSN1Bit(name='cv_bep', bit=3),
   CSN1Bit(name='nbr_rcvd_blocks', bit=5)])
-
-eutran_measurement_report_struct = CSN1List(name='eutran_measurement_report_struct', list=[
-  CSN1Bit(name='n_eutran', bit=2),
-  CSN1List(num=([0], lambda x: x + 1), list=[
-    CSN1Bit(name='eutran_frequency_index', bit=3),
-    CSN1Bit(name='cell_identity', bit=9),
-    CSN1Bit(name='reporting_quantity', bit=6)])])
 
 enhanced_measurement_report = CSN1List(name='enhanced_measurement_report', list=[
   CSN1Bit(name='rr_short_pd'),

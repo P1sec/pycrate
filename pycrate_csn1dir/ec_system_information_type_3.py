@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/ec_system_information_type_3.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -42,19 +42,6 @@ from pycrate_csn1.csnobj import *
 spare_padding = CSN1Val(name='spare_padding', val='L', num=-1)
 Spare_padding = spare_padding
 Spare_Padding = spare_padding 
-
-ec_cell_reselection_parameters_struct = CSN1List(name='ec_cell_reselection_parameters_struct', list=[
-  CSN1Bit(name='cell_reselect_hysteresis', bit=3),
-  CSN1Bit(name='cell_reselect_offset', bit=6),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='c1_delta_min', bit=2),
-    CSN1Bit(name='c1_delta_max', bit=3)])})])
-
-ec_neighbour_cell_description_struct = CSN1List(name='ec_neighbour_cell_description_struct', list=[
-  CSN1Bit(name='numberofoctets', bit=5),
-  CSN1Bit(name='neighbour_frequency_list_information', bit=([0], lambda x: 8 * (x + 1)))])
 
 ec_neighbour_cell_reselection_parameters_struct = CSN1List(name='ec_neighbour_cell_reselection_parameters_struct', list=[
   CSN1Bit(name='nb_ncell', bit=5),
@@ -85,6 +72,19 @@ ec_neighbour_cell_reselection_parameters_struct = CSN1List(name='ec_neighbour_ce
         '0': ('', []),
         '1': ('', [
         CSN1Bit(name='cell_reselect_offset', bit=6)])})])})])])
+
+ec_cell_reselection_parameters_struct = CSN1List(name='ec_cell_reselection_parameters_struct', list=[
+  CSN1Bit(name='cell_reselect_hysteresis', bit=3),
+  CSN1Bit(name='cell_reselect_offset', bit=6),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='c1_delta_min', bit=2),
+    CSN1Bit(name='c1_delta_max', bit=3)])})])
+
+ec_neighbour_cell_description_struct = CSN1List(name='ec_neighbour_cell_description_struct', list=[
+  CSN1Bit(name='numberofoctets', bit=5),
+  CSN1Bit(name='neighbour_frequency_list_information', bit=([0], lambda x: 8 * (x + 1)))])
 
 ec_system_information_type_3 = CSN1List(name='ec_system_information_type_3', list=[
   CSN1Bit(name='message_type', bit=3),

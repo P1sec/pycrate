@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2017. Benoit Michau. ANSSI.
+# * Copyright 2017. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -50,18 +50,20 @@ class CSN1Obj(Element):
             int, static number of repetition for the object
                 default is 1, it can be >= 0
                 or -1, for an undefined number of repetitions
-            (x:int, (a:int, b:int) is an alternate possible value in case
+            (x:int, (a:int, b:int)) is an alternate possible value in case
                 the number of repetitions is dynamic and depends on another 
-                object, handling is similar to lref
-            In case of undefined number of repetitions, the decoding happens
-            until there is no more buffer to decode, or a fixed value defined in
-            the object is not present anymore in the buffer to decode
-        - lref: (x:int, (a:int, b:int)), enforces the length in bit during 
-            the decoding and potentially the encoding 
-            x: offset into a field in the parent object (which has to be a list)
-               to get the value from
-            a, b: transform in the form x: a*(x+b) to be applied to the 
-                  value of the referred object to get the length of self
+                object:
+                x: backward reference to a field into the parent object which 
+                   has to be a list
+                a, b: transform in the form x: a*(x+b) to be applied to the 
+                      value of the backward reference to get the length of self
+        - lref: enforces a limitation to the length in bits during the decoding 
+                and potentially the encoding, used for lists and alternatives
+            None, no limitation
+            int, static limitation of the number of bits
+            (x:int, (a:int, b:int)) is an alternate possible value in case the
+                limitation of number of bits is dynamic and depends on another 
+                object, handling is similar to num
     
     This class must not be used directly, only CSN1Bit, CSN1List, CSN1Alt, 
     CSN1Val, CSN1Ref, CSN1SelfRef.
@@ -114,6 +116,8 @@ class CSN1Obj(Element):
             self._num  = kw['num']
         if 'lref' in kw and kw['lref'] is not None:
             self._lref = kw['lref']
+        if 'val' in kw:
+            self.set_val(kw['val'])
         # offset for dealing with L / H bits
         self._off = 0
     
@@ -255,8 +259,12 @@ class CSN1Obj(Element):
             _root_obj = self
         #
         if self._lref is not None:
-            # dynamic shortage of the char buffer
-            lref = self._resolve_ref(self._lref)
+            if isinstance(self._lref, integer_types):
+                # static shortage of the char buffer
+                lref = self._lref
+            else:
+                # dynamic shortage of the char buffer
+                lref = self._resolve_ref(self._lref)
             char_lb = char._len_bit
             char._len_bit = char._cur + lref
             assert( char._len_bit <= char_lb )

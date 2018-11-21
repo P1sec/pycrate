@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/receive_npdu_number_list_value.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -39,9 +39,17 @@
 
 from pycrate_csn1.csnobj import *
 
-receive_npdu_number_value = CSN1Alt(name='receive_npdu_number_value', num=8, alt={
-  '0': ('', []),
-  '1': ('', [])})
+padding_bits = CSN1Alt(name='padding_bits', alt={
+  '0000': ('', []),
+  None: ('', [])})
+
+receive_npdu_number_list = CSN1List(name='receive_npdu_number_list', list=[
+  CSN1Bit(name='sapi', bit=4),
+  CSN1Bit(name='receive_npdu_number_value', bit=8),
+  CSN1Alt(alt={
+    '': ('', [
+    CSN1SelfRef()]),
+    None: ('', [])})])
 
 nsapi = CSN1Alt(name='nsapi', alt={
   '0101': ('', []),
@@ -56,17 +64,9 @@ nsapi = CSN1Alt(name='nsapi', alt={
   '1110': ('', []),
   '1111': ('', [])})
 
-padding_bits = CSN1Alt(name='padding_bits', alt={
-  '0000': ('', []),
-  None: ('', [])})
-
-receive_npdu_number_list = CSN1List(name='receive_npdu_number_list', list=[
-  CSN1Bit(name='sapi', bit=4),
-  CSN1Bit(name='receive_npdu_number_value', bit=8),
-  CSN1Alt(alt={
-    '': ('', [
-    CSN1SelfRef()]),
-    None: ('', [])})])
+receive_npdu_number_value = CSN1Alt(name='receive_npdu_number_value', num=8, alt={
+  '0': ('', []),
+  '1': ('', [])})
 
 receive_npdu_number_list_value = CSN1List(name='receive_npdu_number_list_value', list=[
   CSN1Ref(obj=receive_npdu_number_list),

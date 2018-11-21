@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/measurement_results_contents.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -59,71 +59,85 @@ measurement_results_contents = CSN1List(name='measurement_results_contents', lre
     '000': ('no_ncell_m', [
     CSN1Ref(name='ncell_report', obj=ncell_report_struct, num=([0], lambda x: x)),
     CSN1Alt(alt={
-      '0**': ('', []),
+      '0': ('', [
+      CSN1Val(name='', val='0**')]),
       '1': ('', [
       CSN1Ref(name='utran_csg_measurement_report', obj=utran_csg_measurement_report_ie),
       CSN1Alt(alt={
-        '0**': ('', []),
+        '0': ('', [
+        CSN1Val(name='', val='0**')]),
         None: ('', [])})]),
       None: ('', [])})]),
     '001': ('no_ncell_m', [
     CSN1Ref(name='ncell_report', obj=ncell_report_struct, num=([0], lambda x: x)),
     CSN1Alt(alt={
-      '0**': ('', []),
+      '0': ('', [
+      CSN1Val(name='', val='0**')]),
       '1': ('', [
       CSN1Ref(name='utran_csg_measurement_report', obj=utran_csg_measurement_report_ie),
       CSN1Alt(alt={
-        '0**': ('', []),
+        '0': ('', [
+        CSN1Val(name='', val='0**')]),
         None: ('', [])})]),
       None: ('', [])})]),
     '010': ('no_ncell_m', [
     CSN1Ref(name='ncell_report', obj=ncell_report_struct, num=([0], lambda x: x)),
     CSN1Alt(alt={
-      '0**': ('', []),
+      '0': ('', [
+      CSN1Val(name='', val='0**')]),
       '1': ('', [
       CSN1Ref(name='utran_csg_measurement_report', obj=utran_csg_measurement_report_ie),
       CSN1Alt(alt={
-        '0**': ('', []),
+        '0': ('', [
+        CSN1Val(name='', val='0**')]),
         None: ('', [])})]),
       None: ('', [])})]),
     '011': ('no_ncell_m', [
     CSN1Ref(name='ncell_report', obj=ncell_report_struct, num=([0], lambda x: x)),
     CSN1Alt(alt={
-      '0**': ('', []),
+      '0': ('', [
+      CSN1Val(name='', val='0**')]),
       '1': ('', [
       CSN1Ref(name='utran_csg_measurement_report', obj=utran_csg_measurement_report_ie),
       CSN1Alt(alt={
-        '0**': ('', []),
+        '0': ('', [
+        CSN1Val(name='', val='0**')]),
         None: ('', [])})]),
       None: ('', [])})]),
     '100': ('no_ncell_m', [
     CSN1Ref(name='ncell_report', obj=ncell_report_struct, num=([0], lambda x: x)),
     CSN1Alt(alt={
-      '0**': ('', []),
+      '0': ('', [
+      CSN1Val(name='', val='0**')]),
       '1': ('', [
       CSN1Ref(name='utran_csg_measurement_report', obj=utran_csg_measurement_report_ie),
       CSN1Alt(alt={
-        '0**': ('', []),
+        '0': ('', [
+        CSN1Val(name='', val='0**')]),
         None: ('', [])})]),
       None: ('', [])})]),
     '101': ('no_ncell_m', [
     CSN1Ref(name='ncell_report', obj=ncell_report_struct, num=([0], lambda x: x)),
     CSN1Alt(alt={
-      '0**': ('', []),
+      '0': ('', [
+      CSN1Val(name='', val='0**')]),
       '1': ('', [
       CSN1Ref(name='utran_csg_measurement_report', obj=utran_csg_measurement_report_ie),
       CSN1Alt(alt={
-        '0**': ('', []),
+        '0': ('', [
+        CSN1Val(name='', val='0**')]),
         None: ('', [])})]),
       None: ('', [])})]),
     '110': ('no_ncell_m', [
     CSN1Ref(name='ncell_report', obj=ncell_report_struct, num=([0], lambda x: x)),
     CSN1Alt(alt={
-      '0**': ('', []),
+      '0': ('', [
+      CSN1Val(name='', val='0**')]),
       '1': ('', [
       CSN1Ref(name='utran_csg_measurement_report', obj=utran_csg_measurement_report_ie),
       CSN1Alt(alt={
-        '0**': ('', []),
+        '0': ('', [
+        CSN1Val(name='', val='0**')]),
         None: ('', [])})]),
       None: ('', [])})]),
     '111': ('no_ncell_m', [

@@ -1,18 +1,32 @@
-> 44060/multiple_tbf_timeslot_reconfigure_message_content.csn
-WARN: unable to process arithmetic expression, (N)
-    do it by hand within the Python file generated
-WARN: unable to process arithmetic expression, (M-1)
-    do it by hand within the Python file generated
-WARN: unable to process arithmetic expression, (N)
-    do it by hand within the Python file generated
-WARN: unable to process arithmetic expression, (M-1)
-    do it by hand within the Python file generated
+### Warnings
 
-> 44060/packet_cs_release_message_content.csn
-WARN: unable to process arithmetic expression, (N)
+> 44018/si2quater_rest_octets.csn
+WARN: unable to process arithmetic expression, (p(NR_OF_FDD_CELLS))
     do it by hand within the Python file generated
-WARN: unable to process arithmetic expression, (M-1)
+WARN: unable to process arithmetic expression, (q(NR_OF_TDD_CELLS))
     do it by hand within the Python file generated
+# handled below
+
+> 44018/cell_selection_indicator_after_release_of_all_tch_and_sdcch_value_part.csn
+WARN: unable to process arithmetic expression, (p(NR_OF_FDD_CELLS))
+    do it by hand within the Python file generated
+WARN: unable to process arithmetic expression, (q(NR_OF_TDD_CELLS))
+    do it by hand within the Python file generated
+# handled below
+
+> 44018/measurement_information.csn
+WARN: unable to process arithmetic expression, (p(NR_OF_FDD_CELLS))
+    do it by hand within the Python file generated
+WARN: unable to process arithmetic expression, (q(NR_OF_TDD_CELLS))
+    do it by hand within the Python file generated
+# handled below
+
+> 44060/psi3_bis_message_content.csn
+WARN: unable to process arithmetic expression, (1+max(val(CELL_PARAMS_POINTER)))
+    do it by hand within the Python file generated
+WARN: unable to process arithmetic expression, (1+max(val(CELL_PARAMS_POINTER)))
+    do it by hand within the Python file generated
+# handled below
 
 > 44060/multiple_uplink_assignment_2_ie.csn
 WARN: unable to resolve reference, N_PAIRS
@@ -21,6 +35,7 @@ WARN: unable to resolve reference, N_PAIRS
     do it by hand within the Python file generated
 WARN: unable to resolve reference, N_PAIRS
     do it by hand within the Python file generated
+# unhandled
 
 > 44060/multiple_tbf_uplink_assignment_message_content.csn
 WARN: unable to process arithmetic expression, (N)
@@ -31,26 +46,69 @@ WARN: unable to process arithmetic expression, (N)
     do it by hand within the Python file generated
 WARN: unable to process arithmetic expression, (M-1)
     do it by hand within the Python file generated
+# unhandled
 
-> 44060/ps_handover_radio_resources_ie.csn
+> 44060/packet_measurement_order_message_content.csn
+WARN: unable to process arithmetic expression, (p(NR_OF_FDD_CELLS))
+    do it by hand within the Python file generated
+WARN: unable to process arithmetic expression, (q(NR_OF_TDD_CELLS))
+    do it by hand within the Python file generated
+# handled below
+
+> 44060/packet_cs_release_message_content.csn
 WARN: unable to process arithmetic expression, (N)
     do it by hand within the Python file generated
 WARN: unable to process arithmetic expression, (M-1)
     do it by hand within the Python file generated
+# unhandled
+
+> 44060/packet_cell_change_order_message_content.csn
+WARN: unable to process arithmetic expression, (p(NR_OF_FDD_CELLS))
+    do it by hand within the Python file generated
+WARN: unable to process arithmetic expression, (q(NR_OF_TDD_CELLS))
+    do it by hand within the Python file generated
+# handled below
+
+> 44060/psi3_quater_message_content.csn
+WARN: unable to process arithmetic expression, (p(NR_OF_FDD_CELLS))
+    do it by hand within the Python file generated
+WARN: unable to process arithmetic expression, (q(NR_OF_TDD_CELLS))
+    do it by hand within the Python file generated
+# handled below
+
+> 44060/multiple_tbf_timeslot_reconfigure_message_content.csn
+WARN: unable to process arithmetic expression, (N)
+    do it by hand within the Python file generated
+WARN: unable to process arithmetic expression, (M-1)
+    do it by hand within the Python file generated
+WARN: unable to process arithmetic expression, (N)
+    do it by hand within the Python file generated
+WARN: unable to process arithmetic expression, (M-1)
+    do it by hand within the Python file generated
+# unhandled
 
 > 44060/dtm_handover_ps_radio_resources_ie.csn
 WARN: unable to process arithmetic expression, (N)
     do it by hand within the Python file generated
 WARN: unable to process arithmetic expression, (M-1)
     do it by hand within the Python file generated
+# unhandled
+
+> 44060/ps_handover_radio_resources_ie.csn
+WARN: unable to process arithmetic expression, (N)
+    do it by hand within the Python file generated
+WARN: unable to process arithmetic expression, (M-1)
+    do it by hand within the Python file generated
+# unhandled
 
 
-# manual patching required
 
-# 24.008
-# ms_ra_capability_value_part.py
+### Manual patching required
 
-# manual edit
+## 24.008
+## ms_ra_capability_value_part.py
+
+# create a dict:
 _AccessTechnoType_dict = {
     0 : 'GSM P',
     1 : 'GSM E  --note that GSM E covers GSM P',
@@ -67,14 +125,18 @@ _AccessTechnoType_dict = {
     12 : 'GSM 710',
     13 : 'GSM T 810',
 }
+# ref it with a kdic=_AccessTechnoType_dict
+# within the object ms_ra_capability_value_part_struct
 
 
-# 44.018
-# cell_selection_indicator_after_release_of_all_tch_and_sdcch_value_part.py
-# measurement_information.py
-# si2quater_rest_octets.py
+## 44.018
+## cell_selection_indicator_after_release_of_all_tch_and_sdcch_value_part.py
+## measurement_information.py
+## si2quater_rest_octets.py
 
-# manual edit
+# add the following function definitions
+# and patch all objects having such crappy references: ('# unprocessed: ...', lambda: 0)
+
 # table 9.1.54.1a
 _TransP = {
     0 : 0,
@@ -133,11 +195,21 @@ def trans_q(n):
     except:
         return 0
 
-# 44.060
-# psi3_bis_message_content.py
+
+## 44.060
+## psi3_bis_message_content.py
+
+# add the following function definitions
+# and patch all objects having such crappy references: ('# unprocessed: ...', lambda: 0)
 
 def max_cell_params(cpp):
-    # cpp is a list of list of (1, ref, val)
+    # cpp is a list of list of fmt [1, ref, 2-bit-val]
+    #
+    # CSN1List(num=-1, list=[
+    #   CSN1Val(name='', val='1'),
+    #   CSN1Ref(obj=ncp2_repeat_struct),
+    #   CSN1Bit(name='cell_params_pointer', bit=2)])
+    #
     if cpp:
         try:
             if isinstance(cpp[0][2], integer_types):
@@ -148,67 +220,14 @@ def max_cell_params(cpp):
             pass
     return 0
 
-# 44.060
-# packet_cell_change_order_message_content.py
-# packet_measurement_order_message_content.py
-# psi3_quater_message_content.py
 
-# manual edit
-# table 11.2.9b.2.a
-_TransP = {
-    0 : 0,
-    1 : 10,
-    2 : 19,
-    3 : 28,
-    4 : 36,
-    5 : 44,
-    6 : 52,
-    7 : 60,
-    8 : 67,
-    9 : 74,
-    10: 81,
-    11: 88,
-    12: 95,
-    13: 102,
-    14: 109,
-    15: 116,
-    16: 122
-    }
+## 44.060
+## packet_cell_change_order_message_content.py
+## packet_measurement_order_message_content.py
+## psi3_quater_message_content.py
 
-def trans_p(n):
-    try:
-        return _TransP[n]
-    except:
-        return 0
+# add the following function definitions
+# and patch all objects having such crappy references: ('# unprocessed: ...', lambda: 0)
 
-# table 11.2.9b.2.b
-_TransQ = {
-    0 : 0,
-    1 : 9,
-    2 : 17,
-    3 : 25,
-    4 : 32,
-    5 : 39,
-    6 : 46,
-    7 : 53,
-    8 : 59,
-    9 : 65,
-    10: 71,
-    11: 77,
-    12: 83,
-    13: 89,
-    14: 95,
-    15: 101,
-    16: 106,
-    17: 111,
-    18: 116,
-    19: 121,
-    20: 126
-    }
 
-def trans_q(n):
-    try:
-        return _TransQ[n]
-    except:
-        return 0
 

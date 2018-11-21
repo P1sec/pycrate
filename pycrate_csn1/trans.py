@@ -47,15 +47,20 @@ class CSN1Obj(object):
             int, static number of repetition for the object
                 default is 1, it can be >= 0
                 or -1, for an undefined number of repetitions
-            (x:int, (a:int, b:int) is an alternate possible value in case
+            (x:int, (a:int, b:int)) is an alternate possible value in case
                 the number of repetitions is dynamic and depends on another 
-                object, handling is similar to lref
-        - lref: (x:int, (a:int, b:int)), enforces the length in bit during 
-            the decoding and potentially the encoding
-            x: backward reference to a field into the parent object which 
-               has to be a list
-            a, b: transform in the form x: a*(x+b) to be applied to the 
-                  value of the backward reference to get the length of self
+                object:
+                x: backward reference to a field into the parent object which 
+                   has to be a list
+                a, b: transform in the form x: a*(x+b) to be applied to the 
+                      value of the backward reference to get the length of self
+        - lref: enforces a limitation to the length in bits during the decoding 
+                and potentially the encoding, used for lists and alternatives
+            None, no limitation
+            int, static limitation to the number of bits
+            (x:int, (a:int, b:int)) is an alternate possible value in case the
+                limitation of number of bits is dynamic and depends on another 
+                object, handling is similar to num
         - ref : set of str, list all reference to external CSN.1 objects
         
         In case the CSN.1 object is a bit-field:
@@ -63,9 +68,9 @@ class CSN1Obj(object):
             int, static number of bits for the object
                 default is 1, it can be >= 0
                 or -1, for an undefined number of bits
-            (x:int, (a:int, b:int) is an alternate possible value in case
+            (x:int, (a:int, b:int)) is an alternate possible value in case
                 the number of bits is dynamic and depends on another 
-                object, handling is similar to lref
+                object, handling is similar to num
         - excl: None or CSN1Val, list of excluded values
         
         In case the CSN.1 object is a list of objects:
@@ -1170,7 +1175,14 @@ def build_alt_selector(Obj):
                     if val == 'null':
                         has_null.append( True )
                     else:
-                        selec.append( (val, (pythonize_name(alt._name), [])) )
+                        # potential alternative
+                        if val[-2:] == '**':
+                            # take care of repeated value (e.g. 0**)
+                            nv = ASN1Val()
+                            nv.parse_val(val)
+                            selec.append( (val[:-2], (pythonize_name(alt._name), [nv])) )
+                        else:
+                            selec.append( (val, (pythonize_name(alt._name), [])) )
                         has_null.append( False )
             else:
                 if alt._val[0] == 'null':
@@ -1178,7 +1190,11 @@ def build_alt_selector(Obj):
                     has_null.append(True)
                 else:
                     # potential alternative
-                    selec.append( (alt._val[0], (pythonize_name(alt._name), [])) )
+                    if alt._val[0][-2:] == '**':
+                        # take care of repeated value (e.g. 0**)
+                        selec.append( (alt._val[0][:-2], (pythonize_name(alt._name), [alt])) )
+                    else:
+                        selec.append( (alt._val[0], (pythonize_name(alt._name), [])) )
                     has_null.append( False )
         #
         elif isinstance(alt, CSN1Ref):
@@ -1193,9 +1209,13 @@ def build_alt_selector(Obj):
                     # associate all of them with the rest of the objects' list
                     rest = alt[1:]
                     for val in alt[0]._val:
+                        if val[-2:] == '**':
+                            raise(CSN1Err('unsupported alternative key, %s' % val))
                         selec.append( (val, (pythonize_name(alt[0]._name), rest)) )
                         has_null.append( False )
                 else:
+                    if alt[0]._val[0][-2:] == '**':
+                        raise(CSN1Err('unsupported alternative key, %s' % alt[0]._val[0]))
                     selec.append( (alt[0]._val[0], (pythonize_name(alt[0]._name), alt[1:])) )
                     has_null.append( False )
             elif alt[0]._bit and alt[0]._excl:
@@ -1231,9 +1251,13 @@ def build_alt_selector(Obj):
                     # associate all of them with the rest of the objects' list
                     rest = alt._list[1:]
                     for val in alt._list[0]._val:
+                        if val[-2:] == '**':
+                            raise(CSN1Err('unsupported alternative key, %s' % val))
                         selec.append( (val, (pythonize_name(alt_name), rest)) )
                         has_null.append( False )
                 else:
+                    if alt._list[0]._val[0][-2:] == '**':
+                        raise(CSN1Err('unsupported alternative key, %s' %  alt._list[0]._val[0]))
                     selec.append( (alt._list[0]._val[0], (pythonize_name(alt_name), alt._list[1:])) )
                     has_null.append( False )
             elif alt._list[0]._bit and alt._list[0]._excl:

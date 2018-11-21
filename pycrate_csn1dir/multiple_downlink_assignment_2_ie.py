@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/multiple_downlink_assignment_2_ie.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -86,17 +86,6 @@ btti_multiple_downlink_assignment_struct = CSN1List(name='btti_multiple_downlink
     CSN1Ref(name='downlink_tbf_assignment', obj=downlink_tbf_assignment_2_struct)]),
   CSN1Val(name='', val='0')])
 
-rtti_multiple_downlink_assignment_sc_struct = CSN1List(name='rtti_multiple_downlink_assignment_sc_struct', list=[
-  CSN1Bit(name='rtti_downlink_pdch_pair_assignment_sc', bit=4),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='uplink_control_timeslot_c1', bit=3)])}),
-  CSN1List(num=-1, list=[
-    CSN1Val(name='', val='1'),
-    CSN1Ref(name='downlink_tbf_assignment', obj=downlink_tbf_assignment_2_struct)]),
-  CSN1Val(name='', val='0')])
-
 rtti_multiple_downlink_assignment_dc_struct = CSN1List(name='rtti_multiple_downlink_assignment_dc_struct', list=[
   CSN1Bit(name='rtti_downlink_pdch_pair_assignment_dc', bit=8),
   CSN1Alt(alt={
@@ -107,6 +96,17 @@ rtti_multiple_downlink_assignment_dc_struct = CSN1List(name='rtti_multiple_downl
     '0': ('', []),
     '1': ('', [
     CSN1Bit(name='uplink_control_timeslot_c2', bit=3)])}),
+  CSN1List(num=-1, list=[
+    CSN1Val(name='', val='1'),
+    CSN1Ref(name='downlink_tbf_assignment', obj=downlink_tbf_assignment_2_struct)]),
+  CSN1Val(name='', val='0')])
+
+rtti_multiple_downlink_assignment_sc_struct = CSN1List(name='rtti_multiple_downlink_assignment_sc_struct', list=[
+  CSN1Bit(name='rtti_downlink_pdch_pair_assignment_sc', bit=4),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='uplink_control_timeslot_c1', bit=3)])}),
   CSN1List(num=-1, list=[
     CSN1Val(name='', val='1'),
     CSN1Ref(name='downlink_tbf_assignment', obj=downlink_tbf_assignment_2_struct)]),

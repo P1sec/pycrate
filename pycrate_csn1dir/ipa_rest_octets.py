@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/ipa_rest_octets.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -42,6 +42,18 @@ from pycrate_csn1.csnobj import *
 spare_padding = CSN1Val(name='spare_padding', val='L', num=-1)
 Spare_padding = spare_padding
 Spare_Padding = spare_padding 
+
+ipa_downlink_assignment_struct = CSN1List(name='ipa_downlink_assignment_struct', list=[
+  CSN1List(num=-1, list=[
+    CSN1Val(name='', val='1'),
+    CSN1Bit(name='tlli', bit=32),
+    CSN1Bit(name='tfi_assignment', bit=5),
+    CSN1Bit(name='gamma', bit=5),
+    CSN1Alt(alt={
+      '0': ('', []),
+      '1': ('', [
+      CSN1Bit(name='timing_advance_value', bit=6)])})]),
+  CSN1Val(name='', val='0')])
 
 ipa_uplink_assignment_struct = CSN1List(name='ipa_uplink_assignment_struct', list=[
   CSN1List(num=-1, list=[
@@ -64,18 +76,6 @@ ipa_single_block_uplink_assignment_struct = CSN1List(name='ipa_single_block_upli
     CSN1Bit(name='gamma', bit=5),
     CSN1Bit(name='timing_advance_value', bit=6),
     CSN1Bit(name='starting_time_offset', bit=6)]),
-  CSN1Val(name='', val='0')])
-
-ipa_downlink_assignment_struct = CSN1List(name='ipa_downlink_assignment_struct', list=[
-  CSN1List(num=-1, list=[
-    CSN1Val(name='', val='1'),
-    CSN1Bit(name='tlli', bit=32),
-    CSN1Bit(name='tfi_assignment', bit=5),
-    CSN1Bit(name='gamma', bit=5),
-    CSN1Alt(alt={
-      '0': ('', []),
-      '1': ('', [
-      CSN1Bit(name='timing_advance_value', bit=6)])})]),
   CSN1Val(name='', val='0')])
 
 ipa_rest_octets = CSN1List(name='ipa_rest_octets', list=[

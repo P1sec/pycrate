@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,13 +22,72 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/psi3_quater_message_content.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
 # specification: TS 44.060 - d60
 # section: 11.2.21b Packet System Information Type 3 quater
 # top-level object: PSI3 quater message content
+
+# table 9.1.54.1a
+_TransP = {
+    0 : 0,
+    1 : 10,
+    2 : 19,
+    3 : 28,
+    4 : 36,
+    5 : 44,
+    6 : 52,
+    7 : 60,
+    8 : 67,
+    9 : 74,
+    10: 81,
+    11: 88,
+    12: 95,
+    13: 102,
+    14: 109,
+    15: 116,
+    16: 122
+    }
+
+def trans_p(n):
+    try:
+        return _TransP[n]
+    except:
+        return 0
+
+# table 9.1.54.1b
+_TransQ = {
+    0 : 0,
+    1 : 9,
+    2 : 17,
+    3 : 25,
+    4 : 32,
+    5 : 39,
+    6 : 46,
+    7 : 53,
+    8 : 59,
+    9 : 65,
+    10: 71,
+    11: 77,
+    12: 83,
+    13: 89,
+    14: 95,
+    15: 101,
+    16: 106,
+    17: 111,
+    18: 116,
+    19: 121,
+    20: 126
+    }
+
+def trans_q(n):
+    try:
+        return _TransQ[n]
+    except:
+        return 0
+
 
 # external references
 from pycrate_csn1dir.padding_bits import padding_bits
@@ -40,28 +99,21 @@ from pycrate_csn1dir.padding_bits import padding_bits
 
 from pycrate_csn1.csnobj import *
 
-_3g_initial_dedicated_mode_reporting_description_struct = CSN1List(name='_3g_initial_dedicated_mode_reporting_description_struct', list=[
-  CSN1Bit(name='_3g_ba_ind'),
-  CSN1Bit(name='qsearch_i', bit=4),
-  CSN1Bit(name='qsearch_c_initial'),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='fdd_qoffset', bit=4),
-    CSN1Bit(name='fdd_rep_quant'),
-    CSN1Bit(name='fdd_multirat_reporting', bit=2)])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='tdd_qoffset', bit=4),
-    CSN1Bit(name='tdd_multirat_reporting', bit=2)])})])
-
 repeated_utran_fdd_neighbour_cells_struct = CSN1List(name='repeated_utran_fdd_neighbour_cells_struct', list=[
   CSN1Val(name='', val='0'),
   CSN1Bit(name='fdd_arfcn', bit=14),
   CSN1Bit(name='fdd_indic0'),
   CSN1Bit(name='nr_of_fdd_cells', bit=5),
-  CSN1Bit(name='fdd__cell_information_field', bit=('# unprocessed: (p(NR_OF_FDD_CELLS))', lambda: 0))])
+  #CSN1Bit(name='fdd__cell_information_field', bit=('# unprocessed: (p(NR_OF_FDD_CELLS))', lambda: 0))])
+  CSN1Bit(name='fdd__cell_information_field', bit=([3], trans_p))])
+
+repeated_utran_tdd_neighbour_cells_struct = CSN1List(name='repeated_utran_tdd_neighbour_cells_struct', list=[
+  CSN1Val(name='', val='0'),
+  CSN1Bit(name='tdd_arfcn', bit=14),
+  CSN1Bit(name='tdd_indic0'),
+  CSN1Bit(name='nr_of_tdd_cells', bit=5),
+  #CSN1Bit(name='tdd_cell_information_field', bit=('# unprocessed: (q(NR_OF_TDD_CELLS))', lambda: 0))])
+  CSN1Bit(name='tdd_cell_information_field', bit=([3], trans_q))])
 
 utran_fdd_description_struct = CSN1List(name='utran_fdd_description_struct', list=[
   CSN1Alt(alt={
@@ -71,6 +123,20 @@ utran_fdd_description_struct = CSN1List(name='utran_fdd_description_struct', lis
   CSN1List(num=-1, list=[
     CSN1Val(name='', val='1'),
     CSN1Ref(name='repeated_utran_fdd_neighbour_cells', obj=repeated_utran_fdd_neighbour_cells_struct)]),
+  CSN1Val(name='', val='0')])
+
+gprs_rep_priority_description_struct = CSN1List(name='gprs_rep_priority_description_struct', list=[
+  CSN1Bit(name='number_cells', bit=7),
+  CSN1Bit(name='rep_priority', num=([0], lambda x: x))])
+
+utran_tdd_description_struct = CSN1List(name='utran_tdd_description_struct', list=[
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='bandwidth_tdd', bit=3)])}),
+  CSN1List(num=-1, list=[
+    CSN1Val(name='', val='1'),
+    CSN1Ref(name='repeated_utran_tdd_neighbour_cells', obj=repeated_utran_tdd_neighbour_cells_struct)]),
   CSN1Val(name='', val='0')])
 
 _3g_measurement_parameters_description_struct = CSN1List(name='_3g_measurement_parameters_description_struct', list=[
@@ -91,30 +157,25 @@ gprs_3g_additional_measurement_parameters_description_2_struct = CSN1Alt(name='g
   '1': ('', [
   CSN1Bit(name='fdd_reporting_threshold_2', bit=6)])})
 
-gprs_rep_priority_description_struct = CSN1List(name='gprs_rep_priority_description_struct', list=[
-  CSN1Bit(name='number_cells', bit=7),
-  CSN1Bit(name='rep_priority', num=([0], lambda x: x))])
+_3g_initial_dedicated_mode_reporting_description_struct = CSN1List(name='_3g_initial_dedicated_mode_reporting_description_struct', list=[
+  CSN1Bit(name='_3g_ba_ind'),
+  CSN1Bit(name='qsearch_i', bit=4),
+  CSN1Bit(name='qsearch_c_initial'),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='fdd_qoffset', bit=4),
+    CSN1Bit(name='fdd_rep_quant'),
+    CSN1Bit(name='fdd_multirat_reporting', bit=2)])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='tdd_qoffset', bit=4),
+    CSN1Bit(name='tdd_multirat_reporting', bit=2)])})])
 
 gprs_3g_additional_measurement_parameters_description_struct = CSN1List(name='gprs_3g_additional_measurement_parameters_description_struct', list=[
   CSN1Bit(name='fdd_qmin_offset', bit=3),
   CSN1Bit(name='fdd_rscpmin', bit=4)])
-
-repeated_utran_tdd_neighbour_cells_struct = CSN1List(name='repeated_utran_tdd_neighbour_cells_struct', list=[
-  CSN1Val(name='', val='0'),
-  CSN1Bit(name='tdd_arfcn', bit=14),
-  CSN1Bit(name='tdd_indic0'),
-  CSN1Bit(name='nr_of_tdd_cells', bit=5),
-  CSN1Bit(name='tdd_cell_information_field', bit=('# unprocessed: (q(NR_OF_TDD_CELLS))', lambda: 0))])
-
-utran_tdd_description_struct = CSN1List(name='utran_tdd_description_struct', list=[
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='bandwidth_tdd', bit=3)])}),
-  CSN1List(num=-1, list=[
-    CSN1Val(name='', val='1'),
-    CSN1Ref(name='repeated_utran_tdd_neighbour_cells', obj=repeated_utran_tdd_neighbour_cells_struct)]),
-  CSN1Val(name='', val='0')])
 
 _3g_neighbour_cells_description_struct = CSN1List(name='_3g_neighbour_cells_description_struct', list=[
   CSN1Alt(alt={

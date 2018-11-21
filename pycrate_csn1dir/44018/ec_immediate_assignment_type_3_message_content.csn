@@ -6,7 +6,7 @@
 	< Message Type : bit (4) >
 	< Used DL Coverage Class : bit (2) >
 	{ 0 | 1 < EC Page Extension : bit (4) > }
-	< Acknowledged Access Request 1 : Acknowldeged Access Request struct >
+	< Acknowledged Access Request 1 : Acknowledged Access Request struct >
 	{ 0 | 1 < Acknowledged Access Request 2 : Acknowledged Access Request struct > }
 	{ 0 | 1 < Acknowledged Access Request 3 : Acknowledged Access Request struct > }
 	{ 0 | 1 < Acknowledged Access Request 4 : Acknowledged Access Request struct > }

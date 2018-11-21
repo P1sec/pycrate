@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,13 +22,32 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/psi3_bis_message_content.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
 # specification: TS 44.060 - d60
 # section: 11.2.21 Packet System Information Type 3 bis
 # top-level object: PSI3 bis message content
+
+def max_cell_params(cpp):
+    # cpp is a list of list of fmt [1, ref, 2-bit-val]
+    #
+    # CSN1List(num=-1, list=[
+    #   CSN1Val(name='', val='1'),
+    #   CSN1Ref(obj=ncp2_repeat_struct),
+    #   CSN1Bit(name='cell_params_pointer', bit=2)])
+    #
+    if cpp:
+        try:
+            if isinstance(cpp[0][2], integer_types):
+                return 1 + max([i[2] for i in cpp])
+            elif isinstance(cpp[0][2], str_types):
+                return 1 + max([int(i[2], 2) for i in cpp])
+        except:
+            pass
+    return 0
+
 
 # external references
 from pycrate_csn1dir.lsa_parameters_ie import lsa_parameters_ie
@@ -41,204 +60,21 @@ from pycrate_csn1dir.padding_bits import padding_bits
 
 from pycrate_csn1.csnobj import *
 
-si13_pbcch_location_struct = CSN1Alt(name='si13_pbcch_location_struct', alt={
-  '0': ('', [
-  CSN1Bit(name='si13_location')]),
-  '1': ('', [
-  CSN1Bit(name='pbcch_location', bit=2),
-  CSN1Bit(name='psi1_repeat_period', bit=4)])})
-
-compact_ncp2_property_struct = CSN1List(name='compact_ncp2_property_struct', list=[
-  CSN1Bit(name='same_ra_as_serving_cell'),
-  CSN1Bit(name='cell_bar_access_2'),
-  CSN1Bit(name='bcc', bit=3),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='time_group', bit=2)])})])
-
-compact_ncp2_repeat_struct = CSN1Alt(name='compact_ncp2_repeat_struct', alt={
-  '0': ('', []),
-  '1': ('', [
-  CSN1Bit(name='start_frequency', bit=10),
-  CSN1Ref(obj=compact_ncp2_property_struct),
-  CSN1Alt(alt={
-    '0000': ('', []),
-    '0001': ('nr_of_remaining_cells', [
-    CSN1Bit(name='freq_diff_length', bit=3),
-    CSN1List(num=([0], lambda x: x), list=[
-      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
-      CSN1Ref(obj=compact_ncp2_property_struct)]),
-    CSN1SelfRef()]),
-    '0010': ('nr_of_remaining_cells', [
-    CSN1Bit(name='freq_diff_length', bit=3),
-    CSN1List(num=([0], lambda x: x), list=[
-      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
-      CSN1Ref(obj=compact_ncp2_property_struct)]),
-    CSN1SelfRef()]),
-    '0011': ('nr_of_remaining_cells', [
-    CSN1Bit(name='freq_diff_length', bit=3),
-    CSN1List(num=([0], lambda x: x), list=[
-      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
-      CSN1Ref(obj=compact_ncp2_property_struct)]),
-    CSN1SelfRef()]),
-    '0100': ('nr_of_remaining_cells', [
-    CSN1Bit(name='freq_diff_length', bit=3),
-    CSN1List(num=([0], lambda x: x), list=[
-      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
-      CSN1Ref(obj=compact_ncp2_property_struct)]),
-    CSN1SelfRef()]),
-    '0101': ('nr_of_remaining_cells', [
-    CSN1Bit(name='freq_diff_length', bit=3),
-    CSN1List(num=([0], lambda x: x), list=[
-      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
-      CSN1Ref(obj=compact_ncp2_property_struct)]),
-    CSN1SelfRef()]),
-    '0110': ('nr_of_remaining_cells', [
-    CSN1Bit(name='freq_diff_length', bit=3),
-    CSN1List(num=([0], lambda x: x), list=[
-      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
-      CSN1Ref(obj=compact_ncp2_property_struct)]),
-    CSN1SelfRef()]),
-    '0111': ('nr_of_remaining_cells', [
-    CSN1Bit(name='freq_diff_length', bit=3),
-    CSN1List(num=([0], lambda x: x), list=[
-      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
-      CSN1Ref(obj=compact_ncp2_property_struct)]),
-    CSN1SelfRef()]),
-    '1000': ('nr_of_remaining_cells', [
-    CSN1Bit(name='freq_diff_length', bit=3),
-    CSN1List(num=([0], lambda x: x), list=[
-      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
-      CSN1Ref(obj=compact_ncp2_property_struct)]),
-    CSN1SelfRef()]),
-    '1001': ('nr_of_remaining_cells', [
-    CSN1Bit(name='freq_diff_length', bit=3),
-    CSN1List(num=([0], lambda x: x), list=[
-      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
-      CSN1Ref(obj=compact_ncp2_property_struct)]),
-    CSN1SelfRef()]),
-    '1010': ('nr_of_remaining_cells', [
-    CSN1Bit(name='freq_diff_length', bit=3),
-    CSN1List(num=([0], lambda x: x), list=[
-      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
-      CSN1Ref(obj=compact_ncp2_property_struct)]),
-    CSN1SelfRef()]),
-    '1011': ('nr_of_remaining_cells', [
-    CSN1Bit(name='freq_diff_length', bit=3),
-    CSN1List(num=([0], lambda x: x), list=[
-      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
-      CSN1Ref(obj=compact_ncp2_property_struct)]),
-    CSN1SelfRef()]),
-    '1100': ('nr_of_remaining_cells', [
-    CSN1Bit(name='freq_diff_length', bit=3),
-    CSN1List(num=([0], lambda x: x), list=[
-      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
-      CSN1Ref(obj=compact_ncp2_property_struct)]),
-    CSN1SelfRef()]),
-    '1101': ('nr_of_remaining_cells', [
-    CSN1Bit(name='freq_diff_length', bit=3),
-    CSN1List(num=([0], lambda x: x), list=[
-      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
-      CSN1Ref(obj=compact_ncp2_property_struct)]),
-    CSN1SelfRef()]),
-    '1110': ('nr_of_remaining_cells', [
-    CSN1Bit(name='freq_diff_length', bit=3),
-    CSN1List(num=([0], lambda x: x), list=[
-      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
-      CSN1Ref(obj=compact_ncp2_property_struct)]),
-    CSN1SelfRef()]),
-    '1111': ('nr_of_remaining_cells', [
-    CSN1Bit(name='freq_diff_length', bit=3),
-    CSN1List(num=([0], lambda x: x), list=[
-      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
-      CSN1Ref(obj=compact_ncp2_property_struct)]),
-    CSN1SelfRef()])})])})
-
 ccn_support_description_struct = CSN1List(name='ccn_support_description_struct', list=[
   CSN1Bit(name='number_cells', bit=7),
   CSN1Bit(name='ccn_supported', num=([0], lambda x: x))])
-
-iu_mode_cell_selection_struct = CSN1List(name='iu_mode_cell_selection_struct', list=[
-  CSN1Bit(name='cell_bar_qualify_3', bit=2),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Ref(name='si13alt_pbcch_location', obj=si13_pbcch_location_struct)])})])
-
-compact_neighbour_parameter_set_struct = CSN1List(name='compact_neighbour_parameter_set_struct', list=[
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='ncc', bit=3)])}),
-  CSN1Bit(name='exc_acc'),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='gprs_rxlev_access_min', bit=6)])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='gprs_ms_txpwr_max_cch', bit=5)])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='gprs_priority_class', bit=3)])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='gprs_hcs_thr', bit=5)])}),
-  CSN1Bit(name='gprs_temporary_offset', bit=3),
-  CSN1Bit(name='gprs_penalty_time', bit=5),
-  CSN1Bit(name='gprs_reselect_offset', bit=5),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='guar_constant_pwr_blks', bit=2)])})])
 
 ncp2_property_struct = CSN1List(name='ncp2_property_struct', list=[
   CSN1Bit(name='same_ra_as_serving_cell'),
   CSN1Bit(name='cell_bar_access_2'),
   CSN1Bit(name='bcc', bit=3)])
 
-neighbour_parameter_set_struct = CSN1List(name='neighbour_parameter_set_struct', list=[
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='ncc', bit=3)])}),
-  CSN1Bit(name='exc_acc'),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='gprs_rxlev_access_min', bit=6)])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='gprs_ms_txpwr_max_cch', bit=5)])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='priority_class', bit=3)])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='hcs_thr', bit=5)])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Ref(name='si13_pbcch_location', obj=si13_pbcch_location_struct)])}),
-  CSN1Bit(name='gprs_temporary_offset', bit=3),
-  CSN1Bit(name='gprs_penalty_time', bit=5),
-  CSN1Bit(name='gprs_reselect_offset', bit=5)])
-
-compact_neighbour_cell_params_2_struct = CSN1List(name='compact_neighbour_cell_params_2_struct', list=[
-  CSN1Val(name='', val='00'),
-  CSN1List(num=-1, list=[
-    CSN1Val(name='', val='1'),
-    CSN1Ref(obj=compact_ncp2_repeat_struct),
-    CSN1Bit(name='cell_params_pointer', bit=2)]),
-  CSN1Val(name='', val='0'),
-  CSN1Ref(name='compact_neighbour_parameter_set', obj=compact_neighbour_parameter_set_struct, num=('# unprocessed: (1+max(val(CELL_PARAMS_POINTER)))', lambda: 0))])
+si13_pbcch_location_struct = CSN1Alt(name='si13_pbcch_location_struct', alt={
+  '0': ('', [
+  CSN1Bit(name='si13_location')]),
+  '1': ('', [
+  CSN1Bit(name='pbcch_location', bit=2),
+  CSN1Bit(name='psi1_repeat_period', bit=4)])})
 
 hcs_struct = CSN1List(name='hcs_struct', list=[
   CSN1Bit(name='priority_class', bit=3),
@@ -271,51 +107,44 @@ iu_mode_only_cell_selection_struct = CSN1List(name='iu_mode_only_cell_selection_
     '1': ('', [
     CSN1Ref(name='si13alt_pbcch_location', obj=si13_pbcch_location_struct)])})])
 
-cell_selection_struct = CSN1List(name='cell_selection_struct', list=[
-  CSN1Bit(name='bsic', bit=6),
-  CSN1Bit(name='cell_bar_access_2'),
-  CSN1Bit(name='exc_acc'),
-  CSN1Bit(name='same_ra_as_serving_cell'),
+neighbour_parameter_set_struct = CSN1List(name='neighbour_parameter_set_struct', list=[
   CSN1Alt(alt={
     '0': ('', []),
     '1': ('', [
-    CSN1Bit(name='gprs_rxlev_access_min', bit=6),
+    CSN1Bit(name='ncc', bit=3)])}),
+  CSN1Bit(name='exc_acc'),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='gprs_rxlev_access_min', bit=6)])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
     CSN1Bit(name='gprs_ms_txpwr_max_cch', bit=5)])}),
   CSN1Alt(alt={
     '0': ('', []),
     '1': ('', [
-    CSN1Bit(name='gprs_temporary_offset', bit=3),
-    CSN1Bit(name='gprs_penalty_time', bit=5)])}),
+    CSN1Bit(name='priority_class', bit=3)])}),
   CSN1Alt(alt={
     '0': ('', []),
     '1': ('', [
-    CSN1Bit(name='gprs_reselect_offset', bit=5)])}),
+    CSN1Bit(name='hcs_thr', bit=5)])}),
   CSN1Alt(alt={
     '0': ('', []),
     '1': ('', [
-    CSN1Ref(name='hcs_params', obj=hcs_struct)])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Ref(name='si13_pbcch_location', obj=si13_pbcch_location_struct)])})])
+    CSN1Ref(name='si13_pbcch_location', obj=si13_pbcch_location_struct)])}),
+  CSN1Bit(name='gprs_temporary_offset', bit=3),
+  CSN1Bit(name='gprs_penalty_time', bit=5),
+  CSN1Bit(name='gprs_reselect_offset', bit=5)])
 
-neighbour_cell_params_struct = CSN1List(name='neighbour_cell_params_struct', list=[
-  CSN1Bit(name='start_frequency', bit=10),
-  CSN1Ref(name='cell_selection_params', obj=cell_selection_struct),
-  CSN1Bit(name='nr_of_remaining_cells', bit=4),
-  CSN1Bit(name='freq_diff_length', bit=3),
-  CSN1List(num=([2], lambda x: x), list=[
-    CSN1Bit(name='frequency_diff', bit=([-1, 3], lambda x: x + 1)),
-    CSN1Ref(name='cell_selection_params', obj=cell_selection_struct)])])
-
-iu_mode_only_neighbour_cell_params_struct = CSN1List(name='iu_mode_only_neighbour_cell_params_struct', list=[
-  CSN1Bit(name='start_frequency', bit=10),
-  CSN1Ref(name='iu_mode_only_cell_selection_params', obj=iu_mode_only_cell_selection_struct),
-  CSN1Bit(name='nr_of_remaining_cells', bit=4),
-  CSN1Bit(name='freq_diff_length', bit=3),
-  CSN1List(num=([2], lambda x: x), list=[
-    CSN1Bit(name='frequency_diff', bit=([-1, 3], lambda x: x + 1)),
-    CSN1Ref(name='iu_mode_only_cell_selection_params', obj=iu_mode_only_cell_selection_struct)])])
+compact_ncp2_property_struct = CSN1List(name='compact_ncp2_property_struct', list=[
+  CSN1Bit(name='same_ra_as_serving_cell'),
+  CSN1Bit(name='cell_bar_access_2'),
+  CSN1Bit(name='bcc', bit=3),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='time_group', bit=2)])})])
 
 ncp2_repeat_struct = CSN1Alt(name='ncp2_repeat_struct', alt={
   '0': ('', []),
@@ -415,12 +244,196 @@ ncp2_repeat_struct = CSN1Alt(name='ncp2_repeat_struct', alt={
       CSN1Ref(obj=ncp2_property_struct)]),
     CSN1SelfRef()])})])})
 
-iu_mode_neighbour_cell_params_struct = CSN1List(name='iu_mode_neighbour_cell_params_struct', list=[
-  CSN1Bit(name='nr_of_remaining_cells', bit=4),
-  CSN1Alt(num=([0], lambda x: x), alt={
+compact_ncp2_repeat_struct = CSN1Alt(name='compact_ncp2_repeat_struct', alt={
+  '0': ('', []),
+  '1': ('', [
+  CSN1Bit(name='start_frequency', bit=10),
+  CSN1Ref(obj=compact_ncp2_property_struct),
+  CSN1Alt(alt={
+    '0000': ('', []),
+    '0001': ('nr_of_remaining_cells', [
+    CSN1Bit(name='freq_diff_length', bit=3),
+    CSN1List(num=([0], lambda x: x), list=[
+      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
+      CSN1Ref(obj=compact_ncp2_property_struct)]),
+    CSN1SelfRef()]),
+    '0010': ('nr_of_remaining_cells', [
+    CSN1Bit(name='freq_diff_length', bit=3),
+    CSN1List(num=([0], lambda x: x), list=[
+      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
+      CSN1Ref(obj=compact_ncp2_property_struct)]),
+    CSN1SelfRef()]),
+    '0011': ('nr_of_remaining_cells', [
+    CSN1Bit(name='freq_diff_length', bit=3),
+    CSN1List(num=([0], lambda x: x), list=[
+      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
+      CSN1Ref(obj=compact_ncp2_property_struct)]),
+    CSN1SelfRef()]),
+    '0100': ('nr_of_remaining_cells', [
+    CSN1Bit(name='freq_diff_length', bit=3),
+    CSN1List(num=([0], lambda x: x), list=[
+      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
+      CSN1Ref(obj=compact_ncp2_property_struct)]),
+    CSN1SelfRef()]),
+    '0101': ('nr_of_remaining_cells', [
+    CSN1Bit(name='freq_diff_length', bit=3),
+    CSN1List(num=([0], lambda x: x), list=[
+      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
+      CSN1Ref(obj=compact_ncp2_property_struct)]),
+    CSN1SelfRef()]),
+    '0110': ('nr_of_remaining_cells', [
+    CSN1Bit(name='freq_diff_length', bit=3),
+    CSN1List(num=([0], lambda x: x), list=[
+      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
+      CSN1Ref(obj=compact_ncp2_property_struct)]),
+    CSN1SelfRef()]),
+    '0111': ('nr_of_remaining_cells', [
+    CSN1Bit(name='freq_diff_length', bit=3),
+    CSN1List(num=([0], lambda x: x), list=[
+      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
+      CSN1Ref(obj=compact_ncp2_property_struct)]),
+    CSN1SelfRef()]),
+    '1000': ('nr_of_remaining_cells', [
+    CSN1Bit(name='freq_diff_length', bit=3),
+    CSN1List(num=([0], lambda x: x), list=[
+      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
+      CSN1Ref(obj=compact_ncp2_property_struct)]),
+    CSN1SelfRef()]),
+    '1001': ('nr_of_remaining_cells', [
+    CSN1Bit(name='freq_diff_length', bit=3),
+    CSN1List(num=([0], lambda x: x), list=[
+      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
+      CSN1Ref(obj=compact_ncp2_property_struct)]),
+    CSN1SelfRef()]),
+    '1010': ('nr_of_remaining_cells', [
+    CSN1Bit(name='freq_diff_length', bit=3),
+    CSN1List(num=([0], lambda x: x), list=[
+      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
+      CSN1Ref(obj=compact_ncp2_property_struct)]),
+    CSN1SelfRef()]),
+    '1011': ('nr_of_remaining_cells', [
+    CSN1Bit(name='freq_diff_length', bit=3),
+    CSN1List(num=([0], lambda x: x), list=[
+      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
+      CSN1Ref(obj=compact_ncp2_property_struct)]),
+    CSN1SelfRef()]),
+    '1100': ('nr_of_remaining_cells', [
+    CSN1Bit(name='freq_diff_length', bit=3),
+    CSN1List(num=([0], lambda x: x), list=[
+      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
+      CSN1Ref(obj=compact_ncp2_property_struct)]),
+    CSN1SelfRef()]),
+    '1101': ('nr_of_remaining_cells', [
+    CSN1Bit(name='freq_diff_length', bit=3),
+    CSN1List(num=([0], lambda x: x), list=[
+      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
+      CSN1Ref(obj=compact_ncp2_property_struct)]),
+    CSN1SelfRef()]),
+    '1110': ('nr_of_remaining_cells', [
+    CSN1Bit(name='freq_diff_length', bit=3),
+    CSN1List(num=([0], lambda x: x), list=[
+      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
+      CSN1Ref(obj=compact_ncp2_property_struct)]),
+    CSN1SelfRef()]),
+    '1111': ('nr_of_remaining_cells', [
+    CSN1Bit(name='freq_diff_length', bit=3),
+    CSN1List(num=([0], lambda x: x), list=[
+      CSN1Bit(name='frequency_diff', bit=([-1, 1], lambda x: x + 1)),
+      CSN1Ref(obj=compact_ncp2_property_struct)]),
+    CSN1SelfRef()])})])})
+
+compact_neighbour_parameter_set_struct = CSN1List(name='compact_neighbour_parameter_set_struct', list=[
+  CSN1Alt(alt={
     '0': ('', []),
     '1': ('', [
-    CSN1Ref(name='iu_mode_cell_selection_params', obj=iu_mode_cell_selection_struct)])})])
+    CSN1Bit(name='ncc', bit=3)])}),
+  CSN1Bit(name='exc_acc'),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='gprs_rxlev_access_min', bit=6)])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='gprs_ms_txpwr_max_cch', bit=5)])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='gprs_priority_class', bit=3)])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='gprs_hcs_thr', bit=5)])}),
+  CSN1Bit(name='gprs_temporary_offset', bit=3),
+  CSN1Bit(name='gprs_penalty_time', bit=5),
+  CSN1Bit(name='gprs_reselect_offset', bit=5),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='guar_constant_pwr_blks', bit=2)])})])
+
+cell_selection_struct = CSN1List(name='cell_selection_struct', list=[
+  CSN1Bit(name='bsic', bit=6),
+  CSN1Bit(name='cell_bar_access_2'),
+  CSN1Bit(name='exc_acc'),
+  CSN1Bit(name='same_ra_as_serving_cell'),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='gprs_rxlev_access_min', bit=6),
+    CSN1Bit(name='gprs_ms_txpwr_max_cch', bit=5)])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='gprs_temporary_offset', bit=3),
+    CSN1Bit(name='gprs_penalty_time', bit=5)])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='gprs_reselect_offset', bit=5)])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Ref(name='hcs_params', obj=hcs_struct)])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Ref(name='si13_pbcch_location', obj=si13_pbcch_location_struct)])})])
+
+iu_mode_only_neighbour_cell_params_struct = CSN1List(name='iu_mode_only_neighbour_cell_params_struct', list=[
+  CSN1Bit(name='start_frequency', bit=10),
+  CSN1Ref(name='iu_mode_only_cell_selection_params', obj=iu_mode_only_cell_selection_struct),
+  CSN1Bit(name='nr_of_remaining_cells', bit=4),
+  CSN1Bit(name='freq_diff_length', bit=3),
+  CSN1List(num=([2], lambda x: x), list=[
+    CSN1Bit(name='frequency_diff', bit=([-1, 3], lambda x: x + 1)),
+    CSN1Ref(name='iu_mode_only_cell_selection_params', obj=iu_mode_only_cell_selection_struct)])])
+
+iu_mode_cell_selection_struct = CSN1List(name='iu_mode_cell_selection_struct', list=[
+  CSN1Bit(name='cell_bar_qualify_3', bit=2),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Ref(name='si13alt_pbcch_location', obj=si13_pbcch_location_struct)])})])
+
+compact_neighbour_cell_params_2_struct = CSN1List(name='compact_neighbour_cell_params_2_struct', list=[
+  CSN1Val(name='', val='00'),
+  CSN1List(num=-1, list=[
+    CSN1Val(name='', val='1'),
+    CSN1Ref(obj=compact_ncp2_repeat_struct),
+    CSN1Bit(name='cell_params_pointer', bit=2)]),
+  CSN1Val(name='', val='0'),
+  #CSN1Ref(name='compact_neighbour_parameter_set', obj=compact_neighbour_parameter_set_struct, num=('# unprocessed: (1+max(val(CELL_PARAMS_POINTER)))', lambda: 0))])
+  CSN1Ref(name='compact_neighbour_parameter_set', obj=compact_neighbour_parameter_set_struct, num=([1], max_cell_params))])
+
+neighbour_cell_params_struct = CSN1List(name='neighbour_cell_params_struct', list=[
+  CSN1Bit(name='start_frequency', bit=10),
+  CSN1Ref(name='cell_selection_params', obj=cell_selection_struct),
+  CSN1Bit(name='nr_of_remaining_cells', bit=4),
+  CSN1Bit(name='freq_diff_length', bit=3),
+  CSN1List(num=([2], lambda x: x), list=[
+    CSN1Bit(name='frequency_diff', bit=([-1, 3], lambda x: x + 1)),
+    CSN1Ref(name='cell_selection_params', obj=cell_selection_struct)])])
 
 neighbour_cell_params_2_struct = CSN1List(name='neighbour_cell_params_2_struct', list=[
   CSN1Val(name='', val='00'),
@@ -429,7 +442,15 @@ neighbour_cell_params_2_struct = CSN1List(name='neighbour_cell_params_2_struct',
     CSN1Ref(obj=ncp2_repeat_struct),
     CSN1Bit(name='cell_params_pointer', bit=2)]),
   CSN1Val(name='', val='0'),
-  CSN1Ref(name='neighbour_parameter_set', obj=neighbour_parameter_set_struct, num=('# unprocessed: (1+max(val(CELL_PARAMS_POINTER)))', lambda: 0))])
+  #CSN1Ref(name='neighbour_parameter_set', obj=neighbour_parameter_set_struct, num=('# unprocessed: (1+max(val(CELL_PARAMS_POINTER)))', lambda: 0))])
+  CSN1Ref(name='neighbour_parameter_set', obj=neighbour_parameter_set_struct, num=([1], max_cell_params))])
+
+iu_mode_neighbour_cell_params_struct = CSN1List(name='iu_mode_neighbour_cell_params_struct', list=[
+  CSN1Bit(name='nr_of_remaining_cells', bit=4),
+  CSN1Alt(num=([0], lambda x: x), alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Ref(name='iu_mode_cell_selection_params', obj=iu_mode_cell_selection_struct)])})])
 
 psi3_bis_message_content = CSN1List(name='psi3_bis_message_content', trunc=True, list=[
   CSN1Bit(name='page_mode', bit=2),

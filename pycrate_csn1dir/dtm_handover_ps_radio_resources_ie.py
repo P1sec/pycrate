@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/dtm_handover_ps_radio_resources_ie.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -31,10 +31,10 @@
 # top-level object: DTM Handover PS Radio Resources IE
 
 # external references
-from pycrate_csn1dir.cell_identification_ie import cell_identification_ie
-from pycrate_csn1dir.gprs_cell_options_ie import gprs_cell_options_ie
 from pycrate_csn1dir.padding_bits import padding_bits
+from pycrate_csn1dir.gprs_cell_options_ie import gprs_cell_options_ie
 from pycrate_csn1dir.egprs_window_size_ie import egprs_window_size_ie
+from pycrate_csn1dir.cell_identification_ie import cell_identification_ie
 from pycrate_csn1dir.egprs_modulation_and_coding_scheme_ie import egprs_modulation_and_coding_scheme_ie
 from pycrate_csn1dir.gprs_power_control_parameters_ie import gprs_power_control_parameters_ie
 
@@ -57,6 +57,10 @@ downlink_tbf_assignment_struct = CSN1List(name='downlink_tbf_assignment_struct',
     '0': ('', []),
     '1': ('', [
     CSN1Ref(name='egprs_window_size', obj=egprs_window_size_ie)])})])
+
+downlink_assignment_struct = CSN1List(name='downlink_assignment_struct', list=[
+  CSN1Bit(name='timeslot_allocation', bit=8),
+  CSN1Ref(name='downlink_tbf_assignment', obj=downlink_tbf_assignment_struct)])
 
 timeslot_description_struct = CSN1Alt(name='timeslot_description_struct', alt={
   '0': ('', [
@@ -130,9 +134,23 @@ uplink_tbf_assignment_struct = CSN1List(name='uplink_tbf_assignment_struct', lis
       '1': ('', [
       CSN1Bit(name='usf_allocation', bit=3)])})])})])
 
-downlink_assignment_struct = CSN1List(name='downlink_assignment_struct', list=[
-  CSN1Bit(name='timeslot_allocation', bit=8),
-  CSN1Ref(name='downlink_tbf_assignment', obj=downlink_tbf_assignment_struct)])
+gprs_mode_struct = CSN1List(name='gprs_mode_struct', list=[
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='channel_coding_command', bit=2)])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Ref(name='global_timeslot_description', obj=timeslot_description_struct),
+    CSN1List(num=-1, list=[
+      CSN1Val(name='', val='1'),
+      CSN1Ref(name='uplink_assignment', obj=uplink_tbf_assignment_struct)]),
+    CSN1Val(name='', val='0')])}),
+  CSN1List(num=-1, list=[
+    CSN1Val(name='', val='1'),
+    CSN1Ref(name='downlink_assignment', obj=downlink_assignment_struct)]),
+  CSN1Val(name='', val='0')])
 
 egprs_mode_struct = CSN1List(name='egprs_mode_struct', list=[
   CSN1List(list=[
@@ -175,24 +193,6 @@ egprs_mode_struct = CSN1List(name='egprs_mode_struct', list=[
       CSN1Val(name='', val='1'),
       CSN1Ref(name='downlink_assignment', obj=downlink_assignment_struct)]),
     CSN1Val(name='', val='0')])})])
-
-gprs_mode_struct = CSN1List(name='gprs_mode_struct', list=[
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='channel_coding_command', bit=2)])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Ref(name='global_timeslot_description', obj=timeslot_description_struct),
-    CSN1List(num=-1, list=[
-      CSN1Val(name='', val='1'),
-      CSN1Ref(name='uplink_assignment', obj=uplink_tbf_assignment_struct)]),
-    CSN1Val(name='', val='0')])}),
-  CSN1List(num=-1, list=[
-    CSN1Val(name='', val='1'),
-    CSN1Ref(name='downlink_assignment', obj=downlink_assignment_struct)]),
-  CSN1Val(name='', val='0')])
 
 dtm_handover_ps_radio_resources_ie = CSN1List(name='dtm_handover_ps_radio_resources_ie', list=[
   CSN1Ref(name='cell_identification', obj=cell_identification_ie),

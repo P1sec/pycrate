@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/ec_system_information_type_2.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -43,24 +43,22 @@ spare_padding = CSN1Val(name='spare_padding', val='L', num=-1)
 Spare_padding = spare_padding
 Spare_Padding = spare_padding 
 
-ec_cell_options_struct = CSN1List(name='ec_cell_options_struct', list=[
+ec_rach_control_parameters_struct = CSN1List(name='ec_rach_control_parameters_struct', list=[
+  CSN1Bit(name='ec_max_retrans', bit=2),
+  CSN1Bit(name='sm', bit=2),
+  CSN1Bit(name='tm', bit=2),
+  CSN1Bit(name='access_timeslots'),
+  CSN1Bit(name='cc_access_adaptation', bit=2),
+  CSN1Bit(name='cell_bar_access'),
   CSN1Alt(alt={
     '0': ('', []),
     '1': ('', [
-    CSN1Bit(name='alpha', bit=4)])}),
+    CSN1Bit(name='ec_access_control_class', bit=7),
+    CSN1Bit(name='exception_report_status')])}),
   CSN1Alt(alt={
     '0': ('', []),
     '1': ('', [
-    CSN1Bit(name='t3168', bit=3)])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='t3192', bit=3)])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='t3226', bit=3)])}),
-  CSN1Bit(name='t3248', bit=2)])
+    CSN1Bit(name='bt_threshold_ul_margin', bit=3)])})])
 
 coverage_class_selection_parameters_struct = CSN1List(name='coverage_class_selection_parameters_struct', list=[
   CSN1Bit(name='dl_cc_selection'),
@@ -89,6 +87,35 @@ coverage_class_selection_parameters_struct = CSN1List(name='coverage_class_selec
     CSN1Bit(name='dl_signal_strength_step_size', bit=2)])}),
   CSN1Bit(name='ec_reduced_pdch_allocation')])
 
+short_rach_control_parameters_struct = CSN1List(name='short_rach_control_parameters_struct', list=[
+  CSN1Bit(name='max_retrans', bit=2),
+  CSN1Bit(name='tx_integer', bit=4),
+  CSN1Bit(name='cell_bar_access'),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='access_control_class', bit=16),
+    CSN1Bit(name='exception_report_status')])})])
+
+ec_cell_options_struct = CSN1List(name='ec_cell_options_struct', list=[
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='alpha', bit=4)])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='t3168', bit=3)])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='t3192', bit=3)])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='t3226', bit=3)])}),
+  CSN1Bit(name='t3248', bit=2)])
+
 ec_cell_selection_parameters_struct = CSN1List(name='ec_cell_selection_parameters_struct', list=[
   CSN1Bit(name='location_area_identification', bit=40),
   CSN1Bit(name='routing_area_code', bit=8),
@@ -104,33 +131,6 @@ ec_cell_selection_parameters_struct = CSN1List(name='ec_cell_selection_parameter
     '0': ('', []),
     '1': ('', [
     CSN1Bit(name='cell_selection_rla_margin', bit=3)])})])
-
-short_rach_control_parameters_struct = CSN1List(name='short_rach_control_parameters_struct', list=[
-  CSN1Bit(name='max_retrans', bit=2),
-  CSN1Bit(name='tx_integer', bit=4),
-  CSN1Bit(name='cell_bar_access'),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='access_control_class', bit=16),
-    CSN1Bit(name='exception_report_status')])})])
-
-ec_rach_control_parameters_struct = CSN1List(name='ec_rach_control_parameters_struct', list=[
-  CSN1Bit(name='ec_max_retrans', bit=2),
-  CSN1Bit(name='sm', bit=2),
-  CSN1Bit(name='tm', bit=2),
-  CSN1Bit(name='access_timeslots'),
-  CSN1Bit(name='cc_access_adaptation', bit=2),
-  CSN1Bit(name='cell_bar_access'),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='ec_access_control_class', bit=7),
-    CSN1Bit(name='exception_report_status')])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='bt_threshold_ul_margin', bit=3)])})])
 
 ec_system_information_type_2 = CSN1List(name='ec_system_information_type_2', list=[
   CSN1Bit(name='message_type', bit=3),

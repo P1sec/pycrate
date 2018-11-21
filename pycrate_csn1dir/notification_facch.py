@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/notification_facch.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -43,6 +43,10 @@ spare_padding = CSN1Val(name='spare_padding', val='L', num=-1)
 Spare_padding = spare_padding
 Spare_Padding = spare_padding 
 
+priority_uplink_access = CSN1Alt(name='priority_uplink_access', alt={
+  'H': ('', []),
+  'L': ('', [])})
+
 emergency_ind = CSN1Alt(name='emergency_ind', alt={
   'H': ('', []),
   'L': ('', [])})
@@ -50,10 +54,6 @@ emergency_ind = CSN1Alt(name='emergency_ind', alt={
 nas_type4_lv = CSN1List(name='nas_type4_lv', list=[
   CSN1Bit(name='length', bit=8),
   CSN1Bit(name='value', bit=([0], lambda x: 8 * x))])
-
-priority_uplink_access = CSN1Alt(name='priority_uplink_access', alt={
-  'H': ('', []),
-  'L': ('', [])})
 
 group_channel_description = CSN1List(name='group_channel_description', list=[
   CSN1Bit(name='channel_description', bit=24),
@@ -66,6 +66,13 @@ group_channel_description = CSN1List(name='group_channel_description', list=[
       '1': ('', [
       CSN1Bit(name='frequency_short_list', bit=64)])})])})])
 
+group_call_information = CSN1List(name='group_call_information', list=[
+  CSN1Bit(name='group_call_reference', bit=36),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Ref(obj=group_channel_description)])})])
+
 paging_information = CSN1List(name='paging_information', list=[
   CSN1Ref(name='mobile_identity', obj=nas_type4_lv),
   CSN1Bit(name='channel_first', bit=2),
@@ -73,13 +80,6 @@ paging_information = CSN1List(name='paging_information', list=[
     '0': ('', []),
     '1': ('', [
     CSN1Bit(name='emlpp_priority', bit=3)])})])
-
-group_call_information = CSN1List(name='group_call_information', list=[
-  CSN1Bit(name='group_call_reference', bit=36),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Ref(obj=group_channel_description)])})])
 
 notification_facch = CSN1List(name='notification_facch', list=[
   CSN1Bit(name='rr_short_pd'),

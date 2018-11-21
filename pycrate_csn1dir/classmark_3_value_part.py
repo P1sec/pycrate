@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/classmark_3_value_part.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -47,7 +47,19 @@ spare_bits = CSN1Bit(name='spare_bits', num=-1)
 Spare_bits = spare_bits
 Spare_Bits = spare_bits
 
-r_support = CSN1Bit(name='r_support', bit=3)
+ms_measurement_capability = CSN1List(name='ms_measurement_capability', list=[
+  CSN1Bit(name='sms_value', bit=4),
+  CSN1Bit(name='sm_value', bit=4)])
+
+ecsd_multi_slot_capability = CSN1Bit(name='ecsd_multi_slot_capability', bit=5)
+
+hscsd_multi_slot_capability = CSN1Bit(name='hscsd_multi_slot_capability', bit=5)
+
+a5_bits = CSN1List(name='a5_bits', list=[
+  CSN1Bit(name='a5_7'),
+  CSN1Bit(name='a5_6'),
+  CSN1Bit(name='a5_5'),
+  CSN1Bit(name='a5_4')])
 
 _8_psk_struct = CSN1List(name='_8_psk_struct', list=[
   CSN1Bit(name='modulation_capability'),
@@ -60,23 +72,11 @@ _8_psk_struct = CSN1List(name='_8_psk_struct', list=[
     '1': ('', [
     CSN1Bit(name='_8_psk_rf_power_capability_2', bit=2)])})])
 
-ecsd_multi_slot_capability = CSN1Bit(name='ecsd_multi_slot_capability', bit=5)
-
-a5_bits = CSN1List(name='a5_bits', list=[
-  CSN1Bit(name='a5_7'),
-  CSN1Bit(name='a5_6'),
-  CSN1Bit(name='a5_5'),
-  CSN1Bit(name='a5_4')])
-
-hscsd_multi_slot_capability = CSN1Bit(name='hscsd_multi_slot_capability', bit=5)
-
-ms_measurement_capability = CSN1List(name='ms_measurement_capability', list=[
-  CSN1Bit(name='sms_value', bit=4),
-  CSN1Bit(name='sm_value', bit=4)])
-
-ms_positioning_method_capability = CSN1Bit(name='ms_positioning_method_capability', bit=5)
+r_support = CSN1Bit(name='r_support', bit=3)
 
 single_band_support = CSN1Bit(name='single_band_support', bit=4)
+
+ms_positioning_method_capability = CSN1Bit(name='ms_positioning_method_capability', bit=5)
 
 classmark_3_value_part = CSN1List(name='classmark_3_value_part', trunc=True, list=[
   CSN1Ref(obj=spare_bit),

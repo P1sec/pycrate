@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/e_utran_parameters_ie.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -79,13 +79,6 @@ repeated_e_utran_pcid_to_ta_mapping_struct = CSN1List(name='repeated_e_utran_pci
     CSN1Bit(name='e_utran_frequency_index', bit=3)]),
   CSN1Val(name='', val='0')])
 
-repeated_e_utran_not_allowed_cells_struct = CSN1List(name='repeated_e_utran_not_allowed_cells_struct', list=[
-  CSN1Ref(name='not_allowed_cells', obj=pcid_group_ie),
-  CSN1List(num=-1, list=[
-    CSN1Val(name='', val='1'),
-    CSN1Bit(name='e_utran_frequency_index', bit=3)]),
-  CSN1Val(name='', val='0')])
-
 repeated_e_utran_neighbour_cells_struct = CSN1List(name='repeated_e_utran_neighbour_cells_struct', list=[
   CSN1List(num=-1, list=[
     CSN1Val(name='', val='1'),
@@ -108,6 +101,13 @@ repeated_e_utran_neighbour_cells_struct = CSN1List(name='repeated_e_utran_neighb
     '0': ('', []),
     '1': ('', [
     CSN1Bit(name='e_utran_qrxlevmin', bit=5)])})])
+
+repeated_e_utran_not_allowed_cells_struct = CSN1List(name='repeated_e_utran_not_allowed_cells_struct', list=[
+  CSN1Ref(name='not_allowed_cells', obj=pcid_group_ie),
+  CSN1List(num=-1, list=[
+    CSN1Val(name='', val='1'),
+    CSN1Bit(name='e_utran_frequency_index', bit=3)]),
+  CSN1Val(name='', val='0')])
 
 e_utran_parameters_ie = CSN1List(name='e_utran_parameters_ie', list=[
   CSN1Bit(name='e_utran_ccn_active'),

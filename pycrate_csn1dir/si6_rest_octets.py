@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/si6_rest_octets.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
@@ -43,19 +43,7 @@ spare_padding = CSN1Val(name='spare_padding', val='L', num=-1)
 Spare_padding = spare_padding
 Spare_Padding = spare_padding 
 
-band_indicator = CSN1Alt(name='band_indicator', alt={
-  'H': ('', []),
-  'L': ('', [])})
-
-inband_pagings = CSN1Alt(name='inband_pagings', alt={
-  '0': ('', []),
-  '1': ('', [])})
-
 paging_channel_restructuring = CSN1Alt(name='paging_channel_restructuring', alt={
-  '0': ('', []),
-  '1': ('', [])})
-
-inband_notifications = CSN1Alt(name='inband_notifications', alt={
   '0': ('', []),
   '1': ('', [])})
 
@@ -68,9 +56,9 @@ pch_and_nch_info = CSN1List(name='pch_and_nch_info', list=[
     CSN1Bit(name='call_priority', bit=3)])}),
   CSN1Bit(name='nln_status_sacch')])
 
-vbs_vgcs_options = CSN1List(name='vbs_vgcs_options', list=[
-  CSN1Ref(obj=inband_notifications),
-  CSN1Ref(obj=inband_pagings)])
+band_indicator = CSN1Alt(name='band_indicator', alt={
+  'H': ('', []),
+  'L': ('', [])})
 
 si6_rest_octets = CSN1List(name='si6_rest_octets', list=[
   CSN1Alt(alt={
@@ -108,4 +96,16 @@ si6_rest_octets = CSN1List(name='si6_rest_octets', list=[
     CSN1Bit(name='random_bit_stream', bit=-1)]),
     'L': ('', [])}),
   CSN1Ref(obj=spare_padding)])
+
+inband_pagings = CSN1Alt(name='inband_pagings', alt={
+  '0': ('', []),
+  '1': ('', [])})
+
+inband_notifications = CSN1Alt(name='inband_notifications', alt={
+  '0': ('', []),
+  '1': ('', [])})
+
+vbs_vgcs_options = CSN1List(name='vbs_vgcs_options', list=[
+  CSN1Ref(obj=inband_notifications),
+  CSN1Ref(obj=inband_pagings)])
 

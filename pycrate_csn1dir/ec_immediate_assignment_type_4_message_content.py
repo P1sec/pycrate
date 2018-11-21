@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. P1sec.
+# * Copyright 2018. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,13 +22,13 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_csn1dir/ec_immediate_assignment_type_4_message_content.py
-# * Created : 2018-10-08
+# * Created : 2018-11-21
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
 # specification: TS 44.018 - d80
 # section: 9.1.66 EC IMMEDIATE ASSIGNMENT TYPE 4
-# top-level object: EC IMMEDIATE ASSIGNMENT TYPE 4 message content 
+# top-level object: EC IMMEDIATE ASSIGNMENT TYPE 4 message content
 
 
 
