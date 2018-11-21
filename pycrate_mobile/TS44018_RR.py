@@ -1934,15 +1934,22 @@ RRBCCHTypeClasses = {
     106: RRECImmediateAssignment1
     }
 
-# Warning, there are few collision within the several dispatchers
-# hence RRTypeClasses does not references all RR signalling message types
+# Warning, there are few collisions within the several dispatchers
+# hence RRTypeClasses / RRTypeMOClasses / RRTypeMTClasses do not references 
+# absolutely all RR signalling message types
+
+RRTypeMOClasses = {}
+RRTypeMOClasses.update(RRSACCHULTypeClasses)
+RRTypeMOClasses.update(RRULTypeClasses)
+
+RRTypeMTClasses = {}
+RRTypeMTClasses.update(RRSACCHDLTypeClasses)
+RRTypeMTClasses.update(RRDLTypeClasses)
+RRTypeMTClasses.update(RRBCCHTypeClasses)
 
 RRTypeClasses = {}
-RRTypeClasses.update(RRSACCHULTypeClasses)
-RRTypeClasses.update(RRSACCHDLTypeClasses)
-RRTypeClasses.update(RRULTypeClasses)
-RRTypeClasses.update(RRDLTypeClasses)
-RRTypeClasses.update(RRBCCHTypeClasses)
+RRTypeClasses.update(RRTypeMOClasses)
+RRTypeClasses.update(RRTypeMTClasses)
 
 def get_rr_msg_instances():
     return {k: RRTypeClasses[k]() for k in RRTypeClasses}

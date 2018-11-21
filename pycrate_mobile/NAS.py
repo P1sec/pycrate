@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2017. Benoit Michau. ANSSI.
+# * Copyright 2017. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -36,6 +36,7 @@ from .TS24008_MM    import *
 from .TS24008_CC    import *
 from .TS24080_SS    import *
 from .TS44018_RR    import *
+from .TS44018_GTTP  import *
 
 from .TS24011_PPSMS import *
 from .TS23040_SMS   import *
@@ -53,8 +54,9 @@ from .NASLTE        import *
 NASMODispatcher = {
     2 : ESMTypeClasses,
     3 : CCTypeMOClasses,
+    4 : GTTPTypeClasses,
     5 : MMTypeClasses,
-    6 : RRTypeClasses,
+    6 : RRTypeMOClasses,
     7 : EMMTypeMOClasses,
     8 : GMMTypeMOClasses,
     9 : PPSMSCPTypeClasses,
@@ -65,8 +67,9 @@ NASMODispatcher = {
 NASMTDispatcher = {
     2 : ESMTypeClasses,
     3 : CCTypeMTClasses,
+    4 : GTTPTypeClasses,
     5 : MMTypeClasses,
-    6 : RRTypeClasses,
+    6 : RRTypeMTClasses,
     7 : EMMTypeMTClasses,
     8 : GMMTypeMTClasses,
     9 : PPSMSCPTypeClasses,
