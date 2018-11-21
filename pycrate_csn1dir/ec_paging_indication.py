@@ -21,14 +21,14 @@
 # * MA 02110-1301  USA
 # *
 # *--------------------------------------------------------
-# * File Name : pycrate_csn1dir/system_information_type_10.py
+# * File Name : pycrate_csn1dir/ec_paging_indication.py
 # * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------
 #*/
 # specification: TS 44.018 - d80
-# section: 9.1.50 System information type 10 $(ASCI)$
-# top-level object: SYSTEM INFORMATION TYPE 10
+# section: 9.1.69 EC PAGING INDICATION
+# top-level object: EC Paging Indication
 
 
 
@@ -39,9 +39,7 @@
 
 from pycrate_csn1.csnobj import *
 
-system_information_type_10 = CSN1List(name='system_information_type_10', list=[
-  CSN1Bit(name='rr_short_pd'),
-  CSN1Bit(name='message_type', bit=5),
-  CSN1Bit(name='short_layer_2_header', bit=2),
-  CSN1Bit(name='si10_rest_octets', bit=160)])
+ec_paging_indication = CSN1List(name='ec_paging_indication', list=[
+  CSN1Bit(name='message_type', bit=4),
+  CSN1Bit(name='paging_indication_sequence', bit=84)])
 

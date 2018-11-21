@@ -7,11 +7,11 @@
 	< Used DL Coverage Class : bit (2) >
 	{ 0 | 1 < EC Page Extension : bit (4) > }
 	< Acknowledged Access Request 1 : Acknowldeged Access Request struct >
-	{ 0 | 1 < Acknowledged Access Request 2 : Acknowldeged Access Request struct > }
-	{ 0 | 1 < Acknowledged Access Request 3 : Acknowldeged Access Request struct > }
-	{ 0 | 1 < Acknowledged Access Request 4 : Acknowldeged Access Request struct > }
-	{ 0 | 1 < Acknowledged Access Request 5 : Acknowldeged Access Request struct > }
-	{ 0 | 1 < Acknowledged Access Request 6 : Acknowldeged Access Request struct > }
+	{ 0 | 1 < Acknowledged Access Request 2 : Acknowledged Access Request struct > }
+	{ 0 | 1 < Acknowledged Access Request 3 : Acknowledged Access Request struct > }
+	{ 0 | 1 < Acknowledged Access Request 4 : Acknowledged Access Request struct > }
+	{ 0 | 1 < Acknowledged Access Request 5 : Acknowledged Access Request struct > }
+	{ 0 | 1 < Acknowledged Access Request 6 : Acknowledged Access Request struct > }
 	<spare padding> ;
 
 

@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -43,36 +43,6 @@ spare_padding = CSN1Val(name='spare_padding', val='L', num=-1)
 Spare_padding = spare_padding
 Spare_Padding = spare_padding 
 
-ec_immediate_assignment_type_3_message_content = CSN1List(name='ec_immediate_assignment_type_3_message_content', list=[
-  CSN1Bit(name='message_type', bit=4),
-  CSN1Bit(name='used_dl_coverage_class', bit=2),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Bit(name='ec_page_extension', bit=4)])}),
-  CSN1Ref(name='acknowledged_access_request_1', obj=acknowldeged_access_request_struct),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Ref(name='acknowledged_access_request_2', obj=acknowldeged_access_request_struct)])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Ref(name='acknowledged_access_request_3', obj=acknowldeged_access_request_struct)])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Ref(name='acknowledged_access_request_4', obj=acknowldeged_access_request_struct)])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Ref(name='acknowledged_access_request_5', obj=acknowldeged_access_request_struct)])}),
-  CSN1Alt(alt={
-    '0': ('', []),
-    '1': ('', [
-    CSN1Ref(name='acknowledged_access_request_6', obj=acknowldeged_access_request_struct)])}),
-  CSN1Ref(obj=spare_padding)])
-
 acknowledged_access_request_struct = CSN1Alt(name='acknowledged_access_request_struct', alt={
   '00': ('', [
   CSN1Bit(name='short_id', bit=8)]),
@@ -81,4 +51,34 @@ acknowledged_access_request_struct = CSN1Alt(name='acknowledged_access_request_s
   '10': ('', [
   CSN1Bit(name='random_id_high', bit=12)]),
   '11': ('', [])})
+
+ec_immediate_assignment_type_3_message_content = CSN1List(name='ec_immediate_assignment_type_3_message_content', list=[
+  CSN1Bit(name='message_type', bit=4),
+  CSN1Bit(name='used_dl_coverage_class', bit=2),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Bit(name='ec_page_extension', bit=4)])}),
+  CSN1Ref(name='acknowledged_access_request_1', obj=acknowledged_access_request_struct),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Ref(name='acknowledged_access_request_2', obj=acknowledged_access_request_struct)])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Ref(name='acknowledged_access_request_3', obj=acknowledged_access_request_struct)])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Ref(name='acknowledged_access_request_4', obj=acknowledged_access_request_struct)])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Ref(name='acknowledged_access_request_5', obj=acknowledged_access_request_struct)])}),
+  CSN1Alt(alt={
+    '0': ('', []),
+    '1': ('', [
+    CSN1Ref(name='acknowledged_access_request_6', obj=acknowledged_access_request_struct)])}),
+  CSN1Ref(obj=spare_padding)])
 

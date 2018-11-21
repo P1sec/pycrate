@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2018. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -21,7 +21,7 @@
 # * MA 02110-1301  USA
 # *
 # *--------------------------------------------------------
-# * File Name : pycrate_csn1dir/ec_downlink_assignment_message_content.py
+# * File Name : pycrate_csn1dir/ec_downlink_assignment_message_type_2_content.py
 # * Created : 2018-10-08
 # * Authors : Benoit Michau
 # *--------------------------------------------------------

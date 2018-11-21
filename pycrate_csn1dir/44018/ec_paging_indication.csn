@@ -1,0 +1,8 @@
+-- TS 44.018 - d80
+-- 9.1.69 EC PAGING INDICATION
+-- EC Paging Indication
+
+< EC Paging Indication > ::=
+	< Message Type : bit (4)  >
+	< Paging Indication Sequence : bit (84) > ;
+

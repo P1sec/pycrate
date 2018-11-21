@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.3
 # *
-# * Copyright 2017. Benoit Michau. ANSSI.
+# * Copyright 2017. Benoit Michau. ANSSI. P1sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -29,7 +29,7 @@
 
 #------------------------------------------------------------------------------#
 # 3GPP TS 44.018 GSM / EDGE RRC protocol
-# release 13 (d60)
+# release 15 (f30)
 #------------------------------------------------------------------------------#
 
 from pycrate_core.utils import *
@@ -38,6 +38,33 @@ from pycrate_core.base  import *
 
 from .TS24007    import *
 from .TS44018_IE import *
+
+from pycrate_csn1dir.notification_facch                             import notification_facch
+from pycrate_csn1dir.vbs_vgcs_reconfigure                           import vbs_vgcs_reconfigure
+from pycrate_csn1dir.vbs_vgcs_reconfigure2                          import vbs_vgcs_reconfigure2
+from pycrate_csn1dir.ec_system_information_type_1                   import ec_system_information_type_1
+from pycrate_csn1dir.ec_system_information_type_2                   import ec_system_information_type_2
+from pycrate_csn1dir.ec_system_information_type_3                   import ec_system_information_type_3
+from pycrate_csn1dir.ec_system_information_type_4                   import ec_system_information_type_4
+from pycrate_csn1dir.uplink_free                                    import uplink_free
+from pycrate_csn1dir.vgcs_additional_info                           import vgcs_additional_info
+from pycrate_csn1dir.vgcs_sms_information                           import vgcs_sms_information
+from pycrate_csn1dir.system_information_type_10                     import system_information_type_10
+from pycrate_csn1dir.system_information_type_10bis                  import system_information_type_10bis
+from pycrate_csn1dir.system_information_type_10ter                  import system_information_type_10ter
+from pycrate_csn1dir.measurement_information                        import measurement_information
+from pycrate_csn1dir.enhanced_measurement_report                    import enhanced_measurement_report
+from pycrate_csn1dir.vgcs_neighbour_cell_information                import vgcs_neighbour_cell_information
+from pycrate_csn1dir.notify_application_data                        import notify_application_data
+from pycrate_csn1dir.ec_immediate_assignment_type_2_message_content import ec_immediate_assignment_type_2_message_content
+from pycrate_csn1dir.ec_immediate_assignment_reject_message_content import ec_immediate_assignment_reject_message_content
+from pycrate_csn1dir.ec_dummy_message_content                       import ec_dummy_message_content
+from pycrate_csn1dir.ec_paging_request_message_content              import ec_paging_request_message_content
+from pycrate_csn1dir.ec_downlink_assignment_message_content         import ec_downlink_assignment_message_content
+from pycrate_csn1dir.ec_immediate_assignment_type_4_message_content import ec_immediate_assignment_type_4_message_content
+from pycrate_csn1dir.ec_downlink_assignment_message_type_2_content  import ec_downlink_assignment_message_type_2_content
+from pycrate_csn1dir.ec_immediate_assignment_type_3_message_content import ec_immediate_assignment_type_3_message_content
+from pycrate_csn1dir.ec_paging_indication                           import ec_paging_indication
 
 
 #------------------------------------------------------------------------------#
@@ -65,8 +92,8 @@ GSMRRType_dict = {
     19:'CLASSMARK ENQUIRY',
     20:'FREQUENCY REDEFINITION',
     21:'MEASUREMENT REPORT',
-    22:'CLASSMARK CHANGE',
-    #22:'MBMS ANNOUNCEMENT',
+    #22:'CLASSMARK CHANGE', # on uplink
+    22:'MBMS ANNOUNCEMENT', # on downlink
     23:'CHANNEL MODE MODIFY ACKNOWLEDGE',
     24:'SYSTEM INFORMATION TYPE 8',
     25:'SYSTEM INFORMATION TYPE 1',
@@ -96,8 +123,8 @@ GSMRRType_dict = {
     51:'CONFIGURATION CHANGE REJECT',
     52:'GPRS SUSPENSION REQUEST',
     53:'CIPHERING MODE COMMAND',
-    54:'EXTENDED MEASUREMENT REPORT',
-    #54:'SERVICE INFORMATION',
+    #54:'EXTENDED MEASUREMENT REPORT', # on SACCH, downlink
+    54:'SERVICE INFORMATION', # on DCCH, downlink
     55:'EXTENDED MEASUREMENT ORDER',
     56:'APPLICATION INFORMATION',
     57:'IMMEDIATE ASSIGNMENT EXTENDED',
@@ -127,18 +154,46 @@ GSMRRType_dict = {
     99:'INTER SYSTEM TO UTRAN HANDOVER COMMAND',
     100:'INTER SYSTEM TO CDMA2000 HANDOVER COMMAND',
     101:'GERAN IU MODE CLASSMARK CHANGE',
-    102:'INTER SYSTEM TO E-UTRAN HANDOVER COMMAND',
-    #102:'PRIORITY UPLINK REQUEST',
+    102:'INTER SYSTEM TO E-UTRAN HANDOVER COMMAND', # on downlink
+    #102:'PRIORITY UPLINK REQUEST', # on uplink
     103:'DATA INDICATION',
     104:'DATA INDICATION 2',
-    105:'IMMEDIATE PACKET ASSIGNMENT'
+    105:'IMMEDIATE PACKET ASSIGNMENT',
+    106:'EC IMMEDIATE ASSIGNMENT TYPE 1'
     }
+
+GSMRRTypeUL_dict = dict(GSMRRType_dict)
+GSMRRTypeUL_dict.update({
+    22 : 'CLASSMARK CHANGE', # on uplink
+    102:'PRIORITY UPLINK REQUEST', # on uplink
+    })
+
+GSMRRTypeSACCH_dict = dict(GSMRRType_dict)
+GSMRRTypeSACCH_dict.update({
+    54:'EXTENDED MEASUREMENT REPORT', # UL on SACCH
+    })
+
 
 class RRHeader(Envelope):
     _GEN = (
         Uint('SkipInd', bl=4),
         Uint('ProtDisc', val=6, bl=4, dic=ProtDisc_dict),
         Uint('Type', bl=8, dic=GSMRRType_dict),
+        )
+
+
+class RRHeaderUL(Envelope):
+    _GEN = (
+        Uint('SkipInd', bl=4),
+        Uint('ProtDisc', val=6, bl=4, dic=ProtDisc_dict),
+        Uint('Type', bl=8, dic=GSMRRTypeUL_dict),
+        )
+
+class RRHeaderSACCH(Envelope):
+    _GEN = (
+        Uint('SkipInd', bl=4),
+        Uint('ProtDisc', val=6, bl=4, dic=ProtDisc_dict),
+        Uint('Type', bl=8, dic=GSMRRTypeSACCH_dict),
         )
 
 #------------------------------------------------------------------------------#
@@ -202,7 +257,7 @@ class RRAssignmentCmd(Layer3):
 
 class RRAssignmentComplete(Layer3):
     _GEN = (
-        RRHeader(val={'Type':41}),
+        RRHeaderUL(val={'Type':41}),
         Type3V('RRCause', val={'V':b'\0'}, bl={'V':8}, IE=RRCause()),
         )
 
@@ -214,7 +269,7 @@ class RRAssignmentComplete(Layer3):
 
 class RRAssignmentFailure(Layer3):
     _GEN = (
-        RRHeader(val={'Type':47}),
+        RRHeaderUL(val={'Type':47}),
         Type3V('RRCause', val={'V':b'\0'}, bl={'V':8}, IE=RRCause())
         )
 
@@ -243,7 +298,7 @@ class RRChannelModeModify(Layer3):
 
 class RRChannelModeModifyAck(Layer3):
     _GEN = (
-        RRHeader(val={'Type':23}),
+        RRHeaderUL(val={'Type':23}),
         Type3V('ChanDesc', val={'V':b'\0\0\0'}, bl={'V':24}, IE=ChanDesc2()),
         Type3V('ChanMode', val={'V':b'\0'}, bl={'V':8}, IE=ChanMode()),
         Type3TV('ExtTSCSet', val={'T':0x6D, 'V':b'\0'}, bl={'V':8}, IE=ExtTSCSet())
@@ -305,7 +360,7 @@ class RRCipheringModeCmd(Layer3):
 
 class RRCipheringModeComplete(Layer3):
     _GEN = (
-        RRHeader(val={'Type':50}),
+        RRHeaderUL(val={'Type':50}),
         Type4TLV('MEId', val={'T':0x17, 'V':b'\0'}, IE=ID())
         )
 
@@ -317,7 +372,7 @@ class RRCipheringModeComplete(Layer3):
 
 class RRClassmarkChange(Layer3):
     _GEN = (
-        RRHeader(val={'Type':22}),
+        RRHeaderUL(val={'Type':22}),
         Type4LV('MSCm2', val={'V':b'@\0\0'}, IE=MSCm2()),
         Type4TLV('MSCm3', val={'T':0x20, 'V':b''}, IE=classmark_3_value_part)
         )
@@ -330,7 +385,7 @@ class RRClassmarkChange(Layer3):
 
 class RRUTRANClassmarkChange(Layer3):
     _GEN = (
-        RRHeader(val={'Type':96}),
+        RRHeaderUL(val={'Type':96}),
         Type4LV('UTRANCm', val={'V':b'\0'}) # INTER RAT HANDOVER INFO from TS 25.331
         )
 
@@ -342,7 +397,7 @@ class RRUTRANClassmarkChange(Layer3):
 
 class RRCdma2000ClassmarkChange(Layer3):
     _GEN = (
-        RRHeader(val={'Type':98}),
+        RRHeaderUL(val={'Type':98}),
         Type4LV('TerminalInfo', val={'V':b''}),
         Type4LV('SecurityStat', val={'V':b''}),
         Type4LV('BandClassInfo', val={'V':b''}),
@@ -364,9 +419,9 @@ class RRCdma2000ClassmarkChange(Layer3):
 # TS 44.018, section 9.1.11d
 #------------------------------------------------------------------------------#
 
-class RRUTRANClassmarkChange(Layer3):
+class RRGERANIuClassmarkChange(Layer3):
     _GEN = (
-        RRHeader(val={'Type':101}),
+        RRHeaderUL(val={'Type':101}),
         Type4LV('GERANIuModeCm', val={'V':14*b'\0'}) # MS GERAN IU MODE RADIO ACCESS CAPABILITY from TS 44.118
         )
 
@@ -410,7 +465,7 @@ class RRConfigChangeCmd(Layer3):
 
 class RRConfigChangeAck(Layer3):
     _GEN = (
-        RRHeader(val={'Type':49})
+        RRHeaderUL(val={'Type':49})
         )
 
 
@@ -421,7 +476,7 @@ class RRConfigChangeAck(Layer3):
 
 class RRConfigChangeReject(Layer3):
     _GEN = (
-        RRHeader(val={'Type':51}),
+        RRHeaderUL(val={'Type':51}),
         Type3V('RRCause', val={'V':b'\0'}, bl={'V':8}, IE=RRCause()),
         )
 
@@ -460,7 +515,7 @@ class RRDTMAssignmentCmd(Layer3):
 
 class RRDTMAssignmentFailure(Layer3):
     _GEN = (
-        RRHeader(val={'Type':72}),
+        RRHeaderUL(val={'Type':72}),
         Type3V('RRCause', val={'V':b'\0'}, bl={'V':8}, IE=RRCause()),
         )
 
@@ -470,7 +525,7 @@ class RRDTMAssignmentFailure(Layer3):
 # TS 44.018, section 9.1.12g
 #------------------------------------------------------------------------------#
 
-class RRDTMInformation(Layer3):
+class RRDTMInfo(Layer3):
     _GEN = (
         RRHeader(val={'Type':77}),
         Type3V('RAI', val={'V':b'\0\xf1\x10\0\0\0'}, bl={'V':48}, IE=RAI()),
@@ -529,7 +584,7 @@ class RRFrequencyRedefinition(Layer3):
 
 class RRGPRSSuspensionReq(Layer3):
     _GEN = (
-        RRHeader(val={'Type':52}),
+        RRHeaderUL(val={'Type':52}),
         Type3V('TLLI', val={'V':4*b'\0'}, bl={'V':32}, IE=TLLI()),
         Type3V('RAI', val={'V':b'\0\xf1\x10\0\0\0'}, bl={'V':48}, IE=RAI()),
         Type3V('SuspensionCause', val={'V':b'\0'}, bl={'V':8}, IE=SuspensionCause()),
@@ -623,7 +678,13 @@ class RRInterSystemCdma200HOCmd(Layer3):
 # HANDOVER TO GERAN Iu MODE Command
 # TS 44.018, section 9.1.15c
 #------------------------------------------------------------------------------#
-# This message has however no defined type
+# TODO: this message has no defined type in the TS 44.018
+
+class RRHOGERANIuModeCmd(Layer3):
+    _GEN = (
+        RRHeader(val={'Type':0}),
+        Type4LV('RadioBearerReconfig', val={'V':b'\0'}) # see TS 44.118
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -646,7 +707,7 @@ class RRInterSystemEUTRANHOCmd(Layer3):
 
 class RRHandoverComplete(Layer3):
     _GEN = (
-        RRHeader(val={'Type':44}),
+        RRHeaderUL(val={'Type':44}),
         Type3V('RRCause', val={'V':b'\0'}, bl={'V':8}, IE=RRCause()),
         Type4TLV('MobileObservedTimeDiff', val={'V':b'\0\0\0'}, IE=MobileTimeDiff()),
         Type4TLV('MobileObservedTimeDiffHFLevel', val={'V':5*b'\0'}, IE=MobileTimeDiffHFLevel()),
@@ -660,7 +721,7 @@ class RRHandoverComplete(Layer3):
 
 class RRHandoverFailure(Layer3):
     _GEN = (
-        RRHeader(val={'Type':40}),
+        RRHeaderUL(val={'Type':40}),
         Type3V('RRCause', val={'V':b'\0'}, bl={'V':8}, IE=RRCause()),
         Type1TV('PSCause', val={'T':0x9, 'V':0}, dic=PSCause_dict),
         )
@@ -670,6 +731,8 @@ class RRHandoverFailure(Layer3):
 # IMMEDIATE ASSIGNMENT
 # TS 44.018, section 9.1.18
 #------------------------------------------------------------------------------#
+# Warning: the MTA Access Burst or Extended Access Burst Method structure is
+# not implemented
 
 def get_tbf(l3msg):
     v = l3msg[2][0].get_val()
@@ -775,7 +838,7 @@ class RRImmediateAssignmentReject(Layer3):
 
 class RRMeasurementReport(Layer3):
     _GEN = (
-        RRHeader(val={'Type':21}),
+        RRHeaderSACCH(val={'Type':21}),
         Type3V('MeasurementResults', val={'V':16*b'\0'}, bl={'V':128}, IE=measurement_results_contents)
         )
 
@@ -808,7 +871,7 @@ class RRNotificationNCH(Layer3):
 
 class RRNotificationResponse(Layer3):
     _GEN = (
-        RRHeader(val={'Type':38}),
+        RRHeaderUL(val={'Type':38}),
         Type4LV('MSCm2', val={'V':b'@\x00\x00'}, IE=MSCm2()),
         Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
         Type3V('BroadcastCallRef', val={'V':5*b'\0'}, bl={'V':40}, IE=BroadcastCallRef())
@@ -941,7 +1004,7 @@ class RRPagingReq3(Layer3):
 
 class RRPagingResponse(Layer3):
     _GEN = (
-        RRHeader(val={'Type':39}),
+        RRHeaderUL(val={'Type':39}),
         Uint('spare', bl=4),
         Type1V('CKSN', dic=CKSN_dict),
         Type4LV('MSCm2', val={'V':b'@\x00\x00'}, IE=MSCm2()),
@@ -969,7 +1032,7 @@ class RRPartialRelease(Layer3):
 
 class RRPartialReleaseComplete(Layer3):
     _GEN = (
-        RRHeader(val={'Type':15}),
+        RRHeaderUL(val={'Type':15}),
         )
 
 
@@ -1148,7 +1211,7 @@ class RRSystemInfo4(Layer3):
 class RRSystemInfo5(Layer3):
     _GEN = (
         L2PseudoLength(),
-        RRHeader(val={'Type':29}),
+        RRHeaderSACCH(val={'Type':29}),
         Type3V('BCCHFreqList', val={'V':16*b'\0'}, bl={'V':128}, IE=NeighbourCellChan())
         )
 
@@ -1161,7 +1224,7 @@ class RRSystemInfo5(Layer3):
 class RRSystemInfo5bis(Layer3):
     _GEN = (
         L2PseudoLength(),
-        RRHeader(val={'Type':5}),
+        RRHeaderSACCH(val={'Type':5}),
         Type3V('ExtBCCHFreqList', val={'V':16*b'\0'}, bl={'V':128}, IE=NeighbourCellChan())
         )
 
@@ -1174,7 +1237,7 @@ class RRSystemInfo5bis(Layer3):
 class RRSystemInfo5ter(Layer3):
     _GEN = (
         L2PseudoLength(),
-        RRHeader(val={'Type':6}),
+        RRHeaderSACCH(val={'Type':6}),
         Type3V('ExtBCCHFreqList', val={'V':16*b'\0'}, bl={'V':128}, IE=NeighbourCellChan2())
         )
 
@@ -1187,7 +1250,7 @@ class RRSystemInfo5ter(Layer3):
 class RRSystemInfo6(Layer3):
     _GEN = (
         L2PseudoLength(),
-        RRHeader(val={'Type':30}),
+        RRHeaderSACCH(val={'Type':30}),
         Type3V('CellId', val={'V':b'\0\0'}, bl={'V':16}, IE=CellId()),
         Type3V('LAI', val={'V': b'\0\xf1\x10\0\0'}, bl={'V':40}, IE=LAI()),
         Type3V('CellOpt', val={'V':b'\0'}, bl={'V':8}, IE=CellOpt()),
@@ -1322,7 +1385,7 @@ class RRSystemInfo20(Layer3):
 class RRSystemInfo14(Layer3):
     _GEN = (
         L2PseudoLength(),
-        RRHeader(val={'Type':1}),
+        RRHeaderSACCH(val={'Type':1}),
         RestOctets('SI14RestOctets', IE=si14_rest_octets)
         )
 
@@ -1431,7 +1494,7 @@ class RRSystemInfo23(Layer3):
 
 class RRTalkerInd(Layer3):
     _GEN = (
-        RRHeader(val={'Type':17}),
+        RRHeaderUL(val={'Type':17}),
         Type4LV('MSCm2', val={'V':b'@\x00\x00'}, IE=MSCm2()),
         Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
         Type1TV('CKSN', val={'T':0xB, 'V':7}, dic=CKSN_dict),
@@ -1445,7 +1508,7 @@ class RRTalkerInd(Layer3):
 
 class RRPriorityUplinkReq(Layer3):
     _GEN = (
-        RRHeader(val={'Type':102}),
+        RRHeaderUL(val={'Type':102}),
         Type3V('EstabCauseRandomRef', val={'V':b'\0'}, bl={'V':8}, IE=EstabCauseRandomRef()),
         Type3V('Token', val={'V':4*b'\0'}, bl={'V':32}, IE=Token()),
         Type3V('ReducedBroadcastCallRef', val={'V':4*b'\0'}, bl={'V':32}, IE=ReducedBroadcastCallRef()),
@@ -1584,7 +1647,7 @@ class RRVGCSUplinkGrant(Layer3):
 
 class RRExtMeasurementOrder(Layer3):
     _GEN = (
-        RRHeader(val={'Type':55}),
+        RRHeaderSACCH(val={'Type':55}),
         Type3V('ExtMeasFreqList', val={'V':16*b'\0'}, bl={'V':128}, IE=ExtMeasFreqList())
         )
 
@@ -1594,9 +1657,9 @@ class RRExtMeasurementOrder(Layer3):
 # TS 44.018, section 9.1.52
 #------------------------------------------------------------------------------#
 
-class RRExtMeasurementOrder(Layer3):
+class RRExtMeasurementReport(Layer3):
     _GEN = (
-        RRHeader(val={'Type':54}),
+        RRHeaderSACCH(val={'Type':54}),
         Type3V('ExtMeasRes', val={'V':16*b'\0'}, bl={'V':128}, IE=ExtMeasRes())
         )
 
@@ -1638,7 +1701,7 @@ class RRApplicationInfo(Layer3):
 
 class RRServiceInfo(Layer3):
     _GEN = (
-        RRHeader(val={'Type':54}),
+        RRHeaderUL(val={'Type':54}),
         Type3V('TLLI', val={'V':4*b'\0'}, bl={'V':32}, IE=TLLI()),
         Type3V('RAI', val={'V':b'\0\xf1\x10\0\0\0'}, bl={'V':48}, IE=RAI()),
         Type3V('ServiceSupport', val={'V':b'\0'}, bl={'V':8}, IE=ServiceSupport())
@@ -1665,7 +1728,17 @@ class RRServiceInfo(Layer3):
 # EC IMMEDIATE ASSIGNMENT TYPE 1
 # TS 44.018, section 9.1.59
 #------------------------------------------------------------------------------#
-# not implemented
+
+class RRECImmediateAssignment1(Layer3):
+    _GEN = (
+        L2PseudoLength(),
+        RRHeader(val={'Type':106}),
+        Type1V('FeatureInd', val={'V':0}, IE=FeatureInd()),
+        Type1V('PageMode', val={'V':0}, dic=PageMode_dict),
+        Type3V('RequestRef', val={'V':b'\0\0\0'}, bl={'V':24}, IE=RequestRef()),
+        Type3V('ECPacketChannelDesc1', val={'V':b'\0\0'}, bl={'V':16}, ),
+        RestOctets('ECFixedUplinkAlloc', )
+        )        
 
 
 #------------------------------------------------------------------------------#
@@ -1748,112 +1821,169 @@ class RRServiceInfo(Layer3):
 
 
 #------------------------------------------------------------------------------#
-# GPRS INFORMATION
-# TS 44.018, section 9.6.1
+# RRC dispatchers
 #------------------------------------------------------------------------------#
-# not implemented
 
-
-#------------------------------------------------------------------------------#
-# RRC dispatcher
-#------------------------------------------------------------------------------#
-'''
-GSMRRType_dict = {
-
-    76:'DTM ASSIGNMENT COMMAND',
-    77:'DTM INFORMATION',
-    78:'PACKET NOTIFICATION',
-    79:'SYSTEM INFORMATION TYPE 23',
-    96:'UTRAN CLASSMARK CHANGE',
-    98:'CDMA2000 CLASSMARK CHANGE',
-    99:'INTER SYSTEM TO UTRAN HANDOVER COMMAND',
-    100:'INTER SYSTEM TO CDMA2000 HANDOVER COMMAND',
-    101:'GERAN IU MODE CLASSMARK CHANGE',
-    102:'INTER SYSTEM TO E-UTRAN HANDOVER COMMAND',
-    #102:'PRIORITY UPLINK REQUEST',
-    103:'DATA INDICATION',
-    104:'DATA INDICATION 2',
-    105:'IMMEDIATE PACKET ASSIGNMENT'
-    }
-
-    61:'SYSTEM INFORMATION TYPE 16',
-    62:'SYSTEM INFORMATION TYPE 17',
-    63:'IMMEDIATE ASSIGNMENT',
-    64:'SYSTEM INFORMATION TYPE 18',
-    65:'SYSTEM INFORMATION TYPE 19',
-    66:'SYSTEM INFORMATION TYPE 20',
-    67:'SYSTEM INFORMATION TYPE 15',
-    68:'SYSTEM INFORMATION TYPE 13 alt',
-    69:'SYSTEM INFORMATION TYPE 2 n',
-    70:'SYSTEM INFORMATION TYPE 21',
-    71:'SYSTEM INFORMATION TYPE 22',
-    72:'DTM ASSIGNMENT FAILURE',
-    73:'DTM REJECT',
-    74:'DTM REQUEST',
-    75:'PACKET ASSIGNMENT',
-'''
-
-RRTypeClasses = {
-
-    
-    
-    0  : RRSystemInfo13,
-    1  : RRSystemInfo14,
-    2  : RRSystemInfo2bis,
-    3  : RRSystemInfo2ter,
-    4  : RRSystemInfo9,
-    5  : RRSystemInfo5bis,
-    6  : RRSystemInfo5ter,
-    7  : RRSystemInfo2quater,
+RRDLTypeClasses = {
+    #0  : RRHOGERANIuModeCmd, # no defined type
     9  : RRVGCSUplinkGrant,
     10 : RRPartialRelease,
     13 : RRChannelRelease,
     14 : RRUplinkRelease,
-    15 : RRPartialReleaseComplete,
     16 : RRChannelModeModify,
-    17 : RRTalkerInd,
     18 : RRStatus,
     19 : RRClassmarkEnquiry,
     20 : RRFrequencyRedefinition,
-    21 : RRMeasurementReport,
+    22 : RRMBMSAnnouncement,
+    32 : RRNotificationNCH,
+    42 : RRUplinkBusy,
+    43 : RRHandoverCmd,
+    45 : RRPhysicalInfo,
+    46 : RRAssignmentCmd,
+    48 : RRConfigChangeCmd,
+    53 : RRCipheringModeCmd,
+    56 : RRApplicationInfo,
+    59 : RRAdditionalAssign,
+    73 : RRDTMReject,
+    75 : RRPacketAssignment,
+    76 : RRDTMAssignmentCmd,
+    77 : RRDTMInfo,
+    78 : RRPacketNotification,
+    99 : RRInterSystemUTRANHOCmd,
+    100: RRInterSystemCdma200HOCmd,
+    102: RRInterSystemEUTRANHOCmd,
+    103: RRDataInd,
+    104: RRDataInd2
+    }
+
+RRULTypeClasses = {
+    14 : RRUplinkRelease,
+    15 : RRPartialReleaseComplete,
+    17 : RRTalkerInd,
+    18 : RRStatus,
     22 : RRClassmarkChange,
     23 : RRChannelModeModifyAck,
+    38 : RRNotificationResponse,
+    39 : RRPagingResponse,
+    40 : RRHandoverFailure,
+    41 : RRAssignmentComplete,
+    44 : RRHandoverComplete,
+    47 : RRAssignmentFailure,
+    49 : RRConfigChangeAck,
+    50 : RRCipheringModeComplete,
+    51 : RRConfigChangeReject,
+    52 : RRGPRSSuspensionReq,
+    54 : RRServiceInfo,
+    56 : RRApplicationInfo,
+    72 : RRDTMAssignmentFailure,
+    74 : RRDTMReq,
+    96 : RRUTRANClassmarkChange,
+    98 : RRCdma2000ClassmarkChange,
+    101: RRGERANIuClassmarkChange,
+    102: RRPriorityUplinkReq,
+    103: RRDataInd,
+    104: RRDataInd2
+    }
+
+RRSACCHDLTypeClasses = {
+    1  : RRSystemInfo14,
+    5  : RRSystemInfo5bis,
+    6  : RRSystemInfo5ter,
+    18 : RRStatus,
+    29 : RRSystemInfo5,
+    30 : RRSystemInfo6,
+    55 : RRExtMeasurementOrder
+    }
+
+RRSACCHULTypeClasses = {
+    18 : RRStatus,
+    21 : RRMeasurementReport,
+    54 : RRExtMeasurementReport
+    }
+
+RRBCCHTypeClasses = {
+    0  : RRSystemInfo13,
+    2  : RRSystemInfo2bis,
+    3  : RRSystemInfo2ter,
+    4  : RRSystemInfo9,
+    7  : RRSystemInfo2quater,
     24 : RRSystemInfo8,
     25 : RRSystemInfo1,
     26 : RRSystemInfo2,
     27 : RRSystemInfo3,
     28 : RRSystemInfo4,
-    29 : RRSystemInfo5,
-    30 : RRSystemInfo6,
     31 : RRSystemInfo7,
-    32 : RRNotificationNCH,
     33 : RRPagingReq1,
     34 : RRPagingReq2,
     36 : RRPagingReq3,
-    38 : RRNotificationResponse,
-    39 : RRPagingResponse,
-    40 : RRHandoverFailure,
-    41 : RRAssignmentComplete,
-    42 : RRUplinkBusy,   
-    43 : RRHandoverCmd,
-    44 : RRHandoverComplete,
-    45 : RRPhysicalInfo,
-    46 : RRAssignmentCmd,
-    47 : RRAssignmentFailure,
-    48 : RRConfigChangeCmd,
-    49 : RRConfigChangeAck,
-    50 : RRCipheringModeComplete,
-    51 : RRConfigChangeReject,
-    52 : RRGPRSSuspensionReq,
-    53 : RRCipheringModeCmd,
-    54 : RRExtMeasurementReport,
-    55 : RRExtMeasurementOrder,
-    56 : RRApplicationInfo,
     57 : RRImmediateAssignmentExt,
     58 : RRImmediateAssignmentReject,
-    59 : RRAdditionalAssignment,
+    61 : RRSystemInfo16,
+    62 : RRSystemInfo17,
+    63 : RRImmediateAssignment,
+    64 : RRSystemInfo18,
+    65 : RRSystemInfo19,
+    66 : RRSystemInfo20,
+    67 : RRSystemInfo15,
+    68 : RRSystemInfo13alt,
+    69 : RRSystemInfo2n,
+    70 : RRSystemInfo21,
+    71 : RRSystemInfo22,
+    79 : RRSystemInfo23,
+    105: RRImmediatePacketAssignment,
+    106: RRECImmediateAssignment1
     }
+
+# Warning, there are few collision within the several dispatchers
+# hence RRTypeClasses does not references all RR signalling message types
+
+RRTypeClasses = {}
+RRTypeClasses.update(RRSACCHULTypeClasses)
+RRTypeClasses.update(RRSACCHDLTypeClasses)
+RRTypeClasses.update(RRULTypeClasses)
+RRTypeClasses.update(RRDLTypeClasses)
+RRTypeClasses.update(RRBCCHTypeClasses)
 
 def get_rr_msg_instances():
     return {k: RRTypeClasses[k]() for k in RRTypeClasses}
+
+
+#------------------------------------------------------------------------------#
+# RRC dispatchers for RR and EC messages with short protocol discriminator
+#------------------------------------------------------------------------------#
+
+RRShortPDTypeMsg = {
+    0 : system_information_type_10.clone(),
+    1 : notification_facch.clone(),
+    2 : uplink_free.clone(),
+    4 : enhanced_measurement_report.clone(), # UL
+    5 : measurement_information.clone(), # DL
+    6 : vbs_vgcs_reconfigure.clone(),
+    7 : vbs_vgcs_reconfigure2.clone(),
+    8 : vgcs_additional_info.clone(),
+    9 : vgcs_sms_information.clone(),
+    10: system_information_type_10bis.clone(),
+    11: system_information_type_10ter.clone(),
+    12: vgcs_neighbour_cell_information.clone(),
+    13: notify_application_data.clone()
+    }
+
+RRShortPDECBCCHTypeMsg = {
+    1 : ec_system_information_type_1.clone(),
+    2 : ec_system_information_type_2.clone(),
+    3 : ec_system_information_type_3.clone(),
+    4 : ec_system_information_type_4.clone()
+    }
+
+RRShortPDECTypeMsg = {
+    1 : ec_immediate_assignment_type_2_message_content.clone(),
+    2 : ec_immediate_assignment_reject_message_content.clone(),
+    3 : ec_dummy_message_content.clone(),
+    4 : ec_downlink_assignment_message_content.clone(),
+    5 : ec_immediate_assignment_type_3_message_content.clone(),
+    6 : ec_downlink_assignment_message_type_2_content.clone(),
+    7 : ec_immediate_assignment_type_4_message_content.clone(),
+    8 : ec_paging_indication.clone(),
+    9 : ec_paging_request_message_content.clone()
+    }
 
