@@ -69,6 +69,8 @@ class CSN1Obj(Element):
     CSN1Val, CSN1Ref, CSN1SelfRef.
     """
     
+    CLASS = 'CSN1Obj'
+    
     # in order to disable any csnlog() during the runtime
     _SILENT = False
     
@@ -76,7 +78,7 @@ class CSN1Obj(Element):
     _REPR = 'V' # value represented with their original type (uint -default- or bit-string)
     
     # for certain CSN.1 structure, there is a distinction between padding bit (L)
-    # and non padding bit (H), where a padding octet is 0x2b
+    # and non padding bit (H), where a padding octet is e.g. 0x2b in GSM
     # null padding :
     #Lv = [0, 0, 0, 0, 0, 0, 0, 0]
     #Lb = '00000000'
@@ -118,6 +120,8 @@ class CSN1Obj(Element):
             self._lref = kw['lref']
         if 'val' in kw:
             self.set_val(kw['val'])
+        else:
+            self._val = None
         # offset for dealing with L / H bits
         self._off = 0
     
@@ -206,6 +210,7 @@ class CSN1Obj(Element):
     #--------------------------------------------------------------------------#
     
     def set_val(self, val):
+        print('ok: %r' % val)
         self._val = val
     
     def get_val(self):
@@ -420,7 +425,6 @@ class CSN1Bit(CSN1Obj):
             self._type = kw['type']
         if 'dict' in kw and kw['dict'] is not None:
             self._dic  = kw['dict']
-        self._val = None
     
     def _repr_val(self):
         if self._REPR == 'B' and self._type == CSN1T_UINT:
@@ -508,8 +512,6 @@ class CSN1Val(CSN1Obj):
     
     def __init__(self, **kw):
         CSN1Obj.__init__(self, **kw)
-        if 'val' in kw and kw['val']:
-            self._val = kw['val']
         if 'L' in self._val or 'H' in self._val:
             # TODO: support mixed padding L/H and non-padding 0/1 values
             assert( '0' not in self._val )
@@ -597,7 +599,6 @@ class CSN1Ref(CSN1Obj):
         CSN1Obj.__init__(self, **kw)
         if 'obj' in kw and kw['obj']:
             self._obj = kw['obj']
-        self._val = None
     
     def _repr_val(self):
         obj_val        = self._obj._val
@@ -667,7 +668,6 @@ class CSN1List(CSN1Obj):
                 Obj._par = self
         if 'trunc' in kw and kw['trunc']:
             self._trunc = True
-        self._val  = None
     
     def _repr_val(self):
         content = []
@@ -781,7 +781,6 @@ class CSN1Alt(CSN1Obj):
         #
         klen = set([len(k) for k in keys])
         self._kord = {kl: set([k for k in keys if len(k) == kl]) for kl in klen}
-        self._val  = None
     
     def _repr_val(self):
         if not self._val:
@@ -950,10 +949,6 @@ class CSN1SelfRef(CSN1Obj):
     specific internal attributes:
         - val: value according to the root object
     """
-    
-    def __init__(self, **kw):
-        CSN1Obj.__init__(self, **kw)
-        self._val  = None
     
     def _repr_val(self):
         global _root_obj
