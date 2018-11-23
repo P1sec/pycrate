@@ -516,7 +516,7 @@ class Type6TLVE(IE):
 
 
 class RestOctets(Type3V):
-    """Rest octets (or Type5) IE as a specific IE only used in GSM / GPRS
+    """Rest octets (or Type5) IE is a specific IE only used in GSM / GPRS
     its content is a single buffer of variable length, which is tied to the
     L2PseudoLength at the beginning of the L3 GSM message containing it
     """
