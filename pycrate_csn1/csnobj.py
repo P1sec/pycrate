@@ -210,7 +210,6 @@ class CSN1Obj(Element):
     #--------------------------------------------------------------------------#
     
     def set_val(self, val):
-        print('ok: %r' % val)
         self._val = val
     
     def get_val(self):
@@ -464,8 +463,7 @@ class CSN1Bit(CSN1Obj):
         except CharpyErr:
             raise(CSN1NoCharErr())
         else:
-            self._off += bit
-            self._off %= 8
+            self._off = (self._off + bit) % 8
             if self._type == CSN1T_BSTR:
                 self._val = uint_to_bitstr(self._val, bit)
     
@@ -483,8 +481,7 @@ class CSN1Bit(CSN1Obj):
         else:
             # static number of bits
             bit = self._bit
-        self._off += bit
-        self._off %= 8
+        self._off = (self._off + bit) % 8
         if self._type == CSN1T_UINT:
             return [(CSN1T_UINT, self._val, bit)]
         else:
@@ -523,6 +520,10 @@ class CSN1Val(CSN1Obj):
             self._val = self._val[:-2]
             self._num = -1
     
+    #def set_val(self, val):
+    #    # CSN1Val is static, should never be updated
+    #    pass
+    
     def _repr_val(self):
         return self._val.__repr__()
     
@@ -543,15 +544,10 @@ class CSN1Val(CSN1Obj):
                     val_p = CSN1Obj.conv_b_pad_gsm(uint_to_bitstr(val, bit), self._off)
                     if self._val != val_p:
                         raise(CSN1InvalidValueErr())
-                    else:
-                        self._off += bit
-                        self._off %= 8
                 else:
                     if int(self._val, 2) != val:
                         raise(CSN1InvalidValueErr())
-                    else:
-                        self._off += bit
-                        self._off %= 8
+                self._off = (self._off + bit) % 8
     
     def _to_pack_obj(self):
         if self._val == 'null':
@@ -570,12 +566,10 @@ class CSN1Val(CSN1Obj):
                     else:
                         # non-padding value
                         bl.append(p^1)
-                self._off += bit
-                self._off %= 8
+                self._off = (self._off + bit) % 8
                 return [(CSN1T_UINT, bitlist_to_uint(bl), bit)]
             else:
-                self._off += bit
-                self._off %= 8
+                self._off = (self._off + bit) % 8
                 return [(CSN1T_UINT, int(self._val, 2), bit)]
     
     def clone(self):
@@ -615,31 +609,29 @@ class CSN1Ref(CSN1Obj):
         return obj_repr
     
     def _from_char_obj(self, char):
-        obj_val = self._obj._val
-        obj_off = self._obj._off
+        # transfer offset to self._obj
+        obj_off, obj_val = self._obj._off, self._obj._val
         self._obj._off = self._off
         try:
             self._obj._from_char(char)
         except (CSN1NoCharErr, CSN1InvalidValueErr) as err:
+            # restore offset and val
+            self._obj._off, self._obj._val = obj_off, obj_val
             self._val = None
-            self._obj._val = obj_val
-            self._obj._off = obj_off
             raise(err)
         else:
-            self._val = self._obj._val
-            self._off = self._obj._off
-            self._obj._val = obj_val
-            self._obj._off = obj_off
+            # restore offset and val
+            self._off, self._val = self._obj._off, self._obj._val
+            self._obj._off, self._obj._val = obj_off, obj_val
     
     def _to_pack_obj(self):
-        obj_val = self._obj._val
-        obj_off = self._obj._off
-        self._obj._val = self._val
-        self._obj._off = self._off
+        # transfer offset and value to self._obj
+        obj_off, obj_val = self._obj._off, self._obj._val
+        self._obj._off, self._obj._val = self._off, self._val
         ret = self._obj._to_pack()
+        # restore offset and value
         self._off = self._obj._off
-        self._obj._val = obj_val
-        self._obj._off = obj_off
+        self._obj._off, self._obj._val = obj_off, obj_val
         return ret
     
     def clone(self):
@@ -698,41 +690,35 @@ class CSN1List(CSN1Obj):
     def _from_char_obj(self, char):
         self._val = []
         for Obj in self._list:
-            obj_val = Obj._val
-            obj_off = Obj._off
+            # transfer offset to Obj
+            obj_off, obj_val = Obj._off, Obj._val
             Obj._off = self._off
             try:
                 Obj._from_char(char)
             except (CSN1NoCharErr, CSN1InvalidValueErr) as err:
-                # TODO: it will be required at some point to handle truncation
-                # properly (e.g. "//" at the end of a CSN1 list)
-                Obj._val = obj_val
-                Obj._off = obj_off
+                # restore offset and val
+                Obj._off, Obj._val = obj_off, obj_val
                 if self._trunc:
                     break
                 else:
                     raise(err)
             else:
                 self._val.append( Obj._val )
+                # restore offset and val
                 self._off = Obj._off
-                Obj._val = obj_val
-                Obj._off = obj_off
+                Obj._off, Obj._val = obj_off, obj_val
     
     def _to_pack_obj(self):
         ret = []
         for i, val in enumerate(self._val):
             Obj = self._list[i]
-            obj_off = Obj._off
-            Obj._off = self._off
-            if isinstance(Obj, CSN1Val):
-                ret.extend( Obj._to_pack() )
-            else:
-                obj_val  = Obj._val
-                Obj._val = val
-                ret.extend( Obj._to_pack() )
-                Obj._val = obj_val
+            # transfer offset and value to Obj
+            obj_off, obj_val = Obj._off, Obj._val
+            Obj._off, Obj._val = self._off, val
+            ret.extend( Obj._to_pack() )
+            # restore offset and value
             self._off = Obj._off
-            Obj._off = obj_off
+            Obj._off, Obj._val = obj_off, obj_val
         return ret
     
     def clone(self):
@@ -749,16 +735,19 @@ class CSN1Alt(CSN1Obj):
     instances
     
     specific internal attributes:
-        - alt : dict of { key bit-string : list of CSN1Obj instances }
-        - kdic: dictionnary of {key bit-string : alternative name}
-        - kord: dictionnary of {key length: {set of keys of given length}}
-        - val : list of CSN1Obj values
+        - alt  : dict of { key bit-string : 2-tuple(alternative_name, list of CSN1Obj instances) }
+        - trunc: in case the list of objects within alternatives can be truncated
+        - kord : dict of {key length: {set of keys of given length}}, built at init
+        - val  : list of CSN1Obj values
+    
+    specific init args:
+        - alt
+        - trunc
+        - kdic : dict of { key bit-string : alternative name } to update potential 
+                 alternatives' name from self._alt
     """
-    # ENC_LREF enables to automatically encode length determinant
-    ENC_LREF = True
     
     _alt   = {}
-    _kdic  = None
     _trunc = False
     
     def __init__(self, **kw):
@@ -769,8 +758,16 @@ class CSN1Alt(CSN1Obj):
                 for Obj in alt[1]:
                     Obj._par = self
         if 'kdic' in kw and kw['kdic']:
-            self._kdic = kw['kdic']
-        #
+            # update alternatives' name
+            kdic = kw['kdic']
+            for k in self._alt:
+                if k in kdic:
+                    self._alt[k] = (kdic[k], self._alt[k][1])
+        if 'trunc' in kw and kw['trunc']:
+            self._trunc = True
+        self._init_dic()
+    
+    def _init_dic(self):
         keys = [k for k in self._alt if k is not None and len(k) > 0]
         if any(['L' in k or 'H' in k for k in keys]):
             # TODO: support mixed padding L/H and non-padding 0/1 keys
@@ -787,11 +784,7 @@ class CSN1Alt(CSN1Obj):
             return '{}'
         else:
             k = self._val[0]
-            if self._kdic and k in self._kdic:
-                alt_name = self._kdic[k]
-            else:
-                alt_name = self._alt[k][0]
-            alt_list = self._alt[k][1]
+            alt_name, alt_list = self._alt[k]
             if alt_name:
                 pref = '{%r (%s): [' % (k, alt_name)
             else:
@@ -813,11 +806,7 @@ class CSN1Alt(CSN1Obj):
             return '{}'
         else:
             k = self._val[0]
-            if self._kdic and k in self._kdic:
-                alt_name = self._kdic[k]
-            else:
-                alt_name = self._alt[k][0]
-            alt_list = self._alt[k][1]
+            alt_name, alt_list = self._alt[k]
             if alt_name:
                 pref = '{%r (%s): [\n ' % (k, alt_name)
             else:
@@ -858,8 +847,7 @@ class CSN1Alt(CSN1Obj):
                 if k in keys:
                     found = True
                     char._cur += kl
-                    self._off += kl
-                    self._off %= 8
+                    self._off  = (self._off + kl) % 8
                     break
             if not found:
                 raise(CSN1InvalidValueErr())
@@ -869,25 +857,23 @@ class CSN1Alt(CSN1Obj):
         #
         # 2) decode alternative
         for Obj in obj_list:
-            obj_val = Obj._val
-            obj_off = Obj._off
+            # transfer offset to Obj
+            obj_off, obj_val = Obj._off, Obj._val
             Obj._off = self._off
             try:
                 Obj._from_char(char)
             except (CSN1NoCharErr, CSN1InvalidValueErr) as err:
-                # TODO: it will be required at some point to handle truncation
-                # properly (e.g. "//" at the end of a CSN1 list)
-                Obj._val = obj_val
-                Obj._off = obj_off
+                # restore offset and val
+                Obj._off, Obj._val = obj_off, obj_val
                 if self._trunc:
                     break
                 else:
                     raise(err)
             else:
                 self._val.append( Obj._val )
+                # restore offset and val
                 self._off = Obj._off
-                Obj._val = obj_val
-                Obj._off = obj_off
+                Obj._off, Obj._val = obj_off, obj_val
     
     def _to_pack_obj(self):
         ret = []
@@ -897,7 +883,6 @@ class CSN1Alt(CSN1Obj):
         k = self._val[0]
         assert( isinstance(k, str_types) )
         if k:
-            # TODO: handle L/H keys
             if self._pad_gsm:
                 bl = []
                 for i, c in enumerate(k):
@@ -911,36 +896,35 @@ class CSN1Alt(CSN1Obj):
                 ret.append( (CSN1T_UINT, bitlist_to_uint(bl), len(k)) )
             else:
                 ret.append( (CSN1T_UINT, int(k, 2), len(k)) )
-            self._off += len(k)
-            self._off %= 8
+            self._off = (self._off + len(k)) % 8
         obj_list = self._alt[k][1]
         #
         # encode alternative list
         for i, val in enumerate(self._val[1:]):
             Obj = obj_list[i]
-            obj_off = Obj._off
-            Obj._off = self._off
-            if isinstance(Obj, CSN1Val):
-                ret.extend( Obj._to_pack() )
-            else:
-                obj_val  = Obj._val
-                Obj._val = val
-                ret.extend( Obj._to_pack() )
-                Obj._val = obj_val
+            # transfer offset and value to Obj
+            obj_off, obj_val = Obj._off, Obj._val
+            Obj._off, Obj._val = self._off, val
+            ret.extend( Obj._to_pack() )
+            # restore offset and value
             self._off = Obj._off
-            Obj._off = obj_off
+            Obj._off, Obj._val = obj_off, obj_val
         return ret
     
     def clone(self):
         kw = self._clone_get_kw()
-        kw['kord'] = self._kord
-        if self._alt:
-            kw['alt'] = {k: (self._alt[k][0], [Obj.clone() for Obj in self._alt[k][1]]) for k in self._alt}
-        if self._kdic != self.__class__._kdic:
-            kw['kdic'] = self._kdic
         if self._trunc:
             kw['trunc'] = True
-        return self.__class__(**kw)
+        clo = self.__class__(**kw)
+        # handle _alt and _kdic out of the init process
+        clo._alt = {}
+        for (k, (altname, altlist)) in self._alt.items():
+            clo_altlist = [Obj.clone() for Obj in altlist]
+            [setattr(Obj, '_par', clo) for Obj in clo_altlist]
+            clo._alt[k] = (altname, clo_altlist)
+        clo._kord    = self._kord
+        clo._pad_gsm = self._pad_gsm
+        return clo
 
 
 class CSN1SelfRef(CSN1Obj):
@@ -970,23 +954,25 @@ class CSN1SelfRef(CSN1Obj):
         global _root_obj
         if _root_obj is None:
             raise(CSN1Err('{0}: no root object referenced'.format(self._name)))
-        # preserve already existing root object value
-        root_obj_val = _root_obj._val
+        # preserve already existing root object value and offset
+        # and transfer offset to it
+        root_obj_off, root_obj_val = _root_obj._off, _root_obj._val
+        _root_obj._off = self._off
         _root_obj._from_char(char)
-        self._val = _root_obj._val
-        # restore initial value
-        _root_obj._val = root_obj_val
+        self._off, self._val = _root_obj._off, _root_obj._val
+        # restore initial value and offset
+        _root_obj._off, _root_obj._val = root_obj_off, root_obj_val
     
     def _to_pack_obj(self):
         global _root_obj
         if _root_obj is None:
             raise(CSN1Err('{0}: no root object referenced'.format(self._name)))
         # preserve already existing root object value
-        root_obj_val = _root_obj._val
-        _root_obj._val = self._val
+        root_obj_off, root_obj_val = _root_obj._off, _root_obj._val
+        _root_obj._off, _root_obj._val = self._off, self._val
         ret = _root_obj._to_pack()
         # restore initial value
-        _root_obj._val = root_obj_val
+        _root_obj._off, _root_obj._val = root_obj_off, root_obj_val
         return ret
     
     def clone(self):
