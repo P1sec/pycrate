@@ -524,46 +524,9 @@ class RestOctets(Type3V):
     def __init__(self, *args, **kwargs):
         Type3V.__init__(self, *args, **kwargs)
         # The length of V is not fixed, but tied to the L2PseudoLength element
-        # prefixing the parent element
+        # prefixing the envelope element
         self[0].set_blauto(lambda: 176 - (self.get_env()[0][0].get_val()<<3))
-    
-    '''
-    def _from_char(self, char):
-        if self[0]._name != 'V':
-            # restore the std buffer for handling the value
-            self.unset_IE()
-        #
-        # TODO: investigate the cause to have this dirty patch within some pcaps
-        # and remove it as soon as possible
-        robl, chbl = self[0]._blauto(), char.len_bit()
-        if chbl < robl:
-            log('%s, _from_char: buffer not long enough, requests %i, max %i'\
-                % (self._name, robl, chbl))
-            char.append_bytes(b'\x2b' * ((robl-chbl)>>3))
-        #
-        Envelope._from_char(self, char)
-        # in case self._IE is defined, use it to decode char instead of V
-        if self.DECODE_INNER and self._IE_stat is not None:
-            if self._IE is None:
-                self._IE = self._IE_stat.clone()
-            iebl = self[-1].get_bl()
-            ccur, clen = char._cur, char._len_bit
-            char._cur -= iebl
-            char._len_bit = char._cur + iebl
-            try:
-                self._IE._from_char(char)
-            except:
-                log('%s, _from_char: unable to decode IE, %s'\
-                    % (self._name, self._IE._name))
-            else:
-                if char.len_bit() > 0:
-                    log('%s, _from_char: uncorrect decoding for IE, %s'\
-                        % (self._name, self._IE._name))
-                else:
-                    # replace V with the IE structure
-                    self.replace(self[-1], self._IE)
-            char._cur, char._len_bit = ccur, clen
-    '''
+
 
 #------------------------------------------------------------------------------#
 # Imperative part of a standard L3 message
