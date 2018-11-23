@@ -106,8 +106,8 @@ egprs_packet_uplink_assignment = CSN1List(name='egprs_packet_uplink_assignment',
     CSN1Alt(alt={
       '0': ('', []),
       '1': ('', [
-      CSN1Bit(name='alpha', bit=4),
-      CSN1Bit(name='gamma', bit=5)])}),
+      CSN1Bit(name='alpha', bit=4)])}),
+    CSN1Bit(name='gamma', bit=5),
     CSN1Alt(alt={
       '0': ('', []),
       '1': ('', [

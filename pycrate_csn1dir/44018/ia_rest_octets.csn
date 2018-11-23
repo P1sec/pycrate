@@ -64,8 +64,8 @@
 		    { 0 | 1 < BEP_PERIOD2 : bit (4) > }
 		    < RESEGMENT : bit (1) >
 		    < EGPRS Window Size : < EGPRS Window Size IE >>
-		    { 0 | 1	< ALPHA : bit (4) > 
-				    < GAMMA : bit (5) > }
+		    { 0 | 1	< ALPHA : bit (4) > }
+			        < GAMMA : bit (5) >
 		    { 0 | 1	< TIMING_ADVANCE_INDEX : bit (4) > }
 		    { 0 | 1	< TBF_STARTING_TIME : bit (16) > }
 		    {	null | L 									-- Receiver compatible with earlier release
