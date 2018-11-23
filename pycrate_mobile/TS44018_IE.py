@@ -38,6 +38,7 @@ from pycrate_core.elt    import Envelope, Array, Sequence, Alt, \
 from pycrate_core.base   import *
 from pycrate_core.repr   import *
 
+from .TS24007    import RestOctets
 from .TS24008_IE import LAI, RAI, ID, MSCm2, BroadcastCallRef, TMGI, AddUpdateParams, \
     CellId, CKSN_dict
 
@@ -1079,20 +1080,23 @@ class HandoverRef(Uint8):
 # after the L2PseudoLength (index 0) and before the RestOctets (index -1)
 
 class L2PseudoLength(Envelope):
-    _excl = ()
     _GEN  = (
         Uint('Value', bl=6),
         Uint('M', val=0, bl=1),
         Uint('EL', val=1, bl=1)
         )
     def __init__(self, *args, **kwargs):
-        if 'excl' in kwargs:
-            self._excl = kwargs['excl']
-            del kwargs['excl']
         Envelope.__init__(self, *args, **kwargs)
-        self[0].set_valauto(
-            lambda: sum([e.get_bl() for i, e in enumerate(self.get_env()._content) \
-                         if i not in self._excl])>>3 )
+        self[0].set_valauto(lambda: self._get_l2pl())
+    
+    def _get_l2pl(self):
+        l2pl = 0
+        for elt in self.get_env()._content[1:]:
+            if isinstance(elt, RestOctets):
+                break
+            else:
+                l2pl += elt.get_bl()
+        return l2pl>>3
 
 
 #------------------------------------------------------------------------------#

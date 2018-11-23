@@ -749,7 +749,7 @@ def get_tbf(l3msg):
 
 class RRImmediateAssignment(Layer3):
     _GEN = (
-        L2PseudoLength(excl=(0, 12)),
+        L2PseudoLength(excl=(0, 9, 10)),
         RRHeader(val={'Type':63}),
         Type1V('DedicatedModeOrTBF', val={'V':0}, IE=DedicatedModeOrTBF()),
         Type1V('PageMode', val={'V':0}, dic=PageMode_dict),
@@ -1835,13 +1835,13 @@ RRDLTypeClasses = {
     19 : RRClassmarkEnquiry,
     20 : RRFrequencyRedefinition,
     22 : RRMBMSAnnouncement,
-    32 : RRNotificationNCH,
     42 : RRUplinkBusy,
     43 : RRHandoverCmd,
     45 : RRPhysicalInfo,
     46 : RRAssignmentCmd,
     48 : RRConfigChangeCmd,
     53 : RRCipheringModeCmd,
+    55 : RRExtMeasurementOrder,
     56 : RRApplicationInfo,
     59 : RRAdditionalAssign,
     73 : RRDTMReject,
@@ -1861,6 +1861,7 @@ RRULTypeClasses = {
     15 : RRPartialReleaseComplete,
     17 : RRTalkerInd,
     18 : RRStatus,
+    21 : RRMeasurementReport,
     22 : RRClassmarkChange,
     23 : RRChannelModeModifyAck,
     38 : RRNotificationResponse,
@@ -1874,6 +1875,7 @@ RRULTypeClasses = {
     51 : RRConfigChangeReject,
     52 : RRGPRSSuspensionReq,
     54 : RRServiceInfo,
+    #54 : RRExtMeasurementReport,
     56 : RRApplicationInfo,
     72 : RRDTMAssignmentFailure,
     74 : RRDTMReq,
@@ -1885,13 +1887,10 @@ RRULTypeClasses = {
     104: RRDataInd2
     }
 
+# Warning: those are separate dict specific for SACCH
+# because of the RRExtMeasurementReport which has the same type as RRServiceInfo
 RRSACCHDLTypeClasses = {
-    1  : RRSystemInfo14,
-    5  : RRSystemInfo5bis,
-    6  : RRSystemInfo5ter,
     18 : RRStatus,
-    29 : RRSystemInfo5,
-    30 : RRSystemInfo6,
     55 : RRExtMeasurementOrder
     }
 
@@ -1901,18 +1900,28 @@ RRSACCHULTypeClasses = {
     54 : RRExtMeasurementReport
     }
 
+# Warning: 
+# SI5, SI5bis, SI5ter, SI6, SI14 (normally over SACCH) and
+# Notification/NCH (normally over NCH) are handled through the RRBCCH dict
+# because they have a L2PseudoLength prefix required for handling RestOctets
 RRBCCHTypeClasses = {
     0  : RRSystemInfo13,
+    1  : RRSystemInfo14,
     2  : RRSystemInfo2bis,
     3  : RRSystemInfo2ter,
     4  : RRSystemInfo9,
+    5  : RRSystemInfo5bis,
+    6  : RRSystemInfo5ter,
     7  : RRSystemInfo2quater,
     24 : RRSystemInfo8,
     25 : RRSystemInfo1,
     26 : RRSystemInfo2,
     27 : RRSystemInfo3,
     28 : RRSystemInfo4,
+    29 : RRSystemInfo5,
+    30 : RRSystemInfo6,
     31 : RRSystemInfo7,
+    32 : RRNotificationNCH,
     33 : RRPagingReq1,
     34 : RRPagingReq2,
     36 : RRPagingReq3,
@@ -1934,8 +1943,8 @@ RRBCCHTypeClasses = {
     106: RRECImmediateAssignment1
     }
 
-# Warning, there are few collisions within the several dispatchers
-# hence RRTypeClasses / RRTypeMOClasses / RRTypeMTClasses do not references 
+# Warning, because of the few collisions within the several dispatchers
+# hence RRTypeClasses / RRTypeMOClasses / RRTypeMTClasses do not reference
 # absolutely all RR signalling message types
 
 RRTypeMOClasses = {}
