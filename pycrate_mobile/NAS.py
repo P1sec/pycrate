@@ -78,11 +78,13 @@ NASMTDispatcher = {
     }
 
 
-def parse_NAS_MO(buf):
+def parse_NAS_MO(buf, wl2=False):
     """Parses a Mobile Originated NAS message bytes' buffer
     
     Args:
         buf: uplink NAS message bytes' buffer
+        wl2: bool, True if the signalling message is a GSM RR with a 
+             L2PseudoLength prefix
     
     Returns:
         element, err: 2-tuple
@@ -91,13 +93,19 @@ def parse_NAS_MO(buf):
     """
     if python_version < 3:
         try:
-            pd, type = unpack('>BB', buf[:2])
+            if wl2:
+                pd, type = unpack('>BB', buf[1:3])
+            else:
+                pd, type = unpack('>BB', buf[:2])
         except:
             # error 111, unspecified protocol error
             return None, 111
     else:
         try:
-            pd, type = buf[0], buf[1]
+            if wl2:
+                pd, type = buf[1], buf[2]
+            else:
+                pd, type = buf[0], buf[1]
         except:
             # error 111, unspecified protocol error
             return None, 111
@@ -122,11 +130,13 @@ def parse_NAS_MO(buf):
     return Msg, 0
 
 
-def parse_NAS_MT(buf):
+def parse_NAS_MT(buf, wl2=False):
     """Parses a Mobile Terminated NAS message bytes' buffer
     
     Args:
         buf: downlink NAS message bytes' buffer
+        wl2: bool, True if the signalling message is a GSM RR with a 
+             L2PseudoLength prefix
     
     Returns:
         element, err: 2-tuple
@@ -135,13 +145,19 @@ def parse_NAS_MT(buf):
     """
     if python_version < 3:
         try:
-            pd, type = unpack('>BB', buf[:2])
+            if wl2:
+                pd, type = unpack('>BB', buf[1:3])
+            else:
+                pd, type = unpack('>BB', buf[:2])
         except:
             # error 111, unspecified protocol error
             return None, 111
     else:
         try:
-            pd, type = buf[0], buf[1]
+            if wl2:
+                pd, type = buf[1], buf[2]
+            else:
+                pd, type = buf[0], buf[1]
         except:
             # error 111, unspecified protocol error
             return None, 111
