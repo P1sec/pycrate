@@ -89,7 +89,7 @@ class Layer3(Envelope):
         self._sec = sec
         # build a list of (tag length, tag value) for the optional part
         # configure IE set by **kw as non-transparent and set their value
-        self._opts = []
+        self._opts, self._rest = [], None
         if val is None:
             # go faster by just looking for optional IE
             for ie in self._content:
@@ -97,6 +97,9 @@ class Layer3(Envelope):
                     # optional IE
                     T = ie[0]
                     self._opts.append( (T.get_bl(), T(), ie) )
+                elif isinstance(ie, RestOctets):
+                    # rest octets
+                    self._rest = ie
         else:
             for ie in self._content:
                 if isinstance(ie, (Type1V, Type1TV)):
@@ -128,6 +131,8 @@ class Layer3(Envelope):
                     self._opts.append( (8, ie[0](), ie) )
                     if ie._name in val:
                         ie._trans = False
+                elif isinstance(ie, RestOctets):
+                    self._rest = ie
                 elif ie._name in val:
                     ie.set_val(val[ie._name])
     
@@ -145,9 +150,13 @@ class Layer3(Envelope):
         # in case some optional IE are set (with transparency enabled)
         # they are decoded as much as the char buffer allows it
         # 1) decode mandatory part
+        if self._rest is not None:
+            self._rest.set_trans(True)
+            dec_brk = self.DEC_BREAK_ON_UNK_IE
+            self.DEC_BREAK_ON_UNK_IE = True
         Envelope._from_char(self, char)
         # 2) decode optional part
-        opts = self._opts[:]
+        opts, dec = self._opts[:], False
         while char.len_bit() >= 8:
             T4, T8, dec = char.to_uint(4), char.to_uint(8), False
             for i, opt in enumerate(opts):
@@ -163,11 +172,16 @@ class Layer3(Envelope):
             if not dec:
                 # unknown IEI
                 if self.DEC_BREAK_ON_UNK_IE:
-                    log('%s, unknown IE remaining, not decoded' % self._name)
+                    #log('%s, unknown IE remaining, not decoded' % self._name)
                     break
                 else:
                     char._cur += 8
                     self._dec_unk_ie(T8, char)
+        # 3) decode rest octets
+        if not dec and self._rest is not None:
+            self._rest.set_trans(False)
+            self.DEC_BREAK_ON_UNK_IE = dec_brk
+            self._rest._from_char(char)
     
     def _dec_unk_ie(self, T8, char):
         if T8 & 0x80:
@@ -515,17 +529,23 @@ class Type6TLVE(IE):
         self[2].set_blauto(lambda: 8*self[1].get_val())
 
 
-class RestOctets(Type3V):
+class RestOctets(IE):
     """Rest octets (or Type5) IE is a specific IE only used in GSM / GPRS
     its content is a single buffer of variable length, which is tied to the
     L2PseudoLength at the beginning of the L3 GSM message containing it
     """
+    _GEN = (
+        BufAuto('V', rep=REPR_HEX),
+        )
     
     def __init__(self, *args, **kwargs):
-        Type3V.__init__(self, *args, **kwargs)
-        # The length of V is not fixed, but tied to the L2PseudoLength element
-        # prefixing the envelope element
-        self[0].set_blauto(lambda: 176 - (self.get_env()[0][0].get_val()<<3))
+        IE.__init__(self, *args, **kwargs)
+        self[0].PAD_VAL = b'+' # 0x2b, GSM padding
+        if self[0]._bl is None:
+            # in case the length is not fixed at init, it is handled in 
+            # a dynamic way, tied to the L2PseudoLength element prefixing the
+            # parent Layer3 envelope
+            self[0].set_blauto(lambda: 176 - (self.get_env()[0][0].get_val()<<3))
 
 
 #------------------------------------------------------------------------------#

@@ -92,8 +92,11 @@ from pycrate_csn1dir.gprs_broadcast_information_value_part      import gprs_broa
 from pycrate_csn1dir.mprach_description_value_part              import mprach_description_value_part
 from pycrate_csn1dir.mbms_p_t_m_channel_description_value_part  import mbms_p_t_m_channel_description_value_part
 from pycrate_csn1dir.mbms_session_parameters_list_value_part    import mbms_session_parameters_list_value_part
+from pycrate_csn1dir.ec_packet_channel_description_type_1       import ec_packet_channel_description_type_1
 from pycrate_csn1dir.rr_packet_downlink_assignment_type_2_value_part import \
     rr_packet_downlink_assignment_type_2_value_part
+from pycrate_csn1dir.ec_immediate_assignment_type_2_message_content  import \
+    ec_immediate_assignment_type_2_message_content
 from pycrate_csn1dir.cell_selection_indicator_after_release_of_all_tch_and_sdcch_value_part import \
     cell_selection_indicator_after_release_of_all_tch_and_sdcch_value_part
 
@@ -102,45 +105,13 @@ from pycrate_csn1dir.cell_selection_indicator_after_release_of_all_tch_and_sdcch
 # generic objects
 #------------------------------------------------------------------------------#
 
-'''to be removed
-def smod(n, m):
-    """
-    offset remainder of the euclidian division of n by m:
-        1 <= (n smod m) <= m and there exists k such that 
-        n = (k*m) + (n smod m);
-    """
-    r = n%m
-    if r == 0:
-        return m
-    else:
-        return r
-
-
-def build_ext_dict(d, kend=None):
-    """extends a dict d that has only integral keys
-    """
-    if not d:
-        return {}
-    di  = sorted(d.items())
-    ret = [di[0]]
-    for i in range(1, len(di)):
-        while di[i][0] > 1+ret[-1][0]:
-            # hole in d, extend ret
-            ret.append( (ret[-1][0]+1, ret[-1][1]) )
-        ret.append( di[i] )
-    if kend:
-        while kend > ret[-1][0]:
-            ret.append( (ret[-1][0]+1, ret[-1][1]) )
-    return dict(ret)
-'''
-
 class BitMap(Buf):
     """handles bit map
     
     derives from the Buf object and includes get() / set() / unset() methods
     for handling bit value at given offset
     """
-    _pre = REPR_BIN
+    _rep = REPR_HEX
     
     # dedicated method to get, set and unset at a given offset
     def get(self, off):
@@ -401,8 +372,8 @@ class FreqListBitmap0(BitMap):
         """returns the list of ARFCNs set
         """
         arfcns = []
-        ar_uint = self.to_uint()
-        for i in range(0, 124):
+        ar_uint, ar_bl = self.to_uint(), 124
+        for i in range(0, ar_bl):
             if ar_uint & (1<<i):
                 arfcns.append(1+i)
         arfcns.sort()
@@ -411,9 +382,9 @@ class FreqListBitmap0(BitMap):
     def encode(self, arfcns):
         """sets a list of ARFCNs
         """
-        ar_uint = 0
+        ar_uint, ar_bl = 0, 124
         for ar in set(arfcns):
-            if isinstance(ar, integer_types) and 0 < ar <= 124:
+            if isinstance(ar, integer_types) and 0 < ar <= ar_bl:
                 ar_uint += 1<<(124-ar)
         self.set_val(uint_to_bytes(ar_uint, 124))
 
@@ -446,7 +417,7 @@ class CellChanAlt2(_FreqListAlt2):
             0: CellChanRange512(),
             1: CellChanRange256(),
             2: CellChanRange128(),
-            3: FreqListBitmapVar('CellChanBitmapVar')},
+            3: FreqListBitmapVar('CellChanBitmapVar', bl=111)},
             sel=lambda self: self.get_env()[0].get_val())
         )
 
@@ -825,7 +796,7 @@ class CtrlChanDesc(Envelope):
         Uint('BS-AG-BLKS-RES', bl=3),
         Uint('CCCHConf', bl=3, dic=_CCCHConf_dict),
         Uint('SI22Ind', bl=1, dic={1:'SI22 broadcasted'}),
-        Uint('CBQ3', bl=1, dic=_CBQ3_dict),
+        Uint('CBQ3', bl=2, dic=_CBQ3_dict),
         Uint('spare', bl=2),
         Uint('BS-PA-MFRMS', bl=3),
         Uint8('T3212', dic={0:'periodic location updating shall not be used in the cell'})
@@ -902,7 +873,7 @@ class FreqListAlt2(_FreqListAlt2):
         )
 
 
-class FreqListAlt1(_FreqList):
+class FreqListAlt1(_FreqListAlt1):
     _GEN = (
         Uint('FmtExt', bl=1, dic={0:'range 1024'}),
         Alt(GEN={
@@ -958,7 +929,7 @@ class FreqShortListAlt2(_FreqListAlt2):
             0: FreqShortListRange512(),
             1: FreqShortListRange256(),
             2: FreqShortListRange128(),
-            3: FreqListBitmapVar('FreqShortListBitmapVar')},
+            3: FreqListBitmapVar('FreqShortListBitmapVar', bl=55)},
             sel=lambda self: self.get_env()[0].get_val())
         )
 
@@ -1087,7 +1058,10 @@ class L2PseudoLength(Envelope):
         )
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[0].set_valauto(lambda: self._get_l2pl())
+        if self[0]._val is None:
+            # in case the Value is not fixed at init, it is handled in 
+            # a dynamic way
+            self[0].set_valauto(lambda: self._get_l2pl())
     
     def _get_l2pl(self):
         l2pl = 0
@@ -1191,6 +1165,20 @@ class NeighbourCellChan(Envelope):
             DEFAULT=Buf('undefined', rep=REPR_HEX),
             sel=lambda self: self.get_env()[0].get_val())
         )
+    
+    def decode(self):
+        """returns the list of ARFCNs set
+        """
+        try:
+            return self[3].get_alt().decode()
+        except:
+            return []
+    
+    def encode(self, arfcns):
+        """sets the list of ARFCNs
+        """
+        # TODO: choose the best possible encoding ?!
+        raise(PycrateErr('not implemented'))
 
 
 #------------------------------------------------------------------------------#
@@ -1210,6 +1198,20 @@ class NeighbourCellChan2(Envelope):
             1: CellChanAlt1()},
             sel=lambda self: self.get_env()[0].get_val())
         )
+    
+    def decode(self):
+        """returns the list of ARFCNs set
+        """
+        try:
+            return self[3].get_alt().decode()
+        except:
+            return []
+    
+    def encode(self, arfcns):
+        """sets the list of ARFCNs
+        """
+        # TODO: choose the best possible encoding ?!
+        raise(PycrateErr('not implemented'))
 
 
 #------------------------------------------------------------------------------#

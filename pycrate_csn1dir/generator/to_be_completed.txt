@@ -107,6 +107,8 @@ WARN: unable to process arithmetic expression, (M-1)
 
 ## 24.008
 ## ms_ra_capability_value_part.py
+## 44.018
+## ia_rest_octets.py
 
 # create a dict:
 _AccessTechnoType_dict = {
@@ -126,7 +128,9 @@ _AccessTechnoType_dict = {
     13 : 'GSM T 810',
 }
 # ref it with a kdic=_AccessTechnoType_dict
-# within the object ms_ra_capability_value_part_struct
+# within the object ms_ra_capability_value_part.ms_ra_capability_value_part_struct
+# and a dic=_AccessTechnoType_dict
+# within the object ia_rest_octets.access_technologies_request_struct
 
 
 ## 44.018

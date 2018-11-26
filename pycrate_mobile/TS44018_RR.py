@@ -749,7 +749,7 @@ def get_tbf(l3msg):
 
 class RRImmediateAssignment(Layer3):
     _GEN = (
-        L2PseudoLength(excl=(0, 9, 10)),
+        L2PseudoLength(),
         RRHeader(val={'Type':63}),
         Type1V('DedicatedModeOrTBF', val={'V':0}, IE=DedicatedModeOrTBF()),
         Type1V('PageMode', val={'V':0}, dic=PageMode_dict),
@@ -815,7 +815,7 @@ class RRImmediateAssignmentExt(Layer3):
 
 class RRImmediateAssignmentReject(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':19}),
         RRHeader(val={'Type':58}),
         Type1V('FeatureInd', val={'V':0}, IE=FeatureInd()),
         Type1V('PageMode', val={'V':0}, dic=PageMode_dict),
@@ -827,7 +827,7 @@ class RRImmediateAssignmentReject(Layer3):
         Type3V('WaitInd3', val={'V':b'\0'}, bl={'V':8}, IE=T3122()),
         Type3V('RequestRef4', val={'V':b'\0\0\0'}, bl={'V':24}, IE=RequestRef()),
         Type3V('WaitInd4', val={'V':b'\0'}, bl={'V':8}, IE=T3122()),
-        RestOctets('IARRestOctets', IE=iar_rest_octets)
+        RestOctets('IARRestOctets', bl={'V': 24}, IE=iar_rest_octets)
         )
 
 
@@ -858,9 +858,9 @@ class RRMeasurementReport(Layer3):
 
 class RRNotificationNCH(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':1}),
         RRHeader(val={'Type':32}),
-        RestOctets('NTNRestOctets', IE=ntn_rest_octets),
+        RestOctets('NTNRestOctets', bl={'V':160}, IE=ntn_rest_octets),
         )
 
 
@@ -985,7 +985,7 @@ class RRPagingReq2(Layer3):
 
 class RRPagingReq3(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':19}),
         RRHeader(val={'Type':36}),
         Type1V('ChanNeeded', val={'V':0}, IE=ChanNeeded()),
         Type1V('PageMode', val={'V':0}, dic=PageMode_dict),
@@ -993,7 +993,7 @@ class RRPagingReq3(Layer3):
         Type3V('ID2', val={'V':4*b'\0'}, bl={'V':32}, IE=TMSI()),
         Type3V('ID3', val={'V':4*b'\0'}, bl={'V':32}, IE=TMSI()),
         Type3V('ID4', val={'V':4*b'\0'}, bl={'V':32}, IE=TMSI()),
-        RestOctets('P3RestOctets', IE=p3_rest_octets)
+        RestOctets('P3RestOctets', bl={'V':24}, IE=p3_rest_octets)
         )
 
 
@@ -1088,11 +1088,11 @@ class RRStatus(Layer3):
 
 class RRSystemInfo1(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':21}),
         RRHeader(val={'Type':25}),
         Type3V('CellChan', val={'V':16*b'\0'}, bl={'V':128}, IE=CellChan()),
         Type3V('RACHCtrl', val={'V':b'\0\0\0'}, bl={'V':24}, IE=RACHCtrl()),
-        RestOctets('SI1RestOctets', IE=si1_rest_octets)
+        RestOctets('SI1RestOctets', bl={'V':8}, IE=si1_rest_octets)
         )
 
 
@@ -1103,7 +1103,7 @@ class RRSystemInfo1(Layer3):
 
 class RRSystemInfo2(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':22}),
         RRHeader(val={'Type':26}),
         Type3V('BCCHFreqList', val={'V':16*b'\0'}, bl={'V':128}, IE=NeighbourCellChan()),
         Type3V('NCCPermitted', val={'V':b'\0'}, bl={'V':8}, IE=NCCPermitted()),
@@ -1118,11 +1118,11 @@ class RRSystemInfo2(Layer3):
 
 class RRSystemInfo2bis(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':21}),
         RRHeader(val={'Type':2}),
         Type3V('ExtBCCHFreqList', val={'V':16*b'\0'}, bl={'V':128}, IE=NeighbourCellChan()),
         Type3V('RACHCtrl', val={'V':b'\0\0\0'}, bl={'V':24}, IE=RACHCtrl()),
-        RestOctets('SI2bisRestOctets', IE=si2bis_rest_octets)
+        RestOctets('SI2bisRestOctets', bl={'V':8}, IE=si2bis_rest_octets)
         )
 
 
@@ -1133,10 +1133,10 @@ class RRSystemInfo2bis(Layer3):
 
 class RRSystemInfo2ter(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':18}),
         RRHeader(val={'Type':3}),
         Type3V('ExtBCCHFreqList', val={'V':16*b'\0'}, bl={'V':128}, IE=NeighbourCellChan2()),
-        RestOctets('SI2terRestOctets', IE=si2ter_rest_octets)
+        RestOctets('SI2terRestOctets', bl={'V':32}, IE=si2ter_rest_octets)
         )
 
 
@@ -1147,9 +1147,9 @@ class RRSystemInfo2ter(Layer3):
 
 class RRSystemInfo2quater(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':1}),
         RRHeader(val={'Type':7}),
-        RestOctets('SI2quaterRestOctets', IE=si2quater_rest_octets)
+        RestOctets('SI2quaterRestOctets', bl={'V':160}, IE=si2quater_rest_octets)
         )
 
 
@@ -1160,9 +1160,9 @@ class RRSystemInfo2quater(Layer3):
 
 class RRSystemInfo2n(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':1}),
         RRHeader(val={'Type':69}),
-        RestOctets('SI2nRestOctets', IE=si2n_rest_octets)
+        RestOctets('SI2nRestOctets', bl={'V':160}, IE=si2n_rest_octets)
         )
 
 
@@ -1173,7 +1173,7 @@ class RRSystemInfo2n(Layer3):
 
 class RRSystemInfo3(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':18}),
         RRHeader(val={'Type':27}),
         Type3V('CellId', val={'V':b'\0\0'}, bl={'V':16}, IE=CellId()),
         Type3V('LAI', val={'V': b'\0\xf1\x10\0\0'}, bl={'V':40}, IE=LAI()),
@@ -1181,7 +1181,7 @@ class RRSystemInfo3(Layer3):
         Type3V('CellOpt', val={'V':b'\0'}, bl={'V':8}, IE=CellOpt()),
         Type3V('CellSelParams', val={'V':b'\0\0'}, bl={'V':16}, IE=CellSelParams()),
         Type3V('RACHCtrl', val={'V':b'\0\0\0'}, bl={'V':24}, IE=RACHCtrl()),
-        RestOctets('SI3RestOctets', IE=si3_rest_octet)
+        RestOctets('SI3RestOctets', bl={'V':32}, IE=si3_rest_octet)
         )
 
 
@@ -1210,7 +1210,7 @@ class RRSystemInfo4(Layer3):
 
 class RRSystemInfo5(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':18}),
         RRHeaderSACCH(val={'Type':29}),
         Type3V('BCCHFreqList', val={'V':16*b'\0'}, bl={'V':128}, IE=NeighbourCellChan())
         )
@@ -1223,7 +1223,7 @@ class RRSystemInfo5(Layer3):
 
 class RRSystemInfo5bis(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':18}),
         RRHeaderSACCH(val={'Type':5}),
         Type3V('ExtBCCHFreqList', val={'V':16*b'\0'}, bl={'V':128}, IE=NeighbourCellChan())
         )
@@ -1236,7 +1236,7 @@ class RRSystemInfo5bis(Layer3):
 
 class RRSystemInfo5ter(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':18}),
         RRHeaderSACCH(val={'Type':6}),
         Type3V('ExtBCCHFreqList', val={'V':16*b'\0'}, bl={'V':128}, IE=NeighbourCellChan2())
         )
@@ -1249,13 +1249,13 @@ class RRSystemInfo5ter(Layer3):
 
 class RRSystemInfo6(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':11}),
         RRHeaderSACCH(val={'Type':30}),
         Type3V('CellId', val={'V':b'\0\0'}, bl={'V':16}, IE=CellId()),
         Type3V('LAI', val={'V': b'\0\xf1\x10\0\0'}, bl={'V':40}, IE=LAI()),
         Type3V('CellOpt', val={'V':b'\0'}, bl={'V':8}, IE=CellOpt()),
         Type3V('NCCPermitted', val={'V':b'\0'}, bl={'V':8}, IE=NCCPermitted()),
-        RestOctets('SI6RestOctets', IE=si6_rest_octets)
+        RestOctets('SI6RestOctets', bl={'V':56}, IE=si6_rest_octets)
         )
 
 
@@ -1266,9 +1266,9 @@ class RRSystemInfo6(Layer3):
 
 class RRSystemInfo7(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':1}),
         RRHeader(val={'Type':31}),
-        RestOctets('SI7RestOctets', IE=si4_rest_octets)
+        RestOctets('SI7RestOctets', bl={'V':160}, IE=si4_rest_octets)
         )
 
 
@@ -1279,9 +1279,9 @@ class RRSystemInfo7(Layer3):
 
 class RRSystemInfo8(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':1}),
         RRHeader(val={'Type':24}),
-        RestOctets('SI7RestOctets', IE=si4_rest_octets)
+        RestOctets('SI7RestOctets', bl={'V':160}, IE=si4_rest_octets)
         )
 
 
@@ -1292,10 +1292,10 @@ class RRSystemInfo8(Layer3):
 
 class RRSystemInfo9(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':1}),
         RRHeader(val={'Type':4}),
         Type3V('RACHCtrl', val={'V':b'\0\0\0'}, bl={'V':24}, IE=RACHCtrl()),
-        RestOctets('SI9RestOctets', IE=si9_rest_octets)
+        RestOctets('SI9RestOctets', bl={'V':136}, IE=si9_rest_octets)
         )
 
 
@@ -1306,9 +1306,9 @@ class RRSystemInfo9(Layer3):
 
 class RRSystemInfo13(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':0}),
         RRHeader(val={'Type':0}),
-        RestOctets('SI13RestOctets', IE=si_13_rest_octets)
+        RestOctets('SI13RestOctets', bl={'V':160}, IE=si_13_rest_octets)
         )
 
 
@@ -1319,9 +1319,9 @@ class RRSystemInfo13(Layer3):
 
 class RRSystemInfo16(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':1}),
         RRHeader(val={'Type':61}),
-        RestOctets('SI16RestOctets', IE=si16_rest_octets)
+        RestOctets('SI16RestOctets', bl={'V':160}, IE=si16_rest_octets)
         )
 
 
@@ -1332,9 +1332,9 @@ class RRSystemInfo16(Layer3):
 
 class RRSystemInfo17(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':1}),
         RRHeader(val={'Type':62}),
-        RestOctets('SI17RestOctets', IE=si17_rest_octets)
+        RestOctets('SI17RestOctets', bl={'V':160}, IE=si17_rest_octets)
         )
 
 
@@ -1345,9 +1345,9 @@ class RRSystemInfo17(Layer3):
 
 class RRSystemInfo19(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':1}),
         RRHeader(val={'Type':65}),
-        RestOctets('SI19RestOctets', IE=si_19_rest_octets)
+        RestOctets('SI19RestOctets', bl={'V':160}, IE=si_19_rest_octets)
         )
 
 
@@ -1358,9 +1358,9 @@ class RRSystemInfo19(Layer3):
 
 class RRSystemInfo18(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':1}),
         RRHeader(val={'Type':64}),
-        RestOctets('SI18RestOctets', IE=si_18_rest_octets)
+        RestOctets('SI18RestOctets', bl={'V':160}, IE=si_18_rest_octets)
         )
 
 
@@ -1371,9 +1371,9 @@ class RRSystemInfo18(Layer3):
 
 class RRSystemInfo20(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':1}),
         RRHeader(val={'Type':66}),
-        RestOctets('SI20RestOctets', IE=si_18_rest_octets)
+        RestOctets('SI20RestOctets', bl={'V':160}, IE=si_18_rest_octets)
         )
 
 
@@ -1384,9 +1384,9 @@ class RRSystemInfo20(Layer3):
 
 class RRSystemInfo14(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':18}), # this 44.018 spec does not make sens at all !!!
         RRHeaderSACCH(val={'Type':1}),
-        RestOctets('SI14RestOctets', IE=si14_rest_octets)
+        RestOctets('SI14RestOctets', bl={'V':128}, IE=si14_rest_octets)
         )
 
 
@@ -1397,9 +1397,9 @@ class RRSystemInfo14(Layer3):
 
 class RRSystemInfo15(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':1}),
         RRHeader(val={'Type':67}),
-        RestOctets('SI15RestOctets', IE=si15_rest_octets)
+        RestOctets('SI15RestOctets', bl={'V':160}, IE=si15_rest_octets)
         )
 
 
@@ -1410,9 +1410,9 @@ class RRSystemInfo15(Layer3):
 
 class RRSystemInfo13alt(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':0}),
         RRHeader(val={'Type':68}),
-        RestOctets('SI13altRestOctets', IE=si_13alt_rest_octets)
+        RestOctets('SI13altRestOctets', bl={'V':160}, IE=si_13alt_rest_octets)
         )
 
 
@@ -1423,9 +1423,9 @@ class RRSystemInfo13alt(Layer3):
 
 class RRSystemInfo21(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':2}),
         RRHeader(val={'Type':70}),
-        RestOctets('SI21RestOctets', IE=si_21_rest_octets)
+        RestOctets('SI21RestOctets', bl={'V':160}, IE=si_21_rest_octets)
         )
 
 
@@ -1436,9 +1436,9 @@ class RRSystemInfo21(Layer3):
 
 class RRSystemInfo22(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':2}),
         RRHeader(val={'Type':71}),
-        RestOctets('SI22RestOctets', IE=si_22_rest_octets)
+        RestOctets('SI22RestOctets', bl={'V':160}, IE=si_22_rest_octets)
         )
 
 
@@ -1449,9 +1449,9 @@ class RRSystemInfo22(Layer3):
 
 class RRSystemInfo23(Layer3):
     _GEN = (
-        L2PseudoLength(),
+        L2PseudoLength(val={'Value':2}),
         RRHeader(val={'Type':79}),
-        RestOctets('SI23RestOctets', IE=si_23_rest_octets)
+        RestOctets('SI23RestOctets', bl={'V':160}, IE=si_23_rest_octets)
         )
 
 
@@ -1736,9 +1736,14 @@ class RRECImmediateAssignment1(Layer3):
         Type1V('FeatureInd', val={'V':0}, IE=FeatureInd()),
         Type1V('PageMode', val={'V':0}, dic=PageMode_dict),
         Type3V('RequestRef', val={'V':b'\0\0\0'}, bl={'V':24}, IE=RequestRef()),
-        Type3V('ECPacketChannelDesc1', val={'V':b'\0\0'}, bl={'V':16}, ),
-        RestOctets('ECFixedUplinkAlloc', )
-        )        
+        Type3V('ECPacketChannelDesc1', val={'V':b'\0\0'}, bl={'V':16}, IE=ec_packet_channel_description_type_1),
+        Type3V('ECFixedUplinkAlloc', val={'V':4*b'\0'}, IE=ec_immediate_assignment_type_2_message_content),
+        RestOctets('rest')
+        )
+    def __init__(self, *args, **kwargs):
+        Layer3.__init__(self, *args, **kwargs)
+        self[0][0].set_valauto(lambda: (64+self[6].get_bl())>>3)
+        self[6][0].set_blauto(lambda: (self[0][0].get_val()<<3)-64)
 
 
 #------------------------------------------------------------------------------#

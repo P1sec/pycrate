@@ -47,6 +47,12 @@ rr_pdu_mo = tuple(map(unhexlify, (
     )))
 
 rr_pdu_mt = tuple(map(unhexlify, (
+    # DCCH
+    '063505', # ciphering mode cmd
+    '060d00', # channel release
+    )))
+
+rr_pdu_l2_mt = tuple(map(unhexlify, (
     # BCCH
     '2d063f110e600c7f1d3800004bc26b0284b510f32b2b2b', # immediate assignment
     '35063f0178b18207ec1704021fff2b2b2b2b2b2b2b2b2b',
@@ -63,12 +69,10 @@ rr_pdu_mt = tuple(map(unhexlify, (
     '49061bfae102f8100310c8021e1785407900008000029b', # SI type 3
     '31061c02f810031085407900008000572b2b2b2b2b2b2b', # SI type 4
     # SACCH
-    '061d00000000000000000000000000007eff', # SI type 5
-    '061e87e902f810031097ff2b2b2b2b2b2b2b', # SI type 6
-    # DCCH
-    '063505', # ciphering mode cmd
-    '060d00', # channel release
+    '49061d00000000000000000000000000007eff', # SI type 5
+    '2d061e87e902f810031097ff2b2b2b2b2b2b2b', # SI type 6
     )))
+
 
 def test_gsmrr_mo(rr_pdu=rr_pdu_mo):
     for pdu in rr_pdu:
@@ -79,6 +83,15 @@ def test_gsmrr_mo(rr_pdu=rr_pdu_mo):
         m.set_val(v)
         assert( m.to_bytes() == pdu )
 
+def test_gsmrr_l2_mt(rr_pdu=rr_pdu_l2_mt):
+    for pdu in rr_pdu:
+        m, e = parse_NAS_MT(pdu, wl2=True)
+        assert( e == 0 )
+        m.reautomate()
+        v = m.get_val()
+        m.set_val(v)
+        assert( m.to_bytes() == pdu )
+    
 def test_gsmrr_mt(rr_pdu=rr_pdu_mt):
     for pdu in rr_pdu:
         m, e = parse_NAS_MT(pdu)
@@ -91,11 +104,15 @@ def test_gsmrr_mt(rr_pdu=rr_pdu_mt):
 def test_perf():
     
     print('[+] GSM RR MO decoding and re-encoding')
-    Ta = timeit(test_gsmrr_mo, number=10)
+    Ta = timeit(test_gsmrr_mo, number=20)
     print('test_nas_mo: {0:.4f}'.format(Ta))
     
     print('[+] GSM RR MT decoding and re-encoding')
-    Tb = timeit(test_gsmrr_mt, number=10)
+    Tb = timeit(test_gsmrr_mt, number=100)
+    print('test_nas_mt: {0:.4f}'.format(Tb))
+    
+    print('[+] GSM RR L2 MT decoding and re-encoding')
+    Tb = timeit(test_gsmrr_l2_mt, number=5)
     print('test_nas_mt: {0:.4f}'.format(Tb))
     
     print('[+] GSM RR total time: {0:.4f}'.format(Ta+Tb))
