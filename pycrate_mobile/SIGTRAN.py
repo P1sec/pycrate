@@ -523,3 +523,101 @@ class SIGTRAN(Envelope):
         else:
             self[1]._from_char(char)
 
+
+class M2PA(Envelope):
+    # RFC 4165
+    
+    _GEN = (
+        Envelope('Header', GEN=(
+            Uint8('Version', val=1),
+            Uint8('spare'),
+            Uint8('Class', val=11, dic=Class_dict),
+            Uint8('Type', val=1, dic={1:'User Data', 2:'Link Status'}),
+            Uint32('Len')),
+            hier=0),
+        Envelope('M2PAHeader', GEN=(
+            Uint8('unused'),
+            Uint24('BSN'),
+            Uint8('unused'),
+            Uint24('FSN')),
+            hier=0),
+        Alt('Data', GEN={
+            1: Envelope('UserData', GEN=(
+                Uint('Priority', bl=2),
+                Uint('spare', bl=6),
+                Buf('Data', val=b'', rep=REPR_HEX))),
+            2: Envelope('LinkStatus', GEN=(
+                Uint8('State'),
+                Buf('filler', val=b'', rep=REPR_HEX)))
+            },
+            DEFAULT=Buf('Data', val=b'', rep=REPR_HEX),
+            sel=lambda self: self.get_env()[0][3].get_val(),
+            hier=1)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0][4].set_valauto(lambda: 16 + self[2].get_len())
+        self[2]._GEN[1][2].set_blauto(lambda: 8*(self[0][4].get_val()-18))
+        self[2]._GEN[2][1].set_blauto(lambda: 8*(self[0][4].get_val()-17))
+        self[2].DEFAULT_ALT.set_blauto(lambda: 8*(self[0][4].get_val()-16))
+
+
+MTP3SubServInd_dict = {
+    0 : 'international network',
+    1 : 'spare',
+    2 : 'national network',
+    3 : 'reserved for national use'
+    }
+
+MTP3ServInd_dict = {
+    0 : 'Signalling network management messages',
+    1 : 'Signalling network testing and maintenance messages',
+    3 : 'Signalling Connection Control Part',
+    4 : 'Telephone User Part',
+    5 : 'ISDN User Part',
+    6 : 'DUP (call and circuit-related messages)',
+    7 : 'DUP (facility registration and cancellation)',
+    9 : 'Broadband ISDN User Part',
+    10: 'Satellite ISDN User Part',
+    }
+
+class MTP3(Envelope):
+    # ITU-T Q.2210, peer-to-peer info of user parts
+    
+    _GEN = (
+        Uint('SubServiceInd', bl=2, dic=MTP3SubServInd_dict),
+        Uint('SubServiceSpare', bl=2),
+        Uint('ServiceInd', bl=4, dic=MTP3ServInd_dict),
+        Uint8('DPC_LSB'),
+        Uint('OPC_LSB', bl=2),
+        Uint('DPC_MSB', bl=6),
+        Uint8('OPC_M'),
+        Uint('SLS', bl=4),
+        Uint('OPC_MSB', bl=4),
+        Uint16('DPC', trans=True),
+        Uint16('OPC', trans=True)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[9].set_valauto( lambda: self[3].get_val() + (self[5].get_val()<<8))
+        self[10].set_valauto(lambda: self[4].get_val() + (self[6].get_val()<<2) + \
+                                    (self[8].get_val()<<10))
+    
+    def set_val(self, vals):
+        if isinstance(vals, dict):
+            if 'DPC' in vals:
+                dpc = vals['DPC']
+                del vals['DPC']
+                self[3].set_val(dpc&0xff)
+                self[5].set_val(dpc>>8)
+            if 'OPC' in vals:
+                opc = vals['OPC']
+                del vals['OPC']
+                self[4].set_val(opc&0x2)
+                self[6].set_val((opc>>2)&0xff)
+                self[8].set_val(opc>>10)
+        if vals:
+            Envelope.set_val(self, vals)
+
