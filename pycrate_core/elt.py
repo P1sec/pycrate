@@ -4254,14 +4254,14 @@ class Alt(Element):
     
     # subscript methods passthrough
     
-    def __getitem__(self, key, sv=None):
-        return self.get_alt(sv).__getitem__(key)
+    def __getitem__(self, key):
+        return self.get_alt().__getitem__(key)
     
-    def __setitem__(self, key, val, sv=None):
-        return self.get_alt(sv).__setitem__(key, val)
+    def __setitem__(self, key, val):
+        return self.get_alt().__setitem__(key, val)
     
-    def __delitem(self, key, sv=None):
-        return self.get_alt(sv).__delitem__(key)
+    def __delitem(self, key):
+        return self.get_alt().__delitem__(key)
     
     #--------------------------------------------------------------------------#
     # representation routines
