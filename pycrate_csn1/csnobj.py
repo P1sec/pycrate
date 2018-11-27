@@ -144,16 +144,23 @@ class CSN1Obj(Element):
                 num = self._num
             if num != 1:
                 # multiple iteration of the object's value
-                content   = []
-                _num      = self._num
-                _val      = self._val
-                self._num = 1
-                for val in _val:
-                    self._val = val
-                    content.append( self._repr_val() )
-                self._num = _num
-                self._val = _val
-                ret = '<%s: [%s]>' % (name, ', '.join(content))
+                if isinstance(self, CSN1Val) and self._val:
+                    # fixed value repeated N times
+                    if num == -1:
+                        ret = '<%s: %s**>' % (name, self._val[0])
+                    else:
+                        ret = '<%s: %s*%i>' % (name, self._val[0], num)
+                else:
+                    content   = []
+                    _num      = self._num
+                    _val      = self._val
+                    self._num = 1
+                    for val in _val:
+                        self._val = val
+                        content.append( self._repr_val() )
+                    self._num = _num
+                    self._val = _val
+                    ret = '<%s: [%s]>' % (name, ', '.join(content))
             else:
                 ret = '<%s: %s>' % (name, self._repr_val())
         else:
@@ -186,16 +193,24 @@ class CSN1Obj(Element):
                 num = self._num
             if num != 1:
                 # multiple iteration of the object's value
-                content   = []
-                _num      = self._num
-                _val      = self._val
-                self._num = 1
-                for val in _val:
-                    self._val = val
-                    content.append( self._show_val().replace('\n', '\n ') )
-                self._num = _num
-                self._val = _val
-                ret = '<%s: [%s]>' % (name, ',\n'.join(content))
+                # multiple iteration of the object's value
+                if isinstance(self, CSN1Val) and self._val:
+                    # fixed value repeated N times
+                    if num == -1:
+                        ret = '<%s: %s**>' % (name, self._val[0])
+                    else:
+                        ret = '<%s: %s*%i>' % (name, self._val[0], num)
+                else:
+                    content   = []
+                    _num      = self._num
+                    _val      = self._val
+                    self._num = 1
+                    for val in _val:
+                        self._val = val
+                        content.append( self._show_val().replace('\n', '\n ') )
+                    self._num = _num
+                    self._val = _val
+                    ret = '<%s: [%s]>' % (name, ',\n'.join(content))
             else:
                 ret = '<%s: %s>' % (name, self._show_val())
         else:
@@ -453,10 +468,10 @@ class CSN1Bit(CSN1Obj):
         else:
             val = self._val
         if self._dic and self._val in self._dic:
-            return '%r (%s)' % (val, self._dic[self._val])
+            return '%s (%s)' % (val, self._dic[self._val])
         else:
             # int or bit-string
-            return val.__repr__()
+            return str(val)
     
     _show_val = _repr_val
     
@@ -558,7 +573,7 @@ class CSN1Val(CSN1Obj):
         return self._val
     
     def _repr_val(self):
-        return self._val.__repr__()
+        return str(self._val)
     
     _show_val = _repr_val
     
@@ -829,9 +844,9 @@ class CSN1Alt(CSN1Obj):
             k = self._val[0]
             alt_name, alt_list = self._alt[k]
             if alt_name:
-                pref = '{%r (%s): [' % (k, alt_name)
+                pref = '{ %s (%s) : [' % (k, alt_name)
             else:
-                pref = '{%r, [' % k
+                pref = '{ %s : [' % k
             content = []
             for i, val in enumerate(self._val[1:]):
                 Obj = alt_list[i]
@@ -851,9 +866,9 @@ class CSN1Alt(CSN1Obj):
             k = self._val[0]
             alt_name, alt_list = self._alt[k]
             if alt_name:
-                pref = '{%r (%s): [\n ' % (k, alt_name)
+                pref = '{ %s (%s) : [\n ' % (k, alt_name)
             else:
-                pref = '{%r, [\n ' % k
+                pref = '{ %s : [\n ' % k
             content = []
             for i, val in enumerate(self._val[1:]):
                 Obj = alt_list[i]
