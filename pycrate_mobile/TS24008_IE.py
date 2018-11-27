@@ -586,6 +586,13 @@ class ID(Envelope):
                 if self[1]._val:
                     self[7]._from_char(char)
             #
+            elif type == IDTYPE_NONE:
+                if not hasattr(self, '_IDNone'):
+                    self._IDNone = IDNone()
+                self._content = self._IDNone._content
+                self._by_id   = self._IDNone._by_id
+                self._by_name = self._IDNone._by_name
+            #
             else:
                 if not hasattr(self, '_IDNone'):
                     self._IDNone = IDNone()
