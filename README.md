@@ -122,8 +122,8 @@ In case you do not want to deep dive in the code, you can still contribute in ma
 and opening an issue with concrete debugging information 
 * writing new test cases for more coverage (have a look at the *test/* directory)
 * sending captures / real-world data that can be used for writing new test cases
-* writing new parts of the wiki (have a look at the [pycrate wiki]
-(https://github.com/p1sec/pycrate/wiki/The-pycrate-wiki))
+* writing new parts of the wiki (have a look at the 
+[pycrate wiki](https://github.com/p1sec/pycrate/wiki/The-pycrate-wiki))
 
 Getting contributions is extremely important to encourage the continuous development
 of the library, and to confirm the choice made to open-source it.
@@ -235,8 +235,9 @@ structures translated to Python objects.
 pycrate_csn1dir
 ---------------
 
-This dubdirectory contains some CSN.1 structures extracted from 3GPP specifications
-(in the .csn files), and translated into Python objects.
+This subdirectory contains CSN.1 structures extracted from 3GPP specifications
+(in the .csn files), and translated into Python objects. The following specifications
+have been used: TS 44.018, TS 44.060 and TS 24.008.
 
 
 pycrate_mobile
@@ -248,8 +249,11 @@ This subdirectory implements most of the 3GPP NAS protocol formats:
 * *NAS*: provides two functions to parse any uplink and downlink mobile NAS messages
 * *NASLTE*: provides two functions to parse LTE uplink and downlink NAS messages
 * *PPP*: structures for NCP and LCP protocols used for PPP connection estabishment
+* *SCCP*: structures for SCCP user-data and management messages
+* *SIGTRAN*: structures for SIGTRAN (mostly M2PA and M3UA) messages
 * *TS23038*: structures and routines for SMS encoding
-* *TS23040*: structures for the SMS transport protocol
+* *TS23040_SMS*: structures for the SMS transport protocol
+* *TS23041_CBS*: structures for the Cell Broadcast Service protocol
 * *TS24007*: basic structures from the TS 24.007 specification, reused in most of the NAS protocols
 * *TS24008_CC* : structures for call control messages from TS 24.008
 * *TS24008_GMM*: structures for GPRS mobility management messages from TS 24.008
@@ -261,15 +265,24 @@ This subdirectory implements most of the 3GPP NAS protocol formats:
 * *TS24301_EMM*: structures for the EPS mobility management messages from TS 24.301
 * *TS24301_ESM*: structures for the EPS mobility management messages from TS 24.301
 * *TS24301_IE*: structures for many information elements from TS 24.301
+* *TS44018_GTTP*: structure for the single GSM GTTP message from TS 44.018
+* *TS44018_IE*: structures for many information elements from TS 44.018
+* *TS44018_RR*: structures for the GSM and GPRS radio ressources messages from TS 44.018
 
 
 pycrate_corenet
 ---------------
 
-This subdirectory implements a signaling server that supports an Iuh interface
-(including HNBAP and RUA/RANAP) for interfacing with 3G femtocells, and just enough
-of IuCS and IuPS stacks to support the attachment and mobility of mobiles connecting
-through the femtocells.
+This subdirectory implements a signaling server that supports IuCS and IuPS over Iuh interfaces
+(including HNBAP and RUA/RANAP) for interfacing with 3G femtocells and S1 interfaces 
+(including S1AP) for interfacing with LTE eNodeBs.
+It handles many procedures to drive femtocells, eNodeBs and mobile terminals connecting
+through them. In terms of services, it mostly support short messages and data connectivity.
+It does not handle call services, neither active mobility procedures (handovers).
+
+It can be easily (common, running a mobile core network is not *that* easy) 
+configured and used thanks to the [corenet](https://github.com/mitshell/corenet/) project, 
+also open-source.
 
 
 Usage
@@ -288,7 +301,7 @@ ASN.1 usage
 ===========
 
 When a Python module from *pycrate_asn1dir/* is loaded, it creates Python classes
-corresponding to ASN.1 module (all dash characters are converted to underscore).
+corresponding to ASN.1 modules (all dash characters are converted to underscore).
 Each ASN.1 object has a corresponding Python instance, exposing the following methods:
 * from_asn1() / to_asn1(), which converts ASN.1 textual value to Python value and back
 * from_aper() / to_aper(), which converts aligned PER encoded value to Python value and back
@@ -426,7 +439,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> Final = HardcoreSyntax.Final # this is the Final object defined at line 115
 >>> Final
 <Final (SEQUENCE)>
->>> Final.get_proto() # warning: this does not show optional or extended component
+>>> Final.get_proto() # warning: this can return very laaaaaaarge definitions
 {
 w1: {
  r10: {
