@@ -1,0 +1,286 @@
+MAPv2-SupplementaryServiceOperations {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-SupplementaryServiceOperations (8)
+   version2 (2)}
+
+DEFINITIONS
+
+::=
+
+BEGIN
+
+EXPORTS
+	RegisterSS,
+	EraseSS,
+	ActivateSS,
+	DeactivateSS,
+	InterrogateSS,
+	ProcessUnstructuredSS-Data,
+	ProcessUnstructuredSS-Request,
+	UnstructuredSS-Request,
+	UnstructuredSS-Notify,
+	RegisterPassword,
+	GetPassword,
+	BeginSubscriberActivity
+;
+
+IMPORTS
+	OPERATION
+FROM TCAPMessages {
+   ccitt recommendation q 773 modules (2) messages (1) version2 (2)}
+
+	SystemFailure,
+	DataMissing,
+	UnexpectedDataValue,
+	UnknownSubscriber,
+	BearerServiceNotProvisioned,
+	TeleserviceNotProvisioned,
+	CallBarred,
+	IllegalSS-Operation,
+	SS-ErrorStatus,
+	SS-NotAvailable,
+	SS-SubscriptionViolation,
+	SS-Incompatibility,
+	PW-RegistrationFailure,
+	NegativePW-Check,
+	NumberOfPW-AttemptsViolation,
+	UnknownAlphabet,
+	USSD-Busy,
+	AbsentSubscriber,
+	IllegalSubscriber,
+	IllegalEquipment
+FROM MAPv2-Errors {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-Errors (10) version2 (2)}
+
+	RegisterSS-Arg,
+	SS-Info,
+	SS-ForBS-Code,
+	InterrogateSS-Res,
+	SS-UserData,
+	USSD-Arg,
+	USSD-Res,
+	Password,
+	GuidanceInfo,
+	BeginSubscriberActivityArg
+FROM MAPv2-SS-DataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-SS-DataTypes (14) version2 (2)}
+
+	SS-Code
+FROM MAPv2-SS-Code {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-SS-Code (15) version2 (2)}
+;
+
+
+
+RegisterSS ::= OPERATION				--Timer m--
+	ARGUMENT
+		registerSS-Arg	RegisterSS-Arg
+	RESULT
+		ss-Info	SS-Info
+		-- optional
+	ERRORS {
+		SystemFailure,
+		DataMissing,
+		UnexpectedDataValue,
+		UnknownSubscriber,
+		-- NU>1 UnknownSubscriber must not be used in version greater 1
+		BearerServiceNotProvisioned,
+		TeleserviceNotProvisioned,
+		CallBarred,
+		-- NU1 CallBarred must not be used in version 1
+		IllegalSS-Operation,
+		SS-ErrorStatus,
+		SS-SubscriptionViolation,
+		-- NU>1 SS-SubscriptionViolation must not be used in version
+		-- greater 1
+		SS-Incompatibility}
+
+EraseSS ::= OPERATION				--Timer m--
+	ARGUMENT
+		ss-ForBS	SS-ForBS-Code
+	RESULT
+		ss-Info	SS-Info
+		-- optional
+	ERRORS {
+		SystemFailure,
+		DataMissing,
+		-- NU1 DataMissing must not be used in version 1
+		UnexpectedDataValue,
+		UnknownSubscriber,
+		-- NU>1 UnknownSubscriber must not be used in version greater 1
+		BearerServiceNotProvisioned,
+		-- NU1 BearerServiceNotProvisioned must not be used in version 1
+		TeleserviceNotProvisioned,
+		-- NU1 TeleserviceNotProvisioned must not be used in version 1
+		CallBarred,
+		-- NU1 CallBarred must not be used in version 1
+		IllegalSS-Operation,
+		SS-ErrorStatus,
+		SS-SubscriptionViolation
+		-- NU>1 SS-SubscriptionViolation must not be used in version
+		-- greater 1
+		}
+
+
+ActivateSS ::= OPERATION				--Timer m--
+	ARGUMENT
+		ss-ForBS	SS-ForBS-Code
+	RESULT
+		ss-Info	SS-Info
+		-- optional
+	ERRORS {
+		SystemFailure,
+		DataMissing,
+		-- NU1 DataMissing must not be used in version 1
+		UnexpectedDataValue,
+		UnknownSubscriber,
+		-- NU>1 UnknownSubscriber must not be used in version greater 1
+		BearerServiceNotProvisioned,
+		-- NU1 BearerServiceNotProvisioned must not be used in version 1
+		TeleserviceNotProvisioned,
+		-- NU1 TeleserviceNotProvisioned must not be used in version 1
+		CallBarred,
+		-- NU1 CallBarred must not be used in version 1
+		IllegalSS-Operation,
+		SS-ErrorStatus,
+		SS-SubscriptionViolation,
+		SS-Incompatibility,
+		NegativePW-Check,
+		NumberOfPW-AttemptsViolation}
+		-- NU1 NumberOfPW-AttemptsViolation must not be used in version 1
+
+DeactivateSS ::= OPERATION				--Timer m--
+	ARGUMENT
+		ss-ForBS	SS-ForBS-Code
+	RESULT
+		ss-Info	SS-Info
+		-- optional
+	ERRORS {
+		SystemFailure,
+		DataMissing,
+		-- NU1 DataMissing must not be used in version 1
+		UnexpectedDataValue,
+		UnknownSubscriber,
+		-- NU>1 UnknownSubscriber must not be used in version greater 1
+		BearerServiceNotProvisioned,
+		-- NU1 BearerServiceNotProvisioned must not be used in version 1
+		TeleserviceNotProvisioned,
+		-- NU1 TeleserviceNotProvisioned must not be used in version 1
+		CallBarred,
+		-- NU1 CallBarred must not be used in version 1
+		IllegalSS-Operation,
+		SS-ErrorStatus,
+		SS-SubscriptionViolation,
+		NegativePW-Check,
+		NumberOfPW-AttemptsViolation}
+		-- NU1 NumberOfPW-AttemptsViolation must not be used in version 1
+
+
+InterrogateSS ::= OPERATION				--Timer m--
+	ARGUMENT
+		ss-ForBS	SS-ForBS-Code
+	RESULT
+		interrogateSS-Res	InterrogateSS-Res
+	ERRORS {
+		SystemFailure,
+		DataMissing,
+		-- NU1 DataMissing must not be used in version 1
+		UnexpectedDataValue,
+		UnknownSubscriber,
+		-- NU>1 UnknownSubscriber must not be used in version greater 1
+		BearerServiceNotProvisioned,
+		-- NU1 BearerServiceNotProvisioned must not be used in version 1
+		TeleserviceNotProvisioned,
+		-- NU1 TeleserviceNotProvisioned must not be used in version 1
+		CallBarred,
+		-- NU1 CallBarred must not be used in version 1
+		IllegalSS-Operation,
+		SS-NotAvailable}
+
+ProcessUnstructuredSS-Data ::= OPERATION		--Timer m--
+	ARGUMENT
+		ss-UserData	SS-UserData
+	RESULT
+		ss-UserData	SS-UserData
+		-- optional
+	ERRORS {
+		SystemFailure,
+		UnexpectedDataValue}
+
+ProcessUnstructuredSS-Request ::= OPERATION	--Timer ml--
+	ARGUMENT
+		ussd-Arg	USSD-Arg
+	RESULT
+		ussd-Res	USSD-Res
+	ERRORS {
+		SystemFailure,
+		DataMissing,
+		UnexpectedDataValue,
+		UnknownAlphabet,
+		CallBarred}
+
+UnstructuredSS-Request ::= OPERATION	--Timer	ml	(for MS)
+						10 min	(for MSC/VLR)
+	ARGUMENT
+		ussd-Arg	USSD-Arg
+	RESULT
+		ussd-Res	USSD-Res
+		-- optional
+	ERRORS {
+		SystemFailure,
+		DataMissing,
+		UnexpectedDataValue,
+		AbsentSubscriber,
+		IllegalSubscriber,
+		IllegalEquipment,
+		UnknownAlphabet,
+		USSD-Busy}
+
+UnstructuredSS-Notify ::= OPERATION		--Timer ml--
+	ARGUMENT
+		ussd-Arg	USSD-Arg
+	RESULT
+	ERRORS {
+		SystemFailure,
+		DataMissing,
+		UnexpectedDataValue,
+		AbsentSubscriber,
+		IllegalSubscriber,
+		IllegalEquipment,
+		UnknownAlphabet,
+		USSD-Busy}
+
+RegisterPassword ::= OPERATION			--Timer ml--
+	ARGUMENT
+		ss-Code	SS-Code
+	RESULT
+		newPassword	Password
+	ERRORS {
+		SystemFailure,
+		DataMissing,
+		-- NU1 DataMissing must not be used in version 1
+		UnexpectedDataValue,
+		CallBarred,
+		-- NU1 CallBarred must not be used in version 1
+		SS-SubscriptionViolation,
+		PW-RegistrationFailure,
+		NegativePW-Check,
+		NumberOfPW-AttemptsViolation}
+		-- NU1 NumberOfPW-AttemptsViolation must not be used in version 1
+	LINKED {
+		GetPassword}
+
+GetPassword ::= OPERATION				--Timer m--
+	ARGUMENT
+		guidanceInfo	GuidanceInfo
+	RESULT
+		currentPassword	Password
+
+BeginSubscriberActivity ::= OPERATION			--Timer m--
+	ARGUMENT
+		beginSubscriberActivityArg	BeginSubscriberActivityArg
+
+END

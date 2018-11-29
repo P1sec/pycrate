@@ -1,0 +1,184 @@
+MAPv2-OperationPackages
+
+DEFINITIONS
+
+::=
+
+BEGIN
+
+LocationUpdatingPackage-v2 ::= OPERATION-PACKAGE
+	-- Supplier is HLR if Consumer is VLR
+	CONSUMER INVOKES {
+		updateLocation}
+	SUPPLIER INVOKES {
+		forwardCheckSs-Indication}
+
+LocationCancellationPackage-v2 ::= OPERATION-PACKAGE
+	-- Supplier is VLR if Consumer is HLR
+	CONSUMER INVOKES {
+		cancelLocation}
+
+RoamingNumberEnquiryPackage-v2 ::= OPERATION-PACKAGE
+	-- Supplier is VLR if Consumer is HLR
+	CONSUMER INVOKES {
+		provideRoamingNumber}
+
+InfoRetrievalPackage-v2 ::= OPERATION-PACKAGE
+	-- Supplier is HLR if Consumer is VLR
+	CONSUMER INVOKES {
+		sendAuthenticationInfo}
+
+InfoRetrievalPackage-v1 ::= OPERATION-PACKAGE
+	-- Supplier is HLR or VLR if Consumer is VLR
+	CONSUMER INVOKES {
+		sendParameters}
+
+InterVlrInfoRetrievalPackage-v2 ::= OPERATION-PACKAGE
+	-- Supplier is VLR if Consumer is VLR
+	CONSUMER INVOKES {
+		sendIdentification}
+
+IMSIRetrievalPackage-v2 ::= OPERATION-PACKAGE
+	-- Supplier is HLR if Consumer is VLR
+	CONSUMER INVOKES {
+		sendIMSI}
+
+InterrogationPackage-v2 ::= OPERATION-PACKAGE
+	-- Supplier is HLR if Consumer is MSC
+	CONSUMER INVOKES {
+		sendRoutingInfo}
+
+HandoverControlPackage-v2 ::= OPERATION-PACKAGE
+	-- Supplier is MSCB if Consumer is MSCA
+	CONSUMER INVOKES {
+		prepareHandover,
+		forwardAccessSignalling}
+	SUPPLIER INVOKES {
+		sendEndSignal,
+		processAccessSignalling,
+		prepareSubsequentHandover}
+
+HandoverControlPackage-v1 ::= OPERATION-PACKAGE
+	-- Supplier is MSCB if Consumer is MSCA
+	CONSUMER INVOKES {
+		performHandover,
+		forwardAccessSignalling,
+		traceSubscriberActivity}
+	SUPPLIER INVOKES {
+		sendEndSignal,
+		noteInternalHandover,
+		processAccessSignalling,
+		performSubsequentHandover}
+
+SubscriberDataMngtStandAlonePackage-v2 ::= OPERATION-PACKAGE
+	-- Supplier is VLR if Consumer is HLR
+	CONSUMER INVOKES {
+		insertSubscriberData,
+		deleteSubscriberData}
+
+EquipmentMngtPackage-v2 ::= OPERATION-PACKAGE
+	-- Supplier is EIR if Consumer is MSC
+	CONSUMER INVOKES {
+		checkIMEI}
+
+SubscriberDataMngtPackage-v2 ::= OPERATION-PACKAGE
+	-- Supplier is VLR if Consumer is HLR
+	CONSUMER INVOKES {
+		insertSubscriberData}
+
+ResetPackage-v2 ::= OPERATION-PACKAGE
+	-- Supplier is VLR if Consumer is HLR
+	CONSUMER INVOKES {
+		reset}
+
+TracingStandAlonePackage-v2 ::= OPERATION-PACKAGE
+	-- Supplier is VLR if Consumer is HLR
+	CONSUMER INVOKES {
+		activateTraceMode,
+		deactivateTraceMode}
+
+FunctionalSsPackage-v2 ::= OPERATION-PACKAGE
+	-- Supplier is HLR if Consumer is VLR
+	CONSUMER INVOKES {
+		registerSS,
+		eraseSS,
+		activateSS,
+		deactivateSS,
+		registerPassword,
+		interrogateSS}
+	SUPPLIER INVOKES {
+		getPassword}
+
+TracingPackage-v2 ::= OPERATION-PACKAGE
+	-- Supplier is VLR if Consumer is HLR
+	CONSUMER INVOKES {
+		activateTraceMode}
+
+BindingPackage-v1 ::= OPERATION-PACKAGE
+	-- Supplier is HLR if Consumer is VLR
+	CONSUMER INVOKES {
+		beginSubscriberActivity}
+
+UnstructuredSsPackage-v2 ::= OPERATION-PACKAGE
+	-- Supplier is HLR if Consumer is VLR
+	CONSUMER INVOKES {
+		processUnstructuredSS-Request}
+	SUPPLIER INVOKES {
+		unstructuredSS-Request,
+		unstructuredSS-Notify}
+
+UnstructuredSsPackage-v1 ::= OPERATION-PACKAGE
+	-- Supplier is HLR if Consumer is VLR
+	CONSUMER INVOKES {
+		processUnstructuredSS-Data}
+ShortMsgRelayPackage-v2 ::= OPERATION-PACKAGE
+	-- Supplier is IWMSC if Consumer is MSC
+	-- Supplier is MSC if Consumer is GMSC
+	CONSUMER INVOKES {
+		forwardSM}
+
+ShortMsgGatewayPackage-v2 ::= OPERATION-PACKAGE
+	-- Supplier is HLR if Consumer is GMSC
+	CONSUMER INVOKES {
+		sendRoutingInfoForSM,
+		reportSM-DeliveryStatus}
+	SUPPLIER INVOKES {
+		informServiceCentre}
+
+ShortMsgGatewayPackage-v1 ::= OPERATION-PACKAGE
+	-- Supplier is HLR if Consumer is GMSC
+	CONSUMER INVOKES {
+		sendRoutingInfoForSM
+		reportSMDeliveryStatus}
+
+MwdMngtPackage-v2 ::= OPERATION-PACKAGE
+	-- Supplier is HLR if Consumer is VLR
+	CONSUMER INVOKES {
+		readyForSM}
+
+MwdMngtPackage-v1 ::= OPERATION-PACKAGE
+	-- Supplier is HLR if Consumer is VLR
+	CONSUMER INVOKES {
+		noteSubscriberPresent}
+
+AlertingPackage-v2 ::= OPERATION-PACKAGE
+	-- Supplier is IWMSC if Consumer is HLR
+	CONSUMER INVOKES {
+		alertServiceCentre}
+
+AlertingPackage-v1 ::= OPERATION-PACKAGE
+	-- Supplier is IWMSC if Consumer is HLR
+	CONSUMER INVOKES {
+		alertServiceCentreWithoutResult}
+
+DataRestorationPackage-v2 ::= OPERATION-PACKAGE
+	-- Supplier is HLR if Consumer is VLR
+	CONSUMER INVOKES {
+		restoreData}
+
+PurgingPackage-v2 ::= OPERATION-PACKAGE
+	-- Supplier is HLR if Consumer is VLR
+	CONSUMER INVOKES {
+		purgeMS}
+
+END

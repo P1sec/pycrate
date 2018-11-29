@@ -1,0 +1,104 @@
+MAPv2-OperationAndMaintenanceOperations --{
+   --ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   --gsm-Network (1) modules (3) map-OperationAndMaintenanceOperations (6)
+   --version2 (2)}
+
+DEFINITIONS
+
+::=
+
+BEGIN
+
+EXPORTS
+	activateTraceMode,
+	deactivateTraceMode,
+	traceSubscriberActivity,
+	noteInternalHandover,
+	sendIMSI
+;
+
+IMPORTS
+	OPERATION
+FROM Remote-Operations-Information-Objects {
+    joint-iso-itu-t remote-operations(4) informationObjects(5) version1(0)}
+
+	systemFailure,
+	dataMissing,
+	unexpectedDataValue,
+	facilityNotSupported,
+	unknownSubscriber,
+	unidentifiedSubscriber,
+	tracingBufferFull
+FROM MAPv2-Errors --{
+   --ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   --gsm-Network (1) modules (3) map-Errors (10) version2 (2)}
+
+	ActivateTraceModeArg,
+	DeactivateTraceModeArg,
+	TraceSubscriberActivityArg,
+	NoteInternalHO-Arg
+FROM MAPv2-OM-DataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-OM-DataTypes (12) version2 (2)}
+
+	ISDN-AddressString,
+	IMSI
+FROM MAPv2-CommonDataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-ComonDataTypes (18) version2 (2)}
+;
+
+
+activateTraceMode OPERATION ::= {				--Timer m--
+	ARGUMENT
+		ActivateTraceModeArg
+	ERRORS {
+		systemFailure |
+		dataMissing |
+		unexpectedDataValue |
+		facilityNotSupported |
+		unidentifiedSubscriber |
+		tracingBufferFull
+		}
+	CODE    local: 50
+	}
+
+deactivateTraceMode OPERATION ::= {				--Timer m--
+	ARGUMENT
+		DeactivateTraceModeArg
+	ERRORS {
+		systemFailure |
+		dataMissing |
+		unexpectedDataValue |
+		facilityNotSupported |
+		unidentifiedSubscriber
+		}
+	CODE    local: 51
+	}
+
+traceSubscriberActivity OPERATION ::= {			--Timer s--
+	ARGUMENT
+		TraceSubscriberActivityArg
+    CODE    local: 52
+    }
+
+noteInternalHandover OPERATION ::= {				--Timer s--
+	ARGUMENT
+		NoteInternalHO-Arg
+	CODE    local: 35
+	}
+
+sendIMSI OPERATION ::= {				--Timer m--
+	ARGUMENT
+		ISDN-AddressString
+	RESULT
+		IMSI
+	ERRORS {
+		dataMissing |
+		unexpectedDataValue |
+		unknownSubscriber
+		}
+	CODE    local: 58
+	}
+
+END

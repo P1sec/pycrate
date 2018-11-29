@@ -1,0 +1,92 @@
+MAPv2-ER-DataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-ER-DataTypes (17) version2 (2)}
+
+DEFINITIONS
+
+IMPLICIT TAGS
+
+::=
+
+BEGIN
+
+EXPORTS
+	RoamingNotAllowedCause,
+	CallBarringCause,
+	CUG-RejectCause,
+	SS-IncompatibilityCause,
+	PW-RegistrationFailureCause,
+	SM-DeliveryFailureCause
+;
+
+IMPORTS
+	SS-Status
+FROM MAPv2-SS-DataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-SS-DataTypes (14) version2 (2)}
+
+	SignalInfo,
+	BasicServiceCode
+FROM MAPv2-CommonDataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-CommonDataTypes (18) version2 (2)}
+
+	SS-Code
+FROM MAPv2-SS-Code {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-SS-Code (15) version2 (2)}
+;
+
+
+RoamingNotAllowedCause ::= ENUMERATED {
+	plmnRoamingNotAllowed  (0),
+	operatorDeterminedBarring  (3)}
+
+CallBarringCause ::= ENUMERATED {
+	barringServiceActive  (0),
+	operatorBarring  (1)}
+
+CUG-RejectCause ::= ENUMERATED {
+	incomingCallsBarredWithinCUG  (0),
+	subscriberNotMemberOfCUG  (1),
+	requestedBasicServiceViolatesCUG-Constraints  (5),
+	calledPartySS-InteractionViolation  (7)}
+	-- NU1 calledPartySS-InteractionViolation must not be used in
+	-- version 1
+
+SS-IncompatibilityCause ::= SEQUENCE {
+	ss-Code		[1] SS-Code	OPTIONAL,
+	basicService	BasicServiceCode	OPTIONAL,
+	ss-Status	[4] SS-Status	OPTIONAL,
+	...}
+
+PW-RegistrationFailureCause ::= ENUMERATED {
+	undetermined  (0),
+	invalidFormat  (1),
+	newPasswordsMismatch  (2)}
+
+SM-DeliveryFailureCause ::= CHOICE {
+	sm-DeliveryFailureCauseWithDiagnostic 
+			SM-DeliveryFailureCauseWithDiagnostic,
+-- NU1 sm-DeliveryFailureCauseWithDiagnostic must not be used in
+-- version 1
+	sm-EnumeratedDeliveryFailureCause  
+			SM-EnumeratedDeliveryFailureCause}
+-- NU>1 sm-EnumeratedDeliveryFailureCause must not be used in version
+-- greater 1
+
+SM-EnumeratedDeliveryFailureCause ::= ENUMERATED {
+	memoryCapacityExceeded  (0),
+	equipmentProtocolError  (1),
+	equipmentNotSM-Equipped  (2),
+	unknownServiceCentre  (3),
+	sc-Congestion  (4),
+	invalidSME-Address  (5),
+	subscriberNotSC-Subscriber  (6)}
+
+SM-DeliveryFailureCauseWithDiagnostic ::= SEQUENCE {
+	sm-EnumeratedDeliveryFailureCause    SM-EnumeratedDeliveryFailureCause,
+	diagnosticInfo	SignalInfo	OPTIONAL,
+	...}
+
+END

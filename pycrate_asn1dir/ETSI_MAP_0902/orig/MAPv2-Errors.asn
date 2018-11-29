@@ -1,0 +1,210 @@
+MAPv2-Errors {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-Errors (10) version2 (2)}
+
+DEFINITIONS
+
+::=
+
+BEGIN
+
+EXPORTS
+
+	SystemFailure,
+	DataMissing,
+	UnexpectedDataValue,
+	FacilityNotSupported,
+
+	UnknownSubscriber,
+	NumberChanged,
+	UnknownBaseStation,
+	UnknownMSC,
+	UnidentifiedSubscriber,
+	UnknownEquipment,
+
+	RoamingNotAllowed,
+	IllegalSubscriber,
+	IllegalEquipment,
+	BearerServiceNotProvisioned,
+	TeleserviceNotProvisioned,
+
+	InvalidTargetBaseStation,
+	NoRadioResourceAvailable,
+	NoHandoverNumberAvailable,
+	SubsequentHandoverFailure,
+
+	TracingBufferFull,
+
+	NoRoamingNumberAvailable,
+	AbsentSubscriber,
+	CallBarred,
+	ForwardingViolation,
+	CUG-Reject,
+
+	IllegalSS-Operation,
+	SS-ErrorStatus,
+	SS-NotAvailable,
+	SS-SubscriptionViolation,
+	SS-Incompatibility,
+	UnknownAlphabet,
+	USSD-Busy,
+	PW-RegistrationFailure,
+	NegativePW-Check,
+	NumberOfPW-AttemptsViolation,
+
+	SubscriberBusyForMT-SMS,
+	SM-DeliveryFailure,
+	MessageWaitingListFull
+;
+
+IMPORTS
+	ERROR
+FROM TCAPMessages {
+   ccitt recommendation q 773 modules (2) messages (1) version2 (2)}
+
+	SS-Status,
+	SS-SubscriptionOption
+FROM MAPv2-SS-DataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-SS-DataTypes (14) version2 (2)}
+
+	RoamingNotAllowedCause,
+	CallBarringCause,
+	CUG-RejectCause,
+	SS-IncompatibilityCause,
+	PW-RegistrationFailureCause,
+	SM-DeliveryFailureCause
+FROM MAPv2-ER-DataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-ER-DataTypes (17) version2 (2)}
+
+	NetworkResource
+FROM MAPv2-CommonDataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-CommonDataTypes (18) version2 (2)}
+;
+
+
+
+SystemFailure ::= ERROR
+	PARAMETER
+		networkResource	NetworkResource
+		-- optional
+
+DataMissing ::= ERROR
+
+UnexpectedDataValue ::= ERROR
+
+FacilityNotSupported ::= ERROR
+
+
+
+UnknownSubscriber ::= ERROR
+
+NumberChanged ::= ERROR
+
+UnknownBaseStation ::= ERROR
+
+UnknownMSC ::= ERROR
+
+UnidentifiedSubscriber ::= ERROR
+
+UnknownEquipment ::= ERROR
+
+
+RoamingNotAllowed ::= ERROR
+	PARAMETER
+		roamingNotAllowedCause	RoamingNotAllowedCause
+		-- optional
+		-- OA1 roamingNotAllowedCause must be absent in version 1
+		-- OP>1 roamingNotAllowedCause must be present in version greater 1
+
+IllegalSubscriber ::= ERROR
+
+IllegalEquipment ::= ERROR
+
+BearerServiceNotProvisioned ::= ERROR
+
+TeleserviceNotProvisioned ::= ERROR
+
+
+
+InvalidTargetBaseStation ::= ERROR
+
+NoRadioResourceAvailable ::= ERROR
+
+NoHandoverNumberAvailable ::= ERROR
+
+SubsequentHandoverFailure ::= ERROR
+
+
+
+TracingBufferFull ::= ERROR
+
+
+
+NoRoamingNumberAvailable ::= ERROR
+
+AbsentSubscriber ::= ERROR
+	PARAMETER
+		mwd-Set	BOOLEAN
+		-- optional
+		-- OA>1 mwd-Set must be absent in version greater 1
+
+CallBarred ::= ERROR
+	PARAMETER
+		callBarringCause	CallBarringCause
+		-- optional
+
+ForwardingViolation ::= ERROR
+
+CUG-Reject ::= ERROR
+	PARAMETER
+		cug-RejectCause	CUG-RejectCause
+		-- optional
+
+
+
+IllegalSS-Operation ::= ERROR
+
+SS-ErrorStatus ::= ERROR
+	PARAMETER
+		ss-Status	SS-Status
+		-- optional
+
+SS-NotAvailable ::= ERROR
+
+SS-SubscriptionViolation ::= ERROR
+	PARAMETER
+		ss-SubscriptionOption	SS-SubscriptionOption
+		-- optional
+		-- NU>1 ss-SubscriptionOption must not be used in version greater 1
+
+SS-Incompatibility ::= ERROR
+	PARAMETER
+		ss-IncompatibilityCause	SS-IncompatibilityCause
+		-- optional
+
+UnknownAlphabet ::= ERROR
+
+USSD-Busy ::= ERROR
+
+PW-RegistrationFailure ::= ERROR
+	PARAMETER
+		pw-RegistrationFailureCause	PW-RegistrationFailureCause
+
+NegativePW-Check ::= ERROR
+
+NumberOfPW-AttemptsViolation ::= ERROR
+
+
+
+SubscriberBusyForMT-SMS ::= ERROR
+
+SM-DeliveryFailure ::= ERROR
+	PARAMETER
+		sm-DeliveryFailureCause	SM-DeliveryFailureCause
+
+MessageWaitingListFull ::= ERROR
+
+END

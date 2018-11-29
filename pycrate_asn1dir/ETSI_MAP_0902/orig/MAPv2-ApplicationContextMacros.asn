@@ -1,0 +1,183 @@
+MAPv2-ApplicationContextMacros
+
+DEFINITION ::=
+
+BEGIN
+
+
+    APPLICATION-CONTEXT MACRO ::=
+
+    BEGIN
+
+    TYPE NOTATION ::= Symmetric | InitiatorConsumerOf
+    ResponderConsumerOf | empty
+
+    VALUE NOTATION ::= value(VALUE OBJECT IDENTIFIER)
+
+    Symmetric ::= "OPERATIONS OF" "{" PackageList "}"
+
+    InitiatorConsumerOf ::= "INITIATOR CONSUMER OF" "{" PackageList "}"
+
+    ResponderConsumerOf ::= "RESPONDER CONSUMER OF" "{" PackageList "}"
+		    | empty
+
+    PackageList ::= Package | PackageList "," Package
+
+    Package ::= value(OPERATION-PACKAGE)
+		    | type -- shall reference a package type
+
+    END
+
+
+networkLocUpContext-v2 APPLICATION-CONTEXT
+	-- Responder is HLR if Initiator is VLR
+	INITIATOR CONSUMER OF {
+		LocationUpdatingPackage-v2,
+		DataRestorationPackage-v2}
+	RESPONDER CONSUMER OF {
+		SubscriberDataMngtPackage-v2
+		TracingPackage-v2}
+::= {map-ac networkLocUp(1) version2(2)}
+    {map-ac networkLocUp(1) version1(1)}
+
+locationCancellation-v2 APPLICATION-CONTEXT
+	-- Responder is VLR if Initiator is HLR
+	INITIATOR CONSUMER OF {
+		LocationCancellationPackage-v2}
+::= {map-ac locationCancel(2) version2(2)}
+    {map-ac locationCancel(2) version1(1)
+
+roamingNumberEnquiryContext-v2 APPLICATION-CONTEXT
+	-- Responder is VLR if Initiator is HLR
+	INITIATOR CONSUMER OF {
+		RoamingNumberEnquiryPackage-v2}
+::= {map-ac roamingNbEnquiry(3) version2(2)}
+    {map-ac roamingNbEnquiry(3) version1(1)}
+
+locationInfoRetrievalContext-v2 APPLICATION-CONTEXT
+	-- Responder is HLR if Initiator is GMSC
+	INITIATOR CONSUMER OF {
+		InterrogationPackage-v2}
+::= {map-ac locInfoRetrieval(5) version2(2)}
+    {map-ac locInfoRetrieval(5) version1(1)}
+
+resetContext-v2 APPLICATION-CONTEXT
+	-- Responder is VLR if Initiator is HLR
+	INITIATOR CONSUMER OF {
+		ResetPackage-v2}
+::= {map-ac reset(10) version2(2)}
+    {map-ac reset(10) version1(1)}
+
+handoverControlContext-v2 APPLICATION-CONTEXT
+	-- Responder is MSCB if Initiator is MSCA
+	INITIATOR CONSUMER OF {
+		HandoverControlPackage-v2}
+::= {map-ac handoverControl(11) version2(2)}
+
+{map-ac handoverControl(11) version1(1)}
+
+imsiRetrievalContext-v2 APPLICATION-CONTEXT
+	-- Responder is HLR if Initiator is VLR
+	INITIATOR CONSUMER OF {
+		IMSIRetrievalPackage-v2}
+::= {map-ac imsiRetrieval(26) version2(2)}
+
+equipmentMngtContext-v2 APPLICATION-CONTEXT
+	-- Responder is EIR if Initiator is MSC
+	INITIATOR CONSUMER OF {
+		EquipmentMngtPackage-v2}
+::= {map-ac equipmentMngt(13) version2(2)}
+    {map-ac equipmentMngt(13) version1(1)}
+
+infoRetrievalContext-v2 APPLICATION-CONTEXT
+	-- Responder is HLR if Initiator is VLR
+	INITIATOR CONSUMER OF {
+		InfoRetrievalPackage-v2}
+::= {map-ac infoRetrieval(14) version2(2)}
+	-- Responder is HLR if Initiator is VLR
+    {map-ac infoRetrieval(14) version1(1)}
+
+interVlrInfoRetrievalContext-v2 APPLICATION-CONTEXT
+	-- Responder is VLR if Initiator is VLR
+	INITIATOR CONSUMER OF {
+		InterVlrInfoRetrievalPackage-v2}
+::= {map-ac interVlrInfoRetrieval(15) version2(2)}
+	-- Responder is VLR if Initiator is VLR
+    {map-ac infoRetrieval(14) version1(1)}
+
+subscriberDataMngtContext-v2 APPLICATION-CONTEXT
+	-- Responder is VLR if Initiator is HLR
+	INITIATOR CONSUMER OF {
+		SubscriberDataMngtStandAlonePackage-v2}
+::= {map-ac subscriberDataMngt(16) version2(2)}
+    {map-ac subscriberDataMngt(16) version1(1)}
+
+tracingContext-v2 APPLICATION-CONTEXT
+	-- Responder is VLR if Initiator is HLR
+	INITIATOR CONSUMER OF {
+		TracingStandAlonePackage-v2}
+::= {map-ac tracing(17) version2(2)}
+    {map-ac tracing(17) version1(1)}
+
+networkFunctionalSsContext-v2 APPLICATION-CONTEXT
+	-- Responder is HLR, Initiator is VLR
+	INITIATOR CONSUMER OF {
+		FunctionalSsPackage-v2}
+::= {map-ac networkFunctionalSs(18) version2(2)}
+
+networkFunctionalSsContext-v1 APPLICATION-CONTEXT
+	-- Responder is HLR, Initiator is VLR
+	INITIATOR CONSUMER OF {
+		FunctionalSsPackage-v1,
+		UnstructuredSsPackage-v1,
+		BindingPackage-v1}
+::= {map-ac networkFunctionalSs(18) version1(1)}
+
+networkUnstructuredSsContext-v2 APPLICATION-CONTEXT
+	-- Responder is HLR, Initiator is VLR
+	-- Responder is VLR, Initiator is HLR
+	OPERATIONS OF {
+		UnstructuredSsPackage-v2}
+::= {map-ac networkUnstructuredSs(19) version2(2)}
+
+shortMsgGatewayContext-v2 APPLICATION-CONTEXT
+	-- Responder is HLR if Initiator is GMSC
+	INITIATOR CONSUMER OF {
+		ShortMsgGatewayPackage-v2}
+::= {map-ac shortMsgGateway(20) version2(2)}
+    {map-ac shortMsgGateway(20) version1(1)}
+
+shortMsgMO-RelayContext-v2 APPLICATION-CONTEXT
+	-- Responder is IWMSC if Initiator is MSC
+	INITIATOR CONSUMER OF {
+		ShortMsgRelayPackage-v2}
+::= {map-ac shortMsgMO-Relay(21) version2(2)}
+    {map-ac --shortMsgRelay--21 version1(1)}
+
+shortMsgAlertContext-v2 APPLICATION-CONTEXT
+	-- Responder is IWMSC if Initiator is HLR
+	INITIATOR CONSUMER OF {
+		AlertingPackage-v2}
+::= {map-ac shortMsgAlert(23) version2(2)}
+    {map-ac shortMsgAlert(23) version1(1)}
+
+mwdMngtContext-v2 APPLICATION-CONTEXT
+	-- Responder is HLR if Initiator is VLR
+	INITIATOR CONSUMER OF {
+		MwdMngtPackage-v2}
+::= {map-ac mwdMngt(24) version2(2)}
+    {map-ac mwdMngt(24) version1(1)}
+
+shortMsgMT-RelayContext-v2 APPLICATION-CONTEXT
+	-- Responder is MSC if Initiator is GMSC
+	INITIATOR CONSUMER OF {
+		ShortMsgRelayPackage-v2}
+::= {map-ac shortMsgMT-Relay(25) version2(2)}
+
+msPurgingContext-v2 APPLICATION-CONTEXT
+	-- Responder is HLR if Initiator is VLR
+	INITIATOR CONSUMER OF {
+		purgingPackage-v2}
+::= {map-ac msPurging(27) version2(2)}
+
+END

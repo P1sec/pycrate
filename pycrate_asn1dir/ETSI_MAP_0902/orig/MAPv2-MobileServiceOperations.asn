@@ -1,0 +1,286 @@
+MAPv2-MobileServiceOperations {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-MobileServiceOperations (5)
+   version2 (2)}
+
+DEFINITIONS
+
+::=
+
+BEGIN
+
+EXPORTS
+
+	UpdateLocation,
+	CancelLocation,
+	PurgeMS,
+	SendIdentification,
+
+	PerformHandover,
+	PrepareHandover,
+	SendEndSignal,
+	ProcessAccessSignalling,
+	ForwardAccessSignalling,
+	PerformSubsequentHandover,
+	PrepareSubsequentHandover,
+
+	SendAuthenticationInfo,
+
+	CheckIMEI,
+
+	SendParameters,
+	InsertSubscriberData,
+	DeleteSubscriberData,
+
+	Reset,
+	ForwardCheckSS-Indication,
+	RestoreData
+;
+
+IMPORTS
+	OPERATION
+FROM TCAPMessages {
+   ccitt recommendation q 773 modules (2) messages (1) version2 (2)}
+
+	SystemFailure,
+	DataMissing,
+	UnexpectedDataValue,
+	UnknownSubscriber,
+	UnknownBaseStation,
+	UnknownMSC,
+	UnidentifiedSubscriber,
+	UnknownEquipment,
+	RoamingNotAllowed,
+	InvalidTargetBaseStation,
+	NoRadioResourceAvailable,
+	NoHandoverNumberAvailable,
+	SubsequentHandoverFailure
+FROM MAPv2-Errors {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-Errors (10) version2 (2)}
+
+	UpdateLocationArg,
+	UpdateLocationRes,
+	CancelLocationArg,
+	PurgeMS-Arg,
+	SendIdentificationRes,
+	PerformHO-Arg,
+	PrepareHO-Arg,
+	PerformHO-Res,
+	PrepareHO-Res,
+	PerformSubsequentHO-Arg,
+	PrepareSubsequentHO-Arg,
+	SendAuthenticationInfoArg,
+	SendAuthenticationInfoRes,
+	EquipmentStatus,
+	SendParametersArg,
+	SentParameterList,
+	InsertSubscriberDataArg,
+	InsertSubscriberDataRes,
+	DeleteSubscriberDataArg,
+	DeleteSubscriberDataRes,
+	ResetArg,
+	RestoreDataArg,
+	RestoreDataRes
+FROM MAPv2-MS-DataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-MS-DataTypes (11) version2 (2)}
+
+	ExternalSignalInfo,
+	TMSI,
+	IMEI
+FROM MAPv2-CommonDataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-CommonDataTypes (18) version2 (2)}
+;
+
+
+
+UpdateLocation ::= OPERATION				--Timer m--
+	ARGUMENT
+		updateLocationArg	UpdateLocationArg
+	RESULT
+		updateLocationRes	UpdateLocationRes
+	ERRORS {
+		SystemFailure,
+		DataMissing,
+		-- NU1 DataMissing must not be used in version 1
+		UnexpectedDataValue,
+		UnknownSubscriber,
+		RoamingNotAllowed}
+
+
+CancelLocation ::= OPERATION				--Timer m--
+	ARGUMENT
+		cancelLocationArg	CancelLocationArg
+	RESULT
+	ERRORS {
+		DataMissing,
+		-- NU1 DataMissing must not be used in version 1
+		UnexpectedDataValue,
+		UnidentifiedSubscriber}
+		-- NU>1 UnidentifiedSubscriber must not be used in version
+		-- greater 1
+
+PurgeMS ::= OPERATION				--Timer m--
+	ARGUMENT
+		purgeMS-Arg	PurgeMS-Arg
+	RESULT ERRORS {}
+
+SendIdentification::= OPERATION				--Timer s--
+	ARGUMENT
+		tmsi	TMSI
+	RESULT
+		sendIdentificationRes	SendIdentificationRes
+	ERRORS {
+		DataMissing,
+		UnidentifiedSubscriber}
+
+
+PrepareHandover ::= OPERATION				--Timer m--
+	ARGUMENT
+		prepareHO-Arg	PrepareHO-Arg
+	RESULT
+		prepareHO-Res	PrepareHO-Res
+	ERRORS {
+		SystemFailure,
+		DataMissing,
+		UnexpectedDataValue,
+		NoHandoverNumberAvailable}
+
+PerformHandover ::= OPERATION				--Timer s--
+	ARGUMENT
+		performHO-Arg	PerformHO-Arg
+	RESULT
+		performHO-Res	PerformHO-Res
+	ERRORS {
+		SystemFailure,
+		UnexpectedDataValue,
+		UnknownBaseStation,
+		InvalidTargetBaseStation,
+		NoRadioResourceAvailable,
+		NoHandoverNumberAvailable}
+
+SendEndSignal ::= OPERATION				--Timer l--
+	ARGUMENT
+		bss-APDU	ExternalSignalInfo
+		-- optional
+		-- OA1 bss-APDU must be absent in version 1
+		-- OP>1 bss-APDU must be present in version greater 1
+	RESULT ERRORS {}
+
+
+ProcessAccessSignalling ::= OPERATION			--Timer s--
+	ARGUMENT
+		bss-APDU	ExternalSignalInfo
+
+ForwardAccessSignalling ::= OPERATION			--Timer s--
+	ARGUMENT
+		bss-APDU	ExternalSignalInfo
+
+PrepareSubsequentHandover ::= OPERATION			--Timer m--
+	ARGUMENT
+		prepareSubsequentHO-Arg	PrepareSubsequentHO-Arg
+	RESULT
+		bss-APDU	ExternalSignalInfo
+	ERRORS {
+		UnexpectedDataValue,
+		DataMissing,
+		UnknownMSC,
+		SubsequentHandoverFailure}
+
+PerformSubsequentHandover ::= OPERATION			--Timer m--
+	ARGUMENT
+		performSubsequentHO-Arg	PerformSubsequentHO-Arg
+	RESULT
+		accessSignalInfo	ExternalSignalInfo
+	ERRORS {
+		UnexpectedDataValue,
+		UnknownBaseStation,
+		UnknownMSC,
+		InvalidTargetBaseStation,
+		SubsequentHandoverFailure}
+
+
+SendAuthenticationInfo ::= OPERATION			--Timer m--
+	ARGUMENT
+		sendAuthenticationInfoArg	SendAuthenticationInfoArg
+	RESULT
+		sendAuthenticationInfoRes	SendAuthenticationInfoRes
+		-- optional
+	ERRORS {
+		SystemFailure,
+		DataMissing,
+		UnexpectedDataValue,
+		UnknownSubscriber}
+
+
+CheckIMEI ::= OPERATION				--Timer m--
+	ARGUMENT
+		imei	IMEI
+	RESULT
+		equipmentStatus	EquipmentStatus
+	ERRORS {
+		SystemFailure,
+		DataMissing,
+		-- NU1 DataMissing must not be used in version 1
+		UnexpectedDataValue,
+		-- NU>1 UnexpectedDataValue must not be used in version greater 1
+		UnknownEquipment}
+
+
+SendParameters ::= OPERATION				--Timer m--
+	ARGUMENT
+		sendParametersArg	SendParametersArg
+	RESULT
+		sentParameterList	SentParameterList
+		-- optional
+		-- nothing is returned, if no requested parameter is
+		-- available or exists
+	ERRORS {
+		UnexpectedDataValue,
+		UnknownSubscriber,
+		UnidentifiedSubscriber}
+
+InsertSubscriberData ::= OPERATION				--Timer m--
+	ARGUMENT
+		insertSubscriberDataArg	InsertSubscriberDataArg
+	RESULT
+		insertSubscriberDataRes	InsertSubscriberDataRes
+		-- optional
+		-- OA1 insertSubscriberDataRes must be absent in version 1
+	ERRORS {
+		DataMissing,
+		UnexpectedDataValue,
+		UnidentifiedSubscriber}
+
+DeleteSubscriberData ::= OPERATION				--Timer m--
+	ARGUMENT
+		deleteSubscriberDataArg	DeleteSubscriberDataArg
+	RESULT
+		deleteSubscriberDataRes	DeleteSubscriberDataRes
+		-- optional
+		-- OA1 deleteSubscriberDataRes must be absent in version 1
+	ERRORS {
+		DataMissing,
+		UnexpectedDataValue,
+		UnidentifiedSubscriber}
+
+Reset ::= OPERATION				--Timer m--
+	ARGUMENT
+		resetArg	ResetArg
+
+ForwardCheckSS-Indication ::= OPERATION		--Timer s--
+
+RestoreData ::= OPERATION				--Timer m--
+	ARGUMENT
+		restoreDataArg	RestoreDataArg
+	RESULT
+		restoreDataRes	RestoreDataRes
+	ERRORS {
+		SystemFailure,
+		DataMissing,
+		UnexpectedDataValue,
+		UnknownSubscriber}
+
+END

@@ -1,0 +1,145 @@
+MAPv2-ShortMessageServiceOperations {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-ShortMessageServiceOperations (9)
+   version2 (2)}
+
+DEFINITIONS
+
+::=
+
+BEGIN
+
+EXPORTS
+	SendRoutingInfoForSM,
+	ForwardSM,
+	ReportSM-DeliveryStatus,
+	NoteSubscriberPresent,
+	AlertServiceCentreWithoutResult,
+	AlertServiceCentre,
+	InformServiceCentre,
+	ReadyForSM
+;
+
+IMPORTS
+	OPERATION
+FROM TCAPMessages {
+   ccitt recommendation q 773 modules (2) messages (1) version2 (2)}
+
+	SystemFailure,
+	DataMissing,
+	UnexpectedDataValue,
+	FacilityNotSupported,
+	UnknownSubscriber,
+	UnidentifiedSubscriber,
+	IllegalSubscriber,
+	IllegalEquipment,
+	TeleserviceNotProvisioned,
+	AbsentSubscriber,
+	CallBarred,
+	SubscriberBusyForMT-SMS,
+	SM-DeliveryFailure,
+	MessageWaitingListFull
+FROM MAP-Errors {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-Errors (10) version2 (2)}
+
+	RoutingInfoForSM-Arg,
+	RoutingInfoForSM-Res,
+	ForwardSM-Arg,
+	ReportSM-DeliveryStatusArg,
+	AlertServiceCentreArg,
+	InformServiceCentreArg,
+	ReadyForSM-Arg
+FROM MAP-SM-DataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-SM-DataTypes (16) version2 (2)}
+
+	ISDN-AddressString,
+	IMSI
+FROM MAP-CommonDataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-CommonDataTypes (18) version2 (2)}
+;
+
+
+SendRoutingInfoForSM ::= OPERATION				--Timer m--
+	ARGUMENT
+		routingInfoForSM-Arg	RoutingInfoForSM-Arg
+	RESULT
+		routingInfoForSM-Res	RoutingInfoForSM-Res
+	ERRORS {
+		SystemFailure,
+		DataMissing,
+		UnexpectedDataValue,
+		FacilityNotSupported,
+		UnknownSubscriber,
+		TeleserviceNotProvisioned,
+		AbsentSubscriber,
+		CallBarred}
+
+ForwardSM ::= OPERATION			--Timer ml--
+	ARGUMENT
+		forwardSM-Arg	ForwardSM-Arg
+	RESULT
+	ERRORS {
+		SystemFailure,
+		DataMissing,
+		-- NU1 DataMissing must not be used in version 1
+		UnexpectedDataValue,
+		FacilityNotSupported,
+		UnidentifiedSubscriber,
+		IllegalSubscriber,
+		IllegalEquipment,
+		-- NU1 IllegalEquipment must not be used in version 1
+		AbsentSubscriber,
+		SubscriberBusyForMT-SMS,
+		-- NU1 SubscriberBusyForMT-SMS must not be used in version 1
+		SM-DeliveryFailure}
+
+ReportSM-DeliveryStatus ::= OPERATION			--Timer s--
+	ARGUMENT
+		reportSM-DeliveryStatusArg	ReportSM-DeliveryStatusArg
+	RESULT
+		storedMSISDN	ISDN-AddressString
+		-- optional
+		-- OA1 storedMSISDN must be absent in version 1
+
+	ERRORS {
+		DataMissing,
+		-- NU1 DataMissing must not be used in version 1
+		UnexpectedDataValue,
+		UnknownSubscriber,
+		MessageWaitingListFull}
+
+NoteSubscriberPresent ::= OPERATION				--Timer s--
+	ARGUMENT
+		imsi		IMSI
+
+AlertServiceCentreWithoutResult ::= OPERATION	--Timer s--
+	ARGUMENT
+		alertServiceCentreArg	AlertServiceCentreArg
+
+AlertServiceCentre ::= OPERATION				--Timer s--
+	ARGUMENT
+		alertServiceCentreArg	AlertServiceCentreArg
+	RESULT
+	ERRORS {
+		SystemFailure,
+		DataMissing,
+		UnexpectedDataValue}
+
+InformServiceCentre ::= OPERATION				--Timer s--
+	ARGUMENT
+		informServiceCentreArg	InformServiceCentreArg
+
+ReadyForSM ::= OPERATION				--Timer m--
+	ARGUMENT
+		readyForSM-Arg	ReadyForSM-Arg
+	RESULT
+	ERRORS {
+		DataMissing,
+		UnexpectedDataValue,
+		FacilityNotSupported,
+		UnknownSubscriber}
+
+END

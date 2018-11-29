@@ -1,0 +1,303 @@
+MAPv2-Protocol {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-Protocol (4) version2 (2)}
+
+DEFINITIONS
+
+::=
+
+BEGIN
+
+IMPORTS
+	UpdateLocation,
+	CancelLocation,
+	PurgeMS,
+	SendIdentification,
+	PerformHandover,
+	PrepareHandover,
+	SendEndSignal,
+	ProcessAccessSignalling,
+	ForwardAccessSignalling,
+	PerformSubsequentHandover,
+	PrepareSubsequentHandover,
+	SendAuthenticationInfo,
+	CheckIMEI,
+	SendParameters,
+	InsertSubscriberData,
+	DeleteSubscriberData,
+	Reset,
+	ForwardCheckSS-Indication,
+	RestoreData
+FROM MAPv2-MobileServiceOperations {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-MobileServiceOperations (5)
+   version2 (2)}
+
+	ActivateTraceMode,
+	DeactivateTraceMode,
+	TraceSubscriberActivity,
+	NoteInternalHandover,
+	SendIMSI
+FROM MAPv2-OperationAndMaintenanceOperations {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-OperationAndMaintenanceOperations (6)
+   version2 (2)}
+
+	SendRoutingInfo,
+	ProvideRoamingNumber
+FROM MAPv2-CallHandlingOperations {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-CallHandlingOperations (7)
+   version2 (2)}
+
+	RegisterSS,
+	EraseSS,
+	ActivateSS,
+	DeactivateSS,
+	InterrogateSS,
+	ProcessUnstructuredSS-Data,
+	ProcessUnstructuredSS-Request,
+	UnstructuredSS-Request,
+	UnstructuredSS-Notify,
+	RegisterPassword,
+	GetPassword,
+
+	BeginSubscriberActivity
+FROM MAPv2-SupplementaryServiceOperations {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-SupplementaryServiceOperations (8)
+   version2 (2)}
+
+	SendRoutingInfoForSM,
+	ForwardSM,
+	ReportSM-DeliveryStatus,
+	NoteSubscriberPresent,
+	AlertServiceCentreWithoutResult,
+	AlertServiceCentre,
+	InformServiceCentre,
+	ReadyForSM
+FROM MAPv2-ShortMessageServiceOperations {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-ShortMessageServiceOperations (9)
+   version2 (2)}
+
+	SystemFailure,
+	DataMissing,
+	UnexpectedDataValue,
+	FacilityNotSupported,
+	UnknownSubscriber,
+	NumberChanged,
+	UnknownBaseStation,
+	UnknownMSC,
+	UnidentifiedSubscriber,
+	UnknownEquipment,
+	RoamingNotAllowed,
+	IllegalSubscriber,
+	IllegalEquipment,
+	BearerServiceNotProvisioned,
+	TeleserviceNotProvisioned,
+	InvalidTargetBaseStation,
+	NoRadioResourceAvailable,
+	NoHandoverNumberAvailable,
+	SubsequentHandoverFailure,
+	TracingBufferFull,
+	NoRoamingNumberAvailable,
+	AbsentSubscriber,
+	CallBarred,
+	ForwardingViolation,
+	CUG-Reject,
+	IllegalSS-Operation,
+	SS-ErrorStatus,
+	SS-NotAvailable,
+	SS-SubscriptionViolation,
+	SS-Incompatibility,
+	UnknownAlphabet,
+	USSD-Busy,
+	PW-RegistrationFailure,
+	NegativePW-Check,
+	NumberOfPW-AttemptsViolation,
+	SubscriberBusyForMT-SMS,
+	SM-DeliveryFailure,
+	MessageWaitingListFull
+FROM MAPv2-Errors {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-Errors (10) version2 (2)}
+;
+
+
+
+updateLocation  UpdateLocation ::= localValue 2
+cancelLocation  CancelLocation ::= localValue 3
+purgeMS  PurgeMS ::= localValue 67
+-- NU1 purgeMS must not be used in version 1
+sendIdentification  SendIdentification ::= localValue 55
+-- NU1 sendIdentification must not be used in version 1
+
+
+
+performHandover  PerformHandover ::= localValue 28
+-- NU>1 performHandover must not be used in version greater 1
+prepareHandover  PrepareHandover ::= localValue 68
+-- NU1 prepareHandover must not be used in version 1
+sendEndSignal  SendEndSignal ::= localValue 29
+processAccessSignalling  ProcessAccessSignalling ::= localValue 33
+forwardAccessSignalling  ForwardAccessSignalling ::= localValue 34
+performSubsequentHandover  PerformSubsequentHandover ::=
+	localValue 30
+-- NU>1 performSubsequentHandover must not be used in version greater 1
+prepareSubsequentHandover  PrepareSubsequentHandover ::=
+	localValue 69
+-- NU1 prepareSubsequentHandover must not be used in version 1
+
+
+
+sendAuthenticationInfo  SendAuthenticationInfo ::= localValue 56
+-- NU1 sendAuthenticationInfo must not be used in version 1
+
+
+
+checkIMEI  CheckIMEI ::= localValue 43
+
+
+
+sendParameters  SendParameters ::= localValue 9
+-- NU>1 sendParameters must not be used in version greater 1
+insertSubscriberData  InsertSubscriberData ::= localValue 7
+deleteSubscriberData  DeleteSubscriberData ::= localValue 8
+
+
+
+reset  Reset ::= localValue 37
+forwardCheckSS-Indication  ForwardCheckSS-Indication ::=
+	localValue 38
+restoreData  RestoreData ::= localValue 57
+-- NU1 restoreData must not be used in version 1
+
+
+
+activateTraceMode  ActivateTraceMode ::= localValue 50
+deactivateTraceMode  DeactivateTraceMode ::= localValue 51
+traceSubscriberActivity  TraceSubscriberActivity ::= localValue 52
+-- NU>1 traceSubscriberActivity must not be used in version greater 1
+noteInternalHandover  NoteInternalHandover ::= localValue 35
+-- NU>1 noteInternalHandover must not be used in version greater 1
+sendIMSI  SendIMSI ::= localValue 58
+-- NU1 sendIMSI must not be used in version 1
+
+
+
+sendRoutingInfo  SendRoutingInfo ::= localValue 22
+provideRoamingNumber  ProvideRoamingNumber ::= localValue 4
+
+
+
+registerSS  RegisterSS ::= localValue 10
+eraseSS  EraseSS ::= localValue 11
+activateSS  ActivateSS ::= localValue 12
+deactivateSS  DeactivateSS ::= localValue 13
+interrogateSS  InterrogateSS ::= localValue 14
+processUnstructuredSS-Data  ProcessUnstructuredSS-Data ::=
+	localValue 19
+-- NU>1 processUnstructuredSS-Data must not be used in version greater 1
+processUnstructuredSS-Request  ProcessUnstructuredSS-Request ::=
+	localValue 59
+-- NU1 processUnstructuredSS-Request must not be used in version 1
+unstructuredSS-Request  UnstructuredSS-Request ::= localValue 60
+-- NU1 unstructuredSS-Request must not be used in version 1
+unstructuredSS-Notify  UnstructuredSS-Notify ::= localValue 61
+-- NU1 unstructuredSS-Notify must not be used in version 1
+registerPassword  RegisterPassword ::= localValue 17
+getPassword  GetPassword ::= localValue 18
+beginSubscriberActivity  BeginSubscriberActivity ::= localValue 54
+-- NU>1 beginSubscriberActivity must not be used in version greater 1
+
+
+
+sendRoutingInfoForSM  SendRoutingInfoForSM ::= localValue 45
+forwardSM  ForwardSM ::= localValue 46
+reportSM-DeliveryStatus  ReportSM-DeliveryStatus ::= localValue 47
+noteSubscriberPresent  NoteSubscriberPresent ::= localValue 48
+-- NU>1 noteSubscriberPresent must not be used in version greater 1
+alertServiceCentreWithoutResult  AlertServiceCentreWithoutResult ::=
+	localValue 49
+-- NU>1 alertServiceCentreWithoutResult must not be used in
+-- version greater 1
+informServiceCentre  InformServiceCentre ::= localValue 63
+-- NU1 informServiceCentre must not be used in version 1
+alertServiceCentre  AlertServiceCentre ::= localValue 64
+-- NU1 alertServiceCentre must not be used in version 1
+readyForSM  ReadyForSM ::= localValue 66
+-- NU1 readyForSM must not be used in version 1
+
+
+
+systemFailure  SystemFailure ::= localValue 34
+dataMissing  DataMissing ::= localValue 35
+unexpectedDataValue  UnexpectedDataValue ::= localValue 36
+facilityNotSupported  FacilityNotSupported ::= localValue 21
+
+
+
+unknownSubscriber  UnknownSubscriber ::= localValue 1
+numberChanged  NumberChanged ::= localValue 44
+unknownBaseStation  UnknownBaseStation ::= localValue 2
+unknownMSC  UnknownMSC ::= localValue 3
+unidentifiedSubscriber  UnidentifiedSubscriber ::= localValue 5
+unknownEquipment  UnknownEquipment ::= localValue 7
+
+
+
+roamingNotAllowed  RoamingNotAllowed ::= localValue 8
+illegalSubscriber  IllegalSubscriber ::= localValue 9
+illegalEquipment  IllegalEquipment ::= localValue 12
+bearerServiceNotProvisioned  BearerServiceNotProvisioned ::=
+	localValue 10
+teleserviceNotProvisioned  TeleserviceNotProvisioned ::=
+	localValue 11
+
+
+
+invalidTargetBaseStation  InvalidTargetBaseStation ::= localValue 23
+noRadioResourceAvailable  NoRadioResourceAvailable ::= localValue 24
+noHandoverNumberAvailable  NoHandoverNumberAvailable ::=
+	localValue 25
+subsequentHandoverFailure  SubsequentHandoverFailure ::=
+	localValue 26
+
+
+
+tracingBufferFull  TracingBufferFull ::= localValue 40
+
+
+
+noRoamingNumberAvailable  NoRoamingNumberAvailable ::= localValue 39
+absentSubscriber  AbsentSubscriber ::= localValue 27
+callBarred  CallBarred ::= localValue 13
+forwardingViolation  ForwardingViolation ::= localValue 14
+cug-Reject  CUG-Reject ::= localValue 15
+
+
+
+illegalSS-Operation  IllegalSS-Operation ::= localValue 16
+ss-ErrorStatus  SS-ErrorStatus ::= localValue 17
+ss-NotAvailable  SS-NotAvailable ::= localValue 18
+ss-SubscriptionViolation  SS-SubscriptionViolation ::= localValue 19
+ss-Incompatibility  SS-Incompatibility ::= localValue 20
+unknownAlphabet  UnknownAlphabet ::= localValue 71
+-- NU1 unknownAlphabet must not be used in version 1
+ussd-Busy  USSD-Busy ::= localValue 72
+-- NU1 ussd-Busy must not be used in version 1
+pw-RegistrationFailure  PW-RegistrationFailure ::= localValue 37
+negativePW-Check  NegativePW-Check ::= localValue 38
+numberOfPW-AttemptsViolation  NumberOfPW-AttemptsViolation ::=
+	localValue 43
+-- NU1 numberOfPW-AttemptsViolation must not be used in version 1
+
+
+
+subscriberBusyForMT-SMS  SubscriberBusyForMT-SMS ::= localValue 31
+-- NU1 subscriberBusyForMT-SMS must not be used in version 1
+sm-DeliveryFailure  SM-DeliveryFailure ::= localValue 32
+messageWaitingListFull  MessageWaitingListFull ::= localValue 33
+
+END

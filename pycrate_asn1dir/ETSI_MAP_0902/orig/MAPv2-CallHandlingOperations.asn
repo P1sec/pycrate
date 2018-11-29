@@ -1,0 +1,86 @@
+MAPv2-CallHandlingOperations {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-CallHandlingOperations (7)
+   version2 (2)}
+
+DEFINITIONS
+
+::=
+
+BEGIN
+
+EXPORTS
+	SendRoutingInfo,
+	ProvideRoamingNumber
+;
+
+IMPORTS
+	OPERATION
+FROM TCAPMessages {
+   ccitt recommendation q 773 modules (2) messages (1) version2 (2)}
+
+	SystemFailure,
+	DataMissing,
+	UnexpectedDataValue,
+	FacilityNotSupported,
+	UnknownSubscriber,
+	NumberChanged,
+	BearerServiceNotProvisioned,
+	TeleserviceNotProvisioned,
+	NoRoamingNumberAvailable,
+	AbsentSubscriber,
+	CallBarred,
+	ForwardingViolation,
+	CUG-Reject
+FROM MAPv2-Errors {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-Errors (10) version2 (2)}
+	SendRoutingInfoArg,
+	SendRoutingInfoRes,
+	ProvideRoamingNumberArg
+FROM MAPv2-CH-DataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-CH-DataTypes (13) version2 (2)}
+
+	ISDN-AddressString
+FROM MAPv2-CommonDataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-CommonDataTypes (18) version2 (2)}
+;
+
+
+SendRoutingInfo ::= OPERATION				--Timer m--
+	ARGUMENT
+		sendRoutingInfoArg	SendRoutingInfoArg
+	RESULT
+		sendRoutingInfoRes	SendRoutingInfoRes
+	ERRORS {
+		SystemFailure,
+		DataMissing,
+		UnexpectedDataValue,
+		FacilityNotSupported,
+		UnknownSubscriber,
+		NumberChanged,
+		-- NU1 NumberChanged must not be used in version 1
+	BearerServiceNotProvisioned,
+		TeleserviceNotProvisioned,
+		AbsentSubscriber,
+		CallBarred,
+		CUG-Reject,
+		-- NU1 CUG-Reject must not be used in version 1
+		ForwardingViolation}
+
+ProvideRoamingNumber ::= OPERATION				--Timer m--
+	ARGUMENT
+		provideRoamingNumberArg	ProvideRoamingNumberArg
+	RESULT
+		roamingNumber	ISDN-AddressString
+	ERRORS {
+		SystemFailure,
+		DataMissing,
+		UnexpectedDataValue,
+		FacilityNotSupported,
+		AbsentSubscriber,
+		NoRoamingNumberAvailable}
+
+END
