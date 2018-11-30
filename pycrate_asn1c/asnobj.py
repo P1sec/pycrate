@@ -5792,21 +5792,21 @@ class ASN1Obj(object):
         # val: root / ext dict for receiving the result when parsing text
         # dom: root / ext domain
         #
-        # 0) check if we are using the exclusion formal
+        # 0) check if we are using the exclusion format
         if text[:10] == 'ALL EXCEPT':
             val['excl'] = True
             text = text[10:].strip()
         #
         # 1) check if we have an identifier + potential .&[fF]ield selection
-        m = SYNT_RE_CLASSINSTFIELDREF.match(text)
-        if m:
+        # must not be a ref to a value within an explicit module (ie Mod.value)
+        m, n = SYNT_RE_CLASSINSTFIELDREF.match(text), SYNT_RE_IDENTEXT.match(text)
+        if m and not n:
             ident_first = m.group(1)
             ident_last  = m.group(2)
             if ident_last is None:
                 #
                 # 1.1) NULL and BOOLEAN have single values which are 
                 # uppercase text, hence need to be processed first
-                # The special ALL EXCEPT case is also handled here, in a very dirty way
                 if ident_first == 'NULL':
                     assert( self._type == TYPE_NULL )
                     return self.parse_value(text)
@@ -5817,6 +5817,7 @@ class ASN1Obj(object):
                     assert( self._type in self._RANGE_TYPE )
                     return self._parse_value_or_range(text)
                 else:
+                    # continue processing below
                     ident_last = ident_first
             #
             if ident_last[0:1].isupper():
