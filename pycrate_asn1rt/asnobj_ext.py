@@ -234,13 +234,18 @@ Single value: Python 2-tuple
     def _from_per_ws(self, char):
         # try to get a defined object from a table constraint
         if self._TAB_LUT and self._const_tab and self._const_tab_at:
-            try:
-                Obj = self._get_tab_obj()
-            except Exception as err:
+            const_obj_type, const_obj = self._get_tab_obj()
+            if const_obj_type == CLASET_NONE:
                 if not self._SILENT:
                     asnlog('OPEN._from_per_ws: %s, unable to retrieve a table-looked up object, %s'\
                            % (self.fullname(), err))
                 Obj = None
+            elif const_obj_type == CLASET_UNIQ:
+                Obj = const_obj
+            else:
+                # const_obj_type == CLASET_MULT
+                # with PER, no tag to select a given object
+                Obj = const_obj[0]
         else:
             # TODO: another way to provide a (set of) potential defined object(s)
             # is to look into value constraint self._const_val
@@ -250,7 +255,7 @@ Single value: Python 2-tuple
         #
         if Obj is None:
             if self._const_val:
-                asnlog('OPEN._from_per_ws: %s, potential type constraint(s) available'\
+                asnlog('OPEN._from_per_ws: %s, potential type constraint(s) available but unused'\
                        % self.fullname())
             val, GEN = ASN1CodecPER.decode_unconst_open_ws(char, wrapped=None)
             assert( isinstance(val, bytes_types) )
@@ -268,13 +273,18 @@ Single value: Python 2-tuple
     def _from_per(self, char):
         # try to get a defined object from a table constraint
         if self._TAB_LUT and self._const_tab and self._const_tab_at:
-            try:
-                Obj = self._get_tab_obj()
-            except Exception as err:
+            const_obj_type, const_obj = self._get_tab_obj()
+            if const_obj_type == CLASET_NONE:
                 if not self._SILENT:
-                    asnlog('OPEN._from_per: %s, unable to retrieve a defined object, %s'\
+                    asnlog('OPEN._from_per: %s, unable to retrieve a table-looked up object, %s'\
                            % (self.fullname(), err))
                 Obj = None
+            elif const_obj_type == CLASET_UNIQ:
+                Obj = const_obj
+            else:
+                # const_obj_type == CLASET_MULT
+                # with PER, no tag to select a given object
+                Obj = const_obj[0]
         else:
             # TODO: another way to provide a (set of) potential defined object(s)
             # is to look into value constraint self._const_val
@@ -285,7 +295,7 @@ Single value: Python 2-tuple
         val = ASN1CodecPER.decode_unconst_open(char, wrapped=Obj)
         if Obj is None:
             if self._const_val:
-                asnlog('OPEN._from_per: %s, potential type constraint(s) available'\
+                asnlog('OPEN._from_per: %s, potential type constraint(s) available but unused'\
                        % self.fullname())
             assert( isinstance(val, bytes_types) )
             self._val = ('_unk_004', val)
@@ -340,12 +350,17 @@ Single value: Python 2-tuple
         tag, Obj = (cl, tval), None
         # try to get a defined object from a table constraint
         if self._TAB_LUT and self._const_tab and self._const_tab_at:
-            try:
-                Obj = self._get_tab_obj()
-            except Exception as err:
+            const_obj_type, const_obj = self._get_tab_obj()
+            if const_obj_type == CLASET_NONE:
                 if not self._SILENT:
-                    asnlog('OPEN._decode_ber_cont_ws: %s, unable to retrieve an object in the table '\
-                           'constraint (%s)' % (self.fullname(), err))
+                    asnlog('OPEN._decode_ber_cont_ws: %s, unable to retrieve a table-looked up object, %s'\
+                           % (self.fullname(), err))
+                Obj = None
+            elif const_obj_type == CLASET_UNIQ:
+                Obj = const_obj
+            else:
+                # const_obj_type == CLASET_MULT
+                Obj = get_obj_by_tag(self, tag, const_obj)
         #
         elif self._const_val is not None:
             # another way to provide a (set of) potential defined object(s)
@@ -426,12 +441,17 @@ Single value: Python 2-tuple
         tag, Obj = (cl, tval), None
         # try to get a defined object from a table constraint
         if self._TAB_LUT and self._const_tab and self._const_tab_at:
-            try:
-                Obj = self._get_tab_obj()
-            except Exception as err:
+            const_obj_type, const_obj = self._get_tab_obj()
+            if const_obj_type == CLASET_NONE:
                 if not self._SILENT:
-                    asnlog('OPEN._decode_ber_cont: %s, unable to retrieve an object in the table '\
-                           'constraint (%s)' % (self.fullname(), err))
+                    asnlog('OPEN._decode_ber_cont: %s, unable to retrieve a table-looked up object, %s'\
+                           % (self.fullname(), err))
+                Obj = None
+            elif const_obj_type == CLASET_UNIQ:
+                Obj = const_obj
+            else:
+                # const_obj_type == CLASET_MULT
+                Obj = get_obj_by_tag(self, tag, const_obj)
         #
         elif self._const_val is not None:
             # another way to provide a (set of) potential defined object(s)

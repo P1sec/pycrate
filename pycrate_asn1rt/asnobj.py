@@ -341,39 +341,75 @@ class ASN1Obj(Element):
                   .format(self.fullname(), val)))
         if self._SAFE_BNDTAB and self._const_tab and self._const_tab_at:
             # check val against a constraint defined within the table constraint
-            try:
-                const_val = self._get_tab_obj()
-            except Exception as err:
+            const_val_type, const_val = self._get_tab_obj()
+            if const_val_type == CLASET_NONE:
                 if not self._SILENT:
                     asnlog('%s._from_per_ws: %s, unable to retrieve a defined object, %s'\
                            % (self.__class__.__name__, self._name, err))
-            else:
-                if self._mode == MODE_VALUE and val != const_val or \
-                self._mode == MODE_SET and val not in const_val:
+            elif self._mode == MODE_VALUE and const_val_type == CLASET_UNIQ:
+                if val != const_val:
+                    raise(ASN1ObjErr('{0}: value out of table constraint, {1!r}'\
+                          .format(self.fullname(), val)))
+            elif self._mode == MODE_SET or const_val_type == CLASET_MULT:
+                if val not in const_val:
                     raise(ASN1ObjErr('{0}: value out of table constraint, {1!r}'\
                           .format(self.fullname(), val)))
     
     def _get_tab_obj(self):
+        ret = (CLASET_NONE, None)
         try:
             IndIdent = self._get_obj_by_path(self._const_tab_at)._const_tab_id
-            IndVal = self._get_val_by_path(self._const_tab_at)
-        except:
+            IndVal   = self._get_val_by_path(self._const_tab_at)
+        except Exception:
+            return ret
+        cla_val_type, cla_val = self._const_tab.get(IndIdent, IndVal)
+        if cla_val_type == CLASET_UNIQ and self._const_tab_id in cla_val:
+            return (CLASET_UNIQ, cla_val[self._const_tab_id])
+        elif cla_val_type == CLASET_MULT:
+            # filter cla_val for the given tab_id
+            cla_val = [val[self._const_tab_id] for val in cla_val if self._const_tab_id in val]
+            if len(cla_val) > 1:
+                return (CLASET_MULT, vals)
+            elif cla_val:
+                return (CLASET_UNIQ, vals[0])
+        return ret
+    
+    def _get_tab_obj_uniq(self):
+        try:
+            IndIdent = self._get_obj_by_path(self._const_tab_at)._const_tab_id
+            IndVal   = self._get_val_by_path(self._const_tab_at)
+        except Exception:
             raise(ASN1ObjErr('{0}: invalid table constraint @ path, {1!r}'\
                   .format(self.fullname(), self._const_tab_at)))
-        try:
-            claval = self._const_tab(IndIdent, IndVal)
-        except:
-            raise(ASN1ObjErr('{0}: invalid identifier {1} for the table constraint'\
-                  .format(self.fullname(), IndIdent)))
+        claval = self._const_tab.get_uniq(IndIdent, IndVal)
         if claval is None:
             raise(ASN1ObjErr('{0}: non-existent value {1} for identifier {2} in the table constraint'\
                   .format(self.fullname(), IndVal, IndIdent)))
         else:
             try:
                 return claval[self._const_tab_id]
-            except:
+            except KeyError:
                 raise(ASN1ObjErr('{0}: non-existent ident {1} within table constraint value'\
                       .format(self.fullname(), self._const_tab_id)))
+    
+    def _get_tab_obj_nonuniq(self):
+        ret = []
+        try:
+            IndIdent = self._get_obj_by_path(self._const_tab_at)._const_tab_id
+            IndVal   = self._get_val_by_path(self._const_tab_at)
+        except Exception:
+            return []
+        clavals = self._const_tab.get_mult(IndIdent, IndVal)
+        if not clavals:
+            return []
+        else:
+            ret = []
+            for claval in clavals:
+                try:
+                    ret.append( claval[self._const_tab_id] )
+                except KeyError:
+                    pass
+            return ret
     
     #--------------------------------------------------------------------------#
     # user-friendly generic representation

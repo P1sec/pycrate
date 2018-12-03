@@ -458,14 +458,17 @@ def match_tag(Obj, tag):
         # Obj is an untagged OPEN / ANY object: this is a bit more tricky again
         if Obj._TAB_LUT and Obj._const_tab and Obj._const_tab_at:
             # a usable table constraint is defined
-            try:
-                ConstObj = Obj._get_tab_obj()
-            except Exception as err:
-                # unable to retrieve a corresponding object in the table
+            const_obj_type, const_obj = Obj._get_tab_obj()
+            if const_obj_type == CLASET_NONE:
                 return 3
+            elif const_obj_type == CLASET_UNIQ:
+                ret = match_tag(const_obj, tag)
+                if ret:
+                    return ret
             else:
-                if ConstObj is not None:
-                    ret = match_tag(ConstObj, tag)
+                # const_obj_type == CLASET_MULT:
+                for obj in const_obj:
+                    ret = match_tag(obj, tag)
                     if ret:
                         return ret
         elif Obj._const_val:
@@ -491,22 +494,23 @@ def match_tag(Obj, tag):
         assert()
     return 0
 
-def get_obj_by_tag(ObjOpen, tag):
+def get_obj_by_tag(ObjOpen, tag, ConstList=None):
     """Check within the value constraint of an OPEN / ANY object ObjOpen 
     for a given tag (tag_class, tag_value) and return the matching object, 
-    in case the tag correspond 
+    in case the tag matches
     """
-    for ConstObj in ObjOpen._const_val.root:
-        if ConstObj.tagc and tag == ConstObj._tagc[0]:
+    if not ConstList:
+        # build ConstList from ObjOpen._const_val.root and ObjOpen._const_val.ext
+        ConstList = ObjOpen._const_val.root
+        if ObjOpen._const_val.ext:
+            ConstList = ConstList + ObjOpen._const_val.ext
+    #
+    for ConstObj in ConstList:
+        if ConstObj._tagc and tag == ConstObj._tagc[0]:
             return ConstObj
         elif ConstObj.TYPE == TYPE_CHOICE and tag in ConstObj._cont_tags:
             return ConstObj
-    if ObjOpen._const_val.ext:
-        for ConstObj in ObjOpen._const_val.ext:
-            if ConstObj.tagc and tag == ConstObj._tagc[0]:
-                return ConstObj
-            elif ConstObj.TYPE == TYPE_CHOICE and tag in ConstObj._cont_tags:
-                return ConstObj
+    #
     return None
 
 #------------------------------------------------------------------------------#

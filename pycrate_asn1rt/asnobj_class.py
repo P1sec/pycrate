@@ -169,12 +169,25 @@ Specific method:
         # this is using the _lut attribute, which is built at module init
         # for every CLASS set defined at the root of a module
         if hasattr(self, '_lut'):
-            if key == self._lut['__lut__']:
-                return self._lut.get(val, (CLASET_NONE, None))
+            if key == self._lut['__key__']:
+                try:
+                    return self._lut[val]
+                except KeyError:
+                    return (CLASET_NONE, None)
         if self._CLASET_MULT:
-            return self.get_mult(key, val)
+            ret = self.get_mult(key, val)
+            if len(ret) > 1:
+                return (CLASET_MULT, ret)
+            elif ret:
+                return (CLASET_UNIQ, ret[0])
+            else:
+                (CLASET_NONE, None)
         else:
-            return self.get_uniq(key, val)
+            ret = self.get_uniq(key, val)
+            if ret:
+                return (CLASET_UNIQ, ret)
+            else:
+                return (CLASET_NONE, None)
     
     def get_uniq(self, name, val):
         # this is using an enumeration of all CLASS set of values,
