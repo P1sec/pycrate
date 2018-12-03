@@ -203,10 +203,16 @@ def init_modules(*args, **kwargs):
             elif Obj.TYPE == TYPE_OID and Obj._mode == MODE_VALUE:
                 if Obj._val in GLOB.OID and GLOB.OID[Obj._val] != Obj._name:
                     if not Obj._SILENT:
-                        asnlog('init_modules: different OID objects (%s, %s) with same OID value (%r)'\
+                        asnlog('init_modules: different OID objects (%s, %s) with same OID value %r'\
                                % (Obj._name, GLOB.OID[Obj._val], Obj._val))
                 elif Obj._val is not None:
                     GLOB.OID[Obj._val] = Obj._name
+            #
+            elif Obj.TYPE == TYPE_CLASS and Obj._mode == MODE_SET and Obj._val:
+                # this should not conflict with the previous check on TYPE_CLASS
+                # which must have self._cont defined (hence being MODE_TYPE)
+                build_classset_dict(Obj)
+                
     #
     # lists all objects defined
     Objs = [Obj for Mod in args for Obj in Mod._all_]
@@ -351,6 +357,7 @@ def get_typeref(Obj, GLOB=GLOBAL):
     #
     return tr
 
+
 def get_tag_chain(Obj):
     """
     returns the list of tags from self up to the last referred object
@@ -371,6 +378,7 @@ def get_tag_chain(Obj):
         # add the universal tag
         tagc.append( (0, Obj.TAG) )
     return tagc
+
 
 def get_cont_tags_dict(Obj):
     """
@@ -403,6 +411,7 @@ def get_cont_tags_dict(Obj):
             tagd[Comp._tagc[0]] = ident
     return tagd
 
+
 def get_cont_tags_canon(Obj):
     """
     returns the list of components in the canonical order of their tags
@@ -430,6 +439,7 @@ def get_cont_tags_canon(Obj):
     # order the whole stuff
     return [tagcan[k] for k in sorted(tagcan.keys())]
 
+
 def bind_attrs(Obj, *attrs):
     attr = attrs[0]
     if getattr(Obj, attr) is None:
@@ -453,6 +463,7 @@ def bind_attrs(Obj, *attrs):
                 tr = None
             else:
                 tr = tr._tr if (tr._tr is not None and not tr._tr._param) else None
+
 
 def bind_all_attrs(Obj):
     # bind content and constraints from typeref objects
@@ -490,4 +501,44 @@ def bind_all_attrs(Obj):
     elif Obj.TYPE in (TYPE_EXT, TYPE_EMB_PDV, TYPE_CHAR_STR):
         bind_attrs(Obj, '_cont', '_root', '_root_mand', '_root_opt')
         bind_attrs(Obj, '_ext')
+
+
+def build_classset_dict(Obj):
+    key = None
+    tr = get_typeref(Obj)
+    while not tr._cont:
+        tr = get_typeref(tr)
+        if tr is None:
+            break
+    if tr._cont is None:
+        # something is screwed somewhere
+        return
+    for Comp in tr._cont.values():
+        if Comp._uniq:
+            key = Comp._name
+    if key is None:
+        return
+    # check the key (UNIQUE) component
+    Obj._lut = {'__key__': key}
+    __build_classet_dict(Obj, key, Obj._val.root)
+    if Obj._val.ext:
+        __build_classet_dict(Obj, key, Obj._val.ext)
+
+
+def __build_classet_dict(Obj, key, valset):
+    for val in valset:
+        if key in val:
+            keyval = val[key]
+            if keyval in Obj._lut:
+                # this is not as UNIQUE as one can think...
+                lutval = Obj._lut[keyval]
+                if lutval[0] == CLASET_UNIQ:
+                    # switching to MULT
+                    Obj._lut[keyval] = (CLASET_MULT, [lutval, val])
+                else:
+                    # already defined as MULT
+                    lutval[1].append(val)
+            else:
+                # this is the first (and hopefully UNIQUE) value
+                Obj._lut[keyval] = (CLASET_UNIQ, val)
 

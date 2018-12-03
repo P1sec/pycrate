@@ -82,6 +82,11 @@ Specific method:
     TYPE  = TYPE_CLASS
     TAG   = None
     
+    # this is to always enumerate all class set of values,
+    # for when the UNIQUE field is actually not unique and the class set is
+    # not defined at the module root (and hence has not _lut attribute)
+    _CLASET_MULT = False
+     
     def _safechk_val(self, val):
         if not isinstance(val, dict) or not all([k in self._cont for k in val]):
             raise(ASN1ObjErr('{0}: invalid value, {1!r}'.format(self.fullname(), val)))
@@ -159,6 +164,61 @@ Specific method:
                         except KeyError:
                             pass
                 return None
+    
+    def get(self, key, val):
+        # this is using the _lut attribute, which is built at module init
+        # for every CLASS set defined at the root of a module
+        if hasattr(self, '_lut'):
+            if key == self._lut['__lut__']:
+                return self._lut.get(val, (CLASET_NONE, None))
+        if self._CLASET_MULT:
+            return self.get_mult(key, val)
+        else:
+            return self.get_uniq(key, val)
+    
+    def get_uniq(self, name, val):
+        # this is using an enumeration of all CLASS set of values,
+        # and returns the first corresponding value found
+        ret = None
+        if self._mode != MODE_SET:
+            return ret
+        if self._val.root:
+            for v in self._val.root:
+                try:
+                    if v[name] == val:
+                        return v
+                except KeyError:
+                    pass
+        if self._val.ext:
+            for v in self._val.ext:
+                try:
+                    if v[name] == val:
+                        return v
+                except KeyError:
+                    pass
+        return ret
+    
+    def get_mult(self, name, val):
+        # this is using a complete enumeration of all CLASS set of values,
+        # and returns the list of corresponding values found
+        ret = []
+        if self._mode != MODE_SET:
+            return ret
+        if self._val.root:
+            for v in self._val.root:
+                try:
+                    if v[name] == val:
+                        ret.append(v)
+                except KeyError:
+                    pass
+        if self._val.ext:
+            for v in self._val.ext:
+                try:
+                    if v[name] == val:
+                        ret.append(v)
+                except KeyError:
+                    pass
+        return ret
     
     # this is very experimental... and may certainly raise() in case of 
     # MODE_SET or MODE_TYPE field setting

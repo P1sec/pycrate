@@ -291,6 +291,11 @@ FLAG_UNIQ  = 'UNIQUE'
 FLAG_DEF   = 'DEFAULT'
 FLAG_DEFBY = 'DEFINED BY'
 
+# specific flags for CLASS set of values, for specific use as table constraint
+CLASET_UNIQ = 'U'
+CLASET_MULT = 'M'
+CLASET_NONE = 'N'
+
 #------------------------------------------------------------------------------#
 # asn1rt naming routine
 #------------------------------------------------------------------------------#

@@ -1127,6 +1127,17 @@ def verify_modules(**kwargs):
                             if not _verify_const_val(val, consts_glob, mod, name, Objs.index(O)):
                                 warn('{0}.{1}: internal object {2}, value outside of the constraint'\
                                 .format(mod, name, Objs.index(O)), raising)
+                #
+                # 4) for SEQ / SET, in case it contains an OPEN object with a table constraint
+                # check the unicity of values associated to the key to the table
+                elif O._mode == MODE_TYPE and O.TYPE in (TYPE_SET, TYPE_SEQ) and O._cont:
+                    for comp in O._cont.values():
+                        if comp.TYPE in (TYPE_OPEN, TYPE_ANY) and comp._const:
+                            for const in comp._const:
+                                if const['type'] == CONST_TABLE:
+                                    if not _verify_seq_const_tab(O, comp._name, const):
+                                        asnlog('WNG: {0}.{1}: internal object {2}, non-unique key subvalue '\
+                                               'within a table constraint'.format(mod, name, Objs.index(O)))
 
 
 def _verify_const_size(val, consts):
@@ -1167,6 +1178,47 @@ def _verify_const_val(val, consts, mod, name, ind):
         return True
     else:
         return False
+
+
+def _verify_seq_const_tab(Obj, open_name, const_tab):
+    # check within a sequence with one of its component being an OPEN type
+    # that the key to the table constraint has unique values
+    comp_open = Obj._cont[open_name]
+    tab_key   = const_tab['at']
+    if not tab_key or len(tab_key) != 2 or tab_key[0] != '..' or tab_key[1] not in Obj._cont:
+        # no key component defined or
+        # complex path to key component, unable to make the verification
+        return True
+    # get the full tab put into a single list of values
+    tab = const_tab['tab']._val['root']
+    if const_tab['tab']._val['ext']:
+        # create a new list concatenating the root and ext part
+        tab = tab + const_tab['tab']._val['ext']
+    # for all values, check the one associated to the key component
+    comp_key = Obj._cont[tab_key[1]]
+    id_key = comp_key.get_typeref()._name
+    val_key, val_all, ret = [], [], True
+    for val in tab:
+        if id_key not in val:
+            #asnlog('[WNG] constraint table value without key subvalue %s: %r' % (id_key, val))
+            pass
+        else:
+            if val[id_key] in val_key:
+                # duplicated key subvalue, get the corresponding complete value
+                if val != val_all[ val_key.index(val[id_key]) ]:
+                    # Houston, we got a problem !
+                    #asnlog('[WNG] constraint table with duplicated key subvalue %s: %r, '\
+                    #       'and different associated value' % (id_key, val[id_key]))
+                    #assert()
+                    ret = False
+                else:
+                    # duplicated key subvalue, with hopefully same value
+                    # nothing to do here
+                    pass
+            else:
+                val_key.append( val[id_key] )
+                val_all.append( val )
+    return ret
 
 
 #------------------------------------------------------------------------------#
