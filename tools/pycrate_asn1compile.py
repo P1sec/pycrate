@@ -39,6 +39,7 @@ from pycrate_asn1c.proc import compile_text, compile_spec, compile_all, \
 # inputs:
 # compile any single file
 # compile all .asn or .asn1 files into a directory
+#   -> take load_mod.txt into account
 # compile a given spec (by shortname)
 # compile all specs from asndir
 
@@ -49,10 +50,35 @@ from pycrate_asn1c.proc import compile_text, compile_spec, compile_all, \
 # output:
 # destination file or directory
 
+
+python_version = sys.version_info[0]
+
+
 def print_specnames():
     print('%s, valid specification names:' % sys.argv[0])
     for k, v in ASN_SPECS.items():
         print('    %s (%s)' % (k, v))
+
+
+def get_mod_wl(fn):
+    ret = []
+    try:
+        fd = open(fn)
+    except:
+        print('unable to read %s, ignoring it')
+        return ret
+    else:
+        try:
+            for l in fd.readlines():
+                if len(l) > 1 and l[0] != '#':
+                    ret.append(l[:-1].strip())
+        except:
+            print('unable to read %s, ignoring it')
+            fd.close()
+            return ret
+        else:
+            return ret
+
 
 def main():
     
@@ -99,25 +125,34 @@ def main():
     #    compile_spec(shortname=args.spec, **ckw)
     #
     if args.input:
-        fn = []
+        files = []
         for i in args.input:
             if os.path.isdir(i):
+                fn, wl = [], []
                 # get all potential .asn / .asn1 / .ASN / .ASN1 files from the dir
                 for f in os.listdir(i):
                     if f.split('.')[-1] in ('asn', 'asn1', 'ASN', 'ASN1'):
-                        fn.append('%s/%s' % (i, f))
+                        fn.append(f)
+                    elif f == 'load_mod.txt':
+                        wl = get_mod_wl('%s/%s' % (i, f))
+                # keep only asn files specified in the load_mod.txt file
+                if wl:
+                    files.extend(['%s%s' % (i, f) for f in fn if f in wl])
+                else:
+                    files.extend(['%s%s' % (i, f) for f in fn])
             elif os.path.isfile(i):
-                fn.append(i)
+                files.append(i)
             else:
                 print('%s, args warning: invalid input %s' % (sys.argv[0], i))
-        if not fn:
+        if not files:
             print('%s, args error: no ASN.1 inputs found')
             return 0
         else:
-            ckw['filenames'] = list(fn)
+            print(files)
+            ckw['filenames'] = list(files)
         # read all file content into a single buffer
         txt = []
-        for f in fn:
+        for f in files:
             try:
                 fd = open(f)
             except:
@@ -125,7 +160,10 @@ def main():
                 return 0
             else:
                 try:
-                    txt.append( fd.read() )
+                    if python_version < 3:
+                        txt.append( fd.read().decode('utf-8') )
+                    else:
+                        txt.append( fd.read() )
                 except:
                     print('%s, args error: unable to read input file %s' % (sys.argv[0], f))
                     fd.close()
