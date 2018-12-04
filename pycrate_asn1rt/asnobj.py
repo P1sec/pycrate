@@ -369,9 +369,9 @@ class ASN1Obj(Element):
             # filter cla_val for the given tab_id
             cla_val = [val[self._const_tab_id] for val in cla_val if self._const_tab_id in val]
             if len(cla_val) > 1:
-                return (CLASET_MULT, vals)
+                return (CLASET_MULT, cla_val)
             elif cla_val:
-                return (CLASET_UNIQ, vals[0])
+                return (CLASET_UNIQ, cla_val[0])
         return ret
     
     def _get_tab_obj_uniq(self):
