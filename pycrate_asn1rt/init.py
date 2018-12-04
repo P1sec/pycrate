@@ -534,7 +534,7 @@ def __build_classet_dict(Obj, key, valset):
                 lutval = Obj._lut[keyval]
                 if lutval[0] == CLASET_UNIQ:
                     # switching to MULT
-                    Obj._lut[keyval] = (CLASET_MULT, [lutval, val])
+                    Obj._lut[keyval] = (CLASET_MULT, [lutval[1], val])
                 else:
                     # already defined as MULT
                     lutval[1].append(val)
