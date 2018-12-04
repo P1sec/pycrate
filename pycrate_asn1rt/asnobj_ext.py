@@ -347,7 +347,7 @@ Single value: Python 2-tuple
         # select the inner encoding
         tlv = tlv[0]
         Tag, cl, pc, tval, Len, lval = tlv[0:6]
-        tag, Obj = (cl, tval), None
+        tag, Obj, obj_mult = (cl, tval), None, False
         # try to get a defined object from a table constraint
         if self._TAB_LUT and self._const_tab and self._const_tab_at:
             const_obj_type, const_obj = self._get_tab_obj()
@@ -360,6 +360,7 @@ Single value: Python 2-tuple
                 Obj = const_obj
             else:
                 # const_obj_type == CLASET_MULT
+                obj_mult = True
                 Obj = get_obj_by_tag(self, tag, const_obj)
         #
         elif self._const_val is not None:
@@ -392,7 +393,10 @@ Single value: Python 2-tuple
             else:
                 # set value
                 if Obj._typeref is not None:
-                    self._val = (Obj._typeref.called[1], Obj._val)
+                    if obj_mult:
+                        self._val = (Obj._typeref.called, Obj._val)
+                    else:
+                        self._val = (Obj._typeref.called[1], Obj._val)
                 else:
                     self._val = (Obj.TYPE, Obj._val)
                 V = Obj._struct
@@ -438,10 +442,11 @@ Single value: Python 2-tuple
         # select the inner encoding
         tlv = tlv[0]
         cl, pc, tval, lval = tlv[0:4]
-        tag, Obj = (cl, tval), None
+        tag, Obj, obj_mult = (cl, tval), None, False
         # try to get a defined object from a table constraint
         if self._TAB_LUT and self._const_tab and self._const_tab_at:
             const_obj_type, const_obj = self._get_tab_obj()
+            print('------------------------------------------- %r / %r ' % (const_obj_type, const_obj))
             if const_obj_type == CLASET_NONE:
                 if not self._SILENT:
                     asnlog('OPEN._decode_ber_cont: %s, unable to retrieve a table-looked up object, %s'\
@@ -451,6 +456,7 @@ Single value: Python 2-tuple
                 Obj = const_obj
             else:
                 # const_obj_type == CLASET_MULT
+                obj_mult = True
                 Obj = get_obj_by_tag(self, tag, const_obj)
         #
         elif self._const_val is not None:
@@ -483,7 +489,11 @@ Single value: Python 2-tuple
             else:
                 # set value
                 if Obj._typeref is not None:
-                    self._val = (Obj._typeref.called[1], Obj._val)
+                    print('---------------------------------------------- %r / %r ' % (obj_mult, Obj._typeref.called))
+                    if obj_mult:
+                        self._val = (Obj._typeref.called, Obj._val)
+                    else:
+                        self._val = (Obj._typeref.called[1], Obj._val)
                 else:
                     self._val = (Obj.TYPE, Obj._val)
                 decoded = True
