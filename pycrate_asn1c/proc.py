@@ -1086,7 +1086,7 @@ def verify_modules(**kwargs):
                                          'no intersecting constraints of type {3}'\
                                          .format(mod, name, Objs.index(O), ct), raising)
                             elif ct not in CONST_UNHANDLED:
-                                asnlog('INFO: {0}.{1}, internal object {2}, '\
+                                asnlog('INF: {0}.{1}, internal object {2}, '\
                                        'multiple constraints of the same type, {3}'\
                                        .format(mod, name, Objs.index(O), ct))
                 #
@@ -1135,9 +1135,7 @@ def verify_modules(**kwargs):
                         if comp.TYPE in (TYPE_OPEN, TYPE_ANY) and comp._const:
                             for const in comp._const:
                                 if const['type'] == CONST_TABLE:
-                                    if not _verify_seq_const_tab(O, comp._name, const):
-                                        asnlog('WNG: {0}.{1}: internal object {2}, non-unique key subvalue '\
-                                               'within a table constraint'.format(mod, name, Objs.index(O)))
+                                    ret = _verify_seq_const_tab(O, comp._name, const, mod, name, Objs.index(O))
 
 
 def _verify_const_size(val, consts):
@@ -1180,7 +1178,7 @@ def _verify_const_val(val, consts, mod, name, ind):
         return False
 
 
-def _verify_seq_const_tab(Obj, open_name, const_tab):
+def _verify_seq_const_tab(Obj, open_name, const_tab, modname, objname, obj_index):
     # check within a sequence with one of its component being an OPEN type
     # that the key to the table constraint has unique values
     comp_open = Obj._cont[open_name]
@@ -1197,7 +1195,7 @@ def _verify_seq_const_tab(Obj, open_name, const_tab):
     # for all values, check the one associated to the key component
     comp_key = Obj._cont[tab_key[1]]
     id_key = comp_key.get_typeref()._name
-    val_key, val_all, ret = [], [], True
+    val_key, val_all, ret = [], [], []
     for val in tab:
         if id_key not in val:
             #asnlog('[WNG] constraint table value without key subvalue %s: %r' % (id_key, val))
@@ -1209,8 +1207,10 @@ def _verify_seq_const_tab(Obj, open_name, const_tab):
                     # Houston, we got a problem !
                     #asnlog('[WNG] constraint table with duplicated key subvalue %s: %r, '\
                     #       'and different associated value' % (id_key, val[id_key]))
+                    infos = (id_key, val[id_key])
+                    if infos not in ret:
+                        ret.append(infos)
                     #assert()
-                    ret = False
                 else:
                     # duplicated key subvalue, with hopefully same value
                     # nothing to do here
@@ -1218,7 +1218,10 @@ def _verify_seq_const_tab(Obj, open_name, const_tab):
             else:
                 val_key.append( val[id_key] )
                 val_all.append( val )
-    return ret
+    if ret:
+        asnlog('WNG: {0}.{1}: internal object {2}, non-unique key subvalue ({3!r}) '\
+               'within a table constraint'.format(modname, objname, obj_index, ret))
+    return True if ret else False
 
 
 #------------------------------------------------------------------------------#
