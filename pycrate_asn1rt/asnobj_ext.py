@@ -446,7 +446,6 @@ Single value: Python 2-tuple
         # try to get a defined object from a table constraint
         if self._TAB_LUT and self._const_tab and self._const_tab_at:
             const_obj_type, const_obj = self._get_tab_obj()
-            print('------------------------------------------- %r / %r ' % (const_obj_type, const_obj))
             if const_obj_type == CLASET_NONE:
                 if not self._SILENT:
                     asnlog('OPEN._decode_ber_cont: %s, unable to retrieve a table-looked up object, %s'\
@@ -489,7 +488,6 @@ Single value: Python 2-tuple
             else:
                 # set value
                 if Obj._typeref is not None:
-                    print('---------------------------------------------- %r / %r ' % (obj_mult, Obj._typeref.called))
                     if obj_mult:
                         self._val = (Obj._typeref.called, Obj._val)
                     else:
