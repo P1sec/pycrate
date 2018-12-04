@@ -1207,9 +1207,8 @@ def _verify_seq_const_tab(Obj, open_name, const_tab, modname, objname, obj_index
                     # Houston, we got a problem !
                     #asnlog('[WNG] constraint table with duplicated key subvalue %s: %r, '\
                     #       'and different associated value' % (id_key, val[id_key]))
-                    infos = (id_key, val[id_key])
-                    if infos not in ret:
-                        ret.append(infos)
+                    if id_key not in ret:
+                        ret.append(id_key)
                     #assert()
                 else:
                     # duplicated key subvalue, with hopefully same value
