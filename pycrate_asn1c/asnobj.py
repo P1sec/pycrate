@@ -2479,19 +2479,22 @@ class ASN1Obj(object):
                             if o._mode == MODE_SET:
                                 assert( 'root' in v and 'ext' in v )
                                 for vr in v['root']:
-                                    val[dom].append(vr)
+                                    if vr not in val[dom]:
+                                        val[dom].append(vr)
                                 if v['ext']:
                                     if val['ext'] is None:
                                         val['ext'] = []
                                     for ve in v['ext']:
                                         val['ext'] = ve
                             elif o._mode == MODE_VALUE:
-                                val[dom].append(v)
+                                if v not in val[dom]:
+                                    val[dom].append(v)
                             else:
                                 assert()
                 else:
                     # just append the value as is
-                    val[dom].append(v)
+                    if v not in val[dom]:
+                        val[dom].append(v)
             #
             if objval['ext']:
                 if val['ext'] is None:
@@ -2528,17 +2531,21 @@ class ASN1Obj(object):
                                     if val['ext'] is None:
                                         val['ext'] = []
                                     for vr in v['root']:
-                                        val['ext'].append(vr)
+                                        if vr not in val['ext']:
+                                            val['ext'].append(vr)
                                     if v['ext']:
                                         for ve in v['ext']:
-                                            val['ext'] = ve
+                                            if ve not in val['ext']:
+                                                val['ext'].append(ve)
                                 elif o._mode == MODE_VALUE:
-                                    val['ext'].append(v)
+                                    if v not in val['ext']:
+                                        val['ext'].append(v)
                                 else:
                                     assert()
                     else:
                         # just append the value as is
-                        val['ext'].append(v)
+                        if v not in val['ext']:
+                            val['ext'].append(v)
             #
             # 2.7) transfer references from ObjProxy to self
             if ObjProxy._ref:
@@ -4087,7 +4094,7 @@ class ASN1Obj(object):
         if text[0:1] == '!':
             # TODO: parse exception case
             const['exc'] = text[1:].strip()
-            asnlog('INFO: {0}.{1}, unprocessed table constraint exception'\
+            asnlog('INF: {0}.{1}, unprocessed table constraint exception'\
                    .format(GLOBAL.COMP['NS']['mod'], self.fullname()))
         elif text:
             raise(ASN1ProcTextErr('{0}: remaining text for table constraint, {1}'\
@@ -4188,7 +4195,7 @@ class ASN1Obj(object):
         const['type'] = CONST_COMP
         const['keys'] = []
         # TODO
-        asnlog('INFO: {0}.{1}, unprocessed WITH COMPONENT constraint'\
+        asnlog('INF: {0}.{1}, unprocessed WITH COMPONENT constraint'\
                .format(GLOBAL.COMP['NS']['mod'], self.fullname()))
     
     def _parse_const_withcomps(self, const):
@@ -4430,7 +4437,7 @@ class ASN1Obj(object):
         const['type'] = CONST_REGEXP
         const['keys'] = []
         # TODO
-        asnlog('INFO: {0}.{1}, unprocessed PATTERN constraint'\
+        asnlog('INF: {0}.{1}, unprocessed PATTERN constraint'\
                .format(GLOBAL.COMP['NS']['mod'], self.fullname()))
     
     def _parse_const_property(self, const):
@@ -4439,7 +4446,7 @@ class ASN1Obj(object):
         const['type'] = CONST_PROPERTY
         const['keys'] = []
         # TODO
-        asnlog('INFO: {0}.{1}, unprocessed SETTINGS constraint'\
+        asnlog('INF: {0}.{1}, unprocessed SETTINGS constraint'\
                .format(GLOBAL.COMP['NS']['mod'], self.fullname()))
     
     def _parse_const_containing(self, const):
@@ -4509,7 +4516,7 @@ class ASN1Obj(object):
         const['keys'] = ['enc']
         const['enc'] = None
         # TODO
-        asnlog('INFO: {0}.{1}, unprocessed ENCODE BY constraint'\
+        asnlog('INF: {0}.{1}, unprocessed ENCODE BY constraint'\
                .format(GLOBAL.COMP['NS']['mod'], self.fullname()))
     
     def _parse_const_userconst(self, const):
@@ -4520,7 +4527,7 @@ class ASN1Obj(object):
         const['user'] = None
         const['exc'] = None
         # TODO
-        asnlog('INFO: {0}.{1}, unprocessed CONSTRAINED BY constraint'\
+        asnlog('INF: {0}.{1}, unprocessed CONSTRAINED BY constraint'\
                .format(GLOBAL.COMP['NS']['mod'], self.fullname()))
     
     
