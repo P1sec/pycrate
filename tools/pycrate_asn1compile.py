@@ -148,7 +148,7 @@ def main():
             print('%s, args error: no ASN.1 inputs found')
             return 0
         else:
-            print(files)
+            #print(files)
             ckw['filenames'] = list(files)
         # read all file content into a single buffer
         txt = []
