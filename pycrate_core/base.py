@@ -33,15 +33,29 @@ __all__ = ['Buf', 'BufAuto', 'NullTermStr',
            'UintLE', 'Uint8LE', 'Uint16LE', 'Uint24LE', 'Uint32LE', 'Uint48LE', 'Uint64LE',
            'IntLE', 'Int8LE', 'Int16LE', 'Int24LE', 'Int32LE', 'Int48LE', 'Int64LE']
 
-from .utils  import *
-from .charpy import Charpy, CharpyErr
-from .elt    import Atom, EltErr, REPR_RAW, REPR_HEX, REPR_BIN, REPR_HD, REPR_HUM
+
+import sys
+python_version = sys.version_info[0]
+
+try:
+    import re
+    from binascii import hexlify, unhexlify
+except ImportError:
+    _with_json = False
+else:
+    _with_json = True
+
+from .utils   import *
+from .charpy  import Charpy, CharpyErr
+from .elt     import Atom, EltErr, REPR_RAW, REPR_HEX, REPR_BIN, REPR_HD, REPR_HUM
+
 
 #------------------------------------------------------------------------------#
 # Basic types - bytes' buffers
 #------------------------------------------------------------------------------#
 
 class Buf(Atom):
+    
     TYPES       = flatten(bytes_types, )
     TYPENAMES   = get_typenames(*TYPES)
     DEFAULT_VAL = b''
@@ -186,6 +200,37 @@ class Buf(Atom):
             raise(CharpyErr('{0} [_from_char]: {1}'.format(self._name, err)))
         except Exception as err:
             raise(EltErr('{0} [_from_char]: {1}'.format(self._name, err)))
+    
+    #--------------------------------------------------------------------------#
+    # json interface
+    #--------------------------------------------------------------------------#
+    
+    if _with_json:
+        
+        def to_json(self):
+            """returns an array ["name", "hstr"] with hstr, hex-string from the value
+            """
+            if self.get_trans():
+                return ''
+            else:
+                return '["%s", "%s"]' % (self._name, hexlify(self.get_val()).decode())
+        
+        def from_json(self, txt):
+            """sets the value from the provided ["name", "hstr"] in txt
+            returns the offset at the end of the expression
+            """
+            if self.get_trans():
+                return 0
+            else:
+                if not hasattr(self, '_JSON_FMT'):
+                    self._JSON_FMT = re.compile('\[\s{0,}\"%s\"\s{0,},\s{0,}\"((?:[0-9a-fA-F]{2}){0,})\"\s{0,}\]'\
+                                                % self._name)
+                m = self._JSON_FMT.match(txt)
+                if m:
+                    self.set_val(unhexlify(m.group(1)))
+                    return m.end()
+                else:
+                    raise(EltErr('{0} [from_json]: invalid format, {1!r}'.format(self._name, txt)))
 
 
 # BufAuto is used when a Buf requires to have its length automatically computed
@@ -306,10 +351,12 @@ class NullTermStr(Buf):
 #------------------------------------------------------------------------------#
 
 class Uint(Atom):
+    
     TYPES       = flatten(integer_types, )
     TYPENAMES   = get_typenames(*TYPES)
     DEFAULT_VAL = 0
     DEFAULT_BL  = 0
+    
     
     #--------------------------------------------------------------------------#
     # format routines
@@ -368,6 +415,37 @@ class Uint(Atom):
             self._val = char.get_uint(bl)
         except CharpyErr as err:
             raise(CharpyErr('{0} [_from_char]: {1}'.format(self._name, err)))
+    
+    #--------------------------------------------------------------------------#
+    # json interface
+    #--------------------------------------------------------------------------#
+    
+    if _with_json:
+
+        def to_json(self):
+            """returns an array ["name", intval]
+            """
+            if self.get_trans():
+                return ''
+            else:
+                return '["%s", %i]' % (self._name, self.get_val())
+        
+        def from_json(self, txt):
+            """sets the value from the provided ["name", inval]
+            returns the offset at the end of the expression
+            """
+            if self.get_trans():
+                return 0
+            else:
+                if not hasattr(self, '_JSON_FMT'):
+                    self._JSON_FMT = re.compile('\[\s{0,}\"%s\"\s{0,},\s{0,}\+{0,1}([0-9]{1,})\s{0,}\]'\
+                                                % self._name)
+                m = self._JSON_FMT.match(txt)
+                if m:
+                    self.set_val(int(m.group(1)))
+                    return m.end()
+                else:
+                    raise(EltErr('{0} [from_json]: invalid format, {1!r}'.format(self._name, txt)))
 
 
 class Uint8(Uint):
@@ -395,10 +473,13 @@ class Uint64(Uint):
 
 
 class Int(Atom):
+    
     TYPES       = flatten(integer_types, )
     TYPENAMES   = get_typenames(*TYPES)
     DEFAULT_VAL = 0
     DEFAULT_BL  = 0
+    
+    _JSON_FMT   = re.compile('^\[\s{0,}(-){0,1}1\s{0,},\s{0,}\"((?:[0-9a-fA-F]{2}){0,})\"\s{0,}\]')
     
     #--------------------------------------------------------------------------#
     # format routines
@@ -459,6 +540,40 @@ class Int(Atom):
             self._val = char.get_int(bl)
         except CharpyErr as err:
             raise(CharpyErr('{0} [_from_char]: {1}'.format(self._name, err)))
+    
+    #--------------------------------------------------------------------------#
+    # json interface
+    #--------------------------------------------------------------------------#
+    
+    if _with_json:
+
+        def to_json(self):
+            """returns an array ["name", intval]
+            """
+            if self.get_trans():
+                return ''
+            else:
+                return '["%s", %i]' % (self._name, self.get_val())
+        
+        def from_json(self, txt):
+            """sets the value from the provided ["name", inval]
+            returns the offset at the end of the expression
+            """
+            if self.get_trans():
+                return 0
+            else:
+                if not hasattr(self, '_JSON_FMT'):
+                    self._JSON_FMT = re.compile('\[\s{0,}\"%s\"\s{0,},\s{0,}(-+){0,1}([0-9]{1,})\s{0,}\]'\
+                                                % self._name)
+                m = self._JSON_FMT.match(txt)
+                if m:
+                    if m.group(1):
+                        self.set_val(int(m.group(1) + m.group(2)))
+                    else:
+                        self.set_val(int(m.group(2)))
+                    return m.end()
+                else:
+                    raise(EltErr('{0} [from_json]: invalid format, {1!r}'.format(self._name, txt)))
 
 
 class Int8(Int):
@@ -563,6 +678,16 @@ class UintLE(Atom):
             self._val = char.get_uint_le(bl)
         except CharpyErr as err:
             raise(CharpyErr('{0} [_from_char]: {1}'.format(self._name, err)))
+    
+    #--------------------------------------------------------------------------#
+    # json interface
+    # value converted to integer
+    #--------------------------------------------------------------------------#
+    
+    if _with_json:
+        
+        to_json   = Uint.to_json
+        from_json = Uint.from_json 
 
 
 class Uint8LE(UintLE):
@@ -667,6 +792,16 @@ class IntLE(Atom):
             self._val = char.get_int_le(bl)
         except CharpyErr as err:
             raise(CharpyErr('{0} [_from_char]: {1}'.format(self._name, err)))
+    
+    #--------------------------------------------------------------------------#
+    # json interface
+    # value converted to integer
+    #--------------------------------------------------------------------------#
+    
+    if _with_json:
+        
+        to_json   = Int.to_json
+        from_json = Int.from_json 
 
 
 class Int8LE(IntLE):
@@ -691,5 +826,4 @@ class Int48LE(IntLE):
 
 class Int64LE(IntLE):
     _bl = 64
-
 
