@@ -99,8 +99,10 @@ Single value: Python 2-tuple
     
     _ASN_RE = re.compile('(?:\'([\s01]{0,})\'B)|(?:\'([\s0-9A-F]{0,})\'H)')
     
+    _val_ref_type = str_types + (tuple, )
+    
     def _get_val_obj(self, ref):
-        if isinstance(ref, str_types):
+        if isinstance(ref, self._val_ref_type):
             const_tr = self._get_const_tr()
             if ref in const_tr:
                 return const_tr[ref]
@@ -125,24 +127,28 @@ Single value: Python 2-tuple
                 # collect all types in the constraint value
                 for C in self._const_val.root:
                     if C._typeref is not None:
+                        # put both complete module ref, and obj-only ref
+                        const_tr[C._typeref.called] = C
                         const_tr[C._typeref.called[1]] = C
                     else:
                         const_tr[C.TYPE] = C
                 if self._const_val.ext:
                     for C in self._const_val.ext:
                         if C._typeref is not None:
+                            const_tr[C._typeref.calld] = C
                             const_tr[C._typeref.called[1]] = C
                         else:
                             const_tr[C.TYPE] = C
             if self._TAB_LUT and self._const_tab and self._const_tab_at:
                 # collect all types from the table constraint
                 assert( hasattr(self, '_const_tab_id') )
-                ObjsTab = self._const_tab(self._const_tab_id)
-                for ObjTab in ObjsTab:
-                    if ObjTab._typeref is not None and ObjTab._typeref.called[1] not in const_tr:
-                        const_tr[ObjTab._typeref.called[1]] = ObjTab
-                    elif ObjTab.TYPE not in const_tr:
-                        const_tr[ObjTab.TYPE] = ObjTab
+                for O in self._const_tab(self._const_tab_id):
+                    if O._typeref is not None:
+                        # put both complete module ref, and obj-only ref
+                        const_tr[O._typeref.called] = O
+                        const_tr[O._typeref.called[1]] = O
+                    else:
+                        const_tr[O.TYPE] = O
             self.__const_tr__ = const_tr
             return const_tr
     
@@ -156,6 +162,8 @@ Single value: Python 2-tuple
                         raise(ASN1ObjErr('{0}: invalid value, {1!r}'.format(self.fullname(), val)))
                 else:
                     self._get_val_obj(val[0])._safechk_val(val[1])
+            elif isinstance(val[0], tuple) and len(val[0]) == 2:
+                self._get_val_obj(val[0])._safechk_val(val[1])
             else:
                 raise(ASN1ObjErr('{0}: invalid value, {1!r}'.format(self.fullname(), val)))
         else:
@@ -193,12 +201,14 @@ Single value: Python 2-tuple
             return txt[m.end():].strip()
         else:
             # we must pick-up a type from a defined constraint
-            const_tr = self._get_const_tr()
-            m = re.match('\s{0,}:|'.join(const_tr.keys()) + '\s{0,}:', txt)
+            # TODO: must implement the Module.value notation to compare to tuples
+            # into const_tr, in addition to simple object name
+            const_tr_keys = [name for name in self._get_const_tr() if isinstance(name, str_types)]
+            m = re.match('\s{0,}:|'.join(const_tr_keys) + '\s{0,}:', txt)
             if m is not None:
                 ident = m.group().split(':')[0].strip()
                 txt = txt[m.end():].strip()
-                Obj = const_tr[ident]
+                Obj = self._get_const_tr()[ident]
                 txt = Obj._from_asn1(txt)
                 if Obj._typeref is not None:
                     self._val = (Obj._typeref.called[1], Obj._val)
