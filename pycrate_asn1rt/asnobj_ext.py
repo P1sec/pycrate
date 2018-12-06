@@ -357,7 +357,7 @@ Single value: Python 2-tuple
         # select the inner encoding
         tlv = tlv[0]
         Tag, cl, pc, tval, Len, lval = tlv[0:6]
-        tag, Obj, obj_mult = (cl, tval), None, False
+        tag, Objs, obj_mult = (cl, tval), [], False
         # try to get a defined object from a table constraint
         if self._TAB_LUT and self._const_tab and self._const_tab_at:
             const_obj_type, const_obj = self._get_tab_obj()
@@ -365,19 +365,19 @@ Single value: Python 2-tuple
                 if not self._SILENT:
                     asnlog('OPEN._decode_ber_cont_ws: %s, unable to retrieve a table-looked up object, %s'\
                            % (self.fullname(), err))
-                Obj = None
+                Objs = []
             elif const_obj_type == CLASET_UNIQ:
-                Obj = const_obj
+                Objs = [const_obj]
             else:
                 # const_obj_type == CLASET_MULT
                 obj_mult = True
-                Obj = get_obj_by_tag(self, tag, const_obj)
+                Objs = get_obj_by_tag(self, tag, const_obj)
         #
         elif self._const_val is not None:
             # another way to provide a (set of) potential defined object(s)
             # is to look into value constraint self._const_val
             # we must select the right one according to the decoded tag
-            Obj = get_obj_by_tag(self, tag)
+            Objs = get_obj_by_tag(self, tag)
         #
         elif hasattr(self, '_defby') and self._defby is not None:
             # TODO: 3rd way to specify the potential defined object
@@ -386,31 +386,30 @@ Single value: Python 2-tuple
                 asnlog('OPEN._decode_ber_cont_ws: %s, DEFINED BY lookup not supported' % self.fullname())
         #
         decoded = False
-        if Obj is not None:
-            # we found a defined object
-            char_cur, char_lb = char._cur, char._len_bit
-            try:
-                Obj._from_ber_ws(char, [tlv])
-            except Exception as err:
-                # decoding failed, we fall back to the simple buffer decoding
-                # WNG: this may screw some internal references (e.g. _parent attributes)
-                if not self._SILENT:
-                    if Obj._tr:
-                        objname = '%s [%s]' % (Obj._name, Obj._tr._name)
-                    asnlog('OPEN._decode_ber_cont: %s, decoding failed for the selected object %s (%s)'\
-                           % (self.fullname(), objname, err))
-                char._cur, char._len_bit = char_cur, char_lb
-            else:
-                # set value
-                if Obj._typeref is not None:
-                    if obj_mult:
-                        self._val = (Obj._typeref.called, Obj._val)
-                    else:
-                        self._val = (Obj._typeref.called[1], Obj._val)
+        if Objs:
+            # we found at least one (or more) defined object
+            for Obj in Objs:
+                char_cur, char_lb = char._cur, char._len_bit
+                try:
+                    Obj._from_ber_ws(char, [tlv])
+                except:
+                    # decoding failed
+                    char._cur, char._len_bit = char_cur, char_lb
                 else:
-                    self._val = (Obj.TYPE, Obj._val)
-                V = Obj._struct
-                decoded = True
+                    # set value
+                    if Obj._typeref is not None:
+                        if obj_mult:
+                            self._val = (Obj._typeref.called, Obj._val)
+                        else:
+                            self._val = (Obj._typeref.called[1], Obj._val)
+                    else:
+                        self._val = (Obj.TYPE, Obj._val)
+                    V = Obj._struct
+                    decoded = True
+                    break
+            if not decoded and not self._SILENT:
+                asnlog('OPEN._decode_ber_cont_ws: %s, decoding failed for all possible objects'\
+                       % self.fullname())
         #
         if not decoded:
             # we did not find a defined object, or failed to decode it
@@ -452,7 +451,7 @@ Single value: Python 2-tuple
         # select the inner encoding
         tlv = tlv[0]
         cl, pc, tval, lval = tlv[0:4]
-        tag, Obj, obj_mult = (cl, tval), None, False
+        tag, Objs, obj_mult = (cl, tval), [], False
         # try to get a defined object from a table constraint
         if self._TAB_LUT and self._const_tab and self._const_tab_at:
             const_obj_type, const_obj = self._get_tab_obj()
@@ -460,19 +459,19 @@ Single value: Python 2-tuple
                 if not self._SILENT:
                     asnlog('OPEN._decode_ber_cont: %s, unable to retrieve a table-looked up object, %s'\
                            % (self.fullname(), err))
-                Obj = None
+                Objs = []
             elif const_obj_type == CLASET_UNIQ:
-                Obj = const_obj
+                Objs = [const_obj]
             else:
                 # const_obj_type == CLASET_MULT
                 obj_mult = True
-                Obj = get_obj_by_tag(self, tag, const_obj)
+                Objs = get_obj_by_tag(self, tag, const_obj)
         #
         elif self._const_val is not None:
             # another way to provide a (set of) potential defined object(s)
             # is to look into value constraint self._const_val
             # we must select the right one according to the decoded tag
-            Obj = get_obj_by_tag(self, tag)
+            Objs = get_obj_by_tag(self, tag)
         #
         elif hasattr(self, '_defby') and self._defby is not None:
             # TODO: 3rd way to specify the potential defined object
@@ -481,30 +480,28 @@ Single value: Python 2-tuple
                 asnlog('OPEN._decode_ber_cont: %s, DEFINED BY lookup not supported' % self.fullname())
         #
         decoded = False
-        if Obj is not None:
-            # we found a defined object
-            char_cur, char_lb = char._cur, char._len_bit
-            try:
-                Obj._from_ber(char, [tlv])
-            except Exception as err:
-                # decoding failed, we fall back to the simple buffer decoding
-                # WNG: this may screw some internal references (e.g. _parent attributes)
-                if not self._SILENT:
-                    if Obj._tr:
-                        objname = '%s [%s]' % (Obj._name, Obj._tr._name)
-                    asnlog('OPEN._decode_ber_cont: %s, decoding failed for the selected object %s (%s)'\
-                           % (self.fullname(), objname, err))
-                char._cur, char._len_bit = char_cur, char_lb
-            else:
-                # set value
-                if Obj._typeref is not None:
-                    if obj_mult:
-                        self._val = (Obj._typeref.called, Obj._val)
-                    else:
-                        self._val = (Obj._typeref.called[1], Obj._val)
+        if Objs:
+            # we found at least one (or more) defined object
+            for Obj in Objs:
+                char_cur, char_lb = char._cur, char._len_bit
+                try:
+                    Obj._from_ber(char, [tlv])
+                except Exception as err:
+                    char._cur, char._len_bit = char_cur, char_lb
                 else:
-                    self._val = (Obj.TYPE, Obj._val)
-                decoded = True
+                    # set value
+                    if Obj._typeref is not None:
+                        if obj_mult:
+                            self._val = (Obj._typeref.called, Obj._val)
+                        else:
+                            self._val = (Obj._typeref.called[1], Obj._val)
+                    else:
+                        self._val = (Obj.TYPE, Obj._val)
+                    decoded = True
+                    break
+            if not decoded and not self._SILENT:
+                asnlog('OPEN._decode_ber_cont: %s, decoding failed for all possible objects'\
+                       % self.fullname())
         #
         if not decoded:
             # we did not find a defined object, or failed to decode it

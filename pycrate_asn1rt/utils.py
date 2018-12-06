@@ -505,13 +505,14 @@ def get_obj_by_tag(ObjOpen, tag, ConstList=None):
         if ObjOpen._const_val.ext:
             ConstList = ConstList + ObjOpen._const_val.ext
     #
+    ret = []
     for ConstObj in ConstList:
         if ConstObj._tagc and tag == ConstObj._tagc[0]:
-            return ConstObj
+            ret.append(ConstObj)
         elif ConstObj.TYPE == TYPE_CHOICE and tag in ConstObj._cont_tags:
-            return ConstObj
+            ret.append(ConstObj)
     #
-    return None
+    return ret
 
 #------------------------------------------------------------------------------#
 # selection by path
