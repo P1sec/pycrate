@@ -10018,9 +10018,8 @@ class SecureMimeMessageV3dot1_2009:
     _SMimeCapsSet_val_Type_1 = INT(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('SecureMimeMessageV3dot1-2009', 'SMIMECapabilitiesParametersForRC2CBC')))
     _SMimeCapsSet_val_Type_13 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('CryptographicMessageSyntaxAlgorithms-2009', 'KeyWrapAlgorithm')))
     _SMimeCapsSet_val_Type_14 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('CryptographicMessageSyntaxAlgorithms-2009', 'KeyWrapAlgorithm')))
-    _SMimeCapsSet_val_Type_19 = INT(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('SecureMimeMessageV3dot1-2009', 'SMIMECapabilitiesParametersForRC2CBC')))
-    _SMimeCapsSet_val_Type_22 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSAES-OAEP-params')))
-    SMimeCapsSet._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 9, 16, 11, 1))]), dict([(u'Type', _SMimeCapsSet_val_Type_1), (u'id', (1, 2, 840, 113549, 3, 2))]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 2))]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 4))]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 5))]), dict([(u'id', (1, 2, 840, 10040, 4, 3))]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 3, 1))]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 3, 2))]), dict([(u'id', (1, 2, 840, 10045, 4, 1))]), dict([(u'id', (1, 2, 840, 10045, 4, 3, 1))]), dict([(u'id', (1, 2, 840, 10045, 4, 3, 2))]), dict([(u'id', (1, 2, 840, 10045, 4, 3, 3))]), dict([(u'id', (1, 2, 840, 10045, 4, 3, 4))]), dict([(u'Type', _SMimeCapsSet_val_Type_13), (u'id', (1, 2, 840, 113549, 1, 9, 16, 3, 5))]), dict([(u'Type', _SMimeCapsSet_val_Type_14), (u'id', (1, 2, 840, 113549, 1, 9, 16, 3, 10))]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 1))]), dict([(u'id', (1, 2, 840, 113549, 1, 9, 16, 3, 6))]), dict([(u'id', (1, 2, 840, 113549, 1, 9, 16, 3, 7))]), dict([(u'id', (1, 2, 840, 113549, 3, 7))]), dict([(u'Type', _SMimeCapsSet_val_Type_19), (u'id', (1, 2, 840, 113549, 3, 2))]), dict([(u'id', (1, 3, 6, 1, 5, 5, 8, 1, 2))]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 10))]), dict([(u'Type', _SMimeCapsSet_val_Type_22), (u'id', (1, 2, 840, 113549, 1, 1, 7))])], rr=[], ev=[], er=[])
+    _SMimeCapsSet_val_Type_21 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1-PSS-OAEP-Algorithms-2009', 'RSAES-OAEP-params')))
+    SMimeCapsSet._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 9, 16, 11, 1))]), dict([(u'Type', _SMimeCapsSet_val_Type_1), (u'id', (1, 2, 840, 113549, 3, 2))]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 2))]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 4))]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 5))]), dict([(u'id', (1, 2, 840, 10040, 4, 3))]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 3, 1))]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 3, 2))]), dict([(u'id', (1, 2, 840, 10045, 4, 1))]), dict([(u'id', (1, 2, 840, 10045, 4, 3, 1))]), dict([(u'id', (1, 2, 840, 10045, 4, 3, 2))]), dict([(u'id', (1, 2, 840, 10045, 4, 3, 3))]), dict([(u'id', (1, 2, 840, 10045, 4, 3, 4))]), dict([(u'Type', _SMimeCapsSet_val_Type_13), (u'id', (1, 2, 840, 113549, 1, 9, 16, 3, 5))]), dict([(u'Type', _SMimeCapsSet_val_Type_14), (u'id', (1, 2, 840, 113549, 1, 9, 16, 3, 10))]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 1))]), dict([(u'id', (1, 2, 840, 113549, 1, 9, 16, 3, 6))]), dict([(u'id', (1, 2, 840, 113549, 1, 9, 16, 3, 7))]), dict([(u'id', (1, 2, 840, 113549, 3, 7))]), dict([(u'id', (1, 3, 6, 1, 5, 5, 8, 1, 2))]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 10))]), dict([(u'Type', _SMimeCapsSet_val_Type_21), (u'id', (1, 2, 840, 113549, 1, 1, 7))])], rr=[], ev=[], er=[])
     
     #-----< aa-encrypKeyPref >-----#
     aa_encrypKeyPref = CLASS(name=u'aa-encrypKeyPref', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'ATTRIBUTE')))
@@ -10096,8 +10095,7 @@ class SecureMimeMessageV3dot1_2009:
         _SMimeCapsSet_val_Type_1,
         _SMimeCapsSet_val_Type_13,
         _SMimeCapsSet_val_Type_14,
-        _SMimeCapsSet_val_Type_19,
-        _SMimeCapsSet_val_Type_22,
+        _SMimeCapsSet_val_Type_21,
         aa_encrypKeyPref,
         _aa_encrypKeyPref_val_Type,
         id_aa_encrypKeyPref,

@@ -86,10 +86,16 @@ class ASN1Dict(object):
         return self._dict.__contains__(item)
     
     def __eq__(self, other):
-        return self._index == other._index and self._dict == other._dict
+        if isinstance(other, self.__class__):
+            return self._index == other._index and self._dict == other._dict
+        else:
+            return False
     
     def __ne__(self, other):
-        return self._index != other._index or self._dict != other._dict
+        if isinstance(other, self.__class__):
+            return self._index != other._index or self._dict != other._dict
+        else:
+            return False
     
     def index(self, key):
         return self._index.index(key)

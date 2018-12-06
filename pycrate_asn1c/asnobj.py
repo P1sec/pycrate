@@ -4760,7 +4760,7 @@ class ASN1Obj(object):
         else:
             # raw BOOLEAN value
             self.select_set(_path_cur(),
-                                 self._VALUE_BOOL[m.group(1)])
+                            self._VALUE_BOOL[m.group(1)])
             return text[m.end():].strip()
     
     def _parse_value_int(self, text):
@@ -5727,7 +5727,18 @@ class ASN1Obj(object):
             if self._type == TYPE_OPEN:
                 rest = self.__parse_set_comp_open(rv, val, dom)
             else:
+                len_val = len(val[dom])
                 rest = self._parse_set_comp(rv, val, dom)
+                # in case the set component just parsed is a single value,
+                # we need to check for potential deduplication here,
+                # because parse_value() is used and cannot implement such control
+                if len(val[dom]) >= 2 and len(val[dom]) == len_val + 1 \
+                and val[dom][-1] in val[dom][:-1]:
+                    print('WNG: {0}.{1}, duplicated value in {2} set: {3}'\
+                          .format(GLOBAL.COMP['NS']['mod'], self.fullname(), dom,
+                                  repr(val[dom][-1]).replace('\n', '')))
+                    del val[dom][-1]
+            # 
             self.__parse_set_comp_path_unconfig()
             val = self.__parse_set_track_val(val)
             #
@@ -5752,7 +5763,18 @@ class ASN1Obj(object):
             if self._type == TYPE_OPEN:
                 rest = self.__parse_set_comp_open(ev, val, dom)
             else:
+                len_val = len(val[dom])
                 rest = self._parse_set_comp(ev, val, dom)
+                # in case the set component just parsed is a single value,
+                # we need to check for potential deduplication here,
+                # because parse_value() is used and cannot implement such control
+                if len(val[dom]) >= 2 and len(val[dom]) == len_val + 1 \
+                and val[dom][-1] in val[dom][:-1]:
+                    print('WNG: {0}.{1}, duplicated value in {2} set: {3}'\
+                          .format(GLOBAL.COMP['NS']['mod'], self.fullname(), dom,
+                                  repr(val[dom][-1]).replace('\n', '')))
+                    del val[dom][-1]
+            #
             self.__parse_set_comp_path_unconfig()
             val = self.__parse_set_track_val(val)
             #
@@ -5915,6 +5937,11 @@ class ASN1Obj(object):
                     else:
                         objval = ObjProxy_val
                     #
+                    
+                    if self._name == 'Supported-MAP-Operations':
+                        print(objval)
+                    
+                    
                     # 3.4.4) dispatch the root / ext values from objval into self within val
                     if objval['root']:
                         self.__parse_set_insert(val[dom], objval['root'], dom)
@@ -5966,11 +5993,13 @@ class ASN1Obj(object):
         # 2) insert all values  1 by 1 from objval into val (self)
         # and rewrite the root / ext domain and indexing into the val set
         for v in objval:
-            val.append(v)
-            if v in ref:
-                ind = ref.index(v)
-                GLOBAL.COMP['NS']['setpar'][ind][-2] = dom
-                GLOBAL.COMP['NS']['setpar'][ind][-1] = len(val)-1
+            # deduplicate values within v
+            if v not in val:
+                val.append(v)
+                if v in ref:
+                    ind = ref.index(v)
+                    GLOBAL.COMP['NS']['setpar'][ind][-2] = dom
+                    GLOBAL.COMP['NS']['setpar'][ind][-1] = len(val)-1
         GLOBAL.COMP['NS']['setpar'] = []
     
     def _parse_value_or_range(self, text):
