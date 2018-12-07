@@ -37,17 +37,12 @@ __all__ = ['Buf', 'BufAuto', 'NullTermStr',
 import sys
 python_version = sys.version_info[0]
 
-try:
-    import re
-    from binascii import hexlify, unhexlify
-except ImportError:
-    _with_json = False
-else:
-    _with_json = True
-
-from .utils   import *
-from .charpy  import Charpy, CharpyErr
-from .elt     import Atom, EltErr, REPR_RAW, REPR_HEX, REPR_BIN, REPR_HD, REPR_HUM
+from .utils  import *
+from .charpy import Charpy, CharpyErr
+from .elt    import Atom, EltErr, REPR_RAW, REPR_HEX, REPR_BIN, REPR_HD, REPR_HUM
+from .elt    import _with_json
+if _with_json:
+    from .elt import re, hexlify, unhexlify
 
 
 #------------------------------------------------------------------------------#
