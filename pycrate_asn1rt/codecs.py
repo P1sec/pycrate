@@ -30,6 +30,16 @@
 from .utils import *
 from .err   import *
 
+try:
+    from json     import JSONEncoder, JSONDecoder, JSONEncodeError, JSONDecodeError
+    from binascii import hexlify, unhexlify
+except ImportError:
+    _with_json = False
+else:
+    _with_json = True
+    JsonEnc = JSONEncoder()
+    JsonDec = JSONDecoder()
+
 
 class ASN1Codec(object):
     pass

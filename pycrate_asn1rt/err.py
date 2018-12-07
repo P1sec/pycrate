@@ -51,7 +51,7 @@ class ASN1ObjErr(ASN1Err):
 class ASN1NotSuppErr(ASN1Err):
     pass
 
-# ASN.1 codecs errors: generic, ASN, PER, UPER, BER, CER, DER, GSER
+# ASN.1 codecs errors: generic, ASN, PER, UPER, BER, CER, DER, JER, GSER
 class ASN1CodecErr(ASN1Err):
     pass
 
@@ -71,6 +71,12 @@ class ASN1BEREncodeErr(ASN1CodecErr):
     pass
 
 class ASN1BERDecodeErr(ASN1CodecErr):
+    pass
+
+class ASN1JEREncodeErr(ASN1CodecErr):
+    pass
+
+class ASN1JERDecodeErr(ASN1CodecErr):
     pass
 
 #class ASN1GSEREncodeErr(ASN1CodecErr):

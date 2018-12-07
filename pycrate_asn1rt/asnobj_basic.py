@@ -27,6 +27,7 @@
 # *--------------------------------------------------------
 #*/
 
+
 from .utils   import *
 from .err     import *
 from .dictobj import *
@@ -36,6 +37,7 @@ from .setobj  import *
 from .asnobj  import *
 from .codecs  import *
 
+from .asnobj  import _with_json
 
 #------------------------------------------------------------------------------#
 # NULL and BOOLEAN
@@ -117,6 +119,21 @@ Single value: int 0
     
     def _encode_ber_cont(self):
         return 0, 0, []
+    
+    ###
+    # conversion between internal value and ASN.1 JER encoding
+    ###
+    if _with_json:
+        
+        def _from_jval(self, val):
+            if val is None:
+                self._val = 0
+            else:
+                raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
+                      .format(self.fullname(), val)))
+        
+        def _to_jval(self):
+            return None
 
 
 class BOOL(ASN1Obj):
@@ -229,6 +246,23 @@ Single value: Python bool
             return 0, 1, [(T_UINT, ASN1CodecBER.ENC_BOOLTRUE, 8)]
         else:
             return 0, 1, [(T_UINT, 0, 8)]
+    
+    ###
+    # conversion between internal value and ASN.1 JER encoding
+    ###
+    
+    if _with_json:
+        
+        def _from_jval(self, val):
+            if isinstance(val, bool):
+                self._val = val
+            else:
+                raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
+                      .format(self.fullname(), val)))
+        
+        def _to_jval(self):
+            return self._val
+    
 
 #------------------------------------------------------------------------------#
 # INTEGER and REAL
@@ -240,7 +274,7 @@ ASN.1 basic type INTEGER object
 
 Single value: Python int
 
-Alternative single value: Python str (from the object's NamedNumber)
+Alternative setting value: Python str (from the object's NamedNumber)
     This is only to be used in set_val() method, and is converted to a Python
     int when set
 
@@ -255,7 +289,6 @@ Specific attribute:
     TAG   = 2
     
     _ASN_RE = re.compile('\-{0,1}[0-9]{1,}')
-    #_ASN_RE_CONT created at runtime
     
     def _safechk_val(self, val):
         self._safechk_val_int(val)
@@ -473,6 +506,22 @@ Specific attribute:
     def _encode_ber_cont(self):
         lval = int_bytelen(self._val)
         return 0, lval, [(T_INT, self._val, 8*lval)]
+
+    ###
+    # conversion between internal value and ASN.1 JER encoding
+    ###
+    
+    if _with_json:
+        
+        def _from_jval(self, val):
+            if isinstance(val, integer_types):
+                self._val = val
+            else:
+                raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
+                      .format(self.fullname(), val)))
+        
+        def _to_jval(self):
+            return self._val
 
 
 class REAL(ASN1Obj):
@@ -802,6 +851,32 @@ Specific attribute:
         buf = self._encode_cont()
         lval = len(buf)
         return 0, lval, [(T_BYTES, buf, 8*lval)]
+    
+    ###
+    # conversion between internal value and ASN.1 JER encoding
+    ###
+    
+    if _with_json:
+        
+        def _from_jval(self, val):
+            if isinstance(val, integer_types):
+                self._val = (val, 2, 0)
+            elif isinstance(val, float):
+                if val == float('inf'):
+                    self._val = (1, None, None)
+                elif val == float('nan'):
+                    self._val = (0, None, None)
+                elif val == float('-inf'):
+                    self._val = (-1, None, None)
+                else:
+                    # TODO: convert float to {mantissa, base, exponent}
+                    raise(ASN1NotSuppErr('{0}: float conversion required'.format(self.fullname())))
+            else:
+                raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
+                      .format(self.fullname(), val)))
+        
+        def _to_jval(self):
+            return self._val[0] * (self._val[1]**self._val[2])
 
 
 #------------------------------------------------------------------------------#
@@ -836,7 +911,6 @@ Specific attribute:
     TAG   = 10
     
     #_ASN_RE created at runtime, depends of self._cont
-    
     
     def _safechk_val(self, val):
         if not isinstance(val, str_types) or val not in self._cont:
@@ -1095,6 +1169,22 @@ Specific attribute:
             val = self._cont[self._val]
         lval = int_bytelen(val)
         return 0, lval, [ (T_INT, val, 8*lval) ]
+    
+    ###
+    # conversion between internal value and ASN.1 JER encoding
+    ###
+    
+    if _with_json:
+        
+        def _from_jval(self, val):
+            if val in self._cont:
+                self._val = val
+            else:
+                raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
+                      .format(self.fullname(), val)))
+        
+        def _to_jval(self):
+            return self._val
 
 
 class _OID(ASN1Obj):
@@ -1104,8 +1194,6 @@ class _OID(ASN1Obj):
     _ASN_RE = re.compile('\{([a-zA-Z0-9\-\(\)\s]{1,})\}')
     _ASN_RE_COMP = re.compile(
     '([0-9]{1,})|(?:([a-zA-Z]{1}[a-zA-Z0-9\-]{0,})\s{0,}(?:\(([0-9]{1,})\)){0,1})')
-
-    
     
     def _safechk_val(self, val):
         if not isinstance(val, tuple) or \
@@ -1201,6 +1289,22 @@ class _OID(ASN1Obj):
         buf = self._encode_cont()
         lval = len(buf)
         return 0, lval, [ (T_BYTES, buf, 8*lval) ]
+    
+    ###
+    # conversion between internal value and ASN.1 JER encoding
+    ###
+    
+    if _with_json:
+        
+        def _from_jval(self, val):
+            try:
+                self._val = tuple(map(int, val.split('.')))
+            except:
+                raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
+                      .format(self.fullname(), val)))
+        
+        def _to_jval(self):
+            return '.'.join(map(str, self._val))
 
 
 class OID(_OID):

@@ -35,6 +35,7 @@ from .refobj  import *
 from .setobj  import *
 from .asnobj  import *
 from .codecs  import *
+from .codecs  import _with_json
 
 try:
     from datetime import datetime, timedelta
@@ -927,6 +928,53 @@ Specific constraints attributes:
             else:
                 # empty bit string
                 return b'', 0
+    
+    ###
+    # conversion between internal value and ASN.1 JER encoding
+    ###
+    
+    if _with_json:
+        
+        def _from_jval(self, val):
+            if isinstance(val, str_types):
+                # ensure the sz constraint is fixed
+                if not self._const_sz or self._const_sz.ra != 1 or len(self._const_sz.rv) != 1:
+                    raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
+                          .format(self.fullname(), val)))
+                else:
+                    try:
+                        val = int(val, 16)
+                    except ValueError:
+                        raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
+                              .format(self.fullname(), val)))
+                    bl = self._const_sz.rv[0]
+            elif isinstance(val, dict):
+                try:
+                    bl  = val['length']
+                    val = val['value']
+                except KeyError:
+                    raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
+                          .format(self.fullname(), val)))
+            else:
+                raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
+                      .format(self.fullname(), val)))
+            if bl%8:
+                self._val = (val>>(-bl%8), bl)
+            else:
+                self._val = (val, bl)
+        
+        def _to_jval(self):
+            if not isinstance(self._val[0], integer_types):
+                raise(ASN1NotSuppErr('{0}: CONTAINING value format'.format(self.fullname())))
+            if self._const_sz and self._const_sz.ra == 1 and len(self._const_sz.rv) == 1:
+                val, bl = self._val
+                bl_rnd = -bl%8
+                if bl_rnd:
+                    return uint_to_hex(val<<bl_rnd, bl+bl_rnd)
+                else:
+                    return uint_to_hex(val, bl)
+            else:
+                return {'value': self._val[0], 'length': self._val[1]}
 
 
 class OCT_STR(ASN1Obj):
@@ -1493,6 +1541,25 @@ Specific constraints attributes:
         else:
             # 2) value is the standard (uint, bit length)
             return self._val
+    
+    ###
+    # conversion between internal value and ASN.1 JER encoding
+    ###
+    
+    if _with_json:
+        
+        def _from_jval(self, val):
+            try:
+                self._val = unhexlify(val)
+            except TypeError:
+                raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
+                      .format(self.fullname(), val)))
+        
+        def _to_jval(self):
+            if not isinstance(self._val, bytes_types):
+                raise(ASN1NotSuppErr('{0}: CONTAINING value format'.format(self.fullname())))
+            return hexlify(self._val).decode()
+
 
 #------------------------------------------------------------------------------#
 # All *String
@@ -2304,6 +2371,22 @@ Virtual parent for any ASN.1 *String object
             return 1, lval, TLV
         else:
             return 0, len(buf), [ (T_BYTES, buf, 8*len(buf)) ]
+    
+    ###
+    # conversion between internal value and ASN.1 JER encoding
+    ###
+    
+    if _with_json:
+        
+        def _from_jval(self, val):
+            if isinstance(val, str_types):
+                self._val = val
+            else:
+                raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
+                      .format(self.fullname(), val)))
+        
+        def _to_jval(self):
+            return self._val
 
 
 # Python does not provide a complete support for ISO2022 encoding

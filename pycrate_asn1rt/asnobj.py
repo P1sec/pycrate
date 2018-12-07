@@ -33,6 +33,7 @@ from .refobj  import *
 from .dictobj import *
 from .setobj  import *
 from .codecs  import *
+from .codecs  import _with_json
 
 
 ASN1Obj_docstring = """
@@ -1652,7 +1653,31 @@ class ASN1Obj(Element):
     
     def to_gser(self, buf, val=None):
         raise(ASN1NotSuppErr(self.fullname()))
-
+    
+    ###
+    # conversion between internal value and ASN.1 JER encoding
+    ###
+    
+    if _with_json:
+        
+        def _from_jval(self, val):
+            raise(ASN1NotSuppErr(self.fullname()))
+        
+        def from_jer(self, txt):
+            try:
+                val = JsonDec.decode(txt)
+            except JSONDecodeError as err:
+                raise(ASN1JERDecodeErr('{0}: invalid json, {1}'\
+                      .format(self.fullname(), err)))
+            else:
+                self._from_jval(val)
+        
+        def _to_jval(self):
+            raise(ASN1NotSuppErr(self.fullname()))
+        
+        def to_jer(self):
+            val = self._to_jval()
+            return JsonEnc.encode(val)
 
 
 def _save_ber_params():
