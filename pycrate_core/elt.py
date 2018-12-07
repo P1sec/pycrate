@@ -2154,26 +2154,23 @@ class Envelope(Element):
             if self.get_trans():
                 return 0
             if not hasattr(self, '_JSON_FMT0'):
-                self._JSON_FMT0 = re.compile('\[\s{0,}\"%s\"\s{0,},\s{0,}' % self._name)
+                self._JSON_FMT0 = re.compile('\[\s{0,}\"%s\"\s{0,}' % self._name)
             m = self._JSON_FMT0.match(txt)
             if not m:
                 raise(EltErr('{0} [from_json]: invalid format, {1!r}'.format(self._name, txt)))
             cur = m.end()
             for e in self._content:
-                cur += e.from_json(txt[cur:])
                 m = self._JSON_FMT1.match(txt[cur:])
                 if not m:
-                    m = self._JSON_FMT2.match(txt[cur:])
-                    if not m:
-                        raise(EltErr('{0} [from_json]: invalid format, {1!r}'\
-                              .format(self._name, txt[cur:])))
-                    else:
-                        # end of array
-                        cur += m.end()
-                        break
-                else:
-                    cur += m.end()
-            # ensure all non-transparent element were set
+                    break
+                cur += m.end()
+                cur += e.from_json(txt[cur:])
+            m = self._JSON_FMT2.match(txt[cur:])
+            if not m:
+                raise(EltErr('{0} [from_json]: invalid format, {1!r}'\
+                      .format(self._name, txt[cur:])))
+            cur += m.end()
+            # ensure all non-transparent elements were set
             for e in self._content[1+self._content.index(e):]:
                 if not e.get_trans() and e.get_bl():
                     raise(EltErr('{0} [from_json]: missing elements, {1}...'\
@@ -3013,7 +3010,7 @@ class Array(Element):
         _JSON_FMT2 = re.compile('\s{0,}\]')
         
         def to_json(self):
-            """returns an array with name and all array value json representation
+            """returns an array with name and all array values' json representation
             """
             if self.get_trans():
                 return ''
@@ -3035,7 +3032,7 @@ class Array(Element):
                 return 0
             # 0) initialize the parsing of txt
             if not hasattr(self, '_JSON_FMT0'):
-                self._JSON_FMT0 = re.compile('\[\s{0,}\"%s\"\s{0,},\s{0,}' % self._name)
+                self._JSON_FMT0 = re.compile('\[\s{0,}\"%s\"\s{0,}' % self._name)
             m = self._JSON_FMT0.match(txt)
             if not m:
                 raise(EltErr('{0} [from_json]: invalid format, {1!r}'.format(self._name, txt)))
@@ -3056,37 +3053,26 @@ class Array(Element):
             # 3) consume txt and fill in self._val
             if num is not None:
                 for i in range(num):
-                    cur += self._tmpl.from_json(txt[cur:])
-                    self._val.append(self._tmpl.get_val())
                     m = self._JSON_FMT1.match(txt[cur:])
                     if not m:
-                        m = self._JSON_FMT2.match(txt[cur:])
-                        if not m:
-                            raise(EltErr('{0} [from_json] invalid format, {1!r}'\
-                                  .format(self._name, txt[cur:])))
-                        else:
-                            cur += m.end()
-                            break
-                    else:
-                        cur += m.end()
-                if i < num-1:
-                    raise(EltErr('{0} [from_json]: missing iteration, {1}'\
-                          .format(self._name, num-1-i)))
+                        raise(EltErr('{0} [from_json] missing iteration, {1!r}'\
+                              .format(self._name, txt[cur:])))
+                    cur += m.end()
+                    cur += self._tmpl.from_json(txt[cur:])
+                    self._val.append(self._tmpl.get_val())
             else:
                 while True:
-                    cur += self._tmpl.from_json(txt[cur:])
-                    self._val.append(self._tmpl.get_val())
                     m = self._JSON_FMT1.match(txt[cur:])
                     if not m:
-                        m = self._JSON_FMT2.match(txt[cur:])
-                        if not m:
-                            raise(EltErr('{0} [from_json] invalid format, {1!r}'\
-                                  .format(self._name, txt[cur:])))
-                        else:
-                            cur += m.end()
-                            break
-                    else:
-                        cur += m.end()
+                        break
+                    cur += m.end()
+                    cur += self._tmpl.from_json(txt[cur:])
+                    self._val.append(self._tmpl.get_val())
+            m = self._JSON_FMT2.match(txt[cur:])
+            if not m:
+                raise(EltErr('{0} [from_json] invalid format, {1!r}'\
+                      .format(self._name, txt[cur:])))
+            cur += m.end()
             return cur
 
 
@@ -3941,7 +3927,7 @@ class Sequence(Element):
         _JSON_FMT2 = re.compile('\s{0,}\]')
         
         def to_json(self):
-            """returns an array with name and all sequence value json representation
+            """returns an array with name and all sequence values' json representation
             """
             if self.get_trans():
                 return ''
@@ -3964,7 +3950,7 @@ class Sequence(Element):
                 return 0
             # 0) initialize the parsing of txt
             if not hasattr(self, '_JSON_FMT0'):
-                self._JSON_FMT0 = re.compile('\[\s{0,}\"%s\"\s{0,},\s{0,}' % self._name)
+                self._JSON_FMT0 = re.compile('\[\s{0,}\"%s\"\s{0,}' % self._name)
             m = self._JSON_FMT0.match(txt)
             if not m:
                 raise(EltErr('{0} [from_json]: invalid format, {1!r}'.format(self._name, txt)))
@@ -3985,41 +3971,30 @@ class Sequence(Element):
             # 3) consume txt and fill in self._content
             if num is not None:
                 for i in range(num):
+                    m = self._JSON_FMT1.match(txt[cur:])
+                    if not m:
+                        raise(EltErr('{0} [from_json]: missing iteration, {1}'\
+                              .format(self._name, num-1-i)))
+                    cur += m.end()
                     clone = self._tmpl.clone()
                     cur += clone.from_json(txt[cur:])
                     self._content.append(clone)
                     clone._env = self
-                    m = self._JSON_FMT1.match(txt[cur:])
-                    if not m:
-                        m = self._JSON_FMT2.match(txt[cur:])
-                        if not m:
-                            raise(EltErr('{0} [from_json] invalid format, {1!r}'\
-                                  .format(self._name, txt[cur:])))
-                        else:
-                            cur += m.end()
-                            break
-                    else:
-                        cur += m.end()
-                if i < num-1:
-                    raise(EltErr('{0} [from_json]: missing iteration, {1}'\
-                          .format(self._name, num-1-i)))
             else:
                 while True:
+                    m = self._JSON_FMT1.match(txt[cur:])
+                    if not m:
+                        break
+                    cur += m.end()
                     clone = self._tmpl.clone()
                     cur += clone.from_json(txt[cur:])
                     self._content.append(clone)
                     clone._env = self
-                    m = self._JSON_FMT1.match(txt[cur:])
-                    if not m:
-                        m = self._JSON_FMT2.match(txt[cur:])
-                        if not m:
-                            raise(EltErr('{0} [from_json] invalid format, {1!r}'\
-                                  .format(self._name, txt[cur:])))
-                        else:
-                            cur += m.end()
-                            break
-                    else:
-                        cur += m.end()
+            m = self._JSON_FMT2.match(txt[cur:])
+            if not m:
+                raise(EltErr('{0} [from_json] invalid format, {1!r}'\
+                      .format(self._name, txt[cur:])))
+            cur += m.end()
             return cur
 
 

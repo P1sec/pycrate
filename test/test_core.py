@@ -58,6 +58,7 @@ int_short = -13260827
 # 2599 bits (bitlist_long[1:])
 int_long = -94141136838495215517845299158555608229389097263134918110073512487708955074894041103365127264423945305271577005867478936082614938245678346728964536999279139705104690104363150525528273568565113823493879883233104270361656010638044577581715798516627421116222889091382678657530100032128576943334766421986106825810555303426623663044347347989020152483414048182544735470813676230102874577335838039740732627206077376237159289971299647616474728885750128680310936854166958449904303849320662357392686642026960960570187644354223267688035330320457581804781813075491042019209092270873160554464912166335902815195660914302873769868331964801183580904011140990770911521338170090090258007234942367640219969887034505319340041084444589385151241858497356760758906222992711343281818881774609542275450689563
 
+
 def test_bitlist():
     
     assert( bytelist_to_bitlist(bytelist_short) == bitlist_short + [0,0,0,0,0,0] )
@@ -72,6 +73,7 @@ def test_bitlist():
     assert( bitlist_to_bytes(bitlist_short) == bytes_short )
     assert( bitlist_to_bytes(bitlist_long) == bytes_long )
 
+
 def test_bytes():
     
     assert( bytes_lshift(bytes_short, 5) == b'\xad?(\x00' )
@@ -83,6 +85,7 @@ def test_bytes():
     assert( bytes_to_bytelist(bytes_long) == bytelist_long )
     assert( bytelist_to_bytes(bytelist_long) == bytes_long )
 
+
 def test_bytelist():
     
     assert( bytelist_lshift(bytelist_short, 4) == [214, 159, 148, 0] )
@@ -93,7 +96,8 @@ def test_bytelist():
     
     assert( bytelist_to_uint(bytelist_short, 26) == uint_short )
     assert( bytelist_to_uint(bytelist_long, 2600) == uint_long )
-    
+
+
 def test_int():
     
     assert( bytes_to_uint(bytes_short, 26) == uint_short )
@@ -103,6 +107,7 @@ def test_int():
     assert( uint_to_bytes(uint_long, 2600) == bytes_long )
     
     assert( decompose_uint(13, 20293605) == [7, 6, 12, 6, 8, 2, 4] )
+
 
 def test_blb():
     blb = bytes_lshift_bnd
@@ -155,6 +160,7 @@ def test_blb():
     assert( blb(b'\xff\xff\xff\xff', 25, 6) == (63, b'\xff\xff', 224) )
     assert( blb(b'\xff\xff\xff\xff', 25, 7) == (127, b'\xff\xff', 192) )
 
+
 def test_pack():
     
     val0 = [(TYPE_BYTES, b'AAAA', 28),
@@ -193,6 +199,7 @@ def test_pack():
     assert( pack_val(*val2) == ( \
              b'\x89\x05\x07\xff\xff\xff`\x00\x00\x00\x00\x00\x01\x00 \x00\x00\x00\x00\x00\x00N"\x84\x84\x84\x84\x84\xc2\xc4\xc6\xc8\xca\xcf\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xfc\x9c\xa3e#\xa2\x16\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x06a\xef\xdf.;\x19\xf7\xc0E\xf1V66666666666666666666666666666666666666666666666660',
              3228) )
+
 
 def test_charpy():
     
@@ -285,7 +292,7 @@ def test_charpy():
     assert( A.to_bytes() == b'gros test\x00\x00\x00' )
     A.set_int_le(-1816384134241655602, 15*8)
     assert( A.to_bytes() == b'\xce\xe4\xde\xe6@\xe8\xca\xe6\xff\xff\xff\xff\xff\xff\xff' )
-    
+
 
 def test_elt_1():
     
@@ -300,10 +307,13 @@ def test_elt_1():
             Uint('f', desc='flag', val=0, bl=1, trans=True)
             )
     
-    #return Test
     t = Test('T')
+    #return t
+    buf = t.to_bytes()
+    jso = t.to_json()
     
-    assert( t.to_bytes() == b'abcd\x00\x00\xa1\x000\x19Y\x99\xda\x1aZ\x9a\xdb\x1b[\x9b\xdc\x1c\\\x9c' )
+    assert( buf == b'abcd\x00\x00\xa1\x000\x19Y\x99\xda\x1aZ\x9a\xdb\x1b[\x9b\xdc\x1c\\\x9c' )
+    assert( jso == '["T",\n ["s0", "61626364"],\n ["u0", 10],\n ["u1", 1024],\n ["i0", -64],\n ["s1", "65666768696a6b6c6d6e6f70717273"]]' )
     assert( t.to_uint() == 596964200264834337516354954544542937658015219270340253479 )
     assert( t.to_int() == 596964200264834337516354954544542937658015219270340253479 )
     assert( t.get_bl() == 190 )
@@ -317,7 +327,26 @@ def test_elt_1():
     assert( t['u0'].get_val() == 10 )
     assert( t['i0'].get_val() == -64 )
     
+    t.set_val(None)
+    t.from_bytes(buf)
+    assert( t[0].to_bytes() == b'abcd' )
+    assert( t[1].to_bytes() == b'\x00\x00\xa0' )
+    assert( t[2].to_bytes() == b'\x10\x00' )
+    assert( t[3].to_bytes() == b'\xc0' )
+    assert( t[4].to_bytes() == b'efghijklmnopqrp' )
+    assert( t[5].to_bytes() == b'' )
+    
+    t.set_val(None)
+    t.from_json(jso)
+    assert( t[0].to_bytes() == b'abcd' )
+    assert( t[1].to_bytes() == b'\x00\x00\xa0' )
+    assert( t[2].to_bytes() == b'\x10\x00' )
+    assert( t[3].to_bytes() == b'\xc0' )
+    assert( t[4].to_bytes() == b'efghijklmnopqrp' )
+    assert( t[5].to_bytes() == b'' )
+    
     buf = b'abcd' * 6
+    t.set_val(None)
     t.from_bytes(buf)
     
     assert( t[0].get_val() == b'abcd' )
@@ -327,6 +356,7 @@ def test_elt_1():
     assert( t[4].get_val() == b'\x89\x8d\x91\x85\x89\x8d\x91\x85\x89\x8d\x91\x85\x89\x8d\x90' )
     
     return t
+
 
 def test_elt_2():
     
@@ -350,6 +380,15 @@ def test_elt_2():
     t['F2'].set_val(1)
     t['res'].set_val(0)
     t['L'].set_val(t['V'].get_bl())
+    
+    if python_version < 3:
+        assert( repr(t) == "<TestTLV : <T [Tag] : 0b00000010 (Tag2)><F1 [Flag1] : 1><F2 [Flag2] : 1><res [Reserved] : 0><L [Length] : 104><V [Value] : 'default value'>>" )
+    else:
+        assert( repr(t) == "<TestTLV : <T [Tag] : 0b00000010 (Tag2)><F1 [Flag1] : 1><F2 [Flag2] : 1><res [Reserved] : 0><L [Length] : 104><V [Value] : b'default value'>>" )
+    
+    assert( t.to_json() == '["TestTLV",\n ["T", 2],\n ["F1", 1],\n ["F2", 1],\n ["res", 0],\n ["L", 104],\n ["V", "64656661756c742076616c7565"]]' )
+    t.set_val(None)
+    assert( t.from_json('["TestTLV",\n ["T", 2],\n ["F1", 1],\n ["F2", 1],\n ["res", 0],\n ["L", 104],\n ["V", "64656661756c742076616c7565"]]') == 110 )
     
     if python_version < 3:
         assert( repr(t) == "<TestTLV : <T [Tag] : 0b00000010 (Tag2)><F1 [Flag1] : 1><F2 [Flag2] : 1><res [Reserved] : 0><L [Length] : 104><V [Value] : 'default value'>>" )
@@ -387,6 +426,15 @@ def test_elt_2():
     assert( t.to_bytes() == b'\x01?\xff\x15another default value' )
     assert( t['L']() == 21 )
     t.from_bytes(b'abcd'*30)
+    assert( t['T']() == 97 )
+    assert( t['F1']() == 0 )
+    assert( t['F2']() == 3 )
+    assert( t['res']() == 611 )
+    assert( t['L']() == 100 )
+    assert( t['V']() == 25*b'abcd' )
+    assert( t.to_json() == '["TestTLV2",\n ["T", 97],\n ["F1", 0],\n ["F2", 3],\n ["res", 611],\n ["L", 100],\n ["V", "61626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364"]]')
+    t.set_val(None)
+    assert( t.from_json('["TestTLV2",\n ["T", 97],\n ["F1", 0],\n ["F2", 3],\n ["res", 611],\n ["L", 100],\n ["V", "61626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364"]]') == 288 )
     assert( t['T']() == 97 )
     assert( t['F1']() == 0 )
     assert( t['F2']() == 3 )
@@ -462,6 +510,8 @@ def test_elt_2():
     
     assert( t1.to_bytes() == b'\x14\xc0@\x02\x045\xd5\xb8\x81\xc1\x95\xd1\xa5\xd0\x81\xd1\xc9\xd5\x8c\x10C\x9d[\x88\x19\xdc\x9b\xdc\xc8\x1bXX\xda\x1a[\x80' )
     assert( t2.get_val() == [5, 3, 0, 256, [2, 0, 1, 13, b'un petit truc'], [1, 0, 1, 14, b'un gros machin']] )
+    assert( t1.to_json() == '["another_test_B",\n ["T", 5],\n ["F1", 3],\n ["F2", 0],\n ["L", 256],\n ["TestA",\n  ["T", 2],\n  ["F1", 0],\n  ["F2", 1],\n  ["L", 13],\n  ["V", "756e2070657469742074727563"]],\n ["TestA",\n  ["T", 1],\n  ["F1", 0],\n  ["F2", 1],\n  ["L", 14],\n  ["V", "756e2067726f73206d616368696e"]]]' )
+    assert( t2.to_json() == '["yet_another_test_B",\n ["T", 5],\n ["F1", 3],\n ["F2", 0],\n ["L", 256],\n ["TestA",\n  ["T", 2],\n  ["F1", 0],\n  ["F2", 1],\n  ["L", 13],\n  ["V", "756e2070657469742074727563"]],\n ["TestA",\n  ["T", 1],\n  ["F1", 0],\n  ["F2", 1],\n  ["L", 14],\n  ["V", "756e2067726f73206d616368696e"]]]' )
     
     
     class TestC(Array):
@@ -471,12 +521,14 @@ def test_elt_2():
     t = TestC('pouet')
     t.set_val({0:{'T':5, 'F1':3, 'F2':0, 4:{'T':2, 'V':b'un petit truc'}, 5:{'T':1, 'V':b'un gros machin'}},
                3:{'T':1, 'F1':1, 'F2':1, 4:{'T':7, 'V':b'un gros truc'}, 5:{'T':3, 'V':b'un petit machin'}}})
-    
+    return t
     assert( t.to_bytes() == b"\x14\xc0@\x02\x045\xd5\xb8\x81\xc1\x95\xd1\xa5\xd0\x81\xd1\xc9\xd5\x8c\x10C\x9d[\x88\x19\xdc\x9b\xdc\xc8\x1bXX\xda\x1a[\x80\x04\x15\x00A\x18super mega default value\x08\x10\xd7V\xc7G&\x12\x066\xf6\xc6\xf7&V@\x01\x05@\x10F\x1c\xdd\\\x19\\\x88\x1bYY\xd8H\x19\x19Y\x98][\x1d\x08\x1d\x98[\x1dYB\x045\xd5\xb1\xd1\xc9\x84\x81\x8d\xbd\xb1\xbd\xc9\x95\x90\x11A\x00\x1c\x10\xc7V\xe2\x06w&\xf72\x07G'V0\xc1\x0fun petit machin" )
+    assert( t.to_json() == '["pouet",\n ["TestB",\n  ["T", 5],\n  ["F1", 3],\n  ["F2", 0],\n  ["L", 256],\n  ["TestA",\n   ["T", 2],\n   ["F1", 0],\n   ["F2", 1],\n   ["L", 13],\n   ["V", "756e2070657469742074727563"]],\n  ["TestA",\n   ["T", 1],\n   ["F1", 0],\n   ["F2", 1],\n   ["L", 14],\n   ["V", "756e2067726f73206d616368696e"]]],\n ["TestB",\n  ["T", 0],\n  ["F1", 0],\n  ["F2", 1],\n  ["L", 336],\n  ["TestA",\n   ["T", 1],\n   ["F1", 0],\n   ["F2", 1],\n   ["L", 24],\n   ["V", "7375706572206d6567612064656661756c742076616c7565"]],\n  ["TestA",\n   ["T", 2],\n   ["F1", 0],\n   ["F2", 1],\n   ["L", 13],\n   ["V", "756c74726120636f6c6f726564"]]],\n ["TestB",\n  ["T", 0],\n  ["F1", 0],\n  ["F2", 1],\n  ["L", 336],\n  ["TestA",\n   ["T", 1],\n   ["F1", 0],\n   ["F2", 1],\n   ["L", 24],\n   ["V", "7375706572206d6567612064656661756c742076616c7565"]],\n  ["TestA",\n   ["T", 2],\n   ["F1", 0],\n   ["F2", 1],\n   ["L", 13],\n   ["V", "756c74726120636f6c6f726564"]]],\n ["TestB",\n  ["T", 1],\n  ["F1", 1],\n  ["F2", 1],\n  ["L", 256],\n  ["TestA",\n   ["T", 7],\n   ["F1", 0],\n   ["F2", 1],\n   ["L", 12],\n   ["V", "756e2067726f732074727563"]],\n  ["TestA",\n   ["T", 3],\n   ["F1", 0],\n   ["F2", 1],\n   ["L", 15],\n   ["V", "756e207065746974206d616368696e"]]]]' )
     
     t1 = TestC('prout')
     t1.from_bytes( t.to_bytes() )
     assert( t1.to_bytes() == b"\x14\xc0@\x02\x045\xd5\xb8\x81\xc1\x95\xd1\xa5\xd0\x81\xd1\xc9\xd5\x8c\x10C\x9d[\x88\x19\xdc\x9b\xdc\xc8\x1bXX\xda\x1a[\x80\x04\x15\x00A\x18super mega default value\x08\x10\xd7V\xc7G&\x12\x066\xf6\xc6\xf7&V@\x01\x05@\x10F\x1c\xdd\\\x19\\\x88\x1bYY\xd8H\x19\x19Y\x98][\x1d\x08\x1d\x98[\x1dYB\x045\xd5\xb1\xd1\xc9\x84\x81\x8d\xbd\xb1\xbd\xc9\x95\x90\x11A\x00\x1c\x10\xc7V\xe2\x06w&\xf72\x07G'V0\xc1\x0fun petit machin" )
+    assert( t1.to_json()[11:] == t.to_json()[11:] ) # jump over the main field name
     assert( t.get_val() == t1.get_val() )
     
     return t
@@ -492,7 +544,7 @@ def test_elt_3():
         def __init__(self, *args, **kwargs):
             Envelope.__init__(self, *args, **kwargs)
             self[1].set_valauto(lambda: self[2].get_len())
-            self[2].set_blauto(lambda: self[0].get_val()<<3)
+            self[2].set_blauto(lambda: self[1].get_val()<<3)
             
     class TLV16(Envelope):
         _GEN = (
@@ -503,37 +555,50 @@ def test_elt_3():
         def __init__(self, *args, **kwargs):
             Envelope.__init__(self, *args, **kwargs)
             self[1].set_valauto(lambda: self[2].get_len())
-            self[2].set_blauto(lambda: self[0].get_val()<<3)
+            self[2].set_blauto(lambda: self[1].get_val()<<3)
     
     class TLVArray(Envelope):
         _GEN = (
             Uint8('Fmt', val=1),
             Alt('TLVs', GEN={
-                1: Array(GEN=TLV8()),
-                2: Array(GEN=TLV16())},
+                1: Array('TLV8Seq', GEN=TLV8()),
+                2: Array('TLV16Seq', GEN=TLV16())},
                 sel=lambda self: self.get_env()[0].get_val())
             )
     
     t1 = TLVArray(val={'Fmt':1, 'TLVs':[{'T':1, 'V':b'aaa'}, {'T':18, 'V':b'BBBB'}]})
-    return t1
     v1 = [1, [[1, 3, b'aaa'], [18, 4, b'BBBB']]]
     b1 = b'\x01\x01\x03aaa\x12\x04BBBB'
+    j1 = '["TLVArray",\n ["Fmt", 1],\n ["TLV8Seq",\n  ["TLV8",\n   ["T", 1],\n   ["L", 3],\n   ["V", "616161"]],\n  ["TLV8",\n   ["T", 18],\n   ["L", 4],\n   ["V", "42424242"]]]]'
     assert( t1.get_val()  == v1 )
     assert( t1.to_bytes() == b1 )
+    assert( t1.to_json() == j1 )
+    t1.set_val(None)
+    assert( t1.from_json(j1) == 158 )
+    assert( t1.get_val() == v1 )
+    #return t1
     
     t2 = TLVArray()
+    #return t1, t2
     t2.from_bytes(b1)
     assert( t2.get_val()  == v1 )
     assert( t2.to_bytes() == b1 )
+    assert( t2.to_json() == j1 )
+    t2.set_val(None)
+    t2.from_json(j1)
+    assert( t2.get_val()  == v1 )
+    assert( t2.to_bytes() == b1 )
+    assert( t2.to_json() == j1 )
     
     t3 = TLVArray(val={'Fmt':2, 'TLVs':[{'T':1, 'V':b'aaa'}, {'T':18, 'V':b'BBBB'}]})
+    #return t1, t2, t3
     b3 = b'\x02\x00\x01\x00\x03aaa\x00\x12\x00\x04BBBB'
-    assert( t3.get_val()  == v1 )
-    assert( t3.to_bytes() == b3 )
+    assert( t3.get_val()[1] == v1[1] )
+    assert( t3.to_bytes()   == b3 )
     
     t2.from_bytes(b3)
-    assert( t2.get_val()  == v1 )
-    assert( t2.to_bytes() == b3 )
+    assert( t2.get_val()[1] == v1[1] )
+    assert( t2.to_bytes()   == b3 )
 
 
 #------------------------------------------------------------------------------#
@@ -628,14 +693,18 @@ def test_perf():
     print('test_perf_charpy_long: {0:.4f}'.format(Tf))
     
     print('[+] elt test 1')
-    Tg = timeit(test_elt_1, number=400)
+    Tg = timeit(test_elt_1, number=300)
     print('test_elt_1: {0:.4f}'.format(Tg))
     
     print('[+] elt test 2')
-    Th = timeit(test_elt_2, number=200)
+    Th = timeit(test_elt_2, number=100)
     print('test_elt_2: {0:.4f}'.format(Th))
     
-    print('[+] core total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te+Tf+Tg+Th))
+    print('[+] elt test 3')
+    Ti = timeit(test_elt_3, number=100)
+    print('test_elt_3: {0:.4f}'.format(Th))
+    
+    print('[+] core total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te+Tf+Tg+Th+Ti))
 
 if __name__ == '__main__':
     test_perf()
