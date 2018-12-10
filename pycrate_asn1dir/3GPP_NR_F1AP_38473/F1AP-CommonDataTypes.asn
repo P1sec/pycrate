@@ -1,3 +1,10 @@
+-- 3GPP TS 38.473 V15.3.0 (2018-09)
+-- 9.4.6	Common Definitions
+-- **************************************************************
+--
+-- Common definitions
+--
+-- **************************************************************
 
 F1AP-CommonDataTypes {
 itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
