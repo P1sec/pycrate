@@ -4,6 +4,7 @@
 # * Version : 0.3
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -35,6 +36,8 @@ from .refobj  import *
 from .setobj  import *
 from .asnobj  import *
 from .codecs  import *
+from .codecs  import *
+from .codecs  import _with_json
 from .asnobj_basic     import *
 from .asnobj_str       import *
 from .asnobj_construct import *
@@ -68,6 +71,7 @@ _ASN1ObjBasicLUT = {
     TYPE_TIME_GEN   : TIME_GEN,
     TYPE_TIME_UTC   : TIME_UTC
     }
+
 
 class OPEN(ASN1Obj):
     __doc__ = """
@@ -247,8 +251,8 @@ Single value: Python 2-tuple
             const_obj_type, const_obj = self._get_tab_obj()
             if const_obj_type == CLASET_NONE:
                 if not self._SILENT:
-                    asnlog('OPEN._from_per_ws: %s, unable to retrieve a table-looked up object, %s'\
-                           % (self.fullname(), err))
+                    asnlog('OPEN._from_per_ws: %s, unable to retrieve a table-looked up object'\
+                           % (self.fullname()))
                 Obj = None
             elif const_obj_type == CLASET_UNIQ:
                 Obj = const_obj
@@ -286,8 +290,8 @@ Single value: Python 2-tuple
             const_obj_type, const_obj = self._get_tab_obj()
             if const_obj_type == CLASET_NONE:
                 if not self._SILENT:
-                    asnlog('OPEN._from_per: %s, unable to retrieve a table-looked up object, %s'\
-                           % (self.fullname(), err))
+                    asnlog('OPEN._from_per: %s, unable to retrieve a table-looked up object'\
+                           % (self.fullname()))
                 Obj = None
             elif const_obj_type == CLASET_UNIQ:
                 Obj = const_obj
@@ -298,7 +302,7 @@ Single value: Python 2-tuple
         else:
             # TODO: another way to provide a (set of) potential defined object(s)
             # is to look into value constraint self._const_val
-            # if we have multiple, then we would have to bruteforce the decoding 
+            # if we have multiple, then we would have to bruteforce the decoding
             # until a correct one is found !!!
             Obj = None
         #
@@ -578,6 +582,63 @@ Single value: Python 2-tuple
         else:
             lval = sum([f[2] for f in TLV]) >> 3
             return 1, lval, TLV
+    
+    ###
+    # conversion between internal value and ASN.1 JER encoding
+    ###
+    
+    if _with_json:
+        
+        def _from_jval(self, val):
+            # same as PER decodeing
+            # try to get a defined object from a table constraint
+            if self._TAB_LUT and self._const_tab and self._const_tab_at:
+                const_obj_type, const_obj = self._get_tab_obj()
+                if const_obj_type == CLASET_NONE:
+                    if not self._SILENT:
+                        asnlog('OPEN._from_jval: %s, unable to retrieve a table-looked up object, %s'\
+                               % (self.fullname(), err))
+                    Obj = None
+                elif const_obj_type == CLASET_UNIQ:
+                    Obj = const_obj
+                else:
+                    # const_obj_type == CLASET_MULT
+                    Obj = const_obj[0]
+            else:
+                Obj = None
+            #
+            if Obj is None:
+                if isinstance(val, str_types):
+                    try:
+                        self._val = ('_unk_004', unhexlify(val))
+                    except TypeError:
+                        raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
+                              .format(self.fullname(), val)))
+                else:
+                    #raise(ASN1JERDecodeErr('{0}: unknown wrapped object, {1!r}'\
+                    #      .format(self.fullname(), val)))
+                    if not self._SILENT:
+                        asnlog('OPEN._from_jval: %s, unknown value type, %r' % (self.fullname(), val))
+                    self._val = ('_unk_004', val)
+            else:
+                Obj._from_jval(val)
+                if Obj._typeref is not None:
+                    self._val = (Obj._typeref.called[1], Obj._val)
+                else:
+                    self._val = (Obj.TYPE, Obj._val)
+        
+        def _to_jval(self):
+            if isinstance(self._val[0], ASN1Obj):
+                Obj = self._val[0]
+            else:
+                if isinstance(self._val[0], str_types) and self._val[0][:5] == '_unk_':
+                    if isinstance(self._val[1], bytes_types):
+                        return hexlify(self._val[1]).decode()
+                    else:
+                        return self._val[1]
+                Obj = self._get_val_obj(self._val[0])
+            Obj._val = self._val[1]
+            return Obj._to_jval()
 
 
 class ANY(OPEN):

@@ -4,6 +4,7 @@
 # * Version : 0.3
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -35,6 +36,7 @@ from .refobj  import *
 from .setobj  import *
 from .asnobj  import *
 from .codecs  import *
+from .codecs  import _with_json
 
 
 #------------------------------------------------------------------------------#
@@ -548,6 +550,44 @@ Specific attributes:
         else:
             lval = sum([f[2] for f in TLV]) >> 3
             return 1, lval, TLV
+    
+    ###
+    # conversion between internal value and ASN.1 JER encoding
+    ###
+    
+    if _with_json:
+        
+        def _from_jval(self, val):
+            try:
+                ident, value = tuple(val.items())[0]
+            except Exception:
+                raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
+                      .format(self.fullname(), val)))
+            if ident in self._cont:
+                _par = self._cont[ident]._parent
+                self._cont[ident]._parent = self
+                self._cont[ident]._from_jval(value)
+                self._val = (ident, self._cont[ident]._val)
+                self._cont[ident]._parent = _par
+                #self._cont[ident]._val = None
+            else:
+                # unknown extended value, keeping value as-is
+                self._val = ('_ext_%s' % ident, value)
+        
+        def _to_jval(self):
+            ident = self._val[0]
+            if ident in self._cont:
+                self._cont[ident]._val = self._val[1]
+                _par = self._cont[ident]._parent
+                self._cont[ident]._parent = self
+                ret = {ident : self._cont[ident]._to_jval()}
+                self._cont[ident]._parent = _par
+                #self._cont[ident]._val = None
+            else:
+                # reencoding unknown value
+                assert( ident[:5] == '_ext_' )
+                ret = {ident[5:] : self._val[1]}
+            return ret
 
 
 #------------------------------------------------------------------------------#
@@ -1075,6 +1115,48 @@ class _CONSTRUCT(ASN1Obj):
             GEN.extend(_gen_ext)
         #
         return GEN
+    
+    ###
+    # conversion between internal value and ASN.1 JER encoding
+    ###
+    
+    if _with_json:
+        
+        def _from_jval(self, val):
+            if not isinstance(val, dict):
+                raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
+                      .format(self.fullname(), val)))
+            self._val, val_cp = {}, dict(val)
+            for ident, Comp in self._cont.items():
+                if ident in val:
+                    _par = Comp._parent
+                    Comp._parent = self
+                    Comp._from_jval( val[ident] )
+                    Comp._parent = _par
+                    self._val[ident] = Comp._val
+                    del val_cp[ident]
+            if val_cp:
+                for ident, comp_val in val_cp:
+                    self._val['_ext_%s' % ident] = comp_val
+        
+        def _to_jval(self):
+            if not self._val:
+                return {}
+            else:
+                ret, val = {}, dict(self._val)
+                for ident in self._cont:
+                    if ident in val:
+                        _par = self._cont[ident]._parent
+                        self._cont[ident]._parent = self
+                        self._cont[ident]._val = val[ident]
+                        ret[ident] = self._cont[ident]._to_jval()
+                        self._cont[ident]._parent = _par
+                        del val[ident]
+                if val:
+                    # unknown extended components are there too
+                    for ident, comp_val in val.items():
+                        ret['_ext_%s' % ident] = comp_val
+                return ret
 
 
 class SEQ(_CONSTRUCT):
@@ -1981,7 +2063,7 @@ class _CONSTRUCT_OF(ASN1Obj):
                 txt = txt[1:].strip()
             elif txt[0:1] == '}':
                 self._cont._parent = _par
-                self._val = self._val
+                #self._val = self._val
                 return txt[1:].strip()
             else:
                 raise(ASN1ASNDecoderErr('{0}: invalid text, {1!r}'\
@@ -2426,6 +2508,36 @@ class _CONSTRUCT_OF(ASN1Obj):
         #
         Comp._parent = _par
         return 1, lval, TLV
+    
+    ###
+    # conversion between internal value and ASN.1 JER encoding
+    ###
+    
+    if _with_json:
+        
+        def _from_jval(self, val):
+            if not isinstance(val, list):
+                raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
+                      .format(self.fullname(), val)))
+            _par = self._cont._parent
+            self._cont._parent = self
+            self._val = []
+            for v in val:
+                self._cont._from_jval(v)
+                self._val.append(self._cont._val)
+            self._cont._parent = _par
+        
+        def _to_jval(self):
+            if not self._val:
+                return []
+            else:
+                _par, ret = self._cont._parent, []
+                self._cont._parent = self
+                for v in self._val:
+                    self._cont._val = v
+                    ret.append( self._cont._to_jval() )
+                self._cont._parent = _par
+                return ret
 
 
 class SEQ_OF(_CONSTRUCT_OF):

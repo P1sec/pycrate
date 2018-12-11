@@ -4,6 +4,7 @@
 # * Version : 0.3
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -568,6 +569,8 @@ Specific attribute:
                 ( 1, None, None): 'PLUS-INFINITY',
                 ( 0, None, None): 'NOT-A-NUMBER'}
     
+    _JER_RE = re.compile('[ 0]{0,}([-+]{0,1}[0-9]{0,})(?:[\.,]{1}([0-9]{0,})){0,1}[eE]([-+]{0,1}[0-9]{1,})')
+    
     def _safechk_val(self, val):
         self._safechk_val_real(val)
     
@@ -869,14 +872,50 @@ Specific attribute:
                 elif val == float('-inf'):
                     self._val = (-1, None, None)
                 else:
-                    # TODO: convert float to {mantissa, base, exponent}
-                    raise(ASN1NotSuppErr('{0}: float conversion required'.format(self.fullname())))
+                    num, den = val.as_integer_ratio()
+                    # den is the fractionnal denominator, which must be a pow of 2
+                    p = 0
+                    while den > 1:
+                        den >> 1
+                        p += 1
+                    self._val = (num, 2, p)
+            elif isinstance(val, dict):
+                try:
+                    sci = val['base10Value']
+                except KeyError:
+                    raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
+                          .format(self.fullname(), val)))
+                m = self._JER_RE.match(sci)
+                if not m:
+                    raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
+                          .format(self.fullname(), val)))
+                i, d, e = m.groups()
+                # remove trailing zero of the decimal part and adjust 
+                # the exponent
+                if d:
+                    d = d.rstrip('0')
+                    if not e:
+                        e = -len(d)
+                    else:
+                        e = int(e) - len(d)
+                    self._val = (int(i+d), 10, e)
+                else:
+                    self._val = (int(i), 10, int(e))
             else:
                 raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
                       .format(self.fullname(), val)))
         
         def _to_jval(self):
-            return self._val[0] * (self._val[1]**self._val[2])
+            if self._val[1] == 2:
+                if self._val[2] >= 0:
+                    return self._val[0] * (2<<self._val[2])
+                else:
+                    return {'base10Value': '%s' % (self._val[0]*(2**self._val[2]))}
+            else:
+                #self._val[1] == 10
+                # TODO: some constraints on the mantissa / base / exponent should
+                # lead to an integer encoding instead of this scientific notation
+                return {'base10Value': '%ie%i' % (self._val[0], self._val[2])}
 
 
 #------------------------------------------------------------------------------#

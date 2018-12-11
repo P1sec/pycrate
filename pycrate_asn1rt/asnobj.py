@@ -4,6 +4,7 @@
 # * Version : 0.3
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -345,8 +346,8 @@ class ASN1Obj(Element):
             const_val_type, const_val = self._get_tab_obj()
             if const_val_type == CLASET_NONE:
                 if not self._SILENT:
-                    asnlog('%s._from_per_ws: %s, unable to retrieve a defined object, %s'\
-                           % (self.__class__.__name__, self._name, err))
+                    asnlog('%s._from_per_ws: %s, unable to retrieve a defined object'\
+                           % (self.__class__.__name__, self._name))
             elif self._mode == MODE_VALUE and const_val_type == CLASET_UNIQ:
                 if val != const_val:
                     raise(ASN1ObjErr('{0}: value out of table constraint, {1!r}'\
@@ -1669,15 +1670,25 @@ class ASN1Obj(Element):
             except JSONDecodeError as err:
                 raise(ASN1JERDecodeErr('{0}: invalid json, {1}'\
                       .format(self.fullname(), err)))
-            else:
-                self._from_jval(val)
+            self._from_jval(val)
+            if self._SAFE_BND:
+                self._safechk_bnd(self._val)
         
         def _to_jval(self):
             raise(ASN1NotSuppErr(self.fullname()))
         
-        def to_jer(self):
-            val = self._to_jval()
-            return JsonEnc.encode(val)
+        def to_jer(self, val=None):
+            if val is not None:
+                self.set_val(val)
+            if self._val is not None:
+                val = self._to_jval()
+                return JsonEnc.encode(val)
+            else:
+                return None
+        
+        # align API with pycrate_core
+        to_json   = to_jer
+        from_json = from_jer
 
 
 def _save_ber_params():

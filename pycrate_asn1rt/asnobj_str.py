@@ -4,6 +4,7 @@
 # * Version : 0.3
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -938,7 +939,7 @@ Specific constraints attributes:
         def _from_jval(self, val):
             if isinstance(val, str_types):
                 # ensure the sz constraint is fixed
-                if not self._const_sz or self._const_sz.ra != 1 or len(self._const_sz.rv) != 1:
+                if not self._const_sz or self._const_sz.ra != 1 or len(self._const_sz._rv) != 1:
                     raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
                           .format(self.fullname(), val)))
                 else:
@@ -947,14 +948,33 @@ Specific constraints attributes:
                     except ValueError:
                         raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
                               .format(self.fullname(), val)))
-                    bl = self._const_sz.rv[0]
+                    bl = self._const_sz._rv[0]
             elif isinstance(val, dict):
-                try:
+                if 'value' in val and 'length' in val:
                     bl  = val['length']
-                    val = val['value']
-                except KeyError:
-                    raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
-                          .format(self.fullname(), val)))
+                    val = int(val['value'], 16)
+                elif self._const_cont is not None:
+                    if self._const_cont_enc is not None:
+                        # TODO: different codec to be used
+                        if not self._SILENT:
+                            raise(ASN1NotSuppErr('{0}: specific CONTAINING decoder unhandled'\
+                                  .format(self.fullname())))
+                    Cont = self._const_cont
+                    if Cont._typeref:
+                        ident = Cont._typeref.called[1]
+                    else:
+                        ident = Cont.TYPE
+                    _par = Cont._parent
+                    Cont._parent = self
+                    try:
+                        Cont._from_jval(val[ident])
+                    except KeyError:
+                        Cont._parent = par
+                        raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
+                              .format(self.fullname(), val)))
+                    Cont._parent = _par
+                    self._val = (ident, Cont._val)
+                    return
             else:
                 raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
                       .format(self.fullname(), val)))
@@ -965,16 +985,35 @@ Specific constraints attributes:
         
         def _to_jval(self):
             if not isinstance(self._val[0], integer_types):
-                raise(ASN1NotSuppErr('{0}: CONTAINING value format'.format(self.fullname())))
-            if self._const_sz and self._const_sz.ra == 1 and len(self._const_sz.rv) == 1:
+                # value is for a contained object to be encoded
+                # using a CHOICE-like encoding
+                Cont = self._get_val_obj(self._val[0])
+                if Cont == self._const_cont and self._const_cont_enc is not None:
+                    # TODO: different codec to be used
+                    raise(ASN1NotSuppErr('{0}: specific CONTAINING encoder unhandled'\
+                          .format(self.fullname())))
+                Cont._val = self._val[1]
+                _par = Cont._parent
+                Cont._parent = self
+                val = Cont._to_jval()
+                Cont._parent = _par
+                if Cont._typeref:
+                    return {Cont._typeref.called[1]: val}
+                else:
+                    return {Cont.TYPE: val}
+            else:
                 val, bl = self._val
                 bl_rnd = -bl%8
-                if bl_rnd:
-                    return uint_to_hex(val<<bl_rnd, bl+bl_rnd)
+                if self._const_sz and self._const_sz.ra == 1 and len(self._const_sz._rv) == 1:
+                    if bl_rnd:
+                        return uint_to_hex(val<<bl_rnd, bl+bl_rnd)
+                    else:
+                        return uint_to_hex(val, bl)
                 else:
-                    return uint_to_hex(val, bl)
-            else:
-                return {'value': self._val[0], 'length': self._val[1]}
+                    if bl_rnd:
+                        return {'value': uint_to_hex(val<<bl_rnd, bl+bl_rnd), 'length': bl}
+                    else:
+                        return {'value': uint_to_hex(val, bl), 'length': bl}
 
 
 class OCT_STR(ASN1Obj):
@@ -1545,20 +1584,60 @@ Specific constraints attributes:
     ###
     # conversion between internal value and ASN.1 JER encoding
     ###
+    # TODO: should support the alternative value based on the CONTAINING 
+    # constraint (i.e. CHOICE-like)
     
     if _with_json:
         
         def _from_jval(self, val):
-            try:
-                self._val = unhexlify(val)
-            except TypeError:
-                raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
-                      .format(self.fullname(), val)))
+            if isinstance(val, str_types):
+                try:
+                    self._val = unhexlify(val)
+                except TypeError:
+                    raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
+                          .format(self.fullname(), val)))
+            elif self._const_cont is not None:
+                if self._const_cont_enc is not None:
+                    # TODO: different codec to be used
+                    if not self._SILENT:
+                        raise(ASN1NotSuppErr('{0}: specific CONTAINING decoder unhandled'\
+                              .format(self.fullname())))
+                Cont = self._const_cont
+                if Cont._typeref:
+                    ident = Cont._typeref.called[1]
+                else:
+                    ident = Cont.TYPE
+                _par = Cont._parent
+                Cont._parent = self
+                try:
+                    Cont._from_jval(val[ident])
+                except KeyError:
+                    Cont._parent = _par
+                    raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
+                          .format(self.fullname(), val)))
+                Cont._parent = _par
+                self._val = (ident, Cont._val)
         
         def _to_jval(self):
-            if not isinstance(self._val, bytes_types):
-                raise(ASN1NotSuppErr('{0}: CONTAINING value format'.format(self.fullname())))
-            return hexlify(self._val).decode()
+            if isinstance(self._val, bytes_types):
+                return hexlify(self._val).decode()
+            else:
+                # value is for a contained object to be encoded
+                # using a CHOICE-like encoding
+                Cont = self._get_val_obj(self._val[0])
+                if Cont == self._const_cont and self._const_cont_enc is not None:
+                    # TODO: different codec to be used
+                    raise(ASN1NotSuppErr('{0}: specific CONTAINING encoder unhandled'\
+                          .format(self.fullname())))
+                Cont._val = self._val[1]
+                _par = Cont._parent
+                Cont._parent = self
+                val = Cont._to_jval()
+                Cont._parent = _par
+                if Cont._typeref:
+                    return {Cont._typeref.called[1]: val}
+                else:
+                    return {Cont.TYPE: val}
 
 
 #------------------------------------------------------------------------------#
@@ -1694,7 +1773,6 @@ Virtual parent for any ASN.1 *String object
                 else:
                     # 3) size has a single possible size
                     ldet = self._const_sz.lb
-                    # TODO: ensure this ldet value is OK for realignment
                     if ASN1CodecPER.ALIGNED and ldet > 2 and ASN1CodecPER._off[-1] % 8:
                         # realignment
                         GEN.extend( ASN1CodecPER.decode_pad_ws(char) )
@@ -1871,7 +1949,6 @@ Virtual parent for any ASN.1 *String object
                 else:
                     # 3) size has a single possible size
                     ldet = self._const_sz.lb
-                    # TODO: ensure this ldet value is OK for realignment
                     if ASN1CodecPER.ALIGNED and ldet > 2 and ASN1CodecPER._off[-1] % 8:
                         # realignment
                         ASN1CodecPER.decode_pad(char)
@@ -2042,7 +2119,6 @@ Virtual parent for any ASN.1 *String object
                     self.__to_per_ws_szunconst(val, cdyn, ldet, GEN)
                     return self._struct
                 else:
-                    # TODO: ensure this ldet value is OK for realignment
                     if ASN1CodecPER.ALIGNED and ldet > 2 and ASN1CodecPER._off[-1] % 8:
                         # realignment
                         GEN.extend( ASN1CodecPER.encode_pad_ws() )
@@ -2175,7 +2251,6 @@ Virtual parent for any ASN.1 *String object
                     self.__to_per_szunconst(val, cdyn, ldet, GEN)
                     return GEN
                 else:
-                    # TODO: ensure this ldet value is OK for realignment
                     if ASN1CodecPER.ALIGNED and ldet > 2 and ASN1CodecPER._off[-1] % 8:
                         # realignment
                         GEN.extend( ASN1CodecPER.encode_pad() )
@@ -2457,6 +2532,10 @@ ASN.1 basic type TeletexString object
     
     TYPE  = TYPE_STR_TELE
     TAG   = 20
+    
+    if _with_json:
+        _from_jval = OCT_STR._from_jval
+        _to_jval   = OCT_STR._to_jval
 
 
 class STR_T61(_String):
@@ -2469,6 +2548,10 @@ ASN.1 basic type T61String object
     
     TYPE  = TYPE_STR_T61
     TAG   = 20
+    
+    if _with_json:
+        _from_jval = OCT_STR._from_jval
+        _to_jval   = OCT_STR._to_jval
 
 
 class STR_VID(_String):
@@ -2481,6 +2564,10 @@ ASN.1 basic type VideotextString object
     
     TYPE  = TYPE_STR_VID
     TAG   = 21
+    
+    if _with_json:
+        _from_jval = OCT_STR._from_jval
+        _to_jval   = OCT_STR._to_jval
 
 
 class STR_IA5(_String):
@@ -2507,6 +2594,10 @@ ASN.1 basic type GraphicString object
     
     TYPE  = TYPE_STR_GRAPH
     TAG   = 25
+    
+    if _with_json:
+        _from_jval = OCT_STR._from_jval
+        _to_jval   = OCT_STR._to_jval
 
 
 class STR_VIS(_String):
@@ -2547,6 +2638,10 @@ ASN.1 basic type GenericString object
     
     TYPE  = TYPE_STR_GENE
     TAG   = 27
+    
+    if _with_json:
+        _from_jval = OCT_STR._from_jval
+        _to_jval   = OCT_STR._to_jval
 
 
 class STR_UNIV(_String):
@@ -2640,7 +2735,25 @@ VisibleString
         ret = _String._encode_ber_cont(self)
         self._val = val
         return ret
-
+    
+    ###
+    # conversion between internal value and ASN.1 JER encoding
+    ###
+    
+    if _with_json:
+        
+        def _from_jval(self, val):
+            _String._from_jval(self, val)
+            self._decode_cont(self._val)
+        
+        def _to_jval(self):
+            val = self._val
+            self._val = self._encode_cont(canon=True)
+            ret = _String._to_jval(self)
+            self._val = val
+            return ret
+        
+    
 
 class TIME_UTC(_Time):
     __doc__ = """

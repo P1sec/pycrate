@@ -31,13 +31,13 @@ from .utils import *
 from .err   import *
 
 try:
-    from json     import JSONEncoder, JSONDecoder, JSONEncodeError, JSONDecodeError
+    from json     import JSONEncoder, JSONDecoder, JSONDecodeError
     from binascii import hexlify, unhexlify
 except ImportError:
     _with_json = False
 else:
     _with_json = True
-    JsonEnc = JSONEncoder()
+    JsonEnc = JSONEncoder(sort_keys=True, indent=1)
     JsonDec = JSONDecoder()
 
 
