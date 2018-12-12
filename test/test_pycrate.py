@@ -38,6 +38,7 @@ from test.test_ether  import *
 from test.test_csn1   import *
 from test.test_asn1rt import *
 from test.test_mobile import *
+from test.test_gsmrr  import *
 from pycrate_asn1c.proc import compile_text, compile_spec, compile_all, \
                                generate_modules, PycrateGenerator, \
                                GLOBAL, ASN_SPECS
@@ -69,6 +70,7 @@ class TestPycrate(unittest.TestCase):
         test_charpy()
         test_elt_1()
         test_elt_2()
+        test_elt_3()
     
     # fmt_media objects
     def test_media(self):
@@ -136,13 +138,27 @@ class TestPycrate(unittest.TestCase):
     def test_csn1(self):
         print('[<>] testing pycrate_csn1')
         test_msnetcap()
+        test_mscm3()
         test_msracap()
-    
+        test_rcvnpdunumlist()
+        test_msracap()
+        test_si2qr()
+        test_si13r()
+        
     # mobile
     def test_mobile(self):
         print('[<>] testing pycrate_mobile')
-        test_nas_mo(nas_pdu_mo)
-        test_nas_mt(nas_pdu_mt)
+        test_nas_mo()
+        test_nas_mt()
+        test_sigtran()
+        test_sccp()
+    
+    # mobile / GSM RR
+    def test_gsmrr(self):
+        print('[<>] testing GSM RR in pycrate_mobile')
+        test_gsmrr_mo()
+        test_gsmrr_l2_mt()
+        test_gsmrr_mt()
 
 
 def test_perf_all():

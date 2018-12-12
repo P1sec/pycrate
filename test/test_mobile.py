@@ -38,6 +38,8 @@ from pycrate_mobile.NAS         import *
 from pycrate_mobile.SIGTRAN     import *
 from pycrate_mobile.SCCP        import *
 
+from pycrate_core.elt           import _with_json
+
 
 # uplink messages
 nas_pdu_mo = tuple(map(unhexlify, (
@@ -142,38 +144,66 @@ def test_nas_mo(nas_pdu=nas_pdu_mo):
     for pdu in nas_pdu:
         m, e = parse_NAS_MO(pdu)
         assert( e == 0 )
-        m.reautomate()
         v = m.get_val()
+        m.reautomate()
+        assert( m.get_val() == v )
         m.set_val(v)
         assert( m.to_bytes() == pdu )
+        #
+        if _with_json:
+            t = m.to_json()
+            m.from_json(t)
+            assert( m.get_val() == v )
+
 
 def test_nas_mt(nas_pdu=nas_pdu_mt):
     for pdu in nas_pdu:
         m, e = parse_NAS_MT(pdu)
         assert( e == 0 )
-        m.reautomate()
         v = m.get_val()
+        m.reautomate()
+        assert( m.get_val() == v )
         m.set_val(v)
         assert( m.to_bytes() == pdu )
+        #
+        #if _with_json:
+        #    t = m.to_json()
+        #    m.from_json(t)
+        #    assert( m.get_val() == v )
+
 
 def test_sigtran(sigtran_pdu=sigtran_pdu):
     for pdu in sigtran_pdu:
         S = SIGTRAN()
         S.from_bytes(pdu)
-        S.reautomate()
         v = S.get_val()
+        S.reautomate()
+        assert( S.get_val() == v )
         S.__init__()
         S.set_val(v)
         assert( S.to_bytes() == pdu )
+        #
+        #if _with_json:
+        #    t = m.to_json()
+        #    m.from_json(t)
+        #    assert( m.get_val() == v )
+
 
 def test_sccp(sccp_pdu=sccp_pdu):
     for pdu in sccp_pdu:
         m, e = parse_SCCP(pdu)
         assert( e == 0 )
-        m.reautomate()
         v = m.get_val()
+        m.reautomate()
+        assert( m.get_val() == v )
         m.set_val(v)
         assert( m.to_bytes() == pdu)
+        #
+        #if _with_json:
+        #    t = m.to_json()
+        #    m.from_json(t)
+        #    assert( m.get_val() == v )
+
 
 def test_perf():
     
