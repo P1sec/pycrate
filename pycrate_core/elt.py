@@ -2175,12 +2175,15 @@ class Envelope(Element):
         def _from_jval(self, val):
             if not isinstance(val, list):
                 raise(EltErr('{0} [_from_jval]: invalid format, {1!r}'.format(self._name, val)))
-            for i, e in enumerate(self._content):
+            i = 0
+            for e in self._content:
                 if not e.get_trans():
                     try:
                         e._from_jval_wrap(val[i])
                     except IndexError:
                         break
+                    else:
+                        i += 1
             # ensure all non-transparent elements were set
             for e in self._content[1+self._content.index(e):]:
                 if not e.get_trans() and e.get_bl():
@@ -3915,17 +3918,20 @@ class Sequence(Element):
             else:
                 # num is None, from_json will consume the txt until it raises
                 num = None
-            # 2) init content
-            self._content = []
-            # 3) consume txt and fill in self._content
+            # 2) consume txt and fill in self._content
             if num is not None and len(val) != num:
                 raise(EltErr('{0} [_from_jval]: invalid number of values: {1} instead of {2}'\
                       .format(self._name, len(val), num)))
-            for v in val:
-                clone = self._tmpl.clone()
-                clone._from_jval_wrap(v)
-                self._content.append(clone)
-                clone._env = self
+            # trying to keep potential mutated tmpl from the existing content
+            if len(self._content) < len(val):
+                while len(self._content) < len(val):
+                    clone = self._tmpl.clone()
+                    self._content.append(clone)
+                    clone._env = self
+            elif len(self._content) > len(val):
+                del self._content[len(val):]
+            for i, v in enumerate(val):
+                self._content[i]._from_jval_wrap(v)
         
         def _to_jval(self):
             if self._SAFE_STAT and self._num is not None and len(self._content) != self._num:
