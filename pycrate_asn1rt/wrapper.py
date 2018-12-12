@@ -29,6 +29,7 @@
 
 from pycrate_core.utils import TYPE_BYTES
 from pycrate_core.elt   import Element
+from pycrate_core.elt   import _with_json
 
 
 def gen_ber_wrapper(obj, asn_acquire=lambda:None, asn_release=lambda:None):
@@ -192,6 +193,28 @@ def gen_ber_wrapper(obj, asn_acquire=lambda:None, asn_release=lambda:None):
         
         def _asn_release(self):
             return asn_release()
+        
+        if _with_json:
+            
+            def _from_jval(self, val):
+                self._asn_acquire()
+                self.OBJ._from_jval(val)
+                self._val = self.OBJ._val
+                self._buf = self.OBJ.to_ber()
+                self._bl  = 8*len(self._buf)
+                self._asn_release()
+                if self.OBJ._SAFE_BND:
+                    self.OBJ._safechk_bnd(self.OBJ._val)
+            
+            def _to_jval(self):
+                self._asn_acquire()
+                self.OBJ._val = self._val
+                self._buf = self.OBJ.to_ber()
+                self._bl = 8*len(self._buf)
+                ret = self.OBJ._to_jval()
+                self._asn_release()
+                return ret
     
+    #
     return _ASNWrapper
 
