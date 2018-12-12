@@ -36,6 +36,8 @@ from pycrate_csn1dir.receive_npdu_number_list_value   import receive_npdu_number
 from pycrate_csn1dir.si2quater_rest_octets            import si2quater_rest_octets
 from pycrate_csn1dir.si_13_rest_octets                import si_13_rest_octets
 
+from pycrate_csn1.csnobj import _with_json
+
 
 def test_msnetcap():
     Obj = ms_network_capability_value_part.clone()
@@ -46,6 +48,11 @@ def test_msnetcap():
     rep = Obj.repr()
     assert( Obj.get_val() == val )
     assert( Obj.to_bytes() == buf )
+    #
+    if _with_json:
+        t = Obj.to_json()
+        Obj.from_json(t)
+        assert( Obj.get_val() == val )
 
 
 def test_mscm3():
@@ -111,7 +118,11 @@ def test_mscm3():
     rep = Obj.repr()
     assert( Obj.get_val() == val )
     assert( Obj.to_bytes() == buf )
-
+    #
+    if _with_json:
+        t = Obj.to_json()
+        Obj.from_json(t)
+        assert( Obj.get_val() == val )
 
 def test_rcvnpdunumlist():
     Obj = receive_npdu_number_list_value.clone()
@@ -262,6 +273,12 @@ def test_msracap():
     rep = Obj.repr()
     assert( Obj.get_val() == val )
     assert( Obj.to_bytes() == buf )
+    #
+    if _with_json:
+        t = Obj.to_json()
+        Obj.from_json(t)
+        assert( Obj.get_val() == val )
+    
     #
     buf = unhexlify(b'1bb3432b259ef989004000d801bbe8c662401000360068f8b1989004000d8010')
     val = [[['0001',
@@ -435,6 +452,11 @@ def test_msracap():
     rep = Obj.repr()
     assert( Obj.get_val() == val )
     assert( Obj.to_bytes() == buf )
+    #
+    if _with_json:
+        t = Obj.to_json()
+        Obj.from_json(t)
+        assert( Obj.get_val() == val )
 
 
 def test_si2qr():
@@ -442,20 +464,38 @@ def test_si2qr():
     buf = unhexlify(b'46a032caa88c2fcf8e0b2b2b2b2b2b2b2b2b2b2b')
     #
     Obj.from_bytes(buf)
+    val = Obj.get_val()
     rep = Obj.repr()
     assert( Obj.to_bytes() == buf )
     #
+    if _with_json:
+        t = Obj.to_json()
+        Obj.from_json(t)
+        assert( Obj.get_val() == val )
+    
     buf = unhexlify(b'cee0048648c0100401004010040100401000802b')
     #
     Obj.from_bytes(buf)
+    val = Obj.get_val()
     rep = Obj.repr()
     assert( Obj.to_bytes() == buf )
     #
+    if _with_json:
+        t = Obj.to_json()
+        Obj.from_json(t)
+        assert( Obj.get_val() == val )
+    
     buf = unhexlify(b'ef200bc10996463fc15010c1ceada382a02b2b2b')
     #
     Obj.from_bytes(buf)
+    val = Obj.get_val()
     rep = Obj.repr()
     assert( Obj.to_bytes() == buf )
+    #
+    if _with_json:
+        t = Obj.to_json()
+        Obj.from_json(t)
+        assert( Obj.get_val() == val )
 
 
 def test_si13r():
@@ -548,6 +588,11 @@ def test_si13r():
     rep = Obj.repr()
     assert( Obj.get_val() == val )
     assert( Obj.to_bytes() == buf )
+    #
+    if _with_json:
+        t = Obj.to_json()
+        Obj.from_json(t)
+        assert( Obj.get_val() == val )
 
 
 if __name__ == '__main__':
