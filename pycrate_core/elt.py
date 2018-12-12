@@ -32,12 +32,13 @@ __all__ = ['EltErr', 'REPR_RAW', 'REPR_HEX', 'REPR_BIN', 'REPR_HD', 'REPR_HUM',
 
 
 try:
-    import re
-    from binascii import hexlify, unhexlify
+    from json import JSONEncoder, JSONDecoder, JSONDecodeError
 except ImportError:
     _with_json = False
 else:
     _with_json = True
+    JsonEnc = JSONEncoder(sort_keys=True, indent=1)
+    JsonDec = JSONDecoder()
 
 from .utils  import *
 from .charpy import Charpy, CharpyErr
@@ -719,6 +720,46 @@ class Element(object):
     
     __bin__ = bin
     __hex__ = hex
+    
+    #--------------------------------------------------------------------------#
+    # json api
+    #--------------------------------------------------------------------------#
+    
+    if _with_json:
+        
+        def _from_jval(self, val):
+            raise(EltErr('not impemented'))
+        
+        def _from_jval_wrap(self, val):
+            try:
+                val = val[self._name]
+            except Exception:
+                raise(EltErr('{0} [_from_jval]: invalid value, {1!r}'.format(self._name, val)))
+            else:
+                self._from_jval(val)
+        
+        def from_json(self, txt):
+            if self.get_trans():
+                return
+            else:
+                try:
+                    val = JsonDec.decode(txt)
+                except JSONDecodeError as err:
+                    raise(EltErr('{0} [from_json]: invalid format, {1!r}'.format(self._name, txt)))
+                else:
+                    self._from_jval_wrap(val)
+        
+        def _to_jval(self):
+            raise(EltErr('not implemented'))
+        
+        def _to_jval_wrap(self):
+            return {self._name: self._to_jval()}
+        
+        def to_json(self):
+            if self.get_trans():
+                return ''
+            else:
+                return JsonEnc.encode(self._to_jval_wrap())
 
 
 #------------------------------------------------------------------------------#
@@ -2131,51 +2172,23 @@ class Envelope(Element):
     
     if _with_json:
         
-        _JSON_FMT1 = re.compile('\s{0,},\s{0,}')
-        _JSON_FMT2 = re.compile('\s{0,}\]')
-        
-        def to_json(self):
-            """returns an array with name and all element json representation
-            """
-            if self.get_trans():
-                return ''
-            ret = ['["%s"' % self._name]
-            for e in self._content:
-                j = e.to_json()
-                if j:
-                    ret.append(',\n %s' % j.replace('\n', '\n '))
-            ret.append(']')
-            return ''.join(ret)
-        
-        def from_json(self, txt):
-            """sets the value from the provided array in txt
-            returns the offset at the end of the expression
-            """
-            if self.get_trans():
-                return 0
-            if not hasattr(self, '_JSON_FMT0'):
-                self._JSON_FMT0 = re.compile('\[\s{0,}\"%s\"\s{0,}' % self._name)
-            m = self._JSON_FMT0.match(txt)
-            if not m:
-                raise(EltErr('{0} [from_json]: invalid format, {1!r}'.format(self._name, txt)))
-            cur = m.end()
-            for e in self._content:
-                m = self._JSON_FMT1.match(txt[cur:])
-                if not m:
-                    break
-                cur += m.end()
-                cur += e.from_json(txt[cur:])
-            m = self._JSON_FMT2.match(txt[cur:])
-            if not m:
-                raise(EltErr('{0} [from_json]: invalid format, {1!r}'\
-                      .format(self._name, txt[cur:])))
-            cur += m.end()
+        def _from_jval(self, val):
+            if not isinstance(val, list):
+                raise(EltErr('{0} [_from_jval]: invalid format, {1!r}'.format(self._name, val)))
+            for i, e in enumerate(self._content):
+                if not e.get_trans():
+                    try:
+                        e._from_jval_wrap(val[i])
+                    except IndexError:
+                        break
             # ensure all non-transparent elements were set
             for e in self._content[1+self._content.index(e):]:
                 if not e.get_trans() and e.get_bl():
-                    raise(EltErr('{0} [from_json]: missing elements, {1}...'\
+                    raise(EltErr('{0} [_from_jval]: missing elements, {1} ...'\
                           .format(self._name, e._name)))
-            return cur
+        
+        def _to_jval(self):
+            return [e._to_jval_wrap() for e in self._content if not e.get_trans()]
 
 
 class Array(Element):
@@ -3006,42 +3019,14 @@ class Array(Element):
     
     if _with_json:
         
-        _JSON_FMT1 = re.compile('\s{0,},\s{0,}')
-        _JSON_FMT2 = re.compile('\s{0,}\]')
-        
-        def to_json(self):
-            """returns an array with name and all array values' json representation
-            """
-            if self.get_trans():
-                return ''
-            if self._SAFE_STAT and self._num is not None and len(self._val) != self._num:
-                raise(EltErr('{0} [to_json] invalid number of values: {1} instead of {2}'\
-                      .format(self._name, len(self._val), self._num)))
-            ret = ['["%s"' % self._name]
-            for v in self._val:
-                self._tmpl.set_val(v)
-                ret.append( ',\n %s' % self._tmpl.to_json().replace('\n', '\n ') )
-            ret.append(']')
-            return ''.join(ret)
-        
-        def from_json(self, txt):
-            """sets the value from the provided array in txt
-            returns the offset at the end of the expression
-            """
-            if self.get_trans():
-                return 0
-            # 0) initialize the parsing of txt
-            if not hasattr(self, '_JSON_FMT0'):
-                self._JSON_FMT0 = re.compile('\[\s{0,}\"%s\"\s{0,}' % self._name)
-            m = self._JSON_FMT0.match(txt)
-            if not m:
-                raise(EltErr('{0} [from_json]: invalid format, {1!r}'.format(self._name, txt)))
-            cur = m.end()
+        def _from_jval(self, val):
+            if not isinstance(val, list):
+                raise(EltErr('{0} [_from_jval]: invalid format, {1!r}'.format(self._name, val)))
             # 1) determine the number of iteration of the template within the array
             if self._numauto is not None:
                 num = self._numauto()
                 if self._SAFE_DYN and not isinstance(num, integer_types):
-                    raise(EltErr('{0} [from_json]: num type produced is {1}, expecting integer'\
+                    raise(EltErr('{0} [_from_jval]: num type produced is {1}, expecting integer'\
                           .format(self._name, type(num).__name__)))
             elif self._num is not None:
                 num = self._num
@@ -3050,30 +3035,23 @@ class Array(Element):
                 num = None
             # 2) init value
             self._val = []
-            # 3) consume txt and fill in self._val
-            if num is not None:
-                for i in range(num):
-                    m = self._JSON_FMT1.match(txt[cur:])
-                    if not m:
-                        raise(EltErr('{0} [from_json] missing iteration, {1!r}'\
-                              .format(self._name, txt[cur:])))
-                    cur += m.end()
-                    cur += self._tmpl.from_json(txt[cur:])
-                    self._val.append(self._tmpl.get_val())
-            else:
-                while True:
-                    m = self._JSON_FMT1.match(txt[cur:])
-                    if not m:
-                        break
-                    cur += m.end()
-                    cur += self._tmpl.from_json(txt[cur:])
-                    self._val.append(self._tmpl.get_val())
-            m = self._JSON_FMT2.match(txt[cur:])
-            if not m:
-                raise(EltErr('{0} [from_json] invalid format, {1!r}'\
-                      .format(self._name, txt[cur:])))
-            cur += m.end()
-            return cur
+            # 3) consume val
+            if num is not None and len(val) != num:
+                raise(EltErr('{0} [_from_jval]: invalid number of values: {1} instead of {2}'\
+                      .format(self._name, len(val), num)))
+            for v in val:
+                self._tmpl._from_jval_wrap(v)
+                self._val.append( self._tmpl.get_val() )
+        
+        def _to_jval(self):
+            if self._SAFE_STAT and self._num is not None and len(self._val) != self._num:
+                raise(EltErr('{0} [_to_jval] invalid number of values: {1} instead of {2}'\
+                      .format(self._name, len(self._val), self._num)))
+            ret = []
+            for v in self._val:
+                self._tmpl.set_val(v)
+                ret.append( self._tmpl._to_jval_wrap() )
+            return ret
 
 
 class Sequence(Element):
@@ -3916,50 +3894,21 @@ class Sequence(Element):
         # PyPy iterator implementation lead to an infinite loop
         # __iter__() calls __len__(), but here, get_bl() calls __iter__()
         __len__ = get_bl
-
+    
     #--------------------------------------------------------------------------#
     # json interface
     #--------------------------------------------------------------------------#
     
     if _with_json:
         
-        _JSON_FMT1 = re.compile('\s{0,},\s{0,}')
-        _JSON_FMT2 = re.compile('\s{0,}\]')
-        
-        def to_json(self):
-            """returns an array with name and all sequence values' json representation
-            """
-            if self.get_trans():
-                return ''
-            if self._SAFE_STAT and self._num is not None and len(self._content) != self._num:
-                raise(EltErr('{0} [to_json]: invalid number of repeated content: {1} instead of {2}'\
-                      .format(self._name, len(self._content), self._num))) 
-            ret = ['["%s"' % self._name]
-            for e in self._content:
-                j = e.to_json()
-                if j:
-                    ret.append(',\n %s' % j.replace('\n', '\n '))
-            ret.append(']')
-            return ''.join(ret)
-        
-        def from_json(self, txt):
-            """sets the value from the provided array in txt
-            returns the offset at the end of the expression
-            """
-            if self.get_trans():
-                return 0
-            # 0) initialize the parsing of txt
-            if not hasattr(self, '_JSON_FMT0'):
-                self._JSON_FMT0 = re.compile('\[\s{0,}\"%s\"\s{0,}' % self._name)
-            m = self._JSON_FMT0.match(txt)
-            if not m:
-                raise(EltErr('{0} [from_json]: invalid format, {1!r}'.format(self._name, txt)))
-            cur = m.end()
+        def _from_jval(self, val):
+            if not isinstance(val, list):
+                raise(EltErr('{0} [_from_jval]: invalid format, {1!r}'.format(self._name, val)))
             # 1) determine the number of iteration of the template within the array
             if self._numauto is not None:
                 num = self._numauto()
                 if self._SAFE_DYN and not isinstance(num, integer_types):
-                    raise(EltErr('{0} [from_json]: num type produced is {1}, expecting integer'\
+                    raise(EltErr('{0} [_from_jval]: num type produced is {1}, expecting integer'\
                           .format(self._name, type(num).__name__)))
             elif self._num is not None:
                 num = self._num
@@ -3969,33 +3918,20 @@ class Sequence(Element):
             # 2) init content
             self._content = []
             # 3) consume txt and fill in self._content
-            if num is not None:
-                for i in range(num):
-                    m = self._JSON_FMT1.match(txt[cur:])
-                    if not m:
-                        raise(EltErr('{0} [from_json]: missing iteration, {1}'\
-                              .format(self._name, num-1-i)))
-                    cur += m.end()
-                    clone = self._tmpl.clone()
-                    cur += clone.from_json(txt[cur:])
-                    self._content.append(clone)
-                    clone._env = self
-            else:
-                while True:
-                    m = self._JSON_FMT1.match(txt[cur:])
-                    if not m:
-                        break
-                    cur += m.end()
-                    clone = self._tmpl.clone()
-                    cur += clone.from_json(txt[cur:])
-                    self._content.append(clone)
-                    clone._env = self
-            m = self._JSON_FMT2.match(txt[cur:])
-            if not m:
-                raise(EltErr('{0} [from_json] invalid format, {1!r}'\
-                      .format(self._name, txt[cur:])))
-            cur += m.end()
-            return cur
+            if num is not None and len(val) != num:
+                raise(EltErr('{0} [_from_jval]: invalid number of values: {1} instead of {2}'\
+                      .format(self._name, len(val), num)))
+            for v in val:
+                clone = self._tmpl.clone()
+                clone._from_jval_wrap(v)
+                self._content.append(clone)
+                clone._env = self
+        
+        def _to_jval(self):
+            if self._SAFE_STAT and self._num is not None and len(self._content) != self._num:
+                raise(EltErr('{0} [_to_jval]: invalid number of repeated content: {1} instead of {2}'\
+                      .format(self._name, len(self._content), self._num))) 
+            return [e._to_jval_wrap() for e in self._content if not e.get_trans()]
 
 
 class Alt(Element):
@@ -4541,23 +4477,9 @@ class Alt(Element):
     
     if _with_json:
         
-        _JSON_FMT1 = re.compile('\s{0,},\s{0,}')
-        _JSON_FMT2 = re.compile('\s{0,}\]')
+        def _from_jval(self, val):
+            self.get_alt()._from_jval_wrap(val)
         
-        def to_json(self):
-            """returns the json representation of the alternative selected
-            """
-            if self.get_trans():
-                return ''
-            else:
-                return self.get_alt().to_json()
-        
-        def from_json(self, txt):
-            """sets the value to the selected alternative from txt
-            returns the offset at the end of the expression
-            """
-            if self.get_trans():
-                return 0
-            else:
-                return self.get_alt().from_json(txt)
+        def _to_jval(self):
+            return self.get_alt()._to_jval_wrap()
 

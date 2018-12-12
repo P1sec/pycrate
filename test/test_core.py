@@ -312,11 +312,8 @@ def test_elt_1():
     t = Test('T')
     #return t
     buf = t.to_bytes()
-    if _with_json:
-        jso = t.to_json()
     
     assert( buf == b'abcd\x00\x00\xa1\x000\x19Y\x99\xda\x1aZ\x9a\xdb\x1b[\x9b\xdc\x1c\\\x9c' )
-    assert( jso == '["T",\n ["s0", "61626364"],\n ["u0", 10],\n ["u1", 1024],\n ["i0", -64],\n ["s1", "65666768696a6b6c6d6e6f70717273"]]' )
     assert( t.to_uint() == 596964200264834337516354954544542937658015219270340253479 )
     assert( t.to_int() == 596964200264834337516354954544542937658015219270340253479 )
     assert( t.get_bl() == 190 )
@@ -329,6 +326,11 @@ def test_elt_1():
     assert( t['s0'].get_val() == b'abcd' )
     assert( t['u0'].get_val() == 10 )
     assert( t['i0'].get_val() == -64 )
+    
+    if _with_json:
+        jv  = t._to_jval()
+        jso = t.to_json()
+        assert( jv == [{'s0': '61626364'}, {'u0': 10}, {'u1': 1024}, {'i0': -64}, {'s1': '65666768696a6b6c6d6e6f70717273'}] )
     
     t.set_val(None)
     t.from_bytes(buf)
@@ -391,9 +393,12 @@ def test_elt_2():
         assert( repr(t) == "<TestTLV : <T [Tag] : 0b00000010 (Tag2)><F1 [Flag1] : 1><F2 [Flag2] : 1><res [Reserved] : 0><L [Length] : 104><V [Value] : b'default value'>>" )
     
     if _with_json:
-        assert( t.to_json() == '["TestTLV",\n ["T", 2],\n ["F1", 1],\n ["F2", 1],\n ["res", 0],\n ["L", 104],\n ["V", "64656661756c742076616c7565"]]' )
+        jv  = t._to_jval()
+        jso = t.to_json()
+        assert( jv == [{'T': 2}, {'F1': 1}, {'F2': 1}, {'res': 0}, {'L': 104}, {'V': '64656661756c742076616c7565'}] )
         t.set_val(None)
-        assert( t.from_json('["TestTLV",\n ["T", 2],\n ["F1", 1],\n ["F2", 1],\n ["res", 0],\n ["L", 104],\n ["V", "64656661756c742076616c7565"]]') == 110 )
+        t.from_json(jso)
+        assert( t._to_jval() == jv )
     
     if python_version < 3:
         assert( repr(t) == "<TestTLV : <T [Tag] : 0b00000010 (Tag2)><F1 [Flag1] : 1><F2 [Flag2] : 1><res [Reserved] : 0><L [Length] : 104><V [Value] : 'default value'>>" )
@@ -439,9 +444,12 @@ def test_elt_2():
     assert( t['V']() == 25*b'abcd' )
     
     if _with_json:
-        assert( t.to_json() == '["TestTLV2",\n ["T", 97],\n ["F1", 0],\n ["F2", 3],\n ["res", 611],\n ["L", 100],\n ["V", "61626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364"]]')
+        jv  = t._to_jval()
+        jso = t.to_json()
+        assert( jv == [{'T': 97}, {'F1': 0}, {'F2': 3}, {'res': 611}, {'L': 100}, {'V': '61626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364'}] )
         t.set_val(None)
-        assert( t.from_json('["TestTLV2",\n ["T", 97],\n ["F1", 0],\n ["F2", 3],\n ["res", 611],\n ["L", 100],\n ["V", "61626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364616263646162636461626364"]]') == 288 )
+        t.from_json(jso)
+        assert( t._to_jval() == jv )
         assert( t['T']() == 97 )
         assert( t['F1']() == 0 )
         assert( t['F2']() == 3 )
@@ -519,8 +527,12 @@ def test_elt_2():
     assert( t2.get_val() == [5, 3, 0, 256, [2, 0, 1, 13, b'un petit truc'], [1, 0, 1, 14, b'un gros machin']] )
     
     if _with_json:
-        assert( t1.to_json() == '["another_test_B",\n ["T", 5],\n ["F1", 3],\n ["F2", 0],\n ["L", 256],\n ["TestA",\n  ["T", 2],\n  ["F1", 0],\n  ["F2", 1],\n  ["L", 13],\n  ["V", "756e2070657469742074727563"]],\n ["TestA",\n  ["T", 1],\n  ["F1", 0],\n  ["F2", 1],\n  ["L", 14],\n  ["V", "756e2067726f73206d616368696e"]]]' )
-        assert( t2.to_json() == '["yet_another_test_B",\n ["T", 5],\n ["F1", 3],\n ["F2", 0],\n ["L", 256],\n ["TestA",\n  ["T", 2],\n  ["F1", 0],\n  ["F2", 1],\n  ["L", 13],\n  ["V", "756e2070657469742074727563"]],\n ["TestA",\n  ["T", 1],\n  ["F1", 0],\n  ["F2", 1],\n  ["L", 14],\n  ["V", "756e2067726f73206d616368696e"]]]' )
+        jv1, jso1 = t1._to_jval(), t1.to_json()
+        jv2, jso2 = t2._to_jval(), t2.to_json()
+        assert( jv1 == [{'T': 5}, {'F1': 3}, {'F2': 0}, {'L': 256}, {'TestA': [{'T': 2}, {'F1': 0}, {'F2': 1}, {'L': 13}, {'V': '756e2070657469742074727563'}]}, {'TestA': [{'T': 1}, {'F1': 0}, {'F2': 1}, {'L': 14}, {'V': '756e2067726f73206d616368696e'}]}] )
+        assert( jv2 == jv1 )
+        t2._from_jval(jv1)
+        assert( t2._to_jval() == jv1 )
     
     
     class TestC(Array):
@@ -530,11 +542,8 @@ def test_elt_2():
     t = TestC('pouet')
     t.set_val({0:{'T':5, 'F1':3, 'F2':0, 4:{'T':2, 'V':b'un petit truc'}, 5:{'T':1, 'V':b'un gros machin'}},
                3:{'T':1, 'F1':1, 'F2':1, 4:{'T':7, 'V':b'un gros truc'}, 5:{'T':3, 'V':b'un petit machin'}}})
-    return t
-    assert( t.to_bytes() == b"\x14\xc0@\x02\x045\xd5\xb8\x81\xc1\x95\xd1\xa5\xd0\x81\xd1\xc9\xd5\x8c\x10C\x9d[\x88\x19\xdc\x9b\xdc\xc8\x1bXX\xda\x1a[\x80\x04\x15\x00A\x18super mega default value\x08\x10\xd7V\xc7G&\x12\x066\xf6\xc6\xf7&V@\x01\x05@\x10F\x1c\xdd\\\x19\\\x88\x1bYY\xd8H\x19\x19Y\x98][\x1d\x08\x1d\x98[\x1dYB\x045\xd5\xb1\xd1\xc9\x84\x81\x8d\xbd\xb1\xbd\xc9\x95\x90\x11A\x00\x1c\x10\xc7V\xe2\x06w&\xf72\x07G'V0\xc1\x0fun petit machin" )
     
-    if _with_json:
-        assert( t.to_json() == '["pouet",\n ["TestB",\n  ["T", 5],\n  ["F1", 3],\n  ["F2", 0],\n  ["L", 256],\n  ["TestA",\n   ["T", 2],\n   ["F1", 0],\n   ["F2", 1],\n   ["L", 13],\n   ["V", "756e2070657469742074727563"]],\n  ["TestA",\n   ["T", 1],\n   ["F1", 0],\n   ["F2", 1],\n   ["L", 14],\n   ["V", "756e2067726f73206d616368696e"]]],\n ["TestB",\n  ["T", 0],\n  ["F1", 0],\n  ["F2", 1],\n  ["L", 336],\n  ["TestA",\n   ["T", 1],\n   ["F1", 0],\n   ["F2", 1],\n   ["L", 24],\n   ["V", "7375706572206d6567612064656661756c742076616c7565"]],\n  ["TestA",\n   ["T", 2],\n   ["F1", 0],\n   ["F2", 1],\n   ["L", 13],\n   ["V", "756c74726120636f6c6f726564"]]],\n ["TestB",\n  ["T", 0],\n  ["F1", 0],\n  ["F2", 1],\n  ["L", 336],\n  ["TestA",\n   ["T", 1],\n   ["F1", 0],\n   ["F2", 1],\n   ["L", 24],\n   ["V", "7375706572206d6567612064656661756c742076616c7565"]],\n  ["TestA",\n   ["T", 2],\n   ["F1", 0],\n   ["F2", 1],\n   ["L", 13],\n   ["V", "756c74726120636f6c6f726564"]]],\n ["TestB",\n  ["T", 1],\n  ["F1", 1],\n  ["F2", 1],\n  ["L", 256],\n  ["TestA",\n   ["T", 7],\n   ["F1", 0],\n   ["F2", 1],\n   ["L", 12],\n   ["V", "756e2067726f732074727563"]],\n  ["TestA",\n   ["T", 3],\n   ["F1", 0],\n   ["F2", 1],\n   ["L", 15],\n   ["V", "756e207065746974206d616368696e"]]]]' )
+    assert( t.to_bytes() == b"\x14\xc0@\x02\x045\xd5\xb8\x81\xc1\x95\xd1\xa5\xd0\x81\xd1\xc9\xd5\x8c\x10C\x9d[\x88\x19\xdc\x9b\xdc\xc8\x1bXX\xda\x1a[\x80\x04\x15\x00A\x18super mega default value\x08\x10\xd7V\xc7G&\x12\x066\xf6\xc6\xf7&V@\x01\x05@\x10F\x1c\xdd\\\x19\\\x88\x1bYY\xd8H\x19\x19Y\x98][\x1d\x08\x1d\x98[\x1dYB\x045\xd5\xb1\xd1\xc9\x84\x81\x8d\xbd\xb1\xbd\xc9\x95\x90\x11A\x00\x1c\x10\xc7V\xe2\x06w&\xf72\x07G'V0\xc1\x0fun petit machin" )
     
     t1 = TestC('prout')
     t1.from_bytes( t.to_bytes() )
@@ -542,9 +551,15 @@ def test_elt_2():
     assert( t.get_val() == t1.get_val() )
     
     if _with_json:
-        assert( t1.to_json()[11:] == t.to_json()[11:] ) # jump over the main field name
+        jv, jso = t._to_jval(), t.to_json()
+        jv1, jso1 = t1._to_jval(), t1.to_json()
+        assert( jv == jv1 )
+        assert( jso[10:] == jso1[10:] )
+        t.from_json(jso)
+        assert( t._to_jval() == jv )
     
     return t
+
 
 def test_elt_3():
     
@@ -582,16 +597,15 @@ def test_elt_3():
     t1 = TLVArray(val={'Fmt':1, 'TLVs':[{'T':1, 'V':b'aaa'}, {'T':18, 'V':b'BBBB'}]})
     v1 = [1, [[1, 3, b'aaa'], [18, 4, b'BBBB']]]
     b1 = b'\x01\x01\x03aaa\x12\x04BBBB'
-    j1 = '["TLVArray",\n ["Fmt", 1],\n ["TLV8Seq",\n  ["TLV8",\n   ["T", 1],\n   ["L", 3],\n   ["V", "616161"]],\n  ["TLV8",\n   ["T", 18],\n   ["L", 4],\n   ["V", "42424242"]]]]'
     assert( t1.get_val()  == v1 )
     assert( t1.to_bytes() == b1 )
     
     if _with_json:
-        assert( t1.to_json() == j1 )
+        jv1, jso1 = t1._to_jval(), t1.to_json() 
+        assert( jv1 == [{'Fmt': 1}, {'TLVs': {'TLV8Seq': [{'TLV8': [{'T': 1}, {'L': 3}, {'V': '616161'}]}, {'TLV8': [{'T': 18}, {'L': 4}, {'V': '42424242'}]}]}}] )
         t1.set_val(None)
-        assert( t1.from_json(j1) == 158 )
-        assert( t1.get_val() == v1 )
-    #return t1
+        t1.from_json(jso1)
+        assert( t1._to_jval() == jv1 )
     
     t2 = TLVArray()
     #return t1, t2
@@ -600,12 +614,12 @@ def test_elt_3():
     assert( t2.to_bytes() == b1 )
     
     if _with_json:
-        assert( t2.to_json() == j1 )
+        assert( t2._to_jval() == jv1 )
         t2.set_val(None)
-        t2.from_json(j1)
+        t2.from_json(jso1)
         assert( t2.get_val()  == v1 )
         assert( t2.to_bytes() == b1 )
-        assert( t2.to_json() == j1 )
+        assert( t2.to_json() == t1.to_json() )
     
     t3 = TLVArray(val={'Fmt':2, 'TLVs':[{'T':1, 'V':b'aaa'}, {'T':18, 'V':b'BBBB'}]})
     #return t1, t2, t3

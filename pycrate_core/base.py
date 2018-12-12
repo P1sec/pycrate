@@ -41,8 +41,9 @@ from .utils  import *
 from .charpy import Charpy, CharpyErr
 from .elt    import Atom, EltErr, REPR_RAW, REPR_HEX, REPR_BIN, REPR_HD, REPR_HUM
 from .elt    import _with_json
+
 if _with_json:
-    from .elt import re, hexlify, unhexlify
+    from binascii import hexlify, unhexlify
 
 
 #------------------------------------------------------------------------------#
@@ -202,30 +203,14 @@ class Buf(Atom):
     
     if _with_json:
         
-        def to_json(self):
-            """returns an array ["name", "hstr"] with hstr, hex-string from the value
-            """
-            if self.get_trans():
-                return ''
-            else:
-                return '["%s", "%s"]' % (self._name, hexlify(self.get_val()).decode())
+        def _from_jval(self, val):
+            try:
+                self.set_val(unhexlify(val))
+            except Exception:
+                raise(EltErr('{0} [_from_jval]: invalid format, {1!r}'.format(self._name, val)))
         
-        def from_json(self, txt):
-            """sets the value from the provided ["name", "hstr"] in txt
-            returns the offset at the end of the expression
-            """
-            if self.get_trans():
-                return 0
-            else:
-                if not hasattr(self, '_JSON_FMT'):
-                    self._JSON_FMT = re.compile('\[\s{0,}\"%s\"\s{0,},\s{0,}\"((?:[0-9a-fA-F]{2}){0,})\"\s{0,}\]'\
-                                                % self._name)
-                m = self._JSON_FMT.match(txt)
-                if m:
-                    self.set_val(unhexlify(m.group(1)))
-                    return m.end()
-                else:
-                    raise(EltErr('{0} [from_json]: invalid format, {1!r}'.format(self._name, txt)))
+        def _to_jval(self):
+            return hexlify(self.get_val()).decode()
 
 
 # BufAuto is used when a Buf requires to have its length automatically computed
@@ -416,31 +401,15 @@ class Uint(Atom):
     #--------------------------------------------------------------------------#
     
     if _with_json:
-
-        def to_json(self):
-            """returns an array ["name", intval]
-            """
-            if self.get_trans():
-                return ''
-            else:
-                return '["%s", %i]' % (self._name, self.get_val())
         
-        def from_json(self, txt):
-            """sets the value from the provided ["name", inval]
-            returns the offset at the end of the expression
-            """
-            if self.get_trans():
-                return 0
-            else:
-                if not hasattr(self, '_JSON_FMT'):
-                    self._JSON_FMT = re.compile('\[\s{0,}\"%s\"\s{0,},\s{0,}\+{0,1}([0-9]{1,})\s{0,}\]'\
-                                                % self._name)
-                m = self._JSON_FMT.match(txt)
-                if m:
-                    self.set_val(int(m.group(1)))
-                    return m.end()
-                else:
-                    raise(EltErr('{0} [from_json]: invalid format, {1!r}'.format(self._name, txt)))
+        def _from_jval(self, val):
+            try:
+                self.set_val(val)
+            except Exception:
+                raise(EltErr('{0} [_from_jval]: invalid format, {1!r}'.format(self._name, val)))
+        
+        def _to_jval(self):
+            return self.get_val()
 
 
 class Uint8(Uint):
@@ -539,34 +508,9 @@ class Int(Atom):
     #--------------------------------------------------------------------------#
     
     if _with_json:
-
-        def to_json(self):
-            """returns an array ["name", intval]
-            """
-            if self.get_trans():
-                return ''
-            else:
-                return '["%s", %i]' % (self._name, self.get_val())
         
-        def from_json(self, txt):
-            """sets the value from the provided ["name", inval]
-            returns the offset at the end of the expression
-            """
-            if self.get_trans():
-                return 0
-            else:
-                if not hasattr(self, '_JSON_FMT'):
-                    self._JSON_FMT = re.compile('\[\s{0,}\"%s\"\s{0,},\s{0,}(-+){0,1}([0-9]{1,})\s{0,}\]'\
-                                                % self._name)
-                m = self._JSON_FMT.match(txt)
-                if m:
-                    if m.group(1):
-                        self.set_val(int(m.group(1) + m.group(2)))
-                    else:
-                        self.set_val(int(m.group(2)))
-                    return m.end()
-                else:
-                    raise(EltErr('{0} [from_json]: invalid format, {1!r}'.format(self._name, txt)))
+        _from_jval = Uint._from_jval
+        _to_jval   = Uint._to_jval
 
 
 class Int8(Int):
@@ -679,8 +623,8 @@ class UintLE(Atom):
     
     if _with_json:
         
-        to_json   = Uint.to_json
-        from_json = Uint.from_json 
+        _from_jval = Uint._from_jval
+        _to_jval   = Uint._to_jval
 
 
 class Uint8LE(UintLE):
@@ -793,8 +737,8 @@ class IntLE(Atom):
     
     if _with_json:
         
-        to_json   = Int.to_json
-        from_json = Int.from_json 
+        _from_jval = Uint._from_jval
+        _to_jval   = Uint._to_jval
 
 
 class Int8LE(IntLE):
