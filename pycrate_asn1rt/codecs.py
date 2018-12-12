@@ -30,15 +30,10 @@
 from .utils import *
 from .err   import *
 
-try:
-    from json     import JSONEncoder, JSONDecoder, JSONDecodeError
-    from binascii import hexlify, unhexlify
-except ImportError:
-    _with_json = False
-else:
-    _with_json = True
-    JsonEnc = JSONEncoder(sort_keys=True, indent=1)
-    JsonDec = JSONDecoder()
+from pycrate_core.elt import _with_json
+if _with_json:
+    from pycrate_core.elt import JsonEnc, JsonDec, JSONDecodeError
+    from binascii         import hexlify, unhexlify
 
 
 class ASN1Codec(object):
