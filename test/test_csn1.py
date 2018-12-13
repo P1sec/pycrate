@@ -28,6 +28,7 @@
 #*/
 
 from binascii import *
+from timeit   import timeit
 
 from pycrate_csn1dir.classmark_3_value_part           import classmark_3_value_part
 from pycrate_csn1dir.ms_network_capability_value_part import ms_network_capability_value_part
@@ -595,11 +596,31 @@ def test_si13r():
         assert( Obj.get_val() == val )
 
 
+def test_perf_csn1():
+    
+    print('[+] CSN.1 MS network capability decoding and re-encoding')
+    Ta = timeit(test_msnetcap, number=600)
+    print('test_msnetcap: {0:.4f}'.format(Ta))
+    
+    print('[+] CSN.1 MS classmark 3 decoding and re-encoding')
+    Tb = timeit(test_mscm3, number=200)
+    print('test_mscm3: {0:.4f}'.format(Tb))
+    
+    print('[+] CSN.1 MS radio access capability decoding and re-encoding')
+    Tc = timeit(test_msracap, number=30)
+    print('test_msracap: {0:.4f}'.format(Tc))
+    
+    print('[+] CSN.1 SI2 quater rest octets decoding and re-encoding')
+    Td = timeit(test_si2qr, number=50)
+    print('test_si2qr: {0:.4f}'.format(Td))
+    
+    print('[+] CSN.1 SI13 rest octets decoding and re-encoding')
+    Te = timeit(test_si13r, number=200)
+    print('test_si13r: {0:.4f}'.format(Te))
+    
+    print('[+] test_csn1 total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te))
+
+
 if __name__ == '__main__':
-    test_msnetcap()
-    test_mscm3()
-    test_rcvnpdunumlist()
-    test_msracap()
-    test_si2qr()
-    test_si13r()
+    test_perf_csn1()
 

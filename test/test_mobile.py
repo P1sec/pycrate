@@ -166,10 +166,10 @@ def test_nas_mt(nas_pdu=nas_pdu_mt):
         m.set_val(v)
         assert( m.to_bytes() == pdu )
         #
-        #if _with_json:
-        #    t = m.to_json()
-        #    m.from_json(t)
-        #    assert( m.get_val() == v )
+        if _with_json:
+            t = m.to_json()
+            m.from_json(t)
+            assert( m.get_val() == v )
 
 
 def test_sigtran(sigtran_pdu=sigtran_pdu):
@@ -183,10 +183,10 @@ def test_sigtran(sigtran_pdu=sigtran_pdu):
         S.set_val(v)
         assert( S.to_bytes() == pdu )
         #
-        #if _with_json:
-        #    t = m.to_json()
-        #    m.from_json(t)
-        #    assert( m.get_val() == v )
+        if _with_json:
+            t = S.to_json()
+            S.from_json(t)
+            assert( S.get_val() == v )
 
 
 def test_sccp(sccp_pdu=sccp_pdu):
@@ -199,13 +199,13 @@ def test_sccp(sccp_pdu=sccp_pdu):
         m.set_val(v)
         assert( m.to_bytes() == pdu)
         #
-        #if _with_json:
-        #    t = m.to_json()
-        #    m.from_json(t)
-        #    assert( m.get_val() == v )
+        if _with_json:
+            t = m.to_json()
+            m.from_json(t)
+            assert( m.get_val() == v )
 
 
-def test_perf():
+def test_perf_mobile():
     
     print('[+] NAS MO decoding and re-encoding')
     Ta = timeit(test_nas_mo, number=14)
@@ -223,8 +223,9 @@ def test_perf():
     Td = timeit(test_sccp, number=100)
     print('test_sccp: {0:.4f}'.format(Td))
     
-    print('[+] mobile total time: {0:.4f}'.format(Ta+Tb+Tc+Td))
+    print('[+] test_mobile total time: {0:.4f}'.format(Ta+Tb+Tc+Td))
+
 
 if __name__ == '__main__':
-    test_perf()
+    test_perf_mobile()
 

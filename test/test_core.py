@@ -697,46 +697,46 @@ def test_perf_charpy_long():
     A.to_uint()
     A.to_int()
 
-def test_perf():
+def test_perf_core():
     
     print('[+] bytes - uint conversion')
-    Ta = timeit(test_perf_bytes_uint, number=1000)
+    Ta = timeit(test_perf_bytes_uint, number=10000)
     print('test_perf_bytes_uint: {0:.4f}'.format(Ta))
     
     print('[+] bytes shifting')
-    Tb = timeit(test_perf_bytes_lshift, number=200)
+    Tb = timeit(test_perf_bytes_lshift, number=2000)
     print('test_perf_bytes_lshift: {0:.4f}'.format(Tb))
     
     print('[+] packing few heterogeneous values')
-    Tc = timeit(test_perf_pack_short, number=2000)
+    Tc = timeit(test_perf_pack_short, number=20000)
     print('test_perf_pack_short: {0:.4f}'.format(Tc))
     
     print('[+] packing many heterogeneous values')
-    Td = timeit(test_perf_pack_long, number=100)
+    Td = timeit(test_perf_pack_long, number=1000)
     print('test_perf_pack_long: {0:.4f}'.format(Td))
     
     print('[+] charpy with short bytes')
-    Te = timeit(test_perf_charpy_short, number=4000)
+    Te = timeit(test_perf_charpy_short, number=40000)
     print('test_perf_charpy_short: {0:.4f}'.format(Te))
     
     print('[+] charpy with long bytes')
-    Tf = timeit(test_perf_charpy_long, number=800)
+    Tf = timeit(test_perf_charpy_long, number=5000)
     print('test_perf_charpy_long: {0:.4f}'.format(Tf))
     
     print('[+] elt test 1')
-    Tg = timeit(test_elt_1, number=300)
+    Tg = timeit(test_elt_1, number=2000)
     print('test_elt_1: {0:.4f}'.format(Tg))
     
     print('[+] elt test 2')
-    Th = timeit(test_elt_2, number=100)
+    Th = timeit(test_elt_2, number=200)
     print('test_elt_2: {0:.4f}'.format(Th))
     
     print('[+] elt test 3')
-    Ti = timeit(test_elt_3, number=100)
-    print('test_elt_3: {0:.4f}'.format(Th))
+    Ti = timeit(test_elt_3, number=700)
+    print('test_elt_3: {0:.4f}'.format(Ti))
     
     print('[+] core total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te+Tf+Tg+Th+Ti))
 
 if __name__ == '__main__':
-    test_perf()
+    test_perf_core()
 

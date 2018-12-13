@@ -33,7 +33,9 @@ from timeit import timeit
 #Element._SAFE_STAT = False
 #Element._SAFE_DYN  = False
 
+from pycrate_core.elt   import _with_json
 from pycrate_mobile.NAS import *
+
 
 rr_pdu_mo = tuple(map(unhexlify, (
     # SACCH
@@ -78,45 +80,64 @@ def test_gsmrr_mo(rr_pdu=rr_pdu_mo):
     for pdu in rr_pdu:
         m, e = parse_NAS_MO(pdu)
         assert( e == 0 )
-        m.reautomate()
         v = m.get_val()
+        m.reautomate()
+        assert( m.get_val() == v )
         m.set_val(v)
         assert( m.to_bytes() == pdu )
+        #
+        if _with_json:
+            t = m.to_json()
+            m.from_json(t)
+            assert( m.get_val() == v )
 
 def test_gsmrr_l2_mt(rr_pdu=rr_pdu_l2_mt):
     for pdu in rr_pdu:
         m, e = parse_NAS_MT(pdu, wl2=True)
         assert( e == 0 )
-        m.reautomate()
         v = m.get_val()
+        m.reautomate()
+        assert( m.get_val() == v )
         m.set_val(v)
         assert( m.to_bytes() == pdu )
+        #
+        if _with_json:
+            t = m.to_json()
+            m.from_json(t)
+            assert( m.get_val() == v )
     
 def test_gsmrr_mt(rr_pdu=rr_pdu_mt):
     for pdu in rr_pdu:
         m, e = parse_NAS_MT(pdu)
         assert( e == 0 )
-        m.reautomate()
         v = m.get_val()
+        m.reautomate()
+        assert( m.get_val() == v )
         m.set_val(v)
         assert( m.to_bytes() == pdu )
+        #
+        if _with_json:
+            t = m.to_json()
+            m.from_json(t)
+            assert( m.get_val() == v )
 
-def test_perf():
+def test_perf_gsmrr():
     
     print('[+] GSM RR MO decoding and re-encoding')
-    Ta = timeit(test_gsmrr_mo, number=20)
-    print('test_nas_mo: {0:.4f}'.format(Ta))
+    Ta = timeit(test_gsmrr_mo, number=30)
+    print('test_gsmrr_mo: {0:.4f}'.format(Ta))
     
     print('[+] GSM RR MT decoding and re-encoding')
-    Tb = timeit(test_gsmrr_mt, number=100)
-    print('test_nas_mt: {0:.4f}'.format(Tb))
+    Tb = timeit(test_gsmrr_mt, number=200)
+    print('test_gsmrr_mt: {0:.4f}'.format(Tb))
     
     print('[+] GSM RR L2 MT decoding and re-encoding')
-    Tb = timeit(test_gsmrr_l2_mt, number=5)
-    print('test_nas_mt: {0:.4f}'.format(Tb))
+    Tb = timeit(test_gsmrr_l2_mt, number=8)
+    print('test_gsmrr_l2_mt: {0:.4f}'.format(Tb))
     
-    print('[+] GSM RR total time: {0:.4f}'.format(Ta+Tb))
+    print('[+] test_gsmrr total time: {0:.4f}'.format(Ta+Tb))
+
 
 if __name__ == '__main__':
-    test_perf()
+    test_perf_gsmrr()
 

@@ -133,26 +133,26 @@ def test_perf_media(bmp_path,
     
     print('[+] instantiating and parsing BMP in LBUF mode')
     BMP._GEN = BMP._GEN_LBUF
-    Ta = timeit(test_bmp, number=150)
+    Ta = timeit(test_bmp, number=1000)
     print('test_bmp: {0:.4f}'.format(Ta))
     
     bmp = BMP()
     bmp.from_bytes(f_bmp)
     bmp.reautomate()
     print('[+] regenerating BMP in LBUF mode')
-    Tb = timeit(bmp.to_bytes, number=200)
+    Tb = timeit(bmp.to_bytes, number=1000)
     print('bmp.to_bytes: {0:.4f}'.format(Tb))
     
     print('[+] instantiating and parsing BMP in LPIX mode')
     BMP._GEN = BMP._GEN_LPIX
-    Tc = timeit(test_bmp, number=3)
+    Tc = timeit(test_bmp, number=15)
     print('test_bmp: {0:.4f}'.format(Tc))
     
     bmp = BMP()
     bmp.from_bytes(f_bmp)
     bmp.reautomate()
     print('[+] regenerating BMP in LPIX mode')
-    Td = timeit(bmp.to_bytes, number=2)
+    Td = timeit(bmp.to_bytes, number=10)
     print('bmp.to_bytes: {0:.4f}'.format(Td))
     
     
@@ -165,14 +165,14 @@ def test_perf_media(bmp_path,
         png.from_bytes(f_png)
     
     print('[+] instantiating and parsing PNG')
-    Te = timeit(test_png, number=120)
+    Te = timeit(test_png, number=1000)
     print('test_png: {0:.4f}'.format(Te))
     
     png = PNG()
     png.from_bytes(f_png)
     png.reautomate()
     print('[+] regenerating PNG')
-    Tf = timeit(png.to_bytes, number=350)
+    Tf = timeit(png.to_bytes, number=1600)
     print('png.to_bytes: {0:.4f}'.format(Tf))
     
     
@@ -185,14 +185,14 @@ def test_perf_media(bmp_path,
         jpeg.from_bytes(f_jpg)
     
     print('[+] instantiating and parsing JPEG')
-    Tg = timeit(test_jpg, number=30)
+    Tg = timeit(test_jpg, number=150)
     print('test_png: {0:.4f}'.format(Tg))
     
     jpeg = JPEG()
     jpeg.from_bytes(f_jpg)
     jpeg.reautomate()
     print('[+] regenerating JPEG')
-    Th = timeit(jpeg.to_bytes, number=60)
+    Th = timeit(jpeg.to_bytes, number=300)
     print('jpeg.to_bytes: {0:.4f}'.format(Th))
     
     
@@ -205,14 +205,14 @@ def test_perf_media(bmp_path,
         tiff.from_bytes(f_tiff)
     
     print('[+] instantiating and parsing TIFF')
-    Ti = timeit(test_tiff, number=60)
+    Ti = timeit(test_tiff, number=250)
     print('test_tiff: {0:.4f}'.format(Ti))
     
     tiff = TIFF()
     tiff.from_bytes(f_tiff)
     tiff.reautomate()
     print('[+] regenerating TIFF')
-    Tj = timeit(tiff.to_bytes, number=240)
+    Tj = timeit(tiff.to_bytes, number=800)
     print('tiff.to_bytes: {0:.4f}'.format(Tj))
     
     
@@ -225,14 +225,14 @@ def test_perf_media(bmp_path,
         gif.from_bytes(f_gif)
     
     print('[+] instantiating and parsing GIF')
-    Tk = timeit(test_gif, number=8)
+    Tk = timeit(test_gif, number=70)
     print('test_gif: {0:.4f}'.format(Tk))
     
     gif = GIF()
     gif.from_bytes(f_gif)
     gif.reautomate()
     print('[+] regenerating GIF')
-    Tl = timeit(gif.to_bytes, number=12)
+    Tl = timeit(gif.to_bytes, number=60)
     print('gif.to_bytes: {0:.4f}'.format(Tl))
     
     
@@ -245,14 +245,14 @@ def test_perf_media(bmp_path,
         mp4.from_bytes(f_mp4)
     
     print('[+] instantiating and parsing MPEG4')
-    Tm = timeit(test_mp4, number=12)
+    Tm = timeit(test_mp4, number=60)
     print('test_mp4: {0:.4f}'.format(Tm))
     
     mp4 = MPEG4()
     mp4.from_bytes(f_mp4)
     mp4.reautomate()
     print('[+] regenerating MPEG4')
-    Tn = timeit(mp4.to_bytes, number=50)
+    Tn = timeit(mp4.to_bytes, number=200)
     print('mp4.to_bytes: {0:.4f}'.format(Tn))
     
     
@@ -265,16 +265,27 @@ def test_perf_media(bmp_path,
         mp3.from_bytes(f_mp3)
     
     print('[+] instantiating and parsing MP3')
-    To = timeit(test_mp3, number=60)
+    To = timeit(test_mp3, number=300)
     print('test_mp3: {0:.4f}'.format(To))
     
     mp3 = MP3()
     mp3.from_bytes(f_mp3)
     mp3.reautomate()
     print('[+] regenerating MP3')
-    Tp = timeit(mp3.to_bytes, number=180)
+    Tp = timeit(mp3.to_bytes, number=700)
     print('mp3.to_bytes: {0:.4f}'.format(Tp))
     
-    print('[+] fmt_media total time: {0:.4f}'\
+    print('[+] test_media total time: {0:.4f}'\
           .format(Ta+Tb+Tc+Td+Te+Tf+Ti+Tj+Tk+Tl+Tm+Tn+To+Tp))
+
+
+if __name__ == '__main__':
+    test_perf_media('./test/res/bmp_test.bmp',
+                    './test/res/xkcd_wireless_signal.png',
+                    './test/res/ESP8266.jpg',
+                    './test/res/xkcd_phone_2.tiff',
+                    './test/res/nyancat.gif',
+                    './test/res/Simulation_of_Kepler_Supernova_Explosion.mp4',
+                    './test/res/snare.mp3'
+                    )
 

@@ -60,22 +60,24 @@ def test_eth(eth_frames=eth_frames):
         pkt = EthernetPacket()
         pkt.from_bytes(f)
 
-def test_perf_ip(eth_frames=eth_frames):
+def test_perf_ether(eth_frames=eth_frames):
     
     print('[+] instantiating and parsing Ethernet frames')
-    Ta = timeit(test_eth, number=100)
+    Ta = timeit(test_eth, number=200)
     print('test_eth: {0:.4f}'.format(Ta))
     
     print('[+] regenerating Ethernet frames')
     pkt = EthernetPacket()
     pkt.from_bytes(eth_ipv4_udp_dns)
     pkt.reautomate()
-    Tb = timeit(pkt.to_bytes, number=100)
+    Tb = timeit(pkt.to_bytes, number=200)
     pkt.from_bytes(eth_ipv4_tcp_http)
     pkt.reautomate()
-    Tc = timeit(pkt.to_bytes, number=100)
+    Tc = timeit(pkt.to_bytes, number=200)
     print('pkt.to_bytes: {0:.4f}'.format(Tb+Tc))
+    
+    print('[+] test_ether total time: {0:.4f}'.format(Ta+Tb+Tc))
 
 if __name__ == '__main__':
-    test_perf_ip(eth_frames)
+    test_perf_ether()
 

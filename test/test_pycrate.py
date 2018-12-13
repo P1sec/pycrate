@@ -31,6 +31,7 @@ import sys
 import os
 import importlib
 import unittest
+import time
 
 from test.test_core   import *
 from test.test_media  import *
@@ -162,7 +163,8 @@ class TestPycrate(unittest.TestCase):
 
 
 def test_perf_all():
-    test_perf()
+    T0 = time.time()
+    test_perf_core()
     test_perf_media('./test/res/bmp_test.bmp',
                     './test/res/xkcd_wireless_signal.png',
                     './test/res/ESP8266.jpg',
@@ -171,9 +173,14 @@ def test_perf_all():
                     './test/res/Simulation_of_Kepler_Supernova_Explosion.mp4',
                     './test/res/snare.mp3'
                     )
-    test_perf_ip(eth_frames)
-
+    test_perf_ether()
+    test_perf_asn1rt()
+    test_perf_csn1()
+    test_perf_mobile()
+    test_perf_gsmrr()
+    print('[<<<>>>] total time: %.4f' % (time.time() - T0))
 
 if __name__ == '__main__':
-    unittest.main()
+    #unittest.main()
+    test_perf_all()
 
