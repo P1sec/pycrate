@@ -849,13 +849,10 @@ class NetworkName(Envelope):
     def set_val(self, vals):
         Name = None
         if isinstance(vals, dict) and 'Name' in vals:
-            Name = vals['Name']
+            Name = dict(vals['Name'])
             del vals['Name']
-        elif isinstance(vals, tuple) and len(vals) == 5:
+        elif isinstance(vals, (tuple, list)) and len(vals) == 5:
             vals = list(vals)
-            Name = vals[-1]
-            vals[-1] = None
-        elif isinstance(vals, list) and len(vals) == 5:
             Name = vals[-1]
             vals[-1] = None
         Envelope.set_val(self, vals)
