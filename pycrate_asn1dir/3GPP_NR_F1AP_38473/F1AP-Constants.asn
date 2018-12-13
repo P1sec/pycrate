@@ -1,5 +1,3 @@
--- 3GPP TS 38.473 V15.3.0 (2018-09)
--- 9.4.7	Constant Definitions
 -- **************************************************************
 --
 -- Constant definitions
@@ -111,9 +109,6 @@ id-Cells-to-be-Deactivated-List						ProtocolIE-ID ::= 5
 id-Cells-to-be-Deactivated-List-Item				ProtocolIE-ID ::= 6
 id-CriticalityDiagnostics							ProtocolIE-ID ::= 7
 id-CUtoDURRCInformation								ProtocolIE-ID ::= 9
--- WS extension
-id-Unknown-10										ProtocolIE-ID ::= 10
-id-Unknown-11										ProtocolIE-ID ::= 11
 id-DRBs-FailedToBeModified-Item						ProtocolIE-ID ::= 12
 id-DRBs-FailedToBeModified-List						ProtocolIE-ID ::= 13
 id-DRBs-FailedToBeSetup-Item						ProtocolIE-ID ::= 14
@@ -205,16 +200,11 @@ id-DRB-Activity-Item							ProtocolIE-ID ::= 99
 id-DRB-Activity-List							ProtocolIE-ID ::= 100
 id-EUTRA-NR-CellResourceCoordinationReq-Container 		ProtocolIE-ID ::= 101
 id-EUTRA-NR-CellResourceCoordinationReqAck-Container 	ProtocolIE-ID ::= 102
--- WS extension
-id-Unknown-103									ProtocolIE-ID ::= 103
-id-Unknown-104									ProtocolIE-ID ::= 104
 id-Protected-EUTRA-Resources-List						ProtocolIE-ID ::= 105
 id-RequestType 											ProtocolIE-ID ::= 106
 id-ServCellndex									ProtocolIE-ID ::= 107 
 id-RAT-FrequencyPriorityInformation				ProtocolIE-ID ::= 108
 id-ExecuteDuplication							ProtocolIE-ID ::= 109
--- WS extension
-id-Unknown-110										ProtocolIE-ID ::= 110
 id-NRCGI											ProtocolIE-ID ::= 111
 id-PagingCell-Item								ProtocolIE-ID ::= 112
 id-PagingCell-List								ProtocolIE-ID ::= 113
@@ -247,8 +237,6 @@ id-RANAC											ProtocolIE-ID ::= 139
 id-PWSSystemInformation							ProtocolIE-ID ::= 140
 id-RepetitionPeriod								ProtocolIE-ID ::= 141
 id-NumberofBroadcastRequest						ProtocolIE-ID ::= 142
--- WS extension
-id-Unknown-143									ProtocolIE-ID ::= 143
 id-Cells-To-Be-Broadcast-List					ProtocolIE-ID ::= 144
 id-Cells-To-Be-Broadcast-Item					ProtocolIE-ID ::= 145
 id-Cells-Broadcast-Completed-List 				ProtocolIE-ID ::= 146
@@ -271,12 +259,7 @@ id-GNB-DUConfigurationQuery						ProtocolIE-ID ::= 162
 id-MeasurementTimingConfiguration				ProtocolIE-ID ::= 163
 id-DRB-Information								ProtocolIE-ID ::= 164
 id-ServingPLMN									ProtocolIE-ID ::= 165
--- WS extension
-id-Unknown-166									ProtocolIE-ID ::= 166
-id-Unknown-167									ProtocolIE-ID ::= 167
 id-Protected-EUTRA-Resources-Item				ProtocolIE-ID ::= 168
--- WS extension
-id-Unknown-169									ProtocolIE-ID ::= 169
 id-GNB-CU-RRC-Version							ProtocolIE-ID ::= 170
 id-GNB-DU-RRC-Version							ProtocolIE-ID ::= 171
 id-GNBDUOverloadInformation						ProtocolIE-ID ::= 172

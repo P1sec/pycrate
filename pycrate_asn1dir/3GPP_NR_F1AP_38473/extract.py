@@ -7,7 +7,7 @@ import codecs
 import re
 
 dirpath = './'
-path = dirpath + '38473-f11.txt'
+path = dirpath + '38473-f30.txt'
 
 # ASN.1 modules are described within specific sections
 sections = [
