@@ -7,7 +7,7 @@ import codecs
 import re
 
 dirpath = './'
-path = dirpath + '38331-f10.txt'
+path = dirpath + '38331-f30.txt'
 
 # for RRC, this re works fine as there is no OID when a module is declared
 module_def = re.compile('^([A-Z][a-zA-Z0-9\-]{0,})(\s{1,}DEFINITIONS\s{1,}[A-Z\-\s]{0,}::=)')
