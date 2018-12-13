@@ -48,7 +48,21 @@ FROM F1AP-CommonDataTypes
 	UEContextReleaseRequest,
 	DLRRCMessageTransfer,
 	ULRRCMessageTransfer,
-	PrivateMessage
+	GNBDUResourceCoordinationRequest,
+	GNBDUResourceCoordinationResponse,
+	PrivateMessage,
+	UEInactivityNotification,
+	InitialULRRCMessageTransfer,
+	SystemInformationDeliveryCommand,
+	Paging,
+	Notify,
+	WriteReplaceWarningRequest,
+	WriteReplaceWarningResponse,
+	PWSCancelRequest,
+	PWSCancelResponse,
+	PWSRestartIndication,
+	PWSFailureIndication,
+	GNBDUStatusIndication
 
 FROM F1AP-PDU-Contents
 	id-Reset,
@@ -63,10 +77,26 @@ FROM F1AP-PDU-Contents
 	id-UEContextReleaseRequest,
 	id-DLRRCMessageTransfer,
 	id-ULRRCMessageTransfer,
-	id-privateMessage
+	id-GNBDUResourceCoordination,
+	id-privateMessage,
+	id-UEInactivityNotification,
+	id-InitialULRRCMessageTransfer,
+	id-SystemInformationDeliveryCommand,
+	id-Paging,
+	id-Notify,
+	id-WriteReplaceWarning,
+	id-PWSCancel,
+	id-PWSRestartIndication,
+	id-PWSFailureIndication,
+	id-GNBDUStatusIndication
 
 
-FROM F1AP-Constants;
+FROM F1AP-Constants
+
+	ProtocolIE-SingleContainer{},
+	F1AP-PROTOCOL-IES
+
+FROM F1AP-Containers;
 
 
 -- **************************************************************
@@ -99,7 +129,11 @@ WITH SYNTAX {
 F1AP-PDU ::= CHOICE {
 	initiatingMessage	InitiatingMessage,
 	successfulOutcome	SuccessfulOutcome,
-	unsuccessfulOutcome	UnsuccessfulOutcome,
+	unsuccessfulOutcome	UnsuccessfulOutcome, 
+	choice-extension	ProtocolIE-SingleContainer { { F1AP-PDU-ExtIEs} }
+}
+
+F1AP-PDU-ExtIEs F1AP-PROTOCOL-IES ::= {
 	...
 }
 
@@ -142,7 +176,10 @@ F1AP-ELEMENTARY-PROCEDURES-CLASS-1 F1AP-ELEMENTARY-PROCEDURE ::= {
 	uEContextSetup					|
 	uEContextRelease				|
 	uEContextModification			|
-	uEContextModificationRequired	,
+	uEContextModificationRequired	|
+	writeReplaceWarning			|
+	pWSCancel					|
+	gNBDUResourceCoordination		,
 	...}
 
  F1AP-ELEMENTARY-PROCEDURES-CLASS-2 F1AP-ELEMENTARY-PROCEDURE ::= {	
@@ -150,7 +187,15 @@ F1AP-ELEMENTARY-PROCEDURES-CLASS-1 F1AP-ELEMENTARY-PROCEDURE ::= {
 	uEContextReleaseRequest			|
 	dLRRCMessageTransfer			|
 	uLRRCMessageTransfer			|
-	privateMessage					,
+	uEInactivityNotification		|
+	privateMessage					|
+	initialULRRCMessageTransfer		|
+	systemInformationDelivery		|
+	paging							|
+	notify							|
+	pWSRestartIndication				|
+	pWSFailureIndication			|
+	gNBDUStatusIndication			,
 	...
 }
 -- **************************************************************
@@ -220,6 +265,19 @@ uEContextModificationRequired F1AP-ELEMENTARY-PROCEDURE ::= {
 	CRITICALITY				reject
 }
 
+writeReplaceWarning F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		WriteReplaceWarningRequest
+	SUCCESSFUL OUTCOME		WriteReplaceWarningResponse
+	PROCEDURE CODE			id-WriteReplaceWarning
+	CRITICALITY				reject
+}
+
+pWSCancel F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		PWSCancelRequest
+	SUCCESSFUL OUTCOME		PWSCancelResponse
+	PROCEDURE CODE			id-PWSCancel
+	CRITICALITY				reject
+}
 
 errorIndication F1AP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		ErrorIndication
@@ -234,6 +292,12 @@ uEContextReleaseRequest F1AP-ELEMENTARY-PROCEDURE ::= {
 }
 
 
+initialULRRCMessageTransfer F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		InitialULRRCMessageTransfer
+	PROCEDURE CODE			id-InitialULRRCMessageTransfer
+	CRITICALITY				ignore
+}
+
 dLRRCMessageTransfer F1AP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		DLRRCMessageTransfer
 	PROCEDURE CODE			id-DLRRCMessageTransfer
@@ -247,12 +311,61 @@ uLRRCMessageTransfer F1AP-ELEMENTARY-PROCEDURE ::= {
 }
 
 
+uEInactivityNotification  F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		UEInactivityNotification
+	PROCEDURE CODE			id-UEInactivityNotification
+	CRITICALITY				ignore
+}
+
+gNBDUResourceCoordination F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		GNBDUResourceCoordinationRequest
+	SUCCESSFUL OUTCOME		GNBDUResourceCoordinationResponse
+	PROCEDURE CODE			id-GNBDUResourceCoordination
+	CRITICALITY				reject
+}
+
 privateMessage F1AP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		PrivateMessage
 	PROCEDURE CODE			id-privateMessage
 	CRITICALITY				ignore
 }
 
+systemInformationDelivery F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		SystemInformationDeliveryCommand
+	PROCEDURE CODE			id-SystemInformationDeliveryCommand
+	CRITICALITY				ignore
+}
+
+
+paging F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		Paging
+	PROCEDURE CODE			id-Paging
+	CRITICALITY				ignore
+}
+
+notify F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		Notify
+	PROCEDURE CODE			id-Notify
+	CRITICALITY				ignore
+}
+
+pWSRestartIndication F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		PWSRestartIndication
+	PROCEDURE CODE			id-PWSRestartIndication
+	CRITICALITY				ignore
+}
+
+pWSFailureIndication F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		PWSFailureIndication
+	PROCEDURE CODE			id-PWSFailureIndication
+	CRITICALITY				ignore
+}
+
+gNBDUStatusIndication 	F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		GNBDUStatusIndication
+	PROCEDURE CODE			id-GNBDUStatusIndication
+	CRITICALITY				ignore
+}
 
 
 END
