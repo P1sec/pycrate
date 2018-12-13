@@ -4482,7 +4482,7 @@ class F1AP_IEs:
     
     #-----< RRC-Version >-----#
     RRC_Version = SEQ(name='RRC-Version', mode=MODE_TYPE)
-    _RRC_Version_latest_RRC_Version = OCT_STR(name='latest-RRC-Version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RRC_Version_latest_RRC_Version = BIT_STR(name='latest-RRC-Version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _RRC_Version_latest_RRC_Version._const_sz = ASN1Set(rv=[3], rr=[], ev=None, er=[])
     _RRC_Version_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('F1AP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __RRC_Version_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('F1AP-Containers', 'ProtocolExtensionField')))
@@ -13292,8 +13292,6 @@ class F1AP_Constants:
         'id-Cells-to-be-Deactivated-List-Item',
         'id-CriticalityDiagnostics',
         'id-CUtoDURRCInformation',
-        'id-Unknown-10',
-        'id-Unknown-11',
         'id-DRBs-FailedToBeModified-Item',
         'id-DRBs-FailedToBeModified-List',
         'id-DRBs-FailedToBeSetup-Item',
@@ -13385,14 +13383,11 @@ class F1AP_Constants:
         'id-DRB-Activity-List',
         'id-EUTRA-NR-CellResourceCoordinationReq-Container',
         'id-EUTRA-NR-CellResourceCoordinationReqAck-Container',
-        'id-Unknown-103',
-        'id-Unknown-104',
         'id-Protected-EUTRA-Resources-List',
         'id-RequestType',
         'id-ServCellndex',
         'id-RAT-FrequencyPriorityInformation',
         'id-ExecuteDuplication',
-        'id-Unknown-110',
         'id-NRCGI',
         'id-PagingCell-Item',
         'id-PagingCell-List',
@@ -13425,7 +13420,6 @@ class F1AP_Constants:
         'id-PWSSystemInformation',
         'id-RepetitionPeriod',
         'id-NumberofBroadcastRequest',
-        'id-Unknown-143',
         'id-Cells-To-Be-Broadcast-List',
         'id-Cells-To-Be-Broadcast-Item',
         'id-Cells-Broadcast-Completed-List',
@@ -13448,10 +13442,7 @@ class F1AP_Constants:
         'id-MeasurementTimingConfiguration',
         'id-DRB-Information',
         'id-ServingPLMN',
-        'id-Unknown-166',
-        'id-Unknown-167',
         'id-Protected-EUTRA-Resources-Item',
-        'id-Unknown-169',
         'id-GNB-CU-RRC-Version',
         'id-GNB-DU-RRC-Version',
         'id-GNBDUOverloadInformation',
@@ -13527,8 +13518,6 @@ class F1AP_Constants:
         'id-Cells-to-be-Deactivated-List-Item',
         'id-CriticalityDiagnostics',
         'id-CUtoDURRCInformation',
-        'id-Unknown-10',
-        'id-Unknown-11',
         'id-DRBs-FailedToBeModified-Item',
         'id-DRBs-FailedToBeModified-List',
         'id-DRBs-FailedToBeSetup-Item',
@@ -13620,14 +13609,11 @@ class F1AP_Constants:
         'id-DRB-Activity-List',
         'id-EUTRA-NR-CellResourceCoordinationReq-Container',
         'id-EUTRA-NR-CellResourceCoordinationReqAck-Container',
-        'id-Unknown-103',
-        'id-Unknown-104',
         'id-Protected-EUTRA-Resources-List',
         'id-RequestType',
         'id-ServCellndex',
         'id-RAT-FrequencyPriorityInformation',
         'id-ExecuteDuplication',
-        'id-Unknown-110',
         'id-NRCGI',
         'id-PagingCell-Item',
         'id-PagingCell-List',
@@ -13660,7 +13646,6 @@ class F1AP_Constants:
         'id-PWSSystemInformation',
         'id-RepetitionPeriod',
         'id-NumberofBroadcastRequest',
-        'id-Unknown-143',
         'id-Cells-To-Be-Broadcast-List',
         'id-Cells-To-Be-Broadcast-Item',
         'id-Cells-Broadcast-Completed-List',
@@ -13683,10 +13668,7 @@ class F1AP_Constants:
         'id-MeasurementTimingConfiguration',
         'id-DRB-Information',
         'id-ServingPLMN',
-        'id-Unknown-166',
-        'id-Unknown-167',
         'id-Protected-EUTRA-Resources-Item',
-        'id-Unknown-169',
         'id-GNB-CU-RRC-Version',
         'id-GNB-DU-RRC-Version',
         'id-GNBDUOverloadInformation',
@@ -13932,14 +13914,6 @@ class F1AP_Constants:
     #-----< id-CUtoDURRCInformation >-----#
     id_CUtoDURRCInformation = INT(name='id-CUtoDURRCInformation', mode=MODE_VALUE, typeref=ASN1RefType(('F1AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_CUtoDURRCInformation._val = 9
-    
-    #-----< id-Unknown-10 >-----#
-    id_Unknown_10 = INT(name='id-Unknown-10', mode=MODE_VALUE, typeref=ASN1RefType(('F1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_Unknown_10._val = 10
-    
-    #-----< id-Unknown-11 >-----#
-    id_Unknown_11 = INT(name='id-Unknown-11', mode=MODE_VALUE, typeref=ASN1RefType(('F1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_Unknown_11._val = 11
     
     #-----< id-DRBs-FailedToBeModified-Item >-----#
     id_DRBs_FailedToBeModified_Item = INT(name='id-DRBs-FailedToBeModified-Item', mode=MODE_VALUE, typeref=ASN1RefType(('F1AP-CommonDataTypes', 'ProtocolIE-ID')))
@@ -14305,14 +14279,6 @@ class F1AP_Constants:
     id_EUTRA_NR_CellResourceCoordinationReqAck_Container = INT(name='id-EUTRA-NR-CellResourceCoordinationReqAck-Container', mode=MODE_VALUE, typeref=ASN1RefType(('F1AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_EUTRA_NR_CellResourceCoordinationReqAck_Container._val = 102
     
-    #-----< id-Unknown-103 >-----#
-    id_Unknown_103 = INT(name='id-Unknown-103', mode=MODE_VALUE, typeref=ASN1RefType(('F1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_Unknown_103._val = 103
-    
-    #-----< id-Unknown-104 >-----#
-    id_Unknown_104 = INT(name='id-Unknown-104', mode=MODE_VALUE, typeref=ASN1RefType(('F1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_Unknown_104._val = 104
-    
     #-----< id-Protected-EUTRA-Resources-List >-----#
     id_Protected_EUTRA_Resources_List = INT(name='id-Protected-EUTRA-Resources-List', mode=MODE_VALUE, typeref=ASN1RefType(('F1AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_Protected_EUTRA_Resources_List._val = 105
@@ -14332,10 +14298,6 @@ class F1AP_Constants:
     #-----< id-ExecuteDuplication >-----#
     id_ExecuteDuplication = INT(name='id-ExecuteDuplication', mode=MODE_VALUE, typeref=ASN1RefType(('F1AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_ExecuteDuplication._val = 109
-    
-    #-----< id-Unknown-110 >-----#
-    id_Unknown_110 = INT(name='id-Unknown-110', mode=MODE_VALUE, typeref=ASN1RefType(('F1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_Unknown_110._val = 110
     
     #-----< id-NRCGI >-----#
     id_NRCGI = INT(name='id-NRCGI', mode=MODE_VALUE, typeref=ASN1RefType(('F1AP-CommonDataTypes', 'ProtocolIE-ID')))
@@ -14465,10 +14427,6 @@ class F1AP_Constants:
     id_NumberofBroadcastRequest = INT(name='id-NumberofBroadcastRequest', mode=MODE_VALUE, typeref=ASN1RefType(('F1AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_NumberofBroadcastRequest._val = 142
     
-    #-----< id-Unknown-143 >-----#
-    id_Unknown_143 = INT(name='id-Unknown-143', mode=MODE_VALUE, typeref=ASN1RefType(('F1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_Unknown_143._val = 143
-    
     #-----< id-Cells-To-Be-Broadcast-List >-----#
     id_Cells_To_Be_Broadcast_List = INT(name='id-Cells-To-Be-Broadcast-List', mode=MODE_VALUE, typeref=ASN1RefType(('F1AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_Cells_To_Be_Broadcast_List._val = 144
@@ -14557,21 +14515,9 @@ class F1AP_Constants:
     id_ServingPLMN = INT(name='id-ServingPLMN', mode=MODE_VALUE, typeref=ASN1RefType(('F1AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_ServingPLMN._val = 165
     
-    #-----< id-Unknown-166 >-----#
-    id_Unknown_166 = INT(name='id-Unknown-166', mode=MODE_VALUE, typeref=ASN1RefType(('F1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_Unknown_166._val = 166
-    
-    #-----< id-Unknown-167 >-----#
-    id_Unknown_167 = INT(name='id-Unknown-167', mode=MODE_VALUE, typeref=ASN1RefType(('F1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_Unknown_167._val = 167
-    
     #-----< id-Protected-EUTRA-Resources-Item >-----#
     id_Protected_EUTRA_Resources_Item = INT(name='id-Protected-EUTRA-Resources-Item', mode=MODE_VALUE, typeref=ASN1RefType(('F1AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_Protected_EUTRA_Resources_Item._val = 168
-    
-    #-----< id-Unknown-169 >-----#
-    id_Unknown_169 = INT(name='id-Unknown-169', mode=MODE_VALUE, typeref=ASN1RefType(('F1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_Unknown_169._val = 169
     
     #-----< id-GNB-CU-RRC-Version >-----#
     id_GNB_CU_RRC_Version = INT(name='id-GNB-CU-RRC-Version', mode=MODE_VALUE, typeref=ASN1RefType(('F1AP-CommonDataTypes', 'ProtocolIE-ID')))
@@ -14679,8 +14625,6 @@ class F1AP_Constants:
         id_Cells_to_be_Deactivated_List_Item,
         id_CriticalityDiagnostics,
         id_CUtoDURRCInformation,
-        id_Unknown_10,
-        id_Unknown_11,
         id_DRBs_FailedToBeModified_Item,
         id_DRBs_FailedToBeModified_List,
         id_DRBs_FailedToBeSetup_Item,
@@ -14772,14 +14716,11 @@ class F1AP_Constants:
         id_DRB_Activity_List,
         id_EUTRA_NR_CellResourceCoordinationReq_Container,
         id_EUTRA_NR_CellResourceCoordinationReqAck_Container,
-        id_Unknown_103,
-        id_Unknown_104,
         id_Protected_EUTRA_Resources_List,
         id_RequestType,
         id_ServCellndex,
         id_RAT_FrequencyPriorityInformation,
         id_ExecuteDuplication,
-        id_Unknown_110,
         id_NRCGI,
         id_PagingCell_Item,
         id_PagingCell_List,
@@ -14812,7 +14753,6 @@ class F1AP_Constants:
         id_PWSSystemInformation,
         id_RepetitionPeriod,
         id_NumberofBroadcastRequest,
-        id_Unknown_143,
         id_Cells_To_Be_Broadcast_List,
         id_Cells_To_Be_Broadcast_Item,
         id_Cells_Broadcast_Completed_List,
@@ -14835,10 +14775,7 @@ class F1AP_Constants:
         id_MeasurementTimingConfiguration,
         id_DRB_Information,
         id_ServingPLMN,
-        id_Unknown_166,
-        id_Unknown_167,
         id_Protected_EUTRA_Resources_Item,
-        id_Unknown_169,
         id_GNB_CU_RRC_Version,
         id_GNB_DU_RRC_Version,
         id_GNBDUOverloadInformation,
