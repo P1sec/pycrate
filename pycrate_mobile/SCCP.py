@@ -105,6 +105,7 @@ _SCCPParam_dict = {
 
 class EOO(Uint8):
     _val = 0
+    _dic = _SCCPParam_dict
 
 
 #------------------------------------------------------------------------------#
@@ -763,7 +764,9 @@ def Optional(param, name, trans=True):
     """prefix the parameter element `param' with an uint8 as name, and eventually
     an uint8 as len, and make it transparent by default
     """
-    if param.CLASS == 'Envelope' and param[0]._name == 'Len':
+    if param._name == 'EOO':
+        w = Envelope(param._name, GEN=(param, ), trans=True)
+    elif param.CLASS == 'Envelope' and param[0]._name == 'Len':
         # length prefix already present
         w = Envelope(param._name, GEN=(
                 Uint8('Name', val=name, dic=_SCCPParam_dict),
@@ -829,11 +832,16 @@ class SCCPOpt(Envelope):
         # parse the different options in the given order
         ind = 0
         while char.len_bit() >= 8:
-            name = char.to_uint(8)
+            name = char.get_uint(8)
             if name not in self._opts:
-                raise(PycrateErr('SCCP option: invalid identifier %i' % name))
-            opt = self._opts[name]
-            opt.set_trans(False)
+                #raise(PycrateErr('SCCP option: invalid identifier %i' % name))
+                # unknown option
+                opt = Optional(Buf('_unk_%i' % name), name)
+                # automate the length of Buf() to its Len() prefix
+                opt[2].set_blauto(lambda: opt[1].get_val()<<3)
+            else:
+                opt = self._opts[name]
+                opt.set_trans(False)
             opt[0].set_val(name)
             # parse the rest of the option
             for e in opt._content[1:]:
