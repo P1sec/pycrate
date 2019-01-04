@@ -1105,15 +1105,16 @@ class SMS_STATUS_REPORT(SMS_TP):
         self['TP_UD'].set_transauto(lambda: False if not self['TP_PI'].get_trans() and self['TP_PI']['TP_UDL']() else True)
     
     def _from_char(self, char):
-        # warning: TP_PI may be transparent
-        self[-4].set_trans(True)
-        SMS_TP._from_char(self, char)
-        if char.len_bit() >= 8:
-            self[-4].set_trans(False)
-            self[-4]._from_char(char)
-            self[-3]._from_char(char)
-            self[-2]._from_char(char)
-            self[-1]._from_char(char)
+        if not self.get_trans():
+            # warning: TP_PI may be transparent
+            self[-4].set_trans(True)
+            SMS_TP._from_char(self, char)
+            if char.len_bit() >= 8:
+                self[-4].set_trans(False)
+                self[-4]._from_char(char)
+                self[-3]._from_char(char)
+                self[-2]._from_char(char)
+                self[-1]._from_char(char)
 
 
 #------------------------------------------------------------------------------#
