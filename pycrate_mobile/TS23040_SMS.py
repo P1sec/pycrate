@@ -1098,6 +1098,7 @@ class SMS_STATUS_REPORT(SMS_TP):
         )
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
+        self['TP_PI'].set_transauto(lambda: True)
         self['TP_PID'].set_transauto(lambda: False if self['TP_PI']['TP_PID']() else True)
         self['TP_DCS'].set_transauto(lambda: False if self['TP_PI']['TP_DCS']() else True)
         self['TP_UD'].set_transauto(lambda: False if self['TP_PI']['TP_UDL']() else True)
