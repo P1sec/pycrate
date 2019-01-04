@@ -842,21 +842,22 @@ class TP_UD(Envelope):
             return self[1].get_len() + self[2].get_len()
     
     def _from_char(self, char):
-        dcs = self.get_dcs()
-        self[0]._from_char(char)
-        ccur, clen, charnum = char._cur, char._len_bit, self[0]()
-        self[1]._from_char(char)
-        if dcs == DCS_7B:
-            char._len_bit = ccur + 7*charnum
-            lastbit, self[2]._ENC_BL = char._len_bit%8, (char._len_bit-char._cur)
-            if lastbit:
-                char._len_bit += 8-lastbit
-            self[2]._from_char(char)
-        else:
-            char._len_bit = ccur + 8*charnum
-            self[2]._ENC_BL = 0
-            self[2]._from_char(char)
-        char._len_bit = clen
+        if not self.get_trans():
+            dcs = self.get_dcs()
+            self[0]._from_char(char)
+            ccur, clen, charnum = char._cur, char._len_bit, self[0]()
+            self[1]._from_char(char)
+            if dcs == DCS_7B:
+                char._len_bit = ccur + 7*charnum
+                lastbit, self[2]._ENC_BL = char._len_bit%8, (char._len_bit-char._cur)
+                if lastbit:
+                    char._len_bit += 8-lastbit
+                self[2]._from_char(char)
+            else:
+                char._len_bit = ccur + 8*charnum
+                self[2]._ENC_BL = 0
+                self[2]._from_char(char)
+            char._len_bit = clen
     
     def get_udhi(self):
         try:
@@ -1091,16 +1092,28 @@ class SMS_STATUS_REPORT(SMS_TP):
         TP_SCTS(),
         TP_DT(),
         Uint8('TP_ST', dic=_TP_ST_dict),
-        TP_PI(),
+        TP_PI(), # may be set to transparent in case none of the following fields are present
         TP_PID(),
         TP_DCS(),
         TP_UD()
         )
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self['TP_PID'].set_transauto(lambda: False if self['TP_PI']['TP_PID']() else True)
-        self['TP_DCS'].set_transauto(lambda: False if self['TP_PI']['TP_DCS']() else True)
-        self['TP_UD'].set_transauto(lambda: False if self['TP_PI']['TP_UDL']() else True)
+        # warning: TP-PI may be transparent
+        self['TP_PID'].set_transauto(lambda: False if not self['TP_PI'].get_trans() and self['TP_PI']['TP_PID']() else True)
+        self['TP_DCS'].set_transauto(lambda: False if not self['TP_PI'].get_trans() and self['TP_PI']['TP_DCS']() else True)
+        self['TP_UD'].set_transauto(lambda: False if not self['TP_PI'].get_trans() and self['TP_PI']['TP_UDL']() else True)
+    
+    def _from_char(self, char):
+        # warning: TP_PI may be transparent
+        self[-4].set_trans(True)
+        SMS_TP._from_char(self, char)
+        if char.len_bit() >= 8:
+            self[-4].set_trans(False)
+            self[-4]._from_char(char)
+            self[-3]._from_char(char)
+            self[-2]._from_char(char)
+            self[-1]._from_char(char)
 
 
 #------------------------------------------------------------------------------#

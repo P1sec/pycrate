@@ -575,7 +575,7 @@ def encode_7b(txt):
 
 def decode_7b(buf):
     """translates the GSM 7 bit characters buffer `buf' to an unicode string
-    """ 
+    """
     if python_version < 3:
         char = Charpy(''.join(reversed(buf)))
     else:
