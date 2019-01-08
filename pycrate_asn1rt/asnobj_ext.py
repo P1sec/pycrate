@@ -367,8 +367,8 @@ Single value: Python 2-tuple
             const_obj_type, const_obj = self._get_tab_obj()
             if const_obj_type == CLASET_NONE:
                 if not self._SILENT:
-                    asnlog('OPEN._decode_ber_cont_ws: %s, unable to retrieve a table-looked up object, %s'\
-                           % (self.fullname(), err))
+                    asnlog('OPEN._decode_ber_cont_ws: %s, unable to retrieve a table-looked up object'\
+                           % self.fullname())
                 Objs = []
             elif const_obj_type == CLASET_UNIQ:
                 Objs = [const_obj]
@@ -392,8 +392,8 @@ Single value: Python 2-tuple
         decoded = False
         if Objs:
             # we found at least one (or more) defined object
+            char_cur, char_lb = char._cur, char._len_bit
             for Obj in Objs:
-                char_cur, char_lb = char._cur, char._len_bit
                 try:
                     Obj._from_ber_ws(char, [tlv])
                 except:
@@ -461,8 +461,8 @@ Single value: Python 2-tuple
             const_obj_type, const_obj = self._get_tab_obj()
             if const_obj_type == CLASET_NONE:
                 if not self._SILENT:
-                    asnlog('OPEN._decode_ber_cont: %s, unable to retrieve a table-looked up object, %s'\
-                           % (self.fullname(), err))
+                    asnlog('OPEN._decode_ber_cont: %s, unable to retrieve a table-looked up object'\
+                           % self.fullname())
                 Objs = []
             elif const_obj_type == CLASET_UNIQ:
                 Objs = [const_obj]
@@ -486,8 +486,8 @@ Single value: Python 2-tuple
         decoded = False
         if Objs:
             # we found at least one (or more) defined object
+            char_cur, char_lb = char._cur, char._len_bit
             for Obj in Objs:
-                char_cur, char_lb = char._cur, char._len_bit
                 try:
                     Obj._from_ber(char, [tlv])
                 except Exception as err:
