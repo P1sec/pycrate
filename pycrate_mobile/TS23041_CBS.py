@@ -191,3 +191,4 @@ def encode_cbs_pages(msg, dcs7b=True, char_preamb=''):
         buf.append(page)
         buf.append(pack('>B', page_len))
     return b''.join(buf)
+

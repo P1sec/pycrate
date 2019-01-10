@@ -296,7 +296,7 @@ _SSN_dict = {
     6 : 'home location register (HLR)',
     7 : 'visitor location register (VLR)',
     8 : 'mobile switching centre (MSC)',
-    9 : 'equipment identifier centre (EIC)',
+    9 : 'equipment identifier register (EIR)',
     10 : 'authentication centre (AUC)',
     11 : 'ISDN supplementary services',
     12 : 'reserved for international use',
@@ -311,6 +311,13 @@ _SSN_dict = {
     148 : '3GPP SIWF (MAP)',
     149 : '3GPP SGSN (MAP)',
     150 : '3GPP GGSN (MAP)',
+    248 : '3GPP CSS (MAP)',
+    249 : '3GPP PCAP',
+    250 : '3GPP BSC (BSSAP-LE)',
+    251 : '3GPP MSC (BSSAP-LE)',
+    252 : '3GPP SMLC (BSSAP-LE)',
+    253 : '3GPP BSS O&M (A interface)',
+    254 : '3GPP BSSAP (A interface)'
     }
 
 
