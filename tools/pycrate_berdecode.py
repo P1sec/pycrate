@@ -60,7 +60,7 @@ def main():
     
     parser.add_argument('-i', dest='input', type=str,
                         help='file containing the binary encoded objects')
-    parser.add_argument('-s', dest='stream', type=bytes,
+    parser.add_argument('-s', dest='stream', type=str,
                         help='hexadecimal string encoding the objects')
     #
     args = parser.parse_args()
