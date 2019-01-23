@@ -937,4 +937,14 @@ class ASN1Set(object):
             else:
                 return None
         return num.bit_length()
+    
+    def getv(self):
+        """
+        returns the list of individual values in the root and ext part, omitting
+        any values in ranges
+        """
+        ret = self._rv[:]
+        if self._ev is not None:
+            ret.extend( self._ev )
+        return ret
 
