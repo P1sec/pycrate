@@ -1369,9 +1369,9 @@ Specific constraints attributes:
     
     def _to_per(self):
         if not isinstance(self._val, bytes_types):
-            buf = self.__to_per_buf()
+            buf, wrapped = self.__to_per_buf()
         else:
-            buf = self._val
+            buf, wrapped = self._val, None
         GEN = []
         if self._const_sz:
             if self._const_sz._ev is not None:
