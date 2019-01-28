@@ -566,7 +566,10 @@ class M2PA(Envelope):
         self[0]._from_char(char)
         self[1]._from_char(char)
         if self[0][4].get_val() > 16:
+            self[2].set_trans(False)
             self[2]._from_char(char)
+        else:
+            self[2].set_trans(True)
 
 
 MTP3SubServInd_dict = {
