@@ -27,7 +27,7 @@
 # *--------------------------------------------------------
 #*/
 
-from pycrate_core.utils import *
+from pycrate_core.utils import integer_types
 
 from .err  import ASN1Err
 
