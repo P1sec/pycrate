@@ -27,6 +27,8 @@
 # *--------------------------------------------------------
 #*/
 
+from pycrate_core.utils import *
+
 from .err  import ASN1Err
 
 
