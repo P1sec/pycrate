@@ -27,7 +27,7 @@
 # *--------------------------------------------------------
 #*/
 
-from .err import ASN1Err 
+from .err  import ASN1Err
 
 
 RefObj_docstring = """
@@ -89,10 +89,11 @@ class ASN1Ref(object):
             return hash(self.called) + hash(tuple(self.ced_path))
     
     def _safechk(self):
-        if not isinstance(self.called, (NoneType, tuple, ASN1RefParam)):
+        if self.called is not None and \
+        not isinstance(self.called, (tuple, ASN1RefParam)):
             raise(ASN1Err('{0}: invalid called'.format(self.__class__.__name__)))
         if not isinstance(self.ced_path, list) or \
-        not all([isinstance(e, (str, integer_types))]):
+        not all([isinstance(e, (str, integer_types)) for e in self.ced_path]):
             raise(ASN1Err('{0}: invalid ced_path'.format(self.__class__.__name__)))
     
     def copy(self):

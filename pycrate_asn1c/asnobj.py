@@ -614,7 +614,7 @@ class ASN1Obj(object):
                 if self._val['ext'] is not None:
                     ext = ', ...'
                 elif self._val['ext']:
-                    ext += ', %s' % repr(self._val['ext'])[1:-1]
+                    ext = ', ..., %s' % repr(self._val['ext'])[1:-1]
                 else:
                     ext = ''
                 val = repr(self._val['root'])[1:-1] + ext
@@ -2266,7 +2266,7 @@ class ASN1Obj(object):
                   .format(self.fullname())))
             #asnlog('WNG: {0}.{1}, missing actual parameters'\
             #       .format(GLOBAL.COMP['NS']['mod'], self.fullname()))
-            return text
+            #return text
         #
         if len(params_act) != len(self._params_form):
             raise(ASN1ProcTextErr('{0}: invalid number of parameters, {1} instead of {2}'\

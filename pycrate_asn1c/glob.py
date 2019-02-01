@@ -128,7 +128,7 @@ def make_GLOBAL(global_name=None):
 
     
     if isinstance(global_name, str):
-        GLOBAL.__name__ = glob_name
+        GLOBAL.__name__ = global_name
     
     return GLOBAL
 
