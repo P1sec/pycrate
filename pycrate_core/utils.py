@@ -292,7 +292,7 @@ def bitstr_to_int(bitstr):
     Returns:
         val (signed integer)
     """
-    uint = int(bitstr, 2)
+    uint, bitlen = int(bitstr, 2), len(bitstr)
     if uint >= 1<<(bitlen-1):
         # 2's complement
         return uint - (1<<bitlen)
@@ -324,7 +324,7 @@ def bitlist_to_int(bitlist):
     Returns:
         val (signed integer)
     """
-    uint = bitlist_to_uint(bitlist)
+    uint, bitlen = bitlist_to_uint(bitlist), len(bitlist)
     if uint >= 1<<(bitlen-1):
         # 2's complement
         return uint - (1<<bitlen)
