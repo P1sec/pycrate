@@ -11,9 +11,8 @@ test_pycrate.ASN1Obj._SAFE_INIT = True
 # testing the compilation of all ASN.1 modules
 test_pycrate.TEST_ASN1C_ALL = False
 
-def main():
-    TO = time.time()
-    
+
+def test_unit():
     print('[+] running unit tests')
     ut = test_pycrate.TestPycrate()
     ut.test_core()
@@ -23,11 +22,18 @@ def main():
     ut.test_asn1rt()
     ut.test_csn1()
     ut.test_mobile()
-    
+
+
+def test_perf():
     print('[+] running perf test')
     test_pycrate.test_perf_all()
-    
-    print('[+] time: %f sec' % (time.time() - TO, ))
+
+
+def main():
+    TO = time.time()
+    test_unit()
+    test_perf()
+    print('[+] total time: %f sec' % (time.time() - TO, ))
     return 0
 
 

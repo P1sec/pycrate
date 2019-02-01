@@ -132,10 +132,10 @@ def test_perf_gsmrr():
     print('test_gsmrr_mt: {0:.4f}'.format(Tb))
     
     print('[+] GSM RR L2 MT decoding and re-encoding')
-    Tb = timeit(test_gsmrr_l2_mt, number=8)
-    print('test_gsmrr_l2_mt: {0:.4f}'.format(Tb))
+    Tc = timeit(test_gsmrr_l2_mt, number=8)
+    print('test_gsmrr_l2_mt: {0:.4f}'.format(Tc))
     
-    print('[+] test_gsmrr total time: {0:.4f}'.format(Ta+Tb))
+    print('[+] test_gsmrr total time: {0:.4f}'.format(Ta+Tb+Tc))
 
 
 if __name__ == '__main__':

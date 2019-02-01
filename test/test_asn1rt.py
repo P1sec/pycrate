@@ -41,7 +41,7 @@ from pycrate_asn1rt.asnobj_str       import *
 from pycrate_asn1rt.asnobj_construct import *
 from pycrate_asn1rt.asnobj_class     import *
 from pycrate_asn1rt.asnobj_ext       import *
-from pycrate_asn1rt.init             import init_modules
+#from pycrate_asn1rt.init             import init_modules
 from pycrate_asn1rt.codecs           import _with_json
 
 
@@ -57,11 +57,13 @@ OCT_STR._ASN_WASC = False
 
 
 def _load_rt_base():
-    try:
-        GLOBAL.clear()
-    except:
-        pass
+    #try:
+    #    GLOBAL.clear()
+    #except:
+    #    pass
     from test import test_asn1rt_mod
+    #print(list(GLOBAL.MOD.keys()))
+
 
 def _test_rt_base():
     Mod = GLOBAL.MOD['Test-Asn1rt']
@@ -1505,10 +1507,10 @@ pkts_rrc3g_nc = tuple(map(unhexlify, (
     )))
 
 def _load_rrc3g():
-    try:
-        GLOBAL.clear()
-    except:
-        pass
+    #try:
+    #    GLOBAL.clear()
+    #except:
+    #    pass
     from pycrate_asn1dir import RRC3G
 
 def _test_rrc3g():
@@ -1628,10 +1630,10 @@ pkts_x2ap = tuple(map(unhexlify, (
     )))
 
 def _load_lteran():
-    try:
-        GLOBAL.clear()
-    except:
-        pass
+    #try:
+    #    GLOBAL.clear()
+    #except:
+    #    pass
     from pycrate_asn1dir import S1AP
     from pycrate_asn1dir import X2AP
 
@@ -1696,10 +1698,10 @@ pkts_tcap_map = tuple(map(unhexlify, (
     )))
 
 def _load_tcap_map():
-    try:
-        GLOBAL.clear()
-    except:
-        pass
+    #try:
+    #    GLOBAL.clear()
+    #except:
+    #    pass
     from pycrate_asn1dir import TCAP_MAP
 
 def _test_tcap_map():
@@ -1747,10 +1749,10 @@ pkts_tcap_cap = tuple(map(unhexlify, (
     )))
 
 def _load_tcap_cap():
-    try:
-        GLOBAL.clear()
-    except:
-        pass
+    #try:
+    #    GLOBAL.clear()
+    #except:
+    #    pass
     from pycrate_asn1dir import TCAP_CAP
 
 def _test_tcap_cap():
@@ -1790,10 +1792,10 @@ pkts_X509 = tuple(map(unhexlify, (
 )))
 
 def _load_X509():
-    try:
-        GLOBAL.clear()
-    except:
-        pass
+    #try:
+    #    GLOBAL.clear()
+    #except:
+    #    pass
     from pycrate_asn1dir import RFC5912
 
 def _test_X509():

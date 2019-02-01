@@ -54,6 +54,7 @@ ASN1Obj._SAFE_INIT = True
 #global TEST_ASN1C_ALL
 TEST_ASN1C_ALL = False
 
+
 class TestPycrate(unittest.TestCase):
     
     def runTest(self):
@@ -93,37 +94,38 @@ class TestPycrate(unittest.TestCase):
     def test_asn1c(self):
         print('[<>] testing pycrate_asn1c')
         # create an "asn" dir for storing compiled specifications
-        if 'test_asn' not in os.listdir('.'):
-            os.mkdir('test_asn')
+        if 'test_asn_todelete' not in os.listdir('.'):
+            os.mkdir('test_asn_todelete')
         # compile and generate the Hardcore ASN.1 module
         fd = open('./test/res/Hardcore.asn', 'r')
         asntext = fd.read()
         fd.close()
-        fd_init = open('./test_asn/__init__.py', 'w')
+        fd_init = open('./test_asn_todelete/__init__.py', 'w')
         fd_init.write('__all__ = [')
         compile_text(asntext)
-        generate_modules(PycrateGenerator, './test_asn/Hardcore.py')
+        generate_modules(PycrateGenerator, './test_asn_todelete/Hardcore.py')
         GLOBAL.clear()
         fd_init.write('\'Hardcore\', ')
         if TEST_ASN1C_ALL:
             # compile and generate all specifications from the asndir
             for sn in ASN_SPECS:
                 compile_spec(shortname=sn)
-                generate_modules(PycrateGenerator, './test_asn/%s.py' % sn)
+                generate_modules(PycrateGenerator, './test_asn_todelete/%s.py' % sn)
                 GLOBAL.clear()
                 fd_init.write('\'%s\',' % sn)
         fd_init.write(']\n')
         fd_init.close()
-        print('[<>] all ASN.1 modules generated to ./test_asn/')
+        print('[<>] all ASN.1 modules generated to ./test_asn_todelete/')
         # load all specification
         print('[<>] loading all compiled module')
-        importlib.import_module('test_asn.Hardcore')
-        del sys.modules['test_asn.Hardcore']
+        importlib.import_module('test_asn_todelete.Hardcore')
+        del sys.modules['test_asn_todelete.Hardcore']
         if TEST_ASN1C_ALL:
             for sn in ASN_SPECS:
-                importlib.import_module('test_asn.%s' % sn)
-                del sys.modules['test_asn.%s' % sn]
-        print('[<>] all ASN.1 modules loaded successfully from ./test_asn/')
+                importlib.import_module('test_asn_todelete.%s' % sn)
+                del sys.modules['test_asn_todelete.%s' % sn]
+        print('[<>] all ASN.1 modules loaded successfully from ./test_asn_delete/')
+        GLOBAL.clear()
     
     # asn1rt
     def test_asn1rt(self):
@@ -134,6 +136,7 @@ class TestPycrate(unittest.TestCase):
         test_tcap_map()
         test_tcap_cap()
         test_X509()
+        GLOBAL.clear()
     
     # csn1
     def test_csn1(self):
@@ -178,7 +181,8 @@ def test_perf_all():
     test_perf_csn1()
     test_perf_mobile()
     test_perf_gsmrr()
-    print('[<<<>>>] total time: %.4f' % (time.time() - T0))
+    print('[<<<>>>] test_perf_all total time: %.4f' % (time.time() - T0))
+
 
 if __name__ == '__main__':
     #unittest.main()
