@@ -44,6 +44,8 @@ def _process_html(fn):
     return MCC_dict, MNC_dict, MCCr_dict
 
 
+# last update : 2019/02/13
+
 MCC_dict = {
  '202': ('+30', 'GR', 'Greece'),
  '204': ('+31', 'NL', 'Netherlands'),
@@ -103,7 +105,7 @@ MCC_dict = {
  '311': ('+1671', 'GU', 'Guam'),
  '312': ('+1', 'US', 'United States'),
  '316': ('+1', 'US', 'United States'),
- '330': (None, 'PR', 'Puerto Rico'),
+ '330': ('+1', 'PR', 'Puerto Rico'),
  '334': ('+52', 'MX', 'Mexico'),
  '338': ('+1876', 'JM', 'Jamaica'),
  '340': ('+594', 'FG', 'French Guiana'),
@@ -126,7 +128,7 @@ MCC_dict = {
  '370': ('+1809', 'DO', 'Dominican Republic'),
  '372': ('+509', 'HT', 'Haiti'),
  '374': ('+1868', 'TT', 'Trinidad and Tobago'),
- '376': (None, 'TC', 'Turks and Caicos Islands'),
+ '376': ('+1', 'TC', 'Turks and Caicos Islands'),
  '400': ('+994', 'AZ', 'Azerbaijan'),
  '401': ('+7', 'KZ', 'Kazakhstan'),
  '402': ('+975', 'BT', 'Bhutan'),
@@ -192,7 +194,7 @@ MCC_dict = {
  '549': ('+685', 'WS', 'Samoa'),
  '550': ('+691', 'FM', 'Micronesia'),
  '552': ('+680', 'PW', 'Palau (Republic of)'),
- '553': (None, 'TV', 'Tuvalu'),
+ '553': ('+688', 'TV', 'Tuvalu'),
  '555': ('+683', 'NU', 'Niue'),
  '602': ('+20', 'EG', 'Egypt'),
  '603': ('+213', 'DZ', 'Algeria'),
@@ -248,7 +250,7 @@ MCC_dict = {
  '654': ('+269', 'KM', 'Comoros'),
  '655': ('+27', 'ZA', 'South Africa'),
  '657': ('+291', 'ER', 'Eritrea'),
- '659': (None, 'SS', 'South Sudan (Republic of)'),
+ '659': ('+211', 'SS', 'South Sudan (Republic of)'),
  '702': ('+501', 'BZ', 'Belize'),
  '704': ('+502', 'GT', 'Guatemala'),
  '706': ('+503', 'SV', 'El Salvador'),
@@ -270,7 +272,7 @@ MCC_dict = {
  '748': ('+598', 'UY', 'Uruguay'),
  '750': ('+500', 'FK', 'Falkland Islands (Malvinas)'),
  '901': ('+882', 'N/A', 'International Networks')
-}
+ }
 
 MNC_dict = {
  '20201': ('+30', 'GR', 'Greece', 'Cosmote'),
@@ -993,8 +995,8 @@ MNC_dict = {
  '312530': ('+1', 'US', 'United States', 'Sprint Spectrum'),
  '316010': ('+1', 'US', 'United States', 'Sprint Spectrum'),
  '316011': ('+1', 'US', 'United States', 'Southern Communications Services Inc.'),
- '33011': (None, 'PR', 'Puerto Rico', 'Puerto Rico Telephone Company Inc. (PRTC)'),
- '330110': (None, 'PR', 'Puerto Rico', 'Puerto Rico Telephone Company Inc. (PRTC)'),
+ '33011': ('+1', 'PR', 'Puerto Rico', 'Puerto Rico Telephone Company Inc. (PRTC)'),
+ '330110': ('+1', 'PR', 'Puerto Rico', 'Puerto Rico Telephone Company Inc. (PRTC)'),
  '33401': ('+52', 'MX', 'Mexico', 'NEXTEL'),
  '334010': ('+52', 'MX', 'Mexico', 'NEXTEL'),
  '33402': ('+52', 'MX', 'Mexico', 'TelCel/America Movil'),
@@ -1086,9 +1088,9 @@ MNC_dict = {
  '374120': ('+1868', 'TT', 'Trinidad and Tobago', 'Bmobile/TSTT'),
  '374130': ('+1868', 'TT', 'Trinidad and Tobago', 'Digicel'),
  '374140': ('+1868', 'TT', 'Trinidad and Tobago', 'LaqTel Ltd.'),
- '376050': (None, 'TC', 'Turks and Caicos Islands', 'Digicel TCI Ltd'),
- '376350': (None, 'TC', 'Turks and Caicos Islands', 'Cable & Wireless (TCI) Ltd'),
- '376352': (None, 'TC', 'Turks and Caicos Islands', 'IslandCom Communications Ltd.'),
+ '376050': ('+1', 'TC', 'Turks and Caicos Islands', 'Digicel TCI Ltd'),
+ '376350': ('+1', 'TC', 'Turks and Caicos Islands', 'Cable & Wireless (TCI) Ltd'),
+ '376352': ('+1', 'TC', 'Turks and Caicos Islands', 'IslandCom Communications Ltd.'),
  '37650': ('+1340', 'VI', 'Virgin Islands, U.S.', 'Digicel'),
  '40001': ('+994', 'AZ', 'Azerbaijan', 'Azercell Telekom B.M.'),
  '40002': ('+994', 'AZ', 'Azerbaijan', 'J.V. Bakcell GSM 2000'),
@@ -1601,7 +1603,7 @@ MNC_dict = {
  '55001': ('+691', 'FM', 'Micronesia', 'FSM Telecom'),
  '55201': ('+680', 'PW', 'Palau (Republic of)', 'Palau National Communications Corp. (PNCC) (Palau'),
  '55280': ('+680', 'PW', 'Palau (Republic of)', 'Palau Mobile Corp. (PMC) (Palau'),
- '55301': (None, 'TV', 'Tuvalu', 'Tuvalu Telecommunication Corporation (TTC)'),
+ '55301': ('+688', 'TV', 'Tuvalu', 'Tuvalu Telecommunication Corporation (TTC)'),
  '55501': ('+683', 'NU', 'Niue', 'Niue Telecom'),
  '60201': ('+20', 'EG', 'Egypt', 'Orange/Mobinil'),
  '60202': ('+20', 'EG', 'Egypt', 'Vodafone/Mirsfone'),
@@ -1815,10 +1817,10 @@ MNC_dict = {
  '65519': ('+27', 'ZA', 'South Africa', 'Wireless Business Solutions (Pty) Ltd'),
  '65521': ('+27', 'ZA', 'South Africa', 'Cape Town Metropolitan'),
  '65701': ('+291', 'ER', 'Eritrea', 'Eritel'),
- '65902': (None, 'SS', 'South Sudan (Republic of)', 'MTN South Sudan (South Sudan'),
- '65903': (None, 'SS', 'South Sudan (Republic of)', 'Gemtel Ltd (South Sudan'),
- '65904': (None, 'SS', 'South Sudan (Republic of)', 'Network of The World Ltd (NOW) (South Sudan'),
- '65906': (None, 'SS', 'South Sudan (Republic of)', 'Zain South Sudan (South Sudan'),
+ '65902': ('+211', 'SS', 'South Sudan (Republic of)', 'MTN South Sudan (South Sudan'),
+ '65903': ('+211', 'SS', 'South Sudan (Republic of)', 'Gemtel Ltd (South Sudan'),
+ '65904': ('+211', 'SS', 'South Sudan (Republic of)', 'Network of The World Ltd (NOW) (South Sudan'),
+ '65906': ('+211', 'SS', 'South Sudan (Republic of)', 'Zain South Sudan (South Sudan'),
  '70267': ('+501', 'BZ', 'Belize', 'DigiCell'),
  '70268': ('+501', 'BZ', 'Belize', 'International Telco (INTELCO)'),
  '70401': ('+502', 'GT', 'Guatemala', 'SERCOM'),
@@ -2112,7 +2114,7 @@ MCCr_dict = {
  'PK': ('410', '+92', 'Pakistan'),
  'PL': ('260', '+48', 'Poland'),
  'PM': ('308', '+508', 'St. Pierre & Miquelon'),
- 'PR': ('330', None, 'Puerto Rico'),
+ 'PR': ('330', '+1', 'Puerto Rico'),
  'PS': ('425', '+970', 'Palestinian Territory'),
  'PT': ('268', '+351', 'Portugal'),
  'PW': ('552', '+680', 'Palau (Republic of)'),
@@ -2136,12 +2138,12 @@ MCCr_dict = {
  'SN': ('608', '+221', 'Senegal'),
  'SO': ('637', '+252', 'Somalia'),
  'SR': ('746', '+597', 'Suriname'),
- 'SS': ('659', None, 'South Sudan (Republic of)'),
+ 'SS': ('659', '+211', 'South Sudan (Republic of)'),
  'ST': ('626', '+239', 'Sao Tome & Principe'),
  'SV': ('706', '+503', 'El Salvador'),
  'SY': ('417', '+963', 'Syrian Arab Republic'),
  'SZ': ('653', '+268', 'Swaziland'),
- 'TC': ('376', None, 'Turks and Caicos Islands'),
+ 'TC': ('376', '+1', 'Turks and Caicos Islands'),
  'TD': ('622', '+235', 'Chad'),
  'TG': ('615', '+228', 'Togo'),
  'TH': ('520', '+66', 'Thailand'),
@@ -2152,7 +2154,7 @@ MCCr_dict = {
  'TP': ('514', '+670', 'Timor-Leste'),
  'TR': ('286', '+90', 'Turkey'),
  'TT': ('374', '+1868', 'Trinidad and Tobago'),
- 'TV': ('553', None, 'Tuvalu'),
+ 'TV': ('553', '+688', 'Tuvalu'),
  'TW': ('466', '+886', 'Taiwan'),
  'TZ': ('640', '+255', 'Tanzania'),
  'UA': ('255', '+380', 'Ukraine'),
@@ -2172,3 +2174,29 @@ MCCr_dict = {
  'ZM': ('645', '+260', 'Zambia'),
  'ZW': ('648', '+263', 'Zimbabwe')
 }
+
+
+# provide a function that returns the numbering prefix from an msisdn
+def build_pref_sets():
+    pref_sets = [set(), set(), set(), set()]
+    for mcc, country_info in MCC_dict.items():
+        pref = country_info[0]
+        assert( isinstance(pref, str) )
+        assert( pref[0] == '+' )
+        pref_sets[len(pref[1:])-1].add(pref[1:])
+    return pref_sets
+
+_PREF_SETS = build_pref_sets()
+
+def identify_prefix(msisdn):
+    if msisdn[:4] in _PREF_SETS[3]:
+        return msisdn[:4]
+    elif msisdn[:3] in _PREF_SETS[2]:
+        return msisdn[:3]
+    elif msisdn[:2] in _PREF_SETS[1]:
+        return msisdn[:2]
+    elif msisdn[:1] in _PREF_SETS[0]:
+        return msisdn[:1]
+    else:
+        return None
+
