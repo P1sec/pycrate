@@ -582,14 +582,17 @@ MTP3SubServInd_dict = {
 MTP3ServInd_dict = {
     0 : 'Signalling network management messages',
     1 : 'Signalling network testing and maintenance messages',
+    2 : 'Signaling Network Testing and Maintenance Special Messages (ANSI)',
     3 : 'Signalling Connection Control Part',
     4 : 'Telephone User Part',
     5 : 'ISDN User Part',
     6 : 'DUP (call and circuit-related messages)',
     7 : 'DUP (facility registration and cancellation)',
+    8 : 'Reserved for MTP Testing User Part',
     9 : 'Broadband ISDN User Part',
     10: 'Satellite ISDN User Part',
     }
+
 
 class MTP3(Envelope):
     # ITU-T Q.2210, peer-to-peer info of user parts
@@ -607,6 +610,9 @@ class MTP3(Envelope):
         Uint16('DPC', trans=True),
         Uint16('OPC', trans=True)
         )
+    
+    # additional class attribute for the size in bytes
+    _SZ = 5
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
@@ -629,4 +635,38 @@ class MTP3(Envelope):
                 self[8].set_val(opc>>10)
         if vals:
             Envelope.set_val(self, vals)
+
+
+class MTP3_JPN(Envelope):
+    # MTP3 Japanese variant : DPC / OPC are on 16 bits and SLS is on 8 bits
+    
+    _GEN = (
+        Uint('SubServiceInd', bl=2, dic=MTP3SubServInd_dict),
+        Uint('SubServiceSpare', bl=2),
+        Uint('ServiceInd', bl=4, dic=MTP3ServInd_dict),
+        Uint16('DPC'),
+        Uint16('OPC'),
+        Uint('SLSSpare', bl=4),
+        Uint('SLS', bl=4)
+        )
+    
+    # additional class attribute for the size in bytes
+    _SZ = 6
+
+
+class MTP3_ANSI(Envelope):
+    # MTP3 ANSI T1.111.1 variant
+    # Seems Chinese variant format has the same layout (with priority being spare)
+    
+    _GEN = (
+        Uint('SubServiceInd', bl=2, dic=MTP3SubServInd_dict),
+        Uint('SubServicePriority', bl=2),
+        Uint('ServiceInd', bl=4, dic=MTP3ServInd_dict),
+        Uint24('DPC'),
+        Uint24('OPC'),
+        Uint8('SLS')
+        )
+    
+    # additional class attribute for the size in bytes
+    _SZ = 8
 
