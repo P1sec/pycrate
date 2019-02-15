@@ -644,8 +644,8 @@ class MTP3_JPN(Envelope):
         Uint('SubServiceInd', bl=2, dic=MTP3SubServInd_dict),
         Uint('SubServiceSpare', bl=2),
         Uint('ServiceInd', bl=4, dic=MTP3ServInd_dict),
-        Uint16('DPC'),
-        Uint16('OPC'),
+        Uint16LE('DPC'),
+        Uint16LE('OPC'),
         Uint('SLSSpare', bl=4),
         Uint('SLS', bl=4)
         )
