@@ -339,8 +339,8 @@ class ASN1Obj(Element):
         if self._const_val and \
         self._const_val.ext is None and \
         val not in self._const_val:
-            raise(ASN1ObjErr('{0}: value out of constraint, {1!r}'\
-                  .format(self.fullname(), val)))
+            raise(ASN1ObjErr('{0}: %s value out of constraint, {1!r}'\
+                  .format(self.fullname(), self.TYPE, val)))
         if self._SAFE_BNDTAB and self._const_tab and self._const_tab_at:
             # check val against a constraint defined within the table constraint
             const_val_type, const_val = self._get_tab_obj()
