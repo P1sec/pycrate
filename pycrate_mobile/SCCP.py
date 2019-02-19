@@ -1414,7 +1414,7 @@ def get_scmg_msg_instances():
 # SCPP Message parser
 #------------------------------------------------------------------------------#
 
-def parse_SCCP(buf):
+def parse_SCCP(buf, w_scmg=True):
     """Parses an SCCP message bytes' buffer
     
     Args:
@@ -1444,17 +1444,18 @@ def parse_SCCP(buf):
         return None, 2
     #
     # if SCMG, parses it further (UDT/XUDT/LUDT, ProtocolClass 0, both addresses on SSN 1)
-    try:
-        if Msg[0].get_val() in (9, 17, 19) and Msg[1][1].get_val() == 0 and \
-        Msg[3][1][0]['RoutingInd'].get_val() == 1 and  Msg[3][1][0]['SSNInd'].get_val() == 1 and Msg[3][1]['SSN'].get_val() == 1 and \
-        Msg[4][1][0]['RoutingInd'].get_val() == 1 and  Msg[4][1][0]['SSNInd'].get_val() == 1 and Msg[4][1]['SSN'].get_val() == 1:
-            data = Msg[5]
-            dataval = data[1]
-            scmg, err = parse_SCMG(dataval.get_val())
-            if err == 0:
-                data.replace(dataval, scmg)
-    except:
-        pass
+    if w_scmg:
+        try:
+            if Msg[0].get_val() in (9, 17, 19) and Msg[1][1].get_val() == 0 and \
+            Msg[3][1][0]['RoutingInd'].get_val() == 1 and  Msg[3][1][0]['SSNInd'].get_val() == 1 and Msg[3][1]['SSN'].get_val() == 1 and \
+            Msg[4][1][0]['RoutingInd'].get_val() == 1 and  Msg[4][1][0]['SSNInd'].get_val() == 1 and Msg[4][1]['SSN'].get_val() == 1:
+                data = Msg[5]
+                dataval = data[1]
+                scmg, err = parse_SCMG(dataval.get_val())
+                if err == 0:
+                    data.replace(dataval, scmg)
+        except:
+            pass
     #
     return Msg, 0
 
