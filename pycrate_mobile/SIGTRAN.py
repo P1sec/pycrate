@@ -558,7 +558,7 @@ class M2PA(Envelope):
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[0][4].set_valauto(lambda: 16 + self[2].get_len())
+        self[0][4].set_valauto(lambda: 16 + self[2].get_len() if not self[2].get_trans() else 16)
         self[2]._GEN[1][2].set_blauto(lambda: 8*(self[0][4].get_val()-18))
         self[2]._GEN[2][1].set_blauto(lambda: 8*(self[0][4].get_val()-17))
         self[2].DEFAULT_ALT.set_blauto(lambda: 8*(self[0][4].get_val()-16))
