@@ -191,34 +191,14 @@ class _GlobalTitle0011(Envelope):
     ENV_SEL_TRANS = False
     _GEN = (
         Uint8('TranslationType'),
-        Uint('NumberingPlan', val=1, bl=4, dic=_NumPlan_dict), # 1: ISDN
-        Uint('EncodingScheme', val=1, bl=4), # 1: BCD odd, 2: BCD even 
-        BufBCD('Addr', val=b''), # if BCD encoding
-        Buf('Addr', val=b'', rep=REPR_HEX) # otherwise
+        Uint('NumberingPlan', val=1, bl=4, dic=_NumPlan_dict),
+        Uint('EncodingScheme', val=1, bl=4, dic=_EncScheme_dict),
+        Alt('Addr', GEN={
+            1 : BufBCD('BCD', val=b''),
+            2 : BufBCD('BCD', val=b'')},
+            DEFAULT=Buf('Raw', val=b'', rep=REPR_HEX),
+            sel=lambda self: self.get_env()[2].get_val())
         )
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self[3].set_transauto(lambda: False if self[2].get_val() in (1, 2) else True)
-        self[4].set_transauto(lambda: True if self[2].get_val() in (1, 2) else False)
-    
-    def set_val(self, vals):
-        if isinstance(vals, dict):
-            addr = None
-            for key, val in vals.items():
-                if key == 'Addr':
-                    addr = val
-                else:
-                    self.__setitem__(key, val)
-            if addr is not None:
-                self.get_addr().set_val(addr)
-        else:
-            Envelope.set_val(self, vals)
-    
-    def get_addr(self):
-        if self[2].get_val() in (1, 2):
-            return self[3]
-        else:
-            return self[4]
 
 
 # GTInd 0100
@@ -239,36 +219,16 @@ class _GlobalTitle0100(Envelope):
     ENV_SEL_TRANS = False
     _GEN = (
         Uint8('TranslationType', val=1, dic=_GTIntTransType_dict),
-        Uint('NumberingPlan', val=1, bl=4, dic=_NumPlan_dict), # 1: ISDN
-        Uint('EncodingScheme', val=1, bl=4), # 1: BCD
+        Uint('NumberingPlan', val=1, bl=4, dic=_NumPlan_dict),
+        Uint('EncodingScheme', val=1, bl=4, dic=_EncScheme_dict),
         Uint('spare', bl=1),
         Uint('NAI', val=1, bl=7, dic=_GTNAI_dict),
-        BufBCD('Addr', val=b''), # if BCD encoding
-        Buf('Addr', val=b'', rep=REPR_HEX) # otherwise
+        Alt('Addr', GEN={
+            1 : BufBCD('BCD', val=b''),
+            2 : BufBCD('BCD', val=b'')},
+            DEFAULT=Buf('Raw', val=b'', rep=REPR_HEX),
+            sel=lambda self: self.get_env()[2].get_val())
         )
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self[5].set_transauto(lambda: False if self[2].get_val() in (1, 2) else True)
-        self[6].set_transauto(lambda: True if self[2].get_val() in (1, 2) else False)
-    
-    def set_val(self, vals):
-        if isinstance(vals, dict):
-            addr = None
-            for key, val in vals.items():
-                if key == 'Addr':
-                    addr = val
-                else:
-                    self.__setitem__(key, val)
-            if addr is not None:
-                self.get_addr().set_val(addr)
-        else:
-            Envelope.set_val(self, vals)
-    
-    def get_addr(self):
-        if self[2].get_val() in (1, 2):
-            return self[5]
-        else:
-            return self[6]
 
 
 # SCCP called / calling party address
@@ -338,42 +298,20 @@ class _SCCPAddr(Envelope):
             )),
         Uint16LE('PC'), # presence depends on PCInd
         Uint8('SSN', val=0, dic=_SSN_dict), # presence depends on SSNInd
-        _GlobalTitle0001('GT'),
-        _GlobalTitle0010('GT'),
-        _GlobalTitle0011('GT'),
-        _GlobalTitle0100('GT')
+        Alt('GT', GEN={
+            1 : _GlobalTitle0001('GT_1'),
+            2 : _GlobalTitle0010('GT_2'),
+            3 : _GlobalTitle0011('GT_3'),
+            4 : _GlobalTitle0100('GT_4')},
+            DEFAULT=Buf('GT_unk', val=b'', rep=REPR_HEX),
+            sel=lambda self: self.get_env()[0][2].get_val())
         )
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[1].set_transauto(lambda: False if self[0][4].get_val() == 1 else True)
-        self[2].set_transauto(lambda: False if self[0][3].get_val() == 1 else True)
-        self[3].set_transauto(lambda: False if self[0][2].get_val() == 1 else True)
-        self[4].set_transauto(lambda: False if self[0][2].get_val() == 2 else True)
-        self[5].set_transauto(lambda: False if self[0][2].get_val() == 3 else True)
-        self[6].set_transauto(lambda: False if self[0][2].get_val() == 4 else True)
-    
-    def set_val(self, vals):
-        if isinstance(vals, dict):
-            gt = None
-            for key, val in vals.items():
-                if key == 'GT':
-                    gt = val
-                else:
-                    self.__setitem__(key, val)
-            if gt is not None:
-                self.get_gt().set_val(gt)
-        else:
-            Envelope.set_val(self, vals)
-    
-    def get_gt(self):
-        # GTInd + SSNInd + PCInd
-        cur = 2 + self[0][2].get_val()
-        try:
-            return self[cur]
-        except:
-            # this is dirty
-            return self[-1]
+        self[1].set_transauto(lambda: False if self[0][4].get_val() != 0 else True)
+        self[2].set_transauto(lambda: False if self[0][3].get_val() != 0 else True)
+        self[3].set_transauto(lambda: False if self[0][2].get_val() != 0 else True)
     
     def _from_char(self, char):
         if not self.GT_DONT_DECODE:
@@ -382,8 +320,8 @@ class _SCCPAddr(Envelope):
             self[0]._from_char(char)
             self[1]._from_char(char)
             self[2]._from_char(char)
-            del self[3:]
-            gt = Buf('GT')
+            del self[3]
+            gt = Buf('GT', rep=REPR_HEX)
             gt._from_char(char)
             self.append( gt )
 
@@ -393,6 +331,7 @@ class CallingPartyAddr(Envelope):
         Uint8('Len'),
         _SCCPAddr('Value')
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: self[1].get_len())
@@ -405,7 +344,7 @@ class CallingPartyAddr(Envelope):
         char._len_bit = clen
     
     def get_gt(self):
-        return self[1].get_gt()
+        return self[1][3].get_alt()
 
 
 class CalledPartyAddr(Envelope):
@@ -413,6 +352,7 @@ class CalledPartyAddr(Envelope):
         Uint8('Len'),
         _SCCPAddr('Value')
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: self[1].get_len())
@@ -425,7 +365,7 @@ class CalledPartyAddr(Envelope):
         char._len_bit = clen
     
     def get_gt(self):
-        return self[1].get_gt()
+        return self[1][3].get_alt()
 
 
 #------------------------------------------------------------------------------#
@@ -697,7 +637,7 @@ class Importance(Envelope):
 
 class LongData(Envelope):
     _GEN = (
-        Uint16('Len'),
+        Uint16LE('Len'),
         Buf('Value', val=b'', rep=REPR_HEX)
         )
     def __init__(self, *args, **kwargs):
