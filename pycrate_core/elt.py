@@ -4462,7 +4462,7 @@ class Alt(Element):
                 return alts.replace('### ', '### %s%s%s : %r -> ' % (self._name, desc, trans, sv), 1)
             else:
                 # case when the selected alternative is a base element
-                return '### %s%s%s : %r -> . ###\n %s' % (self._name, desc, trans, sv, alts)
+                return '### %s%s%s : %r ###\n %s' % (self._name, desc, trans, sv, alts)
         else:
             return self.get_alt().show()
     
