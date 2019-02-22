@@ -618,12 +618,14 @@ class _CONSTRUCT(ASN1Obj):
             ext = [k for k in val if k in self._ext]
             for e in ext:
                 if e in self._ext_ident:
-                    for ident in self._ext_group[self._ext_ident[e]]:
-                        if ident not in ext:
-                            raise(ASN1ObjErr('{0}: missing extended value, {1!r}'\
-                                  .format(self.fullname(), val)))
-                        else:
-                            ext.remove(ident)
+                    grp_id = self._ext_ident[e]
+                    for ident, grp_comp in self._ext_group_obj[grp_id]._cont.items():
+                        if not grp_comp._opt:
+                            if ident not in ext:
+                                raise(ASN1ObjErr('{0}: missing extended value for group {1}, {2!r}'\
+                                      .format(self.fullname(), grp_id, val)))
+                            else:
+                                ext.remove(ident)
     
     def _safechk_bnd(self, val):
         # TODO:
