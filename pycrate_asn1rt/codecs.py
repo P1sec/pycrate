@@ -1059,6 +1059,13 @@ class ASN1CodecBER(ASN1Codec):
     # here NR3 cannot be tricked like NR1 and 2, 
     # so that it's the way to go for CER / DER
     
+    # force the encoder to extend to a given length the encoding of unsigned 
+    # integers within OBJECT IDENTIFIER and RELATIVE-OID
+    ENC_OID_LEXT = 0
+    # force the encoder to extend to a given length the encoding of unsigned 
+    # integers for tag prefixes
+    ENC_TAG_LEXT = 0
+    
     # force the encoder to use the constructed form enabling the fragmentation
     # of the bit string / octet (or character) string 
     # every ENC_BSTR_FRAG / ENC_OSTR_FRAG bytes
@@ -1367,6 +1374,8 @@ class ASN1CodecBER(ASN1Codec):
             # extended value for the tag
             GEN.append( Uint('Ext', val=31, bl=5) )
             fact = decompose_uint_sl(7, val)
+            if cla.ENC_TAG_LEXT and len(fact) < cla.ENC_TAG_LEXT:
+                fact.extend([0]*(cla.ENC_TAG_LEXT-len(fact)))
             fact.reverse()
             E = Uint('E', val=1, bl=1)
             [GEN.extend( (E, Uint('Val7', val=f, bl=7)) ) for f in fact[:-1]]
@@ -1384,6 +1393,8 @@ class ASN1CodecBER(ASN1Codec):
             # extended value for the tag
             GEN.append( (T_UINT, 31, 5) )
             fact = decompose_uint_sl(7, val)
+            if cla.ENC_TAG_LEXT and len(fact) < cla.ENC_TAG_LEXT:
+                fact.extend([0]*(cla.ENC_TAG_LEXT-len(fact)))
             fact.reverse()
             E = (T_UINT, 1, 1)
             [GEN.extend( (E, (T_UINT, f, 7)) ) for f in fact[:-1]]

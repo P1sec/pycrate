@@ -1405,6 +1405,8 @@ Single value: Python tuple of int
         by = []
         for i in arcs:
             fact = decompose_uint_sl(7, i)
+            if ASN1CodecBER.ENC_OID_LEXT and len(fact) < ASN1CodecBER.ENC_OID_LEXT:
+                fact.extend([0]*(ASN1CodecBER.ENC_OID_LEXT-len(fact)))
             fact.reverse()
             for f in fact[:-1]:
                 by.append( 0x80 + f )
@@ -1454,6 +1456,8 @@ Single value: Python tuple of int
         by = []
         for i in self._val:
             fact = decompose_uint_sl(7, i)
+            if ASN1CodecBER.ENC_OID_LEXT and len(fact) < ASN1CodecBER.ENC_OID_LEXT:
+                fact.extend([0]*(ASN1CodecBER.ENC_OID_LEXT-len(fact)))
             fact.reverse()
             for f in fact[:-1]:
                 by.append( 0x80 + f )
