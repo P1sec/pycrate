@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2016. Benoit Michau. ANSSI.
 # *
@@ -31,4 +31,4 @@ __all__ = ['utils', 'err', 'glob',
            'dictobj', 'setobj', 'refobj', 'asnobj',
            'extractor', 'specdir', 'proc', 'generator'
            ]
-__version__ = '0.2.0'
+__version__ = '0.4.0'

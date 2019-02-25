@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="pycrate",
-    version="0.3",
+    version="0.4",
     
     #packages=find_packages(),
     packages=["pycrate_core",
