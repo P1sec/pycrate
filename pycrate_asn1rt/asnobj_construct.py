@@ -971,7 +971,7 @@ class _CONSTRUCT(ASN1Obj):
                 GEN.append( Uint('big', val=1, bl=1) )
                 if ASN1CodecPER.ALIGNED:
                     ASN1CodecPER._off[-1] += 1
-                GEN.extend( ASN1CodecPER.encode_intconst_ws(ldet-1, 0, name='C') )
+                GEN.extend( ASN1CodecPER.encode_intunconst_ws(ldet-1, 0, name='C') )
             else:
                 GEN.extend( (Uint('big', val=0, bl=1), Uint('C', val=ldet-1, bl=6)) )
                 if ASN1CodecPER.ALIGNED:
@@ -1101,7 +1101,7 @@ class _CONSTRUCT(ASN1Obj):
                 GEN.append( (T_UINT, 1, 1) )
                 if ASN1CodecPER.ALIGNED:
                     ASN1CodecPER._off[-1] += 1
-                GEN.extend( ASN1CodecPER.encode_intconst(ldet-1, 0) )
+                GEN.extend( ASN1CodecPER.encode_intunconst(ldet-1, 0) )
             else:
                 GEN.append( (T_UINT, ldet-1, 7) )
                 if ASN1CodecPER.ALIGNED:
