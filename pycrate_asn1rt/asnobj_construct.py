@@ -2030,6 +2030,9 @@ class _CONSTRUCT_OF(ASN1Obj):
     
     # this class implements the methods that are common to SEQ and SET
     
+    # this is to potentially limit the length of the encoded content
+    _ENC_MAXLEN = None
+    
     def _safechk_val(self, val):
         if not isinstance(val, list):
             raise(ASN1ObjErr('{0}: invalid value, {1!r}'.format(self.fullname(), val)))
@@ -2352,9 +2355,21 @@ class _CONSTRUCT_OF(ASN1Obj):
                     GEN.extend( ASN1CodecPER.encode_intconst(ldet, self._const_sz) )
                     _par = self._cont._parent
                     self._cont._parent = self
-                    for i in range(ldet):
-                        self._cont._val = self._val[i]
-                        GEN.extend( self._cont._to_per() )
+                    
+                    if self._ENC_MAXLEN:
+                        cur_bl = 0
+                        for i in range(ldet):
+                            self._cont._val = self._val[i]
+                            cont_per = self._cont._to_per()
+                            cur_bl += sum([v[2] for v in cont_per])
+                            if cur_bl > self._ENC_MAXLEN:
+                                raise(ASN1NotSuppErr('{0}: encoding too long, {1} bytes'.format(self.fullname(), cur_bl>>3)))
+                            GEN.extend( cont_per )
+                    else:
+                        for i in range(ldet):
+                            self._cont._val = self._val[i]
+                            GEN.extend( self._cont._to_per() )
+                    
                     self._cont._parent = _par
                     #self._cont._val = None
                     return GEN
@@ -2366,9 +2381,21 @@ class _CONSTRUCT_OF(ASN1Obj):
                 else:
                     _par = self._cont._parent
                     self._cont._parent = self
-                    for i in range(ldet):
-                        self._cont._val = self._val[i]
-                        GEN.extend( self._cont._to_per() )
+                    
+                    if self._ENC_MAXLEN:
+                        cur_bl = 0
+                        for i in range(ldet):
+                            self._cont._val = self._val[i]
+                            cont_per = self._cont._to_per()
+                            cur_bl += sum([v[2] for v in cont_per])
+                            if cur_bl > self._ENC_MAXLEN:
+                                raise(ASN1NotSuppErr('{0}: encoding too long, {1} bytes'.format(self.fullname(), cur_bl>>3)))
+                            GEN.extend( cont_per )
+                    else:
+                        for i in range(ldet):
+                            self._cont._val = self._val[i]
+                            GEN.extend( self._cont._to_per() )
+                    
                     self._cont._parent = _par
                     #self._cont._val = None
                     return GEN
@@ -2385,29 +2412,73 @@ class _CONSTRUCT_OF(ASN1Obj):
             # requires fragmentation
             frags, rem = factor_perfrag(ldet)
             off = 0
-            for (fs, fn) in frags:
-                for i in range(fn):
-                    if ASN1CodecPER.ALIGNED:
-                        GEN.extend( ASN1CodecPER.encode_pas() )
-                    GEN.extend( ASN1CodecPER.encode_count(fs) )
-                    for j in range(fs):
-                        self._cont._val = self._val[off]
-                        GEN.extend( self._cont._to_per() )
-                        off += 1
-            if ASN1CodecPER.ALIGNED and ASN1CodecPER._off[-1] % 8:
-                GEN.extend( ASN1CodecPER.encode_pad() )
-            GEN.extend( ASN1CodecPER.encode_count(rem) )
-            for i in range(rem):
-                self._cont._val = self._val[off]
-                GEN.extend( self._cont._to_per() )
-                off += 1
+            
+            if self._ENC_MAXLEN:
+                cur_bl = 0
+                for (fs, fn) in frags:
+                    for i in range(fn):
+                        if ASN1CodecPER.ALIGNED:
+                            GEN.extend( ASN1CodecPER.encode_pas() )
+                        GEN.extend( ASN1CodecPER.encode_count(fs) )
+                        for j in range(fs):
+                            self._cont._val = self._val[off]
+                            cont_per = self._cont._to_per()
+                            cur_bl += sum([v[2] for v in cont_per])
+                            if cur_bl > self._ENC_MAXLEN:
+                                raise(ASN1NotSuppErr('{0}: encoding too long, {1} bytes'.format(self.fullname(), cur_bl>>3)))
+                            GEN.extend( cont_per )
+                            off += 1
+                #
+                if ASN1CodecPER.ALIGNED and ASN1CodecPER._off[-1] % 8:
+                    GEN.extend( ASN1CodecPER.encode_pad() )
+                GEN.extend( ASN1CodecPER.encode_count(rem) )
+                for i in range(rem):
+                    self._cont._val = self._val[off]
+                    cont_per = self._cont._to_per()
+                    cur_bl += sum([v[2] for v in cont_per])
+                    if cur_bl > self._ENC_MAXLEN:
+                        raise(ASN1NotSuppErr('{0}: encoding too long, {1} bytes'.format(self.fullname(), cur_bl>>3)))
+                    GEN.extend( cont_per )
+                    off += 1
+            #
+            else:
+                for (fs, fn) in frags:
+                    for i in range(fn):
+                        if ASN1CodecPER.ALIGNED:
+                            GEN.extend( ASN1CodecPER.encode_pas() )
+                        GEN.extend( ASN1CodecPER.encode_count(fs) )
+                        for j in range(fs):
+                            self._cont._val = self._val[off]
+                            GEN.extend( self._cont._to_per() )
+                            off += 1
+                #
+                if ASN1CodecPER.ALIGNED and ASN1CodecPER._off[-1] % 8:
+                    GEN.extend( ASN1CodecPER.encode_pad() )
+                GEN.extend( ASN1CodecPER.encode_count(rem) )
+                for i in range(rem):
+                    self._cont._val = self._val[off]
+                    GEN.extend( self._cont._to_per() )
+                    off += 1
+        
         else:
             if ASN1CodecPER.ALIGNED and ASN1CodecPER._off[-1] % 8:
                 GEN.extend( ASN1CodecPER.encode_pad() )
             GEN.extend( ASN1CodecPER.encode_count(ldet) )
-            for i in range(ldet):
-                self._cont._val = self._val[i]
-                GEN.extend( self._cont._to_per() )
+            
+            if self._ENC_MAXLEN:
+                cur_bl = 0
+                for i in range(ldet):
+                    self._cont._val = self._val[i]
+                    cont_per = self._cont._to_per()
+                    cur_bl += sum([v[2] for v in cont_per])
+                    if cur_bl > self._ENC_MAXLEN:
+                        raise(ASN1NotSuppErr('{0}: encoding too long, {1} bytes'.format(self.fullname(), cur_bl>>3)))
+                    GEN.extend( cont_per )
+            else:
+                for i in range(ldet):
+                    self._cont._val = self._val[i]
+                    GEN.extend( self._cont._to_per() )
+        
         self._cont._parent = _par
         #self._cont._val = None
     
