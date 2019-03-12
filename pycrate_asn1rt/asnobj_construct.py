@@ -2500,44 +2500,75 @@ class _CONSTRUCT_OF(ASN1Obj):
     
     def _encode_ber_cont_ws(self):
         Comp, TLV = self._cont, []
-        if ASN1CodecBER.ENC_LUNDEF:
-            lval = -1
-        else:
-            lval = 0
         _par = Comp._parent
         Comp._parent = self
         #
-        for val in self._val:
-            Comp._val = val
-            tlv = Comp._to_ber_ws()
-            if lval >= 0:
-                # TODO: check which one is the more efficient
-                #lval += (tlv[0].get_bl() >> 3) + (tlv[1].get_bl() >> 3) + tlv[1]()
-                #lval += (tlv[0:2].get_bl() >> 3) + tlv[1]()
-                lval += tlv.get_bl() >> 3
-            TLV.append( tlv )
+        if ASN1CodecBER.ENC_LUNDEF and not self._ENC_MAXLEN:
+            # do not track the length of the content
+            for val in self._val:
+                Comp._val = val
+                tlv = Comp._to_ber_ws()
+                TLV.append( tlv )
+        elif self._ENC_MAXLEN:
+            # track the length of the content and verify it at each iteration
+            bl = 0
+            for val in self._val:
+                Comp._val = val
+                tlv = Comp._to_ber_ws()
+                bl += tlv.get_bl()
+                if bl > self._ENC_MAXLEN:
+                    raise(ASN1NotSuppErr('{0}: encoding too long, {1} bytes'.format(self.fullname(), bl>>3)))
+                TLV.append( tlv )
+        else:
+            # track the length of the content
+            bl = 0
+            for val in self._val:
+                Comp._val = val
+                tlv = Comp._to_ber_ws()
+                bl += tlv.get_bl()
+                TLV.append( tlv )
         #
         Comp._parent = _par
-        return 1, lval, Envelope('V', GEN=tuple(TLV))
+        if ASN1CodecBER.ENC_LUNDEF:
+            return 1, -1, Envelope('V', GEN=tuple(TLV))
+        else:
+            return 1, bl>>3, Envelope('V', GEN=tuple(TLV))
     
     def _encode_ber_cont(self):
         Comp, TLV = self._cont, []
-        if ASN1CodecBER.ENC_LUNDEF:
-            lval = -1
-        else:
-            lval = 0
         _par = Comp._parent
         Comp._parent = self
         #
-        for val in self._val:
-            Comp._val = val
-            tlv = Comp._to_ber()
-            if lval >= 0:
-                lval += sum([f[2] for f in tlv]) >> 3
-            TLV.extend( tlv )
+        if ASN1CodecBER.ENC_LUNDEF and not self._ENC_MAXLEN:
+            # do not track the length of the content
+            for val in self._val:
+                Comp._val = val
+                tlv = Comp._to_ber()
+                TLV.extend( tlv )
+        elif self._ENC_MAXLEN:
+            # track the length of the content and verify it at each iteration
+            bl = 0
+            for val in self._val:
+                Comp._val = val
+                tlv = Comp._to_ber()
+                bl += sum([f[2] for f in tlv])
+                if bl > self._ENC_MAXLEN:
+                    raise(ASN1NotSuppErr('{0}: encoding too long, {1} bytes'.format(self.fullname(), bl>>3)))
+                TLV.extend( tlv )
+        else:
+            # track the length of the content
+            bl = 0
+            for val in self._val:
+                Comp._val = val
+                tlv = Comp._to_ber()
+                bl += sum([f[2] for f in tlv])
+                TLV.extend( tlv )
         #
         Comp._parent = _par
-        return 1, lval, TLV
+        if ASN1CodecBER.ENC_LUNDEF:
+            return 1, -1, TLV
+        else:
+            return 1, bl>>3, TLV
     
     ###
     # conversion between internal value and ASN.1 JER encoding
