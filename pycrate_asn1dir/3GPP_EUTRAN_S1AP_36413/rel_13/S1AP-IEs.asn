@@ -59,7 +59,6 @@ IMPORTS
 	maxnoofForbTACs,
 	maxnoofCells,
 	maxnoofCellID,
-	maxnoofDCNs,
 	maxnoofEmergencyAreaID,
 	maxnoofTAIforWarning,
 	maxnoofCellinTAI,
@@ -169,7 +168,7 @@ AssistanceDataForRecommendedCells-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 Bearers-SubjectToStatusTransferList ::= SEQUENCE (SIZE(1.. maxnoofE-RABs)) OF ProtocolIE-SingleContainer { { Bearers-SubjectToStatusTransfer-ItemIEs } }
 
 Bearers-SubjectToStatusTransfer-ItemIEs S1AP-PROTOCOL-IES ::= {
-	{ ID id-Bearers-SubjectToStatusTransfer-Item	CRITICALITY ignore	TYPE Bearers-SubjectToStatusTransfer-Item	PRESENCE mandatory	},
+	{ ID id-Bearers-SubjectToStatusTransfer-Item	CRITICALITY ignore	TYPE Bearers-SubjectToStatusTransfer-Item 	PRESENCE mandatory	},
 	...
 }
 
@@ -314,8 +313,7 @@ CauseRadioNetwork ::= ENUMERATED {
 	...,
 	redirection-towards-1xRTT,
 	not-supported-QCI-value,
-	invalid-CSG-Id,
-	release-due-to-pre-emption
+	invalid-CSG-Id
 
 }
 
@@ -352,11 +350,6 @@ CellIdentifierAndCELevelForCECapableUEs-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 
 -- Coverage Enhancement level encoded according to TS 36.331 [16] --
 CELevel ::= OCTET STRING
-
-CE-mode-B-SupportIndicator ::= ENUMERATED {
-	supported,
-	...
-}
 
 CellIdentity ::= BIT STRING (SIZE (28))
 
@@ -542,11 +535,6 @@ COUNTvaluePDCP-SNlength18-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
-Coverage-Level ::= ENUMERATED {
-	extendedcoverage,
-	...
-}
-
 CriticalityDiagnostics ::= SEQUENCE {
 	procedureCode					ProcedureCode														OPTIONAL,
 	triggeringMessage				TriggeringMessage													OPTIONAL,
@@ -579,37 +567,10 @@ CriticalityDiagnostics-IE-Item-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 
 DataCodingScheme ::= BIT STRING (SIZE (8))
 
-DCN-ID ::= INTEGER (0..65535)
-
-ServedDCNs ::= SEQUENCE (SIZE(0..maxnoofDCNs)) OF ServedDCNsItem
-
-ServedDCNsItem ::= SEQUENCE {
-	dCN-ID						DCN-ID,
-	relativeDCNCapacity			RelativeMMECapacity,
-	iE-Extensions			ProtocolExtensionContainer { {ServedDCNsItem-ExtIEs} }	OPTIONAL,
-	...
-}
-
-ServedDCNsItem-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-DL-CP-SecurityInformation ::= SEQUENCE {
-	dl-NAS-MAC				DL-NAS-MAC,
-	iE-Extensions			ProtocolExtensionContainer { { DL-CP-SecurityInformation-ExtIEs} }	OPTIONAL,
-	...
-}
-
-DL-CP-SecurityInformation-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
 DL-Forwarding ::= ENUMERATED {
 	dL-Forwarding-proposed,
 	...
 }
-
-DL-NAS-MAC ::= BIT STRING (SIZE (16))
 
 Direct-Forwarding-Path-Availability ::= ENUMERATED {
 	directPathAvailable,
@@ -618,11 +579,6 @@ Direct-Forwarding-Path-Availability ::= ENUMERATED {
 
 Data-Forwarding-Not-Possible ::= ENUMERATED {
 	data-Forwarding-not-Possible,
-	...
-}
-
-DLNASPDUDeliveryAckRequest ::= ENUMERATED {
-	requested,
 	...
 }
 
@@ -683,9 +639,7 @@ EmergencyAreaIDListForRestart	::= SEQUENCE (SIZE(1..maxnoofRestartEmergencyAreaI
 ENB-ID ::= CHOICE {
 	macroENB-ID			BIT STRING (SIZE(20)),
 	homeENB-ID			BIT STRING (SIZE(28)),
-	... ,
-	short-macroENB-ID 	BIT STRING (SIZE(18)),
-	long-macroENB-ID		BIT STRING (SIZE(21))
+	...
 }
 
 GERAN-Cell-ID ::= SEQUENCE {
@@ -730,17 +684,6 @@ ENBname ::= PrintableString (SIZE (1..150,...))
 ENBX2TLAs ::= SEQUENCE (SIZE(1.. maxnoofeNBX2TLAs)) OF TransportLayerAddress
 
 EncryptionAlgorithms ::= BIT STRING (SIZE (16,...))
-
-EnhancedCoverageRestricted ::= ENUMERATED {
-	restricted,
-	...
-}
-
-CE-ModeBRestricted ::= ENUMERATED {
-	restricted,
-	not-restricted,
-	...
-}
 
 EPLMNs ::= SEQUENCE (SIZE(1..maxnoofEPLMNs)) OF PLMNidentity
 EventType	::= ENUMERATED {
@@ -1323,8 +1266,6 @@ NB-IoT-Paging-eDRX-Cycle ::= ENUMERATED{hf2, hf4, hf6, hf8, hf10, hf12, hf14, hf
 
 NB-IoT-PagingTimeWindow ::= ENUMERATED{s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, ...}
 
-NB-IoT-UEIdentityIndexValue ::= BIT STRING (SIZE (12))
-
 NextPagingAreaScope ::= ENUMERATED {
 	same,
 	changed,
@@ -1345,10 +1286,7 @@ OverloadAction ::= ENUMERATED {
 	permit-emergency-sessions-and-mobile-terminated-services-only,
 	...,
 	permit-high-priority-sessions-and-mobile-terminated-services-only,
-	reject-delay-tolerant-access,
-	permit-high-priority-sessions-and-exception-reporting-and-mobile-terminated-services-only,
-	not-accept-mo-data-or-delay-tolerant-access-from-CP-CIoT
-
+	reject-delay-tolerant-access
 }
 
 OverloadResponse ::= CHOICE {
@@ -1413,11 +1351,6 @@ PDCP-SN ::= INTEGER (0..4095)
 PDCP-SNExtended ::= INTEGER (0..32767)
 
 PDCP-SNlength18 ::= INTEGER (0..262143)
-
-PendingDataIndication ::= ENUMERATED {
-	true,
-	...
-}
 
 M1PeriodicReporting ::= SEQUENCE { 
 	reportInterval				ReportIntervalMDT,
@@ -1751,11 +1684,6 @@ SourceeNB-ID-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
-SRVCCOperationNotPossible ::= ENUMERATED {
-	notPossible,
-	...
-}
-
 SRVCCOperationPossible ::= ENUMERATED {
 	possible,
 	...
@@ -2017,8 +1945,8 @@ TransportLayerAddress		::= BIT STRING (SIZE(1..160, ...))
 TraceActivation ::= SEQUENCE {
 	e-UTRAN-Trace-ID					E-UTRAN-Trace-ID,
 	interfacesToTrace					InterfacesToTrace,
-traceDepth							TraceDepth,
-traceCollectionEntityIPAddress		TransportLayerAddress,
+     traceDepth							TraceDepth,
+     traceCollectionEntityIPAddress		TransportLayerAddress,
 	iE-Extensions						ProtocolExtensionContainer { { TraceActivation-ExtIEs} }	OPTIONAL,
 	...
 }
@@ -2142,33 +2070,7 @@ UESecurityCapabilities-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
-UESidelinkAggregateMaximumBitrate ::= SEQUENCE {
-	uESidelinkAggregateMaximumBitRate		BitRate,
-	iE-Extensions					ProtocolExtensionContainer { {UE-Sidelink-Aggregate-MaximumBitrates-ExtIEs} } OPTIONAL,
-	...
-}
-
-UE-Sidelink-Aggregate-MaximumBitrates-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-UE-Usage-Type ::= INTEGER (0..255) 
-
-UL-CP-SecurityInformation ::= SEQUENCE {
-	ul-NAS-MAC				UL-NAS-MAC,
-	ul-NAS-Count			UL-NAS-Count,
-	iE-Extensions			ProtocolExtensionContainer { { UL-CP-SecurityInformation-ExtIEs} }	OPTIONAL,
-	...
-}
-
-UL-CP-SecurityInformation-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-UL-NAS-MAC ::= BIT STRING (SIZE (16))
-
-UL-NAS-Count ::= BIT STRING (SIZE (5))
-
+UE-Usage-Type ::= INTEGER (0..255)
 
 UserLocationInformation ::= SEQUENCE {
 	eutran-cgi 				EUTRAN-CGI,
@@ -2191,29 +2093,6 @@ UEUserPlaneCIoTSupportIndicator ::= ENUMERATED {
 VoiceSupportMatchIndicator ::= ENUMERATED { 
 	supported,
 	not-supported,
-	...
-}
-
-V2XServicesAuthorized ::= SEQUENCE {
-	vehicleUE			VehicleUE											OPTIONAL,
-	pedestrianUE 		PedestrianUE						OPTIONAL,
-	iE-Extensions		ProtocolExtensionContainer { {V2XServicesAuthorized-ExtIEs} }	OPTIONAL,
-	...
-}
-
-V2XServicesAuthorized-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-VehicleUE ::= ENUMERATED { 
-	authorized,
-	not-authorized,
-	...
-}
-
-PedestrianUE ::= ENUMERATED { 
-	authorized,
-	not-authorized,
 	...
 }
 

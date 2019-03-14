@@ -109,12 +109,7 @@ FROM S1AP-CommonDataTypes
 	UEContextResumeRequest,
 	UEContextResumeResponse,
 	UEContextResumeFailure,
-	ConnectionEstablishmentIndication,
-	NASDeliveryIndication,
-	RetrieveUEInformation,
-	UEInformationTransfer,
-	ENBCPRelocationIndication,
-	MMECPRelocationIndication
+	ConnectionEstablishmentIndication
 
 
 FROM S1AP-PDU-Contents
@@ -175,14 +170,7 @@ FROM S1AP-PDU-Contents
 	id-PWSFailureIndication,
 	id-UEContextSuspend,
 	id-UEContextResume,
-	id-ConnectionEstablishmentIndication,
-	id-NASDeliveryIndication,
-	id-RetrieveUEInformation,
-	id-UEInformationTransfer,
-	id-eNBCPRelocationIndication,
-	id-MMECPRelocationIndication
-
-
+	id-ConnectionEstablishmentIndication
 FROM S1AP-Constants;
 
 
@@ -196,8 +184,8 @@ S1AP-ELEMENTARY-PROCEDURE ::= CLASS {
 	&InitiatingMessage				,
 	&SuccessfulOutcome							OPTIONAL,
 	&UnsuccessfulOutcome						OPTIONAL,
-	&procedureCode				ProcedureCode	UNIQUE,
-	&criticality				Criticality	DEFAULT ignore
+	&procedureCode				ProcedureCode 	UNIQUE,
+	&criticality				Criticality 	DEFAULT ignore
 }
 WITH SYNTAX {
 	INITIATING MESSAGE			&InitiatingMessage
@@ -254,7 +242,7 @@ S1AP-ELEMENTARY-PROCEDURES S1AP-ELEMENTARY-PROCEDURE ::= {
 S1AP-ELEMENTARY-PROCEDURES-CLASS-1 S1AP-ELEMENTARY-PROCEDURE ::= {
 	handoverPreparation				|
 	handoverResourceAllocation		|
-	pathSwitchRequest				|
+	pathSwitchRequest 				|
 	e-RABSetup						|
 	e-RABModify						|
 	e-RABRelease					|
@@ -279,7 +267,7 @@ S1AP-ELEMENTARY-PROCEDURES-CLASS-1 S1AP-ELEMENTARY-PROCEDURE ::= {
 S1AP-ELEMENTARY-PROCEDURES-CLASS-2 S1AP-ELEMENTARY-PROCEDURE ::= {	
 	handoverNotification			|
 	e-RABReleaseIndication			|
-	paging							|
+	paging 							|
 	downlinkNASTransport			|
 	initialUEMessage				|
 	uplinkNASTransport				|
@@ -313,12 +301,7 @@ S1AP-ELEMENTARY-PROCEDURES-CLASS-2 S1AP-ELEMENTARY-PROCEDURE ::= {
 	pWSRestartIndication			|
 	rerouteNASRequest				|
 	pWSFailureIndication						|
-	connectionEstablishmentIndication	|
-	nASDeliveryIndication			|
-	retrieveUEInformation			|
-	uEInformationTransfer			|
-	eNBCPRelocationIndication					|
-	mMECPRelocationIndication
+	connectionEstablishmentIndication
 }
 
 -- **************************************************************
@@ -387,7 +370,7 @@ e-RABReleaseIndication S1AP-ELEMENTARY-PROCEDURE ::= {
 initialContextSetup S1AP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		InitialContextSetupRequest
 	SUCCESSFUL OUTCOME		InitialContextSetupResponse
-	UNSUCCESSFUL OUTCOME	InitialContextSetupFailure
+	UNSUCCESSFUL OUTCOME 	InitialContextSetupFailure
 	PROCEDURE CODE			id-InitialContextSetup
 	CRITICALITY				reject
 }
@@ -450,7 +433,7 @@ errorIndication S1AP-ELEMENTARY-PROCEDURE ::= {
 s1Setup S1AP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		S1SetupRequest
 	SUCCESSFUL OUTCOME		S1SetupResponse
-	UNSUCCESSFUL OUTCOME	S1SetupFailure
+	UNSUCCESSFUL OUTCOME 	S1SetupFailure
 	PROCEDURE CODE			id-S1Setup
 	CRITICALITY				reject
 }
@@ -458,7 +441,7 @@ s1Setup S1AP-ELEMENTARY-PROCEDURE ::= {
 eNBConfigurationUpdate S1AP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		ENBConfigurationUpdate
 	SUCCESSFUL OUTCOME		ENBConfigurationUpdateAcknowledge
-	UNSUCCESSFUL OUTCOME	ENBConfigurationUpdateFailure
+	UNSUCCESSFUL OUTCOME 	ENBConfigurationUpdateFailure
 	PROCEDURE CODE			id-ENBConfigurationUpdate
 	CRITICALITY				reject
 }
@@ -466,7 +449,7 @@ eNBConfigurationUpdate S1AP-ELEMENTARY-PROCEDURE ::= {
 mMEConfigurationUpdate S1AP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		MMEConfigurationUpdate
 	SUCCESSFUL OUTCOME		MMEConfigurationUpdateAcknowledge
-	UNSUCCESSFUL OUTCOME	MMEConfigurationUpdateFailure
+	UNSUCCESSFUL OUTCOME 	MMEConfigurationUpdateFailure
 	PROCEDURE CODE			id-MMEConfigurationUpdate
 	CRITICALITY				reject
 }
@@ -486,7 +469,7 @@ uplinkS1cdma2000tunnelling S1AP-ELEMENTARY-PROCEDURE ::= {
 uEContextModification S1AP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		UEContextModificationRequest
 	SUCCESSFUL OUTCOME		UEContextModificationResponse
-	UNSUCCESSFUL OUTCOME	UEContextModificationFailure
+	UNSUCCESSFUL OUTCOME 	UEContextModificationFailure
 	PROCEDURE CODE			id-UEContextModification
 	CRITICALITY				reject
 }
@@ -534,9 +517,9 @@ traceFailureIndication S1AP-ELEMENTARY-PROCEDURE ::= {
 	CRITICALITY				ignore
 }
 cellTrafficTrace S1AP-ELEMENTARY-PROCEDURE ::={
-INITIATING MESSAGE		CellTrafficTrace
-PROCEDURE CODE			id-CellTrafficTrace
-CRITICALITY				ignore
+     INITIATING MESSAGE		CellTrafficTrace
+     PROCEDURE CODE			id-CellTrafficTrace
+     CRITICALITY				ignore
 }
 
 locationReportingControl S1AP-ELEMENTARY-PROCEDURE ::= {
@@ -686,7 +669,7 @@ uEContextSuspend S1AP-ELEMENTARY-PROCEDURE ::= {
 uEContextResume S1AP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		UEContextResumeRequest
 	SUCCESSFUL OUTCOME		UEContextResumeResponse
-	UNSUCCESSFUL OUTCOME	UEContextResumeFailure
+	UNSUCCESSFUL OUTCOME 	UEContextResumeFailure
 	PROCEDURE CODE			id-UEContextResume
 	CRITICALITY				reject
 }
@@ -696,36 +679,5 @@ connectionEstablishmentIndication S1AP-ELEMENTARY-PROCEDURE ::= {
 	PROCEDURE CODE			id-ConnectionEstablishmentIndication
 	CRITICALITY				reject
 }
-
-nASDeliveryIndication S1AP-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE		NASDeliveryIndication
-	PROCEDURE CODE			id-NASDeliveryIndication
-	CRITICALITY				ignore
-}
-
-retrieveUEInformation S1AP-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE		RetrieveUEInformation
-	PROCEDURE CODE			id-RetrieveUEInformation
-	CRITICALITY				reject
-}
-
-uEInformationTransfer S1AP-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE		UEInformationTransfer
-	PROCEDURE CODE			id-UEInformationTransfer
-	CRITICALITY				reject
-}
-
-eNBCPRelocationIndication S1AP-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE		ENBCPRelocationIndication
-	PROCEDURE CODE			id-eNBCPRelocationIndication
-	CRITICALITY				reject
-}
-
-mMECPRelocationIndication S1AP-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE		MMECPRelocationIndication
-	PROCEDURE CODE			id-MMECPRelocationIndication
-	CRITICALITY				reject
-}
-
 
 END

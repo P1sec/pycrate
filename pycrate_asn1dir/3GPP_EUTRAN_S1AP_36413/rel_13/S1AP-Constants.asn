@@ -88,11 +88,6 @@ id-UEContextModificationIndication			ProcedureCode ::= 53
 id-ConnectionEstablishmentIndication		ProcedureCode ::= 54
 id-UEContextSuspend							ProcedureCode ::= 55
 id-UEContextResume							ProcedureCode ::= 56
-id-NASDeliveryIndication					ProcedureCode ::= 57
-id-RetrieveUEInformation					ProcedureCode ::= 58
-id-UEInformationTransfer					ProcedureCode ::= 59
-id-eNBCPRelocationIndication				ProcedureCode ::= 60
-id-MMECPRelocationIndication				ProcedureCode ::= 61
 
 -- **************************************************************
 --
@@ -125,7 +120,6 @@ maxnoofCells							INTEGER ::= 16
 maxnoofCellsineNB						INTEGER ::= 256
 maxnoofTAIforWarning					INTEGER ::= 65535 
 maxnoofCellID							INTEGER ::= 65535 
-maxnoofDCNs								INTEGER ::= 32 
 maxnoofEmergencyAreaID					INTEGER ::= 65535 
 maxnoofCellinTAI						INTEGER ::= 65535 
 maxnoofCellinEAI						INTEGER ::= 65535 
@@ -284,7 +278,7 @@ id-CellAccessMode									ProtocolIE-ID ::= 145
 id-CSGMembershipStatus 								ProtocolIE-ID ::= 146
 id-LPPa-PDU											ProtocolIE-ID ::= 147
 id-Routing-ID										ProtocolIE-ID ::= 148
-id-Time-Synchronisation-Info							ProtocolIE-ID ::= 149
+id-Time-Synchronisation-Info						ProtocolIE-ID ::= 149
 id-PS-ServiceNotAvailable							ProtocolIE-ID ::= 150
 id-PagingPriority									ProtocolIE-ID ::= 151
 id-x2TNLConfigurationInfo							ProtocolIE-ID ::= 152
@@ -374,22 +368,5 @@ id-E-RABFailedToResumeItemResumeReq					ProtocolIE-ID ::= 236
 id-E-RABFailedToResumeListResumeRes					ProtocolIE-ID ::= 237
 id-E-RABFailedToResumeItemResumeRes					ProtocolIE-ID ::= 238
 id-NB-IoT-Paging-eDRXInformation					ProtocolIE-ID ::= 239
-id-V2XServicesAuthorized							ProtocolIE-ID ::= 240
 id-UEUserPlaneCIoTSupportIndicator 					ProtocolIE-ID ::= 241
-id-CE-mode-B-SupportIndicator 						ProtocolIE-ID ::= 242
-id-SRVCCOperationNotPossible						ProtocolIE-ID ::= 243
-id-NB-IoT-UEIdentityIndexValue 						ProtocolIE-ID ::= 244
-id-RRC-Resume-Cause									ProtocolIE-ID ::= 245
-id-DCN-ID											ProtocolIE-ID ::= 246
-id-ServedDCNs					 					ProtocolIE-ID ::= 247
-id-UESidelinkAggregateMaximumBitrate 				ProtocolIE-ID ::= 248
-id-DLNASPDUDeliveryAckRequest						ProtocolIE-ID ::= 249
-id-Coverage-Level 									ProtocolIE-ID ::= 250
-id-EnhancedCoverageRestricted						ProtocolIE-ID ::= 251
-id-UE-Level-QoS-Parameters							ProtocolIE-ID ::= 252
-id-DL-CP-SecurityInformation						ProtocolIE-ID ::= 253
-id-UL-CP-SecurityInformation						ProtocolIE-ID ::= 254
-id-CE-ModeBRestricted								ProtocolIE-ID ::= 271
-id-PendingDataIndication							ProtocolIE-ID ::= 283
-
 END
