@@ -109,7 +109,6 @@ Specific attributes:
             txt = self._cont[ident]._from_asn1(txt)
             self._val = (ident, self._cont[ident]._val)
             self._cont[ident]._parent = _par
-            #self._cont[ident]._val = None
             return txt
         else:
             raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'\
@@ -123,7 +122,6 @@ Specific attributes:
             self._cont[ident]._parent = self
             ret = '%s : %s' % (ident, self._cont[ident]._to_asn1())
             self._cont[ident]._parent = _par
-            #self._cont[ident]._val = None
         else:
             ret = '%s : \'%s\'H' % (ident, hexlify(self._val[1]))
         return ret
@@ -195,7 +193,6 @@ Specific attributes:
         GEN.append(Cho._struct)
         self._val = (ident, Cho._val)
         Cho._parent = _par
-        #Cho._val = None
         self._struct = Envelope(self._name, GEN=tuple(GEN))
         return
     
@@ -250,7 +247,6 @@ Specific attributes:
         Cho._from_per(char)
         self._val = (ident, Cho._val)
         Cho._parent = _par
-        #Cho._val = None
         return
     
     def _to_per_ws(self):
@@ -294,7 +290,6 @@ Specific attributes:
                     else:
                         buf = Cho.to_uper_ws()
                     Cho._parent = _par
-                    #Cho._val = None
                 else:
                     buf = self._val[1]
                 GEN.extend( ASN1CodecPER.encode_unconst_buf_ws(buf) )
@@ -313,7 +308,6 @@ Specific attributes:
         Cho._parent = self
         GEN.append( Cho._to_per_ws() )
         Cho._parent = self
-        #Cho._val = None
         self._struct = Envelope(self._name, GEN=tuple(GEN))
         return self._struct
     
@@ -355,7 +349,6 @@ Specific attributes:
                         buf = Cho.to_aper()
                     else:
                         buf = Cho.to_uper()
-                    #Cho._val = None
                 else:
                     buf = self._val[1]
                 GEN.extend( ASN1CodecPER.encode_unconst_buf(buf) )
@@ -373,7 +366,6 @@ Specific attributes:
         Cho._parent = self
         GEN.extend( Cho._to_per() )
         Cho._parent = _par
-        #Cho._val = None
         return GEN
     
     ###
@@ -569,7 +561,6 @@ Specific attributes:
                 self._cont[ident]._from_jval(value)
                 self._val = (ident, self._cont[ident]._val)
                 self._cont[ident]._parent = _par
-                #self._cont[ident]._val = None
             else:
                 # unknown extended value, keeping value as-is
                 self._val = ('_ext_%s' % ident, value)
@@ -582,7 +573,6 @@ Specific attributes:
                 self._cont[ident]._parent = self
                 ret = {ident : self._cont[ident]._to_jval()}
                 self._cont[ident]._parent = _par
-                #self._cont[ident]._val = None
             else:
                 # reencoding unknown value
                 assert( ident[:5] == '_ext_' )
@@ -654,7 +644,6 @@ class _CONSTRUCT(ASN1Obj):
                     self._cont[ident]._parent = self
                     self._cont[ident]._val = self._val[ident]
                     val.append('  %s %s,\n' % (ident, self._cont[ident]._to_asn1().replace('\n', '\n  ')))
-                    #self._cont[ident]._val = None
                     self._cont[ident]._parent = _par
             if val:
                 val[-1] = val[-1][:-2]
@@ -710,7 +699,6 @@ class _CONSTRUCT(ASN1Obj):
                 GEN.append(Comp._struct)
                 self._val[ident] = Comp._val
                 Comp._parent = _par
-                #Comp._val = None
             elif Comp._def is not None and ASN1CodecPER.GET_DEFVAL:
                 # component absent of the encoding, but with default value
                 self._val[ident] = Comp._def
@@ -815,7 +803,6 @@ class _CONSTRUCT(ASN1Obj):
                 Comp._from_per(char)
                 self._val[ident] = Comp._val
                 Comp._parent = _par
-                #Comp._val = None
             elif Comp._def is not None and ASN1CodecPER.GET_DEFVAL:
                 # component absent of the encoding, but with default value
                 self._val[ident] = Comp._def
@@ -1235,7 +1222,6 @@ Specific attributes:
                 txt = self._cont[ident]._from_asn1(t_rest)
                 val[ident] = self._cont[ident]._val
                 self._cont[ident]._parent = _par
-                #self._cont[ident]._val = None
                 if txt[0:1] == ',':
                     txt = txt[1:].strip()
                     try:
@@ -1275,7 +1261,6 @@ Specific attributes:
                         GSeq = self._ext_group_obj[self._ext_ident[ident]]
                         txt = GSeq._from_asn1(txt)
                         val.update(GSeq._val)
-                        #GSeq._val = None
                         i += len(GSeq._cont)
                     else:
                         # independent extension
@@ -1284,7 +1269,6 @@ Specific attributes:
                         txt = self._cont[ident]._from_asn1(t_rest)
                         val[ident] = self._cont[ident]._val
                         self._cont[ident]._parent = _par
-                        #self._cont[ident]._val = None
                         i += 1
                     if txt[0:1] == ',':
                         txt = txt[1:].strip()
@@ -2063,7 +2047,6 @@ class _CONSTRUCT_OF(ASN1Obj):
         while True:
             txt = self._cont._from_asn1(txt)
             self._val.append(self._cont._val)
-            #self._cont._val = None
             if txt[0:1] == ',':
                 txt = txt[1:].strip()
             elif txt[0:1] == '}':
@@ -2082,7 +2065,6 @@ class _CONSTRUCT_OF(ASN1Obj):
             self._cont._val = v
             val.append('  %s,\n' % self._cont._to_asn1().replace('\n', '\n  '))
         self._cont._parent = _par
-        #self._cont._val = None
         if val:
             val[-1] = val[-1][:-2]
         return '{\n' + ''.join(val) + '\n}'
@@ -2132,7 +2114,6 @@ class _CONSTRUCT_OF(ASN1Obj):
                     GEN.append(self._cont._struct)
                     self._val.append(self._cont._val)
                 self._cont._parent = _par
-                #self._cont._val = None
                 self._struct = Envelope(self._name, GEN=tuple(GEN))
                 return
         # 4) size is semi-constrained or has no constraint
@@ -2168,7 +2149,6 @@ class _CONSTRUCT_OF(ASN1Obj):
             GEN.append(self._cont._struct)
             self._val.append(self._cont._val)
         self._cont._parent = _par
-        #self._cont._val = None
         self._struct = Envelope(self._name, GEN=tuple(GEN))
     
     def _from_per(self, char):
@@ -2208,7 +2188,6 @@ class _CONSTRUCT_OF(ASN1Obj):
                     self._cont._from_per(char)
                     self._val.append(self._cont._val)
                 self._cont._parent = _par
-                #self._cont._val = None
                 return
         # 4) size is semi-constrained or has no constraint
         # decoded as unconstrained
@@ -2239,7 +2218,6 @@ class _CONSTRUCT_OF(ASN1Obj):
             self._cont._from_per(char)
             self._val.append(self._cont._val)
         self._cont._parent = _par
-        #self._cont._val = None
     
     def _to_per_ws(self):
         GEN, ldet = [], len(self._val)
@@ -2269,7 +2247,6 @@ class _CONSTRUCT_OF(ASN1Obj):
                     self._cont._parent = self
                     self.__to_per_ws_cont(GEN, ldet)
                     self._cont._parent = _par
-                    #self._cont._val = None
                     self._struct = Envelope(self._name, GEN=tuple(GEN))
                     return self._struct
             elif self._const_sz.rdyn == 0:
@@ -2282,7 +2259,6 @@ class _CONSTRUCT_OF(ASN1Obj):
                     self._cont._parent = self
                     self.__to_per_ws_cont(GEN, ldet)
                     self._cont._parent = _par
-                    #self._cont._val = None
                     self._struct = Envelope(self._name, GEN=tuple(GEN))
                     return self._struct
         # 4) size is semi-constrained or has no constraint
@@ -2317,7 +2293,6 @@ class _CONSTRUCT_OF(ASN1Obj):
             GEN.extend( ASN1CodecPER.encode_count_ws(ldet) )
             self.__to_per_ws_cont(GEN, ldet)
         self._cont._parent = _par
-        #self._cont._val = None
         self._struct = Envelope(self._name, GEN=tuple(GEN))
     
     def __to_per_ws_cont(self, GEN, num, off=0, bl=None):
@@ -2370,7 +2345,6 @@ class _CONSTRUCT_OF(ASN1Obj):
                     self._cont._parent = self
                     self.__to_per_cont(GEN, ldet)
                     self._cont._parent = _par
-                    #self._cont._val = None
                     return GEN
             elif self._const_sz.rdyn == 0:
                 # 3) size has a single possible size
@@ -2382,7 +2356,6 @@ class _CONSTRUCT_OF(ASN1Obj):
                     self._cont._parent = self
                     self.__to_per_cont(GEN, ldet)
                     self._cont._parent = _par
-                    #self._cont._val = None
                     return GEN
         # 4) size is semi-constrained or has no constraint
         # encoded as unconstrained integer

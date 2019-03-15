@@ -1086,7 +1086,7 @@ Specific attribute:
                 if self._val in self._ext:
                     ind = self._ext.index(self._val)
                 else:
-                    #self._val[:5] == '_ext_':
+                    #self._val[:5] == '_ext_'
                     ind = int(self._val[5:])
                 if ind < 64:
                     # 4) normally small index
@@ -1125,7 +1125,8 @@ Specific attribute:
                 if self._val in self._ext:
                     GEN.append( (T_UINT, 1, 1) )
                     ind = self._ext.index(self._val)
-                elif self._val[:5] == '_ext_':
+                else:
+                    # self._val[:5] == '_ext_'
                     GEN.append( (T_UINT, 1, 1) )
                     ind = int(self._val[5:])
                 if ind < 64:
@@ -1194,18 +1195,20 @@ Specific attribute:
             self._val = self._cont_rev[val]
     
     def _encode_ber_cont_ws(self):
-        if self._val[:5] == '_ext_':
-            val = int(self._val[5:])
-        else:
+        if self._val in self._cont:
             val = self._cont[self._val]
+        else:
+            # self._val[:5] == '_ext_'
+            val = int(self._val[5:])
         lval = int_bytelen(val)
         return 0, lval, Int('V', val=val, bl=8*lval)
     
     def _encode_ber_cont(self):
-        if self._val[:5] == '_ext_':
-            val = int(self._val[5:])
-        else:
+        if self._val in self._cont:
             val = self._cont[self._val]
+        else:
+            # self._val[:5] == '_ext_'
+            val = int(self._val[5:])
         lval = int_bytelen(val)
         return 0, lval, [ (T_INT, val, 8*lval) ]
     

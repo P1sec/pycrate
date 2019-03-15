@@ -332,7 +332,6 @@ Single value: Python 2-tuple
             Obj = self._get_val_obj(self._val[0])
         Obj._val = self._val[1]
         GEN = ASN1CodecPER.encode_unconst_open_ws(Obj)
-        #Obj._val = None
         self._struct = Envelope(self._name, GEN=tuple(GEN))
         return self._struct
     
@@ -346,7 +345,6 @@ Single value: Python 2-tuple
             Obj = self._get_val_obj(self._val[0])
         Obj._val = self._val[1]
         ret = ASN1CodecPER.encode_unconst_open(Obj)
-        #Obj._val = None
         return ret
     
     ###
