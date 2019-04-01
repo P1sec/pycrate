@@ -43,6 +43,7 @@ else:
 from .utils  import *
 from .charpy import Charpy, CharpyErr
 
+
 #------------------------------------------------------------------------------#
 # Elt specific error
 #------------------------------------------------------------------------------#
@@ -1423,10 +1424,10 @@ class Atom(Element):
     
     __call__ = get_val
     __repr__ = repr
-    if python_implementation != 'PyPy':
+    #if python_implementation != 'PyPy':
         # PyPy iterator implementation leads to an infinite loop
         # __iter__() calls __len__(), but here, get_bl() calls __iter__()
-        __len__ = get_bl
+    #    __len__ = get_bl
 
 
 #------------------------------------------------------------------------------#
@@ -2048,6 +2049,7 @@ class Envelope(Element):
             except Exception as err:
                 raise(EltErr('{0} [__getitem__] str item: {1}'.format(self._name, err)))
         elif isinstance(key, integer_types):
+            #print(self._name, self._content, len(self._content), key) #len(self), key)
             try:
                 return self._content[key]
             except Exception as err:
@@ -2161,10 +2163,10 @@ class Envelope(Element):
     
     __call__ = get_val
     __repr__ = repr
-    if python_implementation != 'PyPy':
+    #if python_implementation != 'PyPy':
         # PyPy iterator implementation lead to an infinite loop
         # __iter__() calls __len__(), but here, get_bl() calls __iter__()
-        __len__ = get_bl
+    #    __len__ = get_bl
     
     #--------------------------------------------------------------------------#
     # json interface
@@ -3011,10 +3013,10 @@ class Array(Element):
     
     __call__ = get_val
     __repr__ = repr
-    if python_implementation != 'PyPy':
+    #if python_implementation != 'PyPy':
         # PyPy iterator implementation lead to an infinite loop
         # __iter__() calls __len__(), but here, get_bl() calls __iter__()
-        __len__ = get_bl
+    #    __len__ = get_bl
     
     #--------------------------------------------------------------------------#
     # json interface
@@ -3893,10 +3895,10 @@ class Sequence(Element):
     
     __call__ = get_val
     __repr__ = repr
-    if python_implementation != 'PyPy':
+    #if python_implementation != 'PyPy':
         # PyPy iterator implementation lead to an infinite loop
         # __iter__() calls __len__(), but here, get_bl() calls __iter__()
-        __len__ = get_bl
+    #    __len__ = get_bl
     
     #--------------------------------------------------------------------------#
     # json interface
@@ -4472,10 +4474,10 @@ class Alt(Element):
     
     __call__ = get_val
     __repr__ = repr
-    if python_implementation != 'PyPy':
+    #if python_implementation != 'PyPy':
         # PyPy iterator implementation lead to an infinite loop
         # __iter__() calls __len__(), but here, get_bl() calls __iter__()
-        __len__ = get_bl
+    #    __len__ = get_bl
 
     #--------------------------------------------------------------------------#
     # json interface
