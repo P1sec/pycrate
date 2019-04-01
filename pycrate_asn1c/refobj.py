@@ -27,9 +27,8 @@
 # *--------------------------------------------------------
 #*/
 
-from pycrate_core.utils import integer_types
-
-from .err  import ASN1Err
+from .utils import integer_types, NoneType
+from .err   import ASN1Err
 
 
 RefObj_docstring = """
@@ -91,8 +90,7 @@ class ASN1Ref(object):
             return hash(self.called) + hash(tuple(self.ced_path))
     
     def _safechk(self):
-        if self.called is not None and \
-        not isinstance(self.called, (tuple, ASN1RefParam)):
+        if not isinstance(self.called, (NoneType, tuple, ASN1RefParam)):
             raise(ASN1Err('{0}: invalid called'.format(self.__class__.__name__)))
         if not isinstance(self.ced_path, list) or \
         not all([isinstance(e, (str, integer_types)) for e in self.ced_path]):
@@ -108,6 +106,7 @@ class ASN1Ref(object):
             return self.__class__(self.called.copy(), self.ced_path[:])
         else:
             assert()
+
 
 class ASN1RefType(ASN1Ref):
     __doc__ = """
@@ -125,6 +124,7 @@ class ASN1RefType(ASN1Ref):
         else:
             return 'ASN1RefType({0!r})'.format(self.called)
 
+
 class ASN1RefInstOf(ASN1Ref):
     __doc__ = """
     Class to handle a reference to a subclass of TYPE-IDENTIFIER
@@ -138,6 +138,7 @@ class ASN1RefInstOf(ASN1Ref):
         # self.called is 2-tuple
         # self.ced_path is empty
         return 'ASN1RefInstOf({0}.{1})'.format(self.called[0], self.called[1])
+
 
 class ASN1RefChoiceComp(ASN1Ref):
     __doc__ = """
@@ -158,6 +159,7 @@ class ASN1RefChoiceComp(ASN1Ref):
             return 'ASN1RefChoiceComp({0}<{1!r})'\
                    .format('<'.join(self.ced_path), self.called)
 
+
 class ASN1RefClassField(ASN1Ref):
     __doc__ = """
     Class to handle a reference to a (chain of) field(s) within a user-defined 
@@ -177,6 +179,7 @@ class ASN1RefClassField(ASN1Ref):
             return 'ASN1RefClassField({0!r}.&{1})'\
                    .format(self.called, '.&'.join(self.ced_path))
 
+
 class ASN1RefClassIntern(ASN1Ref):
     __doc__ = """
     Class to handle an local reference within a user-defined ASN.1 CLASS, 
@@ -192,7 +195,7 @@ class ASN1RefClassIntern(ASN1Ref):
         # self.called is None
         # self.ced_path is not empty
         return 'ASN1RefClassIntern(&{0})'.format('.&'.join(self.ced_path))
-        
+
 
 class ASN1RefClassValField(ASN1Ref):
     __doc__ = """
@@ -212,6 +215,7 @@ class ASN1RefClassValField(ASN1Ref):
         else:
             return 'ASN1RefClassValField({0!r}.&{1})'\
                    .format(self.called, '.&'.join(self.ced_path))
+
 
 class ASN1RefValue(ASN1Ref):
     __doc__ = """
@@ -238,6 +242,7 @@ class ASN1RefValue(ASN1Ref):
             else:
                 return 'ASN1RefValue({0!r})'.format(self.called)
 
+
 class ASN1RefSet(ASN1Ref):
     __doc__ = """
     Class to handle a reference to a user-defined ASN.1 set object
@@ -262,6 +267,7 @@ class ASN1RefSet(ASN1Ref):
                        .format(self.called, '.&'.join(self.ced_path))
             else:
                 return 'ASN1RefSet({0!r})'.format(self.called)
+
 
 class ASN1RefParam(ASN1Ref):
     """

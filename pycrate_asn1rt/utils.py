@@ -63,6 +63,7 @@ def asnlog(msg):
     '''
     log(msg)
 
+
 # -----------------------------------------------------------------------------#
 # asn1-wide Python variables and identifiers
 # -----------------------------------------------------------------------------#
@@ -380,6 +381,7 @@ def factor_perfrag(val):
         val -= f * frags[-1][1]
     return frags, val
 
+
 # for PER integer encoding
 def int_bitlen(val):
     # get the length in bits required for the absolute value of val
@@ -392,6 +394,7 @@ def int_bitlen(val):
         # 1+bl bits required
         return 1+bl
 
+
 # for PER and BER integer encoding
 def uint_bytelen(val):
     bl = val.bit_length()
@@ -399,6 +402,7 @@ def uint_bytelen(val):
         return 1 + (bl>>3)
     else:
         return bl>>3
+
 
 def int_bytelen(val):
     # get the length in bits required for the absolute value of val
@@ -420,6 +424,7 @@ def int_bytelen(val):
             return 1 + (bl>>3)
         else:
             return bl>>3
+
 
 # for APER character rounding
 def round_p2(val):
@@ -494,6 +499,7 @@ def match_tag(Obj, tag):
         assert()
     return 0
 
+
 def get_obj_by_tag(ObjOpen, tag, ConstList=None):
     """Check within the value constraint of an OPEN / ANY object ObjOpen 
     for a given tag (tag_class, tag_value) and return the matching object, 
@@ -550,6 +556,7 @@ def get_obj_at(Obj, path):
             raise(ASN1Err('invalid object selection with path {0!r}, from {1}'\
                   .format(path, p)))
     return Obj  
+
 
 def get_val_at(Obj, path):
     """return the value within `Obj' value according to the given path

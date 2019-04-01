@@ -63,7 +63,9 @@ except ImportError:
     genrand = lambda n: uint_to_bytes(_rand.getrandbits(8*n), 8*n)
 
 try:
-    from CryptoMobile.Milenage import *
+    from CryptoMobile.Milenage import Milenage, xor_buf, conv_C2, conv_C3, conv_A2
+    # other available conversion functions are:
+    # conv_C4, conv_C5, conv_A2, conv_A3, conv_A4, conv_A7
     from pycomp128             import comp128v1, comp128v2, comp128v3
 except ImportError as err:
     print('CryptoMobile library is required for Milenage and Comp-128')
@@ -216,7 +218,7 @@ class AuC:
                 XRES, CK, IK, AK = self.Milenage.f2345(RAND, K, OP)
             else:
                 XRES, CK, IK, AK = self.Milenage.f2345(RAND, K)
-            RES, Ck = conv_C2(XRES), conv_C3(Ck, Ik)
+            RES, Ck = conv_C2(XRES), conv_C3(CK, IK)
         else:
             if ALG2 == 1:
                 RES, Ck = comp128v1(K, RAND)

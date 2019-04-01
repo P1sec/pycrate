@@ -325,7 +325,7 @@ class ARPd(object):
             if cnt < 3:
                 return self.ARP_RESOLV_TABLE[ip]
             else:
-                return 6*'b\xFF' # LAN broadcast, maybe a bit strong !
+                return 6*b'\xFF' # LAN broadcast, maybe a bit strong !
 
 
 #------------------------------------------------------------------------------#

@@ -29,11 +29,12 @@
 
 import re
 import pprint
+from keyword import iskeyword
 
 # pycrate_core is used only for basic library-wide functions / variables:
 # log(), python_version, integer_types, str_types
 from pycrate_core.utils import *
-from .err import ASN1Err
+from .err               import ASN1Err
 
 # ------------------------------------------------------------------------------#
 # asn1-wide Python routines
@@ -418,6 +419,13 @@ def match_typeref(text):
 
 def strip(text=''):
     return text.strip()
+
+
+def name_to_defin(n):
+    if iskeyword(n):
+        # n is a Python keyword
+        n += '_'
+    return n.replace('-', '_').replace(' ', '_')
 
 
 def scan_for_comments(text=''):

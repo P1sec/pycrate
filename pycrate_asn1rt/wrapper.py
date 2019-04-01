@@ -27,7 +27,7 @@
 # *--------------------------------------------------------
 #*/
 
-from pycrate_core.utils import TYPE_BYTES
+from pycrate_core.utils import TYPE_BYTES, uint_to_hex, bytes_to_uint, bytes_to_bitstr
 from pycrate_core.elt   import Element
 from pycrate_core.elt   import _with_json
 

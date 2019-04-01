@@ -3836,7 +3836,7 @@ class Sequence(Element):
         if isinstance(key, integer_types):
             try:
                 elt = self._content[key]
-            except Exception:
+            except Exception as err:
                 raise(EltErr('{0} [__delitem__] int item: {1}'.format(self._name, err)))
             del self._content[key]
             if elt != self._tmpl:

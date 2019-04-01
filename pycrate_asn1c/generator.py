@@ -27,8 +27,6 @@
 # *--------------------------------------------------------
 #*/
 
-from keyword import iskeyword
-
 from .utils  import *
 from .glob   import *
 from .setobj import *
@@ -315,11 +313,6 @@ def typeref_to_defin(Obj):
         else:
             assert()
 
-def name_to_defin(n):
-    if iskeyword(n):
-        # n is a Python keyword
-        n += '_'
-    return n.replace('-', '_').replace(' ', '_')
 
 class PycrateGenerator(_Generator):
     """

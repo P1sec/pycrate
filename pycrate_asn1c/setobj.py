@@ -297,7 +297,7 @@ class ASN1RangeStr(ASN1Range):
         # disjoint sets:
         if ub < ralb:
             return self, ra
-        else:
+        elif raub < lb:
             return ra, self
         #
         # intersecting sets:

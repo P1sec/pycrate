@@ -505,7 +505,6 @@ Specific attributes:
     def _encode_ber_cont_ws(self):
         if self._val[0][:5] == '_ext_':
             # unknown extension re-encoding
-            #assert( self._ext is not None )
             cl, pc, tval = int(self._val[0][5:6]), int(self._val[0][6:7]), int(self._val[0][7:])
             TLV = ASN1CodecBER.encode_tlv_ws(cl, tval, self._val[1], pc=pc)
         else:
@@ -518,16 +517,12 @@ Specific attributes:
         if ASN1CodecBER.ENC_LUNDEF:
             return 1, -1, TLV
         else:
-            # TODO: check which one is the more efficient
-            #lval += (TLV[0].get_bl() >> 3) + (TLV[1].get_bl() >> 3) + TLV[1]()
-            #lval = (TLV[0:2].get_bl() >> 3) + TLV[1]()
             lval = TLV.get_bl() >> 3
             return 1, lval, TLV
     
     def _encode_ber_cont(self):
         if self._val[0][:5] == '_ext_':
             # unknown extension re-encoding
-            #assert( self._ext is not None )
             cl, pc, tval = int(self._val[0][5:6]), int(self._val[0][6:7]), int(self._val[0][7:])
             TLV = ASN1CodecBER.encode_tlv(cl, tval, self._val[1], pc=pc)
         else:
@@ -618,9 +613,6 @@ class _CONSTRUCT(ASN1Obj):
                                 ext.remove(ident)
     
     def _safechk_bnd(self, val):
-        # TODO:
-        # in order to support _SAFE_BNDTAB, we need to set values to each field 
-        # in the correct order !
         for (name, Obj) in self._cont.items():
             if name in val:
                 Obj._val = val[name]
@@ -1541,24 +1533,17 @@ Specific attributes:
                     TLV.append( comp_tlv )
                     Comp._parent = _par
                     if lval >= 0:
-                        # TODO: check which one is the more efficient
-                        #lval += (comp_tlv[0].get_bl() >> 3) + (comp_tlv[1].get_bl() >> 3) + comp_tlv[1]()
-                        #lval += (comp_tlv[0:2].get_bl() >> 3) + comp_tlv[1]()
                         lval += comp_tlv.get_bl() >> 3
                 val_ids.remove(ident)
         #
         if val_ids:
             # encode unknown extended components
-            #assert( self._ext is not None )
             for ident in val_ids:
                 assert( ident[0:5] == '_ext_' )
                 cl, pc, tval = int(ident[5:6]), int(ident[6:7]), int(ident[7:])
                 comp_tlv = ASN1CodecBER.encode_tlv_ws(cl, tval, self._val[ident], pc=pc)
                 TLV.append( comp_tlv )
                 if lval >= 0:
-                    # TODO: check which one is the more efficient
-                    #lval += (comp_tlv[0].get_bl() >> 3) + (comp_tlv[1].get_bl() >> 3) + comp_tlv[1]()
-                    #lval += (comp_tlv[0:2].get_bl() >> 3) + comp_tlv[1]()
                     lval += comp_tlv.get_bl() >> 3
         #
         return 1, lval, Envelope('V', GEN=tuple(TLV))
@@ -1594,7 +1579,6 @@ Specific attributes:
         #
         if val_ids:
             # encode unknown extended components
-            #assert( self._ext is not None )
             for ident in val_ids:
                 assert( ident[0:5] == '_ext_' )
                 cl, pc, tval = int(ident[5:6]), int(ident[6:7]), int(ident[7:])
@@ -1842,7 +1826,6 @@ Specific attributes:
                           .format(self.fullname())))
                 break
             elif self._ext is not None:
-                # TODO: decode unknown extended component
                 if not self._SILENT:
                     asnlog('SET._decode_ber_cont: %s, unknown extension tag %r'\
                            % (self.fullname(), (cl, tval)))
@@ -1894,9 +1877,6 @@ Specific attributes:
                     TLV.append( comp_tlv )
                     Comp._parent = _par
                     if lval >= 0:
-                        # TODO: check which one is the more efficient
-                        #lval += (comp_tlv[0].get_bl() >> 3) + (comp_tlv[1].get_bl() >> 3) + comp_tlv[1]()
-                        #lval += (comp_tlv[0:2].get_bl() >> 3) + comp_tlv[1]()
                         lval += comp_tlv.get_bl() >> 3
                 val_ids.remove(ident)
         # encode extended component 1 by 1 in their definition order
@@ -1919,24 +1899,17 @@ Specific attributes:
                     TLV.append( comp_tlv )
                     Comp._parent = _par
                     if lval >= 0:
-                        # TODO: check which one is the more efficient
-                        #lval += (comp_tlv[0].get_bl() >> 3) + (comp_tlv[1].get_bl() >> 3) + comp_tlv[1]()
-                        #lval += (comp_tlv[0:2].get_bl() >> 3) + comp_tlv[1]()
                         lval += comp_tlv.get_bl() >> 3
                 val_ids.remove(ident)
         #
         if val_ids:
             # encode unknown extended components
-            #assert( self._ext is not None )
             for ident in val_ids:
                 assert( ident[0:5] == '_ext_' )
                 cl, pc, tval = int(ident[5:6]), int(ident[6:7]), int(ident[7:])
                 comp_tlv = ASN1CodecBER.encode_tlv_ws(cl, tval, self._val[ident], pc=pc)
                 TLV.append( comp_tlv )
                 if lval >= 0:
-                    # TODO: check which one is the more efficient
-                    #lval += (comp_tlv[0].get_bl() >> 3) + (comp_tlv[1].get_bl() >> 3) + comp_tlv[1]()
-                    #lval += (comp_tlv[0:2].get_bl() >> 3) + comp_tlv[1]()
                     lval += comp_tlv.get_bl() >> 3
         #
         return 1, lval, Envelope('V', GEN=tuple(TLV))
@@ -1994,7 +1967,6 @@ Specific attributes:
         #
         if val_ids:
             # encode unknown extended components
-            #assert( self._ext is not None )
             for ident in val_ids:
                 assert( ident[0:5] == '_ext_' )
                 cl, pc, tval = int(ident[5:6]), int(ident[6:7]), int(ident[7:])

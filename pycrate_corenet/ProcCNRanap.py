@@ -1381,9 +1381,8 @@ class RANAPLocationReport(RANAPSigProc):
     
     @classmethod
     def _get_position_data(cls, data):
-        disc, desc = data['positioningDataDiscriminator'][0], []
+        disc, ds, desc = data['positioningDataDiscriminator'][0], data['positioningDataSet'], []
         if disc == 0:
-            ds = data['positioningDataSet']
             pmu = ord(ds[0])
             pm, pu = pmu>>3, pmu&0x7
             desc.append('positioning method %i (%s) and usage %i (%s)'\

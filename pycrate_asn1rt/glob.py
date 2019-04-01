@@ -27,7 +27,10 @@
 # *--------------------------------------------------------
 #*/
 
+from .utils   import asnlog, name_to_defin
+from .err     import ASN1Err
 from .dictobj import ASN1Dict
+
 
 #------------------------------------------------------------------------------#
 # ASN.1 global directory: GLOBAL
@@ -69,7 +72,7 @@ def make_GLOBAL(global_name=None):
             cla.OID.clear()
     
     if isinstance(global_name, str):
-        GLOBAL.__name__ = glob_name
+        GLOBAL.__name__ = global_name
     
     return GLOBAL
 
