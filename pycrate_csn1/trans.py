@@ -696,7 +696,6 @@ class CSN1Obj(object):
                     raise(CSN1Err('unsupported'))
             else:
                 raise(CSN1Err('unsupported'))
-            return (tok_ref, (a, b))
     
     @classmethod
     def _process_arithm_grp(cls, tok0, tok1, tok2):
