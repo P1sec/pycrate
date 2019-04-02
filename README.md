@@ -34,8 +34,8 @@ Operating systems and Python version
 
 The library is designed to work with both Python 2 (2.7) and Python 3 (3.4, 3.5 and greater), 
 from the official Python implementation [CPython](https://www.python.org/).
-It is also supporting alternative Python engine such as [pypy](http://pypy.org/) or
-[nuitka](http://nuitka.net/).
+It is also supporting alternative Python engine such as [pypy](http://pypy.org/),
+[nuitka](http://nuitka.net/) or [Cython](https://cython.org/).
 It is regularly tested both on Linux and Windows, and should actually work on any
 operating system which has [r|d]ecent Python support (as in 2017).
 
