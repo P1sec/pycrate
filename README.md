@@ -77,7 +77,7 @@ It is also possible to recompile all ASN.1 modules, this will take few minutes
 should have been compiled with the latest version of the compiler):
 
 ```
-python -m pycrate_asn1c.proc
+python -m pycrate_asn1c.asnproc
 ```
 
 

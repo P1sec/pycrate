@@ -21,7 +21,7 @@
 # * MA 02110-1301  USA
 # *
 # *--------------------------------------------------------
-# * File Name : pycrate_asn1c/proc.py
+# * File Name : pycrate_asn1c/asnproc.py
 # * Created : 2016-03-02
 # * Authors : Benoit Michau 
 # *--------------------------------------------------------

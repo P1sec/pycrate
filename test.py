@@ -31,7 +31,7 @@ def test_perf():
 
 def main():
     TO = time.time()
-    test_unit()
+    #test_unit()
     test_perf()
     print('[+] total time: %f sec' % (time.time() - TO, ))
     return 0

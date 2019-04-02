@@ -40,9 +40,8 @@ from test.test_csn1   import *
 from test.test_asn1rt import *
 from test.test_mobile import *
 from test.test_gsmrr  import *
-from pycrate_asn1c.proc import compile_text, compile_spec, compile_all, \
-                               generate_modules, PycrateGenerator, \
-                               GLOBAL, ASN_SPECS
+from pycrate_asn1c.asnproc import compile_text, compile_spec, compile_all, \
+    generate_modules, PycrateGenerator, GLOBAL, ASN_SPECS
 from pycrate_asn1rt.asnobj import ASN1Obj
 
 Element._SAFE_STAT = True
