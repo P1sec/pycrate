@@ -945,8 +945,10 @@ class _CONSTRUCT(ASN1Obj):
             # generate the bitmap preambule for extended (group of) components
             # bitmap length is encoded with a normally small value
             ldet = max(Bm)
+            if len(self._ext_nest) > ldet:
+                ldet = len(self._ext_nest)
             if ldet > 64:
-                # no so small value
+                # not so small value
                 GEN.append( Uint('big', val=1, bl=1) )
                 if ASN1CodecPER.ALIGNED:
                     ASN1CodecPER._off[-1] += 1
@@ -1075,6 +1077,8 @@ class _CONSTRUCT(ASN1Obj):
             # generate the bitmap preambule for extended (group of) components
             # bitmap length is encoded with a normally small value
             ldet = max(Bm)
+            if len(self._ext_nest) > ldet:
+                ldet = len(self._ext_nest)
             if ldet > 64:
                 # not so small value
                 GEN.append( (T_UINT, 1, 1) )

@@ -52,7 +52,7 @@ class ASN1CodecPER(ASN1Codec):
     # constructed object
     CANONICAL = True
     
-    # this is used to return default values , even when absent from the transfer syntax
+    # this is used to return default values, even when absent from the transfer syntax
     GET_DEFVAL = True
     
     # maximum length (or number of objects) allowed when decoding a fragmented stream
