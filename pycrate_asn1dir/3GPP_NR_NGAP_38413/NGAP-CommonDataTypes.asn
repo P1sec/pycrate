@@ -1,13 +1,13 @@
--- ASN1START 
+-- ASN1START
 -- **************************************************************
 --
 -- Common definitions
 --
 -- **************************************************************
 
-F1AP-CommonDataTypes {
+NGAP-CommonDataTypes {
 itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
-ngran-access (22) modules (3) f1ap (3) version1 (1) f1ap-CommonDataTypes (3) }
+ngran-Access (22) modules (3) ngap (1) version1 (1) ngap-CommonDataTypes (3) }
 
 DEFINITIONS AUTOMATIC TAGS ::= 
 

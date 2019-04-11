@@ -4,6 +4,7 @@ BEGIN
 
 IMPORTS
     CellIdentity,
+    EUTRA-PhysCellId,
     MeasId,
     MeasIdToAddModList,
     MeasObjectToAddModList,
@@ -16,14 +17,15 @@ IMPORTS
     maxNrofMeasId
 FROM NR-RRC-Definitions;
 
--- TAG-VAR-PENDING-RNA-UPDATE-START
+-- NR-UE-VARIABLES-STOP
+-- TAG-VARPENDINGRNA-UPDATE-START
 
 VarPendingRNA-Update ::=                    SEQUENCE {
     pendingRNA-Update                   BOOLEAN                             OPTIONAL
 }
 
--- TAG-VAR-PENDING-RNA-UPDATE-STOP
--- TAG-VAR-MEAS-CONFIG-START
+-- TAG-VARPENDINGRNA-UPDATE-STOP
+-- TAG-VARMEASCONFIG-START
 
 VarMeasConfig ::=                   SEQUENCE {
     -- Measurement identities
@@ -42,8 +44,8 @@ VarMeasConfig ::=                   SEQUENCE {
 
 }
 
--- TAG-VAR-MEAS-CONFIG-STOP
--- TAG-VAR-MEAS-REPORT-START
+-- TAG-VARMEASCONFIG-STOP
+-- TAG-VARMEASREPORTLIST-START
 
 VarMeasReportList ::=               SEQUENCE (SIZE (1..maxNrofMeasId)) OF VarMeasReport
 
@@ -56,13 +58,12 @@ VarMeasReport ::=                   SEQUENCE {
 
 CellsTriggeredList ::=              SEQUENCE (SIZE (1..maxNrofCellMeas)) OF CHOICE {
     physCellId                          PhysCellId,
---  Not needed for EN-DC.
-    physCellIdEUTRA                     ENUMERATED {ffsTypeAndValue}
+    physCellIdEUTRA                     EUTRA-PhysCellId
     }
 
 
--- TAG-VAR-MEAS-REPORT-STOP
--- TAG-VAR-RESUMEMACINPUT-START
+-- TAG-VARMEASREPORTLIST-STOP
+-- TAG-VARRESUMEMAC-INPUT-START
 
 VarResumeMAC-Input  ::=     SEQUENCE {
     sourcePhysCellId                        PhysCellId,
@@ -71,8 +72,8 @@ VarResumeMAC-Input  ::=     SEQUENCE {
 
 }
 
--- TAG-VAR-RESUMEMACINPUT-STOP
--- TAG-VAR-SHORTMACINPUT-START
+-- TAG-VARRESUMEMAC-INPUT-STOP
+-- TAG-VARSHORTMAC-INPUT-START
 
 VarShortMAC-Input   ::=                 SEQUENCE {
     sourcePhysCellId                        PhysCellId,
@@ -80,9 +81,9 @@ VarShortMAC-Input   ::=                 SEQUENCE {
     source-c-RNTI                           RNTI-Value
 }
 
--- TAG-VAR- SHORTMACINPUT-STOP
+-- TAG-VARSHORTMAC-INPUT-STOP
 
 END
 
--- TAG_NR-INTER-NODE-DEFINITIONS-START
+-- TAG-NR-INTER-NODE-DEFINITIONS-START
 

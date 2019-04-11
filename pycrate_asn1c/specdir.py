@@ -71,7 +71,11 @@ ASN_SPECS_LTE = {
 # 3GPP NR (5G)
 ASN_SPECS_5G = {
     'RRCNR'     : '3GPP_NR_RRC_38331',
-    'F1AP'      : '3GPP_NR_F1AP_38473',
+    'NGAP'      : '3GPP_NR_NGAP_38413',
+    'XnAP'      : '3GPP_NR_XnAP_38423',
+    'NRPPa'     : '3GPP_NR_NRPPa_38455',
+    'E1AP'      : '3GPP_NR_E1AP_38463',
+    'F1AP'      : '3GPP_NR_F1AP_38473'
     }
 
 # ITU-T various recommendations

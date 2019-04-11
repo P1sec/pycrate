@@ -7,7 +7,7 @@ import codecs
 import re
 
 dirpath = './'
-path = dirpath + '38473-f50.txt'
+path = dirpath + '38463-f30.txt'
 
 # ASN.1 modules are described within specific sections
 sections = [
@@ -18,6 +18,7 @@ sections = [
     '9.4.7	Constant Definitions',
     '9.4.8	Container Definitions'
     ]
+
 
 module_def = re.compile('^([A-Z][a-zA-Z0-9\-]{0,})\s{0,}')
 

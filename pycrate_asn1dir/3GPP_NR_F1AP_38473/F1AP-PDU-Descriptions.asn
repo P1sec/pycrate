@@ -1,3 +1,4 @@
+-- ASN1START 
 -- **************************************************************
 --
 -- Elementary Procedure definitions
@@ -62,7 +63,9 @@ FROM F1AP-CommonDataTypes
 	PWSCancelResponse,
 	PWSRestartIndication,
 	PWSFailureIndication,
-	GNBDUStatusIndication
+	GNBDUStatusIndication,
+	RRCDeliveryReport,
+	UEContextModificationRefuse
 
 FROM F1AP-PDU-Contents
 	id-Reset,
@@ -88,7 +91,8 @@ FROM F1AP-PDU-Contents
 	id-PWSCancel,
 	id-PWSRestartIndication,
 	id-PWSFailureIndication,
-	id-GNBDUStatusIndication
+	id-GNBDUStatusIndication,
+	id-RRCDeliveryReport
 
 
 FROM F1AP-Constants
@@ -133,7 +137,7 @@ F1AP-PDU ::= CHOICE {
 	choice-extension	ProtocolIE-SingleContainer { { F1AP-PDU-ExtIEs} }
 }
 
-F1AP-PDU-ExtIEs F1AP-PROTOCOL-IES ::= {
+F1AP-PDU-ExtIEs F1AP-PROTOCOL-IES ::= { -- this extension is not used
 	...
 }
 
@@ -180,7 +184,8 @@ F1AP-ELEMENTARY-PROCEDURES-CLASS-1 F1AP-ELEMENTARY-PROCEDURE ::= {
 	writeReplaceWarning			|
 	pWSCancel					|
 	gNBDUResourceCoordination		,
-	...}
+	...
+}
 
  F1AP-ELEMENTARY-PROCEDURES-CLASS-2 F1AP-ELEMENTARY-PROCEDURE ::= {	
 	errorIndication					|
@@ -195,7 +200,8 @@ F1AP-ELEMENTARY-PROCEDURES-CLASS-1 F1AP-ELEMENTARY-PROCEDURE ::= {
 	notify							|
 	pWSRestartIndication				|
 	pWSFailureIndication			|
-	gNBDUStatusIndication			,
+	gNBDUStatusIndication			|
+	rRCDeliveryReport				,
 	...
 }
 -- **************************************************************
@@ -214,7 +220,7 @@ reset F1AP-ELEMENTARY-PROCEDURE ::= {
 f1Setup F1AP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		F1SetupRequest
 	SUCCESSFUL OUTCOME		F1SetupResponse
-	UNSUCCESSFUL 			OUTCOME	F1SetupFailure
+	UNSUCCESSFUL OUTCOME	F1SetupFailure
 	PROCEDURE CODE			id-F1Setup
 	CRITICALITY				reject
 }
@@ -261,6 +267,7 @@ uEContextModification F1AP-ELEMENTARY-PROCEDURE ::= {
 uEContextModificationRequired F1AP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		UEContextModificationRequired
 	SUCCESSFUL OUTCOME		UEContextModificationConfirm
+	UNSUCCESSFUL OUTCOME		UEContextModificationRefuse
 	PROCEDURE CODE			id-UEContextModificationRequired
 	CRITICALITY				reject
 }
@@ -366,6 +373,14 @@ gNBDUStatusIndication 	F1AP-ELEMENTARY-PROCEDURE ::= {
 	PROCEDURE CODE			id-GNBDUStatusIndication
 	CRITICALITY				ignore
 }
+
+
+rRCDeliveryReport F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		RRCDeliveryReport
+	PROCEDURE CODE			id-RRCDeliveryReport
+	CRITICALITY				ignore
+}
+
 
 
 END
