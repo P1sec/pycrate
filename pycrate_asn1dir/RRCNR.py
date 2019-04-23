@@ -14,157 +14,6 @@ from pycrate_asn1rt.asnobj_class     import *
 from pycrate_asn1rt.asnobj_ext       import *
 from pycrate_asn1rt.init             import init_modules
 
-class NR_UE_Variables:
-
-    _name_  = u'NR-UE-Variables'
-    _oid_   = []
-    
-    _obj_ = [
-        u'VarPendingRNA-Update',
-        u'VarMeasConfig',
-        u'VarMeasReportList',
-        u'VarMeasReport',
-        u'CellsTriggeredList',
-        u'VarResumeMAC-Input',
-        u'VarShortMAC-Input',
-        ]
-    _type_ = [
-        u'VarPendingRNA-Update',
-        u'VarMeasConfig',
-        u'VarMeasReportList',
-        u'VarMeasReport',
-        u'CellsTriggeredList',
-        u'VarResumeMAC-Input',
-        u'VarShortMAC-Input',
-        ]
-    _set_ = [
-        ]
-    _val_ = [
-        ]
-    _class_ = [
-        ]
-    _param_ = [
-        ]
-    
-    #-----< VarPendingRNA-Update >-----#
-    VarPendingRNA_Update = SEQ(name=u'VarPendingRNA-Update', mode=MODE_TYPE)
-    _VarPendingRNA_Update_pendingRNA_Update = BOOL(name=u'pendingRNA-Update', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    VarPendingRNA_Update._cont = ASN1Dict([
-        (u'pendingRNA-Update', _VarPendingRNA_Update_pendingRNA_Update),
-        ])
-    VarPendingRNA_Update._ext = None
-    
-    #-----< VarMeasConfig >-----#
-    VarMeasConfig = SEQ(name=u'VarMeasConfig', mode=MODE_TYPE)
-    _VarMeasConfig_measIdList = SEQ_OF(name=u'measIdList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasIdToAddModList')), opt=True)
-    _VarMeasConfig_measObjectList = SEQ_OF(name=u'measObjectList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasObjectToAddModList')), opt=True)
-    _VarMeasConfig_reportConfigList = SEQ_OF(name=u'reportConfigList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ReportConfigToAddModList')), opt=True)
-    _VarMeasConfig_quantityConfig = SEQ(name=u'quantityConfig', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'QuantityConfig')), opt=True)
-    _VarMeasConfig_s_MeasureConfig = CHOICE(name=u's-MeasureConfig', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
-    __VarMeasConfig_s_MeasureConfig_ssb_RSRP = INT(name=u'ssb-RSRP', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RSRP-Range')))
-    __VarMeasConfig_s_MeasureConfig_csi_RSRP = INT(name=u'csi-RSRP', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RSRP-Range')))
-    _VarMeasConfig_s_MeasureConfig._cont = ASN1Dict([
-        (u'ssb-RSRP', __VarMeasConfig_s_MeasureConfig_ssb_RSRP),
-        (u'csi-RSRP', __VarMeasConfig_s_MeasureConfig_csi_RSRP),
-        ])
-    _VarMeasConfig_s_MeasureConfig._ext = None
-    VarMeasConfig._cont = ASN1Dict([
-        (u'measIdList', _VarMeasConfig_measIdList),
-        (u'measObjectList', _VarMeasConfig_measObjectList),
-        (u'reportConfigList', _VarMeasConfig_reportConfigList),
-        (u'quantityConfig', _VarMeasConfig_quantityConfig),
-        (u's-MeasureConfig', _VarMeasConfig_s_MeasureConfig),
-        ])
-    VarMeasConfig._ext = None
-    
-    #-----< VarMeasReportList >-----#
-    VarMeasReportList = SEQ_OF(name=u'VarMeasReportList', mode=MODE_TYPE)
-    _VarMeasReportList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-UE-Variables', 'VarMeasReport')))
-    VarMeasReportList._cont = _VarMeasReportList__item_
-    VarMeasReportList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    
-    #-----< VarMeasReport >-----#
-    VarMeasReport = SEQ(name=u'VarMeasReport', mode=MODE_TYPE)
-    _VarMeasReport_measId = INT(name=u'measId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasId')))
-    _VarMeasReport_cellsTriggeredList = SEQ_OF(name=u'cellsTriggeredList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-UE-Variables', 'CellsTriggeredList')), opt=True)
-    _VarMeasReport_numberOfReportsSent = INT(name=u'numberOfReportsSent', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    VarMeasReport._cont = ASN1Dict([
-        (u'measId', _VarMeasReport_measId),
-        (u'cellsTriggeredList', _VarMeasReport_cellsTriggeredList),
-        (u'numberOfReportsSent', _VarMeasReport_numberOfReportsSent),
-        ])
-    VarMeasReport._ext = None
-    
-    #-----< CellsTriggeredList >-----#
-    CellsTriggeredList = SEQ_OF(name=u'CellsTriggeredList', mode=MODE_TYPE)
-    _CellsTriggeredList__item_ = CHOICE(name='_item_', mode=MODE_TYPE)
-    __CellsTriggeredList__item__physCellId = INT(name=u'physCellId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')))
-    __CellsTriggeredList__item__physCellIdEUTRA = ENUM(name=u'physCellIdEUTRA', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __CellsTriggeredList__item__physCellIdEUTRA._cont = ASN1Dict([(u'ffsTypeAndValue', 0)])
-    __CellsTriggeredList__item__physCellIdEUTRA._ext = None
-    _CellsTriggeredList__item_._cont = ASN1Dict([
-        (u'physCellId', __CellsTriggeredList__item__physCellId),
-        (u'physCellIdEUTRA', __CellsTriggeredList__item__physCellIdEUTRA),
-        ])
-    _CellsTriggeredList__item_._ext = None
-    CellsTriggeredList._cont = _CellsTriggeredList__item_
-    CellsTriggeredList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
-    
-    #-----< VarResumeMAC-Input >-----#
-    VarResumeMAC_Input = SEQ(name=u'VarResumeMAC-Input', mode=MODE_TYPE)
-    _VarResumeMAC_Input_sourcePhysCellId = INT(name=u'sourcePhysCellId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')))
-    _VarResumeMAC_Input_targetCellIdentity = BIT_STR(name=u'targetCellIdentity', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CellIdentity')))
-    _VarResumeMAC_Input_source_c_RNTI = INT(name=u'source-c-RNTI', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RNTI-Value')))
-    VarResumeMAC_Input._cont = ASN1Dict([
-        (u'sourcePhysCellId', _VarResumeMAC_Input_sourcePhysCellId),
-        (u'targetCellIdentity', _VarResumeMAC_Input_targetCellIdentity),
-        (u'source-c-RNTI', _VarResumeMAC_Input_source_c_RNTI),
-        ])
-    VarResumeMAC_Input._ext = None
-    
-    #-----< VarShortMAC-Input >-----#
-    VarShortMAC_Input = SEQ(name=u'VarShortMAC-Input', mode=MODE_TYPE)
-    _VarShortMAC_Input_sourcePhysCellId = INT(name=u'sourcePhysCellId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')))
-    _VarShortMAC_Input_targetCellIdentity = BIT_STR(name=u'targetCellIdentity', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CellIdentity')))
-    _VarShortMAC_Input_source_c_RNTI = INT(name=u'source-c-RNTI', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RNTI-Value')))
-    VarShortMAC_Input._cont = ASN1Dict([
-        (u'sourcePhysCellId', _VarShortMAC_Input_sourcePhysCellId),
-        (u'targetCellIdentity', _VarShortMAC_Input_targetCellIdentity),
-        (u'source-c-RNTI', _VarShortMAC_Input_source_c_RNTI),
-        ])
-    VarShortMAC_Input._ext = None
-    
-    _all_ = [
-        _VarPendingRNA_Update_pendingRNA_Update,
-        VarPendingRNA_Update,
-        _VarMeasConfig_measIdList,
-        _VarMeasConfig_measObjectList,
-        _VarMeasConfig_reportConfigList,
-        _VarMeasConfig_quantityConfig,
-        __VarMeasConfig_s_MeasureConfig_ssb_RSRP,
-        __VarMeasConfig_s_MeasureConfig_csi_RSRP,
-        _VarMeasConfig_s_MeasureConfig,
-        VarMeasConfig,
-        _VarMeasReportList__item_,
-        VarMeasReportList,
-        _VarMeasReport_measId,
-        _VarMeasReport_cellsTriggeredList,
-        _VarMeasReport_numberOfReportsSent,
-        VarMeasReport,
-        __CellsTriggeredList__item__physCellId,
-        __CellsTriggeredList__item__physCellIdEUTRA,
-        _CellsTriggeredList__item_,
-        CellsTriggeredList,
-        _VarResumeMAC_Input_sourcePhysCellId,
-        _VarResumeMAC_Input_targetCellIdentity,
-        _VarResumeMAC_Input_source_c_RNTI,
-        VarResumeMAC_Input,
-        _VarShortMAC_Input_sourcePhysCellId,
-        _VarShortMAC_Input_targetCellIdentity,
-        _VarShortMAC_Input_source_c_RNTI,
-        VarShortMAC_Input,
-    ]
-
 class NR_RRC_Definitions:
 
     _name_  = u'NR-RRC-Definitions'
@@ -197,6 +46,9 @@ class NR_RRC_Definitions:
         u'DRB-CountInfo',
         u'DLInformationTransfer',
         u'DLInformationTransfer-IEs',
+        u'FailureInformation',
+        u'FailureInformation-IEs',
+        u'FailureInfoRLC-Bearer',
         u'LocationMeasurementIndication',
         u'LocationMeasurementIndication-IEs',
         u'MIB',
@@ -219,15 +71,16 @@ class NR_RRC_Definitions:
         u'RRCReconfiguration',
         u'RRCReconfiguration-IEs',
         u'RRCReconfiguration-v1530-IEs',
+        u'RRCReconfiguration-v1540-IEs',
         u'MasterKeyUpdate',
         u'RRCReconfigurationComplete',
         u'RRCReconfigurationComplete-IEs',
         u'RRCReconfigurationComplete-v1530-IEs',
         u'RRCReject',
         u'RRCReject-IEs',
-        u'RejectWaitTime',
         u'RRCRelease',
         u'RRCRelease-IEs',
+        u'RRCRelease-v1540-IEs',
         u'RedirectedCarrierInfo',
         u'RedirectedCarrierInfo-EUTRA',
         u'CarrierInfoNR',
@@ -278,6 +131,9 @@ class NR_RRC_Definitions:
         u'UEAssistanceInformation',
         u'UEAssistanceInformation-IEs',
         u'DelayBudgetReport',
+        u'UEAssistanceInformation-v1540-IEs',
+        u'OverheatingAssistance',
+        u'ReducedAggregatedBandwidth',
         u'UECapabilityEnquiry',
         u'UECapabilityEnquiry-IEs',
         u'UECapabilityInformation',
@@ -451,8 +307,12 @@ class NR_RRC_Definitions:
         u'MeasResult2NR',
         u'MobilityStateParameters',
         u'MultiFrequencyBandListNR',
+        u'MultiFrequencyBandListNR-SIB',
+        u'NR-MultiBandInfo',
         u'NextHopChainingCount',
         u'NG-5G-S-TMSI',
+        u'NR-NS-PmaxList',
+        u'NR-NS-PmaxValue',
         u'NZP-CSI-RS-Resource',
         u'NZP-CSI-RS-ResourceId',
         u'NZP-CSI-RS-ResourceSet',
@@ -553,6 +413,7 @@ class NR_RRC_Definitions:
         u'RateMatchPattern',
         u'RateMatchPatternId',
         u'RateMatchPatternLTE-CRS',
+        u'RejectWaitTime',
         u'ReportConfigId',
         u'ReportConfigInterRAT',
         u'ReportCGI-EUTRA',
@@ -683,22 +544,32 @@ class NR_RRC_Definitions:
         u'ZP-CSI-RS-ResourceSetId',
         u'AccessStratumRelease',
         u'BandCombinationList',
+        u'BandCombinationList-v1540',
+        u'BandCombinationList-v1550',
         u'BandCombination',
+        u'BandCombination-v1540',
+        u'BandCombination-v1550',
         u'BandParameters',
+        u'BandParameters-v1540',
         u'CA-BandwidthClassEUTRA',
         u'CA-BandwidthClassNR',
         u'CA-ParametersEUTRA',
         u'CA-ParametersNR',
+        u'CA-ParametersNR-v1540',
+        u'CA-ParametersNR-v1550',
+        u'CodebookParameters',
+        u'SupportedCSI-RS-Resource',
         u'FeatureSetCombination',
         u'FeatureSetsPerBand',
         u'FeatureSet',
         u'FeatureSetCombinationId',
         u'FeatureSetDownlink',
-        u'CSI-RS-IM-ReceptionForFeedback',
-        u'TypeI-SinglePanelCodebook',
-        u'TypeI-MultiPanelCodebook',
-        u'TypeII-Codebook',
-        u'TypeII-CodebookPortSelection',
+        u'FeatureSetDownlink-v1540',
+        u'DummyA',
+        u'DummyB',
+        u'DummyC',
+        u'DummyD',
+        u'DummyE',
         u'FeatureSetDownlinkId',
         u'FeatureSetDownlinkPerCC',
         u'FeatureSetDownlinkPerCC-Id',
@@ -706,9 +577,12 @@ class NR_RRC_Definitions:
         u'FeatureSetEUTRA-UplinkId',
         u'FeatureSets',
         u'FeatureSetUplink',
-        u'CSI-ReportFramework',
+        u'FeatureSetUplink-v1540',
+        u'SRS-Resources',
+        u'DummyF',
         u'FeatureSetUplinkId',
         u'FeatureSetUplinkPerCC',
+        u'FeatureSetUplinkPerCC-v1540',
         u'FeatureSetUplinkPerCC-Id',
         u'FreqBandIndicatorEUTRA',
         u'FreqBandList',
@@ -717,6 +591,9 @@ class NR_RRC_Definitions:
         u'FreqBandInformationNR',
         u'AggregatedBandwidth',
         u'FreqSeparationClass',
+        u'IMS-Parameters',
+        u'IMS-ParametersCommon',
+        u'IMS-ParametersFRX-Diff',
         u'InterRAT-Parameters',
         u'EUTRA-Parameters',
         u'EUTRA-ParametersCommon',
@@ -735,12 +612,17 @@ class NR_RRC_Definitions:
         u'MIMO-LayersDL',
         u'MIMO-LayersUL',
         u'MIMO-ParametersPerBand',
+        u'DummyG',
         u'BeamManagementSSB-CSI-RS',
+        u'DummyH',
         u'CSI-RS-ForTracking',
+        u'CSI-RS-IM-ReceptionForFeedback',
+        u'CSI-RS-ProcFrameworkForSRS',
+        u'CSI-ReportFramework',
         u'PTRS-DensityRecommendationDL',
         u'PTRS-DensityRecommendationUL',
-        u'SRS-Resources',
-        u'SRS-TxSwitch',
+        u'SpatialRelations',
+        u'DummyI',
         u'ModulationOrder',
         u'MRDC-Parameters',
         u'PDCP-Parameters',
@@ -753,26 +635,35 @@ class NR_RRC_Definitions:
         u'Phy-ParametersFR2',
         u'Phy-ParametersMRDC',
         u'NAICS-Capability-Entry',
+        u'ProcessingParameters',
+        u'NumberOfCarriers',
         u'RAT-Type',
         u'RF-Parameters',
         u'BandNR',
         u'RF-ParametersMRDC',
         u'RLC-Parameters',
+        u'SDAP-Parameters',
+        u'SRS-SwitchingTimeNR',
+        u'SRS-SwitchingTimeEUTRA',
         u'SupportedBandwidth',
         u'UE-CapabilityRAT-ContainerList',
         u'UE-CapabilityRAT-Container',
         u'UE-CapabilityRAT-RequestList',
         u'UE-CapabilityRAT-Request',
         u'UE-CapabilityRequestFilterNR',
+        u'UE-CapabilityRequestFilterNR-v1540',
         u'UE-MRDC-Capability',
         u'UE-MRDC-CapabilityAddXDD-Mode',
         u'UE-MRDC-CapabilityAddFRX-Mode',
         u'GeneralParametersMRDC-XDD-Diff',
         u'UE-NR-Capability',
-        u'UE-NR-Capability-1530',
+        u'UE-NR-Capability-v1530',
+        u'UE-NR-Capability-v1540',
+        u'UE-NR-Capability-v1550',
         u'UE-NR-CapabilityAddXDD-Mode',
-        u'UE-NR-CapabilityAddXDD-Mode-1530',
+        u'UE-NR-CapabilityAddXDD-Mode-v1530',
         u'UE-NR-CapabilityAddFRX-Mode',
+        u'UE-NR-CapabilityAddFRX-Mode-v1540',
         u'EUTRA-AllowedMeasBandwidth',
         u'EUTRA-MBSFN-SubframeConfigList',
         u'EUTRA-MBSFN-SubframeConfig',
@@ -784,11 +675,9 @@ class NR_RRC_Definitions:
         u'EUTRA-PhysCellIdRange',
         u'EUTRA-PresenceAntennaPort1',
         u'EUTRA-Q-OffsetRange',
-        u'MultiFrequencyBandListNR-SIB',
-        u'NR-MultiBandInfo',
-        u'NR-NS-PmaxList',
-        u'NR-NS-PmaxValue',
         u'OtherConfig',
+        u'OtherConfig-v1540',
+        u'OverheatingAssistanceConfig',
         u'RRC-TransactionIdentifier',
         u'maxBandComb',
         u'maxCellBlack',
@@ -933,11 +822,12 @@ class NR_RRC_Definitions:
         u'maxCellSFTD',
         u'maxReportConfigId',
         u'maxNrofCodebooks',
+        u'maxNrofCSI-RS-Resources',
         u'maxNrofSRI-PUSCH-Mappings',
         u'maxNrofSRI-PUSCH-Mappings-1',
         u'maxSIB',
-        u'maxSIB-1',
         u'maxSI-Message',
+        u'maxPO-perPF',
         u'maxAccessCat-1',
         u'maxBarringInfoSet',
         u'maxCellEUTRA',
@@ -979,6 +869,9 @@ class NR_RRC_Definitions:
         u'DRB-CountInfo',
         u'DLInformationTransfer',
         u'DLInformationTransfer-IEs',
+        u'FailureInformation',
+        u'FailureInformation-IEs',
+        u'FailureInfoRLC-Bearer',
         u'LocationMeasurementIndication',
         u'LocationMeasurementIndication-IEs',
         u'MIB',
@@ -1001,15 +894,16 @@ class NR_RRC_Definitions:
         u'RRCReconfiguration',
         u'RRCReconfiguration-IEs',
         u'RRCReconfiguration-v1530-IEs',
+        u'RRCReconfiguration-v1540-IEs',
         u'MasterKeyUpdate',
         u'RRCReconfigurationComplete',
         u'RRCReconfigurationComplete-IEs',
         u'RRCReconfigurationComplete-v1530-IEs',
         u'RRCReject',
         u'RRCReject-IEs',
-        u'RejectWaitTime',
         u'RRCRelease',
         u'RRCRelease-IEs',
+        u'RRCRelease-v1540-IEs',
         u'RedirectedCarrierInfo',
         u'RedirectedCarrierInfo-EUTRA',
         u'CarrierInfoNR',
@@ -1060,6 +954,9 @@ class NR_RRC_Definitions:
         u'UEAssistanceInformation',
         u'UEAssistanceInformation-IEs',
         u'DelayBudgetReport',
+        u'UEAssistanceInformation-v1540-IEs',
+        u'OverheatingAssistance',
+        u'ReducedAggregatedBandwidth',
         u'UECapabilityEnquiry',
         u'UECapabilityEnquiry-IEs',
         u'UECapabilityInformation',
@@ -1233,8 +1130,12 @@ class NR_RRC_Definitions:
         u'MeasResult2NR',
         u'MobilityStateParameters',
         u'MultiFrequencyBandListNR',
+        u'MultiFrequencyBandListNR-SIB',
+        u'NR-MultiBandInfo',
         u'NextHopChainingCount',
         u'NG-5G-S-TMSI',
+        u'NR-NS-PmaxList',
+        u'NR-NS-PmaxValue',
         u'NZP-CSI-RS-Resource',
         u'NZP-CSI-RS-ResourceId',
         u'NZP-CSI-RS-ResourceSet',
@@ -1335,6 +1236,7 @@ class NR_RRC_Definitions:
         u'RateMatchPattern',
         u'RateMatchPatternId',
         u'RateMatchPatternLTE-CRS',
+        u'RejectWaitTime',
         u'ReportConfigId',
         u'ReportConfigInterRAT',
         u'ReportCGI-EUTRA',
@@ -1465,22 +1367,32 @@ class NR_RRC_Definitions:
         u'ZP-CSI-RS-ResourceSetId',
         u'AccessStratumRelease',
         u'BandCombinationList',
+        u'BandCombinationList-v1540',
+        u'BandCombinationList-v1550',
         u'BandCombination',
+        u'BandCombination-v1540',
+        u'BandCombination-v1550',
         u'BandParameters',
+        u'BandParameters-v1540',
         u'CA-BandwidthClassEUTRA',
         u'CA-BandwidthClassNR',
         u'CA-ParametersEUTRA',
         u'CA-ParametersNR',
+        u'CA-ParametersNR-v1540',
+        u'CA-ParametersNR-v1550',
+        u'CodebookParameters',
+        u'SupportedCSI-RS-Resource',
         u'FeatureSetCombination',
         u'FeatureSetsPerBand',
         u'FeatureSet',
         u'FeatureSetCombinationId',
         u'FeatureSetDownlink',
-        u'CSI-RS-IM-ReceptionForFeedback',
-        u'TypeI-SinglePanelCodebook',
-        u'TypeI-MultiPanelCodebook',
-        u'TypeII-Codebook',
-        u'TypeII-CodebookPortSelection',
+        u'FeatureSetDownlink-v1540',
+        u'DummyA',
+        u'DummyB',
+        u'DummyC',
+        u'DummyD',
+        u'DummyE',
         u'FeatureSetDownlinkId',
         u'FeatureSetDownlinkPerCC',
         u'FeatureSetDownlinkPerCC-Id',
@@ -1488,9 +1400,12 @@ class NR_RRC_Definitions:
         u'FeatureSetEUTRA-UplinkId',
         u'FeatureSets',
         u'FeatureSetUplink',
-        u'CSI-ReportFramework',
+        u'FeatureSetUplink-v1540',
+        u'SRS-Resources',
+        u'DummyF',
         u'FeatureSetUplinkId',
         u'FeatureSetUplinkPerCC',
+        u'FeatureSetUplinkPerCC-v1540',
         u'FeatureSetUplinkPerCC-Id',
         u'FreqBandIndicatorEUTRA',
         u'FreqBandList',
@@ -1499,6 +1414,9 @@ class NR_RRC_Definitions:
         u'FreqBandInformationNR',
         u'AggregatedBandwidth',
         u'FreqSeparationClass',
+        u'IMS-Parameters',
+        u'IMS-ParametersCommon',
+        u'IMS-ParametersFRX-Diff',
         u'InterRAT-Parameters',
         u'EUTRA-Parameters',
         u'EUTRA-ParametersCommon',
@@ -1517,12 +1435,17 @@ class NR_RRC_Definitions:
         u'MIMO-LayersDL',
         u'MIMO-LayersUL',
         u'MIMO-ParametersPerBand',
+        u'DummyG',
         u'BeamManagementSSB-CSI-RS',
+        u'DummyH',
         u'CSI-RS-ForTracking',
+        u'CSI-RS-IM-ReceptionForFeedback',
+        u'CSI-RS-ProcFrameworkForSRS',
+        u'CSI-ReportFramework',
         u'PTRS-DensityRecommendationDL',
         u'PTRS-DensityRecommendationUL',
-        u'SRS-Resources',
-        u'SRS-TxSwitch',
+        u'SpatialRelations',
+        u'DummyI',
         u'ModulationOrder',
         u'MRDC-Parameters',
         u'PDCP-Parameters',
@@ -1535,26 +1458,35 @@ class NR_RRC_Definitions:
         u'Phy-ParametersFR2',
         u'Phy-ParametersMRDC',
         u'NAICS-Capability-Entry',
+        u'ProcessingParameters',
+        u'NumberOfCarriers',
         u'RAT-Type',
         u'RF-Parameters',
         u'BandNR',
         u'RF-ParametersMRDC',
         u'RLC-Parameters',
+        u'SDAP-Parameters',
+        u'SRS-SwitchingTimeNR',
+        u'SRS-SwitchingTimeEUTRA',
         u'SupportedBandwidth',
         u'UE-CapabilityRAT-ContainerList',
         u'UE-CapabilityRAT-Container',
         u'UE-CapabilityRAT-RequestList',
         u'UE-CapabilityRAT-Request',
         u'UE-CapabilityRequestFilterNR',
+        u'UE-CapabilityRequestFilterNR-v1540',
         u'UE-MRDC-Capability',
         u'UE-MRDC-CapabilityAddXDD-Mode',
         u'UE-MRDC-CapabilityAddFRX-Mode',
         u'GeneralParametersMRDC-XDD-Diff',
         u'UE-NR-Capability',
-        u'UE-NR-Capability-1530',
+        u'UE-NR-Capability-v1530',
+        u'UE-NR-Capability-v1540',
+        u'UE-NR-Capability-v1550',
         u'UE-NR-CapabilityAddXDD-Mode',
-        u'UE-NR-CapabilityAddXDD-Mode-1530',
+        u'UE-NR-CapabilityAddXDD-Mode-v1530',
         u'UE-NR-CapabilityAddFRX-Mode',
+        u'UE-NR-CapabilityAddFRX-Mode-v1540',
         u'EUTRA-AllowedMeasBandwidth',
         u'EUTRA-MBSFN-SubframeConfigList',
         u'EUTRA-MBSFN-SubframeConfig',
@@ -1566,11 +1498,9 @@ class NR_RRC_Definitions:
         u'EUTRA-PhysCellIdRange',
         u'EUTRA-PresenceAntennaPort1',
         u'EUTRA-Q-OffsetRange',
-        u'MultiFrequencyBandListNR-SIB',
-        u'NR-MultiBandInfo',
-        u'NR-NS-PmaxList',
-        u'NR-NS-PmaxValue',
         u'OtherConfig',
+        u'OtherConfig-v1540',
+        u'OverheatingAssistanceConfig',
         u'RRC-TransactionIdentifier',
         ]
     _set_ = [
@@ -1719,11 +1649,12 @@ class NR_RRC_Definitions:
         u'maxCellSFTD',
         u'maxReportConfigId',
         u'maxNrofCodebooks',
+        u'maxNrofCSI-RS-Resources',
         u'maxNrofSRI-PUSCH-Mappings',
         u'maxNrofSRI-PUSCH-Mappings-1',
         u'maxSIB',
-        u'maxSIB-1',
         u'maxSI-Message',
+        u'maxPO-perPF',
         u'maxAccessCat-1',
         u'maxBarringInfoSet',
         u'maxCellEUTRA',
@@ -1996,7 +1927,7 @@ class NR_RRC_Definitions:
     __UL_DCCH_MessageType_c1_ueCapabilityInformation = SEQ(name=u'ueCapabilityInformation', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'UECapabilityInformation')))
     __UL_DCCH_MessageType_c1_counterCheckResponse = SEQ(name=u'counterCheckResponse', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CounterCheckResponse')))
     __UL_DCCH_MessageType_c1_ueAssistanceInformation = SEQ(name=u'ueAssistanceInformation', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'UEAssistanceInformation')))
-    __UL_DCCH_MessageType_c1_spare4 = NULL(name=u'spare4', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __UL_DCCH_MessageType_c1_failureInformation = SEQ(name=u'failureInformation', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'FailureInformation')))
     __UL_DCCH_MessageType_c1_spare3 = NULL(name=u'spare3', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __UL_DCCH_MessageType_c1_spare2 = NULL(name=u'spare2', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __UL_DCCH_MessageType_c1_spare1 = NULL(name=u'spare1', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
@@ -2013,7 +1944,7 @@ class NR_RRC_Definitions:
         (u'ueCapabilityInformation', __UL_DCCH_MessageType_c1_ueCapabilityInformation),
         (u'counterCheckResponse', __UL_DCCH_MessageType_c1_counterCheckResponse),
         (u'ueAssistanceInformation', __UL_DCCH_MessageType_c1_ueAssistanceInformation),
-        (u'spare4', __UL_DCCH_MessageType_c1_spare4),
+        (u'failureInformation', __UL_DCCH_MessageType_c1_failureInformation),
         (u'spare3', __UL_DCCH_MessageType_c1_spare3),
         (u'spare2', __UL_DCCH_MessageType_c1_spare2),
         (u'spare1', __UL_DCCH_MessageType_c1_spare1),
@@ -2173,6 +2104,53 @@ class NR_RRC_Definitions:
         (u'nonCriticalExtension', _DLInformationTransfer_IEs_nonCriticalExtension),
         ])
     DLInformationTransfer_IEs._ext = None
+    
+    #-----< FailureInformation >-----#
+    FailureInformation = SEQ(name=u'FailureInformation', mode=MODE_TYPE)
+    _FailureInformation_criticalExtensions = CHOICE(name=u'criticalExtensions', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __FailureInformation_criticalExtensions_failureInformation = SEQ(name=u'failureInformation', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'FailureInformation-IEs')))
+    __FailureInformation_criticalExtensions_criticalExtensionsFuture = SEQ(name=u'criticalExtensionsFuture', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __FailureInformation_criticalExtensions_criticalExtensionsFuture._cont = ASN1Dict([
+        ])
+    __FailureInformation_criticalExtensions_criticalExtensionsFuture._ext = None
+    _FailureInformation_criticalExtensions._cont = ASN1Dict([
+        (u'failureInformation', __FailureInformation_criticalExtensions_failureInformation),
+        (u'criticalExtensionsFuture', __FailureInformation_criticalExtensions_criticalExtensionsFuture),
+        ])
+    _FailureInformation_criticalExtensions._ext = None
+    FailureInformation._cont = ASN1Dict([
+        (u'criticalExtensions', _FailureInformation_criticalExtensions),
+        ])
+    FailureInformation._ext = None
+    
+    #-----< FailureInformation-IEs >-----#
+    FailureInformation_IEs = SEQ(name=u'FailureInformation-IEs', mode=MODE_TYPE)
+    _FailureInformation_IEs_failureInfoRLC_Bearer = SEQ(name=u'failureInfoRLC-Bearer', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'FailureInfoRLC-Bearer')), opt=True)
+    _FailureInformation_IEs_lateNonCriticalExtension = OCT_STR(name=u'lateNonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _FailureInformation_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _FailureInformation_IEs_nonCriticalExtension._cont = ASN1Dict([
+        ])
+    _FailureInformation_IEs_nonCriticalExtension._ext = None
+    FailureInformation_IEs._cont = ASN1Dict([
+        (u'failureInfoRLC-Bearer', _FailureInformation_IEs_failureInfoRLC_Bearer),
+        (u'lateNonCriticalExtension', _FailureInformation_IEs_lateNonCriticalExtension),
+        (u'nonCriticalExtension', _FailureInformation_IEs_nonCriticalExtension),
+        ])
+    FailureInformation_IEs._ext = None
+    
+    #-----< FailureInfoRLC-Bearer >-----#
+    FailureInfoRLC_Bearer = SEQ(name=u'FailureInfoRLC-Bearer', mode=MODE_TYPE)
+    _FailureInfoRLC_Bearer_cellGroupId = INT(name=u'cellGroupId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CellGroupId')))
+    _FailureInfoRLC_Bearer_logicalChannelIdentity = INT(name=u'logicalChannelIdentity', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'LogicalChannelIdentity')))
+    _FailureInfoRLC_Bearer_failureType = ENUM(name=u'failureType', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _FailureInfoRLC_Bearer_failureType._cont = ASN1Dict([(u'duplication', 0), (u'spare3', 1), (u'spare2', 2), (u'spare1', 3)])
+    _FailureInfoRLC_Bearer_failureType._ext = None
+    FailureInfoRLC_Bearer._cont = ASN1Dict([
+        (u'cellGroupId', _FailureInfoRLC_Bearer_cellGroupId),
+        (u'logicalChannelIdentity', _FailureInfoRLC_Bearer_logicalChannelIdentity),
+        (u'failureType', _FailureInfoRLC_Bearer_failureType),
+        ])
+    FailureInfoRLC_Bearer._ext = None
     
     #-----< LocationMeasurementIndication >-----#
     LocationMeasurementIndication = SEQ(name=u'LocationMeasurementIndication', mode=MODE_TYPE)
@@ -2357,10 +2335,10 @@ class NR_RRC_Definitions:
     #-----< PagingUE-Identity >-----#
     PagingUE_Identity = CHOICE(name=u'PagingUE-Identity', mode=MODE_TYPE)
     _PagingUE_Identity_ng_5G_S_TMSI = BIT_STR(name=u'ng-5G-S-TMSI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'NG-5G-S-TMSI')))
-    _PagingUE_Identity_i_RNTI = BIT_STR(name=u'i-RNTI', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'I-RNTI-Value')))
+    _PagingUE_Identity_fullI_RNTI = BIT_STR(name=u'fullI-RNTI', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'I-RNTI-Value')))
     PagingUE_Identity._cont = ASN1Dict([
         (u'ng-5G-S-TMSI', _PagingUE_Identity_ng_5G_S_TMSI),
-        (u'i-RNTI', _PagingUE_Identity_i_RNTI),
+        (u'fullI-RNTI', _PagingUE_Identity_fullI_RNTI),
         ])
     PagingUE_Identity._ext = []
     
@@ -2528,10 +2506,7 @@ class NR_RRC_Definitions:
     __RRCReconfiguration_v1530_IEs_dedicatedSystemInformationDelivery_contain = SEQ(name='_cont_dedicatedSystemInformationDelivery', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'SystemInformation')))
     _RRCReconfiguration_v1530_IEs_dedicatedSystemInformationDelivery._const_cont = __RRCReconfiguration_v1530_IEs_dedicatedSystemInformationDelivery_contain
     _RRCReconfiguration_v1530_IEs_otherConfig = SEQ(name=u'otherConfig', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'OtherConfig')), opt=True)
-    _RRCReconfiguration_v1530_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _RRCReconfiguration_v1530_IEs_nonCriticalExtension._cont = ASN1Dict([
-        ])
-    _RRCReconfiguration_v1530_IEs_nonCriticalExtension._ext = None
+    _RRCReconfiguration_v1530_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RRCReconfiguration-v1540-IEs')), opt=True)
     RRCReconfiguration_v1530_IEs._cont = ASN1Dict([
         (u'masterCellGroup', _RRCReconfiguration_v1530_IEs_masterCellGroup),
         (u'fullConfig', _RRCReconfiguration_v1530_IEs_fullConfig),
@@ -2543,6 +2518,19 @@ class NR_RRC_Definitions:
         (u'nonCriticalExtension', _RRCReconfiguration_v1530_IEs_nonCriticalExtension),
         ])
     RRCReconfiguration_v1530_IEs._ext = None
+    
+    #-----< RRCReconfiguration-v1540-IEs >-----#
+    RRCReconfiguration_v1540_IEs = SEQ(name=u'RRCReconfiguration-v1540-IEs', mode=MODE_TYPE)
+    _RRCReconfiguration_v1540_IEs_otherConfig_v1540 = SEQ(name=u'otherConfig-v1540', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'OtherConfig-v1540')), opt=True)
+    _RRCReconfiguration_v1540_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _RRCReconfiguration_v1540_IEs_nonCriticalExtension._cont = ASN1Dict([
+        ])
+    _RRCReconfiguration_v1540_IEs_nonCriticalExtension._ext = None
+    RRCReconfiguration_v1540_IEs._cont = ASN1Dict([
+        (u'otherConfig-v1540', _RRCReconfiguration_v1540_IEs_otherConfig_v1540),
+        (u'nonCriticalExtension', _RRCReconfiguration_v1540_IEs_nonCriticalExtension),
+        ])
+    RRCReconfiguration_v1540_IEs._ext = None
     
     #-----< MasterKeyUpdate >-----#
     MasterKeyUpdate = SEQ(name=u'MasterKeyUpdate', mode=MODE_TYPE)
@@ -2632,10 +2620,6 @@ class NR_RRC_Definitions:
         ])
     RRCReject_IEs._ext = None
     
-    #-----< RejectWaitTime >-----#
-    RejectWaitTime = INT(name=u'RejectWaitTime', mode=MODE_TYPE)
-    RejectWaitTime._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    
     #-----< RRCRelease >-----#
     RRCRelease = SEQ(name=u'RRCRelease', mode=MODE_TYPE)
     _RRCRelease_rrc_TransactionIdentifier = INT(name=u'rrc-TransactionIdentifier', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RRC-TransactionIdentifier')))
@@ -2674,10 +2658,7 @@ class NR_RRC_Definitions:
         ])
     _RRCRelease_IEs_deprioritisationReq._ext = None
     _RRCRelease_IEs_lateNonCriticalExtension = OCT_STR(name=u'lateNonCriticalExtension', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _RRCRelease_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _RRCRelease_IEs_nonCriticalExtension._cont = ASN1Dict([
-        ])
-    _RRCRelease_IEs_nonCriticalExtension._ext = None
+    _RRCRelease_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RRCRelease-v1540-IEs')), opt=True)
     RRCRelease_IEs._cont = ASN1Dict([
         (u'redirectedCarrierInfo', _RRCRelease_IEs_redirectedCarrierInfo),
         (u'cellReselectionPriorities', _RRCRelease_IEs_cellReselectionPriorities),
@@ -2687,6 +2668,19 @@ class NR_RRC_Definitions:
         (u'nonCriticalExtension', _RRCRelease_IEs_nonCriticalExtension),
         ])
     RRCRelease_IEs._ext = None
+    
+    #-----< RRCRelease-v1540-IEs >-----#
+    RRCRelease_v1540_IEs = SEQ(name=u'RRCRelease-v1540-IEs', mode=MODE_TYPE)
+    _RRCRelease_v1540_IEs_waitTime = INT(name=u'waitTime', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RejectWaitTime')), opt=True)
+    _RRCRelease_v1540_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _RRCRelease_v1540_IEs_nonCriticalExtension._cont = ASN1Dict([
+        ])
+    _RRCRelease_v1540_IEs_nonCriticalExtension._ext = None
+    RRCRelease_v1540_IEs._cont = ASN1Dict([
+        (u'waitTime', _RRCRelease_v1540_IEs_waitTime),
+        (u'nonCriticalExtension', _RRCRelease_v1540_IEs_nonCriticalExtension),
+        ])
+    RRCRelease_v1540_IEs._ext = None
     
     #-----< RedirectedCarrierInfo >-----#
     RedirectedCarrierInfo = CHOICE(name=u'RedirectedCarrierInfo', mode=MODE_TYPE)
@@ -2701,12 +2695,12 @@ class NR_RRC_Definitions:
     #-----< RedirectedCarrierInfo-EUTRA >-----#
     RedirectedCarrierInfo_EUTRA = SEQ(name=u'RedirectedCarrierInfo-EUTRA', mode=MODE_TYPE)
     _RedirectedCarrierInfo_EUTRA_eutraFrequency = INT(name=u'eutraFrequency', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueEUTRA')))
-    _RedirectedCarrierInfo_EUTRA_cnType_r15 = ENUM(name=u'cnType-r15', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _RedirectedCarrierInfo_EUTRA_cnType_r15._cont = ASN1Dict([(u'epc', 0), (u'fiveGC', 1)])
-    _RedirectedCarrierInfo_EUTRA_cnType_r15._ext = None
+    _RedirectedCarrierInfo_EUTRA_cnType = ENUM(name=u'cnType', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _RedirectedCarrierInfo_EUTRA_cnType._cont = ASN1Dict([(u'epc', 0), (u'fiveGC', 1)])
+    _RedirectedCarrierInfo_EUTRA_cnType._ext = None
     RedirectedCarrierInfo_EUTRA._cont = ASN1Dict([
         (u'eutraFrequency', _RedirectedCarrierInfo_EUTRA_eutraFrequency),
-        (u'cnType-r15', _RedirectedCarrierInfo_EUTRA_cnType_r15),
+        (u'cnType', _RedirectedCarrierInfo_EUTRA_cnType),
         ])
     RedirectedCarrierInfo_EUTRA._ext = None
     
@@ -3061,10 +3055,10 @@ class NR_RRC_Definitions:
     _RRCSetupComplete_IEs_guami_Type = ENUM(name=u'guami-Type', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _RRCSetupComplete_IEs_guami_Type._cont = ASN1Dict([(u'native', 0), (u'mapped', 1)])
     _RRCSetupComplete_IEs_guami_Type._ext = None
-    _RRCSetupComplete_IEs_s_nssai_List = SEQ_OF(name=u's-nssai-List', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __RRCSetupComplete_IEs_s_nssai_List__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'S-NSSAI')))
-    _RRCSetupComplete_IEs_s_nssai_List._cont = __RRCSetupComplete_IEs_s_nssai_List__item_
-    _RRCSetupComplete_IEs_s_nssai_List._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    _RRCSetupComplete_IEs_s_NSSAI_List = SEQ_OF(name=u's-NSSAI-List', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __RRCSetupComplete_IEs_s_NSSAI_List__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'S-NSSAI')))
+    _RRCSetupComplete_IEs_s_NSSAI_List._cont = __RRCSetupComplete_IEs_s_NSSAI_List__item_
+    _RRCSetupComplete_IEs_s_NSSAI_List._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
     _RRCSetupComplete_IEs_dedicatedNAS_Message = OCT_STR(name=u'dedicatedNAS-Message', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'DedicatedNAS-Message')))
     _RRCSetupComplete_IEs_ng_5G_S_TMSI_Value = CHOICE(name=u'ng-5G-S-TMSI-Value', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
     __RRCSetupComplete_IEs_ng_5G_S_TMSI_Value_ng_5G_S_TMSI = BIT_STR(name=u'ng-5G-S-TMSI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'NG-5G-S-TMSI')))
@@ -3084,7 +3078,7 @@ class NR_RRC_Definitions:
         (u'selectedPLMN-Identity', _RRCSetupComplete_IEs_selectedPLMN_Identity),
         (u'registeredAMF', _RRCSetupComplete_IEs_registeredAMF),
         (u'guami-Type', _RRCSetupComplete_IEs_guami_Type),
-        (u's-nssai-List', _RRCSetupComplete_IEs_s_nssai_List),
+        (u's-NSSAI-List', _RRCSetupComplete_IEs_s_NSSAI_List),
         (u'dedicatedNAS-Message', _RRCSetupComplete_IEs_dedicatedNAS_Message),
         (u'ng-5G-S-TMSI-Value', _RRCSetupComplete_IEs_ng_5G_S_TMSI_Value),
         (u'lateNonCriticalExtension', _RRCSetupComplete_IEs_lateNonCriticalExtension),
@@ -3436,10 +3430,7 @@ class NR_RRC_Definitions:
     UEAssistanceInformation_IEs = SEQ(name=u'UEAssistanceInformation-IEs', mode=MODE_TYPE)
     _UEAssistanceInformation_IEs_delayBudgetReport = CHOICE(name=u'delayBudgetReport', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'DelayBudgetReport')), opt=True)
     _UEAssistanceInformation_IEs_lateNonCriticalExtension = OCT_STR(name=u'lateNonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _UEAssistanceInformation_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _UEAssistanceInformation_IEs_nonCriticalExtension._cont = ASN1Dict([
-        ])
-    _UEAssistanceInformation_IEs_nonCriticalExtension._ext = None
+    _UEAssistanceInformation_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'UEAssistanceInformation-v1540-IEs')), opt=True)
     UEAssistanceInformation_IEs._cont = ASN1Dict([
         (u'delayBudgetReport', _UEAssistanceInformation_IEs_delayBudgetReport),
         (u'lateNonCriticalExtension', _UEAssistanceInformation_IEs_lateNonCriticalExtension),
@@ -3456,6 +3447,77 @@ class NR_RRC_Definitions:
         (u'type1', _DelayBudgetReport_type1),
         ])
     DelayBudgetReport._ext = []
+    
+    #-----< UEAssistanceInformation-v1540-IEs >-----#
+    UEAssistanceInformation_v1540_IEs = SEQ(name=u'UEAssistanceInformation-v1540-IEs', mode=MODE_TYPE)
+    _UEAssistanceInformation_v1540_IEs_overheatingAssistance = SEQ(name=u'overheatingAssistance', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'OverheatingAssistance')), opt=True)
+    _UEAssistanceInformation_v1540_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _UEAssistanceInformation_v1540_IEs_nonCriticalExtension._cont = ASN1Dict([
+        ])
+    _UEAssistanceInformation_v1540_IEs_nonCriticalExtension._ext = None
+    UEAssistanceInformation_v1540_IEs._cont = ASN1Dict([
+        (u'overheatingAssistance', _UEAssistanceInformation_v1540_IEs_overheatingAssistance),
+        (u'nonCriticalExtension', _UEAssistanceInformation_v1540_IEs_nonCriticalExtension),
+        ])
+    UEAssistanceInformation_v1540_IEs._ext = None
+    
+    #-----< OverheatingAssistance >-----#
+    OverheatingAssistance = SEQ(name=u'OverheatingAssistance', mode=MODE_TYPE)
+    _OverheatingAssistance_reducedMaxCCs = SEQ(name=u'reducedMaxCCs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __OverheatingAssistance_reducedMaxCCs_reducedCCsDL = INT(name=u'reducedCCsDL', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __OverheatingAssistance_reducedMaxCCs_reducedCCsDL._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=31)], ev=None, er=[])
+    __OverheatingAssistance_reducedMaxCCs_reducedCCsUL = INT(name=u'reducedCCsUL', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __OverheatingAssistance_reducedMaxCCs_reducedCCsUL._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=31)], ev=None, er=[])
+    _OverheatingAssistance_reducedMaxCCs._cont = ASN1Dict([
+        (u'reducedCCsDL', __OverheatingAssistance_reducedMaxCCs_reducedCCsDL),
+        (u'reducedCCsUL', __OverheatingAssistance_reducedMaxCCs_reducedCCsUL),
+        ])
+    _OverheatingAssistance_reducedMaxCCs._ext = None
+    _OverheatingAssistance_reducedMaxBW_FR1 = SEQ(name=u'reducedMaxBW-FR1', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __OverheatingAssistance_reducedMaxBW_FR1_reducedBW_FR1_DL = ENUM(name=u'reducedBW-FR1-DL', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ReducedAggregatedBandwidth')))
+    __OverheatingAssistance_reducedMaxBW_FR1_reducedBW_FR1_UL = ENUM(name=u'reducedBW-FR1-UL', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ReducedAggregatedBandwidth')))
+    _OverheatingAssistance_reducedMaxBW_FR1._cont = ASN1Dict([
+        (u'reducedBW-FR1-DL', __OverheatingAssistance_reducedMaxBW_FR1_reducedBW_FR1_DL),
+        (u'reducedBW-FR1-UL', __OverheatingAssistance_reducedMaxBW_FR1_reducedBW_FR1_UL),
+        ])
+    _OverheatingAssistance_reducedMaxBW_FR1._ext = None
+    _OverheatingAssistance_reducedMaxBW_FR2 = SEQ(name=u'reducedMaxBW-FR2', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __OverheatingAssistance_reducedMaxBW_FR2_reducedBW_FR2_DL = ENUM(name=u'reducedBW-FR2-DL', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ReducedAggregatedBandwidth')))
+    __OverheatingAssistance_reducedMaxBW_FR2_reducedBW_FR2_UL = ENUM(name=u'reducedBW-FR2-UL', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ReducedAggregatedBandwidth')))
+    _OverheatingAssistance_reducedMaxBW_FR2._cont = ASN1Dict([
+        (u'reducedBW-FR2-DL', __OverheatingAssistance_reducedMaxBW_FR2_reducedBW_FR2_DL),
+        (u'reducedBW-FR2-UL', __OverheatingAssistance_reducedMaxBW_FR2_reducedBW_FR2_UL),
+        ])
+    _OverheatingAssistance_reducedMaxBW_FR2._ext = None
+    _OverheatingAssistance_reducedMaxMIMO_LayersFR1 = SEQ(name=u'reducedMaxMIMO-LayersFR1', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __OverheatingAssistance_reducedMaxMIMO_LayersFR1_reducedMIMO_LayersFR1_DL = ENUM(name=u'reducedMIMO-LayersFR1-DL', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MIMO-LayersDL')))
+    __OverheatingAssistance_reducedMaxMIMO_LayersFR1_reducedMIMO_LayersFR1_UL = ENUM(name=u'reducedMIMO-LayersFR1-UL', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MIMO-LayersUL')))
+    _OverheatingAssistance_reducedMaxMIMO_LayersFR1._cont = ASN1Dict([
+        (u'reducedMIMO-LayersFR1-DL', __OverheatingAssistance_reducedMaxMIMO_LayersFR1_reducedMIMO_LayersFR1_DL),
+        (u'reducedMIMO-LayersFR1-UL', __OverheatingAssistance_reducedMaxMIMO_LayersFR1_reducedMIMO_LayersFR1_UL),
+        ])
+    _OverheatingAssistance_reducedMaxMIMO_LayersFR1._ext = None
+    _OverheatingAssistance_reducedMaxMIMO_LayersFR2 = SEQ(name=u'reducedMaxMIMO-LayersFR2', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __OverheatingAssistance_reducedMaxMIMO_LayersFR2_reducedMIMO_LayersFR2_DL = ENUM(name=u'reducedMIMO-LayersFR2-DL', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MIMO-LayersDL')))
+    __OverheatingAssistance_reducedMaxMIMO_LayersFR2_reducedMIMO_LayersFR2_UL = ENUM(name=u'reducedMIMO-LayersFR2-UL', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MIMO-LayersUL')))
+    _OverheatingAssistance_reducedMaxMIMO_LayersFR2._cont = ASN1Dict([
+        (u'reducedMIMO-LayersFR2-DL', __OverheatingAssistance_reducedMaxMIMO_LayersFR2_reducedMIMO_LayersFR2_DL),
+        (u'reducedMIMO-LayersFR2-UL', __OverheatingAssistance_reducedMaxMIMO_LayersFR2_reducedMIMO_LayersFR2_UL),
+        ])
+    _OverheatingAssistance_reducedMaxMIMO_LayersFR2._ext = None
+    OverheatingAssistance._cont = ASN1Dict([
+        (u'reducedMaxCCs', _OverheatingAssistance_reducedMaxCCs),
+        (u'reducedMaxBW-FR1', _OverheatingAssistance_reducedMaxBW_FR1),
+        (u'reducedMaxBW-FR2', _OverheatingAssistance_reducedMaxBW_FR2),
+        (u'reducedMaxMIMO-LayersFR1', _OverheatingAssistance_reducedMaxMIMO_LayersFR1),
+        (u'reducedMaxMIMO-LayersFR2', _OverheatingAssistance_reducedMaxMIMO_LayersFR2),
+        ])
+    OverheatingAssistance._ext = None
+    
+    #-----< ReducedAggregatedBandwidth >-----#
+    ReducedAggregatedBandwidth = ENUM(name=u'ReducedAggregatedBandwidth', mode=MODE_TYPE)
+    ReducedAggregatedBandwidth._cont = ASN1Dict([(u'mhz0', 0), (u'mhz10', 1), (u'mhz20', 2), (u'mhz30', 3), (u'mhz40', 4), (u'mhz50', 5), (u'mhz60', 6), (u'mhz80', 7), (u'mhz100', 8), (u'mhz200', 9), (u'mhz300', 10), (u'mhz400', 11)])
+    ReducedAggregatedBandwidth._ext = None
     
     #-----< UECapabilityEnquiry >-----#
     UECapabilityEnquiry = SEQ(name=u'UECapabilityEnquiry', mode=MODE_TYPE)
@@ -3630,6 +3692,7 @@ class NR_RRC_Definitions:
     __SIB2_intraFreqCellReselectionInfo_ss_RSSI_Measurement = SEQ(name=u'ss-RSSI-Measurement', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SS-RSSI-Measurement')), opt=True)
     __SIB2_intraFreqCellReselectionInfo_ssb_ToMeasure = CHOICE(name=u'ssb-ToMeasure', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SSB-ToMeasure')), opt=True)
     __SIB2_intraFreqCellReselectionInfo_deriveSSB_IndexFromCell = BOOL(name=u'deriveSSB-IndexFromCell', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __SIB2_intraFreqCellReselectionInfo_t_ReselectionNR_SF = SEQ(name=u't-ReselectionNR-SF', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SpeedStateScaleFactors')), opt=True, group=0)
     _SIB2_intraFreqCellReselectionInfo._cont = ASN1Dict([
         (u'q-RxLevMin', __SIB2_intraFreqCellReselectionInfo_q_RxLevMin),
         (u'q-RxLevMinSUL', __SIB2_intraFreqCellReselectionInfo_q_RxLevMinSUL),
@@ -3644,8 +3707,9 @@ class NR_RRC_Definitions:
         (u'ss-RSSI-Measurement', __SIB2_intraFreqCellReselectionInfo_ss_RSSI_Measurement),
         (u'ssb-ToMeasure', __SIB2_intraFreqCellReselectionInfo_ssb_ToMeasure),
         (u'deriveSSB-IndexFromCell', __SIB2_intraFreqCellReselectionInfo_deriveSSB_IndexFromCell),
+        (u't-ReselectionNR-SF', __SIB2_intraFreqCellReselectionInfo_t_ReselectionNR_SF),
         ])
-    _SIB2_intraFreqCellReselectionInfo._ext = []
+    _SIB2_intraFreqCellReselectionInfo._ext = [u't-ReselectionNR-SF']
     SIB2._cont = ASN1Dict([
         (u'cellReselectionInfoCommon', _SIB2_cellReselectionInfoCommon),
         (u'cellReselectionServingFreqInfo', _SIB2_cellReselectionServingFreqInfo),
@@ -5349,9 +5413,9 @@ class NR_RRC_Definitions:
     _CSI_ReportConfig_timeRestrictionForInterferenceMeasurements._cont = ASN1Dict([(u'configured', 0), (u'notConfigured', 1)])
     _CSI_ReportConfig_timeRestrictionForInterferenceMeasurements._ext = None
     _CSI_ReportConfig_codebookConfig = SEQ(name=u'codebookConfig', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CodebookConfig')), opt=True)
-    _CSI_ReportConfig_nrofCQIsPerReport = ENUM(name=u'nrofCQIsPerReport', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _CSI_ReportConfig_nrofCQIsPerReport._cont = ASN1Dict([(u'n1', 0), (u'n2', 1)])
-    _CSI_ReportConfig_nrofCQIsPerReport._ext = None
+    _CSI_ReportConfig_dummy = ENUM(name=u'dummy', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _CSI_ReportConfig_dummy._cont = ASN1Dict([(u'n1', 0), (u'n2', 1)])
+    _CSI_ReportConfig_dummy._ext = None
     _CSI_ReportConfig_groupBasedBeamReporting = CHOICE(name=u'groupBasedBeamReporting', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     __CSI_ReportConfig_groupBasedBeamReporting_enabled = NULL(name=u'enabled', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __CSI_ReportConfig_groupBasedBeamReporting_disabled = SEQ(name=u'disabled', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
@@ -5397,7 +5461,7 @@ class NR_RRC_Definitions:
         (u'timeRestrictionForChannelMeasurements', _CSI_ReportConfig_timeRestrictionForChannelMeasurements),
         (u'timeRestrictionForInterferenceMeasurements', _CSI_ReportConfig_timeRestrictionForInterferenceMeasurements),
         (u'codebookConfig', _CSI_ReportConfig_codebookConfig),
-        (u'nrofCQIsPerReport', _CSI_ReportConfig_nrofCQIsPerReport),
+        (u'dummy', _CSI_ReportConfig_dummy),
         (u'groupBasedBeamReporting', _CSI_ReportConfig_groupBasedBeamReporting),
         (u'cqi-Table', _CSI_ReportConfig_cqi_Table),
         (u'subbandSize', _CSI_ReportConfig_subbandSize),
@@ -6283,10 +6347,12 @@ class NR_RRC_Definitions:
     #-----< LocationMeasurementInfo >-----#
     LocationMeasurementInfo = CHOICE(name=u'LocationMeasurementInfo', mode=MODE_TYPE)
     _LocationMeasurementInfo_eutra_RSTD = SEQ_OF(name=u'eutra-RSTD', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'EUTRA-RSTD-InfoList')))
+    _LocationMeasurementInfo_eutra_FineTimingDetection = NULL(name=u'eutra-FineTimingDetection', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     LocationMeasurementInfo._cont = ASN1Dict([
         (u'eutra-RSTD', _LocationMeasurementInfo_eutra_RSTD),
+        (u'eutra-FineTimingDetection', _LocationMeasurementInfo_eutra_FineTimingDetection),
         ])
-    LocationMeasurementInfo._ext = []
+    LocationMeasurementInfo._ext = [u'eutra-FineTimingDetection']
     
     #-----< EUTRA-RSTD-InfoList >-----#
     EUTRA_RSTD_InfoList = SEQ_OF(name=u'EUTRA-RSTD-InfoList', mode=MODE_TYPE)
@@ -6909,7 +6975,7 @@ class NR_RRC_Definitions:
     
     #-----< MeasResultEUTRA >-----#
     MeasResultEUTRA = SEQ(name=u'MeasResultEUTRA', mode=MODE_TYPE)
-    _MeasResultEUTRA_physCellId = INT(name=u'physCellId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')))
+    _MeasResultEUTRA_eutra_PhysCellId = INT(name=u'eutra-PhysCellId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')))
     _MeasResultEUTRA_measResult = SEQ(name=u'measResult', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasQuantityResultsEUTRA')))
     _MeasResultEUTRA_cgi_Info = SEQ(name=u'cgi-Info', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MeasResultEUTRA_cgi_Info_cgi_info_EPC = SEQ(name=u'cgi-info-EPC', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
@@ -6941,7 +7007,7 @@ class NR_RRC_Definitions:
         ])
     _MeasResultEUTRA_cgi_Info._ext = None
     MeasResultEUTRA._cont = ASN1Dict([
-        (u'physCellId', _MeasResultEUTRA_physCellId),
+        (u'eutra-PhysCellId', _MeasResultEUTRA_eutra_PhysCellId),
         (u'measResult', _MeasResultEUTRA_measResult),
         (u'cgi-Info', _MeasResultEUTRA_cgi_Info),
         ])
@@ -7063,6 +7129,22 @@ class NR_RRC_Definitions:
     MultiFrequencyBandListNR._cont = _MultiFrequencyBandListNR__item_
     MultiFrequencyBandListNR._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
     
+    #-----< MultiFrequencyBandListNR-SIB >-----#
+    MultiFrequencyBandListNR_SIB = SEQ_OF(name=u'MultiFrequencyBandListNR-SIB', mode=MODE_TYPE)
+    _MultiFrequencyBandListNR_SIB__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'NR-MultiBandInfo')))
+    MultiFrequencyBandListNR_SIB._cont = _MultiFrequencyBandListNR_SIB__item_
+    MultiFrequencyBandListNR_SIB._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    
+    #-----< NR-MultiBandInfo >-----#
+    NR_MultiBandInfo = SEQ(name=u'NR-MultiBandInfo', mode=MODE_TYPE)
+    _NR_MultiBandInfo_freqBandIndicatorNR = INT(name=u'freqBandIndicatorNR', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'FreqBandIndicatorNR')), opt=True)
+    _NR_MultiBandInfo_nr_NS_PmaxList = SEQ_OF(name=u'nr-NS-PmaxList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'NR-NS-PmaxList')), opt=True)
+    NR_MultiBandInfo._cont = ASN1Dict([
+        (u'freqBandIndicatorNR', _NR_MultiBandInfo_freqBandIndicatorNR),
+        (u'nr-NS-PmaxList', _NR_MultiBandInfo_nr_NS_PmaxList),
+        ])
+    NR_MultiBandInfo._ext = None
+    
     #-----< NextHopChainingCount >-----#
     NextHopChainingCount = INT(name=u'NextHopChainingCount', mode=MODE_TYPE)
     NextHopChainingCount._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=7)], ev=None, er=[])
@@ -7070,6 +7152,22 @@ class NR_RRC_Definitions:
     #-----< NG-5G-S-TMSI >-----#
     NG_5G_S_TMSI = BIT_STR(name=u'NG-5G-S-TMSI', mode=MODE_TYPE)
     NG_5G_S_TMSI._const_sz = ASN1Set(rv=[48], rr=[], ev=None, er=[])
+    
+    #-----< NR-NS-PmaxList >-----#
+    NR_NS_PmaxList = SEQ_OF(name=u'NR-NS-PmaxList', mode=MODE_TYPE)
+    _NR_NS_PmaxList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'NR-NS-PmaxValue')))
+    NR_NS_PmaxList._cont = _NR_NS_PmaxList__item_
+    NR_NS_PmaxList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    
+    #-----< NR-NS-PmaxValue >-----#
+    NR_NS_PmaxValue = SEQ(name=u'NR-NS-PmaxValue', mode=MODE_TYPE)
+    _NR_NS_PmaxValue_additionalPmax = INT(name=u'additionalPmax', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')), opt=True)
+    _NR_NS_PmaxValue_additionalSpectrumEmission = INT(name=u'additionalSpectrumEmission', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'AdditionalSpectrumEmission')))
+    NR_NS_PmaxValue._cont = ASN1Dict([
+        (u'additionalPmax', _NR_NS_PmaxValue_additionalPmax),
+        (u'additionalSpectrumEmission', _NR_NS_PmaxValue_additionalSpectrumEmission),
+        ])
+    NR_NS_PmaxValue._ext = None
     
     #-----< NZP-CSI-RS-Resource >-----#
     NZP_CSI_RS_Resource = SEQ(name=u'NZP-CSI-RS-Resource', mode=MODE_TYPE)
@@ -7109,7 +7207,7 @@ class NR_RRC_Definitions:
     _NZP_CSI_RS_ResourceSet_repetition._cont = ASN1Dict([(u'on', 0), (u'off', 1)])
     _NZP_CSI_RS_ResourceSet_repetition._ext = None
     _NZP_CSI_RS_ResourceSet_aperiodicTriggeringOffset = INT(name=u'aperiodicTriggeringOffset', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _NZP_CSI_RS_ResourceSet_aperiodicTriggeringOffset._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4)], ev=None, er=[])
+    _NZP_CSI_RS_ResourceSet_aperiodicTriggeringOffset._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=6)], ev=None, er=[])
     _NZP_CSI_RS_ResourceSet_trs_Info = ENUM(name=u'trs-Info', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _NZP_CSI_RS_ResourceSet_trs_Info._cont = ASN1Dict([(u'true', 0)])
     _NZP_CSI_RS_ResourceSet_trs_Info._ext = None
@@ -7243,6 +7341,58 @@ class NR_RRC_Definitions:
     _PDCCH_ConfigCommon_searchSpaceOtherSystemInformation = INT(name=u'searchSpaceOtherSystemInformation', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SearchSpaceId')), opt=True)
     _PDCCH_ConfigCommon_pagingSearchSpace = INT(name=u'pagingSearchSpace', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SearchSpaceId')), opt=True)
     _PDCCH_ConfigCommon_ra_SearchSpace = INT(name=u'ra-SearchSpace', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SearchSpaceId')), opt=True)
+    _PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO = CHOICE(name=u'firstPDCCH-MonitoringOccasionOfPO', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True, group=0)
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS15KHZoneT = SEQ_OF(name=u'sCS15KHZoneT', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS15KHZoneT__item_ = INT(name='_item_', mode=MODE_TYPE)
+    ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS15KHZoneT__item_._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=139)], ev=None, er=[])
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS15KHZoneT._cont = ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS15KHZoneT__item_
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS15KHZoneT._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS30KHZoneT_SCS15KHZhalfT = SEQ_OF(name=u'sCS30KHZoneT-SCS15KHZhalfT', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS30KHZoneT_SCS15KHZhalfT__item_ = INT(name='_item_', mode=MODE_TYPE)
+    ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS30KHZoneT_SCS15KHZhalfT__item_._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=279)], ev=None, er=[])
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS30KHZoneT_SCS15KHZhalfT._cont = ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS30KHZoneT_SCS15KHZhalfT__item_
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS30KHZoneT_SCS15KHZhalfT._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS60KHZoneT_SCS30KHZhalfT_SCS15KHZquarterT = SEQ_OF(name=u'sCS60KHZoneT-SCS30KHZhalfT-SCS15KHZquarterT', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS60KHZoneT_SCS30KHZhalfT_SCS15KHZquarterT__item_ = INT(name='_item_', mode=MODE_TYPE)
+    ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS60KHZoneT_SCS30KHZhalfT_SCS15KHZquarterT__item_._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=559)], ev=None, er=[])
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS60KHZoneT_SCS30KHZhalfT_SCS15KHZquarterT._cont = ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS60KHZoneT_SCS30KHZhalfT_SCS15KHZquarterT__item_
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS60KHZoneT_SCS30KHZhalfT_SCS15KHZquarterT._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneT_SCS60KHZhalfT_SCS30KHZquarterT_SCS15KHZoneEighthT = SEQ_OF(name=u'sCS120KHZoneT-SCS60KHZhalfT-SCS30KHZquarterT-SCS15KHZoneEighthT', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneT_SCS60KHZhalfT_SCS30KHZquarterT_SCS15KHZoneEighthT__item_ = INT(name='_item_', mode=MODE_TYPE)
+    ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneT_SCS60KHZhalfT_SCS30KHZquarterT_SCS15KHZoneEighthT__item_._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1119)], ev=None, er=[])
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneT_SCS60KHZhalfT_SCS30KHZquarterT_SCS15KHZoneEighthT._cont = ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneT_SCS60KHZhalfT_SCS30KHZquarterT_SCS15KHZoneEighthT__item_
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneT_SCS60KHZhalfT_SCS30KHZquarterT_SCS15KHZoneEighthT._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZhalfT_SCS60KHZquarterT_SCS30KHZoneEighthT_SCS15KHZoneSixteenthT = SEQ_OF(name=u'sCS120KHZhalfT-SCS60KHZquarterT-SCS30KHZoneEighthT-SCS15KHZoneSixteenthT', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZhalfT_SCS60KHZquarterT_SCS30KHZoneEighthT_SCS15KHZoneSixteenthT__item_ = INT(name='_item_', mode=MODE_TYPE)
+    ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZhalfT_SCS60KHZquarterT_SCS30KHZoneEighthT_SCS15KHZoneSixteenthT__item_._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2239)], ev=None, er=[])
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZhalfT_SCS60KHZquarterT_SCS30KHZoneEighthT_SCS15KHZoneSixteenthT._cont = ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZhalfT_SCS60KHZquarterT_SCS30KHZoneEighthT_SCS15KHZoneSixteenthT__item_
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZhalfT_SCS60KHZquarterT_SCS30KHZoneEighthT_SCS15KHZoneSixteenthT._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZquarterT_SCS60KHZoneEighthT_SCS30KHZoneSixteenthT = SEQ_OF(name=u'sCS120KHZquarterT-SCS60KHZoneEighthT-SCS30KHZoneSixteenthT', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZquarterT_SCS60KHZoneEighthT_SCS30KHZoneSixteenthT__item_ = INT(name='_item_', mode=MODE_TYPE)
+    ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZquarterT_SCS60KHZoneEighthT_SCS30KHZoneSixteenthT__item_._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4479)], ev=None, er=[])
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZquarterT_SCS60KHZoneEighthT_SCS30KHZoneSixteenthT._cont = ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZquarterT_SCS60KHZoneEighthT_SCS30KHZoneSixteenthT__item_
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZquarterT_SCS60KHZoneEighthT_SCS30KHZoneSixteenthT._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneEighthT_SCS60KHZoneSixteenthT = SEQ_OF(name=u'sCS120KHZoneEighthT-SCS60KHZoneSixteenthT', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneEighthT_SCS60KHZoneSixteenthT__item_ = INT(name='_item_', mode=MODE_TYPE)
+    ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneEighthT_SCS60KHZoneSixteenthT__item_._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=8959)], ev=None, er=[])
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneEighthT_SCS60KHZoneSixteenthT._cont = ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneEighthT_SCS60KHZoneSixteenthT__item_
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneEighthT_SCS60KHZoneSixteenthT._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneSixteenthT = SEQ_OF(name=u'sCS120KHZoneSixteenthT', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneSixteenthT__item_ = INT(name='_item_', mode=MODE_TYPE)
+    ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneSixteenthT__item_._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=17919)], ev=None, er=[])
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneSixteenthT._cont = ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneSixteenthT__item_
+    __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneSixteenthT._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO._cont = ASN1Dict([
+        (u'sCS15KHZoneT', __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS15KHZoneT),
+        (u'sCS30KHZoneT-SCS15KHZhalfT', __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS30KHZoneT_SCS15KHZhalfT),
+        (u'sCS60KHZoneT-SCS30KHZhalfT-SCS15KHZquarterT', __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS60KHZoneT_SCS30KHZhalfT_SCS15KHZquarterT),
+        (u'sCS120KHZoneT-SCS60KHZhalfT-SCS30KHZquarterT-SCS15KHZoneEighthT', __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneT_SCS60KHZhalfT_SCS30KHZquarterT_SCS15KHZoneEighthT),
+        (u'sCS120KHZhalfT-SCS60KHZquarterT-SCS30KHZoneEighthT-SCS15KHZoneSixteenthT', __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZhalfT_SCS60KHZquarterT_SCS30KHZoneEighthT_SCS15KHZoneSixteenthT),
+        (u'sCS120KHZquarterT-SCS60KHZoneEighthT-SCS30KHZoneSixteenthT', __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZquarterT_SCS60KHZoneEighthT_SCS30KHZoneSixteenthT),
+        (u'sCS120KHZoneEighthT-SCS60KHZoneSixteenthT', __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneEighthT_SCS60KHZoneSixteenthT),
+        (u'sCS120KHZoneSixteenthT', __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneSixteenthT),
+        ])
+    _PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO._ext = None
     PDCCH_ConfigCommon._cont = ASN1Dict([
         (u'controlResourceSetZero', _PDCCH_ConfigCommon_controlResourceSetZero),
         (u'commonControlResourceSet', _PDCCH_ConfigCommon_commonControlResourceSet),
@@ -7252,8 +7402,9 @@ class NR_RRC_Definitions:
         (u'searchSpaceOtherSystemInformation', _PDCCH_ConfigCommon_searchSpaceOtherSystemInformation),
         (u'pagingSearchSpace', _PDCCH_ConfigCommon_pagingSearchSpace),
         (u'ra-SearchSpace', _PDCCH_ConfigCommon_ra_SearchSpace),
+        (u'firstPDCCH-MonitoringOccasionOfPO', _PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO),
         ])
-    PDCCH_ConfigCommon._ext = []
+    PDCCH_ConfigCommon._ext = [u'firstPDCCH-MonitoringOccasionOfPO']
     
     #-----< PDCCH-ConfigSIB1 >-----#
     PDCCH_ConfigSIB1 = SEQ(name=u'PDCCH-ConfigSIB1', mode=MODE_TYPE)
@@ -7595,13 +7746,18 @@ class NR_RRC_Definitions:
     _PDSCH_ServingCellConfig_nrofHARQ_ProcessesForPDSCH._cont = ASN1Dict([(u'n2', 0), (u'n4', 1), (u'n6', 2), (u'n10', 3), (u'n12', 4), (u'n16', 5)])
     _PDSCH_ServingCellConfig_nrofHARQ_ProcessesForPDSCH._ext = None
     _PDSCH_ServingCellConfig_pucch_Cell = INT(name=u'pucch-Cell', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ServCellIndex')), opt=True)
+    _PDSCH_ServingCellConfig_maxMIMO_Layers = INT(name=u'maxMIMO-Layers', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _PDSCH_ServingCellConfig_maxMIMO_Layers._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    _PDSCH_ServingCellConfig_processingType2Enabled = BOOL(name=u'processingType2Enabled', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
     PDSCH_ServingCellConfig._cont = ASN1Dict([
         (u'codeBlockGroupTransmission', _PDSCH_ServingCellConfig_codeBlockGroupTransmission),
         (u'xOverhead', _PDSCH_ServingCellConfig_xOverhead),
         (u'nrofHARQ-ProcessesForPDSCH', _PDSCH_ServingCellConfig_nrofHARQ_ProcessesForPDSCH),
         (u'pucch-Cell', _PDSCH_ServingCellConfig_pucch_Cell),
+        (u'maxMIMO-Layers', _PDSCH_ServingCellConfig_maxMIMO_Layers),
+        (u'processingType2Enabled', _PDSCH_ServingCellConfig_processingType2Enabled),
         ])
-    PDSCH_ServingCellConfig._ext = []
+    PDSCH_ServingCellConfig._ext = [u'maxMIMO-Layers', u'processingType2Enabled']
     
     #-----< PDSCH-CodeBlockGroupTransmission >-----#
     PDSCH_CodeBlockGroupTransmission = SEQ(name=u'PDSCH-CodeBlockGroupTransmission', mode=MODE_TYPE)
@@ -7695,6 +7851,9 @@ class NR_RRC_Definitions:
     _PhysicalCellGroupConfig_cs_RNTI._ext = None
     _PhysicalCellGroupConfig_mcs_C_RNTI = INT(name=u'mcs-C-RNTI', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RNTI-Value')), opt=True, group=0)
     _PhysicalCellGroupConfig_p_UE_FR1 = INT(name=u'p-UE-FR1', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')), opt=True, group=0)
+    _PhysicalCellGroupConfig_xScale = ENUM(name=u'xScale', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
+    _PhysicalCellGroupConfig_xScale._cont = ASN1Dict([(u'dB0', 0), (u'dB6', 1), (u'spare2', 2), (u'spare1', 3)])
+    _PhysicalCellGroupConfig_xScale._ext = None
     PhysicalCellGroupConfig._cont = ASN1Dict([
         (u'harq-ACK-SpatialBundlingPUCCH', _PhysicalCellGroupConfig_harq_ACK_SpatialBundlingPUCCH),
         (u'harq-ACK-SpatialBundlingPUSCH', _PhysicalCellGroupConfig_harq_ACK_SpatialBundlingPUSCH),
@@ -7707,8 +7866,9 @@ class NR_RRC_Definitions:
         (u'cs-RNTI', _PhysicalCellGroupConfig_cs_RNTI),
         (u'mcs-C-RNTI', _PhysicalCellGroupConfig_mcs_C_RNTI),
         (u'p-UE-FR1', _PhysicalCellGroupConfig_p_UE_FR1),
+        (u'xScale', _PhysicalCellGroupConfig_xScale),
         ])
-    PhysicalCellGroupConfig._ext = [u'mcs-C-RNTI', u'p-UE-FR1']
+    PhysicalCellGroupConfig._ext = [u'mcs-C-RNTI', u'p-UE-FR1', u'xScale']
     
     #-----< PLMN-Identity >-----#
     PLMN_Identity = SEQ(name=u'PLMN-Identity', mode=MODE_TYPE)
@@ -8535,12 +8695,17 @@ class NR_RRC_Definitions:
     _PUSCH_ServingCellConfig_xOverhead = ENUM(name=u'xOverhead', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _PUSCH_ServingCellConfig_xOverhead._cont = ASN1Dict([(u'xoh6', 0), (u'xoh12', 1), (u'xoh18', 2)])
     _PUSCH_ServingCellConfig_xOverhead._ext = None
+    _PUSCH_ServingCellConfig_maxMIMO_Layers = INT(name=u'maxMIMO-Layers', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _PUSCH_ServingCellConfig_maxMIMO_Layers._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _PUSCH_ServingCellConfig_processingType2Enabled = BOOL(name=u'processingType2Enabled', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
     PUSCH_ServingCellConfig._cont = ASN1Dict([
         (u'codeBlockGroupTransmission', _PUSCH_ServingCellConfig_codeBlockGroupTransmission),
         (u'rateMatching', _PUSCH_ServingCellConfig_rateMatching),
         (u'xOverhead', _PUSCH_ServingCellConfig_xOverhead),
+        (u'maxMIMO-Layers', _PUSCH_ServingCellConfig_maxMIMO_Layers),
+        (u'processingType2Enabled', _PUSCH_ServingCellConfig_processingType2Enabled),
         ])
-    PUSCH_ServingCellConfig._ext = []
+    PUSCH_ServingCellConfig._ext = [u'maxMIMO-Layers', u'processingType2Enabled']
     
     #-----< PUSCH-CodeBlockGroupTransmission >-----#
     PUSCH_CodeBlockGroupTransmission = SEQ(name=u'PUSCH-CodeBlockGroupTransmission', mode=MODE_TYPE)
@@ -8595,7 +8760,7 @@ class NR_RRC_Definitions:
     
     #-----< Q-QualMin >-----#
     Q_QualMin = INT(name=u'Q-QualMin', mode=MODE_TYPE)
-    Q_QualMin._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-34, ub=-3)], ev=None, er=[])
+    Q_QualMin._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-43, ub=-12)], ev=None, er=[])
     
     #-----< Q-RxLevMin >-----#
     Q_RxLevMin = INT(name=u'Q-RxLevMin', mode=MODE_TYPE)
@@ -8627,10 +8792,10 @@ class NR_RRC_Definitions:
     #-----< QuantityConfigRS >-----#
     QuantityConfigRS = SEQ(name=u'QuantityConfigRS', mode=MODE_TYPE)
     _QuantityConfigRS_ssb_FilterConfig = SEQ(name=u'ssb-FilterConfig', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'FilterConfig')))
-    _QuantityConfigRS_cs_RS_FilterConfig = SEQ(name=u'cs-RS-FilterConfig', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'FilterConfig')))
+    _QuantityConfigRS_csi_RS_FilterConfig = SEQ(name=u'csi-RS-FilterConfig', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'FilterConfig')))
     QuantityConfigRS._cont = ASN1Dict([
         (u'ssb-FilterConfig', _QuantityConfigRS_ssb_FilterConfig),
-        (u'cs-RS-FilterConfig', _QuantityConfigRS_cs_RS_FilterConfig),
+        (u'csi-RS-FilterConfig', _QuantityConfigRS_csi_RS_FilterConfig),
         ])
     QuantityConfigRS._ext = None
     
@@ -9112,6 +9277,10 @@ class NR_RRC_Definitions:
         ])
     RateMatchPatternLTE_CRS._ext = None
     
+    #-----< RejectWaitTime >-----#
+    RejectWaitTime = INT(name=u'RejectWaitTime', mode=MODE_TYPE)
+    RejectWaitTime._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    
     #-----< ReportConfigId >-----#
     ReportConfigId = INT(name=u'ReportConfigId', mode=MODE_TYPE)
     ReportConfigId._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
@@ -9361,9 +9530,9 @@ class NR_RRC_Definitions:
     _EventTriggerConfig_reportQuantityCell = SEQ(name=u'reportQuantityCell', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasReportQuantity')))
     _EventTriggerConfig_maxReportCells = INT(name=u'maxReportCells', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _EventTriggerConfig_maxReportCells._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
-    _EventTriggerConfig_reportQuantityRsIndexes = SEQ(name=u'reportQuantityRsIndexes', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasReportQuantity')), opt=True)
-    _EventTriggerConfig_maxNrofRSIndexesToReport = INT(name=u'maxNrofRSIndexesToReport', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _EventTriggerConfig_maxNrofRSIndexesToReport._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    _EventTriggerConfig_reportQuantityRS_Indexes = SEQ(name=u'reportQuantityRS-Indexes', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasReportQuantity')), opt=True)
+    _EventTriggerConfig_maxNrofRS_IndexesToReport = INT(name=u'maxNrofRS-IndexesToReport', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _EventTriggerConfig_maxNrofRS_IndexesToReport._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
     _EventTriggerConfig_includeBeamMeasurements = BOOL(name=u'includeBeamMeasurements', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _EventTriggerConfig_reportAddNeighMeas = ENUM(name=u'reportAddNeighMeas', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _EventTriggerConfig_reportAddNeighMeas._cont = ASN1Dict([(u'setup', 0)])
@@ -9375,8 +9544,8 @@ class NR_RRC_Definitions:
         (u'reportAmount', _EventTriggerConfig_reportAmount),
         (u'reportQuantityCell', _EventTriggerConfig_reportQuantityCell),
         (u'maxReportCells', _EventTriggerConfig_maxReportCells),
-        (u'reportQuantityRsIndexes', _EventTriggerConfig_reportQuantityRsIndexes),
-        (u'maxNrofRSIndexesToReport', _EventTriggerConfig_maxNrofRSIndexesToReport),
+        (u'reportQuantityRS-Indexes', _EventTriggerConfig_reportQuantityRS_Indexes),
+        (u'maxNrofRS-IndexesToReport', _EventTriggerConfig_maxNrofRS_IndexesToReport),
         (u'includeBeamMeasurements', _EventTriggerConfig_includeBeamMeasurements),
         (u'reportAddNeighMeas', _EventTriggerConfig_reportAddNeighMeas),
         ])
@@ -9392,9 +9561,9 @@ class NR_RRC_Definitions:
     _PeriodicalReportConfig_reportQuantityCell = SEQ(name=u'reportQuantityCell', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasReportQuantity')))
     _PeriodicalReportConfig_maxReportCells = INT(name=u'maxReportCells', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PeriodicalReportConfig_maxReportCells._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
-    _PeriodicalReportConfig_reportQuantityRsIndexes = SEQ(name=u'reportQuantityRsIndexes', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasReportQuantity')), opt=True)
-    _PeriodicalReportConfig_maxNrofRsIndexesToReport = INT(name=u'maxNrofRsIndexesToReport', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _PeriodicalReportConfig_maxNrofRsIndexesToReport._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    _PeriodicalReportConfig_reportQuantityRS_Indexes = SEQ(name=u'reportQuantityRS-Indexes', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasReportQuantity')), opt=True)
+    _PeriodicalReportConfig_maxNrofRS_IndexesToReport = INT(name=u'maxNrofRS-IndexesToReport', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _PeriodicalReportConfig_maxNrofRS_IndexesToReport._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
     _PeriodicalReportConfig_includeBeamMeasurements = BOOL(name=u'includeBeamMeasurements', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PeriodicalReportConfig_useWhiteCellList = BOOL(name=u'useWhiteCellList', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     PeriodicalReportConfig._cont = ASN1Dict([
@@ -9403,8 +9572,8 @@ class NR_RRC_Definitions:
         (u'reportAmount', _PeriodicalReportConfig_reportAmount),
         (u'reportQuantityCell', _PeriodicalReportConfig_reportQuantityCell),
         (u'maxReportCells', _PeriodicalReportConfig_maxReportCells),
-        (u'reportQuantityRsIndexes', _PeriodicalReportConfig_reportQuantityRsIndexes),
-        (u'maxNrofRsIndexesToReport', _PeriodicalReportConfig_maxNrofRsIndexesToReport),
+        (u'reportQuantityRS-Indexes', _PeriodicalReportConfig_reportQuantityRS_Indexes),
+        (u'maxNrofRS-IndexesToReport', _PeriodicalReportConfig_maxNrofRS_IndexesToReport),
         (u'includeBeamMeasurements', _PeriodicalReportConfig_includeBeamMeasurements),
         (u'useWhiteCellList', _PeriodicalReportConfig_useWhiteCellList),
         ])
@@ -10082,13 +10251,33 @@ class NR_RRC_Definitions:
     _ServingCellConfig_sCellDeactivationTimer._ext = None
     _ServingCellConfig_crossCarrierSchedulingConfig = SEQ(name=u'crossCarrierSchedulingConfig', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CrossCarrierSchedulingConfig')), opt=True)
     _ServingCellConfig_tag_Id = INT(name=u'tag-Id', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'TAG-Id')))
-    _ServingCellConfig_ue_BeamLockFunction = ENUM(name=u'ue-BeamLockFunction', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ServingCellConfig_ue_BeamLockFunction._cont = ASN1Dict([(u'enabled', 0)])
-    _ServingCellConfig_ue_BeamLockFunction._ext = None
+    _ServingCellConfig_dummy = ENUM(name=u'dummy', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ServingCellConfig_dummy._cont = ASN1Dict([(u'enabled', 0)])
+    _ServingCellConfig_dummy._ext = None
     _ServingCellConfig_pathlossReferenceLinking = ENUM(name=u'pathlossReferenceLinking', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _ServingCellConfig_pathlossReferenceLinking._cont = ASN1Dict([(u'pCell', 0), (u'sCell', 1)])
     _ServingCellConfig_pathlossReferenceLinking._ext = None
     _ServingCellConfig_servingCellMO = INT(name=u'servingCellMO', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasObjectId')), opt=True)
+    _ServingCellConfig_lte_CRS_ToMatchAround = CHOICE(name=u'lte-CRS-ToMatchAround', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SetupRelease')), opt=True, group=0)
+    __ServingCellConfig_lte_CRS_ToMatchAround_release = NULL(name=u'release', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ServingCellConfig_lte_CRS_ToMatchAround_setup = SEQ(name=u'setup', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RateMatchPatternLTE-CRS')))
+    _ServingCellConfig_lte_CRS_ToMatchAround._cont = ASN1Dict([
+        (u'release', __ServingCellConfig_lte_CRS_ToMatchAround_release),
+        (u'setup', __ServingCellConfig_lte_CRS_ToMatchAround_setup),
+        ])
+    _ServingCellConfig_lte_CRS_ToMatchAround._ext = None
+    _ServingCellConfig_rateMatchPatternToAddModList = SEQ_OF(name=u'rateMatchPatternToAddModList', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    __ServingCellConfig_rateMatchPatternToAddModList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RateMatchPattern')))
+    _ServingCellConfig_rateMatchPatternToAddModList._cont = __ServingCellConfig_rateMatchPatternToAddModList__item_
+    _ServingCellConfig_rateMatchPatternToAddModList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _ServingCellConfig_rateMatchPatternToReleaseList = SEQ_OF(name=u'rateMatchPatternToReleaseList', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    __ServingCellConfig_rateMatchPatternToReleaseList__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RateMatchPatternId')))
+    _ServingCellConfig_rateMatchPatternToReleaseList._cont = __ServingCellConfig_rateMatchPatternToReleaseList__item_
+    _ServingCellConfig_rateMatchPatternToReleaseList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _ServingCellConfig_downlinkChannelBW_PerSCS_List = SEQ_OF(name=u'downlinkChannelBW-PerSCS-List', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    __ServingCellConfig_downlinkChannelBW_PerSCS_List__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'SCS-SpecificCarrier')))
+    _ServingCellConfig_downlinkChannelBW_PerSCS_List._cont = __ServingCellConfig_downlinkChannelBW_PerSCS_List__item_
+    _ServingCellConfig_downlinkChannelBW_PerSCS_List._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=5)], ev=None, er=[])
     ServingCellConfig._cont = ASN1Dict([
         (u'tdd-UL-DL-ConfigurationDedicated', _ServingCellConfig_tdd_UL_DL_ConfigurationDedicated),
         (u'initialDownlinkBWP', _ServingCellConfig_initialDownlinkBWP),
@@ -10105,11 +10294,15 @@ class NR_RRC_Definitions:
         (u'sCellDeactivationTimer', _ServingCellConfig_sCellDeactivationTimer),
         (u'crossCarrierSchedulingConfig', _ServingCellConfig_crossCarrierSchedulingConfig),
         (u'tag-Id', _ServingCellConfig_tag_Id),
-        (u'ue-BeamLockFunction', _ServingCellConfig_ue_BeamLockFunction),
+        (u'dummy', _ServingCellConfig_dummy),
         (u'pathlossReferenceLinking', _ServingCellConfig_pathlossReferenceLinking),
         (u'servingCellMO', _ServingCellConfig_servingCellMO),
+        (u'lte-CRS-ToMatchAround', _ServingCellConfig_lte_CRS_ToMatchAround),
+        (u'rateMatchPatternToAddModList', _ServingCellConfig_rateMatchPatternToAddModList),
+        (u'rateMatchPatternToReleaseList', _ServingCellConfig_rateMatchPatternToReleaseList),
+        (u'downlinkChannelBW-PerSCS-List', _ServingCellConfig_downlinkChannelBW_PerSCS_List),
         ])
-    ServingCellConfig._ext = []
+    ServingCellConfig._ext = [u'lte-CRS-ToMatchAround', u'rateMatchPatternToAddModList', u'rateMatchPatternToReleaseList', u'downlinkChannelBW-PerSCS-List']
     
     #-----< UplinkConfig >-----#
     UplinkConfig = SEQ(name=u'UplinkConfig', mode=MODE_TYPE)
@@ -10139,6 +10332,11 @@ class NR_RRC_Definitions:
         (u'setup', __UplinkConfig_carrierSwitching_setup),
         ])
     _UplinkConfig_carrierSwitching._ext = None
+    _UplinkConfig_powerBoostPi2BPSK = BOOL(name=u'powerBoostPi2BPSK', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _UplinkConfig_uplinkChannelBW_PerSCS_List = SEQ_OF(name=u'uplinkChannelBW-PerSCS-List', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    __UplinkConfig_uplinkChannelBW_PerSCS_List__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'SCS-SpecificCarrier')))
+    _UplinkConfig_uplinkChannelBW_PerSCS_List._cont = __UplinkConfig_uplinkChannelBW_PerSCS_List__item_
+    _UplinkConfig_uplinkChannelBW_PerSCS_List._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=5)], ev=None, er=[])
     UplinkConfig._cont = ASN1Dict([
         (u'initialUplinkBWP', _UplinkConfig_initialUplinkBWP),
         (u'uplinkBWP-ToReleaseList', _UplinkConfig_uplinkBWP_ToReleaseList),
@@ -10146,8 +10344,10 @@ class NR_RRC_Definitions:
         (u'firstActiveUplinkBWP-Id', _UplinkConfig_firstActiveUplinkBWP_Id),
         (u'pusch-ServingCellConfig', _UplinkConfig_pusch_ServingCellConfig),
         (u'carrierSwitching', _UplinkConfig_carrierSwitching),
+        (u'powerBoostPi2BPSK', _UplinkConfig_powerBoostPi2BPSK),
+        (u'uplinkChannelBW-PerSCS-List', _UplinkConfig_uplinkChannelBW_PerSCS_List),
         ])
-    UplinkConfig._ext = []
+    UplinkConfig._ext = [u'powerBoostPi2BPSK', u'uplinkChannelBW-PerSCS-List']
     
     #-----< ServingCellConfigCommon >-----#
     ServingCellConfigCommon = SEQ(name=u'ServingCellConfigCommon', mode=MODE_TYPE)
@@ -10193,7 +10393,7 @@ class NR_RRC_Definitions:
     __ServingCellConfigCommon_rateMatchPatternToReleaseList__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RateMatchPatternId')))
     _ServingCellConfigCommon_rateMatchPatternToReleaseList._cont = __ServingCellConfigCommon_rateMatchPatternToReleaseList__item_
     _ServingCellConfigCommon_rateMatchPatternToReleaseList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
-    _ServingCellConfigCommon_subcarrierSpacing = ENUM(name=u'subcarrierSpacing', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SubcarrierSpacing')), opt=True)
+    _ServingCellConfigCommon_ssbSubcarrierSpacing = ENUM(name=u'ssbSubcarrierSpacing', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SubcarrierSpacing')), opt=True)
     _ServingCellConfigCommon_tdd_UL_DL_ConfigurationCommon = SEQ(name=u'tdd-UL-DL-ConfigurationCommon', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'TDD-UL-DL-ConfigCommon')), opt=True)
     _ServingCellConfigCommon_ss_PBCH_BlockPower = INT(name=u'ss-PBCH-BlockPower', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _ServingCellConfigCommon_ss_PBCH_BlockPower._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-60, ub=50)], ev=None, er=[])
@@ -10209,7 +10409,7 @@ class NR_RRC_Definitions:
         (u'lte-CRS-ToMatchAround', _ServingCellConfigCommon_lte_CRS_ToMatchAround),
         (u'rateMatchPatternToAddModList', _ServingCellConfigCommon_rateMatchPatternToAddModList),
         (u'rateMatchPatternToReleaseList', _ServingCellConfigCommon_rateMatchPatternToReleaseList),
-        (u'subcarrierSpacing', _ServingCellConfigCommon_subcarrierSpacing),
+        (u'ssbSubcarrierSpacing', _ServingCellConfigCommon_ssbSubcarrierSpacing),
         (u'tdd-UL-DL-ConfigurationCommon', _ServingCellConfigCommon_tdd_UL_DL_ConfigurationCommon),
         (u'ss-PBCH-BlockPower', _ServingCellConfigCommon_ss_PBCH_BlockPower),
         ])
@@ -10221,7 +10421,7 @@ class NR_RRC_Definitions:
     _ServingCellConfigCommonSIB_uplinkConfigCommon = SEQ(name=u'uplinkConfigCommon', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'UplinkConfigCommonSIB')), opt=True)
     _ServingCellConfigCommonSIB_supplementaryUplink = SEQ(name=u'supplementaryUplink', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'UplinkConfigCommonSIB')), opt=True)
     _ServingCellConfigCommonSIB_n_TimingAdvanceOffset = ENUM(name=u'n-TimingAdvanceOffset', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ServingCellConfigCommonSIB_n_TimingAdvanceOffset._cont = ASN1Dict([(u'n0', 0), (u'n25560', 1), (u'n39936', 2)])
+    _ServingCellConfigCommonSIB_n_TimingAdvanceOffset._cont = ASN1Dict([(u'n0', 0), (u'n25600', 1), (u'n39936', 2)])
     _ServingCellConfigCommonSIB_n_TimingAdvanceOffset._ext = None
     _ServingCellConfigCommonSIB_ssb_PositionsInBurst = SEQ(name=u'ssb-PositionsInBurst', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ServingCellConfigCommonSIB_ssb_PositionsInBurst_inOneGroup = BIT_STR(name=u'inOneGroup', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
@@ -11308,6 +11508,18 @@ class NR_RRC_Definitions:
     BandCombinationList._cont = _BandCombinationList__item_
     BandCombinationList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65536)], ev=None, er=[])
     
+    #-----< BandCombinationList-v1540 >-----#
+    BandCombinationList_v1540 = SEQ_OF(name=u'BandCombinationList-v1540', mode=MODE_TYPE)
+    _BandCombinationList_v1540__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'BandCombination-v1540')))
+    BandCombinationList_v1540._cont = _BandCombinationList_v1540__item_
+    BandCombinationList_v1540._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65536)], ev=None, er=[])
+    
+    #-----< BandCombinationList-v1550 >-----#
+    BandCombinationList_v1550 = SEQ_OF(name=u'BandCombinationList-v1550', mode=MODE_TYPE)
+    _BandCombinationList_v1550__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'BandCombination-v1550')))
+    BandCombinationList_v1550._cont = _BandCombinationList_v1550__item_
+    BandCombinationList_v1550._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65536)], ev=None, er=[])
+    
     #-----< BandCombination >-----#
     BandCombination = SEQ(name=u'BandCombination', mode=MODE_TYPE)
     _BandCombination_bandList = SEQ_OF(name=u'bandList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
@@ -11333,6 +11545,27 @@ class NR_RRC_Definitions:
         (u'powerClass-v1530', _BandCombination_powerClass_v1530),
         ])
     BandCombination._ext = None
+    
+    #-----< BandCombination-v1540 >-----#
+    BandCombination_v1540 = SEQ(name=u'BandCombination-v1540', mode=MODE_TYPE)
+    _BandCombination_v1540_bandList_v1540 = SEQ_OF(name=u'bandList-v1540', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __BandCombination_v1540_bandList_v1540__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'BandParameters-v1540')))
+    _BandCombination_v1540_bandList_v1540._cont = __BandCombination_v1540_bandList_v1540__item_
+    _BandCombination_v1540_bandList_v1540._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    _BandCombination_v1540_ca_ParametersNR_v1540 = SEQ(name=u'ca-ParametersNR-v1540', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CA-ParametersNR-v1540')), opt=True)
+    BandCombination_v1540._cont = ASN1Dict([
+        (u'bandList-v1540', _BandCombination_v1540_bandList_v1540),
+        (u'ca-ParametersNR-v1540', _BandCombination_v1540_ca_ParametersNR_v1540),
+        ])
+    BandCombination_v1540._ext = None
+    
+    #-----< BandCombination-v1550 >-----#
+    BandCombination_v1550 = SEQ(name=u'BandCombination-v1550', mode=MODE_TYPE)
+    _BandCombination_v1550_ca_ParametersNR_v1550 = SEQ(name=u'ca-ParametersNR-v1550', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CA-ParametersNR-v1550')))
+    BandCombination_v1550._cont = ASN1Dict([
+        (u'ca-ParametersNR-v1550', _BandCombination_v1550_ca_ParametersNR_v1550),
+        ])
+    BandCombination_v1550._ext = None
     
     #-----< BandParameters >-----#
     BandParameters = CHOICE(name=u'BandParameters', mode=MODE_TYPE)
@@ -11361,6 +11594,52 @@ class NR_RRC_Definitions:
         (u'nr', _BandParameters_nr),
         ])
     BandParameters._ext = None
+    
+    #-----< BandParameters-v1540 >-----#
+    BandParameters_v1540 = SEQ(name=u'BandParameters-v1540', mode=MODE_TYPE)
+    _BandParameters_v1540_srs_CarrierSwitch = CHOICE(name=u'srs-CarrierSwitch', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    __BandParameters_v1540_srs_CarrierSwitch_nr = SEQ(name=u'nr', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___BandParameters_v1540_srs_CarrierSwitch_nr_srs_SwitchingTimesListNR = SEQ_OF(name=u'srs-SwitchingTimesListNR', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____BandParameters_v1540_srs_CarrierSwitch_nr_srs_SwitchingTimesListNR__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'SRS-SwitchingTimeNR')))
+    ___BandParameters_v1540_srs_CarrierSwitch_nr_srs_SwitchingTimesListNR._cont = ____BandParameters_v1540_srs_CarrierSwitch_nr_srs_SwitchingTimesListNR__item_
+    ___BandParameters_v1540_srs_CarrierSwitch_nr_srs_SwitchingTimesListNR._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    __BandParameters_v1540_srs_CarrierSwitch_nr._cont = ASN1Dict([
+        (u'srs-SwitchingTimesListNR', ___BandParameters_v1540_srs_CarrierSwitch_nr_srs_SwitchingTimesListNR),
+        ])
+    __BandParameters_v1540_srs_CarrierSwitch_nr._ext = None
+    __BandParameters_v1540_srs_CarrierSwitch_eutra = SEQ(name=u'eutra', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___BandParameters_v1540_srs_CarrierSwitch_eutra_srs_SwitchingTimesListEUTRA = SEQ_OF(name=u'srs-SwitchingTimesListEUTRA', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____BandParameters_v1540_srs_CarrierSwitch_eutra_srs_SwitchingTimesListEUTRA__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'SRS-SwitchingTimeEUTRA')))
+    ___BandParameters_v1540_srs_CarrierSwitch_eutra_srs_SwitchingTimesListEUTRA._cont = ____BandParameters_v1540_srs_CarrierSwitch_eutra_srs_SwitchingTimesListEUTRA__item_
+    ___BandParameters_v1540_srs_CarrierSwitch_eutra_srs_SwitchingTimesListEUTRA._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    __BandParameters_v1540_srs_CarrierSwitch_eutra._cont = ASN1Dict([
+        (u'srs-SwitchingTimesListEUTRA', ___BandParameters_v1540_srs_CarrierSwitch_eutra_srs_SwitchingTimesListEUTRA),
+        ])
+    __BandParameters_v1540_srs_CarrierSwitch_eutra._ext = None
+    _BandParameters_v1540_srs_CarrierSwitch._cont = ASN1Dict([
+        (u'nr', __BandParameters_v1540_srs_CarrierSwitch_nr),
+        (u'eutra', __BandParameters_v1540_srs_CarrierSwitch_eutra),
+        ])
+    _BandParameters_v1540_srs_CarrierSwitch._ext = None
+    _BandParameters_v1540_srs_TxSwitch_v1540 = SEQ(name=u'srs-TxSwitch-v1540', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __BandParameters_v1540_srs_TxSwitch_v1540_supportedSRS_TxPortSwitch = ENUM(name=u'supportedSRS-TxPortSwitch', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __BandParameters_v1540_srs_TxSwitch_v1540_supportedSRS_TxPortSwitch._cont = ASN1Dict([(u't1r2', 0), (u't1r4', 1), (u't2r4', 2), (u't1r4-t2r4', 3), (u't1r1', 4), (u't2r2', 5), (u't4r4', 6), (u'notSupported', 7)])
+    __BandParameters_v1540_srs_TxSwitch_v1540_supportedSRS_TxPortSwitch._ext = None
+    __BandParameters_v1540_srs_TxSwitch_v1540_txSwitchImpactToRx = INT(name=u'txSwitchImpactToRx', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __BandParameters_v1540_srs_TxSwitch_v1540_txSwitchImpactToRx._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    __BandParameters_v1540_srs_TxSwitch_v1540_txSwitchWithAnotherBand = INT(name=u'txSwitchWithAnotherBand', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __BandParameters_v1540_srs_TxSwitch_v1540_txSwitchWithAnotherBand._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    _BandParameters_v1540_srs_TxSwitch_v1540._cont = ASN1Dict([
+        (u'supportedSRS-TxPortSwitch', __BandParameters_v1540_srs_TxSwitch_v1540_supportedSRS_TxPortSwitch),
+        (u'txSwitchImpactToRx', __BandParameters_v1540_srs_TxSwitch_v1540_txSwitchImpactToRx),
+        (u'txSwitchWithAnotherBand', __BandParameters_v1540_srs_TxSwitch_v1540_txSwitchWithAnotherBand),
+        ])
+    _BandParameters_v1540_srs_TxSwitch_v1540._ext = None
+    BandParameters_v1540._cont = ASN1Dict([
+        (u'srs-CarrierSwitch', _BandParameters_v1540_srs_CarrierSwitch),
+        (u'srs-TxSwitch-v1540', _BandParameters_v1540_srs_TxSwitch_v1540),
+        ])
+    BandParameters_v1540._ext = None
     
     #-----< CA-BandwidthClassEUTRA >-----#
     CA_BandwidthClassEUTRA = ENUM(name=u'CA-BandwidthClassEUTRA', mode=MODE_TYPE)
@@ -11438,6 +11717,146 @@ class NR_RRC_Definitions:
         ])
     CA_ParametersNR._ext = []
     
+    #-----< CA-ParametersNR-v1540 >-----#
+    CA_ParametersNR_v1540 = SEQ(name=u'CA-ParametersNR-v1540', mode=MODE_TYPE)
+    _CA_ParametersNR_v1540_simultaneousSRS_AssocCSI_RS_AllCC = INT(name=u'simultaneousSRS-AssocCSI-RS-AllCC', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _CA_ParametersNR_v1540_simultaneousSRS_AssocCSI_RS_AllCC._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=5, ub=32)], ev=None, er=[])
+    _CA_ParametersNR_v1540_csi_RS_IM_ReceptionForFeedbackPerBandComb = SEQ(name=u'csi-RS-IM-ReceptionForFeedbackPerBandComb', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CA_ParametersNR_v1540_csi_RS_IM_ReceptionForFeedbackPerBandComb_maxNumberSimultaneousNZP_CSI_RS_ActBWP_AllCC = INT(name=u'maxNumberSimultaneousNZP-CSI-RS-ActBWP-AllCC', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CA_ParametersNR_v1540_csi_RS_IM_ReceptionForFeedbackPerBandComb_maxNumberSimultaneousNZP_CSI_RS_ActBWP_AllCC._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    __CA_ParametersNR_v1540_csi_RS_IM_ReceptionForFeedbackPerBandComb_totalNumberPortsSimultaneousNZP_CSI_RS_ActBWP_AllCC = INT(name=u'totalNumberPortsSimultaneousNZP-CSI-RS-ActBWP-AllCC', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CA_ParametersNR_v1540_csi_RS_IM_ReceptionForFeedbackPerBandComb_totalNumberPortsSimultaneousNZP_CSI_RS_ActBWP_AllCC._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=256)], ev=None, er=[])
+    _CA_ParametersNR_v1540_csi_RS_IM_ReceptionForFeedbackPerBandComb._cont = ASN1Dict([
+        (u'maxNumberSimultaneousNZP-CSI-RS-ActBWP-AllCC', __CA_ParametersNR_v1540_csi_RS_IM_ReceptionForFeedbackPerBandComb_maxNumberSimultaneousNZP_CSI_RS_ActBWP_AllCC),
+        (u'totalNumberPortsSimultaneousNZP-CSI-RS-ActBWP-AllCC', __CA_ParametersNR_v1540_csi_RS_IM_ReceptionForFeedbackPerBandComb_totalNumberPortsSimultaneousNZP_CSI_RS_ActBWP_AllCC),
+        ])
+    _CA_ParametersNR_v1540_csi_RS_IM_ReceptionForFeedbackPerBandComb._ext = None
+    _CA_ParametersNR_v1540_simultaneousCSI_ReportsAllCC = INT(name=u'simultaneousCSI-ReportsAllCC', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _CA_ParametersNR_v1540_simultaneousCSI_ReportsAllCC._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=5, ub=32)], ev=None, er=[])
+    _CA_ParametersNR_v1540_dualPA_Architecture = ENUM(name=u'dualPA-Architecture', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _CA_ParametersNR_v1540_dualPA_Architecture._cont = ASN1Dict([(u'supported', 0)])
+    _CA_ParametersNR_v1540_dualPA_Architecture._ext = None
+    CA_ParametersNR_v1540._cont = ASN1Dict([
+        (u'simultaneousSRS-AssocCSI-RS-AllCC', _CA_ParametersNR_v1540_simultaneousSRS_AssocCSI_RS_AllCC),
+        (u'csi-RS-IM-ReceptionForFeedbackPerBandComb', _CA_ParametersNR_v1540_csi_RS_IM_ReceptionForFeedbackPerBandComb),
+        (u'simultaneousCSI-ReportsAllCC', _CA_ParametersNR_v1540_simultaneousCSI_ReportsAllCC),
+        (u'dualPA-Architecture', _CA_ParametersNR_v1540_dualPA_Architecture),
+        ])
+    CA_ParametersNR_v1540._ext = None
+    
+    #-----< CA-ParametersNR-v1550 >-----#
+    CA_ParametersNR_v1550 = SEQ(name=u'CA-ParametersNR-v1550', mode=MODE_TYPE)
+    _CA_ParametersNR_v1550_aperiodic_CSI_diffSCS = ENUM(name=u'aperiodic-CSI-diffSCS', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _CA_ParametersNR_v1550_aperiodic_CSI_diffSCS._cont = ASN1Dict([(u'supported', 0)])
+    _CA_ParametersNR_v1550_aperiodic_CSI_diffSCS._ext = None
+    CA_ParametersNR_v1550._cont = ASN1Dict([
+        (u'aperiodic-CSI-diffSCS', _CA_ParametersNR_v1550_aperiodic_CSI_diffSCS),
+        ])
+    CA_ParametersNR_v1550._ext = None
+    
+    #-----< CodebookParameters >-----#
+    CodebookParameters = SEQ(name=u'CodebookParameters', mode=MODE_TYPE)
+    _CodebookParameters_type1 = SEQ(name=u'type1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __CodebookParameters_type1_singlePanel = SEQ(name=u'singlePanel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___CodebookParameters_type1_singlePanel_supportedCSI_RS_ResourceList = SEQ_OF(name=u'supportedCSI-RS-ResourceList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____CodebookParameters_type1_singlePanel_supportedCSI_RS_ResourceList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'SupportedCSI-RS-Resource')))
+    ___CodebookParameters_type1_singlePanel_supportedCSI_RS_ResourceList._cont = ____CodebookParameters_type1_singlePanel_supportedCSI_RS_ResourceList__item_
+    ___CodebookParameters_type1_singlePanel_supportedCSI_RS_ResourceList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=7)], ev=None, er=[])
+    ___CodebookParameters_type1_singlePanel_modes = ENUM(name=u'modes', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___CodebookParameters_type1_singlePanel_modes._cont = ASN1Dict([(u'mode1', 0), (u'mode1andMode2', 1)])
+    ___CodebookParameters_type1_singlePanel_modes._ext = None
+    ___CodebookParameters_type1_singlePanel_maxNumberCSI_RS_PerResourceSet = INT(name=u'maxNumberCSI-RS-PerResourceSet', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___CodebookParameters_type1_singlePanel_maxNumberCSI_RS_PerResourceSet._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    __CodebookParameters_type1_singlePanel._cont = ASN1Dict([
+        (u'supportedCSI-RS-ResourceList', ___CodebookParameters_type1_singlePanel_supportedCSI_RS_ResourceList),
+        (u'modes', ___CodebookParameters_type1_singlePanel_modes),
+        (u'maxNumberCSI-RS-PerResourceSet', ___CodebookParameters_type1_singlePanel_maxNumberCSI_RS_PerResourceSet),
+        ])
+    __CodebookParameters_type1_singlePanel._ext = None
+    __CodebookParameters_type1_multiPanel = SEQ(name=u'multiPanel', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ___CodebookParameters_type1_multiPanel_supportedCSI_RS_ResourceList = SEQ_OF(name=u'supportedCSI-RS-ResourceList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____CodebookParameters_type1_multiPanel_supportedCSI_RS_ResourceList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'SupportedCSI-RS-Resource')))
+    ___CodebookParameters_type1_multiPanel_supportedCSI_RS_ResourceList._cont = ____CodebookParameters_type1_multiPanel_supportedCSI_RS_ResourceList__item_
+    ___CodebookParameters_type1_multiPanel_supportedCSI_RS_ResourceList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=7)], ev=None, er=[])
+    ___CodebookParameters_type1_multiPanel_modes = ENUM(name=u'modes', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___CodebookParameters_type1_multiPanel_modes._cont = ASN1Dict([(u'mode1', 0), (u'mode2', 1), (u'both', 2)])
+    ___CodebookParameters_type1_multiPanel_modes._ext = None
+    ___CodebookParameters_type1_multiPanel_nrofPanels = ENUM(name=u'nrofPanels', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___CodebookParameters_type1_multiPanel_nrofPanels._cont = ASN1Dict([(u'n2', 0), (u'n4', 1)])
+    ___CodebookParameters_type1_multiPanel_nrofPanels._ext = None
+    ___CodebookParameters_type1_multiPanel_maxNumberCSI_RS_PerResourceSet = INT(name=u'maxNumberCSI-RS-PerResourceSet', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___CodebookParameters_type1_multiPanel_maxNumberCSI_RS_PerResourceSet._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    __CodebookParameters_type1_multiPanel._cont = ASN1Dict([
+        (u'supportedCSI-RS-ResourceList', ___CodebookParameters_type1_multiPanel_supportedCSI_RS_ResourceList),
+        (u'modes', ___CodebookParameters_type1_multiPanel_modes),
+        (u'nrofPanels', ___CodebookParameters_type1_multiPanel_nrofPanels),
+        (u'maxNumberCSI-RS-PerResourceSet', ___CodebookParameters_type1_multiPanel_maxNumberCSI_RS_PerResourceSet),
+        ])
+    __CodebookParameters_type1_multiPanel._ext = None
+    _CodebookParameters_type1._cont = ASN1Dict([
+        (u'singlePanel', __CodebookParameters_type1_singlePanel),
+        (u'multiPanel', __CodebookParameters_type1_multiPanel),
+        ])
+    _CodebookParameters_type1._ext = None
+    _CodebookParameters_type2 = SEQ(name=u'type2', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CodebookParameters_type2_supportedCSI_RS_ResourceList = SEQ_OF(name=u'supportedCSI-RS-ResourceList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___CodebookParameters_type2_supportedCSI_RS_ResourceList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'SupportedCSI-RS-Resource')))
+    __CodebookParameters_type2_supportedCSI_RS_ResourceList._cont = ___CodebookParameters_type2_supportedCSI_RS_ResourceList__item_
+    __CodebookParameters_type2_supportedCSI_RS_ResourceList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=7)], ev=None, er=[])
+    __CodebookParameters_type2_parameterLx = INT(name=u'parameterLx', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __CodebookParameters_type2_parameterLx._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=4)], ev=None, er=[])
+    __CodebookParameters_type2_amplitudeScalingType = ENUM(name=u'amplitudeScalingType', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __CodebookParameters_type2_amplitudeScalingType._cont = ASN1Dict([(u'wideband', 0), (u'widebandAndSubband', 1)])
+    __CodebookParameters_type2_amplitudeScalingType._ext = None
+    __CodebookParameters_type2_amplitudeSubsetRestriction = ENUM(name=u'amplitudeSubsetRestriction', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CodebookParameters_type2_amplitudeSubsetRestriction._cont = ASN1Dict([(u'supported', 0)])
+    __CodebookParameters_type2_amplitudeSubsetRestriction._ext = None
+    _CodebookParameters_type2._cont = ASN1Dict([
+        (u'supportedCSI-RS-ResourceList', __CodebookParameters_type2_supportedCSI_RS_ResourceList),
+        (u'parameterLx', __CodebookParameters_type2_parameterLx),
+        (u'amplitudeScalingType', __CodebookParameters_type2_amplitudeScalingType),
+        (u'amplitudeSubsetRestriction', __CodebookParameters_type2_amplitudeSubsetRestriction),
+        ])
+    _CodebookParameters_type2._ext = None
+    _CodebookParameters_type2_PortSelection = SEQ(name=u'type2-PortSelection', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CodebookParameters_type2_PortSelection_supportedCSI_RS_ResourceList = SEQ_OF(name=u'supportedCSI-RS-ResourceList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___CodebookParameters_type2_PortSelection_supportedCSI_RS_ResourceList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'SupportedCSI-RS-Resource')))
+    __CodebookParameters_type2_PortSelection_supportedCSI_RS_ResourceList._cont = ___CodebookParameters_type2_PortSelection_supportedCSI_RS_ResourceList__item_
+    __CodebookParameters_type2_PortSelection_supportedCSI_RS_ResourceList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=7)], ev=None, er=[])
+    __CodebookParameters_type2_PortSelection_parameterLx = INT(name=u'parameterLx', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __CodebookParameters_type2_PortSelection_parameterLx._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=4)], ev=None, er=[])
+    __CodebookParameters_type2_PortSelection_amplitudeScalingType = ENUM(name=u'amplitudeScalingType', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __CodebookParameters_type2_PortSelection_amplitudeScalingType._cont = ASN1Dict([(u'wideband', 0), (u'widebandAndSubband', 1)])
+    __CodebookParameters_type2_PortSelection_amplitudeScalingType._ext = None
+    _CodebookParameters_type2_PortSelection._cont = ASN1Dict([
+        (u'supportedCSI-RS-ResourceList', __CodebookParameters_type2_PortSelection_supportedCSI_RS_ResourceList),
+        (u'parameterLx', __CodebookParameters_type2_PortSelection_parameterLx),
+        (u'amplitudeScalingType', __CodebookParameters_type2_PortSelection_amplitudeScalingType),
+        ])
+    _CodebookParameters_type2_PortSelection._ext = None
+    CodebookParameters._cont = ASN1Dict([
+        (u'type1', _CodebookParameters_type1),
+        (u'type2', _CodebookParameters_type2),
+        (u'type2-PortSelection', _CodebookParameters_type2_PortSelection),
+        ])
+    CodebookParameters._ext = None
+    
+    #-----< SupportedCSI-RS-Resource >-----#
+    SupportedCSI_RS_Resource = SEQ(name=u'SupportedCSI-RS-Resource', mode=MODE_TYPE)
+    _SupportedCSI_RS_Resource_maxNumberTxPortsPerResource = ENUM(name=u'maxNumberTxPortsPerResource', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SupportedCSI_RS_Resource_maxNumberTxPortsPerResource._cont = ASN1Dict([(u'p2', 0), (u'p4', 1), (u'p8', 2), (u'p12', 3), (u'p16', 4), (u'p24', 5), (u'p32', 6)])
+    _SupportedCSI_RS_Resource_maxNumberTxPortsPerResource._ext = None
+    _SupportedCSI_RS_Resource_maxNumberResourcesPerBand = INT(name=u'maxNumberResourcesPerBand', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SupportedCSI_RS_Resource_maxNumberResourcesPerBand._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    _SupportedCSI_RS_Resource_totalNumberTxPortsPerBand = INT(name=u'totalNumberTxPortsPerBand', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SupportedCSI_RS_Resource_totalNumberTxPortsPerBand._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=256)], ev=None, er=[])
+    SupportedCSI_RS_Resource._cont = ASN1Dict([
+        (u'maxNumberTxPortsPerResource', _SupportedCSI_RS_Resource_maxNumberTxPortsPerResource),
+        (u'maxNumberResourcesPerBand', _SupportedCSI_RS_Resource_maxNumberResourcesPerBand),
+        (u'totalNumberTxPortsPerBand', _SupportedCSI_RS_Resource_totalNumberTxPortsPerBand),
+        ])
+    SupportedCSI_RS_Resource._ext = None
+    
     #-----< FeatureSetCombination >-----#
     FeatureSetCombination = SEQ_OF(name=u'FeatureSetCombination', mode=MODE_TYPE)
     _FeatureSetCombination__item_ = SEQ_OF(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'FeatureSetsPerBand')))
@@ -11497,18 +11916,18 @@ class NR_RRC_Definitions:
     _FeatureSetDownlink_csi_RS_MeasSCellWithoutSSB = ENUM(name=u'csi-RS-MeasSCellWithoutSSB', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _FeatureSetDownlink_csi_RS_MeasSCellWithoutSSB._cont = ASN1Dict([(u'supported', 0)])
     _FeatureSetDownlink_csi_RS_MeasSCellWithoutSSB._ext = None
-    _FeatureSetDownlink_srs_AssocCSI_RS = ENUM(name=u'srs-AssocCSI-RS', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _FeatureSetDownlink_srs_AssocCSI_RS._cont = ASN1Dict([(u'supported', 0)])
-    _FeatureSetDownlink_srs_AssocCSI_RS._ext = None
+    _FeatureSetDownlink_dummy1 = ENUM(name=u'dummy1', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _FeatureSetDownlink_dummy1._cont = ASN1Dict([(u'supported', 0)])
+    _FeatureSetDownlink_dummy1._ext = None
     _FeatureSetDownlink_type1_3_CSS = ENUM(name=u'type1-3-CSS', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _FeatureSetDownlink_type1_3_CSS._cont = ASN1Dict([(u'supported', 0)])
     _FeatureSetDownlink_type1_3_CSS._ext = None
     _FeatureSetDownlink_pdcch_MonitoringAnyOccasions = ENUM(name=u'pdcch-MonitoringAnyOccasions', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _FeatureSetDownlink_pdcch_MonitoringAnyOccasions._cont = ASN1Dict([(u'withoutDCI-Gap', 0), (u'withDCI-Gap', 1)])
     _FeatureSetDownlink_pdcch_MonitoringAnyOccasions._ext = None
-    _FeatureSetDownlink_pdcch_MonitoringAnyOccasionsWithSpanGap = ENUM(name=u'pdcch-MonitoringAnyOccasionsWithSpanGap', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _FeatureSetDownlink_pdcch_MonitoringAnyOccasionsWithSpanGap._cont = ASN1Dict([(u'supported', 0)])
-    _FeatureSetDownlink_pdcch_MonitoringAnyOccasionsWithSpanGap._ext = None
+    _FeatureSetDownlink_dummy2 = ENUM(name=u'dummy2', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _FeatureSetDownlink_dummy2._cont = ASN1Dict([(u'supported', 0)])
+    _FeatureSetDownlink_dummy2._ext = None
     _FeatureSetDownlink_ue_SpecificUL_DL_Assignment = ENUM(name=u'ue-SpecificUL-DL-Assignment', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _FeatureSetDownlink_ue_SpecificUL_DL_Assignment._cont = ASN1Dict([(u'supported', 0)])
     _FeatureSetDownlink_ue_SpecificUL_DL_Assignment._ext = None
@@ -11519,51 +11938,51 @@ class NR_RRC_Definitions:
     __FeatureSetDownlink_timeDurationForQCL_scs_60kHz = ENUM(name=u'scs-60kHz', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __FeatureSetDownlink_timeDurationForQCL_scs_60kHz._cont = ASN1Dict([(u's7', 0), (u's14', 1), (u's28', 2)])
     __FeatureSetDownlink_timeDurationForQCL_scs_60kHz._ext = None
-    __FeatureSetDownlink_timeDurationForQCL_sch_120kHz = ENUM(name=u'sch-120kHz', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __FeatureSetDownlink_timeDurationForQCL_sch_120kHz._cont = ASN1Dict([(u's14', 0), (u's28', 1)])
-    __FeatureSetDownlink_timeDurationForQCL_sch_120kHz._ext = None
+    __FeatureSetDownlink_timeDurationForQCL_scs_120kHz = ENUM(name=u'scs-120kHz', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetDownlink_timeDurationForQCL_scs_120kHz._cont = ASN1Dict([(u's14', 0), (u's28', 1)])
+    __FeatureSetDownlink_timeDurationForQCL_scs_120kHz._ext = None
     _FeatureSetDownlink_timeDurationForQCL._cont = ASN1Dict([
         (u'scs-60kHz', __FeatureSetDownlink_timeDurationForQCL_scs_60kHz),
-        (u'sch-120kHz', __FeatureSetDownlink_timeDurationForQCL_sch_120kHz),
+        (u'scs-120kHz', __FeatureSetDownlink_timeDurationForQCL_scs_120kHz),
         ])
     _FeatureSetDownlink_timeDurationForQCL._ext = None
-    _FeatureSetDownlink_pdsch_DifferentTB_PerSlot = SEQ(name=u'pdsch-DifferentTB-PerSlot', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __FeatureSetDownlink_pdsch_DifferentTB_PerSlot_scs_15kHz = ENUM(name=u'scs-15kHz', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __FeatureSetDownlink_pdsch_DifferentTB_PerSlot_scs_15kHz._cont = ASN1Dict([(u'upto2', 0), (u'upto4', 1), (u'upto7', 2)])
-    __FeatureSetDownlink_pdsch_DifferentTB_PerSlot_scs_15kHz._ext = None
-    __FeatureSetDownlink_pdsch_DifferentTB_PerSlot_scs_30kHz = ENUM(name=u'scs-30kHz', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __FeatureSetDownlink_pdsch_DifferentTB_PerSlot_scs_30kHz._cont = ASN1Dict([(u'upto2', 0), (u'upto4', 1), (u'upto7', 2)])
-    __FeatureSetDownlink_pdsch_DifferentTB_PerSlot_scs_30kHz._ext = None
-    __FeatureSetDownlink_pdsch_DifferentTB_PerSlot_scs_60kHz = ENUM(name=u'scs-60kHz', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __FeatureSetDownlink_pdsch_DifferentTB_PerSlot_scs_60kHz._cont = ASN1Dict([(u'upto2', 0), (u'upto4', 1), (u'upto7', 2)])
-    __FeatureSetDownlink_pdsch_DifferentTB_PerSlot_scs_60kHz._ext = None
-    __FeatureSetDownlink_pdsch_DifferentTB_PerSlot_scs_120kHz = ENUM(name=u'scs-120kHz', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __FeatureSetDownlink_pdsch_DifferentTB_PerSlot_scs_120kHz._cont = ASN1Dict([(u'upto2', 0), (u'upto4', 1), (u'upto7', 2)])
-    __FeatureSetDownlink_pdsch_DifferentTB_PerSlot_scs_120kHz._ext = None
-    _FeatureSetDownlink_pdsch_DifferentTB_PerSlot._cont = ASN1Dict([
-        (u'scs-15kHz', __FeatureSetDownlink_pdsch_DifferentTB_PerSlot_scs_15kHz),
-        (u'scs-30kHz', __FeatureSetDownlink_pdsch_DifferentTB_PerSlot_scs_30kHz),
-        (u'scs-60kHz', __FeatureSetDownlink_pdsch_DifferentTB_PerSlot_scs_60kHz),
-        (u'scs-120kHz', __FeatureSetDownlink_pdsch_DifferentTB_PerSlot_scs_120kHz),
+    _FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot = SEQ(name=u'pdsch-ProcessingType1-DifferentTB-PerSlot', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot_scs_15kHz = ENUM(name=u'scs-15kHz', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot_scs_15kHz._cont = ASN1Dict([(u'upto2', 0), (u'upto4', 1), (u'upto7', 2)])
+    __FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot_scs_15kHz._ext = None
+    __FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot_scs_30kHz = ENUM(name=u'scs-30kHz', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot_scs_30kHz._cont = ASN1Dict([(u'upto2', 0), (u'upto4', 1), (u'upto7', 2)])
+    __FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot_scs_30kHz._ext = None
+    __FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot_scs_60kHz = ENUM(name=u'scs-60kHz', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot_scs_60kHz._cont = ASN1Dict([(u'upto2', 0), (u'upto4', 1), (u'upto7', 2)])
+    __FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot_scs_60kHz._ext = None
+    __FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot_scs_120kHz = ENUM(name=u'scs-120kHz', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot_scs_120kHz._cont = ASN1Dict([(u'upto2', 0), (u'upto4', 1), (u'upto7', 2)])
+    __FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot_scs_120kHz._ext = None
+    _FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot._cont = ASN1Dict([
+        (u'scs-15kHz', __FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot_scs_15kHz),
+        (u'scs-30kHz', __FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot_scs_30kHz),
+        (u'scs-60kHz', __FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot_scs_60kHz),
+        (u'scs-120kHz', __FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot_scs_120kHz),
         ])
-    _FeatureSetDownlink_pdsch_DifferentTB_PerSlot._ext = None
-    _FeatureSetDownlink_csi_RS_IM_ReceptionForFeedback = SEQ(name=u'csi-RS-IM-ReceptionForFeedback', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CSI-RS-IM-ReceptionForFeedback')), opt=True)
-    _FeatureSetDownlink_typeI_SinglePanelCodebookList = SEQ_OF(name=u'typeI-SinglePanelCodebookList', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __FeatureSetDownlink_typeI_SinglePanelCodebookList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'TypeI-SinglePanelCodebook')))
-    _FeatureSetDownlink_typeI_SinglePanelCodebookList._cont = __FeatureSetDownlink_typeI_SinglePanelCodebookList__item_
-    _FeatureSetDownlink_typeI_SinglePanelCodebookList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    _FeatureSetDownlink_typeI_MultiPanelCodebookList = SEQ_OF(name=u'typeI-MultiPanelCodebookList', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __FeatureSetDownlink_typeI_MultiPanelCodebookList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'TypeI-MultiPanelCodebook')))
-    _FeatureSetDownlink_typeI_MultiPanelCodebookList._cont = __FeatureSetDownlink_typeI_MultiPanelCodebookList__item_
-    _FeatureSetDownlink_typeI_MultiPanelCodebookList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    _FeatureSetDownlink_typeII_CodebookList = SEQ_OF(name=u'typeII-CodebookList', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __FeatureSetDownlink_typeII_CodebookList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'TypeII-Codebook')))
-    _FeatureSetDownlink_typeII_CodebookList._cont = __FeatureSetDownlink_typeII_CodebookList__item_
-    _FeatureSetDownlink_typeII_CodebookList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    _FeatureSetDownlink_typeII_CodebookPortSelectionList = SEQ_OF(name=u'typeII-CodebookPortSelectionList', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __FeatureSetDownlink_typeII_CodebookPortSelectionList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'TypeII-CodebookPortSelection')))
-    _FeatureSetDownlink_typeII_CodebookPortSelectionList._cont = __FeatureSetDownlink_typeII_CodebookPortSelectionList__item_
-    _FeatureSetDownlink_typeII_CodebookPortSelectionList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    _FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot._ext = None
+    _FeatureSetDownlink_dummy3 = SEQ(name=u'dummy3', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'DummyA')), opt=True)
+    _FeatureSetDownlink_dummy4 = SEQ_OF(name=u'dummy4', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetDownlink_dummy4__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'DummyB')))
+    _FeatureSetDownlink_dummy4._cont = __FeatureSetDownlink_dummy4__item_
+    _FeatureSetDownlink_dummy4._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    _FeatureSetDownlink_dummy5 = SEQ_OF(name=u'dummy5', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetDownlink_dummy5__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'DummyC')))
+    _FeatureSetDownlink_dummy5._cont = __FeatureSetDownlink_dummy5__item_
+    _FeatureSetDownlink_dummy5._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    _FeatureSetDownlink_dummy6 = SEQ_OF(name=u'dummy6', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetDownlink_dummy6__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'DummyD')))
+    _FeatureSetDownlink_dummy6._cont = __FeatureSetDownlink_dummy6__item_
+    _FeatureSetDownlink_dummy6._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    _FeatureSetDownlink_dummy7 = SEQ_OF(name=u'dummy7', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetDownlink_dummy7__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'DummyE')))
+    _FeatureSetDownlink_dummy7._cont = __FeatureSetDownlink_dummy7__item_
+    _FeatureSetDownlink_dummy7._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
     FeatureSetDownlink._cont = ASN1Dict([
         (u'featureSetListPerDownlinkCC', _FeatureSetDownlink_featureSetListPerDownlinkCC),
         (u'intraBandFreqSeparationDL', _FeatureSetDownlink_intraBandFreqSeparationDL),
@@ -11571,152 +11990,223 @@ class NR_RRC_Definitions:
         (u'crossCarrierScheduling-OtherSCS', _FeatureSetDownlink_crossCarrierScheduling_OtherSCS),
         (u'scellWithoutSSB', _FeatureSetDownlink_scellWithoutSSB),
         (u'csi-RS-MeasSCellWithoutSSB', _FeatureSetDownlink_csi_RS_MeasSCellWithoutSSB),
-        (u'srs-AssocCSI-RS', _FeatureSetDownlink_srs_AssocCSI_RS),
+        (u'dummy1', _FeatureSetDownlink_dummy1),
         (u'type1-3-CSS', _FeatureSetDownlink_type1_3_CSS),
         (u'pdcch-MonitoringAnyOccasions', _FeatureSetDownlink_pdcch_MonitoringAnyOccasions),
-        (u'pdcch-MonitoringAnyOccasionsWithSpanGap', _FeatureSetDownlink_pdcch_MonitoringAnyOccasionsWithSpanGap),
+        (u'dummy2', _FeatureSetDownlink_dummy2),
         (u'ue-SpecificUL-DL-Assignment', _FeatureSetDownlink_ue_SpecificUL_DL_Assignment),
         (u'searchSpaceSharingCA-DL', _FeatureSetDownlink_searchSpaceSharingCA_DL),
         (u'timeDurationForQCL', _FeatureSetDownlink_timeDurationForQCL),
-        (u'pdsch-DifferentTB-PerSlot', _FeatureSetDownlink_pdsch_DifferentTB_PerSlot),
-        (u'csi-RS-IM-ReceptionForFeedback', _FeatureSetDownlink_csi_RS_IM_ReceptionForFeedback),
-        (u'typeI-SinglePanelCodebookList', _FeatureSetDownlink_typeI_SinglePanelCodebookList),
-        (u'typeI-MultiPanelCodebookList', _FeatureSetDownlink_typeI_MultiPanelCodebookList),
-        (u'typeII-CodebookList', _FeatureSetDownlink_typeII_CodebookList),
-        (u'typeII-CodebookPortSelectionList', _FeatureSetDownlink_typeII_CodebookPortSelectionList),
+        (u'pdsch-ProcessingType1-DifferentTB-PerSlot', _FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot),
+        (u'dummy3', _FeatureSetDownlink_dummy3),
+        (u'dummy4', _FeatureSetDownlink_dummy4),
+        (u'dummy5', _FeatureSetDownlink_dummy5),
+        (u'dummy6', _FeatureSetDownlink_dummy6),
+        (u'dummy7', _FeatureSetDownlink_dummy7),
         ])
     FeatureSetDownlink._ext = None
     
-    #-----< CSI-RS-IM-ReceptionForFeedback >-----#
-    CSI_RS_IM_ReceptionForFeedback = SEQ(name=u'CSI-RS-IM-ReceptionForFeedback', mode=MODE_TYPE)
-    _CSI_RS_IM_ReceptionForFeedback_maxNumberNZP_CSI_RS_PerCC = INT(name=u'maxNumberNZP-CSI-RS-PerCC', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _CSI_RS_IM_ReceptionForFeedback_maxNumberNZP_CSI_RS_PerCC._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
-    _CSI_RS_IM_ReceptionForFeedback_maxNumberPortsAcrossNZP_CSI_RS_PerCC = ENUM(name=u'maxNumberPortsAcrossNZP-CSI-RS-PerCC', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _CSI_RS_IM_ReceptionForFeedback_maxNumberPortsAcrossNZP_CSI_RS_PerCC._cont = ASN1Dict([(u'p2', 0), (u'p4', 1), (u'p8', 2), (u'p12', 3), (u'p16', 4), (u'p24', 5), (u'p32', 6), (u'p40', 7), (u'p48', 8), (u'p56', 9), (u'p64', 10), (u'p72', 11), (u'p80', 12), (u'p88', 13), (u'p96', 14), (u'p104', 15), (u'p112', 16), (u'p120', 17), (u'p128', 18), (u'p136', 19), (u'p144', 20), (u'p152', 21), (u'p160', 22), (u'p168', 23), (u'p176', 24), (u'p184', 25), (u'p192', 26), (u'p200', 27), (u'p208', 28), (u'p216', 29), (u'p224', 30), (u'p232', 31), (u'p240', 32), (u'p248', 33), (u'p256', 34)])
-    _CSI_RS_IM_ReceptionForFeedback_maxNumberPortsAcrossNZP_CSI_RS_PerCC._ext = None
-    _CSI_RS_IM_ReceptionForFeedback_maxNumberCS_IM_PerCC = ENUM(name=u'maxNumberCS-IM-PerCC', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _CSI_RS_IM_ReceptionForFeedback_maxNumberCS_IM_PerCC._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2), (u'n8', 3), (u'n16', 4), (u'n32', 5)])
-    _CSI_RS_IM_ReceptionForFeedback_maxNumberCS_IM_PerCC._ext = None
-    _CSI_RS_IM_ReceptionForFeedback_maxNumberSimultaneousCSI_RS_ActBWP_AllCC = ENUM(name=u'maxNumberSimultaneousCSI-RS-ActBWP-AllCC', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _CSI_RS_IM_ReceptionForFeedback_maxNumberSimultaneousCSI_RS_ActBWP_AllCC._cont = ASN1Dict([(u'n5', 0), (u'n6', 1), (u'n7', 2), (u'n8', 3), (u'n9', 4), (u'n10', 5), (u'n12', 6), (u'n14', 7), (u'n16', 8), (u'n18', 9), (u'n20', 10), (u'n22', 11), (u'n24', 12), (u'n26', 13), (u'n28', 14), (u'n30', 15), (u'n32', 16), (u'n34', 17), (u'n36', 18), (u'n38', 19), (u'n40', 20), (u'n42', 21), (u'n44', 22), (u'n46', 23), (u'n48', 24), (u'n50', 25), (u'n52', 26), (u'n54', 27), (u'n56', 28), (u'n58', 29), (u'n60', 30), (u'n62', 31), (u'n64', 32)])
-    _CSI_RS_IM_ReceptionForFeedback_maxNumberSimultaneousCSI_RS_ActBWP_AllCC._ext = None
-    _CSI_RS_IM_ReceptionForFeedback_totalNumberPortsSimultaneousCSI_RS_ActBWP_AllCC = ENUM(name=u'totalNumberPortsSimultaneousCSI-RS-ActBWP-AllCC', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _CSI_RS_IM_ReceptionForFeedback_totalNumberPortsSimultaneousCSI_RS_ActBWP_AllCC._cont = ASN1Dict([(u'p8', 0), (u'p12', 1), (u'p16', 2), (u'p24', 3), (u'p32', 4), (u'p40', 5), (u'p48', 6), (u'p56', 7), (u'p64', 8), (u'p72', 9), (u'p80', 10), (u'p88', 11), (u'p96', 12), (u'p104', 13), (u'p112', 14), (u'p120', 15), (u'p128', 16), (u'p136', 17), (u'p144', 18), (u'p152', 19), (u'p160', 20), (u'p168', 21), (u'p176', 22), (u'p184', 23), (u'p192', 24), (u'p200', 25), (u'p208', 26), (u'p216', 27), (u'p224', 28), (u'p232', 29), (u'p240', 30), (u'p248', 31), (u'p256', 32)])
-    _CSI_RS_IM_ReceptionForFeedback_totalNumberPortsSimultaneousCSI_RS_ActBWP_AllCC._ext = None
-    CSI_RS_IM_ReceptionForFeedback._cont = ASN1Dict([
-        (u'maxNumberNZP-CSI-RS-PerCC', _CSI_RS_IM_ReceptionForFeedback_maxNumberNZP_CSI_RS_PerCC),
-        (u'maxNumberPortsAcrossNZP-CSI-RS-PerCC', _CSI_RS_IM_ReceptionForFeedback_maxNumberPortsAcrossNZP_CSI_RS_PerCC),
-        (u'maxNumberCS-IM-PerCC', _CSI_RS_IM_ReceptionForFeedback_maxNumberCS_IM_PerCC),
-        (u'maxNumberSimultaneousCSI-RS-ActBWP-AllCC', _CSI_RS_IM_ReceptionForFeedback_maxNumberSimultaneousCSI_RS_ActBWP_AllCC),
-        (u'totalNumberPortsSimultaneousCSI-RS-ActBWP-AllCC', _CSI_RS_IM_ReceptionForFeedback_totalNumberPortsSimultaneousCSI_RS_ActBWP_AllCC),
+    #-----< FeatureSetDownlink-v1540 >-----#
+    FeatureSetDownlink_v1540 = SEQ(name=u'FeatureSetDownlink-v1540', mode=MODE_TYPE)
+    _FeatureSetDownlink_v1540_oneFL_DMRS_TwoAdditionalDMRS_DL = ENUM(name=u'oneFL-DMRS-TwoAdditionalDMRS-DL', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _FeatureSetDownlink_v1540_oneFL_DMRS_TwoAdditionalDMRS_DL._cont = ASN1Dict([(u'supported', 0)])
+    _FeatureSetDownlink_v1540_oneFL_DMRS_TwoAdditionalDMRS_DL._ext = None
+    _FeatureSetDownlink_v1540_additionalDMRS_DL_Alt = ENUM(name=u'additionalDMRS-DL-Alt', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _FeatureSetDownlink_v1540_additionalDMRS_DL_Alt._cont = ASN1Dict([(u'supported', 0)])
+    _FeatureSetDownlink_v1540_additionalDMRS_DL_Alt._ext = None
+    _FeatureSetDownlink_v1540_twoFL_DMRS_TwoAdditionalDMRS_DL = ENUM(name=u'twoFL-DMRS-TwoAdditionalDMRS-DL', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _FeatureSetDownlink_v1540_twoFL_DMRS_TwoAdditionalDMRS_DL._cont = ASN1Dict([(u'supported', 0)])
+    _FeatureSetDownlink_v1540_twoFL_DMRS_TwoAdditionalDMRS_DL._ext = None
+    _FeatureSetDownlink_v1540_oneFL_DMRS_ThreeAdditionalDMRS_DL = ENUM(name=u'oneFL-DMRS-ThreeAdditionalDMRS-DL', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _FeatureSetDownlink_v1540_oneFL_DMRS_ThreeAdditionalDMRS_DL._cont = ASN1Dict([(u'supported', 0)])
+    _FeatureSetDownlink_v1540_oneFL_DMRS_ThreeAdditionalDMRS_DL._ext = None
+    _FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap = SEQ(name=u'pdcch-MonitoringAnyOccasionsWithSpanGap', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap_scs_15kHz = ENUM(name=u'scs-15kHz', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap_scs_15kHz._cont = ASN1Dict([(u'set1', 0), (u'set2', 1), (u'set3', 2)])
+    __FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap_scs_15kHz._ext = None
+    __FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap_scs_30kHz = ENUM(name=u'scs-30kHz', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap_scs_30kHz._cont = ASN1Dict([(u'set1', 0), (u'set2', 1), (u'set3', 2)])
+    __FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap_scs_30kHz._ext = None
+    __FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap_scs_60kHz = ENUM(name=u'scs-60kHz', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap_scs_60kHz._cont = ASN1Dict([(u'set1', 0), (u'set2', 1), (u'set3', 2)])
+    __FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap_scs_60kHz._ext = None
+    __FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap_scs_120kHz = ENUM(name=u'scs-120kHz', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap_scs_120kHz._cont = ASN1Dict([(u'set1', 0), (u'set2', 1), (u'set3', 2)])
+    __FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap_scs_120kHz._ext = None
+    _FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap._cont = ASN1Dict([
+        (u'scs-15kHz', __FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap_scs_15kHz),
+        (u'scs-30kHz', __FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap_scs_30kHz),
+        (u'scs-60kHz', __FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap_scs_60kHz),
+        (u'scs-120kHz', __FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap_scs_120kHz),
         ])
-    CSI_RS_IM_ReceptionForFeedback._ext = None
+    _FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap._ext = None
+    _FeatureSetDownlink_v1540_pdsch_SeparationWithGap = ENUM(name=u'pdsch-SeparationWithGap', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _FeatureSetDownlink_v1540_pdsch_SeparationWithGap._cont = ASN1Dict([(u'supported', 0)])
+    _FeatureSetDownlink_v1540_pdsch_SeparationWithGap._ext = None
+    _FeatureSetDownlink_v1540_pdsch_ProcessingType2 = SEQ(name=u'pdsch-ProcessingType2', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetDownlink_v1540_pdsch_ProcessingType2_scs_15kHz = SEQ(name=u'scs-15kHz', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ProcessingParameters')), opt=True)
+    __FeatureSetDownlink_v1540_pdsch_ProcessingType2_scs_30kHz = SEQ(name=u'scs-30kHz', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ProcessingParameters')), opt=True)
+    __FeatureSetDownlink_v1540_pdsch_ProcessingType2_scs_60kHz = SEQ(name=u'scs-60kHz', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ProcessingParameters')), opt=True)
+    _FeatureSetDownlink_v1540_pdsch_ProcessingType2._cont = ASN1Dict([
+        (u'scs-15kHz', __FeatureSetDownlink_v1540_pdsch_ProcessingType2_scs_15kHz),
+        (u'scs-30kHz', __FeatureSetDownlink_v1540_pdsch_ProcessingType2_scs_30kHz),
+        (u'scs-60kHz', __FeatureSetDownlink_v1540_pdsch_ProcessingType2_scs_60kHz),
+        ])
+    _FeatureSetDownlink_v1540_pdsch_ProcessingType2._ext = None
+    _FeatureSetDownlink_v1540_pdsch_ProcessingType2_Limited = SEQ(name=u'pdsch-ProcessingType2-Limited', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetDownlink_v1540_pdsch_ProcessingType2_Limited_differentTB_PerSlot_SCS_30kHz = ENUM(name=u'differentTB-PerSlot-SCS-30kHz', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __FeatureSetDownlink_v1540_pdsch_ProcessingType2_Limited_differentTB_PerSlot_SCS_30kHz._cont = ASN1Dict([(u'upto1', 0), (u'upto2', 1), (u'upto4', 2), (u'upto7', 3)])
+    __FeatureSetDownlink_v1540_pdsch_ProcessingType2_Limited_differentTB_PerSlot_SCS_30kHz._ext = None
+    _FeatureSetDownlink_v1540_pdsch_ProcessingType2_Limited._cont = ASN1Dict([
+        (u'differentTB-PerSlot-SCS-30kHz', __FeatureSetDownlink_v1540_pdsch_ProcessingType2_Limited_differentTB_PerSlot_SCS_30kHz),
+        ])
+    _FeatureSetDownlink_v1540_pdsch_ProcessingType2_Limited._ext = None
+    _FeatureSetDownlink_v1540_dl_MCS_TableAlt_DynamicIndication = ENUM(name=u'dl-MCS-TableAlt-DynamicIndication', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _FeatureSetDownlink_v1540_dl_MCS_TableAlt_DynamicIndication._cont = ASN1Dict([(u'supported', 0)])
+    _FeatureSetDownlink_v1540_dl_MCS_TableAlt_DynamicIndication._ext = None
+    FeatureSetDownlink_v1540._cont = ASN1Dict([
+        (u'oneFL-DMRS-TwoAdditionalDMRS-DL', _FeatureSetDownlink_v1540_oneFL_DMRS_TwoAdditionalDMRS_DL),
+        (u'additionalDMRS-DL-Alt', _FeatureSetDownlink_v1540_additionalDMRS_DL_Alt),
+        (u'twoFL-DMRS-TwoAdditionalDMRS-DL', _FeatureSetDownlink_v1540_twoFL_DMRS_TwoAdditionalDMRS_DL),
+        (u'oneFL-DMRS-ThreeAdditionalDMRS-DL', _FeatureSetDownlink_v1540_oneFL_DMRS_ThreeAdditionalDMRS_DL),
+        (u'pdcch-MonitoringAnyOccasionsWithSpanGap', _FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap),
+        (u'pdsch-SeparationWithGap', _FeatureSetDownlink_v1540_pdsch_SeparationWithGap),
+        (u'pdsch-ProcessingType2', _FeatureSetDownlink_v1540_pdsch_ProcessingType2),
+        (u'pdsch-ProcessingType2-Limited', _FeatureSetDownlink_v1540_pdsch_ProcessingType2_Limited),
+        (u'dl-MCS-TableAlt-DynamicIndication', _FeatureSetDownlink_v1540_dl_MCS_TableAlt_DynamicIndication),
+        ])
+    FeatureSetDownlink_v1540._ext = None
     
-    #-----< TypeI-SinglePanelCodebook >-----#
-    TypeI_SinglePanelCodebook = SEQ(name=u'TypeI-SinglePanelCodebook', mode=MODE_TYPE)
-    _TypeI_SinglePanelCodebook_maxNumberTxPortsPerResource = ENUM(name=u'maxNumberTxPortsPerResource', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypeI_SinglePanelCodebook_maxNumberTxPortsPerResource._cont = ASN1Dict([(u'p2', 0), (u'p4', 1), (u'p8', 2), (u'p12', 3), (u'p16', 4), (u'p24', 5), (u'p32', 6)])
-    _TypeI_SinglePanelCodebook_maxNumberTxPortsPerResource._ext = None
-    _TypeI_SinglePanelCodebook_maxNumberResources = INT(name=u'maxNumberResources', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypeI_SinglePanelCodebook_maxNumberResources._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _TypeI_SinglePanelCodebook_totalNumberTxPorts = INT(name=u'totalNumberTxPorts', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypeI_SinglePanelCodebook_totalNumberTxPorts._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=256)], ev=None, er=[])
-    _TypeI_SinglePanelCodebook_supportedCodebookMode = ENUM(name=u'supportedCodebookMode', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypeI_SinglePanelCodebook_supportedCodebookMode._cont = ASN1Dict([(u'mode1', 0), (u'mode1AndMode2', 1)])
-    _TypeI_SinglePanelCodebook_supportedCodebookMode._ext = None
-    _TypeI_SinglePanelCodebook_maxNumberCSI_RS_PerResourceSet = INT(name=u'maxNumberCSI-RS-PerResourceSet', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypeI_SinglePanelCodebook_maxNumberCSI_RS_PerResourceSet._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
-    TypeI_SinglePanelCodebook._cont = ASN1Dict([
-        (u'maxNumberTxPortsPerResource', _TypeI_SinglePanelCodebook_maxNumberTxPortsPerResource),
-        (u'maxNumberResources', _TypeI_SinglePanelCodebook_maxNumberResources),
-        (u'totalNumberTxPorts', _TypeI_SinglePanelCodebook_totalNumberTxPorts),
-        (u'supportedCodebookMode', _TypeI_SinglePanelCodebook_supportedCodebookMode),
-        (u'maxNumberCSI-RS-PerResourceSet', _TypeI_SinglePanelCodebook_maxNumberCSI_RS_PerResourceSet),
+    #-----< DummyA >-----#
+    DummyA = SEQ(name=u'DummyA', mode=MODE_TYPE)
+    _DummyA_maxNumberNZP_CSI_RS_PerCC = INT(name=u'maxNumberNZP-CSI-RS-PerCC', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyA_maxNumberNZP_CSI_RS_PerCC._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    _DummyA_maxNumberPortsAcrossNZP_CSI_RS_PerCC = ENUM(name=u'maxNumberPortsAcrossNZP-CSI-RS-PerCC', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyA_maxNumberPortsAcrossNZP_CSI_RS_PerCC._cont = ASN1Dict([(u'p2', 0), (u'p4', 1), (u'p8', 2), (u'p12', 3), (u'p16', 4), (u'p24', 5), (u'p32', 6), (u'p40', 7), (u'p48', 8), (u'p56', 9), (u'p64', 10), (u'p72', 11), (u'p80', 12), (u'p88', 13), (u'p96', 14), (u'p104', 15), (u'p112', 16), (u'p120', 17), (u'p128', 18), (u'p136', 19), (u'p144', 20), (u'p152', 21), (u'p160', 22), (u'p168', 23), (u'p176', 24), (u'p184', 25), (u'p192', 26), (u'p200', 27), (u'p208', 28), (u'p216', 29), (u'p224', 30), (u'p232', 31), (u'p240', 32), (u'p248', 33), (u'p256', 34)])
+    _DummyA_maxNumberPortsAcrossNZP_CSI_RS_PerCC._ext = None
+    _DummyA_maxNumberCS_IM_PerCC = ENUM(name=u'maxNumberCS-IM-PerCC', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyA_maxNumberCS_IM_PerCC._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2), (u'n8', 3), (u'n16', 4), (u'n32', 5)])
+    _DummyA_maxNumberCS_IM_PerCC._ext = None
+    _DummyA_maxNumberSimultaneousCSI_RS_ActBWP_AllCC = ENUM(name=u'maxNumberSimultaneousCSI-RS-ActBWP-AllCC', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyA_maxNumberSimultaneousCSI_RS_ActBWP_AllCC._cont = ASN1Dict([(u'n5', 0), (u'n6', 1), (u'n7', 2), (u'n8', 3), (u'n9', 4), (u'n10', 5), (u'n12', 6), (u'n14', 7), (u'n16', 8), (u'n18', 9), (u'n20', 10), (u'n22', 11), (u'n24', 12), (u'n26', 13), (u'n28', 14), (u'n30', 15), (u'n32', 16), (u'n34', 17), (u'n36', 18), (u'n38', 19), (u'n40', 20), (u'n42', 21), (u'n44', 22), (u'n46', 23), (u'n48', 24), (u'n50', 25), (u'n52', 26), (u'n54', 27), (u'n56', 28), (u'n58', 29), (u'n60', 30), (u'n62', 31), (u'n64', 32)])
+    _DummyA_maxNumberSimultaneousCSI_RS_ActBWP_AllCC._ext = None
+    _DummyA_totalNumberPortsSimultaneousCSI_RS_ActBWP_AllCC = ENUM(name=u'totalNumberPortsSimultaneousCSI-RS-ActBWP-AllCC', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyA_totalNumberPortsSimultaneousCSI_RS_ActBWP_AllCC._cont = ASN1Dict([(u'p8', 0), (u'p12', 1), (u'p16', 2), (u'p24', 3), (u'p32', 4), (u'p40', 5), (u'p48', 6), (u'p56', 7), (u'p64', 8), (u'p72', 9), (u'p80', 10), (u'p88', 11), (u'p96', 12), (u'p104', 13), (u'p112', 14), (u'p120', 15), (u'p128', 16), (u'p136', 17), (u'p144', 18), (u'p152', 19), (u'p160', 20), (u'p168', 21), (u'p176', 22), (u'p184', 23), (u'p192', 24), (u'p200', 25), (u'p208', 26), (u'p216', 27), (u'p224', 28), (u'p232', 29), (u'p240', 30), (u'p248', 31), (u'p256', 32)])
+    _DummyA_totalNumberPortsSimultaneousCSI_RS_ActBWP_AllCC._ext = None
+    DummyA._cont = ASN1Dict([
+        (u'maxNumberNZP-CSI-RS-PerCC', _DummyA_maxNumberNZP_CSI_RS_PerCC),
+        (u'maxNumberPortsAcrossNZP-CSI-RS-PerCC', _DummyA_maxNumberPortsAcrossNZP_CSI_RS_PerCC),
+        (u'maxNumberCS-IM-PerCC', _DummyA_maxNumberCS_IM_PerCC),
+        (u'maxNumberSimultaneousCSI-RS-ActBWP-AllCC', _DummyA_maxNumberSimultaneousCSI_RS_ActBWP_AllCC),
+        (u'totalNumberPortsSimultaneousCSI-RS-ActBWP-AllCC', _DummyA_totalNumberPortsSimultaneousCSI_RS_ActBWP_AllCC),
         ])
-    TypeI_SinglePanelCodebook._ext = None
+    DummyA._ext = None
     
-    #-----< TypeI-MultiPanelCodebook >-----#
-    TypeI_MultiPanelCodebook = SEQ(name=u'TypeI-MultiPanelCodebook', mode=MODE_TYPE)
-    _TypeI_MultiPanelCodebook_maxNumberTxPortsPerResource = ENUM(name=u'maxNumberTxPortsPerResource', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypeI_MultiPanelCodebook_maxNumberTxPortsPerResource._cont = ASN1Dict([(u'p8', 0), (u'p16', 1), (u'p32', 2)])
-    _TypeI_MultiPanelCodebook_maxNumberTxPortsPerResource._ext = None
-    _TypeI_MultiPanelCodebook_maxNumberResources = INT(name=u'maxNumberResources', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypeI_MultiPanelCodebook_maxNumberResources._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _TypeI_MultiPanelCodebook_totalNumberTxPorts = INT(name=u'totalNumberTxPorts', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypeI_MultiPanelCodebook_totalNumberTxPorts._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=256)], ev=None, er=[])
-    _TypeI_MultiPanelCodebook_supportedCodebookMode = ENUM(name=u'supportedCodebookMode', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypeI_MultiPanelCodebook_supportedCodebookMode._cont = ASN1Dict([(u'mode1', 0), (u'mode2', 1), (u'both', 2)])
-    _TypeI_MultiPanelCodebook_supportedCodebookMode._ext = None
-    _TypeI_MultiPanelCodebook_supportedNumberPanels = ENUM(name=u'supportedNumberPanels', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypeI_MultiPanelCodebook_supportedNumberPanels._cont = ASN1Dict([(u'n2', 0), (u'n4', 1)])
-    _TypeI_MultiPanelCodebook_supportedNumberPanels._ext = None
-    _TypeI_MultiPanelCodebook_maxNumberCSI_RS_PerResourceSet = INT(name=u'maxNumberCSI-RS-PerResourceSet', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypeI_MultiPanelCodebook_maxNumberCSI_RS_PerResourceSet._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
-    TypeI_MultiPanelCodebook._cont = ASN1Dict([
-        (u'maxNumberTxPortsPerResource', _TypeI_MultiPanelCodebook_maxNumberTxPortsPerResource),
-        (u'maxNumberResources', _TypeI_MultiPanelCodebook_maxNumberResources),
-        (u'totalNumberTxPorts', _TypeI_MultiPanelCodebook_totalNumberTxPorts),
-        (u'supportedCodebookMode', _TypeI_MultiPanelCodebook_supportedCodebookMode),
-        (u'supportedNumberPanels', _TypeI_MultiPanelCodebook_supportedNumberPanels),
-        (u'maxNumberCSI-RS-PerResourceSet', _TypeI_MultiPanelCodebook_maxNumberCSI_RS_PerResourceSet),
+    #-----< DummyB >-----#
+    DummyB = SEQ(name=u'DummyB', mode=MODE_TYPE)
+    _DummyB_maxNumberTxPortsPerResource = ENUM(name=u'maxNumberTxPortsPerResource', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyB_maxNumberTxPortsPerResource._cont = ASN1Dict([(u'p2', 0), (u'p4', 1), (u'p8', 2), (u'p12', 3), (u'p16', 4), (u'p24', 5), (u'p32', 6)])
+    _DummyB_maxNumberTxPortsPerResource._ext = None
+    _DummyB_maxNumberResources = INT(name=u'maxNumberResources', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyB_maxNumberResources._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    _DummyB_totalNumberTxPorts = INT(name=u'totalNumberTxPorts', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyB_totalNumberTxPorts._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=256)], ev=None, er=[])
+    _DummyB_supportedCodebookMode = ENUM(name=u'supportedCodebookMode', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyB_supportedCodebookMode._cont = ASN1Dict([(u'mode1', 0), (u'mode1AndMode2', 1)])
+    _DummyB_supportedCodebookMode._ext = None
+    _DummyB_maxNumberCSI_RS_PerResourceSet = INT(name=u'maxNumberCSI-RS-PerResourceSet', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyB_maxNumberCSI_RS_PerResourceSet._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    DummyB._cont = ASN1Dict([
+        (u'maxNumberTxPortsPerResource', _DummyB_maxNumberTxPortsPerResource),
+        (u'maxNumberResources', _DummyB_maxNumberResources),
+        (u'totalNumberTxPorts', _DummyB_totalNumberTxPorts),
+        (u'supportedCodebookMode', _DummyB_supportedCodebookMode),
+        (u'maxNumberCSI-RS-PerResourceSet', _DummyB_maxNumberCSI_RS_PerResourceSet),
         ])
-    TypeI_MultiPanelCodebook._ext = None
+    DummyB._ext = None
     
-    #-----< TypeII-Codebook >-----#
-    TypeII_Codebook = SEQ(name=u'TypeII-Codebook', mode=MODE_TYPE)
-    _TypeII_Codebook_maxNumberTxPortsPerResource = ENUM(name=u'maxNumberTxPortsPerResource', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypeII_Codebook_maxNumberTxPortsPerResource._cont = ASN1Dict([(u'p4', 0), (u'p8', 1), (u'p12', 2), (u'p16', 3), (u'p24', 4), (u'p32', 5)])
-    _TypeII_Codebook_maxNumberTxPortsPerResource._ext = None
-    _TypeII_Codebook_maxNumberResources = INT(name=u'maxNumberResources', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypeII_Codebook_maxNumberResources._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _TypeII_Codebook_totalNumberTxPorts = INT(name=u'totalNumberTxPorts', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypeII_Codebook_totalNumberTxPorts._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=256)], ev=None, er=[])
-    _TypeII_Codebook_parameterLx = INT(name=u'parameterLx', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypeII_Codebook_parameterLx._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=4)], ev=None, er=[])
-    _TypeII_Codebook_amplitudeScalingType = ENUM(name=u'amplitudeScalingType', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypeII_Codebook_amplitudeScalingType._cont = ASN1Dict([(u'wideband', 0), (u'widebandAndSubband', 1)])
-    _TypeII_Codebook_amplitudeScalingType._ext = None
-    _TypeII_Codebook_amplitudeSubsetRestriction = ENUM(name=u'amplitudeSubsetRestriction', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _TypeII_Codebook_amplitudeSubsetRestriction._cont = ASN1Dict([(u'supported', 0)])
-    _TypeII_Codebook_amplitudeSubsetRestriction._ext = None
-    _TypeII_Codebook_maxNumberCSI_RS_PerResourceSet = INT(name=u'maxNumberCSI-RS-PerResourceSet', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypeII_Codebook_maxNumberCSI_RS_PerResourceSet._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
-    TypeII_Codebook._cont = ASN1Dict([
-        (u'maxNumberTxPortsPerResource', _TypeII_Codebook_maxNumberTxPortsPerResource),
-        (u'maxNumberResources', _TypeII_Codebook_maxNumberResources),
-        (u'totalNumberTxPorts', _TypeII_Codebook_totalNumberTxPorts),
-        (u'parameterLx', _TypeII_Codebook_parameterLx),
-        (u'amplitudeScalingType', _TypeII_Codebook_amplitudeScalingType),
-        (u'amplitudeSubsetRestriction', _TypeII_Codebook_amplitudeSubsetRestriction),
-        (u'maxNumberCSI-RS-PerResourceSet', _TypeII_Codebook_maxNumberCSI_RS_PerResourceSet),
+    #-----< DummyC >-----#
+    DummyC = SEQ(name=u'DummyC', mode=MODE_TYPE)
+    _DummyC_maxNumberTxPortsPerResource = ENUM(name=u'maxNumberTxPortsPerResource', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyC_maxNumberTxPortsPerResource._cont = ASN1Dict([(u'p8', 0), (u'p16', 1), (u'p32', 2)])
+    _DummyC_maxNumberTxPortsPerResource._ext = None
+    _DummyC_maxNumberResources = INT(name=u'maxNumberResources', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyC_maxNumberResources._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    _DummyC_totalNumberTxPorts = INT(name=u'totalNumberTxPorts', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyC_totalNumberTxPorts._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=256)], ev=None, er=[])
+    _DummyC_supportedCodebookMode = ENUM(name=u'supportedCodebookMode', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyC_supportedCodebookMode._cont = ASN1Dict([(u'mode1', 0), (u'mode2', 1), (u'both', 2)])
+    _DummyC_supportedCodebookMode._ext = None
+    _DummyC_supportedNumberPanels = ENUM(name=u'supportedNumberPanels', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyC_supportedNumberPanels._cont = ASN1Dict([(u'n2', 0), (u'n4', 1)])
+    _DummyC_supportedNumberPanels._ext = None
+    _DummyC_maxNumberCSI_RS_PerResourceSet = INT(name=u'maxNumberCSI-RS-PerResourceSet', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyC_maxNumberCSI_RS_PerResourceSet._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    DummyC._cont = ASN1Dict([
+        (u'maxNumberTxPortsPerResource', _DummyC_maxNumberTxPortsPerResource),
+        (u'maxNumberResources', _DummyC_maxNumberResources),
+        (u'totalNumberTxPorts', _DummyC_totalNumberTxPorts),
+        (u'supportedCodebookMode', _DummyC_supportedCodebookMode),
+        (u'supportedNumberPanels', _DummyC_supportedNumberPanels),
+        (u'maxNumberCSI-RS-PerResourceSet', _DummyC_maxNumberCSI_RS_PerResourceSet),
         ])
-    TypeII_Codebook._ext = None
+    DummyC._ext = None
     
-    #-----< TypeII-CodebookPortSelection >-----#
-    TypeII_CodebookPortSelection = SEQ(name=u'TypeII-CodebookPortSelection', mode=MODE_TYPE)
-    _TypeII_CodebookPortSelection_maxNumberTxPortsPerResource = ENUM(name=u'maxNumberTxPortsPerResource', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypeII_CodebookPortSelection_maxNumberTxPortsPerResource._cont = ASN1Dict([(u'p4', 0), (u'p8', 1), (u'p12', 2), (u'p16', 3), (u'p24', 4), (u'p32', 5)])
-    _TypeII_CodebookPortSelection_maxNumberTxPortsPerResource._ext = None
-    _TypeII_CodebookPortSelection_maxNumberResources = INT(name=u'maxNumberResources', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypeII_CodebookPortSelection_maxNumberResources._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _TypeII_CodebookPortSelection_totalNumberTxPorts = INT(name=u'totalNumberTxPorts', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypeII_CodebookPortSelection_totalNumberTxPorts._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=256)], ev=None, er=[])
-    _TypeII_CodebookPortSelection_parameterLx = INT(name=u'parameterLx', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypeII_CodebookPortSelection_parameterLx._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=4)], ev=None, er=[])
-    _TypeII_CodebookPortSelection_amplitudeScalingType = ENUM(name=u'amplitudeScalingType', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypeII_CodebookPortSelection_amplitudeScalingType._cont = ASN1Dict([(u'wideband', 0), (u'widebandAndSubband', 1)])
-    _TypeII_CodebookPortSelection_amplitudeScalingType._ext = None
-    _TypeII_CodebookPortSelection_maxNumberCSI_RS_PerResourceSet = INT(name=u'maxNumberCSI-RS-PerResourceSet', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypeII_CodebookPortSelection_maxNumberCSI_RS_PerResourceSet._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
-    TypeII_CodebookPortSelection._cont = ASN1Dict([
-        (u'maxNumberTxPortsPerResource', _TypeII_CodebookPortSelection_maxNumberTxPortsPerResource),
-        (u'maxNumberResources', _TypeII_CodebookPortSelection_maxNumberResources),
-        (u'totalNumberTxPorts', _TypeII_CodebookPortSelection_totalNumberTxPorts),
-        (u'parameterLx', _TypeII_CodebookPortSelection_parameterLx),
-        (u'amplitudeScalingType', _TypeII_CodebookPortSelection_amplitudeScalingType),
-        (u'maxNumberCSI-RS-PerResourceSet', _TypeII_CodebookPortSelection_maxNumberCSI_RS_PerResourceSet),
+    #-----< DummyD >-----#
+    DummyD = SEQ(name=u'DummyD', mode=MODE_TYPE)
+    _DummyD_maxNumberTxPortsPerResource = ENUM(name=u'maxNumberTxPortsPerResource', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyD_maxNumberTxPortsPerResource._cont = ASN1Dict([(u'p4', 0), (u'p8', 1), (u'p12', 2), (u'p16', 3), (u'p24', 4), (u'p32', 5)])
+    _DummyD_maxNumberTxPortsPerResource._ext = None
+    _DummyD_maxNumberResources = INT(name=u'maxNumberResources', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyD_maxNumberResources._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    _DummyD_totalNumberTxPorts = INT(name=u'totalNumberTxPorts', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyD_totalNumberTxPorts._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=256)], ev=None, er=[])
+    _DummyD_parameterLx = INT(name=u'parameterLx', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyD_parameterLx._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=4)], ev=None, er=[])
+    _DummyD_amplitudeScalingType = ENUM(name=u'amplitudeScalingType', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyD_amplitudeScalingType._cont = ASN1Dict([(u'wideband', 0), (u'widebandAndSubband', 1)])
+    _DummyD_amplitudeScalingType._ext = None
+    _DummyD_amplitudeSubsetRestriction = ENUM(name=u'amplitudeSubsetRestriction', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DummyD_amplitudeSubsetRestriction._cont = ASN1Dict([(u'supported', 0)])
+    _DummyD_amplitudeSubsetRestriction._ext = None
+    _DummyD_maxNumberCSI_RS_PerResourceSet = INT(name=u'maxNumberCSI-RS-PerResourceSet', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyD_maxNumberCSI_RS_PerResourceSet._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    DummyD._cont = ASN1Dict([
+        (u'maxNumberTxPortsPerResource', _DummyD_maxNumberTxPortsPerResource),
+        (u'maxNumberResources', _DummyD_maxNumberResources),
+        (u'totalNumberTxPorts', _DummyD_totalNumberTxPorts),
+        (u'parameterLx', _DummyD_parameterLx),
+        (u'amplitudeScalingType', _DummyD_amplitudeScalingType),
+        (u'amplitudeSubsetRestriction', _DummyD_amplitudeSubsetRestriction),
+        (u'maxNumberCSI-RS-PerResourceSet', _DummyD_maxNumberCSI_RS_PerResourceSet),
         ])
-    TypeII_CodebookPortSelection._ext = None
+    DummyD._ext = None
+    
+    #-----< DummyE >-----#
+    DummyE = SEQ(name=u'DummyE', mode=MODE_TYPE)
+    _DummyE_maxNumberTxPortsPerResource = ENUM(name=u'maxNumberTxPortsPerResource', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyE_maxNumberTxPortsPerResource._cont = ASN1Dict([(u'p4', 0), (u'p8', 1), (u'p12', 2), (u'p16', 3), (u'p24', 4), (u'p32', 5)])
+    _DummyE_maxNumberTxPortsPerResource._ext = None
+    _DummyE_maxNumberResources = INT(name=u'maxNumberResources', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyE_maxNumberResources._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    _DummyE_totalNumberTxPorts = INT(name=u'totalNumberTxPorts', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyE_totalNumberTxPorts._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=256)], ev=None, er=[])
+    _DummyE_parameterLx = INT(name=u'parameterLx', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyE_parameterLx._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=4)], ev=None, er=[])
+    _DummyE_amplitudeScalingType = ENUM(name=u'amplitudeScalingType', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyE_amplitudeScalingType._cont = ASN1Dict([(u'wideband', 0), (u'widebandAndSubband', 1)])
+    _DummyE_amplitudeScalingType._ext = None
+    _DummyE_maxNumberCSI_RS_PerResourceSet = INT(name=u'maxNumberCSI-RS-PerResourceSet', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyE_maxNumberCSI_RS_PerResourceSet._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    DummyE._cont = ASN1Dict([
+        (u'maxNumberTxPortsPerResource', _DummyE_maxNumberTxPortsPerResource),
+        (u'maxNumberResources', _DummyE_maxNumberResources),
+        (u'totalNumberTxPorts', _DummyE_totalNumberTxPorts),
+        (u'parameterLx', _DummyE_parameterLx),
+        (u'amplitudeScalingType', _DummyE_amplitudeScalingType),
+        (u'maxNumberCSI-RS-PerResourceSet', _DummyE_maxNumberCSI_RS_PerResourceSet),
+        ])
+    DummyE._ext = None
     
     #-----< FeatureSetDownlinkId >-----#
     FeatureSetDownlinkId = INT(name=u'FeatureSetDownlinkId', mode=MODE_TYPE)
@@ -11770,13 +12260,28 @@ class NR_RRC_Definitions:
     __FeatureSets_featureSetsUplinkPerCC__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'FeatureSetUplinkPerCC')))
     _FeatureSets_featureSetsUplinkPerCC._cont = __FeatureSets_featureSetsUplinkPerCC__item_
     _FeatureSets_featureSetsUplinkPerCC._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1024)], ev=None, er=[])
+    _FeatureSets_featureSetsDownlink_v1540 = SEQ_OF(name=u'featureSetsDownlink-v1540', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    __FeatureSets_featureSetsDownlink_v1540__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'FeatureSetDownlink-v1540')))
+    _FeatureSets_featureSetsDownlink_v1540._cont = __FeatureSets_featureSetsDownlink_v1540__item_
+    _FeatureSets_featureSetsDownlink_v1540._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1024)], ev=None, er=[])
+    _FeatureSets_featureSetsUplink_v1540 = SEQ_OF(name=u'featureSetsUplink-v1540', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    __FeatureSets_featureSetsUplink_v1540__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'FeatureSetUplink-v1540')))
+    _FeatureSets_featureSetsUplink_v1540._cont = __FeatureSets_featureSetsUplink_v1540__item_
+    _FeatureSets_featureSetsUplink_v1540._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1024)], ev=None, er=[])
+    _FeatureSets_featureSetsUplinkPerCC_v1540 = SEQ_OF(name=u'featureSetsUplinkPerCC-v1540', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    __FeatureSets_featureSetsUplinkPerCC_v1540__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'FeatureSetUplinkPerCC-v1540')))
+    _FeatureSets_featureSetsUplinkPerCC_v1540._cont = __FeatureSets_featureSetsUplinkPerCC_v1540__item_
+    _FeatureSets_featureSetsUplinkPerCC_v1540._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1024)], ev=None, er=[])
     FeatureSets._cont = ASN1Dict([
         (u'featureSetsDownlink', _FeatureSets_featureSetsDownlink),
         (u'featureSetsDownlinkPerCC', _FeatureSets_featureSetsDownlinkPerCC),
         (u'featureSetsUplink', _FeatureSets_featureSetsUplink),
         (u'featureSetsUplinkPerCC', _FeatureSets_featureSetsUplinkPerCC),
+        (u'featureSetsDownlink-v1540', _FeatureSets_featureSetsDownlink_v1540),
+        (u'featureSetsUplink-v1540', _FeatureSets_featureSetsUplink_v1540),
+        (u'featureSetsUplinkPerCC-v1540', _FeatureSets_featureSetsUplinkPerCC_v1540),
         ])
-    FeatureSets._ext = []
+    FeatureSets._ext = [u'featureSetsDownlink-v1540', u'featureSetsUplink-v1540', u'featureSetsUplinkPerCC-v1540']
     
     #-----< FeatureSetUplink >-----#
     FeatureSetUplink = SEQ(name=u'FeatureSetUplink', mode=MODE_TYPE)
@@ -11794,7 +12299,7 @@ class NR_RRC_Definitions:
     _FeatureSetUplink_searchSpaceSharingCA_UL = ENUM(name=u'searchSpaceSharingCA-UL', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _FeatureSetUplink_searchSpaceSharingCA_UL._cont = ASN1Dict([(u'supported', 0)])
     _FeatureSetUplink_searchSpaceSharingCA_UL._ext = None
-    _FeatureSetUplink_srs_TxSwitch = SEQ(name=u'srs-TxSwitch', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SRS-TxSwitch')), opt=True)
+    _FeatureSetUplink_dummy1 = SEQ(name=u'dummy1', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'DummyI')), opt=True)
     _FeatureSetUplink_supportedSRS_Resources = SEQ(name=u'supportedSRS-Resources', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SRS-Resources')), opt=True)
     _FeatureSetUplink_twoPUCCH_Group = ENUM(name=u'twoPUCCH-Group', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _FeatureSetUplink_twoPUCCH_Group._cont = ASN1Dict([(u'supported', 0)])
@@ -11802,63 +12307,127 @@ class NR_RRC_Definitions:
     _FeatureSetUplink_dynamicSwitchSUL = ENUM(name=u'dynamicSwitchSUL', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _FeatureSetUplink_dynamicSwitchSUL._cont = ASN1Dict([(u'supported', 0)])
     _FeatureSetUplink_dynamicSwitchSUL._ext = None
-    _FeatureSetUplink_simultaneousTxSUL_NonSUL_v1530 = ENUM(name=u'simultaneousTxSUL-NonSUL-v1530', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _FeatureSetUplink_simultaneousTxSUL_NonSUL_v1530._cont = ASN1Dict([(u'supported', 0)])
-    _FeatureSetUplink_simultaneousTxSUL_NonSUL_v1530._ext = None
-    _FeatureSetUplink_pusch_DifferentTB_PerSlot = SEQ(name=u'pusch-DifferentTB-PerSlot', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __FeatureSetUplink_pusch_DifferentTB_PerSlot_scs_15kHz = ENUM(name=u'scs-15kHz', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __FeatureSetUplink_pusch_DifferentTB_PerSlot_scs_15kHz._cont = ASN1Dict([(u'upto2', 0), (u'upto4', 1), (u'upto7', 2)])
-    __FeatureSetUplink_pusch_DifferentTB_PerSlot_scs_15kHz._ext = None
-    __FeatureSetUplink_pusch_DifferentTB_PerSlot_scs_30kHz = ENUM(name=u'scs-30kHz', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __FeatureSetUplink_pusch_DifferentTB_PerSlot_scs_30kHz._cont = ASN1Dict([(u'upto2', 0), (u'upto4', 1), (u'upto7', 2)])
-    __FeatureSetUplink_pusch_DifferentTB_PerSlot_scs_30kHz._ext = None
-    __FeatureSetUplink_pusch_DifferentTB_PerSlot_scs_60kHz = ENUM(name=u'scs-60kHz', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __FeatureSetUplink_pusch_DifferentTB_PerSlot_scs_60kHz._cont = ASN1Dict([(u'upto2', 0), (u'upto4', 1), (u'upto7', 2)])
-    __FeatureSetUplink_pusch_DifferentTB_PerSlot_scs_60kHz._ext = None
-    __FeatureSetUplink_pusch_DifferentTB_PerSlot_scs_120kHz = ENUM(name=u'scs-120kHz', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __FeatureSetUplink_pusch_DifferentTB_PerSlot_scs_120kHz._cont = ASN1Dict([(u'upto2', 0), (u'upto4', 1), (u'upto7', 2)])
-    __FeatureSetUplink_pusch_DifferentTB_PerSlot_scs_120kHz._ext = None
-    _FeatureSetUplink_pusch_DifferentTB_PerSlot._cont = ASN1Dict([
-        (u'scs-15kHz', __FeatureSetUplink_pusch_DifferentTB_PerSlot_scs_15kHz),
-        (u'scs-30kHz', __FeatureSetUplink_pusch_DifferentTB_PerSlot_scs_30kHz),
-        (u'scs-60kHz', __FeatureSetUplink_pusch_DifferentTB_PerSlot_scs_60kHz),
-        (u'scs-120kHz', __FeatureSetUplink_pusch_DifferentTB_PerSlot_scs_120kHz),
+    _FeatureSetUplink_simultaneousTxSUL_NonSUL = ENUM(name=u'simultaneousTxSUL-NonSUL', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _FeatureSetUplink_simultaneousTxSUL_NonSUL._cont = ASN1Dict([(u'supported', 0)])
+    _FeatureSetUplink_simultaneousTxSUL_NonSUL._ext = None
+    _FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot = SEQ(name=u'pusch-ProcessingType1-DifferentTB-PerSlot', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot_scs_15kHz = ENUM(name=u'scs-15kHz', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot_scs_15kHz._cont = ASN1Dict([(u'upto2', 0), (u'upto4', 1), (u'upto7', 2)])
+    __FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot_scs_15kHz._ext = None
+    __FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot_scs_30kHz = ENUM(name=u'scs-30kHz', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot_scs_30kHz._cont = ASN1Dict([(u'upto2', 0), (u'upto4', 1), (u'upto7', 2)])
+    __FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot_scs_30kHz._ext = None
+    __FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot_scs_60kHz = ENUM(name=u'scs-60kHz', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot_scs_60kHz._cont = ASN1Dict([(u'upto2', 0), (u'upto4', 1), (u'upto7', 2)])
+    __FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot_scs_60kHz._ext = None
+    __FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot_scs_120kHz = ENUM(name=u'scs-120kHz', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot_scs_120kHz._cont = ASN1Dict([(u'upto2', 0), (u'upto4', 1), (u'upto7', 2)])
+    __FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot_scs_120kHz._ext = None
+    _FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot._cont = ASN1Dict([
+        (u'scs-15kHz', __FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot_scs_15kHz),
+        (u'scs-30kHz', __FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot_scs_30kHz),
+        (u'scs-60kHz', __FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot_scs_60kHz),
+        (u'scs-120kHz', __FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot_scs_120kHz),
         ])
-    _FeatureSetUplink_pusch_DifferentTB_PerSlot._ext = None
-    _FeatureSetUplink_csi_ReportFramework = SEQ(name=u'csi-ReportFramework', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CSI-ReportFramework')), opt=True)
+    _FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot._ext = None
+    _FeatureSetUplink_dummy2 = SEQ(name=u'dummy2', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'DummyF')), opt=True)
     FeatureSetUplink._cont = ASN1Dict([
         (u'featureSetListPerUplinkCC', _FeatureSetUplink_featureSetListPerUplinkCC),
         (u'scalingFactor', _FeatureSetUplink_scalingFactor),
         (u'crossCarrierScheduling-OtherSCS', _FeatureSetUplink_crossCarrierScheduling_OtherSCS),
         (u'intraBandFreqSeparationUL', _FeatureSetUplink_intraBandFreqSeparationUL),
         (u'searchSpaceSharingCA-UL', _FeatureSetUplink_searchSpaceSharingCA_UL),
-        (u'srs-TxSwitch', _FeatureSetUplink_srs_TxSwitch),
+        (u'dummy1', _FeatureSetUplink_dummy1),
         (u'supportedSRS-Resources', _FeatureSetUplink_supportedSRS_Resources),
         (u'twoPUCCH-Group', _FeatureSetUplink_twoPUCCH_Group),
         (u'dynamicSwitchSUL', _FeatureSetUplink_dynamicSwitchSUL),
-        (u'simultaneousTxSUL-NonSUL-v1530', _FeatureSetUplink_simultaneousTxSUL_NonSUL_v1530),
-        (u'pusch-DifferentTB-PerSlot', _FeatureSetUplink_pusch_DifferentTB_PerSlot),
-        (u'csi-ReportFramework', _FeatureSetUplink_csi_ReportFramework),
+        (u'simultaneousTxSUL-NonSUL', _FeatureSetUplink_simultaneousTxSUL_NonSUL),
+        (u'pusch-ProcessingType1-DifferentTB-PerSlot', _FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot),
+        (u'dummy2', _FeatureSetUplink_dummy2),
         ])
     FeatureSetUplink._ext = None
     
-    #-----< CSI-ReportFramework >-----#
-    CSI_ReportFramework = SEQ(name=u'CSI-ReportFramework', mode=MODE_TYPE)
-    _CSI_ReportFramework_maxNumberPeriodicCSI_ReportPerBWP = INT(name=u'maxNumberPeriodicCSI-ReportPerBWP', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _CSI_ReportFramework_maxNumberPeriodicCSI_ReportPerBWP._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
-    _CSI_ReportFramework_maxNumberAperiodicCSI_ReportPerBWP = INT(name=u'maxNumberAperiodicCSI-ReportPerBWP', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _CSI_ReportFramework_maxNumberAperiodicCSI_ReportPerBWP._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
-    _CSI_ReportFramework_maxNumberSemiPersistentCSI_ReportPerBWP = INT(name=u'maxNumberSemiPersistentCSI-ReportPerBWP', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _CSI_ReportFramework_maxNumberSemiPersistentCSI_ReportPerBWP._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4)], ev=None, er=[])
-    _CSI_ReportFramework_simultaneousCSI_ReportsAllCC = INT(name=u'simultaneousCSI-ReportsAllCC', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _CSI_ReportFramework_simultaneousCSI_ReportsAllCC._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=5, ub=32)], ev=None, er=[])
-    CSI_ReportFramework._cont = ASN1Dict([
-        (u'maxNumberPeriodicCSI-ReportPerBWP', _CSI_ReportFramework_maxNumberPeriodicCSI_ReportPerBWP),
-        (u'maxNumberAperiodicCSI-ReportPerBWP', _CSI_ReportFramework_maxNumberAperiodicCSI_ReportPerBWP),
-        (u'maxNumberSemiPersistentCSI-ReportPerBWP', _CSI_ReportFramework_maxNumberSemiPersistentCSI_ReportPerBWP),
-        (u'simultaneousCSI-ReportsAllCC', _CSI_ReportFramework_simultaneousCSI_ReportsAllCC),
+    #-----< FeatureSetUplink-v1540 >-----#
+    FeatureSetUplink_v1540 = SEQ(name=u'FeatureSetUplink-v1540', mode=MODE_TYPE)
+    _FeatureSetUplink_v1540_zeroSlotOffsetAperiodicSRS = ENUM(name=u'zeroSlotOffsetAperiodicSRS', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _FeatureSetUplink_v1540_zeroSlotOffsetAperiodicSRS._cont = ASN1Dict([(u'supported', 0)])
+    _FeatureSetUplink_v1540_zeroSlotOffsetAperiodicSRS._ext = None
+    _FeatureSetUplink_v1540_pa_PhaseDiscontinuityImpacts = ENUM(name=u'pa-PhaseDiscontinuityImpacts', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _FeatureSetUplink_v1540_pa_PhaseDiscontinuityImpacts._cont = ASN1Dict([(u'supported', 0)])
+    _FeatureSetUplink_v1540_pa_PhaseDiscontinuityImpacts._ext = None
+    _FeatureSetUplink_v1540_pusch_SeparationWithGap = ENUM(name=u'pusch-SeparationWithGap', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _FeatureSetUplink_v1540_pusch_SeparationWithGap._cont = ASN1Dict([(u'supported', 0)])
+    _FeatureSetUplink_v1540_pusch_SeparationWithGap._ext = None
+    _FeatureSetUplink_v1540_pusch_ProcessingType2 = SEQ(name=u'pusch-ProcessingType2', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetUplink_v1540_pusch_ProcessingType2_scs_15kHz = SEQ(name=u'scs-15kHz', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ProcessingParameters')), opt=True)
+    __FeatureSetUplink_v1540_pusch_ProcessingType2_scs_30kHz = SEQ(name=u'scs-30kHz', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ProcessingParameters')), opt=True)
+    __FeatureSetUplink_v1540_pusch_ProcessingType2_scs_60kHz = SEQ(name=u'scs-60kHz', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ProcessingParameters')), opt=True)
+    _FeatureSetUplink_v1540_pusch_ProcessingType2._cont = ASN1Dict([
+        (u'scs-15kHz', __FeatureSetUplink_v1540_pusch_ProcessingType2_scs_15kHz),
+        (u'scs-30kHz', __FeatureSetUplink_v1540_pusch_ProcessingType2_scs_30kHz),
+        (u'scs-60kHz', __FeatureSetUplink_v1540_pusch_ProcessingType2_scs_60kHz),
         ])
-    CSI_ReportFramework._ext = None
+    _FeatureSetUplink_v1540_pusch_ProcessingType2._ext = None
+    _FeatureSetUplink_v1540_ul_MCS_TableAlt_DynamicIndication = ENUM(name=u'ul-MCS-TableAlt-DynamicIndication', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _FeatureSetUplink_v1540_ul_MCS_TableAlt_DynamicIndication._cont = ASN1Dict([(u'supported', 0)])
+    _FeatureSetUplink_v1540_ul_MCS_TableAlt_DynamicIndication._ext = None
+    FeatureSetUplink_v1540._cont = ASN1Dict([
+        (u'zeroSlotOffsetAperiodicSRS', _FeatureSetUplink_v1540_zeroSlotOffsetAperiodicSRS),
+        (u'pa-PhaseDiscontinuityImpacts', _FeatureSetUplink_v1540_pa_PhaseDiscontinuityImpacts),
+        (u'pusch-SeparationWithGap', _FeatureSetUplink_v1540_pusch_SeparationWithGap),
+        (u'pusch-ProcessingType2', _FeatureSetUplink_v1540_pusch_ProcessingType2),
+        (u'ul-MCS-TableAlt-DynamicIndication', _FeatureSetUplink_v1540_ul_MCS_TableAlt_DynamicIndication),
+        ])
+    FeatureSetUplink_v1540._ext = None
+    
+    #-----< SRS-Resources >-----#
+    SRS_Resources = SEQ(name=u'SRS-Resources', mode=MODE_TYPE)
+    _SRS_Resources_maxNumberAperiodicSRS_PerBWP = ENUM(name=u'maxNumberAperiodicSRS-PerBWP', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SRS_Resources_maxNumberAperiodicSRS_PerBWP._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2), (u'n8', 3), (u'n16', 4)])
+    _SRS_Resources_maxNumberAperiodicSRS_PerBWP._ext = None
+    _SRS_Resources_maxNumberAperiodicSRS_PerBWP_PerSlot = INT(name=u'maxNumberAperiodicSRS-PerBWP-PerSlot', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SRS_Resources_maxNumberAperiodicSRS_PerBWP_PerSlot._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=6)], ev=None, er=[])
+    _SRS_Resources_maxNumberPeriodicSRS_PerBWP = ENUM(name=u'maxNumberPeriodicSRS-PerBWP', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SRS_Resources_maxNumberPeriodicSRS_PerBWP._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2), (u'n8', 3), (u'n16', 4)])
+    _SRS_Resources_maxNumberPeriodicSRS_PerBWP._ext = None
+    _SRS_Resources_maxNumberPeriodicSRS_PerBWP_PerSlot = INT(name=u'maxNumberPeriodicSRS-PerBWP-PerSlot', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SRS_Resources_maxNumberPeriodicSRS_PerBWP_PerSlot._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=6)], ev=None, er=[])
+    _SRS_Resources_maxNumberSemiPersitentSRS_PerBWP = ENUM(name=u'maxNumberSemiPersitentSRS-PerBWP', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SRS_Resources_maxNumberSemiPersitentSRS_PerBWP._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2), (u'n8', 3), (u'n16', 4)])
+    _SRS_Resources_maxNumberSemiPersitentSRS_PerBWP._ext = None
+    _SRS_Resources_maxNumberSP_SRS_PerBWP_PerSlot = INT(name=u'maxNumberSP-SRS-PerBWP-PerSlot', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SRS_Resources_maxNumberSP_SRS_PerBWP_PerSlot._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=6)], ev=None, er=[])
+    _SRS_Resources_maxNumberSRS_Ports_PerResource = ENUM(name=u'maxNumberSRS-Ports-PerResource', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SRS_Resources_maxNumberSRS_Ports_PerResource._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2)])
+    _SRS_Resources_maxNumberSRS_Ports_PerResource._ext = None
+    SRS_Resources._cont = ASN1Dict([
+        (u'maxNumberAperiodicSRS-PerBWP', _SRS_Resources_maxNumberAperiodicSRS_PerBWP),
+        (u'maxNumberAperiodicSRS-PerBWP-PerSlot', _SRS_Resources_maxNumberAperiodicSRS_PerBWP_PerSlot),
+        (u'maxNumberPeriodicSRS-PerBWP', _SRS_Resources_maxNumberPeriodicSRS_PerBWP),
+        (u'maxNumberPeriodicSRS-PerBWP-PerSlot', _SRS_Resources_maxNumberPeriodicSRS_PerBWP_PerSlot),
+        (u'maxNumberSemiPersitentSRS-PerBWP', _SRS_Resources_maxNumberSemiPersitentSRS_PerBWP),
+        (u'maxNumberSP-SRS-PerBWP-PerSlot', _SRS_Resources_maxNumberSP_SRS_PerBWP_PerSlot),
+        (u'maxNumberSRS-Ports-PerResource', _SRS_Resources_maxNumberSRS_Ports_PerResource),
+        ])
+    SRS_Resources._ext = None
+    
+    #-----< DummyF >-----#
+    DummyF = SEQ(name=u'DummyF', mode=MODE_TYPE)
+    _DummyF_maxNumberPeriodicCSI_ReportPerBWP = INT(name=u'maxNumberPeriodicCSI-ReportPerBWP', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyF_maxNumberPeriodicCSI_ReportPerBWP._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _DummyF_maxNumberAperiodicCSI_ReportPerBWP = INT(name=u'maxNumberAperiodicCSI-ReportPerBWP', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyF_maxNumberAperiodicCSI_ReportPerBWP._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _DummyF_maxNumberSemiPersistentCSI_ReportPerBWP = INT(name=u'maxNumberSemiPersistentCSI-ReportPerBWP', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyF_maxNumberSemiPersistentCSI_ReportPerBWP._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4)], ev=None, er=[])
+    _DummyF_simultaneousCSI_ReportsAllCC = INT(name=u'simultaneousCSI-ReportsAllCC', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyF_simultaneousCSI_ReportsAllCC._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=5, ub=32)], ev=None, er=[])
+    DummyF._cont = ASN1Dict([
+        (u'maxNumberPeriodicCSI-ReportPerBWP', _DummyF_maxNumberPeriodicCSI_ReportPerBWP),
+        (u'maxNumberAperiodicCSI-ReportPerBWP', _DummyF_maxNumberAperiodicCSI_ReportPerBWP),
+        (u'maxNumberSemiPersistentCSI-ReportPerBWP', _DummyF_maxNumberSemiPersistentCSI_ReportPerBWP),
+        (u'simultaneousCSI-ReportsAllCC', _DummyF_simultaneousCSI_ReportsAllCC),
+        ])
+    DummyF._ext = None
     
     #-----< FeatureSetUplinkId >-----#
     FeatureSetUplinkId = INT(name=u'FeatureSetUplinkId', mode=MODE_TYPE)
@@ -11891,6 +12460,23 @@ class NR_RRC_Definitions:
         (u'supportedModulationOrderUL', _FeatureSetUplinkPerCC_supportedModulationOrderUL),
         ])
     FeatureSetUplinkPerCC._ext = None
+    
+    #-----< FeatureSetUplinkPerCC-v1540 >-----#
+    FeatureSetUplinkPerCC_v1540 = SEQ(name=u'FeatureSetUplinkPerCC-v1540', mode=MODE_TYPE)
+    _FeatureSetUplinkPerCC_v1540_mimo_NonCB_PUSCH = SEQ(name=u'mimo-NonCB-PUSCH', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __FeatureSetUplinkPerCC_v1540_mimo_NonCB_PUSCH_maxNumberSRS_ResourcePerSet = INT(name=u'maxNumberSRS-ResourcePerSet', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __FeatureSetUplinkPerCC_v1540_mimo_NonCB_PUSCH_maxNumberSRS_ResourcePerSet._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    __FeatureSetUplinkPerCC_v1540_mimo_NonCB_PUSCH_maxNumberSimultaneousSRS_ResourceTx = INT(name=u'maxNumberSimultaneousSRS-ResourceTx', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __FeatureSetUplinkPerCC_v1540_mimo_NonCB_PUSCH_maxNumberSimultaneousSRS_ResourceTx._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _FeatureSetUplinkPerCC_v1540_mimo_NonCB_PUSCH._cont = ASN1Dict([
+        (u'maxNumberSRS-ResourcePerSet', __FeatureSetUplinkPerCC_v1540_mimo_NonCB_PUSCH_maxNumberSRS_ResourcePerSet),
+        (u'maxNumberSimultaneousSRS-ResourceTx', __FeatureSetUplinkPerCC_v1540_mimo_NonCB_PUSCH_maxNumberSimultaneousSRS_ResourceTx),
+        ])
+    _FeatureSetUplinkPerCC_v1540_mimo_NonCB_PUSCH._ext = None
+    FeatureSetUplinkPerCC_v1540._cont = ASN1Dict([
+        (u'mimo-NonCB-PUSCH', _FeatureSetUplinkPerCC_v1540_mimo_NonCB_PUSCH),
+        ])
+    FeatureSetUplinkPerCC_v1540._ext = None
     
     #-----< FeatureSetUplinkPerCC-Id >-----#
     FeatureSetUplinkPerCC_Id = INT(name=u'FeatureSetUplinkPerCC-Id', mode=MODE_TYPE)
@@ -11956,6 +12542,36 @@ class NR_RRC_Definitions:
     FreqSeparationClass._cont = ASN1Dict([(u'c1', 0), (u'c2', 1), (u'c3', 2)])
     FreqSeparationClass._ext = []
     
+    #-----< IMS-Parameters >-----#
+    IMS_Parameters = SEQ(name=u'IMS-Parameters', mode=MODE_TYPE)
+    _IMS_Parameters_ims_ParametersCommon = SEQ(name=u'ims-ParametersCommon', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'IMS-ParametersCommon')), opt=True)
+    _IMS_Parameters_ims_ParametersFRX_Diff = SEQ(name=u'ims-ParametersFRX-Diff', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'IMS-ParametersFRX-Diff')), opt=True)
+    IMS_Parameters._cont = ASN1Dict([
+        (u'ims-ParametersCommon', _IMS_Parameters_ims_ParametersCommon),
+        (u'ims-ParametersFRX-Diff', _IMS_Parameters_ims_ParametersFRX_Diff),
+        ])
+    IMS_Parameters._ext = []
+    
+    #-----< IMS-ParametersCommon >-----#
+    IMS_ParametersCommon = SEQ(name=u'IMS-ParametersCommon', mode=MODE_TYPE)
+    _IMS_ParametersCommon_voiceOverEUTRA_5GC = ENUM(name=u'voiceOverEUTRA-5GC', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _IMS_ParametersCommon_voiceOverEUTRA_5GC._cont = ASN1Dict([(u'supported', 0)])
+    _IMS_ParametersCommon_voiceOverEUTRA_5GC._ext = None
+    IMS_ParametersCommon._cont = ASN1Dict([
+        (u'voiceOverEUTRA-5GC', _IMS_ParametersCommon_voiceOverEUTRA_5GC),
+        ])
+    IMS_ParametersCommon._ext = []
+    
+    #-----< IMS-ParametersFRX-Diff >-----#
+    IMS_ParametersFRX_Diff = SEQ(name=u'IMS-ParametersFRX-Diff', mode=MODE_TYPE)
+    _IMS_ParametersFRX_Diff_voiceOverNR = ENUM(name=u'voiceOverNR', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _IMS_ParametersFRX_Diff_voiceOverNR._cont = ASN1Dict([(u'supported', 0)])
+    _IMS_ParametersFRX_Diff_voiceOverNR._ext = None
+    IMS_ParametersFRX_Diff._cont = ASN1Dict([
+        (u'voiceOverNR', _IMS_ParametersFRX_Diff_voiceOverNR),
+        ])
+    IMS_ParametersFRX_Diff._ext = []
+    
     #-----< InterRAT-Parameters >-----#
     InterRAT_Parameters = SEQ(name=u'InterRAT-Parameters', mode=MODE_TYPE)
     _InterRAT_Parameters_eutra = SEQ(name=u'eutra', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'EUTRA-Parameters')), opt=True)
@@ -11984,8 +12600,8 @@ class NR_RRC_Definitions:
     _EUTRA_ParametersCommon_mfbi_EUTRA = ENUM(name=u'mfbi-EUTRA', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _EUTRA_ParametersCommon_mfbi_EUTRA._cont = ASN1Dict([(u'supported', 0)])
     _EUTRA_ParametersCommon_mfbi_EUTRA._ext = None
-    _EUTRA_ParametersCommon_modifiedMRP_BehaviorEUTRA = BIT_STR(name=u'modifiedMRP-BehaviorEUTRA', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _EUTRA_ParametersCommon_modifiedMRP_BehaviorEUTRA._const_sz = ASN1Set(rv=[32], rr=[], ev=None, er=[])
+    _EUTRA_ParametersCommon_modifiedMPR_BehaviorEUTRA = BIT_STR(name=u'modifiedMPR-BehaviorEUTRA', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _EUTRA_ParametersCommon_modifiedMPR_BehaviorEUTRA._const_sz = ASN1Set(rv=[32], rr=[], ev=None, er=[])
     _EUTRA_ParametersCommon_multiNS_Pmax_EUTRA = ENUM(name=u'multiNS-Pmax-EUTRA', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _EUTRA_ParametersCommon_multiNS_Pmax_EUTRA._cont = ASN1Dict([(u'supported', 0)])
     _EUTRA_ParametersCommon_multiNS_Pmax_EUTRA._ext = None
@@ -11994,7 +12610,7 @@ class NR_RRC_Definitions:
     _EUTRA_ParametersCommon_rs_SINR_MeasEUTRA._ext = None
     EUTRA_ParametersCommon._cont = ASN1Dict([
         (u'mfbi-EUTRA', _EUTRA_ParametersCommon_mfbi_EUTRA),
-        (u'modifiedMRP-BehaviorEUTRA', _EUTRA_ParametersCommon_modifiedMRP_BehaviorEUTRA),
+        (u'modifiedMPR-BehaviorEUTRA', _EUTRA_ParametersCommon_modifiedMPR_BehaviorEUTRA),
         (u'multiNS-Pmax-EUTRA', _EUTRA_ParametersCommon_multiNS_Pmax_EUTRA),
         (u'rs-SINR-MeasEUTRA', _EUTRA_ParametersCommon_rs_SINR_MeasEUTRA),
         ])
@@ -12025,9 +12641,9 @@ class NR_RRC_Definitions:
     _MAC_ParametersCommon_lcp_Restriction = ENUM(name=u'lcp-Restriction', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _MAC_ParametersCommon_lcp_Restriction._cont = ASN1Dict([(u'supported', 0)])
     _MAC_ParametersCommon_lcp_Restriction._ext = None
-    _MAC_ParametersCommon_pucch_SpatialRelInfoMAC_CE = ENUM(name=u'pucch-SpatialRelInfoMAC-CE', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _MAC_ParametersCommon_pucch_SpatialRelInfoMAC_CE._cont = ASN1Dict([(u'supported', 0)])
-    _MAC_ParametersCommon_pucch_SpatialRelInfoMAC_CE._ext = None
+    _MAC_ParametersCommon_dummy = ENUM(name=u'dummy', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _MAC_ParametersCommon_dummy._cont = ASN1Dict([(u'supported', 0)])
+    _MAC_ParametersCommon_dummy._ext = None
     _MAC_ParametersCommon_lch_ToSCellRestriction = ENUM(name=u'lch-ToSCellRestriction', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _MAC_ParametersCommon_lch_ToSCellRestriction._cont = ASN1Dict([(u'supported', 0)])
     _MAC_ParametersCommon_lch_ToSCellRestriction._ext = None
@@ -12039,7 +12655,7 @@ class NR_RRC_Definitions:
     _MAC_ParametersCommon_recommendedBitRateQuery._ext = None
     MAC_ParametersCommon._cont = ASN1Dict([
         (u'lcp-Restriction', _MAC_ParametersCommon_lcp_Restriction),
-        (u'pucch-SpatialRelInfoMAC-CE', _MAC_ParametersCommon_pucch_SpatialRelInfoMAC_CE),
+        (u'dummy', _MAC_ParametersCommon_dummy),
         (u'lch-ToSCellRestriction', _MAC_ParametersCommon_lch_ToSCellRestriction),
         (u'recommendedBitRate', _MAC_ParametersCommon_recommendedBitRate),
         (u'recommendedBitRateQuery', _MAC_ParametersCommon_recommendedBitRateQuery),
@@ -12110,6 +12726,21 @@ class NR_RRC_Definitions:
     _MeasAndMobParametersCommon_nr_CGI_Reporting = ENUM(name=u'nr-CGI-Reporting', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
     _MeasAndMobParametersCommon_nr_CGI_Reporting._cont = ASN1Dict([(u'supported', 0)])
     _MeasAndMobParametersCommon_nr_CGI_Reporting._ext = None
+    _MeasAndMobParametersCommon_independentGapConfig = ENUM(name=u'independentGapConfig', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
+    _MeasAndMobParametersCommon_independentGapConfig._cont = ASN1Dict([(u'supported', 0)])
+    _MeasAndMobParametersCommon_independentGapConfig._ext = None
+    _MeasAndMobParametersCommon_periodicEUTRA_MeasAndReport = ENUM(name=u'periodicEUTRA-MeasAndReport', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
+    _MeasAndMobParametersCommon_periodicEUTRA_MeasAndReport._cont = ASN1Dict([(u'supported', 0)])
+    _MeasAndMobParametersCommon_periodicEUTRA_MeasAndReport._ext = None
+    _MeasAndMobParametersCommon_handoverFR1_FR2 = ENUM(name=u'handoverFR1-FR2', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
+    _MeasAndMobParametersCommon_handoverFR1_FR2._cont = ASN1Dict([(u'supported', 0)])
+    _MeasAndMobParametersCommon_handoverFR1_FR2._ext = None
+    _MeasAndMobParametersCommon_maxNumberCSI_RS_RRM_RS_SINR = ENUM(name=u'maxNumberCSI-RS-RRM-RS-SINR', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
+    _MeasAndMobParametersCommon_maxNumberCSI_RS_RRM_RS_SINR._cont = ASN1Dict([(u'n4', 0), (u'n8', 1), (u'n16', 2), (u'n32', 3), (u'n64', 4), (u'n96', 5)])
+    _MeasAndMobParametersCommon_maxNumberCSI_RS_RRM_RS_SINR._ext = None
+    _MeasAndMobParametersCommon_nr_CGI_Reporting_ENDC = ENUM(name=u'nr-CGI-Reporting-ENDC', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=2)
+    _MeasAndMobParametersCommon_nr_CGI_Reporting_ENDC._cont = ASN1Dict([(u'supported', 0)])
+    _MeasAndMobParametersCommon_nr_CGI_Reporting_ENDC._ext = None
     MeasAndMobParametersCommon._cont = ASN1Dict([
         (u'supportedGapPattern', _MeasAndMobParametersCommon_supportedGapPattern),
         (u'ssb-RLM', _MeasAndMobParametersCommon_ssb_RLM),
@@ -12118,8 +12749,13 @@ class NR_RRC_Definitions:
         (u'handoverFDD-TDD', _MeasAndMobParametersCommon_handoverFDD_TDD),
         (u'eutra-CGI-Reporting', _MeasAndMobParametersCommon_eutra_CGI_Reporting),
         (u'nr-CGI-Reporting', _MeasAndMobParametersCommon_nr_CGI_Reporting),
+        (u'independentGapConfig', _MeasAndMobParametersCommon_independentGapConfig),
+        (u'periodicEUTRA-MeasAndReport', _MeasAndMobParametersCommon_periodicEUTRA_MeasAndReport),
+        (u'handoverFR1-FR2', _MeasAndMobParametersCommon_handoverFR1_FR2),
+        (u'maxNumberCSI-RS-RRM-RS-SINR', _MeasAndMobParametersCommon_maxNumberCSI_RS_RRM_RS_SINR),
+        (u'nr-CGI-Reporting-ENDC', _MeasAndMobParametersCommon_nr_CGI_Reporting_ENDC),
         ])
-    MeasAndMobParametersCommon._ext = [u'eventB-MeasAndReport', u'handoverFDD-TDD', u'eutra-CGI-Reporting', u'nr-CGI-Reporting']
+    MeasAndMobParametersCommon._ext = [u'eventB-MeasAndReport', u'handoverFDD-TDD', u'eutra-CGI-Reporting', u'nr-CGI-Reporting', u'independentGapConfig', u'periodicEUTRA-MeasAndReport', u'handoverFR1-FR2', u'maxNumberCSI-RS-RRM-RS-SINR', u'nr-CGI-Reporting-ENDC']
     
     #-----< MeasAndMobParametersXDD-Diff >-----#
     MeasAndMobParametersXDD_Diff = SEQ(name=u'MeasAndMobParametersXDD-Diff', mode=MODE_TYPE)
@@ -12173,6 +12809,12 @@ class NR_RRC_Definitions:
     _MeasAndMobParametersFRX_Diff_handover_eLTE = ENUM(name=u'handover-eLTE', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
     _MeasAndMobParametersFRX_Diff_handover_eLTE._cont = ASN1Dict([(u'supported', 0)])
     _MeasAndMobParametersFRX_Diff_handover_eLTE._ext = None
+    _MeasAndMobParametersFRX_Diff_maxNumberResource_CSI_RS_RLM = ENUM(name=u'maxNumberResource-CSI-RS-RLM', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
+    _MeasAndMobParametersFRX_Diff_maxNumberResource_CSI_RS_RLM._cont = ASN1Dict([(u'n2', 0), (u'n4', 1), (u'n6', 2), (u'n8', 3)])
+    _MeasAndMobParametersFRX_Diff_maxNumberResource_CSI_RS_RLM._ext = None
+    _MeasAndMobParametersFRX_Diff_simultaneousRxDataSSB_DiffNumerology = ENUM(name=u'simultaneousRxDataSSB-DiffNumerology', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=2)
+    _MeasAndMobParametersFRX_Diff_simultaneousRxDataSSB_DiffNumerology._cont = ASN1Dict([(u'supported', 0)])
+    _MeasAndMobParametersFRX_Diff_simultaneousRxDataSSB_DiffNumerology._ext = None
     MeasAndMobParametersFRX_Diff._cont = ASN1Dict([
         (u'ss-SINR-Meas', _MeasAndMobParametersFRX_Diff_ss_SINR_Meas),
         (u'csi-RSRP-AndRSRQ-MeasWithSSB', _MeasAndMobParametersFRX_Diff_csi_RSRP_AndRSRQ_MeasWithSSB),
@@ -12182,8 +12824,10 @@ class NR_RRC_Definitions:
         (u'handoverInterF', _MeasAndMobParametersFRX_Diff_handoverInterF),
         (u'handoverLTE', _MeasAndMobParametersFRX_Diff_handoverLTE),
         (u'handover-eLTE', _MeasAndMobParametersFRX_Diff_handover_eLTE),
+        (u'maxNumberResource-CSI-RS-RLM', _MeasAndMobParametersFRX_Diff_maxNumberResource_CSI_RS_RLM),
+        (u'simultaneousRxDataSSB-DiffNumerology', _MeasAndMobParametersFRX_Diff_simultaneousRxDataSSB_DiffNumerology),
         ])
-    MeasAndMobParametersFRX_Diff._ext = [u'handoverInterF', u'handoverLTE', u'handover-eLTE']
+    MeasAndMobParametersFRX_Diff._ext = [u'handoverInterF', u'handoverLTE', u'handover-eLTE', u'maxNumberResource-CSI-RS-RLM', u'simultaneousRxDataSSB-DiffNumerology']
     
     #-----< MeasAndMobParametersMRDC >-----#
     MeasAndMobParametersMRDC = SEQ(name=u'MeasAndMobParametersMRDC', mode=MODE_TYPE)
@@ -12259,11 +12903,11 @@ class NR_RRC_Definitions:
     _MIMO_ParametersPerBand_additionalActiveTCI_StatePDCCH._cont = ASN1Dict([(u'supported', 0)])
     _MIMO_ParametersPerBand_additionalActiveTCI_StatePDCCH._ext = None
     _MIMO_ParametersPerBand_pusch_TransCoherence = ENUM(name=u'pusch-TransCoherence', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _MIMO_ParametersPerBand_pusch_TransCoherence._cont = ASN1Dict([(u'nonCoherent', 0), (u'partialNonCoherent', 1), (u'fullCoherent', 2)])
+    _MIMO_ParametersPerBand_pusch_TransCoherence._cont = ASN1Dict([(u'nonCoherent', 0), (u'partialCoherent', 1), (u'fullCoherent', 2)])
     _MIMO_ParametersPerBand_pusch_TransCoherence._ext = None
-    _MIMO_ParametersPerBand_beamCorrespondence = ENUM(name=u'beamCorrespondence', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _MIMO_ParametersPerBand_beamCorrespondence._cont = ASN1Dict([(u'supported', 0)])
-    _MIMO_ParametersPerBand_beamCorrespondence._ext = None
+    _MIMO_ParametersPerBand_beamCorrespondenceWithoutUL_BeamSweeping = ENUM(name=u'beamCorrespondenceWithoutUL-BeamSweeping', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _MIMO_ParametersPerBand_beamCorrespondenceWithoutUL_BeamSweeping._cont = ASN1Dict([(u'supported', 0)])
+    _MIMO_ParametersPerBand_beamCorrespondenceWithoutUL_BeamSweeping._ext = None
     _MIMO_ParametersPerBand_periodicBeamReport = ENUM(name=u'periodicBeamReport', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _MIMO_ParametersPerBand_periodicBeamReport._cont = ASN1Dict([(u'supported', 0)])
     _MIMO_ParametersPerBand_periodicBeamReport._ext = None
@@ -12276,7 +12920,7 @@ class NR_RRC_Definitions:
     _MIMO_ParametersPerBand_sp_BeamReportPUSCH = ENUM(name=u'sp-BeamReportPUSCH', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _MIMO_ParametersPerBand_sp_BeamReportPUSCH._cont = ASN1Dict([(u'supported', 0)])
     _MIMO_ParametersPerBand_sp_BeamReportPUSCH._ext = None
-    _MIMO_ParametersPerBand_beamManagementSSB_CSI_RS = SEQ(name=u'beamManagementSSB-CSI-RS', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'BeamManagementSSB-CSI-RS')), opt=True)
+    _MIMO_ParametersPerBand_dummy1 = SEQ(name=u'dummy1', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'DummyG')), opt=True)
     _MIMO_ParametersPerBand_maxNumberRxBeam = INT(name=u'maxNumberRxBeam', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _MIMO_ParametersPerBand_maxNumberRxBeam._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=8)], ev=None, er=[])
     _MIMO_ParametersPerBand_maxNumberRxTxBeamSwitchDL = SEQ(name=u'maxNumberRxTxBeamSwitchDL', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
@@ -12320,27 +12964,27 @@ class NR_RRC_Definitions:
         (u'maxNumberSRS-ResourceSet', __MIMO_ParametersPerBand_uplinkBeamManagement_maxNumberSRS_ResourceSet),
         ])
     _MIMO_ParametersPerBand_uplinkBeamManagement._ext = None
-    _MIMO_ParametersPerBand_maxNumberCSI_RS_BFR = INT(name=u'maxNumberCSI-RS-BFR', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _MIMO_ParametersPerBand_maxNumberCSI_RS_BFR._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _MIMO_ParametersPerBand_maxNumberSSB_BFR = INT(name=u'maxNumberSSB-BFR', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _MIMO_ParametersPerBand_maxNumberSSB_BFR._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _MIMO_ParametersPerBand_maxNumberCSI_RS_SSB_BFR = INT(name=u'maxNumberCSI-RS-SSB-BFR', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _MIMO_ParametersPerBand_maxNumberCSI_RS_SSB_BFR._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=256)], ev=None, er=[])
-    _MIMO_ParametersPerBand_twoPortsPTRS_DL = ENUM(name=u'twoPortsPTRS-DL', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _MIMO_ParametersPerBand_twoPortsPTRS_DL._cont = ASN1Dict([(u'supported', 0)])
-    _MIMO_ParametersPerBand_twoPortsPTRS_DL._ext = None
+    _MIMO_ParametersPerBand_maxNumberCSI_RS_BFD = INT(name=u'maxNumberCSI-RS-BFD', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _MIMO_ParametersPerBand_maxNumberCSI_RS_BFD._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    _MIMO_ParametersPerBand_maxNumberSSB_BFD = INT(name=u'maxNumberSSB-BFD', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _MIMO_ParametersPerBand_maxNumberSSB_BFD._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    _MIMO_ParametersPerBand_maxNumberCSI_RS_SSB_CBD = INT(name=u'maxNumberCSI-RS-SSB-CBD', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _MIMO_ParametersPerBand_maxNumberCSI_RS_SSB_CBD._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=256)], ev=None, er=[])
+    _MIMO_ParametersPerBand_dummy2 = ENUM(name=u'dummy2', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _MIMO_ParametersPerBand_dummy2._cont = ASN1Dict([(u'supported', 0)])
+    _MIMO_ParametersPerBand_dummy2._ext = None
     _MIMO_ParametersPerBand_twoPortsPTRS_UL = ENUM(name=u'twoPortsPTRS-UL', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _MIMO_ParametersPerBand_twoPortsPTRS_UL._cont = ASN1Dict([(u'supported', 0)])
     _MIMO_ParametersPerBand_twoPortsPTRS_UL._ext = None
-    _MIMO_ParametersPerBand_supportedSRS_Resources = SEQ(name=u'supportedSRS-Resources', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SRS-Resources')), opt=True)
-    _MIMO_ParametersPerBand_maxNumberSimultaneousSRS_PerCC = INT(name=u'maxNumberSimultaneousSRS-PerCC', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _MIMO_ParametersPerBand_maxNumberSimultaneousSRS_PerCC._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _MIMO_ParametersPerBand_dummy5 = SEQ(name=u'dummy5', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SRS-Resources')), opt=True)
+    _MIMO_ParametersPerBand_dummy3 = INT(name=u'dummy3', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _MIMO_ParametersPerBand_dummy3._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     _MIMO_ParametersPerBand_beamReportTiming = SEQ(name=u'beamReportTiming', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MIMO_ParametersPerBand_beamReportTiming_scs_15kHz = ENUM(name=u'scs-15kHz', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MIMO_ParametersPerBand_beamReportTiming_scs_15kHz._cont = ASN1Dict([(u'sym2', 0), (u'sym4', 1), (u'sym8', 2)])
     __MIMO_ParametersPerBand_beamReportTiming_scs_15kHz._ext = None
     __MIMO_ParametersPerBand_beamReportTiming_scs_30kHz = ENUM(name=u'scs-30kHz', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __MIMO_ParametersPerBand_beamReportTiming_scs_30kHz._cont = ASN1Dict([(u'sym4', 0), (u'sym8', 1), (u'sym14', 2)])
+    __MIMO_ParametersPerBand_beamReportTiming_scs_30kHz._cont = ASN1Dict([(u'sym4', 0), (u'sym8', 1), (u'sym14', 2), (u'sym28', 3)])
     __MIMO_ParametersPerBand_beamReportTiming_scs_30kHz._ext = None
     __MIMO_ParametersPerBand_beamReportTiming_scs_60kHz = ENUM(name=u'scs-60kHz', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MIMO_ParametersPerBand_beamReportTiming_scs_60kHz._cont = ASN1Dict([(u'sym8', 0), (u'sym14', 1), (u'sym28', 2)])
@@ -12379,75 +13023,226 @@ class NR_RRC_Definitions:
         (u'scs-120kHz', __MIMO_ParametersPerBand_ptrs_DensityRecommendationSetUL_scs_120kHz),
         ])
     _MIMO_ParametersPerBand_ptrs_DensityRecommendationSetUL._ext = None
-    _MIMO_ParametersPerBand_csi_RS_ForTracking = SEQ(name=u'csi-RS-ForTracking', mode=MODE_TYPE, tag=(24, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CSI-RS-ForTracking')), opt=True)
+    _MIMO_ParametersPerBand_dummy4 = SEQ(name=u'dummy4', mode=MODE_TYPE, tag=(24, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'DummyH')), opt=True)
     _MIMO_ParametersPerBand_aperiodicTRS = ENUM(name=u'aperiodicTRS', mode=MODE_TYPE, tag=(25, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _MIMO_ParametersPerBand_aperiodicTRS._cont = ASN1Dict([(u'supported', 0)])
     _MIMO_ParametersPerBand_aperiodicTRS._ext = None
+    _MIMO_ParametersPerBand_beamCorrespondenceCA = ENUM(name=u'beamCorrespondenceCA', mode=MODE_TYPE, tag=(26, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _MIMO_ParametersPerBand_beamCorrespondenceCA._cont = ASN1Dict([(u'true', 0)])
+    _MIMO_ParametersPerBand_beamCorrespondenceCA._ext = None
+    _MIMO_ParametersPerBand_beamManagementSSB_CSI_RS = SEQ(name=u'beamManagementSSB-CSI-RS', mode=MODE_TYPE, tag=(27, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'BeamManagementSSB-CSI-RS')), opt=True, group=0)
+    _MIMO_ParametersPerBand_beamSwitchTiming = SEQ(name=u'beamSwitchTiming', mode=MODE_TYPE, tag=(28, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    __MIMO_ParametersPerBand_beamSwitchTiming_scs_60kHz = ENUM(name=u'scs-60kHz', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __MIMO_ParametersPerBand_beamSwitchTiming_scs_60kHz._cont = ASN1Dict([(u'sym14', 0), (u'sym28', 1), (u'sym48', 2), (u'sym224', 3), (u'sym336', 4)])
+    __MIMO_ParametersPerBand_beamSwitchTiming_scs_60kHz._ext = None
+    __MIMO_ParametersPerBand_beamSwitchTiming_scs_120kHz = ENUM(name=u'scs-120kHz', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __MIMO_ParametersPerBand_beamSwitchTiming_scs_120kHz._cont = ASN1Dict([(u'sym14', 0), (u'sym28', 1), (u'sym48', 2), (u'sym224', 3), (u'sym336', 4)])
+    __MIMO_ParametersPerBand_beamSwitchTiming_scs_120kHz._ext = None
+    _MIMO_ParametersPerBand_beamSwitchTiming._cont = ASN1Dict([
+        (u'scs-60kHz', __MIMO_ParametersPerBand_beamSwitchTiming_scs_60kHz),
+        (u'scs-120kHz', __MIMO_ParametersPerBand_beamSwitchTiming_scs_120kHz),
+        ])
+    _MIMO_ParametersPerBand_beamSwitchTiming._ext = None
+    _MIMO_ParametersPerBand_codebookParameters = SEQ(name=u'codebookParameters', mode=MODE_TYPE, tag=(29, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CodebookParameters')), opt=True, group=0)
+    _MIMO_ParametersPerBand_csi_RS_IM_ReceptionForFeedback = SEQ(name=u'csi-RS-IM-ReceptionForFeedback', mode=MODE_TYPE, tag=(30, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CSI-RS-IM-ReceptionForFeedback')), opt=True, group=0)
+    _MIMO_ParametersPerBand_csi_RS_ProcFrameworkForSRS = SEQ(name=u'csi-RS-ProcFrameworkForSRS', mode=MODE_TYPE, tag=(31, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CSI-RS-ProcFrameworkForSRS')), opt=True, group=0)
+    _MIMO_ParametersPerBand_csi_ReportFramework = SEQ(name=u'csi-ReportFramework', mode=MODE_TYPE, tag=(32, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CSI-ReportFramework')), opt=True, group=0)
+    _MIMO_ParametersPerBand_csi_RS_ForTracking = SEQ(name=u'csi-RS-ForTracking', mode=MODE_TYPE, tag=(33, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CSI-RS-ForTracking')), opt=True, group=0)
+    _MIMO_ParametersPerBand_srs_AssocCSI_RS = SEQ_OF(name=u'srs-AssocCSI-RS', mode=MODE_TYPE, tag=(34, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    __MIMO_ParametersPerBand_srs_AssocCSI_RS__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'SupportedCSI-RS-Resource')))
+    _MIMO_ParametersPerBand_srs_AssocCSI_RS._cont = __MIMO_ParametersPerBand_srs_AssocCSI_RS__item_
+    _MIMO_ParametersPerBand_srs_AssocCSI_RS._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=7)], ev=None, er=[])
+    _MIMO_ParametersPerBand_spatialRelations = SEQ(name=u'spatialRelations', mode=MODE_TYPE, tag=(35, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SpatialRelations')), opt=True, group=0)
     MIMO_ParametersPerBand._cont = ASN1Dict([
         (u'tci-StatePDSCH', _MIMO_ParametersPerBand_tci_StatePDSCH),
         (u'additionalActiveTCI-StatePDCCH', _MIMO_ParametersPerBand_additionalActiveTCI_StatePDCCH),
         (u'pusch-TransCoherence', _MIMO_ParametersPerBand_pusch_TransCoherence),
-        (u'beamCorrespondence', _MIMO_ParametersPerBand_beamCorrespondence),
+        (u'beamCorrespondenceWithoutUL-BeamSweeping', _MIMO_ParametersPerBand_beamCorrespondenceWithoutUL_BeamSweeping),
         (u'periodicBeamReport', _MIMO_ParametersPerBand_periodicBeamReport),
         (u'aperiodicBeamReport', _MIMO_ParametersPerBand_aperiodicBeamReport),
         (u'sp-BeamReportPUCCH', _MIMO_ParametersPerBand_sp_BeamReportPUCCH),
         (u'sp-BeamReportPUSCH', _MIMO_ParametersPerBand_sp_BeamReportPUSCH),
-        (u'beamManagementSSB-CSI-RS', _MIMO_ParametersPerBand_beamManagementSSB_CSI_RS),
+        (u'dummy1', _MIMO_ParametersPerBand_dummy1),
         (u'maxNumberRxBeam', _MIMO_ParametersPerBand_maxNumberRxBeam),
         (u'maxNumberRxTxBeamSwitchDL', _MIMO_ParametersPerBand_maxNumberRxTxBeamSwitchDL),
         (u'maxNumberNonGroupBeamReporting', _MIMO_ParametersPerBand_maxNumberNonGroupBeamReporting),
         (u'groupBeamReporting', _MIMO_ParametersPerBand_groupBeamReporting),
         (u'uplinkBeamManagement', _MIMO_ParametersPerBand_uplinkBeamManagement),
-        (u'maxNumberCSI-RS-BFR', _MIMO_ParametersPerBand_maxNumberCSI_RS_BFR),
-        (u'maxNumberSSB-BFR', _MIMO_ParametersPerBand_maxNumberSSB_BFR),
-        (u'maxNumberCSI-RS-SSB-BFR', _MIMO_ParametersPerBand_maxNumberCSI_RS_SSB_BFR),
-        (u'twoPortsPTRS-DL', _MIMO_ParametersPerBand_twoPortsPTRS_DL),
+        (u'maxNumberCSI-RS-BFD', _MIMO_ParametersPerBand_maxNumberCSI_RS_BFD),
+        (u'maxNumberSSB-BFD', _MIMO_ParametersPerBand_maxNumberSSB_BFD),
+        (u'maxNumberCSI-RS-SSB-CBD', _MIMO_ParametersPerBand_maxNumberCSI_RS_SSB_CBD),
+        (u'dummy2', _MIMO_ParametersPerBand_dummy2),
         (u'twoPortsPTRS-UL', _MIMO_ParametersPerBand_twoPortsPTRS_UL),
-        (u'supportedSRS-Resources', _MIMO_ParametersPerBand_supportedSRS_Resources),
-        (u'maxNumberSimultaneousSRS-PerCC', _MIMO_ParametersPerBand_maxNumberSimultaneousSRS_PerCC),
+        (u'dummy5', _MIMO_ParametersPerBand_dummy5),
+        (u'dummy3', _MIMO_ParametersPerBand_dummy3),
         (u'beamReportTiming', _MIMO_ParametersPerBand_beamReportTiming),
         (u'ptrs-DensityRecommendationSetDL', _MIMO_ParametersPerBand_ptrs_DensityRecommendationSetDL),
         (u'ptrs-DensityRecommendationSetUL', _MIMO_ParametersPerBand_ptrs_DensityRecommendationSetUL),
-        (u'csi-RS-ForTracking', _MIMO_ParametersPerBand_csi_RS_ForTracking),
+        (u'dummy4', _MIMO_ParametersPerBand_dummy4),
         (u'aperiodicTRS', _MIMO_ParametersPerBand_aperiodicTRS),
+        (u'beamCorrespondenceCA', _MIMO_ParametersPerBand_beamCorrespondenceCA),
+        (u'beamManagementSSB-CSI-RS', _MIMO_ParametersPerBand_beamManagementSSB_CSI_RS),
+        (u'beamSwitchTiming', _MIMO_ParametersPerBand_beamSwitchTiming),
+        (u'codebookParameters', _MIMO_ParametersPerBand_codebookParameters),
+        (u'csi-RS-IM-ReceptionForFeedback', _MIMO_ParametersPerBand_csi_RS_IM_ReceptionForFeedback),
+        (u'csi-RS-ProcFrameworkForSRS', _MIMO_ParametersPerBand_csi_RS_ProcFrameworkForSRS),
+        (u'csi-ReportFramework', _MIMO_ParametersPerBand_csi_ReportFramework),
+        (u'csi-RS-ForTracking', _MIMO_ParametersPerBand_csi_RS_ForTracking),
+        (u'srs-AssocCSI-RS', _MIMO_ParametersPerBand_srs_AssocCSI_RS),
+        (u'spatialRelations', _MIMO_ParametersPerBand_spatialRelations),
         ])
-    MIMO_ParametersPerBand._ext = []
+    MIMO_ParametersPerBand._ext = [u'beamCorrespondenceCA', u'beamManagementSSB-CSI-RS', u'beamSwitchTiming', u'codebookParameters', u'csi-RS-IM-ReceptionForFeedback', u'csi-RS-ProcFrameworkForSRS', u'csi-ReportFramework', u'csi-RS-ForTracking', u'srs-AssocCSI-RS', u'spatialRelations']
+    
+    #-----< DummyG >-----#
+    DummyG = SEQ(name=u'DummyG', mode=MODE_TYPE)
+    _DummyG_maxNumberSSB_CSI_RS_ResourceOneTx = ENUM(name=u'maxNumberSSB-CSI-RS-ResourceOneTx', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyG_maxNumberSSB_CSI_RS_ResourceOneTx._cont = ASN1Dict([(u'n8', 0), (u'n16', 1), (u'n32', 2), (u'n64', 3)])
+    _DummyG_maxNumberSSB_CSI_RS_ResourceOneTx._ext = None
+    _DummyG_maxNumberSSB_CSI_RS_ResourceTwoTx = ENUM(name=u'maxNumberSSB-CSI-RS-ResourceTwoTx', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyG_maxNumberSSB_CSI_RS_ResourceTwoTx._cont = ASN1Dict([(u'n0', 0), (u'n4', 1), (u'n8', 2), (u'n16', 3), (u'n32', 4), (u'n64', 5)])
+    _DummyG_maxNumberSSB_CSI_RS_ResourceTwoTx._ext = None
+    _DummyG_supportedCSI_RS_Density = ENUM(name=u'supportedCSI-RS-Density', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyG_supportedCSI_RS_Density._cont = ASN1Dict([(u'one', 0), (u'three', 1), (u'oneAndThree', 2)])
+    _DummyG_supportedCSI_RS_Density._ext = None
+    DummyG._cont = ASN1Dict([
+        (u'maxNumberSSB-CSI-RS-ResourceOneTx', _DummyG_maxNumberSSB_CSI_RS_ResourceOneTx),
+        (u'maxNumberSSB-CSI-RS-ResourceTwoTx', _DummyG_maxNumberSSB_CSI_RS_ResourceTwoTx),
+        (u'supportedCSI-RS-Density', _DummyG_supportedCSI_RS_Density),
+        ])
+    DummyG._ext = None
     
     #-----< BeamManagementSSB-CSI-RS >-----#
     BeamManagementSSB_CSI_RS = SEQ(name=u'BeamManagementSSB-CSI-RS', mode=MODE_TYPE)
     _BeamManagementSSB_CSI_RS_maxNumberSSB_CSI_RS_ResourceOneTx = ENUM(name=u'maxNumberSSB-CSI-RS-ResourceOneTx', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _BeamManagementSSB_CSI_RS_maxNumberSSB_CSI_RS_ResourceOneTx._cont = ASN1Dict([(u'n8', 0), (u'n16', 1), (u'n32', 2), (u'n64', 3)])
+    _BeamManagementSSB_CSI_RS_maxNumberSSB_CSI_RS_ResourceOneTx._cont = ASN1Dict([(u'n0', 0), (u'n8', 1), (u'n16', 2), (u'n32', 3), (u'n64', 4)])
     _BeamManagementSSB_CSI_RS_maxNumberSSB_CSI_RS_ResourceOneTx._ext = None
-    _BeamManagementSSB_CSI_RS_maxNumberSSB_CSI_RS_ResourceTwoTx = ENUM(name=u'maxNumberSSB-CSI-RS-ResourceTwoTx', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _BeamManagementSSB_CSI_RS_maxNumberSSB_CSI_RS_ResourceTwoTx._cont = ASN1Dict([(u'n0', 0), (u'n4', 1), (u'n8', 2), (u'n16', 3), (u'n32', 4), (u'n64', 5)])
-    _BeamManagementSSB_CSI_RS_maxNumberSSB_CSI_RS_ResourceTwoTx._ext = None
-    _BeamManagementSSB_CSI_RS_supportedCSI_RS_Density = ENUM(name=u'supportedCSI-RS-Density', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _BeamManagementSSB_CSI_RS_maxNumberCSI_RS_Resource = ENUM(name=u'maxNumberCSI-RS-Resource', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _BeamManagementSSB_CSI_RS_maxNumberCSI_RS_Resource._cont = ASN1Dict([(u'n0', 0), (u'n4', 1), (u'n8', 2), (u'n16', 3), (u'n32', 4), (u'n64', 5)])
+    _BeamManagementSSB_CSI_RS_maxNumberCSI_RS_Resource._ext = None
+    _BeamManagementSSB_CSI_RS_maxNumberCSI_RS_ResourceTwoTx = ENUM(name=u'maxNumberCSI-RS-ResourceTwoTx', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _BeamManagementSSB_CSI_RS_maxNumberCSI_RS_ResourceTwoTx._cont = ASN1Dict([(u'n0', 0), (u'n4', 1), (u'n8', 2), (u'n16', 3), (u'n32', 4), (u'n64', 5)])
+    _BeamManagementSSB_CSI_RS_maxNumberCSI_RS_ResourceTwoTx._ext = None
+    _BeamManagementSSB_CSI_RS_supportedCSI_RS_Density = ENUM(name=u'supportedCSI-RS-Density', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _BeamManagementSSB_CSI_RS_supportedCSI_RS_Density._cont = ASN1Dict([(u'one', 0), (u'three', 1), (u'oneAndThree', 2)])
     _BeamManagementSSB_CSI_RS_supportedCSI_RS_Density._ext = None
+    _BeamManagementSSB_CSI_RS_maxNumberAperiodicCSI_RS_Resource = ENUM(name=u'maxNumberAperiodicCSI-RS-Resource', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _BeamManagementSSB_CSI_RS_maxNumberAperiodicCSI_RS_Resource._cont = ASN1Dict([(u'n0', 0), (u'n1', 1), (u'n4', 2), (u'n8', 3), (u'n16', 4), (u'n32', 5), (u'n64', 6)])
+    _BeamManagementSSB_CSI_RS_maxNumberAperiodicCSI_RS_Resource._ext = None
     BeamManagementSSB_CSI_RS._cont = ASN1Dict([
         (u'maxNumberSSB-CSI-RS-ResourceOneTx', _BeamManagementSSB_CSI_RS_maxNumberSSB_CSI_RS_ResourceOneTx),
-        (u'maxNumberSSB-CSI-RS-ResourceTwoTx', _BeamManagementSSB_CSI_RS_maxNumberSSB_CSI_RS_ResourceTwoTx),
+        (u'maxNumberCSI-RS-Resource', _BeamManagementSSB_CSI_RS_maxNumberCSI_RS_Resource),
+        (u'maxNumberCSI-RS-ResourceTwoTx', _BeamManagementSSB_CSI_RS_maxNumberCSI_RS_ResourceTwoTx),
         (u'supportedCSI-RS-Density', _BeamManagementSSB_CSI_RS_supportedCSI_RS_Density),
+        (u'maxNumberAperiodicCSI-RS-Resource', _BeamManagementSSB_CSI_RS_maxNumberAperiodicCSI_RS_Resource),
         ])
     BeamManagementSSB_CSI_RS._ext = None
     
+    #-----< DummyH >-----#
+    DummyH = SEQ(name=u'DummyH', mode=MODE_TYPE)
+    _DummyH_burstLength = INT(name=u'burstLength', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyH_burstLength._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=2)], ev=None, er=[])
+    _DummyH_maxSimultaneousResourceSetsPerCC = INT(name=u'maxSimultaneousResourceSetsPerCC', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyH_maxSimultaneousResourceSetsPerCC._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    _DummyH_maxConfiguredResourceSetsPerCC = INT(name=u'maxConfiguredResourceSetsPerCC', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyH_maxConfiguredResourceSetsPerCC._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    _DummyH_maxConfiguredResourceSetsAllCC = INT(name=u'maxConfiguredResourceSetsAllCC', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyH_maxConfiguredResourceSetsAllCC._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
+    DummyH._cont = ASN1Dict([
+        (u'burstLength', _DummyH_burstLength),
+        (u'maxSimultaneousResourceSetsPerCC', _DummyH_maxSimultaneousResourceSetsPerCC),
+        (u'maxConfiguredResourceSetsPerCC', _DummyH_maxConfiguredResourceSetsPerCC),
+        (u'maxConfiguredResourceSetsAllCC', _DummyH_maxConfiguredResourceSetsAllCC),
+        ])
+    DummyH._ext = None
+    
     #-----< CSI-RS-ForTracking >-----#
     CSI_RS_ForTracking = SEQ(name=u'CSI-RS-ForTracking', mode=MODE_TYPE)
-    _CSI_RS_ForTracking_burstLength = INT(name=u'burstLength', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _CSI_RS_ForTracking_burstLength._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=2)], ev=None, er=[])
+    _CSI_RS_ForTracking_maxBurstLength = INT(name=u'maxBurstLength', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CSI_RS_ForTracking_maxBurstLength._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=2)], ev=None, er=[])
     _CSI_RS_ForTracking_maxSimultaneousResourceSetsPerCC = INT(name=u'maxSimultaneousResourceSetsPerCC', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _CSI_RS_ForTracking_maxSimultaneousResourceSetsPerCC._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
     _CSI_RS_ForTracking_maxConfiguredResourceSetsPerCC = INT(name=u'maxConfiguredResourceSetsPerCC', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _CSI_RS_ForTracking_maxConfiguredResourceSetsPerCC._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
     _CSI_RS_ForTracking_maxConfiguredResourceSetsAllCC = INT(name=u'maxConfiguredResourceSetsAllCC', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _CSI_RS_ForTracking_maxConfiguredResourceSetsAllCC._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
+    _CSI_RS_ForTracking_maxConfiguredResourceSetsAllCC._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=256)], ev=None, er=[])
     CSI_RS_ForTracking._cont = ASN1Dict([
-        (u'burstLength', _CSI_RS_ForTracking_burstLength),
+        (u'maxBurstLength', _CSI_RS_ForTracking_maxBurstLength),
         (u'maxSimultaneousResourceSetsPerCC', _CSI_RS_ForTracking_maxSimultaneousResourceSetsPerCC),
         (u'maxConfiguredResourceSetsPerCC', _CSI_RS_ForTracking_maxConfiguredResourceSetsPerCC),
         (u'maxConfiguredResourceSetsAllCC', _CSI_RS_ForTracking_maxConfiguredResourceSetsAllCC),
         ])
     CSI_RS_ForTracking._ext = None
+    
+    #-----< CSI-RS-IM-ReceptionForFeedback >-----#
+    CSI_RS_IM_ReceptionForFeedback = SEQ(name=u'CSI-RS-IM-ReceptionForFeedback', mode=MODE_TYPE)
+    _CSI_RS_IM_ReceptionForFeedback_maxConfigNumberNZP_CSI_RS_PerCC = INT(name=u'maxConfigNumberNZP-CSI-RS-PerCC', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CSI_RS_IM_ReceptionForFeedback_maxConfigNumberNZP_CSI_RS_PerCC._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    _CSI_RS_IM_ReceptionForFeedback_maxConfigNumberPortsAcrossNZP_CSI_RS_PerCC = INT(name=u'maxConfigNumberPortsAcrossNZP-CSI-RS-PerCC', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CSI_RS_IM_ReceptionForFeedback_maxConfigNumberPortsAcrossNZP_CSI_RS_PerCC._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=256)], ev=None, er=[])
+    _CSI_RS_IM_ReceptionForFeedback_maxConfigNumberCSI_IM_PerCC = ENUM(name=u'maxConfigNumberCSI-IM-PerCC', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CSI_RS_IM_ReceptionForFeedback_maxConfigNumberCSI_IM_PerCC._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2), (u'n8', 3), (u'n16', 4), (u'n32', 5)])
+    _CSI_RS_IM_ReceptionForFeedback_maxConfigNumberCSI_IM_PerCC._ext = None
+    _CSI_RS_IM_ReceptionForFeedback_maxNumberSimultaneousNZP_CSI_RS_PerCC = INT(name=u'maxNumberSimultaneousNZP-CSI-RS-PerCC', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CSI_RS_IM_ReceptionForFeedback_maxNumberSimultaneousNZP_CSI_RS_PerCC._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    _CSI_RS_IM_ReceptionForFeedback_totalNumberPortsSimultaneousNZP_CSI_RS_PerCC = INT(name=u'totalNumberPortsSimultaneousNZP-CSI-RS-PerCC', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CSI_RS_IM_ReceptionForFeedback_totalNumberPortsSimultaneousNZP_CSI_RS_PerCC._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=256)], ev=None, er=[])
+    CSI_RS_IM_ReceptionForFeedback._cont = ASN1Dict([
+        (u'maxConfigNumberNZP-CSI-RS-PerCC', _CSI_RS_IM_ReceptionForFeedback_maxConfigNumberNZP_CSI_RS_PerCC),
+        (u'maxConfigNumberPortsAcrossNZP-CSI-RS-PerCC', _CSI_RS_IM_ReceptionForFeedback_maxConfigNumberPortsAcrossNZP_CSI_RS_PerCC),
+        (u'maxConfigNumberCSI-IM-PerCC', _CSI_RS_IM_ReceptionForFeedback_maxConfigNumberCSI_IM_PerCC),
+        (u'maxNumberSimultaneousNZP-CSI-RS-PerCC', _CSI_RS_IM_ReceptionForFeedback_maxNumberSimultaneousNZP_CSI_RS_PerCC),
+        (u'totalNumberPortsSimultaneousNZP-CSI-RS-PerCC', _CSI_RS_IM_ReceptionForFeedback_totalNumberPortsSimultaneousNZP_CSI_RS_PerCC),
+        ])
+    CSI_RS_IM_ReceptionForFeedback._ext = None
+    
+    #-----< CSI-RS-ProcFrameworkForSRS >-----#
+    CSI_RS_ProcFrameworkForSRS = SEQ(name=u'CSI-RS-ProcFrameworkForSRS', mode=MODE_TYPE)
+    _CSI_RS_ProcFrameworkForSRS_maxNumberPeriodicSRS_AssocCSI_RS_PerBWP = INT(name=u'maxNumberPeriodicSRS-AssocCSI-RS-PerBWP', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CSI_RS_ProcFrameworkForSRS_maxNumberPeriodicSRS_AssocCSI_RS_PerBWP._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _CSI_RS_ProcFrameworkForSRS_maxNumberAperiodicSRS_AssocCSI_RS_PerBWP = INT(name=u'maxNumberAperiodicSRS-AssocCSI-RS-PerBWP', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CSI_RS_ProcFrameworkForSRS_maxNumberAperiodicSRS_AssocCSI_RS_PerBWP._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _CSI_RS_ProcFrameworkForSRS_maxNumberSP_SRS_AssocCSI_RS_PerBWP = INT(name=u'maxNumberSP-SRS-AssocCSI-RS-PerBWP', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CSI_RS_ProcFrameworkForSRS_maxNumberSP_SRS_AssocCSI_RS_PerBWP._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4)], ev=None, er=[])
+    _CSI_RS_ProcFrameworkForSRS_simultaneousSRS_AssocCSI_RS_PerCC = INT(name=u'simultaneousSRS-AssocCSI-RS-PerCC', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CSI_RS_ProcFrameworkForSRS_simultaneousSRS_AssocCSI_RS_PerCC._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    CSI_RS_ProcFrameworkForSRS._cont = ASN1Dict([
+        (u'maxNumberPeriodicSRS-AssocCSI-RS-PerBWP', _CSI_RS_ProcFrameworkForSRS_maxNumberPeriodicSRS_AssocCSI_RS_PerBWP),
+        (u'maxNumberAperiodicSRS-AssocCSI-RS-PerBWP', _CSI_RS_ProcFrameworkForSRS_maxNumberAperiodicSRS_AssocCSI_RS_PerBWP),
+        (u'maxNumberSP-SRS-AssocCSI-RS-PerBWP', _CSI_RS_ProcFrameworkForSRS_maxNumberSP_SRS_AssocCSI_RS_PerBWP),
+        (u'simultaneousSRS-AssocCSI-RS-PerCC', _CSI_RS_ProcFrameworkForSRS_simultaneousSRS_AssocCSI_RS_PerCC),
+        ])
+    CSI_RS_ProcFrameworkForSRS._ext = None
+    
+    #-----< CSI-ReportFramework >-----#
+    CSI_ReportFramework = SEQ(name=u'CSI-ReportFramework', mode=MODE_TYPE)
+    _CSI_ReportFramework_maxNumberPeriodicCSI_PerBWP_ForCSI_Report = INT(name=u'maxNumberPeriodicCSI-PerBWP-ForCSI-Report', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CSI_ReportFramework_maxNumberPeriodicCSI_PerBWP_ForCSI_Report._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _CSI_ReportFramework_maxNumberAperiodicCSI_PerBWP_ForCSI_Report = INT(name=u'maxNumberAperiodicCSI-PerBWP-ForCSI-Report', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CSI_ReportFramework_maxNumberAperiodicCSI_PerBWP_ForCSI_Report._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _CSI_ReportFramework_maxNumberSemiPersistentCSI_PerBWP_ForCSI_Report = INT(name=u'maxNumberSemiPersistentCSI-PerBWP-ForCSI-Report', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CSI_ReportFramework_maxNumberSemiPersistentCSI_PerBWP_ForCSI_Report._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4)], ev=None, er=[])
+    _CSI_ReportFramework_maxNumberPeriodicCSI_PerBWP_ForBeamReport = INT(name=u'maxNumberPeriodicCSI-PerBWP-ForBeamReport', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CSI_ReportFramework_maxNumberPeriodicCSI_PerBWP_ForBeamReport._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _CSI_ReportFramework_maxNumberAperiodicCSI_PerBWP_ForBeamReport = INT(name=u'maxNumberAperiodicCSI-PerBWP-ForBeamReport', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CSI_ReportFramework_maxNumberAperiodicCSI_PerBWP_ForBeamReport._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _CSI_ReportFramework_maxNumberAperiodicCSI_triggeringStatePerCC = ENUM(name=u'maxNumberAperiodicCSI-triggeringStatePerCC', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CSI_ReportFramework_maxNumberAperiodicCSI_triggeringStatePerCC._cont = ASN1Dict([(u'n3', 0), (u'n7', 1), (u'n15', 2), (u'n31', 3), (u'n63', 4), (u'n128', 5)])
+    _CSI_ReportFramework_maxNumberAperiodicCSI_triggeringStatePerCC._ext = None
+    _CSI_ReportFramework_maxNumberSemiPersistentCSI_PerBWP_ForBeamReport = INT(name=u'maxNumberSemiPersistentCSI-PerBWP-ForBeamReport', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CSI_ReportFramework_maxNumberSemiPersistentCSI_PerBWP_ForBeamReport._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4)], ev=None, er=[])
+    _CSI_ReportFramework_simultaneousCSI_ReportsPerCC = INT(name=u'simultaneousCSI-ReportsPerCC', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CSI_ReportFramework_simultaneousCSI_ReportsPerCC._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    CSI_ReportFramework._cont = ASN1Dict([
+        (u'maxNumberPeriodicCSI-PerBWP-ForCSI-Report', _CSI_ReportFramework_maxNumberPeriodicCSI_PerBWP_ForCSI_Report),
+        (u'maxNumberAperiodicCSI-PerBWP-ForCSI-Report', _CSI_ReportFramework_maxNumberAperiodicCSI_PerBWP_ForCSI_Report),
+        (u'maxNumberSemiPersistentCSI-PerBWP-ForCSI-Report', _CSI_ReportFramework_maxNumberSemiPersistentCSI_PerBWP_ForCSI_Report),
+        (u'maxNumberPeriodicCSI-PerBWP-ForBeamReport', _CSI_ReportFramework_maxNumberPeriodicCSI_PerBWP_ForBeamReport),
+        (u'maxNumberAperiodicCSI-PerBWP-ForBeamReport', _CSI_ReportFramework_maxNumberAperiodicCSI_PerBWP_ForBeamReport),
+        (u'maxNumberAperiodicCSI-triggeringStatePerCC', _CSI_ReportFramework_maxNumberAperiodicCSI_triggeringStatePerCC),
+        (u'maxNumberSemiPersistentCSI-PerBWP-ForBeamReport', _CSI_ReportFramework_maxNumberSemiPersistentCSI_PerBWP_ForBeamReport),
+        (u'simultaneousCSI-ReportsPerCC', _CSI_ReportFramework_simultaneousCSI_ReportsPerCC),
+        ])
+    CSI_ReportFramework._ext = None
     
     #-----< PTRS-DensityRecommendationDL >-----#
     PTRS_DensityRecommendationDL = SEQ(name=u'PTRS-DensityRecommendationDL', mode=MODE_TYPE)
@@ -12506,50 +13301,41 @@ class NR_RRC_Definitions:
         ])
     PTRS_DensityRecommendationUL._ext = None
     
-    #-----< SRS-Resources >-----#
-    SRS_Resources = SEQ(name=u'SRS-Resources', mode=MODE_TYPE)
-    _SRS_Resources_maxNumberAperiodicSRS_PerBWP = ENUM(name=u'maxNumberAperiodicSRS-PerBWP', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SRS_Resources_maxNumberAperiodicSRS_PerBWP._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2), (u'n8', 3), (u'n16', 4)])
-    _SRS_Resources_maxNumberAperiodicSRS_PerBWP._ext = None
-    _SRS_Resources_maxNumberAperiodicSRS_PerBWP_PerSlot = INT(name=u'maxNumberAperiodicSRS-PerBWP-PerSlot', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SRS_Resources_maxNumberAperiodicSRS_PerBWP_PerSlot._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=6)], ev=None, er=[])
-    _SRS_Resources_maxNumberPeriodicSRS_PerBWP = ENUM(name=u'maxNumberPeriodicSRS-PerBWP', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SRS_Resources_maxNumberPeriodicSRS_PerBWP._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2), (u'n8', 3), (u'n16', 4)])
-    _SRS_Resources_maxNumberPeriodicSRS_PerBWP._ext = None
-    _SRS_Resources_maxNumberPeriodicSRS_PerBWP_PerSlot = INT(name=u'maxNumberPeriodicSRS-PerBWP-PerSlot', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SRS_Resources_maxNumberPeriodicSRS_PerBWP_PerSlot._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=6)], ev=None, er=[])
-    _SRS_Resources_maxNumberSemiPersitentSRS_PerBWP = ENUM(name=u'maxNumberSemiPersitentSRS-PerBWP', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SRS_Resources_maxNumberSemiPersitentSRS_PerBWP._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2), (u'n8', 3), (u'n16', 4)])
-    _SRS_Resources_maxNumberSemiPersitentSRS_PerBWP._ext = None
-    _SRS_Resources_maxNumberSP_SRS_PerBWP_PerSlot = INT(name=u'maxNumberSP-SRS-PerBWP-PerSlot', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SRS_Resources_maxNumberSP_SRS_PerBWP_PerSlot._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=6)], ev=None, er=[])
-    _SRS_Resources_maxNumberSRS_Ports_PerResource = ENUM(name=u'maxNumberSRS-Ports-PerResource', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SRS_Resources_maxNumberSRS_Ports_PerResource._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2)])
-    _SRS_Resources_maxNumberSRS_Ports_PerResource._ext = None
-    SRS_Resources._cont = ASN1Dict([
-        (u'maxNumberAperiodicSRS-PerBWP', _SRS_Resources_maxNumberAperiodicSRS_PerBWP),
-        (u'maxNumberAperiodicSRS-PerBWP-PerSlot', _SRS_Resources_maxNumberAperiodicSRS_PerBWP_PerSlot),
-        (u'maxNumberPeriodicSRS-PerBWP', _SRS_Resources_maxNumberPeriodicSRS_PerBWP),
-        (u'maxNumberPeriodicSRS-PerBWP-PerSlot', _SRS_Resources_maxNumberPeriodicSRS_PerBWP_PerSlot),
-        (u'maxNumberSemiPersitentSRS-PerBWP', _SRS_Resources_maxNumberSemiPersitentSRS_PerBWP),
-        (u'maxNumberSP-SRS-PerBWP-PerSlot', _SRS_Resources_maxNumberSP_SRS_PerBWP_PerSlot),
-        (u'maxNumberSRS-Ports-PerResource', _SRS_Resources_maxNumberSRS_Ports_PerResource),
+    #-----< SpatialRelations >-----#
+    SpatialRelations = SEQ(name=u'SpatialRelations', mode=MODE_TYPE)
+    _SpatialRelations_maxNumberConfiguredSpatialRelations = ENUM(name=u'maxNumberConfiguredSpatialRelations', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SpatialRelations_maxNumberConfiguredSpatialRelations._cont = ASN1Dict([(u'n4', 0), (u'n8', 1), (u'n16', 2), (u'n32', 3), (u'n64', 4), (u'n96', 5)])
+    _SpatialRelations_maxNumberConfiguredSpatialRelations._ext = None
+    _SpatialRelations_maxNumberActiveSpatialRelations = ENUM(name=u'maxNumberActiveSpatialRelations', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SpatialRelations_maxNumberActiveSpatialRelations._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2), (u'n8', 3), (u'n14', 4)])
+    _SpatialRelations_maxNumberActiveSpatialRelations._ext = None
+    _SpatialRelations_additionalActiveSpatialRelationPUCCH = ENUM(name=u'additionalActiveSpatialRelationPUCCH', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SpatialRelations_additionalActiveSpatialRelationPUCCH._cont = ASN1Dict([(u'supported', 0)])
+    _SpatialRelations_additionalActiveSpatialRelationPUCCH._ext = None
+    _SpatialRelations_maxNumberDL_RS_QCL_TypeD = ENUM(name=u'maxNumberDL-RS-QCL-TypeD', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SpatialRelations_maxNumberDL_RS_QCL_TypeD._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2), (u'n8', 3), (u'n14', 4)])
+    _SpatialRelations_maxNumberDL_RS_QCL_TypeD._ext = None
+    SpatialRelations._cont = ASN1Dict([
+        (u'maxNumberConfiguredSpatialRelations', _SpatialRelations_maxNumberConfiguredSpatialRelations),
+        (u'maxNumberActiveSpatialRelations', _SpatialRelations_maxNumberActiveSpatialRelations),
+        (u'additionalActiveSpatialRelationPUCCH', _SpatialRelations_additionalActiveSpatialRelationPUCCH),
+        (u'maxNumberDL-RS-QCL-TypeD', _SpatialRelations_maxNumberDL_RS_QCL_TypeD),
         ])
-    SRS_Resources._ext = None
+    SpatialRelations._ext = None
     
-    #-----< SRS-TxSwitch >-----#
-    SRS_TxSwitch = SEQ(name=u'SRS-TxSwitch', mode=MODE_TYPE)
-    _SRS_TxSwitch_supportedSRS_TxPortSwitch = ENUM(name=u'supportedSRS-TxPortSwitch', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SRS_TxSwitch_supportedSRS_TxPortSwitch._cont = ASN1Dict([(u't1r2', 0), (u't1r4', 1), (u't2r4', 2), (u't1r4-t2r4', 3), (u'tr-equal', 4)])
-    _SRS_TxSwitch_supportedSRS_TxPortSwitch._ext = None
-    _SRS_TxSwitch_txSwitchImpactToRx = ENUM(name=u'txSwitchImpactToRx', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _SRS_TxSwitch_txSwitchImpactToRx._cont = ASN1Dict([(u'true', 0)])
-    _SRS_TxSwitch_txSwitchImpactToRx._ext = None
-    SRS_TxSwitch._cont = ASN1Dict([
-        (u'supportedSRS-TxPortSwitch', _SRS_TxSwitch_supportedSRS_TxPortSwitch),
-        (u'txSwitchImpactToRx', _SRS_TxSwitch_txSwitchImpactToRx),
+    #-----< DummyI >-----#
+    DummyI = SEQ(name=u'DummyI', mode=MODE_TYPE)
+    _DummyI_supportedSRS_TxPortSwitch = ENUM(name=u'supportedSRS-TxPortSwitch', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DummyI_supportedSRS_TxPortSwitch._cont = ASN1Dict([(u't1r2', 0), (u't1r4', 1), (u't2r4', 2), (u't1r4-t2r4', 3), (u'tr-equal', 4)])
+    _DummyI_supportedSRS_TxPortSwitch._ext = None
+    _DummyI_txSwitchImpactToRx = ENUM(name=u'txSwitchImpactToRx', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DummyI_txSwitchImpactToRx._cont = ASN1Dict([(u'true', 0)])
+    _DummyI_txSwitchImpactToRx._ext = None
+    DummyI._cont = ASN1Dict([
+        (u'supportedSRS-TxPortSwitch', _DummyI_supportedSRS_TxPortSwitch),
+        (u'txSwitchImpactToRx', _DummyI_txSwitchImpactToRx),
         ])
-    SRS_TxSwitch._ext = None
+    DummyI._ext = None
     
     #-----< ModulationOrder >-----#
     ModulationOrder = ENUM(name=u'ModulationOrder', mode=MODE_TYPE)
@@ -12579,6 +13365,15 @@ class NR_RRC_Definitions:
     _MRDC_Parameters_asyncIntraBandENDC = ENUM(name=u'asyncIntraBandENDC', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _MRDC_Parameters_asyncIntraBandENDC._cont = ASN1Dict([(u'supported', 0)])
     _MRDC_Parameters_asyncIntraBandENDC._ext = None
+    _MRDC_Parameters_dualPA_Architecture = ENUM(name=u'dualPA-Architecture', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _MRDC_Parameters_dualPA_Architecture._cont = ASN1Dict([(u'supported', 0)])
+    _MRDC_Parameters_dualPA_Architecture._ext = None
+    _MRDC_Parameters_intraBandENDC_Support_v1540 = ENUM(name=u'intraBandENDC-Support-v1540', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _MRDC_Parameters_intraBandENDC_Support_v1540._cont = ASN1Dict([(u'non-contiguous', 0), (u'both', 1)])
+    _MRDC_Parameters_intraBandENDC_Support_v1540._ext = None
+    _MRDC_Parameters_ul_TimingAlignmentEUTRA_NR = ENUM(name=u'ul-TimingAlignmentEUTRA-NR', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _MRDC_Parameters_ul_TimingAlignmentEUTRA_NR._cont = ASN1Dict([(u'required', 0)])
+    _MRDC_Parameters_ul_TimingAlignmentEUTRA_NR._ext = None
     MRDC_Parameters._cont = ASN1Dict([
         (u'singleUL-Transmission', _MRDC_Parameters_singleUL_Transmission),
         (u'dynamicPowerSharing', _MRDC_Parameters_dynamicPowerSharing),
@@ -12587,8 +13382,11 @@ class NR_RRC_Definitions:
         (u'ul-SwitchingTimeEUTRA-NR', _MRDC_Parameters_ul_SwitchingTimeEUTRA_NR),
         (u'simultaneousRxTxInterBandENDC', _MRDC_Parameters_simultaneousRxTxInterBandENDC),
         (u'asyncIntraBandENDC', _MRDC_Parameters_asyncIntraBandENDC),
+        (u'dualPA-Architecture', _MRDC_Parameters_dualPA_Architecture),
+        (u'intraBandENDC-Support-v1540', _MRDC_Parameters_intraBandENDC_Support_v1540),
+        (u'ul-TimingAlignmentEUTRA-NR', _MRDC_Parameters_ul_TimingAlignmentEUTRA_NR),
         ])
-    MRDC_Parameters._ext = []
+    MRDC_Parameters._ext = [u'dualPA-Architecture', u'intraBandENDC-Support-v1540', u'ul-TimingAlignmentEUTRA-NR']
     
     #-----< PDCP-Parameters >-----#
     PDCP_Parameters = SEQ(name=u'PDCP-Parameters', mode=MODE_TYPE)
@@ -12631,12 +13429,12 @@ class NR_RRC_Definitions:
     _PDCP_Parameters_shortSN = ENUM(name=u'shortSN', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _PDCP_Parameters_shortSN._cont = ASN1Dict([(u'supported', 0)])
     _PDCP_Parameters_shortSN._ext = None
-    _PDCP_Parameters_pdcp_DuplicationSRB3 = ENUM(name=u'pdcp-DuplicationSRB3', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _PDCP_Parameters_pdcp_DuplicationSRB3._cont = ASN1Dict([(u'supported', 0)])
-    _PDCP_Parameters_pdcp_DuplicationSRB3._ext = None
-    _PDCP_Parameters_pdcp_DuplicationMCG_OrSCG = ENUM(name=u'pdcp-DuplicationMCG-OrSCG', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _PDCP_Parameters_pdcp_DuplicationMCG_OrSCG._cont = ASN1Dict([(u'supported', 0)])
-    _PDCP_Parameters_pdcp_DuplicationMCG_OrSCG._ext = None
+    _PDCP_Parameters_pdcp_DuplicationSRB = ENUM(name=u'pdcp-DuplicationSRB', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _PDCP_Parameters_pdcp_DuplicationSRB._cont = ASN1Dict([(u'supported', 0)])
+    _PDCP_Parameters_pdcp_DuplicationSRB._ext = None
+    _PDCP_Parameters_pdcp_DuplicationMCG_OrSCG_DRB = ENUM(name=u'pdcp-DuplicationMCG-OrSCG-DRB', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _PDCP_Parameters_pdcp_DuplicationMCG_OrSCG_DRB._cont = ASN1Dict([(u'supported', 0)])
+    _PDCP_Parameters_pdcp_DuplicationMCG_OrSCG_DRB._ext = None
     PDCP_Parameters._cont = ASN1Dict([
         (u'supportedROHC-Profiles', _PDCP_Parameters_supportedROHC_Profiles),
         (u'maxNumberROHC-ContextSessions', _PDCP_Parameters_maxNumberROHC_ContextSessions),
@@ -12644,8 +13442,8 @@ class NR_RRC_Definitions:
         (u'continueROHC-Context', _PDCP_Parameters_continueROHC_Context),
         (u'outOfOrderDelivery', _PDCP_Parameters_outOfOrderDelivery),
         (u'shortSN', _PDCP_Parameters_shortSN),
-        (u'pdcp-DuplicationSRB3', _PDCP_Parameters_pdcp_DuplicationSRB3),
-        (u'pdcp-DuplicationMCG-OrSCG', _PDCP_Parameters_pdcp_DuplicationMCG_OrSCG),
+        (u'pdcp-DuplicationSRB', _PDCP_Parameters_pdcp_DuplicationSRB),
+        (u'pdcp-DuplicationMCG-OrSCG-DRB', _PDCP_Parameters_pdcp_DuplicationMCG_OrSCG_DRB),
         ])
     PDCP_Parameters._ext = []
     
@@ -12783,9 +13581,18 @@ class NR_RRC_Definitions:
     _Phy_ParametersCommon_bwp_SwitchingDelay = ENUM(name=u'bwp-SwitchingDelay', mode=MODE_TYPE, tag=(33, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _Phy_ParametersCommon_bwp_SwitchingDelay._cont = ASN1Dict([(u'type1', 0), (u'type2', 1)])
     _Phy_ParametersCommon_bwp_SwitchingDelay._ext = None
-    _Phy_ParametersCommon_eutra_RS_SINR_measurement = ENUM(name=u'eutra-RS-SINR-measurement', mode=MODE_TYPE, tag=(34, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
-    _Phy_ParametersCommon_eutra_RS_SINR_measurement._cont = ASN1Dict([(u'supported', 0)])
-    _Phy_ParametersCommon_eutra_RS_SINR_measurement._ext = None
+    _Phy_ParametersCommon_dummy = ENUM(name=u'dummy', mode=MODE_TYPE, tag=(34, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _Phy_ParametersCommon_dummy._cont = ASN1Dict([(u'supported', 0)])
+    _Phy_ParametersCommon_dummy._ext = None
+    _Phy_ParametersCommon_maxNumberSearchSpaces = ENUM(name=u'maxNumberSearchSpaces', mode=MODE_TYPE, tag=(35, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
+    _Phy_ParametersCommon_maxNumberSearchSpaces._cont = ASN1Dict([(u'n10', 0)])
+    _Phy_ParametersCommon_maxNumberSearchSpaces._ext = None
+    _Phy_ParametersCommon_rateMatchingCtrlResrcSetDynamic = ENUM(name=u'rateMatchingCtrlResrcSetDynamic', mode=MODE_TYPE, tag=(36, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
+    _Phy_ParametersCommon_rateMatchingCtrlResrcSetDynamic._cont = ASN1Dict([(u'supported', 0)])
+    _Phy_ParametersCommon_rateMatchingCtrlResrcSetDynamic._ext = None
+    _Phy_ParametersCommon_maxLayersMIMO_Indication = ENUM(name=u'maxLayersMIMO-Indication', mode=MODE_TYPE, tag=(37, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
+    _Phy_ParametersCommon_maxLayersMIMO_Indication._cont = ASN1Dict([(u'supported', 0)])
+    _Phy_ParametersCommon_maxLayersMIMO_Indication._ext = None
     Phy_ParametersCommon._cont = ASN1Dict([
         (u'csi-RS-CFRA-ForHO', _Phy_ParametersCommon_csi_RS_CFRA_ForHO),
         (u'dynamicPRB-BundlingDL', _Phy_ParametersCommon_dynamicPRB_BundlingDL),
@@ -12821,9 +13628,12 @@ class NR_RRC_Definitions:
         (u'rateMatchingResrcSetSemi-Static', _Phy_ParametersCommon_rateMatchingResrcSetSemi_Static),
         (u'rateMatchingResrcSetDynamic', _Phy_ParametersCommon_rateMatchingResrcSetDynamic),
         (u'bwp-SwitchingDelay', _Phy_ParametersCommon_bwp_SwitchingDelay),
-        (u'eutra-RS-SINR-measurement', _Phy_ParametersCommon_eutra_RS_SINR_measurement),
+        (u'dummy', _Phy_ParametersCommon_dummy),
+        (u'maxNumberSearchSpaces', _Phy_ParametersCommon_maxNumberSearchSpaces),
+        (u'rateMatchingCtrlResrcSetDynamic', _Phy_ParametersCommon_rateMatchingCtrlResrcSetDynamic),
+        (u'maxLayersMIMO-Indication', _Phy_ParametersCommon_maxLayersMIMO_Indication),
         ])
-    Phy_ParametersCommon._ext = [u'eutra-RS-SINR-measurement']
+    Phy_ParametersCommon._ext = [u'dummy', u'maxNumberSearchSpaces', u'rateMatchingCtrlResrcSetDynamic', u'maxLayersMIMO-Indication']
     
     #-----< Phy-ParametersXDD-Diff >-----#
     Phy_ParametersXDD_Diff = SEQ(name=u'Phy-ParametersXDD-Diff', mode=MODE_TYPE)
@@ -12839,27 +13649,39 @@ class NR_RRC_Definitions:
     _Phy_ParametersXDD_Diff_twoDifferentTPC_Loop_PUCCH = ENUM(name=u'twoDifferentTPC-Loop-PUCCH', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _Phy_ParametersXDD_Diff_twoDifferentTPC_Loop_PUCCH._cont = ASN1Dict([(u'supported', 0)])
     _Phy_ParametersXDD_Diff_twoDifferentTPC_Loop_PUCCH._ext = None
+    _Phy_ParametersXDD_Diff_dl_SchedulingOffset_PDSCH_TypeA = ENUM(name=u'dl-SchedulingOffset-PDSCH-TypeA', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _Phy_ParametersXDD_Diff_dl_SchedulingOffset_PDSCH_TypeA._cont = ASN1Dict([(u'supported', 0)])
+    _Phy_ParametersXDD_Diff_dl_SchedulingOffset_PDSCH_TypeA._ext = None
+    _Phy_ParametersXDD_Diff_dl_SchedulingOffset_PDSCH_TypeB = ENUM(name=u'dl-SchedulingOffset-PDSCH-TypeB', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _Phy_ParametersXDD_Diff_dl_SchedulingOffset_PDSCH_TypeB._cont = ASN1Dict([(u'supported', 0)])
+    _Phy_ParametersXDD_Diff_dl_SchedulingOffset_PDSCH_TypeB._ext = None
+    _Phy_ParametersXDD_Diff_ul_SchedulingOffset = ENUM(name=u'ul-SchedulingOffset', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _Phy_ParametersXDD_Diff_ul_SchedulingOffset._cont = ASN1Dict([(u'supported', 0)])
+    _Phy_ParametersXDD_Diff_ul_SchedulingOffset._ext = None
     Phy_ParametersXDD_Diff._cont = ASN1Dict([
         (u'dynamicSFI', _Phy_ParametersXDD_Diff_dynamicSFI),
         (u'twoPUCCH-F0-2-ConsecSymbols', _Phy_ParametersXDD_Diff_twoPUCCH_F0_2_ConsecSymbols),
         (u'twoDifferentTPC-Loop-PUSCH', _Phy_ParametersXDD_Diff_twoDifferentTPC_Loop_PUSCH),
         (u'twoDifferentTPC-Loop-PUCCH', _Phy_ParametersXDD_Diff_twoDifferentTPC_Loop_PUCCH),
+        (u'dl-SchedulingOffset-PDSCH-TypeA', _Phy_ParametersXDD_Diff_dl_SchedulingOffset_PDSCH_TypeA),
+        (u'dl-SchedulingOffset-PDSCH-TypeB', _Phy_ParametersXDD_Diff_dl_SchedulingOffset_PDSCH_TypeB),
+        (u'ul-SchedulingOffset', _Phy_ParametersXDD_Diff_ul_SchedulingOffset),
         ])
-    Phy_ParametersXDD_Diff._ext = []
+    Phy_ParametersXDD_Diff._ext = [u'dl-SchedulingOffset-PDSCH-TypeA', u'dl-SchedulingOffset-PDSCH-TypeB', u'ul-SchedulingOffset']
     
     #-----< Phy-ParametersFRX-Diff >-----#
     Phy_ParametersFRX_Diff = SEQ(name=u'Phy-ParametersFRX-Diff', mode=MODE_TYPE)
     _Phy_ParametersFRX_Diff_dynamicSFI = ENUM(name=u'dynamicSFI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _Phy_ParametersFRX_Diff_dynamicSFI._cont = ASN1Dict([(u'supported', 0)])
     _Phy_ParametersFRX_Diff_dynamicSFI._ext = None
-    _Phy_ParametersFRX_Diff_oneFL_DMRS_TwoAdditionalDMRS = BIT_STR(name=u'oneFL-DMRS-TwoAdditionalDMRS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Phy_ParametersFRX_Diff_oneFL_DMRS_TwoAdditionalDMRS._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
+    _Phy_ParametersFRX_Diff_dummy1 = BIT_STR(name=u'dummy1', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Phy_ParametersFRX_Diff_dummy1._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     _Phy_ParametersFRX_Diff_twoFL_DMRS = BIT_STR(name=u'twoFL-DMRS', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _Phy_ParametersFRX_Diff_twoFL_DMRS._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
-    _Phy_ParametersFRX_Diff_twoFL_DMRS_TwoAdditionalDMRS = BIT_STR(name=u'twoFL-DMRS-TwoAdditionalDMRS', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Phy_ParametersFRX_Diff_twoFL_DMRS_TwoAdditionalDMRS._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
-    _Phy_ParametersFRX_Diff_oneFL_DMRS_ThreeAdditionalDMRS = BIT_STR(name=u'oneFL-DMRS-ThreeAdditionalDMRS', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Phy_ParametersFRX_Diff_oneFL_DMRS_ThreeAdditionalDMRS._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
+    _Phy_ParametersFRX_Diff_dummy2 = BIT_STR(name=u'dummy2', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Phy_ParametersFRX_Diff_dummy2._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
+    _Phy_ParametersFRX_Diff_dummy3 = BIT_STR(name=u'dummy3', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Phy_ParametersFRX_Diff_dummy3._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     _Phy_ParametersFRX_Diff_supportedDMRS_TypeDL = ENUM(name=u'supportedDMRS-TypeDL', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _Phy_ParametersFRX_Diff_supportedDMRS_TypeDL._cont = ASN1Dict([(u'type1', 0), (u'type1And2', 1)])
     _Phy_ParametersFRX_Diff_supportedDMRS_TypeDL._ext = None
@@ -12895,9 +13717,9 @@ class NR_RRC_Definitions:
     _Phy_ParametersFRX_Diff_freqHoppingPUCCH_F1_3_4 = ENUM(name=u'freqHoppingPUCCH-F1-3-4', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _Phy_ParametersFRX_Diff_freqHoppingPUCCH_F1_3_4._cont = ASN1Dict([(u'notSupported', 0)])
     _Phy_ParametersFRX_Diff_freqHoppingPUCCH_F1_3_4._ext = None
-    _Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH = ENUM(name=u'mux-SR-HARQ-ACK-CSI-PUCCH', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH._cont = ASN1Dict([(u'supported', 0)])
-    _Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH._ext = None
+    _Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH_MultiPerSlot = ENUM(name=u'mux-SR-HARQ-ACK-CSI-PUCCH-MultiPerSlot', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH_MultiPerSlot._cont = ASN1Dict([(u'supported', 0)])
+    _Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH_MultiPerSlot._ext = None
     _Phy_ParametersFRX_Diff_uci_CodeBlockSegmentation = ENUM(name=u'uci-CodeBlockSegmentation', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _Phy_ParametersFRX_Diff_uci_CodeBlockSegmentation._cont = ASN1Dict([(u'supported', 0)])
     _Phy_ParametersFRX_Diff_uci_CodeBlockSegmentation._ext = None
@@ -12954,12 +13776,60 @@ class NR_RRC_Definitions:
     _Phy_ParametersFRX_Diff_multipleCORESET = ENUM(name=u'multipleCORESET', mode=MODE_TYPE, tag=(36, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _Phy_ParametersFRX_Diff_multipleCORESET._cont = ASN1Dict([(u'supported', 0)])
     _Phy_ParametersFRX_Diff_multipleCORESET._ext = None
+    _Phy_ParametersFRX_Diff_csi_RS_IM_ReceptionForFeedback = SEQ(name=u'csi-RS-IM-ReceptionForFeedback', mode=MODE_TYPE, tag=(37, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CSI-RS-IM-ReceptionForFeedback')), opt=True, group=0)
+    _Phy_ParametersFRX_Diff_csi_RS_ProcFrameworkForSRS = SEQ(name=u'csi-RS-ProcFrameworkForSRS', mode=MODE_TYPE, tag=(38, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CSI-RS-ProcFrameworkForSRS')), opt=True, group=0)
+    _Phy_ParametersFRX_Diff_csi_ReportFramework = SEQ(name=u'csi-ReportFramework', mode=MODE_TYPE, tag=(39, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CSI-ReportFramework')), opt=True, group=0)
+    _Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH_OncePerSlot = SEQ(name=u'mux-SR-HARQ-ACK-CSI-PUCCH-OncePerSlot', mode=MODE_TYPE, tag=(40, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    __Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH_OncePerSlot_sameSymbol = ENUM(name=u'sameSymbol', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH_OncePerSlot_sameSymbol._cont = ASN1Dict([(u'supported', 0)])
+    __Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH_OncePerSlot_sameSymbol._ext = None
+    __Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH_OncePerSlot_diffSymbol = ENUM(name=u'diffSymbol', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH_OncePerSlot_diffSymbol._cont = ASN1Dict([(u'supported', 0)])
+    __Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH_OncePerSlot_diffSymbol._ext = None
+    _Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH_OncePerSlot._cont = ASN1Dict([
+        (u'sameSymbol', __Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH_OncePerSlot_sameSymbol),
+        (u'diffSymbol', __Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH_OncePerSlot_diffSymbol),
+        ])
+    _Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH_OncePerSlot._ext = None
+    _Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_PUCCH = ENUM(name=u'mux-SR-HARQ-ACK-PUCCH', mode=MODE_TYPE, tag=(41, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_PUCCH._cont = ASN1Dict([(u'supported', 0)])
+    _Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_PUCCH._ext = None
+    _Phy_ParametersFRX_Diff_mux_MultipleGroupCtrlCH_Overlap = ENUM(name=u'mux-MultipleGroupCtrlCH-Overlap', mode=MODE_TYPE, tag=(42, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _Phy_ParametersFRX_Diff_mux_MultipleGroupCtrlCH_Overlap._cont = ASN1Dict([(u'supported', 0)])
+    _Phy_ParametersFRX_Diff_mux_MultipleGroupCtrlCH_Overlap._ext = None
+    _Phy_ParametersFRX_Diff_dl_SchedulingOffset_PDSCH_TypeA = ENUM(name=u'dl-SchedulingOffset-PDSCH-TypeA', mode=MODE_TYPE, tag=(43, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _Phy_ParametersFRX_Diff_dl_SchedulingOffset_PDSCH_TypeA._cont = ASN1Dict([(u'supported', 0)])
+    _Phy_ParametersFRX_Diff_dl_SchedulingOffset_PDSCH_TypeA._ext = None
+    _Phy_ParametersFRX_Diff_dl_SchedulingOffset_PDSCH_TypeB = ENUM(name=u'dl-SchedulingOffset-PDSCH-TypeB', mode=MODE_TYPE, tag=(44, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _Phy_ParametersFRX_Diff_dl_SchedulingOffset_PDSCH_TypeB._cont = ASN1Dict([(u'supported', 0)])
+    _Phy_ParametersFRX_Diff_dl_SchedulingOffset_PDSCH_TypeB._ext = None
+    _Phy_ParametersFRX_Diff_ul_SchedulingOffset = ENUM(name=u'ul-SchedulingOffset', mode=MODE_TYPE, tag=(45, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _Phy_ParametersFRX_Diff_ul_SchedulingOffset._cont = ASN1Dict([(u'supported', 0)])
+    _Phy_ParametersFRX_Diff_ul_SchedulingOffset._ext = None
+    _Phy_ParametersFRX_Diff_dl_64QAM_MCS_TableAlt = ENUM(name=u'dl-64QAM-MCS-TableAlt', mode=MODE_TYPE, tag=(46, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _Phy_ParametersFRX_Diff_dl_64QAM_MCS_TableAlt._cont = ASN1Dict([(u'supported', 0)])
+    _Phy_ParametersFRX_Diff_dl_64QAM_MCS_TableAlt._ext = None
+    _Phy_ParametersFRX_Diff_ul_64QAM_MCS_TableAlt = ENUM(name=u'ul-64QAM-MCS-TableAlt', mode=MODE_TYPE, tag=(47, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _Phy_ParametersFRX_Diff_ul_64QAM_MCS_TableAlt._cont = ASN1Dict([(u'supported', 0)])
+    _Phy_ParametersFRX_Diff_ul_64QAM_MCS_TableAlt._ext = None
+    _Phy_ParametersFRX_Diff_cqi_TableAlt = ENUM(name=u'cqi-TableAlt', mode=MODE_TYPE, tag=(48, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _Phy_ParametersFRX_Diff_cqi_TableAlt._cont = ASN1Dict([(u'supported', 0)])
+    _Phy_ParametersFRX_Diff_cqi_TableAlt._ext = None
+    _Phy_ParametersFRX_Diff_oneFL_DMRS_TwoAdditionalDMRS_UL = ENUM(name=u'oneFL-DMRS-TwoAdditionalDMRS-UL', mode=MODE_TYPE, tag=(49, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _Phy_ParametersFRX_Diff_oneFL_DMRS_TwoAdditionalDMRS_UL._cont = ASN1Dict([(u'supported', 0)])
+    _Phy_ParametersFRX_Diff_oneFL_DMRS_TwoAdditionalDMRS_UL._ext = None
+    _Phy_ParametersFRX_Diff_twoFL_DMRS_TwoAdditionalDMRS_UL = ENUM(name=u'twoFL-DMRS-TwoAdditionalDMRS-UL', mode=MODE_TYPE, tag=(50, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _Phy_ParametersFRX_Diff_twoFL_DMRS_TwoAdditionalDMRS_UL._cont = ASN1Dict([(u'supported', 0)])
+    _Phy_ParametersFRX_Diff_twoFL_DMRS_TwoAdditionalDMRS_UL._ext = None
+    _Phy_ParametersFRX_Diff_oneFL_DMRS_ThreeAdditionalDMRS_UL = ENUM(name=u'oneFL-DMRS-ThreeAdditionalDMRS-UL', mode=MODE_TYPE, tag=(51, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _Phy_ParametersFRX_Diff_oneFL_DMRS_ThreeAdditionalDMRS_UL._cont = ASN1Dict([(u'supported', 0)])
+    _Phy_ParametersFRX_Diff_oneFL_DMRS_ThreeAdditionalDMRS_UL._ext = None
     Phy_ParametersFRX_Diff._cont = ASN1Dict([
         (u'dynamicSFI', _Phy_ParametersFRX_Diff_dynamicSFI),
-        (u'oneFL-DMRS-TwoAdditionalDMRS', _Phy_ParametersFRX_Diff_oneFL_DMRS_TwoAdditionalDMRS),
+        (u'dummy1', _Phy_ParametersFRX_Diff_dummy1),
         (u'twoFL-DMRS', _Phy_ParametersFRX_Diff_twoFL_DMRS),
-        (u'twoFL-DMRS-TwoAdditionalDMRS', _Phy_ParametersFRX_Diff_twoFL_DMRS_TwoAdditionalDMRS),
-        (u'oneFL-DMRS-ThreeAdditionalDMRS', _Phy_ParametersFRX_Diff_oneFL_DMRS_ThreeAdditionalDMRS),
+        (u'dummy2', _Phy_ParametersFRX_Diff_dummy2),
+        (u'dummy3', _Phy_ParametersFRX_Diff_dummy3),
         (u'supportedDMRS-TypeDL', _Phy_ParametersFRX_Diff_supportedDMRS_TypeDL),
         (u'supportedDMRS-TypeUL', _Phy_ParametersFRX_Diff_supportedDMRS_TypeUL),
         (u'semiOpenLoopCSI', _Phy_ParametersFRX_Diff_semiOpenLoopCSI),
@@ -12972,7 +13842,7 @@ class NR_RRC_Definitions:
         (u'pucch-F4-WithFH', _Phy_ParametersFRX_Diff_pucch_F4_WithFH),
         (u'freqHoppingPUCCH-F0-2', _Phy_ParametersFRX_Diff_freqHoppingPUCCH_F0_2),
         (u'freqHoppingPUCCH-F1-3-4', _Phy_ParametersFRX_Diff_freqHoppingPUCCH_F1_3_4),
-        (u'mux-SR-HARQ-ACK-CSI-PUCCH', _Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH),
+        (u'mux-SR-HARQ-ACK-CSI-PUCCH-MultiPerSlot', _Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH_MultiPerSlot),
         (u'uci-CodeBlockSegmentation', _Phy_ParametersFRX_Diff_uci_CodeBlockSegmentation),
         (u'onePUCCH-LongAndShortFormat', _Phy_ParametersFRX_Diff_onePUCCH_LongAndShortFormat),
         (u'twoPUCCH-AnyOthersInSlot', _Phy_ParametersFRX_Diff_twoPUCCH_AnyOthersInSlot),
@@ -12992,8 +13862,23 @@ class NR_RRC_Definitions:
         (u'sp-CSI-IM', _Phy_ParametersFRX_Diff_sp_CSI_IM),
         (u'tdd-MultiDL-UL-SwitchPerSlot', _Phy_ParametersFRX_Diff_tdd_MultiDL_UL_SwitchPerSlot),
         (u'multipleCORESET', _Phy_ParametersFRX_Diff_multipleCORESET),
+        (u'csi-RS-IM-ReceptionForFeedback', _Phy_ParametersFRX_Diff_csi_RS_IM_ReceptionForFeedback),
+        (u'csi-RS-ProcFrameworkForSRS', _Phy_ParametersFRX_Diff_csi_RS_ProcFrameworkForSRS),
+        (u'csi-ReportFramework', _Phy_ParametersFRX_Diff_csi_ReportFramework),
+        (u'mux-SR-HARQ-ACK-CSI-PUCCH-OncePerSlot', _Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH_OncePerSlot),
+        (u'mux-SR-HARQ-ACK-PUCCH', _Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_PUCCH),
+        (u'mux-MultipleGroupCtrlCH-Overlap', _Phy_ParametersFRX_Diff_mux_MultipleGroupCtrlCH_Overlap),
+        (u'dl-SchedulingOffset-PDSCH-TypeA', _Phy_ParametersFRX_Diff_dl_SchedulingOffset_PDSCH_TypeA),
+        (u'dl-SchedulingOffset-PDSCH-TypeB', _Phy_ParametersFRX_Diff_dl_SchedulingOffset_PDSCH_TypeB),
+        (u'ul-SchedulingOffset', _Phy_ParametersFRX_Diff_ul_SchedulingOffset),
+        (u'dl-64QAM-MCS-TableAlt', _Phy_ParametersFRX_Diff_dl_64QAM_MCS_TableAlt),
+        (u'ul-64QAM-MCS-TableAlt', _Phy_ParametersFRX_Diff_ul_64QAM_MCS_TableAlt),
+        (u'cqi-TableAlt', _Phy_ParametersFRX_Diff_cqi_TableAlt),
+        (u'oneFL-DMRS-TwoAdditionalDMRS-UL', _Phy_ParametersFRX_Diff_oneFL_DMRS_TwoAdditionalDMRS_UL),
+        (u'twoFL-DMRS-TwoAdditionalDMRS-UL', _Phy_ParametersFRX_Diff_twoFL_DMRS_TwoAdditionalDMRS_UL),
+        (u'oneFL-DMRS-ThreeAdditionalDMRS-UL', _Phy_ParametersFRX_Diff_oneFL_DMRS_ThreeAdditionalDMRS_UL),
         ])
-    Phy_ParametersFRX_Diff._ext = []
+    Phy_ParametersFRX_Diff._ext = [u'csi-RS-IM-ReceptionForFeedback', u'csi-RS-ProcFrameworkForSRS', u'csi-ReportFramework', u'mux-SR-HARQ-ACK-CSI-PUCCH-OncePerSlot', u'mux-SR-HARQ-ACK-PUCCH', u'mux-MultipleGroupCtrlCH-Overlap', u'dl-SchedulingOffset-PDSCH-TypeA', u'dl-SchedulingOffset-PDSCH-TypeB', u'ul-SchedulingOffset', u'dl-64QAM-MCS-TableAlt', u'ul-64QAM-MCS-TableAlt', u'cqi-TableAlt', u'oneFL-DMRS-TwoAdditionalDMRS-UL', u'twoFL-DMRS-TwoAdditionalDMRS-UL', u'oneFL-DMRS-ThreeAdditionalDMRS-UL']
     
     #-----< Phy-ParametersFR1 >-----#
     Phy_ParametersFR1 = SEQ(name=u'Phy-ParametersFR1', mode=MODE_TYPE)
@@ -13006,30 +13891,42 @@ class NR_RRC_Definitions:
     _Phy_ParametersFR1_pdsch_256QAM_FR1 = ENUM(name=u'pdsch-256QAM-FR1', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _Phy_ParametersFR1_pdsch_256QAM_FR1._cont = ASN1Dict([(u'supported', 0)])
     _Phy_ParametersFR1_pdsch_256QAM_FR1._ext = None
-    _Phy_ParametersFR1_pdsch_RE_MappingFR1 = ENUM(name=u'pdsch-RE-MappingFR1', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Phy_ParametersFR1_pdsch_RE_MappingFR1._cont = ASN1Dict([(u'n10', 0), (u'n20', 1)])
-    _Phy_ParametersFR1_pdsch_RE_MappingFR1._ext = None
+    _Phy_ParametersFR1_pdsch_RE_MappingFR1_PerSymbol = ENUM(name=u'pdsch-RE-MappingFR1-PerSymbol', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Phy_ParametersFR1_pdsch_RE_MappingFR1_PerSymbol._cont = ASN1Dict([(u'n10', 0), (u'n20', 1)])
+    _Phy_ParametersFR1_pdsch_RE_MappingFR1_PerSymbol._ext = None
+    _Phy_ParametersFR1_pdsch_RE_MappingFR1_PerSlot = ENUM(name=u'pdsch-RE-MappingFR1-PerSlot', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _Phy_ParametersFR1_pdsch_RE_MappingFR1_PerSlot._cont = ASN1Dict([(u'n16', 0), (u'n32', 1), (u'n48', 2), (u'n64', 3), (u'n80', 4), (u'n96', 5), (u'n112', 6), (u'n128', 7), (u'n144', 8), (u'n160', 9), (u'n176', 10), (u'n192', 11), (u'n208', 12), (u'n224', 13), (u'n240', 14), (u'n256', 15)])
+    _Phy_ParametersFR1_pdsch_RE_MappingFR1_PerSlot._ext = None
     Phy_ParametersFR1._cont = ASN1Dict([
         (u'pdcchMonitoringSingleOccasion', _Phy_ParametersFR1_pdcchMonitoringSingleOccasion),
         (u'scs-60kHz', _Phy_ParametersFR1_scs_60kHz),
         (u'pdsch-256QAM-FR1', _Phy_ParametersFR1_pdsch_256QAM_FR1),
-        (u'pdsch-RE-MappingFR1', _Phy_ParametersFR1_pdsch_RE_MappingFR1),
+        (u'pdsch-RE-MappingFR1-PerSymbol', _Phy_ParametersFR1_pdsch_RE_MappingFR1_PerSymbol),
+        (u'pdsch-RE-MappingFR1-PerSlot', _Phy_ParametersFR1_pdsch_RE_MappingFR1_PerSlot),
         ])
-    Phy_ParametersFR1._ext = []
+    Phy_ParametersFR1._ext = [u'pdsch-RE-MappingFR1-PerSlot']
     
     #-----< Phy-ParametersFR2 >-----#
     Phy_ParametersFR2 = SEQ(name=u'Phy-ParametersFR2', mode=MODE_TYPE)
-    _Phy_ParametersFR2_calibrationGapPA = ENUM(name=u'calibrationGapPA', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Phy_ParametersFR2_calibrationGapPA._cont = ASN1Dict([(u'supported', 0)])
-    _Phy_ParametersFR2_calibrationGapPA._ext = None
-    _Phy_ParametersFR2_pdsch_RE_MappingFR2 = ENUM(name=u'pdsch-RE-MappingFR2', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Phy_ParametersFR2_pdsch_RE_MappingFR2._cont = ASN1Dict([(u'n6', 0), (u'n20', 1)])
-    _Phy_ParametersFR2_pdsch_RE_MappingFR2._ext = None
+    _Phy_ParametersFR2_dummy = ENUM(name=u'dummy', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Phy_ParametersFR2_dummy._cont = ASN1Dict([(u'supported', 0)])
+    _Phy_ParametersFR2_dummy._ext = None
+    _Phy_ParametersFR2_pdsch_RE_MappingFR2_PerSymbol = ENUM(name=u'pdsch-RE-MappingFR2-PerSymbol', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Phy_ParametersFR2_pdsch_RE_MappingFR2_PerSymbol._cont = ASN1Dict([(u'n6', 0), (u'n20', 1)])
+    _Phy_ParametersFR2_pdsch_RE_MappingFR2_PerSymbol._ext = None
+    _Phy_ParametersFR2_pCell_FR2 = ENUM(name=u'pCell-FR2', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _Phy_ParametersFR2_pCell_FR2._cont = ASN1Dict([(u'supported', 0)])
+    _Phy_ParametersFR2_pCell_FR2._ext = None
+    _Phy_ParametersFR2_pdsch_RE_MappingFR2_PerSlot = ENUM(name=u'pdsch-RE-MappingFR2-PerSlot', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _Phy_ParametersFR2_pdsch_RE_MappingFR2_PerSlot._cont = ASN1Dict([(u'n16', 0), (u'n32', 1), (u'n48', 2), (u'n64', 3), (u'n80', 4), (u'n96', 5), (u'n112', 6), (u'n128', 7), (u'n144', 8), (u'n160', 9), (u'n176', 10), (u'n192', 11), (u'n208', 12), (u'n224', 13), (u'n240', 14), (u'n256', 15)])
+    _Phy_ParametersFR2_pdsch_RE_MappingFR2_PerSlot._ext = None
     Phy_ParametersFR2._cont = ASN1Dict([
-        (u'calibrationGapPA', _Phy_ParametersFR2_calibrationGapPA),
-        (u'pdsch-RE-MappingFR2', _Phy_ParametersFR2_pdsch_RE_MappingFR2),
+        (u'dummy', _Phy_ParametersFR2_dummy),
+        (u'pdsch-RE-MappingFR2-PerSymbol', _Phy_ParametersFR2_pdsch_RE_MappingFR2_PerSymbol),
+        (u'pCell-FR2', _Phy_ParametersFR2_pCell_FR2),
+        (u'pdsch-RE-MappingFR2-PerSlot', _Phy_ParametersFR2_pdsch_RE_MappingFR2_PerSlot),
         ])
-    Phy_ParametersFR2._ext = []
+    Phy_ParametersFR2._ext = [u'pCell-FR2', u'pdsch-RE-MappingFR2-PerSlot']
     
     #-----< Phy-ParametersMRDC >-----#
     Phy_ParametersMRDC = SEQ(name=u'Phy-ParametersMRDC', mode=MODE_TYPE)
@@ -13055,6 +13952,33 @@ class NR_RRC_Definitions:
         ])
     NAICS_Capability_Entry._ext = []
     
+    #-----< ProcessingParameters >-----#
+    ProcessingParameters = SEQ(name=u'ProcessingParameters', mode=MODE_TYPE)
+    _ProcessingParameters_fallback = ENUM(name=u'fallback', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ProcessingParameters_fallback._cont = ASN1Dict([(u'sc', 0), (u'cap1-only', 1)])
+    _ProcessingParameters_fallback._ext = None
+    _ProcessingParameters_differentTB_PerSlot = SEQ(name=u'differentTB-PerSlot', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __ProcessingParameters_differentTB_PerSlot_upto1 = INT(name=u'upto1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'NumberOfCarriers')), opt=True)
+    __ProcessingParameters_differentTB_PerSlot_upto2 = INT(name=u'upto2', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'NumberOfCarriers')), opt=True)
+    __ProcessingParameters_differentTB_PerSlot_upto4 = INT(name=u'upto4', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'NumberOfCarriers')), opt=True)
+    __ProcessingParameters_differentTB_PerSlot_upto7 = INT(name=u'upto7', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'NumberOfCarriers')), opt=True)
+    _ProcessingParameters_differentTB_PerSlot._cont = ASN1Dict([
+        (u'upto1', __ProcessingParameters_differentTB_PerSlot_upto1),
+        (u'upto2', __ProcessingParameters_differentTB_PerSlot_upto2),
+        (u'upto4', __ProcessingParameters_differentTB_PerSlot_upto4),
+        (u'upto7', __ProcessingParameters_differentTB_PerSlot_upto7),
+        ])
+    _ProcessingParameters_differentTB_PerSlot._ext = None
+    ProcessingParameters._cont = ASN1Dict([
+        (u'fallback', _ProcessingParameters_fallback),
+        (u'differentTB-PerSlot', _ProcessingParameters_differentTB_PerSlot),
+        ])
+    ProcessingParameters._ext = None
+    
+    #-----< NumberOfCarriers >-----#
+    NumberOfCarriers = INT(name=u'NumberOfCarriers', mode=MODE_TYPE)
+    NumberOfCarriers._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    
     #-----< RAT-Type >-----#
     RAT_Type = ENUM(name=u'RAT-Type', mode=MODE_TYPE)
     RAT_Type._cont = ASN1Dict([(u'nr', 0), (u'eutra-nr', 1), (u'eutra', 2), (u'spare1', 3)])
@@ -13068,12 +13992,20 @@ class NR_RRC_Definitions:
     _RF_Parameters_supportedBandListNR._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1024)], ev=None, er=[])
     _RF_Parameters_supportedBandCombinationList = SEQ_OF(name=u'supportedBandCombinationList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'BandCombinationList')), opt=True)
     _RF_Parameters_appliedFreqBandListFilter = SEQ_OF(name=u'appliedFreqBandListFilter', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'FreqBandList')), opt=True)
+    _RF_Parameters_supportedBandCombinationList_v1540 = SEQ_OF(name=u'supportedBandCombinationList-v1540', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'BandCombinationList-v1540')), opt=True, group=0)
+    _RF_Parameters_srs_SwitchingTimeRequested = ENUM(name=u'srs-SwitchingTimeRequested', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _RF_Parameters_srs_SwitchingTimeRequested._cont = ASN1Dict([(u'true', 0)])
+    _RF_Parameters_srs_SwitchingTimeRequested._ext = None
+    _RF_Parameters_supportedBandCombinationList_v1550 = SEQ_OF(name=u'supportedBandCombinationList-v1550', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'BandCombinationList-v1550')), opt=True, group=1)
     RF_Parameters._cont = ASN1Dict([
         (u'supportedBandListNR', _RF_Parameters_supportedBandListNR),
         (u'supportedBandCombinationList', _RF_Parameters_supportedBandCombinationList),
         (u'appliedFreqBandListFilter', _RF_Parameters_appliedFreqBandListFilter),
+        (u'supportedBandCombinationList-v1540', _RF_Parameters_supportedBandCombinationList_v1540),
+        (u'srs-SwitchingTimeRequested', _RF_Parameters_srs_SwitchingTimeRequested),
+        (u'supportedBandCombinationList-v1550', _RF_Parameters_supportedBandCombinationList_v1550),
         ])
-    RF_Parameters._ext = []
+    RF_Parameters._ext = [u'supportedBandCombinationList-v1540', u'srs-SwitchingTimeRequested', u'supportedBandCombinationList-v1550']
     
     #-----< BandNR >-----#
     BandNR = SEQ(name=u'BandNR', mode=MODE_TYPE)
@@ -13169,9 +14101,15 @@ class NR_RRC_Definitions:
         (u'fr2', __BandNR_channelBWs_UL_v1530_fr2),
         ])
     _BandNR_channelBWs_UL_v1530._ext = None
-    _BandNR_maxUplinkDutyCycle = ENUM(name=u'maxUplinkDutyCycle', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
-    _BandNR_maxUplinkDutyCycle._cont = ASN1Dict([(u'n60', 0), (u'n70', 1), (u'n80', 2), (u'n90', 3), (u'n100', 4)])
-    _BandNR_maxUplinkDutyCycle._ext = None
+    _BandNR_maxUplinkDutyCycle_PC2_FR1 = ENUM(name=u'maxUplinkDutyCycle-PC2-FR1', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _BandNR_maxUplinkDutyCycle_PC2_FR1._cont = ASN1Dict([(u'n60', 0), (u'n70', 1), (u'n80', 2), (u'n90', 3), (u'n100', 4)])
+    _BandNR_maxUplinkDutyCycle_PC2_FR1._ext = None
+    _BandNR_pucch_SpatialRelInfoMAC_CE = ENUM(name=u'pucch-SpatialRelInfoMAC-CE', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
+    _BandNR_pucch_SpatialRelInfoMAC_CE._cont = ASN1Dict([(u'supported', 0)])
+    _BandNR_pucch_SpatialRelInfoMAC_CE._ext = None
+    _BandNR_powerBoosting_pi2BPSK = ENUM(name=u'powerBoosting-pi2BPSK', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
+    _BandNR_powerBoosting_pi2BPSK._cont = ASN1Dict([(u'supported', 0)])
+    _BandNR_powerBoosting_pi2BPSK._ext = None
     BandNR._cont = ASN1Dict([
         (u'bandNR', _BandNR_bandNR),
         (u'modifiedMPR-Behaviour', _BandNR_modifiedMPR_Behaviour),
@@ -13188,19 +14126,29 @@ class NR_RRC_Definitions:
         (u'rateMatchingLTE-CRS', _BandNR_rateMatchingLTE_CRS),
         (u'channelBWs-DL-v1530', _BandNR_channelBWs_DL_v1530),
         (u'channelBWs-UL-v1530', _BandNR_channelBWs_UL_v1530),
-        (u'maxUplinkDutyCycle', _BandNR_maxUplinkDutyCycle),
+        (u'maxUplinkDutyCycle-PC2-FR1', _BandNR_maxUplinkDutyCycle_PC2_FR1),
+        (u'pucch-SpatialRelInfoMAC-CE', _BandNR_pucch_SpatialRelInfoMAC_CE),
+        (u'powerBoosting-pi2BPSK', _BandNR_powerBoosting_pi2BPSK),
         ])
-    BandNR._ext = [u'maxUplinkDutyCycle']
+    BandNR._ext = [u'maxUplinkDutyCycle-PC2-FR1', u'pucch-SpatialRelInfoMAC-CE', u'powerBoosting-pi2BPSK']
     
     #-----< RF-ParametersMRDC >-----#
     RF_ParametersMRDC = SEQ(name=u'RF-ParametersMRDC', mode=MODE_TYPE)
     _RF_ParametersMRDC_supportedBandCombinationList = SEQ_OF(name=u'supportedBandCombinationList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'BandCombinationList')), opt=True)
     _RF_ParametersMRDC_appliedFreqBandListFilter = SEQ_OF(name=u'appliedFreqBandListFilter', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'FreqBandList')), opt=True)
+    _RF_ParametersMRDC_srs_SwitchingTimeRequested = ENUM(name=u'srs-SwitchingTimeRequested', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _RF_ParametersMRDC_srs_SwitchingTimeRequested._cont = ASN1Dict([(u'true', 0)])
+    _RF_ParametersMRDC_srs_SwitchingTimeRequested._ext = None
+    _RF_ParametersMRDC_supportedBandCombinationList_v1540 = SEQ_OF(name=u'supportedBandCombinationList-v1540', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'BandCombinationList-v1540')), opt=True, group=0)
+    _RF_ParametersMRDC_supportedBandCombinationList_v1550 = SEQ_OF(name=u'supportedBandCombinationList-v1550', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'BandCombinationList-v1550')), opt=True, group=1)
     RF_ParametersMRDC._cont = ASN1Dict([
         (u'supportedBandCombinationList', _RF_ParametersMRDC_supportedBandCombinationList),
         (u'appliedFreqBandListFilter', _RF_ParametersMRDC_appliedFreqBandListFilter),
+        (u'srs-SwitchingTimeRequested', _RF_ParametersMRDC_srs_SwitchingTimeRequested),
+        (u'supportedBandCombinationList-v1540', _RF_ParametersMRDC_supportedBandCombinationList_v1540),
+        (u'supportedBandCombinationList-v1550', _RF_ParametersMRDC_supportedBandCombinationList_v1550),
         ])
-    RF_ParametersMRDC._ext = []
+    RF_ParametersMRDC._ext = [u'srs-SwitchingTimeRequested', u'supportedBandCombinationList-v1540', u'supportedBandCombinationList-v1550']
     
     #-----< RLC-Parameters >-----#
     RLC_Parameters = SEQ(name=u'RLC-Parameters', mode=MODE_TYPE)
@@ -13219,6 +14167,44 @@ class NR_RRC_Definitions:
         (u'um-WithLongSN', _RLC_Parameters_um_WithLongSN),
         ])
     RLC_Parameters._ext = []
+    
+    #-----< SDAP-Parameters >-----#
+    SDAP_Parameters = SEQ(name=u'SDAP-Parameters', mode=MODE_TYPE)
+    _SDAP_Parameters_as_ReflectiveQoS = ENUM(name=u'as-ReflectiveQoS', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SDAP_Parameters_as_ReflectiveQoS._cont = ASN1Dict([(u'true', 0)])
+    _SDAP_Parameters_as_ReflectiveQoS._ext = None
+    SDAP_Parameters._cont = ASN1Dict([
+        (u'as-ReflectiveQoS', _SDAP_Parameters_as_ReflectiveQoS),
+        ])
+    SDAP_Parameters._ext = []
+    
+    #-----< SRS-SwitchingTimeNR >-----#
+    SRS_SwitchingTimeNR = SEQ(name=u'SRS-SwitchingTimeNR', mode=MODE_TYPE)
+    _SRS_SwitchingTimeNR_switchingTimeDL = ENUM(name=u'switchingTimeDL', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SRS_SwitchingTimeNR_switchingTimeDL._cont = ASN1Dict([(u'n0us', 0), (u'n30us', 1), (u'n100us', 2), (u'n140us', 3), (u'n200us', 4), (u'n300us', 5), (u'n500us', 6), (u'n900us', 7)])
+    _SRS_SwitchingTimeNR_switchingTimeDL._ext = None
+    _SRS_SwitchingTimeNR_switchingTimeUL = ENUM(name=u'switchingTimeUL', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SRS_SwitchingTimeNR_switchingTimeUL._cont = ASN1Dict([(u'n0us', 0), (u'n30us', 1), (u'n100us', 2), (u'n140us', 3), (u'n200us', 4), (u'n300us', 5), (u'n500us', 6), (u'n900us', 7)])
+    _SRS_SwitchingTimeNR_switchingTimeUL._ext = None
+    SRS_SwitchingTimeNR._cont = ASN1Dict([
+        (u'switchingTimeDL', _SRS_SwitchingTimeNR_switchingTimeDL),
+        (u'switchingTimeUL', _SRS_SwitchingTimeNR_switchingTimeUL),
+        ])
+    SRS_SwitchingTimeNR._ext = None
+    
+    #-----< SRS-SwitchingTimeEUTRA >-----#
+    SRS_SwitchingTimeEUTRA = SEQ(name=u'SRS-SwitchingTimeEUTRA', mode=MODE_TYPE)
+    _SRS_SwitchingTimeEUTRA_switchingTimeDL = ENUM(name=u'switchingTimeDL', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SRS_SwitchingTimeEUTRA_switchingTimeDL._cont = ASN1Dict([(u'n0', 0), (u'n0dot5', 1), (u'n1', 2), (u'n1dot5', 3), (u'n2', 4), (u'n2dot5', 5), (u'n3', 6), (u'n3dot5', 7), (u'n4', 8), (u'n4dot5', 9), (u'n5', 10), (u'n5dot5', 11), (u'n6', 12), (u'n6dot5', 13), (u'n7', 14)])
+    _SRS_SwitchingTimeEUTRA_switchingTimeDL._ext = None
+    _SRS_SwitchingTimeEUTRA_switchingTimeUL = ENUM(name=u'switchingTimeUL', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SRS_SwitchingTimeEUTRA_switchingTimeUL._cont = ASN1Dict([(u'n0', 0), (u'n0dot5', 1), (u'n1', 2), (u'n1dot5', 3), (u'n2', 4), (u'n2dot5', 5), (u'n3', 6), (u'n3dot5', 7), (u'n4', 8), (u'n4dot5', 9), (u'n5', 10), (u'n5dot5', 11), (u'n6', 12), (u'n6dot5', 13), (u'n7', 14)])
+    _SRS_SwitchingTimeEUTRA_switchingTimeUL._ext = None
+    SRS_SwitchingTimeEUTRA._cont = ASN1Dict([
+        (u'switchingTimeDL', _SRS_SwitchingTimeEUTRA_switchingTimeDL),
+        (u'switchingTimeUL', _SRS_SwitchingTimeEUTRA_switchingTimeUL),
+        ])
+    SRS_SwitchingTimeEUTRA._ext = None
     
     #-----< SupportedBandwidth >-----#
     SupportedBandwidth = CHOICE(name=u'SupportedBandwidth', mode=MODE_TYPE)
@@ -13268,16 +14254,28 @@ class NR_RRC_Definitions:
     
     #-----< UE-CapabilityRequestFilterNR >-----#
     UE_CapabilityRequestFilterNR = SEQ(name=u'UE-CapabilityRequestFilterNR', mode=MODE_TYPE)
-    _UE_CapabilityRequestFilterNR_frequencyBandList = SEQ_OF(name=u'frequencyBandList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'FreqBandList')), opt=True)
-    _UE_CapabilityRequestFilterNR_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _UE_CapabilityRequestFilterNR_nonCriticalExtension._cont = ASN1Dict([
-        ])
-    _UE_CapabilityRequestFilterNR_nonCriticalExtension._ext = None
+    _UE_CapabilityRequestFilterNR_frequencyBandListFilter = SEQ_OF(name=u'frequencyBandListFilter', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'FreqBandList')), opt=True)
+    _UE_CapabilityRequestFilterNR_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'UE-CapabilityRequestFilterNR-v1540')), opt=True)
     UE_CapabilityRequestFilterNR._cont = ASN1Dict([
-        (u'frequencyBandList', _UE_CapabilityRequestFilterNR_frequencyBandList),
+        (u'frequencyBandListFilter', _UE_CapabilityRequestFilterNR_frequencyBandListFilter),
         (u'nonCriticalExtension', _UE_CapabilityRequestFilterNR_nonCriticalExtension),
         ])
     UE_CapabilityRequestFilterNR._ext = None
+    
+    #-----< UE-CapabilityRequestFilterNR-v1540 >-----#
+    UE_CapabilityRequestFilterNR_v1540 = SEQ(name=u'UE-CapabilityRequestFilterNR-v1540', mode=MODE_TYPE)
+    _UE_CapabilityRequestFilterNR_v1540_srs_SwitchingTimeRequest = ENUM(name=u'srs-SwitchingTimeRequest', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _UE_CapabilityRequestFilterNR_v1540_srs_SwitchingTimeRequest._cont = ASN1Dict([(u'true', 0)])
+    _UE_CapabilityRequestFilterNR_v1540_srs_SwitchingTimeRequest._ext = None
+    _UE_CapabilityRequestFilterNR_v1540_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _UE_CapabilityRequestFilterNR_v1540_nonCriticalExtension._cont = ASN1Dict([
+        ])
+    _UE_CapabilityRequestFilterNR_v1540_nonCriticalExtension._ext = None
+    UE_CapabilityRequestFilterNR_v1540._cont = ASN1Dict([
+        (u'srs-SwitchingTimeRequest', _UE_CapabilityRequestFilterNR_v1540_srs_SwitchingTimeRequest),
+        (u'nonCriticalExtension', _UE_CapabilityRequestFilterNR_v1540_nonCriticalExtension),
+        ])
+    UE_CapabilityRequestFilterNR_v1540._ext = None
     
     #-----< UE-MRDC-Capability >-----#
     UE_MRDC_Capability = SEQ(name=u'UE-MRDC-Capability', mode=MODE_TYPE)
@@ -13374,7 +14372,7 @@ class NR_RRC_Definitions:
     _UE_NR_Capability_featureSetCombinations._cont = __UE_NR_Capability_featureSetCombinations__item_
     _UE_NR_Capability_featureSetCombinations._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1024)], ev=None, er=[])
     _UE_NR_Capability_lateNonCriticalExtension = OCT_STR(name=u'lateNonCriticalExtension', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _UE_NR_Capability_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'UE-NR-Capability-1530')), opt=True)
+    _UE_NR_Capability_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'UE-NR-Capability-v1530')), opt=True)
     UE_NR_Capability._cont = ASN1Dict([
         (u'accessStratumRelease', _UE_NR_Capability_accessStratumRelease),
         (u'pdcp-Parameters', _UE_NR_Capability_pdcp_Parameters),
@@ -13394,34 +14392,68 @@ class NR_RRC_Definitions:
         ])
     UE_NR_Capability._ext = None
     
-    #-----< UE-NR-Capability-1530 >-----#
-    UE_NR_Capability_1530 = SEQ(name=u'UE-NR-Capability-1530', mode=MODE_TYPE)
-    _UE_NR_Capability_1530_fdd_Add_UE_NR_Capabilities_1530 = SEQ(name=u'fdd-Add-UE-NR-Capabilities-1530', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'UE-NR-CapabilityAddXDD-Mode-1530')), opt=True)
-    _UE_NR_Capability_1530_tdd_Add_UE_NR_Capabilities_1530 = SEQ(name=u'tdd-Add-UE-NR-Capabilities-1530', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'UE-NR-CapabilityAddXDD-Mode-1530')), opt=True)
-    _UE_NR_Capability_1530_voiceOverMCG_Bearer = ENUM(name=u'voiceOverMCG-Bearer', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _UE_NR_Capability_1530_voiceOverMCG_Bearer._cont = ASN1Dict([(u'supported', 0)])
-    _UE_NR_Capability_1530_voiceOverMCG_Bearer._ext = None
-    _UE_NR_Capability_1530_interRAT_Parameters = SEQ(name=u'interRAT-Parameters', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'InterRAT-Parameters')), opt=True)
-    _UE_NR_Capability_1530_inactiveState = ENUM(name=u'inactiveState', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _UE_NR_Capability_1530_inactiveState._cont = ASN1Dict([(u'supported', 0)])
-    _UE_NR_Capability_1530_inactiveState._ext = None
-    _UE_NR_Capability_1530_delayBudgetReporting = ENUM(name=u'delayBudgetReporting', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _UE_NR_Capability_1530_delayBudgetReporting._cont = ASN1Dict([(u'supported', 0)])
-    _UE_NR_Capability_1530_delayBudgetReporting._ext = None
-    _UE_NR_Capability_1530_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _UE_NR_Capability_1530_nonCriticalExtension._cont = ASN1Dict([
+    #-----< UE-NR-Capability-v1530 >-----#
+    UE_NR_Capability_v1530 = SEQ(name=u'UE-NR-Capability-v1530', mode=MODE_TYPE)
+    _UE_NR_Capability_v1530_fdd_Add_UE_NR_Capabilities_v1530 = SEQ(name=u'fdd-Add-UE-NR-Capabilities-v1530', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'UE-NR-CapabilityAddXDD-Mode-v1530')), opt=True)
+    _UE_NR_Capability_v1530_tdd_Add_UE_NR_Capabilities_v1530 = SEQ(name=u'tdd-Add-UE-NR-Capabilities-v1530', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'UE-NR-CapabilityAddXDD-Mode-v1530')), opt=True)
+    _UE_NR_Capability_v1530_dummy = ENUM(name=u'dummy', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _UE_NR_Capability_v1530_dummy._cont = ASN1Dict([(u'supported', 0)])
+    _UE_NR_Capability_v1530_dummy._ext = None
+    _UE_NR_Capability_v1530_interRAT_Parameters = SEQ(name=u'interRAT-Parameters', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'InterRAT-Parameters')), opt=True)
+    _UE_NR_Capability_v1530_inactiveState = ENUM(name=u'inactiveState', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _UE_NR_Capability_v1530_inactiveState._cont = ASN1Dict([(u'supported', 0)])
+    _UE_NR_Capability_v1530_inactiveState._ext = None
+    _UE_NR_Capability_v1530_delayBudgetReporting = ENUM(name=u'delayBudgetReporting', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _UE_NR_Capability_v1530_delayBudgetReporting._cont = ASN1Dict([(u'supported', 0)])
+    _UE_NR_Capability_v1530_delayBudgetReporting._ext = None
+    _UE_NR_Capability_v1530_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'UE-NR-Capability-v1540')), opt=True)
+    UE_NR_Capability_v1530._cont = ASN1Dict([
+        (u'fdd-Add-UE-NR-Capabilities-v1530', _UE_NR_Capability_v1530_fdd_Add_UE_NR_Capabilities_v1530),
+        (u'tdd-Add-UE-NR-Capabilities-v1530', _UE_NR_Capability_v1530_tdd_Add_UE_NR_Capabilities_v1530),
+        (u'dummy', _UE_NR_Capability_v1530_dummy),
+        (u'interRAT-Parameters', _UE_NR_Capability_v1530_interRAT_Parameters),
+        (u'inactiveState', _UE_NR_Capability_v1530_inactiveState),
+        (u'delayBudgetReporting', _UE_NR_Capability_v1530_delayBudgetReporting),
+        (u'nonCriticalExtension', _UE_NR_Capability_v1530_nonCriticalExtension),
         ])
-    _UE_NR_Capability_1530_nonCriticalExtension._ext = None
-    UE_NR_Capability_1530._cont = ASN1Dict([
-        (u'fdd-Add-UE-NR-Capabilities-1530', _UE_NR_Capability_1530_fdd_Add_UE_NR_Capabilities_1530),
-        (u'tdd-Add-UE-NR-Capabilities-1530', _UE_NR_Capability_1530_tdd_Add_UE_NR_Capabilities_1530),
-        (u'voiceOverMCG-Bearer', _UE_NR_Capability_1530_voiceOverMCG_Bearer),
-        (u'interRAT-Parameters', _UE_NR_Capability_1530_interRAT_Parameters),
-        (u'inactiveState', _UE_NR_Capability_1530_inactiveState),
-        (u'delayBudgetReporting', _UE_NR_Capability_1530_delayBudgetReporting),
-        (u'nonCriticalExtension', _UE_NR_Capability_1530_nonCriticalExtension),
+    UE_NR_Capability_v1530._ext = None
+    
+    #-----< UE-NR-Capability-v1540 >-----#
+    UE_NR_Capability_v1540 = SEQ(name=u'UE-NR-Capability-v1540', mode=MODE_TYPE)
+    _UE_NR_Capability_v1540_sdap_Parameters = SEQ(name=u'sdap-Parameters', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SDAP-Parameters')), opt=True)
+    _UE_NR_Capability_v1540_overheatingInd = ENUM(name=u'overheatingInd', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _UE_NR_Capability_v1540_overheatingInd._cont = ASN1Dict([(u'supported', 0)])
+    _UE_NR_Capability_v1540_overheatingInd._ext = None
+    _UE_NR_Capability_v1540_ims_Parameters = SEQ(name=u'ims-Parameters', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'IMS-Parameters')), opt=True)
+    _UE_NR_Capability_v1540_fr1_Add_UE_NR_Capabilities_v1540 = SEQ(name=u'fr1-Add-UE-NR-Capabilities-v1540', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'UE-NR-CapabilityAddFRX-Mode-v1540')), opt=True)
+    _UE_NR_Capability_v1540_fr2_Add_UE_NR_Capabilities_v1540 = SEQ(name=u'fr2-Add-UE-NR-Capabilities-v1540', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'UE-NR-CapabilityAddFRX-Mode-v1540')), opt=True)
+    _UE_NR_Capability_v1540_fr1_fr2_Add_UE_NR_Capabilities = SEQ(name=u'fr1-fr2-Add-UE-NR-Capabilities', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'UE-NR-CapabilityAddFRX-Mode')), opt=True)
+    _UE_NR_Capability_v1540_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'UE-NR-Capability-v1550')), opt=True)
+    UE_NR_Capability_v1540._cont = ASN1Dict([
+        (u'sdap-Parameters', _UE_NR_Capability_v1540_sdap_Parameters),
+        (u'overheatingInd', _UE_NR_Capability_v1540_overheatingInd),
+        (u'ims-Parameters', _UE_NR_Capability_v1540_ims_Parameters),
+        (u'fr1-Add-UE-NR-Capabilities-v1540', _UE_NR_Capability_v1540_fr1_Add_UE_NR_Capabilities_v1540),
+        (u'fr2-Add-UE-NR-Capabilities-v1540', _UE_NR_Capability_v1540_fr2_Add_UE_NR_Capabilities_v1540),
+        (u'fr1-fr2-Add-UE-NR-Capabilities', _UE_NR_Capability_v1540_fr1_fr2_Add_UE_NR_Capabilities),
+        (u'nonCriticalExtension', _UE_NR_Capability_v1540_nonCriticalExtension),
         ])
-    UE_NR_Capability_1530._ext = None
+    UE_NR_Capability_v1540._ext = None
+    
+    #-----< UE-NR-Capability-v1550 >-----#
+    UE_NR_Capability_v1550 = SEQ(name=u'UE-NR-Capability-v1550', mode=MODE_TYPE)
+    _UE_NR_Capability_v1550_reducedCP_Latency = ENUM(name=u'reducedCP-Latency', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _UE_NR_Capability_v1550_reducedCP_Latency._cont = ASN1Dict([(u'supported', 0)])
+    _UE_NR_Capability_v1550_reducedCP_Latency._ext = None
+    _UE_NR_Capability_v1550_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _UE_NR_Capability_v1550_nonCriticalExtension._cont = ASN1Dict([
+        ])
+    _UE_NR_Capability_v1550_nonCriticalExtension._ext = None
+    UE_NR_Capability_v1550._cont = ASN1Dict([
+        (u'reducedCP-Latency', _UE_NR_Capability_v1550_reducedCP_Latency),
+        (u'nonCriticalExtension', _UE_NR_Capability_v1550_nonCriticalExtension),
+        ])
+    UE_NR_Capability_v1550._ext = None
     
     #-----< UE-NR-CapabilityAddXDD-Mode >-----#
     UE_NR_CapabilityAddXDD_Mode = SEQ(name=u'UE-NR-CapabilityAddXDD-Mode', mode=MODE_TYPE)
@@ -13435,13 +14467,13 @@ class NR_RRC_Definitions:
         ])
     UE_NR_CapabilityAddXDD_Mode._ext = None
     
-    #-----< UE-NR-CapabilityAddXDD-Mode-1530 >-----#
-    UE_NR_CapabilityAddXDD_Mode_1530 = SEQ(name=u'UE-NR-CapabilityAddXDD-Mode-1530', mode=MODE_TYPE)
-    _UE_NR_CapabilityAddXDD_Mode_1530_eutra_ParametersXDD_Diff = SEQ(name=u'eutra-ParametersXDD-Diff', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'EUTRA-ParametersXDD-Diff')))
-    UE_NR_CapabilityAddXDD_Mode_1530._cont = ASN1Dict([
-        (u'eutra-ParametersXDD-Diff', _UE_NR_CapabilityAddXDD_Mode_1530_eutra_ParametersXDD_Diff),
+    #-----< UE-NR-CapabilityAddXDD-Mode-v1530 >-----#
+    UE_NR_CapabilityAddXDD_Mode_v1530 = SEQ(name=u'UE-NR-CapabilityAddXDD-Mode-v1530', mode=MODE_TYPE)
+    _UE_NR_CapabilityAddXDD_Mode_v1530_eutra_ParametersXDD_Diff = SEQ(name=u'eutra-ParametersXDD-Diff', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'EUTRA-ParametersXDD-Diff')))
+    UE_NR_CapabilityAddXDD_Mode_v1530._cont = ASN1Dict([
+        (u'eutra-ParametersXDD-Diff', _UE_NR_CapabilityAddXDD_Mode_v1530_eutra_ParametersXDD_Diff),
         ])
-    UE_NR_CapabilityAddXDD_Mode_1530._ext = None
+    UE_NR_CapabilityAddXDD_Mode_v1530._ext = None
     
     #-----< UE-NR-CapabilityAddFRX-Mode >-----#
     UE_NR_CapabilityAddFRX_Mode = SEQ(name=u'UE-NR-CapabilityAddFRX-Mode', mode=MODE_TYPE)
@@ -13452,6 +14484,14 @@ class NR_RRC_Definitions:
         (u'measAndMobParametersFRX-Diff', _UE_NR_CapabilityAddFRX_Mode_measAndMobParametersFRX_Diff),
         ])
     UE_NR_CapabilityAddFRX_Mode._ext = None
+    
+    #-----< UE-NR-CapabilityAddFRX-Mode-v1540 >-----#
+    UE_NR_CapabilityAddFRX_Mode_v1540 = SEQ(name=u'UE-NR-CapabilityAddFRX-Mode-v1540', mode=MODE_TYPE)
+    _UE_NR_CapabilityAddFRX_Mode_v1540_ims_ParametersFRX_Diff = SEQ(name=u'ims-ParametersFRX-Diff', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'IMS-ParametersFRX-Diff')), opt=True)
+    UE_NR_CapabilityAddFRX_Mode_v1540._cont = ASN1Dict([
+        (u'ims-ParametersFRX-Diff', _UE_NR_CapabilityAddFRX_Mode_v1540_ims_ParametersFRX_Diff),
+        ])
+    UE_NR_CapabilityAddFRX_Mode_v1540._ext = None
     
     #-----< EUTRA-AllowedMeasBandwidth >-----#
     EUTRA_AllowedMeasBandwidth = ENUM(name=u'EUTRA-AllowedMeasBandwidth', mode=MODE_TYPE)
@@ -13557,38 +14597,6 @@ class NR_RRC_Definitions:
     EUTRA_Q_OffsetRange._cont = ASN1Dict([(u'dB-24', 0), (u'dB-22', 1), (u'dB-20', 2), (u'dB-18', 3), (u'dB-16', 4), (u'dB-14', 5), (u'dB-12', 6), (u'dB-10', 7), (u'dB-8', 8), (u'dB-6', 9), (u'dB-5', 10), (u'dB-4', 11), (u'dB-3', 12), (u'dB-2', 13), (u'dB-1', 14), (u'dB0', 15), (u'dB1', 16), (u'dB2', 17), (u'dB3', 18), (u'dB4', 19), (u'dB5', 20), (u'dB6', 21), (u'dB8', 22), (u'dB10', 23), (u'dB12', 24), (u'dB14', 25), (u'dB16', 26), (u'dB18', 27), (u'dB20', 28), (u'dB22', 29), (u'dB24', 30)])
     EUTRA_Q_OffsetRange._ext = None
     
-    #-----< MultiFrequencyBandListNR-SIB >-----#
-    MultiFrequencyBandListNR_SIB = SEQ_OF(name=u'MultiFrequencyBandListNR-SIB', mode=MODE_TYPE)
-    _MultiFrequencyBandListNR_SIB__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'NR-MultiBandInfo')))
-    MultiFrequencyBandListNR_SIB._cont = _MultiFrequencyBandListNR_SIB__item_
-    MultiFrequencyBandListNR_SIB._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
-    
-    #-----< NR-MultiBandInfo >-----#
-    NR_MultiBandInfo = SEQ(name=u'NR-MultiBandInfo', mode=MODE_TYPE)
-    _NR_MultiBandInfo_freqBandIndicatorNR = INT(name=u'freqBandIndicatorNR', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'FreqBandIndicatorNR')), opt=True)
-    _NR_MultiBandInfo_nr_NS_PmaxList = SEQ_OF(name=u'nr-NS-PmaxList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'NR-NS-PmaxList')), opt=True)
-    NR_MultiBandInfo._cont = ASN1Dict([
-        (u'freqBandIndicatorNR', _NR_MultiBandInfo_freqBandIndicatorNR),
-        (u'nr-NS-PmaxList', _NR_MultiBandInfo_nr_NS_PmaxList),
-        ])
-    NR_MultiBandInfo._ext = None
-    
-    #-----< NR-NS-PmaxList >-----#
-    NR_NS_PmaxList = SEQ_OF(name=u'NR-NS-PmaxList', mode=MODE_TYPE)
-    _NR_NS_PmaxList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'NR-NS-PmaxValue')))
-    NR_NS_PmaxList._cont = _NR_NS_PmaxList__item_
-    NR_NS_PmaxList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
-    
-    #-----< NR-NS-PmaxValue >-----#
-    NR_NS_PmaxValue = SEQ(name=u'NR-NS-PmaxValue', mode=MODE_TYPE)
-    _NR_NS_PmaxValue_additionalPmax = INT(name=u'additionalPmax', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')), opt=True)
-    _NR_NS_PmaxValue_additionalSpectrumEmission = INT(name=u'additionalSpectrumEmission', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'AdditionalSpectrumEmission')))
-    NR_NS_PmaxValue._cont = ASN1Dict([
-        (u'additionalPmax', _NR_NS_PmaxValue_additionalPmax),
-        (u'additionalSpectrumEmission', _NR_NS_PmaxValue_additionalSpectrumEmission),
-        ])
-    NR_NS_PmaxValue._ext = None
-    
     #-----< OtherConfig >-----#
     OtherConfig = SEQ(name=u'OtherConfig', mode=MODE_TYPE)
     _OtherConfig_delayBudgetReportingConfig = CHOICE(name=u'delayBudgetReportingConfig', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
@@ -13610,6 +14618,31 @@ class NR_RRC_Definitions:
         (u'delayBudgetReportingConfig', _OtherConfig_delayBudgetReportingConfig),
         ])
     OtherConfig._ext = None
+    
+    #-----< OtherConfig-v1540 >-----#
+    OtherConfig_v1540 = SEQ(name=u'OtherConfig-v1540', mode=MODE_TYPE)
+    _OtherConfig_v1540_overheatingAssistanceConfig = CHOICE(name=u'overheatingAssistanceConfig', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SetupRelease')), opt=True)
+    __OtherConfig_v1540_overheatingAssistanceConfig_release = NULL(name=u'release', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __OtherConfig_v1540_overheatingAssistanceConfig_setup = SEQ(name=u'setup', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'OverheatingAssistanceConfig')))
+    _OtherConfig_v1540_overheatingAssistanceConfig._cont = ASN1Dict([
+        (u'release', __OtherConfig_v1540_overheatingAssistanceConfig_release),
+        (u'setup', __OtherConfig_v1540_overheatingAssistanceConfig_setup),
+        ])
+    _OtherConfig_v1540_overheatingAssistanceConfig._ext = None
+    OtherConfig_v1540._cont = ASN1Dict([
+        (u'overheatingAssistanceConfig', _OtherConfig_v1540_overheatingAssistanceConfig),
+        ])
+    OtherConfig_v1540._ext = []
+    
+    #-----< OverheatingAssistanceConfig >-----#
+    OverheatingAssistanceConfig = SEQ(name=u'OverheatingAssistanceConfig', mode=MODE_TYPE)
+    _OverheatingAssistanceConfig_overheatingIndicationProhibitTimer = ENUM(name=u'overheatingIndicationProhibitTimer', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _OverheatingAssistanceConfig_overheatingIndicationProhibitTimer._cont = ASN1Dict([(u's0', 0), (u's0dot5', 1), (u's1', 2), (u's2', 3), (u's5', 4), (u's10', 5), (u's20', 6), (u's30', 7), (u's60', 8), (u's90', 9), (u's120', 10), (u's300', 11), (u's600', 12), (u'spare3', 13), (u'spare2', 14), (u'spare1', 15)])
+    _OverheatingAssistanceConfig_overheatingIndicationProhibitTimer._ext = None
+    OverheatingAssistanceConfig._cont = ASN1Dict([
+        (u'overheatingIndicationProhibitTimer', _OverheatingAssistanceConfig_overheatingIndicationProhibitTimer),
+        ])
+    OverheatingAssistanceConfig._ext = None
     
     #-----< RRC-TransactionIdentifier >-----#
     RRC_TransactionIdentifier = INT(name=u'RRC-TransactionIdentifier', mode=MODE_TYPE)
@@ -14187,6 +15220,10 @@ class NR_RRC_Definitions:
     maxNrofCodebooks = INT(name=u'maxNrofCodebooks', mode=MODE_VALUE)
     maxNrofCodebooks._val = 16
     
+    #-----< maxNrofCSI-RS-Resources >-----#
+    maxNrofCSI_RS_Resources = INT(name=u'maxNrofCSI-RS-Resources', mode=MODE_VALUE)
+    maxNrofCSI_RS_Resources._val = 7
+    
     #-----< maxNrofSRI-PUSCH-Mappings >-----#
     maxNrofSRI_PUSCH_Mappings = INT(name=u'maxNrofSRI-PUSCH-Mappings', mode=MODE_VALUE)
     maxNrofSRI_PUSCH_Mappings._val = 16
@@ -14199,13 +15236,13 @@ class NR_RRC_Definitions:
     maxSIB = INT(name=u'maxSIB', mode=MODE_VALUE)
     maxSIB._val = 32
     
-    #-----< maxSIB-1 >-----#
-    maxSIB_1 = INT(name=u'maxSIB-1', mode=MODE_VALUE)
-    maxSIB_1._val = 31
-    
     #-----< maxSI-Message >-----#
     maxSI_Message = INT(name=u'maxSI-Message', mode=MODE_VALUE)
     maxSI_Message._val = 32
+    
+    #-----< maxPO-perPF >-----#
+    maxPO_perPF = INT(name=u'maxPO-perPF', mode=MODE_VALUE)
+    maxPO_perPF._val = 4
     
     #-----< maxAccessCat-1 >-----#
     maxAccessCat_1 = INT(name=u'maxAccessCat-1', mode=MODE_VALUE)
@@ -14341,7 +15378,7 @@ class NR_RRC_Definitions:
         __UL_DCCH_MessageType_c1_ueCapabilityInformation,
         __UL_DCCH_MessageType_c1_counterCheckResponse,
         __UL_DCCH_MessageType_c1_ueAssistanceInformation,
-        __UL_DCCH_MessageType_c1_spare4,
+        __UL_DCCH_MessageType_c1_failureInformation,
         __UL_DCCH_MessageType_c1_spare3,
         __UL_DCCH_MessageType_c1_spare2,
         __UL_DCCH_MessageType_c1_spare1,
@@ -14387,6 +15424,18 @@ class NR_RRC_Definitions:
         _DLInformationTransfer_IEs_lateNonCriticalExtension,
         _DLInformationTransfer_IEs_nonCriticalExtension,
         DLInformationTransfer_IEs,
+        __FailureInformation_criticalExtensions_failureInformation,
+        __FailureInformation_criticalExtensions_criticalExtensionsFuture,
+        _FailureInformation_criticalExtensions,
+        FailureInformation,
+        _FailureInformation_IEs_failureInfoRLC_Bearer,
+        _FailureInformation_IEs_lateNonCriticalExtension,
+        _FailureInformation_IEs_nonCriticalExtension,
+        FailureInformation_IEs,
+        _FailureInfoRLC_Bearer_cellGroupId,
+        _FailureInfoRLC_Bearer_logicalChannelIdentity,
+        _FailureInfoRLC_Bearer_failureType,
+        FailureInfoRLC_Bearer,
         __LocationMeasurementIndication_criticalExtensions_locationMeasurementIndication,
         __LocationMeasurementIndication_criticalExtensions_criticalExtensionsFuture,
         _LocationMeasurementIndication_criticalExtensions,
@@ -14435,7 +15484,7 @@ class NR_RRC_Definitions:
         _PagingRecord_accessType,
         PagingRecord,
         _PagingUE_Identity_ng_5G_S_TMSI,
-        _PagingUE_Identity_i_RNTI,
+        _PagingUE_Identity_fullI_RNTI,
         PagingUE_Identity,
         _RRCReestablishment_rrc_TransactionIdentifier,
         __RRCReestablishment_criticalExtensions_rrcReestablishment,
@@ -14490,6 +15539,9 @@ class NR_RRC_Definitions:
         _RRCReconfiguration_v1530_IEs_otherConfig,
         _RRCReconfiguration_v1530_IEs_nonCriticalExtension,
         RRCReconfiguration_v1530_IEs,
+        _RRCReconfiguration_v1540_IEs_otherConfig_v1540,
+        _RRCReconfiguration_v1540_IEs_nonCriticalExtension,
+        RRCReconfiguration_v1540_IEs,
         _MasterKeyUpdate_keySetChangeIndicator,
         _MasterKeyUpdate_nextHopChainingCount,
         _MasterKeyUpdate_nas_Container,
@@ -14513,7 +15565,6 @@ class NR_RRC_Definitions:
         _RRCReject_IEs_lateNonCriticalExtension,
         _RRCReject_IEs_nonCriticalExtension,
         RRCReject_IEs,
-        RejectWaitTime,
         _RRCRelease_rrc_TransactionIdentifier,
         __RRCRelease_criticalExtensions_rrcRelease,
         __RRCRelease_criticalExtensions_criticalExtensionsFuture,
@@ -14528,11 +15579,14 @@ class NR_RRC_Definitions:
         _RRCRelease_IEs_lateNonCriticalExtension,
         _RRCRelease_IEs_nonCriticalExtension,
         RRCRelease_IEs,
+        _RRCRelease_v1540_IEs_waitTime,
+        _RRCRelease_v1540_IEs_nonCriticalExtension,
+        RRCRelease_v1540_IEs,
         _RedirectedCarrierInfo_nr,
         _RedirectedCarrierInfo_eutra,
         RedirectedCarrierInfo,
         _RedirectedCarrierInfo_EUTRA_eutraFrequency,
-        _RedirectedCarrierInfo_EUTRA_cnType_r15,
+        _RedirectedCarrierInfo_EUTRA_cnType,
         RedirectedCarrierInfo_EUTRA,
         _CarrierInfoNR_carrierFreq,
         _CarrierInfoNR_ssbSubcarrierSpacing,
@@ -14639,8 +15693,8 @@ class NR_RRC_Definitions:
         _RRCSetupComplete_IEs_selectedPLMN_Identity,
         _RRCSetupComplete_IEs_registeredAMF,
         _RRCSetupComplete_IEs_guami_Type,
-        __RRCSetupComplete_IEs_s_nssai_List__item_,
-        _RRCSetupComplete_IEs_s_nssai_List,
+        __RRCSetupComplete_IEs_s_NSSAI_List__item_,
+        _RRCSetupComplete_IEs_s_NSSAI_List,
         _RRCSetupComplete_IEs_dedicatedNAS_Message,
         __RRCSetupComplete_IEs_ng_5G_S_TMSI_Value_ng_5G_S_TMSI,
         __RRCSetupComplete_IEs_ng_5G_S_TMSI_Value_ng_5G_S_TMSI_Part2,
@@ -14748,6 +15802,26 @@ class NR_RRC_Definitions:
         UEAssistanceInformation_IEs,
         _DelayBudgetReport_type1,
         DelayBudgetReport,
+        _UEAssistanceInformation_v1540_IEs_overheatingAssistance,
+        _UEAssistanceInformation_v1540_IEs_nonCriticalExtension,
+        UEAssistanceInformation_v1540_IEs,
+        __OverheatingAssistance_reducedMaxCCs_reducedCCsDL,
+        __OverheatingAssistance_reducedMaxCCs_reducedCCsUL,
+        _OverheatingAssistance_reducedMaxCCs,
+        __OverheatingAssistance_reducedMaxBW_FR1_reducedBW_FR1_DL,
+        __OverheatingAssistance_reducedMaxBW_FR1_reducedBW_FR1_UL,
+        _OverheatingAssistance_reducedMaxBW_FR1,
+        __OverheatingAssistance_reducedMaxBW_FR2_reducedBW_FR2_DL,
+        __OverheatingAssistance_reducedMaxBW_FR2_reducedBW_FR2_UL,
+        _OverheatingAssistance_reducedMaxBW_FR2,
+        __OverheatingAssistance_reducedMaxMIMO_LayersFR1_reducedMIMO_LayersFR1_DL,
+        __OverheatingAssistance_reducedMaxMIMO_LayersFR1_reducedMIMO_LayersFR1_UL,
+        _OverheatingAssistance_reducedMaxMIMO_LayersFR1,
+        __OverheatingAssistance_reducedMaxMIMO_LayersFR2_reducedMIMO_LayersFR2_DL,
+        __OverheatingAssistance_reducedMaxMIMO_LayersFR2_reducedMIMO_LayersFR2_UL,
+        _OverheatingAssistance_reducedMaxMIMO_LayersFR2,
+        OverheatingAssistance,
+        ReducedAggregatedBandwidth,
         _UECapabilityEnquiry_rrc_TransactionIdentifier,
         __UECapabilityEnquiry_criticalExtensions_ueCapabilityEnquiry,
         __UECapabilityEnquiry_criticalExtensions_criticalExtensionsFuture,
@@ -14804,6 +15878,7 @@ class NR_RRC_Definitions:
         __SIB2_intraFreqCellReselectionInfo_ss_RSSI_Measurement,
         __SIB2_intraFreqCellReselectionInfo_ssb_ToMeasure,
         __SIB2_intraFreqCellReselectionInfo_deriveSSB_IndexFromCell,
+        __SIB2_intraFreqCellReselectionInfo_t_ReselectionNR_SF,
         _SIB2_intraFreqCellReselectionInfo,
         SIB2,
         RangeToBestCell,
@@ -15336,7 +16411,7 @@ class NR_RRC_Definitions:
         _CSI_ReportConfig_timeRestrictionForChannelMeasurements,
         _CSI_ReportConfig_timeRestrictionForInterferenceMeasurements,
         _CSI_ReportConfig_codebookConfig,
-        _CSI_ReportConfig_nrofCQIsPerReport,
+        _CSI_ReportConfig_dummy,
         __CSI_ReportConfig_groupBasedBeamReporting_enabled,
         ___CSI_ReportConfig_groupBasedBeamReporting_disabled_nrofReportedRS,
         __CSI_ReportConfig_groupBasedBeamReporting_disabled,
@@ -15613,6 +16688,7 @@ class NR_RRC_Definitions:
         Hysteresis,
         I_RNTI_Value,
         _LocationMeasurementInfo_eutra_RSTD,
+        _LocationMeasurementInfo_eutra_FineTimingDetection,
         LocationMeasurementInfo,
         _EUTRA_RSTD_InfoList__item_,
         EUTRA_RSTD_InfoList,
@@ -15817,7 +16893,7 @@ class NR_RRC_Definitions:
         MeasResultNR,
         _MeasResultListEUTRA__item_,
         MeasResultListEUTRA,
-        _MeasResultEUTRA_physCellId,
+        _MeasResultEUTRA_eutra_PhysCellId,
         _MeasResultEUTRA_measResult,
         ___MeasResultEUTRA_cgi_Info_cgi_info_EPC_cgi_info_EPC_legacy,
         ____MeasResultEUTRA_cgi_Info_cgi_info_EPC_cgi_info_EPC_list__item_,
@@ -15866,8 +16942,18 @@ class NR_RRC_Definitions:
         MobilityStateParameters,
         _MultiFrequencyBandListNR__item_,
         MultiFrequencyBandListNR,
+        _MultiFrequencyBandListNR_SIB__item_,
+        MultiFrequencyBandListNR_SIB,
+        _NR_MultiBandInfo_freqBandIndicatorNR,
+        _NR_MultiBandInfo_nr_NS_PmaxList,
+        NR_MultiBandInfo,
         NextHopChainingCount,
         NG_5G_S_TMSI,
+        _NR_NS_PmaxList__item_,
+        NR_NS_PmaxList,
+        _NR_NS_PmaxValue_additionalPmax,
+        _NR_NS_PmaxValue_additionalSpectrumEmission,
+        NR_NS_PmaxValue,
         _NZP_CSI_RS_Resource_nzp_CSI_RS_ResourceId,
         _NZP_CSI_RS_Resource_resourceMapping,
         _NZP_CSI_RS_Resource_powerControlOffset,
@@ -15927,6 +17013,23 @@ class NR_RRC_Definitions:
         _PDCCH_ConfigCommon_searchSpaceOtherSystemInformation,
         _PDCCH_ConfigCommon_pagingSearchSpace,
         _PDCCH_ConfigCommon_ra_SearchSpace,
+        ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS15KHZoneT__item_,
+        __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS15KHZoneT,
+        ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS30KHZoneT_SCS15KHZhalfT__item_,
+        __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS30KHZoneT_SCS15KHZhalfT,
+        ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS60KHZoneT_SCS30KHZhalfT_SCS15KHZquarterT__item_,
+        __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS60KHZoneT_SCS30KHZhalfT_SCS15KHZquarterT,
+        ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneT_SCS60KHZhalfT_SCS30KHZquarterT_SCS15KHZoneEighthT__item_,
+        __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneT_SCS60KHZhalfT_SCS30KHZquarterT_SCS15KHZoneEighthT,
+        ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZhalfT_SCS60KHZquarterT_SCS30KHZoneEighthT_SCS15KHZoneSixteenthT__item_,
+        __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZhalfT_SCS60KHZquarterT_SCS30KHZoneEighthT_SCS15KHZoneSixteenthT,
+        ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZquarterT_SCS60KHZoneEighthT_SCS30KHZoneSixteenthT__item_,
+        __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZquarterT_SCS60KHZoneEighthT_SCS30KHZoneSixteenthT,
+        ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneEighthT_SCS60KHZoneSixteenthT__item_,
+        __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneEighthT_SCS60KHZoneSixteenthT,
+        ___PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneSixteenthT__item_,
+        __PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO_sCS120KHZoneSixteenthT,
+        _PDCCH_ConfigCommon_firstPDCCH_MonitoringOccasionOfPO,
         PDCCH_ConfigCommon,
         _PDCCH_ConfigSIB1_controlResourceSetZero,
         _PDCCH_ConfigSIB1_searchSpaceZero,
@@ -16032,6 +17135,8 @@ class NR_RRC_Definitions:
         _PDSCH_ServingCellConfig_xOverhead,
         _PDSCH_ServingCellConfig_nrofHARQ_ProcessesForPDSCH,
         _PDSCH_ServingCellConfig_pucch_Cell,
+        _PDSCH_ServingCellConfig_maxMIMO_Layers,
+        _PDSCH_ServingCellConfig_processingType2Enabled,
         PDSCH_ServingCellConfig,
         _PDSCH_CodeBlockGroupTransmission_maxCodeBlockGroupsPerTransportBlock,
         _PDSCH_CodeBlockGroupTransmission_codeBlockGroupFlushIndicator,
@@ -16064,6 +17169,7 @@ class NR_RRC_Definitions:
         _PhysicalCellGroupConfig_cs_RNTI,
         _PhysicalCellGroupConfig_mcs_C_RNTI,
         _PhysicalCellGroupConfig_p_UE_FR1,
+        _PhysicalCellGroupConfig_xScale,
         PhysicalCellGroupConfig,
         _PLMN_Identity_mcc,
         _PLMN_Identity_mnc,
@@ -16312,6 +17418,8 @@ class NR_RRC_Definitions:
         _PUSCH_ServingCellConfig_codeBlockGroupTransmission,
         _PUSCH_ServingCellConfig_rateMatching,
         _PUSCH_ServingCellConfig_xOverhead,
+        _PUSCH_ServingCellConfig_maxMIMO_Layers,
+        _PUSCH_ServingCellConfig_processingType2Enabled,
         PUSCH_ServingCellConfig,
         _PUSCH_CodeBlockGroupTransmission_maxCodeBlockGroupsPerTransportBlock,
         PUSCH_CodeBlockGroupTransmission,
@@ -16336,7 +17444,7 @@ class NR_RRC_Definitions:
         _QuantityConfigNR_quantityConfigRS_Index,
         QuantityConfigNR,
         _QuantityConfigRS_ssb_FilterConfig,
-        _QuantityConfigRS_cs_RS_FilterConfig,
+        _QuantityConfigRS_csi_RS_FilterConfig,
         QuantityConfigRS,
         _FilterConfig_filterCoefficientRSRP,
         _FilterConfig_filterCoefficientRSRQ,
@@ -16473,6 +17581,7 @@ class NR_RRC_Definitions:
         _RateMatchPatternLTE_CRS_nrofCRS_Ports,
         _RateMatchPatternLTE_CRS_v_Shift,
         RateMatchPatternLTE_CRS,
+        RejectWaitTime,
         ReportConfigId,
         __ReportConfigInterRAT_reportType_periodical,
         __ReportConfigInterRAT_reportType_eventTriggered,
@@ -16559,8 +17668,8 @@ class NR_RRC_Definitions:
         _EventTriggerConfig_reportAmount,
         _EventTriggerConfig_reportQuantityCell,
         _EventTriggerConfig_maxReportCells,
-        _EventTriggerConfig_reportQuantityRsIndexes,
-        _EventTriggerConfig_maxNrofRSIndexesToReport,
+        _EventTriggerConfig_reportQuantityRS_Indexes,
+        _EventTriggerConfig_maxNrofRS_IndexesToReport,
         _EventTriggerConfig_includeBeamMeasurements,
         _EventTriggerConfig_reportAddNeighMeas,
         EventTriggerConfig,
@@ -16569,8 +17678,8 @@ class NR_RRC_Definitions:
         _PeriodicalReportConfig_reportAmount,
         _PeriodicalReportConfig_reportQuantityCell,
         _PeriodicalReportConfig_maxReportCells,
-        _PeriodicalReportConfig_reportQuantityRsIndexes,
-        _PeriodicalReportConfig_maxNrofRsIndexesToReport,
+        _PeriodicalReportConfig_reportQuantityRS_Indexes,
+        _PeriodicalReportConfig_maxNrofRS_IndexesToReport,
         _PeriodicalReportConfig_includeBeamMeasurements,
         _PeriodicalReportConfig_useWhiteCellList,
         PeriodicalReportConfig,
@@ -16771,9 +17880,18 @@ class NR_RRC_Definitions:
         _ServingCellConfig_sCellDeactivationTimer,
         _ServingCellConfig_crossCarrierSchedulingConfig,
         _ServingCellConfig_tag_Id,
-        _ServingCellConfig_ue_BeamLockFunction,
+        _ServingCellConfig_dummy,
         _ServingCellConfig_pathlossReferenceLinking,
         _ServingCellConfig_servingCellMO,
+        __ServingCellConfig_lte_CRS_ToMatchAround_release,
+        __ServingCellConfig_lte_CRS_ToMatchAround_setup,
+        _ServingCellConfig_lte_CRS_ToMatchAround,
+        __ServingCellConfig_rateMatchPatternToAddModList__item_,
+        _ServingCellConfig_rateMatchPatternToAddModList,
+        __ServingCellConfig_rateMatchPatternToReleaseList__item_,
+        _ServingCellConfig_rateMatchPatternToReleaseList,
+        __ServingCellConfig_downlinkChannelBW_PerSCS_List__item_,
+        _ServingCellConfig_downlinkChannelBW_PerSCS_List,
         ServingCellConfig,
         _UplinkConfig_initialUplinkBWP,
         __UplinkConfig_uplinkBWP_ToReleaseList__item_,
@@ -16787,6 +17905,9 @@ class NR_RRC_Definitions:
         __UplinkConfig_carrierSwitching_release,
         __UplinkConfig_carrierSwitching_setup,
         _UplinkConfig_carrierSwitching,
+        _UplinkConfig_powerBoostPi2BPSK,
+        __UplinkConfig_uplinkChannelBW_PerSCS_List__item_,
+        _UplinkConfig_uplinkChannelBW_PerSCS_List,
         UplinkConfig,
         _ServingCellConfigCommon_physCellId,
         _ServingCellConfigCommon_downlinkConfigCommon,
@@ -16806,7 +17927,7 @@ class NR_RRC_Definitions:
         _ServingCellConfigCommon_rateMatchPatternToAddModList,
         __ServingCellConfigCommon_rateMatchPatternToReleaseList__item_,
         _ServingCellConfigCommon_rateMatchPatternToReleaseList,
-        _ServingCellConfigCommon_subcarrierSpacing,
+        _ServingCellConfigCommon_ssbSubcarrierSpacing,
         _ServingCellConfigCommon_tdd_UL_DL_ConfigurationCommon,
         _ServingCellConfigCommon_ss_PBCH_BlockPower,
         ServingCellConfigCommon,
@@ -17123,6 +18244,10 @@ class NR_RRC_Definitions:
         AccessStratumRelease,
         _BandCombinationList__item_,
         BandCombinationList,
+        _BandCombinationList_v1540__item_,
+        BandCombinationList_v1540,
+        _BandCombinationList_v1550__item_,
+        BandCombinationList_v1550,
         __BandCombination_bandList__item_,
         _BandCombination_bandList,
         _BandCombination_featureSetCombination,
@@ -17132,6 +18257,12 @@ class NR_RRC_Definitions:
         _BandCombination_supportedBandwidthCombinationSet,
         _BandCombination_powerClass_v1530,
         BandCombination,
+        __BandCombination_v1540_bandList_v1540__item_,
+        _BandCombination_v1540_bandList_v1540,
+        _BandCombination_v1540_ca_ParametersNR_v1540,
+        BandCombination_v1540,
+        _BandCombination_v1550_ca_ParametersNR_v1550,
+        BandCombination_v1550,
         __BandParameters_eutra_bandEUTRA,
         __BandParameters_eutra_ca_BandwidthClassDL_EUTRA,
         __BandParameters_eutra_ca_BandwidthClassUL_EUTRA,
@@ -17141,6 +18272,18 @@ class NR_RRC_Definitions:
         __BandParameters_nr_ca_BandwidthClassUL_NR,
         _BandParameters_nr,
         BandParameters,
+        ____BandParameters_v1540_srs_CarrierSwitch_nr_srs_SwitchingTimesListNR__item_,
+        ___BandParameters_v1540_srs_CarrierSwitch_nr_srs_SwitchingTimesListNR,
+        __BandParameters_v1540_srs_CarrierSwitch_nr,
+        ____BandParameters_v1540_srs_CarrierSwitch_eutra_srs_SwitchingTimesListEUTRA__item_,
+        ___BandParameters_v1540_srs_CarrierSwitch_eutra_srs_SwitchingTimesListEUTRA,
+        __BandParameters_v1540_srs_CarrierSwitch_eutra,
+        _BandParameters_v1540_srs_CarrierSwitch,
+        __BandParameters_v1540_srs_TxSwitch_v1540_supportedSRS_TxPortSwitch,
+        __BandParameters_v1540_srs_TxSwitch_v1540_txSwitchImpactToRx,
+        __BandParameters_v1540_srs_TxSwitch_v1540_txSwitchWithAnotherBand,
+        _BandParameters_v1540_srs_TxSwitch_v1540,
+        BandParameters_v1540,
         CA_BandwidthClassEUTRA,
         CA_BandwidthClassNR,
         _CA_ParametersEUTRA_multipleTimingAdvance,
@@ -17159,6 +18302,43 @@ class NR_RRC_Definitions:
         _CA_ParametersNR_diffNumerologyWithinPUCCH_Group,
         _CA_ParametersNR_supportedNumberTAG,
         CA_ParametersNR,
+        _CA_ParametersNR_v1540_simultaneousSRS_AssocCSI_RS_AllCC,
+        __CA_ParametersNR_v1540_csi_RS_IM_ReceptionForFeedbackPerBandComb_maxNumberSimultaneousNZP_CSI_RS_ActBWP_AllCC,
+        __CA_ParametersNR_v1540_csi_RS_IM_ReceptionForFeedbackPerBandComb_totalNumberPortsSimultaneousNZP_CSI_RS_ActBWP_AllCC,
+        _CA_ParametersNR_v1540_csi_RS_IM_ReceptionForFeedbackPerBandComb,
+        _CA_ParametersNR_v1540_simultaneousCSI_ReportsAllCC,
+        _CA_ParametersNR_v1540_dualPA_Architecture,
+        CA_ParametersNR_v1540,
+        _CA_ParametersNR_v1550_aperiodic_CSI_diffSCS,
+        CA_ParametersNR_v1550,
+        ____CodebookParameters_type1_singlePanel_supportedCSI_RS_ResourceList__item_,
+        ___CodebookParameters_type1_singlePanel_supportedCSI_RS_ResourceList,
+        ___CodebookParameters_type1_singlePanel_modes,
+        ___CodebookParameters_type1_singlePanel_maxNumberCSI_RS_PerResourceSet,
+        __CodebookParameters_type1_singlePanel,
+        ____CodebookParameters_type1_multiPanel_supportedCSI_RS_ResourceList__item_,
+        ___CodebookParameters_type1_multiPanel_supportedCSI_RS_ResourceList,
+        ___CodebookParameters_type1_multiPanel_modes,
+        ___CodebookParameters_type1_multiPanel_nrofPanels,
+        ___CodebookParameters_type1_multiPanel_maxNumberCSI_RS_PerResourceSet,
+        __CodebookParameters_type1_multiPanel,
+        _CodebookParameters_type1,
+        ___CodebookParameters_type2_supportedCSI_RS_ResourceList__item_,
+        __CodebookParameters_type2_supportedCSI_RS_ResourceList,
+        __CodebookParameters_type2_parameterLx,
+        __CodebookParameters_type2_amplitudeScalingType,
+        __CodebookParameters_type2_amplitudeSubsetRestriction,
+        _CodebookParameters_type2,
+        ___CodebookParameters_type2_PortSelection_supportedCSI_RS_ResourceList__item_,
+        __CodebookParameters_type2_PortSelection_supportedCSI_RS_ResourceList,
+        __CodebookParameters_type2_PortSelection_parameterLx,
+        __CodebookParameters_type2_PortSelection_amplitudeScalingType,
+        _CodebookParameters_type2_PortSelection,
+        CodebookParameters,
+        _SupportedCSI_RS_Resource_maxNumberTxPortsPerResource,
+        _SupportedCSI_RS_Resource_maxNumberResourcesPerBand,
+        _SupportedCSI_RS_Resource_totalNumberTxPortsPerBand,
+        SupportedCSI_RS_Resource,
         _FeatureSetCombination__item_,
         FeatureSetCombination,
         _FeatureSetsPerBand__item_,
@@ -17178,64 +18358,82 @@ class NR_RRC_Definitions:
         _FeatureSetDownlink_crossCarrierScheduling_OtherSCS,
         _FeatureSetDownlink_scellWithoutSSB,
         _FeatureSetDownlink_csi_RS_MeasSCellWithoutSSB,
-        _FeatureSetDownlink_srs_AssocCSI_RS,
+        _FeatureSetDownlink_dummy1,
         _FeatureSetDownlink_type1_3_CSS,
         _FeatureSetDownlink_pdcch_MonitoringAnyOccasions,
-        _FeatureSetDownlink_pdcch_MonitoringAnyOccasionsWithSpanGap,
+        _FeatureSetDownlink_dummy2,
         _FeatureSetDownlink_ue_SpecificUL_DL_Assignment,
         _FeatureSetDownlink_searchSpaceSharingCA_DL,
         __FeatureSetDownlink_timeDurationForQCL_scs_60kHz,
-        __FeatureSetDownlink_timeDurationForQCL_sch_120kHz,
+        __FeatureSetDownlink_timeDurationForQCL_scs_120kHz,
         _FeatureSetDownlink_timeDurationForQCL,
-        __FeatureSetDownlink_pdsch_DifferentTB_PerSlot_scs_15kHz,
-        __FeatureSetDownlink_pdsch_DifferentTB_PerSlot_scs_30kHz,
-        __FeatureSetDownlink_pdsch_DifferentTB_PerSlot_scs_60kHz,
-        __FeatureSetDownlink_pdsch_DifferentTB_PerSlot_scs_120kHz,
-        _FeatureSetDownlink_pdsch_DifferentTB_PerSlot,
-        _FeatureSetDownlink_csi_RS_IM_ReceptionForFeedback,
-        __FeatureSetDownlink_typeI_SinglePanelCodebookList__item_,
-        _FeatureSetDownlink_typeI_SinglePanelCodebookList,
-        __FeatureSetDownlink_typeI_MultiPanelCodebookList__item_,
-        _FeatureSetDownlink_typeI_MultiPanelCodebookList,
-        __FeatureSetDownlink_typeII_CodebookList__item_,
-        _FeatureSetDownlink_typeII_CodebookList,
-        __FeatureSetDownlink_typeII_CodebookPortSelectionList__item_,
-        _FeatureSetDownlink_typeII_CodebookPortSelectionList,
+        __FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot_scs_15kHz,
+        __FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot_scs_30kHz,
+        __FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot_scs_60kHz,
+        __FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot_scs_120kHz,
+        _FeatureSetDownlink_pdsch_ProcessingType1_DifferentTB_PerSlot,
+        _FeatureSetDownlink_dummy3,
+        __FeatureSetDownlink_dummy4__item_,
+        _FeatureSetDownlink_dummy4,
+        __FeatureSetDownlink_dummy5__item_,
+        _FeatureSetDownlink_dummy5,
+        __FeatureSetDownlink_dummy6__item_,
+        _FeatureSetDownlink_dummy6,
+        __FeatureSetDownlink_dummy7__item_,
+        _FeatureSetDownlink_dummy7,
         FeatureSetDownlink,
-        _CSI_RS_IM_ReceptionForFeedback_maxNumberNZP_CSI_RS_PerCC,
-        _CSI_RS_IM_ReceptionForFeedback_maxNumberPortsAcrossNZP_CSI_RS_PerCC,
-        _CSI_RS_IM_ReceptionForFeedback_maxNumberCS_IM_PerCC,
-        _CSI_RS_IM_ReceptionForFeedback_maxNumberSimultaneousCSI_RS_ActBWP_AllCC,
-        _CSI_RS_IM_ReceptionForFeedback_totalNumberPortsSimultaneousCSI_RS_ActBWP_AllCC,
-        CSI_RS_IM_ReceptionForFeedback,
-        _TypeI_SinglePanelCodebook_maxNumberTxPortsPerResource,
-        _TypeI_SinglePanelCodebook_maxNumberResources,
-        _TypeI_SinglePanelCodebook_totalNumberTxPorts,
-        _TypeI_SinglePanelCodebook_supportedCodebookMode,
-        _TypeI_SinglePanelCodebook_maxNumberCSI_RS_PerResourceSet,
-        TypeI_SinglePanelCodebook,
-        _TypeI_MultiPanelCodebook_maxNumberTxPortsPerResource,
-        _TypeI_MultiPanelCodebook_maxNumberResources,
-        _TypeI_MultiPanelCodebook_totalNumberTxPorts,
-        _TypeI_MultiPanelCodebook_supportedCodebookMode,
-        _TypeI_MultiPanelCodebook_supportedNumberPanels,
-        _TypeI_MultiPanelCodebook_maxNumberCSI_RS_PerResourceSet,
-        TypeI_MultiPanelCodebook,
-        _TypeII_Codebook_maxNumberTxPortsPerResource,
-        _TypeII_Codebook_maxNumberResources,
-        _TypeII_Codebook_totalNumberTxPorts,
-        _TypeII_Codebook_parameterLx,
-        _TypeII_Codebook_amplitudeScalingType,
-        _TypeII_Codebook_amplitudeSubsetRestriction,
-        _TypeII_Codebook_maxNumberCSI_RS_PerResourceSet,
-        TypeII_Codebook,
-        _TypeII_CodebookPortSelection_maxNumberTxPortsPerResource,
-        _TypeII_CodebookPortSelection_maxNumberResources,
-        _TypeII_CodebookPortSelection_totalNumberTxPorts,
-        _TypeII_CodebookPortSelection_parameterLx,
-        _TypeII_CodebookPortSelection_amplitudeScalingType,
-        _TypeII_CodebookPortSelection_maxNumberCSI_RS_PerResourceSet,
-        TypeII_CodebookPortSelection,
+        _FeatureSetDownlink_v1540_oneFL_DMRS_TwoAdditionalDMRS_DL,
+        _FeatureSetDownlink_v1540_additionalDMRS_DL_Alt,
+        _FeatureSetDownlink_v1540_twoFL_DMRS_TwoAdditionalDMRS_DL,
+        _FeatureSetDownlink_v1540_oneFL_DMRS_ThreeAdditionalDMRS_DL,
+        __FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap_scs_15kHz,
+        __FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap_scs_30kHz,
+        __FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap_scs_60kHz,
+        __FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap_scs_120kHz,
+        _FeatureSetDownlink_v1540_pdcch_MonitoringAnyOccasionsWithSpanGap,
+        _FeatureSetDownlink_v1540_pdsch_SeparationWithGap,
+        __FeatureSetDownlink_v1540_pdsch_ProcessingType2_scs_15kHz,
+        __FeatureSetDownlink_v1540_pdsch_ProcessingType2_scs_30kHz,
+        __FeatureSetDownlink_v1540_pdsch_ProcessingType2_scs_60kHz,
+        _FeatureSetDownlink_v1540_pdsch_ProcessingType2,
+        __FeatureSetDownlink_v1540_pdsch_ProcessingType2_Limited_differentTB_PerSlot_SCS_30kHz,
+        _FeatureSetDownlink_v1540_pdsch_ProcessingType2_Limited,
+        _FeatureSetDownlink_v1540_dl_MCS_TableAlt_DynamicIndication,
+        FeatureSetDownlink_v1540,
+        _DummyA_maxNumberNZP_CSI_RS_PerCC,
+        _DummyA_maxNumberPortsAcrossNZP_CSI_RS_PerCC,
+        _DummyA_maxNumberCS_IM_PerCC,
+        _DummyA_maxNumberSimultaneousCSI_RS_ActBWP_AllCC,
+        _DummyA_totalNumberPortsSimultaneousCSI_RS_ActBWP_AllCC,
+        DummyA,
+        _DummyB_maxNumberTxPortsPerResource,
+        _DummyB_maxNumberResources,
+        _DummyB_totalNumberTxPorts,
+        _DummyB_supportedCodebookMode,
+        _DummyB_maxNumberCSI_RS_PerResourceSet,
+        DummyB,
+        _DummyC_maxNumberTxPortsPerResource,
+        _DummyC_maxNumberResources,
+        _DummyC_totalNumberTxPorts,
+        _DummyC_supportedCodebookMode,
+        _DummyC_supportedNumberPanels,
+        _DummyC_maxNumberCSI_RS_PerResourceSet,
+        DummyC,
+        _DummyD_maxNumberTxPortsPerResource,
+        _DummyD_maxNumberResources,
+        _DummyD_totalNumberTxPorts,
+        _DummyD_parameterLx,
+        _DummyD_amplitudeScalingType,
+        _DummyD_amplitudeSubsetRestriction,
+        _DummyD_maxNumberCSI_RS_PerResourceSet,
+        DummyD,
+        _DummyE_maxNumberTxPortsPerResource,
+        _DummyE_maxNumberResources,
+        _DummyE_totalNumberTxPorts,
+        _DummyE_parameterLx,
+        _DummyE_amplitudeScalingType,
+        _DummyE_maxNumberCSI_RS_PerResourceSet,
+        DummyE,
         FeatureSetDownlinkId,
         _FeatureSetDownlinkPerCC_supportedSubcarrierSpacingDL,
         _FeatureSetDownlinkPerCC_supportedBandwidthDL,
@@ -17254,6 +18452,12 @@ class NR_RRC_Definitions:
         _FeatureSets_featureSetsUplink,
         __FeatureSets_featureSetsUplinkPerCC__item_,
         _FeatureSets_featureSetsUplinkPerCC,
+        __FeatureSets_featureSetsDownlink_v1540__item_,
+        _FeatureSets_featureSetsDownlink_v1540,
+        __FeatureSets_featureSetsUplink_v1540__item_,
+        _FeatureSets_featureSetsUplink_v1540,
+        __FeatureSets_featureSetsUplinkPerCC_v1540__item_,
+        _FeatureSets_featureSetsUplinkPerCC_v1540,
         FeatureSets,
         __FeatureSetUplink_featureSetListPerUplinkCC__item_,
         _FeatureSetUplink_featureSetListPerUplinkCC,
@@ -17261,23 +18465,40 @@ class NR_RRC_Definitions:
         _FeatureSetUplink_crossCarrierScheduling_OtherSCS,
         _FeatureSetUplink_intraBandFreqSeparationUL,
         _FeatureSetUplink_searchSpaceSharingCA_UL,
-        _FeatureSetUplink_srs_TxSwitch,
+        _FeatureSetUplink_dummy1,
         _FeatureSetUplink_supportedSRS_Resources,
         _FeatureSetUplink_twoPUCCH_Group,
         _FeatureSetUplink_dynamicSwitchSUL,
-        _FeatureSetUplink_simultaneousTxSUL_NonSUL_v1530,
-        __FeatureSetUplink_pusch_DifferentTB_PerSlot_scs_15kHz,
-        __FeatureSetUplink_pusch_DifferentTB_PerSlot_scs_30kHz,
-        __FeatureSetUplink_pusch_DifferentTB_PerSlot_scs_60kHz,
-        __FeatureSetUplink_pusch_DifferentTB_PerSlot_scs_120kHz,
-        _FeatureSetUplink_pusch_DifferentTB_PerSlot,
-        _FeatureSetUplink_csi_ReportFramework,
+        _FeatureSetUplink_simultaneousTxSUL_NonSUL,
+        __FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot_scs_15kHz,
+        __FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot_scs_30kHz,
+        __FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot_scs_60kHz,
+        __FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot_scs_120kHz,
+        _FeatureSetUplink_pusch_ProcessingType1_DifferentTB_PerSlot,
+        _FeatureSetUplink_dummy2,
         FeatureSetUplink,
-        _CSI_ReportFramework_maxNumberPeriodicCSI_ReportPerBWP,
-        _CSI_ReportFramework_maxNumberAperiodicCSI_ReportPerBWP,
-        _CSI_ReportFramework_maxNumberSemiPersistentCSI_ReportPerBWP,
-        _CSI_ReportFramework_simultaneousCSI_ReportsAllCC,
-        CSI_ReportFramework,
+        _FeatureSetUplink_v1540_zeroSlotOffsetAperiodicSRS,
+        _FeatureSetUplink_v1540_pa_PhaseDiscontinuityImpacts,
+        _FeatureSetUplink_v1540_pusch_SeparationWithGap,
+        __FeatureSetUplink_v1540_pusch_ProcessingType2_scs_15kHz,
+        __FeatureSetUplink_v1540_pusch_ProcessingType2_scs_30kHz,
+        __FeatureSetUplink_v1540_pusch_ProcessingType2_scs_60kHz,
+        _FeatureSetUplink_v1540_pusch_ProcessingType2,
+        _FeatureSetUplink_v1540_ul_MCS_TableAlt_DynamicIndication,
+        FeatureSetUplink_v1540,
+        _SRS_Resources_maxNumberAperiodicSRS_PerBWP,
+        _SRS_Resources_maxNumberAperiodicSRS_PerBWP_PerSlot,
+        _SRS_Resources_maxNumberPeriodicSRS_PerBWP,
+        _SRS_Resources_maxNumberPeriodicSRS_PerBWP_PerSlot,
+        _SRS_Resources_maxNumberSemiPersitentSRS_PerBWP,
+        _SRS_Resources_maxNumberSP_SRS_PerBWP_PerSlot,
+        _SRS_Resources_maxNumberSRS_Ports_PerResource,
+        SRS_Resources,
+        _DummyF_maxNumberPeriodicCSI_ReportPerBWP,
+        _DummyF_maxNumberAperiodicCSI_ReportPerBWP,
+        _DummyF_maxNumberSemiPersistentCSI_ReportPerBWP,
+        _DummyF_simultaneousCSI_ReportsAllCC,
+        DummyF,
         FeatureSetUplinkId,
         _FeatureSetUplinkPerCC_supportedSubcarrierSpacingUL,
         _FeatureSetUplinkPerCC_supportedBandwidthUL,
@@ -17288,6 +18509,10 @@ class NR_RRC_Definitions:
         _FeatureSetUplinkPerCC_maxNumberMIMO_LayersNonCB_PUSCH,
         _FeatureSetUplinkPerCC_supportedModulationOrderUL,
         FeatureSetUplinkPerCC,
+        __FeatureSetUplinkPerCC_v1540_mimo_NonCB_PUSCH_maxNumberSRS_ResourcePerSet,
+        __FeatureSetUplinkPerCC_v1540_mimo_NonCB_PUSCH_maxNumberSimultaneousSRS_ResourceTx,
+        _FeatureSetUplinkPerCC_v1540_mimo_NonCB_PUSCH,
+        FeatureSetUplinkPerCC_v1540,
         FeatureSetUplinkPerCC_Id,
         FreqBandIndicatorEUTRA,
         _FreqBandList__item_,
@@ -17307,6 +18532,13 @@ class NR_RRC_Definitions:
         FreqBandInformationNR,
         AggregatedBandwidth,
         FreqSeparationClass,
+        _IMS_Parameters_ims_ParametersCommon,
+        _IMS_Parameters_ims_ParametersFRX_Diff,
+        IMS_Parameters,
+        _IMS_ParametersCommon_voiceOverEUTRA_5GC,
+        IMS_ParametersCommon,
+        _IMS_ParametersFRX_Diff_voiceOverNR,
+        IMS_ParametersFRX_Diff,
         _InterRAT_Parameters_eutra,
         InterRAT_Parameters,
         __EUTRA_Parameters_supportedBandListEUTRA__item_,
@@ -17315,7 +18547,7 @@ class NR_RRC_Definitions:
         _EUTRA_Parameters_eutra_ParametersXDD_Diff,
         EUTRA_Parameters,
         _EUTRA_ParametersCommon_mfbi_EUTRA,
-        _EUTRA_ParametersCommon_modifiedMRP_BehaviorEUTRA,
+        _EUTRA_ParametersCommon_modifiedMPR_BehaviorEUTRA,
         _EUTRA_ParametersCommon_multiNS_Pmax_EUTRA,
         _EUTRA_ParametersCommon_rs_SINR_MeasEUTRA,
         EUTRA_ParametersCommon,
@@ -17325,7 +18557,7 @@ class NR_RRC_Definitions:
         _MAC_Parameters_mac_ParametersXDD_Diff,
         MAC_Parameters,
         _MAC_ParametersCommon_lcp_Restriction,
-        _MAC_ParametersCommon_pucch_SpatialRelInfoMAC_CE,
+        _MAC_ParametersCommon_dummy,
         _MAC_ParametersCommon_lch_ToSCellRestriction,
         _MAC_ParametersCommon_recommendedBitRate,
         _MAC_ParametersCommon_recommendedBitRateQuery,
@@ -17348,6 +18580,11 @@ class NR_RRC_Definitions:
         _MeasAndMobParametersCommon_handoverFDD_TDD,
         _MeasAndMobParametersCommon_eutra_CGI_Reporting,
         _MeasAndMobParametersCommon_nr_CGI_Reporting,
+        _MeasAndMobParametersCommon_independentGapConfig,
+        _MeasAndMobParametersCommon_periodicEUTRA_MeasAndReport,
+        _MeasAndMobParametersCommon_handoverFR1_FR2,
+        _MeasAndMobParametersCommon_maxNumberCSI_RS_RRM_RS_SINR,
+        _MeasAndMobParametersCommon_nr_CGI_Reporting_ENDC,
         MeasAndMobParametersCommon,
         _MeasAndMobParametersXDD_Diff_intraAndInterF_MeasAndReport,
         _MeasAndMobParametersXDD_Diff_eventA_MeasAndReport,
@@ -17363,6 +18600,8 @@ class NR_RRC_Definitions:
         _MeasAndMobParametersFRX_Diff_handoverInterF,
         _MeasAndMobParametersFRX_Diff_handoverLTE,
         _MeasAndMobParametersFRX_Diff_handover_eLTE,
+        _MeasAndMobParametersFRX_Diff_maxNumberResource_CSI_RS_RLM,
+        _MeasAndMobParametersFRX_Diff_simultaneousRxDataSSB_DiffNumerology,
         MeasAndMobParametersFRX_Diff,
         _MeasAndMobParametersMRDC_measAndMobParametersMRDC_Common,
         _MeasAndMobParametersMRDC_measAndMobParametersMRDC_XDD_Diff,
@@ -17382,12 +18621,12 @@ class NR_RRC_Definitions:
         _MIMO_ParametersPerBand_tci_StatePDSCH,
         _MIMO_ParametersPerBand_additionalActiveTCI_StatePDCCH,
         _MIMO_ParametersPerBand_pusch_TransCoherence,
-        _MIMO_ParametersPerBand_beamCorrespondence,
+        _MIMO_ParametersPerBand_beamCorrespondenceWithoutUL_BeamSweeping,
         _MIMO_ParametersPerBand_periodicBeamReport,
         _MIMO_ParametersPerBand_aperiodicBeamReport,
         _MIMO_ParametersPerBand_sp_BeamReportPUCCH,
         _MIMO_ParametersPerBand_sp_BeamReportPUSCH,
-        _MIMO_ParametersPerBand_beamManagementSSB_CSI_RS,
+        _MIMO_ParametersPerBand_dummy1,
         _MIMO_ParametersPerBand_maxNumberRxBeam,
         __MIMO_ParametersPerBand_maxNumberRxTxBeamSwitchDL_scs_15kHz,
         __MIMO_ParametersPerBand_maxNumberRxTxBeamSwitchDL_scs_30kHz,
@@ -17400,13 +18639,13 @@ class NR_RRC_Definitions:
         __MIMO_ParametersPerBand_uplinkBeamManagement_maxNumberSRS_ResourcePerSet_BM,
         __MIMO_ParametersPerBand_uplinkBeamManagement_maxNumberSRS_ResourceSet,
         _MIMO_ParametersPerBand_uplinkBeamManagement,
-        _MIMO_ParametersPerBand_maxNumberCSI_RS_BFR,
-        _MIMO_ParametersPerBand_maxNumberSSB_BFR,
-        _MIMO_ParametersPerBand_maxNumberCSI_RS_SSB_BFR,
-        _MIMO_ParametersPerBand_twoPortsPTRS_DL,
+        _MIMO_ParametersPerBand_maxNumberCSI_RS_BFD,
+        _MIMO_ParametersPerBand_maxNumberSSB_BFD,
+        _MIMO_ParametersPerBand_maxNumberCSI_RS_SSB_CBD,
+        _MIMO_ParametersPerBand_dummy2,
         _MIMO_ParametersPerBand_twoPortsPTRS_UL,
-        _MIMO_ParametersPerBand_supportedSRS_Resources,
-        _MIMO_ParametersPerBand_maxNumberSimultaneousSRS_PerCC,
+        _MIMO_ParametersPerBand_dummy5,
+        _MIMO_ParametersPerBand_dummy3,
         __MIMO_ParametersPerBand_beamReportTiming_scs_15kHz,
         __MIMO_ParametersPerBand_beamReportTiming_scs_30kHz,
         __MIMO_ParametersPerBand_beamReportTiming_scs_60kHz,
@@ -17422,18 +18661,62 @@ class NR_RRC_Definitions:
         __MIMO_ParametersPerBand_ptrs_DensityRecommendationSetUL_scs_60kHz,
         __MIMO_ParametersPerBand_ptrs_DensityRecommendationSetUL_scs_120kHz,
         _MIMO_ParametersPerBand_ptrs_DensityRecommendationSetUL,
-        _MIMO_ParametersPerBand_csi_RS_ForTracking,
+        _MIMO_ParametersPerBand_dummy4,
         _MIMO_ParametersPerBand_aperiodicTRS,
+        _MIMO_ParametersPerBand_beamCorrespondenceCA,
+        _MIMO_ParametersPerBand_beamManagementSSB_CSI_RS,
+        __MIMO_ParametersPerBand_beamSwitchTiming_scs_60kHz,
+        __MIMO_ParametersPerBand_beamSwitchTiming_scs_120kHz,
+        _MIMO_ParametersPerBand_beamSwitchTiming,
+        _MIMO_ParametersPerBand_codebookParameters,
+        _MIMO_ParametersPerBand_csi_RS_IM_ReceptionForFeedback,
+        _MIMO_ParametersPerBand_csi_RS_ProcFrameworkForSRS,
+        _MIMO_ParametersPerBand_csi_ReportFramework,
+        _MIMO_ParametersPerBand_csi_RS_ForTracking,
+        __MIMO_ParametersPerBand_srs_AssocCSI_RS__item_,
+        _MIMO_ParametersPerBand_srs_AssocCSI_RS,
+        _MIMO_ParametersPerBand_spatialRelations,
         MIMO_ParametersPerBand,
+        _DummyG_maxNumberSSB_CSI_RS_ResourceOneTx,
+        _DummyG_maxNumberSSB_CSI_RS_ResourceTwoTx,
+        _DummyG_supportedCSI_RS_Density,
+        DummyG,
         _BeamManagementSSB_CSI_RS_maxNumberSSB_CSI_RS_ResourceOneTx,
-        _BeamManagementSSB_CSI_RS_maxNumberSSB_CSI_RS_ResourceTwoTx,
+        _BeamManagementSSB_CSI_RS_maxNumberCSI_RS_Resource,
+        _BeamManagementSSB_CSI_RS_maxNumberCSI_RS_ResourceTwoTx,
         _BeamManagementSSB_CSI_RS_supportedCSI_RS_Density,
+        _BeamManagementSSB_CSI_RS_maxNumberAperiodicCSI_RS_Resource,
         BeamManagementSSB_CSI_RS,
-        _CSI_RS_ForTracking_burstLength,
+        _DummyH_burstLength,
+        _DummyH_maxSimultaneousResourceSetsPerCC,
+        _DummyH_maxConfiguredResourceSetsPerCC,
+        _DummyH_maxConfiguredResourceSetsAllCC,
+        DummyH,
+        _CSI_RS_ForTracking_maxBurstLength,
         _CSI_RS_ForTracking_maxSimultaneousResourceSetsPerCC,
         _CSI_RS_ForTracking_maxConfiguredResourceSetsPerCC,
         _CSI_RS_ForTracking_maxConfiguredResourceSetsAllCC,
         CSI_RS_ForTracking,
+        _CSI_RS_IM_ReceptionForFeedback_maxConfigNumberNZP_CSI_RS_PerCC,
+        _CSI_RS_IM_ReceptionForFeedback_maxConfigNumberPortsAcrossNZP_CSI_RS_PerCC,
+        _CSI_RS_IM_ReceptionForFeedback_maxConfigNumberCSI_IM_PerCC,
+        _CSI_RS_IM_ReceptionForFeedback_maxNumberSimultaneousNZP_CSI_RS_PerCC,
+        _CSI_RS_IM_ReceptionForFeedback_totalNumberPortsSimultaneousNZP_CSI_RS_PerCC,
+        CSI_RS_IM_ReceptionForFeedback,
+        _CSI_RS_ProcFrameworkForSRS_maxNumberPeriodicSRS_AssocCSI_RS_PerBWP,
+        _CSI_RS_ProcFrameworkForSRS_maxNumberAperiodicSRS_AssocCSI_RS_PerBWP,
+        _CSI_RS_ProcFrameworkForSRS_maxNumberSP_SRS_AssocCSI_RS_PerBWP,
+        _CSI_RS_ProcFrameworkForSRS_simultaneousSRS_AssocCSI_RS_PerCC,
+        CSI_RS_ProcFrameworkForSRS,
+        _CSI_ReportFramework_maxNumberPeriodicCSI_PerBWP_ForCSI_Report,
+        _CSI_ReportFramework_maxNumberAperiodicCSI_PerBWP_ForCSI_Report,
+        _CSI_ReportFramework_maxNumberSemiPersistentCSI_PerBWP_ForCSI_Report,
+        _CSI_ReportFramework_maxNumberPeriodicCSI_PerBWP_ForBeamReport,
+        _CSI_ReportFramework_maxNumberAperiodicCSI_PerBWP_ForBeamReport,
+        _CSI_ReportFramework_maxNumberAperiodicCSI_triggeringStatePerCC,
+        _CSI_ReportFramework_maxNumberSemiPersistentCSI_PerBWP_ForBeamReport,
+        _CSI_ReportFramework_simultaneousCSI_ReportsPerCC,
+        CSI_ReportFramework,
         _PTRS_DensityRecommendationDL_frequencyDensity1,
         _PTRS_DensityRecommendationDL_frequencyDensity2,
         _PTRS_DensityRecommendationDL_timeDensity1,
@@ -17451,17 +18734,14 @@ class NR_RRC_Definitions:
         _PTRS_DensityRecommendationUL_sampleDensity4,
         _PTRS_DensityRecommendationUL_sampleDensity5,
         PTRS_DensityRecommendationUL,
-        _SRS_Resources_maxNumberAperiodicSRS_PerBWP,
-        _SRS_Resources_maxNumberAperiodicSRS_PerBWP_PerSlot,
-        _SRS_Resources_maxNumberPeriodicSRS_PerBWP,
-        _SRS_Resources_maxNumberPeriodicSRS_PerBWP_PerSlot,
-        _SRS_Resources_maxNumberSemiPersitentSRS_PerBWP,
-        _SRS_Resources_maxNumberSP_SRS_PerBWP_PerSlot,
-        _SRS_Resources_maxNumberSRS_Ports_PerResource,
-        SRS_Resources,
-        _SRS_TxSwitch_supportedSRS_TxPortSwitch,
-        _SRS_TxSwitch_txSwitchImpactToRx,
-        SRS_TxSwitch,
+        _SpatialRelations_maxNumberConfiguredSpatialRelations,
+        _SpatialRelations_maxNumberActiveSpatialRelations,
+        _SpatialRelations_additionalActiveSpatialRelationPUCCH,
+        _SpatialRelations_maxNumberDL_RS_QCL_TypeD,
+        SpatialRelations,
+        _DummyI_supportedSRS_TxPortSwitch,
+        _DummyI_txSwitchImpactToRx,
+        DummyI,
         ModulationOrder,
         _MRDC_Parameters_singleUL_Transmission,
         _MRDC_Parameters_dynamicPowerSharing,
@@ -17470,6 +18750,9 @@ class NR_RRC_Definitions:
         _MRDC_Parameters_ul_SwitchingTimeEUTRA_NR,
         _MRDC_Parameters_simultaneousRxTxInterBandENDC,
         _MRDC_Parameters_asyncIntraBandENDC,
+        _MRDC_Parameters_dualPA_Architecture,
+        _MRDC_Parameters_intraBandENDC_Support_v1540,
+        _MRDC_Parameters_ul_TimingAlignmentEUTRA_NR,
         MRDC_Parameters,
         __PDCP_Parameters_supportedROHC_Profiles_profile0x0000,
         __PDCP_Parameters_supportedROHC_Profiles_profile0x0001,
@@ -17487,8 +18770,8 @@ class NR_RRC_Definitions:
         _PDCP_Parameters_continueROHC_Context,
         _PDCP_Parameters_outOfOrderDelivery,
         _PDCP_Parameters_shortSN,
-        _PDCP_Parameters_pdcp_DuplicationSRB3,
-        _PDCP_Parameters_pdcp_DuplicationMCG_OrSCG,
+        _PDCP_Parameters_pdcp_DuplicationSRB,
+        _PDCP_Parameters_pdcp_DuplicationMCG_OrSCG_DRB,
         PDCP_Parameters,
         _PDCP_ParametersMRDC_pdcp_DuplicationSplitSRB,
         _PDCP_ParametersMRDC_pdcp_DuplicationSplitDRB,
@@ -17533,18 +18816,24 @@ class NR_RRC_Definitions:
         _Phy_ParametersCommon_rateMatchingResrcSetSemi_Static,
         _Phy_ParametersCommon_rateMatchingResrcSetDynamic,
         _Phy_ParametersCommon_bwp_SwitchingDelay,
-        _Phy_ParametersCommon_eutra_RS_SINR_measurement,
+        _Phy_ParametersCommon_dummy,
+        _Phy_ParametersCommon_maxNumberSearchSpaces,
+        _Phy_ParametersCommon_rateMatchingCtrlResrcSetDynamic,
+        _Phy_ParametersCommon_maxLayersMIMO_Indication,
         Phy_ParametersCommon,
         _Phy_ParametersXDD_Diff_dynamicSFI,
         _Phy_ParametersXDD_Diff_twoPUCCH_F0_2_ConsecSymbols,
         _Phy_ParametersXDD_Diff_twoDifferentTPC_Loop_PUSCH,
         _Phy_ParametersXDD_Diff_twoDifferentTPC_Loop_PUCCH,
+        _Phy_ParametersXDD_Diff_dl_SchedulingOffset_PDSCH_TypeA,
+        _Phy_ParametersXDD_Diff_dl_SchedulingOffset_PDSCH_TypeB,
+        _Phy_ParametersXDD_Diff_ul_SchedulingOffset,
         Phy_ParametersXDD_Diff,
         _Phy_ParametersFRX_Diff_dynamicSFI,
-        _Phy_ParametersFRX_Diff_oneFL_DMRS_TwoAdditionalDMRS,
+        _Phy_ParametersFRX_Diff_dummy1,
         _Phy_ParametersFRX_Diff_twoFL_DMRS,
-        _Phy_ParametersFRX_Diff_twoFL_DMRS_TwoAdditionalDMRS,
-        _Phy_ParametersFRX_Diff_oneFL_DMRS_ThreeAdditionalDMRS,
+        _Phy_ParametersFRX_Diff_dummy2,
+        _Phy_ParametersFRX_Diff_dummy3,
         _Phy_ParametersFRX_Diff_supportedDMRS_TypeDL,
         _Phy_ParametersFRX_Diff_supportedDMRS_TypeUL,
         _Phy_ParametersFRX_Diff_semiOpenLoopCSI,
@@ -17557,7 +18846,7 @@ class NR_RRC_Definitions:
         _Phy_ParametersFRX_Diff_pucch_F4_WithFH,
         _Phy_ParametersFRX_Diff_freqHoppingPUCCH_F0_2,
         _Phy_ParametersFRX_Diff_freqHoppingPUCCH_F1_3_4,
-        _Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH,
+        _Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH_MultiPerSlot,
         _Phy_ParametersFRX_Diff_uci_CodeBlockSegmentation,
         _Phy_ParametersFRX_Diff_onePUCCH_LongAndShortFormat,
         _Phy_ParametersFRX_Diff_twoPUCCH_AnyOthersInSlot,
@@ -17577,14 +18866,34 @@ class NR_RRC_Definitions:
         _Phy_ParametersFRX_Diff_sp_CSI_IM,
         _Phy_ParametersFRX_Diff_tdd_MultiDL_UL_SwitchPerSlot,
         _Phy_ParametersFRX_Diff_multipleCORESET,
+        _Phy_ParametersFRX_Diff_csi_RS_IM_ReceptionForFeedback,
+        _Phy_ParametersFRX_Diff_csi_RS_ProcFrameworkForSRS,
+        _Phy_ParametersFRX_Diff_csi_ReportFramework,
+        __Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH_OncePerSlot_sameSymbol,
+        __Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH_OncePerSlot_diffSymbol,
+        _Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_CSI_PUCCH_OncePerSlot,
+        _Phy_ParametersFRX_Diff_mux_SR_HARQ_ACK_PUCCH,
+        _Phy_ParametersFRX_Diff_mux_MultipleGroupCtrlCH_Overlap,
+        _Phy_ParametersFRX_Diff_dl_SchedulingOffset_PDSCH_TypeA,
+        _Phy_ParametersFRX_Diff_dl_SchedulingOffset_PDSCH_TypeB,
+        _Phy_ParametersFRX_Diff_ul_SchedulingOffset,
+        _Phy_ParametersFRX_Diff_dl_64QAM_MCS_TableAlt,
+        _Phy_ParametersFRX_Diff_ul_64QAM_MCS_TableAlt,
+        _Phy_ParametersFRX_Diff_cqi_TableAlt,
+        _Phy_ParametersFRX_Diff_oneFL_DMRS_TwoAdditionalDMRS_UL,
+        _Phy_ParametersFRX_Diff_twoFL_DMRS_TwoAdditionalDMRS_UL,
+        _Phy_ParametersFRX_Diff_oneFL_DMRS_ThreeAdditionalDMRS_UL,
         Phy_ParametersFRX_Diff,
         _Phy_ParametersFR1_pdcchMonitoringSingleOccasion,
         _Phy_ParametersFR1_scs_60kHz,
         _Phy_ParametersFR1_pdsch_256QAM_FR1,
-        _Phy_ParametersFR1_pdsch_RE_MappingFR1,
+        _Phy_ParametersFR1_pdsch_RE_MappingFR1_PerSymbol,
+        _Phy_ParametersFR1_pdsch_RE_MappingFR1_PerSlot,
         Phy_ParametersFR1,
-        _Phy_ParametersFR2_calibrationGapPA,
-        _Phy_ParametersFR2_pdsch_RE_MappingFR2,
+        _Phy_ParametersFR2_dummy,
+        _Phy_ParametersFR2_pdsch_RE_MappingFR2_PerSymbol,
+        _Phy_ParametersFR2_pCell_FR2,
+        _Phy_ParametersFR2_pdsch_RE_MappingFR2_PerSlot,
         Phy_ParametersFR2,
         __Phy_ParametersMRDC_naics_Capability_List__item_,
         _Phy_ParametersMRDC_naics_Capability_List,
@@ -17592,11 +18901,22 @@ class NR_RRC_Definitions:
         _NAICS_Capability_Entry_numberOfNAICS_CapableCC,
         _NAICS_Capability_Entry_numberOfAggregatedPRB,
         NAICS_Capability_Entry,
+        _ProcessingParameters_fallback,
+        __ProcessingParameters_differentTB_PerSlot_upto1,
+        __ProcessingParameters_differentTB_PerSlot_upto2,
+        __ProcessingParameters_differentTB_PerSlot_upto4,
+        __ProcessingParameters_differentTB_PerSlot_upto7,
+        _ProcessingParameters_differentTB_PerSlot,
+        ProcessingParameters,
+        NumberOfCarriers,
         RAT_Type,
         __RF_Parameters_supportedBandListNR__item_,
         _RF_Parameters_supportedBandListNR,
         _RF_Parameters_supportedBandCombinationList,
         _RF_Parameters_appliedFreqBandListFilter,
+        _RF_Parameters_supportedBandCombinationList_v1540,
+        _RF_Parameters_srs_SwitchingTimeRequested,
+        _RF_Parameters_supportedBandCombinationList_v1550,
         RF_Parameters,
         _BandNR_bandNR,
         _BandNR_modifiedMPR_Behaviour,
@@ -17627,15 +18947,28 @@ class NR_RRC_Definitions:
         ___BandNR_channelBWs_UL_v1530_fr2_scs_120kHz,
         __BandNR_channelBWs_UL_v1530_fr2,
         _BandNR_channelBWs_UL_v1530,
-        _BandNR_maxUplinkDutyCycle,
+        _BandNR_maxUplinkDutyCycle_PC2_FR1,
+        _BandNR_pucch_SpatialRelInfoMAC_CE,
+        _BandNR_powerBoosting_pi2BPSK,
         BandNR,
         _RF_ParametersMRDC_supportedBandCombinationList,
         _RF_ParametersMRDC_appliedFreqBandListFilter,
+        _RF_ParametersMRDC_srs_SwitchingTimeRequested,
+        _RF_ParametersMRDC_supportedBandCombinationList_v1540,
+        _RF_ParametersMRDC_supportedBandCombinationList_v1550,
         RF_ParametersMRDC,
         _RLC_Parameters_am_WithShortSN,
         _RLC_Parameters_um_WithShortSN,
         _RLC_Parameters_um_WithLongSN,
         RLC_Parameters,
+        _SDAP_Parameters_as_ReflectiveQoS,
+        SDAP_Parameters,
+        _SRS_SwitchingTimeNR_switchingTimeDL,
+        _SRS_SwitchingTimeNR_switchingTimeUL,
+        SRS_SwitchingTimeNR,
+        _SRS_SwitchingTimeEUTRA_switchingTimeDL,
+        _SRS_SwitchingTimeEUTRA_switchingTimeUL,
+        SRS_SwitchingTimeEUTRA,
         _SupportedBandwidth_fr1,
         _SupportedBandwidth_fr2,
         SupportedBandwidth,
@@ -17649,9 +18982,12 @@ class NR_RRC_Definitions:
         _UE_CapabilityRAT_Request_rat_Type,
         _UE_CapabilityRAT_Request_capabilityRequestFilter,
         UE_CapabilityRAT_Request,
-        _UE_CapabilityRequestFilterNR_frequencyBandList,
+        _UE_CapabilityRequestFilterNR_frequencyBandListFilter,
         _UE_CapabilityRequestFilterNR_nonCriticalExtension,
         UE_CapabilityRequestFilterNR,
+        _UE_CapabilityRequestFilterNR_v1540_srs_SwitchingTimeRequest,
+        _UE_CapabilityRequestFilterNR_v1540_nonCriticalExtension,
+        UE_CapabilityRequestFilterNR_v1540,
         _UE_MRDC_Capability_measAndMobParametersMRDC,
         _UE_MRDC_Capability_phy_ParametersMRDC_v1530,
         _UE_MRDC_Capability_rf_ParametersMRDC,
@@ -17693,23 +19029,36 @@ class NR_RRC_Definitions:
         _UE_NR_Capability_lateNonCriticalExtension,
         _UE_NR_Capability_nonCriticalExtension,
         UE_NR_Capability,
-        _UE_NR_Capability_1530_fdd_Add_UE_NR_Capabilities_1530,
-        _UE_NR_Capability_1530_tdd_Add_UE_NR_Capabilities_1530,
-        _UE_NR_Capability_1530_voiceOverMCG_Bearer,
-        _UE_NR_Capability_1530_interRAT_Parameters,
-        _UE_NR_Capability_1530_inactiveState,
-        _UE_NR_Capability_1530_delayBudgetReporting,
-        _UE_NR_Capability_1530_nonCriticalExtension,
-        UE_NR_Capability_1530,
+        _UE_NR_Capability_v1530_fdd_Add_UE_NR_Capabilities_v1530,
+        _UE_NR_Capability_v1530_tdd_Add_UE_NR_Capabilities_v1530,
+        _UE_NR_Capability_v1530_dummy,
+        _UE_NR_Capability_v1530_interRAT_Parameters,
+        _UE_NR_Capability_v1530_inactiveState,
+        _UE_NR_Capability_v1530_delayBudgetReporting,
+        _UE_NR_Capability_v1530_nonCriticalExtension,
+        UE_NR_Capability_v1530,
+        _UE_NR_Capability_v1540_sdap_Parameters,
+        _UE_NR_Capability_v1540_overheatingInd,
+        _UE_NR_Capability_v1540_ims_Parameters,
+        _UE_NR_Capability_v1540_fr1_Add_UE_NR_Capabilities_v1540,
+        _UE_NR_Capability_v1540_fr2_Add_UE_NR_Capabilities_v1540,
+        _UE_NR_Capability_v1540_fr1_fr2_Add_UE_NR_Capabilities,
+        _UE_NR_Capability_v1540_nonCriticalExtension,
+        UE_NR_Capability_v1540,
+        _UE_NR_Capability_v1550_reducedCP_Latency,
+        _UE_NR_Capability_v1550_nonCriticalExtension,
+        UE_NR_Capability_v1550,
         _UE_NR_CapabilityAddXDD_Mode_phy_ParametersXDD_Diff,
         _UE_NR_CapabilityAddXDD_Mode_mac_ParametersXDD_Diff,
         _UE_NR_CapabilityAddXDD_Mode_measAndMobParametersXDD_Diff,
         UE_NR_CapabilityAddXDD_Mode,
-        _UE_NR_CapabilityAddXDD_Mode_1530_eutra_ParametersXDD_Diff,
-        UE_NR_CapabilityAddXDD_Mode_1530,
+        _UE_NR_CapabilityAddXDD_Mode_v1530_eutra_ParametersXDD_Diff,
+        UE_NR_CapabilityAddXDD_Mode_v1530,
         _UE_NR_CapabilityAddFRX_Mode_phy_ParametersFRX_Diff,
         _UE_NR_CapabilityAddFRX_Mode_measAndMobParametersFRX_Diff,
         UE_NR_CapabilityAddFRX_Mode,
+        _UE_NR_CapabilityAddFRX_Mode_v1540_ims_ParametersFRX_Diff,
+        UE_NR_CapabilityAddFRX_Mode_v1540,
         EUTRA_AllowedMeasBandwidth,
         _EUTRA_MBSFN_SubframeConfigList__item_,
         EUTRA_MBSFN_SubframeConfigList,
@@ -17738,21 +19087,17 @@ class NR_RRC_Definitions:
         EUTRA_PhysCellIdRange,
         EUTRA_PresenceAntennaPort1,
         EUTRA_Q_OffsetRange,
-        _MultiFrequencyBandListNR_SIB__item_,
-        MultiFrequencyBandListNR_SIB,
-        _NR_MultiBandInfo_freqBandIndicatorNR,
-        _NR_MultiBandInfo_nr_NS_PmaxList,
-        NR_MultiBandInfo,
-        _NR_NS_PmaxList__item_,
-        NR_NS_PmaxList,
-        _NR_NS_PmaxValue_additionalPmax,
-        _NR_NS_PmaxValue_additionalSpectrumEmission,
-        NR_NS_PmaxValue,
         __OtherConfig_delayBudgetReportingConfig_release,
         ___OtherConfig_delayBudgetReportingConfig_setup_delayBudgetReportingProhibitTimer,
         __OtherConfig_delayBudgetReportingConfig_setup,
         _OtherConfig_delayBudgetReportingConfig,
         OtherConfig,
+        __OtherConfig_v1540_overheatingAssistanceConfig_release,
+        __OtherConfig_v1540_overheatingAssistanceConfig_setup,
+        _OtherConfig_v1540_overheatingAssistanceConfig,
+        OtherConfig_v1540,
+        _OverheatingAssistanceConfig_overheatingIndicationProhibitTimer,
+        OverheatingAssistanceConfig,
         RRC_TransactionIdentifier,
         maxBandComb,
         maxCellBlack,
@@ -17897,11 +19242,12 @@ class NR_RRC_Definitions:
         maxCellSFTD,
         maxReportConfigId,
         maxNrofCodebooks,
+        maxNrofCSI_RS_Resources,
         maxNrofSRI_PUSCH_Mappings,
         maxNrofSRI_PUSCH_Mappings_1,
         maxSIB,
-        maxSIB_1,
         maxSI_Message,
+        maxPO_perPF,
         maxAccessCat_1,
         maxBarringInfoSet,
         maxCellEUTRA,
@@ -17915,6 +19261,155 @@ class NR_RRC_Definitions:
         maxPerCC_FeatureSets,
         maxFeatureSetCombinations,
         maxInterRAT_RSTD_Freq,
+    ]
+
+class NR_UE_Variables:
+
+    _name_  = u'NR-UE-Variables'
+    _oid_   = []
+    
+    _obj_ = [
+        u'VarPendingRNA-Update',
+        u'VarMeasConfig',
+        u'VarMeasReportList',
+        u'VarMeasReport',
+        u'CellsTriggeredList',
+        u'VarResumeMAC-Input',
+        u'VarShortMAC-Input',
+        ]
+    _type_ = [
+        u'VarPendingRNA-Update',
+        u'VarMeasConfig',
+        u'VarMeasReportList',
+        u'VarMeasReport',
+        u'CellsTriggeredList',
+        u'VarResumeMAC-Input',
+        u'VarShortMAC-Input',
+        ]
+    _set_ = [
+        ]
+    _val_ = [
+        ]
+    _class_ = [
+        ]
+    _param_ = [
+        ]
+    
+    #-----< VarPendingRNA-Update >-----#
+    VarPendingRNA_Update = SEQ(name=u'VarPendingRNA-Update', mode=MODE_TYPE)
+    _VarPendingRNA_Update_pendingRNA_Update = BOOL(name=u'pendingRNA-Update', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    VarPendingRNA_Update._cont = ASN1Dict([
+        (u'pendingRNA-Update', _VarPendingRNA_Update_pendingRNA_Update),
+        ])
+    VarPendingRNA_Update._ext = None
+    
+    #-----< VarMeasConfig >-----#
+    VarMeasConfig = SEQ(name=u'VarMeasConfig', mode=MODE_TYPE)
+    _VarMeasConfig_measIdList = SEQ_OF(name=u'measIdList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasIdToAddModList')), opt=True)
+    _VarMeasConfig_measObjectList = SEQ_OF(name=u'measObjectList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasObjectToAddModList')), opt=True)
+    _VarMeasConfig_reportConfigList = SEQ_OF(name=u'reportConfigList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ReportConfigToAddModList')), opt=True)
+    _VarMeasConfig_quantityConfig = SEQ(name=u'quantityConfig', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'QuantityConfig')), opt=True)
+    _VarMeasConfig_s_MeasureConfig = CHOICE(name=u's-MeasureConfig', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    __VarMeasConfig_s_MeasureConfig_ssb_RSRP = INT(name=u'ssb-RSRP', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RSRP-Range')))
+    __VarMeasConfig_s_MeasureConfig_csi_RSRP = INT(name=u'csi-RSRP', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RSRP-Range')))
+    _VarMeasConfig_s_MeasureConfig._cont = ASN1Dict([
+        (u'ssb-RSRP', __VarMeasConfig_s_MeasureConfig_ssb_RSRP),
+        (u'csi-RSRP', __VarMeasConfig_s_MeasureConfig_csi_RSRP),
+        ])
+    _VarMeasConfig_s_MeasureConfig._ext = None
+    VarMeasConfig._cont = ASN1Dict([
+        (u'measIdList', _VarMeasConfig_measIdList),
+        (u'measObjectList', _VarMeasConfig_measObjectList),
+        (u'reportConfigList', _VarMeasConfig_reportConfigList),
+        (u'quantityConfig', _VarMeasConfig_quantityConfig),
+        (u's-MeasureConfig', _VarMeasConfig_s_MeasureConfig),
+        ])
+    VarMeasConfig._ext = None
+    
+    #-----< VarMeasReportList >-----#
+    VarMeasReportList = SEQ_OF(name=u'VarMeasReportList', mode=MODE_TYPE)
+    _VarMeasReportList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-UE-Variables', 'VarMeasReport')))
+    VarMeasReportList._cont = _VarMeasReportList__item_
+    VarMeasReportList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    
+    #-----< VarMeasReport >-----#
+    VarMeasReport = SEQ(name=u'VarMeasReport', mode=MODE_TYPE)
+    _VarMeasReport_measId = INT(name=u'measId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasId')))
+    _VarMeasReport_cellsTriggeredList = SEQ_OF(name=u'cellsTriggeredList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-UE-Variables', 'CellsTriggeredList')), opt=True)
+    _VarMeasReport_numberOfReportsSent = INT(name=u'numberOfReportsSent', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    VarMeasReport._cont = ASN1Dict([
+        (u'measId', _VarMeasReport_measId),
+        (u'cellsTriggeredList', _VarMeasReport_cellsTriggeredList),
+        (u'numberOfReportsSent', _VarMeasReport_numberOfReportsSent),
+        ])
+    VarMeasReport._ext = None
+    
+    #-----< CellsTriggeredList >-----#
+    CellsTriggeredList = SEQ_OF(name=u'CellsTriggeredList', mode=MODE_TYPE)
+    _CellsTriggeredList__item_ = CHOICE(name='_item_', mode=MODE_TYPE)
+    __CellsTriggeredList__item__physCellId = INT(name=u'physCellId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')))
+    __CellsTriggeredList__item__physCellIdEUTRA = INT(name=u'physCellIdEUTRA', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'EUTRA-PhysCellId')))
+    _CellsTriggeredList__item_._cont = ASN1Dict([
+        (u'physCellId', __CellsTriggeredList__item__physCellId),
+        (u'physCellIdEUTRA', __CellsTriggeredList__item__physCellIdEUTRA),
+        ])
+    _CellsTriggeredList__item_._ext = None
+    CellsTriggeredList._cont = _CellsTriggeredList__item_
+    CellsTriggeredList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    
+    #-----< VarResumeMAC-Input >-----#
+    VarResumeMAC_Input = SEQ(name=u'VarResumeMAC-Input', mode=MODE_TYPE)
+    _VarResumeMAC_Input_sourcePhysCellId = INT(name=u'sourcePhysCellId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')))
+    _VarResumeMAC_Input_targetCellIdentity = BIT_STR(name=u'targetCellIdentity', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CellIdentity')))
+    _VarResumeMAC_Input_source_c_RNTI = INT(name=u'source-c-RNTI', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RNTI-Value')))
+    VarResumeMAC_Input._cont = ASN1Dict([
+        (u'sourcePhysCellId', _VarResumeMAC_Input_sourcePhysCellId),
+        (u'targetCellIdentity', _VarResumeMAC_Input_targetCellIdentity),
+        (u'source-c-RNTI', _VarResumeMAC_Input_source_c_RNTI),
+        ])
+    VarResumeMAC_Input._ext = None
+    
+    #-----< VarShortMAC-Input >-----#
+    VarShortMAC_Input = SEQ(name=u'VarShortMAC-Input', mode=MODE_TYPE)
+    _VarShortMAC_Input_sourcePhysCellId = INT(name=u'sourcePhysCellId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')))
+    _VarShortMAC_Input_targetCellIdentity = BIT_STR(name=u'targetCellIdentity', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CellIdentity')))
+    _VarShortMAC_Input_source_c_RNTI = INT(name=u'source-c-RNTI', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RNTI-Value')))
+    VarShortMAC_Input._cont = ASN1Dict([
+        (u'sourcePhysCellId', _VarShortMAC_Input_sourcePhysCellId),
+        (u'targetCellIdentity', _VarShortMAC_Input_targetCellIdentity),
+        (u'source-c-RNTI', _VarShortMAC_Input_source_c_RNTI),
+        ])
+    VarShortMAC_Input._ext = None
+    
+    _all_ = [
+        _VarPendingRNA_Update_pendingRNA_Update,
+        VarPendingRNA_Update,
+        _VarMeasConfig_measIdList,
+        _VarMeasConfig_measObjectList,
+        _VarMeasConfig_reportConfigList,
+        _VarMeasConfig_quantityConfig,
+        __VarMeasConfig_s_MeasureConfig_ssb_RSRP,
+        __VarMeasConfig_s_MeasureConfig_csi_RSRP,
+        _VarMeasConfig_s_MeasureConfig,
+        VarMeasConfig,
+        _VarMeasReportList__item_,
+        VarMeasReportList,
+        _VarMeasReport_measId,
+        _VarMeasReport_cellsTriggeredList,
+        _VarMeasReport_numberOfReportsSent,
+        VarMeasReport,
+        __CellsTriggeredList__item__physCellId,
+        __CellsTriggeredList__item__physCellIdEUTRA,
+        _CellsTriggeredList__item_,
+        CellsTriggeredList,
+        _VarResumeMAC_Input_sourcePhysCellId,
+        _VarResumeMAC_Input_targetCellIdentity,
+        _VarResumeMAC_Input_source_c_RNTI,
+        VarResumeMAC_Input,
+        _VarShortMAC_Input_sourcePhysCellId,
+        _VarShortMAC_Input_targetCellIdentity,
+        _VarShortMAC_Input_source_c_RNTI,
+        VarShortMAC_Input,
     ]
 
 class NR_InterNodeDefinitions:
@@ -17935,6 +19430,10 @@ class NR_InterNodeDefinitions:
         u'RRM-Config',
         u'CG-Config',
         u'CG-Config-IEs',
+        u'CG-Config-v1540-IEs',
+        u'PH-TypeListSCG',
+        u'PH-InfoSCG',
+        u'PH-UplinkCarrierSCG',
         u'MeasConfigSN',
         u'NR-FreqInfo',
         u'ConfigRestrictModReqSCG',
@@ -17945,7 +19444,11 @@ class NR_InterNodeDefinitions:
         u'CandidateServingFreqListNR',
         u'CG-ConfigInfo',
         u'CG-ConfigInfo-IEs',
+        u'CG-ConfigInfo-v1540-IEs',
         u'ConfigRestrictInfoSCG',
+        u'PH-TypeListMCG',
+        u'PH-InfoMCG',
+        u'PH-UplinkCarrierMCG',
         u'BandCombinationInfoList',
         u'BandCombinationInfo',
         u'FeatureSetEntryIndex',
@@ -17958,6 +19461,7 @@ class NR_InterNodeDefinitions:
         u'AffectedCarrierFreqCombNR',
         u'MeasurementTimingConfiguration',
         u'MeasurementTimingConfiguration-IEs',
+        u'MeasurementTimingConfiguration-v1550-IEs',
         u'MeasTimingList',
         u'MeasTiming',
         u'UERadioPagingInformation',
@@ -17982,6 +19486,10 @@ class NR_InterNodeDefinitions:
         u'RRM-Config',
         u'CG-Config',
         u'CG-Config-IEs',
+        u'CG-Config-v1540-IEs',
+        u'PH-TypeListSCG',
+        u'PH-InfoSCG',
+        u'PH-UplinkCarrierSCG',
         u'MeasConfigSN',
         u'NR-FreqInfo',
         u'ConfigRestrictModReqSCG',
@@ -17992,7 +19500,11 @@ class NR_InterNodeDefinitions:
         u'CandidateServingFreqListNR',
         u'CG-ConfigInfo',
         u'CG-ConfigInfo-IEs',
+        u'CG-ConfigInfo-v1540-IEs',
         u'ConfigRestrictInfoSCG',
+        u'PH-TypeListMCG',
+        u'PH-InfoMCG',
+        u'PH-UplinkCarrierMCG',
         u'BandCombinationInfoList',
         u'BandCombinationInfo',
         u'FeatureSetEntryIndex',
@@ -18005,6 +19517,7 @@ class NR_InterNodeDefinitions:
         u'AffectedCarrierFreqCombNR',
         u'MeasurementTimingConfiguration',
         u'MeasurementTimingConfiguration-IEs',
+        u'MeasurementTimingConfiguration-v1550-IEs',
         u'MeasTimingList',
         u'MeasTiming',
         u'UERadioPagingInformation',
@@ -18132,12 +19645,16 @@ class NR_InterNodeDefinitions:
     _AS_Context_reestablishmentInfo = SEQ(name=u'reestablishmentInfo', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ReestablishmentInfo')), opt=True)
     _AS_Context_configRestrictInfo = SEQ(name=u'configRestrictInfo', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ConfigRestrictInfoSCG')), opt=True)
     _AS_Context_ran_NotificationAreaInfo = CHOICE(name=u'ran-NotificationAreaInfo', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RAN-NotificationAreaInfo')), opt=True, group=0)
+    _AS_Context_ueAssistanceInformation = OCT_STR(name=u'ueAssistanceInformation', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
+    __AS_Context_ueAssistanceInformation_contain = SEQ(name='_cont_ueAssistanceInformation', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'UEAssistanceInformation')))
+    _AS_Context_ueAssistanceInformation._const_cont = __AS_Context_ueAssistanceInformation_contain
     AS_Context._cont = ASN1Dict([
         (u'reestablishmentInfo', _AS_Context_reestablishmentInfo),
         (u'configRestrictInfo', _AS_Context_configRestrictInfo),
         (u'ran-NotificationAreaInfo', _AS_Context_ran_NotificationAreaInfo),
+        (u'ueAssistanceInformation', _AS_Context_ueAssistanceInformation),
         ])
-    AS_Context._ext = [u'ran-NotificationAreaInfo']
+    AS_Context._ext = [u'ran-NotificationAreaInfo', u'ueAssistanceInformation']
     
     #-----< ReestablishmentInfo >-----#
     ReestablishmentInfo = SEQ(name=u'ReestablishmentInfo', mode=MODE_TYPE)
@@ -18173,7 +19690,7 @@ class NR_InterNodeDefinitions:
     #-----< RRM-Config >-----#
     RRM_Config = SEQ(name=u'RRM-Config', mode=MODE_TYPE)
     _RRM_Config_ue_InactiveTime = ENUM(name=u'ue-InactiveTime', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _RRM_Config_ue_InactiveTime._cont = ASN1Dict([(u's1', 0), (u's2', 1), (u's3', 2), (u's5', 3), (u's7', 4), (u's10', 5), (u's15', 6), (u's20', 7), (u's25', 8), (u's30', 9), (u's40', 10), (u's50', 11), (u'min1', 12), (u'min1s20c', 13), (u'min1s40', 14), (u'min2', 15), (u'min2s30', 16), (u'min3', 17), (u'min3s30', 18), (u'min4', 19), (u'min5', 20), (u'min6', 21), (u'min7', 22), (u'min8', 23), (u'min9', 24), (u'min10', 25), (u'min12', 26), (u'min14', 27), (u'min17', 28), (u'min20', 29), (u'min24', 30), (u'min28', 31), (u'min33', 32), (u'min38', 33), (u'min44', 34), (u'min50', 35), (u'hr1', 36), (u'hr1min30', 37), (u'hr2', 38), (u'hr2min30', 39), (u'hr3', 40), (u'hr3min30', 41), (u'hr4', 42), (u'hr5', 43), (u'hr6', 44), (u'hr8', 45), (u'hr10', 46), (u'hr13', 47), (u'hr16', 48), (u'hr20', 49), (u'day1', 50), (u'day1hr12', 51), (u'day2', 52), (u'day2hr12', 53), (u'day3', 54), (u'day4', 55), (u'day5', 56), (u'day7', 57), (u'day10', 58), (u'day14', 59), (u'day19', 60), (u'day24', 61), (u'day30', 62), (u'dayMoreThan30', 63)])
+    _RRM_Config_ue_InactiveTime._cont = ASN1Dict([(u's1', 0), (u's2', 1), (u's3', 2), (u's5', 3), (u's7', 4), (u's10', 5), (u's15', 6), (u's20', 7), (u's25', 8), (u's30', 9), (u's40', 10), (u's50', 11), (u'min1', 12), (u'min1s20', 13), (u'min1s40', 14), (u'min2', 15), (u'min2s30', 16), (u'min3', 17), (u'min3s30', 18), (u'min4', 19), (u'min5', 20), (u'min6', 21), (u'min7', 22), (u'min8', 23), (u'min9', 24), (u'min10', 25), (u'min12', 26), (u'min14', 27), (u'min17', 28), (u'min20', 29), (u'min24', 30), (u'min28', 31), (u'min33', 32), (u'min38', 33), (u'min44', 34), (u'min50', 35), (u'hr1', 36), (u'hr1min30', 37), (u'hr2', 38), (u'hr2min30', 39), (u'hr3', 40), (u'hr3min30', 41), (u'hr4', 42), (u'hr5', 43), (u'hr6', 44), (u'hr8', 45), (u'hr10', 46), (u'hr13', 47), (u'hr16', 48), (u'hr20', 49), (u'day1', 50), (u'day1hr12', 51), (u'day2', 52), (u'day2hr12', 53), (u'day3', 54), (u'day4', 55), (u'day5', 56), (u'day7', 57), (u'day10', 58), (u'day14', 59), (u'day19', 60), (u'day24', 61), (u'day30', 62), (u'dayMoreThan30', 63)])
     _RRM_Config_ue_InactiveTime._ext = None
     _RRM_Config_candidateCellInfoList = SEQ_OF(name=u'candidateCellInfoList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultList2NR')), opt=True)
     RRM_Config._cont = ASN1Dict([
@@ -18228,10 +19745,7 @@ class NR_InterNodeDefinitions:
     _CG_Config_IEs_selectedBandCombinationNR = SEQ(name=u'selectedBandCombinationNR', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'BandCombinationInfoSN')), opt=True)
     _CG_Config_IEs_fr_InfoListSCG = SEQ_OF(name=u'fr-InfoListSCG', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'FR-InfoList')), opt=True)
     _CG_Config_IEs_candidateServingFreqListNR = SEQ_OF(name=u'candidateServingFreqListNR', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CandidateServingFreqListNR')), opt=True)
-    _CG_Config_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _CG_Config_IEs_nonCriticalExtension._cont = ASN1Dict([
-        ])
-    _CG_Config_IEs_nonCriticalExtension._ext = None
+    _CG_Config_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-Config-v1540-IEs')), opt=True)
     CG_Config_IEs._cont = ASN1Dict([
         (u'scg-CellGroupConfig', _CG_Config_IEs_scg_CellGroupConfig),
         (u'scg-RB-Config', _CG_Config_IEs_scg_RB_Config),
@@ -18245,6 +19759,63 @@ class NR_InterNodeDefinitions:
         (u'nonCriticalExtension', _CG_Config_IEs_nonCriticalExtension),
         ])
     CG_Config_IEs._ext = None
+    
+    #-----< CG-Config-v1540-IEs >-----#
+    CG_Config_v1540_IEs = SEQ(name=u'CG-Config-v1540-IEs', mode=MODE_TYPE)
+    _CG_Config_v1540_IEs_pSCellFrequency = INT(name=u'pSCellFrequency', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')), opt=True)
+    _CG_Config_v1540_IEs_reportCGI_Request = SEQ(name=u'reportCGI-Request', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_Config_v1540_IEs_reportCGI_Request_requestedCellInfo = SEQ(name=u'requestedCellInfo', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ___CG_Config_v1540_IEs_reportCGI_Request_requestedCellInfo_ssbFrequency = INT(name=u'ssbFrequency', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
+    ___CG_Config_v1540_IEs_reportCGI_Request_requestedCellInfo_cellForWhichToReportCGI = INT(name=u'cellForWhichToReportCGI', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')))
+    __CG_Config_v1540_IEs_reportCGI_Request_requestedCellInfo._cont = ASN1Dict([
+        (u'ssbFrequency', ___CG_Config_v1540_IEs_reportCGI_Request_requestedCellInfo_ssbFrequency),
+        (u'cellForWhichToReportCGI', ___CG_Config_v1540_IEs_reportCGI_Request_requestedCellInfo_cellForWhichToReportCGI),
+        ])
+    __CG_Config_v1540_IEs_reportCGI_Request_requestedCellInfo._ext = None
+    _CG_Config_v1540_IEs_reportCGI_Request._cont = ASN1Dict([
+        (u'requestedCellInfo', __CG_Config_v1540_IEs_reportCGI_Request_requestedCellInfo),
+        ])
+    _CG_Config_v1540_IEs_reportCGI_Request._ext = None
+    _CG_Config_v1540_IEs_ph_InfoSCG = SEQ_OF(name=u'ph-InfoSCG', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-TypeListSCG')), opt=True)
+    _CG_Config_v1540_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _CG_Config_v1540_IEs_nonCriticalExtension._cont = ASN1Dict([
+        ])
+    _CG_Config_v1540_IEs_nonCriticalExtension._ext = None
+    CG_Config_v1540_IEs._cont = ASN1Dict([
+        (u'pSCellFrequency', _CG_Config_v1540_IEs_pSCellFrequency),
+        (u'reportCGI-Request', _CG_Config_v1540_IEs_reportCGI_Request),
+        (u'ph-InfoSCG', _CG_Config_v1540_IEs_ph_InfoSCG),
+        (u'nonCriticalExtension', _CG_Config_v1540_IEs_nonCriticalExtension),
+        ])
+    CG_Config_v1540_IEs._ext = None
+    
+    #-----< PH-TypeListSCG >-----#
+    PH_TypeListSCG = SEQ_OF(name=u'PH-TypeListSCG', mode=MODE_TYPE)
+    _PH_TypeListSCG__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-InfoSCG')))
+    PH_TypeListSCG._cont = _PH_TypeListSCG__item_
+    PH_TypeListSCG._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    
+    #-----< PH-InfoSCG >-----#
+    PH_InfoSCG = SEQ(name=u'PH-InfoSCG', mode=MODE_TYPE)
+    _PH_InfoSCG_servCellIndex = INT(name=u'servCellIndex', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ServCellIndex')))
+    _PH_InfoSCG_ph_Uplink = SEQ(name=u'ph-Uplink', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-UplinkCarrierSCG')))
+    _PH_InfoSCG_ph_SupplementaryUplink = SEQ(name=u'ph-SupplementaryUplink', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-UplinkCarrierSCG')), opt=True)
+    PH_InfoSCG._cont = ASN1Dict([
+        (u'servCellIndex', _PH_InfoSCG_servCellIndex),
+        (u'ph-Uplink', _PH_InfoSCG_ph_Uplink),
+        (u'ph-SupplementaryUplink', _PH_InfoSCG_ph_SupplementaryUplink),
+        ])
+    PH_InfoSCG._ext = []
+    
+    #-----< PH-UplinkCarrierSCG >-----#
+    PH_UplinkCarrierSCG = SEQ(name=u'PH-UplinkCarrierSCG', mode=MODE_TYPE)
+    _PH_UplinkCarrierSCG_ph_Type1or3 = ENUM(name=u'ph-Type1or3', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PH_UplinkCarrierSCG_ph_Type1or3._cont = ASN1Dict([(u'type1', 0), (u'type3', 1)])
+    _PH_UplinkCarrierSCG_ph_Type1or3._ext = None
+    PH_UplinkCarrierSCG._cont = ASN1Dict([
+        (u'ph-Type1or3', _PH_UplinkCarrierSCG_ph_Type1or3),
+        ])
+    PH_UplinkCarrierSCG._ext = []
     
     #-----< MeasConfigSN >-----#
     MeasConfigSN = SEQ(name=u'MeasConfigSN', mode=MODE_TYPE)
@@ -18354,7 +19925,7 @@ class NR_InterNodeDefinitions:
     _CG_ConfigInfo_IEs_measResultCellListSFTD = SEQ_OF(name=u'measResultCellListSFTD', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultCellListSFTD')), opt=True)
     _CG_ConfigInfo_IEs_scgFailureInfo = SEQ(name=u'scgFailureInfo', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __CG_ConfigInfo_IEs_scgFailureInfo_failureType = ENUM(name=u'failureType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __CG_ConfigInfo_IEs_scgFailureInfo_failureType._cont = ASN1Dict([(u't310-Expiry', 0), (u'randomAccessProblem', 1), (u'rlc-MaxNumRetx', 2), (u'scg-ChangeFailure', 3), (u'scg-reconfigFailure', 4), (u'srb3-IntegrityFailure', 5)])
+    __CG_ConfigInfo_IEs_scgFailureInfo_failureType._cont = ASN1Dict([(u't310-Expiry', 0), (u'randomAccessProblem', 1), (u'rlc-MaxNumRetx', 2), (u'synchReconfigFailure-SCG', 3), (u'scg-reconfigFailure', 4), (u'srb3-IntegrityFailure', 5)])
     __CG_ConfigInfo_IEs_scgFailureInfo_failureType._ext = None
     __CG_ConfigInfo_IEs_scgFailureInfo_measResultSCG = OCT_STR(name=u'measResultSCG', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ___CG_ConfigInfo_IEs_scgFailureInfo_measResultSCG_contain = SEQ(name='_cont_measResultSCG', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultSCG-Failure')))
@@ -18377,10 +19948,7 @@ class NR_InterNodeDefinitions:
     __CG_ConfigInfo_IEs_mcg_RB_Config_contain = SEQ(name='_cont_mcg-RB-Config', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RadioBearerConfig')))
     _CG_ConfigInfo_IEs_mcg_RB_Config._const_cont = __CG_ConfigInfo_IEs_mcg_RB_Config_contain
     _CG_ConfigInfo_IEs_mrdc_AssistanceInfo = SEQ(name=u'mrdc-AssistanceInfo', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'MRDC-AssistanceInfo')), opt=True)
-    _CG_ConfigInfo_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _CG_ConfigInfo_IEs_nonCriticalExtension._cont = ASN1Dict([
-        ])
-    _CG_ConfigInfo_IEs_nonCriticalExtension._ext = None
+    _CG_ConfigInfo_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-ConfigInfo-v1540-IEs')), opt=True)
     CG_ConfigInfo_IEs._cont = ASN1Dict([
         (u'ue-CapabilityInfo', _CG_ConfigInfo_IEs_ue_CapabilityInfo),
         (u'candidateCellInfoListMN', _CG_ConfigInfo_IEs_candidateCellInfoListMN),
@@ -18397,6 +19965,30 @@ class NR_InterNodeDefinitions:
         (u'nonCriticalExtension', _CG_ConfigInfo_IEs_nonCriticalExtension),
         ])
     CG_ConfigInfo_IEs._ext = None
+    
+    #-----< CG-ConfigInfo-v1540-IEs >-----#
+    CG_ConfigInfo_v1540_IEs = SEQ(name=u'CG-ConfigInfo-v1540-IEs', mode=MODE_TYPE)
+    _CG_ConfigInfo_v1540_IEs_ph_InfoMCG = SEQ_OF(name=u'ph-InfoMCG', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-TypeListMCG')), opt=True)
+    _CG_ConfigInfo_v1540_IEs_measResultReportCGI = SEQ(name=u'measResultReportCGI', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_ConfigInfo_v1540_IEs_measResultReportCGI_ssbFrequency = INT(name=u'ssbFrequency', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
+    __CG_ConfigInfo_v1540_IEs_measResultReportCGI_cellForWhichToReportCGI = INT(name=u'cellForWhichToReportCGI', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')))
+    __CG_ConfigInfo_v1540_IEs_measResultReportCGI_cgi_Info = SEQ(name=u'cgi-Info', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CGI-Info')))
+    _CG_ConfigInfo_v1540_IEs_measResultReportCGI._cont = ASN1Dict([
+        (u'ssbFrequency', __CG_ConfigInfo_v1540_IEs_measResultReportCGI_ssbFrequency),
+        (u'cellForWhichToReportCGI', __CG_ConfigInfo_v1540_IEs_measResultReportCGI_cellForWhichToReportCGI),
+        (u'cgi-Info', __CG_ConfigInfo_v1540_IEs_measResultReportCGI_cgi_Info),
+        ])
+    _CG_ConfigInfo_v1540_IEs_measResultReportCGI._ext = None
+    _CG_ConfigInfo_v1540_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _CG_ConfigInfo_v1540_IEs_nonCriticalExtension._cont = ASN1Dict([
+        ])
+    _CG_ConfigInfo_v1540_IEs_nonCriticalExtension._ext = None
+    CG_ConfigInfo_v1540_IEs._cont = ASN1Dict([
+        (u'ph-InfoMCG', _CG_ConfigInfo_v1540_IEs_ph_InfoMCG),
+        (u'measResultReportCGI', _CG_ConfigInfo_v1540_IEs_measResultReportCGI),
+        (u'nonCriticalExtension', _CG_ConfigInfo_v1540_IEs_nonCriticalExtension),
+        ])
+    CG_ConfigInfo_v1540_IEs._ext = None
     
     #-----< ConfigRestrictInfoSCG >-----#
     ConfigRestrictInfoSCG = SEQ(name=u'ConfigRestrictInfoSCG', mode=MODE_TYPE)
@@ -18431,6 +20023,34 @@ class NR_InterNodeDefinitions:
         (u'maxMeasIdentitiesSCG-NR', _ConfigRestrictInfoSCG_maxMeasIdentitiesSCG_NR),
         ])
     ConfigRestrictInfoSCG._ext = []
+    
+    #-----< PH-TypeListMCG >-----#
+    PH_TypeListMCG = SEQ_OF(name=u'PH-TypeListMCG', mode=MODE_TYPE)
+    _PH_TypeListMCG__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-InfoMCG')))
+    PH_TypeListMCG._cont = _PH_TypeListMCG__item_
+    PH_TypeListMCG._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    
+    #-----< PH-InfoMCG >-----#
+    PH_InfoMCG = SEQ(name=u'PH-InfoMCG', mode=MODE_TYPE)
+    _PH_InfoMCG_servCellIndex = INT(name=u'servCellIndex', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ServCellIndex')))
+    _PH_InfoMCG_ph_Uplink = SEQ(name=u'ph-Uplink', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-UplinkCarrierMCG')))
+    _PH_InfoMCG_ph_SupplementaryUplink = SEQ(name=u'ph-SupplementaryUplink', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-UplinkCarrierMCG')), opt=True)
+    PH_InfoMCG._cont = ASN1Dict([
+        (u'servCellIndex', _PH_InfoMCG_servCellIndex),
+        (u'ph-Uplink', _PH_InfoMCG_ph_Uplink),
+        (u'ph-SupplementaryUplink', _PH_InfoMCG_ph_SupplementaryUplink),
+        ])
+    PH_InfoMCG._ext = []
+    
+    #-----< PH-UplinkCarrierMCG >-----#
+    PH_UplinkCarrierMCG = SEQ(name=u'PH-UplinkCarrierMCG', mode=MODE_TYPE)
+    _PH_UplinkCarrierMCG_ph_Type1or3 = ENUM(name=u'ph-Type1or3', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PH_UplinkCarrierMCG_ph_Type1or3._cont = ASN1Dict([(u'type1', 0), (u'type3', 1)])
+    _PH_UplinkCarrierMCG_ph_Type1or3._ext = None
+    PH_UplinkCarrierMCG._cont = ASN1Dict([
+        (u'ph-Type1or3', _PH_UplinkCarrierMCG_ph_Type1or3),
+        ])
+    PH_UplinkCarrierMCG._ext = []
     
     #-----< BandCombinationInfoList >-----#
     BandCombinationInfoList = SEQ_OF(name=u'BandCombinationInfoList', mode=MODE_TYPE)
@@ -18668,15 +20288,27 @@ class NR_InterNodeDefinitions:
     #-----< MeasurementTimingConfiguration-IEs >-----#
     MeasurementTimingConfiguration_IEs = SEQ(name=u'MeasurementTimingConfiguration-IEs', mode=MODE_TYPE)
     _MeasurementTimingConfiguration_IEs_measTiming = SEQ_OF(name=u'measTiming', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'MeasTimingList')), opt=True)
-    _MeasurementTimingConfiguration_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _MeasurementTimingConfiguration_IEs_nonCriticalExtension._cont = ASN1Dict([
-        ])
-    _MeasurementTimingConfiguration_IEs_nonCriticalExtension._ext = None
+    _MeasurementTimingConfiguration_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'MeasurementTimingConfiguration-v1550-IEs')), opt=True)
     MeasurementTimingConfiguration_IEs._cont = ASN1Dict([
         (u'measTiming', _MeasurementTimingConfiguration_IEs_measTiming),
         (u'nonCriticalExtension', _MeasurementTimingConfiguration_IEs_nonCriticalExtension),
         ])
     MeasurementTimingConfiguration_IEs._ext = None
+    
+    #-----< MeasurementTimingConfiguration-v1550-IEs >-----#
+    MeasurementTimingConfiguration_v1550_IEs = SEQ(name=u'MeasurementTimingConfiguration-v1550-IEs', mode=MODE_TYPE)
+    _MeasurementTimingConfiguration_v1550_IEs_campOnFirstSSB = BOOL(name=u'campOnFirstSSB', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _MeasurementTimingConfiguration_v1550_IEs_psCellOnlyOnFirstSSB = BOOL(name=u'psCellOnlyOnFirstSSB', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _MeasurementTimingConfiguration_v1550_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _MeasurementTimingConfiguration_v1550_IEs_nonCriticalExtension._cont = ASN1Dict([
+        ])
+    _MeasurementTimingConfiguration_v1550_IEs_nonCriticalExtension._ext = None
+    MeasurementTimingConfiguration_v1550_IEs._cont = ASN1Dict([
+        (u'campOnFirstSSB', _MeasurementTimingConfiguration_v1550_IEs_campOnFirstSSB),
+        (u'psCellOnlyOnFirstSSB', _MeasurementTimingConfiguration_v1550_IEs_psCellOnlyOnFirstSSB),
+        (u'nonCriticalExtension', _MeasurementTimingConfiguration_v1550_IEs_nonCriticalExtension),
+        ])
+    MeasurementTimingConfiguration_v1550_IEs._ext = None
     
     #-----< MeasTimingList >-----#
     MeasTimingList = SEQ_OF(name=u'MeasTimingList', mode=MODE_TYPE)
@@ -18698,10 +20330,14 @@ class NR_InterNodeDefinitions:
         (u'ss-RSSI-Measurement', __MeasTiming_frequencyAndTiming_ss_RSSI_Measurement),
         ])
     _MeasTiming_frequencyAndTiming._ext = None
+    _MeasTiming_ssb_ToMeasure_v1540 = CHOICE(name=u'ssb-ToMeasure-v1540', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SSB-ToMeasure')), opt=True, group=0)
+    _MeasTiming_physCellId = INT(name=u'physCellId', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')), opt=True, group=0)
     MeasTiming._cont = ASN1Dict([
         (u'frequencyAndTiming', _MeasTiming_frequencyAndTiming),
+        (u'ssb-ToMeasure-v1540', _MeasTiming_ssb_ToMeasure_v1540),
+        (u'physCellId', _MeasTiming_physCellId),
         ])
-    MeasTiming._ext = []
+    MeasTiming._ext = [u'ssb-ToMeasure-v1540', u'physCellId']
     
     #-----< UERadioPagingInformation >-----#
     UERadioPagingInformation = SEQ(name=u'UERadioPagingInformation', mode=MODE_TYPE)
@@ -18857,6 +20493,8 @@ class NR_InterNodeDefinitions:
         _AS_Context_reestablishmentInfo,
         _AS_Context_configRestrictInfo,
         _AS_Context_ran_NotificationAreaInfo,
+        __AS_Context_ueAssistanceInformation_contain,
+        _AS_Context_ueAssistanceInformation,
         AS_Context,
         _ReestablishmentInfo_sourcePhysCellId,
         _ReestablishmentInfo_targetCellShortMAC_I,
@@ -18893,6 +20531,22 @@ class NR_InterNodeDefinitions:
         _CG_Config_IEs_candidateServingFreqListNR,
         _CG_Config_IEs_nonCriticalExtension,
         CG_Config_IEs,
+        _CG_Config_v1540_IEs_pSCellFrequency,
+        ___CG_Config_v1540_IEs_reportCGI_Request_requestedCellInfo_ssbFrequency,
+        ___CG_Config_v1540_IEs_reportCGI_Request_requestedCellInfo_cellForWhichToReportCGI,
+        __CG_Config_v1540_IEs_reportCGI_Request_requestedCellInfo,
+        _CG_Config_v1540_IEs_reportCGI_Request,
+        _CG_Config_v1540_IEs_ph_InfoSCG,
+        _CG_Config_v1540_IEs_nonCriticalExtension,
+        CG_Config_v1540_IEs,
+        _PH_TypeListSCG__item_,
+        PH_TypeListSCG,
+        _PH_InfoSCG_servCellIndex,
+        _PH_InfoSCG_ph_Uplink,
+        _PH_InfoSCG_ph_SupplementaryUplink,
+        PH_InfoSCG,
+        _PH_UplinkCarrierSCG_ph_Type1or3,
+        PH_UplinkCarrierSCG,
         __MeasConfigSN_measuredFrequenciesSN__item_,
         _MeasConfigSN_measuredFrequenciesSN,
         MeasConfigSN,
@@ -18942,6 +20596,13 @@ class NR_InterNodeDefinitions:
         _CG_ConfigInfo_IEs_mrdc_AssistanceInfo,
         _CG_ConfigInfo_IEs_nonCriticalExtension,
         CG_ConfigInfo_IEs,
+        _CG_ConfigInfo_v1540_IEs_ph_InfoMCG,
+        __CG_ConfigInfo_v1540_IEs_measResultReportCGI_ssbFrequency,
+        __CG_ConfigInfo_v1540_IEs_measResultReportCGI_cellForWhichToReportCGI,
+        __CG_ConfigInfo_v1540_IEs_measResultReportCGI_cgi_Info,
+        _CG_ConfigInfo_v1540_IEs_measResultReportCGI,
+        _CG_ConfigInfo_v1540_IEs_nonCriticalExtension,
+        CG_ConfigInfo_v1540_IEs,
         _ConfigRestrictInfoSCG_allowedBC_ListMRDC,
         __ConfigRestrictInfoSCG_powerCoordination_FR1_p_maxNR_FR1,
         __ConfigRestrictInfoSCG_powerCoordination_FR1_p_maxEUTRA,
@@ -18953,6 +20614,14 @@ class NR_InterNodeDefinitions:
         _ConfigRestrictInfoSCG_maxMeasFreqsSCG_NR,
         _ConfigRestrictInfoSCG_maxMeasIdentitiesSCG_NR,
         ConfigRestrictInfoSCG,
+        _PH_TypeListMCG__item_,
+        PH_TypeListMCG,
+        _PH_InfoMCG_servCellIndex,
+        _PH_InfoMCG_ph_Uplink,
+        _PH_InfoMCG_ph_SupplementaryUplink,
+        PH_InfoMCG,
+        _PH_UplinkCarrierMCG_ph_Type1or3,
+        PH_UplinkCarrierMCG,
         _BandCombinationInfoList__item_,
         BandCombinationInfoList,
         _BandCombinationInfo_bandCombinationIndex,
@@ -19023,6 +20692,10 @@ class NR_InterNodeDefinitions:
         _MeasurementTimingConfiguration_IEs_measTiming,
         _MeasurementTimingConfiguration_IEs_nonCriticalExtension,
         MeasurementTimingConfiguration_IEs,
+        _MeasurementTimingConfiguration_v1550_IEs_campOnFirstSSB,
+        _MeasurementTimingConfiguration_v1550_IEs_psCellOnlyOnFirstSSB,
+        _MeasurementTimingConfiguration_v1550_IEs_nonCriticalExtension,
+        MeasurementTimingConfiguration_v1550_IEs,
         _MeasTimingList__item_,
         MeasTimingList,
         __MeasTiming_frequencyAndTiming_carrierFreq,
@@ -19030,6 +20703,8 @@ class NR_InterNodeDefinitions:
         __MeasTiming_frequencyAndTiming_ssb_MeasurementTimingConfiguration,
         __MeasTiming_frequencyAndTiming_ss_RSSI_Measurement,
         _MeasTiming_frequencyAndTiming,
+        _MeasTiming_ssb_ToMeasure_v1540,
+        _MeasTiming_physCellId,
         MeasTiming,
         ___UERadioPagingInformation_criticalExtensions_c1_ueRadioPagingInformation,
         ___UERadioPagingInformation_criticalExtensions_c1_spare7,
@@ -19069,4 +20744,4 @@ class NR_InterNodeDefinitions:
         maxCellPrep,
     ]
 
-init_modules(NR_UE_Variables, NR_RRC_Definitions, NR_InterNodeDefinitions)
+init_modules(NR_RRC_Definitions, NR_UE_Variables, NR_InterNodeDefinitions)
