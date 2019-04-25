@@ -8,10 +8,9 @@ IMPORTS
 
 FROM EUTRA-UE-Variables;
 
-VarShortMAC-Input-NB-r13		::= 	VarShortMAC-Input
+VarShortMAC-Input-NB-r13		::=	VarShortMAC-Input
 
-VarShortResumeMAC-Input-NB-r13	::= 	VarShortResumeMAC-Input-r13
-
+VarShortResumeMAC-Input-NB-r13	::=	VarShortResumeMAC-Input-r13
 
 
 END
