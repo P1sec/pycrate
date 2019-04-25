@@ -763,6 +763,44 @@ class SCCPMessage(Envelope):
             f = self._content[start+ind]
             f._from_char(char)
 
+    def is_valid(self):
+        """Ensures an SCCP message has a valid layout,
+        i.e. its mandatory parameters with variable length (those with pointers) 
+        do not overlap
+        
+        Args:
+            None
+        
+        Returns:
+            result: bool
+        """
+        if 'Pointers' in self._by_name:
+            ptrs_ind = self._by_name.index('Pointers')
+            ptrs  = self._content[ptrs_ind].get_val()
+            prms  = self._content[1+ptrs_ind:]
+            areas, len_ptrs = [], len(ptrs)
+            for i in range(len_ptrs):
+                prm = prms[i]
+                if prm._name == 'Opt':
+                    # Options have no global length prefix, but are always the last parameter
+                    # moreover, if their pointer is null, the parameter is not present
+                    ptr = ptrs[i]
+                    if ptr != 0:
+                        areas.append( (ptr-(len_ptrs-i), None) )
+                else:
+                    areas.append( (ptrs[i]-(len_ptrs-i), 1+prm._content[0].get_val()) )
+            areas.sort(key=lambda x: x[0])
+            # areas: list of (prm_offset, prm_length), sorted by prm_offset
+            #print(areas)
+            off = 0
+            for prm in areas:
+                if prm[0] < off:
+                    return False
+                else:
+                    if prm[1] is not None:
+                        off += prm[1]
+        return True
+
 
 # parent class for SCCP messages options
 class SCCPOpt(Envelope):
@@ -1175,7 +1213,44 @@ class SCCPLongUnitData(SCCPMessage):
             Optional(EOO(), 0)
             ))
         )
+    
+    def is_valid(self):
+        """Ensures an SCCP message has a valid layout,
+        i.e. its mandatory parameters with variable length (those with pointers) 
+        do not overlap
         
+        Args:
+            None
+        
+        Returns:
+            result: bool
+        """
+        # for LUDT / LUDTS, pointer and length prefix are 2 bytes long
+        ptrs = self._content[3].get_val()
+        prms = self._content[4:]
+        areas = []
+        for i in range(4):
+            prm = prms[i]
+            if prm._name == 'Opt':
+                # Options have no global length prefix, but are always the last parameter
+                # moreover, if their pointer is null, the parameter is not present
+                ptr = ptrs[i]
+                if ptr != 0:
+                    areas.append( (ptr-2*(4-i), None) )
+            else:
+                areas.append( (ptrs[i]-2*(4-i), 2+prm._content[0].get_val()) )
+        areas.sort(key=lambda x: x[0])
+        # areas: list of (prm_offset, prm_length), sorted by prm_offset
+        #print(areas)
+        off = 0
+        for prm in areas:
+            if prm[0] < off:
+                return False
+            else:
+                if prm[1] is not None:
+                    off += prm[1]
+        return True
+
 
 #------------------------------------------------------------------------------#
 # Long unitdata service (LUDTS)
@@ -1202,7 +1277,45 @@ class SCCPLongUnitDataService(SCCPMessage):
             Optional(EOO(), 0)
             ))
         )
+    
+    def is_valid(self):
+        """Ensures an SCCP message has a valid layout,
+        i.e. its mandatory parameters with variable length (those with pointers) 
+        do not overlap
         
+        Args:
+            None
+        
+        Returns:
+            result: bool
+        """
+        # for LUDT / LUDTS, pointer and length prefix are 2 bytes long
+        ptrs = self._content[3].get_val()
+        prms = self._content[4:]
+        areas = []
+        for i in range(4):
+            prm = prms[i]
+            if prm._name == 'Opt':
+                # Options have no global length prefix, but are always the last parameter
+                # moreover, if their pointer is null, the parameter is not present
+                ptr = ptrs[i]
+                if ptr != 0:
+                    areas.append( (ptr-2*(4-i), None) )
+            else:
+                areas.append( (ptrs[i]-2*(4-i), 2+prm._content[0].get_val()) )
+        areas.sort(key=lambda x: x[0])
+        # areas: list of (prm_offset, prm_length), sorted by prm_offset
+        #print(areas)
+        off = 0
+        for prm in areas:
+            if prm[0] < off:
+                return False
+            elif prm[1] is None:
+                return False
+            else:
+                off = prm[1]
+        return True
+
 
 #------------------------------------------------------------------------------#
 # SCCP Message dispatcher
@@ -1429,4 +1542,5 @@ def parse_SCMG(buf):
     except:
         return None, 2
     return Msg, 0
+
 
