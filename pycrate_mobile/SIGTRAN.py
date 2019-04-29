@@ -456,6 +456,7 @@ Params_dict = {
 }
 
 # SIGTRAN message structure
+# works for both M2UA (RFC 3331) and M3UA (RFC 4666)
 
 class Param(Envelope):
     _pad = b'\0'
