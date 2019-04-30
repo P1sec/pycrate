@@ -471,14 +471,25 @@ class Param(Envelope):
         Envelope.__init__(self, *args, **kwargs)
         self[1].set_valauto(lambda: 4+self[2].get_len())
         self[2].set_blauto(lambda:  8*max(0, self[1].get_val()-4))
-        self[3].set_valauto(lambda: (4-self[2].get_len()%4)%4 * self._pad) 
-        self[3].set_blauto(lambda:  8*((4-self[2].get_len()%4)%4))
+        self[3].set_valauto(lambda: (-self[2].get_len()%4) * self._pad)
+        self[3].set_blauto(lambda:  8*(-self[2].get_len()%4))
+    
+    def _from_char(self, char):
+        self[0]._from_char(char)
+        self[1]._from_char(char)
+        self[2]._from_char(char)
+        # this is to enable the decoding of some SIGTRAN implementations
+        # were padding of the last parameter is omitted
+        if not char.len_bit():
+            self[3].set_trans(True)
 
 
 class SIGTRAN(Envelope):
-    # this enforces the Length field in the Header at decoding
-    # warning RFC 4666: this length must take padding into account, 
-    # otherwise there will be a mismatch with Len fields in following Params
+
+    # warning RFC 4666: the length must take padding into account, 
+    # otherwise there will be a mismatch with `Len' fields in the sequence of
+    # parameters
+    # this class attribute enforces the Length field in the Header at decoding
     _LEN_ENFORCE = True
     
     _TypeUndef_dict = {}
