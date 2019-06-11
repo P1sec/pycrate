@@ -705,6 +705,27 @@ class ASN1Obj(Element):
             del self._proto_fields[-1]
         return ret
     
+    # experimental: to be improved
+    def iter_cont(self):
+        if self.TYPE == TYPE_OPEN:
+            cont = ASN1Dict()
+            for (ident, Comp) in self._get_const_tr().items():
+                Comp.iter_cont()
+        #
+        elif self.TYPE in TYPES_BASIC + TYPES_EXT:
+            print('%s: %s, %r' % (self._name, self.TYPE, self.get_const()))
+        #
+        elif self.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
+            self._cont.iter_cont()
+        #
+        elif self.TYPE in (TYPE_CHOICE, TYPE_SEQ, TYPE_SET, TYPE_CLASS):
+            cont = ASN1Dict()
+            for (ident, Comp) in self._cont.items():
+                Comp.iter_cont()
+        #
+        else:
+            assert()
+    
     def get_complexity(self, w_open=True, print_recurs=False):
         """
         returns the number of basic types referenced from self,
