@@ -111,7 +111,8 @@ class LinkSigProc(SigProc):
                 if 'protocolIEs' in content._cont:
                     # get the ASN.1 set of defined {ident : value's type}
                     set_ies = content._cont['protocolIEs']._cont._cont['value']._const_tab
-                    for ident in set_ies('id'):
+                    ord_ies = set_ies('id')
+                    for ident in ord_ies:
                         cont_ies[ident] = set_ies('id', ident)
                         if cont_ies[ident]['presence'] == 'mandatory':
                             mand.append( ident )
@@ -124,10 +125,13 @@ class LinkSigProc(SigProc):
                                 encod[0][ident] = encod[0][pyname]
                             if pyname in decod[0]:
                                 decod[0][ident] = decod[0][pyname]
+                else:
+                    ord_ies = []
                 if 'protocolExtensions' in content._cont:
                     # get the ASN.1 set of defined {ident : extvalue's type}
                     set_exts = content._cont['protocolExtensions']._cont._cont['extensionValue']._const_tab
-                    for ident in set_exts('id'):
+                    ord_exts = set_exts('id')
+                    for ident in ord_exts:
                         cont_exts[ident] = set_exts('id', ident)
                         if cont_exts[ident]['presence'] == 'mandatory':
                             mand.append( ident )
@@ -140,11 +144,13 @@ class LinkSigProc(SigProc):
                                 encod[1][ident] = encod[1][pyname]
                             if pyname in decod[1]:
                                 decod[1][ident] = decod[1][pyname]
+                else:
+                    ord_exts = []
                 if not cont_ies:
                     cont_ies = None
                 if not cont_exts:
                     cont_exts = None
-                cls.Cont[ptype[1]] = (content, cont_ies, cont_exts, mand)
+                cls.Cont[ptype[1]] = (content, cont_ies, cont_exts, mand, ord_ies, ord_exts)
     
     #--------------------------------------------------------------------------#
     
@@ -168,7 +174,7 @@ class LinkSigProc(SigProc):
             # some 3G RAN procedure have only 'outcome' pdu
             # which are changed to 'suc'
             ptype = 'suc'
-        Cont, IEs, Extensions, mand = self.Cont[ptype]
+        Cont, IEs, Extensions, mand, ord_ies, ord_exts = self.Cont[ptype]
         Decod = self.Decod[ptype]
         #
         val = pdu[1]
@@ -276,12 +282,14 @@ class LinkSigProc(SigProc):
         original ASN.1 specification
         """
         # 1) select the correct PDU and content
-        Cont, IEs, Extensions, mand = self.Cont[ptype]
+        Cont, IEs, Extensions, mand, ord_ies, ord_exts = self.Cont[ptype]
         self._NetInfo, Encod, pdu_ies, pdu_exts = kw.copy(), self.Encod[ptype], [], []
         #
         # 2) encode the list of IEs' values
         if IEs is not None:
-            for (ident, IE) in IEs.items():
+            #for (ident, IE) in IEs.items():
+            for ident in ord_ies:
+                IE = IEs[ident]
                 name, val = IE['Value']._tr._name, None
                 pyname, idname = pythonize_name(name), 'id_%i' % ident
                 if pyname in Encod[0]:
@@ -309,11 +317,13 @@ class LinkSigProc(SigProc):
                 elif ident in mand:
                     self._log('WNG', 'encode_pdu: missing mandatory IE, ident %i' % ident)
             # sort pdu_ies in order according to 'id'
-            pdu_ies.sort(key=lambda x:x['id'])
+            #pdu_ies.sort(key=lambda x:x['id'])
         #
         # 3) encode the list of Extensions' values
         if Extensions is not None:
-            for (ident, IE) in Extensions.items():
+            #for (ident, IE) in Extensions.items():
+            for ident in ord_exts:
+                IE = Extensions[ident]
                 name, val = IE['Extension']._tr._name, None
                 pyname, idname = pythonize_name(name), 'idext_%i' % ident
                 if pyname in Encod[1]:
@@ -341,7 +351,7 @@ class LinkSigProc(SigProc):
                 elif ident in mand:
                     self._log('WNG', 'encode_pdu: missing mandatory Ext, ident %i' % ident)
             # sort pdu_exts in order according to 'id'
-            pdu_exts.sort(key=lambda x:x['id'])
+            #pdu_exts.sort(key=lambda x:x['id'])
         #
         # 4) enable also undefined buffer values passed at runtime to be encoded
         for name in kw:
