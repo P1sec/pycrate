@@ -2177,16 +2177,21 @@ MCCr_dict = {
 
 
 # provide a function that returns the numbering prefix from an msisdn
-def build_pref_sets():
-    pref_sets = [set(), set(), set(), set()]
+def _build_pref_sets():
+    pref_sets, pref_ctry = [set(), set(), set(), set()], {}
     for mcc, country_info in MCC_dict.items():
         pref = country_info[0]
         assert( isinstance(pref, str) )
         assert( pref[0] == '+' )
-        pref_sets[len(pref[1:])-1].add(pref[1:])
-    return pref_sets
+        pref = pref[1:]
+        pref_sets[len(pref)-1].add(pref)
+        if pref in pref_ctry and country_info[1] not in pref_ctry[pref]:
+            pref_ctry[pref] += '|%s' % country_info[1]
+        else:
+            pref_ctry[pref] = country_info[1]
+    return pref_sets, pref_ctry
 
-_PREF_SETS = build_pref_sets()
+_PREF_SETS, _PREF_CTRY = _build_pref_sets()
 
 def identify_prefix(msisdn):
     if msisdn[:4] in _PREF_SETS[3]:
@@ -2199,4 +2204,11 @@ def identify_prefix(msisdn):
         return msisdn[:1]
     else:
         return None
+
+def identify_country(msisdn):
+    pref = identify_prefix(msisdn)
+    if pref is not None:
+        return _PREF_CTRY[pref]
+    else:
+        return ''
 
