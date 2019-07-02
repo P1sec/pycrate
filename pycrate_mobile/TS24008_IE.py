@@ -105,10 +105,12 @@ class BufBCD(Buf):
     """
     
     _rep = REPR_HUM
-    _dic = None # dict lookup not supported for repr()
+    _dic = None     # dict lookup not supported for repr()
     
     # characters accepted in a BCD number
-    _chars = '0123456789*#abc'
+    _chars  = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '#', 'a', 'b', 'c')
+    # filler character for odd length number encoding
+    _filler = 0xF
     
     def __init__(self, *args, **kw):
         # element name in kw, or first args
@@ -175,12 +177,12 @@ class BufBCD(Buf):
         """
         # encode the chars
         try:
-            ret = [self._chars.find(c) for c in bcd]
-        except:
-            raise(PycrateErr('{0}: invalid BCD string to encode, {1!r}'\
+            ret = [self._chars.index(c) for c in bcd]
+        except Exception:
+            raise(PycrateErr('{0}: invalid character in BCD string to encode, {1!r}'\
                   .format(self._name, bcd)))
         if len(ret) % 2:
-            ret.append( 0xF )
+            ret.append( self._filler )
         #
         if python_version < 3:
             self._val = ''.join([chr(c) for c in map(lambda x,y:x+(y<<4), ret[::2], ret[1::2])])
@@ -2709,7 +2711,7 @@ class ProtConfigElt(Envelope):
             char._len_bit = ccur + 8*self[1].get_val()
             try:
                 cont._from_char(char)
-            except:
+            except Exception:
                 cont = None
                 char._cur, char._len_bit = ccur, clen
             else:
@@ -3346,7 +3348,7 @@ class TFTPktFilter(Envelope):
         char._cur -= cont_bl
         try:
             self._Cont._from_char(char)
-        except:
+        except Exception:
             char._cur, char._len_bit = ccur, clen
         else:
             if char._cur == ccur:

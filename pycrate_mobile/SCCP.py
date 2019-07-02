@@ -132,6 +132,11 @@ class SrcLocalRef(Uint24):
 # ITU-T Q.713, section 3.4 / 3.5
 #------------------------------------------------------------------------------#
 
+class SCCPBufBCD(BufBCD):
+    _chars  = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '_', '11', '12', '_', 'ST')
+    _filler = 0x0
+
+
 # GTInd 0001
 # section 3.4.2.3.1
 
@@ -151,7 +156,7 @@ class _GlobalTitle0001(Envelope):
     _GEN = (
         Uint('OE', bl=1, dic={0:'even number of address signals', 1:'odd number of address signals'}),
         Uint('NAI', val=1, bl=7, dic=_GTNAI_dict),
-        BufBCD('Addr', val=b'')
+        SCCPBufBCD('Addr', val=b'')
         )
 
 
@@ -194,8 +199,8 @@ class _GlobalTitle0011(Envelope):
         Uint('NumberingPlan', val=1, bl=4, dic=_NumPlan_dict),
         Uint('EncodingScheme', val=1, bl=4, dic=_EncScheme_dict),
         Alt('Addr', GEN={
-            1 : BufBCD('BCD', val=b''),
-            2 : BufBCD('BCD', val=b'')},
+            1 : SCCPBufBCD('BCD', val=b''),
+            2 : SCCPBufBCD('BCD', val=b'')},
             DEFAULT=Buf('Raw', val=b'', rep=REPR_HEX),
             sel=lambda self: self.get_env()[2].get_val())
         )
@@ -224,8 +229,8 @@ class _GlobalTitle0100(Envelope):
         Uint('spare', bl=1),
         Uint('NAI', val=1, bl=7, dic=_GTNAI_dict),
         Alt('Addr', GEN={
-            1 : BufBCD('BCD', val=b''),
-            2 : BufBCD('BCD', val=b'')},
+            1 : SCCPBufBCD('BCD', val=b''),
+            2 : SCCPBufBCD('BCD', val=b'')},
             DEFAULT=Buf('Raw', val=b'', rep=REPR_HEX),
             sel=lambda self: self.get_env()[2].get_val())
         )
