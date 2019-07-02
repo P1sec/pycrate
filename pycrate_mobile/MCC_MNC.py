@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 # Python dictionnaries for MCC / MNC
 # Mobile Country Code / Mobile Network Code
 
@@ -273,6 +274,7 @@ MCC_dict = {
  '750': ('+500', 'FK', 'Falkland Islands (Malvinas)'),
  '901': ('+882', 'N/A', 'International Networks')
  }
+
 
 MNC_dict = {
  '20201': ('+30', 'GR', 'Greece', 'Cosmote'),
@@ -2176,6 +2178,15 @@ MCCr_dict = {
 }
 
 
+CN_dict = {}
+for cc, (mcc, cn, country) in MCCr_dict.items():
+    cn = cn[1:]
+    if cn in CN_dict:
+        CN_dict[cn].add(cc)
+    else:
+        CN_dict[cn] = {cc}
+
+
 # provide a function that returns the numbering prefix from an msisdn
 def build_pref_sets():
     pref_sets = [set(), set(), set(), set()]
@@ -2188,7 +2199,11 @@ def build_pref_sets():
 
 _PREF_SETS = build_pref_sets()
 
+
 def identify_prefix(msisdn):
+    """returns the number prefix of the MSISDN,
+    or None if the prefix is not recognized
+    """
     if msisdn[:4] in _PREF_SETS[3]:
         return msisdn[:4]
     elif msisdn[:3] in _PREF_SETS[2]:
@@ -2199,6 +2214,13 @@ def identify_prefix(msisdn):
         return msisdn[:1]
     else:
         return None
+
+
+def identify_country(msisdn):
+    """returns the set of 2-character country codes associated with the msisdn,
+    or the empty set if the prefix is not recognized
+    """
+    return CN_dict.get(identify_prefix(msisdn), set())
 
 
 # table of ISO 3166 country codes
@@ -2458,6 +2480,6 @@ CC_table = [
  ('ZW', 'ZWE', '716', 'Zimbabwe')]
 
 
-CC3_CC2_dict = {i[0]: i[1] for i in CC_table}
-CC2_CC3_dict = {i[1]: i[0] for i in CC_table}
+CC2_CC3_dict = {i[0]: i[1] for i in CC_table}
+CC3_CC2_dict = {i[1]: i[0] for i in CC_table}
 
