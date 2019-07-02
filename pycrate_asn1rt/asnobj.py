@@ -346,7 +346,7 @@ class ASN1Obj(Element):
             const_val_type, const_val = self._get_tab_obj()
             if const_val_type == CLASET_NONE:
                 if not self._SILENT:
-                    asnlog('%s._from_per_ws: %s, unable to retrieve a defined object'\
+                    asnlog('%s._safechk_bnd: %s, unable to retrieve a defined object'\
                            % (self.__class__.__name__, self._name))
             elif self._mode == MODE_VALUE and const_val_type == CLASET_UNIQ:
                 if val != const_val:
