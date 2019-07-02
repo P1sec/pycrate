@@ -4,6 +4,7 @@
 # * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
+# * Copyright 2019. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -82,18 +83,76 @@ class SMS_TP(Envelope):
 # TS 23.040, section 9.1.2.5	
 #------------------------------------------------------------------------------#
 
+class BufTPNum(BufBCD):
+    
+    _ALNUM_PAD = 0
+    
+    def get_tpnum_type(self):
+        try:
+            return self.get_env()['Type'].get_val()
+        except Exception:
+            # international BCD number
+            return 1
+    
+    def decode(self):
+        if self.get_tpnum_type() == 5:
+            # alphanumeric
+            dec = decode_7b(self._val)
+            if self._ALNUM_PAD and dec[-1] == '@':
+                return dec[:-1]
+            else:
+                return dec
+        else:
+            # BCD
+            return BufBCD.decode(self)
+    
+    def encode(self, val=''):
+        if self.get_tpnum_type() == 5:
+            # alphanumeric
+            self._val, cnt = encode_7b(val)
+            if 1 <= (7*cnt) % 8 <= 3:
+                self._ALNUM_PAD = 1
+            else:
+                self._ALNUM_PAD = 0
+        else:
+            # BCD
+            BufBCD.encode(self, val)
+
+
 class _TPAddress(Envelope):
     _GEN = (
-        Uint8('Len'), # WNG: number of digits in Num
+        Uint8('Len'), # WNG: number of nibbles (4-bits) in Num
         Uint('Ext', val=1, bl=1),
         Uint('Type', val=1, bl=3, dic=_BCDType_dict),
         Uint('NumberingPlan', val=1, bl=4, dic=_NumPlan_dict),
-        BufBCD('Num')
+        BufTPNum('Num')
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[0].set_valauto(lambda: len(self['Num'].decode()))
-        self[4].set_blauto(lambda: 8*int(ceil(self[0]()/2.0)))
+        self[0].set_valauto(lambda: self._len_set())
+        self[4].set_blauto(lambda: self._len_get())
+    
+    def _len_set(self):
+        if self[2].get_val() == 5:
+            # alphanumeric
+            l = 2 * self[4].get_len()
+            if self[4]._ALNUM_PAD:
+                return l-1
+            else:
+                return l
+        else:
+            # BCD
+            return len(self[4].decode())
+    
+    def _len_get(self):
+        l = self[0].get_val()
+        if l%2:
+            if self[2].get_val() == 5:
+                self[4]._ALNUM_PAD = 1
+            return (1+l)<<2
+        else:
+            return l<<2
 
 
 #------------------------------------------------------------------------------#
@@ -345,6 +404,7 @@ class _TP_SCTS_TZ(Envelope):
         return '<TZ: %s%.2f>' % (self._Sign_dict[self[1]()], 0.25 * (self[0]() + (self[2]()<<4)))
         
     __repr__ = repr
+
 
 class TP_SCTS(Envelope):
     YEAR_BASE = 2000
@@ -742,7 +802,7 @@ class TP_UDH(Envelope):
             char._len_bit = clen
             self[2]._from_char(char)
 
-    
+
 class BufUD(Buf):
     
     # default encoding, required in SMS REPORT without TP-DCS
@@ -777,7 +837,7 @@ class BufUD(Buf):
             elif grp == 14 and cs in (0, 2):
                 return DCS_UCS
             return DCS_8B
-        
+    
     def encode(self, val):
         dcs = self.get_dcs()
         if dcs == DCS_7B:

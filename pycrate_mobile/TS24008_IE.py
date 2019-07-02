@@ -1588,8 +1588,8 @@ _BCDType_dict = {
     2 : 'national number',
     3 : 'network specific number',
     4 : 'dedicated access, short code',
-    5 : 'alphanumeric',
-    6 : 'abbreviated number',
+    5 : 'alphanumeric',         # only for SMS
+    6 : 'abbreviated number',   # only for SMS
     7 : _str_reserved
     }
 
@@ -1599,11 +1599,11 @@ _NumPlan_dict = {
     2 : 'generic numbering plan',
     3 : 'data numbering plan (X.121)',
     4 : 'telex numbering plan (F.69)',
-    5 : 'service center specific',
-    6 : 'service center specific',
+    5 : 'service center specific',  # only for SMS
+    6 : 'service center specific',  # only for SMS
     8 : 'national numbering plan',
     9 : 'private numbering plan',
-    10: 'ERMES numbering plan',
+    10: 'ERMES numbering plan',     # only for SMS
     11: 'reserved for CTS',
     15: _str_reserved
     }
