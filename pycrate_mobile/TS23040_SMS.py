@@ -137,7 +137,7 @@ class _TPAddress(Envelope):
         if self[2].get_val() == 5:
             # alphanumeric
             l = 2 * self[4].get_len()
-            if self[4]._ALNUM_PAD:
+            if hasattr(self[4], '_ALNUM_PAD') and self[4]._ALNUM_PAD:
                 return l-1
             else:
                 return l
@@ -148,7 +148,7 @@ class _TPAddress(Envelope):
     def _len_get(self):
         l = self[0].get_val()
         if l%2:
-            if self[2].get_val() == 5:
+            if self[2].get_val() == 5 and hasattr(self[4], '_ALNUM_PAD'):
                 self[4]._ALNUM_PAD = 1
             return (1+l)<<2
         else:
