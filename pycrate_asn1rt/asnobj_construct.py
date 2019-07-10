@@ -1317,6 +1317,8 @@ Specific attributes:
         #
         Tag, cl, pc, tval, Len, lval = tlv[ind][0:6]
         tag = (cl, tval)
+        # list of decoded components
+        dec = []
         #
         # 2) get over all components within the SEQUENCE content 1 by 1
         #    check if it corresponds to the current tlv
@@ -1346,11 +1348,6 @@ Specific attributes:
                             # component is mandatory, so we will still try to decode it
                             next = True
             #
-            if not next and Comp._name in self._root_mand:
-                # missing mandatory component
-                raise(ASN1BERDecodeErr('{0}: missing mandatory component, {1}'\
-                      .format(self.fullname(), Comp._name)))
-            #
             if next:
                 # 3) decode the current component
                 _par = Comp._parent
@@ -1358,7 +1355,8 @@ Specific attributes:
                 Comp._from_ber_ws(char, [tlv[ind]])
                 Comp._parent = _par
                 self._val[Comp._name] = Comp._val
-                TLV.append( Comp._struct )
+                TLV.append(Comp._struct)
+                dec.append(Comp._name)
                 # get next tlv
                 ind += 1
                 if ind < len(tlv):
@@ -1366,16 +1364,18 @@ Specific attributes:
                     tag = (cl, tval)
                 else:
                     # no more tlv to consume
-                    if Comp._name in self._root_mand and Comp._name != self._root_mand[-1]:
-                        # missing mandatory component
-                        raise(ASN1BERDecodeErr('{0}: missing mandatory component, {1!r}'\
-                              .format(self.fullname(), self._root_mand[self._root_mand.index(Comp._name):])))
                     break
         #
-        # 4) decode unknown provided extensions
+        # checks for error in the decoded structure
+        for mandcomp in self._root_mand:
+            if mandcomp not in dec:
+                raise(ASN1BERDecodeErr('{0}: missing mandatory component, {1}'\
+                      .format(self.fullname(), mandcomp)))
         if eoc and ind < len(tlv)-1:
             raise(ASN1BERDecodeErr('{0}: invalid EOC marker in between TLV components'\
                   .format(self.fullname())))
+        #
+        # 4) decode unknown provided extensions
         elif ind < len(tlv)-1 and self._ext is None:
             raise(ASN1BERDecodeErr('{0}: invalid extension to be decoded, {1!r}'\
                   .format(self.fullname(), tlv[ind])))
@@ -1427,12 +1427,13 @@ Specific attributes:
         #
         cl, pc, tval, lval = tlv[ind][0:4]
         tag = (cl, tval)
+        # list of decoded components
+        dec = []
         #
         # 2) get over all components within the SEQUENCE content 1 by 1
         #    check if it corresponds to the current tlv
         #    decode the component
         for Comp in self._cont.values():
-            #
             next = False
             if (cl, pc, tval, lval) == (0, 0, 0, 0):
                 # EOC marker
@@ -1450,24 +1451,20 @@ Specific attributes:
                         next = True
                     else:
                         if not self._SILENT:
-                            asnlog('SEQUENCE._decode_ber_cont_ws: %s, unable to determine '\
+                            asnlog('SEQUENCE._decode_ber_cont: %s, unable to determine '\
                                    'if component %s is present (err %i)' % (self.fullname(), Comp._name, m))
                         if Comp._name in self._root_mand:
                             # component is mandatory, so we will still try to decode it
                             next = True
             #
-            if not next:
-                if Comp._name in self._root_mand:
-                    # missing mandatory component
-                    raise(ASN1BERDecodeErr('{0}: missing mandatory component, {1}'\
-                          .format(self.fullname(), Comp._name)))
-            else:
+            if next:
                 # 3) decode the current component
                 _par = Comp._parent
                 Comp._parent = self
                 Comp._from_ber(char, [tlv[ind]])
                 Comp._parent = _par
                 self._val[Comp._name] = Comp._val
+                dec.append(Comp._name)
                 # and get next tlv
                 ind += 1
                 if ind < len(tlv):
@@ -1475,17 +1472,19 @@ Specific attributes:
                     tag = (cl, tval)
                 else:
                     # no more tlv to consume
-                    if Comp._name in self._root_mand and Comp._name != self._root_mand[-1]:
-                        # missing mandatory component
-                        raise(ASN1BERDecodeErr('{0}: missing mandatory component, {1!r}'\
-                              .format(self.fullname(), self._root_mand[self._root_mand.index(Comp._name):])))
                     break
         #
-        # 4) decode unknown provided extensions
+        # checks for error in the decoded structure
+        for mandcomp in self._root_mand:
+            if mandcomp not in dec:
+                raise(ASN1BERDecodeErr('{0}: missing mandatory component, {1}'\
+                      .format(self.fullname(), mandcomp)))
         if eoc and ind < len(tlv)-1:
             raise(ASN1BERDecodeErr('{0}: invalid EOC marker in between TLV components'\
                   .format(self.fullname())))
-        elif ind < len(tlv)-1 and self._ext is None:
+        #
+        # 4) decode unknown provided extensions
+        if ind < len(tlv)-1 and self._ext is None:
             raise(ASN1BERDecodeErr('{0}: invalid extension to be decoded, {1!r}'\
                   .format(self.fullname(), tlv[ind])))
         while ind < len(tlv)-1:
