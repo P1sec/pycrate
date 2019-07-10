@@ -92,13 +92,13 @@ def parse_NAS_MO(buf):
     if python_version < 3:
         try:
             pd, type = unpack('>BB', buf[:2])
-        except:
+        except Exception:
             # error 111, unspecified protocol error
             return None, 111
     else:
         try:
             pd, type = buf[0], buf[1]
-        except:
+        except Exception:
             # error 111, unspecified protocol error
             return None, 111
     pd &= 0xF
@@ -109,13 +109,13 @@ def parse_NAS_MO(buf):
     #
     try:
         Msg = NASMODispatcher[pd][type]()
-    except:
+    except KeyError:
         # error 97, message type non-existent or not implemented
         return None, 97
     #
     try:
         Msg.from_bytes(buf)
-    except:
+    except Exception:
         # error 96, invalid mandatory info
         return None, 96
     #
@@ -141,7 +141,7 @@ def parse_NAS_MT(buf, wl2=False):
                 pd, type = unpack('>BB', buf[1:3])
             else:
                 pd, type = unpack('>BB', buf[:2])
-        except:
+        except Exception:
             # error 111, unspecified protocol error
             return None, 111
     else:
@@ -150,7 +150,7 @@ def parse_NAS_MT(buf, wl2=False):
                 pd, type = buf[1], buf[2]
             else:
                 pd, type = buf[0], buf[1]
-        except:
+        except Exception:
             # error 111, unspecified protocol error
             return None, 111
     pd &= 0xF
@@ -161,13 +161,13 @@ def parse_NAS_MT(buf, wl2=False):
     #
     try:
         Msg = NASMTDispatcher[pd][type]()
-    except:
+    except KeyError:
         # error 97, message type non-existent or not implemented
         return None, 97
     #
     try:
         Msg.from_bytes(buf)
-    except:
+    except Exception:
         # error 96, invalid mandatory info
         return None, 96
     #

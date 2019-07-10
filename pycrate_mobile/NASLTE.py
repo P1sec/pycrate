@@ -54,13 +54,13 @@ def parse_NASLTE_MO(buf, inner=True, sec_hdr=True):
     if python_version < 3:
         try:
             pd = ord(buf[:1])
-        except:
+        except Exception:
             # error 111, unspecified protocol error
             return None, 111
     else:
         try:
             pd = buf[0]
-        except:
+        except Exception:
             return None, 111
     shdr = pd>>4
     pd  &= 0xf
@@ -70,7 +70,7 @@ def parse_NASLTE_MO(buf, inner=True, sec_hdr=True):
         Msg = EMMSecProtNASMessage()
         try:
             Msg.from_bytes(buf)
-        except:
+        except Exception:
             # error 96, invalid mandatory info
             return None, 96
         #
@@ -88,7 +88,7 @@ def parse_NASLTE_MO(buf, inner=True, sec_hdr=True):
         Msg = EMMServiceRequest()
         try:
             Msg.from_bytes(buf)
-        except:
+        except Exception:
             return None, 96
         return Msg, 0
     
@@ -101,16 +101,16 @@ def parse_NASLTE_MO(buf, inner=True, sec_hdr=True):
             if python_version < 3:
                 try:
                     typ = ord(buf[1:2])
-                except:
+                except Exception:
                     return None, 111
             else:
                 try:
                     typ = buf[1]
-                except:
+                except Exception:
                     return None, 111
             try:
                 Msg = EMMTypeMOClasses[typ]()
-            except:
+            except KeyError:
                 # error 97, message type non-existent or not implemented
                 return None, 97
         elif pd == 2:
@@ -118,23 +118,23 @@ def parse_NASLTE_MO(buf, inner=True, sec_hdr=True):
             if python_version < 3:
                 try:
                     typ = ord(buf[2:3])
-                except:
+                except Exception:
                     return None, 111
             else:
                 try:
                     typ = buf[2]
-                except:
+                except Exception:
                     return None, 111
             try:
                 Msg = ESMTypeClasses[typ]()
-            except:
+            except KeyError:
                 return None, 97
         else:
             return None, 97
         #
         try:
             Msg.from_bytes(buf)
-        except:
+        except Exception:
             # error 96, invalid mandatory info
             return None, 96
         #
@@ -155,14 +155,14 @@ def parse_NASLTE_MO(buf, inner=True, sec_hdr=True):
                 ppsmsb = nasc[1].get_val()
                 try:
                     pd, typ = unpack('>BB', ppsmsb[:2])
-                except:
+                except Exception:
                     return Msg, 111
                 pd &= 0xF
                 if pd == 9 and typ in (1, 4, 16):
                     cont = PPSMSCPTypeClasses[typ]()
                     try:
                         cont.from_bytes(ppsmsb)
-                    except:
+                    except Exception:
                         return Msg, 96
                     nasc.replace(nasc[1], cont)
         #
@@ -188,13 +188,13 @@ def parse_NASLTE_MT(buf, inner=True, sec_hdr=True):
     if python_version < 3:
         try:
             pd = ord(buf[0])
-        except:
+        except Exception:
             # error 111, unspecified protocol error
             return None, 111
     else:
         try:
             pd = buf[0]
-        except:
+        except Exception:
             return None, 111
     shdr = pd>>4
     pd  &= 0xf
@@ -204,7 +204,7 @@ def parse_NASLTE_MT(buf, inner=True, sec_hdr=True):
         Msg = EMMSecProtNASMessage()
         try:
             Msg.from_bytes(buf)
-        except:
+        except Exception:
             # error 96, invalid mandatory info
             return None, 96
         #
@@ -222,7 +222,7 @@ def parse_NASLTE_MT(buf, inner=True, sec_hdr=True):
         Msg = EMMServiceRequest()
         try:
             Msg.from_bytes(buf)
-        except:
+        except Exception:
             return None, 96
         return Msg, 0
     
@@ -235,16 +235,16 @@ def parse_NASLTE_MT(buf, inner=True, sec_hdr=True):
             if python_version < 3:
                 try:
                     typ = ord(buf[1])
-                except:
+                except Exception:
                     return None, 111
             else:
                 try:
                     typ = buf[1]
-                except:
+                except Exception:
                     return None, 111
             try:
                 Msg = EMMTypeMTClasses[typ]()
-            except:
+            except KeyError:
                 # error 97, message type non-existent or not implemented
                 return None, 97
         elif pd == 2:
@@ -252,23 +252,23 @@ def parse_NASLTE_MT(buf, inner=True, sec_hdr=True):
             if python_version < 3:
                 try:
                     typ = ord(buf[2])
-                except:
+                except Exception:
                     return None, 111
             else:
                 try:
                     typ = buf[2]
-                except:
+                except Exception:
                     return None, 111
             try:
                 Msg = ESMTypeClasses[typ]()
-            except:
+            except KeyError:
                 return None, 97
         else:
             return None, 97
         #
         try:
             Msg.from_bytes(buf)
-        except:
+        except Exception:
             # error 96, invalid mandatory info
             return None, 96
         #
@@ -290,14 +290,14 @@ def parse_NASLTE_MT(buf, inner=True, sec_hdr=True):
                 ppsmsb = nasc[1].get_val()
                 try:
                     pd, typ = unpack('>BB', ppsmsb[:2])
-                except:
+                except Exception:
                     return Msg, 111
                 pd &= 0xF
                 if pd == 9 and typ in (1, 4, 16):
                     cont = PPSMSCPTypeClasses[typ]()
                     try:
                         cont.from_bytes(ppsmsb)
-                    except:
+                    except Exception:
                         return Msg, 96
                     nasc.replace(nasc[1], cont)
         #
