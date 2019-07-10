@@ -275,22 +275,24 @@ class PLMN(Buf):
     def decode(self):
         """returns the encoded string of digits
         """
-        if python_version < 3:
-            num = [ord(c) for c in self.get_val()]
-            join_init = u''
-        else:
-            num = self.get_val()
-            join_init = ''
         plmn = []
-        [plmn.extend((o>>4, o&0xF)) for o in num]
-        if plmn[2] == 15:
-            # 3-digits MNC
-            return join_init.join((str(plmn[1]), str(plmn[0]), str(plmn[3]),
-                                   str(plmn[5]), str(plmn[4])))
+        if python_version < 3:
+            for c in self.get_val():
+                b = ord(c)
+                plmn.append(b>>4)
+                plmn.append(b&0xf)
+            if plmn[2] == 0xf:
+                return u'%i%i%i%i%i' % (plmn[1], plmn[0], plmn[3], plmn[5], plmn[4])
+            else:
+                return u'%i%i%i%i%i%i' % (plmn[1], plmn[0], plmn[3], plmn[5], plmn[4], plmn[2])
         else:
-            # 3-digits MNC
-            return join_init.join((str(plmn[1]), str(plmn[0]), str(plmn[3]),
-                                   str(plmn[5]), str(plmn[4]), str(plmn[2])))
+            for b in self.get_val():
+                plmn.append(b>>4)
+                plmn.append(b&0xf)
+            if plmn[2] == 0xf:
+                return '%i%i%i%i%i' % (plmn[1], plmn[0], plmn[3], plmn[5], plmn[4])
+            else:
+                return '%i%i%i%i%i%i' % (plmn[1], plmn[0], plmn[3], plmn[5], plmn[4], plmn[2])
     
     def encode(self, plmn=u'00101'):
         """encode the given PLMN string and store the resulting buffer in 
@@ -304,12 +306,9 @@ class PLMN(Buf):
         elif len(plmn) != 6:
             raise(PycrateErr('{0}: invalid PLMN string to encode, {1!r}'\
                   .format(self._name, plmn)))
-        #
-        if python_version > 2:
-            plmn = tuple(plmn)
-            self._val = unhexlify(''.join((plmn[1], plmn[0], plmn[5], plmn[2], plmn[4], plmn[3])))
-        else:
-            self._val = unhexlify(str(''.join((plmn[1], plmn[0], plmn[5], plmn[2], plmn[4], plmn[3]))))
+        # no need to distinguish Python version as join() and unhexlify() seems to
+        # do a good job here in both cases
+        self._val = unhexlify(''.join((plmn[1], plmn[0], plmn[5], plmn[2], plmn[4], plmn[3])))
     
     def repr(self):
         # special hexdump representation
