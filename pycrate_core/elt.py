@@ -4,6 +4,7 @@
 # * Version : 0.4
 # *
 # * Copyright 2016. Benoit Michau. ANSSI.
+# * Copyright 2019. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -228,8 +229,9 @@ class Element(object):
                         i += 1
                 return self._env[ind+i]
         except EltErr as err:
-            raise(EltErr('{0} [get_next]: invalid index {1} within envelope {2}'\
-                  .format(self._name, ind+val, self._env._name)))
+            #raise(EltErr('{0} [get_next]: invalid index {1} within envelope {2}'\
+            #      .format(self._name, ind+val, self._env._name)))
+            return None
     
     def get_prev(self, val=1):
         """Returns the previous element in the envelope around self
@@ -260,8 +262,9 @@ class Element(object):
                         i += 1
                 return self._env[ind-i]
         except EltErr as err:
-            raise(EltErr('{0} [get_prev]: invalid index {1} within envelope {2}'\
-                  .format(self._name, ind-val, self._env._name)))
+            #raise(EltErr('{0} [get_prev]: invalid index {1} within envelope {2}'\
+            #      .format(self._name, ind-val, self._env._name)))
+            return None
     
     def set_hier(self, hier):
         """Set the hierarchical level of self, relative to the one of the 
@@ -3594,7 +3597,6 @@ class Sequence(Element):
         Raises:
             EltErr
         """
-        
         if self._SAFE_STAT:
             if not isinstance(elt, Element):
                 raise(EltErr('{0} [append]: elt type is {1}, expecting element'\
