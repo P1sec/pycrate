@@ -4466,9 +4466,16 @@ class Alt(Element):
                 return alts.replace('### ', '### %s%s%s : %r -> ' % (self._name, desc, trans, sv), 1)
             else:
                 # case when the selected alternative is a base element
-                return '### %s%s%s : %r ###\n %s' % (self._name, desc, trans, sv, alts)
+                spaces = self.get_hier_abs() * '    '
+                return '%s### %s%s%s : %r ###\n %s%s'\
+                        % (spaces, self._name, desc, trans, sv, spaces, alts)
         else:
-            return self.get_alt().show()
+            alt = self.get_alt()
+            _hier = alt._hier
+            alt._hier = self._hier
+            s = alt.show()
+            alt._hier = _hier
+            return s
     
     #--------------------------------------------------------------------------#
     # Python built-ins override
