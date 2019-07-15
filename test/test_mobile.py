@@ -29,16 +29,17 @@
 
 from timeit import timeit
 
-#from pycrate_core.elt           import Element
+#from pycrate_core.elt               import Element
 #Element._SAFE_STAT = False
 #Element._SAFE_DYN  = False
 
-from pycrate_mobile.GSMTAP      import *
-from pycrate_mobile.NAS         import *
-from pycrate_mobile.SIGTRAN     import *
-from pycrate_mobile.SCCP        import *
-
-from pycrate_core.elt           import _with_json
+from pycrate_mobile.GSMTAP          import *
+from pycrate_mobile.NAS             import *
+from pycrate_mobile.SIGTRAN         import *
+from pycrate_mobile.SCCP            import *
+from pycrate_mobile.TS29281_GTPU    import *
+#
+from pycrate_core.elt               import _with_json
 
 
 # uplink messages
@@ -139,6 +140,12 @@ sccp_pdu = tuple(map(unhexlify, (
     '090003070b04435604010443430a0105018e430a00'
     )))
 
+# GTPU messages
+gtpu_pdu = tuple(map(unhexlify, (
+    '30ff003c04cec0bb4500003c22cb000080019bad0aa002ff481e268c0800995a0300b1016162636465666768696a6b6c6d6e6f7071727374757677616263646566676869', # GPDU (wireshark bug tracker)
+    '361a00200000000000000040010868001004cec0bb85001022222222000000000000000000000002', # GTPU error ind
+    )))
+
 
 def test_nas_mo(nas_pdu=nas_pdu_mo):
     for pdu in nas_pdu:
@@ -205,6 +212,22 @@ def test_sccp(sccp_pdu=sccp_pdu):
             assert( m.get_val() == v )
 
 
+def test_gtpu(gtpu_pdu=gtpu_pdu):
+    for pdu in gtpu_pdu:
+        m, e = parse_GTPU(pdu)
+        assert( e == 0 )
+        v = m.get_val()
+        m.reautomate()
+        assert( m.get_val() == v )
+        m.set_val(v)
+        assert( m.to_bytes() == pdu )
+        #
+        if _with_json:
+            t = m.to_json()
+            m.from_json(t)
+            assert( m.get_val() == v )
+
+
 def test_perf_mobile():
     
     print('[+] NAS MO decoding and re-encoding')
@@ -220,10 +243,14 @@ def test_perf_mobile():
     print('test_sigtran: {0:.4f}'.format(Tc))
     
     print('[+] SCCP decoding and re-encoding')
-    Td = timeit(test_sccp, number=100)
+    Td = timeit(test_sccp, number=130)
     print('test_sccp: {0:.4f}'.format(Td))
     
-    print('[+] test_mobile total time: {0:.4f}'.format(Ta+Tb+Tc+Td))
+    print('[+] GTP-U decoding and re-encoding')
+    Te = timeit(test_gtpu, number=500)
+    print('test_gtpu: {0:.4f}'.format(Te))
+    
+    print('[+] test_mobile total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te))
 
 
 if __name__ == '__main__':

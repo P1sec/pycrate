@@ -4,6 +4,7 @@
 # * Version : 0.4
 # *
 # * Copyright 2016. Benoit Michau. ANSSI.
+# * Copyright 2019. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -155,6 +156,7 @@ class TestPycrate(unittest.TestCase):
         test_nas_mt()
         test_sigtran()
         test_sccp()
+        test_gtpu()
     
     # mobile / GSM RR
     def test_gsmrr(self):

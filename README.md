@@ -159,6 +159,7 @@ pycrate_ether
 -------------
 
 The modules provided here implement Ethernet and IP-oriented protocols and formats.
+* *MPLS* with structures for MPLS label and header
 * *Ethernet* with structures for Ethernet and VLAN headers
 * *ARP* simply providing the structure for ARP
 * *IP* with structures for IPv4, IPv6, ICMP, UDP and TCP
@@ -245,7 +246,7 @@ pycrate_mobile
 
 This subdirectory implements most of the 3GPP NAS protocol formats:
 * *GSMTAP*: gsmtap header format
-* *MCC_MNC*: dictionnaries for MCC and MNC look-ups
+* *MCC_MNC*: dictionnaries for MCC and MNC look-up
 * *NAS*: provides two functions to parse any uplink and downlink mobile NAS messages
 * *NASLTE*: provides two functions to parse LTE uplink and downlink NAS messages
 * *PPP*: structures for NCP and LCP protocols used for PPP connection estabishment
@@ -265,6 +266,7 @@ This subdirectory implements most of the 3GPP NAS protocol formats:
 * *TS24301_EMM*: structures for the EPS mobility management messages from TS 24.301
 * *TS24301_ESM*: structures for the EPS mobility management messages from TS 24.301
 * *TS24301_IE*: structures for many information elements from TS 24.301
+* *TS29281_GTPU*: structures for GTP-U messages from TS 29.281
 * *TS44018_GTTP*: structure for the single GSM GTTP message from TS 44.018
 * *TS44018_IE*: structures for many information elements from TS 44.018
 * *TS44018_RR*: structures for the GSM and GPRS radio ressources messages from TS 44.018
