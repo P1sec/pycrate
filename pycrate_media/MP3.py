@@ -35,7 +35,7 @@ from pycrate_core.charpy import *
 from pycrate_core.utils  import decompose_uint, TYPE_UINT
 from pycrate_core.repr   import *
 
-Element.ENV_SEL_TRANS = False
+#Element.ENV_SEL_TRANS = False
 Buf.REPR_MAXLEN = 512
 
 
@@ -158,6 +158,7 @@ class Header(Envelope):
             return SampRateV25_dict
         return {}
 
+
 # Samples (compressed) per frame, depending of version and layer
 FrameSamp_dict = {
     0 : {0: 0, 1: 576, 2: 1152, 3: 384}, # version 2.5, layer r,3,2,1
@@ -165,10 +166,13 @@ FrameSamp_dict = {
     2 : {0: 0, 1: 576, 2: 1152, 3: 384}, # version 2, layer r,3,2,1
     3 : {0: 0, 1: 1152, 2: 1152, 3: 384} # version 1, layer r,3,2,1
     }
+
 # Slot size
 SlotSize_dict = {
-    0: 0, 1: 1, 2: 1, 3: 4}
- 
+    0: 0, 1: 1, 2: 1, 3: 4
+    }
+
+
 class MPEGFrame(Envelope):
     _GEN = (
         Header(),
@@ -221,6 +225,7 @@ class ID3V1(Envelope):
         Buf('Genre', bl=8)
         )
 
+
 class ID3V1Ext(Envelope):
     _GEN = (
         Buf('TAG+', val=b'TAG+', bl=32),
@@ -232,6 +237,7 @@ class ID3V1Ext(Envelope):
         Buf('StartTime', bl=48),
         Buf('EndTime', bl=48)
         )
+
 
 # ID3V2 MP3 metadata
 # made from http://id3.org/id3v2.4.0-structure
@@ -294,6 +300,7 @@ class Uint32SynchSafe(Uint32):
                     raise(EltErr('{0} [_from_char]: {1}'\
                                  .format(self._name, err)))
 
+
 class ID3V2Header(Envelope):
     _GEN = (
         Buf('ID3', val=b'ID3', bl=24),
@@ -306,6 +313,7 @@ class ID3V2Header(Envelope):
         Uint32SynchSafe('Size')
         )
 
+
 class ID3V2Footer(Envelope):
     _GEN = (
         Buf('Identifier', val=b'3DI', bl=24),
@@ -317,6 +325,7 @@ class ID3V2Footer(Envelope):
         Uint('Undefined', bl=4),
         Uint32SynchSafe('Size')
         )
+
 
 class ID3V2HeaderExtension(Envelope):
     _GEN = (
@@ -337,6 +346,7 @@ class ID3V2HeaderExtension(Envelope):
     def _set_Flags_bl(self):
         return 8 * self[1].get_val()
 
+
 class ID3V2Frame(Envelope):
     _GEN = (
         Buf('FrameID', bl=32),
@@ -352,6 +362,7 @@ class ID3V2Frame(Envelope):
     
     def _set_Data_bl(self):
         return 8*self[1].get_val()
+
 
 class ID3V2Frames(Array):
     _GEN = ID3V2Frame()
@@ -405,6 +416,9 @@ class ID3V2Frames(Array):
 
 
 class ID3V2(Envelope):
+    
+    ENV_SEL_TRANS = False
+    
     _GEN = (
         ID3V2Header(),
         ID3V2HeaderExtension(hier=1),
@@ -440,7 +454,7 @@ class ID3V2(Envelope):
         self[1:4]._from_char(char_id3v2)
         self[4]._from_char(char)
 
-    
+
 # MP3 file format, including metadata
 class MP3(Envelope):
     _GEN = ()
