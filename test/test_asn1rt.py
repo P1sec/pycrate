@@ -106,6 +106,41 @@ def _test_rt_base():
     
     # Int01 ::= INTEGER
     Int01 = Mod['Int01']
+    #
+    Int01.from_asn1('0')
+    # encoding
+    assert( Int01.to_aper() == Int01.to_aper_ws() == b'\x01\x00' )
+    assert( Int01.to_uper() == Int01.to_uper_ws() == b'\x01\x00' )
+    assert( Int01.to_ber() == Int01.to_ber_ws() == b'\x02\x01\x00' )
+    assert( Int01.to_cer() == Int01.to_cer_ws() == b'\x02\x01\x00' )
+    assert( Int01.to_der() == Int01.to_der_ws() == b'\x02\x01\x00' )
+    # decoding
+    Int01.from_aper(b'\x01\x00')
+    assert( Int01._val == 0 )
+    Int01.from_aper_ws(b'\x01\x00')
+    assert( Int01._val == 0 )
+    Int01.from_uper(b'\x01\x00')
+    assert( Int01._val == 0 )
+    Int01.from_uper_ws(b'\x01\x00')
+    assert( Int01._val == 0 )
+    Int01.from_ber(b'\x02\x01\x00')
+    assert( Int01._val == 0 )
+    Int01.from_ber_ws(b'\x02\x01\x00')
+    assert( Int01._val == 0 )
+    Int01.from_cer(b'\x02\x01\x00')
+    assert( Int01._val == 0 )
+    Int01.from_cer_ws(b'\x02\x01\x00')
+    assert( Int01._val == 0 )
+    Int01.from_der(b'\x02\x01\x00')
+    assert( Int01._val == 0 )
+    Int01.from_der_ws(b'\x02\x01\x00')
+    assert( Int01._val == 0 )
+    # jer
+    if _with_json:
+        assert( Int01.to_jer() == '0' )
+        Int01.from_jer('0')
+        assert( Int01._val == 0 )
+    #
     Int01.from_asn1('4096')
     # encoding
     assert( Int01.to_aper() == Int01.to_aper_ws() == b'\x02\x10\x00' )
@@ -277,6 +312,41 @@ def _test_rt_base():
     
     # Int04 ::= INTEGER (1..MAX)
     Int04 = Mod['Int04']
+    #
+    Int04.from_asn1('1')
+    # encoding
+    assert( Int04.to_aper() == Int04.to_aper_ws() == b'\x01\x00' )
+    assert( Int04.to_uper() == Int04.to_uper_ws() == b'\x01\x00' )
+    assert( Int04.to_ber() == Int04.to_ber_ws() == b'\x02\x01\x01' )
+    assert( Int04.to_cer() == Int04.to_cer_ws() == b'\x02\x01\x01' )
+    assert( Int04.to_der() == Int04.to_der_ws() == b'\x02\x01\x01' )
+    # decoding
+    Int04.from_aper(b'\x01\x00')
+    assert( Int04._val == 1)
+    Int04.from_aper_ws(b'\x01\x00')
+    assert( Int04._val == 1 )
+    Int04.from_uper(b'\x01\x00')
+    assert( Int04._val == 1 )
+    Int04.from_uper_ws(b'\x01\x00')
+    assert( Int04._val == 1 )
+    Int04.from_ber(b'\x02\x01\x01')
+    assert( Int04._val == 1 )
+    Int04.from_ber_ws(b'\x02\x01\x01')
+    assert( Int04._val == 1 )
+    Int04.from_cer(b'\x02\x01\x01')
+    assert( Int04._val == 1 )
+    Int04.from_cer_ws(b'\x02\x01\x01')
+    assert( Int04._val == 1 )
+    Int04.from_der(b'\x02\x01\x01')
+    assert( Int04._val == 1 )
+    Int04.from_der_ws(b'\x02\x01\x01')
+    assert( Int04._val == 1 )
+    # jer
+    if _with_json:
+        assert( Int04.to_jer() == '1' )
+        Int04.from_jer('1')
+        assert( Int04._val == 1 )
+    #
     Int04.from_asn1('127')
     # encoding
     assert( Int04.to_aper() == Int04.to_aper_ws() == b'\x01~' )

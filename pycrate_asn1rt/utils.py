@@ -397,6 +397,8 @@ def int_bitlen(val):
 
 # for PER and BER integer encoding
 def uint_bytelen(val):
+    if val == 0:
+        return 1
     bl = val.bit_length()
     if bl % 8:
         return 1 + (bl>>3)
