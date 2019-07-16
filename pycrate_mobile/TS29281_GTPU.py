@@ -317,7 +317,7 @@ GTPUType_dict = {
     255 : 'G-PDU'
     }
 
-class GTPUHdrMand(Envelope):
+class GTPUHdr(Envelope):
     _GEN = (
         Uint('Version', val=1, bl=3),
         Uint('PT', val=1, bl=1, dic=ProtType_dict),
@@ -327,44 +327,31 @@ class GTPUHdrMand(Envelope):
         Uint('PN', bl=1),
         Uint8('Type', dic=GTPUType_dict),
         Uint16('Len'),
-        Uint32('TEID', rep=REPR_HEX)
-        )
-    
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self[7].set_valauto(lambda: self._get_len())
-    
-    def _get_len(self):
-        l = 0
-        # get length of header optional and extended part
-        opt = self.get_next(1)
-        if opt and not opt.get_trans():
-            l +=4
-        ext = self.get_next(2)
-        if ext and ext._content:
-            l += ext.get_len()
-        # get length of payload
-        env = self.get_env()
-        if env:
-            env = env.get_env()
-            if env:
-                for e in env._content[1:]:
-                    if not e.get_trans():
-                        l += e.get_len()
-        return l
-
-
-class GTPUHdr(Envelope):
-    _GEN = (
-        GTPUHdrMand(),
+        Uint32('TEID', rep=REPR_HEX),
         GTPUHdrOpt(hier=1),
         GTPUHdrExtList(hier=1)
         )
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[1].set_transauto(lambda: not self[0]['E']() and not self[0]['S']() and not self[0]['PN']())
-        self[2].set_transauto(lambda: not self[0]['E']())
+        self[7].set_valauto(lambda: self._get_len())
+        self[9].set_transauto(lambda: False if (self[3]() or self[4]() or self[5]()) else True)
+        self[10].set_transauto(lambda: False if self[3]() else True)
+
+    def _get_len(self):
+        l = 0
+        # get length of header optional and extended part
+        if not self[9].get_trans():
+            l +=4
+        if self[10]._content:
+            l += self[10].get_len()
+        # get length of payload
+        env = self.get_env()
+        if env:
+            for e in env._content[1:]:
+                if not e.get_trans():
+                    l += e.get_len()
+        return l
 
 
 #------------------------------------------------------------------------------#
@@ -498,7 +485,7 @@ class GTPUMsg(Envelope):
 
 class GTPUEchoRequest(GTPUMsg):
     _GEN = (
-        GTPUHdr(val={'GTPUHdrMand': {'Type': 1}}),
+        GTPUHdr(val={'Type': 1}),
         GTPUIEPrivateExt(hier=1, trans=True) # optional
         )
 
@@ -510,7 +497,7 @@ class GTPUEchoRequest(GTPUMsg):
 
 class GTPUEchoResponse(GTPUMsg):
     _GEN = (
-        GTPUHdr(val={'GTPUHdrMand': {'Type': 2}}),
+        GTPUHdr(val={'Type': 2}),
         GTPUIERecovery(hier=1),
         GTPUIEPrivateExt(hier=1, trans=True) # optional
         )
@@ -523,7 +510,7 @@ class GTPUEchoResponse(GTPUMsg):
 
 class GTPUSuppExtHdrNotif(GTPUMsg):
     _GEN = (
-        GTPUHdr(val={'GTPUHdrMand': {'Type': 31}}),
+        GTPUHdr(val={'Type': 31}),
         GTPUIEExtHdrList(hier=1)
         )
 
@@ -535,7 +522,7 @@ class GTPUSuppExtHdrNotif(GTPUMsg):
 
 class GTPUErrorInd(GTPUMsg):
     _GEN = (
-        GTPUHdr(val={'GTPUHdrMand': {'Type': 26}}),
+        GTPUHdr(val={'Type': 26}),
         GTPUIETEID(hier=1),
         GTPUIEPeerAddr(hier=1),
         GTPUIEPrivateExt(hier=1, trans=True) # optional
@@ -549,7 +536,7 @@ class GTPUErrorInd(GTPUMsg):
 
 class GTPUEndMarker(GTPUMsg):
     _GEN = (
-        GTPUHdr(val={'GTPUHdrMand': {'Type': 254}}),
+        GTPUHdr(val={'Type': 254}),
         GTPUIEPrivateExt(hier=1, trans=True) # optional
         )
 
@@ -561,7 +548,7 @@ class GTPUEndMarker(GTPUMsg):
 
 class GPDU(Envelope):
     _GEN = (
-        GTPUHdr(val={'GTPUHdrMand': {'Type': 255}}),
+        GTPUHdr(val={'Type': 255}),
         Buf('TPDU', hier=1, rep=REPR_HEX)
         )
 
