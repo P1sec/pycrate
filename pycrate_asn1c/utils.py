@@ -384,6 +384,10 @@ SYNT_RE_REALSEQ = re.compile(
     '\s{0,}exponent\s{1,}(\-{0,1}[0-9]{1,})\s{0,}\})')
 SYNT_RE_REALSPEC = re.compile(
     '(?:^|\s{1})((?:PLUS\-INFINITY)|(?:MINUS\-INFINITY)|(?:NOT-A-NUMBER))')
+SYNT_RE_UNIVSTR = re.compile(
+    '(?:^|\s{1})(?:\{\s{0,}'\
+    '([0-9]{1,3})\s{0,},\s{0,}([0-9]{1,3})\s{0,},\s{0,}'\
+    '([0-9]{1,3})\s{0,},\s{0,}([0-9]{1,3})\s{0,}\})')
 SYNT_RE_TIMEUTC = re.compile(
     '(?:^|\s{1})' \
     '"([0-9]{2})([0-9]{2})([0-9]{2})' \

@@ -410,7 +410,7 @@ class ASN1Obj(object):
         TYPE_STR_GRAPH  : '_parse_value_str',
         TYPE_STR_T61    : '_parse_value_str',
         TYPE_STR_GENE   : '_parse_value_str',
-        TYPE_STR_UNIV   : '_parse_value_str',
+        TYPE_STR_UNIV   : '_parse_value_str_univ',
         TYPE_OBJ_DESC   : '_parse_value_str',
         TYPE_TIME_GEN   : '_parse_value_timegen',
         TYPE_TIME_UTC   : '_parse_value_timeutc',
@@ -5095,10 +5095,12 @@ class ASN1Obj(object):
         m = SYNT_RE_IDENT.match(text)
         if m:
             return self._parse_value_ref(text)
+            #return self._parse_value_ref(text, type_expected=TYPE_STRINGS)
         m = SYNT_RE_IDENTEXT.match(text)
         if m:
             # reference to an external module value
             return self._parse_value_ref(text)
+            #return self._parse_value_ref(text, type_expected=TYPE_STRINGS)
         else:
             text, val = extract_charstr(text)
             if val is None:
@@ -5106,6 +5108,33 @@ class ASN1Obj(object):
                       .format(self.fullname(), self._type, text)))
             self.select_set(_path_cur(), val)
         return text
+    
+    def _parse_value_str_univ(self, text):
+        """
+        parses the UniversalString object value
+        
+        value is a string (Python str) or code-point (4 uint8 tuples)
+        """
+        try:
+            text = self._parse_value_str(text)
+        except ASN1ProcTextErr:
+            # try with the code-point notation {W, X, Y, Z}
+            m = SYNT_RE_UNIVSTR.match(text)
+            if m:
+                # convert to a std Python str
+                try:
+                    val = pack('>BBBB', *map(int, m.groups())).decode('utf-32-be')
+                except Exception:
+                    raise(ASN1ProcTextErr('{0}: invalid UniversalString value, {2}'\
+                          .format(self.fullname(), text)))
+                else:
+                    self.select_set(_path_cur(), val)
+                    return text[m.end():].strip()
+            else:
+                raise(ASN1ProcTextErr('{0}: invalid UniversalString value, {2}'\
+                      .format(self.fullname(), text)))
+        else:
+            return text
     
     def _parse_value_timeutc(self, text):
         """
