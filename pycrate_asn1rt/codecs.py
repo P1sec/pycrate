@@ -191,7 +191,12 @@ class ASN1CodecPER(ASN1Codec):
         ldet, _gen = cla.decode_count_ws(char)
         GEN.extend(_gen)
         # 2) get value, byte-aligned
-        if ldet in (65536, 49152, 32768, 16384):
+        if ldet == 0:
+            if offset is None:
+                return 0, GEN
+            else:
+                return offset, GEN
+        elif ldet in (65536, 49152, 32768, 16384):
             # requires defragmentation
             (buf, buflen), _gen = cla.decode_fragbytes_ws(char, ldet)
             GEN.extend(_gen)
@@ -222,7 +227,12 @@ class ASN1CodecPER(ASN1Codec):
         # 1) get byte-length determinant
         ldet = cla.decode_count(char)
         # 2) get value, byte-aligned
-        if ldet in (65536, 49152, 32768, 16384):
+        if ldet == 0:
+            if offset is None:
+                return 0
+            else:
+                return offset
+        elif ldet in (65536, 49152, 32768, 16384):
             # requires defragmentation
             buf, buflen = cla.decode_fragbytes(char, ldet)
             if offset is None:
