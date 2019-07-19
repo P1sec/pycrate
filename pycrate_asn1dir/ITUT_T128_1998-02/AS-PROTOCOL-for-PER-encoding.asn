@@ -1,0 +1,1422 @@
+-- Module AS-PROTOCOL-for-PER-encoding (T.128:06/2008)
+-- See also ITU-T T.128 (06/2008)
+-- See also the index of all ASN.1 assignments needed in this document
+
+--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+--
+--                    Begin AS Definitions
+--
+-- The following base mode ASN.1 definitions are encoded using the 
+-- BASIC ALIGNED variant of the Packed Encoding Rules of Recommendation
+-- ITU-T X.691.
+--
+--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+AS-PROTOCOL-for-PER-encoding {itu-t(0) recommendation(0) t(20) t128(128)
+  version(0) 2 as-protocol-for-per-encoding(1)} DEFINITIONS AUTOMATIC TAGS ::=
+BEGIN
+
+IMPORTS
+  H221NonStandardIdentifier, Key, NonStandardParameter, UserID
+    FROM GCC-PROTOCOL {itu-t(0) recommendation(0) t(20) t124(124) version(0) 
+      2 asn1Modules(2) gcc-protocol(1)};
+
+-- NOTE: =====================================================
+-- NOTE: All abstract types defined shall be exported
+-- NOTE: =====================================================
+
+-- Base Types
+Coordinate8 ::= INTEGER(-128..127)
+
+Coordinate16 ::= INTEGER(-32768..32767)
+
+Integer8 ::= INTEGER(0..255)
+
+Integer12 ::= INTEGER(0..4095)
+
+Integer16 ::= INTEGER(0..65535)
+
+Integer32 ::= INTEGER(0..4294967295)
+
+Signed16 ::= INTEGER(-32768..32767)
+
+ShareID ::= Integer32
+
+WindowID ::= Integer32
+
+T50String ::= OCTET STRING(SIZE (0..255)) -- T.50 String
+                          
+
+ASString ::= OCTET STRING(SIZE (0..255)) -- AS Protocol CodePage String
+                         
+
+-- Bit Flag Types
+ExtraTextFlags ::= BIT STRING {
+  opaqueRectangle(1), clipToRectangle(2), deltaXPresent(15)}
+
+FontAttributeFlags ::= BIT STRING {fixedPitch(0), fixedSize(1)}
+
+KeyboardFlags ::= BIT STRING {right(0), quiet(12), down(14), release(15)}
+
+PointingDeviceFlags ::= BIT STRING {
+  move(11), button1(12), button2(13), button3(14), down(15)}
+
+TextAttributeFlags ::= BIT STRING {
+  italic(2), underline(3), strikeout(4), baselineStart(8)}
+
+WindowAttributeFlags ::= BIT STRING {
+  minimized(0), taggable(1), hosted(2), shadow(3), local(4), topmost(5),
+  windowManagerMinimized(16), windowManagerInvisible(17)}
+
+-- General Types
+ActivateWindowRequest ::= SEQUENCE {
+  activationWindow       WindowID,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+ActivationHelpKeyRequest ::= SEQUENCE {
+  activationWindow       WindowID,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+ActivationHelpIndexKeyRequest ::= SEQUENCE {
+  activationWindow       WindowID,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+ActivationHelpExtendedKeyRequest ::= SEQUENCE {
+  activationWindow       WindowID,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+BackgroundMixMode ::= CHOICE {
+  transparent                   [1]  NULL,
+  opaque                        [2]  NULL,
+  nonStandardBackgroundMixMode  NonStandardParameter,
+  -- Subject to capability negotiation.
+  ...
+}
+
+BitmapData ::= CHOICE {
+  uncompressedBitmapData  [0]  OCTET STRING,
+  compressedBitmapData    [2]  CompressedBitmapData,
+  nonStandardBitmapData   NonStandardParameter,
+  -- Subject to capability negotiation.
+  ...
+}
+
+Brush ::= SEQUENCE {
+  originX                Integer8 OPTIONAL,
+  originY                Integer8 OPTIONAL,
+  style                  BrushStyle OPTIONAL,
+  hatch                  BrushHatch OPTIONAL,
+  pattern                OCTET STRING(SIZE (7)) OPTIONAL,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+BrushHatch ::= CHOICE {
+  style                  HatchStyle,
+  patternZero            Integer8,
+  nonStandardBrushHatch  NonStandardParameter,
+  -- Subject to capability negotiation.
+  ...
+}
+
+BrushStyle ::= CHOICE {
+  solid                  [0]  NULL,
+  null                   [1]  NULL,
+  hatched                [2]  NULL,
+  pattern                [3]  NULL,
+  nonStandardBrushStyle  NonStandardParameter,
+  -- Subject to capability negotiation.
+  ...
+}
+
+CloseWindowRequest ::= SEQUENCE {
+  activationWindow       WindowID,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+Color ::= SEQUENCE {
+  c1  Integer8,
+  -- either R of RGB or subject to capability negotiation.
+  c2  Integer8,
+  -- either G of RGB or subject to capability negotiation.
+  c3  Integer8
+  -- either B of RGB or subject to capability negotiation
+}
+
+ColorAccuracyEnhancementRGB ::= CHOICE {
+  predefinedRGBSpace    CHOICE {nonStandardRGBSpace  NonStandardParameter,
+                                ...},
+  generalRGBParameters
+    --SEQUENCE {gamma             REAL(0..MAX) OPTIONAL,
+    SEQUENCE {gamma             REAL(0..PLUS-INFINITY) OPTIONAL,         
+              -- Gamma value of the color space
+              colorTemperature  INTEGER(0..MAX) OPTIONAL,
+              -- Color temperature of the white point assumed by
+              -- the color space (in degrees Kelvin)
+              primaries
+                SEQUENCE {red    ColorCIExyChromaticity,
+                          -- CIE xy chromaticity coordinate of the red primary
+                          green  ColorCIExyChromaticity,
+                          -- CIE xy chromaticity coordinate of the green primary
+                          blue   ColorCIExyChromaticity
+                          -- CIE xy chromaticity coordinate of the blue primary
+              } OPTIONAL,
+              ...},
+  ...
+}
+
+ColorCIExyChromaticity ::= SEQUENCE {
+  x  REAL(0..1), -- CIE normalized x component
+  y  REAL(0..1) -- CIE normalized y component
+}
+
+ColorPalette ::= CHOICE {
+  paletteRGB
+    SEQUENCE {palette      SEQUENCE (SIZE (16 | 256)) OF ColorRGB,
+              enhancement  ColorAccuracyEnhancementRGB OPTIONAL,
+              ...},
+  nonStandardPalette  NonStandardParameter,
+  ...
+}
+
+ColorPointerAttribute ::= SEQUENCE {
+  cacheIndex             Integer16,
+  hotSpot                Point16,
+  width                  Integer16,
+  height                 Integer16,
+  colorPointerData       OCTET STRING,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+ColorRGB ::= SEQUENCE {red    Integer8,
+                       green  Integer8,
+                       blue   Integer8
+}
+
+ColorSpaceSpecifier ::= CHOICE {
+  colorSpaceDefault      NULL,
+  -- Default color space is RGB without accuracy enhancement
+  colorSpaceRGB          ColorAccuracyEnhancementRGB,
+  nonStandardColorSpace  NonStandardParameter,
+  -- Subject to capability negotiation.
+  ...
+}
+
+CompressedBitmapData ::= SEQUENCE {
+  mainBodySize           Integer16,
+  rowSize                Integer16,
+  uncompressedSize       Integer16,
+  compressedBitmap       OCTET STRING,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+ConfirmDetachResponse ::= SEQUENCE {
+  passControlFlag        BOOLEAN,
+  sendingReference       Integer16,
+  originatorReference    Integer16,
+  originatorID           UserID,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+ConfirmRemoteShare ::= SEQUENCE {
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+ConfirmTakeResponse ::= SEQUENCE {
+  passControlFlag        BOOLEAN,
+  sendingReference       Integer16,
+  originatorReference    Integer16,
+  originatorID           UserID,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+ControlPriority ::= CHOICE {
+  always                      [1]  NULL,
+  never                       [2]  NULL,
+  confirm                     [3]  NULL,
+  nonStandardControlPriority  NonStandardParameter,
+  -- Subject to capability negotiation.
+  ...
+}
+
+Cooperate ::= SEQUENCE {
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+Coordinate ::= CHOICE {
+  absolute               Coordinate16,
+  delta                  Coordinate8,
+  nonStandardCoordinate  NonStandardParameter,
+  -- Subject to capability negotiation.
+  ...
+}
+
+DesktopSaveAction ::= CHOICE {
+  desktopSave                   [0]  NULL,
+  desktopRestore                [1]  NULL,
+  nonStandardDesktopSaveAction  NonStandardParameter,
+  -- Subject to capability negotiation.
+  ...
+}
+
+DenyDetachResponse ::= SEQUENCE {
+  passControlFlag        BOOLEAN,
+  sendingReference       Integer16,
+  originatorReference    Integer16,
+  originatorID           UserID,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+DenyPassResponse ::= SEQUENCE {
+  passControlFlag        BOOLEAN,
+  sendingReference       Integer16,
+  originatorReference    Integer16,
+  originatorID           UserID,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+DenyTakeResponse ::= SEQUENCE {
+  passControlFlag        BOOLEAN,
+  sendingReference       Integer16,
+  originatorReference    Integer16,
+  originatorID           UserID,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+DenyRemoteDetachResponse ::= SEQUENCE {
+  passControlFlag        BOOLEAN,
+  sendingReference       Integer16,
+  originatorReference    Integer16,
+  originatorID           UserID,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+DenyRemoteShare ::= CHOICE {
+  remoteShareDenial  RemoteShareDenial,
+  nonStandardDenial  NonStandardParameter,
+  -- Subject to capability negotiation.
+  ...
+}
+
+Detach ::= SEQUENCE {
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+DetachRequest ::= SEQUENCE {
+  passControlFlag        BOOLEAN,
+  sendingReference       Integer16,
+  originatorID           UserID,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+FontAttribute ::= SEQUENCE {
+  faceName               T50String,
+  fontFlags              FontAttributeFlags,
+  averageWidth           Integer16,
+  height                 Integer16,
+  aspectX                Integer16,
+  aspectY                Integer16,
+  signature1             Integer8,
+  signature2             Integer8,
+  signature3             Integer16,
+  codePage               FontCodePage,
+  ascent                 Integer16,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+FontCodePage ::= CHOICE {
+  allCodePoints            [0]  NULL,
+  coreCodePoints           [255]  NULL,
+  nonStandardFontCodePage  NonStandardParameter,
+  -- Subject to capability negotiation.
+  ...
+}
+
+GeneralCompressionSpecifier ::= CHOICE {
+  v42bisCompression       V42bisCompression,
+  nonStandardCompression  NonStandardParameter,
+  ...
+}
+
+GrantControl ::= SEQUENCE {
+  grantID                UserID,
+  controlID              INTEGER(0..2147483647),
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+HatchStyle ::= CHOICE {
+  horizontal             [0]  NULL,
+  vertical               [1]  NULL,
+  forward                [2]  NULL,
+  backward               [3]  NULL,
+  cross                  [4]  NULL,
+  diagonal               [5]  NULL,
+  nonStandardHatchStyle  NonStandardParameter,
+  -- Subject to capability negotiation.
+  ...
+}
+
+HostedWindowActiveIndication ::= SEQUENCE {
+  activationID           Integer16,
+  activationWindow       WindowID,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+HostedWindowInvisibleIndication ::= SEQUENCE {
+  activationID           Integer16,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+LocalWindowActiveIndication ::= SEQUENCE {
+  activationID           Integer16,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+MonoPointerAttribute ::= SEQUENCE {
+  hotSpot                Point16,
+  width                  Integer16,
+  height                 Integer16,
+  monoPointerData        OCTET STRING,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+NotifyHostedApplications ::= SEQUENCE {
+  numberApplications     Integer16,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+PassControlRequest ::= SEQUENCE {
+  passControlFlag        BOOLEAN,
+  sendingReference       Integer16,
+  originatorID           UserID,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+Pen ::= SEQUENCE {
+  style                  PenStyle OPTIONAL,
+  width                  Integer8(1) OPTIONAL,
+  color                  Color OPTIONAL,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+PenStyle ::= CHOICE {
+  solid                [0]  NULL,
+  dashed               [1]  NULL,
+  dotted               [2]  NULL,
+  dash-dot             [3]  NULL,
+  dash-dot-dot         [4]  NULL,
+  null                 [5]  NULL,
+  nonStandardPenStyle  NonStandardParameter,
+  -- Subject to capability negotiation.
+  ...
+}
+
+Point16 ::= SEQUENCE {x  Coordinate16,
+                      y  Coordinate16
+}
+
+PointerDeviceCaptureIndication ::= SEQUENCE {
+  activationID           Integer16,
+  activationWindow       WindowID,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+Rectangle16 ::= SEQUENCE {
+  left    Coordinate16,
+  top     Coordinate16,
+  right   Coordinate16,
+  bottom  Coordinate16
+}
+
+RemoteDetachRequest ::= SEQUENCE {
+  passControlFlag        BOOLEAN,
+  sendingReference       Integer16,
+  originatorID           UserID,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+RemoteShareDenial ::= CHOICE {
+  incorrectPassword               [1]  NULL,
+  remoteShareNotEnabled           [2]  NULL,
+  remoteShareInOperationIncoming  [3]  NULL,
+  remoteShareInOperationOutgoing  [4]  NULL,
+  nonStandardRemoteShareDenial    NonStandardParameter,
+  -- Subject to capability negotiation.
+  ...
+}
+
+RequestControl ::= SEQUENCE {
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+RequestRemoteShare ::= SEQUENCE {
+  requestingID           UserID,
+  encryptedPassword      OCTET STRING,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+RestoreWindowRequest ::= SEQUENCE {
+  activationWindow       WindowID,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+ROP2 ::= INTEGER {
+  r2BLACK(1), r2DPon(2), r2DPna(3), r2Pn(4), r2PDna(5), r2Dn(6), r2DPx(7),
+  r2DPan(8), r2DPa(9), r2DPxn(10), r2D(11), r2DPno(12), r2P(13), r2PDno(14),
+  r2DPo(15), r2WHITE(16)}(0..255)
+
+ROP3 ::= INTEGER {
+  r3BLACK(0), -- ('00'H)
+  r3DPSoon(1), -- ('01'H)
+  r3DPSona(2), -- ('02'H)
+  r3PSon(3), -- ('03'H)
+  r3SDPona(4), -- ('04'H)
+  r3DPon(5), -- ('05'H)
+  r3PDSxnon(6), -- ('06'H)
+  r3PDSaon(7), -- ('07'H)
+  r3SDPnaa(8), -- ('08'H)
+  r3PDSxon(9), -- ('09'H)
+  r3DPna(10), -- ('0A'H)
+  r3PSDnaon(11), -- ('0B'H)
+  r3SPna(12), -- ('0C'H)
+  r3PDSnaon(13), -- ('0D'H)
+  r3PDSonon(14), -- ('0E'H)
+  r3Pn(15), -- ('0F'H)
+  r3PDSona(16), -- ('10'H)
+  r3DSon(17), -- ('11'H)
+  r3SDPxnon(18), -- ('12'H)
+  r3SDPaon(19), -- ('13'H)
+  r3DPSxnon(20), -- ('14'H)
+  r3DPSaon(21), -- ('15'H)
+  r3PSDPSanaxx(22), -- ('16'H)
+  r3SSPxDSxaxn(23), -- ('17'H)
+  r3SPxPDxa(24), -- ('18'H)
+  r3SDPSanaxn(25), -- ('19'H)
+  r3PDSPaox(26), -- ('1A'H)
+  r3SDPSxaxn(27), -- ('1B'H)
+  r3PSDPaox(28), -- ('1C'H)
+  r3DSPDxaxn(29), -- ('1D'H)
+  r3PDSox(30), -- ('1E'H)
+  r3PDSoan(31), -- ('1F'H)
+  r3DPSnaa(32), -- ('20'H)
+  r3SDPxon(33), -- ('21'H)
+  r3DSna(34), -- ('22'H)
+  r3SPDnaon(35), -- ('23'H)
+  r3SPxDSxa(36), -- ('24'H)
+  r3PDSPanaxn(37), -- ('25'H)
+  r3SDPSaox(38), -- ('26'H)
+  r3SDPSxnox(39), -- ('27'H)
+  r3DPSxa(40), -- ('28'H)
+  r3PSDPSaoxxn(41), -- ('29'H)
+  r3DPSana(42), -- ('2A'H)
+  r3SSPxPDxaxn(43), -- ('2B'H)
+  r3SPDSoax(44), -- ('2C'H)
+  r3PSDnox(45), -- ('2D'H)
+  r3PSDPxox(46), -- ('2E'H)
+  r3PSDnoan(47), -- ('2F'H)
+  r3PSna(48), -- ('30'H)
+  r3SDPnaon(49), -- ('31'H)
+  r3SDPSoox(50), -- ('32'H)
+  r3Sn(51), -- ('33'H)
+  r3SPDSaox(52), -- ('34'H)
+  r3SPDSxnox(53), -- ('35'H)
+  r3SDPox(54), -- ('36'H)
+  r3SDPoan(55), -- ('37'H)
+  r3PSDPoax(56), -- ('38'H)
+  r3SPDnox(57), -- ('39'H)
+  r3SPDSxox(58), -- ('3A'H)
+  r3SPDnoan(59), -- ('3B'H)
+  r3PSx(60), -- ('3C'H)
+  r3SPDSonox(61), -- ('3D'H)
+  r3SPDSnaox(62), -- ('3E'H)
+  r3PSan(63), -- ('3F'H)
+  r3PSDnaa(64), -- ('40'H)
+  r3DPSxon(65), -- ('41'H)
+  r3SDxPDxa(66), -- ('42'H)
+  r3SPDSanaxn(67), -- ('43'H)
+  r3SDna(68), -- ('44'H)
+  r3DPSnaon(69), -- ('45'H)
+  r3DSPDaox(70), -- ('46'H)
+  r3PSDPxaxn(71), -- ('47'H)
+  r3SDPxa(72), -- ('48'H)
+  r3PDSPDaoxxn(73), -- ('49'H)
+  r3DPSDoax(74), -- ('4A'H)
+  r3PDSnox(75), -- ('4B'H)
+  r3SDPana(76), -- ('4C'H)
+  r3SSPxDSxoxn(77), -- ('4D'H)
+  r3PDSPxox(78), -- ('4E'H)
+  r3PDSnoan(79), -- ('4F'H)
+  r3PDna(80), -- ('50'H)
+  r3DSPnaon(81), -- ('51'H)
+  r3DPSDaox(82), -- ('52'H)
+  r3SPDSxaxn(83), -- ('53'H)
+  r3DPSonon(84), -- ('54'H)
+  r3Dn(85), -- ('55'H)
+  r3DPSox(86), -- ('56'H)
+  r3DPSoan(87), -- ('57'H)
+  r3PDSPoax(88), -- ('58'H)
+  r3DPSnox(89), -- ('59'H)
+  r3DPx(90), -- ('5A'H)
+  r3DPSDonox(91), -- ('5B'H)
+  r3DPSDxox(92), -- ('5C'H)
+  r3DPSnoan(93), -- ('5D'H)
+  r3DPSDnaox(94), -- ('5E'H)
+  r3DPan(95), -- ('5F'H)
+  r3PDSxa(96), -- ('60'H)
+  r3DSPDSaoxxn(97), -- ('61'H)
+  r3DSPDoax(98), -- ('62'H)
+  r3SDPnox(99), -- ('63'H)
+  r3SDPSoax(100), -- ('64'H)
+  r3DSPnox(101), -- ('65'H)
+  r3DSx(102), -- ('66'H)
+  r3SDPSonox(103), -- ('67'H)
+  r3DSPDSonoxxn(104), -- ('68'H)
+  r3PDSxxn(105), -- ('69'H)
+  r3DPSax(106), -- ('6A'H)
+  r3PSDPSoaxxn(107), -- ('6B'H)
+  r3SDPax(108), -- ('6C'H)
+  r3PDSPDoaxxn(109), -- ('6D'H)
+  r3SDPSnoax(110), -- ('6E'H)
+  r3PDSxnan(111), -- ('6F'H)
+  r3PDSana(112), -- ('70'H)
+  r3SSDxPDxaxn(113), -- ('71'H)
+  r3SDPSxox(114), -- ('72'H)
+  r3SDPnoan(115), -- ('73'H)
+  r3DSPDxox(116), -- ('74'H)
+  r3DSPnoan(117), -- ('75'H)
+  r3SDPSnaox(118), -- ('76'H)
+  r3DSan(119), -- ('77'H)
+  r3PDSax(120), -- ('78'H)
+  r3DSPDSoaxxn(121), -- ('79'H)
+  r3DPSDnoax(122), -- ('7A'H)
+  r3SDPxnan(123), -- ('7B'H)
+  r3SPDSnoax(124), -- ('7C'H)
+  r3DPSxnan(125), -- ('7D'H)
+  r3SPxDSxo(126), -- ('7E'H)
+  r3DPSaan(127), -- ('7F'H)
+  r3DPSaa(128), -- ('80'H)
+  r3SPxDSxon(129), -- ('81'H)
+  r3DPSxna(130), -- ('82'H)
+  r3SPDSnoaxn(131), -- ('83'H)
+  r3SDPxna(132), -- ('84'H)
+  r3PDSPnoaxn(133), -- ('85'H)
+  r3DSPDSoaxx(134), -- ('86'H)
+  r3PDSaxn(135), -- ('87'H)
+  r3DSa(136), -- ('88'H)
+  r3SDPSnaoxn(137), -- ('89'H)
+  r3DSPnoa(138), -- ('8A'H)
+  r3DSPDxoxn(139), -- ('8B'H)
+  r3SDPnoa(140), -- ('8C'H)
+  r3SDPSxoxn(141), -- ('8D'H)
+  r3SSDxPDxax(142), -- ('8E'H)
+  r3PDSanan(143), -- ('8F'H)
+  r3PDSxna(144), -- ('90'H)
+  r3SDPSnoaxn(145), -- ('91'H)
+  r3DPSDPoaxx(146), -- ('92'H)
+  r3SPDaxn(147), -- ('93'H)
+  r3PSDPSoaxx(148), -- ('94'H)
+  r3DPSaxn(149), -- ('95'H)
+  r3DPSxx(150), -- ('96'H)
+  r3PSDPSonoxx(151), -- ('97'H)
+  r3SDPSonoxn(152), -- ('98'H)
+  r3DSxn(153), -- ('99'H)
+  r3DPSnax(154), -- ('9A'H)
+  r3SDPSoaxn(155), -- ('9B'H)
+  r3SPDnax(156), -- ('9C'H)
+  r3DSPDoaxn(157), -- ('9D'H)
+  r3DSPDSaoxx(158), -- ('9E'H)
+  r3PDSxan(159), -- ('9F'H)
+  r3DPa(160), -- ('A0'H)
+  r3PDSPnaoxn(161), -- ('A1'H)
+  r3DPSnoa(162), -- ('A2'H)
+  r3DPSDxoxn(163), -- ('A3'H)
+  r3PDSPonoxn(164), -- ('A4'H)
+  r3PDxn(165), -- ('A5'H)
+  r3DSPnax(166), -- ('A6'H)
+  r3PDSPoaxn(167), -- ('A7'H)
+  r3DPSoa(168), -- ('A8'H)
+  r3DPSoxn(169), -- ('A9'H)
+  r3D(170), -- ('AA'H)
+  r3DPSono(171), -- ('AB'H)
+  r3SPDSxax(172), -- ('AC'H)
+  r3DPSDaoxn(173), -- ('AD'H)
+  r3DSPnao(174), -- ('AE'H)
+  r3DPno(175), -- ('AF'H)
+  r3PDSnoa(176), -- ('B0'H)
+  r3PDSPxoxn(177), -- ('B1'H)
+  r3SSPxDSxox(178), -- ('B2'H)
+  r3SDPanan(179), -- ('B3'H)
+  r3PSDnax(180), -- ('B4'H)
+  r3DPSDoaxn(181), -- ('B5'H)
+  r3DPSDPaoxx(182), -- ('B6'H)
+  r3SDPxan(183), -- ('B7'H)
+  r3PSDPxax(184), -- ('B8'H)
+  r3DSPDaoxn(185), -- ('B9'H)
+  r3DPSnao(186), -- ('BA'H)
+  r3DSno(187), -- ('BB'H)
+  r3SPDSanax(188), -- ('BC'H)
+  r3SDxPDxan(189), -- ('BD'H)
+  r3DPSxo(190), -- ('BE'H)
+  r3DPSano(191), -- ('BF'H)
+  r3PSa(192), -- ('C0'H)
+  r3SPDSnaoxn(193), -- ('C1'H)
+  r3SPDSonoxn(194), -- ('C2'H)
+  r3PSxn(195), -- ('C3'H)
+  r3SPDnoa(196), -- ('C4'H)
+  r3SPDSxoxn(197), -- ('C5'H)
+  r3SDPnax(198), -- ('C6'H)
+  r3PSDPoaxn(199), -- ('C7'H)
+  r3SDPoa(200), -- ('C8'H)
+  r3SPDoxn(201), -- ('C9'H)
+  r3DPSDxax(202), -- ('CA'H)
+  r3SPDSaoxn(203), -- ('CB'H)
+  r3S(204), -- ('CC'H)
+  r3SDPono(205), -- ('CD'H)
+  r3SDPnao(206), -- ('CE'H)
+  r3SPno(207), -- ('CF'H)
+  r3PSDnoa(208), -- ('D0'H)
+  r3PSDPxoxn(209), -- ('D1'H)
+  r3PDSnax(210), -- ('D2'H)
+  r3SPDSoaxn(211), -- ('D3'H)
+  r3SSPxPDxax(212), -- ('D4'H)
+  r3DPSanan(213), -- ('D5'H)
+  r3PSDPSaoxx(214), -- ('D6'H)
+  r3DPSxan(215), -- ('D7'H)
+  r3PDSPxax(216), -- ('D8'H)
+  r3SDPSaoxn(217), -- ('D9'H)
+  r3DPSDanax(218), -- ('DA'H)
+  r3SPxDSxan(219), -- ('DB'H)
+  r3SPDnao(220), -- ('DC'H)
+  r3SDno(221), -- ('DD'H)
+  r3SDPxo(222), -- ('DE'H)
+  r3SDPano(223), -- ('DF'H)
+  r3PDSoa(224), -- ('E0'H)
+  r3PDSoxn(225), -- ('E1'H)
+  r3DSPDxax(226), -- ('E2'H)
+  r3PSDPaoxn(227), -- ('E3'H)
+  r3SDPSxax(228), -- ('E4'H)
+  r3PDSPaoxn(229), -- ('E5'H)
+  r3SDPSanax(230), -- ('E6'H)
+  r3SPxPDxan(231), -- ('E7'H)
+  r3SSPxDSxax(232), -- ('E8'H)
+  r3DSPDSanaxxn(233), -- ('E9'H)
+  r3DPSao(234), -- ('EA'H)
+  r3DPSxno(235), -- ('EB'H)
+  r3SDPao(236), -- ('EC'H)
+  r3SDPxno(237), -- ('ED'H)
+  r3DSo(238), -- ('EE'H)
+  r3SDPnoo(239), -- ('EF'H)
+  r3P(240), -- ('F0'H)
+  r3PDSono(241), -- ('F1'H)
+  r3PDSnao(242), -- ('F2'H)
+  r3PSno(243), -- ('F3'H)
+  r3PSDnao(244), -- ('F4'H)
+  r3PDno(245), -- ('F5'H)
+  r3PDSxo(246), -- ('F6'H)
+  r3PDSano(247), -- ('F7'H)
+  r3PDSao(248), -- ('F8'H)
+  r3PDSxno(249), -- ('F9'H)
+  r3DPo(250), -- ('FA'H)
+  r3DPSnoo(251), -- ('FB'H)
+  r3PSo(252), -- ('FC'H)
+  r3PSDnoo(253), -- ('FD'H)
+  r3DPSoo(254), -- ('FE'H)
+  r3WHITE(255) -- ('FF'H)--}(0..255)
+
+SystemPointerType ::= CHOICE {
+  null                           [0]  NULL,
+  default                        [12512]  NULL,
+  nonStandardSystemPointerValue  NonStandardParameter,
+  -- Subject to capability negotiation.
+  ...
+}
+
+TakeControlRequest ::= SEQUENCE {
+  passControlFlag        BOOLEAN,
+  sendingReference       Integer16,
+  originatorReference    Integer16,
+  originatorID           UserID,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+UnhostApplication ::= SEQUENCE {
+  windowID               WindowID,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+V42bisCompression ::= SEQUENCE {
+  p1  INTEGER(512..65535) OPTIONAL,
+  p2  INTEGER(6..250) OPTIONAL,
+  ...
+}
+
+WindowAttribute ::= SEQUENCE {
+  windowID               WindowID,
+  windowExtra            Integer32,
+  windowOwner            WindowID,
+  windowFlags            WindowAttributeFlags,
+  windowRectangle        Rectangle16,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+WindowManagerMenuRequest ::= SEQUENCE {
+  activationWindow       WindowID,
+  activationPoint        Point16,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+WindowTitle ::= CHOICE {
+  noTitle                 Integer8(255),
+  titleString             T50String,
+  nonStandardWindowTitle  NonStandardParameter,
+  -- Subject to capability negotiation.
+  ...
+}
+
+-- Input Types
+InputEvent ::= CHOICE {
+  pointingDeviceEvent    [12769]  PointingDeviceEvent,
+  codePointEvent         [1]  CodePointEvent,
+  virtualKeyEvent        [2]  VirtualKeyEvent,
+  synchronizeEvent       [0]  SynchronizeEvent,
+  nonStandardInputEvent  NonStandardParameter,
+  -- Subject to capability negotiation.
+  ...
+}
+
+CodePointEvent ::= SEQUENCE {
+  eventTime              Integer32,
+  keyboardFlags          KeyboardFlags,
+  codePoint              Integer16,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+VirtualKeyEvent ::= SEQUENCE {
+  eventTime              Integer32,
+  keyboardFlags          KeyboardFlags,
+  virtualKey             Integer16,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+PointingDeviceEvent ::= SEQUENCE {
+  eventTime              Integer32,
+  pointingDeviceFlags    PointingDeviceFlags,
+  pointingDeviceX        Coordinate16,
+  pointingDeviceY        Coordinate16,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+SynchronizeEvent ::= SEQUENCE {
+  eventTime              Integer32,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+-- Common Header Types
+PrimaryOrderHeader ::= SEQUENCE {
+  boundsLeft    Coordinate OPTIONAL,
+  boundsTop     Coordinate OPTIONAL,
+  boundsRight   Coordinate OPTIONAL,
+  boundsBottom  Coordinate OPTIONAL,
+  ...
+}
+
+ShareDataHeader ::= SEQUENCE {
+  shareID                      ShareID,
+  generalCompressionSpecifier  GeneralCompressionSpecifier OPTIONAL,
+  ...
+}
+
+-- Order Types
+DestinationBltOrder ::= SEQUENCE {
+  header                 PrimaryOrderHeader,
+  destLeft               Coordinate OPTIONAL,
+  destTop                Coordinate OPTIONAL,
+  destWidth              Coordinate OPTIONAL,
+  destHeight             Coordinate OPTIONAL,
+  rop3                   ROP3 OPTIONAL,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+PatternBltOrder ::= SEQUENCE {
+  header                 PrimaryOrderHeader,
+  destLeft               Coordinate OPTIONAL,
+  destTop                Coordinate OPTIONAL,
+  destWidth              Coordinate OPTIONAL,
+  destHeight             Coordinate OPTIONAL,
+  rop3                   ROP3 OPTIONAL,
+  backgroundColor        Color OPTIONAL,
+  foregroundColor        Color OPTIONAL,
+  brush                  Brush OPTIONAL,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+ScreenBltOrder ::= SEQUENCE {
+  header                 PrimaryOrderHeader,
+  destLeft               Coordinate OPTIONAL,
+  destTop                Coordinate OPTIONAL,
+  destWidth              Coordinate OPTIONAL,
+  destHeight             Coordinate OPTIONAL,
+  rop3                   ROP3 OPTIONAL,
+  sourceX                Coordinate OPTIONAL,
+  sourceY                Coordinate OPTIONAL,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+CacheBitmapOrder ::= SEQUENCE {
+  cacheId                INTEGER(0..2),
+  bitmapWidth            Integer8,
+  bitmapHeight           Integer8,
+  bitmapBitsPerPel       INTEGER(1 | 4 | 8),
+  cacheIndex             Integer16,
+  bitmapData             BitmapData,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+CacheColorTableOrder ::= SEQUENCE {
+  cacheIndex             Integer8,
+  colorTable             ColorPalette,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+MemoryBltOrder ::= SEQUENCE {
+  header                 PrimaryOrderHeader,
+  colorTableCacheIndex   Integer8 OPTIONAL,
+  bitmapCacheID          Integer8 OPTIONAL,
+  destLeft               Coordinate OPTIONAL,
+  destTop                Coordinate OPTIONAL,
+  destWidth              Coordinate OPTIONAL,
+  destHeight             Coordinate OPTIONAL,
+  rop3                   ROP3 OPTIONAL,
+  sourceX                Coordinate OPTIONAL,
+  sourceY                Coordinate OPTIONAL,
+  bitmapCacheIndex       Integer16 OPTIONAL,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+MemoryThreeWayBltOrder ::= SEQUENCE {
+  header                 PrimaryOrderHeader,
+  colorTableCacheIndex   Integer8 OPTIONAL,
+  bitmapCacheID          Integer8 OPTIONAL,
+  destLeft               Coordinate OPTIONAL,
+  destTop                Coordinate OPTIONAL,
+  destWidth              Coordinate OPTIONAL,
+  destHeight             Coordinate OPTIONAL,
+  rop3                   ROP3 OPTIONAL,
+  sourceX                Coordinate OPTIONAL,
+  sourceY                Coordinate OPTIONAL,
+  backgroundColor        Color OPTIONAL,
+  foregroundColor        Color OPTIONAL,
+  brush                  Brush OPTIONAL,
+  bitmapCacheIndex       Integer16 OPTIONAL,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+TextOrder ::= SEQUENCE {
+  header                 PrimaryOrderHeader,
+  backMixMode            BackgroundMixMode OPTIONAL,
+  startX                 Coordinate OPTIONAL,
+  startY                 Coordinate OPTIONAL,
+  backgroundColor        Color OPTIONAL,
+  foregroundColor        Color OPTIONAL,
+  extraSpacing           Integer16 OPTIONAL,
+  totalBreakSpacing      Integer16 OPTIONAL,
+  breakCount             Integer16 OPTIONAL,
+  fontHeight             Integer16 OPTIONAL,
+  fontWidth              Integer16 OPTIONAL,
+  fontWeight             Integer16 OPTIONAL,
+  textFlags              TextAttributeFlags OPTIONAL,
+  fontID                 Integer16 OPTIONAL,
+  codePointList          ASString(SIZE (1..255)) OPTIONAL,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+ExtendedTextOrder ::= SEQUENCE {
+  header                 PrimaryOrderHeader,
+  backMixMode            BackgroundMixMode OPTIONAL,
+  startX                 Coordinate OPTIONAL,
+  startY                 Coordinate OPTIONAL,
+  backgroundColor        Color OPTIONAL,
+  foregroundColor        Color OPTIONAL,
+  extraSpacing           Integer16 OPTIONAL,
+  totalBreakSpacing      Integer16 OPTIONAL,
+  breakCount             Integer16 OPTIONAL,
+  fontHeight             Integer16 OPTIONAL,
+  fontWidth              Integer16 OPTIONAL,
+  fontWeight             Integer16 OPTIONAL,
+  textFlags1             TextAttributeFlags OPTIONAL,
+  fontID                 Integer16 OPTIONAL,
+  textFlags2             ExtraTextFlags OPTIONAL,
+  clipLeft               Coordinate OPTIONAL,
+  clipTop                Coordinate OPTIONAL,
+  clipRight              Coordinate OPTIONAL,
+  clipBottom             Coordinate OPTIONAL,
+  codePointList          ASString(SIZE (1..255)) OPTIONAL,
+  deltaXList             SEQUENCE (SIZE (1..127)) OF Coordinate OPTIONAL,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+FrameOrder ::= SEQUENCE {
+  header                 PrimaryOrderHeader,
+  destLeft               Coordinate OPTIONAL,
+  destTop                Coordinate OPTIONAL,
+  destWidth              Coordinate OPTIONAL,
+  destHeight             Coordinate OPTIONAL,
+  rop3                   ROP3 OPTIONAL,
+  backgroundColor        Color OPTIONAL,
+  foregroundColor        Color OPTIONAL,
+  brush                  Brush OPTIONAL,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+RectangleOrder ::= SEQUENCE {
+  header                 PrimaryOrderHeader,
+  backMixMode            BackgroundMixMode OPTIONAL,
+  destLeft               Coordinate OPTIONAL,
+  destTop                Coordinate OPTIONAL,
+  destRight              Coordinate OPTIONAL,
+  destBottom             Coordinate OPTIONAL,
+  backgroundColor        Color OPTIONAL,
+  foregroundColor        Color OPTIONAL,
+  brush                  Brush OPTIONAL,
+  rop2                   ROP2 OPTIONAL,
+  pen                    Pen OPTIONAL,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+OpaqueRectangleOrder ::= SEQUENCE {
+  header                 PrimaryOrderHeader,
+  destLeft               Coordinate OPTIONAL,
+  destTop                Coordinate OPTIONAL,
+  destWidth              Coordinate OPTIONAL,
+  destHeight             Coordinate OPTIONAL,
+  color                  Color OPTIONAL,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+LineOrder ::= SEQUENCE {
+  header                 PrimaryOrderHeader,
+  backMixMode            BackgroundMixMode OPTIONAL,
+  startX                 Coordinate OPTIONAL,
+  startY                 Coordinate OPTIONAL,
+  endX                   Coordinate OPTIONAL,
+  endY                   Coordinate OPTIONAL,
+  backgroundColor        Color OPTIONAL,
+  rop2                   ROP2 OPTIONAL,
+  pen                    Pen OPTIONAL,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+DesktopSaveOrder ::= SEQUENCE {
+  header                 PrimaryOrderHeader,
+  saveOffset             Integer32 OPTIONAL,
+  destLeft               Coordinate OPTIONAL,
+  destTop                Coordinate OPTIONAL,
+  destWidth              Coordinate OPTIONAL,
+  destHeight             Coordinate OPTIONAL,
+  action                 DesktopSaveAction OPTIONAL,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+DesktopOriginOrder ::= SEQUENCE {
+  header                 PrimaryOrderHeader,
+  desktopLeft            Coordinate OPTIONAL,
+  desktopTop             Coordinate OPTIONAL,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+ColorSpaceOrder ::= SEQUENCE {
+  colorSpace             ColorSpaceSpecifier,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+PrimaryOrder ::= CHOICE {
+  destinationBlt           [0]  DestinationBltOrder,
+  patternBlt               [1]  PatternBltOrder,
+  screenBlt                [2]  ScreenBltOrder,
+  memoryBlt                [13]  MemoryBltOrder,
+  memoryThreeWayBlt        [14]  MemoryThreeWayBltOrder,
+  text                     [5]  TextOrder,
+  extendedText             [6]  ExtendedTextOrder,
+  frame                    [9]  FrameOrder,
+  rectangle                [7]  RectangleOrder,
+  line                     [8]  LineOrder,
+  opaqueRectangle          [10]  OpaqueRectangleOrder,
+  desktopSave              [11]  DesktopSaveOrder,
+  desktopOrigin            [32]  DesktopOriginOrder,
+  nonStandardPrimaryOrder  NonStandardParameter,
+  -- Subject to capability negotiation.
+  ...
+}
+
+SecondaryOrder ::= CHOICE {
+  cacheBitmap                [0]  CacheBitmapOrder,
+  cacheColorTable            [1]  CacheColorTableOrder,
+  colorSpaceOrder            [2]  ColorSpaceOrder,
+  nonStandardSecondaryOrder  [3]  NonStandardParameter,
+  -- Subject to capability negotiation.
+  ...
+}
+
+UpdateOrder ::= CHOICE {
+  primaryOrder      PrimaryOrder,
+  secondaryOrder    SecondaryOrder,
+  nonStandardOrder  NonStandardParameter,
+  -- Subject to capability negotiation.
+  ...
+}
+
+--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+--
+--           Begin AS PDU Definitions
+--
+--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+ApplicationPDU ::= SEQUENCE {
+  shareDataHeader        ShareDataHeader,
+  action
+    CHOICE {notifyHostedApplications  [1]  NotifyHostedApplications,
+            unhostApplication         [2]  UnhostApplication,
+            nonStandardAction         NonStandardParameter,
+            -- Subject to capability negotiation.
+            ...},
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+ControlPDU ::= SEQUENCE {
+  shareDataHeader        ShareDataHeader,
+  action
+    CHOICE {requestControl     [1]  RequestControl,
+            grantControl       [2]  GrantControl,
+            detach             [3]  Detach,
+            cooperate          [4]  Cooperate,
+            nonStandardAction  NonStandardParameter,
+            -- Subject to capability negotiation.
+            ...},
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+FlowResponsePDU ::= SEQUENCE {
+  flowIdentifier         INTEGER(0..127),
+  flowNumber             Integer8,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+FlowStopPDU ::= SEQUENCE {
+  flowIdentifier         INTEGER(0..127),
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+FlowTestPDU ::= SEQUENCE {
+  flowIdentifier         INTEGER(0..127),
+  flowNumber             Integer8,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+FontPDU ::= SEQUENCE {
+  shareDataHeader        ShareDataHeader,
+  fontList               SEQUENCE OF FontAttribute,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+InputPDU ::= SEQUENCE {
+  shareDataHeader        ShareDataHeader,
+  eventList              SEQUENCE OF InputEvent,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+MediatedControlPDU ::= SEQUENCE {
+  shareDataHeader        ShareDataHeader,
+  action
+    CHOICE {takeControlRequest        [1]  TakeControlRequest,
+            passControlRequest        [2]  PassControlRequest,
+            detachRequest             [3]  DetachRequest,
+            confirmTakeResponse       [5]  ConfirmTakeResponse,
+            denyTakeResponse          [6]  DenyTakeResponse,
+            confirmDetachResponse     [7]  ConfirmDetachResponse,
+            denyDetachResponse        [8]  DenyDetachResponse,
+            denyPassResponse          [9]  DenyPassResponse,
+            remoteDetachRequest       [10]  RemoteDetachRequest,
+            denyRemoteDetachResponse  [11]  DenyRemoteDetachResponse,
+            nonStandardAction         NonStandardParameter,
+            -- Subject to capability negotiation.
+            ...},
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+PointerPDU ::= SEQUENCE {
+  shareDataHeader        ShareDataHeader,
+  pointerData
+    CHOICE {systemPointerType      [1]  SystemPointerType,
+            monoPointerAttribute   [2]  MonoPointerAttribute,
+            colorPointerAttribute  [6]  ColorPointerAttribute,
+            cachedPointerIndex     [7]  Integer16,
+            pointerPosition        [3]  Point16,
+            nonStandardPointer     NonStandardParameter,
+            -- Subject to capability negotiation.
+            ...},
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+RemoteSharePDU ::= SEQUENCE {
+  shareDataHeader        ShareDataHeader,
+  action
+    CHOICE {requestRemoteShare  [1]  RequestRemoteShare,
+            confirmRemoteShare  [2]  ConfirmRemoteShare,
+            denyRemoteShare     [3]  DenyRemoteShare,
+            nonStandardAction   NonStandardParameter,
+            -- Subject to capability negotiation.
+            ...},
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+SynchronizePDU ::= SEQUENCE {
+  shareDataHeader        ShareDataHeader,
+  targetUser             UserID,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+UpdateBitmapPDU ::= SEQUENCE {
+  shareDataHeader        ShareDataHeader,
+  destLeft               Coordinate16,
+  destTop                Coordinate16,
+  destRight              Coordinate16,
+  destBottom             Coordinate16,
+  width                  Integer16,
+  height                 Integer16,
+  bitsPerPixel           INTEGER(1 | 4 | 8),
+  compressedFlag         BOOLEAN,
+  bitmapData             BitmapData,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+UpdateOrdersPDU ::= SEQUENCE {
+  shareDataHeader        ShareDataHeader,
+  orderList              SEQUENCE OF UpdateOrder,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+UpdatePalettePDU ::= SEQUENCE {
+  shareDataHeader        ShareDataHeader,
+  palette                ColorPalette,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+UpdateSynchronizePDU ::= SEQUENCE {
+  shareDataHeader        ShareDataHeader,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+WindowActivationPDU ::= SEQUENCE {
+  shareDataHeader        ShareDataHeader,
+  action
+    CHOICE {localWindowActive          [1]  LocalWindowActiveIndication,
+            hostedWindowActive         [2]  HostedWindowActiveIndication,
+            hostedWindowInvisible      [3]  HostedWindowInvisibleIndication,
+            pointerDeviceCapture       [4]  PointerDeviceCaptureIndication,
+            activateWindow             [12769]  ActivateWindowRequest,
+            closeWindow                [12770]  CloseWindowRequest,
+            restoreWindow              [12771]  RestoreWindowRequest,
+            windowManagerMenu          [12772]  WindowManagerMenuRequest,
+            activationHelpKey          [12785]  ActivationHelpKeyRequest,
+            activationHelpIndexKey     [12786]  ActivationHelpIndexKeyRequest,
+            activationHelpExtendedKey
+              [12787]  ActivationHelpExtendedKeyRequest,
+            nonStandardAction          NonStandardParameter,
+            -- Subject to capability negotiation.
+            ...},
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+WindowListPDU ::= SEQUENCE {
+  shareDataHeader        ShareDataHeader,
+  listTime               Integer16,
+  listID                 Integer16,
+  windowAttributeList    SEQUENCE OF WindowAttribute,
+  windowTitleList        SEQUENCE OF WindowTitle,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  -- Subject to capability negotiation.
+  ...
+}
+
+ASNonStandardPDU ::= SEQUENCE {
+  nonStandardParameter  NonStandardParameter,
+  -- Subject to capability negotiation.
+  ...
+}
+
+SharePDU ::= CHOICE {
+  applicationPDU        [25]  ApplicationPDU,
+  controlPDU            [20]  ControlPDU,
+  flowResponsePDU       [66]  FlowResponsePDU,
+  flowStopPDU           [67]  FlowStopPDU,
+  flowTestPDU           [65]  FlowTestPDU,
+  fontPDU               [11]  FontPDU,
+  inputPDU              [28]  InputPDU,
+  mediatedControlPDU    [29]  MediatedControlPDU,
+  pointerPDU            [27]  PointerPDU,
+  remoteSharePDU        [30]  RemoteSharePDU,
+  synchronizePDU        [31]  SynchronizePDU,
+  updateBitmapPDU       [1]  UpdateBitmapPDU,
+  updateOrdersPDU       [0]  UpdateOrdersPDU,
+  updateSynchronizePDU  [3]  UpdateSynchronizePDU,
+  updatePalettePDU      [2]  UpdatePalettePDU,
+  windowActivationPDU   [23]  WindowActivationPDU,
+  windowListPDU         [24]  WindowListPDU,
+  asNonStandardPDU      ASNonStandardPDU,
+  ...
+}
+
+--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+--
+--                        End AS Definitions
+--
+--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+END
+
+-- Generated by Asnp, the ASN.1 pretty-printer of France Telecom R&D 

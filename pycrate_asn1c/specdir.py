@@ -88,6 +88,10 @@ ASN_SPECS_ITUT = {
     'X509'      : 'ITUT_X509_2012-10',
     'X509_2016' : 'ITUT_X509_2016-10',
     'X520'      : 'ITUT_X520_2016-10',
+    # teleconferencing
+    'T124'      : 'ITUT_T124_2007-01',
+    'T125'      : 'ITUT_T125_1998-02',
+    'T128'      : 'ITUT_T128_1998-02'
     }
 
 # IETF specs

@@ -1,0 +1,5 @@
+# downloaded from ITU-T ASN.1 module database
+# https://www.itu.int/ITU-T/recommendations/rec.aspx?rec=4220&lang=en
+MCS-PROTOCOL.asn
+MCS-PROTOCOL-3.asn
+MAP-PROTOCOL.asn
