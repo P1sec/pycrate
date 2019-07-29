@@ -57,7 +57,7 @@ class PacketCmdSMSPP(Envelope):
         )
     
     def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, *kwargs)
+        Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: 1 + self[1]() + self[-1].get_len())
         self[1].set_valauto(lambda: 13 + self[-2].get_len())
         self[-2].set_blauto(lambda: max(0, self[1]() - 13))
@@ -77,7 +77,7 @@ class PacketRespSMSPP(Envelope):
         )
     
     def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, *kwargs)
+        Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: 1 + self[1]() + self[-1].get_len())
         self[1].set_valauto(lambda: 10 + self[-2].get_len())
         self[-2].set_blauto(lambda: max(0, self[1]() - 10))
