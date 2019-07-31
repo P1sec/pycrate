@@ -272,7 +272,7 @@ MCC_dict = {
  '746': ('+597', 'SR', 'Suriname'),
  '748': ('+598', 'UY', 'Uruguay'),
  '750': ('+500', 'FK', 'Falkland Islands (Malvinas)'),
- '901': ('+882', 'N/A', 'International Networks')
+ '901': ('+882', 'Intl', 'International Networks')
  }
 
 
@@ -1945,11 +1945,11 @@ MNC_dict = {
  '74807': ('+598', 'UY', 'Uruguay', 'MOVISTAR'),
  '74810': ('+598', 'UY', 'Uruguay', 'Claro/AM Wireless'),
  '750001': ('+500', 'FK', 'Falkland Islands (Malvinas)', 'Cable and Wireless South Atlantic Ltd (Falkland Islands'),
- '90105': ('+870', 'N/A', 'Satellite Networks', 'Thuraya Satellite'),
- '90111': ('+870', 'N/A', 'Satellite Networks', 'InMarSAT'),
- '90112': ('+870', 'N/A', 'Satellite Networks', 'Maritime Communications Partner AS'),
- '90113': ('+882', 'N/A', 'International Networks', 'Antarctica'),
- '90114': ('+870', 'N/A', 'Satellite Networks', 'AeroMobile')
+ '90105': ('+870', 'Intl', 'Satellite Networks', 'Thuraya Satellite'),
+ '90111': ('+870', 'Intl', 'Satellite Networks', 'InMarSAT'),
+ '90112': ('+870', 'Intl', 'Satellite Networks', 'Maritime Communications Partner AS'),
+ '90113': ('+882', 'Intl', 'International Networks', 'Antarctica'),
+ '90114': ('+870', 'Intl', 'Satellite Networks', 'AeroMobile')
 }
 
 MCCr_dict = {
