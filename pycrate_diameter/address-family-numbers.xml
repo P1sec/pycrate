@@ -1,0 +1,330 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="address-family-numbers.xsl"?>
+<?oxygen RNGSchema="address-family-numbers.rng" type="xml"?>
+<registry xmlns="http://www.iana.org/assignments" id="address-family-numbers">
+  <title>Address Family Numbers</title>
+  <updated>2018-04-02</updated>
+  <registry id="address-family-numbers-2">
+    <title>Address Family Numbers</title>
+    <xref type="rfc" data="rfc2453"/>
+    <xref type="rfc" data="rfc2677"/>
+    <xref type="rfc" data="rfc2858"/>
+    <note>Registrations also appear in <xref type="registry" data="ianaaddressfamilynumbers-mib">ianaaddressfamilynumbers-mib</xref>.
+    </note>
+    <note>When this registry is modified, the YANG module <xref type="registry" data="iana-routing-types">iana-routing-types</xref> 
+must be updated as defined in <xref type="rfc" data="rfc8294"/>.
+    </note>
+    <range>
+      <value>1-16383</value>
+      <registration_rule>Standards Action</registration_rule>
+    </range>
+    <range>
+      <value>16384-32767</value>
+      <registration_rule>First Come First Served</registration_rule>
+    </range>
+    <record>
+      <value>0</value>
+      <description>Reserved</description>
+      <registration/>
+    </record>
+    <record>
+      <value>1</value>
+      <description>IP (IP version 4)</description>
+      <registration/>
+    </record>
+    <record>
+      <value>2</value>
+      <description>IP6 (IP version 6)</description>
+      <registration/>
+    </record>
+    <record>
+      <value>3</value>
+      <description>NSAP</description>
+      <registration/>
+    </record>
+    <record>
+      <value>4</value>
+      <description>HDLC (8-bit multidrop)</description>
+      <registration/>
+    </record>
+    <record>
+      <value>5</value>
+      <description>BBN 1822</description>
+      <registration/>
+    </record>
+    <record>
+      <value>6</value>
+      <description>802 (includes all 802 media plus Ethernet "canonical format")</description>
+      <registration/>
+    </record>
+    <record>
+      <value>7</value>
+      <description>E.163</description>
+      <registration/>
+    </record>
+    <record>
+      <value>8</value>
+      <description>E.164 (SMDS, Frame Relay, ATM)</description>
+      <registration/>
+    </record>
+    <record>
+      <value>9</value>
+      <description>F.69 (Telex)</description>
+      <registration/>
+    </record>
+    <record>
+      <value>10</value>
+      <description>X.121 (X.25, Frame Relay)</description>
+      <registration/>
+    </record>
+    <record>
+      <value>11</value>
+      <description>IPX</description>
+      <registration/>
+    </record>
+    <record>
+      <value>12</value>
+      <description>Appletalk</description>
+      <registration/>
+    </record>
+    <record>
+      <value>13</value>
+      <description>Decnet IV</description>
+      <registration/>
+    </record>
+    <record>
+      <value>14</value>
+      <description>Banyan Vines</description>
+      <registration/>
+    </record>
+    <record date="1995-10">
+      <value>15</value>
+      <description>E.164 with NSAP format subaddress</description>
+      <xref type="text">ATM Forum UNI 3.1. October 1995.</xref>
+      <xref type="person" data="Andy_Malis"/>
+      <registration/>
+    </record>
+    <record>
+      <value>16</value>
+      <description>DNS (Domain Name System)</description>
+      <registration/>
+    </record>
+    <record date="2000-03">
+      <value>17</value>
+      <description>Distinguished Name</description>
+      <xref type="person" data="Charles_Lynn"/>
+      <registration/>
+    </record>
+    <record date="2000-03">
+      <value>18</value>
+      <description>AS Number</description>
+      <xref type="person" data="Charles_Lynn"/>
+      <registration/>
+    </record>
+    <record date="2000-09">
+      <value>19</value>
+      <description>XTP over IP version 4</description>
+      <xref type="person" data="Mike_Saul"/>
+      <registration/>
+    </record>
+    <record date="2000-09">
+      <value>20</value>
+      <description>XTP over IP version 6</description>
+      <xref type="person" data="Mike_Saul"/>
+      <registration/>
+    </record>
+    <record date="2000-09">
+      <value>21</value>
+      <description>XTP native mode XTP</description>
+      <xref type="person" data="Mike_Saul"/>
+      <registration/>
+    </record>
+    <record date="2002-03">
+      <value>22</value>
+      <description>Fibre Channel World-Wide Port Name</description>
+      <xref type="person" data="Mark_Bakke"/>
+      <registration/>
+    </record>
+    <record date="2002-03">
+      <value>23</value>
+      <description>Fibre Channel World-Wide Node Name</description>
+      <xref type="person" data="Mark_Bakke"/>
+      <registration/>
+    </record>
+    <record date="2002-03">
+      <value>24</value>
+      <description>GWID</description>
+      <xref type="person" data="Subra_Hegde"/>
+      <registration/>
+    </record>
+    <record>
+      <value>25</value>
+      <description>AFI for L2VPN information</description>
+      <xref type="rfc" data="rfc4761"/>
+      <xref type="rfc" data="rfc6074"/>
+      <registration/>
+    </record>    
+    <record>
+      <value>26</value>
+      <description>MPLS-TP Section Endpoint Identifier</description>
+      <xref type="rfc" data="rfc7212"/>
+      <registration/>
+    </record>    
+    <record>
+      <value>27</value>
+      <description>MPLS-TP LSP Endpoint Identifier</description>
+      <xref type="rfc" data="rfc7212"/>
+      <registration/>
+    </record>    
+    <record>
+      <value>28</value>
+      <description>MPLS-TP Pseudowire Endpoint Identifier</description>
+      <xref type="rfc" data="rfc7212"/>
+      <registration/>
+    </record>
+    <record date="2014-04-29">
+      <value>29</value>
+      <description>MT IP: Multi-Topology IP version 4</description>
+      <xref type="rfc" data="rfc7307"/>
+      <registration/>
+    </record>
+    <record date="2014-04-29">
+      <value>30</value>
+      <description>MT IPv6: Multi-Topology IP version 6</description>
+      <xref type="rfc" data="rfc7307"/>
+      <registration/>
+    </record>
+    <record>
+      <value>31-16383</value>
+      <description>Unassigned</description>
+      
+      <registration/>
+    </record>
+    <record date="2008-05-13">
+      <value>16384</value>
+      <description>EIGRP Common Service Family</description>
+      <xref type="person" data="Donnie_Savage"/>
+      <registration>2008-05-13</registration>
+    </record>
+    <record date="2008-05-13">
+      <value>16385</value>
+      <description>EIGRP IPv4 Service Family</description>
+      <xref type="person" data="Donnie_Savage"/>
+      <registration>2008-05-13</registration>
+    </record>
+    <record date="2008-05-13">
+      <value>16386</value>
+      <description>EIGRP IPv6 Service Family</description>
+      <xref type="person" data="Donnie_Savage"/>
+      <registration>2008-05-13</registration>
+    </record>
+    <record date="2009-11-12">
+      <value>16387</value>
+      <description>LISP Canonical Address Format (LCAF)</description>
+      <xref type="person" data="David_Meyer"/>
+      <registration>2009-11-12</registration>
+    </record>    
+    <record date="2013-03-20" updated="2016-03-22">
+      <value>16388</value>
+      <description>BGP-LS</description>
+      <xref type="rfc" data="rfc7752"/>
+      <registration>2013-03-20</registration>
+    </record>    
+    <record date="2013-05-06">
+      <value>16389</value>
+      <description>48-bit MAC</description>
+      <xref type="rfc" data="rfc7042"/>
+      <registration>2013-05-06</registration>
+    </record>    
+    <record date="2013-05-06">
+      <value>16390</value>
+      <description>64-bit MAC</description>
+      <xref type="rfc" data="rfc7042"/>
+      <registration>2013-05-06</registration>
+    </record>    
+    <record date="2013-09-25">
+      <value>16391</value>
+      <description>OUI</description>
+      <xref type="rfc" data="rfc7961"/>
+      <registration>2013-09-25</registration>
+    </record>    
+    <record date="2013-09-25">
+      <value>16392</value>
+      <description>MAC/24</description>
+      <xref type="rfc" data="rfc7961"/>
+      <registration>2013-09-25</registration>
+    </record>    
+    <record date="2013-09-25">
+      <value>16393</value>
+      <description>MAC/40</description>
+      <xref type="rfc" data="rfc7961"/>
+      <registration>2013-09-25</registration>
+    </record>    
+    <record date="2013-09-25">
+      <value>16394</value>
+      <description>IPv6/64</description>
+      <xref type="rfc" data="rfc7961"/>
+      <registration>2013-09-25</registration>
+    </record>    
+    <record date="2013-09-25">
+      <value>16395</value>
+      <description>RBridge Port ID</description>
+      <xref type="rfc" data="rfc7961"/>
+      <registration>2013-09-25</registration>
+    </record>
+    <record date="2014-09-02" updated="2014-11-07">
+      <value>16396</value>
+      <description>TRILL Nickname</description>
+      <xref type="rfc" data="rfc7455"/>
+      <registration>2014-09-02</registration>
+    </record>
+    <record>
+      <value>16397-65534</value>
+      <description>Unassigned</description>
+      
+      <registration/>
+    </record>
+    <record>
+      <value>65535</value>
+      <description>Reserved</description>
+      <registration/>
+    </record>
+  </registry>
+  <people>
+    <person id="Andy_Malis">
+      <name>Andy Malis</name>
+      <uri>mailto:agmalis&amp;gmail.com</uri>
+      <updated>2013-05-28</updated>
+    </person>
+    <person id="Charles_Lynn">
+      <name>Charles Lynn</name>
+      <uri>mailto:clynn&amp;bbn.com</uri>
+      <updated>2000-03</updated>
+    </person>
+    <person id="David_Meyer">
+      <name>David Meyer</name>
+      <uri>mailto:dmm&amp;1-4-5.net</uri>
+      <updated>2009-11-12</updated>
+    </person>
+    <person id="Donnie_Savage">
+      <name>Donnie Savage</name>
+      <uri>mailto:dsavage&amp;cisco.com</uri>
+      <updated>2008-05-13</updated>
+    </person>
+    <person id="Mark_Bakke">
+      <name>Mark Bakke</name>
+      <uri>mailto:mbakke&amp;cisco.com</uri>
+      <updated>2002-03</updated>
+    </person>
+    <person id="Mike_Saul">
+      <name>Mike Saul</name>
+      <uri>mailto:mike&amp;nentat.com</uri>
+      <updated>2000-09</updated>
+    </person>
+    <person id="Subra_Hegde">
+      <name>Subra Hegde</name>
+      <uri>mailto:subrah&amp;cisco.com</uri>
+      <updated>2002-03</updated>
+    </person>
+  </people>
+</registry>

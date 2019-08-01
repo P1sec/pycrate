@@ -1,0 +1,5955 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="aaa-parameters.xsl"?>
+<?oxygen RNGSchema="aaa-parameters.rng" type="xml"?>
+<registry xmlns="http://www.iana.org/assignments" id="aaa-parameters">
+  <title>Authentication, Authorization, and Accounting (AAA) Parameters</title>
+  <category>Authentication, Authorization, and Accounting (AAA) Parameters</category>
+  <created>2003-04-08</created>
+  <updated>2019-07-12</updated>
+  
+  
+  <registry id="aaa-parameters-1">
+    <title>AVP Codes</title>
+    <xref type="rfc" data="rfc6733"/>
+    <range>
+      <value>block allocation (release of more than three AVPs at a time for a given purpose)</value>
+      <registration_rule>IETF Review</registration_rule>
+    </range>
+    <range>
+      <value>other allocation</value>
+      <registration_rule>Specification Required</registration_rule>
+    </range>
+    <expert>Lionel Morand (primary) and Jouni Korhonen (secondary)</expert>
+    <record>
+      <code>1-255</code>
+      <name>Radius attributes</name>
+      <xref type="uri" data="http://www.iana.org/assignments/radius-types"/>
+    </record>
+    <record>
+      <code>256</code>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <code>257</code>
+      <name>Host-IP-Address</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>258</code>
+      <name>Auth-Application-Id</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>259</code>
+      <name>Acct-Application-Id</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>260</code>
+      <name>Vendor-Specific-Application-Id</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>261</code>
+      <name>Redirect-Host-Usage</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>262</code>
+      <name>Redirect-Max-Cache-Time</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>263</code>
+      <name>Session-Id</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>264</code>
+      <name>Origin-Host</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>265</code>
+      <name>Supported-Vendor-Id</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>266</code>
+      <name>Vendor-Id</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>267</code>
+      <name>Firmware-Version</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>268</code>
+      <name>Result-Code</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>269</code>
+      <name>Product-Name</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>270</code>
+      <name>Session-Binding</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>271</code>
+      <name>Session-Server-Failover</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>272</code>
+      <name>Multi-Round-Time-Out</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>273</code>
+      <name>Disconnect-Cause</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>274</code>
+      <name>Auth-Request-Type</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>276</code>
+      <name>Auth-Grace-Period</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>277</code>
+      <name>Auth-Session-State</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>278</code>
+      <name>Origin-State-Id</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>279</code>
+      <name>Failed-AVP</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>280</code>
+      <name>Proxy-Host</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>281</code>
+      <name>Error-Message</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>282</code>
+      <name>Route-Record</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>283</code>
+      <name>Destination-Realm</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>284</code>
+      <name>Proxy-Info</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>285</code>
+      <name>Re-Auth-Request-Type</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>286</code>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <code>287</code>
+      <name>Accounting-Sub-Session-Id</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>288-290</code>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <code>291</code>
+      <name>Authorization-Lifetime</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>292</code>
+      <name>Redirect-Host</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>293</code>
+      <name>Destination-Host</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>294</code>
+      <name>Error-Reporting-Host</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>295</code>
+      <name>Termination-Cause</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>296</code>
+      <name>Origin-Realm</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>297</code>
+      <name>Experimental-Result</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>298</code>
+      <name>Experimental-Result-Code</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>299</code>
+      <name>Inband-Security-Id</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>300</code>
+      <name>E2E-Sequence</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record date="2016-07-08">
+      <code>301</code>
+      <name>DRMP</name>
+      <xref type="rfc" data="rfc7944"/>
+    </record>
+    <record>
+      <code>302-317</code>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <code>318</code>
+      <name>MIP-FA-to-HA-SPI</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>319</code>
+      <name>MIP-FA-to-MN-SPI</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>320</code>
+      <name>MIP-Reg-Request</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>321</code>
+      <name>MIP-Reg-Reply</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>322</code>
+      <name>MIP-MN-AAA-Auth</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>323</code>
+      <name>MIP-HA-to-FA-SPI</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>324</code>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <code>325</code>
+      <name>MIP-MN-to-FA-MSA</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>326</code>
+      <name>MIP-FA-to-MN-MSA</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>327</code>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <code>328</code>
+      <name>MIP-FA-to-HA-MSA</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>329</code>
+      <name>MIP-HA-to-FA-MSA</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>331</code>
+      <name>MIP-MN-to-HA-MSA</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>332</code>
+      <name>MIP-HA-to-MN-MSA</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>333</code>
+      <name>MIP-Mobile-Node-Address</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>334</code>
+      <name>MIP-Home-Agent-Address</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>335</code>
+      <name>MIP-Nonce</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>336</code>
+      <name>MIP-Candidate-Home-Agent-Host</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>337</code>
+      <name>MIP-Feature-Vector</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>338</code>
+      <name>MIP-Auth-Input-Data-Length</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>339</code>
+      <name>MIP-Authenticator-Length</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>340</code>
+      <name>MIP-Authenticator-Offset</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>341</code>
+      <name>MIP-MN-AAA-SPI</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>342</code>
+      <name>MIP-Filter-Rule</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>343</code>
+      <name>MIP-Session-Key</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>344</code>
+      <name>MIP-FA-Challenge</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>345</code>
+      <name>MIP-Algorithm-Type</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>346</code>
+      <name>MIP-Replay-Mode</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>347</code>
+      <name>MIP-Originating-Foreign-AAA</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>348</code>
+      <name>MIP-Home-Agent-Host</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>349-362</code>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <code>363</code>
+      <name>Accounting-Input-Octets</name>
+      <xref type="rfc" data="rfc7155"/>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>364</code>
+      <name>Accounting-Output-Octets</name>
+      <xref type="rfc" data="rfc7155"/>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>365</code>
+      <name>Accounting-Input-Packets</name>
+      <xref type="rfc" data="rfc7155"/>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>366</code>
+      <name>Accounting-Output-Packets</name>
+      <xref type="rfc" data="rfc7155"/>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>367</code>
+      <name>MIP-MSA-Lifetime</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <code>368</code>
+      <name>SIP-Accounting-Information</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>369</code>
+      <name>SIP-Accounting-Server-URI</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>370</code>
+      <name>SIP-Credit-Control-Server-URI</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>371</code>
+      <name>SIP-Server-URI</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>372</code>
+      <name>SIP-Server-Capabilities</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>373</code>
+      <name>SIP-Mandatory-Capability</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>374</code>
+      <name>SIP-Optional-Capability</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>375</code>
+      <name>SIP-Server-Assignment-Type</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>376</code>
+      <name>SIP-Auth-Data-Item</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>377</code>
+      <name>SIP-Authentication-Scheme</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>378</code>
+      <name>SIP-Item-Number</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>379</code>
+      <name>SIP-Authenticate</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>380</code>
+      <name>SIP-Authorization</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>381</code>
+      <name>SIP-Authentication-Info</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>382</code>
+      <name>SIP-Number-Auth-Items</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>383</code>
+      <name>SIP-Deregistration-Reason</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>384</code>
+      <name>SIP-Reason-Code</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>385</code>
+      <name>SIP-Reason-Info</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>386</code>
+      <name>SIP-Visited-Network-Id</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>387</code>
+      <name>SIP-User-Authorization-Type</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>388</code>
+      <name>SIP-Supported-User-Data-Type</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>389</code>
+      <name>SIP-User-Data</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>390</code>
+      <name>SIP-User-Data-Type</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>391</code>
+      <name>SIP-User-Data-Contents</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>392</code>
+      <name>SIP-User-Data-Already-Available</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>393</code>
+      <name>SIP-Method</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <code>394-399</code>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <code>400</code>
+      <name>NAS-Filter-Rule</name>
+      <xref type="rfc" data="rfc7155"/>
+    </record>
+    <record>
+      <code>401</code>
+      <name>Tunneling</name>
+      <xref type="rfc" data="rfc7155"/>
+    </record>
+    <record>
+      <code>402</code>
+      <name>CHAP-Auth</name>
+      <xref type="rfc" data="rfc7155"/>
+    </record>
+    <record>
+      <code>403</code>
+      <name>CHAP-Algorithm</name>
+      <xref type="rfc" data="rfc7155"/>
+    </record>
+    <record>
+      <code>404</code>
+      <name>CHAP-Ident</name>
+      <xref type="rfc" data="rfc7155"/>
+    </record>
+    <record>
+      <code>405</code>
+      <name>CHAP-Response</name>
+      <xref type="rfc" data="rfc7155"/>
+    </record>
+    <record>
+      <code>406</code>
+      <name>Accounting-Auth-Method</name>
+      <xref type="rfc" data="rfc7155"/>
+    </record>
+    <record>
+      <code>407</code>
+      <name>QoS-Filter-Rule</name>
+      <xref type="rfc" data="rfc7155"/>
+    </record>
+    <record>
+      <code>408</code>
+      <name>Origin-AAA-Protocol</name>
+      <xref type="rfc" data="rfc7155"/>
+    </record>
+    <record>
+      <code>409-410</code>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <code>411</code>
+      <name>CC-Correlation-Id</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>412</code>
+      <name>CC-Input-Octets</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>413</code>
+      <name>CC-Money</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>414</code>
+      <name>CC-Output-Octets</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>415</code>
+      <name>CC-Request-Number</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>416</code>
+      <name>CC-Request-Type</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>417</code>
+      <name>CC-Service-Specific-Units</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>418</code>
+      <name>CC-Session-Failover</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>419</code>
+      <name>CC-Sub-Session-Id</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>420</code>
+      <name>CC-Time</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>421</code>
+      <name>CC-Total-Octets</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>422</code>
+      <name>Check-Balance-Result</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>423</code>
+      <name>Cost-Information</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>424</code>
+      <name>Cost-Unit</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>425</code>
+      <name>Currency-Code</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>426</code>
+      <name>Credit-Control</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>427</code>
+      <name>Credit-Control-Failure-Handling</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>428</code>
+      <name>Direct-Debiting-Failure-Handling</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>429</code>
+      <name>Exponent</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>430</code>
+      <name>Final-Unit-Indication</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>431</code>
+      <name>Granted-Service-Unit</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>432</code>
+      <name>Rating-Group</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>433</code>
+      <name>Redirect-Address-Type</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>434</code>
+      <name>Redirect-Server</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>435</code>
+      <name>Redirect-Server-Address</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>436</code>
+      <name>Requested-Action</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>437</code>
+      <name>Requested-Service-Unit</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>438</code>
+      <name>Restriction-Filter-Rule</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>439</code>
+      <name>Service-Identifier</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>440</code>
+      <name>Service-Parameter-Info</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>441</code>
+      <name>Service-Parameter-Type</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>442</code>
+      <name>Service-Parameter-Value</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>443</code>
+      <name>Subscription-Id</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>444</code>
+      <name>Subscription-Id-Data</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>445</code>
+      <name>Unit-Value</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>446</code>
+      <name>Used-Service-Unit</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>447</code>
+      <name>Value-Digits</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>448</code>
+      <name>Validity-Time</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>449</code>
+      <name>Final-Unit-Action</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>450</code>
+      <name>Subscription-Id-Type</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>451</code>
+      <name>Tariff-Time-Change</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>452</code>
+      <name>Tariff-Change-Usage</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>453</code>
+      <name>G-S-U-Pool-Identifier</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>454</code>
+      <name>CC-Unit-Type</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>455</code>
+      <name>Multiple-Services-Indicator</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>456</code>
+      <name>Multiple-Services-Credit-Control</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>457</code>
+      <name>G-S-U-Pool-Reference</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>458</code>
+      <name>User-Equipment-Info</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>459</code>
+      <name>User-Equipment-Info-Type</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>460</code>
+      <name>User-Equipment-Info-Value</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>461</code>
+      <name>Service-Context-Id</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <code>462</code>
+      <name>EAP-Payload</name>
+      <xref type="rfc" data="rfc4072"/>
+    </record>
+    <record>
+      <code>463</code>
+      <name>EAP-Reissued-Payload</name>
+      <xref type="rfc" data="rfc4072"/>
+    </record>
+    <record>
+      <code>464</code>
+      <name>EAP-Master-Session-Key</name>
+      <xref type="rfc" data="rfc4072"/>
+    </record>
+    <record>
+      <code>465</code>
+      <name>Accounting-EAP-Auth-Method</name>
+      <xref type="rfc" data="rfc4072"/>
+    </record>
+    <record>
+      <code>466-479</code>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <code>480</code>
+      <name>Accounting-Record-Type</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>481-482</code>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <code>483</code>
+      <name>Accounting-Realtime-Required</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>484</code>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <code>485</code>
+      <name>Accounting-Record-Number</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <code>486</code>
+      <name>MIP6-Agent-Info</name>
+      <xref type="rfc" data="rfc5447"/>
+    </record>
+    <record>
+      <code>487</code>
+      <name>MIP-Careof-Address</name>
+      <xref type="rfc" data="rfc5778"/>
+    </record>
+    <record>
+      <code>488</code>
+      <name>MIP-Authenticator</name>
+      <xref type="rfc" data="rfc5778"/>
+    </record>
+    <record>
+      <code>489</code>
+      <name>MIP-MAC-Mobility-Data</name>
+      <xref type="rfc" data="rfc5778"/>
+    </record>
+    <record>
+      <code>490</code>
+      <name>MIP-Timestamp</name>
+      <xref type="rfc" data="rfc5778"/>
+    </record>
+    <record>
+      <code>491</code>
+      <name>MIP-MN-HA-SPI</name>
+      <xref type="rfc" data="rfc5778"/>
+    </record>
+    <record>
+      <code>492</code>
+      <name>MIP-MN-HA-MSA</name>
+      <xref type="rfc" data="rfc5778"/>
+    </record>
+    <record>
+      <code>493</code>
+      <name>Service-Selection</name>
+      <xref type="rfc" data="rfc5778"/>
+    </record>
+    <record>
+      <code>494</code>
+      <name>MIP6-Auth-Mode</name>
+      <xref type="rfc" data="rfc5778"/>
+    </record>
+    <record>
+      <code>495</code>
+      <name>TMOD-1</name>
+      <xref type="rfc" data="rfc5624"/>
+    </record>
+    <record>
+      <code>496</code>
+      <name>Token-Rate</name>
+      <xref type="rfc" data="rfc5624"/>
+    </record>
+    <record>
+      <code>497</code>
+      <name>Bucket-Depth</name>
+      <xref type="rfc" data="rfc5624"/>
+    </record>
+    <record>
+      <code>498</code>
+      <name>Peak-Traffic-Rate</name>
+      <xref type="rfc" data="rfc5624"/>
+    </record>
+    <record>
+      <code>499</code>
+      <name>Minimum-Policed-Unit</name>
+      <xref type="rfc" data="rfc5624"/>
+    </record>
+    <record>
+      <code>500</code>
+      <name>Maximum-Packet-Size</name>
+      <xref type="rfc" data="rfc5624"/>
+    </record>
+    <record>
+      <code>501</code>
+      <name>TMOD-2</name>
+      <xref type="rfc" data="rfc5624"/>
+    </record>
+    <record>
+      <code>502</code>
+      <name>Bandwidth</name>
+      <xref type="rfc" data="rfc5624"/>
+    </record>
+    <record>
+      <code>503</code>
+      <name>PHB-Class</name>
+      <xref type="rfc" data="rfc5624"/>
+    </record>
+    <record>
+      <code>504</code>
+      <name>PMIP6-DHCP-Server-Address</name>
+      <xref type="rfc" data="rfc5779"/>
+    </record>
+    <record>
+      <code>505</code>
+      <name>PMIP6-IPv4-Home-Address</name>
+      <xref type="rfc" data="rfc5779"/>
+    </record>
+    <record>
+      <code>506</code>
+      <name>Mobile-Node-Identifier</name>
+      <xref type="rfc" data="rfc5779"/>
+    </record>
+    <record>
+      <code>507</code>
+      <name>Service-Configuration</name>
+      <xref type="rfc" data="rfc5779"/>
+    </record>
+    <record>
+      <code>508</code>
+      <name>QoS-Resources</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>509</code>
+      <name>Filter-Rule</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>510</code>
+      <name>Filter-Rule-Precedence</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>511</code>
+      <name>Classifier</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>512</code>
+      <name>Classifier-ID</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>513</code>
+      <name>Protocol</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>514</code>
+      <name>Direction</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>515</code>
+      <name>From-Spec</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>516</code>
+      <name>To-Spec</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>517</code>
+      <name>Negated</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>518</code>
+      <name>IP-Address</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>519</code>
+      <name>IP-Address-Range</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>520</code>
+      <name>IP-Address-Start</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>521</code>
+      <name>IP-Address-End</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>522</code>
+      <name>IP-Address-Mask</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>523</code>
+      <name>IP-Mask-Bit-Mask-Width</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>524</code>
+      <name>MAC-Address</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>525</code>
+      <name>MAC-Address-Mask</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>526</code>
+      <name>MAC-Address-Mask-Pattern</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>527</code>
+      <name>EUI64-Address</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>528</code>
+      <name>EUI64-Address-Mask</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>529</code>
+      <name>EUI64-Address-Mask-Pattern</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>530</code>
+      <name>Port</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>531</code>
+      <name>Port-Range</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>532</code>
+      <name>Port-Start</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>533</code>
+      <name>Port-End</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>534</code>
+      <name>Use-Assigned-Address</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>535</code>
+      <name>Diffserv-Code-Point</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>536</code>
+      <name>Fragmentation-Flag</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>537</code>
+      <name>IP-Option</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>538</code>
+      <name>IP-Option-Type</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>539</code>
+      <name>IP-Option-Value</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>540</code>
+      <name>TCP-Option</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>541</code>
+      <name>TCP-Option-Type</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>542</code>
+      <name>TCP-Option-Value</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>543</code>
+      <name>TCP-Flags</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>544</code>
+      <name>TCP-Flag-Type</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>545</code>
+      <name>ICMP-Type</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>546</code>
+      <name>ICMP-Type-Number</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>547</code>
+      <name>ICMP-Code</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>548</code>
+      <name>ETH-Option</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>549</code>
+      <name>ETH-Proto-Type</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>550</code>
+      <name>ETH-Ether-Type</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>551</code>
+      <name>ETH-SAP</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>552</code>
+      <name>VLAN-ID-Range</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>553</code>
+      <name>S-VID-Start</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>554</code>
+      <name>S-VID-End</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>555</code>
+      <name>C-VID-Start</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>556</code>
+      <name>C-VID-End</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>557</code>
+      <name>User-Priority-Range</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>558</code>
+      <name>Low-User-Priority</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>559</code>
+      <name>High-User-Priority</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>560</code>
+      <name>Time-Of-Day-Condition</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>561</code>
+      <name>Time-Of-Day-Start</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>562</code>
+      <name>Time-Of-Day-End</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>563</code>
+      <name>Day-Of-Week-Mask</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>564</code>
+      <name>Day-Of-Month-Mask</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>565</code>
+      <name>Month-Of-Year-Mask</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>566</code>
+      <name>Absolute-Start-Time</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>567</code>
+      <name>Absolute-Start-Fractional-Seconds</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>568</code>
+      <name>Absolute-End-Time</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>569</code>
+      <name>Absolute-End-Fractional-Seconds</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>570</code>
+      <name>Timezone-Flag</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>571</code>
+      <name>Timezone-Offset</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>572</code>
+      <name>Treatment-Action</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>573</code>
+      <name>QoS-Profile-Id</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>574</code>
+      <name>QoS-Profile-Template</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>575</code>
+      <name>QoS-Semantics</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>576</code>
+      <name>QoS-Parameters</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>577</code>
+      <name>Excess-Treatment</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>578</code>
+      <name>QoS-Capability</name>
+      <xref type="rfc" data="rfc5777"/>
+    </record>
+    <record>
+      <code>579</code>
+      <name>QoS-Authorization-Data</name>
+      <xref type="rfc" data="rfc5866"/>
+    </record>
+    <record>
+      <code>580</code>
+      <name>Bound-Auth-Session-Id</name>
+      <xref type="rfc" data="rfc5866"/>
+    </record>
+    <record>
+      <code>581</code>
+      <name>Key</name>
+      <xref type="rfc" data="rfc6734"/>
+    </record>
+    <record>
+      <code>582</code>
+      <name>Key-Type</name>
+      <xref type="rfc" data="rfc6734"/>
+    </record>
+    <record>
+      <code>583</code>
+      <name>Keying-Material</name>
+      <xref type="rfc" data="rfc6734"/>
+    </record>
+    <record>
+      <code>584</code>
+      <name>Key-Lifetime</name>
+      <xref type="rfc" data="rfc6734"/>
+    </record>
+    <record>
+      <code>585</code>
+      <name>Key-SPI</name>
+      <xref type="rfc" data="rfc6734"/>
+    </record>
+    <record>
+      <code>586</code>
+      <name>Key-Name</name>
+      <xref type="rfc" data="rfc6734"/>
+    </record>
+    <record>
+      <code>587</code>
+      <name>IKEv2-Nonces</name>
+      <xref type="rfc" data="rfc6738"/>
+    </record>
+    <record>
+      <code>588</code>
+      <name>Ni</name>
+      <xref type="rfc" data="rfc6738"/>
+    </record>
+    <record>
+      <code>589</code>
+      <name>Nr</name>
+      <xref type="rfc" data="rfc6738"/>
+    </record>
+    <record>
+      <code>590</code>
+      <name>IKEv2-Identity</name>
+      <xref type="rfc" data="rfc6738"/>
+    </record>
+    <record>
+      <code>591</code>
+      <name>Initiator-Identity</name>
+      <xref type="rfc" data="rfc6738"/>
+    </record>
+    <record>
+      <code>592</code>
+      <name>ID-Type</name>
+      <xref type="rfc" data="rfc6738"/>
+    </record>
+    <record>
+      <code>593</code>
+      <name>Identification-Data</name>
+      <xref type="rfc" data="rfc6738"/>
+    </record>
+    <record>
+      <code>594</code>
+      <name>Responder-Identity</name>
+      <xref type="rfc" data="rfc6738"/>
+    </record>
+    <record>
+      <code>595</code>
+      <name>NC-Request-Type</name>
+      <xref type="rfc" data="rfc6736"/>
+    </record>
+    <record>
+      <code>596</code>
+      <name>NAT-Control-Install</name>
+      <xref type="rfc" data="rfc6736"/>
+    </record>
+    <record>
+      <code>597</code>
+      <name>NAT-Control-Remove</name>
+      <xref type="rfc" data="rfc6736"/>
+    </record>
+    <record>
+      <code>598</code>
+      <name>NAT-Control-Definition</name>
+      <xref type="rfc" data="rfc6736"/>
+    </record>
+    <record>
+      <code>599</code>
+      <name>NAT-Internal-Address</name>
+      <xref type="rfc" data="rfc6736"/>
+    </record>
+    <record>
+      <code>600</code>
+      <name>NAT-External-Address</name>
+      <xref type="rfc" data="rfc6736"/>
+    </record>
+    <record>
+      <code>601</code>
+      <name>Max-NAT-Bindings</name>
+      <xref type="rfc" data="rfc6736"/>
+    </record>
+    <record>
+      <code>602</code>
+      <name>NAT-Control-Binding-Template</name>
+      <xref type="rfc" data="rfc6736"/>
+    </record>
+    <record>
+      <code>603</code>
+      <name>Duplicate-Session-Id</name>
+      <xref type="rfc" data="rfc6736"/>
+    </record>
+    <record>
+      <code>604</code>
+      <name>NAT-External-Port-Style</name>
+      <xref type="rfc" data="rfc6736"/>
+    </record>
+    <record>
+      <code>605</code>
+      <name>NAT-Control-Record</name>
+      <xref type="rfc" data="rfc6736"/>
+    </record>
+    <record>
+      <code>606</code>
+      <name>NAT-Control-Binding-Status</name>
+      <xref type="rfc" data="rfc6736"/>
+    </record>
+    <record>
+      <code>607</code>
+      <name>Current-NAT-Bindings</name>
+      <xref type="rfc" data="rfc6736"/>
+    </record>
+    <record>
+      <code>608</code>
+      <name>Dual-Priority</name>
+      <xref type="rfc" data="rfc6735"/>
+    </record>
+    <record>
+      <code>609</code>
+      <name>Preemption-Priority</name>
+      <xref type="rfc" data="rfc6735"/>
+    </record>
+    <record>
+      <code>610</code>
+      <name>Defending-Priority</name>
+      <xref type="rfc" data="rfc6735"/>
+    </record>
+    <record>
+      <code>611</code>
+      <name>Admission-Priority</name>
+      <xref type="rfc" data="rfc6735"/>
+    </record>
+    <record>
+      <code>612</code>
+      <name>SIP-Resource-Priority</name>
+      <xref type="rfc" data="rfc6735"/>
+    </record>
+    <record>
+      <code>613</code>
+      <name>SIP-Resource-Priority-Namespace</name>
+      <xref type="rfc" data="rfc6735"/>
+    </record>
+    <record>
+      <code>614</code>
+      <name>SIP-Resource-Priority-Value</name>
+      <xref type="rfc" data="rfc6735"/>
+    </record>
+    <record>
+      <code>615</code>
+      <name>Application-Level-Resource-Priority</name>
+      <xref type="rfc" data="rfc6735"/>
+    </record>
+    <record>
+      <code>616</code>
+      <name>ALRP-Namespace</name>
+      <xref type="rfc" data="rfc6735"/>
+    </record>
+    <record>
+      <code>617</code>
+      <name>ALRP-Value</name>
+      <xref type="rfc" data="rfc6735"/>
+    </record>    
+    <record>
+      <code>618</code>
+      <name>ERP-RK-Request</name>
+      <xref type="rfc" data="rfc6942"/>
+    </record>    
+    <record>
+      <code>619</code>
+      <name>ERP-Realm</name>
+      <xref type="rfc" data="rfc6942"/>
+    </record>
+    <record>
+      <code>620</code>
+      <name>Redirect-Realm</name>
+      <xref type="rfc" data="rfc7075"/>
+    </record>
+    <record date="2015-03-03">
+      <code>621</code>
+      <name>OC-Supported-Features</name>
+      <xref type="rfc" data="rfc7683"/>
+    </record>
+    <record date="2015-03-03">
+      <code>622</code>
+      <name>OC-Feature-Vector</name>
+      <xref type="rfc" data="rfc7683"/>
+    </record>
+    <record date="2015-03-03">
+      <code>623</code>
+      <name>OC-OLR</name>
+      <xref type="rfc" data="rfc7683"/>
+    </record>
+    <record date="2015-03-03">
+      <code>624</code>
+      <name>OC-Sequence-Number</name>
+      <xref type="rfc" data="rfc7683"/>
+    </record>
+    <record date="2015-03-03">
+      <code>625</code>
+      <name>OC-Validity-Duration</name>
+      <xref type="rfc" data="rfc7683"/>
+    </record>
+    <record date="2015-03-03">
+      <code>626</code>
+      <name>OC-Report-Type</name>
+      <xref type="rfc" data="rfc7683"/>
+    </record>
+    <record date="2015-03-03">
+      <code>627</code>
+      <name>OC-Reduction-Percentage</name>
+      <xref type="rfc" data="rfc7683"/>
+    </record>
+    <record date="2015-08-13">
+      <code>628</code>
+      <name>ECN-IP-Codepoint</name>
+      <xref type="rfc" data="rfc7660"/>
+    </record>
+    <record date="2015-08-13">
+      <code>629</code>
+      <name>Congestion-Treatment</name>
+      <xref type="rfc" data="rfc7660"/>
+    </record>
+    <record date="2015-08-13">
+      <code>630</code>
+      <name>Flow-Count</name>
+      <xref type="rfc" data="rfc7660"/>
+    </record>
+    <record date="2015-08-13">
+      <code>631</code>
+      <name>Packet-Count</name>
+      <xref type="rfc" data="rfc7660"/>
+    </record>
+    <record date="2015-08-13">
+      <code>632</code>
+      <name>IP-Prefix-Length</name>
+      <xref type="rfc" data="rfc7678"/>
+    </record>
+    <record date="2015-08-13">
+      <code>633</code>
+      <name>Border-Router-Name</name>
+      <xref type="rfc" data="rfc7678"/>
+    </record>
+    <record date="2015-08-13">
+      <code>634</code>
+      <name>64-Multicast-Attributes</name>
+      <xref type="rfc" data="rfc7678"/>
+    </record>
+    <record date="2015-08-13">
+      <code>635</code>
+      <name>ASM-mPrefix64</name>
+      <xref type="rfc" data="rfc7678"/>
+    </record>
+    <record date="2015-08-13">
+      <code>636</code>
+      <name>SSM-mPrefix64</name>
+      <xref type="rfc" data="rfc7678"/>
+    </record>
+    <record date="2015-08-13">
+      <code>637</code>
+      <name>Tunnel-Source-Pref-Or-Addr</name>
+      <xref type="rfc" data="rfc7678"/>
+    </record>
+    <record date="2015-08-13">
+      <code>638</code>
+      <name>Tunnel-Source-IPv6-Address</name>
+      <xref type="rfc" data="rfc7678"/>
+    </record>
+    <record date="2015-08-13">
+      <code>639</code>
+      <name>Port-Set-Identifier</name>
+      <xref type="rfc" data="rfc7678"/>
+    </record>
+    <record date="2015-08-13">
+      <code>640</code>
+      <name>Lw4o6-Binding</name>
+      <xref type="rfc" data="rfc7678"/>
+    </record>
+    <record date="2015-08-13">
+      <code>641</code>
+      <name>Lw4o6-External-IPv4-Addr</name>
+      <xref type="rfc" data="rfc7678"/>
+    </record>
+    <record date="2015-08-13">
+      <code>642</code>
+      <name>MAP-E-Attributes</name>
+      <xref type="rfc" data="rfc7678"/>
+    </record>
+    <record date="2015-08-13">
+      <code>643</code>
+      <name>MAP-Mesh-Mode</name>
+      <xref type="rfc" data="rfc7678"/>
+    </record>
+    <record date="2015-08-13">
+      <code>644</code>
+      <name>MAP-Mapping-Rule</name>
+      <xref type="rfc" data="rfc7678"/>
+    </record>
+    <record date="2015-08-13">
+      <code>645</code>
+      <name>Rule-IPv4-Addr-Or-Prefix</name>
+      <xref type="rfc" data="rfc7678"/>
+    </record>
+    <record date="2015-08-13">
+      <code>646</code>
+      <name>Rule-IPv6-Prefix</name>
+      <xref type="rfc" data="rfc7678"/>
+    </record>
+    <record date="2015-08-13">
+      <code>647</code>
+      <name>EA-Field-Length</name>
+      <xref type="rfc" data="rfc7678"/>
+    </record>
+    <record date="2017-03-24">
+      <code>648</code>
+      <name>OC-Peer-Algo</name>
+      <xref type="draft" data="RFC-ietf-dime-agent-overload-11"/>
+    </record>
+    <record date="2017-03-24">
+      <code>649</code>
+      <name>SourceID</name>
+      <xref type="draft" data="RFC-ietf-dime-agent-overload-11"/>
+    </record>
+    <record date="2017-03-24">
+      <code>650</code>
+      <name>Load</name>
+      <xref type="draft" data="RFC-ietf-dime-load-09"/>
+    </record>
+    <record date="2017-03-24">
+      <code>651</code>
+      <name>Load-Type</name>
+      <xref type="draft" data="RFC-ietf-dime-load-09"/>
+    </record>
+    <record date="2017-03-24">
+      <code>652</code>
+      <name>Load-Value</name>
+      <xref type="draft" data="RFC-ietf-dime-load-09"/>
+    </record>
+    <record date="2018-08-29">
+      <code>653</code>
+      <name>User-Equipment-Info-Extension</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record date="2018-08-29">
+      <code>654</code>
+      <name>User-Equipment-Info-IMEISV</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record date="2018-08-29">
+      <code>655</code>
+      <name>User-Equipment-Info-MAC</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record date="2018-08-29">
+      <code>656</code>
+      <name>User-Equipment-Info-EUI64</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record date="2018-08-29">
+      <code>657</code>
+      <name>User-Equipment-Info-ModifiedEUI64</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record date="2018-08-29">
+      <code>658</code>
+      <name>User-Equipment-Info-IMEI</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record date="2018-08-29">
+      <code>659</code>
+      <name>Subscription-Id-Extension</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record date="2018-08-29">
+      <code>660</code>
+      <name>Subscription-Id-E164</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record date="2018-08-29">
+      <code>661</code>
+      <name>Subscription-Id-IMSI</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record date="2018-08-29">
+      <code>662</code>
+      <name>Subscription-Id-SIP-URI</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record date="2018-08-29">
+      <code>663</code>
+      <name>Subscription-Id-NAI</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record date="2018-08-29">
+      <code>664</code>
+      <name>Subscription-Id-Private</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record date="2018-08-29">
+      <code>665</code>
+      <name>Redirect-Server-Extension</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record date="2018-08-29">
+      <code>666</code>
+      <name>Redirect-Address-IPAddress</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record date="2018-08-29">
+      <code>667</code>
+      <name>Redirect-Address-URL</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record date="2018-08-29">
+      <code>668</code>
+      <name>Redirect-Address-SIP-URI</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record date="2018-08-29">
+      <code>669</code>
+      <name>QoS-Final-Unit-Indication</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record date="2019-02-27">
+      <code>670</code>
+      <name>OC-Maximum-Rate</name>
+      <xref type="draft" data="RFC-ietf-dime-doic-rate-control-11"/>
+    </record>
+    <record>
+      <code>671-16777215</code>
+      <name>Unassigned</name>
+    </record>
+  </registry>
+  
+  
+  
+  <registry id="aaa-parameters-2">
+    <title>AVP Specific Values</title>
+    <xref type="rfc" data="rfc6733"/>
+    <registration_rule>IETF Review (unless otherwise specified)</registration_rule>
+    <registry id="aaa-parameters-3">
+      <title>Redirect-Host-Usage AVP Values (code 261)</title>
+      <record>
+        <value>0</value>
+        <name>DONT_CACHE</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>ALL_SESSION</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>ALL_REALM</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>3</value>
+        <name>REALM_AND_APPLICATION</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>4</value>
+        <name>ALL_APPLICATION</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>5</value>
+        <name>ALL_HOST</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>6</value>
+        <name>ALL_USER</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>7-4294967295</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-4">
+      <title>Result-Code AVP Values (code 268)</title>
+      <record>
+        <value>0-999</value>
+        <name>Reserved</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-5">
+      <title>Result-Code AVP Values (code 268) - Informational</title>
+      <record>
+        <value>1000</value>
+        <name>Reserved</name>
+      </record>
+      <record>
+        <value>1001</value>
+        <name>DIAMETER_MULTI_ROUND_AUTH</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>1002-1999</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-6">
+      <title>Result-Code AVP Values (code 268) - Success</title>
+      <record>
+        <value>2000</value>
+        <name>Reserved</name>
+      </record>
+      <record>
+        <value>2001</value>
+        <name>DIAMETER_SUCCESS</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>2002</value>
+        <name>DIAMETER_LIMITED_SUCCESS</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>2003</value>
+        <name>DIAMETER_FIRST_REGISTRATION</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>2004</value>
+        <name>DIAMETER_SUBSEQUENT_REGISTRATION</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>2005</value>
+        <name>DIAMETER_UNREGISTERED_SERVICE</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>2006</value>
+        <name>DIAMETER_SUCCESS_SERVER_NAME_NOT_STORED</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>2007</value>
+        <name>DIAMETER_SERVER_SELECTION</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>2008</value>
+        <name>DIAMETER_SUCCESS_AUTH_SENT_SERVER_NOT_STORED</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>2009</value>
+        <name>DIAMETER_SUCCESS_RELOCATE_HA</name>
+        <xref type="rfc" data="rfc5778"/>
+      </record>
+      <record>
+        <value>2010-2999</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-7">
+      <title>Result-Code AVP Values (code 268) - Protocol Errors</title>
+      <record>
+        <value>3000</value>
+        <name>Reserved</name>
+      </record>
+      <record>
+        <value>3001</value>
+        <name>DIAMETER_COMMAND_UNSUPPORTED</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>3002</value>
+        <name>DIAMETER_UNABLE_TO_DELIVER</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>3003</value>
+        <name>DIAMETER_REALM_NOT_SERVED</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>3004</value>
+        <name>DIAMETER_TOO_BUSY</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>3005</value>
+        <name>DIAMETER_LOOP_DETECTED</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>3006</value>
+        <name>DIAMETER_REDIRECT_INDICATION</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>3007</value>
+        <name>DIAMETER_APPLICATION_UNSUPPORTED</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>3008</value>
+        <name>DIAMETER_INVALID_HDR_BITS</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>3009</value>
+        <name>DIAMETER_INVALID_AVP_BITS</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>3010</value>
+        <name>DIAMETER_UNKNOWN_PEER</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>      
+      <record>
+        <value>3011</value>
+        <name>DIAMETER_REALM_REDIRECT_INDICATION</name>
+        <xref type="rfc" data="rfc7075"/>
+      </record>
+      <record>
+        <value>3012-3999</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-8">
+      <title>Result-Code AVP Values (code 268) - Transient Failures</title>
+      <record>
+        <value>4000</value>
+        <name>Reserved</name>
+      </record>
+      <record>
+        <value>4001</value>
+        <name>DIAMETER_AUTHENTICATION_REJECTED</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>4002</value>
+        <name>DIAMETER_OUT_OF_SPACE</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>4003</value>
+        <name>ELECTION_LOST</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>4004</value>
+        <name>Unassigned</name>
+      </record>
+      <record>
+        <value>4005</value>
+        <name>DIAMETER_ERROR_MIP_REPLY_FAILURE</name>
+        <xref type="rfc" data="rfc4004"/>
+      </record>
+      <record>
+        <value>4006</value>
+        <name>DIAMETER_ERROR_HA_NOT_AVAILABLE</name>
+        <xref type="rfc" data="rfc4004"/>
+      </record>
+      <record>
+        <value>4007</value>
+        <name>DIAMETER_ERROR_BAD_KEY</name>
+        <xref type="rfc" data="rfc4004"/>
+      </record>
+      <record>
+        <value>4008</value>
+        <name>DIAMETER_ERROR_MIP_FILTER_NOT_SUPPORTED</name>
+        <xref type="rfc" data="rfc4004"/>
+      </record>
+      <record>
+        <value>4009</value>
+        <name>Unassigned</name>
+      </record>
+      <record>
+        <value>4010</value>
+        <name>DIAMETER_END_USER_SERVICE_DENIED</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>4011</value>
+        <name>DIAMETER_CREDIT_CONTROL_NOT_APPLICABLE</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>4012</value>
+        <name>DIAMETER_CREDIT_LIMIT_REACHED</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>4013</value>
+        <name>DIAMETER_USER_NAME_REQUIRED</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>4014</value>
+        <name>RESOURCE_FAILURE</name>
+        <xref type="rfc" data="rfc6736"/>
+      </record>
+      <record>
+        <value>4015-4999</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-9">
+      <title>Result-Code AVP Values (code 268) - Permanent Failure</title>
+      <record>
+        <value>5000</value>
+        <name>Reserved</name>
+      </record>
+      <record>
+        <value>5001</value>
+        <name>DIAMETER_AVP_UNSUPPORTED</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>5002</value>
+        <name>DIAMETER_UNKNOWN_SESSION_ID</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>5003</value>
+        <name>DIAMETER_AUTHORIZATION_REJECTED</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>5004</value>
+        <name>DIAMETER_INVALID_AVP_VALUE</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>5005</value>
+        <name>DIAMETER_MISSING_AVP</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>5006</value>
+        <name>DIAMETER_RESOURCES_EXCEEDED</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>5007</value>
+        <name>DIAMETER_CONTRADICTING_AVPS</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>5008</value>
+        <name>DIAMETER_AVP_NOT_ALLOWED</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>5009</value>
+        <name>DIAMETER_AVP_OCCURS_TOO_MANY_TIMES</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>5010</value>
+        <name>DIAMETER_NO_COMMON_APPLICATION</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>5011</value>
+        <name>DIAMETER_UNSUPPORTED_VERSION</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>5012</value>
+        <name>DIAMETER_UNABLE_TO_COMPLY</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>5013</value>
+        <name>DIAMETER_INVALID_BIT_IN_HEADER</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>5014</value>
+        <name>DIAMETER_INVALID_AVP_LENGTH</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>5015</value>
+        <name>DIAMETER_INVALID_MESSAGE_LENGTH</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>5016</value>
+        <name>DIAMETER_INVALID_AVP_BIT_COMBO</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>5017</value>
+        <name>DIAMETER_NO_COMMON_SECURITY</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>5018</value>
+        <name>DIAMETER_RADIUS_AVP_UNTRANSLATABLE</name>
+        <xref type="rfc" data="rfc4849"/>
+      </record>
+      <record>
+        <value>5019-5023</value>
+        <name>Unassigned</name>
+      </record>
+      <record>
+        <value>5024</value>
+        <name>DIAMETER_ERROR_NO_FOREIGN_HA_SERVICE</name>
+        <xref type="rfc" data="rfc4004"/>
+      </record>
+      <record>
+        <value>5025</value>
+        <name>DIAMETER_ERROR_END_TO_END_MIP_KEY_ENCRYPTION</name>
+        <xref type="rfc" data="rfc4004"/>
+      </record>
+      <record>
+        <value>5026-5029</value>
+        <name>Unassigned</name>
+      </record>
+      <record>
+        <value>5030</value>
+        <name>DIAMETER_USER_UNKNOWN</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>5031</value>
+        <name>DIAMETER_RATING_FAILED</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>5032</value>
+        <name>DIAMETER_ERROR_USER_UNKNOWN</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>5033</value>
+        <name>DIAMETER_ERROR_IDENTITIES_DONT_MATCH</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>5034</value>
+        <name>DIAMETER_ERROR_IDENTITY_NOT_REGISTERED</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>5035</value>
+        <name>DIAMETER_ERROR_ROAMING_NOT_ALLOWED</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>5036</value>
+        <name>DIAMETER_ERROR_IDENTITY_ALREADY_REGISTERED</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>5037</value>
+        <name>DIAMETER_ERROR_AUTH_SCHEME_NOT_SUPPORTED</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>5038</value>
+        <name>DIAMETER_ERROR_IN_ASSIGNMENT_TYPE</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>5039</value>
+        <name>DIAMETER_ERROR_TOO_MUCH_DATA</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>5040</value>
+        <name>DIAMETER_ERROR_NOT SUPPORTED_USER_DATA</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>5041</value>
+        <name>DIAMETER_ERROR_MIP6_AUTH_MODE</name>
+        <xref type="rfc" data="rfc5778"/>
+      </record>
+      <record>
+        <value>5042</value>
+        <name>UNKNOWN_BINDING_TEMPLATE_NAME</name>
+        <xref type="rfc" data="rfc6736"/>
+      </record>
+      <record>
+        <value>5043</value>
+        <name>BINDING_FAILURE</name>
+        <xref type="rfc" data="rfc6736"/>
+      </record>
+      <record>
+        <value>5044</value>
+        <name>MAX_BINDINGS_SET_FAILURE</name>
+        <xref type="rfc" data="rfc6736"/>
+      </record>
+      <record>
+        <value>5045</value>
+        <name>MAXIMUM_BINDINGS_REACHED_FOR_ENDPOINT</name>
+        <xref type="rfc" data="rfc6736"/>
+      </record>
+      <record>
+        <value>5046</value>
+        <name>SESSION_EXISTS</name>
+        <xref type="rfc" data="rfc6736"/>
+      </record>
+      <record>
+        <value>5047</value>
+        <name>INSUFFICIENT_CLASSIFIERS</name>
+        <xref type="rfc" data="rfc6736"/>
+      </record>      
+      <record>
+        <value>5048</value>
+        <name>DIAMETER_ERROR_EAP_CODE_UNKNOWN</name>
+        <xref type="rfc" data="rfc6942"/>
+      </record>
+      <record>
+        <value>5049-4294967295</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-10">
+      <title>Session-Binding AVP Values (code 270)</title>
+      <record>
+        <value>1</value>
+        <name>RE_AUTH</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>STR</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>3</value>
+        <name>Unassigned</name>
+      </record>
+      <record>
+        <value>4</value>
+        <name>ACCOUNTING</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>5-8</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-11">
+      <title>Session-Server-Failover AVP Values (code 271)</title>
+      <record>
+        <value>0</value>
+        <name>REFUSE_SERVICE</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>TRY_AGAIN</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>ALLOW_SERVICE</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>3</value>
+        <name>TRY_AGAIN_ALLOW_SERVICE</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>4-4294967295</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-12">
+      <title>Disconnect-Cause AVP Values (code 273)</title>
+      <record>
+        <value>0</value>
+        <name>REBOOTING</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>BUSY</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>DO_NOT_WANT_TO_TALK_TO_YOU</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>3-4294967295</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-13">
+      <title>Auth-Request-Type AVP Values (code 274)</title>
+      <record>
+        <value>0</value>
+        <name>Reserved</name>
+      </record>
+      <record>
+        <value>1</value>
+        <name>AUTHENTICATE_ONLY</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>AUTHORIZE_ONLY</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>3</value>
+        <name>AUTHORIZE_AUTHENTICATE</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>4-4294967295</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-14">
+      <title>Auth-Session-State AVP Values (code 277)</title>
+      <record>
+        <value>0</value>
+        <name>STATE_MAINTAINED</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>NO_STATE_MAINTAINED</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>2-4294967295</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-15">
+      <title>Re-Auth-Request-Type AVP Values (code 285)</title>
+      <record>
+        <value>0</value>
+        <name>AUTHORIZE_ONLY</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>AUTHORIZE_AUTHENTICATE</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>2-4294967295</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-16">
+      <title>Termination-Cause AVP Values (code 295)</title>
+      <record>
+        <value>0</value>
+        <name>Reserved</name>
+      </record>
+      <record>
+        <value>1</value>
+        <name>DIAMETER_LOGOUT</name>
+        <xref type="rfc" data="rfc3588"/>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>DIAMETER_SERVICE_NOT_PROVIDED</name>
+        <xref type="rfc" data="rfc3588"/>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>3</value>
+        <name>DIAMETER_BAD_ANSWER</name>
+        <xref type="rfc" data="rfc3588"/>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>4</value>
+        <name>DIAMETER_ADMINISTRATIVE</name>
+        <xref type="rfc" data="rfc3588"/>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>5</value>
+        <name>DIAMETER_LINK_BROKEN</name>
+        <xref type="rfc" data="rfc3588"/>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>6</value>
+        <name>DIAMETER_AUTH_EXPIRED</name>
+        <xref type="rfc" data="rfc3588"/>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>7</value>
+        <name>DIAMETER_USER_MOVED</name>
+        <xref type="rfc" data="rfc3588"/>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>8</value>
+        <name>DIAMETER_SESSION_TIMEOUT</name>
+        <xref type="rfc" data="rfc3588"/>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>9-10</value>
+        <name>Unassigned</name>
+      </record>
+      <record>
+        <value>11</value>
+        <name>User Request</name>
+        <xref type="rfc" data="rfc2866"/>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>12</value>
+        <name>Lost Carrier</name>
+        <xref type="rfc" data="rfc2866"/>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>13</value>
+        <name>Lost Service</name>
+        <xref type="rfc" data="rfc2866"/>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>14</value>
+        <name>Idle Timeout</name>
+        <xref type="rfc" data="rfc2866"/>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>15</value>
+        <name>Session Timeout</name>
+        <xref type="rfc" data="rfc2866"/>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>16</value>
+        <name>Admin Reset</name>
+        <xref type="rfc" data="rfc2866"/>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>17</value>
+        <name>Admin Reboot</name>
+        <xref type="rfc" data="rfc2866"/>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>18</value>
+        <name>Port Error</name>
+        <xref type="rfc" data="rfc2866"/>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>19</value>
+        <name>NAS Error</name>
+        <xref type="rfc" data="rfc2866"/>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>20</value>
+        <name>NAS Request</name>
+        <xref type="rfc" data="rfc2866"/>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>21</value>
+        <name>NAS Reboot</name>
+        <xref type="rfc" data="rfc2866"/>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>22</value>
+        <name>Port Unneeded</name>
+        <xref type="rfc" data="rfc2866"/>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>23</value>
+        <name>Port Preempted</name>
+        <xref type="rfc" data="rfc2866"/>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>24</value>
+        <name>Port Suspended</name>
+        <xref type="rfc" data="rfc2866"/>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>25</value>
+        <name>Service Unavailable</name>
+        <xref type="rfc" data="rfc2866"/>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>26</value>
+        <name>Callback</name>
+        <xref type="rfc" data="rfc2866"/>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>27</value>
+        <name>User Error</name>
+        <xref type="rfc" data="rfc2866"/>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>28</value>
+        <name>Host Request</name>
+        <xref type="rfc" data="rfc2866"/>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>29</value>
+        <name>Supplicant Restart</name>
+        <xref type="rfc" data="rfc3580"/>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>30</value>
+        <name>Reauthentication Failure</name>
+        <xref type="rfc" data="rfc3580"/>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>31</value>
+        <name>Port Reinitialized</name>
+        <xref type="rfc" data="rfc3580"/>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>32</value>
+        <name>Port Administratively Disabled</name>
+        <xref type="rfc" data="rfc3580"/>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>33-4294967295</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-17">
+      <title>Inband-Security-Id AVP (code 299)</title>
+      <note>Deprecated by <xref type="rfc" data="rfc6733"/></note>
+      <record>
+        <value>0</value>
+        <name>NO_INBAND_SECURITY</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>TLS</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>2-4294967295</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-18">
+      <title>MIP-Feature-Vector AVP (code 337)</title>
+      <record>
+        <value>1</value>
+        <name>Mobile-Node-Home-Address-Requested</name>
+        <xref type="rfc" data="rfc4004"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>Home-Address-Allocatable-Only-in-Home-Realm</name>
+        <xref type="rfc" data="rfc4004"/>
+      </record>
+      <record>
+        <value>3</value>
+        <name>Unassigned</name>
+      </record>
+      <record>
+        <value>4</value>
+        <name>Home-Agent-Requested</name>
+        <xref type="rfc" data="rfc4004"/>
+      </record>
+      <record>
+        <value>5-7</value>
+        <name>Unassigned</name>
+      </record>
+      <record>
+        <value>8</value>
+        <name>Foreign-Home-Agent-Available</name>
+        <xref type="rfc" data="rfc4004"/>
+      </record>
+      <record>
+        <value>9-15</value>
+        <name>Unassigned</name>
+      </record>
+      <record>
+        <value>16</value>
+        <name>MN-HA-Key-Request</name>
+        <xref type="rfc" data="rfc4004"/>
+      </record>
+      <record>
+        <value>17-31</value>
+        <name>Unassigned</name>
+      </record>
+      <record>
+        <value>32</value>
+        <name>MN-FA-Key-Request</name>
+        <xref type="rfc" data="rfc4004"/>
+      </record>
+      <record>
+        <value>33-63</value>
+        <name>Unassigned</name>
+      </record>
+      <record>
+        <value>64</value>
+        <name>FA-HA-Key-Request</name>
+        <xref type="rfc" data="rfc4004"/>
+      </record>
+      <record>
+        <value>65-127</value>
+        <name>Unassigned</name>
+      </record>
+      <record>
+        <value>128</value>
+        <name>Home-Agent-In-Foreign-Network</name>
+        <xref type="rfc" data="rfc4004"/>
+      </record>
+      <record>
+        <value>129-255</value>
+        <name>Unassigned</name>
+      </record>
+      <record>
+        <value>256</value>
+        <name>Co-Located-Mobile-Node</name>
+        <xref type="rfc" data="rfc4004"/>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-19">
+      <title>MIP-Algorithm-Type AVP Values (code 345)</title>
+      <record>
+        <value>2</value>
+        <name>HMAC-SHA-1</name>
+        <xref type="rfc" data="rfc4004"/>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-20">
+      <title>MIP-Replay-Mode AVP Values (code 346)</title>
+      <record>
+        <value>1</value>
+        <name>None</name>
+        <xref type="rfc" data="rfc4004"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>Timestamps</name>
+        <xref type="rfc" data="rfc4004"/>
+      </record>
+      <record>
+        <value>3</value>
+        <name>Nonces</name>
+        <xref type="rfc" data="rfc4004"/>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-21">
+      <title>SIP-Server-Assignment-Type AVP Values (375)</title>
+      <record>
+        <value>0</value>
+        <name>NO_ASSIGNMENT</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>REGISTRATION</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>RE_REGISTRATION</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>3</value>
+        <name>UNREGISTERED_USER</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>4</value>
+        <name>TIMEOUT_DEREGISTRATION</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>5</value>
+        <name>USER_DEREGISTRATION</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>6</value>
+        <name>TIMEOUT_DEREGISTRATION_STORE_SERVER_NAME</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>7</value>
+        <name>USER_DEREGISTRATION_STORE_SERVER_NAME</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>8</value>
+        <name>ADMINISTRATIVE_DEREGISTRATION</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>9</value>
+        <name>AUTHENTICATION_FAILURE</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>10</value>
+        <name>AUTHENTICATION_TIMEOUT</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>11</value>
+        <name>DEREGISTRATION_TOO_MUCH_DATA</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-22">
+      <title>SIP-Authentication-Scheme AVP Values (377)</title>
+      <record>
+        <value>0</value>
+        <name>DIGEST</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-23">
+      <title>SIP-Reason-Code AVP Values (384)</title>
+      <record>
+        <value>0</value>
+        <name>PERMANENT_TERMINATION</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>NEW_SIP_SERVER_ASSIGNED</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>SIP_SERVER_CHANGE</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>3</value>
+        <name>REMOVE_SIP_SERVER</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-24">
+      <title>SIP-User-Authorization-Type AVP Values (387)</title>
+      <record>
+        <value>0</value>
+        <name>REGISTRATION</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>DEREGISTRATION</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>REGISTRATION_AND_CAPABILITIES</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-25">
+      <title>SIP-User-Data-Already-Available AVP Values (392)</title>
+      <record>
+        <value>0</value>
+        <name>USER_DATA_NOT_AVAILABLE</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>USER_DATA_ALREADY_AVAILABLE</name>
+        <xref type="rfc" data="rfc4740"/>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-26">
+      <title>Accounting-Auth-Method AVP Values (code 406)</title>
+      <record>
+        <value>1</value>
+        <name>PAP</name>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>CHAP</name>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>3</value>
+        <name>MS-CHAP-1</name>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>4</value>
+        <name>MS-CHAP-2</name>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>5</value>
+        <name>EAP</name>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+      <record>
+        <value>7</value>
+        <name>None</name>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-27">
+      <title>Origin-AAA-Protocol AVP Values (code 408)</title>
+      <record>
+        <value>1</value>
+        <name>RADIUS</name>
+        <xref type="rfc" data="rfc7155"/>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-28">
+      <title>CC-Request-Type AVP Values (code 416)</title>
+      <xref type="rfc" data="rfc8506"/>
+      <registration_rule>Specification Required</registration_rule>
+      <expert>Jouni Korhonen, Lionel Morand</expert>
+      <record>
+        <value>0</value>
+        <name>Reserved</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>INITIAL_REQUEST</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>UPDATE_REQUEST</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>3</value>
+        <name>TERMINATION_REQUEST</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>4</value>
+        <name>EVENT_REQUEST</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>5-2147483647</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-29">
+      <title>CC-Session-Failover AVP Values (code 418)</title>
+      <xref type="rfc" data="rfc8506"/>
+      <registration_rule>Specification Required</registration_rule>
+      <expert>Jouni Korhonen, Lionel Morand</expert>
+      <record>
+        <value>0</value>
+        <name>FAILOVER_NOT_SUPPORTED</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>FAILOVER_SUPPORTED</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>2-2147483647</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-30">
+      <title>Check-Balance-Result AVP Values (code 422)</title>
+      <xref type="rfc" data="rfc8506"/>
+      <registration_rule>Specification Required</registration_rule>
+      <expert>Jouni Korhonen, Lionel Morand</expert>
+      <record>
+        <value>0</value>
+        <name>ENOUGH_CREDIT</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>NO_CREDIT</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>2-2147483647</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-31">
+      <title>Credit-Control AVP Values (code 426)</title>
+      <xref type="rfc" data="rfc8506"/>
+      <registration_rule>Specification Required</registration_rule>
+      <expert>Jouni Korhonen, Lionel Morand</expert>
+      <record>
+        <value>0</value>
+        <name>CREDIT_AUTHORIZATION</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>RE_AUTHORIZATION</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>2-2147483647</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-32">
+      <title>Credit-Control-Failure-Handling AVP Values (code 427)</title>
+      <xref type="rfc" data="rfc8506"/>
+      <registration_rule>Specification Required</registration_rule>
+      <expert>Jouni Korhonen, Lionel Morand</expert>
+      <record>
+        <value>0</value>
+        <name>TERMINATE</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>CONTINUE</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>RETRY_AND_TERMINATE</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>3-2147483647</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-33">
+      <title>Direct-Debiting-Failure-Handling AVP Values (code 428)</title>
+      <xref type="rfc" data="rfc8506"/>
+      <registration_rule>Specification Required</registration_rule>
+      <expert>Jouni Korhonen, Lionel Morand</expert>
+      <record>
+        <value>0</value>
+        <name>TERMINATE_OR_BUFFER</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>CONTINUE</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>2-2147483647</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-34">
+      <title>Redirect-Address-Type AVP Values (code 433)</title>
+      <xref type="rfc" data="rfc8506"/>
+      <registration_rule>Specification Required</registration_rule>
+      <expert>Jouni Korhonen, Lionel Morand</expert>
+      <record>
+        <value>0</value>
+        <name>IPv4 Address</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>IPv6 Address</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>URL</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>3</value>
+        <name>SIP URI</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>4-2147483647</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-35">
+      <title>Requested-Action AVP Values (436)</title>
+      <xref type="rfc" data="rfc8506"/>
+      <registration_rule>Specification Required</registration_rule>
+      <expert>Jouni Korhonen, Lionel Morand</expert>
+      <record>
+        <value>0</value>
+        <name>DIRECT_DEBITING</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>REFUND_ACCOUNT</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>CHECK_BALANCE</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>3</value>
+        <name>PRICE_ENQUIRY</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>4-2147483647</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-36">
+      <title>Final-Unit-Action AVP Values (code 449)</title>
+      <xref type="rfc" data="rfc8506"/>
+      <registration_rule>Specification Required</registration_rule>
+      <expert>Jouni Korhonen, Lionel Morand</expert>
+      <record>
+        <value>0</value>
+        <name>TERMINATE</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>REDIRECT</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>RESTRICT_ACCESS</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>3-2147483647</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-37">
+      <title>Subscription-Id-Type AVP Values (code 450)</title>
+      <xref type="rfc" data="rfc8506"/>
+      <registration_rule>Specification Required</registration_rule>
+      <expert>Jouni Korhonen, Lionel Morand</expert>
+      <record>
+        <value>0</value>
+        <name>END_USER_E164</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>END_USER_IMSI</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>END_USER_SIP_URI</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>3</value>
+        <name>END_USER_NAI</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>4</value>
+        <name>END_USER_PRIVATE</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>5-2147483647</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-40">
+      <title>Tariff-Change-Usage AVP Values (code 452)</title>
+      <xref type="rfc" data="rfc8506"/>
+      <registration_rule>Specification Required</registration_rule>
+      <expert>Jouni Korhonen, Lionel Morand</expert>
+      <record>
+        <value>0</value>
+        <name>UNIT_BEFORE_TARIFF_CHANGE</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>UNIT_AFTER_TARIFF_CHANGE</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>UNIT_INDETERMINATE</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>3-2147483647</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-38">
+      <title>CC-Unit-Type AVP Values (code 454)</title>
+      <xref type="rfc" data="rfc8506"/>
+      <registration_rule>Specification Required</registration_rule>
+      <expert>Jouni Korhonen, Lionel Morand</expert>
+      <record>
+        <value>0</value>
+        <name>TIME</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>MONEY</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>TOTAL-OCTETS</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>3</value>
+        <name>INPUT-OCTETS</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>4</value>
+        <name>OUTPUT-OCTETS</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>5</value>
+        <name>SERVICE-SPECIFIC-UNITS</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>6-2147483647</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-39">
+      <title>Multiple-Services-Indicator AVP Values (code 455)</title>
+      <xref type="rfc" data="rfc8506"/>
+      <registration_rule>Specification Required</registration_rule>
+      <expert>Jouni Korhonen, Lionel Morand</expert>
+      <record>
+        <value>0</value>
+        <name>MULTIPLE_SERVICES_NOT_SUPPORTED</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>MULTIPLE_SERVICES_SUPPORTED</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>2-2147483647</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>   
+    <registry id="aaa-parameters-41">
+      <title>User-Equipment-Info-Type AVP Values (code 459)</title>
+      <xref type="rfc" data="rfc8506"/>
+      <registration_rule>Specification Required</registration_rule>
+      <expert>Jouni Korhonen, Lionel Morand</expert>
+      <record>
+        <value>0</value>
+        <name>IMEISV</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>MAC</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>EUI64</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>3</value>
+        <name>MODIFIED_EUI64</name>
+        <xref type="rfc" data="rfc8506"/>
+      </record>
+      <record>
+        <value>4-2147483647</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-42">
+      <title>Accounting-Record-Type AVP Values (code 480)</title>
+      <record>
+        <value>0</value>
+        <name>Reserved</name>
+      </record>
+      <record>
+        <value>1</value>
+        <name>EVENT_RECORD</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>START_RECORD</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>3</value>
+        <name>INTERIM_RECORD</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>4</value>
+        <name>STOP_RECORD</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>5-4294967295</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="aaa-parameters-43">
+      <title>Accounting-Realtime-Required AVP Values (code 483)</title>
+      <record>
+        <value>0</value>
+        <name>Reserved</name>
+      </record>
+      <record>
+        <value>1</value>
+        <name>DELIVER_AND_GRANT</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>GRANT_AND_STORE</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>3</value>
+        <name>GRANT_AND_LOSE</name>
+        <xref type="rfc" data="rfc6733"/>
+      </record>
+      <record>
+        <value>4-4294967295</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="treatment-action">
+      <title>Treatment-Action AVP Values (code 572)</title>
+      <xref type="rfc" data="rfc5777"/>
+      <registration_rule>Specification Required</registration_rule>
+      <record>
+        <value>0</value>
+        <name>drop</name>
+        <xref type="rfc" data="rfc5777"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>shape</name>
+        <xref type="rfc" data="rfc5777"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>mark</name>
+        <xref type="rfc" data="rfc5777"/>
+      </record>
+      <record>
+        <value>3</value>
+        <name>permit</name>
+        <xref type="rfc" data="rfc5777"/>
+      </record>
+    </registry>
+    <registry id="qos-semantics">
+      <title>QoS-Semantics AVP Values (code 575)</title>
+      <xref type="rfc" data="rfc5777"/>
+      <registration_rule>Specification Required</registration_rule>
+      <record>
+        <value>0</value>
+        <name>QoS-Desired</name>
+        <xref type="rfc" data="rfc5777"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>QoS-Available</name>
+        <xref type="rfc" data="rfc5777"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>QoS-Delivered</name>
+        <xref type="rfc" data="rfc5777"/>
+      </record>
+      <record>
+        <value>3</value>
+        <name>Minimum-QoS</name>
+        <xref type="rfc" data="rfc5777"/>
+      </record>
+      <record>
+        <value>4</value>
+        <name>QoS-Authorized</name>
+        <xref type="rfc" data="rfc5777"/>
+      </record>
+    </registry>
+    <registry id="key-type">
+      <title>Key-Type AVP Values (code 582)</title>
+      <xref type="rfc" data="rfc6734"/>
+      <registration_rule>Specification Required</registration_rule>
+      <record>
+        <value>0</value>
+        <name>DSRK</name>
+        <xref type="rfc" data="rfc6734"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>rRK</name>
+        <xref type="rfc" data="rfc6734"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>rMSK</name>
+        <xref type="rfc" data="rfc6734"/>
+      </record>
+      <record>
+        <value>3</value>
+        <name>IKEv2 SK</name>
+        <xref type="rfc" data="rfc6738"/>
+      </record>
+      <record>
+        <value>4-2147483647</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="nc-request-type">
+      <title>NC-Request-Type AVP Values (code 595)</title>
+      <xref type="rfc" data="rfc6736"/>
+      <registration_rule>Expert Review</registration_rule>
+      <record>
+        <value>0</value>
+        <name>Reserved</name>
+        <xref type="rfc" data="rfc6736"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>INITIAL_REQUEST</name>
+        <xref type="rfc" data="rfc6736"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>UPDATE_REQUEST</name>
+        <xref type="rfc" data="rfc6736"/>
+      </record>
+      <record>
+        <value>3</value>
+        <name>QUERY_REQUEST</name>
+        <xref type="rfc" data="rfc6736"/>
+      </record>
+      <record>
+        <value>4-2147483647</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="nat-external-port-style">
+      <title>NAT-External-Port-Style AVP Values (code 604)</title>
+      <xref type="rfc" data="rfc6736"/>
+      <registration_rule>Expert Review</registration_rule>
+      <record>
+        <value>0</value>
+        <name>Reserved</name>
+        <xref type="rfc" data="rfc6736"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>FOLLOW_INTERNAL_PORT_STYLE</name>
+        <xref type="rfc" data="rfc6736"/>
+      </record>
+      <record>
+        <value>2-2147483647</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="nat-control-binding-status">
+      <title>NAT-Control-Binding-Status (code 606)</title>
+      <xref type="rfc" data="rfc6736"/>
+      <registration_rule>Expert Review</registration_rule>
+      <record>
+        <value>0</value>
+        <name>Reserved</name>
+        <xref type="rfc" data="rfc6736"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>INITIAL_REQUEST</name>
+        <xref type="rfc" data="rfc6736"/>
+      </record>
+      <record>
+        <value>2</value>
+        <name>UPDATE_REQUEST</name>
+        <xref type="rfc" data="rfc6736"/>
+      </record>
+      <record>
+        <value>3</value>
+        <name>QUERY_REQUEST</name>
+        <xref type="rfc" data="rfc6736"/>
+      </record>
+      <record>
+        <value>4-2147483647</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="oc-feature-vector">
+      <title>OC-Feature-Vector AVP Values (code 622)</title>
+      <xref type="rfc" data="rfc7683"/>
+      <registration_rule>Specification Required</registration_rule>
+      <expert>Jouni Korhonen and Lionel Morand</expert>
+      <record>
+        <value>0x0000000000000000</value>
+        <name>Reserved</name>
+        <xref type="rfc" data="rfc7683"/>
+      </record>
+      <record>
+        <value>0x0000000000000001</value>
+        <name>OLR_DEFAULT_ALGO</name>
+        <xref type="rfc" data="rfc7683"/>
+      </record>
+      <record>
+        <value>0x0000000000000002</value>
+        <name>Unassigned</name>
+      </record>
+      <record date="2019-02-27">
+        <value>0x0000000000000004</value>
+        <name>OLR_RATE_ALGORITHM</name>
+        <xref type="draft" data="RFC-ietf-dime-doic-rate-control-11"/>
+      </record>
+      <record>
+        <value>0x0000000000000008</value>
+        <name>Unassigned</name>
+      </record>
+      <record date="2019-04-10">
+        <value>0x0000000000000010</value>
+        <name>OC_PEER_REPORT</name>
+        <xref type="draft" data="RFC-ietf-dime-agent-overload-11"/>
+      </record>
+      <record>
+        <value>0x0000000000000020-0xFFFFFFFFFFFFFFFF</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+    <registry id="oc-report-type">
+      <title>OC-Report-Type AVP Values (code 626)</title>
+      <xref type="rfc" data="rfc7683"/>
+      <registration_rule>Specification Required</registration_rule>
+      <expert>Jouni Korhonen and Lionel Morand</expert>
+      <record>
+        <value>0</value>
+        <name>HOST_REPORT</name>
+        <xref type="rfc" data="rfc7683"/>
+      </record>
+      <record>
+        <value>1</value>
+        <name>REALM_REPORT</name>
+        <xref type="rfc" data="rfc7683"/>
+      </record>
+      <record date="2019-04-10">
+        <value>2</value>
+        <name>PEER_REPORT</name>
+        <xref type="draft" data="RFC-ietf-dime-agent-overload-11"/>
+      </record>
+      <record>
+        <value>3-4294967295</value>
+        <name>Unassigned</name>
+      </record>
+    </registry>
+  </registry>
+
+
+
+  <registry id="aaa-parameters-44">
+    <title>AVP Flags Value</title>
+    <xref type="rfc" data="rfc6733"/>
+    <registration_rule>Standards Action</registration_rule>
+    <record>
+      <bit>0</bit>
+      <name>'V'endor Specific</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <bit>1</bit>
+      <name>'M'andatory</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <bit>2</bit>
+      <name>'P'rotected</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <bit>3-7</bit>
+      <name>Unassigned</name>
+    </record>
+  </registry>
+  
+  
+  
+  <registry id="aaa-parameters-46">
+    <title>Application IDs</title>
+    <xref type="rfc" data="rfc6733"/>
+    <xref type="rfc" data="rfc6942"/>
+    <expert>Unassigned</expert>
+    <range>
+      <value>0-16777215</value>
+      <registration_rule>Specification Required</registration_rule>
+    </range>
+    <range>
+      <value>16777216-4294967294</value>
+      <registration_rule>First Come First Served</registration_rule>
+      <note>Vendor-Specific</note>
+    </range>
+    <record>
+      <value>0</value>
+      <name>Diameter common message</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <value>1</value>
+      <name>NASREQ</name>
+      <xref type="rfc" data="rfc7155"/>
+    </record>
+    <record>
+      <value>2</value>
+      <name>Mobile IPv4</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <value>3</value>
+      <name>Diameter base accounting</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <value>4</value>
+      <name>Diameter Credit Control</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <value>5</value>
+      <name>Diameter EAP</name>
+      <xref type="rfc" data="rfc4072"/>
+    </record>
+    <record>
+      <value>6</value>
+      <name>Diameter Session Initiation Protocol (SIP) Application</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <value>7</value>
+      <name>Diameter Mobile IPv6 IKE (MIP6I)</name>
+      <xref type="rfc" data="rfc5778"/>
+    </record>
+    <record>
+      <value>8</value>
+      <name>Diameter Mobile IPv6 Auth (MIP6A)</name>
+      <xref type="rfc" data="rfc5778"/>
+    </record>
+    <record>
+      <value>9</value>
+      <name>Diameter QoS application</name>
+      <xref type="rfc" data="rfc5866"/>
+    </record>
+    <record>
+      <value>10</value>
+      <name>Diameter Capabilities Update</name>
+      <xref type="rfc" data="rfc6737"/>
+    </record>
+    <record>
+      <value>11</value>
+      <name>Diameter IKE SK (IKESK)</name>
+      <xref type="rfc" data="rfc6738"/>
+    </record>
+    <record>
+      <value>12</value>
+      <name>Diameter NAT Control Application</name>
+      <xref type="rfc" data="rfc6736"/>
+    </record>
+    <record>
+      <value>13</value>
+      <name>Diameter ERP</name>
+      <xref type="rfc" data="rfc6942"/>
+    </record>
+    <record>
+      <value>14-16777215</value>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <value>16777216</value>
+      <name>3GPP Cx</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.228</xref>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.229</xref>
+    </record>
+    <record>
+      <value>16777217</value>
+      <name>3GPP Sh</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.328</xref>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.329</xref>
+    </record>
+    <record date="2005-09">
+      <value>16777218</value>
+      <name>3GPP Re</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/archive/32_series/">3GPP TS 32.296</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2005-04">
+      <value>16777219</value>
+      <name>3GPP Wx</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.234</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2005-04">
+      <value>16777220</value>
+      <name>3GPP Zn</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.109</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2005-04">
+      <value>16777221</value>
+      <name>3GPP Zh</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.109</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2005-04">
+      <value>16777222</value>
+      <name>3GPP Gq</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.209</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2005-04">
+      <value>16777223</value>
+      <name>3GPP Gmb</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.061</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2005-09">
+      <value>16777224</value>
+      <name>3GPP Gx</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/archive/29_series/">3GPP TS 29.210</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2005-09">
+      <value>16777225</value>
+      <name>3GPP Gx over Gy</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/archive/29_series/">3GPP TS 29.210</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2005-09">
+      <value>16777226</value>
+      <name>3GPP MM10</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/archive/29_series/">3GPP TS 29.140</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2006-07-31">
+      <value>16777227</value>
+      <name>Ericsson MSI</name>
+      <xref type="person" data="German_Blanco"/>
+    </record>
+    <record date="2006-07-31">
+      <value>16777228</value>
+      <name>Ericsson Zx</name>
+      <xref type="person" data="German_Blanco"/>
+    </record>
+    <record date="2005-09">
+      <value>16777229</value>
+      <name>3GPP Rx</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.211</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2005-04">
+      <value>16777230</value>
+      <name>3GPP Pr</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.234</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record>
+      <value>16777231</value>
+      <name>ETSI e4</name>
+      <xref type="uri" data="http://pda.etsi.org/pda/AQuery.asp">ETSI ES 283 034</xref>
+    </record>
+    <record date="2006-04-11">
+      <value>16777232</value>
+      <name>Ericsson Charging-CIP</name>
+      <xref type="person" data="Bjorn_Almen"/>
+    </record>
+    <record date="2006-07-31">
+      <value>16777233</value>
+      <name>Ericsson Mm</name>
+      <xref type="person" data="German_Blanco"/>
+    </record>
+    <record date="2006-09-20">
+      <value>16777234</value>
+      <name>Vodafone Gx+</name>
+      <xref type="person" data="Torsten_Oertel"/>
+    </record>
+    <record>
+      <value>16777235</value>
+      <name>ITU-T Rs</name>
+      <xref type="text">ITU-T Recommendation Q.3301.1</xref>
+    </record>
+    <record date="2007-05-07">
+      <value>16777236</value>
+      <name>3GPP Rx</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.214</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2007-08-01">
+      <value>16777237</value>
+      <name>3GPP2 Ty</name>
+      <xref type="person" data="AC_Mahendran"/>
+    </record>
+    <record date="2007-08-22">
+      <value>16777238</value>
+      <name>3GPP Gx</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.212</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2007-09-26">
+      <value>16777239</value>
+      <name>Juniper Cluster</name>
+      <xref type="person" data="Vitaly_Dzhitenov"/>
+    </record>
+    <record date="2007-10-11">
+      <value>16777240</value>
+      <name>Juniper Policy-Control-AAA</name>
+      <xref type="person" data="Steffen_Ries"/>
+    </record>
+    <record date="2007-10-22">
+      <value>16777241</value>
+      <name>iptego USPI</name>
+      <xref type="person" data="Christian_Schubert"/>
+    </record>
+    <record date="2007-11-06">
+      <value>16777242</value>
+      <name>Covergence-specific SIP routing</name>
+      <xref type="person" data="Martin_Del_Vecchio"/>
+    </record>
+    <record date="2007-11-19">
+      <value>16777243</value>
+      <name>Policy Processing</name>
+      <xref type="uri" data="http://www.openmobilealliance.org">OMA PEEM V1.0</xref>
+      <xref type="person" data="Michael_Brenner"/>
+    </record>
+    <record date="2007-12-10">
+      <value>16777244</value>
+      <name>Juniper Policy-Control-JSRC</name>
+      <xref type="person" data="Jun_Chang"/>
+    </record>
+    <record date="2008-02-01">
+      <value>16777245</value>
+      <name>ITU-T S-TC1</name>
+      <xref type="text">ITU-T Recommendation Q.3221</xref>
+      <xref type="person" data="Kwihoon_Kim"/>
+    </record>
+    <record date="2008-04-14">
+      <value>16777246</value>
+      <name>NSN Unified Charging Trigger Function (UCTF)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/"/>
+      <xref type="person" data="Dan_D_Albuquerque"/>
+    </record>
+    <record date="2008-05-09">
+      <value>16777247</value>
+      <name>3GPP2 CAN Access Authentication and Authorization</name>
+      <xref type="uri" data="ftp://ftp.3gpp2.org/TSGX/Projects/"/>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2008-05-09">
+      <value>16777248</value>
+      <name>3GPP2 WLAN Interworking Access Authentication and         
+Authorization</name>
+      <xref type="uri" data="ftp://ftp.3gpp2.org/TSGX/Projects/"/>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2008-05-09">
+      <value>16777249</value>
+      <name>3GPP2 WLAN Interworking Accounting</name>
+      <xref type="uri" data="ftp://ftp.3gpp2.org/TSGX/Projects/"/>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2008-06-26">
+      <value>16777250</value>
+      <name>3GPP Sta</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.273</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2008-06-26">
+      <value>16777251</value>
+      <name>3GPP S6a</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs">3GPP TS 29.272</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2008-06-26">
+      <value>16777252</value>
+      <name>3GPP S13</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.272</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2008-09-23">
+      <value>16777253</value>
+      <name>ETSI Re</name>
+      <xref type="uri" data="http://pda.etsi.org/pda/AQuery.asp">ETSI TS 183 060</xref>
+      <xref type="person" data="Shicheng_Hu"/>
+    </record>
+    <record date="2008-09-23">
+      <value>16777254</value>
+      <name>ETSI GOCAP</name>
+      <xref type="uri" data="http://pda.etsi.org/pda/AQuery.asp">ETSI ES 283 039</xref>
+      <xref type="person" data="Shicheng_Hu"/>
+    </record>
+    <record date="2008-09-23">
+      <value>16777255</value>
+      <name>SLg</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.172</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2008-10-09">
+      <value>16777256</value>
+      <name>ITU-T Rw</name>
+      <xref type="text">ITU-T Rec. Q.3303.3</xref>
+      <xref type="rfc" data="rfc5431"/>
+    </record>
+    <record date="2008-10-22">
+      <value>16777257</value>
+      <name>ETSI a4</name>
+      <xref type="person" data="Shicheng_Hu"/>
+    </record>
+    <record date="2008-12-04">
+      <value>16777258</value>
+      <name>ITU-T Rt</name>
+      <xref type="text">ITU-T Rec. Q.3305.1</xref>
+      <xref type="person" data="Tom_Taylor"/>
+    </record>
+    <record date="2008-12-10">
+      <value>16777259</value>
+      <name>CARA</name>
+      <xref type="person" data="Sachin_Rathee"/>
+    </record>
+    <record date="2008-12-10">
+      <value>16777260</value>
+      <name>CAMA</name>
+      <xref type="person" data="Sachin_Rathee"/>
+    </record>
+    <record date="2009-04-09">
+      <value>16777261</value>
+      <name>Femtocell extension to Diameter EAP Application</name>
+      <xref type="person" data="Vitaly_Dzhitenov"/>
+    </record>
+    <record date="2009-04-14">
+      <value>16777262</value>
+      <name>ITU-T Ru</name>
+      <xref type="text">ITU-T Rec. Q.nacp.Ru Q.nacp.Ru</xref>
+      <xref type="person" data="Hyungseok_Chung"/>
+    </record>
+    <record date="2009-04-14">
+      <value>16777263</value>
+      <name>ITU-T Ng</name>
+      <xref type="text">ITU-T Rec. Q.nacp.Ru Q.nacp.Ru</xref>
+      <xref type="person" data="Kwihoon_Kim"/>
+    </record>
+    <record date="2009-04-21">
+      <value>16777264</value>
+      <name>3GPP SWm</name>
+      <xref type="text">3GPP TS 29.273</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2009-04-21">
+      <value>16777265</value>
+      <name>3GPP SWx</name>
+      <xref type="text">3GPP TS 29.273</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2009-04-21">
+      <value>16777266</value>
+      <name>3GPP Gxx</name>
+      <xref type="text">3GPP TS 29.212</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2009-04-21">
+      <value>16777267</value>
+      <name>3GPP S9</name>
+      <xref type="text">3GPP TS 29.215</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2009-04-21">
+      <value>16777268</value>
+      <name>3GPP Zpn</name>
+      <xref type="text">3GPP TS 29.109</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2009-05-12">
+      <value>16777269</value>
+      <name>Ericsson HSI</name>
+      <xref type="person" data="German_Blanco"/>
+    </record>
+    <record date="2009-05-13">
+      <value>16777270</value>
+      <name>Juniper-Example</name>
+      <xref type="person" data="Aleksey_Romanov"/>
+    </record>
+    <record date="2009-05-21">
+      <value>16777271</value>
+      <name>ITU-T Ri</name>
+      <xref type="text">ITU-T Rec. Q.3307.1</xref>
+      <xref type="person" data="Michiaki_Hayashi"/>
+    </record>
+    <record date="2009-06-09">
+      <value>16777272</value>
+      <name>3GPP S6b</name>
+      <xref type="text">3GPP TS 29.273</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2009-08-21">
+      <value>16777273</value>
+      <name>Juniper JGx</name>
+      <xref type="person" data="Claudio_Lordello"/>
+    </record>
+    <record date="2009-09-08">
+      <value>16777274</value>
+      <name>ITU-T Rd</name>
+      <xref type="text">ITU-T Rec. Q.3306.1</xref>
+      <xref type="person" data="Janusz_Pieczerak"/>
+    </record>
+    <record date="2009-09-08">
+      <value>16777275</value>
+      <name>ADMI Notification Application</name>
+      <xref type="person" data="Tomas_Menzl"/>
+    </record>
+    <record date="2009-09-08">
+      <value>16777276</value>
+      <name>ADMI Messaging Interface Application</name>
+      <xref type="person" data="Tomas_Menzl"/>
+    </record>
+    <record date="2009-12-04">
+      <value>16777277</value>
+      <name>Peter-Service VSI</name>
+      <xref type="person" data="Alexey_Grishin"/>
+    </record>
+    <record date="2010-01-08">
+      <value>16777278</value>
+      <name>ETSI Rr request model</name>
+      <xref type="uri" data="http://pda.etsi.org/pda/AQuery.asp">ETSI TS 183 071</xref>
+      <xref type="person" data="Miguel_Angel_Reina_Ortega"/>
+    </record>
+    <record date="2010-01-08">
+      <value>16777279</value>
+      <name>ETSI Rr delegated model</name>
+      <xref type="uri" data="http://pda.etsi.org/pda/AQuery.asp">ETSI TS 183 071</xref>
+      <xref type="person" data="Miguel_Angel_Reina_Ortega"/>
+    </record>
+    <record date="2010-03-04">
+      <value>16777280</value>
+      <name>WIMAX HRPD Interworking</name>
+      <xref type="uri" data="http://www.3gpp2.org/Public_html/specs/tsgx.cfm">3GPP2 X.S0058-0 v1.0</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-03-31">
+      <value>16777281</value>
+      <name>WiMAX Network Access Authentication and Authorization Diameter Application (WNAAADA)</name>
+      <xref type="uri" data="http://www.wimaxforum.org/resources/documents/technical/T33">WiMAX Release 1.5</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-03-31">
+      <value>16777282</value>
+      <name>WiMAX Network Accounting Diameter Application (WNADA)</name>
+      <xref type="uri" data="http://www.wimaxforum.org/resources/documents/technical/T33">WiMAX Release 1.5</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-03-31">
+      <value>16777283</value>
+      <name>WiMAX MIP4 Diameter Application (WM4DA)</name>
+      <xref type="uri" data="http://www.wimaxforum.org/resources/documents/technical/T33">WiMAX Release 1.5</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-03-31">
+      <value>16777284</value>
+      <name>WiMAX MIP6 Diameter Application (WM6DA)</name>
+      <xref type="uri" data="http://www.wimaxforum.org/resources/documents/technical/T33">WiMAX Release 1.5</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-03-31">
+      <value>16777285</value>
+      <name>WiMAX DHCP Diameter Application (WDDA)</name>
+      <xref type="uri" data="http://www.wimaxforum.org/resources/documents/technical/T33">WiMAX Release 1.5</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-03-31">
+      <value>16777286</value>
+      <name>WiMAX-Location-Authentication-Authorization Diameter Application (WLAADA)</name>
+      <xref type="uri" data="http://www.wimaxforum.org/resources/documents/technical/T33">WiMAX Release 1.5</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-03-31">
+      <value>16777287</value>
+      <name>WiMAX-Policy-and-Charging-Control-R3-Policies Diameter Application (WiMAX PCC-R3-P)</name>
+      <xref type="uri" data="http://www.wimaxforum.org/resources/documents/technical/T33">WiMAX Release 1.5</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-03-31">
+      <value>16777288</value>
+      <name>WiMAX-Policy-and-Charging-Control-R3-OFfline-Charging Diameter Application (WiMAX PCC-R3-OFC)</name>
+      <xref type="uri" data="http://www.wimaxforum.org/resources/documents/technical/T33">WiMAX Release 1.5</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-03-31">
+      <value>16777289</value>
+      <name>WiMAX-Policy-and-Charging-Control-R3-Offline-Charging-Prime Diameter Application (WiMAX PCC-R3-OFC-PRIME)</name>
+      <xref type="uri" data="http://www.wimaxforum.org/resources/documents/technical/T33">WiMAX Release 1.5</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-03-31">
+      <value>16777290</value>
+      <name>WiMAX-Policy-and-Charging-Control-R3-Online-Charging Diameter Application (WiMAX PCC-R3-OC)</name>
+      <xref type="uri" data="http://www.wimaxforum.org/resources/documents/technical/T33">WiMAX Release 1.5</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-04-02">
+      <value>16777291</value>
+      <name>3GPP SLh</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.173</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2010-04-19">
+      <value>16777292</value>
+      <name>3GPP SGmb</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.061</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2010-04-28">
+      <value>16777293</value>
+      <name>CMDI - Cloudmark Diameter Interface</name>
+      <xref type="person" data="Sanjiv_Parikh"/>
+    </record>
+    <record date="2010-07-29">
+      <value>16777294</value>
+      <name>Camiant DRMA</name>
+      <xref type="person" data="Tarek_Abou-Assali"/>
+      <xref type="person" data="Michael_Mercurio"/>
+    </record>
+    <record date="2010-08-05">
+      <value>16777295</value>
+      <name>PiLTE Interworking Diameter Application</name>
+      <xref type="uri" data="http://www.3gpp2.org/Public_html/specs/">3GPP2 publication X.S0057</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-10-12">
+      <value>16777296</value>
+      <name>Juniper-Sessions-Recovery (JSR)</name>
+      <xref type="person" data="Aleksey_Romanov"/>
+    </record>
+    <record date="2011-02-25">
+      <value>16777297</value>
+      <name>Vedicis LiveProxy</name>
+      <xref type="person" data="Francois-Frederic_Ozog"/>
+    </record>
+    <record date="2011-04-07">
+      <value>16777298</value>
+      <name>Pi*3GPP2 Diameter Application</name>
+      <xref type="uri" data="http://www.3gpp2.org/Public_html/specs/">3GPP2 publication X.S0057A E-UTRAN eHRPD</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2011-04-29">
+      <value>16777299</value>
+      <name>Sandvine Rf+</name>
+      <xref type="person" data="Yoni_Eitan"/>
+    </record>
+    <record date="2011-06-22">
+      <value>16777300</value>
+      <name>Subscription Information Application</name>
+      <xref type="person" data="Lars_Anglert"/>
+    </record>
+    <record date="2011-07-06">
+      <value>16777301</value>
+      <name>Ericsson Charging-DCIP</name>
+      <xref type="person" data="Lars_Anglert"/>
+    </record>
+    <record date="2011-10-11">
+      <value>16777302</value>
+      <name>3GPP Sy</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.219</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2011-10-11">
+      <value>16777303</value>
+      <name>3GPP Sd</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.212</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2011-10-27">
+      <value>16777304</value>
+      <name>Ericsson Sy</name>
+      <xref type="person" data="Lars_Anglert"/>
+    </record>
+    <record date="2011-11-04">
+      <value>16777305</value>
+      <name>HP DTD</name>
+      <xref type="person" data="Chiranjeev_Agrawal"/>
+      <xref type="person" data="J_V_Kishore"/>
+    </record>
+    <record date="2012-01-04">
+      <value>16777306</value>
+      <name>M9 interface between MLM-PE(P) and MLM-PE(C)</name>
+      <xref type="uri" data="http://www.itu.int">ITU-T Q5/Sg11</xref>
+      <xref type="person" data="Jin_Seek_Choi"/>
+    </record>
+    <record date="2012-01-11">
+      <value>16777307</value>
+      <name>ITU-T M13</name>
+      <xref type="uri" data="http://www.itu.int">ITU-T Q.3230</xref>
+      <xref type="person" data="Kwihoon_Kim"/>
+    </record>
+    <record date="2012-05-15">
+      <value>16777308</value>
+      <name>3GPP S7a</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.272</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2012-09-26">
+      <value>16777309</value>
+      <name>3GPP Tsp</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.368</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2012-09-26">
+      <value>16777310</value>
+      <name>3GPP S6m</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.336</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2012-12-20">
+      <value>16777311</value>
+      <name>3GPP T4</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.337</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2012-12-20">
+      <value>16777312</value>
+      <name>3GPP S6c</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.338</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2012-12-20">
+      <value>16777313</value>
+      <name>3GPP SGd</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.338</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>    
+    <record date="2013-04-22">
+      <value>16777314</value>
+      <name>Intrado-SLg</name>
+      <xref type="person" data="Scott_Luallin"/>
+    </record>    
+    <record date="2013-04-23">
+      <value>16777315</value>
+      <name>Ericsson Diameter Signalling Controller Application (DSC)</name>
+      <xref type="person" data="Klaus_Turina"/>
+    </record>    
+    <record date="2013-06-13">
+      <value>16777316</value>
+      <name>Verizon-Femto-Loc</name>
+      <xref type="person" data="Niranjan_Avula"/>
+    </record>    
+    <record date="2013-07-18">
+      <value>16777317</value>
+      <name>Nokia Siemens Networks (NSN) Hd Application</name>
+      <xref type="person" data="Hannes_Tschofenig"/>
+    </record>
+    <record date="2013-09-20">
+      <value>16777318</value>
+      <name>3GPP S15</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.212</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>    
+    <record date="2013-09-20">
+      <value>16777319</value>
+      <name>3GPP S9a</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.215</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2013-09-20">
+      <value>16777320</value>
+      <name>3GPP S9a*</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.215</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>    
+    <record date="2013-09-23">
+      <value>16777321</value>
+      <name>Gateway Location Application</name>
+      <xref type="person" data="Steve_Donovan"/>
+    </record>    
+    <record date="2013-09-26">
+      <value>16777322</value>
+      <name>Verizon Session Recovery</name>
+      <xref type="person" data="Niranjan_Avula"/>
+    </record>
+    <record date="2013-12-08">
+      <value>16777323</value>
+      <name>3GPP2 M1 Interface</name>
+      <xref type="uri" data="ftp://ftp.3gpp2.org/TSGSX/Projects/X.S0068%20Network%20Enhancements%20for%20Machine%20to%20Machine/">3GPP2 X.S0068</xref>
+      <xref type="person" data="Jun_Wang"/>
+    </record>
+    <record date="2014-04-09">
+      <value>16777324</value>
+      <name>MAGIC Client Interface Protocol (CIP)</name>
+      <xref type="uri" data="http://www.aviation-ia.com/aeec/projects/agie_magic/index.html">ARINC 839</xref>
+      <xref type="person" data="Paul_Prisaznuk"/>
+      <xref type="person" data="Manfred_Benten"/>
+    </record>
+    <record date="2014-05-19">
+      <value>16777325</value>
+      <name>ITU-T Nc</name>
+      <xref type="uri" data="http://www.itu.int/md/T13-SG11-130225-TD-GEN-0066/en">ITU-T Rec. Q.nacp.Nc</xref>
+      <xref type="person" data="Kwihoon_Kim"/>
+    </record>
+    <record date="2014-05-19">
+      <value>16777326</value>
+      <name>ITU-T Ne</name>
+      <xref type="uri" data="http://www.itu.int/md/T13-SG11-130225-TD-GEN-0067/en">ITU-T Rec. Q.nacp.Ne</xref>
+      <xref type="person" data="Kwihoon_Kim"/>
+    </record>
+    <record date="2014-07-09">
+      <value>16777327</value>
+      <name>Ericsson Sx</name>
+      <xref type="person" data="Irene_Martin"/>
+    </record>
+    <record date="2014-08-13">
+      <value>16777328</value>
+      <name>Nokia Service Extension, NSE</name>
+      <xref type="person" data="Timo_Perala"/>
+    </record>
+    <record date="2014-08-21">
+      <value>16777329</value>
+      <name>Rivada Xd</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-08-21">
+      <value>16777330</value>
+      <name>Rivada Xm</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-08-21">
+      <value>16777331</value>
+      <name>Rivada Xh</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-08-21">
+      <value>16777332</value>
+      <name>Rivada Xf</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-08-21">
+      <value>16777333</value>
+      <name>Rivada Xp</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-08-21">
+      <value>16777334</value>
+      <name>Rivada Xa</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-09-26">
+      <value>16777335</value>
+      <name>3GPP MB2-C</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.468</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2014-10-01">
+      <value>16777336</value>
+      <name>3GPP PC4a</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.344</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2014-10-22">
+      <value>16777337</value>
+      <name>3GPP PC2</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.343</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2014-10-29">
+      <value>16777338</value>
+      <name>Juniper Domain Policy</name>
+      <xref type="person" data="Vitaly_Dzhitenov"/>
+    </record>
+    <record date="2014-11-06">
+      <value>16777339</value>
+      <name>Host Observer</name>
+      <xref type="person" data="Laimutis_Slecpenka"/>
+    </record>
+    <record date="2014-11-19">
+      <value>16777340</value>
+      <name>3GPP PC6/PC7</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.345</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2015-02-22">
+      <value>16777341</value>
+      <name>Nokia Sdr Application</name>
+      <xref type="person" data="Timo_Perala"/>
+    </record>
+    <record date="2015-03-24">
+      <value>16777342</value>
+      <name>3GPP Np</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.217</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2015-07-26">
+      <value>16777343</value>
+      <name>Sandvine Location Relay Service</name>
+      <xref type="person" data="Inian_Vasanth"/>
+    </record>
+    <record date="2015-07-26">
+      <value>16777344</value>
+      <name>Sandvine Fairshare Traffic Management Service</name>
+      <xref type="person" data="Inian_Vasanth"/>
+    </record>
+    <record date="2015-09-24">
+      <value>16777345</value>
+      <name>3GPP S6t</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.336</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2015-11-19">
+      <value>16777346</value>
+      <name>3GPP T6a/T6b</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.128</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2015-11-19">
+      <value>16777347</value>
+      <name>3GPP Ns</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.153</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2015-11-19">
+      <value>16777348</value>
+      <name>3GPP Nt</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.154</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2016-01-22">
+      <value>16777349</value>
+      <name>3GPP St</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.212</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2016-03-21">
+      <value>16777350</value>
+      <name>3GPP PC2</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.343</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2016-03-21">
+      <value>16777351</value>
+      <name>3GPP Diameter Data Management</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.283</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2016-05-16">
+      <value>16777352</value>
+      <name>ITU-T M1</name>
+      <xref type="text">ITU-T Recommendation Q.nacp.M1</xref>
+      <xref type="person" data="Kwihoon_Kim"/>
+    </record>
+    <record date="2016-05-16">
+      <value>16777353</value>
+      <name>ITU-T M2</name>
+      <xref type="text">ITU-T Recommendation Q.nacp.M2</xref>
+      <xref type="person" data="Kwihoon_Kim"/>
+    </record>
+    <record date="2016-07-11">
+      <value>16777354</value>
+      <name>Verizon-NLS-WDS</name>
+      <xref type="person" data="Niranjan_Avula"/>
+    </record>
+    <record date="2016-12-14">
+      <value>16777355</value>
+      <name>3GPP V4</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.388</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2016-12-14">
+      <value>16777356</value>
+      <name>3GPP V6</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.389</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2017-03-28">
+      <value>16777357</value>
+      <name>OMN Adapt Application</name>
+      <xref type="person" data="Jarda_Nedved"/>
+    </record>
+    <record date="2018-04-27">
+      <value>16777358</value>
+      <name>3GPP Nta</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.154</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2018-12-14">
+      <value>16777359</value>
+      <name>Ericsson Charging - SBI Policy</name>
+      <xref type="person" data="S.Dhanalakshmi"/>
+    </record>
+    <record>
+      <value>16777360-4294967294</value>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <value>4294967295</value>
+      <name>Relay</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+  </registry>
+  
+  
+  
+  <registry id="aaa-parameters-47">
+    <title>Command Codes</title>
+    <xref type="rfc" data="rfc6733"/>
+    <xref type="rfc" data="rfc5719"/>
+    <range>
+      <value>0-255</value>
+      <registration_rule>Reserved for RADIUS backward compatibility</registration_rule>
+      <note>See RADIUS Packet Type Codes</note>
+    </range>
+    <range>
+      <value>256-8388607</value>
+      <registration_rule>IETF Review</registration_rule>
+    </range>
+    <range>
+      <value>8388608-16777213</value>
+      <registration_rule>First Come First Served with specification</registration_rule>
+      <note>Vendor-Specific</note>
+    </range>
+    <record>
+      <value>0-255</value>
+      <name>RADIUS compatability codes</name>
+      <xref type="uri" data="http://www.iana.org/assignments/radius-types"/>
+    </record>
+    <record>
+      <value>256</value>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <value>257</value>
+      <name>CER / CEA</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <value>258</value>
+      <name>RAR / RAA</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <value>259</value>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <value>260</value>
+      <name>AMR / AMA</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <value>261</value>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <value>262</value>
+      <name>HAR / HAA</name>
+      <xref type="rfc" data="rfc4004"/>
+    </record>
+    <record>
+      <value>263-264</value>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <value>265</value>
+      <name>AAR / AAA</name>
+      <xref type="rfc" data="rfc7155"/>
+    </record>
+    <record>
+      <value>266-267</value>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <value>268</value>
+      <name>DER / DEA</name>
+      <xref type="rfc" data="rfc4072"/>
+    </record>
+    <record>
+      <value>269-270</value>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <value>271</value>
+      <name>ACR / ACA</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <value>272</value>
+      <name>CCR / CCA</name>
+      <xref type="rfc" data="rfc8506"/>
+    </record>
+    <record>
+      <value>273</value>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <value>274</value>
+      <name>ASR / ASA</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <value>275</value>
+      <name>STR / STA</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <value>276-279</value>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <value>280</value>
+      <name>DWR / DWA</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <value>281</value>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <value>282</value>
+      <name>DPR / DPA</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <value>283</value>
+      <name>UAR / UAA</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <value>284</value>
+      <name>SAR / SAA</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <value>285</value>
+      <name>LIR / LIA</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <value>286</value>
+      <name>MAR / MAA</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <value>287</value>
+      <name>RTR / RTA</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <value>288</value>
+      <name>PPR / PPA</name>
+      <xref type="rfc" data="rfc4740"/>
+    </record>
+    <record>
+      <value>289-299</value>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <value>300-313</value>
+      <name>Allocated for 3GPP</name>
+      <xref type="rfc" data="rfc3589"/>
+    </record>
+    <record>
+      <value>314</value>
+      <name>PDR / PDA</name>
+      <xref type="rfc" data="rfc5224"/>
+    </record>
+    <record>
+      <value>315</value>
+      <name>Policy-Install-Request (PIR)/Policy-Install-Answer (PIA)</name>
+      <xref type="text">ITU-T Rec. Q.3303.3</xref>
+      <xref type="rfc" data="rfc5431"/>
+    </record>
+    <record>
+      <value>316</value>
+      <name>3GPP-Update-Location-Request/Answer (ULR/ULA)</name>
+      <xref type="text">3GPP TS 29.272</xref>
+      <xref type="rfc" data="rfc5516"/>
+    </record>
+    <record>
+      <value>317</value>
+      <name>3GPP-Cancel-Location-Request/Answer (CLR/CLA)</name>
+      <xref type="text">3GPP TS 29.272</xref>
+      <xref type="rfc" data="rfc5516"/>
+    </record>
+    <record>
+      <value>318</value>
+      <name>3GPP-Authentication-Information-Request/Answer (AIR/AIA)</name>
+      <xref type="text">3GPP TS 29.272</xref>
+      <xref type="rfc" data="rfc5516"/>
+    </record>
+    <record>
+      <value>319</value>
+      <name>3GPP-Insert-Subscriber-Data-Request/Answer (IDR/IDA)</name>
+      <xref type="text">3GPP TS 29.272</xref>
+      <xref type="rfc" data="rfc5516"/>
+    </record>
+    <record>
+      <value>320</value>
+      <name>3GPP-Delete-Subscriber-Data-Request/Answer (DSR/DSA)</name>
+      <xref type="text">3GPP TS 29.272</xref>
+      <xref type="rfc" data="rfc5516"/>
+    </record>
+    <record>
+      <value>321</value>
+      <name>3GPP-Purge-UE-Request/Answer (PUR/PUA)</name>
+      <xref type="text">3GPP TS 29.272</xref>
+      <xref type="rfc" data="rfc5516"/>
+    </record>
+    <record>
+      <value>322</value>
+      <name>3GPP-Reset-Request/Answer (RSR/RSA)</name>
+      <xref type="text">3GPP TS 29.272</xref>
+      <xref type="rfc" data="rfc5516"/>
+    </record>
+    <record>
+      <value>323</value>
+      <name>3GPP-Notify-Request/Answer (NOR/NOA)</name>
+      <xref type="text">3GPP TS 29.272</xref>
+      <xref type="rfc" data="rfc5516"/>
+    </record>
+    <record>
+      <value>324</value>
+      <name>3GPP-ME-Identity-Check-Request/Answer (ECR/ECA)</name>
+      <xref type="text">3GPP TS 29.272</xref>
+      <xref type="rfc" data="rfc5516"/>
+    </record>
+    <record>
+      <value>325</value>
+      <name>MIP6-Request/Answer (MIR/MIA)</name>
+      <xref type="rfc" data="rfc5778"/>
+    </record>
+    <record>
+      <value>326</value>
+      <name>QoS-Authorization-Request/QoS-Authorization-Answer (QAR/QAA)</name>
+      <xref type="rfc" data="rfc5866"/>
+    </record>
+    <record>
+      <value>327</value>
+      <name>QoS-Install-Request/QoS-Install-Answer (QIR/QIA)</name>
+      <xref type="rfc" data="rfc5866"/>
+    </record>
+    <record>
+      <value>328</value>
+      <name>Capabilities-Update-Request/Capabilities-Update-Answer (CUR/CUA)</name>
+      <xref type="rfc" data="rfc6737"/>
+    </record>
+    <record>
+      <value>329</value>
+      <name>IKEv2-SK-Request/Answer (ISR/ISA)</name>
+      <xref type="rfc" data="rfc6738"/>
+    </record>
+    <record>
+      <value>330</value>
+      <name>NAT-Control-Request/Answer (NCR/NCA)</name>
+      <xref type="rfc" data="rfc6736"/>
+    </record>
+    <record>
+      <value>331-8388607</value>
+      <name>Unassigned</name>
+    </record>
+    <record date="2010-03-04">
+      <value>8388608</value>
+      <name>WIMAX-HRPD-SFF Request/Answer</name>
+      <xref type="uri" data="http://www.3gpp2.org/Public_html/specs/tsgx.cfm">3GPP2 X.S0058-0 v1.0</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-03-31">
+      <value>8388609</value>
+      <name>WiMAX-Diameter-EAP-Request/Answer (WDER/WDEA) WDE</name>
+      <xref type="uri" data="http://www.wimaxforum.org/resources/documents/technical/T33">WiMAX Release 1.5</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-03-31">
+      <value>8388610</value>
+      <name>WiMAX-Change-of-Authorization-Request/Answer (WCAR/WCAA) WCA</name>
+      <xref type="uri" data="http://www.wimaxforum.org/resources/documents/technical/T33">WiMAX Release 1.5</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-03-31">
+      <value>8388611</value>
+      <name>WiMAX-Reauthentication-Request/Answer (WRAR/WRAA) WRA</name>
+      <xref type="uri" data="http://www.wimaxforum.org/resources/documents/technical/T33">WiMAX Release 1.5</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-03-31">
+      <value>8388612</value>
+      <name>WiMAX-Session-Termination-Request/Answer (WSTR/WSTA) WST</name>
+      <xref type="uri" data="http://www.wimaxforum.org/resources/documents/technical/T33">WiMAX Release 1.5</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-03-31">
+      <value>8388613</value>
+      <name>WiMAX-Abort-Session-Request/Answer (WASR/WASA) WAS</name>
+      <xref type="uri" data="http://www.wimaxforum.org/resources/documents/technical/T33">WiMAX Release 1.5</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-03-31">
+      <value>8388614</value>
+      <name>WiMAX-Home-Agent-IPv4-Request/Answer (WHA4R/WHA4A) WHA4</name>
+      <xref type="uri" data="http://www.wimaxforum.org/resources/documents/technical/T33">WiMAX Release 1.5</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-03-31">
+      <value>8388615</value>
+      <name>WiMAX-Home-Agent-IPv6-Request/Answer (WHA6R/WHA6A) WHA6</name>
+      <xref type="uri" data="http://www.wimaxforum.org/resources/documents/technical/T33">WiMAX Release 1.5</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-03-31">
+      <value>8388616</value>
+      <name>WiMAX-DHCP-Request/Answer (WDHCPR/WDHCPA) WDHCP</name>
+      <xref type="uri" data="http://www.wimaxforum.org/resources/documents/technical/T33">WiMAX Release 1.5</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-03-31">
+      <value>8388617</value>
+      <name>WiMAX-LAA-Request/Answer (WLAAR/WLAA) WLAA</name>
+      <xref type="uri" data="http://www.wimaxforum.org/resources/documents/technical/T33">WiMAX Release 1.5</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-03-31">
+      <value>8388618</value>
+      <name>WiMAX-Location-Accounting-Request/Answer (WLACR/WLACA) WLAC</name>
+      <xref type="uri" data="http://www.wimaxforum.org/resources/documents/technical/T33">WiMAX Release 1.5</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-03-31">
+      <value>8388619</value>
+      <name>WiMAX-Location-Measurement-Query-Request/Answer (WLMQR/WLMQA) WLMQ</name>
+      <xref type="uri" data="http://www.wimaxforum.org/resources/documents/technical/T33">WiMAX Release 1.5</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-04-07">
+      <value>8388620</value>
+      <name>3GPP-Provide-Location-Request/Answer (PLR/PLA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.172</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2010-04-07">
+      <value>8388621</value>
+      <name>3GPP-Location-Report-Request/Answer (LRR/LRA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.172</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2010-04-07">
+      <value>8388622</value>
+      <name>3GPP-LCS-Routing-Info-Request/Answer (RIR/RIA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.173</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2010-05-12">
+      <value>8388623</value>
+      <name>Notif-Request/Answer (NFR/NFA)</name>
+      <xref type="person" data="Tomas_Menzl"/>
+    </record>
+    <record date="2010-05-12">
+      <value>8388624</value>
+      <name>Msg-Interface-Request/Answer (MIFR/MIFA)</name>
+      <xref type="person" data="Tomas_Menzl"/>
+    </record>
+    <record date="2010-05-12">
+      <value>8388625</value>
+      <name>Mobile-Application-Request/Answer (MAPR/MAPA)</name>
+      <xref type="person" data="Tomas_Menzl"/>
+    </record>
+    <record date="2010-08-05">
+      <value>8388626</value>
+      <name>Update Location Request/Answer (ULR / ULA)</name>
+      <xref type="uri" data="http://www.3gpp2.org/Public_html/specs/">3GPP2 publication X.S0057</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-08-05">
+      <value>8388627</value>
+      <name>Cancel Location Request/Answer (CLR CLA)</name>
+      <xref type="uri" data="http://www.3gpp2.org/Public_html/specs/">3GPP2 publication X.S0057</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2010-10-12">
+      <value>8388628</value>
+      <name>Juniper-Sync-Event (JSE)</name>
+      <xref type="person" data="Aleksey_Romanov"/>
+    </record>
+    <record date="2010-10-12">
+      <value>8388629</value>
+      <name>Juniper-Session-Discovery (JSD)</name>
+      <xref type="person" data="Aleksey_Romanov"/>
+    </record>
+    <record date="2011-04-07">
+      <value>8388630</value>
+      <name>Query Profile Request Answer (QPR/QPA)</name>
+      <xref type="uri" data="http://www.3gpp2.org/Public_html/specs/">3GPP2 publication X.S0057A E-UTRAN eHRPD7</xref>
+      <xref type="person" data="Avi_Lior"/>
+    </record>
+    <record date="2011-06-28">
+      <value>8388631</value>
+      <name>Subscription Information Application (SIR/SIA)</name>
+      <xref type="person" data="Lars_Anglert"/>
+    </record>
+    <record date="2011-07-06">
+      <value>8388632</value>
+      <name>Distributed Charging Request/Diameter Charging Answer (DCR/DCA)</name>
+      <xref type="person" data="Lars_Anglert"/>
+    </record>
+    <record date="2011-10-27">
+      <value>8388633</value>
+      <name>Ericsson Spending Limit Request/Answer (SLR/SLA)</name>
+      <xref type="person" data="Lars_Anglert"/>
+    </record>
+    <record date="2011-10-27">
+      <value>8388634</value>
+      <name>Ericsson Spending Status Notification Request/Answer (SNR/SNA)</name>
+      <xref type="person" data="Lars_Anglert"/>
+    </record>
+    <record date="2012-02-29">
+      <value>8388635</value>
+      <name>Spending-Limit-Request/Answer (SLR/SLA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.219</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2012-02-29">
+      <value>8388636</value>
+      <name>Spending-Status-Notification-Request/Answer (SNR/SNA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.219</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2012-02-29">
+      <value>8388637</value>
+      <name>TDF-Session-Request/Answer (TSR/TSA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.212</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2012-05-15">
+      <value>8388638</value>
+      <name>3GPP-Update-VCSG-Location-Request/Answer (UVR/UVA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.272</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2012-09-26">
+      <value>8388639</value>
+      <name>Device-Action-Request/Answer (DAR/DAA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.368</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2012-09-26">
+      <value>8388640</value>
+      <name>Device-Notification-Request/Answer (DNR/DNA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.368</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2012-09-26">
+      <value>8388641</value>
+      <name>Subscriber-Information-Request/Answer (SIR/SIA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.336</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2012-09-26">
+      <value>8388642</value>
+      <name>Cancel-VCSG-Location-Request/Answer (CVR/CVA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.272</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2012-12-20">
+      <value>8388643</value>
+      <name>Device-Trigger-Request/Answer (DTR/DTA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.337</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2012-12-20">
+      <value>8388644</value>
+      <name>Delivery-Report-Request/Answer (DRR/DRA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.337</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2012-12-20">
+      <value>8388645</value>
+      <name>MO-Forward-Short-Message Request/Answer (OFR/OFA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.338</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2012-12-20">
+      <value>8388646</value>
+      <name>MT-Forward-Short-Message Request/Answer (TFR/TFA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.338</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2012-12-20">
+      <value>8388647</value>
+      <name>Send-Routing-Info-for-SM-Request/Answer (SRR/SRA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.338</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2012-12-20">
+      <value>8388648</value>
+      <name>Alert-Service-Centre-Request/Answer (ALR/ALA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.338</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2012-12-20">
+      <value>8388649</value>
+      <name>Report-SM-Delivery-Status-Request/Answer (RDR/RDA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.338</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>    
+    <record date="2013-07-23">
+      <value>8388650</value>
+      <name>NSN Cancel-LocationMS-Request/Answer (CLR/CLA)</name>
+      <xref type="person" data="Hannes_Tschofenig"/>
+    </record>    
+    <record date="2013-07-23">
+      <value>8388651</value>
+      <name>NSN User-DataMS-Request/Answer (UDR/UDA)</name>
+      <xref type="person" data="Hannes_Tschofenig"/>
+    </record>    
+    <record date="2013-07-23">
+      <value>8388652</value>
+      <name>NSN Profile-UpdateMS-Request/Answer (PUR/PUA)</name>
+      <xref type="person" data="Hannes_Tschofenig"/>
+    </record>    
+    <record date="2013-07-23">
+      <value>8388653</value>
+      <name>NSN Subscribe-NotificationsMS-Request/Answer (SNR/SNA)</name>
+      <xref type="person" data="Hannes_Tschofenig"/>
+    </record>    
+    <record date="2013-07-23">
+      <value>8388654</value>
+      <name>NSN Push-NotificationMS-Request/Answer (PNR/PNA)</name>
+      <xref type="person" data="Hannes_Tschofenig"/>
+    </record>
+    <record date="2013-09-20">
+      <value>8388655</value>
+      <name>Get Gateway Request/Answer (GGR/GGA)</name>
+      <xref type="person" data="Steve_Donovan"/>
+    </record>    
+    <record date="2013-09-20">
+      <value>8388656</value>
+      <name>Trigger-Establishment-Request/Answer (TER/TEA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.215</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>    
+    <record date="2013-10-23">
+      <value>8388657</value>
+      <name>Ericsson Binding-Data-Request/Answer (BDR/BDA)</name>
+      <xref type="person" data="Klaus_Turina"/>
+    </record>
+    <record date="2013-12-08">
+      <value>8388658</value>
+      <name>3GPP2 Subscriber-Information-Request/Answer (SIR/SIA)</name>
+      <xref type="uri" data="ftp://ftp.3gpp2.org/TSGSX/Projects/X.S0068%20Network%20Enhancements%20for%20Machine%20to%20Machine/">3GPP2 X.S0068</xref>
+      <xref type="person" data="Jun_Wang"/>
+    </record>
+    <record date="2013-12-20">
+      <value>8388659</value>
+      <name>Verizon Session Data Recovery Request/Answer (SDR/SDA)</name>
+      <xref type="person" data="Niranjan_Avula"/>
+    </record>
+    <record date="2014-08-13">
+      <value>8388660</value>
+      <name>Nokia Core Service Request/Answer (CSR/CSA)</name>
+      <xref type="person" data="Timo_Perala"/>
+    </record>
+    <record date="2014-08-13">
+      <value>8388661</value>
+      <name>Nokia Extended Command Request/Answer (ECR/ECA)</name>
+      <xref type="person" data="Timo_Perala"/>
+    </record>
+    <record date="2014-09-26">
+      <value>8388662</value>
+      <name>GCS-Action-Request/Answer (GAR/GAA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.468</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2014-09-26">
+      <value>8388663</value>
+      <name>GCS-Notification-Request/Answer (GNR/GNA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.468</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2014-10-01">
+      <value>8388664</value>
+      <name>ProSe-Subscriber-Information-Request/Answer (PIR/PIA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.344</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2014-10-01">
+      <value>8388665</value>
+      <name>Update-ProSe-Subscriber-Data-Request/Answer (UPR/UPA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.344</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2014-10-01">
+      <value>8388666</value>
+      <name>ProSe-Notify-Request/Answer (PNR/PNA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.344</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2014-10-01">
+      <value>8388667</value>
+      <name>Reset-Request/Answer (RSR/RSA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.344</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2014-10-01">
+      <value>8388668</value>
+      <name>ProSe-Authorization-Request/Answer (PAR/PAA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.345</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2014-10-01">
+      <value>8388669</value>
+      <name>ProSe-Discovery-Request/Answer (PDR/PDA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.345</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2014-10-01">
+      <value>8388670</value>
+      <name>ProSe-Match-Request/Answer (PMR/PMA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.345</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2014-10-01">
+      <value>8388671</value>
+      <name>ProSe-Match-Report-Info-Request/Answer (PIR/PIA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.345</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2014-10-01">
+      <value>8388672</value>
+      <name>ProSe-Proximity-Request/Answer (PRR/PRA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.345</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2014-10-01">
+      <value>8388673</value>
+      <name>ProSe-Location-Update-Request (PLR/PLA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.345</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2014-10-01">
+      <value>8388674</value>
+      <name>ProSe-Alert-Request/Answer (ALR/ALA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.345</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2014-10-01">
+      <value>8388675</value>
+      <name>ProSe-Cancellation-Request/Answer (RPR/RPA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.345</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2014-10-08">
+      <value>8388676</value>
+      <name>ProXimity-Action-Request/Answer (PXR/PXA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.343</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2014-11-04">
+      <value>8388677</value>
+      <name>Rivada Xd DSC-Registration-Request/Answer (DDRR/DDRA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-11-04">
+      <value>8388678</value>
+      <name>Rivada Xd Heart-Beat-Request/Answer (DHBR/DHBA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-11-04">
+      <value>8388679</value>
+      <name>Rivada Xd Cell-Info-Transfer-Request/Answer (DCTR/DCTA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-11-04">
+      <value>8388680</value>
+      <name>Rivada Xd Cell-Info-Notification-Request/Answer (DCNR/DCNA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-11-04">
+      <value>8388681</value>
+      <name>Rivada Xd Cell-Info-Modification-Request/Answer (DIMR/DIMA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-11-04">
+      <value>8388682</value>
+      <name>Rivada Xd Cell-Info-Modification-Notification-Request/Answer (DINR/DINA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-11-04">
+      <value>8388683</value>
+      <name>Rivada Xd Resource-Allocation-Request/Answer (DRAR/DRAA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-11-04">
+      <value>8388684</value>
+      <name>Rivada Xd Resource-Allocation-Notification-Request/Answer (DANR/DANA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-11-04">
+      <value>8388685</value>
+      <name>Rivada Xd Resource-Modification-Request/Answer (DRMR/DRMA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-11-04">
+      <value>8388686</value>
+      <name>Rivada Xd Resource-Modification-Notification-Request/Answer (DMNR/DMNA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-11-04">
+      <value>8388687</value>
+      <name>Rivada Xd Resource-Hold-Request/Answer (DRHR/DRHA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-11-04">
+      <value>8388688</value>
+      <name>Rivada Xd Resource-Hold-Notification-Request/Answer (DHNR/DHNA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-11-04">
+      <value>8388689</value>
+      <name>Rivada Xd Resource-Resume-Request/Answer (DRSR/DRSA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-11-04">
+      <value>8388690</value>
+      <name>Rivada Xd Resource-Resume-Notification-Request/Answer (DSNR/DSNA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-11-04">
+      <value>8388691</value>
+      <name>Rivada Xd Resource-Usage-Update-Request/Answer (DRUR/DRUA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-11-04">
+      <value>8388692</value>
+      <name>Rivada Xd Resource-Usage-Notification-Request/Answer (DUNR/DUNA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-11-04">
+      <value>8388693</value>
+      <name>Rivada Xd Resource-Release-Request/Answer (DRRR/DRRA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-11-04">
+      <value>8388694</value>
+      <name>Rivada Xd Resource-Release-Notification-Request/Answer (DRNR/DRNA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-12-17">
+      <value>8388695</value>
+      <name>Rivada Xm Resource-Allocation-Request/Answer (MRAR/MRAA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-12-17">
+      <value>8388696</value>
+      <name>Rivada Xm Resource-Hold-Request/Answer (MRHR/MRHA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-12-17">
+      <value>8388697</value>
+      <name>Rivada Xm Resource-Release-Request/Answer (MRRR/MRRA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-12-17">
+      <value>8388698</value>
+      <name>Rivada Xm Resource-Modify-Request/Answer (MRMR/MRMA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-12-17">
+      <value>8388699</value>
+      <name>Rivada Xm Resource-Allocation-Notify-Request/Answer (MANR/MANA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-12-17">
+      <value>8388700</value>
+      <name>Rivada Xm Resource-Resume-Request/Answer (MRSR/MRSA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-12-17">
+      <value>8388701</value>
+      <name>Rivada Xm Add-UE-Context-Request/Answer (MAUR/MAUA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-12-17">
+      <value>8388702</value>
+      <name>Rivada Xm Update-UE-Context-Request/Answer (MUUR/MUUA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-12-17">
+      <value>8388703</value>
+      <name>Rivada Xm Delete-UE-Context-Request/Answer (MDUR/MDUA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-12-17">
+      <value>8388704</value>
+      <name>Rivada Xm Detach-UE-Request/Answer (MDTR/MDTA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-12-17">
+      <value>8388705</value>
+      <name>Rivada Xm Page-UE-Request/Answer (MPUR/MPUA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-12-17">
+      <value>8388706</value>
+      <name>Rivada Xm Heart-Beat-Request/Answer (MHBR/MHBA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-12-29">
+      <value>8388707</value>
+      <name>Rivada Xa DPC-Registration-Request/Answer (ADRR/ADRA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-12-29">
+      <value>8388708</value>
+      <name>Rivada Xa Heart-Beat-Request/Answer (AHBR/AHBA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-12-29">
+      <value>8388709</value>
+      <name>Rivada Xa Resource-Allocation-Request/Answer (ARAR/ARAA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-12-29">
+      <value>8388710</value>
+      <name>Rivada Xa Resource-Release-Request/Answer (ARRR/ARRA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-12-29">
+      <value>8388711</value>
+      <name>Rivada Xa Resource-Release-Notification-Request/Answer (ARNR/ARNA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2014-12-30">
+      <value>8388712</value>
+      <name>Rivada Xh User-Data-Request/Answer (HUDR/HUDA)</name>
+      <xref type="person" data="Vincent_D_Onofrio"/>
+    </record>
+    <record date="2015-01-04" updated="2015-01-06">
+      <value>8388713</value>
+      <name>ProSe-Initial-Location-Information-Request/Answer (PSR/PSA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.344</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2015-02-17">
+      <value>8388714</value>
+      <name>Nokia Session-Sync-Request/Answer (SSR/SSA)</name>
+      <xref type="person" data="Timo_Perala"/>
+    </record>
+    <record date="2015-02-17">
+      <value>8388715</value>
+      <name>Nokia Session-Mass-Sync-Request/Answer (SMR/SMA)</name>
+      <xref type="person" data="Timo_Perala"/>
+    </record>
+    <record date="2015-02-17">
+      <value>8388716</value>
+      <name>Nokia Fetch-Session-Request/Answer (FSR/FSA)</name>
+      <xref type="person" data="Timo_Perala"/>
+    </record>
+    <record date="2015-08-19">
+      <value>8388717</value>
+      <name>Ericsson Trace-Report-Request/Answer (TRR/TRA)</name>
+      <xref type="person" data="Gerhard_Schmidt-Krschka"/>
+    </record>
+    <record date="2015-09-24">
+      <value>8388718</value>
+      <name>Configuration-Information-Request/Answer (CIR/CIA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.336</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2015-09-24">
+      <value>8388719</value>
+      <name>Reporting-Information-Request/Answer (RIR/RIA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.336</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2015-10-14">
+      <value>8388720</value>
+      <name>Non-Aggregated-RUCI-Report-Request/Answer (NRR/NRA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.217</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2015-10-14">
+      <value>8388721</value>
+      <name>Aggregated-RUCI-Report-Request/Answer (ARR/ARA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.217</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2015-10-14">
+      <value>8388722</value>
+      <name>Modify-Uecontext-Request/Answer (MUR/MUA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.217</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2015-11-19">
+      <value>8388723</value>
+      <name>Background-Data-Transfer-Request/Answer (BTR/BTA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.154</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2015-11-19">
+      <value>8388724</value>
+      <name>Network-Status-Request/Answer (NSR/NSA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.153</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2015-11-19">
+      <value>8388725</value>
+      <name>Network-Status-Continuous-Report-Request/Answer (NCR/NCA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.153</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2016-03-21">
+      <value>8388726</value>
+      <name>NIDD-Information-Request/Answer (NIR/NIA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.336</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2016-03-21">
+      <value>8388727</value>
+      <name>ProXimity-Application-Request/Answer (XAR/XAA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.343</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2016-03-21">
+      <value>8388728</value>
+      <name>Data-Pull-Request/Answer (DPR/DPA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.283</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2016-03-21">
+      <value>8388729</value>
+      <name>Data-Update-Request/Answer (DMR/DMA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.283</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2016-03-21">
+      <value>8388730</value>
+      <name>Notification-Data-Request/Answer (NDR/NDA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.283</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2016-03-21">
+      <value>8388731</value>
+      <name>TSSF-Notification-Request/Answer (TNR/TNA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.212</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2016-03-22">
+      <value>8388732</value>
+      <name>Connection-Management-Request/Answer (CMR/CMA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.128</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2016-03-22">
+      <value>8388733</value>
+      <name>MO-Data-Request/Answer (ODR/ODA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.128</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2016-03-22">
+      <value>8388734</value>
+      <name>MT-Data-Request/Answer (TDR/TDA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.128</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2018-08-15">
+      <value>8388735</value>
+      <name>Event-Configuration-Request/Answer (ECR/ECA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.154</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2018-08-15">
+      <value>8388736</value>
+      <name>Event-Reporting-Request/Answer (ERR/ERA)</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.154</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record>
+      <value>8388737-16777213</value>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <value>16777214</value>
+      <name>Experimental code</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <value>16777215</value>
+      <name>Experimental code</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+  </registry>
+  
+  
+  
+  <registry id="aaa-parameters-48">
+    <title>Command Flags</title>
+    <xref type="rfc" data="rfc6733"/>
+    <registration_rule>Standards Action</registration_rule>
+    <record>
+      <bit>0</bit>
+      <name>'R'equest</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <bit>1</bit>
+      <name>'P'roxy</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <bit>2</bit>
+      <name>'E'rror</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <bit>3</bit>
+      <name>'T'</name>
+      <xref type="rfc" data="rfc6733"/>
+    </record>
+    <record>
+      <bit>4-7</bit>
+      <name>Unassigned</name>
+    </record>
+  </registry>
+  
+  
+  
+  <registry id="aaa-parameters-49">
+    <title>Mobility Capability Registry</title>
+    <expert>Jouni Korhonen</expert>
+    <xref type="rfc" data="rfc5447"/>
+    <registration_rule>Specification Required</registration_rule>
+    <note>Only numeric values that are 2^x (power of two, where x &gt;= 2) may be registered.
+    </note>
+    <record>
+      <value>0x0000000000000001</value>
+      <name>MIP6_INTEGRATED</name>
+      <xref type="rfc" data="rfc5447"/>
+    </record>
+    <record>
+      <value>0x0000000000000002</value>
+      <name>LOCAL_HOME_AGENT_ASSIGNMENT</name>
+      <xref type="rfc" data="rfc5447"/>
+    </record>
+    <record>
+      <value>0x0000010000000000</value>
+      <name>PMIP6_SUPPORTED</name>
+      <xref type="rfc" data="rfc5779"/>
+    </record>
+    <record>
+      <value>0x0000020000000000</value>
+      <name>IP4_HOA_SUPPORTED</name>
+      <xref type="rfc" data="rfc5779"/>
+    </record>
+    <record>
+      <value>0x0000040000000000</value>
+      <name>LOCAL_MAG_ROUTING_SUPPORTED</name>
+      <xref type="rfc" data="rfc5779"/>
+    </record>
+    <record date="2010-10-27">
+      <value>0x0000080000000000</value>
+      <name>ASSIGN_LOCAL_IP</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.273</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2010-10-27">
+      <value>0x0000100000000000</value>
+      <name>MIP4_SUPPORTED</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.273</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2010-10-27">
+      <value>0x0000200000000000</value>
+      <name>OPTIMIZED_IDLE_MODE_MOBILITY</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.273</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record date="2010-10-27">
+      <value>0x0000400000000000</value>
+      <name>GTPv2_SUPPORTED</name>
+      <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.273</xref>
+      <xref type="person" data="Kimmo_Kymalainen"/>
+    </record>
+    <record>
+      <value>0x0000800000000000</value>
+      <name>IP4_TRANSPORT_SUPPORTED</name>
+      <xref type="rfc" data="rfc6572"/>
+    </record>
+    <record>
+      <value>0x0001000000000000</value>
+      <name>IP4_HOA_ONLY_SUPPORTED</name>
+      <xref type="rfc" data="rfc6572"/>
+    </record>
+    <record>
+      <value>0x0002000000000000</value>
+      <name>INTER_MAG_ROUTING_SUPPORTED</name>
+      <xref type="rfc" data="rfc7156"/>
+    </record>
+  </registry>
+  
+  
+  <registry id="mip6-authentication-mode">
+    <title>MIP6 Authentication Mode Registry</title>
+    <hide/>
+    <xref type="rfc" data="rfc5778"/>
+    <registration_rule>Specification Required</registration_rule>
+    <expert>Unassigned</expert>
+    <record>
+      <value>0</value>
+      <name>Reserved</name>
+      <xref type="rfc" data="rfc5778"/>
+    </record>
+    <record>
+      <value>1</value>
+      <name>MIP6_AUTH_MN_AAA</name>
+      <xref type="rfc" data="rfc5778"/>
+    </record>
+    <record>
+      <value>2-4294967295</value>
+      <name>Unassigned</name>
+    </record>
+  </registry> 
+  
+  
+  <registry id="qos-profile">
+    <title>QoS Profiles</title>
+    <xref type="rfc" data="rfc5624"/>
+    <expert>Unassigned</expert>
+    <range>
+      <value>0-511</value>
+      <registration_rule>Standards Action</registration_rule>
+    </range>
+    <range>
+      <value>512-32767</value>
+      <registration_rule>Specification Required</registration_rule>
+    </range>
+    <range>
+      <value>32768-429496729</value>
+      <registration_rule>Reserved</registration_rule>
+    </range>
+    <record>
+      <value>0</value>
+      <name>Diameter</name>
+      <xref type="rfc" data="rfc5624"/>
+    </record>
+    <record>
+      <value>1</value>
+      <name>Resource priority parameters</name>
+      <xref type="rfc" data="rfc6735"/>
+    </record>
+    <record>
+      <value>2-32767</value>
+      <name>Unassigned</name>
+    </record>
+    <record>
+      <value>32768-4294967295</value>
+      <name>Reserved</name>
+      <xref type="rfc" data="rfc5624"/>
+    </record>
+  </registry> 
+  
+  
+  <people>
+    <person id="AC_Mahendran">
+      <name>AC Mahendran</name>
+      <uri>mailto:ac&amp;qualcomm.com</uri>
+      <updated>2007-08-01</updated>
+    </person>
+    <person id="Aleksey_Romanov">
+      <name>Aleksey Romanov</name>
+      <uri>mailto:aromanov&amp;juniper.net</uri>
+      <updated>2010-10-12</updated>
+    </person>
+    <person id="Alexey_Grishin">
+      <name>Alexey Grishin</name>
+      <uri>mailto:Alexei.Grichine&amp;billing.ru</uri>
+      <updated>2009-12-04</updated>
+    </person>
+    <person id="Avi_Lior">
+      <name>Avi Lior</name>
+      <uri>mailto:avi&amp;bridgewatersystems.com</uri>
+      <updated>2011-04-07</updated>
+    </person>
+    <person id="Bjorn_Almen">
+      <name>Björn Almén</name>
+      <uri>mailto:bjorn.almen&amp;ericsson.com</uri>
+      <updated>2006-04-11</updated>
+    </person>
+    <person id="Chiranjeev_Agrawal">
+      <name>Chiranjeev Agrawal</name>
+      <uri>mailto:chiranjeev.agrawal&amp;hp.com</uri>
+      <updated>2011-11-04</updated>
+    </person>
+    <person id="Christian_Schubert">
+      <name>Christian Schubert</name>
+      <uri>mailto:christian.schubert&amp;iptego.de</uri>
+      <updated>2007-10-22</updated>
+    </person>
+    <person id="Claudio_Lordello">
+      <name>Claudio Lordello</name>
+      <uri>mailto:clordello&amp;juniper.net</uri>
+      <updated>2009-08-21</updated>
+    </person>
+    <person id="Dan_D_Albuquerque">
+      <name>Dan D'Albuquerque</name>
+      <uri>mailto:dan.dalbuquerque&amp;apertio.com</uri>
+      <updated>2008-04-14</updated>
+    </person>
+    <person id="Francois-Frederic_Ozog">
+      <name>Francois-Frederic Ozog</name>
+      <uri>mailto:ff&amp;vedicis.com</uri>
+      <updated>2011-02-25</updated>
+    </person>
+    <person id="Gerhard_Schmidt-Krschka">
+      <name>Gerhard Schmidt-Krschka</name>
+      <uri>mailto:gerhard.schmidt-krschka&amp;ericsson.com</uri>
+      <updated>2015-08-19</updated>
+    </person>
+    <person id="German_Blanco">
+      <name>German Blanco</name>
+      <uri>mailto:german.blanco&amp;ericsson.com</uri>
+      <updated>2009-05-12</updated>
+    </person>    
+    <person id="Hannes_Tschofenig">
+      <name>Hannes Tschofenig</name>
+      <uri>mailto:Hannes.Tschofenig&amp;gmx.net</uri>
+      <updated>2013-07-23</updated>
+    </person>
+    <person id="Hyungseok_Chung">
+      <name>Hyungseok Chung</name>
+      <uri>mailto:chunghs&amp;etri.re.kr</uri>
+      <updated>2009-04-14</updated>
+    </person>
+    <person id="Inian_Vasanth">
+      <name>Inian Vasanth</name>
+      <uri>mailto:ivasanthp&amp;sandvine.com</uri>
+      <updated>2015-07-26</updated>
+    </person>
+    <person id="Irene_Martin">
+      <name>Irene Martin</name>
+      <uri>mailto:irene.martin&amp;ericsson.com</uri>
+      <updated>2014-07-09</updated>
+    </person>
+    <person id="J_V_Kishore">
+      <name>J V Kishore</name>
+      <uri>mailto:jvkk&amp;hp.com</uri>
+      <updated>2011-11-04</updated>
+    </person>
+    <person id="Janusz_Pieczerak">
+      <name>Janusz Pieczerak</name>
+      <uri>mailto:janusz.pieczerak&amp;telekomunikacja.pl</uri>
+      <updated>2009-09-08</updated>
+    </person>
+    <person id="Jarda_Nedved">
+      <name>Jarda Nedved</name>
+      <uri>mailto:jaroslav.nedved&amp;openmindnetworks.com</uri>
+      <updated>2017-03-28</updated>
+    </person>
+    <person id="Jin_Seek_Choi">
+      <name>Jin Seek Choi</name>
+      <uri>mailto:jinseek&amp;hanyang.ac.kr</uri>
+      <updated>2012-01-04</updated>
+    </person>
+    <person id="Jun_Chang">
+      <name>Jun Chang</name>
+      <uri>mailto:jchang&amp;juniper.net</uri>
+      <updated>2007-12-10</updated>
+    </person>
+    <person id="Jun_Wang">
+      <name>Jun Wang</name>
+      <uri>mailto:jwang&amp;qti.qualcomm.com</uri>
+      <updated>2013-12-08</updated>
+    </person>
+    <person id="Kimmo_Kymalainen">
+      <name>Kimmo Kymalainen</name>
+      <uri>mailto:kimmo.kymalainen&amp;etsi.org</uri>
+      <updated>2018-08-15</updated>
+    </person>    
+    <person id="Klaus_Turina">
+      <name>Klaus Turina</name>
+      <uri>mailto:Klaus.Turina&amp;ericsson.com</uri>
+      <updated>2013-10-23</updated>
+    </person>
+    <person id="Kwihoon_Kim">
+      <name>Kwihoon Kim</name>
+      <uri>mailto:kwihooi&amp;etri.re.kr</uri>
+      <updated>2016-05-16</updated>
+    </person>
+    <person id="Lars_Anglert">
+      <name>Lars Anglert</name>
+      <uri>mailto:lars.anglert&amp;ericsson.com</uri>
+      <updated>2011-10-27</updated>
+    </person>
+    <person id="Laimutis_Slecpenka">
+      <name>Laimutis Slecpenka</name>
+      <uri>mailto:dev&amp;tridigy.com</uri>
+      <updated>2014-11-06</updated>
+    </person>
+    <person id="Manfred_Benten">
+      <name>Manfred Benten</name>
+      <uri>mailto:manfred.benten&amp;airbus.com</uri>
+      <updated>2014-04-09</updated>
+    </person>
+    <person id="Martin_Del_Vecchio">
+      <name>Martin Del Vecchio</name>
+      <uri>mailto:marty&amp;covergence.com</uri>
+      <updated>2007-11-06</updated>
+    </person>
+    <person id="Michael_Brenner">
+      <name>Michael Brenner</name>
+      <uri>mailto:mrbrenner&amp;alcatel-lucent.com</uri>
+      <updated>2007-11-19</updated>
+    </person>
+    <person id="Michael_Mercurio">
+      <name>Michael Mercurio</name>
+      <uri>mailto:mmercurio&amp;camiant.com</uri>
+      <updated>2010-07-29</updated>
+    </person>
+    <person id="Michiaki_Hayashi">
+      <name>Michiaki Hayashi</name>
+      <uri>mailto:mc-hayashi&amp;kddi.com</uri>
+      <updated>2009-05-21</updated>
+    </person>
+    <person id="Miguel_Angel_Reina_Ortega">
+      <name>Miguel Angel Reina Ortega</name>
+      <uri>mailto:MiguelAngel.ReinaOrtega&amp;etsi.org</uri>
+      <updated>2010-01-08</updated>
+    </person>    
+    <person id="Niranjan_Avula">
+      <name>Niranjan Avula</name>
+      <uri>mailto:niranjan.avula&amp;verizonwireless.com</uri>
+      <updated>2016-07-11</updated>
+    </person>
+    <person id="Paul_Prisaznuk">
+      <name>Paul Prisaznuk</name>
+      <uri>mailto:pprisaznuk&amp;gmail.com</uri>
+      <updated>2014-04-09</updated>
+    </person>
+    <person id="S.Dhanalakshmi">
+      <name>S. Dhanalakshmi</name>
+      <uri>mailto:s.dhanalakshmi&amp;ericsson.com</uri>
+      <updated>2018-12-14</updated>
+    </person>
+    <person id="Sachin_Rathee">
+      <name>Sachin Rathee</name>
+      <uri>mailto:sachin.rathee&amp;convergys.com</uri>
+      <updated>2008-12-10</updated>
+    </person>
+    <person id="Sanjiv_Parikh">
+      <name>Sanjiv Parikh</name>
+      <uri>mailto:sparikh&amp;cloudmark.com</uri>
+      <updated>2010-04-28</updated>
+    </person>    
+    <person id="Scott_Luallin">
+      <name>Scott Luallin</name>
+      <uri>mailto:Scott.Luallin&amp;intrado.com</uri>
+      <updated>2013-04-22</updated>
+    </person>
+    <person id="Shicheng_Hu">
+      <name>Shicheng Hu</name>
+      <uri>mailto:shicheng.hu&amp;etsi.org</uri>
+      <updated>2008-10-22</updated>
+    </person>
+    <person id="Steffen_Ries">
+      <name>Steffen Ries</name>
+      <uri>mailto:sries&amp;juniper.net</uri>
+      <updated>2007-10-11</updated>
+    </person>
+    <person id="Steve_Donovan">
+      <name>Steve Donovan</name>
+      <uri>mailto:steve.donovan&amp;oracle.com</uri>
+      <updated>2013-09-23</updated>
+    </person>
+    <person id="Tarek_Abou-Assali">
+      <name>Tarek Abou-Assali</name>
+      <uri>mailto:tassali&amp;camiant.com</uri>
+      <updated>2010-07-29</updated>
+    </person>
+    <person id="Timo_Perala">
+      <name>Timo Perala</name>
+      <uri>mailto:timo.perala&amp;nsn.com</uri>
+      <updated>2015-02-17</updated>
+    </person>
+    <person id="Tom_Taylor">
+      <name>Tom Taylor</name>
+      <uri>mailto:tom.taylor.stds&amp;gmail.com</uri>
+      <updated>2008-12-04</updated>
+    </person>
+    <person id="Tomas_Menzl">
+      <name>Tomas Menzl</name>
+      <uri>mailto:tomas.menzl&amp;acision.com</uri>
+      <updated>2010-05-12</updated>
+    </person>
+    <person id="Torsten_Oertel">
+      <name>Torsten Oertel</name>
+      <uri>mailto:torsten.oertel&amp;vodafone.com</uri>
+      <updated>2006-09-20</updated>
+    </person>
+    <person id="Vincent_D_Onofrio">
+      <name>Vincent D’Onofrio</name>
+      <uri>mailto:registration&amp;rivada.com</uri>
+      <updated>2014-12-29</updated>
+    </person>
+    <person id="Vitaly_Dzhitenov">
+      <name>Vitaly Dzhitenov</name>
+      <uri>mailto:vitaly&amp;juniper.net</uri>
+      <updated>2014-10-29</updated>
+    </person>
+    <person id="Yoni_Eitan">
+      <name>Yoni Eitan</name>
+      <uri>mailto:yeitan&amp;sandvine.com</uri>
+      <updated>2011-04-29</updated>
+    </person>
+  </people>
+
+</registry>
