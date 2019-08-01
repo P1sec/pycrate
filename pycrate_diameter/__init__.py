@@ -27,5 +27,5 @@
 # *--------------------------------------------------------
 #*/
 #
-__all__ = ['Diameter', ]
+__all__ = ['Diameter', 'DiameterIETF', 'Diameter3GPP']
 __version__ = '0.4.0'
