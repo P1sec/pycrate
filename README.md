@@ -44,8 +44,16 @@ Dependencies
 ------------
 
 Currently none. Only the Python builtins and few internal modules of Python 
-(e.g. os, system, re) are required for most of the features.
-The pycrate_corenet part requires pysctp and CryptoMobile.
+(e.g. os, system, re) are required for most of the features. The json internal
+module is required for supporting the JSON API.
+
+The pycrate_mobile/TS24301_EMM module uses CryptoMobile as optional dependency
+to cipher / decipher LTE NAS messages.
+
+The pycrate_diameter part uses lxml as optional dependency to translate xml files
+from IANA as Python dictionnaries when the diameter module is loaded.
+
+The pycrate_corenet part requires pysctp and CryptoMobile to run.
 
 
 Automatic installation
@@ -80,6 +88,9 @@ should have been compiled with the latest version of the compiler):
 python -m pycrate_asn1c.asnproc
 ```
 
+More generally, installation is not required, and simply having all pycrate_* subdirectories
+into the PYTHON_PATH enables to use the complete library.
+
 
 Contributing
 ============
@@ -94,7 +105,7 @@ docstrings, and finally you can have a look at the source code.
 
 If after all those steps, you still have a question or you think you found a bug,
 please open an issue. When filling an issue, please provide precise information
-about your case.
+about your case and the error you potentially encounter.
 
 Specific support requires time and may not be always possible. 
 In case you require such support, please consider also contributing in one way or 
@@ -266,10 +277,17 @@ This subdirectory implements most of the 3GPP NAS protocol formats:
 * *TS24301_EMM*: structures for the EPS mobility management messages from TS 24.301
 * *TS24301_ESM*: structures for the EPS mobility management messages from TS 24.301
 * *TS24301_IE*: structures for many information elements from TS 24.301
-* *TS29281_GTPU*: structures for GTP-U messages from TS 29.281
+* *TS29281_GTPU*: structures for LTE/EPC GTP-U messages from TS 29.281
 * *TS44018_GTTP*: structure for the single GSM GTTP message from TS 44.018
 * *TS44018_IE*: structures for many information elements from TS 44.018
 * *TS44018_RR*: structures for the GSM and GPRS radio ressources messages from TS 44.018
+
+
+pycrate_diameter
+----------------
+
+This subdirectory contains a diameter module which implements the DiameterGeneric
+class, a generic diameter encoder / decoder.
 
 
 pycrate_corenet
