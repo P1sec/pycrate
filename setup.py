@@ -31,7 +31,7 @@ setup(
     install_requires=[],
     
     # optional dependencies
-    extra_require={
+    extras_require={
         "NASLTE"  : ["CryptoMobile"],
         "corenet" : ["pysctp", "CryptoMobile"],
         "diameter_dict" : ["lxml"],
