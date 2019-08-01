@@ -16,6 +16,7 @@ setup(
               "pycrate_csn1",
               "pycrate_csn1dir",
               "pycrate_mobile",
+              "pycrate_diameter",
               "pycrate_corenet",
               "pycrate_sys",
               ],
@@ -26,14 +27,31 @@ setup(
              "tools/pycrate_showmedia.py",
              ],
     
-    # no dependency yet
+    # no mandatory dependency
     install_requires=[],
     
-    # dirs with .asn and .txt files are not installed, like .json files 
+    # optional dependencies
+    extra_require={
+        "NASLTE"  : ["CryptoMobile"],
+        "corenet" : ["pysctp", "CryptoMobile"],
+        "diameter_dict" : ["lxml"],
+        },
+    
+    # for pycrate_asn1dir and pycrate_csn1dir:
+    # .asn, .csn, .txt and .json files from asn1dir and csn1dir are not required
+    # to be installed 
     # only compiled .py modules are installed by default
+    # for pycrate_diameter:
+    # .xml files are required as they are transformed into Python dict when the
+    # module is loaded
+    # for pycrate_corenet:
+    # the AuC.db file is the mobile subscriber authentication database 
+    # containing Ki and is required at runtime when using corenet
     package_data={
-        #'pycrate_asn1dir': ['*.asn', '*.json'],
-        'pycrate_corenet': ['AuC.db'],
+        #"pycrate_asn1dir"  : ["*.asn", "*.json"],
+        #"pycrate_csn1dir"  : ["*.csn"],
+        "pycrate_diameter" : ["*.xml"],
+        "pycrate_corenet"  : ["AuC.db"],
         },
     #include_package_data=False,
     
@@ -41,7 +59,7 @@ setup(
     author_email="michau.benoit@gmail.com",
     description="A software suite to handle various data formats",
     long_description=open("README.md", "r").read(),
-    url="https://github.com/mitshell/pycrate/",
-    keywords="protocol format asn1 compiler csn1 encoder decoder mobile core network",
+    url="https://github.com/P1sec/pycrate/",
+    keywords="protocol format asn1 compiler csn1 encoder decoder mobile core network Diameter NAS S1AP TCAP MAP",
     license="LGPL v2.1+",
     )
