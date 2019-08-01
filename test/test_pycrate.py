@@ -73,6 +73,7 @@ class TestPycrate(unittest.TestCase):
         test_elt_1()
         test_elt_2()
         test_elt_3()
+        test_elt_4()
     
     # fmt_media objects
     def test_media(self):
@@ -148,7 +149,7 @@ class TestPycrate(unittest.TestCase):
         test_msracap()
         test_si2qr()
         test_si13r()
-        
+    
     # mobile
     def test_mobile(self):
         print('[<>] testing pycrate_mobile')

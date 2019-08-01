@@ -28,6 +28,7 @@
 #*/
 
 __all__ = ['Buf', 'BufAuto', 'NullTermStr',
+           'String', 'UTF8String', 'UTF16String', 'UTF32String',
            'Uint', 'Uint8', 'Uint16', 'Uint24', 'Uint32', 'Uint48', 'Uint64',
            'Int', 'Int8', 'Int16', 'Int24', 'Int32', 'Int48', 'Int64',
            'UintLE', 'Uint8LE', 'Uint16LE', 'Uint24LE', 'Uint32LE', 'Uint48LE', 'Uint64LE',
@@ -324,6 +325,101 @@ class NullTermStr(Buf):
                 raise(EltErr('{0} [_from_char]: {1}'.format(self._name, err)))
             else:
                 char.forward(8*len(val))
+
+
+#------------------------------------------------------------------------------#
+# Encoded string
+#------------------------------------------------------------------------------#
+
+class String(Atom):
+    
+    # CODEC can be any of the string codec supported by Python
+    # e.g. utf8, utf16, utf32...
+    CODEC = 'utf8'
+    
+    if python_version <= 2:
+        TYPES   = (unicode, )
+    else:
+        TYPES   = (str, )
+    TYPENAMES   = get_typenames(*TYPES)
+    DEFAULT_VAL = u''
+    DEFAULT_BL  = 0
+    
+    #--------------------------------------------------------------------------#
+    # format routines
+    #--------------------------------------------------------------------------#
+    # Warning: there is no specific processing against fixed bit / byte length
+    # because it is highly improbable to have such encoded string with fixed
+    # length.
+    # However, in case some fixed length is applied to such type, things could
+    # fail silently...
+    
+    def _get_bl_from_val(self):
+        return 8 * len(self.get_val().encode(self.CODEC))
+    
+    #--------------------------------------------------------------------------#
+    # conversion routines
+    #--------------------------------------------------------------------------#
+    
+    def _to_pack(self):
+        """Produces a tuple ready to be packed with pack_val() according to its
+        internal value
+        """
+        if not self.get_trans():
+            return [(TYPE_BYTES, self.get_val().encode(self.CODEC), self.get_bl())]
+        else:
+            return []
+    
+    def _from_char(self, char):
+        """Consume the charpy intance and set its internal value according to it
+        """
+        if self.get_trans():
+            return
+        if self._blauto is not None:
+            bl = self._blauto()
+            if self._SAFE_DYN:
+                self._chk_bl(bl)
+        elif self._bl is not None:
+            bl = self._bl
+        else:
+            bl = None
+        #
+        try:
+            buf = char.get_bytes(bl)
+        except CharpyErr as err:
+            raise(CharpyErr('{0} [_from_char]: {1}'.format(self._name, err)))
+        except Exception as err:
+            raise(EltErr('{0} [_from_char]: {1}'.format(self._name, err)))
+        else:
+            try:
+                self._val = buf.decode(self.CODEC)
+            except Exception as err:
+                raise(EltErr('{0} [_from_char], invalid encoding: {1}'\
+                      .format(self._name, err)))
+    
+    #--------------------------------------------------------------------------#
+    # json interface
+    #--------------------------------------------------------------------------#
+    
+    if _with_json:
+        
+        def _from_jval(self, val):
+            self.set_val(val)
+        
+        def _to_jval(self):
+            return self.get_val()
+
+
+class UTF8String(String):
+    CODEC = 'utf8'
+
+
+class UTF16String(String):
+    CODEC = 'utf16'
+
+
+class UTF32String(String):
+    CODEC = 'utf32'
 
 
 #------------------------------------------------------------------------------#

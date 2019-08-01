@@ -529,7 +529,9 @@ def test_elt_2():
     if _with_json:
         jv1, jso1 = t1._to_jval(), t1.to_json()
         jv2, jso2 = t2._to_jval(), t2.to_json()
-        assert( jv1 == [{'T': 5}, {'F1': 3}, {'F2': 0}, {'L': 256}, {'TestA': [{'T': 2}, {'F1': 0}, {'F2': 1}, {'L': 13}, {'V': '756e2070657469742074727563'}]}, {'TestA': [{'T': 1}, {'F1': 0}, {'F2': 1}, {'L': 14}, {'V': '756e2067726f73206d616368696e'}]}] )
+        assert( jv1 == [{'T': 5}, {'F1': 3}, {'F2': 0}, {'L': 256},
+            {'TestA': [{'T': 2}, {'F1': 0}, {'F2': 1}, {'L': 13}, {'V': '756e2070657469742074727563'}]},
+            {'TestA': [{'T': 1}, {'F1': 0}, {'F2': 1}, {'L': 14}, {'V': '756e2067726f73206d616368696e'}]}] )
         assert( jv2 == jv1 )
         t2._from_jval(jv1)
         assert( t2._to_jval() == jv1 )
@@ -602,7 +604,8 @@ def test_elt_3():
     
     if _with_json:
         jv1, jso1 = t1._to_jval(), t1.to_json() 
-        assert( jv1 == [{'Fmt': 1}, {'TLVs': {'TLV8Seq': [{'TLV8': [{'T': 1}, {'L': 3}, {'V': '616161'}]}, {'TLV8': [{'T': 18}, {'L': 4}, {'V': '42424242'}]}]}}] )
+        assert( jv1 == [{'Fmt': 1}, {'TLVs': {'TLV8Seq': [{'TLV8': [{'T': 1}, {'L': 3}, {'V': '616161'}]},
+                                                          {'TLV8': [{'T': 18}, {'L': 4}, {'V': '42424242'}]}]}}] )
         t1.set_val(None)
         t1.from_json(jso1)
         assert( t1._to_jval() == jv1 )
@@ -630,6 +633,38 @@ def test_elt_3():
     t2.from_bytes(b3)
     assert( t2.get_val()[1] == v1[1] )
     assert( t2.to_bytes()   == b3 )
+
+
+def test_elt_4():
+    
+    class LenStr(Envelope):
+        _GEN = (
+            Uint8('Len'),
+            UTF8String('Str')
+            )
+        def __init__(self, *args, **kwargs):
+            Envelope.__init__(self, *args, **kwargs)
+            self[0].set_valauto(lambda: self[1].get_len())
+            self[1].set_blauto(lambda: 8 * self[0].get_val())
+    
+    ls  = LenStr(val={'Str': u'über schön!'})
+    lsv = [13, u'über schön!']
+    lsb = b'\r\xc3\xbcber sch\xc3\xb6n!'
+    assert( ls.get_val() == lsv )
+    assert( ls.to_bytes() == lsb )
+    ls.set_val(None)
+    ls.from_bytes(lsb)
+    assert( ls.get_val() == lsv )
+    ls.reautomate()
+    assert( ls.get_val() == lsv )
+    
+    if _with_json:
+        lsj = ls.to_json()
+        ls.set_val(None)
+        ls.from_json(lsj)
+        assert( ls.get_val() == lsv )
+        ls.reautomate()
+        assert( ls.get_val() == lsv )
 
 
 #------------------------------------------------------------------------------#
@@ -735,7 +770,11 @@ def test_perf_core():
     Ti = timeit(test_elt_3, number=700)
     print('test_elt_3: {0:.4f}'.format(Ti))
     
-    print('[+] core total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te+Tf+Tg+Th+Ti))
+    print('[+] elt test 4')
+    Tj = timeit(test_elt_3, number=500)
+    print('test_elt_4: {0:.4f}'.format(Tj))
+    
+    print('[+] core total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te+Tf+Tg+Th+Ti+Tj))
 
 if __name__ == '__main__':
     test_perf_core()
