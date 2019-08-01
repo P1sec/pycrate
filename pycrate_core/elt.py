@@ -1371,9 +1371,8 @@ class Atom(Element):
         else:
             desc = ''
         # type of representation to be used
-        val = self()
         if self._rep in (REPR_RAW, REPR_HUM):
-            val_repr = repr(val)
+            val_repr = repr(self.get_val())
         elif self._rep == REPR_BIN:
             val_repr = '0b' + self.bin()
         elif self._rep in (REPR_HEX, REPR_HD):
