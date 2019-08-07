@@ -267,14 +267,12 @@ class IE(Envelope):
             self.unset_IE()
             [elt.set_val(None) for elt in self.__iter__()]
         elif isinstance(vals, (tuple, list)):
-            ind = 0
-            for elt in self.__iter__():
+            for ind, elt in enumerate(self.__iter__()):
                 val = vals[ind]
                 if elt._name == 'V' and not isinstance(val, bytes_types):
                     ie_val = val
                 else:
                     elt.set_val(val)
-                ind += 1
         elif isinstance(vals, dict):
             for key, val in vals.items():
                 if key == 'V' and not isinstance(val, bytes_types):
