@@ -38,6 +38,10 @@ from pycrate_mobile.NAS             import *
 from pycrate_mobile.SIGTRAN         import *
 from pycrate_mobile.SCCP            import *
 from pycrate_mobile.TS29281_GTPU    import *
+from pycrate_mobile.TS29274_GTPC    import *
+from pycrate_diameter.Diameter      import DiameterGeneric
+from pycrate_diameter.DiameterIETF  import DiameterIETF
+from pycrate_diameter.Diameter3GPP  import Diameter3GPP
 #
 from pycrate_core.elt               import _with_json
 
@@ -140,10 +144,27 @@ sccp_pdu = tuple(map(unhexlify, (
     '090003070b04435604010443430a0105018e430a00'
     )))
 
-# GTPU messages
+# GTPv1-U messages
 gtpu_pdu = tuple(map(unhexlify, (
     '30ff003c04cec0bb4500003c22cb000080019bad0aa002ff481e268c0800995a0300b1016162636465666768696a6b6c6d6e6f7071727374757677616263646566676869', # GPDU (wireshark bug tracker)
     '361a00200000000000000040010868001004cec0bb85001022222222000000000000000000000002', # GTPU error ind
+    )))
+
+# GTPv2-C messages
+gtpc_pdu = tuple(map(unhexlify, (
+    '482000c400000000000016000100080010214365871932f44c00050004930400004b000800538811500000000056000d001804f550000904f5500000001463000100015300030004f55052000100064d00040000080000570009008a000000070a010a0b570009018700000000c0a80169470005000461706e3180000100004f00050001000000004800080000003e8000003e807f00010000720002000a015f00020072315d001f0049000100055000160008090000000000000000000000000000000000000000', # Create Session Request (ngic project)
+    '48220043eeffc000000017005d001200490001000557000900800c0000000b01016c570009008a000000070a010a0b56000d001804f550000904f550000000145300030004f550', # Modify Bearer Request (ngic project)
+    '4844004deeffc00080001800490001000564000100025100150001000000abe0000000abe0000000abe0000000abe052000100065500190022208009100a989a81ffffffff108109100a989a81ffffffff', # Bearer Resource Command (ngic project)
+    )))
+
+# Diameter IETF messages
+diam_pdu = tuple(map(unhexlify, (
+    '010000c8800001010000000053cafe6a7dc0a11b00000108400000206f70656e6469616d2e6561702e746573746265642e61616100000128400000176561702e746573746265642e61616100000001014000000e0001c0a8692800000000010a4000000c000000000000010d000000154f70656e204469616d65746572000000000001164000000c4bed17dc000001094000000c00000000000001024000000c00000001000001024000000c000000050000010b0000000c000000010000012b4000000c00000000', # Cap Exchange Req (opendiameter project)
+    '010000cc000001010000000053cafe6a7dc0a11b0000010c4000000c000007d1000001084000001a67772e6561702e746573746265642e616161000000000128400000176561702e746573746265642e61616100000001164000000c4bed163e000001014000000e0001c0a8691e00000000010a4000000c000000000000010d00000014667265654469616d657465720000010b0000000c000000640000012b4000000c00000000000001024000000c00000001000001034000000c00000003000001024000000c00000005', # Cap Exchange Resp (opendiameter project)
+    '010001a8c000010c0000000500204a1663d000060000010740000046737570617574682e6561702e746573746265642e6161613b313237333832383932353b313b636c69656e743b67772e6561702e746573746265642e61616100000000011b400000176561702e746573746265642e61616100000001084000001f737570617574682e6561702e746573746265642e6161610000000128400000176561702e746573746265642e61616100000001024000000c00000005000001124000000c00000003000001984000000c00000001000001ce4000001302c6000b01636c69656e7400000000014000000e636c69656e740000000000044000000cc0a8690a000000204000001f737570617574682e6561702e746573746265642e61616100000000054000000c000000010000001e4000002730322d30302d30302d30302d30302d30303a6d616338303231312074657374000000001f4000001930322d30302d30302d30302d30312d30300000000000000c4000000c000005780000003d4000000c000000130000004d4000001e434f4e4e4543542035344d627073203830322e3131670000', # EAP Req (opendiameter project)
+    '010001080000010c0000000500204a1663d000060000010740000046737570617574682e6561702e746573746265642e6161613b313237333832383932353b313b636c69656e743b67772e6561702e746573746265642e6161610000000001024000000c00000005000001124000000c000000030000010c4000000c000003e900000108400000206f70656e6469616d2e6561702e746573746265642e61616100000128400000176561702e746573746265642e61616100000000014000000e636c69656e740000000001ce4000000e01c700060d200000000001234000000c00000168000001144000000c0000001e000001154000000c000000010000001b0000000c00000bb8', # EAP Resp (opendiameter project)
+    '010000588000011a0000000000204a1967700003000001084000001f6261636b656e642e6561702e746573746265642e6161610000000128400000176561702e746573746265642e61616100000001114000000c00000000', # Discon-peer Req (opendiameter project)
+    '010000540000011a0000000000204a1967700003000001084000001a67772e6561702e746573746265642e616161000000000128400000176561702e746573746265642e616161000000010c4000000c000007d1', # Discon-peer Ans (opendiameter project)
     )))
 
 
@@ -203,6 +224,7 @@ def test_sccp(sccp_pdu=sccp_pdu):
         v = m.get_val()
         m.reautomate()
         assert( m.get_val() == v )
+        #m.__init__()
         m.set_val(v)
         assert( m.to_bytes() == pdu)
         #
@@ -219,6 +241,7 @@ def test_gtpu(gtpu_pdu=gtpu_pdu):
         v = m.get_val()
         m.reautomate()
         assert( m.get_val() == v )
+        #m.__init__()
         m.set_val(v)
         assert( m.to_bytes() == pdu )
         #
@@ -226,6 +249,41 @@ def test_gtpu(gtpu_pdu=gtpu_pdu):
             t = m.to_json()
             m.from_json(t)
             assert( m.get_val() == v )
+
+
+def test_gtpc(gtpc_pdu=gtpc_pdu):
+    for pdu in gtpc_pdu:
+        m, e = parse_GTPC(pdu)
+        assert( e == 0 )
+        v = m.get_val()
+        m.reautomate()
+        assert( m.get_val() == v )
+        m.__init__()
+        m.set_val(v)
+        assert( m.to_bytes() == pdu )
+        #
+        if _with_json:
+            t = m.to_json()
+            m.from_json(t)
+            assert( m.get_val() == v )
+
+
+def test_diameter(diam_pdu=diam_pdu):
+    for dm in (DiameterGeneric(), DiameterIETF(), Diameter3GPP()):
+        for pdu in diam_pdu:
+            dm.from_bytes(pdu)
+            v = dm.get_val()
+            dm.reautomate()
+            assert( dm.get_val() == v )
+            dm.__init__()
+            dm.set_val(v)
+            assert( dm.to_bytes() == pdu )
+            #
+            if _with_json:
+                t = dm.to_json()
+                dm.from_json(t)
+                assert( dm.get_val() == v )
+
 
 
 def test_perf_mobile():
@@ -239,18 +297,26 @@ def test_perf_mobile():
     print('test_nas_mt: {0:.4f}'.format(Tb))
     
     print('[+] SIGTRAN decoding and re-encoding')
-    Tc = timeit(test_sigtran, number=300)
+    Tc = timeit(test_sigtran, number=350)
     print('test_sigtran: {0:.4f}'.format(Tc))
     
     print('[+] SCCP decoding and re-encoding')
     Td = timeit(test_sccp, number=130)
     print('test_sccp: {0:.4f}'.format(Td))
     
-    print('[+] GTP-U decoding and re-encoding')
-    Te = timeit(test_gtpu, number=500)
+    print('[+] GTPv1-U decoding and re-encoding')
+    Te = timeit(test_gtpu, number=600)
     print('test_gtpu: {0:.4f}'.format(Te))
     
-    print('[+] test_mobile total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te))
+    print('[+] GTPv2-C decoding and re-encoding')
+    Tf = timeit(test_gtpc, number=80)
+    print('test_gtpc: {0:.4f}'.format(Tf))
+    
+    print('[+] Diameter decoding and re-encoding')
+    Tg = timeit(test_diameter, number=14)
+    print('test_diameter: {0:.4f}'.format(Tg))
+    
+    print('[+] test_mobile total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te+Tf+Tg))
 
 
 if __name__ == '__main__':
