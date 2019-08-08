@@ -1057,7 +1057,6 @@ class GTPCIE(Envelope):
                 ie_class, ie_desc = env.OPT[ie_type]
             elif (ie_type, ie_inst) in env.OPT:
                 ie_class, ie_desc = env.OPT[(ie_type, ie_inst)]
-            print('%s [_select_ie] %r, %r' % (self._name, ie_class, ie_desc))
         if ie_class is None and ie_type in GTPCIETags_dict:
             # IE type / instance not defined for this specific msg
             ie_class = GTPCIETags_dict[ie_type][0]
@@ -1067,6 +1066,8 @@ class GTPCIE(Envelope):
             return ie_class(hier=1), ie_desc
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         self[0]._from_char(char)
         self.set_ie_class()
         # truncate char according to Len and decode IE data
@@ -1112,6 +1113,9 @@ class GTPCIEs(Sequence):
             self._ie_mand.add(ie_name)
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
+        #
         self.__init__()
         Sequence._from_char(self, char)
         #
@@ -1140,6 +1144,8 @@ class GTPCMsg(Envelope):
         )
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         # decode msg header
         self[0]._from_char(char)
         # truncate char according to Len
