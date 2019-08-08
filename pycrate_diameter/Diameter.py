@@ -98,14 +98,18 @@ except Exception as err:
 class OctetString(Buf):
     pass
 
+
 class Integer32(Int32):
     pass
+
 
 class Integer64(Int64):
     pass
 
+
 class Unsigned32(Uint32):
     pass
+
 
 class Unsigned64(Uint64):
     pass
@@ -149,11 +153,14 @@ class Float64(_IEEE_754_1985):
 class DiameterIdentity(Buf):
     _rep = REPR_HUM
 
+
 class DiameterURI(UTF8String):
     _rep = REPR_HUM
 
+
 class Enumerated(Int32):
     pass
+
 
 class IPFilterRule(Buf):
     _rep = REPR_HUM
@@ -206,7 +213,7 @@ class AVPGeneric(Envelope):
     _GEN = (
         AVPHdr(),
         Buf('AVPData', rep=REPR_HEX, hier=1),
-        Buf('AVPPad', rep=REPR_HEX)
+        BufAuto('AVPPad', rep=REPR_HEX)
         )
     
     def __init__(self, *args, **kwargs):
@@ -237,43 +244,42 @@ class AVPGeneric(Envelope):
         self[0].set_val(val_hdr)
         avp_code = self[0][0].get_val()
         if avp_code in self.FMT_LUT:
-            AVPData = self.FMT_LUT[avp_code]()
+            AVPData = self.FMT_LUT[avp_code](hier=1)
             self.replace(self[1], AVPData)
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         self[0]._from_char(char)
         avp_code = self[0][0].get_val()
-        restore_char_len = False
+        char_lb = None
+        #
         if avp_code in self.FMT_LUT:
-            AVPData = self.FMT_LUT[avp_code]()
-            if hasattr(AVPData, '_bl') and AVPData._bl is None:
-                # atomic variable length AVP, need to automate AVPData length
-                AVPData.set_blauto(lambda: (self[0][5].get_val() - 12) << 3 if \
-                                                       self[0][1].get_val() else \
-                                           (self[0][5].get_val() -  8) << 3)
-            else:
-                # Grouped or Float AVP
-                restore_char_len = True
-                char_bl = char._len_bit
-                dat_len = self[0][5].get_val() - 8
-                if self[0][1].get_val():
-                    dat_len -= 4
-                if dat_len < 0:
-                    raise(EltErr('{0} [_from_char] invalid AVP length, {1}'\
-                          .format(self._name, self[0][5].get_val())))
-                char._len_bit = char._cur + 8 * dat_len
+            # get the length of the AVP data
+            dat_len = self[0][5].get_val() - 8
+            if self[0][1].get_val():
+                dat_len -= 4
+            if dat_len < 0:
+                raise(EltErr('{0} [_from_char] invalid AVP length, {1}'\
+                      .format(self._name, self[0][5].get_val())))
+            # instantiate the type corresponding to the AVP
+            AVPData = self.FMT_LUT[avp_code](hier=1)
             if avp_code in AVPSpecVal_dict:
                 # add dict for value interpretation
                 AVPData._dic = AVPSpecVal_dict[avp_code]
             # replace the generic Data format with the custom one
             self.replace(self[1], AVPData)
+            # truncate char
+            char_lb = char._len_bit
+            char._len_bit = char._cur + 8 * dat_len
+        #
         self[1]._from_char(char)
-        if restore_char_len:
-            # Grouped or Float AVP
-            char._len_bit = char_bl
-        else:
-            # atomic variable length AVP
-            self[2]._from_char(char)
+        if char_lb is not None:
+            # restore char original length
+            char._len_bit = char_lb
+        #
+        # get padding
+        self[2]._from_char(char)
 
 
 #------------------------------------------------------------------------------#
@@ -324,21 +330,21 @@ class DiameterGeneric(Envelope):
         avps_len = self[0][1].get_val() - 20
         char_len = char.len_byte()
         if char_len > avps_len:
-            char._len_bit -= 8*(char_len - avps_len)
-            restore_char_len = True
-            char_bl = char._len_bit
+            char_lb = char._len_bit
+            char._len_bit = char._cur + 8 * avps_len
         else:
-            restore_char_len = False
+            char_lb = None
         #
         self[1]._from_char(char)
         #
-        if restore_char_len:
-            char._len_bit = char_bl
+        if char_lb is not None:
+            char._len_bit = char_lb
 
 
 #------------------------------------------------------------------------------#
 # custom AVP generator
 #------------------------------------------------------------------------------#
+# this is currently unused
 
 def GenerateAVP(Code, DataType, M=0, P=0, VendorID=None):
     """generate a specific Diameter AVP with the appropriate Code and Data type
