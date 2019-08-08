@@ -230,6 +230,8 @@ class AVPGeneric(Envelope):
                 self[1].set_val(val['AVPData'])
             if 'AVPPad' in val:
                 self[1].set_val(val['AVPPad'])
+        else:
+            Envelope.set_val(self, val)
     
     def set_val_hdr(self, val_hdr):
         self[0].set_val(val_hdr)
