@@ -256,6 +256,9 @@ class GTPUHdrExt133(GTPUHdrExtAuto):
 # TS 29.281, section 5.1
 #------------------------------------------------------------------------------#
 
+# Warning: this GTPUHdrExtList is not friendly to build, as the user requires to
+# explicitely add GTPUHdrExt.. into it when building a message
+
 class GTPUHdrExtList(Envelope):
     _GEN = ()
     _HdrExt = {
