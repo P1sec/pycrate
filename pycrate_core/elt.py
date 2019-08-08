@@ -3457,9 +3457,9 @@ class Sequence(Element):
         if num is not None:
             for i in range(num):
                 clone = self._tmpl.clone()
+                clone._env = self
                 clone._from_char(char)
                 self._content.append(clone)
-                clone._env = self
         else:
             # there is no predefined limit in the number of repeated content
             # consume the charpy instance until its empty and raises
@@ -3467,6 +3467,7 @@ class Sequence(Element):
                 # remember charpy cursor position, to restore it when it raises
                 cur = char._cur
                 clone = self._tmpl.clone()
+                clone._env = self
                 try:
                     clone._from_char(char)
                 except CharpyErr as err:
@@ -3474,7 +3475,6 @@ class Sequence(Element):
                     break
                 else:
                     self._content.append(clone)
-                    clone._env = self
     
     #--------------------------------------------------------------------------#
     # copy / cloning routines
