@@ -3994,6 +3994,13 @@ class Alt(Element):
     _trans     = None
     _transauto = None
     _GEN       = {}
+    _sel       = lambda a, b: None
+    
+    # Warning:
+    # When setting the selection callback as class attribute _sel, prototype is
+    # lambda a, b: ... both a & b being self when instantiated
+    # When setting the selection callback during / after initialization, prototype is
+    # lambda a: ... a being self
     
     __attrs__ = ('_env',
                  '_name',
@@ -4080,9 +4087,6 @@ class Alt(Element):
         # alternative selection callback
         if 'sel' in kw:
             self.set_sel( kw['sel'] )
-        else:
-            self._sel = lambda: None
-        # currently, selection callback needs to be set after initialization
         
         # if a val dict is passed as argument
         # broadcast it to given content items
