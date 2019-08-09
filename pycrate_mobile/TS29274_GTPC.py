@@ -38,9 +38,18 @@
 # release 16 (00)
 #------------------------------------------------------------------------------#
 
-from pycrate_core.utils import *
-from pycrate_core.elt   import *
-from pycrate_core.base  import *
+from pycrate_core.utils     import *
+from pycrate_core.elt       import *
+from pycrate_core.base      import *
+from pycrate_core.charpy    import *
+
+from pycrate_mobile.TS24301_IE  import TAI, UENetCap
+from pycrate_mobile.TS24008_IE  import (
+    BufBCD, ProtConfig, PLMN, TFT, RAI, LAI, DRXParam, VoiceDomPref
+    )
+from pycrate_csn1dir.ms_network_capability_value_part import (
+    ms_network_capability_value_part
+    )
 
 
 #------------------------------------------------------------------------------#
@@ -839,6 +848,1274 @@ class WLANOffloadabilityInd(Buf):
     pass
 
 
+#------------------------------------------------------------------------------#
+# IMSI
+# TS 29.274, 8.3
+#------------------------------------------------------------------------------#
+
+class IMSI(BufBCD):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# Cause
+# TS 29.274, 8.4
+#------------------------------------------------------------------------------#
+
+Cause_dict = {
+    1 : 'Reserved',
+    2 : 'Local Detach',
+    3 : 'Complete Detach',
+    4 : 'RAT changed from 3GPP to Non-3GPP',
+    5 : 'ISR deactivation',
+    6 : 'Error Indication received from RNC/eNodeB/S4-SGSN/MME',
+    7 : 'IMSI Detach Only',
+    8 : 'Reactivation Requested',
+    9 : 'PDN reconnection to this APN disallowed',
+    10 : 'Access changed from Non-3GPP to 3GPP',
+    11 : 'PDN connection inactivity timer expires',
+    12 : 'PGW not responding',
+    13 : 'Network Failure',
+    14 : 'QoS parameter mismatch',
+    15 : 'EPS to 5GS Mobility',
+    16 : 'Request accepted',
+    17 : 'Request accepted partially',
+    18 : 'New PDN type due to network preference.',
+    19 : 'New PDN type due to single address bearer only.',
+    64 : 'Context Not Found',
+    65 : 'Invalid Message Format',
+    66 : 'Version not supported by next peer',
+    67 : 'Invalid length',
+    68 : 'Service not supported',
+    69 : 'Mandatory IE incorrect',
+    70 : 'Mandatory IE missing',
+    71 : 'Shall not be used. See NOTE 2 and NOTE 3.',
+    72 : 'System failure',
+    73 : 'No resources available',
+    74 : 'Semantic error in the TFT operation',
+    75 : 'Syntactic error in the TFT operation',
+    76 : 'Semantic errors in packet filter(s)',
+    77 : 'Syntactic errors in packet filter(s)',
+    78 : 'Missing or unknown APN',
+    79 : 'Shall not be used. See NOTE 2 and NOTE 3.',
+    80 : 'GRE key not found',
+    81 : 'Relocation failure',
+    82 : 'Denied in RAT',
+    83 : 'Preferred PDN type not supported',
+    84 : 'All dynamic addresses are occupied',
+    85 : 'UE context without TFT already activated. See NOTE 6.',
+    86 : 'Protocol type not supported',
+    87 : 'UE not responding. See NOTE 7.',
+    88 : 'UE refuses',
+    89 : 'Service denied. See NOTE 7.',
+    90 : 'Unable to page UE',
+    91 : 'No memory available',
+    92 : 'User authentication failed',
+    93 : 'APN access denied – no subscription',
+    94 : 'Request rejected (reason not specified)',
+    95 : 'P-TMSI Signature mismatch',
+    96 : 'IMSI/IMEI not known',
+    97 : 'Semantic error in the TAD operation',
+    98 : 'Syntactic error in the TAD operation',
+    99 : 'Shall not be used. See NOTE 2 and NOTE 3.',
+    100 : 'Remote peer not responding',
+    101 : 'Collision with network initiated request',
+    102 : 'Unable to page UE due to Suspension',
+    103 : 'Conditional IE missing',
+    104 : 'APN Restriction type Incompatible with currently active PDN connection',
+    105 : 'Invalid overall length of the triggered response message and a piggybacked initial message',
+    106 : 'Data forwarding not supported',
+    107 : 'Invalid reply from remote peer',
+    108 : 'Fallback to GTPv1',
+    109 : 'Invalid peer',
+    110 : 'Temporarily rejected due to handover/TAU/RAU procedure in progress',
+    111 : 'Modifications not limited to S1-U bearers',
+    112 : 'Request rejected for a PMIPv6 reason (see 3GPP TS 29.275).',
+    113 : 'APN Congestion',
+    114 : 'Bearer handling not supported',
+    115 : 'UE already re-attached. See NOTE 7.',
+    116 : 'Multiple PDN connections for a given APN not allowed',
+    117 : 'Target access restricted for the subscriber',
+    118 : 'Shall not be used. See NOTE 2 and NOTE 3.',
+    119 : 'MME/SGSN refuses due to VPLMN Policy',
+    120 : 'GTP-C Entity Congestion',
+    121 : 'Late Overlapping Request ',
+    122 : 'Timed out Request ',
+    123 : 'UE is temporarily not reachable due to power saving',
+    124 : 'Relocation failure due to NAS message redirection',
+    125 : 'UE not authorised by OCS or external AAA Server',
+    126 : 'Multiple accesses to a PDN connection not allowed',
+    127 : 'Request rejected due to UE capability',
+    128 : 'S1-U Path Failure. See NOTE 8.',
+    129 : '5GC not allowed'
+    }
+
+
+class Cause(Envelope):
+    _GEN = (
+        Uint8('Value', dic=Cause_dict),
+        Uint('spare', bl=5),
+        Uint('PCE', bl=1, dic={1: 'error in the PDN Connection IE'}),
+        Uint('BCE', bl=1, dic={1: 'error in the Bearer Context IE'}),
+        Uint('CS', bl=1, dic={1: 'error originated by the remote node'}),
+        Envelope('OffendingIE', GEN=(
+            Uint8('Type'),
+            Uint16('Len'),
+            Uint('spare', bl=4),
+            Uint('Inst', bl=4)
+            ))
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[5].set_transauto(lambda: self.get_env()[0][1].get_val() < 10)
+
+
+#------------------------------------------------------------------------------#
+# Recovery
+# TS 29.274, 8.5
+#------------------------------------------------------------------------------#
+
+class Recovery(Uint8):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# APN
+# TS 29.274, 8.6
+#------------------------------------------------------------------------------#
+
+class APN(Buf):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# AMBR
+# TS 29.274, 8.7
+#------------------------------------------------------------------------------#
+
+class AMBR(Envelope):
+    _GEN = (
+        Uint32('APN-AMBR-UL'),
+        Uint32('APN-AMBR-DL')
+        )
+
+
+#------------------------------------------------------------------------------#
+# EBI
+# TS 29.274, 8.8
+#------------------------------------------------------------------------------#
+
+class EBI(Envelope):
+    _GEN = (
+        Uint('spare', bl=4),
+        Uint('Value', bl=4),
+        Buf('ext', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# IP Address
+# TS 29.274, 8.9
+#------------------------------------------------------------------------------#
+
+class IPAddress(Buf):
+    _rep = REPR_HEX
+
+
+#------------------------------------------------------------------------------#
+# MEI
+# TS 29.274, 8.10
+#------------------------------------------------------------------------------#
+
+class MEI(BufBCD):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# MSISDN
+# TS 29.274, 8.11
+#------------------------------------------------------------------------------#
+
+class MSISDN(BufBCD):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# Indication
+# TS 29.274, 8.12
+#------------------------------------------------------------------------------#
+'''
+class Ind(Envelope):
+    
+    ENV_SEL_TRANS = False
+    
+    _GEN = (
+        Envelope('Octet1', GEN=(
+            Uint('DAF', bl=1),
+            Uint('DTF', bl=1),
+            Uint('HI', bl=1),
+            Uint('DFI', bl=1),
+            Uint('OI', bl=1),
+            Uint('ISRSI', bl=1),
+            Uint('ISRAI', bl=1),
+            Uint('SGWCI', bl=1))),
+        Envelope('Octet2', GEN=(
+            Uint('SQCI', bl=1),
+            Uint('UIMSI', bl=1),
+            Uint('CFSI', bl=1),
+            Uint('CRSI', bl=1),
+            Uint('P', bl=1),
+            Uint('PT', bl=1),
+            Uint('SI', bl=1),
+            Uint('MSV', bl=1))),
+        Envelope('Octet3', GEN=(
+            Uint('RetLoc', bl=1),
+            Uint('PBIC', bl=1),
+            Uint('SRNI', bl=1),
+            Uint('S6AF', bl=1),
+            Uint('S4AF', bl=1),
+            Uint('MBMDT', bl=1),
+            Uint('ISRAU', bl=1),
+            Uint('CCRSI', bl=1))),
+        Envelope('Octet4', GEN=(
+            Uint('CPRAI', bl=1),
+            Uint('ARRL', bl=1),
+            Uint('PPOF', bl=1),
+            Uint('PPON/PPEI', bl=1),
+            Uint('PPSI', bl=1),
+            Uint('CSFBI', bl=1),
+            Uint('CLII', bl=1),
+            Uint('CPSR', bl=1))),
+        Envelope('Octet5', GEN=(
+            Uint('NSI', bl=1),
+            Uint('UASI', bl=1),
+            Uint('DTCI', bl=1),
+            Uint('BDWI', bl=1),
+            Uint('PCSI', bl=1),
+            Uint('PCRI', bl=1),
+            Uint('AOSI', bl=1),
+            Uint('AOPI', bl=1))),
+        Envelope('Octet6', GEN=(
+            Uint('ROAAI', bl=1),
+            Uint('EPCOSI', bl=1),
+            Uint('CPOPCI', bl=1),
+            Uint('PMTSMI', bl=1),
+            Uint('S11TF', bl=1),
+            Uint('PNSI', bl=1),
+            Uint('UNACCSI', bl=1),
+            Uint('WPMSI', bl=1))),
+        Envelope('Octet7', GEN=(
+            Uint('5GSNN26', bl=1),
+            Uint('REPREFI', bl=1),
+            Uint('5GSIWK', bl=1),
+            Uint('EEVRSI', bl=1),
+            Uint('LTEMUI', bl=1),
+            Uint('LTEMPI', bl=1),
+            Uint('ENBCRSI', bl=1),
+            Uint('TSPCMI', bl=1))),
+        Envelope('Octet8', GEN=(
+            Uint('spare', bl=7),
+            Uint('ETHPDN', bl=1))),
+        Buf('ext', rep=REPR_HEX)
+        )
+    
+    def _from_char(self, char):
+        l = char.len_byte()
+        if l < 8:
+            list(map(lambda e: e.set_trans(True), self._content[l:8]))
+        Envelope._from_char(self, char)
+'''
+
+#------------------------------------------------------------------------------#
+# PCO
+# TS 29.274, 8.13
+#------------------------------------------------------------------------------#
+
+class PCO(ProtConfig):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# PAA
+# TS 29.274, 8.14
+#------------------------------------------------------------------------------#
+
+PDNType_dict = {
+    1 : 'IPv4',
+    2 : 'IPv6',
+    3 : 'IPv4v6',
+    4 : 'Non-IP',
+    5 : 'Ethernet'
+    }
+
+class PAA(Envelope):
+    _GEN = (
+        Uint('spare', bl=5),
+        Uint('PDNType', bl=3, dic=PDNType_dict),
+        Buf('PDNAddress', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Bearer QoS
+# TS 29.274, 8.15
+#------------------------------------------------------------------------------#
+
+class BearerQoS(Envelope):
+    _GEN = (
+        Uint('spare', bl=1),
+        Uint('PCI', bl=1),
+        Uint('PL', bl=4),
+        Uint('spare', bl=1),
+        Uint('PVI', bl=1),
+        Uint8('QCI'),
+        Uint32('MaxBitRateUL'),
+        Uint32('MaxBitRateDL'),
+        Uint32('GuaranteedBitRateUL'),
+        Uint32('GuaranteedBitRateDL'),
+        Buf('ext', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Flow QoS
+# TS 29.274, 8.16
+#------------------------------------------------------------------------------#
+
+class FlowQoS(Envelope):
+    _GEN = (
+        Uint8('QCI'),
+        Uint32('MaxBitRateUL'),
+        Uint32('MaxBitRateDL'),
+        Uint32('GuaranteedBitRateUL'),
+        Uint32('GuaranteedBitRateDL'),
+        Buf('ext', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# RAT Type
+# TS 29.274, 8.17
+#------------------------------------------------------------------------------#
+
+RATType_dict = {
+    0 : 'reserved',
+    1 : 'UTRAN',
+    2 : 'GERAN',
+    3 : 'WLAN',
+    4 : 'GAN',
+    5 : 'HSPA Evolution',
+    6 : 'EUTRAN (WB-E-UTRAN)',
+    7 : 'Virtual',
+    8 : 'EUTRAN-NB-IoT',
+    9 : 'LTE-M',
+    10 : 'NR'
+    }
+
+class RATType(Envelope):
+    _GEN = (
+        Uint8('Value', dic=RATType_dict),
+        Buf('ext', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Serving Network
+# TS 29.274, 8.18
+#------------------------------------------------------------------------------#
+
+class ServingNetwork(Envelope):
+    _GEN = (
+        PLMN(),
+        Buf('ext', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Bearer TFT
+# TS 29.274, 8.19
+#------------------------------------------------------------------------------#
+
+class BearerTFT(TFT):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# Traffic Aggregate Description (TAD)
+# TS 29.274, 8.20
+#------------------------------------------------------------------------------#
+
+class TAD(TFT):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# User Location Information (ULI)
+# TS 29.274, 8.21
+#------------------------------------------------------------------------------#
+# Warning, within TS 29.274, the RAC is 2 bytes, with 2nd byte being 0xff
+# this is different from other specification where the RAC is only 1 byte
+
+# 8.21.1 CGI field
+class CGI(Envelope):
+    _GEN = (
+        PLMN(),
+        Uint16('LAC', rep=REPR_HEX),
+        Uint16('CI', rep=REPR_HEX)
+        )
+    
+    encode = Envelope.set_val
+    
+    def decode(self):
+        return (self[0].decode(), self[1].get_val(), self[2].get_val())
+
+
+# 8.21.2 SAI field
+class SAI(Envelope):
+    _GEN = (
+        PLMN(),
+        Uint16('LAC', rep=REPR_HEX),
+        Uint16('SAC', rep=REPR_HEX)
+        )
+    
+    encode = Envelope.set_val
+    
+    def decode(self):
+        return (self[0].decode(), self[1].get_val(), self[2].get_val())
+
+
+# 8.21.3 RAI field
+class RAI(Envelope):
+    _GEN = (
+        PLMN(),
+        Uint16('LAC', rep=REPR_HEX),
+        Uint8('RAC', rep=REPR_HEX),
+        Uint8('spare', val=0xff, rep=REPR_HEX)
+        )
+    
+    encode = Envelope.set_val
+    
+    def decode(self):
+        return (self[0].decode(), self[1].get_val(), self[2].get_val())
+
+
+# 8.21.4 TAI field, identical to TS 24.301
+
+# 8.21.5 ECGI field
+class ECGI(Envelope):
+    _GEN = (
+        PLMN(),
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('ECI', bl=28, rep=REPR_HEX)
+        )
+    
+    encode = Envelope.set_val
+    
+    def decode(self):
+        return (self[0].decode(), self[2].get_val())
+
+
+# 8.21.6 LAI field, identical to TS 24.008
+
+# 8.21.7 Macro eNodeB ID field
+class MacroENBID(Envelope):
+    _GEN = (
+        PLMN(),
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('MacroENBID', bl=20, rep=REPR_HEX)
+        )
+    
+    encode = Envelope.set_val
+    
+    def decode(self):
+        return (self[0].decode(), self[2].get_val())
+
+
+# 8.21.8 Extended Macro eNodeB ID field
+class ExtMacroENBID(Envelope):
+    _GEN = (
+        PLMN(),
+        Uint('SMeNB', bl=1, dic={0: 'long', 1: 'short'}),
+        Uint('spare', bl=2, rep=REPR_HEX),
+        Uint('ExtMacroENBID', bl=21, rep=REPR_HEX)
+        )
+    
+    encode = Envelope.set_val
+    
+    def decode(self):
+        return (self[0].decode(), self[1].get_val(), self[3].get_val())
+
+
+class ULI(Envelope):
+    
+    ENV_SEL_TRANS = False
+    
+    _GEN = (
+        Envelope('Flags', GEN=(
+            Uint('ExtMacroENBID', bl=1),
+            Uint('MacroENBID', bl=1),
+            Uint('LAI', bl=1),
+            Uint('ECGI', bl=1),
+            Uint('TAI', bl=1),
+            Uint('RAI', bl=1),
+            Uint('SAI', bl=1),
+            Uint('CGI', bl=1)
+            )),
+        CGI(),
+        SAI(),
+        RAI(),
+        TAI(),
+        ECGI(),
+        LAI(),
+        MacroENBID(),
+        ExtMacroENBID(),
+        Buf('ext', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[1].set_transauto(lambda: self[0][7].get_val() == 0)
+        self[2].set_transauto(lambda: self[0][6].get_val() == 0)
+        self[3].set_transauto(lambda: self[0][5].get_val() == 0)
+        self[4].set_transauto(lambda: self[0][4].get_val() == 0)
+        self[5].set_transauto(lambda: self[0][3].get_val() == 0)
+        self[6].set_transauto(lambda: self[0][2].get_val() == 0)
+        self[7].set_transauto(lambda: self[0][1].get_val() == 0)
+        self[8].set_transauto(lambda: self[0][0].get_val() == 0)
+
+
+#------------------------------------------------------------------------------#
+# Fully Qualified TEID (F-TEID)
+# TS 29.274, 8.22
+#------------------------------------------------------------------------------#
+
+FTEIDIF_dict = {
+    0: 'S1-U eNodeB GTP-U interface',
+    1: 'S1-U SGW GTP-U interface',
+    2: 'S12 RNC GTP-U interface',
+    3: 'S12 SGW GTP-U interface',
+    4: 'S5/S8 SGW GTP-U interface',
+    5: 'S5/S8 PGW GTP-U interface',
+    6: 'S5/S8 SGW GTP-C interface',
+    7: 'S5/S8 PGW GTP-C interface',
+    8: 'S5/S8 SGW PMIPv6 interface (the 32 bit GRE key is encoded in 32 bit TEID field)',
+    9: 'S5/S8 PGW PMIPv6 interface (the 32 bit GRE key is encoded in the 32 bit TEID field, see clause 6.3 of 3GPP TS 29.275)',
+    10: 'S11 MME GTP-C interface',
+    11: 'S11/S4 SGW GTP-C interface',
+    12: 'S10/N26 MME GTP-C interface',
+    13: 'S3 MME GTP-C interface',
+    14: 'S3 SGSN GTP-C interface',
+    15: 'S4 SGSN GTP-U interface',
+    16: 'S4 SGW GTP-U interface',
+    17: 'S4 SGSN GTP-C interface',
+    18: 'S16 SGSN GTP-C interface',
+    19: 'eNodeB GTP-U interface for DL data forwarding',
+    20: 'eNodeB GTP-U interface for UL data forwarding',
+    21: 'RNC GTP-U interface for data forwarding',
+    22: 'SGSN GTP-U interface for data forwarding',
+    23: 'SGW/UPF GTP-U interface for DL data forwarding',
+    24: 'Sm MBMS GW GTP-C interface',
+    25: 'Sn MBMS GW GTP-C interface',
+    26: 'Sm MME GTP-C interface',
+    27: 'Sn SGSN GTP-C interface',
+    28: 'SGW GTP-U interface for UL data forwarding',
+    29: 'Sn SGSN GTP-U interface',
+    30: 'S2b ePDG GTP-C interface',
+    31: 'S2b-U ePDG GTP-U interface',
+    32: 'S2b PGW GTP-C interface',
+    33: 'S2b-U PGW GTP-U interface',
+    34: 'S2a TWAN GTP-U interface',
+    35: 'S2a TWAN GTP-C interface',
+    36: 'S2a PGW GTP-C interface',
+    37: 'S2a PGW GTP-U interface',
+    38: 'S11 MME GTP-U interface',
+    39: 'S11 SGW GTP-U interface',
+    40: 'N26 AMF GTP-C interface',
+    }
+
+class FTEID(Envelope):
+    
+    ENV_SEL_TRANS = False
+    
+    _GEN = (
+        Uint('V4', bl=1),
+        Uint('V6', bl=1),
+        Uint('IF', bl=6, dic=FTEIDIF_dict),
+        Uint32('TEID/GREKey'),
+        Buf('IPv4Addr', bl=32, rep=REPR_HEX),
+        Buf('IPv6Addr', bl=128, rep=REPR_HEX),
+        Buf('ext')
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[4].set_transauto(lambda: self[0].get_val() == 0)
+        self[5].set_transauto(lambda: self[1].get_val() == 0)
+
+
+#------------------------------------------------------------------------------#
+# TMSI
+# TS 29.274, 8.23
+#------------------------------------------------------------------------------#
+
+class TMSI(Uint32):
+    rep = REPR_HEX
+
+
+#------------------------------------------------------------------------------#
+# Global CN-Id
+# TS 29.274, 8.24
+#------------------------------------------------------------------------------#
+# in RANAP, CN-ID is an INTEGER (0..4096)
+# but TS 29.274 does not provide any boundary on the length
+
+class GlobalCNId(Envelope):
+    _GEN = (
+        PLMN(),
+        Uint('CNId', rep=REPR_HEX)
+        )
+    
+    encode = Envelope.set_val
+    
+    def decode(self):
+        return (self[0].decode(), self[1].get_val())
+
+
+# TODO: 8.25, 8.26, 8.27
+
+
+#------------------------------------------------------------------------------#
+# Bearer Context
+# TS 29.274, 8.28
+#------------------------------------------------------------------------------#
+# Bearer Context is a grouped IE that is always defined locally for each GTPCMsg
+
+class BearerContext(Buf):
+    _rep = REPR_HEX
+
+
+#------------------------------------------------------------------------------#
+# Charging ID
+# TS 29.274, 8.29
+#------------------------------------------------------------------------------#
+
+class ChargingID(Envelope):
+    _GEN = (
+        Uint32('Value', rep=REPR_HEX),
+        Buf('ext')
+        )
+
+
+#------------------------------------------------------------------------------#
+# Charging Characteristics
+# TS 29.274, 8.30
+#------------------------------------------------------------------------------#
+
+class ChargingCharacteristics(Envelope):
+    _GEN = (
+        Uint16('Value', rep=REPR_HEX),
+        Buf('ext')
+        )
+
+
+#------------------------------------------------------------------------------#
+# Trace ID
+# TS 29.274, 8.31
+#------------------------------------------------------------------------------#
+
+class TraceID(Envelope):
+    _GEN = (
+        PLMN(),
+        Uint16('TraceID', rep=REPR_HEX),
+        Uint64('TriggeringEvents', rep=REPR_HEX),
+        Uint16('ListOfNETypes', rep=REPR_HEX),
+        Uint8('SessionTraceDepth'),
+        Buf('ListOfInterfaces', bl=96, rep=REPR_HEX),
+        Buf('IPAddrForCollection', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Bearer Flags
+# TS 29.274, 8.32
+#------------------------------------------------------------------------------#
+
+class BearerFlags(Envelope):
+    _GEN = (
+        Uint('spare', bl=4),
+        Uint('ASI', bl=1),
+        Uint('Vind', bl=1),
+        Uint('VB', bl=1),
+        Uint('PPC', bl=1),
+        Buf('ext')
+        )
+
+
+#------------------------------------------------------------------------------#
+# PDN Type
+# TS 29.274, 8.34
+#------------------------------------------------------------------------------#
+
+class PDNType(Envelope):
+    _GEN = (
+        Uint('spare', bl=5),
+        Uint('Value', bl=3, dic=PDNType_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Procedure Transaction ID (PTI) 
+# TS 29.274, 8.35
+#------------------------------------------------------------------------------#
+
+class PTI(Envelope):
+    _GEN = (
+        Uint8('Value'),
+        Buf('ext')
+        )
+
+
+#------------------------------------------------------------------------------#
+# MM Context
+# TS 29.274, 8.38
+#------------------------------------------------------------------------------#
+
+# 8.38-7
+class MMContextTriplet(Envelope):
+    _GEN = (
+        Buf('RAND', bl=128, rep=REPR_HEX),
+        Buf('SRES', bl=32, rep=REPR_HEX),
+        Buf('Kc', bl=64, rep=REPR_HEX)
+        )
+
+
+# 8.38-8
+class MMContextQuintuplet(Envelope):
+    _GEN = (
+        Buf('RAND', bl=128, rep=REPR_HEX),
+        Uint8('XRESLen'),
+        Buf('XRES', rep=REPR_HEX),
+        Buf('CK', bl=128, rep=REPR_HEX),
+        Buf('IK', bl=128, rep=REPR_HEX),
+        Uint8('AUTNLen'),
+        Buf('AUTN', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[1].set_valauto(lambda: self[2].get_len())
+        self[2].set_blauto(lambda: 8*self[1].get_val())
+        self[5].set_valauto(lambda: self[6].get_len())
+        self[6].set_blauto(lambda: 8*self[5].get_val())
+
+
+# 8.38-9
+class MMContextQuadruplet(Envelope):
+    _GEN = (
+        Buf('RAND', bl=128, rep=REPR_HEX),
+        Uint8('XRESLen'),
+        Buf('XRES', rep=REPR_HEX),
+        Uint8('AUTNLen'),
+        Buf('AUTN', rep=REPR_HEX),
+        Buf('KASME', bl=256, rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[1].set_valauto(lambda: self[2].get_len())
+        self[2].set_blauto(lambda: 8*self[1].get_val())
+        self[3].set_valauto(lambda: self[4].get_len())
+        self[4].set_blauto(lambda: 8*self[3].get_val())
+
+
+# 8.38-10
+class MMContextAPNRateCtrlStat(Envelope):
+    _GEN = (
+        Uint16('Len'),
+        Uint16('APNLen'),
+        Buf('APN'),
+        Uint32('ULNumOfPktAllowed'),
+        Uint32('NumAddExceptReports'),
+        Uint32('DLNumOfPktAllowed'),
+        Uint64('ValidityTime')
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[1].set_valauto(lambda: self[2].get_len())
+        self[2].set_blauto(lambda: 8*self[1].get_val())
+
+
+MMContextSecurityType_dict = {
+    0 : 'GSM Key and Triplets',
+    1 : 'UMTS Key, Used Cipher and Quintuplets',
+    2 : 'GSM Key, Used Cipher and Quintuplets',
+    3 : 'UMTS Key and Quintuplets',
+    4 : 'EPS Security Context and Quadruplets',
+    5 : 'UMTS Key, Quadruplets and Quintuplets',
+    }
+
+
+# some automated basic structures
+class MMContextUENetCap(Envelope):
+    _GEN = (
+        Uint8('Len'),
+        UENetCap()
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_len())
+    
+    def _from_char(self, char):
+        if self.get_trans():
+            return
+        self[0]._from_char(char)
+        char_lb = char._len_bit
+        char._len_bit = min(char._cur + 8 * self[0].get_val(), char_lb)
+        self[1]._from_char(char)
+        char._len_bit = char_lb
+
+
+class MMContextMSNetCap(Envelope):
+    _GEN = (
+        Uint8('Len'),
+        ms_network_capability_value_part
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_len())
+    
+    def _from_char(self, char):
+        if self.get_trans():
+            return
+        self[0]._from_char(char)
+        char_lb = char._len_bit
+        char._len_bit = min(char._cur + 8 * self[0].get_val(), char_lb)
+        self[1]._from_char(char)
+        char._len_bit = char_lb
+
+
+class MMContextMEI(Envelope):
+    _GEN = (
+        Uint8('Len'),
+        BufBCD('MEI')
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_len())
+        self[1].set_blauto(lambda: 8*self[0].get_val())
+
+
+class MMContextVoiceDomPref(Envelope):
+    _GEN = (
+        Uint8('Len'),
+        VoiceDomPref()
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_len())
+    
+    def _from_char(self, char):
+        if self.get_trans():
+            return
+        self[0]._from_char(char)
+        char_lb = char._len_bit
+        char._len_bit = min(char._cur + 8 * self[0].get_val(), char_lb)
+        self[1]._from_char(char)
+        char._len_bit = char_lb
+    
+
+class MMContextHigherBitRate(Envelope):
+    _GEN = (
+        Uint8('Len'),
+        Buf('HigherBitRate', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_len())
+        self[1].set_blauto(lambda: 8*self[0].get_val())
+
+
+class MMContextExtAccessRestrictData(Envelope):
+    _GEN = (
+        Uint8('Len', val=1),
+        Uint('spare', bl=6),
+        Uint('USSRNA', bl=1),
+        Uint('NRSRNA', bl=1)
+        )
+
+
+class MMContextUERadioCapForPaging(Envelope):
+    _GEN = (
+        Uint16('Len'),
+        Buf('UERadioCapForPaging', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_len())
+        self[1].set_blauto(lambda: 8*self[0].get_val())
+
+
+class MMContextUEAddSecCap(Envelope):
+    _GEN = (
+        Uint8('Len'),
+        Buf('UEAddSecCap', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_len())
+        self[1].set_blauto(lambda: 8*self[0].get_val())
+
+
+class MMContextUENRSecCap(Envelope):
+    _GEN = (
+        Uint8('Len'),
+        Buf('UENRSecCap', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_len())
+        self[1].set_blauto(lambda: 8*self[0].get_val())
+
+
+class MMContextAPNRateCtrlStats(Envelope):
+    _GEN = (
+        Uint16('Len'),
+        Sequence('APNRateCtrlStats', GEN=MMContextAPNRateCtrlStat())
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_len())
+    
+    def _from_char(self, char):
+        if self.get_trans():
+            return
+        self[0]._from_char(char)
+        char_lb = char._len_bit
+        char._len_bit = min(char._cur + 8 * self[0].get_val(), char_lb)
+        self[1]._from_char(char)
+        char._len_bit = char_lb
+
+
+# 8.38-1
+# Type 103
+class MMContext_GSMKeyTriplets(Envelope):
+    _GEN = (
+        Uint('SecurityMode', bl=3, dic=MMContextSecurityType_dict),
+        Uint('spare', bl=1),
+        Uint('DRXI', bl=1),
+        Uint('CKSN', bl=3),
+        Uint('NumOfTriplets', bl=3),
+        Uint('spare', bl=3),
+        Uint('UAMBRI', bl=1),
+        Uint('SAMBRI', bl=1),
+        Uint('spare', bl=5),
+        Uint('UsedCipher', bl=3),
+        Buf('Kc', bl=64, rep=REPR_HEX),
+        Sequence('Triplets', GEN=MMContextTriplet()),
+        DRXParam(),
+        Uint32('ULSubscribedUEAMBR'),
+        Uint32('DLSubscribedUEAMBR'),
+        Uint32('ULUsedUEAMBR'),
+        Uint32('DLUsedUEAMBR'),
+        MMContextUENetCap(),
+        MMContextMSNetCap(),
+        MMContextMEI(),
+        Uint('ECNA', bl=1),
+        Uint('NBNA', bl=1),
+        Uint('HNNA', bl=1),
+        Uint('ENA', bl=1),
+        Uint('INA', bl=1),
+        Uint('GANA', bl=1),
+        Uint('GENA', bl=1),
+        Uint('UNA', bl=1),
+        MMContextVoiceDomPref(),
+        Buf('ext', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['NumOfTriplets'].set_valauto(lambda: self['Triplets'].get_num())
+        self['Triplets'].set_numauto(lambda: self['NumOfTriplets'].get_val())
+
+
+# 8.38-2
+# Type 104
+class MMContext_UMTSKeyUsedCipherQuintuplets(Envelope):
+    _GEN = (
+        Uint('SecurityMode', bl=3, dic=MMContextSecurityType_dict),
+        Uint('spare', bl=1),
+        Uint('DRXI', bl=1),
+        Uint('CKSN', bl=3),
+        Uint('NumOfQuintuplets', bl=3),
+        Uint('IOVI', bl=1),
+        Uint('GUPII', bl=1),
+        Uint('UGIPAI', bl=1),
+        Uint('UAMBRI', bl=1),
+        Uint('SAMBRI', bl=1),
+        Uint('spare', bl=2),
+        Uint('UsedGPRSIntegrityProtAlg', bl=3),
+        Uint('UsedCipher', bl=3),
+        Buf('CK', bl=128, rep=REPR_HEX),
+        Buf('IK', bl=128, rep=REPR_HEX),
+        Sequence('Quintuplets', GEN=MMContextQuintuplet()),
+        DRXParam(),
+        Uint32('ULSubscribedUEAMBR'),
+        Uint32('DLSubscribedUEAMBR'),
+        Uint32('ULUsedUEAMBR'),
+        Uint32('DLUsedUEAMBR'),
+        MMContextUENetCap(),
+        MMContextMSNetCap(),
+        MMContextMEI(),
+        Uint('ECNA', bl=1),
+        Uint('NBNA', bl=1),
+        Uint('HNNA', bl=1),
+        Uint('ENA', bl=1),
+        Uint('INA', bl=1),
+        Uint('GANA', bl=1),
+        Uint('GENA', bl=1),
+        Uint('UNA', bl=1),
+        MMContextVoiceDomPref(),
+        MMContextHigherBitRate(),
+        Uint8('IOVUpdateCounter'),
+        Buf('ext', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['NumOfQuintuplets'].set_valauto(lambda: self['Quintuplets'].get_num())
+        self['Quintuplets'].set_numauto(lambda: self['NumOfQuintuplets'].get_val())
+
+
+# 8.38-3
+# Type 105
+class MMContext_GSMKeyUsedCipherQuintuplets(Envelope):
+    _GEN = (
+        Uint('SecurityMode', bl=3, dic=MMContextSecurityType_dict),
+        Uint('spare', bl=1),
+        Uint('DRXI', bl=1),
+        Uint('CKSN', bl=3),
+        Uint('NumOfQuintuplets', bl=3),
+        Uint('spare', bl=3),
+        Uint('UAMBRI', bl=1),
+        Uint('SAMBRI', bl=1),
+        Uint('spare', bl=5),
+        Uint('UsedCipher', bl=3),
+        Buf('Kc', bl=64, rep=REPR_HEX),
+        Sequence('Quintuplets', GEN=MMContextQuintuplet()),
+        DRXParam(),
+        Uint32('ULSubscribedUEAMBR'),
+        Uint32('DLSubscribedUEAMBR'),
+        Uint32('ULUsedUEAMBR'),
+        Uint32('DLUsedUEAMBR'),
+        MMContextUENetCap(),
+        MMContextMSNetCap(),
+        MMContextMEI(),
+        Uint('ECNA', bl=1),
+        Uint('NBNA', bl=1),
+        Uint('HNNA', bl=1),
+        Uint('ENA', bl=1),
+        Uint('INA', bl=1),
+        Uint('GANA', bl=1),
+        Uint('GENA', bl=1),
+        Uint('UNA', bl=1),
+        MMContextVoiceDomPref(),
+        MMContextHigherBitRate(),
+        Buf('ext', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['NumOfQuintuplets'].set_valauto(lambda: self['Quintuplets'].get_num())
+        self['Quintuplets'].set_numauto(lambda: self['NumOfQuintuplets'].get_val())
+
+
+# 8.38-4
+# Type 106
+class MMContext_UMTSKeyQuintuplets(Envelope):
+    _GEN = (
+        Uint('SecurityMode', bl=3, dic=MMContextSecurityType_dict),
+        Uint('spare', bl=1),
+        Uint('DRXI', bl=1),
+        Uint('KSI', bl=3),
+        Uint('NumOfQuintuplets', bl=3),
+        Uint('IOVI', bl=1),
+        Uint('GUPII', bl=1),
+        Uint('UGIPAI', bl=1),
+        Uint('UAMBRI', bl=1),
+        Uint('SAMBRI', bl=1),
+        Uint('spare', bl=5),
+        Uint('UsedGPRSIntegrityProtAlg', bl=3),
+        Buf('CK', bl=128, rep=REPR_HEX),
+        Buf('IK', bl=128, rep=REPR_HEX),
+        Sequence('Quintuplets', GEN=MMContextQuintuplet()),
+        DRXParam(),
+        Uint32('ULSubscribedUEAMBR'),
+        Uint32('DLSubscribedUEAMBR'),
+        Uint32('ULUsedUEAMBR'),
+        Uint32('DLUsedUEAMBR'),
+        MMContextUENetCap(),
+        MMContextMSNetCap(),
+        MMContextMEI(),
+        Uint('ECNA', bl=1),
+        Uint('NBNA', bl=1),
+        Uint('HNNA', bl=1),
+        Uint('ENA', bl=1),
+        Uint('INA', bl=1),
+        Uint('GANA', bl=1),
+        Uint('GENA', bl=1),
+        Uint('UNA', bl=1),
+        MMContextVoiceDomPref(),
+        MMContextHigherBitRate(),
+        Uint8('IOVUpdatesCounter'),
+        MMContextExtAccessRestrictData(),
+        Buf('ext', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['NumOfQuintuplets'].set_valauto(lambda: self['Quintuplets'].get_num())
+        self['Quintuplets'].set_numauto(lambda: self['NumOfQuintuplets'].get_val())
+
+
+# 8.38-5
+# Type 107
+class MMContext_EPSSecContextQuadruplets(Envelope):
+    _GEN = (
+        Uint('SecurityMode', bl=3, dic=MMContextSecurityType_dict),
+        Uint('NHI', bl=1),
+        Uint('DRXI', bl=1),
+        Uint('KSI', bl=3),
+        Uint('NumOfQuintuplets', bl=3),
+        Uint('NumOfQuadruplets', bl=3),
+        Uint('UAMBRI', bl=1),
+        Uint('OSCI', bl=1),
+        Uint('SAMBRI', bl=1),
+        Uint('NASIntegrityProtAlg', bl=3),
+        Uint('NASCipherAlg', bl=3),
+        Uint16('NASDLCount'),
+        Uint16('NASULCount'),
+        Buf('KASME', bl=256, rep=REPR_HEX),
+        Sequence('Quadruplets', GEN=MMContextQuadruplet()),
+        Sequence('Quintuplets', GEN=MMContextQuintuplet()),
+        DRXParam(),
+        Buf('NH', bl=256, rep=REPR_HEX),
+        Uint('spare', bl=5),
+        Uint('NCC', bl=3),
+        Uint32('ULSubscribedUEAMBR'),
+        Uint32('DLSubscribedUEAMBR'),
+        Uint32('ULUsedUEAMBR'),
+        Uint32('DLUsedUEAMBR'),
+        MMContextUENetCap(),
+        MMContextMSNetCap(),
+        MMContextMEI(),
+        Uint('ECNA', bl=1),
+        Uint('NBNA', bl=1),
+        Uint('HNNA', bl=1),
+        Uint('ENA', bl=1),
+        Uint('INA', bl=1),
+        Uint('GANA', bl=1),
+        Uint('GENA', bl=1),
+        Uint('UNA', bl=1),
+        Uint('S', bl=1),
+        Uint('NHIOld', bl=1),
+        Uint('spare', bl=1),
+        Uint('KSIOld', bl=3),
+        Uint('NCCOld', bl=3),
+        Buf('KASMEOld', bl=256, rep=REPR_HEX),
+        Buf('NHOld', bl=256, rep=REPR_HEX),
+        MMContextVoiceDomPref(),
+        MMContextUERadioCapForPaging(),
+        MMContextExtAccessRestrictData(),
+        MMContextUEAddSecCap(),
+        MMContextUENRSecCap(),
+        MMContextAPNRateCtrlStats(),
+        Buf('ext', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['NumOfQuintuplets'].set_valauto(lambda: self['Quintuplets'].get_num())
+        self['Quintuplets'].set_numauto(lambda: self['NumOfQuintuplets'].get_val())
+        self['NumOfQuadruplets'].set_valauto(lambda: self['Quadruplets'].get_num())
+        self['Quadruplets'].set_numauto(lambda: self['NumOfQuadruplets'].get_val())
+
+
+# 8.38-6
+# UMTS Key, Quadruplets and Quintuplets
+class MMContext_UMTSKeyQuadrupletsQuintuplets(Envelope):
+    _GEN = (
+        Uint('SecurityMode', bl=3, dic=MMContextSecurityType_dict),
+        Uint('spare', bl=1),
+        Uint('DRXI', bl=1),
+        Uint('KSI', bl=3),
+        Uint('NumOfQuintuplets', bl=3),
+        Uint('NumOfQuadruplets', bl=3),
+        Uint('UAMBRI', bl=1),
+        Uint('SAMBRI', bl=1),
+        Uint8('spare', rep=REPR_HEX),
+        Buf('CK', bl=128, rep=REPR_HEX),
+        Buf('IK', bl=128, rep=REPR_HEX),
+        Sequence('Quadruplets', GEN=MMContextQuadruplet()),
+        Sequence('Quintuplets', GEN=MMContextQuintuplet()),
+        DRXParam(),
+        Uint32('ULSubscribedUEAMBR'),
+        Uint32('DLSubscribedUEAMBR'),
+        Uint32('ULUsedUEAMBR'),
+        Uint32('DLUsedUEAMBR'),
+        MMContextUENetCap(),
+        MMContextMSNetCap(),
+        MMContextMEI(),
+        Uint('ECNA', bl=1),
+        Uint('NBNA', bl=1),
+        Uint('HNNA', bl=1),
+        Uint('ENA', bl=1),
+        Uint('INA', bl=1),
+        Uint('GANA', bl=1),
+        Uint('GENA', bl=1),
+        Uint('UNA', bl=1),
+        MMContextVoiceDomPref(),
+        MMContextAPNRateCtrlStats(),
+        Buf('ext', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['NumOfQuintuplets'].set_valauto(lambda: self['Quintuplets'].get_num())
+        self['Quintuplets'].set_numauto(lambda: self['NumOfQuintuplets'].get_val())
+        self['NumOfQuadruplets'].set_valauto(lambda: self['Quadruplets'].get_num())
+        self['Quadruplets'].set_numauto(lambda: self['NumOfQuadruplets'].get_val())
+
+
+class MMContext(Alt):
+    _GEN = {
+        103: MMContext_GSMKeyTriplets(),
+        104: MMContext_UMTSKeyUsedCipherQuintuplets(),
+        105: MMContext_GSMKeyUsedCipherQuintuplets(),
+        106: MMContext_UMTSKeyQuintuplets(),
+        107: MMContext_EPSSecContextQuadruplets(),
+        108: MMContext_UMTSKeyQuadrupletsQuintuplets()
+        }
+    DEFAULT_ALT = Buf('MMContext')
+    _sel = lambda a, b: b.get_env()[0][0].get_val() # GTPCIEHdr['Type']
+
+
+
+
+
+
+
+
 # extracted from Table 8.1-1: Information Element types for GTPv2
 # tag: (class, length, description)
 # length: -1 is undefined or extensive, >= 0 is fixed length
@@ -1030,6 +2307,24 @@ class GTPCIE(Envelope):
                 self.set_ie_class()
             Envelope.set_val(self, val)
     
+    def _from_char(self, char):
+        if self.get_trans():
+            return
+        self[0]._from_char(char)
+        self.set_ie_class()
+        # truncate char according to Len and decode IE data
+        ie_len = self[0][1].get_val()
+        if self[0][0].get_val() == 254:
+            ie_len -= 2
+        char_lb = char._len_bit
+        char._len_bit = min(char._cur + 8 * ie_len, char_lb)
+        self[1]._from_char(char)
+        char._len_bit = char_lb
+    
+    #--------------------------------------------------------------------------#
+    # specific methods to deal with MAND / OPT dict at decoding and encoding
+    #--------------------------------------------------------------------------#
+    
     def set_ie_class(self):
         # this is were the potential replacement of the generic GTPCIEData happens,
         # according to the GTPCIEHdr value
@@ -1065,20 +2360,15 @@ class GTPCIE(Envelope):
         else:
             return ie_class(hier=1), ie_desc
     
-    def _from_char(self, char):
-        if self.get_trans():
-            return
-        self[0]._from_char(char)
-        self.set_ie_class()
-        # truncate char according to Len and decode IE data
-        ie_len = self[0][1].get_val()
-        if self[0][0].get_val() == 254:
-            ie_len -= 2
-        char_lb = char._len_bit
-        char._len_bit = min(char._cur + 8 * ie_len, char_lb)
-        self[1]._from_char(char)
-        char._len_bit = char_lb
-
+    def init_mand(self):
+        """initialize all IEs that are mandatory
+        """
+        pass
+    
+    def init_opt(self):
+        """initialize all IEs that are optional
+        """
+    
 
 class GTPCIEs(Sequence):
     """GTPv2-C Grouped Information Element
@@ -1125,8 +2415,8 @@ class GTPCIEs(Sequence):
                 if ie._name in self._ie_mand:
                     self._ie_mand.remove(ie._name)
             if self._ie_mand:
-                raise(PycrateErr('GTPCMsg: missing mandatory IE(s), %s'\
-                      .format(', '.join(sorted(self._ie_mand)))))
+                raise(PycrateErr('{0}: missing mandatory IE(s), {1}'\
+                      .format(self._name, ', '.join(sorted(self._ie_mand)))))
 
 
 #------------------------------------------------------------------------------#
