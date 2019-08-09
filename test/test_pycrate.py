@@ -158,6 +158,8 @@ class TestPycrate(unittest.TestCase):
         test_sigtran()
         test_sccp()
         test_gtpu()
+        test_gtpc()
+        test_diameter()
     
     # mobile / GSM RR
     def test_gsmrr(self):

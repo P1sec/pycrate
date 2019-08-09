@@ -286,7 +286,6 @@ def test_diameter(diam_pdu=diam_pdu):
                 assert( dm.get_val() == v )
 
 
-
 def test_perf_mobile():
     
     print('[+] NAS MO decoding and re-encoding')
