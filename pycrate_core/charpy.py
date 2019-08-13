@@ -420,7 +420,7 @@ class Charpy(object):
         """
         try:
             self._buf = bytelist_to_bytes(bytelist)
-        except:
+        except Exception:
             raise(CharpyErr('invalid argument: {0}'.format(bytelist)))
         if bitlen is None or bitlen <= 0 or bitlen > 8*len(bytelist):
             self._len_bit = 8*len(bytelist)
@@ -551,7 +551,7 @@ class Charpy(object):
         """
         try:
             self._buf = bitlist_to_bytes(bitlist)
-        except:
+        except Exception:
             raise(CharpyErr('invalid argument: {0}'.format(bitlist)))
         self._len_bit = len(bitlist)
         self._cur = 0

@@ -228,7 +228,7 @@ class Element(object):
                     if not self._env[ind+i].get_trans():
                         i += 1
                 return self._env[ind+i]
-        except EltErr as err:
+        except EltErr:
             #raise(EltErr('{0} [get_next]: invalid index {1} within envelope {2}'\
             #      .format(self._name, ind+val, self._env._name)))
             return None
@@ -261,7 +261,7 @@ class Element(object):
                     if not self._env[ind-i].get_trans():
                         i += 1
                 return self._env[ind-i]
-        except EltErr as err:
+        except EltErr:
             #raise(EltErr('{0} [get_prev]: invalid index {1} within envelope {2}'\
             #      .format(self._name, ind-val, self._env._name)))
             return None
@@ -748,7 +748,7 @@ class Element(object):
             else:
                 try:
                     val = JsonDec.decode(txt)
-                except JSONDecodeError as err:
+                except JSONDecodeError:
                     raise(EltErr('{0} [from_json]: invalid format, {1!r}'.format(self._name, txt)))
                 else:
                     self._from_jval_wrap(val)
@@ -2331,13 +2331,13 @@ class Array(Element):
         if 'tmpl_val' in kw:
             try:
                 self._tmpl.set_val(kw['tmpl_val'])
-            except Exception:
+            except Exception as err:
                 raise(EltErr('{0} [__init__] set template value error: {1}'\
                       .format(self._name, err)))
         if 'tmpl_bl' in kw:
             try:
                 self._tmpl.set_bl(kw['tmpl_bl'])
-            except Exception:
+            except Exception as err:
                 raise(EltErr('{0} [__init__] set template bl error: {1}'\
                       .format(self._name, err)))
         
@@ -2601,7 +2601,7 @@ class Array(Element):
                 cur = char._cur
                 try:
                     self._tmpl._from_char(char)
-                except CharpyErr as err:
+                except CharpyErr:
                     char._cur = cur
                     break
                 else:
@@ -3470,7 +3470,7 @@ class Sequence(Element):
                 clone._env = self
                 try:
                     clone._from_char(char)
-                except CharpyErr as err:
+                except CharpyErr:
                     char._cur = cur
                     break
                 else:
@@ -3744,7 +3744,7 @@ class Sequence(Element):
         """.format(self.__class__.__name__)
         try:
             ind = self._val.index(old)
-        except Exception:
+        except Exception as err:
             raise(EltErr('{0} [replace] invalid old: {1}'.format(self._name, err)))
         if self._SAFE_STAT and not isinstance(new, Element):
             raise(EltErr('{0} [insert]: elt type is {1}, expecting element'\
@@ -4135,7 +4135,7 @@ class Alt(Element):
         """
         try:
             return self._sel(self)
-        except:
+        except Exception:
             return None
     
     def get_alt(self):
@@ -4384,7 +4384,7 @@ class Alt(Element):
                   .format(self._name, type(elt).__name__)))
         try:
             self._content[sv] = elt
-        except Exception as err:
+        except Exception:
             raise(EltErr('{0} [insert]: selection value is invalid, {1}'.format(self._name, sv)))
         else:
             elt.set_env(self.get_env())
