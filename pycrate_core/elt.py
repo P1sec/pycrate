@@ -3646,7 +3646,7 @@ class Sequence(Element):
             EltErr : if `elt' is not in self._content
         """
         try:
-            return self._val.index(elt)
+            return self._content.index(elt)
         except Exception as err:
             raise(EltErr('{0} [index]: {1}'.format(self._name, err)))
     
@@ -3720,7 +3720,7 @@ class Sequence(Element):
             raise(EltErr('{0} [remove] content length {1} underflow (num {2})'\
                   .format(self._name, len(self._content)-1, self._num)))
         try:
-            self._val.remove(elt)
+            self._content.remove(elt)
         except Exception as err:
             raise(EltErr('{0} [remove]: {1}'.format(self._name, err)))
         else:
@@ -3743,7 +3743,7 @@ class Sequence(Element):
                 if `new' is not an element
         """.format(self.__class__.__name__)
         try:
-            ind = self._val.index(old)
+            ind = self._content.index(old)
         except Exception as err:
             raise(EltErr('{0} [replace] invalid old: {1}'.format(self._name, err)))
         if self._SAFE_STAT and not isinstance(new, Element):
@@ -4162,7 +4162,7 @@ class Alt(Element):
             return self.DEFAULT_ALT
         else:
             raise(EltErr('{0} [set_val]: invalid selection value {1!r}'\
-                  .format(self._name, sv)))    
+                  .format(self._name, sv)))
     
     # standard methods passthrough
     def set_val(self, val=None):
