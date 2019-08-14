@@ -45,7 +45,7 @@ from pycrate_core.charpy    import *
 
 from pycrate_mobile.TS24301_IE  import TAI, UENetCap
 from pycrate_mobile.TS24008_IE  import (
-    BufBCD, ProtConfig, PLMN, TFT, RAI, LAI, DRXParam, VoiceDomPref
+    BufBCD, ProtConfig, APN, PLMN, TFT, RAI, LAI, DRXParam, VoiceDomPref
     )
 from pycrate_csn1dir.ms_network_capability_value_part import (
     ms_network_capability_value_part
@@ -328,8 +328,9 @@ class AMBR(Buf):
     pass
 
 
-class APN(Buf):
-    pass
+# this is imported from TS24008_IE
+#class APN(Buf):
+#    pass
 
 
 class APNAndRelativeCapacity(Buf):
@@ -985,8 +986,9 @@ class Recovery(Uint8):
 # TS 29.274, 8.6
 #------------------------------------------------------------------------------#
 
-class APN(Buf):
-    pass
+# imported from TS24008_IE
+#class APN(Buf):
+#    pass
 
 
 #------------------------------------------------------------------------------#
@@ -1045,7 +1047,7 @@ class MSISDN(BufBCD):
 # Indication
 # TS 29.274, 8.12
 #------------------------------------------------------------------------------#
-'''
+
 class Ind(Envelope):
     
     ENV_SEL_TRANS = False
@@ -1120,12 +1122,45 @@ class Ind(Envelope):
         Buf('ext', rep=REPR_HEX)
         )
     
+    def set_val(self, vals):
+        if vals is None:
+            [elt.set_trans(False) for elt in self._content]
+            [elt.set_val(None) for elt in self._content]
+        elif isinstance(vals, (tuple, list)):
+            for i, val in enumerate(vals):
+                self._content[i].set_trans(False)
+                self._content[i].set_val(val)
+                if i > len(self._content):
+                    break
+            if i < len(self._content)-1:
+                [elt.set_trans(True) for elt in self._content[1+i:]]
+        elif isinstance(vals, dict):
+            off = 0
+            for name, val in vals.items():
+                if name[:5] == 'Octet':
+                    try:
+                        off = max(off, int(name[5:]))
+                    except Exception:
+                        pass
+                elif name == 'ext':
+                    off = len(self._content)
+                try:
+                    self.__setitem__(name, val)
+                except Exception:
+                    pass
+            [elt.set_trans(False) for elt in self._content[:off]]
+            if off < len(self._content)-1:
+                [elt.set_trans(True) for elt in self._content[off:]]
+        elif self._SAFE_STAT:
+            raise(EltErr('{0} [set_val]: vals type is {1}, expecting None, '\
+                  'tuple, list or dict'.format(self._name, type(vals).__name__)))
+    
     def _from_char(self, char):
         l = char.len_byte()
-        if l < 8:
-            list(map(lambda e: e.set_trans(True), self._content[l:8]))
+        if l < 9:
+            [elt.set_trans(True) for elt in self._content[l:]]
         Envelope._from_char(self, char)
-'''
+
 
 #------------------------------------------------------------------------------#
 # PCO
@@ -2110,6 +2145,8 @@ class MMContext(Alt):
     _sel = lambda a, b: b.get_env()[0][0].get_val() # GTPCIEHdr['Type']
 
 
+# some more missing
+# UETimeZone, APNRestriction, SelectionMode, 
 
 
 
