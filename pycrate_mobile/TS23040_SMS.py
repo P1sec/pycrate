@@ -1016,7 +1016,7 @@ class SMS_DELIVER_REPORT_RP_ERROR(SMS_TP):
         )
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self['TP_PDI'].set_transauto(lambda: False if self['TP_PI']['TP_PID']() else True)
+        self['TP_PID'].set_transauto(lambda: False if self['TP_PI']['TP_PID']() else True)
         self['TP_DCS'].set_transauto(lambda: False if self['TP_PI']['TP_DCS']() else True)
         self['TP_UD'].set_transauto(lambda: False if self['TP_PI']['TP_UDL']() else True)
 
