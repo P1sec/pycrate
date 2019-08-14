@@ -3732,7 +3732,8 @@ class Sequence(Element):
         content
         
         Args:
-            old (element) : element to be removed
+            old (element) : element to be removed,
+                alternatively, old can be the element's index (int)
             new (element) : element to be inserted
         
         Returns:
@@ -3742,12 +3743,19 @@ class Sequence(Element):
             EltErr : if element `old' is not in self or
                 if `new' is not an element
         """.format(self.__class__.__name__)
-        try:
-            ind = self._content.index(old)
-        except Exception as err:
-            raise(EltErr('{0} [replace] invalid old: {1}'.format(self._name, err)))
-        if self._SAFE_STAT and not isinstance(new, Element):
-            raise(EltErr('{0} [insert]: elt type is {1}, expecting element'\
+        if isinstance(old, Elt):
+            try:
+                ind = self._content.index(old)
+            except Exception as err:
+                raise(EltErr('{0} [replace] invalid old: {1}'.format(self._name, err)))
+        elif isinstance(old, integer_types):
+            ind = old
+            try:
+                old = self._content[ind]
+            except Exception:
+                raise(EltErr('{0} [replace] invalid old index: {1}'.format(self._name, ind)))
+        elif self._SAFE_STAT:
+            raise(EltErr('{0} [replace]: elt type is {1}, expecting element or index'\
                          .format(self._name, type(elt).__name__)))
         del self._content[ind]
         if old != self._tmpl:
