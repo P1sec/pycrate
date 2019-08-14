@@ -2711,11 +2711,9 @@ class ProtConfigElt(Envelope):
             try:
                 cont._from_char(char)
             except Exception:
-                cont = None
                 char._cur, char._len_bit = ccur, clen
             else:
                 if char._cur < char._len_bit:
-                    cont = None
                     char._cur, char._len_bit = ccur, clen
                 else:
                     self.replace(self[2], cont)
