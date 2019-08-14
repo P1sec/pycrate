@@ -433,10 +433,41 @@ class Uint(Atom):
     DEFAULT_VAL = 0
     DEFAULT_BL  = 0
     
+    _SAFE_VALAUTO = False
     
     #--------------------------------------------------------------------------#
     # format routines
     #--------------------------------------------------------------------------#
+    
+    def _get_val_min(self):
+        return 0
+    
+    def _get_val_max(self):
+        return (1 << self.get_bl()) - 1
+        
+    def get_val(self):
+        # follow the value resolution order:
+        # 1) raw value
+        if self._val is not None:
+            return self._val
+        
+        # 2) value automation
+        elif self._valauto is not None:
+            val = self._valauto()
+            if self._SAFE_DYN:
+                self._chk_val(val)
+            elif self._SAFE_VALAUTO:
+                if val < self._get_val_min():
+                    return self._get_val_min()
+                elif val > self._get_val_max():
+                    return self._get_val_max()
+            return val
+        
+        # 3) default value
+        else:
+            return self.DEFAULT_VAL
+    
+    __call__ = get_val
     
     def _chk_val(self, *args):
         if args:
@@ -539,9 +570,41 @@ class Int(Atom):
     DEFAULT_VAL = 0
     DEFAULT_BL  = 0
     
+    _SAFE_VALAUTO = False
+    
     #--------------------------------------------------------------------------#
     # format routines
     #--------------------------------------------------------------------------#
+    
+    def _get_val_min(self):
+        return -1 << (self.get_bl()-1)
+    
+    def _get_val_max(self):
+        return (1 << (self.get_bl()-1)) - 1
+    
+    def get_val(self):
+        # follow the value resolution order:
+        # 1) raw value
+        if self._val is not None:
+            return self._val
+        
+        # 2) value automation
+        elif self._valauto is not None:
+            val = self._valauto()
+            if self._SAFE_DYN:
+                self._chk_val(val)
+            elif self._SAFE_VALAUTO:
+                if val < self._get_val_min():
+                    return self._get_val_min()
+                elif val > self._get_val_max():
+                    return self._get_val_max()
+            return val
+        
+        # 3) default value
+        else:
+            return self.DEFAULT_VAL
+    
+    __call__ = get_val
     
     def _chk_val(self, *args):
         if args:
