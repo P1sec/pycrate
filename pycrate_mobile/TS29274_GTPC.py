@@ -2328,8 +2328,17 @@ class GTPCIE(Envelope):
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[0][1].set_valauto(lambda: self[1].get_len() if self[0][0].get_val() != 254 \
-                                       else 2 + self[1].get_len())
+        self[0][1].set_valauto(lambda: self._get_len())
+        
+    def _get_len(self):
+        l = 0
+        if len(self._content) > 1:
+            # IE data
+            l += self._content[1].get_len()
+        if self[0][0].get_val() == 254:
+            # extended type
+            l += 2
+        return l
     
     def set_val(self, val):
         if isinstance(val, (tuple, list)) and val:
