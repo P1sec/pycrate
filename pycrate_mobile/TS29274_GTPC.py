@@ -1011,7 +1011,7 @@ class AMBR(Envelope):
 class EBI(Envelope):
     _GEN = (
         Uint('spare', bl=4),
-        Uint('Value', bl=4),
+        Uint('Value', val=5, bl=4),
         Buf('ext', rep=REPR_HEX)
         )
 
@@ -1187,7 +1187,7 @@ PDNType_dict = {
 class PAA(Envelope):
     _GEN = (
         Uint('spare', bl=5),
-        Uint('PDNType', bl=3, dic=PDNType_dict),
+        Uint('PDNType', val=1, bl=3, dic=PDNType_dict),
         Buf('PDNAddress', rep=REPR_HEX)
         )
 
@@ -1204,11 +1204,11 @@ class BearerQoS(Envelope):
         Uint('PL', bl=4),
         Uint('spare', bl=1),
         Uint('PVI', bl=1),
-        Uint8('QCI'),
-        Uint32('MaxBitRateUL'),
-        Uint32('MaxBitRateDL'),
-        Uint32('GuaranteedBitRateUL'),
-        Uint32('GuaranteedBitRateDL'),
+        Uint8('QCI', val=9),
+        Uint('MaxBitRateUL', val=10000, bl=40),
+        Uint('MaxBitRateDL', val=10000, bl=40),
+        Uint('GuaranteedBitRateUL', bl=40),
+        Uint('GuaranteedBitRateDL', bl=40),
         Buf('ext', rep=REPR_HEX)
         )
 
@@ -1220,11 +1220,11 @@ class BearerQoS(Envelope):
 
 class FlowQoS(Envelope):
     _GEN = (
-        Uint8('QCI'),
-        Uint32('MaxBitRateUL'),
-        Uint32('MaxBitRateDL'),
-        Uint32('GuaranteedBitRateUL'),
-        Uint32('GuaranteedBitRateDL'),
+        Uint8('QCI', val=9),
+        Uint('MaxBitRateUL', val=10000, bl=40),
+        Uint('MaxBitRateDL', val=10000, bl=40),
+        Uint('GuaranteedBitRateUL', bl=40),
+        Uint('GuaranteedBitRateDL', bl=40),
         Buf('ext', rep=REPR_HEX)
         )
 
@@ -1250,7 +1250,7 @@ RATType_dict = {
 
 class RATType(Envelope):
     _GEN = (
-        Uint8('Value', dic=RATType_dict),
+        Uint8('Value', val=6, dic=RATType_dict),
         Buf('ext', rep=REPR_HEX)
         )
 
@@ -1474,7 +1474,7 @@ class FTEID(Envelope):
     ENV_SEL_TRANS = False
     
     _GEN = (
-        Uint('V4', bl=1),
+        Uint('V4', val=1, bl=1),
         Uint('V6', bl=1),
         Uint('IF', bl=6, dic=FTEIDIF_dict),
         Uint32('TEID/GREKey'),
@@ -1595,7 +1595,7 @@ class BearerFlags(Envelope):
 class PDNType(Envelope):
     _GEN = (
         Uint('spare', bl=5),
-        Uint('Value', bl=3, dic=PDNType_dict)
+        Uint('Value', val=1, bl=3, dic=PDNType_dict)
         )
 
 
@@ -2454,6 +2454,17 @@ class GTPCIEs(Sequence):
             if self._ie_mand:
                 raise(PycrateErr('{0}: missing mandatory IE(s), {1}'\
                       .format(self._name, ', '.join(sorted(self._ie_mand)))))
+    
+    def add_ie(self, ie_type, ie_inst=0, val=None):
+        self.set_val({self.get_num(): {'GTPCIEHdr': {'Type': ie_type, 'Inst': ie_inst}}})
+        if val is not None:
+            self[-1][1].set_val(val)
+    
+    def rem_ie(self, ie_type, ie_inst=0):
+        for ie in self._content[::-1]:
+            if (ie[0]['Type'].get_val(), ie[0]['Inst'].get_val()) == (ie_type, ie_inst):
+                self._content.remove(ie)
+                break
 
 
 #------------------------------------------------------------------------------#
