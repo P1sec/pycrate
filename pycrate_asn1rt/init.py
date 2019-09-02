@@ -33,7 +33,6 @@ from .refobj import *
 from .setobj import *
 from .codecs import ASN1CodecBER
 
-import inspect
 
 def init_modules(*args, **kwargs):
     """
