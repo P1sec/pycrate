@@ -529,6 +529,14 @@ def __build_classet_dict(Obj, key, valset):
     for val in valset:
         if key in val:
             keyval = val[key]
+            # WARNING: keyval is not always a basic value (e.g. INTEGER),
+            # but can be a constructed value, hence a dict or a list
+            # We need to make it hashable for Python
+            if isinstance(keyval, list):
+                keyval = tuple(keyval)
+            elif isinstance(keyval, dict):
+                keyval = tuple(sorted(keyval.items()))
+            #
             if keyval in Obj._lut:
                 # this is not as UNIQUE as one can think...
                 lutval = Obj._lut[keyval]

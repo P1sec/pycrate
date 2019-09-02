@@ -171,6 +171,13 @@ Specific method:
         # for every CLASS set defined at the root of a module
         if hasattr(self, '_lut'):
             if key == self._lut['__key__']:
+                # WARNING: val is not always a basic value (e.g. INTEGER),
+                # but can be a constructed value, hence a dict or a list
+                # We need to make it hashable for Python
+                if isinstance(val, list):
+                    val = tuple(val)
+                elif isinstance(val, dict):
+                    val = tuple(sorted(val.items()))
                 try:
                     return self._lut[val]
                 except KeyError:
