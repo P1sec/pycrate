@@ -36,6 +36,50 @@ from pycrate_core.elt  import *
 from pycrate_core.repr import *
 
 
+# well known TAR (Toolkit Application Reference)
+
+TAR_dict = {
+    # ETSI TS 101.220
+    0x000000: 'Issuer Security Domain',
+    0xB20100: 'Issuer Security Domain',
+    0xB00000: 'UICC Shared File System',
+    0xB00001: 'ADF Remote File Management',
+    0xB20101: 'SCWS (OMA)',
+    0xB20102: 'SCWS administrative agent Application (OMA)',
+    0xB20200: 'Multiplexing Application (ETSI)',
+    0xB20201: 'Controlling Authority Security Domain (GP)',
+    0xB20202: 'OMA BCAST Smartcard-Centric Audience Measurement ',
+    0xB20203: 'OMA DM LWM2M UICC Application',
+    # SIM Alliance SAT browser
+    0x534054: 'SAT browser',
+    0x505348: 'SAT browser low priority Push' 
+    }
+
+# ETSI TS 101.220
+for i in range(0xB00002, 0xB00010):
+    TAR_dict[i] = 'UICC Shared File System'
+for i in range(0xB00010, 0xB00020):
+    TAR_dict[i] = 'SIM File System'
+for i in range(0xB00020, 0xB00120):
+    TAR_dict[i] = 'ADF Remote File Management'
+for i in range(0xB00120, 0xB00130):
+    TAR_dict[i] = 'UICC Shared File System'
+for i in range(0xB00130, 0xB00140):
+    TAR_dict[i] = 'SIM File System'
+for i in range(0xB00140, 0xB00200):
+    TAR_dict[i] = 'ADF Remote File Management'
+for i in range(0xB10000, 0xB10005):
+    TAR_dict[i] = 'Visa Mobile Payment Toolkit Application'
+for i in range(0xB20000, 0xB20100):
+    TAR_dict[i] = 'USAT Interpreter Application'
+for i in range(0xB20210, 0xB20220):
+    TAR_dict[i] = 'Security Domain with Authorized Management privilege (EMVCo)',
+for i in range(0xB20220, 0xB20230):
+    TAR_dict[i] = 'Security Domain with Delegated Management privilege (EMVCo)',
+for i in range(0xBFFF00, 0xC00000):
+    TAR_dict[i] = 'Proprietary Toolkit Application'
+
+
 # BER length handler
 # supports value automation
 
@@ -327,7 +371,7 @@ class PacketCmd(Envelope):
             },
             DEFAULT=Uint8('NoIntegrity', val=0, bl=0),
             sel=lambda self: self.get_env()['SPI']['IntegrityType']()),
-        Uint24('TAR', rep=REPR_HEX),
+        Uint24('TAR', rep=REPR_HEX, dic=TAR_dict),
         Uint('CNTR', bl=40),
         Uint8('PCNTR'),
         Buf('IntegrityCheck', rep=REPR_HEX),
@@ -373,7 +417,7 @@ class PacketResp(Envelope):
         BERLen('RespPacketLen'),
         Uint8('RespHeaderId'),
         BERLen('RespHeaderLen'),
-        Uint24('TAR', rep=REPR_HEX),
+        Uint24('TAR', rep=REPR_HEX, dic=TAR_dict),
         Uint('CNTR', bl=40),
         Uint8('PCNTR'),
         Uint8('Status', dic=RespStatus_dict),

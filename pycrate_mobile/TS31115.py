@@ -49,7 +49,7 @@ class PacketCmdSMSPP(Envelope):
             },
             DEFAULT=Uint8('NoIntegrity', val=0, bl=0),
             sel=lambda self: self.get_env()['SPI']['IntegrityType']()),
-        Uint24('TAR', rep=REPR_HEX),
+        Uint24('TAR', rep=REPR_HEX, dic=TAR_dict),
         Uint('CNTR', bl=40),
         Uint8('PCNTR'),
         Buf('IntegrityCheck', rep=REPR_HEX),
@@ -68,7 +68,7 @@ class PacketRespSMSPP(Envelope):
     _GEN = (
         Uint16('RespPacketLen'),
         Uint8('RespHeaderLen'),
-        Uint24('TAR', rep=REPR_HEX),
+        Uint24('TAR', rep=REPR_HEX, dic=TAR_dict),
         Uint('CNTR', bl=40),
         Uint8('PCNTR'),
         Uint8('Status'),
