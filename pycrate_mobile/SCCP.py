@@ -331,7 +331,7 @@ class _SCCPAddr(Envelope):
             self.append( gt )
 
 
-class CallingPartyAddr(Envelope):
+class SCCPPartyAddr(Envelope):
     _GEN = (
         Uint8('Len'),
         _SCCPAddr('Value')
@@ -352,25 +352,12 @@ class CallingPartyAddr(Envelope):
         return self[1][3].get_alt()
 
 
-class CalledPartyAddr(Envelope):
-    _GEN = (
-        Uint8('Len'),
-        _SCCPAddr('Value')
-        )
-    
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self[0].set_valauto(lambda: self[1].get_len())
-    
-    def _from_char(self, char):
-        self[0]._from_char(char)
-        clen = char._len_bit
-        char._len_bit = char._cur + 8*self[0].get_val()
-        self[1]._from_char(char)
-        char._len_bit = clen
-    
-    def get_gt(self):
-        return self[1][3].get_alt()
+class CallingPartyAddr(SCCPPartyAddr):
+    pass
+
+
+class CalledPartyAddr(SCCPPartyAddr):
+    pass
 
 
 #------------------------------------------------------------------------------#
