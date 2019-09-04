@@ -42,7 +42,7 @@ class PacketCmdSMSPP(Envelope):
         SPI(),
         KIc(),
         Alt('KID', GEN={
-            0 : Uint8('NoIntegrity', val=0, bl=0),
+            0 : Uint8('NoIntegrity', val=0),
             1 : KID_RC(),
             2 : KID_CC(),
             3 : KID_DS()

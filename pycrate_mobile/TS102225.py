@@ -35,129 +35,7 @@ from pycrate_core.base import *
 from pycrate_core.elt  import *
 from pycrate_core.repr import *
 
-
-# well known TAR (Toolkit Application Reference)
-
-TAR_dict = {
-    # ETSI TS 101.220
-    0x000000: 'Issuer Security Domain',
-    0xB20100: 'Issuer Security Domain',
-    0xB00000: 'UICC Shared File System',
-    0xB00001: 'ADF Remote File Management',
-    0xB20101: 'SCWS (OMA)',
-    0xB20102: 'SCWS administrative agent Application (OMA)',
-    0xB20200: 'Multiplexing Application (ETSI)',
-    0xB20201: 'Controlling Authority Security Domain (GP)',
-    0xB20202: 'OMA BCAST Smartcard-Centric Audience Measurement ',
-    0xB20203: 'OMA DM LWM2M UICC Application',
-    # SIM Alliance SAT browser
-    0x534054: 'SAT browser',
-    0x505348: 'SAT browser low priority Push' 
-    }
-
-# ETSI TS 101.220
-for i in range(0xB00002, 0xB00010):
-    TAR_dict[i] = 'UICC Shared File System'
-for i in range(0xB00010, 0xB00020):
-    TAR_dict[i] = 'SIM File System'
-for i in range(0xB00020, 0xB00120):
-    TAR_dict[i] = 'ADF Remote File Management'
-for i in range(0xB00120, 0xB00130):
-    TAR_dict[i] = 'UICC Shared File System'
-for i in range(0xB00130, 0xB00140):
-    TAR_dict[i] = 'SIM File System'
-for i in range(0xB00140, 0xB00200):
-    TAR_dict[i] = 'ADF Remote File Management'
-for i in range(0xB10000, 0xB10005):
-    TAR_dict[i] = 'Visa Mobile Payment Toolkit Application'
-for i in range(0xB20000, 0xB20100):
-    TAR_dict[i] = 'USAT Interpreter Application'
-for i in range(0xB20210, 0xB20220):
-    TAR_dict[i] = 'Security Domain with Authorized Management privilege (EMVCo)',
-for i in range(0xB20220, 0xB20230):
-    TAR_dict[i] = 'Security Domain with Delegated Management privilege (EMVCo)',
-for i in range(0xBFFF00, 0xC00000):
-    TAR_dict[i] = 'Proprietary Toolkit Application'
-
-
-# BER length handler
-# supports value automation
-
-class BERLen(Envelope):
-    
-    DEFAULT_VAL = 0
-    
-    MAXLEN = 65536
-    
-    _GEN = (
-        Uint('Form', bl=1, dic={0: 'short', 1: 'long'}),
-        Uint('Val', bl=7)
-        )
-    
-    def set_val(self, val):
-        if val > 127:
-            # long format
-            self[0].set_val(1)
-            bl = val.bit_length()
-            if bl % 8:
-                l = 1 + (bl>>3)
-            else:
-                l = bl>>3
-            self[1]._name = 'Len'
-            self[1].set_val(l)
-            self.append(Uint('Val', val=val, bl=l<<3))
-        else:
-            # short format
-            self[0].set_val(0)
-            self[1].set_val(val)
-    
-    def set_valauto(self, valauto=None):
-        if valauto is None:
-            try:
-                del self._valauto
-            except Exception:
-                pass
-        else:
-            if self._SAFE_STAT and not callable(valauto):
-                raise(EltErr('{0} [set_valauto]: valauto type is {1}, expecting callable'\
-                      .format(self._name, type(valauto).__name__)))
-            self._valauto = valauto
-    
-    def get_val(self):
-        # follow the value resolution order:
-        # 1) raw value
-        if self['Val']._val is not None:
-            return self['Val']._val
-        
-        # 2) value automation
-        elif self._valauto is not None:
-            val = self._valauto()
-            self.set_val(val)
-            return val
-        
-        # 3) default value
-        else:
-            return self.DEFAULT_VAL
-    
-    
-    def _from_char(self, char):
-        if self.get_trans():
-            return
-        self[0]._from_char(char)
-        if self[0]():
-            # long format
-            self[1]._name = 'Len'
-            self[1]._from_char(char)
-            self.append(Uint('Val', bl=self[1]()<<3))
-            self[2]._from_char(char)
-            val = self[2]()
-            if val > self.MAXLEN:
-                raise(PycrateErr('Length too long, %i' % self[2]()))
-            elif val == 0:
-                raise(PycrateErr('Undefinite length'))
-        else:
-            # short format
-            self[1]._from_char(char)
+from pycrate_mobile.TS31111_SAT import *
 
 
 # 5.1.1 Coding of the SPI
@@ -216,7 +94,7 @@ class SPI(Envelope):
         Uint('reserved', bl=2, rep=REPR_HEX),
         Uint('SMSPoR', bl=1, dic=SPI_sms_dict), # TS 31.115
         Uint('PoRCipherType', bl=1, dic=SPI_porc_dict),
-        Uint('PoRIntegrityType', bl=1, dic=SPI_pori_dict),
+        Uint('PoRIntegrityType', bl=2, dic=SPI_pori_dict),
         Uint('PoRExpect', bl=2, dic=SPI_porr_dict)
         )
 
@@ -364,7 +242,7 @@ class PacketCmd(Envelope):
         SPI(),                  # 2 bytes
         KIc(),                  # 1 byte
         Alt('KID', GEN={        # 1 byte
-            0 : Uint8('NoIntegrity', val=0, bl=0),
+            0 : Uint8('NoIntegrity', val=0),
             1 : KID_RC(),
             2 : KID_CC(),
             3 : KID_DS()
