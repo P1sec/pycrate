@@ -38,6 +38,9 @@ __all__ = [
     'PPSMSCPTypeClasses',
     'get_ppsmscp_msg_instances',
     #
+    'RPOriginatorAddress',
+    'RPDestinationAddress',
+    #
     'RP_DATA_MO',
     'RP_DATA_MT',
     'RP_ACK_MO',
