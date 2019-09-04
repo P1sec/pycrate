@@ -759,7 +759,6 @@ class _CONSTRUCT(ASN1Obj):
         GEN, self._val = [], {}
         if not self._cont and self._ext is None:
             # empty sequence
-            self._struct = Envelope(self._name, GEN=tuple())
             return
         #
         extended = False
