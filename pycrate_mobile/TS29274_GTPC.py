@@ -2309,7 +2309,7 @@ class GTPCIEHdr(Envelope):
         Uint16('Len'),
         Uint('spare', bl=4),
         Uint('Inst', bl=4),
-        Uint16('TypeExt', dic=GTPCIETags_dict, trans=True),
+        Uint16('TypeExt', dic=GTPCIETags_dict),
         )
     
     def __init__(self, *args, **kwargs):
