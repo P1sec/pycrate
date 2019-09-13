@@ -964,12 +964,17 @@ class Cause(Envelope):
             Uint16('Len'),
             Uint('spare', bl=4),
             Uint('Inst', bl=4)
-            ))
+            ), trans=True)
         )
     
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self[5].set_transauto(lambda: self.get_env()[0][1].get_val() < 10)
+    def _from_char(self, char):
+        ie = self.get_env()
+        if ie is not None and ie[0][1].get_val() >= 6:
+            # this is an arbitrary choice to expect the OffendingIE part if 
+            # the IE length is long enough
+            self[5].set_trans(False)
+        Envelope._from_char(self, char)
+        
 
 
 #------------------------------------------------------------------------------#
