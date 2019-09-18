@@ -74,9 +74,9 @@ for i in range(0xB10000, 0xB10005):
 for i in range(0xB20000, 0xB20100):
     TAR_dict[i] = 'USAT Interpreter Application'
 for i in range(0xB20210, 0xB20220):
-    TAR_dict[i] = 'Security Domain with Authorized Management privilege (EMVCo)',
+    TAR_dict[i] = 'Security Domain with Authorized Management privilege (EMVCo)'
 for i in range(0xB20220, 0xB20230):
-    TAR_dict[i] = 'Security Domain with Delegated Management privilege (EMVCo)',
+    TAR_dict[i] = 'Security Domain with Delegated Management privilege (EMVCo)'
 for i in range(0xBFFF00, 0xC00000):
     TAR_dict[i] = 'Proprietary Toolkit Application'
 
