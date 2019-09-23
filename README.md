@@ -89,7 +89,7 @@ python -m pycrate_asn1c.asnproc
 ```
 
 More generally, installation is not required, and simply having all pycrate_* subdirectories
-into the PYTHON_PATH enables to use the complete library.
+into the PYTHONPATH enables to use the complete library.
 
 
 Contributing
