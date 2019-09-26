@@ -1203,7 +1203,7 @@ Specific attributes:
             return txt[1:].strip()
         try:
             t_ident, t_rest = txt.split(' ', 1)
-        except:
+        except Exception:
             raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'\
                   .format(self.fullname(), txt)))
         val = self._val
@@ -1221,7 +1221,7 @@ Specific attributes:
                     txt = txt[1:].strip()
                     try:
                         t_ident, t_rest = txt.split(' ', 1)
-                    except:
+                    except Exception:
                         raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'\
                               .format(self.fullname(), txt)))
                 elif txt[0:1] == '}':
@@ -1269,7 +1269,7 @@ Specific attributes:
                         txt = txt[1:].strip()
                         try:
                             t_ident, t_rest = txt.split(' ', 1)
-                        except:
+                        except Exception:
                             raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'\
                                   .format(self.fullname(), txt)))
                     elif txt[0:1] == '}':
@@ -1653,7 +1653,7 @@ Specific attributes:
             return txt[1:].strip()
         try:
             t_ident, t_rest = txt.split(' ', 1)
-        except:
+        except Exception:
             raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'\
                   .format(self.fullname(), txt)))
         #
@@ -1674,7 +1674,7 @@ Specific attributes:
                 txt = txt[1:].strip()
                 try:
                     t_ident, t_rest = txt.split(' ', 1)
-                except:
+                except Exception:
                     raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'\
                           .format(self.fullname(), txt)))
             elif txt[0:1] == '}':

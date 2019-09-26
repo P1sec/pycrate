@@ -907,7 +907,7 @@ class ASN1Obj(Element):
                 else:
                     # invalid path, go to the exception case
                     raise()
-            except:
+            except Exception:
                 raise(ASN1Err('{0}: invalid path {1}'.format(self.fullname(), selected)))
         return Obj
     
@@ -1032,7 +1032,7 @@ class ASN1Obj(Element):
                         raise()
                 else:
                     raise()
-            except:
+            except Exception:
                 raise(ASN1Err('{0}: invalid value path, {1!r}'.format(self.fullname(), path)))
         return val
     

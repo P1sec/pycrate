@@ -298,7 +298,7 @@ Specific attribute:
         if isinstance(val, str_types):
             try:
                 self._val = self._cont[val]
-            except:
+            except Exception:
                 raise(ASN1ObjErr('{0}: invalid named value, {1!r}'.format(self.fullname(), val)))
         else:
             self._val = val
@@ -312,7 +312,7 @@ Specific attribute:
         """
         try:
             return self._cont_rev[self._val]
-        except:
+        except Exception:
             return None
     
     ###
@@ -1341,7 +1341,7 @@ class _OID(ASN1Obj):
         def _from_jval(self, val):
             try:
                 self._val = tuple(map(int, val.split('.')))
-            except:
+            except Exception:
                 raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
                       .format(self.fullname(), val)))
         
@@ -1377,7 +1377,7 @@ Single value: Python tuple of int
                     e = char.get_uint(1)
                     v <<= 7
                     v += char.get_uint(7)
-                except Exception as err:
+                except Exception:
                     raise(ASN1BERDecodeErr('{0}: invalid OID integer value'\
                           .format(self.fullname())))
             arcs.append(v)
@@ -1448,7 +1448,7 @@ Single value: Python tuple of int
                     e = char.get_uint(1)
                     v <<= 7
                     v += char.get_uint(7)
-                except Exception as err:
+                except Exception:
                     raise(ASN1BERDecodeErr('{0}: invalid OID integer value'\
                           .format(self.fullname())))
             arcs.append(v)

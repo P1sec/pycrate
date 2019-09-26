@@ -118,7 +118,7 @@ Single value: Python 2-tuple
         else:
             try:
                 return GLOBAL.MOD[ref[0]][ref[1]]
-            except:
+            except Exception:
                 raise(ASN1ObjErr('{0}: invalid object reference, {1!r}'\
                       .format(self.fullname(), ref)))
     
@@ -394,7 +394,7 @@ Single value: Python 2-tuple
             for Obj in Objs:
                 try:
                     Obj._from_ber_ws(char, [tlv])
-                except:
+                except Exception:
                     # decoding failed
                     char._cur, char._len_bit = char_cur, char_lb
                 else:
@@ -488,7 +488,7 @@ Single value: Python 2-tuple
             for Obj in Objs:
                 try:
                     Obj._from_ber(char, [tlv])
-                except Exception as err:
+                except Exception:
                     char._cur, char._len_bit = char_cur, char_lb
                 else:
                     # set value
@@ -543,7 +543,7 @@ Single value: Python 2-tuple
                     cl, pc, tval = int(self._val[0][5:6]), \
                                    int(self._val[0][6:7]), \
                                    int(self._val[0][7:])
-                except:
+                except Exception:
                     cl, pc, tval = 0, 0, 4
                 TLV = ASN1CodecBER.encode_tlv_ws(cl, tval, self._val[1], pc=pc)
             else:
@@ -568,7 +568,7 @@ Single value: Python 2-tuple
                     cl, pc, tval = int(self._val[0][5:6]), \
                                    int(self._val[0][6:7]), \
                                    int(self._val[0][7:])
-                except:
+                except Exception:
                     cl, pc, tval = 0, 0, 4
                 TLV = ASN1CodecBER.encode_tlv(cl, tval, self._val[1], pc=pc)
             else:

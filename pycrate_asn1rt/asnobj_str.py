@@ -117,7 +117,7 @@ Specific constraints attributes:
         else:
             try:
                 return GLOBAL.MOD[ref[0]][ref[1]]
-            except:
+            except Exception:
                 raise(ASN1ObjErr('{0}: invalid object reference, {1!r}'\
                       .format(self.fullname(), ref)))
     
@@ -157,7 +157,7 @@ Specific constraints attributes:
             for name in val:
                 try:
                     off.append(self._cont[name])
-                except:
+                except Exception:
                     raise(ASN1ObjErr('{0}: invalid named bit, {1!r}'.format(self.fullname(), val)))
             if off:
                 moff = max(off)
@@ -274,7 +274,7 @@ Specific constraints attributes:
                         return ret + ' -- %s --' % s
                     else:
                         return ret
-                except:
+                except Exception:
                     return ret
             else:
                 return ret
@@ -395,7 +395,7 @@ Specific constraints attributes:
                         self._const_cont.from_aper_ws(char)
                     else:
                         self._const_cont.from_uper_ws(char)
-                except:
+                except Exception:
                     if not self._SILENT:
                         asnlog('BIT_STR.__from_per_ws_buf: %s, CONTAINING object decoding failed'\
                                % self._name)
@@ -499,7 +499,7 @@ Specific constraints attributes:
                         self._const_cont.from_aper(char)
                     else:
                         self._const_cont.from_uper(char)
-                except:
+                except Exception:
                     if not self._SILENT:
                         asnlog('BIT_STR.__from_per_buf: %s, CONTAINING object decoding failed'\
                                % self._name)
@@ -839,7 +839,7 @@ Specific constraints attributes:
                 Obj._parent = self._parent
                 try:
                     Obj.from_ber(char, single=False)
-                except:
+                except Exception:
                     if not self._SILENT:
                         asnlog('BIT_STR.__from_ber_buf: %s, CONTAINING object decoding failed'\
                                % self._name)
@@ -1068,7 +1068,7 @@ Specific constraints attributes:
         else:
             try:
                 return GLOBAL.MOD[ref[0]][ref[1]]
-            except:
+            except Exception:
                 raise(ASN1ObjErr('{0}: invalid object reference, {1!r}'\
                       .format(self.fullname(), ref)))
     
@@ -1147,7 +1147,7 @@ Specific constraints attributes:
                         return ret + ' -- %s --' % s
                     else:
                         return ret
-                except:
+                except Exception:
                     return ret
             else:
                 return ret
@@ -1516,7 +1516,7 @@ Specific constraints attributes:
                 Obj._parent = self._parent
                 try:
                     Obj.from_ber(char, single=False)
-                except:
+                except Exception:
                     if not self._SILENT:
                         asnlog('OCT_STR.__from_ber_buf: %s, CONTAINING object decoding failed'\
                                % self._name)
@@ -1810,7 +1810,7 @@ Virtual parent for any ASN.1 *String object
                 # character remapping required
                 try:
                     self._val = ''.join([self._const_alpha.root[i] for i in val])
-                except:
+                except Exception:
                     raise(ASN1PERDecodeErr('{0}: character out of alphabet constraint'\
                           .format(self.fullname())))
             elif cdyn == 4:
@@ -1819,7 +1819,7 @@ Virtual parent for any ASN.1 *String object
                 # numeric string
                 try:
                     self._val = ''.join([self._ALPHA_RE[i] for i in val])
-                except:
+                except Exception:
                     raise(ASN1PERDecodeErr('{0}: character out of alphabet'\
                           .format(self.fullname())))
             elif cdyn == 7:
@@ -1828,7 +1828,7 @@ Virtual parent for any ASN.1 *String object
                 # ascii encoding
                 try:
                     self._val = ''.join(map(chr, val))
-                except:
+                except Exception:
                     raise(ASN1PERDecodeErr('{0}: character out of alphabet'\
                           .format(self.fullname())))
             else:
@@ -1873,7 +1873,7 @@ Virtual parent for any ASN.1 *String object
             # character remapping required
             try:
                 self._val = ''.join([self._const_alpha.root[i] for i in V()])
-            except:
+            except Exception:
                 raise(ASN1PERDecodeErr('{0}: character out of alphabet constraint, {1!r}'\
                       .format(self.fullname(), V())))
         elif cdyn == 4:
@@ -1885,7 +1885,7 @@ Virtual parent for any ASN.1 *String object
             # numeric string
             try:
                 self._val = ''.join([self._ALPHA_RE[i] for i in V()])
-            except:
+            except Exception:
                 raise(ASN1PERDecodeErr('{0}: character out of alphabet, {1!r}'\
                       .format(self.fullname(), V())))
         elif cdyn == 7:
@@ -1897,7 +1897,7 @@ Virtual parent for any ASN.1 *String object
             # ascii encoding
             try:    
                 self._val = ''.join(map(chr, V()))
-            except:
+            except Exception:
                 raise(ASN1PERDecodeErr('{0}: character out of alphabet, {1!r}'\
                       .format(self.fullname(), V())))
         else:
@@ -1984,7 +1984,7 @@ Virtual parent for any ASN.1 *String object
                 # character remapping required
                 try:
                     self._val = ''.join([self._const_alpha.root[i] for i in val])
-                except:
+                except Exception:
                     raise(ASN1PERDecodeErr('{0}: character out of alphabet constraint'\
                           .format(self.fullname())))
             elif cdyn == 4:
@@ -1993,7 +1993,7 @@ Virtual parent for any ASN.1 *String object
                 # numeric string
                 try:
                     self._val = ''.join([self._ALPHA_RE[i] for i in val])
-                except:
+                except Exception:
                     raise(ASN1PERDecodeErr('{0}: character out of alphabet'\
                           .format(self.fullname())))
             elif cdyn == 7:
@@ -2002,7 +2002,7 @@ Virtual parent for any ASN.1 *String object
                 # ascii encoding
                 try:
                     self._val = ''.join(map(chr, val))
-                except:
+                except Exception:
                     raise(ASN1PERDecodeErr('{0}: character out of alphabet'\
                           .format(self.fullname())))
             else:
@@ -2043,7 +2043,7 @@ Virtual parent for any ASN.1 *String object
             # character remapping required
             try:
                 self._val = ''.join([self._const_alpha.root[i] for i in val])
-            except:
+            except Exception:
                 raise(ASN1PERDecodeErr('{0}: character out of alphabet constraint, {1!r}'\
                       .format(self.fullname(), V())))
         elif cdyn == 4:
@@ -2054,7 +2054,7 @@ Virtual parent for any ASN.1 *String object
             # numeric string
             try:
                 self._val = ''.join([self._ALPHA_RE[i] for i in val])
-            except:
+            except Exception:
                 raise(ASN1PERDecodeErr('{0}: character out of alphabet, {1!r}'\
                       .format(self.fullname(), V())))
         elif cdyn == 7:
@@ -2065,7 +2065,7 @@ Virtual parent for any ASN.1 *String object
             # ascii encoding
             try:    
                 self._val = ''.join(map(chr, val))
-            except:
+            except Exception:
                 raise(ASN1PERDecodeErr('{0}: character out of alphabet, {1!r}'\
                       .format(self.fullname(), V())))
         else:
@@ -2149,21 +2149,21 @@ Virtual parent for any ASN.1 *String object
                 # character remapping required
                 try:
                     val = [self._const_alpha.root.index(c) for c in self._val]
-                except:
+                except Exception:
                     raise(ASN1PEREncodeErr('{0}: character out of alphabet constraint, {1!r}'\
                           .format(self.fullname(), self._val)))
             elif cdyn == 4:
                 # numeric string
                 try:
                     val = [self._ALPHA_RE.find(c) for c in self._val]
-                except:
+                except Exception:
                     raise(ASN1PEREncodeErr('{0}: character out of alphabet, {1!r}'\
                           .format(self.fullname(), self._val)))
             elif cdyn == 7:
                 # ascii encoding
                 try:
                     val = list(map(ord, self._val))
-                except:
+                except Exception:
                     raise(ASN1PEREncodeErr('{0}: character out of alphabet, {1!r}'\
                           .format(self.fullname(), self._val)))
             else:
@@ -2799,7 +2799,7 @@ Single value: Python 7-tuple of str or None
                         i = ' -- %s --' % asctime(strptime(s[1:-2], '%y%m%d%H%M'))
                     else:
                         i = ' -- %s --' % asctime(strptime(s[1:-1], '%y%m%d%H%M%Z'))
-                except:
+                except Exception:
                     i = ''
                 return s + i
             else:
@@ -2812,7 +2812,7 @@ Single value: Python 7-tuple of str or None
                         i = ' -- %s --' % asctime(strptime(s[1:-2], '%y%m%d%H%M%S'))
                     else:
                         i = ' -- %s --' % asctime(strptime(s[1:-1], '%y%m%d%H%M%S%Z'))
-                except:
+                except Exception:
                     i = ''
                 return s + i
             else:
@@ -2825,7 +2825,7 @@ Single value: Python 7-tuple of str or None
     def _decode_cont(self, asc):
         try:
             self._from_asn1('"' + asc + '"')
-        except Exception as err:
+        except Exception:
             raise(ASN1BERDecodeErr('{0}: invalid UTCTime ascii encoding'\
                   .format(self.fullname())))
     
@@ -2907,7 +2907,7 @@ Single value: Python 8-tuple of str or None
     def _decode_cont(self, asc):
         try:
             self._from_asn1('"' + asc + '"')
-        except Exception as err:
+        except Exception:
             raise(ASN1BERDecodeErr('{0}: invalid GeneralizedTime ascii encoding'\
                   .format(self.fullname())))
     
