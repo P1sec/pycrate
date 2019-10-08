@@ -28,6 +28,8 @@
 # *--------------------------------------------------------
 #*/
 
+from binascii import unhexlify
+
 from pycrate_core.utils  import *
 from pycrate_core.repr   import *
 from pycrate_core.elt    import *
@@ -158,6 +160,23 @@ class _GlobalTitle0001(Envelope):
         Uint('NAI', val=1, bl=7, dic=_GTNAI_dict),
         SCCPBufBCD('Addr', val=b'')
         )
+    
+    def get_addr(self):
+        """return BCD-encoded Addr, properly decoded according to OE
+        """
+        if self[0].get_val():
+            return self[2].decode()[:-1]
+        else:
+            return self[2].decode()
+    
+    def set_addr(self, addr):
+        """set the BCD-encoded Addr and OE
+        """
+        if len(addr) % 2:
+            self[0].set_val(1)
+        self[2].encode(addr)
+    
+    set_attr_bcd = set_addr
 
 
 # GTInd 0010
@@ -168,6 +187,16 @@ class _GlobalTitle0010(Envelope):
         Uint8('TranslationType'),
         Buf('Addr', val=b'', rep=REPR_HEX)
         )
+    
+    def get_addr(self):
+        """return the hex-encoded Addr
+        """
+        return self[1].hex()
+    
+    def set_addr(self, addr):
+        """set the hex-encoded Addr
+        """
+        self[1].set_val(unhexlify(addr))
 
 
 # GTInd 0011
@@ -205,6 +234,26 @@ class _GlobalTitle0011(Envelope):
             sel=lambda self: self.get_env()[2].get_val())
         )
 
+    def get_addr(self):
+        """return the BCD- or hex-encoded Addr, properly decoded according to EncodingScheme
+        """
+        enc = self[2].get_val()
+        if enc == 1:
+            return self[3].get_alt().decode()[:-1]
+        elif enc == 2:
+            return self[3].get_alt().decode()
+        else:
+            return self[3].get_alt().hex()
+    
+    def set_addr_bcd(self, addr):
+        """set the BCD-encoded Addr and EncodingScheme
+        """
+        if len(addr) % 2:
+            self[2].set_val(1)
+        else:
+            self[2].set_val(2)
+        self[3].get_alt().encode(addr)
+
 
 # GTInd 0100
 # section 3.4.2.3.4
@@ -234,6 +283,26 @@ class _GlobalTitle0100(Envelope):
             DEFAULT=Buf('Raw', val=b'', rep=REPR_HEX),
             sel=lambda self: self.get_env()[2].get_val())
         )
+
+    def get_addr(self):
+        """return the BCD- or hex-encoded Addr, properly decoded according to EncodingScheme
+        """
+        enc = self[2].get_val()
+        if enc == 1:
+            return self[5].get_alt().decode()[:-1]
+        elif enc == 2:
+            return self[5].get_alt().decode()
+        else:
+            return self[5].get_alt().hex()
+    
+    def set_addr_bcd(self, addr):
+        """set the BCD-encoded Addr and EncodingScheme
+        """
+        if len(addr) % 2:
+            self[2].set_val(1)
+        else:
+            self[2].set_val(2)
+        self[5].get_alt().encode(addr)
 
 
 # SCCP called / calling party address

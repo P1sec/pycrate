@@ -242,6 +242,16 @@ def test_sccp(sccp_pdu=sccp_pdu):
             t = m.to_json()
             m.from_json(t)
             assert( m.get_val() == v )
+    #
+    # verify GT specific methods
+    m, e = parse_SCCP(sccp_pdu[5])
+    m.reautomate()
+    called  = m[3].get_gt().get_addr()
+    calling = m[4].get_gt().get_addr()
+    m[3].get_gt().set_addr_bcd(called)
+    m[4].get_gt().set_addr_bcd(calling)
+    assert( m[3].get_gt().get_addr() == called )
+    assert( m[4].get_gt().get_addr() == calling )
 
 
 def test_gtpu(gtpu_pdu=gtpu_pdu):
