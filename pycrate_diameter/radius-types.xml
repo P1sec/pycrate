@@ -1,0 +1,3405 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="radius-types.xsl"?>
+<?oxygen RNGSchema="radius-types.rng" type="xml"?>
+<registry xmlns="http://www.iana.org/assignments" id="radius-types">
+  <title>RADIUS Types</title>
+  <category>Radius Types</category>
+  <updated>2019-06-20</updated>
+  <note>The RFC "Remote Authentication Dial In User Service (RADIUS)"
+<xref type="rfc" data="rfc2865"/> defines a Packet Type Code and an Attribute Type 
+Code.  The IANA registry of these codes and subordinate
+assigned values is listed here according to <xref type="rfc" data="rfc3575"/>.
+  </note>
+
+
+  <registry id="radius-types-2">
+    <title>RADIUS Attribute Types</title>
+    <xref type="rfc" data="rfc3575"/>
+    <xref type="rfc" data="rfc6929"/>
+    <xref type="rfc" data="rfc8044"/>
+    <note>Specifications which would allocate more than 20 percent of the remaining standard 
+space attributes should have all allocations made from the extended space. Otherwise, 
+specifications allocating fewer than 10 attributes should have allocations made in the 
+standard space. Specifications which allocate a data type TLV should receive an 
+allocation from the extended space. Specifications requesting allocation of an 
+attribute which can transport 253 or more octets of data should have that attribute 
+allocated from within the long extended space. See section 10.3.4 of <xref type="rfc" data="rfc6929"/>.
+    </note>
+    <range>
+      <value>1-191</value>
+      <registration_rule>IETF Review</registration_rule>
+    </range>
+    <range>
+      <value>192-240</value>
+      <registration_rule>Reserved for Private Use</registration_rule>
+    </range>
+    <range>
+      <value>224-240</value>
+      <registration_rule>Implementation Specific</registration_rule>
+    </range>
+    <range>
+      <value>241-246 (extended space, Unassigned)</value>
+      <registration_rule>IETF Review</registration_rule>
+    </range>    
+    <range>
+      <value>241-246 (extended space, Reserved)</value>
+      <registration_rule>Standards Action</registration_rule>
+    </range>     
+    <range>
+      <value>247-255</value>
+      <registration_rule>Reserved</registration_rule>
+    </range>
+    <record>
+      <value>1</value>
+      <description>User-Name</description>
+    	<datatype>text</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>2</value>
+      <description>User-Password</description>
+    	 <datatype>string</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>3</value>
+      <description>CHAP-Password</description>
+    	<datatype>string</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>4</value>
+      <description>NAS-IP-Address</description>
+    	<datatype>ipv4addr</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>5</value>
+      <description>NAS-Port</description>
+    	<datatype>integer</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>6</value>
+      <description>Service-Type</description>
+    	<datatype>enum</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>7</value>
+      <description>Framed-Protocol</description>
+    	<datatype>enum</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>8</value>
+      <description>Framed-IP-Address</description>
+    	<datatype>ipv4addr</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>9</value>
+      <description>Framed-IP-Netmask</description>
+    	<datatype>ipv4addr</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>10</value>
+      <description>Framed-Routing</description>
+    	<datatype>enum</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>11</value>
+      <description>Filter-Id</description>
+    	<datatype>text</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>12</value>
+      <description>Framed-MTU</description>
+    	<datatype>integer</datatype>
+      <xref type="rfc" data="rfc2865"/>
+   	</record>
+    <record>
+      <value>13</value>
+      <description>Framed-Compression</description>
+    	<datatype>enum</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>14</value>
+      <description>Login-IP-Host</description>
+    	<datatype>ipv4addr</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>15</value>
+      <description>Login-Service</description>
+    	<datatype>enum</datatype>
+      <xref type="rfc" data="rfc2865"/>
+   	</record>
+    <record>
+      <value>16</value>
+      <description>Login-TCP-Port</description>
+    	<datatype>integer</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>17</value>
+      <description>Unassigned</description>
+    	<datatype/>
+    </record>
+    <record>
+      <value>18</value>
+      <description>Reply-Message</description>
+    	<datatype>text</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>19</value>
+      <description>Callback-Number</description>
+    	<datatype>text</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>20</value>
+      <description>Callback-Id</description>
+    	<datatype>text</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>21</value>
+      <description>Unassigned</description>
+    	<datatype/>
+    </record>
+    <record>
+      <value>22</value>
+      <description>Framed-Route</description>
+    	<datatype>text</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>23</value>
+      <description>Framed-IPX-Network</description>
+    	<datatype>ipv4addr</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>24</value>
+      <description>State</description>
+    	<datatype>string</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>25</value>
+      <description>Class</description>
+    	<datatype>string</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>26</value>
+      <description>Vendor-Specific</description>
+    	<datatype>vsa</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>27</value>
+      <description>Session-Timeout</description>
+    	<datatype>integer</datatype>
+      <xref type="rfc" data="rfc2865"/>
+   	</record>
+    <record>
+      <value>28</value>
+      <description>Idle-Timeout</description>
+    	<datatype>integer</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>29</value>
+      <description>Termination-Action</description>
+    	<datatype>enum</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>30</value>
+      <description>Called-Station-Id</description>
+    	<datatype>text</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>31</value>
+      <description>Calling-Station-Id</description>
+    	<datatype>text</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>32</value>
+      <description>NAS-Identifier</description>
+    	<datatype>text</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>33</value>
+      <description>Proxy-State</description>
+    	<datatype>string</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>34</value>
+      <description>Login-LAT-Service</description>
+    	<datatype>text</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>35</value>
+      <description>Login-LAT-Node</description>
+    	<datatype>text</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>36</value>
+      <description>Login-LAT-Group</description>
+    	<datatype>string</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>37</value>
+      <description>Framed-AppleTalk-Link</description>
+    	<datatype>integer</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>38</value>
+      <description>Framed-AppleTalk-Network</description>
+    	<datatype>integer</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>39</value>
+      <description>Framed-AppleTalk-Zone</description>
+    	<datatype>text</datatype>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>40</value>
+      <description>Acct-Status-Type</description>
+    	<datatype>enum</datatype>
+    	<xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>41</value>
+      <description>Acct-Delay-Time</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>42</value>
+      <description>Acct-Input-Octets</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>43</value>
+      <description>Acct-Output-Octets</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>44</value>
+      <description>Acct-Session-Id</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>45</value>
+      <description>Acct-Authentic</description>
+    	<datatype>enum</datatype>
+    	<xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>46</value>
+      <description>Acct-Session-Time</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>47</value>
+      <description>Acct-Input-Packets</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>48</value>
+      <description>Acct-Output-Packets</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>49</value>
+      <description>Acct-Terminate-Cause</description>
+    	<datatype>enum</datatype>
+    	<xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>50</value>
+      <description>Acct-Multi-Session-Id</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>51</value>
+      <description>Acct-Link-Count</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>52</value>
+      <description>Acct-Input-Gigawords</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc2869"/>
+    </record>
+    <record>
+      <value>53</value>
+      <description>Acct-Output-Gigawords</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc2869"/>
+    </record>
+    <record>
+      <value>54</value>
+      <description>Unassigned</description>
+    	<datatype/></record>
+    <record>
+      <value>55</value>
+      <description>Event-Timestamp</description>
+    	<datatype>time</datatype>
+    	<xref type="rfc" data="rfc2869"/>
+    </record>
+    <record>
+      <value>56</value>
+      <description>Egress-VLANID</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc4675"/>
+    </record>
+    <record>
+      <value>57</value>
+      <description>Ingress-Filters</description>
+    	<datatype>enum</datatype>
+    	<xref type="rfc" data="rfc4675"/>
+    </record>
+    <record>
+      <value>58</value>
+      <description>Egress-VLAN-Name</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc4675"/>
+    </record>
+    <record>
+      <value>59</value>
+      <description>User-Priority-Table</description>
+    	<datatype>string</datatype>
+    	<xref type="rfc" data="rfc4675"/>
+    </record>
+    <record>
+      <value>60</value>
+      <description>CHAP-Challenge</description>
+    	<datatype>string</datatype>
+    	<xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>61</value>
+      <description>NAS-Port-Type</description>
+    	<datatype>enum</datatype>
+    	<xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>62</value>
+      <description>Port-Limit</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>63</value>
+      <description>Login-LAT-Port</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>64</value>
+      <description>Tunnel-Type</description>
+    	<datatype>enum</datatype>
+    	<xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>65</value>
+      <description>Tunnel-Medium-Type</description>
+    	<datatype>enum</datatype>
+    	<xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>66</value>
+      <description>Tunnel-Client-Endpoint</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>67</value>
+      <description>Tunnel-Server-Endpoint</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>68</value>
+      <description>Acct-Tunnel-Connection</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc2867"/>
+    </record>
+    <record>
+      <value>69</value>
+      <description>Tunnel-Password</description>
+    	<datatype>string</datatype>
+    	<xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>70</value>
+      <description>ARAP-Password</description>
+    	<datatype>string</datatype>
+    	<xref type="rfc" data="rfc2869"/>
+    </record>
+    <record>
+      <value>71</value>
+      <description>ARAP-Features</description>
+    	<datatype>string</datatype>
+    	<xref type="rfc" data="rfc2869"/>
+    </record>
+    <record>
+      <value>72</value>
+      <description>ARAP-Zone-Access</description>
+    	<datatype>enum</datatype>
+    	<xref type="rfc" data="rfc2869"/>
+    </record>
+    <record>
+      <value>73</value>
+      <description>ARAP-Security</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc2869"/>
+    </record>
+    <record>
+      <value>74</value>
+      <description>ARAP-Security-Data</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc2869"/>
+    </record>
+    <record>
+      <value>75</value>
+      <description>Password-Retry</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc2869"/>
+    </record>
+    <record>
+      <value>76</value>
+      <description>Prompt</description>
+    	<datatype>enum</datatype>
+    	<xref type="rfc" data="rfc2869"/>
+    </record>
+    <record>
+      <value>77</value>
+      <description>Connect-Info</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc2869"/>
+    </record>
+    <record>
+      <value>78</value>
+      <description>Configuration-Token</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc2869"/>
+    </record>
+    <record>
+      <value>79</value>
+      <description>EAP-Message</description>
+    	<datatype>concat</datatype>
+    	<xref type="rfc" data="rfc2869"/>
+    </record>
+    <record>
+      <value>80</value>
+      <description>Message-Authenticator</description>
+    	<datatype>string</datatype>
+    	<xref type="rfc" data="rfc2869"/>
+    </record>
+    <record>
+      <value>81</value>
+      <description>Tunnel-Private-Group-ID</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>82</value>
+      <description>Tunnel-Assignment-ID</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>83</value>
+      <description>Tunnel-Preference</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>84</value>
+      <description>ARAP-Challenge-Response</description>
+    	<datatype>string</datatype>
+    	<xref type="rfc" data="rfc2869"/>
+    </record>
+    <record>
+      <value>85</value>
+      <description>Acct-Interim-Interval</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc2869"/>
+    </record>
+    <record>
+      <value>86</value>
+      <description>Acct-Tunnel-Packets-Lost</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc2867"/>
+    </record>
+    <record>
+      <value>87</value>
+      <description>NAS-Port-Id</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc2869"/>
+    </record>
+    <record>
+      <value>88</value>
+      <description>Framed-Pool</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc2869"/>
+    </record>
+    <record>
+      <value>89</value>
+      <description>CUI</description>
+    	<datatype>string</datatype>
+    	<xref type="rfc" data="rfc4372"/>
+    </record>
+    <record>
+      <value>90</value>
+      <description>Tunnel-Client-Auth-ID</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>91</value>
+      <description>Tunnel-Server-Auth-ID</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>92</value>
+      <description>NAS-Filter-Rule</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc4849"/>
+    </record>
+    <record>
+      <value>93</value>
+      <description>Unassigned</description>
+    	<datatype/></record>
+    <record>
+      <value>94</value>
+      <description>Originating-Line-Info</description>
+    	<datatype>string</datatype>
+    	<xref type="rfc" data="rfc7155"/>
+    </record>
+    <record>
+      <value>95</value>
+      <description>NAS-IPv6-Address</description>
+    	<datatype>ipv6addr</datatype>
+    	<xref type="rfc" data="rfc3162"/>
+    </record>
+    <record>
+      <value>96</value>
+      <description>Framed-Interface-Id</description>
+    	<datatype>ifid</datatype>
+    	<xref type="rfc" data="rfc3162"/>
+    </record>
+    <record>
+      <value>97</value>
+      <description>Framed-IPv6-Prefix</description>
+    	<datatype>ipv6prefix</datatype>
+    	<xref type="rfc" data="rfc3162"/>
+    </record>
+    <record>
+      <value>98</value>
+      <description>Login-IPv6-Host</description>
+    	<datatype>ipv6addr</datatype>
+    	<xref type="rfc" data="rfc3162"/>
+    </record>
+    <record>
+      <value>99</value>
+      <description>Framed-IPv6-Route</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc3162"/>
+    </record>
+    <record>
+      <value>100</value>
+      <description>Framed-IPv6-Pool</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc3162"/>
+    </record>
+    <record>
+      <value>101</value>
+      <description>Error-Cause Attribute</description>
+    	<datatype>enum</datatype>
+    	<xref type="rfc" data="rfc3576"/>
+    </record>
+    <record>
+      <value>102</value>
+      <description>EAP-Key-Name</description>
+    	<datatype>string</datatype>
+    	<xref type="rfc" data="rfc4072"/><xref type="rfc" data="rfc7268"/></record>
+    <record>
+      <value>103</value>
+      <description>Digest-Response</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc5090"/>
+    </record>
+    <record>
+      <value>104</value>
+      <description>Digest-Realm</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc5090"/>
+    </record>
+    <record>
+      <value>105</value>
+      <description>Digest-Nonce</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc5090"/>
+    </record>
+    <record>
+      <value>106</value>
+      <description>Digest-Response-Auth</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc5090"/>
+    </record>
+    <record>
+      <value>107</value>
+      <description>Digest-Nextnonce</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc5090"/>
+    </record>
+    <record>
+      <value>108</value>
+      <description>Digest-Method</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc5090"/>
+    </record>
+    <record>
+      <value>109</value>
+      <description>Digest-URI</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc5090"/>
+    </record>
+    <record>
+      <value>110</value>
+      <description>Digest-Qop</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc5090"/>
+    </record>
+    <record>
+      <value>111</value>
+      <description>Digest-Algorithm</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc5090"/>
+    </record>
+    <record>
+      <value>112</value>
+      <description>Digest-Entity-Body-Hash</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc5090"/>
+    </record>
+    <record>
+      <value>113</value>
+      <description>Digest-CNonce</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc5090"/>
+    </record>
+    <record>
+      <value>114</value>
+      <description>Digest-Nonce-Count</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc5090"/>
+    </record>
+    <record>
+      <value>115</value>
+      <description>Digest-Username</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc5090"/>
+    </record>
+    <record>
+      <value>116</value>
+      <description>Digest-Opaque</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc5090"/>
+    </record>
+    <record>
+      <value>117</value>
+      <description>Digest-Auth-Param</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc5090"/>
+    </record>
+    <record>
+      <value>118</value>
+      <description>Digest-AKA-Auts</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc5090"/>
+    </record>
+    <record>
+      <value>119</value>
+      <description>Digest-Domain</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc5090"/>
+    </record>
+    <record>
+      <value>120</value>
+      <description>Digest-Stale</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc5090"/>
+    </record>
+    <record>
+      <value>121</value>
+      <description>Digest-HA1</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc5090"/>
+    </record>
+    <record>
+      <value>122</value>
+      <description>SIP-AOR</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc5090"/>
+    </record>
+    <record>
+      <value>123</value>
+      <description>Delegated-IPv6-Prefix</description>
+    	<datatype>ipv6prefix</datatype>
+    	<xref type="rfc" data="rfc4818"/>
+    </record>
+    <record>
+      <value>124</value>
+      <description>MIP6-Feature-Vector</description>
+      <datatype>integer64</datatype>
+    	<xref type="rfc" data="rfc5447"/>
+    </record>
+    <record>
+      <value>125</value>
+      <description>MIP6-Home-Link-Prefix</description>
+      <datatype>string</datatype>
+    	<xref type="rfc" data="rfc5447"/>
+    </record>
+    <record>
+      <value>126</value>
+      <description>Operator-Name</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <value>127</value>
+      <description>Location-Information</description>
+    	<datatype>string</datatype>
+    	<xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <value>128</value>
+      <description>Location-Data</description>
+    	<datatype>string</datatype>
+    	<xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <value>129</value>
+      <description>Basic-Location-Policy-Rules</description>
+    	<datatype>string</datatype>
+    	<xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <value>130</value>
+      <description>Extended-Location-Policy-Rules</description>
+    	<datatype>string</datatype>
+    	<xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <value>131</value>
+      <description>Location-Capable</description>
+    	<datatype>enum</datatype>
+    	<xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <value>132</value>
+      <description>Requested-Location-Info</description>
+    	<datatype>enum</datatype>
+    	<xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <value>133</value>
+      <description>Framed-Management-Protocol</description>
+    	<datatype>enum</datatype>
+    	<xref type="rfc" data="rfc5607"/>
+    </record>
+    <record>
+      <value>134</value>
+      <description>Management-Transport-Protection</description>
+    	<datatype>enum</datatype>
+    	<xref type="rfc" data="rfc5607"/>
+    </record>
+    <record>
+      <value>135</value>
+      <description>Management-Policy-Id</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc5607"/>
+    </record>
+    <record>
+      <value>136</value>
+      <description>Management-Privilege-Level</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc5607"/>
+    </record>
+    <record>
+      <value>137</value>
+      <description>PKM-SS-Cert</description>
+    	<datatype>concat</datatype>
+    	<xref type="rfc" data="rfc5904"/>
+    </record>
+    <record>
+      <value>138</value>
+      <description>PKM-CA-Cert</description>
+    	<datatype>concat</datatype>
+    	<xref type="rfc" data="rfc5904"/>
+    </record>
+    <record>
+      <value>139</value>
+      <description>PKM-Config-Settings</description>
+    	<datatype>string</datatype>
+    	<xref type="rfc" data="rfc5904"/>
+    </record>
+    <record>
+      <value>140</value>
+      <description>PKM-Cryptosuite-List</description>
+    	<datatype>string</datatype>
+    	<xref type="rfc" data="rfc5904"/>
+    </record>
+    <record>
+      <value>141</value>
+      <description>PKM-SAID</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc5904"/>
+    </record>
+    <record>
+      <value>142</value>
+      <description>PKM-SA-Descriptor</description>
+    	<datatype>string</datatype>
+    	<xref type="rfc" data="rfc5904"/>
+    </record>
+    <record>
+      <value>143</value>
+      <description>PKM-Auth-Key</description>
+    	<datatype>string</datatype>
+    	<xref type="rfc" data="rfc5904"/>
+    </record>
+    <record>
+      <value>144</value>
+      <description>DS-Lite-Tunnel-Name</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc6519"/>
+    </record>
+    <record>
+      <value>145</value>
+      <description>Mobile-Node-Identifier</description>
+    	<datatype>string</datatype>
+    	<xref type="rfc" data="rfc6572"/>
+    </record>
+    <record>
+      <value>146</value>
+      <description>Service-Selection</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc6572"/>
+    </record>
+    <record>
+      <value>147</value>
+      <description>PMIP6-Home-LMA-IPv6-Address</description>
+    	<datatype>ipv6addr</datatype>
+    	<xref type="rfc" data="rfc6572"/>
+    </record>
+    <record>
+      <value>148</value>
+      <description>PMIP6-Visited-LMA-IPv6-Address</description>
+    	<datatype>ipv6addr</datatype>
+    	<xref type="rfc" data="rfc6572"/>
+    </record>
+    <record>
+      <value>149</value>
+      <description>PMIP6-Home-LMA-IPv4-Address</description>
+    	<datatype>ipv4addr</datatype>
+    	<xref type="rfc" data="rfc6572"/>
+    </record>
+    <record>
+      <value>150</value>
+      <description>PMIP6-Visited-LMA-IPv4-Address</description>
+    	<datatype>ipv4addr</datatype>
+    	<xref type="rfc" data="rfc6572"/>
+    </record>
+    <record>
+      <value>151</value>
+      <description>PMIP6-Home-HN-Prefix</description>
+    	<datatype>ipv6prefix</datatype>
+    	<xref type="rfc" data="rfc6572"/>
+    </record>
+    <record>
+      <value>152</value>
+      <description>PMIP6-Visited-HN-Prefix</description>
+    	<datatype>ipv6prefix</datatype>
+    	<xref type="rfc" data="rfc6572"/>
+    </record>
+    <record>
+      <value>153</value>
+      <description>PMIP6-Home-Interface-ID</description>
+    	<datatype>ifid</datatype>
+    	<xref type="rfc" data="rfc6572"/>
+    </record>
+    <record>
+      <value>154</value>
+      <description>PMIP6-Visited-Interface-ID</description>
+    	<datatype>ifid</datatype>
+    	<xref type="rfc" data="rfc6572"/>
+    </record>
+    <record>
+      <value>155</value>
+      <description>PMIP6-Home-IPv4-HoA</description>
+    	<datatype>ipv4prefix</datatype>
+    	<xref type="rfc" data="rfc6572"/>
+    </record>
+    <record>
+      <value>156</value>
+      <description>PMIP6-Visited-IPv4-HoA</description>
+    	<datatype>ipv4prefix</datatype>
+    	<xref type="rfc" data="rfc6572"/>
+    </record>
+    <record>
+      <value>157</value>
+      <description>PMIP6-Home-DHCP4-Server-Address</description>
+    	<datatype>ipv4addr</datatype>
+    	<xref type="rfc" data="rfc6572"/>
+    </record>
+    <record>
+      <value>158</value>
+      <description>PMIP6-Visited-DHCP4-Server-Address</description>
+    	<datatype>ipv4addr</datatype>
+    	<xref type="rfc" data="rfc6572"/>
+    </record>
+    <record>
+      <value>159</value>
+      <description>PMIP6-Home-DHCP6-Server-Address</description>
+    	<datatype>ipv6addr</datatype>
+    	<xref type="rfc" data="rfc6572"/>
+    </record>
+    <record>
+      <value>160</value>
+      <description>PMIP6-Visited-DHCP6-Server-Address</description>
+    	<datatype>ipv6addr</datatype>
+    	<xref type="rfc" data="rfc6572"/>
+    </record>
+    <record>
+      <value>161</value>
+      <description>PMIP6-Home-IPv4-Gateway</description>
+    	<datatype>ipv4addr</datatype>
+    	<xref type="rfc" data="rfc6572"/>
+    </record>
+    <record>
+      <value>162</value>
+      <description>PMIP6-Visited-IPv4-Gateway</description>
+    	<datatype>ipv4addr</datatype>
+    	<xref type="rfc" data="rfc6572"/>
+    </record>
+    <record>
+      <value>163</value>
+      <description>EAP-Lower-Layer</description>
+    	<datatype>enum</datatype>
+    	<xref type="rfc" data="rfc6677"/>
+    </record>
+    <record>
+      <value>164</value>
+      <description>GSS-Acceptor-Service-Name</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc7055"/>
+    </record>
+    <record>
+      <value>165</value>
+      <description>GSS-Acceptor-Host-Name</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc7055"/>
+    </record>
+    <record>
+      <value>166</value>
+      <description>GSS-Acceptor-Service-Specifics</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc7055"/>
+    </record>
+    <record>
+      <value>167</value>
+      <description>GSS-Acceptor-Realm-Name</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc7055"/>
+    </record>
+    <record>
+      <value>168</value>
+      <description>Framed-IPv6-Address</description>
+    	<datatype>ipv6addr</datatype>
+    	<xref type="rfc" data="rfc6911"/>
+    </record>
+    <record>
+      <value>169</value>
+      <description>DNS-Server-IPv6-Address</description>
+    	<datatype>ipv6addr</datatype>
+    	<xref type="rfc" data="rfc6911"/>
+    </record>
+    <record>
+      <value>170</value>
+      <description>Route-IPv6-Information</description>
+    	<datatype>ipv6prefix</datatype>
+    	<xref type="rfc" data="rfc6911"/>
+    </record>
+    <record>
+      <value>171</value>
+      <description>Delegated-IPv6-Prefix-Pool</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc6911"/>
+    </record>
+    <record>
+      <value>172</value>
+      <description>Stateful-IPv6-Address-Pool</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc6911"/>
+    </record>
+    <record>
+      <value>173</value>
+      <description>IPv6-6rd-Configuration</description>
+    	<datatype>tlv</datatype>
+    	<xref type="rfc" data="rfc6930"/>
+    </record>
+    <record date="2014-04-01">
+      <value>174</value>
+      <description>Allowed-Called-Station-Id</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc7268"/>
+    </record>
+    <record date="2014-04-01">
+      <value>175</value>
+      <description>EAP-Peer-Id</description>
+    	<datatype>string</datatype>
+    	<xref type="rfc" data="rfc7268"/>
+    </record>
+    <record date="2014-04-01">
+      <value>176</value>
+      <description>EAP-Server-Id</description>
+    	<datatype>string</datatype>
+    	<xref type="rfc" data="rfc7268"/>
+    </record>
+    <record date="2014-04-01">
+      <value>177</value>
+      <description>Mobility-Domain-Id</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc7268"/>
+    </record>
+    <record date="2014-04-01">
+      <value>178</value>
+      <description>Preauth-Timeout</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc7268"/>
+    </record>
+    <record date="2014-04-01">
+      <value>179</value>
+      <description>Network-Id-Name</description>
+    	<datatype>string</datatype>
+    	<xref type="rfc" data="rfc7268"/>
+    </record>
+    <record date="2014-04-01">
+      <value>180</value>
+      <description>EAPoL-Announcement</description>
+    	<datatype>concat</datatype>
+    	<xref type="rfc" data="rfc7268"/>
+    </record>
+    <record date="2014-04-01">
+      <value>181</value>
+      <description>WLAN-HESSID</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc7268"/>
+    </record>
+    <record date="2014-04-01">
+      <value>182</value>
+      <description>WLAN-Venue-Info</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc7268"/>
+    </record>
+    <record date="2014-04-01">
+      <value>183</value>
+      <description>WLAN-Venue-Language</description>
+    	<datatype>string</datatype>
+    	<xref type="rfc" data="rfc7268"/>
+    </record>
+    <record date="2014-04-01">
+      <value>184</value>
+      <description>WLAN-Venue-Name</description>
+    	<datatype>text</datatype>
+    	<xref type="rfc" data="rfc7268"/>
+    </record>
+    <record date="2014-04-01">
+      <value>185</value>
+      <description>WLAN-Reason-Code</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc7268"/>
+    </record>
+    <record date="2014-04-01">
+      <value>186</value>
+      <description>WLAN-Pairwise-Cipher</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc7268"/>
+    </record>
+    <record date="2014-04-01">
+      <value>187</value>
+      <description>WLAN-Group-Cipher</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc7268"/>
+    </record>
+    <record date="2014-04-01">
+      <value>188</value>
+      <description>WLAN-AKM-Suite</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc7268"/>
+    </record>
+    <record date="2014-04-01">
+      <value>189</value>
+      <description>WLAN-Group-Mgmt-Cipher</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc7268"/>
+    </record>
+    <record date="2014-04-01">
+      <value>190</value>
+      <description>WLAN-RF-Band</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc7268"/>
+    </record>
+    <record>
+      <value>191</value>
+      <description>Unassigned</description>
+    	<datatype/></record>
+    <record>
+      <value>192-223</value>
+      <description>Experimental Use</description>
+    	<datatype/>
+    	<xref type="rfc" data="rfc3575"/>
+    </record>
+    <record>
+      <value>224-240</value>
+      <description>Implementation Specific</description>
+    	<datatype/>
+    	<xref type="rfc" data="rfc3575"/>
+    </record>
+    <record>
+      <value>241</value>
+      <description>Extended-Attribute-1</description>
+    	<datatype>extended</datatype>
+    	<xref type="rfc" data="rfc6929"/>
+    </record>
+    <record date="2015-02-10">
+      <value>241.1</value>
+      <description>Frag-Status</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc7499"/>
+    </record>
+    <record date="2015-02-10">
+      <value>241.2</value>
+      <description>Proxy-State-Length</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc7499"/>
+    </record>
+    <record date="2016-06-21">
+      <value>241.3</value>
+      <description>Response-Length</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc7930"/>
+    </record>
+    <record date="2016-06-21">
+      <value>241.4</value>
+      <description>Original-Packet-Code</description>
+    	<datatype>integer</datatype>
+    	<xref type="rfc" data="rfc7930"/>
+    </record>
+    <record date="2016-11-15">
+      <value>241.5</value>
+      <description>IP-Port-Limit-Info</description>
+      <datatype>tlv</datatype>
+      <xref type="rfc" data="rfc8045">RFC8045, Section 3.1.1</xref>
+    </record>
+    <record date="2016-11-15">
+      <value>241.6</value>
+      <description>IP-Port-Range</description>
+      <datatype>tlv</datatype>
+      <xref type="rfc" data="rfc8045">RFC8045, Section 3.1.2</xref>
+    </record>
+    <record date="2016-11-15">
+      <value>241.7</value>
+      <description>IP-Port-Forwarding-Map</description>
+      <datatype>tlv</datatype>
+      <xref type="rfc" data="rfc8045">RFC8045, Section 3.1.3</xref>
+    </record>
+    <record date="2019-01-25">
+      <value>241.8</value>
+      <description>Operator-NAS-Identifier</description>
+      <datatype>string</datatype>
+      <xref type="rfc" data="rfc8559"/>
+    </record>
+    <record date="2019-06-18">
+      <value>241.9</value>
+      <description>Softwire46-Configuration</description>
+      <datatype>tlv</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1</xref>
+    </record>
+    <record date="2019-06-18">
+      <value>241.10</value>
+      <description>Softwire46-Priority</description>
+      <datatype>tlv</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.2</xref>
+    </record>
+    <record date="2019-06-18">
+      <value>241.11</value>
+      <description>Softwire46-Multicast</description>
+      <datatype>tlv</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.3</xref>
+    </record>
+    <record>
+      <value>241.{12-25}</value>
+      <description>Unassigned</description>
+    	<datatype/></record>
+    <record>
+      <value>241.26</value>
+      <description>Extended-Vendor-Specific-1</description>
+    	<datatype>evs</datatype>
+    	<xref type="rfc" data="rfc6929"/>
+    </record>
+    <record>
+      <value>241.{27-240}</value>
+      <description>Unassigned</description>
+    	<datatype/></record>
+    <record>
+      <value>241.{241-255}</value>
+      <description>Reserved</description>
+    	<datatype/>
+    	<xref type="rfc" data="rfc6929"/>
+    </record>
+    <record>
+      <value>242</value>
+      <description>Extended-Attribute-2</description>
+    	<datatype>extended</datatype>
+    	<xref type="rfc" data="rfc6929"/>
+    </record>
+    <record>
+      <value>242.{1-25}</value>
+      <description>Unassigned</description>
+    	<datatype/></record>
+    <record>
+      <value>242.26</value>
+      <description>Extended-Vendor-Specific-2</description>
+    	<datatype>evs</datatype>
+    	<xref type="rfc" data="rfc6929"/>
+    </record>
+    <record>
+      <value>242.{27-240}</value>
+      <description>Unassigned</description>
+    	<datatype/></record>
+    <record>
+      <value>242.{241-255}</value>
+      <description>Reserved</description>
+    	<datatype/>
+    	<xref type="rfc" data="rfc6929"/>
+    </record>
+    <record>
+      <value>243</value>
+      <description>Extended-Attribute-3</description>
+    	<datatype>extended</datatype>
+    	<xref type="rfc" data="rfc6929"/>
+    </record>
+    <record>
+      <value>243.{1-25}</value>
+      <description>Unassigned</description>
+    	<datatype/></record>
+    <record>
+      <value>243.26</value>
+      <description>Extended-Vendor-Specific-3</description>
+    	<datatype>evs</datatype>
+    	<xref type="rfc" data="rfc6929"/>
+    </record>
+    <record>
+      <value>243.{27-240}</value>
+      <description>Unassigned</description>
+    	<datatype/></record>
+    <record>
+      <value>243.{241-255}</value>
+      <description>Reserved</description>
+    	<datatype/>
+    	<xref type="rfc" data="rfc6929"/>
+    </record>
+    <record>
+      <value>244</value>
+      <description>Extended-Attribute-4</description>
+    	<datatype>extended</datatype>
+    	<xref type="rfc" data="rfc6929"/>
+    </record>
+    <record>
+      <value>244.{1-25}</value>
+      <description>Unassigned</description>
+    	<datatype/></record>
+    <record>
+      <value>244.26</value>
+      <description>Extended-Vendor-Specific-4</description>
+    	<datatype>evs</datatype>
+    	<xref type="rfc" data="rfc6929"/>
+    </record>
+    <record>
+      <value>244.{27-240}</value>
+      <description>Unassigned</description>
+    	<datatype/></record>
+    <record>
+      <value>244.{241-255}</value>
+      <description>Reserved</description>
+    	<datatype/>
+    	<xref type="rfc" data="rfc6929"/>
+    </record>
+    <record>
+      <value>245</value>
+      <description>Extended-Attribute-5</description>
+    	<datatype>long-extended</datatype>
+    	<xref type="rfc" data="rfc6929"/>
+    </record>
+    <record date="2016-01-14">
+      <value>245.1</value>
+      <description>SAML-Assertion</description>
+      <datatype>text</datatype>
+      <xref type="rfc" data="rfc7833"/>
+    </record>
+    <record date="2016-01-14">
+      <value>245.2</value>
+      <description>SAML-Protocol</description>
+      <datatype>text</datatype>
+      <xref type="rfc" data="rfc7833"/>
+    </record>
+    <record>
+      <value>245.{3-25}</value>
+      <description>Unassigned</description>
+      <datatype/>
+    </record>
+    <record>
+      <value>245.26</value>
+      <description>Extended-Vendor-Specific-5</description>
+    	<datatype>evs</datatype>
+    	<xref type="rfc" data="rfc6929"/>
+    </record>
+    <record>
+      <value>245.{27-240}</value>
+      <description>Unassigned</description>
+    	<datatype/></record>
+    <record>
+      <value>245.{241-255}</value>
+      <description>Reserved</description>
+    	<datatype/>
+    	<xref type="rfc" data="rfc6929"/>
+    </record>
+    <record>
+      <value>246</value>
+      <description>Extended-Attribute-6</description>
+    	<datatype>long-extended</datatype>
+    	<xref type="rfc" data="rfc6929"/>
+    </record>
+    <record>
+      <value>246.{1-25}</value>
+      <description>Unassigned</description>
+    	<datatype/></record>
+    <record>
+      <value>246.26</value>
+      <description>Extended-Vendor-Specific-6</description>
+    	<datatype>evs</datatype>
+    	<xref type="rfc" data="rfc6929"/>
+    </record>
+    <record>
+      <value>246.{27-240}</value>
+      <description>Unassigned</description>
+    	<datatype/></record>
+    <record>
+      <value>246.{241-255}</value>
+      <description>Reserved</description>
+    	<datatype/>
+    	<xref type="rfc" data="rfc6929"/>
+    </record>
+    <record>
+      <value>247-255</value>
+      <description>Reserved</description>
+    	<datatype/>
+    	<xref type="rfc" data="rfc3575"/>
+    </record>
+      </registry>
+ 
+
+  <registry id="radius-types-3">
+    <title>RADIUS Attribute Values</title>
+    <xref type="rfc" data="rfc2865"/>
+    <xref type="rfc" data="rfc3575"/>
+  </registry>
+  
+
+  <registry id="radius-types-4">
+    <title>Values for RADIUS Attribute 6, Service-Type</title>
+    <xref type="rfc" data="rfc2865"/>
+    <xref type="rfc" data="rfc3575"/>
+    <registration_rule>IETF Review</registration_rule>
+    <record>
+      <value>1</value>
+      <description>Login</description>
+    </record>
+    <record>
+      <value>2</value>
+      <description>Framed</description>
+    </record>
+    <record>
+      <value>3</value>
+      <description>Callback Login</description>
+    </record>
+    <record>
+      <value>4</value>
+      <description>Callback Framed</description>
+    </record>
+    <record>
+      <value>5</value>
+      <description>Outbound</description>
+    </record>
+    <record>
+      <value>6</value>
+      <description>Administrative</description>
+    </record>
+    <record>
+      <value>7</value>
+      <description>NAS Prompt</description>
+    </record>
+    <record>
+      <value>8</value>
+      <description>Authenticate Only</description>
+    </record>
+    <record>
+      <value>9</value>
+      <description>Callback NAS Prompt</description>
+    </record>
+    <record>
+      <value>10</value>
+      <description>Call Check</description>
+    </record>
+    <record>
+      <value>11</value>
+      <description>Callback Administrative</description>
+    </record>
+    <record>
+      <value>12</value>
+      <description>Voice</description>
+      <xref type="person" data="Murtaza_Chiba"/>
+    </record>
+    <record>
+      <value>13</value>
+      <description>Fax</description>
+      <xref type="person" data="Murtaza_Chiba"/>
+    </record>
+    <record>
+      <value>14</value>
+      <description>Modem Relay</description>
+      <xref type="person" data="Murtaza_Chiba"/>
+    </record>
+    <record>
+      <value>15</value>
+      <description>IAPP-Register</description>
+      <xref type="text">"IEEE Trial-Use Recommended Practice for Multi-Vendor
+Access Point Interoperability via an Inter-Access Point
+Protocol Across Distribution Systems Supporting
+IEEE 802.11 Operation", IEEE 802.11F, June 2003.</xref>
+      <xref type="person" data="Stuart_Kerry"/>
+    </record>
+    <record>
+      <value>16</value>
+      <description>IAPP-AP-Check</description>
+      <xref type="text">"IEEE Trial-Use Recommended Practice for Multi-Vendor
+Access Point Interoperability via an Inter-Access Point
+Protocol Across Distribution Systems Supporting
+IEEE 802.11 Operation", IEEE 802.11F, June 2003.</xref>
+      <xref type="person" data="Stuart_Kerry"/>
+    </record>
+    <record>
+      <value>17</value>
+      <description>Authorize Only</description>
+      <xref type="rfc" data="rfc3576"/>
+    </record>
+    <record>
+      <value>18</value>
+      <description>Framed-Management</description>
+      <xref type="rfc" data="rfc5607"/>
+    </record>
+    <record date="2015-02-10">
+      <value>19</value>
+      <description>Additional-Authorization</description>
+      <xref type="rfc" data="rfc7499"/>
+    </record>
+  </registry>
+
+
+  <registry id="radius-types-5">
+    <title>Values for RADIUS Attribute 7, Framed-Protocol</title>
+    <xref type="rfc" data="rfc2865"/>
+    <xref type="rfc" data="rfc3575"/>
+    <registration_rule>Expert Review</registration_rule>
+    <record>
+      <value>1</value>
+      <description>PPP</description>
+    </record>
+    <record>
+      <value>2</value>
+      <description>SLIP</description>
+    </record>
+    <record>
+      <value>3</value>
+      <description>AppleTalk Remote Access Protocol (ARAP)</description>
+    </record>
+    <record>
+      <value>4</value>
+      <description>Gandalf proprietary SingleLink/MultiLink protocol</description>
+    </record>
+    <record>
+      <value>5</value>
+      <description>Xylogics proprietary IPX/SLIP</description>
+    </record>
+    <record>
+      <value>6</value>
+      <description>X.75 Synchronous</description>
+    </record>
+    <record>
+      <value>7</value>
+      <description>GPRS PDP Context</description>
+      <xref type="person" data="Jeff_Moore"/>
+    </record>
+  </registry>
+
+
+  <registry id="radius-types-6">
+    <title>Values for RADIUS Attribute 10, Framed-Routing</title>
+    <xref type="rfc" data="rfc2865"/>
+    <xref type="rfc" data="rfc3575"/>
+    <registration_rule>Expert Review</registration_rule>
+    <record>
+      <value>0</value>
+      <description>None</description>
+    </record>
+    <record>
+      <value>1</value>
+      <description>Send routing packets</description>
+    </record>
+    <record>
+      <value>2</value>
+      <description>Listen for routing packets</description>
+    </record>
+    <record>
+      <value>3</value>
+      <description>Send and Listen</description>
+    </record>
+  </registry>
+
+
+  <registry id="radius-types-7">
+    <title>Values for RADIUS Attribute 13, Framed-Compression</title>
+    <xref type="rfc" data="rfc2865"/>
+    <xref type="rfc" data="rfc3575"/>
+    <registration_rule>Expert Review</registration_rule>
+    <record>
+      <value>0</value>
+      <description>None</description>
+    </record>
+    <record>
+      <value>1</value>
+      <description>VJ TCP/IP header compression</description>
+    </record>
+    <record>
+      <value>2</value>
+      <description>IPX header compression</description>
+    </record>
+    <record>
+      <value>3</value>
+      <description>Stac-LZS compression</description>
+    </record>
+  </registry>
+
+
+  <registry id="radius-types-8">
+    <title>Values for RADIUS Attribute 15, Login-Service</title>
+    <xref type="rfc" data="rfc2865"/>
+    <xref type="rfc" data="rfc3575"/>
+    <registration_rule>Expert Review</registration_rule>
+    <record>
+      <value>0</value>
+      <description>Telnet</description>
+    </record>
+    <record>
+      <value>1</value>
+      <description>Rlogin</description>
+    </record>
+    <record>
+      <value>2</value>
+      <description>TCP Clear</description>
+    </record>
+    <record>
+      <value>3</value>
+      <description>PortMaster (proprietary)</description>
+    </record>
+    <record>
+      <value>4</value>
+      <description>LAT</description>
+    </record>
+    <record>
+      <value>5</value>
+      <description>X25-PAD</description>
+    </record>
+    <record>
+      <value>6</value>
+      <description>X25-T3POS</description>
+    </record>
+    <record>
+      <value>7</value>
+      <description>Unassigned</description>
+    </record>
+    <record>
+      <value>8</value>
+      <description>TCP Clear Quiet (suppresses any NAS-generated connect string)</description>
+    </record>
+  </registry>
+
+
+  <registry id="radius-types-9">
+    <title>Values for RADIUS Attribute 29, Termination-Action</title>
+    <xref type="rfc" data="rfc2865"/>
+    <xref type="rfc" data="rfc3575"/>
+    <registration_rule>Expert Review</registration_rule>
+    <record>
+      <value>0</value>
+      <description>Default</description>
+    </record>
+    <record>
+      <value>1</value>
+      <description>RADIUS-Request</description>
+    </record>
+  </registry>
+
+
+  <registry id="radius-types-10">
+    <title>Values for RADIUS Attribute 40, Acct-Status-Type</title>
+    <xref type="rfc" data="rfc2866"/>
+    <xref type="rfc" data="rfc3575"/>
+    <registration_rule>Expert Review</registration_rule>
+    <record>
+      <value>1</value>
+      <description>Start</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>2</value>
+      <description>Stop</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>3</value>
+      <description>Interim-Update</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>4-6</value>
+      <description>Unassigned</description>
+    </record>
+    <record>
+      <value>7</value>
+      <description>Accounting-On</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>8</value>
+      <description>Accounting-Off</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>9</value>
+      <description>Tunnel-Start</description>
+      <xref type="rfc" data="rfc2867"/>
+    </record>
+    <record>
+      <value>10</value>
+      <description>Tunnel-Stop</description>
+      <xref type="rfc" data="rfc2867"/>
+    </record>
+    <record>
+      <value>11</value>
+      <description>Tunnel-Reject</description>
+      <xref type="rfc" data="rfc2867"/>
+    </record>
+    <record>
+      <value>12</value>
+      <description>Tunnel-Link-Start</description>
+      <xref type="rfc" data="rfc2867"/>
+    </record>
+    <record>
+      <value>13</value>
+      <description>Tunnel-Link-Stop</description>
+      <xref type="rfc" data="rfc2867"/>
+    </record>
+    <record>
+      <value>14</value>
+      <description>Tunnel-Link-Reject</description>
+      <xref type="rfc" data="rfc2867"/>
+    </record>
+    <record>
+      <value>15</value>
+      <description>Failed</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+  </registry>
+
+
+  <registry id="radius-types-11">
+    <title>Values for RADIUS Attribute 45, Acct-Authentic</title>
+    <xref type="rfc" data="rfc2866"/>
+    <xref type="rfc" data="rfc3575"/>
+    <registration_rule>Expert Review</registration_rule>
+    <record>
+      <value>1</value>
+      <description>RADIUS</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>2</value>
+      <description>Local</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>3</value>
+      <description>Remote</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>4</value>
+      <description>Diameter</description>
+      <xref type="person" data="Pat_Calhoun"/>
+    </record>
+  </registry>
+
+
+  <registry id="radius-types-12">
+    <title>Values for RADIUS Attribute 49, Acct-Terminate-Cause</title>
+    <xref type="rfc" data="rfc2866"/>
+    <xref type="rfc" data="rfc3575"/>
+    <registration_rule>Expert Review</registration_rule>
+    <record>
+      <value>1</value>
+      <description>User Request</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>2</value>
+      <description>Lost Carrier</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>3</value>
+      <description>Lost Service</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>4</value>
+      <description>Idle Timeout</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>5</value>
+      <description>Session Timeout</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>6</value>
+      <description>Admin Reset</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>7</value>
+      <description>Admin Reboot</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>8</value>
+      <description>Port Error</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>9</value>
+      <description>NAS Error</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>10</value>
+      <description>NAS Request</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>11</value>
+      <description>NAS Reboot</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>12</value>
+      <description>Port Unneeded</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>13</value>
+      <description>Port Preempted</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>14</value>
+      <description>Port Suspended</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>15</value>
+      <description>Service Unavailable</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>16</value>
+      <description>Callback</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>17</value>
+      <description>User Error</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>18</value>
+      <description>Host Request</description>
+      <xref type="rfc" data="rfc2866"/>
+    </record>
+    <record>
+      <value>19</value>
+      <description>Supplicant Restart</description>
+      <xref type="rfc" data="rfc3580"/>
+    </record>
+    <record>
+      <value>20</value>
+      <description>Reauthentication Failure</description>
+      <xref type="rfc" data="rfc3580"/>
+    </record>
+    <record>
+      <value>21</value>
+      <description>Port Reinitialized</description>
+      <xref type="rfc" data="rfc3580"/>
+    </record>
+    <record>
+      <value>22</value>
+      <description>Port Administratively Disabled</description>
+      <xref type="rfc" data="rfc3580"/>
+    </record>
+    <record date="2010-11-30">
+      <value>23</value>
+      <description>Lost Power</description>
+      <xref type="person" data="Ramprasad_Golla"/>
+    </record>
+  </registry>
+
+
+  <registry id="radius-types-13">
+    <title>Values for RADIUS Attribute 61, NAS-Port-Type</title>
+    <xref type="rfc" data="rfc2865"/>
+    <xref type="rfc" data="rfc3575"/>
+    <registration_rule>Expert Review</registration_rule>
+    <record>
+      <value>0</value>
+      <description>Async</description>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>1</value>
+      <description>Sync</description>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>2</value>
+      <description>ISDN Sync</description>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>3</value>
+      <description>ISDN Async V.120</description>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>4</value>
+      <description>ISDN Async V.110</description>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>5</value>
+      <description>Virtual</description>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>6</value>
+      <description>PIAFS</description>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>7</value>
+      <description>HDLC Clear Channel</description>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>8</value>
+      <description>X.25</description>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>9</value>
+      <description>X.75</description>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>10</value>
+      <description>G.3 Fax</description>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>11</value>
+      <description>SDSL - Symmetric DSL</description>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>12</value>
+      <description>ADSL-CAP - Asymmetric DSL, Carrierless Amplitude Phase Modulation</description>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>13</value>
+      <description>ADSL-DMT - Asymmetric DSL, Discrete Multi-Tone</description>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>14</value>
+      <description>IDSL - ISDN Digital Subscriber Line</description>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>15</value>
+      <description>Ethernet</description>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>16</value>
+      <description>xDSL - Digital Subscriber Line of unknown type</description>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>17</value>
+      <description>Cable</description>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>18</value>
+      <description>Wireless - Other</description>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>19</value>
+      <description>Wireless - IEEE 802.11</description>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <value>20</value>
+      <description>Token-Ring</description>
+      <xref type="rfc" data="rfc3580"/>
+    </record>
+    <record>
+      <value>21</value>
+      <description>FDDI</description>
+      <xref type="rfc" data="rfc3580"/>
+    </record>
+    <record>
+      <value>22</value>
+      <description>Wireless - CDMA2000</description>
+      <xref type="person" data="Pete_McCann"/>
+    </record>
+    <record>
+      <value>23</value>
+      <description>Wireless - UMTS</description>
+      <xref type="person" data="Pete_McCann"/>
+    </record>
+    <record>
+      <value>24</value>
+      <description>Wireless - 1X-EV</description>
+      <xref type="person" data="Pete_McCann"/>
+    </record>
+    <record>
+      <value>25</value>
+      <description>IAPP</description>
+      <xref type="text">"IEEE Trial-Use Recommended Practice for Multi-Vendor
+Access Point Interoperability via an Inter-Access Point
+Protocol Across Distribution Systems Supporting
+IEEE 802.11 Operation", IEEE 802.11F, June 2003.</xref>
+      <xref type="person" data="Stuart_Kerry"/>
+    </record>
+    <record>
+      <value>26</value>
+      <description>FTTP - Fiber to the Premises</description>
+      <xref type="person" data="Tim_Nyce"/>
+    </record>
+    <record>
+      <value>27</value>
+      <description>Wireless - IEEE 802.16</description>
+      <xref type="text">"IEEE Standard for Local and metropolitan area networks,
+Part 16: Air Interface for Fixed and Mobile Broadband
+Wireless Access Systems, Amendment2: Physical and Medium
+Access Control Layers for Combined Fixed and Mobile
+Operation in Licensed Bands", IEEE 802.16, February 2006.</xref>
+      <registration_date>2006-12-12</registration_date>
+    </record>
+    <record>
+      <value>28</value>
+      <description>Wireless - IEEE 802.20</description>
+      <xref type="text">Mobile Broadband Wireless Access (MBWA), IEEE Standard,
+IEEE 802.20, Work in Progress.</xref>
+      <registration_date>2006-12-12</registration_date>
+    </record>
+    <record>
+      <value>29</value>
+      <description>Wireless - IEEE 802.22</description>
+      <xref type="text">Wireless Regional Area Networks (WRAN), IEEE Standard,
+IEEE 802.22, Work in Progress.</xref>
+      <registration_date>2006-12-12</registration_date>
+    </record>
+    <record>
+      <value>30</value>
+      <description>PPPoA - PPP over ATM</description>
+      <xref type="rfc" data="rfc4603"/>
+    </record>
+    <record>
+      <value>31</value>
+      <description>PPPoEoA - PPP over Ethernet over ATM</description>
+      <xref type="rfc" data="rfc4603"/>
+    </record>
+    <record>
+      <value>32</value>
+      <description>PPPoEoE - PPP over Ethernet over Ethernet</description>
+      <xref type="rfc" data="rfc4603"/>
+    </record>
+    <record>
+      <value>33</value>
+      <description>PPPoEoVLAN - PPP over Ethernet over VLAN</description>
+      <xref type="rfc" data="rfc4603"/>
+    </record>
+    <record>
+      <value>34</value>
+      <description>PPPoEoQinQ - PPP over Ethernet over IEEE 802.1QinQ</description>
+      <xref type="rfc" data="rfc4603"/>
+    </record>
+    <record>
+      <value>35</value>
+      <description>xPON - Passive Optical Network</description>
+      <xref type="person" data="Christian_Hublet"/>
+      <xref type="person" data="Renxiang_Yan"/>
+      <registration_date>2007-06-19</registration_date>
+    </record>
+    <record>
+      <value>36</value>
+      <description>Wireless - XGP</description>
+      <xref type="person" data="Tomohiro_Ichida"/>
+      <registration_date>2008-08-12</registration_date>
+    </record>
+    <record>
+      <value>37</value>
+      <description>WiMAX Pre-Release 8 IWK Function</description>
+      <xref type="uri" data="http://www.wimaxforum.org">WMF-T37-008-R016v01_PreRelease8-3GPP-IWK</xref>
+      <xref type="person" data="Avi_Lior"/>
+      <registration_date>2011-09-06</registration_date>
+    </record>
+    <record>
+      <value>38</value>
+      <description>WIMAX-WIFI-IWK: WiMAX WIFI Interworking</description>
+      <xref type="uri" data="http://www.wimaxforum.org">WMF-T37-010-R016v01_WiFi-WiMAX-IWK</xref>
+      <xref type="person" data="Avi_Lior"/>
+      <registration_date>2011-09-06</registration_date>
+    </record>
+    <record>
+      <value>39</value>
+      <description>WIMAX-SFF: Signaling Forwarding Function for LTE/3GPP2</description>
+      <xref type="uri" data="http://www.wimaxforum.org">WMF-T37-004-R015v02_3GPP2-Interworking</xref>
+      <xref type="person" data="Avi_Lior"/>
+      <registration_date>2011-09-06</registration_date>
+    </record>
+    <record>
+      <value>40</value>
+      <description>WIMAX-HA-LMA: WiMAX HA and or LMA function</description>
+      <xref type="uri" data="http://www.wimaxforum.org">WMF-T33-001-R015 Network Stage 3</xref>
+      <xref type="person" data="Avi_Lior"/>
+      <registration_date>2011-09-06</registration_date>
+    </record>
+    <record>
+      <value>41</value>
+      <description>WIMAX-DHCP: WIMAX DCHP service</description>
+      <xref type="uri" data="http://www.wimaxforum.org">WMF-T33-001-R015 Network Stage 3</xref>
+      <xref type="person" data="Avi_Lior"/>
+      <registration_date>2011-09-06</registration_date>
+    </record>
+    <record>
+      <value>42</value>
+      <description>WIMAX-LBS: WiMAX location based service</description>
+      <xref type="uri" data="http://www.wimaxforum.org">WMF-T33-110-R015v01_LBS</xref>
+      <xref type="person" data="Avi_Lior"/>
+      <registration_date>2011-09-06</registration_date>
+    </record>
+    <record>
+      <value>43</value>
+      <description>WIMAX-WVS: WiMAX voice service</description>
+      <xref type="uri" data="http://www.wimaxforum.org">WMF-T33-121-R020 WiMAX voice service</xref>
+      <xref type="person" data="Avi_Lior"/>
+      <registration_date>2011-09-06</registration_date>
+    </record>
+  </registry>
+
+
+  <registry id="radius-types-14">
+    <title>Values for RADIUS Attribute 64, Tunnel-Type</title>
+    <xref type="rfc" data="rfc3575"/><xref type="rfc-errata" data="3378"/>
+    <registration_rule>Expert Review</registration_rule>
+    <record>
+      <value>1</value>
+      <description>Point-to-Point Tunneling Protocol (PPTP)</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>2</value>
+      <description>Layer Two Forwarding (L2F)</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>3</value>
+      <description>Layer Two Tunneling Protocol (L2TP)</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>4</value>
+      <description>Ascend Tunnel Management Protocol (ATMP)</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>5</value>
+      <description>Virtual Tunneling Protocol (VTP)</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>6</value>
+      <description>IP Authentication Header in the Tunnel-mode (AH)</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>7</value>
+      <description>IP-in-IP Encapsulation (IP-IP)</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>8</value>
+      <description>Minimal IP-in-IP Encapsulation (MIN-IP-IP)</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>9</value>
+      <description>IP Encapsulating Security Payload in the Tunnel-mode (ESP)</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>10</value>
+      <description>Generic Route Encapsulation (GRE)</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>11</value>
+      <description>Bay Dial Virtual Services (DVS)</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>12</value>
+      <description>IP-in-IP Tunneling</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>13</value>
+      <description>Virtual LANs (VLAN)</description>
+      <xref type="rfc" data="rfc3580"/>
+    </record>
+  </registry>
+
+
+  <registry id="radius-types-15">
+    <title>Values for RADIUS Attribute 65, Tunnel-Medium-Type</title>
+    <xref type="rfc" data="rfc3575"/><xref type="rfc-errata" data="3378"/>
+    <registration_rule>Expert Review</registration_rule>
+    <record>
+      <value>1</value>
+      <description>IPv4 (IP version 4)</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>2</value>
+      <description>IPv6 (IP version 6)</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>3</value>
+      <description>NSAP</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>4</value>
+      <description>HDLC (8-bit multidrop)</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>5</value>
+      <description>BBN 1822</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>6</value>
+      <description>802 (includes all 802 media plus Ethernet "canonical format")</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>7</value>
+      <description>E.163 (POTS)</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>8</value>
+      <description>E.164 (SMDS, Frame Relay, ATM)</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>9</value>
+      <description>F.69 (Telex)</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>10</value>
+      <description>X.121 (X.25, Frame Relay)</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>11</value>
+      <description>IPX</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>12</value>
+      <description>Appletalk</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>13</value>
+      <description>Decnet IV</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>14</value>
+      <description>Banyan Vines</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+    <record>
+      <value>15</value>
+      <description>E.164 with NSAP format subaddress</description>
+      <xref type="rfc" data="rfc2868"/>
+    </record>
+  </registry>
+
+
+  <registry id="radius-types-16">
+    <title>Values for RADIUS Attribute 72, ARAP-Zone-Access</title>
+    <xref type="rfc" data="rfc2869"/>
+    <xref type="rfc" data="rfc3575"/>
+    <registration_rule>Expert Review</registration_rule>
+    <record>
+      <value>1</value>
+      <description>Only allow access to default zone</description>
+      <xref type="rfc" data="rfc2869"/>
+    </record>
+    <record>
+      <value>2</value>
+      <description>Use zone filter inclusively</description>
+      <xref type="rfc" data="rfc2869"/>
+    </record>
+    <record>
+      <value>3</value>
+      <description>Not used</description>
+      <xref type="rfc" data="rfc2869"/>
+    </record>
+    <record>
+      <value>4</value>
+      <description>Use zone filter exclusively</description>
+      <xref type="rfc" data="rfc2869"/>
+    </record>
+  </registry>
+
+
+  <registry id="radius-types-17">
+    <title>Values for RADIUS Attribute 76, Prompt</title>
+    <xref type="rfc" data="rfc2869"/>
+    <xref type="rfc" data="rfc3575"/>
+    <registration_rule>Expert Review</registration_rule>
+    <record>
+      <value>0</value>
+      <description>No Echo</description>
+      <xref type="rfc" data="rfc2869"/>
+    </record>
+    <record>
+      <value>1</value>
+      <description>Echo</description>
+      <xref type="rfc" data="rfc2869"/>
+    </record>
+  </registry>
+
+
+  <registry id="radius-types-18">
+    <title>Values for RADIUS Attribute 101, Error-Cause Attribute</title>
+    <xref type="rfc" data="rfc3575"/>
+    <xref type="rfc" data="rfc5176"/>
+    <xref type="rfc" data="rfc7930"/>
+    <registration_rule>Expert Review</registration_rule>
+    <record>
+      <value>201</value>
+      <description>Residual Session Context Removed</description>
+      <xref type="rfc" data="rfc5176"/>
+    </record>
+    <record>
+      <value>202</value>
+      <description>Invalid EAP Packet (Ignored)</description>
+      <xref type="rfc" data="rfc5176"/>
+    </record>
+    <record>
+      <value>401</value>
+      <description>Unsupported Attribute</description>
+      <xref type="rfc" data="rfc5176"/>
+    </record>
+    <record>
+      <value>402</value>
+      <description>Missing Attribute</description>
+      <xref type="rfc" data="rfc5176"/>
+    </record>
+    <record>
+      <value>403</value>
+      <description>NAS Identification Mismatch</description>
+      <xref type="rfc" data="rfc5176"/>
+    </record>
+    <record>
+      <value>404</value>
+      <description>Invalid Request</description>
+      <xref type="rfc" data="rfc5176"/>
+    </record>
+    <record>
+      <value>405</value>
+      <description>Unsupported Service</description>
+      <xref type="rfc" data="rfc5176"/>
+    </record>
+    <record>
+      <value>406</value>
+      <description>Unsupported Extension</description>
+      <xref type="rfc" data="rfc5176"/>
+    </record>
+    <record>
+      <value>407</value>
+      <description>Invalid Attribute Value</description>
+      <xref type="rfc" data="rfc5176"/>
+    </record>
+    <record>
+      <value>501</value>
+      <description>Administratively Prohibited</description>
+      <xref type="rfc" data="rfc5176"/>
+    </record>
+    <record>
+      <value>502</value>
+      <description>Request Not Routable (Proxy)</description>
+      <xref type="rfc" data="rfc5176"/>
+    </record>
+    <record>
+      <value>503</value>
+      <description>Session Context Not Found</description>
+      <xref type="rfc" data="rfc5176"/>
+    </record>
+    <record>
+      <value>504</value>
+      <description>Session Context Not Removable</description>
+      <xref type="rfc" data="rfc5176"/>
+    </record>
+    <record>
+      <value>505</value>
+      <description>Other Proxy Processing Error</description>
+      <xref type="rfc" data="rfc5176"/>
+    </record>
+    <record>
+      <value>506</value>
+      <description>Resources Unavailable</description>
+      <xref type="rfc" data="rfc5176"/>
+    </record>
+    <record>
+      <value>507</value>
+      <description>Request Initiated</description>
+      <xref type="rfc" data="rfc5176"/>
+    </record>
+    <record>
+      <value>508</value>
+      <description>Multiple Session Selection Unsupported</description>
+      <xref type="rfc" data="rfc5176"/>
+    </record>
+    <record>
+      <value>509</value>
+      <description>Location-Info-Required</description>
+      <xref type="rfc" data="rfc5580"/>
+    </record>
+    <record date="2016-06-21">
+      <value>601</value>
+      <description>Response Too Big</description>
+      <xref type="rfc" data="rfc7930"/>
+    </record>
+  </registry>
+
+
+  <registry id="radius-types-19">
+    <title>Operator Namespace Identifier for Attribute 126</title>
+    <xref type="rfc" data="rfc5580"/>
+    <registration_rule>Expert Review</registration_rule>
+    <expert>Alan DeKok, Mohit Sethi</expert>
+    <record>
+      <identifier>0x00-0x29</identifier>
+      <token>Reserved</token>
+      <xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <identifier>0x30</identifier>
+      <token>TADIG</token>
+      <contact>TD.13 Coordinator (td13 at gsm.org)</contact>
+      <xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <identifier>0x31</identifier>
+      <token>REALM</token>
+      <contact>IETF O&amp;M Area Directors (ops-ads at ietf.org)</contact>
+      <xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <identifier>0x32</identifier>
+      <token>E212</token>
+      <contact>ITU Director (tsbdir at itu.int)</contact>
+      <xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <identifier>0x33</identifier>
+      <token>ICC</token>
+      <contact>ITU Director (tsbdir at itu.int)</contact>
+      <xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <identifier>0x34</identifier>
+      <token>WBAID</token>
+      <contact>WBA Director (pmo@wballiance.com)</contact>
+      <xref type="person" data="WBA"/>
+      <xref type="person" data="Bruno_Tomas"/>
+    </record>
+    <record>
+      <identifier>0x35-0xFE</identifier>
+      <token>Unassigned</token>
+    </record>
+    <record>
+      <identifier>0xFF</identifier>
+      <token>Reserved</token>
+      <xref type="rfc" data="rfc5580"/>
+    </record>
+  </registry>
+
+
+  <registry id="radius-types-20">
+    <title>Location Profiles (Attribute 127, Location-Information)</title>
+    <xref type="rfc" data="rfc5580"/>
+    <registration_rule>Expert Review</registration_rule>
+    <expert>Alan DeKok, Mohit Sethi</expert>
+    <record>
+      <value>0</value>
+      <description>Civic location profile</description>
+      <xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <value>1</value>
+      <description>Geospatial location profile</description>
+      <xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <value>2-255</value>
+      <description>Unassigned</description>
+    </record>
+  </registry>
+
+
+  <registry id="radius-types-21">
+    <title>Entity Types (Attribute 127, Location-Information)</title>
+    <xref type="rfc" data="rfc5580"/>
+    <registration_rule>Expert Review</registration_rule>
+    <expert>Alan DeKok, Mohit Sethi</expert>
+    <record>
+      <value>0</value>
+      <description>Location of the User's Client Device</description>
+      <xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <value>1</value>
+      <description>Location of the RADIUS Client</description>
+      <xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <value>2-255</value>
+      <description>Unassigned</description>
+    </record>
+  </registry>
+
+
+  <registry id="radius-types-22">
+    <title>Privacy Flags (Attribute 129, Basic-Location-Policy-Rules)</title>
+    <xref type="rfc" data="rfc5580"/>
+    <registration_rule>Expert Review</registration_rule>
+    <expert>Alan DeKok, Mohit Sethi</expert>
+    <record>
+      <value>0</value>
+      <description>Retransmission allowed</description>
+      <xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <value>1-15</value>
+      <description>Unassigned</description>
+    </record>
+  </registry>
+
+
+  <registry id="radius-types-23">
+    <title>Location-Capable Attribute (Attribute 131)</title>
+    <xref type="rfc" data="rfc5580"/>
+    <registration_rule>Expert Review</registration_rule>
+    <expert>Alan DeKok, Mohit Sethi</expert>
+    <record>
+      <value>1</value>
+      <capability_token>CIVIC_LOCATION</capability_token>
+      <xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <value>2</value>
+      <capability_token>GEO_LOCATION</capability_token>
+      <xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <value>4</value>
+      <capability_token>USERS_LOCATION</capability_token>
+      <xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <value>8</value>
+      <capability_token>NAS_LOCATION</capability_token>
+      <xref type="rfc" data="rfc5580"/>
+    </record>
+  </registry>
+
+
+  <registry id="radius-types-24">
+    <title>Requested-Location-Info Attribute (Attribute 132)</title>
+    <xref type="rfc" data="rfc5580"/>
+    <registration_rule>Expert Review</registration_rule>
+    <expert>Alan DeKok, Mohit Sethi</expert>
+    <record>
+      <value>1</value>
+      <capability_token>CIVIC_LOCATION</capability_token>
+      <xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <value>2</value>
+      <capability_token>GEO_LOCATION</capability_token>
+      <xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <value>4</value>
+      <capability_token>USERS_LOCATION</capability_token>
+      <xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <value>8</value>
+      <capability_token>NAS_LOCATION</capability_token>
+      <xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <value>16</value>
+      <capability_token>FUTURE_REQUESTS</capability_token>
+      <xref type="rfc" data="rfc5580"/>
+    </record>
+    <record>
+      <value>32</value>
+      <capability_token>NONE</capability_token>
+      <xref type="rfc" data="rfc5580"/>
+    </record>
+  </registry>
+
+
+  <registry id="radius-types-25">
+    <title>Values for RADIUS Attribute 133, Framed-Management-Protocol Attribute</title>
+    <xref type="rfc" data="rfc5607"/>
+    <registration_rule>Specification Required</registration_rule>
+    <record>
+      <value>1</value>
+      <description>SNMP</description>
+      <xref type="rfc" data="rfc5607"/>
+    </record>
+    <record>
+      <value>2</value>
+      <description>Web-based</description>
+      <xref type="rfc" data="rfc5607"/>
+    </record>
+    <record>
+      <value>3</value>
+      <description>NETCONF</description>
+      <xref type="rfc" data="rfc5607"/>
+    </record>
+    <record>
+      <value>4</value>
+      <description>FTP</description>
+      <xref type="rfc" data="rfc5607"/>
+    </record>
+    <record>
+      <value>5</value>
+      <description>TFTP</description>
+      <xref type="rfc" data="rfc5607"/>
+    </record>
+    <record>
+      <value>6</value>
+      <description>SFTP</description>
+      <xref type="rfc" data="rfc5607"/>
+    </record>
+    <record>
+      <value>7</value>
+      <description>RCP</description>
+      <xref type="rfc" data="rfc5607"/>
+    </record>
+    <record>
+      <value>8</value>
+      <description>SCP</description>
+      <xref type="rfc" data="rfc5607"/>
+    </record>
+  </registry>
+  
+  
+  <registry id="radius-types-26">
+    <title>Values for RADIUS Attribute 134, Management-Transport-Protection Attribute</title>
+    <xref type="rfc" data="rfc5607"/>
+    <registration_rule>Specification Required</registration_rule>
+    <record>
+      <value>1</value>
+      <description>No-Protection</description>
+      <xref type="rfc" data="rfc5607"/>
+    </record>
+    <record>
+      <value>2</value>
+      <description>Integrity-Protection</description>
+      <xref type="rfc" data="rfc5607"/>
+    </record>
+    <record>
+      <value>3</value>
+      <description>Integrity-Confidentiality-Protection</description>
+      <xref type="rfc" data="rfc5607"/>
+    </record>
+  </registry>
+
+  
+  <registry id="frag-status-241-1">
+    <title>Code Values for RADIUS Attribute 241.1, Frag-Status</title>
+    <xref type="rfc" data="rfc7499"/>
+    <registration_rule>RFC Required</registration_rule>
+    <record date="2015-02-10">
+      <value>0</value>
+      <description>Reserved</description>
+      <xref type="rfc" data="rfc7499"/>
+    </record>
+    <record date="2015-02-10">
+      <value>1</value>
+      <description>Fragmentation-Supported</description>
+      <xref type="rfc" data="rfc7499"/>
+    </record>
+    <record date="2015-02-10">
+      <value>2</value>
+      <description>More-Data-Pending</description>
+      <xref type="rfc" data="rfc7499"/>
+    </record>
+    <record date="2015-02-10">
+      <value>3</value>
+      <description>More-Data-Request</description>
+      <xref type="rfc" data="rfc7499"/>
+    </record>
+    <record>
+      <value>4-255</value>
+      <description>Unassigned</description>
+    </record>
+  </registry>
+
+  
+  <registry id="radius-types-27">
+    <title>RADIUS Packet Type Codes</title>
+    <xref type="rfc" data="rfc3575"/>
+    <registration_rule>IESG Approval</registration_rule>
+    <record>
+      <decimal>1</decimal>
+      <message>Access-Request</message>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <decimal>2</decimal>
+      <message>Access-Accept</message>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <decimal>3</decimal>
+      <message>Access-Reject</message>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <decimal>4</decimal>
+      <message>Accounting-Request</message>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <decimal>5</decimal>
+      <message>Accounting-Response</message>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <decimal>6</decimal>
+      <message>Accounting-Status (now Interim Accounting)</message>
+      <xref type="rfc" data="rfc3575"/>
+    </record>
+    <record>
+      <decimal>7</decimal>
+      <message>Password-Request</message>
+      <xref type="rfc" data="rfc3575"/>
+    </record>
+    <record>
+      <decimal>8</decimal>
+      <message>Password-Ack</message>
+      <xref type="rfc" data="rfc3575"/>
+    </record>
+    <record>
+      <decimal>9</decimal>
+      <message>Password-Reject</message>
+      <xref type="rfc" data="rfc3575"/>
+    </record>
+    <record>
+      <decimal>10</decimal>
+      <message>Accounting-Message</message>
+      <xref type="rfc" data="rfc3575"/>
+    </record>
+    <record>
+      <decimal>11</decimal>
+      <message>Access-Challenge</message>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <decimal>12</decimal>
+      <message>Status-Server (experimental)</message>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <decimal>13</decimal>
+      <message>Status-Client (experimental)</message>
+      <xref type="rfc" data="rfc2865"/>
+    </record>
+    <record>
+      <decimal>21</decimal>
+      <message>Resource-Free-Request</message>
+      <xref type="rfc" data="rfc3575"/>
+    </record>
+    <record>
+      <decimal>22</decimal>
+      <message>Resource-Free-Response</message>
+      <xref type="rfc" data="rfc3575"/>
+    </record>
+    <record>
+      <decimal>23</decimal>
+      <message>Resource-Query-Request</message>
+      <xref type="rfc" data="rfc3575"/>
+    </record>
+    <record>
+      <decimal>24</decimal>
+      <message>Resource-Query-Response</message>
+      <xref type="rfc" data="rfc3575"/>
+    </record>
+    <record>
+      <decimal>25</decimal>
+      <message>Alternate-Resource-Reclaim-Request</message>
+      <xref type="rfc" data="rfc3575"/>
+    </record>
+    <record>
+      <decimal>26</decimal>
+      <message>NAS-Reboot-Request</message>
+      <xref type="rfc" data="rfc3575"/>
+    </record>
+    <record>
+      <decimal>27</decimal>
+      <message>NAS-Reboot-Response</message>
+      <xref type="rfc" data="rfc3575"/>
+    </record>
+    <record>
+      <decimal>28</decimal>
+      <message>Reserved</message>
+    </record>
+    <record>
+      <decimal>29</decimal>
+      <message>Next-Passcode</message>
+      <xref type="rfc" data="rfc3575"/>
+    </record>
+    <record>
+      <decimal>30</decimal>
+      <message>New-Pin</message>
+      <xref type="rfc" data="rfc3575"/>
+    </record>
+    <record>
+      <decimal>31</decimal>
+      <message>Terminate-Session</message>
+      <xref type="rfc" data="rfc3575"/>
+    </record>
+    <record>
+      <decimal>32</decimal>
+      <message>Password-Expired</message>
+      <xref type="rfc" data="rfc3575"/>
+    </record>
+    <record>
+      <decimal>33</decimal>
+      <message>Event-Request</message>
+      <xref type="rfc" data="rfc3575"/>
+    </record>
+    <record>
+      <decimal>34</decimal>
+      <message>Event-Response</message>
+      <xref type="rfc" data="rfc3575"/>
+    </record>
+    <record>
+      <decimal>35-39</decimal>
+      <message>Unassigned</message>
+    </record>
+    <record>
+      <decimal>40</decimal>
+      <message>Disconnect-Request</message>
+      <xref type="rfc" data="rfc3575"/>
+      <xref type="rfc" data="rfc5176"/>
+    </record>
+    <record>
+      <decimal>41</decimal>
+      <message>Disconnect-ACK</message>
+      <xref type="rfc" data="rfc3575"/>
+      <xref type="rfc" data="rfc5176"/>
+    </record>
+    <record>
+      <decimal>42</decimal>
+      <message>Disconnect-NAK</message>
+      <xref type="rfc" data="rfc3575"/>
+      <xref type="rfc" data="rfc5176"/>
+    </record>
+    <record>
+      <decimal>43</decimal>
+      <message>CoA-Request</message>
+      <xref type="rfc" data="rfc3575"/>
+      <xref type="rfc" data="rfc5176"/>
+    </record>
+    <record>
+      <decimal>44</decimal>
+      <message>CoA-ACK</message>
+      <xref type="rfc" data="rfc3575"/>
+      <xref type="rfc" data="rfc5176"/>
+    </record>
+    <record>
+      <decimal>45</decimal>
+      <message>CoA-NAK</message>
+      <xref type="rfc" data="rfc3575"/>
+      <xref type="rfc" data="rfc5176"/>
+    </record>
+    <record>
+      <decimal>46-49</decimal>
+      <message>Unassigned</message>
+    </record>
+    <record>
+      <decimal>50</decimal>
+      <message>IP-Address-Allocate</message>
+      <xref type="rfc" data="rfc3575"/>
+    </record>
+    <record>
+      <decimal>51</decimal>
+      <message>IP-Address-Release</message>
+      <xref type="rfc" data="rfc3575"/>
+    </record>
+    <record date="2016-06-21">
+      <decimal>52</decimal>
+      <message>Protocol-Error</message>
+      <xref type="rfc" data="rfc7930"/>
+    </record>
+    <record>
+      <decimal>53-249</decimal>
+      <message>Unassigned</message>
+    </record>
+    <record>
+      <decimal>250-253</decimal>
+      <message>Experimental Use</message>
+      <xref type="rfc" data="rfc3575"/>
+    </record>
+    <record>
+      <decimal>254</decimal>
+      <message>Reserved</message>
+      <xref type="rfc" data="rfc3575"/>
+    </record>
+    <record>
+      <decimal>255</decimal>
+      <message>Reserved</message>
+      <xref type="rfc" data="rfc3575"/>
+    </record>
+  </registry>
+  
+  <registry id="radius-ip-port-configuration-reporting-tlvs">
+    <title>RADIUS IP Port Configuration and Reporting TLVs</title>
+    <xref type="rfc" data="rfc8045"/>
+    <registration_rule>Standards Action</registration_rule>
+    <record date="2016-11-15">
+      <value>0</value>
+      <description>Reserved</description>
+      <xref type="rfc" data="rfc8045"/>
+    </record>
+    <record date="2016-11-15" updated="2017-01-27">
+      <value>1</value>
+      <description>IP-Port-Type</description>
+      <datatype>integer</datatype>
+      <xref type="rfc" data="rfc8045">RFC8045, Section 3.2.1</xref>
+    </record>
+    <record date="2016-11-15" updated="2017-01-27">
+      <value>2</value>
+      <description>IP-Port-Limit</description>
+      <datatype>integer</datatype>
+      <xref type="rfc" data="rfc8045">RFC8045, Section 3.2.2</xref>
+    </record>
+    <record date="2016-11-15" updated="2017-01-27">
+      <value>3</value>
+      <description>IP-Port-Ext-IPv4-Addr</description>
+      <datatype>ipv4addr</datatype>
+      <xref type="rfc" data="rfc8045">RFC8045, Section 3.2.3</xref>
+    </record>
+    <record date="2016-11-15" updated="2017-01-27">
+      <value>4</value>
+      <description>IP-Port-Int-IPv4-Addr</description>
+      <datatype>ipv4addr</datatype>
+      <xref type="rfc" data="rfc8045">RFC8045, Section 3.2.4</xref>
+    </record>
+    <record date="2016-11-15" updated="2017-01-27">
+      <value>5</value>
+      <description>IP-Port-Int-IPv6-Addr</description>
+      <datatype>ipv6addr</datatype>
+      <xref type="rfc" data="rfc8045">RFC8045, Section 3.2.5</xref>
+    </record>
+    <record date="2016-11-15" updated="2017-01-27">
+      <value>6</value>
+      <description>IP-Port-Int-Port</description>
+      <datatype>integer</datatype>
+      <xref type="rfc" data="rfc8045">RFC8045, Section 3.2.6</xref>
+    </record>
+    <record date="2016-11-15" updated="2017-01-27">
+      <value>7</value>
+      <description>IP-Port-Ext-Port</description>
+      <datatype>integer</datatype>
+      <xref type="rfc" data="rfc8045">RFC8045, Section 3.2.7</xref>
+    </record>
+    <record date="2016-11-15" updated="2017-01-27">
+      <value>8</value>
+      <description>IP-Port-Alloc</description>
+      <datatype>integer</datatype>
+      <xref type="rfc" data="rfc8045">RFC8045, Section 3.2.8</xref>
+    </record>
+    <record date="2016-11-15" updated="2017-01-27">
+      <value>9</value>
+      <description>IP-Port-Range-Start</description>
+      <datatype>integer</datatype>
+      <xref type="rfc" data="rfc8045">RFC8045, Section 3.2.9</xref>
+    </record>
+    <record date="2016-11-15" updated="2017-01-27">
+      <value>10</value>
+      <description>IP-Port-Range-End</description>
+      <datatype>integer</datatype>
+      <xref type="rfc" data="rfc8045">RFC8045, Section 3.2.10</xref>
+    </record>
+    <record date="2016-11-15" updated="2017-01-27">
+      <value>11</value>
+      <description>IP-Port-Local-Id</description>
+      <datatype>string</datatype>
+      <xref type="rfc" data="rfc8045">RFC8045, Section 3.2.11</xref>
+    </record>
+    <record>
+      <value>12-255</value>
+      <description>Unassigned</description>
+    </record>
+    </registry>
+  
+  <registry id="data-type">
+    <title>Data Type</title>
+    <xref type="rfc" data="rfc8044"/>
+    <registration_rule>Standards Action</registration_rule>
+    <record date="2016-11-23">
+      <value>1</value>
+      <description>integer</description>
+      <xref type="rfc" data="rfc2865"/>
+      <xref type="rfc" data="rfc8044"/>
+    </record>
+    <record date="2016-11-23">
+      <value>2</value>
+      <description>enum</description>
+      <xref type="rfc" data="rfc2865"/>
+      <xref type="rfc" data="rfc8044"/>
+    </record>
+    <record date="2016-11-23">
+      <value>3</value>
+      <description>time</description>
+      <xref type="rfc" data="rfc2865"/>
+      <xref type="rfc" data="rfc8044"/>
+    </record>
+    <record date="2016-11-23">
+      <value>4</value>
+      <description>text</description>
+      <xref type="rfc" data="rfc2865"/>
+      <xref type="rfc" data="rfc8044"/>
+    </record>
+    <record date="2016-11-23">
+      <value>5</value>
+      <description>string</description>
+      <xref type="rfc" data="rfc2865"/>
+      <xref type="rfc" data="rfc8044"/>
+    </record>
+    <record date="2016-11-23">
+      <value>6</value>
+      <description>concat</description>
+      <xref type="rfc" data="rfc8044"/>
+    </record>
+    <record date="2016-11-23">
+      <value>7</value>
+      <description>ifid</description>
+      <xref type="rfc" data="rfc3162"/>
+      <xref type="rfc" data="rfc8044"/>
+    </record>
+    <record date="2016-11-23">
+      <value>8</value>
+      <description>ipv4addr</description>
+      <xref type="rfc" data="rfc2865"/>
+      <xref type="rfc" data="rfc8044"/>
+    </record>
+    <record date="2016-11-23">
+      <value>9</value>
+      <description>ipv6addr</description>
+      <xref type="rfc" data="rfc3162"/>
+      <xref type="rfc" data="rfc8044"/>
+    </record>
+    <record date="2016-11-23">
+      <value>10</value>
+      <description>ipv6prefix</description>
+      <xref type="rfc" data="rfc3162"/>
+      <xref type="rfc" data="rfc8044"/>
+    </record>
+    <record date="2016-11-23">
+      <value>11</value>
+      <description>ipv4prefix</description>
+      <xref type="rfc" data="rfc6572"/>
+      <xref type="rfc" data="rfc8044"/>
+    </record>
+    <record date="2016-11-23">
+      <value>12</value>
+      <description>integer64</description>
+      <xref type="rfc" data="rfc6929"/>
+      <xref type="rfc" data="rfc8044"/>
+    </record>
+    <record date="2016-11-23">
+      <value>13</value>
+      <description>tlv</description>
+      <xref type="rfc" data="rfc6929"/>
+      <xref type="rfc" data="rfc8044"/>
+    </record>
+    <record date="2016-11-23" updated="2017-01-27">
+      <value>14</value>
+      <description>vsa</description>
+      <xref type="rfc" data="rfc2865"/>
+      <xref type="rfc" data="rfc8044"/>
+    </record>
+    <record date="2016-11-23">
+      <value>15</value>
+      <description>extended</description>
+      <xref type="rfc" data="rfc6929"/>
+      <xref type="rfc" data="rfc8044"/>
+    </record>
+    <record date="2016-11-23">
+      <value>16</value>
+      <description>long-extended</description>
+      <xref type="rfc" data="rfc6929"/>
+      <xref type="rfc" data="rfc8044"/>
+    </record>
+    <record date="2016-11-23" updated="2016-01-27">
+      <value>17</value>
+      <description>evs</description>
+      <xref type="rfc" data="rfc6929"/>
+      <xref type="rfc" data="rfc8044"/>
+    </record>
+  </registry>
+  
+  <registry id="softwire46-configuration-multicast-attributes">
+    <title>RADIUS Softwire46 Configuration and Multicast Attributes</title>
+    <xref type="draft" data="RFC-ietf-softwire-map-radius-26"/>
+    <registration_rule>Standards Action</registration_rule>
+    <record date="2019-06-18">
+      <value>0</value>
+      <description>Reserved</description>
+      <datatype/>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26"/>
+    </record>
+    <record date="2019-06-18">
+      <value>1</value>
+      <description>Softwire46-MAP-E</description>
+      <datatype>tlv</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.1.1</xref>
+    </record>
+    <record date="2019-06-18">
+      <value>2</value>
+      <description>Softwire46-MAP-T</description>
+      <datatype>tlv</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.1.2</xref>
+    </record>
+    <record date="2019-06-18">
+      <value>3</value>
+      <description>Softwire46-Lightweight-4over6</description>
+      <datatype>tlv</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.1.3</xref>
+    </record>
+    <record date="2019-06-18">
+      <value>4</value>
+      <description>Softwire46-Rule (BMR)</description>
+      <datatype>tlv</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.3.1</xref>
+    </record>
+    <record date="2019-06-18">
+      <value>5</value>
+      <description>Softwire46-Rule (FMR)</description>
+      <datatype>tlv</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.3.1</xref>
+    </record>
+    <record date="2019-06-18">
+      <value>6</value>
+      <description>Softwire46-BR</description>
+      <datatype>ipv6addr</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.3.2</xref>
+    </record>
+    <record date="2019-06-18">
+      <value>7</value>
+      <description>Softwire46-DMR</description>
+      <datatype>ipv6prefix</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.3.3</xref>
+    </record>
+    <record date="2019-06-18">
+      <value>8</value>
+      <description>Softwire46-V4V6Bind</description>
+      <datatype>tlv</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.3.4</xref>
+    </record>
+    <record date="2019-06-18">
+      <value>9</value>
+      <description>Softwire46-PORTPARAMS</description>
+      <datatype>tlv</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.3.5</xref>
+    </record>
+    <record date="2019-06-18">
+      <value>10</value>
+      <description>Rule-IPv6-Prefix</description>
+      <datatype>ipv6prefix</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.4.1</xref>
+    </record>
+    <record date="2019-06-18">
+      <value>11</value>
+      <description>Rule-IPv4-Prefix</description>
+      <datatype>ipv4prefix</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.4.2</xref>
+    </record>
+    <record date="2019-06-18">
+      <value>12</value>
+      <description>EA-Length</description>
+      <datatype>integer</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.4.3</xref>
+    </record>
+    <record date="2019-06-18">
+      <value>13</value>
+      <description>IPv4-Address</description>
+      <datatype>ipv4addr</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.5.1</xref>
+    </record>
+    <record date="2019-06-18">
+      <value>14</value>
+      <description>Bind-IPv6-Prefix</description>
+      <datatype>ipv6prefix</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.5.2</xref>
+    </record>
+    <record date="2019-06-18">
+      <value>15</value>
+      <description>PSID-Offset</description>
+      <datatype>integer</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.6.1</xref>
+    </record>
+    <record date="2019-06-18">
+      <value>16</value>
+      <description>PSID-Len</description>
+      <datatype>integer</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.6.2</xref>
+    </record>
+    <record date="2019-06-18">
+      <value>17</value>
+      <description>PSID</description>
+      <datatype>integer</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.6.3</xref>
+    </record>
+    <record date="2019-06-18">
+      <value>18</value>
+      <description>Softwire46-Option-Code</description>
+      <datatype>integer</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.2.1</xref>
+    </record>
+    <record date="2019-06-18">
+      <value>19</value>
+      <description>ASM-Prefix64</description>
+      <datatype>ipv6prefix</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.3.1</xref>
+    </record>
+    <record date="2019-06-18">
+      <value>20</value>
+      <description>SSM-Prefix64</description>
+      <datatype>ipv6prefix</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.3.2</xref>
+    </record>
+    <record date="2019-06-18">
+      <value>21</value>
+      <description>U-Prefix64</description>
+      <datatype>ipv6prefix</datatype>
+      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.3.3</xref>
+    </record>
+    <record>
+      <value>22-255</value>
+      <description>Unassigned</description>
+      <datatype/>
+    </record>
+  </registry>
+  
+  <registry id="option-codes-softwire46-priority-attribute">
+    <title>Option Codes Permitted in the Softwire46-Priority Attribute</title>
+    <xref type="draft" data="RFC-ietf-softwire-map-radius-26"/>
+    <registration_rule>IETF Review</registration_rule>
+    <record date="2019-06-18">
+      <value>1</value>
+      <description>MAP-E</description>
+      <xref type="rfc" data="rfc7597"/>
+    </record>
+    <record date="2019-06-18">
+      <value>2</value>
+      <description>MAP-T</description>
+      <xref type="rfc" data="rfc7599"/>
+    </record>
+    <record date="2019-06-18">
+      <value>3</value>
+      <description>Lightweight 4over6</description>
+      <xref type="rfc" data="rfc7596"/>
+    </record>
+    <record date="2019-06-18">
+      <value>144</value>
+      <description>DS-Lite</description>
+      <xref type="rfc" data="rfc6519"/>
+    </record>
+  </registry>
+  
+  
+  <people>
+    <person id="Avi_Lior">
+      <name>Avi Lior</name>
+      <uri>mailto:avi&amp;bridgewatersystems.com</uri>
+      <updated>2011-09-06</updated>
+    </person>
+    <person id="Bruno_Tomas">
+      <name>Bruno Tomas</name>
+      <uri>mailto:pmo&amp;wballiance.com</uri>
+      <updated>2019-06-20</updated>
+    </person>
+    <person id="Christian_Hublet">
+      <name>Christian Hublet</name>
+      <uri>mailto:Christian.Hublet&amp;alcatel-lucent.be</uri>
+      <updated>2007-06-21</updated>
+    </person>
+    <person id="Jeff_Moore">
+      <name>Jeff Moore</name>
+      <uri>mailto:jeff.moore&amp;cisco.com</uri>
+      <updated>2001-02</updated>
+    </person>
+    <person id="Murtaza_Chiba">
+      <name>Murtaza Chiba</name>
+      <uri>mailto:mchiba&amp;cisco.com</uri>
+      <updated>2001-06</updated>
+    </person>
+    <person id="Pat_Calhoun">
+      <name>Pat Calhoun</name>
+      <uri>mailto:pcalhoun&amp;diameter.org</uri>
+      <updated>2001-05</updated>
+    </person>
+    <person id="Pete_McCann">
+      <name>Pete McCann</name>
+      <uri>mailto:mccap&amp;lucent.com</uri>
+      <updated>2002-03</updated>
+    </person>
+    <person id="Ramprasad_Golla">
+      <name>Ramprasad Golla</name>
+      <uri>mailto:rgolla&amp;grid-net.com</uri>
+      <updated>2010-11-30</updated>
+    </person>
+    <person id="Renxiang_Yan">
+      <name>Renxiang Yan</name>
+      <uri>mailto:Renxiang.Yan&amp;alcatel-sbell.com.cn</uri>
+      <updated>2007-06-19</updated>
+    </person>
+    <person id="Stuart_Kerry">
+      <name>Stuart Kerry</name>
+      <uri>mailto:stuart.kerry&amp;philips.com</uri>
+      <updated>2003-01</updated>
+    </person>
+    <person id="Tim_Nyce">
+      <name>Tim Nyce</name>
+      <uri>mailto:tnyce&amp;idts.org</uri>
+      <updated>2004-03</updated>
+    </person>
+    <person id="Tomohiro_Ichida">
+      <name>Tomohiro Ichida</name>
+      <uri>mailto:t_ichida&amp;willcom-inc.com</uri>
+      <updated>2008-08-12</updated>
+    </person>
+    <person id="WBA">
+      <name>Wireless Broadband Alliance</name>
+      <uri>https://www.wballiance.com/</uri>
+      <updated>2019-06-20</updated>
+    </person>
+  </people>
+</registry>

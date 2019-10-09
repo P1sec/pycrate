@@ -65,6 +65,9 @@ class Grouped(Sequence):
 # 4.5.  Diameter Base Protocol AVPs
 #------------------------------------------------------------------------------#
 
+# 1 -> 190 : RADIUS (code -> name, fmt [to be translated from RADIUS to Diameter])
+# 256+     : Diameter (code -> name, fmt)
+
 FMT_LUT_RFC6733 = {
     1   : UTF8String,
     25  : OctetString,

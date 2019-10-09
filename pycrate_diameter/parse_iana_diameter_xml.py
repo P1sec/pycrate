@@ -30,6 +30,7 @@
 __all__ = [
     'FILENAME_aaa_parameters',
     'FILENAME_address_family_numbers',
+    'FILENAME_radius_types',
     'build_dict_from_xml'
     ]
 
@@ -40,7 +41,8 @@ from lxml import etree
 
 
 FILENAME_aaa_parameters = os.path.dirname(__file__) + '/aaa-parameters.xml'
-FILENAME_address_family_numbers =  os.path.dirname(__file__) + '/address-family-numbers.xml'
+FILENAME_address_family_numbers = os.path.dirname(__file__) + '/address-family-numbers.xml'
+FILENAME_radius_types = os.path.dirname(__file__) + '/radius-types.xml'
 
 
 '''
@@ -68,7 +70,7 @@ Address Family Numbers:
 
 
 # some regexp
-RE_INT      = re.compile(r'[1-9]{1}[0-9]{0,}')
+RE_INT      = re.compile(r'^[1-9]{1}[0-9]{0,}$')
 RE_HEX      = re.compile(r'0x[0-9]{2,4,6,8,10,12,14,16}')
 RE_SV_CODE  = re.compile(r'\(code (%s)\)' % RE_INT.pattern)
 
@@ -110,6 +112,18 @@ def build_dict_from_xml(filename=FILENAME_aaa_parameters):
         #
         return dict_addr_fam_nums
     #
+    elif filename == FILENAME_radius_types:
+        T = etree.parse(filename).getroot()
+        for child in T.getchildren():
+            subchild_list = child.getchildren()
+            if not subchild_list:
+                pass
+            elif subchild_list[0].text == 'RADIUS Attribute Types':
+                dict_radius_avp_codes = build_dict_from_val_name(
+                    [i for i in subchild_list if i.tag == '{http://www.iana.org/assignments}record'])
+        #
+        return dict_radius_avp_codes
+    #
     else:
         print('error: invalid filename')
 
@@ -145,4 +159,5 @@ def build_dict_from_avp_spec_val(registrylist):
                     if m:
                         subd[int(m.group(), 16)] = name.text
     return d
+
 
