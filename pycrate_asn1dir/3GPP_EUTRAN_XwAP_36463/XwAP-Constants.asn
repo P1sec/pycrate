@@ -43,7 +43,10 @@ id-eNBInitiatedWTRelease					ProcedureCode ::= 9
 id-wTInitiatedWTRelease						ProcedureCode ::= 10
 id-wTAssociationConfirmation				ProcedureCode ::= 11
 id-privateMessage							ProcedureCode ::= 12
-
+id-lWIPAdditionPreparation					ProcedureCode ::= 13
+id-eNBInitiatedLWIPModification				ProcedureCode ::= 14
+id-eNBInitiatedLWIPRelease					ProcedureCode ::= 15
+id-wTInitiatedLWIPRelease					ProcedureCode ::= 16
 
 -- **************************************************************
 --
@@ -69,6 +72,7 @@ maxnoofErrors								INTEGER ::= 256
 maxnoofFailedMeasObjects					INTEGER ::= 32
 maxnoofMobilitySetItems						INTEGER ::= 1024
 maxnoofWLANIdentifierItems					INTEGER ::= 4096
+maxnoofeNBNeighbours							INTEGER ::= 256
 
 
 -- **************************************************************
@@ -140,5 +144,16 @@ id-E-RABs-Confirmed-ToBeModified-ModReqdItem			ProtocolIE-ID ::= 59
 id-wLANBandInformation									ProtocolIE-ID ::= 60
 id-WLANIdentifiersToDeleteExtension-Item 				ProtocolIE-ID ::= 61
 id-WLANIdentifiersToDeleteExtension-List 				ProtocolIE-ID ::= 62
+id-TimeToWait											ProtocolIE-ID ::= 63
+id-UE-ContextKeptIndicator								ProtocolIE-ID ::= 64
+id-DRB-Identity											ProtocolIE-ID ::= 65
+id-LWA-WLAN-AC											ProtocolIE-ID ::= 66
+id-eNBNeighbour-List									ProtocolIE-ID ::= 67
+id-eNBNeighbour-Item									ProtocolIE-ID ::= 68
+id-LWIP-SeGWSecurityInfo								ProtocolIE-ID ::= 69
+id-eNBGTPtunnelEndpoint									ProtocolIE-ID ::= 70
+id-LWIP-SeGWGTPtunnelEndpoint							ProtocolIE-ID ::= 71
+id-WLANUsage											ProtocolIE-ID ::= 72
+id-WT-MAC-Address										ProtocolIE-ID ::= 73
 
 END

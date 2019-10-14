@@ -1,7 +1,0 @@
-S1AP-CommonDataTypes.asn
-S1AP-Constants.asn
-S1AP-Containers.asn
-S1AP-IEs.asn
-S1AP-PDU-Contents.asn
-S1AP-PDU-Descriptions.asn
-SonTransfer-IEs.asn

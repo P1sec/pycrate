@@ -7,7 +7,7 @@ import codecs
 import re
 
 dirpath = './'
-path = dirpath + '36355-d10.txt'
+path = dirpath + '36355-f50.txt'
 
 # it is not possible to catch modules' name as an OID is declared on multiple lines
 module_def = re.compile('DEFINITIONS\s{1,}[A-Z\-\s]{0,}::=')

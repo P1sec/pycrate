@@ -1,3 +1,4 @@
+-- ASN1START
 -- **************************************************************
 --
 -- Elementary Procedure definitions
@@ -74,7 +75,51 @@ FROM X2AP-CommonDataTypes
 	X2RemovalResponse,
 	RetrieveUEContextRequest,
 	RetrieveUEContextResponse,
-	RetrieveUEContextFailure
+	RetrieveUEContextFailure,
+	SgNBAdditionRequest,
+	SgNBAdditionRequestAcknowledge,
+	SgNBAdditionRequestReject,
+	SgNBReconfigurationComplete,
+	SgNBModificationRequest,
+	SgNBModificationRequestAcknowledge,
+	SgNBModificationRequestReject,
+	SgNBModificationRequired,
+	SgNBModificationConfirm,
+	SgNBModificationRefuse,
+	SgNBReleaseRequest,
+	SgNBReleaseRequestAcknowledge,
+	SgNBReleaseRequestReject,
+	SgNBReleaseRequired,
+	SgNBReleaseConfirm,
+	SgNBCounterCheckRequest,
+	SgNBChangeRequired,
+	SgNBChangeConfirm,
+	SgNBChangeRefuse,
+	RRCTransfer,
+	ENDCX2SetupRequest,
+	ENDCX2SetupResponse,
+	ENDCX2SetupFailure,
+	ENDCConfigurationUpdate,
+	ENDCConfigurationUpdateAcknowledge,
+	ENDCConfigurationUpdateFailure,
+	SecondaryRATDataUsageReport,
+	ENDCCellActivationRequest,
+	ENDCCellActivationResponse,
+	ENDCCellActivationFailure,
+	ENDCPartialResetRequired,
+	ENDCPartialResetConfirm,
+	EUTRANRCellResourceCoordinationRequest,
+	EUTRANRCellResourceCoordinationResponse,
+	SgNBActivityNotification,
+	ENDCX2RemovalRequest,
+	ENDCX2RemovalResponse,
+	ENDCX2RemovalFailure,
+	DataForwardingAddressIndication,
+	GNBStatusIndication,
+	ENDCConfigurationTransfer,
+	DeactivateTrace,
+	TraceStart
+
 
 FROM X2AP-PDU-Contents
 
@@ -106,7 +151,31 @@ FROM X2AP-PDU-Contents
 	id-seNBinitiatedSeNBRelease,
 	id-seNBCounterCheck,
 	id-x2Removal,
-	id-retrieveUEContext
+	id-retrieveUEContext,
+	id-sgNBAdditionPreparation,
+	id-sgNBReconfigurationCompletion,
+	id-meNBinitiatedSgNBModificationPreparation,
+	id-sgNBinitiatedSgNBModification,
+	id-meNBinitiatedSgNBRelease,
+	id-sgNBinitiatedSgNBRelease,
+	id-sgNBChange,
+	id-sgNBCounterCheck,
+	id-rRCTransfer,
+	id-endcX2Setup,
+	id-endcConfigurationUpdate,
+	id-secondaryRATDataUsageReport,
+	id-endcCellActivation,
+	id-endcPartialReset,
+	id-eUTRANRCellResourceCoordination,
+	id-SgNBActivityNotification,
+	id-endcX2Removal,
+	id-dataForwardingAddressIndication,
+	id-gNBStatusIndication,
+	id-endcConfigurationTransfer,
+	id-deactivateTrace,
+	id-traceStart
+
+
 
 FROM X2AP-Constants;
 
@@ -187,7 +256,19 @@ X2AP-ELEMENTARY-PROCEDURES-CLASS-1 X2AP-ELEMENTARY-PROCEDURE ::= {
 	seNBinitiatedSeNBModification							|
 	seNBinitiatedSeNBRelease								|
 	x2Removal												|
-	retrieveUEContext,
+	retrieveUEContext										|
+	sgNBAdditionPreparation									|
+	meNBinitiatedSgNBModificationPreparation					|
+	sgNBinitiatedSgNBModification							|
+	meNBinitiatedSgNBRelease									|
+	sgNBinitiatedSgNBRelease									|
+	sgNBChange												|
+	endcX2Setup												|
+	endcConfigurationUpdate									|
+	endcCellActivation										|
+	endcPartialReset											|
+	eUTRANRCellResourceCoordination							|
+	endcX2Removal											,
 	...
 }
 
@@ -205,7 +286,17 @@ X2AP-ELEMENTARY-PROCEDURES-CLASS-2 X2AP-ELEMENTARY-PROCEDURE ::= {
 	x2APMessageTransfer						|
 	seNBReconfigurationCompletion			|
 	meNBinitiatedSeNBRelease				|
-	seNBCounterCheck,
+	seNBCounterCheck						|
+	sgNBReconfigurationCompletion			|
+	sgNBCounterCheck							|
+	rRCTransfer								|
+	secondaryRATDataUsageReport				|
+	sgNBActivityNotification					|
+	dataForwardingAddressIndication			|
+	gNBStatusIndication						|
+	endcConfigurationTransfer				|
+	deactivateTrace							|
+	traceStart								,
 	...
 
 }
@@ -402,6 +493,161 @@ retrieveUEContext	X2AP-ELEMENTARY-PROCEDURE ::= {
 	UNSUCCESSFUL OUTCOME	RetrieveUEContextFailure
 	PROCEDURE CODE			id-retrieveUEContext
 	CRITICALITY				reject
+}
+
+sgNBAdditionPreparation		X2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		SgNBAdditionRequest
+	SUCCESSFUL OUTCOME		SgNBAdditionRequestAcknowledge
+	UNSUCCESSFUL OUTCOME	SgNBAdditionRequestReject
+	PROCEDURE CODE			id-sgNBAdditionPreparation
+	CRITICALITY				reject
+}
+
+sgNBReconfigurationCompletion	X2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		SgNBReconfigurationComplete
+	PROCEDURE CODE			id-sgNBReconfigurationCompletion
+	CRITICALITY				ignore
+}
+
+meNBinitiatedSgNBModificationPreparation	X2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		SgNBModificationRequest
+	SUCCESSFUL OUTCOME		SgNBModificationRequestAcknowledge
+	UNSUCCESSFUL OUTCOME	SgNBModificationRequestReject
+	PROCEDURE CODE			id-meNBinitiatedSgNBModificationPreparation
+	CRITICALITY				reject
+}
+
+sgNBinitiatedSgNBModification		X2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		SgNBModificationRequired
+	SUCCESSFUL OUTCOME		SgNBModificationConfirm
+	UNSUCCESSFUL OUTCOME	SgNBModificationRefuse
+	PROCEDURE CODE			id-sgNBinitiatedSgNBModification	
+	CRITICALITY				reject
+}
+
+meNBinitiatedSgNBRelease	X2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		SgNBReleaseRequest
+	SUCCESSFUL OUTCOME		SgNBReleaseRequestAcknowledge
+	UNSUCCESSFUL OUTCOME	SgNBReleaseRequestReject
+	PROCEDURE CODE			id-meNBinitiatedSgNBRelease
+	CRITICALITY				ignore
+}
+
+sgNBinitiatedSgNBRelease	X2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		SgNBReleaseRequired
+	SUCCESSFUL OUTCOME		SgNBReleaseConfirm
+	PROCEDURE CODE			id-sgNBinitiatedSgNBRelease
+	CRITICALITY				reject
+}
+
+sgNBCounterCheck	X2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		SgNBCounterCheckRequest
+	PROCEDURE CODE			id-sgNBCounterCheck
+	CRITICALITY				reject
+}
+
+sgNBChange	X2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		SgNBChangeRequired
+	SUCCESSFUL OUTCOME		SgNBChangeConfirm
+	UNSUCCESSFUL OUTCOME	SgNBChangeRefuse
+	PROCEDURE CODE			id-sgNBChange
+	CRITICALITY				reject
+}
+
+rRCTransfer	X2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		RRCTransfer
+	PROCEDURE CODE			id-rRCTransfer
+	CRITICALITY				reject
+}
+
+endcX2Setup X2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ENDCX2SetupRequest
+	SUCCESSFUL OUTCOME		ENDCX2SetupResponse
+	UNSUCCESSFUL OUTCOME	ENDCX2SetupFailure
+	PROCEDURE CODE			id-endcX2Setup
+	CRITICALITY				reject
+}
+
+
+endcConfigurationUpdate		X2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ENDCConfigurationUpdate
+	SUCCESSFUL OUTCOME		ENDCConfigurationUpdateAcknowledge
+	UNSUCCESSFUL OUTCOME	ENDCConfigurationUpdateFailure
+	PROCEDURE CODE			id-endcConfigurationUpdate
+	CRITICALITY				reject
+}
+
+secondaryRATDataUsageReport	X2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		SecondaryRATDataUsageReport
+	PROCEDURE CODE			id-secondaryRATDataUsageReport
+	CRITICALITY				reject
+}
+
+endcCellActivation	X2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ENDCCellActivationRequest
+	SUCCESSFUL OUTCOME		ENDCCellActivationResponse
+	UNSUCCESSFUL OUTCOME	ENDCCellActivationFailure
+	PROCEDURE CODE			id-endcCellActivation
+	CRITICALITY				reject
+}
+
+endcPartialReset	X2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ENDCPartialResetRequired
+	SUCCESSFUL OUTCOME		ENDCPartialResetConfirm
+	PROCEDURE CODE			id-endcPartialReset
+	CRITICALITY				reject
+}
+
+eUTRANRCellResourceCoordination X2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		EUTRANRCellResourceCoordinationRequest
+	SUCCESSFUL OUTCOME		EUTRANRCellResourceCoordinationResponse
+	PROCEDURE CODE			id-eUTRANRCellResourceCoordination
+	CRITICALITY				reject
+}
+
+sgNBActivityNotification 	X2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		SgNBActivityNotification
+	PROCEDURE CODE			id-SgNBActivityNotification
+	CRITICALITY				reject
+}
+
+
+endcX2Removal	X2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ENDCX2RemovalRequest
+	SUCCESSFUL OUTCOME		ENDCX2RemovalResponse
+	UNSUCCESSFUL OUTCOME	ENDCX2RemovalFailure
+	PROCEDURE CODE			id-endcX2Removal
+	CRITICALITY				reject
+}
+
+dataForwardingAddressIndication	X2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		DataForwardingAddressIndication
+	PROCEDURE CODE			id-dataForwardingAddressIndication
+	CRITICALITY				ignore
+}
+
+gNBStatusIndication		X2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		GNBStatusIndication
+	PROCEDURE CODE			id-gNBStatusIndication
+	CRITICALITY				ignore
+}
+
+endcConfigurationTransfer	X2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ENDCConfigurationTransfer
+	PROCEDURE CODE			id-endcConfigurationTransfer
+	CRITICALITY				ignore
+}
+
+deactivateTrace X2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		DeactivateTrace
+	PROCEDURE CODE			id-deactivateTrace
+	CRITICALITY				ignore
+}
+
+traceStart X2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		TraceStart
+	PROCEDURE CODE			id-traceStart
+	CRITICALITY				ignore
 }
 
 END

@@ -57,7 +57,7 @@ maxnoofCellsforMBMS							INTEGER ::= 4096
 
 -- **************************************************************
 --
--- IEs
+-- Ies
 --
 -- **************************************************************
 
@@ -104,5 +104,10 @@ id-Active-MBMS-Session-List													ProtocolIE-ID ::= 42
 id-MBMS-Suspension-Notification-List 										ProtocolIE-ID ::= 43
 id-MBMS-Suspension-Notification-Item										ProtocolIE-ID ::= 44
 id-SC-PTM-Information														ProtocolIE-ID ::= 45
+id-Modification-PeriodExtended												ProtocolIE-ID ::= 46
+id-Repetition-PeriodExtended												ProtocolIE-ID ::= 47
+id-MCH-Scheduling-PeriodExtended2											ProtocolIE-ID ::= 48
+id-Subcarrier-SpacingMBMS													ProtocolIE-ID ::= 49
+id-SubframeAllocationExtended												ProtocolIE-ID ::= 50
 
 END

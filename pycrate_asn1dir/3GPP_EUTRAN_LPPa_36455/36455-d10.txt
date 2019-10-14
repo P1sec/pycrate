@@ -1,1973 +1,0 @@
-﻿3GPP TS 36.455 V13.1.0 (2016-03)
-Technical Specification
-3rd Generation Partnership Project;
-Technical Specification Group Radio Access Network;
-Evolved Universal Terrestrial Radio Access (E-UTRA);
-LTE Positioning Protocol A (LPPa)
-(Release 13)
-
-	
-
-The present document has been developed within the 3rd Generation Partnership Project (3GPP TM) and may be further elaborated for the purposes of 3GPP.
-The present document has not been subject to any approval process by the 3GPP Organizational Partners and shall not be implemented.
-This Specification is provided for future development work within 3GPP only. The Organizational Partners accept no liability for any use of this Specification.
-Specifications and reports for implementation of the 3GPP TM system should be obtained via the 3GPP Organizational Partners' Publications Offices.
-
-
-
-
-Keywords
-LTE, radio, positioning
-
-3GPP
-Postal address
-
-3GPP support office address
-650 Route des Lucioles - Sophia Antipolis
-Valbonne - FRANCE
-Tel.: +33 4 92 94 42 00 Fax: +33 4 93 65 47 16
-Internet
-http://www.3gpp.org
-
-Copyright Notification
-No part may be reproduced except as authorized by written permission.
-The copyright and the foregoing restriction extend to reproduction in all media.
-
-© 2016, 3GPP Organizational Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, TTA, TTC).
-All rights reserved.
-
-UMTS™ is a Trade Mark of ETSI registered for the benefit of its members
-3GPP™ is a Trade Mark of ETSI registered for the benefit of its Members and of the 3GPP Organizational Partners
-LTE™ is a Trade Mark of ETSI registered for the benefit of its Members and of the 3GPP Organizational Partners
-GSM® and the GSM logo are registered and owned by the GSM Association
-
-Contents
-Foreword	5
-1	Scope	6
-2	References	6
-3	Definitions, symbols and abbreviations	6
-3.1	Definitions	6
-3.2	Symbols	7
-3.3	Abbreviations	7
-4	General	7
-4.1	Procedure specification principles	7
-4.2	Forwards and backwards compatibility	8
-4.3	Specification notations	8
-5	LPPa services	8
-5.1	LPPa procedure modules	8
-5.2	Parallel transactions	8
-6	Services expected from lower layer	9
-7	Functions of LPPa	9
-8	LPPa procedures	9
-8.1	Elementary procedures	9
-8.2	Location Information Transfer Procedures	10
-8.2.1	E-CID Measurement Initiation	10
-8.2.1.1	General	10
-8.2.1.2	Successful Operation	10
-8.2.1.3	Unsuccessful Operation	11
-8.2.1.4	Abnormal Conditions	11
-8.2.2	E-CID Measurement Failure Indication	11
-8.2.2.1	General	11
-8.2.2.2	Successful Operation	11
-8.2.2.3	Unsuccessful Operation	11
-8.2.2.4	Abnormal Conditions	11
-8.2.3	E-CID Measurement Report	12
-8.2.3.1	General	12
-8.2.3.2	Successful Operation	12
-8.2.3.3	Unsuccessful Operation	12
-8.2.3.4	Abnormal Conditions	12
-8.2.4	E-CID Measurement Termination	12
-8.2.4.1	General	12
-8.2.4.2	Successful Operation	13
-8.2.4.3	Unsuccessful Operation	13
-8.2.4.4	Abnormal Conditions	13
-8.2.5	OTDOA Information Exchange	13
-8.2.5.1	General	13
-8.2.5.2	Successful Operation	13
-8.2.5.3	Unsuccessful Operation	14
-8.2.5.4	Abnormal Conditions	14
-8.2.6	UTDOA Information Exchange	14
-8.2.6.1	General	14
-8.2.6.2	Successful Operation	14
-8.2.6.3	Unsuccessful Operation	15
-8.2.6.4	Abnormal Conditions	15
-8.2.7	UTDOA Information Update	15
-8.2.7.1	General	15
-8.2.7.2	Successful Operation	15
-8.2.7.3	Unsuccessful Operation	15
-8.2.7.4	Abnormal Conditions	16
-8.3	Management Procedures	16
-8.3.1	Error Indication	16
-8.3.1.1	General	16
-8.3.1.2	Successful Operation	16
-8.3.1.3	Abnormal Conditions	16
-9	Elements for LPPa Communication	16
-9.0	General	16
-9.1	Message Functional Definition and Content	17
-9.1.1	Messages for Location Information Transfer Procedures	17
-9.1.1.1	E-CID MEASUREMENT INITIATION REQUEST	17
-9.1.1.2	E-CID MEASUREMENT INITIATION RESPONSE	17
-9.1.1.3	E-CID MEASUREMENT INITIATION FAILURE	18
-9.1.1.4	E-CID MEASUREMENT FAILURE INDICATION	18
-9.1.1.5	E-CID MEASUREMENT REPORT	18
-9.1.1.6	E-CID MEASUREMENT TERMINATION COMMAND	19
-9.1.1.7	OTDOA INFORMATION REQUEST	19
-9.1.1.8	OTDOA INFORMATION RESPONSE	19
-9.1.1.9	OTDOA INFORMATION FAILURE	20
-9.1.1.10	UTDOA INFORMATION REQUEST	20
-9.1.1.11	UTDOA INFORMATION RESPONSE	20
-9.1.1.12	UTDOA INFORMATION FAILURE	20
-9.1.1.13	UTDOA INFORMATION UPDATE	21
-9.1.2	Messages for Management Procedures	21
-9.1.2.1	ERROR INDICATION	21
-9.2	Information Element definitions	21
-9.2.0	General	21
-9.2.1	Cause	21
-9.2.2	Criticality Diagnostics	23
-9.2.3	Message Type	23
-9.2.4	LPPa Transaction ID	24
-9.2.5	E-CID Measurement Result	24
-9.2.6	ECGI	25
-9.2.7	OTDOA Cell Information	25
-9.2.8	E-UTRAN Access Point Position	26
-9.2.9	PRS Muting Configuration	27
-9.2.10	Requested SRS Transmission Characteristics	28
-9.2.11	UL Configuration	28
-9.2.12	Cell Portion ID	30
-9.2.13	Inter-RAT Measurement Result	30
-9.3	Message and Information Element Abstract Syntax (with ASN.1)	32
-9.3.1	General	32
-9.3.2	Usage of Private Message Mechanism for Non-standard Use	32
-9.3.3	Elementary Procedure Definitions	32
-9.3.4	PDU Definitions	37
-9.3.5	Information Element definitions	44
-9.3.6	Common definitions	53
-9.3.7	Constant definitions	54
-9.3.8	Container definitions	56
-9.4	Message transfer syntax	60
-9.5	Timers	60
-10	Handling of unknown, unforeseen and erroneous protocol data	60
-Annex A (informative):	Change History	61
-
-
-Foreword
-This Technical Specification has been produced by the 3rd Generation Partnership Project (3GPP).
-The contents of the present document are subject to continuing work within the TSG and may change following formal TSG approval. Should the TSG modify the contents of the present document, it will be re-released by the TSG with an identifying change of release date and an increase in version number as follows:
-Version x.y.z
-where:
-x	the first digit:
-1	presented to TSG for information;
-2	presented to TSG for approval;
-3	or greater indicates TSG approved document under change control.
-y	the second digit is incremented for all changes of substance, i.e. technical enhancements, corrections, updates, etc.
-z	the third digit is incremented when editorial only changes have been incorporated in the document.
-
-1	Scope
-The present document specifies the control plane radio network layer signalling procedures between eNB and E-SMLC. LPPa supports the concerned functions by signalling procedures defined in this document. LPPa is developed in accordance with the general principles stated in TS 36.401 [2].
-2	References
-The following documents contain provisions which, through reference in this text, constitute provisions of the present document.
--	References are either specific (identified by date of publication, edition number, version number, etc.) or nonspecific.
--	For a specific reference, subsequent revisions do not apply.
--	For a non-specific reference, the latest version applies. In the case of a reference to a 3GPP document (including a GSM document), a non-specific reference implicitly refers to the latest version of that document in the same Release as the present document.
-[1]	3GPP TR 21.905: "Vocabulary for 3GPP Specifications".
-[2]	3GPP TS 36.401:  "Evolved Universal Terrestrial Radio Access Network (E-UTRAN); Architecture Description".
-[3]	3GPP TS 36.413:  "Evolved Universal Terrestrial Radio Access Network (E-UTRAN); S1 Application Protocol (S1AP)".
-[4]	ITU-T Recommendation X.691 (2002-07): "Information technology - ASN.1 encoding rules - Specification of Packed Encoding Rules (PER) ".
-[5]	3GPP TS 36.104:  "Evolved Universal Terrestrial Radio Access Network (E-UTRAN); Base Station (BS) radio transmission and reception".
-[6]	3GPP TS 36.211:  "Evolved Universal Terrestrial Radio Access Network (E-UTRAN); Physical Channels and Modulation".
-[7]	3GPP TS 23.032:  "Technical Specification Group Services and System Aspects; Universal Geographical Area Description (GAD)".
-[8] 	3GPP TS 36.133:  "Evolved Universal Terrestrial Radio Access (E-UTRA); Requirements for support of radio resource management".
-[9]	3GPP TR 25.921 (version.7.0.0): "Guidelines and principles for protocol description and error handling".
-3	Definitions, symbols and abbreviations
-3.1	Definitions
-For the purposes of the present document, the terms and definitions given in TR 21.905 [1] and the following apply. A term defined in the present document takes precedence over the definition of the same term, if any, in TR 21.905 [1].
-Elementary Procedure: LPPa protocol consists of Elementary Procedures (EPs). An LPPa Elementary Procedure is a unit of interaction between the eNB and the E-SMLC. An EP consists of an initiating message and possibly a response message. Two kinds of EPs are used:
--	Class 1: Elementary Procedures with response (success or failure),
--	Class 2: Elementary Procedures without response.
-Cell Portion: A geographical part of a cell. A cell portion is semi-static, and identical for both the UL and the DL. Within a cell, a cell portion is uniquely identified by its Cell Portion ID.
-3.2	Symbols
-For the purposes of the present document, the following symbols apply:
-<symbol>	<Explanation>
-
-3.3	Abbreviations
-For the purposes of the present document, the abbreviations given in TR 21.905 [1] and the following apply. An abbreviation defined in the present document takes precedence over the definition of the same abbreviation, if any, in TR 21.905 [1].
-CID	Cell-ID (positioning method)
-DL	Downlink
-E-CID	Enhanced Cell-ID (positioning method)
-eNB	E-UTRAN NodeB
-EP	Elementary Procedure
-EPC	Evolved Packet Core
-E-SMLC	Evolved Serving Mobile Location Centre
-E-UTRAN	Evolved UTRAN
-IE	Information Element
-LCS	LoCation Services
-LPP	LTE Positioning Protocol
-LPPa	LTE Positioning Protocol Annex
-MME	Mobility Management Entity
-NW	Network
-OTDOA	Observed Time Difference of Arrival
-S1AP	S1 Application Protocol
-SRS	Sounding Reference Signal
-UE	User Equipment
-UL	Uplink
-UTDOA	Uplink Time Difference of Arrival
-4	General
-4.1	Procedure specification principles
-The principle for specifying the procedure logic is to specify the functional behaviour of the terminating eNB exactly and completely. Any rule that specifies the behaviour of the originating eNB shall be possible to be verified with information that is visible within the system.
-The following specification principles have been applied for the procedure text in clause 8:
--	The procedure text discriminates between:
-1)	Functionality which "shall" be executed
-	The procedure text indicates that the receiving node "shall" perform a certain function Y under a certain condition. If the receiving node supports procedure X but cannot perform functionality Y requested in the initiating message of a Class 1 EP, the receiving node shall respond with the message used to report unsuccessful outcome for this procedure, containing an appropriate cause value.
-2)	Functionality which "shall, if supported" be executed
-	The procedure text indicates that the receiving node "shall, if supported," perform a certain function Y under a certain condition. If the receiving node supports procedure X, but does not support functionality Y, the receiving node shall proceed with the execution of the EP, possibly informing the requesting node about the not supported functionality.
--	Any required inclusion of an optional IE in a response message is explicitly indicated in the procedure text. If the procedure text does not explicitly indicate that an optional IE shall be included in a response message, the optional IE shall not be included. For requirements on including Criticality Diagnostics IE, see section 10. 
-4.2	Forwards and backwards compatibility
-The forwards and backwards compatibility of the protocol is assured by a mechanism where all current and future messages, and IEs or groups of related IEs, include ID and criticality fields that are coded in a standard format that will not be changed in the future. These parts can always be decoded regardless of the standard version.
-4.3	Specification notations
-For the purposes of the present document, the following notations apply:
-Procedure	When referring to an elementary procedure in the specification the Procedure Name is written with the first letters in each word in upper case characters followed by the word "procedure", e.g. Handover Preparation procedure.
-Message	When referring to a message in the specification the MESSAGE NAME is written with all letters in upper case characters followed by the word "message", e.g. ERROR INDICATION message.
-IE	When referring to an information element (IE) in the specification the Information Element Name is written with the first letters in each word in upper case characters and all letters in Italic font followed by the abbreviation "IE", e.g. Cause IE.
-Value of an IE	When referring to the value of an information element (IE) in the specification the "Value" is written as it is specified in sub clause 9.2 enclosed by quotation marks, e.g. "Value".
-5	LPPa services
-The present clause describes the services an eNB offers to the E-SMLC.
-5.1	LPPa procedure modules
-The procedures are divided into two modules as follows:
-1.	LPPa Location Information Transfer Procedures;
-2.	LPPa Management Procedures;
-The LPPa Location Information Transfer Procedures module contains procedures used to handle the transfer of positioning related information between eNB and E-SMLC.
-The Management Procedures module contains procedures that are not related specifically to positioning, i.e. error handling. 
-5.2	Parallel transactions
-Unless explicitly indicated in the procedure specification, at any instance in time one protocol peer may have more than one ongoing LPPa procedure.
-6	Services expected from lower layer
-Within E-UTRAN, LPPa protocol uses the services provided by the S1AP protocol. An LPPa message is carried inside an S1AP message.
-S1AP signalling is described in TS 36.413 [3].
-7	Functions of LPPa
-The LPPa protocol provides the following functions:
--	E-CID Location Information Transfer. This function allows the eNB to exchange location information with the E-SMLC for the purpose of E-CID positioning.
--	OTDOA Information Transfer. This function allows the eNB to exchange information with the E-SMLC for the purpose of OTDOA positioning.
--	UTDOA Information Transfer. This function allows the eNB to exchange information with the E-SMLC for the purpose of supporting UTDOA.
--	Reporting of General Error Situations. This function allows reporting of general error situations, for which function specific error messages have not been defined.
-The mapping between the above functions and LPPa EPs is shown in the table below.
-Table 7-1: Mapping between LPPa functions and LPPa EPs
-FunctionElementary Procedure(s)E-CID Location Information Transfera) E-CID Measurement Initiation
-b) E-CID Measurement Failure Indication
-c)  E-CID Measurement Report
-d) E-CID Measurement TerminationOTDOA Information TransferOTDOA Information ExchangeUTDOA Information Transfera) UTDOA Information Exchange
-b) UTDOA Information UpdateReporting of General Error SituationsError Indication	
-8	LPPa procedures
-8.1	Elementary procedures
-In the following tables, all EPs are divided into Class 1 and Class 2 EPs.
-Table 8.1-1: Class 1 Elementary Procedures
-Elementary ProcedureInitiating MessageSuccessful OutcomeUnsuccessful OutcomeResponse messageResponse messageE-CID Measurement InitiationE-CID MEASUREMENT INITIATION REQUESTE-CID MEASUREMENT INITIATION RESPONSEE-CID MEASUREMENT INITIATION FAILUREOTDOA Information ExchangeOTDOA INFORMATION REQUESTOTDOA INFORMATION RESPONSEOTDOA INFORMATION FAILUREUTDOA Information ExchangeUTDOA INFORMATION REQUESTUTDOA INFORMATION RESPONSEUTDOA INFORMATION FAILURE
-Table 8.1-2: Class 2 Elementary Procedures
-Elementary ProcedureInitiating MessageE-CID Measurement Failure IndicationE-CID MEASUREMENT FAILURE INDICATIONE-CID Measurement ReportE-CID MEASUREMENT REPORTE-CID Measurement TerminationE-CID MEASUREMENT TERMINATION COMMANDUTDOA Information UpdateUTDOA INFORMATION UPDATEError IndicationERROR INDICATION
-8.2	Location Information Transfer Procedures
-8.2.1	E-CID Measurement Initiation
-8.2.1.1	General
-The purpose of E-CID Measurement Initiation procedure is to allow the E-SMLC to request the eNB to report E-CID measurements used by E-SMLC to compute the location of the UE.
-8.2.1.2	Successful Operation
-
-Figure 8.2.1.2-1: E-CID Measurement Initiation procedure, successful operation
-The E-SMLC initiates the procedure by sending an E-CID MEASUREMENT INITIATION REQUEST message. If the eNB is able to initiate the requested E-CID measurements, it shall reply with the E-CID MEASUREMENT INITIATION RESPONSE message.
-The Measured Results IE shall be included in the E-CID Measurement Result IE of the E-CID MEASUREMENT INITIATION RESPONSE message when measurement results other than the "Cell-ID" have been requested.
-If the Report Characteristics IE is set to "OnDemand", the eNB shall return the result of the measurement in the E-CID MEASUREMENT INITIATION RESPONSE message including, if available, the E-UTRAN Access Point Position IE in the E-CID Measurement Result IE, and the E-SMLC shall consider that the E-CID measurements for the UE has been terminated by the eNB. If available, the eNB shall include the Cell Portion ID IE in the E-CID MEASUREMENT INITIATION RESPONSE message. Upon reception of the Cell Portion ID IE, the E-SMLC may use the value as the cell portion for the measurement. If the Report Characteristics IE is set to "OnDemand" and the Inter-RAT Measurement Quantities IE is included in the E-CID MEASUREMENT INITIATION REQUEST message, the eNB shall, if supported, provide the corresponding measurements, if available in the eNB, in the Inter-RAT Measurement Result IE in E-CID MEASUREMENT INITIATION RESPONSE message.
-If the Report Characteristics IE is set to "Periodic", the eNB shall initiate the requested measurements and shall reply with the E-CID MEASUREMENT INITIATION RESPONSE message without including either the E-CID Measurement Result IE or the Cell Portion ID IE in this message. The eNB shall then periodically initiate the E-CID Measurement Report procedure for the measurements, with the requested reporting periodicity.
-8.2.1.3	Unsuccessful Operation
-
-Figure 8.2.1.3-1: E-CID Measurement Initiation procedure, unsuccessful operation
-If the eNB is not able to initiate at least one of the requested E-CID measurements, the eNB shall respond with an E-CID MEASUREMENT INITIATION FAILURE message.
-8.2.1.4	Abnormal Conditions
-Void
-8.2.2	E-CID Measurement Failure Indication
-8.2.2.1	General
-The purpose of the E-CID Measurement Failure Indication procedure is for the eNB to notify the E-SMLC that the E-CID measurements previously requested with the E-CID Measurement Initiation procedure can no longer be reported.
-8.2.2.2	Successful Operation
-
-Figure 8.2.2.2-1: E-CID Measurement Failure Indication, successful operation
-Upon reception of the E-CID MEASUREMENT FAILURE INDICATION message, the E-SMLC shall consider that the E-CID measurements for the UE have been terminated by the eNB.
-8.2.2.3	Unsuccessful Operation
-Not applicable.
-8.2.2.4	Abnormal Conditions
-Void.
-8.2.3	E-CID Measurement Report
-8.2.3.1	General
-The purpose of E-CID Measurement Report procedure is for the eNB to provide the E-CID measurements for the UE to the E-SMLC.
-8.2.3.2	Successful Operation
-
-Figure 8.2.3.2-1: E-CID Measurement Report procedure, successful operation
-The eNB initiates the procedure by sending an E-CID MEASUREMENT REPORT message. The E-CID MEASUREMENT REPORT message contains the E-CID measurement results according to the measurement configuration in the respective E-CID MEASUREMENT INITIATION REQUEST message.
-The Measured Results IE shall be included in the E-CID Measurement Result IE of the E-CID MEASUREMENT REPORT message when measurement results other than the "Cell-ID" have been requested.
-If available, the eNB shall include the E-UTRAN Access Point Position IE which is the configured estimated serving antenna position in the E-CID Measurement Result IE within the E-CID MEASUREMENT REPORT message. Upon reception of this E-UTRAN Access Point Position IE, the E-SMLC may use the value as the geographical position of the E-UTRAN access point.
-If available, the eNB shall include the Cell Portion ID IE in the E-CID MEASUREMENT REPORT message. Upon reception of the Cell Portion ID IE, the E-SMLC may use the value as the cell portion for the measurement.
-8.2.3.3	Unsuccessful Operation
-Not applicable.
-8.2.3.4	Abnormal Conditions
-Void.
-8.2.4	E-CID Measurement Termination
-8.2.4.1	General
-The purpose of E-CID Measurement Termination procedure is to terminate periodical E-CID measurements for the UE performed by the eNB.
-8.2.4.2	Successful Operation
-
-Figure 8.2.4.2-1: E-CID Measurement Termination procedure, successful operation
-The E-SMLC initiates the procedure by generating an E-CID MEASUREMENT TERMINATION COMMAND message. 
-8.2.4.3	Unsuccessful Operation
-Not applicable.
-8.2.4.4	Abnormal Conditions
-Void.
-8.2.5	OTDOA Information Exchange
-8.2.5.1	General
-The purpose of the OTDOA Information Exchange procedure is to allow the E-SMLC to request the eNB to transfer OTDOA information to the E-SMLC.
-8.2.5.2	Successful Operation
-
-Figure 8.2.5.2-1: OTDOA Information Exchange procedure, successful operation
-The E-SMLC initiates the procedure by sending an OTDOA INFORMATION REQUEST message. The eNB responds with OTDOA INFORMATION RESPONSE message that contains OTDOA information related to the relevant cells.
-8.2.5.3	Unsuccessful Operation
-
-Figure 8.2.5.3-1: OTDOA Information Exchange procedure, unsuccessful operation
-If the eNB does not have any OTDOA information to report, the eNB shall respond with an OTDOA INFORMATION FAILURE message.
-8.2.5.4	Abnormal Conditions
-Void.
-8.2.6	UTDOA Information Exchange
-8.2.6.1	General
-The UTDOA Information Exchange procedure is initiated by the E-SMLC to indicate to the eNB the need to configure the UE to transmit periodic SRS signals and to retrieve the SRS configuration from the eNB.
-8.2.6.2	Successful Operation
-
-Figure 8.2.6.2-1: UTDOA Information Exchange procedure, successful operation
-The E-SMLC initiates the procedure by sending a UTDOA INFORMATION REQUEST message to the eNB. This message may contain the bandwidth and number of SRS transmissions desired. If the E-SMLC requests a number of SRS transmissions, the eNB may take this information into account when configuring SRS transmissions for the UE. The eNB shall reply with the UTDOA INFORMATION RESPONSE message.
-The UTDOA INFORMATION RESPONSE message contains the SRS configuration for the UE. The eNB shall include the deltaSS IE in the UTDOA INFORMATION RESPONSE message whenever SRS sequence hopping is enabled for the requested measurement. If the deltaSS IE is received by the E-SMLC in the UTDOA INFORMATION RESPONSE message, the E-SMLC shall consider that SRS sequence hopping is enabled for that particular measurement.
-8.2.6.3	Unsuccessful Operation
-
-Figure 8.2.6.3-1: UTDOA Information Exchange procedure, unsuccessful operation
-If the eNB is unable to configure any SRS transmissions for the UE, the eNB shall respond with a UTDOA INFORMATION FAILURE message. If a handover of the target UE has been triggered, the eNB shall send a UTDOA INFORMATION FAILURE message with an appropriate cause value.
-8.2.6.4	Abnormal Conditions
-Void.
-8.2.7	UTDOA Information Update
-8.2.7.1	General
-The UTDOA Information Update procedure is sent by the eNB to indicate to the E-SMLC that a change has occurred in the SRS configuration, either due to a change in SRS configuration parameters in one or more cells, or because a cell change has been triggered.
-8.2.7.2	Successful Operation
-
-Figure 8.2.7.2-1: UTDOA Information Update procedure, successful operation
-The eNB initiates the procedure by sending a UTDOA INFORMATION UPDATE message to the E-SMLC. This message contains, in the case of a change in SRS configuration parameters, the SRS configuration information for all cells with SRS configured. The eNB shall include the deltaSS IE in the UTDOA INFORMATION UPDATE message whenever SRS sequence hopping is enabled for the requested measurement. If the deltaSS IE is received by the E-SMLC in the UTDOA INFORMATION UPDATE message, the E-SMLC shall consider that SRS sequence hopping is enabled for that particular measurement.
-8.2.7.3	Unsuccessful Operation
-Not Applicable.
-8.2.7.4	Abnormal Conditions
-Void.
-8.3	Management Procedures
-8.3.1	Error Indication
-8.3.1.1	General
-The Error Indication procedure is initiated by a node to report detected errors in one incoming message, provided they cannot be reported by an appropriate failure message.
-8.3.1.2	Successful Operation
-
-Figure 8.3.1.2-1: Error Indication procedure, E-SMLC originated, successful operation
-
-Figure 8.3.1.2-2: Error Indication procedure, eNB originated, successful operation
-When the conditions defined in clause 10 are fulfilled, the Error Indication procedure is initiated by an ERROR INDICATION message sent from the receiving node.
-The ERROR INDICATION message shall contain at least either the Cause IE or the Criticality Diagnostics IE.
-8.3.1.3	Abnormal Conditions 
-Not applicable.
-9	Elements for LPPa Communication
-9.0	General
-Sub clauses 9.1 and 9.2 describe the structure of the messages and information elements required for the LPPa protocol in tabular format. Sub clause 9.3 provides the corresponding ASN.1 definition. 
-The following attributes are used for the tabular description of the messages and information elements: Presence, Range Criticality and Assigned Criticality. Their definition and use can be found in TS 36.413 [3]. 
-NOTE:	The messages have been defined in accordance to the guidelines specified in TR 25.921 [9].
-9.1	Message Functional Definition and Content
-9.1.1	Messages for Location Information Transfer Procedures
-9.1.1.1	E-CID MEASUREMENT INITIATION REQUEST
-This message is sent by E-SMLC to initiate E-CID measurements.
-Direction: E-SMLC i eNB.
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionCriticalityAssigned CriticalityMessage TypeM9.2.3YESrejectLPPa Transaction IDM9.2.4-E-SMLC Measurement IDMINTEGER(1..15,…)YESrejectReport CharacteristicsMENUMERATED(OnDemand, Periodic,…)YESrejectMeasurement PeriodicityC-ifReportCharacteristicsPeriodicENUMERATED(120ms, 240ms, 480ms, 640ms, 1024ms, 2048ms, 5120ms, 10240ms, 1min, 6min, 12min, 30min, 60min,…)YESrejectMeasurement Quantities1 .. <maxnoMeas>EACHreject>Measurement Quantities ItemMENUMERATED (Cell-ID, Angle of Arrival, Timing Advance Type 1, Timing Advance Type 2, RSRP, RSRQ,…)--Inter-RAT Measurement Quantities0 .. <maxnoMeas>EACHignore>Inter-RAT Measurement Quantities ItemMENUMERATED(GERAN, UTRAN ,…)
-Range boundExplanationmaxnoMeasMaximum no. of measured quantities that can be configured and reported with one message. Value is 63.
-ConditionExplanationifReportCharacteristicsPeriodicThis IE shall be present if the Report Characteristics IE is set to the value “Periodic”.
-9.1.1.2	E-CID MEASUREMENT INITIATION RESPONSE
-This message is sent by eNB to indicate that the requested E-CID measurement is successfully initiated.
-Direction: eNB c E-SMLC.
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionCriticalityAssigned CriticalityMessage TypeM9.2.3YESrejectLPPa Transaction IDM9.2.4-E-SMLC UE Measurement IDMINTEGER(1..15,…)YESrejecteNB UE Measurement IDMINTEGER(1..15,…)YESrejectE-CID Measurement ResultO9.2.5YESignoreCriticality DiagnosticsO9.2.2YESignoreCell Portion IDO9.2.12YESignoreInter-RAT Measurement ResultO9.2.13YESignore
-9.1.1.3	E-CID MEASUREMENT INITIATION FAILURE
-This message is sent by eNB to indicate that the requested E-CID measurement cannot be initiated.
-Direction: eNB D E-SMLC.
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionCriticalityAssigned CriticalityMessage TypeM9.2.3YESrejectLPPa Transaction IDM9.2.4-E-SMLC UE Measurement IDMINTEGER(1..15,…)YESrejectCauseM9.2.1YESignoreCriticality DiagnosticsO9.2.2YESignore
-9.1.1.4	E-CID MEASUREMENT FAILURE INDICATION
-This message is sent by eNB to indicate that the previously requested E-CID measurement can no longer be reported.
-Direction: eNB D E-SMLC.
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionCriticalityAssigned CriticalityMessage TypeM9.2.3YESignoreLPPa Transaction IDM9.2.4-E-SMLC UE Measurement IDMINTEGER(1..15,…)YESrejecteNB UE Measurement IDMINTEGER(1..15,…)YESrejectCauseM9.2.1YESignore
-9.1.1.5	E-CID MEASUREMENT REPORT
-This message is sent by eNB to report the results of the requested E-CID measurement.
-Direction: eNB D E-SMLC.
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionCriticalityAssigned CriticalityMessage TypeM9.2.3YESignoreLPPa Transaction IDM9.2.4-E-SMLC UE Measurement IDMINTEGER(1..15,…)YESrejecteNB UE Measurement IDMINTEGER(1..15,…)YESrejectE-CID Measurement ResultM9.2.5YESignoreCell Portion IDO9.2.12YESignore
-9.1.1.6	E-CID MEASUREMENT TERMINATION COMMAND
-This message is sent by the E-SMLC to terminate the requested E-CID measurement.
-Direction: E-SMLC D eNB.
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionCriticalityAssigned CriticalityMessage TypeM9.2.3YESignoreLPPa Transaction IDM9.2.4-E-SMLC UE Measurement IDMINTEGER(1..15,…)YESrejecteNB UE Measurement IDMINTEGER(1..15,…)YESreject
-9.1.1.7	OTDOA INFORMATION REQUEST
-This message is sent by E-SMLC to request OTDOA information.
-Direction: E-SMLC D eNB.
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionCriticalityAssigned CriticalityMessage TypeM9.2.3YESrejectLPPa Transaction IDM9.2.4-OTDOA Information Type1 .. <maxnoOTDOAtypes>EACHreject>OTDOA Information Item MENUMERATED (pci, cellid, tac, earfcn, prsBandwidth, prsConfigIndex, cpLength, noDlFrames, noAntennaPorts, sFNInitTime, …, e-UTRANAccessPointPosition, prsmutingconfiguration)--
-Range boundExplanationmaxnoOTDOAtypesMaximum no. of OTDOA information types that can be requested and reported with one message. Value is 63.
-9.1.1.8	OTDOA INFORMATION RESPONSE
-This message is sent by eNB to provide OTDOA information.
-Direction: eNB D E-SMLC.
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionCriticalityAssigned CriticalityMessage TypeM9.2.3YESrejectLPPa Transaction IDM9.2.4-OTDOA Cells1 .. <maxCellineNB>Served cells that broadcast PRSGLOBALignore>OTDOA Cell InformationM9.2.7--Criticality DiagnosticsO9.2.2YESignore
-Range boundExplanationmaxCellineNBMaximum no. cells that can be served by an eNB. Value is 256.
-9.1.1.9	OTDOA INFORMATION FAILURE
-This message is sent by eNB to indicate that the OTDOA information cannot be provided.
-Direction: eNB c E-SMLC.
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionCriticalityAssigned CriticalityMessage TypeM9.2.3YESrejectLPPa Transaction IDM9.2.4-CauseM9.2.1YESignoreCriticality DiagnosticsO9.2.2YESignore
-9.1.1.10	UTDOA INFORMATION REQUEST
-This message is sent by the E-SMLC to indicate to the eNB the need to configure the UE to transmit periodic SRS signals for UTDOA positioning.
-Direction: E-SMLC D eNB.
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionCriticalityAssigned CriticalityMessage TypeM9.2.3YESrejectLPPa Transaction IDM9.2.4-Requested SRS Transmission CharacteristicsO9.2.10YESignore
-9.1.1.11	UTDOA INFORMATION RESPONSE
-This message is sent by the eNB to provide the configured SRS information to the E-SMLC.
-Direction: eNB D E-SMLC.
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionCriticalityAssigned CriticalityMessage TypeM9.2.3YESrejectLPPa Transaction IDM9.2.4-UL ConfigurationM9.2.11YESrejectCriticality DiagnosticsO9.2.2YESignore
-9.1.1.12	UTDOA INFORMATION FAILURE
-This message is sent by the eNB to indicate that no SRS transmissions could be configured for the UE for UTDOA positioning.
-Direction: eNB D E-SMLC.
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionCriticalityAssigned CriticalityMessage TypeM9.2.3YESrejectLPPa Transaction IDM9.2.4-CauseM9.2.1YESignoreCriticality DiagnosticsO9.2.2YESignore
-9.1.1.13	UTDOA INFORMATION UPDATE
-This message is sent by the eNB to indicate that the SRS configuration for the UE, for one or more cells, has changed.
-Direction: eNB D E-SMLC.
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionCriticalityAssigned CriticalityMessage TypeM9.2.3YESrejectLPPa Transaction IDM9.2.4-UL ConfigurationO9.2.11YESignore
-9.1.2	Messages for Management Procedures
-9.1.2.1	ERROR INDICATION
-This message is used to indicate that some error has been detected in the eNB or in the E-SMLC.
-Direction: E-SMLC D eNB and eNB   E-SMLC.
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionCriticalityAssigned CriticalityMessage TypeM9.2.3YESignoreLPPa Transaction IDM9.2.4–CauseO9.2.1YESignoreCriticality DiagnosticsO9.2.2YESignore
-9.2	Information Element definitions
-9.2.0	General
-When specifying information elements which are to be represented by bit strings, if not otherwise specifically stated in the semantics description of the concerned IE or elsewhere, the following principle applies with regards to the ordering of bits:
--	The first bit (leftmost bit) contains the most significant bit (MSB);
--	The last bit (rightmost bit) contains the least significant bit (LSB);
--	When importing bit strings from other specifications, the first bit of the bit string contains the first bit of the concerned information.
-9.2.1	Cause
-The purpose of the cause information element is to indicate the reason for a particular event for the whole protocol.
-IE/Group NamePresenceRangeIE Type and ReferenceSemantics DescriptionCHOICE Cause GroupM>Radio Network Layer>>Radio Network Layer Cause MENUMERATED
-(Unspecified, Requested Item not Supported, Requested Item Temporarily not Available,
-...
-)>Protocol>>Protocol CauseMENUMERATED
-(Transfer Syntax Error,
-Abstract Syntax Error (Reject),
-Abstract Syntax Error (Ignore and Notify),
-Message not Compatible with Receiver State,
-Semantic Error,
-Unspecified,
-Abstract Syntax Error (Falsely Constructed Message),...)>Misc>>Miscellaneous CauseMENUMERATED
-(Unspecified,
-...)
-The meaning of the different cause values is described in the following table. In general, "not supported" cause values indicate that the concerned capability is missing. On the other hand, "not available" cause values indicate that the concerned capability is present, but insufficient resources were available to perform the requested action.
-Radio Network Layer causeMeaningUnspecifiedSent when none of the above cause values applies but still the cause is Radio Network Layer relatedRequested Item not SupportedThe eNB does not support the requested measurement object, or cannot provide the requested information item.Requested Item Temporarily not AvailableThe eNB can temporarily not provide the requested measurement object or information item.
-Protocol causeMeaningAbstract Syntax Error (Reject)The received message included an abstract syntax error and the concerned criticality indicated "reject" (see sub clause 10.3)Abstract Syntax Error (Ignore and Notify)The received message included an abstract syntax error and the concerned criticality indicated "ignore and notify" (see sub clause 10.3)Abstract syntax error (falsely constructed message)The received message contained IEs or IE groups in wrong order or with too many occurrences (see sub clause 10.3)Message not Compatible with Receiver StateThe received message was not compatible with the receiver state (see sub clause 10.4)Semantic ErrorThe received message included a semantic error (see sub clause 10.4)Transfer Syntax ErrorThe received message included a transfer syntax error (see sub clause 10.2)UnspecifiedSent when none of the above cause values applies but still the cause is Protocol related
-Miscellaneous causeMeaningUnspecifiedSent when none of the above cause values applies and the cause is not related to any of the categories Radio Network Layer, Transport Network Layer or Protocol.
-9.2.2	Criticality Diagnostics
-The Criticality Diagnostics IE is sent by the eNB or E-SMLC when parts of a received message have not been comprehended or were missing, or if the message contained logical errors. When applicable, it contains information about which IEs were not comprehended or were missing. The conditions for inclusion of the LPPa Transaction ID IE are described in clause 10.
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionProcedure CodeOINTEGER (0..255)Procedure Code is to be used if Criticality Diagnostics is part of Error Indication procedure, and not within the response message of the same procedure that caused the error.Triggering Message OENUMERATED (initiating message, successful outcome, unsuccessful outcome)The Triggering Message is used only if the Criticality Diagnostics is part of Error Indication procedure.Procedure Criticality OENUMERATED (reject, ignore, notify)This Procedure Criticality is used for reporting the Criticality of the Triggering message (Procedure).LPPa Transaction IDO9.2.4Information Element Criticality Diagnostics0 .. <maxNrOfErrors>>IE Criticality MENUMERATED (reject, ignore, notify)The IE Criticality is used for reporting the criticality of the triggering IE. The value "ignore'" shall not be used.>IE IDMINTEGER (0..65535)The IE ID of the not understood or missing IE.>Type Of ErrorMENUMERATED (not understood, missing, …) 
-Range boundExplanationmaxNrOfErrorsMaximum no. of IE errors allowed to be reported with a single message. The value for maxNroOfErrors is 256.
-9.2.3	Message Type
-The Message Type IE uniquely identifies the message being sent. It is mandatory for all messages.
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionProcedure CodeMINTEGER (0..255)Type of MessageMCHOICE (Initiating Message, Successful Outcome, Unsuccessful Outcome, 
-…)
-9.2.4	LPPa Transaction ID
-The LPPa Transaction ID IE is used to associate all the messages belonging to the same procedure. Messages belonging to the same procedure shall use the same LPPa Transaction ID.
-The LPPa Transaction ID is determined by the initiating peer of a procedure.
-The LPPa Transaction ID shall uniquely identify a procedure among all ongoing parallel procedures using the same procedure code, and initiated by the same protocol peer.
-IE/Group NamePresenceRangeIE Type and ReferenceSemantics DescriptionLPPa Transaction ID MINTEGER (0..32767)
-9.2.5	E-CID Measurement Result
-The purpose of the E-CID Measurement Result information element is to provide the E-CID measurement result.
-IE/Group NamePresenceRangeIE Type and ReferenceSemantics DescriptionServing Cell IDMECGI
-9.2.6E-UTRAN Cell Identifier of the serving cellServing Cell TACMOCTET STRING(2)Tracking Area Code of the serving cellE-UTRAN Access Point PositionO9.2.8The configured estimated geographical position of the antenna of the cell.Measured Results0 .. <maxnoMeas>>CHOICE Measured Results ValueM>>Value Angle of ArrivalMINTEGER (0..719)According to mapping in TS 36.133 [8]>>Value Timing Advance Type 1MINTEGER (0..7690)According to mapping in TS 36.133 [8]>>Value Timing Advance Type 2MINTEGER (0..7690)According to mapping in TS 36.133 [8]>>Result RSRP1 .. <maxCellReport>>>>PCIMINTEGER (0..503, …)Physical Cell Identifier of the reported cell>>>EARFCNMINTEGER (0..65535, ..., 65536..262143)Corresponds to NDL for FDD and NDL/UL for TDD in ref. TS 36.104 [5]>>>ECGIOECGI
-9.2.6E-UTRAN Cell Global Identifier of the reported cell>>>Value RSRPMINTEGER(0..97, …)>>Result RSRQ1 . <maxCellReport>>>>PCIMINTEGER (0..503, …)Physical Cell Identifier of the reported cell>>>EARFCNMINTEGER (0..65535, ..., 65536..262143)Corresponds to NDL for FDD and NDL/UL for TDD in ref. TS 36.104 [5]>>>ECGIOECGI
-9.2.6E-UTRAN Cell Global Identifier of the reported cell>>>Value RSRQMINTEGER(0..34, …)
-Range boundExplanationmaxnoMeasMaximum no. of measured quantities that can be configured and reported with one message. Value is 63.maxCellReportMaximum no. of cells that can be reported with one message. Value is 9.
-9.2.6	ECGI
-The E-UTRAN Cell Global Identifier (ECGI) is used to globally identify a cell.
-IE/Group NamePresenceRangeIE Type and ReferenceSemantics DescriptionPLMN identityMOCTET STRING (SIZE (3))PLMN identity
-- digits 0 to 9, encoded 0000 to 1001,
-- 1111 used as filler digit,
-two digits per octet,
-- bits 4 to 1 of octet n encoding digit 2n-1
-- bits 8 to 5 of octet n encoding digit 2n
--The Selected PLMN identity consists of 3 digits from MCC followed by either 
--a filler digit plus 2 digits from MNC (in case of 2 digit MNC) or 
--3 digits from MNC (in case of a 3 digit MNC).E-UTRAN Cell IdentifierMBIT STRING (28)
-9.2.7	OTDOA Cell Information
-This IE contains OTDOA information of a cell.
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionOTDOA Cell Information1 .. <maxnoOTDOAtypes>>CHOICE OTDOA Cell Information ItemM>>PCIMINTEGER (0..503, …)Physical Cell ID>>Cell IDMECGI
-9.2.6>>TACMOCTET STRING(2)Tracking Area Code>>EARFCNMINTEGER (0..65535, ..., 65536..262143)Corresponds to NDL for FDD and NDL/UL for TDD in ref. TS 36.104 [5]>>PRS BandwidthMENUMERATED (bw6, bw15, bw25, bw50, bw75, bw100, ...)Transmission bandwidth of PRS>>PRS Configuration IndexMINTEGER (0..4095, ...)PRS Configuration Index, ref TS 36.211 [6]>>CP LengthMENUMERATED (Normal, Extended,...)Cyclic prefix length of the PRS>>Number of DL FramesMENUMERATED (sf1, sf2, sf4, sf6,…) Number of consecutive downlink subframes NPRS with PRS, ref TS 36.211 [6]>>Number of Antenna PortsMENUMERATED(n1-or-n2, n4,…)Number of used antenna ports, where n1-or-n2 corresponds to 1 or 2 ports, n4 corresponds to 4 ports>>SFN Initialisation TimeMBIT STRING (64)Time in seconds relative to 00:00:00 on 1 January 1900 (calculated as continuous time without leap seconds and traceable to a common time reference) where binary encoding of the integer part is in the first 32 bits and binary encoding of the fraction part in the last 32 bits. The fraction part is expressed with a granularity of 1 /2**32 second.>>E-UTRAN Access Point PositionM9.2.8The configured estimated geographical position of the antenna of the cell.>>PRS Muting ConfigurationM9.2.9The configuration of positioning reference signals muting pattern, when applicable
-Range boundExplanationmaxnoOTDOAtypesMaximum no. of OTDOA information types that can be requested and reported with one message. Value is 63.
-9.2.8	E-UTRAN Access Point Position
-E-UTRAN Access Point Position IE is used to identify the geographical position of an E-UTRAN Access Point. It is expressed as ellipsoid point with altitude and uncertainty ellipsoid according to TS 23.032 [7].
-IE/Group NamePresenceRangeIE Type and ReferenceSemantics DescriptionLatitude SignMENUMERATED (North, South)Degrees Of LatitudeMINTEGER
-(0..223-1)The IE value (N) is derived by this formula:
-NN223 X /90 / N+1
-X being the latitude in degrees (0°.. 90°).Degrees Of LongitudeMINTEGER
-(-223..223-1)The IE value (N) is derived by this formula:
-NN224 X /360 / N+1
-X being the longitude in degrees (-180°..+180°).Direction of AltitudeMENUMERATED (Height, Depth)
-AltitudeMINTEGER
-(0..215-1)The relation between the value (N) and the altitude (a) in meters it describes is N T a < N+1, except for N=215-1 for which the range is extended to include all greater values of (a).Uncertainty semi-majorMINTEGER (0..127)The uncertainty "r" is derived from the "uncertainty code" k by r = 10x(1.1k-1).Uncertainty semi-minorMINTEGER (0..127)The uncertainty "r" is derived from the "uncertainty code" k by r = 10x(1.1k-1).Orientation of major axisMINTEGER (0..179)Uncertainty AltitudeMINTEGER (0..127)The uncertainty altitude “h” expressed in metres is derived from the “uncertainty code” k, by:
-h=45x(1.025k-1).ConfidenceMINTEGER(0..100)In percentage
-9.2.9	PRS Muting Configuration
-The PRS Muting Configuration IE is used to describe the configuration of PRS muting patterns for the concerned cell, according to TS 36.211 [6] and TS 36.133 [8].
-IE/Group NamePresenceRangeIE Type and ReferenceSemantics DescriptionCHOICE PRS Muting ConfigurationM>TwoMBIT STRING (2)If a bit is set to "0", it indicates that the PRS is muted in the corresponding PRS positioning occasion (numbering from any sub frame for which SFN=0) in a periodic cycle of length equal to the length of the bit string>FourMBIT STRING (4)Same as above>EightMBIT STRING (8)Same as above>SixteenMBIT STRING (16)Same as above
-9.2.10	Requested SRS Transmission Characteristics
-The purpose of the Requested SRS Transmissions Characteristics information element is to inform the eNB of the number and bandwidth of periodic SRS transmissions requested for the UE for the purpose of UTDOA positioning.
-IE/Group NamePresenceRangeIE Type and ReferenceSemantics DescriptionNumber Of TransmissionsMINTEGER (0..500,…)The number of periodic SRS transmissions requested. The value of ‘0’ represents an infinite number of SRS transmissions.BandwidthMINTEGER (1..100,…) The requested bandwidth of the SRS transmissions, the value of which corresponds to the number of resource blocks requested to be allocated.
-9.2.11	UL Configuration
-The purpose of the Uplink Configuration information element is to inform the E-SMLC of the uplink configuration parameters.
-IE/Group NamePresenceRangeIE Type and ReferenceSemantics DescriptionPCIMINTEGER (0..503, …)Physical Cell Identifier of the PCellUL EARFCNMINTEGER (0..262143, …)The uplink E-UTRA carrier frequency of the PCellTA Type1OINTEGER (0..7690)Timing advance measurement, the mapping of the reported quantity is defined in TS 36.133 [8]TA Type2OINTEGER (0..7690)Timing advance measurement, the mapping of the reported quantity is defined in TS 36.133 [8]Number of TransmissionsMINTEGER (0..500,…)The number of periodic SRS transmissions. The value of ‘0’ represents an infinite number of SRS transmissions.SRS ConfigurationM1 ..<maxServCell>Configuration of SRS for corresponding serving cells. >PCIMINTEGER (0..503, …)Physical Cell ID.>UL EARFCNMINTEGER (0..262143, ...)The uplink E-UTRA carrier frequency of the corresponding serving cell.  Corresponds to NUL in TS 36.104 [5].>UL-bandwidthMENUMERATED (n6, n15, n25, n50, n75, n100)Cell transmission bandwidth configuration in uplink corresponding to an E-UTRA channel bandwidth TS 36.104 [5], Table 5.6-1. Value n6 corresponds to 6 resource blocks, n15 to 15 resource blocks and so on.>UL-CyclicPrefixLengthMENUMERATED (Normal, Extended)Uplink cyclic prefix.>srs-BandwidthConfigMENUMERATED (bw0, bw1, bw2, bw3, bw4, bw5, bw6, bw7)Cell-specific SRS bandwidth configuration TS 36.211 [6]. bw0 corresponds to value 0, bw1 to value 1 and so on 
->srs-BandwidthMENUMERATED (bw0, bw1, bw2, bw3)UE-specific SRS bandwidth configuration TS 36.211 [6]>srs-AntennaPortMENUMERATED (an1, an2, an4, ...).Number of antenna ports for SRS transmission. TS 36.211 [6]>srs-HoppingBandwidthMENUMERATED (hbw0, hbw1, hbw2, hbw3)SRS frequency hopping bandwidth configuration TS 36.211 [6]>srs-cyclicShiftMENUMERATED (cs0, cs1, cs2, cs3, cs4, cs5, cs6, cs7)SRS-Cyclic shift TS 36.211 [6]>srs-ConfigIndexMINTEGER (0..1023)SRS configuration index TS 36.211 [6]>MaxUpPtC-
-IfTDDENUMERATED (true)MaxUpPt TS 36.211[6]>transmissionCombMINTEGER (0..1)Transmission comb TS 36.211 [6]>freqDomainPositionMINTEGER (0..23)Frequency domain position TS 36.211 [6]>groupHoppingEnabledMBOOLEANGroup-hopping-enabled TS 36.211 [6]>deltaSSO
-INTEGER (0..29)deltaSS TS 36.211 [6]>SFN Initialisation TimeMBIT STRING (64)Time in seconds relative to 00:00:00 on 1 January 1900 (calculated as continuous time without leap seconds and traceable to a common time reference) where binary encoding of the integer part is in the first 32 bits and binary encoding of the fraction part in the last 32 bits. The fraction part is expressed with a granularity of 1 /2**32 second.  
-ConditionExplanationIfTDDThis IE shall be present if the UL-EARFCN IE refers to TDD operation.
-Range boundExplanationmaxServCellMaximum number of serving cells with SRS configuration. Value is 5.
-9.2.12	Cell Portion ID
-This parameter gives the current Cell Portion associated with the target UE. The Cell Portion ID is the unique identifier for a cell portion within a cell.
-Table 9.2.12-1: Cell Portion
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionCell Portion IDMINTEGER (0..255, …)
-9.2.13	Inter-RAT Measurement Result
-The purpose of the Inter-RAT Measurement Result information element is to provide the Inter-RAT measurement results.
-IE/Group NamePresenceRangeIE Type and ReferenceSemantics DescriptionInter-RAT Measured Results1.. <maxnoMeas>>CHOICE Inter-RAT Measured Results ValueM>>Result GERANM1..<maxGERANMeas>>>>ARFCN of BCCHMINTEGER (0..1023, ...)>>>Physical CellId GERANMINTEGER (0..63, ...)>>>RSSIMINTEGER(0..63, ...)>>Result UTRAN1..<maxUTRANMeas>>>>UARFCNMINTEGER (0..16383, ...)>>>CHOICE Physical CellId UTRAM>>>>Physical CellId UTRA FDDMINTEGER (0..511, ...)>>>>Physical CellId UTRA TDDMINTEGER (0..127, ...)>>>UTRA RSCPOINTEGER(-5..91, ...)>>>UTRA EcNoOINTEGER(0..49, ...)This IE applies to FDD only.
-Range boundExplanationmaxnoMeasMaximum no. of measured quantities that can be configured and reported with one message. Value is 63.maxGERANMeasMaximum no. of GERAN cells that can be reported with one message. Value is 8.maxUTRANMeasMaximum no. of UTRAN cells that can be reported with one message. Value is 8.
-
-9.3	Message and Information Element Abstract Syntax (with ASN.1)
-9.3.1	General
-Sub clause 9.3 presents the Abstract Syntax of the LPPa protocol with ASN.1. In case there is contradiction between the ASN.1 definition in this sub clause and the tabular format in sub clause 9.1 and 9.2, the ASN.1 shall take precedence, except for the definition of conditions for the presence of conditional elements, in which the tabular format shall take precedence.
-The ASN.1 definition specifies the structure and content of LPPa messages. LPPa messages can contain any IEs specified in the object set definitions for that message without the order or number of occurrence being restricted by ASN.1. However, for this version of the standard, a sending entity shall construct an LPPa message according to the PDU definitions module and with the following additional rules (Note that in the following, "IE" means an IE in the object set with an explicit id. If one IE needs to appear more than once in one object set, then the different occurrences have different IE ids):
--	IEs shall be ordered (in an IE container) in the order they appear in object set definitions.
--	Object set definitions specify how many times IEs may appear. An IE shall appear exactly once if the presence field in an object has value "mandatory". An IE may appear at most once if the presence field in an object has value "optional" or "conditional". If in a tabular format there is multiplicity specified for an IE (i.e. an IE list) then in the corresponding ASN.1 definition the list definition is separated into two parts. The first part defines an IE container list in which the list elements reside. The second part defines list elements. The IE container list appears as an IE of its own. For this version of the standard an IE container list may contain only one kind of list elements.
-If an LPPa message that is not constructed as defined above is received, this shall be considered as Abstract Syntax Error, and the message shall be handled as defined for Abstract Syntax Error in clause 10.
-9.3.2	Usage of Private Message Mechanism for Non-standard Use
-The private message mechanism for non-standard use may be used:
--	for special operator (and/or vendor) specific features considered not to be part of the basic functionality, i.e. the functionality required for a complete and high-quality specification in order to guarantee multivendor inter-operability.
--	by vendors for research purposes, e.g. to implement and evaluate new algorithms/features before such features are proposed for standardisation.
-The private message mechanism shall not be used for basic functionality. Such functionality shall be standardised.
-9.3.3	Elementary Procedure Definitions
--- **************************************************************
---
--- Elementary Procedure definitions
---
--- **************************************************************
-
-LPPA-PDU-Descriptions {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
-eps-Access (21) modules (3) lppa (6) version1 (1) lppa-PDU-Descriptions (0) }
-
-DEFINITIONS AUTOMATIC TAGS ::= 
-
-BEGIN
-
--- **************************************************************
---
--- IE parameter types from other modules.
---
--- **************************************************************
-
-IMPORTS
-	Criticality,
-	ProcedureCode,
-	LPPATransactionID
-
-FROM LPPA-CommonDataTypes
-
-
-	ErrorIndication,
-	PrivateMessage,
-	E-CIDMeasurementInitiationRequest,
-	E-CIDMeasurementInitiationResponse,
-	E-CIDMeasurementInitiationFailure,
-	E-CIDMeasurementFailureIndication,
-	E-CIDMeasurementReport,
-	E-CIDMeasurementTerminationCommand,
-	OTDOAInformationRequest,
-	OTDOAInformationResponse,
-	OTDOAInformationFailure,
-	UTDOAInformationRequest,
-	UTDOAInformationResponse,
-	UTDOAInformationFailure,
-	UTDOAInformationUpdate
-
-
-FROM LPPA-PDU-Contents
-
-	id-errorIndication,
-	id-privateMessage,
-	id-e-CIDMeasurementInitiation,
-	id-e-CIDMeasurementFailureIndication,
-	id-e-CIDMeasurementReport,
-	id-e-CIDMeasurementTermination,
-	id-oTDOAInformationExchange,
-	id-uTDOAInformationExchange,
-	id-uTDOAInformationUpdate
-
-
-FROM LPPA-Constants;
-
--- **************************************************************
---
--- Interface Elementary Procedure Class
---
--- **************************************************************
-
-LPPA-ELEMENTARY-PROCEDURE ::= CLASS {
-	&InitiatingMessage				,
-	&SuccessfulOutcome				OPTIONAL,
-	&UnsuccessfulOutcome				OPTIONAL,
-	&procedureCode			ProcedureCode	UNIQUE,
-	&criticality			Criticality		DEFAULT ignore
-}
-WITH SYNTAX {
-	INITIATING MESSAGE		&InitiatingMessage
-	[SUCCESSFUL OUTCOME		&SuccessfulOutcome]
-	[UNSUCCESSFUL OUTCOME	&UnsuccessfulOutcome]
-	PROCEDURE CODE			&procedureCode
-	[CRITICALITY			&criticality]
-}
-
--- **************************************************************
---
--- Interface PDU Definition
---
--- **************************************************************
-
-LPPA-PDU ::= CHOICE {
-	initiatingMessage	InitiatingMessage,
-	successfulOutcome	SuccessfulOutcome,
-	unsuccessfulOutcome	UnsuccessfulOutcome,
-	...
-}
-
-InitiatingMessage ::= SEQUENCE {
-	procedureCode		LPPA-ELEMENTARY-PROCEDURE.&procedureCode		({LPPA-ELEMENTARY-PROCEDURES}),
-	criticality			LPPA-ELEMENTARY-PROCEDURE.&criticality			({LPPA-ELEMENTARY-PROCEDURES}{@procedureCode}),
-	lppatransactionID	LPPATransactionID,
-	value				LPPA-ELEMENTARY-PROCEDURE.&InitiatingMessage	({LPPA-ELEMENTARY-PROCEDURES}{@procedureCode})
-}
-
-SuccessfulOutcome ::= SEQUENCE {
-	procedureCode		LPPA-ELEMENTARY-PROCEDURE.&procedureCode		({LPPA-ELEMENTARY-PROCEDURES}),
-	criticality			LPPA-ELEMENTARY-PROCEDURE.&criticality			({LPPA-ELEMENTARY-PROCEDURES}{@procedureCode}),
-	lppatransactionID	LPPATransactionID,
-	value				LPPA-ELEMENTARY-PROCEDURE.&SuccessfulOutcome	({LPPA-ELEMENTARY-PROCEDURES}{@procedureCode})
-}
-
-UnsuccessfulOutcome ::= SEQUENCE {
-	procedureCode		LPPA-ELEMENTARY-PROCEDURE.&procedureCode		({LPPA-ELEMENTARY-PROCEDURES}),
-	criticality			LPPA-ELEMENTARY-PROCEDURE.&criticality			({LPPA-ELEMENTARY-PROCEDURES}{@procedureCode}),
-	lppatransactionID	LPPATransactionID,
-	value				LPPA-ELEMENTARY-PROCEDURE.&UnsuccessfulOutcome	({LPPA-ELEMENTARY-PROCEDURES}{@procedureCode})
-}
-
-
--- **************************************************************
---
--- Interface Elementary Procedure List
---
--- **************************************************************
-
-LPPA-ELEMENTARY-PROCEDURES LPPA-ELEMENTARY-PROCEDURE ::= {
-	LPPA-ELEMENTARY-PROCEDURES-CLASS-1			|
-	LPPA-ELEMENTARY-PROCEDURES-CLASS-2			,
-	...
-}
-
-LPPA-ELEMENTARY-PROCEDURES-CLASS-1 LPPA-ELEMENTARY-PROCEDURE ::= {
-	e-CIDMeasurementInitiation	|
-	oTDOAInformationExchange		,
-	...,
-	uTDOAInformationExchange
-}
-
-LPPA-ELEMENTARY-PROCEDURES-CLASS-2 LPPA-ELEMENTARY-PROCEDURE ::= {
-	e-CIDMeasurementFailureIndication		|
-	e-CIDMeasurementReport					|
-	e-CIDMeasurementTermination				|
-	errorIndication							|
-	privateMessage							,
-	...,
-	uTDOAInformationUpdate
-}
-
-
--- **************************************************************
---
--- Interface Elementary Procedures
---
--- **************************************************************
-
-e-CIDMeasurementInitiation LPPA-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE		E-CIDMeasurementInitiationRequest
-	SUCCESSFUL OUTCOME		E-CIDMeasurementInitiationResponse
-	UNSUCCESSFUL OUTCOME	E-CIDMeasurementInitiationFailure
-	PROCEDURE CODE			id-e-CIDMeasurementInitiation
-	CRITICALITY				reject
-}
-
-e-CIDMeasurementFailureIndication LPPA-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE		E-CIDMeasurementFailureIndication
-	PROCEDURE CODE			id-e-CIDMeasurementFailureIndication
-	CRITICALITY				ignore
-}
-
-e-CIDMeasurementReport LPPA-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE		E-CIDMeasurementReport
-	PROCEDURE CODE			id-e-CIDMeasurementReport
-	CRITICALITY				ignore
-}
-
-e-CIDMeasurementTermination LPPA-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE		E-CIDMeasurementTerminationCommand
-	PROCEDURE CODE			id-e-CIDMeasurementTermination
-	CRITICALITY				reject
-}
-
-oTDOAInformationExchange LPPA-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE		OTDOAInformationRequest
-	SUCCESSFUL OUTCOME		OTDOAInformationResponse
-	UNSUCCESSFUL OUTCOME	OTDOAInformationFailure
-	PROCEDURE CODE			id-oTDOAInformationExchange
-	CRITICALITY				reject
-}
-
-uTDOAInformationExchange LPPA-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE		UTDOAInformationRequest
-	SUCCESSFUL OUTCOME		UTDOAInformationResponse
-	UNSUCCESSFUL OUTCOME	UTDOAInformationFailure
-	PROCEDURE CODE			id-uTDOAInformationExchange
-	CRITICALITY				reject
-}
-
-uTDOAInformationUpdate LPPA-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE		UTDOAInformationUpdate
-	PROCEDURE CODE			id-uTDOAInformationUpdate
-	CRITICALITY				ignore
-}
-
-errorIndication LPPA-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE		ErrorIndication
-	PROCEDURE CODE			id-errorIndication
-	CRITICALITY				ignore
-}
-
-
-privateMessage			LPPA-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE		PrivateMessage
-	PROCEDURE CODE			id-privateMessage
-	CRITICALITY				ignore
-}
-
-END
-
-9.3.4	PDU Definitions
--- **************************************************************
---
--- PDU definitions for LPPa.
---
--- **************************************************************
-
-LPPA-PDU-Contents {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
-eps-Access (21) modules (3) lppa (6) version1 (1) lppa-PDU-Contents (1) }
-
-DEFINITIONS AUTOMATIC TAGS ::= 
-
-BEGIN
-
--- **************************************************************
---
--- IE parameter types from other modules.
---
--- **************************************************************
-
-IMPORTS
-	
-	Cause,
-	CriticalityDiagnostics,
-	E-CID-MeasurementResult,
-	OTDOACells,
-	OTDOA-Information-Item,
-	Measurement-ID,
-	MeasurementPeriodicity,
-	MeasurementQuantities,
-	ReportCharacteristics,
-	RequestedSRSTransmissionCharacteristics,
-	ULConfiguration,
-	Cell-Portion-ID,
-	InterRATMeasurementQuantities,
-	InterRATMeasurementResult
-	
-FROM LPPA-IEs
-
-	PrivateIE-Container{},
-	ProtocolExtensionContainer{},
-	ProtocolIE-Container{},
-	ProtocolIE-ContainerList{},
-	ProtocolIE-ContainerPair{},
-	ProtocolIE-ContainerPairList{},
-	ProtocolIE-Single-Container{},
-	LPPA-PRIVATE-IES,
-	LPPA-PROTOCOL-EXTENSION,
-	LPPA-PROTOCOL-IES,
-	LPPA-PROTOCOL-IES-PAIR
-FROM LPPA-Containers
-
-	
-	maxnoOTDOAtypes,
-	id-Cause,
-	id-CriticalityDiagnostics,
-	id-E-SMLC-UE-Measurement-ID,
-	id-OTDOACells,
-	id-OTDOA-Information-Type-Group,
-	id-OTDOA-Information-Type-Item,
-	id-ReportCharacteristics,
-	id-MeasurementPeriodicity,
-	id-MeasurementQuantities,
-	id-eNB-UE-Measurement-ID,
-	id-E-CID-MeasurementResult,
-	id-RequestedSRSTransmissionCharacteristics,
-	id-ULConfiguration,
-	id-Cell-Portion-ID,
-	id-InterRATMeasurementQuantities,
-	id-InterRATMeasurementResult
-	
-	
-FROM LPPA-Constants;
-
--- **************************************************************
---
--- E-CID MEASUREMENT INITIATION REQUEST
---
--- **************************************************************
-
-E-CIDMeasurementInitiationRequest ::= SEQUENCE {
-	protocolIEs		ProtocolIE-Container	{{E-CIDMeasurementInitiationRequest-IEs}},
-	...
-}
-
-E-CIDMeasurementInitiationRequest-IEs LPPA-PROTOCOL-IES ::= {
-	{ ID id-E-SMLC-UE-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID						PRESENCE mandatory}|
-	{ ID id-ReportCharacteristics			CRITICALITY reject	TYPE ReportCharacteristics				PRESENCE mandatory}|
-	{ ID id-MeasurementPeriodicity			CRITICALITY reject	TYPE MeasurementPeriodicity				PRESENCE conditional}|
--- The IE shall be present if the Report Characteritics IE is set to “periodic” --
-	{ ID id-MeasurementQuantities			CRITICALITY reject	TYPE MeasurementQuantities				PRESENCE mandatory}|
-	{ ID id-InterRATMeasurementQuantities	CRITICALITY ignore	TYPE InterRATMeasurementQuantities	PRESENCE optional},
-	...
-}
-
-
--- **************************************************************
---
--- E-CID MEASUREMENT INITIATION RESPONSE
---
--- **************************************************************
-
-E-CIDMeasurementInitiationResponse ::= SEQUENCE {
-	protocolIEs		ProtocolIE-Container	{{E-CIDMeasurementInitiationResponse-IEs}},
-	...
-}
-
-E-CIDMeasurementInitiationResponse-IEs LPPA-PROTOCOL-IES ::= {
-	{ ID id-E-SMLC-UE-Measurement-ID	CRITICALITY reject	TYPE Measurement-ID					PRESENCE mandatory}|
-	{ ID id-eNB-UE-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID					PRESENCE mandatory}|
-	{ ID id-E-CID-MeasurementResult		CRITICALITY ignore	TYPE E-CID-MeasurementResult		PRESENCE optional}|
-	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional}|
-	{ ID id-Cell-Portion-ID				CRITICALITY ignore	TYPE Cell-Portion-ID				PRESENCE optional}|
-	{ ID id-InterRATMeasurementResult	CRITICALITY ignore	TYPE InterRATMeasurementResult		PRESENCE optional},
-	...
-}
-
-
-
--- **************************************************************
---
--- E-CID MEASUREMENT INITIATION FAILURE
---
--- **************************************************************
-
-E-CIDMeasurementInitiationFailure ::= SEQUENCE {
-	protocolIEs						ProtocolIE-Container		{{E-CIDMeasurementInitiationFailure-IEs}},
-	...
-}
-
-
-E-CIDMeasurementInitiationFailure-IEs LPPA-PROTOCOL-IES ::= {
-	{ ID id-E-SMLC-UE-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}|
-	{ ID id-Cause							CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
-	{ ID id-CriticalityDiagnostics			CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
-	...
-}
-
-
--- **************************************************************
---
--- E-CID MEASUREMENT FAILURE INDICATION
---
--- **************************************************************
-
-E-CIDMeasurementFailureIndication ::= SEQUENCE {
-	protocolIEs						ProtocolIE-Container		{{E-CIDMeasurementFailureIndication-IEs}},
-	...
-}
-
-
-E-CIDMeasurementFailureIndication-IEs LPPA-PROTOCOL-IES ::= {
-	{ ID id-E-SMLC-UE-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}|
-	{ ID id-eNB-UE-Measurement-ID			CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}|
-	{ ID id-Cause							CRITICALITY ignore	TYPE Cause						PRESENCE mandatory},
-	...
-}
-
--- **************************************************************
---
--- E-CID MEASUREMENT REPORT
---
--- **************************************************************
-
-E-CIDMeasurementReport ::= SEQUENCE {
-	protocolIEs						ProtocolIE-Container		{{E-CIDMeasurementReport-IEs}},
-	...
-}
-
-
-E-CIDMeasurementReport-IEs LPPA-PROTOCOL-IES ::= {
-	{ ID id-E-SMLC-UE-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}|
-	{ ID id-eNB-UE-Measurement-ID			CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}|
-	{ ID id-E-CID-MeasurementResult			CRITICALITY ignore	TYPE E-CID-MeasurementResult	PRESENCE mandatory}|
-	{ ID id-Cell-Portion-ID					CRITICALITY ignore	TYPE Cell-Portion-ID			PRESENCE optional},
-	...
-}
-
--- **************************************************************
---
--- E-CID MEASUREMENT TERMINATION 
---
--- **************************************************************
-
-E-CIDMeasurementTerminationCommand ::= SEQUENCE {
-	protocolIEs						ProtocolIE-Container		{{E-CIDMeasurementTerminationCommand-IEs}},
-	...
-}
-
-
-E-CIDMeasurementTerminationCommand-IEs LPPA-PROTOCOL-IES ::= {
-	{ ID id-E-SMLC-UE-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}|
-	{ ID id-eNB-UE-Measurement-ID			CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory},
-	...
-}
-
-
--- **************************************************************
---
--- OTDOA INFORMATION REQUEST
---
--- **************************************************************
-
-OTDOAInformationRequest ::= SEQUENCE {
-	protocolIEs		ProtocolIE-Container	{{OTDOAInformationRequest-IEs}},
-	...
-}
-
-OTDOAInformationRequest-IEs LPPA-PROTOCOL-IES ::= {
-	{ ID id-OTDOA-Information-Type-Group		CRITICALITY reject	TYPE OTDOA-Information-Type			PRESENCE mandatory},
-	...
-}
-
-OTDOA-Information-Type ::= SEQUENCE (SIZE(1..maxnoOTDOAtypes)) OF ProtocolIE-Single-Container { { OTDOA-Information-TypeIEs} }
-
-OTDOA-Information-TypeIEs	LPPA-PROTOCOL-IES ::= {
-	{ ID id-OTDOA-Information-Type-Item		CRITICALITY reject	TYPE OTDOA-Information-Type-Item	PRESENCE mandatory},
-	...
-}
-
-OTDOA-Information-Type-Item ::= SEQUENCE {
-	oTDOA-Information-Type-Item		OTDOA-Information-Item,
-	iE-Extensions					ProtocolExtensionContainer { { OTDOA-Information-Type-ItemExtIEs} } OPTIONAL,
-	...
-}
-
-OTDOA-Information-Type-ItemExtIEs LPPA-PROTOCOL-EXTENSION ::= {
-	...
-}
-
--- **************************************************************
---
--- OTDOA INFORMATION RESPONSE
---
--- **************************************************************
-
-OTDOAInformationResponse ::= SEQUENCE {
-	protocolIEs		ProtocolIE-Container	{{OTDOAInformationResponse-IEs}},
-	...
-}
-
-OTDOAInformationResponse-IEs LPPA-PROTOCOL-IES ::= {
-	{ ID id-OTDOACells						CRITICALITY ignore	TYPE OTDOACells					PRESENCE mandatory}|
-	{ ID id-CriticalityDiagnostics			CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
-	...
-}
-
--- **************************************************************
---
--- OTDOA INFORMATION FAILURE
---
--- **************************************************************
-
-OTDOAInformationFailure ::= SEQUENCE {
-	protocolIEs						ProtocolIE-Container		{{OTDOAInformationFailure-IEs}},
-	...
-}
-
-
-OTDOAInformationFailure-IEs LPPA-PROTOCOL-IES ::= {
-	{ ID id-Cause							CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
-	{ ID id-CriticalityDiagnostics			CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
-	...
-}
-
--- **************************************************************
---
--- UTDOA INFORMATION REQUEST
---
--- **************************************************************
-
-UTDOAInformationRequest ::= SEQUENCE {
-	protocolIEs				ProtocolIE-Container		{{UTDOAInformationRequest-IEs}},
-	...
-}
-
-UTDOAInformationRequest-IEs LPPA-PROTOCOL-IES ::= {
-	{ ID id-RequestedSRSTransmissionCharacteristics		CRITICALITY ignore	TYPE RequestedSRSTransmissionCharacteristics	PRESENCE optional},
-	...
-}
-
--- **************************************************************
---
--- UTDOA INFORMATION RESPONSE
---
--- **************************************************************
-
-UTDOAInformationResponse ::= SEQUENCE {
-	protocolIEs				ProtocolIE-Container		{{UTDOAInformationResponse-IEs}},
-	...
-}
-
-UTDOAInformationResponse-IEs LPPA-PROTOCOL-IES ::= {
-	{ ID id-ULConfiguration					CRITICALITY reject	TYPE ULConfiguration			PRESENCE mandatory}|
-	{ ID id-CriticalityDiagnostics			CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
-	...
-}
-
--- **************************************************************
---
--- UTDOA INFORMATION FAILURE
---
--- **************************************************************
-
-UTDOAInformationFailure ::= SEQUENCE {
-	protocolIEs				ProtocolIE-Container		{{UTDOAInformationFailure-IEs}},
-	...
-}
-
-
-UTDOAInformationFailure-IEs LPPA-PROTOCOL-IES ::= {
-	{ ID id-Cause							CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
-	{ ID id-CriticalityDiagnostics			CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
-	...
-}
-
--- **************************************************************
---
--- UTDOA INFORMATION UPDATE
---
--- **************************************************************
-
-UTDOAInformationUpdate ::= SEQUENCE {
-	protocolIEs					ProtocolIE-Container		{{UTDOAInformationUpdate-IEs}},
-	...
-}
-
-UTDOAInformationUpdate-IEs LPPA-PROTOCOL-IES ::= {
-	{ ID id-ULConfiguration		CRITICALITY ignore	TYPE ULConfiguration	PRESENCE optional},
-	...
-}
-
--- **************************************************************
---
--- ERROR INDICATION
---
--- **************************************************************
-
-ErrorIndication ::= SEQUENCE {
-	protocolIEs		ProtocolIE-Container	{{ErrorIndication-IEs}},
-	...
-}
-
-ErrorIndication-IEs LPPA-PROTOCOL-IES ::= {
-	
-	{ ID id-Cause						CRITICALITY ignore	TYPE Cause						PRESENCE optional}|
-	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
-	...
-}
-
--- **************************************************************
---
--- PRIVATE MESSAGE
---
--- **************************************************************
-
-PrivateMessage ::= SEQUENCE {
-	privateIEs		PrivateIE-Container  {{PrivateMessage-IEs}},
-	...
-}
-
-PrivateMessage-IEs LPPA-PRIVATE-IES ::= {
-	...
-}
-
-END
-
-9.3.5	Information Element definitions
--- **************************************************************
---
--- Information Element Definitions
---
--- **************************************************************
-
-LPPA-IEs {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
-eps-Access (21) modules (3) lppa (6) version1 (1) lppa-IEs (2) }
-
-DEFINITIONS AUTOMATIC TAGS ::= 
-
-BEGIN
-
-IMPORTS	
-	
-	id-MeasurementQuantities-Item,
-	maxCellineNB,
-	maxCellReport,
-	maxNrOfErrors,
-	maxNoMeas,
-	maxnoOTDOAtypes,
-	maxServCell,
-	id-InterRATMeasurementQuantities-Item,
-	maxGERANMeas,
-	maxUTRANMeas
-
-FROM LPPA-Constants
-
-	Criticality,
-	LPPATransactionID,
-	ProcedureCode,
-	ProtocolIE-ID,
-	TriggeringMessage
-
-FROM LPPA-CommonDataTypes
-
-	ProtocolExtensionContainer{},
-	ProtocolIE-Single-Container{},
-	
-	LPPA-PROTOCOL-EXTENSION,
-	LPPA-PROTOCOL-IES
-FROM LPPA-Containers;
-
--- A
--- B
-
-BCCH ::= INTEGER (0..1023, ...)
-
--- C
-
-Cause ::= CHOICE {
-	radioNetwork		CauseRadioNetwork,
-	protocol			CauseProtocol,
-	misc				CauseMisc,
-	...
-}
-
-CauseMisc ::= ENUMERATED {
-	unspecified,
-	...
-}
-
-CauseProtocol ::= ENUMERATED {
-	transfer-syntax-error,
-	abstract-syntax-error-reject,
-	abstract-syntax-error-ignore-and-notify,
-	message-not-compatible-with-receiver-state,
-	semantic-error,
-	unspecified,
-	abstract-syntax-error-falsely-constructed-message,
-	...
-}
-
-CauseRadioNetwork ::= ENUMERATED {
-	unspecified,
-	requested-item-not-supported,
-	requested-item-temporarily-not-available,
-	...
-
-}
-
-Cell-Portion-ID ::= INTEGER (0..255,...)
-
-CPLength ::= ENUMERATED {
-	normal,
-	extended,
-	...
-}
-
-CriticalityDiagnostics ::= SEQUENCE {
-	procedureCode					ProcedureCode					OPTIONAL,
-	triggeringMessage				TriggeringMessage				OPTIONAL,
-	procedureCriticality			Criticality						OPTIONAL,
-	lppatransactionID				LPPATransactionID				OPTIONAL,
-	iEsCriticalityDiagnostics		CriticalityDiagnostics-IE-List	OPTIONAL,
-	iE-Extensions					ProtocolExtensionContainer { {CriticalityDiagnostics-ExtIEs} }	OPTIONAL,
-	...
-}
-
-
-CriticalityDiagnostics-ExtIEs LPPA-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-CriticalityDiagnostics-IE-List ::= SEQUENCE (SIZE (1..maxNrOfErrors)) OF
-	SEQUENCE {
-		iECriticality			Criticality,
-		iE-ID					ProtocolIE-ID,
-		typeOfError				TypeOfError,
-		iE-Extensions			ProtocolExtensionContainer { {CriticalityDiagnostics-IE-List-ExtIEs} } OPTIONAL,
-		...
-}
-
-CriticalityDiagnostics-IE-List-ExtIEs LPPA-PROTOCOL-EXTENSION ::= {
-	...
-}
-
--- D
--- E
-
-E-CID-MeasurementResult ::= SEQUENCE {
-	servingCell-ID					ECGI,
-	servingCellTAC					TAC,
-	e-UTRANAccessPointPosition		E-UTRANAccessPointPosition	OPTIONAL,
-	measuredResults					MeasuredResults				OPTIONAL,
-	...
-}
-
-ECGI ::= SEQUENCE {
-	pLMN-Identity				PLMN-Identity,
-	eUTRANcellIdentifier		EUTRANCellIdentifier,
-	iE-Extensions				ProtocolExtensionContainer { {ECGI-ExtIEs} } OPTIONAL,
-	...
-}
-
-ECGI-ExtIEs LPPA-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-EUTRANCellIdentifier ::= BIT STRING (SIZE (28))
-
-EARFCN ::= INTEGER (0..65535, ..., 65536..262143)
-
-E-UTRANAccessPointPosition ::= SEQUENCE {
-	latitudeSign				ENUMERATED {north, south},
-	latitude					INTEGER (0..8388607),
-	longitude					INTEGER (-8388608..8388607),
-	directionOfAltitude			ENUMERATED {height, depth},
-	altitude					INTEGER (0..32767),
-	uncertaintySemi-major		INTEGER (0..127),
-	uncertaintySemi-minor		INTEGER (0..127),
-	orientationOfMajorAxis		INTEGER (0..179),
-	uncertaintyAltitude			INTEGER (0..127),
-	confidence					INTEGER (0..100),
-	...
-}
-
--- F
--- G
--- H
--- I
-
-InterRATMeasurementQuantities ::= SEQUENCE (SIZE (0.. maxNoMeas)) OF ProtocolIE-Single-Container { {InterRATMeasurementQuantities-ItemIEs} }
-
-InterRATMeasurementQuantities-ItemIEs LPPA-PROTOCOL-IES ::= {
-	{ ID id-InterRATMeasurementQuantities-Item	CRITICALITY reject	TYPE InterRATMeasurementQuantities-Item PRESENCE mandatory}}
-
-InterRATMeasurementQuantities-Item ::= SEQUENCE {
-	interRATMeasurementQuantitiesValue			InterRATMeasurementQuantitiesValue,
-	iE-Extensions								ProtocolExtensionContainer { { InterRATMeasurementQuantitiesValue-ExtIEs} } OPTIONAL,
-	...
-}
-
-InterRATMeasurementQuantitiesValue-ExtIEs LPPA-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-InterRATMeasurementQuantitiesValue ::= ENUMERATED {
-	geran,
-	utran,
-	...
-}
-
-InterRATMeasurementResult ::= SEQUENCE (SIZE (1.. maxNoMeas)) OF InterRATMeasuredResultsValue
-
-InterRATMeasuredResultsValue ::= CHOICE {
-	resultGERAN			ResultGERAN,
-	resultUTRAN			ResultUTRAN,
-	...
-}
-
--- J
--- K
--- L
--- M
-
-Measurement-ID ::= INTEGER (1..15, ...)
-
-MeasurementPeriodicity ::= ENUMERATED {
-	ms120,
-	ms240,
-	ms480,
-	ms640,
-	ms1024,
-	ms2048,
-	ms5120,
-	ms10240,
-	min1,
-	min6,
-	min12,
-	min30,
-	min60,
-	...
-}
-
-MeasurementQuantities ::= SEQUENCE (SIZE (1.. maxNoMeas)) OF ProtocolIE-Single-Container { {MeasurementQuantities-ItemIEs} }
-
-MeasurementQuantities-ItemIEs LPPA-PROTOCOL-IES ::= {
-	{ ID id-MeasurementQuantities-Item	CRITICALITY reject	TYPE MeasurementQuantities-Item		PRESENCE mandatory}
-}
-
-MeasurementQuantities-Item ::= SEQUENCE {
-	measurementQuantitiesValue							MeasurementQuantitiesValue,
-	iE-Extensions										ProtocolExtensionContainer { { MeasurementQuantitiesValue-ExtIEs} } OPTIONAL,
-	...
-}
-
-MeasurementQuantitiesValue-ExtIEs LPPA-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-MeasurementQuantitiesValue ::= ENUMERATED {
-	cell-ID,
-	angleOfArrival,
-	timingAdvanceType1,
-	timingAdvanceType2,
-	rSRP,
-	rSRQ,
-	...
-}
-
-MeasuredResults ::= SEQUENCE (SIZE (1.. maxNoMeas)) OF MeasuredResultsValue
-
-
-MeasuredResultsValue ::= CHOICE { 
-	valueAngleOfArrival				INTEGER (0..719),
-	valueTimingAdvanceType1			INTEGER (0..7690),
-	valueTimingAdvanceType2			INTEGER (0..7690),
-	resultRSRP						ResultRSRP,
-	resultRSRQ						ResultRSRQ,
-	...
-}
-
--- N
-
-NumberOfAntennaPorts ::= ENUMERATED {
-		n1-or-n2,
-		n4,
-		...
-}
-
-NumberOfDlFrames ::= ENUMERATED {
-		sf1,
-		sf2,
-		sf4,
-		sf6,
-		...
-}
-
--- O
-
-OTDOACells ::= SEQUENCE (SIZE (1.. maxCellineNB)) OF SEQUENCE {
-	oTDOACellInfo					OTDOACell-Information,
-	iE-Extensions					ProtocolExtensionContainer { {OTDOACells-ExtIEs} } OPTIONAL,
-	...
-}
-
-OTDOACells-ExtIEs LPPA-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-OTDOACell-Information ::= SEQUENCE (SIZE (1..maxnoOTDOAtypes)) OF OTDOACell-Information-Item
-
-OTDOACell-Information-Item ::= CHOICE {
-	pCI							PCI,
-	cellId						ECGI,
-	tAC							TAC,
-	eARFCN						EARFCN,
-	pRS-Bandwidth				PRS-Bandwidth,
-	pRS-ConfigurationIndex		PRS-Configuration-Index, 
-	cPLength					CPLength,
-	numberOfDlFrames			NumberOfDlFrames,
-	numberOfAntennaPorts		NumberOfAntennaPorts,
-	sFNInitialisationTime		SFNInitialisationTime,
-	e-UTRANAccessPointPosition	E-UTRANAccessPointPosition,
-	...,
-	pRSMutingConfiguration		PRSMutingConfiguration
-}
-
-OTDOA-Information-Item ::= ENUMERATED {
-		pci,
-		cellid,
-		tac,
-		earfcn,
-		prsBandwidth,
-		prsConfigIndex,
-		cpLength,
-		noDlFrames,
-		noAntennaPorts,
-		sFNInitTime,
-		...,
-		e-UTRANAccessPointPosition,
-		prsmutingconfiguration
-}
-
--- P
-
-PCI ::= INTEGER (0..503, ...)
-
-PhysCellIDGERAN ::= INTEGER (0..63, ...)
-
-PhysCellIDUTRA-FDD ::= INTEGER (0..511, ...)
-
-PhysCellIDUTRA-TDD ::= INTEGER (0..127, ...)
-
-PLMN-Identity ::= OCTET STRING (SIZE(3))
-
-PRS-Bandwidth ::= ENUMERATED {
-		bw6,
-		bw15,
-		bw25,
-		bw50,
-		bw75,
-		bw100,
-		...
-}
-
-PRS-Configuration-Index ::= INTEGER (0..4095, ...)
-
-PRSMutingConfiguration ::= CHOICE {
-	two 			BIT STRING (SIZE (2)),
-	four 			BIT STRING (SIZE (4)),
-	eight 			BIT STRING (SIZE (8)),
-	sixteen 		BIT STRING (SIZE (16)),
-	...
-}
-
-
--- Q
--- R
-
-ReportCharacteristics ::= ENUMERATED {
-	onDemand,
-	periodic,
-	...
-}
-
-RequestedSRSTransmissionCharacteristics ::= SEQUENCE {
-	numberOfTransmissions	INTEGER (0..500, ...),
-	bandwidth				INTEGER (1..100, ...),
-	...
-}
-
-ResultRSRP ::= SEQUENCE (SIZE (1.. maxCellReport)) OF ResultRSRP-Item
-
-ResultRSRP-Item ::= SEQUENCE {
-	pCI				PCI,
-	eARFCN			EARFCN,
-	eCGI			ECGI OPTIONAL,
-	valueRSRP		ValueRSRP,
-	iE-Extensions	ProtocolExtensionContainer { { ResultRSRP-Item-ExtIEs} } OPTIONAL,
-	...
-}
-
-ResultRSRP-Item-ExtIEs LPPA-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-ResultRSRQ ::= SEQUENCE (SIZE (1.. maxCellReport)) OF ResultRSRQ-Item
-
-ResultRSRQ-Item ::= SEQUENCE {
-	pCI				PCI,
-	eARFCN			EARFCN,
-	eCGI			ECGI OPTIONAL,
-	valueRSRQ		ValueRSRQ,
-	iE-Extensions	ProtocolExtensionContainer { { ResultRSRQ-Item-ExtIEs} } OPTIONAL,
-	...
-}
-
-ResultRSRQ-Item-ExtIEs LPPA-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-ResultGERAN ::= SEQUENCE (SIZE (1.. maxGERANMeas)) OF ResultGERAN-Item
-
-ResultGERAN-Item ::= SEQUENCE {
-	bCCH				BCCH,
-	physCellIDGERAN		PhysCellIDGERAN,
-	rSSI				RSSI,
-	iE-Extensions		ProtocolExtensionContainer { { ResultGERAN-Item-ExtIEs} } OPTIONAL,
-	...
-}
-
-ResultGERAN-Item-ExtIEs LPPA-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-ResultUTRAN ::= SEQUENCE (SIZE (1.. maxUTRANMeas)) OF ResultUTRAN-Item
-
-ResultUTRAN-Item ::= SEQUENCE {
-	uARFCN				UARFCN,
-	physCellIDUTRAN		CHOICE {
-		physCellIDUTRA-FDD		PhysCellIDUTRA-FDD,
-		physCellIDUTRA-TDD		PhysCellIDUTRA-TDD
-	},
-	uTRA-RSCP			UTRA-RSCP OPTIONAL,
-	uTRA-EcN0			UTRA-EcN0 OPTIONAL,
-	iE-Extensions		ProtocolExtensionContainer { { ResultUTRAN-Item-ExtIEs} } OPTIONAL,
-	...
-}
-
-ResultUTRAN-Item-ExtIEs LPPA-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-RSSI ::= INTEGER (0..63, ...)
-
--- S
-
-SFNInitialisationTime ::= BIT STRING (SIZE (64))
-
-SRSConfigurationForAllCells ::= SEQUENCE (SIZE (1.. maxServCell)) OF SRSConfigurationForOneCell
-
-SRSConfigurationForOneCell ::= SEQUENCE {
-	pci							PCI,
-	ul-earfcn					EARFCN,
-	ul-bandwidth				ENUMERATED {n6, n15, n25, n50, n75, n100},
-	ul-cyclicPrefixLength		CPLength,
-	srs-BandwidthConfig			ENUMERATED {bw0, bw1, bw2, bw3, bw4, bw5, bw6, bw7},
-	srs-Bandwidth				ENUMERATED {bw0, bw1, bw2, bw3},
-	srs-AntennaPort				ENUMERATED {an1, an2, an4, ...},
-	srs-HoppingBandwidth		ENUMERATED {hbw0, hbw1, hbw2, hbw3},
-	srs-cyclicShift				ENUMERATED {cs0, cs1, cs2, cs3, cs4, cs5, cs6, cs7},
-	srs-ConfigIndex				INTEGER (0..1023),
-	maxUpPts					ENUMERATED {true}			OPTIONAL,	-- Cond ifTDD
-	transmissionComb			INTEGER (0..1),
-	freqDomainPosition			INTEGER (0..23),
-	groupHoppingEnabled			BOOLEAN,
-	deltaSS						INTEGER (0..29)				OPTIONAL,
-	sfnInitialisationTime		SFNInitialisationTime,
-	...
-}
-
--- T
-
-TAC ::= OCTET STRING (SIZE(2))
-
-
-TypeOfError ::= ENUMERATED {
-	not-understood,
-	missing,
-	...
-}
-
-
-
--- U
-
-ULConfiguration ::= SEQUENCE {
-	pci							PCI,
-	ul-earfcn					EARFCN,
-	timingAdvanceType1			INTEGER (0..7690)           OPTIONAL,
-	timingAdvanceType2			INTEGER (0..7690)			OPTIONAL,
-	numberOfTransmissions		INTEGER (0..500,...),
-	srsConfiguration			SRSConfigurationForAllCells,
-	...
-}
-
-UARFCN ::= INTEGER (0..16383, ...)
-
-UTRA-EcN0 ::= INTEGER (0..49, ...)
-
-UTRA-RSCP ::= INTEGER (-5..91, ...)
-
--- V
-
-ValueRSRP ::= INTEGER (0..97, ...)
-
-ValueRSRQ ::= INTEGER (0..34, ...)
-
--- W
--- X
--- Y
--- Z
-
-END
-
-9.3.6	Common definitions
--- **************************************************************
---
--- Common definitions
---
--- **************************************************************
-
-LPPA-CommonDataTypes {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
-eps-Access (21) modules (3) lppa (6) version1 (1) lppa-CommonDataTypes (3)  }
-
-DEFINITIONS AUTOMATIC TAGS ::= 
-
-BEGIN
-
--- **************************************************************
---
--- Extension constants
---
--- **************************************************************
-
-maxPrivateIEs 									INTEGER ::= 65535
-maxProtocolExtensions 							INTEGER ::= 65535
-maxProtocolIEs									INTEGER ::= 65535
-
--- **************************************************************
---
--- Common Data Types
---
--- **************************************************************
-
-Criticality		::= ENUMERATED { reject, ignore, notify }
-
-LPPATransactionID		::= INTEGER (0..32767)
-
-
-Presence		::= ENUMERATED { optional, conditional, mandatory }
-
-PrivateIE-ID	::= CHOICE {
-	local				INTEGER (0.. maxPrivateIEs),
-	global				OBJECT IDENTIFIER
-}
-
-ProcedureCode		::= INTEGER (0..255)
-
-
-ProtocolIE-ID		::= INTEGER (0..maxProtocolIEs)
-
-TriggeringMessage	::= ENUMERATED { initiating-message, successful-outcome, unsuccessful-outcome}
-
-END
-
-9.3.7	Constant definitions
--- **************************************************************
---
--- Constant definitions
---
--- **************************************************************
-
-LPPA-Constants {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
-eps-Access (21) modules (3) lppa (6) version1 (1) lppa-Constants (4) }
-
-DEFINITIONS AUTOMATIC TAGS ::= 
-
-BEGIN
-
-IMPORTS
-	ProcedureCode,
-	ProtocolIE-ID
-FROM LPPA-CommonDataTypes;
-
--- **************************************************************
---
--- Elementary Procedures
---
--- **************************************************************
-
-id-errorIndication												ProcedureCode ::= 0
-id-privateMessage												ProcedureCode ::= 1
-id-e-CIDMeasurementInitiation									ProcedureCode ::= 2
-id-e-CIDMeasurementFailureIndication							ProcedureCode ::= 3
-id-e-CIDMeasurementReport										ProcedureCode ::= 4
-id-e-CIDMeasurementTermination									ProcedureCode ::= 5
-id-oTDOAInformationExchange										ProcedureCode ::= 6
-id-uTDOAInformationExchange										ProcedureCode ::= 7
-id-uTDOAInformationUpdate										ProcedureCode ::= 8
-
--- **************************************************************
---
--- Lists
---
--- **************************************************************
-
-maxNrOfErrors								INTEGER ::= 256
-maxCellineNB								INTEGER ::= 256
-maxNoMeas									INTEGER ::= 63
-maxCellReport								INTEGER ::= 9
-maxnoOTDOAtypes								INTEGER ::= 63
-maxServCell									INTEGER ::= 5
-maxGERANMeas								INTEGER ::= 8
-maxUTRANMeas								INTEGER ::= 8
-
--- **************************************************************
---
--- IEs
---
--- **************************************************************
-
-id-Cause																	ProtocolIE-ID ::= 0
-id-CriticalityDiagnostics													ProtocolIE-ID ::= 1
-id-E-SMLC-UE-Measurement-ID													ProtocolIE-ID ::= 2
-id-ReportCharacteristics													ProtocolIE-ID ::= 3
-id-MeasurementPeriodicity													ProtocolIE-ID ::= 4
-id-MeasurementQuantities													ProtocolIE-ID ::= 5
-id-eNB-UE-Measurement-ID													ProtocolIE-ID ::= 6
-id-E-CID-MeasurementResult													ProtocolIE-ID ::= 7
-id-OTDOACells																ProtocolIE-ID ::= 8
-id-OTDOA-Information-Type-Group												ProtocolIE-ID ::= 9
-id-OTDOA-Information-Type-Item												ProtocolIE-ID ::= 10
-id-MeasurementQuantities-Item												ProtocolIE-ID ::= 11
-id-RequestedSRSTransmissionCharacteristics									ProtocolIE-ID ::= 12
-id-ULConfiguration															ProtocolIE-ID ::= 13
-id-Cell-Portion-ID															ProtocolIE-ID ::= 14
-id-InterRATMeasurementQuantities											ProtocolIE-ID ::= 15
-id-InterRATMeasurementQuantities-Item										ProtocolIE-ID ::= 16
-id-InterRATMeasurementResult												ProtocolIE-ID ::= 17
-
-END
-
-9.3.8	Container definitions
--- **************************************************************
---
--- Container definitions
---
--- **************************************************************
-
-LPPA-Containers {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
-eps-Access (21) modules (3) lppa (6) version1 (1) lppa-Containers (5)  }
-
-DEFINITIONS AUTOMATIC TAGS ::= 
-
-BEGIN
-
--- **************************************************************
---
--- IE parameter types from other modules.
---
--- **************************************************************
-
-IMPORTS
-	maxPrivateIEs,
-	maxProtocolExtensions,
-	maxProtocolIEs,
-	Criticality,
-	Presence,
-	PrivateIE-ID,
-	ProtocolIE-ID	
-FROM LPPA-CommonDataTypes;
-
--- **************************************************************
---
--- Class Definition for Protocol IEs
---
--- **************************************************************
-
-LPPA-PROTOCOL-IES ::= CLASS {
-	&id				ProtocolIE-ID			UNIQUE,
-	&criticality	Criticality,
-	&Value,
-	&presence		Presence
-}
-WITH SYNTAX {
-	ID				&id
-	CRITICALITY		&criticality
-	TYPE			&Value
-	PRESENCE		&presence
-}
-
--- **************************************************************
---
--- Class Definition for Protocol IEs
---
--- **************************************************************
-
-LPPA-PROTOCOL-IES-PAIR ::= CLASS {
-	&id						ProtocolIE-ID		UNIQUE,
-	&firstCriticality		Criticality,
-	&FirstValue,
-	&secondCriticality		Criticality,
-	&SecondValue,
-	&presence				Presence
-}
-WITH SYNTAX {
-	ID						&id
-	FIRST CRITICALITY 		&firstCriticality
-	FIRST TYPE				&FirstValue
-	SECOND CRITICALITY 		&secondCriticality
-	SECOND TYPE				&SecondValue
-	PRESENCE				&presence
-}
-
--- **************************************************************
---
--- Class Definition for Protocol Extensions
---
--- **************************************************************
-
-LPPA-PROTOCOL-EXTENSION ::= CLASS {
-	&id					ProtocolIE-ID		UNIQUE,
-	&criticality		Criticality,
-	&Extension,
-	&presence			Presence
-}
-WITH SYNTAX {
-	ID					&id
-	CRITICALITY			&criticality
-	EXTENSION			&Extension
-	PRESENCE			&presence
-}
-
--- **************************************************************
---
--- Class Definition for Private IEs
---
--- **************************************************************
-
-LPPA-PRIVATE-IES ::= CLASS {
-	&id					PrivateIE-ID,
-	&criticality		Criticality,
-	&Value,
-	&presence			Presence
-}
-WITH SYNTAX {
-	ID					&id
-	CRITICALITY			&criticality
-	TYPE				&Value
-	PRESENCE			&presence
-}
-
--- **************************************************************
---
--- Container for Protocol IEs
---
--- **************************************************************
-
-ProtocolIE-Container { LPPA-PROTOCOL-IES : IEsSetParam} ::= 
-	SEQUENCE (SIZE (0..maxProtocolIEs)) OF
-	ProtocolIE-Field {{IEsSetParam}}
-
-ProtocolIE-Single-Container { LPPA-PROTOCOL-IES : IEsSetParam} ::= 
-	ProtocolIE-Field {{IEsSetParam}}
-
-ProtocolIE-Field { LPPA-PROTOCOL-IES : IEsSetParam} ::= SEQUENCE {
-	id				LPPA-PROTOCOL-IES.&id					({IEsSetParam}),
-	criticality		LPPA-PROTOCOL-IES.&criticality			({IEsSetParam}{@id}),
-	value			LPPA-PROTOCOL-IES.&Value				({IEsSetParam}{@id})
-}
-
--- **************************************************************
---
--- Container for Protocol IE Pairs
---
--- **************************************************************
-
-ProtocolIE-ContainerPair { LPPA-PROTOCOL-IES-PAIR : IEsSetParam} ::= 
-	SEQUENCE (SIZE (0..maxProtocolIEs)) OF
-	ProtocolIE-FieldPair {{IEsSetParam}}
-
-ProtocolIE-FieldPair { LPPA-PROTOCOL-IES-PAIR : IEsSetParam} ::= SEQUENCE {
-	id					LPPA-PROTOCOL-IES-PAIR.&id					({IEsSetParam}),
-	firstCriticality	LPPA-PROTOCOL-IES-PAIR.&firstCriticality	({IEsSetParam}{@id}),
-	firstValue			LPPA-PROTOCOL-IES-PAIR.&FirstValue			({IEsSetParam}{@id}),
-	secondCriticality	LPPA-PROTOCOL-IES-PAIR.&secondCriticality	({IEsSetParam}{@id}),
-	secondValue			LPPA-PROTOCOL-IES-PAIR.&SecondValue			({IEsSetParam}{@id})
-}
-
--- **************************************************************
---
--- Container Lists for Protocol IE Containers
---
--- **************************************************************
-
-ProtocolIE-ContainerList {INTEGER : lowerBound, INTEGER : upperBound, LPPA-PROTOCOL-IES : IEsSetParam} ::=
-	SEQUENCE (SIZE (lowerBound..upperBound)) OF
-	ProtocolIE-Container {{IEsSetParam}}
-
-ProtocolIE-ContainerPairList {INTEGER : lowerBound, INTEGER : upperBound, LPPA-PROTOCOL-IES-PAIR : IEsSetParam} ::=
-	SEQUENCE (SIZE (lowerBound..upperBound)) OF
-	ProtocolIE-ContainerPair {{IEsSetParam}}
-
--- **************************************************************
---
--- Container for Protocol Extensions
---
--- **************************************************************
-
-ProtocolExtensionContainer { LPPA-PROTOCOL-EXTENSION : ExtensionSetParam} ::= 
-	SEQUENCE (SIZE (1..maxProtocolExtensions)) OF
-	ProtocolExtensionField {{ExtensionSetParam}}
-
-ProtocolExtensionField { LPPA-PROTOCOL-EXTENSION : ExtensionSetParam} ::= SEQUENCE {
-	id					LPPA-PROTOCOL-EXTENSION.&id				({ExtensionSetParam}),
-	criticality			LPPA-PROTOCOL-EXTENSION.&criticality	({ExtensionSetParam}{@id}),
-	extensionValue		LPPA-PROTOCOL-EXTENSION.&Extension		({ExtensionSetParam}{@id})
-}
-
--- **************************************************************
---
--- Container for Private IEs
---
--- **************************************************************
-
-PrivateIE-Container { LPPA-PRIVATE-IES : IEsSetParam} ::= 
-	SEQUENCE (SIZE (1..maxPrivateIEs)) OF
-	PrivateIE-Field {{IEsSetParam}}
-
-PrivateIE-Field { LPPA-PRIVATE-IES : IEsSetParam} ::= SEQUENCE {
-	id				LPPA-PRIVATE-IES.&id			({IEsSetParam}),
-	criticality		LPPA-PRIVATE-IES.&criticality	({IEsSetParam}{@id}),
-	value			LPPA-PRIVATE-IES.&Value			({IEsSetParam}{@id})
-}
-
-END
-
-
-9.4	Message transfer syntax
-LPPa shall use the ASN.1 Basic Packed Encoding Rules (BASIC-PER) Aligned Variant as transfer syntax, as specified in ref. ITU-T Rec. X.691 [4].
-9.5	Timers
-Void.
-10	Handling of unknown, unforeseen and erroneous protocol data
-Section 10 of TS 36.413 [3] is applicable for the purposes of the present document, with the following additions:
-• In case of Abstract Syntax Error, when reporting the Criticality Diagnostics IE for not comprehended IE/IEgroups or missing IE/IE groups, the LPPa Transaction ID IE shall also be included;
-• In case of Logical Error, when reporting the Criticality Diagnostics IE, the LPPa Transaction ID IE shall also be included.
-
-Annex A (informative):
-Change History
-TSG #TSG Doc.CRRevSubject/CommentNew11/2009First version is created0.0.012/2009Increasing the version to 2.0.0 for approval at RAN#462.0.046RP-091213Approved at RAN#469.0.047RP-10022500013Inclusion of Geographical Area and E-UTRAN Access Point Position information9.1.047RP-10022500031Introduction of new cause values in LPPa9.1.047RP-1002250004Introduction of EARFCN information in E-CID measurement results over LPPa9.1.047RP-1002250007Rapporteur’s update of LPPa protocol9.1.048RP-10060000101Clarification on E-CID MEASUREMENT INITIATION  procedure9.2.048RP-1006000011Correction of signalling of E-UTRAN Access Point Position9.2.048RP-10060000132Addition of PRS Muting Configuration information to LPPa9.2.048RP-10060000152Access Point reporting for OTDOA9.2.049RP-1009060016Rapporteur’s update9.3.050RP-1012700017Object ID for LPPa modules9.4.012/2010Created Rel-10 version based v. 9.4.010.0.0SP-49SP-100629Clarification on the use of References (TS 21.801 CR#0030)10.0.152RP-11068900181Correction of Measured Result IE10.1.052RP-11068600191Rapporteur’s proposal following review of TS 36.45510.1.052RP-1106850020Reference review outcome in TS 36.45510.1.053RP-1111960021Encoding of SFN Initialisation Time10.2.056RP-1207440026Correction of SFN Initialization Time10.3.056RP-1207440027Correction of E-UTRAN Acess Point Position10.3.057RP-12113100302Correction on E-CID Measurements10.4.009/2012Update to Rel-11 version (MCC)11.0.058RP-1217360036Correction on Uncertainty Altitude11.1.059RP-1302370042Extending maxEARFCN11.2.060RP-13084000453Network Based Positioning Support in LTE11.3.064RP-14090500464Adding Cell Portion to E-CID Measurement Reporting12.0.064RP-14090400474Modifications of LPPa to Include inter-RAT Measurements12.0.066RP-14209300481LPPa Rapporteur Update12.1.066RP-14209400491Corrections to Inter-RAT Measurements in TS 36.45512.1.067RP-15035600501ASN.1 Corrections for LPPa12.2.012/2015Update to Rel-13 version (MCC)13.0.071RP-1604490054LPPa Rapporteur Update13.1.0
-3GPP TS 36.455 V13.1.0 (2016-03)
-61
-Release 13
-
-
-3GPP
-

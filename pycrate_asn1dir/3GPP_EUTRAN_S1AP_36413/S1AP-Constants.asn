@@ -93,6 +93,7 @@ id-RetrieveUEInformation					ProcedureCode ::= 58
 id-UEInformationTransfer					ProcedureCode ::= 59
 id-eNBCPRelocationIndication				ProcedureCode ::= 60
 id-MMECPRelocationIndication				ProcedureCode ::= 61
+id-SecondaryRATDataUsageReport				ProcedureCode ::= 62
 
 -- **************************************************************
 --
@@ -121,7 +122,7 @@ maxnoofEPLMNsPlusOne					INTEGER ::= 16
 maxnoofForbLACs							INTEGER ::= 4096
 maxnoofForbTACs							INTEGER ::= 4096
 maxnoofIndividualS1ConnectionsToReset	INTEGER ::= 256
-maxnoofCells							INTEGER ::= 16
+maxnoofCellsinUEHistoryInfo				INTEGER ::= 16
 maxnoofCellsineNB						INTEGER ::= 256
 maxnoofTAIforWarning					INTEGER ::= 65535 
 maxnoofCellID							INTEGER ::= 65535 
@@ -145,6 +146,15 @@ maxEARFCN								INTEGER ::= 262143
 maxnoofMBSFNAreaMDT						INTEGER ::= 8
 maxnoofRecommendedCells					INTEGER ::= 16
 maxnoofRecommendedENBs					INTEGER ::= 16
+maxnooftimeperiods						INTEGER ::= 2 
+maxnoofCellIDforQMC						INTEGER ::= 32
+maxnoofTAforQMC							INTEGER ::= 8
+maxnoofPLMNforQMC						INTEGER ::= 16
+maxnoofBluetoothName					INTEGER ::= 4
+maxnoofWLANName							INTEGER ::= 4
+maxnoofConnectedengNBs					INTEGER ::= 256
+
+
 
 -- **************************************************************
 --
@@ -389,7 +399,47 @@ id-EnhancedCoverageRestricted						ProtocolIE-ID ::= 251
 id-UE-Level-QoS-Parameters							ProtocolIE-ID ::= 252
 id-DL-CP-SecurityInformation						ProtocolIE-ID ::= 253
 id-UL-CP-SecurityInformation						ProtocolIE-ID ::= 254
+id-extended-e-RAB-MaximumBitrateDL					ProtocolIE-ID ::= 255
+id-extended-e-RAB-MaximumBitrateUL					ProtocolIE-ID ::= 256
+id-extended-e-RAB-GuaranteedBitrateDL				ProtocolIE-ID ::= 257
+id-extended-e-RAB-GuaranteedBitrateUL				ProtocolIE-ID ::= 258
+id-extended-uEaggregateMaximumBitRateDL				ProtocolIE-ID ::= 259
+id-extended-uEaggregateMaximumBitRateUL				ProtocolIE-ID ::= 260
+id-NRrestrictioninEPSasSecondaryRAT					ProtocolIE-ID ::= 261
+id-UEAppLayerMeasConfig								ProtocolIE-ID ::= 262
+id-UE-Application-Layer-Measurement-Capability		ProtocolIE-ID ::= 263
+id-SecondaryRATDataUsageReportList					ProtocolIE-ID ::= 264
+id-SecondaryRATDataUsageReportItem					ProtocolIE-ID ::= 265
+id-HandoverFlag										ProtocolIE-ID ::= 266
+id-E-RABUsageReportItem								ProtocolIE-ID ::= 267
+id-SecondaryRATDataUsageRequest						ProtocolIE-ID ::= 268
+id-NRUESecurityCapabilities							ProtocolIE-ID ::= 269
+id-UnlicensedSpectrumRestriction					ProtocolIE-ID ::= 270
 id-CE-ModeBRestricted								ProtocolIE-ID ::= 271
+id-LTE-M-Indication									ProtocolIE-ID ::= 272
+id-DownlinkPacketLossRate							ProtocolIE-ID ::= 273
+id-UplinkPacketLossRate								ProtocolIE-ID ::= 274
+id-UECapabilityInfoRequest							ProtocolIE-ID ::= 275
+id-serviceType										ProtocolIE-ID ::= 276
+id-AerialUEsubscriptionInformation					ProtocolIE-ID ::= 277
+id-Subscription-Based-UE-DifferentiationInfo		ProtocolIE-ID ::= 278
+id-EndIndication									ProtocolIE-ID ::= 280
+id-EDT-Session										ProtocolIE-ID ::= 281
+id-CNTypeRestrictions								ProtocolIE-ID ::= 282
 id-PendingDataIndication							ProtocolIE-ID ::= 283
+id-BluetoothMeasurementConfiguration				ProtocolIE-ID ::= 284
+id-WLANMeasurementConfiguration						ProtocolIE-ID ::= 285
+id-WarningAreaCoordinates							ProtocolIE-ID ::= 286
+id-NRrestrictionin5GS								ProtocolIE-ID ::= 287
+id-PSCellInformation								ProtocolIE-ID ::= 288
+id-LastNG-RANPLMNIdentity							ProtocolIE-ID ::= 290
+id-ConnectedengNBList								ProtocolIE-ID ::= 291
+id-ConnectedengNBToAddList							ProtocolIE-ID ::= 292
+id-ConnectedengNBToRemoveList						ProtocolIE-ID ::= 293
+id-EN-DCSONConfigurationTransfer-ECT				ProtocolIE-ID ::= 294
+id-EN-DCSONConfigurationTransfer-MCT				ProtocolIE-ID ::= 295
+id-IMSvoiceEPSfallbackfrom5G						ProtocolIE-ID ::= 296
+id-TimeSinceSecondaryNodeRelease					ProtocolIE-ID ::= 297
+id-RequestTypeAdditionalInfo						ProtocolIE-ID ::= 298
 
 END

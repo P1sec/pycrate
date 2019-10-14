@@ -26,6 +26,15 @@ FROM XwAP-CommonDataTypes
 
 	
 	ErrorIndication,
+	LWIPAdditionRequest,
+	LWIPAdditionRequestAcknowledge,
+	LWIPAdditionRequestReject, 
+	LWIPModificationRequest,
+	LWIPModificationRequestAcknowledge,
+	LWIPModificationRequestReject,
+	LWIPReleaseRequest,
+	LWIPReleaseRequired,
+	LWIPReleaseConfirm,
 	PrivateMessage,
 	Reset,
 	ResetResponse,
@@ -67,8 +76,12 @@ FROM XwAP-PDU-Contents
 	id-wTInitiatedWTModification,
 	id-wTInitiatedWTRelease,
 	id-wTStatusReporting,
-	id-wTStatusReportingInitiation
-	
+	id-wTStatusReportingInitiation,
+	id-lWIPAdditionPreparation,
+	id-eNBInitiatedLWIPModification,
+	id-eNBInitiatedLWIPRelease,
+	id-wTInitiatedLWIPRelease
+
 FROM XwAP-Constants;
 
 
@@ -145,7 +158,10 @@ XWAP-ELEMENTARY-PROCEDURES-CLASS-1 XWAP-ELEMENTARY-PROCEDURE ::= {
 	wTAdditionPreparation			|
 	eNBInitiatedWTModification		|
 	wTInitiatedWTModification		|
-	wTInitiatedWTRelease			,
+	wTInitiatedWTRelease			|
+	lWIPAdditionPreparation			|
+	eNBInitiatedLWIPModification				|
+	wTInitiatedLWIPRelease			,
 
 	...
 }
@@ -155,7 +171,8 @@ XWAP-ELEMENTARY-PROCEDURES-CLASS-2 XWAP-ELEMENTARY-PROCEDURE ::= {
 	errorIndication					|
 	eNBInitiatedWTRelease			|
 	wTAssociationConfirmation		|
-	privateMessage					,
+	privateMessage					|
+	eNBInitiatedLWIPRelease			,
 	...
 }
 
@@ -255,6 +272,34 @@ privateMessage				XWAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		PrivateMessage
 	PROCEDURE CODE			id-privateMessage
 	CRITICALITY				ignore
+}
+
+lWIPAdditionPreparation		XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		LWIPAdditionRequest
+	SUCCESSFUL OUTCOME		LWIPAdditionRequestAcknowledge
+	UNSUCCESSFUL OUTCOME	LWIPAdditionRequestReject
+	PROCEDURE CODE			id-lWIPAdditionPreparation
+	CRITICALITY				reject
+}
+eNBInitiatedLWIPModification	XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE			LWIPModificationRequest
+	SUCCESSFUL OUTCOME			LWIPModificationRequestAcknowledge
+	UNSUCCESSFUL OUTCOME 		LWIPModificationRequestReject
+	PROCEDURE CODE				id-eNBInitiatedLWIPModification
+	CRITICALITY					reject
+}
+
+eNBInitiatedLWIPRelease		XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		LWIPReleaseRequest
+	PROCEDURE CODE			id-eNBInitiatedLWIPRelease
+	CRITICALITY				ignore
+}
+
+wTInitiatedLWIPRelease		XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		LWIPReleaseRequired
+	SUCCESSFUL OUTCOME		LWIPReleaseConfirm
+	PROCEDURE CODE			id-wTInitiatedLWIPRelease
+	CRITICALITY				reject
 }
 
 END

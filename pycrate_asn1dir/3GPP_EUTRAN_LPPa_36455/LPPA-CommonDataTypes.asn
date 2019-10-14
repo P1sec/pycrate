@@ -1,3 +1,4 @@
+-- ASN1START
 -- **************************************************************
 --
 -- Common definitions
@@ -6,7 +7,7 @@
 
 LPPA-CommonDataTypes {
 itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
-eps-Access (21) modules (3) lppa (6) version1 (1) lppa-CommonDataTypes (3)  }
+eps-Access (21) modules (3) lppa (6) version1 (1) lppa-CommonDataTypes (3)}
 
 DEFINITIONS AUTOMATIC TAGS ::= 
 
