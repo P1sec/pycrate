@@ -1,0 +1,968 @@
+-- **************************************************************
+--
+-- PDU definitions for XwAP.
+--
+-- **************************************************************
+
+XwAP-PDU-Contents { 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) xwap (8) version1 (1) xwap-PDU-Contents (1) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- IE parameter types from other modules.
+--
+-- **************************************************************
+
+IMPORTS
+
+	BSSMeasurementResult-List,
+	BSSToReport-List,
+	Cause,
+	CompleteFailureCauseInformation-List,
+	CriticalityDiagnostics,
+	E-RAB-ID,
+	E-RAB-List,
+	E-RAB-QoS-Parameters,
+	Global-ENB-ID,
+	GTPtunnelEndpoint,
+	Measurement-ID,
+	MeasurementInitiationResult-List,
+	MobilitySet,
+	PartialSuccessIndicator,
+	PLMN-Identity,
+	Registration-Request,
+	ReportCharacteristics,
+	ReportingPeriodicity,
+	UE-Identity,
+	UE-XwAP-ID,
+	WLANIdentifier-List,
+	WLANIdentifiersToDelete-List,
+	WLANIdentifiersToDeleteExtension-List,
+	WLANSecurityInfo,
+	WTID
+
+FROM XwAP-IEs
+
+	PrivateIE-Container{},
+	ProtocolExtensionContainer{},
+	ProtocolIE-Container{},
+	ProtocolIE-ContainerList{},
+	ProtocolIE-ContainerPair{},
+	ProtocolIE-ContainerPairList{},
+	ProtocolIE-SingleContainer{},
+	XWAP-PRIVATE-IES,
+	XWAP-PROTOCOL-EXTENSION,
+	XWAP-PROTOCOL-IES,
+	XWAP-PROTOCOL-IES-PAIR
+FROM XwAP-Containers
+
+
+	id-BSSMeasurementResult-List,
+	id-BSSToReport-List,
+	id-Cause,
+	id-CompleteFailureCauseInformation-List,
+	id-UE-ContextInformationWTModReq,
+	id-CriticalityDiagnostics,
+	id-ENB-Measurement-ID,
+	id-ENB-UE-XwAP-ID,
+	id-E-RABs-Admitted-ToBeAdded-Item,
+	id-E-RABs-Admitted-ToBeAdded-List,
+	id-E-RABs-Admitted-ToBeAdded-ModAckItem,
+	id-E-RABs-Admitted-ToBeAdded-ModAckList,
+	id-E-RABs-Admitted-ToBeModified-ModAckItem,
+	id-E-RABs-Admitted-ToBeModified-ModAckList,
+	id-E-RABs-Admitted-ToBeReleased-ModAckItem,
+	id-E-RABs-Admitted-ToBeReleased-ModAckList,
+	id-E-RABs-Confirmed-ToBeModified-ModReqdList,
+	id-E-RABs-Confirmed-ToBeModified-ModReqdItem,
+	id-E-RABs-Confirmed-ToBeReleased-ModReqdList,
+	id-E-RABs-Confirmed-ToBeReleased-ModReqdItem,
+	id-E-RABs-NotAdmitted-List,
+	id-E-RABs-ToBeAdded-Item,
+	id-E-RABs-ToBeAdded-List,
+	id-E-RABs-ToBeAdded-ModReqItem,
+	id-E-RABs-ToBeModified-ModReqItem,
+	id-E-RABs-ToBeModified-ModReqdList,
+	id-E-RABs-ToBeModified-ModReqdItem,
+	id-E-RABs-ToBeReleased-ModReqItem,
+	id-E-RABs-ToBeReleased-List-RelConf,
+	id-E-RABs-ToBeReleased-RelConfItem,
+	id-E-RABs-ToBeReleased-List-RelReq,
+	id-E-RABs-ToBeReleased-RelReqItem,
+	id-E-RABs-ToBeReleased-ModReqdList,
+	id-E-RABs-ToBeReleased-ModReqdItem,
+	id-Global-ENB-ID,
+	id-MeasurementInitiationResult-List,
+	id-MobilitySet,
+	id-PartialSuccessIndicator,
+	id-ServingPLMN,
+	id-Registration-Request,
+	id-ReportCharacteristics,
+	id-ReportingPeriodicity,
+	id-UE-Identity,
+	id-WLANIdentifier-List, 
+	id-WLANIdentifiersToAdd-List,
+	id-WLANIdentifiersToDelete-List,
+	id-WLANIdentifiersToDeleteExtension-List,
+	id-WLANIdentifiersToModify-List,
+	id-WLANSecurityInfo,
+	id-WTID,
+	id-WT-Measurement-ID,
+	id-WT-UE-XwAP-ID,
+
+	maxnoofBearers
+FROM XwAP-Constants;
+
+
+-- **************************************************************
+--
+-- Xw SETUP ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- Xw Setup Request
+--
+-- **************************************************************
+
+XwSetupRequest ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { {XwSetupRequestIEs} },
+	...
+}
+
+XwSetupRequestIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-Global-ENB-ID	CRITICALITY reject	TYPE Global-ENB-ID		PRESENCE mandatory	},
+	...
+}
+
+-- **************************************************************
+--
+-- Xw Setup Response
+--
+-- **************************************************************
+
+XwSetupResponse ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { {XwSetupResponseIEs} },
+	...
+}
+
+XwSetupResponseIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-WTID					CRITICALITY reject	TYPE WTID						PRESENCE mandatory}|
+	{ ID id-WLANIdentifier-List		CRITICALITY reject	TYPE WLANIdentifier-List		PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics	CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- Xw Setup Failure
+--
+-- **************************************************************
+
+XwSetupFailure ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { {XwSetupFailureIEs} },
+	...
+}
+
+XwSetupFailureIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-Cause					CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics	CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- WT CONFIGURATION UPDATE ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- WT Configuration Update 
+--
+-- **************************************************************
+
+WTConfigurationUpdate ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { {WTConfigurationUpdateIEs} },
+	...
+}
+
+WTConfigurationUpdateIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-WLANIdentifiersToAdd-List				CRITICALITY reject	TYPE WLANIdentifier-List								PRESENCE optional}|
+	{ ID id-WLANIdentifiersToModify-List			CRITICALITY reject	TYPE WLANIdentifier-List								PRESENCE optional}|
+	{ ID id-WLANIdentifiersToDelete-List			CRITICALITY reject	TYPE WLANIdentifiersToDelete-List					PRESENCE optional}|
+	{ ID id-WLANIdentifiersToDeleteExtension-List	CRITICALITY reject	TYPE WLANIdentifiersToDeleteExtension-List		PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- WT Configuration Update Acknowledge
+--
+-- **************************************************************
+
+WTConfigurationUpdateAcknowledge ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { {WTConfigurationUpdateAcknowledgeIEs} },
+	...
+}
+
+
+WTConfigurationUpdateAcknowledgeIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics	PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- WT Configuration Update Failure
+--
+-- **************************************************************
+
+WTConfigurationUpdateFailure ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { {WTConfigurationUpdateFailureIEs} },
+	...
+}
+
+WTConfigurationUpdateFailureIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-Cause						CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+...
+}
+
+-- **************************************************************
+--
+-- WT STATUS REPORTING INITIATION ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- WT Status Request 
+--
+-- **************************************************************
+
+WTStatusRequest ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{WTStatusRequest-IEs}},
+	...
+}
+
+WTStatusRequest-IEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}|
+	{ ID id-WT-Measurement-ID		CRITICALITY ignore	TYPE Measurement-ID				PRESENCE conditional}|
+-- The IE shall be present if the Registration Request IE is set to “Stop”--
+	{ ID id-Registration-Request	CRITICALITY reject	TYPE Registration-Request		PRESENCE mandatory}|
+	{ ID id-ReportCharacteristics	CRITICALITY reject	TYPE ReportCharacteristics		PRESENCE optional}|
+	{ ID id-BSSToReport-List		CRITICALITY ignore	TYPE BSSToReport-List			PRESENCE mandatory}|
+	{ ID id-ReportingPeriodicity	CRITICALITY ignore	TYPE ReportingPeriodicity		PRESENCE optional}|
+	{ ID id-PartialSuccessIndicator	CRITICALITY ignore	TYPE PartialSuccessIndicator	PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- WT Status Response
+--
+-- **************************************************************
+
+WTStatusResponse ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{WTStatusResponse-IEs}},
+	...
+}
+
+WTStatusResponse-IEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-Measurement-ID					CRITICALITY reject	TYPE Measurement-ID								PRESENCE mandatory}|
+	{ ID id-WT-Measurement-ID					CRITICALITY reject	TYPE Measurement-ID								PRESENCE mandatory}|
+	{ ID id-MeasurementInitiationResult-List	CRITICALITY ignore	TYPE MeasurementInitiationResult-List		PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics				CRITICALITY ignore	TYPE CriticalityDiagnostics						PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- WT Status Failure
+--
+-- **************************************************************
+
+WTStatusFailure ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{WTStatusFailure-IEs}},
+	...
+}
+
+WTStatusFailure-IEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-Measurement-ID						CRITICALITY reject	TYPE Measurement-ID									PRESENCE mandatory}|
+	{ ID id-WT-Measurement-ID						CRITICALITY reject	TYPE Measurement-ID									PRESENCE mandatory}|
+	{ ID id-CompleteFailureCauseInformation-List	CRITICALITY ignore	TYPE CompleteFailureCauseInformation-List	PRESENCE optional}|
+	{ ID id-Cause									CRITICALITY ignore	TYPE Cause											PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics					CRITICALITY ignore	TYPE CriticalityDiagnostics						PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- WT STATUS REPORTING ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- WT Status Report
+--
+-- **************************************************************
+
+WTStatusReport ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{WTStatusReport-IEs}},
+	...
+}
+
+WTStatusReport-IEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-Measurement-ID			CRITICALITY reject	TYPE Measurement-ID					PRESENCE mandatory}|
+	{ ID id-WT-Measurement-ID			CRITICALITY reject	TYPE Measurement-ID					PRESENCE mandatory}|
+	{ ID id-BSSMeasurementResult-List	CRITICALITY ignore	TYPE BSSMeasurementResult-List		PRESENCE mandatory},
+	...
+}
+
+-- **************************************************************
+--
+-- ERROR INDICATION ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- Error Indication
+--
+-- **************************************************************
+
+ErrorIndication ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{ErrorIndication-IEs}},
+	...
+}
+
+ErrorIndication-IEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID				CRITICALITY ignore	TYPE UE-XwAP-ID						PRESENCE optional}|
+	{ ID id-WT-UE-XwAP-ID				CRITICALITY ignore	TYPE UE-XwAP-ID						PRESENCE optional}|
+	{ ID id-Cause						CRITICALITY ignore	TYPE Cause							PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- RESET ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- Reset
+--
+-- **************************************************************
+
+Reset ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{Reset-IEs}},
+	...
+}
+
+Reset-IEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-Cause		CRITICALITY ignore	TYPE Cause			PRESENCE mandatory},
+	...
+}
+
+-- **************************************************************
+--
+-- Reset Response
+--
+-- **************************************************************
+
+ResetResponse ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{ResetResponse-IEs}},
+	...
+}
+
+ResetResponse-IEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- WT ADDITION PREPARATION ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- WT Addition Request
+--
+-- **************************************************************
+
+WTAdditionRequest ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { {WTAdditionRequestIEs} },
+	...
+}
+
+WTAdditionRequestIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID			CRITICALITY reject	TYPE UE-XwAP-ID					PRESENCE mandatory}|
+	{ ID id-UE-Identity				CRITICALITY reject	TYPE UE-Identity				PRESENCE mandatory}|
+	{ ID id-WLANSecurityInfo		CRITICALITY reject	TYPE WLANSecurityInfo			PRESENCE optional}|
+	{ ID id-ServingPLMN				CRITICALITY ignore	TYPE PLMN-Identity				PRESENCE optional}|
+	{ ID id-E-RABs-ToBeAdded-List	CRITICALITY reject	TYPE E-RABs-ToBeAdded-List		PRESENCE mandatory}|
+	{ ID id-MobilitySet				CRITICALITY reject	TYPE MobilitySet				PRESENCE mandatory},
+	...
+}
+
+E-RABs-ToBeAdded-List ::= SEQUENCE (SIZE(1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-ToBeAdded-ItemIEs} }
+
+E-RABs-ToBeAdded-ItemIEs 	XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-ToBeAdded-Item	CRITICALITY reject	TYPE E-RABs-ToBeAdded-Item	PRESENCE mandatory},
+	...
+}
+
+E-RABs-ToBeAdded-Item ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID,
+	e-RAB-QoS-Parameters			E-RAB-QoS-Parameters,
+	eNB-GTPtunnelEndpoint			GTPtunnelEndpoint,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-ToBeAdded-ItemExtIEs} } OPTIONAL,
+	...
+}
+
+E-RABs-ToBeAdded-ItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- **************************************************************
+--
+-- WT Addition Request Acknowledge
+--
+-- **************************************************************
+
+WTAdditionRequestAcknowledge ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { WTAdditionRequestAcknowledgeIEs} },
+	...
+}
+
+WTAdditionRequestAcknowledgeIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID						CRITICALITY ignore	TYPE UE-XwAP-ID								PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID						CRITICALITY ignore	TYPE UE-XwAP-ID								PRESENCE mandatory}|
+	{ ID id-E-RABs-Admitted-ToBeAdded-List		CRITICALITY ignore	TYPE E-RABs-Admitted-ToBeAdded-List		PRESENCE mandatory}|
+	{ ID id-E-RABs-NotAdmitted-List				CRITICALITY ignore	TYPE E-RAB-List								PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics				CRITICALITY ignore	TYPE CriticalityDiagnostics					PRESENCE optional},
+	...
+}
+
+E-RABs-Admitted-ToBeAdded-List ::= SEQUENCE (SIZE (1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-Admitted-ToBeAdded-ItemIEs} }
+
+E-RABs-Admitted-ToBeAdded-ItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-Admitted-ToBeAdded-Item	CRITICALITY ignore	TYPE E-RABs-Admitted-ToBeAdded-Item		PRESENCE mandatory}
+}
+
+E-RABs-Admitted-ToBeAdded-Item ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID,
+	wT-GTPtunnelEndpoint			GTPtunnelEndpoint,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-Admitted-ToBeAdded-ItemExtIEs} } OPTIONAL,
+	...
+}
+
+E-RABs-Admitted-ToBeAdded-ItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- **************************************************************
+--
+-- WT Addition Request Reject
+--
+-- **************************************************************
+
+WTAdditionRequestReject ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { WTAdditionRequestRejectIEs} },
+	...
+}
+
+WTAdditionRequestRejectIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID			CRITICALITY ignore	TYPE UE-XwAP-ID					PRESENCE mandatory}|
+	{ ID id-Cause					CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics	CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+
+-- **************************************************************
+--
+-- eNB INITIATED WT MODIFICATION ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- WT Modification Request
+--
+-- **************************************************************
+
+WTModificationRequest ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { WTModificationRequestIEs} },
+	...
+}
+
+WTModificationRequestIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID					CRITICALITY reject	TYPE UE-XwAP-ID								PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID					CRITICALITY reject	TYPE UE-XwAP-ID								PRESENCE mandatory}|
+	{ ID id-Cause							CRITICALITY ignore	TYPE Cause									PRESENCE mandatory}|
+	{ ID id-ServingPLMN						CRITICALITY ignore	TYPE PLMN-Identity							PRESENCE optional}|
+	{ ID id-UE-ContextInformationWTModReq	CRITICALITY reject	TYPE UE-ContextInformationWTModReq		PRESENCE optional}|
+	{ ID id-MobilitySet						CRITICALITY reject	TYPE MobilitySet							PRESENCE optional},
+	...
+}
+
+UE-ContextInformationWTModReq ::= SEQUENCE {
+	wLANSecurityInfo					WLANSecurityInfo					OPTIONAL,
+	e-RABs-ToBeAdded					E-RABs-ToBeAdded-List-ModReq		OPTIONAL,
+	e-RABs-ToBeModified					E-RABs-ToBeModified-List-ModReq		OPTIONAL,
+	e-RABs-ToBeReleased					E-RABs-ToBeReleased-List-ModReq		OPTIONAL,
+	iE-Extensions						ProtocolExtensionContainer { { UE-ContextInformationWTModReqExtIEs} }	OPTIONAL,
+	...
+}
+
+UE-ContextInformationWTModReqExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+E-RABs-ToBeAdded-List-ModReq ::= SEQUENCE (SIZE(1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-ToBeAdded-ModReqItemIEs} }
+
+E-RABs-ToBeAdded-ModReqItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-ToBeAdded-ModReqItem	CRITICALITY ignore	TYPE E-RABs-ToBeAdded-ModReqItem	PRESENCE mandatory},
+	...
+}
+
+E-RABs-ToBeAdded-ModReqItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID,
+	e-RAB-QoS-Parameters			E-RAB-QoS-Parameters,
+	eNB-GTPtunnelEndpoint			GTPtunnelEndpoint,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-ToBeAdded-ModReqItemExtIEs} } OPTIONAL,
+	...
+}
+
+E-RABs-ToBeAdded-ModReqItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+E-RABs-ToBeModified-List-ModReq ::= SEQUENCE (SIZE(1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-ToBeModified-ModReqItemIEs} }
+
+E-RABs-ToBeModified-ModReqItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-ToBeModified-ModReqItem	CRITICALITY ignore	TYPE E-RABs-ToBeModified-ModReqItem		PRESENCE mandatory},
+	...
+}
+
+E-RABs-ToBeModified-ModReqItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID,
+	e-RAB-QoS-Parameters			E-RAB-QoS-Parameters		OPTIONAL,
+	eNB-GTPtunnelEndpoint			GTPtunnelEndpoint			OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-ToBeModified-ModReqItemExtIEs} } OPTIONAL,
+	...
+}
+
+E-RABs-ToBeModified-ModReqItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+E-RABs-ToBeReleased-List-ModReq ::= SEQUENCE (SIZE(1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-ToBeReleased-ModReqItemIEs} }
+
+E-RABs-ToBeReleased-ModReqItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-ToBeReleased-ModReqItem	CRITICALITY ignore	TYPE E-RABs-ToBeReleased-ModReqItem		PRESENCE mandatory},
+	...
+}
+
+E-RABs-ToBeReleased-ModReqItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID, 
+	dL-GTPtunnelEndpoint			GTPtunnelEndpoint															OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-ToBeReleased-ModReqItemExtIEs} } 	OPTIONAL,
+	...
+}
+
+E-RABs-ToBeReleased-ModReqItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- **************************************************************
+--
+-- WT Modification Request Acknowledge
+--
+-- **************************************************************
+
+WTModificationRequestAcknowledge ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { WTModificationRequestAcknowledgeIEs} },
+	...
+}
+
+WTModificationRequestAcknowledgeIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID							CRITICALITY ignore	TYPE UE-XwAP-ID											PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID							CRITICALITY ignore	TYPE UE-XwAP-ID											PRESENCE mandatory}|
+	{ ID id-E-RABs-Admitted-ToBeAdded-ModAckList	CRITICALITY ignore	TYPE E-RABs-Admitted-ToBeAdded-ModAckList		PRESENCE optional}|
+	{ ID id-E-RABs-Admitted-ToBeModified-ModAckList	CRITICALITY ignore	TYPE E-RABs-Admitted-ToBeModified-ModAckList	PRESENCE optional}|
+	{ ID id-E-RABs-Admitted-ToBeReleased-ModAckList	CRITICALITY ignore	TYPE E-RABs-Admitted-ToBeReleased-ModAckList	PRESENCE optional}|
+	{ ID id-E-RABs-NotAdmitted-List					CRITICALITY ignore	TYPE E-RAB-List											PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics					CRITICALITY ignore	TYPE CriticalityDiagnostics							PRESENCE optional},
+	...
+}
+
+E-RABs-Admitted-ToBeAdded-ModAckList ::= SEQUENCE (SIZE (1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-Admitted-ToBeAdded-ModAckItemIEs} }
+
+E-RABs-Admitted-ToBeAdded-ModAckItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-Admitted-ToBeAdded-ModAckItem	CRITICALITY ignore	TYPE E-RABs-Admitted-ToBeAdded-ModAckItem		PRESENCE mandatory}
+}
+
+E-RABs-Admitted-ToBeAdded-ModAckItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID,
+	wT-GTPtunnelEndpoint			GTPtunnelEndpoint,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-Admitted-ToBeAdded-ModAckItemExtIEs} } OPTIONAL,
+	...
+}
+
+E-RABs-Admitted-ToBeAdded-ModAckItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+E-RABs-Admitted-ToBeModified-ModAckList ::= SEQUENCE (SIZE (1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-Admitted-ToBeModified-ModAckItemIEs} }
+
+E-RABs-Admitted-ToBeModified-ModAckItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-Admitted-ToBeModified-ModAckItem		CRITICALITY ignore	TYPE E-RABs-Admitted-ToBeModified-ModAckItem	PRESENCE mandatory}
+}
+
+E-RABs-Admitted-ToBeModified-ModAckItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID,
+	wT-GTPtunnelEndpoint			GTPtunnelEndpoint						OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-Admitted-ToBeModified-ModAckItemExtIEs} } OPTIONAL,
+	...
+}
+
+E-RABs-Admitted-ToBeModified-ModAckItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+E-RABs-Admitted-ToBeReleased-ModAckList ::= SEQUENCE (SIZE (1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-Admitted-ToBeReleased-ModAckItemIEs} }
+
+E-RABs-Admitted-ToBeReleased-ModAckItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-Admitted-ToBeReleased-ModAckItem		CRITICALITY ignore	TYPE E-RABs-Admitted-ToBeReleased-ModAckItem		PRESENCE mandatory}
+}
+
+E-RABs-Admitted-ToBeReleased-ModAckItem ::= SEQUENCE {
+	e-RAB-ID					E-RAB-ID,
+	iE-Extensions				ProtocolExtensionContainer { {E-RABs-Admitted-ToBeReleased-ModAckItemExtIEs} } OPTIONAL,
+	...
+}
+
+E-RABs-Admitted-ToBeReleased-ModAckItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- **************************************************************
+--
+-- WT Modification Request Reject
+--
+-- **************************************************************
+
+WTModificationRequestReject ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { WTModificationRequestRejectIEs} },
+	...
+}
+
+WTModificationRequestRejectIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID			CRITICALITY ignore	TYPE UE-XwAP-ID					PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID			CRITICALITY ignore	TYPE UE-XwAP-ID					PRESENCE mandatory}|
+	{ ID id-Cause					CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics	CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- WT INITIATED WT MODIFICATION ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- WT Modification Required
+--
+-- **************************************************************
+
+WTModificationRequired ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { WTModificationRequiredIEs} },
+	...
+}
+
+WTModificationRequiredIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID					CRITICALITY reject	TYPE UE-XwAP-ID							PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID					CRITICALITY reject	TYPE UE-XwAP-ID							PRESENCE mandatory}|
+	{ ID id-Cause							CRITICALITY ignore	TYPE Cause								PRESENCE mandatory}|
+	{ ID id-E-RABs-ToBeReleased-ModReqdList	CRITICALITY ignore	TYPE E-RABs-ToBeReleased-ModReqdList	PRESENCE optional}|
+	{ ID id-E-RABs-ToBeModified-ModReqdList	CRITICALITY ignore	TYPE E-RABs-ToBeModified-ModReqdList	PRESENCE optional},
+	...
+}
+
+E-RABs-ToBeReleased-ModReqdList ::= SEQUENCE (SIZE (1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-ToBeReleased-ModReqdItemIEs} }
+
+E-RABs-ToBeReleased-ModReqdItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-ToBeReleased-ModReqdItem	CRITICALITY ignore	TYPE E-RABs-ToBeReleased-ModReqdItem	PRESENCE mandatory},
+	...
+}
+
+E-RABs-ToBeReleased-ModReqdItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID,
+	cause							Cause,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-ToBeReleased-ModReqdItemExtIEs} } OPTIONAL,
+	...
+}
+
+E-RABs-ToBeReleased-ModReqdItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+E-RABs-ToBeModified-ModReqdList ::= SEQUENCE (SIZE (1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-ToBeModified-ModReqdItemIEs} }
+
+E-RABs-ToBeModified-ModReqdItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-ToBeModified-ModReqdItem	CRITICALITY ignore	TYPE E-RABs-ToBeModified-ModReqdItem	PRESENCE mandatory},
+	...
+}
+
+E-RABs-ToBeModified-ModReqdItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID,
+	wT-GTPtunnelEndpoint			GTPtunnelEndpoint				OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-ToBeModified-ModReqdItemExtIEs} } OPTIONAL,
+	...
+}
+
+E-RABs-ToBeModified-ModReqdItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- WT Modification Confirm
+--
+-- **************************************************************
+
+WTModificationConfirm ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { WTModificationConfirmIEs} },
+	...
+}
+
+WTModificationConfirmIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID								CRITICALITY ignore	TYPE UE-XwAP-ID												PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID								CRITICALITY ignore	TYPE UE-XwAP-ID												PRESENCE mandatory}|
+	{ ID id-E-RABs-Confirmed-ToBeReleased-ModReqdList	CRITICALITY ignore	TYPE E-RABs-Confirmed-ToBeReleased-ModReqdList	PRESENCE optional}|
+	{ ID id-E-RABs-Confirmed-ToBeModified-ModReqdList	CRITICALITY ignore	TYPE E-RABs-Confirmed-ToBeModified-ModReqdList	PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics						CRITICALITY ignore	TYPE CriticalityDiagnostics								PRESENCE optional},
+	...
+}
+
+E-RABs-Confirmed-ToBeReleased-ModReqdList ::= SEQUENCE (SIZE(1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-Confirmed-ToBeReleased-ModReqdItemIEs} }
+
+E-RABs-Confirmed-ToBeReleased-ModReqdItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-Confirmed-ToBeReleased-ModReqdItem	CRITICALITY ignore	TYPE E-RABs-Confirmed-ToBeReleased-ModReqdItem	PRESENCE mandatory},
+	...
+}
+
+E-RABs-Confirmed-ToBeReleased-ModReqdItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID, 
+	dL-GTPtunnelEndpoint			GTPtunnelEndpoint															OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-Confirmed-ToBeReleased-ModReqdItemExtIEs} } 	OPTIONAL,
+	...
+}
+
+E-RABs-Confirmed-ToBeReleased-ModReqdItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+E-RABs-Confirmed-ToBeModified-ModReqdList ::= SEQUENCE (SIZE(1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-Confirmed-ToBeModified-ModReqdItemIEs} }
+
+E-RABs-Confirmed-ToBeModified-ModReqdItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-Confirmed-ToBeModified-ModReqdItem	CRITICALITY ignore	TYPE E-RABs-Confirmed-ToBeModified-ModReqdItem		PRESENCE mandatory},
+	...
+}
+
+E-RABs-Confirmed-ToBeModified-ModReqdItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID, 
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-Confirmed-ToBeModified-ModReqdItemExtIEs} } 	OPTIONAL,
+	...
+}
+
+E-RABs-Confirmed-ToBeModified-ModReqdItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- WT Modification Refuse
+--
+-- **************************************************************
+
+WTModificationRefuse ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { WTModificationRefuseIEs} },
+	...
+}
+
+WTModificationRefuseIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID			CRITICALITY ignore	TYPE UE-XwAP-ID					PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID			CRITICALITY ignore	TYPE UE-XwAP-ID					PRESENCE mandatory}|
+	{ ID id-Cause					CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics	CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+
+-- **************************************************************
+--
+-- eNB INITIATED WT RELEASE ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- WT Release Request
+--
+-- **************************************************************
+
+WTReleaseRequest ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{ WTReleaseRequest-IEs}},
+	...
+}
+
+WTReleaseRequest-IEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID						CRITICALITY reject	TYPE UE-XwAP-ID								PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID						CRITICALITY reject	TYPE UE-XwAP-ID								PRESENCE mandatory}|
+	{ ID id-Cause								CRITICALITY ignore	TYPE Cause									PRESENCE optional}|
+	{ ID id-E-RABs-ToBeReleased-List-RelReq		CRITICALITY ignore	TYPE E-RABs-ToBeReleased-List-RelReq	PRESENCE optional},
+	...
+}
+
+E-RABs-ToBeReleased-List-RelReq ::= SEQUENCE (SIZE(1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-ToBeReleased-RelReqItemIEs} }
+
+E-RABs-ToBeReleased-RelReqItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-ToBeReleased-RelReqItem		CRITICALITY ignore	TYPE E-RABs-ToBeReleased-RelReqItem		PRESENCE mandatory},
+	...
+}
+
+E-RABs-ToBeReleased-RelReqItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID,
+	wT-GTPtunnelEndpoint			GTPtunnelEndpoint														OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-ToBeReleased-RelReqItemExtIEs} } OPTIONAL,
+	...
+}
+
+E-RABs-ToBeReleased-RelReqItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- **************************************************************
+--
+-- WT INITIATED WT RELEASE ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- WT Release Required
+--
+-- **************************************************************
+
+WTReleaseRequired ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { WTReleaseRequiredIEs} },
+	...
+}
+
+WTReleaseRequiredIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID		CRITICALITY reject	TYPE UE-XwAP-ID		PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID		CRITICALITY reject	TYPE UE-XwAP-ID		PRESENCE mandatory}|
+	{ ID id-Cause				CRITICALITY ignore	TYPE Cause			PRESENCE mandatory},
+	...
+}
+
+-- **************************************************************
+--
+-- WT Release Confirm
+--
+-- **************************************************************
+
+WTReleaseConfirm ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { WTReleaseConfirmIEs} },
+	...
+}
+
+WTReleaseConfirmIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID						CRITICALITY ignore	TYPE UE-XwAP-ID									PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID						CRITICALITY ignore	TYPE UE-XwAP-ID									PRESENCE mandatory}|
+	{ ID id-E-RABs-ToBeReleased-List-RelConf	CRITICALITY ignore	TYPE E-RABs-ToBeReleased-List-RelConf		PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics				CRITICALITY ignore	TYPE CriticalityDiagnostics						PRESENCE optional},
+	...
+}
+
+E-RABs-ToBeReleased-List-RelConf ::= SEQUENCE (SIZE(1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-ToBeReleased-RelConfItemIEs} }
+
+E-RABs-ToBeReleased-RelConfItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-ToBeReleased-RelConfItem		CRITICALITY ignore	TYPE E-RABs-ToBeReleased-RelConfItem		PRESENCE mandatory},
+	...
+}
+
+E-RABs-ToBeReleased-RelConfItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID,
+	wT-GTPtunnelEndpoint			GTPtunnelEndpoint															OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-ToBeReleased-RelConfItemExtIEs} } OPTIONAL,
+	...
+}
+
+E-RABs-ToBeReleased-RelConfItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- **************************************************************
+--
+-- WT ASSOCIATION CONFIRMATION ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- WT Association Confirmation 
+--
+-- **************************************************************
+
+WTAssociationConfirmation ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { {WTAssociationConfirmationIEs} },
+	...
+}
+
+WTAssociationConfirmationIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID	CRITICALITY ignore	TYPE UE-XwAP-ID		PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID	CRITICALITY ignore	TYPE UE-XwAP-ID		PRESENCE mandatory},
+	...
+}
+
+
+-- **************************************************************
+--
+-- PRIVATE MESSAGE
+--
+-- **************************************************************
+
+PrivateMessage ::= SEQUENCE {
+	privateIEs		PrivateIE-Container	{{PrivateMessage-IEs}},
+	...
+}
+
+PrivateMessage-IEs XWAP-PRIVATE-IES ::= {
+	...
+}
+
+END

@@ -1,0 +1,6677 @@
+﻿
+
+
+
+
+Contents
+Foreword	7
+1	Scope	8
+2	References	8
+3	Definitions and abbreviations	9
+3.1	Definitions	9
+3.2	Abbreviations	9
+4	General	10
+4.1	Procedure specification principles	10
+4.2	Forwards and backwards compatibility	10
+4.3	Specification notations	10
+5	XwAP services	11
+5.1	General	11
+5.2	XwAP procedures	11
+5.3	Parallel transactions	11
+6	Services expected from signalling transport	11
+7	Functions of XwAP	11
+8	XwAP procedures	12
+8.1	Elementary procedures	12
+8.2	Xw Setup	13
+8.2.1	General	13
+8.2.2	Successful Operation	13
+8.2.3	Unsuccessful Operation	13
+8.2.4	Abnormal Conditions	14
+8.3	WT Configuration Update	14
+8.3.1	General	14
+8.3.2	Successful Operation	14
+8.3.3	Unsuccessful Operation	14
+8.3.4	Abnormal Conditions	15
+8.4	WT Status Reporting Initiation	15
+8.4.1	General	15
+8.4.2	Successful Operation	15
+8.4.3	Unsuccessful Operation	16
+8.4.4	Abnormal Conditions	16
+8.5	WT Status Reporting	16
+8.5.1	General	16
+8.5.2	Successful Operation	17
+8.5.3	Unsuccessful Operation	17
+8.5.4	Abnormal Conditions	17
+8.6	Error Indication	17
+8.6.1	General	17
+8.6.2	Successful Operation	17
+8.6.3	Unsuccessful Operation	18
+8.6.4	Abnormal Conditions	18
+8.7	Reset	18
+8.7.1	General	18
+8.7.2	Successful Operation	18
+8.7.3	Unsuccessful Operation	19
+8.7.4	Abnormal Conditions	19
+8.8	WT Addition Preparation	19
+8.8.1	General	19
+8.8.2	Successful Operation	19
+8.8.3	Unsuccessful Operation	20
+8.8.4	Abnormal Conditions	20
+8.9	eNB Initiated WT Modification	21
+8.9.1	General	21
+8.9.2	Successful Operation	21
+8.9.3	Unsuccessful Operation	22
+8.9.4	Abnormal Conditions	22
+8.10	WT Initiated WT Modification	23
+8.10.1	General	23
+8.10.2	Successful Operation	23
+8.10.3	Unsuccessful Operation	24
+8.10.4	Abnormal Conditions	24
+8.11	eNB Initiated WT Release	24
+8.11.1	General	24
+8.11.2	Successful Operation	24
+8.11.3	Unsuccessful Operation	25
+8.11.4	Abnormal Conditions	25
+8.12	 WT Initiated WT Release	25
+8.12.1	General	25
+8.12.2	Successful Operation	25
+8.12.3	Unsuccessful Operation	25
+8.12.4	Abnormal Conditions	26
+8.13	WT Association Confirmation	26
+8.13.1	General	26
+8.13.2	Successful Operation	26
+8.13.3	Unsuccessful Operation	26
+8.13.4	Abnormal Conditions	26
+8.14	LWIP Addition Preparation	26
+8.14.1	General	26
+8.14.2	Successful Operation	27
+8.14.3	Unsuccessful Operation	27
+8.14.4	Abnormal Conditions	27
+8.15	eNB Initiated LWIP Modification	28
+8.15.1	General	28
+8.15.2	Successful Operation	28
+8.15.3	Unsuccessful Operation	28
+8.15.4	Abnormal Conditions	28
+8.16	eNB Initiated LWIP Release	29
+8.16.1	General	29
+8.16.2	Successful Operation	29
+8.16.3	Unsuccessful Operation	29
+8.16.4	Abnormal Conditions	29
+8.17	 WT Initiated LWIP Release	29
+8.17.1	General	29
+8.17.2	Successful Operation	30
+8.17.3	Unsuccessful Operation	30
+8.17.4	Abnormal Conditions	30
+9	Elements for XwAP Communication	30
+9.0	General	30
+9.1	Message Functional Definition and Content	30
+9.1.1	Xw SETUP REQUEST	30
+9.1.2	Xw SETUP RESPONSE	31
+9.1.3	Xw SETUP FAILURE	31
+9.1.4	WT CONFIGURATION UPDATE	31
+9.1.5	WT CONFIGURATION UPDATE ACKNOWLEDGE	32
+9.1.6	WT CONFIGURATION UPDATE FAILURE	32
+9.1.7	WT STATUS REQUEST	33
+9.1.8	WT STATUS RESPONSE	34
+9.1.9	WT STATUS FAILURE	36
+9.1.10	WT STATUS REPORT	37
+9.1.11	ERROR INDICATION	37
+9.1.12	RESET	37
+9.1.13	RESET RESPONSE	38
+9.1.14	WT ADDITION REQUEST	38
+9.1.15	WT ADDITION REQUEST ACKNOWLEDGE	38
+9.1.16	WT ADDITION REQUEST REJECT	39
+9.1.17	WT MODIFICATION REQUEST	39
+9.1.18	WT MODIFICATION REQUEST ACKNOWLEDGE	40
+9.1.19	WT MODIFICATION REQUEST REJECT	41
+9.1.20	WT MODIFICATION REQUIRED	42
+9.1.21	WT MODIFICATION CONFIRM	42
+9.1.22	WT MODIFICATION REFUSE	43
+9.1.23	WT RELEASE REQUEST	43
+9.1.24	WT RELEASE REQUIRED	44
+9.1.25	WT RELEASE CONFIRM	44
+9.1.26	WT ASSOCIATION CONFIRMATION	45
+9.1.27	LWIP ADDITION REQUEST	45
+9.1.28	LWIP ADDITION REQUEST ACKNOWLEDGE	46
+9.1.29	LWIP ADDITION REQUEST REJECT	46
+9.1.30	LWIP MODIFICATION REQUEST	46
+9.1.31	LWIP MODIFICATION REQUEST ACKNOWLEDGE	46
+9.1.32	LWIP MODIFICATION REQUEST REJECT	47
+9.1.33	LWIP RELEASE REQUEST	47
+9.1.34	LWIP RELEASE REQUIRED	47
+9.1.35	LWIP RELEASE CONFIRM	48
+9.2	Information Element definitions	48
+9.2.0	General	48
+9.2.1	Message Type	48
+9.2.2	Global eNB ID	48
+9.2.3	PLMN Identity	49
+9.2.4	Cause	49
+9.2.5	Criticality Diagnostics	52
+9.2.6	WT ID	52
+9.2.7	WLAN Information	53
+9.2.8	BSSID	53
+9.2.9	SSID	54
+9.2.10	HESSID	54
+9.2.11	BSS Load	54
+9.2.12	WAN Metrics	54
+9.2.13	WLAN Band Information	55
+9.2.14	Channel Utilization	55
+9.2.15	WLAN Backhaul Rate	55
+9.2.16	UE Identity	55
+9.2.17	Bit Rate	55
+9.2.18	E-RAB ID	56
+9.2.19	E-RAB Level QoS Parameters	56
+9.2.20	Allocation and Retention Priority	56
+9.2.21	GBR QoS Information	57
+9.2.22	GTP Tunnel Endpoint	58
+9.2.23	E-RAB List	58
+9.2.24	UE XwAP ID	58
+9.2.25	Station Count	58
+9.2.26	Available Channel Utilization	58
+9.2.27	WLAN Security Information	59
+9.2.28	Mobility Set	59
+9.2.30	LWIP-SeGW Security Information	59
+9.2.32	UE Context Kept Indicator	60
+9.2.33	DRB-Identity	60
+9.2.34	LWA WLAN AC	60
+9.2.35	WT MAC Address	60
+9.3	Message and Information Element Abstract Syntax (with ASN.1)	61
+9.3.1	General	61
+9.3.2	Usage of Private Message Mechanism for Non-standard Use	61
+9.3.3	Elementary Procedure Definitions	61
+9.3.4	PDU Definitions	67
+9.3.5	Information Element definitions	90
+9.3.6	Common definitions	103
+9.3.7	Constant definitions	104
+9.3.8	Container definitions	107
+9.4	Message transfer syntax	112
+10	Handling of unknown, unforeseen and erroneous protocol data	112
+Annex A (informative):	Change history	112
+
+
+Foreword
+This Technical Specification has been produced by the 3rd Generation Partnership Project (3GPP).
+The contents of the present document are subject to continuing work within the TSG and may change following formal TSG approval. Should the TSG modify the contents of the present document, it will be re-released by the TSG with an identifying change of release date and an increase in version number as follows:
+Version x.y.z
+where:
+x	the first digit:
+1	presented to TSG for information;
+2	presented to TSG for approval;
+3	or greater indicates TSG approved document under change control.
+y	the second digit is incremented for all changes of substance, i.e. technical enhancements, corrections, updates, etc.
+z	the third digit is incremented when editorial only changes have been incorporated in the document.
+1	Scope
+The present document specifies the signalling procedures of the control plane between an eNB and WLAN Termination (WT). The Xw Application Protocol (XwAP) supports the functions of Xw interface by signalling procedures defined in this document.
+2	References
+The following documents contain provisions which, through reference in this text, constitute provisions of the present document.
+-	References are either specific (identified by date of publication, edition number, version number, etc.) or non‑specific.
+-	For a specific reference, subsequent revisions do not apply.
+-	For a non-specific reference, the latest version applies. In the case of a reference to a 3GPP document (including a GSM document), a non-specific reference implicitly refers to the latest version of that document in the same Release as the present document.
+[1]	3GPP TR 21.905: "Vocabulary for 3GPP Specifications".
+[2]	3GPP TS 36.300: "Evolved Universal Terrestrial Radio Access (E-UTRA) and Evolved Universal Terrestrial Radio Access Network (E-UTRAN); Overall description; Stage 2".
+[3]	3GPP TS 29.281: "General Packet Radio System (GPRS) Tunnelling Protocol User Plane (GTPv1-U)".
+[4]	3GPP TS 36.462: “Evolved Universal Terrestrial Radio Access Network (E-UTRAN) and Wireless LAN (WLAN); Xw signalling support”
+[5]	ITU-T Recommendation X.691 (2002-07): "Information technology - ASN.1 encoding rules - Specification of Packed Encoding Rules (PER) ".
+[6]	ITU-T Recommendation X.680 (07/2002): "Information technology – Abstract Syntax Notation One (ASN.1): Specification of basic notation".
+[7]	ITU-T Recommendation X.681 (07/2002): "Information technology – Abstract Syntax Notation One (ASN.1): Information object specification".
+[8]	3GPP TS 36.413: "Evolved Universal Terrestrial Radio Access Network (E-UTRAN); S1 Application Protocol (S1AP)".
+[9]	3GPP TS 36.401: "Evolved Universal Terrestrial Radio Access Network (E-UTRAN); Architecture description".
+[10]	Wi-Fi Alliance® Technical Committee, Hotspot 2.0 Technical Task Group Hotspot 2.0 (Release 2) Technical Specification Version 3.11.
+[11]	IEEE Std 802.11™-2012, IEEE Standard for Information technology-Telecommunications and information exchange between systems-Local and metropolitan area network.
+[12]	3GPP TR 25.921: "Guidelines and principles for protocol description and error handling”
+[13]	3GPP TS 23.203: "Numbering, addressing and identification"
+[14]	3GPP TS 23.401: "General Packet Radio Service (GPRS) enhancements for Evolved Universal Terrestrial Radio Access Network (E-UTRAN) access"
+[15]	3GPP TS 36.464: "Evolved Universal Terrestrial Radio Access Network (E-UTRAN) and Wireless LAN (WLAN); Xw data transport"
+[16]	3GPP TS 29.281: "General Packet Radio System (GPRS) Tunnelling Protocol User Plane (GTPv1-U)"
+[17]	3GPP TS 33.401: "3GPP System Architecture Evolution (SAE); Security architecture"
+[18]	3GPP TS 36.331: "Evolved Universal Terrestrial Radio Access (E-UTRA); Radio Resource Control (RRC) protocol specification".
+3	Definitions and abbreviations
+3.1	Definitions
+For the purposes of the present document, the terms and definitions given in TR 21.905 [1] and the following apply. A term defined in the present document takes precedence over the definition of the same term, if any, in TR 21.905 [1].
+Elementary Procedure: XwAP protocol consists of Elementary Procedures (EPs). An XwAP Elementary Procedure is a unit of interaction between an eNB and WT. An EP consists of an initiating message and possibly a response message. Two kinds of EPs are used:
+-	Class 1: Elementary Procedures with response (success or failure),
+-	Class 2: Elementary Procedures without response.
+eNB UE XwAP ID: Defined in TS 36.401 [9].
+E-RAB: Defined in TS 36.401 [9].
+LWA bearer: Defined in TS 36.300 [2].
+LWIP-SeGW: Defined in TS 33.401 [17].
+UE-associated signalling: Refers to XwAP messages associated to one UE, and which use the respective UE-associated logical Xw connection.
+UE-associated logical Xw connection: The UE-associated logical Xw connection transports UE-associated signalling. The identities WT UE XwAP ID and eNB UE XwAP ID are used to identify the particular UE-associated logical Xw connection that a message relates to.
+WLAN Termination: Defined in TS 36.300 [2].
+WT UE XwAP ID: Defined in TS 36.401 [9].
+3.2	Abbreviations
+For the purposes of the present document, the abbreviations given in TR 21.905 [1] and the following apply. An abbreviation defined in the present document takes precedence over the definition of the same abbreviation, if any, in TR 21.905 [1].
+AC	Access Category
+DL	Downlink
+eNB	E-UTRAN NodeB
+EP	Elementary Procedure
+EPC	Evolved Packet Core
+E-RAB	E-UTRAN Radio Access Bearer
+E-UTRAN	Evolved UTRAN
+IE	Information Element
+IKE	Internet Key Exchange
+LWA	LTE/WLAN Aggregation
+LWIP	LTE/WLAN Radio Level Integration with IPsec Tunnel
+LWIP-SeGW	LWIP Security GateWay
+PDCP	Packet Data Convergence Protocol
+RCLWI	RAN Controlled LTE-WLAN Interworking
+SN	Sequence Number
+TAC	Tracking Area Code
+UE	User Equipment
+UL	Uplink
+WT	WLAN Termination
+Xw UP	Xw User Plane
+4	General
+4.1	Procedure specification principles
+The principle for specifying the procedure logic is to specify the functional behaviour of the terminating node exactly and completely. Any rule that specifies the behaviour of the originating node shall be possible to be verified with information that is visible within the system.
+The following specification principles have been applied for the procedure text in clause 8:
+-	The procedure text discriminates between:
+1)	Functionality which "shall" be executed
+	The procedure text indicates that the receiving node "shall" perform a certain function Y under a certain condition. If the receiving node supports procedure X but cannot perform functionality Y requested in the initiating message of a Class 1 EP, the receiving node shall respond with the message used to report unsuccessful outcome for this procedure, containing an appropriate cause value.
+2)	Functionality which "shall, if supported" be executed
+	The procedure text indicates that the receiving node "shall, if supported," perform a certain function Y under a certain condition. If the receiving node supports procedure X, but does not support functionality Y, the receiving node shall proceed with the execution of the EP, possibly informing the requesting node about the not supported functionality.
+-	Any required inclusion of an optional IE in a response message is explicitly indicated in the procedure text. If the procedure text does not explicitly indicate that an optional IE shall be included in a response message, the optional IE shall not be included. For requirements on including Criticality Diagnostics IE, see section 10.
+4.2	Forwards and backwards compatibility
+The forwards and backwards compatibility of the protocol is assured by a mechanism where all current and future messages, and IEs or groups of related IEs, include ID and criticality fields that are coded in a standard format that will not be changed in the future. These parts can always be decoded regardless of the standard version.
+4.3	Specification notations
+For the purposes of the present document, the following notations apply:
+Procedure	When referring to an elementary procedure in the specification the Procedure Name is written with the first letters in each word in upper case characters followed by the word "procedure", e.g. Handover Preparation procedure.
+Message	When referring to a message in the specification the MESSAGE NAME is written with all letters in upper case characters followed by the word "message", e.g. HANDOVER REQUEST message.
+IE	When referring to an information element (IE) in the specification the Information Element Name is written with the first letters in each word in upper case characters and all letters in Italic font followed by the abbreviation "IE", e.g. E-RAB ID IE.
+Value of an IE	When referring to the value of an information element (IE) in the specification the "Value" is written as it is specified in sub clause 9.2 enclosed by quotation marks, e.g. "Value".
+5	XwAP services
+5.1	General
+The present clause describes the services offered between an eNB and WT.
+5.2	XwAP procedures
+The Xw interface XwAP procedures may be UE-associated or non UE-associated. UE-associated XwAP procedures are used to handle the configuration and modification to support LWA or LWIP for a specific UE. Non UE-associated procedures support LWA, RCLWI and/or LWIP, and are not related to a specific UE.
+5.3	Parallel transactions
+Unless explicitly indicated in the procedure specification, at any instance in time one protocol peer shall have a maximum of one ongoing XwAP procedure related to a certain UE.
+6	Services expected from signalling transport
+The signalling connection shall provide in sequence delivery of XwAP messages. XwAP shall be notified if the signalling connection breaks.
+Xw signalling transport is described in TS 36.462 [4].
+7	Functions of XwAP
+The XwAP protocol provides the following functions:
+-	Setting up the Xw. This function is used to exchange the necessary data for the eNB and the WT to set up the Xw interface and implicitly perform an Xw Reset.
+-	WT Configuration Update. This function allows updating of application level data needed for the eNB and the WT to interoperate correctly on the Xw interface.
+-	WLAN Status Reporting. This function allows the eNB to configure reporting of load-related information from the WT.
+-	LTE-WLAN Aggregation. This function allows the eNB to request a WT to provide radio resources for LWA operation for a certain UE while keeping responsibility for that UE.
+-	LTE-WLAN Radio Level Integration with IPsec Tunnel. This function allows the eNB to request a WT to provide tunnel resources for LWIP operation for a certain UE while keeping responsibility for that UE.
+-	Reporting of General Error Situations. This function allows reporting of general error situations, for which function specific error messages have not been defined.
+-	Resetting the Xw. This function is used to reset the Xw interface.
+The mapping between the above functions and Xw EPs is shown in the table below.
+Table 7-1: Mapping between XwAP functions and XwAP EPs
+Function
+Elementary Procedure(s)
+WLAN Status Reporting
+a)	WT Status Reporting Initiation
+b)	WT Status Reporting
+Setting up the Xw
+Xw Setup
+WT Configuration Update
+WT Configuration Update
+LTE-WLAN Aggregation
+a)	WT Addition Preparation
+b)	WT Association Confirmation
+c)	eNB Initiated WT Modification
+d)	WT Initiated WT Modification
+e)	eNB Initiated WT Release
+f)	WT Initiated WT Release
+LTE-WLAN Radio Level Integration with IPsec Tunnel
+a)	LWIP Addition Preparation
+b)	eNB Initiated LWIP Modification
+c)	eNB Initiated LWIP Release
+d)	WT Initiated LWIP Release
+Reporting of General Error Situations
+Error Indication
+Resetting the Xw
+Reset
+
+8	XwAP procedures
+8.1	Elementary procedures
+In the following tables, all EPs are divided into Class 1 and Class 2 EPs.
+Table 8.1-1: Class 1 Elementary Procedures
+Elementary Procedure
+Initiating Message
+Successful Outcome
+Unsuccessful Outcome
+
+
+Response message
+Response message
+Xw Setup
+Xw SETUP REQUEST
+Xw SETUP RESPONSE
+Xw SETUP FAILURE
+WT Configuration Update
+WT CONFIGURATION UPDATE
+WT CONFIGURATION UPDATE ACKNOWLEDGE
+WT CONFIGURATION UPDATE FAILURE
+WT Status Reporting Initiation
+WT STATUS REQUEST
+WT STATUS RESPONSE
+WT STATUS FAILURE
+WT Addition Preparation
+WT ADDITION REQUEST
+WT ADDITION REQUEST ACKNOWLEDGE
+WT ADDITION REQUEST REJECT
+eNB Initiated WT Modification
+WT MODIFICATION REQUEST
+WT MODIFICATION REQUEST ACKNOWLEDGE
+WT MODIFICATION REQUEST REJECT
+WT Initiated WT Modification
+WT MODIFICATION REQUIRED
+WT MODIFICATION CONFIRM
+WT MODIFICATION REFUSE
+WT Initiated WT Release
+WT RELEASE REQUIRED
+WT RELEASE CONFIRM
+
+Reset
+RESET REQUEST
+RESET RESPONSE
+
+LWIP Addition Preparation
+LWIP ADDITION REQUEST
+LWIP ADDITION REQUEST ACKNOWLEDGE
+LWIP ADDITION REQUEST REJECT
+eNB Initiated LWIP Modification
+LWIP MODIFICATION REQUEST
+LWIP MODIFICATION REQUEST ACKNOWLEDGE
+LWIP MODIFICATION REQUEST REJECT
+WT Initiated LWIP Release
+LWIP RELEASE REQUIRED
+LWIP RELEASE CONFIRM
+
+
+Table 8.1-2: Class 2 Elementary Procedures
+Elementary Procedure
+Initiating Message
+WT Status Reporting
+WT STATUS REPORT
+Error Indication
+ERROR INDICATION
+WT Association Confirmation
+WT ASSOCIATION CONFIRMATION
+eNB Initiated WT Release
+WT RELEASE REQUEST
+eNB Initiated LWIP Release
+LWIP RELEASE REQUEST
+
+8.2	Xw Setup
+8.2.1	General
+The purpose of the Xw Setup procedure is to exchange application level configuration data needed for the eNB and the WT to interoperate correctly over the Xw interface. This procedure erases any existing application level configuration data in the two nodes and replaces it by the one received. This procedure also resets the Xw interface.
+The procedure uses non-UE-associated signalling.
+8.2.2	Successful Operation
+
+Figure 8.2.2-1: Xw Setup, successful operation
+An eNB initiates the procedure by sending the Xw SETUP REQUEST message to a candidate WT. The candidate WT replies with the Xw SETUP RESPONSE message. The candidate WT shall reply with a list of relevant WLAN identifiers.
+If the WLAN Usage IE is included in the WLAN Information IE, the eNB shall consider that the relevant WLAN identifier(s) may be used for both LWA and LWIP, or for LWIP only; otherwise, the relevant WLAN identifier(s) may be used for LWA only.
+If the Neighbour eNB Information IE is included in the Xw SETUP RESPONSE message, the eNB shall consider the included information as the list of eNBs to which the WT is connected.
+8.2.3	Unsuccessful Operation
+
+Figure 8.2.3-1: Xw Setup, unsuccessful operation
+If the candidate WT cannot accept the setup, it shall respond with an Xw SETUP FAILURE message with an appropriate cause value.
+If the Xw SETUP FAILURE message includes the Time To Wait IE the initiating eNB shall wait at least for the indicated time before reinitiating the Xw Setup procedure towards the same WT.
+8.2.4	Abnormal Conditions
+If the first message received for a specific TNL association is not an Xw SETUP REQUEST, Xw SETUP RESPONSE, or Xw SETUP FAILURE message, then this shall be treated as a logical error.
+8.3	WT Configuration Update
+8.3.1	General
+The purpose of the WT Configuration Update procedure is to update application level configuration data needed for an eNB and a WT to interoperate correctly over the Xw interface.
+The procedure uses non-UE-associated signalling.
+8.3.2	Successful Operation
+
+Figure 8.3.2-1: WT Configuration Update, successful operation
+A WT initiates the procedure by sending a WT CONFIGURATION UPDATE message to an eNB. Such message shall include an appropriate set of up-to-date configuration data, including, but not limited to, relevant lists of added, modified and deleted WLAN identifiers that the WT has just taken into operational use.
+If the WLAN Usage IE is included in the WLAN Information IE, the eNB shall consider that the relevant WLAN identifier(s) may be used for both LWA and LWIP, or for LWIP only; otherwise, the relevant WLAN identifier(s) may be used for LWA only.
+If the Neighbour eNB Information IE is included in the WT CONFIGURATION UPDATE message, the eNB shall consider the included information as the full updated list of eNBs to which the WT is connected.
+8.3.3	Unsuccessful Operation
+
+Figure 8.3.3-1: WT Configuration Update, successful operation
+If the eNB cannot accept the update, it shall respond with a WT CONFIGURATION UPDATE FAILURE message with an appropriate cause value.
+If the WT CONFIGURATION UPDATE FAILURE message includes the Time To Wait IE the WT shall wait at least for the indicated time before reinitiating the WT Configuration Update procedure towards the same eNB. Both nodes shall continue to operate the Xw with their existing configuration data.
+8.3.4	Abnormal Conditions
+Not applicable.
+8.4	WT Status Reporting Initiation
+8.4.1	General
+This procedure is used by an eNB to request the reporting of load measurements to a WT.
+The procedure uses non-UE-associated signalling.
+8.4.2	Successful Operation
+
+Figure 8.4.2-1: WT Status Reporting Initiation procedure, successful operation
+The procedure is initiated with a WT STATUS REQUEST message sent from the eNB to the WT. Upon receipt, the WT shall initiate the requested measurement according to the parameters given in the request in case the Registration Request IE is set to "start" and shall stop all measurements and terminate the reporting in case the Registration Request IE is set to “stop".
+If the Registration Request IE is set to "start" then the Report Characteristics IE shall be included in WT STATUS REQUEST message.
+The Report Characteristics IE indicates the type of objects WT shall perform measurements on.
+For each BSS, the WT shall include in the WT STATUS REPORT message:
+-	the BSS Load IE, if the first bit, “BSS Load” of the Report Characteristics IE included in the WT STATUS REQUEST message is set to 1;
+-	the WAN Metrics IE, if the second bit, “WAN Metrics” of the Report Characteristics IE included in the WT STATUS REQUEST message is set to 1;
+-	the Available Channel Utilization IE, if the third bit, “Available Channel Utilization” of the Report Characteristics IE included in the WT STATUS REQUEST message is set to 1.
+If the Reporting Periodicity IE is included in the WT STATUS REQUEST message, the WT shall use its value as the time interval between two subsequent WT STATUS REPORT messages.
+If the WT is capable to provide all requested resource status information, it shall initiate the measurement as requested by the eNB, and respond with the WT STATUS RESPONSE message.
+If the WT is capable to provide some but not all of the requested resource status information and the Partial Success Indicator IE is present in the WT STATUS REQUEST, it shall initiate the measurement for the admitted measurement objects and include the Measurement Initiation Result IE in the WT STATUS RESPONSE message.
+If the WT received a WT STATUS REQUEST message which includes the Registration Request IE set to "stop", it shall ignore the Report Characteristics, the BSS To Report List, the Reporting Periodicity, and the Partial Success Indicator IEs.
+8.4.3	Unsuccessful Operation
+
+Figure 8.4.3-1: WT Status Reporting Initiation procedure, unsuccessful operation
+If none of the requested measurements can be initiated, the WT shall send a WT STATUS FAILURE message. The Cause IE shall be set to an appropriate value for each requested measurement object. The eNB may include the Complete Failure Cause Information IE in the WT STATUS FAILURE message.
+8.4.4	Abnormal Conditions
+If the eNB does not receive either WT STATUS RESPONSE message or WT STATUS FAILURE message, the eNB may reinitiate the WT Status Reporting Initiation procedure towards the WT, provided that the content of the new WT STATUS REQUEST message is identical to the content of the previously unacknowledged WT STATUS REQUEST message.
+If the eNB receives the WT STATUS RESPONSE message including the Measurement Initiation Result IE containing no admitted measurements, the eNB shall consider the procedure as failed.
+If the Registration Request IE is set to "start" and the Report Characteristics IE bitmap is set to "0" (all bits are set to "0") in the WT STATUS REQUEST message, then the WT shall initiate a WT STATUS FAILURE message, the cause shall be set to appropriate value e.g. "ReportCharacteristicsEmpty".
+If the Registration Request IE is set to "start" and the Reporting Periodicity IE value is not specified, then the WT shall initiate a WT STATUS FAILURE message, the cause shall be set to appropriate value e.g. "No Report Periodicity".
+If the WT received a WT STATUS REQUEST message which includes the Registration Request IE set to "start" and the eNB Measurement ID IE corresponding to an existing on-going load measurement reporting, then the WT shall initiate a WT STATUS FAILURE message, the cause shall be set to appropriate value e.g. "ExistingMeasurement ID".
+If the Registration Request IE is set to "stop" and the WT STATUS REQUEST message does not contain WT Measurement ID IE, the WT shall consider the procedure as failed and respond with the WT STATUS FAILURE message, the cause shall be set to appropriate value e.g. "Unknown Measurement ID".
+8.5	WT Status Reporting
+8.5.1	General
+This procedure is initiated by the WT to report the result of measurements admitted by the WT following a successful WT Status Reporting Initiation procedure.
+The procedure uses non-UE-associated signalling.
+8.5.2	Successful Operation
+
+Figure 8.5.2-1: WT Status Reporting procedure, successful operation
+The WT shall report the results of the admitted measurements in the WT STATUS REPORT message. The admitted measurements are the measurements that were successfully initiated during the preceding WT Status Reporting Initiation procedure.
+8.5.3	Unsuccessful Operation
+Not applicable.
+8.5.4	Abnormal Conditions
+Not applicable.
+8.6	Error Indication
+8.6.1	General
+The Error Indication procedure is initiated by a node to report detected errors in one incoming message, provided they cannot be reported by an appropriate failure message.
+If the error situation arises due to reception of a message which used UE-associated signalling, then the Error Indication procedure uses UE-associated signalling. Otherwise the procedure uses non UE-associated signalling.
+8.6.2	Successful Operation
+
+Figure 8.6.2-1: Error Indication procedure, eNB originated. Successful operation.
+
+Figure 8.6.2-2: Error Indication procedure, WT originated. Successful operation.
+When the conditions defined in clause 10 are fulfilled, the Error Indication procedure is initiated by an ERROR INDICATION message sent from the receiving node.
+The ERROR INDICATION message shall contain at least either the Cause IE or the Criticality Diagnostics IE. In case the Error Indication procedure is triggered by UE associated signalling, the eNB UE XwAP ID IE and the WT UE XwAP ID IE shall be included in the ERROR INDICATION message. If one or both of eNB UE XwAP ID IE and the WT UE XwAP ID IE are not correct, the cause shall be set to an appropriate value, e.g., “Unknown eNB UE XwAP ID”, “Unknown WT UE XwAP ID” or “Unknown pair of UE XwAP ID”.
+8.6.3	Unsuccessful Operation
+Not applicable.
+8.6.4	Abnormal Conditions
+Not applicable.
+8.7	Reset
+8.7.1	General
+The purpose of the Reset procedure is to align the resources in the eNB and in the WT in the event of an abnormal failure. The procedure resets the Xw interface. This procedure does not affect the application level configuration data exchanged during, e.g., the Xw Setup procedure.
+The procedure uses non UE-associated signalling.
+8.7.2	Successful Operation
+
+Figure 8.7.2-1: Reset, eNB-initiated. Successful operation.
+
+Figure 8.7.2-2: Reset, WT-initiated. Successful operation.
+The procedure is initiated with a RESET message sent from the initiating node. Upon receipt of this message, the receiving node shall abort any other ongoing procedures (except another Reset procedure) over Xw with the initiating node. The receiving node shall delete all the context information related to the initiating node, except the application level configuration data exchanged during Xw Setup or WT Configuration Update procedures, and release the corresponding resources. After completing the release of the resources, the receiving node shall respond with a RESET RESPONSE message.
+8.7.3	Unsuccessful Operation
+Not applicable.
+8.7.4	Abnormal Conditions
+If Reset procedure is ongoing and the receiving node receives the RESET message from the peer entity on the same Xw interface, the receiving node shall respond with the RESET RESPONSE message as described in 8.7.2.
+8.8	WT Addition Preparation
+8.8.1	General
+The purpose of the WT Addition Preparation procedure is to request the WT to allocate resources for LWA operation for a specific UE.
+The procedure uses UE-associated signalling and, in case of successful operation, establishes a new UE-associated logical Xw-connection.
+8.8.2	Successful Operation
+
+Figure 8.8.2-1: WT Addition Preparation, successful operation
+The eNB initiates the procedures by sending the WT ADDITION REQUEST message to the WT.
+The allocation of resources according to the values of the Allocation and Retention Priority IE included in the E-RAB Level QoS Parameters IE shall follow the principles described for the E-RAB Setup Procedure in TS 36.413 [8].
+NOTE:	Due to inherent features of the WLAN radio interface, it may not always be possible to guarantee a bit rate. If the GBR QoS Information IE is present in the WT ADDITION REQUEST, the WT may accept the request even though it may not be able to guarantee the bit rate signalled in the GBR QoS Information IE. The eNB may therefore need to monitor the bit rate of offloaded GBR bearers.
+If the WT ADDITION REQUEST message contains the Serving PLMN IE, the WT may take it into account for the allocation of resources for LWA.
+If the WT ADDITION REQUEST message contains the WT UE XwAP ID IE, the WT shall use the included information to identify the UE.
+If the DRB-Identity IE is present in an item in the E-RABs To Be Added List IE in the WT ADDITION REQUEST message, the WT shall consider that the respective LWA bearer is configured for uplink.
+At reception of the WT ADDITION REQUEST message the WT shall:
+-	use the information included in the Mobility Set IE as the WLAN Mobility Set configured for LWA, as defined in TS 36.300 [2];
+-	store the WLAN Security Information IE, if included, and use it to establish the required security relation towards the UE.
+The WT shall report to the eNB, in the WT ADDITION REQUEST ACKNOWLEDGE message, the result for all the requested E-RABs in the following way:
+-	A list of E-RABs which are successfully established shall be included in the E-RABs Admitted To Be Added List IE.
+-	A list of E-RABs which failed to be established shall be included in the E-RABs Not Admitted List IE.
+For each admitted uplink E-RAB to be added, the WT may include the LWA WLAN AC IE in the WT ADDITION REQUEST ACKNOWLEDGE message, and, if included, the eNB shall use the respective information as the LWA WLAN Access Category to be forwarded to the UE, as specified in TS 36.300 [2].
+If the WT ADDITION REQUEST ACKNOWLEDGE message contains the WT MAC Address IE, the eNB shall, if supported, communicate this information to the UE.
+8.8.3	Unsuccessful Operation
+
+Figure 8.8.3-1: WT Addition Preparation, unsuccessful operation
+If the WT is not able to accept at least one of the bearers or a failure occurs during the WT Addition Preparation, the WT sends the WT ADDITION REQUEST REJECT message with an appropriate cause value to the eNB.
+8.8.4	Abnormal Conditions
+If the WT receives a WT ADDITION REQUEST message containing multiple E-RAB ID IEs (in the E-RABs To Be Added List IE) set to the same value, the WT shall consider the establishment of the corresponding E-RAB as failed.
+If the WT receives a WT ADDITION REQUEST message containing an E-RAB Level QoS Parameters IE which contains a QCI IE indicating a GBR bearer (as defined in TS 23.203 [13]), and which does not contain the GBR QoS Information IE, the WT shall consider the establishment of the corresponding E-RAB as failed.
+If the WT receives a WT ADDITION REQUEST message containing the WT UE XwAP ID IE but it is not able to identify the UE, it shall reply with the WT ADDITION REQUEST REJECT message with an appropriate cause value.
+8.9	eNB Initiated WT Modification
+8.9.1	General
+This procedure is used to enable an eNB to request a WT to modify the UE context at the WT.
+The procedure uses UE-associated signalling.
+8.9.2	Successful Operation
+
+Figure 8.9.2-1: eNB initiated WT Modification, successful operation
+The eNB initiates the procedure by sending the WT MODIFICATION REQUEST message to the WT.
+The WT MODIFICATION REQUEST message may contain within the UE Context Information IE:
+-	E-RABs to be added within the E-RABs To Be Added Item IE;
+-	E-RABs to be modified within the E-RABs To Be Modified Item IE;
+-	E-RABs to be released within the E-RABs To Be Released Item IE;
+-	WLAN security information in the WLAN Security Information IE.
+If the WLAN Security Information IE is included in the WT MODIFICATION REQUEST message the WT shall store the information contained in this IE, and use it to establish the required security relation towards the UE.
+The allocation of resources according to the values of the Allocation and Retention Priority IE included in the E-RAB Level QoS Parameters IE shall follow the principles described for the E-RAB Setup procedure in TS 36.413 [8].
+NOTE:	Due to inherent features of the WLAN radio interface, it may not always be possible to guarantee a bit rate. If the GBR QoS Information IE is present in the WT MODIFICATION REQUEST, the WT may accept the request even though it may not be able to guarantee the bit rate signalled in the GBR QoS Information IE. The eNB may therefore need to monitor the bit rate of offloaded GBR bearers.
+If the DRB-Identity IE is present in an item in the E-RABs To Be Added List IE in the WT MODIFICATION REQUEST message, the WT shall consider that the respective LWA bearer is configured for uplink.
+If the WT MODIFICATION REQUEST message contains the Serving PLMN IE, the WT may take it into account for the allocation of resources for LWA.
+If at least one of the requested modifications is admitted by the WT, the WT shall modify the related part of the UE context accordingly and send the WT MODIFICATION REQUEST ACKNOWLEDGE message back to the eNB.
+The WT shall include the E-RABs for which resources have been either added or modified or released at the WT either in the E-RABs Admitted To Be Added List IE or the E-RABs Admitted To Be Modified List IE or the E-RABs Admitted To Be Released List IE. The WT shall include the E-RABs that have not been admitted in the E-RABs Not Admitted List IE with an appropriate cause value.
+For each admitted uplink E-RAB to be added or modified, the WT may include the LWA WLAN AC IE in the WT MODIFICATION REQUEST ACKNOWLEDGE message, and, if included, the eNB shall use the respective information as the LWA WLAN Access Category to be forwarded to the UE, as specified in TS 36.300 [2].
+For each E-RAB to be modified, if the WT MODIFICATION REQUEST message includes the eNB GTP Tunnel Endpoint IE in the E-RABs To Be Modified Item IE, the WT shall act as specified in TS 36.300 [2].
+For each E-RAB to be released, if the DL Forwarding GTP Tunnel Endpoint IE is included within the E-RABs To Be Released Item IE in the WT MODIFICATION REQUEST message, the WT may perform data forwarding of downlink packets for that bearer.
+If the E-RAB level QoS parameter IE is included in the WT MODIFICATION REQUEST message for an E-RAB to be modified, the WT shall allocate respective resources as described in TS 36.300 [2].
+For an E-RAB to be modified, the WT may include in the WT MODIFICATION REQUEST ACKNOWLEDGE message the WT GTP Tunnel Endpoint IE.
+If the Mobility Set IE is included in the WT MODIFICATION REQUEST message, the WT shall use the information included in this IE as the WLAN Mobility Set configured for LWA, as defined in TS 36.300 [2].
+8.9.3	Unsuccessful Operation
+
+Figure 8.9.3-1: eNB initiated WT Modification, unsuccessful operation
+If the WT does not admit any modification requested by the eNB, or a failure occurs during the eNB initiated WT Modification, the WT shall send the WT MODIFICATION REQUEST REJECT message to the eNB. The message shall contain the Cause IE with an appropriate value.
+8.9.4	Abnormal Conditions
+If the WT receives a WT MODIFICATION REQUEST message containing multiple E-RAB ID IEs (in the E-RABs To Be Added List IE and/or the E-RABs To Be Modified List IE) set to the same value, the WT shall not admit the action requested for the corresponding E-RABs.
+If the WT receives a WT MODIFICATION REQUEST message containing multiple E-RAB ID IEs (in the E-RAB To Be Released List IE) set to the same value, the WT shall initiate the release of one corresponding E-RAB and ignore the duplication of the instances of the selected corresponding E-RABs.
+If the WT receives a WT MODIFICATION REQUEST message containing a E-RAB Level QoS Parameters IE which contains a QCI IE indicating a GBR bearer (as defined in TS 23.203 [13]), and which does not contain the GBR QoS Information IE, the WT shall not admit the corresponding E-RAB.
+Interaction with the WT initiated WT Modification procedure:
+If the eNB, after having initiated the eNB initiated WT Modification procedure, receives the WT MODIFICATION REQUIRED message, the eNB shall refuse the WT initiated WT Modification procedure with an appropriate cause value in the Cause IE.
+8.10	WT Initiated WT Modification
+8.10.1	General
+This procedure is used by the WT to modify the UE context in the WT. In particular, in this Release of the specification, this procedure is used to request to the eNB the release of LWA bearers, or change their WT GTP Tunnel Endpoints.
+The procedure uses UE-associated signalling.
+8.10.2	Successful Operation
+
+Figure 8.10.2-1: WT initiated WT Modification, successful operation
+The WT initiates the procedure by sending the WT MODIFICATION REQUIRED message to the eNB.
+The WT MODIFICATION REQUIRED message may contain
+-	E-RABs to be released within the E-RABs To Be Released Item IE;
+-	E-RABs to be modified within the E-RABs To Be Modified Item IE.
+If the WT GTP Tunnel Endpoint IE is present in the E-RABs To Be Modified Item IE for a particular E-RAB, the eNB shall use this information to change the Xw transport bearer associated to the concerned E-RAB.
+For each uplink E-RAB to be modified, the WT may include the LWA WLAN AC IE in the WT MODIFICATION REQUIRED message, and, if included, the eNB shall use the respective information as the LWA WLAN Access Category to be forwarded to the UE, as specified in TS 36.300 [2].
+If the eNB is able to perform at least one of the modifications requested by the WT, the eNB shall send the WT MODIFICATION CONFIRM message to the WT with the appropriate information in the E-RABs Confirmed To Be Released List and/or E-RABs Confirmed To Be Modified List IEs. For each E-RAB to be released, if the DL Forwarding GTP Tunnel Endpoint IE is included within the E-RABs Confirmed To Be Released Item IE in the WT MODIFICATION CONFIRM message, the WT may perform data forwarding of downlink packets for that bearer.
+8.10.3	Unsuccessful Operation
+
+Figure 8.10.3-1: WT initiated WT Modification, unsuccessful operation
+In case none of the requested modifications can be performed successfully the eNB shall respond with the WT MODIFICATION REFUSE message to the WT with an appropriate cause value in the Cause IE.
+8.10.4	Abnormal Conditions
+If the value received in the E-RAB ID IE of any of the E-RABs To Be Released Item IE or of the E-RABs To Be Modified Item IE is not known at the eNB, the eNB shall regard the procedure as failed and may take appropriate actions like triggering the eNB initiated WT Release procedure.
+Interaction with the eNB initiated WT Modification Preparation procedure:
+If the WT, after having initiated the WT initiated WT Modification procedure, receives the WT MODIFICATION REQUEST message, the WT shall
+-	regard the WT initiated WT Modification Procedure as failed,
+-	be prepared to receive the WT MODIFICATION REFUSE message from the eNB, and
+-	continue with the eNB initiated WT Modification procedure as specified in Section 8.9.
+8.11	eNB Initiated WT Release
+8.11.1	General
+The eNB initiated WT Release procedure is triggered by the eNB to initiate the release of the resources for a specific UE.
+The procedure uses UE-associated signalling.
+8.11.2	Successful Operation
+
+Figure 8.11.2-1: eNB initiated WT Release, successful operation
+The eNB initiates the procedure by sending the WT RELEASE REQUEST message. Upon reception of the WT RELEASE REQUEST message the WT shall stop providing user data to the UE. The eNB may provide appropriate information within the Cause IE.
+For each E-RAB, if the DL Forwarding GTP Tunnel Endpoint IE is included within the E-RABs To Be Released Item IE in the WT RELEASE REQUEST message, the WT may perform data forwarding of downlink packets for that bearer.
+Upon reception of the WT RELEASE REQUEST message containing the UE Context Kept Indicator IE set to "True", the WT shall, if supported, only initiate the release of the resources related to the UE-associated signaling connection between the eNB and the WT.
+8.11.3	Unsuccessful Operation
+Not applicable.
+8.11.4	Abnormal Conditions
+Not applicable.
+8.12		WT Initiated WT Release
+8.12.1	General
+This procedure is triggered by the WT to initiate the release of the resources for a specific UE.
+The procedure uses UE-associated signalling.
+8.12.2	Successful Operation
+
+Figure 8.12.2-1: WT initiated WT Release, successful operation
+The WT initiates the procedure by sending the WT RELEASE REQUIRED message to the eNB.
+Upon reception of the WT RELEASE REQUIRED message, the eNB replies with the WT RELEASE CONFIRM message. For each E-RAB, if the DL Forwarding GTP Tunnel Endpoint IE is included within the E-RABs To Be Released Item IE in the WT RELEASE CONFIRM message, the WT may perform data forwarding of downlink packets for that bearer.
+The WT may start data forwarding and stop providing user data to the UE upon reception of the WT RELEASE CONFIRM message.
+8.12.3	Unsuccessful Operation
+Not applicable.
+8.12.4	Abnormal Conditions
+Not applicable.
+8.13	WT Association Confirmation
+8.13.1	General
+This procedure is initiated by the WT to give confirmation to the eNB that a certain UE successfully associated with the WLAN following a successful WT Addition Preparation procedure.
+The procedure uses UE-associated signalling.
+8.13.2	Successful Operation
+
+Figure 8.13.2-1: WT Association Confirm procedure, successful operation
+The WT initiates the procedure by sending the WT ASSOCIATION CONFIRMATION message to the eNB.
+Upon reception of the WT ASSOCIATION CONFIRMATION message, the eNB shall consider that the UE is associated with the WLAN, and that user plane data for that UE may be sent to the WT.
+8.13.3	Unsuccessful Operation
+Not applicable.
+8.13.4	Abnormal Conditions
+Not applicable.
+8.14	LWIP Addition Preparation
+8.14.1	General
+The purpose of the LWIP Addition Preparation procedure is to request the WT to configure tunnel resources for LWIP operation for a specific UE.
+The procedure uses UE-associated signalling and, in case of successful operation, establishes a new UE-associated logical Xw-connection.
+8.14.2	Successful Operation
+
+Figure 8.14.2-1: LWIP Addition Preparation, successful operation
+The eNB initiates the procedures by sending the LWIP ADDITION REQUEST message to the WT.
+At reception of the LWIP ADDITION REQUEST message the WT shall	use the received information to configure resources for LWIP for the UE, as defined in TS 36.300 [2].
+If the LWIP ADDITION REQUEST message contains the Serving PLMN IE, the WT may take it into account for the allocation of resources for LWIP.
+If the LWIP ADDITION REQUEST message contains the Mobility Set IE, the WT shall use the included information as described in TS 36.300 [2].
+If the LWIP ADDITION REQUEST message contains the eNB GTP Tunnel Endpoint IE, the WT shall use the included information to configure the LWIP user plane for the UE.
+The WT shall respond to the eNB with the LWIP ADDITION REQUEST ACKNOWLEDGE message.
+If the LWIP-SeGW GTP Tunnel Endpoint IE is included in the LWIP ADDITION REQUEST ACKNOWLEDGE message, the eNB shall use the included information to configure the LWIP user plane for the UE.
+8.14.3	Unsuccessful Operation
+
+Figure 8.14.3-1: LWIP Addition Preparation, unsuccessful operation
+If the WT is not able to configure tunnel resources for LWIP operation for the UE or a failure occurs during the LWIP Addition Preparation, the WT sends the LWIP ADDITION REQUEST REJECT message with an appropriate cause value to the eNB.
+8.14.4	Abnormal Conditions
+ Not applicable.
+8.15	eNB Initiated LWIP Modification
+8.15.1	General
+This procedure is used to enable an eNB to request a WT to modify the UE context for LWIP at the WT.
+The procedure uses UE-associated signalling.
+8.15.2	Successful Operation
+
+Figure 8.15.2-1: eNB initiated LWIP Modification, successful operation
+The eNB initiates the procedure by sending the LWIP MODIFICATION REQUEST message to the WT.
+If the LWIP MODIFICATION REQUEST message contains the Serving PLMN IE, the WT may take it into account for the allocation of resources for LWIP.
+If the Mobility Set IE is included in the LWIP MODIFICATION REQUEST message, the WT shall use the information included in this IE as defined in TS 36.300 [2].
+If at least one of the requested modifications is admitted by the WT, the WT shall modify the related part of the UE context accordingly and send the LWIP MODIFICATION REQUEST ACKNOWLEDGE message back to the eNB.
+8.15.3	Unsuccessful Operation
+
+Figure 8.15.3-1: eNB initiated LWIP Modification, unsuccessful operation
+If the WT does not admit any modification requested by the eNB, or a failure occurs during the eNB initiated LWIP Modification, the WT shall send the LWIP MODIFICATION REQUEST REJECT message to the eNB. The message shall contain the Cause IE with an appropriate value.
+8.15.4	Abnormal Conditions
+Not applicable.
+8.16	eNB Initiated LWIP Release
+8.16.1	General
+The eNB initiated LWIP Release procedure is triggered by the eNB to initiate the release of tunnel resources for LWIP operation for a specific UE.
+The procedure uses UE-associated signalling.
+8.16.2	Successful Operation
+
+Figure 8.16.2-1: eNB initiated LWIP Release, successful operation
+The eNB initiates the procedure by sending the LWIP RELEASE REQUEST message. Upon reception of the LWIP RELEASE REQUEST message the WT shall release LWIP tunnel resources for the UE. The eNB may provide appropriate information within the Cause IE.
+8.16.3	Unsuccessful Operation
+Not applicable.
+8.16.4	Abnormal Conditions
+Not applicable.
+8.17		WT Initiated LWIP Release
+8.17.1	General
+This procedure is triggered by the WT to initiate the release of tunnel resources for LWIP operation for a specific UE.
+The procedure uses UE-associated signalling.
+8.17.2	Successful Operation
+
+Figure 8.17.2-1: WT initiated LWIP Release, successful operation
+The WT initiates the procedure by sending the LWIP RELEASE REQUIRED message to the eNB.
+Upon reception of the LWIP RELEASE REQUIRED message, the eNB replies with the LWIP RELEASE CONFIRM message.
+The WT may stop providing user data for LWIP operation to the UE upon reception of the LWIP RELEASE CONFIRM message.
+8.17.3	Unsuccessful Operation
+Not applicable.
+8.17.4	Abnormal Conditions
+Not applicable.
+9	Elements for XwAP Communication
+9.0	General
+Sub clauses 9.1 and 9.2 describe the structure of the messages and information elements required for the XwAP protocol in tabular format. Sub clause 9.3 provides the corresponding ASN.1 definition.
+The following attributes are used for the tabular description of the messages and information elements: Presence, Range Criticality and Assigned Criticality. Their definition and use can be found in TS 36.413 [8].
+NOTE:	The messages have been defined in accordance to the guidelines specified in TR 25.921 [12].
+9.1	Message Functional Definition and Content
+9.1.1	Xw SETUP REQUEST
+This message is sent by an eNB to a WT to transfer the initialization information for a TNL association.
+Direction: eNB  WT.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+Global eNB ID
+M
+
+9.2.2
+
+YES
+reject
+
+9.1.2	Xw SETUP RESPONSE
+This message is sent by a WT to a requesting eNB to transfer the initialization information for a TNL association.
+Direction: WT  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+WT ID
+M
+
+9.2.6
+
+YES
+reject
+WLAN Identifier List
+
+1
+
+List of identifiers supported by the WT
+YES
+reject
+>WLAN Identifier Item
+
+1..<maxnoofWLANIdentifierItems>
+
+
+
+
+>>WLAN Information
+M
+
+9.2.7
+
+
+
+Neighbour eNB Information
+
+0..< maxnoofeNBNeighbours >
+
+
+
+
+>Global eNB ID
+M
+
+9.2.2
+
+
+
+Criticality Diagnostics
+O
+
+9.2.5
+
+YES
+ignore
+
+Range bound
+Explanation
+maxnoofWLANIdentifierItems
+Maximum number of WLAN Identifier Items. The value is 4096.
+maxnoofeNBNeighbours
+Maximum number of eNBs a WT can connect to. The value is 256 
+
+9.1.3	Xw SETUP FAILURE
+This message is sent by the WT to indicate Xw Setup failure.
+Direction: WT  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+Cause 
+M
+
+9.2.4
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.5
+
+YES
+ignore
+Time To Wait
+O
+
+9.2.29
+
+YES
+ignore
+
+9.1.4	WT CONFIGURATION UPDATE
+This message is sent by a WT to an eNB to transfer updated information for a TNL association.
+Direction: WT  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+WLAN Identifiers To Add List
+
+0..1
+
+List of identifiers added by the WT
+GLOBAL
+reject
+>WLAN Identifiers To Add Item
+
+1..< maxnoofWLANIdentifierItems>
+
+
+
+
+>>WLAN Information
+M
+
+9.2.7
+
+
+
+WLAN Identifiers To Modify List
+
+0..1
+
+List of identifiers modified by the WT
+GLOBAL
+reject
+>WLAN Identifiers To Modify Item
+
+1..< maxnoofWLANIdentifierItems>
+
+
+
+
+>>WLAN Information
+M
+
+9.2.7
+
+
+
+WLAN Identifiers To Delete List
+
+0..1
+
+List of identifiers deleted by the WT
+GLOBAL
+reject
+>WLAN Identifiers To Delete Item
+
+1..< maxnoofWLANIdentifierItems >
+
+
+
+
+>>Old BSSID
+M
+
+BSSID
+9.2.8
+
+
+
+WLAN Identifiers To Delete Extension List 
+
+0..1
+
+List of identifiers deleted by the WT
+GLOBAL
+reject
+>WLAN Identifiers To Delete extension Item
+
+1..<maxnoofWLANIdentifierItems >
+
+
+
+
+>>Old SSID
+O
+
+SSID
+9.2.9
+
+
+
+>>Old HESSID
+O
+
+HESSID
+9.2.10
+
+
+
+Neighbour eNB Information
+
+0..< maxnoofeNBNeighbours >
+
+
+
+
+>Global eNB ID
+M
+
+9.2.2
+
+
+
+
+Range bound
+Explanation
+maxnoofWLANIdentifierItems
+Maximum number of WLAN Identifier Items. The value is 4096.
+maxnoofeNBNeighbours
+Maximum number of eNBs a WT can connect to. The value is 256 
+
+9.1.5	WT CONFIGURATION UPDATE ACKNOWLEDGE
+This message is sent by an eNB to a WT to acknowledge update of information for a TNL association.
+Direction: eNB  WT.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+Criticality Diagnostics
+O
+
+9.2.5
+
+YES
+ignore
+
+9.1.6	WT CONFIGURATION UPDATE FAILURE
+This message is sent by an eNB to a WT to indicate WT Configuration Update Failure.
+Direction: eNB  WT.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+Cause
+M
+
+9.2.4
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.5
+
+YES
+ignore
+Time To Wait
+O
+
+9.2.29
+
+YES
+ignore
+
+9.1.7	WT STATUS REQUEST
+This message is sent by an eNB to a WT to initiate the requested measurement according to the parameters given in the message.
+Direction: eNB  WT.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+eNB Measurement ID
+M
+
+INTEGER (1..4095,...)
+Allocated by the eNB
+YES
+reject
+WT Measurement ID
+C-ifRegistrationRequestStop
+
+INTEGER (1..4095,...)
+Allocated by the WT
+YES
+ignore
+Registration Request
+M
+
+ENUMERATED(start, stop,
+…)
+A value set to “stop”, indicates a request to stop all BSS measurements.
+YES
+reject
+Report Characteristics
+O
+
+BITSTRING
+(SIZE(32))
+Each position in the bitmap indicates measurement object the WT is requested to report.
+First Bit = BSS Load,
+Second Bit = WAN Metrics, Third bit = Available Channel Utilization.
+Other bits shall be ignored by the WT.
+YES
+reject
+BSS To Report List
+
+1
+
+List of BSSs for which measurement is needed
+YES
+ignore
+>BSS To Report Item
+
+1 .. <maxnoofBSSs>
+
+
+EACH
+ignore
+>>BSSID
+M
+
+9.2.8
+
+–
+–
+Reporting Periodicity
+O
+
+ENUMERATED(10ms, 50ms, 100ms, 200ms, 500ms, 1s, 5s, 10s, …)
+
+YES
+ignore
+Partial Success Indicator
+O
+
+ENUMERATED(partial success allowed, …)
+Included if partial success is allowed
+YES
+ignore
+
+Range bound
+Explanation
+maxnoofBSSs
+Maximum number of BSS Items in a list. The value is 4096.
+
+Condition
+Explanation
+ifRegistrationRequestStop
+This IE shall be present if the Registration Request IE is set to the value “stop”.
+
+9.1.8	WT STATUS RESPONSE
+This message is sent by the WT to indicate that the requested measurement, for all or for a subset of the measurement objects included in the measurement request, is successfully initiated.
+Direction: WT  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+eNB Measurement ID
+M
+
+INTEGER (1..4095,...)
+Allocated by the eNB
+YES
+reject
+WT Measurement ID
+M
+
+INTEGER (1..4095,...)
+Allocated by the WT
+YES
+reject
+Measurement Initiation Result List
+
+0..1
+
+List of all BSSs in which measurement objects were requested, included when indicating partial success
+YES
+ignore
+>Measurement Initiation Result Item
+
+1 .. <maxnoofBSSs>
+
+
+EACH
+ignore
+>>BSSID
+M
+
+9.2.8
+
+–
+–
+>>Measurement Failure Cause List
+
+0..1
+
+Indicates that WT could not initiate the measurement for at least one of the requested measurement objects in the BSS
+–
+–
+>>>Measurement Failure Cause Item
+
+1 .. <maxnoofFailedMeasObjects>
+
+
+EACH
+ignore
+>>>>Measurement Failed Report Characteristics
+M
+
+BITSTRING
+(SIZE(32))
+Each position in the bitmap indicates measurement object that failed to be initiated in the WT. 
+First Bit = BSS Load,
+Second Bit = WAN Metrics, Third Bit = Available Channel Utilization.
+Other bits shall be ignored by the eNB.
+–
+–
+>>>>Cause
+M
+
+9.2.4
+Failure cause for measurement objects for which the measurement cannot be initiated
+–
+–
+Criticality Diagnostics
+O
+
+9.2.5
+
+YES
+ignore
+
+Range bound
+Explanation
+maxnoofBSSs
+Maximum number of BSSs Items in a list. The value is 4096.
+maxnoofFailedMeasObjects
+Maximum number of measurement objects that can fail per measurement. Value is 32.
+
+9.1.9	WT STATUS FAILURE
+This message is sent by the WT to indicate that none of the requested measurements can be initiated.
+Direction: WT  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+eNB Measurement ID
+M
+
+INTEGER (1..4095,...)
+Allocated by the eNB
+YES
+reject
+WT Measurement ID
+M
+
+INTEGER (1..4095,...)
+Allocated by the WT
+YES
+reject
+Complete Failure Cause Information List
+
+0..1
+
+Complete list of failure causes for all requested cells
+YES
+ignore
+>Complete Failure Cause Information Item
+
+1 .. <maxnoofBSSs>
+
+
+EACH
+ignore
+>>BSSID
+M
+
+9.2.8
+
+–
+–
+>>Measurement Failure Cause List
+
+1
+
+
+–
+–
+>>>Measurement Failure Cause Item
+
+1 .. <maxnoofFailedMeasObjects>
+
+
+EACH
+ignore
+>>>>Measurement Failed Report Characteristics
+M
+
+BITSTRING
+(SIZE(32))
+Each position in the bitmap indicates measurement object that failed to be initiated in the WT. 
+First Bit = BSS Load,
+Second Bit =  WAN Metrics, Third Bit = Available Channel Utilization.
+Other bits shall be ignored by the eNB.
+–
+–
+>>>>Cause
+M
+
+9.2.4
+Failure cause for measurements that cannot be initiated
+–
+–
+Cause
+M
+
+9.2.4
+Ignored by the receiver when the Complete Failure Cause Information IE is included
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.5
+
+YES
+ignore
+
+Range bound
+Explanation
+maxnoofBSSs
+Maximum number of BSS Items in a list. The value is 4096.
+maxnoofFailedMeasObjects
+Maximum number of measurement objects that can fail per measurement. Value is 32.
+
+9.1.10	WT STATUS REPORT
+This message is sent by the WT to the eNB to report the results of the requested measurements.
+Direction: WT  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+ignore
+eNB Measurement ID
+M
+
+INTEGER (1..4095,...)
+Allocated by the eNB
+YES
+reject
+WT Measurement ID
+M
+
+INTEGER (1..4095,...)
+Allocated by the WT
+YES
+reject
+BSS Measurement Result List
+
+1
+
+
+YES
+ignore
+>BSS Measurement Result Item
+
+1 .. <maxnoofBSSs>
+
+
+EACH
+ignore
+>>BSSID
+M
+
+9.2.8
+
+
+
+>>BSS Load
+O
+
+9.2.11
+
+
+
+>>WAN Metrics
+O
+
+9.2.12
+
+
+
+>>Available Channel Utilization
+O
+
+9.2.26
+
+
+
+
+Range bound
+Explanation
+maxnoofBSSs
+Maximum number of BSS Items in a list. The value is 4096.
+
+9.1.11	ERROR INDICATION
+This message is used to indicate that some error has been detected in the originating node.
+Direction: eNB  WT and WT  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+ignore
+eNB UE XwAP ID
+O
+
+UE XwAP ID 9.2.24
+Assigned by the eNB
+YES
+ignore
+WT UE XwAP ID
+O
+
+UE XwAP ID 9.2.24
+Assigned by the WT
+YES
+ignore
+Cause
+O
+
+9.2.4
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.5
+
+YES
+ignore
+
+9.1.12	RESET
+This message is used to request the Xw interface to be reset.
+Direction: eNB  WT and WT  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+Cause
+M
+
+9.2.4
+
+YES
+ignore
+
+9.1.13	RESET RESPONSE
+This message is sent as a response to a RESET message.
+Direction: WT  eNB and eNB  WT.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+Criticality Diagnostics
+O
+
+9.2.5
+
+YES
+ignore
+
+9.1.14	WT ADDITION REQUEST
+This message is sent by the eNB to the WT to request the preparation of resources for LTE-WLAN aggregation for a specific UE.
+Direction: eNB  WT.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+eNB UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the eNB
+YES
+reject
+UE Identity
+M
+
+9.2.16
+
+YES
+reject
+WLAN Security Information
+O
+
+9.2.27
+
+YES
+reject
+Serving PLMN
+O
+
+PLMN Identity
+9.2.3
+The serving PLMN for the UE.
+YES
+ignore
+E-RABs To Be Added List
+
+1
+
+
+YES
+reject
+>E-RABs To Be Added Item
+
+1 .. <maxnoof Bearers>
+
+
+EACH
+reject
+>>E-RAB ID
+M
+
+9.2.18
+
+–
+–
+>>E-RAB Level QoS Parameters
+M
+
+9.2.19
+Includes necessary QoS parameters
+–
+–
+>> eNB GTP Tunnel Endpoint
+M
+
+GTP Tunnel Endpoint 9.2.22
+Endpoint of the Xw transport bearer at the eNB
+–
+–
+>>DRB-Identity
+O
+
+9.2.33
+Mapping between DRB and E-RAB ID for UL bearers.
+YES
+reject
+Mobility Set
+M
+
+9.2.28
+
+YES
+reject
+WT UE XwAP ID
+O
+
+UE XwAP ID 9.2.24
+Previously assigned by the WT
+YES
+reject
+
+
+9.1.15	WT ADDITION REQUEST ACKNOWLEDGE
+ This message is sent by the WT to confirm to the eNB about the WT addition preparation.
+Direction: WT  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+eNB UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the eNB
+YES
+ignore
+WT UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the WT
+YES
+ignore
+E-RABs Admitted To Be Added List
+
+1
+
+
+YES
+ignore
+>E-RABs Admitted To Be Added Item
+
+1 .. <maxnoof Bearers>
+
+
+EACH
+ignore
+>>E-RAB ID
+M
+
+9.2.18
+
+–
+–
+>>WT GTP Tunnel Endpoint
+M
+
+GTP Tunnel Endpoint 9.2.22
+Endpoint of the Xw transport bearer at the WT.
+–
+–
+>>LWA WLAN AC
+O
+
+9.2.34
+
+YES
+ignore
+E-RABs Not Admitted List
+O
+
+E-RAB List
+9.2.23
+A value for E-RAB ID shall only be present once in E-RABs Admitted List IE and in E-RABs Not Admitted List IE.
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.5
+
+YES
+ignore
+WT MAC Address
+O
+
+9.2.35
+
+YES
+ignore
+
+
+9.1.16	WT ADDITION REQUEST REJECT
+This message is sent by the WT to inform the eNB that the WT Addition Preparation procedure has failed.
+Direction: WT  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+eNB UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the eNB
+YES
+ignore
+Cause
+M
+
+9.2.4
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.5
+
+YES
+ignore
+
+9.1.17	WT MODIFICATION REQUEST
+This message is sent by the eNB to the WT to request the modification of WT resources for a specific UE.
+Direction: eNB  WT.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+eNB UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the eNB
+YES
+reject
+WT UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the WT
+YES
+reject
+Cause
+M
+
+9.2.4
+
+YES
+ignore
+Serving PLMN
+O
+
+PLMN Identity
+9.2.3
+The serving PLMN for the UE.
+YES
+ignore
+UE Context Information
+
+0..1
+
+
+YES
+reject
+>WLAN Security Information 
+O
+
+9.2.27
+
+
+
+>E-RABs To Be Added List
+
+0..1
+
+
+–
+–
+>>E-RABs To Be Added Item
+
+1 .. <maxnoof Bearers>
+
+
+EACH
+ignore
+>>>E-RAB ID
+M
+
+9.2.18
+
+–
+–
+>>>E-RAB Level QoS Parameters
+M
+
+9.2.19
+Includes necessary QoS parameters
+–
+–
+>>> eNB GTP Tunnel Endpoint
+M
+
+GTP Tunnel Endpoint 9.2.22
+Endpoint of the Xw transport bearer at the eNB
+–
+–
+>>>DRB-Identity
+O
+
+9.2.33
+Mapping between DRB and E-RAB ID for UL bearers.
+YES
+reject
+>E-RABs To Be Modified List
+
+0..1
+
+
+–
+–
+>>E-RABs To Be Modified Item
+
+1 .. <maxnoof Bearers>
+
+
+EACH
+ignore
+>>>E-RAB ID
+M
+
+9.2.18
+
+–
+–
+>>>E-RAB Level QoS Parameters
+O
+
+9.2.19
+Includes QoS parameters to be modified
+–
+–
+>>> eNB GTP Tunnel Endpoint
+O
+
+GTP Tunnel Endpoint 9.2.22
+Endpoint of the Xw transport bearer at the eNB
+–
+–
+>E-RABs To Be Released List
+
+0..1
+
+
+–
+–
+>>E-RABs To Be Released Item
+
+1 .. <maxnoof Bearers>
+
+
+EACH
+ignore
+>>>E-RAB ID
+M
+
+9.2.18
+
+–
+–
+>>>DL Forwarding GTP Tunnel Endpoint
+O
+
+GTP Tunnel Endpoint 9.2.22
+Identifies the Xw transport bearer used for forwarding of DL PDUs
+–
+–
+Mobility Set
+O
+
+9.2.28
+
+YES
+reject
+
+
+9.1.18	WT MODIFICATION REQUEST ACKNOWLEDGE
+This message is sent by the WT to the eNB to confirm the modification of the WT resources for a specific UE.
+Direction: WT  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+eNB UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the eNB
+YES
+ignore
+WT UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the WT
+YES
+ignore
+E-RABs Admitted List
+
+0..1
+
+
+YES
+ignore
+>E-RABs Admitted To Be Added List
+
+0..1
+
+
+–
+–
+>>E-RABs Admitted To Be Added Item
+
+1 .. <maxnoof Bearers>
+
+
+EACH
+ignore
+>>>E-RAB ID
+M
+
+9.2.18
+
+–
+–
+>>>WT GTP Tunnel Endpoint
+M
+
+GTP Tunnel Endpoint 9.2.22
+Endpoint of the Xw transport bearer at the WT.
+–
+–
+>>>LWA WLAN AC
+O
+
+9.2.34
+
+YES
+ignore
+>E-RABs Admitted To Be Modified List
+
+0..1
+
+
+–
+–
+>>E-RABs Admitted To Be Modified Item
+
+1 .. <maxnoof Bearers>
+
+
+EACH
+ignore
+>>>E-RAB ID
+M
+
+9.2.18
+
+–
+–
+>>>WT GTP Tunnel Endpoint
+O
+
+GTP Tunnel Endpoint 9.2.22
+Endpoint of the Xw transport bearer at the WT.
+–
+–
+>>>LWA WLAN AC
+O
+
+9.2.34
+
+YES
+ignore
+>E-RABs Admitted To Be Released List
+
+0..1
+
+
+–
+–
+>>E-RABs Admitted To Be Released Item
+
+1 .. <maxnoof Bearers>
+
+
+EACH
+ignore
+>>>E-RAB ID
+M
+
+9.2.18
+
+–
+–
+E-RABs Not Admitted List
+O
+
+E-RAB List
+9.2.23
+A value for E-RAB ID shall only be present once  in E-RABs Admitted List IE and in E-RABs Not Admitted List IE.
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.5
+
+YES
+ignore
+
+
+9.1.19	WT MODIFICATION REQUEST REJECT
+This message is sent by the WT to inform the eNB that the eNB initiated WT Modification procedure has failed.
+Direction: WT  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+eNB UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the eNB
+YES
+ignore
+WT UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the WT
+YES
+ignore
+Cause
+M
+
+9.2.4
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.5
+
+YES
+ignore
+
+9.1.20	WT MODIFICATION REQUIRED 
+This message is sent by the WT to the eNB to request the release or modification of LWA bearers for a specific UE.
+Direction: WT  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+eNB UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the eNB
+YES
+reject
+WT UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the WT
+YES
+reject
+Cause
+M
+
+9.2.4
+
+YES
+ignore
+E-RABs To Be Released List
+
+0..1
+
+
+YES
+ignore
+>E-RABs To Be Released Item
+
+1 .. <maxnoof Bearers>
+
+
+EACH
+ignore
+>>E-RAB ID
+M
+
+9.2.18
+
+–
+–
+>>Cause
+M
+
+9.2.4
+
+–
+–
+E-RABs To Be Modified List
+
+0..1
+
+
+–
+–
+>E-RABs To Be Modified Item
+
+1 .. <maxnoof Bearers>
+
+
+EACH
+ignore
+>>E-RAB ID
+M
+
+9.2.18
+
+–
+–
+>>WT GTP Tunnel Endpoint
+O
+
+GTP Tunnel Endpoint 9.2.22
+Endpoint of the Xw transport bearer at the WT
+–
+–
+>>LWA WLAN AC
+O
+
+9.2.34
+
+YES
+ignore
+
+
+9.1.21	WT MODIFICATION CONFIRM 
+This message is sent by the eNB to inform the WT that the WT initiated WT Modification procedure was successful.
+Direction: eNB  WT.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+eNB UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the eNB
+YES
+ignore
+WT UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the WT
+YES
+ignore
+E-RABs Confirmed To Be Released List
+
+0..1
+
+
+–
+–
+>E-RABs Confirmed To Be Released Item
+
+1 .. <maxnoof Bearers>
+
+
+EACH
+ignore
+>>E-RAB ID
+M
+
+9.2.18
+
+–
+–
+>>DL Forwarding GTP Tunnel Endpoint
+O
+
+GTP Tunnel Endpoint 9.2.22
+Identifies the Xw transport bearer used for forwarding of DL PDUs
+–
+–
+E-RABs Confirmed To Be Modified List
+
+0..1
+
+
+–
+–
+>E-RABs Confirmed To Be Modified Item
+
+1 .. <maxnoof Bearers>
+
+
+EACH
+ignore
+>>E-RAB ID
+M
+
+9.2.18
+
+–
+–
+Criticality Diagnostics
+O
+
+9.2.5
+
+YES
+ignore
+
+
+9.1.22	WT MODIFICATION REFUSE 
+This message is sent by the eNB to inform the WT that the WT initiated WT Modification procedure has failed.
+Direction: eNB  WT.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+eNB UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the eNB
+YES
+ignore
+WT UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the WT
+YES
+ignore
+Cause
+M
+
+9.2.4
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.5
+
+YES
+ignore
+
+9.1.23	WT RELEASE REQUEST
+This message is sent by the eNB to the WT to request the release of all resources for a specific UE at the WT.
+Direction: eNB  WT.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+ignore
+eNB UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the eNB
+YES
+reject
+WT UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the WT
+YES
+reject
+Cause
+O
+
+9.2.4
+
+YES
+ignore
+E-RABs To Be Released List
+
+0..1
+
+
+YES
+ignore
+>E-RABs To Be Released Item
+
+1 .. <maxnoof Bearers>
+
+
+EACH
+ignore
+>>E-RAB ID
+M
+
+9.2.18
+
+–
+–
+>>DL Forwarding GTP Tunnel Endpoint
+O
+
+GTP Tunnel Endpoint 9.2.22
+Identifies the Xw transport bearer. used for forwarding of DL PDUs
+–
+–
+UE Context Kept Indicator
+O
+
+9.2.32
+
+YES
+ignore
+
+
+9.1.24	WT RELEASE REQUIRED
+This message is sent by the WT to request the release of all resources for a specific UE at the WT.
+Direction: WT  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+eNB UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the eNB
+YES
+reject
+WT UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the WT
+YES
+reject
+Cause
+M
+
+9.2.4
+
+YES
+ignore
+
+9.1.25	WT RELEASE CONFIRM
+This message is sent by the eNB to confirm the release of all resources for a specific UE at the WT.
+Direction: eNB  WT.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+eNB UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the eNB
+YES
+ignore
+WT UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the WT
+YES
+ignore
+E-RABs to be Released List
+
+0..1
+
+
+YES
+ignore
+>E-RABs To Be Released Item
+
+1 .. <maxnoof Bearers>
+
+
+–
+–
+>>E-RAB ID
+M
+
+9.2.18
+
+–
+–
+>>DL Forwarding GTP Tunnel Endpoint
+O
+
+GTP Tunnel Endpoint 9.2.22
+Identifies the Xw transport bearer used for forwarding of DL PDUs
+–
+–
+Criticality Diagnostics
+O
+
+9.2.5
+
+YES
+ignore
+
+
+9.1.26	WT ASSOCIATION CONFIRMATION
+This message is sent by the WT to the eNB to confirm that a certain UE successfully associated with the WLAN.
+Direction: WT  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+ignore
+eNB UE XwAP ID
+M
+
+UE XwAP ID
+9.2.24
+Assigned by the eNB
+YES
+ignore
+WT UE XwAP ID
+M
+
+UE XwAP ID
+9.2.24
+Assigned by the WT
+YES
+ignore
+
+9.1.27	LWIP ADDITION REQUEST
+This message is sent by the eNB to the WT to request the configuration of tunnel resources for LWIP operation for a specific UE.
+Direction: eNB  WT.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+eNB UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the eNB
+YES
+reject
+UE Identity
+M
+
+9.2.16
+
+YES
+reject
+LWIP-SeGW Security Information
+M
+
+9.2.30
+
+
+
+Serving PLMN
+O
+
+PLMN Identity
+9.2.3
+The serving PLMN for the UE.
+YES
+ignore
+eNB GTP Tunnel Endpoint
+O
+
+GTP Tunnel Endpoint 9.2.22
+Endpoint of the Xw transport bearer at the eNB
+YES
+reject
+Mobility Set
+O
+
+9.2.28
+
+YES
+reject
+
+9.1.28	LWIP ADDITION REQUEST ACKNOWLEDGE
+ This message is sent by the WT to confirm to the eNB about the LWIP addition preparation.
+Direction: WT  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+eNB UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the eNB
+YES
+ignore
+WT UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the WT
+YES
+ignore
+LWIP-SeGW GTP Tunnel Endpoint
+O
+
+GTP Tunnel Endpoint 9.2.22
+Endpoint of the Xw transport bearer at the WT
+YES
+reject
+Criticality Diagnostics
+O
+
+9.2.5
+
+YES
+ignore
+
+9.1.29	LWIP ADDITION REQUEST REJECT
+This message is sent by the WT to inform the eNB that the LWIP Addition Preparation procedure has failed.
+Direction: WT  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+eNB UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the eNB
+YES
+ignore
+Cause
+M
+
+9.2.4
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.5
+
+YES
+ignore
+
+9.1.30	LWIP MODIFICATION REQUEST
+This message is sent by the eNB to the WT to request the modification of tunnel resources for LWIP operation for a specific UE.
+Direction: eNB  WT.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+eNB UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the eNB
+YES
+reject
+WT UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the WT
+YES
+reject
+Cause
+M
+
+9.2.4
+
+YES
+ignore
+Serving PLMN
+O
+
+PLMN Identity
+9.2.3
+The serving PLMN for the UE.
+YES
+ignore
+Mobility Set
+O
+
+9.2.28
+
+YES
+reject
+
+9.1.31	LWIP MODIFICATION REQUEST ACKNOWLEDGE
+This message is sent by the WT to the eNB to confirm the modification of tunnel resources for LWIP operation for a specific UE.
+Direction: WT  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+eNB UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the eNB
+YES
+ignore
+WT UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the WT
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.5
+
+YES
+ignore
+
+9.1.32	LWIP MODIFICATION REQUEST REJECT
+This message is sent by the WT to inform the eNB that the eNB initiated LWIP Modification procedure has failed.
+Direction: WT  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+eNB UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the eNB
+YES
+ignore
+WT UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the WT
+YES
+ignore
+Cause
+M
+
+9.2.4
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.5
+
+YES
+ignore
+
+9.1.33	LWIP RELEASE REQUEST
+This message is sent by the eNB to the WT to request the release of all tunnel resources for LWIP operation for a specific UE at the WT.
+Direction: eNB  WT.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+ignore
+eNB UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the eNB
+YES
+reject
+WT UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the WT
+YES
+reject
+Cause
+O
+
+9.2.4
+
+YES
+ignore
+
+9.1.34	LWIP RELEASE REQUIRED
+This message is sent by the WT to request the release of all tunnel resources for LWIP operation for a specific UE at the WT.
+Direction: WT  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+eNB UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the eNB
+YES
+reject
+WT UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the WT
+YES
+reject
+Cause
+M
+
+9.2.4
+
+YES
+ignore
+
+9.1.35	LWIP RELEASE CONFIRM
+This message is sent by the eNB to confirm the release of all tunnel resources for LWIP operation for a specific UE at the WT.
+Direction: eNB  WT.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+eNB UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the eNB
+YES
+ignore
+WT UE XwAP ID
+M
+
+UE XwAP ID 9.2.24
+Assigned by the WT
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.5
+
+YES
+ignore
+
+9.2	Information Element definitions
+9.2.0	General
+When specifying information elements which are to be represented by bit strings, if not otherwise specifically stated in the semantics description of the concerned IE or elsewhere, the following principle applies with regards to the ordering of bits:
+-	The first bit (leftmost bit) contains the most significant bit (MSB);
+-	The last bit (rightmost bit) contains the least significant bit (LSB);
+-	When importing bit strings from other specifications, the first bit of the bit string contains the first bit of the concerned information.
+9.2.1	Message Type
+This IE uniquely identifies the message being sent. It is mandatory for all messages.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Procedure Code
+M
+
+INTEGER (0..255)
+
+Type of Message
+M
+
+CHOICE (Initiating Message, Successful Outcome, Unsuccessful Outcome, 
+…)
+
+
+9.2.2	Global eNB ID
+This IE is used to globally identify an eNB (see TS 36.401 [9]).
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+PLMN Identity
+M
+
+9.2.3
+
+CHOICE eNB ID
+M
+
+
+
+>Macro eNB ID
+
+
+
+
+>>Macro eNB ID
+M
+
+BIT STRING (20)
+Equal to the Macro eNB ID IE contained in Global eNB ID IE as defined in sub clause 9.2.1.37 of TS 36.413 [8]..
+>Other eNB ID
+
+
+
+
+>>Other eNB ID
+M
+
+Protocol IE Container
+
+>Short Macro eNB ID
+
+
+
+
+>>Short Macro eNB ID
+M
+
+BIT STRING (SIZE(18))
+Equal to the Short Macro eNB ID IE contained in Global eNB ID IE as defined in sub clause 9.2.1.37 of TS 36.413 [8].
+>Long Macro eNB ID
+
+
+
+
+>>Long Macro eNB ID
+M
+
+BIT STRING (SIZE(21))
+Equal to the Long Macro eNB ID IE contained in Global eNB ID IE as defined in sub clause 9.2.1.37 of TS 36.413 [8].
+
+9.2.3	PLMN Identity
+This IE indicates the PLMN Identity.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+PLMN Identity
+M
+
+OCTET STRING (SIZE(3))
+- digits 0 to 9, encoded 0000 to 1001,
+- 1111 used as filler digit,
+two digits per octet,
+- bits 4 to 1 of octet n encoding digit 2n-1
+- bits 8 to 5 of octet n encoding digit 2n
+
+-The PLMN identity consists of 3 digits from MCC followed by either 
+-a filler digit plus 2 digits from MNC (in case of 2 digit MNC) or 
+-3 digits from MNC (in case of a 3 digit MNC).
+
+9.2.4	Cause
+The purpose of this IE is to indicate the reason for a particular event for the whole protocol.
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+CHOICE Cause Group
+M
+
+
+
+>Radio Network Layer
+
+
+
+
+>>Radio Network Layer Cause 
+M
+
+ENUMERATED
+(Unknown eNB UE XwAP ID, Unknown WT UE XwAP ID, Unknown Pair of UE XwAP ID,
+WLAN not Available,
+Security Failure, ReportCharacteristicsEmpty, ExistingMeasurement ID, Unknown Measurement ID, Measurement Temporarily not Available,
+Unspecified, Multiple E-RAB ID instances, Switch Off Ongoing, Not supported QCI value, Measurement not supported for the object,
+Reduce Load,
+Resource Optimisation,
+Target not Allowed,
+No Radio Resources Available,
+Invalid QoS combination, Procedure cancelled, Radio Connection With UE Lost, Failure in the Radio Interface Procedure, ..., No Report Periodicity, Wrong WLAN Interworking Mode)
+
+>Transport Layer
+
+
+
+
+>>Transport Layer Cause
+M
+
+ENUMERATED
+(Transport Resource Unavailable,
+Unspecified, ...)
+
+>Protocol
+
+
+
+
+>>Protocol Cause
+M
+
+ENUMERATED
+(Transfer Syntax Error,Abstract Syntax Error (Reject),Abstract Syntax Error (Ignore and Notify),Message not Compatible with Receiver State,Semantic Error,Unspecified,Abstract Syntax Error (Falsely Constructed Message), ...)
+
+>Misc
+
+
+
+
+>>Miscellaneous Cause
+M
+
+ENUMERATED
+(Control Processing Overload,
+Hardware Failure,O&M Intervention,Not enough User Plane Processing Resources,Unspecified, ...)
+
+
+The meaning of the different cause values is described in the following table. In general, "not supported" cause values indicate that the concerned capability is missing. On the other hand, "not available" cause values indicate that the concerned capability is present, but insufficient resources were available to perform the requested action.
+Radio Network Layer cause
+Meaning
+WLAN not Available
+The concerned WLAN is not available.
+Unknown eNB UE XwAP ID
+The action failed because the eNB UE XwAP ID is unknown.
+Unknown WT UE XwAP ID
+The action failed because the WT UE XwAP ID is unknown.
+Unknown Pair of UE XwAP ID
+The action failed because the pair of UE XwAP IDs is unknown.
+Security Failure
+The action is requested (or a previous request by the receiving node failed) due to a failure in security procedures.
+ReportCharacteristicsEmpty
+The action failed because there is no characteristic reported.
+Existing Measurement ID
+The action failed because Measurement ID is already used.
+Unknown Measurement ID
+The action failed because some eNB or WT Measurement ID is unknown.
+Measurement Temporarily not Available
+The WT can temporarily not provide the requested measurement object.
+Multiple E-RAB ID Instances
+The action failed because multiple instances of the same E-RAB had been provided to the WT.
+Switch Off Ongoing
+The reason for the action is an ongoing switch off i.e. either the sending node, or nodes whose actions the sending node triggers or monitors, will be switched off and not be available. It aids the receiving node in taking subsequent actions. 
+Not supported QCI value
+The action failed because the requested QCI is not supported.
+Unspecified
+Sent when none of the above cause values applies but still the cause is Radio Network Layer related.
+Measurement not Supported For The Object
+At least one of the concerned BSS(s) does not support the requested measurement.
+Reduce Load
+The action is requested in order to reduce load in an element controlled by the sending node.
+Resource Optimisation
+The reason for requesting this action is to improve the load distribution.
+Target not Allowed
+Requested action towards the indicated target is not allowed for the UE in question.
+No Radio Resources Available
+The action failed because of insufficient radio resources in the requested node.
+Invalid QoS combination
+The action was failed because of invalid QoS combination.
+Procedure cancelled
+The sending node cancelled the procedure due to other urgent actions to be performed.
+Radio Connection With UE Lost
+The action is requested due to losing the radio connection to the UE.
+Failure in the Radio Interface Procedure
+Radio interface procedure has failed.
+No Report Periodicity
+The action failed because the periodicity is not defined.
+Wrong WLAN Interworking Mode
+The WT cannot support the requested WLAN interworking mode (LWA or LWIP), or it cannot handle a procedure related to one of the modes, or the requested mode is not configured for the UE.
+
+Transport Network Layer cause
+Meaning
+Transport resource unavailable
+The required transport resources are not available.
+Unspecified
+Sent when none of the above cause values applies but still the cause is Transport Network Layer related
+
+Protocol cause
+Meaning
+Abstract Syntax Error (Reject)
+The received message included an abstract syntax error and the concerned criticality indicated "reject" (see sub clause 10.3 of TS 36.413 [8]).
+Abstract Syntax Error (Ignore and Notify)
+The received message included an abstract syntax error and the concerned criticality indicated "ignore and notify" (see sub clause 10.3 of TS 36.413 [8]).
+Abstract Syntax Error (falsely constructed message)
+The received message contained IEs or IE groups in wrong order or with too many occurrences (see sub clause 10.3 of TS 36.413 [8]).
+Message not Compatible with Receiver State
+The received message was not compatible with the receiver state (see sub clause 10.4 of TS 36.413 [8]).
+Semantic Error
+The received message included a semantic error (see sub clause 10.4 of TS 36.413 [8]).
+Transfer Syntax Error
+The received message included a transfer syntax error (see sub clause 10.2 of TS 36.413 [8]).
+Unspecified
+Sent when none of the above cause values applies but still the cause is Protocol related
+
+Miscellaneous cause
+Meaning
+Control Processing Overload
+eNB or WT control processing overload
+Hardware Failure
+eNB or WT hardware failure
+Not enough User Plane Processing Resources
+eNB or WT has insufficient user plane processing resources available.
+O&M Intervention
+Operation and Maintenance intervention
+Unspecified
+Sent when none of the above cause values applies and the cause is not related to any of the categories Radio Network Layer, Transport Network Layer or Protocol
+
+9.2.5	Criticality Diagnostics
+The Criticality Diagnostics IE is sent by the eNB and the WT when parts of a received message have not been comprehended or were missing, or if the message contained logical errors. When applicable, it contains information about which IEs were not comprehended or were missing.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Procedure Code
+O
+
+INTEGER (0..255)
+Procedure Code is to be used if Criticality Diagnostics is part of Error Indication procedure, and not within the response message of the same procedure that caused the error.
+Triggering Message
+O
+
+ENUMERATED(initiating message, successful outcome, unsuccessful outcome)
+The Triggering Message is used only if the Criticality Diagnostics is part of Error Indication procedure.
+Procedure Criticality
+O
+
+ENUMERATED(reject, ignore, notify)
+This Procedure Criticality is used for reporting the Criticality of the Triggering message (Procedure).
+Information Element Criticality Diagnostics
+
+0..<maxnoofErrors>
+
+
+>IE Criticality
+M
+
+ENUMERATED(reject, ignore, notify)
+The IE Criticality is used for reporting the criticality of the triggering IE. The value "ignore'" shall not be used.
+>IE ID
+M
+
+INTEGER (0..65535)
+The IE ID of the not understood or missing IE 
+>Type Of Error
+M
+
+ENUMERATED(not understood, missing, …)
+
+
+Range bound
+Explanation
+maxnoofErrors
+Maximum no. of IE errors allowed to be reported with a single message. The value for maxnoofErrors is 256.
+
+9.2.6	WT ID
+This IE is used to identify a WT.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+CHOICE WT ID Type
+M
+
+
+
+>WT ID Type 1
+
+
+
+
+>>PLMN ID
+M
+
+PLMN Identity
+9.2.3
+
+>>Short WT ID
+M
+
+BIT STRING (24)
+
+>WT ID Type 2
+
+
+
+
+>>Long WT ID
+M
+
+BIT STRING (48)
+
+
+9.2.7	WLAN Information
+This IE contains WLAN configuration information that an eNB may need for the Xw interface. It shall contain at least one of the BSS Item, the SSID, and/or the HESSID IEs.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+BSS Item
+O
+
+
+
+
+
+>BSSID
+M
+
+9.2.8
+
+
+
+>WLAN Operating Class
+O
+
+INTEGER (0..255)
+Indicates the Operating Class of WLAN as defined in IEEE 802.11™ [11].
+
+
+>WLAN Country Code
+O
+
+ENUMERATED (unitedStates, europe, japan, global, …)
+Indicates the country code of WLAN as defined in IEEE 802.11™ [11].
+
+
+>Maximum Capacity
+O
+
+Bit Rate 9.2.17
+The maximum  supported data rate corresponding to this BSSID.
+
+
+>WLAN Band Information List
+
+0..1
+
+
+
+
+>>WLAN Band Information Item
+
+1..<maxnoofBands>
+
+
+EACH
+ignore
+>>>WLAN Band Information
+
+
+9.2.13
+
+
+
+SSID
+O
+
+9.2.9
+
+
+
+HESSID
+O
+
+9.2.10
+
+
+
+WLAN Usage
+O
+
+9.2.31
+
+YES
+reject
+
+Range bound
+Explanation
+maxnoofBands
+Maximum number of WLAN Band Information Items per BSSID. The value of maxnoofBands is 256.
+
+9.2.8	BSSID
+This IE contains the BSSID.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+BSSID
+M
+
+OCTET STRING (SIZE(6))
+Includes the BSSID field as defined in subclause 8.2.4.3.4 of IEEE 802.11™ [11].
+
+9.2.9	SSID
+This IE contains the SSID.
+
+9.2.10	HESSID
+This IE contains the HESSID.
+
+9.2.11	BSS Load
+This IE contains the BSS Load.
+
+9.2.12	WAN Metrics
+This IE contains the WAN Metrics.
+
+9.2.13	WLAN Band Information
+This IE describes the WLAN band information.
+
+9.2.14	Channel Utilization
+This IE indicates the utilization level of a channel.
+
+9.2.15	WLAN Backhaul Rate
+This IE identifies a WLAN Backhaul Rate.
+
+9.2.16	UE Identity
+This IE represents the WLAN MAC address of the UE.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+UE Identity
+M
+
+OCTET STRING (SIZE(6))
+This corresponds to the WLAN MAC address of the UE
+
+9.2.17	Bit Rate
+This IE indicates the number of bits delivered within a period of time, divided by the duration of the period. It is used, for example, to indicate the maximum or guaranteed bit rate for a GBR E-RAB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Bit Rate
+M
+
+INTEGER (0..10,000,000,000)
+The unit is: bit/s
+
+9.2.18	E-RAB ID
+This IE uniquely identifies an E-RAB for a UE.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+E-RAB ID
+M
+
+INTEGER (0..15, ...)
+
+
+9.2.19	E-RAB Level QoS Parameters
+This IE defines the QoS to be applied to an E-RAB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+QCI
+M
+
+INTEGER (0..255)
+QoS Class Identifier defined in TS 23.401 [14].
+Logical range and coding specified in TS 23.203 [13].
+–
+–
+Allocation and Retention Priority
+M 
+
+9.2.20
+
+–
+–
+GBR QoS Information
+O
+
+9.2.21
+This IE applies to GBR bearers only and shall be ignored otherwise.
+–
+–
+
+9.2.20	Allocation and Retention Priority
+This IE specifies the relative importance compared to other E-RABs for allocation and retention of the E-UTRAN Radio Access Bearer.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Priority Level
+M
+
+INTEGER (0..15)
+Desc.: This IE should be understood as “priority of allocation and retention” (see TS 23.401 [14]).
+Usage:
+Value 15 means “no priority”.
+Values between 1 and 14 are ordered in decreasing order of priority, i.e. 1 is the highest and 14 the lowest.
+Value 0 shall be treated as a logical error if received.
+Pre-emption Capability
+M
+
+ENUMERATED(shall not trigger pre-emption, may trigger pre-emption)
+Descr.: This IE indicates the pre-emption capability of the request on other E-RABs
+Usage: 
+The E-RAB shall not pre-empt other E-RABs or, the E-RAB may pre-empt other E-RABs
+The Pre-emption Capability indicator applies to the allocation of resources for an E-RAB and as such it provides the trigger to the pre-emption procedures/processes of the eNB.
+Pre-emption Vulnerability
+M
+
+ENUMERATED(not pre-emptable, pre-emptable)
+Desc.: This IE indicates the vulnerability of the E-RAB to pre-emption of other E-RABs.
+Usage:
+The E-RAB shall not be pre-empted by other E-RABs or the E-RAB may be pre-empted by other RABs.
+Pre-emption Vulnerability indicator applies for the entire duration of the E-RAB, unless modified, and as such indicates whether the E-RAB is a target of the pre-emption procedures/processes of the eNB.
+
+9.2.21	GBR QoS Information
+This IE indicates the maximum and guaranteed bit rates of a GBR E-RAB for downlink.
+NOTE:	The WT shall regard the GBR QoS Information IE as an E-RAB level parameter for E-RABs configured with the LWA bearer, although the bit rates signalled by the eNB are typically not equal to the bit rates signalled by the MME for that E-RAB (see TS 36.300 [2]).
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+E-RAB Maximum Bit Rate Downlink
+M
+
+Bit Rate 9.2.17
+Maximum Bit Rate in DL (i.e. from EPC to E-UTRAN) for the bearer.
+Details in TS 23.401 [14].
+–
+–
+E-RAB Guaranteed Bit Rate Downlink
+M
+
+Bit Rate 9.2.17
+Guaranteed Bit Rate (provided that there is data to deliver) in DL (i.e. from EPC to E-UTRAN) for the bearer.
+Details in TS 23.401 [14].
+–
+–
+
+9.2.22	GTP Tunnel Endpoint
+The GTP Tunnel Endpoint IE identifies an Xw transport bearer associated to an E-RAB. It contains a Transport Layer Address and a GTP Tunnel Endpoint Identifier. The Transport Layer Address is an IP address to be used for the Xw user plane transport (see TS 36.464 [15]). The GTP Tunnel Endpoint Identifier is to be used for the user plane transport between the eNB and the WT.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Transport Layer Address
+M
+
+BIT STRING (1..160, ...)
+For details on the Transport Layer Address, see TS 36.464 [15]
+–
+–
+GTP TEID
+M
+
+OCTET STRING (4)
+For details and range, see TS 29.281 [16]
+–
+–
+
+9.2.23	E-RAB List
+The IE contains a list of E-RAB identities with a cause value. It is used for example to indicate not admitted bearers.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+E-RAB List Item
+
+1..<maxnoofBearers>
+
+
+EACH
+ignore
+>E-RAB ID
+M
+
+9.2.18
+
+–
+–
+>Cause
+M
+
+9.2.4
+
+–
+–
+
+Range bound
+Explanation
+maxnoofBearers
+Maximum no. of E-RABs. Value is 256.
+
+9.2.24	UE XwAP ID
+This information element uniquely identifies a UE over the Xw interface within a WT or an eNB.
+The eNB UE XwAP ID is allocated by the eNB, and the WT UE XwAP ID is allocated by the WT.
+The usage of this IE is defined in TS 36.401 [9].
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+UE XwAP ID
+M
+
+OCTET STRING (SIZE(3))
+
+
+9.2.25	Station Count
+The Station Count IE indicates the total number of stations associated with the BSS.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Station Count
+M
+
+INTEGER (0..65535)
+Defined in subclause 8.4.2.30 of IEEE 802.11™ [11]
+
+9.2.26	Available Channel Utilization
+The Available Channel Utilization IE indicates the amount of WLAN channel utilization time that is available for LWA services relative to the total channel busy time period, as defined in [11]. The available channel utilization should be measured and reported so that the minimum channel utilization time needed for existing services is reserved according to implementation. 
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Capacity Value
+M
+
+INTEGER (0..100)
+Value 0 shall indicate no available channel utilization time, and 100 shall indicate that all the channel utilization time is available. Available Channel Utilization should be measured on a linear scale.
+-
+-
+
+9.2.27	WLAN Security Information
+The WLAN Security Information IE is used to establish WLAN security as defined in TS 33.401 [17].
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+WT Security Key
+M
+
+BIT STRING (SIZE(256))
+The S-KWT which is provided by the eNB, see TS 33.401 [17].
+
+9.2.28	Mobility Set
+The Mobility Set IE contains the mobility set configured for a UE, as defined in TS 36.300 [2]. It shall contain at least one of the BSSID, the SSID, and/or the HESSID IEs.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Mobility Set Item
+
+1..<maxnoofMobilitySetItems>
+
+
+>BSSID
+O
+
+9.2.8
+
+>SSID
+O
+
+9.2.9
+
+>HESSID
+O
+
+9.2.10
+
+
+Range bound
+Explanation
+maxnoofMobilitySetItems
+Maximum number of mobility set items in the Mobility Set. The value is 1024.
+
+9.2.29	Time To Wait
+This IE defines the minimum allowed waiting times.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Time To Wait
+M
+
+ENUMERATED(1s, 2s, 5s, 10s, 20s, 60s, …)
+
+
+9.2.30	LWIP-SeGW Security Information
+This IE contains security information for the LWIP IPSec tunnel, as defined in TS 33.401 [17].
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+LWIP-PSK
+M
+
+BIT STRING (SIZE(256))
+
+IKE Initiator Identity
+M
+
+OCTET STRING
+
+
+9.2.31	WLAN Usage
+This IE identifies the usage of the given WLAN identifier(s).
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+WLAN Usage
+M
+
+ENUMERATED (LWA and LWIP, LWIP only, ...)
+
+
+9.2.32	UE Context Kept Indicator
+This IE indicates that the UE Context at the WT is kept in case of inter-eNB handover without WT Change procedure, as specified in TS 36.300 [2].
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+UE Context Kept Indicator
+M
+
+ENUMERATED (True, …)
+
+
+9.2.33	DRB-Identity
+This IE uniquely identifies the DRB for a UE.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+DRB-Identity
+M
+
+INTEGER (1..32,...)
+Corresponds to the DRB Identity as defined in TS 36.331 [18]
+
+9.2.34	LWA WLAN AC
+This IE identifies the Access Category for uplink LWA.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+LWA WLAN AC
+M
+
+ENUMERATED (ac-bk, ac-be, ac-vi, ac-vo)
+Corresponds to the Access Categories as defined in TS 36.331 [18]
+
+9.2.35	WT MAC Address
+This IE represents the WT MAC address on the network interface towards the WLAN.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+WT MAC Address
+M
+
+OCTET STRING (SIZE(6))
+This corresponds to the WT MAC Address
+
+9.3	Message and Information Element Abstract Syntax (with ASN.1)
+9.3.1	General
+XwAP ASN.1 definition conforms to ITU-T Rec. X.680 [6] and ITU-T Rec. X.681 [7].
+Sub clause 9.3 presents the Abstract Syntax of the XwAP protocol with ASN.1. In case there is contradiction between the ASN.1 definition in this sub clause and the tabular format in sub clause 9.1 and 9.2, the ASN.1 shall take precedence, except for the definition of conditions for the presence of conditional elements, in which the tabular format shall take precedence.
+The ASN.1 definition specifies the structure and content of XwAP messages. XwAP messages can contain any IEs specified in the object set definitions for that message without the order or number of occurrence being restricted by ASN.1. However, for this version of the standard, a sending entity shall construct an XwAP message according to the PDU definitions module and with the following additional rules:
+-	IEs shall be ordered (in an IE container) in the order they appear in object set definitions.
+-	Object set definitions specify how many times IEs may appear. An IE shall appear exactly once if the presence field in an object has value "mandatory". An IE may appear at most once if the presence field in an object has value "optional" or "conditional". If in a tabular format there is multiplicity specified for an IE (i.e. an IE list) then in the corresponding ASN.1 definition the list definition is separated into two parts. The first part defines an IE container list in which the list elements reside. The second part defines list elements. The IE container list appears as an IE of its own. For this version of the standard an IE container list may contain only one kind of list elements.
+NOTE:	In the above, "IE" means an IE in the object set with an explicit ID. If one IE needs to appear more than once in one object set, then the different occurrences have different IE IDs.
+If an XwAP message that is not constructed as defined above is received, this shall be considered as Abstract Syntax Error, and the message shall be handled as defined for Abstract Syntax Error in clause 10.
+9.3.2	Usage of Private Message Mechanism for Non-standard Use
+The private message mechanism for non-standard use may be used:
+-	for special operator (and/or vendor) specific features considered not to be part of the basic functionality, i.e. the functionality required for a complete and high-quality specification in order to guarantee multivendor inter-operability.
+-	by vendors for research purposes, e.g. to implement and evaluate new algorithms/features before such features are proposed for standardisation.
+The private message mechanism shall not be used for basic functionality. Such functionality shall be standardised.
+9.3.3	Elementary Procedure Definitions
+-- **************************************************************
+--
+-- Elementary Procedure definitions for XwAP
+--
+-- **************************************************************
+
+XwAP-PDU-Descriptions  { 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) xwap (8) version1 (1) xwap-PDU-Descriptions (0)}
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- IE parameter types from other modules
+--
+-- **************************************************************
+
+IMPORTS
+	Criticality,
+	ProcedureCode
+
+FROM XwAP-CommonDataTypes
+
+	
+	ErrorIndication,
+	LWIPAdditionRequest,
+	LWIPAdditionRequestAcknowledge,
+	LWIPAdditionRequestReject, 
+	LWIPModificationRequest,
+	LWIPModificationRequestAcknowledge,
+	LWIPModificationRequestReject,
+	LWIPReleaseRequest,
+	LWIPReleaseRequired,
+	LWIPReleaseConfirm,
+	PrivateMessage,
+	Reset,
+	ResetResponse,
+	XwSetupRequest,
+	XwSetupResponse,
+	XwSetupFailure,
+	WTAdditionRequest,
+	WTAdditionRequestAcknowledge,
+	WTAdditionRequestReject,
+	WTAssociationConfirmation,
+	WTConfigurationUpdate,
+	WTConfigurationUpdateAcknowledge,
+	WTConfigurationUpdateFailure,
+	WTModificationRequest,
+	WTModificationRequestAcknowledge,
+	WTModificationRequestReject,
+	WTModificationRequired,
+	WTModificationConfirm,
+	WTModificationRefuse,
+	WTReleaseRequest,
+	WTReleaseRequired,
+	WTReleaseConfirm,
+	WTStatusRequest,
+	WTStatusResponse,
+	WTStatusFailure,
+	WTStatusReport
+	
+FROM XwAP-PDU-Contents
+
+	id-eNBInitiatedWTModification,
+	id-eNBInitiatedWTRelease,
+	id-errorIndication,
+	id-privateMessage,
+	id-reset,
+	id-xwSetup,
+	id-wTAdditionPreparation,
+	id-wTAssociationConfirmation,
+	id-wTConfigurationUpdate,
+	id-wTInitiatedWTModification,
+	id-wTInitiatedWTRelease,
+	id-wTStatusReporting,
+	id-wTStatusReportingInitiation,
+	id-lWIPAdditionPreparation,
+	id-eNBInitiatedLWIPModification,
+	id-eNBInitiatedLWIPRelease,
+	id-wTInitiatedLWIPRelease
+
+FROM XwAP-Constants;
+
+
+-- **************************************************************
+--
+-- Interface Elementary Procedure Class
+--
+-- **************************************************************
+
+XWAP-ELEMENTARY-PROCEDURE ::= CLASS {
+	&InitiatingMessage				,
+	&SuccessfulOutcome							OPTIONAL,
+	&UnsuccessfulOutcome						OPTIONAL,
+	&procedureCode				ProcedureCode	UNIQUE,
+	&criticality				Criticality		DEFAULT ignore
+}
+WITH SYNTAX {
+	INITIATING MESSAGE			&InitiatingMessage
+	[SUCCESSFUL OUTCOME			&SuccessfulOutcome]
+	[UNSUCCESSFUL OUTCOME		&UnsuccessfulOutcome]
+	PROCEDURE CODE				&procedureCode
+	[CRITICALITY				&criticality]
+}
+
+-- **************************************************************
+--
+-- Interface PDU Definition
+--
+-- **************************************************************
+
+XwAP-PDU ::= CHOICE {
+	initiatingMessage	InitiatingMessage,
+	successfulOutcome	SuccessfulOutcome,
+	unsuccessfulOutcome	UnsuccessfulOutcome,
+	...
+}
+
+InitiatingMessage ::= SEQUENCE {
+	procedureCode	XWAP-ELEMENTARY-PROCEDURE.&procedureCode		({XWAP-ELEMENTARY-PROCEDURES}),
+	criticality		XWAP-ELEMENTARY-PROCEDURE.&criticality			({XWAP-ELEMENTARY-PROCEDURES}{@procedureCode}),
+	value			XWAP-ELEMENTARY-PROCEDURE.&InitiatingMessage	({XWAP-ELEMENTARY-PROCEDURES}{@procedureCode})
+}
+
+SuccessfulOutcome ::= SEQUENCE {
+	procedureCode	XWAP-ELEMENTARY-PROCEDURE.&procedureCode		({XWAP-ELEMENTARY-PROCEDURES}),
+	criticality		XWAP-ELEMENTARY-PROCEDURE.&criticality			({XWAP-ELEMENTARY-PROCEDURES}{@procedureCode}),
+	value			XWAP-ELEMENTARY-PROCEDURE.&SuccessfulOutcome	({XWAP-ELEMENTARY-PROCEDURES}{@procedureCode})
+}
+
+UnsuccessfulOutcome ::= SEQUENCE {
+	procedureCode	XWAP-ELEMENTARY-PROCEDURE.&procedureCode		({XWAP-ELEMENTARY-PROCEDURES}),
+	criticality		XWAP-ELEMENTARY-PROCEDURE.&criticality			({XWAP-ELEMENTARY-PROCEDURES}{@procedureCode}),
+	value			XWAP-ELEMENTARY-PROCEDURE.&UnsuccessfulOutcome	({XWAP-ELEMENTARY-PROCEDURES}{@procedureCode})
+}
+
+-- **************************************************************
+--
+-- Interface Elementary Procedure List
+--
+-- **************************************************************
+
+XWAP-ELEMENTARY-PROCEDURES XWAP-ELEMENTARY-PROCEDURE ::= {
+	XWAP-ELEMENTARY-PROCEDURES-CLASS-1			|
+	XWAP-ELEMENTARY-PROCEDURES-CLASS-2,	
+	...
+}
+
+
+XWAP-ELEMENTARY-PROCEDURES-CLASS-1 XWAP-ELEMENTARY-PROCEDURE ::= {
+	xwSetup							|
+	wTConfigurationUpdate			|
+	wTStatusReportingInitiation		|
+	reset							|
+	wTAdditionPreparation			|
+	eNBInitiatedWTModification		|
+	wTInitiatedWTModification		|
+	wTInitiatedWTRelease			|
+	lWIPAdditionPreparation			|
+	eNBInitiatedLWIPModification				|
+	wTInitiatedLWIPRelease			,
+
+	...
+}
+
+XWAP-ELEMENTARY-PROCEDURES-CLASS-2 XWAP-ELEMENTARY-PROCEDURE ::= {	
+	wTStatusReporting				|
+	errorIndication					|
+	eNBInitiatedWTRelease			|
+	wTAssociationConfirmation		|
+	privateMessage					|
+	eNBInitiatedLWIPRelease			,
+	...
+}
+
+-- **************************************************************
+--
+-- Interface Elementary Procedures
+--
+-- **************************************************************
+
+xwSetup 					XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		XwSetupRequest
+	SUCCESSFUL OUTCOME		XwSetupResponse
+	UNSUCCESSFUL OUTCOME	XwSetupFailure
+	PROCEDURE CODE			id-xwSetup
+	CRITICALITY				reject
+}
+
+wTConfigurationUpdate 		XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		WTConfigurationUpdate
+	SUCCESSFUL OUTCOME		WTConfigurationUpdateAcknowledge
+	UNSUCCESSFUL OUTCOME 	WTConfigurationUpdateFailure
+	PROCEDURE CODE			id-wTConfigurationUpdate
+	CRITICALITY				reject
+}
+
+wTStatusReportingInitiation	XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		WTStatusRequest
+	SUCCESSFUL OUTCOME		WTStatusResponse
+	UNSUCCESSFUL OUTCOME	WTStatusFailure
+	PROCEDURE CODE			id-wTStatusReportingInitiation
+	CRITICALITY				reject
+}
+
+wTStatusReporting 			XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		WTStatusReport
+	PROCEDURE CODE			id-wTStatusReporting
+	CRITICALITY				ignore
+}
+
+errorIndication				XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ErrorIndication
+	PROCEDURE CODE			id-errorIndication
+	CRITICALITY				ignore
+}
+
+reset						XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		Reset
+	SUCCESSFUL OUTCOME		ResetResponse
+	PROCEDURE CODE			id-reset
+	CRITICALITY				reject
+}
+
+wTAdditionPreparation 		XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		WTAdditionRequest
+	SUCCESSFUL OUTCOME		WTAdditionRequestAcknowledge
+	UNSUCCESSFUL OUTCOME 	WTAdditionRequestReject
+	PROCEDURE CODE			id-wTAdditionPreparation
+	CRITICALITY				reject
+}
+
+eNBInitiatedWTModification	XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		WTModificationRequest
+	SUCCESSFUL OUTCOME		WTModificationRequestAcknowledge
+	UNSUCCESSFUL OUTCOME 	WTModificationRequestReject
+	PROCEDURE CODE			id-eNBInitiatedWTModification
+	CRITICALITY				reject
+}
+
+wTInitiatedWTModification	XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		WTModificationRequired
+	SUCCESSFUL OUTCOME		WTModificationConfirm
+	UNSUCCESSFUL OUTCOME 	WTModificationRefuse
+	PROCEDURE CODE			id-wTInitiatedWTModification
+	CRITICALITY				reject
+}
+
+eNBInitiatedWTRelease		XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		WTReleaseRequest
+	PROCEDURE CODE			id-eNBInitiatedWTRelease
+	CRITICALITY				ignore
+}
+
+wTInitiatedWTRelease		XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		WTReleaseRequired
+	SUCCESSFUL OUTCOME		WTReleaseConfirm
+	PROCEDURE CODE			id-wTInitiatedWTRelease
+	CRITICALITY				reject
+}
+
+wTAssociationConfirmation	XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		WTAssociationConfirmation
+	PROCEDURE CODE			id-wTAssociationConfirmation
+	CRITICALITY				ignore
+}
+
+privateMessage				XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		PrivateMessage
+	PROCEDURE CODE			id-privateMessage
+	CRITICALITY				ignore
+}
+
+lWIPAdditionPreparation		XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		LWIPAdditionRequest
+	SUCCESSFUL OUTCOME		LWIPAdditionRequestAcknowledge
+	UNSUCCESSFUL OUTCOME	LWIPAdditionRequestReject
+	PROCEDURE CODE			id-lWIPAdditionPreparation
+	CRITICALITY				reject
+}
+eNBInitiatedLWIPModification	XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE			LWIPModificationRequest
+	SUCCESSFUL OUTCOME			LWIPModificationRequestAcknowledge
+	UNSUCCESSFUL OUTCOME 		LWIPModificationRequestReject
+	PROCEDURE CODE				id-eNBInitiatedLWIPModification
+	CRITICALITY					reject
+}
+
+eNBInitiatedLWIPRelease		XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		LWIPReleaseRequest
+	PROCEDURE CODE			id-eNBInitiatedLWIPRelease
+	CRITICALITY				ignore
+}
+
+wTInitiatedLWIPRelease		XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		LWIPReleaseRequired
+	SUCCESSFUL OUTCOME		LWIPReleaseConfirm
+	PROCEDURE CODE			id-wTInitiatedLWIPRelease
+	CRITICALITY				reject
+}
+
+END
+
+9.3.4	PDU Definitions
+-- **************************************************************
+--
+-- PDU definitions for XwAP.
+--
+-- **************************************************************
+
+XwAP-PDU-Contents { 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) xwap (8) version1 (1) xwap-PDU-Contents (1) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- IE parameter types from other modules.
+--
+-- **************************************************************
+
+IMPORTS
+
+	BSSMeasurementResult-List,
+	BSSToReport-List,
+	Cause,
+	CompleteFailureCauseInformation-List,
+	CriticalityDiagnostics,
+	DRB-Identity,
+	ENBNeighbour-List,
+	E-RAB-ID,
+	E-RAB-List,
+	E-RAB-QoS-Parameters,
+	Global-ENB-ID,
+	GTPtunnelEndpoint,
+	LWA-WLAN-AC,
+	Measurement-ID,
+	MeasurementInitiationResult-List,
+	MobilitySet,
+	PartialSuccessIndicator,
+	PLMN-Identity,
+	Registration-Request,
+	ReportCharacteristics,
+	ReportingPeriodicity,
+	UE-ContextKeptIndicator,
+	UE-Identity,
+	UE-XwAP-ID,
+	WLANIdentifier-List,
+	WLANIdentifiersToDelete-List,
+	WLANIdentifiersToDeleteExtension-List,
+	WLANSecurityInfo,
+	WT-MAC-Address,
+	WTID,
+	TimeToWait,
+	LWIP-SeGWSecurityInfo
+
+FROM XwAP-IEs
+
+	PrivateIE-Container{},
+	ProtocolExtensionContainer{},
+	ProtocolIE-Container{},
+	ProtocolIE-ContainerList{},
+	ProtocolIE-ContainerPair{},
+	ProtocolIE-ContainerPairList{},
+	ProtocolIE-SingleContainer{},
+	XWAP-PRIVATE-IES,
+	XWAP-PROTOCOL-EXTENSION,
+	XWAP-PROTOCOL-IES,
+	XWAP-PROTOCOL-IES-PAIR
+FROM XwAP-Containers
+
+
+	id-BSSMeasurementResult-List,
+	id-BSSToReport-List,
+	id-Cause,
+	id-CompleteFailureCauseInformation-List,
+	id-UE-ContextInformationWTModReq,
+	id-UE-ContextKeptIndicator,
+	id-CriticalityDiagnostics,
+	id-DRB-Identity,
+	id-ENB-Measurement-ID,
+	id-ENB-UE-XwAP-ID,
+	id-eNBNeighbour-List,
+	id-E-RABs-Admitted-ToBeAdded-Item,
+	id-E-RABs-Admitted-ToBeAdded-List,
+	id-E-RABs-Admitted-ToBeAdded-ModAckItem,
+	id-E-RABs-Admitted-ToBeAdded-ModAckList,
+	id-E-RABs-Admitted-ToBeModified-ModAckItem,
+	id-E-RABs-Admitted-ToBeModified-ModAckList,
+	id-E-RABs-Admitted-ToBeReleased-ModAckItem,
+	id-E-RABs-Admitted-ToBeReleased-ModAckList,
+	id-E-RABs-Confirmed-ToBeModified-ModReqdList,
+	id-E-RABs-Confirmed-ToBeModified-ModReqdItem,
+	id-E-RABs-Confirmed-ToBeReleased-ModReqdList,
+	id-E-RABs-Confirmed-ToBeReleased-ModReqdItem,
+	id-E-RABs-NotAdmitted-List,
+	id-E-RABs-ToBeAdded-Item,
+	id-E-RABs-ToBeAdded-List,
+	id-E-RABs-ToBeAdded-ModReqItem,
+	id-E-RABs-ToBeModified-ModReqItem,
+	id-E-RABs-ToBeModified-ModReqdList,
+	id-E-RABs-ToBeModified-ModReqdItem,
+	id-E-RABs-ToBeReleased-ModReqItem,
+	id-E-RABs-ToBeReleased-List-RelConf,
+	id-E-RABs-ToBeReleased-RelConfItem,
+	id-E-RABs-ToBeReleased-List-RelReq,
+	id-E-RABs-ToBeReleased-RelReqItem,
+	id-E-RABs-ToBeReleased-ModReqdList,
+	id-E-RABs-ToBeReleased-ModReqdItem,
+	id-Global-ENB-ID,
+	id-LWA-WLAN-AC,
+	id-MeasurementInitiationResult-List,
+	id-MobilitySet,
+	id-PartialSuccessIndicator,
+	id-ServingPLMN,
+	id-Registration-Request,
+	id-ReportCharacteristics,
+	id-ReportingPeriodicity,
+	id-UE-Identity,
+	id-WLANIdentifier-List, 
+	id-WLANIdentifiersToAdd-List,
+	id-WLANIdentifiersToDelete-List,
+	id-WLANIdentifiersToDeleteExtension-List,
+	id-WLANIdentifiersToModify-List,
+	id-WLANSecurityInfo,
+	id-WT-MAC-Address,
+	id-WTID,
+	id-WT-Measurement-ID,
+	id-WT-UE-XwAP-ID,
+	id-TimeToWait,
+	id-LWIP-SeGWSecurityInfo,
+	id-eNBGTPtunnelEndpoint, 
+	id-LWIP-SeGWGTPtunnelEndpoint,
+	maxnoofBearers
+FROM XwAP-Constants;
+
+
+-- **************************************************************
+--
+-- Xw SETUP ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- Xw Setup Request
+--
+-- **************************************************************
+
+XwSetupRequest ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { {XwSetupRequestIEs} },
+	...
+}
+
+XwSetupRequestIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-Global-ENB-ID	CRITICALITY reject	TYPE Global-ENB-ID		PRESENCE mandatory	},
+	...
+}
+
+-- **************************************************************
+--
+-- Xw Setup Response
+--
+-- **************************************************************
+
+XwSetupResponse ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { {XwSetupResponseIEs} },
+	...
+}
+
+XwSetupResponseIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-WTID					CRITICALITY reject	TYPE WTID						PRESENCE mandatory}|
+	{ ID id-WLANIdentifier-List		CRITICALITY reject	TYPE WLANIdentifier-List		PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics	CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional}|
+	{ ID id-eNBNeighbour-List		CRITICALITY reject	TYPE ENBNeighbour-List		PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- Xw Setup Failure
+--
+-- **************************************************************
+
+XwSetupFailure ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { {XwSetupFailureIEs} },
+	...
+}
+
+XwSetupFailureIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-Cause					CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics	CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional}|
+	{ ID id-TimeToWait				CRITICALITY ignore	TYPE TimeToWait			PRESENCE optional },
+	...
+}
+
+-- **************************************************************
+--
+-- WT CONFIGURATION UPDATE ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- WT Configuration Update 
+--
+-- **************************************************************
+
+WTConfigurationUpdate ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { {WTConfigurationUpdateIEs} },
+	...
+}
+
+WTConfigurationUpdateIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-WLANIdentifiersToAdd-List				CRITICALITY reject	TYPE WLANIdentifier-List								PRESENCE optional}|
+	{ ID id-WLANIdentifiersToModify-List			CRITICALITY reject	TYPE WLANIdentifier-List								PRESENCE optional}|
+	{ ID id-WLANIdentifiersToDelete-List			CRITICALITY reject	TYPE WLANIdentifiersToDelete-List					PRESENCE optional}|
+	{ ID id-WLANIdentifiersToDeleteExtension-List	CRITICALITY reject	TYPE WLANIdentifiersToDeleteExtension-List		PRESENCE optional}|
+	{ ID id-eNBNeighbour-List					CRITICALITY reject	TYPE ENBNeighbour-List									PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- WT Configuration Update Acknowledge
+--
+-- **************************************************************
+
+WTConfigurationUpdateAcknowledge ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { {WTConfigurationUpdateAcknowledgeIEs} },
+	...
+}
+
+
+WTConfigurationUpdateAcknowledgeIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics	PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- WT Configuration Update Failure
+--
+-- **************************************************************
+
+WTConfigurationUpdateFailure ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { {WTConfigurationUpdateFailureIEs} },
+	...
+}
+
+WTConfigurationUpdateFailureIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-Cause						CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional}|
+	{ ID id-TimeToWait				CRITICALITY ignore	TYPE TimeToWait			PRESENCE optional },
+...
+}
+
+-- **************************************************************
+--
+-- WT STATUS REPORTING INITIATION ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- WT Status Request 
+--
+-- **************************************************************
+
+WTStatusRequest ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{WTStatusRequest-IEs}},
+	...
+}
+
+WTStatusRequest-IEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}|
+	{ ID id-WT-Measurement-ID		CRITICALITY ignore	TYPE Measurement-ID				PRESENCE conditional}|
+-- The IE shall be present if the Registration Request IE is set to “Stop”--
+	{ ID id-Registration-Request	CRITICALITY reject	TYPE Registration-Request		PRESENCE mandatory}|
+	{ ID id-ReportCharacteristics	CRITICALITY reject	TYPE ReportCharacteristics		PRESENCE optional}|
+	{ ID id-BSSToReport-List		CRITICALITY ignore	TYPE BSSToReport-List			PRESENCE mandatory}|
+	{ ID id-ReportingPeriodicity	CRITICALITY ignore	TYPE ReportingPeriodicity		PRESENCE optional}|
+	{ ID id-PartialSuccessIndicator	CRITICALITY ignore	TYPE PartialSuccessIndicator	PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- WT Status Response
+--
+-- **************************************************************
+
+WTStatusResponse ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{WTStatusResponse-IEs}},
+	...
+}
+
+WTStatusResponse-IEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-Measurement-ID					CRITICALITY reject	TYPE Measurement-ID								PRESENCE mandatory}|
+	{ ID id-WT-Measurement-ID					CRITICALITY reject	TYPE Measurement-ID								PRESENCE mandatory}|
+	{ ID id-MeasurementInitiationResult-List	CRITICALITY ignore	TYPE MeasurementInitiationResult-List		PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics				CRITICALITY ignore	TYPE CriticalityDiagnostics						PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- WT Status Failure
+--
+-- **************************************************************
+
+WTStatusFailure ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{WTStatusFailure-IEs}},
+	...
+}
+
+WTStatusFailure-IEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-Measurement-ID						CRITICALITY reject	TYPE Measurement-ID									PRESENCE mandatory}|
+	{ ID id-WT-Measurement-ID						CRITICALITY reject	TYPE Measurement-ID									PRESENCE mandatory}|
+	{ ID id-CompleteFailureCauseInformation-List	CRITICALITY ignore	TYPE CompleteFailureCauseInformation-List	PRESENCE optional}|
+	{ ID id-Cause									CRITICALITY ignore	TYPE Cause											PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics					CRITICALITY ignore	TYPE CriticalityDiagnostics						PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- WT STATUS REPORTING ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- WT Status Report
+--
+-- **************************************************************
+
+WTStatusReport ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{WTStatusReport-IEs}},
+	...
+}
+
+WTStatusReport-IEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-Measurement-ID			CRITICALITY reject	TYPE Measurement-ID					PRESENCE mandatory}|
+	{ ID id-WT-Measurement-ID			CRITICALITY reject	TYPE Measurement-ID					PRESENCE mandatory}|
+	{ ID id-BSSMeasurementResult-List	CRITICALITY ignore	TYPE BSSMeasurementResult-List		PRESENCE mandatory},
+	...
+}
+
+-- **************************************************************
+--
+-- ERROR INDICATION ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- Error Indication
+--
+-- **************************************************************
+
+ErrorIndication ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{ErrorIndication-IEs}},
+	...
+}
+
+ErrorIndication-IEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID				CRITICALITY ignore	TYPE UE-XwAP-ID						PRESENCE optional}|
+	{ ID id-WT-UE-XwAP-ID				CRITICALITY ignore	TYPE UE-XwAP-ID						PRESENCE optional}|
+	{ ID id-Cause						CRITICALITY ignore	TYPE Cause							PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- RESET ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- Reset
+--
+-- **************************************************************
+
+Reset ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{Reset-IEs}},
+	...
+}
+
+Reset-IEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-Cause		CRITICALITY ignore	TYPE Cause			PRESENCE mandatory},
+	...
+}
+
+-- **************************************************************
+--
+-- Reset Response
+--
+-- **************************************************************
+
+ResetResponse ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{ResetResponse-IEs}},
+	...
+}
+
+ResetResponse-IEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- WT ADDITION PREPARATION ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- WT Addition Request
+--
+-- **************************************************************
+
+WTAdditionRequest ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { {WTAdditionRequestIEs} },
+	...
+}
+
+WTAdditionRequestIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID			CRITICALITY reject	TYPE UE-XwAP-ID					PRESENCE mandatory}|
+	{ ID id-UE-Identity				CRITICALITY reject	TYPE UE-Identity				PRESENCE mandatory}|
+	{ ID id-WLANSecurityInfo		CRITICALITY reject	TYPE WLANSecurityInfo			PRESENCE optional}|
+	{ ID id-ServingPLMN				CRITICALITY ignore	TYPE PLMN-Identity				PRESENCE optional}|
+	{ ID id-E-RABs-ToBeAdded-List	CRITICALITY reject	TYPE E-RABs-ToBeAdded-List		PRESENCE mandatory}|
+	{ ID id-MobilitySet				CRITICALITY reject	TYPE MobilitySet				PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID			CRITICALITY reject	TYPE UE-XwAP-ID					PRESENCE optional},
+	...
+}
+
+E-RABs-ToBeAdded-List ::= SEQUENCE (SIZE(1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-ToBeAdded-ItemIEs} }
+
+E-RABs-ToBeAdded-ItemIEs 	XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-ToBeAdded-Item	CRITICALITY reject	TYPE E-RABs-ToBeAdded-Item	PRESENCE mandatory},
+	...
+}
+
+E-RABs-ToBeAdded-Item ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID,
+	e-RAB-QoS-Parameters			E-RAB-QoS-Parameters,
+	eNB-GTPtunnelEndpoint			GTPtunnelEndpoint,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-ToBeAdded-ItemExtIEs} } OPTIONAL,
+	...
+}
+
+E-RABs-ToBeAdded-ItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	{ ID id-DRB-Identity	CRITICALITY reject	EXTENSION DRB-Identity	PRESENCE optional},
+	...
+}
+
+
+-- **************************************************************
+--
+-- WT Addition Request Acknowledge
+--
+-- **************************************************************
+
+WTAdditionRequestAcknowledge ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { WTAdditionRequestAcknowledgeIEs} },
+	...
+}
+
+WTAdditionRequestAcknowledgeIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID						CRITICALITY ignore	TYPE UE-XwAP-ID								PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID						CRITICALITY ignore	TYPE UE-XwAP-ID								PRESENCE mandatory}|
+	{ ID id-E-RABs-Admitted-ToBeAdded-List		CRITICALITY ignore	TYPE E-RABs-Admitted-ToBeAdded-List		PRESENCE mandatory}|
+	{ ID id-E-RABs-NotAdmitted-List				CRITICALITY ignore	TYPE E-RAB-List								PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics				CRITICALITY ignore	TYPE CriticalityDiagnostics					PRESENCE optional}|
+	{ ID id-WT-MAC-Address				CRITICALITY ignore	TYPE WT-MAC-Address					PRESENCE optional},
+	...
+}
+
+E-RABs-Admitted-ToBeAdded-List ::= SEQUENCE (SIZE (1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-Admitted-ToBeAdded-ItemIEs} }
+
+E-RABs-Admitted-ToBeAdded-ItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-Admitted-ToBeAdded-Item	CRITICALITY ignore	TYPE E-RABs-Admitted-ToBeAdded-Item		PRESENCE mandatory}
+}
+
+E-RABs-Admitted-ToBeAdded-Item ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID,
+	wT-GTPtunnelEndpoint			GTPtunnelEndpoint,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-Admitted-ToBeAdded-ItemExtIEs} } OPTIONAL,
+	...
+}
+
+E-RABs-Admitted-ToBeAdded-ItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	{ ID id-LWA-WLAN-AC	CRITICALITY ignore	EXTENSION LWA-WLAN-AC	PRESENCE optional},
+	...
+}
+
+
+-- **************************************************************
+--
+-- WT Addition Request Reject
+--
+-- **************************************************************
+
+WTAdditionRequestReject ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { WTAdditionRequestRejectIEs} },
+	...
+}
+
+WTAdditionRequestRejectIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID			CRITICALITY ignore	TYPE UE-XwAP-ID					PRESENCE mandatory}|
+	{ ID id-Cause					CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics	CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+
+-- **************************************************************
+--
+-- eNB INITIATED WT MODIFICATION ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- WT Modification Request
+--
+-- **************************************************************
+
+WTModificationRequest ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { WTModificationRequestIEs} },
+	...
+}
+
+WTModificationRequestIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID					CRITICALITY reject	TYPE UE-XwAP-ID								PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID					CRITICALITY reject	TYPE UE-XwAP-ID								PRESENCE mandatory}|
+	{ ID id-Cause							CRITICALITY ignore	TYPE Cause									PRESENCE mandatory}|
+	{ ID id-ServingPLMN						CRITICALITY ignore	TYPE PLMN-Identity							PRESENCE optional}|
+	{ ID id-UE-ContextInformationWTModReq	CRITICALITY reject	TYPE UE-ContextInformationWTModReq		PRESENCE optional}|
+	{ ID id-MobilitySet						CRITICALITY reject	TYPE MobilitySet							PRESENCE optional},
+	...
+}
+
+UE-ContextInformationWTModReq ::= SEQUENCE {
+	wLANSecurityInfo					WLANSecurityInfo					OPTIONAL,
+	e-RABs-ToBeAdded					E-RABs-ToBeAdded-List-ModReq		OPTIONAL,
+	e-RABs-ToBeModified					E-RABs-ToBeModified-List-ModReq		OPTIONAL,
+	e-RABs-ToBeReleased					E-RABs-ToBeReleased-List-ModReq		OPTIONAL,
+	iE-Extensions						ProtocolExtensionContainer { { UE-ContextInformationWTModReqExtIEs} }	OPTIONAL,
+	...
+}
+
+UE-ContextInformationWTModReqExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+E-RABs-ToBeAdded-List-ModReq ::= SEQUENCE (SIZE(1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-ToBeAdded-ModReqItemIEs} }
+
+E-RABs-ToBeAdded-ModReqItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-ToBeAdded-ModReqItem	CRITICALITY ignore	TYPE E-RABs-ToBeAdded-ModReqItem	PRESENCE mandatory},
+	...
+}
+
+E-RABs-ToBeAdded-ModReqItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID,
+	e-RAB-QoS-Parameters			E-RAB-QoS-Parameters,
+	eNB-GTPtunnelEndpoint			GTPtunnelEndpoint,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-ToBeAdded-ModReqItemExtIEs} } OPTIONAL,
+	...
+}
+
+E-RABs-ToBeAdded-ModReqItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	{ ID id-DRB-Identity	CRITICALITY reject	EXTENSION DRB-Identity	PRESENCE optional},
+	...
+}
+
+E-RABs-ToBeModified-List-ModReq ::= SEQUENCE (SIZE(1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-ToBeModified-ModReqItemIEs} }
+
+E-RABs-ToBeModified-ModReqItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-ToBeModified-ModReqItem	CRITICALITY ignore	TYPE E-RABs-ToBeModified-ModReqItem		PRESENCE mandatory},
+	...
+}
+
+E-RABs-ToBeModified-ModReqItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID,
+	e-RAB-QoS-Parameters			E-RAB-QoS-Parameters		OPTIONAL,
+	eNB-GTPtunnelEndpoint			GTPtunnelEndpoint			OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-ToBeModified-ModReqItemExtIEs} } OPTIONAL,
+	...
+}
+
+E-RABs-ToBeModified-ModReqItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+E-RABs-ToBeReleased-List-ModReq ::= SEQUENCE (SIZE(1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-ToBeReleased-ModReqItemIEs} }
+
+E-RABs-ToBeReleased-ModReqItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-ToBeReleased-ModReqItem	CRITICALITY ignore	TYPE E-RABs-ToBeReleased-ModReqItem		PRESENCE mandatory},
+	...
+}
+
+E-RABs-ToBeReleased-ModReqItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID, 
+	dL-GTPtunnelEndpoint			GTPtunnelEndpoint															OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-ToBeReleased-ModReqItemExtIEs} } 	OPTIONAL,
+	...
+}
+
+E-RABs-ToBeReleased-ModReqItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- **************************************************************
+--
+-- WT Modification Request Acknowledge
+--
+-- **************************************************************
+
+WTModificationRequestAcknowledge ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { WTModificationRequestAcknowledgeIEs} },
+	...
+}
+
+WTModificationRequestAcknowledgeIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID							CRITICALITY ignore	TYPE UE-XwAP-ID											PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID							CRITICALITY ignore	TYPE UE-XwAP-ID											PRESENCE mandatory}|
+	{ ID id-E-RABs-Admitted-ToBeAdded-ModAckList	CRITICALITY ignore	TYPE E-RABs-Admitted-ToBeAdded-ModAckList		PRESENCE optional}|
+	{ ID id-E-RABs-Admitted-ToBeModified-ModAckList	CRITICALITY ignore	TYPE E-RABs-Admitted-ToBeModified-ModAckList	PRESENCE optional}|
+	{ ID id-E-RABs-Admitted-ToBeReleased-ModAckList	CRITICALITY ignore	TYPE E-RABs-Admitted-ToBeReleased-ModAckList	PRESENCE optional}|
+	{ ID id-E-RABs-NotAdmitted-List					CRITICALITY ignore	TYPE E-RAB-List											PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics					CRITICALITY ignore	TYPE CriticalityDiagnostics							PRESENCE optional},
+	...
+}
+
+E-RABs-Admitted-ToBeAdded-ModAckList ::= SEQUENCE (SIZE (1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-Admitted-ToBeAdded-ModAckItemIEs} }
+
+E-RABs-Admitted-ToBeAdded-ModAckItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-Admitted-ToBeAdded-ModAckItem	CRITICALITY ignore	TYPE E-RABs-Admitted-ToBeAdded-ModAckItem		PRESENCE mandatory}
+}
+
+E-RABs-Admitted-ToBeAdded-ModAckItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID,
+	wT-GTPtunnelEndpoint			GTPtunnelEndpoint,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-Admitted-ToBeAdded-ModAckItemExtIEs} } OPTIONAL,
+	...
+}
+
+E-RABs-Admitted-ToBeAdded-ModAckItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	{ ID id-LWA-WLAN-AC	CRITICALITY ignore	EXTENSION LWA-WLAN-AC	PRESENCE optional},
+	...
+}
+
+E-RABs-Admitted-ToBeModified-ModAckList ::= SEQUENCE (SIZE (1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-Admitted-ToBeModified-ModAckItemIEs} }
+
+E-RABs-Admitted-ToBeModified-ModAckItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-Admitted-ToBeModified-ModAckItem		CRITICALITY ignore	TYPE E-RABs-Admitted-ToBeModified-ModAckItem	PRESENCE mandatory}
+}
+
+E-RABs-Admitted-ToBeModified-ModAckItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID,
+	wT-GTPtunnelEndpoint			GTPtunnelEndpoint						OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-Admitted-ToBeModified-ModAckItemExtIEs} } OPTIONAL,
+	...
+}
+
+E-RABs-Admitted-ToBeModified-ModAckItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	{ ID id-LWA-WLAN-AC	CRITICALITY ignore	EXTENSION LWA-WLAN-AC	PRESENCE optional},
+	...
+}
+
+E-RABs-Admitted-ToBeReleased-ModAckList ::= SEQUENCE (SIZE (1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-Admitted-ToBeReleased-ModAckItemIEs} }
+
+E-RABs-Admitted-ToBeReleased-ModAckItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-Admitted-ToBeReleased-ModAckItem		CRITICALITY ignore	TYPE E-RABs-Admitted-ToBeReleased-ModAckItem		PRESENCE mandatory}
+}
+
+E-RABs-Admitted-ToBeReleased-ModAckItem ::= SEQUENCE {
+	e-RAB-ID					E-RAB-ID,
+	iE-Extensions				ProtocolExtensionContainer { {E-RABs-Admitted-ToBeReleased-ModAckItemExtIEs} } OPTIONAL,
+	...
+}
+
+E-RABs-Admitted-ToBeReleased-ModAckItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- **************************************************************
+--
+-- WT Modification Request Reject
+--
+-- **************************************************************
+
+WTModificationRequestReject ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { WTModificationRequestRejectIEs} },
+	...
+}
+
+WTModificationRequestRejectIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID			CRITICALITY ignore	TYPE UE-XwAP-ID					PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID			CRITICALITY ignore	TYPE UE-XwAP-ID					PRESENCE mandatory}|
+	{ ID id-Cause					CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics	CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- WT INITIATED WT MODIFICATION ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- WT Modification Required
+--
+-- **************************************************************
+
+WTModificationRequired ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { WTModificationRequiredIEs} },
+	...
+}
+
+WTModificationRequiredIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID					CRITICALITY reject	TYPE UE-XwAP-ID							PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID					CRITICALITY reject	TYPE UE-XwAP-ID							PRESENCE mandatory}|
+	{ ID id-Cause							CRITICALITY ignore	TYPE Cause								PRESENCE mandatory}|
+	{ ID id-E-RABs-ToBeReleased-ModReqdList	CRITICALITY ignore	TYPE E-RABs-ToBeReleased-ModReqdList	PRESENCE optional}|
+	{ ID id-E-RABs-ToBeModified-ModReqdList	CRITICALITY ignore	TYPE E-RABs-ToBeModified-ModReqdList	PRESENCE optional},
+	...
+}
+
+E-RABs-ToBeReleased-ModReqdList ::= SEQUENCE (SIZE (1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-ToBeReleased-ModReqdItemIEs} }
+
+E-RABs-ToBeReleased-ModReqdItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-ToBeReleased-ModReqdItem	CRITICALITY ignore	TYPE E-RABs-ToBeReleased-ModReqdItem	PRESENCE mandatory},
+	...
+}
+
+E-RABs-ToBeReleased-ModReqdItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID,
+	cause							Cause,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-ToBeReleased-ModReqdItemExtIEs} } OPTIONAL,
+	...
+}
+
+E-RABs-ToBeReleased-ModReqdItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+E-RABs-ToBeModified-ModReqdList ::= SEQUENCE (SIZE (1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-ToBeModified-ModReqdItemIEs} }
+
+E-RABs-ToBeModified-ModReqdItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-ToBeModified-ModReqdItem	CRITICALITY ignore	TYPE E-RABs-ToBeModified-ModReqdItem	PRESENCE mandatory},
+	...
+}
+
+E-RABs-ToBeModified-ModReqdItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID,
+	wT-GTPtunnelEndpoint			GTPtunnelEndpoint				OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-ToBeModified-ModReqdItemExtIEs} } OPTIONAL,
+	...
+}
+
+E-RABs-ToBeModified-ModReqdItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	{ ID id-LWA-WLAN-AC	CRITICALITY ignore	EXTENSION LWA-WLAN-AC	PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- WT Modification Confirm
+--
+-- **************************************************************
+
+WTModificationConfirm ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { WTModificationConfirmIEs} },
+	...
+}
+
+WTModificationConfirmIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID								CRITICALITY ignore	TYPE UE-XwAP-ID												PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID								CRITICALITY ignore	TYPE UE-XwAP-ID												PRESENCE mandatory}|
+	{ ID id-E-RABs-Confirmed-ToBeReleased-ModReqdList	CRITICALITY ignore	TYPE E-RABs-Confirmed-ToBeReleased-ModReqdList	PRESENCE optional}|
+	{ ID id-E-RABs-Confirmed-ToBeModified-ModReqdList	CRITICALITY ignore	TYPE E-RABs-Confirmed-ToBeModified-ModReqdList	PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics						CRITICALITY ignore	TYPE CriticalityDiagnostics								PRESENCE optional},
+	...
+}
+
+E-RABs-Confirmed-ToBeReleased-ModReqdList ::= SEQUENCE (SIZE(1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-Confirmed-ToBeReleased-ModReqdItemIEs} }
+
+E-RABs-Confirmed-ToBeReleased-ModReqdItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-Confirmed-ToBeReleased-ModReqdItem	CRITICALITY ignore	TYPE E-RABs-Confirmed-ToBeReleased-ModReqdItem	PRESENCE mandatory},
+	...
+}
+
+E-RABs-Confirmed-ToBeReleased-ModReqdItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID, 
+	dL-GTPtunnelEndpoint			GTPtunnelEndpoint															OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-Confirmed-ToBeReleased-ModReqdItemExtIEs} } 	OPTIONAL,
+	...
+}
+
+E-RABs-Confirmed-ToBeReleased-ModReqdItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+E-RABs-Confirmed-ToBeModified-ModReqdList ::= SEQUENCE (SIZE(1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-Confirmed-ToBeModified-ModReqdItemIEs} }
+
+E-RABs-Confirmed-ToBeModified-ModReqdItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-Confirmed-ToBeModified-ModReqdItem	CRITICALITY ignore	TYPE E-RABs-Confirmed-ToBeModified-ModReqdItem		PRESENCE mandatory},
+	...
+}
+
+E-RABs-Confirmed-ToBeModified-ModReqdItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID, 
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-Confirmed-ToBeModified-ModReqdItemExtIEs} } 	OPTIONAL,
+	...
+}
+
+E-RABs-Confirmed-ToBeModified-ModReqdItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- WT Modification Refuse
+--
+-- **************************************************************
+
+WTModificationRefuse ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { WTModificationRefuseIEs} },
+	...
+}
+
+WTModificationRefuseIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID			CRITICALITY ignore	TYPE UE-XwAP-ID					PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID			CRITICALITY ignore	TYPE UE-XwAP-ID					PRESENCE mandatory}|
+	{ ID id-Cause					CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics	CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+
+-- **************************************************************
+--
+-- eNB INITIATED WT RELEASE ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- WT Release Request
+--
+-- **************************************************************
+
+WTReleaseRequest ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{ WTReleaseRequest-IEs}},
+	...
+}
+
+WTReleaseRequest-IEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID						CRITICALITY reject	TYPE UE-XwAP-ID								PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID						CRITICALITY reject	TYPE UE-XwAP-ID								PRESENCE mandatory}|
+	{ ID id-Cause								CRITICALITY ignore	TYPE Cause									PRESENCE optional}|
+	{ ID id-E-RABs-ToBeReleased-List-RelReq		CRITICALITY ignore	TYPE E-RABs-ToBeReleased-List-RelReq	PRESENCE optional}|
+	{ ID id-UE-ContextKeptIndicator				CRITICALITY ignore	TYPE UE-ContextKeptIndicator				PRESENCE optional},
+	...
+}
+
+E-RABs-ToBeReleased-List-RelReq ::= SEQUENCE (SIZE(1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-ToBeReleased-RelReqItemIEs} }
+
+E-RABs-ToBeReleased-RelReqItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-ToBeReleased-RelReqItem		CRITICALITY ignore	TYPE E-RABs-ToBeReleased-RelReqItem		PRESENCE mandatory},
+	...
+}
+
+E-RABs-ToBeReleased-RelReqItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID,
+	wT-GTPtunnelEndpoint			GTPtunnelEndpoint														OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-ToBeReleased-RelReqItemExtIEs} } OPTIONAL,
+	...
+}
+
+E-RABs-ToBeReleased-RelReqItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- **************************************************************
+--
+-- WT INITIATED WT RELEASE ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- WT Release Required
+--
+-- **************************************************************
+
+WTReleaseRequired ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { WTReleaseRequiredIEs} },
+	...
+}
+
+WTReleaseRequiredIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID		CRITICALITY reject	TYPE UE-XwAP-ID		PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID		CRITICALITY reject	TYPE UE-XwAP-ID		PRESENCE mandatory}|
+	{ ID id-Cause				CRITICALITY ignore	TYPE Cause			PRESENCE mandatory},
+	...
+}
+
+-- **************************************************************
+--
+-- WT Release Confirm
+--
+-- **************************************************************
+
+WTReleaseConfirm ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { WTReleaseConfirmIEs} },
+	...
+}
+
+WTReleaseConfirmIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID						CRITICALITY ignore	TYPE UE-XwAP-ID									PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID						CRITICALITY ignore	TYPE UE-XwAP-ID									PRESENCE mandatory}|
+	{ ID id-E-RABs-ToBeReleased-List-RelConf	CRITICALITY ignore	TYPE E-RABs-ToBeReleased-List-RelConf		PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics				CRITICALITY ignore	TYPE CriticalityDiagnostics						PRESENCE optional},
+	...
+}
+
+E-RABs-ToBeReleased-List-RelConf ::= SEQUENCE (SIZE(1..maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RABs-ToBeReleased-RelConfItemIEs} }
+
+E-RABs-ToBeReleased-RelConfItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RABs-ToBeReleased-RelConfItem		CRITICALITY ignore	TYPE E-RABs-ToBeReleased-RelConfItem		PRESENCE mandatory},
+	...
+}
+
+E-RABs-ToBeReleased-RelConfItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID,
+	wT-GTPtunnelEndpoint			GTPtunnelEndpoint															OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { {E-RABs-ToBeReleased-RelConfItemExtIEs} } OPTIONAL,
+	...
+}
+
+E-RABs-ToBeReleased-RelConfItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- **************************************************************
+--
+-- WT ASSOCIATION CONFIRMATION ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- WT Association Confirmation 
+--
+-- **************************************************************
+
+WTAssociationConfirmation ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { {WTAssociationConfirmationIEs} },
+	...
+}
+
+WTAssociationConfirmationIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID	CRITICALITY ignore	TYPE UE-XwAP-ID		PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID	CRITICALITY ignore	TYPE UE-XwAP-ID		PRESENCE mandatory},
+	...
+}
+
+
+-- **************************************************************
+--
+-- PRIVATE MESSAGE
+--
+-- **************************************************************
+
+PrivateMessage ::= SEQUENCE {
+	privateIEs		PrivateIE-Container	{{PrivateMessage-IEs}},
+	...
+}
+
+PrivateMessage-IEs XWAP-PRIVATE-IES ::= {
+	...
+}
+
+
+-- **************************************************************
+--
+-- LWIP ADDITION PREPARATION ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- LWIP Addition Request
+--
+-- **************************************************************
+
+LWIPAdditionRequest ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { {LWIPAdditionRequestIEs} },
+	...
+}
+
+LWIPAdditionRequestIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID			CRITICALITY reject	TYPE UE-XwAP-ID					PRESENCE mandatory}|
+	{ ID id-UE-Identity				CRITICALITY reject	TYPE UE-Identity				PRESENCE mandatory}|
+	{ ID id-LWIP-SeGWSecurityInfo	CRITICALITY reject	TYPE LWIP-SeGWSecurityInfo		PRESENCE mandatory}|
+	{ ID id-ServingPLMN				CRITICALITY ignore	TYPE PLMN-Identity				PRESENCE optional}|
+	{ ID id-eNBGTPtunnelEndpoint	CRITICALITY reject	TYPE GTPtunnelEndpoint			PRESENCE optional}|
+	{ ID id-MobilitySet				CRITICALITY reject	TYPE MobilitySet				PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- LWIP Addition Request Acknowledge
+--
+-- **************************************************************
+
+LWIPAdditionRequestAcknowledge ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { LWIPAdditionRequestAcknowledgeIEs} },
+	...
+}
+
+LWIPAdditionRequestAcknowledgeIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID						CRITICALITY ignore	TYPE UE-XwAP-ID								PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID						CRITICALITY ignore	TYPE UE-XwAP-ID								PRESENCE mandatory}|
+	{ ID id-LWIP-SeGWGTPtunnelEndpoint			CRITICALITY reject	TYPE GTPtunnelEndpoint						PRESENCE optional}|
+	{ ID id-E-RABs-Admitted-ToBeAdded-List		CRITICALITY ignore	TYPE E-RABs-Admitted-ToBeAdded-List		PRESENCE optional}|
+	{ ID id-E-RABs-NotAdmitted-List				CRITICALITY ignore	TYPE E-RAB-List								PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics				CRITICALITY ignore	TYPE CriticalityDiagnostics					PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- LWIP Addition Request Reject
+--
+-- **************************************************************
+
+LWIPAdditionRequestReject ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { LWIPAdditionRequestRejectIEs} },
+	...
+}
+
+LWIPAdditionRequestRejectIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID			CRITICALITY ignore	TYPE UE-XwAP-ID					PRESENCE mandatory}|
+	{ ID id-Cause					CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics	CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+
+-- **************************************************************
+--
+-- eNB INITIATED LWIP MODIFICATION ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- LWIP Modification Request
+--
+-- **************************************************************
+
+LWIPModificationRequest ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { LWIPModificationRequestIEs} },
+	...
+}
+
+LWIPModificationRequestIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID					CRITICALITY reject	TYPE UE-XwAP-ID								PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID					CRITICALITY reject	TYPE UE-XwAP-ID								PRESENCE mandatory}|
+	{ ID id-Cause							CRITICALITY ignore	TYPE Cause									PRESENCE mandatory}|
+	{ ID id-ServingPLMN						CRITICALITY ignore	TYPE PLMN-Identity							PRESENCE optional}|
+	{ ID id-MobilitySet						CRITICALITY reject	TYPE MobilitySet							PRESENCE optional},
+	...
+}
+
+
+-- **************************************************************
+--
+-- LWIP Modification Request Acknowledge
+--
+-- **************************************************************
+
+LWIPModificationRequestAcknowledge ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { LWIPModificationRequestAcknowledgeIEs} },
+	...
+}
+
+LWIPModificationRequestAcknowledgeIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID							CRITICALITY ignore	TYPE UE-XwAP-ID											PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID							CRITICALITY ignore	TYPE UE-XwAP-ID											PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics					CRITICALITY ignore	TYPE CriticalityDiagnostics							PRESENCE optional},
+	...
+}
+
+
+-- **************************************************************
+--
+-- LWIP Modification Request Reject
+--
+-- **************************************************************
+
+LWIPModificationRequestReject ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { LWIPModificationRequestRejectIEs} },
+	...
+}
+
+LWIPModificationRequestRejectIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID			CRITICALITY ignore	TYPE UE-XwAP-ID					PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID			CRITICALITY ignore	TYPE UE-XwAP-ID					PRESENCE mandatory}|
+	{ ID id-Cause					CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics	CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+
+-- **************************************************************
+--
+-- eNB INITIATED LWIP RELEASE ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- LWIP Release Request
+--
+-- **************************************************************
+
+LWIPReleaseRequest ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{ LWIPReleaseRequest-IEs}},
+	...
+}
+
+LWIPReleaseRequest-IEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID						CRITICALITY reject	TYPE UE-XwAP-ID								PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID						CRITICALITY reject	TYPE UE-XwAP-ID								PRESENCE mandatory}|
+	{ ID id-Cause								CRITICALITY ignore	TYPE Cause									PRESENCE optional},
+	...
+}
+
+
+-- **************************************************************
+--
+-- WT INITIATED LWIP RELEASE ELEMENTARY PROCEDURE
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- LWIP Release Required
+--
+-- **************************************************************
+
+LWIPReleaseRequired ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { LWIPReleaseRequiredIEs} },
+	...
+}
+
+LWIPReleaseRequiredIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID		CRITICALITY reject	TYPE UE-XwAP-ID		PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID		CRITICALITY reject	TYPE UE-XwAP-ID		PRESENCE mandatory}|
+	{ ID id-Cause				CRITICALITY ignore	TYPE Cause			PRESENCE mandatory},
+	...
+}
+
+-- **************************************************************
+--
+-- LWIP Release Confirm
+--
+-- **************************************************************
+
+LWIPReleaseConfirm ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { LWIPReleaseConfirmIEs} },
+	...
+}
+
+LWIPReleaseConfirmIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-ENB-UE-XwAP-ID						CRITICALITY ignore	TYPE UE-XwAP-ID									PRESENCE mandatory}|
+	{ ID id-WT-UE-XwAP-ID						CRITICALITY ignore	TYPE UE-XwAP-ID									PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics				CRITICALITY ignore	TYPE CriticalityDiagnostics						PRESENCE optional},
+	...
+}
+
+
+END
+
+9.3.5	Information Element definitions
+-- **************************************************************
+--
+-- Information Element Definitions
+--
+-- **************************************************************
+
+XwAP-IEs {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) xwap (8) version1 (1) xwap-IEs (2) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+IMPORTS
+	id-BSSMeasurementResult-Item,
+	id-BSSToReport-Item,
+	id-E-RAB-Item,
+	id-CompleteFailureCauseInformation-Item,
+	id-MeasurementInitiationResult-Item,
+	id-MeasurementFailureCause-Item,
+	id-wLANBandInformation,
+	id-WLANIdentifier-Item,
+	id-WLANIdentifiersToDelete-Item,
+	id-WLANIdentifiersToDeleteExtension-Item,
+	id-WLANUsage,
+	id-eNBNeighbour-Item,
+
+	maxnoofBands,
+	maxnoofBearers,
+	maxnoofBSSs,
+	maxnoofErrors,
+	maxnoofFailedMeasObjects,
+	maxnoofMobilitySetItems,
+	maxnoofWLANIdentifierItems,
+	maxnoofeNBNeighbours
+FROM XwAP-Constants
+
+	Criticality,
+	ProcedureCode,
+	ProtocolIE-ID,
+	TriggeringMessage
+FROM XwAP-CommonDataTypes
+
+	ProtocolExtensionContainer{},
+	XWAP-PROTOCOL-EXTENSION,
+	ProtocolIE-SingleContainer{},
+	XWAP-PROTOCOL-IES
+FROM XwAP-Containers;	
+
+-- A
+
+AllocationAndRetentionPriority ::= SEQUENCE {
+	priorityLevel				PriorityLevel,
+	pre-emptionCapability		Pre-emptionCapability,
+	pre-emptionVulnerability	Pre-emptionVulnerability,
+	iE-Extensions				ProtocolExtensionContainer { {AllocationAndRetentionPriority-ExtIEs} } OPTIONAL,
+	...
+}
+
+AllocationAndRetentionPriority-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+AvailableChUtilization ::= SEQUENCE {
+	capacityValue				CapacityValue,
+	iE-Extensions				ProtocolExtensionContainer { { AvailableChUtilization-ExtIEs} } OPTIONAL,
+	...
+}
+
+AvailableChUtilization-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- B
+
+BitRate	::= INTEGER (0..10000000000)
+
+BSSID ::= OCTET STRING (SIZE(6))
+
+BSSLoad ::= SEQUENCE {
+	channelUtilization		ChannelUtilization,
+	stationCount			StationCount		OPTIONAL,
+	iE-Extensions			ProtocolExtensionContainer { {BSSLoad-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+BSSLoad-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+BSS-Item ::= SEQUENCE {
+	bSSID						BSSID,
+	wLANOperatingClass			WLANOperatingClass			OPTIONAL,
+	wLANCountryCode				WLANCountryCode				OPTIONAL,
+	maximumCapacity				BitRate						OPTIONAL,
+	wLANBandInformationList		WLANBandInformationList		OPTIONAL,
+	iE-Extensions				ProtocolExtensionContainer { {BSS-Item-ExtIEs} } OPTIONAL,
+	...
+}
+
+BSS-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+BSSMeasurementResult-List ::= SEQUENCE (SIZE (1..maxnoofBSSs)) OF ProtocolIE-SingleContainer { {BSSMeasurementResult-ItemIEs} }
+
+BSSMeasurementResult-ItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-BSSMeasurementResult-Item	CRITICALITY ignore	TYPE BSSMeasurementResult-Item	PRESENCE mandatory},
+	...
+}
+
+BSSMeasurementResult-Item ::= SEQUENCE {
+	bSSID					BSSID,
+	bSSLoad					BSSLoad					OPTIONAL,
+	wANMetrics				WANMetrics				OPTIONAL,
+	availableChUtilization	AvailableChUtilization	OPTIONAL,
+	iE-Extensions				ProtocolExtensionContainer { {BSSMeasurementResult-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+BSSMeasurementResult-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+BSSToReport-List ::= SEQUENCE (SIZE (1.. maxnoofBSSs)) OF ProtocolIE-SingleContainer { {BSSToReport-ItemIEs} }
+
+BSSToReport-ItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-BSSToReport-Item	CRITICALITY ignore	TYPE BSSToReport-Item 	PRESENCE mandatory}
+}
+
+BSSToReport-Item ::= SEQUENCE {
+	bSSID									BSSID,
+	iE-Extensions							ProtocolExtensionContainer { {BSSToReport-Item-ExtIEs} } OPTIONAL,
+	...
+}
+
+BSSToReport-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- C
+
+CapacityValue ::= INTEGER (0..100)
+
+Cause ::= CHOICE {
+	radioNetwork		CauseRadioNetwork,
+	transport			CauseTransport,
+	protocol			CauseProtocol,
+	misc				CauseMisc,
+	...
+}
+
+CauseMisc ::= ENUMERATED {
+	control-processing-overload,
+	hardware-failure,
+	om-intervention,
+	not-enough-user-plane-processing-resources,
+	unspecified,
+	...
+}
+
+CauseProtocol ::= ENUMERATED {
+	transfer-syntax-error,
+	abstract-syntax-error-reject,
+	abstract-syntax-error-ignore-and-notify,
+	message-not-compatible-with-receiver-state,
+	semantic-error,
+	unspecified,
+	abstract-syntax-error-falsely-constructed-message,
+	...
+}
+
+CauseRadioNetwork ::= ENUMERATED {
+	unknown-eNB-UE-XwAP-ID, 
+	unknown-WT-UE-XwAP-ID, 
+	unknown-pair-of-UE-XwAP-ID,
+	wLAN-not-available,
+	security-failure,
+	reportCharacteristicsEmpty,
+	existing-Measurement-ID,
+	unknown-Measurement-ID,
+	measurement-temporarily-not-available,
+	unspecified,
+	multiple-E-RAB-ID-instances,
+	switch-off-ongoing,
+	not-supported-QCI-value,
+	measurement-not-supported-for-the-object,
+	reduce-load,
+	resource-optimisation,
+	target-not-allowed,
+	no-radio-resources-available,
+	invalid-QoS-combination,
+	procedure-cancelled,
+	radio-connection-with-UE-lost,
+	failure-in-the-radio-interface-procedure,
+	...,
+	no-report-periodicity,
+	wrong-wlan-interworking-mode
+}
+
+CauseTransport ::= ENUMERATED {
+	transport-resource-unavailable,
+	unspecified,
+	...
+}
+
+ChannelUtilization ::= INTEGER (0..255)
+
+CompleteFailureCauseInformation-List ::= SEQUENCE (SIZE (1..maxnoofBSSs)) OF ProtocolIE-SingleContainer { {CompleteFailureCauseInformation-ItemIEs} }
+
+CompleteFailureCauseInformation-ItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-CompleteFailureCauseInformation-Item	CRITICALITY ignore	TYPE CompleteFailureCauseInformation-Item	PRESENCE mandatory}
+}
+
+CompleteFailureCauseInformation-Item ::= SEQUENCE {
+	bSSID									BSSID,
+	measurementFailureCause-List			MeasurementFailureCause-List,
+	iE-Extensions							ProtocolExtensionContainer { { CompleteFailureCauseInformation-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+CompleteFailureCauseInformation-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+CriticalityDiagnostics ::= SEQUENCE {
+	procedureCode					ProcedureCode														OPTIONAL,
+	triggeringMessage				TriggeringMessage													OPTIONAL,
+	procedureCriticality			Criticality															OPTIONAL,
+	iEsCriticalityDiagnostics		CriticalityDiagnostics-IE-List										OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer {{CriticalityDiagnostics-ExtIEs}}		OPTIONAL,
+	...
+}
+
+CriticalityDiagnostics-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+CriticalityDiagnostics-IE-List ::= SEQUENCE (SIZE (1.. maxnoofErrors)) OF CriticalityDiagnostics-IE-Item
+
+CriticalityDiagnostics-IE-Item ::= SEQUENCE {
+	iECriticality			Criticality,
+	iE-ID					ProtocolIE-ID,
+	typeOfError 			TypeOfError,
+	iE-Extensions			ProtocolExtensionContainer {{CriticalityDiagnostics-IE-Item-ExtIEs}}	OPTIONAL,
+	...
+}
+
+CriticalityDiagnostics-IE-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- D
+
+DRB-Identity ::= INTEGER (1..32, ...)
+
+-- E
+
+ENB-ID ::= CHOICE {
+	macroENB-ID			BIT STRING (SIZE(20)),
+	otherENB-ID			ProtocolIE-SingleContainer { {OtherENB-IDIEs} },
+	...,
+	short-macroENB-ID		BIT STRING (SIZE(18)),
+	long-macroENB-ID			BIT STRING (SIZE(21))
+}
+
+ENBNeighbour-List ::= SEQUENCE (SIZE (0.. maxnoofeNBNeighbours)) OF ProtocolIE-SingleContainer { { ENBNeighbour-ItemIEs} }
+
+ENBNeighbour-ItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-eNBNeighbour-Item	CRITICALITY ignore	TYPE ENBNeighbour-Item	PRESENCE mandatory},
+	...
+}
+
+ENBNeighbour-Item ::= SEQUENCE {
+		glogal-eNB-ID			Global-ENB-ID,
+	iE-Extensions			ProtocolExtensionContainer { { ENBNeighbour-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+ENBNeighbour-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+E-RAB-ID ::= INTEGER (0..15, ...)
+
+E-RAB-List ::= SEQUENCE (SIZE(1.. maxnoofBearers)) OF ProtocolIE-SingleContainer { {E-RAB-ItemIEs} }
+
+E-RAB-ItemIEs 	XWAP-PROTOCOL-IES ::= {
+	{ ID id-E-RAB-Item	 CRITICALITY ignore 	TYPE E-RAB-Item 	PRESENCE mandatory },
+	...
+}
+
+E-RAB-Item ::= SEQUENCE {
+	e-RAB-ID					E-RAB-ID,
+	cause						Cause,
+	iE-Extensions				ProtocolExtensionContainer { {E-RAB-Item-ExtIEs} } OPTIONAL,
+	...
+}
+
+E-RAB-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+E-RAB-QoS-Parameters ::= SEQUENCE {
+	qCI								QCI,
+	allocationRetentionPriority		AllocationAndRetentionPriority,
+	gbrQosInformation				GBR-QosInformation					OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { {E-RAB-QoS-Parameters-ExtIEs} }	OPTIONAL,
+	...
+}
+
+E-RAB-QoS-Parameters-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- G
+
+GBR-QosInformation ::= SEQUENCE {
+	e-RAB-MaximumBitrateDL			BitRate,
+	e-RAB-GuaranteedBitrateDL		BitRate,
+	iE-Extensions					ProtocolExtensionContainer { { GBR-QosInformation-ExtIEs} } OPTIONAL,
+	...
+}
+
+GBR-QosInformation-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+Global-ENB-ID ::= SEQUENCE {
+	pLMNidentity			PLMN-Identity,
+	eNB-ID					ENB-ID,
+	iE-Extensions			ProtocolExtensionContainer { {GlobalENB-ID-ExtIEs} }		OPTIONAL,
+	...
+}
+
+GlobalENB-ID-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+GTPtunnelEndpoint ::= SEQUENCE {
+	transportLayerAddress			TransportLayerAddress,
+	gTP-TEID						GTP-TEID,
+	iE-Extensions					ProtocolExtensionContainer { {GTPtunnelEndpoint-ExtIEs} } OPTIONAL,
+	...
+}
+
+GTPtunnelEndpoint-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+GTP-TEID	::= OCTET STRING (SIZE (4))
+
+-- H
+
+HESSID ::= OCTET STRING (SIZE(6))
+
+-- I
+
+IKE-Initiator-Identity ::= OCTET STRING
+
+-- L
+
+LWA-WLAN-AC ::= ENUMERATED {
+	ac-bk, ac-be, ac-vi, ac-vo, ...
+}
+
+LWIP-SeGWSecurityInfo ::= SEQUENCE {
+	lWIP-PSK					LWIP-PSK,
+	iKE-Initiator-Identity		IKE-Initiator-Identity,
+	iE-Extensions				ProtocolExtensionContainer { {LWIP-SeGWSecurityInfo-ExtIEs} }		OPTIONAL,
+	...
+}
+
+LWIP-SeGWSecurityInfo-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+LWIP-PSK ::= BIT STRING(SIZE(256))
+
+-- M
+
+Measurement-ID ::= INTEGER (1..4095, ...)
+
+MeasurementInitiationResult-List ::= SEQUENCE (SIZE (1.. maxnoofBSSs)) OF ProtocolIE-SingleContainer { { MeasurementInitiationResult-ItemIEs} }
+
+MeasurementInitiationResult-ItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-MeasurementInitiationResult-Item	CRITICALITY ignore	TYPE MeasurementInitiationResult-Item	PRESENCE mandatory}
+}
+
+MeasurementInitiationResult-Item ::= SEQUENCE {
+	bSSID								BSSID,
+	measurementFailureCause-List		MeasurementFailureCause-List	OPTIONAL,
+	iE-Extensions						ProtocolExtensionContainer { { MeasurementInitiationResult-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+MeasurementInitiationResult-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+MeasurementFailureCause-List ::= SEQUENCE (SIZE (1..maxnoofFailedMeasObjects)) OF ProtocolIE-SingleContainer { { MeasurementFailureCause-ItemIEs} }
+
+MeasurementFailureCause-ItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-MeasurementFailureCause-Item	CRITICALITY ignore	TYPE MeasurementFailureCause-Item		PRESENCE mandatory}
+}
+
+MeasurementFailureCause-Item ::= SEQUENCE {
+	measurementFailedReportCharacteristics			ReportCharacteristics,
+	cause											Cause,
+	iE-Extensions									ProtocolExtensionContainer { { MeasurementFailureCause-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+MeasurementFailureCause-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+MobilitySet ::= SEQUENCE (SIZE (1..maxnoofMobilitySetItems)) OF MobilitySetItem
+
+MobilitySetItem ::= SEQUENCE {
+	bSSID				BSSID				OPTIONAL,
+	sSID				SSID				OPTIONAL,
+	hESSID				HESSID				OPTIONAL,
+	iE-Extensions		ProtocolExtensionContainer	{ { MobilitySetItem-ExtIEs } }	OPTIONAL,
+	...
+}
+
+MobilitySetItem-ExtIEs	XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- O
+OtherENB-IDIEs 	XWAP-PROTOCOL-IES ::= {
+	...
+}
+
+-- P
+
+PartialSuccessIndicator ::= ENUMERATED {
+	partial-success-allowed, ...
+}
+
+PLMN-Identity ::= OCTET STRING (SIZE(3))
+
+Pre-emptionCapability ::= ENUMERATED {
+	shall-not-trigger-pre-emption,
+	may-trigger-pre-emption
+}
+
+Pre-emptionVulnerability ::= ENUMERATED {
+	not-pre-emptable,
+	pre-emptable
+}
+
+PriorityLevel ::= INTEGER { spare (0), highest (1), lowest (14), no-priority (15) } (0..15)
+
+-- Q
+
+QCI ::= INTEGER (0..255)
+
+
+-- R
+
+Registration-Request ::= ENUMERATED {
+	start,
+	stop,
+	...
+}
+
+ReportCharacteristics ::= BIT STRING (SIZE (32))
+
+ReportingPeriodicity ::= ENUMERATED {
+	ms10, ms50, ms100, ms200, ms500, s1, s5, s10, ...
+}
+
+
+-- S
+
+SSID ::= OCTET STRING (SIZE (1..32))
+
+StationCount ::= INTEGER (0..65535)
+
+-- T
+
+TransportLayerAddress ::= BIT STRING (SIZE(1..160, ...))
+
+TypeOfError ::= ENUMERATED {
+	not-understood,
+	missing,
+	...
+}
+
+TimeToWait ::= ENUMERATED {
+	v1s, 
+	v2s, 
+	v5s, 
+	v10s, 
+	v20s, 
+	v60s, 
+	...
+}
+
+
+-- U
+
+UE-ContextKeptIndicator ::= ENUMERATED {
+	true,
+	...
+}
+
+UE-Identity ::= OCTET STRING (SIZE (6))
+
+UE-XwAP-ID ::= OCTET STRING (SIZE (3))
+
+-- W
+
+WANMetrics ::= SEQUENCE {
+	wAN-Backhaul-Rate-DL		WLAN-Backhaul-Rate,
+	wAN-Backhaul-Rate-UL		WLAN-Backhaul-Rate,
+	wANBackhaulLoad-DL	ChannelUtilization,
+	wANBackhaulLoad-UL	ChannelUtilization,
+	iE-Extensions				ProtocolExtensionContainer { { WANMetrics-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+WANMetrics-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+WLAN-Backhaul-Rate ::= ENUMERATED {r0, r4, r8, r16, r32, r64, r128, r256, r512, r1024, r2048, r4096, r8192, r16384, r32768, r65536, r131072, r262144, r524288, r1048576, r2097152, r4194304, r8388608, r16777216, r33554432, r67108864, r134217728, r268435456, r536870912, r1073741824, r2147483648, r4294967296}
+
+WLANband  ::= ENUMERATED {band2dot4, band5, ..., band60}
+
+WLANBandInformationList ::= SEQUENCE (SIZE (1..maxnoofBands)) OF ProtocolIE-SingleContainer { { WLANBandInformation-ItemIEs} }
+
+WLANBandInformation-ItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-wLANBandInformation	   CRITICALITY ignore	TYPE WLANBandInformation 	PRESENCE mandatory},
+	...
+}
+
+WLANBandInformation ::= CHOICE {
+	band				WLANband,
+	channelnumber		WLANchannelnumber,
+	...
+}
+
+WLANchannelnumber ::= INTEGER (0..255)
+
+WLANOperatingClass ::= INTEGER (0..255)
+
+WLANCountryCode ::= ENUMERATED {
+	unitedStates,
+	europe,
+	japan,
+	global,
+	...
+}
+
+WLANIdentifier-List ::= SEQUENCE (SIZE (1.. maxnoofWLANIdentifierItems)) OF ProtocolIE-SingleContainer { { WLANIdentifier-ItemIEs} }
+
+WLANIdentifier-ItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-WLANIdentifier-Item	CRITICALITY ignore	TYPE WLANIdentifier-Item	PRESENCE mandatory},
+	...
+}
+
+WLANIdentifier-Item ::= SEQUENCE {
+	wLANInformation			WLANInformation,
+	iE-Extensions			ProtocolExtensionContainer { { WLANIdentifier-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+WLANIdentifier-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+WLANIdentifiersToDelete-List ::= SEQUENCE (SIZE (1.. maxnoofWLANIdentifierItems)) OF ProtocolIE-SingleContainer { { WLANIdentifiersToDelete-ItemIEs} }
+
+WLANIdentifiersToDelete-ItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-WLANIdentifiersToDelete-Item	CRITICALITY ignore	TYPE WLANIdentifiersToDelete-Item	PRESENCE mandatory}
+}
+
+WLANIdentifiersToDelete-Item ::= SEQUENCE {
+	bSSID											BSSID,
+	iE-Extensions									ProtocolExtensionContainer { { WLANIdentifiersToDelete-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+WLANIdentifiersToDelete-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+WLANIdentifiersToDeleteExtension-List ::= SEQUENCE (SIZE (1.. maxnoofWLANIdentifierItems)) OF ProtocolIE-SingleContainer { { WLANIdentifiersToDeleteExtension-ItemIEs} }
+
+WLANIdentifiersToDeleteExtension-ItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-WLANIdentifiersToDeleteExtension-Item	CRITICALITY ignore	TYPE WLANIdentifiersToDeleteExtension-Item	PRESENCE mandatory}
+}
+
+WLANIdentifiersToDeleteExtension-Item ::= SEQUENCE {
+	sSID					SSID			OPTIONAL,
+	hESSID					HESSID			OPTIONAL,
+	iE-Extensions			ProtocolExtensionContainer { { WLANIdentifiersToDeleteExtension-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+WLANIdentifiersToDeleteExtension-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+WLANInformation ::= SEQUENCE {
+	bSS-Item		BSS-Item	OPTIONAL,
+	sSID			SSID		OPTIONAL,
+	hESSID			HESSID		OPTIONAL,
+	iE-Extensions	ProtocolExtensionContainer { { WLANInformation-ExtIEs} }	OPTIONAL,
+	...
+}
+
+WLANInformation-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	{ ID id-WLANUsage	CRITICALITY reject	EXTENSION	WLANUsage	PRESENCE optional},
+	...
+}
+
+WLANSecurityInfo ::= SEQUENCE {
+	wT-Security-Key 	BIT STRING (SIZE(256)),
+	iE-Extensions		ProtocolExtensionContainer { { WLANSecurityInfo-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+WLANSecurityInfo-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+WLANUsage ::=	ENUMERATED {
+	lWAandLWIP,
+	lWIPonly,
+	...
+}
+
+
+WT-MAC-Address ::= OCTET STRING (SIZE (6))
+
+WTID ::= CHOICE {
+	wTID-Type1			WTID-Type1,
+	wTID-Type2			WTID-Long-Type2,
+	...
+}
+
+WTID-Type1 ::= SEQUENCE {
+	pLMN-Identity					PLMN-Identity,
+	shortWTID						BIT STRING (SIZE(24)),
+	...
+}
+
+WTID-Long-Type2 ::= BIT STRING (SIZE(48))
+
+
+END
+
+
+9.3.6	Common definitions
+-- **************************************************************
+--
+-- Common definitions
+--
+-- **************************************************************
+
+XwAP-CommonDataTypes {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) xwap (8) version1 (1) xwap-CommonDataTypes (3) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- IE parameter types from other modules.
+--
+-- **************************************************************
+
+IMPORTS
+	maxPrivateIEs,
+	maxProtocolExtensions,
+	maxProtocolIEs
+
+FROM XwAP-Constants;
+
+-- **************************************************************
+--
+-- Common Data Types
+--
+-- **************************************************************
+
+Criticality ::= ENUMERATED { reject, ignore, notify }
+
+Presence ::= ENUMERATED { optional, conditional, mandatory }
+
+PrivateIE-ID ::= CHOICE {
+	local				INTEGER (0.. maxPrivateIEs),
+	global				OBJECT IDENTIFIER
+}
+
+ProcedureCode ::= INTEGER (0..255)
+
+ProtocolExtensionID ::= INTEGER (0.. maxProtocolExtensions)
+
+ProtocolIE-ID ::= INTEGER (0.. maxProtocolIEs)
+
+TriggeringMessage ::= ENUMERATED { initiating-message, successful-outcome, unsuccessful-outcome }
+END
+
+
+9.3.7	Constant definitions
+-- **************************************************************
+--
+-- Constant definitions
+--
+-- **************************************************************
+XwAP-Constants { 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) xwap (8) version1 (1) xwap-Constants (4) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- IE parameter types from other modules.
+--
+-- **************************************************************
+
+IMPORTS
+	ProcedureCode,
+	ProtocolIE-ID
+
+FROM XwAP-CommonDataTypes;
+
+
+-- **************************************************************
+--
+-- Elementary Procedures
+--
+-- **************************************************************
+
+id-xwSetup									ProcedureCode ::= 0
+id-wTConfigurationUpdate					ProcedureCode ::= 1
+id-wTStatusReportingInitiation				ProcedureCode ::= 2
+id-wTStatusReporting						ProcedureCode ::= 3
+id-errorIndication							ProcedureCode ::= 4
+id-reset									ProcedureCode ::= 5
+id-wTAdditionPreparation					ProcedureCode ::= 6
+id-eNBInitiatedWTModification				ProcedureCode ::= 7
+id-wTInitiatedWTModification				ProcedureCode ::= 8
+id-eNBInitiatedWTRelease					ProcedureCode ::= 9
+id-wTInitiatedWTRelease						ProcedureCode ::= 10
+id-wTAssociationConfirmation				ProcedureCode ::= 11
+id-privateMessage							ProcedureCode ::= 12
+id-lWIPAdditionPreparation					ProcedureCode ::= 13
+id-eNBInitiatedLWIPModification				ProcedureCode ::= 14
+id-eNBInitiatedLWIPRelease					ProcedureCode ::= 15
+id-wTInitiatedLWIPRelease					ProcedureCode ::= 16
+
+-- **************************************************************
+--
+-- Extension constants
+--
+-- **************************************************************
+
+maxPrivateIEs							INTEGER ::= 65535
+maxProtocolExtensions					INTEGER ::= 65535
+maxProtocolIEs							INTEGER ::= 65535
+
+
+-- **************************************************************
+--
+-- Lists
+--
+-- **************************************************************
+
+maxnoofBands								INTEGER ::= 256
+maxnoofBearers								INTEGER ::= 256
+maxnoofBSSs									INTEGER ::= 4096
+maxnoofErrors								INTEGER ::= 256
+maxnoofFailedMeasObjects					INTEGER ::= 32
+maxnoofMobilitySetItems						INTEGER ::= 1024
+maxnoofWLANIdentifierItems					INTEGER ::= 4096
+maxnoofeNBNeighbours							INTEGER ::= 256
+
+
+-- **************************************************************
+--
+-- IEs
+--
+-- **************************************************************
+
+id-BSSMeasurementResult-Item							ProtocolIE-ID ::= 0
+id-BSSMeasurementResult-List							ProtocolIE-ID ::= 1
+id-BSSToReport-Item 									ProtocolIE-ID ::= 2
+id-BSSToReport-List 									ProtocolIE-ID ::= 3
+id-Cause 												ProtocolIE-ID ::= 4
+id-CompleteFailureCauseInformation-Item 				ProtocolIE-ID ::= 5
+id-CompleteFailureCauseInformation-List 				ProtocolIE-ID ::= 6
+id-CriticalityDiagnostics 								ProtocolIE-ID ::= 7
+id-ENB-Measurement-ID 									ProtocolIE-ID ::= 8
+id-Global-ENB-ID 										ProtocolIE-ID ::= 9
+id-MeasurementFailureCause-Item 						ProtocolIE-ID ::= 10
+id-MeasurementInitiationResult-Item 					ProtocolIE-ID ::= 11
+id-MeasurementInitiationResult-List 					ProtocolIE-ID ::= 12
+id-PartialSuccessIndicator 								ProtocolIE-ID ::= 13
+id-Registration-Request 								ProtocolIE-ID ::= 14
+id-ReportCharacteristics 								ProtocolIE-ID ::= 15
+id-ReportingPeriodicity 								ProtocolIE-ID ::= 16
+id-WLANIdentifier-Item 									ProtocolIE-ID ::= 17
+id-WLANIdentifier-List 									ProtocolIE-ID ::= 18
+id-WLANIdentifiersToAdd-List 							ProtocolIE-ID ::= 19
+id-WLANIdentifiersToDelete-Item 						ProtocolIE-ID ::= 20
+id-WLANIdentifiersToDelete-List 						ProtocolIE-ID ::= 21
+id-WLANIdentifiersToModify-List 						ProtocolIE-ID ::= 22
+id-WTID 												ProtocolIE-ID ::= 23
+id-WT-Measurement-ID 									ProtocolIE-ID ::= 24
+id-ENB-UE-XwAP-ID										ProtocolIE-ID ::= 25
+id-WT-UE-XwAP-ID										ProtocolIE-ID ::= 26
+id-BSS-Item												ProtocolIE-ID ::= 27
+id-E-RABs-ToBeAdded-List								ProtocolIE-ID ::= 28
+id-E-RABs-ToBeAdded-Item								ProtocolIE-ID ::= 29
+id-UE-Identity											ProtocolIE-ID ::= 30
+id-WLANSecurityInfo										ProtocolIE-ID ::= 31
+id-E-RABs-Admitted-ToBeAdded-List						ProtocolIE-ID ::= 32
+id-E-RABs-Admitted-ToBeAdded-Item						ProtocolIE-ID ::= 33
+id-E-RABs-NotAdmitted-List								ProtocolIE-ID ::= 34
+id-E-RAB-Item											ProtocolIE-ID ::= 35
+id-UE-ContextInformationWTModReq						ProtocolIE-ID ::= 36
+id-E-RABs-ToBeAdded-ModReqItem							ProtocolIE-ID ::= 37
+id-E-RABs-ToBeModified-ModReqItem						ProtocolIE-ID ::= 38
+id-E-RABs-ToBeReleased-ModReqItem						ProtocolIE-ID ::= 39
+id-E-RABs-Admitted-ToBeAdded-ModAckList					ProtocolIE-ID ::= 40
+id-E-RABs-Admitted-ToBeAdded-ModAckItem					ProtocolIE-ID ::= 41
+id-E-RABs-Admitted-ToBeModified-ModAckList				ProtocolIE-ID ::= 42
+id-E-RABs-Admitted-ToBeModified-ModAckItem				ProtocolIE-ID ::= 43
+id-E-RABs-Admitted-ToBeReleased-ModAckList				ProtocolIE-ID ::= 44
+id-E-RABs-Admitted-ToBeReleased-ModAckItem				ProtocolIE-ID ::= 45
+id-E-RABs-ToBeReleased-ModReqdList						ProtocolIE-ID ::= 46
+id-E-RABs-ToBeReleased-ModReqdItem						ProtocolIE-ID ::= 47
+id-E-RABs-ToBeReleased-List-RelReq						ProtocolIE-ID ::= 48
+id-E-RABs-ToBeReleased-RelReqItem						ProtocolIE-ID ::= 49
+id-E-RABs-ToBeReleased-List-RelConf						ProtocolIE-ID ::= 50
+id-E-RABs-ToBeReleased-RelConfItem						ProtocolIE-ID ::= 51
+id-E-RABs-Confirmed-ToBeReleased-ModReqdList			ProtocolIE-ID ::= 52
+id-E-RABs-Confirmed-ToBeReleased-ModReqdItem			ProtocolIE-ID ::= 53
+id-MobilitySet											ProtocolIE-ID ::= 54
+id-ServingPLMN											ProtocolIE-ID ::= 55
+id-E-RABs-ToBeModified-ModReqdList						ProtocolIE-ID ::= 56
+id-E-RABs-ToBeModified-ModReqdItem						ProtocolIE-ID ::= 57
+id-E-RABs-Confirmed-ToBeModified-ModReqdList			ProtocolIE-ID ::= 58
+id-E-RABs-Confirmed-ToBeModified-ModReqdItem			ProtocolIE-ID ::= 59
+id-wLANBandInformation									ProtocolIE-ID ::= 60
+id-WLANIdentifiersToDeleteExtension-Item 				ProtocolIE-ID ::= 61
+id-WLANIdentifiersToDeleteExtension-List 				ProtocolIE-ID ::= 62
+id-TimeToWait											ProtocolIE-ID ::= 63
+id-UE-ContextKeptIndicator								ProtocolIE-ID ::= 64
+id-DRB-Identity											ProtocolIE-ID ::= 65
+id-LWA-WLAN-AC											ProtocolIE-ID ::= 66
+id-eNBNeighbour-List									ProtocolIE-ID ::= 67
+id-eNBNeighbour-Item									ProtocolIE-ID ::= 68
+id-LWIP-SeGWSecurityInfo								ProtocolIE-ID ::= 69
+id-eNBGTPtunnelEndpoint									ProtocolIE-ID ::= 70
+id-LWIP-SeGWGTPtunnelEndpoint							ProtocolIE-ID ::= 71
+id-WLANUsage											ProtocolIE-ID ::= 72
+id-WT-MAC-Address										ProtocolIE-ID ::= 73
+
+END
+
+9.3.8	Container definitions
+-- **************************************************************
+--
+-- Container definitions
+--
+-- **************************************************************
+
+XwAP-Containers {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) xwap (8) version1 (1) xwap-Containers (5) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- IE parameter types from other modules.
+--
+-- **************************************************************
+
+IMPORTS
+	Criticality,
+	Presence,
+	PrivateIE-ID,
+	ProtocolExtensionID,
+	ProtocolIE-ID
+FROM XwAP-CommonDataTypes
+
+	maxPrivateIEs,
+	maxProtocolExtensions,
+	maxProtocolIEs
+FROM XwAP-Constants;
+
+-- **************************************************************
+--
+-- Class Definition for Protocol IEs
+--
+-- **************************************************************
+
+XWAP-PROTOCOL-IES ::= CLASS {
+	&id				ProtocolIE-ID					UNIQUE,
+	&criticality	Criticality,
+	&Value,
+	&presence		Presence
+}
+WITH SYNTAX {
+	ID				&id
+	CRITICALITY		&criticality
+	TYPE			&Value
+	PRESENCE		&presence
+}
+
+-- **************************************************************
+--
+-- Class Definition for Protocol IEs
+--
+-- **************************************************************
+
+XWAP-PROTOCOL-IES-PAIR ::= CLASS {
+	&id					ProtocolIE-ID				UNIQUE,
+	&firstCriticality	Criticality,
+	&FirstValue,
+	&secondCriticality	Criticality,
+	&SecondValue,
+	&presence			Presence
+}
+WITH SYNTAX {
+	ID				&id
+	FIRST CRITICALITY		&firstCriticality
+	FIRST TYPE				&FirstValue
+	SECOND CRITICALITY		&secondCriticality
+	SECOND TYPE				&SecondValue
+	PRESENCE				&presence
+}
+
+-- **************************************************************
+--
+-- Class Definition for Protocol Extensions
+--
+-- **************************************************************
+
+XWAP-PROTOCOL-EXTENSION ::= CLASS {
+	&id				ProtocolExtensionID			UNIQUE,
+	&criticality	Criticality,
+	&Extension,
+	&presence		Presence
+}
+WITH SYNTAX {
+	ID				&id
+	CRITICALITY		&criticality
+	EXTENSION		&Extension
+	PRESENCE		&presence
+}
+
+-- **************************************************************
+--
+-- Class Definition for Private IEs
+--
+-- **************************************************************
+
+XWAP-PRIVATE-IES ::= CLASS {
+	&id				PrivateIE-ID,
+	&criticality	Criticality,
+	&Value,
+	&presence		Presence
+}
+WITH SYNTAX {
+	ID				&id
+	CRITICALITY		&criticality
+	TYPE			&Value
+	PRESENCE		&presence
+}
+
+-- **************************************************************
+--
+-- Container for Protocol IEs
+--
+-- **************************************************************
+
+ProtocolIE-Container { XWAP-PROTOCOL-IES : IEsSetParam} ::= 
+	SEQUENCE (SIZE (0..maxProtocolIEs)) OF
+	ProtocolIE-Field {{IEsSetParam}}
+
+ProtocolIE-SingleContainer { XWAP-PROTOCOL-IES : IEsSetParam} ::= 
+	ProtocolIE-Field {{IEsSetParam}}
+
+ProtocolIE-Field { XWAP-PROTOCOL-IES : IEsSetParam} ::= SEQUENCE {
+	id				XWAP-PROTOCOL-IES.&id				({IEsSetParam}),
+	criticality		XWAP-PROTOCOL-IES.&criticality		({IEsSetParam}{@id}),
+	value			XWAP-PROTOCOL-IES.&Value			({IEsSetParam}{@id})
+}
+
+-- **************************************************************
+--
+-- Container for Protocol IE Pairs
+--
+-- **************************************************************
+
+ProtocolIE-ContainerPair { XWAP-PROTOCOL-IES-PAIR : IEsSetParam} ::= 
+	SEQUENCE (SIZE (0..maxProtocolIEs)) OF
+	ProtocolIE-FieldPair {{IEsSetParam}}
+
+ProtocolIE-FieldPair { XWAP-PROTOCOL-IES-PAIR : IEsSetParam} ::= SEQUENCE {
+	id					XWAP-PROTOCOL-IES-PAIR.&id					({IEsSetParam}),
+	firstCriticality	XWAP-PROTOCOL-IES-PAIR.&firstCriticality	({IEsSetParam}{@id}),
+	firstValue			XWAP-PROTOCOL-IES-PAIR.&FirstValue			({IEsSetParam}{@id}),
+	secondCriticality	XWAP-PROTOCOL-IES-PAIR.&secondCriticality	({IEsSetParam}{@id}),
+	secondValue			XWAP-PROTOCOL-IES-PAIR.&SecondValue			({IEsSetParam}{@id})
+}
+
+-- **************************************************************
+--
+-- Container Lists for Protocol IE Containers
+--
+-- **************************************************************
+
+ProtocolIE-ContainerList {INTEGER : lowerBound, INTEGER : upperBound, XWAP-PROTOCOL-IES : IEsSetParam} ::=
+	SEQUENCE (SIZE (lowerBound..upperBound)) OF
+	ProtocolIE-SingleContainer {{IEsSetParam}}
+
+ProtocolIE-ContainerPairList {INTEGER : lowerBound, INTEGER : upperBound, XWAP-PROTOCOL-IES-PAIR : IEsSetParam} ::=
+	SEQUENCE (SIZE (lowerBound..upperBound)) OF
+	ProtocolIE-ContainerPair {{IEsSetParam}}
+
+-- **************************************************************
+--
+-- Container for Protocol Extensions
+--
+-- **************************************************************
+
+ProtocolExtensionContainer { XWAP-PROTOCOL-EXTENSION : ExtensionSetParam} ::= 
+	SEQUENCE (SIZE (1..maxProtocolExtensions)) OF
+	ProtocolExtensionField {{ExtensionSetParam}}
+
+ProtocolExtensionField { XWAP-PROTOCOL-EXTENSION : ExtensionSetParam} ::= SEQUENCE {
+	id					XWAP-PROTOCOL-EXTENSION.&id				({ExtensionSetParam}),
+	criticality			XWAP-PROTOCOL-EXTENSION.&criticality	({ExtensionSetParam}{@id}),
+	extensionValue		XWAP-PROTOCOL-EXTENSION.&Extension		({ExtensionSetParam}{@id})
+}
+
+-- **************************************************************
+--
+-- Container for Private IEs
+--
+-- **************************************************************
+
+PrivateIE-Container { XWAP-PRIVATE-IES : IEsSetParam } ::= 
+	SEQUENCE (SIZE (1.. maxPrivateIEs)) OF
+	PrivateIE-Field {{IEsSetParam}}
+
+PrivateIE-Field { XWAP-PRIVATE-IES : IEsSetParam} ::= SEQUENCE {
+	id					XWAP-PRIVATE-IES.&id				({IEsSetParam}),
+	criticality			XWAP-PRIVATE-IES.&criticality		({IEsSetParam}{@id}),
+	value				XWAP-PRIVATE-IES.&Value				({IEsSetParam}{@id})
+}
+END
+
+9.4	Message transfer syntax
+XwAP shall use the ASN.1 Basic Packed Encoding Rules (BASIC-PER) Aligned Variant as transfer syntax, as specified in ITU-T Rec. X.691 [5].
+10	Handling of unknown, unforeseen and erroneous protocol data
+Clause 10 of TS 36.413 [8] is applicable for the purposes of the present document, with the following addition to the handling of AP IDs specified in clause 10.6.
+If a node receives a message (other than the first or first returned messages) that includes AP ID(s) identifying a logical connection which is known to the node (for the same Xw interface), but was established for the LWIP operation whereas the message relates to LWA operation (or vice-versa), the node shall behave as if the AP ID(s) identify a logical connection which is unknown to the node. If the node subsequently initiates an Error Indication procedure as part of the error handling described in clause 10.6 of TS 36.413 [8], it shall include an appropriate cause value such as "Wrong WLAN Interworking Mode".
+Annex A (informative):
+Change history
+TSG #
+TSG Doc.
+CR
+Rev
+Cat
+Subject/Comment
+New
+
+
+
+
+
+Initial skeleton
+0.0.1
+
+
+
+
+
+Inclusion of text proposals agreed at RAN WG3#89bis
+0.0.2
+
+
+
+
+
+Editorial revisions and corrections
+0.0.3
+
+
+
+
+
+Inclusion of text proposals agreed at RAN WG3#90
+0.0.4
+RAN#70
+
+
+
+
+Presentation to RAN#70 for information
+1.0.0
+
+
+
+
+
+Editorial revisions and corrections
+1.1.0
+
+
+
+
+
+Inclusion of text proposals agreed at RAN WG3 Adhoc NBIoT
+1.2.0
+
+
+
+
+
+Editorial revisions and corrections
+1.3.0
+
+
+
+
+
+Inclusion of text proposals agreed at RAN WG3#91
+1.4.0
+RAN#71
+
+
+
+
+Presentation to RAN#71 for approval
+2.0.0
+RAN#71
+
+
+
+
+Upgraded to Rel-13 and placed under change control
+13.0.0
+RAN#72
+RP-161046
+3
+2
+F
+Addition of measurement configuration
+13.1.0
+RAN#72
+RP-161046
+4
+1
+F
+Correction on RESET procedure
+13.1.0
+RAN#72
+RP-161046
+5
+
+F
+Correction on WT Initiated WT Modification
+13.1.0
+RAN#72
+RP-161046
+7
+2
+F
+Correction on WT configuration update
+13.1.0
+RAN#72
+RP-161046
+8
+2
+F
+Correction on Global eNB ID
+13.1.0
+RAN#72
+RP-161043
+12
+
+F
+Correction to WT-Initiated WT Modification
+13.1.0
+RAN#72
+RP-161046
+14
+3
+F
+Xw-AP corrections
+13.1.0
+RAN#72
+RP-161046
+17
+1
+F
+Rapporteur updates to TS 36.463
+13.1.0
+RAN#74
+RP-162336
+0027
+2
+B
+Correction on the reinitiating waiting time in Xw
+14.0.0
+
+Change history
+Date
+Meeting
+TDoc
+CR
+Rev
+Cat
+Subject/Comment
+New version
+2017-03
+RP-75
+RP-170535
+0032
+ 
+B
+XwAP Support for Inter-eNB Mobility without WT Change
+14.1.0
+2017-03
+RP-75
+RP-170535
+0033
+ 
+B
+Introduction of WLAN band indication
+14.1.0
+2017-03
+RP-75
+RP-170535
+0034
+ 
+B
+Uplink bearer identification
+14.1.0
+2017-03
+RP-75
+RP-170535
+0035
+ 
+B
+WT Notifying neighbour eNB information on Xw
+14.1.0
+2017-03
+RP-75
+RP-170542
+0036
+ 
+B
+Introduction of New types of eNB ID
+14.1.0
+2017-03
+RP-75
+RP-170543
+0031
+4
+B
+LWIP Addition and Modification
+14.1.0
+2017-03
+RP-75
+RP-170535
+0032
+ 
+B
+XwAP Support for Inter-eNB Mobility without WT Change
+14.1.0
+2017-03
+RP-75
+RP-170535
+0033
+ 
+B
+Introduction of WLAN band indication
+14.1.0
+2017-03
+RP-75
+RP-170331
+0037
+
+B
+Xw support for WT MAC address signalling
+14.1.0
+2017-06
+RP-76
+RP-171326
+0038
+1
+F
+Corrections on inter-WLAN interworking mode error handling
+14.2.0
+2017-06
+RP-76
+RP-171324
+0039
+1
+F
+Rapporteur update for TS 36.463
+14.2.0
+2018-06
+SA#80
+-
+-
+-
+-
+Promotion to Release 15 without technical change
+15.0.0
+

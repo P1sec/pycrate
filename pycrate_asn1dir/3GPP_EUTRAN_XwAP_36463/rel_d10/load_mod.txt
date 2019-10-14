@@ -1,0 +1,6 @@
+XwAP-CommonDataTypes.asn
+XwAP-Constants.asn
+XwAP-Containers.asn
+XwAP-IEs.asn
+XwAP-PDU-Contents.asn
+XwAP-PDU-Descriptions.asn
