@@ -115,6 +115,10 @@ class XwAP_Constants:
         u'id-wTInitiatedWTRelease',
         u'id-wTAssociationConfirmation',
         u'id-privateMessage',
+        u'id-lWIPAdditionPreparation',
+        u'id-eNBInitiatedLWIPModification',
+        u'id-eNBInitiatedLWIPRelease',
+        u'id-wTInitiatedLWIPRelease',
         u'maxPrivateIEs',
         u'maxProtocolExtensions',
         u'maxProtocolIEs',
@@ -125,6 +129,7 @@ class XwAP_Constants:
         u'maxnoofFailedMeasObjects',
         u'maxnoofMobilitySetItems',
         u'maxnoofWLANIdentifierItems',
+        u'maxnoofeNBNeighbours',
         u'id-BSSMeasurementResult-Item',
         u'id-BSSMeasurementResult-List',
         u'id-BSSToReport-Item',
@@ -188,6 +193,17 @@ class XwAP_Constants:
         u'id-wLANBandInformation',
         u'id-WLANIdentifiersToDeleteExtension-Item',
         u'id-WLANIdentifiersToDeleteExtension-List',
+        u'id-TimeToWait',
+        u'id-UE-ContextKeptIndicator',
+        u'id-DRB-Identity',
+        u'id-LWA-WLAN-AC',
+        u'id-eNBNeighbour-List',
+        u'id-eNBNeighbour-Item',
+        u'id-LWIP-SeGWSecurityInfo',
+        u'id-eNBGTPtunnelEndpoint',
+        u'id-LWIP-SeGWGTPtunnelEndpoint',
+        u'id-WLANUsage',
+        u'id-WT-MAC-Address',
         ]
     _type_ = [
         ]
@@ -207,6 +223,10 @@ class XwAP_Constants:
         u'id-wTInitiatedWTRelease',
         u'id-wTAssociationConfirmation',
         u'id-privateMessage',
+        u'id-lWIPAdditionPreparation',
+        u'id-eNBInitiatedLWIPModification',
+        u'id-eNBInitiatedLWIPRelease',
+        u'id-wTInitiatedLWIPRelease',
         u'maxPrivateIEs',
         u'maxProtocolExtensions',
         u'maxProtocolIEs',
@@ -217,6 +237,7 @@ class XwAP_Constants:
         u'maxnoofFailedMeasObjects',
         u'maxnoofMobilitySetItems',
         u'maxnoofWLANIdentifierItems',
+        u'maxnoofeNBNeighbours',
         u'id-BSSMeasurementResult-Item',
         u'id-BSSMeasurementResult-List',
         u'id-BSSToReport-Item',
@@ -280,6 +301,17 @@ class XwAP_Constants:
         u'id-wLANBandInformation',
         u'id-WLANIdentifiersToDeleteExtension-Item',
         u'id-WLANIdentifiersToDeleteExtension-List',
+        u'id-TimeToWait',
+        u'id-UE-ContextKeptIndicator',
+        u'id-DRB-Identity',
+        u'id-LWA-WLAN-AC',
+        u'id-eNBNeighbour-List',
+        u'id-eNBNeighbour-Item',
+        u'id-LWIP-SeGWSecurityInfo',
+        u'id-eNBGTPtunnelEndpoint',
+        u'id-LWIP-SeGWGTPtunnelEndpoint',
+        u'id-WLANUsage',
+        u'id-WT-MAC-Address',
         ]
     _class_ = [
         ]
@@ -338,6 +370,22 @@ class XwAP_Constants:
     id_privateMessage = INT(name=u'id-privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('XwAP-CommonDataTypes', 'ProcedureCode')))
     id_privateMessage._val = 12
     
+    #-----< id-lWIPAdditionPreparation >-----#
+    id_lWIPAdditionPreparation = INT(name=u'id-lWIPAdditionPreparation', mode=MODE_VALUE, typeref=ASN1RefType(('XwAP-CommonDataTypes', 'ProcedureCode')))
+    id_lWIPAdditionPreparation._val = 13
+    
+    #-----< id-eNBInitiatedLWIPModification >-----#
+    id_eNBInitiatedLWIPModification = INT(name=u'id-eNBInitiatedLWIPModification', mode=MODE_VALUE, typeref=ASN1RefType(('XwAP-CommonDataTypes', 'ProcedureCode')))
+    id_eNBInitiatedLWIPModification._val = 14
+    
+    #-----< id-eNBInitiatedLWIPRelease >-----#
+    id_eNBInitiatedLWIPRelease = INT(name=u'id-eNBInitiatedLWIPRelease', mode=MODE_VALUE, typeref=ASN1RefType(('XwAP-CommonDataTypes', 'ProcedureCode')))
+    id_eNBInitiatedLWIPRelease._val = 15
+    
+    #-----< id-wTInitiatedLWIPRelease >-----#
+    id_wTInitiatedLWIPRelease = INT(name=u'id-wTInitiatedLWIPRelease', mode=MODE_VALUE, typeref=ASN1RefType(('XwAP-CommonDataTypes', 'ProcedureCode')))
+    id_wTInitiatedLWIPRelease._val = 16
+    
     #-----< maxPrivateIEs >-----#
     maxPrivateIEs = INT(name=u'maxPrivateIEs', mode=MODE_VALUE)
     maxPrivateIEs._val = 65535
@@ -377,6 +425,10 @@ class XwAP_Constants:
     #-----< maxnoofWLANIdentifierItems >-----#
     maxnoofWLANIdentifierItems = INT(name=u'maxnoofWLANIdentifierItems', mode=MODE_VALUE)
     maxnoofWLANIdentifierItems._val = 4096
+    
+    #-----< maxnoofeNBNeighbours >-----#
+    maxnoofeNBNeighbours = INT(name=u'maxnoofeNBNeighbours', mode=MODE_VALUE)
+    maxnoofeNBNeighbours._val = 256
     
     #-----< id-BSSMeasurementResult-Item >-----#
     id_BSSMeasurementResult_Item = INT(name=u'id-BSSMeasurementResult-Item', mode=MODE_VALUE, typeref=ASN1RefType(('XwAP-CommonDataTypes', 'ProtocolIE-ID')))
@@ -630,6 +682,50 @@ class XwAP_Constants:
     id_WLANIdentifiersToDeleteExtension_List = INT(name=u'id-WLANIdentifiersToDeleteExtension-List', mode=MODE_VALUE, typeref=ASN1RefType(('XwAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_WLANIdentifiersToDeleteExtension_List._val = 62
     
+    #-----< id-TimeToWait >-----#
+    id_TimeToWait = INT(name=u'id-TimeToWait', mode=MODE_VALUE, typeref=ASN1RefType(('XwAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_TimeToWait._val = 63
+    
+    #-----< id-UE-ContextKeptIndicator >-----#
+    id_UE_ContextKeptIndicator = INT(name=u'id-UE-ContextKeptIndicator', mode=MODE_VALUE, typeref=ASN1RefType(('XwAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_UE_ContextKeptIndicator._val = 64
+    
+    #-----< id-DRB-Identity >-----#
+    id_DRB_Identity = INT(name=u'id-DRB-Identity', mode=MODE_VALUE, typeref=ASN1RefType(('XwAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_DRB_Identity._val = 65
+    
+    #-----< id-LWA-WLAN-AC >-----#
+    id_LWA_WLAN_AC = INT(name=u'id-LWA-WLAN-AC', mode=MODE_VALUE, typeref=ASN1RefType(('XwAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_LWA_WLAN_AC._val = 66
+    
+    #-----< id-eNBNeighbour-List >-----#
+    id_eNBNeighbour_List = INT(name=u'id-eNBNeighbour-List', mode=MODE_VALUE, typeref=ASN1RefType(('XwAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_eNBNeighbour_List._val = 67
+    
+    #-----< id-eNBNeighbour-Item >-----#
+    id_eNBNeighbour_Item = INT(name=u'id-eNBNeighbour-Item', mode=MODE_VALUE, typeref=ASN1RefType(('XwAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_eNBNeighbour_Item._val = 68
+    
+    #-----< id-LWIP-SeGWSecurityInfo >-----#
+    id_LWIP_SeGWSecurityInfo = INT(name=u'id-LWIP-SeGWSecurityInfo', mode=MODE_VALUE, typeref=ASN1RefType(('XwAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_LWIP_SeGWSecurityInfo._val = 69
+    
+    #-----< id-eNBGTPtunnelEndpoint >-----#
+    id_eNBGTPtunnelEndpoint = INT(name=u'id-eNBGTPtunnelEndpoint', mode=MODE_VALUE, typeref=ASN1RefType(('XwAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_eNBGTPtunnelEndpoint._val = 70
+    
+    #-----< id-LWIP-SeGWGTPtunnelEndpoint >-----#
+    id_LWIP_SeGWGTPtunnelEndpoint = INT(name=u'id-LWIP-SeGWGTPtunnelEndpoint', mode=MODE_VALUE, typeref=ASN1RefType(('XwAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_LWIP_SeGWGTPtunnelEndpoint._val = 71
+    
+    #-----< id-WLANUsage >-----#
+    id_WLANUsage = INT(name=u'id-WLANUsage', mode=MODE_VALUE, typeref=ASN1RefType(('XwAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_WLANUsage._val = 72
+    
+    #-----< id-WT-MAC-Address >-----#
+    id_WT_MAC_Address = INT(name=u'id-WT-MAC-Address', mode=MODE_VALUE, typeref=ASN1RefType(('XwAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_WT_MAC_Address._val = 73
+    
     _all_ = [
         id_xwSetup,
         id_wTConfigurationUpdate,
@@ -644,6 +740,10 @@ class XwAP_Constants:
         id_wTInitiatedWTRelease,
         id_wTAssociationConfirmation,
         id_privateMessage,
+        id_lWIPAdditionPreparation,
+        id_eNBInitiatedLWIPModification,
+        id_eNBInitiatedLWIPRelease,
+        id_wTInitiatedLWIPRelease,
         maxPrivateIEs,
         maxProtocolExtensions,
         maxProtocolIEs,
@@ -654,6 +754,7 @@ class XwAP_Constants:
         maxnoofFailedMeasObjects,
         maxnoofMobilitySetItems,
         maxnoofWLANIdentifierItems,
+        maxnoofeNBNeighbours,
         id_BSSMeasurementResult_Item,
         id_BSSMeasurementResult_List,
         id_BSSToReport_Item,
@@ -717,6 +818,17 @@ class XwAP_Constants:
         id_wLANBandInformation,
         id_WLANIdentifiersToDeleteExtension_Item,
         id_WLANIdentifiersToDeleteExtension_List,
+        id_TimeToWait,
+        id_UE_ContextKeptIndicator,
+        id_DRB_Identity,
+        id_LWA_WLAN_AC,
+        id_eNBNeighbour_List,
+        id_eNBNeighbour_Item,
+        id_LWIP_SeGWSecurityInfo,
+        id_eNBGTPtunnelEndpoint,
+        id_LWIP_SeGWGTPtunnelEndpoint,
+        id_WLANUsage,
+        id_WT_MAC_Address,
     ]
 
 class XwAP_Containers:
@@ -936,7 +1048,12 @@ class XwAP_IEs:
         u'CriticalityDiagnostics-IE-List',
         u'CriticalityDiagnostics-IE-Item',
         u'CriticalityDiagnostics-IE-Item-ExtIEs',
+        u'DRB-Identity',
         u'ENB-ID',
+        u'ENBNeighbour-List',
+        u'ENBNeighbour-ItemIEs',
+        u'ENBNeighbour-Item',
+        u'ENBNeighbour-Item-ExtIEs',
         u'E-RAB-ID',
         u'E-RAB-List',
         u'E-RAB-ItemIEs',
@@ -952,6 +1069,11 @@ class XwAP_IEs:
         u'GTPtunnelEndpoint-ExtIEs',
         u'GTP-TEID',
         u'HESSID',
+        u'IKE-Initiator-Identity',
+        u'LWA-WLAN-AC',
+        u'LWIP-SeGWSecurityInfo',
+        u'LWIP-SeGWSecurityInfo-ExtIEs',
+        u'LWIP-PSK',
         u'Measurement-ID',
         u'MeasurementInitiationResult-List',
         u'MeasurementInitiationResult-ItemIEs',
@@ -978,6 +1100,8 @@ class XwAP_IEs:
         u'StationCount',
         u'TransportLayerAddress',
         u'TypeOfError',
+        u'TimeToWait',
+        u'UE-ContextKeptIndicator',
         u'UE-Identity',
         u'UE-XwAP-ID',
         u'WANMetrics',
@@ -1006,6 +1130,8 @@ class XwAP_IEs:
         u'WLANInformation-ExtIEs',
         u'WLANSecurityInfo',
         u'WLANSecurityInfo-Item-ExtIEs',
+        u'WLANUsage',
+        u'WT-MAC-Address',
         u'WTID',
         u'WTID-Type1',
         u'WTID-Long-Type2',
@@ -1033,7 +1159,10 @@ class XwAP_IEs:
         u'CriticalityDiagnostics',
         u'CriticalityDiagnostics-IE-List',
         u'CriticalityDiagnostics-IE-Item',
+        u'DRB-Identity',
         u'ENB-ID',
+        u'ENBNeighbour-List',
+        u'ENBNeighbour-Item',
         u'E-RAB-ID',
         u'E-RAB-List',
         u'E-RAB-Item',
@@ -1043,6 +1172,10 @@ class XwAP_IEs:
         u'GTPtunnelEndpoint',
         u'GTP-TEID',
         u'HESSID',
+        u'IKE-Initiator-Identity',
+        u'LWA-WLAN-AC',
+        u'LWIP-SeGWSecurityInfo',
+        u'LWIP-PSK',
         u'Measurement-ID',
         u'MeasurementInitiationResult-List',
         u'MeasurementInitiationResult-Item',
@@ -1063,6 +1196,8 @@ class XwAP_IEs:
         u'StationCount',
         u'TransportLayerAddress',
         u'TypeOfError',
+        u'TimeToWait',
+        u'UE-ContextKeptIndicator',
         u'UE-Identity',
         u'UE-XwAP-ID',
         u'WANMetrics',
@@ -1081,6 +1216,8 @@ class XwAP_IEs:
         u'WLANIdentifiersToDeleteExtension-Item',
         u'WLANInformation',
         u'WLANSecurityInfo',
+        u'WLANUsage',
+        u'WT-MAC-Address',
         u'WTID',
         u'WTID-Type1',
         u'WTID-Long-Type2',
@@ -1098,12 +1235,15 @@ class XwAP_IEs:
         u'CompleteFailureCauseInformation-Item-ExtIEs',
         u'CriticalityDiagnostics-ExtIEs',
         u'CriticalityDiagnostics-IE-Item-ExtIEs',
+        u'ENBNeighbour-ItemIEs',
+        u'ENBNeighbour-Item-ExtIEs',
         u'E-RAB-ItemIEs',
         u'E-RAB-Item-ExtIEs',
         u'E-RAB-QoS-Parameters-ExtIEs',
         u'GBR-QosInformation-ExtIEs',
         u'GlobalENB-ID-ExtIEs',
         u'GTPtunnelEndpoint-ExtIEs',
+        u'LWIP-SeGWSecurityInfo-ExtIEs',
         u'MeasurementInitiationResult-ItemIEs',
         u'MeasurementInitiationResult-Item-ExtIEs',
         u'MeasurementFailureCause-ItemIEs',
@@ -1136,12 +1276,15 @@ class XwAP_IEs:
         u'CompleteFailureCauseInformation-Item-ExtIEs',
         u'CriticalityDiagnostics-ExtIEs',
         u'CriticalityDiagnostics-IE-Item-ExtIEs',
+        u'ENBNeighbour-ItemIEs',
+        u'ENBNeighbour-Item-ExtIEs',
         u'E-RAB-ItemIEs',
         u'E-RAB-Item-ExtIEs',
         u'E-RAB-QoS-Parameters-ExtIEs',
         u'GBR-QosInformation-ExtIEs',
         u'GlobalENB-ID-ExtIEs',
         u'GTPtunnelEndpoint-ExtIEs',
+        u'LWIP-SeGWSecurityInfo-ExtIEs',
         u'MeasurementInitiationResult-ItemIEs',
         u'MeasurementInitiationResult-Item-ExtIEs',
         u'MeasurementFailureCause-ItemIEs',
@@ -1506,8 +1649,8 @@ class XwAP_IEs:
     
     #-----< CauseRadioNetwork >-----#
     CauseRadioNetwork = ENUM(name=u'CauseRadioNetwork', mode=MODE_TYPE)
-    CauseRadioNetwork._cont = ASN1Dict([(u'unknown-eNB-UE-XwAP-ID', 0), (u'unknown-WT-UE-XwAP-ID', 1), (u'unknown-pair-of-UE-XwAP-ID', 2), (u'wLAN-not-available', 3), (u'security-failure', 4), (u'reportCharacteristicsEmpty', 5), (u'existing-Measurement-ID', 6), (u'unknown-Measurement-ID', 7), (u'measurement-temporarily-not-available', 8), (u'unspecified', 9), (u'multiple-E-RAB-ID-instances', 10), (u'switch-off-ongoing', 11), (u'not-supported-QCI-value', 12), (u'measurement-not-supported-for-the-object', 13), (u'reduce-load', 14), (u'resource-optimisation', 15), (u'target-not-allowed', 16), (u'no-radio-resources-available', 17), (u'invalid-QoS-combination', 18), (u'procedure-cancelled', 19), (u'radio-connection-with-UE-lost', 20), (u'failure-in-the-radio-interface-procedure', 21), (u'no-report-periodicity', 22)])
-    CauseRadioNetwork._ext = [u'no-report-periodicity']
+    CauseRadioNetwork._cont = ASN1Dict([(u'unknown-eNB-UE-XwAP-ID', 0), (u'unknown-WT-UE-XwAP-ID', 1), (u'unknown-pair-of-UE-XwAP-ID', 2), (u'wLAN-not-available', 3), (u'security-failure', 4), (u'reportCharacteristicsEmpty', 5), (u'existing-Measurement-ID', 6), (u'unknown-Measurement-ID', 7), (u'measurement-temporarily-not-available', 8), (u'unspecified', 9), (u'multiple-E-RAB-ID-instances', 10), (u'switch-off-ongoing', 11), (u'not-supported-QCI-value', 12), (u'measurement-not-supported-for-the-object', 13), (u'reduce-load', 14), (u'resource-optimisation', 15), (u'target-not-allowed', 16), (u'no-radio-resources-available', 17), (u'invalid-QoS-combination', 18), (u'procedure-cancelled', 19), (u'radio-connection-with-UE-lost', 20), (u'failure-in-the-radio-interface-procedure', 21), (u'no-report-periodicity', 22), (u'wrong-wlan-interworking-mode', 23)])
+    CauseRadioNetwork._ext = [u'no-report-periodicity', u'wrong-wlan-interworking-mode']
     
     #-----< CauseTransport >-----#
     CauseTransport = ENUM(name=u'CauseTransport', mode=MODE_TYPE)
@@ -1679,6 +1822,10 @@ class XwAP_IEs:
     CriticalityDiagnostics_IE_Item_ExtIEs = CLASS(name=u'CriticalityDiagnostics-IE-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION')))
     CriticalityDiagnostics_IE_Item_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
+    #-----< DRB-Identity >-----#
+    DRB_Identity = INT(name=u'DRB-Identity', mode=MODE_TYPE)
+    DRB_Identity._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=[], er=[])
+    
     #-----< ENB-ID >-----#
     ENB_ID = CHOICE(name=u'ENB-ID', mode=MODE_TYPE)
     _ENB_ID_macroENB_ID = BIT_STR(name=u'macroENB-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
@@ -1704,11 +1851,86 @@ class XwAP_IEs:
         (u'value', __ENB_ID_otherENB_ID_value),
         ])
     _ENB_ID_otherENB_ID._ext = None
+    _ENB_ID_short_macroENB_ID = BIT_STR(name=u'short-macroENB-ID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ENB_ID_short_macroENB_ID._const_sz = ASN1Set(rv=[18], rr=[], ev=None, er=[])
+    _ENB_ID_long_macroENB_ID = BIT_STR(name=u'long-macroENB-ID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ENB_ID_long_macroENB_ID._const_sz = ASN1Set(rv=[21], rr=[], ev=None, er=[])
     ENB_ID._cont = ASN1Dict([
         (u'macroENB-ID', _ENB_ID_macroENB_ID),
         (u'otherENB-ID', _ENB_ID_otherENB_ID),
+        (u'short-macroENB-ID', _ENB_ID_short_macroENB_ID),
+        (u'long-macroENB-ID', _ENB_ID_long_macroENB_ID),
         ])
-    ENB_ID._ext = []
+    ENB_ID._ext = [u'short-macroENB-ID', u'long-macroENB-ID']
+    
+    #-----< ENBNeighbour-List >-----#
+    ENBNeighbour_List = SEQ_OF(name=u'ENBNeighbour-List', mode=MODE_TYPE)
+    _ENBNeighbour_List__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-Containers', 'ProtocolIE-SingleContainer')))
+    __ENBNeighbour_List__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'id']))
+    ___ENBNeighbour_List__item__id_tab = CLASS(name='_tab_XWAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
+    ____ENBNeighbour_List__item__id_tab_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'ENBNeighbour-Item')))
+    ___ENBNeighbour_List__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 68), (u'criticality', u'ignore'), (u'Value', ____ENBNeighbour_List__item__id_tab_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
+    __ENBNeighbour_List__item__id._const_tab = ___ENBNeighbour_List__item__id_tab
+    __ENBNeighbour_List__item__id._const_tab_at = None
+    __ENBNeighbour_List__item__id._const_tab_id = u'id'
+    __ENBNeighbour_List__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'criticality']))
+    __ENBNeighbour_List__item__criticality._const_tab = ___ENBNeighbour_List__item__id_tab
+    __ENBNeighbour_List__item__criticality._const_tab_at = ('..', u'id')
+    __ENBNeighbour_List__item__criticality._const_tab_id = u'criticality'
+    __ENBNeighbour_List__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'Value']))
+    __ENBNeighbour_List__item__value._const_tab = ___ENBNeighbour_List__item__id_tab
+    __ENBNeighbour_List__item__value._const_tab_at = ('..', u'id')
+    __ENBNeighbour_List__item__value._const_tab_id = u'Value'
+    _ENBNeighbour_List__item_._cont = ASN1Dict([
+        (u'id', __ENBNeighbour_List__item__id),
+        (u'criticality', __ENBNeighbour_List__item__criticality),
+        (u'value', __ENBNeighbour_List__item__value),
+        ])
+    _ENBNeighbour_List__item_._ext = None
+    ENBNeighbour_List._cont = _ENBNeighbour_List__item_
+    ENBNeighbour_List._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=256)], ev=None, er=[])
+    
+    #-----< ENBNeighbour-ItemIEs >-----#
+    ENBNeighbour_ItemIEs = CLASS(name=u'ENBNeighbour-ItemIEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
+    _ENBNeighbour_ItemIEs_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'ENBNeighbour-Item')))
+    ENBNeighbour_ItemIEs._val = ASN1Set(rv=[dict([(u'id', 68), (u'criticality', u'ignore'), (u'Value', _ENBNeighbour_ItemIEs_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
+    
+    #-----< ENBNeighbour-Item >-----#
+    ENBNeighbour_Item = SEQ(name=u'ENBNeighbour-Item', mode=MODE_TYPE)
+    _ENBNeighbour_Item_glogal_eNB_ID = SEQ(name=u'glogal-eNB-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XwAP-IEs', 'Global-ENB-ID')))
+    _ENBNeighbour_Item_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XwAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    __ENBNeighbour_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-Containers', 'ProtocolExtensionField')))
+    ___ENBNeighbour_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION'), [u'id']))
+    ____ENBNeighbour_Item_iE_Extensions__item__id_tab = CLASS(name='_tab_XWAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION')))
+    ____ENBNeighbour_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ENBNeighbour_Item_iE_Extensions__item__id._const_tab = ____ENBNeighbour_Item_iE_Extensions__item__id_tab
+    ___ENBNeighbour_Item_iE_Extensions__item__id._const_tab_at = None
+    ___ENBNeighbour_Item_iE_Extensions__item__id._const_tab_id = u'id'
+    ___ENBNeighbour_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION'), [u'criticality']))
+    ___ENBNeighbour_Item_iE_Extensions__item__criticality._const_tab = ____ENBNeighbour_Item_iE_Extensions__item__id_tab
+    ___ENBNeighbour_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___ENBNeighbour_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___ENBNeighbour_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION'), [u'Extension']))
+    ___ENBNeighbour_Item_iE_Extensions__item__extensionValue._const_tab = ____ENBNeighbour_Item_iE_Extensions__item__id_tab
+    ___ENBNeighbour_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___ENBNeighbour_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
+    __ENBNeighbour_Item_iE_Extensions__item_._cont = ASN1Dict([
+        (u'id', ___ENBNeighbour_Item_iE_Extensions__item__id),
+        (u'criticality', ___ENBNeighbour_Item_iE_Extensions__item__criticality),
+        (u'extensionValue', ___ENBNeighbour_Item_iE_Extensions__item__extensionValue),
+        ])
+    __ENBNeighbour_Item_iE_Extensions__item_._ext = None
+    _ENBNeighbour_Item_iE_Extensions._cont = __ENBNeighbour_Item_iE_Extensions__item_
+    _ENBNeighbour_Item_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
+    ENBNeighbour_Item._cont = ASN1Dict([
+        (u'glogal-eNB-ID', _ENBNeighbour_Item_glogal_eNB_ID),
+        (u'iE-Extensions', _ENBNeighbour_Item_iE_Extensions),
+        ])
+    ENBNeighbour_Item._ext = []
+    
+    #-----< ENBNeighbour-Item-ExtIEs >-----#
+    ENBNeighbour_Item_ExtIEs = CLASS(name=u'ENBNeighbour-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION')))
+    ENBNeighbour_Item_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< E-RAB-ID >-----#
     E_RAB_ID = INT(name=u'E-RAB-ID', mode=MODE_TYPE)
@@ -1950,6 +2172,57 @@ class XwAP_IEs:
     #-----< HESSID >-----#
     HESSID = OCT_STR(name=u'HESSID', mode=MODE_TYPE)
     HESSID._const_sz = ASN1Set(rv=[6], rr=[], ev=None, er=[])
+    
+    #-----< IKE-Initiator-Identity >-----#
+    IKE_Initiator_Identity = OCT_STR(name=u'IKE-Initiator-Identity', mode=MODE_TYPE)
+    
+    #-----< LWA-WLAN-AC >-----#
+    LWA_WLAN_AC = ENUM(name=u'LWA-WLAN-AC', mode=MODE_TYPE)
+    LWA_WLAN_AC._cont = ASN1Dict([(u'ac-bk', 0), (u'ac-be', 1), (u'ac-vi', 2), (u'ac-vo', 3)])
+    LWA_WLAN_AC._ext = []
+    
+    #-----< LWIP-SeGWSecurityInfo >-----#
+    LWIP_SeGWSecurityInfo = SEQ(name=u'LWIP-SeGWSecurityInfo', mode=MODE_TYPE)
+    _LWIP_SeGWSecurityInfo_lWIP_PSK = BIT_STR(name=u'lWIP-PSK', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XwAP-IEs', 'LWIP-PSK')))
+    _LWIP_SeGWSecurityInfo_iKE_Initiator_Identity = OCT_STR(name=u'iKE-Initiator-Identity', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XwAP-IEs', 'IKE-Initiator-Identity')))
+    _LWIP_SeGWSecurityInfo_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XwAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    __LWIP_SeGWSecurityInfo_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-Containers', 'ProtocolExtensionField')))
+    ___LWIP_SeGWSecurityInfo_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION'), [u'id']))
+    ____LWIP_SeGWSecurityInfo_iE_Extensions__item__id_tab = CLASS(name='_tab_XWAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION')))
+    ____LWIP_SeGWSecurityInfo_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___LWIP_SeGWSecurityInfo_iE_Extensions__item__id._const_tab = ____LWIP_SeGWSecurityInfo_iE_Extensions__item__id_tab
+    ___LWIP_SeGWSecurityInfo_iE_Extensions__item__id._const_tab_at = None
+    ___LWIP_SeGWSecurityInfo_iE_Extensions__item__id._const_tab_id = u'id'
+    ___LWIP_SeGWSecurityInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION'), [u'criticality']))
+    ___LWIP_SeGWSecurityInfo_iE_Extensions__item__criticality._const_tab = ____LWIP_SeGWSecurityInfo_iE_Extensions__item__id_tab
+    ___LWIP_SeGWSecurityInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___LWIP_SeGWSecurityInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___LWIP_SeGWSecurityInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION'), [u'Extension']))
+    ___LWIP_SeGWSecurityInfo_iE_Extensions__item__extensionValue._const_tab = ____LWIP_SeGWSecurityInfo_iE_Extensions__item__id_tab
+    ___LWIP_SeGWSecurityInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___LWIP_SeGWSecurityInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
+    __LWIP_SeGWSecurityInfo_iE_Extensions__item_._cont = ASN1Dict([
+        (u'id', ___LWIP_SeGWSecurityInfo_iE_Extensions__item__id),
+        (u'criticality', ___LWIP_SeGWSecurityInfo_iE_Extensions__item__criticality),
+        (u'extensionValue', ___LWIP_SeGWSecurityInfo_iE_Extensions__item__extensionValue),
+        ])
+    __LWIP_SeGWSecurityInfo_iE_Extensions__item_._ext = None
+    _LWIP_SeGWSecurityInfo_iE_Extensions._cont = __LWIP_SeGWSecurityInfo_iE_Extensions__item_
+    _LWIP_SeGWSecurityInfo_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
+    LWIP_SeGWSecurityInfo._cont = ASN1Dict([
+        (u'lWIP-PSK', _LWIP_SeGWSecurityInfo_lWIP_PSK),
+        (u'iKE-Initiator-Identity', _LWIP_SeGWSecurityInfo_iKE_Initiator_Identity),
+        (u'iE-Extensions', _LWIP_SeGWSecurityInfo_iE_Extensions),
+        ])
+    LWIP_SeGWSecurityInfo._ext = []
+    
+    #-----< LWIP-SeGWSecurityInfo-ExtIEs >-----#
+    LWIP_SeGWSecurityInfo_ExtIEs = CLASS(name=u'LWIP-SeGWSecurityInfo-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION')))
+    LWIP_SeGWSecurityInfo_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    
+    #-----< LWIP-PSK >-----#
+    LWIP_PSK = BIT_STR(name=u'LWIP-PSK', mode=MODE_TYPE)
+    LWIP_PSK._const_sz = ASN1Set(rv=[256], rr=[], ev=None, er=[])
     
     #-----< Measurement-ID >-----#
     Measurement_ID = INT(name=u'Measurement-ID', mode=MODE_TYPE)
@@ -2207,6 +2480,16 @@ class XwAP_IEs:
     TypeOfError._cont = ASN1Dict([(u'not-understood', 0), (u'missing', 1)])
     TypeOfError._ext = []
     
+    #-----< TimeToWait >-----#
+    TimeToWait = ENUM(name=u'TimeToWait', mode=MODE_TYPE)
+    TimeToWait._cont = ASN1Dict([(u'v1s', 0), (u'v2s', 1), (u'v5s', 2), (u'v10s', 3), (u'v20s', 4), (u'v60s', 5)])
+    TimeToWait._ext = []
+    
+    #-----< UE-ContextKeptIndicator >-----#
+    UE_ContextKeptIndicator = ENUM(name=u'UE-ContextKeptIndicator', mode=MODE_TYPE)
+    UE_ContextKeptIndicator._cont = ASN1Dict([(u'true', 0)])
+    UE_ContextKeptIndicator._ext = []
+    
     #-----< UE-Identity >-----#
     UE_Identity = OCT_STR(name=u'UE-Identity', mode=MODE_TYPE)
     UE_Identity._const_sz = ASN1Set(rv=[6], rr=[], ev=None, er=[])
@@ -2265,8 +2548,8 @@ class XwAP_IEs:
     
     #-----< WLANband >-----#
     WLANband = ENUM(name=u'WLANband', mode=MODE_TYPE)
-    WLANband._cont = ASN1Dict([(u'band2dot4', 0), (u'band5', 1)])
-    WLANband._ext = []
+    WLANband._cont = ASN1Dict([(u'band2dot4', 0), (u'band5', 1), (u'band60', 2)])
+    WLANband._ext = [u'band60']
     
     #-----< WLANBandInformationList >-----#
     WLANBandInformationList = SEQ_OF(name=u'WLANBandInformationList', mode=MODE_TYPE)
@@ -2541,7 +2824,8 @@ class XwAP_IEs:
     __WLANInformation_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-Containers', 'ProtocolExtensionField')))
     ___WLANInformation_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION'), [u'id']))
     ____WLANInformation_iE_Extensions__item__id_tab = CLASS(name='_tab_XWAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION')))
-    ____WLANInformation_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____WLANInformation_iE_Extensions__item__id_tab_val_Extension_0 = ENUM(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'WLANUsage')))
+    ____WLANInformation_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 72), (u'criticality', u'reject'), (u'Extension', _____WLANInformation_iE_Extensions__item__id_tab_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___WLANInformation_iE_Extensions__item__id._const_tab = ____WLANInformation_iE_Extensions__item__id_tab
     ___WLANInformation_iE_Extensions__item__id._const_tab_at = None
     ___WLANInformation_iE_Extensions__item__id._const_tab_id = u'id'
@@ -2571,7 +2855,8 @@ class XwAP_IEs:
     
     #-----< WLANInformation-ExtIEs >-----#
     WLANInformation_ExtIEs = CLASS(name=u'WLANInformation-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION')))
-    WLANInformation_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    _WLANInformation_ExtIEs_val_Extension_0 = ENUM(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'WLANUsage')))
+    WLANInformation_ExtIEs._val = ASN1Set(rv=[dict([(u'id', 72), (u'criticality', u'reject'), (u'Extension', _WLANInformation_ExtIEs_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< WLANSecurityInfo >-----#
     WLANSecurityInfo = SEQ(name=u'WLANSecurityInfo', mode=MODE_TYPE)
@@ -2610,6 +2895,15 @@ class XwAP_IEs:
     #-----< WLANSecurityInfo-Item-ExtIEs >-----#
     WLANSecurityInfo_Item_ExtIEs = CLASS(name=u'WLANSecurityInfo-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION')))
     WLANSecurityInfo_Item_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    
+    #-----< WLANUsage >-----#
+    WLANUsage = ENUM(name=u'WLANUsage', mode=MODE_TYPE)
+    WLANUsage._cont = ASN1Dict([(u'lWAandLWIP', 0), (u'lWIPonly', 1)])
+    WLANUsage._ext = []
+    
+    #-----< WT-MAC-Address >-----#
+    WT_MAC_Address = OCT_STR(name=u'WT-MAC-Address', mode=MODE_TYPE)
+    WT_MAC_Address._const_sz = ASN1Set(rv=[6], rr=[], ev=None, er=[])
     
     #-----< WTID >-----#
     WTID = CHOICE(name=u'WTID', mode=MODE_TYPE)
@@ -2776,13 +3070,34 @@ class XwAP_IEs:
         _CriticalityDiagnostics_IE_Item_iE_Extensions,
         CriticalityDiagnostics_IE_Item,
         CriticalityDiagnostics_IE_Item_ExtIEs,
+        DRB_Identity,
         _ENB_ID_macroENB_ID,
         ___ENB_ID_otherENB_ID_id_tab,
         __ENB_ID_otherENB_ID_id,
         __ENB_ID_otherENB_ID_criticality,
         __ENB_ID_otherENB_ID_value,
         _ENB_ID_otherENB_ID,
+        _ENB_ID_short_macroENB_ID,
+        _ENB_ID_long_macroENB_ID,
         ENB_ID,
+        ___ENBNeighbour_List__item__id_tab,
+        ____ENBNeighbour_List__item__id_tab_val_Value_0,
+        __ENBNeighbour_List__item__id,
+        __ENBNeighbour_List__item__criticality,
+        __ENBNeighbour_List__item__value,
+        _ENBNeighbour_List__item_,
+        ENBNeighbour_List,
+        ENBNeighbour_ItemIEs,
+        _ENBNeighbour_ItemIEs_val_Value_0,
+        _ENBNeighbour_Item_glogal_eNB_ID,
+        ____ENBNeighbour_Item_iE_Extensions__item__id_tab,
+        ___ENBNeighbour_Item_iE_Extensions__item__id,
+        ___ENBNeighbour_Item_iE_Extensions__item__criticality,
+        ___ENBNeighbour_Item_iE_Extensions__item__extensionValue,
+        __ENBNeighbour_Item_iE_Extensions__item_,
+        _ENBNeighbour_Item_iE_Extensions,
+        ENBNeighbour_Item,
+        ENBNeighbour_Item_ExtIEs,
         E_RAB_ID,
         ___E_RAB_List__item__id_tab,
         ____E_RAB_List__item__id_tab_val_Value_0,
@@ -2846,6 +3161,19 @@ class XwAP_IEs:
         GTPtunnelEndpoint_ExtIEs,
         GTP_TEID,
         HESSID,
+        IKE_Initiator_Identity,
+        LWA_WLAN_AC,
+        _LWIP_SeGWSecurityInfo_lWIP_PSK,
+        _LWIP_SeGWSecurityInfo_iKE_Initiator_Identity,
+        ____LWIP_SeGWSecurityInfo_iE_Extensions__item__id_tab,
+        ___LWIP_SeGWSecurityInfo_iE_Extensions__item__id,
+        ___LWIP_SeGWSecurityInfo_iE_Extensions__item__criticality,
+        ___LWIP_SeGWSecurityInfo_iE_Extensions__item__extensionValue,
+        __LWIP_SeGWSecurityInfo_iE_Extensions__item_,
+        _LWIP_SeGWSecurityInfo_iE_Extensions,
+        LWIP_SeGWSecurityInfo,
+        LWIP_SeGWSecurityInfo_ExtIEs,
+        LWIP_PSK,
         Measurement_ID,
         ___MeasurementInitiationResult_List__item__id_tab,
         ____MeasurementInitiationResult_List__item__id_tab_val_Value_0,
@@ -2912,6 +3240,8 @@ class XwAP_IEs:
         StationCount,
         TransportLayerAddress,
         TypeOfError,
+        TimeToWait,
+        UE_ContextKeptIndicator,
         UE_Identity,
         UE_XwAP_ID,
         _WANMetrics_wAN_Backhaul_Rate_DL,
@@ -3002,6 +3332,7 @@ class XwAP_IEs:
         _WLANInformation_sSID,
         _WLANInformation_hESSID,
         ____WLANInformation_iE_Extensions__item__id_tab,
+        _____WLANInformation_iE_Extensions__item__id_tab_val_Extension_0,
         ___WLANInformation_iE_Extensions__item__id,
         ___WLANInformation_iE_Extensions__item__criticality,
         ___WLANInformation_iE_Extensions__item__extensionValue,
@@ -3009,6 +3340,7 @@ class XwAP_IEs:
         _WLANInformation_iE_Extensions,
         WLANInformation,
         WLANInformation_ExtIEs,
+        _WLANInformation_ExtIEs_val_Extension_0,
         _WLANSecurityInfo_wT_Security_Key,
         ____WLANSecurityInfo_iE_Extensions__item__id_tab,
         ___WLANSecurityInfo_iE_Extensions__item__id,
@@ -3018,6 +3350,8 @@ class XwAP_IEs:
         _WLANSecurityInfo_iE_Extensions,
         WLANSecurityInfo,
         WLANSecurityInfo_Item_ExtIEs,
+        WLANUsage,
+        WT_MAC_Address,
         _WTID_wTID_Type1,
         _WTID_wTID_Type2,
         WTID,
@@ -3145,6 +3479,24 @@ class XwAP_PDU_Contents:
         u'WTAssociationConfirmationIEs',
         u'PrivateMessage',
         u'PrivateMessage-IEs',
+        u'LWIPAdditionRequest',
+        u'LWIPAdditionRequestIEs',
+        u'LWIPAdditionRequestAcknowledge',
+        u'LWIPAdditionRequestAcknowledgeIEs',
+        u'LWIPAdditionRequestReject',
+        u'LWIPAdditionRequestRejectIEs',
+        u'LWIPModificationRequest',
+        u'LWIPModificationRequestIEs',
+        u'LWIPModificationRequestAcknowledge',
+        u'LWIPModificationRequestAcknowledgeIEs',
+        u'LWIPModificationRequestReject',
+        u'LWIPModificationRequestRejectIEs',
+        u'LWIPReleaseRequest',
+        u'LWIPReleaseRequest-IEs',
+        u'LWIPReleaseRequired',
+        u'LWIPReleaseRequiredIEs',
+        u'LWIPReleaseConfirm',
+        u'LWIPReleaseConfirmIEs',
         ]
     _type_ = [
         u'XwSetupRequest',
@@ -3203,6 +3555,15 @@ class XwAP_PDU_Contents:
         u'E-RABs-ToBeReleased-RelConfItem',
         u'WTAssociationConfirmation',
         u'PrivateMessage',
+        u'LWIPAdditionRequest',
+        u'LWIPAdditionRequestAcknowledge',
+        u'LWIPAdditionRequestReject',
+        u'LWIPModificationRequest',
+        u'LWIPModificationRequestAcknowledge',
+        u'LWIPModificationRequestReject',
+        u'LWIPReleaseRequest',
+        u'LWIPReleaseRequired',
+        u'LWIPReleaseConfirm',
         ]
     _set_ = [
         u'XwSetupRequestIEs',
@@ -3261,6 +3622,15 @@ class XwAP_PDU_Contents:
         u'E-RABs-ToBeReleased-RelConfItemExtIEs',
         u'WTAssociationConfirmationIEs',
         u'PrivateMessage-IEs',
+        u'LWIPAdditionRequestIEs',
+        u'LWIPAdditionRequestAcknowledgeIEs',
+        u'LWIPAdditionRequestRejectIEs',
+        u'LWIPModificationRequestIEs',
+        u'LWIPModificationRequestAcknowledgeIEs',
+        u'LWIPModificationRequestRejectIEs',
+        u'LWIPReleaseRequest-IEs',
+        u'LWIPReleaseRequiredIEs',
+        u'LWIPReleaseConfirmIEs',
         ]
     _val_ = [
         ]
@@ -3321,6 +3691,15 @@ class XwAP_PDU_Contents:
         u'E-RABs-ToBeReleased-RelConfItemExtIEs',
         u'WTAssociationConfirmationIEs',
         u'PrivateMessage-IEs',
+        u'LWIPAdditionRequestIEs',
+        u'LWIPAdditionRequestAcknowledgeIEs',
+        u'LWIPAdditionRequestRejectIEs',
+        u'LWIPModificationRequestIEs',
+        u'LWIPModificationRequestAcknowledgeIEs',
+        u'LWIPModificationRequestRejectIEs',
+        u'LWIPReleaseRequest-IEs',
+        u'LWIPReleaseRequiredIEs',
+        u'LWIPReleaseConfirmIEs',
         ]
     _param_ = [
         ]
@@ -3371,7 +3750,8 @@ class XwAP_PDU_Contents:
     _____XwSetupResponse_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'WTID')))
     _____XwSetupResponse_protocolIEs__item__id_tab_val_Value_1 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'WLANIdentifier-List')))
     _____XwSetupResponse_protocolIEs__item__id_tab_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'CriticalityDiagnostics')))
-    ____XwSetupResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 23), (u'criticality', u'reject'), (u'Value', _____XwSetupResponse_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 18), (u'criticality', u'reject'), (u'Value', _____XwSetupResponse_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _____XwSetupResponse_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    _____XwSetupResponse_protocolIEs__item__id_tab_val_Value_3 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'ENBNeighbour-List')))
+    ____XwSetupResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 23), (u'criticality', u'reject'), (u'Value', _____XwSetupResponse_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 18), (u'criticality', u'reject'), (u'Value', _____XwSetupResponse_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _____XwSetupResponse_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 67), (u'criticality', u'reject'), (u'Value', _____XwSetupResponse_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___XwSetupResponse_protocolIEs__item__id._const_tab = ____XwSetupResponse_protocolIEs__item__id_tab
     ___XwSetupResponse_protocolIEs__item__id._const_tab_at = None
     ___XwSetupResponse_protocolIEs__item__id._const_tab_id = u'id'
@@ -3401,7 +3781,8 @@ class XwAP_PDU_Contents:
     _XwSetupResponseIEs_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'WTID')))
     _XwSetupResponseIEs_val_Value_1 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'WLANIdentifier-List')))
     _XwSetupResponseIEs_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'CriticalityDiagnostics')))
-    XwSetupResponseIEs._val = ASN1Set(rv=[dict([(u'id', 23), (u'criticality', u'reject'), (u'Value', _XwSetupResponseIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 18), (u'criticality', u'reject'), (u'Value', _XwSetupResponseIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _XwSetupResponseIEs_val_Value_2), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    _XwSetupResponseIEs_val_Value_3 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'ENBNeighbour-List')))
+    XwSetupResponseIEs._val = ASN1Set(rv=[dict([(u'id', 23), (u'criticality', u'reject'), (u'Value', _XwSetupResponseIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 18), (u'criticality', u'reject'), (u'Value', _XwSetupResponseIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _XwSetupResponseIEs_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 67), (u'criticality', u'reject'), (u'Value', _XwSetupResponseIEs_val_Value_3), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< XwSetupFailure >-----#
     XwSetupFailure = SEQ(name=u'XwSetupFailure', mode=MODE_TYPE)
@@ -3411,7 +3792,8 @@ class XwAP_PDU_Contents:
     ____XwSetupFailure_protocolIEs__item__id_tab = CLASS(name='_tab_XWAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
     _____XwSetupFailure_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'Cause')))
     _____XwSetupFailure_protocolIEs__item__id_tab_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'CriticalityDiagnostics')))
-    ____XwSetupFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _____XwSetupFailure_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _____XwSetupFailure_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    _____XwSetupFailure_protocolIEs__item__id_tab_val_Value_2 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'TimeToWait')))
+    ____XwSetupFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _____XwSetupFailure_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _____XwSetupFailure_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')]), dict([(u'id', 63), (u'criticality', u'ignore'), (u'Value', _____XwSetupFailure_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___XwSetupFailure_protocolIEs__item__id._const_tab = ____XwSetupFailure_protocolIEs__item__id_tab
     ___XwSetupFailure_protocolIEs__item__id._const_tab_at = None
     ___XwSetupFailure_protocolIEs__item__id._const_tab_id = u'id'
@@ -3440,7 +3822,8 @@ class XwAP_PDU_Contents:
     XwSetupFailureIEs = CLASS(name=u'XwSetupFailureIEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
     _XwSetupFailureIEs_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'Cause')))
     _XwSetupFailureIEs_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'CriticalityDiagnostics')))
-    XwSetupFailureIEs._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _XwSetupFailureIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _XwSetupFailureIEs_val_Value_1), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    _XwSetupFailureIEs_val_Value_2 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'TimeToWait')))
+    XwSetupFailureIEs._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _XwSetupFailureIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _XwSetupFailureIEs_val_Value_1), (u'presence', u'optional')]), dict([(u'id', 63), (u'criticality', u'ignore'), (u'Value', _XwSetupFailureIEs_val_Value_2), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< WTConfigurationUpdate >-----#
     WTConfigurationUpdate = SEQ(name=u'WTConfigurationUpdate', mode=MODE_TYPE)
@@ -3452,7 +3835,8 @@ class XwAP_PDU_Contents:
     _____WTConfigurationUpdate_protocolIEs__item__id_tab_val_Value_1 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'WLANIdentifier-List')))
     _____WTConfigurationUpdate_protocolIEs__item__id_tab_val_Value_2 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'WLANIdentifiersToDelete-List')))
     _____WTConfigurationUpdate_protocolIEs__item__id_tab_val_Value_3 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'WLANIdentifiersToDeleteExtension-List')))
-    ____WTConfigurationUpdate_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 19), (u'criticality', u'reject'), (u'Value', _____WTConfigurationUpdate_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'optional')]), dict([(u'id', 22), (u'criticality', u'reject'), (u'Value', _____WTConfigurationUpdate_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')]), dict([(u'id', 21), (u'criticality', u'reject'), (u'Value', _____WTConfigurationUpdate_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 62), (u'criticality', u'reject'), (u'Value', _____WTConfigurationUpdate_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    _____WTConfigurationUpdate_protocolIEs__item__id_tab_val_Value_4 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'ENBNeighbour-List')))
+    ____WTConfigurationUpdate_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 19), (u'criticality', u'reject'), (u'Value', _____WTConfigurationUpdate_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'optional')]), dict([(u'id', 22), (u'criticality', u'reject'), (u'Value', _____WTConfigurationUpdate_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')]), dict([(u'id', 21), (u'criticality', u'reject'), (u'Value', _____WTConfigurationUpdate_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 62), (u'criticality', u'reject'), (u'Value', _____WTConfigurationUpdate_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 67), (u'criticality', u'reject'), (u'Value', _____WTConfigurationUpdate_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___WTConfigurationUpdate_protocolIEs__item__id._const_tab = ____WTConfigurationUpdate_protocolIEs__item__id_tab
     ___WTConfigurationUpdate_protocolIEs__item__id._const_tab_at = None
     ___WTConfigurationUpdate_protocolIEs__item__id._const_tab_id = u'id'
@@ -3483,7 +3867,8 @@ class XwAP_PDU_Contents:
     _WTConfigurationUpdateIEs_val_Value_1 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'WLANIdentifier-List')))
     _WTConfigurationUpdateIEs_val_Value_2 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'WLANIdentifiersToDelete-List')))
     _WTConfigurationUpdateIEs_val_Value_3 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'WLANIdentifiersToDeleteExtension-List')))
-    WTConfigurationUpdateIEs._val = ASN1Set(rv=[dict([(u'id', 19), (u'criticality', u'reject'), (u'Value', _WTConfigurationUpdateIEs_val_Value_0), (u'presence', u'optional')]), dict([(u'id', 22), (u'criticality', u'reject'), (u'Value', _WTConfigurationUpdateIEs_val_Value_1), (u'presence', u'optional')]), dict([(u'id', 21), (u'criticality', u'reject'), (u'Value', _WTConfigurationUpdateIEs_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 62), (u'criticality', u'reject'), (u'Value', _WTConfigurationUpdateIEs_val_Value_3), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    _WTConfigurationUpdateIEs_val_Value_4 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'ENBNeighbour-List')))
+    WTConfigurationUpdateIEs._val = ASN1Set(rv=[dict([(u'id', 19), (u'criticality', u'reject'), (u'Value', _WTConfigurationUpdateIEs_val_Value_0), (u'presence', u'optional')]), dict([(u'id', 22), (u'criticality', u'reject'), (u'Value', _WTConfigurationUpdateIEs_val_Value_1), (u'presence', u'optional')]), dict([(u'id', 21), (u'criticality', u'reject'), (u'Value', _WTConfigurationUpdateIEs_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 62), (u'criticality', u'reject'), (u'Value', _WTConfigurationUpdateIEs_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 67), (u'criticality', u'reject'), (u'Value', _WTConfigurationUpdateIEs_val_Value_4), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< WTConfigurationUpdateAcknowledge >-----#
     WTConfigurationUpdateAcknowledge = SEQ(name=u'WTConfigurationUpdateAcknowledge', mode=MODE_TYPE)
@@ -3530,7 +3915,8 @@ class XwAP_PDU_Contents:
     ____WTConfigurationUpdateFailure_protocolIEs__item__id_tab = CLASS(name='_tab_XWAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
     _____WTConfigurationUpdateFailure_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'Cause')))
     _____WTConfigurationUpdateFailure_protocolIEs__item__id_tab_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'CriticalityDiagnostics')))
-    ____WTConfigurationUpdateFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _____WTConfigurationUpdateFailure_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _____WTConfigurationUpdateFailure_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    _____WTConfigurationUpdateFailure_protocolIEs__item__id_tab_val_Value_2 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'TimeToWait')))
+    ____WTConfigurationUpdateFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _____WTConfigurationUpdateFailure_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _____WTConfigurationUpdateFailure_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')]), dict([(u'id', 63), (u'criticality', u'ignore'), (u'Value', _____WTConfigurationUpdateFailure_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___WTConfigurationUpdateFailure_protocolIEs__item__id._const_tab = ____WTConfigurationUpdateFailure_protocolIEs__item__id_tab
     ___WTConfigurationUpdateFailure_protocolIEs__item__id._const_tab_at = None
     ___WTConfigurationUpdateFailure_protocolIEs__item__id._const_tab_id = u'id'
@@ -3559,7 +3945,8 @@ class XwAP_PDU_Contents:
     WTConfigurationUpdateFailureIEs = CLASS(name=u'WTConfigurationUpdateFailureIEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
     _WTConfigurationUpdateFailureIEs_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'Cause')))
     _WTConfigurationUpdateFailureIEs_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'CriticalityDiagnostics')))
-    WTConfigurationUpdateFailureIEs._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _WTConfigurationUpdateFailureIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _WTConfigurationUpdateFailureIEs_val_Value_1), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    _WTConfigurationUpdateFailureIEs_val_Value_2 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'TimeToWait')))
+    WTConfigurationUpdateFailureIEs._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _WTConfigurationUpdateFailureIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _WTConfigurationUpdateFailureIEs_val_Value_1), (u'presence', u'optional')]), dict([(u'id', 63), (u'criticality', u'ignore'), (u'Value', _WTConfigurationUpdateFailureIEs_val_Value_2), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< WTStatusRequest >-----#
     WTStatusRequest = SEQ(name=u'WTStatusRequest', mode=MODE_TYPE)
@@ -3868,7 +4255,8 @@ class XwAP_PDU_Contents:
     _____WTAdditionRequest_protocolIEs__item__id_tab_val_Value_3 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'PLMN-Identity')))
     _____WTAdditionRequest_protocolIEs__item__id_tab_val_Value_4 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'E-RABs-ToBeAdded-List')))
     _____WTAdditionRequest_protocolIEs__item__id_tab_val_Value_5 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'MobilitySet')))
-    ____WTAdditionRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'reject'), (u'Value', _____WTAdditionRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 30), (u'criticality', u'reject'), (u'Value', _____WTAdditionRequest_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 31), (u'criticality', u'reject'), (u'Value', _____WTAdditionRequest_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 55), (u'criticality', u'ignore'), (u'Value', _____WTAdditionRequest_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 28), (u'criticality', u'reject'), (u'Value', _____WTAdditionRequest_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'mandatory')]), dict([(u'id', 54), (u'criticality', u'reject'), (u'Value', _____WTAdditionRequest_protocolIEs__item__id_tab_val_Value_5), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
+    _____WTAdditionRequest_protocolIEs__item__id_tab_val_Value_6 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    ____WTAdditionRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'reject'), (u'Value', _____WTAdditionRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 30), (u'criticality', u'reject'), (u'Value', _____WTAdditionRequest_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 31), (u'criticality', u'reject'), (u'Value', _____WTAdditionRequest_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 55), (u'criticality', u'ignore'), (u'Value', _____WTAdditionRequest_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 28), (u'criticality', u'reject'), (u'Value', _____WTAdditionRequest_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'mandatory')]), dict([(u'id', 54), (u'criticality', u'reject'), (u'Value', _____WTAdditionRequest_protocolIEs__item__id_tab_val_Value_5), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'reject'), (u'Value', _____WTAdditionRequest_protocolIEs__item__id_tab_val_Value_6), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___WTAdditionRequest_protocolIEs__item__id._const_tab = ____WTAdditionRequest_protocolIEs__item__id_tab
     ___WTAdditionRequest_protocolIEs__item__id._const_tab_at = None
     ___WTAdditionRequest_protocolIEs__item__id._const_tab_id = u'id'
@@ -3901,7 +4289,8 @@ class XwAP_PDU_Contents:
     _WTAdditionRequestIEs_val_Value_3 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'PLMN-Identity')))
     _WTAdditionRequestIEs_val_Value_4 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'E-RABs-ToBeAdded-List')))
     _WTAdditionRequestIEs_val_Value_5 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'MobilitySet')))
-    WTAdditionRequestIEs._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'reject'), (u'Value', _WTAdditionRequestIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 30), (u'criticality', u'reject'), (u'Value', _WTAdditionRequestIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 31), (u'criticality', u'reject'), (u'Value', _WTAdditionRequestIEs_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 55), (u'criticality', u'ignore'), (u'Value', _WTAdditionRequestIEs_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 28), (u'criticality', u'reject'), (u'Value', _WTAdditionRequestIEs_val_Value_4), (u'presence', u'mandatory')]), dict([(u'id', 54), (u'criticality', u'reject'), (u'Value', _WTAdditionRequestIEs_val_Value_5), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
+    _WTAdditionRequestIEs_val_Value_6 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    WTAdditionRequestIEs._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'reject'), (u'Value', _WTAdditionRequestIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 30), (u'criticality', u'reject'), (u'Value', _WTAdditionRequestIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 31), (u'criticality', u'reject'), (u'Value', _WTAdditionRequestIEs_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 55), (u'criticality', u'ignore'), (u'Value', _WTAdditionRequestIEs_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 28), (u'criticality', u'reject'), (u'Value', _WTAdditionRequestIEs_val_Value_4), (u'presence', u'mandatory')]), dict([(u'id', 54), (u'criticality', u'reject'), (u'Value', _WTAdditionRequestIEs_val_Value_5), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'reject'), (u'Value', _WTAdditionRequestIEs_val_Value_6), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< E-RABs-ToBeAdded-List >-----#
     E_RABs_ToBeAdded_List = SEQ_OF(name=u'E-RABs-ToBeAdded-List', mode=MODE_TYPE)
@@ -3944,7 +4333,8 @@ class XwAP_PDU_Contents:
     __E_RABs_ToBeAdded_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-Containers', 'ProtocolExtensionField')))
     ___E_RABs_ToBeAdded_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION'), [u'id']))
     ____E_RABs_ToBeAdded_Item_iE_Extensions__item__id_tab = CLASS(name='_tab_XWAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION')))
-    ____E_RABs_ToBeAdded_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____E_RABs_ToBeAdded_Item_iE_Extensions__item__id_tab_val_Extension_0 = INT(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'DRB-Identity')))
+    ____E_RABs_ToBeAdded_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 65), (u'criticality', u'reject'), (u'Extension', _____E_RABs_ToBeAdded_Item_iE_Extensions__item__id_tab_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___E_RABs_ToBeAdded_Item_iE_Extensions__item__id._const_tab = ____E_RABs_ToBeAdded_Item_iE_Extensions__item__id_tab
     ___E_RABs_ToBeAdded_Item_iE_Extensions__item__id._const_tab_at = None
     ___E_RABs_ToBeAdded_Item_iE_Extensions__item__id._const_tab_id = u'id'
@@ -3974,7 +4364,8 @@ class XwAP_PDU_Contents:
     
     #-----< E-RABs-ToBeAdded-ItemExtIEs >-----#
     E_RABs_ToBeAdded_ItemExtIEs = CLASS(name=u'E-RABs-ToBeAdded-ItemExtIEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION')))
-    E_RABs_ToBeAdded_ItemExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    _E_RABs_ToBeAdded_ItemExtIEs_val_Extension_0 = INT(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'DRB-Identity')))
+    E_RABs_ToBeAdded_ItemExtIEs._val = ASN1Set(rv=[dict([(u'id', 65), (u'criticality', u'reject'), (u'Extension', _E_RABs_ToBeAdded_ItemExtIEs_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< WTAdditionRequestAcknowledge >-----#
     WTAdditionRequestAcknowledge = SEQ(name=u'WTAdditionRequestAcknowledge', mode=MODE_TYPE)
@@ -3987,7 +4378,8 @@ class XwAP_PDU_Contents:
     _____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_2 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'E-RABs-Admitted-ToBeAdded-List')))
     _____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_3 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'E-RAB-List')))
     _____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_4 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'CriticalityDiagnostics')))
-    ____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'ignore'), (u'Value', _____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'ignore'), (u'Value', _____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 32), (u'criticality', u'ignore'), (u'Value', _____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 34), (u'criticality', u'ignore'), (u'Value', _____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    _____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_5 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'WT-MAC-Address')))
+    ____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'ignore'), (u'Value', _____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'ignore'), (u'Value', _____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 32), (u'criticality', u'ignore'), (u'Value', _____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 34), (u'criticality', u'ignore'), (u'Value', _____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 73), (u'criticality', u'ignore'), (u'Value', _____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_5), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___WTAdditionRequestAcknowledge_protocolIEs__item__id._const_tab = ____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab
     ___WTAdditionRequestAcknowledge_protocolIEs__item__id._const_tab_at = None
     ___WTAdditionRequestAcknowledge_protocolIEs__item__id._const_tab_id = u'id'
@@ -4019,7 +4411,8 @@ class XwAP_PDU_Contents:
     _WTAdditionRequestAcknowledgeIEs_val_Value_2 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'E-RABs-Admitted-ToBeAdded-List')))
     _WTAdditionRequestAcknowledgeIEs_val_Value_3 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'E-RAB-List')))
     _WTAdditionRequestAcknowledgeIEs_val_Value_4 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'CriticalityDiagnostics')))
-    WTAdditionRequestAcknowledgeIEs._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'ignore'), (u'Value', _WTAdditionRequestAcknowledgeIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'ignore'), (u'Value', _WTAdditionRequestAcknowledgeIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 32), (u'criticality', u'ignore'), (u'Value', _WTAdditionRequestAcknowledgeIEs_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 34), (u'criticality', u'ignore'), (u'Value', _WTAdditionRequestAcknowledgeIEs_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _WTAdditionRequestAcknowledgeIEs_val_Value_4), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    _WTAdditionRequestAcknowledgeIEs_val_Value_5 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'WT-MAC-Address')))
+    WTAdditionRequestAcknowledgeIEs._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'ignore'), (u'Value', _WTAdditionRequestAcknowledgeIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'ignore'), (u'Value', _WTAdditionRequestAcknowledgeIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 32), (u'criticality', u'ignore'), (u'Value', _WTAdditionRequestAcknowledgeIEs_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 34), (u'criticality', u'ignore'), (u'Value', _WTAdditionRequestAcknowledgeIEs_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _WTAdditionRequestAcknowledgeIEs_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 73), (u'criticality', u'ignore'), (u'Value', _WTAdditionRequestAcknowledgeIEs_val_Value_5), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< E-RABs-Admitted-ToBeAdded-List >-----#
     E_RABs_Admitted_ToBeAdded_List = SEQ_OF(name=u'E-RABs-Admitted-ToBeAdded-List', mode=MODE_TYPE)
@@ -4061,7 +4454,8 @@ class XwAP_PDU_Contents:
     __E_RABs_Admitted_ToBeAdded_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-Containers', 'ProtocolExtensionField')))
     ___E_RABs_Admitted_ToBeAdded_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION'), [u'id']))
     ____E_RABs_Admitted_ToBeAdded_Item_iE_Extensions__item__id_tab = CLASS(name='_tab_XWAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION')))
-    ____E_RABs_Admitted_ToBeAdded_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____E_RABs_Admitted_ToBeAdded_Item_iE_Extensions__item__id_tab_val_Extension_0 = ENUM(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'LWA-WLAN-AC')))
+    ____E_RABs_Admitted_ToBeAdded_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 66), (u'criticality', u'ignore'), (u'Extension', _____E_RABs_Admitted_ToBeAdded_Item_iE_Extensions__item__id_tab_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___E_RABs_Admitted_ToBeAdded_Item_iE_Extensions__item__id._const_tab = ____E_RABs_Admitted_ToBeAdded_Item_iE_Extensions__item__id_tab
     ___E_RABs_Admitted_ToBeAdded_Item_iE_Extensions__item__id._const_tab_at = None
     ___E_RABs_Admitted_ToBeAdded_Item_iE_Extensions__item__id._const_tab_id = u'id'
@@ -4090,7 +4484,8 @@ class XwAP_PDU_Contents:
     
     #-----< E-RABs-Admitted-ToBeAdded-ItemExtIEs >-----#
     E_RABs_Admitted_ToBeAdded_ItemExtIEs = CLASS(name=u'E-RABs-Admitted-ToBeAdded-ItemExtIEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION')))
-    E_RABs_Admitted_ToBeAdded_ItemExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    _E_RABs_Admitted_ToBeAdded_ItemExtIEs_val_Extension_0 = ENUM(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'LWA-WLAN-AC')))
+    E_RABs_Admitted_ToBeAdded_ItemExtIEs._val = ASN1Set(rv=[dict([(u'id', 66), (u'criticality', u'ignore'), (u'Extension', _E_RABs_Admitted_ToBeAdded_ItemExtIEs_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< WTAdditionRequestReject >-----#
     WTAdditionRequestReject = SEQ(name=u'WTAdditionRequestReject', mode=MODE_TYPE)
@@ -4264,7 +4659,8 @@ class XwAP_PDU_Contents:
     __E_RABs_ToBeAdded_ModReqItem_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-Containers', 'ProtocolExtensionField')))
     ___E_RABs_ToBeAdded_ModReqItem_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION'), [u'id']))
     ____E_RABs_ToBeAdded_ModReqItem_iE_Extensions__item__id_tab = CLASS(name='_tab_XWAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION')))
-    ____E_RABs_ToBeAdded_ModReqItem_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____E_RABs_ToBeAdded_ModReqItem_iE_Extensions__item__id_tab_val_Extension_0 = INT(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'DRB-Identity')))
+    ____E_RABs_ToBeAdded_ModReqItem_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 65), (u'criticality', u'reject'), (u'Extension', _____E_RABs_ToBeAdded_ModReqItem_iE_Extensions__item__id_tab_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___E_RABs_ToBeAdded_ModReqItem_iE_Extensions__item__id._const_tab = ____E_RABs_ToBeAdded_ModReqItem_iE_Extensions__item__id_tab
     ___E_RABs_ToBeAdded_ModReqItem_iE_Extensions__item__id._const_tab_at = None
     ___E_RABs_ToBeAdded_ModReqItem_iE_Extensions__item__id._const_tab_id = u'id'
@@ -4294,7 +4690,8 @@ class XwAP_PDU_Contents:
     
     #-----< E-RABs-ToBeAdded-ModReqItemExtIEs >-----#
     E_RABs_ToBeAdded_ModReqItemExtIEs = CLASS(name=u'E-RABs-ToBeAdded-ModReqItemExtIEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION')))
-    E_RABs_ToBeAdded_ModReqItemExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    _E_RABs_ToBeAdded_ModReqItemExtIEs_val_Extension_0 = INT(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'DRB-Identity')))
+    E_RABs_ToBeAdded_ModReqItemExtIEs._val = ASN1Set(rv=[dict([(u'id', 65), (u'criticality', u'reject'), (u'Extension', _E_RABs_ToBeAdded_ModReqItemExtIEs_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< E-RABs-ToBeModified-List-ModReq >-----#
     E_RABs_ToBeModified_List_ModReq = SEQ_OF(name=u'E-RABs-ToBeModified-List-ModReq', mode=MODE_TYPE)
@@ -4529,7 +4926,8 @@ class XwAP_PDU_Contents:
     __E_RABs_Admitted_ToBeAdded_ModAckItem_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-Containers', 'ProtocolExtensionField')))
     ___E_RABs_Admitted_ToBeAdded_ModAckItem_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION'), [u'id']))
     ____E_RABs_Admitted_ToBeAdded_ModAckItem_iE_Extensions__item__id_tab = CLASS(name='_tab_XWAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION')))
-    ____E_RABs_Admitted_ToBeAdded_ModAckItem_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____E_RABs_Admitted_ToBeAdded_ModAckItem_iE_Extensions__item__id_tab_val_Extension_0 = ENUM(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'LWA-WLAN-AC')))
+    ____E_RABs_Admitted_ToBeAdded_ModAckItem_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 66), (u'criticality', u'ignore'), (u'Extension', _____E_RABs_Admitted_ToBeAdded_ModAckItem_iE_Extensions__item__id_tab_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___E_RABs_Admitted_ToBeAdded_ModAckItem_iE_Extensions__item__id._const_tab = ____E_RABs_Admitted_ToBeAdded_ModAckItem_iE_Extensions__item__id_tab
     ___E_RABs_Admitted_ToBeAdded_ModAckItem_iE_Extensions__item__id._const_tab_at = None
     ___E_RABs_Admitted_ToBeAdded_ModAckItem_iE_Extensions__item__id._const_tab_id = u'id'
@@ -4558,7 +4956,8 @@ class XwAP_PDU_Contents:
     
     #-----< E-RABs-Admitted-ToBeAdded-ModAckItemExtIEs >-----#
     E_RABs_Admitted_ToBeAdded_ModAckItemExtIEs = CLASS(name=u'E-RABs-Admitted-ToBeAdded-ModAckItemExtIEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION')))
-    E_RABs_Admitted_ToBeAdded_ModAckItemExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    _E_RABs_Admitted_ToBeAdded_ModAckItemExtIEs_val_Extension_0 = ENUM(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'LWA-WLAN-AC')))
+    E_RABs_Admitted_ToBeAdded_ModAckItemExtIEs._val = ASN1Set(rv=[dict([(u'id', 66), (u'criticality', u'ignore'), (u'Extension', _E_RABs_Admitted_ToBeAdded_ModAckItemExtIEs_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< E-RABs-Admitted-ToBeModified-ModAckList >-----#
     E_RABs_Admitted_ToBeModified_ModAckList = SEQ_OF(name=u'E-RABs-Admitted-ToBeModified-ModAckList', mode=MODE_TYPE)
@@ -4600,7 +4999,8 @@ class XwAP_PDU_Contents:
     __E_RABs_Admitted_ToBeModified_ModAckItem_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-Containers', 'ProtocolExtensionField')))
     ___E_RABs_Admitted_ToBeModified_ModAckItem_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION'), [u'id']))
     ____E_RABs_Admitted_ToBeModified_ModAckItem_iE_Extensions__item__id_tab = CLASS(name='_tab_XWAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION')))
-    ____E_RABs_Admitted_ToBeModified_ModAckItem_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____E_RABs_Admitted_ToBeModified_ModAckItem_iE_Extensions__item__id_tab_val_Extension_0 = ENUM(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'LWA-WLAN-AC')))
+    ____E_RABs_Admitted_ToBeModified_ModAckItem_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 66), (u'criticality', u'ignore'), (u'Extension', _____E_RABs_Admitted_ToBeModified_ModAckItem_iE_Extensions__item__id_tab_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___E_RABs_Admitted_ToBeModified_ModAckItem_iE_Extensions__item__id._const_tab = ____E_RABs_Admitted_ToBeModified_ModAckItem_iE_Extensions__item__id_tab
     ___E_RABs_Admitted_ToBeModified_ModAckItem_iE_Extensions__item__id._const_tab_at = None
     ___E_RABs_Admitted_ToBeModified_ModAckItem_iE_Extensions__item__id._const_tab_id = u'id'
@@ -4629,7 +5029,8 @@ class XwAP_PDU_Contents:
     
     #-----< E-RABs-Admitted-ToBeModified-ModAckItemExtIEs >-----#
     E_RABs_Admitted_ToBeModified_ModAckItemExtIEs = CLASS(name=u'E-RABs-Admitted-ToBeModified-ModAckItemExtIEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION')))
-    E_RABs_Admitted_ToBeModified_ModAckItemExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    _E_RABs_Admitted_ToBeModified_ModAckItemExtIEs_val_Extension_0 = ENUM(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'LWA-WLAN-AC')))
+    E_RABs_Admitted_ToBeModified_ModAckItemExtIEs._val = ASN1Set(rv=[dict([(u'id', 66), (u'criticality', u'ignore'), (u'Extension', _E_RABs_Admitted_ToBeModified_ModAckItemExtIEs_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< E-RABs-Admitted-ToBeReleased-ModAckList >-----#
     E_RABs_Admitted_ToBeReleased_ModAckList = SEQ_OF(name=u'E-RABs-Admitted-ToBeReleased-ModAckList', mode=MODE_TYPE)
@@ -4899,7 +5300,8 @@ class XwAP_PDU_Contents:
     __E_RABs_ToBeModified_ModReqdItem_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-Containers', 'ProtocolExtensionField')))
     ___E_RABs_ToBeModified_ModReqdItem_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION'), [u'id']))
     ____E_RABs_ToBeModified_ModReqdItem_iE_Extensions__item__id_tab = CLASS(name='_tab_XWAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION')))
-    ____E_RABs_ToBeModified_ModReqdItem_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____E_RABs_ToBeModified_ModReqdItem_iE_Extensions__item__id_tab_val_Extension_0 = ENUM(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'LWA-WLAN-AC')))
+    ____E_RABs_ToBeModified_ModReqdItem_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 66), (u'criticality', u'ignore'), (u'Extension', _____E_RABs_ToBeModified_ModReqdItem_iE_Extensions__item__id_tab_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___E_RABs_ToBeModified_ModReqdItem_iE_Extensions__item__id._const_tab = ____E_RABs_ToBeModified_ModReqdItem_iE_Extensions__item__id_tab
     ___E_RABs_ToBeModified_ModReqdItem_iE_Extensions__item__id._const_tab_at = None
     ___E_RABs_ToBeModified_ModReqdItem_iE_Extensions__item__id._const_tab_id = u'id'
@@ -4928,7 +5330,8 @@ class XwAP_PDU_Contents:
     
     #-----< E-RABs-ToBeModified-ModReqdItemExtIEs >-----#
     E_RABs_ToBeModified_ModReqdItemExtIEs = CLASS(name=u'E-RABs-ToBeModified-ModReqdItemExtIEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-EXTENSION')))
-    E_RABs_ToBeModified_ModReqdItemExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    _E_RABs_ToBeModified_ModReqdItemExtIEs_val_Extension_0 = ENUM(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'LWA-WLAN-AC')))
+    E_RABs_ToBeModified_ModReqdItemExtIEs._val = ASN1Set(rv=[dict([(u'id', 66), (u'criticality', u'ignore'), (u'Extension', _E_RABs_ToBeModified_ModReqdItemExtIEs_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< WTModificationConfirm >-----#
     WTModificationConfirm = SEQ(name=u'WTModificationConfirm', mode=MODE_TYPE)
@@ -5168,7 +5571,8 @@ class XwAP_PDU_Contents:
     _____WTReleaseRequest_protocolIEs__item__id_tab_val_Value_1 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
     _____WTReleaseRequest_protocolIEs__item__id_tab_val_Value_2 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'Cause')))
     _____WTReleaseRequest_protocolIEs__item__id_tab_val_Value_3 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'E-RABs-ToBeReleased-List-RelReq')))
-    ____WTReleaseRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'reject'), (u'Value', _____WTReleaseRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'reject'), (u'Value', _____WTReleaseRequest_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _____WTReleaseRequest_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 48), (u'criticality', u'ignore'), (u'Value', _____WTReleaseRequest_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    _____WTReleaseRequest_protocolIEs__item__id_tab_val_Value_4 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-ContextKeptIndicator')))
+    ____WTReleaseRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'reject'), (u'Value', _____WTReleaseRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'reject'), (u'Value', _____WTReleaseRequest_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _____WTReleaseRequest_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 48), (u'criticality', u'ignore'), (u'Value', _____WTReleaseRequest_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 64), (u'criticality', u'ignore'), (u'Value', _____WTReleaseRequest_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___WTReleaseRequest_protocolIEs__item__id._const_tab = ____WTReleaseRequest_protocolIEs__item__id_tab
     ___WTReleaseRequest_protocolIEs__item__id._const_tab_at = None
     ___WTReleaseRequest_protocolIEs__item__id._const_tab_id = u'id'
@@ -5199,7 +5603,8 @@ class XwAP_PDU_Contents:
     _WTReleaseRequest_IEs_val_Value_1 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
     _WTReleaseRequest_IEs_val_Value_2 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'Cause')))
     _WTReleaseRequest_IEs_val_Value_3 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'E-RABs-ToBeReleased-List-RelReq')))
-    WTReleaseRequest_IEs._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'reject'), (u'Value', _WTReleaseRequest_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'reject'), (u'Value', _WTReleaseRequest_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _WTReleaseRequest_IEs_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 48), (u'criticality', u'ignore'), (u'Value', _WTReleaseRequest_IEs_val_Value_3), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    _WTReleaseRequest_IEs_val_Value_4 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-ContextKeptIndicator')))
+    WTReleaseRequest_IEs._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'reject'), (u'Value', _WTReleaseRequest_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'reject'), (u'Value', _WTReleaseRequest_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _WTReleaseRequest_IEs_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 48), (u'criticality', u'ignore'), (u'Value', _WTReleaseRequest_IEs_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 64), (u'criticality', u'ignore'), (u'Value', _WTReleaseRequest_IEs_val_Value_4), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< E-RABs-ToBeReleased-List-RelReq >-----#
     E_RABs_ToBeReleased_List_RelReq = SEQ_OF(name=u'E-RABs-ToBeReleased-List-RelReq', mode=MODE_TYPE)
@@ -5501,6 +5906,393 @@ class XwAP_PDU_Contents:
     PrivateMessage_IEs = CLASS(name=u'PrivateMessage-IEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PRIVATE-IES')))
     PrivateMessage_IEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
+    #-----< LWIPAdditionRequest >-----#
+    LWIPAdditionRequest = SEQ(name=u'LWIPAdditionRequest', mode=MODE_TYPE)
+    _LWIPAdditionRequest_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XwAP-Containers', 'ProtocolIE-Container')))
+    __LWIPAdditionRequest_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-Containers', 'ProtocolIE-Field')))
+    ___LWIPAdditionRequest_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'id']))
+    ____LWIPAdditionRequest_protocolIEs__item__id_tab = CLASS(name='_tab_XWAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
+    _____LWIPAdditionRequest_protocolIEs__item__id_tab_val_Value_0 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _____LWIPAdditionRequest_protocolIEs__item__id_tab_val_Value_1 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-Identity')))
+    _____LWIPAdditionRequest_protocolIEs__item__id_tab_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'LWIP-SeGWSecurityInfo')))
+    _____LWIPAdditionRequest_protocolIEs__item__id_tab_val_Value_3 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'PLMN-Identity')))
+    _____LWIPAdditionRequest_protocolIEs__item__id_tab_val_Value_4 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'GTPtunnelEndpoint')))
+    _____LWIPAdditionRequest_protocolIEs__item__id_tab_val_Value_5 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'MobilitySet')))
+    ____LWIPAdditionRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'reject'), (u'Value', _____LWIPAdditionRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 30), (u'criticality', u'reject'), (u'Value', _____LWIPAdditionRequest_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 69), (u'criticality', u'reject'), (u'Value', _____LWIPAdditionRequest_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 55), (u'criticality', u'ignore'), (u'Value', _____LWIPAdditionRequest_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 70), (u'criticality', u'reject'), (u'Value', _____LWIPAdditionRequest_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 54), (u'criticality', u'reject'), (u'Value', _____LWIPAdditionRequest_protocolIEs__item__id_tab_val_Value_5), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    ___LWIPAdditionRequest_protocolIEs__item__id._const_tab = ____LWIPAdditionRequest_protocolIEs__item__id_tab
+    ___LWIPAdditionRequest_protocolIEs__item__id._const_tab_at = None
+    ___LWIPAdditionRequest_protocolIEs__item__id._const_tab_id = u'id'
+    ___LWIPAdditionRequest_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'criticality']))
+    ___LWIPAdditionRequest_protocolIEs__item__criticality._const_tab = ____LWIPAdditionRequest_protocolIEs__item__id_tab
+    ___LWIPAdditionRequest_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___LWIPAdditionRequest_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___LWIPAdditionRequest_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'Value']))
+    ___LWIPAdditionRequest_protocolIEs__item__value._const_tab = ____LWIPAdditionRequest_protocolIEs__item__id_tab
+    ___LWIPAdditionRequest_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___LWIPAdditionRequest_protocolIEs__item__value._const_tab_id = u'Value'
+    __LWIPAdditionRequest_protocolIEs__item_._cont = ASN1Dict([
+        (u'id', ___LWIPAdditionRequest_protocolIEs__item__id),
+        (u'criticality', ___LWIPAdditionRequest_protocolIEs__item__criticality),
+        (u'value', ___LWIPAdditionRequest_protocolIEs__item__value),
+        ])
+    __LWIPAdditionRequest_protocolIEs__item_._ext = None
+    _LWIPAdditionRequest_protocolIEs._cont = __LWIPAdditionRequest_protocolIEs__item_
+    _LWIPAdditionRequest_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
+    LWIPAdditionRequest._cont = ASN1Dict([
+        (u'protocolIEs', _LWIPAdditionRequest_protocolIEs),
+        ])
+    LWIPAdditionRequest._ext = []
+    
+    #-----< LWIPAdditionRequestIEs >-----#
+    LWIPAdditionRequestIEs = CLASS(name=u'LWIPAdditionRequestIEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
+    _LWIPAdditionRequestIEs_val_Value_0 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _LWIPAdditionRequestIEs_val_Value_1 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-Identity')))
+    _LWIPAdditionRequestIEs_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'LWIP-SeGWSecurityInfo')))
+    _LWIPAdditionRequestIEs_val_Value_3 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'PLMN-Identity')))
+    _LWIPAdditionRequestIEs_val_Value_4 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'GTPtunnelEndpoint')))
+    _LWIPAdditionRequestIEs_val_Value_5 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'MobilitySet')))
+    LWIPAdditionRequestIEs._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'reject'), (u'Value', _LWIPAdditionRequestIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 30), (u'criticality', u'reject'), (u'Value', _LWIPAdditionRequestIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 69), (u'criticality', u'reject'), (u'Value', _LWIPAdditionRequestIEs_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 55), (u'criticality', u'ignore'), (u'Value', _LWIPAdditionRequestIEs_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 70), (u'criticality', u'reject'), (u'Value', _LWIPAdditionRequestIEs_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 54), (u'criticality', u'reject'), (u'Value', _LWIPAdditionRequestIEs_val_Value_5), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    
+    #-----< LWIPAdditionRequestAcknowledge >-----#
+    LWIPAdditionRequestAcknowledge = SEQ(name=u'LWIPAdditionRequestAcknowledge', mode=MODE_TYPE)
+    _LWIPAdditionRequestAcknowledge_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XwAP-Containers', 'ProtocolIE-Container')))
+    __LWIPAdditionRequestAcknowledge_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-Containers', 'ProtocolIE-Field')))
+    ___LWIPAdditionRequestAcknowledge_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'id']))
+    ____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab = CLASS(name='_tab_XWAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
+    _____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_0 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_1 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'GTPtunnelEndpoint')))
+    _____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_3 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'E-RABs-Admitted-ToBeAdded-List')))
+    _____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_4 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'E-RAB-List')))
+    _____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_5 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'CriticalityDiagnostics')))
+    ____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'ignore'), (u'Value', _____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'ignore'), (u'Value', _____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 71), (u'criticality', u'reject'), (u'Value', _____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 32), (u'criticality', u'ignore'), (u'Value', _____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 34), (u'criticality', u'ignore'), (u'Value', _____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_5), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    ___LWIPAdditionRequestAcknowledge_protocolIEs__item__id._const_tab = ____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab
+    ___LWIPAdditionRequestAcknowledge_protocolIEs__item__id._const_tab_at = None
+    ___LWIPAdditionRequestAcknowledge_protocolIEs__item__id._const_tab_id = u'id'
+    ___LWIPAdditionRequestAcknowledge_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'criticality']))
+    ___LWIPAdditionRequestAcknowledge_protocolIEs__item__criticality._const_tab = ____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab
+    ___LWIPAdditionRequestAcknowledge_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___LWIPAdditionRequestAcknowledge_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___LWIPAdditionRequestAcknowledge_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'Value']))
+    ___LWIPAdditionRequestAcknowledge_protocolIEs__item__value._const_tab = ____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab
+    ___LWIPAdditionRequestAcknowledge_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___LWIPAdditionRequestAcknowledge_protocolIEs__item__value._const_tab_id = u'Value'
+    __LWIPAdditionRequestAcknowledge_protocolIEs__item_._cont = ASN1Dict([
+        (u'id', ___LWIPAdditionRequestAcknowledge_protocolIEs__item__id),
+        (u'criticality', ___LWIPAdditionRequestAcknowledge_protocolIEs__item__criticality),
+        (u'value', ___LWIPAdditionRequestAcknowledge_protocolIEs__item__value),
+        ])
+    __LWIPAdditionRequestAcknowledge_protocolIEs__item_._ext = None
+    _LWIPAdditionRequestAcknowledge_protocolIEs._cont = __LWIPAdditionRequestAcknowledge_protocolIEs__item_
+    _LWIPAdditionRequestAcknowledge_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
+    LWIPAdditionRequestAcknowledge._cont = ASN1Dict([
+        (u'protocolIEs', _LWIPAdditionRequestAcknowledge_protocolIEs),
+        ])
+    LWIPAdditionRequestAcknowledge._ext = []
+    
+    #-----< LWIPAdditionRequestAcknowledgeIEs >-----#
+    LWIPAdditionRequestAcknowledgeIEs = CLASS(name=u'LWIPAdditionRequestAcknowledgeIEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
+    _LWIPAdditionRequestAcknowledgeIEs_val_Value_0 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _LWIPAdditionRequestAcknowledgeIEs_val_Value_1 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _LWIPAdditionRequestAcknowledgeIEs_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'GTPtunnelEndpoint')))
+    _LWIPAdditionRequestAcknowledgeIEs_val_Value_3 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'E-RABs-Admitted-ToBeAdded-List')))
+    _LWIPAdditionRequestAcknowledgeIEs_val_Value_4 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'E-RAB-List')))
+    _LWIPAdditionRequestAcknowledgeIEs_val_Value_5 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'CriticalityDiagnostics')))
+    LWIPAdditionRequestAcknowledgeIEs._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'ignore'), (u'Value', _LWIPAdditionRequestAcknowledgeIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'ignore'), (u'Value', _LWIPAdditionRequestAcknowledgeIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 71), (u'criticality', u'reject'), (u'Value', _LWIPAdditionRequestAcknowledgeIEs_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 32), (u'criticality', u'ignore'), (u'Value', _LWIPAdditionRequestAcknowledgeIEs_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 34), (u'criticality', u'ignore'), (u'Value', _LWIPAdditionRequestAcknowledgeIEs_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _LWIPAdditionRequestAcknowledgeIEs_val_Value_5), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    
+    #-----< LWIPAdditionRequestReject >-----#
+    LWIPAdditionRequestReject = SEQ(name=u'LWIPAdditionRequestReject', mode=MODE_TYPE)
+    _LWIPAdditionRequestReject_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XwAP-Containers', 'ProtocolIE-Container')))
+    __LWIPAdditionRequestReject_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-Containers', 'ProtocolIE-Field')))
+    ___LWIPAdditionRequestReject_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'id']))
+    ____LWIPAdditionRequestReject_protocolIEs__item__id_tab = CLASS(name='_tab_XWAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
+    _____LWIPAdditionRequestReject_protocolIEs__item__id_tab_val_Value_0 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _____LWIPAdditionRequestReject_protocolIEs__item__id_tab_val_Value_1 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'Cause')))
+    _____LWIPAdditionRequestReject_protocolIEs__item__id_tab_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'CriticalityDiagnostics')))
+    ____LWIPAdditionRequestReject_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'ignore'), (u'Value', _____LWIPAdditionRequestReject_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _____LWIPAdditionRequestReject_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _____LWIPAdditionRequestReject_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    ___LWIPAdditionRequestReject_protocolIEs__item__id._const_tab = ____LWIPAdditionRequestReject_protocolIEs__item__id_tab
+    ___LWIPAdditionRequestReject_protocolIEs__item__id._const_tab_at = None
+    ___LWIPAdditionRequestReject_protocolIEs__item__id._const_tab_id = u'id'
+    ___LWIPAdditionRequestReject_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'criticality']))
+    ___LWIPAdditionRequestReject_protocolIEs__item__criticality._const_tab = ____LWIPAdditionRequestReject_protocolIEs__item__id_tab
+    ___LWIPAdditionRequestReject_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___LWIPAdditionRequestReject_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___LWIPAdditionRequestReject_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'Value']))
+    ___LWIPAdditionRequestReject_protocolIEs__item__value._const_tab = ____LWIPAdditionRequestReject_protocolIEs__item__id_tab
+    ___LWIPAdditionRequestReject_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___LWIPAdditionRequestReject_protocolIEs__item__value._const_tab_id = u'Value'
+    __LWIPAdditionRequestReject_protocolIEs__item_._cont = ASN1Dict([
+        (u'id', ___LWIPAdditionRequestReject_protocolIEs__item__id),
+        (u'criticality', ___LWIPAdditionRequestReject_protocolIEs__item__criticality),
+        (u'value', ___LWIPAdditionRequestReject_protocolIEs__item__value),
+        ])
+    __LWIPAdditionRequestReject_protocolIEs__item_._ext = None
+    _LWIPAdditionRequestReject_protocolIEs._cont = __LWIPAdditionRequestReject_protocolIEs__item_
+    _LWIPAdditionRequestReject_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
+    LWIPAdditionRequestReject._cont = ASN1Dict([
+        (u'protocolIEs', _LWIPAdditionRequestReject_protocolIEs),
+        ])
+    LWIPAdditionRequestReject._ext = []
+    
+    #-----< LWIPAdditionRequestRejectIEs >-----#
+    LWIPAdditionRequestRejectIEs = CLASS(name=u'LWIPAdditionRequestRejectIEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
+    _LWIPAdditionRequestRejectIEs_val_Value_0 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _LWIPAdditionRequestRejectIEs_val_Value_1 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'Cause')))
+    _LWIPAdditionRequestRejectIEs_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'CriticalityDiagnostics')))
+    LWIPAdditionRequestRejectIEs._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'ignore'), (u'Value', _LWIPAdditionRequestRejectIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _LWIPAdditionRequestRejectIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _LWIPAdditionRequestRejectIEs_val_Value_2), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    
+    #-----< LWIPModificationRequest >-----#
+    LWIPModificationRequest = SEQ(name=u'LWIPModificationRequest', mode=MODE_TYPE)
+    _LWIPModificationRequest_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XwAP-Containers', 'ProtocolIE-Container')))
+    __LWIPModificationRequest_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-Containers', 'ProtocolIE-Field')))
+    ___LWIPModificationRequest_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'id']))
+    ____LWIPModificationRequest_protocolIEs__item__id_tab = CLASS(name='_tab_XWAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
+    _____LWIPModificationRequest_protocolIEs__item__id_tab_val_Value_0 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _____LWIPModificationRequest_protocolIEs__item__id_tab_val_Value_1 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _____LWIPModificationRequest_protocolIEs__item__id_tab_val_Value_2 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'Cause')))
+    _____LWIPModificationRequest_protocolIEs__item__id_tab_val_Value_3 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'PLMN-Identity')))
+    _____LWIPModificationRequest_protocolIEs__item__id_tab_val_Value_4 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'MobilitySet')))
+    ____LWIPModificationRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'reject'), (u'Value', _____LWIPModificationRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'reject'), (u'Value', _____LWIPModificationRequest_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _____LWIPModificationRequest_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 55), (u'criticality', u'ignore'), (u'Value', _____LWIPModificationRequest_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 54), (u'criticality', u'reject'), (u'Value', _____LWIPModificationRequest_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    ___LWIPModificationRequest_protocolIEs__item__id._const_tab = ____LWIPModificationRequest_protocolIEs__item__id_tab
+    ___LWIPModificationRequest_protocolIEs__item__id._const_tab_at = None
+    ___LWIPModificationRequest_protocolIEs__item__id._const_tab_id = u'id'
+    ___LWIPModificationRequest_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'criticality']))
+    ___LWIPModificationRequest_protocolIEs__item__criticality._const_tab = ____LWIPModificationRequest_protocolIEs__item__id_tab
+    ___LWIPModificationRequest_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___LWIPModificationRequest_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___LWIPModificationRequest_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'Value']))
+    ___LWIPModificationRequest_protocolIEs__item__value._const_tab = ____LWIPModificationRequest_protocolIEs__item__id_tab
+    ___LWIPModificationRequest_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___LWIPModificationRequest_protocolIEs__item__value._const_tab_id = u'Value'
+    __LWIPModificationRequest_protocolIEs__item_._cont = ASN1Dict([
+        (u'id', ___LWIPModificationRequest_protocolIEs__item__id),
+        (u'criticality', ___LWIPModificationRequest_protocolIEs__item__criticality),
+        (u'value', ___LWIPModificationRequest_protocolIEs__item__value),
+        ])
+    __LWIPModificationRequest_protocolIEs__item_._ext = None
+    _LWIPModificationRequest_protocolIEs._cont = __LWIPModificationRequest_protocolIEs__item_
+    _LWIPModificationRequest_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
+    LWIPModificationRequest._cont = ASN1Dict([
+        (u'protocolIEs', _LWIPModificationRequest_protocolIEs),
+        ])
+    LWIPModificationRequest._ext = []
+    
+    #-----< LWIPModificationRequestIEs >-----#
+    LWIPModificationRequestIEs = CLASS(name=u'LWIPModificationRequestIEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
+    _LWIPModificationRequestIEs_val_Value_0 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _LWIPModificationRequestIEs_val_Value_1 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _LWIPModificationRequestIEs_val_Value_2 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'Cause')))
+    _LWIPModificationRequestIEs_val_Value_3 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'PLMN-Identity')))
+    _LWIPModificationRequestIEs_val_Value_4 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'MobilitySet')))
+    LWIPModificationRequestIEs._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'reject'), (u'Value', _LWIPModificationRequestIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'reject'), (u'Value', _LWIPModificationRequestIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _LWIPModificationRequestIEs_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 55), (u'criticality', u'ignore'), (u'Value', _LWIPModificationRequestIEs_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 54), (u'criticality', u'reject'), (u'Value', _LWIPModificationRequestIEs_val_Value_4), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    
+    #-----< LWIPModificationRequestAcknowledge >-----#
+    LWIPModificationRequestAcknowledge = SEQ(name=u'LWIPModificationRequestAcknowledge', mode=MODE_TYPE)
+    _LWIPModificationRequestAcknowledge_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XwAP-Containers', 'ProtocolIE-Container')))
+    __LWIPModificationRequestAcknowledge_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-Containers', 'ProtocolIE-Field')))
+    ___LWIPModificationRequestAcknowledge_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'id']))
+    ____LWIPModificationRequestAcknowledge_protocolIEs__item__id_tab = CLASS(name='_tab_XWAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
+    _____LWIPModificationRequestAcknowledge_protocolIEs__item__id_tab_val_Value_0 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _____LWIPModificationRequestAcknowledge_protocolIEs__item__id_tab_val_Value_1 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _____LWIPModificationRequestAcknowledge_protocolIEs__item__id_tab_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'CriticalityDiagnostics')))
+    ____LWIPModificationRequestAcknowledge_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'ignore'), (u'Value', _____LWIPModificationRequestAcknowledge_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'ignore'), (u'Value', _____LWIPModificationRequestAcknowledge_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _____LWIPModificationRequestAcknowledge_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    ___LWIPModificationRequestAcknowledge_protocolIEs__item__id._const_tab = ____LWIPModificationRequestAcknowledge_protocolIEs__item__id_tab
+    ___LWIPModificationRequestAcknowledge_protocolIEs__item__id._const_tab_at = None
+    ___LWIPModificationRequestAcknowledge_protocolIEs__item__id._const_tab_id = u'id'
+    ___LWIPModificationRequestAcknowledge_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'criticality']))
+    ___LWIPModificationRequestAcknowledge_protocolIEs__item__criticality._const_tab = ____LWIPModificationRequestAcknowledge_protocolIEs__item__id_tab
+    ___LWIPModificationRequestAcknowledge_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___LWIPModificationRequestAcknowledge_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___LWIPModificationRequestAcknowledge_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'Value']))
+    ___LWIPModificationRequestAcknowledge_protocolIEs__item__value._const_tab = ____LWIPModificationRequestAcknowledge_protocolIEs__item__id_tab
+    ___LWIPModificationRequestAcknowledge_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___LWIPModificationRequestAcknowledge_protocolIEs__item__value._const_tab_id = u'Value'
+    __LWIPModificationRequestAcknowledge_protocolIEs__item_._cont = ASN1Dict([
+        (u'id', ___LWIPModificationRequestAcknowledge_protocolIEs__item__id),
+        (u'criticality', ___LWIPModificationRequestAcknowledge_protocolIEs__item__criticality),
+        (u'value', ___LWIPModificationRequestAcknowledge_protocolIEs__item__value),
+        ])
+    __LWIPModificationRequestAcknowledge_protocolIEs__item_._ext = None
+    _LWIPModificationRequestAcknowledge_protocolIEs._cont = __LWIPModificationRequestAcknowledge_protocolIEs__item_
+    _LWIPModificationRequestAcknowledge_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
+    LWIPModificationRequestAcknowledge._cont = ASN1Dict([
+        (u'protocolIEs', _LWIPModificationRequestAcknowledge_protocolIEs),
+        ])
+    LWIPModificationRequestAcknowledge._ext = []
+    
+    #-----< LWIPModificationRequestAcknowledgeIEs >-----#
+    LWIPModificationRequestAcknowledgeIEs = CLASS(name=u'LWIPModificationRequestAcknowledgeIEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
+    _LWIPModificationRequestAcknowledgeIEs_val_Value_0 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _LWIPModificationRequestAcknowledgeIEs_val_Value_1 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _LWIPModificationRequestAcknowledgeIEs_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'CriticalityDiagnostics')))
+    LWIPModificationRequestAcknowledgeIEs._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'ignore'), (u'Value', _LWIPModificationRequestAcknowledgeIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'ignore'), (u'Value', _LWIPModificationRequestAcknowledgeIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _LWIPModificationRequestAcknowledgeIEs_val_Value_2), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    
+    #-----< LWIPModificationRequestReject >-----#
+    LWIPModificationRequestReject = SEQ(name=u'LWIPModificationRequestReject', mode=MODE_TYPE)
+    _LWIPModificationRequestReject_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XwAP-Containers', 'ProtocolIE-Container')))
+    __LWIPModificationRequestReject_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-Containers', 'ProtocolIE-Field')))
+    ___LWIPModificationRequestReject_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'id']))
+    ____LWIPModificationRequestReject_protocolIEs__item__id_tab = CLASS(name='_tab_XWAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
+    _____LWIPModificationRequestReject_protocolIEs__item__id_tab_val_Value_0 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _____LWIPModificationRequestReject_protocolIEs__item__id_tab_val_Value_1 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _____LWIPModificationRequestReject_protocolIEs__item__id_tab_val_Value_2 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'Cause')))
+    _____LWIPModificationRequestReject_protocolIEs__item__id_tab_val_Value_3 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'CriticalityDiagnostics')))
+    ____LWIPModificationRequestReject_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'ignore'), (u'Value', _____LWIPModificationRequestReject_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'ignore'), (u'Value', _____LWIPModificationRequestReject_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _____LWIPModificationRequestReject_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _____LWIPModificationRequestReject_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    ___LWIPModificationRequestReject_protocolIEs__item__id._const_tab = ____LWIPModificationRequestReject_protocolIEs__item__id_tab
+    ___LWIPModificationRequestReject_protocolIEs__item__id._const_tab_at = None
+    ___LWIPModificationRequestReject_protocolIEs__item__id._const_tab_id = u'id'
+    ___LWIPModificationRequestReject_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'criticality']))
+    ___LWIPModificationRequestReject_protocolIEs__item__criticality._const_tab = ____LWIPModificationRequestReject_protocolIEs__item__id_tab
+    ___LWIPModificationRequestReject_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___LWIPModificationRequestReject_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___LWIPModificationRequestReject_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'Value']))
+    ___LWIPModificationRequestReject_protocolIEs__item__value._const_tab = ____LWIPModificationRequestReject_protocolIEs__item__id_tab
+    ___LWIPModificationRequestReject_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___LWIPModificationRequestReject_protocolIEs__item__value._const_tab_id = u'Value'
+    __LWIPModificationRequestReject_protocolIEs__item_._cont = ASN1Dict([
+        (u'id', ___LWIPModificationRequestReject_protocolIEs__item__id),
+        (u'criticality', ___LWIPModificationRequestReject_protocolIEs__item__criticality),
+        (u'value', ___LWIPModificationRequestReject_protocolIEs__item__value),
+        ])
+    __LWIPModificationRequestReject_protocolIEs__item_._ext = None
+    _LWIPModificationRequestReject_protocolIEs._cont = __LWIPModificationRequestReject_protocolIEs__item_
+    _LWIPModificationRequestReject_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
+    LWIPModificationRequestReject._cont = ASN1Dict([
+        (u'protocolIEs', _LWIPModificationRequestReject_protocolIEs),
+        ])
+    LWIPModificationRequestReject._ext = []
+    
+    #-----< LWIPModificationRequestRejectIEs >-----#
+    LWIPModificationRequestRejectIEs = CLASS(name=u'LWIPModificationRequestRejectIEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
+    _LWIPModificationRequestRejectIEs_val_Value_0 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _LWIPModificationRequestRejectIEs_val_Value_1 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _LWIPModificationRequestRejectIEs_val_Value_2 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'Cause')))
+    _LWIPModificationRequestRejectIEs_val_Value_3 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'CriticalityDiagnostics')))
+    LWIPModificationRequestRejectIEs._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'ignore'), (u'Value', _LWIPModificationRequestRejectIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'ignore'), (u'Value', _LWIPModificationRequestRejectIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _LWIPModificationRequestRejectIEs_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _LWIPModificationRequestRejectIEs_val_Value_3), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    
+    #-----< LWIPReleaseRequest >-----#
+    LWIPReleaseRequest = SEQ(name=u'LWIPReleaseRequest', mode=MODE_TYPE)
+    _LWIPReleaseRequest_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XwAP-Containers', 'ProtocolIE-Container')))
+    __LWIPReleaseRequest_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-Containers', 'ProtocolIE-Field')))
+    ___LWIPReleaseRequest_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'id']))
+    ____LWIPReleaseRequest_protocolIEs__item__id_tab = CLASS(name='_tab_XWAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
+    _____LWIPReleaseRequest_protocolIEs__item__id_tab_val_Value_0 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _____LWIPReleaseRequest_protocolIEs__item__id_tab_val_Value_1 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _____LWIPReleaseRequest_protocolIEs__item__id_tab_val_Value_2 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'Cause')))
+    ____LWIPReleaseRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'reject'), (u'Value', _____LWIPReleaseRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'reject'), (u'Value', _____LWIPReleaseRequest_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _____LWIPReleaseRequest_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    ___LWIPReleaseRequest_protocolIEs__item__id._const_tab = ____LWIPReleaseRequest_protocolIEs__item__id_tab
+    ___LWIPReleaseRequest_protocolIEs__item__id._const_tab_at = None
+    ___LWIPReleaseRequest_protocolIEs__item__id._const_tab_id = u'id'
+    ___LWIPReleaseRequest_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'criticality']))
+    ___LWIPReleaseRequest_protocolIEs__item__criticality._const_tab = ____LWIPReleaseRequest_protocolIEs__item__id_tab
+    ___LWIPReleaseRequest_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___LWIPReleaseRequest_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___LWIPReleaseRequest_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'Value']))
+    ___LWIPReleaseRequest_protocolIEs__item__value._const_tab = ____LWIPReleaseRequest_protocolIEs__item__id_tab
+    ___LWIPReleaseRequest_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___LWIPReleaseRequest_protocolIEs__item__value._const_tab_id = u'Value'
+    __LWIPReleaseRequest_protocolIEs__item_._cont = ASN1Dict([
+        (u'id', ___LWIPReleaseRequest_protocolIEs__item__id),
+        (u'criticality', ___LWIPReleaseRequest_protocolIEs__item__criticality),
+        (u'value', ___LWIPReleaseRequest_protocolIEs__item__value),
+        ])
+    __LWIPReleaseRequest_protocolIEs__item_._ext = None
+    _LWIPReleaseRequest_protocolIEs._cont = __LWIPReleaseRequest_protocolIEs__item_
+    _LWIPReleaseRequest_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
+    LWIPReleaseRequest._cont = ASN1Dict([
+        (u'protocolIEs', _LWIPReleaseRequest_protocolIEs),
+        ])
+    LWIPReleaseRequest._ext = []
+    
+    #-----< LWIPReleaseRequest-IEs >-----#
+    LWIPReleaseRequest_IEs = CLASS(name=u'LWIPReleaseRequest-IEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
+    _LWIPReleaseRequest_IEs_val_Value_0 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _LWIPReleaseRequest_IEs_val_Value_1 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _LWIPReleaseRequest_IEs_val_Value_2 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'Cause')))
+    LWIPReleaseRequest_IEs._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'reject'), (u'Value', _LWIPReleaseRequest_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'reject'), (u'Value', _LWIPReleaseRequest_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _LWIPReleaseRequest_IEs_val_Value_2), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    
+    #-----< LWIPReleaseRequired >-----#
+    LWIPReleaseRequired = SEQ(name=u'LWIPReleaseRequired', mode=MODE_TYPE)
+    _LWIPReleaseRequired_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XwAP-Containers', 'ProtocolIE-Container')))
+    __LWIPReleaseRequired_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-Containers', 'ProtocolIE-Field')))
+    ___LWIPReleaseRequired_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'id']))
+    ____LWIPReleaseRequired_protocolIEs__item__id_tab = CLASS(name='_tab_XWAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
+    _____LWIPReleaseRequired_protocolIEs__item__id_tab_val_Value_0 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _____LWIPReleaseRequired_protocolIEs__item__id_tab_val_Value_1 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _____LWIPReleaseRequired_protocolIEs__item__id_tab_val_Value_2 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'Cause')))
+    ____LWIPReleaseRequired_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'reject'), (u'Value', _____LWIPReleaseRequired_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'reject'), (u'Value', _____LWIPReleaseRequired_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _____LWIPReleaseRequired_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
+    ___LWIPReleaseRequired_protocolIEs__item__id._const_tab = ____LWIPReleaseRequired_protocolIEs__item__id_tab
+    ___LWIPReleaseRequired_protocolIEs__item__id._const_tab_at = None
+    ___LWIPReleaseRequired_protocolIEs__item__id._const_tab_id = u'id'
+    ___LWIPReleaseRequired_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'criticality']))
+    ___LWIPReleaseRequired_protocolIEs__item__criticality._const_tab = ____LWIPReleaseRequired_protocolIEs__item__id_tab
+    ___LWIPReleaseRequired_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___LWIPReleaseRequired_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___LWIPReleaseRequired_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'Value']))
+    ___LWIPReleaseRequired_protocolIEs__item__value._const_tab = ____LWIPReleaseRequired_protocolIEs__item__id_tab
+    ___LWIPReleaseRequired_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___LWIPReleaseRequired_protocolIEs__item__value._const_tab_id = u'Value'
+    __LWIPReleaseRequired_protocolIEs__item_._cont = ASN1Dict([
+        (u'id', ___LWIPReleaseRequired_protocolIEs__item__id),
+        (u'criticality', ___LWIPReleaseRequired_protocolIEs__item__criticality),
+        (u'value', ___LWIPReleaseRequired_protocolIEs__item__value),
+        ])
+    __LWIPReleaseRequired_protocolIEs__item_._ext = None
+    _LWIPReleaseRequired_protocolIEs._cont = __LWIPReleaseRequired_protocolIEs__item_
+    _LWIPReleaseRequired_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
+    LWIPReleaseRequired._cont = ASN1Dict([
+        (u'protocolIEs', _LWIPReleaseRequired_protocolIEs),
+        ])
+    LWIPReleaseRequired._ext = []
+    
+    #-----< LWIPReleaseRequiredIEs >-----#
+    LWIPReleaseRequiredIEs = CLASS(name=u'LWIPReleaseRequiredIEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
+    _LWIPReleaseRequiredIEs_val_Value_0 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _LWIPReleaseRequiredIEs_val_Value_1 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _LWIPReleaseRequiredIEs_val_Value_2 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'Cause')))
+    LWIPReleaseRequiredIEs._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'reject'), (u'Value', _LWIPReleaseRequiredIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'reject'), (u'Value', _LWIPReleaseRequiredIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _LWIPReleaseRequiredIEs_val_Value_2), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
+    
+    #-----< LWIPReleaseConfirm >-----#
+    LWIPReleaseConfirm = SEQ(name=u'LWIPReleaseConfirm', mode=MODE_TYPE)
+    _LWIPReleaseConfirm_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XwAP-Containers', 'ProtocolIE-Container')))
+    __LWIPReleaseConfirm_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-Containers', 'ProtocolIE-Field')))
+    ___LWIPReleaseConfirm_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'id']))
+    ____LWIPReleaseConfirm_protocolIEs__item__id_tab = CLASS(name='_tab_XWAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
+    _____LWIPReleaseConfirm_protocolIEs__item__id_tab_val_Value_0 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _____LWIPReleaseConfirm_protocolIEs__item__id_tab_val_Value_1 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _____LWIPReleaseConfirm_protocolIEs__item__id_tab_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'CriticalityDiagnostics')))
+    ____LWIPReleaseConfirm_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'ignore'), (u'Value', _____LWIPReleaseConfirm_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'ignore'), (u'Value', _____LWIPReleaseConfirm_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _____LWIPReleaseConfirm_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    ___LWIPReleaseConfirm_protocolIEs__item__id._const_tab = ____LWIPReleaseConfirm_protocolIEs__item__id_tab
+    ___LWIPReleaseConfirm_protocolIEs__item__id._const_tab_at = None
+    ___LWIPReleaseConfirm_protocolIEs__item__id._const_tab_id = u'id'
+    ___LWIPReleaseConfirm_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'criticality']))
+    ___LWIPReleaseConfirm_protocolIEs__item__criticality._const_tab = ____LWIPReleaseConfirm_protocolIEs__item__id_tab
+    ___LWIPReleaseConfirm_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___LWIPReleaseConfirm_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___LWIPReleaseConfirm_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('XwAP-Containers', 'XWAP-PROTOCOL-IES'), [u'Value']))
+    ___LWIPReleaseConfirm_protocolIEs__item__value._const_tab = ____LWIPReleaseConfirm_protocolIEs__item__id_tab
+    ___LWIPReleaseConfirm_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___LWIPReleaseConfirm_protocolIEs__item__value._const_tab_id = u'Value'
+    __LWIPReleaseConfirm_protocolIEs__item_._cont = ASN1Dict([
+        (u'id', ___LWIPReleaseConfirm_protocolIEs__item__id),
+        (u'criticality', ___LWIPReleaseConfirm_protocolIEs__item__criticality),
+        (u'value', ___LWIPReleaseConfirm_protocolIEs__item__value),
+        ])
+    __LWIPReleaseConfirm_protocolIEs__item_._ext = None
+    _LWIPReleaseConfirm_protocolIEs._cont = __LWIPReleaseConfirm_protocolIEs__item_
+    _LWIPReleaseConfirm_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
+    LWIPReleaseConfirm._cont = ASN1Dict([
+        (u'protocolIEs', _LWIPReleaseConfirm_protocolIEs),
+        ])
+    LWIPReleaseConfirm._ext = []
+    
+    #-----< LWIPReleaseConfirmIEs >-----#
+    LWIPReleaseConfirmIEs = CLASS(name=u'LWIPReleaseConfirmIEs', mode=MODE_SET, typeref=ASN1RefType(('XwAP-Containers', 'XWAP-PROTOCOL-IES')))
+    _LWIPReleaseConfirmIEs_val_Value_0 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _LWIPReleaseConfirmIEs_val_Value_1 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'UE-XwAP-ID')))
+    _LWIPReleaseConfirmIEs_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-IEs', 'CriticalityDiagnostics')))
+    LWIPReleaseConfirmIEs._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'ignore'), (u'Value', _LWIPReleaseConfirmIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'ignore'), (u'Value', _LWIPReleaseConfirmIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _LWIPReleaseConfirmIEs_val_Value_2), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    
     _all_ = [
         ____XwSetupRequest_protocolIEs__item__id_tab,
         _____XwSetupRequest_protocolIEs__item__id_tab_val_Value_0,
@@ -5516,6 +6308,7 @@ class XwAP_PDU_Contents:
         _____XwSetupResponse_protocolIEs__item__id_tab_val_Value_0,
         _____XwSetupResponse_protocolIEs__item__id_tab_val_Value_1,
         _____XwSetupResponse_protocolIEs__item__id_tab_val_Value_2,
+        _____XwSetupResponse_protocolIEs__item__id_tab_val_Value_3,
         ___XwSetupResponse_protocolIEs__item__id,
         ___XwSetupResponse_protocolIEs__item__criticality,
         ___XwSetupResponse_protocolIEs__item__value,
@@ -5526,9 +6319,11 @@ class XwAP_PDU_Contents:
         _XwSetupResponseIEs_val_Value_0,
         _XwSetupResponseIEs_val_Value_1,
         _XwSetupResponseIEs_val_Value_2,
+        _XwSetupResponseIEs_val_Value_3,
         ____XwSetupFailure_protocolIEs__item__id_tab,
         _____XwSetupFailure_protocolIEs__item__id_tab_val_Value_0,
         _____XwSetupFailure_protocolIEs__item__id_tab_val_Value_1,
+        _____XwSetupFailure_protocolIEs__item__id_tab_val_Value_2,
         ___XwSetupFailure_protocolIEs__item__id,
         ___XwSetupFailure_protocolIEs__item__criticality,
         ___XwSetupFailure_protocolIEs__item__value,
@@ -5538,11 +6333,13 @@ class XwAP_PDU_Contents:
         XwSetupFailureIEs,
         _XwSetupFailureIEs_val_Value_0,
         _XwSetupFailureIEs_val_Value_1,
+        _XwSetupFailureIEs_val_Value_2,
         ____WTConfigurationUpdate_protocolIEs__item__id_tab,
         _____WTConfigurationUpdate_protocolIEs__item__id_tab_val_Value_0,
         _____WTConfigurationUpdate_protocolIEs__item__id_tab_val_Value_1,
         _____WTConfigurationUpdate_protocolIEs__item__id_tab_val_Value_2,
         _____WTConfigurationUpdate_protocolIEs__item__id_tab_val_Value_3,
+        _____WTConfigurationUpdate_protocolIEs__item__id_tab_val_Value_4,
         ___WTConfigurationUpdate_protocolIEs__item__id,
         ___WTConfigurationUpdate_protocolIEs__item__criticality,
         ___WTConfigurationUpdate_protocolIEs__item__value,
@@ -5554,6 +6351,7 @@ class XwAP_PDU_Contents:
         _WTConfigurationUpdateIEs_val_Value_1,
         _WTConfigurationUpdateIEs_val_Value_2,
         _WTConfigurationUpdateIEs_val_Value_3,
+        _WTConfigurationUpdateIEs_val_Value_4,
         ____WTConfigurationUpdateAcknowledge_protocolIEs__item__id_tab,
         _____WTConfigurationUpdateAcknowledge_protocolIEs__item__id_tab_val_Value_0,
         ___WTConfigurationUpdateAcknowledge_protocolIEs__item__id,
@@ -5567,6 +6365,7 @@ class XwAP_PDU_Contents:
         ____WTConfigurationUpdateFailure_protocolIEs__item__id_tab,
         _____WTConfigurationUpdateFailure_protocolIEs__item__id_tab_val_Value_0,
         _____WTConfigurationUpdateFailure_protocolIEs__item__id_tab_val_Value_1,
+        _____WTConfigurationUpdateFailure_protocolIEs__item__id_tab_val_Value_2,
         ___WTConfigurationUpdateFailure_protocolIEs__item__id,
         ___WTConfigurationUpdateFailure_protocolIEs__item__criticality,
         ___WTConfigurationUpdateFailure_protocolIEs__item__value,
@@ -5576,6 +6375,7 @@ class XwAP_PDU_Contents:
         WTConfigurationUpdateFailureIEs,
         _WTConfigurationUpdateFailureIEs_val_Value_0,
         _WTConfigurationUpdateFailureIEs_val_Value_1,
+        _WTConfigurationUpdateFailureIEs_val_Value_2,
         ____WTStatusRequest_protocolIEs__item__id_tab,
         _____WTStatusRequest_protocolIEs__item__id_tab_val_Value_0,
         _____WTStatusRequest_protocolIEs__item__id_tab_val_Value_1,
@@ -5689,6 +6489,7 @@ class XwAP_PDU_Contents:
         _____WTAdditionRequest_protocolIEs__item__id_tab_val_Value_3,
         _____WTAdditionRequest_protocolIEs__item__id_tab_val_Value_4,
         _____WTAdditionRequest_protocolIEs__item__id_tab_val_Value_5,
+        _____WTAdditionRequest_protocolIEs__item__id_tab_val_Value_6,
         ___WTAdditionRequest_protocolIEs__item__id,
         ___WTAdditionRequest_protocolIEs__item__criticality,
         ___WTAdditionRequest_protocolIEs__item__value,
@@ -5702,6 +6503,7 @@ class XwAP_PDU_Contents:
         _WTAdditionRequestIEs_val_Value_3,
         _WTAdditionRequestIEs_val_Value_4,
         _WTAdditionRequestIEs_val_Value_5,
+        _WTAdditionRequestIEs_val_Value_6,
         ___E_RABs_ToBeAdded_List__item__id_tab,
         ____E_RABs_ToBeAdded_List__item__id_tab_val_Value_0,
         __E_RABs_ToBeAdded_List__item__id,
@@ -5715,6 +6517,7 @@ class XwAP_PDU_Contents:
         _E_RABs_ToBeAdded_Item_e_RAB_QoS_Parameters,
         _E_RABs_ToBeAdded_Item_eNB_GTPtunnelEndpoint,
         ____E_RABs_ToBeAdded_Item_iE_Extensions__item__id_tab,
+        _____E_RABs_ToBeAdded_Item_iE_Extensions__item__id_tab_val_Extension_0,
         ___E_RABs_ToBeAdded_Item_iE_Extensions__item__id,
         ___E_RABs_ToBeAdded_Item_iE_Extensions__item__criticality,
         ___E_RABs_ToBeAdded_Item_iE_Extensions__item__extensionValue,
@@ -5722,12 +6525,14 @@ class XwAP_PDU_Contents:
         _E_RABs_ToBeAdded_Item_iE_Extensions,
         E_RABs_ToBeAdded_Item,
         E_RABs_ToBeAdded_ItemExtIEs,
+        _E_RABs_ToBeAdded_ItemExtIEs_val_Extension_0,
         ____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab,
         _____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_0,
         _____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_1,
         _____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_2,
         _____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_3,
         _____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_4,
+        _____WTAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_5,
         ___WTAdditionRequestAcknowledge_protocolIEs__item__id,
         ___WTAdditionRequestAcknowledge_protocolIEs__item__criticality,
         ___WTAdditionRequestAcknowledge_protocolIEs__item__value,
@@ -5740,6 +6545,7 @@ class XwAP_PDU_Contents:
         _WTAdditionRequestAcknowledgeIEs_val_Value_2,
         _WTAdditionRequestAcknowledgeIEs_val_Value_3,
         _WTAdditionRequestAcknowledgeIEs_val_Value_4,
+        _WTAdditionRequestAcknowledgeIEs_val_Value_5,
         ___E_RABs_Admitted_ToBeAdded_List__item__id_tab,
         ____E_RABs_Admitted_ToBeAdded_List__item__id_tab_val_Value_0,
         __E_RABs_Admitted_ToBeAdded_List__item__id,
@@ -5752,6 +6558,7 @@ class XwAP_PDU_Contents:
         _E_RABs_Admitted_ToBeAdded_Item_e_RAB_ID,
         _E_RABs_Admitted_ToBeAdded_Item_wT_GTPtunnelEndpoint,
         ____E_RABs_Admitted_ToBeAdded_Item_iE_Extensions__item__id_tab,
+        _____E_RABs_Admitted_ToBeAdded_Item_iE_Extensions__item__id_tab_val_Extension_0,
         ___E_RABs_Admitted_ToBeAdded_Item_iE_Extensions__item__id,
         ___E_RABs_Admitted_ToBeAdded_Item_iE_Extensions__item__criticality,
         ___E_RABs_Admitted_ToBeAdded_Item_iE_Extensions__item__extensionValue,
@@ -5759,6 +6566,7 @@ class XwAP_PDU_Contents:
         _E_RABs_Admitted_ToBeAdded_Item_iE_Extensions,
         E_RABs_Admitted_ToBeAdded_Item,
         E_RABs_Admitted_ToBeAdded_ItemExtIEs,
+        _E_RABs_Admitted_ToBeAdded_ItemExtIEs_val_Extension_0,
         ____WTAdditionRequestReject_protocolIEs__item__id_tab,
         _____WTAdditionRequestReject_protocolIEs__item__id_tab_val_Value_0,
         _____WTAdditionRequestReject_protocolIEs__item__id_tab_val_Value_1,
@@ -5818,6 +6626,7 @@ class XwAP_PDU_Contents:
         _E_RABs_ToBeAdded_ModReqItem_e_RAB_QoS_Parameters,
         _E_RABs_ToBeAdded_ModReqItem_eNB_GTPtunnelEndpoint,
         ____E_RABs_ToBeAdded_ModReqItem_iE_Extensions__item__id_tab,
+        _____E_RABs_ToBeAdded_ModReqItem_iE_Extensions__item__id_tab_val_Extension_0,
         ___E_RABs_ToBeAdded_ModReqItem_iE_Extensions__item__id,
         ___E_RABs_ToBeAdded_ModReqItem_iE_Extensions__item__criticality,
         ___E_RABs_ToBeAdded_ModReqItem_iE_Extensions__item__extensionValue,
@@ -5825,6 +6634,7 @@ class XwAP_PDU_Contents:
         _E_RABs_ToBeAdded_ModReqItem_iE_Extensions,
         E_RABs_ToBeAdded_ModReqItem,
         E_RABs_ToBeAdded_ModReqItemExtIEs,
+        _E_RABs_ToBeAdded_ModReqItemExtIEs_val_Extension_0,
         ___E_RABs_ToBeModified_List_ModReq__item__id_tab,
         ____E_RABs_ToBeModified_List_ModReq__item__id_tab_val_Value_0,
         __E_RABs_ToBeModified_List_ModReq__item__id,
@@ -5898,6 +6708,7 @@ class XwAP_PDU_Contents:
         _E_RABs_Admitted_ToBeAdded_ModAckItem_e_RAB_ID,
         _E_RABs_Admitted_ToBeAdded_ModAckItem_wT_GTPtunnelEndpoint,
         ____E_RABs_Admitted_ToBeAdded_ModAckItem_iE_Extensions__item__id_tab,
+        _____E_RABs_Admitted_ToBeAdded_ModAckItem_iE_Extensions__item__id_tab_val_Extension_0,
         ___E_RABs_Admitted_ToBeAdded_ModAckItem_iE_Extensions__item__id,
         ___E_RABs_Admitted_ToBeAdded_ModAckItem_iE_Extensions__item__criticality,
         ___E_RABs_Admitted_ToBeAdded_ModAckItem_iE_Extensions__item__extensionValue,
@@ -5905,6 +6716,7 @@ class XwAP_PDU_Contents:
         _E_RABs_Admitted_ToBeAdded_ModAckItem_iE_Extensions,
         E_RABs_Admitted_ToBeAdded_ModAckItem,
         E_RABs_Admitted_ToBeAdded_ModAckItemExtIEs,
+        _E_RABs_Admitted_ToBeAdded_ModAckItemExtIEs_val_Extension_0,
         ___E_RABs_Admitted_ToBeModified_ModAckList__item__id_tab,
         ____E_RABs_Admitted_ToBeModified_ModAckList__item__id_tab_val_Value_0,
         __E_RABs_Admitted_ToBeModified_ModAckList__item__id,
@@ -5917,6 +6729,7 @@ class XwAP_PDU_Contents:
         _E_RABs_Admitted_ToBeModified_ModAckItem_e_RAB_ID,
         _E_RABs_Admitted_ToBeModified_ModAckItem_wT_GTPtunnelEndpoint,
         ____E_RABs_Admitted_ToBeModified_ModAckItem_iE_Extensions__item__id_tab,
+        _____E_RABs_Admitted_ToBeModified_ModAckItem_iE_Extensions__item__id_tab_val_Extension_0,
         ___E_RABs_Admitted_ToBeModified_ModAckItem_iE_Extensions__item__id,
         ___E_RABs_Admitted_ToBeModified_ModAckItem_iE_Extensions__item__criticality,
         ___E_RABs_Admitted_ToBeModified_ModAckItem_iE_Extensions__item__extensionValue,
@@ -5924,6 +6737,7 @@ class XwAP_PDU_Contents:
         _E_RABs_Admitted_ToBeModified_ModAckItem_iE_Extensions,
         E_RABs_Admitted_ToBeModified_ModAckItem,
         E_RABs_Admitted_ToBeModified_ModAckItemExtIEs,
+        _E_RABs_Admitted_ToBeModified_ModAckItemExtIEs_val_Extension_0,
         ___E_RABs_Admitted_ToBeReleased_ModAckList__item__id_tab,
         ____E_RABs_Admitted_ToBeReleased_ModAckList__item__id_tab_val_Value_0,
         __E_RABs_Admitted_ToBeReleased_ModAckList__item__id,
@@ -6007,6 +6821,7 @@ class XwAP_PDU_Contents:
         _E_RABs_ToBeModified_ModReqdItem_e_RAB_ID,
         _E_RABs_ToBeModified_ModReqdItem_wT_GTPtunnelEndpoint,
         ____E_RABs_ToBeModified_ModReqdItem_iE_Extensions__item__id_tab,
+        _____E_RABs_ToBeModified_ModReqdItem_iE_Extensions__item__id_tab_val_Extension_0,
         ___E_RABs_ToBeModified_ModReqdItem_iE_Extensions__item__id,
         ___E_RABs_ToBeModified_ModReqdItem_iE_Extensions__item__criticality,
         ___E_RABs_ToBeModified_ModReqdItem_iE_Extensions__item__extensionValue,
@@ -6014,6 +6829,7 @@ class XwAP_PDU_Contents:
         _E_RABs_ToBeModified_ModReqdItem_iE_Extensions,
         E_RABs_ToBeModified_ModReqdItem,
         E_RABs_ToBeModified_ModReqdItemExtIEs,
+        _E_RABs_ToBeModified_ModReqdItemExtIEs_val_Extension_0,
         ____WTModificationConfirm_protocolIEs__item__id_tab,
         _____WTModificationConfirm_protocolIEs__item__id_tab_val_Value_0,
         _____WTModificationConfirm_protocolIEs__item__id_tab_val_Value_1,
@@ -6090,6 +6906,7 @@ class XwAP_PDU_Contents:
         _____WTReleaseRequest_protocolIEs__item__id_tab_val_Value_1,
         _____WTReleaseRequest_protocolIEs__item__id_tab_val_Value_2,
         _____WTReleaseRequest_protocolIEs__item__id_tab_val_Value_3,
+        _____WTReleaseRequest_protocolIEs__item__id_tab_val_Value_4,
         ___WTReleaseRequest_protocolIEs__item__id,
         ___WTReleaseRequest_protocolIEs__item__criticality,
         ___WTReleaseRequest_protocolIEs__item__value,
@@ -6101,6 +6918,7 @@ class XwAP_PDU_Contents:
         _WTReleaseRequest_IEs_val_Value_1,
         _WTReleaseRequest_IEs_val_Value_2,
         _WTReleaseRequest_IEs_val_Value_3,
+        _WTReleaseRequest_IEs_val_Value_4,
         ___E_RABs_ToBeReleased_List_RelReq__item__id_tab,
         ____E_RABs_ToBeReleased_List_RelReq__item__id_tab_val_Value_0,
         __E_RABs_ToBeReleased_List_RelReq__item__id,
@@ -6189,6 +7007,150 @@ class XwAP_PDU_Contents:
         _PrivateMessage_privateIEs,
         PrivateMessage,
         PrivateMessage_IEs,
+        ____LWIPAdditionRequest_protocolIEs__item__id_tab,
+        _____LWIPAdditionRequest_protocolIEs__item__id_tab_val_Value_0,
+        _____LWIPAdditionRequest_protocolIEs__item__id_tab_val_Value_1,
+        _____LWIPAdditionRequest_protocolIEs__item__id_tab_val_Value_2,
+        _____LWIPAdditionRequest_protocolIEs__item__id_tab_val_Value_3,
+        _____LWIPAdditionRequest_protocolIEs__item__id_tab_val_Value_4,
+        _____LWIPAdditionRequest_protocolIEs__item__id_tab_val_Value_5,
+        ___LWIPAdditionRequest_protocolIEs__item__id,
+        ___LWIPAdditionRequest_protocolIEs__item__criticality,
+        ___LWIPAdditionRequest_protocolIEs__item__value,
+        __LWIPAdditionRequest_protocolIEs__item_,
+        _LWIPAdditionRequest_protocolIEs,
+        LWIPAdditionRequest,
+        LWIPAdditionRequestIEs,
+        _LWIPAdditionRequestIEs_val_Value_0,
+        _LWIPAdditionRequestIEs_val_Value_1,
+        _LWIPAdditionRequestIEs_val_Value_2,
+        _LWIPAdditionRequestIEs_val_Value_3,
+        _LWIPAdditionRequestIEs_val_Value_4,
+        _LWIPAdditionRequestIEs_val_Value_5,
+        ____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab,
+        _____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_0,
+        _____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_1,
+        _____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_2,
+        _____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_3,
+        _____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_4,
+        _____LWIPAdditionRequestAcknowledge_protocolIEs__item__id_tab_val_Value_5,
+        ___LWIPAdditionRequestAcknowledge_protocolIEs__item__id,
+        ___LWIPAdditionRequestAcknowledge_protocolIEs__item__criticality,
+        ___LWIPAdditionRequestAcknowledge_protocolIEs__item__value,
+        __LWIPAdditionRequestAcknowledge_protocolIEs__item_,
+        _LWIPAdditionRequestAcknowledge_protocolIEs,
+        LWIPAdditionRequestAcknowledge,
+        LWIPAdditionRequestAcknowledgeIEs,
+        _LWIPAdditionRequestAcknowledgeIEs_val_Value_0,
+        _LWIPAdditionRequestAcknowledgeIEs_val_Value_1,
+        _LWIPAdditionRequestAcknowledgeIEs_val_Value_2,
+        _LWIPAdditionRequestAcknowledgeIEs_val_Value_3,
+        _LWIPAdditionRequestAcknowledgeIEs_val_Value_4,
+        _LWIPAdditionRequestAcknowledgeIEs_val_Value_5,
+        ____LWIPAdditionRequestReject_protocolIEs__item__id_tab,
+        _____LWIPAdditionRequestReject_protocolIEs__item__id_tab_val_Value_0,
+        _____LWIPAdditionRequestReject_protocolIEs__item__id_tab_val_Value_1,
+        _____LWIPAdditionRequestReject_protocolIEs__item__id_tab_val_Value_2,
+        ___LWIPAdditionRequestReject_protocolIEs__item__id,
+        ___LWIPAdditionRequestReject_protocolIEs__item__criticality,
+        ___LWIPAdditionRequestReject_protocolIEs__item__value,
+        __LWIPAdditionRequestReject_protocolIEs__item_,
+        _LWIPAdditionRequestReject_protocolIEs,
+        LWIPAdditionRequestReject,
+        LWIPAdditionRequestRejectIEs,
+        _LWIPAdditionRequestRejectIEs_val_Value_0,
+        _LWIPAdditionRequestRejectIEs_val_Value_1,
+        _LWIPAdditionRequestRejectIEs_val_Value_2,
+        ____LWIPModificationRequest_protocolIEs__item__id_tab,
+        _____LWIPModificationRequest_protocolIEs__item__id_tab_val_Value_0,
+        _____LWIPModificationRequest_protocolIEs__item__id_tab_val_Value_1,
+        _____LWIPModificationRequest_protocolIEs__item__id_tab_val_Value_2,
+        _____LWIPModificationRequest_protocolIEs__item__id_tab_val_Value_3,
+        _____LWIPModificationRequest_protocolIEs__item__id_tab_val_Value_4,
+        ___LWIPModificationRequest_protocolIEs__item__id,
+        ___LWIPModificationRequest_protocolIEs__item__criticality,
+        ___LWIPModificationRequest_protocolIEs__item__value,
+        __LWIPModificationRequest_protocolIEs__item_,
+        _LWIPModificationRequest_protocolIEs,
+        LWIPModificationRequest,
+        LWIPModificationRequestIEs,
+        _LWIPModificationRequestIEs_val_Value_0,
+        _LWIPModificationRequestIEs_val_Value_1,
+        _LWIPModificationRequestIEs_val_Value_2,
+        _LWIPModificationRequestIEs_val_Value_3,
+        _LWIPModificationRequestIEs_val_Value_4,
+        ____LWIPModificationRequestAcknowledge_protocolIEs__item__id_tab,
+        _____LWIPModificationRequestAcknowledge_protocolIEs__item__id_tab_val_Value_0,
+        _____LWIPModificationRequestAcknowledge_protocolIEs__item__id_tab_val_Value_1,
+        _____LWIPModificationRequestAcknowledge_protocolIEs__item__id_tab_val_Value_2,
+        ___LWIPModificationRequestAcknowledge_protocolIEs__item__id,
+        ___LWIPModificationRequestAcknowledge_protocolIEs__item__criticality,
+        ___LWIPModificationRequestAcknowledge_protocolIEs__item__value,
+        __LWIPModificationRequestAcknowledge_protocolIEs__item_,
+        _LWIPModificationRequestAcknowledge_protocolIEs,
+        LWIPModificationRequestAcknowledge,
+        LWIPModificationRequestAcknowledgeIEs,
+        _LWIPModificationRequestAcknowledgeIEs_val_Value_0,
+        _LWIPModificationRequestAcknowledgeIEs_val_Value_1,
+        _LWIPModificationRequestAcknowledgeIEs_val_Value_2,
+        ____LWIPModificationRequestReject_protocolIEs__item__id_tab,
+        _____LWIPModificationRequestReject_protocolIEs__item__id_tab_val_Value_0,
+        _____LWIPModificationRequestReject_protocolIEs__item__id_tab_val_Value_1,
+        _____LWIPModificationRequestReject_protocolIEs__item__id_tab_val_Value_2,
+        _____LWIPModificationRequestReject_protocolIEs__item__id_tab_val_Value_3,
+        ___LWIPModificationRequestReject_protocolIEs__item__id,
+        ___LWIPModificationRequestReject_protocolIEs__item__criticality,
+        ___LWIPModificationRequestReject_protocolIEs__item__value,
+        __LWIPModificationRequestReject_protocolIEs__item_,
+        _LWIPModificationRequestReject_protocolIEs,
+        LWIPModificationRequestReject,
+        LWIPModificationRequestRejectIEs,
+        _LWIPModificationRequestRejectIEs_val_Value_0,
+        _LWIPModificationRequestRejectIEs_val_Value_1,
+        _LWIPModificationRequestRejectIEs_val_Value_2,
+        _LWIPModificationRequestRejectIEs_val_Value_3,
+        ____LWIPReleaseRequest_protocolIEs__item__id_tab,
+        _____LWIPReleaseRequest_protocolIEs__item__id_tab_val_Value_0,
+        _____LWIPReleaseRequest_protocolIEs__item__id_tab_val_Value_1,
+        _____LWIPReleaseRequest_protocolIEs__item__id_tab_val_Value_2,
+        ___LWIPReleaseRequest_protocolIEs__item__id,
+        ___LWIPReleaseRequest_protocolIEs__item__criticality,
+        ___LWIPReleaseRequest_protocolIEs__item__value,
+        __LWIPReleaseRequest_protocolIEs__item_,
+        _LWIPReleaseRequest_protocolIEs,
+        LWIPReleaseRequest,
+        LWIPReleaseRequest_IEs,
+        _LWIPReleaseRequest_IEs_val_Value_0,
+        _LWIPReleaseRequest_IEs_val_Value_1,
+        _LWIPReleaseRequest_IEs_val_Value_2,
+        ____LWIPReleaseRequired_protocolIEs__item__id_tab,
+        _____LWIPReleaseRequired_protocolIEs__item__id_tab_val_Value_0,
+        _____LWIPReleaseRequired_protocolIEs__item__id_tab_val_Value_1,
+        _____LWIPReleaseRequired_protocolIEs__item__id_tab_val_Value_2,
+        ___LWIPReleaseRequired_protocolIEs__item__id,
+        ___LWIPReleaseRequired_protocolIEs__item__criticality,
+        ___LWIPReleaseRequired_protocolIEs__item__value,
+        __LWIPReleaseRequired_protocolIEs__item_,
+        _LWIPReleaseRequired_protocolIEs,
+        LWIPReleaseRequired,
+        LWIPReleaseRequiredIEs,
+        _LWIPReleaseRequiredIEs_val_Value_0,
+        _LWIPReleaseRequiredIEs_val_Value_1,
+        _LWIPReleaseRequiredIEs_val_Value_2,
+        ____LWIPReleaseConfirm_protocolIEs__item__id_tab,
+        _____LWIPReleaseConfirm_protocolIEs__item__id_tab_val_Value_0,
+        _____LWIPReleaseConfirm_protocolIEs__item__id_tab_val_Value_1,
+        _____LWIPReleaseConfirm_protocolIEs__item__id_tab_val_Value_2,
+        ___LWIPReleaseConfirm_protocolIEs__item__id,
+        ___LWIPReleaseConfirm_protocolIEs__item__criticality,
+        ___LWIPReleaseConfirm_protocolIEs__item__value,
+        __LWIPReleaseConfirm_protocolIEs__item_,
+        _LWIPReleaseConfirm_protocolIEs,
+        LWIPReleaseConfirm,
+        LWIPReleaseConfirmIEs,
+        _LWIPReleaseConfirmIEs_val_Value_0,
+        _LWIPReleaseConfirmIEs_val_Value_1,
+        _LWIPReleaseConfirmIEs_val_Value_2,
     ]
 
 class XwAP_PDU_Descriptions:
@@ -6218,6 +7180,10 @@ class XwAP_PDU_Descriptions:
         u'wTInitiatedWTRelease',
         u'wTAssociationConfirmation',
         u'privateMessage',
+        u'lWIPAdditionPreparation',
+        u'eNBInitiatedLWIPModification',
+        u'eNBInitiatedLWIPRelease',
+        u'wTInitiatedLWIPRelease',
         ]
     _type_ = [
         u'XWAP-ELEMENTARY-PROCEDURE',
@@ -6245,6 +7211,10 @@ class XwAP_PDU_Descriptions:
         u'wTInitiatedWTRelease',
         u'wTAssociationConfirmation',
         u'privateMessage',
+        u'lWIPAdditionPreparation',
+        u'eNBInitiatedLWIPModification',
+        u'eNBInitiatedLWIPRelease',
+        u'wTInitiatedLWIPRelease',
         ]
     _class_ = [
         u'XWAP-ELEMENTARY-PROCEDURE',
@@ -6264,6 +7234,10 @@ class XwAP_PDU_Descriptions:
         u'wTInitiatedWTRelease',
         u'wTAssociationConfirmation',
         u'privateMessage',
+        u'lWIPAdditionPreparation',
+        u'eNBInitiatedLWIPModification',
+        u'eNBInitiatedLWIPRelease',
+        u'wTInitiatedLWIPRelease',
         ]
     _param_ = [
         ]
@@ -6321,12 +7295,21 @@ class XwAP_PDU_Descriptions:
     ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_6 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTModificationRefuse')))
     ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTReleaseRequired')))
     ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTReleaseConfirm')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTStatusReport')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'ErrorIndication')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTReleaseRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTAssociationConfirmation')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'PrivateMessage')))
-    __InitiatingMessage_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 1), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_2), (u'procedureCode', 2), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_3), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_4), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_5), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_6), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8), (u'procedureCode', 3), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10), (u'procedureCode', 9), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_11), (u'procedureCode', 11), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_12), (u'procedureCode', 12), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPAdditionRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPAdditionRequestAcknowledge')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_8 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPAdditionRequestReject')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPModificationRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPModificationRequestAcknowledge')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_9 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPModificationRequestReject')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPReleaseRequired')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_10 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPReleaseConfirm')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTStatusReport')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'ErrorIndication')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTReleaseRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTAssociationConfirmation')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'PrivateMessage')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_16 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPReleaseRequest')))
+    __InitiatingMessage_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 1), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_2), (u'procedureCode', 2), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_3), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_4), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_5), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_6), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_8), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_8), (u'procedureCode', 13), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_9), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_9), (u'procedureCode', 14), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_10), (u'procedureCode', 16), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_11), (u'procedureCode', 3), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_12), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_13), (u'procedureCode', 9), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_14), (u'procedureCode', 11), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_15), (u'procedureCode', 12), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_16), (u'procedureCode', 15), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
     _InitiatingMessage_procedureCode._const_tab = __InitiatingMessage_procedureCode_tab
     _InitiatingMessage_procedureCode._const_tab_at = None
     _InitiatingMessage_procedureCode._const_tab_id = u'procedureCode'
@@ -6371,12 +7354,21 @@ class XwAP_PDU_Descriptions:
     ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTModificationRefuse')))
     ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTReleaseRequired')))
     ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTReleaseConfirm')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTStatusReport')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'ErrorIndication')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTReleaseRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTAssociationConfirmation')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'PrivateMessage')))
-    __SuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 1), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2), (u'procedureCode', 2), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8), (u'procedureCode', 3), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10), (u'procedureCode', 9), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11), (u'procedureCode', 11), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12), (u'procedureCode', 12), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPAdditionRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPAdditionRequestAcknowledge')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_8 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPAdditionRequestReject')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPModificationRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPModificationRequestAcknowledge')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_9 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPModificationRequestReject')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPReleaseRequired')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_10 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPReleaseConfirm')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTStatusReport')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'ErrorIndication')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTReleaseRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTAssociationConfirmation')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'PrivateMessage')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPReleaseRequest')))
+    __SuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 1), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2), (u'procedureCode', 2), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_8), (u'procedureCode', 13), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_9), (u'procedureCode', 14), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_10), (u'procedureCode', 16), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11), (u'procedureCode', 3), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13), (u'procedureCode', 9), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14), (u'procedureCode', 11), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15), (u'procedureCode', 12), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16), (u'procedureCode', 15), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
     _SuccessfulOutcome_procedureCode._const_tab = __SuccessfulOutcome_procedureCode_tab
     _SuccessfulOutcome_procedureCode._const_tab_at = None
     _SuccessfulOutcome_procedureCode._const_tab_id = u'procedureCode'
@@ -6421,12 +7413,21 @@ class XwAP_PDU_Descriptions:
     ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTModificationRefuse')))
     ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTReleaseRequired')))
     ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTReleaseConfirm')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTStatusReport')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'ErrorIndication')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTReleaseRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTAssociationConfirmation')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'PrivateMessage')))
-    __UnsuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 1), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2), (u'procedureCode', 2), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8), (u'procedureCode', 3), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10), (u'procedureCode', 9), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11), (u'procedureCode', 11), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12), (u'procedureCode', 12), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPAdditionRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPAdditionRequestAcknowledge')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_8 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPAdditionRequestReject')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPModificationRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPModificationRequestAcknowledge')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_9 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPModificationRequestReject')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPReleaseRequired')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_10 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPReleaseConfirm')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTStatusReport')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'ErrorIndication')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTReleaseRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTAssociationConfirmation')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'PrivateMessage')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPReleaseRequest')))
+    __UnsuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 1), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2), (u'procedureCode', 2), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_8), (u'procedureCode', 13), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_9), (u'procedureCode', 14), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_10), (u'procedureCode', 16), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11), (u'procedureCode', 3), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13), (u'procedureCode', 9), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14), (u'procedureCode', 11), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15), (u'procedureCode', 12), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16), (u'procedureCode', 15), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
     _UnsuccessfulOutcome_procedureCode._const_tab = __UnsuccessfulOutcome_procedureCode_tab
     _UnsuccessfulOutcome_procedureCode._const_tab_at = None
     _UnsuccessfulOutcome_procedureCode._const_tab_id = u'procedureCode'
@@ -6469,12 +7470,21 @@ class XwAP_PDU_Descriptions:
     _XWAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_6 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTModificationRefuse')))
     _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTReleaseRequired')))
     _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTReleaseConfirm')))
-    _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTStatusReport')))
-    _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'ErrorIndication')))
-    _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTReleaseRequest')))
-    _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTAssociationConfirmation')))
-    _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'PrivateMessage')))
-    XWAP_ELEMENTARY_PROCEDURES._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1), (u'procedureCode', 1), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_2), (u'procedureCode', 2), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_3), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_4), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_5), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_6), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8), (u'procedureCode', 3), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10), (u'procedureCode', 9), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_11), (u'procedureCode', 11), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_12), (u'procedureCode', 12), (u'criticality', u'ignore')])], rr=[], ev=[], er=[])
+    _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPAdditionRequest')))
+    _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPAdditionRequestAcknowledge')))
+    _XWAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_8 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPAdditionRequestReject')))
+    _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPModificationRequest')))
+    _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPModificationRequestAcknowledge')))
+    _XWAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_9 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPModificationRequestReject')))
+    _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPReleaseRequired')))
+    _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_10 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPReleaseConfirm')))
+    _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTStatusReport')))
+    _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'ErrorIndication')))
+    _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTReleaseRequest')))
+    _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTAssociationConfirmation')))
+    _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'PrivateMessage')))
+    _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_16 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPReleaseRequest')))
+    XWAP_ELEMENTARY_PROCEDURES._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1), (u'procedureCode', 1), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_2), (u'procedureCode', 2), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_3), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_4), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_5), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_6), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_8), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_8), (u'procedureCode', 13), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_9), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_9), (u'procedureCode', 14), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_10), (u'procedureCode', 16), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_11), (u'procedureCode', 3), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_12), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_13), (u'procedureCode', 9), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_14), (u'procedureCode', 11), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_15), (u'procedureCode', 12), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_16), (u'procedureCode', 15), (u'criticality', u'ignore')])], rr=[], ev=[], er=[])
     
     #-----< XWAP-ELEMENTARY-PROCEDURES-CLASS-1 >-----#
     XWAP_ELEMENTARY_PROCEDURES_CLASS_1 = CLASS(name=u'XWAP-ELEMENTARY-PROCEDURES-CLASS-1', mode=MODE_SET, typeref=ASN1RefType(('XwAP-PDU-Descriptions', 'XWAP-ELEMENTARY-PROCEDURE')))
@@ -6500,7 +7510,15 @@ class XwAP_PDU_Descriptions:
     _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_6 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTModificationRefuse')))
     _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTReleaseRequired')))
     _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTReleaseConfirm')))
-    XWAP_ELEMENTARY_PROCEDURES_CLASS_1._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1), (u'procedureCode', 1), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2), (u'procedureCode', 2), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_3), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_3), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_4), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_4), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_5), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_5), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_6), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_6), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_7), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_7), (u'procedureCode', 10), (u'criticality', u'reject')])], rr=[], ev=[], er=[])
+    _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPAdditionRequest')))
+    _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPAdditionRequestAcknowledge')))
+    _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_8 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPAdditionRequestReject')))
+    _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPModificationRequest')))
+    _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPModificationRequestAcknowledge')))
+    _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_9 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPModificationRequestReject')))
+    _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPReleaseRequired')))
+    _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_10 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPReleaseConfirm')))
+    XWAP_ELEMENTARY_PROCEDURES_CLASS_1._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1), (u'procedureCode', 1), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2), (u'procedureCode', 2), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_3), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_3), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_4), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_4), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_5), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_5), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_6), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_6), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_7), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_7), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_8), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_8), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_8), (u'procedureCode', 13), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_9), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_9), (u'UnsuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_9), (u'procedureCode', 14), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_10), (u'SuccessfulOutcome', _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_10), (u'procedureCode', 16), (u'criticality', u'reject')])], rr=[], ev=[], er=[])
     
     #-----< XWAP-ELEMENTARY-PROCEDURES-CLASS-2 >-----#
     XWAP_ELEMENTARY_PROCEDURES_CLASS_2 = CLASS(name=u'XWAP-ELEMENTARY-PROCEDURES-CLASS-2', mode=MODE_SET, typeref=ASN1RefType(('XwAP-PDU-Descriptions', 'XWAP-ELEMENTARY-PROCEDURE')))
@@ -6509,7 +7527,8 @@ class XwAP_PDU_Descriptions:
     _XWAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTReleaseRequest')))
     _XWAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'WTAssociationConfirmation')))
     _XWAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'PrivateMessage')))
-    XWAP_ELEMENTARY_PROCEDURES_CLASS_2._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0), (u'procedureCode', 3), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2), (u'procedureCode', 9), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3), (u'procedureCode', 11), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4), (u'procedureCode', 12), (u'criticality', u'ignore')])], rr=[], ev=[], er=[])
+    _XWAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPReleaseRequest')))
+    XWAP_ELEMENTARY_PROCEDURES_CLASS_2._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0), (u'procedureCode', 3), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2), (u'procedureCode', 9), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3), (u'procedureCode', 11), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4), (u'procedureCode', 12), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XWAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5), (u'procedureCode', 15), (u'criticality', u'ignore')])], rr=[], ev=[], er=[])
     
     #-----< xwSetup >-----#
     xwSetup = CLASS(name=u'xwSetup', mode=MODE_VALUE, typeref=ASN1RefType(('XwAP-PDU-Descriptions', 'XWAP-ELEMENTARY-PROCEDURE')))
@@ -6590,6 +7609,31 @@ class XwAP_PDU_Descriptions:
     _privateMessage_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'PrivateMessage')))
     privateMessage._val = dict([(u'InitiatingMessage', _privateMessage_val_InitiatingMessage), (u'procedureCode', 12), (u'criticality', u'ignore')])
     
+    #-----< lWIPAdditionPreparation >-----#
+    lWIPAdditionPreparation = CLASS(name=u'lWIPAdditionPreparation', mode=MODE_VALUE, typeref=ASN1RefType(('XwAP-PDU-Descriptions', 'XWAP-ELEMENTARY-PROCEDURE')))
+    _lWIPAdditionPreparation_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPAdditionRequest')))
+    _lWIPAdditionPreparation_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPAdditionRequestAcknowledge')))
+    _lWIPAdditionPreparation_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPAdditionRequestReject')))
+    lWIPAdditionPreparation._val = dict([(u'InitiatingMessage', _lWIPAdditionPreparation_val_InitiatingMessage), (u'SuccessfulOutcome', _lWIPAdditionPreparation_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _lWIPAdditionPreparation_val_UnsuccessfulOutcome), (u'procedureCode', 13), (u'criticality', u'reject')])
+    
+    #-----< eNBInitiatedLWIPModification >-----#
+    eNBInitiatedLWIPModification = CLASS(name=u'eNBInitiatedLWIPModification', mode=MODE_VALUE, typeref=ASN1RefType(('XwAP-PDU-Descriptions', 'XWAP-ELEMENTARY-PROCEDURE')))
+    _eNBInitiatedLWIPModification_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPModificationRequest')))
+    _eNBInitiatedLWIPModification_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPModificationRequestAcknowledge')))
+    _eNBInitiatedLWIPModification_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPModificationRequestReject')))
+    eNBInitiatedLWIPModification._val = dict([(u'InitiatingMessage', _eNBInitiatedLWIPModification_val_InitiatingMessage), (u'SuccessfulOutcome', _eNBInitiatedLWIPModification_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _eNBInitiatedLWIPModification_val_UnsuccessfulOutcome), (u'procedureCode', 14), (u'criticality', u'reject')])
+    
+    #-----< eNBInitiatedLWIPRelease >-----#
+    eNBInitiatedLWIPRelease = CLASS(name=u'eNBInitiatedLWIPRelease', mode=MODE_VALUE, typeref=ASN1RefType(('XwAP-PDU-Descriptions', 'XWAP-ELEMENTARY-PROCEDURE')))
+    _eNBInitiatedLWIPRelease_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPReleaseRequest')))
+    eNBInitiatedLWIPRelease._val = dict([(u'InitiatingMessage', _eNBInitiatedLWIPRelease_val_InitiatingMessage), (u'procedureCode', 15), (u'criticality', u'ignore')])
+    
+    #-----< wTInitiatedLWIPRelease >-----#
+    wTInitiatedLWIPRelease = CLASS(name=u'wTInitiatedLWIPRelease', mode=MODE_VALUE, typeref=ASN1RefType(('XwAP-PDU-Descriptions', 'XWAP-ELEMENTARY-PROCEDURE')))
+    _wTInitiatedLWIPRelease_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPReleaseRequired')))
+    _wTInitiatedLWIPRelease_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XwAP-PDU-Contents', 'LWIPReleaseConfirm')))
+    wTInitiatedLWIPRelease._val = dict([(u'InitiatingMessage', _wTInitiatedLWIPRelease_val_InitiatingMessage), (u'SuccessfulOutcome', _wTInitiatedLWIPRelease_val_SuccessfulOutcome), (u'procedureCode', 16), (u'criticality', u'reject')])
+    
     _all_ = [
         _XWAP_ELEMENTARY_PROCEDURE_InitiatingMessage,
         _XWAP_ELEMENTARY_PROCEDURE_SuccessfulOutcome,
@@ -6625,10 +7669,19 @@ class XwAP_PDU_Descriptions:
         ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7,
         ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7,
         ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_8,
+        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_8,
         ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_9,
+        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_9,
         ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_10,
         ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_11,
         ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_12,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_13,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_14,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_15,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_16,
         _InitiatingMessage_procedureCode,
         _InitiatingMessage_criticality,
         _InitiatingMessage_value,
@@ -6657,10 +7710,19 @@ class XwAP_PDU_Descriptions:
         ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7,
         ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7,
         ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8,
+        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_8,
         ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9,
+        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_9,
         ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_10,
         ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11,
         ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16,
         _SuccessfulOutcome_procedureCode,
         _SuccessfulOutcome_criticality,
         _SuccessfulOutcome_value,
@@ -6689,10 +7751,19 @@ class XwAP_PDU_Descriptions:
         ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7,
         ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7,
         ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_8,
         ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_9,
         ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_10,
         ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11,
         ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16,
         _UnsuccessfulOutcome_procedureCode,
         _UnsuccessfulOutcome_criticality,
         _UnsuccessfulOutcome_value,
@@ -6721,10 +7792,19 @@ class XwAP_PDU_Descriptions:
         _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7,
         _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7,
         _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8,
+        _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_8,
+        _XWAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_8,
         _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9,
+        _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_9,
+        _XWAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_9,
         _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10,
+        _XWAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_10,
         _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_11,
         _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_12,
+        _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_13,
+        _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_14,
+        _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_15,
+        _XWAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_16,
         XWAP_ELEMENTARY_PROCEDURES_CLASS_1,
         _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0,
         _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0,
@@ -6748,12 +7828,21 @@ class XwAP_PDU_Descriptions:
         _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_6,
         _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_7,
         _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_7,
+        _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_8,
+        _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_8,
+        _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_8,
+        _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_9,
+        _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_9,
+        _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_9,
+        _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_10,
+        _XWAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_10,
         XWAP_ELEMENTARY_PROCEDURES_CLASS_2,
         _XWAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0,
         _XWAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1,
         _XWAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2,
         _XWAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3,
         _XWAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4,
+        _XWAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5,
         xwSetup,
         _xwSetup_val_InitiatingMessage,
         _xwSetup_val_SuccessfulOutcome,
@@ -6794,6 +7883,19 @@ class XwAP_PDU_Descriptions:
         _wTAssociationConfirmation_val_InitiatingMessage,
         privateMessage,
         _privateMessage_val_InitiatingMessage,
+        lWIPAdditionPreparation,
+        _lWIPAdditionPreparation_val_InitiatingMessage,
+        _lWIPAdditionPreparation_val_SuccessfulOutcome,
+        _lWIPAdditionPreparation_val_UnsuccessfulOutcome,
+        eNBInitiatedLWIPModification,
+        _eNBInitiatedLWIPModification_val_InitiatingMessage,
+        _eNBInitiatedLWIPModification_val_SuccessfulOutcome,
+        _eNBInitiatedLWIPModification_val_UnsuccessfulOutcome,
+        eNBInitiatedLWIPRelease,
+        _eNBInitiatedLWIPRelease_val_InitiatingMessage,
+        wTInitiatedLWIPRelease,
+        _wTInitiatedLWIPRelease_val_InitiatingMessage,
+        _wTInitiatedLWIPRelease_val_SuccessfulOutcome,
     ]
 
 init_modules(XwAP_CommonDataTypes, XwAP_Constants, XwAP_Containers, XwAP_IEs, XwAP_PDU_Contents, XwAP_PDU_Descriptions)

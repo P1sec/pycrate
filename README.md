@@ -204,7 +204,7 @@ The most important ones are:
    file to be used with the pycrate ASN.1 runtime (in *pycrate_asn1rt*), 
    and *JSONDepGraphGenerator* which produces json file listing object dependencies 
    (which then can be browsed dynamically thanks to D3).
-* *proc* which is the top-level module for the compiler, it contains for example 
+* *asnproc* which is the top-level module for the compiler, it contains for example 
    the *compile_text()* function which compiles a serie of ASN.1 modules into
    Python objects
    
