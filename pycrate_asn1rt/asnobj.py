@@ -921,6 +921,19 @@ class ASN1Obj(Element):
     def get_val(self):
         return self._val
     
+
+    def __getattr__(self, name):
+        """
+            Lazy attribute accesor to `get_at`
+        """
+
+        # Do not hook internal attrs
+        if str.startswith(name, '_'):
+            raise AttributeError('Unknown attribute {}'.format(name))
+
+        path = name.replace('_', '-')
+        return self.get_at([path])
+
     def get_val_paths(self, curpath=[], paths=[]):
         """
         returns the list of paths of each individual basic value set into self
