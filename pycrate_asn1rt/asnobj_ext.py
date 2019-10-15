@@ -429,7 +429,8 @@ Single value: Python 2-tuple
                 char._len_bit = 8*len(char._buf)
                 val = ASN1CodecBER.scan_tlv_ws(char, tlv)
                 self._val_tag = (cl, pc, tval)
-                self._val = ('_unk_%i%i%i' % self._val_tag, val)
+                ident = '_unk_%i%i%i' % self._val_tag
+                self._val = (ident, val)
                 V = Envelope('V', GEN=(Tag, Len, Buf(ident, val=val, bl=8*len(val), rep=REPR_HEX)))
             elif lval >= 0:
                 # primitive object
