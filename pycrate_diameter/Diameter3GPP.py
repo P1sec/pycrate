@@ -588,7 +588,7 @@ TGPPAVPInfos_dict = {
     1404 : ('QoS-Subscribed', UTF8String),
     1405 : ('ULR-Flags', Unsigned32),
     1406 : ('ULA-Flags', Unsigned32),
-    1407 : ('VisitedPLMNId', OctetString),
+    1407 : ('Visited-PLMN-Id', OctetString),
     1408 : ('Requested-EUTRAN-Authentication-Info', Grouped),
     1409 : ('Requested-UTRAN-GERAN-Authentication-Info', Grouped),
     1410 : ('Number-Of-Requested-Vectors', Unsigned32),
@@ -1149,7 +1149,7 @@ TGPPAVPInfos_dict = {
     3140 : ('Reachability-Information', Unsigned32),
     3141 : ('IMEI-Change', Unsigned32),
     3142 : ('Monitoring-Event-Config-Status', Grouped),
-    3143 : ('Supported-Service', Grouped),
+    3143 : ('Supported-Services', Grouped),
     3144 : ('Supported-Monitoring-Event', Unsigned64),
     3145 : ('CIR-Flags', Unsigned32),
     3146 : ('Service-Result', Grouped),
@@ -1480,7 +1480,7 @@ TGPPAVPInfos_dict = {
     4206 : ('Transfer-Start-Time', Time),
     4207 : ('Transfer-Policy', Grouped),
     4208 : ('Transfer-Policy-Id', Unsigned32),
-    4209 : ('Number-Of-UEs', Unsigned32),
+    4209 : ('Number-of-UEs', Unsigned32),
     4210 : ('Access-Network-Reports', Grouped),
     4211 : ('Event-Configuration', Grouped),
     4212 : ('Event-Configuration-State', Unsigned32),
@@ -1553,7 +1553,7 @@ TGPPAVPInfos_dict = {
 
 # extend existing dictionnary and LUT
 
-FMT_LUT_TS29230     = dict(FMT_LUT_RFC6733)
+FMT_LUT_TS29230     = dict(FMT_LUT_IETF)
 AVP3GPPCodes_dict   = dict(AVPCodes_dict)
 
 for code, (name, fmt) in TGPPAVPInfos_dict.items():
