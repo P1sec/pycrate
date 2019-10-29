@@ -207,6 +207,15 @@ class AVPHdr(Envelope):
         self[6].set_transauto(lambda: False if self[1].get_val() else True)
 
 
+class AVPPad(BufAuto):
+    
+    _rep = REPR_HEX
+    
+    def reautomate(self):
+        BufAuto.reautomate(self)
+        self._val = None
+
+
 class AVPGeneric(Envelope):
     
     # FMT_LUT is a lookup table to get the proper AVP Data Format from the 
@@ -216,15 +225,18 @@ class AVPGeneric(Envelope):
     _GEN = (
         AVPHdr(),
         Buf('AVPData', rep=REPR_HEX, hier=1),
-        BufAuto('AVPPad', rep=REPR_HEX)
+        AVPPad()
         )
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[0][5].set_valauto(lambda: 12 + self[1].get_len() if self[0][1].get_val() else \
                                         8 + self[1].get_len())
-        self[1].set_blauto(lambda: (self[0][5].get_val() - 12) << 3 if self[0][1].get_val() else \
-                                   (self[0][5].get_val() -  8) << 3)
+        if isinstance(self[1], Buf):
+            # when cloning an AVP that was changed to a specific structure
+            # we still go over this __init__ code
+            self[1].set_blauto(lambda: (self[0][5].get_val() - 12) << 3 if self[0][1].get_val() else \
+                                       (self[0][5].get_val() -  8) << 3)
         self[2].set_blauto(lambda: (-self[1].get_len()%4) << 3)
     
     def set_val(self, val):
@@ -389,14 +401,15 @@ def GenerateAVP(Code, DataType, M=0, P=0, VendorID=None):
             _GEN = (
                 AVPHdr(val=val_hdr),
                 DataType('AVPData', hier=1),
-                Buf('AVPPad', rep=REPR_HEX)
+                AVPPad()
                 )
             def __init__(self, *args, **kwargs):
                 Envelope.__init__(self, *args, **kwargs)
                 self[0][5].set_valauto(lambda: 12 + self[1].get_len() if self[0][1].get_val() else \
                                                 8 + self[1].get_len())
-                self[1].set_blauto(lambda: (self[0][5].get_val() - 12) << 3 if self[0][1].get_val() else \
-                                           (self[0][5].get_val() -  8) << 3)
+                if isinstance(self[1], Buf):
+                    self[1].set_blauto(lambda: (self[0][5].get_val() - 12) << 3 if self[0][1].get_val() else \
+                                               (self[0][5].get_val() -  8) << 3)
                 self[2].set_blauto(lambda: (-self[1].get_len()%4) << 3)
     #
     return AVP
