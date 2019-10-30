@@ -228,11 +228,24 @@ Specific constraints attributes:
             if m:
                 # named offsets
                 off = set(map(str.strip, m.group(1).split(',')))
-                # converting to integral offsets (starting from 0)
-                off  = [self._cont[no] for no in off]
-                moff = max(off)
-                self._val = (sum([1<<(moff-i) for i in off]), 1+moff)
-                return txt[m.end():].strip()
+                if len(off) == 1 and '' in off:
+                    # empty content
+                    bval  = 0
+                    bsize = 0
+                else:
+                    # converting to integral offsets (starting from 0)
+                    off   = [self._cont[no] for no in off]
+                    moff  = max(off)
+                    bval  = sum([1<<(moff-i) for i in off])
+                    bsize = 1+moff
+                if self._const_sz is not None and self._const_sz.ext is None \
+                and self._const_sz.lb is not None and bsize < self._const_sz.lb:
+                    # non extensible size constraint that requires bsize to be extended
+                    # and bval to be shifted accordingly
+                    bval <<= (self._const_sz.lb - bsize)
+                    bsize = self._const_sz.lb
+                self._val = (bval, bsize)
+                return txt[m.end():].lstrip()
         elif self._const_cont:
             # CHOICE-like value notation
             if self._const_cont._typeref:
