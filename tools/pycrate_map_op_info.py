@@ -65,23 +65,27 @@ def get_error_info(err, info, wext=True):
 
 
 def get_construct_info(seq, info, wext=True, space=SPACE_CONSTRUCT):
+    if PRINT_PROTO_EXTCONTAINER:
+        bl = set()
+    else:
+        bl = set(('extensionContainer', ))
     if seq.TYPE in (TYPE_SEQ, TYPE_SET):
         for c in seq._cont.values():
             info.append(space + '- %s (%s)' % (c._name, c.TYPE))
             if wext and c.TYPE in TYPE_CONSTRUCT and \
             (c._name != 'extensionContainer' or PRINT_PROTO_EXTCONTAINER):
-                info.append( 2*space + pp.pformat(c.get_proto()[1]).replace('\n', '\n    ' + space) )
+                info.append( 2*space + pp.pformat(c.get_proto(blacklist=bl)[1]).replace('\n', '\n    ' + space) )
         info.append(space + 'mandatory : %s' % ', '.join(seq._root_mand))
     elif seq.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
         c = seq._cont
         info.append(space + '- %s (%s)' % (c._typeref.called[1], c.TYPE))
         if wext and c.TYPE in TYPE_CONSTRUCT:
-            info.append( 2*space + pp.pformat(c.get_proto()[1]).replace('\n', '\n    ' + space) )
+            info.append( 2*space + pp.pformat(c.get_proto(blacklist=bl)[1]).replace('\n', '\n    ' + space) )
     elif seq.TYPE == TYPE_CHOICE:
         for c in seq._cont.values():
             info.append(space + '- %s (%s)' % (c._name, c.TYPE))
             if wext and c.TYPE in TYPE_CONSTRUCT:
-                info.append( 2*space + pp.pformat(c.get_proto()[1]).replace('\n', '\n    ' + space) )
+                info.append( 2*space + pp.pformat(c.get_proto(blacklist=bl)[1]).replace('\n', '\n    ' + space) )
 
 
 def show_infos(val, werr, wext):
