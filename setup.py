@@ -25,6 +25,7 @@ setup(
     scripts=["tools/pycrate_asn1compile.py",
              "tools/pycrate_berdecode.py",
              "tools/pycrate_showmedia.py",
+             "tools/pycrate_map_op_info.py",
              ],
     
     # no mandatory dependency
