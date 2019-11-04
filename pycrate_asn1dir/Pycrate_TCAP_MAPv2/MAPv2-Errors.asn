@@ -1,0 +1,237 @@
+MAPv2-Errors -- {
+   -- ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   -- gsm-Network (1) modules (3) map-Errors (10) version2 (2)}
+
+DEFINITIONS
+
+::=
+
+BEGIN
+
+EXPORTS
+
+	systemFailure,
+	dataMissing,
+	unexpectedDataValue,
+	facilityNotSupported,
+
+	unknownSubscriber,
+	numberChanged,
+	unknownBaseStation,
+	unknownMSC,
+	unidentifiedSubscriber,
+	unknownEquipment,
+
+	roamingNotAllowed,
+	illegalSubscriber,
+	illegalEquipment,
+	bearerServiceNotProvisioned,
+	teleserviceNotProvisioned,
+
+	invalidTargetBaseStation,
+	noRadioResourceAvailable,
+	noHandoverNumberAvailable,
+	subsequentHandoverFailure,
+
+	tracingBufferFull,
+
+	noRoamingNumberAvailable,
+	absentSubscriber,
+	callBarred,
+	forwardingViolation,
+	cug-Reject,
+
+	illegalSS-Operation,
+	ss-ErrorStatus,
+	ss-NotAvailable,
+	ss-SubscriptionViolation,
+	ss-Incompatibility,
+	unknownAlphabet,
+	ussd-Busy,
+	pw-RegistrationFailure,
+	negativePW-Check,
+	numberOfPW-AttemptsViolation,
+
+	subscriberBusyForMT-SMS,
+	sm-DeliveryFailure,
+	messageWaitingListFull
+;
+
+IMPORTS
+	ERROR
+FROM Remote-Operations-Information-Objects {joint-iso-itu-t remote-operations(4)
+  informationObjects(5) version1(0) }
+
+	SS-Status,
+	SS-SubscriptionOption
+FROM MAPv2-SS-DataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-SS-DataTypes (14) version2 (2)}
+
+	RoamingNotAllowedCause,
+	CallBarringCause,
+	CUG-RejectCause,
+	SS-IncompatibilityCause,
+	PW-RegistrationFailureCause,
+	SM-DeliveryFailureCause
+FROM MAPv2-ER-DataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-ER-DataTypes (17) version2 (2)}
+
+	NetworkResource
+FROM MAPv2-CommonDataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-CommonDataTypes (18) version2 (2)}
+;
+
+-- ERROR CODE are copied from the original MAPv2-Protocol module
+
+systemFailure ERROR ::= { 
+	PARAMETER
+	    NetworkResource
+		-- optional
+	CODE    local: 34 }
+
+dataMissing ERROR ::= {
+    CODE    local: 35 }
+
+unexpectedDataValue ERROR ::= {
+    CODE    local: 36 }
+
+facilityNotSupported ERROR ::= {
+    CODE    local: 21 }
+
+unknownSubscriber ERROR ::= {
+    CODE    local: 1 }
+
+numberChanged ERROR ::= {
+    CODE    local: 44 }
+
+unknownBaseStation ERROR ::= {
+    CODE    local: 2 }
+
+unknownMSC ERROR ::= {
+    CODE    local: 3 }
+
+unidentifiedSubscriber ERROR ::= {
+    CODE    local: 5 }
+
+unknownEquipment ERROR ::= {
+    CODE    local: 7 }
+
+roamingNotAllowed ERROR ::= {
+	PARAMETER
+		RoamingNotAllowedCause
+		-- optional
+		-- OA1 roamingNotAllowedCause must be absent in version 1
+		-- OP>1 roamingNotAllowedCause must be present in version greater 1
+	CODE    local: 8 }
+
+illegalSubscriber ERROR ::= {
+    CODE    local: 9 }
+
+illegalEquipment ERROR ::= {
+    CODE    local: 12 }
+
+bearerServiceNotProvisioned ERROR ::= {
+    CODE    local: 10 }
+
+teleserviceNotProvisioned ERROR ::= {
+    CODE    local: 11 }
+
+invalidTargetBaseStation ERROR ::= {
+    CODE    local: 23 }
+
+noRadioResourceAvailable ERROR ::= {
+    CODE    local: 24 }
+
+noHandoverNumberAvailable ERROR ::= {
+    CODE    local: 25 }
+
+subsequentHandoverFailure ERROR ::= {
+    CODE    local: 26 }
+
+tracingBufferFull ERROR ::= {
+    CODE    local: 40 }
+
+noRoamingNumberAvailable ERROR ::= {
+    CODE    local: 39 }
+
+Mwd-Set ::= BOOLEAN
+
+absentSubscriber ERROR ::= {
+	PARAMETER
+	    Mwd-Set
+		-- optional
+		-- OA>1 mwd-Set must be absent in version greater 1
+    CODE    local: 27 }
+
+callBarred ERROR ::= {
+	PARAMETER
+		CallBarringCause
+		-- optional
+    CODE    local: 13 }
+
+forwardingViolation ERROR ::= {
+    CODE    local: 14 }
+
+cug-Reject ERROR ::= {
+	PARAMETER
+		CUG-RejectCause
+		-- optional
+    CODE    local: 15 }
+
+illegalSS-Operation ERROR ::= {
+    CODE    local: 16 }
+
+ss-ErrorStatus ERROR ::= {
+	PARAMETER
+		SS-Status
+		-- optional
+    CODE    local: 17 }
+
+ss-NotAvailable ERROR ::= {
+    CODE    local: 18 }
+
+ss-SubscriptionViolation ERROR ::= {
+	PARAMETER
+		SS-SubscriptionOption
+		-- optional
+		-- NU>1 ss-SubscriptionOption must not be used in version greater 1
+    CODE    local: 19 }
+
+ss-Incompatibility ERROR ::= {
+	PARAMETER
+		SS-IncompatibilityCause
+		-- optional
+    CODE    local: 20 }
+
+unknownAlphabet ERROR ::= {
+    CODE    local: 71 }
+
+ussd-Busy ERROR ::= {
+    CODE    local: 72 }
+
+pw-RegistrationFailure ERROR ::= {
+	PARAMETER
+		PW-RegistrationFailureCause
+    CODE    local: 37 }
+
+negativePW-Check ERROR ::= {
+    CODE    local: 38 }
+
+numberOfPW-AttemptsViolation ERROR ::= {
+    CODE    local: 43 }
+
+subscriberBusyForMT-SMS ERROR ::= {
+    CODE    local: 31 }
+
+sm-DeliveryFailure ERROR ::= {
+	PARAMETER
+		SM-DeliveryFailureCause
+    CODE    local: 32 }
+
+messageWaitingListFull ERROR ::= {
+    CODE    local: 33 }
+
+END

@@ -1,0 +1,68 @@
+MAPv2-OM-DataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-OM-DataTypes (12) version2 (2)}
+
+DEFINITIONS
+
+IMPLICIT TAGS
+
+::=
+
+BEGIN
+
+EXPORTS
+	ActivateTraceModeArg,
+	DeactivateTraceModeArg,
+	TraceSubscriberActivityArg,
+	NoteInternalHO-Arg
+;
+
+IMPORTS
+	AddressString,
+	ExternalSignalInfo,
+	IMSI,
+	GlobalCellId
+FROM MAPv2-CommonDataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-CommonDataTypes (18) version2 (2)}
+
+;
+
+
+ActivateTraceModeArg ::= SEQUENCE {
+	imsi			[0] IMSI		OPTIONAL,
+	traceReference	[1] TraceReference,
+	traceType	[2] TraceType,
+	omc-Id		[3] AddressString	OPTIONAL,
+	...}
+
+TraceReference ::= OCTET STRING (SIZE (1..2))
+
+TraceType ::= INTEGER
+	(0..255)
+	-- Trace types are fully defined in GSM 12.08.
+
+DeactivateTraceModeArg ::= SEQUENCE {
+	imsi			[0] IMSI		OPTIONAL,
+	traceReference	[1] TraceReference,
+	...}
+
+TraceSubscriberActivityArg ::= SEQUENCE {
+	imsi			[0] IMSI		OPTIONAL,
+	traceReference	[1] TraceReference,
+	traceType	[2] TraceType,
+	omc-Id		[3] AddressString	OPTIONAL,
+	callReference	[4] CallReference	OPTIONAL}
+
+CallReference ::= OCTET STRING (SIZE (1..3))
+
+NoteInternalHO-Arg ::= SEQUENCE {
+	handoverType	HandoverType,
+	targetCellId	[1] GlobalCellId	OPTIONAL,
+	channelId	[2] ExternalSignalInfo	OPTIONAL}
+
+HandoverType ::= ENUMERATED {
+	interBSS  (0),
+	intraBSS  (1)}
+
+END

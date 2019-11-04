@@ -1,0 +1,119 @@
+MAPv2-ApplicationContexts {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-ApplicationContexts (2) version2 (2)}
+
+DEFINITIONS
+
+::=
+
+BEGIN
+
+
+-- EXPORTS everything
+
+
+IMPORTS
+	gsm-NetworkId,
+	ac-Id
+FROM MobileDomainDefinitions {
+   ccitt (0) identified-organization (4) etsi (0) mobileDomain (0)
+   mobileDomainDefinitions (0) version1 (1)}
+;
+
+-- application-context-names
+
+map-ac  OBJECT IDENTIFIER ::= {gsm-NetworkId ac-Id}
+
+networkLocUpContext-v2  OBJECT IDENTIFIER ::=
+	{map-ac networkLocUp(1) version2(2)}
+networkLocUpContext-v1  OBJECT IDENTIFIER ::=
+	{map-ac networkLocUp(1) version1(1)}
+
+
+locationCancellation-v2  OBJECT IDENTIFIER ::=
+	{map-ac locationCancel(2) version2(2)}
+locationCancellation-v1  OBJECT IDENTIFIER ::=
+	{map-ac locationCancel(2) version1(1)}
+
+roamingNumberEnquiryContext-v2  OBJECT IDENTIFIER ::=
+	{map-ac roamingNbEnquiry(3) version2(2)}
+roamingNumberEnquiryContext-v1  OBJECT IDENTIFIER ::=
+	{map-ac roamingNbEnquiry(3) version1(1)}
+
+locationInfoRetrievalContext-v2  OBJECT IDENTIFIER ::=
+	{map-ac locInfoRetrieval(5) version2(2)}
+locationInfoRetrievalContext-v1  OBJECT IDENTIFIER ::=
+	{map-ac locInfoRetrieval(5) version1(1)}
+
+resetContext-v2  OBJECT IDENTIFIER ::=
+	{map-ac reset(10) version2(2)}
+resetContext-v1  OBJECT IDENTIFIER ::=
+	{map-ac reset(10) version1(1)}
+
+handoverControlContext-v2  OBJECT IDENTIFIER ::=
+	{map-ac handoverControl(11) version2(2)}
+handoverControlContext-v1  OBJECT IDENTIFIER ::=
+	{map-ac handoverControl(11) version1(1)}
+
+equipmentMngtContext-v2  OBJECT IDENTIFIER ::=
+	{map-ac equipmentMngt(13) version2(2)}
+equipmentMngtContext-v1  OBJECT IDENTIFIER ::=
+	{map-ac equipmentMngt(13) version1(1)}
+
+infoRetrievalContext-v2  OBJECT IDENTIFIER ::=
+	{map-ac infoRetrieval(14) version2(2)}
+infoRetrievalContext-v1  OBJECT IDENTIFIER ::=
+	{map-ac infoRetrieval(14) version1(1)}
+
+interVlrInfoRetrievalContext-v2  OBJECT IDENTIFIER ::=
+	{map-ac interVlrInfoRetrieval(15) version2(2)}
+
+subscriberDataMngtContext-v2  OBJECT IDENTIFIER ::=
+	{map-ac subscriberDataMngt(16) version2(2)}
+subscriberDataMngtContext-v1  OBJECT IDENTIFIER ::=
+	{map-ac subscriberDataMngt(16) version1(1)}
+
+tracingContext-v2  OBJECT IDENTIFIER ::=
+	{map-ac tracing(17) version2(2)}
+tracingContext-v1  OBJECT IDENTIFIER ::=
+	{map-ac tracing(17) version1(1)}
+
+networkFunctionalSsContext-v2  OBJECT IDENTIFIER ::=
+	{map-ac networkFunctionalSs(18) version2(2)}
+networkFunctionalSsContext-v1  OBJECT IDENTIFIER ::=
+	{map-ac networkFunctionalSs(18) version1(1)}
+
+
+networkUnstructuredSsContext-v2  OBJECT IDENTIFIER ::=
+	{map-ac networkUnstructuredSs(19) version2(2)}
+
+shortMsgGatewayContext-v2  OBJECT IDENTIFIER ::=
+	{map-ac shortMsgGateway(20) version2(2)}
+shortMsgGatewayContext-v1  OBJECT IDENTIFIER ::=
+	{map-ac shortMsgGateway(20) version1(1)}
+
+shortMsgMO-RelayContext-v2  OBJECT IDENTIFIER ::=
+	{map-ac shortMsgMO-Relay(21) version2(2)}
+shortMsgRelayContext-v1  OBJECT IDENTIFIER ::=
+	{map-ac --shortMsgRelay--21 version1(1)}
+
+shortMsgAlertContext-v2  OBJECT IDENTIFIER ::=
+	{map-ac shortMsgAlert(23) version2(2)}
+shortMsgAlertContext-v1  OBJECT IDENTIFIER ::=
+	{map-ac shortMsgAlert(23) version1(1)}
+
+mwdMngtContext-v2  OBJECT IDENTIFIER ::=
+	{map-ac mwdMngt(24) version2(2)}
+mwdMngtContext-v1  OBJECT IDENTIFIER ::=
+	{map-ac mwdMngt(24) version1(1)}
+
+shortMsgMT-RelayContext-v2  OBJECT IDENTIFIER ::=
+	{map-ac shortMsgMT-Relay(25) version2(2)}
+
+imsiRetrievalContext-v2  OBJECT IDENTIFIER ::=
+	{map-ac imsiRetrieval(26) version2(2)}
+
+msPurgingContext-v2  OBJECT IDENTIFIER ::=
+	{map-ac msPurging(27) version2(2)}
+
+END

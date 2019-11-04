@@ -1,0 +1,139 @@
+MAPv2-Protocol
+
+DEFINITIONS
+
+::=
+
+BEGIN
+
+IMPORTS
+    OPERATION
+FROM Remote-Operations-Information-Objects {
+    joint-iso-itu-t remote-operations(4) informationObjects(5) version1(0)}
+
+	updateLocation,
+	cancelLocation,
+	purgeMS,
+	sendIdentification,
+	performHandover,
+	prepareHandover,
+	sendEndSignal,
+	processAccessSignalling,
+	forwardAccessSignalling,
+	performSubsequentHandover,
+	prepareSubsequentHandover,
+	sendAuthenticationInfo,
+	checkIMEI,
+	sendParameters,
+	insertSubscriberData,
+	deleteSubscriberData,
+	reset,
+	forwardCheckSS-Indication,
+	restoreData
+FROM MAPv2-MobileServiceOperations --{
+   --ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   --gsm-Network (1) modules (3) map-MobileServiceOperations (5)
+   --version2 (2)}
+
+	activateTraceMode,
+	deactivateTraceMode,
+	traceSubscriberActivity,
+	noteInternalHandover,
+	sendIMSI
+FROM MAPv2-OperationAndMaintenanceOperations --{
+   --ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   --gsm-Network (1) modules (3) map-OperationAndMaintenanceOperations (6)
+   --version2 (2)}
+
+	sendRoutingInfo,
+	provideRoamingNumber
+FROM MAPv2-CallHandlingOperations --{
+   --ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   --gsm-Network (1) modules (3) map-CallHandlingOperations (7)
+   --version2 (2)}
+
+	registerSS,
+	eraseSS,
+	activateSS,
+	deactivateSS,
+	interrogateSS,
+	processUnstructuredSS-Data,
+	processUnstructuredSS-Request,
+	unstructuredSS-Request,
+	unstructuredSS-Notify,
+	registerPassword,
+	getPassword,
+	beginSubscriberActivity
+FROM MAPv2-SupplementaryServiceOperations --{
+   --ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   --gsm-Network (1) modules (3) map-SupplementaryServiceOperations (8)
+   --version2 (2)}
+
+	sendRoutingInfoForSM,
+	forwardSM,
+	reportSM-DeliveryStatus,
+	noteSubscriberPresent,
+	alertServiceCentreWithoutResult,
+	alertServiceCentre,
+	informServiceCentre,
+	readyForSM
+FROM MAPv2-ShortMessageServiceOperations --{
+   --ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   --gsm-Network (1) modules (3) map-ShortMessageServiceOperations (9)
+   --version2 (2)}
+
+;
+
+Supported-MAP-Operations OPERATION ::= {
+    --
+    -- MAPv1 and MAPv2 from ETSI 09.02
+    --
+    MAPv2-CallHandlingOperations.provideRoamingNumber |
+    MAPv2-CallHandlingOperations.sendRoutingInfo |
+    MAPv2-MobileServiceOperations.cancelLocation |
+    MAPv2-MobileServiceOperations.checkIMEI |
+    MAPv2-MobileServiceOperations.deleteSubscriberData |
+    MAPv2-MobileServiceOperations.forwardAccessSignalling |
+    MAPv2-MobileServiceOperations.forwardCheckSS-Indication |
+    MAPv2-MobileServiceOperations.insertSubscriberData |
+    MAPv2-MobileServiceOperations.performHandover |
+    MAPv2-MobileServiceOperations.performSubsequentHandover |
+    MAPv2-MobileServiceOperations.prepareHandover |
+    MAPv2-MobileServiceOperations.prepareSubsequentHandover |
+    MAPv2-MobileServiceOperations.processAccessSignalling |
+    MAPv2-MobileServiceOperations.purgeMS |
+    MAPv2-MobileServiceOperations.reset |
+    MAPv2-MobileServiceOperations.restoreData |
+    MAPv2-MobileServiceOperations.sendAuthenticationInfo |
+    MAPv2-MobileServiceOperations.sendEndSignal |
+    MAPv2-MobileServiceOperations.sendIdentification |
+    MAPv2-MobileServiceOperations.sendParameters |
+    MAPv2-MobileServiceOperations.updateLocation |
+    MAPv2-OperationAndMaintenanceOperations.activateTraceMode |
+    MAPv2-OperationAndMaintenanceOperations.deactivateTraceMode |
+    MAPv2-OperationAndMaintenanceOperations.noteInternalHandover |
+    MAPv2-OperationAndMaintenanceOperations.sendIMSI |
+    MAPv2-OperationAndMaintenanceOperations.traceSubscriberActivity |
+    MAPv2-ShortMessageServiceOperations.alertServiceCentre |
+    MAPv2-ShortMessageServiceOperations.alertServiceCentreWithoutResult |
+    MAPv2-ShortMessageServiceOperations.forwardSM |
+    MAPv2-ShortMessageServiceOperations.informServiceCentre |
+    MAPv2-ShortMessageServiceOperations.noteSubscriberPresent |
+    MAPv2-ShortMessageServiceOperations.readyForSM |
+    MAPv2-ShortMessageServiceOperations.reportSM-DeliveryStatus |
+    MAPv2-ShortMessageServiceOperations.sendRoutingInfoForSM |
+    MAPv2-SupplementaryServiceOperations.activateSS |
+    MAPv2-SupplementaryServiceOperations.beginSubscriberActivity |
+    MAPv2-SupplementaryServiceOperations.deactivateSS |
+    MAPv2-SupplementaryServiceOperations.eraseSS |
+    MAPv2-SupplementaryServiceOperations.getPassword |
+    MAPv2-SupplementaryServiceOperations.interrogateSS |
+    MAPv2-SupplementaryServiceOperations.processUnstructuredSS-Data |
+    MAPv2-SupplementaryServiceOperations.processUnstructuredSS-Request |
+    MAPv2-SupplementaryServiceOperations.registerPassword |
+    MAPv2-SupplementaryServiceOperations.registerSS |
+    MAPv2-SupplementaryServiceOperations.unstructuredSS-Notify |
+    MAPv2-SupplementaryServiceOperations.unstructuredSS-Request
+    }
+
+END

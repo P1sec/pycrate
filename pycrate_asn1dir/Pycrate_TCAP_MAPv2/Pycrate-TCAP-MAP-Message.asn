@@ -1,0 +1,27 @@
+TCAP-MAP-Messages DEFINITIONS ::=
+BEGIN
+
+IMPORTS
+
+    --Supported-MAP-Operations
+    --FROM MAP-Protocol {itu-t identified-organization (4) etsi (0) mobileDomain (0)
+    --     gsm-Network (1) modules (3) map-Protocol (4) version16 (16)}
+    
+    --Supported-MAPv2-Operations
+    --FROM MAPv2-Protocol
+    
+    Supported-MAP-Operations
+    FROM MAPv2-Protocol
+    
+    TCMessage{}
+    FROM TCAPMessages {itu-t recommendation q 773 modules(2) messages(1) version3(3)}
+;
+
+-- TCMessage{OPERATION:Invokable, OPERATION:Returnable}
+-- here for commodity, we consider all MAP operation as potentially invokable and returnable
+
+TCAP-MAP-Message ::= TCMessage{ Supported-MAP-Operations, Supported-MAP-Operations }
+
+
+END
+

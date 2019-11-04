@@ -143,9 +143,11 @@ ASN_SPECS_CORE = {
     # GSMA spec
     'TAP3'      : 'GSMA_TAP3_17102014',
     # Pycrate TCAP-specific modules
-    'TCAP_RAW'  : 'Pycrate_TCAP',
-    'TCAP_MAP'  : 'Pycrate_TCAP_MAP',
-    'TCAP_CAP'  : 'Pycrate_TCAP_CAP',
+    'TCAP_RAW'      : 'Pycrate_TCAP',
+    'TCAP_MAP'      : 'Pycrate_TCAP_MAP',     # MAPv3 and further
+    'TCAP_MAPv2'    : 'Pycrate_TCAP_MAPv2',   # MAPv1 and v2 (based on old ETSI specs)
+    'TCAP_MAPv2v3'  : 'Pycrate_TCAP_MAPv2v3', # all MAPv1, v2, v3 and further into a single Python module
+    'TCAP_CAP'      : 'Pycrate_TCAP_CAP',
     }
 
 # ETSI Intelligent Transport System
