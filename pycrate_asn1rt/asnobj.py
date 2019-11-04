@@ -622,20 +622,21 @@ class ASN1Obj(Element):
             const['tab_at']   = self._const_tab_at
         return const
     
-    def _get_proto_old(self):
-        # old method, deprecated
-        # TODO: in case of recursive object, this will break Python
-        # TODO: add information on OPTIONAL / DEFAULT components
-        if self.TYPE in TYPES_BASIC + TYPES_EXT:
-            return self.TYPE
-        elif self.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
-            return [self._cont._get_proto_old()]
-        elif self.TYPE in (TYPE_CHOICE, TYPE_SEQ, TYPE_SET, TYPE_CLASS):
-            return ASN1Dict([(ident, Comp._get_proto_old()) for (ident, Comp) in self._cont.items()])
-        else:
-            assert()
+    #deprecated
+    #def _get_proto_old(self):
+    #    # old method, deprecated
+    #    # TODO: in case of recursive object, this will break Python
+    #    # TODO: add information on OPTIONAL / DEFAULT components
+    #    if self.TYPE in TYPES_BASIC + TYPES_EXT:
+    #        return self.TYPE
+    #    elif self.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
+    #        return [self._cont._get_proto_old()]
+    #    elif self.TYPE in (TYPE_CHOICE, TYPE_SEQ, TYPE_SET, TYPE_CLASS):
+    #        return ASN1Dict([(ident, Comp._get_proto_old()) for (ident, Comp) in self._cont.items()])
+    #    else:
+    #        assert()
     
-    def get_proto(self, w_open=True, print_recurs=False):
+    def get_proto(self, w_open=True, print_recurs=False, blacklist=set()):
         """
         returns the prototype of the object
         
@@ -669,7 +670,7 @@ class ASN1Obj(Element):
                 cont = ASN1Dict()
                 for (ident, Comp) in self._get_const_tr().items():
                     Comp._proto_fields = self._proto_fields
-                    cont[ident] = Comp.get_proto(w_open, print_recurs)
+                    cont[ident] = Comp.get_proto(w_open, print_recurs, blacklist)
                     self._proto_fields = Comp._proto_fields
                     del Comp._proto_fields
                 ret = (self.TYPE, cont)
@@ -682,19 +683,22 @@ class ASN1Obj(Element):
         #
         elif self.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
             self._cont._proto_fields = self._proto_fields
-            ret = (self.TYPE, self._cont.get_proto(w_open, print_recurs))
+            ret = (self.TYPE, self._cont.get_proto(w_open, print_recurs, blacklist))
             self._proto_fields = self._cont._proto_fields
             del self._cont._proto_fields
         #
         elif self.TYPE in (TYPE_CHOICE, TYPE_SEQ, TYPE_SET, TYPE_CLASS):
-            # TODO: add information on fields with OPTIONAL or DEFAULT flag
-            cont = ASN1Dict()
-            for (ident, Comp) in self._cont.items():
-                Comp._proto_fields = self._proto_fields
-                cont[ident] = Comp.get_proto(w_open, print_recurs)
-                self._proto_fields = Comp._proto_fields
-                del Comp._proto_fields
-            ret = (self.TYPE, cont)
+            if self._name in blacklist:
+                ret = self.TYPE
+            else:
+                # TODO: add information on fields with OPTIONAL or DEFAULT flag
+                cont = ASN1Dict()
+                for (ident, Comp) in self._cont.items():
+                    Comp._proto_fields = self._proto_fields
+                    cont[ident] = Comp.get_proto(w_open, print_recurs, blacklist)
+                    self._proto_fields = Comp._proto_fields
+                    del Comp._proto_fields
+                ret = (self.TYPE, cont)
         #
         else:
             assert()
