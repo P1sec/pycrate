@@ -219,6 +219,10 @@ class Buf(Atom):
 # and not only at parsing (i.e. in _from_char())
 class BufAuto(Buf):
     
+    #--------------------------------------------------------------------------#
+    # format routines
+    #--------------------------------------------------------------------------#
+    
     def get_val(self):
         """Returns the value of self
         
@@ -289,6 +293,8 @@ class BufAuto(Buf):
         # 4) no bl defined, no value defines, return the default one
         else:
             return self.DEFAULT_BL
+    
+    __call__ = get_val
 
 
 class NullTermStr(Buf):
@@ -467,8 +473,6 @@ class Uint(Atom):
         else:
             return self.DEFAULT_VAL
     
-    __call__ = get_val
-    
     def _chk_val(self, *args):
         if args:
             val = args[0]
@@ -488,6 +492,8 @@ class Uint(Atom):
     def _get_bl_from_val(self):
         # Python int.bit_length() API, nice
         return self.get_val().bit_length()
+    
+    __call__ = get_val
     
     #--------------------------------------------------------------------------#
     # conversion routines
@@ -604,8 +610,6 @@ class Int(Atom):
         else:
             return self.DEFAULT_VAL
     
-    __call__ = get_val
-    
     def _chk_val(self, *args):
         if args:
             val = args[0]
@@ -627,6 +631,8 @@ class Int(Atom):
         # we can't use the 2's complement convention, 
         # so we just return 1 additional bit for the sign
         return 1 + self.get_val().bit_length()
+    
+    __call__ = get_val
     
     #--------------------------------------------------------------------------#
     # conversion routines
