@@ -88,7 +88,7 @@ def show_infos(val, werr, wext):
     
     print()
     vers = ''
-    info = ['OPERATION content: %s\n' % ' - '.join(val.keys())]
+    info = ['OPERATION content: %s\n' % ' - '.join(sorted(val.keys()))]
     
     if 'ArgumentType' in val:
         arg  = val['ArgumentType']
