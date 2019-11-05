@@ -24,6 +24,8 @@ Wiki
 ====
 
 Pycrate has a growing [wiki](https://github.com/p1sec/pycrate/wiki/The-pycrate-wiki).
+Use it as much as possible before opening an issue.
+Feel free also to propose some additional content.
 
 
 Installation
@@ -277,6 +279,7 @@ This subdirectory implements most of the 3GPP NAS protocol formats:
 * *TS24301_EMM*: structures for the EPS mobility management messages from TS 24.301
 * *TS24301_ESM*: structures for the EPS mobility management messages from TS 24.301
 * *TS24301_IE*: structures for many information elements from TS 24.301
+* *TS29002_MAPAppCtx*: functions that relies on the Pycrate_TCAP_MAPv2v3 ASN.1, dealing with MAP application-contexts 
 * *TS29281_GTPU*: structures for LTE/EPC GTP-U messages from TS 29.281
 * *TS44018_GTTP*: structure for the single GSM GTTP message from TS 44.018
 * *TS44018_IE*: structures for many information elements from TS 44.018
@@ -286,8 +289,10 @@ This subdirectory implements most of the 3GPP NAS protocol formats:
 pycrate_diameter
 ----------------
 
-This subdirectory contains a diameter module which implements the DiameterGeneric
-class, a generic diameter encoder / decoder.
+This subdirectory contains the following modules:
+* *Diameter*: a generic Diameter module which implements DiameterGeneric and AVPGeneric structures
+* *DiameterIETF*: a Diameter module which relies on AVP types provided in all IETF RFC
+* *Diameter3GPP*: a Diameter module which relies on AVP types provided in all 3GPP TS
 
 
 pycrate_corenet
@@ -346,6 +351,8 @@ Three different tools are provided (yet):
    specification.
 * *pycrate_berdecode.py* parses any BER/CER/DER encoded binary value of ASN.1 
    objects and prints the corresponding structure.
+* *pycrate_map_op_info.py* prints prototypes and various information related to
+   MAP (Mobile Application Part) operation.
 
 
 Examples
