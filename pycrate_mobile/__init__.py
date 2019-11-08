@@ -32,8 +32,9 @@ __all__ = ['GSMTAP', 'MCC_MNC', 'PPP', 'SIGTRAN', 'SCCP',
            'TS24007', 'NAS', 'NASLTE',
            'TS24008_IE', 'TS24008_MM', 'TS24008_GMM', 'TS24008_CC', 'TS24008_SM',
            'TS23038', 'TS23040_SMS', 'TS23041_CBS', 'TS24011_PPSMS', 'TS24080_SS',
-           'TS24301_IE', 'TS24301_NAS', 'TS24301_EMM', 'TS24301_ESM',
-           'TS29281_GTPU',
+           'TS24301_IE', 'TS24301_EMM', 'TS24301_ESM',
+           'TS24501_IE', 'TS24501_FGMM', 'TS24501_FGSM',
+           'TS29002_MAPAppCtx', 'TS29274_GTPC', 'TS29281_GTPU',
            'TS44018_IE', 'TS44018_RR', 'TS44018_GTTP']
 __version__ = '0.4.0'
 

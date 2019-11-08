@@ -614,21 +614,23 @@ class TI(Envelope):
 
 
 ProtDisc_dict = {
-    0 : 'GCC',
-    1 : 'BCC',
-    2 : 'ESM',
-    3 : 'CC',
-    4 : 'GTTP',
-    5 : 'MM',
-    6 : 'RRM',
-    7 : 'EMM',
-    8 : 'GMM',
-    9 : 'SMS',
-    10: 'SM',
-    11: 'SS',
-    12: 'LCS',
-    13: 'extended ProtDisc',
-    14: 'testing',
+    0  : 'GCC',
+    1  : 'BCC',
+    2  : 'ESM',
+    3  : 'CC',
+    4  : 'GTTP',
+    5  : 'MM',
+    6  : 'RRM',
+    7  : 'EMM',
+    8  : 'GMM',
+    9  : 'SMS',
+    10 : 'SM',
+    11 : 'SS',
+    12 : 'LCS',
+    14 : 'extended ProtDisc',
+    15 : 'testing',
+    46 : '5GSM',
+    126: '5GMM'
     }
 
 class TIPD(TI):

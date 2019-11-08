@@ -73,8 +73,6 @@ __all__ = [
 # release 13 (da0)
 #------------------------------------------------------------------------------#
 
-from time import time
-
 from pycrate_core.utils import *
 from pycrate_core.elt   import *
 from pycrate_core.base  import *
