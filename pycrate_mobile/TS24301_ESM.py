@@ -137,8 +137,8 @@ class ESMActDediEPSBearerCtxtAccept(Layer3):
     _GEN = (
         ESMHeader(val={'Type':198}),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
-        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}),
-        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
+        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}, IE=NBIFOMContainer()),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
 
@@ -152,8 +152,8 @@ class ESMActDediEPSBearerCtxtReject(Layer3):
         ESMHeader(val={'Type':199}),
         Type3V('ESMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=ESMCause()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
-        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}),
-        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
+        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}, IE=NBIFOMContainer()),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
 
@@ -176,8 +176,9 @@ class ESMActDediEPSBearerCtxtRequest(Layer3):
         Type4TLV('PacketFlowId', val={'T':0x34, 'V':b'\0'}, IE=PacketFlowId()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type1TV('WLANOffloadInd', val={'T':0xC, 'V':0}, IE=WLANOffloadAccept()),
-        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}),
-        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
+        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}, IE=NBIFOMContainer()),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
+        Type4TLV('ExtEPSQoS', val={'T':0x5C, 'V':10*b'\0'}, IE=ExtEPSQoS())
         )
 
 
@@ -190,7 +191,7 @@ class ESMActDefaultEPSBearerCtxtAccept(Layer3):
     _GEN = (
         ESMHeader(val={'Type':194}),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
-        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
 
@@ -204,7 +205,7 @@ class ESMActDefaultEPSBearerCtxtReject(Layer3):
         ESMHeader(val={'Type':195}),
         Type3V('ESMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=ESMCause()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
-        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
 
@@ -229,11 +230,12 @@ class ESMActDefaultEPSBearerCtxtRequest(Layer3):
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type1TV('ConType', val={'T':0xB, 'V':0}, dic=ConnectivityType_dict),
         Type1TV('WLANOffloadInd', val={'T':0xC, 'V':0}, IE=WLANOffloadAccept()),
-        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}),
+        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}, IE=NBIFOMContainer()),
         Type4TLV('HdrCompConfig', val={'T':0x66, 'V':b'\0\0\0'}, IE=HdrCompConfig()),
         Type1TV('CPOnlyInd', val={'T':0x9, 'V':0}, IE=CPOnlyInd()),
-        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}),
-        Type4TLV('ServingPLMNRateCtrl', val={'T':0x6E, 'V':b'\0'}, IE=ServingPLMNRateCtrl())
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
+        Type4TLV('ServingPLMNRateCtrl', val={'T':0x6E, 'V':b'\0'}, IE=ServingPLMNRateCtrl()),
+        Type4TLV('ExtAPN_AMBR', val={'T':0x5F, 'V':b''}, IE=ExtAPN_AMBR())
         )
 
 
@@ -249,8 +251,8 @@ class ESMBearerResourceAllocReject(Layer3):
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer3()),
         Type4TLV('ReattemptInd', val={'T':0x6B, 'V':b'\0'}, IE=ReattemptInd()),
-        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}),
-        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
+        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}, IE=NBIFOMContainer()),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
 
@@ -268,8 +270,9 @@ class ESMBearerResourceAllocRequest(Layer3):
         Type4LV('EPSQoS', val={'V':b'\x09'}, IE=EPSQoS()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type1TV('DeviceProp', val={'T':0xC, 'V':0}, IE=DeviceProp()),
-        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}),
-        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
+        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}, IE=NBIFOMContainer()),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
+        Type4TLV('ExtEPSQoS', val={'T':0x5C, 'V':10*b'\0'}, IE=ExtEPSQoS())
         )
 
 
@@ -285,8 +288,8 @@ class ESMBearerResourceModifReject(Layer3):
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer3()),
         Type4TLV('ReattemptInd', val={'T':0x6B, 'V':b'\0'}, IE=ReattemptInd()),
-        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}),
-        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
+        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}, IE=NBIFOMContainer()),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
 
@@ -305,9 +308,10 @@ class ESMBearerResourceModifRequest(Layer3):
         Type3TV('ESMCause', val={'T':0x58, 'V':b'\0'}, bl={'V':8}, IE=ESMCause()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type1TV('DeviceProp', val={'T':0xC, 'V':0}, IE=DeviceProp()),
-        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}),
+        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}, IE=NBIFOMContainer()),
         Type4TLV('HdrCompConfig', val={'T':0x66, 'V':b'\0\0\0'}, IE=HdrCompConfig()),
-        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
+        Type4TLV('ExtEPSQoS', val={'T':0x5C, 'V':10*b'\0'}, IE=ExtEPSQoS())
         )
 
 
@@ -320,7 +324,7 @@ class ESMDeactEPSBearerCtxtAccept(Layer3):
     _GEN = (
         ESMHeader(val={'Type':206}),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
-        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
 
@@ -336,8 +340,8 @@ class ESMDeactEPSBearerCtxtRequest(Layer3):
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer3()),
         Type1TV('WLANOffloadInd', val={'T':0xC, 'V':0}, IE=WLANOffloadAccept()),
-        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}),
-        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
+        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}, IE=NBIFOMContainer()),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
 
@@ -373,7 +377,7 @@ class ESMInformationResponse(Layer3):
         ESMHeader(val={'Type':218}),
         Type4TLV('APN', val={'T':0x28, 'V':b'\0'}, IE=APN()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
-        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
 
@@ -398,8 +402,8 @@ class ESMModifyEPSBearerCtxtAccept(Layer3):
     _GEN = (
         ESMHeader(val={'Type':202}),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
-        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}),
-        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
+        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}, IE=NBIFOMContainer()),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
 
@@ -413,8 +417,8 @@ class ESMModifyEPSBearerCtxtReject(Layer3):
         ESMHeader(val={'Type':203}),
         Type3V('ESMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=ESMCause()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
-        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}),
-        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
+        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}, IE=NBIFOMContainer()),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
 
@@ -435,9 +439,11 @@ class ESMModifyEPSBearerCtxtRequest(Layer3):
         Type4TLV('APN_AMBR', val={'T':0x5E, 'V':b'\0\0'}, IE=APN_AMBR()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type1TV('WLANOffloadInd', val={'T':0xC, 'V':0}, IE=WLANOffloadAccept()),
-        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}),
+        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}, IE=NBIFOMContainer()),
         Type4TLV('HdrCompConfig', val={'T':0x66, 'V':b'\0\0\0'}, IE=HdrCompConfig()),
-        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
+        Type4TLV('ExtAPN_AMBR', val={'T':0x5F, 'V':b''}, IE=ExtAPN_AMBR()),
+        Type4TLV('ExtEPSQoS', val={'T':0x5C, 'V':10*b'\0'}, IE=ExtEPSQoS())
         )
 
 
@@ -465,8 +471,8 @@ class ESMPDNConnectivityReject(Layer3):
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer3()),
         Type4TLV('ReattemptInd', val={'T':0x6B, 'V':b'\0'}, IE=ReattemptInd()),
-        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}),
-        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
+        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}, IE=NBIFOMContainer()),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
 
@@ -484,9 +490,9 @@ class ESMPDNConnectivityRequest(Layer3):
         Type4TLV('APN', val={'T':0x28, 'V':b'\0'}, IE=APN()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
         Type1TV('DeviceProp', val={'T':0xC, 'V':0}, IE=DeviceProp()),
-        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}),
+        Type4TLV('NBIFOMContainer', val={'T':0x33, 'V':b'\0'}, IE=NBIFOMContainer()),
         Type4TLV('HdrCompConfig', val={'T':0x66, 'V':b'\0\0\0'}, IE=HdrCompConfig()),
-        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
 
@@ -500,7 +506,7 @@ class ESMPDNDisconnectReject(Layer3):
         ESMHeader(val={'Type':211}),
         Type3V('ESMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=ESMCause()),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
-        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
 
@@ -516,7 +522,7 @@ class ESMPDNDisconnectRequest(Layer3):
         Uint('spare', bl=4),
         Type1V('LinkedEPSBearerId'),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
-        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'})
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
 
@@ -554,7 +560,7 @@ class ESMDataTransport(Layer3):
     _GEN = (
         ESMHeader(val={'Type':235}),
         Type6LVE('UserData', val={'V':b''}),
-        Type1TV('ReleaseAssistInd', val={'T':0xD, 'V':0}, IE=ReleaseAssistInd())
+        Type1TV('ReleaseAssistInd', val={'T':0xF, 'V':0}, IE=ReleaseAssistInd())
         )
 
 

@@ -33,6 +33,7 @@
 #------------------------------------------------------------------------------#
 
 from binascii import unhexlify
+from time     import struct_time
 
 from pycrate_core.utils  import *
 from pycrate_core.elt    import Envelope, Array, Sequence, REPR_RAW, REPR_HEX, \
@@ -1003,7 +1004,9 @@ class _TP_SCTS_Comp(Envelope):
 
 
 class TimeZoneTime(Envelope):
+    
     YEAR_BASE = 2000
+    
     _GEN = (
         _TP_SCTS_Comp('Year', GEN=(Uint('Y1', bl=4), Uint('Y0', bl=4))),
         _TP_SCTS_Comp('Mon',  GEN=(Uint('M1', bl=4), Uint('M0', bl=4))),
@@ -1036,9 +1039,14 @@ class TimeZoneTime(Envelope):
         """decode the value of the TimeZoneTime into a Python struct_time and 
         timezone shift
         """
-        ts = struct_time((self.YEAR_BASE+self['Year'].decode(), self['Mon'].decode(),
-                          self['Day'].decode(), self['Hour'].decode(), self['Min'].decode(),
-                          self['Sec'].decode(), 0, 0, 0))
+        ts = struct_time((
+            self.YEAR_BASE+self['Year'].decode(),
+            self['Mon'].decode(),
+            self['Day'].decode(),
+            self['Hour'].decode(),
+            self['Min'].decode(),
+            self['Sec'].decode(),
+            0, 0, 0))
         return ts, self['TimeZone'].decode()
 
 
@@ -2591,6 +2599,33 @@ class UPIntegrityInd(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# DCN-ID
+# TS 24.008, 10.5.5.35
+#------------------------------------------------------------------------------#
+# Dedicated Core Network ID
+
+class DCNID(Uint16):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# Non-3GPP NW provided policies
+# TS 24.008, 10.5.5.37
+#------------------------------------------------------------------------------#
+
+_Non3GPPNWProvPol_dict = {
+    0 : 'use of non-3GPP emergency numbers not permitted', 
+    1 : 'use of non-3GPP emergency numbers permitted'
+    }
+
+class Non3GPPNWProvPol(Envelope):
+    _GEN = (
+        Uint('spare', bl=3),
+        Uint('Value', bl=1, dic=_Non3GPPNWProvPol_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
 # Access point name
 # TS 24.008, 10.5.6.1
 #------------------------------------------------------------------------------#
@@ -3410,7 +3445,8 @@ class TMGI(Envelope):
         if char.len_bit() < 48:
             self[1].set_trans(True)
         Envelope._from_char(self, char)
-        
+
+
 #------------------------------------------------------------------------------#
 # MBMS bearer capabilities
 # TS 24.008, 10.5.6.14
@@ -3491,6 +3527,40 @@ class WLANOffloadAccept(Envelope):
         Uint('UTRANOffloadAccept', bl=1, dic=_UTRANOffAcc_dict),
         Uint('EUTRANOffloadAccept', bl=1, dic=_EUTRANOffAcc_dict)
         )
+
+
+#------------------------------------------------------------------------------#
+# NBIFOM container
+# TS 24.008, 10.5.6.21
+#------------------------------------------------------------------------------#
+
+_NBIFOMParamID_dict = {
+    0 : 'Not assigned',
+    1 : 'NBIFOM mode',
+    2 : 'NBIFOM default access',
+    3 : 'NBIFOM status',
+    4 : 'NBIFOM routing rules',
+    5 : 'NBIFOM IP flow mapping',
+    6 : 'NBIFOM RAN rules handling',
+    7 : 'NBIFOM Access stratum status',
+    8 : 'NBIFOM access usability indication',
+    }
+
+class NBIFOMParameter(Envelope):
+    _GEN = (
+        Uint8('ParamID', dic=_NBIFOMParamID_dict),
+        Uint8('ParamLen'),
+        Buf('Param', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[1].set_valauto(lambda: self[2].get_len())
+        self[2].set_blauto(lambda: self[1].get_val()<<3)
+
+
+class NBIFOMContainer(Sequence):
+    _GEN = NBIFOMParameter()
 
 
 #------------------------------------------------------------------------------#

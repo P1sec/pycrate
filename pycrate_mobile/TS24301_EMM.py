@@ -82,6 +82,9 @@ from pycrate_core.base  import *
 from .TS24007     import *
 from .TS24008_IE  import *
 from .TS24301_IE  import *
+from .TS24501_IE  import (
+    UERadioCapID, UERadioCapIDDelInd, UEStatus,
+    )
 from .TS24301_ESM import ESMTypeClasses
 
 try:
@@ -208,7 +211,15 @@ class EMMAttachAccept(Layer3):
         Type4TLV('T3412Ext', val={'T':0x5E, 'V':b'\0'}, IE=GPRSTimer3()),
         Type4TLV('T3324', val={'T':0x6A, 'V':b'\0'}, IE=GPRSTimer()),
         Type4TLV('ExtDRXParam', val={'T':0x6E, 'V':b'\0'}, IE=ExtDRXParam()),
-        Type1TV('SMSServStat', val={'T':0xE, 'V':0}, IE=SMSServStat())
+        Type1TV('SMSServStat', val={'T':0xE, 'V':0}, IE=SMSServStat()),
+        Type1TV('Non3GPPNWProvPol', val={'T':0xD, 'V':0}, IE=Non3GPPNWProvPol()),
+        Type4TLV('T3448', val={'T':0x6B, 'V':b'\0'}, IE=GPRSTimer()),
+        Type1TV('NetworkPol', val={'T':0xC, 'V':0}, IE=NetworkPol()),
+        Type4TLV('T3447', val={'T':0x6C, 'V':b'\0'}, IE=GPRSTimer3()),
+        Type6TLVE('ExtEmergNumList', val={'T':0x7A, 'V':b'\0\0\0\0'}, IE=ExtEmergNumList()),
+        Type6TLVE('CipherKeyData', val={'T':0x7C, 'V':32*b'\0'}, IE=CipherKeyData()),
+        Type4TLV('UERadioCapID', val={'T':0x66, 'V':b'\0'}, IE=UERadioCapID()),
+        Type1TV('UERadioCapIDDelInd', val={'T':0xB, 'V':0}, IE=UERadioCapIDDelInd())
         )
 
 #------------------------------------------------------------------------------#
@@ -270,7 +281,12 @@ class EMMAttachRequest(Layer3):
         Type4TLV('TMSIBasedNRICont', val={'T':0x10, 'V':b'\0\0'}, IE=NRICont()),
         Type4TLV('T3324', val={'T':0x6A, 'V':b'\0'}, IE=GPRSTimer()),
         Type4TLV('T3412Ext', val={'T':0x5E, 'V':b'\0'}, IE=GPRSTimer3()),
-        Type4TLV('ExtDRXParam', val={'T':0x6E, 'V':b'\0'}, IE=ExtDRXParam())
+        Type4TLV('ExtDRXParam', val={'T':0x6E, 'V':b'\0'}, IE=ExtDRXParam()),
+        Type4TLV('UEAddSecCap', val={'T':0x6F, 'V':b'\0\0\0\0'}, IE=UEAddSecCap()),
+        Type4TLV('UEStatus', val={'T':0x6D, 'V':b'\0'}, IE=UEStatus()),
+        Type3TV('AddInfoReq', val={'T':0x17, 'V':b'\0'}, IE=AddInfoReq()),
+        Type4TLV('N1UENetCap', val={'T':0x32, 'V':b'\0'}, IE=N1UENetCap()),
+        Type1TV('UERadioCapIDAvail', val={'T':0xB, 'V':0}, IE=UERadioCapIDAvail()) # WNG: tag is undefined in current TS
         )
 
 
@@ -447,7 +463,8 @@ class EMMGUTIReallocCommand(Layer3):
     _GEN = (
         EMMHeader(val={'Type':80}),
         Type4LV('GUTI', val={'V':b'\xf6'+10*b'\0'}, IE=EPSID()),
-        Type4TLV('TAIList', val={'T':0x54, 'V':6*b'\0'}, IE=TAIList())
+        Type4TLV('TAIList', val={'T':0x54, 'V':6*b'\0'}, IE=TAIList()),
+        Type4TLV('DCNID', val={'T':0x65, 'V':b'\0\0'}, IE=DCNID())
         )
 
 
@@ -500,8 +517,11 @@ class EMMSecurityModeCommand(Layer3):
         Type1V('NAS_KSI', IE=NAS_KSI()),
         Type4LV('UESecCap', val={'V':b'\0\0'}, IE=UESecCap()),
         Type1TV('IMEISVReq', val={'T':0xC, 'V':0}),
-        Type3TV('NonceUE', val={'T':0x55, 'V':4*b'\0'}, bl={'V':32}),
-        Type3TV('NonceMME', val={'T':0x56, 'V':4*b'\0'}, bl={'V':32})
+        Type3TV('NonceUE', val={'T':0x55, 'V':b'\0\0\0\0'}, bl={'V':32}),
+        Type3TV('NonceMME', val={'T':0x56, 'V':b'\0\0\0\0'}, bl={'V':32}),
+        Type4TLV('HashMME', val={'T':0x4F, 'V':8*b'\0'}),
+        Type4TLV('UEAddSecCap', val={'T':0x6F, 'V':b'\0\0\0\0'}, IE=UEAddSecCap()),
+        Type1TV('UERadioCapIDReq', val={'T':0xD, 'V':0}, IE=UERadioCapIDReq())
         )
 
 
@@ -513,7 +533,9 @@ class EMMSecurityModeCommand(Layer3):
 class EMMSecurityModeComplete(Layer3):
     _GEN = (
         EMMHeader(val={'Type':94}),
-        Type4TLV('IMEISV', val={'T':0x23, 'V':b'\x03\0\0\0\0\0\0\0\xf0'}, IE=ID())
+        Type4TLV('IMEISV', val={'T':0x23, 'V':b'\x03\0\0\0\0\0\0\0\xf0'}, IE=ID()),
+        Type6TLVE('NASMessage', val={'T':0x79, 'V':b'\x07\0'}),
+        Type4TLV('UERadioCapID', val={'T':0x66, 'V':b'\0'}, IE=UERadioCapID())
         )
 
 
@@ -688,7 +710,8 @@ class EMMServiceReject(Layer3):
         EMMHeader(val={'Type':78}),
         Type3V('EMMCause', val={'V':b'\x11'}, bl={'V':8}, IE=EMMCause()),
         Type3TV('T3442', val={'T':0x5B, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
-        Type4TLV('T3346', val={'T':0x5C, 'V':b'\0'}, IE=GPRSTimer())
+        Type4TLV('T3346', val={'T':0x5C, 'V':b'\0'}, IE=GPRSTimer()),
+        Type4TLV('T3448', val={'T':0x6B, 'V':b'\0'}, IE=GPRSTimer()),
         )
 
 
@@ -798,7 +821,16 @@ class EMMTrackingAreaUpdateAccept(Layer3):
         Type4TLV('T3324', val={'T':0x6A, 'V':b'\0'}, IE=GPRSTimer()),
         Type4TLV('ExtDRXParam', val={'T':0x6E, 'V':b'\0'}, IE=ExtDRXParam()),
         Type4TLV('HdrCompConfigStat', val={'T':0x68, 'V':b'\0\0'}, IE=HdrCompConfigStat()),
-        Type1TV('SMSServStat', val={'T':0xE, 'V':0}, IE=SMSServStat())
+        Type4TLV('DCNID', val={'T':0x65, 'V':b'\0\0'}, IE=DCNID()),
+        Type1TV('SMSServStat', val={'T':0xE, 'V':0}, IE=SMSServStat()),
+        Type1TV('Non3GPPNWProvPol', val={'T':0xD, 'V':0}, IE=Non3GPPNWProvPol()),
+        Type4TLV('T3448', val={'T':0x6B, 'V':b'\0'}, IE=GPRSTimer()),
+        Type1TV('NetworkPol', val={'T':0xC, 'V':0}, IE=NetworkPol()),
+        Type4TLV('T3447', val={'T':0x6C, 'V':b'\0'}, IE=GPRSTimer3()),
+        Type6TLVE('ExtEmergNumList', val={'T':0x7A, 'V':b'\0\0\0\0'}, IE=ExtEmergNumList()),
+        Type6TLVE('CipherKeyData', val={'T':0x7C, 'V':32*b'\0'}, IE=CipherKeyData()),
+        Type4TLV('UERadioCapID', val={'T':0x66, 'V':b'\0'}, IE=UERadioCapID()),
+        Type1TV('UERadioCapIDDelInd', val={'T':0xB, 'V':0}, IE=UERadioCapIDDelInd())
         )
 
 
@@ -862,7 +894,12 @@ class EMMTrackingAreaUpdateRequest(Layer3):
         Type4TLV('TMSIBasedNRICont', val={'T':0x10, 'V':b'\0\0'}, IE=NRICont()),
         Type4TLV('T3324', val={'T':0x6A, 'V':b'\0'}, IE=GPRSTimer()),
         Type4TLV('T3412Ext', val={'T':0x5E, 'V':b'\0'}, IE=GPRSTimer3()),
-        Type4TLV('ExtDRXParam', val={'T':0x6E, 'V':b'\0'}, IE=ExtDRXParam())
+        Type4TLV('ExtDRXParam', val={'T':0x6E, 'V':b'\0'}, IE=ExtDRXParam()),
+        Type4TLV('UEAddSecCap', val={'T':0x6F, 'V':b'\0\0\0\0'}, IE=UEAddSecCap()),
+        Type4TLV('UEStatus', val={'T':0x6D, 'V':b'\0'}, IE=UEStatus()),
+        Type3TV('AddInfoReq', val={'T':0x17, 'V':b'\0'}, IE=AddInfoReq()),
+        Type4TLV('N1UENetCap', val={'T':0x32, 'V':b'\0'}, IE=N1UENetCap()),
+        Type1TV('UERadioCapIDAvail', val={'T':0xB, 'V':0}, IE=UERadioCapIDAvail()) # WNG: tag is undefined in current TS
         )
 
 
@@ -931,7 +968,8 @@ class EMMCPServiceRequest(Layer3):
 class EMMServiceAccept(Layer3):
     _GEN = (
         EMMHeader(val={'Type':79}),
-        Type4TLV('EPSBearerCtxtStat', val={'T':0x57, 'V':b'\0\0'}, IE=EPSBearerCtxtStat())
+        Type4TLV('EPSBearerCtxtStat', val={'T':0x57, 'V':b'\0\0'}, IE=EPSBearerCtxtStat()),
+        Type4TLV('T3448', val={'T':0x6B, 'V':b'\0'}, IE=GPRSTimer())
         )
 
 

@@ -4,6 +4,7 @@
 # * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
+# * Copyright 2019. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -29,20 +30,26 @@
 
 #------------------------------------------------------------------------------#
 # 3GPP TS 24.301: NAS protocol for EPS
-# release 13 (da0)
+# release 16 (g20)
 #------------------------------------------------------------------------------#
 
 from binascii import unhexlify
+from time     import struct_time
 
 from pycrate_core.utils  import *
-from pycrate_core.elt    import Envelope, Sequence, Array, REPR_RAW, REPR_HEX, \
-     REPR_BIN, REPR_HD, REPR_HUM
+from pycrate_core.elt    import (
+    Envelope, Sequence, Array,
+    REPR_RAW, REPR_HEX, REPR_BIN, REPR_HD, REPR_HUM
+    )
 from pycrate_core.base   import *
 from pycrate_core.repr   import *
 from pycrate_core.charpy import Charpy
 
-from pycrate_mobile.MCC_MNC    import MNC_dict
-from pycrate_mobile.TS24008_IE import TFT, PLMN, encode_bcd, decode_bcd
+from pycrate_mobile.MCC_MNC     import MNC_dict
+from pycrate_mobile.TS23038     import encode_7b, decode_7b
+from pycrate_mobile.TS24008_IE  import (
+    TFT, PLMN, BufBCD, encode_bcd, decode_bcd, _TP_SCTS_Comp
+    )
 
 #------------------------------------------------------------------------------#
 # For Supplementary Services, some ASN.1 structures are required
@@ -1009,6 +1016,70 @@ class UESecCap(Envelope):
             ind = 1 + self._by_name.index(ind)
         [e.set_trans(False) for e in self._content[:ind]]
 
+
+#------------------------------------------------------------------------------#
+# Extended emergency number list
+# TS 24.008, section 9.9.3.37A
+#------------------------------------------------------------------------------#
+
+class _SubServices(Buf):
+    
+    def set_val(self, val):
+        if isinstance(val, str_types):
+            # this is not Python2-friendly...
+            self.encode(val)
+        else:
+            Buf.set_val(self, val)
+    
+    def encode(self, val):
+        self._val, _ = encode_7b(val)
+    
+    def decode(self):
+        return decode_7b(self.get_val())
+    
+    def repr(self):
+        return '<%s: %s>' % (self._name, self.decode())
+    
+    __repr__ = repr
+
+
+class ExtEmergNum(Envelope):
+    _GEN = (
+        Uint8('LenNum'), # number of digits
+        BufBCD('Num'),
+        Uint8('LenSubServices'), # number of bytes
+        _SubServices('SubServices')
+        )
+    
+    def __init__(self, *args, **kw):
+        Envelope.__init__(self, *args, **kw)
+        # could be better to force LenNum explicit setting ?
+        self[0].set_valauto(lambda: self[1].get_bl()//4)
+        self[1].set_blauto(lambda: self._get_len_num())
+        self[2].set_valauto(lambda: self[3].get_len())
+        self[3].set_blauto(lambda: self[2].get_val()<<3)
+    
+    def _get_len_num():
+        len_num = self[1].get_bl()
+        if len_num % 2:
+            return 1 + (len_num//2)
+        else:
+            return len_num//2
+
+
+EENLValidity_dict = {
+    0 : 'country wide list',
+    1 : 'PLMN wide list'
+    }
+
+class ExtEmergNumList(Envelope):
+    _GEN = (
+        Uint('spare', bl=7),
+        Uint('EENLValidity', bl=1, dic=EENLValidity_dict),
+        Array('EENL', GEN=ExtEmergNum()),
+        )
+
+
 #------------------------------------------------------------------------------#
 # SS Code
 # TS 24.301, 9.9.3.39
@@ -1148,6 +1219,23 @@ class GUTIType(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# Network policy
+# TS 24.301, 9.9.3.52
+#------------------------------------------------------------------------------#
+
+_NetworkPol_dict = {
+    0 : 'Unsecured redirection to GERAN allowed',
+    1 : 'Unsecured redirection to GERAN not allowed'
+    }
+
+class NetworkPol(Envelope):
+    _GEN = (
+        Uint('spare', bl=3),
+        Uint('Value', bl=1, dic=_NetworkPol_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
 # Control plane service type
 # TS 24.301, 9.9.3.47
 #------------------------------------------------------------------------------#
@@ -1162,6 +1250,201 @@ class CPServiceType(Envelope):
         Uint('Active', bl=1,
              dic={0:'No bearer establishment requested', 1:'Bearer establishment requested'}),
         Uint('Value', bl=3, dic=_CPServType_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# UE additional security capability
+# TS 24.301, 9.9.3.53 
+#------------------------------------------------------------------------------#
+
+class UEAddSecCap(Envelope):
+    _GEN = (
+        Uint('5G-EA0', bl=1),
+        Uint('5G-EA1_128', bl=1),
+        Uint('5G-EA2_128', bl=1),
+        Uint('5G-EA3_128', bl=1),
+        Uint('5G-EA4', bl=1),
+        Uint('5G-EA5', bl=1),
+        Uint('5G-EA6', bl=1),
+        Uint('5G-EA7', bl=1),
+        Uint('5G-EA8', bl=1),
+        Uint('5G-EA9', bl=1),
+        Uint('5G-EA10', bl=1),
+        Uint('5G-EA11', bl=1),
+        Uint('5G-EA12', bl=1),
+        Uint('5G-EA13', bl=1),
+        Uint('5G-EA14', bl=1),
+        Uint('5G-EA15', bl=1),
+        Uint('5G-IA0', bl=1),
+        Uint('5G-IA1_128', bl=1),
+        Uint('5G-IA2_128', bl=1),
+        Uint('5G-IA3_128', bl=1),
+        Uint('5G-IA4', bl=1),
+        Uint('5G-IA5', bl=1),
+        Uint('5G-IA6', bl=1),
+        Uint('5G-IA7', bl=1),
+        Uint('5G-IA8', bl=1),
+        Uint('5G-IA9', bl=1),
+        Uint('5G-IA10', bl=1),
+        Uint('5G-IA11', bl=1),
+        Uint('5G-IA12', bl=1),
+        Uint('5G-IA13', bl=1),
+        Uint('5G-IA14', bl=1),
+        Uint('5G-IA15', bl=1)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Additional information requested
+# TS 24.301, 9.9.3.55
+#------------------------------------------------------------------------------#
+
+_AddInfoReq_dict = {
+    0 : 'ciphering keys for ciphered broadcast assistance data not requested',
+    1 : 'ciphering keys for ciphered broadcast assistance data requested'
+    }
+
+class AddInfoReq(Envelope):
+    _GEN = (
+        Uint('spare', bl=7),
+        Uint('CipherKey', bl=1, dic=_AddInfoReq_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Ciphering key data
+# TS 24.301, 9.9.3.56
+#------------------------------------------------------------------------------#
+
+class _CipherDataTime(Envelope):
+    _GEN = (
+        _TP_SCTS_Comp('Year', GEN=(Uint('Y1', bl=4), Uint('Y0', bl=4))),
+        _TP_SCTS_Comp('Mon',  GEN=(Uint('M1', bl=4), Uint('M0', bl=4))),
+        _TP_SCTS_Comp('Day',  GEN=(Uint('D1', bl=4), Uint('D0', bl=4))),
+        _TP_SCTS_Comp('Hour', GEN=(Uint('H1', bl=4), Uint('H0', bl=4))),
+        _TP_SCTS_Comp('Min',  GEN=(Uint('M1', bl=4), Uint('M0', bl=4))),
+        )
+    
+    def set_val(self, val):
+        if isinstance(val, struct_time):
+            self.encode(val)
+        else:
+            Envelope.set_val(self, val)
+    
+    def encode(self, ts, tz=0.0):
+        """encode a Python struct_time as the value of the _CipherDataTime
+        """
+        self['Year'].encode( ts.tm_year-self.YEAR_BASE )
+        self['Mon'].encode( ts.tm_mon  )
+        self['Day'].encode( ts.tm_mday )
+        self['Hour'].encode( ts.tm_hour )
+        self['Min'].encode( ts.tm_min )
+    
+    def decode(self):
+        """decode the value of the _CipherDataTime into a Python struct_time
+        """
+        return struct_time((
+            self.YEAR_BASE+self['Year'].decode(),
+            self['Mon'].decode(),
+            self['Day'].decode(),
+            self['Hour'].decode(),
+            self['Min'].decode(),
+            0, 0, 0, 0))
+
+
+class _CipherDataSet(Envelope):
+    _GEN = (
+        Uint16('CipherSetID'),
+        Buf('CipherKey', bl=128, rep=REPR_HEX),
+        Uint('spare', bl=3),
+        Uint('C0Len', bl=5),
+        Buf('C0', rep=REPR_HEX),
+        Uint('PosSIBType11', bl=1),
+        Uint('PosSIBType12', bl=1),
+        Uint('PosSIBType13', bl=1),
+        Uint('PosSIBType14', bl=1),
+        Uint('PosSIBType15', bl=1),
+        Uint('PosSIBType16', bl=1),
+        Uint('PosSIBType17', bl=1),
+        Uint('PosSIBType21', bl=1),
+        Uint('PosSIBType22', bl=1),
+        Uint('PosSIBType23', bl=1),
+        Uint('PosSIBType24', bl=1),
+        Uint('PosSIBType25', bl=1),
+        Uint('PosSIBType26', bl=1),
+        Uint('PosSIBType27', bl=1),
+        Uint('PosSIBType28', bl=1),
+        Uint('PosSIBType29', bl=1),
+        Uint('PosSIBType210', bl=1),
+        Uint('PosSIBType211', bl=1),
+        Uint('PosSIBType212', bl=1),
+        Uint('PosSIBType213', bl=1),
+        Uint('PosSIBType214', bl=1),
+        Uint('PosSIBType215', bl=1),
+        Uint('PosSIBType216', bl=1),
+        Uint('PosSIBType217', bl=1),
+        Uint('PosSIBType218', bl=1),
+        Uint('PosSIBType219', bl=1),
+        Uint('PosSIBType31', bl=1),
+        Uint('spare', bl=5),
+        _CipherDataTime('ValidityStartTime'),
+        Uint16('ValidityDuration'),
+        TAIList()
+        )
+
+
+class CipherKeyData(Sequence):
+    _GEN = _CipherDataSet()
+
+
+#------------------------------------------------------------------------------#
+# N1 UE network capability
+# TS 24.301, 9.9.3.57
+#------------------------------------------------------------------------------#
+
+class N1UENetCap(Envelope):
+    _GEN = (
+        Uint('spare', bl=2),
+        Uint('5GS-PNB-CIoT', bl=2),
+        Uint('5G-UP-CIoT', bl=1),
+        Uint('5G-HC-CP-CIoT', bl=1),
+        Uint('N3Data', bl=1),
+        Uint('5G-CP-CIoT', bl=1),
+        )
+
+
+#------------------------------------------------------------------------------#
+# UE radio capability ID availability
+# TS 24.301, 9.9.3.58
+#------------------------------------------------------------------------------#
+
+_UERadioCapIDAvail_dict = {
+    0 : 'UE radio capability ID not available',
+    1 : 'UE radio capability ID available'
+    }
+
+class UERadioCapIDAvail(Envelope):
+    _GEN = (
+        Uint('spare', bl=1),
+        Uint('Value', bl=3, dic=_UERadioCapIDAvail_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# UE radio capability ID request
+# TS 24.301, 9.9.3.58
+#------------------------------------------------------------------------------#
+
+_UERadioCapIDReq_dict = {
+    0 : 'UE radio capability ID not requested',
+    1 : 'UE radio capability ID requested'
+    }
+
+class UERadioCapIDReq(Envelope):
+    _GEN = (
+        Uint('spare', bl=1),
+        Uint('Value', bl=3, dic=_UERadioCapIDReq_dict)
         )
 
 
@@ -1742,4 +2025,58 @@ class HdrCompConfigStat(Envelope):
 class ServingPLMNRateCtrl(Uint16):
     _desc = 'maximum ESM data transport messages with user data per 6 min'
     _dic  = {0xFFFF: 'not restricted'}
+
+
+#------------------------------------------------------------------------------#
+# Extended APN aggregate maximum bit rate
+# TS 24.301, 9.9.4.29
+#------------------------------------------------------------------------------#
+
+_UnitBitrate_dict = {
+    1 : '200 kbps',
+    2 : '1 Mbps',
+    3 : '4 Mbps',
+    4 : '16 Mbps',
+    5 : '64 Mbps',
+    6 : '256 Mbps',
+    7 : '1 Gbps',
+    8 : '4 Gbps',
+    9 : '16 Gbps',
+    10: '64 Gbps',
+    11: '256 Gbps',
+    12: '1 Tbps',
+    13: '4 Tbps',
+    14: '16 Tbps',
+    15: '64 Tbps',
+    16: '256 Tbps',
+    17: '1 Pbps',
+    18: '4 Pbps',
+    19: '16 Pbps',
+    20: '64 Pbps',
+    21: '256 Pbps', # does it make any sense ?!!
+    }
+
+class ExtAPN_AMBR(Envelope):
+    _GEN = (
+        Uint8('UnitDL', dic=_UnitBitrate_dict),
+        Uint16('DL'),
+        Uint8('UnitUL', dic=_UnitBitrate_dict),
+        Uint16('UL')
+        )
+
+
+#------------------------------------------------------------------------------#
+# Extended quality of service
+# TS 24.301, 9.9.4.30
+#------------------------------------------------------------------------------#
+
+class ExtEPSQoS(Envelope):
+    _GEN = (
+        Uint8('UnitMaxBitrate', dic=_UnitBitrate_dict),
+        Uint16('MaxULBitrate'),
+        Uint16('MaxDLBitrate'),
+        Uint8('UnitGuaranteedBitrate', dic=_UnitBitrate_dict),
+        Uint16('GuaranteedULBitrate'),
+        Uint16('GuaranteedDLBitrate')
+        )
 
