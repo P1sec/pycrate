@@ -645,6 +645,8 @@ class ASN1Obj(Element):
                           if True, returns the potential content of OPEN objects
             print_recurs: bool,
                           if True, prints paths that lead to recursion
+            blacklist   : set of str,
+                          list of blacklisted constructed object names, that won't be expanded
         
         Returns:
             type: str if self is of basic type, 
@@ -658,15 +660,16 @@ class ASN1Obj(Element):
             root = False
         elif self._name in self._proto_fields:
             # recursion detected, stop inspecting the content
+            # can happen also in case different components at different levels have the same name
             if print_recurs:
-                asnlog('[+] recursion detected: %s, %r' % (self._name, self._proto_fields))
+                asnlog('[+] recursion suspected: %s, %r' % (self._name, self._proto_fields))
             return self.TYPE
         else:
             root = False
             self._proto_fields.append( self._name )
         #
         if self.TYPE == TYPE_OPEN:
-            if w_open:
+            if w_open and self._name not in blacklist:
                 cont = ASN1Dict()
                 for (ident, Comp) in self._get_const_tr().items():
                     Comp._proto_fields = self._proto_fields
