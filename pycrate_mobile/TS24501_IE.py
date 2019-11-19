@@ -700,7 +700,7 @@ class UEUsage(Envelope):
 # TS 24.501, 9.11.3.56
 #------------------------------------------------------------------------------#
 
-class UEStat(Envelope):
+class UEStatus(Envelope):
     _GEN = (
         Uint('spare', bl=6, rep=REPR_HEX),
         Uint('N1ModeReg', bl=1, dic={0:'UE not in 5GMM-REGISTERED state', 1:'UE in 5GMM-REGISTERED state'}),

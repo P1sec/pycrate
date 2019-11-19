@@ -220,7 +220,7 @@ class FGMMRegistrationRequest(Layer3):
         Type4TLV('S1UENetCap', val={'T':0x17, 'V':b'\0\0'}, IE=S1UENetCap()),
         Type4TLV('ULDataStat', val={'T':0x40, 'V':b'\0\0'}, IE=ULDataStat()),
         Type1TV('MICOInd', val={'T':0xB, 'V':0}, IE=MICOInd()),
-        Type4TLV('UEStat', val={'T':0x2B, 'V':b'\0'}, IE=UEStat()),
+        Type4TLV('UEStatus', val={'T':0x2B, 'V':b'\0'}, IE=UEStatus()),
         Type6TLVE('AddGUTI', val={'T':0x77, 'V':b'\xf2'+10*b'\0'}, IE=FGSID()),
         Type4TLV('AllowedPDUSessStat', val={'T':0x25, 'V':b'\0\0'}, IE=AllowedPDUSessStat()),
         Type4TLV('UEUsage', val={'T':0x18, 'V':b'\0'}, IE=UEUsage()),
