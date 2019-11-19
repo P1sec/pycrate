@@ -473,7 +473,7 @@ def match_tag(Obj, tag):
                 if ret:
                     return ret
             else:
-                # const_obj_type == CLASET_MULT:
+                #const_obj_type == CLASET_MULT
                 for obj in const_obj:
                     ret = match_tag(obj, tag)
                     if ret:
@@ -496,6 +496,10 @@ def match_tag(Obj, tag):
         elif hasattr(Obj, '_defby') and Obj._defby is not None:
             # DEFINED BY construction, not supported yet
             return 5
+        else:
+            # OPEN / ANY internal content cannot be determined
+            # so we suppose we have a match
+            return 1
     else:
         # we should never come here
         assert()

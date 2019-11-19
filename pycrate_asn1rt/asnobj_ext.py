@@ -367,7 +367,6 @@ Single value: Python 2-tuple
                 if not self._SILENT:
                     asnlog('OPEN._decode_ber_cont_ws: %s, unable to retrieve a table-looked up object'\
                            % self.fullname())
-                Objs = []
             elif const_obj_type == CLASET_UNIQ:
                 Objs = [const_obj]
             else:
@@ -462,7 +461,6 @@ Single value: Python 2-tuple
                 if not self._SILENT:
                     asnlog('OPEN._decode_ber_cont: %s, unable to retrieve a table-looked up object'\
                            % self.fullname())
-                Objs = []
             elif const_obj_type == CLASET_UNIQ:
                 Objs = [const_obj]
             else:
