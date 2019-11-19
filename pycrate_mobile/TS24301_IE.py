@@ -950,6 +950,9 @@ class UENetCap(Envelope):
 #------------------------------------------------------------------------------#
 
 class UESecCap(Envelope):
+    
+    ENV_SEL_TRANS = False
+    
     _GEN = (
         Uint('EEA0', bl=1),
         Uint('EEA1_128', bl=1),

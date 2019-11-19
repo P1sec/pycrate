@@ -183,7 +183,7 @@ class FGMMAuthenticationResult(Layer3):
 class FGMMAuthenticationFailure(Layer3):
     _GEN = (
         FGMMHeader(val={'Type':89}),
-        Type3V('FGMMCause', val={'V':b'\x16'}, bl={'V':8}, IE=FGMMCause()),
+        Type3V('5GMMCause', val={'V':b'\x16'}, bl={'V':8}, IE=FGMMCause()),
         Type4TLV('AUTS', val={'T':0x30, 'V':14*b'\0'})
         )
 
@@ -200,5 +200,34 @@ class FGMMAuthenticationReject(Layer3):
         )
 
 
+#------------------------------------------------------------------------------#
+# Registration request
+# TS 24.501, section 8.2.6
+#------------------------------------------------------------------------------#
+# This is were things are getting serious...
 
+class FGMMRegistrationRequest(Layer3):
+    _GEN = (
+        FGMMHeader(val={'Type':65}),
+        Type1V('NAS_KSI', IE=NAS_KSI()),
+        Type1V('5GSRegistrationType', IE=FGSRegType()),
+        Type6LVE('5GSID', val={'V':b'\0\0\0\0'}, IE=FGSID()),
+        Type1TV('NonCurrentNativeNAS_KSI', val={'T':0xC, 'V':0}, IE=NAS_KSI()),
+        Type4TLV('5GMMCap', val={'T':0x10, 'V':b'\0'}, IE=FGMMCap()),
+        Type4TLV('UESecCap', val={'T':0x2E, 'V':b'\0\0'}, IE=UESecCap()),
+        Type4TLV('NSSAI', val={'T':0x2F, 'V':b'\0\0'}, IE=NSSAI()),
+        Type3TV('TAI', val={'T':0x52, 'V':6*b'\0'}, IE=FGSTAI()),
+        Type4TLV('S1UENetCap', val={'T':0x17, 'V':b'\0\0'}, IE=S1UENetCap()),
+        Type4TLV('ULDataStat', val={'T':0x40, 'V':b'\0\0'}, IE=ULDataStat()),
+        Type1TV('MICOInd', val={'T':0xB, 'V':0}, IE=MICOInd()),
+        Type4TLV('UEStat', val={'T':0x2B, 'V':b'\0'}, IE=UEStat()),
+        Type6TLVE('AddGUTI', val={'T':0x77, 'V':b'\xf2'+10*b'\0'}, IE=FGSID()),
+        Type4TLV('AllowedPDUSessStat', val={'T':0x25, 'V':b'\0\0'}, IE=AllowedPDUSessStat()),
+        Type4TLV('UEUsage', val={'T':0x18, 'V':b'\0'}, IE=UEUsage()),
+        Type4TLV('5GSDRXParam', val={'T':0x51, 'V':b'\0'}, IE=FGSDRXParam()),
+        
+        
+        # TODO
+        
+        )
 

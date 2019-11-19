@@ -44,7 +44,9 @@ from pycrate_core.charpy import Charpy
 from pycrate_mobile.TS24008_IE  import (
     BufBCD, PLMN
     )
-
+from pycrate_mobile.TS24301_IE import (
+    UENetCap as S1UENetCap, UESecCap as S1UESecCap
+    )
 
 _str_reserved = 'reserved'
 _str_mnospec  = 'operator-specific'
@@ -62,6 +64,121 @@ SecHdrType_dict = {
     3 : 'Integrity protected with new 5G NAS security context',
     4 : 'Integrity protected and ciphered with new 5G NAS security context'
     }
+
+
+#------------------------------------------------------------------------------#
+# S-NSSAI
+# TS 24.301, 9.11.2.8
+#------------------------------------------------------------------------------#
+
+class _SNSSAI_SST(Uint8):
+    _name = 'SST'
+
+class _SNSSAI_SST_MappedHSST(Envelope):
+    _GEN = (
+        Uint8('SST'),
+        Uint8('MappedHPLMNSST')
+        )
+
+class _SNSSAI_SST_SD(Envelope):
+    _GEN = (
+        Uint8('SST'),
+        Uint16('SD')
+        )
+
+class _SNSSAI_SST_SD_MappedHSST(Envelope):
+    _GEN = (
+        Uint8('SST'),
+        Uint16('SD'),
+        Uint8('MappedHPLMNSST')
+        )
+
+class _SNSSAI_SST_SD_MappedHSSTSD(Envelope):
+    _GEN = (
+        Uint8('SST'),
+        Uint16('SD'),
+        Uint8('MappedHPLMNSST'),
+        Uint16('MappedHPLMNSD')
+        )
+
+class _SNSSAI_SST_SD_MappedHSSTSD_spare(Envelope):
+    _GEN = (
+        Uint8('SST'),
+        Uint16('SD'),
+        Uint8('MappedHPLMNSST'),
+        Uint16('MappedHPLMNSD'),
+        Buf('spare', rep=REPR_HEX)
+        )
+
+class SNSSAI(Envelope):
+    _GEN = (
+        Uint8('Len'),
+        Alt('Value', GEN={
+            0 : Buf('none', bl=0),
+            1 : Uint8('SST'),
+            2 : _SNSSAI_SST_MappedHSST('SST_MappedHPLMNSST'),
+            3 : _SNSSAI_SST_SD('SST_SD'),
+            4 : _SNSSAI_SST_SD_MappedHSSTSD('SST_SD_MappedHPLMNSSTSD')},
+            DEFAULT=_SNSSAI_SST_SD_MappedHSSTSD_spare('SST_SD_MappedHPLMNSSTSD_spare'),
+            sel=lambda self: self.get_env()[0].get_val()
+            )
+        )
+
+
+#------------------------------------------------------------------------------#
+# 5GMM capability
+# TS 24.301, 9.11.3.1
+#------------------------------------------------------------------------------#
+
+class FGMMCap(Envelope):
+    
+    ENV_SEL_TRANS = False
+    
+    _GEN = (
+        Uint('SGC', bl=1),
+        Uint('5G-HC-CP-CIoT', bl=1),
+        Uint('N3Data', bl=1),
+        Uint('5G-CP-CIoT', bl=1),
+        Uint('RestrictEC', bl=1),
+        Uint('LPP', bl=1),
+        Uint('HOAttach', bl=1),
+        Uint('S1Mode', bl=1),
+        Uint('RACS', bl=1),
+        Uint('NSSAA', bl=1),
+        Uint('5G-LCS', bl=1),
+        Uint('V2XCNPC5', bl=1),
+        Uint('V2XCEPC5', bl=1),
+        Uint('V2X', bl=1),
+        Uint('5G-UP-CIoT', bl=1),
+        Uint('5GSRVCC', bl=1), # end of octet 2
+        Buf('spare', val=b'', rep=REPR_HEX)
+        )
+    
+    def _from_char(self, char):
+        l = char.len_bit()
+        if l <= 16:
+            # disable all elements after bit l
+            self.disable_from(l)
+        elif l > 16:
+            # enables some spare bits at the end
+            self[-1]._bl = l-16
+        Envelope._from_char(self, char)
+    
+    def disable_from(self, ind):
+        """disables all elements from index `ind' excluded (integer -bit offset- 
+        or element name)
+        """
+        if isinstance(ind, str_types) and ind in self._by_name:
+            ind = self._by_name.index(ind)
+        [e.set_trans(True) for e in self._content[ind:]]
+    
+    def enable_upto(self, ind):
+        """enables all elements up to index `ind' included (integer -bit offset- 
+        or element name)
+        """
+        if isinstance(ind, str_types) and ind in self._by_name:
+            ind = 1 + self._by_name.index(ind)
+        [e.set_trans(False) for e in self._content[:ind]]
 
 
 #------------------------------------------------------------------------------#
@@ -115,6 +232,26 @@ _FGMMCause_dict = {
 
 class FGMMCause(Uint8):
     _dic = _FGMMCause_dict
+
+
+#------------------------------------------------------------------------------#
+# 5GS DRX parameters
+# TS 24.301, 9.11.3.2A
+#------------------------------------------------------------------------------#
+
+_FGSDRXParam_dict = {
+    0 : 'DRX value not specified',
+    1 : 'DRX cycle parameter T = 32',
+    2 : 'DRX cycle parameter T = 64',
+    3 : 'DRX cycle parameter T = 128',
+    4 : 'DRX cycle parameter T = 256'
+    }
+
+class FGSDRXParam(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('Value', bl=4, dic=_FGSDRXParam_dict)
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -387,17 +524,197 @@ class FGSRegType(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# 5GS tracking area identity
+# TS 24.301, 9.11.3.8
+#------------------------------------------------------------------------------#
+
+class FGSTAI(Envelope):
+    _GEN = (
+        PLMN(),
+        Uint24('TAC', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Allowed PDU session status
+# TS 24.301, 9.11.3.13
+#------------------------------------------------------------------------------#
+
+class AllowedPDUSessStat(Envelope):
+    _GEN = (
+        Uint('PSI_7', bl=1),
+        Uint('PSI_6', bl=1),
+        Uint('PSI_5', bl=1),
+        Uint('PSI_4', bl=1),
+        Uint('PSI_3', bl=1),
+        Uint('PSI_2', bl=1),
+        Uint('PSI_1', bl=1),
+        Uint('PSI_0', bl=1),
+        Uint('PSI_15', bl=1),
+        Uint('PSI_14', bl=1),
+        Uint('PSI_13', bl=1),
+        Uint('PSI_12', bl=1),
+        Uint('PSI_11', bl=1),
+        Uint('PSI_10', bl=1),
+        Uint('PSI_9', bl=1),
+        Uint('PSI_8', bl=1),
+        Buf('spare', val=b'', rep=REPR_HEX)
+        )
+    
+    def _from_char(self, char):
+        l = char.len_bit()
+        if l <= 16:
+            # disable all elements after bit l
+            self.disable_from(l)
+        elif l > 16:
+            # enables some spare bits at the end
+            self[-1]._bl = l-16
+        Envelope._from_char(self, char)
+    
+    def disable_from(self, ind):
+        """disables all elements from index `ind' excluded (integer -bit offset- 
+        or element name)
+        """
+        if isinstance(ind, str_types) and ind in self._by_name:
+            ind = self._by_name.index(ind)
+        [e.set_trans(True) for e in self._content[ind:]]
+    
+    def enable_upto(self, ind):
+        """enables all elements up to index `ind' included (integer -bit offset- 
+        or element name)
+        """
+        if isinstance(ind, str_types) and ind in self._by_name:
+            ind = 1 + self._by_name.index(ind)
+        [e.set_trans(False) for e in self._content[:ind]]
+
+
+#------------------------------------------------------------------------------#
+# MICO indication
+# TS 24.501, 9.11.3.31
+#------------------------------------------------------------------------------#
+
+class MICOInd(Envelope):
+    _GEN = (
+        Uint('spare', bl=2),
+        Uint('SPRTI', bl=1),
+        Uint('RAAI', bl=1)
+        )
+
+
+#------------------------------------------------------------------------------#
+# NSSAI
+# TS 24.501, 9.11.3.37
+#------------------------------------------------------------------------------#
+
+class NSSAI(Sequence):
+    _GEN = SNSSAI()
+
+
+#------------------------------------------------------------------------------#
+# UE security capability
+# TS 24.501, 9.11.3.54
+#------------------------------------------------------------------------------#
+
+class UESecCap(Envelope):
+    
+    ENV_SEL_TRANS = False
+    
+    _GEN = (
+        Uint('5GEA0', bl=1),
+        Uint('5GEA1_128', bl=1),
+        Uint('5GEA2_128', bl=1),
+        Uint('5GEA3_128', bl=1),
+        Uint('5GEA4', bl=1),
+        Uint('5GEA5', bl=1),
+        Uint('5GEA6', bl=1),
+        Uint('5GEA7', bl=1),
+        Uint('5GIA0', bl=1),
+        Uint('5GIA1_128', bl=1),
+        Uint('5GIA2_128', bl=1),
+        Uint('5GIA3_128', bl=1),
+        Uint('5GIA4', bl=1),
+        Uint('5GIA5', bl=1),
+        Uint('5GIA6', bl=1),
+        Uint('5GIA7', bl=1), # end of octet 2 (mandatory part)
+        Uint('EEA0', bl=1),
+        Uint('EEA1_128', bl=1),
+        Uint('EEA2_128', bl=1),
+        Uint('EEA3_128', bl=1),
+        Uint('EEA4', bl=1),
+        Uint('EEA5', bl=1),
+        Uint('EEA6', bl=1),
+        Uint('EEA7', bl=1),
+        Uint('EIA0', bl=1),
+        Uint('EIA1_128', bl=1),
+        Uint('EIA2_128', bl=1),
+        Uint('EIA3_128', bl=1),
+        Uint('EIA4', bl=1),
+        Uint('EIA5', bl=1),
+        Uint('EIA6', bl=1),
+        Uint('EIA7', bl=1), # end of octet 4 (optional part)
+        Buf('spare', rep=REPR_HEX)
+        )
+    
+    def _from_char(self, char):
+        l = char.len_bit()
+        if l <= 32:
+            # disable all elements after bit l
+            self.disable_from(l)
+        elif l > 32:
+            # enables some spare bits at the end
+            self[-1]._bl = l-32
+        Envelope._from_char(self, char)
+    
+    def disable_from(self, ind):
+        """disables all elements from index `ind' excluded (integer -bit offset- 
+        or element name)
+        """
+        if isinstance(ind, str_types) and ind in self._by_name:
+            ind = self._by_name.index(ind)
+        [e.set_trans(True) for e in self._content[ind:]]
+    
+    def enable_upto(self, ind):
+        """enables all elements up to index `ind' included (integer -bit offset- 
+        or element name)
+        """
+        if isinstance(ind, str_types) and ind in self._by_name:
+            ind = 1 + self._by_name.index(ind)
+        [e.set_trans(False) for e in self._content[:ind]]
+
+
+
+#------------------------------------------------------------------------------#
+# UE's usage setting
+# TS 24.501, 9.11.3.55
+#------------------------------------------------------------------------------#
+
+class UEUsage(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('Value', bl=1, dic={0:'voice centric', 1:'data centric'})
+        )
+
+
+#------------------------------------------------------------------------------#
 # UE status
 # TS 24.501, 9.11.3.56
 #------------------------------------------------------------------------------#
 
-class UEStatus(Envelope):
+class UEStat(Envelope):
     _GEN = (
-        Uint('spare', bl=6),
-        Uint('N1ModeReg', bl=1),
-        Uint('S1ModeReg', bl=1)
+        Uint('spare', bl=6, rep=REPR_HEX),
+        Uint('N1ModeReg', bl=1, dic={0:'UE not in 5GMM-REGISTERED state', 1:'UE in 5GMM-REGISTERED state'}),
+        Uint('S1ModeReg', bl=1, dic={0:'UE not in EMM-REGISTERED state', 1:'UE in EMM-REGISTERED state'})
         )
 
+
+#------------------------------------------------------------------------------#
+# Uplink data status
+# TS 24.501, 9.11.3.57
+#------------------------------------------------------------------------------#
+
+class ULDataStat(AllowedPDUSessStat):
+    pass
 
 #------------------------------------------------------------------------------#
 # UE radio capability ID
