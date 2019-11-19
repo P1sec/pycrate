@@ -818,17 +818,19 @@ class PycrateGenerator(_Generator):
                 asnlog('WNG, {0}.{1}: multiple table constraint, but compiling only the first'\
                        .format(self._mod_name, Obj._name))
             Const = Consts_tab[0]
-            #ConstTab = Const['tab']
             link_name = None
             # check if the same constraint was already defined somewhere in the root object
             if hasattr(self, '_const_tabs'):
                 ConstTabVal = Const['tab'].get_val()
-                for ct in self._const_tabs:
-                    # HOLLY PYTHON: comparing damned complex dict values...
-                    if ConstTabVal == ct[1]:
-                        # the table of values get already compiled, just need to link it
-                        link_name = ct[0]
-                        break
+                if len(ConstTabVal['root']) \
+                or ConstTabVal['ext'] is not None and len(ConstTabVal['ext']):
+                    # ensure the table as actual value(s) inside 
+                    for ct in self._const_tabs:
+                        # HOLLY PYTHON: comparing damned complex dict values...
+                        if ConstTabVal == ct[1]:
+                            # the table of values get already compiled, just need to link it
+                            link_name = ct[0]
+                            break
             if link_name is None:
                 # create the table set object
                 Const['tab']._pyname = '_{0}_tab'.format(Obj._pyname)

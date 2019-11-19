@@ -52,8 +52,8 @@ _DEBUG_SYNTAX_GRP  = False
 _DEBUG_SYNTAX_OGRP = False
 
 # method tracer, to be used as a decorator
-_TRACE_NAME = ['chained', 'chainedRead', ]
-#_TRACE_NAME = None
+#_TRACE_NAME = ['ROS', ]
+_TRACE_NAME = None
 def tracemethod(meth, *args, **kwargs):
     def wrapper(*args, **kwargs):
         if _TRACE_NAME is None or GLOBAL.COMP['NS']['name'] in _TRACE_NAME:
@@ -2412,7 +2412,7 @@ class ASN1Obj(object):
             assert( path[-2] in ('root', 'ext') )
             if dom == 'root':
                 dom = path[-2]
-            ind  = path[-1]
+            ind = path[-1]
             assert( isinstance(ind, integer_types) and ind >= 0 )
             #
             # 2.2) select the root / ext dict containing the set of values
@@ -2601,7 +2601,7 @@ class ASN1Obj(object):
         for path in self._pathes:
             #
             if path[0] == 'param':
-                raise(ASN1NotSuppErr('{0}: formal parameter passthrough parameterization, {1}'\
+                raise(ASN1NotSuppErr('{0}: formal parameter pass-through parameterization, {1}'\
                       .format(self.fullname(), path)))
             #
             # 4.1) take potential current path into account (especially when
