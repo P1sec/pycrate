@@ -16336,7 +16336,9 @@ class DSRC:
     ___SPAT_regional__item__regionId._const_tab_at = None
     ___SPAT_regional__item__regionId._const_tab_id = u'id'
     ___SPAT_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
-    ___SPAT_regional__item__regExtValue._const_tab = ____SPAT_regional__item__regionId_tab
+    ____SPAT_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    ____SPAT_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SPAT_regional__item__regExtValue._const_tab = ____SPAT_regional__item__regExtValue_tab
     ___SPAT_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
     ___SPAT_regional__item__regExtValue._const_tab_id = u'Type'
     __SPAT_regional__item_._cont = ASN1Dict([
@@ -16370,7 +16372,9 @@ class DSRC:
     ___SignalRequestMessage_regional__item__regionId._const_tab_at = None
     ___SignalRequestMessage_regional__item__regionId._const_tab_id = u'id'
     ___SignalRequestMessage_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
-    ___SignalRequestMessage_regional__item__regExtValue._const_tab = ____SignalRequestMessage_regional__item__regionId_tab
+    ____SignalRequestMessage_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    ____SignalRequestMessage_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SignalRequestMessage_regional__item__regExtValue._const_tab = ____SignalRequestMessage_regional__item__regExtValue_tab
     ___SignalRequestMessage_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
     ___SignalRequestMessage_regional__item__regExtValue._const_tab_id = u'Type'
     __SignalRequestMessage_regional__item_._cont = ASN1Dict([
@@ -16405,7 +16409,9 @@ class DSRC:
     ___SignalStatusMessage_regional__item__regionId._const_tab_at = None
     ___SignalStatusMessage_regional__item__regionId._const_tab_id = u'id'
     ___SignalStatusMessage_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
-    ___SignalStatusMessage_regional__item__regExtValue._const_tab = ____SignalStatusMessage_regional__item__regionId_tab
+    ____SignalStatusMessage_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    ____SignalStatusMessage_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SignalStatusMessage_regional__item__regExtValue._const_tab = ____SignalStatusMessage_regional__item__regExtValue_tab
     ___SignalStatusMessage_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
     ___SignalStatusMessage_regional__item__regExtValue._const_tab_id = u'Type'
     __SignalStatusMessage_regional__item_._cont = ASN1Dict([
@@ -16483,7 +16489,9 @@ class DSRC:
     ___AdvisorySpeed_regional__item__regionId._const_tab_at = None
     ___AdvisorySpeed_regional__item__regionId._const_tab_id = u'id'
     ___AdvisorySpeed_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
-    ___AdvisorySpeed_regional__item__regExtValue._const_tab = ____AdvisorySpeed_regional__item__regionId_tab
+    ____AdvisorySpeed_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    ____AdvisorySpeed_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AdvisorySpeed_regional__item__regExtValue._const_tab = ____AdvisorySpeed_regional__item__regExtValue_tab
     ___AdvisorySpeed_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
     ___AdvisorySpeed_regional__item__regExtValue._const_tab_id = u'Type'
     __AdvisorySpeed_regional__item_._cont = ASN1Dict([
@@ -16540,7 +16548,9 @@ class DSRC:
     ___ComputedLane_regional__item__regionId._const_tab_at = None
     ___ComputedLane_regional__item__regionId._const_tab_id = u'id'
     ___ComputedLane_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
-    ___ComputedLane_regional__item__regExtValue._const_tab = ____ComputedLane_regional__item__regionId_tab
+    ____ComputedLane_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    ____ComputedLane_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ComputedLane_regional__item__regExtValue._const_tab = ____ComputedLane_regional__item__regExtValue_tab
     ___ComputedLane_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
     ___ComputedLane_regional__item__regExtValue._const_tab_id = u'Type'
     __ComputedLane_regional__item_._cont = ASN1Dict([
@@ -16730,7 +16740,9 @@ class DSRC:
     ___IntersectionGeometry_regional__item__regionId._const_tab_at = None
     ___IntersectionGeometry_regional__item__regionId._const_tab_id = u'id'
     ___IntersectionGeometry_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
-    ___IntersectionGeometry_regional__item__regExtValue._const_tab = ____IntersectionGeometry_regional__item__regionId_tab
+    ____IntersectionGeometry_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    ____IntersectionGeometry_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___IntersectionGeometry_regional__item__regExtValue._const_tab = ____IntersectionGeometry_regional__item__regExtValue_tab
     ___IntersectionGeometry_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
     ___IntersectionGeometry_regional__item__regExtValue._const_tab_id = u'Type'
     __IntersectionGeometry_regional__item_._cont = ASN1Dict([
@@ -16833,7 +16845,9 @@ class DSRC:
     __LaneAttributes_regional_regionId._const_tab_at = None
     __LaneAttributes_regional_regionId._const_tab_id = u'id'
     __LaneAttributes_regional_regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
-    __LaneAttributes_regional_regExtValue._const_tab = ___LaneAttributes_regional_regionId_tab
+    ___LaneAttributes_regional_regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    ___LaneAttributes_regional_regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    __LaneAttributes_regional_regExtValue._const_tab = ___LaneAttributes_regional_regExtValue_tab
     __LaneAttributes_regional_regExtValue._const_tab_at = ('..', u'regionId')
     __LaneAttributes_regional_regExtValue._const_tab_id = u'Type'
     _LaneAttributes_regional._cont = ASN1Dict([
@@ -16866,7 +16880,9 @@ class DSRC:
     ___LaneDataAttribute_regional__item__regionId._const_tab_at = None
     ___LaneDataAttribute_regional__item__regionId._const_tab_id = u'id'
     ___LaneDataAttribute_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
-    ___LaneDataAttribute_regional__item__regExtValue._const_tab = ____LaneDataAttribute_regional__item__regionId_tab
+    ____LaneDataAttribute_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    ____LaneDataAttribute_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___LaneDataAttribute_regional__item__regExtValue._const_tab = ____LaneDataAttribute_regional__item__regExtValue_tab
     ___LaneDataAttribute_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
     ___LaneDataAttribute_regional__item__regExtValue._const_tab_id = u'Type'
     __LaneDataAttribute_regional__item_._cont = ASN1Dict([
@@ -16952,7 +16968,9 @@ class DSRC:
     ___MovementEvent_regional__item__regionId._const_tab_at = None
     ___MovementEvent_regional__item__regionId._const_tab_id = u'id'
     ___MovementEvent_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
-    ___MovementEvent_regional__item__regExtValue._const_tab = ____MovementEvent_regional__item__regionId_tab
+    ____MovementEvent_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    ____MovementEvent_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___MovementEvent_regional__item__regExtValue._const_tab = ____MovementEvent_regional__item__regExtValue_tab
     ___MovementEvent_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
     ___MovementEvent_regional__item__regExtValue._const_tab_id = u'Type'
     __MovementEvent_regional__item_._cont = ASN1Dict([
@@ -16991,7 +17009,9 @@ class DSRC:
     ___MovementState_regional__item__regionId._const_tab_at = None
     ___MovementState_regional__item__regionId._const_tab_id = u'id'
     ___MovementState_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
-    ___MovementState_regional__item__regExtValue._const_tab = ____MovementState_regional__item__regionId_tab
+    ____MovementState_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    ____MovementState_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___MovementState_regional__item__regExtValue._const_tab = ____MovementState_regional__item__regExtValue_tab
     ___MovementState_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
     ___MovementState_regional__item__regExtValue._const_tab_id = u'Type'
     __MovementState_regional__item_._cont = ASN1Dict([
@@ -17157,7 +17177,9 @@ class DSRC:
     __NodeOffsetPointXY_regional_regionId._const_tab_at = None
     __NodeOffsetPointXY_regional_regionId._const_tab_id = u'id'
     __NodeOffsetPointXY_regional_regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
-    __NodeOffsetPointXY_regional_regExtValue._const_tab = ___NodeOffsetPointXY_regional_regionId_tab
+    ___NodeOffsetPointXY_regional_regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    ___NodeOffsetPointXY_regional_regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    __NodeOffsetPointXY_regional_regExtValue._const_tab = ___NodeOffsetPointXY_regional_regExtValue_tab
     __NodeOffsetPointXY_regional_regExtValue._const_tab_at = ('..', u'regionId')
     __NodeOffsetPointXY_regional_regExtValue._const_tab_id = u'Type'
     _NodeOffsetPointXY_regional._cont = ASN1Dict([
@@ -17267,7 +17289,9 @@ class DSRC:
     ___RequestorDescription_regional__item__regionId._const_tab_at = None
     ___RequestorDescription_regional__item__regionId._const_tab_id = u'id'
     ___RequestorDescription_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
-    ___RequestorDescription_regional__item__regExtValue._const_tab = ____RequestorDescription_regional__item__regionId_tab
+    ____RequestorDescription_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    ____RequestorDescription_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RequestorDescription_regional__item__regExtValue._const_tab = ____RequestorDescription_regional__item__regExtValue_tab
     ___RequestorDescription_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
     ___RequestorDescription_regional__item__regExtValue._const_tab_id = u'Type'
     __RequestorDescription_regional__item_._cont = ASN1Dict([
@@ -17317,7 +17341,9 @@ class DSRC:
     __RequestorType_regional_regionId._const_tab_at = None
     __RequestorType_regional_regionId._const_tab_id = u'id'
     __RequestorType_regional_regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
-    __RequestorType_regional_regExtValue._const_tab = ___RequestorType_regional_regionId_tab
+    ___RequestorType_regional_regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    ___RequestorType_regional_regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    __RequestorType_regional_regExtValue._const_tab = ___RequestorType_regional_regExtValue_tab
     __RequestorType_regional_regExtValue._const_tab_at = ('..', u'regionId')
     __RequestorType_regional_regExtValue._const_tab_id = u'Type'
     _RequestorType_regional._cont = ASN1Dict([
@@ -17420,7 +17446,9 @@ class DSRC:
     ___RoadSegment_regional__item__regionId._const_tab_at = None
     ___RoadSegment_regional__item__regionId._const_tab_id = u'id'
     ___RoadSegment_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
-    ___RoadSegment_regional__item__regExtValue._const_tab = ____RoadSegment_regional__item__regionId_tab
+    ____RoadSegment_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    ____RoadSegment_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RoadSegment_regional__item__regExtValue._const_tab = ____RoadSegment_regional__item__regExtValue_tab
     ___RoadSegment_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
     ___RoadSegment_regional__item__regExtValue._const_tab_id = u'Type'
     __RoadSegment_regional__item_._cont = ASN1Dict([
@@ -17464,7 +17492,9 @@ class DSRC:
     __SignalControlZone_zone_regionId._const_tab_at = None
     __SignalControlZone_zone_regionId._const_tab_id = u'id'
     __SignalControlZone_zone_regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
-    __SignalControlZone_zone_regExtValue._const_tab = ___SignalControlZone_zone_regionId_tab
+    ___SignalControlZone_zone_regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    ___SignalControlZone_zone_regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    __SignalControlZone_zone_regExtValue._const_tab = ___SignalControlZone_zone_regExtValue_tab
     __SignalControlZone_zone_regExtValue._const_tab_at = ('..', u'regionId')
     __SignalControlZone_zone_regExtValue._const_tab_id = u'Type'
     _SignalControlZone_zone._cont = ASN1Dict([
@@ -17514,7 +17544,9 @@ class DSRC:
     ___SignalRequestPackage_regional__item__regionId._const_tab_at = None
     ___SignalRequestPackage_regional__item__regionId._const_tab_id = u'id'
     ___SignalRequestPackage_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
-    ___SignalRequestPackage_regional__item__regExtValue._const_tab = ____SignalRequestPackage_regional__item__regionId_tab
+    ____SignalRequestPackage_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    ____SignalRequestPackage_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SignalRequestPackage_regional__item__regExtValue._const_tab = ____SignalRequestPackage_regional__item__regExtValue_tab
     ___SignalRequestPackage_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
     ___SignalRequestPackage_regional__item__regExtValue._const_tab_id = u'Type'
     __SignalRequestPackage_regional__item_._cont = ASN1Dict([
@@ -17549,7 +17581,9 @@ class DSRC:
     ___SignalRequest_regional__item__regionId._const_tab_at = None
     ___SignalRequest_regional__item__regionId._const_tab_id = u'id'
     ___SignalRequest_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
-    ___SignalRequest_regional__item__regExtValue._const_tab = ____SignalRequest_regional__item__regionId_tab
+    ____SignalRequest_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    ____SignalRequest_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SignalRequest_regional__item__regExtValue._const_tab = ____SignalRequest_regional__item__regExtValue_tab
     ___SignalRequest_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
     ___SignalRequest_regional__item__regExtValue._const_tab_id = u'Type'
     __SignalRequest_regional__item_._cont = ASN1Dict([
@@ -17636,7 +17670,9 @@ class DSRC:
     ___SignalStatus_regional__item__regionId._const_tab_at = None
     ___SignalStatus_regional__item__regionId._const_tab_id = u'id'
     ___SignalStatus_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
-    ___SignalStatus_regional__item__regExtValue._const_tab = ____SignalStatus_regional__item__regionId_tab
+    ____SignalStatus_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    ____SignalStatus_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SignalStatus_regional__item__regExtValue._const_tab = ____SignalStatus_regional__item__regExtValue_tab
     ___SignalStatus_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
     ___SignalStatus_regional__item__regExtValue._const_tab_id = u'Type'
     __SignalStatus_regional__item_._cont = ASN1Dict([
@@ -18043,6 +18079,7 @@ class DSRC:
         _SPAT_intersections,
         ____SPAT_regional__item__regionId_tab,
         ___SPAT_regional__item__regionId,
+        ____SPAT_regional__item__regExtValue_tab,
         ___SPAT_regional__item__regExtValue,
         __SPAT_regional__item_,
         _SPAT_regional,
@@ -18054,6 +18091,7 @@ class DSRC:
         _SignalRequestMessage_requestor,
         ____SignalRequestMessage_regional__item__regionId_tab,
         ___SignalRequestMessage_regional__item__regionId,
+        ____SignalRequestMessage_regional__item__regExtValue_tab,
         ___SignalRequestMessage_regional__item__regExtValue,
         __SignalRequestMessage_regional__item_,
         _SignalRequestMessage_regional,
@@ -18064,6 +18102,7 @@ class DSRC:
         _SignalStatusMessage_status,
         ____SignalStatusMessage_regional__item__regionId_tab,
         ___SignalStatusMessage_regional__item__regionId,
+        ____SignalStatusMessage_regional__item__regExtValue_tab,
         ___SignalStatusMessage_regional__item__regExtValue,
         __SignalStatusMessage_regional__item_,
         _SignalStatusMessage_regional,
@@ -18090,6 +18129,7 @@ class DSRC:
         _AdvisorySpeed_class_,
         ____AdvisorySpeed_regional__item__regionId_tab,
         ___AdvisorySpeed_regional__item__regionId,
+        ____AdvisorySpeed_regional__item__regExtValue_tab,
         ___AdvisorySpeed_regional__item__regExtValue,
         __AdvisorySpeed_regional__item_,
         _AdvisorySpeed_regional,
@@ -18108,6 +18148,7 @@ class DSRC:
         _ComputedLane_scaleYaxis,
         ____ComputedLane_regional__item__regionId_tab,
         ___ComputedLane_regional__item__regionId,
+        ____ComputedLane_regional__item__regExtValue_tab,
         ___ComputedLane_regional__item__regExtValue,
         __ComputedLane_regional__item_,
         _ComputedLane_regional,
@@ -18172,6 +18213,7 @@ class DSRC:
         _IntersectionGeometry_preemptPriorityData,
         ____IntersectionGeometry_regional__item__regionId_tab,
         ___IntersectionGeometry_regional__item__regionId,
+        ____IntersectionGeometry_regional__item__regExtValue_tab,
         ___IntersectionGeometry_regional__item__regExtValue,
         __IntersectionGeometry_regional__item_,
         _IntersectionGeometry_regional,
@@ -18204,6 +18246,7 @@ class DSRC:
         _LaneAttributes_laneType,
         ___LaneAttributes_regional_regionId_tab,
         __LaneAttributes_regional_regionId,
+        ___LaneAttributes_regional_regExtValue_tab,
         __LaneAttributes_regional_regExtValue,
         _LaneAttributes_regional,
         LaneAttributes,
@@ -18215,6 +18258,7 @@ class DSRC:
         _LaneDataAttribute_speedLimits,
         ____LaneDataAttribute_regional__item__regionId_tab,
         ___LaneDataAttribute_regional__item__regionId,
+        ____LaneDataAttribute_regional__item__regExtValue_tab,
         ___LaneDataAttribute_regional__item__regExtValue,
         __LaneDataAttribute_regional__item_,
         _LaneDataAttribute_regional,
@@ -18242,6 +18286,7 @@ class DSRC:
         _MovementEvent_speeds,
         ____MovementEvent_regional__item__regionId_tab,
         ___MovementEvent_regional__item__regionId,
+        ____MovementEvent_regional__item__regExtValue_tab,
         ___MovementEvent_regional__item__regExtValue,
         __MovementEvent_regional__item_,
         _MovementEvent_regional,
@@ -18254,6 +18299,7 @@ class DSRC:
         _MovementState_maneuverAssistList,
         ____MovementState_regional__item__regionId_tab,
         ___MovementState_regional__item__regionId,
+        ____MovementState_regional__item__regExtValue_tab,
         ___MovementState_regional__item__regExtValue,
         __MovementState_regional__item_,
         _MovementState_regional,
@@ -18307,6 +18353,7 @@ class DSRC:
         _NodeOffsetPointXY_node_LatLon,
         ___NodeOffsetPointXY_regional_regionId_tab,
         __NodeOffsetPointXY_regional_regionId,
+        ___NodeOffsetPointXY_regional_regExtValue_tab,
         __NodeOffsetPointXY_regional_regExtValue,
         _NodeOffsetPointXY_regional,
         NodeOffsetPointXY,
@@ -18342,6 +18389,7 @@ class DSRC:
         _RequestorDescription_transitSchedule,
         ____RequestorDescription_regional__item__regionId_tab,
         ___RequestorDescription_regional__item__regionId,
+        ____RequestorDescription_regional__item__regExtValue_tab,
         ___RequestorDescription_regional__item__regExtValue,
         __RequestorDescription_regional__item_,
         _RequestorDescription_regional,
@@ -18357,6 +18405,7 @@ class DSRC:
         _RequestorType_hpmsType,
         ___RequestorType_regional_regionId_tab,
         __RequestorType_regional_regionId,
+        ___RequestorType_regional_regExtValue_tab,
         __RequestorType_regional_regExtValue,
         _RequestorType_regional,
         RequestorType,
@@ -18389,6 +18438,7 @@ class DSRC:
         _RoadSegment_roadLaneSet,
         ____RoadSegment_regional__item__regionId_tab,
         ___RoadSegment_regional__item__regionId,
+        ____RoadSegment_regional__item__regExtValue_tab,
         ___RoadSegment_regional__item__regExtValue,
         __RoadSegment_regional__item_,
         _RoadSegment_regional,
@@ -18399,6 +18449,7 @@ class DSRC:
         SegmentAttributeXYList,
         ___SignalControlZone_zone_regionId_tab,
         __SignalControlZone_zone_regionId,
+        ___SignalControlZone_zone_regExtValue_tab,
         __SignalControlZone_zone_regExtValue,
         _SignalControlZone_zone,
         SignalControlZone,
@@ -18416,6 +18467,7 @@ class DSRC:
         _SignalRequestPackage_duration,
         ____SignalRequestPackage_regional__item__regionId_tab,
         ___SignalRequestPackage_regional__item__regionId,
+        ____SignalRequestPackage_regional__item__regExtValue_tab,
         ___SignalRequestPackage_regional__item__regExtValue,
         __SignalRequestPackage_regional__item_,
         _SignalRequestPackage_regional,
@@ -18427,6 +18479,7 @@ class DSRC:
         _SignalRequest_outBoundLane,
         ____SignalRequest_regional__item__regionId_tab,
         ___SignalRequest_regional__item__regionId,
+        ____SignalRequest_regional__item__regExtValue_tab,
         ___SignalRequest_regional__item__regExtValue,
         __SignalRequest_regional__item_,
         _SignalRequest_regional,
@@ -18454,6 +18507,7 @@ class DSRC:
         _SignalStatus_sigStatus,
         ____SignalStatus_regional__item__regionId_tab,
         ___SignalStatus_regional__item__regionId,
+        ____SignalStatus_regional__item__regExtValue_tab,
         ___SignalStatus_regional__item__regExtValue,
         __SignalStatus_regional__item_,
         _SignalStatus_regional,

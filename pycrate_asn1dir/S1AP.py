@@ -4310,11 +4310,15 @@ class S1AP_IEs:
     ___Additional_GUTI_iE_Extensions__item__id._const_tab_at = None
     ___Additional_GUTI_iE_Extensions__item__id._const_tab_id = u'id'
     ___Additional_GUTI_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Additional_GUTI_iE_Extensions__item__criticality._const_tab = ____Additional_GUTI_iE_Extensions__item__id_tab
+    ____Additional_GUTI_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____Additional_GUTI_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Additional_GUTI_iE_Extensions__item__criticality._const_tab = ____Additional_GUTI_iE_Extensions__item__criticality_tab
     ___Additional_GUTI_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___Additional_GUTI_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___Additional_GUTI_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Additional_GUTI_iE_Extensions__item__extensionValue._const_tab = ____Additional_GUTI_iE_Extensions__item__id_tab
+    ____Additional_GUTI_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____Additional_GUTI_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Additional_GUTI_iE_Extensions__item__extensionValue._const_tab = ____Additional_GUTI_iE_Extensions__item__extensionValue_tab
     ___Additional_GUTI_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Additional_GUTI_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Additional_GUTI_iE_Extensions__item_._cont = ASN1Dict([
@@ -4383,11 +4387,15 @@ class S1AP_IEs:
     ___AllocationAndRetentionPriority_iE_Extensions__item__id._const_tab_at = None
     ___AllocationAndRetentionPriority_iE_Extensions__item__id._const_tab_id = u'id'
     ___AllocationAndRetentionPriority_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___AllocationAndRetentionPriority_iE_Extensions__item__criticality._const_tab = ____AllocationAndRetentionPriority_iE_Extensions__item__id_tab
+    ____AllocationAndRetentionPriority_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____AllocationAndRetentionPriority_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AllocationAndRetentionPriority_iE_Extensions__item__criticality._const_tab = ____AllocationAndRetentionPriority_iE_Extensions__item__criticality_tab
     ___AllocationAndRetentionPriority_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___AllocationAndRetentionPriority_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___AllocationAndRetentionPriority_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___AllocationAndRetentionPriority_iE_Extensions__item__extensionValue._const_tab = ____AllocationAndRetentionPriority_iE_Extensions__item__id_tab
+    ____AllocationAndRetentionPriority_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____AllocationAndRetentionPriority_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AllocationAndRetentionPriority_iE_Extensions__item__extensionValue._const_tab = ____AllocationAndRetentionPriority_iE_Extensions__item__extensionValue_tab
     ___AllocationAndRetentionPriority_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___AllocationAndRetentionPriority_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __AllocationAndRetentionPriority_iE_Extensions__item_._cont = ASN1Dict([
@@ -4422,11 +4430,15 @@ class S1AP_IEs:
     ___AssistanceDataForCECapableUEs_iE_Extensions__item__id._const_tab_at = None
     ___AssistanceDataForCECapableUEs_iE_Extensions__item__id._const_tab_id = u'id'
     ___AssistanceDataForCECapableUEs_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___AssistanceDataForCECapableUEs_iE_Extensions__item__criticality._const_tab = ____AssistanceDataForCECapableUEs_iE_Extensions__item__id_tab
+    ____AssistanceDataForCECapableUEs_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____AssistanceDataForCECapableUEs_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AssistanceDataForCECapableUEs_iE_Extensions__item__criticality._const_tab = ____AssistanceDataForCECapableUEs_iE_Extensions__item__criticality_tab
     ___AssistanceDataForCECapableUEs_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___AssistanceDataForCECapableUEs_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___AssistanceDataForCECapableUEs_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___AssistanceDataForCECapableUEs_iE_Extensions__item__extensionValue._const_tab = ____AssistanceDataForCECapableUEs_iE_Extensions__item__id_tab
+    ____AssistanceDataForCECapableUEs_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____AssistanceDataForCECapableUEs_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AssistanceDataForCECapableUEs_iE_Extensions__item__extensionValue._const_tab = ____AssistanceDataForCECapableUEs_iE_Extensions__item__extensionValue_tab
     ___AssistanceDataForCECapableUEs_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___AssistanceDataForCECapableUEs_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __AssistanceDataForCECapableUEs_iE_Extensions__item_._cont = ASN1Dict([
@@ -4461,11 +4473,15 @@ class S1AP_IEs:
     ___AssistanceDataForPaging_iE_Extensions__item__id._const_tab_at = None
     ___AssistanceDataForPaging_iE_Extensions__item__id._const_tab_id = u'id'
     ___AssistanceDataForPaging_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___AssistanceDataForPaging_iE_Extensions__item__criticality._const_tab = ____AssistanceDataForPaging_iE_Extensions__item__id_tab
+    ____AssistanceDataForPaging_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____AssistanceDataForPaging_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AssistanceDataForPaging_iE_Extensions__item__criticality._const_tab = ____AssistanceDataForPaging_iE_Extensions__item__criticality_tab
     ___AssistanceDataForPaging_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___AssistanceDataForPaging_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___AssistanceDataForPaging_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___AssistanceDataForPaging_iE_Extensions__item__extensionValue._const_tab = ____AssistanceDataForPaging_iE_Extensions__item__id_tab
+    ____AssistanceDataForPaging_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____AssistanceDataForPaging_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AssistanceDataForPaging_iE_Extensions__item__extensionValue._const_tab = ____AssistanceDataForPaging_iE_Extensions__item__extensionValue_tab
     ___AssistanceDataForPaging_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___AssistanceDataForPaging_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __AssistanceDataForPaging_iE_Extensions__item_._cont = ASN1Dict([
@@ -4500,11 +4516,15 @@ class S1AP_IEs:
     ___AssistanceDataForRecommendedCells_iE_Extensions__item__id._const_tab_at = None
     ___AssistanceDataForRecommendedCells_iE_Extensions__item__id._const_tab_id = u'id'
     ___AssistanceDataForRecommendedCells_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___AssistanceDataForRecommendedCells_iE_Extensions__item__criticality._const_tab = ____AssistanceDataForRecommendedCells_iE_Extensions__item__id_tab
+    ____AssistanceDataForRecommendedCells_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____AssistanceDataForRecommendedCells_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AssistanceDataForRecommendedCells_iE_Extensions__item__criticality._const_tab = ____AssistanceDataForRecommendedCells_iE_Extensions__item__criticality_tab
     ___AssistanceDataForRecommendedCells_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___AssistanceDataForRecommendedCells_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___AssistanceDataForRecommendedCells_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___AssistanceDataForRecommendedCells_iE_Extensions__item__extensionValue._const_tab = ____AssistanceDataForRecommendedCells_iE_Extensions__item__id_tab
+    ____AssistanceDataForRecommendedCells_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____AssistanceDataForRecommendedCells_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AssistanceDataForRecommendedCells_iE_Extensions__item__extensionValue._const_tab = ____AssistanceDataForRecommendedCells_iE_Extensions__item__extensionValue_tab
     ___AssistanceDataForRecommendedCells_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___AssistanceDataForRecommendedCells_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __AssistanceDataForRecommendedCells_iE_Extensions__item_._cont = ASN1Dict([
@@ -4637,11 +4657,15 @@ class S1AP_IEs:
     ___BluetoothMeasurementConfiguration_iE_Extensions__item__id._const_tab_at = None
     ___BluetoothMeasurementConfiguration_iE_Extensions__item__id._const_tab_id = u'id'
     ___BluetoothMeasurementConfiguration_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___BluetoothMeasurementConfiguration_iE_Extensions__item__criticality._const_tab = ____BluetoothMeasurementConfiguration_iE_Extensions__item__id_tab
+    ____BluetoothMeasurementConfiguration_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____BluetoothMeasurementConfiguration_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___BluetoothMeasurementConfiguration_iE_Extensions__item__criticality._const_tab = ____BluetoothMeasurementConfiguration_iE_Extensions__item__criticality_tab
     ___BluetoothMeasurementConfiguration_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___BluetoothMeasurementConfiguration_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___BluetoothMeasurementConfiguration_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___BluetoothMeasurementConfiguration_iE_Extensions__item__extensionValue._const_tab = ____BluetoothMeasurementConfiguration_iE_Extensions__item__id_tab
+    ____BluetoothMeasurementConfiguration_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____BluetoothMeasurementConfiguration_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___BluetoothMeasurementConfiguration_iE_Extensions__item__extensionValue._const_tab = ____BluetoothMeasurementConfiguration_iE_Extensions__item__extensionValue_tab
     ___BluetoothMeasurementConfiguration_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___BluetoothMeasurementConfiguration_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __BluetoothMeasurementConfiguration_iE_Extensions__item_._cont = ASN1Dict([
@@ -4728,11 +4752,15 @@ class S1AP_IEs:
     ___CancelledCellinEAI_Item_iE_Extensions__item__id._const_tab_at = None
     ___CancelledCellinEAI_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___CancelledCellinEAI_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___CancelledCellinEAI_Item_iE_Extensions__item__criticality._const_tab = ____CancelledCellinEAI_Item_iE_Extensions__item__id_tab
+    ____CancelledCellinEAI_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CancelledCellinEAI_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CancelledCellinEAI_Item_iE_Extensions__item__criticality._const_tab = ____CancelledCellinEAI_Item_iE_Extensions__item__criticality_tab
     ___CancelledCellinEAI_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___CancelledCellinEAI_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___CancelledCellinEAI_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___CancelledCellinEAI_Item_iE_Extensions__item__extensionValue._const_tab = ____CancelledCellinEAI_Item_iE_Extensions__item__id_tab
+    ____CancelledCellinEAI_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CancelledCellinEAI_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CancelledCellinEAI_Item_iE_Extensions__item__extensionValue._const_tab = ____CancelledCellinEAI_Item_iE_Extensions__item__extensionValue_tab
     ___CancelledCellinEAI_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___CancelledCellinEAI_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CancelledCellinEAI_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -4773,11 +4801,15 @@ class S1AP_IEs:
     ___CancelledCellinTAI_Item_iE_Extensions__item__id._const_tab_at = None
     ___CancelledCellinTAI_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___CancelledCellinTAI_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___CancelledCellinTAI_Item_iE_Extensions__item__criticality._const_tab = ____CancelledCellinTAI_Item_iE_Extensions__item__id_tab
+    ____CancelledCellinTAI_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CancelledCellinTAI_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CancelledCellinTAI_Item_iE_Extensions__item__criticality._const_tab = ____CancelledCellinTAI_Item_iE_Extensions__item__criticality_tab
     ___CancelledCellinTAI_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___CancelledCellinTAI_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___CancelledCellinTAI_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___CancelledCellinTAI_Item_iE_Extensions__item__extensionValue._const_tab = ____CancelledCellinTAI_Item_iE_Extensions__item__id_tab
+    ____CancelledCellinTAI_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CancelledCellinTAI_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CancelledCellinTAI_Item_iE_Extensions__item__extensionValue._const_tab = ____CancelledCellinTAI_Item_iE_Extensions__item__extensionValue_tab
     ___CancelledCellinTAI_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___CancelledCellinTAI_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CancelledCellinTAI_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -4858,11 +4890,15 @@ class S1AP_IEs:
     ___CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__id._const_tab_at = None
     ___CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__id._const_tab_id = u'id'
     ___CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__criticality._const_tab = ____CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__id_tab
+    ____CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__criticality._const_tab = ____CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__criticality_tab
     ___CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__extensionValue._const_tab = ____CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__id_tab
+    ____CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__extensionValue._const_tab = ____CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__extensionValue_tab
     ___CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item_._cont = ASN1Dict([
@@ -4914,11 +4950,15 @@ class S1AP_IEs:
     ___CellID_Broadcast_Item_iE_Extensions__item__id._const_tab_at = None
     ___CellID_Broadcast_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___CellID_Broadcast_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___CellID_Broadcast_Item_iE_Extensions__item__criticality._const_tab = ____CellID_Broadcast_Item_iE_Extensions__item__id_tab
+    ____CellID_Broadcast_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CellID_Broadcast_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CellID_Broadcast_Item_iE_Extensions__item__criticality._const_tab = ____CellID_Broadcast_Item_iE_Extensions__item__criticality_tab
     ___CellID_Broadcast_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___CellID_Broadcast_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___CellID_Broadcast_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___CellID_Broadcast_Item_iE_Extensions__item__extensionValue._const_tab = ____CellID_Broadcast_Item_iE_Extensions__item__id_tab
+    ____CellID_Broadcast_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CellID_Broadcast_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CellID_Broadcast_Item_iE_Extensions__item__extensionValue._const_tab = ____CellID_Broadcast_Item_iE_Extensions__item__extensionValue_tab
     ___CellID_Broadcast_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___CellID_Broadcast_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CellID_Broadcast_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -4958,11 +4998,15 @@ class S1AP_IEs:
     ___CellID_Cancelled_Item_iE_Extensions__item__id._const_tab_at = None
     ___CellID_Cancelled_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___CellID_Cancelled_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___CellID_Cancelled_Item_iE_Extensions__item__criticality._const_tab = ____CellID_Cancelled_Item_iE_Extensions__item__id_tab
+    ____CellID_Cancelled_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CellID_Cancelled_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CellID_Cancelled_Item_iE_Extensions__item__criticality._const_tab = ____CellID_Cancelled_Item_iE_Extensions__item__criticality_tab
     ___CellID_Cancelled_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___CellID_Cancelled_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___CellID_Cancelled_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___CellID_Cancelled_Item_iE_Extensions__item__extensionValue._const_tab = ____CellID_Cancelled_Item_iE_Extensions__item__id_tab
+    ____CellID_Cancelled_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CellID_Cancelled_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CellID_Cancelled_Item_iE_Extensions__item__extensionValue._const_tab = ____CellID_Cancelled_Item_iE_Extensions__item__extensionValue_tab
     ___CellID_Cancelled_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___CellID_Cancelled_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CellID_Cancelled_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -4996,11 +5040,15 @@ class S1AP_IEs:
     ___CellBasedMDT_iE_Extensions__item__id._const_tab_at = None
     ___CellBasedMDT_iE_Extensions__item__id._const_tab_id = u'id'
     ___CellBasedMDT_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___CellBasedMDT_iE_Extensions__item__criticality._const_tab = ____CellBasedMDT_iE_Extensions__item__id_tab
+    ____CellBasedMDT_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CellBasedMDT_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CellBasedMDT_iE_Extensions__item__criticality._const_tab = ____CellBasedMDT_iE_Extensions__item__criticality_tab
     ___CellBasedMDT_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___CellBasedMDT_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___CellBasedMDT_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___CellBasedMDT_iE_Extensions__item__extensionValue._const_tab = ____CellBasedMDT_iE_Extensions__item__id_tab
+    ____CellBasedMDT_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CellBasedMDT_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CellBasedMDT_iE_Extensions__item__extensionValue._const_tab = ____CellBasedMDT_iE_Extensions__item__extensionValue_tab
     ___CellBasedMDT_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___CellBasedMDT_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CellBasedMDT_iE_Extensions__item_._cont = ASN1Dict([
@@ -5039,11 +5087,15 @@ class S1AP_IEs:
     ___CellBasedQMC_iE_Extensions__item__id._const_tab_at = None
     ___CellBasedQMC_iE_Extensions__item__id._const_tab_id = u'id'
     ___CellBasedQMC_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___CellBasedQMC_iE_Extensions__item__criticality._const_tab = ____CellBasedQMC_iE_Extensions__item__id_tab
+    ____CellBasedQMC_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CellBasedQMC_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CellBasedQMC_iE_Extensions__item__criticality._const_tab = ____CellBasedQMC_iE_Extensions__item__criticality_tab
     ___CellBasedQMC_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___CellBasedQMC_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___CellBasedQMC_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___CellBasedQMC_iE_Extensions__item__extensionValue._const_tab = ____CellBasedQMC_iE_Extensions__item__id_tab
+    ____CellBasedQMC_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CellBasedQMC_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CellBasedQMC_iE_Extensions__item__extensionValue._const_tab = ____CellBasedQMC_iE_Extensions__item__extensionValue_tab
     ___CellBasedQMC_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___CellBasedQMC_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CellBasedQMC_iE_Extensions__item_._cont = ASN1Dict([
@@ -5105,11 +5157,15 @@ class S1AP_IEs:
     ___Cdma2000OneXSRVCCInfo_iE_Extensions__item__id._const_tab_at = None
     ___Cdma2000OneXSRVCCInfo_iE_Extensions__item__id._const_tab_id = u'id'
     ___Cdma2000OneXSRVCCInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Cdma2000OneXSRVCCInfo_iE_Extensions__item__criticality._const_tab = ____Cdma2000OneXSRVCCInfo_iE_Extensions__item__id_tab
+    ____Cdma2000OneXSRVCCInfo_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____Cdma2000OneXSRVCCInfo_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Cdma2000OneXSRVCCInfo_iE_Extensions__item__criticality._const_tab = ____Cdma2000OneXSRVCCInfo_iE_Extensions__item__criticality_tab
     ___Cdma2000OneXSRVCCInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___Cdma2000OneXSRVCCInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___Cdma2000OneXSRVCCInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Cdma2000OneXSRVCCInfo_iE_Extensions__item__extensionValue._const_tab = ____Cdma2000OneXSRVCCInfo_iE_Extensions__item__id_tab
+    ____Cdma2000OneXSRVCCInfo_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____Cdma2000OneXSRVCCInfo_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Cdma2000OneXSRVCCInfo_iE_Extensions__item__extensionValue._const_tab = ____Cdma2000OneXSRVCCInfo_iE_Extensions__item__extensionValue_tab
     ___Cdma2000OneXSRVCCInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Cdma2000OneXSRVCCInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Cdma2000OneXSRVCCInfo_iE_Extensions__item_._cont = ASN1Dict([
@@ -5161,11 +5217,15 @@ class S1AP_IEs:
     ___CellType_iE_Extensions__item__id._const_tab_at = None
     ___CellType_iE_Extensions__item__id._const_tab_id = u'id'
     ___CellType_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___CellType_iE_Extensions__item__criticality._const_tab = ____CellType_iE_Extensions__item__id_tab
+    ____CellType_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CellType_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CellType_iE_Extensions__item__criticality._const_tab = ____CellType_iE_Extensions__item__criticality_tab
     ___CellType_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___CellType_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___CellType_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___CellType_iE_Extensions__item__extensionValue._const_tab = ____CellType_iE_Extensions__item__id_tab
+    ____CellType_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CellType_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CellType_iE_Extensions__item__extensionValue._const_tab = ____CellType_iE_Extensions__item__extensionValue_tab
     ___CellType_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___CellType_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CellType_iE_Extensions__item_._cont = ASN1Dict([
@@ -5201,11 +5261,15 @@ class S1AP_IEs:
     ___CGI_iE_Extensions__item__id._const_tab_at = None
     ___CGI_iE_Extensions__item__id._const_tab_id = u'id'
     ___CGI_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___CGI_iE_Extensions__item__criticality._const_tab = ____CGI_iE_Extensions__item__id_tab
+    ____CGI_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CGI_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CGI_iE_Extensions__item__criticality._const_tab = ____CGI_iE_Extensions__item__criticality_tab
     ___CGI_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___CGI_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___CGI_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___CGI_iE_Extensions__item__extensionValue._const_tab = ____CGI_iE_Extensions__item__id_tab
+    ____CGI_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CGI_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CGI_iE_Extensions__item__extensionValue._const_tab = ____CGI_iE_Extensions__item__extensionValue_tab
     ___CGI_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___CGI_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CGI_iE_Extensions__item_._cont = ASN1Dict([
@@ -5257,11 +5321,15 @@ class S1AP_IEs:
     ___CNTypeRestrictions_Item_iE_Extensions__item__id._const_tab_at = None
     ___CNTypeRestrictions_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___CNTypeRestrictions_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___CNTypeRestrictions_Item_iE_Extensions__item__criticality._const_tab = ____CNTypeRestrictions_Item_iE_Extensions__item__id_tab
+    ____CNTypeRestrictions_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CNTypeRestrictions_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CNTypeRestrictions_Item_iE_Extensions__item__criticality._const_tab = ____CNTypeRestrictions_Item_iE_Extensions__item__criticality_tab
     ___CNTypeRestrictions_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___CNTypeRestrictions_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___CNTypeRestrictions_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___CNTypeRestrictions_Item_iE_Extensions__item__extensionValue._const_tab = ____CNTypeRestrictions_Item_iE_Extensions__item__id_tab
+    ____CNTypeRestrictions_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CNTypeRestrictions_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CNTypeRestrictions_Item_iE_Extensions__item__extensionValue._const_tab = ____CNTypeRestrictions_Item_iE_Extensions__item__extensionValue_tab
     ___CNTypeRestrictions_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___CNTypeRestrictions_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CNTypeRestrictions_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -5312,11 +5380,15 @@ class S1AP_IEs:
     ___ConnectedengNBItem_iE_Extensions__item__id._const_tab_at = None
     ___ConnectedengNBItem_iE_Extensions__item__id._const_tab_id = u'id'
     ___ConnectedengNBItem_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___ConnectedengNBItem_iE_Extensions__item__criticality._const_tab = ____ConnectedengNBItem_iE_Extensions__item__id_tab
+    ____ConnectedengNBItem_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____ConnectedengNBItem_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ConnectedengNBItem_iE_Extensions__item__criticality._const_tab = ____ConnectedengNBItem_iE_Extensions__item__criticality_tab
     ___ConnectedengNBItem_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___ConnectedengNBItem_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___ConnectedengNBItem_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___ConnectedengNBItem_iE_Extensions__item__extensionValue._const_tab = ____ConnectedengNBItem_iE_Extensions__item__id_tab
+    ____ConnectedengNBItem_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____ConnectedengNBItem_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ConnectedengNBItem_iE_Extensions__item__extensionValue._const_tab = ____ConnectedengNBItem_iE_Extensions__item__extensionValue_tab
     ___ConnectedengNBItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___ConnectedengNBItem_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ConnectedengNBItem_iE_Extensions__item_._cont = ASN1Dict([
@@ -5374,11 +5446,15 @@ class S1AP_IEs:
     ___CSG_IdList_Item_iE_Extensions__item__id._const_tab_at = None
     ___CSG_IdList_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___CSG_IdList_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___CSG_IdList_Item_iE_Extensions__item__criticality._const_tab = ____CSG_IdList_Item_iE_Extensions__item__id_tab
+    ____CSG_IdList_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CSG_IdList_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CSG_IdList_Item_iE_Extensions__item__criticality._const_tab = ____CSG_IdList_Item_iE_Extensions__item__criticality_tab
     ___CSG_IdList_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___CSG_IdList_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___CSG_IdList_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___CSG_IdList_Item_iE_Extensions__item__extensionValue._const_tab = ____CSG_IdList_Item_iE_Extensions__item__id_tab
+    ____CSG_IdList_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CSG_IdList_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CSG_IdList_Item_iE_Extensions__item__extensionValue._const_tab = ____CSG_IdList_Item_iE_Extensions__item__extensionValue_tab
     ___CSG_IdList_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___CSG_IdList_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CSG_IdList_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -5417,11 +5493,15 @@ class S1AP_IEs:
     ___COUNTvalue_iE_Extensions__item__id._const_tab_at = None
     ___COUNTvalue_iE_Extensions__item__id._const_tab_id = u'id'
     ___COUNTvalue_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___COUNTvalue_iE_Extensions__item__criticality._const_tab = ____COUNTvalue_iE_Extensions__item__id_tab
+    ____COUNTvalue_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____COUNTvalue_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___COUNTvalue_iE_Extensions__item__criticality._const_tab = ____COUNTvalue_iE_Extensions__item__criticality_tab
     ___COUNTvalue_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___COUNTvalue_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___COUNTvalue_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___COUNTvalue_iE_Extensions__item__extensionValue._const_tab = ____COUNTvalue_iE_Extensions__item__id_tab
+    ____COUNTvalue_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____COUNTvalue_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___COUNTvalue_iE_Extensions__item__extensionValue._const_tab = ____COUNTvalue_iE_Extensions__item__extensionValue_tab
     ___COUNTvalue_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___COUNTvalue_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __COUNTvalue_iE_Extensions__item_._cont = ASN1Dict([
@@ -5456,11 +5536,15 @@ class S1AP_IEs:
     ___COUNTValueExtended_iE_Extensions__item__id._const_tab_at = None
     ___COUNTValueExtended_iE_Extensions__item__id._const_tab_id = u'id'
     ___COUNTValueExtended_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___COUNTValueExtended_iE_Extensions__item__criticality._const_tab = ____COUNTValueExtended_iE_Extensions__item__id_tab
+    ____COUNTValueExtended_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____COUNTValueExtended_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___COUNTValueExtended_iE_Extensions__item__criticality._const_tab = ____COUNTValueExtended_iE_Extensions__item__criticality_tab
     ___COUNTValueExtended_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___COUNTValueExtended_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___COUNTValueExtended_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___COUNTValueExtended_iE_Extensions__item__extensionValue._const_tab = ____COUNTValueExtended_iE_Extensions__item__id_tab
+    ____COUNTValueExtended_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____COUNTValueExtended_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___COUNTValueExtended_iE_Extensions__item__extensionValue._const_tab = ____COUNTValueExtended_iE_Extensions__item__extensionValue_tab
     ___COUNTValueExtended_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___COUNTValueExtended_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __COUNTValueExtended_iE_Extensions__item_._cont = ASN1Dict([
@@ -5495,11 +5579,15 @@ class S1AP_IEs:
     ___COUNTvaluePDCP_SNlength18_iE_Extensions__item__id._const_tab_at = None
     ___COUNTvaluePDCP_SNlength18_iE_Extensions__item__id._const_tab_id = u'id'
     ___COUNTvaluePDCP_SNlength18_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___COUNTvaluePDCP_SNlength18_iE_Extensions__item__criticality._const_tab = ____COUNTvaluePDCP_SNlength18_iE_Extensions__item__id_tab
+    ____COUNTvaluePDCP_SNlength18_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____COUNTvaluePDCP_SNlength18_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___COUNTvaluePDCP_SNlength18_iE_Extensions__item__criticality._const_tab = ____COUNTvaluePDCP_SNlength18_iE_Extensions__item__criticality_tab
     ___COUNTvaluePDCP_SNlength18_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___COUNTvaluePDCP_SNlength18_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___COUNTvaluePDCP_SNlength18_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___COUNTvaluePDCP_SNlength18_iE_Extensions__item__extensionValue._const_tab = ____COUNTvaluePDCP_SNlength18_iE_Extensions__item__id_tab
+    ____COUNTvaluePDCP_SNlength18_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____COUNTvaluePDCP_SNlength18_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___COUNTvaluePDCP_SNlength18_iE_Extensions__item__extensionValue._const_tab = ____COUNTvaluePDCP_SNlength18_iE_Extensions__item__extensionValue_tab
     ___COUNTvaluePDCP_SNlength18_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___COUNTvaluePDCP_SNlength18_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __COUNTvaluePDCP_SNlength18_iE_Extensions__item_._cont = ASN1Dict([
@@ -5541,11 +5629,15 @@ class S1AP_IEs:
     ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_at = None
     ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_id = u'id'
     ___CriticalityDiagnostics_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__id_tab
+    ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab
     ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___CriticalityDiagnostics_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__id_tab
+    ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab
     ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CriticalityDiagnostics_iE_Extensions__item_._cont = ASN1Dict([
@@ -5589,11 +5681,15 @@ class S1AP_IEs:
     ___CriticalityDiagnostics_IE_Item_iE_Extensions__item__id._const_tab_at = None
     ___CriticalityDiagnostics_IE_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___CriticalityDiagnostics_IE_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___CriticalityDiagnostics_IE_Item_iE_Extensions__item__criticality._const_tab = ____CriticalityDiagnostics_IE_Item_iE_Extensions__item__id_tab
+    ____CriticalityDiagnostics_IE_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CriticalityDiagnostics_IE_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CriticalityDiagnostics_IE_Item_iE_Extensions__item__criticality._const_tab = ____CriticalityDiagnostics_IE_Item_iE_Extensions__item__criticality_tab
     ___CriticalityDiagnostics_IE_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___CriticalityDiagnostics_IE_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___CriticalityDiagnostics_IE_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___CriticalityDiagnostics_IE_Item_iE_Extensions__item__extensionValue._const_tab = ____CriticalityDiagnostics_IE_Item_iE_Extensions__item__id_tab
+    ____CriticalityDiagnostics_IE_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CriticalityDiagnostics_IE_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CriticalityDiagnostics_IE_Item_iE_Extensions__item__extensionValue._const_tab = ____CriticalityDiagnostics_IE_Item_iE_Extensions__item__extensionValue_tab
     ___CriticalityDiagnostics_IE_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___CriticalityDiagnostics_IE_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CriticalityDiagnostics_IE_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -5643,11 +5739,15 @@ class S1AP_IEs:
     ___ServedDCNsItem_iE_Extensions__item__id._const_tab_at = None
     ___ServedDCNsItem_iE_Extensions__item__id._const_tab_id = u'id'
     ___ServedDCNsItem_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___ServedDCNsItem_iE_Extensions__item__criticality._const_tab = ____ServedDCNsItem_iE_Extensions__item__id_tab
+    ____ServedDCNsItem_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____ServedDCNsItem_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ServedDCNsItem_iE_Extensions__item__criticality._const_tab = ____ServedDCNsItem_iE_Extensions__item__criticality_tab
     ___ServedDCNsItem_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___ServedDCNsItem_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___ServedDCNsItem_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___ServedDCNsItem_iE_Extensions__item__extensionValue._const_tab = ____ServedDCNsItem_iE_Extensions__item__id_tab
+    ____ServedDCNsItem_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____ServedDCNsItem_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ServedDCNsItem_iE_Extensions__item__extensionValue._const_tab = ____ServedDCNsItem_iE_Extensions__item__extensionValue_tab
     ___ServedDCNsItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___ServedDCNsItem_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ServedDCNsItem_iE_Extensions__item_._cont = ASN1Dict([
@@ -5681,11 +5781,15 @@ class S1AP_IEs:
     ___DL_CP_SecurityInformation_iE_Extensions__item__id._const_tab_at = None
     ___DL_CP_SecurityInformation_iE_Extensions__item__id._const_tab_id = u'id'
     ___DL_CP_SecurityInformation_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___DL_CP_SecurityInformation_iE_Extensions__item__criticality._const_tab = ____DL_CP_SecurityInformation_iE_Extensions__item__id_tab
+    ____DL_CP_SecurityInformation_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____DL_CP_SecurityInformation_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DL_CP_SecurityInformation_iE_Extensions__item__criticality._const_tab = ____DL_CP_SecurityInformation_iE_Extensions__item__criticality_tab
     ___DL_CP_SecurityInformation_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___DL_CP_SecurityInformation_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___DL_CP_SecurityInformation_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___DL_CP_SecurityInformation_iE_Extensions__item__extensionValue._const_tab = ____DL_CP_SecurityInformation_iE_Extensions__item__id_tab
+    ____DL_CP_SecurityInformation_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____DL_CP_SecurityInformation_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DL_CP_SecurityInformation_iE_Extensions__item__extensionValue._const_tab = ____DL_CP_SecurityInformation_iE_Extensions__item__extensionValue_tab
     ___DL_CP_SecurityInformation_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___DL_CP_SecurityInformation_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __DL_CP_SecurityInformation_iE_Extensions__item_._cont = ASN1Dict([
@@ -5780,11 +5884,15 @@ class S1AP_IEs:
     ___EmergencyAreaID_Broadcast_Item_iE_Extensions__item__id._const_tab_at = None
     ___EmergencyAreaID_Broadcast_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___EmergencyAreaID_Broadcast_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___EmergencyAreaID_Broadcast_Item_iE_Extensions__item__criticality._const_tab = ____EmergencyAreaID_Broadcast_Item_iE_Extensions__item__id_tab
+    ____EmergencyAreaID_Broadcast_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____EmergencyAreaID_Broadcast_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___EmergencyAreaID_Broadcast_Item_iE_Extensions__item__criticality._const_tab = ____EmergencyAreaID_Broadcast_Item_iE_Extensions__item__criticality_tab
     ___EmergencyAreaID_Broadcast_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___EmergencyAreaID_Broadcast_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___EmergencyAreaID_Broadcast_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___EmergencyAreaID_Broadcast_Item_iE_Extensions__item__extensionValue._const_tab = ____EmergencyAreaID_Broadcast_Item_iE_Extensions__item__id_tab
+    ____EmergencyAreaID_Broadcast_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____EmergencyAreaID_Broadcast_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___EmergencyAreaID_Broadcast_Item_iE_Extensions__item__extensionValue._const_tab = ____EmergencyAreaID_Broadcast_Item_iE_Extensions__item__extensionValue_tab
     ___EmergencyAreaID_Broadcast_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___EmergencyAreaID_Broadcast_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __EmergencyAreaID_Broadcast_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -5825,11 +5933,15 @@ class S1AP_IEs:
     ___EmergencyAreaID_Cancelled_Item_iE_Extensions__item__id._const_tab_at = None
     ___EmergencyAreaID_Cancelled_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___EmergencyAreaID_Cancelled_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___EmergencyAreaID_Cancelled_Item_iE_Extensions__item__criticality._const_tab = ____EmergencyAreaID_Cancelled_Item_iE_Extensions__item__id_tab
+    ____EmergencyAreaID_Cancelled_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____EmergencyAreaID_Cancelled_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___EmergencyAreaID_Cancelled_Item_iE_Extensions__item__criticality._const_tab = ____EmergencyAreaID_Cancelled_Item_iE_Extensions__item__criticality_tab
     ___EmergencyAreaID_Cancelled_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___EmergencyAreaID_Cancelled_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___EmergencyAreaID_Cancelled_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___EmergencyAreaID_Cancelled_Item_iE_Extensions__item__extensionValue._const_tab = ____EmergencyAreaID_Cancelled_Item_iE_Extensions__item__id_tab
+    ____EmergencyAreaID_Cancelled_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____EmergencyAreaID_Cancelled_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___EmergencyAreaID_Cancelled_Item_iE_Extensions__item__extensionValue._const_tab = ____EmergencyAreaID_Cancelled_Item_iE_Extensions__item__extensionValue_tab
     ___EmergencyAreaID_Cancelled_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___EmergencyAreaID_Cancelled_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __EmergencyAreaID_Cancelled_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -5869,11 +5981,15 @@ class S1AP_IEs:
     ___CompletedCellinEAI_Item_iE_Extensions__item__id._const_tab_at = None
     ___CompletedCellinEAI_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___CompletedCellinEAI_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___CompletedCellinEAI_Item_iE_Extensions__item__criticality._const_tab = ____CompletedCellinEAI_Item_iE_Extensions__item__id_tab
+    ____CompletedCellinEAI_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CompletedCellinEAI_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CompletedCellinEAI_Item_iE_Extensions__item__criticality._const_tab = ____CompletedCellinEAI_Item_iE_Extensions__item__criticality_tab
     ___CompletedCellinEAI_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___CompletedCellinEAI_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___CompletedCellinEAI_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___CompletedCellinEAI_Item_iE_Extensions__item__extensionValue._const_tab = ____CompletedCellinEAI_Item_iE_Extensions__item__id_tab
+    ____CompletedCellinEAI_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CompletedCellinEAI_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CompletedCellinEAI_Item_iE_Extensions__item__extensionValue._const_tab = ____CompletedCellinEAI_Item_iE_Extensions__item__extensionValue_tab
     ___CompletedCellinEAI_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___CompletedCellinEAI_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CompletedCellinEAI_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -5942,11 +6058,15 @@ class S1AP_IEs:
     ___GERAN_Cell_ID_iE_Extensions__item__id._const_tab_at = None
     ___GERAN_Cell_ID_iE_Extensions__item__id._const_tab_id = u'id'
     ___GERAN_Cell_ID_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GERAN_Cell_ID_iE_Extensions__item__criticality._const_tab = ____GERAN_Cell_ID_iE_Extensions__item__id_tab
+    ____GERAN_Cell_ID_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____GERAN_Cell_ID_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GERAN_Cell_ID_iE_Extensions__item__criticality._const_tab = ____GERAN_Cell_ID_iE_Extensions__item__criticality_tab
     ___GERAN_Cell_ID_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GERAN_Cell_ID_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GERAN_Cell_ID_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GERAN_Cell_ID_iE_Extensions__item__extensionValue._const_tab = ____GERAN_Cell_ID_iE_Extensions__item__id_tab
+    ____GERAN_Cell_ID_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____GERAN_Cell_ID_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GERAN_Cell_ID_iE_Extensions__item__extensionValue._const_tab = ____GERAN_Cell_ID_iE_Extensions__item__extensionValue_tab
     ___GERAN_Cell_ID_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GERAN_Cell_ID_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GERAN_Cell_ID_iE_Extensions__item_._cont = ASN1Dict([
@@ -5982,11 +6102,15 @@ class S1AP_IEs:
     ___Global_ENB_ID_iE_Extensions__item__id._const_tab_at = None
     ___Global_ENB_ID_iE_Extensions__item__id._const_tab_id = u'id'
     ___Global_ENB_ID_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Global_ENB_ID_iE_Extensions__item__criticality._const_tab = ____Global_ENB_ID_iE_Extensions__item__id_tab
+    ____Global_ENB_ID_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____Global_ENB_ID_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Global_ENB_ID_iE_Extensions__item__criticality._const_tab = ____Global_ENB_ID_iE_Extensions__item__criticality_tab
     ___Global_ENB_ID_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___Global_ENB_ID_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___Global_ENB_ID_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Global_ENB_ID_iE_Extensions__item__extensionValue._const_tab = ____Global_ENB_ID_iE_Extensions__item__id_tab
+    ____Global_ENB_ID_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____Global_ENB_ID_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Global_ENB_ID_iE_Extensions__item__extensionValue._const_tab = ____Global_ENB_ID_iE_Extensions__item__extensionValue_tab
     ___Global_ENB_ID_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Global_ENB_ID_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Global_ENB_ID_iE_Extensions__item_._cont = ASN1Dict([
@@ -6021,11 +6145,15 @@ class S1AP_IEs:
     ___Global_en_gNB_ID_iE_Extensions__item__id._const_tab_at = None
     ___Global_en_gNB_ID_iE_Extensions__item__id._const_tab_id = u'id'
     ___Global_en_gNB_ID_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Global_en_gNB_ID_iE_Extensions__item__criticality._const_tab = ____Global_en_gNB_ID_iE_Extensions__item__id_tab
+    ____Global_en_gNB_ID_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____Global_en_gNB_ID_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Global_en_gNB_ID_iE_Extensions__item__criticality._const_tab = ____Global_en_gNB_ID_iE_Extensions__item__criticality_tab
     ___Global_en_gNB_ID_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___Global_en_gNB_ID_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___Global_en_gNB_ID_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Global_en_gNB_ID_iE_Extensions__item__extensionValue._const_tab = ____Global_en_gNB_ID_iE_Extensions__item__id_tab
+    ____Global_en_gNB_ID_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____Global_en_gNB_ID_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Global_en_gNB_ID_iE_Extensions__item__extensionValue._const_tab = ____Global_en_gNB_ID_iE_Extensions__item__extensionValue_tab
     ___Global_en_gNB_ID_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Global_en_gNB_ID_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Global_en_gNB_ID_iE_Extensions__item_._cont = ASN1Dict([
@@ -6065,11 +6193,15 @@ class S1AP_IEs:
     ___ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__id._const_tab_at = None
     ___ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__id._const_tab_id = u'id'
     ___ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__criticality._const_tab = ____ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__id_tab
+    ____ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__criticality._const_tab = ____ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__criticality_tab
     ___ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__extensionValue._const_tab = ____ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__id_tab
+    ____ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__extensionValue._const_tab = ____ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__extensionValue_tab
     ___ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ENB_StatusTransfer_TransparentContainer_iE_Extensions__item_._cont = ASN1Dict([
@@ -6122,11 +6254,15 @@ class S1AP_IEs:
     ___EN_DCSONConfigurationTransfer_iE_Extensions__item__id._const_tab_at = None
     ___EN_DCSONConfigurationTransfer_iE_Extensions__item__id._const_tab_id = u'id'
     ___EN_DCSONConfigurationTransfer_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___EN_DCSONConfigurationTransfer_iE_Extensions__item__criticality._const_tab = ____EN_DCSONConfigurationTransfer_iE_Extensions__item__id_tab
+    ____EN_DCSONConfigurationTransfer_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____EN_DCSONConfigurationTransfer_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___EN_DCSONConfigurationTransfer_iE_Extensions__item__criticality._const_tab = ____EN_DCSONConfigurationTransfer_iE_Extensions__item__criticality_tab
     ___EN_DCSONConfigurationTransfer_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___EN_DCSONConfigurationTransfer_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___EN_DCSONConfigurationTransfer_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___EN_DCSONConfigurationTransfer_iE_Extensions__item__extensionValue._const_tab = ____EN_DCSONConfigurationTransfer_iE_Extensions__item__id_tab
+    ____EN_DCSONConfigurationTransfer_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____EN_DCSONConfigurationTransfer_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___EN_DCSONConfigurationTransfer_iE_Extensions__item__extensionValue._const_tab = ____EN_DCSONConfigurationTransfer_iE_Extensions__item__extensionValue_tab
     ___EN_DCSONConfigurationTransfer_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___EN_DCSONConfigurationTransfer_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __EN_DCSONConfigurationTransfer_iE_Extensions__item_._cont = ASN1Dict([
@@ -6175,11 +6311,15 @@ class S1AP_IEs:
     ___EN_DCTransferTypeRequest_iE_Extensions__item__id._const_tab_at = None
     ___EN_DCTransferTypeRequest_iE_Extensions__item__id._const_tab_id = u'id'
     ___EN_DCTransferTypeRequest_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___EN_DCTransferTypeRequest_iE_Extensions__item__criticality._const_tab = ____EN_DCTransferTypeRequest_iE_Extensions__item__id_tab
+    ____EN_DCTransferTypeRequest_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____EN_DCTransferTypeRequest_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___EN_DCTransferTypeRequest_iE_Extensions__item__criticality._const_tab = ____EN_DCTransferTypeRequest_iE_Extensions__item__criticality_tab
     ___EN_DCTransferTypeRequest_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___EN_DCTransferTypeRequest_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___EN_DCTransferTypeRequest_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___EN_DCTransferTypeRequest_iE_Extensions__item__extensionValue._const_tab = ____EN_DCTransferTypeRequest_iE_Extensions__item__id_tab
+    ____EN_DCTransferTypeRequest_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____EN_DCTransferTypeRequest_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___EN_DCTransferTypeRequest_iE_Extensions__item__extensionValue._const_tab = ____EN_DCTransferTypeRequest_iE_Extensions__item__extensionValue_tab
     ___EN_DCTransferTypeRequest_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___EN_DCTransferTypeRequest_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __EN_DCTransferTypeRequest_iE_Extensions__item_._cont = ASN1Dict([
@@ -6217,11 +6357,15 @@ class S1AP_IEs:
     ___EN_DCTransferTypeReply_iE_Extensions__item__id._const_tab_at = None
     ___EN_DCTransferTypeReply_iE_Extensions__item__id._const_tab_id = u'id'
     ___EN_DCTransferTypeReply_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___EN_DCTransferTypeReply_iE_Extensions__item__criticality._const_tab = ____EN_DCTransferTypeReply_iE_Extensions__item__id_tab
+    ____EN_DCTransferTypeReply_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____EN_DCTransferTypeReply_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___EN_DCTransferTypeReply_iE_Extensions__item__criticality._const_tab = ____EN_DCTransferTypeReply_iE_Extensions__item__criticality_tab
     ___EN_DCTransferTypeReply_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___EN_DCTransferTypeReply_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___EN_DCTransferTypeReply_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___EN_DCTransferTypeReply_iE_Extensions__item__extensionValue._const_tab = ____EN_DCTransferTypeReply_iE_Extensions__item__id_tab
+    ____EN_DCTransferTypeReply_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____EN_DCTransferTypeReply_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___EN_DCTransferTypeReply_iE_Extensions__item__extensionValue._const_tab = ____EN_DCTransferTypeReply_iE_Extensions__item__extensionValue_tab
     ___EN_DCTransferTypeReply_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___EN_DCTransferTypeReply_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __EN_DCTransferTypeReply_iE_Extensions__item_._cont = ASN1Dict([
@@ -6256,11 +6400,15 @@ class S1AP_IEs:
     ___EN_DCSONeNBIdentification_iE_Extensions__item__id._const_tab_at = None
     ___EN_DCSONeNBIdentification_iE_Extensions__item__id._const_tab_id = u'id'
     ___EN_DCSONeNBIdentification_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___EN_DCSONeNBIdentification_iE_Extensions__item__criticality._const_tab = ____EN_DCSONeNBIdentification_iE_Extensions__item__id_tab
+    ____EN_DCSONeNBIdentification_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____EN_DCSONeNBIdentification_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___EN_DCSONeNBIdentification_iE_Extensions__item__criticality._const_tab = ____EN_DCSONeNBIdentification_iE_Extensions__item__criticality_tab
     ___EN_DCSONeNBIdentification_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___EN_DCSONeNBIdentification_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___EN_DCSONeNBIdentification_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___EN_DCSONeNBIdentification_iE_Extensions__item__extensionValue._const_tab = ____EN_DCSONeNBIdentification_iE_Extensions__item__id_tab
+    ____EN_DCSONeNBIdentification_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____EN_DCSONeNBIdentification_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___EN_DCSONeNBIdentification_iE_Extensions__item__extensionValue._const_tab = ____EN_DCSONeNBIdentification_iE_Extensions__item__extensionValue_tab
     ___EN_DCSONeNBIdentification_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___EN_DCSONeNBIdentification_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __EN_DCSONeNBIdentification_iE_Extensions__item_._cont = ASN1Dict([
@@ -6295,11 +6443,15 @@ class S1AP_IEs:
     ___EN_DCSONengNBIdentification_iE_Extensions__item__id._const_tab_at = None
     ___EN_DCSONengNBIdentification_iE_Extensions__item__id._const_tab_id = u'id'
     ___EN_DCSONengNBIdentification_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___EN_DCSONengNBIdentification_iE_Extensions__item__criticality._const_tab = ____EN_DCSONengNBIdentification_iE_Extensions__item__id_tab
+    ____EN_DCSONengNBIdentification_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____EN_DCSONengNBIdentification_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___EN_DCSONengNBIdentification_iE_Extensions__item__criticality._const_tab = ____EN_DCSONengNBIdentification_iE_Extensions__item__criticality_tab
     ___EN_DCSONengNBIdentification_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___EN_DCSONengNBIdentification_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___EN_DCSONengNBIdentification_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___EN_DCSONengNBIdentification_iE_Extensions__item__extensionValue._const_tab = ____EN_DCSONengNBIdentification_iE_Extensions__item__id_tab
+    ____EN_DCSONengNBIdentification_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____EN_DCSONengNBIdentification_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___EN_DCSONengNBIdentification_iE_Extensions__item__extensionValue._const_tab = ____EN_DCSONengNBIdentification_iE_Extensions__item__extensionValue_tab
     ___EN_DCSONengNBIdentification_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___EN_DCSONengNBIdentification_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __EN_DCSONengNBIdentification_iE_Extensions__item_._cont = ASN1Dict([
@@ -6396,11 +6548,15 @@ class S1AP_IEs:
     ___E_RABInformationListItem_iE_Extensions__item__id._const_tab_at = None
     ___E_RABInformationListItem_iE_Extensions__item__id._const_tab_id = u'id'
     ___E_RABInformationListItem_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___E_RABInformationListItem_iE_Extensions__item__criticality._const_tab = ____E_RABInformationListItem_iE_Extensions__item__id_tab
+    ____E_RABInformationListItem_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABInformationListItem_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABInformationListItem_iE_Extensions__item__criticality._const_tab = ____E_RABInformationListItem_iE_Extensions__item__criticality_tab
     ___E_RABInformationListItem_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___E_RABInformationListItem_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___E_RABInformationListItem_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___E_RABInformationListItem_iE_Extensions__item__extensionValue._const_tab = ____E_RABInformationListItem_iE_Extensions__item__id_tab
+    ____E_RABInformationListItem_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABInformationListItem_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABInformationListItem_iE_Extensions__item__extensionValue._const_tab = ____E_RABInformationListItem_iE_Extensions__item__extensionValue_tab
     ___E_RABInformationListItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___E_RABInformationListItem_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __E_RABInformationListItem_iE_Extensions__item_._cont = ASN1Dict([
@@ -6467,11 +6623,15 @@ class S1AP_IEs:
     ___E_RABItem_iE_Extensions__item__id._const_tab_at = None
     ___E_RABItem_iE_Extensions__item__id._const_tab_id = u'id'
     ___E_RABItem_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___E_RABItem_iE_Extensions__item__criticality._const_tab = ____E_RABItem_iE_Extensions__item__id_tab
+    ____E_RABItem_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABItem_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABItem_iE_Extensions__item__criticality._const_tab = ____E_RABItem_iE_Extensions__item__criticality_tab
     ___E_RABItem_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___E_RABItem_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___E_RABItem_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___E_RABItem_iE_Extensions__item__extensionValue._const_tab = ____E_RABItem_iE_Extensions__item__id_tab
+    ____E_RABItem_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABItem_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABItem_iE_Extensions__item__extensionValue._const_tab = ____E_RABItem_iE_Extensions__item__extensionValue_tab
     ___E_RABItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___E_RABItem_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __E_RABItem_iE_Extensions__item_._cont = ASN1Dict([
@@ -6583,11 +6743,15 @@ class S1AP_IEs:
     ___E_RABUsageReportItem_iE_Extensions__item__id._const_tab_at = None
     ___E_RABUsageReportItem_iE_Extensions__item__id._const_tab_id = u'id'
     ___E_RABUsageReportItem_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___E_RABUsageReportItem_iE_Extensions__item__criticality._const_tab = ____E_RABUsageReportItem_iE_Extensions__item__id_tab
+    ____E_RABUsageReportItem_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABUsageReportItem_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABUsageReportItem_iE_Extensions__item__criticality._const_tab = ____E_RABUsageReportItem_iE_Extensions__item__criticality_tab
     ___E_RABUsageReportItem_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___E_RABUsageReportItem_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___E_RABUsageReportItem_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___E_RABUsageReportItem_iE_Extensions__item__extensionValue._const_tab = ____E_RABUsageReportItem_iE_Extensions__item__id_tab
+    ____E_RABUsageReportItem_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABUsageReportItem_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABUsageReportItem_iE_Extensions__item__extensionValue._const_tab = ____E_RABUsageReportItem_iE_Extensions__item__extensionValue_tab
     ___E_RABUsageReportItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___E_RABUsageReportItem_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __E_RABUsageReportItem_iE_Extensions__item_._cont = ASN1Dict([
@@ -6630,11 +6794,15 @@ class S1AP_IEs:
     ___EUTRAN_CGI_iE_Extensions__item__id._const_tab_at = None
     ___EUTRAN_CGI_iE_Extensions__item__id._const_tab_id = u'id'
     ___EUTRAN_CGI_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___EUTRAN_CGI_iE_Extensions__item__criticality._const_tab = ____EUTRAN_CGI_iE_Extensions__item__id_tab
+    ____EUTRAN_CGI_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____EUTRAN_CGI_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___EUTRAN_CGI_iE_Extensions__item__criticality._const_tab = ____EUTRAN_CGI_iE_Extensions__item__criticality_tab
     ___EUTRAN_CGI_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___EUTRAN_CGI_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___EUTRAN_CGI_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___EUTRAN_CGI_iE_Extensions__item__extensionValue._const_tab = ____EUTRAN_CGI_iE_Extensions__item__id_tab
+    ____EUTRAN_CGI_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____EUTRAN_CGI_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___EUTRAN_CGI_iE_Extensions__item__extensionValue._const_tab = ____EUTRAN_CGI_iE_Extensions__item__extensionValue_tab
     ___EUTRAN_CGI_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___EUTRAN_CGI_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __EUTRAN_CGI_iE_Extensions__item_._cont = ASN1Dict([
@@ -6673,11 +6841,15 @@ class S1AP_IEs:
     ___ExpectedUEBehaviour_iE_Extensions__item__id._const_tab_at = None
     ___ExpectedUEBehaviour_iE_Extensions__item__id._const_tab_id = u'id'
     ___ExpectedUEBehaviour_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___ExpectedUEBehaviour_iE_Extensions__item__criticality._const_tab = ____ExpectedUEBehaviour_iE_Extensions__item__id_tab
+    ____ExpectedUEBehaviour_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____ExpectedUEBehaviour_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ExpectedUEBehaviour_iE_Extensions__item__criticality._const_tab = ____ExpectedUEBehaviour_iE_Extensions__item__criticality_tab
     ___ExpectedUEBehaviour_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___ExpectedUEBehaviour_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___ExpectedUEBehaviour_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___ExpectedUEBehaviour_iE_Extensions__item__extensionValue._const_tab = ____ExpectedUEBehaviour_iE_Extensions__item__id_tab
+    ____ExpectedUEBehaviour_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____ExpectedUEBehaviour_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ExpectedUEBehaviour_iE_Extensions__item__extensionValue._const_tab = ____ExpectedUEBehaviour_iE_Extensions__item__extensionValue_tab
     ___ExpectedUEBehaviour_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___ExpectedUEBehaviour_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ExpectedUEBehaviour_iE_Extensions__item_._cont = ASN1Dict([
@@ -6713,11 +6885,15 @@ class S1AP_IEs:
     ___ExpectedUEActivityBehaviour_iE_Extensions__item__id._const_tab_at = None
     ___ExpectedUEActivityBehaviour_iE_Extensions__item__id._const_tab_id = u'id'
     ___ExpectedUEActivityBehaviour_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___ExpectedUEActivityBehaviour_iE_Extensions__item__criticality._const_tab = ____ExpectedUEActivityBehaviour_iE_Extensions__item__id_tab
+    ____ExpectedUEActivityBehaviour_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____ExpectedUEActivityBehaviour_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ExpectedUEActivityBehaviour_iE_Extensions__item__criticality._const_tab = ____ExpectedUEActivityBehaviour_iE_Extensions__item__criticality_tab
     ___ExpectedUEActivityBehaviour_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___ExpectedUEActivityBehaviour_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___ExpectedUEActivityBehaviour_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___ExpectedUEActivityBehaviour_iE_Extensions__item__extensionValue._const_tab = ____ExpectedUEActivityBehaviour_iE_Extensions__item__id_tab
+    ____ExpectedUEActivityBehaviour_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____ExpectedUEActivityBehaviour_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ExpectedUEActivityBehaviour_iE_Extensions__item__extensionValue._const_tab = ____ExpectedUEActivityBehaviour_iE_Extensions__item__extensionValue_tab
     ___ExpectedUEActivityBehaviour_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___ExpectedUEActivityBehaviour_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ExpectedUEActivityBehaviour_iE_Extensions__item_._cont = ASN1Dict([
@@ -6791,11 +6967,15 @@ class S1AP_IEs:
     ___FiveGSTAI_iE_Extensions__item__id._const_tab_at = None
     ___FiveGSTAI_iE_Extensions__item__id._const_tab_id = u'id'
     ___FiveGSTAI_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___FiveGSTAI_iE_Extensions__item__criticality._const_tab = ____FiveGSTAI_iE_Extensions__item__id_tab
+    ____FiveGSTAI_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____FiveGSTAI_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___FiveGSTAI_iE_Extensions__item__criticality._const_tab = ____FiveGSTAI_iE_Extensions__item__criticality_tab
     ___FiveGSTAI_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___FiveGSTAI_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___FiveGSTAI_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___FiveGSTAI_iE_Extensions__item__extensionValue._const_tab = ____FiveGSTAI_iE_Extensions__item__id_tab
+    ____FiveGSTAI_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____FiveGSTAI_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___FiveGSTAI_iE_Extensions__item__extensionValue._const_tab = ____FiveGSTAI_iE_Extensions__item__extensionValue_tab
     ___FiveGSTAI_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___FiveGSTAI_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __FiveGSTAI_iE_Extensions__item_._cont = ASN1Dict([
@@ -6841,11 +7021,15 @@ class S1AP_IEs:
     ___ForbiddenTAs_Item_iE_Extensions__item__id._const_tab_at = None
     ___ForbiddenTAs_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___ForbiddenTAs_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___ForbiddenTAs_Item_iE_Extensions__item__criticality._const_tab = ____ForbiddenTAs_Item_iE_Extensions__item__id_tab
+    ____ForbiddenTAs_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____ForbiddenTAs_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ForbiddenTAs_Item_iE_Extensions__item__criticality._const_tab = ____ForbiddenTAs_Item_iE_Extensions__item__criticality_tab
     ___ForbiddenTAs_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___ForbiddenTAs_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___ForbiddenTAs_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___ForbiddenTAs_Item_iE_Extensions__item__extensionValue._const_tab = ____ForbiddenTAs_Item_iE_Extensions__item__id_tab
+    ____ForbiddenTAs_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____ForbiddenTAs_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ForbiddenTAs_Item_iE_Extensions__item__extensionValue._const_tab = ____ForbiddenTAs_Item_iE_Extensions__item__extensionValue_tab
     ___ForbiddenTAs_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___ForbiddenTAs_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ForbiddenTAs_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -6892,11 +7076,15 @@ class S1AP_IEs:
     ___ForbiddenLAs_Item_iE_Extensions__item__id._const_tab_at = None
     ___ForbiddenLAs_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___ForbiddenLAs_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___ForbiddenLAs_Item_iE_Extensions__item__criticality._const_tab = ____ForbiddenLAs_Item_iE_Extensions__item__id_tab
+    ____ForbiddenLAs_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____ForbiddenLAs_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ForbiddenLAs_Item_iE_Extensions__item__criticality._const_tab = ____ForbiddenLAs_Item_iE_Extensions__item__criticality_tab
     ___ForbiddenLAs_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___ForbiddenLAs_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___ForbiddenLAs_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___ForbiddenLAs_Item_iE_Extensions__item__extensionValue._const_tab = ____ForbiddenLAs_Item_iE_Extensions__item__id_tab
+    ____ForbiddenLAs_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____ForbiddenLAs_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ForbiddenLAs_Item_iE_Extensions__item__extensionValue._const_tab = ____ForbiddenLAs_Item_iE_Extensions__item__extensionValue_tab
     ___ForbiddenLAs_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___ForbiddenLAs_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ForbiddenLAs_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -6993,11 +7181,15 @@ class S1AP_IEs:
     ___GUMMEI_iE_Extensions__item__id._const_tab_at = None
     ___GUMMEI_iE_Extensions__item__id._const_tab_id = u'id'
     ___GUMMEI_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GUMMEI_iE_Extensions__item__criticality._const_tab = ____GUMMEI_iE_Extensions__item__id_tab
+    ____GUMMEI_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____GUMMEI_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GUMMEI_iE_Extensions__item__criticality._const_tab = ____GUMMEI_iE_Extensions__item__criticality_tab
     ___GUMMEI_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GUMMEI_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GUMMEI_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GUMMEI_iE_Extensions__item__extensionValue._const_tab = ____GUMMEI_iE_Extensions__item__id_tab
+    ____GUMMEI_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____GUMMEI_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GUMMEI_iE_Extensions__item__extensionValue._const_tab = ____GUMMEI_iE_Extensions__item__extensionValue_tab
     ___GUMMEI_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GUMMEI_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GUMMEI_iE_Extensions__item_._cont = ASN1Dict([
@@ -7187,11 +7379,15 @@ class S1AP_IEs:
     ___InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__id._const_tab_at = None
     ___InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__id._const_tab_id = u'id'
     ___InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__criticality._const_tab = ____InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__id_tab
+    ____InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__criticality._const_tab = ____InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__criticality_tab
     ___InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__extensionValue._const_tab = ____InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__id_tab
+    ____InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__extensionValue._const_tab = ____InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__extensionValue_tab
     ___InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item_._cont = ASN1Dict([
@@ -7252,11 +7448,15 @@ class S1AP_IEs:
     ___LAI_iE_Extensions__item__id._const_tab_at = None
     ___LAI_iE_Extensions__item__id._const_tab_id = u'id'
     ___LAI_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___LAI_iE_Extensions__item__criticality._const_tab = ____LAI_iE_Extensions__item__id_tab
+    ____LAI_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____LAI_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___LAI_iE_Extensions__item__criticality._const_tab = ____LAI_iE_Extensions__item__criticality_tab
     ___LAI_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___LAI_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___LAI_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___LAI_iE_Extensions__item__extensionValue._const_tab = ____LAI_iE_Extensions__item__id_tab
+    ____LAI_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____LAI_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___LAI_iE_Extensions__item__extensionValue._const_tab = ____LAI_iE_Extensions__item__extensionValue_tab
     ___LAI_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___LAI_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __LAI_iE_Extensions__item_._cont = ASN1Dict([
@@ -7382,11 +7582,15 @@ class S1AP_IEs:
     ___ListeningSubframePattern_iE_Extensions__item__id._const_tab_at = None
     ___ListeningSubframePattern_iE_Extensions__item__id._const_tab_id = u'id'
     ___ListeningSubframePattern_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___ListeningSubframePattern_iE_Extensions__item__criticality._const_tab = ____ListeningSubframePattern_iE_Extensions__item__id_tab
+    ____ListeningSubframePattern_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____ListeningSubframePattern_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ListeningSubframePattern_iE_Extensions__item__criticality._const_tab = ____ListeningSubframePattern_iE_Extensions__item__criticality_tab
     ___ListeningSubframePattern_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___ListeningSubframePattern_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___ListeningSubframePattern_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___ListeningSubframePattern_iE_Extensions__item__extensionValue._const_tab = ____ListeningSubframePattern_iE_Extensions__item__id_tab
+    ____ListeningSubframePattern_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____ListeningSubframePattern_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ListeningSubframePattern_iE_Extensions__item__extensionValue._const_tab = ____ListeningSubframePattern_iE_Extensions__item__extensionValue_tab
     ___ListeningSubframePattern_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___ListeningSubframePattern_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ListeningSubframePattern_iE_Extensions__item_._cont = ASN1Dict([
@@ -7475,11 +7679,15 @@ class S1AP_IEs:
     ___LoggedMBSFNMDT_iE_Extensions__item__id._const_tab_at = None
     ___LoggedMBSFNMDT_iE_Extensions__item__id._const_tab_id = u'id'
     ___LoggedMBSFNMDT_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___LoggedMBSFNMDT_iE_Extensions__item__criticality._const_tab = ____LoggedMBSFNMDT_iE_Extensions__item__id_tab
+    ____LoggedMBSFNMDT_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____LoggedMBSFNMDT_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___LoggedMBSFNMDT_iE_Extensions__item__criticality._const_tab = ____LoggedMBSFNMDT_iE_Extensions__item__criticality_tab
     ___LoggedMBSFNMDT_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___LoggedMBSFNMDT_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___LoggedMBSFNMDT_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___LoggedMBSFNMDT_iE_Extensions__item__extensionValue._const_tab = ____LoggedMBSFNMDT_iE_Extensions__item__id_tab
+    ____LoggedMBSFNMDT_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____LoggedMBSFNMDT_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___LoggedMBSFNMDT_iE_Extensions__item__extensionValue._const_tab = ____LoggedMBSFNMDT_iE_Extensions__item__extensionValue_tab
     ___LoggedMBSFNMDT_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___LoggedMBSFNMDT_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __LoggedMBSFNMDT_iE_Extensions__item_._cont = ASN1Dict([
@@ -7519,11 +7727,15 @@ class S1AP_IEs:
     ___M3Configuration_iE_Extensions__item__id._const_tab_at = None
     ___M3Configuration_iE_Extensions__item__id._const_tab_id = u'id'
     ___M3Configuration_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___M3Configuration_iE_Extensions__item__criticality._const_tab = ____M3Configuration_iE_Extensions__item__id_tab
+    ____M3Configuration_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____M3Configuration_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___M3Configuration_iE_Extensions__item__criticality._const_tab = ____M3Configuration_iE_Extensions__item__criticality_tab
     ___M3Configuration_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___M3Configuration_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___M3Configuration_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___M3Configuration_iE_Extensions__item__extensionValue._const_tab = ____M3Configuration_iE_Extensions__item__id_tab
+    ____M3Configuration_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____M3Configuration_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___M3Configuration_iE_Extensions__item__extensionValue._const_tab = ____M3Configuration_iE_Extensions__item__extensionValue_tab
     ___M3Configuration_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___M3Configuration_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __M3Configuration_iE_Extensions__item_._cont = ASN1Dict([
@@ -7562,11 +7774,15 @@ class S1AP_IEs:
     ___M4Configuration_iE_Extensions__item__id._const_tab_at = None
     ___M4Configuration_iE_Extensions__item__id._const_tab_id = u'id'
     ___M4Configuration_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___M4Configuration_iE_Extensions__item__criticality._const_tab = ____M4Configuration_iE_Extensions__item__id_tab
+    ____M4Configuration_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____M4Configuration_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___M4Configuration_iE_Extensions__item__criticality._const_tab = ____M4Configuration_iE_Extensions__item__criticality_tab
     ___M4Configuration_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___M4Configuration_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___M4Configuration_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___M4Configuration_iE_Extensions__item__extensionValue._const_tab = ____M4Configuration_iE_Extensions__item__id_tab
+    ____M4Configuration_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____M4Configuration_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___M4Configuration_iE_Extensions__item__extensionValue._const_tab = ____M4Configuration_iE_Extensions__item__extensionValue_tab
     ___M4Configuration_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___M4Configuration_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __M4Configuration_iE_Extensions__item_._cont = ASN1Dict([
@@ -7606,11 +7822,15 @@ class S1AP_IEs:
     ___M5Configuration_iE_Extensions__item__id._const_tab_at = None
     ___M5Configuration_iE_Extensions__item__id._const_tab_id = u'id'
     ___M5Configuration_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___M5Configuration_iE_Extensions__item__criticality._const_tab = ____M5Configuration_iE_Extensions__item__id_tab
+    ____M5Configuration_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____M5Configuration_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___M5Configuration_iE_Extensions__item__criticality._const_tab = ____M5Configuration_iE_Extensions__item__criticality_tab
     ___M5Configuration_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___M5Configuration_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___M5Configuration_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___M5Configuration_iE_Extensions__item__extensionValue._const_tab = ____M5Configuration_iE_Extensions__item__id_tab
+    ____M5Configuration_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____M5Configuration_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___M5Configuration_iE_Extensions__item__extensionValue._const_tab = ____M5Configuration_iE_Extensions__item__extensionValue_tab
     ___M5Configuration_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___M5Configuration_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __M5Configuration_iE_Extensions__item_._cont = ASN1Dict([
@@ -7651,11 +7871,15 @@ class S1AP_IEs:
     ___M6Configuration_iE_Extensions__item__id._const_tab_at = None
     ___M6Configuration_iE_Extensions__item__id._const_tab_id = u'id'
     ___M6Configuration_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___M6Configuration_iE_Extensions__item__criticality._const_tab = ____M6Configuration_iE_Extensions__item__id_tab
+    ____M6Configuration_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____M6Configuration_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___M6Configuration_iE_Extensions__item__criticality._const_tab = ____M6Configuration_iE_Extensions__item__criticality_tab
     ___M6Configuration_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___M6Configuration_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___M6Configuration_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___M6Configuration_iE_Extensions__item__extensionValue._const_tab = ____M6Configuration_iE_Extensions__item__id_tab
+    ____M6Configuration_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____M6Configuration_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___M6Configuration_iE_Extensions__item__extensionValue._const_tab = ____M6Configuration_iE_Extensions__item__extensionValue_tab
     ___M6Configuration_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___M6Configuration_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __M6Configuration_iE_Extensions__item_._cont = ASN1Dict([
@@ -7701,11 +7925,15 @@ class S1AP_IEs:
     ___M7Configuration_iE_Extensions__item__id._const_tab_at = None
     ___M7Configuration_iE_Extensions__item__id._const_tab_id = u'id'
     ___M7Configuration_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___M7Configuration_iE_Extensions__item__criticality._const_tab = ____M7Configuration_iE_Extensions__item__id_tab
+    ____M7Configuration_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____M7Configuration_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___M7Configuration_iE_Extensions__item__criticality._const_tab = ____M7Configuration_iE_Extensions__item__criticality_tab
     ___M7Configuration_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___M7Configuration_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___M7Configuration_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___M7Configuration_iE_Extensions__item__extensionValue._const_tab = ____M7Configuration_iE_Extensions__item__id_tab
+    ____M7Configuration_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____M7Configuration_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___M7Configuration_iE_Extensions__item__extensionValue._const_tab = ____M7Configuration_iE_Extensions__item__extensionValue_tab
     ___M7Configuration_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___M7Configuration_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __M7Configuration_iE_Extensions__item_._cont = ASN1Dict([
@@ -7808,11 +8036,15 @@ class S1AP_IEs:
     ___MBSFN_ResultToLogInfo_iE_Extensions__item__id._const_tab_at = None
     ___MBSFN_ResultToLogInfo_iE_Extensions__item__id._const_tab_id = u'id'
     ___MBSFN_ResultToLogInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___MBSFN_ResultToLogInfo_iE_Extensions__item__criticality._const_tab = ____MBSFN_ResultToLogInfo_iE_Extensions__item__id_tab
+    ____MBSFN_ResultToLogInfo_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____MBSFN_ResultToLogInfo_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___MBSFN_ResultToLogInfo_iE_Extensions__item__criticality._const_tab = ____MBSFN_ResultToLogInfo_iE_Extensions__item__criticality_tab
     ___MBSFN_ResultToLogInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___MBSFN_ResultToLogInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___MBSFN_ResultToLogInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___MBSFN_ResultToLogInfo_iE_Extensions__item__extensionValue._const_tab = ____MBSFN_ResultToLogInfo_iE_Extensions__item__id_tab
+    ____MBSFN_ResultToLogInfo_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____MBSFN_ResultToLogInfo_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___MBSFN_ResultToLogInfo_iE_Extensions__item__extensionValue._const_tab = ____MBSFN_ResultToLogInfo_iE_Extensions__item__extensionValue_tab
     ___MBSFN_ResultToLogInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___MBSFN_ResultToLogInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __MBSFN_ResultToLogInfo_iE_Extensions__item_._cont = ASN1Dict([
@@ -7970,11 +8202,15 @@ class S1AP_IEs:
     ___MutingPatternInformation_iE_Extensions__item__id._const_tab_at = None
     ___MutingPatternInformation_iE_Extensions__item__id._const_tab_id = u'id'
     ___MutingPatternInformation_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___MutingPatternInformation_iE_Extensions__item__criticality._const_tab = ____MutingPatternInformation_iE_Extensions__item__id_tab
+    ____MutingPatternInformation_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____MutingPatternInformation_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___MutingPatternInformation_iE_Extensions__item__criticality._const_tab = ____MutingPatternInformation_iE_Extensions__item__criticality_tab
     ___MutingPatternInformation_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___MutingPatternInformation_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___MutingPatternInformation_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___MutingPatternInformation_iE_Extensions__item__extensionValue._const_tab = ____MutingPatternInformation_iE_Extensions__item__id_tab
+    ____MutingPatternInformation_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____MutingPatternInformation_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___MutingPatternInformation_iE_Extensions__item__extensionValue._const_tab = ____MutingPatternInformation_iE_Extensions__item__extensionValue_tab
     ___MutingPatternInformation_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___MutingPatternInformation_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __MutingPatternInformation_iE_Extensions__item_._cont = ASN1Dict([
@@ -8023,11 +8259,15 @@ class S1AP_IEs:
     ___NB_IoT_Paging_eDRXInformation_iE_Extensions__item__id._const_tab_at = None
     ___NB_IoT_Paging_eDRXInformation_iE_Extensions__item__id._const_tab_id = u'id'
     ___NB_IoT_Paging_eDRXInformation_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___NB_IoT_Paging_eDRXInformation_iE_Extensions__item__criticality._const_tab = ____NB_IoT_Paging_eDRXInformation_iE_Extensions__item__id_tab
+    ____NB_IoT_Paging_eDRXInformation_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____NB_IoT_Paging_eDRXInformation_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NB_IoT_Paging_eDRXInformation_iE_Extensions__item__criticality._const_tab = ____NB_IoT_Paging_eDRXInformation_iE_Extensions__item__criticality_tab
     ___NB_IoT_Paging_eDRXInformation_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___NB_IoT_Paging_eDRXInformation_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___NB_IoT_Paging_eDRXInformation_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___NB_IoT_Paging_eDRXInformation_iE_Extensions__item__extensionValue._const_tab = ____NB_IoT_Paging_eDRXInformation_iE_Extensions__item__id_tab
+    ____NB_IoT_Paging_eDRXInformation_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____NB_IoT_Paging_eDRXInformation_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NB_IoT_Paging_eDRXInformation_iE_Extensions__item__extensionValue._const_tab = ____NB_IoT_Paging_eDRXInformation_iE_Extensions__item__extensionValue_tab
     ___NB_IoT_Paging_eDRXInformation_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___NB_IoT_Paging_eDRXInformation_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __NB_IoT_Paging_eDRXInformation_iE_Extensions__item_._cont = ASN1Dict([
@@ -8085,11 +8325,15 @@ class S1AP_IEs:
     ___NR_CGI_iE_Extensions__item__id._const_tab_at = None
     ___NR_CGI_iE_Extensions__item__id._const_tab_id = u'id'
     ___NR_CGI_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___NR_CGI_iE_Extensions__item__criticality._const_tab = ____NR_CGI_iE_Extensions__item__id_tab
+    ____NR_CGI_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____NR_CGI_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NR_CGI_iE_Extensions__item__criticality._const_tab = ____NR_CGI_iE_Extensions__item__criticality_tab
     ___NR_CGI_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___NR_CGI_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___NR_CGI_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___NR_CGI_iE_Extensions__item__extensionValue._const_tab = ____NR_CGI_iE_Extensions__item__id_tab
+    ____NR_CGI_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____NR_CGI_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NR_CGI_iE_Extensions__item__extensionValue._const_tab = ____NR_CGI_iE_Extensions__item__extensionValue_tab
     ___NR_CGI_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___NR_CGI_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __NR_CGI_iE_Extensions__item_._cont = ASN1Dict([
@@ -8142,11 +8386,15 @@ class S1AP_IEs:
     ___NRUESecurityCapabilities_iE_Extensions__item__id._const_tab_at = None
     ___NRUESecurityCapabilities_iE_Extensions__item__id._const_tab_id = u'id'
     ___NRUESecurityCapabilities_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___NRUESecurityCapabilities_iE_Extensions__item__criticality._const_tab = ____NRUESecurityCapabilities_iE_Extensions__item__id_tab
+    ____NRUESecurityCapabilities_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____NRUESecurityCapabilities_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NRUESecurityCapabilities_iE_Extensions__item__criticality._const_tab = ____NRUESecurityCapabilities_iE_Extensions__item__criticality_tab
     ___NRUESecurityCapabilities_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___NRUESecurityCapabilities_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___NRUESecurityCapabilities_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___NRUESecurityCapabilities_iE_Extensions__item__extensionValue._const_tab = ____NRUESecurityCapabilities_iE_Extensions__item__id_tab
+    ____NRUESecurityCapabilities_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____NRUESecurityCapabilities_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NRUESecurityCapabilities_iE_Extensions__item__extensionValue._const_tab = ____NRUESecurityCapabilities_iE_Extensions__item__extensionValue_tab
     ___NRUESecurityCapabilities_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___NRUESecurityCapabilities_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __NRUESecurityCapabilities_iE_Extensions__item_._cont = ASN1Dict([
@@ -8210,11 +8458,15 @@ class S1AP_IEs:
     ___PagingAttemptInformation_iE_Extensions__item__id._const_tab_at = None
     ___PagingAttemptInformation_iE_Extensions__item__id._const_tab_id = u'id'
     ___PagingAttemptInformation_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___PagingAttemptInformation_iE_Extensions__item__criticality._const_tab = ____PagingAttemptInformation_iE_Extensions__item__id_tab
+    ____PagingAttemptInformation_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____PagingAttemptInformation_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PagingAttemptInformation_iE_Extensions__item__criticality._const_tab = ____PagingAttemptInformation_iE_Extensions__item__criticality_tab
     ___PagingAttemptInformation_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___PagingAttemptInformation_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___PagingAttemptInformation_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___PagingAttemptInformation_iE_Extensions__item__extensionValue._const_tab = ____PagingAttemptInformation_iE_Extensions__item__id_tab
+    ____PagingAttemptInformation_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____PagingAttemptInformation_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PagingAttemptInformation_iE_Extensions__item__extensionValue._const_tab = ____PagingAttemptInformation_iE_Extensions__item__extensionValue_tab
     ___PagingAttemptInformation_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___PagingAttemptInformation_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __PagingAttemptInformation_iE_Extensions__item_._cont = ASN1Dict([
@@ -8254,11 +8506,15 @@ class S1AP_IEs:
     ___Paging_eDRXInformation_iE_Extensions__item__id._const_tab_at = None
     ___Paging_eDRXInformation_iE_Extensions__item__id._const_tab_id = u'id'
     ___Paging_eDRXInformation_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Paging_eDRXInformation_iE_Extensions__item__criticality._const_tab = ____Paging_eDRXInformation_iE_Extensions__item__id_tab
+    ____Paging_eDRXInformation_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____Paging_eDRXInformation_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Paging_eDRXInformation_iE_Extensions__item__criticality._const_tab = ____Paging_eDRXInformation_iE_Extensions__item__criticality_tab
     ___Paging_eDRXInformation_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___Paging_eDRXInformation_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___Paging_eDRXInformation_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Paging_eDRXInformation_iE_Extensions__item__extensionValue._const_tab = ____Paging_eDRXInformation_iE_Extensions__item__id_tab
+    ____Paging_eDRXInformation_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____Paging_eDRXInformation_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Paging_eDRXInformation_iE_Extensions__item__extensionValue._const_tab = ____Paging_eDRXInformation_iE_Extensions__item__extensionValue_tab
     ___Paging_eDRXInformation_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Paging_eDRXInformation_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Paging_eDRXInformation_iE_Extensions__item_._cont = ASN1Dict([
@@ -8330,11 +8586,15 @@ class S1AP_IEs:
     ___M1PeriodicReporting_iE_Extensions__item__id._const_tab_at = None
     ___M1PeriodicReporting_iE_Extensions__item__id._const_tab_id = u'id'
     ___M1PeriodicReporting_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___M1PeriodicReporting_iE_Extensions__item__criticality._const_tab = ____M1PeriodicReporting_iE_Extensions__item__id_tab
+    ____M1PeriodicReporting_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____M1PeriodicReporting_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___M1PeriodicReporting_iE_Extensions__item__criticality._const_tab = ____M1PeriodicReporting_iE_Extensions__item__criticality_tab
     ___M1PeriodicReporting_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___M1PeriodicReporting_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___M1PeriodicReporting_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___M1PeriodicReporting_iE_Extensions__item__extensionValue._const_tab = ____M1PeriodicReporting_iE_Extensions__item__id_tab
+    ____M1PeriodicReporting_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____M1PeriodicReporting_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___M1PeriodicReporting_iE_Extensions__item__extensionValue._const_tab = ____M1PeriodicReporting_iE_Extensions__item__extensionValue_tab
     ___M1PeriodicReporting_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___M1PeriodicReporting_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __M1PeriodicReporting_iE_Extensions__item_._cont = ASN1Dict([
@@ -8371,11 +8631,15 @@ class S1AP_IEs:
     ___PLMNAreaBasedQMC_iE_Extensions__item__id._const_tab_at = None
     ___PLMNAreaBasedQMC_iE_Extensions__item__id._const_tab_id = u'id'
     ___PLMNAreaBasedQMC_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___PLMNAreaBasedQMC_iE_Extensions__item__criticality._const_tab = ____PLMNAreaBasedQMC_iE_Extensions__item__id_tab
+    ____PLMNAreaBasedQMC_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____PLMNAreaBasedQMC_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PLMNAreaBasedQMC_iE_Extensions__item__criticality._const_tab = ____PLMNAreaBasedQMC_iE_Extensions__item__criticality_tab
     ___PLMNAreaBasedQMC_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___PLMNAreaBasedQMC_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___PLMNAreaBasedQMC_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___PLMNAreaBasedQMC_iE_Extensions__item__extensionValue._const_tab = ____PLMNAreaBasedQMC_iE_Extensions__item__id_tab
+    ____PLMNAreaBasedQMC_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____PLMNAreaBasedQMC_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PLMNAreaBasedQMC_iE_Extensions__item__extensionValue._const_tab = ____PLMNAreaBasedQMC_iE_Extensions__item__extensionValue_tab
     ___PLMNAreaBasedQMC_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___PLMNAreaBasedQMC_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __PLMNAreaBasedQMC_iE_Extensions__item_._cont = ASN1Dict([
@@ -8494,11 +8758,15 @@ class S1AP_IEs:
     ___PSCellInformation_iE_Extensions__item__id._const_tab_at = None
     ___PSCellInformation_iE_Extensions__item__id._const_tab_id = u'id'
     ___PSCellInformation_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___PSCellInformation_iE_Extensions__item__criticality._const_tab = ____PSCellInformation_iE_Extensions__item__id_tab
+    ____PSCellInformation_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____PSCellInformation_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PSCellInformation_iE_Extensions__item__criticality._const_tab = ____PSCellInformation_iE_Extensions__item__criticality_tab
     ___PSCellInformation_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___PSCellInformation_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___PSCellInformation_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___PSCellInformation_iE_Extensions__item__extensionValue._const_tab = ____PSCellInformation_iE_Extensions__item__id_tab
+    ____PSCellInformation_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____PSCellInformation_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PSCellInformation_iE_Extensions__item__extensionValue._const_tab = ____PSCellInformation_iE_Extensions__item__extensionValue_tab
     ___PSCellInformation_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___PSCellInformation_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __PSCellInformation_iE_Extensions__item_._cont = ASN1Dict([
@@ -8547,11 +8815,15 @@ class S1AP_IEs:
     ___RecommendedCellsForPaging_iE_Extensions__item__id._const_tab_at = None
     ___RecommendedCellsForPaging_iE_Extensions__item__id._const_tab_id = u'id'
     ___RecommendedCellsForPaging_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___RecommendedCellsForPaging_iE_Extensions__item__criticality._const_tab = ____RecommendedCellsForPaging_iE_Extensions__item__id_tab
+    ____RecommendedCellsForPaging_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____RecommendedCellsForPaging_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RecommendedCellsForPaging_iE_Extensions__item__criticality._const_tab = ____RecommendedCellsForPaging_iE_Extensions__item__criticality_tab
     ___RecommendedCellsForPaging_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___RecommendedCellsForPaging_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___RecommendedCellsForPaging_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___RecommendedCellsForPaging_iE_Extensions__item__extensionValue._const_tab = ____RecommendedCellsForPaging_iE_Extensions__item__id_tab
+    ____RecommendedCellsForPaging_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____RecommendedCellsForPaging_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RecommendedCellsForPaging_iE_Extensions__item__extensionValue._const_tab = ____RecommendedCellsForPaging_iE_Extensions__item__extensionValue_tab
     ___RecommendedCellsForPaging_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___RecommendedCellsForPaging_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __RecommendedCellsForPaging_iE_Extensions__item_._cont = ASN1Dict([
@@ -8618,11 +8890,15 @@ class S1AP_IEs:
     ___RecommendedCellItem_iE_Extensions__item__id._const_tab_at = None
     ___RecommendedCellItem_iE_Extensions__item__id._const_tab_id = u'id'
     ___RecommendedCellItem_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___RecommendedCellItem_iE_Extensions__item__criticality._const_tab = ____RecommendedCellItem_iE_Extensions__item__id_tab
+    ____RecommendedCellItem_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____RecommendedCellItem_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RecommendedCellItem_iE_Extensions__item__criticality._const_tab = ____RecommendedCellItem_iE_Extensions__item__criticality_tab
     ___RecommendedCellItem_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___RecommendedCellItem_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___RecommendedCellItem_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___RecommendedCellItem_iE_Extensions__item__extensionValue._const_tab = ____RecommendedCellItem_iE_Extensions__item__id_tab
+    ____RecommendedCellItem_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____RecommendedCellItem_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RecommendedCellItem_iE_Extensions__item__extensionValue._const_tab = ____RecommendedCellItem_iE_Extensions__item__extensionValue_tab
     ___RecommendedCellItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___RecommendedCellItem_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __RecommendedCellItem_iE_Extensions__item_._cont = ASN1Dict([
@@ -8656,11 +8932,15 @@ class S1AP_IEs:
     ___RecommendedENBsForPaging_iE_Extensions__item__id._const_tab_at = None
     ___RecommendedENBsForPaging_iE_Extensions__item__id._const_tab_id = u'id'
     ___RecommendedENBsForPaging_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___RecommendedENBsForPaging_iE_Extensions__item__criticality._const_tab = ____RecommendedENBsForPaging_iE_Extensions__item__id_tab
+    ____RecommendedENBsForPaging_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____RecommendedENBsForPaging_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RecommendedENBsForPaging_iE_Extensions__item__criticality._const_tab = ____RecommendedENBsForPaging_iE_Extensions__item__criticality_tab
     ___RecommendedENBsForPaging_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___RecommendedENBsForPaging_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___RecommendedENBsForPaging_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___RecommendedENBsForPaging_iE_Extensions__item__extensionValue._const_tab = ____RecommendedENBsForPaging_iE_Extensions__item__id_tab
+    ____RecommendedENBsForPaging_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____RecommendedENBsForPaging_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RecommendedENBsForPaging_iE_Extensions__item__extensionValue._const_tab = ____RecommendedENBsForPaging_iE_Extensions__item__extensionValue_tab
     ___RecommendedENBsForPaging_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___RecommendedENBsForPaging_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __RecommendedENBsForPaging_iE_Extensions__item_._cont = ASN1Dict([
@@ -8725,11 +9005,15 @@ class S1AP_IEs:
     ___RecommendedENBItem_iE_Extensions__item__id._const_tab_at = None
     ___RecommendedENBItem_iE_Extensions__item__id._const_tab_id = u'id'
     ___RecommendedENBItem_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___RecommendedENBItem_iE_Extensions__item__criticality._const_tab = ____RecommendedENBItem_iE_Extensions__item__id_tab
+    ____RecommendedENBItem_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____RecommendedENBItem_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RecommendedENBItem_iE_Extensions__item__criticality._const_tab = ____RecommendedENBItem_iE_Extensions__item__criticality_tab
     ___RecommendedENBItem_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___RecommendedENBItem_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___RecommendedENBItem_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___RecommendedENBItem_iE_Extensions__item__extensionValue._const_tab = ____RecommendedENBItem_iE_Extensions__item__id_tab
+    ____RecommendedENBItem_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____RecommendedENBItem_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RecommendedENBItem_iE_Extensions__item__extensionValue._const_tab = ____RecommendedENBItem_iE_Extensions__item__extensionValue_tab
     ___RecommendedENBItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___RecommendedENBItem_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __RecommendedENBItem_iE_Extensions__item_._cont = ASN1Dict([
@@ -8842,11 +9126,15 @@ class S1AP_IEs:
     ___RIMTransfer_iE_Extensions__item__id._const_tab_at = None
     ___RIMTransfer_iE_Extensions__item__id._const_tab_id = u'id'
     ___RIMTransfer_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___RIMTransfer_iE_Extensions__item__criticality._const_tab = ____RIMTransfer_iE_Extensions__item__id_tab
+    ____RIMTransfer_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____RIMTransfer_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RIMTransfer_iE_Extensions__item__criticality._const_tab = ____RIMTransfer_iE_Extensions__item__criticality_tab
     ___RIMTransfer_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___RIMTransfer_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___RIMTransfer_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___RIMTransfer_iE_Extensions__item__extensionValue._const_tab = ____RIMTransfer_iE_Extensions__item__id_tab
+    ____RIMTransfer_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____RIMTransfer_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RIMTransfer_iE_Extensions__item__extensionValue._const_tab = ____RIMTransfer_iE_Extensions__item__extensionValue_tab
     ___RIMTransfer_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___RIMTransfer_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __RIMTransfer_iE_Extensions__item_._cont = ASN1Dict([
@@ -8906,11 +9194,15 @@ class S1AP_IEs:
     ___RLFReportInformation_iE_Extensions__item__id._const_tab_at = None
     ___RLFReportInformation_iE_Extensions__item__id._const_tab_id = u'id'
     ___RLFReportInformation_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___RLFReportInformation_iE_Extensions__item__criticality._const_tab = ____RLFReportInformation_iE_Extensions__item__id_tab
+    ____RLFReportInformation_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____RLFReportInformation_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RLFReportInformation_iE_Extensions__item__criticality._const_tab = ____RLFReportInformation_iE_Extensions__item__criticality_tab
     ___RLFReportInformation_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___RLFReportInformation_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___RLFReportInformation_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___RLFReportInformation_iE_Extensions__item__extensionValue._const_tab = ____RLFReportInformation_iE_Extensions__item__id_tab
+    ____RLFReportInformation_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____RLFReportInformation_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RLFReportInformation_iE_Extensions__item__extensionValue._const_tab = ____RLFReportInformation_iE_Extensions__item__extensionValue_tab
     ___RLFReportInformation_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___RLFReportInformation_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __RLFReportInformation_iE_Extensions__item_._cont = ASN1Dict([
@@ -8972,11 +9264,15 @@ class S1AP_IEs:
     ___SecurityContext_iE_Extensions__item__id._const_tab_at = None
     ___SecurityContext_iE_Extensions__item__id._const_tab_id = u'id'
     ___SecurityContext_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___SecurityContext_iE_Extensions__item__criticality._const_tab = ____SecurityContext_iE_Extensions__item__id_tab
+    ____SecurityContext_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____SecurityContext_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SecurityContext_iE_Extensions__item__criticality._const_tab = ____SecurityContext_iE_Extensions__item__criticality_tab
     ___SecurityContext_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___SecurityContext_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___SecurityContext_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___SecurityContext_iE_Extensions__item__extensionValue._const_tab = ____SecurityContext_iE_Extensions__item__id_tab
+    ____SecurityContext_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____SecurityContext_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SecurityContext_iE_Extensions__item__extensionValue._const_tab = ____SecurityContext_iE_Extensions__item__extensionValue_tab
     ___SecurityContext_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___SecurityContext_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __SecurityContext_iE_Extensions__item_._cont = ASN1Dict([
@@ -9054,11 +9350,15 @@ class S1AP_IEs:
     ___SecondaryRATDataUsageReportItem_iE_Extensions__item__id._const_tab_at = None
     ___SecondaryRATDataUsageReportItem_iE_Extensions__item__id._const_tab_id = u'id'
     ___SecondaryRATDataUsageReportItem_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___SecondaryRATDataUsageReportItem_iE_Extensions__item__criticality._const_tab = ____SecondaryRATDataUsageReportItem_iE_Extensions__item__id_tab
+    ____SecondaryRATDataUsageReportItem_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____SecondaryRATDataUsageReportItem_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SecondaryRATDataUsageReportItem_iE_Extensions__item__criticality._const_tab = ____SecondaryRATDataUsageReportItem_iE_Extensions__item__criticality_tab
     ___SecondaryRATDataUsageReportItem_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___SecondaryRATDataUsageReportItem_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___SecondaryRATDataUsageReportItem_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___SecondaryRATDataUsageReportItem_iE_Extensions__item__extensionValue._const_tab = ____SecondaryRATDataUsageReportItem_iE_Extensions__item__id_tab
+    ____SecondaryRATDataUsageReportItem_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____SecondaryRATDataUsageReportItem_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SecondaryRATDataUsageReportItem_iE_Extensions__item__extensionValue._const_tab = ____SecondaryRATDataUsageReportItem_iE_Extensions__item__extensionValue_tab
     ___SecondaryRATDataUsageReportItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___SecondaryRATDataUsageReportItem_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __SecondaryRATDataUsageReportItem_iE_Extensions__item_._cont = ASN1Dict([
@@ -9244,11 +9544,15 @@ class S1AP_IEs:
     ___SynchronisationInformation_iE_Extensions__item__id._const_tab_at = None
     ___SynchronisationInformation_iE_Extensions__item__id._const_tab_id = u'id'
     ___SynchronisationInformation_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___SynchronisationInformation_iE_Extensions__item__criticality._const_tab = ____SynchronisationInformation_iE_Extensions__item__id_tab
+    ____SynchronisationInformation_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____SynchronisationInformation_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SynchronisationInformation_iE_Extensions__item__criticality._const_tab = ____SynchronisationInformation_iE_Extensions__item__criticality_tab
     ___SynchronisationInformation_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___SynchronisationInformation_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___SynchronisationInformation_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___SynchronisationInformation_iE_Extensions__item__extensionValue._const_tab = ____SynchronisationInformation_iE_Extensions__item__id_tab
+    ____SynchronisationInformation_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____SynchronisationInformation_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SynchronisationInformation_iE_Extensions__item__extensionValue._const_tab = ____SynchronisationInformation_iE_Extensions__item__extensionValue_tab
     ___SynchronisationInformation_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___SynchronisationInformation_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __SynchronisationInformation_iE_Extensions__item_._cont = ASN1Dict([
@@ -9290,11 +9594,15 @@ class S1AP_IEs:
     ___SourceeNB_ID_iE_Extensions__item__id._const_tab_at = None
     ___SourceeNB_ID_iE_Extensions__item__id._const_tab_id = u'id'
     ___SourceeNB_ID_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___SourceeNB_ID_iE_Extensions__item__criticality._const_tab = ____SourceeNB_ID_iE_Extensions__item__id_tab
+    ____SourceeNB_ID_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____SourceeNB_ID_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SourceeNB_ID_iE_Extensions__item__criticality._const_tab = ____SourceeNB_ID_iE_Extensions__item__criticality_tab
     ___SourceeNB_ID_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___SourceeNB_ID_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___SourceeNB_ID_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___SourceeNB_ID_iE_Extensions__item__extensionValue._const_tab = ____SourceeNB_ID_iE_Extensions__item__id_tab
+    ____SourceeNB_ID_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____SourceeNB_ID_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SourceeNB_ID_iE_Extensions__item__extensionValue._const_tab = ____SourceeNB_ID_iE_Extensions__item__extensionValue_tab
     ___SourceeNB_ID_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___SourceeNB_ID_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __SourceeNB_ID_iE_Extensions__item_._cont = ASN1Dict([
@@ -9408,11 +9716,15 @@ class S1AP_IEs:
     ___ServedGUMMEIsItem_iE_Extensions__item__id._const_tab_at = None
     ___ServedGUMMEIsItem_iE_Extensions__item__id._const_tab_id = u'id'
     ___ServedGUMMEIsItem_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___ServedGUMMEIsItem_iE_Extensions__item__criticality._const_tab = ____ServedGUMMEIsItem_iE_Extensions__item__id_tab
+    ____ServedGUMMEIsItem_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____ServedGUMMEIsItem_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ServedGUMMEIsItem_iE_Extensions__item__criticality._const_tab = ____ServedGUMMEIsItem_iE_Extensions__item__criticality_tab
     ___ServedGUMMEIsItem_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___ServedGUMMEIsItem_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___ServedGUMMEIsItem_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___ServedGUMMEIsItem_iE_Extensions__item__extensionValue._const_tab = ____ServedGUMMEIsItem_iE_Extensions__item__id_tab
+    ____ServedGUMMEIsItem_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____ServedGUMMEIsItem_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ServedGUMMEIsItem_iE_Extensions__item__extensionValue._const_tab = ____ServedGUMMEIsItem_iE_Extensions__item__extensionValue_tab
     ___ServedGUMMEIsItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___ServedGUMMEIsItem_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ServedGUMMEIsItem_iE_Extensions__item_._cont = ASN1Dict([
@@ -9483,11 +9795,15 @@ class S1AP_IEs:
     ___Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__id._const_tab_at = None
     ___Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__id._const_tab_id = u'id'
     ___Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__criticality._const_tab = ____Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__id_tab
+    ____Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__criticality._const_tab = ____Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__criticality_tab
     ___Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__extensionValue._const_tab = ____Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__id_tab
+    ____Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__extensionValue._const_tab = ____Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__extensionValue_tab
     ___Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item_._cont = ASN1Dict([
@@ -9530,11 +9846,15 @@ class S1AP_IEs:
     ___ScheduledCommunicationTime_iE_Extensions__item__id._const_tab_at = None
     ___ScheduledCommunicationTime_iE_Extensions__item__id._const_tab_id = u'id'
     ___ScheduledCommunicationTime_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___ScheduledCommunicationTime_iE_Extensions__item__criticality._const_tab = ____ScheduledCommunicationTime_iE_Extensions__item__id_tab
+    ____ScheduledCommunicationTime_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____ScheduledCommunicationTime_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ScheduledCommunicationTime_iE_Extensions__item__criticality._const_tab = ____ScheduledCommunicationTime_iE_Extensions__item__criticality_tab
     ___ScheduledCommunicationTime_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___ScheduledCommunicationTime_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___ScheduledCommunicationTime_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___ScheduledCommunicationTime_iE_Extensions__item__extensionValue._const_tab = ____ScheduledCommunicationTime_iE_Extensions__item__id_tab
+    ____ScheduledCommunicationTime_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____ScheduledCommunicationTime_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ScheduledCommunicationTime_iE_Extensions__item__extensionValue._const_tab = ____ScheduledCommunicationTime_iE_Extensions__item__extensionValue_tab
     ___ScheduledCommunicationTime_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___ScheduledCommunicationTime_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ScheduledCommunicationTime_iE_Extensions__item_._cont = ASN1Dict([
@@ -9667,11 +9987,15 @@ class S1AP_IEs:
     ___S_TMSI_iE_Extensions__item__id._const_tab_at = None
     ___S_TMSI_iE_Extensions__item__id._const_tab_id = u'id'
     ___S_TMSI_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___S_TMSI_iE_Extensions__item__criticality._const_tab = ____S_TMSI_iE_Extensions__item__id_tab
+    ____S_TMSI_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____S_TMSI_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___S_TMSI_iE_Extensions__item__criticality._const_tab = ____S_TMSI_iE_Extensions__item__criticality_tab
     ___S_TMSI_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___S_TMSI_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___S_TMSI_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___S_TMSI_iE_Extensions__item__extensionValue._const_tab = ____S_TMSI_iE_Extensions__item__id_tab
+    ____S_TMSI_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____S_TMSI_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___S_TMSI_iE_Extensions__item__extensionValue._const_tab = ____S_TMSI_iE_Extensions__item__extensionValue_tab
     ___S_TMSI_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___S_TMSI_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __S_TMSI_iE_Extensions__item_._cont = ASN1Dict([
@@ -9709,11 +10033,15 @@ class S1AP_IEs:
     ___TAIBasedMDT_iE_Extensions__item__id._const_tab_at = None
     ___TAIBasedMDT_iE_Extensions__item__id._const_tab_id = u'id'
     ___TAIBasedMDT_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___TAIBasedMDT_iE_Extensions__item__criticality._const_tab = ____TAIBasedMDT_iE_Extensions__item__id_tab
+    ____TAIBasedMDT_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TAIBasedMDT_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TAIBasedMDT_iE_Extensions__item__criticality._const_tab = ____TAIBasedMDT_iE_Extensions__item__criticality_tab
     ___TAIBasedMDT_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___TAIBasedMDT_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___TAIBasedMDT_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___TAIBasedMDT_iE_Extensions__item__extensionValue._const_tab = ____TAIBasedMDT_iE_Extensions__item__id_tab
+    ____TAIBasedMDT_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TAIBasedMDT_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TAIBasedMDT_iE_Extensions__item__extensionValue._const_tab = ____TAIBasedMDT_iE_Extensions__item__extensionValue_tab
     ___TAIBasedMDT_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___TAIBasedMDT_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TAIBasedMDT_iE_Extensions__item_._cont = ASN1Dict([
@@ -9759,11 +10087,15 @@ class S1AP_IEs:
     ___TAI_iE_Extensions__item__id._const_tab_at = None
     ___TAI_iE_Extensions__item__id._const_tab_id = u'id'
     ___TAI_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___TAI_iE_Extensions__item__criticality._const_tab = ____TAI_iE_Extensions__item__id_tab
+    ____TAI_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TAI_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TAI_iE_Extensions__item__criticality._const_tab = ____TAI_iE_Extensions__item__criticality_tab
     ___TAI_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___TAI_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___TAI_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___TAI_iE_Extensions__item__extensionValue._const_tab = ____TAI_iE_Extensions__item__id_tab
+    ____TAI_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TAI_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TAI_iE_Extensions__item__extensionValue._const_tab = ____TAI_iE_Extensions__item__extensionValue_tab
     ___TAI_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___TAI_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TAI_iE_Extensions__item_._cont = ASN1Dict([
@@ -9804,11 +10136,15 @@ class S1AP_IEs:
     ___TAI_Broadcast_Item_iE_Extensions__item__id._const_tab_at = None
     ___TAI_Broadcast_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___TAI_Broadcast_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___TAI_Broadcast_Item_iE_Extensions__item__criticality._const_tab = ____TAI_Broadcast_Item_iE_Extensions__item__id_tab
+    ____TAI_Broadcast_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TAI_Broadcast_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TAI_Broadcast_Item_iE_Extensions__item__criticality._const_tab = ____TAI_Broadcast_Item_iE_Extensions__item__criticality_tab
     ___TAI_Broadcast_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___TAI_Broadcast_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___TAI_Broadcast_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___TAI_Broadcast_Item_iE_Extensions__item__extensionValue._const_tab = ____TAI_Broadcast_Item_iE_Extensions__item__id_tab
+    ____TAI_Broadcast_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TAI_Broadcast_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TAI_Broadcast_Item_iE_Extensions__item__extensionValue._const_tab = ____TAI_Broadcast_Item_iE_Extensions__item__extensionValue_tab
     ___TAI_Broadcast_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___TAI_Broadcast_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TAI_Broadcast_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -9849,11 +10185,15 @@ class S1AP_IEs:
     ___TAI_Cancelled_Item_iE_Extensions__item__id._const_tab_at = None
     ___TAI_Cancelled_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___TAI_Cancelled_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___TAI_Cancelled_Item_iE_Extensions__item__criticality._const_tab = ____TAI_Cancelled_Item_iE_Extensions__item__id_tab
+    ____TAI_Cancelled_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TAI_Cancelled_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TAI_Cancelled_Item_iE_Extensions__item__criticality._const_tab = ____TAI_Cancelled_Item_iE_Extensions__item__criticality_tab
     ___TAI_Cancelled_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___TAI_Cancelled_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___TAI_Cancelled_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___TAI_Cancelled_Item_iE_Extensions__item__extensionValue._const_tab = ____TAI_Cancelled_Item_iE_Extensions__item__id_tab
+    ____TAI_Cancelled_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TAI_Cancelled_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TAI_Cancelled_Item_iE_Extensions__item__extensionValue._const_tab = ____TAI_Cancelled_Item_iE_Extensions__item__extensionValue_tab
     ___TAI_Cancelled_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___TAI_Cancelled_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TAI_Cancelled_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -9887,11 +10227,15 @@ class S1AP_IEs:
     ___TABasedMDT_iE_Extensions__item__id._const_tab_at = None
     ___TABasedMDT_iE_Extensions__item__id._const_tab_id = u'id'
     ___TABasedMDT_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___TABasedMDT_iE_Extensions__item__criticality._const_tab = ____TABasedMDT_iE_Extensions__item__id_tab
+    ____TABasedMDT_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TABasedMDT_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TABasedMDT_iE_Extensions__item__criticality._const_tab = ____TABasedMDT_iE_Extensions__item__criticality_tab
     ___TABasedMDT_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___TABasedMDT_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___TABasedMDT_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___TABasedMDT_iE_Extensions__item__extensionValue._const_tab = ____TABasedMDT_iE_Extensions__item__id_tab
+    ____TABasedMDT_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TABasedMDT_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TABasedMDT_iE_Extensions__item__extensionValue._const_tab = ____TABasedMDT_iE_Extensions__item__extensionValue_tab
     ___TABasedMDT_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___TABasedMDT_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TABasedMDT_iE_Extensions__item_._cont = ASN1Dict([
@@ -9930,11 +10274,15 @@ class S1AP_IEs:
     ___TABasedQMC_iE_Extensions__item__id._const_tab_at = None
     ___TABasedQMC_iE_Extensions__item__id._const_tab_id = u'id'
     ___TABasedQMC_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___TABasedQMC_iE_Extensions__item__criticality._const_tab = ____TABasedQMC_iE_Extensions__item__id_tab
+    ____TABasedQMC_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TABasedQMC_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TABasedQMC_iE_Extensions__item__criticality._const_tab = ____TABasedQMC_iE_Extensions__item__criticality_tab
     ___TABasedQMC_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___TABasedQMC_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___TABasedQMC_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___TABasedQMC_iE_Extensions__item__extensionValue._const_tab = ____TABasedQMC_iE_Extensions__item__id_tab
+    ____TABasedQMC_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TABasedQMC_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TABasedQMC_iE_Extensions__item__extensionValue._const_tab = ____TABasedQMC_iE_Extensions__item__extensionValue_tab
     ___TABasedQMC_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___TABasedQMC_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TABasedQMC_iE_Extensions__item_._cont = ASN1Dict([
@@ -9973,11 +10321,15 @@ class S1AP_IEs:
     ___TAIBasedQMC_iE_Extensions__item__id._const_tab_at = None
     ___TAIBasedQMC_iE_Extensions__item__id._const_tab_id = u'id'
     ___TAIBasedQMC_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___TAIBasedQMC_iE_Extensions__item__criticality._const_tab = ____TAIBasedQMC_iE_Extensions__item__id_tab
+    ____TAIBasedQMC_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TAIBasedQMC_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TAIBasedQMC_iE_Extensions__item__criticality._const_tab = ____TAIBasedQMC_iE_Extensions__item__criticality_tab
     ___TAIBasedQMC_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___TAIBasedQMC_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___TAIBasedQMC_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___TAIBasedQMC_iE_Extensions__item__extensionValue._const_tab = ____TAIBasedQMC_iE_Extensions__item__id_tab
+    ____TAIBasedQMC_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TAIBasedQMC_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TAIBasedQMC_iE_Extensions__item__extensionValue._const_tab = ____TAIBasedQMC_iE_Extensions__item__extensionValue_tab
     ___TAIBasedQMC_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___TAIBasedQMC_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TAIBasedQMC_iE_Extensions__item_._cont = ASN1Dict([
@@ -10022,11 +10374,15 @@ class S1AP_IEs:
     ___CompletedCellinTAI_Item_iE_Extensions__item__id._const_tab_at = None
     ___CompletedCellinTAI_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___CompletedCellinTAI_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___CompletedCellinTAI_Item_iE_Extensions__item__criticality._const_tab = ____CompletedCellinTAI_Item_iE_Extensions__item__id_tab
+    ____CompletedCellinTAI_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CompletedCellinTAI_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CompletedCellinTAI_Item_iE_Extensions__item__criticality._const_tab = ____CompletedCellinTAI_Item_iE_Extensions__item__criticality_tab
     ___CompletedCellinTAI_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___CompletedCellinTAI_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___CompletedCellinTAI_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___CompletedCellinTAI_Item_iE_Extensions__item__extensionValue._const_tab = ____CompletedCellinTAI_Item_iE_Extensions__item__id_tab
+    ____CompletedCellinTAI_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CompletedCellinTAI_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CompletedCellinTAI_Item_iE_Extensions__item__extensionValue._const_tab = ____CompletedCellinTAI_Item_iE_Extensions__item__extensionValue_tab
     ___CompletedCellinTAI_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___CompletedCellinTAI_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CompletedCellinTAI_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -10078,11 +10434,15 @@ class S1AP_IEs:
     ___TargeteNB_ID_iE_Extensions__item__id._const_tab_at = None
     ___TargeteNB_ID_iE_Extensions__item__id._const_tab_id = u'id'
     ___TargeteNB_ID_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___TargeteNB_ID_iE_Extensions__item__criticality._const_tab = ____TargeteNB_ID_iE_Extensions__item__id_tab
+    ____TargeteNB_ID_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TargeteNB_ID_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TargeteNB_ID_iE_Extensions__item__criticality._const_tab = ____TargeteNB_ID_iE_Extensions__item__criticality_tab
     ___TargeteNB_ID_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___TargeteNB_ID_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___TargeteNB_ID_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___TargeteNB_ID_iE_Extensions__item__extensionValue._const_tab = ____TargeteNB_ID_iE_Extensions__item__id_tab
+    ____TargeteNB_ID_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TargeteNB_ID_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TargeteNB_ID_iE_Extensions__item__extensionValue._const_tab = ____TargeteNB_ID_iE_Extensions__item__extensionValue_tab
     ___TargeteNB_ID_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___TargeteNB_ID_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TargeteNB_ID_iE_Extensions__item_._cont = ASN1Dict([
@@ -10119,11 +10479,15 @@ class S1AP_IEs:
     ___TargetRNC_ID_iE_Extensions__item__id._const_tab_at = None
     ___TargetRNC_ID_iE_Extensions__item__id._const_tab_id = u'id'
     ___TargetRNC_ID_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___TargetRNC_ID_iE_Extensions__item__criticality._const_tab = ____TargetRNC_ID_iE_Extensions__item__id_tab
+    ____TargetRNC_ID_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TargetRNC_ID_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TargetRNC_ID_iE_Extensions__item__criticality._const_tab = ____TargetRNC_ID_iE_Extensions__item__criticality_tab
     ___TargetRNC_ID_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___TargetRNC_ID_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___TargetRNC_ID_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___TargetRNC_ID_iE_Extensions__item__extensionValue._const_tab = ____TargetRNC_ID_iE_Extensions__item__id_tab
+    ____TargetRNC_ID_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TargetRNC_ID_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TargetRNC_ID_iE_Extensions__item__extensionValue._const_tab = ____TargetRNC_ID_iE_Extensions__item__extensionValue_tab
     ___TargetRNC_ID_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___TargetRNC_ID_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TargetRNC_ID_iE_Extensions__item_._cont = ASN1Dict([
@@ -10160,11 +10524,15 @@ class S1AP_IEs:
     ___TargetNgRanNode_ID_iE_Extensions__item__id._const_tab_at = None
     ___TargetNgRanNode_ID_iE_Extensions__item__id._const_tab_id = u'id'
     ___TargetNgRanNode_ID_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___TargetNgRanNode_ID_iE_Extensions__item__criticality._const_tab = ____TargetNgRanNode_ID_iE_Extensions__item__id_tab
+    ____TargetNgRanNode_ID_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TargetNgRanNode_ID_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TargetNgRanNode_ID_iE_Extensions__item__criticality._const_tab = ____TargetNgRanNode_ID_iE_Extensions__item__criticality_tab
     ___TargetNgRanNode_ID_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___TargetNgRanNode_ID_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___TargetNgRanNode_ID_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___TargetNgRanNode_ID_iE_Extensions__item__extensionValue._const_tab = ____TargetNgRanNode_ID_iE_Extensions__item__id_tab
+    ____TargetNgRanNode_ID_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TargetNgRanNode_ID_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TargetNgRanNode_ID_iE_Extensions__item__extensionValue._const_tab = ____TargetNgRanNode_ID_iE_Extensions__item__extensionValue_tab
     ___TargetNgRanNode_ID_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___TargetNgRanNode_ID_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TargetNgRanNode_ID_iE_Extensions__item_._cont = ASN1Dict([
@@ -10208,11 +10576,15 @@ class S1AP_IEs:
     ___GNB_iE_Extensions__item__id._const_tab_at = None
     ___GNB_iE_Extensions__item__id._const_tab_id = u'id'
     ___GNB_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GNB_iE_Extensions__item__criticality._const_tab = ____GNB_iE_Extensions__item__id_tab
+    ____GNB_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____GNB_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GNB_iE_Extensions__item__criticality._const_tab = ____GNB_iE_Extensions__item__criticality_tab
     ___GNB_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GNB_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GNB_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GNB_iE_Extensions__item__extensionValue._const_tab = ____GNB_iE_Extensions__item__id_tab
+    ____GNB_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____GNB_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GNB_iE_Extensions__item__extensionValue._const_tab = ____GNB_iE_Extensions__item__extensionValue_tab
     ___GNB_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GNB_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GNB_iE_Extensions__item_._cont = ASN1Dict([
@@ -10246,11 +10618,15 @@ class S1AP_IEs:
     ___Global_GNB_ID_iE_Extensions__item__id._const_tab_at = None
     ___Global_GNB_ID_iE_Extensions__item__id._const_tab_id = u'id'
     ___Global_GNB_ID_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Global_GNB_ID_iE_Extensions__item__criticality._const_tab = ____Global_GNB_ID_iE_Extensions__item__id_tab
+    ____Global_GNB_ID_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____Global_GNB_ID_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Global_GNB_ID_iE_Extensions__item__criticality._const_tab = ____Global_GNB_ID_iE_Extensions__item__criticality_tab
     ___Global_GNB_ID_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___Global_GNB_ID_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___Global_GNB_ID_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Global_GNB_ID_iE_Extensions__item__extensionValue._const_tab = ____Global_GNB_ID_iE_Extensions__item__id_tab
+    ____Global_GNB_ID_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____Global_GNB_ID_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Global_GNB_ID_iE_Extensions__item__extensionValue._const_tab = ____Global_GNB_ID_iE_Extensions__item__extensionValue_tab
     ___Global_GNB_ID_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Global_GNB_ID_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Global_GNB_ID_iE_Extensions__item_._cont = ASN1Dict([
@@ -10292,11 +10668,15 @@ class S1AP_IEs:
     ___NG_eNB_iE_Extensions__item__id._const_tab_at = None
     ___NG_eNB_iE_Extensions__item__id._const_tab_id = u'id'
     ___NG_eNB_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___NG_eNB_iE_Extensions__item__criticality._const_tab = ____NG_eNB_iE_Extensions__item__id_tab
+    ____NG_eNB_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____NG_eNB_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NG_eNB_iE_Extensions__item__criticality._const_tab = ____NG_eNB_iE_Extensions__item__criticality_tab
     ___NG_eNB_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___NG_eNB_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___NG_eNB_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___NG_eNB_iE_Extensions__item__extensionValue._const_tab = ____NG_eNB_iE_Extensions__item__id_tab
+    ____NG_eNB_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____NG_eNB_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NG_eNB_iE_Extensions__item__extensionValue._const_tab = ____NG_eNB_iE_Extensions__item__extensionValue_tab
     ___NG_eNB_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___NG_eNB_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __NG_eNB_iE_Extensions__item_._cont = ASN1Dict([
@@ -10333,11 +10713,15 @@ class S1AP_IEs:
     ___TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__id._const_tab_at = None
     ___TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__id._const_tab_id = u'id'
     ___TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__criticality._const_tab = ____TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__id_tab
+    ____TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__criticality._const_tab = ____TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__criticality_tab
     ___TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__extensionValue._const_tab = ____TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__id_tab
+    ____TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__extensionValue._const_tab = ____TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__extensionValue_tab
     ___TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item_._cont = ASN1Dict([
@@ -10382,11 +10766,15 @@ class S1AP_IEs:
     ___M1ThresholdEventA2_iE_Extensions__item__id._const_tab_at = None
     ___M1ThresholdEventA2_iE_Extensions__item__id._const_tab_id = u'id'
     ___M1ThresholdEventA2_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___M1ThresholdEventA2_iE_Extensions__item__criticality._const_tab = ____M1ThresholdEventA2_iE_Extensions__item__id_tab
+    ____M1ThresholdEventA2_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____M1ThresholdEventA2_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___M1ThresholdEventA2_iE_Extensions__item__criticality._const_tab = ____M1ThresholdEventA2_iE_Extensions__item__criticality_tab
     ___M1ThresholdEventA2_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___M1ThresholdEventA2_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___M1ThresholdEventA2_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___M1ThresholdEventA2_iE_Extensions__item__extensionValue._const_tab = ____M1ThresholdEventA2_iE_Extensions__item__id_tab
+    ____M1ThresholdEventA2_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____M1ThresholdEventA2_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___M1ThresholdEventA2_iE_Extensions__item__extensionValue._const_tab = ____M1ThresholdEventA2_iE_Extensions__item__extensionValue_tab
     ___M1ThresholdEventA2_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___M1ThresholdEventA2_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __M1ThresholdEventA2_iE_Extensions__item_._cont = ASN1Dict([
@@ -10519,11 +10907,15 @@ class S1AP_IEs:
     ___TunnelInformation_iE_Extensions__item__id._const_tab_at = None
     ___TunnelInformation_iE_Extensions__item__id._const_tab_id = u'id'
     ___TunnelInformation_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___TunnelInformation_iE_Extensions__item__criticality._const_tab = ____TunnelInformation_iE_Extensions__item__id_tab
+    ____TunnelInformation_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TunnelInformation_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TunnelInformation_iE_Extensions__item__criticality._const_tab = ____TunnelInformation_iE_Extensions__item__criticality_tab
     ___TunnelInformation_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___TunnelInformation_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___TunnelInformation_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___TunnelInformation_iE_Extensions__item__extensionValue._const_tab = ____TunnelInformation_iE_Extensions__item__id_tab
+    ____TunnelInformation_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TunnelInformation_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TunnelInformation_iE_Extensions__item__extensionValue._const_tab = ____TunnelInformation_iE_Extensions__item__extensionValue_tab
     ___TunnelInformation_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___TunnelInformation_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TunnelInformation_iE_Extensions__item_._cont = ASN1Dict([
@@ -10674,11 +11066,15 @@ class S1AP_IEs:
     ___UE_S1AP_ID_pair_iE_Extensions__item__id._const_tab_at = None
     ___UE_S1AP_ID_pair_iE_Extensions__item__id._const_tab_id = u'id'
     ___UE_S1AP_ID_pair_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UE_S1AP_ID_pair_iE_Extensions__item__criticality._const_tab = ____UE_S1AP_ID_pair_iE_Extensions__item__id_tab
+    ____UE_S1AP_ID_pair_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____UE_S1AP_ID_pair_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UE_S1AP_ID_pair_iE_Extensions__item__criticality._const_tab = ____UE_S1AP_ID_pair_iE_Extensions__item__criticality_tab
     ___UE_S1AP_ID_pair_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UE_S1AP_ID_pair_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UE_S1AP_ID_pair_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UE_S1AP_ID_pair_iE_Extensions__item__extensionValue._const_tab = ____UE_S1AP_ID_pair_iE_Extensions__item__id_tab
+    ____UE_S1AP_ID_pair_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____UE_S1AP_ID_pair_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UE_S1AP_ID_pair_iE_Extensions__item__extensionValue._const_tab = ____UE_S1AP_ID_pair_iE_Extensions__item__extensionValue_tab
     ___UE_S1AP_ID_pair_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UE_S1AP_ID_pair_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UE_S1AP_ID_pair_iE_Extensions__item_._cont = ASN1Dict([
@@ -10713,11 +11109,15 @@ class S1AP_IEs:
     ___UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__id._const_tab_at = None
     ___UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__id._const_tab_id = u'id'
     ___UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__criticality._const_tab = ____UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__id_tab
+    ____UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__criticality._const_tab = ____UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__criticality_tab
     ___UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__extensionValue._const_tab = ____UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__id_tab
+    ____UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__extensionValue._const_tab = ____UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__extensionValue_tab
     ___UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item_._cont = ASN1Dict([
@@ -10787,11 +11187,15 @@ class S1AP_IEs:
     ___UESecurityCapabilities_iE_Extensions__item__id._const_tab_at = None
     ___UESecurityCapabilities_iE_Extensions__item__id._const_tab_id = u'id'
     ___UESecurityCapabilities_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UESecurityCapabilities_iE_Extensions__item__criticality._const_tab = ____UESecurityCapabilities_iE_Extensions__item__id_tab
+    ____UESecurityCapabilities_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____UESecurityCapabilities_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UESecurityCapabilities_iE_Extensions__item__criticality._const_tab = ____UESecurityCapabilities_iE_Extensions__item__criticality_tab
     ___UESecurityCapabilities_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UESecurityCapabilities_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UESecurityCapabilities_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UESecurityCapabilities_iE_Extensions__item__extensionValue._const_tab = ____UESecurityCapabilities_iE_Extensions__item__id_tab
+    ____UESecurityCapabilities_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____UESecurityCapabilities_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UESecurityCapabilities_iE_Extensions__item__extensionValue._const_tab = ____UESecurityCapabilities_iE_Extensions__item__extensionValue_tab
     ___UESecurityCapabilities_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UESecurityCapabilities_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UESecurityCapabilities_iE_Extensions__item_._cont = ASN1Dict([
@@ -10825,11 +11229,15 @@ class S1AP_IEs:
     ___UESidelinkAggregateMaximumBitrate_iE_Extensions__item__id._const_tab_at = None
     ___UESidelinkAggregateMaximumBitrate_iE_Extensions__item__id._const_tab_id = u'id'
     ___UESidelinkAggregateMaximumBitrate_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UESidelinkAggregateMaximumBitrate_iE_Extensions__item__criticality._const_tab = ____UESidelinkAggregateMaximumBitrate_iE_Extensions__item__id_tab
+    ____UESidelinkAggregateMaximumBitrate_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____UESidelinkAggregateMaximumBitrate_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UESidelinkAggregateMaximumBitrate_iE_Extensions__item__criticality._const_tab = ____UESidelinkAggregateMaximumBitrate_iE_Extensions__item__criticality_tab
     ___UESidelinkAggregateMaximumBitrate_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UESidelinkAggregateMaximumBitrate_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UESidelinkAggregateMaximumBitrate_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UESidelinkAggregateMaximumBitrate_iE_Extensions__item__extensionValue._const_tab = ____UESidelinkAggregateMaximumBitrate_iE_Extensions__item__id_tab
+    ____UESidelinkAggregateMaximumBitrate_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____UESidelinkAggregateMaximumBitrate_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UESidelinkAggregateMaximumBitrate_iE_Extensions__item__extensionValue._const_tab = ____UESidelinkAggregateMaximumBitrate_iE_Extensions__item__extensionValue_tab
     ___UESidelinkAggregateMaximumBitrate_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UESidelinkAggregateMaximumBitrate_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UESidelinkAggregateMaximumBitrate_iE_Extensions__item_._cont = ASN1Dict([
@@ -10867,11 +11275,15 @@ class S1AP_IEs:
     ___UL_CP_SecurityInformation_iE_Extensions__item__id._const_tab_at = None
     ___UL_CP_SecurityInformation_iE_Extensions__item__id._const_tab_id = u'id'
     ___UL_CP_SecurityInformation_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UL_CP_SecurityInformation_iE_Extensions__item__criticality._const_tab = ____UL_CP_SecurityInformation_iE_Extensions__item__id_tab
+    ____UL_CP_SecurityInformation_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____UL_CP_SecurityInformation_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UL_CP_SecurityInformation_iE_Extensions__item__criticality._const_tab = ____UL_CP_SecurityInformation_iE_Extensions__item__criticality_tab
     ___UL_CP_SecurityInformation_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UL_CP_SecurityInformation_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UL_CP_SecurityInformation_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UL_CP_SecurityInformation_iE_Extensions__item__extensionValue._const_tab = ____UL_CP_SecurityInformation_iE_Extensions__item__id_tab
+    ____UL_CP_SecurityInformation_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____UL_CP_SecurityInformation_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UL_CP_SecurityInformation_iE_Extensions__item__extensionValue._const_tab = ____UL_CP_SecurityInformation_iE_Extensions__item__extensionValue_tab
     ___UL_CP_SecurityInformation_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UL_CP_SecurityInformation_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UL_CP_SecurityInformation_iE_Extensions__item_._cont = ASN1Dict([
@@ -10974,11 +11386,15 @@ class S1AP_IEs:
     ___V2XServicesAuthorized_iE_Extensions__item__id._const_tab_at = None
     ___V2XServicesAuthorized_iE_Extensions__item__id._const_tab_id = u'id'
     ___V2XServicesAuthorized_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___V2XServicesAuthorized_iE_Extensions__item__criticality._const_tab = ____V2XServicesAuthorized_iE_Extensions__item__id_tab
+    ____V2XServicesAuthorized_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____V2XServicesAuthorized_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___V2XServicesAuthorized_iE_Extensions__item__criticality._const_tab = ____V2XServicesAuthorized_iE_Extensions__item__criticality_tab
     ___V2XServicesAuthorized_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___V2XServicesAuthorized_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___V2XServicesAuthorized_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___V2XServicesAuthorized_iE_Extensions__item__extensionValue._const_tab = ____V2XServicesAuthorized_iE_Extensions__item__id_tab
+    ____V2XServicesAuthorized_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____V2XServicesAuthorized_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___V2XServicesAuthorized_iE_Extensions__item__extensionValue._const_tab = ____V2XServicesAuthorized_iE_Extensions__item__extensionValue_tab
     ___V2XServicesAuthorized_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___V2XServicesAuthorized_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __V2XServicesAuthorized_iE_Extensions__item_._cont = ASN1Dict([
@@ -11057,11 +11473,15 @@ class S1AP_IEs:
     ___WLANMeasurementConfiguration_iE_Extensions__item__id._const_tab_at = None
     ___WLANMeasurementConfiguration_iE_Extensions__item__id._const_tab_id = u'id'
     ___WLANMeasurementConfiguration_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___WLANMeasurementConfiguration_iE_Extensions__item__criticality._const_tab = ____WLANMeasurementConfiguration_iE_Extensions__item__id_tab
+    ____WLANMeasurementConfiguration_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____WLANMeasurementConfiguration_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___WLANMeasurementConfiguration_iE_Extensions__item__criticality._const_tab = ____WLANMeasurementConfiguration_iE_Extensions__item__criticality_tab
     ___WLANMeasurementConfiguration_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___WLANMeasurementConfiguration_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___WLANMeasurementConfiguration_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___WLANMeasurementConfiguration_iE_Extensions__item__extensionValue._const_tab = ____WLANMeasurementConfiguration_iE_Extensions__item__id_tab
+    ____WLANMeasurementConfiguration_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____WLANMeasurementConfiguration_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___WLANMeasurementConfiguration_iE_Extensions__item__extensionValue._const_tab = ____WLANMeasurementConfiguration_iE_Extensions__item__extensionValue_tab
     ___WLANMeasurementConfiguration_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___WLANMeasurementConfiguration_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __WLANMeasurementConfiguration_iE_Extensions__item_._cont = ASN1Dict([
@@ -11160,11 +11580,15 @@ class S1AP_IEs:
     ___ENBX2ExtTLA_iE_Extensions__item__id._const_tab_at = None
     ___ENBX2ExtTLA_iE_Extensions__item__id._const_tab_id = u'id'
     ___ENBX2ExtTLA_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___ENBX2ExtTLA_iE_Extensions__item__criticality._const_tab = ____ENBX2ExtTLA_iE_Extensions__item__id_tab
+    ____ENBX2ExtTLA_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____ENBX2ExtTLA_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ENBX2ExtTLA_iE_Extensions__item__criticality._const_tab = ____ENBX2ExtTLA_iE_Extensions__item__criticality_tab
     ___ENBX2ExtTLA_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___ENBX2ExtTLA_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___ENBX2ExtTLA_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___ENBX2ExtTLA_iE_Extensions__item__extensionValue._const_tab = ____ENBX2ExtTLA_iE_Extensions__item__id_tab
+    ____ENBX2ExtTLA_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____ENBX2ExtTLA_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ENBX2ExtTLA_iE_Extensions__item__extensionValue._const_tab = ____ENBX2ExtTLA_iE_Extensions__item__extensionValue_tab
     ___ENBX2ExtTLA_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___ENBX2ExtTLA_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ENBX2ExtTLA_iE_Extensions__item_._cont = ASN1Dict([
@@ -11203,7 +11627,9 @@ class S1AP_IEs:
         _Additional_GUTI_m_TMSI,
         ____Additional_GUTI_iE_Extensions__item__id_tab,
         ___Additional_GUTI_iE_Extensions__item__id,
+        ____Additional_GUTI_iE_Extensions__item__criticality_tab,
         ___Additional_GUTI_iE_Extensions__item__criticality,
+        ____Additional_GUTI_iE_Extensions__item__extensionValue_tab,
         ___Additional_GUTI_iE_Extensions__item__extensionValue,
         __Additional_GUTI_iE_Extensions__item_,
         _Additional_GUTI_iE_Extensions,
@@ -11225,7 +11651,9 @@ class S1AP_IEs:
         _AllocationAndRetentionPriority_pre_emptionVulnerability,
         ____AllocationAndRetentionPriority_iE_Extensions__item__id_tab,
         ___AllocationAndRetentionPriority_iE_Extensions__item__id,
+        ____AllocationAndRetentionPriority_iE_Extensions__item__criticality_tab,
         ___AllocationAndRetentionPriority_iE_Extensions__item__criticality,
+        ____AllocationAndRetentionPriority_iE_Extensions__item__extensionValue_tab,
         ___AllocationAndRetentionPriority_iE_Extensions__item__extensionValue,
         __AllocationAndRetentionPriority_iE_Extensions__item_,
         _AllocationAndRetentionPriority_iE_Extensions,
@@ -11234,7 +11662,9 @@ class S1AP_IEs:
         _AssistanceDataForCECapableUEs_cellIdentifierAndCELevelForCECapableUEs,
         ____AssistanceDataForCECapableUEs_iE_Extensions__item__id_tab,
         ___AssistanceDataForCECapableUEs_iE_Extensions__item__id,
+        ____AssistanceDataForCECapableUEs_iE_Extensions__item__criticality_tab,
         ___AssistanceDataForCECapableUEs_iE_Extensions__item__criticality,
+        ____AssistanceDataForCECapableUEs_iE_Extensions__item__extensionValue_tab,
         ___AssistanceDataForCECapableUEs_iE_Extensions__item__extensionValue,
         __AssistanceDataForCECapableUEs_iE_Extensions__item_,
         _AssistanceDataForCECapableUEs_iE_Extensions,
@@ -11245,7 +11675,9 @@ class S1AP_IEs:
         _AssistanceDataForPaging_pagingAttemptInformation,
         ____AssistanceDataForPaging_iE_Extensions__item__id_tab,
         ___AssistanceDataForPaging_iE_Extensions__item__id,
+        ____AssistanceDataForPaging_iE_Extensions__item__criticality_tab,
         ___AssistanceDataForPaging_iE_Extensions__item__criticality,
+        ____AssistanceDataForPaging_iE_Extensions__item__extensionValue_tab,
         ___AssistanceDataForPaging_iE_Extensions__item__extensionValue,
         __AssistanceDataForPaging_iE_Extensions__item_,
         _AssistanceDataForPaging_iE_Extensions,
@@ -11254,7 +11686,9 @@ class S1AP_IEs:
         _AssistanceDataForRecommendedCells_recommendedCellsForPaging,
         ____AssistanceDataForRecommendedCells_iE_Extensions__item__id_tab,
         ___AssistanceDataForRecommendedCells_iE_Extensions__item__id,
+        ____AssistanceDataForRecommendedCells_iE_Extensions__item__criticality_tab,
         ___AssistanceDataForRecommendedCells_iE_Extensions__item__criticality,
+        ____AssistanceDataForRecommendedCells_iE_Extensions__item__extensionValue_tab,
         ___AssistanceDataForRecommendedCells_iE_Extensions__item__extensionValue,
         __AssistanceDataForRecommendedCells_iE_Extensions__item_,
         _AssistanceDataForRecommendedCells_iE_Extensions,
@@ -11300,7 +11734,9 @@ class S1AP_IEs:
         _BluetoothMeasurementConfiguration_bt_rssi,
         ____BluetoothMeasurementConfiguration_iE_Extensions__item__id_tab,
         ___BluetoothMeasurementConfiguration_iE_Extensions__item__id,
+        ____BluetoothMeasurementConfiguration_iE_Extensions__item__criticality_tab,
         ___BluetoothMeasurementConfiguration_iE_Extensions__item__criticality,
+        ____BluetoothMeasurementConfiguration_iE_Extensions__item__extensionValue_tab,
         ___BluetoothMeasurementConfiguration_iE_Extensions__item__extensionValue,
         __BluetoothMeasurementConfiguration_iE_Extensions__item_,
         _BluetoothMeasurementConfiguration_iE_Extensions,
@@ -11326,7 +11762,9 @@ class S1AP_IEs:
         _CancelledCellinEAI_Item_numberOfBroadcasts,
         ____CancelledCellinEAI_Item_iE_Extensions__item__id_tab,
         ___CancelledCellinEAI_Item_iE_Extensions__item__id,
+        ____CancelledCellinEAI_Item_iE_Extensions__item__criticality_tab,
         ___CancelledCellinEAI_Item_iE_Extensions__item__criticality,
+        ____CancelledCellinEAI_Item_iE_Extensions__item__extensionValue_tab,
         ___CancelledCellinEAI_Item_iE_Extensions__item__extensionValue,
         __CancelledCellinEAI_Item_iE_Extensions__item_,
         _CancelledCellinEAI_Item_iE_Extensions,
@@ -11338,7 +11776,9 @@ class S1AP_IEs:
         _CancelledCellinTAI_Item_numberOfBroadcasts,
         ____CancelledCellinTAI_Item_iE_Extensions__item__id_tab,
         ___CancelledCellinTAI_Item_iE_Extensions__item__id,
+        ____CancelledCellinTAI_Item_iE_Extensions__item__criticality_tab,
         ___CancelledCellinTAI_Item_iE_Extensions__item__criticality,
+        ____CancelledCellinTAI_Item_iE_Extensions__item__extensionValue_tab,
         ___CancelledCellinTAI_Item_iE_Extensions__item__extensionValue,
         __CancelledCellinTAI_Item_iE_Extensions__item_,
         _CancelledCellinTAI_Item_iE_Extensions,
@@ -11360,7 +11800,9 @@ class S1AP_IEs:
         _CellIdentifierAndCELevelForCECapableUEs_cELevel,
         ____CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__id_tab,
         ___CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__id,
+        ____CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__criticality_tab,
         ___CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__criticality,
+        ____CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__extensionValue_tab,
         ___CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item__extensionValue,
         __CellIdentifierAndCELevelForCECapableUEs_iE_Extensions__item_,
         _CellIdentifierAndCELevelForCECapableUEs_iE_Extensions,
@@ -11374,7 +11816,9 @@ class S1AP_IEs:
         _CellID_Broadcast_Item_eCGI,
         ____CellID_Broadcast_Item_iE_Extensions__item__id_tab,
         ___CellID_Broadcast_Item_iE_Extensions__item__id,
+        ____CellID_Broadcast_Item_iE_Extensions__item__criticality_tab,
         ___CellID_Broadcast_Item_iE_Extensions__item__criticality,
+        ____CellID_Broadcast_Item_iE_Extensions__item__extensionValue_tab,
         ___CellID_Broadcast_Item_iE_Extensions__item__extensionValue,
         __CellID_Broadcast_Item_iE_Extensions__item_,
         _CellID_Broadcast_Item_iE_Extensions,
@@ -11386,7 +11830,9 @@ class S1AP_IEs:
         _CellID_Cancelled_Item_numberOfBroadcasts,
         ____CellID_Cancelled_Item_iE_Extensions__item__id_tab,
         ___CellID_Cancelled_Item_iE_Extensions__item__id,
+        ____CellID_Cancelled_Item_iE_Extensions__item__criticality_tab,
         ___CellID_Cancelled_Item_iE_Extensions__item__criticality,
+        ____CellID_Cancelled_Item_iE_Extensions__item__extensionValue_tab,
         ___CellID_Cancelled_Item_iE_Extensions__item__extensionValue,
         __CellID_Cancelled_Item_iE_Extensions__item_,
         _CellID_Cancelled_Item_iE_Extensions,
@@ -11395,7 +11841,9 @@ class S1AP_IEs:
         _CellBasedMDT_cellIdListforMDT,
         ____CellBasedMDT_iE_Extensions__item__id_tab,
         ___CellBasedMDT_iE_Extensions__item__id,
+        ____CellBasedMDT_iE_Extensions__item__criticality_tab,
         ___CellBasedMDT_iE_Extensions__item__criticality,
+        ____CellBasedMDT_iE_Extensions__item__extensionValue_tab,
         ___CellBasedMDT_iE_Extensions__item__extensionValue,
         __CellBasedMDT_iE_Extensions__item_,
         _CellBasedMDT_iE_Extensions,
@@ -11406,7 +11854,9 @@ class S1AP_IEs:
         _CellBasedQMC_cellIdListforQMC,
         ____CellBasedQMC_iE_Extensions__item__id_tab,
         ___CellBasedQMC_iE_Extensions__item__id,
+        ____CellBasedQMC_iE_Extensions__item__criticality_tab,
         ___CellBasedQMC_iE_Extensions__item__criticality,
+        ____CellBasedQMC_iE_Extensions__item__extensionValue_tab,
         ___CellBasedQMC_iE_Extensions__item__extensionValue,
         __CellBasedQMC_iE_Extensions__item_,
         _CellBasedQMC_iE_Extensions,
@@ -11424,7 +11874,9 @@ class S1AP_IEs:
         _Cdma2000OneXSRVCCInfo_cdma2000OneXPilot,
         ____Cdma2000OneXSRVCCInfo_iE_Extensions__item__id_tab,
         ___Cdma2000OneXSRVCCInfo_iE_Extensions__item__id,
+        ____Cdma2000OneXSRVCCInfo_iE_Extensions__item__criticality_tab,
         ___Cdma2000OneXSRVCCInfo_iE_Extensions__item__criticality,
+        ____Cdma2000OneXSRVCCInfo_iE_Extensions__item__extensionValue_tab,
         ___Cdma2000OneXSRVCCInfo_iE_Extensions__item__extensionValue,
         __Cdma2000OneXSRVCCInfo_iE_Extensions__item_,
         _Cdma2000OneXSRVCCInfo_iE_Extensions,
@@ -11438,7 +11890,9 @@ class S1AP_IEs:
         _CellType_cell_Size,
         ____CellType_iE_Extensions__item__id_tab,
         ___CellType_iE_Extensions__item__id,
+        ____CellType_iE_Extensions__item__criticality_tab,
         ___CellType_iE_Extensions__item__criticality,
+        ____CellType_iE_Extensions__item__extensionValue_tab,
         ___CellType_iE_Extensions__item__extensionValue,
         __CellType_iE_Extensions__item_,
         _CellType_iE_Extensions,
@@ -11450,7 +11904,9 @@ class S1AP_IEs:
         _CGI_rAC,
         ____CGI_iE_Extensions__item__id_tab,
         ___CGI_iE_Extensions__item__id,
+        ____CGI_iE_Extensions__item__criticality_tab,
         ___CGI_iE_Extensions__item__criticality,
+        ____CGI_iE_Extensions__item__extensionValue_tab,
         ___CGI_iE_Extensions__item__extensionValue,
         __CGI_iE_Extensions__item_,
         _CGI_iE_Extensions,
@@ -11464,7 +11920,9 @@ class S1AP_IEs:
         _CNTypeRestrictions_Item_cNType,
         ____CNTypeRestrictions_Item_iE_Extensions__item__id_tab,
         ___CNTypeRestrictions_Item_iE_Extensions__item__id,
+        ____CNTypeRestrictions_Item_iE_Extensions__item__criticality_tab,
         ___CNTypeRestrictions_Item_iE_Extensions__item__criticality,
+        ____CNTypeRestrictions_Item_iE_Extensions__item__extensionValue_tab,
         ___CNTypeRestrictions_Item_iE_Extensions__item__extensionValue,
         __CNTypeRestrictions_Item_iE_Extensions__item_,
         _CNTypeRestrictions_Item_iE_Extensions,
@@ -11478,7 +11936,9 @@ class S1AP_IEs:
         _ConnectedengNBItem_supportedTAs,
         ____ConnectedengNBItem_iE_Extensions__item__id_tab,
         ___ConnectedengNBItem_iE_Extensions__item__id,
+        ____ConnectedengNBItem_iE_Extensions__item__criticality_tab,
         ___ConnectedengNBItem_iE_Extensions__item__criticality,
+        ____ConnectedengNBItem_iE_Extensions__item__extensionValue_tab,
         ___ConnectedengNBItem_iE_Extensions__item__extensionValue,
         __ConnectedengNBItem_iE_Extensions__item_,
         _ConnectedengNBItem_iE_Extensions,
@@ -11493,7 +11953,9 @@ class S1AP_IEs:
         _CSG_IdList_Item_cSG_Id,
         ____CSG_IdList_Item_iE_Extensions__item__id_tab,
         ___CSG_IdList_Item_iE_Extensions__item__id,
+        ____CSG_IdList_Item_iE_Extensions__item__criticality_tab,
         ___CSG_IdList_Item_iE_Extensions__item__criticality,
+        ____CSG_IdList_Item_iE_Extensions__item__extensionValue_tab,
         ___CSG_IdList_Item_iE_Extensions__item__extensionValue,
         __CSG_IdList_Item_iE_Extensions__item_,
         _CSG_IdList_Item_iE_Extensions,
@@ -11504,7 +11966,9 @@ class S1AP_IEs:
         _COUNTvalue_hFN,
         ____COUNTvalue_iE_Extensions__item__id_tab,
         ___COUNTvalue_iE_Extensions__item__id,
+        ____COUNTvalue_iE_Extensions__item__criticality_tab,
         ___COUNTvalue_iE_Extensions__item__criticality,
+        ____COUNTvalue_iE_Extensions__item__extensionValue_tab,
         ___COUNTvalue_iE_Extensions__item__extensionValue,
         __COUNTvalue_iE_Extensions__item_,
         _COUNTvalue_iE_Extensions,
@@ -11514,7 +11978,9 @@ class S1AP_IEs:
         _COUNTValueExtended_hFNModified,
         ____COUNTValueExtended_iE_Extensions__item__id_tab,
         ___COUNTValueExtended_iE_Extensions__item__id,
+        ____COUNTValueExtended_iE_Extensions__item__criticality_tab,
         ___COUNTValueExtended_iE_Extensions__item__criticality,
+        ____COUNTValueExtended_iE_Extensions__item__extensionValue_tab,
         ___COUNTValueExtended_iE_Extensions__item__extensionValue,
         __COUNTValueExtended_iE_Extensions__item_,
         _COUNTValueExtended_iE_Extensions,
@@ -11524,7 +11990,9 @@ class S1AP_IEs:
         _COUNTvaluePDCP_SNlength18_hFNforPDCP_SNlength18,
         ____COUNTvaluePDCP_SNlength18_iE_Extensions__item__id_tab,
         ___COUNTvaluePDCP_SNlength18_iE_Extensions__item__id,
+        ____COUNTvaluePDCP_SNlength18_iE_Extensions__item__criticality_tab,
         ___COUNTvaluePDCP_SNlength18_iE_Extensions__item__criticality,
+        ____COUNTvaluePDCP_SNlength18_iE_Extensions__item__extensionValue_tab,
         ___COUNTvaluePDCP_SNlength18_iE_Extensions__item__extensionValue,
         __COUNTvaluePDCP_SNlength18_iE_Extensions__item_,
         _COUNTvaluePDCP_SNlength18_iE_Extensions,
@@ -11537,7 +12005,9 @@ class S1AP_IEs:
         _CriticalityDiagnostics_iEsCriticalityDiagnostics,
         ____CriticalityDiagnostics_iE_Extensions__item__id_tab,
         ___CriticalityDiagnostics_iE_Extensions__item__id,
+        ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab,
         ___CriticalityDiagnostics_iE_Extensions__item__criticality,
+        ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab,
         ___CriticalityDiagnostics_iE_Extensions__item__extensionValue,
         __CriticalityDiagnostics_iE_Extensions__item_,
         _CriticalityDiagnostics_iE_Extensions,
@@ -11550,7 +12020,9 @@ class S1AP_IEs:
         _CriticalityDiagnostics_IE_Item_typeOfError,
         ____CriticalityDiagnostics_IE_Item_iE_Extensions__item__id_tab,
         ___CriticalityDiagnostics_IE_Item_iE_Extensions__item__id,
+        ____CriticalityDiagnostics_IE_Item_iE_Extensions__item__criticality_tab,
         ___CriticalityDiagnostics_IE_Item_iE_Extensions__item__criticality,
+        ____CriticalityDiagnostics_IE_Item_iE_Extensions__item__extensionValue_tab,
         ___CriticalityDiagnostics_IE_Item_iE_Extensions__item__extensionValue,
         __CriticalityDiagnostics_IE_Item_iE_Extensions__item_,
         _CriticalityDiagnostics_IE_Item_iE_Extensions,
@@ -11564,7 +12036,9 @@ class S1AP_IEs:
         _ServedDCNsItem_relativeDCNCapacity,
         ____ServedDCNsItem_iE_Extensions__item__id_tab,
         ___ServedDCNsItem_iE_Extensions__item__id,
+        ____ServedDCNsItem_iE_Extensions__item__criticality_tab,
         ___ServedDCNsItem_iE_Extensions__item__criticality,
+        ____ServedDCNsItem_iE_Extensions__item__extensionValue_tab,
         ___ServedDCNsItem_iE_Extensions__item__extensionValue,
         __ServedDCNsItem_iE_Extensions__item_,
         _ServedDCNsItem_iE_Extensions,
@@ -11573,7 +12047,9 @@ class S1AP_IEs:
         _DL_CP_SecurityInformation_dl_NAS_MAC,
         ____DL_CP_SecurityInformation_iE_Extensions__item__id_tab,
         ___DL_CP_SecurityInformation_iE_Extensions__item__id,
+        ____DL_CP_SecurityInformation_iE_Extensions__item__criticality_tab,
         ___DL_CP_SecurityInformation_iE_Extensions__item__criticality,
+        ____DL_CP_SecurityInformation_iE_Extensions__item__extensionValue_tab,
         ___DL_CP_SecurityInformation_iE_Extensions__item__extensionValue,
         __DL_CP_SecurityInformation_iE_Extensions__item_,
         _DL_CP_SecurityInformation_iE_Extensions,
@@ -11599,7 +12075,9 @@ class S1AP_IEs:
         _EmergencyAreaID_Broadcast_Item_completedCellinEAI,
         ____EmergencyAreaID_Broadcast_Item_iE_Extensions__item__id_tab,
         ___EmergencyAreaID_Broadcast_Item_iE_Extensions__item__id,
+        ____EmergencyAreaID_Broadcast_Item_iE_Extensions__item__criticality_tab,
         ___EmergencyAreaID_Broadcast_Item_iE_Extensions__item__criticality,
+        ____EmergencyAreaID_Broadcast_Item_iE_Extensions__item__extensionValue_tab,
         ___EmergencyAreaID_Broadcast_Item_iE_Extensions__item__extensionValue,
         __EmergencyAreaID_Broadcast_Item_iE_Extensions__item_,
         _EmergencyAreaID_Broadcast_Item_iE_Extensions,
@@ -11611,7 +12089,9 @@ class S1AP_IEs:
         _EmergencyAreaID_Cancelled_Item_cancelledCellinEAI,
         ____EmergencyAreaID_Cancelled_Item_iE_Extensions__item__id_tab,
         ___EmergencyAreaID_Cancelled_Item_iE_Extensions__item__id,
+        ____EmergencyAreaID_Cancelled_Item_iE_Extensions__item__criticality_tab,
         ___EmergencyAreaID_Cancelled_Item_iE_Extensions__item__criticality,
+        ____EmergencyAreaID_Cancelled_Item_iE_Extensions__item__extensionValue_tab,
         ___EmergencyAreaID_Cancelled_Item_iE_Extensions__item__extensionValue,
         __EmergencyAreaID_Cancelled_Item_iE_Extensions__item_,
         _EmergencyAreaID_Cancelled_Item_iE_Extensions,
@@ -11622,7 +12102,9 @@ class S1AP_IEs:
         _CompletedCellinEAI_Item_eCGI,
         ____CompletedCellinEAI_Item_iE_Extensions__item__id_tab,
         ___CompletedCellinEAI_Item_iE_Extensions__item__id,
+        ____CompletedCellinEAI_Item_iE_Extensions__item__criticality_tab,
         ___CompletedCellinEAI_Item_iE_Extensions__item__criticality,
+        ____CompletedCellinEAI_Item_iE_Extensions__item__extensionValue_tab,
         ___CompletedCellinEAI_Item_iE_Extensions__item__extensionValue,
         __CompletedCellinEAI_Item_iE_Extensions__item_,
         _CompletedCellinEAI_Item_iE_Extensions,
@@ -11643,7 +12125,9 @@ class S1AP_IEs:
         _GERAN_Cell_ID_cI,
         ____GERAN_Cell_ID_iE_Extensions__item__id_tab,
         ___GERAN_Cell_ID_iE_Extensions__item__id,
+        ____GERAN_Cell_ID_iE_Extensions__item__criticality_tab,
         ___GERAN_Cell_ID_iE_Extensions__item__criticality,
+        ____GERAN_Cell_ID_iE_Extensions__item__extensionValue_tab,
         ___GERAN_Cell_ID_iE_Extensions__item__extensionValue,
         __GERAN_Cell_ID_iE_Extensions__item_,
         _GERAN_Cell_ID_iE_Extensions,
@@ -11653,7 +12137,9 @@ class S1AP_IEs:
         _Global_ENB_ID_eNB_ID,
         ____Global_ENB_ID_iE_Extensions__item__id_tab,
         ___Global_ENB_ID_iE_Extensions__item__id,
+        ____Global_ENB_ID_iE_Extensions__item__criticality_tab,
         ___Global_ENB_ID_iE_Extensions__item__criticality,
+        ____Global_ENB_ID_iE_Extensions__item__extensionValue_tab,
         ___Global_ENB_ID_iE_Extensions__item__extensionValue,
         __Global_ENB_ID_iE_Extensions__item_,
         _Global_ENB_ID_iE_Extensions,
@@ -11663,7 +12149,9 @@ class S1AP_IEs:
         _Global_en_gNB_ID_en_gNB_ID,
         ____Global_en_gNB_ID_iE_Extensions__item__id_tab,
         ___Global_en_gNB_ID_iE_Extensions__item__id,
+        ____Global_en_gNB_ID_iE_Extensions__item__criticality_tab,
         ___Global_en_gNB_ID_iE_Extensions__item__criticality,
+        ____Global_en_gNB_ID_iE_Extensions__item__extensionValue_tab,
         ___Global_en_gNB_ID_iE_Extensions__item__extensionValue,
         __Global_en_gNB_ID_iE_Extensions__item_,
         _Global_en_gNB_ID_iE_Extensions,
@@ -11674,7 +12162,9 @@ class S1AP_IEs:
         _ENB_StatusTransfer_TransparentContainer_bearers_SubjectToStatusTransferList,
         ____ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__id_tab,
         ___ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__id,
+        ____ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__criticality_tab,
         ___ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__criticality,
+        ____ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__extensionValue_tab,
         ___ENB_StatusTransfer_TransparentContainer_iE_Extensions__item__extensionValue,
         __ENB_StatusTransfer_TransparentContainer_iE_Extensions__item_,
         _ENB_StatusTransfer_TransparentContainer_iE_Extensions,
@@ -11690,7 +12180,9 @@ class S1AP_IEs:
         _EN_DCSONConfigurationTransfer_x2TNLConfigInfo,
         ____EN_DCSONConfigurationTransfer_iE_Extensions__item__id_tab,
         ___EN_DCSONConfigurationTransfer_iE_Extensions__item__id,
+        ____EN_DCSONConfigurationTransfer_iE_Extensions__item__criticality_tab,
         ___EN_DCSONConfigurationTransfer_iE_Extensions__item__criticality,
+        ____EN_DCSONConfigurationTransfer_iE_Extensions__item__extensionValue_tab,
         ___EN_DCSONConfigurationTransfer_iE_Extensions__item__extensionValue,
         __EN_DCSONConfigurationTransfer_iE_Extensions__item_,
         _EN_DCSONConfigurationTransfer_iE_Extensions,
@@ -11706,7 +12198,9 @@ class S1AP_IEs:
         _EN_DCTransferTypeRequest_broadcast5GSTAI,
         ____EN_DCTransferTypeRequest_iE_Extensions__item__id_tab,
         ___EN_DCTransferTypeRequest_iE_Extensions__item__id,
+        ____EN_DCTransferTypeRequest_iE_Extensions__item__criticality_tab,
         ___EN_DCTransferTypeRequest_iE_Extensions__item__criticality,
+        ____EN_DCTransferTypeRequest_iE_Extensions__item__extensionValue_tab,
         ___EN_DCTransferTypeRequest_iE_Extensions__item__extensionValue,
         __EN_DCTransferTypeRequest_iE_Extensions__item_,
         _EN_DCTransferTypeRequest_iE_Extensions,
@@ -11716,7 +12210,9 @@ class S1AP_IEs:
         _EN_DCTransferTypeReply_targeteNB,
         ____EN_DCTransferTypeReply_iE_Extensions__item__id_tab,
         ___EN_DCTransferTypeReply_iE_Extensions__item__id,
+        ____EN_DCTransferTypeReply_iE_Extensions__item__criticality_tab,
         ___EN_DCTransferTypeReply_iE_Extensions__item__criticality,
+        ____EN_DCTransferTypeReply_iE_Extensions__item__extensionValue_tab,
         ___EN_DCTransferTypeReply_iE_Extensions__item__extensionValue,
         __EN_DCTransferTypeReply_iE_Extensions__item_,
         _EN_DCTransferTypeReply_iE_Extensions,
@@ -11726,7 +12222,9 @@ class S1AP_IEs:
         _EN_DCSONeNBIdentification_selectedTAI,
         ____EN_DCSONeNBIdentification_iE_Extensions__item__id_tab,
         ___EN_DCSONeNBIdentification_iE_Extensions__item__id,
+        ____EN_DCSONeNBIdentification_iE_Extensions__item__criticality_tab,
         ___EN_DCSONeNBIdentification_iE_Extensions__item__criticality,
+        ____EN_DCSONeNBIdentification_iE_Extensions__item__extensionValue_tab,
         ___EN_DCSONeNBIdentification_iE_Extensions__item__extensionValue,
         __EN_DCSONeNBIdentification_iE_Extensions__item_,
         _EN_DCSONeNBIdentification_iE_Extensions,
@@ -11736,7 +12234,9 @@ class S1AP_IEs:
         _EN_DCSONengNBIdentification_selectedTAI,
         ____EN_DCSONengNBIdentification_iE_Extensions__item__id_tab,
         ___EN_DCSONengNBIdentification_iE_Extensions__item__id,
+        ____EN_DCSONengNBIdentification_iE_Extensions__item__criticality_tab,
         ___EN_DCSONengNBIdentification_iE_Extensions__item__criticality,
+        ____EN_DCSONengNBIdentification_iE_Extensions__item__extensionValue_tab,
         ___EN_DCSONengNBIdentification_iE_Extensions__item__extensionValue,
         __EN_DCSONengNBIdentification_iE_Extensions__item_,
         _EN_DCSONengNBIdentification_iE_Extensions,
@@ -11762,7 +12262,9 @@ class S1AP_IEs:
         _E_RABInformationListItem_dL_Forwarding,
         ____E_RABInformationListItem_iE_Extensions__item__id_tab,
         ___E_RABInformationListItem_iE_Extensions__item__id,
+        ____E_RABInformationListItem_iE_Extensions__item__criticality_tab,
         ___E_RABInformationListItem_iE_Extensions__item__criticality,
+        ____E_RABInformationListItem_iE_Extensions__item__extensionValue_tab,
         ___E_RABInformationListItem_iE_Extensions__item__extensionValue,
         __E_RABInformationListItem_iE_Extensions__item_,
         _E_RABInformationListItem_iE_Extensions,
@@ -11781,7 +12283,9 @@ class S1AP_IEs:
         _E_RABItem_cause,
         ____E_RABItem_iE_Extensions__item__id_tab,
         ___E_RABItem_iE_Extensions__item__id,
+        ____E_RABItem_iE_Extensions__item__criticality_tab,
         ___E_RABItem_iE_Extensions__item__criticality,
+        ____E_RABItem_iE_Extensions__item__extensionValue_tab,
         ___E_RABItem_iE_Extensions__item__extensionValue,
         __E_RABItem_iE_Extensions__item_,
         _E_RABItem_iE_Extensions,
@@ -11814,7 +12318,9 @@ class S1AP_IEs:
         _E_RABUsageReportItem_usageCountDL,
         ____E_RABUsageReportItem_iE_Extensions__item__id_tab,
         ___E_RABUsageReportItem_iE_Extensions__item__id,
+        ____E_RABUsageReportItem_iE_Extensions__item__criticality_tab,
         ___E_RABUsageReportItem_iE_Extensions__item__criticality,
+        ____E_RABUsageReportItem_iE_Extensions__item__extensionValue_tab,
         ___E_RABUsageReportItem_iE_Extensions__item__extensionValue,
         __E_RABUsageReportItem_iE_Extensions__item_,
         _E_RABUsageReportItem_iE_Extensions,
@@ -11827,7 +12333,9 @@ class S1AP_IEs:
         _EUTRAN_CGI_cell_ID,
         ____EUTRAN_CGI_iE_Extensions__item__id_tab,
         ___EUTRAN_CGI_iE_Extensions__item__id,
+        ____EUTRAN_CGI_iE_Extensions__item__criticality_tab,
         ___EUTRAN_CGI_iE_Extensions__item__criticality,
+        ____EUTRAN_CGI_iE_Extensions__item__extensionValue_tab,
         ___EUTRAN_CGI_iE_Extensions__item__extensionValue,
         __EUTRAN_CGI_iE_Extensions__item_,
         _EUTRAN_CGI_iE_Extensions,
@@ -11838,7 +12346,9 @@ class S1AP_IEs:
         _ExpectedUEBehaviour_expectedHOInterval,
         ____ExpectedUEBehaviour_iE_Extensions__item__id_tab,
         ___ExpectedUEBehaviour_iE_Extensions__item__id,
+        ____ExpectedUEBehaviour_iE_Extensions__item__criticality_tab,
         ___ExpectedUEBehaviour_iE_Extensions__item__criticality,
+        ____ExpectedUEBehaviour_iE_Extensions__item__extensionValue_tab,
         ___ExpectedUEBehaviour_iE_Extensions__item__extensionValue,
         __ExpectedUEBehaviour_iE_Extensions__item_,
         _ExpectedUEBehaviour_iE_Extensions,
@@ -11849,7 +12359,9 @@ class S1AP_IEs:
         _ExpectedUEActivityBehaviour_sourceofUEActivityBehaviourInformation,
         ____ExpectedUEActivityBehaviour_iE_Extensions__item__id_tab,
         ___ExpectedUEActivityBehaviour_iE_Extensions__item__id,
+        ____ExpectedUEActivityBehaviour_iE_Extensions__item__criticality_tab,
         ___ExpectedUEActivityBehaviour_iE_Extensions__item__criticality,
+        ____ExpectedUEActivityBehaviour_iE_Extensions__item__extensionValue_tab,
         ___ExpectedUEActivityBehaviour_iE_Extensions__item__extensionValue,
         __ExpectedUEActivityBehaviour_iE_Extensions__item_,
         _ExpectedUEActivityBehaviour_iE_Extensions,
@@ -11868,7 +12380,9 @@ class S1AP_IEs:
         _FiveGSTAI_fiveGSTAC,
         ____FiveGSTAI_iE_Extensions__item__id_tab,
         ___FiveGSTAI_iE_Extensions__item__id,
+        ____FiveGSTAI_iE_Extensions__item__criticality_tab,
         ___FiveGSTAI_iE_Extensions__item__criticality,
+        ____FiveGSTAI_iE_Extensions__item__extensionValue_tab,
         ___FiveGSTAI_iE_Extensions__item__extensionValue,
         __FiveGSTAI_iE_Extensions__item_,
         _FiveGSTAI_iE_Extensions,
@@ -11881,7 +12395,9 @@ class S1AP_IEs:
         _ForbiddenTAs_Item_forbiddenTACs,
         ____ForbiddenTAs_Item_iE_Extensions__item__id_tab,
         ___ForbiddenTAs_Item_iE_Extensions__item__id,
+        ____ForbiddenTAs_Item_iE_Extensions__item__criticality_tab,
         ___ForbiddenTAs_Item_iE_Extensions__item__criticality,
+        ____ForbiddenTAs_Item_iE_Extensions__item__extensionValue_tab,
         ___ForbiddenTAs_Item_iE_Extensions__item__extensionValue,
         __ForbiddenTAs_Item_iE_Extensions__item_,
         _ForbiddenTAs_Item_iE_Extensions,
@@ -11895,7 +12411,9 @@ class S1AP_IEs:
         _ForbiddenLAs_Item_forbiddenLACs,
         ____ForbiddenLAs_Item_iE_Extensions__item__id_tab,
         ___ForbiddenLAs_Item_iE_Extensions__item__id,
+        ____ForbiddenLAs_Item_iE_Extensions__item__criticality_tab,
         ___ForbiddenLAs_Item_iE_Extensions__item__criticality,
+        ____ForbiddenLAs_Item_iE_Extensions__item__extensionValue_tab,
         ___ForbiddenLAs_Item_iE_Extensions__item__extensionValue,
         __ForbiddenLAs_Item_iE_Extensions__item_,
         _ForbiddenLAs_Item_iE_Extensions,
@@ -11929,7 +12447,9 @@ class S1AP_IEs:
         _GUMMEI_mME_Code,
         ____GUMMEI_iE_Extensions__item__id_tab,
         ___GUMMEI_iE_Extensions__item__id,
+        ____GUMMEI_iE_Extensions__item__criticality_tab,
         ___GUMMEI_iE_Extensions__item__criticality,
+        ____GUMMEI_iE_Extensions__item__extensionValue_tab,
         ___GUMMEI_iE_Extensions__item__extensionValue,
         __GUMMEI_iE_Extensions__item_,
         _GUMMEI_iE_Extensions,
@@ -11999,7 +12519,9 @@ class S1AP_IEs:
         _InformationOnRecommendedCellsAndENBsForPaging_recommendENBsForPaging,
         ____InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__id_tab,
         ___InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__id,
+        ____InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__criticality_tab,
         ___InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__criticality,
+        ____InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__extensionValue_tab,
         ___InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item__extensionValue,
         __InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions__item_,
         _InformationOnRecommendedCellsAndENBsForPaging_iE_Extensions,
@@ -12015,7 +12537,9 @@ class S1AP_IEs:
         _LAI_lAC,
         ____LAI_iE_Extensions__item__id_tab,
         ___LAI_iE_Extensions__item__id,
+        ____LAI_iE_Extensions__item__criticality_tab,
         ___LAI_iE_Extensions__item__criticality,
+        ____LAI_iE_Extensions__item__extensionValue_tab,
         ___LAI_iE_Extensions__item__extensionValue,
         __LAI_iE_Extensions__item_,
         _LAI_iE_Extensions,
@@ -12053,7 +12577,9 @@ class S1AP_IEs:
         _ListeningSubframePattern_pattern_offset,
         ____ListeningSubframePattern_iE_Extensions__item__id_tab,
         ___ListeningSubframePattern_iE_Extensions__item__id,
+        ____ListeningSubframePattern_iE_Extensions__item__criticality_tab,
         ___ListeningSubframePattern_iE_Extensions__item__criticality,
+        ____ListeningSubframePattern_iE_Extensions__item__extensionValue_tab,
         ___ListeningSubframePattern_iE_Extensions__item__extensionValue,
         __ListeningSubframePattern_iE_Extensions__item_,
         _ListeningSubframePattern_iE_Extensions,
@@ -12080,7 +12606,9 @@ class S1AP_IEs:
         _LoggedMBSFNMDT_mBSFN_ResultToLog,
         ____LoggedMBSFNMDT_iE_Extensions__item__id_tab,
         ___LoggedMBSFNMDT_iE_Extensions__item__id,
+        ____LoggedMBSFNMDT_iE_Extensions__item__criticality_tab,
         ___LoggedMBSFNMDT_iE_Extensions__item__criticality,
+        ____LoggedMBSFNMDT_iE_Extensions__item__extensionValue_tab,
         ___LoggedMBSFNMDT_iE_Extensions__item__extensionValue,
         __LoggedMBSFNMDT_iE_Extensions__item_,
         _LoggedMBSFNMDT_iE_Extensions,
@@ -12090,7 +12618,9 @@ class S1AP_IEs:
         _M3Configuration_m3period,
         ____M3Configuration_iE_Extensions__item__id_tab,
         ___M3Configuration_iE_Extensions__item__id,
+        ____M3Configuration_iE_Extensions__item__criticality_tab,
         ___M3Configuration_iE_Extensions__item__criticality,
+        ____M3Configuration_iE_Extensions__item__extensionValue_tab,
         ___M3Configuration_iE_Extensions__item__extensionValue,
         __M3Configuration_iE_Extensions__item_,
         _M3Configuration_iE_Extensions,
@@ -12101,7 +12631,9 @@ class S1AP_IEs:
         _M4Configuration_m4_links_to_log,
         ____M4Configuration_iE_Extensions__item__id_tab,
         ___M4Configuration_iE_Extensions__item__id,
+        ____M4Configuration_iE_Extensions__item__criticality_tab,
         ___M4Configuration_iE_Extensions__item__criticality,
+        ____M4Configuration_iE_Extensions__item__extensionValue_tab,
         ___M4Configuration_iE_Extensions__item__extensionValue,
         __M4Configuration_iE_Extensions__item_,
         _M4Configuration_iE_Extensions,
@@ -12112,7 +12644,9 @@ class S1AP_IEs:
         _M5Configuration_m5_links_to_log,
         ____M5Configuration_iE_Extensions__item__id_tab,
         ___M5Configuration_iE_Extensions__item__id,
+        ____M5Configuration_iE_Extensions__item__criticality_tab,
         ___M5Configuration_iE_Extensions__item__criticality,
+        ____M5Configuration_iE_Extensions__item__extensionValue_tab,
         ___M5Configuration_iE_Extensions__item__extensionValue,
         __M5Configuration_iE_Extensions__item_,
         _M5Configuration_iE_Extensions,
@@ -12124,7 +12658,9 @@ class S1AP_IEs:
         _M6Configuration_m6_links_to_log,
         ____M6Configuration_iE_Extensions__item__id_tab,
         ___M6Configuration_iE_Extensions__item__id,
+        ____M6Configuration_iE_Extensions__item__criticality_tab,
         ___M6Configuration_iE_Extensions__item__criticality,
+        ____M6Configuration_iE_Extensions__item__extensionValue_tab,
         ___M6Configuration_iE_Extensions__item__extensionValue,
         __M6Configuration_iE_Extensions__item_,
         _M6Configuration_iE_Extensions,
@@ -12136,7 +12672,9 @@ class S1AP_IEs:
         _M7Configuration_m7_links_to_log,
         ____M7Configuration_iE_Extensions__item__id_tab,
         ___M7Configuration_iE_Extensions__item__id,
+        ____M7Configuration_iE_Extensions__item__criticality_tab,
         ___M7Configuration_iE_Extensions__item__criticality,
+        ____M7Configuration_iE_Extensions__item__extensionValue_tab,
         ___M7Configuration_iE_Extensions__item__extensionValue,
         __M7Configuration_iE_Extensions__item_,
         _M7Configuration_iE_Extensions,
@@ -12165,7 +12703,9 @@ class S1AP_IEs:
         _MBSFN_ResultToLogInfo_carrierFreq,
         ____MBSFN_ResultToLogInfo_iE_Extensions__item__id_tab,
         ___MBSFN_ResultToLogInfo_iE_Extensions__item__id,
+        ____MBSFN_ResultToLogInfo_iE_Extensions__item__criticality_tab,
         ___MBSFN_ResultToLogInfo_iE_Extensions__item__criticality,
+        ____MBSFN_ResultToLogInfo_iE_Extensions__item__extensionValue_tab,
         ___MBSFN_ResultToLogInfo_iE_Extensions__item__extensionValue,
         __MBSFN_ResultToLogInfo_iE_Extensions__item_,
         _MBSFN_ResultToLogInfo_iE_Extensions,
@@ -12208,7 +12748,9 @@ class S1AP_IEs:
         _MutingPatternInformation_muting_pattern_offset,
         ____MutingPatternInformation_iE_Extensions__item__id_tab,
         ___MutingPatternInformation_iE_Extensions__item__id,
+        ____MutingPatternInformation_iE_Extensions__item__criticality_tab,
         ___MutingPatternInformation_iE_Extensions__item__criticality,
+        ____MutingPatternInformation_iE_Extensions__item__extensionValue_tab,
         ___MutingPatternInformation_iE_Extensions__item__extensionValue,
         __MutingPatternInformation_iE_Extensions__item_,
         _MutingPatternInformation_iE_Extensions,
@@ -12222,7 +12764,9 @@ class S1AP_IEs:
         _NB_IoT_Paging_eDRXInformation_nB_IoT_pagingTimeWindow,
         ____NB_IoT_Paging_eDRXInformation_iE_Extensions__item__id_tab,
         ___NB_IoT_Paging_eDRXInformation_iE_Extensions__item__id,
+        ____NB_IoT_Paging_eDRXInformation_iE_Extensions__item__criticality_tab,
         ___NB_IoT_Paging_eDRXInformation_iE_Extensions__item__criticality,
+        ____NB_IoT_Paging_eDRXInformation_iE_Extensions__item__extensionValue_tab,
         ___NB_IoT_Paging_eDRXInformation_iE_Extensions__item__extensionValue,
         __NB_IoT_Paging_eDRXInformation_iE_Extensions__item_,
         _NB_IoT_Paging_eDRXInformation_iE_Extensions,
@@ -12237,7 +12781,9 @@ class S1AP_IEs:
         _NR_CGI_nRCellIdentity,
         ____NR_CGI_iE_Extensions__item__id_tab,
         ___NR_CGI_iE_Extensions__item__id,
+        ____NR_CGI_iE_Extensions__item__criticality_tab,
         ___NR_CGI_iE_Extensions__item__criticality,
+        ____NR_CGI_iE_Extensions__item__extensionValue_tab,
         ___NR_CGI_iE_Extensions__item__extensionValue,
         __NR_CGI_iE_Extensions__item_,
         _NR_CGI_iE_Extensions,
@@ -12251,7 +12797,9 @@ class S1AP_IEs:
         _NRUESecurityCapabilities_nRintegrityProtectionAlgorithms,
         ____NRUESecurityCapabilities_iE_Extensions__item__id_tab,
         ___NRUESecurityCapabilities_iE_Extensions__item__id,
+        ____NRUESecurityCapabilities_iE_Extensions__item__criticality_tab,
         ___NRUESecurityCapabilities_iE_Extensions__item__criticality,
+        ____NRUESecurityCapabilities_iE_Extensions__item__extensionValue_tab,
         ___NRUESecurityCapabilities_iE_Extensions__item__extensionValue,
         __NRUESecurityCapabilities_iE_Extensions__item_,
         _NRUESecurityCapabilities_iE_Extensions,
@@ -12269,7 +12817,9 @@ class S1AP_IEs:
         _PagingAttemptInformation_nextPagingAreaScope,
         ____PagingAttemptInformation_iE_Extensions__item__id_tab,
         ___PagingAttemptInformation_iE_Extensions__item__id,
+        ____PagingAttemptInformation_iE_Extensions__item__criticality_tab,
         ___PagingAttemptInformation_iE_Extensions__item__criticality,
+        ____PagingAttemptInformation_iE_Extensions__item__extensionValue_tab,
         ___PagingAttemptInformation_iE_Extensions__item__extensionValue,
         __PagingAttemptInformation_iE_Extensions__item_,
         _PagingAttemptInformation_iE_Extensions,
@@ -12280,7 +12830,9 @@ class S1AP_IEs:
         _Paging_eDRXInformation_pagingTimeWindow,
         ____Paging_eDRXInformation_iE_Extensions__item__id_tab,
         ___Paging_eDRXInformation_iE_Extensions__item__id,
+        ____Paging_eDRXInformation_iE_Extensions__item__criticality_tab,
         ___Paging_eDRXInformation_iE_Extensions__item__criticality,
+        ____Paging_eDRXInformation_iE_Extensions__item__extensionValue_tab,
         ___Paging_eDRXInformation_iE_Extensions__item__extensionValue,
         __Paging_eDRXInformation_iE_Extensions__item_,
         _Paging_eDRXInformation_iE_Extensions,
@@ -12298,7 +12850,9 @@ class S1AP_IEs:
         _M1PeriodicReporting_reportAmount,
         ____M1PeriodicReporting_iE_Extensions__item__id_tab,
         ___M1PeriodicReporting_iE_Extensions__item__id,
+        ____M1PeriodicReporting_iE_Extensions__item__criticality_tab,
         ___M1PeriodicReporting_iE_Extensions__item__criticality,
+        ____M1PeriodicReporting_iE_Extensions__item__extensionValue_tab,
         ___M1PeriodicReporting_iE_Extensions__item__extensionValue,
         __M1PeriodicReporting_iE_Extensions__item_,
         _M1PeriodicReporting_iE_Extensions,
@@ -12308,7 +12862,9 @@ class S1AP_IEs:
         _PLMNAreaBasedQMC_plmnListforQMC,
         ____PLMNAreaBasedQMC_iE_Extensions__item__id_tab,
         ___PLMNAreaBasedQMC_iE_Extensions__item__id,
+        ____PLMNAreaBasedQMC_iE_Extensions__item__criticality_tab,
         ___PLMNAreaBasedQMC_iE_Extensions__item__criticality,
+        ____PLMNAreaBasedQMC_iE_Extensions__item__extensionValue_tab,
         ___PLMNAreaBasedQMC_iE_Extensions__item__extensionValue,
         __PLMNAreaBasedQMC_iE_Extensions__item_,
         _PLMNAreaBasedQMC_iE_Extensions,
@@ -12339,7 +12895,9 @@ class S1AP_IEs:
         _PSCellInformation_nCGI,
         ____PSCellInformation_iE_Extensions__item__id_tab,
         ___PSCellInformation_iE_Extensions__item__id,
+        ____PSCellInformation_iE_Extensions__item__criticality_tab,
         ___PSCellInformation_iE_Extensions__item__criticality,
+        ____PSCellInformation_iE_Extensions__item__extensionValue_tab,
         ___PSCellInformation_iE_Extensions__item__extensionValue,
         __PSCellInformation_iE_Extensions__item_,
         _PSCellInformation_iE_Extensions,
@@ -12352,7 +12910,9 @@ class S1AP_IEs:
         _RecommendedCellsForPaging_recommendedCellList,
         ____RecommendedCellsForPaging_iE_Extensions__item__id_tab,
         ___RecommendedCellsForPaging_iE_Extensions__item__id,
+        ____RecommendedCellsForPaging_iE_Extensions__item__criticality_tab,
         ___RecommendedCellsForPaging_iE_Extensions__item__criticality,
+        ____RecommendedCellsForPaging_iE_Extensions__item__extensionValue_tab,
         ___RecommendedCellsForPaging_iE_Extensions__item__extensionValue,
         __RecommendedCellsForPaging_iE_Extensions__item_,
         _RecommendedCellsForPaging_iE_Extensions,
@@ -12371,7 +12931,9 @@ class S1AP_IEs:
         _RecommendedCellItem_timeStayedInCell,
         ____RecommendedCellItem_iE_Extensions__item__id_tab,
         ___RecommendedCellItem_iE_Extensions__item__id,
+        ____RecommendedCellItem_iE_Extensions__item__criticality_tab,
         ___RecommendedCellItem_iE_Extensions__item__criticality,
+        ____RecommendedCellItem_iE_Extensions__item__extensionValue_tab,
         ___RecommendedCellItem_iE_Extensions__item__extensionValue,
         __RecommendedCellItem_iE_Extensions__item_,
         _RecommendedCellItem_iE_Extensions,
@@ -12380,7 +12942,9 @@ class S1AP_IEs:
         _RecommendedENBsForPaging_recommendedENBList,
         ____RecommendedENBsForPaging_iE_Extensions__item__id_tab,
         ___RecommendedENBsForPaging_iE_Extensions__item__id,
+        ____RecommendedENBsForPaging_iE_Extensions__item__criticality_tab,
         ___RecommendedENBsForPaging_iE_Extensions__item__criticality,
+        ____RecommendedENBsForPaging_iE_Extensions__item__extensionValue_tab,
         ___RecommendedENBsForPaging_iE_Extensions__item__extensionValue,
         __RecommendedENBsForPaging_iE_Extensions__item_,
         _RecommendedENBsForPaging_iE_Extensions,
@@ -12398,7 +12962,9 @@ class S1AP_IEs:
         _RecommendedENBItem_mMEPagingTarget,
         ____RecommendedENBItem_iE_Extensions__item__id_tab,
         ___RecommendedENBItem_iE_Extensions__item__id,
+        ____RecommendedENBItem_iE_Extensions__item__criticality_tab,
         ___RecommendedENBItem_iE_Extensions__item__criticality,
+        ____RecommendedENBItem_iE_Extensions__item__extensionValue_tab,
         ___RecommendedENBItem_iE_Extensions__item__extensionValue,
         __RecommendedENBItem_iE_Extensions__item_,
         _RecommendedENBItem_iE_Extensions,
@@ -12428,7 +12994,9 @@ class S1AP_IEs:
         _RIMTransfer_rIMRoutingAddress,
         ____RIMTransfer_iE_Extensions__item__id_tab,
         ___RIMTransfer_iE_Extensions__item__id,
+        ____RIMTransfer_iE_Extensions__item__criticality_tab,
         ___RIMTransfer_iE_Extensions__item__criticality,
+        ____RIMTransfer_iE_Extensions__item__extensionValue_tab,
         ___RIMTransfer_iE_Extensions__item__extensionValue,
         __RIMTransfer_iE_Extensions__item_,
         _RIMTransfer_iE_Extensions,
@@ -12445,7 +13013,9 @@ class S1AP_IEs:
         _RLFReportInformation_uE_RLF_Report_Container_for_extended_bands,
         ____RLFReportInformation_iE_Extensions__item__id_tab,
         ___RLFReportInformation_iE_Extensions__item__id,
+        ____RLFReportInformation_iE_Extensions__item__criticality_tab,
         ___RLFReportInformation_iE_Extensions__item__criticality,
+        ____RLFReportInformation_iE_Extensions__item__extensionValue_tab,
         ___RLFReportInformation_iE_Extensions__item__extensionValue,
         __RLFReportInformation_iE_Extensions__item_,
         _RLFReportInformation_iE_Extensions,
@@ -12462,7 +13032,9 @@ class S1AP_IEs:
         _SecurityContext_nextHopParameter,
         ____SecurityContext_iE_Extensions__item__id_tab,
         ___SecurityContext_iE_Extensions__item__id,
+        ____SecurityContext_iE_Extensions__item__criticality_tab,
         ___SecurityContext_iE_Extensions__item__criticality,
+        ____SecurityContext_iE_Extensions__item__extensionValue_tab,
         ___SecurityContext_iE_Extensions__item__extensionValue,
         __SecurityContext_iE_Extensions__item_,
         _SecurityContext_iE_Extensions,
@@ -12484,7 +13056,9 @@ class S1AP_IEs:
         _SecondaryRATDataUsageReportItem_e_RABUsageReportList,
         ____SecondaryRATDataUsageReportItem_iE_Extensions__item__id_tab,
         ___SecondaryRATDataUsageReportItem_iE_Extensions__item__id,
+        ____SecondaryRATDataUsageReportItem_iE_Extensions__item__criticality_tab,
         ___SecondaryRATDataUsageReportItem_iE_Extensions__item__criticality,
+        ____SecondaryRATDataUsageReportItem_iE_Extensions__item__extensionValue_tab,
         ___SecondaryRATDataUsageReportItem_iE_Extensions__item__extensionValue,
         __SecondaryRATDataUsageReportItem_iE_Extensions__item_,
         _SecondaryRATDataUsageReportItem_iE_Extensions,
@@ -12540,7 +13114,9 @@ class S1AP_IEs:
         _SynchronisationInformation_aggressoreCGI_List,
         ____SynchronisationInformation_iE_Extensions__item__id_tab,
         ___SynchronisationInformation_iE_Extensions__item__id,
+        ____SynchronisationInformation_iE_Extensions__item__criticality_tab,
         ___SynchronisationInformation_iE_Extensions__item__criticality,
+        ____SynchronisationInformation_iE_Extensions__item__extensionValue_tab,
         ___SynchronisationInformation_iE_Extensions__item__extensionValue,
         __SynchronisationInformation_iE_Extensions__item_,
         _SynchronisationInformation_iE_Extensions,
@@ -12552,7 +13128,9 @@ class S1AP_IEs:
         _SourceeNB_ID_selected_TAI,
         ____SourceeNB_ID_iE_Extensions__item__id_tab,
         ___SourceeNB_ID_iE_Extensions__item__id,
+        ____SourceeNB_ID_iE_Extensions__item__criticality_tab,
         ___SourceeNB_ID_iE_Extensions__item__criticality,
+        ____SourceeNB_ID_iE_Extensions__item__extensionValue_tab,
         ___SourceeNB_ID_iE_Extensions__item__extensionValue,
         __SourceeNB_ID_iE_Extensions__item_,
         _SourceeNB_ID_iE_Extensions,
@@ -12589,7 +13167,9 @@ class S1AP_IEs:
         _ServedGUMMEIsItem_servedMMECs,
         ____ServedGUMMEIsItem_iE_Extensions__item__id_tab,
         ___ServedGUMMEIsItem_iE_Extensions__item__id,
+        ____ServedGUMMEIsItem_iE_Extensions__item__criticality_tab,
         ___ServedGUMMEIsItem_iE_Extensions__item__criticality,
+        ____ServedGUMMEIsItem_iE_Extensions__item__extensionValue_tab,
         ___ServedGUMMEIsItem_iE_Extensions__item__extensionValue,
         __ServedGUMMEIsItem_iE_Extensions__item_,
         _ServedGUMMEIsItem_iE_Extensions,
@@ -12610,7 +13190,9 @@ class S1AP_IEs:
         _Subscription_Based_UE_DifferentiationInfo_batteryIndication,
         ____Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__id_tab,
         ___Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__id,
+        ____Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__criticality_tab,
         ___Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__criticality,
+        ____Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__extensionValue_tab,
         ___Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item__extensionValue,
         __Subscription_Based_UE_DifferentiationInfo_iE_Extensions__item_,
         _Subscription_Based_UE_DifferentiationInfo_iE_Extensions,
@@ -12621,7 +13203,9 @@ class S1AP_IEs:
         _ScheduledCommunicationTime_timeofDayEnd,
         ____ScheduledCommunicationTime_iE_Extensions__item__id_tab,
         ___ScheduledCommunicationTime_iE_Extensions__item__id,
+        ____ScheduledCommunicationTime_iE_Extensions__item__criticality_tab,
         ___ScheduledCommunicationTime_iE_Extensions__item__criticality,
+        ____ScheduledCommunicationTime_iE_Extensions__item__extensionValue_tab,
         ___ScheduledCommunicationTime_iE_Extensions__item__extensionValue,
         __ScheduledCommunicationTime_iE_Extensions__item_,
         _ScheduledCommunicationTime_iE_Extensions,
@@ -12659,7 +13243,9 @@ class S1AP_IEs:
         _S_TMSI_m_TMSI,
         ____S_TMSI_iE_Extensions__item__id_tab,
         ___S_TMSI_iE_Extensions__item__id,
+        ____S_TMSI_iE_Extensions__item__criticality_tab,
         ___S_TMSI_iE_Extensions__item__criticality,
+        ____S_TMSI_iE_Extensions__item__extensionValue_tab,
         ___S_TMSI_iE_Extensions__item__extensionValue,
         __S_TMSI_iE_Extensions__item_,
         _S_TMSI_iE_Extensions,
@@ -12669,7 +13255,9 @@ class S1AP_IEs:
         _TAIBasedMDT_tAIListforMDT,
         ____TAIBasedMDT_iE_Extensions__item__id_tab,
         ___TAIBasedMDT_iE_Extensions__item__id,
+        ____TAIBasedMDT_iE_Extensions__item__criticality_tab,
         ___TAIBasedMDT_iE_Extensions__item__criticality,
+        ____TAIBasedMDT_iE_Extensions__item__extensionValue_tab,
         ___TAIBasedMDT_iE_Extensions__item__extensionValue,
         __TAIBasedMDT_iE_Extensions__item_,
         _TAIBasedMDT_iE_Extensions,
@@ -12683,7 +13271,9 @@ class S1AP_IEs:
         _TAI_tAC,
         ____TAI_iE_Extensions__item__id_tab,
         ___TAI_iE_Extensions__item__id,
+        ____TAI_iE_Extensions__item__criticality_tab,
         ___TAI_iE_Extensions__item__criticality,
+        ____TAI_iE_Extensions__item__extensionValue_tab,
         ___TAI_iE_Extensions__item__extensionValue,
         __TAI_iE_Extensions__item_,
         _TAI_iE_Extensions,
@@ -12695,7 +13285,9 @@ class S1AP_IEs:
         _TAI_Broadcast_Item_completedCellinTAI,
         ____TAI_Broadcast_Item_iE_Extensions__item__id_tab,
         ___TAI_Broadcast_Item_iE_Extensions__item__id,
+        ____TAI_Broadcast_Item_iE_Extensions__item__criticality_tab,
         ___TAI_Broadcast_Item_iE_Extensions__item__criticality,
+        ____TAI_Broadcast_Item_iE_Extensions__item__extensionValue_tab,
         ___TAI_Broadcast_Item_iE_Extensions__item__extensionValue,
         __TAI_Broadcast_Item_iE_Extensions__item_,
         _TAI_Broadcast_Item_iE_Extensions,
@@ -12707,7 +13299,9 @@ class S1AP_IEs:
         _TAI_Cancelled_Item_cancelledCellinTAI,
         ____TAI_Cancelled_Item_iE_Extensions__item__id_tab,
         ___TAI_Cancelled_Item_iE_Extensions__item__id,
+        ____TAI_Cancelled_Item_iE_Extensions__item__criticality_tab,
         ___TAI_Cancelled_Item_iE_Extensions__item__criticality,
+        ____TAI_Cancelled_Item_iE_Extensions__item__extensionValue_tab,
         ___TAI_Cancelled_Item_iE_Extensions__item__extensionValue,
         __TAI_Cancelled_Item_iE_Extensions__item_,
         _TAI_Cancelled_Item_iE_Extensions,
@@ -12716,7 +13310,9 @@ class S1AP_IEs:
         _TABasedMDT_tAListforMDT,
         ____TABasedMDT_iE_Extensions__item__id_tab,
         ___TABasedMDT_iE_Extensions__item__id,
+        ____TABasedMDT_iE_Extensions__item__criticality_tab,
         ___TABasedMDT_iE_Extensions__item__criticality,
+        ____TABasedMDT_iE_Extensions__item__extensionValue_tab,
         ___TABasedMDT_iE_Extensions__item__extensionValue,
         __TABasedMDT_iE_Extensions__item_,
         _TABasedMDT_iE_Extensions,
@@ -12727,7 +13323,9 @@ class S1AP_IEs:
         _TABasedQMC_tAListforQMC,
         ____TABasedQMC_iE_Extensions__item__id_tab,
         ___TABasedQMC_iE_Extensions__item__id,
+        ____TABasedQMC_iE_Extensions__item__criticality_tab,
         ___TABasedQMC_iE_Extensions__item__criticality,
+        ____TABasedQMC_iE_Extensions__item__extensionValue_tab,
         ___TABasedQMC_iE_Extensions__item__extensionValue,
         __TABasedQMC_iE_Extensions__item_,
         _TABasedQMC_iE_Extensions,
@@ -12738,7 +13336,9 @@ class S1AP_IEs:
         _TAIBasedQMC_tAIListforQMC,
         ____TAIBasedQMC_iE_Extensions__item__id_tab,
         ___TAIBasedQMC_iE_Extensions__item__id,
+        ____TAIBasedQMC_iE_Extensions__item__criticality_tab,
         ___TAIBasedQMC_iE_Extensions__item__criticality,
+        ____TAIBasedQMC_iE_Extensions__item__extensionValue_tab,
         ___TAIBasedQMC_iE_Extensions__item__extensionValue,
         __TAIBasedQMC_iE_Extensions__item_,
         _TAIBasedQMC_iE_Extensions,
@@ -12751,7 +13351,9 @@ class S1AP_IEs:
         _CompletedCellinTAI_Item_eCGI,
         ____CompletedCellinTAI_Item_iE_Extensions__item__id_tab,
         ___CompletedCellinTAI_Item_iE_Extensions__item__id,
+        ____CompletedCellinTAI_Item_iE_Extensions__item__criticality_tab,
         ___CompletedCellinTAI_Item_iE_Extensions__item__criticality,
+        ____CompletedCellinTAI_Item_iE_Extensions__item__extensionValue_tab,
         ___CompletedCellinTAI_Item_iE_Extensions__item__extensionValue,
         __CompletedCellinTAI_Item_iE_Extensions__item_,
         _CompletedCellinTAI_Item_iE_Extensions,
@@ -12767,7 +13369,9 @@ class S1AP_IEs:
         _TargeteNB_ID_selected_TAI,
         ____TargeteNB_ID_iE_Extensions__item__id_tab,
         ___TargeteNB_ID_iE_Extensions__item__id,
+        ____TargeteNB_ID_iE_Extensions__item__criticality_tab,
         ___TargeteNB_ID_iE_Extensions__item__criticality,
+        ____TargeteNB_ID_iE_Extensions__item__extensionValue_tab,
         ___TargeteNB_ID_iE_Extensions__item__extensionValue,
         __TargeteNB_ID_iE_Extensions__item_,
         _TargeteNB_ID_iE_Extensions,
@@ -12779,7 +13383,9 @@ class S1AP_IEs:
         _TargetRNC_ID_extendedRNC_ID,
         ____TargetRNC_ID_iE_Extensions__item__id_tab,
         ___TargetRNC_ID_iE_Extensions__item__id,
+        ____TargetRNC_ID_iE_Extensions__item__criticality_tab,
         ___TargetRNC_ID_iE_Extensions__item__criticality,
+        ____TargetRNC_ID_iE_Extensions__item__extensionValue_tab,
         ___TargetRNC_ID_iE_Extensions__item__extensionValue,
         __TargetRNC_ID_iE_Extensions__item_,
         _TargetRNC_ID_iE_Extensions,
@@ -12789,7 +13395,9 @@ class S1AP_IEs:
         _TargetNgRanNode_ID_selected_TAI,
         ____TargetNgRanNode_ID_iE_Extensions__item__id_tab,
         ___TargetNgRanNode_ID_iE_Extensions__item__id,
+        ____TargetNgRanNode_ID_iE_Extensions__item__criticality_tab,
         ___TargetNgRanNode_ID_iE_Extensions__item__criticality,
+        ____TargetNgRanNode_ID_iE_Extensions__item__extensionValue_tab,
         ___TargetNgRanNode_ID_iE_Extensions__item__extensionValue,
         __TargetNgRanNode_ID_iE_Extensions__item_,
         _TargetNgRanNode_ID_iE_Extensions,
@@ -12801,7 +13409,9 @@ class S1AP_IEs:
         _GNB_global_gNB_ID,
         ____GNB_iE_Extensions__item__id_tab,
         ___GNB_iE_Extensions__item__id,
+        ____GNB_iE_Extensions__item__criticality_tab,
         ___GNB_iE_Extensions__item__criticality,
+        ____GNB_iE_Extensions__item__extensionValue_tab,
         ___GNB_iE_Extensions__item__extensionValue,
         __GNB_iE_Extensions__item_,
         _GNB_iE_Extensions,
@@ -12811,7 +13421,9 @@ class S1AP_IEs:
         _Global_GNB_ID_gNB_ID,
         ____Global_GNB_ID_iE_Extensions__item__id_tab,
         ___Global_GNB_ID_iE_Extensions__item__id,
+        ____Global_GNB_ID_iE_Extensions__item__criticality_tab,
         ___Global_GNB_ID_iE_Extensions__item__criticality,
+        ____Global_GNB_ID_iE_Extensions__item__extensionValue_tab,
         ___Global_GNB_ID_iE_Extensions__item__extensionValue,
         __Global_GNB_ID_iE_Extensions__item_,
         _Global_GNB_ID_iE_Extensions,
@@ -12822,7 +13434,9 @@ class S1AP_IEs:
         _NG_eNB_global_ng_eNB_ID,
         ____NG_eNB_iE_Extensions__item__id_tab,
         ___NG_eNB_iE_Extensions__item__id,
+        ____NG_eNB_iE_Extensions__item__criticality_tab,
         ___NG_eNB_iE_Extensions__item__criticality,
+        ____NG_eNB_iE_Extensions__item__extensionValue_tab,
         ___NG_eNB_iE_Extensions__item__extensionValue,
         __NG_eNB_iE_Extensions__item_,
         _NG_eNB_iE_Extensions,
@@ -12832,7 +13446,9 @@ class S1AP_IEs:
         _TargeteNB_ToSourceeNB_TransparentContainer_rRC_Container,
         ____TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__id_tab,
         ___TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__id,
+        ____TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__criticality_tab,
         ___TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__criticality,
+        ____TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__extensionValue_tab,
         ___TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item__extensionValue,
         __TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions__item_,
         _TargeteNB_ToSourceeNB_TransparentContainer_iE_Extensions,
@@ -12845,7 +13461,9 @@ class S1AP_IEs:
         _M1ThresholdEventA2_measurementThreshold,
         ____M1ThresholdEventA2_iE_Extensions__item__id_tab,
         ___M1ThresholdEventA2_iE_Extensions__item__id,
+        ____M1ThresholdEventA2_iE_Extensions__item__criticality_tab,
         ___M1ThresholdEventA2_iE_Extensions__item__criticality,
+        ____M1ThresholdEventA2_iE_Extensions__item__extensionValue_tab,
         ___M1ThresholdEventA2_iE_Extensions__item__extensionValue,
         __M1ThresholdEventA2_iE_Extensions__item_,
         _M1ThresholdEventA2_iE_Extensions,
@@ -12884,7 +13502,9 @@ class S1AP_IEs:
         _TunnelInformation_uDP_Port_Number,
         ____TunnelInformation_iE_Extensions__item__id_tab,
         ___TunnelInformation_iE_Extensions__item__id,
+        ____TunnelInformation_iE_Extensions__item__criticality_tab,
         ___TunnelInformation_iE_Extensions__item__criticality,
+        ____TunnelInformation_iE_Extensions__item__extensionValue_tab,
         ___TunnelInformation_iE_Extensions__item__extensionValue,
         __TunnelInformation_iE_Extensions__item_,
         _TunnelInformation_iE_Extensions,
@@ -12928,7 +13548,9 @@ class S1AP_IEs:
         _UE_S1AP_ID_pair_eNB_UE_S1AP_ID,
         ____UE_S1AP_ID_pair_iE_Extensions__item__id_tab,
         ___UE_S1AP_ID_pair_iE_Extensions__item__id,
+        ____UE_S1AP_ID_pair_iE_Extensions__item__criticality_tab,
         ___UE_S1AP_ID_pair_iE_Extensions__item__criticality,
+        ____UE_S1AP_ID_pair_iE_Extensions__item__extensionValue_tab,
         ___UE_S1AP_ID_pair_iE_Extensions__item__extensionValue,
         __UE_S1AP_ID_pair_iE_Extensions__item_,
         _UE_S1AP_ID_pair_iE_Extensions,
@@ -12938,7 +13560,9 @@ class S1AP_IEs:
         _UE_associatedLogicalS1_ConnectionItem_eNB_UE_S1AP_ID,
         ____UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__id_tab,
         ___UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__id,
+        ____UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__criticality_tab,
         ___UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__criticality,
+        ____UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__extensionValue_tab,
         ___UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item__extensionValue,
         __UE_associatedLogicalS1_ConnectionItem_iE_Extensions__item_,
         _UE_associatedLogicalS1_ConnectionItem_iE_Extensions,
@@ -12959,7 +13583,9 @@ class S1AP_IEs:
         _UESecurityCapabilities_integrityProtectionAlgorithms,
         ____UESecurityCapabilities_iE_Extensions__item__id_tab,
         ___UESecurityCapabilities_iE_Extensions__item__id,
+        ____UESecurityCapabilities_iE_Extensions__item__criticality_tab,
         ___UESecurityCapabilities_iE_Extensions__item__criticality,
+        ____UESecurityCapabilities_iE_Extensions__item__extensionValue_tab,
         ___UESecurityCapabilities_iE_Extensions__item__extensionValue,
         __UESecurityCapabilities_iE_Extensions__item_,
         _UESecurityCapabilities_iE_Extensions,
@@ -12968,7 +13594,9 @@ class S1AP_IEs:
         _UESidelinkAggregateMaximumBitrate_uESidelinkAggregateMaximumBitRate,
         ____UESidelinkAggregateMaximumBitrate_iE_Extensions__item__id_tab,
         ___UESidelinkAggregateMaximumBitrate_iE_Extensions__item__id,
+        ____UESidelinkAggregateMaximumBitrate_iE_Extensions__item__criticality_tab,
         ___UESidelinkAggregateMaximumBitrate_iE_Extensions__item__criticality,
+        ____UESidelinkAggregateMaximumBitrate_iE_Extensions__item__extensionValue_tab,
         ___UESidelinkAggregateMaximumBitrate_iE_Extensions__item__extensionValue,
         __UESidelinkAggregateMaximumBitrate_iE_Extensions__item_,
         _UESidelinkAggregateMaximumBitrate_iE_Extensions,
@@ -12979,7 +13607,9 @@ class S1AP_IEs:
         _UL_CP_SecurityInformation_ul_NAS_Count,
         ____UL_CP_SecurityInformation_iE_Extensions__item__id_tab,
         ___UL_CP_SecurityInformation_iE_Extensions__item__id,
+        ____UL_CP_SecurityInformation_iE_Extensions__item__criticality_tab,
         ___UL_CP_SecurityInformation_iE_Extensions__item__criticality,
+        ____UL_CP_SecurityInformation_iE_Extensions__item__extensionValue_tab,
         ___UL_CP_SecurityInformation_iE_Extensions__item__extensionValue,
         __UL_CP_SecurityInformation_iE_Extensions__item_,
         _UL_CP_SecurityInformation_iE_Extensions,
@@ -13007,7 +13637,9 @@ class S1AP_IEs:
         _V2XServicesAuthorized_pedestrianUE,
         ____V2XServicesAuthorized_iE_Extensions__item__id_tab,
         ___V2XServicesAuthorized_iE_Extensions__item__id,
+        ____V2XServicesAuthorized_iE_Extensions__item__criticality_tab,
         ___V2XServicesAuthorized_iE_Extensions__item__criticality,
+        ____V2XServicesAuthorized_iE_Extensions__item__extensionValue_tab,
         ___V2XServicesAuthorized_iE_Extensions__item__extensionValue,
         __V2XServicesAuthorized_iE_Extensions__item_,
         _V2XServicesAuthorized_iE_Extensions,
@@ -13029,7 +13661,9 @@ class S1AP_IEs:
         _WLANMeasurementConfiguration_wlan_rtt,
         ____WLANMeasurementConfiguration_iE_Extensions__item__id_tab,
         ___WLANMeasurementConfiguration_iE_Extensions__item__id,
+        ____WLANMeasurementConfiguration_iE_Extensions__item__criticality_tab,
         ___WLANMeasurementConfiguration_iE_Extensions__item__criticality,
+        ____WLANMeasurementConfiguration_iE_Extensions__item__extensionValue_tab,
         ___WLANMeasurementConfiguration_iE_Extensions__item__extensionValue,
         __WLANMeasurementConfiguration_iE_Extensions__item_,
         _WLANMeasurementConfiguration_iE_Extensions,
@@ -13058,7 +13692,9 @@ class S1AP_IEs:
         _ENBX2ExtTLA_gTPTLAa,
         ____ENBX2ExtTLA_iE_Extensions__item__id_tab,
         ___ENBX2ExtTLA_iE_Extensions__item__id,
+        ____ENBX2ExtTLA_iE_Extensions__item__criticality_tab,
         ___ENBX2ExtTLA_iE_Extensions__item__criticality,
+        ____ENBX2ExtTLA_iE_Extensions__item__extensionValue_tab,
         ___ENBX2ExtTLA_iE_Extensions__item__extensionValue,
         __ENBX2ExtTLA_iE_Extensions__item_,
         _ENBX2ExtTLA_iE_Extensions,
@@ -13946,11 +14582,15 @@ class S1AP_PDU_Contents:
     ___E_RABDataForwardingItem_iE_Extensions__item__id._const_tab_at = None
     ___E_RABDataForwardingItem_iE_Extensions__item__id._const_tab_id = u'id'
     ___E_RABDataForwardingItem_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___E_RABDataForwardingItem_iE_Extensions__item__criticality._const_tab = ____E_RABDataForwardingItem_iE_Extensions__item__id_tab
+    ____E_RABDataForwardingItem_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABDataForwardingItem_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABDataForwardingItem_iE_Extensions__item__criticality._const_tab = ____E_RABDataForwardingItem_iE_Extensions__item__criticality_tab
     ___E_RABDataForwardingItem_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___E_RABDataForwardingItem_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___E_RABDataForwardingItem_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___E_RABDataForwardingItem_iE_Extensions__item__extensionValue._const_tab = ____E_RABDataForwardingItem_iE_Extensions__item__id_tab
+    ____E_RABDataForwardingItem_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABDataForwardingItem_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABDataForwardingItem_iE_Extensions__item__extensionValue._const_tab = ____E_RABDataForwardingItem_iE_Extensions__item__extensionValue_tab
     ___E_RABDataForwardingItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___E_RABDataForwardingItem_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __E_RABDataForwardingItem_iE_Extensions__item_._cont = ASN1Dict([
@@ -14297,11 +14937,15 @@ class S1AP_PDU_Contents:
     ___E_RABAdmittedItem_iE_Extensions__item__id._const_tab_at = None
     ___E_RABAdmittedItem_iE_Extensions__item__id._const_tab_id = u'id'
     ___E_RABAdmittedItem_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___E_RABAdmittedItem_iE_Extensions__item__criticality._const_tab = ____E_RABAdmittedItem_iE_Extensions__item__id_tab
+    ____E_RABAdmittedItem_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABAdmittedItem_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABAdmittedItem_iE_Extensions__item__criticality._const_tab = ____E_RABAdmittedItem_iE_Extensions__item__criticality_tab
     ___E_RABAdmittedItem_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___E_RABAdmittedItem_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___E_RABAdmittedItem_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___E_RABAdmittedItem_iE_Extensions__item__extensionValue._const_tab = ____E_RABAdmittedItem_iE_Extensions__item__id_tab
+    ____E_RABAdmittedItem_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABAdmittedItem_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABAdmittedItem_iE_Extensions__item__extensionValue._const_tab = ____E_RABAdmittedItem_iE_Extensions__item__extensionValue_tab
     ___E_RABAdmittedItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___E_RABAdmittedItem_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __E_RABAdmittedItem_iE_Extensions__item_._cont = ASN1Dict([
@@ -14373,11 +15017,15 @@ class S1AP_PDU_Contents:
     ___E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__id._const_tab_at = None
     ___E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__id._const_tab_id = u'id'
     ___E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__criticality._const_tab = ____E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__id_tab
+    ____E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__criticality._const_tab = ____E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__criticality_tab
     ___E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__extensionValue._const_tab = ____E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__id_tab
+    ____E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__extensionValue._const_tab = ____E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__extensionValue_tab
     ___E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __E_RABFailedToSetupItemHOReqAck_iE_Extensions__item_._cont = ASN1Dict([
@@ -14600,11 +15248,15 @@ class S1AP_PDU_Contents:
     ___E_RABToBeSwitchedDLItem_iE_Extensions__item__id._const_tab_at = None
     ___E_RABToBeSwitchedDLItem_iE_Extensions__item__id._const_tab_id = u'id'
     ___E_RABToBeSwitchedDLItem_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___E_RABToBeSwitchedDLItem_iE_Extensions__item__criticality._const_tab = ____E_RABToBeSwitchedDLItem_iE_Extensions__item__id_tab
+    ____E_RABToBeSwitchedDLItem_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABToBeSwitchedDLItem_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABToBeSwitchedDLItem_iE_Extensions__item__criticality._const_tab = ____E_RABToBeSwitchedDLItem_iE_Extensions__item__criticality_tab
     ___E_RABToBeSwitchedDLItem_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___E_RABToBeSwitchedDLItem_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___E_RABToBeSwitchedDLItem_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___E_RABToBeSwitchedDLItem_iE_Extensions__item__extensionValue._const_tab = ____E_RABToBeSwitchedDLItem_iE_Extensions__item__id_tab
+    ____E_RABToBeSwitchedDLItem_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABToBeSwitchedDLItem_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABToBeSwitchedDLItem_iE_Extensions__item__extensionValue._const_tab = ____E_RABToBeSwitchedDLItem_iE_Extensions__item__extensionValue_tab
     ___E_RABToBeSwitchedDLItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___E_RABToBeSwitchedDLItem_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __E_RABToBeSwitchedDLItem_iE_Extensions__item_._cont = ASN1Dict([
@@ -14746,11 +15398,15 @@ class S1AP_PDU_Contents:
     ___E_RABToBeSwitchedULItem_iE_Extensions__item__id._const_tab_at = None
     ___E_RABToBeSwitchedULItem_iE_Extensions__item__id._const_tab_id = u'id'
     ___E_RABToBeSwitchedULItem_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___E_RABToBeSwitchedULItem_iE_Extensions__item__criticality._const_tab = ____E_RABToBeSwitchedULItem_iE_Extensions__item__id_tab
+    ____E_RABToBeSwitchedULItem_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABToBeSwitchedULItem_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABToBeSwitchedULItem_iE_Extensions__item__criticality._const_tab = ____E_RABToBeSwitchedULItem_iE_Extensions__item__criticality_tab
     ___E_RABToBeSwitchedULItem_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___E_RABToBeSwitchedULItem_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___E_RABToBeSwitchedULItem_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___E_RABToBeSwitchedULItem_iE_Extensions__item__extensionValue._const_tab = ____E_RABToBeSwitchedULItem_iE_Extensions__item__id_tab
+    ____E_RABToBeSwitchedULItem_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABToBeSwitchedULItem_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABToBeSwitchedULItem_iE_Extensions__item__extensionValue._const_tab = ____E_RABToBeSwitchedULItem_iE_Extensions__item__extensionValue_tab
     ___E_RABToBeSwitchedULItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___E_RABToBeSwitchedULItem_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __E_RABToBeSwitchedULItem_iE_Extensions__item_._cont = ASN1Dict([
@@ -15115,11 +15771,15 @@ class S1AP_PDU_Contents:
     ___E_RABSetupItemBearerSURes_iE_Extensions__item__id._const_tab_at = None
     ___E_RABSetupItemBearerSURes_iE_Extensions__item__id._const_tab_id = u'id'
     ___E_RABSetupItemBearerSURes_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___E_RABSetupItemBearerSURes_iE_Extensions__item__criticality._const_tab = ____E_RABSetupItemBearerSURes_iE_Extensions__item__id_tab
+    ____E_RABSetupItemBearerSURes_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABSetupItemBearerSURes_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABSetupItemBearerSURes_iE_Extensions__item__criticality._const_tab = ____E_RABSetupItemBearerSURes_iE_Extensions__item__criticality_tab
     ___E_RABSetupItemBearerSURes_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___E_RABSetupItemBearerSURes_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___E_RABSetupItemBearerSURes_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___E_RABSetupItemBearerSURes_iE_Extensions__item__extensionValue._const_tab = ____E_RABSetupItemBearerSURes_iE_Extensions__item__id_tab
+    ____E_RABSetupItemBearerSURes_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABSetupItemBearerSURes_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABSetupItemBearerSURes_iE_Extensions__item__extensionValue._const_tab = ____E_RABSetupItemBearerSURes_iE_Extensions__item__extensionValue_tab
     ___E_RABSetupItemBearerSURes_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___E_RABSetupItemBearerSURes_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __E_RABSetupItemBearerSURes_iE_Extensions__item_._cont = ASN1Dict([
@@ -15353,11 +16013,15 @@ class S1AP_PDU_Contents:
     ___E_RABModifyItemBearerModRes_iE_Extensions__item__id._const_tab_at = None
     ___E_RABModifyItemBearerModRes_iE_Extensions__item__id._const_tab_id = u'id'
     ___E_RABModifyItemBearerModRes_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___E_RABModifyItemBearerModRes_iE_Extensions__item__criticality._const_tab = ____E_RABModifyItemBearerModRes_iE_Extensions__item__id_tab
+    ____E_RABModifyItemBearerModRes_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABModifyItemBearerModRes_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABModifyItemBearerModRes_iE_Extensions__item__criticality._const_tab = ____E_RABModifyItemBearerModRes_iE_Extensions__item__criticality_tab
     ___E_RABModifyItemBearerModRes_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___E_RABModifyItemBearerModRes_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___E_RABModifyItemBearerModRes_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___E_RABModifyItemBearerModRes_iE_Extensions__item__extensionValue._const_tab = ____E_RABModifyItemBearerModRes_iE_Extensions__item__id_tab
+    ____E_RABModifyItemBearerModRes_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABModifyItemBearerModRes_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABModifyItemBearerModRes_iE_Extensions__item__extensionValue._const_tab = ____E_RABModifyItemBearerModRes_iE_Extensions__item__extensionValue_tab
     ___E_RABModifyItemBearerModRes_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___E_RABModifyItemBearerModRes_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __E_RABModifyItemBearerModRes_iE_Extensions__item_._cont = ASN1Dict([
@@ -15516,11 +16180,15 @@ class S1AP_PDU_Contents:
     ___E_RABReleaseItemBearerRelComp_iE_Extensions__item__id._const_tab_at = None
     ___E_RABReleaseItemBearerRelComp_iE_Extensions__item__id._const_tab_id = u'id'
     ___E_RABReleaseItemBearerRelComp_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___E_RABReleaseItemBearerRelComp_iE_Extensions__item__criticality._const_tab = ____E_RABReleaseItemBearerRelComp_iE_Extensions__item__id_tab
+    ____E_RABReleaseItemBearerRelComp_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABReleaseItemBearerRelComp_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABReleaseItemBearerRelComp_iE_Extensions__item__criticality._const_tab = ____E_RABReleaseItemBearerRelComp_iE_Extensions__item__criticality_tab
     ___E_RABReleaseItemBearerRelComp_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___E_RABReleaseItemBearerRelComp_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___E_RABReleaseItemBearerRelComp_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___E_RABReleaseItemBearerRelComp_iE_Extensions__item__extensionValue._const_tab = ____E_RABReleaseItemBearerRelComp_iE_Extensions__item__id_tab
+    ____E_RABReleaseItemBearerRelComp_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABReleaseItemBearerRelComp_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABReleaseItemBearerRelComp_iE_Extensions__item__extensionValue._const_tab = ____E_RABReleaseItemBearerRelComp_iE_Extensions__item__extensionValue_tab
     ___E_RABReleaseItemBearerRelComp_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___E_RABReleaseItemBearerRelComp_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __E_RABReleaseItemBearerRelComp_iE_Extensions__item_._cont = ASN1Dict([
@@ -15857,11 +16525,15 @@ class S1AP_PDU_Contents:
     ___E_RABSetupItemCtxtSURes_iE_Extensions__item__id._const_tab_at = None
     ___E_RABSetupItemCtxtSURes_iE_Extensions__item__id._const_tab_id = u'id'
     ___E_RABSetupItemCtxtSURes_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___E_RABSetupItemCtxtSURes_iE_Extensions__item__criticality._const_tab = ____E_RABSetupItemCtxtSURes_iE_Extensions__item__id_tab
+    ____E_RABSetupItemCtxtSURes_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABSetupItemCtxtSURes_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABSetupItemCtxtSURes_iE_Extensions__item__criticality._const_tab = ____E_RABSetupItemCtxtSURes_iE_Extensions__item__criticality_tab
     ___E_RABSetupItemCtxtSURes_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___E_RABSetupItemCtxtSURes_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___E_RABSetupItemCtxtSURes_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___E_RABSetupItemCtxtSURes_iE_Extensions__item__extensionValue._const_tab = ____E_RABSetupItemCtxtSURes_iE_Extensions__item__id_tab
+    ____E_RABSetupItemCtxtSURes_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABSetupItemCtxtSURes_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABSetupItemCtxtSURes_iE_Extensions__item__extensionValue._const_tab = ____E_RABSetupItemCtxtSURes_iE_Extensions__item__extensionValue_tab
     ___E_RABSetupItemCtxtSURes_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___E_RABSetupItemCtxtSURes_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __E_RABSetupItemCtxtSURes_iE_Extensions__item_._cont = ASN1Dict([
@@ -16036,11 +16708,15 @@ class S1AP_PDU_Contents:
     ___TAIItem_iE_Extensions__item__id._const_tab_at = None
     ___TAIItem_iE_Extensions__item__id._const_tab_id = u'id'
     ___TAIItem_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___TAIItem_iE_Extensions__item__criticality._const_tab = ____TAIItem_iE_Extensions__item__id_tab
+    ____TAIItem_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TAIItem_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TAIItem_iE_Extensions__item__criticality._const_tab = ____TAIItem_iE_Extensions__item__criticality_tab
     ___TAIItem_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___TAIItem_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___TAIItem_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___TAIItem_iE_Extensions__item__extensionValue._const_tab = ____TAIItem_iE_Extensions__item__id_tab
+    ____TAIItem_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____TAIItem_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TAIItem_iE_Extensions__item__extensionValue._const_tab = ____TAIItem_iE_Extensions__item__extensionValue_tab
     ___TAIItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___TAIItem_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TAIItem_iE_Extensions__item_._cont = ASN1Dict([
@@ -18229,11 +18905,15 @@ class S1AP_PDU_Contents:
     ___PrivateMessage_privateIEs__item__id._const_tab_at = None
     ___PrivateMessage_privateIEs__item__id._const_tab_id = u'id'
     ___PrivateMessage_privateIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PRIVATE-IES'), [u'criticality']))
-    ___PrivateMessage_privateIEs__item__criticality._const_tab = ____PrivateMessage_privateIEs__item__id_tab
+    ____PrivateMessage_privateIEs__item__criticality_tab = CLASS(name='_tab_S1AP-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PRIVATE-IES')))
+    ____PrivateMessage_privateIEs__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PrivateMessage_privateIEs__item__criticality._const_tab = ____PrivateMessage_privateIEs__item__criticality_tab
     ___PrivateMessage_privateIEs__item__criticality._const_tab_at = ('..', u'id')
     ___PrivateMessage_privateIEs__item__criticality._const_tab_id = u'criticality'
     ___PrivateMessage_privateIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PRIVATE-IES'), [u'Value']))
-    ___PrivateMessage_privateIEs__item__value._const_tab = ____PrivateMessage_privateIEs__item__id_tab
+    ____PrivateMessage_privateIEs__item__value_tab = CLASS(name='_tab_S1AP-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PRIVATE-IES')))
+    ____PrivateMessage_privateIEs__item__value_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PrivateMessage_privateIEs__item__value._const_tab = ____PrivateMessage_privateIEs__item__value_tab
     ___PrivateMessage_privateIEs__item__value._const_tab_at = ('..', u'id')
     ___PrivateMessage_privateIEs__item__value._const_tab_id = u'Value'
     __PrivateMessage_privateIEs__item_._cont = ASN1Dict([
@@ -18680,11 +19360,15 @@ class S1AP_PDU_Contents:
     ___E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__id._const_tab_at = None
     ___E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__id._const_tab_id = u'id'
     ___E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__criticality._const_tab = ____E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__id_tab
+    ____E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__criticality._const_tab = ____E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__criticality_tab
     ___E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__extensionValue._const_tab = ____E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__id_tab
+    ____E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__extensionValue._const_tab = ____E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__extensionValue_tab
     ___E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __E_RABToBeModifiedItemBearerModInd_iE_Extensions__item_._cont = ASN1Dict([
@@ -18753,11 +19437,15 @@ class S1AP_PDU_Contents:
     ___E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__id._const_tab_at = None
     ___E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__id._const_tab_id = u'id'
     ___E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__criticality._const_tab = ____E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__id_tab
+    ____E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__criticality._const_tab = ____E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__criticality_tab
     ___E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__extensionValue._const_tab = ____E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__id_tab
+    ____E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__extensionValue._const_tab = ____E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__extensionValue_tab
     ___E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item_._cont = ASN1Dict([
@@ -18795,11 +19483,15 @@ class S1AP_PDU_Contents:
     ___CSGMembershipInfo_iE_Extensions__item__id._const_tab_at = None
     ___CSGMembershipInfo_iE_Extensions__item__id._const_tab_id = u'id'
     ___CSGMembershipInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___CSGMembershipInfo_iE_Extensions__item__criticality._const_tab = ____CSGMembershipInfo_iE_Extensions__item__id_tab
+    ____CSGMembershipInfo_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CSGMembershipInfo_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CSGMembershipInfo_iE_Extensions__item__criticality._const_tab = ____CSGMembershipInfo_iE_Extensions__item__criticality_tab
     ___CSGMembershipInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___CSGMembershipInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___CSGMembershipInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___CSGMembershipInfo_iE_Extensions__item__extensionValue._const_tab = ____CSGMembershipInfo_iE_Extensions__item__id_tab
+    ____CSGMembershipInfo_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____CSGMembershipInfo_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CSGMembershipInfo_iE_Extensions__item__extensionValue._const_tab = ____CSGMembershipInfo_iE_Extensions__item__extensionValue_tab
     ___CSGMembershipInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___CSGMembershipInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CSGMembershipInfo_iE_Extensions__item_._cont = ASN1Dict([
@@ -18916,11 +19608,15 @@ class S1AP_PDU_Contents:
     ___E_RABModifyItemBearerModConf_iE_Extensions__item__id._const_tab_at = None
     ___E_RABModifyItemBearerModConf_iE_Extensions__item__id._const_tab_id = u'id'
     ___E_RABModifyItemBearerModConf_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___E_RABModifyItemBearerModConf_iE_Extensions__item__criticality._const_tab = ____E_RABModifyItemBearerModConf_iE_Extensions__item__id_tab
+    ____E_RABModifyItemBearerModConf_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABModifyItemBearerModConf_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABModifyItemBearerModConf_iE_Extensions__item__criticality._const_tab = ____E_RABModifyItemBearerModConf_iE_Extensions__item__criticality_tab
     ___E_RABModifyItemBearerModConf_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___E_RABModifyItemBearerModConf_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___E_RABModifyItemBearerModConf_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___E_RABModifyItemBearerModConf_iE_Extensions__item__extensionValue._const_tab = ____E_RABModifyItemBearerModConf_iE_Extensions__item__id_tab
+    ____E_RABModifyItemBearerModConf_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABModifyItemBearerModConf_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABModifyItemBearerModConf_iE_Extensions__item__extensionValue._const_tab = ____E_RABModifyItemBearerModConf_iE_Extensions__item__extensionValue_tab
     ___E_RABModifyItemBearerModConf_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___E_RABModifyItemBearerModConf_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __E_RABModifyItemBearerModConf_iE_Extensions__item_._cont = ASN1Dict([
@@ -19205,11 +19901,15 @@ class S1AP_PDU_Contents:
     ___E_RABFailedToResumeItemResumeReq_iE_Extensions__item__id._const_tab_at = None
     ___E_RABFailedToResumeItemResumeReq_iE_Extensions__item__id._const_tab_id = u'id'
     ___E_RABFailedToResumeItemResumeReq_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___E_RABFailedToResumeItemResumeReq_iE_Extensions__item__criticality._const_tab = ____E_RABFailedToResumeItemResumeReq_iE_Extensions__item__id_tab
+    ____E_RABFailedToResumeItemResumeReq_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABFailedToResumeItemResumeReq_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABFailedToResumeItemResumeReq_iE_Extensions__item__criticality._const_tab = ____E_RABFailedToResumeItemResumeReq_iE_Extensions__item__criticality_tab
     ___E_RABFailedToResumeItemResumeReq_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___E_RABFailedToResumeItemResumeReq_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___E_RABFailedToResumeItemResumeReq_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___E_RABFailedToResumeItemResumeReq_iE_Extensions__item__extensionValue._const_tab = ____E_RABFailedToResumeItemResumeReq_iE_Extensions__item__id_tab
+    ____E_RABFailedToResumeItemResumeReq_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABFailedToResumeItemResumeReq_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABFailedToResumeItemResumeReq_iE_Extensions__item__extensionValue._const_tab = ____E_RABFailedToResumeItemResumeReq_iE_Extensions__item__extensionValue_tab
     ___E_RABFailedToResumeItemResumeReq_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___E_RABFailedToResumeItemResumeReq_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __E_RABFailedToResumeItemResumeReq_iE_Extensions__item_._cont = ASN1Dict([
@@ -19323,11 +20023,15 @@ class S1AP_PDU_Contents:
     ___E_RABFailedToResumeItemResumeRes_iE_Extensions__item__id._const_tab_at = None
     ___E_RABFailedToResumeItemResumeRes_iE_Extensions__item__id._const_tab_id = u'id'
     ___E_RABFailedToResumeItemResumeRes_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___E_RABFailedToResumeItemResumeRes_iE_Extensions__item__criticality._const_tab = ____E_RABFailedToResumeItemResumeRes_iE_Extensions__item__id_tab
+    ____E_RABFailedToResumeItemResumeRes_iE_Extensions__item__criticality_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABFailedToResumeItemResumeRes_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABFailedToResumeItemResumeRes_iE_Extensions__item__criticality._const_tab = ____E_RABFailedToResumeItemResumeRes_iE_Extensions__item__criticality_tab
     ___E_RABFailedToResumeItemResumeRes_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___E_RABFailedToResumeItemResumeRes_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___E_RABFailedToResumeItemResumeRes_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___E_RABFailedToResumeItemResumeRes_iE_Extensions__item__extensionValue._const_tab = ____E_RABFailedToResumeItemResumeRes_iE_Extensions__item__id_tab
+    ____E_RABFailedToResumeItemResumeRes_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_S1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('S1AP-Containers', 'S1AP-PROTOCOL-EXTENSION')))
+    ____E_RABFailedToResumeItemResumeRes_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_RABFailedToResumeItemResumeRes_iE_Extensions__item__extensionValue._const_tab = ____E_RABFailedToResumeItemResumeRes_iE_Extensions__item__extensionValue_tab
     ___E_RABFailedToResumeItemResumeRes_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___E_RABFailedToResumeItemResumeRes_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __E_RABFailedToResumeItemResumeRes_iE_Extensions__item_._cont = ASN1Dict([
@@ -19735,7 +20439,9 @@ class S1AP_PDU_Contents:
         _E_RABDataForwardingItem_uL_GTP_TEID,
         ____E_RABDataForwardingItem_iE_Extensions__item__id_tab,
         ___E_RABDataForwardingItem_iE_Extensions__item__id,
+        ____E_RABDataForwardingItem_iE_Extensions__item__criticality_tab,
         ___E_RABDataForwardingItem_iE_Extensions__item__criticality,
+        ____E_RABDataForwardingItem_iE_Extensions__item__extensionValue_tab,
         ___E_RABDataForwardingItem_iE_Extensions__item__extensionValue,
         __E_RABDataForwardingItem_iE_Extensions__item_,
         _E_RABDataForwardingItem_iE_Extensions,
@@ -19896,7 +20602,9 @@ class S1AP_PDU_Contents:
         _E_RABAdmittedItem_uL_GTP_TEID,
         ____E_RABAdmittedItem_iE_Extensions__item__id_tab,
         ___E_RABAdmittedItem_iE_Extensions__item__id,
+        ____E_RABAdmittedItem_iE_Extensions__item__criticality_tab,
         ___E_RABAdmittedItem_iE_Extensions__item__criticality,
+        ____E_RABAdmittedItem_iE_Extensions__item__extensionValue_tab,
         ___E_RABAdmittedItem_iE_Extensions__item__extensionValue,
         __E_RABAdmittedItem_iE_Extensions__item_,
         _E_RABAdmittedItem_iE_Extensions,
@@ -19915,7 +20623,9 @@ class S1AP_PDU_Contents:
         _E_RABFailedToSetupItemHOReqAck_cause,
         ____E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__id_tab,
         ___E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__id,
+        ____E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__criticality_tab,
         ___E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__criticality,
+        ____E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__extensionValue_tab,
         ___E_RABFailedToSetupItemHOReqAck_iE_Extensions__item__extensionValue,
         __E_RABFailedToSetupItemHOReqAck_iE_Extensions__item_,
         _E_RABFailedToSetupItemHOReqAck_iE_Extensions,
@@ -20009,7 +20719,9 @@ class S1AP_PDU_Contents:
         _E_RABToBeSwitchedDLItem_gTP_TEID,
         ____E_RABToBeSwitchedDLItem_iE_Extensions__item__id_tab,
         ___E_RABToBeSwitchedDLItem_iE_Extensions__item__id,
+        ____E_RABToBeSwitchedDLItem_iE_Extensions__item__criticality_tab,
         ___E_RABToBeSwitchedDLItem_iE_Extensions__item__criticality,
+        ____E_RABToBeSwitchedDLItem_iE_Extensions__item__extensionValue_tab,
         ___E_RABToBeSwitchedDLItem_iE_Extensions__item__extensionValue,
         __E_RABToBeSwitchedDLItem_iE_Extensions__item_,
         _E_RABToBeSwitchedDLItem_iE_Extensions,
@@ -20075,7 +20787,9 @@ class S1AP_PDU_Contents:
         _E_RABToBeSwitchedULItem_gTP_TEID,
         ____E_RABToBeSwitchedULItem_iE_Extensions__item__id_tab,
         ___E_RABToBeSwitchedULItem_iE_Extensions__item__id,
+        ____E_RABToBeSwitchedULItem_iE_Extensions__item__criticality_tab,
         ___E_RABToBeSwitchedULItem_iE_Extensions__item__criticality,
+        ____E_RABToBeSwitchedULItem_iE_Extensions__item__extensionValue_tab,
         ___E_RABToBeSwitchedULItem_iE_Extensions__item__extensionValue,
         __E_RABToBeSwitchedULItem_iE_Extensions__item_,
         _E_RABToBeSwitchedULItem_iE_Extensions,
@@ -20201,7 +20915,9 @@ class S1AP_PDU_Contents:
         _E_RABSetupItemBearerSURes_gTP_TEID,
         ____E_RABSetupItemBearerSURes_iE_Extensions__item__id_tab,
         ___E_RABSetupItemBearerSURes_iE_Extensions__item__id,
+        ____E_RABSetupItemBearerSURes_iE_Extensions__item__criticality_tab,
         ___E_RABSetupItemBearerSURes_iE_Extensions__item__criticality,
+        ____E_RABSetupItemBearerSURes_iE_Extensions__item__extensionValue_tab,
         ___E_RABSetupItemBearerSURes_iE_Extensions__item__extensionValue,
         __E_RABSetupItemBearerSURes_iE_Extensions__item_,
         _E_RABSetupItemBearerSURes_iE_Extensions,
@@ -20279,7 +20995,9 @@ class S1AP_PDU_Contents:
         _E_RABModifyItemBearerModRes_e_RAB_ID,
         ____E_RABModifyItemBearerModRes_iE_Extensions__item__id_tab,
         ___E_RABModifyItemBearerModRes_iE_Extensions__item__id,
+        ____E_RABModifyItemBearerModRes_iE_Extensions__item__criticality_tab,
         ___E_RABModifyItemBearerModRes_iE_Extensions__item__criticality,
+        ____E_RABModifyItemBearerModRes_iE_Extensions__item__extensionValue_tab,
         ___E_RABModifyItemBearerModRes_iE_Extensions__item__extensionValue,
         __E_RABModifyItemBearerModRes_iE_Extensions__item_,
         _E_RABModifyItemBearerModRes_iE_Extensions,
@@ -20337,7 +21055,9 @@ class S1AP_PDU_Contents:
         _E_RABReleaseItemBearerRelComp_e_RAB_ID,
         ____E_RABReleaseItemBearerRelComp_iE_Extensions__item__id_tab,
         ___E_RABReleaseItemBearerRelComp_iE_Extensions__item__id,
+        ____E_RABReleaseItemBearerRelComp_iE_Extensions__item__criticality_tab,
         ___E_RABReleaseItemBearerRelComp_iE_Extensions__item__criticality,
+        ____E_RABReleaseItemBearerRelComp_iE_Extensions__item__extensionValue_tab,
         ___E_RABReleaseItemBearerRelComp_iE_Extensions__item__extensionValue,
         __E_RABReleaseItemBearerRelComp_iE_Extensions__item_,
         _E_RABReleaseItemBearerRelComp_iE_Extensions,
@@ -20491,7 +21211,9 @@ class S1AP_PDU_Contents:
         _E_RABSetupItemCtxtSURes_gTP_TEID,
         ____E_RABSetupItemCtxtSURes_iE_Extensions__item__id_tab,
         ___E_RABSetupItemCtxtSURes_iE_Extensions__item__id,
+        ____E_RABSetupItemCtxtSURes_iE_Extensions__item__criticality_tab,
         ___E_RABSetupItemCtxtSURes_iE_Extensions__item__criticality,
+        ____E_RABSetupItemCtxtSURes_iE_Extensions__item__extensionValue_tab,
         ___E_RABSetupItemCtxtSURes_iE_Extensions__item__extensionValue,
         __E_RABSetupItemCtxtSURes_iE_Extensions__item_,
         _E_RABSetupItemCtxtSURes_iE_Extensions,
@@ -20563,7 +21285,9 @@ class S1AP_PDU_Contents:
         _TAIItem_tAI,
         ____TAIItem_iE_Extensions__item__id_tab,
         ___TAIItem_iE_Extensions__item__id,
+        ____TAIItem_iE_Extensions__item__criticality_tab,
         ___TAIItem_iE_Extensions__item__criticality,
+        ____TAIItem_iE_Extensions__item__extensionValue_tab,
         ___TAIItem_iE_Extensions__item__extensionValue,
         __TAIItem_iE_Extensions__item_,
         _TAIItem_iE_Extensions,
@@ -21423,7 +22147,9 @@ class S1AP_PDU_Contents:
         _MMEConfigurationTransferIEs_val_Value_1,
         ____PrivateMessage_privateIEs__item__id_tab,
         ___PrivateMessage_privateIEs__item__id,
+        ____PrivateMessage_privateIEs__item__criticality_tab,
         ___PrivateMessage_privateIEs__item__criticality,
+        ____PrivateMessage_privateIEs__item__value_tab,
         ___PrivateMessage_privateIEs__item__value,
         __PrivateMessage_privateIEs__item_,
         _PrivateMessage_privateIEs,
@@ -21581,7 +22307,9 @@ class S1AP_PDU_Contents:
         _E_RABToBeModifiedItemBearerModInd_dL_GTP_TEID,
         ____E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__id_tab,
         ___E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__id,
+        ____E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__criticality_tab,
         ___E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__criticality,
+        ____E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__extensionValue_tab,
         ___E_RABToBeModifiedItemBearerModInd_iE_Extensions__item__extensionValue,
         __E_RABToBeModifiedItemBearerModInd_iE_Extensions__item_,
         _E_RABToBeModifiedItemBearerModInd_iE_Extensions,
@@ -21601,7 +22329,9 @@ class S1AP_PDU_Contents:
         _E_RABNotToBeModifiedItemBearerModInd_dL_GTP_TEID,
         ____E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__id_tab,
         ___E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__id,
+        ____E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__criticality_tab,
         ___E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__criticality,
+        ____E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__extensionValue_tab,
         ___E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item__extensionValue,
         __E_RABNotToBeModifiedItemBearerModInd_iE_Extensions__item_,
         _E_RABNotToBeModifiedItemBearerModInd_iE_Extensions,
@@ -21613,7 +22343,9 @@ class S1AP_PDU_Contents:
         _CSGMembershipInfo_pLMNidentity,
         ____CSGMembershipInfo_iE_Extensions__item__id_tab,
         ___CSGMembershipInfo_iE_Extensions__item__id,
+        ____CSGMembershipInfo_iE_Extensions__item__criticality_tab,
         ___CSGMembershipInfo_iE_Extensions__item__criticality,
+        ____CSGMembershipInfo_iE_Extensions__item__extensionValue_tab,
         ___CSGMembershipInfo_iE_Extensions__item__extensionValue,
         __CSGMembershipInfo_iE_Extensions__item_,
         _CSGMembershipInfo_iE_Extensions,
@@ -21653,7 +22385,9 @@ class S1AP_PDU_Contents:
         _E_RABModifyItemBearerModConf_e_RAB_ID,
         ____E_RABModifyItemBearerModConf_iE_Extensions__item__id_tab,
         ___E_RABModifyItemBearerModConf_iE_Extensions__item__id,
+        ____E_RABModifyItemBearerModConf_iE_Extensions__item__criticality_tab,
         ___E_RABModifyItemBearerModConf_iE_Extensions__item__criticality,
+        ____E_RABModifyItemBearerModConf_iE_Extensions__item__extensionValue_tab,
         ___E_RABModifyItemBearerModConf_iE_Extensions__item__extensionValue,
         __E_RABModifyItemBearerModConf_iE_Extensions__item_,
         _E_RABModifyItemBearerModConf_iE_Extensions,
@@ -21756,7 +22490,9 @@ class S1AP_PDU_Contents:
         _E_RABFailedToResumeItemResumeReq_cause,
         ____E_RABFailedToResumeItemResumeReq_iE_Extensions__item__id_tab,
         ___E_RABFailedToResumeItemResumeReq_iE_Extensions__item__id,
+        ____E_RABFailedToResumeItemResumeReq_iE_Extensions__item__criticality_tab,
         ___E_RABFailedToResumeItemResumeReq_iE_Extensions__item__criticality,
+        ____E_RABFailedToResumeItemResumeReq_iE_Extensions__item__extensionValue_tab,
         ___E_RABFailedToResumeItemResumeReq_iE_Extensions__item__extensionValue,
         __E_RABFailedToResumeItemResumeReq_iE_Extensions__item_,
         _E_RABFailedToResumeItemResumeReq_iE_Extensions,
@@ -21795,7 +22531,9 @@ class S1AP_PDU_Contents:
         _E_RABFailedToResumeItemResumeRes_cause,
         ____E_RABFailedToResumeItemResumeRes_iE_Extensions__item__id_tab,
         ___E_RABFailedToResumeItemResumeRes_iE_Extensions__item__id,
+        ____E_RABFailedToResumeItemResumeRes_iE_Extensions__item__criticality_tab,
         ___E_RABFailedToResumeItemResumeRes_iE_Extensions__item__criticality,
+        ____E_RABFailedToResumeItemResumeRes_iE_Extensions__item__extensionValue_tab,
         ___E_RABFailedToResumeItemResumeRes_iE_Extensions__item__extensionValue,
         __E_RABFailedToResumeItemResumeRes_iE_Extensions__item_,
         _E_RABFailedToResumeItemResumeRes_iE_Extensions,

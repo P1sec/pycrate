@@ -1027,11 +1027,15 @@ class M2AP_Ies:
     ___AllocationAndRetentionPriority_iE_Extensions__item__id._const_tab_at = None
     ___AllocationAndRetentionPriority_iE_Extensions__item__id._const_tab_id = u'id'
     ___AllocationAndRetentionPriority_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___AllocationAndRetentionPriority_iE_Extensions__item__criticality._const_tab = ____AllocationAndRetentionPriority_iE_Extensions__item__id_tab
+    ____AllocationAndRetentionPriority_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____AllocationAndRetentionPriority_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AllocationAndRetentionPriority_iE_Extensions__item__criticality._const_tab = ____AllocationAndRetentionPriority_iE_Extensions__item__criticality_tab
     ___AllocationAndRetentionPriority_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___AllocationAndRetentionPriority_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___AllocationAndRetentionPriority_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___AllocationAndRetentionPriority_iE_Extensions__item__extensionValue._const_tab = ____AllocationAndRetentionPriority_iE_Extensions__item__id_tab
+    ____AllocationAndRetentionPriority_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____AllocationAndRetentionPriority_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AllocationAndRetentionPriority_iE_Extensions__item__extensionValue._const_tab = ____AllocationAndRetentionPriority_iE_Extensions__item__extensionValue_tab
     ___AllocationAndRetentionPriority_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___AllocationAndRetentionPriority_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __AllocationAndRetentionPriority_iE_Extensions__item_._cont = ASN1Dict([
@@ -1114,11 +1118,15 @@ class M2AP_Ies:
     ___Cell_Information_iE_Extensions__item__id._const_tab_at = None
     ___Cell_Information_iE_Extensions__item__id._const_tab_id = u'id'
     ___Cell_Information_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Cell_Information_iE_Extensions__item__criticality._const_tab = ____Cell_Information_iE_Extensions__item__id_tab
+    ____Cell_Information_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____Cell_Information_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Cell_Information_iE_Extensions__item__criticality._const_tab = ____Cell_Information_iE_Extensions__item__criticality_tab
     ___Cell_Information_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___Cell_Information_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___Cell_Information_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Cell_Information_iE_Extensions__item__extensionValue._const_tab = ____Cell_Information_iE_Extensions__item__id_tab
+    ____Cell_Information_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____Cell_Information_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Cell_Information_iE_Extensions__item__extensionValue._const_tab = ____Cell_Information_iE_Extensions__item__extensionValue_tab
     ___Cell_Information_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Cell_Information_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Cell_Information_iE_Extensions__item_._cont = ASN1Dict([
@@ -1161,11 +1169,15 @@ class M2AP_Ies:
     ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_at = None
     ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_id = u'id'
     ___CriticalityDiagnostics_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__id_tab
+    ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab
     ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___CriticalityDiagnostics_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__id_tab
+    ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab
     ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CriticalityDiagnostics_iE_Extensions__item_._cont = ASN1Dict([
@@ -1204,11 +1216,15 @@ class M2AP_Ies:
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab_at = None
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab_id = u'id'
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab
+    _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab
+    _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_._cont = ASN1Dict([
@@ -1246,11 +1262,15 @@ class M2AP_Ies:
     ___ECGI_iE_Extensions__item__id._const_tab_at = None
     ___ECGI_iE_Extensions__item__id._const_tab_id = u'id'
     ___ECGI_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___ECGI_iE_Extensions__item__criticality._const_tab = ____ECGI_iE_Extensions__item__id_tab
+    ____ECGI_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____ECGI_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ECGI_iE_Extensions__item__criticality._const_tab = ____ECGI_iE_Extensions__item__criticality_tab
     ___ECGI_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___ECGI_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___ECGI_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___ECGI_iE_Extensions__item__extensionValue._const_tab = ____ECGI_iE_Extensions__item__id_tab
+    ____ECGI_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____ECGI_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ECGI_iE_Extensions__item__extensionValue._const_tab = ____ECGI_iE_Extensions__item__extensionValue_tab
     ___ECGI_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___ECGI_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ECGI_iE_Extensions__item_._cont = ASN1Dict([
@@ -1301,11 +1321,15 @@ class M2AP_Ies:
     ___ENB_MBMS_Configuration_data_Item_iE_Extensions__item__id._const_tab_at = None
     ___ENB_MBMS_Configuration_data_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___ENB_MBMS_Configuration_data_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___ENB_MBMS_Configuration_data_Item_iE_Extensions__item__criticality._const_tab = ____ENB_MBMS_Configuration_data_Item_iE_Extensions__item__id_tab
+    ____ENB_MBMS_Configuration_data_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____ENB_MBMS_Configuration_data_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ENB_MBMS_Configuration_data_Item_iE_Extensions__item__criticality._const_tab = ____ENB_MBMS_Configuration_data_Item_iE_Extensions__item__criticality_tab
     ___ENB_MBMS_Configuration_data_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___ENB_MBMS_Configuration_data_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___ENB_MBMS_Configuration_data_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___ENB_MBMS_Configuration_data_Item_iE_Extensions__item__extensionValue._const_tab = ____ENB_MBMS_Configuration_data_Item_iE_Extensions__item__id_tab
+    ____ENB_MBMS_Configuration_data_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____ENB_MBMS_Configuration_data_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ENB_MBMS_Configuration_data_Item_iE_Extensions__item__extensionValue._const_tab = ____ENB_MBMS_Configuration_data_Item_iE_Extensions__item__extensionValue_tab
     ___ENB_MBMS_Configuration_data_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___ENB_MBMS_Configuration_data_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ENB_MBMS_Configuration_data_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -1363,11 +1387,15 @@ class M2AP_Ies:
     ___GBR_QosInformation_iE_Extensions__item__id._const_tab_at = None
     ___GBR_QosInformation_iE_Extensions__item__id._const_tab_id = u'id'
     ___GBR_QosInformation_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GBR_QosInformation_iE_Extensions__item__criticality._const_tab = ____GBR_QosInformation_iE_Extensions__item__id_tab
+    ____GBR_QosInformation_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____GBR_QosInformation_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GBR_QosInformation_iE_Extensions__item__criticality._const_tab = ____GBR_QosInformation_iE_Extensions__item__criticality_tab
     ___GBR_QosInformation_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GBR_QosInformation_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GBR_QosInformation_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GBR_QosInformation_iE_Extensions__item__extensionValue._const_tab = ____GBR_QosInformation_iE_Extensions__item__id_tab
+    ____GBR_QosInformation_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____GBR_QosInformation_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GBR_QosInformation_iE_Extensions__item__extensionValue._const_tab = ____GBR_QosInformation_iE_Extensions__item__extensionValue_tab
     ___GBR_QosInformation_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GBR_QosInformation_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GBR_QosInformation_iE_Extensions__item_._cont = ASN1Dict([
@@ -1402,11 +1430,15 @@ class M2AP_Ies:
     ___GlobalENB_ID_iE_Extensions__item__id._const_tab_at = None
     ___GlobalENB_ID_iE_Extensions__item__id._const_tab_id = u'id'
     ___GlobalENB_ID_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GlobalENB_ID_iE_Extensions__item__criticality._const_tab = ____GlobalENB_ID_iE_Extensions__item__id_tab
+    ____GlobalENB_ID_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____GlobalENB_ID_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GlobalENB_ID_iE_Extensions__item__criticality._const_tab = ____GlobalENB_ID_iE_Extensions__item__criticality_tab
     ___GlobalENB_ID_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GlobalENB_ID_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GlobalENB_ID_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GlobalENB_ID_iE_Extensions__item__extensionValue._const_tab = ____GlobalENB_ID_iE_Extensions__item__id_tab
+    ____GlobalENB_ID_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____GlobalENB_ID_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GlobalENB_ID_iE_Extensions__item__extensionValue._const_tab = ____GlobalENB_ID_iE_Extensions__item__extensionValue_tab
     ___GlobalENB_ID_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GlobalENB_ID_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GlobalENB_ID_iE_Extensions__item_._cont = ASN1Dict([
@@ -1441,11 +1473,15 @@ class M2AP_Ies:
     ___GlobalMCE_ID_iE_Extensions__item__id._const_tab_at = None
     ___GlobalMCE_ID_iE_Extensions__item__id._const_tab_id = u'id'
     ___GlobalMCE_ID_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GlobalMCE_ID_iE_Extensions__item__criticality._const_tab = ____GlobalMCE_ID_iE_Extensions__item__id_tab
+    ____GlobalMCE_ID_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____GlobalMCE_ID_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GlobalMCE_ID_iE_Extensions__item__criticality._const_tab = ____GlobalMCE_ID_iE_Extensions__item__criticality_tab
     ___GlobalMCE_ID_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GlobalMCE_ID_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GlobalMCE_ID_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GlobalMCE_ID_iE_Extensions__item__extensionValue._const_tab = ____GlobalMCE_ID_iE_Extensions__item__id_tab
+    ____GlobalMCE_ID_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____GlobalMCE_ID_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GlobalMCE_ID_iE_Extensions__item__extensionValue._const_tab = ____GlobalMCE_ID_iE_Extensions__item__extensionValue_tab
     ___GlobalMCE_ID_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GlobalMCE_ID_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GlobalMCE_ID_iE_Extensions__item_._cont = ASN1Dict([
@@ -1499,11 +1535,15 @@ class M2AP_Ies:
     ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id._const_tab_at = None
     ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id._const_tab_id = u'id'
     ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__criticality._const_tab = ____MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id_tab
+    ____MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__criticality._const_tab = ____MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__criticality_tab
     ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__extensionValue._const_tab = ____MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id_tab
+    ____MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__extensionValue._const_tab = ____MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__extensionValue_tab
     ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __MBMS_E_RAB_QoS_Parameters_iE_Extensions__item_._cont = ASN1Dict([
@@ -1539,11 +1579,15 @@ class M2AP_Ies:
     ___MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__id._const_tab_at = None
     ___MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__id._const_tab_id = u'id'
     ___MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__criticality._const_tab = ____MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__id_tab
+    ____MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__criticality._const_tab = ____MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__criticality_tab
     ___MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__extensionValue._const_tab = ____MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__id_tab
+    ____MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__extensionValue._const_tab = ____MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__extensionValue_tab
     ___MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item_._cont = ASN1Dict([
@@ -1592,11 +1636,15 @@ class M2AP_Ies:
     ____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__id._const_tab_at = None
     ____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__id._const_tab_id = u'id'
     ____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__criticality._const_tab = _____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__id_tab
+    _____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__criticality_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    _____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__criticality._const_tab = _____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__criticality_tab
     ____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__extensionValue._const_tab = _____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__id_tab
+    _____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    _____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__extensionValue._const_tab = _____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__extensionValue_tab
     ____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___MBMSsessionListPerPMCH_Item__item__iE_Extensions__item_._cont = ASN1Dict([
@@ -1633,11 +1681,15 @@ class M2AP_Ies:
     ____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__id._const_tab_at = None
     ____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__id._const_tab_id = u'id'
     ____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__criticality._const_tab = _____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__id_tab
+    _____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__criticality_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    _____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__criticality._const_tab = _____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__criticality_tab
     ____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__extensionValue._const_tab = _____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__id_tab
+    _____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    _____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__extensionValue._const_tab = _____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__extensionValue_tab
     ____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item_._cont = ASN1Dict([
@@ -1924,11 +1976,15 @@ class M2AP_Ies:
     ___SC_PTM_Information_iE_Extensions__item__id._const_tab_at = None
     ___SC_PTM_Information_iE_Extensions__item__id._const_tab_id = u'id'
     ___SC_PTM_Information_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___SC_PTM_Information_iE_Extensions__item__criticality._const_tab = ____SC_PTM_Information_iE_Extensions__item__id_tab
+    ____SC_PTM_Information_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____SC_PTM_Information_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SC_PTM_Information_iE_Extensions__item__criticality._const_tab = ____SC_PTM_Information_iE_Extensions__item__criticality_tab
     ___SC_PTM_Information_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___SC_PTM_Information_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___SC_PTM_Information_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___SC_PTM_Information_iE_Extensions__item__extensionValue._const_tab = ____SC_PTM_Information_iE_Extensions__item__id_tab
+    ____SC_PTM_Information_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____SC_PTM_Information_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SC_PTM_Information_iE_Extensions__item__extensionValue._const_tab = ____SC_PTM_Information_iE_Extensions__item__extensionValue_tab
     ___SC_PTM_Information_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___SC_PTM_Information_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __SC_PTM_Information_iE_Extensions__item_._cont = ASN1Dict([
@@ -1973,11 +2029,15 @@ class M2AP_Ies:
     __SubframeAllocationExtended_choice_extension_id._const_tab_at = None
     __SubframeAllocationExtended_choice_extension_id._const_tab_id = u'id'
     __SubframeAllocationExtended_choice_extension_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-IES'), [u'criticality']))
-    __SubframeAllocationExtended_choice_extension_criticality._const_tab = ___SubframeAllocationExtended_choice_extension_id_tab
+    ___SubframeAllocationExtended_choice_extension_criticality_tab = CLASS(name='_tab_M2AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-IES')))
+    ___SubframeAllocationExtended_choice_extension_criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    __SubframeAllocationExtended_choice_extension_criticality._const_tab = ___SubframeAllocationExtended_choice_extension_criticality_tab
     __SubframeAllocationExtended_choice_extension_criticality._const_tab_at = ('..', u'id')
     __SubframeAllocationExtended_choice_extension_criticality._const_tab_id = u'criticality'
     __SubframeAllocationExtended_choice_extension_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-IES'), [u'Value']))
-    __SubframeAllocationExtended_choice_extension_value._const_tab = ___SubframeAllocationExtended_choice_extension_id_tab
+    ___SubframeAllocationExtended_choice_extension_value_tab = CLASS(name='_tab_M2AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-IES')))
+    ___SubframeAllocationExtended_choice_extension_value_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    __SubframeAllocationExtended_choice_extension_value._const_tab = ___SubframeAllocationExtended_choice_extension_value_tab
     __SubframeAllocationExtended_choice_extension_value._const_tab_at = ('..', u'id')
     __SubframeAllocationExtended_choice_extension_value._const_tab_id = u'Value'
     _SubframeAllocationExtended_choice_extension._cont = ASN1Dict([
@@ -2016,11 +2076,15 @@ class M2AP_Ies:
     ___TMGI_iE_Extensions__item__id._const_tab_at = None
     ___TMGI_iE_Extensions__item__id._const_tab_id = u'id'
     ___TMGI_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___TMGI_iE_Extensions__item__criticality._const_tab = ____TMGI_iE_Extensions__item__id_tab
+    ____TMGI_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____TMGI_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TMGI_iE_Extensions__item__criticality._const_tab = ____TMGI_iE_Extensions__item__criticality_tab
     ___TMGI_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___TMGI_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___TMGI_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___TMGI_iE_Extensions__item__extensionValue._const_tab = ____TMGI_iE_Extensions__item__id_tab
+    ____TMGI_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____TMGI_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TMGI_iE_Extensions__item__extensionValue._const_tab = ____TMGI_iE_Extensions__item__extensionValue_tab
     ___TMGI_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___TMGI_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TMGI_iE_Extensions__item_._cont = ASN1Dict([
@@ -2056,11 +2120,15 @@ class M2AP_Ies:
     ___TNL_Information_iE_Extensions__item__id._const_tab_at = None
     ___TNL_Information_iE_Extensions__item__id._const_tab_id = u'id'
     ___TNL_Information_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___TNL_Information_iE_Extensions__item__criticality._const_tab = ____TNL_Information_iE_Extensions__item__id_tab
+    ____TNL_Information_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____TNL_Information_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TNL_Information_iE_Extensions__item__criticality._const_tab = ____TNL_Information_iE_Extensions__item__criticality_tab
     ___TNL_Information_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___TNL_Information_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___TNL_Information_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___TNL_Information_iE_Extensions__item__extensionValue._const_tab = ____TNL_Information_iE_Extensions__item__id_tab
+    ____TNL_Information_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____TNL_Information_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TNL_Information_iE_Extensions__item__extensionValue._const_tab = ____TNL_Information_iE_Extensions__item__extensionValue_tab
     ___TNL_Information_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___TNL_Information_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TNL_Information_iE_Extensions__item_._cont = ASN1Dict([
@@ -2095,7 +2163,9 @@ class M2AP_Ies:
         _AllocationAndRetentionPriority_pre_emptionVulnerability,
         ____AllocationAndRetentionPriority_iE_Extensions__item__id_tab,
         ___AllocationAndRetentionPriority_iE_Extensions__item__id,
+        ____AllocationAndRetentionPriority_iE_Extensions__item__criticality_tab,
         ___AllocationAndRetentionPriority_iE_Extensions__item__criticality,
+        ____AllocationAndRetentionPriority_iE_Extensions__item__extensionValue_tab,
         ___AllocationAndRetentionPriority_iE_Extensions__item__extensionValue,
         __AllocationAndRetentionPriority_iE_Extensions__item_,
         _AllocationAndRetentionPriority_iE_Extensions,
@@ -2117,7 +2187,9 @@ class M2AP_Ies:
         _Cell_Information_cellReservationInfo,
         ____Cell_Information_iE_Extensions__item__id_tab,
         ___Cell_Information_iE_Extensions__item__id,
+        ____Cell_Information_iE_Extensions__item__criticality_tab,
         ___Cell_Information_iE_Extensions__item__criticality,
+        ____Cell_Information_iE_Extensions__item__extensionValue_tab,
         ___Cell_Information_iE_Extensions__item__extensionValue,
         __Cell_Information_iE_Extensions__item_,
         _Cell_Information_iE_Extensions,
@@ -2131,7 +2203,9 @@ class M2AP_Ies:
         _CriticalityDiagnostics_iEsCriticalityDiagnostics,
         ____CriticalityDiagnostics_iE_Extensions__item__id_tab,
         ___CriticalityDiagnostics_iE_Extensions__item__id,
+        ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab,
         ___CriticalityDiagnostics_iE_Extensions__item__criticality,
+        ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab,
         ___CriticalityDiagnostics_iE_Extensions__item__extensionValue,
         __CriticalityDiagnostics_iE_Extensions__item_,
         _CriticalityDiagnostics_iE_Extensions,
@@ -2142,7 +2216,9 @@ class M2AP_Ies:
         __CriticalityDiagnostics_IE_List__item__typeOfError,
         _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab,
         ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id,
+        _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab,
         ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality,
+        _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab,
         ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue,
         ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_,
         __CriticalityDiagnostics_IE_List__item__iE_Extensions,
@@ -2153,7 +2229,9 @@ class M2AP_Ies:
         _ECGI_eUTRANcellIdentifier,
         ____ECGI_iE_Extensions__item__id_tab,
         ___ECGI_iE_Extensions__item__id,
+        ____ECGI_iE_Extensions__item__criticality_tab,
         ___ECGI_iE_Extensions__item__criticality,
+        ____ECGI_iE_Extensions__item__extensionValue_tab,
         ___ECGI_iE_Extensions__item__extensionValue,
         __ECGI_iE_Extensions__item_,
         _ECGI_iE_Extensions,
@@ -2168,7 +2246,9 @@ class M2AP_Ies:
         _ENB_MBMS_Configuration_data_Item_mbmsServiceAreaList,
         ____ENB_MBMS_Configuration_data_Item_iE_Extensions__item__id_tab,
         ___ENB_MBMS_Configuration_data_Item_iE_Extensions__item__id,
+        ____ENB_MBMS_Configuration_data_Item_iE_Extensions__item__criticality_tab,
         ___ENB_MBMS_Configuration_data_Item_iE_Extensions__item__criticality,
+        ____ENB_MBMS_Configuration_data_Item_iE_Extensions__item__extensionValue_tab,
         ___ENB_MBMS_Configuration_data_Item_iE_Extensions__item__extensionValue,
         __ENB_MBMS_Configuration_data_Item_iE_Extensions__item_,
         _ENB_MBMS_Configuration_data_Item_iE_Extensions,
@@ -2184,7 +2264,9 @@ class M2AP_Ies:
         _GBR_QosInformation_mBMS_E_RAB_GuaranteedBitrateDL,
         ____GBR_QosInformation_iE_Extensions__item__id_tab,
         ___GBR_QosInformation_iE_Extensions__item__id,
+        ____GBR_QosInformation_iE_Extensions__item__criticality_tab,
         ___GBR_QosInformation_iE_Extensions__item__criticality,
+        ____GBR_QosInformation_iE_Extensions__item__extensionValue_tab,
         ___GBR_QosInformation_iE_Extensions__item__extensionValue,
         __GBR_QosInformation_iE_Extensions__item_,
         _GBR_QosInformation_iE_Extensions,
@@ -2194,7 +2276,9 @@ class M2AP_Ies:
         _GlobalENB_ID_eNB_ID,
         ____GlobalENB_ID_iE_Extensions__item__id_tab,
         ___GlobalENB_ID_iE_Extensions__item__id,
+        ____GlobalENB_ID_iE_Extensions__item__criticality_tab,
         ___GlobalENB_ID_iE_Extensions__item__criticality,
+        ____GlobalENB_ID_iE_Extensions__item__extensionValue_tab,
         ___GlobalENB_ID_iE_Extensions__item__extensionValue,
         __GlobalENB_ID_iE_Extensions__item_,
         _GlobalENB_ID_iE_Extensions,
@@ -2204,7 +2288,9 @@ class M2AP_Ies:
         _GlobalMCE_ID_mCE_ID,
         ____GlobalMCE_ID_iE_Extensions__item__id_tab,
         ___GlobalMCE_ID_iE_Extensions__item__id,
+        ____GlobalMCE_ID_iE_Extensions__item__criticality_tab,
         ___GlobalMCE_ID_iE_Extensions__item__criticality,
+        ____GlobalMCE_ID_iE_Extensions__item__extensionValue_tab,
         ___GlobalMCE_ID_iE_Extensions__item__extensionValue,
         __GlobalMCE_ID_iE_Extensions__item_,
         _GlobalMCE_ID_iE_Extensions,
@@ -2220,7 +2306,9 @@ class M2AP_Ies:
         _MBMS_E_RAB_QoS_Parameters_allocationAndRetentionPriority,
         ____MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id_tab,
         ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id,
+        ____MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__criticality_tab,
         ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__criticality,
+        ____MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__extensionValue_tab,
         ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__extensionValue,
         __MBMS_E_RAB_QoS_Parameters_iE_Extensions__item_,
         _MBMS_E_RAB_QoS_Parameters_iE_Extensions,
@@ -2230,7 +2318,9 @@ class M2AP_Ies:
         _MBMS_Service_associatedLogicalM2_ConnectionItem_mCE_MBMS_M2AP_ID,
         ____MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__id_tab,
         ___MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__id,
+        ____MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__criticality_tab,
         ___MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__criticality,
+        ____MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__extensionValue_tab,
         ___MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item__extensionValue,
         __MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions__item_,
         _MBMS_Service_associatedLogicalM2_ConnectionItem_iE_Extensions,
@@ -2244,7 +2334,9 @@ class M2AP_Ies:
         __MBMSsessionListPerPMCH_Item__item__lcid,
         _____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__id_tab,
         ____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__id,
+        _____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__criticality_tab,
         ____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__criticality,
+        _____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__extensionValue_tab,
         ____MBMSsessionListPerPMCH_Item__item__iE_Extensions__item__extensionValue,
         ___MBMSsessionListPerPMCH_Item__item__iE_Extensions__item_,
         __MBMSsessionListPerPMCH_Item__item__iE_Extensions,
@@ -2254,7 +2346,9 @@ class M2AP_Ies:
         __MBMSsessionsToBeSuspendedListPerPMCH_Item__item__tmgi,
         _____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__id_tab,
         ____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__id,
+        _____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__criticality_tab,
         ____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__criticality,
+        _____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__extensionValue_tab,
         ____MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item__extensionValue,
         ___MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions__item_,
         __MBMSsessionsToBeSuspendedListPerPMCH_Item__item__iE_Extensions,
@@ -2337,7 +2431,9 @@ class M2AP_Ies:
         _SC_PTM_Information_mbms_E_RAB_QoS_Parameters,
         ____SC_PTM_Information_iE_Extensions__item__id_tab,
         ___SC_PTM_Information_iE_Extensions__item__id,
+        ____SC_PTM_Information_iE_Extensions__item__criticality_tab,
         ___SC_PTM_Information_iE_Extensions__item__criticality,
+        ____SC_PTM_Information_iE_Extensions__item__extensionValue_tab,
         ___SC_PTM_Information_iE_Extensions__item__extensionValue,
         __SC_PTM_Information_iE_Extensions__item_,
         _SC_PTM_Information_iE_Extensions,
@@ -2349,7 +2445,9 @@ class M2AP_Ies:
         _SubframeAllocationExtended_fourFrameExtension,
         ___SubframeAllocationExtended_choice_extension_id_tab,
         __SubframeAllocationExtended_choice_extension_id,
+        ___SubframeAllocationExtended_choice_extension_criticality_tab,
         __SubframeAllocationExtended_choice_extension_criticality,
+        ___SubframeAllocationExtended_choice_extension_value_tab,
         __SubframeAllocationExtended_choice_extension_value,
         _SubframeAllocationExtended_choice_extension,
         SubframeAllocationExtended,
@@ -2359,7 +2457,9 @@ class M2AP_Ies:
         _TMGI_serviceID,
         ____TMGI_iE_Extensions__item__id_tab,
         ___TMGI_iE_Extensions__item__id,
+        ____TMGI_iE_Extensions__item__criticality_tab,
         ___TMGI_iE_Extensions__item__criticality,
+        ____TMGI_iE_Extensions__item__extensionValue_tab,
         ___TMGI_iE_Extensions__item__extensionValue,
         __TMGI_iE_Extensions__item_,
         _TMGI_iE_Extensions,
@@ -2370,7 +2470,9 @@ class M2AP_Ies:
         _TNL_Information_gTP_TEID,
         ____TNL_Information_iE_Extensions__item__id_tab,
         ___TNL_Information_iE_Extensions__item__id,
+        ____TNL_Information_iE_Extensions__item__criticality_tab,
         ___TNL_Information_iE_Extensions__item__criticality,
+        ____TNL_Information_iE_Extensions__item__extensionValue_tab,
         ___TNL_Information_iE_Extensions__item__extensionValue,
         __TNL_Information_iE_Extensions__item_,
         _TNL_Information_iE_Extensions,
@@ -3101,11 +3203,15 @@ class M2AP_PDU_Contents:
     ___PMCH_Configuration_Item_iE_Extensions__item__id._const_tab_at = None
     ___PMCH_Configuration_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___PMCH_Configuration_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___PMCH_Configuration_Item_iE_Extensions__item__criticality._const_tab = ____PMCH_Configuration_Item_iE_Extensions__item__id_tab
+    ____PMCH_Configuration_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____PMCH_Configuration_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PMCH_Configuration_Item_iE_Extensions__item__criticality._const_tab = ____PMCH_Configuration_Item_iE_Extensions__item__criticality_tab
     ___PMCH_Configuration_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___PMCH_Configuration_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___PMCH_Configuration_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___PMCH_Configuration_Item_iE_Extensions__item__extensionValue._const_tab = ____PMCH_Configuration_Item_iE_Extensions__item__id_tab
+    ____PMCH_Configuration_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____PMCH_Configuration_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PMCH_Configuration_Item_iE_Extensions__item__extensionValue._const_tab = ____PMCH_Configuration_Item_iE_Extensions__item__extensionValue_tab
     ___PMCH_Configuration_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___PMCH_Configuration_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __PMCH_Configuration_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -3204,11 +3310,15 @@ class M2AP_PDU_Contents:
     ___MBMS_Suspension_Notification_Item_iE_Extensions__item__id._const_tab_at = None
     ___MBMS_Suspension_Notification_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___MBMS_Suspension_Notification_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___MBMS_Suspension_Notification_Item_iE_Extensions__item__criticality._const_tab = ____MBMS_Suspension_Notification_Item_iE_Extensions__item__id_tab
+    ____MBMS_Suspension_Notification_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____MBMS_Suspension_Notification_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___MBMS_Suspension_Notification_Item_iE_Extensions__item__criticality._const_tab = ____MBMS_Suspension_Notification_Item_iE_Extensions__item__criticality_tab
     ___MBMS_Suspension_Notification_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___MBMS_Suspension_Notification_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___MBMS_Suspension_Notification_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___MBMS_Suspension_Notification_Item_iE_Extensions__item__extensionValue._const_tab = ____MBMS_Suspension_Notification_Item_iE_Extensions__item__id_tab
+    ____MBMS_Suspension_Notification_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____MBMS_Suspension_Notification_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___MBMS_Suspension_Notification_Item_iE_Extensions__item__extensionValue._const_tab = ____MBMS_Suspension_Notification_Item_iE_Extensions__item__extensionValue_tab
     ___MBMS_Suspension_Notification_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___MBMS_Suspension_Notification_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __MBMS_Suspension_Notification_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -3939,11 +4049,15 @@ class M2AP_PDU_Contents:
     ___PrivateMessage_privateIEs__item__id._const_tab_at = None
     ___PrivateMessage_privateIEs__item__id._const_tab_id = u'id'
     ___PrivateMessage_privateIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PRIVATE-IES'), [u'criticality']))
-    ___PrivateMessage_privateIEs__item__criticality._const_tab = ____PrivateMessage_privateIEs__item__id_tab
+    ____PrivateMessage_privateIEs__item__criticality_tab = CLASS(name='_tab_M2AP-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PRIVATE-IES')))
+    ____PrivateMessage_privateIEs__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PrivateMessage_privateIEs__item__criticality._const_tab = ____PrivateMessage_privateIEs__item__criticality_tab
     ___PrivateMessage_privateIEs__item__criticality._const_tab_at = ('..', u'id')
     ___PrivateMessage_privateIEs__item__criticality._const_tab_id = u'criticality'
     ___PrivateMessage_privateIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PRIVATE-IES'), [u'Value']))
-    ___PrivateMessage_privateIEs__item__value._const_tab = ____PrivateMessage_privateIEs__item__id_tab
+    ____PrivateMessage_privateIEs__item__value_tab = CLASS(name='_tab_M2AP-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PRIVATE-IES')))
+    ____PrivateMessage_privateIEs__item__value_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PrivateMessage_privateIEs__item__value._const_tab = ____PrivateMessage_privateIEs__item__value_tab
     ___PrivateMessage_privateIEs__item__value._const_tab_at = ('..', u'id')
     ___PrivateMessage_privateIEs__item__value._const_tab_id = u'Value'
     __PrivateMessage_privateIEs__item_._cont = ASN1Dict([
@@ -4051,11 +4165,15 @@ class M2AP_PDU_Contents:
     ___MBMS_Counting_Request_SessionIE_iE_Extensions__item__id._const_tab_at = None
     ___MBMS_Counting_Request_SessionIE_iE_Extensions__item__id._const_tab_id = u'id'
     ___MBMS_Counting_Request_SessionIE_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___MBMS_Counting_Request_SessionIE_iE_Extensions__item__criticality._const_tab = ____MBMS_Counting_Request_SessionIE_iE_Extensions__item__id_tab
+    ____MBMS_Counting_Request_SessionIE_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____MBMS_Counting_Request_SessionIE_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___MBMS_Counting_Request_SessionIE_iE_Extensions__item__criticality._const_tab = ____MBMS_Counting_Request_SessionIE_iE_Extensions__item__criticality_tab
     ___MBMS_Counting_Request_SessionIE_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___MBMS_Counting_Request_SessionIE_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___MBMS_Counting_Request_SessionIE_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___MBMS_Counting_Request_SessionIE_iE_Extensions__item__extensionValue._const_tab = ____MBMS_Counting_Request_SessionIE_iE_Extensions__item__id_tab
+    ____MBMS_Counting_Request_SessionIE_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____MBMS_Counting_Request_SessionIE_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___MBMS_Counting_Request_SessionIE_iE_Extensions__item__extensionValue._const_tab = ____MBMS_Counting_Request_SessionIE_iE_Extensions__item__extensionValue_tab
     ___MBMS_Counting_Request_SessionIE_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___MBMS_Counting_Request_SessionIE_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __MBMS_Counting_Request_SessionIE_iE_Extensions__item_._cont = ASN1Dict([
@@ -4239,11 +4357,15 @@ class M2AP_PDU_Contents:
     ___MBMS_Counting_Result_iE_Extensions__item__id._const_tab_at = None
     ___MBMS_Counting_Result_iE_Extensions__item__id._const_tab_id = u'id'
     ___MBMS_Counting_Result_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___MBMS_Counting_Result_iE_Extensions__item__criticality._const_tab = ____MBMS_Counting_Result_iE_Extensions__item__id_tab
+    ____MBMS_Counting_Result_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____MBMS_Counting_Result_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___MBMS_Counting_Result_iE_Extensions__item__criticality._const_tab = ____MBMS_Counting_Result_iE_Extensions__item__criticality_tab
     ___MBMS_Counting_Result_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___MBMS_Counting_Result_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___MBMS_Counting_Result_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___MBMS_Counting_Result_iE_Extensions__item__extensionValue._const_tab = ____MBMS_Counting_Result_iE_Extensions__item__id_tab
+    ____MBMS_Counting_Result_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M2AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M2AP-Containers', 'M2AP-PROTOCOL-EXTENSION')))
+    ____MBMS_Counting_Result_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___MBMS_Counting_Result_iE_Extensions__item__extensionValue._const_tab = ____MBMS_Counting_Result_iE_Extensions__item__extensionValue_tab
     ___MBMS_Counting_Result_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___MBMS_Counting_Result_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __MBMS_Counting_Result_iE_Extensions__item_._cont = ASN1Dict([
@@ -4557,7 +4679,9 @@ class M2AP_PDU_Contents:
         _PMCH_Configuration_Item_mbms_Session_List,
         ____PMCH_Configuration_Item_iE_Extensions__item__id_tab,
         ___PMCH_Configuration_Item_iE_Extensions__item__id,
+        ____PMCH_Configuration_Item_iE_Extensions__item__criticality_tab,
         ___PMCH_Configuration_Item_iE_Extensions__item__criticality,
+        ____PMCH_Configuration_Item_iE_Extensions__item__extensionValue_tab,
         ___PMCH_Configuration_Item_iE_Extensions__item__extensionValue,
         __PMCH_Configuration_Item_iE_Extensions__item_,
         _PMCH_Configuration_Item_iE_Extensions,
@@ -4585,7 +4709,9 @@ class M2AP_PDU_Contents:
         _MBMS_Suspension_Notification_Item_mbms_Sessions_To_Be_Suspended_List,
         ____MBMS_Suspension_Notification_Item_iE_Extensions__item__id_tab,
         ___MBMS_Suspension_Notification_Item_iE_Extensions__item__id,
+        ____MBMS_Suspension_Notification_Item_iE_Extensions__item__criticality_tab,
         ___MBMS_Suspension_Notification_Item_iE_Extensions__item__criticality,
+        ____MBMS_Suspension_Notification_Item_iE_Extensions__item__extensionValue_tab,
         ___MBMS_Suspension_Notification_Item_iE_Extensions__item__extensionValue,
         __MBMS_Suspension_Notification_Item_iE_Extensions__item_,
         _MBMS_Suspension_Notification_Item_iE_Extensions,
@@ -4814,7 +4940,9 @@ class M2AP_PDU_Contents:
         _MBMS_Service_associatedLogicalM2_ConnectionItemResAck_val_Value_0,
         ____PrivateMessage_privateIEs__item__id_tab,
         ___PrivateMessage_privateIEs__item__id,
+        ____PrivateMessage_privateIEs__item__criticality_tab,
         ___PrivateMessage_privateIEs__item__criticality,
+        ____PrivateMessage_privateIEs__item__value_tab,
         ___PrivateMessage_privateIEs__item__value,
         __PrivateMessage_privateIEs__item_,
         _PrivateMessage_privateIEs,
@@ -4847,7 +4975,9 @@ class M2AP_PDU_Contents:
         _MBMS_Counting_Request_SessionIE_tmgi,
         ____MBMS_Counting_Request_SessionIE_iE_Extensions__item__id_tab,
         ___MBMS_Counting_Request_SessionIE_iE_Extensions__item__id,
+        ____MBMS_Counting_Request_SessionIE_iE_Extensions__item__criticality_tab,
         ___MBMS_Counting_Request_SessionIE_iE_Extensions__item__criticality,
+        ____MBMS_Counting_Request_SessionIE_iE_Extensions__item__extensionValue_tab,
         ___MBMS_Counting_Request_SessionIE_iE_Extensions__item__extensionValue,
         __MBMS_Counting_Request_SessionIE_iE_Extensions__item_,
         _MBMS_Counting_Request_SessionIE_iE_Extensions,
@@ -4901,7 +5031,9 @@ class M2AP_PDU_Contents:
         _MBMS_Counting_Result_countingResult,
         ____MBMS_Counting_Result_iE_Extensions__item__id_tab,
         ___MBMS_Counting_Result_iE_Extensions__item__id,
+        ____MBMS_Counting_Result_iE_Extensions__item__criticality_tab,
         ___MBMS_Counting_Result_iE_Extensions__item__criticality,
+        ____MBMS_Counting_Result_iE_Extensions__item__extensionValue_tab,
         ___MBMS_Counting_Result_iE_Extensions__item__extensionValue,
         __MBMS_Counting_Result_iE_Extensions__item_,
         _MBMS_Counting_Result_iE_Extensions,

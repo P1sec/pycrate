@@ -3807,7 +3807,9 @@ class MAP_ExtensionDataTypes:
     _PrivateExtension_extId._const_tab_at = None
     _PrivateExtension_extId._const_tab_id = u'extensionId'
     _PrivateExtension_extType = OPEN(name=u'extType', mode=MODE_TYPE, typeref=ASN1RefClassField(('MAP-ExtensionDataTypes', 'MAP-EXTENSION'), [u'ExtensionType']), opt=True)
-    _PrivateExtension_extType._const_tab = __PrivateExtension_extId_tab
+    __PrivateExtension_extType_tab = CLASS(name='_tab_MAP-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('MAP-ExtensionDataTypes', 'MAP-EXTENSION')))
+    __PrivateExtension_extType_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _PrivateExtension_extType._const_tab = __PrivateExtension_extType_tab
     _PrivateExtension_extType._const_tab_at = ('..', u'extId')
     _PrivateExtension_extType._const_tab_id = u'ExtensionType'
     PrivateExtension._cont = ASN1Dict([
@@ -3852,6 +3854,7 @@ class MAP_ExtensionDataTypes:
         PrivateExtensionList,
         __PrivateExtension_extId_tab,
         _PrivateExtension_extId,
+        __PrivateExtension_extType_tab,
         _PrivateExtension_extType,
         PrivateExtension,
         maxNumOfPrivateExtensions,

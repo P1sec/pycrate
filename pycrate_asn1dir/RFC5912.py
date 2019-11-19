@@ -480,7 +480,9 @@ class CryptographicMessageSyntax_2009:
     ___EnvelopedData_unprotectedAttrs__item__attrType._const_tab_id = u'id'
     ___EnvelopedData_unprotectedAttrs__item__attrValues = SET_OF(name=u'attrValues', mode=MODE_TYPE)
     ____EnvelopedData_unprotectedAttrs__item__attrValues__item_ = OPEN(name='_item_', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKIX-CommonTypes-2009', 'ATTRIBUTE'), [u'Type']))
-    ____EnvelopedData_unprotectedAttrs__item__attrValues__item_._const_tab = ____EnvelopedData_unprotectedAttrs__item__attrType_tab
+    _____EnvelopedData_unprotectedAttrs__item__attrValues__item__tab = CLASS(name='_tab_ATTRIBUTE', mode=MODE_SET, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'ATTRIBUTE')))
+    _____EnvelopedData_unprotectedAttrs__item__attrValues__item__tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____EnvelopedData_unprotectedAttrs__item__attrValues__item_._const_tab = _____EnvelopedData_unprotectedAttrs__item__attrValues__item__tab
     ____EnvelopedData_unprotectedAttrs__item__attrValues__item_._const_tab_at = ('..', '..', u'attrType')
     ____EnvelopedData_unprotectedAttrs__item__attrValues__item_._const_tab_id = u'Type'
     ___EnvelopedData_unprotectedAttrs__item__attrValues._cont = ____EnvelopedData_unprotectedAttrs__item__attrValues__item_
@@ -788,7 +790,9 @@ class CryptographicMessageSyntax_2009:
     _OtherRecipientInfo_oriType._const_tab_at = None
     _OtherRecipientInfo_oriType._const_tab_id = u'id'
     _OtherRecipientInfo_oriValue = OPEN(name=u'oriValue', mode=MODE_TYPE, typeref=ASN1RefClassField(('CryptographicMessageSyntax-2009', 'OTHER-RECIPIENT'), [u'Type']))
-    _OtherRecipientInfo_oriValue._const_tab = __OtherRecipientInfo_oriType_tab
+    __OtherRecipientInfo_oriValue_tab = CLASS(name='_tab_OTHER-RECIPIENT', mode=MODE_SET, typeref=ASN1RefType(('CryptographicMessageSyntax-2009', 'OTHER-RECIPIENT')))
+    __OtherRecipientInfo_oriValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _OtherRecipientInfo_oriValue._const_tab = __OtherRecipientInfo_oriValue_tab
     _OtherRecipientInfo_oriValue._const_tab_at = ('..', u'oriType')
     _OtherRecipientInfo_oriValue._const_tab_id = u'Type'
     OtherRecipientInfo._cont = ASN1Dict([
@@ -832,7 +836,9 @@ class CryptographicMessageSyntax_2009:
     ___EncryptedData_unprotectedAttrs__item__attrType._const_tab_id = u'id'
     ___EncryptedData_unprotectedAttrs__item__attrValues = SET_OF(name=u'attrValues', mode=MODE_TYPE)
     ____EncryptedData_unprotectedAttrs__item__attrValues__item_ = OPEN(name='_item_', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKIX-CommonTypes-2009', 'ATTRIBUTE'), [u'Type']))
-    ____EncryptedData_unprotectedAttrs__item__attrValues__item_._const_tab = ____EncryptedData_unprotectedAttrs__item__attrType_tab
+    _____EncryptedData_unprotectedAttrs__item__attrValues__item__tab = CLASS(name='_tab_ATTRIBUTE', mode=MODE_SET, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'ATTRIBUTE')))
+    _____EncryptedData_unprotectedAttrs__item__attrValues__item__tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____EncryptedData_unprotectedAttrs__item__attrValues__item_._const_tab = _____EncryptedData_unprotectedAttrs__item__attrValues__item__tab
     ____EncryptedData_unprotectedAttrs__item__attrValues__item_._const_tab_at = ('..', '..', u'attrType')
     ____EncryptedData_unprotectedAttrs__item__attrValues__item_._const_tab_id = u'Type'
     ___EncryptedData_unprotectedAttrs__item__attrValues._cont = ____EncryptedData_unprotectedAttrs__item__attrValues__item_
@@ -921,7 +927,9 @@ class CryptographicMessageSyntax_2009:
     __UnauthAttributes__item__attrType._const_tab_id = u'id'
     __UnauthAttributes__item__attrValues = SET_OF(name=u'attrValues', mode=MODE_TYPE)
     ___UnauthAttributes__item__attrValues__item_ = OPEN(name='_item_', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKIX-CommonTypes-2009', 'ATTRIBUTE'), [u'Type']))
-    ___UnauthAttributes__item__attrValues__item_._const_tab = ___UnauthAttributes__item__attrType_tab
+    ____UnauthAttributes__item__attrValues__item__tab = CLASS(name='_tab_ATTRIBUTE', mode=MODE_SET, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'ATTRIBUTE')))
+    ____UnauthAttributes__item__attrValues__item__tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UnauthAttributes__item__attrValues__item_._const_tab = ____UnauthAttributes__item__attrValues__item__tab
     ___UnauthAttributes__item__attrValues__item_._const_tab_at = ('..', '..', u'attrType')
     ___UnauthAttributes__item__attrValues__item_._const_tab_id = u'Type'
     __UnauthAttributes__item__attrValues._cont = ___UnauthAttributes__item__attrValues__item_
@@ -946,7 +954,9 @@ class CryptographicMessageSyntax_2009:
     _DigestAlgorithmIdentifier_algorithm._const_tab_at = None
     _DigestAlgorithmIdentifier_algorithm._const_tab_id = u'id'
     _DigestAlgorithmIdentifier_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM'), [u'Params']), opt=True)
-    _DigestAlgorithmIdentifier_parameters._const_tab = __DigestAlgorithmIdentifier_algorithm_tab
+    __DigestAlgorithmIdentifier_parameters_tab = CLASS(name='_tab_DIGEST-ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM')))
+    __DigestAlgorithmIdentifier_parameters_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _DigestAlgorithmIdentifier_parameters._const_tab = __DigestAlgorithmIdentifier_parameters_tab
     _DigestAlgorithmIdentifier_parameters._const_tab_at = ('..', u'algorithm')
     _DigestAlgorithmIdentifier_parameters._const_tab_id = u'Params'
     DigestAlgorithmIdentifier._cont = ASN1Dict([
@@ -968,7 +978,9 @@ class CryptographicMessageSyntax_2009:
     _SignatureAlgorithmIdentifier_algorithm._const_tab_at = None
     _SignatureAlgorithmIdentifier_algorithm._const_tab_id = u'id'
     _SignatureAlgorithmIdentifier_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'SIGNATURE-ALGORITHM'), [u'Params']), opt=True)
-    _SignatureAlgorithmIdentifier_parameters._const_tab = __SignatureAlgorithmIdentifier_algorithm_tab
+    __SignatureAlgorithmIdentifier_parameters_tab = CLASS(name='_tab_SIGNATURE-ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'SIGNATURE-ALGORITHM')))
+    __SignatureAlgorithmIdentifier_parameters_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _SignatureAlgorithmIdentifier_parameters._const_tab = __SignatureAlgorithmIdentifier_parameters_tab
     _SignatureAlgorithmIdentifier_parameters._const_tab_at = ('..', u'algorithm')
     _SignatureAlgorithmIdentifier_parameters._const_tab_id = u'Params'
     SignatureAlgorithmIdentifier._cont = ASN1Dict([
@@ -1104,7 +1116,9 @@ class CryptographicMessageSyntax_2009:
     _OtherRevocationInfoFormat_otherRevInfoFormat._const_tab_at = None
     _OtherRevocationInfoFormat_otherRevInfoFormat._const_tab_id = u'id'
     _OtherRevocationInfoFormat_otherRevInfo = OPEN(name=u'otherRevInfo', mode=MODE_TYPE, typeref=ASN1RefClassField(('CryptographicMessageSyntax-2009', 'OTHER-REVOK-INFO'), [u'Type']))
-    _OtherRevocationInfoFormat_otherRevInfo._const_tab = __OtherRevocationInfoFormat_otherRevInfoFormat_tab
+    __OtherRevocationInfoFormat_otherRevInfo_tab = CLASS(name='_tab_OTHER-REVOK-INFO', mode=MODE_SET, typeref=ASN1RefType(('CryptographicMessageSyntax-2009', 'OTHER-REVOK-INFO')))
+    __OtherRevocationInfoFormat_otherRevInfo_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _OtherRevocationInfoFormat_otherRevInfo._const_tab = __OtherRevocationInfoFormat_otherRevInfo_tab
     _OtherRevocationInfoFormat_otherRevInfo._const_tab_at = ('..', u'otherRevInfoFormat')
     _OtherRevocationInfoFormat_otherRevInfo._const_tab_id = u'Type'
     OtherRevocationInfoFormat._cont = ASN1Dict([
@@ -1148,7 +1162,9 @@ class CryptographicMessageSyntax_2009:
     _OtherCertificateFormat_otherCertFormat._const_tab_at = None
     _OtherCertificateFormat_otherCertFormat._const_tab_id = u'id'
     _OtherCertificateFormat_otherCert = OPEN(name=u'otherCert', mode=MODE_TYPE, typeref=ASN1RefClassField(('CryptographicMessageSyntax-2009', 'OTHER-CERT-FMT'), [u'Type']))
-    _OtherCertificateFormat_otherCert._const_tab = __OtherCertificateFormat_otherCertFormat_tab
+    __OtherCertificateFormat_otherCert_tab = CLASS(name='_tab_OTHER-CERT-FMT', mode=MODE_SET, typeref=ASN1RefType(('CryptographicMessageSyntax-2009', 'OTHER-CERT-FMT')))
+    __OtherCertificateFormat_otherCert_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _OtherCertificateFormat_otherCert._const_tab = __OtherCertificateFormat_otherCert_tab
     _OtherCertificateFormat_otherCert._const_tab_at = ('..', u'otherCertFormat')
     _OtherCertificateFormat_otherCert._const_tab_id = u'Type'
     OtherCertificateFormat._cont = ASN1Dict([
@@ -1195,7 +1211,9 @@ class CryptographicMessageSyntax_2009:
     _OtherKeyAttribute_keyAttrId._const_tab_at = None
     _OtherKeyAttribute_keyAttrId._const_tab_id = u'id'
     _OtherKeyAttribute_keyAttr = OPEN(name=u'keyAttr', mode=MODE_TYPE, typeref=ASN1RefClassField(('CryptographicMessageSyntax-2009', 'KEY-ATTRIBUTE'), [u'Type']))
-    _OtherKeyAttribute_keyAttr._const_tab = __OtherKeyAttribute_keyAttrId_tab
+    __OtherKeyAttribute_keyAttr_tab = CLASS(name='_tab_KEY-ATTRIBUTE', mode=MODE_SET, typeref=ASN1RefType(('CryptographicMessageSyntax-2009', 'KEY-ATTRIBUTE')))
+    __OtherKeyAttribute_keyAttr_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _OtherKeyAttribute_keyAttr._const_tab = __OtherKeyAttribute_keyAttr_tab
     _OtherKeyAttribute_keyAttr._const_tab_at = ('..', u'keyAttrId')
     _OtherKeyAttribute_keyAttr._const_tab_id = u'Type'
     OtherKeyAttribute._cont = ASN1Dict([
@@ -1444,6 +1462,7 @@ class CryptographicMessageSyntax_2009:
         _EnvelopedData_encryptedContentInfo,
         ____EnvelopedData_unprotectedAttrs__item__attrType_tab,
         ___EnvelopedData_unprotectedAttrs__item__attrType,
+        _____EnvelopedData_unprotectedAttrs__item__attrValues__item__tab,
         ____EnvelopedData_unprotectedAttrs__item__attrValues__item_,
         ___EnvelopedData_unprotectedAttrs__item__attrValues,
         __EnvelopedData_unprotectedAttrs__item_,
@@ -1551,6 +1570,7 @@ class CryptographicMessageSyntax_2009:
         OTHER_RECIPIENT,
         __OtherRecipientInfo_oriType_tab,
         _OtherRecipientInfo_oriType,
+        __OtherRecipientInfo_oriValue_tab,
         _OtherRecipientInfo_oriValue,
         OtherRecipientInfo,
         SupportedOtherRecipInfo,
@@ -1564,6 +1584,7 @@ class CryptographicMessageSyntax_2009:
         _EncryptedData_encryptedContentInfo,
         ____EncryptedData_unprotectedAttrs__item__attrType_tab,
         ___EncryptedData_unprotectedAttrs__item__attrType,
+        _____EncryptedData_unprotectedAttrs__item__attrValues__item__tab,
         ____EncryptedData_unprotectedAttrs__item__attrValues__item_,
         ___EncryptedData_unprotectedAttrs__item__attrValues,
         __EncryptedData_unprotectedAttrs__item_,
@@ -1595,6 +1616,7 @@ class CryptographicMessageSyntax_2009:
         MessageAuthenticationCode,
         ___UnauthAttributes__item__attrType_tab,
         __UnauthAttributes__item__attrType,
+        ____UnauthAttributes__item__attrValues__item__tab,
         ___UnauthAttributes__item__attrValues__item_,
         __UnauthAttributes__item__attrValues,
         _UnauthAttributes__item_,
@@ -1602,11 +1624,13 @@ class CryptographicMessageSyntax_2009:
         UnauthAttributeSet,
         __DigestAlgorithmIdentifier_algorithm_tab,
         _DigestAlgorithmIdentifier_algorithm,
+        __DigestAlgorithmIdentifier_parameters_tab,
         _DigestAlgorithmIdentifier_parameters,
         DigestAlgorithmIdentifier,
         DigestAlgorithmSet,
         __SignatureAlgorithmIdentifier_algorithm_tab,
         _SignatureAlgorithmIdentifier_algorithm,
+        __SignatureAlgorithmIdentifier_parameters_tab,
         _SignatureAlgorithmIdentifier_parameters,
         SignatureAlgorithmIdentifier,
         SignatureAlgorithmSet,
@@ -1649,6 +1673,7 @@ class CryptographicMessageSyntax_2009:
         OTHER_REVOK_INFO,
         __OtherRevocationInfoFormat_otherRevInfoFormat_tab,
         _OtherRevocationInfoFormat_otherRevInfoFormat,
+        __OtherRevocationInfoFormat_otherRevInfo_tab,
         _OtherRevocationInfoFormat_otherRevInfo,
         OtherRevocationInfoFormat,
         SupportedOtherRevokInfo,
@@ -1662,6 +1687,7 @@ class CryptographicMessageSyntax_2009:
         OTHER_CERT_FMT,
         __OtherCertificateFormat_otherCertFormat_tab,
         _OtherCertificateFormat_otherCertFormat,
+        __OtherCertificateFormat_otherCert_tab,
         _OtherCertificateFormat_otherCert,
         OtherCertificateFormat,
         SupportedCertFormats,
@@ -1675,6 +1701,7 @@ class CryptographicMessageSyntax_2009:
         KEY_ATTRIBUTE,
         __OtherKeyAttribute_keyAttrId_tab,
         _OtherKeyAttribute_keyAttrId,
+        __OtherKeyAttribute_keyAttr_tab,
         _OtherKeyAttribute_keyAttr,
         OtherKeyAttribute,
         SupportedKeyAttributes,
@@ -2039,7 +2066,9 @@ class CryptographicMessageSyntaxAlgorithms_2009:
     _PBKDF2_SaltSourcesAlgorithmIdentifier_algorithm._const_tab_at = None
     _PBKDF2_SaltSourcesAlgorithmIdentifier_algorithm._const_tab_id = u'id'
     _PBKDF2_SaltSourcesAlgorithmIdentifier_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'ALGORITHM'), [u'Params']), opt=True)
-    _PBKDF2_SaltSourcesAlgorithmIdentifier_parameters._const_tab = __PBKDF2_SaltSourcesAlgorithmIdentifier_algorithm_tab
+    __PBKDF2_SaltSourcesAlgorithmIdentifier_parameters_tab = CLASS(name='_tab_ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'ALGORITHM')))
+    __PBKDF2_SaltSourcesAlgorithmIdentifier_parameters_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _PBKDF2_SaltSourcesAlgorithmIdentifier_parameters._const_tab = __PBKDF2_SaltSourcesAlgorithmIdentifier_parameters_tab
     _PBKDF2_SaltSourcesAlgorithmIdentifier_parameters._const_tab_at = ('..', u'algorithm')
     _PBKDF2_SaltSourcesAlgorithmIdentifier_parameters._const_tab_id = u'Params'
     PBKDF2_SaltSourcesAlgorithmIdentifier._cont = ASN1Dict([
@@ -2195,6 +2224,7 @@ class CryptographicMessageSyntaxAlgorithms_2009:
         PBKDF2_SaltSources,
         __PBKDF2_SaltSourcesAlgorithmIdentifier_algorithm_tab,
         _PBKDF2_SaltSourcesAlgorithmIdentifier_algorithm,
+        __PBKDF2_SaltSourcesAlgorithmIdentifier_parameters_tab,
         _PBKDF2_SaltSourcesAlgorithmIdentifier_parameters,
         PBKDF2_SaltSourcesAlgorithmIdentifier,
         defaultPBKDF2,
@@ -2856,7 +2886,9 @@ class AttributeCertificateVersion1_2009:
     __AttributeCertificateInfoV1_signature_algorithm._const_tab_at = None
     __AttributeCertificateInfoV1_signature_algorithm._const_tab_id = u'id'
     __AttributeCertificateInfoV1_signature_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'SIGNATURE-ALGORITHM'), [u'Params']), opt=True)
-    __AttributeCertificateInfoV1_signature_parameters._const_tab = ___AttributeCertificateInfoV1_signature_algorithm_tab
+    ___AttributeCertificateInfoV1_signature_parameters_tab = CLASS(name='_tab_SIGNATURE-ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'SIGNATURE-ALGORITHM')))
+    ___AttributeCertificateInfoV1_signature_parameters_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    __AttributeCertificateInfoV1_signature_parameters._const_tab = ___AttributeCertificateInfoV1_signature_parameters_tab
     __AttributeCertificateInfoV1_signature_parameters._const_tab_at = ('..', u'algorithm')
     __AttributeCertificateInfoV1_signature_parameters._const_tab_id = u'Params'
     _AttributeCertificateInfoV1_signature._cont = ASN1Dict([
@@ -2876,7 +2908,9 @@ class AttributeCertificateVersion1_2009:
     ___AttributeCertificateInfoV1_attributes__item__type._const_tab_id = u'id'
     ___AttributeCertificateInfoV1_attributes__item__values = SET_OF(name=u'values', mode=MODE_TYPE)
     ____AttributeCertificateInfoV1_attributes__item__values__item_ = OPEN(name='_item_', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKIX-CommonTypes-2009', 'ATTRIBUTE'), [u'Type']))
-    ____AttributeCertificateInfoV1_attributes__item__values__item_._const_tab = ____AttributeCertificateInfoV1_attributes__item__type_tab
+    _____AttributeCertificateInfoV1_attributes__item__values__item__tab = CLASS(name='_tab_ATTRIBUTE', mode=MODE_SET, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'ATTRIBUTE')))
+    _____AttributeCertificateInfoV1_attributes__item__values__item__tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____AttributeCertificateInfoV1_attributes__item__values__item_._const_tab = _____AttributeCertificateInfoV1_attributes__item__values__item__tab
     ____AttributeCertificateInfoV1_attributes__item__values__item_._const_tab_at = ('..', '..', u'type')
     ____AttributeCertificateInfoV1_attributes__item__values__item_._const_tab_id = u'Type'
     ___AttributeCertificateInfoV1_attributes__item__values._cont = ____AttributeCertificateInfoV1_attributes__item__values__item_
@@ -2891,13 +2925,17 @@ class AttributeCertificateVersion1_2009:
     _AttributeCertificateInfoV1_extensions = SEQ_OF(name=u'extensions', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'Extensions')), opt=True)
     __AttributeCertificateInfoV1_extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'Extension')))
     ___AttributeCertificateInfoV1_extensions__item__extnID = OID(name=u'extnID', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKIX-CommonTypes-2009', 'EXTENSION'), [u'id']))
-    ___AttributeCertificateInfoV1_extensions__item__extnID._const_tab = ____AttributeCertificateInfoV1_attributes__item__type_tab
+    ____AttributeCertificateInfoV1_extensions__item__extnID_tab = CLASS(name='_tab_EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'EXTENSION')))
+    ____AttributeCertificateInfoV1_extensions__item__extnID_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AttributeCertificateInfoV1_extensions__item__extnID._const_tab = ____AttributeCertificateInfoV1_extensions__item__extnID_tab
     ___AttributeCertificateInfoV1_extensions__item__extnID._const_tab_at = None
     ___AttributeCertificateInfoV1_extensions__item__extnID._const_tab_id = u'id'
     ___AttributeCertificateInfoV1_extensions__item__critical = BOOL(name=u'critical', mode=MODE_TYPE, default=False)
     ___AttributeCertificateInfoV1_extensions__item__extnValue = OCT_STR(name=u'extnValue', mode=MODE_TYPE)
     ____AttributeCertificateInfoV1_extensions__item__extnValue_contain = OPEN(name='_cont_extnValue', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKIX-CommonTypes-2009', 'EXTENSION'), [u'ExtnType']))
-    ____AttributeCertificateInfoV1_extensions__item__extnValue_contain._const_tab = ____AttributeCertificateInfoV1_attributes__item__type_tab
+    _____AttributeCertificateInfoV1_extensions__item__extnValue_contain_tab = CLASS(name='_tab_EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'EXTENSION')))
+    _____AttributeCertificateInfoV1_extensions__item__extnValue_contain_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____AttributeCertificateInfoV1_extensions__item__extnValue_contain._const_tab = _____AttributeCertificateInfoV1_extensions__item__extnValue_contain_tab
     ____AttributeCertificateInfoV1_extensions__item__extnValue_contain._const_tab_at = ('..', u'extnID')
     ____AttributeCertificateInfoV1_extensions__item__extnValue_contain._const_tab_id = u'ExtnType'
     ___AttributeCertificateInfoV1_extensions__item__extnValue._const_cont = ____AttributeCertificateInfoV1_extensions__item__extnValue_contain
@@ -2983,19 +3021,23 @@ class AttributeCertificateVersion1_2009:
         _AttributeCertificateInfoV1_issuer,
         ___AttributeCertificateInfoV1_signature_algorithm_tab,
         __AttributeCertificateInfoV1_signature_algorithm,
+        ___AttributeCertificateInfoV1_signature_parameters_tab,
         __AttributeCertificateInfoV1_signature_parameters,
         _AttributeCertificateInfoV1_signature,
         _AttributeCertificateInfoV1_serialNumber,
         _AttributeCertificateInfoV1_attCertValidityPeriod,
         ____AttributeCertificateInfoV1_attributes__item__type_tab,
         ___AttributeCertificateInfoV1_attributes__item__type,
+        _____AttributeCertificateInfoV1_attributes__item__values__item__tab,
         ____AttributeCertificateInfoV1_attributes__item__values__item_,
         ___AttributeCertificateInfoV1_attributes__item__values,
         __AttributeCertificateInfoV1_attributes__item_,
         _AttributeCertificateInfoV1_attributes,
         _AttributeCertificateInfoV1_issuerUniqueID,
+        ____AttributeCertificateInfoV1_extensions__item__extnID_tab,
         ___AttributeCertificateInfoV1_extensions__item__extnID,
         ___AttributeCertificateInfoV1_extensions__item__critical,
+        _____AttributeCertificateInfoV1_extensions__item__extnValue_contain_tab,
         ____AttributeCertificateInfoV1_extensions__item__extnValue_contain,
         ___AttributeCertificateInfoV1_extensions__item__extnValue,
         __AttributeCertificateInfoV1_extensions__item_,
@@ -3496,7 +3538,9 @@ class EnrollmentMessageSyntax_2009:
     __TaggedRequest_orm_requestMessageType._const_tab_at = None
     __TaggedRequest_orm_requestMessageType._const_tab_id = u'id'
     __TaggedRequest_orm_requestMessageValue = OPEN(name=u'requestMessageValue', mode=MODE_TYPE, typeref=ASN1RefClassField(('EnrollmentMessageSyntax-2009', 'OTHER-REQUEST'), [u'Type']))
-    __TaggedRequest_orm_requestMessageValue._const_tab = ___TaggedRequest_orm_requestMessageType_tab
+    ___TaggedRequest_orm_requestMessageValue_tab = CLASS(name='_tab_OTHER-REQUEST', mode=MODE_SET, typeref=ASN1RefType(('EnrollmentMessageSyntax-2009', 'OTHER-REQUEST')))
+    ___TaggedRequest_orm_requestMessageValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    __TaggedRequest_orm_requestMessageValue._const_tab = ___TaggedRequest_orm_requestMessageValue_tab
     __TaggedRequest_orm_requestMessageValue._const_tab_at = ('..', u'requestMessageType')
     __TaggedRequest_orm_requestMessageValue._const_tab_id = u'Type'
     _TaggedRequest_orm._cont = ASN1Dict([
@@ -3684,7 +3728,9 @@ class EnrollmentMessageSyntax_2009:
     _OtherMsg_otherMsgType._const_tab_at = None
     _OtherMsg_otherMsgType._const_tab_id = u'id'
     _OtherMsg_otherMsgValue = OPEN(name=u'otherMsgValue', mode=MODE_TYPE, typeref=ASN1RefClassField(('EnrollmentMessageSyntax-2009', 'OTHER-MSG'), [u'Type']))
-    _OtherMsg_otherMsgValue._const_tab = __OtherMsg_otherMsgType_tab
+    __OtherMsg_otherMsgValue_tab = CLASS(name='_tab_OTHER-MSG', mode=MODE_SET, typeref=ASN1RefType(('EnrollmentMessageSyntax-2009', 'OTHER-MSG')))
+    __OtherMsg_otherMsgValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _OtherMsg_otherMsgValue._const_tab = __OtherMsg_otherMsgValue_tab
     _OtherMsg_otherMsgValue._const_tab_at = ('..', u'otherMsgType')
     _OtherMsg_otherMsgValue._const_tab_id = u'Type'
     OtherMsg._cont = ASN1Dict([
@@ -4279,7 +4325,15 @@ class EnrollmentMessageSyntax_2009:
     ___CMCStatusInfoV2_otherInfo_extendedFailInfo_failInfoOID._const_tab_at = None
     ___CMCStatusInfoV2_otherInfo_extendedFailInfo_failInfoOID._const_tab_id = u'id'
     ___CMCStatusInfoV2_otherInfo_extendedFailInfo_failInfoValue = OPEN(name=u'failInfoValue', mode=MODE_TYPE, typeref=ASN1RefClassField(('_IMPL_', u'TYPE-IDENTIFIER'), [u'Type']))
-    ___CMCStatusInfoV2_otherInfo_extendedFailInfo_failInfoValue._const_tab = ____CMCStatusInfoV2_otherInfo_extendedFailInfo_failInfoOID_tab
+    ____CMCStatusInfoV2_otherInfo_extendedFailInfo_failInfoValue_tab = CLASS(name='TYPE-IDENTIFIER', mode=MODE_SET)
+    _____CMCStatusInfoV2_otherInfo_extendedFailInfo_failInfoValue_tab_id = OID(name='id', mode=MODE_VALUE, uniq=True)
+    _____CMCStatusInfoV2_otherInfo_extendedFailInfo_failInfoValue_tab_Type = OPEN(name='Type', mode=MODE_TYPE)
+    ____CMCStatusInfoV2_otherInfo_extendedFailInfo_failInfoValue_tab._cont = ASN1Dict([
+        ('id', _____CMCStatusInfoV2_otherInfo_extendedFailInfo_failInfoValue_tab_id),
+        ('Type', _____CMCStatusInfoV2_otherInfo_extendedFailInfo_failInfoValue_tab_Type),
+        ])
+    ____CMCStatusInfoV2_otherInfo_extendedFailInfo_failInfoValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CMCStatusInfoV2_otherInfo_extendedFailInfo_failInfoValue._const_tab = ____CMCStatusInfoV2_otherInfo_extendedFailInfo_failInfoValue_tab
     ___CMCStatusInfoV2_otherInfo_extendedFailInfo_failInfoValue._const_tab_at = ('..', u'failInfoOID')
     ___CMCStatusInfoV2_otherInfo_extendedFailInfo_failInfoValue._const_tab_id = u'Type'
     __CMCStatusInfoV2_otherInfo_extendedFailInfo._cont = ASN1Dict([
@@ -4692,6 +4746,7 @@ class EnrollmentMessageSyntax_2009:
         __TaggedRequest_orm_bodyPartID,
         ___TaggedRequest_orm_requestMessageType_tab,
         __TaggedRequest_orm_requestMessageType,
+        ___TaggedRequest_orm_requestMessageValue_tab,
         __TaggedRequest_orm_requestMessageValue,
         _TaggedRequest_orm,
         TaggedRequest,
@@ -4779,6 +4834,7 @@ class EnrollmentMessageSyntax_2009:
         _OtherMsg_bodyPartID,
         __OtherMsg_otherMsgType_tab,
         _OtherMsg_otherMsgType,
+        __OtherMsg_otherMsgValue_tab,
         _OtherMsg_otherMsgValue,
         OtherMsg,
         ct_PKIResponse,
@@ -4997,6 +5053,9 @@ class EnrollmentMessageSyntax_2009:
         _____CMCStatusInfoV2_otherInfo_extendedFailInfo_failInfoOID_tab_Type,
         ____CMCStatusInfoV2_otherInfo_extendedFailInfo_failInfoOID_tab,
         ___CMCStatusInfoV2_otherInfo_extendedFailInfo_failInfoOID,
+        _____CMCStatusInfoV2_otherInfo_extendedFailInfo_failInfoValue_tab_id,
+        _____CMCStatusInfoV2_otherInfo_extendedFailInfo_failInfoValue_tab_Type,
+        ____CMCStatusInfoV2_otherInfo_extendedFailInfo_failInfoValue_tab,
         ___CMCStatusInfoV2_otherInfo_extendedFailInfo_failInfoValue,
         __CMCStatusInfoV2_otherInfo_extendedFailInfo,
         _CMCStatusInfoV2_otherInfo,
@@ -5259,7 +5318,9 @@ class OCSP_2009:
     __Signature_signatureAlgorithm_algorithm._const_tab_at = None
     __Signature_signatureAlgorithm_algorithm._const_tab_id = u'id'
     __Signature_signatureAlgorithm_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'SIGNATURE-ALGORITHM'), [u'Params']), opt=True)
-    __Signature_signatureAlgorithm_parameters._const_tab = ___Signature_signatureAlgorithm_algorithm_tab
+    ___Signature_signatureAlgorithm_parameters_tab = CLASS(name='_tab_SIGNATURE-ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'SIGNATURE-ALGORITHM')))
+    ___Signature_signatureAlgorithm_parameters_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    __Signature_signatureAlgorithm_parameters._const_tab = ___Signature_signatureAlgorithm_parameters_tab
     __Signature_signatureAlgorithm_parameters._const_tab_at = ('..', u'algorithm')
     __Signature_signatureAlgorithm_parameters._const_tab_id = u'Params'
     _Signature_signatureAlgorithm._cont = ASN1Dict([
@@ -5325,7 +5386,9 @@ class OCSP_2009:
     __CertID_hashAlgorithm_algorithm._const_tab_at = None
     __CertID_hashAlgorithm_algorithm._const_tab_id = u'id'
     __CertID_hashAlgorithm_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM'), [u'Params']), opt=True)
-    __CertID_hashAlgorithm_parameters._const_tab = ___CertID_hashAlgorithm_algorithm_tab
+    ___CertID_hashAlgorithm_parameters_tab = CLASS(name='_tab_DIGEST-ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM')))
+    ___CertID_hashAlgorithm_parameters_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    __CertID_hashAlgorithm_parameters._const_tab = ___CertID_hashAlgorithm_parameters_tab
     __CertID_hashAlgorithm_parameters._const_tab_at = ('..', u'algorithm')
     __CertID_hashAlgorithm_parameters._const_tab_id = u'Params'
     _CertID_hashAlgorithm._cont = ASN1Dict([
@@ -5677,6 +5740,7 @@ class OCSP_2009:
         TBSRequest,
         ___Signature_signatureAlgorithm_algorithm_tab,
         __Signature_signatureAlgorithm_algorithm,
+        ___Signature_signatureAlgorithm_parameters_tab,
         __Signature_signatureAlgorithm_parameters,
         _Signature_signatureAlgorithm,
         _Signature_signature,
@@ -5696,6 +5760,7 @@ class OCSP_2009:
         Request,
         ___CertID_hashAlgorithm_algorithm_tab,
         __CertID_hashAlgorithm_algorithm,
+        ___CertID_hashAlgorithm_parameters_tab,
         __CertID_hashAlgorithm_parameters,
         _CertID_hashAlgorithm,
         _CertID_issuerNameHash,
@@ -5869,7 +5934,9 @@ class PKCS_10:
     ___CertificationRequestInfo_subjectPKInfo_algorithm_algorithm._const_tab_at = None
     ___CertificationRequestInfo_subjectPKInfo_algorithm_algorithm._const_tab_id = u'id'
     ___CertificationRequestInfo_subjectPKInfo_algorithm_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'PUBLIC-KEY'), [u'Params']), opt=True)
-    ___CertificationRequestInfo_subjectPKInfo_algorithm_parameters._const_tab = ____CertificationRequestInfo_subjectPKInfo_algorithm_algorithm_tab
+    ____CertificationRequestInfo_subjectPKInfo_algorithm_parameters_tab = CLASS(name='_tab_PUBLIC-KEY', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'PUBLIC-KEY')))
+    ____CertificationRequestInfo_subjectPKInfo_algorithm_parameters_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CertificationRequestInfo_subjectPKInfo_algorithm_parameters._const_tab = ____CertificationRequestInfo_subjectPKInfo_algorithm_parameters_tab
     ___CertificationRequestInfo_subjectPKInfo_algorithm_parameters._const_tab_at = ('..', u'algorithm')
     ___CertificationRequestInfo_subjectPKInfo_algorithm_parameters._const_tab_id = u'Params'
     __CertificationRequestInfo_subjectPKInfo_algorithm._cont = ASN1Dict([
@@ -5886,12 +5953,16 @@ class PKCS_10:
     _CertificationRequestInfo_attributes = SET_OF(name=u'attributes', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKCS-10', 'Attributes')))
     __CertificationRequestInfo_attributes__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-10', 'Attribute')))
     ___CertificationRequestInfo_attributes__item__type = OID(name=u'type', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKIX-CommonTypes-2009', 'ATTRIBUTE'), [u'id']))
-    ___CertificationRequestInfo_attributes__item__type._const_tab = ____CertificationRequestInfo_subjectPKInfo_algorithm_algorithm_tab
+    ____CertificationRequestInfo_attributes__item__type_tab = CLASS(name='_tab_ATTRIBUTE', mode=MODE_SET, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'ATTRIBUTE')))
+    ____CertificationRequestInfo_attributes__item__type_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CertificationRequestInfo_attributes__item__type._const_tab = ____CertificationRequestInfo_attributes__item__type_tab
     ___CertificationRequestInfo_attributes__item__type._const_tab_at = None
     ___CertificationRequestInfo_attributes__item__type._const_tab_id = u'id'
     ___CertificationRequestInfo_attributes__item__values = SET_OF(name=u'values', mode=MODE_TYPE)
     ____CertificationRequestInfo_attributes__item__values__item_ = OPEN(name='_item_', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKIX-CommonTypes-2009', 'ATTRIBUTE'), [u'Type']))
-    ____CertificationRequestInfo_attributes__item__values__item_._const_tab = ____CertificationRequestInfo_subjectPKInfo_algorithm_algorithm_tab
+    _____CertificationRequestInfo_attributes__item__values__item__tab = CLASS(name='_tab_ATTRIBUTE', mode=MODE_SET, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'ATTRIBUTE')))
+    _____CertificationRequestInfo_attributes__item__values__item__tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____CertificationRequestInfo_attributes__item__values__item_._const_tab = _____CertificationRequestInfo_attributes__item__values__item__tab
     ____CertificationRequestInfo_attributes__item__values__item_._const_tab_at = ('..', '..', u'type')
     ____CertificationRequestInfo_attributes__item__values__item_._const_tab_id = u'Type'
     ___CertificationRequestInfo_attributes__item__values._cont = ____CertificationRequestInfo_attributes__item__values__item_
@@ -5938,7 +6009,9 @@ class PKCS_10:
     __CertificationRequest_signatureAlgorithm_algorithm._const_tab_at = None
     __CertificationRequest_signatureAlgorithm_algorithm._const_tab_id = u'id'
     __CertificationRequest_signatureAlgorithm_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'SIGNATURE-ALGORITHM'), [u'Params']), opt=True)
-    __CertificationRequest_signatureAlgorithm_parameters._const_tab = ___CertificationRequest_signatureAlgorithm_algorithm_tab
+    ___CertificationRequest_signatureAlgorithm_parameters_tab = CLASS(name='_tab_SIGNATURE-ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'SIGNATURE-ALGORITHM')))
+    ___CertificationRequest_signatureAlgorithm_parameters_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    __CertificationRequest_signatureAlgorithm_parameters._const_tab = ___CertificationRequest_signatureAlgorithm_parameters_tab
     __CertificationRequest_signatureAlgorithm_parameters._const_tab_at = ('..', u'algorithm')
     __CertificationRequest_signatureAlgorithm_parameters._const_tab_id = u'Params'
     _CertificationRequest_signatureAlgorithm._cont = ASN1Dict([
@@ -5963,11 +6036,14 @@ class PKCS_10:
         _CertificationRequestInfo_subject,
         ____CertificationRequestInfo_subjectPKInfo_algorithm_algorithm_tab,
         ___CertificationRequestInfo_subjectPKInfo_algorithm_algorithm,
+        ____CertificationRequestInfo_subjectPKInfo_algorithm_parameters_tab,
         ___CertificationRequestInfo_subjectPKInfo_algorithm_parameters,
         __CertificationRequestInfo_subjectPKInfo_algorithm,
         __CertificationRequestInfo_subjectPKInfo_subjectPublicKey,
         _CertificationRequestInfo_subjectPKInfo,
+        ____CertificationRequestInfo_attributes__item__type_tab,
         ___CertificationRequestInfo_attributes__item__type,
+        _____CertificationRequestInfo_attributes__item__values__item__tab,
         ____CertificationRequestInfo_attributes__item__values__item_,
         ___CertificationRequestInfo_attributes__item__values,
         __CertificationRequestInfo_attributes__item_,
@@ -5978,6 +6054,7 @@ class PKCS_10:
         _CertificationRequest_certificationRequestInfo,
         ___CertificationRequest_signatureAlgorithm_algorithm_tab,
         __CertificationRequest_signatureAlgorithm_algorithm,
+        ___CertificationRequest_signatureAlgorithm_parameters_tab,
         __CertificationRequest_signatureAlgorithm_parameters,
         _CertificationRequest_signatureAlgorithm,
         _CertificationRequest_signature,
@@ -11085,7 +11162,9 @@ class PKIXAttributeCertificate_2009:
     __ObjectDigestInfo_digestAlgorithm_algorithm._const_tab_at = None
     __ObjectDigestInfo_digestAlgorithm_algorithm._const_tab_id = u'id'
     __ObjectDigestInfo_digestAlgorithm_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM'), [u'Params']), opt=True)
-    __ObjectDigestInfo_digestAlgorithm_parameters._const_tab = ___ObjectDigestInfo_digestAlgorithm_algorithm_tab
+    ___ObjectDigestInfo_digestAlgorithm_parameters_tab = CLASS(name='_tab_DIGEST-ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM')))
+    ___ObjectDigestInfo_digestAlgorithm_parameters_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    __ObjectDigestInfo_digestAlgorithm_parameters._const_tab = ___ObjectDigestInfo_digestAlgorithm_parameters_tab
     __ObjectDigestInfo_digestAlgorithm_parameters._const_tab_at = ('..', u'algorithm')
     __ObjectDigestInfo_digestAlgorithm_parameters._const_tab_id = u'Params'
     _ObjectDigestInfo_digestAlgorithm._cont = ASN1Dict([
@@ -11256,7 +11335,9 @@ class PKIXAttributeCertificate_2009:
     ___Clearance_securityCategories__item__type._const_tab_at = None
     ___Clearance_securityCategories__item__type._const_tab_id = u'id'
     ___Clearance_securityCategories__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PKIX-CommonTypes-2009', 'SECURITY-CATEGORY'), [u'Type']))
-    ___Clearance_securityCategories__item__value._const_tab = ____Clearance_securityCategories__item__type_tab
+    ____Clearance_securityCategories__item__value_tab = CLASS(name='_tab_SECURITY-CATEGORY', mode=MODE_SET, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'SECURITY-CATEGORY')))
+    ____Clearance_securityCategories__item__value_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Clearance_securityCategories__item__value._const_tab = ____Clearance_securityCategories__item__value_tab
     ___Clearance_securityCategories__item__value._const_tab_at = ('..', u'type')
     ___Clearance_securityCategories__item__value._const_tab_id = u'Type'
     __Clearance_securityCategories__item_._cont = ASN1Dict([
@@ -11285,7 +11366,9 @@ class PKIXAttributeCertificate_2009:
     ___Clearance_rfc3281_securityCategories__item__type._const_tab_at = None
     ___Clearance_rfc3281_securityCategories__item__type._const_tab_id = u'id'
     ___Clearance_rfc3281_securityCategories__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PKIX-CommonTypes-2009', 'SECURITY-CATEGORY'), [u'Type']))
-    ___Clearance_rfc3281_securityCategories__item__value._const_tab = ____Clearance_rfc3281_securityCategories__item__type_tab
+    ____Clearance_rfc3281_securityCategories__item__value_tab = CLASS(name='_tab_SECURITY-CATEGORY', mode=MODE_SET, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'SECURITY-CATEGORY')))
+    ____Clearance_rfc3281_securityCategories__item__value_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Clearance_rfc3281_securityCategories__item__value._const_tab = ____Clearance_rfc3281_securityCategories__item__value_tab
     ___Clearance_rfc3281_securityCategories__item__value._const_tab_at = ('..', u'type')
     ___Clearance_rfc3281_securityCategories__item__value._const_tab_id = u'Type'
     __Clearance_rfc3281_securityCategories__item_._cont = ASN1Dict([
@@ -11518,6 +11601,7 @@ class PKIXAttributeCertificate_2009:
         _ObjectDigestInfo_otherObjectTypeID,
         ___ObjectDigestInfo_digestAlgorithm_algorithm_tab,
         __ObjectDigestInfo_digestAlgorithm_algorithm,
+        ___ObjectDigestInfo_digestAlgorithm_parameters_tab,
         __ObjectDigestInfo_digestAlgorithm_parameters,
         _ObjectDigestInfo_digestAlgorithm,
         _ObjectDigestInfo_objectDigest,
@@ -11573,6 +11657,7 @@ class PKIXAttributeCertificate_2009:
         _Clearance_classList,
         ____Clearance_securityCategories__item__type_tab,
         ___Clearance_securityCategories__item__type,
+        ____Clearance_securityCategories__item__value_tab,
         ___Clearance_securityCategories__item__value,
         __Clearance_securityCategories__item_,
         _Clearance_securityCategories,
@@ -11581,6 +11666,7 @@ class PKIXAttributeCertificate_2009:
         _Clearance_rfc3281_classList,
         ____Clearance_rfc3281_securityCategories__item__type_tab,
         ___Clearance_rfc3281_securityCategories__item__type,
+        ____Clearance_rfc3281_securityCategories__item__value_tab,
         ___Clearance_rfc3281_securityCategories__item__value,
         __Clearance_rfc3281_securityCategories__item_,
         _Clearance_rfc3281_securityCategories,
@@ -11759,7 +11845,9 @@ class PKIXCMP_2009:
     __PKIHeader_protectionAlg_algorithm._const_tab_at = None
     __PKIHeader_protectionAlg_algorithm._const_tab_id = u'id'
     __PKIHeader_protectionAlg_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'ALGORITHM'), [u'Params']), opt=True)
-    __PKIHeader_protectionAlg_parameters._const_tab = ___PKIHeader_protectionAlg_algorithm_tab
+    ___PKIHeader_protectionAlg_parameters_tab = CLASS(name='_tab_ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'ALGORITHM')))
+    ___PKIHeader_protectionAlg_parameters_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    __PKIHeader_protectionAlg_parameters._const_tab = ___PKIHeader_protectionAlg_parameters_tab
     __PKIHeader_protectionAlg_parameters._const_tab_at = ('..', u'algorithm')
     __PKIHeader_protectionAlg_parameters._const_tab_id = u'Params'
     _PKIHeader_protectionAlg._cont = ASN1Dict([
@@ -11887,7 +11975,9 @@ class PKIXCMP_2009:
     __PBMParameter_owf_algorithm._const_tab_at = None
     __PBMParameter_owf_algorithm._const_tab_id = u'id'
     __PBMParameter_owf_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM'), [u'Params']), opt=True)
-    __PBMParameter_owf_parameters._const_tab = ___PBMParameter_owf_algorithm_tab
+    ___PBMParameter_owf_parameters_tab = CLASS(name='_tab_DIGEST-ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM')))
+    ___PBMParameter_owf_parameters_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    __PBMParameter_owf_parameters._const_tab = ___PBMParameter_owf_parameters_tab
     __PBMParameter_owf_parameters._const_tab_at = ('..', u'algorithm')
     __PBMParameter_owf_parameters._const_tab_id = u'Params'
     _PBMParameter_owf._cont = ASN1Dict([
@@ -11898,11 +11988,15 @@ class PKIXCMP_2009:
     _PBMParameter_iterationCount = INT(name=u'iterationCount', mode=MODE_TYPE)
     _PBMParameter_mac = SEQ(name=u'mac', mode=MODE_TYPE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'AlgorithmIdentifier')))
     __PBMParameter_mac_algorithm = OID(name=u'algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'MAC-ALGORITHM'), [u'id']))
-    __PBMParameter_mac_algorithm._const_tab = ___PBMParameter_owf_algorithm_tab
+    ___PBMParameter_mac_algorithm_tab = CLASS(name='_tab_MAC-ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'MAC-ALGORITHM')))
+    ___PBMParameter_mac_algorithm_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    __PBMParameter_mac_algorithm._const_tab = ___PBMParameter_mac_algorithm_tab
     __PBMParameter_mac_algorithm._const_tab_at = None
     __PBMParameter_mac_algorithm._const_tab_id = u'id'
     __PBMParameter_mac_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'MAC-ALGORITHM'), [u'Params']), opt=True)
-    __PBMParameter_mac_parameters._const_tab = ___PBMParameter_owf_algorithm_tab
+    ___PBMParameter_mac_parameters_tab = CLASS(name='_tab_MAC-ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'MAC-ALGORITHM')))
+    ___PBMParameter_mac_parameters_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    __PBMParameter_mac_parameters._const_tab = ___PBMParameter_mac_parameters_tab
     __PBMParameter_mac_parameters._const_tab_at = ('..', u'algorithm')
     __PBMParameter_mac_parameters._const_tab_id = u'Params'
     _PBMParameter_mac._cont = ASN1Dict([
@@ -11932,7 +12026,9 @@ class PKIXCMP_2009:
     __DHBMParameter_owf_algorithm._const_tab_at = None
     __DHBMParameter_owf_algorithm._const_tab_id = u'id'
     __DHBMParameter_owf_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM'), [u'Params']), opt=True)
-    __DHBMParameter_owf_parameters._const_tab = ___DHBMParameter_owf_algorithm_tab
+    ___DHBMParameter_owf_parameters_tab = CLASS(name='_tab_DIGEST-ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM')))
+    ___DHBMParameter_owf_parameters_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    __DHBMParameter_owf_parameters._const_tab = ___DHBMParameter_owf_parameters_tab
     __DHBMParameter_owf_parameters._const_tab_at = ('..', u'algorithm')
     __DHBMParameter_owf_parameters._const_tab_id = u'Params'
     _DHBMParameter_owf._cont = ASN1Dict([
@@ -11942,11 +12038,15 @@ class PKIXCMP_2009:
     _DHBMParameter_owf._ext = None
     _DHBMParameter_mac = SEQ(name=u'mac', mode=MODE_TYPE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'AlgorithmIdentifier')))
     __DHBMParameter_mac_algorithm = OID(name=u'algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'MAC-ALGORITHM'), [u'id']))
-    __DHBMParameter_mac_algorithm._const_tab = ___DHBMParameter_owf_algorithm_tab
+    ___DHBMParameter_mac_algorithm_tab = CLASS(name='_tab_MAC-ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'MAC-ALGORITHM')))
+    ___DHBMParameter_mac_algorithm_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    __DHBMParameter_mac_algorithm._const_tab = ___DHBMParameter_mac_algorithm_tab
     __DHBMParameter_mac_algorithm._const_tab_at = None
     __DHBMParameter_mac_algorithm._const_tab_id = u'id'
     __DHBMParameter_mac_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'MAC-ALGORITHM'), [u'Params']), opt=True)
-    __DHBMParameter_mac_parameters._const_tab = ___DHBMParameter_owf_algorithm_tab
+    ___DHBMParameter_mac_parameters_tab = CLASS(name='_tab_MAC-ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'MAC-ALGORITHM')))
+    ___DHBMParameter_mac_parameters_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    __DHBMParameter_mac_parameters._const_tab = ___DHBMParameter_mac_parameters_tab
     __DHBMParameter_mac_parameters._const_tab_at = ('..', u'algorithm')
     __DHBMParameter_mac_parameters._const_tab_id = u'Params'
     _DHBMParameter_mac._cont = ASN1Dict([
@@ -11993,7 +12093,9 @@ class PKIXCMP_2009:
     __OOBCertHash_hashAlg_algorithm._const_tab_at = None
     __OOBCertHash_hashAlg_algorithm._const_tab_id = u'id'
     __OOBCertHash_hashAlg_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM'), [u'Params']), opt=True)
-    __OOBCertHash_hashAlg_parameters._const_tab = ___OOBCertHash_hashAlg_algorithm_tab
+    ___OOBCertHash_hashAlg_parameters_tab = CLASS(name='_tab_DIGEST-ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM')))
+    ___OOBCertHash_hashAlg_parameters_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    __OOBCertHash_hashAlg_parameters._const_tab = ___OOBCertHash_hashAlg_parameters_tab
     __OOBCertHash_hashAlg_parameters._const_tab_at = ('..', u'algorithm')
     __OOBCertHash_hashAlg_parameters._const_tab_id = u'Params'
     _OOBCertHash_hashAlg._cont = ASN1Dict([
@@ -12025,7 +12127,9 @@ class PKIXCMP_2009:
     __Challenge_owf_algorithm._const_tab_at = None
     __Challenge_owf_algorithm._const_tab_id = u'id'
     __Challenge_owf_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM'), [u'Params']), opt=True)
-    __Challenge_owf_parameters._const_tab = ___Challenge_owf_algorithm_tab
+    ___Challenge_owf_parameters_tab = CLASS(name='_tab_DIGEST-ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'DIGEST-ALGORITHM')))
+    ___Challenge_owf_parameters_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    __Challenge_owf_parameters._const_tab = ___Challenge_owf_parameters_tab
     __Challenge_owf_parameters._const_tab_at = ('..', u'algorithm')
     __Challenge_owf_parameters._const_tab_id = u'Params'
     _Challenge_owf._cont = ASN1Dict([
@@ -12137,7 +12241,9 @@ class PKIXCMP_2009:
     ___RevDetails_crlEntryDetails__item__critical = BOOL(name=u'critical', mode=MODE_TYPE, default=False)
     ___RevDetails_crlEntryDetails__item__extnValue = OCT_STR(name=u'extnValue', mode=MODE_TYPE)
     ____RevDetails_crlEntryDetails__item__extnValue_contain = OPEN(name='_cont_extnValue', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKIX-CommonTypes-2009', 'EXTENSION'), [u'ExtnType']))
-    ____RevDetails_crlEntryDetails__item__extnValue_contain._const_tab = ____RevDetails_crlEntryDetails__item__extnID_tab
+    _____RevDetails_crlEntryDetails__item__extnValue_contain_tab = CLASS(name='_tab_EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'EXTENSION')))
+    _____RevDetails_crlEntryDetails__item__extnValue_contain_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    ____RevDetails_crlEntryDetails__item__extnValue_contain._const_tab = _____RevDetails_crlEntryDetails__item__extnValue_contain_tab
     ____RevDetails_crlEntryDetails__item__extnValue_contain._const_tab_at = ('..', u'extnID')
     ____RevDetails_crlEntryDetails__item__extnValue_contain._const_tab_id = u'ExtnType'
     ___RevDetails_crlEntryDetails__item__extnValue._const_cont = ____RevDetails_crlEntryDetails__item__extnValue_contain
@@ -12208,7 +12314,9 @@ class PKIXCMP_2009:
     ___RevAnnContent_crlDetails__item__critical = BOOL(name=u'critical', mode=MODE_TYPE, default=False)
     ___RevAnnContent_crlDetails__item__extnValue = OCT_STR(name=u'extnValue', mode=MODE_TYPE)
     ____RevAnnContent_crlDetails__item__extnValue_contain = OPEN(name='_cont_extnValue', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKIX-CommonTypes-2009', 'EXTENSION'), [u'ExtnType']))
-    ____RevAnnContent_crlDetails__item__extnValue_contain._const_tab = ____RevAnnContent_crlDetails__item__extnID_tab
+    _____RevAnnContent_crlDetails__item__extnValue_contain_tab = CLASS(name='_tab_EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'EXTENSION')))
+    _____RevAnnContent_crlDetails__item__extnValue_contain_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    ____RevAnnContent_crlDetails__item__extnValue_contain._const_tab = _____RevAnnContent_crlDetails__item__extnValue_contain_tab
     ____RevAnnContent_crlDetails__item__extnValue_contain._const_tab_at = ('..', u'extnID')
     ____RevAnnContent_crlDetails__item__extnValue_contain._const_tab_id = u'ExtnType'
     ___RevAnnContent_crlDetails__item__extnValue._const_cont = ____RevAnnContent_crlDetails__item__extnValue_contain
@@ -12252,7 +12360,9 @@ class PKIXCMP_2009:
     _InfoTypeAndValue_infoType._const_tab_at = None
     _InfoTypeAndValue_infoType._const_tab_id = u'id'
     _InfoTypeAndValue_infoValue = OPEN(name=u'infoValue', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKIXCMP-2009', 'INFO-TYPE-AND-VALUE'), [u'Type']))
-    _InfoTypeAndValue_infoValue._const_tab = __InfoTypeAndValue_infoType_tab
+    __InfoTypeAndValue_infoValue_tab = CLASS(name='_tab_INFO-TYPE-AND-VALUE', mode=MODE_SET, typeref=ASN1RefType(('PKIXCMP-2009', 'INFO-TYPE-AND-VALUE')))
+    __InfoTypeAndValue_infoValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _InfoTypeAndValue_infoValue._const_tab = __InfoTypeAndValue_infoValue_tab
     _InfoTypeAndValue_infoValue._const_tab_at = ('..', u'infoType')
     _InfoTypeAndValue_infoValue._const_tab_id = u'Type'
     InfoTypeAndValue._cont = ASN1Dict([
@@ -12345,6 +12455,7 @@ class PKIXCMP_2009:
         _PKIHeader_messageTime,
         ___PKIHeader_protectionAlg_algorithm_tab,
         __PKIHeader_protectionAlg_algorithm,
+        ___PKIHeader_protectionAlg_parameters_tab,
         __PKIHeader_protectionAlg_parameters,
         _PKIHeader_protectionAlg,
         _PKIHeader_senderKID,
@@ -12394,19 +12505,25 @@ class PKIXCMP_2009:
         _PBMParameter_salt,
         ___PBMParameter_owf_algorithm_tab,
         __PBMParameter_owf_algorithm,
+        ___PBMParameter_owf_parameters_tab,
         __PBMParameter_owf_parameters,
         _PBMParameter_owf,
         _PBMParameter_iterationCount,
+        ___PBMParameter_mac_algorithm_tab,
         __PBMParameter_mac_algorithm,
+        ___PBMParameter_mac_parameters_tab,
         __PBMParameter_mac_parameters,
         _PBMParameter_mac,
         PBMParameter,
         id_DHBasedMac,
         ___DHBMParameter_owf_algorithm_tab,
         __DHBMParameter_owf_algorithm,
+        ___DHBMParameter_owf_parameters_tab,
         __DHBMParameter_owf_parameters,
         _DHBMParameter_owf,
+        ___DHBMParameter_mac_algorithm_tab,
         __DHBMParameter_mac_algorithm,
+        ___DHBMParameter_mac_parameters_tab,
         __DHBMParameter_mac_parameters,
         _DHBMParameter_mac,
         DHBMParameter,
@@ -12419,6 +12536,7 @@ class PKIXCMP_2009:
         OOBCert,
         ___OOBCertHash_hashAlg_algorithm_tab,
         __OOBCertHash_hashAlg_algorithm,
+        ___OOBCertHash_hashAlg_parameters_tab,
         __OOBCertHash_hashAlg_parameters,
         _OOBCertHash_hashAlg,
         _OOBCertHash_certId,
@@ -12428,6 +12546,7 @@ class PKIXCMP_2009:
         POPODecKeyChallContent,
         ___Challenge_owf_algorithm_tab,
         __Challenge_owf_algorithm,
+        ___Challenge_owf_parameters_tab,
         __Challenge_owf_parameters,
         _Challenge_owf,
         _Challenge_witness,
@@ -12465,6 +12584,7 @@ class PKIXCMP_2009:
         ____RevDetails_crlEntryDetails__item__extnID_tab,
         ___RevDetails_crlEntryDetails__item__extnID,
         ___RevDetails_crlEntryDetails__item__critical,
+        _____RevDetails_crlEntryDetails__item__extnValue_contain_tab,
         ____RevDetails_crlEntryDetails__item__extnValue_contain,
         ___RevDetails_crlEntryDetails__item__extnValue,
         __RevDetails_crlEntryDetails__item_,
@@ -12489,6 +12609,7 @@ class PKIXCMP_2009:
         ____RevAnnContent_crlDetails__item__extnID_tab,
         ___RevAnnContent_crlDetails__item__extnID,
         ___RevAnnContent_crlDetails__item__critical,
+        _____RevAnnContent_crlDetails__item__extnValue_contain_tab,
         ____RevAnnContent_crlDetails__item__extnValue_contain,
         ___RevAnnContent_crlDetails__item__extnValue,
         __RevAnnContent_crlDetails__item_,
@@ -12501,6 +12622,7 @@ class PKIXCMP_2009:
         INFO_TYPE_AND_VALUE,
         __InfoTypeAndValue_infoType_tab,
         _InfoTypeAndValue_infoType,
+        __InfoTypeAndValue_infoValue_tab,
         _InfoTypeAndValue_infoValue,
         InfoTypeAndValue,
         SupportedInfoSet,
@@ -13239,7 +13361,9 @@ class PKIXCRMF_2009:
     __PrivateKeyInfo_privateKeyAlgorithm_algorithm._const_tab_at = None
     __PrivateKeyInfo_privateKeyAlgorithm_algorithm._const_tab_id = u'id'
     __PrivateKeyInfo_privateKeyAlgorithm_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'PUBLIC-KEY'), [u'Params']), opt=True)
-    __PrivateKeyInfo_privateKeyAlgorithm_parameters._const_tab = ___PrivateKeyInfo_privateKeyAlgorithm_algorithm_tab
+    ___PrivateKeyInfo_privateKeyAlgorithm_parameters_tab = CLASS(name='_tab_PUBLIC-KEY', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'PUBLIC-KEY')))
+    ___PrivateKeyInfo_privateKeyAlgorithm_parameters_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    __PrivateKeyInfo_privateKeyAlgorithm_parameters._const_tab = ___PrivateKeyInfo_privateKeyAlgorithm_parameters_tab
     __PrivateKeyInfo_privateKeyAlgorithm_parameters._const_tab_at = ('..', u'algorithm')
     __PrivateKeyInfo_privateKeyAlgorithm_parameters._const_tab_id = u'Params'
     _PrivateKeyInfo_privateKeyAlgorithm._cont = ASN1Dict([
@@ -13268,7 +13392,9 @@ class PKIXCRMF_2009:
     __Attributes__item__type._const_tab_id = u'id'
     __Attributes__item__values = SET_OF(name=u'values', mode=MODE_TYPE)
     ___Attributes__item__values__item_ = OPEN(name='_item_', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKIX-CommonTypes-2009', 'ATTRIBUTE'), [u'Type']))
-    ___Attributes__item__values__item_._const_tab = ___Attributes__item__type_tab
+    ____Attributes__item__values__item__tab = CLASS(name='_tab_ATTRIBUTE', mode=MODE_SET, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'ATTRIBUTE')))
+    ____Attributes__item__values__item__tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Attributes__item__values__item_._const_tab = ____Attributes__item__values__item__tab
     ___Attributes__item__values__item_._const_tab_at = ('..', '..', u'type')
     ___Attributes__item__values__item_._const_tab_id = u'Type'
     __Attributes__item__values._cont = ___Attributes__item__values__item_
@@ -13397,7 +13523,9 @@ class PKIXCRMF_2009:
     __EncryptedValue_intendedAlg_algorithm._const_tab_at = None
     __EncryptedValue_intendedAlg_algorithm._const_tab_id = u'id'
     __EncryptedValue_intendedAlg_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'ALGORITHM'), [u'Params']), opt=True)
-    __EncryptedValue_intendedAlg_parameters._const_tab = ___EncryptedValue_intendedAlg_algorithm_tab
+    ___EncryptedValue_intendedAlg_parameters_tab = CLASS(name='_tab_ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'ALGORITHM')))
+    ___EncryptedValue_intendedAlg_parameters_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    __EncryptedValue_intendedAlg_parameters._const_tab = ___EncryptedValue_intendedAlg_parameters_tab
     __EncryptedValue_intendedAlg_parameters._const_tab_at = ('..', u'algorithm')
     __EncryptedValue_intendedAlg_parameters._const_tab_id = u'Params'
     _EncryptedValue_intendedAlg._cont = ASN1Dict([
@@ -13407,11 +13535,15 @@ class PKIXCRMF_2009:
     _EncryptedValue_intendedAlg._ext = None
     _EncryptedValue_symmAlg = SEQ(name=u'symmAlg', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AlgorithmInformation-2009', 'AlgorithmIdentifier')), opt=True)
     __EncryptedValue_symmAlg_algorithm = OID(name=u'algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'ALGORITHM'), [u'id']))
-    __EncryptedValue_symmAlg_algorithm._const_tab = ___EncryptedValue_intendedAlg_algorithm_tab
+    ___EncryptedValue_symmAlg_algorithm_tab = CLASS(name='_tab_ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'ALGORITHM')))
+    ___EncryptedValue_symmAlg_algorithm_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    __EncryptedValue_symmAlg_algorithm._const_tab = ___EncryptedValue_symmAlg_algorithm_tab
     __EncryptedValue_symmAlg_algorithm._const_tab_at = None
     __EncryptedValue_symmAlg_algorithm._const_tab_id = u'id'
     __EncryptedValue_symmAlg_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'ALGORITHM'), [u'Params']), opt=True)
-    __EncryptedValue_symmAlg_parameters._const_tab = ___EncryptedValue_intendedAlg_algorithm_tab
+    ___EncryptedValue_symmAlg_parameters_tab = CLASS(name='_tab_ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'ALGORITHM')))
+    ___EncryptedValue_symmAlg_parameters_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    __EncryptedValue_symmAlg_parameters._const_tab = ___EncryptedValue_symmAlg_parameters_tab
     __EncryptedValue_symmAlg_parameters._const_tab_at = ('..', u'algorithm')
     __EncryptedValue_symmAlg_parameters._const_tab_id = u'Params'
     _EncryptedValue_symmAlg._cont = ASN1Dict([
@@ -13422,11 +13554,15 @@ class PKIXCRMF_2009:
     _EncryptedValue_encSymmKey = BIT_STR(name=u'encSymmKey', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _EncryptedValue_keyAlg = SEQ(name=u'keyAlg', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AlgorithmInformation-2009', 'AlgorithmIdentifier')), opt=True)
     __EncryptedValue_keyAlg_algorithm = OID(name=u'algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'ALGORITHM'), [u'id']))
-    __EncryptedValue_keyAlg_algorithm._const_tab = ___EncryptedValue_intendedAlg_algorithm_tab
+    ___EncryptedValue_keyAlg_algorithm_tab = CLASS(name='_tab_ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'ALGORITHM')))
+    ___EncryptedValue_keyAlg_algorithm_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    __EncryptedValue_keyAlg_algorithm._const_tab = ___EncryptedValue_keyAlg_algorithm_tab
     __EncryptedValue_keyAlg_algorithm._const_tab_at = None
     __EncryptedValue_keyAlg_algorithm._const_tab_id = u'id'
     __EncryptedValue_keyAlg_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'ALGORITHM'), [u'Params']), opt=True)
-    __EncryptedValue_keyAlg_parameters._const_tab = ___EncryptedValue_intendedAlg_algorithm_tab
+    ___EncryptedValue_keyAlg_parameters_tab = CLASS(name='_tab_ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'ALGORITHM')))
+    ___EncryptedValue_keyAlg_parameters_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    __EncryptedValue_keyAlg_parameters._const_tab = ___EncryptedValue_keyAlg_parameters_tab
     __EncryptedValue_keyAlg_parameters._const_tab_at = ('..', u'algorithm')
     __EncryptedValue_keyAlg_parameters._const_tab_id = u'Params'
     _EncryptedValue_keyAlg._cont = ASN1Dict([
@@ -13704,6 +13840,7 @@ class PKIXCRMF_2009:
         _PrivateKeyInfo_version,
         ___PrivateKeyInfo_privateKeyAlgorithm_algorithm_tab,
         __PrivateKeyInfo_privateKeyAlgorithm_algorithm,
+        ___PrivateKeyInfo_privateKeyAlgorithm_parameters_tab,
         __PrivateKeyInfo_privateKeyAlgorithm_parameters,
         _PrivateKeyInfo_privateKeyAlgorithm,
         _PrivateKeyInfo_privateKey,
@@ -13711,6 +13848,7 @@ class PKIXCRMF_2009:
         PrivateKeyInfo,
         ___Attributes__item__type_tab,
         __Attributes__item__type,
+        ____Attributes__item__values__item__tab,
         ___Attributes__item__values__item_,
         __Attributes__item__values,
         _Attributes__item_,
@@ -13754,13 +13892,18 @@ class PKIXCRMF_2009:
         EncryptedKey,
         ___EncryptedValue_intendedAlg_algorithm_tab,
         __EncryptedValue_intendedAlg_algorithm,
+        ___EncryptedValue_intendedAlg_parameters_tab,
         __EncryptedValue_intendedAlg_parameters,
         _EncryptedValue_intendedAlg,
+        ___EncryptedValue_symmAlg_algorithm_tab,
         __EncryptedValue_symmAlg_algorithm,
+        ___EncryptedValue_symmAlg_parameters_tab,
         __EncryptedValue_symmAlg_parameters,
         _EncryptedValue_symmAlg,
         _EncryptedValue_encSymmKey,
+        ___EncryptedValue_keyAlg_algorithm_tab,
         __EncryptedValue_keyAlg_algorithm,
+        ___EncryptedValue_keyAlg_parameters_tab,
         __EncryptedValue_keyAlg_parameters,
         _EncryptedValue_keyAlg,
         _EncryptedValue_valueHint,
@@ -15290,7 +15433,9 @@ class SCVP_2009:
     ___CVRequest_requestExtensions__item__critical = BOOL(name=u'critical', mode=MODE_TYPE, default=False)
     ___CVRequest_requestExtensions__item__extnValue = OCT_STR(name=u'extnValue', mode=MODE_TYPE)
     ____CVRequest_requestExtensions__item__extnValue_contain = OPEN(name='_cont_extnValue', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKIX-CommonTypes-2009', 'EXTENSION'), [u'ExtnType']))
-    ____CVRequest_requestExtensions__item__extnValue_contain._const_tab = ____CVRequest_requestExtensions__item__extnID_tab
+    _____CVRequest_requestExtensions__item__extnValue_contain_tab = CLASS(name='_tab_EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'EXTENSION')))
+    _____CVRequest_requestExtensions__item__extnValue_contain_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____CVRequest_requestExtensions__item__extnValue_contain._const_tab = _____CVRequest_requestExtensions__item__extnValue_contain_tab
     ____CVRequest_requestExtensions__item__extnValue_contain._const_tab_at = ('..', u'extnID')
     ____CVRequest_requestExtensions__item__extnValue_contain._const_tab_id = u'ExtnType'
     ___CVRequest_requestExtensions__item__extnValue._const_cont = ____CVRequest_requestExtensions__item__extnValue_contain
@@ -15395,7 +15540,9 @@ class SCVP_2009:
     ___Query_queryExtensions__item__critical = BOOL(name=u'critical', mode=MODE_TYPE, default=False)
     ___Query_queryExtensions__item__extnValue = OCT_STR(name=u'extnValue', mode=MODE_TYPE)
     ____Query_queryExtensions__item__extnValue_contain = OPEN(name='_cont_extnValue', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKIX-CommonTypes-2009', 'EXTENSION'), [u'ExtnType']))
-    ____Query_queryExtensions__item__extnValue_contain._const_tab = ____Query_queryExtensions__item__extnID_tab
+    _____Query_queryExtensions__item__extnValue_contain_tab = CLASS(name='_tab_EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'EXTENSION')))
+    _____Query_queryExtensions__item__extnValue_contain_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____Query_queryExtensions__item__extnValue_contain._const_tab = _____Query_queryExtensions__item__extnValue_contain_tab
     ____Query_queryExtensions__item__extnValue_contain._const_tab_at = ('..', u'extnID')
     ____Query_queryExtensions__item__extnValue_contain._const_tab_id = u'ExtnType'
     ___Query_queryExtensions__item__extnValue._const_cont = ____Query_queryExtensions__item__extnValue_contain
@@ -15641,7 +15788,9 @@ class SCVP_2009:
     __KeyAgreePublicKey_algorithm_algorithm._const_tab_at = None
     __KeyAgreePublicKey_algorithm_algorithm._const_tab_id = u'id'
     __KeyAgreePublicKey_algorithm_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'KEY-AGREE'), [u'Params']), opt=True)
-    __KeyAgreePublicKey_algorithm_parameters._const_tab = ___KeyAgreePublicKey_algorithm_algorithm_tab
+    ___KeyAgreePublicKey_algorithm_parameters_tab = CLASS(name='_tab_KEY-AGREE', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'KEY-AGREE')))
+    ___KeyAgreePublicKey_algorithm_parameters_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    __KeyAgreePublicKey_algorithm_parameters._const_tab = ___KeyAgreePublicKey_algorithm_parameters_tab
     __KeyAgreePublicKey_algorithm_parameters._const_tab_at = ('..', u'algorithm')
     __KeyAgreePublicKey_algorithm_parameters._const_tab_id = u'Params'
     _KeyAgreePublicKey_algorithm._cont = ASN1Dict([
@@ -15652,11 +15801,15 @@ class SCVP_2009:
     _KeyAgreePublicKey_publicKey = BIT_STR(name=u'publicKey', mode=MODE_TYPE)
     _KeyAgreePublicKey_macAlgorithm = SEQ(name=u'macAlgorithm', mode=MODE_TYPE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'AlgorithmIdentifier')))
     __KeyAgreePublicKey_macAlgorithm_algorithm = OID(name=u'algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'MAC-ALGORITHM'), [u'id']))
-    __KeyAgreePublicKey_macAlgorithm_algorithm._const_tab = ___KeyAgreePublicKey_algorithm_algorithm_tab
+    ___KeyAgreePublicKey_macAlgorithm_algorithm_tab = CLASS(name='_tab_MAC-ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'MAC-ALGORITHM')))
+    ___KeyAgreePublicKey_macAlgorithm_algorithm_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    __KeyAgreePublicKey_macAlgorithm_algorithm._const_tab = ___KeyAgreePublicKey_macAlgorithm_algorithm_tab
     __KeyAgreePublicKey_macAlgorithm_algorithm._const_tab_at = None
     __KeyAgreePublicKey_macAlgorithm_algorithm._const_tab_id = u'id'
     __KeyAgreePublicKey_macAlgorithm_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'MAC-ALGORITHM'), [u'Params']), opt=True)
-    __KeyAgreePublicKey_macAlgorithm_parameters._const_tab = ___KeyAgreePublicKey_algorithm_algorithm_tab
+    ___KeyAgreePublicKey_macAlgorithm_parameters_tab = CLASS(name='_tab_MAC-ALGORITHM', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'MAC-ALGORITHM')))
+    ___KeyAgreePublicKey_macAlgorithm_parameters_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    __KeyAgreePublicKey_macAlgorithm_parameters._const_tab = ___KeyAgreePublicKey_macAlgorithm_parameters_tab
     __KeyAgreePublicKey_macAlgorithm_parameters._const_tab_at = ('..', u'algorithm')
     __KeyAgreePublicKey_macAlgorithm_parameters._const_tab_id = u'Params'
     _KeyAgreePublicKey_macAlgorithm._cont = ASN1Dict([
@@ -15666,11 +15819,15 @@ class SCVP_2009:
     _KeyAgreePublicKey_macAlgorithm._ext = None
     _KeyAgreePublicKey_kDF = SEQ(name=u'kDF', mode=MODE_TYPE, typeref=ASN1RefType(('AlgorithmInformation-2009', 'AlgorithmIdentifier')), opt=True)
     __KeyAgreePublicKey_kDF_algorithm = OID(name=u'algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'KEY-DERIVATION'), [u'id']))
-    __KeyAgreePublicKey_kDF_algorithm._const_tab = ___KeyAgreePublicKey_algorithm_algorithm_tab
+    ___KeyAgreePublicKey_kDF_algorithm_tab = CLASS(name='_tab_KEY-DERIVATION', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'KEY-DERIVATION')))
+    ___KeyAgreePublicKey_kDF_algorithm_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    __KeyAgreePublicKey_kDF_algorithm._const_tab = ___KeyAgreePublicKey_kDF_algorithm_tab
     __KeyAgreePublicKey_kDF_algorithm._const_tab_at = None
     __KeyAgreePublicKey_kDF_algorithm._const_tab_id = u'id'
     __KeyAgreePublicKey_kDF_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('AlgorithmInformation-2009', 'KEY-DERIVATION'), [u'Params']), opt=True)
-    __KeyAgreePublicKey_kDF_parameters._const_tab = ___KeyAgreePublicKey_algorithm_algorithm_tab
+    ___KeyAgreePublicKey_kDF_parameters_tab = CLASS(name='_tab_KEY-DERIVATION', mode=MODE_SET, typeref=ASN1RefType(('AlgorithmInformation-2009', 'KEY-DERIVATION')))
+    ___KeyAgreePublicKey_kDF_parameters_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    __KeyAgreePublicKey_kDF_parameters._const_tab = ___KeyAgreePublicKey_kDF_parameters_tab
     __KeyAgreePublicKey_kDF_parameters._const_tab_at = ('..', u'algorithm')
     __KeyAgreePublicKey_kDF_parameters._const_tab_id = u'Params'
     _KeyAgreePublicKey_kDF._cont = ASN1Dict([
@@ -15784,7 +15941,9 @@ class SCVP_2009:
     ___CVResponse_cvResponseExtensions__item__critical = BOOL(name=u'critical', mode=MODE_TYPE, default=False)
     ___CVResponse_cvResponseExtensions__item__extnValue = OCT_STR(name=u'extnValue', mode=MODE_TYPE)
     ____CVResponse_cvResponseExtensions__item__extnValue_contain = OPEN(name='_cont_extnValue', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKIX-CommonTypes-2009', 'EXTENSION'), [u'ExtnType']))
-    ____CVResponse_cvResponseExtensions__item__extnValue_contain._const_tab = ____CVResponse_cvResponseExtensions__item__extnID_tab
+    _____CVResponse_cvResponseExtensions__item__extnValue_contain_tab = CLASS(name='_tab_EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'EXTENSION')))
+    _____CVResponse_cvResponseExtensions__item__extnValue_contain_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____CVResponse_cvResponseExtensions__item__extnValue_contain._const_tab = _____CVResponse_cvResponseExtensions__item__extnValue_contain_tab
     ____CVResponse_cvResponseExtensions__item__extnValue_contain._const_tab_at = ('..', u'extnID')
     ____CVResponse_cvResponseExtensions__item__extnValue_contain._const_tab_id = u'ExtnType'
     ___CVResponse_cvResponseExtensions__item__extnValue._const_cont = ____CVResponse_cvResponseExtensions__item__extnValue_contain
@@ -15887,7 +16046,9 @@ class SCVP_2009:
     ___CertReply_certReplyExtensions__item__critical = BOOL(name=u'critical', mode=MODE_TYPE, default=False)
     ___CertReply_certReplyExtensions__item__extnValue = OCT_STR(name=u'extnValue', mode=MODE_TYPE)
     ____CertReply_certReplyExtensions__item__extnValue_contain = OPEN(name='_cont_extnValue', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKIX-CommonTypes-2009', 'EXTENSION'), [u'ExtnType']))
-    ____CertReply_certReplyExtensions__item__extnValue_contain._const_tab = ____CertReply_certReplyExtensions__item__extnID_tab
+    _____CertReply_certReplyExtensions__item__extnValue_contain_tab = CLASS(name='_tab_EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PKIX-CommonTypes-2009', 'EXTENSION')))
+    _____CertReply_certReplyExtensions__item__extnValue_contain_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    ____CertReply_certReplyExtensions__item__extnValue_contain._const_tab = _____CertReply_certReplyExtensions__item__extnValue_contain_tab
     ____CertReply_certReplyExtensions__item__extnValue_contain._const_tab_at = ('..', u'extnID')
     ____CertReply_certReplyExtensions__item__extnValue_contain._const_tab_id = u'ExtnType'
     ___CertReply_certReplyExtensions__item__extnValue._const_cont = ____CertReply_certReplyExtensions__item__extnValue_contain
@@ -16478,6 +16639,7 @@ class SCVP_2009:
         ____CVRequest_requestExtensions__item__extnID_tab,
         ___CVRequest_requestExtensions__item__extnID,
         ___CVRequest_requestExtensions__item__critical,
+        _____CVRequest_requestExtensions__item__extnValue_contain_tab,
         ____CVRequest_requestExtensions__item__extnValue_contain,
         ___CVRequest_requestExtensions__item__extnValue,
         __CVRequest_requestExtensions__item_,
@@ -16536,6 +16698,7 @@ class SCVP_2009:
         ____Query_queryExtensions__item__extnID_tab,
         ___Query_queryExtensions__item__extnID,
         ___Query_queryExtensions__item__critical,
+        _____Query_queryExtensions__item__extnValue_contain_tab,
         ____Query_queryExtensions__item__extnValue_contain,
         ___Query_queryExtensions__item__extnValue,
         __Query_queryExtensions__item_,
@@ -16618,13 +16781,18 @@ class SCVP_2009:
         TrustAnchors,
         ___KeyAgreePublicKey_algorithm_algorithm_tab,
         __KeyAgreePublicKey_algorithm_algorithm,
+        ___KeyAgreePublicKey_algorithm_parameters_tab,
         __KeyAgreePublicKey_algorithm_parameters,
         _KeyAgreePublicKey_algorithm,
         _KeyAgreePublicKey_publicKey,
+        ___KeyAgreePublicKey_macAlgorithm_algorithm_tab,
         __KeyAgreePublicKey_macAlgorithm_algorithm,
+        ___KeyAgreePublicKey_macAlgorithm_parameters_tab,
         __KeyAgreePublicKey_macAlgorithm_parameters,
         _KeyAgreePublicKey_macAlgorithm,
+        ___KeyAgreePublicKey_kDF_algorithm_tab,
         __KeyAgreePublicKey_kDF_algorithm,
+        ___KeyAgreePublicKey_kDF_parameters_tab,
         __KeyAgreePublicKey_kDF_parameters,
         _KeyAgreePublicKey_kDF,
         KeyAgreePublicKey,
@@ -16666,6 +16834,7 @@ class SCVP_2009:
         ____CVResponse_cvResponseExtensions__item__extnID_tab,
         ___CVResponse_cvResponseExtensions__item__extnID,
         ___CVResponse_cvResponseExtensions__item__critical,
+        _____CVResponse_cvResponseExtensions__item__extnValue_contain_tab,
         ____CVResponse_cvResponseExtensions__item__extnValue_contain,
         ___CVResponse_cvResponseExtensions__item__extnValue,
         __CVResponse_cvResponseExtensions__item_,
@@ -16697,6 +16866,7 @@ class SCVP_2009:
         ____CertReply_certReplyExtensions__item__extnID_tab,
         ___CertReply_certReplyExtensions__item__extnID,
         ___CertReply_certReplyExtensions__item__critical,
+        _____CertReply_certReplyExtensions__item__extnValue_contain_tab,
         ____CertReply_certReplyExtensions__item__extnValue_contain,
         ___CertReply_certReplyExtensions__item__extnValue,
         __CertReply_certReplyExtensions__item_,
