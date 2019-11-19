@@ -389,7 +389,7 @@ class EPSID(Envelope):
             return (type, self[3].decode(), self[4](), self[5](), self[6]())
     
     def encode(self, type, ident):
-        """sets the mobile identity with given type
+        """sets the EPS mobile identity with given type
         
         if type is IDTYPE_IMSI or IDTYPE_IMEISV: ident must be a string of digits
         if type is IDTYPE_GUTI: ident must be a 4-tuple (PLMN -string of digits-, 
