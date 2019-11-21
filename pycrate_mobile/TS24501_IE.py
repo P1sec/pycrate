@@ -42,10 +42,10 @@ from pycrate_core.repr   import *
 from pycrate_core.charpy import Charpy
 
 from pycrate_mobile.TS24008_IE  import (
-    BufBCD, PLMN
+    BufBCD, PLMN, GPRSTimer3,
     )
 from pycrate_mobile.TS24301_IE import (
-    UENetCap as S1UENetCap, UESecCap as S1UESecCap
+    UENetCap as S1UENetCap, UESecCap as S1UESecCap,
     )
 
 _str_reserved = 'reserved'
@@ -67,12 +67,26 @@ SecHdrType_dict = {
 
 
 #------------------------------------------------------------------------------#
+# DNN
+# TS 24.301, 9.11.2.1A
+#------------------------------------------------------------------------------#
+
+class DNN(Envelope):
+    _GEN = (
+        Uint8('Len'),
+        Buf('Value')
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_len())
+        self[1].set_blauto(lambda: self[0].get_val()<<3)
+
+
+#------------------------------------------------------------------------------#
 # S-NSSAI
 # TS 24.301, 9.11.2.8
 #------------------------------------------------------------------------------#
-
-class _SNSSAI_SST(Uint8):
-    _name = 'SST'
 
 class _SNSSAI_SST_MappedHSST(Envelope):
     _GEN = (
@@ -80,11 +94,13 @@ class _SNSSAI_SST_MappedHSST(Envelope):
         Uint8('MappedHPLMNSST')
         )
 
+
 class _SNSSAI_SST_SD(Envelope):
     _GEN = (
         Uint8('SST'),
         Uint16('SD')
         )
+
 
 class _SNSSAI_SST_SD_MappedHSST(Envelope):
     _GEN = (
@@ -92,6 +108,7 @@ class _SNSSAI_SST_SD_MappedHSST(Envelope):
         Uint16('SD'),
         Uint8('MappedHPLMNSST')
         )
+
 
 class _SNSSAI_SST_SD_MappedHSSTSD(Envelope):
     _GEN = (
@@ -101,6 +118,7 @@ class _SNSSAI_SST_SD_MappedHSSTSD(Envelope):
         Uint16('MappedHPLMNSD')
         )
 
+
 class _SNSSAI_SST_SD_MappedHSSTSD_spare(Envelope):
     _GEN = (
         Uint8('SST'),
@@ -109,6 +127,7 @@ class _SNSSAI_SST_SD_MappedHSSTSD_spare(Envelope):
         Uint16('MappedHPLMNSD'),
         Buf('spare', rep=REPR_HEX)
         )
+
 
 class SNSSAI(Envelope):
     _GEN = (
@@ -120,9 +139,13 @@ class SNSSAI(Envelope):
             3 : _SNSSAI_SST_SD('SST_SD'),
             4 : _SNSSAI_SST_SD_MappedHSSTSD('SST_SD_MappedHPLMNSSTSD')},
             DEFAULT=_SNSSAI_SST_SD_MappedHSSTSD_spare('SST_SD_MappedHPLMNSSTSD_spare'),
-            sel=lambda self: self.get_env()[0].get_val()
+            sel=lambda self: self.get_env()['Len'].get_val()
             )
         )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_len())
 
 
 #------------------------------------------------------------------------------#
@@ -248,6 +271,7 @@ _FGSDRXParam_dict = {
     }
 
 class FGSDRXParam(Envelope):
+    _name = '5GSDRXParam'
     _GEN = (
         Uint('spare', bl=4, rep=REPR_HEX),
         Uint('Value', bl=4, dic=_FGSDRXParam_dict)
@@ -356,6 +380,7 @@ class SUPI_NAI(UTF8String):
 
 
 class FGSIDSUPI(Envelope):
+    _name = '5GSIDSUPI'
     _GEN = (
         Uint('spare', bl=1),
         Uint('Fmt', bl=3, dic={0:'IMSI', 1:'NAI'}),
@@ -370,6 +395,7 @@ class FGSIDSUPI(Envelope):
 
 
 class FGSIDGUTI(Envelope):
+    _name = '5GSIDGUTI'
     _GEN = (
         Uint('ind', val=0xf, bl=4, rep=REPR_HEX),
         Uint('spare', bl=1),
@@ -384,6 +410,7 @@ class FGSIDGUTI(Envelope):
 
 # for IMEI and IMEISV
 class FGSIDDigit(Envelope):
+    _name = '5GSIDDigit'
     _GEN = (
         Uint('Digit1', val=0xF, bl=4, rep=REPR_HEX),
         Uint('Odd', bl=1),
@@ -393,6 +420,7 @@ class FGSIDDigit(Envelope):
 
 
 class FGSIDTMSI(Envelope):
+    _name = '5GSIDTMSI'
     _GEN = (
         Uint('ind', val=0xf, bl=4, rep=REPR_HEX),
         Uint('spare', bl=1),
@@ -405,6 +433,7 @@ class FGSIDTMSI(Envelope):
 
 
 class FGSIDNone(Envelope):
+    _name = '5GSIDNone'
     _GEN = (
         Uint('spare', bl=5, rep=REPR_HEX),
         Uint('Type', val=FGSIDTYPE_NO, bl=3, dic=FGSIDType_dict)
@@ -412,6 +441,7 @@ class FGSIDNone(Envelope):
 
 
 class FGSIDMAC(Envelope):
+    _name = '5GSIDMAC'
     _GEN = (
         Uint('spare', bl=5, rep=REPR_HEX),
         Uint('Type', val=FGSIDTYPE_MAC, bl=3, dic=FGSIDType_dict),
@@ -420,6 +450,7 @@ class FGSIDMAC(Envelope):
 
 
 class FGSIDUnk(Envelope):
+    _name = '5GSIDUnk'
     _GEN = (
         Uint('spare', bl=5, rep=REPR_HEX),
         Uint('Type', val=FGSIDTYPE_MAC, bl=3, dic=FGSIDType_dict),
@@ -513,10 +544,11 @@ _FGSRegType_dict = {
     2 : 'mobility registration updating',
     3 : 'periodic registration updating',
     4 : 'emergency registration',
-    7 : 'reserved'
+    7 : _str_reserved
     }
 
 class FGSRegType(Envelope):
+    _name = '5GSRegType'
     _GEN = (
         Uint('FOR', bl=1, dic=_FOR_dict),
         Uint('Value', bl=3, dic=_FGSRegType_dict)
@@ -529,9 +561,26 @@ class FGSRegType(Envelope):
 #------------------------------------------------------------------------------#
 
 class FGSTAI(Envelope):
+    _name = '5GSTAI'
     _GEN = (
         PLMN(),
         Uint24('TAC', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# 5GS update type
+# TS 24.301, 9.11.3.9A
+#------------------------------------------------------------------------------#
+
+class FGSUpdateType(Envelope):
+    _name = '5GSUpdateType'
+    _GEN = (
+        Uint('spare', bl=2),
+        Uint('EPS-PNB-CIoT', bl=2),
+        Uint('5GS-PNB-CIoT', bl=2),
+        Uint('NG-RAN-RCU', bl=1),
+        Uint('SMSRequested', bl=1)
         )
 
 
@@ -589,6 +638,15 @@ class AllowedPDUSessStat(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# LADN indication
+# TS 24.501, 9.11.3.29
+#------------------------------------------------------------------------------#
+
+class LADNInd(Sequence):
+    _GEN = DNN()
+
+
+#------------------------------------------------------------------------------#
 # MICO indication
 # TS 24.501, 9.11.3.31
 #------------------------------------------------------------------------------#
@@ -602,12 +660,156 @@ class MICOInd(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# Network slicing indication
+# TS 24.501, 9.11.3.36
+#------------------------------------------------------------------------------#
+
+class NetSlicingInd(Envelope):
+    _GEN = (
+        Uint('spare', bl=2),
+        Uint('DCNI', bl=1, dic={
+             0: 'requested NSSAI not created from default configured NSSAI',
+             1: 'requested NSSAI created from default configured NSSAI'}),
+        Uint('NSSCI', bl=1, dic={
+             0: 'network slicing subscription not changed',
+             1: 'network slicing subscription changed'})
+        )
+
+
+#------------------------------------------------------------------------------#
 # NSSAI
 # TS 24.501, 9.11.3.37
 #------------------------------------------------------------------------------#
 
 class NSSAI(Sequence):
     _GEN = SNSSAI()
+
+
+#------------------------------------------------------------------------------#
+# Payload container type
+# TS 24.501, 9.11.3.40
+#------------------------------------------------------------------------------#
+
+PayloadContainerType_dict = {
+    1 : 'N1 SM information',
+    2 : 'SMS',
+    3 : 'LTE Positioning Protocol message container',
+    4 : 'SOR transparent container',
+    5 : 'UE policy container',
+    6 : 'UE parameters update transparent container',
+    7 : 'Location services message container',
+    8 : 'CIoT user data container',
+    15: 'Multiple payloads'
+    }
+
+#------------------------------------------------------------------------------#
+# PDU session identity 2
+# TS 24.501, 9.11.3.41
+#------------------------------------------------------------------------------#
+
+class PDUSessID(Uint8):
+    _dic = {0: 'no PDU session ID assigned'}
+
+
+#------------------------------------------------------------------------------#
+# Request type
+# TS 24.501, 9.11.3.47
+#------------------------------------------------------------------------------#
+
+_RequestType_dict = {
+    1 : 'initial request',
+    2 : 'existing PDU session',
+    3 : 'initial emergency request',
+    4 : 'existing emergency PDU session',
+    5 : 'modification request',
+    6 : 'MA PDU request',
+    7 : _str_reserved
+    }
+
+class RequestType(Envelope):
+    _GEN = (
+        Uint('spare', bl=1),
+        Uint('Value', bl=3, dic=_RequestType_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Payload container
+# TS 24.501, 9.11.3.39
+#------------------------------------------------------------------------------#
+
+_PayContOptType_dict = {
+    12 : 'PDU session ID',
+    24 : 'Additional information',
+    58 : '5GMM cause',
+    37 : 'Back-off timer value',
+    59 : 'Old PDU session ID',
+    80 : 'Request type',
+    22 : 'S-NSSAI',
+    25 : 'DNN'
+    }
+
+
+class _PayContOpt(Envelope):
+    _GEN = (
+        Uint8('Type', dic=_PayContOptType_dict),
+        Uint8('Len'),
+        Alt('Val', GEN={
+            12 : PDUSessID(),
+            24 : Buf('AdditionalInfo', rep=REPR_HEX),
+            58 : FGMMCause(),
+            37 : GPRSTimer3('BackOffTimer'),
+            59 : PDUSessID('OldPDUSessID'),
+            80 : Uint8('RequestType', dic=_RequestType_dict),
+            22 : SNSSAI()['Value'],
+            25 : Buf('DNN')
+            },
+            DEFAULT=Buf('Val'),
+            sel=lambda self: self.get_env()[0].get_val()
+            )
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[1].set_valauto(lambda: self[2].get_len())
+    
+    def _from_char(self, char):
+        self[0]._from_char(char)
+        self[1]._from_char(char)
+        optlen  = self[1].get_val()
+        char_lb = char._len_bit
+        char._len_bit = char._cur + (optlen<<3)
+        self[2]._from_char(char)
+        char._len_bit = char_lb
+
+
+class _PayContEntry(Envelope):
+    _GEN = (
+        Uint16('Len'),
+        Uint('OptNum', bl=4),
+        Uint('Type', bl=4, dic=PayloadContainerType_dict),
+        Sequence('Opts', GEN=_PayContOpt('Opt')),
+        Buf('Cont')
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: 1 + self[3].get_len() + self[4].get_len())
+        self[1].set_valauto(lambda: self[3].get_num())
+        self[3].set_numauto(lambda: self[1].get_val())
+        self[4].set_blauto(lambda: self[0].get_val() - 1 - self[3].get_len())
+
+
+class PayloadContainer(Envelope):
+    _GEN = (
+        Uint8('Num'),
+        Sequence('Entries', GEN=_PayContEntry('Entry'))
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_num())
+        self[1].set_numauto(lambda: self[0].get_val())
 
 
 #------------------------------------------------------------------------------#
@@ -620,22 +822,22 @@ class UESecCap(Envelope):
     ENV_SEL_TRANS = False
     
     _GEN = (
-        Uint('5GEA0', bl=1),
-        Uint('5GEA1_128', bl=1),
-        Uint('5GEA2_128', bl=1),
-        Uint('5GEA3_128', bl=1),
-        Uint('5GEA4', bl=1),
-        Uint('5GEA5', bl=1),
-        Uint('5GEA6', bl=1),
-        Uint('5GEA7', bl=1),
-        Uint('5GIA0', bl=1),
-        Uint('5GIA1_128', bl=1),
-        Uint('5GIA2_128', bl=1),
-        Uint('5GIA3_128', bl=1),
-        Uint('5GIA4', bl=1),
-        Uint('5GIA5', bl=1),
-        Uint('5GIA6', bl=1),
-        Uint('5GIA7', bl=1), # end of octet 2 (mandatory part)
+        Uint('5G-EA0', bl=1),
+        Uint('5G-EA1_128', bl=1),
+        Uint('5G-EA2_128', bl=1),
+        Uint('5G-EA3_128', bl=1),
+        Uint('5G-EA4', bl=1),
+        Uint('5G-EA5', bl=1),
+        Uint('5G-EA6', bl=1),
+        Uint('5G-EA7', bl=1),
+        Uint('5G-IA0', bl=1),
+        Uint('5G-IA1_128', bl=1),
+        Uint('5G-IA2_128', bl=1),
+        Uint('5G-IA3_128', bl=1),
+        Uint('5G-IA4', bl=1),
+        Uint('5G-IA5', bl=1),
+        Uint('5G-IA6', bl=1),
+        Uint('5G-IA7', bl=1), # end of octet 2 (mandatory part)
         Uint('EEA0', bl=1),
         Uint('EEA1_128', bl=1),
         Uint('EEA2_128', bl=1),

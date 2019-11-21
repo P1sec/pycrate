@@ -41,10 +41,10 @@ from pycrate_core.base  import *
 
 from .TS24007       import *
 from .TS24008_IE    import (
-    AUTN,
+    AUTN, MSCm2, SuppCodecList, ExtDRXParam,
     )
 from .TS24301_IE    import (
-    NAS_KSI,
+    NAS_KSI, EPSBearerCtxtStat,
     )
 from .TS24501_IE    import *
 #from .TS24501_FGSM  import FGSMTypeClasses
@@ -225,9 +225,18 @@ class FGMMRegistrationRequest(Layer3):
         Type4TLV('AllowedPDUSessStat', val={'T':0x25, 'V':b'\0\0'}, IE=AllowedPDUSessStat()),
         Type4TLV('UEUsage', val={'T':0x18, 'V':b'\0'}, IE=UEUsage()),
         Type4TLV('5GSDRXParam', val={'T':0x51, 'V':b'\0'}, IE=FGSDRXParam()),
-        
-        
-        # TODO
-        
+        Type6TLVE('EPSNASContainer', val={'T':0x70, 'V':b'\x07\0'}),
+        Type6TLVE('LADNInd', val={'T':0x74, 'V':b''}, IE=LADNInd()),
+        Type1TV('PayloadContainerType', val={'T':0x8, 'V':1}, dic=PayloadContainerType_dict),
+        Type6TLVE('PayloadContainer', val={'T':0x7B, 'V':b'\0'}, IE=PayloadContainer()),
+        Type1TV('NetSlicingInd', val={'T':0x9, 'V':0}, IE=NetSlicingInd()),
+        Type4TLV('5GSUpdateType', val={'T':0x43, 'V':b'\0'}, IE=FGSUpdateType()),
+        Type4TLV('MSCm2', val={'T':0x41, 'V':b'@\0\0'}, IE=MSCm2()),
+        Type4TLV('SuppCodecs', val={'T':0x42, 'V':b'\0\x01\0'}, IE=SuppCodecList()),
+        Type6TLVE('NASContainer', val={'T':0x71, 'V':b'\0\0'}),
+        Type4TLV('EPSBearerCtxtStat', val={'T':0x60, 'V':b'\0\0'}, IE=EPSBearerCtxtStat()),
+        Type4TLV('ExtDRXParam', val={'T':0x6E, 'V':b'\0'}, IE=ExtDRXParam()),
+        Type4TLV('T3324', val={'T':0x6A, 'V':b'\0'}, IE=GPRSTimer3()),
+        Type4TLV('UERadioCapID', val={'T':0x67, 'V':b'\0'}, IE=UERadioCapID()),
         )
 
