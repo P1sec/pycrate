@@ -864,7 +864,7 @@ class Atom(Element):
         elif 'name' in kw:
             self._name = str(kw['name'])
         # if not provided, it's the class name
-        else:
+        elif not hasattr(self, '_name'):
             self._name = self.__class__.__name__
         
         # element description customization
@@ -1519,7 +1519,7 @@ class Envelope(Element):
         elif 'name' in kw:
             self._name = str(kw['name'])
         # if not provided, it's the class name
-        else:
+        elif not hasattr(self, '_name'):
             self._name = self.__class__.__name__
         
         # envelope description customization
@@ -2294,7 +2294,7 @@ class Array(Element):
         elif 'name' in kw:
             self._name = str(kw['name'])
         # if not provided, it's the class name
-        else:
+        elif not hasattr(self, '_name'):
             self._name = self.__class__.__name__
         
         # array description customization
@@ -3159,7 +3159,7 @@ class Sequence(Element):
         elif 'name' in kw:
             self._name = str(kw['name'])
         # if not provided, it's the class name
-        else:
+        elif not hasattr(self, '_name'):
             self._name = self.__class__.__name__
         
         # sequence description customization
@@ -4045,7 +4045,7 @@ class Alt(Element):
         elif 'name' in kw:
             self._name = str(kw['name'])
         # if not provided, it's the class name
-        else:
+        elif not hasattr(self, '_name'):
             self._name = self.__class__.__name__
         
         # alt description customization
