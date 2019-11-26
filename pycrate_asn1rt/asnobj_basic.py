@@ -483,7 +483,7 @@ Specific attribute:
                   .format(self.fullname())))
         if vbnd[1] - vbnd[0] <= 0:
             raise(ASN1BERDecodeErr('{0}: invalid INTEGER length, {1!r}'\
-                  .format(self.fullname(), lval)))
+                  .format(self.fullname(), vbnd[1]-vbnd[0])))
         char._cur, char._len_bit = vbnd[0], vbnd[1]
         V = Int('V', bl=vbnd[1]-vbnd[0])
         V._from_char(char)
@@ -496,7 +496,7 @@ Specific attribute:
                   .format(self.fullname())))
         if vbnd[1] - vbnd[0] <= 0:
             raise(ASN1BERDecodeErr('{0}: invalid INTEGER length, {1!r}'\
-                  .format(self.fullname(), lval)))
+                  .format(self.fullname(), vbnd[1]-vbnd[0])))
         char._cur, char._len_bit = vbnd[0], vbnd[1]
         self._val = char.get_int(vbnd[1]-vbnd[0])
     
