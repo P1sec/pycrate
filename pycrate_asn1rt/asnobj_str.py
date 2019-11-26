@@ -726,35 +726,36 @@ Specific constraints attributes:
             Frag, bsfrag = [], []
             for tlv in vs:
                 Tag, cl, pc, tval, Len, lval = tlv[0:6]
-                if pc != 0:
-                    # fragmenting the fragment... damned BER recursivity !
-                    raise(ASN1NotSuppErr('{0}: BIT STRING fragments of fragments'\
-                          .format(self.fullname())))
-                elif cl != 0:
+                if cl != 0:
                     raise(ASN1BERDecodeErr('{0}: invalid BIT STRING fragment tag class, {1!r}'\
                           .format(self.fullname(), cl)))
-                elif (tval, lval) == (0, 0):
-                    # EOC marker
-                    assert( tlv == v[-1] )
-                    Frag.append( Envelope('EOC', GEN=(Tag, Len)) )
-                elif lval == 0:
-                    raise(ASN1BERDecodeErr('{0}: invalid BIT STRING fragment length'\
-                          .format(self.fullname())))
                 elif tval != 3:
                     raise(ASN1BERDecodeErr('{0}: invalid BIT STRING fragment tag value, {1!r}'\
                           .format(self.fullname(), tval)))
+                elif lval == 0:
+                    raise(ASN1BERDecodeErr('{0}: invalid BIT STRING fragment length'\
+                          .format(self.fullname())))
+                elif pc != 0:
+                    # fragmenting the fragment... damned BER recursivity !
+                    raise(ASN1NotSuppErr('{0}: BIT STRING fragments within fragments'\
+                          .format(self.fullname())))
+                elif (tval, lval) == (0, 0):
+                    # EOC marker
+                    if tlv != vs[-1]:
+                        raise(ASN1BERDecodeErr('{0}: invalid EOC within BIT STRING fragments'))
+                    Frag.append( Envelope('EOC', GEN=(Tag, Len)) )
                 else:
-                    char._cur, char._len_bit = tlv[-1][0], tlv[-1][1]
+                    char._cur, char._len_bit = tlv[6][0], tlv[6][1]
                     Bu = Uint8('BU')
                     Bu._from_char(char)
                     bu = Bu()
                     if bu > 7:
                         raise(ASN1BERDecodeErr('{0}: invalid BIT STRING counter for unused bits'\
                               .format(self.fullname())))
-                    Bs = Buf('BS', bl=tlv[-1][1]-tlv[-1][0]-8, rep=REPR_HEX)
+                    Bs = Buf('BS', bl=tlv[6][1]-tlv[6][0]-8, rep=REPR_HEX)
                     Bs._from_char(char)
                     # concat the fragment of bit string
-                    bsfrag.append( (T_BYTES, Bs.to_bytes(), tlv[-1][1]-tlv[-1][0]-8-bu) )
+                    bsfrag.append( (T_BYTES, Bs.to_bytes(), tlv[6][1]-tlv[6][0]-8-bu) )
                     # generate the fragment envelope
                     Frag.append( Envelope('TLV', GEN=(Tag, Len, Envelope('V', GEN=(Bu, Bs)))) )
             # generate the complete V envelope
@@ -789,32 +790,32 @@ Specific constraints attributes:
             bsfrag = []
             for tlv in vs:
                 cl, pc, tval, lval = tlv[0:4]
-                if pc != 0:
-                    # fragmenting the fragment... damned BER recursivity !
-                    raise(ASN1NotSuppErr('{0}: BIT STRING fragments of fragments'\
-                          .format(self.fullname())))
-                elif cl != 0:
+                if cl != 0:
                     raise(ASN1BERDecodeErr('{0}: invalid BIT STRING fragment tag class, {1!r}'\
                           .format(self.fullname(), cl)))
-                elif (tval, lval) == (0, 0):
-                    # EOC marker
-                    assert( tlv == v[-1] )
-                    pass
-                elif lval == 0:
-                    raise(ASN1BERDecodeErr('{0}: invalid BIT STRING fragment length'\
-                          .format(self.fullname())))
                 elif tval != 3:
                     raise(ASN1BERDecodeErr('{0}: invalid BIT STRING fragment tag value, {1!r}'\
                           .format(self.fullname(), tval)))
+                elif lval == 0:
+                    raise(ASN1BERDecodeErr('{0}: invalid BIT STRING fragment length'\
+                          .format(self.fullname())))
+                elif pc != 0:
+                    # fragmenting the fragment... damned BER recursivity !
+                    raise(ASN1NotSuppErr('{0}: BIT STRING fragments within fragments'\
+                          .format(self.fullname())))
+                elif (tval, lval) == (0, 0):
+                    # EOC marker
+                    if tlv != vs[-1]:
+                        raise(ASN1BERDecodeErr('{0}: invalid EOC within BIT STRING fragments'))
                 else:
-                    char._cur, char._len_bit = tlv[-1][0], tlv[-1][1]
+                    char._cur, char._len_bit = tlv[4][0], tlv[4][1]
                     bu = char.get_uint(8)
                     if bu > 7:
                         raise(ASN1BERDecodeErr('{0}: invalid BIT STRING counter for unused bits'\
                               .format(self.fullname())))
                     bs = char.get_bytes(8*(lval-1))
                     # concat the fragment of bit string
-                    bsfrag.append( (T_BYTES, bs, tlv[-1][1]-tlv[-1][0]-8-bu) )
+                    bsfrag.append( (T_BYTES, bs, tlv[4][1]-tlv[4][0]-8-bu) )
             # process the defragmented bit string
             self.__from_ber_buf( *pack_val(*bsfrag) )
         else:
@@ -1459,11 +1460,13 @@ Specific constraints attributes:
                     raise(ASN1NotSuppErr('{0}: OCTET STRING fragments within fragments'\
                           .format(self.fullname())))
                 elif (tval, lval) == (0, 0):
-                    # EOC marker, nothing to do here
+                    # EOC marker
+                    if tlv != vs[-1]:
+                        raise(ASN1BERDecodeErr('{0}: invalid EOC within OCTET STRING fragments'))
                     Frag.append( Envelope('EOC', GEN=(Tag, Len)) )
                 else:
-                    char._cur, char._len_bit = tlv[-1][0], tlv[-1][1]
-                    Val = Buf('V', bl=tlv[-1][1]-tlv[-1][0], rep=REPR_HEX)
+                    char._cur, char._len_bit = tlv[6][0], tlv[6][1]
+                    Val = Buf('V', bl=tlv[6][1]-tlv[6][0], rep=REPR_HEX)
                     Val._from_char(char)
                     osfrag.append( Val.to_bytes() )
                     Frag.append( Envelope('TLV', GEN=(Tag, Len, Val)) )
@@ -1499,11 +1502,12 @@ Specific constraints attributes:
                     raise(ASN1NotSuppErr('{0}: OCTET STRING fragments within fragments'\
                           .format(self.fullname())))
                 elif (tval, lval) == (0, 0):
-                    # EOC marker, nothing to do here
-                    pass
+                    # EOC marker
+                    if tlv != vs[-1]:
+                        raise(ASN1BERDecodeErr('{0}: invalid EOC within OCTET STRING fragments'))
                 else:
-                    char._cur, char._len_bit = tlv[-1][0], tlv[-1][1]
-                    osfrag.append( char.get_bytes(tlv[-1][1]-tlv[-1][0]) )
+                    char._cur, char._len_bit = tlv[4][0], tlv[4][1]
+                    osfrag.append( char.get_bytes() )
             # process the defragmented octet string
             self.__from_ber_buf( b''.join(osfrag) )
         else:
@@ -2317,23 +2321,24 @@ Virtual parent for any ASN.1 *String object
             Frag, sfrag = [], []
             for tlv in vs:
                 Tag, cl, pc, tval, Len, lval = tlv[0:6]
-                if pc != 0:
-                    # fragmenting the fragment... damned BER recursivity !
-                    raise(ASN1NotSuppErr('{0}: String fragments of fragments'\
-                          .format(self.fullname())))
-                elif cl != 0:
+                if cl != 0:
                     raise(ASN1BERDecodeErr('{0}: invalid String fragment tag class, {1!r}'\
                           .format(self.fullname(), cl)))
-                elif (tval, lval) == (0, 0):
-                    # EOC marker
-                    assert( tlv == v[-1] )
-                    Frag.append( Envelope('EOC', GEN=(Tag, Len)) )
                 elif tval != self.TAG:
                     raise(ASN1BERDecodeErr('{0}: invalid String fragment tag value, {1!r}'\
                           .format(self.fullname(), tval)))
+                elif pc != 0:
+                    # fragmenting the fragment... damned BER recursivity !
+                    raise(ASN1NotSuppErr('{0}: String fragments within fragments'\
+                          .format(self.fullname())))
+                elif (tval, lval) == (0, 0):
+                    # EOC marker
+                    if tlv != vs[-1]:
+                        raise(ASN1BERDecodeErr('{0}: invalid EOC within String fragments'))
+                    Frag.append( Envelope('EOC', GEN=(Tag, Len)) )
                 else:
-                    char._cur, char._len_bit = tlv[-1][0], tlv[-1][1]
-                    Val = Buf('V', bl=tlv[-1][1]*tlv[-1][0])
+                    char._cur, char._len_bit = tlv[6][0], tlv[6][1]
+                    Val = Buf('V', bl=tlv[6][1]-tlv[6][0])
                     Val._from_char(char)
                     sfrag.append( Val.to_bytes() )
                     Frag.append( Envelope('TLV', GEN=(Tag, Len, Val)) )
@@ -2372,22 +2377,23 @@ Virtual parent for any ASN.1 *String object
             sfrag = []
             for tlv in vs:
                 cl, pc, tval, lval = tlv[0:4]
-                if pc != 0:
-                    # fragmenting the fragment... damned BER recursivity !
-                    raise(ASN1NotSuppErr('{0}: String fragments of fragments'\
-                          .format(self.fullname())))
-                elif cl != 0:
+                if cl != 0:
                     raise(ASN1BERDecodeErr('{0}: invalid String fragment tag class, {1!r}'\
                           .format(self.fullname(), cl)))
-                elif (tval, lval) == (0, 0):
-                    # EOC marker
-                    assert( tlv == v[-1] )
                 elif tval != self.TAG:
                     raise(ASN1BERDecodeErr('{0}: invalid String fragment tag value, {1!r}'\
                           .format(self.fullname(), tval)))
+                elif pc != 0:
+                    # fragmenting the fragment... damned BER recursivity !
+                    raise(ASN1NotSuppErr('{0}: String fragments of fragments'\
+                          .format(self.fullname())))
+                elif (tval, lval) == (0, 0):
+                    # EOC marker
+                    if tlv != vs[-1]:
+                        raise(ASN1BERDecodeErr('{0}: invalid EOC within String fragments'))
                 else:
-                    char._cur, char._len_bit = tlv[-1][0], tlv[-1][1]
-                    sfrag.append( char.get_bytes(tlv[-1][1]-tlv[-1][0]) )
+                    char._cur, char._len_bit = tlv[4][0], tlv[4][1]
+                    sfrag.append( char.get_bytes() )
             # process the defragmented string
             if self._codec is None:
                 raise(ASN1NotSuppErr('{0}: ISO 2022 codec not supported'\
