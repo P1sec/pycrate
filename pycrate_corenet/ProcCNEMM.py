@@ -1049,7 +1049,7 @@ class EMMAttach(EMMSigProc):
             if isinstance(self.S1.Config['EmergNumList'], bytes_types):
                 IEs['EmergNumList'] = self.S1.Config['EmergNumList']
             elif self.S1.Config['EmergNumList'] is not None:
-                IEs['EmergNumList'] = [{'ServiceCat': uint_to_bitlist(cat), 'Num': num} for \
+                IEs['EmergNumList'] = [{'ServiceCat': {c:1 for c in cat}, 'Num': num} for \
                                        (cat, num) in self.S1.Config['EmergNumList']]
             #
             if self.EMM.ATT_EPS_NETFEAT_SUPP:
@@ -1542,7 +1542,7 @@ class EMMTrackingAreaUpdate(EMMSigProc):
             if isinstance(self.S1.Config['EmergNumList'], bytes_types):
                 IEs['EmergNumList'] = self.S1.Config['EmergNumList']
             elif self.S1.Config['EmergNumList'] is not None:
-                IEs['EmergNumList'] = [{'ServiceCat': uint_to_bitlist(cat), 'Num': num} for \
+                IEs['EmergNumList'] = [{'ServiceCat': {c:1 for c in cat}, 'Num': num} for \
                                        (cat, num) in self.S1.Config['EmergNumList']]
             if self.EMM.TAU_EPS_NETFEAT_SUPP:
                 IEs['EPSNetFeat'] = self.EMM.TAU_EPS_NETFEAT_SUPP

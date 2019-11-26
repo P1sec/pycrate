@@ -879,7 +879,7 @@ class MMLocationUpdating(MMSigProc):
             if isinstance(self.Iu.Config['EmergNumList'], bytes_types):
                 IEs['EmergNumList'] = self.Iu.Config['EmergNumList']
             elif self.Iu.Config['EmergNumList'] is not None:
-                IEs['EmergNumList'] = [{'ServiceCat': uint_to_bitlist(cat), 'Num': num} for \
+                IEs['EmergNumList'] = [{'ServiceCat': {c:1 for c in cat}, 'Num': num} for \
                                        (cat, num) in self.Iu.Config['EmergNumList']]
             if self.MM.LU_T3212 is not None:
                 IEs['MST3212'] = self.MM.LU_T3212
