@@ -41,11 +41,12 @@ from pycrate_core.base  import *
 
 from .TS24007       import *
 from .TS24008_IE    import (
-    AUTN, MSCm2, SuppCodecList, ExtDRXParam, PLMNList, GPRSTimer2, GPRSTimer3,
-    EmergNumList, 
+    AUTN, MSCm2, SuppCodecList, ExtDRXParam, PLMNList, GPRSTimer, GPRSTimer3,
+    EmergNumList, Non3GPPNWProvPol, ExtDRXParam, 
     )
 from .TS24301_IE    import (
-    NAS_KSI, EPSBearerCtxtStat, UENetCap as S1UENetCap, ExtEmergNumList
+    NAS_KSI, EPSBearerCtxtStat, UENetCap as S1UENetCap, ExtEmergNumList, 
+    EPSBearerCtxtStat, 
     )
 from .TS24501_IE    import *
 #from .TS24501_FGSM  import FGSMTypeClasses
@@ -140,7 +141,7 @@ class FGMMAuthenticationRequest(Layer3):
     _GEN = (
         FGMMHeader(val={'Type':86}),
         Uint('spare', bl=4),
-        Type1V('NAS_KSI', IE=NAS_KSI()),
+        Type1V('NAS_KSI', val={'V': 7}, IE=NAS_KSI()),
         Type4LV('ABBA', val={'V':b'\0\0'}),
         Type3TV('RAND', val={'T':0x21, 'V':16*b'\0'}, bl={'V':128}),
         Type4LV('AUTN', val={'V':16*b'\0'}, IE=AUTN()),
@@ -170,7 +171,7 @@ class FGMMAuthenticationResult(Layer3):
     _GEN = (
         FGMMHeader(val={'Type':90}),
         Uint('spare', bl=4),
-        Type1V('NAS_KSI', IE=NAS_KSI()),
+        Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
         Type6LVE('EAPMsg', val={'V':b'\0\0\0\0'}),
         Type4TLV('ABBA', val={'T':0x38, 'V':b'\0\0'})
         )
@@ -209,7 +210,7 @@ class FGMMAuthenticationReject(Layer3):
 class FGMMRegistrationRequest(Layer3):
     _GEN = (
         FGMMHeader(val={'Type':65}),
-        Type1V('NAS_KSI', IE=NAS_KSI()),
+        Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
         Type1V('5GSRegType', IE=FGSRegType()),
         Type6LVE('5GSID', val={'V':b'\0\0\0\0'}, IE=FGSID()),
         Type1TV('NonCurrentNativeNAS_KSI', val={'T':0xC, 'V':0}, IE=NAS_KSI()),
@@ -273,12 +274,70 @@ class FGMMRegistrationAccept(Layer3):
         Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0'}),
         Type1TV('NSSAIInclMode', val={'T':0xA, 'V':0}, IE=NSSAIInclMode()),
         Type6TLVE('OperatorAccessCatDefs', val={'T':0x76, 'V':b''}, IE=OperatorAccessCatDefs()),
-        
-        
+        Type4TLV('5GSDRXParam', val={'T':0x51, 'V':b'\0'}, IE=FGSDRXParam()),
+        Type1TV('Non3GPPNWProvPol', val={'T':0xD, 'V':0}, IE=Non3GPPNWProvPol()),
+        Type4TLV('EPSBearerCtxtStat', val={'T':0x57, 'V':b'\0\0'}, IE=EPSBearerCtxtStat()),
+        Type4TLV('ExtDRXParam', val={'T':0x6E, 'V':b'\0'}, IE=ExtDRXParam()),
+        Type4TLV('T3447', val={'T':0x6C, 'V':b'\0'}, IE=GPRSTimer3()),
+        Type4TLV('T3448', val={'T':0x6B, 'V':b'\0'}, IE=GPRSTimer()),
+        Type4TLV('T3324', val={'T':0x6A, 'V':b'\0'}, IE=GPRSTimer()),
+        Type4TLV('UERadioCapID', val={'T':0x67, 'V':b'\0'}, IE=UERadioCapID()),
+        #Type1TV('UERadioCapIDDelInd', val={'T':0xB, 'V':0}, IE=UERadioCapIDDelInd()) # WNG: tag /fmt is invalid in current TS
+        )
+
+
+#------------------------------------------------------------------------------#
+# Registration complete
+# TS 24.501, section 8.2.8
+#------------------------------------------------------------------------------#
+
+class FGMMRegistrationComplete(Layer3):
+    _GEN = (
+        FGMMHeader(val={'Type':67}),
+        Type6TLVE('SORTransparentContainer', val={'T':0x73, 'V':17*b'\0'}, IE=SORTransparentContainer()),
+        )
+
+
+#------------------------------------------------------------------------------#
+# Registration reject
+# TS 24.501, section 8.2.9
+#------------------------------------------------------------------------------#
+
+class FGMMRegistrationReject(Layer3):
+    _GEN = (
+        FGMMHeader(val={'Type':68}),
+        Type3V('5GMMCause', val={'V':b'\x16'}, bl={'V':8}, IE=FGMMCause()),
+        Type4TLV('T3346', val={'T':0x5F, 'V':b'\0'}, IE=GPRSTimer()),
+        Type4TLV('T3502', val={'T':0x16, 'V':b'\0'}, IE=GPRSTimer()),
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0'}),
+        Type4TLV('RejectedNSSAI', val={'T':0x69, 'V':b'\0\0'}, IE=RejectedNSSAI()),
+        )
+
+
+#------------------------------------------------------------------------------#
+# UL NAS transport
+# TS 24.501, section 8.2.10
+#------------------------------------------------------------------------------#
+
+class FGMMULNASTransport(Layer3):
+    _GEN = (
+        FGMMHeader(val={'Type':103}),
+        Uint('spare', bl=4),
+        Type1V('PayloadContainerType', val={'V':1}, dic=PayloadContainerType_dict),
+        Type6LVE('PayloadContainer', val={'V':b'\0'}, IE=PayloadContainer()),
+        Type3TV('PDUSessID', val={'T':0x12, 'V':0}, bl={'V':8}, IE=PDUSessID()),
+        # TODO
         
         )
 
 
+#------------------------------------------------------------------------------#
+# DL NAS transport
+# TS 24.501, section 8.2.11
+#------------------------------------------------------------------------------#
 
-
+class FGMMDLNASTransport(Layer3):
+    _GEN = (
+        FGMMHeader(val={'Type':104}),
+        )
 

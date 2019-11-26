@@ -258,7 +258,7 @@ class EMMAttachReject(Layer3):
 class EMMAttachRequest(Layer3):
     _GEN = (
         EMMHeader(val={'Type':65}),
-        Type1V('NAS_KSI', IE=NAS_KSI()),
+        Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
         Type1V('EPSAttachType', dic=EPSAttType_dict),
         Type4LV('EPSID', val={'V':b'\xf6'+10*b'\0'}, IE=EPSID()),
         Type4LV('UENetCap', val={'V':b'\0\0'}, IE=UENetCap()),
@@ -323,7 +323,7 @@ class EMMAuthenticationRequest(Layer3):
     _GEN = (
         EMMHeader(val={'Type':82}),
         Uint('spare', bl=4),
-        Type1V('NAS_KSI', IE=NAS_KSI()),
+        Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
         Type3V('RAND', val={'V':16*b'\0'}, bl={'V':128}),
         Type4LV('AUTN', val={'V':16*b'\0'}, IE=AUTN())
         )
@@ -376,7 +376,7 @@ class EMMDetachAccept(Layer3):
 class EMMDetachRequestMO(Layer3):
     _GEN = (
         EMMHeader(val={'Type':69}),
-        Type1V('NAS_KSI', IE=NAS_KSI()),
+        Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
         Type1V('EPSDetachType', IE=EPSDetachTypeMO()),
         Type4LV('EPSID', val={'V':b'\xf6'+10*b'\0'}, IE=EPSID())
         )
@@ -445,7 +445,7 @@ class EMMStatus(Layer3):
 class EMMExtServiceRequest(Layer3):
     _GEN = (
         EMMHeader(val={'Type':76}),
-        Type1V('NAS_KSI', IE=NAS_KSI()),
+        Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
         Type1V('ServiceType', dic=EMMServType_dict),
         Type4LV('MTMSI', val={'V':b'\xf4\0\0\0\0'}, IE=ID()),
         Type1TV('CSFBResponse', val={'T':0xB, 'V':0}, IE=CSFBResponse()),
@@ -514,7 +514,7 @@ class EMMSecurityModeCommand(Layer3):
         EMMHeader(val={'Type':93}),
         Type3V('NASSecAlgo', val={'V':b'\0'}, bl={'V':8}, IE=NASSecAlgo()),
         Uint('spare', bl=4),
-        Type1V('NAS_KSI', IE=NAS_KSI()),
+        Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
         Type4LV('UESecCap', val={'V':b'\0\0'}, IE=UESecCap()),
         Type1TV('IMEISVReq', val={'T':0xC, 'V':0}),
         Type3TV('NonceUE', val={'T':0x55, 'V':b'\0\0\0\0'}, bl={'V':32}),
@@ -867,7 +867,7 @@ class EMMTrackingAreaUpdateReject(Layer3):
 class EMMTrackingAreaUpdateRequest(Layer3):
     _GEN = (
         EMMHeader(val={'Type':72}),
-        Type1V('NAS_KSI', IE=NAS_KSI()),
+        Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
         Type1V('EPSUpdateType', IE=EPSUpdateType()),
         Type4LV('OldGUTI', val={'V':b'\xf6'+10*b'\0'}, IE=EPSID()),
         Type1TV('Native_NAS_KSI', val={'T':0xB, 'V':0}, IE=NAS_KSI()),
@@ -899,7 +899,7 @@ class EMMTrackingAreaUpdateRequest(Layer3):
         Type4TLV('UEStatus', val={'T':0x6D, 'V':b'\0'}, IE=UEStatus()),
         Type3TV('AddInfoReq', val={'T':0x17, 'V':b'\0'}, IE=AddInfoReq()),
         Type4TLV('N1UENetCap', val={'T':0x32, 'V':b'\0'}, IE=N1UENetCap()),
-        Type1TV('UERadioCapIDAvail', val={'T':0xB, 'V':0}, IE=UERadioCapIDAvail()) # WNG: tag is undefined in current TS
+        #Type1TV('UERadioCapIDAvail', val={'T':0xB, 'V':0}, IE=UERadioCapIDAvail()) # WNG: tag is undefined in current TS
         )
 
 
@@ -951,7 +951,7 @@ class EMMULGenericNASTransport(Layer3):
 class EMMCPServiceRequest(Layer3):
     _GEN = (
         EMMHeader(val={'Type':77}),
-        Type1V('NAS_KSI', IE=NAS_KSI()),
+        Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
         Type1V('CPServiceType', IE=CPServiceType()),
         Type6TLVE('ESMContainer', val={'T':0x78, 'V':b'\0'}),
         Type4TLV('NASContainer', val={'T':0x67, 'V':b'\0\0'}),

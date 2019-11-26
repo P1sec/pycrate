@@ -2641,6 +2641,7 @@ class _APNItem(Envelope):
         self[0].set_valauto(self[1].get_len)
         self[1].set_blauto(lambda: 8*self[0].get_val())
 
+
 class APN(Sequence):
     _GEN = _APNItem('APNItem')
 
