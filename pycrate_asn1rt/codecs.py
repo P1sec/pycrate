@@ -981,7 +981,8 @@ class ASN1CodecPER(ASN1Codec):
                 cla._off[-1] += 8*ldet
         else:
             # implicit length determinant
-            assert( ldet == const_sz.ub )
+            if ldet != const_sz.ub:
+                raise(ASN1PEREncodeErr('invalid buf length'))
             GEN = []
             if cla.ALIGNED:
                 if const_sz.ub > 2 and cla._off[-1] % 8:
@@ -1020,7 +1021,8 @@ class ASN1CodecPER(ASN1Codec):
         else:
             GEN = []
             # implicit length determinant
-            assert( ldet == const_sz.ub )
+            if ldet != const_sz.ub:
+                raise(ASN1PEREncodeErr('invalid buf length'))
             if cla.ALIGNED:
                 if const_sz.ub > 2 and cla._off[-1] % 8:
                     GEN.extend( cla.encode_pad() )
@@ -1526,7 +1528,8 @@ class ASN1CodecBER(ASN1Codec):
                 if lundef:
                     EOS = True
             else:
-                assert( lval >= 0 )
+                if lval < 0:
+                    raise(ASN1BERDecodeErr('invalid undefinite length'))
                 # keep track of the decoded tag and length, and the value boundary
                 TLV = [Tag, cl, pc, tval, Len, lval, (char._cur, char._cur + 8*lval), ccur]
                 char._cur += 8*lval
@@ -1570,7 +1573,8 @@ class ASN1CodecBER(ASN1Codec):
                 if lundef:
                     EOS = True
             else:
-                assert( lval >= 0 )
+                if lval < 0:
+                    raise(ASN1BERDecodeErr('invalid undefinite length'))
                 # keep track of the decoded tag and length, and the value boundary
                 TLV = [cl, pc, tval, lval, (char._cur, char._cur + 8*lval), ccur]
                 # and jump over the value
@@ -1598,12 +1602,15 @@ class ASN1CodecBER(ASN1Codec):
         else:
             # lval == -1, need to scan up to an EOC marker
             # requires pc == 1
-            assert( tlv[2] == 1 )
+            if tlv[2] != 1:
+                raise(ASN1BERDecodeErr('invalid primitive tag'))
             # tlv[6] is a list of tlv
             V = tlv[6]
-            assert( isinstance(V, list) )
+            if not isinstance(V, list):
+                raise(ASN1BERDecodeErr('invalid value type'))
             # the last component being an EOC, (cl, pc, tval) == (0, 0, 0)
-            assert( V[-1][1:4] == [0, 0, 0] )
+            if V[-1][1:4] != [0, 0, 0]:
+                raise(ASN1BERDecodeErr('missing EOC marker'))
             # get the buffer up to the end of this EOC - 16
             ecur = V[-1][-1] - 16
             return char.get_bytes(ecur - char._cur)
@@ -1619,12 +1626,15 @@ class ASN1CodecBER(ASN1Codec):
         else:
             # lval == -1, need to scan up to an EOC marker
             # requires pc == 1
-            assert( tlv[1] == 1 )
+            if tlv[2] != 1:
+                raise(ASN1BERDecodeErr('invalid primitive tag'))
             # tlv[6] is a list of tlv
             V = tlv[4]
-            assert( isinstance(V, list) )
+            if not isinstance(V, list):
+                raise(ASN1BERDecodeErr('invalid value type'))
             # the last component being an EOC, (cl, pc, tval, lval) == (0, 0, 0, 0)
-            assert( V[-1][0:4] == [0, 0, 0, 0] )
+            if V[-1][0:4] != [0, 0, 0, 0]:
+                raise(ASN1BERDecodeErr('missing EOC marker'))
             # get the buffer up to the end of this EOC - 16
             ecur = V[-1][-1] - 16
             return char.get_bytes(ecur - char._cur)
