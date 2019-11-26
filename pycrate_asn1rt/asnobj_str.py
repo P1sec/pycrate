@@ -1448,20 +1448,19 @@ Specific constraints attributes:
             Frag, osfrag = [], []
             for tlv in vs:
                 Tag, cl, pc, tval, Len, lval = tlv[0:6]
-                if pc != 0:
-                    # fragmenting the fragment... damned BER recursivity !
-                    raise(ASN1NotSuppErr('{0}: OCTET STRING fragments of fragments'\
-                          .format(self.fullname())))
-                elif cl != 0:
+                if cl != 0:
                     raise(ASN1BERDecodeErr('{0}: invalid OCTET STRING fragment tag class, {1!r}'\
                           .format(self.fullname(), cl)))
-                elif (tval, lval) == (0, 0):
-                    # EOC marker
-                    assert( tlv == v[-1] )
-                    Frag.append( Envelope('EOC', GEN=(Tag, Len)) )
                 elif tval != 4:
                     raise(ASN1BERDecodeErr('{0}: invalid OCTET STRING fragment tag value, {1!r}'\
                           .format(self.fullname(), tval)))
+                elif pc != 0:
+                    # fragmenting the fragment... damned BER recursivity !
+                    raise(ASN1NotSuppErr('{0}: OCTET STRING fragments within fragments'\
+                          .format(self.fullname())))
+                elif (tval, lval) == (0, 0):
+                    # EOC marker, nothing to do here
+                    Frag.append( Envelope('EOC', GEN=(Tag, Len)) )
                 else:
                     char._cur, char._len_bit = tlv[-1][0], tlv[-1][1]
                     Val = Buf('V', bl=tlv[-1][1]-tlv[-1][0], rep=REPR_HEX)
@@ -1489,20 +1488,19 @@ Specific constraints attributes:
             osfrag = []
             for tlv in vs:
                 cl, pc, tval, lval = tlv[0:4]
-                if pc != 0:
-                    # fragmenting the fragment... damned BER recursivity !
-                    raise(ASN1NotSuppErr('{0}: OCTET STRING fragments of fragments'\
-                          .format(self.fullname())))
-                elif cl != 0:
+                if cl != 0:
                     raise(ASN1BERDecodeErr('{0}: invalid OCTET STRING fragment tag class, {1!r}'\
                           .format(self.fullname(), cl)))
-                elif (tval, lval) == (0, 0):
-                    # EOC marker
-                    assert( tlv == v[-1] )
-                    pass
                 elif tval != 4:
                     raise(ASN1BERDecodeErr('{0}: invalid OCTET STRING fragment tag value, {1!r}'\
                           .format(self.fullname(), tval)))
+                elif pc != 0:
+                    # fragmenting the fragment... damned BER recursivity !
+                    raise(ASN1NotSuppErr('{0}: OCTET STRING fragments within fragments'\
+                          .format(self.fullname())))
+                elif (tval, lval) == (0, 0):
+                    # EOC marker, nothing to do here
+                    pass
                 else:
                     char._cur, char._len_bit = tlv[-1][0], tlv[-1][1]
                     osfrag.append( char.get_bytes(tlv[-1][1]-tlv[-1][0]) )
