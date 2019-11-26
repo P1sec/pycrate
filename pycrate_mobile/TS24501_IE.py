@@ -44,9 +44,8 @@ from pycrate_core.charpy import Charpy
 from pycrate_mobile.TS24008_IE  import (
     BufBCD, PLMN, GPRSTimer3,
     )
-from pycrate_mobile.TS24301_IE import (
-    UENetCap as S1UENetCap, UESecCap as S1UESecCap,
-    )
+#from pycrate_mobile.TS24301_IE import (
+#    )
 
 _str_reserved = 'reserved'
 _str_mnospec  = 'operator-specific'
@@ -68,7 +67,7 @@ SecHdrType_dict = {
 
 #------------------------------------------------------------------------------#
 # DNN
-# TS 24.301, 9.11.2.1A
+# TS 24.501, 9.11.2.1A
 #------------------------------------------------------------------------------#
 
 class DNN(Envelope):
@@ -85,7 +84,7 @@ class DNN(Envelope):
 
 #------------------------------------------------------------------------------#
 # S-NSSAI
-# TS 24.301, 9.11.2.8
+# TS 24.501, 9.11.2.8
 #------------------------------------------------------------------------------#
 
 class _SNSSAI_SST_MappedHSST(Envelope):
@@ -98,14 +97,14 @@ class _SNSSAI_SST_MappedHSST(Envelope):
 class _SNSSAI_SST_SD(Envelope):
     _GEN = (
         Uint8('SST'),
-        Uint16('SD')
+        Uint24('SD')
         )
 
 
 class _SNSSAI_SST_SD_MappedHSST(Envelope):
     _GEN = (
         Uint8('SST'),
-        Uint16('SD'),
+        Uint24('SD'),
         Uint8('MappedHPLMNSST')
         )
 
@@ -113,18 +112,18 @@ class _SNSSAI_SST_SD_MappedHSST(Envelope):
 class _SNSSAI_SST_SD_MappedHSSTSD(Envelope):
     _GEN = (
         Uint8('SST'),
-        Uint16('SD'),
+        Uint24('SD'),
         Uint8('MappedHPLMNSST'),
-        Uint16('MappedHPLMNSD')
+        Uint24('MappedHPLMNSD')
         )
 
 
 class _SNSSAI_SST_SD_MappedHSSTSD_spare(Envelope):
     _GEN = (
         Uint8('SST'),
-        Uint16('SD'),
+        Uint24('SD'),
         Uint8('MappedHPLMNSST'),
-        Uint16('MappedHPLMNSD'),
+        Uint24('MappedHPLMNSD'),
         Buf('spare', rep=REPR_HEX)
         )
 
@@ -133,11 +132,11 @@ class SNSSAI(Envelope):
     _GEN = (
         Uint8('Len'),
         Alt('Value', GEN={
-            0 : Buf('none', bl=0),
-            1 : Uint8('SST'),
-            2 : _SNSSAI_SST_MappedHSST('SST_MappedHPLMNSST'),
-            3 : _SNSSAI_SST_SD('SST_SD'),
-            4 : _SNSSAI_SST_SD_MappedHSSTSD('SST_SD_MappedHPLMNSSTSD')},
+            1: Uint8('SST'),
+            2: _SNSSAI_SST_MappedHSST('SST_MappedHPLMNSST'),
+            4: _SNSSAI_SST_SD('SST_SD'),
+            5: _SNSSAI_SST_SD_MappedHSST('SST_SD_MappedHPLMNSST'),
+            8: _SNSSAI_SST_SD_MappedHSSTSD('SST_SD_MappedHPLMNSSTSD')},
             DEFAULT=_SNSSAI_SST_SD_MappedHSSTSD_spare('SST_SD_MappedHPLMNSSTSD_spare'),
             sel=lambda self: self.get_env()['Len'].get_val()
             )
@@ -150,7 +149,7 @@ class SNSSAI(Envelope):
 
 #------------------------------------------------------------------------------#
 # 5GMM capability
-# TS 24.301, 9.11.3.1
+# TS 24.501, 9.11.3.1
 #------------------------------------------------------------------------------#
 
 class FGMMCap(Envelope):
@@ -178,6 +177,8 @@ class FGMMCap(Envelope):
         )
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         l = char.len_bit()
         if l <= 16:
             # disable all elements after bit l
@@ -206,7 +207,7 @@ class FGMMCap(Envelope):
 
 #------------------------------------------------------------------------------#
 # 5GMM cause
-# TS 24.301, 9.11.3.2
+# TS 24.501, 9.11.3.2
 #------------------------------------------------------------------------------#
 
 _FGMMCause_dict = {
@@ -259,7 +260,7 @@ class FGMMCause(Uint8):
 
 #------------------------------------------------------------------------------#
 # 5GS DRX parameters
-# TS 24.301, 9.11.3.2A
+# TS 24.501, 9.11.3.2A
 #------------------------------------------------------------------------------#
 
 _FGSDRXParam_dict = {
@@ -280,7 +281,7 @@ class FGSDRXParam(Envelope):
 
 #------------------------------------------------------------------------------#
 # 5GS mobile identity
-# TS 24.301, 9.11.3.4
+# TS 24.501, 9.11.3.4
 #------------------------------------------------------------------------------#
 
 FGSIDType_dict = {
@@ -331,6 +332,8 @@ class SUCI_ECIESProfA(Envelope):
         )
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         self[0]._from_char(char)
         ct_bl = char.len_bit() - 64
         if ct_bl > 0:
@@ -349,6 +352,8 @@ class SUCI_ECIESProfB(Envelope):
         )
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         self[0]._from_char(char)
         ct_bl = char.len_bit() - 64
         if ct_bl > 0:
@@ -521,17 +526,92 @@ class FGSID(Envelope):
         Envelope.set_val(self, kwargs)
     
     def _from_char(self, char):
-        if not self.get_trans():
-            # get the type and set the appropriate content
-            type = char.to_uint(8) & 0x7
-            self._set_content(type)
-            Envelope._from_char(self, char)
+        if self.get_trans():
+            return
+        # get the type and set the appropriate content
+        type = char.to_uint(8) & 0x7
+        self._set_content(type)
+        Envelope._from_char(self, char)
         
+
+#------------------------------------------------------------------------------#
+# 5GS network feature support
+# TS 24.501, 9.11.3.5
+#------------------------------------------------------------------------------#
+
+class FGSNetFeat(Envelope):
+    _name = '5GSNetFeat'
+    _GEN = (
+        Uint('MPSI', bl=1),
+        Uint('IWK_N26', bl=1),
+        Uint('EMF', bl=1),
+        Uint('EMC', bl=3),
+        Uint('IMS-VoPS-N3GPP', bl=1),
+	    Uint('IMS-VoPS-3GPP', bl=1), # end of octet 1
+	    Uint('5G-LCS', bl=1),
+        Uint('5G-UP-CIoT', bl=1),
+        Uint('5G-HC-CP-CIoT', bl=1),
+        Uint('N3Data', bl=1),
+        Uint('5G-CP-CIoT', bl=1),
+        Uint('RestrictEC', bl=1),
+        Uint('MCSI', bl=1),
+        Uint('EMCN3', bl=1), # end of octet 2
+        Buf('spare', val=b'', rep=REPR_HEX)
+        )
+    
+    def _from_char(self, char):
+        if self.get_trans():
+            return
+        l = char.len_bit()
+        if l <= 8:
+            # disable all elements after bit l
+            self.disable_from('5G-LCS')
+        elif l > 16:
+            # enables some spare bits at the end
+            self[-1]._bl = l-16
+        Envelope._from_char(self, char)
+    
+    def disable_from(self, ind):
+        """disables all elements from index `ind' excluded (element offset or name)
+        """
+        if isinstance(ind, str_types) and ind in self._by_name:
+            ind = self._by_name.index(ind)
+        [e.set_trans(True) for e in self._content[ind:]]
+    
+    def enable_upto(self, ind):
+        """enables all elements up to index `ind' included (element offset or name)
+        """
+        if isinstance(ind, str_types) and ind in self._by_name:
+            ind = 1 + self._by_name.index(ind)
+        [e.set_trans(False) for e in self._content[:ind]]
+
+
+#------------------------------------------------------------------------------#
+# 5GS registration result
+# TS 24.501, 9.11.3.6
+#------------------------------------------------------------------------------#
+
+_FGSRegResult_dict = {
+    1 : '3GPP access',
+    2 : 'Non-3GPP access',
+    3 : '3GPP access and non-3GPP access',
+    7 : _str_reserved
+    }
+
+
+class FGSRegResult(Envelope):
+    _name = '5GSRegType'
+    _GEN = (
+        Uint('spare', bl=3),
+        Uint('NSSAAPerformed', bl=1),
+        Uint('SMSAllowed', bl=1),
+        Uint('Value', bl=3, dic=_FGSRegResult_dict)
+        )
 
 
 #------------------------------------------------------------------------------#
 # 5GS registration type
-# TS 24.301, 9.11.3.7
+# TS 24.501, 9.11.3.7
 #------------------------------------------------------------------------------#
 
 _FOR_dict = {
@@ -557,7 +637,7 @@ class FGSRegType(Envelope):
 
 #------------------------------------------------------------------------------#
 # 5GS tracking area identity
-# TS 24.301, 9.11.3.8
+# TS 24.501, 9.11.3.8
 #------------------------------------------------------------------------------#
 
 class FGSTAI(Envelope):
@@ -566,11 +646,110 @@ class FGSTAI(Envelope):
         PLMN(),
         Uint24('TAC', rep=REPR_HEX)
         )
+    
+    encode = Envelope.set_val
+    
+    def decode(self):
+        return (self[0].decode(), self[1].get_val())
+
+
+#------------------------------------------------------------------------------#
+# 5GS tracking area identity list
+# TS 24.501, 9.11.3.9
+#------------------------------------------------------------------------------#
+
+_PTAIListType_dict = {
+    0 : 'list of TACs belonging to one PLMN, with non-consecutive TAC values',
+    1 : 'list of TACs belonging to one PLMN, with consecutive TAC values',
+    2 : 'list of TAIs belonging to different PLMNs'
+    }
+
+
+class _PTAIList0(Envelope):
+    """List of non-consecutive TACs belonging to one PLMN
+    """
+    
+    _GEN = (
+        Uint('Num', bl=5),
+        PLMN(),
+        Array('TACs', GEN=Uint24('TAC'))
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: max(0, self[2].get_num()-1))
+        self[2].set_numauto(lambda: self[0].get_val()+1)
+    
+    def get_tai(self):
+        plmn = self['PLMN'].decode()
+        return set([(plmn, tac) for tac in self['TACs'].get_val()])
+
+
+class _PTAIList1(Envelope):
+    """List of consecutive TACs belonging to one PLMN
+    """
+    
+    _GEN = (
+        Uint('Num', bl=5),
+        PLMN(),
+        Uint24('TAC1'),
+        )
+    
+    def get_tai(self):
+        plmn, tac1 = self['PLMN'].decode(), self['TAC1'].get_val()
+        return set([(plmn, tac1 + i) for i in range(self['Num'].get_val() + 1)])
+
+
+class _PTAIList2(Envelope):
+    """List of TAI belonging to different PLMNs
+    """
+    
+    _GEN = (
+        Uint('Num', bl=5),
+        Sequence('TAIs', GEN=FGSTAI())
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: max(0, self[1].get_num()-1))
+        self[1].set_numauto(lambda: self[0].get_val()+1)
+    
+    def get_tai(self):
+        return set([tai.decode() for tai in self['TAIs']])
+
+
+class FGSPTAIList(Envelope):
+    _name = '5GSPTAIList'
+    _GEN = (
+        Uint('spare', bl=1),
+        Uint('Type', bl=2, dic=_PTAIListType_dict),
+        Alt('PTAI', GEN={
+            0: _PTAIList0('PTAIList0'),
+            1: _PTAIList1('PTAIList1'),
+            2: _PTAIList2('PTAIList2')
+            },
+            DEFAULT=_PTAIList1('PTAIList1'),
+            sel=lambda self: self.get_env()['Type'].get_val())
+        )
+    
+    def get_tai(self):
+        return self['PTAI'].get_alt().get_tai()
+
+
+class FGSTAIList(Sequence):
+    _name = '5GSTAIList'
+    _GEN = FGSPTAIList() 
+    
+    def get_tai(self):
+        tai = set()
+        for tl in self:
+            tai.update(tl.get_tai())
+        return tai
 
 
 #------------------------------------------------------------------------------#
 # 5GS update type
-# TS 24.301, 9.11.3.9A
+# TS 24.501, 9.11.3.9A
 #------------------------------------------------------------------------------#
 
 class FGSUpdateType(Envelope):
@@ -586,55 +765,9 @@ class FGSUpdateType(Envelope):
 
 #------------------------------------------------------------------------------#
 # Allowed PDU session status
-# TS 24.301, 9.11.3.13
+# TS 24.501, 9.11.3.13
 #------------------------------------------------------------------------------#
-
-class AllowedPDUSessStat(Envelope):
-    _GEN = (
-        Uint('PSI_7', bl=1),
-        Uint('PSI_6', bl=1),
-        Uint('PSI_5', bl=1),
-        Uint('PSI_4', bl=1),
-        Uint('PSI_3', bl=1),
-        Uint('PSI_2', bl=1),
-        Uint('PSI_1', bl=1),
-        Uint('PSI_0', bl=1),
-        Uint('PSI_15', bl=1),
-        Uint('PSI_14', bl=1),
-        Uint('PSI_13', bl=1),
-        Uint('PSI_12', bl=1),
-        Uint('PSI_11', bl=1),
-        Uint('PSI_10', bl=1),
-        Uint('PSI_9', bl=1),
-        Uint('PSI_8', bl=1),
-        Buf('spare', val=b'', rep=REPR_HEX)
-        )
-    
-    def _from_char(self, char):
-        l = char.len_bit()
-        if l <= 16:
-            # disable all elements after bit l
-            self.disable_from(l)
-        elif l > 16:
-            # enables some spare bits at the end
-            self[-1]._bl = l-16
-        Envelope._from_char(self, char)
-    
-    def disable_from(self, ind):
-        """disables all elements from index `ind' excluded (integer -bit offset- 
-        or element name)
-        """
-        if isinstance(ind, str_types) and ind in self._by_name:
-            ind = self._by_name.index(ind)
-        [e.set_trans(True) for e in self._content[ind:]]
-    
-    def enable_upto(self, ind):
-        """enables all elements up to index `ind' included (integer -bit offset- 
-        or element name)
-        """
-        if isinstance(ind, str_types) and ind in self._by_name:
-            ind = 1 + self._by_name.index(ind)
-        [e.set_trans(False) for e in self._content[:ind]]
+# actually identical to PDU session status in .44
 
 
 #------------------------------------------------------------------------------#
@@ -644,6 +777,22 @@ class AllowedPDUSessStat(Envelope):
 
 class LADNInd(Sequence):
     _GEN = DNN()
+
+
+#------------------------------------------------------------------------------#
+# LADN information
+# TS 24.501, 9.11.3.30
+#------------------------------------------------------------------------------#
+
+class LADN(Envelope):
+    _GEN = (
+        DNN(),
+        FGSTAIList()
+        )
+
+
+class LADNInfo(Sequence):
+    _GEN = LADN()
 
 
 #------------------------------------------------------------------------------#
@@ -683,6 +832,135 @@ class NetSlicingInd(Envelope):
 
 class NSSAI(Sequence):
     _GEN = SNSSAI()
+
+
+#------------------------------------------------------------------------------#
+# NSSAI inclusion mode
+# TS 24.501, 9.11.3.37A
+#------------------------------------------------------------------------------#
+
+class NSSAIInclMode(Envelope):
+    _GEN = (
+        Uint('spare', bl=2),
+        Uint('Value', bl=2, dic={0:'A', 1:'B', 2:'C', 3:'D'})
+        )
+
+
+#------------------------------------------------------------------------------#
+# Operator-defined access category definitions
+# TS 24.501, 9.11.3.38
+#------------------------------------------------------------------------------#
+
+_CriteriaType_dict = {
+    0 : 'DNN',
+    1 : 'OS Id + OS App Id',
+    2 : 'S-NSSAI'
+    }
+
+
+class _CritDNNs(Envelope):
+    _GEN = (
+        Uint8('Cnt'),
+        Array('DNNs', GEN=DNN())
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_num())
+        self[1].set_numauto(lambda: self[0].get_val())
+
+
+class _CritOSAppId(Envelope):
+    _GEN = (
+        Buf('OS_UUID', bl=128, rep=REPR_HEX),
+        Uint8('LenAppId'),
+        Buf('AppId')
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[1].set_valauto(lambda: self[2].get_len())
+        self[2].set_blauto(lambda: self[1].get_val()<<3)
+
+
+class _CritOSAppIds(Envelope):
+    _GEN = (
+        Uint8('Cnt'),
+        Array('OSAppIds', GEN=_CritOSAppId('OSAppId'))
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_num())
+        self[1].set_numauto(lambda: self[0].get_val())
+
+        
+class _CritSNSSAI(Envelope):
+    _GEN = (
+        Uint8('Cnt'),
+        Sequence('SNSSAIs', GEN=SNSSAI())
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_num())
+        self[1].set_numauto(lambda: self[0].get_val())
+
+
+class CriteriaComp(Envelope):
+    _GEN = (
+        Uint8('Type', dic=_CriteriaType_dict),
+        Alt('Crit', GEN={
+            0 : _CritDNNs('CompDNN'),
+            1 : _CritOSAppIds('CompOSAppId'),
+            2 : _CritSNSSAI('CompNSSAI')},
+            DEFAULT=Buf('CompUnk', rep=REPR_HEX),
+            sel=lambda self: self.get_env()['Type'].get_val()
+            )
+        )
+
+
+class OperatorAccessCatDef(Envelope):
+    _GEN = (
+        Uint8('Len'),
+        Uint8('Precedence'),
+        Uint('PSAC', bl=1),
+        Uint('spare', bl=2),
+        Uint('AccessCatNum', bl=5),
+        Uint8('LenCriteria'),
+        Sequence('Criteria', GEN=CriteriaComp()),
+        Envelope('StdAccessCat', GEN=(
+            Uint('spare', bl=3), 
+            Uint('Value', bl=5)),
+            ) # optional, depends on PSAC (Presence of Std Access Cat...)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['Len'].set_valauto(lambda: 3 + self['LenCriteria'].get_val() if self['StdAccessCat'].get_trans() \
+                                   else 4 + self['LenCriteria'].get_val())
+        self['LenCriteria'].set_valauto(lambda: self['Criteria'].get_len())
+        self['StdAccessCat'].set_transauto(lambda: False if self['PSAC'].get_val() else True)
+    
+    def _from_char(self, char):
+        if self.get_trans():
+            return
+        self[0]._from_char(char)
+        self[1]._from_char(char)
+        self[2]._from_char(char)
+        self[3]._from_char(char)
+        self[4]._from_char(char)
+        self[5]._from_char(char)
+        # truncate char according to LenCriteria
+        char_lb = char._len_bit
+        char._len_bit = char._cur + (self[5].get_val()<<3)
+        self[6]._from_char(char)
+        char._len_bit = char_lb
+        self[7]._from_char(char)
+
+
+class OperatorAccessCatDefs(Sequence):
+    _GEN = OperatorAccessCatDef()
 
 
 #------------------------------------------------------------------------------#
@@ -774,6 +1052,8 @@ class _PayContOpt(Envelope):
         self[1].set_valauto(lambda: self[2].get_len())
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         self[0]._from_char(char)
         self[1]._from_char(char)
         optlen  = self[1].get_val()
@@ -810,6 +1090,228 @@ class PayloadContainer(Envelope):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: self[1].get_num())
         self[1].set_numauto(lambda: self[0].get_val())
+
+
+#------------------------------------------------------------------------------#
+# PDU session reactivation result error cause
+# TS 24.501, 9.11.3.42
+#------------------------------------------------------------------------------#
+
+class PDUSessReactResultErr(Array):
+    _GEN = Envelope('PDUSessErr', GEN=(
+        Uint8('PSI'),
+        Uint8('Cause', dic=_FGMMCause_dict))
+        )
+
+
+#------------------------------------------------------------------------------#
+# PDU session status
+# TS 24.501, 9.11.3.44
+#------------------------------------------------------------------------------#
+
+class PDUSessStat(Envelope):
+    _GEN = (
+        Uint('PSI_7', bl=1),
+        Uint('PSI_6', bl=1),
+        Uint('PSI_5', bl=1),
+        Uint('PSI_4', bl=1),
+        Uint('PSI_3', bl=1),
+        Uint('PSI_2', bl=1),
+        Uint('PSI_1', bl=1),
+        Uint('PSI_0', bl=1),
+        Uint('PSI_15', bl=1),
+        Uint('PSI_14', bl=1),
+        Uint('PSI_13', bl=1),
+        Uint('PSI_12', bl=1),
+        Uint('PSI_11', bl=1),
+        Uint('PSI_10', bl=1),
+        Uint('PSI_9', bl=1),
+        Uint('PSI_8', bl=1),
+        Buf('spare', val=b'', rep=REPR_HEX)
+        )
+    
+    def _from_char(self, char):
+        if self.get_trans():
+            return
+        l = char.len_bit()
+        if l <= 16:
+            # disable all elements after bit l
+            self.disable_from(l)
+        elif l > 16:
+            # enables some spare bits at the end
+            self[-1]._bl = l-16
+        Envelope._from_char(self, char)
+    
+    def disable_from(self, ind):
+        """disables all elements from index `ind' excluded (integer -bit offset- 
+        or element name)
+        """
+        if isinstance(ind, str_types) and ind in self._by_name:
+            ind = self._by_name.index(ind)
+        [e.set_trans(True) for e in self._content[ind:]]
+    
+    def enable_upto(self, ind):
+        """enables all elements up to index `ind' included (integer -bit offset- 
+        or element name)
+        """
+        if isinstance(ind, str_types) and ind in self._by_name:
+            ind = 1 + self._by_name.index(ind)
+        [e.set_trans(False) for e in self._content[:ind]]
+
+
+#------------------------------------------------------------------------------#
+# Rejected NSSAI
+# TS 24.501, 9.11.3.46
+#------------------------------------------------------------------------------#
+
+class RejectedSNSSAI(Envelope):
+    _GEN = (
+        Uint8('Len'),
+        Alt('Value', GEN={
+            1: Uint8('SST'),
+            4: Envelope('SST_SD', GEN=(Uint8('SST'), Uint24('SD')))},
+            sel=lambda self: self.get_env()['Len'].get_val()
+            )
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_len())
+
+
+class RejectedNSSAI(Sequence):
+    _GEN = RejectedSNSSAI()
+
+
+#------------------------------------------------------------------------------#
+# Service area list
+# TS 24.501, 9.11.3.49
+#------------------------------------------------------------------------------#
+
+class _PTAIList3(Envelope):
+    """All TAI belonging to a given PLMN
+    """
+    
+    _GEN = (
+        Uint('Num', val=0, bl=5),
+        PLMN(),
+        )
+    
+    def get_tai(self):
+        return {(self['PLMN'].decode(), None), }
+
+
+_AllowedPSAList_dict = {
+    0: 'TAIs in the list are in the allowed area',
+    1: 'TAIs in the list are in the non-allowed area'
+    }
+
+
+class PSAList(Envelope):
+    _GEN = (
+        Uint('Allowed', bl=1, dic=_AllowedPSAList_dict),
+        Uint('Type', bl=2, dic=_PTAIListType_dict),
+        Alt('PTAI', GEN={
+            0: _PTAIList0('PTAIList0'),
+            1: _PTAIList1('PTAIList1'),
+            2: _PTAIList2('PTAIList2'),
+            3: _PTAIList3('PTAIList3')
+            },
+            DEFAULT=_PTAIList1('PTAIList3'),
+            sel=lambda self: self.get_env()['Type'].get_val())
+        )
+    
+    def get_tai(self):
+        return self['PTAI'].get_alt().get_tai()
+
+
+class SAList(Sequence):
+    _GEN = FGSPTAIList() 
+    
+    def get_tai(self):
+        tai = set()
+        for tl in self:
+            tai.update(tl.get_tai())
+        return tai
+
+
+#------------------------------------------------------------------------------#
+# SOR transparent container
+# TS 24.501, 9.11.3.51
+#------------------------------------------------------------------------------#
+
+_SORDataType_dict = {
+    0: 'steering of roaming information',
+    1: 'acknowledgement of successful reception of the steering of roaming information'
+    }
+
+_SORListInd_dict = {
+    0: 'no change in the list of operator controlled PLMN',
+    1: 'list of preferred PLMN/access technology combinations provided'
+    }
+
+_SORListType_dict = {
+    0: 'secured packet',
+    1: 'list of PLMN ID and access technology'
+    }
+
+_SORAck_dict = {
+    0: 'Ack not requested',
+    1: 'Ack requested'
+    }
+
+
+class SORHeader(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('ACK', bl=1, dic=_SORAck_dict),
+        Uint('ListType', bl=1, dic=_SORListType_dict),
+        Uint('ListInd', bl=1, dic=_SORListInd_dict),
+        Uint('DataType', bl=1, dic=_SORDataType_dict)
+        )
+
+
+class _SORTransCont00(Envelope):
+    _GEN = (
+        Buf('SOR_MACI_AUSF', bl=128, rep=REPR_HEX),
+        Uint16('CntSOR'),
+        Buf('SecuredPkt', rep=REPR_HEX)
+        )
+
+
+class _SORTransCont01(Envelope):
+    _GEN = (
+        Buf('SOR_MACI_AUSF', bl=128, rep=REPR_HEX),
+        Uint16('CntSOR'),
+        Sequence('PLMNATList', GEN=Envelope('PLMNAT', GEN=(
+            PLMN(),
+            Uint16('AccessTechno')))
+            )
+        )
+
+
+class _SORTransCont1(Envelope):
+    _GEN = (
+        Buf('SOR_MACI_UE', bl=128, rep=REPR_HEX),
+        )
+
+
+def get_sor_types(cont):
+    hdr = cont.get_env()['SORHeader']
+    return hdr['DataType'].get_val(), hdr['ListType'].get_val()
+    
+
+class SORTransparentContainer(Envelope):
+    _GEN = (
+        SORHeader(),
+        Alt('Cont', GEN={
+            (0, 0): _SORTransCont00('SORSecuredPkt'),
+            (0, 1): _SORTransCont01('SORPLMNList'),
+            (1, 0): _SORTransCont1('SORACK'),
+            (1, 1): _SORTransCont1('SORACK')},
+            sel=lambda self: get_sor_types(self)
+            )
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -858,6 +1360,8 @@ class UESecCap(Envelope):
         )
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         l = char.len_bit()
         if l <= 32:
             # disable all elements after bit l
@@ -915,7 +1419,7 @@ class UEStatus(Envelope):
 # TS 24.501, 9.11.3.57
 #------------------------------------------------------------------------------#
 
-class ULDataStat(AllowedPDUSessStat):
+class ULDataStat(PDUSessStat):
     pass
 
 #------------------------------------------------------------------------------#

@@ -41,10 +41,11 @@ from pycrate_core.base  import *
 
 from .TS24007       import *
 from .TS24008_IE    import (
-    AUTN, MSCm2, SuppCodecList, ExtDRXParam,
+    AUTN, MSCm2, SuppCodecList, ExtDRXParam, PLMNList, GPRSTimer2, GPRSTimer3,
+    EmergNumList, 
     )
 from .TS24301_IE    import (
-    NAS_KSI, EPSBearerCtxtStat,
+    NAS_KSI, EPSBearerCtxtStat, UENetCap as S1UENetCap, ExtEmergNumList
     )
 from .TS24501_IE    import *
 #from .TS24501_FGSM  import FGSMTypeClasses
@@ -204,13 +205,12 @@ class FGMMAuthenticationReject(Layer3):
 # Registration request
 # TS 24.501, section 8.2.6
 #------------------------------------------------------------------------------#
-# This is were things are getting serious...
 
 class FGMMRegistrationRequest(Layer3):
     _GEN = (
         FGMMHeader(val={'Type':65}),
         Type1V('NAS_KSI', IE=NAS_KSI()),
-        Type1V('5GSRegistrationType', IE=FGSRegType()),
+        Type1V('5GSRegType', IE=FGSRegType()),
         Type6LVE('5GSID', val={'V':b'\0\0\0\0'}, IE=FGSID()),
         Type1TV('NonCurrentNativeNAS_KSI', val={'T':0xC, 'V':0}, IE=NAS_KSI()),
         Type4TLV('5GMMCap', val={'T':0x10, 'V':b'\0'}, IE=FGMMCap()),
@@ -222,7 +222,7 @@ class FGMMRegistrationRequest(Layer3):
         Type1TV('MICOInd', val={'T':0xB, 'V':0}, IE=MICOInd()),
         Type4TLV('UEStatus', val={'T':0x2B, 'V':b'\0'}, IE=UEStatus()),
         Type6TLVE('AddGUTI', val={'T':0x77, 'V':b'\xf2'+10*b'\0'}, IE=FGSID()),
-        Type4TLV('AllowedPDUSessStat', val={'T':0x25, 'V':b'\0\0'}, IE=AllowedPDUSessStat()),
+        Type4TLV('AllowedPDUSessStat', val={'T':0x25, 'V':b'\0\0'}, IE=PDUSessStat()),
         Type4TLV('UEUsage', val={'T':0x18, 'V':b'\0'}, IE=UEUsage()),
         Type4TLV('5GSDRXParam', val={'T':0x51, 'V':b'\0'}, IE=FGSDRXParam()),
         Type6TLVE('EPSNASContainer', val={'T':0x70, 'V':b'\x07\0'}),
@@ -239,4 +239,46 @@ class FGMMRegistrationRequest(Layer3):
         Type4TLV('T3324', val={'T':0x6A, 'V':b'\0'}, IE=GPRSTimer3()),
         Type4TLV('UERadioCapID', val={'T':0x67, 'V':b'\0'}, IE=UERadioCapID()),
         )
+
+
+#------------------------------------------------------------------------------#
+# Registration accept
+# TS 24.501, section 8.2.7
+#------------------------------------------------------------------------------#
+
+class FGMMRegistrationAccept(Layer3):
+    _GEN = (
+        FGMMHeader(val={'Type':66}),
+        Type4LV('5GSRegResult', val={'V':b'\0'}, IE=FGSRegType()),
+        Type6LVE('GUTI', val={'V':b'\0\0\0\0'}, IE=FGSID()),
+        Type4TLV('EquivPLMNList', val={'T':0x4A, 'V':3*b'\0'}, IE=PLMNList()),
+        Type4TLV('5GSTAIList', val={'T':0x54, 'V':7*b'\0'}, IE=FGSTAIList()),
+        Type4TLV('AllowedNSSAI', val={'T':0x15, 'V':b'\0\0'}, IE=NSSAI()),
+        Type4TLV('RejectedNSSAI', val={'T':0x11, 'V':b'\0\0'}, IE=RejectedNSSAI()),
+        Type4TLV('ConfiguredNSSAI', val={'T':0x31, 'V':b'\0\0'}, IE=NSSAI()),
+        Type4TLV('5GSNetFeat', val={'T':0x21, 'V':b'\0'}, IE=FGSNetFeat()),
+        Type4TLV('PDUSessStat', val={'T':0x50, 'V':b'\0\0'}, IE=PDUSessStat()),
+        Type4TLV('PDUSessStatReactResult', val={'T':0x26, 'V':b'\0\0'}, IE=PDUSessStat()),
+        Type6TLVE('PDUSessReactResultErr', val={'T':0x72, 'V':b'\0\0'}, IE=PDUSessReactResultErr()),
+        Type6TLVE('LADNInfo', val={'T':0x79, 'V':9*b'\0'}, IE=LADNInfo()),
+        Type1TV('MICOInd', val={'T':0xB, 'V':0}, IE=MICOInd()),
+        Type1TV('NetSlicingInd', val={'T':0x9, 'V':0}, IE=NetSlicingInd()),
+        Type6TLVE('SAList', val={'T':0x27, 'V':b'\0\0\0'}, IE=SAList()),
+        Type4TLV('T3512', val={'T':0x5E, 'V':b'\0'}, IE=GPRSTimer3()),
+        Type4TLV('Non3GPPDeregTimer', val={'T':0x5D, 'V':b'\0'}, IE=GPRSTimer()),
+        Type4TLV('T3502', val={'T':0x16, 'V':b'\0'}, IE=GPRSTimer()),
+        Type4TLV('EmergNumList', val={'T':0x34, 'V':b'\x02\x01\0'}, IE=EmergNumList()),
+        Type6TLVE('ExtEmergNumList', val={'T':0x7A, 'V':b'\0\0\0\0'}, IE=ExtEmergNumList()),
+        Type6TLVE('SORTransparentContainer', val={'T':0x73, 'V':17*b'\0'}, IE=SORTransparentContainer()),
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0'}),
+        Type1TV('NSSAIInclMode', val={'T':0xA, 'V':0}, IE=NSSAIInclMode()),
+        Type6TLVE('OperatorAccessCatDefs', val={'T':0x76, 'V':b''}, IE=OperatorAccessCatDefs()),
+        
+        
+        
+        )
+
+
+
+
 

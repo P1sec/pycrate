@@ -221,6 +221,7 @@ class EMMAttachAccept(Layer3):
         Type1TV('UERadioCapIDDelInd', val={'T':0xB, 'V':0}, IE=UERadioCapIDDelInd())
         )
 
+
 #------------------------------------------------------------------------------#
 # Attach complete
 # TS 24.301, section 8.2.2

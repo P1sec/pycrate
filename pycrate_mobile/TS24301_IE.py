@@ -430,43 +430,44 @@ class EPSID(Envelope):
                   .format(self._name, ident)))
     
     def _from_char(self, char):
-        if not self.get_trans():
-            try:
-                spare = char.get_uint(5)
-                type  = char.get_uint(3)
-            except CharpyErr as err:
-                raise(CharpyErr('{0} [_from_char]: {1}'.format(self._name, err)))
-            except Exception as err:
-                raise(EltErr('{0} [_from_char]: {1}'.format(self._name, err)))
-            #
-            if type in (IDTYPE_IMSI, IDTYPE_IMEISV):
-                if not hasattr(self, '_IDDigit'):
-                    self._IDDigit = IDDigit()
-                self._content = self._IDDigit._content
-                self._by_id   = self._IDDigit._by_id
-                self._by_name = self._IDDigit._by_name
-                self[0]._val = spare >> 1
-                self[1]._val = spare & 1
-                self[2]._val = type
-                self[3]._from_char(char)   
-            #
-            elif type == IDTYPE_GUTI:
-                if not hasattr(self, '_IDGUTI'):
-                    self._IDGUTI = IDGUTI()
-                self._content = self._IDGUTI._content
-                self._by_id   = self._IDGUTI._by_id
-                self._by_name = self._IDGUTI._by_name
-                self[0]._val = spare >> 1
-                self[1]._val = spare & 1
-                self[2]._val = type
-                self[3]._from_char(char)
-                self[4]._from_char(char)
-                self[5]._from_char(char)
-                self[6]._from_char(char)
-            #
-            else:
-                raise(PycrateErr('{0}: invalid identity to decode, {1}'\
-                      .format(self._name, type)))
+        if self.get_trans():
+            return
+        try:
+            spare = char.get_uint(5)
+            type  = char.get_uint(3)
+        except CharpyErr as err:
+            raise(CharpyErr('{0} [_from_char]: {1}'.format(self._name, err)))
+        except Exception as err:
+            raise(EltErr('{0} [_from_char]: {1}'.format(self._name, err)))
+        #
+        if type in (IDTYPE_IMSI, IDTYPE_IMEISV):
+            if not hasattr(self, '_IDDigit'):
+                self._IDDigit = IDDigit()
+            self._content = self._IDDigit._content
+            self._by_id   = self._IDDigit._by_id
+            self._by_name = self._IDDigit._by_name
+            self[0]._val = spare >> 1
+            self[1]._val = spare & 1
+            self[2]._val = type
+            self[3]._from_char(char)   
+        #
+        elif type == IDTYPE_GUTI:
+            if not hasattr(self, '_IDGUTI'):
+                self._IDGUTI = IDGUTI()
+            self._content = self._IDGUTI._content
+            self._by_id   = self._IDGUTI._by_id
+            self._by_name = self._IDGUTI._by_name
+            self[0]._val = spare >> 1
+            self[1]._val = spare & 1
+            self[2]._val = type
+            self[3]._from_char(char)
+            self[4]._from_char(char)
+            self[5]._from_char(char)
+            self[6]._from_char(char)
+        #
+        else:
+            raise(PycrateErr('{0}: invalid identity to decode, {1}'\
+                  .format(self._name, type)))
     
     def repr(self):
         if not self._content:
@@ -516,6 +517,8 @@ class EPSNetFeat(Envelope):
         )
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         if char.len_bit() < 16:
             self._set_o2_trans(True)
         Envelope._from_char(self, char)
@@ -830,6 +833,8 @@ class TAIList(Envelope):
         return ret
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         self.clear()
         if self._ptail2 is not None:
             del self._ptail2
@@ -847,6 +852,87 @@ class TAIList(Envelope):
             ptl._from_char(char)
             self.append(ptl)
 
+
+'''this will need to be introduced, to be similar as in TS24501_IE
+class _PTAIList0(Envelope):
+    """List of non-consecutive TACs belonging to one PLMN
+    """
+    
+    _GEN = (
+        Uint('Num', bl=5),
+        PLMN(),
+        Array('TACs', GEN=Uint16('TAC'))
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: max(0, self[2].get_num()-1))
+        self[2].set_numauto(lambda: self[0].get_val()+1)
+    
+    def get_tai(self):
+        plmn = self['PLMN'].decode()
+        return set([(plmn, tac) for tac in self['TACs'].get_val()])
+
+
+class _PTAIList1(Envelope):
+    """List of consecutive TACs belonging to one PLMN
+    """
+    
+    _GEN = (
+        Uint('Num', bl=5),
+        PLMN(),
+        Uint16('TAC1'),
+        )
+    
+    def get_tai(self):
+        plmn, tac1 = self['PLMN'].decode(), self['TAC1'].get_val()
+        return set([(plmn, tac1 + i) for i in range(self['Num'].get_val() + 1)])
+
+
+class _PTAIList2(Envelope):
+    """List of TAI belonging to different PLMNs
+    """
+    
+    _GEN = (
+        Uint('Num', bl=5),
+        Sequence('TAIs', GEN=TAI())
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: max(0, self[1].get_num()-1))
+        self[1].set_numauto(lambda: self[0].get_val()+1)
+    
+    def get_tai(self):
+        return set([tai.decode() for tai in self['TAIs']])
+
+
+class PTAIList(Envelope):
+    _GEN = (
+        Uint('spare', bl=1),
+        Uint('Type', bl=2, dic=_PTAIListType_dict),
+        Alt('PTAI', GEN={
+            0: _PTAIList0('PTAIList0'),
+            1: _PTAIList1('PTAIList1'),
+            2: _PTAIList2('PTAIList2')
+            },
+            DEFAULT=_PTAIList1('PTAIList1'),
+            sel=lambda self: self.get_env()['Type'].get_val())
+        )
+    
+    def get_tai(self):
+        return self['PTAI'].get_tai()
+
+
+class TAIList(Sequence):
+    _GEN = PTAIList()
+    
+    def get_tai(self):
+        tai = set()
+        for tl in self:
+            tai.update(tl.get_tai())
+        return tai
+'''
 
 #------------------------------------------------------------------------------#
 # UE network capability
@@ -918,6 +1004,8 @@ class UENetCap(Envelope):
         )
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         l = char.len_bit()
         if l <= 56:
             # disable all elements after bit l
@@ -997,6 +1085,8 @@ class UESecCap(Envelope):
         )
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         l = char.len_bit()
         if l <= 40:
             # disable all elements after bit l
@@ -1494,6 +1584,8 @@ class APN_AMBR(Envelope):
         Envelope.set_val(self, vals)
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         # in case long-enough buffer is available, make extended fields non-transparent
         l = char.len_byte()
         if l == 6:
@@ -1577,6 +1669,8 @@ class EPSQoS(Envelope):
         Envelope.set_val(self, vals)
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         # in case long-enough buffer is available, make extended fields non-transparent
         l = char.len_byte()
         if l == 13:
@@ -1789,35 +1883,36 @@ class RemoteUEID(Envelope):
             self[3]._val = encode_bcd(ident[1:])
     
     def _from_char(self, char):
-        if not self.get_trans():
-            try:
-                spare = char.get_uint(5)
-                type  = char.get_uint(3)
-            except CharpyErr as err:
-                raise(CharpyErr('{0} [_from_char]: {1}'.format(self._name, err)))
-            except Exception as err:
-                raise(EltErr('{0} [_from_char]: {1}'.format(self._name, err)))
-            #
-            if type == 1:
-                if not hasattr(self, '_IDEncIMSI'):
-                    self._IDEncIMSI = RemUEIDEncIMSI()
-                self._content = self._IDTemp._content
-                self._by_id   = self._IDTemp._by_id
-                self._by_name = self._IDTemp._by_name
-                self[0]._val = spare >> 1
-                self[1]._val = spare & 1
-                self[3]._from_char(char)
-            #
-            elif type in (2, 3, 4, 5):
-                if not hasattr(self, '_IDDigit'):
-                    self._IDDigit = RemUEIDDigit()
-                self._content = self._IDDigit._content
-                self._by_id   = self._IDDigit._by_id
-                self._by_name = self._IDDigit._by_name
-                self[0]._val = spare >> 1
-                self[1]._val = spare & 1
-                self[2]._val = type
-                self[3]._from_char(char)   
+        if self.get_trans():
+            return
+        try:
+            spare = char.get_uint(5)
+            type  = char.get_uint(3)
+        except CharpyErr as err:
+            raise(CharpyErr('{0} [_from_char]: {1}'.format(self._name, err)))
+        except Exception as err:
+            raise(EltErr('{0} [_from_char]: {1}'.format(self._name, err)))
+        #
+        if type == 1:
+            if not hasattr(self, '_IDEncIMSI'):
+                self._IDEncIMSI = RemUEIDEncIMSI()
+            self._content = self._IDTemp._content
+            self._by_id   = self._IDTemp._by_id
+            self._by_name = self._IDTemp._by_name
+            self[0]._val = spare >> 1
+            self[1]._val = spare & 1
+            self[3]._from_char(char)
+        #
+        elif type in (2, 3, 4, 5):
+            if not hasattr(self, '_IDDigit'):
+                self._IDDigit = RemUEIDDigit()
+            self._content = self._IDDigit._content
+            self._by_id   = self._IDDigit._by_id
+            self._by_name = self._IDDigit._by_name
+            self[0]._val = spare >> 1
+            self[1]._val = spare & 1
+            self[2]._val = type
+            self[3]._from_char(char)   
     
     def repr(self):
         if not self._content:
@@ -1948,6 +2043,8 @@ class HdrCompConfig(Envelope):
         Envelope.set_val(self, vals)
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         if char.get_len() >= 4:
             self[9].set_trans(False)
             self[10].set_trans(False)
