@@ -512,11 +512,11 @@ class EMMIdentityResponse(Layer3):
 class EMMSecurityModeCommand(Layer3):
     _GEN = (
         EMMHeader(val={'Type':93}),
-        Type3V('NASSecAlgo', val={'V':b'\0'}, bl={'V':8}, IE=NASSecAlgo()),
+        Type3V('NASSecAlgo', val={'V':b'\x11'}, bl={'V':8}, IE=NASSecAlgo()),
         Uint('spare', bl=4),
-        Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
+        Type1V('NAS_KSI', val={'V':0}, IE=NAS_KSI()),
         Type4LV('UESecCap', val={'V':b'\0\0'}, IE=UESecCap()),
-        Type1TV('IMEISVReq', val={'T':0xC, 'V':0}),
+        Type1TV('IMEISVReq', val={'T':0xC, 'V':0}, IE=IMEISVReq()),
         Type3TV('NonceUE', val={'T':0x55, 'V':b'\0\0\0\0'}, bl={'V':32}),
         Type3TV('NonceMME', val={'T':0x56, 'V':b'\0\0\0\0'}, bl={'V':32}),
         Type4TLV('HashMME', val={'T':0x4F, 'V':8*b'\0'}),

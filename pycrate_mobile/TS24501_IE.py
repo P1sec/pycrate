@@ -42,7 +42,7 @@ from pycrate_core.repr   import *
 from pycrate_core.charpy import Charpy
 
 from pycrate_mobile.TS24008_IE  import (
-    BufBCD, PLMN, GPRSTimer3,
+    BufBCD, PLMN, GPRSTimer3, APN, 
     )
 #from pycrate_mobile.TS24301_IE import (
 #    )
@@ -73,13 +73,13 @@ SecHdrType_dict = {
 class DNN(Envelope):
     _GEN = (
         Uint8('Len'),
-        Buf('Value')
+        APN()
         )
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: self[1].get_len())
-        self[1].set_blauto(lambda: self[0].get_val()<<3)
+        #self[1].set_blauto(lambda: self[0].get_val()<<3)
 
 
 #------------------------------------------------------------------------------#
@@ -276,6 +276,28 @@ class FGSDRXParam(Envelope):
     _GEN = (
         Uint('spare', bl=4, rep=REPR_HEX),
         Uint('Value', bl=4, dic=_FGSDRXParam_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# 5GS identity type
+# TS 24.501, 9.11.3.3
+#------------------------------------------------------------------------------#
+
+_FGSIDType_dict = {
+    1 : 'SUCI',
+    2 : '5G-GUTI',
+    3 : 'IMEI',
+    4 : '5G-S-TMSI',
+    5 : 'IMEISV',
+    6 : 'MAC address'
+    }
+
+class FGSIDType(Envelope):
+    _name = '5GSIDType'
+    _GEN = (
+        Uint('spare', bl=1),
+        Uint('Value', bl=3, dic=_FGSIDType_dict)
         )
 
 
@@ -764,10 +786,69 @@ class FGSUpdateType(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# Access type
+# TS 24.501, 9.11.3.11
+#------------------------------------------------------------------------------#
+
+class AccessType(Envelope):
+    _GEN = (
+        Uint('spare', bl=2),
+        Uint('Value', bl=2, dic={1:'3GPP access', 2:'non-3GPP access'})
+        )
+
+
+#------------------------------------------------------------------------------#
+# Additional 5G security information
+# TS 24.501, 9.11.3.12
+#------------------------------------------------------------------------------#
+
+class Add5GSecInfo(Envelope):
+    _GEN = (
+        Uint('spare', bl=6, rep=REPR_HEX),
+        Uint('RINMR', bl=1, dic={
+            0:'retransmission of the initial NAS message not requested',
+            1:'retransmission of the initial NAS message requested'}),
+        Uint('HDP', bl=1, dic={0:'K_AMF derivation not required', 1:'K_AMF derivation required'})
+        )
+
+
+#------------------------------------------------------------------------------#
 # Allowed PDU session status
 # TS 24.501, 9.11.3.13
 #------------------------------------------------------------------------------#
 # actually identical to PDU session status in .44
+
+
+#------------------------------------------------------------------------------#
+# Configuration update indication
+# TS 24.501, 9.11.3.18
+#------------------------------------------------------------------------------#
+
+class ConfigUpdateInd(Envelope):
+    _GEN = (
+        Uint('spare', bl=2),
+        Uint('RED', bl=1, dic={0:'registration not requested', 1:'registration requested'}),
+        Uint('ACK', bl=1, dic={0:'ACK not requested', 1:'ACK requested'})
+        )
+
+
+#------------------------------------------------------------------------------#
+# De-registration type
+# TS 24.501, 9.11.3.20
+#------------------------------------------------------------------------------#
+
+_DeregAccessType_dict = {
+    1 : '3GPP access',
+    2 : 'Non-3GPP access',
+    3 : '3GPP access and non-3GPP access'
+    }
+
+class DeregistrationType(Envelope):
+    _GEN = (
+        Uint('SwitchOff', bl=1, dic={0:'normal de-registration', 1:'switch off'}),
+        Uint('ReregistrationRequired', bl=1),
+        Uint('AccessType', val=1, bl=2, dic=_DeregAccessType_dict)
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -805,6 +886,40 @@ class MICOInd(Envelope):
         Uint('spare', bl=2),
         Uint('SPRTI', bl=1),
         Uint('RAAI', bl=1)
+        )
+
+
+#------------------------------------------------------------------------------#
+# NAS security algorithms
+# TS 24.501, 9.11.3.34
+#------------------------------------------------------------------------------#
+
+_NASCiphAlgo_dict = {
+    0 : '5G encryption algorithm 5G-EA0 (null)',
+    1 : '5G encryption algorithm 128-5G-EA1 (SNOW)',
+    2 : '5G encryption algorithm 128-5G-EA2 (AES)',
+    3 : '5G encryption algorithm 128-5G-EA3 (ZUC)',
+    4 : '5G encryption algorithm 5G-EA4',
+    5 : '5G encryption algorithm 5G-EA5',
+    6 : '5G encryption algorithm 5G-EA6',
+    7 : '5G encryption algorithm 5G-EA7'
+    }
+
+_NASIntegAlgo_dict = {
+    0 : '5G integrity algorithm 5G-IA0 (null)',
+    1 : '5G integrity algorithm 128-5G-IA1 (SNOW)',
+    2 : '5G integrity algorithm 128-5G-IA2 (AES)',
+    3 : '5G integrity algorithm 128-5G-IA3 (ZUC)',
+    4 : '5G integrity algorithm 5G-IA4',
+    5 : '5G integrity algorithm 5G-IA5',
+    6 : '5G integrity algorithm 5G-IA6',
+    7 : '5G integrity algorithm 5G-IA7'
+    }
+
+class NASSecAlgo(Envelope):
+    _GEN = (
+        Uint('CiphAlgo', bl=4, dic=_NASCiphAlgo_dict),
+        Uint('IntegAlgo', bl=4, dic=_NASIntegAlgo_dict)
         )
 
 
@@ -1236,6 +1351,39 @@ class SAList(Sequence):
 
 
 #------------------------------------------------------------------------------#
+# Service type
+# TS 24.501, 9.11.3.50
+#------------------------------------------------------------------------------#
+
+ServiceType_dict = {
+    0 : 'signalling',
+    1 : 'data',
+    2 : 'mobile terminated services',
+    3 : 'emergency services',
+    4 : 'emergency services fallback',
+    5 : 'high priority access',
+    6 : 'elevated signalling',
+    7 : 'unused - signalling',
+    8 : 'unused - signalling',
+    9 : 'unused - data',
+    10 : 'unused - data',
+    11 : 'unused - data'
+    }
+
+
+#------------------------------------------------------------------------------#
+# SMS indication
+# TS 24.501, 9.11.3.50A
+#------------------------------------------------------------------------------#
+
+class SMSInd(Envelope):
+    _GEN = (
+        Uint('spare', bl=3),
+        Uint('Value', bl=1, dic={0:'SMS over NAS not available', 1:'SMS over NAS available'})
+        )
+
+
+#------------------------------------------------------------------------------#
 # SOR transparent container
 # TS 24.501, 9.11.3.51
 #------------------------------------------------------------------------------#
@@ -1421,6 +1569,48 @@ class UEStatus(Envelope):
 
 class ULDataStat(PDUSessStat):
     pass
+
+
+#------------------------------------------------------------------------------#
+# MA PDU session information
+# TS 24.501, 9.11.3.63
+#------------------------------------------------------------------------------#
+
+MAPDUSessInfo_dict = {
+    1 : 'MA PDU session network upgrade is allowed'
+    }
+
+
+#------------------------------------------------------------------------------#
+# CAG information list
+# TS 24.501, 9.11.3.64
+#------------------------------------------------------------------------------#
+
+class CAGInfo(Envelope):
+    _GEN = (
+        Uint8('Len'),
+        PLMN(),
+        Array('CAGIDList', GEN=Uint32('CAGID', rep=REPR_HEX))
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: 3 + self[2].get_len())
+    
+    def _from_char(self, char):
+        if self.get_trans():
+            return
+        self[0]._from_char(char)
+        self[1]._from_char(char)
+        char_lb = char._len_bit
+        char._len_bit = char._cur + self[0].get_val() - 3
+        self[2]._from_char(char)
+        char._len_bit = char_lb
+
+
+class CAGInfoList(Sequence):
+    _GEN = CAGInfo()
+
 
 #------------------------------------------------------------------------------#
 # UE radio capability ID
