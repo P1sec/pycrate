@@ -1613,6 +1613,56 @@ class CAGInfoList(Sequence):
 
 
 #------------------------------------------------------------------------------#
+# Control plane service type
+# TS 24.501, 9.11.3.65
+#------------------------------------------------------------------------------#
+
+_CtrlPlaneServType_dict = {
+    0 : 'mobile originating request',
+    1 : 'mobile terminating request',
+    2 : 'data',
+    3 : 'unused - mobile originating request',
+    4 : 'unused - mobile originating request',
+    5 : 'unused - mobile originating request',
+    6 : 'unused - mobile originating request',
+    7 : 'unused - mobile originating request'
+    }
+
+class CtrlPlaneServiceType(Envelope):
+    _GEN = (
+        Uint('spare', bl=1),
+        Uint('Value', bl=3, dic=_CtrlPlaneServType_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# CIoT small data container
+# TS 24.501, 9.11.3.67
+#------------------------------------------------------------------------------#
+
+_CIoTDataType_dict = {
+    1 : 'Control plane user data',
+    2 : 'SMS'
+    }
+
+_CIoTDDX_dict = {
+    0 : 'No information available',
+    1 : 'No further uplink or downlink data transmission subsequent to the uplink data transmission is expected',
+    2 : 'Only a single downlink data transmission and no further uplink data transmission subsequent to the uplink data transmission is expected',
+    3 : _str_reserved
+    }
+
+
+class CIoTSmallDataContainer(Envelope):
+    _GEN = (
+        Uint('DataType', bl=3, dic=_CIoTDataType_dict),
+        Uint('DDX', bl=2, dic=_CIoTDDX_dict),
+        Uint('PDUSessID', bl=3, dic={0:'No PDU session identity assigned'}),
+        Buf('Data', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
 # UE radio capability ID
 # TS 24.501, 9.11.3.68
 #------------------------------------------------------------------------------#

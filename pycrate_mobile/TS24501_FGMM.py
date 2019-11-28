@@ -48,6 +48,7 @@ from .TS24008_IE    import (
 from .TS24301_IE    import (
     NAS_KSI, EPSBearerCtxtStat, UENetCap as EPSUENetCap, ExtEmergNumList, 
     EPSBearerCtxtStat, NASSecAlgo as EPSNASSecAlgo, UESecCap as EPSUESecCap, 
+    ReleaseAssistInd, 
     )
 from .TS24501_IE    import *
 #from .TS24501_FGSM  import FGSMTypeClasses
@@ -60,22 +61,22 @@ except:
 else:
     _with_cm = True
     if hasattr(CM, 'EEA2'):
-        _EIA = {
+        _FGIA = {
             1 : CM.EIA1,
             2 : CM.EIA2,
             3 : CM.EIA3
             }
-        _EEA = {
+        _FGEA = {
             1 : CM.EEA1,
             2 : CM.EEA2,
             3 : CM.EEA3
             }
     else:
-        _EIA = {
+        _FGIA = {
             1 : CM.EIA1,
             3 : CM.EIA3
             }
-        _EEA = {
+        _FGEA = {
             1 : CM.EEA1,
             3 : CM.EEA3
             }
@@ -131,6 +132,15 @@ class FGMMHeader(Envelope):
         Uint('spare', bl=4, rep=REPR_HEX),
         Uint('SecHdr', bl=4, dic=SecHdrType_dict),
         Uint8('Type', val=100, dic=_FGMM_dict)
+        )
+
+
+class FGMMHeaderSec(Envelope):
+    _name = '5GMMHeaderSec'
+    _GEN = (
+        Uint8('EPD', val=126, dic=ProtDisc_dict),
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('SecHdr', bl=4, dic=SecHdrType_dict)
         )
 
 
@@ -205,7 +215,7 @@ class FGMMAuthenticationReject(Layer3):
     _name = '5GMMAuthenticationReject'
     _GEN = (
         FGMMHeader(val={'Type':88}),
-        Type6LVE('EAPMsg', val={'V':b'\0\0\0\0'}),
+        Type6LVE('EAPMsg', val={'V':b'\0\0\0\0'})
         )
 
 
@@ -246,7 +256,7 @@ class FGMMRegistrationRequest(Layer3):
         Type4TLV('EPSBearerCtxtStat', val={'T':0x60, 'V':b'\0\0'}, IE=EPSBearerCtxtStat()),
         Type4TLV('ExtDRXParam', val={'T':0x6E, 'V':b'\0'}, IE=ExtDRXParam()),
         Type4TLV('T3324', val={'T':0x6A, 'V':b'\0'}, IE=GPRSTimer3()),
-        Type4TLV('UERadioCapID', val={'T':0x67, 'V':b'\0'}, IE=UERadioCapID()),
+        Type4TLV('UERadioCapID', val={'T':0x67, 'V':b'\0'}, IE=UERadioCapID())
         )
 
 
@@ -304,7 +314,7 @@ class FGMMRegistrationComplete(Layer3):
     _name = '5GMMRegistrationComplete'
     _GEN = (
         FGMMHeader(val={'Type':67}),
-        Type6TLVE('SORTransparentContainer', val={'T':0x73, 'V':17*b'\0'}, IE=SORTransparentContainer()),
+        Type6TLVE('SORTransparentContainer', val={'T':0x73, 'V':17*b'\0'}, IE=SORTransparentContainer())
         )
 
 
@@ -321,7 +331,7 @@ class FGMMRegistrationReject(Layer3):
         Type4TLV('T3346', val={'T':0x5F, 'V':b'\0'}, IE=GPRSTimer()),
         Type4TLV('T3502', val={'T':0x16, 'V':b'\0'}, IE=GPRSTimer()),
         Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0'}),
-        Type4TLV('RejectedNSSAI', val={'T':0x69, 'V':b'\0\0'}, IE=RejectedNSSAI()),
+        Type4TLV('RejectedNSSAI', val={'T':0x69, 'V':b'\0\0'}, IE=RejectedNSSAI())
         )
 
 
@@ -377,7 +387,7 @@ class FGMMMODeregistrationRequest(Layer3):
         FGMMHeader(val={'Type':69}),
         Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
         Type1V('DeregistrationType', val={'V':1}, IE=DeregistrationType()),
-        Type6LVE('5GSID', val={'V':b'\0\0\0\0'}, IE=FGSID()),
+        Type6LVE('5GSID', val={'V':b'\0\0\0\0'}, IE=FGSID())
         )
 
 
@@ -405,7 +415,7 @@ class FGMMMTDeregistrationRequest(Layer3):
         Uint('spare', bl=4, rep=REPR_HEX),
         Type1V('DeregistrationType', val={'V':1}, IE=DeregistrationType()),
         Type3TV('5GMMCause', val={'T':0x58, 'V':b'\x16'}, bl={'V':8}, IE=FGMMCause()),
-        Type4TLV('T3346', val={'T':0x5F, 'V':b'\0'}, IE=GPRSTimer()),
+        Type4TLV('T3346', val={'T':0x5F, 'V':b'\0'}, IE=GPRSTimer())
         )
 
 
@@ -542,7 +552,7 @@ class FGMMIdentityResponse(Layer3):
     _name = '5GMMIdentityResponse'
     _GEN = (
         FGMMHeader(val={'Type':92}),
-        Type6LVE('5GSID', val={'V':b'\0'}, IE=FGSID()),
+        Type6LVE('5GSID', val={'V':b'\0'}, IE=FGSID())
         )
 
 
@@ -569,7 +579,7 @@ class FGMMNotificationResponse(Layer3):
     _name = '5GMMNotificationResponse'
     _GEN = (
         FGMMHeader(val={'Type':102}),
-        Type4TLV('PDUSessStat', val={'T':0x50, 'V':b'\0\0'}, IE=PDUSessStat()),
+        Type4TLV('PDUSessStat', val={'T':0x50, 'V':b'\0\0'}, IE=PDUSessStat())
         )
 
 
@@ -604,10 +614,9 @@ class FGMMSecurityModeComplete(Layer3):
     _name = '5GMMSecurityModeComplete'
     _GEN = (
         FGMMHeader(val={'Type':94}),
-        # TODO
-        
+        Type6TLVE('5GSID', val={'T':0x77, 'V':b'\0'}, IE=FGSID()), # IMEISV
+        Type6TLVE('NASContainer', val={'T':0x71, 'V':b'\0\0'})
         )
-
 
 
 #------------------------------------------------------------------------------#
@@ -619,18 +628,193 @@ class FGMMSecurityModeReject(Layer3):
     _name = '5GMMSecurityModeReject'
     _GEN = (
         FGMMHeader(val={'Type':95}),
-        # TODO
-        
+        Type3V('5GMMCause', val={'V':b'\x18'}, bl={'V':8}, IE=FGMMCause())
         )
 
 
+#------------------------------------------------------------------------------#
+# Security protected 5GS NAS message
+# TS 24.501, section 8.2.28
+#------------------------------------------------------------------------------#
 
-'''remaining:
+if _with_cm:
+    
+    class FGMMSecProtNASMessage(Layer3):
+        _name = '5GMMSecProtNASMessage'
+        _GEN = (
+            FGMMHeaderSec(),
+            Buf('MAC', val=b'\0\0\0\0', bl=32, rep=REPR_HEX),
+            Uint8('Seqn'),
+            Buf('NASMessage', rep=REPR_HEX)
+            )
+        
+        def mac_verify(self, key=16*b'\0', dir=0, fgia=0, seqnoff=0):
+            """compute the MAC of the NASMessage using Seqn plus seqnoff, key, 
+            direction and fgia, and verify against the embedded MAC value
+            
+            Args:
+                key: 16 bytes buffer, K_nas_int
+                dir: 0 for uplink, 1 for downlink
+                fgia: 0 to 3, reference to 5G-IA algorithm
+                seqnoff: 0 to 2^32 - 2^8, NAS count offset to add to Seqn
+            
+            Returns:
+                True if embedded MAC is correct, False otherwise
+            """
+            if fgia == 0:
+                return True
+            shdr = self[0][2].get_val()
+            if shdr == 0:
+                return True
+            elif shdr in (1, 2, 3, 4):
+                try:
+                    FGIA = _FGIA[fgia]
+                except KeyError:
+                    raise(PycrateErr('5GMMSecProtNASMessage.mac_verify(): invalid 5G-IA identifier, {0}'\
+                          .format(fgia)))
+                mac = FGIA(key, seqnoff + self[2].get_val(), 0, dir, self[2].to_bytes() + self[3].get_val())
+                return mac == self[1].get_val()
+            else:
+                #raise(PycrateErr('5GMMSecProtNASMessage.mac_verify(): invalid sec hdr value, {0}'\
+                #      .format(shdr)))
+                return False
+        
+        def mac_compute(self, key=16*b'\0', dir=0, fgia=0, seqnoff=0):
+            """compute the MAC of the NASMessage using Seqn plus seqnoff, key, 
+            direction and fgia, and set the embedded MAC value with it
+            
+            Args:
+                key: 16 bytes buffer, K_nas_int
+                dir: 0 for uplink, 1 for downlink
+                fgia: 0 to 3, reference to 5G-IA algorithm
+                seqnoff: 0 to 2^32 - 2^8, NAS count offset to add to Seqn
+            
+            Returns:
+                None
+            """
+            if fgia == 0:
+                self[1].set_val(b'\0\0\0\0')
+                return
+            shdr = self[0][2].get_val()
+            if shdr == 0:
+                self[1].set_val(b'\0\0\0\0')
+            elif shdr in (1, 2, 3, 4):
+                try:
+                    FGIA = _FGIA[fgia]
+                except KeyError:
+                    raise(PycrateErr('5GMMSecProtNASMessage.mac_compute(): invalid 5G-IA identifier, {0}'\
+                          .format(fgia)))
+                mac = FGIA(key, seqnoff + self[2].get_val(), 0, dir, self[2].to_bytes() + self[3].get_val())
+                self[1].set_val(mac)
+            else:
+                raise(PycrateErr('5GMMSecProtNASMessage.mac_compute(): invalid sec hdr value, {0}'\
+                      .format(shdr)))
+        
+        def encrypt(self, key=16*b'\0', dir=0, fgea=0, seqnoff=0):
+            """encrypt the NASMessage in place using Seqn plus seqnoff, key, 
+            direction and fgea
+            
+            Args:
+                key: 16 bytes buffer, K_nas_enc
+                dir: 0 for uplink, 1 for downlink
+                fgea: 0 to 3, reference to 5G-EA algorithm
+                seqnoff: 0 to 2^24 by step of 0x100
+            
+            Returns:
+                None
+            """
+            if fgea == 0:
+                return
+            shdr = self[0][0].get_val()
+            if shdr in (0, 1, 3):
+                return
+            elif shdr in (2, 4):
+                try:
+                    FGEA = _FGEA[fgea]
+                except KeyError:
+                    raise(PycrateErr('5GMMSecProtNASMessage.encrypt(): invalid 5G-EA identifier, {0}'\
+                          .format(fgea)))
+                self._dec_msg = self[3].to_bytes()
+                self._enc_msg = FGEA(key, seqnoff + self[2].get_val(), 0, dir, self._dec_msg)
+                self[3].set_val(self._enc_msg)
+            else:
+                raise(PycrateErr('5GMMSecProtNASMessage.encrypt(): invalid sec hdr value, {0}'\
+                      .format(shdr)))
+        
+        def decrypt(self, key=16*b'\0', dir=0, fgea=0, seqnoff=0):
+            """decrypt the NASMessage in place using Seqn plus seqnoff, key, 
+            direction and fgea
+            
+            Args:
+                key: 16 bytes buffer, K_nas_enc
+                dir: 0 for uplink, 1 for downlink
+                fgea: 0 to 3, reference to 5G-EA algorithm
+                seqnoff: 0 to 2^24 by step of 0x100
+            
+            Returns:
+                None
+            """
+            if fgea == 0:
+                return
+            shdr = self[0][0].get_val()
+            if shdr in (0, 1, 3):
+                return
+            elif shdr in (2, 4):
+                try:
+                    FGEA = _FGEA[fgea]
+                except KeyError:
+                    raise(PycrateErr('5GMMSecProtNASMessage.decrypt(): invalid 5G-EA identifier, {0}'\
+                          .format(fgea)))
+                self._enc_msg = self[3].to_bytes()
+                self._dec_msg = FGEA(key, seqnoff + self[2].get_val(), 0, dir, self._enc_msg)
+                self[3].set_val(self._dec_msg)
+            else:
+                raise(PycrateErr('5GMMSecProtNASMessage.decrypt(): invalid sec hdr value, {0}'\
+                      .format(shdr)))
+    
+else:
+    
+    class FGMMSecProtNASMessage(Layer3):
+        _name = '5GMMSecProtNASMessage'
+        _GEN = (
+            FGMMHeaderSec(),
+            Buf('MAC', val=b'\0\0\0\0', bl=32, rep=REPR_HEX),
+            Uint8('Seqn'),
+            Buf('NASMessage', rep=REPR_HEX)
+            )
+            
 
-    # service request
-    79 : "Control plane service request",
-    # misc
-    100: "5GMM status",
-'''
+#------------------------------------------------------------------------------#
+# 5GMM status
+# TS 24.501, section 8.2.29
+#------------------------------------------------------------------------------#
 
+class FGMMStatus(Layer3):
+    _name = '5GMMStatus'
+    _GEN = (
+        FGMMHeader(val={'Type':100}),
+        Type3V('5GMMCause', val={'V':b'\x18'}, bl={'V':8}, IE=FGMMCause())
+        )
+
+
+#------------------------------------------------------------------------------#
+# Control Plane Service request
+# TS 24.501, section 8.2.30
+#------------------------------------------------------------------------------#
+
+class FGMMControlPlaneServiceRequest(Layer3):
+    _name = '5GMMControlPlaneServiceRequest'
+    _GEN = (
+        FGMMHeader(val={'Type':79}),
+        Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
+        Type1V('CtrlPlaneServiceType', val={'V':0}, IE=CtrlPlaneServiceType()),
+        #Type4TLV('CIoTSmallDataContainer', val={'T':0x0, 'V':b'\x20\0'}, IE=CIoTSmallDataContainer()), # WNG: tag is undefined in current TS
+        Type1TV('PayloadContainerType', val={'T':0x8, 'V':1}, dic=PayloadContainerType_dict),
+        Type6TLVE('PayloadContainer', val={'T':0x7B, 'V':b'\0'}, IE=PayloadContainer()),
+        Type3TV('PDUSessID', val={'T':0x12, 'V':b'\0'}, bl={'V':8}, IE=PDUSessID()),
+        Type4TLV('PDUSessStat', val={'T':0x50, 'V':b'\0\0'}, IE=PDUSessStat()),
+        Type1TV('ReleaseAssistInd', val={'T':0xF, 'V':0}, IE=ReleaseAssistInd()),
+        Type4TLV('ULDataStat', val={'T':0x40, 'V':b'\0\0'}, IE=ULDataStat()),
+        Type6TLVE('NASContainer', val={'T':0x71, 'V':b'\0\0'})
+        )
 
