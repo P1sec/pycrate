@@ -818,3 +818,44 @@ class FGMMControlPlaneServiceRequest(Layer3):
         Type6TLVE('NASContainer', val={'T':0x71, 'V':b'\0\0'})
         )
 
+
+#------------------------------------------------------------------------------#
+# 5GMM dispatcher
+#------------------------------------------------------------------------------#
+# special 5GMM message: FGMMSecProtNASMessage
+
+FGMMTypeClasses = {
+    65 : FGMMRegistrationRequest,
+    66 : FGMMRegistrationAccept,
+    67 : FGMMRegistrationComplete,
+    68 : FGMMRegistrationReject,
+    69 : FGMMMODeregistrationRequest,
+    70 : FGMMMODeregistrationAccept,
+    71 : FGMMMTDeregistrationRequest,
+    72 : FGMMMTDeregistrationAccept,
+    76 : FGMMServiceRequest,
+    77 : FGMMServiceReject,
+    78 : FGMMServiceAccept,
+    79 : FGMMControlPlaneServiceRequest,
+    84 : FGMMConfigurationUpdateCommand,
+    85 : FGMMConfigurationUpdateComplete,
+    86 : FGMMAuthenticationRequest,
+    87 : FGMMAuthenticationResponse,
+    88 : FGMMAuthenticationReject,
+    89 : FGMMAuthenticationFailure,
+    90 : FGMMAuthenticationResult,
+    91 : FGMMIdentityRequest,
+    92 : FGMMIdentityResponse,
+    93 : FGMMSecurityModeCommand,
+    94 : FGMMSecurityModeComplete,
+    95 : FGMMSecurityModeReject,
+    100 : FGMMStatus,
+    101 : FGMMNotification,
+    102 : FGMMNotificationResponse,
+    103 : FGMMULNASTransport,
+    104 : FGMMDLNASTransport
+    }
+
+def get_5gmm_msg_instances():
+    return {k: FGMMTypeClasses[k]() for k in FGMMTypeClasses}
+

@@ -41,6 +41,8 @@ from pycrate_core.base   import *
 from pycrate_core.repr   import *
 from pycrate_core.charpy import Charpy
 
+from pycrate_ether.Ethernet     import EtherType_dict
+from pycrate_ether.IP           import IPProt_dict
 from pycrate_mobile.TS24008_IE  import (
     BufBCD, PLMN, GPRSTimer3, APN, 
     )
@@ -255,6 +257,7 @@ _FGMMCause_dict = {
     }
 
 class FGMMCause(Uint8):
+    _name = '5GMMCause'
     _dic = _FGMMCause_dict
 
 
@@ -1171,9 +1174,8 @@ class _PayContOpt(Envelope):
             return
         self[0]._from_char(char)
         self[1]._from_char(char)
-        optlen  = self[1].get_val()
         char_lb = char._len_bit
-        char._len_bit = char._cur + (optlen<<3)
+        char._len_bit = char._cur + (self[1].get_val()<<3)
         self[2]._from_char(char)
         char._len_bit = char_lb
 
@@ -1504,7 +1506,7 @@ class UESecCap(Envelope):
         Uint('EIA5', bl=1),
         Uint('EIA6', bl=1),
         Uint('EIA7', bl=1), # end of octet 4 (optional part)
-        Buf('spare', rep=REPR_HEX)
+        Buf('spare', val=b'', rep=REPR_HEX)
         )
     
     def _from_char(self, char):
@@ -1603,7 +1605,7 @@ class CAGInfo(Envelope):
         self[0]._from_char(char)
         self[1]._from_char(char)
         char_lb = char._len_bit
-        char._len_bit = char._cur + self[0].get_val() - 3
+        char._len_bit = char._cur + ((self[0].get_val()-3)<<3)
         self[2]._from_char(char)
         char._len_bit = char_lb
 
@@ -1686,5 +1688,466 @@ class UERadioCapIDDelInd(Envelope):
         Uint('spare', bl=1),
         Uint('DelRequest', bl=3, dic=_DelRequest_dict)
         )
+
+
+#------------------------------------------------------------------------------#
+# 5GSM capability
+# TS 24.501, 9.11.4.1
+#------------------------------------------------------------------------------#
+
+class FGSMCap(Envelope):
+    _name = '5GSMCap'
+    _GEN = (
+        Uint('spare', bl=2),
+        Uint('TPMIC', bl=1),
+        Uint('MPTCP', bl=1),
+        Uint('ATS-LL', bl=1),
+        Uint('EPT-S1', bl=1),
+        Uint('MH6-PDU', bl=1),
+        Uint('RQoS', bl=1),
+        Buf('spare', val=b'', rep=REPR_HEX)
+        )
+    
+    #def _from_char(self, char):
+    #    Envelope._from_char(self, char)
+        
+    def disable_from(self, ind):
+        """disables all elements from index `ind' excluded (integer -bit offset- 
+        or element name)
+        """
+        if isinstance(ind, str_types) and ind in self._by_name:
+            ind = self._by_name.index(ind)
+        [e.set_trans(True) for e in self._content[ind:]]
+    
+    def enable_upto(self, ind):
+        """enables all elements up to index `ind' included (integer -bit offset- 
+        or element name)
+        """
+        if isinstance(ind, str_types) and ind in self._by_name:
+            ind = 1 + self._by_name.index(ind)
+        [e.set_trans(False) for e in self._content[:ind]]
+
+
+#------------------------------------------------------------------------------#
+# 5GSM cause
+# TS 24.501, 9.11.4.2
+#------------------------------------------------------------------------------#
+
+_FGSMCause_dict = {
+    8 : 'Operator determined barring',
+    26 : 'Insufficient resources',
+    27 : 'Missing or unknown DNN',
+    28 : 'Unknown PDU session type',
+    29 : 'User authentication or authorization failed',
+    31 : 'Request rejected, unspecified',
+    32 : 'Service option not supported',
+    33 : 'Requested service option not subscribed',
+    34 : 'Service option temporarily out of order',
+    35 : 'PTI already in use',
+    36 : 'Regular deactivation',
+    38 : 'Network failure',
+    39 : 'Reactivation requested',
+    41 : 'Semantic error in the TFT operation',
+    42 : 'Syntactical error in the TFT operation',
+    43 : 'Invalid PDU session identity',
+    44 : 'Semantic errors in packet filter(s)',
+    45 : 'Syntactical error in packet filter(s)',
+    46 : 'Out of LADN service area',
+    47 : 'PTI mismatch',
+    50 : 'PDU session type IPv4 only allowed',
+    51 : 'PDU session type IPv6 only allowed',
+    54 : 'PDU session does not exist',
+    67 : 'Insufficient resources for specific slice and DNN',
+    68 : 'Not supported SSC mode',
+    69 : 'Insufficient resources for specific slice',
+    70 : 'Missing or unknown DNN in a slice',
+    81 : 'Invalid PTI value',
+    82 : 'Maximum data rate per UE for user-plane integrity protection is too low',
+    83 : 'Semantic error in the QoS operation',
+    84 : 'Syntactical error in the QoS operation',
+    85 : 'Invalid mapped EPS bearer identity',
+    95 : 'Semantically incorrect message',
+    96 : 'Invalid mandatory information',
+    97 : 'Message type non-existent or not implemented',
+    98 : 'Message type not compatible with the protocol state',
+    99 : 'Information element non-existent or not implemented',
+    100 : 'Conditional IE error',
+    101 : 'Message not compatible with the protocol state',
+    111 : 'Protocol error, unspecified'
+    }
+
+class FGSMCause(Uint8):
+    _name = '5GSMCause'
+    _dic  = _FGSMCause_dict
+
+
+#------------------------------------------------------------------------------#
+# Always-on PDU session indication
+# TS 24.501, 9.11.4.3
+#------------------------------------------------------------------------------#
+
+class AlwaysOnPDUSessInd(Envelope):
+    _GEN = (
+        Uint('spare', bl=3),
+        Uint('Value', bl=1)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Always-on PDU session requested
+# TS 24.501, 9.11.4.4
+#------------------------------------------------------------------------------#
+
+class AlwaysOnPDUSessReq(Envelope):
+    _GEN = (
+        Uint('spare', bl=3),
+        Uint('Value', bl=1)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Integrity protection maximum data rate
+# TS 24.501, 9.11.4.7
+#------------------------------------------------------------------------------#
+
+_IntegrityProtMaxDataRate_dict = {
+    0    : '64 kbps',
+    0xff : 'full data rate'
+    }
+
+class IntegrityProtMaxDataRate(Envelope):
+    _GEN = (
+        Uint8('UPUL', dic=_IntegrityProtMaxDataRate_dict),
+        Uint8('UPDL', dic=_IntegrityProtMaxDataRate_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Maximum number of supported packet filters
+# TS 24.501, 9.11.4.9
+#------------------------------------------------------------------------------#
+# 17 <= Value <= 1024
+ 
+class MaxPktFilters(Envelope):
+    _GEN = (
+        Uint('Value', bl=11),
+        Uint('spare', bl=5)
+        )
+
+
+#------------------------------------------------------------------------------#
+# PDU address
+# TS 24.501, 9.11.4.10
+#------------------------------------------------------------------------------#
+
+class PDUAddress(Envelope):
+    _GEN = (
+        Uint('spare', bl=6, rep=REPR_HEX),
+        Uint('Type', bl=2, dic={1:'IPv4', 2:'IPv6', 3:'IPv4v6'}),
+        Alt('Addr', GEN={
+            1 : Buf('IPv4', bl=32, rep=REPR_HEX),
+            2 : Buf('IPv6', bl=128, rep=REPR_HEX),
+            3 : Envelope('IPv4v6', GEN=(
+                    Buf('IPv4', bl=32, rep=REPR_HEX),
+                    Buf('IPv6', bl=128, rep=REPR_HEX)))},
+            DEFAULT=Buf('unk', rep=REPR_HEX),
+            sel=lambda self: self.get_env()['Type'].get_val()
+            )
+        )
+
+
+#------------------------------------------------------------------------------#
+# PDU session type
+# TS 24.501, 9.11.4.11
+#------------------------------------------------------------------------------#
+
+_PDUSessType_dict = {
+    1 : 'IPv4',
+    2 : 'IPv6',
+    3 : 'IPv4v6',
+    4 : 'Unstructured',
+    5 : 'Ethernet',
+    7 : _str_reserved
+    }
+
+class PDUSessType(Envelope):
+    _GEN = (
+        Uint('spare', bl=1),
+        Uint('Value', bl=3, dic=_PDUSessType_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# QoS rules
+# TS 24.501, 9.11.4.13
+#------------------------------------------------------------------------------#
+
+_QoSRuleOpCode_dict = {
+    0 : _str_reserved,
+    1 : 'Create new QoS rule',
+    2 : 'Delete existing QoS rule',
+    3 : 'Modify existing QoS rule and add packet filters',
+    4 : 'Modify existing QoS rule and replace all packet filters',
+    5 : 'Modify existing QoS rule and delete packet filters',
+    6 : 'Modify existing QoS rule without modifying packet filters',
+    7 : _str_reserved
+    }
+
+_PktFilterDir_dict = {
+    0 : _str_reserved,
+    1 : 'downlink only',
+    2 : 'uplink only',
+    3 : 'bidirectional'
+    }
+
+_PktFilterCompType_dict = {
+    1   : 'Match-all type',
+    16  : 'IPv4 remote address type',
+    17  : 'IPv4 local address type',
+    33  : 'IPv6 remote address/prefix length type',
+    35  : 'IPv6 local address/prefix length type',
+    48  : 'Protocol identifier/Next header type',
+    64  : 'Single local port type',
+    65  : 'Local port range type',
+    80  : 'Single remote port type',
+    81  : 'Remote port range type',
+    96  : 'Security parameter index type',
+    112 : 'Type of service/Traffic class type',
+    128 : 'Flow label type',
+    129 : 'Destination MAC address type',
+    130 : 'Source MAC address type',
+    131 : '802.1Q C-TAG VID type',
+    132 : '802.1Q S-TAG VID type',
+    133 : '802.1Q C-TAG PCP/DEI type',
+    134 : '802.1Q S-TAG PCP/DEI type',
+    135 : 'Ethertype type'
+    }
+
+
+class PktFilterDel(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('ID', bl=4)
+        )
+
+
+class _PktFilterCompIPv4(Envelope):
+    _GEN = (
+        Buf('Addr', bl=32, rep=REPR_HEX),
+        Buf('Mask', bl=32, rep=REPR_HEX)
+        )
+
+
+class _PktFilterCompIPv6(Envelope):
+    _GEN = (
+        Buf('Addr', bl=128, rep=REPR_HEX),
+        Uint8('Pref')
+        )
+
+
+class _PktFilterCompPortRange(Envelope):
+    _GEN = (
+        Uint16('Low'),
+        Uint16('High')
+        )
+
+
+class _PktFilterTrafficClass(Envelope):
+    _GEN = (
+        Uint8('Class'),
+        Uint8('Mask')
+        )
+
+
+class _PktFilterFlowLabel(Envelope):
+    _GEN = (
+        Uint('spare', bl=4),
+        Uint('Value', bl=20, rep=REPR_HEX)
+        )
+
+
+class _PktFilterVID(Envelope):
+    _GEN = (
+        Uint('spare', bl=4),
+        Uint('Value', bl=12)
+        )
+
+
+class _PktFilterPCPDEI(Envelope):
+    _GEN = (
+        Uint('spare', bl=4),
+        Uint('PCP', bl=3),
+        Uint('DEI', bl=1)
+        )
+
+
+class PktFilterComp(Envelope):
+    _GEN = (
+        Uint8('Type', dic=_PktFilterCompType_dict),
+        Alt('Value', GEN={
+            # TODO
+            1   : Buf('none', bl=0),
+            16  : _PktFilterCompIPv4('IPv4RemoteAddr'),
+            17  : _PktFilterCompIPv4('IPv4LocalAddr'),
+            33  : _PktFilterCompIPv6('IPv6RemoteAddr'),
+            35  : _PktFilterCompIPv6('IPv6LocalAddr'),
+            48  : Uint8('ProtID', dic=IPProt_dict),
+            64  : Uint16('PortLocal'),
+            65  : _PktFilterCompPortRange('PortRangeLocal'),
+            80  : Uint16('PortRemote'),
+            81  : _PktFilterCompPortRange('PortRangeRemote'),
+            96  : Uint32('SPI', rep=REPR_HEX),
+            112 : _PktFilterTrafficClass('TrafficClass'),
+            128 : _PktFilterFlowLabel('FlowLabel'),
+            129 : Buf('MACDest', bl=48, rep=REPR_HEX),
+            130 : Buf('MACSrc', bl=48, rep=REPR_HEX),
+            131 : _PktFilterVID('CTagVID'),
+            132 : _PktFilterVID('STagVID'),
+            133 : _PktFilterPCPDEI('CTagPCPDEI'),
+            134 : _PktFilterPCPDEI('STagPCPDEI'),
+            135 : Uint16('EtherType', dic=EtherType_dict)
+            },
+            DEFAULT=Buf('unk', rep=REPR_HEX),
+            sel=lambda self: self.get_env()['Type'].get_val())
+        )
+
+
+class PktFilterAdd(Envelope):
+    _GEN = (
+        Uint('spare', bl=2),
+        Uint('Direction', bl=2, dict=_PktFilterDir_dict),
+        Uint('ID', bl=4),
+        Uint8('Len'),
+        Sequence('PktFilter', GEN=PktFilterComp())
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['Len'].set_valauto(lambda: self['PktFilter'].get_len())
+    
+    def _from_char(self, char):
+        if self.get_trans():
+            return
+        self[0]._from_char(char)
+        self[1]._from_char(char)
+        self[2]._from_char(char)
+        self[3]._from_char(char)
+        char_lb = char._len_bit
+        char._len_bit = char._cur + (self[3].get_val()<<3)
+        self[4]._from_char(char)
+        char._len_bit = char_lb
+
+
+class QoSRule(Envelope):
+    _GEN = (
+        Uint8('ID', dic={0:'no QoS rule identifier assigned'}),
+        Uint16('Len'),
+        Uint('OpCode', val=1, bl=3, dic=_QoSRuleOpCode_dict),
+        Uint('DQR', bl=1, dic={0:'not the default rule', 1:'default rule'}),
+        Uint('NumPktFilters', bl=4),
+        Sequence('PktFilterList',
+            GEN=Alt('PktFilter', GEN={
+                1 : PktFilterAdd(),
+                2 : Buf('empty', bl=0),
+                3 : PktFilterAdd(),
+                4 : PktFilterAdd(),
+                5 : PktFilterDel(),
+                6 : Buf('empty', bl=0)},
+                DEFAULT=Buf('none', bl=0),
+                sel=lambda self: self.get_env().get_env()['OpCode'].get_val())
+            ),
+        Uint8('Precedence', trans=True), # optional
+        Envelope('Flow', GEN=(
+            Uint('spare', bl=1),
+            Uint('Segregation', bl=2),
+            Uint('QFI', bl=5)),
+            trans=True) # optional
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[1].set_valauto(lambda: 1 + self['PktFilterList'].get_len() + self['Precedence'].get_len() + self['Flow'].get_len())
+        self[4].set_valauto(lambda: self[5].get_num())
+        self[5].set_numauto(lambda: self[4].get_val())
+
+
+class QoSRules(Sequence):
+    _GEN = QoSRule()
+
+
+#------------------------------------------------------------------------------#
+# Session-AMBR
+# TS 24.501, 9.11.4.14
+#------------------------------------------------------------------------------#
+
+_UnitBitrate_dict = {
+    1  : '1 Kbps',
+    2  : '4 Kbps',
+    3  : '16 Kbps',
+    4  : '64 Kbps',
+    5  : '256 kbps',
+    6  : '1 Mbps',
+    7  : '4 Mbps',
+    8  : '16 Mbps',
+    9  : '64 Mbps',
+    10 : '256 Mbps',
+    11 : '1 Gbps',
+    12 : '4 Gbps',
+    13 : '16 Gbps',
+    14 : '64 Gbps',
+    15 : '256 Gbps',
+    16 : '1 Tbps',
+    17 : '4 Tbps',
+    18 : '16 Tbps',
+    19 : '64 Tbps',
+    20 : '256 Tbps',
+    21 : '1 Pbps',
+    22 : '4 Pbps',
+    23 : '16 Pbps',
+    24 : '64 Pbps',
+    25 : '256 Pbps'
+    }
+
+class SessAMBR(Envelope):
+    _GEN = (
+        Uint8('DLUnit', dic=_UnitBitrate_dict),
+        Uint16('DL'),
+        Uint8('ULUnit', dic=_UnitBitrate_dict),
+        Uint16('UL')
+        )
+
+
+#------------------------------------------------------------------------------#
+# SM PDU DN request container
+# TS 24.501, 9.11.4.15
+#------------------------------------------------------------------------------#
+
+class SMPDUDNReqContainer(Envelope):
+    _GEN = (
+        UTF8String('DNSpecificID')
+        )
+
+
+#------------------------------------------------------------------------------#
+# SSC mode
+# TS 24.501, 9.11.4.16
+#------------------------------------------------------------------------------#
+
+_SSCMode_dict = {
+    1 : 'mode 1',
+    2 : 'mode 2',
+    3 : 'mode 3',
+    4 : 'unused - mode 1',
+    5 : 'unused - mode 2',
+    6 : 'unused - mode 3'
+    }
+
+class SSCMode(Envelope):
+    _GEN = (
+        Uint('spare', bl=1),
+        Uint('Value', bl=3, dict=_SSCMode_dict)
+        )
+
+
 
 
