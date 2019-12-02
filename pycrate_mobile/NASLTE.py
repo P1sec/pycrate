@@ -148,7 +148,6 @@ def parse_NASLTE_MO(buf, inner=True, sec_hdr=True):
                         return Msg, err
                     else:
                         esmc.replace(esmc[-1], cont)
-                        #esmc[-2].set_valauto(cont.get_len)
             elif typ in (98, 99):
                 # PP-SMS
                 nasc   = Msg['NASContainer']

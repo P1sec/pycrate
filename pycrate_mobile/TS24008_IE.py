@@ -36,8 +36,10 @@ from binascii import unhexlify
 from time     import struct_time
 
 from pycrate_core.utils  import *
-from pycrate_core.elt    import Envelope, Array, Sequence, REPR_RAW, REPR_HEX, \
-                                REPR_BIN, REPR_HD, REPR_HUM
+from pycrate_core.elt    import (
+    Envelope, Array, Sequence, Alt,
+    REPR_RAW, REPR_HEX, REPR_BIN, REPR_HD, REPR_HUM
+    )
 from pycrate_core.base   import *
 from pycrate_core.repr   import *
 from pycrate_core.charpy import Charpy
@@ -3287,11 +3289,13 @@ class TFTPktFilterId(Envelope):
         Uint('Id', bl=4)
         )
 
+
 class _CompIPv4(Envelope):
     _GEN = (
         Buf('Address', bl=32, rep=REPR_HEX),
         Buf('Netmask', bl=32, rep=REPR_HEX)
         )
+
 
 class _CompIPv6(Envelope):
     _GEN = (
@@ -3299,11 +3303,13 @@ class _CompIPv6(Envelope):
         Buf('Netmask', bl=128, rep=REPR_HEX)
         )
 
+
 class _CompIPv6Pref(Envelope):
     _GEN = (
         Buf('Address', bl=128, rep=REPR_HEX),
         Uint8('PrefixLen')
         )
+
 
 class _CompPortRange(Envelope):
     _GEN = (
@@ -3311,12 +3317,14 @@ class _CompPortRange(Envelope):
         Uint16('PortHi')
         )
 
+
 class _CompTrafficClass(Envelope):
     _GEN = (
         Uint8('Class'),
         Uint8('Mask')
         )
 
+'''
 class TFTPktFilterComp(Envelope):
     _ValueLUT = {
         16 : _CompIPv4('IPv4'),
@@ -3355,6 +3363,7 @@ class TFTPktFilterComp(Envelope):
         if t in self._ValueLUT:
             self.replace(self[1], self._ValueLUT[t].clone())
         self[1]._from_char(char)
+
 
 class TFTPktFilter(Envelope):
     _Cont = Sequence('Cont', GEN=TFTPktFilterComp())
@@ -3401,17 +3410,71 @@ class TFTPktFilter(Envelope):
             else:
                 char._cur = ccur
             char._len_bit = clen
+'''
+
+class TFTPktFilterComp(Envelope):
+    _GEN = (
+        Uint8('Type', dic=_PktFilterCompType_dict),
+        Alt('Value', GEN={
+            16 : _CompIPv4('IPv4'),
+            17 : _CompIPv4('IPv4'),
+            32 : _CompIPv6('IPv6'),
+            33 : _CompIPv6Pref('IPv6Pref'),
+            35 : _CompIPv6Pref('IPv6Pref'),
+            48 : Uint8('ProtId'),
+            64 : Uint16('Port'),
+            65 : _CompPortRange('PortRange'),
+            80 : Uint16('Port'),
+            81 : _CompPortRange('PortRange'),
+            96 : Uint32('SPI'),
+            112 : _CompTrafficClass('TrafficClass'),
+            128 : Uint24('FlowLabel')
+            },
+            DEFAULT=Buf('unk', val=b'', rep=REPR_HEX),
+            sel=lambda self: self.get_env()['Type'].get_val())
+        )
+
+
+class TFTPktFilter(Envelope):
+    _GEN = (
+        Uint('spare', bl=2),
+        Uint('Dir', bl=2, dic=_PktFilterDir_dict),
+        Uint('Id', bl=4),
+        Uint8('Precedence'),
+        Uint8('Len'),
+        Sequence('Cont', GEN=TFTPktFilterComp())
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['Len'].set_valauto(lambda: self['Cont'].get_len())
+    
+    def _from_char(self, char):
+        if self.get_trans():
+            return
+        self[0]._from_char(char)
+        self[1]._from_char(char)
+        self[2]._from_char(char)
+        self[3]._from_char(char)
+        self[4]._from_char(char)
+        char_lb = char._len_bit
+        char._len_bit = char._cur + (self[4].get_val()<<3)
+        self[5]._from_char(char)
+        char._len_bit = char_lb
+
 
 class TFTParameter(Envelope):
     _GEN = (
         Uint8('Id'),
         Uint8('Len'),
-        Buf('Cont', val=b'')
+        Buf('Cont', val=b'', rep=REPR_HEX)
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[1].set_valauto(self[2].get_len)
         self[2].set_blauto(lambda: 8*self[1]())
+
 
 class TFT(Envelope):
     ENV_SEL_TRANS = False
@@ -3423,6 +3486,7 @@ class TFT(Envelope):
         Sequence('PktFilters', GEN=TFTPktFilter()),
         Sequence('Parameters', GEN=TFTParameter())
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[2].set_valauto(lambda: self[3].get_num() if \

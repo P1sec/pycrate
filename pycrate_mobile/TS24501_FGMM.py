@@ -158,7 +158,7 @@ class FGMMAuthenticationRequest(Layer3):
         Type4LV('ABBA', val={'V':b'\0\0'}),
         Type3TV('RAND', val={'T':0x21, 'V':16*b'\0'}, bl={'V':128}),
         Type4LV('AUTN', val={'V':16*b'\0'}, IE=AUTN()),
-        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0'})
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'})
         )
 
 
@@ -172,7 +172,7 @@ class FGMMAuthenticationResponse(Layer3):
     _GEN = (
         FGMMHeader(val={'Type':87}),
         Type4TLV('RES', val={'T':0x2D, 'V':16*b'\0'}),
-        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0'})
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'})
         )
 
 
@@ -187,7 +187,7 @@ class FGMMAuthenticationResult(Layer3):
         FGMMHeader(val={'Type':90}),
         Uint('spare', bl=4, rep=REPR_HEX),
         Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
-        Type6LVE('EAPMsg', val={'V':b'\0\0\0\0'}),
+        Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'}),
         Type4TLV('ABBA', val={'T':0x38, 'V':b'\0\0'})
         )
 
@@ -215,7 +215,7 @@ class FGMMAuthenticationReject(Layer3):
     _name = '5GMMAuthenticationReject'
     _GEN = (
         FGMMHeader(val={'Type':88}),
-        Type6LVE('EAPMsg', val={'V':b'\0\0\0\0'})
+        Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'})
         )
 
 
@@ -235,7 +235,7 @@ class FGMMRegistrationRequest(Layer3):
         Type4TLV('5GMMCap', val={'T':0x10, 'V':b'\0'}, IE=FGMMCap()),
         Type4TLV('UESecCap', val={'T':0x2E, 'V':b'\0\0'}, IE=UESecCap()),
         Type4TLV('NSSAI', val={'T':0x2F, 'V':b'\0\0'}, IE=NSSAI()),
-        Type3TV('TAI', val={'T':0x52, 'V':6*b'\0'}, IE=FGSTAI()),
+        Type3TV('TAI', val={'T':0x52, 'V':6*b'\0'}, bl={'V':48}, IE=FGSTAI()),
         Type4TLV('EPSUENetCap', val={'T':0x17, 'V':b'\0\0'}, IE=EPSUENetCap()),
         Type4TLV('ULDataStat', val={'T':0x40, 'V':b'\0\0'}, IE=ULDataStat()),
         Type1TV('MICOInd', val={'T':0xB, 'V':0}, IE=MICOInd()),
@@ -290,7 +290,7 @@ class FGMMRegistrationAccept(Layer3):
         Type4TLV('EmergNumList', val={'T':0x34, 'V':b'\x02\x01\0'}, IE=EmergNumList()),
         Type6TLVE('ExtEmergNumList', val={'T':0x7A, 'V':b'\0\0\0\0'}, IE=ExtEmergNumList()),
         Type6TLVE('SORTransparentContainer', val={'T':0x73, 'V':17*b'\0'}, IE=SORTransparentContainer()),
-        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0'}),
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
         Type1TV('NSSAIInclMode', val={'T':0xA, 'V':0}, IE=NSSAIInclMode()),
         Type6TLVE('OperatorAccessCatDefs', val={'T':0x76, 'V':b''}, IE=OperatorAccessCatDefs()),
         Type4TLV('5GSDRXParam', val={'T':0x51, 'V':b'\0'}, IE=FGSDRXParam()),
@@ -330,7 +330,7 @@ class FGMMRegistrationReject(Layer3):
         Type3V('5GMMCause', val={'V':b'\x16'}, bl={'V':8}, IE=FGMMCause()),
         Type4TLV('T3346', val={'T':0x5F, 'V':b'\0'}, IE=GPRSTimer()),
         Type4TLV('T3502', val={'T':0x16, 'V':b'\0'}, IE=GPRSTimer()),
-        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0'}),
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
         Type4TLV('RejectedNSSAI', val={'T':0x69, 'V':b'\0\0'}, IE=RejectedNSSAI())
         )
 
@@ -462,7 +462,7 @@ class FGMMServiceAccept(Layer3):
         Type4TLV('PDUSessStat', val={'T':0x50, 'V':b'\0\0'}, IE=PDUSessStat()),
         Type4TLV('PDUSessStatReactResult', val={'T':0x26, 'V':b'\0\0'}, IE=PDUSessStat()),
         Type6TLVE('PDUSessReactResultErr', val={'T':0x72, 'V':b'\0\0'}, IE=PDUSessReactResultErr()),
-        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0'}),
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
         Type4TLV('T3448', val={'T':0x6B, 'V':b'\0'}, IE=GPRSTimer())
         )
 
@@ -479,7 +479,7 @@ class FGMMServiceReject(Layer3):
         Type3V('5GMMCause', val={'V':b'\x16'}, bl={'V':8}, IE=FGMMCause()),
         Type4TLV('PDUSessStat', val={'T':0x50, 'V':b'\0\0'}, IE=PDUSessStat()),
         Type4TLV('T3346', val={'T':0x5F, 'V':b'\0'}, IE=GPRSTimer()),
-        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0'}),
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
         Type4TLV('T3448', val={'T':0x6B, 'V':b'\0'}, IE=GPRSTimer())
         )
 
@@ -599,7 +599,7 @@ class FGMMSecurityModeCommand(Layer3):
         Type1TV('IMEISVReq', val={'T':0xC, 'V':0}, IE=IMEISVReq()),
         Type3TV('EPSNASSecAlgo', val={'T':0x57, 'V':b'\x11'}, bl={'V':8}, IE=EPSNASSecAlgo()),
         Type4TLV('Add5GSecInfo', val={'T':0x36, 'V':b'\0'}, IE=Add5GSecInfo()),
-        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0'}),
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
         Type4TLV('ABBA', val={'T':0x38, 'V':b'\0\0'}),
         Type4TLV('EPSUESecCap', val={'T':0x19, 'V':b'\0\0'}, IE=EPSUESecCap())
         )

@@ -44,10 +44,11 @@ from pycrate_core.charpy import Charpy
 from pycrate_ether.Ethernet     import EtherType_dict
 from pycrate_ether.IP           import IPProt_dict
 from pycrate_mobile.TS24008_IE  import (
-    BufBCD, PLMN, GPRSTimer3, APN, 
+    BufBCD, PLMN, GPRSTimer3, APN, TFT, 
     )
-#from pycrate_mobile.TS24301_IE import (
-#    )
+from pycrate_mobile.TS24301_IE import (
+    EPSQoS, ExtEPSQoS, APN_AMBR, ExtAPN_AMBR, 
+    )
 
 _str_reserved = 'reserved'
 _str_mnospec  = 'operator-specific'
@@ -1806,6 +1807,20 @@ class AlwaysOnPDUSessReq(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# Allowed SSC mode
+# TS 24.501, 9.11.4.5
+#------------------------------------------------------------------------------#
+
+class AllowedSSCMode(Envelope):
+    _GEN = (
+        Uint('spare', bl=1),
+        Uint('SSC3', bl=1),
+        Uint('SSC2', bl=1),
+        Uint('SSC1', bl=1)
+        )
+
+
+#------------------------------------------------------------------------------#
 # Integrity protection maximum data rate
 # TS 24.501, 9.11.4.7
 #------------------------------------------------------------------------------#
@@ -1820,6 +1835,92 @@ class IntegrityProtMaxDataRate(Envelope):
         Uint8('UPUL', dic=_IntegrityProtMaxDataRate_dict),
         Uint8('UPDL', dic=_IntegrityProtMaxDataRate_dict)
         )
+
+
+#------------------------------------------------------------------------------#
+# Mapped EPS bearer contexts
+# TS 24.501, 9.11.4.8
+#------------------------------------------------------------------------------#
+
+_EPSBearerCtxtOC_dict = {
+    0 : _str_reserved,
+    1 : 'Create new EPS bearer',
+    2 : 'Delete new EPS bearer',
+    3 : 'Modify new EPS bearer'
+    }
+
+_EPSBearerCtxtEDict_sel = {
+    1 : {
+        0 : 'parameters not included',
+        1 : 'parameters included'
+        },
+    2 : {
+        0 : 'previously provided parameters extension',
+        1 : 'previously provided parameters replacement'
+        },
+    3 : { # TS unclear there !
+        }
+    }
+
+_EPSParamType_dict = {
+    1 : 'Mapped EPS QoS parameters',
+    2 : 'Mapped extended EPS QoS parameters',
+    3 : 'Traffic flow template',
+    4 : 'APN-AMBR',
+    5 : 'extended APN-AMBR',
+    }
+
+
+class EPSParam(Envelope):
+    _GEN = (
+        Uint8('Type', dic=_EPSParamType_dict),
+        Uint8('Len'),
+        Alt('Content', GEN={
+            1 : EPSQoS(),
+            2 : ExtEPSQoS(),
+            3 : TFT(),
+            4 : APN_AMBR(),
+            5 : ExtAPN_AMBR()
+            },
+            DEFAULT=Buf('unk', val=b'', rep=REPR_HEX),
+            sel=lambda self: self.get_env()['Type'].get_val())
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['Len'].set_valauto(lambda: self['Content'].get_len())
+    
+    def _from_char(self, char):
+        self[0]._from_char(char)
+        self[1]._from_char(char)
+        char_lb = char._len_bit
+        char._len_bit = char._cur + (self[1].get_val()<<3)
+        self[2]._from_char(char)
+        char._len_bit = char_lb
+
+
+class EPSBearerCtxt(Envelope):
+    _GEN = (
+        Uint('spare', bl=4),
+        Uint('EBI', bl=4),
+        Uint16('Len'),
+        Uint('OpCode', bl=2, dic=_EPSBearerCtxtOC_dict),
+        Uint('spare', bl=2),
+        Uint('E', bl=1),
+        Uint('Num', bl=3),
+        Sequence('EPSParams', GEN=EPSParam())
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['Len'].set_valauto(lambda: 1 + self['EPSParams'].get_len()) # TS does not define which length it is...
+        self['E'].set_dicauto(lambda: _EPSBearerCtxtEDict_sel[self['OpCode'].get_val()])
+        self['Num'].set_valauto(lambda: self['EPSParams'].get_num())
+        self['EPSParams'].set_numauto(lambda: self['Num'].get_val())
+
+
+class MappedEPSBearerCtxt(Sequence):
+    _GEN = EPSBearerCtxt()
 
 
 #------------------------------------------------------------------------------#
@@ -1878,9 +1979,130 @@ class PDUSessType(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# QoS flow descriptions
+# TS 24.501, 9.11.4.12
+#------------------------------------------------------------------------------#
+
+_UnitBitrate_dict = {
+    1  : '1 Kbps',
+    2  : '4 Kbps',
+    3  : '16 Kbps',
+    4  : '64 Kbps',
+    5  : '256 kbps',
+    6  : '1 Mbps',
+    7  : '4 Mbps',
+    8  : '16 Mbps',
+    9  : '64 Mbps',
+    10 : '256 Mbps',
+    11 : '1 Gbps',
+    12 : '4 Gbps',
+    13 : '16 Gbps',
+    14 : '64 Gbps',
+    15 : '256 Gbps',
+    16 : '1 Tbps',
+    17 : '4 Tbps',
+    18 : '16 Tbps',
+    19 : '64 Tbps',
+    20 : '256 Tbps',
+    21 : '1 Pbps',
+    22 : '4 Pbps',
+    23 : '16 Pbps',
+    24 : '64 Pbps',
+    25 : '256 Pbps'
+    }
+
+_QoSFlowOC_dict = {
+    1 : 'Create new QoS flow description',
+    2 : 'Delete existing QoS flow description',
+    3 : 'Modify existing QoS flow description'
+    }
+
+_QoSFlowE_dict = {
+    1 : {
+        0 : _str_reserved,
+        1 : 'parameters list is included'
+        },
+    2 : {
+        0 : 'parameters list is not included',
+        1 : _str_reserved
+        },
+    3 : {
+        0 : 'extension of previously provided parameters',
+        1 : 'replacement of all previously provided parameters'
+        }
+    }
+
+_QoSFlowParamType_dict = {
+    1 : '5QI',
+    2 : 'GFBR uplink',
+    3 : 'GFBR downlink',
+    4 : 'MFBR uplink',
+    5 : 'MFBR downlink',
+    6 : 'Averaging window',
+    7 : 'EPS bearer identity'
+    }
+
+
+class _QoSFlowParamFBR(Envelope):
+    _GEN = (
+        Uint8('Unit', dic=_UnitBitrate_dict),
+        Uint16('Value')
+        )
+
+
+class _QoSFlowParamEBI(Envelope):
+    _GEN = (
+        Uint('spare', bl=4),
+        Uint('EBI', bl=4),
+        )
+
+
+class QoSFlowParam(Envelope):
+    _GEN = (
+        Uint8('Type', dic=_QoSFlowParamType_dict),
+        Uint8('Len'),
+        Alt('Content', GEN={
+            1 : Uint8('5GQI'),
+            2 : _QoSFlowParamFBR('GFBR'),
+            3 : _QoSFlowParamFBR('GFBR'),
+            4 : _QoSFlowParamFBR('MFBR'),
+            5 : _QoSFlowParamFBR('MFBR'),
+            6 : Uint16('Win', desc='millisecond'),
+            7 : _QoSFlowParamEBI('EBI')
+            },
+            DEFAULT=Buf('unk', val=b'', rep=REPR_HEX),
+            sel=lambda self: self.get_env()['Type'].get_val())
+        )
+
+
+class QoSFlow(Envelope):
+    _GEN = (
+        Uint('spare', bl=2),
+        Uint('QFI', bl=6),
+        Uint('OpCode', bl=3, dic=_QoSFlowOC_dict),
+        Uint('spare', bl=6), # last 5 bit of 2nd octet and 1st bit of 3rd octet
+        Uint('E', bl=1),
+        Uint('Num', bl=6),
+        Sequence('Params', GEN=QoSFlowParam('Param'))
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['E'].set_dicauto(lambda: _QoSFlowE_dict[self['OpCode'].get_val()])
+        self['Num'].set_valauto(lambda: self['Params'].get_num())
+        self['Params'].set_numauto(lambda: self['Num'].get_val())
+
+
+class QoSFlowDesc(Sequence):
+    _GEN = QoSFlow()
+
+
+#------------------------------------------------------------------------------#
 # QoS rules
 # TS 24.501, 9.11.4.13
 #------------------------------------------------------------------------------#
+# similar to Traffic Flow Template for PS and EPS domains
+# TS 24.008, 10.5.6.12
 
 _QoSRuleOpCode_dict = {
     0 : _str_reserved,
@@ -1985,17 +2207,16 @@ class PktFilterComp(Envelope):
     _GEN = (
         Uint8('Type', dic=_PktFilterCompType_dict),
         Alt('Value', GEN={
-            # TODO
             1   : Buf('none', bl=0),
-            16  : _PktFilterCompIPv4('IPv4RemoteAddr'),
-            17  : _PktFilterCompIPv4('IPv4LocalAddr'),
-            33  : _PktFilterCompIPv6('IPv6RemoteAddr'),
-            35  : _PktFilterCompIPv6('IPv6LocalAddr'),
-            48  : Uint8('ProtID', dic=IPProt_dict),
-            64  : Uint16('PortLocal'),
-            65  : _PktFilterCompPortRange('PortRangeLocal'),
-            80  : Uint16('PortRemote'),
-            81  : _PktFilterCompPortRange('PortRangeRemote'),
+            16  : _PktFilterCompIPv4('IPv4'),
+            17  : _PktFilterCompIPv4('IPv4'),
+            33  : _PktFilterCompIPv6('IPv6Pref'),
+            35  : _PktFilterCompIPv6('IPv6Pref'),
+            48  : Uint8('ProtId', dic=IPProt_dict),
+            64  : Uint16('Port'),
+            65  : _PktFilterCompPortRange('PortRange'),
+            80  : Uint16('Port'),
+            81  : _PktFilterCompPortRange('PortRange'),
             96  : Uint32('SPI', rep=REPR_HEX),
             112 : _PktFilterTrafficClass('TrafficClass'),
             128 : _PktFilterFlowLabel('FlowLabel'),
@@ -2007,7 +2228,7 @@ class PktFilterComp(Envelope):
             134 : _PktFilterPCPDEI('STagPCPDEI'),
             135 : Uint16('EtherType', dic=EtherType_dict)
             },
-            DEFAULT=Buf('unk', rep=REPR_HEX),
+            DEFAULT=Buf('unk', val=b'', rep=REPR_HEX),
             sel=lambda self: self.get_env()['Type'].get_val())
         )
 
@@ -2015,8 +2236,8 @@ class PktFilterComp(Envelope):
 class PktFilterAdd(Envelope):
     _GEN = (
         Uint('spare', bl=2),
-        Uint('Direction', bl=2, dict=_PktFilterDir_dict),
-        Uint('ID', bl=4),
+        Uint('Dir', bl=2, dict=_PktFilterDir_dict),
+        Uint('Id', bl=4),
         Uint8('Len'),
         Sequence('PktFilter', GEN=PktFilterComp())
         )
@@ -2080,34 +2301,6 @@ class QoSRules(Sequence):
 # TS 24.501, 9.11.4.14
 #------------------------------------------------------------------------------#
 
-_UnitBitrate_dict = {
-    1  : '1 Kbps',
-    2  : '4 Kbps',
-    3  : '16 Kbps',
-    4  : '64 Kbps',
-    5  : '256 kbps',
-    6  : '1 Mbps',
-    7  : '4 Mbps',
-    8  : '16 Mbps',
-    9  : '64 Mbps',
-    10 : '256 Mbps',
-    11 : '1 Gbps',
-    12 : '4 Gbps',
-    13 : '16 Gbps',
-    14 : '64 Gbps',
-    15 : '256 Gbps',
-    16 : '1 Tbps',
-    17 : '4 Tbps',
-    18 : '16 Tbps',
-    19 : '64 Tbps',
-    20 : '256 Tbps',
-    21 : '1 Pbps',
-    22 : '4 Pbps',
-    23 : '16 Pbps',
-    24 : '64 Pbps',
-    25 : '256 Pbps'
-    }
-
 class SessAMBR(Envelope):
     _GEN = (
         Uint8('DLUnit', dic=_UnitBitrate_dict),
@@ -2146,6 +2339,81 @@ class SSCMode(Envelope):
     _GEN = (
         Uint('spare', bl=1),
         Uint('Value', bl=3, dict=_SSCMode_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Re-attempt indicator
+# TS 24.501, 9.11.4.17
+#------------------------------------------------------------------------------#
+
+class ReattemptInd(Envelope):
+    _GEN = (
+        Uint('spare', bl=6, rep=REPR_HEX),
+        Uint('EPLMNC', bl=1),
+        Uint('RATC', bl=1)
+        )
+
+
+#------------------------------------------------------------------------------#
+# 5GSM network feature support
+# TS 24.501, 9.11.4.18
+#------------------------------------------------------------------------------#
+
+class FGSNetFeat(Envelope):
+    _name = '5GSMNetFeat'
+    _GEN = (
+        Uint('spare', bl=7),
+        Uint('EPT-S1', bl=1),
+        Buf('spare', val=b'', rep=REPR_HEX)
+        )
+    
+    def disable_from(self, ind):
+        """disables all elements from index `ind' excluded (element offset or name)
+        """
+        if isinstance(ind, str_types) and ind in self._by_name:
+            ind = self._by_name.index(ind)
+        [e.set_trans(True) for e in self._content[ind:]]
+    
+    def enable_upto(self, ind):
+        """enables all elements up to index `ind' included (element offset or name)
+        """
+        if isinstance(ind, str_types) and ind in self._by_name:
+            ind = 1 + self._by_name.index(ind)
+        [e.set_trans(False) for e in self._content[:ind]]
+
+
+#------------------------------------------------------------------------------#
+# Session-TMBR
+# TS 24.501, 9.11.4.19
+#------------------------------------------------------------------------------#
+
+class SessTMBR(SessAMBR):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# Re-attempt indicator
+# TS 24.501, 9.11.4.17
+#------------------------------------------------------------------------------#
+
+class CongestReattemptInd(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('ABO', bl=1)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Control plane only indication
+# TS 24.501, 9.11.4.23
+#------------------------------------------------------------------------------#
+
+class CtrlPlaneOnlyInd(Envelope):
+    _GEN = (
+        Uint('spare', bl=3),
+        Uint('Value', val=1, bl=1,
+             dic={1:'PDU session can be used for control plane CIoT 5GS optimization only'})
         )
 
 

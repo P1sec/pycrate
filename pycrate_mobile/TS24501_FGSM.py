@@ -44,7 +44,7 @@ from .TS24008_IE import (
     ProtConfig, GPRSTimer,
     )
 from .TS24301_IE import (
-    HdrCompConfig, 
+    HdrCompConfig, ServingPLMNRateCtrl, 
     )
 from .TS24501_IE import *
 
@@ -96,8 +96,8 @@ class FGSMHeader(Envelope):
 class FGSMPDUSessionEstabRequest(Layer3):
     _name = '5GSMPDUSessionEstabRequest'
     _GEN = (
-        FGSMHeader(val={'Type':193})
-        Type3V('IntegrityProtMaxDataRate', val={'V':b'\0\0'}, IE=IntegrityProtMaxDataRate()),
+        FGSMHeader(val={'Type':193}),
+        Type3V('IntegrityProtMaxDataRate', val={'V':b'\0\0'}, bl={'V':16}, IE=IntegrityProtMaxDataRate()),
         Type1TV('PDUSessType', val={'T':0x9, 'V':1}, IE=PDUSessType()),
         Type1TV('SSCMode', val={'T':0xA, 'V':1}, IE=SSCMode()),
         Type4TLV('5GSMCap', val={'T':0x28, 'V':b'\0'}, IE=FGSMCap()),
@@ -119,18 +119,27 @@ class FGSMPDUSessionEstabRequest(Layer3):
 class FGSMPDUSessionEstabAccept(Layer3):
     _name = '5GSMPDUSessionEstabAccept'
     _GEN = (
-        FGSMHeader(val={'Type':194})
+        FGSMHeader(val={'Type':194}),
         Type1V('SSCMode', val={'V':1}, IE=SSCMode()),
         Type1V('PDUSessType', val={'V':1}, IE=PDUSessType()),
         Type6LVE('QoSRules', val={'V':b'\0\0\0\0'}, IE=QoSRules()),
         Type4LV('SessAMBR', val={'V':b'\x06\0\x01\x06\0\x01'}, IE=SessAMBR()),
-        Type3TV('FGSMCause', val={'T':0x59, 'V':b'\x1a'}, IE=FGSMCause()),
+        Type3TV('5GSMCause', val={'T':0x59, 'V':b'\x1a'}, bl={'V':8}, IE=FGSMCause()),
         Type4TLV('PDUAddress', val={'T':0x29, 'V':b'\x01\x7f\0\0\x01'}, IE=PDUAddress()),
-        Type3TV('RQTimer', val={'T':0x56, 'V':b'\0'}, IE=GPRSTimer()),
+        Type3TV('RQTimer', val={'T':0x56, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
         Type4TLV('SNSSAI', val={'T':0x22, 'V':b'\0'}, IE=SNSSAI()),
         Type1TV('AlwaysOnPDUSessInd', val={'T':0x8, 'V':0}, IE=AlwaysOnPDUSessInd()),
-        # TODO
-
+        Type6TLVE('MappedEPSBearerCtxt', val={'T':0x75, 'V':b'\0\0\0\0'}, IE=MappedEPSBearerCtxt()),
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
+        Type6TLVE('QoSFlowDesc', val={'T':0x79, 'V':b'\0\0\0'}, IE=QoSFlowDesc()),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
+        Type4TLV('DNN', val={'T':0x25, 'V':b'\0'}, IE=APN('DNN')),
+        #Type4TLV('5GSMNetFeat', val={'T':0x00, 'V':b'\0'}, IE=FGSMNetFeat()), # WNG: tag is undefined in current TS
+        #Type4TLV('SessTMBR', val={'T':0x00, 'V':6*b'\0'}, IE=SessTMBR()), # WNG: tag is undefined in current TS
+        #Type4TLV('ServingPLMNRateCtrl', val={'T':0x00, 'V':b'\0\0'}, IE=ServingPLMNRateCtrl()), # WNG: tag is undefined in current TS
+        #Type6TLVE('ATSSSContainer', val={'T':0x00, 'B':b''}), # WNG: tag is undefined in current TS
+        #Type1TV('CtrlPlaneOnlyInd', val={'T':0x0, 'V':1}, IE=CtrlPlaneOnlyInd()), # WNG: tag is undefined in current TS
+        Type4TLV('HdrCompConfig', val={'T':0x66, 'V':b'\0\0\0'}, IE=HdrCompConfig())
         )
 
 
@@ -142,8 +151,14 @@ class FGSMPDUSessionEstabAccept(Layer3):
 class FGSMPDUSessionEstabReject(Layer3):
     _name = '5GSMPDUSessionEstabReject'
     _GEN = (
-        FGSMHeader(val={'Type':195})
-        
+        FGSMHeader(val={'Type':195}),
+        Type3V('5GSMCause', val={'V':b'\x1a'}, bl={'V':8}, IE=FGSMCause()),
+        Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GRPSTimer3()),
+        Type1TV('AllowedSSCMode', val={'T':0xF, 'V':0}, IE=AllowedSSCMode()),
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
+        #Type4TLV('ReattemptInd', val={'V':0x00, 'V':b'\0'}, IE=ReattemptInd()), # WNG: tag is undefined in current TS
+        Type4TLV('CongestReattemptInd', val={'T':0x61, 'V':b'\0'}, IE=CongestReattemptInd())
         )
 
 
@@ -155,8 +170,9 @@ class FGSMPDUSessionEstabReject(Layer3):
 class FGSMPDUSessionAuthentCommand(Layer3):
     _name = '5GSMPDUSessionAuthentCommand'
     _GEN = (
-        FGSMHeader(val={'Type':197})
-        
+        FGSMHeader(val={'Type':197}),
+        Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'}),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
 
@@ -168,8 +184,9 @@ class FGSMPDUSessionAuthentCommand(Layer3):
 class FGSMPDUSessionAuthentComplete(Layer3):
     _name = '5GSMPDUSessionAuthentComplete'
     _GEN = (
-        FGSMHeader(val={'Type':198})
-        
+        FGSMHeader(val={'Type':198}),
+        Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'}),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
 
@@ -181,8 +198,9 @@ class FGSMPDUSessionAuthentComplete(Layer3):
 class FGSMPDUSessionAuthentResult(Layer3):
     _name = '5GSMPDUSessionAuthentResult'
     _GEN = (
-        FGSMHeader(val={'Type':199})
-        
+        FGSMHeader(val={'Type':199}),
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
         )
 
 
@@ -194,8 +212,17 @@ class FGSMPDUSessionAuthentResult(Layer3):
 class FGSMPDUSessionModifRequest(Layer3):
     _name = '5GSMPDUSessionModifRequest'
     _GEN = (
-        FGSMHeader(val={'Type':201})
-        
+        FGSMHeader(val={'Type':201}),
+        Type4TLV('5GSMCap', val={'T':0x28, 'V':b'\0'}, IE=FGSMCap()),
+        Type3TV('5GSMCause', val={'T':0x59, 'V':b'\x1a'}, bl={'V':8}, IE=FGSMCause()),
+        Type3TV('MaxPktFilters', val={'T':0x55, 'V':b'\x02\x20'}, bl={'V':16}, IE=MaxPktFilters()),
+        Type1TV('AlwaysOnPDUSessReq', val={'T':0xB, 'V':0}, IE=AlwaysOnPDUSessReq()),
+        Type3TV('IntegrityProtMaxDataRate', val={'V':b'\0\0'}, bl={'V':16}, IE=IntegrityProtMaxDataRate()),
+        Type6TLVE('QoSRules', val={'T':0x7A, 'V':b'\0\0\0\0'}, IE=QoSRules()),
+        Type6TLVE('QoSFlowDesc', val={'T':0x79, 'V':b'\0\0\0'}, IE=QoSFlowDesc()),
+        Type6TLVE('MappedEPSBearerCtxt', val={'T':0x75, 'V':b'\0\0\0\0'}, IE=MappedEPSBearerCtxt()),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
+        #Type6TLVE('PortMgmtInfoContainer', val={'T':0x00, 'V':b'\0'}), # WNG: tag is undefined in current TS
         )
 
 
@@ -207,8 +234,12 @@ class FGSMPDUSessionModifRequest(Layer3):
 class FGSMPDUSessionModifReject(Layer3):
     _name = '5GSMPDUSessionModifReject'
     _GEN = (
-        FGSMHeader(val={'Type':202})
-        
+        FGSMHeader(val={'Type':202}),
+        Type3V('5GSMCause', val={'V':b'\x1a'}, bl={'V':8}, IE=FGSMCause()),
+        Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GRPSTimer3()),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
+        #Type4TLV('ReattemptInd', val={'V':0x00, 'V':b'\0'}, IE=ReattemptInd()), # WNG: tag is undefined in current TS
+        Type4TLV('CongestReattemptInd', val={'T':0x61, 'V':b'\0'}, IE=CongestReattemptInd())
         )
 
 
@@ -220,8 +251,19 @@ class FGSMPDUSessionModifReject(Layer3):
 class FGSMPDUSessionModifCommand(Layer3):
     _name = '5GSMPDUSessionModifCommand'
     _GEN = (
-        FGSMHeader(val={'Type':203})
-        
+        FGSMHeader(val={'Type':203}),
+        Type3TV('5GSMCause', val={'T':0x59, 'V':b'\x1a'}, bl={'V':8}, IE=FGSMCause()),
+        Type4TLV('SessAMBR', val={'T':0x2A, 'V':b'\x06\0\x01\x06\0\x01'}, IE=SessAMBR()),
+        Type3TV('RQTimer', val={'T':0x56, 'V':b'\0'}, bl={'V':8}, IE=GPRSTimer()),
+        Type1TV('AlwaysOnPDUSessInd', val={'T':0x8, 'V':0}, IE=AlwaysOnPDUSessInd()),
+        Type6TLVE('QoSRules', val={'T':0x7A, 'V':b'\0\0\0\0'}, IE=QoSRules()),
+        Type6TLVE('MappedEPSBearerCtxt', val={'T':0x75, 'V':b'\0\0\0\0'}, IE=MappedEPSBearerCtxt()),
+        Type6TLVE('QoSFlowDesc', val={'T':0x79, 'V':b'\0\0\0'}, IE=QoSFlowDesc()),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
+        #Type4TLV('SessTMBR', val={'T':0x00, 'V':6*b'\0'}, IE=SessTMBR()), # WNG: tag is undefined in current TS
+        #Type6TLVE('ATSSSContainer', val={'T':0x00, 'B':b''}), # WNG: tag is undefined in current TS
+        Type4TLV('HdrCompConfig', val={'T':0x66, 'V':b'\0\0\0'}, IE=HdrCompConfig()),
+        #Type6TLVE('PortMgmtInfoContainer', val={'T':0x00, 'V':b'\0'}), # WNG: tag is undefined in current TS
         )
 
 
@@ -233,8 +275,9 @@ class FGSMPDUSessionModifCommand(Layer3):
 class FGSMPDUSessionModifComplete(Layer3):
     _name = '5GSMPDUSessionModifComplete'
     _GEN = (
-        FGSMHeader(val={'Type':204})
-        
+        FGSMHeader(val={'Type':204}),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
+        #Type6TLVE('PortMgmtInfoContainer', val={'T':0x00, 'V':b'\0'}), # WNG: tag is undefined in current TS
         )
 
 
@@ -246,8 +289,9 @@ class FGSMPDUSessionModifComplete(Layer3):
 class FGSMPDUSessionModifCommandReject(Layer3):
     _name = '5GSMPDUSessionModifCommandReject'
     _GEN = (
-        FGSMHeader(val={'Type':205})
-        
+        FGSMHeader(val={'Type':205}),
+        Type3V('5GSMCause', val={'V':b'\x1a'}, bl={'V':8}, IE=FGSMCause()),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
 
@@ -259,8 +303,9 @@ class FGSMPDUSessionModifCommandReject(Layer3):
 class FGSMPDUSessionReleaseRequest(Layer3):
     _name = '5GSMPDUSessionReleaseRequest'
     _GEN = (
-        FGSMHeader(val={'Type':209})
-        
+        FGSMHeader(val={'Type':209}),
+        Type3TV('5GSMCause', val={'T':0x59, 'V':b'\x1a'}, bl={'V':8}, IE=FGSMCause()),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
 
@@ -272,8 +317,9 @@ class FGSMPDUSessionReleaseRequest(Layer3):
 class FGSMPDUSessionReleaseReject(Layer3):
     _name = '5GSMPDUSessionReleaseReject'
     _GEN = (
-        FGSMHeader(val={'Type':210})
-        
+        FGSMHeader(val={'Type':210}),
+        Type3V('5GSMCause', val={'V':b'\x1a'}, bl={'V':8}, IE=FGSMCause()),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
 
@@ -285,8 +331,12 @@ class FGSMPDUSessionReleaseReject(Layer3):
 class FGSMPDUSessionReleaseCommand(Layer3):
     _name = '5GSMPDUSessionReleaseCommand'
     _GEN = (
-        FGSMHeader(val={'Type':211})
-        
+        FGSMHeader(val={'Type':211}),
+        Type3V('5GSMCause', val={'V':b'\x1a'}, bl={'V':8}, IE=FGSMCause()),
+        Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GRPSTimer3()),
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
+        Type4TLV('CongestReattemptInd', val={'T':0x61, 'V':b'\0'}, IE=CongestReattemptInd()),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
 
@@ -298,8 +348,9 @@ class FGSMPDUSessionReleaseCommand(Layer3):
 class FGSMPDUSessionReleaseComplete(Layer3):
     _name = '5GSMPDUSessionReleaseComplete'
     _GEN = (
-        FGSMHeader(val={'Type':212})
-        
+        FGSMHeader(val={'Type':212}),
+        Type3TV('5GSMCause', val={'T':0x59, 'V':b'\x1a'}, bl={'V':8}, IE=FGSMCause()),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())        
         )
 
 
@@ -311,8 +362,8 @@ class FGSMPDUSessionReleaseComplete(Layer3):
 class FGSMStatus(Layer3):
     _name = '5GSMStatus'
     _GEN = (
-        FGSMHeader(val={'Type':214})
-        
+        FGSMHeader(val={'Type':214}),
+        Type3V('5GSMCause', val={'V':b'\x1a'}, bl={'V':8}, IE=FGSMCause())
         )
 
 
