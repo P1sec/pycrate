@@ -153,7 +153,7 @@ class FGSMPDUSessionEstabReject(Layer3):
     _GEN = (
         FGSMHeader(val={'Type':195}),
         Type3V('5GSMCause', val={'V':b'\x1a'}, bl={'V':8}, IE=FGSMCause()),
-        Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GRPSTimer3()),
+        Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer3()),
         Type1TV('AllowedSSCMode', val={'T':0xF, 'V':0}, IE=AllowedSSCMode()),
         Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
@@ -236,7 +236,7 @@ class FGSMPDUSessionModifReject(Layer3):
     _GEN = (
         FGSMHeader(val={'Type':202}),
         Type3V('5GSMCause', val={'V':b'\x1a'}, bl={'V':8}, IE=FGSMCause()),
-        Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GRPSTimer3()),
+        Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer3()),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
         #Type4TLV('ReattemptInd', val={'V':0x00, 'V':b'\0'}, IE=ReattemptInd()), # WNG: tag is undefined in current TS
         Type4TLV('CongestReattemptInd', val={'T':0x61, 'V':b'\0'}, IE=CongestReattemptInd())
@@ -333,7 +333,7 @@ class FGSMPDUSessionReleaseCommand(Layer3):
     _GEN = (
         FGSMHeader(val={'Type':211}),
         Type3V('5GSMCause', val={'V':b'\x1a'}, bl={'V':8}, IE=FGSMCause()),
-        Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GRPSTimer3()),
+        Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer3()),
         Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
         Type4TLV('CongestReattemptInd', val={'T':0x61, 'V':b'\0'}, IE=CongestReattemptInd()),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
@@ -372,22 +372,22 @@ class FGSMStatus(Layer3):
 #------------------------------------------------------------------------------#
 
 FGSMTypeClasses = {
-    193 : 5GSMPDUSessionEstabRequest,
-    194 : 5GSMPDUSessionEstabAccept,
-    195 : 5GSMPDUSessionEstabReject,
-    197 : 5GSMPDUSessionAuthentCommand,
-    198 : 5GSMPDUSessionAuthentComplete,
-    199 : 5GSMPDUSessionAuthentResult,
-    201 : 5GSMPDUSessionModifRequest,
-    202 : 5GSMPDUSessionModifReject,
-    203 : 5GSMPDUSessionModifCommand,
-    204 : 5GSMPDUSessionModifComplete,
-    205 : 5GSMPDUSessionModifCommandReject,
-    209 : 5GSMPDUSessionReleaseRequest,
-    210 : 5GSMPDUSessionReleaseReject,
-    211 : 5GSMPDUSessionReleaseCommand,
-    212 : 5GSMPDUSessionReleaseComplete,
-    214 : 5GSMStatus
+    193 : FGSMPDUSessionEstabRequest,
+    194 : FGSMPDUSessionEstabAccept,
+    195 : FGSMPDUSessionEstabReject,
+    197 : FGSMPDUSessionAuthentCommand,
+    198 : FGSMPDUSessionAuthentComplete,
+    199 : FGSMPDUSessionAuthentResult,
+    201 : FGSMPDUSessionModifRequest,
+    202 : FGSMPDUSessionModifReject,
+    203 : FGSMPDUSessionModifCommand,
+    204 : FGSMPDUSessionModifComplete,
+    205 : FGSMPDUSessionModifCommandReject,
+    209 : FGSMPDUSessionReleaseRequest,
+    210 : FGSMPDUSessionReleaseReject,
+    211 : FGSMPDUSessionReleaseCommand,
+    212 : FGSMPDUSessionReleaseComplete,
+    214 : FGSMStatus
     }
 
 def get_5gsm_msg_instances():

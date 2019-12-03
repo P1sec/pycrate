@@ -110,30 +110,49 @@ def parse_NAS5G(buf, inner=True, sec_hdr=True):
             if not nasc.get_trans():
                 # NAS Container present in Msg
                 cont, err = parse_NAS5G(nasc[-1].get_val(), inner=inner)
-                if err:
-                    return Msg, err
-                else:
+                if err == 0:
                     nasc.replace(nasc[-1], cont)
         #
         if typ in (65, 79, 103, 104):
             payc = Msg['PayloadContainer']
-            if not payc.get_trans():
+            if not payc.get_trans() and payc._IE is not None:
                 # Payload container present in Msg
-                # TODO: check if IE decoded properly, then decode each entry into a proper msg
-                # 5GSM and SMS at 1st
-                pass
+                for entry in payc._IE['Entries']:
+                    etype = entry['Type'].get_val()
+                    econt = entry['Cont'].get_val()
+                    if etype == 1 and econt:
+                        # 5GSM
+                        cont, err = parse_NAS5G(nasc[-1].get_val(), inner=inner)
+                        if err == 0:
+                            entry.replace(entry['Cont'], cont)
+                    elif etype == 2 and econt:
+                        # SMS PP
+                        try:
+                            epd, etyp = unpack('>BB', econt[:2])
+                        except Exception:
+                            pass
+                        else:
+                            epd &= 0xF
+                            if epd == 9 and etyp in (1, 4, 16):
+                                cont = PPSMSCPTypeClasses[etyp]()
+                                try:
+                                    cont.from_bytes(econt)
+                                except Exception:
+                                    pass
+                                else:
+                                    entry.replace(entry['Cont'], cont)
+                    #else:
+                    #    pass
+                    # TODO: decode mode embedded protocols
+                    # 5G NAS payload container entries:
+                    #   1 : 'N1 SM information',
+                    #   2 : 'SMS',
+                    #   3 : 'LTE Positioning Protocol message container',
+                    #   4 : 'SOR transparent container',
+                    #   5 : 'UE policy container',
+                    #   6 : 'UE parameters update transparent container',
+                    #   7 : 'Location services message container',
+                    #   8 : 'CIoT user data container',
     #
     return Msg, 0
-
-'''payload container entries:
-    1 : 'N1 SM information',
-    2 : 'SMS',
-    3 : 'LTE Positioning Protocol message container',
-    4 : 'SOR transparent container',
-    5 : 'UE policy container',
-    6 : 'UE parameters update transparent container',
-    7 : 'Location services message container',
-    8 : 'CIoT user data container',
-'''
-
 

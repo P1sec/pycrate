@@ -372,7 +372,7 @@ class FGMMDLNASTransport(Layer3):
         Type3TV('PDUSessID', val={'T':0x12, 'V':b'\0'}, bl={'V':8}, IE=PDUSessID()),
         Type4TLV('AddInfo', val={'T':0x24, 'V':b'\0'}),
         Type3TV('5GMMCause', val={'T':0x58, 'V':b'\x16'}, bl={'V':8}, IE=FGMMCause()),
-        Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GRPSTimer3())
+        Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer3())
         )
 
 
@@ -595,7 +595,7 @@ class FGMMSecurityModeCommand(Layer3):
         Type3V('NASSecAlgo', val={'V':b'\x11'}, bl={'V':8}, IE=NASSecAlgo()),
         Uint('spare', bl=4, rep=REPR_HEX),
         Type1V('NAS_KSI', val={'V':0}, IE=NAS_KSI()),
-        Type4LV('UESecCap', val={'V':b'\0\0'}, UESecCap()),
+        Type4LV('UESecCap', val={'V':b'\0\0'}, IE=UESecCap()),
         Type1TV('IMEISVReq', val={'T':0xC, 'V':0}, IE=IMEISVReq()),
         Type3TV('EPSNASSecAlgo', val={'T':0x57, 'V':b'\x11'}, bl={'V':8}, IE=EPSNASSecAlgo()),
         Type4TLV('Add5GSecInfo', val={'T':0x36, 'V':b'\0'}, IE=Add5GSecInfo()),

@@ -2317,7 +2317,7 @@ class SessAMBR(Envelope):
 
 class SMPDUDNReqContainer(Envelope):
     _GEN = (
-        UTF8String('DNSpecificID')
+        UTF8String('DNSpecificID'),
         )
 
 
