@@ -39,14 +39,14 @@ from the official Python implementation [CPython](https://www.python.org/).
 It is also supporting alternative Python engine such as [pypy](http://pypy.org/),
 [nuitka](http://nuitka.net/) or [Cython](https://cython.org/).
 It is regularly tested both on Linux and Windows, and should actually work on any
-operating system which has [r|d]ecent Python support (as in 2017).
+operating system which has [r|d]ecent Python support (as in 2017, 2018 and more...).
 
 
 Dependencies
 ------------
 
 Currently none. Only the Python builtins and few internal modules of Python 
-(e.g. os, system, re) are required for most of the features. The json internal
+(e.g. os, system, re, struct) are required for most of the features. The json internal
 module is required for supporting the JSON API.
 
 The pycrate_mobile/TS24301_EMM module uses CryptoMobile as optional dependency
@@ -224,7 +224,7 @@ This subdirectory contains several ASN.1 specifications that are supported and
 precompiled for pycrate. Very few specifications have been changed in order to
 work with pycrate :
 * Q.775, in which the terrible *AllPackagesAS* is commented out
-* Q.773 and Q.775, in which the *TCInvokeIdSet* constraint is modified to be easier
+* Q.773 and Q.775, in which the *TCInvokeIdSet* constraint is modified to be
    used as a set of values
 That's all !
 
@@ -234,8 +234,8 @@ pycrate_asn1rt
 
 This subdirectory contains the ASN.1 runtime, that is loaded and used by the ASN.1 
 specifications compiled with the compiler in *pycrate_asn1c*. It supports 
-the PER encoding rules (aligned and not, canonical also), and the BER, CER and 
-DER encoding rules.
+the PER encoding rules (aligned and not, canonical also), and the BER, CER, DER 
+and JER encoding rules.
 
 
 pycrate_csn1
@@ -262,9 +262,11 @@ This subdirectory implements most of the 3GPP NAS protocol formats:
 * *MCC_MNC*: dictionnaries for MCC and MNC look-up
 * *NAS*: provides two functions to parse any uplink and downlink mobile NAS messages
 * *NASLTE*: provides two functions to parse LTE uplink and downlink NAS messages
+* *NAS5G*: provides one function to parse 5G upling and downling mobile NAS messages
 * *PPP*: structures for NCP and LCP protocols used for PPP connection estabishment
 * *SCCP*: structures for SCCP user-data and management messages
 * *SIGTRAN*: structures for SIGTRAN (mostly M2PA and M3UA) messages
+* *TS102225*: structures for SIM card's Secured Packets
 * *TS23038*: structures and routines for SMS encoding
 * *TS23040_SMS*: structures for the SMS transport protocol
 * *TS23041_CBS*: structures for the Cell Broadcast Service protocol
@@ -277,10 +279,16 @@ This subdirectory implements most of the 3GPP NAS protocol formats:
 * *TS24011_PPSMS*: structures for the SMS point-to-point protocol
 * *TS24080_SS*: structures for the Supplementary Services protocol, wrapping some MAP ASN.1 objects
 * *TS24301_EMM*: structures for the EPS mobility management messages from TS 24.301
-* *TS24301_ESM*: structures for the EPS mobility management messages from TS 24.301
+* *TS24301_ESM*: structures for the EPS session management messages from TS 24.301
 * *TS24301_IE*: structures for many information elements from TS 24.301
-* *TS29002_MAPAppCtx*: functions that relies on the Pycrate_TCAP_MAPv2v3 ASN.1, dealing with MAP application-contexts 
+* *TS24501_FGMM*: structures for the 5G mobility management messages from TS 24.501
+* *TS24501_FGSM*: structures for the 5G session management messages from TS 24.501
+* *TS24501_IE*: structures for many information elements from TS 24.501
+* *TS29002_MAPAppCtx*: functions that relies on the Pycrate_TCAP_MAPv2v3 ASN.1 module, dealing mostly with MAP application-contexts
+* *TS29274_GTPC*: structures for LTE/EPC GTP-C messages from TS 29.274
 * *TS29281_GTPU*: structures for LTE/EPC GTP-U messages from TS 29.281
+* *TS31111_SAT*: basic structures and dict for the SIM application toolkit
+* *TS31115*: structures for SIM card's Secured Packets over SMS
 * *TS44018_GTTP*: structure for the single GSM GTTP message from TS 44.018
 * *TS44018_IE*: structures for many information elements from TS 44.018
 * *TS44018_RR*: structures for the GSM and GPRS radio ressources messages from TS 44.018
@@ -299,7 +307,7 @@ pycrate_corenet
 ---------------
 
 This subdirectory implements a signaling server that supports IuCS and IuPS over Iuh interfaces
-(including HNBAP and RUA/RANAP) for interfacing with 3G femtocells and S1 interfaces 
+(including HNBAP and RUA/RANAP) for interfacing with 3G femtocells, and S1 interfaces 
 (including S1AP) for interfacing with LTE eNodeBs.
 It handles many procedures to drive femtocells, eNodeBs and mobile terminals connecting
 through them. In terms of services, it mostly support short messages and data connectivity.
@@ -317,9 +325,16 @@ Most of the modules have doc strings. I try also to write readable sources and t
 comment them as much as possible for understanding them easily (and to allow also
 myself to understand my own code years after...).
 A wiki is provided and extended from time to time, to bring examples and methods on 
-how to use the different modules (any contribution on this would be very welcomed, too).
+how to use the different modules (any contribution on this would be very welcome, too).
 Finally, the code provided in the *test/* subdirectory is also representative on
 how to use the different modules.
+
+Basically, a pycrate's object exposes the following methods:
+* set_val() / get_val(), which sets and gets a value into the object
+* from_bytes() / to_bytes(), which converts a buffer into values according to the internal structure of the object, and back
+* from_json() / to_json(), for working with JSON-encoded values
+* hex() / bin(), for getting hexadecimal and binary representation of the serialized obect's value
+* repr() / show(), for providing nice python's internal representation, and printable representation of the object's value
 
 
 ASN.1 usage
@@ -334,6 +349,9 @@ Each ASN.1 object has a corresponding Python instance, exposing the following me
 * from_ber() / to_ber(), which converts BER
 * from_cer() / to_cer(), which converts CER
 * from_der() / to_der(), which converts DER
+* from_jer() / to_jer(), which converts JER
+* set_val() / get_val(), to set and get Python's values into the ASN.1 object
+* get_proto(), to return to internal structure of the ASN.1 object
 
 All the methods useful for working with ASN.1 objects at runtime can be found in 
 the file *pycrate_asn1rt/asnobj.py*.
@@ -342,7 +360,7 @@ the file *pycrate_asn1rt/asnobj.py*.
 Tools
 =====
 
-Three different tools are provided (yet):
+Four different tools are provided (yet):
 * *pycrate_showmedia.py* parses some media files (jpg, bmp, gif, mp3, png, 
    tiff, mpeg4) and pretty print the file structure on the standard output.
 * *pycrate_asn1compile.py* compiles ASN.1 source file(s) and produce a Python
@@ -352,7 +370,7 @@ Three different tools are provided (yet):
 * *pycrate_berdecode.py* parses any BER/CER/DER encoded binary value of ASN.1 
    objects and prints the corresponding structure.
 * *pycrate_map_op_info.py* prints prototypes and various information related to
-   MAP (Mobile Application Part) operation.
+   MAP (Mobile Application Part) operations and application-contexts.
 
 
 Examples
@@ -549,3 +567,4 @@ True
 
 For more information about the API exposed for each ASN.1 object, you can check
 the docstrings of all ASN.1 objects, and also read the source file *pycrate_asn1rt/asnobj.py*.
+Do not forget to have a look at the Wiki, too!
