@@ -52,12 +52,12 @@ def parse_NAS5G(buf, inner=True, sec_hdr=True):
     """
     try:
         # this corresponds actually only to the layout of the 5GMM header
-        pd, shr, typ = unpack('>BBB', buf)
+        pd, shdr, typ = unpack('>BBB', buf[:3])
     except Exception:
         # error 111, unspecified protocol error
         return None, 111
     #
-    if pd == 146:
+    if pd == 126:
         # 5GMM
         if sec_hdr and shdr in (1, 2, 3, 4):
             # 5GMM security protected NAS message
@@ -104,7 +104,7 @@ def parse_NAS5G(buf, inner=True, sec_hdr=True):
         # error 97: message type non-existent or not implemented
         return None, 97
     #
-    if inner and pd == 146:
+    if inner and pd == 126:
         if typ in (65, 76, 79, 94):
             nasc = Msg['NASContainer']
             if not nasc.get_trans():
