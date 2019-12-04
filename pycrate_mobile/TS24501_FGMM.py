@@ -157,7 +157,7 @@ class FGMMAuthenticationRequest(Layer3):
         Type1V('NAS_KSI', val={'V': 7}, IE=NAS_KSI()),
         Type4LV('ABBA', val={'V':b'\0\0'}),
         Type3TV('RAND', val={'T':0x21, 'V':16*b'\0'}, bl={'V':128}),
-        Type4LV('AUTN', val={'V':16*b'\0'}, IE=AUTN()),
+        Type4TLV('AUTN', val={'T':0x20, 'V':16*b'\0'}, IE=AUTN()),
         Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'})
         )
 
@@ -269,8 +269,8 @@ class FGMMRegistrationAccept(Layer3):
     _name = '5GMMRegistrationAccept'
     _GEN = (
         FGMMHeader(val={'Type':66}),
-        Type4LV('5GSRegResult', val={'V':b'\0'}, IE=FGSRegType()),
-        Type6LVE('GUTI', val={'V':b'\0\0\0\0'}, IE=FGSID()),
+        Type4LV('5GSRegResult', val={'V':b'\0'}, IE=FGSRegResult()),
+        Type6TLVE('GUTI', val={'T': 0x77, 'V':b'\0\0\0\0'}, IE=FGSID()),
         Type4TLV('EquivPLMNList', val={'T':0x4A, 'V':3*b'\0'}, IE=PLMNList()),
         Type4TLV('5GSTAIList', val={'T':0x54, 'V':7*b'\0'}, IE=FGSTAIList()),
         Type4TLV('AllowedNSSAI', val={'T':0x15, 'V':b'\0\0'}, IE=NSSAI()),
@@ -596,7 +596,7 @@ class FGMMSecurityModeCommand(Layer3):
         Uint('spare', bl=4, rep=REPR_HEX),
         Type1V('NAS_KSI', val={'V':0}, IE=NAS_KSI()),
         Type4LV('UESecCap', val={'V':b'\0\0'}, IE=UESecCap()),
-        Type1TV('IMEISVReq', val={'T':0xC, 'V':0}, IE=IMEISVReq()),
+        Type1TV('IMEISVReq', val={'T':0xE, 'V':0}, IE=IMEISVReq()),
         Type3TV('EPSNASSecAlgo', val={'T':0x57, 'V':b'\x11'}, bl={'V':8}, IE=EPSNASSecAlgo()),
         Type4TLV('Add5GSecInfo', val={'T':0x36, 'V':b'\0'}, IE=Add5GSecInfo()),
         Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),

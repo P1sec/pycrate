@@ -104,6 +104,12 @@ def parse_NAS5G(buf, inner=True, sec_hdr=True):
         # error 97: message type non-existent or not implemented
         return None, 97
     #
+    try:
+        Msg.from_bytes(buf)
+    except Exception:
+        # error 96, invalid mandatory info
+        return None, 96
+    #
     if inner and pd == 126:
         if typ in (65, 76, 79, 94):
             nasc = Msg['NASContainer']

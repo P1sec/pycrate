@@ -159,6 +159,7 @@ class FGMMCap(Envelope):
     
     ENV_SEL_TRANS = False
     
+    _name = '5GMMCap'
     _GEN = (
         Uint('SGC', bl=1),
         Uint('5G-HC-CP-CIoT', bl=1),
@@ -446,7 +447,7 @@ class FGSIDDigit(Envelope):
         Uint('Digit1', val=0xF, bl=4, rep=REPR_HEX),
         Uint('Odd', bl=1),
         Uint('Type', val=FGSIDTYPE_IMEI, bl=3, dic=FGSIDType_dict),
-        Buf('Digits', val=b'', rep=REPR_HEX)
+        BufBCD('Digits', val='')
         )
 
 
@@ -490,6 +491,8 @@ class FGSIDUnk(Envelope):
 
 
 class FGSID(Envelope):
+    _name = '5GSID'
+    
     # FGSIDTYPE_NO (0) -> FGSIDNone
     # FGSIDTYPE_SUPI (1) -> FGSIDSUPI
     # FGSIDTYPE_GUTI (2) -> FGSIDGUTI
@@ -626,7 +629,7 @@ _FGSRegResult_dict = {
 
 
 class FGSRegResult(Envelope):
-    _name = '5GSRegType'
+    _name = '5GSRegResult'
     _GEN = (
         Uint('spare', bl=3),
         Uint('NSSAAPerformed', bl=1),

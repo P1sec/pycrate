@@ -579,7 +579,7 @@ class EPSUpdateType(Envelope):
 
 class NAS_KSI(Envelope):
     _GEN = (
-        Uint('TSC', bl=1, dic={0:' native security context', 1:'mapped security context'}),
+        Uint('TSC', bl=1, dic={0:'native security context', 1:'mapped security context'}),
         Uint('Value', bl=3, dic={7:'no key available'})
         )
 
