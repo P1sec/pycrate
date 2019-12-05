@@ -25,16 +25,17 @@
 # * Authors : Benoit Michau 
 # *--------------------------------------------------------
 #*/
-#
+
+from pycrate_int_asn1dir.TCAP_MAPv2v3   import GLOBAL as GLOBAL_MAPv2v3
+
+
+#------------------------------------------------------------------------------#
 # MAP application context functions
-#
+#------------------------------------------------------------------------------#
 
-# making use of the almighty MAPv2v3 module
-from pycrate_int_asn1dir.TCAP_MAPv2v3 import *
-
-Operations      = GLOBAL.MOD['MAPv2v3-Protocol']['Supported-MAP-Operations']
-OperationPkgs   = GLOBAL.MOD['MAPv2v3-Application']['Supported-MAP-OperationPackages']
-ApplicationCtxs = GLOBAL.MOD['MAPv2v3-Application']['Supported-MAP-ApplicationContexts']
+Operations      = GLOBAL_MAPv2v3.MOD['MAPv2v3-Protocol']['Supported-MAP-Operations']
+OperationPkgs   = GLOBAL_MAPv2v3.MOD['MAPv2v3-Application']['Supported-MAP-OperationPackages']
+ApplicationCtxs = GLOBAL_MAPv2v3.MOD['MAPv2v3-Application']['Supported-MAP-ApplicationContexts']
 
 
 def get_operation(opcode):
@@ -57,7 +58,7 @@ def list_operation_pkg_names():
     """returns the list of names of defined MAP operation-packages
     """
     names = []
-    for name in GLOBAL.MOD['MAPv2v3-Application']['_val_']:
+    for name in GLOBAL_MAPv2v3.MOD['MAPv2v3-Application']['_val_']:
         if name.split('-')[-2][-7:] == 'Package':
             names.append(name)
     return names
@@ -67,7 +68,7 @@ def list_application_ctx_names():
     """returns the list of names of defined MAP application-contexts
     """
     names = []
-    for name in GLOBAL.MOD['MAPv2v3-Application']['_val_']:
+    for name in GLOBAL_MAPv2v3.MOD['MAPv2v3-Application']['_val_']:
         if name.split('-')[-2][-7:] == 'Context':
             names.append(name)
     return names
@@ -82,7 +83,7 @@ def get_operation_pkgs(opcode, mode='S'):
     ret = {}
     key = 'Supplier' if mode in ('s', 'S') else 'Consumer' 
     for opname in list_operation_pkg_names():
-        opval = GLOBAL.MOD['MAPv2v3-Application'][opname]._val
+        opval = GLOBAL_MAPv2v3.MOD['MAPv2v3-Application'][opname]._val
         if key not in opval:
             continue
         for oval in opval[key].getv():
@@ -118,7 +119,7 @@ def get_application_ctxs(opcode, mode='I'):
     key    = ('Symmetric', 'InitiatorConsumerOf') if mode in ('I', 'i') else ('Symmetric', 'ResponderConsumerOf')
     keyrev = ('Symmetric', 'ResponderConsumerOf') if mode in ('I', 'i') else ('Symmetric', 'InitiatorConsumerOf') 
     for acname in list_application_ctx_names():
-        acval = GLOBAL.MOD['MAPv2v3-Application'][acname]._val
+        acval = GLOBAL_MAPv2v3.MOD['MAPv2v3-Application'][acname]._val
         # looking at Supplier within the Initiator potential operation-package
         for k in key:
             if k in acval:
