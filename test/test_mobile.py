@@ -129,6 +129,27 @@ nas_pdu_mt = tuple(map(unhexlify, (
     '0746' # EMM Detach Accept
     )))
 
+# 5G NAS pdu
+nas_5g_pdu = tuple(map(unhexlify, (
+    '7e004179000d0100f1100000000022222222222e02e0e0', # 5GMM Reg Req
+    '7e0056000200002198a600000000000098a600000000000020105c717acfe29180001fb3117a0f18c3ab', # 5GMM Auth Req
+    '7e00572d1034f95b9d3826fc095c9d9232f4d182c5', # 5GMM Auth Resp
+    '7e038f2b564d007e005d010002e0e0', # 5GMM Sec Mode Cmd
+    '7e0300000000007e005d000602f0f0e1360102', # 5GMM Sec Mode Cmd, more beefy
+    '7e04fd5a6e42007e005e', # 5GMM Encrypted message
+    '7e005e', # 5GMM Sec Mode Compl inner
+    '7e005e7700091530014100002100f07100217e004169000d010302460fff000000000000f11001072e02f0f02f05040aabcdef', # 5GMM Sec Mode Compl inner, more beefy
+    '7e004407', # 5GMM Reg Rej
+    '7e0100000000037e004561000bf2030246010041c0e00010', # 5GMM Integ prot MO Dereg Req
+    '7e0046', # 5GMM MO Dereg Accept
+    '7e0042010177000bf2030246010041c0e000105407200302460000641505040aabcdef2101005e016516012c', # 5GMM Reg Accept
+    '7e0043', # 5GMM Reg Compl
+    '7e0054d0430989cef73a1d2696db6f450989cef73a1d2696db6f46694791501391446069490101', # 5GMM Config Upd Cmd
+    '2e0501c1ffff91a1', # 5GSM PDU Sess Estab Req
+    '2e0501c211000901000631310101ff0506060001060001290501ac115f012506056461746131', # 5GSM PDU Sess Estab Accept
+    )))
+
+
 # SIGTRAN messages
 sigtran_pdu = tuple(map(unhexlify, (
     '01000701000000d4000600080000000c011500080000000101020018000200008002000800000001800300080000000101160008000000010101000800000001011300080000000101140008000000010013000800000001011700080000000c010b0072626a4804000000106c62a16002010102012e3058840791198996909949820791198996000033044411330a8189961083993100a73ee8329bfd6681e8e8f41c949e83d4f5391d1406b1dfee73590ea297e774d03d4d4783e2f534bd0c0a83cce53be8fe9693e7a0b41b94a60300000000',
@@ -197,6 +218,22 @@ def test_nas_mo(nas_pdu=nas_pdu_mo):
 def test_nas_mt(nas_pdu=nas_pdu_mt):
     for pdu in nas_pdu:
         m, e = parse_NAS_MT(pdu)
+        assert( e == 0 )
+        v = m.get_val()
+        m.reautomate()
+        assert( m.get_val() == v )
+        m.set_val(v)
+        assert( m.to_bytes() == pdu )
+        #
+        if _with_json:
+            t = m.to_json()
+            m.from_json(t)
+            assert( m.get_val() == v )
+
+
+def test_nas_5g(nas_pdu=nas_5g_pdu):
+    for pdu in nas_pdu:
+        m, e = parse_NAS5G(pdu)
         assert( e == 0 )
         v = m.get_val()
         m.reautomate()
@@ -315,27 +352,31 @@ def test_perf_mobile():
     Tb = timeit(test_nas_mt, number=24)
     print('test_nas_mt: {0:.4f}'.format(Tb))
     
+    print('[+] NAS 5G decoding and re-encoding')
+    Tc = timeit(test_nas_5g, number=30)
+    print('test_nas_5g: {0:.4f}'.format(Tc))
+    
     print('[+] SIGTRAN decoding and re-encoding')
-    Tc = timeit(test_sigtran, number=350)
-    print('test_sigtran: {0:.4f}'.format(Tc))
+    Td = timeit(test_sigtran, number=350)
+    print('test_sigtran: {0:.4f}'.format(Td))
     
     print('[+] SCCP decoding and re-encoding')
-    Td = timeit(test_sccp, number=130)
-    print('test_sccp: {0:.4f}'.format(Td))
+    Te = timeit(test_sccp, number=130)
+    print('test_sccp: {0:.4f}'.format(Te))
     
     print('[+] GTPv1-U decoding and re-encoding')
-    Te = timeit(test_gtpu, number=600)
-    print('test_gtpu: {0:.4f}'.format(Te))
+    Tf = timeit(test_gtpu, number=600)
+    print('test_gtpu: {0:.4f}'.format(Tf))
     
     print('[+] GTPv2-C decoding and re-encoding')
-    Tf = timeit(test_gtpc, number=20)
-    print('test_gtpc: {0:.4f}'.format(Tf))
+    Tg = timeit(test_gtpc, number=20)
+    print('test_gtpc: {0:.4f}'.format(Tg))
     
     print('[+] Diameter decoding and re-encoding')
-    Tg = timeit(test_diameter, number=5)
-    print('test_diameter: {0:.4f}'.format(Tg))
+    Th = timeit(test_diameter, number=5)
+    print('test_diameter: {0:.4f}'.format(Th))
     
-    print('[+] test_mobile total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te+Tf+Tg))
+    print('[+] test_mobile total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te+Tf+Tg+Th))
 
 
 if __name__ == '__main__':

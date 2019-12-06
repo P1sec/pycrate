@@ -155,6 +155,7 @@ class TestPycrate(unittest.TestCase):
         print('[<>] testing pycrate_mobile')
         test_nas_mo()
         test_nas_mt()
+        test_nas_5g()
         test_sigtran()
         test_sccp()
         test_gtpu()
