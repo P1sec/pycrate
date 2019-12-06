@@ -51,30 +51,39 @@ from .TS24301_EMM   import *
 from .TS24301_ESM   import *
 from .NASLTE        import *
 
+# WNG if trying to import 24501_IE, as some IE in 5G may have same name but not
+# same structure as in 4G
+from .NAS5G         import *
+
+
 NASMODispatcher = {
-    2 : ESMTypeClasses,
-    3 : CCTypeMOClasses,
-    4 : GTTPTypeClasses,
-    5 : MMTypeClasses,
-    6 : RRTypeMOClasses,
-    7 : EMMTypeMOClasses,
-    8 : GMMTypeMOClasses,
-    9 : PPSMSCPTypeClasses,
-    10: SMTypeClasses,
-    11: SSTypeMOClasses
+    2   : ESMTypeClasses,
+    3   : CCTypeMOClasses,
+    4   : GTTPTypeClasses,
+    5   : MMTypeClasses,
+    6   : RRTypeMOClasses,
+    7   : EMMTypeMOClasses,
+    8   : GMMTypeMOClasses,
+    9   : PPSMSCPTypeClasses,
+    10  : SMTypeClasses,
+    11  : SSTypeMOClasses,
+    46  : FGSMTypeClasses,
+    126 : FGMMTypeClasses
     }
 
 NASMTDispatcher = {
-    2 : ESMTypeClasses,
-    3 : CCTypeMTClasses,
-    4 : GTTPTypeClasses,
-    5 : MMTypeClasses,
-    6 : RRTypeMTClasses,
-    7 : EMMTypeMTClasses,
-    8 : GMMTypeMTClasses,
-    9 : PPSMSCPTypeClasses,
-    10: SMTypeClasses,
-    11: SSTypeMTClasses
+    2   : ESMTypeClasses,
+    3   : CCTypeMTClasses,
+    4   : GTTPTypeClasses,
+    5   : MMTypeClasses,
+    6   : RRTypeMTClasses,
+    7   : EMMTypeMTClasses,
+    8   : GMMTypeMTClasses,
+    9   : PPSMSCPTypeClasses,
+    10  : SMTypeClasses,
+    11  : SSTypeMTClasses,
+    46  : FGSMTypeClasses,
+    126 : FGMMTypeClasses
     }
 
 
@@ -101,11 +110,15 @@ def parse_NAS_MO(buf):
         except Exception:
             # error 111, unspecified protocol error
             return None, 111
-    pd &= 0xF
+    if pd & 0xf != 0xe:
+        # 4-bit protocol discriminator
+        pd &= 0xf
     if pd in (3, 5, 11):
         type &= 0x3f
     elif pd in (2, 7):
         return parse_NASLTE_MO(buf, inner=True)
+    elif pd in (46, 126):
+        return parse_NAS5G(buf, inner=True)
     #
     try:
         Msg = NASMODispatcher[pd][type]()
@@ -153,11 +166,15 @@ def parse_NAS_MT(buf, wl2=False):
         except Exception:
             # error 111, unspecified protocol error
             return None, 111
-    pd &= 0xF
+    if pd & 0xf != 0xe:
+        # 4-bit protocol discriminator
+        pd &= 0xf
     if pd in (3, 5, 11):
         type &= 0x3f
     elif pd in (2, 7):
         return parse_NASLTE_MT(buf, inner=True)
+    elif pd in (46, 126):
+        return parse_NAS5G(buf, inner=True)
     #
     try:
         Msg = NASMTDispatcher[pd][type]()
@@ -172,3 +189,4 @@ def parse_NAS_MT(buf, wl2=False):
         return None, 96
     #
     return Msg, 0
+
