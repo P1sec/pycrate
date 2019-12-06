@@ -2239,7 +2239,7 @@ class PktFilterComp(Envelope):
 class PktFilterAdd(Envelope):
     _GEN = (
         Uint('spare', bl=2),
-        Uint('Dir', bl=2, dict=_PktFilterDir_dict),
+        Uint('Dir', bl=2, dic=_PktFilterDir_dict),
         Uint('Id', bl=4),
         Uint8('Len'),
         Sequence('PktFilter', GEN=PktFilterComp())
@@ -2293,6 +2293,24 @@ class QoSRule(Envelope):
         self[1].set_valauto(lambda: 1 + self['PktFilterList'].get_len() + self['Precedence'].get_len() + self['Flow'].get_len())
         self[4].set_valauto(lambda: self[5].get_num())
         self[5].set_numauto(lambda: self[4].get_val())
+    
+    def _from_char(self, char):
+        if self.get_trans():
+            return
+        self[0]._from_char(char)
+        self[1]._from_char(char)
+        char_lb = char._len_bit
+        char._len_bit = char._cur + (self[1].get_val()<<3)
+        self[2]._from_char(char)
+        self[3]._from_char(char)
+        self[4]._from_char(char)
+        self[5]._from_char(char)
+        if char.len_bit() >= 8:
+            self[6].set_trans(False)
+            self[6]._from_char(char)
+            if char.len_bit() >= 8:
+                self[7].set_trans(False)
+                self[7]._from_char(char)
 
 
 class QoSRules(Sequence):
