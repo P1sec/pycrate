@@ -147,7 +147,8 @@ class SNSSAI(Envelope):
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[0].set_valauto(lambda: self[1].get_len())
+        # do not automate length, otherwise, it breaks reautomate()
+        #self[0].set_valauto(lambda: self[1].get_len())
 
 
 #------------------------------------------------------------------------------#

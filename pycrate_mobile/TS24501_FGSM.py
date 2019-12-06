@@ -80,6 +80,7 @@ _FGSM_dict = {
 
 
 class FGSMHeader(Envelope):
+    _name = '5GSMHeader'
     _GEN = (
         Uint8('EPD', val=46, dic=ProtDisc_dict),
         PDUSessID(),
