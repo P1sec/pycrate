@@ -778,6 +778,8 @@ class ASN1CodecPER(ASN1Codec):
             # shorten char according to ldet
             lb = char._len_bit
             char._len_bit = char._cur + 8*ldet
+            if char._len_bit > lb:
+                raise(ASN1PERDecodeErr('length determinant too long'))
             if cla.ALIGNED:
                 # keep track of the char's cursor to increment the APER offset
                 _cur = char._cur
@@ -816,6 +818,8 @@ class ASN1CodecPER(ASN1Codec):
             # shorten char according to ldet
             lb = char._len_bit
             char._len_bit = char._cur + 8*ldet
+            if char._len_bit > lb:
+                raise(ASN1PERDecodeErr('length determinant too long'))
             # decoding a wrapped object
             if cla.ALIGNED:
                 # keep track of the char's cursor to increment the APER offset
@@ -858,6 +862,8 @@ class ASN1CodecPER(ASN1Codec):
             # shorten char according to ldet
             lb = char._len_bit
             char._len_bit = char._cur + 8*ldet
+            if char._len_bit > lb:
+                raise(ASN1PERDecodeErr('length determinant too long'))
             if cla.ALIGNED:
                 # keep track of the char's cursor to increment the APER offset
                 _cur = char._cur
@@ -892,6 +898,8 @@ class ASN1CodecPER(ASN1Codec):
             # shorten char according to ldet
             lb = char._len_bit
             char._len_bit = char._cur + 8*ldet
+            if char._len_bit > lb:
+                raise(ASN1PERDecodeErr('length determinant too long'))
             # decoding a wrapped object
             if cla.ALIGNED:
                 # keep track of the char's cursor to increment the APER offset

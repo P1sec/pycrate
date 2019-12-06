@@ -184,7 +184,10 @@ Specific attributes:
             # index decoded as a constrained integer
             ind, _gen = ASN1CodecPER.decode_intconst_ws(char, self._const_ind, name='I')
             GEN.extend(_gen)
-        ident = self._root[ind]
+        try:
+            ident = self._root[ind]
+        except IndexError:
+            raise(ASN1PERDecodeErr('{0}: invalid CHOICE index, %r'.format(self.fullname(), ind)))
         Cho = self._cont[ident]
         # decode the chosen object
         _par = Cho._parent
@@ -239,7 +242,10 @@ Specific attributes:
         else:
             # index decoded as a constrained integer
             ind = ASN1CodecPER.decode_intconst(char, self._const_ind)
-        ident = self._root[ind]
+        try:
+            ident = self._root[ind]
+        except IndexError:
+            raise(ASN1PERDecodeErr('{0}: invalid CHOICE index, %r'.format(self.fullname(), ind)))
         Cho = self._cont[ident]
         # decode the chosen object
         _par = Cho._parent
@@ -941,6 +947,9 @@ class _CONSTRUCT(ASN1Obj):
                         asnlog('_CONSTRUCT._to_per_ws: %s.%s, invalid unknown extension index'\
                                % (self.fullname(), ident))
             #
+            if not Bm:
+                self._struct = Envelope(self._name, GEN=tuple(GEN))
+                return self._struct
             # generate the bitmap preambule for extended (group of) components
             # bitmap length is encoded with a normally small value
             ldet = max(Bm)
@@ -1073,6 +1082,8 @@ class _CONSTRUCT(ASN1Obj):
                         asnlog('_CONSTRUCT._to_per: %s.%s, invalid unknown extension index'\
                                % (self.fullname(), ident))
             #
+            if not Bm:
+                return GEN
             # generate the bitmap preambule for extended (group of) components
             # bitmap length is encoded with a normally small value
             ldet = max(Bm)

@@ -1343,7 +1343,10 @@ class ASN1Obj(Element):
         # 1) decode the tag chain
         tlv, pc = TLV, 1
         for t in self._tagc:
-            tlv = tlv[0]
+            try:
+                tlv = tlv[0]
+            except IndexError:
+                raise(ASN1BERDecodeErr('{0}: missing tag buffer'.format(self.fullname())))
             cl, pc, tval, lval = tlv[0:4]
             if (cl, tval) != t or (t != self._tagc[-1] and pc == 0):
                 raise(ASN1BERDecodeErr('{0}: invalid tag class / pc / value, {1!r}'\
@@ -1431,7 +1434,10 @@ class ASN1Obj(Element):
         # 1) decode the tag chain
         tlv, TL, pc = TLV, [], 1
         for t in self._tagc:
-            tlv = tlv[0]
+            try:
+                tlv = tlv[0]
+            except IndexError:
+                raise(ASN1BERDecodeErr('{0}: missing tag buffer'.format(self.fullname())))
             Tag, cl, pc, tval, Len, lval = tlv[0:6]
             if (cl, tval) != t or (t != self._tagc[-1] and pc == 0):
                 raise(ASN1BERDecodeErr('{0}: invalid tag class / pc / value, {1!r}'\

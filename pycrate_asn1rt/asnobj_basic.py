@@ -1027,7 +1027,10 @@ Specific attribute:
         else:
             # 6) decode the enum index in the minimum number of bits
             ind, _gen = ASN1CodecPER.decode_intconst_ws(char, self._const_ind, name='I')
-            self._val = self._root[ind]
+            try:
+                self._val = self._root[ind]
+            except IndexError:
+                raise(ASN1PERDecodeErr('{0}: invalid ENUMERATED index, %r'.format(self.fullname(), ind)))
             self._struct = Envelope(self._name, GEN=tuple(GEN + _gen))
             return
     
@@ -1067,7 +1070,10 @@ Specific attribute:
         else:
             # 6) decode the enum index in the minimum number of bits
             ind = ASN1CodecPER.decode_intconst(char, self._const_ind)
-            self._val = self._root[ind]
+            try:
+                self._val = self._root[ind]
+            except IndexError:
+                raise(ASN1PERDecodeErr('{0}: invalid ENUMERATED index, %r'.format(self.fullname(), ind)))
             return
     
     def _to_per_ws(self):
