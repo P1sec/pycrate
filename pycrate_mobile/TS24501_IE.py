@@ -1063,23 +1063,8 @@ class OperatorAccessCatDef(Envelope):
         self['Len'].set_valauto(lambda: 3 + self['LenCriteria'].get_val() if self['StdAccessCat'].get_trans() \
                                    else 4 + self['LenCriteria'].get_val())
         self['LenCriteria'].set_valauto(lambda: self['Criteria'].get_len())
+        self['Criteria'].set_blauto(lambda: self['LenCriteria'].get_val()<<3)
         self['StdAccessCat'].set_transauto(lambda: False if self['PSAC'].get_val() else True)
-    
-    def _from_char(self, char):
-        if self.get_trans():
-            return
-        self[0]._from_char(char)
-        self[1]._from_char(char)
-        self[2]._from_char(char)
-        self[3]._from_char(char)
-        self[4]._from_char(char)
-        self[5]._from_char(char)
-        # truncate char according to LenCriteria
-        char_lb = char._len_bit
-        char._len_bit = char._cur + (self[5].get_val()<<3)
-        self[6]._from_char(char)
-        char._len_bit = char_lb
-        self[7]._from_char(char)
 
 
 class OperatorAccessCatDefs(Sequence):
@@ -1173,6 +1158,7 @@ class _PayContOpt(Envelope):
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[1].set_valauto(lambda: self[2].get_len())
+        
     
     def _from_char(self, char):
         if self.get_trans():
@@ -1181,6 +1167,8 @@ class _PayContOpt(Envelope):
         self[1]._from_char(char)
         char_lb = char._len_bit
         char._len_bit = char._cur + (self[1].get_val()<<3)
+        if char._len_bit > char_lb:
+            raise(EltErr('{0} [_from_char]: bit length overflow'.format(self._name)))
         self[2]._from_char(char)
         char._len_bit = char_lb
 
@@ -1603,16 +1591,7 @@ class CAGInfo(Envelope):
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: 3 + self[2].get_len())
-    
-    def _from_char(self, char):
-        if self.get_trans():
-            return
-        self[0]._from_char(char)
-        self[1]._from_char(char)
-        char_lb = char._len_bit
-        char._len_bit = char._cur + ((self[0].get_val()-3)<<3)
-        self[2]._from_char(char)
-        char._len_bit = char_lb
+        self[2].set_blauto(lambda: (self[0].get_val()-3)<<3)
 
 
 class CAGInfoList(Sequence):
@@ -1899,6 +1878,8 @@ class EPSParam(Envelope):
         self[1]._from_char(char)
         char_lb = char._len_bit
         char._len_bit = char._cur + (self[1].get_val()<<3)
+        if char._len_bit > char_lb:
+            raise(EltErr('{0} [_from_char]: bit length overflow'.format(self._name)))
         self[2]._from_char(char)
         char._len_bit = char_lb
 
@@ -2248,19 +2229,8 @@ class PktFilterAdd(Envelope):
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self['Len'].set_valauto(lambda: self['PktFilter'].get_len())
-    
-    def _from_char(self, char):
-        if self.get_trans():
-            return
-        self[0]._from_char(char)
-        self[1]._from_char(char)
-        self[2]._from_char(char)
-        self[3]._from_char(char)
-        char_lb = char._len_bit
-        char._len_bit = char._cur + (self[3].get_val()<<3)
-        self[4]._from_char(char)
-        char._len_bit = char_lb
+        self[3].set_valauto(lambda: self[4].get_len())
+        self[4].set_blauto(lambda: self[3].get_val()<<3)
 
 
 class QoSRule(Envelope):
@@ -2302,6 +2272,8 @@ class QoSRule(Envelope):
         self[1]._from_char(char)
         char_lb = char._len_bit
         char._len_bit = char._cur + (self[1].get_val()<<3)
+        if char._len_bit > char_lb:
+            raise(EltErr('{0} [_from_char]: bit length overflow'.format(self._name)))
         self[2]._from_char(char)
         self[3]._from_char(char)
         self[4]._from_char(char)
@@ -2312,6 +2284,7 @@ class QoSRule(Envelope):
             if char.len_bit() >= 8:
                 self[7].set_trans(False)
                 self[7]._from_char(char)
+        char._len_bit = char_lb
 
 
 class QoSRules(Sequence):

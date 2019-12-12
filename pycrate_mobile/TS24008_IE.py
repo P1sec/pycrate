@@ -2146,6 +2146,8 @@ class CodecSysID(Envelope):
         l = self[1]()
         clen = char._len_bit
         char._len_bit = char._cur + 8*l
+        if char._len_bit > clen:
+            raise(EltErr('{0} [_from_char]: bit length overflow'.format(self._name)))
         if l == 1:
             for b in self[8:16]:
                 b.set_trans(True)
@@ -2758,6 +2760,8 @@ class ProtConfigElt(Envelope):
             cont = self._ContLUT[ident]('Cont')
             ccur, clen = char._cur, char._len_bit
             char._len_bit = ccur + 8*self[1].get_val()
+            if char._len_bit > clen:
+                raise(EltErr('{0} [_from_char]: bit length overflow'.format(self._name)))
             try:
                 cont._from_char(char)
             except Exception:
@@ -3324,93 +3328,6 @@ class _CompTrafficClass(Envelope):
         Uint8('Mask')
         )
 
-'''
-class TFTPktFilterComp(Envelope):
-    _ValueLUT = {
-        16 : _CompIPv4('IPv4'),
-        17 : _CompIPv4('IPv4'),
-        32 : _CompIPv6('IPv6'),
-        33 : _CompIPv6Pref('IPv6Pref'),
-        35 : _CompIPv6Pref('IPv6Pref'),
-        48 : Uint8('ProtId'),
-        64 : Uint16('Port'),
-        65 : _CompPortRange('PortRange'),
-        80 : Uint16('Port'),
-        81 : _CompPortRange('PortRange'),
-        96 : Uint32('IPsecSPI'),
-        112 : _CompTrafficClass('TrafficClass'),
-        128 : Uint24('FlowLabel')
-        }
-    _GEN = (
-        Uint8('Type', dic=_PktFilterCompType_dict),
-        Buf('Value', val=b'', rep=REPR_HEX)
-        )
-        
-    def set_val(self, vals):
-        if isinstance(vals, (tuple, list)) and len(vals) > 1 and \
-        vals[0] in self._ValueLUT and not isinstance(vals[1], bytes_types):
-            # replace Buf with the specific structure
-            self.replace(self[1], self._ValueLUT[vals[0]].clone())
-        elif isinstance(vals, dict) and 'Type' in vals and 'Value' in vals and \
-        vals['Type'] in self._ValueLUT and not isinstance(vals['Value'], bytes_types):
-            # replace Buf with the specific structure
-            self.replace(self[1], self._ValueLUT[vals[0]].clone())
-        Envelope.set_val(self, vals)
-    
-    def _from_char(self, char):
-        self[0]._from_char(char)
-        t = self[0]()
-        if t in self._ValueLUT:
-            self.replace(self[1], self._ValueLUT[t].clone())
-        self[1]._from_char(char)
-
-
-class TFTPktFilter(Envelope):
-    _Cont = Sequence('Cont', GEN=TFTPktFilterComp())
-    _GEN = (
-        Uint('spare', bl=2),
-        Uint('Dir', bl=2, dic=_PktFilterDir_dict),
-        Uint('Id', bl=4),
-        Uint8('Precedence'),
-        Uint8('Len'),
-        Buf('Cont', val=b'', rep=REPR_HEX)
-        )
-    
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self._Cont = self.__class__._Cont.clone()
-        self[4].set_valauto(lambda: self[5].get_len())
-        self[5].set_blauto(lambda: 8*self[4]())
-    
-    def set_val(self, vals):
-        if isinstance(vals, (tuple, list)) and len(vals) > 5 and \
-        not isinstance(vals[5], bytes_types):
-            # replace Cont with the specific structure
-            self.replace(self[5], self._Cont)
-        elif isinstance(vals, dict) and 'Cont' in vals and \
-        not isinstance(vals['Cont'], bytes_types):
-            # replace Cont with the specific structure
-            self.replace(self[5], self._Cont)
-        Envelope.set_val(self, vals)
-    
-    def _from_char(self, char):
-        Envelope._from_char(self, char)
-        # saves char settings
-        ccur, clen, cont_bl = char._cur, char._len_bit, self[5].get_bl()
-        # rewind it to parse again with a sequence of TFTPktFilterComp()
-        char._len_bit = char._cur
-        char._cur -= cont_bl
-        try:
-            self._Cont._from_char(char)
-        except Exception:
-            char._cur, char._len_bit = ccur, clen
-        else:
-            if char._cur == ccur:
-                self.replace(self[5], self._Cont)
-            else:
-                char._cur = ccur
-            char._len_bit = clen
-'''
 
 class TFTPktFilterComp(Envelope):
     _GEN = (
@@ -3448,19 +3365,7 @@ class TFTPktFilter(Envelope):
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self['Len'].set_valauto(lambda: self['Cont'].get_len())
-    
-    def _from_char(self, char):
-        if self.get_trans():
-            return
-        self[0]._from_char(char)
-        self[1]._from_char(char)
-        self[2]._from_char(char)
-        self[3]._from_char(char)
-        self[4]._from_char(char)
-        char_lb = char._len_bit
-        char._len_bit = char._cur + (self[4].get_val()<<3)
-        self[5]._from_char(char)
-        char._len_bit = char_lb
+        self['Cont'].set_blauto(lambda: self['Len'].get_val()<<3)
 
 
 class TFTParameter(Envelope):
