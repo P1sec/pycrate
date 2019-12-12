@@ -37,6 +37,6 @@ def fuzz_s1ap(buf):
 
 
 if __name__ == '__main__':
-    #fuzz_tcap_map()
+    fuzz_tcap_map()
     fuzz_s1ap()
 
