@@ -2220,6 +2220,7 @@ class Array(Element):
     automation attribute:
     - numauto: callable, to automate the determination of the number of 
     template's iteration
+    - blauto: callable, to automate the length in bits to be decoded
     - transauto: callable, to automate the determination of array's 
     transparency
     
@@ -2244,6 +2245,7 @@ class Array(Element):
     _transauto = None
     _num       = None
     _numauto   = None
+    _blauto    = None
     _GEN       = Atom()
     
     __attrs__ = ('_env',
@@ -2254,6 +2256,7 @@ class Array(Element):
                  '_transauto',
                  '_num',
                  '_numauto',
+                 '_blauto',
                  '_GEN',
                  '_tmpl',
                  '_tmpl_val',
@@ -2504,6 +2507,31 @@ class Array(Element):
         else:
             return len(self._val)
     
+    def set_blauto(self, blauto=None):
+        """Set an automation for the length in bits of self, used only when 
+        mapping an external buffer to it.
+        
+        Args:
+            blauto (callable) : automate the bl computation,
+                call blauto() to compute the bit length, default to None
+        
+        Returns:
+            None
+        
+        Raises:
+            EltErr : if self._SAFE_STAT is enabled and blauto is not a callable
+        """
+        if blauto is None:
+            try:
+                del self._blauto
+            except Exception:
+                pass
+        else:
+            if self._SAFE_STAT and not callable(blauto):
+                raise(EltErr('{0} [set_blauto]: blauto type is {1}, expecting callable'\
+                      .format(self._name, type(blauto).__name__)))
+            self._blauto = blauto
+    
     def get_bl(self):
         """Returns the length in bits of self
         
@@ -2586,9 +2614,15 @@ class Array(Element):
             # num is None, _from_char will consume the charpy instance until
             # it raises
             num = None
-        # 2) init value
+        # 2) truncate char if length automation is set
+        if self._blauto is not None:
+            char_lb = char._len_bit
+            char._len_bit = char._cur + self._blauto()
+            if char._len_bit > char_lb:
+                raise(EltErr('{0} [_from_char]: bit length overflow'.format(self._name)))
+        # 3) init value
         self._val = []
-        # 3) consume char and fill in self._val
+        # 4) consume char and fill in self._val
         if num is not None:
             for i in range(num):
                 self._tmpl._from_char(char)
@@ -2607,6 +2641,9 @@ class Array(Element):
                 else:
                     self._val.append(self._tmpl())
         self._tmpl.set_val(None)
+        # 5) in case of length automation, set the original length back
+        if self._blauto is not None:
+            char._len_bit = char_lb
     
     #--------------------------------------------------------------------------#
     # copy / cloning routines
@@ -3082,6 +3119,7 @@ class Sequence(Element):
     automation attribute:
     - numauto: callable, to automate the determination of the number of content's 
     iteration
+    - blauto: callable, to automate the length in bits to be decoded
     - transauto: callable, to automate the determination of sequence's 
     transparency
     
@@ -3110,6 +3148,7 @@ class Sequence(Element):
     _transauto = None
     _num       = None
     _numauto   = None
+    _blauto    = None
     _GEN       = Atom()
     
     __attrs__ = ('_env',
@@ -3120,6 +3159,7 @@ class Sequence(Element):
                  '_transauto',
                  '_num',
                  '_numauto',
+                 '_blauto',
                  '_tmpl',
                  '_content',
                  '_it',
@@ -3380,6 +3420,31 @@ class Sequence(Element):
         else:
             return len(self._content)
     
+    def set_blauto(self, blauto=None):
+        """Set an automation for the length in bits of self, used only when 
+        mapping an external buffer to it.
+        
+        Args:
+            blauto (callable) : automate the bl computation,
+                call blauto() to compute the bit length, default to None
+        
+        Returns:
+            None
+        
+        Raises:
+            EltErr : if self._SAFE_STAT is enabled and blauto is not a callable
+        """
+        if blauto is None:
+            try:
+                del self._blauto
+            except Exception:
+                pass
+        else:
+            if self._SAFE_STAT and not callable(blauto):
+                raise(EltErr('{0} [set_blauto]: blauto type is {1}, expecting callable'\
+                      .format(self._name, type(blauto).__name__)))
+            self._blauto = blauto
+    
     def get_bl(self):
         """Returns the length in bits of self
         
@@ -3451,9 +3516,15 @@ class Sequence(Element):
             # num is None, _from_char will consume the charpy instance until
             # it raises
             num = None
-        # 2) init content
+        # 2) truncate char if length automation is set
+        if self._blauto is not None:
+            char_lb = char._len_bit
+            char._len_bit = char._cur + self._blauto()
+            if char._len_bit > char_lb:
+                raise(EltErr('{0} [_from_char]: bit length overflow'.format(self._name)))
+        # 3) init content
         self._content = []
-        # 3) consume char and fill in self._content
+        # 4) consume char and fill in self._content
         if num is not None:
             for i in range(num):
                 clone = self._tmpl.clone()
@@ -3475,6 +3546,9 @@ class Sequence(Element):
                     break
                 else:
                     self._content.append(clone)
+        # 5) in case of length automation, set the original length back
+        if self._blauto is not None:
+            char._len_bit = char_lb
     
     #--------------------------------------------------------------------------#
     # copy / cloning routines
@@ -3962,7 +4036,7 @@ class Alt(Element):
     initialization, keys are values that must correspond to the selector element
     
     universal attributes:
-    - sel: callback to get the value which is used to select one of the 
+    - sel: selector callback to get the value which is used to select one of the 
     alternatives
     - content: dict of selector values and elements cloned from the GEN dict
     - trans: bool, transparency of the alternative
