@@ -4253,8 +4253,8 @@ class Alt(Element):
     def _chk_val(self, *args):
         self.get_alt()._chk_val(*args)
     
-    def set_valauto(self, valauto=None):
-        self.get_alt().set_valauto(valauto)
+    #def set_valauto(self, valauto=None):
+    #    self.get_alt().set_valauto(valauto)
     
     def get_val(self):
         return self.get_alt().get_val()
@@ -4265,8 +4265,8 @@ class Alt(Element):
     def _chk_bl(self, *args):
         self.get_alt()._chk_bl(*args)
     
-    def set_blauto(self, blauto=None):
-        self.get_alt().set_blauto(blauto)
+    #def set_blauto(self, blauto=None):
+    #    self.get_alt().set_blauto(blauto)
     
     def set_len(self, l=None):
         self.get_alt().set_len(l)
@@ -4283,8 +4283,8 @@ class Alt(Element):
     def _chk_dic(self, *args):
         self.get_alt()._chk_dic(*args)
     
-    def set_dicauto(self, dicauto=None):
-        self.get_alt()._chk_dicauto(dicauto)
+    #def set_dicauto(self, dicauto=None):
+    #    self.get_alt()._chk_dicauto(dicauto)
     
     def get_dic(self):
         return self.get_alt().get_dic()
