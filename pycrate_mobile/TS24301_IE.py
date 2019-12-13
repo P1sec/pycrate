@@ -1146,18 +1146,17 @@ class ExtEmergNum(Envelope):
     
     def __init__(self, *args, **kw):
         Envelope.__init__(self, *args, **kw)
-        # could be better to force LenNum explicit setting ?
-        self[0].set_valauto(lambda: self[1].get_bl()//4)
+        self[0].set_valauto(lambda: len(self[1].decode()))
         self[1].set_blauto(lambda: self._get_len_num())
         self[2].set_valauto(lambda: self[3].get_len())
         self[3].set_blauto(lambda: self[2].get_val()<<3)
     
-    def _get_len_num():
-        len_num = self[1].get_bl()
+    def _get_len_num(self):
+        len_num = self[0].get_val()
         if len_num % 2:
-            return 1 + (len_num//2)
+            return (1+len_num)<<2
         else:
-            return len_num//2
+            return len_num<<2
 
 
 EENLValidity_dict = {
@@ -1950,7 +1949,7 @@ class RemoteUEID(Envelope):
 
 
 class RemoteUECtxt(Envelope):
-    _AddrBlLUT = {1:4, 2:8} 
+    _AddrBlLUT = {1:32, 2:64} 
     _GEN = (
         Uint8('Len'),
         Uint8('Num'),

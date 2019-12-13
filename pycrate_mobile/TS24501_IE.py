@@ -147,7 +147,8 @@ class SNSSAI(Envelope):
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        # do not automate length, otherwise, it breaks reautomate()
+        # do not automate length, otherwise, it breaks reautomate() due to Value
+        # using the provided Len value to select the appropriate content
         #self[0].set_valauto(lambda: self[1].get_len())
 
 
@@ -1158,19 +1159,7 @@ class _PayContOpt(Envelope):
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[1].set_valauto(lambda: self[2].get_len())
-        
-    
-    def _from_char(self, char):
-        if self.get_trans():
-            return
-        self[0]._from_char(char)
-        self[1]._from_char(char)
-        char_lb = char._len_bit
-        char._len_bit = char._cur + (self[1].get_val()<<3)
-        if char._len_bit > char_lb:
-            raise(EltErr('{0} [_from_char]: bit length overflow'.format(self._name)))
-        self[2]._from_char(char)
-        char._len_bit = char_lb
+        self[2].set_blauto(lambda: self[1].get_val()<<3)
 
 
 class _PayContEntry(Envelope):
@@ -1179,7 +1168,7 @@ class _PayContEntry(Envelope):
         Uint('OptNum', bl=4),
         Uint('Type', bl=4, dic=PayloadContainerType_dict),
         Sequence('Opts', GEN=_PayContOpt('Opt')),
-        Buf('Cont')
+        Buf('Cont', val=b'', rep=REPR_HEX)
         )
     
     def __init__(self, *args, **kwargs):
@@ -1187,7 +1176,7 @@ class _PayContEntry(Envelope):
         self[0].set_valauto(lambda: 1 + self[3].get_len() + self[4].get_len())
         self[1].set_valauto(lambda: self[3].get_num())
         self[3].set_numauto(lambda: self[1].get_val())
-        self[4].set_blauto(lambda: self[0].get_val() - 1 - self[3].get_len())
+        self[4].set_blauto(lambda: (self[0].get_val()-1-self[3].get_len())<<3)
 
 
 class PayloadContainer(Envelope):
@@ -1287,6 +1276,7 @@ class RejectedSNSSAI(Envelope):
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: self[1].get_len())
+        self[1].set_blauto(lambda: self[0].get_val()<<3)
 
 
 class RejectedNSSAI(Sequence):
@@ -1871,17 +1861,8 @@ class EPSParam(Envelope):
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self['Len'].set_valauto(lambda: self['Content'].get_len())
-    
-    def _from_char(self, char):
-        self[0]._from_char(char)
-        self[1]._from_char(char)
-        char_lb = char._len_bit
-        char._len_bit = char._cur + (self[1].get_val()<<3)
-        if char._len_bit > char_lb:
-            raise(EltErr('{0} [_from_char]: bit length overflow'.format(self._name)))
-        self[2]._from_char(char)
-        char._len_bit = char_lb
+        self[1].set_valauto(lambda: self[2].get_len())
+        self[2].set_blauto(lambda: self[1].get_val()<<3)
 
 
 class EPSBearerCtxt(Envelope):
@@ -2058,6 +2039,11 @@ class QoSFlowParam(Envelope):
             DEFAULT=Buf('unk', val=b'', rep=REPR_HEX),
             sel=lambda self: self.get_env()['Type'].get_val())
         )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[1].set_valauto(lambda: self[2].get_len())
+        self[2].set_blauto(lambda: self[1].get_val()<<3)
 
 
 class QoSFlow(Envelope):
