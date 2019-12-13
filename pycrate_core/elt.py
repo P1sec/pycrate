@@ -4073,6 +4073,7 @@ class Alt(Element):
     _env       = None
     _hier      = 0
     _desc      = ''
+    _blauto    = None
     _trans     = None
     _transauto = None
     _GEN       = {}
@@ -4088,6 +4089,7 @@ class Alt(Element):
                  '_name',
                  '_desc',
                  '_hier',
+                 '_blauto',
                  '_trans',
                  '_transauto',
                  '_GEN',
@@ -4246,6 +4248,31 @@ class Alt(Element):
             raise(EltErr('{0} [set_val]: invalid selection value {1!r}'\
                   .format(self._name, sv)))
     
+    def set_blauto(self, blauto=None):
+        """Set an automation for the length in bits of self, used only when 
+        mapping an external buffer to it.
+        
+        Args:
+            blauto (callable) : automate the bl computation,
+                call blauto() to compute the bit length, default to None
+        
+        Returns:
+            None
+        
+        Raises:
+            EltErr : if self._SAFE_STAT is enabled and blauto is not a callable
+        """
+        if blauto is None:
+            try:
+                del self._blauto
+            except Exception:
+                pass
+        else:
+            if self._SAFE_STAT and not callable(blauto):
+                raise(EltErr('{0} [set_blauto]: blauto type is {1}, expecting callable'\
+                      .format(self._name, type(blauto).__name__)))
+            self._blauto = blauto
+    
     # standard methods passthrough
     def set_val(self, val=None):
         self.get_alt().set_val(val)
@@ -4324,7 +4351,16 @@ class Alt(Element):
         within the content
         """
         if not self.get_trans():
+            # truncate char if length automation is set
+            if self._blauto is not None:
+                char_lb = char._len_bit
+                char._len_bit = char._cur + self._blauto()
+                if char._len_bit > char_lb:
+                    raise(EltErr('{0} [_from_char]: bit length overflow'.format(self._name)))
             self.get_alt()._from_char(char)
+            # in case of length automation, set the original length back
+            if self._blauto is not None:
+                char._len_bit = char_lb
     
     #--------------------------------------------------------------------------#
     # copy / cloning routines
