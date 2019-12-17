@@ -130,54 +130,33 @@ Specific constraints attributes:
             else:
                 # CONTAINING value
                 self._get_val_obj(val[0])._safechk_val(val[1])
+        elif isinstance(val, set):
+            # named bits
+            if not self._cont:
+                raise(ASN1ObjErr('{0}: invalid named bits, {1!r}'.format(self.fullname(), val)))
+            elif any([nb not in self._cont for nb in val]):
+                raise(ASN1ObjErr('{0}: invalid named bits, {1!r}'.format(self.fullname(), val)))
         else:
             raise(ASN1ObjErr('{0}: invalid value, {1!r}'.format(self.fullname(), val)))
     
     def _safechk_bnd(self, val):
-        if isinstance(val[0], integer_types):
-            # check val against potential constraints
-            ASN1Obj._safechk_bnd(self, val)
-            if self._const_sz and \
-            self._const_sz.ext is None and \
-            val[1] not in self._const_sz:
-                raise(ASN1ObjErr('{0}: value out of size constraint, {1!r}'\
-                      .format(self.fullname(), val)))
-        elif self._const_cont:
-            if self._const_cont._typeref:
-                ident = self._const_cont._typeref.called[1]
-            else:
-                ident = self._const_cont.TYPE 
-            if val[0] != ident:
-                raise(ASN1ObjErr('{0}: value out of containing constraint, {1!r}'\
-                      .format(self.fullname(), val)))
-    
-    def set_val(self, val):
-        if isinstance(val, set):
-            off = []
-            for name in val:
-                try:
-                    off.append(self._cont[name])
-                except Exception:
-                    raise(ASN1ObjErr('{0}: invalid named bit, {1!r}'.format(self.fullname(), val)))
-            if off:
-                moff = max(off)
-                val  = (sum([1<<(moff-i) for i in off]), 1+moff)
-            else:
-                moff = 0
-                val  = (0, 0)
-            if self._const_sz and self._const_sz.ext is None \
-            and self._const_sz.lb and val[1] < self._const_sz.lb:
-                # need to extend the value to the lower bound of the size constraint
-                diff = self._const_sz.lb - val[1]
-                self._val = (val[0] << diff, val[1] + diff)
-            else:
-                self._val = val
-        else:
-            self._val = val
-        if self._SAFE_VAL:
-            self._safechk_val(self._val)
-        if self._SAFE_BND:
-            self._safechk_bnd(self._val)
+        if isinstance(val, tuple):
+            if isinstance(val[0], integer_types):
+                # check val against potential constraints
+                ASN1Obj._safechk_bnd(self, val)
+                if self._const_sz and \
+                self._const_sz.ext is None and \
+                val[1] not in self._const_sz:
+                    raise(ASN1ObjErr('{0}: value out of size constraint, {1!r}'\
+                          .format(self.fullname(), val)))
+            elif self._const_cont:
+                if self._const_cont._typeref:
+                    ident = self._const_cont._typeref.called[1]
+                else:
+                    ident = self._const_cont.TYPE 
+                if val[0] != ident:
+                    raise(ASN1ObjErr('{0}: value out of containing constraint, {1!r}'\
+                          .format(self.fullname(), val)))
     
     def get_names(self):
         """Returns the set of names from the NamedBitList corresponding to the 
@@ -194,6 +173,27 @@ Specific constraints attributes:
             if bit == '1':
                 names.add(self._cont_rev[off])
         return names
+    
+    def _names_to_val(self):
+        off, val = [], self._val
+        for name in val:
+            try:
+                off.append(self._cont[name])
+            except Exception:
+                raise(ASN1ObjErr('{0}: invalid named bits, {1!r}'.format(self.fullname(), val)))
+        if off:
+            moff = max(off)
+            val  = (sum([1<<(moff-i) for i in off]), 1+moff)
+        else:
+            moff = 0
+            val  = (0, 0)
+        if self._const_sz and self._const_sz.ext is None \
+        and self._const_sz.lb and val[1] < self._const_sz.lb:
+            # need to extend the value to the lower bound of the size constraint
+            diff = self._const_sz.lb - val[1]
+            self._val = (val[0] << diff, val[1] + diff)
+        else:
+            self._val = val
     
     ###
     # conversion between internal value and ASN.1 syntax
@@ -261,6 +261,8 @@ Specific constraints attributes:
         raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'.format(self.fullname(), txt)))
     
     def _to_asn1(self):
+        if isinstance(self._val, set):
+            self._names_to_val()
         if isinstance(self._val[0], integer_types):
             uint = Uint('bs', val=self._val[0], bl=self._val[1])
             if self._val[1] % 4 == 0:
@@ -270,7 +272,7 @@ Specific constraints attributes:
                 # BSTRING
                 ret = '\'%s\'B' % uint_to_bitstr(self._val[0], self._val[1])
             if self._cont:
-                # add flags in comment
+                # add named bits in comment
                 flags = []
                 for i, v in enumerate(uint_to_bitstr(self._val[0], self._val[1])):
                     if i in self._cont_rev and v == '1':
@@ -535,6 +537,8 @@ Specific constraints attributes:
                 self._val = (0, 0)
     
     def _to_per_ws(self):
+        if isinstance(self._val, set):
+            self._names_to_val()
         buf, ldet = self.__to_per_ws_buf()
         GEN = []
         if self._const_sz:
@@ -627,6 +631,8 @@ Specific constraints attributes:
         self._struct = Envelope(self._name, GEN=tuple(GEN))
     
     def _to_per(self):
+        if isinstance(self._val, set):
+            self._names_to_val()
         buf, ldet = self.__to_per_buf()
         GEN = []
         if self._const_sz:
@@ -876,6 +882,8 @@ Specific constraints attributes:
                 self._val = (0, 0)
     
     def _encode_ber_cont_ws(self):
+        if isinstance(self._val, set):
+            self._names_to_val()
         buf, bl = self.__to_ber_buf()
         if bl % 8:
             bu = 8 - (bl%8)
@@ -902,6 +910,8 @@ Specific constraints attributes:
                                                Buf('BS', val=buf, bl=8*len(buf), rep=REPR_HEX)))
     
     def _encode_ber_cont(self):
+        if isinstance(self._val, set):
+            self._names_to_val()
         buf, bl = self.__to_ber_buf()
         if bl % 8:
             bu = 8 - (bl%8)
@@ -998,6 +1008,8 @@ Specific constraints attributes:
                 self._val = (val, bl)
         
         def _to_jval(self):
+            if isinstance(self._val, set):
+                self._names_to_val()
             if not isinstance(self._val[0], integer_types):
                 # value is for a contained object to be encoded
                 # using a CHOICE-like encoding
