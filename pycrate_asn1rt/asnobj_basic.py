@@ -292,20 +292,13 @@ Specific attribute:
     _ASN_RE = re.compile('\-{0,1}[0-9]{1,}')
     
     def _safechk_val(self, val):
-        self._safechk_val_int(val)
-    
-    def set_val(self, val):
         if isinstance(val, str_types):
-            try:
-                self._val = self._cont[val]
-            except Exception:
+            if not self._cont:
+                raise(ASN1ObjErr('{0}: invalid named value, {1!r}'.format(self.fullname(), val)))
+            elif val not in self._cont:
                 raise(ASN1ObjErr('{0}: invalid named value, {1!r}'.format(self.fullname(), val)))
         else:
-            self._val = val
-        if self._SAFE_VAL:
-            self._safechk_val(self._val)
-        if self._SAFE_BND:
-            self._safechk_bnd(self._val)
+            self._safechk_val_int(val)
     
     def get_name(self):
         """Returns the NamedNumber corresponding to the internal value
@@ -314,6 +307,12 @@ Specific attribute:
             return self._cont_rev[self._val]
         except Exception:
             return None
+    
+    def _name_to_val(self):
+        try:
+            self._val = self._cont[self._val]
+        except:
+            raise(ASN1ObjErr('{0}: invalid named value, {1!r}'.format(self.fullname(), val)))
     
     ###
     # conversion between internal value and ASN.1 syntax
@@ -336,8 +335,14 @@ Specific attribute:
         raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'.format(self.fullname(), txt)))
     
     def _to_asn1(self):
-        if self._cont and self._val in self._cont_rev:
-            return '%i -- %s --' % (self._val, self._cont_rev[self._val])
+        name = None
+        if isinstance(self._val, str_types):
+            name = self._val
+            self._name_to_val()
+        elif self._cont and self._val in self._cont_rev:
+            name = self._cont_rev[self._val]
+        if name:
+            return '%i -- %s --' % (self._val, name)
         else:
             return '%i' % self._val
     
@@ -410,6 +415,8 @@ Specific attribute:
         return
     
     def _to_per_ws(self):
+        if isinstance(self._val, str_types):
+            self._name_to_val()
         GEN = []
         if self._const_val:
             if self._const_val.ext is not None:
@@ -445,6 +452,8 @@ Specific attribute:
         return self._struct
     
     def _to_per(self):
+        if isinstance(self._val, str_types):
+            self._name_to_val()
         GEN = []
         if self._const_val:
             if self._const_val.ext is not None:
@@ -501,10 +510,14 @@ Specific attribute:
         self._val = char.get_int(vbnd[1]-vbnd[0])
     
     def _encode_ber_cont_ws(self):
+        if isinstance(self._val, str_types):
+            self._name_to_val()
         lval = int_bytelen(self._val)
         return 0, lval, Int('V', val=self._val, bl=8*lval)
     
     def _encode_ber_cont(self):
+        if isinstance(self._val, str_types):
+            self._name_to_val()
         lval = int_bytelen(self._val)
         return 0, lval, [(T_INT, self._val, 8*lval)]
 
@@ -522,6 +535,8 @@ Specific attribute:
                       .format(self.fullname(), val)))
         
         def _to_jval(self):
+            if isinstance(self._val, set):
+                self._names_to_val()
             return self._val
 
 
