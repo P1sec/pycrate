@@ -620,20 +620,6 @@ class ASN1Obj(Element):
             const['tab_at']   = self._const_tab_at
         return const
     
-    #deprecated
-    #def _get_proto_old(self):
-    #    # old method, deprecated
-    #    # TODO: in case of recursive object, this will break Python
-    #    # TODO: add information on OPTIONAL / DEFAULT components
-    #    if self.TYPE in TYPES_BASIC + TYPES_EXT:
-    #        return self.TYPE
-    #    elif self.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
-    #        return [self._cont._get_proto_old()]
-    #    elif self.TYPE in (TYPE_CHOICE, TYPE_SEQ, TYPE_SET, TYPE_CLASS):
-    #        return ASN1Dict([(ident, Comp._get_proto_old()) for (ident, Comp) in self._cont.items()])
-    #    else:
-    #        assert()
-    
     def get_proto(self, w_open=True, print_recurs=False, blacklist=set()):
         """
         returns the prototype of the object
@@ -1102,6 +1088,23 @@ class ASN1Obj(Element):
             self._safechk_val(self._val)
         if self._SAFE_BND:
             self._safechk_bnd(self._val)
+    
+    def convert_named_val(self):
+        """convert all INTEGER and BIT STRING values within self to named values and
+        sets of named bits when possible
+        """
+        for path, val in self.get_val_paths():
+            Obj = self.get_at(path)
+            if Obj.TYPE == TYPE_INT and Obj._cont:
+                Obj.set_val(val)
+                name = Obj.get_name()
+                if name:
+                    self.set_val_at(path, name)
+            elif Obj.TYPE == TYPE_BIT_STR and Obj._cont:
+                Obj.set_val(val)
+                names = Obj.get_names()
+                if names:
+                    self.set_val_at(path, names)
     
     #--------------------------------------------------------------------------#
     # encoding / decoding methods
