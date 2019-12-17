@@ -134,11 +134,9 @@ class ASN1Obj(Element):
     _SAFE_INIT   = True
     # this enables object value verification when using set_val()
     _SAFE_VAL    = True
-    # this enables object's constraints verification when using set_val() or 
-    # set_val_unsafe()
+    # this enables object's constraints verification when using set_val()
     _SAFE_BND    = True
-    # this enables object's table constraint verification when using set_val() 
-    # or set_val_unsafe()
+    # this enables object's table constraint verification when using set_val()
     _SAFE_BNDTAB = True
     
     #--------------------------------------------------------------------------#
@@ -1102,11 +1100,6 @@ class ASN1Obj(Element):
         self._val = val
         if self._SAFE_VAL:
             self._safechk_val(self._val)
-        if self._SAFE_BND:
-            self._safechk_bnd(self._val)
-    
-    def set_val_unsafe(self, val):
-        self._val = val
         if self._SAFE_BND:
             self._safechk_bnd(self._val)
     
