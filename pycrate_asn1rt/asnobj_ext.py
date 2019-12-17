@@ -146,7 +146,7 @@ Single value: Python 2-tuple
             if self._TAB_LUT and self._const_tab and self._const_tab_at:
                 # collect all types from the table constraint
                 assert( hasattr(self, '_const_tab_id') )
-                for O in self._const_tab(self._const_tab_id):
+                for O in self._const_tab(self._const_tab_id)[::-1]:
                     if O._typeref is not None:
                         # put both complete module ref, and obj-only ref
                         const_tr[O._typeref.called] = O
