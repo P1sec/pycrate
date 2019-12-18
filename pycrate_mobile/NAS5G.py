@@ -121,48 +121,69 @@ def parse_NAS5G(buf, inner=True, sec_hdr=True):
                     nasc.replace(nasc[-1], cont)
         #
         if typ in (65, 79, 103, 104):
-            payc = Msg['PayloadContainer']
-            if not payc.get_trans() and payc._IE is not None:
+            payct, payc = Msg['PayloadContainerType'], Msg['PayloadContainer']
+            if not payct.get_trans() and not payc.get_trans():
                 # Payload container present in Msg
-                for entry in payc._IE['Entries']:
-                    etype = entry['Type'].get_val()
-                    econt = entry['Cont'].get_val()
-                    if etype == 1 and econt:
-                        # 5GSM
-                        cont, err = parse_NAS5G(nasc[-1].get_val(), inner=inner)
-                        if err == 0:
-                            entry.replace(entry['Cont'], cont)
-                    elif etype == 2 and len(econt) >= 2:
-                        # SMS PP
-                        epd, etyp = unpack('>BB', econt[:2])
-                        epd &= 0xF
-                        if epd == 9 and etyp in (1, 4, 16):
-                            cont = PPSMSCPTypeClasses[etyp]()
-                            try:
-                                cont.from_bytes(econt)
-                            except Exception:
-                                pass
-                            else:
-                                entry.replace(entry['Cont'], cont)
-                    elif etype == 5 and len(econt) >= 2:
-                        # UE Policy
-                        _, etyp = unpack('>BB', econt[:2])
-                        if 1 <= etyp <= 4:
-                            cont = FGUEPOLTypeClasses[etyp]
-                            try:
-                                cont.from_bytes(econt)
-                            except Exception:
-                                pass
-                            else:
-                                entry.replace(entry['Cont'], cont)
-                    #
-                    # TODO: decode mode embedded protocols
-                    # 5G NAS payload container entries:
-                    #   3 : 'LTE Positioning Protocol message container',
-                    #   4 : 'SOR transparent container',
-                    #   6 : 'UE parameters update transparent container',
-                    #   7 : 'Location services message container',
-                    #   8 : 'CIoT user data container',
+                conttype, contbuf = payct['V'].get_val(), payc['V'].get_val()
+                cont = parse_NAS5GPayCont(conttype, contbuf)
+                if cont:
+                    payc.replace(payc['V'], cont)
     #
     return Msg, 0
 
+
+def parse_NAS5GPayCont(conttype, buf):
+    if conttype == 1 and len(buf) >= 2:
+        # 5GSM
+        cont, err = parse_NAS5G(buf, inner=True)
+        if err == 0:
+            return cont
+    elif conttype == 2 and len(buf) >= 2:
+        # SMS PP
+        pd, typ = unpack('>BB', buf)
+        pd &= 0xF
+        if pd == 9 and typ in (1, 4, 16):
+            cont = PPSMSCPTypeClasses[typ]()
+            try:
+                cont.from_bytes(buf)
+            except Exception:
+                pass
+            else:
+                return cont
+    elif conttype == 3:
+        # LPP, TODO
+        pass
+    elif conttype == 4 and len(buf) >= 17:
+        # SOR
+        cont = SORTransparentContainer()
+        try:
+            cont.from_bytes(buf)
+        except Exception:
+            pass
+        else:
+            return cont
+    elif conttype == 6:
+        # UE params update, TODO
+        pass
+    elif conttype == 7:
+        # Loc services, TODO
+        pass
+    elif conttype == 8:
+        # CIoT, TODO
+        pass
+    elif conttype == 15 and len(buf) >= 1:
+        # multi
+        cont = PayloadContainerMult()
+        try:
+            cont.from_bytes(buf)
+        except Exception:
+            pass
+        else:
+            # parse each entry
+            for entry in cont['Entries']:
+                econttype, ebuf = cont['Type'].get_val(), cont['Cont'].get_val()
+                econt = parse_NAS5GPayCont(econttype, ebuf)
+                if econt:
+                    entry.replace(entr['Cont'], econt)
+    return None
+        

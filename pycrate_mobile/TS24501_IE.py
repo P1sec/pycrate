@@ -90,66 +90,78 @@ class DNN(Envelope):
 # TS 24.501, 9.11.2.8
 #------------------------------------------------------------------------------#
 
-class _SNSSAI_SST_MappedHSST(Envelope):
-    _GEN = (
-        Uint8('SST'),
-        Uint8('MappedHPLMNSST')
-        )
-
-
-class _SNSSAI_SST_SD(Envelope):
-    _GEN = (
-        Uint8('SST'),
-        Uint24('SD')
-        )
-
-
-class _SNSSAI_SST_SD_MappedHSST(Envelope):
-    _GEN = (
-        Uint8('SST'),
-        Uint24('SD'),
-        Uint8('MappedHPLMNSST')
-        )
-
-
-class _SNSSAI_SST_SD_MappedHSSTSD(Envelope):
-    _GEN = (
-        Uint8('SST'),
-        Uint24('SD'),
-        Uint8('MappedHPLMNSST'),
-        Uint24('MappedHPLMNSD')
-        )
-
-
-class _SNSSAI_SST_SD_MappedHSSTSD_spare(Envelope):
-    _GEN = (
-        Uint8('SST'),
-        Uint24('SD'),
-        Uint8('MappedHPLMNSST'),
-        Uint24('MappedHPLMNSD'),
-        Buf('spare', rep=REPR_HEX)
-        )
-
 
 class SNSSAI(Envelope):
+    
+    ENV_SEL_TRANS = False
+    
+    _GEN = (
+        Uint8('SST'),
+        Uint24('SD', trans=True),
+        Uint8('MappedHPLMNSST', trans=True),
+        Uint24('MappedHPLMNSD', trans=True)
+        )
+    
+    def set_val(self, val):
+        if isinstance(val, (tuple, list)):
+            if len(val) == 1:
+                self[1].set_trans(True)
+                self[2].set_trans(True)
+                self[3].set_trans(True)
+            elif len(val) == 2:
+                self[1].set_trans(False)
+                self[2].set_trans(True)
+                self[3].set_trans(True)
+            elif len(val) == 3:
+                self[1].set_trans(False)
+                self[2].set_trans(False)
+                self[3].set_trans(True)
+            elif len(val) > 3:
+                self[1].set_trans(False)
+                self[2].set_trans(False)
+                self[3].set_trans(False)
+        elif isinstance(val, dict):
+            if 'SD' in val:
+                self[1].set_trans(False)
+            if 'MappedHPLMNSST' in val:
+                self[2].set_trans(False)
+            if 'MappedHPLMNSD' in val:
+                self[3].set_trans(False)
+        Envelope.set_val(self, val)
+    
+    
+    def _from_char(self, char):
+        l = char.len_bit()
+        if l == 8:
+            self[1].set_trans(True)
+            self[2].set_trans(True)
+            self[3].set_trans(True)
+        elif l == 32:
+            self[1].set_trans(False)
+            self[2].set_trans(True)
+            self[3].set_trans(True)
+        elif l == 40:
+            self[1].set_trans(False)
+            self[2].set_trans(False)
+            self[3].set_trans(True)
+        elif l >= 64:
+            self[1].set_trans(False)
+            self[2].set_trans(False)
+            self[3].set_trans(False)
+        Envelope._from_char(self, char)
+
+
+class L_SNSSAI(Envelope):
+    _name = 'SNSSAI'
     _GEN = (
         Uint8('Len'),
-        Alt('Value', GEN={
-            1: Uint8('SST'),
-            2: _SNSSAI_SST_MappedHSST('SST_MappedHPLMNSST'),
-            4: _SNSSAI_SST_SD('SST_SD'),
-            5: _SNSSAI_SST_SD_MappedHSST('SST_SD_MappedHPLMNSST'),
-            8: _SNSSAI_SST_SD_MappedHSSTSD('SST_SD_MappedHPLMNSSTSD')},
-            DEFAULT=_SNSSAI_SST_SD_MappedHSSTSD_spare('SST_SD_MappedHPLMNSSTSD_spare'),
-            sel=lambda self: self.get_env()['Len'].get_val()
-            )
+        SNSSAI()
         )
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        # do not automate length, otherwise, it breaks reautomate() due to Value
-        # using the provided Len value to select the appropriate content
-        #self[0].set_valauto(lambda: self[1].get_len())
+        self[0].set_valauto(lambda: self[1].get_len())
+        self[1].set_blauto(lambda: self[0].get_val()<<3)    
 
 
 #------------------------------------------------------------------------------#
@@ -955,7 +967,7 @@ class NetSlicingInd(Envelope):
 #------------------------------------------------------------------------------#
 
 class NSSAI(Sequence):
-    _GEN = SNSSAI()
+    _GEN = L_SNSSAI()
 
 
 #------------------------------------------------------------------------------#
@@ -1022,7 +1034,7 @@ class _CritOSAppIds(Envelope):
 class _CritSNSSAI(Envelope):
     _GEN = (
         Uint8('Cnt'),
-        Sequence('SNSSAIs', GEN=SNSSAI())
+        Sequence('SNSSAIs', GEN=L_SNSSAI())
         )
     
     def __init__(self, *args, **kwargs):
@@ -1148,7 +1160,7 @@ class _PayContOpt(Envelope):
             37 : GPRSTimer3('BackOffTimer'),
             59 : PDUSessID('OldPDUSessID'),
             80 : Uint8('RequestType', dic=_RequestType_dict),
-            22 : SNSSAI()['Value'],
+            22 : SNSSAI(),
             25 : Buf('DNN')
             },
             DEFAULT=Buf('Val'),
@@ -1179,7 +1191,7 @@ class _PayContEntry(Envelope):
         self[4].set_blauto(lambda: (self[0].get_val()-1-self[3].get_len())<<3)
 
 
-class PayloadContainer(Envelope):
+class PayloadContainerMult(Envelope):
     _GEN = (
         Uint8('Num'),
         Sequence('Entries', GEN=_PayContEntry('Entry'))
@@ -1263,20 +1275,23 @@ class PDUSessStat(Envelope):
 # TS 24.501, 9.11.3.46
 #------------------------------------------------------------------------------#
 
+_RejectedSNSSAICause_dict = {
+    0 : 'S-NSSAI not available in the current PLMN or SNPN',
+    1 : 'S-NSSAI not available in the current registration area',
+    2 : 'Network slice specific authentication and authorization pending for the S-NSSAI'
+    }
+
 class RejectedSNSSAI(Envelope):
     _GEN = (
-        Uint8('Len'),
-        Alt('Value', GEN={
-            1: Uint8('SST'),
-            4: Envelope('SST_SD', GEN=(Uint8('SST'), Uint24('SD')))},
-            sel=lambda self: self.get_env()['Len'].get_val()
-            )
+        Uint('Len', bl=4),
+        Uint('Cause', bl=4, dic=_RejectedSNSSAICause_dict),
+        SNSSAI()
         )
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[0].set_valauto(lambda: self[1].get_len())
-        self[1].set_blauto(lambda: self[0].get_val()<<3)
+        self[0].set_valauto(lambda: self[2].get_len())
+        self[2].set_blauto(lambda: self[0].get_val()<<3)
 
 
 class RejectedNSSAI(Sequence):
