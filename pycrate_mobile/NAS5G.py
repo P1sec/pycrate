@@ -31,6 +31,7 @@ from pycrate_core.utils import *
 
 from .TS24501_FGMM  import FGMMTypeClasses, FGMMSecProtNASMessage
 from .TS24501_FGSM  import FGSMTypeClasses
+from .TS24501_UEPOL import FGUEPOLTypeClasses
 from .TS24011_PPSMS import PPSMSCPTypeClasses
 
 
@@ -131,31 +132,34 @@ def parse_NAS5G(buf, inner=True, sec_hdr=True):
                         cont, err = parse_NAS5G(nasc[-1].get_val(), inner=inner)
                         if err == 0:
                             entry.replace(entry['Cont'], cont)
-                    elif etype == 2 and econt:
+                    elif etype == 2 and len(econt) >= 2:
                         # SMS PP
-                        try:
-                            epd, etyp = unpack('>BB', econt[:2])
-                        except Exception:
-                            pass
-                        else:
-                            epd &= 0xF
-                            if epd == 9 and etyp in (1, 4, 16):
-                                cont = PPSMSCPTypeClasses[etyp]()
-                                try:
-                                    cont.from_bytes(econt)
-                                except Exception:
-                                    pass
-                                else:
-                                    entry.replace(entry['Cont'], cont)
-                    #else:
-                    #    pass
+                        epd, etyp = unpack('>BB', econt[:2])
+                        epd &= 0xF
+                        if epd == 9 and etyp in (1, 4, 16):
+                            cont = PPSMSCPTypeClasses[etyp]()
+                            try:
+                                cont.from_bytes(econt)
+                            except Exception:
+                                pass
+                            else:
+                                entry.replace(entry['Cont'], cont)
+                    elif etype == 5 and len(econt) >= 2:
+                        # UE Policy
+                        _, etyp = unpack('>BB', econt[:2])
+                        if 1 <= etyp <= 4:
+                            cont = FGUEPOLTypeClasses[etyp]
+                            try:
+                                cont.from_bytes(econt)
+                            except Exception:
+                                pass
+                            else:
+                                entry.replace(entry['Cont'], cont)
+                    #
                     # TODO: decode mode embedded protocols
                     # 5G NAS payload container entries:
-                    #   1 : 'N1 SM information',
-                    #   2 : 'SMS',
                     #   3 : 'LTE Positioning Protocol message container',
                     #   4 : 'SOR transparent container',
-                    #   5 : 'UE policy container',
                     #   6 : 'UE parameters update transparent container',
                     #   7 : 'Location services message container',
                     #   8 : 'CIoT user data container',
