@@ -1472,6 +1472,7 @@ class Envelope(Element):
     _env       = None
     _hier      = 0
     _desc      = ''
+    _blauto    = None
     _trans     = None
     _transauto = None
     _GEN       = tuple()
@@ -1480,6 +1481,7 @@ class Envelope(Element):
                  '_name',
                  '_desc',
                  '_hier',
+                 '_blauto',
                  '_trans',
                  '_transauto',
                  '_GEN',
@@ -1666,6 +1668,31 @@ class Envelope(Element):
             raise(EltErr('{0} [set_bl]: bl type is {1}, expecting tuple, list '\
                          'or dict'.format(self._name, type(bl).__name__)))
     
+    def set_blauto(self, blauto=None):
+        """Set an automation for the length in bits of self, used only when 
+        mapping an external buffer to it.
+        
+        Args:
+            blauto (callable) : automate the bl computation,
+                call blauto() to compute the bit length, default to None
+        
+        Returns:
+            None
+        
+        Raises:
+            EltErr : if self._SAFE_STAT is enabled and blauto is not a callable
+        """
+        if blauto is None:
+            try:
+                del self._blauto
+            except Exception:
+                pass
+        else:
+            if self._SAFE_STAT and not callable(blauto):
+                raise(EltErr('{0} [set_blauto]: blauto type is {1}, expecting callable'\
+                      .format(self._name, type(blauto).__name__)))
+            self._blauto = blauto
+    
     def get_bl(self):
         """Returns the total length in bits of self
         
@@ -1719,9 +1746,21 @@ class Envelope(Element):
         # TODO: in cases some ranges of elt within self have a fixed _bl
         # it would be more efficient to unpack them in a single shot, 
         # especially if these are int / uint on 8, 16, 32, 64 bits
-        if not self.get_trans():
-            for elt in self.__iter__():
-                elt._from_char(char)
+        if self.get_trans():
+            return
+        # truncate char if length automation is set
+        if self._blauto is not None:
+            char_lb = char._len_bit
+            char._len_bit = char._cur + self._blauto()
+            if char._len_bit > char_lb:
+                raise(EltErr('{0} [_from_char]: bit length overflow'.format(self._name)))
+        #
+        for elt in self.__iter__():
+            elt._from_char(char)
+        #
+        # in case of length automation, set the original length back
+        if self._blauto is not None:
+            char._len_bit = char_lb
     
     #--------------------------------------------------------------------------#
     # copy / cloning routines
