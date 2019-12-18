@@ -162,6 +162,17 @@ def parse_NAS5GPayCont(conttype, buf):
             pass
         else:
             return cont
+    elif conttype == 5 and len(buf) >= 2:
+        # UE policy
+        _, typ = unpack('>BB', buf)
+        if 1 <= typ <= 4:
+            cont = FGUEPOLTypeClasses[typ]()
+            try:
+                cont.from_bytes(buf)
+            except Exception:
+                pass
+            else:
+                return cont
     elif conttype == 6:
         # UE params update, TODO
         pass
