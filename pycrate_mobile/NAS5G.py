@@ -140,7 +140,7 @@ def parse_NAS5GPayCont(conttype, buf):
             return cont
     elif conttype == 2 and len(buf) >= 2:
         # SMS PP
-        pd, typ = unpack('>BB', buf)
+        pd, typ = unpack('>BB', buf[:2])
         pd &= 0xF
         if pd == 9 and typ in (1, 4, 16):
             cont = PPSMSCPTypeClasses[typ]()
@@ -164,7 +164,7 @@ def parse_NAS5GPayCont(conttype, buf):
             return cont
     elif conttype == 5 and len(buf) >= 2:
         # UE policy
-        _, typ = unpack('>BB', buf)
+        _, typ = unpack('>BB', buf[:2])
         if 1 <= typ <= 4:
             cont = FGUEPOLTypeClasses[typ]()
             try:

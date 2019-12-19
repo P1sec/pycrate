@@ -2193,7 +2193,7 @@ class PktFilterComp(Envelope):
     _GEN = (
         Uint8('Type', dic=_PktFilterCompType_dict),
         Alt('Value', GEN={
-            1   : Buf('none', bl=0),
+            1   : Buf('none', bl=0, rep=REPR_HEX),
             16  : _PktFilterCompIPv4('IPv4'),
             17  : _PktFilterCompIPv4('IPv4'),
             33  : _PktFilterCompIPv6('IPv6Pref'),
@@ -2249,7 +2249,7 @@ class QoSRule(Envelope):
                 4 : PktFilterAdd(),
                 5 : PktFilterDel(),
                 6 : Buf('empty', bl=0)},
-                DEFAULT=Buf('none', bl=0),
+                DEFAULT=Buf('none', bl=0, rep=REPR_HEX),
                 sel=lambda self: self.get_env().get_env()['OpCode'].get_val())
             ),
         Uint8('Precedence', trans=True), # optional
