@@ -49,8 +49,8 @@ Currently none. Only the Python builtins and few internal modules of Python
 (e.g. os, system, re, struct) are required for most of the features. The json internal
 module is required for supporting the JSON API.
 
-The pycrate_mobile/TS24301_EMM module uses CryptoMobile as optional dependency
-to cipher / decipher LTE NAS messages.
+The pycrate_mobile/TS24301_EMM and pycrate_mobile/TS24501_FGMM modules use 
+CryptoMobile as optional dependency to cipher / decipher LTE and 5G NAS messages.
 
 The pycrate_diameter part uses lxml as optional dependency to translate xml files
 from IANA as Python dictionnaries when the diameter module is loaded.
@@ -262,7 +262,7 @@ This subdirectory implements most of the 3GPP NAS protocol formats:
 * *MCC_MNC*: dictionnaries for MCC and MNC look-up
 * *NAS*: provides two functions to parse any uplink and downlink mobile NAS messages
 * *NASLTE*: provides two functions to parse LTE uplink and downlink NAS messages
-* *NAS5G*: provides one function to parse 5G upling and downling mobile NAS messages
+* *NAS5G*: provides one function to parse 5G uplink and downlink mobile NAS messages
 * *PPP*: structures for NCP and LCP protocols used for PPP connection estabishment
 * *SCCP*: structures for SCCP user-data and management messages
 * *SIGTRAN*: structures for SIGTRAN (mostly M2PA and M3UA) messages
@@ -284,7 +284,9 @@ This subdirectory implements most of the 3GPP NAS protocol formats:
 * *TS24501_FGMM*: structures for the 5G mobility management messages from TS 24.501
 * *TS24501_FGSM*: structures for the 5G session management messages from TS 24.501
 * *TS24501_IE*: structures for many information elements from TS 24.501
+* *TS24501_UEPOL*, *TS24526_UEPOL* and *TS24588_UEPOL*: structures for the 5G UE policy protocol from TS 24.501, 526 and 588
 * *TS29002_MAPAppCtx*: functions that relies on the Pycrate_TCAP_MAPv2v3 ASN.1 module, dealing mostly with MAP application-contexts
+* *TS29002_MAPIE*: structure for the MAP AddressString object
 * *TS29274_GTPC*: structures for LTE/EPC GTP-C messages from TS 29.274
 * *TS29281_GTPU*: structures for LTE/EPC GTP-U messages from TS 29.281
 * *TS31111_SAT*: basic structures and dict for the SIM application toolkit
