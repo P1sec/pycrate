@@ -26,7 +26,7 @@
 # *--------------------------------------------------------
 #*/
 
-from pycrate_int_asn1dir.TCAP_MAPv2v3   import GLOBAL as GLOBAL_MAPv2v3
+from pycrate_asn1dir.TCAP_MAPv2v3   import GLOBAL as GLOBAL_MAPv2v3
 
 
 #------------------------------------------------------------------------------#
