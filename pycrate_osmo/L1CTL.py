@@ -219,6 +219,20 @@ L1CTLReset_dict = {
     }
 
 
+class ARFCNFlags(Envelope):
+    _GEN = (
+        Uint('PCS', bl=1),
+        Uint('Uplink', bl=1),
+        Uint('spare', bl=6),
+        )
+
+class ARFCNBand(Envelope):
+    _GEN = (
+        ARFCNFlags('Flags'),
+        Uint('ARFCN', bl=11),
+        )
+
+
 #------------------------------------------------------------------------------#
 # Message parameters
 #------------------------------------------------------------------------------#
@@ -232,7 +246,7 @@ class L1CTLInfoDL(Envelope):
     _GEN = (
         ChannelNumber(),    # GSM 08.58 channel number (9.3.1)
         LinkIdentifier(),   # GSM 08.58 link identifier (9.3.2)
-        Uint16('ARFCN'),
+        ARFCNBand('ARFCN'),
         Uint32('FrameNr'),
         Uint8('RxLevel'),   # 0 .. 63 in typical GSM notation (dBm+110)
         Uint8('SNR'),       # Signal/Noise Ration (dB)
@@ -321,7 +335,7 @@ class L1CTLFBSBFlags(Envelope):
 # the l1_info_ul header is in front
 class L1CTLFBSBReq(Envelope):
     _GEN = (
-        Uint16('ARFCN'),
+        ARFCNBand('ARFCN'),
         Uint16('Timeout'),  # in TDMA frames
         Uint16('FreqErrThres1'),
         Uint16('FreqErrThres2'),
@@ -413,7 +427,7 @@ class L1CTLDataReq(Envelope):
 
 class L1CTL_H0(Envelope):
     _GEN = (
-        Uint16('ARFCN'),
+        ARFCNBand('ARFCN'),
         )
 
 
@@ -475,8 +489,8 @@ class L1CTLPMReq(Envelope):
         Uint8('Type'),
         Uint24('pad', rep=REPR_HEX),
         Envelope('ARFCNRange', GEN=(
-            Uint16('ARFCNFrom'),
-            Uint16('ARFCNTo'))
+            ARFCNBand('ARFCNFrom'),
+            ARFCNBand('ARFCNTo'))
         ))
 
 
@@ -492,7 +506,7 @@ class L1CTLPMConf(Array):
 class L1CTLBurstInd(Envelope):
     _GEN = (
         Uint32('FrameNumber'),
-        Uint16('ARFCN'),    # ARFCN + band + ul indicator 
+        ARFCNBand('ARFCN'), # ARFCN + band + ul indicator
         ChannelNumber(),    # GSM 08.58 channel number (9.3.1)
         Uint8('Flags'),     # BI_FLG_xxx + burst_id = 2LSBs
         Uint8('RXLevel'),   # 0 .. 63 in typical GSM notation (dBm+110)
@@ -514,14 +528,14 @@ class L1CTLNeighPMReq(Envelope):
     _GEN = (
         Uint8('N'),
         Uint8('pad', rep=REPR_HEX),
-        Array('ARFCNs', GEN=Uint16('ARFCN'), num=64),
+        Array('ARFCNs', GEN=ARFCNBand('ARFCN'), num=64),
         Array('TNs', GEN=Uint8('TN'), num=64)
         )
 
 
 class L1CTLNeighPMInd(Array):
     _GEN = Envelope('NeighPM', GEN=(
-        Uint16('ARFCN'),
+        ARFCNBand('ARFCN'),
         Uint8('PM'),
         Uint8('PM2'),
         Uint8('TN'),
