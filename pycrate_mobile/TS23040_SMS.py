@@ -1154,11 +1154,11 @@ class TP_PI(Envelope):
 
 class SMS_DELIVER(SMS_TP):
     _GEN = (
-        Uint('TP_SRI', bl=1, dic=_TP_SRI_dict),
-        Uint('TP_UDHI', desc='UDH Indicator', bl=1),
         Uint('TP_RP', bl=1, dic=_TP_RP_dict),
-        Uint('TP_LP', desc='Loop Prevention', bl=1),
+        Uint('TP_UDHI', desc='UDH Indicator', bl=1),
+        Uint('TP_SRI', bl=1, dic=_TP_SRI_dict),
         Uint('spare', bl=1),
+        Uint('TP_LP', desc='Loop Prevention', bl=1),
         Uint('TP_MMS', desc='no More Message to Send', bl=1),
         Uint('TP_MTI', val=0, bl=2, dic=_TP_MTI_MT_dict),
         TP_OA(desc='Originating Address'),
@@ -1229,9 +1229,9 @@ class SMS_DELIVER_REPORT_RP_ACK(SMS_TP):
 class SMS_SUBMIT(SMS_TP):
     ENV_SEL_TRANS = False
     _GEN = (
-        Uint('TP_SRR', bl=1, dic=_TP_SRR_dict),
-        Uint('TP_UDHI', desc='UDH Indicator', bl=1),
         Uint('TP_RP', bl=1, dic=_TP_RP_dict),
+        Uint('TP_UDHI', desc='UDH Indicator', bl=1),
+        Uint('TP_SRR', bl=1, dic=_TP_SRR_dict),
         Uint('TP_VPF', bl=2, dic=_TP_VPF_dict),
         Uint('TP_RD', desc='Reject Duplicates', bl=1),
         Uint('TP_MTI', val=1, bl=2, dic=_TP_MTI_MT_dict),
@@ -1317,8 +1317,8 @@ class SMS_STATUS_REPORT(SMS_TP):
         Uint('spare', bl=1),
         Uint('TP_UDHI', desc='UDH Indicator', bl=1),
         Uint('TP_SRQ', bl=1, dic=_TP_SRQ_dict),
-        Uint('TP_LP', desc='Loop Prevention', bl=1),
         Uint('spare', bl=1),
+        Uint('TP_LP', desc='Loop Prevention', bl=1),
         Uint('TP_MMS', desc='no More Message to Send', bl=1),
         Uint('TP_MTI', val=2, bl=2, dic=_TP_MTI_MT_dict),
         Uint8('TP_MR', desc='Message Reference'),
