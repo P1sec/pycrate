@@ -438,6 +438,7 @@ class FGSIDSUPI(Envelope):
             DEFAULT=Buf('SUPI_Unk', rep=REPR_HEX),
             sel=lambda self: self.get_env()[1].get_val()),
         )
+# see TS 29.503, annex C, for a human-readable representation of SUPI
 
 
 class FGSIDGUTI(Envelope):
