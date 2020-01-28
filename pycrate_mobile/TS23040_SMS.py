@@ -902,51 +902,25 @@ class TP_UDH_IE(Envelope):
         self[0]._from_char(char)
         self[1]._from_char(char)
         char_lb = char._len_bit
-        char._len_bit = char._cur + 8*self[1].get_val()
+        char._len_bit = char._cur + (self[1].get_val()<<3)
         self[2]._from_char(char)
         if char._cur < char._len_bit:
             # length was longer than the expected structure
             self.append( Buf('unk', rep=REPR_HEX) )
             self[3]._from_char(char)
-        char._lb = char_lb
+        char._len_bit = char_lb
 
 
 class TP_UDH(Envelope):
     _GEN = (
         Uint8('UDHL'),
         Sequence('UDH', GEN=TP_UDH_IE('UDHIE')),
-        Uint('fill', rep=REPR_BIN), # WNG: not sure this will be aligned in the correct way 
         )
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[0].set_valauto(self[1].get_len)
-        self[2].set_blauto(self._set_fill_bl)
-    
-    def _set_fill_bl(self):
-        try:
-            dcs = self.get_env().get_env()['TP_DCS']
-        except:
-            return 0
-        else:
-            grp, cs = dcs['Group'](), dcs['Charset']()
-            if grp in (0, 1, 4, 5, 15) and cs == 0:
-                # DCS_7B
-                return (7 - (self[1].get_bl()%7)) % 7
-            elif grp in (12, 13) and cs in (0, 2):
-                # DCS_7B
-                return (7 - (self[1].get_bl()%7)) % 7
-            else:
-                return 0
-    
-    def _from_char(self, char):
-        if not self.get_trans():
-            self[0]._from_char(char)
-            clen = char._len_bit
-            char._len_bit = char._cur + 8*self[0]()
-            self[1]._from_char(char)
-            char._len_bit = clen
-            self[2]._from_char(char)
+        self[0].set_valauto(lambda: self[1].get_len())
+        self[1].set_blauto(lambda: self[0].get_val()<<3)
 
 
 class BufUD(Buf):
@@ -969,7 +943,7 @@ class BufUD(Buf):
     def get_dcs(self):
         try:
             dcs = self.get_env().get_env()['TP_DCS']
-        except:
+        except Exception:
             return self.DEFAULT_DCS
         else:
             grp, cs = dcs['Group'](), dcs['Charset']()
@@ -984,10 +958,22 @@ class BufUD(Buf):
                 return DCS_UCS
             return DCS_8B
     
+    def get_dcs7b_off(self):
+        try:
+            udh = self.get_env()['UDH']
+        except Exception:
+            return 0
+        else:
+            if udh.get_trans():
+                return 0
+            else:
+                len_udh = 8 + (udh[0].get_val() << 3)
+                return (7 - (len_udh%7)) % 7
+    
     def encode(self, val):
         dcs = self.get_dcs()
         if dcs == DCS_7B:
-            enc, cnt = encode_7b(val)
+            enc, cnt = encode_7b(val, self.get_dcs7b_off())
             self.set_val(enc)
             self._ENC_BL = 7*cnt
         elif dcs == DCS_UCS:
@@ -1002,12 +988,12 @@ class BufUD(Buf):
         if dcs == DCS_7B:
             try:
                 udhbl = self.get_env()['UDH'].get_bl()
-            except:
+            except Exception:
                 udhbl = 0
             if (udhbl + self._ENC_BL) % 8 == 1:
-                return decode_7b(self.get_val())[:-1]
+                return decode_7b(self.get_val(), self.get_dcs7b_off())[:-1]
             else:
-                return decode_7b(self.get_val())
+                return decode_7b(self.get_val(), self.get_dcs7b_off())
         elif dcs == DCS_UCS:
             return str(self.get_val(), 'utf-16-be')
         else:
@@ -1068,7 +1054,7 @@ class TP_UD(Envelope):
     def get_udhi(self):
         try:
             udhi = self.get_env()['TP_UDHI']
-        except:
+        except Exception:
             return 0
         else:
             return udhi()
@@ -1076,7 +1062,7 @@ class TP_UD(Envelope):
     def get_dcs(self):
         try:
             dcs = self.get_env()['TP_DCS']
-        except:
+        except Exception:
             return self[2].DEFAULT_DCS
         else:
             grp, cs = dcs['Group'](), dcs['Charset']()
@@ -1114,7 +1100,7 @@ class TP_CD(Envelope):
     def get_udhi(self):
         try:
             udhi = self.get_env()['TP_UDHI']
-        except:
+        except Exception:
             return 0
         else:
             return udhi()
