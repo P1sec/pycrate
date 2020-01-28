@@ -551,7 +551,7 @@ def encode_7b(txt, off=0):
     
     Args:
         txt (utf8 str): text string to encode
-        off (uint): bit offset, set to 1 for fragmented text, otherwise 0
+        off (uint): bit offset
      
     Returns:
         encoded buffer and septet count (bytes, uint)
@@ -572,7 +572,7 @@ def encode_7b(txt, off=0):
         else:
             cnt += 1
     # check the length in bits and add padding bits
-    pad = ((8-(7*len(arr))%8)%8)-off
+    pad = ((8-(7*len(arr)+off)%8)%8)
     arr.insert(0, (TYPE_UINT, 0, pad))
     if python_version < 3:
         return ''.join(reversed(pack_val(*arr)[0])), cnt
@@ -585,7 +585,7 @@ def decode_7b(buf, off=0):
     
     Args:
         buf (bytes): buffer to decode
-        off (uint): bit offset, set to 1 for fragmented text, otherwise 0
+        off (uint): bit offset
      
     Returns:
         decoded text string (utf8 str)
@@ -596,8 +596,8 @@ def decode_7b(buf, off=0):
         char = Charpy(bytes(reversed(buf)))
     # jump over the padding bits
     # WNG: in case of 7 bits padding, we will have an @ at the end 
-    chars_num = (8*len(buf)) // 7
-    char._cur = (8*len(buf))-(7*chars_num)-off
+    chars_num = (8*len(buf)-off) // 7
+    char._cur = (8*len(buf)-off)-(7*chars_num)
     # get all chars
     arr = [char.get_uint(7) for i in range(chars_num)]
     chars = []
