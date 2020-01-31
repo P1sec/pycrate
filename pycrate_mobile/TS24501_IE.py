@@ -412,7 +412,7 @@ class SUPI_IMSI(Envelope):
         Uint('ProtSchemeID', bl=4, dic=_ProtSchemeID_dict),
         Uint8('HNPKID'),
         Alt('Output', GEN={
-            0 : BufBCD('IMSI'),
+            0 : BufBCD('MSIN'),
             1 : SUCI_ECIESProfA(),
             2 : SUCI_ECIESProfB()
             },
