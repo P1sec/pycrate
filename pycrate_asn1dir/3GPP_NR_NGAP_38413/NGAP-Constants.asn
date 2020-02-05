@@ -141,9 +141,9 @@ maxProtocolIEs							INTEGER ::= 65535
 	maxnoofTAIinAoI						INTEGER ::= 16
 	maxnoofTimePeriods					INTEGER ::= 2
 	maxnoofTNLAssociations				INTEGER ::= 32
-	maxnoofXnExtTLAs					INTEGER ::= 2
+	maxnoofXnExtTLAs					INTEGER ::= 16
 	maxnoofXnGTP-TLAs					INTEGER ::= 16
-	maxnoofXnTLAs						INTEGER ::= 16
+	maxnoofXnTLAs						INTEGER ::= 2
 
 -- **************************************************************
 --
@@ -169,7 +169,7 @@ maxProtocolIEs							INTEGER ::= 65535
 	id-Cause												ProtocolIE-ID ::= 15
 	id-CellIDListForRestart									ProtocolIE-ID ::= 16
 	id-ConcurrentWarningMessageInd							ProtocolIE-ID ::= 17
-	id-CoreNetworkAssistanceInformation						ProtocolIE-ID ::= 18
+	id-CoreNetworkAssistanceInformationForInactive			ProtocolIE-ID ::= 18
 	id-CriticalityDiagnostics								ProtocolIE-ID ::= 19
 	id-DataCodingScheme										ProtocolIE-ID ::= 20
 	id-DefaultPagingDRX										ProtocolIE-ID ::= 21
@@ -309,5 +309,21 @@ maxProtocolIEs							INTEGER ::= 65535
 	id-SecurityResult										ProtocolIE-ID ::= 156
 	id-ENDC-SONConfigurationTransferDL						ProtocolIE-ID ::= 157
 	id-ENDC-SONConfigurationTransferUL						ProtocolIE-ID ::= 158
+	id-OldAssociatedQosFlowList-ULendmarkerexpected			ProtocolIE-ID ::= 159
+	id-CNTypeRestrictionsForEquivalent						ProtocolIE-ID ::= 160
+	id-CNTypeRestrictionsForServing							ProtocolIE-ID ::= 161
+	id-NewGUAMI												ProtocolIE-ID ::= 162
+	id-ULForwarding											ProtocolIE-ID ::= 163
+	id-ULForwardingUP-TNLInformation						ProtocolIE-ID ::= 164
+	id-CNAssistedRANTuning									ProtocolIE-ID ::= 165
+	id-CommonNetworkInstance								ProtocolIE-ID ::= 166
+	id-NGRAN-TNLAssociationToRemoveList						ProtocolIE-ID ::= 167
+	id-TNLAssociationTransportLayerAddressNGRAN				ProtocolIE-ID ::= 168
+	id-EndpointIPAddressAndPort								ProtocolIE-ID ::= 169
+	id-LocationReportingAdditionalInfo						ProtocolIE-ID ::= 170
+	id-SourceToTarget-AMFInformationReroute					ProtocolIE-ID ::= 171
+	id-AdditionalULForwardingUPTNLInformation				ProtocolIE-ID ::= 172
+	id-SCTP-TLAs											ProtocolIE-ID ::= 173
+
 
 END

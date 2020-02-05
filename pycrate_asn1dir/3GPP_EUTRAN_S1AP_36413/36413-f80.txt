@@ -123,7 +123,7 @@ Foreword	14
 8.4.4.4	Abnormal Conditions	64
 8.4.5	Handover Cancellation	64
 8.4.5.1	General	64
-8.4.5.2	Successful Operation	64
+8.4.5.2	Successful Operation	65
 8.4.5.3	Unsuccessful Operation	65
 8.4.5.4	Abnormal Conditions	65
 8.4.6	eNB Status Transfer	65
@@ -134,7 +134,7 @@ Foreword	14
 8.4.7	MME Status Transfer	66
 8.4.7.1	General	66
 8.4.7.2	Successful Operation	66
-8.4.7.3	Unsuccessful Operation	66
+8.4.7.3	Unsuccessful Operation	67
 8.4.7.4	Abnormal Conditions	67
 8.5	Paging	67
 8.5.1	General	67
@@ -143,62 +143,62 @@ Foreword	14
 8.5.4	Abnormal Conditions	68
 8.6	NAS transport	68
 8.6.1	General	68
-8.6.2	Successful Operations	68
-8.6.2.1	Initial UE Message	68
+8.6.2	Successful Operations	69
+8.6.2.1	Initial UE Message	69
 8.6.2.2	DOWNLINK NAS TRANSPORT	70
 8.6.2.3	UPLINK NAS TRANSPORT	71
 8.6.2.4	NAS NON DELIVERY INDICATION	72
 8.6.2.4a	NAS DELIVERY INDICATION	72
-8.6.2.5	Reroute NAS Request	72
+8.6.2.5	Reroute NAS Request	73
 8.6.3	Unsuccessful Operation	73
 8.6.4	Abnormal Conditions	73
 8.7	Management procedures	73
 8.7.1	Reset	73
 8.7.1.1	General	73
-8.7.1.2	Successful Operation	73
-8.7.1.2.1	Reset Procedure Initiated from the MME	73
-8.7.1.2.2	Reset Procedure Initiated from the E-UTRAN	74
+8.7.1.2	Successful Operation	74
+8.7.1.2.1	Reset Procedure Initiated from the MME	74
+8.7.1.2.2	Reset Procedure Initiated from the E-UTRAN	75
 8.7.1.3	Abnormal Conditions	75
 8.7.1.3.1	Abnormal Condition at the EPC	75
-8.7.1.3.2	Abnormal Condition at the E-UTRAN	75
-8.7.1.3.3	Crossing of Reset Messages	75
+8.7.1.3.2	Abnormal Condition at the E-UTRAN	76
+8.7.1.3.3	Crossing of Reset Messages	76
 8.7.2	Error Indication	76
 8.7.2.1	General	76
 8.7.2.2	Successful Operation	76
-8.7.2.3	Abnormal Conditions	76
-8.7.3	S1 Setup	76
-8.7.3.1	General	76
+8.7.2.3	Abnormal Conditions	77
+8.7.3	S1 Setup	77
+8.7.3.1	General	77
 8.7.3.2	Successful Operation	77
-8.7.3.3	Unsuccessful Operation	77
+8.7.3.3	Unsuccessful Operation	78
 8.7.3.4	Abnormal Conditions	78
 8.7.4	eNB Configuration Update	78
 8.7.4.1	General	78
 8.7.4.2	Successful Operation	78
 8.7.4.3	Unsuccessful Operation	79
 8.7.4.4	Abnormal Conditions	79
-8.7.5	MME Configuration Update	79
-8.7.5.1	General	79
-8.7.5.2	Successful Operation	79
+8.7.5	MME Configuration Update	80
+8.7.5.1	General	80
+8.7.5.2	Successful Operation	80
 8.7.5.3	Unsuccessful Operation	80
-8.7.5.4	Abnormal Conditions	80
-8.7.6	Overload Start	80
-8.7.6.1	General	80
+8.7.5.4	Abnormal Conditions	81
+8.7.6	Overload Start	81
+8.7.6.1	General	81
 8.7.6.2	Successful Operation	81
 8.7.6.3	Unsuccessful Operation	82
 8.7.7	Overload Stop	82
 8.7.7.1	General	82
 8.7.7.2	Successful Operation	82
 8.7.7.3	Unsuccessful Operation	82
-8.8	S1 CDMA2000 Tunnelling Procedures	82
-8.8.1	General	82
+8.8	S1 CDMA2000 Tunnelling Procedures	83
+8.8.1	General	83
 8.8.2	Successful Operations	83
 8.8.2.1	Downlink S1 CDMA2000 Tunnelling	83
-8.8.2.2	Uplink S1 CDMA2000 Tunnelling	83
+8.8.2.2	Uplink S1 CDMA2000 Tunnelling	84
 8.8.3	Unsuccessful Operation	84
 8.8.4	Abnormal Conditions	84
-8.9	UE Capability Info Indication	84
-8.9.1	General	84
-8.9.2	Successful Operation	84
+8.9	UE Capability Info Indication	85
+8.9.1	General	85
+8.9.2	Successful Operation	85
 8.10	Trace Procedures	85
 8.10.1	Trace Start	85
 8.10.1.1	General	85
@@ -206,452 +206,452 @@ Foreword	14
 8.10.2	Trace Failure Indication	86
 8.10.2.1	General	86
 8.10.2.2	Successful Operation	86
-8.10.3	Deactivate Trace	86
-8.10.3.1	General	86
-8.10.3.2	Successful Operation	86
+8.10.3	Deactivate Trace	87
+8.10.3.1	General	87
+8.10.3.2	Successful Operation	87
 8.10.4	Cell Traffic Trace	87
 8.10.4.1	General	87
 8.10.4.2	Successful Operation	87
-8.11	Location Reporting Procedures	87
-8.11.1	Location Reporting Control	87
-8.11.1.1	General	87
-8.11.1.2	Successful Operation	87
+8.11	Location Reporting Procedures	88
+8.11.1	Location Reporting Control	88
+8.11.1.1	General	88
+8.11.1.2	Successful Operation	88
 8.11.1.3	Abnormal Conditions	88
 8.11.2	Location Report Failure Indication	88
 8.11.2.1	General	88
-8.11.2.2	Successful Operation	88
-8.11.3	Location Report	88
-8.11.3.1	General	88
+8.11.2.2	Successful Operation	89
+8.11.3	Location Report	89
+8.11.3.1	General	89
 8.11.3.2	Successful Operation	89
 8.11.3.3	Abnormal Conditions	89
 8.12	Warning Message Transmission Procedures	89
 8.12.1	Write-Replace Warning	89
 8.12.1.1	General	89
-8.12.1.2	Successful Operation	89
-8.12.1.3	Abnormal Conditions	90
+8.12.1.2	Successful Operation	90
+8.12.1.3	Abnormal Conditions	91
 8.12.2	Kill	91
 8.12.2.1	General	91
 8.12.2.2	Successful Operation	91
-8.12.3	PWS Restart Indication	91
-8.12.3.1	General	91
+8.12.3	PWS Restart Indication	92
+8.12.3.1	General	92
 8.12.3.2	Successful Operation	92
 8.12.4	PWS Failure Indication	92
 8.12.4.1	General	92
 8.12.4.2	Successful Operation	92
-8.13	eNB Direct Information Transfer	92
-8.13.1	General	92
+8.13	eNB Direct Information Transfer	93
+8.13.1	General	93
 8.13.2	Successful Operation	93
 8.13.2.1	eNB Direct Information Transfer	93
 8.13.3	Abnormal Conditions	93
 8.14	MME Direct Information Transfer	93
 8.14.1	General	93
-8.14.2	Successful Operation	93
-8.14.2.1	MME Direct Information Transfer	93
+8.14.2	Successful Operation	94
+8.14.2.1	MME Direct Information Transfer	94
 8.14.3	Abnormal Conditions	94
 8.15	eNB Configuration Transfer	94
 8.15.1	General	94
 8.15.2	Successful Operation	94
 8.15.2.1	eNB Configuration Transfer	94
-8.15.3	Abnormal Conditions	94
-8.16	MME Configuration Transfer	94
-8.16.1	General	94
+8.15.3	Abnormal Conditions	95
+8.16	MME Configuration Transfer	95
+8.16.1	General	95
 8.16.2	Successful Operation	95
 8.16.2.1	MME Configuration Transfer	95
 8.16.3	Abnormal Conditions	96
 8.17	LPPa transport	96
 8.17.1	General	96
-8.17.2	Successful Operations	96
-8.17.2.1	DOWNLINK UE ASSOCIATED LPPA TRANSPORT	96
-8.17.2.2	UPLINK UE ASSOCIATED LPPA TRANSPORT	96
+8.17.2	Successful Operations	97
+8.17.2.1	DOWNLINK UE ASSOCIATED LPPA TRANSPORT	97
+8.17.2.2	UPLINK UE ASSOCIATED LPPA TRANSPORT	97
 8.17.2.3	DOWNLINK NON UE ASSOCIATED LPPA TRANSPORT	97
-8.17.2.4	UPLINK NON UE ASSOCIATED LPPA TRANSPORT	97
-8.17.3	Unsuccessful Operation	97
-8.17.4	Abnormal Conditions	97
-8.18	Secondary RAT Data Usage Report	97
-8.18.1	General	97
+8.17.2.4	UPLINK NON UE ASSOCIATED LPPA TRANSPORT	98
+8.17.3	Unsuccessful Operation	98
+8.17.4	Abnormal Conditions	98
+8.18	Secondary RAT Data Usage Report	98
+8.18.1	General	98
 8.18.2	Successful Operations	98
 8.18.2.1	SECONDARY RAT DATA USAGE REPORT	98
-8.18.3	Unsuccessful Operation	98
-8.18.4	Abnormal Conditions	98
-9	Elements for S1AP Communication	99
-9.1	Message Functional Definition and Content	99
-9.1.1	General	99
-9.1.2	Message Contents	99
-9.1.2.1	Presence	99
-9.1.2.2	Criticality	99
-9.1.2.3	Range	99
-9.1.2.4	Assigned Criticality	99
-9.1.3	E-RAB Management Messages	100
-9.1.3.1	E-RAB SETUP REQUEST	100
-9.1.3.2	E-RAB SETUP RESPONSE	101
-9.1.3.3	E-RAB MODIFY REQUEST	102
-9.1.3.4	E-RAB MODIFY RESPONSE	103
-9.1.3.5	E-RAB RELEASE COMMAND	103
-9.1.3.6	E-RAB RELEASE RESPONSE	104
-9.1.3.7	E-RAB RELEASE INDICATION	104
-9.1.3.8	E-RAB MODIFICATION INDICATION	105
-9.1.3.9	E-RAB MODIFICATION CONFIRM	106
-9.1.4	Context Management Messages	106
-9.1.4.1	INITIAL CONTEXT SETUP REQUEST	106
-9.1.4.2	Void	108
-9.1.4.3	INITIAL CONTEXT SETUP RESPONSE	108
-9.1.4.4	INITIAL CONTEXT SETUP FAILURE	108
-9.1.4.5	UE CONTEXT RELEASE REQUEST	109
-9.1.4.6	UE CONTEXT RELEASE COMMAND	109
-9.1.4.7	UE CONTEXT RELEASE COMPLETE	109
-9.1.4.8	UE CONTEXT MODIFICATION REQUEST	110
-9.1.4.9	UE CONTEXT MODIFICATION RESPONSE	110
-9.1.4.10	UE CONTEXT MODIFICATION FAILURE	110
-9.1.4.11	UE RADIO CAPABILITY MATCH REQUEST	111
-9.1.4.12	UE RADIO CAPABILITY MATCH RESPONSE	111
-9.1.4.13	UE CONTEXT MODIFICATION INDICATION	111
-9.1.4.14	UE CONTEXT MODIFICATION CONFIRM	112
-9.1.4.15	UE CONTEXT SUSPEND REQUEST	112
-9.1.4.16	UE CONTEXT SUSPEND RESPONSE	112
-9.1.4.17	UE CONTEXT RESUME REQUEST	112
-9.1.4.18	UE CONTEXT RESUME RESPONSE	113
-9.1.4.19	UE CONTEXT RESUME FAILURE	113
-9.1.4.20	CONNECTION ESTABLISHMENT INDICATION	114
-9.1.4.21	RETRIEVE UE INFORMATION	114
-9.1.4.22	UE INFORMATION TRANSFER	114
-9.1.4.23	eNB CP RELOCATION INDICATION	115
-9.1.4.24	MME CP RELOCATION INDICATION	115
-9.1.5	Handover Signalling Messages	116
-9.1.5.1	HANDOVER REQUIRED	116
-9.1.5.2	HANDOVER COMMAND	117
-9.1.5.3	HANDOVER PREPARATION FAILURE	118
-9.1.5.4	HANDOVER REQUEST	119
-9.1.5.5	HANDOVER REQUEST ACKNOWLEDGE	120
-9.1.5.6	HANDOVER FAILURE	121
-9.1.5.7	HANDOVER NOTIFY	121
-9.1.5.8	PATH SWITCH REQUEST	122
-9.1.5.9	PATH SWITCH REQUEST ACKNOWLEDGE	123
-9.1.5.10	PATH SWITCH REQUEST FAILURE	124
-9.1.5.11	HANDOVER CANCEL	124
-9.1.5.12	HANDOVER CANCEL ACKNOWLEDGE	124
-9.1.5.13	eNB STATUS TRANSFER	124
-9.1.5.14	MME STATUS TRANSFER	124
-9.1.6	PAGING	125
-9.1.7	NAS Transport Messages	126
-9.1.7.1	INITIAL UE MESSAGE	126
-9.1.7.2	DOWNLINK NAS TRANSPORT	127
-9.1.7.3	UPLINK NAS TRANSPORT	127
-9.1.7.4	NAS NON DELIVERY INDICATION	128
-9.1.7.4a	NAS DELIVERY INDICATION	128
-9.1.7.5	REROUTE NAS REQUEST	129
-9.1.8	Management messages	129
-9.1.8.1	RESET	129
-9.1.8.2	RESET ACKNOWLEDGE	129
-9.1.8.3	ERROR INDICATION	130
-9.1.8.4	S1 SETUP REQUEST	130
-9.1.8.5	S1 SETUP RESPONSE	131
-9.1.8.6	S1 SETUP FAILURE	132
-9.1.8.7	ENB CONFIGURATION UPDATE	132
-9.1.8.8	ENB CONFIGURATION UPDATE ACKNOWLEDGE	133
-9.1.8.9	ENB CONFIGURATION UPDATE FAILURE	134
-9.1.8.10	MME CONFIGURATION UPDATE	134
-9.1.8.11	MME CONFIGURATION UPDATE ACKNOWLEDGE	134
-9.1.8.12	MME CONFIGURATION UPDATE FAILURE	135
-9.1.8.13	OVERLOAD START	135
-9.1.8.14	OVERLOAD STOP	135
-9.1.9	S1 CDMA2000 Tunnelling Messages	136
-9.1.9.1	DOWNLINK S1 CDMA2000 TUNNELLING	136
-9.1.9.2	UPLINK S1 CDMA2000 TUNNELLING	136
-9.1.10	UE CAPABILITY INFO INDICATION	136
-9.1.11	Trace Messages	137
-9.1.11.1	TRACE START	137
-9.1.11.2	TRACE FAILURE INDICATION	137
-9.1.11.3	DEACTIVATE TRACE	138
-9.1.12	Location Reporting Messages	138
-9.1.12.1	LOCATION REPORTING CONTROL	138
-9.1.12.2	LOCATION REPORT FAILURE INDICATION	138
-9.1.12.3	LOCATION REPORT	138
-9.1.13	Warning Message Transmission Messages	139
-9.1.13.1	WRITE-REPLACE WARNING REQUEST	139
-9.1.13.2	WRITE-REPLACE WARNING RESPONSE	139
-9.1.13.3	KILL REQUEST	139
-9.1.13.4	KILL RESPONSE	140
-9.1.13.5	PWS RESTART INDICATION	140
-9.1.13.6	PWS FAILURE INDICATION	141
-9.1.14	eNB DIRECT INFORMATION TRANSFER	141
-9.1.15	MME DIRECT INFORMATION TRANSFER	141
-9.1.16	eNB CONFIGURATION TRANSFER	141
-9.1.17	MME CONFIGURATION TRANSFER	141
-9.1.18	CELL TRAFFIC TRACE	142
-9.1.19	LPPa Transport Messages	142
-9.1.19.1	DOWNLINK UE ASSOCIATED LPPA TRANSPORT	142
-9.1.19.2	UPLINK UE ASSOCIATED LPPA TRANSPORT	142
-9.1.19.3	DOWNLINK NON UE ASSOCIATED LPPA TRANSPORT	143
-9.1.19.4	UPLINK NON UE ASSOCIATED LPPA TRANSPORT	143
-9.1.20	Secondary RAT Report Data Usage Messages	143
-9.1.20.1	SECONDARY RAT DATA USAGE REPORT	143
-9.2	Information Element Definitions	144
-9.2.0	General	144
-9.2.1	Radio Network Layer Related IEs	144
-9.2.1.1	Message Type	144
-9.2.1.2	E-RAB ID	144
-9.2.1.3	Cause	144
-9.2.1.3a	RRC Establishment Cause	148
-9.2.1.4	Trace Activation	148
-9.2.1.5	Source ID	149
-9.2.1.6	Target ID	149
-9.2.1.7	Source eNB to Target eNB Transparent Container	150
-9.2.1.8	Target eNB to Source eNB Transparent Container	151
-9.2.1.9	Source RNC to Target RNC Transparent Container	152
-9.2.1.10	Target RNC to Source RNC Transparent Container	152
-9.2.1.11	Source BSS to Target BSS Transparent Container	152
-9.2.1.12	Target BSS to Source BSS Transparent Container	152
-9.2.1.13	Handover Type	152
-9.2.1.14	Extended RNC-ID	152
-9.2.1.15	E-RAB Level QoS Parameters	152
-9.2.1.16	Paging DRX	153
-9.2.1.17	Paging Cause	153
-9.2.1.18	GBR QoS Information	153
-9.2.1.19	Bit Rate	154
-9.2.1.20	UE Aggregate Maximum Bit Rate	155
-9.2.1.21	Criticality Diagnostics	155
-9.2.1.22	Handover Restriction List	156
-9.2.1.23	CDMA2000-PDU	158
-9.2.1.24	CDMA2000 RAT Type	158
-9.2.1.25	CDMA2000 Sector ID	159
-9.2.1.26	Security Context	159
-9.2.1.27	UE Radio Capability	159
-9.2.1.28	CDMA2000 HO Status	159
-9.2.1.29	CDMA2000 HO Required Indication	160
-9.2.1.30	1xRTT MEID	160
-9.2.1.31	eNB Status Transfer Transparent Container	160
-9.2.1.32	COUNT Value	162
-9.2.1.33	CDMA2000 1xRTT RAND	162
-9.2.1.34	Request Type	163
-9.2.1.35	CDMA2000 1xRTT SRVCC Info	163
-9.2.1.36	E-RAB List	163
-9.2.1.37	Global eNB ID	164
-9.2.1.37a	Global en-gNB ID	164
-9.2.1.38	E-UTRAN CGI	164
-9.2.1.39	Subscriber Profile ID for RAT/Frequency priority	164
-9.2.1.40	UE Security Capabilities	165
-9.2.1.41	Security Key	165
-9.2.1.42	UE History Information	165
-9.2.1.43	Last Visited Cell Information	166
-9.2.1.43a	Last Visited E-UTRAN Cell Information	166
-9.2.1.43b	Last Visited GERAN Cell Information	166
-9.2.1.44	Message Identifier	167
-9.2.1.45	Serial Number	167
-9.2.1.46	Warning Area List	167
-9.2.1.47	Emergency Area ID	167
-9.2.1.48	Repetition Period	168
-9.2.1.49	Number of Broadcasts Requested	168
-9.2.1.50	Warning Type	168
-9.2.1.51	Warning Security Information	168
-9.2.1.52	Data Coding Scheme	168
-9.2.1.53	Warning Message Contents	169
-9.2.1.54	Broadcast Completed Area List	169
-9.2.1.55	Inter-system Information Transfer Type	169
-9.2.1.56	Source To Target Transparent Container	170
-9.2.1.57	Target To Source Transparent Container	170
-9.2.1.58	SRVCC Operation Possible	171
-9.2.1.59	SRVCC HO Indication	171
-9.2.1.60	Allocation and Retention Priority	171
-9.2.1.61	Time to wait	172
-9.2.1.62	CSG Id	172
-9.2.1.63	CSG Id List	172
-9.2.1.64	MS Classmark 2	173
-9.2.1.65	MS Classmark 3	173
-9.2.1.66	Cell Type	173
-9.2.1.67	Old BSS to New BSS Information	173
-9.2.1.68	Layer 3 Information	173
-9.2.1.69	E-UTRAN Round Trip Delay Estimation Info	173
-9.2.1.70	Broadcast Cancelled Area List	173
-9.2.1.71	Number of Broadcasts	174
-9.2.1.72	Concurrent Warning Message Indicator	174
-9.2.1.73	CSG Membership Status	175
-9.2.1.74	Cell Access Mode	175
-9.2.1.75	Extended Repetition Period	175
-9.2.1.76	Data Forwarding Not Possible	175
-9.2.1.77	PS Service Not Available	175
-9.2.1.78	Paging Priority	175
-9.2.1.79	Relay Node Indicator	176
-9.2.1.80	Correlation ID	176
-9.2.1.81	MDT Configuration	176
-9.2.1.82	MME Relay Support Indicator	179
-9.2.1.83	Management Based MDT Allowed	179
-9.2.1.84	GW Context Release Indication	180
-9.2.1.85	Voice Support Match Indicator	180
-9.2.1.86	M3 Configuration	180
-9.2.1.87	M4 Configuration	180
-9.2.1.88	M5 Configuration	180
-9.2.1.89	MDT PLMN List	181
-9.2.1.90	COUNT Value Extended	181
-9.2.1.91	Kill-all Warning Messages Indicator	181
-9.2.1.92	LHN ID	181
-9.2.1.93	User Location Information	181
-9.2.1.94	MBSFN-ResultToLog	182
-9.2.1.95	EARFCN	182
-9.2.1.96	Expected UE Behaviour	182
-9.2.1.97	Expected UE Activity Behaviour	183
-9.2.1.98	UE Radio Capability for Paging	183
-9.2.1.99	ProSe Authorized	183
-9.2.1.100	COUNT Value for PDCP SN Length 18	184
-9.2.1.101	M6 Configuration	184
-9.2.1.102	M7 Configuration	184
-9.2.1.103	Assistance Data for Paging	185
-9.2.1.104	Assistance Data for Recommended Cells	185
-9.2.1.105	Information on Recommended Cells and eNBs for Paging	185
-9.2.1.106	Recommended Cells for Paging	185
-9.2.1.107	Recommended eNBs for Paging	186
-9.2.1.108	Assistance Data for CE capable UEs	186
-9.2.1.109	Cell Identifier and Coverage Enhancement Level	187
-9.2.1.110	Paging Attempt Information	187
-9.2.1.111	Paging eDRX Information	187
-9.2.1.112	UE Retention Information	187
-9.2.1.113	UE User Plane CIoT Support Indicator	187
-9.2.1.114	NB-IoT Default Paging DRX	188
-9.2.1.115	NB-IoT Paging eDRX Information	188
-9.2.1.116	Bearer Type	188
-9.2.1.117	RAT Type	188
-9.2.1.118	CE-mode-B Support Indicator	188
-9.2.1.119	SRVCC Operation Not Possible	188
-9.2.1.120	V2X Services Authorized	189
-9.2.1.121	Served DCNs Items	189
-9.2.1.122	UE Sidelink Aggregate Maximum Bit Rate	189
-9.2.1.123	Enhanced Coverage Restricted	189
-9.2.1.124	Secondary RAT Usage Report List	190
-9.2.1.125	Handover Flag	191
-9.2.1.126	Extended Bit Rate	191
-9.2.1.127	NR UE Security Capabilities	191
-9.2.1.128	UE Application layer measurement configuration	191
-9.2.1.129	CE-mode-B Restricted	192
-9.2.1.130	Packet Loss Rate	193
-9.2.1.131 	Global RAN Node ID	193
-9.2.1.132	Global gNB ID	193
-9.2.1.133	Source NG-RAN Node To Target NG-RAN Node Transparent Container	193
-9.2.1.134	Target NG-RAN Node To Source NG-RAN Node Transparent Container	194
-9.2.1.135	LTE-M Indication	194
-9.2.1.136	Aerial UE subscription information	194
-9.2.1.137	Bluetooth Measurement Configuration	194
-9.2.1.138	WLAN Measurement Configuration	194
-9.2.1.139	Warning Area Coordinates	195
-9.2.1.140	Subscription Based UE Differentiation Information	195
-9.2.1.141	PSCell Information	196
-9.2.1.142	NR CGI	197
-9.2.1.143	Time Since Secondary Node Release	197
-9.2.2	Transport Network Layer Related IEs	198
-9.2.2.1	Transport Layer Address	198
-9.2.2.2	GTP-TEID	198
-9.2.2.3	Tunnel Information	198
-9.2.3	NAS Related IEs	198
-9.2.3.1	LAI	198
-9.2.3.2	RAC	198
-9.2.3.3	MME UE S1AP ID	199
-9.2.3.4	eNB UE S1AP ID	199
-9.2.3.5	NAS-PDU	199
-9.2.3.6	S-TMSI	199
-9.2.3.7	TAC	199
-9.2.3.8	PLMN Identity	199
-9.2.3.9	GUMMEI	200
-9.2.3.10	UE Identity Index value	200
-9.2.3.11	IMSI	200
-9.2.3.12	MMEC	200
-9.2.3.13	UE Paging Identity	201
-9.2.3.14	DL Forwarding	201
-9.2.3.15	Direct Forwarding Path Availability	201
-9.2.3.16	TAI	201
-9.2.3.17	Relative MME Capacity	202
-9.2.3.18	UE S1AP ID pair	202
-9.2.3.19	Overload Response	202
-9.2.3.20	Overload Action	202
-9.2.3.21	CS Fallback Indicator	202
-9.2.3.22	CN Domain	203
-9.2.3.23	RIM Transfer	203
-9.2.3.24	RIM Information	203
-9.2.3.25	RIM Routing Address	203
-9.2.3.26	SON Configuration Transfer	204
-9.2.3.26a	EN-DC SON Configuration Transfer	205
-9.2.3.27	SON Information	205
-9.2.3.28	SON Information Reply	206
-9.2.3.29	X2 TNL Configuration Info	206
-9.2.3.30	NAS Security Parameters from E-UTRAN	207
-9.2.3.31	NAS Security Parameters to E-UTRAN	207
-9.2.3.32	LPPa-PDU	208
-9.2.3.33	Routing ID	208
-9.2.3.34	Time Synchronisation Info	208
-9.2.3.35	Void	208
-9.2.3.36	Traffic Load Reduction Indication	208
-9.2.3.37	Additional CS Fallback Indicator	209
-9.2.3.38	Masked IMEISV	209
-9.2.3.39	SON Information Report	209
-9.2.3.40	RLF Report Information	209
-9.2.3.41	Muting Pattern Information	209
-9.2.3.42	Synchronisation Information	210
-9.2.3.43	Listening Subframe Pattern	210
-9.2.3.44	MME Group ID	210
-9.2.3.45	Additional GUTI	211
-9.2.3.46	Extended UE Identity Index Value	211
-9.2.3.47	NB-IoT UE Identity Index Value	211
-9.2.3.48	DL NAS PDU Delivey Request	211
-9.2.3.49	DL CP Security Information	211
-9.2.3.50	UL CP Security Information	211
-9.2.3.51	UE Capability Info Request	212
-9.2.3.52	5GS TAI	212
-9.2.3.53	5GS TAC	212
-9.2.3.54	End Indication	212
-9.2.3.55	Pending Data Indication	212
-9.3	Message and Information Element Abstract Syntax (with ASN.1)	213
-9.3.0	General	213
-9.3.1	Usage of private message mechanism for non-standard use	213
-9.3.2	Elementary Procedure Definitions	214
-9.3.3	PDU Definitions	229
-9.3.4	Information Element Definitions	289
-9.3.5	Common Definitions	343
-9.3.6	Constant Definitions	343
-9.3.7	Container Definitions	352
-9.4	Message Transfer Syntax	356
-9.5	Timers	356
-10	Handling of Unknown, Unforeseen and Erroneous Protocol Data	357
-10.1	General	357
-10.2	Transfer Syntax Error	357
-10.3	Abstract Syntax Error	357
-10.3.1	General	357
-10.3.2	Criticality Information	358
-10.3.3	Presence Information	358
-10.3.4	Not comprehended IE/IE group	359
-10.3.4.1	Procedure Code	359
-10.3.4.1A	Type of Message	359
-10.3.4.2	IEs other than the Procedure Code and Type of Message	359
-10.3.5	Missing IE or IE group	360
-10.3.6	IEs or IE groups received in wrong order or with too many occurrences or erroneously present	361
-10.4	Logical Error	362
-10.5	Exceptions	362
-10.6	Handling of AP ID	363
-Annex A (informative):	S1AP Transparent containers content	364
-Annex B (normative):	IEs for SON Transfer	365
-B.1	Tabular definition	365
-B.1.1	SON Transfer Application Identity	365
-B.1.2	SON Transfer Request Container	365
-B.1.3	SON Transfer Response Container	366
-B.1.4	SON Transfer Cause	367
-B.1.5	Cell Load Reporting Response	369
-B.1.6	E-UTRAN Cell Load Reporting Response	369
-B.1.7	Multi-Cell Load Reporting Request	370
-B.1.8	IRAT Cell ID	370
-B.1.9	Multi-Cell Load Reporting Response	370
-B.1.10	Cell Load Reporting Cause	371
-B.1.11	Event-Triggered Cell Load Reporting Request	372
-B.1.12	Event-triggered Cell Load Reporting Response	372
-B.1.13	HO Report	372
-B.1.14	Cell Activation Request	373
-B.1.15	Cell Activation Response	374
-B.1.16	Cell State Indication	374
-B.1.17	Failure Event Report	374
-B.1.18	eHRPD Sector ID	375
-B.1.19	eHRPD Sector Load Reporting Response	375
-B.1.20	eHRPD Composite Available Capacity	375
-B.1.21	eHRPD Sector Capacity Class Value	376
-B.1.22	eHRPD Capacity Value	376
-B.1.23	Candidate PCI	376
-B.2	ASN.1 definition	376
-Annex C (informative):	Processing of Transparent Containers at the MME	381
-Annex D (informative):	Change history	382
+8.18.3	Unsuccessful Operation	99
+8.18.4	Abnormal Conditions	99
+9	Elements for S1AP Communication	100
+9.1	Message Functional Definition and Content	100
+9.1.1	General	100
+9.1.2	Message Contents	100
+9.1.2.1	Presence	100
+9.1.2.2	Criticality	100
+9.1.2.3	Range	100
+9.1.2.4	Assigned Criticality	100
+9.1.3	E-RAB Management Messages	101
+9.1.3.1	E-RAB SETUP REQUEST	101
+9.1.3.2	E-RAB SETUP RESPONSE	102
+9.1.3.3	E-RAB MODIFY REQUEST	103
+9.1.3.4	E-RAB MODIFY RESPONSE	104
+9.1.3.5	E-RAB RELEASE COMMAND	104
+9.1.3.6	E-RAB RELEASE RESPONSE	105
+9.1.3.7	E-RAB RELEASE INDICATION	105
+9.1.3.8	E-RAB MODIFICATION INDICATION	106
+9.1.3.9	E-RAB MODIFICATION CONFIRM	107
+9.1.4	Context Management Messages	107
+9.1.4.1	INITIAL CONTEXT SETUP REQUEST	107
+9.1.4.2	Void	109
+9.1.4.3	INITIAL CONTEXT SETUP RESPONSE	109
+9.1.4.4	INITIAL CONTEXT SETUP FAILURE	109
+9.1.4.5	UE CONTEXT RELEASE REQUEST	110
+9.1.4.6	UE CONTEXT RELEASE COMMAND	110
+9.1.4.7	UE CONTEXT RELEASE COMPLETE	110
+9.1.4.8	UE CONTEXT MODIFICATION REQUEST	111
+9.1.4.9	UE CONTEXT MODIFICATION RESPONSE	111
+9.1.4.10	UE CONTEXT MODIFICATION FAILURE	111
+9.1.4.11	UE RADIO CAPABILITY MATCH REQUEST	112
+9.1.4.12	UE RADIO CAPABILITY MATCH RESPONSE	112
+9.1.4.13	UE CONTEXT MODIFICATION INDICATION	112
+9.1.4.14	UE CONTEXT MODIFICATION CONFIRM	113
+9.1.4.15	UE CONTEXT SUSPEND REQUEST	113
+9.1.4.16	UE CONTEXT SUSPEND RESPONSE	113
+9.1.4.17	UE CONTEXT RESUME REQUEST	113
+9.1.4.18	UE CONTEXT RESUME RESPONSE	114
+9.1.4.19	UE CONTEXT RESUME FAILURE	114
+9.1.4.20	CONNECTION ESTABLISHMENT INDICATION	115
+9.1.4.21	RETRIEVE UE INFORMATION	115
+9.1.4.22	UE INFORMATION TRANSFER	115
+9.1.4.23	eNB CP RELOCATION INDICATION	116
+9.1.4.24	MME CP RELOCATION INDICATION	116
+9.1.5	Handover Signalling Messages	117
+9.1.5.1	HANDOVER REQUIRED	117
+9.1.5.2	HANDOVER COMMAND	118
+9.1.5.3	HANDOVER PREPARATION FAILURE	119
+9.1.5.4	HANDOVER REQUEST	120
+9.1.5.5	HANDOVER REQUEST ACKNOWLEDGE	121
+9.1.5.6	HANDOVER FAILURE	122
+9.1.5.7	HANDOVER NOTIFY	122
+9.1.5.8	PATH SWITCH REQUEST	123
+9.1.5.9	PATH SWITCH REQUEST ACKNOWLEDGE	124
+9.1.5.10	PATH SWITCH REQUEST FAILURE	125
+9.1.5.11	HANDOVER CANCEL	125
+9.1.5.12	HANDOVER CANCEL ACKNOWLEDGE	125
+9.1.5.13	eNB STATUS TRANSFER	125
+9.1.5.14	MME STATUS TRANSFER	125
+9.1.6	PAGING	126
+9.1.7	NAS Transport Messages	127
+9.1.7.1	INITIAL UE MESSAGE	127
+9.1.7.2	DOWNLINK NAS TRANSPORT	128
+9.1.7.3	UPLINK NAS TRANSPORT	128
+9.1.7.4	NAS NON DELIVERY INDICATION	129
+9.1.7.4a	NAS DELIVERY INDICATION	129
+9.1.7.5	REROUTE NAS REQUEST	130
+9.1.8	Management messages	130
+9.1.8.1	RESET	130
+9.1.8.2	RESET ACKNOWLEDGE	130
+9.1.8.3	ERROR INDICATION	131
+9.1.8.4	S1 SETUP REQUEST	131
+9.1.8.5	S1 SETUP RESPONSE	132
+9.1.8.6	S1 SETUP FAILURE	133
+9.1.8.7	ENB CONFIGURATION UPDATE	133
+9.1.8.8	ENB CONFIGURATION UPDATE ACKNOWLEDGE	134
+9.1.8.9	ENB CONFIGURATION UPDATE FAILURE	135
+9.1.8.10	MME CONFIGURATION UPDATE	135
+9.1.8.11	MME CONFIGURATION UPDATE ACKNOWLEDGE	135
+9.1.8.12	MME CONFIGURATION UPDATE FAILURE	136
+9.1.8.13	OVERLOAD START	136
+9.1.8.14	OVERLOAD STOP	136
+9.1.9	S1 CDMA2000 Tunnelling Messages	137
+9.1.9.1	DOWNLINK S1 CDMA2000 TUNNELLING	137
+9.1.9.2	UPLINK S1 CDMA2000 TUNNELLING	137
+9.1.10	UE CAPABILITY INFO INDICATION	137
+9.1.11	Trace Messages	138
+9.1.11.1	TRACE START	138
+9.1.11.2	TRACE FAILURE INDICATION	138
+9.1.11.3	DEACTIVATE TRACE	139
+9.1.12	Location Reporting Messages	139
+9.1.12.1	LOCATION REPORTING CONTROL	139
+9.1.12.2	LOCATION REPORT FAILURE INDICATION	139
+9.1.12.3	LOCATION REPORT	139
+9.1.13	Warning Message Transmission Messages	140
+9.1.13.1	WRITE-REPLACE WARNING REQUEST	140
+9.1.13.2	WRITE-REPLACE WARNING RESPONSE	140
+9.1.13.3	KILL REQUEST	140
+9.1.13.4	KILL RESPONSE	141
+9.1.13.5	PWS RESTART INDICATION	141
+9.1.13.6	PWS FAILURE INDICATION	142
+9.1.14	eNB DIRECT INFORMATION TRANSFER	142
+9.1.15	MME DIRECT INFORMATION TRANSFER	142
+9.1.16	eNB CONFIGURATION TRANSFER	142
+9.1.17	MME CONFIGURATION TRANSFER	142
+9.1.18	CELL TRAFFIC TRACE	143
+9.1.19	LPPa Transport Messages	143
+9.1.19.1	DOWNLINK UE ASSOCIATED LPPA TRANSPORT	143
+9.1.19.2	UPLINK UE ASSOCIATED LPPA TRANSPORT	143
+9.1.19.3	DOWNLINK NON UE ASSOCIATED LPPA TRANSPORT	144
+9.1.19.4	UPLINK NON UE ASSOCIATED LPPA TRANSPORT	144
+9.1.20	Secondary RAT Report Data Usage Messages	144
+9.1.20.1	SECONDARY RAT DATA USAGE REPORT	144
+9.2	Information Element Definitions	145
+9.2.0	General	145
+9.2.1	Radio Network Layer Related IEs	145
+9.2.1.1	Message Type	145
+9.2.1.2	E-RAB ID	145
+9.2.1.3	Cause	145
+9.2.1.3a	RRC Establishment Cause	149
+9.2.1.4	Trace Activation	149
+9.2.1.5	Source ID	150
+9.2.1.6	Target ID	150
+9.2.1.7	Source eNB to Target eNB Transparent Container	151
+9.2.1.8	Target eNB to Source eNB Transparent Container	152
+9.2.1.9	Source RNC to Target RNC Transparent Container	153
+9.2.1.10	Target RNC to Source RNC Transparent Container	153
+9.2.1.11	Source BSS to Target BSS Transparent Container	153
+9.2.1.12	Target BSS to Source BSS Transparent Container	153
+9.2.1.13	Handover Type	153
+9.2.1.14	Extended RNC-ID	153
+9.2.1.15	E-RAB Level QoS Parameters	153
+9.2.1.16	Paging DRX	154
+9.2.1.17	Paging Cause	154
+9.2.1.18	GBR QoS Information	154
+9.2.1.19	Bit Rate	155
+9.2.1.20	UE Aggregate Maximum Bit Rate	156
+9.2.1.21	Criticality Diagnostics	156
+9.2.1.22	Handover Restriction List	157
+9.2.1.23	CDMA2000-PDU	159
+9.2.1.24	CDMA2000 RAT Type	159
+9.2.1.25	CDMA2000 Sector ID	160
+9.2.1.26	Security Context	160
+9.2.1.27	UE Radio Capability	160
+9.2.1.28	CDMA2000 HO Status	160
+9.2.1.29	CDMA2000 HO Required Indication	161
+9.2.1.30	1xRTT MEID	161
+9.2.1.31	eNB Status Transfer Transparent Container	161
+9.2.1.32	COUNT Value	163
+9.2.1.33	CDMA2000 1xRTT RAND	163
+9.2.1.34	Request Type	164
+9.2.1.35	CDMA2000 1xRTT SRVCC Info	164
+9.2.1.36	E-RAB List	164
+9.2.1.37	Global eNB ID	165
+9.2.1.37a	Global en-gNB ID	165
+9.2.1.38	E-UTRAN CGI	165
+9.2.1.39	Subscriber Profile ID for RAT/Frequency priority	165
+9.2.1.40	UE Security Capabilities	166
+9.2.1.41	Security Key	166
+9.2.1.42	UE History Information	166
+9.2.1.43	Last Visited Cell Information	167
+9.2.1.43a	Last Visited E-UTRAN Cell Information	167
+9.2.1.43b	Last Visited GERAN Cell Information	167
+9.2.1.44	Message Identifier	168
+9.2.1.45	Serial Number	168
+9.2.1.46	Warning Area List	168
+9.2.1.47	Emergency Area ID	168
+9.2.1.48	Repetition Period	169
+9.2.1.49	Number of Broadcasts Requested	169
+9.2.1.50	Warning Type	169
+9.2.1.51	Warning Security Information	169
+9.2.1.52	Data Coding Scheme	169
+9.2.1.53	Warning Message Contents	170
+9.2.1.54	Broadcast Completed Area List	170
+9.2.1.55	Inter-system Information Transfer Type	170
+9.2.1.56	Source To Target Transparent Container	171
+9.2.1.57	Target To Source Transparent Container	171
+9.2.1.58	SRVCC Operation Possible	172
+9.2.1.59	SRVCC HO Indication	172
+9.2.1.60	Allocation and Retention Priority	172
+9.2.1.61	Time to wait	173
+9.2.1.62	CSG Id	173
+9.2.1.63	CSG Id List	173
+9.2.1.64	MS Classmark 2	174
+9.2.1.65	MS Classmark 3	174
+9.2.1.66	Cell Type	174
+9.2.1.67	Old BSS to New BSS Information	174
+9.2.1.68	Layer 3 Information	174
+9.2.1.69	E-UTRAN Round Trip Delay Estimation Info	174
+9.2.1.70	Broadcast Cancelled Area List	174
+9.2.1.71	Number of Broadcasts	175
+9.2.1.72	Concurrent Warning Message Indicator	175
+9.2.1.73	CSG Membership Status	176
+9.2.1.74	Cell Access Mode	176
+9.2.1.75	Extended Repetition Period	176
+9.2.1.76	Data Forwarding Not Possible	176
+9.2.1.77	PS Service Not Available	176
+9.2.1.78	Paging Priority	176
+9.2.1.79	Relay Node Indicator	177
+9.2.1.80	Correlation ID	177
+9.2.1.81	MDT Configuration	177
+9.2.1.82	MME Relay Support Indicator	180
+9.2.1.83	Management Based MDT Allowed	180
+9.2.1.84	GW Context Release Indication	181
+9.2.1.85	Voice Support Match Indicator	181
+9.2.1.86	M3 Configuration	181
+9.2.1.87	M4 Configuration	181
+9.2.1.88	M5 Configuration	181
+9.2.1.89	MDT PLMN List	182
+9.2.1.90	COUNT Value Extended	182
+9.2.1.91	Kill-all Warning Messages Indicator	182
+9.2.1.92	LHN ID	182
+9.2.1.93	User Location Information	182
+9.2.1.94	MBSFN-ResultToLog	183
+9.2.1.95	EARFCN	183
+9.2.1.96	Expected UE Behaviour	183
+9.2.1.97	Expected UE Activity Behaviour	184
+9.2.1.98	UE Radio Capability for Paging	184
+9.2.1.99	ProSe Authorized	184
+9.2.1.100	COUNT Value for PDCP SN Length 18	185
+9.2.1.101	M6 Configuration	185
+9.2.1.102	M7 Configuration	185
+9.2.1.103	Assistance Data for Paging	186
+9.2.1.104	Assistance Data for Recommended Cells	186
+9.2.1.105	Information on Recommended Cells and eNBs for Paging	186
+9.2.1.106	Recommended Cells for Paging	186
+9.2.1.107	Recommended eNBs for Paging	187
+9.2.1.108	Assistance Data for CE capable UEs	187
+9.2.1.109	Cell Identifier and Coverage Enhancement Level	188
+9.2.1.110	Paging Attempt Information	188
+9.2.1.111	Paging eDRX Information	188
+9.2.1.112	UE Retention Information	188
+9.2.1.113	UE User Plane CIoT Support Indicator	188
+9.2.1.114	NB-IoT Default Paging DRX	189
+9.2.1.115	NB-IoT Paging eDRX Information	189
+9.2.1.116	Bearer Type	189
+9.2.1.117	RAT Type	189
+9.2.1.118	CE-mode-B Support Indicator	189
+9.2.1.119	SRVCC Operation Not Possible	189
+9.2.1.120	V2X Services Authorized	190
+9.2.1.121	Served DCNs Items	190
+9.2.1.122	UE Sidelink Aggregate Maximum Bit Rate	190
+9.2.1.123	Enhanced Coverage Restricted	190
+9.2.1.124	Secondary RAT Usage Report List	191
+9.2.1.125	Handover Flag	192
+9.2.1.126	Extended Bit Rate	192
+9.2.1.127	NR UE Security Capabilities	192
+9.2.1.128	UE Application layer measurement configuration	192
+9.2.1.129	CE-mode-B Restricted	193
+9.2.1.130	Packet Loss Rate	194
+9.2.1.131 	Global RAN Node ID	194
+9.2.1.132	Global gNB ID	194
+9.2.1.133	Source NG-RAN Node To Target NG-RAN Node Transparent Container	194
+9.2.1.134	Target NG-RAN Node To Source NG-RAN Node Transparent Container	195
+9.2.1.135	LTE-M Indication	195
+9.2.1.136	Aerial UE subscription information	195
+9.2.1.137	Bluetooth Measurement Configuration	195
+9.2.1.138	WLAN Measurement Configuration	195
+9.2.1.139	Warning Area Coordinates	196
+9.2.1.140	Subscription Based UE Differentiation Information	196
+9.2.1.141	PSCell Information	197
+9.2.1.142	NR CGI	198
+9.2.1.143	Time Since Secondary Node Release	198
+9.2.2	Transport Network Layer Related IEs	199
+9.2.2.1	Transport Layer Address	199
+9.2.2.2	GTP-TEID	199
+9.2.2.3	Tunnel Information	199
+9.2.3	NAS Related IEs	199
+9.2.3.1	LAI	199
+9.2.3.2	RAC	199
+9.2.3.3	MME UE S1AP ID	200
+9.2.3.4	eNB UE S1AP ID	200
+9.2.3.5	NAS-PDU	200
+9.2.3.6	S-TMSI	200
+9.2.3.7	TAC	200
+9.2.3.8	PLMN Identity	200
+9.2.3.9	GUMMEI	201
+9.2.3.10	UE Identity Index value	201
+9.2.3.11	IMSI	201
+9.2.3.12	MMEC	201
+9.2.3.13	UE Paging Identity	202
+9.2.3.14	DL Forwarding	202
+9.2.3.15	Direct Forwarding Path Availability	202
+9.2.3.16	TAI	202
+9.2.3.17	Relative MME Capacity	203
+9.2.3.18	UE S1AP ID pair	203
+9.2.3.19	Overload Response	203
+9.2.3.20	Overload Action	203
+9.2.3.21	CS Fallback Indicator	203
+9.2.3.22	CN Domain	204
+9.2.3.23	RIM Transfer	204
+9.2.3.24	RIM Information	204
+9.2.3.25	RIM Routing Address	204
+9.2.3.26	SON Configuration Transfer	205
+9.2.3.26a	EN-DC SON Configuration Transfer	206
+9.2.3.27	SON Information	206
+9.2.3.28	SON Information Reply	207
+9.2.3.29	X2 TNL Configuration Info	207
+9.2.3.30	NAS Security Parameters from E-UTRAN	208
+9.2.3.31	NAS Security Parameters to E-UTRAN	208
+9.2.3.32	LPPa-PDU	209
+9.2.3.33	Routing ID	209
+9.2.3.34	Time Synchronisation Info	209
+9.2.3.35	Void	209
+9.2.3.36	Traffic Load Reduction Indication	209
+9.2.3.37	Additional CS Fallback Indicator	210
+9.2.3.38	Masked IMEISV	210
+9.2.3.39	SON Information Report	210
+9.2.3.40	RLF Report Information	210
+9.2.3.41	Muting Pattern Information	210
+9.2.3.42	Synchronisation Information	211
+9.2.3.43	Listening Subframe Pattern	211
+9.2.3.44	MME Group ID	211
+9.2.3.45	Additional GUTI	212
+9.2.3.46	Extended UE Identity Index Value	212
+9.2.3.47	NB-IoT UE Identity Index Value	212
+9.2.3.48	DL NAS PDU Delivey Request	212
+9.2.3.49	DL CP Security Information	212
+9.2.3.50	UL CP Security Information	212
+9.2.3.51	UE Capability Info Request	213
+9.2.3.52	5GS TAI	213
+9.2.3.53	5GS TAC	213
+9.2.3.54	End Indication	213
+9.2.3.55	Pending Data Indication	213
+9.3	Message and Information Element Abstract Syntax (with ASN.1)	214
+9.3.0	General	214
+9.3.1	Usage of private message mechanism for non-standard use	214
+9.3.2	Elementary Procedure Definitions	215
+9.3.3	PDU Definitions	230
+9.3.4	Information Element Definitions	290
+9.3.5	Common Definitions	344
+9.3.6	Constant Definitions	344
+9.3.7	Container Definitions	353
+9.4	Message Transfer Syntax	357
+9.5	Timers	357
+10	Handling of Unknown, Unforeseen and Erroneous Protocol Data	358
+10.1	General	358
+10.2	Transfer Syntax Error	358
+10.3	Abstract Syntax Error	358
+10.3.1	General	358
+10.3.2	Criticality Information	359
+10.3.3	Presence Information	359
+10.3.4	Not comprehended IE/IE group	360
+10.3.4.1	Procedure Code	360
+10.3.4.1A	Type of Message	360
+10.3.4.2	IEs other than the Procedure Code and Type of Message	360
+10.3.5	Missing IE or IE group	361
+10.3.6	IEs or IE groups received in wrong order or with too many occurrences or erroneously present	362
+10.4	Logical Error	363
+10.5	Exceptions	363
+10.6	Handling of AP ID	364
+Annex A (informative): S1AP Transparent containers content	365
+Annex B (normative): IEs for SON Transfer	366
+B.1	Tabular definition	366
+B.1.1	SON Transfer Application Identity	366
+B.1.2	SON Transfer Request Container	366
+B.1.3	SON Transfer Response Container	367
+B.1.4	SON Transfer Cause	368
+B.1.5	Cell Load Reporting Response	370
+B.1.6	E-UTRAN Cell Load Reporting Response	370
+B.1.7	Multi-Cell Load Reporting Request	371
+B.1.8	IRAT Cell ID	371
+B.1.9	Multi-Cell Load Reporting Response	371
+B.1.10	Cell Load Reporting Cause	372
+B.1.11	Event-Triggered Cell Load Reporting Request	373
+B.1.12	Event-triggered Cell Load Reporting Response	373
+B.1.13	HO Report	373
+B.1.14	Cell Activation Request	374
+B.1.15	Cell Activation Response	375
+B.1.16	Cell State Indication	375
+B.1.17	Failure Event Report	375
+B.1.18	eHRPD Sector ID	376
+B.1.19	eHRPD Sector Load Reporting Response	376
+B.1.20	eHRPD Composite Available Capacity	376
+B.1.21	eHRPD Sector Capacity Class Value	377
+B.1.22	eHRPD Capacity Value	377
+B.1.23	Candidate PCI	377
+B.2	ASN.1 definition	377
+Annex C (informative): Processing of Transparent Containers at the MME	382
+Annex D (informative): Change history	383
 
 Foreword
 This Technical Specification has been produced by the 3rd Generation Partnership Project (3GPP).
@@ -1715,7 +1715,7 @@ If the UE is configured with EN-DC radio resources and the PSCell information is
 Not applicable.
 8.4.4	Path Switch Request
 8.4.4.1	General
-The purpose of the Path Switch Request procedure is to request the switch of a downlink GTP tunnel towards a new GTP tunnel endpoint.
+The purpose of the Path Switch Request procedure is to establish a UE associated signalling connection to the EPC and, if applicable, to request the switch of a downlink GTP tunnel towards a new GTP tunnel endpoint.
 8.4.4.2	Successful Operation
 
 Figure 8.4.4.2-1: Path switch request: successful operation
@@ -1753,6 +1753,9 @@ If the NR UE Security Capabilities IE is included in the PATH SWITCH REQUEST ACK
 If the Aerial UE subscription information IE is included in the PATH SWITCH REQUEST ACKNOWLEDGE message, the eNB shall, if supported, store this information in the UE context and use it as defined in TS 36.300 [14].
 If the Pending Data Indication IE is included in the PATH SWITCH REQUEST ACKNOWLEDGE message, the eNB shall use it as defined in TS 23.401 [11].
 If the Subscription Based UE Differentiation Information IE is included in the PATH SWITCH REQUEST ACKNOWLEDGE message, the eNB shall, if supported, store this information in the UE context for further use according to TS 23.401 [11].
+If the Handover Restriction List IE is contained in the PATH SWITCH REQUEST ACKNOWLEDGE message, the eNB shall, if supported, overwrite any previously stored handover restriction information in the UE context and use the information in the Handover Restriction List IE to:
+-	determine a target for subsequent mobility action for which the eNB provides information about the target of the mobility action towards the UE;
+-	select a proper SCG during dual connectivity operation;
 If the UE is configured with EN-DC radio resources and the PSCell information is available, the PSCell Information IE shall be included in the PATH SWITCH REQUEST message.
 8.4.4.3	Unsuccessful Operation
 
@@ -5988,6 +5991,13 @@ Subscription Based UE Differentiation Information
 O
 
 9.2.1.140
+
+YES
+ignore
+Handover Restriction List
+O
+
+9.2.1.22
 
 YES
 ignore
@@ -16164,7 +16174,8 @@ PathSwitchRequestAcknowledgeIEs S1AP-PROTOCOL-IES ::= {
 	{ ID id-CE-ModeBRestricted				CRITICALITY ignore	TYPE CE-ModeBRestricted			PRESENCE optional}|
 	{ ID id-AerialUEsubscriptionInformation			CRITICALITY ignore	TYPE AerialUEsubscriptionInformation				PRESENCE optional}|
 	{ ID id-PendingDataIndication			CRITICALITY ignore	TYPE PendingDataIndication				PRESENCE optional}|
-	{ ID id-Subscription-Based-UE-DifferentiationInfo		CRITICALITY ignore	TYPE Subscription-Based-UE-DifferentiationInfo		PRESENCE optional},
+	{ ID id-Subscription-Based-UE-DifferentiationInfo		CRITICALITY ignore	TYPE Subscription-Based-UE-DifferentiationInfo		PRESENCE optional}|
+	{ ID id-HandoverRestrictionList			CRITICALITY ignore	TYPE HandoverRestrictionList			PRESENCE optional},
 	...
 }
 
@@ -26005,4 +26016,20 @@ Correction to EN-DC TNL address discovery
 
 Editorial Correction to ASN1: Adding a missing comma after "id-IMSvoiceEPSfallbackfrom5G"
 15.7.1
+2019-12
+RP-86
+RP-192916
+1734
+2
+F
+Addition of Handover Restriction List to PATH SWITCH REQUEST ACKNOWLEDGE message
+15.8.0
+2019-12
+RP-86
+RP-192916
+1737
+
+F
+CR for Clarification on purpose of  path switch request
+15.8.0
 

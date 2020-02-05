@@ -208,27 +208,27 @@ Foreword	12
 8.7.9.2	Successful Operation	84
 8.7.9.3	Unsuccessful Operation	85
 8.7.9.4	Abnormal Conditions	85
-8.7.10	SgNB initiated SgNB Release	85
-8.7.10.1	General	85
+8.7.10	SgNB initiated SgNB Release	86
+8.7.10.1	General	86
 8.7.10.2	Successful Operation	86
 8.7.10.3	Unsuccessful Operation	86
 8.7.10.4	Abnormal Conditions	86
-8.7.11	SgNB Counter Check	86
-8.7.11.1	General	86
+8.7.11	SgNB Counter Check	87
+8.7.11.1	General	87
 8.7.11.2	Successful Operation	87
 8.7.11.3	Unsuccessful Operation	87
 8.7.11.4	Abnormal Conditions	87
 8.7.12	RRC Transfer	87
 8.7.12.1	General	87
-8.7.12.2	Successful Operation	87
+8.7.12.2	Successful Operation	88
 8.7.12.3	Abnormal Conditions	88
 8.7.13	Secondary RAT Data Usage Report	88
 8.7.13.1	General	88
 8.7.13.2	Successful Operation	88
 8.7.13.3	Unsuccessful Operation	88
-8.7.13.4	Abnormal Conditions	88
-8.7.14	Partial reset of EN-DC	88
-8.7.14.1	General	88
+8.7.13.4	Abnormal Conditions	89
+8.7.14	Partial reset of EN-DC	89
+8.7.14.1	General	89
 8.7.14.2	Successful Operation	89
 8.7.14.3	Unsuccessful Operation	90
 8.7.14.4	Abnormal Conditions	90
@@ -237,23 +237,23 @@ Foreword	12
 8.7.15.2	Successful Operation	90
 8.7.16	SgNB Activity Notification	91
 8.7.16.1	General	91
-8.7.16.2	Successful Operation	91
+8.7.16.2	Successful Operation	92
 8.7.16.3	Abnormal Conditions	92
 8.7.17	gNB Status Indication	92
 8.7.17.1	General	92
 8.7.17.2	Successful Operation	92
 8.7.17.3	Abnormal Conditions	92
-8.7.18	EN-DC Configuration Transfer	92
-8.7.18.1	General	92
-8.7.18.2	Successful Operation	92
-8.7.18.3	Abnormal Conditions	93
+8.7.18	EN-DC Configuration Transfer	93
+8.7.18.1	General	93
+8.7.18.2	Successful Operation	93
+8.7.18.3	Abnormal Conditions	94
 8.7.19	Trace Start	94
 8.7.19.1	General	94
 8.7.19.2	Successful Operation	94
 8.7.19.3	Abnormal Conditions	94
 8.7.20	Deactivate Trace	94
 8.7.20.1	General	94
-8.7.20.2	Successful Operation	94
+8.7.20.2	Successful Operation	95
 8.7.20.3	Abnormal Conditions	95
 9	Elements for X2AP Communication	95
 9.0	General	95
@@ -513,7 +513,7 @@ Foreword	12
 9.4	Message transfer syntax	416
 9.5	Timers	416
 10	Handling of unknown, unforeseen and erroneous protocol data	416
-Annex A (informative):	Change history	417
+Annex A (informative): Change history	417
 
 Foreword
 This Technical Specification has been produced by the 3rd Generation Partnership Project (3GPP).
@@ -973,6 +973,7 @@ If the ProSe Authorized IE is contained in the HANDOVER REQUEST message and it c
 If the V2X Services Authorized IE is contained in the HANDOVER REQUEST message and it contains one or more IEs set to "authorized", the eNB shall, if supported, consider that the UE is authorized for the relevant service(s).
 If the UE Context Reference at the SeNB IE is contained in the HANDOVER REQUEST message the target eNB may use it as specified in TS 36.300 [15]. In this case, the source eNB may expect the target eNB to include the UE Context Kept Indicator IE set to "True" in the HANDOVER REQUEST ACKNOWLEDGE message, which shall use this information as specified in TS 36.300 [15]. If the UE Context Reference at the WT IE is contained in the HANDOVER REQUEST message, the target eNB may use it as specified in TS 36.300 [15]. In this case, the source eNB may expect the target eNB to include the WT UE Context Kept Indicator IE set to "True" in the HANDOVER REQUEST ACKNOWLEDGE message; the source eNB shall use this information as specified in TS 36.300 [15].
 If the UE Context Reference at the SgNB IE is contained in the HANDOVER REQUEST message the target eNB may use it as specified in TS 37.340 [32]. In this case, the source eNB may expect the target eNB to include the UE Context Kept Indicator IE set to "True" in the HANDOVER REQUEST ACKNOWLEDGE message, which shall use this information as specified in TS 37.340 [32].
+If the UE Context Kept Indicator IE set to "True" is included, then, if the E-RABs transferred to MeNB IE is included in the HANDOVER REQUEST ACKNOWLEDGE message, the source eNB shall, if supported, include the uplink/downlink PDCP SN and HFN status received from the SgNB in the SN Status Transfer procedure towards the target eNB, as specified in TS 37.340 [32].
 If the Bearer Type IE is included in the HANDOVER REQUEST message and is set to "non IP", then the target eNB shall not perform header compression for the concerned E-RAB.If the UE Sidelink Aggregate Maximum Bit Rate IE is contained in the HANDOVER REQUEST message, the target eNB shall, if supported, use it for the concerned UE's sidelink communication in network scheduled mode for V2X services.
 If the NR UE Security Capabilities IE is included in the HANDOVER REQUEST message, the target eNB shall, if supported, store this information in the UE context and send it to the respective peer node during subsequent handover preparations and/or EN-DC operations for the UE as defined in TS 33.401 [15].
 If the Aerial UE subscription information IE is included in the HANDOVER REQUEST message, the target eNB shall, if supported, store this information in the UE context and use it as defined in TS 36.300 [15].
@@ -998,10 +999,10 @@ If the target cell is a CSG cell with a different CSG from the source cell, the 
 8.2.2.1	General
 The purpose of the SN Status Transfer procedure is to transfer the uplink PDCP SN and HFN receiver status and the downlink PDCP SN and HFN transmitter status either, from the source to the target eNB during an X2 handover, between the eNBs involved in dual connectivity and/or LWA, or between MeNB and en-gNB involved in EN-DC, for each respective E-RAB for which PDCP SN and HFN status preservation applies.
 If the SN Status Transfer procedure is applied in the course of dual connectivity, LWA, RRC connection re-establishment or EN-DC, in the subsequent specification text
--	the behaviour of the eNB from which the E-RAB context is transferred, i.e., the eNB involved in dual connectivity, LWA, RRC connection re-establishment or EN-DC from which data forwarding, is specified by the behaviour of the "source eNB",
--	the behaviour of the eNB to which the E-RAB context is transferred, i.e., the eNB involved in dual connectivity, LWA, RRC connection re-establishment or EN-DC to which data is forwarded, is specified by the behaviour of the "target eNB".
--	the behaviour of the en-gNB from which the E-RAB context is transferred, i.e., the en-gNB involved in EN-DC from which data forwarding, is specified by the behaviour of the "source en-gNB",
--	the behaviour of the en-gNB to which the E-RAB context is transferred, i.e., the en-gNB involved in EN-DC to which data is forwarded, is specified by the behaviour of the "target en-gNB".
+-	the behaviour of the eNB from which the E-RAB context is transferred, i.e., the eNB involved in dual connectivity, LWA, RRC connection re-establishment from which data forwarding, is specified by the behaviour of the "source eNB",
+-	the behaviour of the eNB to which the E-RAB context is transferred, i.e., the eNB involved in dual connectivity, LWA, RRC connection re-establishment to which data is forwarded, is specified by the behaviour of the "target eNB".
+-	in case of EN-DC, the behaviour of the node from which the E-RAB context is transferred, i.e., either the en-gNB or the MeNB from which data is forwarded, is specified by the behaviour of the "source eNB",
+-	in case of EN-DC, the behaviour of the node to which the E-RAB context is transferred, i.e., either the en-gNB or the MeNB to which data is forwarded, is specified by the behaviour of the "target eNB".
 The procedure uses UE-associated signalling.
 8.2.2.2	Successful Operation
 
@@ -1010,7 +1011,7 @@ Figure 8.2.2.2-1: SN Status Transfer, successful operation
 Figure 8.2.2.2-2: MeNB initiated SN Status Transfer for EN-DC, successful operation
 
 Figure 8.2.2.2-3: en-gNB initiated SN Status Transfer for EN-DC, successful operation
-The source eNB initiates the procedure by stop assigning PDCP SNs to downlink SDUs and stop delivering UL SDUs towards the EPC and sending the SN STATUS TRANSFER message to the target eNB at the time point when it considers the transmitter/receiver status to be frozen. The target eNB using Full Configuration for this handover as per TS 36.300 [15] shall ignore the information received in this message.
+The source eNB initiates the procedure by stop assigning PDCP SNs to downlink SDUs and stop delivering UL SDUs towards the EPC and sending the SN STATUS TRANSFER message to the target eNB at the time point when it considers the transmitter/receiver status to be frozen. The target eNB using Full Configuration for this handover as per TS 36.300 [15] or for the EN-DC operations as per TS 37.340 [32] shall ignore the information received in this message. In case of EN-DC, if the target eNB performs PDCP version change or PDCP SN length change or RLC mode change for an E-RAB as specified in TS 37.340 [32], it shall ignore the information received for that E-RAB in this message.
 The E-RABs Subject To Status Transfer List IE included in the SN STATUS TRANSFER message contains the E-RAB ID(s) corresponding to the E-RAB(s) for which PDCP SN and HFN status preservation shall be applied.
 If the source eNB includes in the SN STATUS TRANSFER message, the information on the missing and received uplink SDUs in the Receive Status Of UL PDCP SDUs IE or Receive Status Of UL PDCP SDUs Extended IE or Receive Status Of UL PDCP SDUs for PDCP SN Length 18 IE for each E-RAB for which the source eNB has accepted the request from the target eNB for uplink forwarding, then the target eNB may use it in a Status Report message sent to the UE over the radio.
 For each E-RAB for which the DL COUNT Value IE is received in the SN STATUS TRANSFER message, the target eNB shall use it to mark with the value contained in the PDCP-SN IE of this IE the first downlink packet for which there is no PDCP SN yet assigned. If the DL COUNT Value Extended IE or DL COUNT Value for PDCP SN Length 18 IE is included in the E-RABs Subject To Status Transfer Item IE, the target eNB shall, if supported, use the value contained in the PDCP-SN Extended IE of the DL COUNT Value Extended IE or PDCP-SN Length 18 IE of the DL COUNT Value for PDCP SN Length 18 IE instead of the value contained in the PDCP-SN IE of the DL COUNT Value IE.
@@ -1653,7 +1654,7 @@ The procedure uses non UE-associated signalling.
 Figure 8.7.1.2-1: eNB Initiated EN-DC X2 Setup, successful operation
 
 Figure 8.7.1.2-2: en-gNB Initiated EN-DC X2 Setup, successful operation
-If case of network sharing with multiple cell ID broadcast with shared X2-C signalling transport, as specified in TS 36.300 [15], the EN-DC X2 SETUP REQUEST message and the EN-DC X2 SETUP RESPONSE message shall include the Interface Instance Indication IE to identify the corresponding interface instance.
+If case of network sharing with multiple cell ID broadcast with shared X2-C signalling transport, as specified in TS 36.300 [15], the EN-DC X2 SETUP REQUEST message and the EN-DC X2 SETUP RESPONSE message shall include the Interface Instance Indication IE to identify the corresponding interface instance. In the current version of this specification an eNB shall not include the Interface Instance Indication IE in the Initiating NodeType IE in the EN-DC X2 SETUP REQUEST message.
 eNB initiated EN-DC X2 Setup:
 An eNB initiates the procedure by sending the EN-DC X2 SETUP REQUEST message to a candidate en-gNB. The candidate en-gNB replies with the EN-DC X2 SETUP RESPONSE message. The initiating eNB shall transfer the complete list of its served cells to the candidate en-gNB. The candidate en-gNB shall reply with the complete list of its served cells. If Supplementary Uplink is configured at the candidate en-gNB, the candidate en-gNB shall include in the EN-DC X2 SETUP RESPONSE message the SUL Information IE and the Supported SUL band List IE for each served cell where supplementary uplink is configured.
 If the EN-DC X2 SETUP REQUEST message contains the Protected E-UTRA Resource Indication IE, the receiving en-gNB should take this into account for cell-level resource coordination with the eNB. The en-gNB shall consider the received Protected E-UTRA Resource Indication IE content valid until reception of a new update of the IE for the same eNB.
@@ -1981,13 +1982,16 @@ Figure 8.7.9.2-1: MeNB initiated SgNB Release, successful operation
 The MeNB initiates the procedure by sending the SGNB RELEASE REQUEST message. Upon reception of the SGNB RELEASE REQUEST message the en-gNB shall stop providing user data to the UE. The SgNB UE X2AP ID IE shall be included if it has been obtained from the en-gNB.
 If the bearer context in the en-gNB was configured with the PDCP entity in the en-gNB, for E-RAB for which the MeNB requests forwarding of uplink/downlink data, the MeNB includes the UL Forwarding GTP Tunnel Endpoint/ DL Forwarding GTP Tunnel Endpoint IE within the E-RABs To Be Released Item IE of the SGNB RELEASE REQUEST message to indicate that the en-gNB should perform data forwarding of uplink/downlink packets for that E-RAB.
 Upon reception of the SGNB RELEASE REQUEST message containing UE Context Kept Indicator IE set to "True", the en-gNB shall, if supported, only initiate the release of the resources related to the UE-associated signalling connection between the MeNB and the en-gNB.
+If the UE Context Kept Indicator IE set to "True" is included, then, if the E-RABs transferred to MeNB IE is included in the SGNB RELEASE REQUEST message, the en-gNB shall, if supported, provide the uplink/downlink PDCP SN and HFN status for the listed E-RABs, as specified in TS 37.340 [32].
 If the en-gNB confirms the request to release en-gNB resources it shall send the SGNB RELEASE REQUEST ACKNOWLEDGE message to the MeNB.
 If the RLC Mode IE is included for an E-RAB within the E-RABs Admitted To Be Released List IE (for E-RABs hosted at the en-gNB) in the SGNB RELEASE REQUEST ACKNOWLEDGE message, it indicates the mode that the en-gNB used for the E-RAB when it was hosted at the en-gNB. 
+If the MeNB did not include the SgNB UE X2AP ID IE in the SGNB RELEASE REQUEST message, the MeNB shall ignore the SgNB UE X2AP ID IE in the SGNB RELEASE REQUEST ACKNOWLEDGE message.
 Upon successful completion of the procedure, the MeNB shall start counting time, so that information regarding time since Secondary Node Release may be transferred towards the MME as specified in TS 36.413 [4].
 8.7.9.3	Unsuccessful Operation
 
 Figure 8.7.9.3-1: MeNB initiated SgNB Release, unsuccessful operation
 If the en-gNB cannot confirm the request to release en-gNB resources it shall send the SGNB RELEASE REQUEST REJECT message to the MeNB with an appropriate cause indicated in the Cause IE.
+If the MeNB did not include the SgNB UE X2AP ID IE in the SGNB RELEASE REQUEST message, the MeNB shall ignore the SgNB UE X2AP ID IE in the SGNB RELEASE REQUEST REJECT message.
 8.7.9.4	Abnormal Conditions
 If the SGNB RELEASE REQUEST message refer to a context that does not exist, the en-gNB shall ignore the message.
 When the MeNB has initiated the procedure and did not include the SgNB UE X2AP ID IE the MeNB shall regard the resources for the UE at the en-gNB as being fully released.
@@ -2001,8 +2005,9 @@ The procedure uses UE-associated signalling.
 
 Figure 8.7.10.2-1: SgNB initiated SgNB Release, successful operation.
 The en-gNB initiates the procedure by sending the SGNB RELEASE REQUIRED message to the MeNB.
-Upon reception of the SGNB RELEASE REQUIRED message, the MeNB replies with the SGNB RELEASE CONFIRM message. For each E-RAB configured with the PDCP entity in the en-gNB, the MeNB may include the DL Forwarding GTP Tunnel Endpoint IE and the UL Forwarding GTP Tunnel Endpoint IE within the E-RABs To Be Released Item IE to indicate that it requests data forwarding of uplink and downlink packets to be performed for that bearer. For each E-RAB configured with the PDCP entity in the MeNB and SCG resources, the MeNB may include the DL Forwarding GTP Tunnel Endpoint IE within the E-RABs To Be Released Item IE to indicate that it requests data forwarding of downlink packets to be performed for that bearer.
-If the RLC Mode IE is included for an E-RAB within the E-RABs To Be Released List IE (for E-RABs hosted at the en-gNB) in the SGNB RELEASE REQUIRED message, it indicates the mode that the en-gNB used for the E-RAB when it was hosted at the en-gNB. 
+Upon reception of the SGNB RELEASE REQUIRED message, the MeNB replies with the SGNB RELEASE CONFIRM message. For each E-RAB configured with the PDCP entity in the en-gNB, the MeNB may include the DL Forwarding GTP Tunnel Endpoint IE and the UL Forwarding GTP Tunnel Endpoint IE within the E-RABs To Be Released Item IE to indicate that it requests data forwarding of uplink and downlink packets to be performed for that bearer.
+If the RLC Mode IE is included for an E-RAB within the E-RABs To Be Released List IE (for E-RABs hosted at the en-gNB) in the SGNB RELEASE REQUIRED message, it indicates the mode that the en-gNB used for the E-RAB when it was hosted at the en-gNB.
+The en-gNB may include the information at the SgNB to MeNB Container IE in the SGNB RELEASE REQUIRED message.
 The en-gNB may start data forwarding and stop providing user data to the UE upon reception of the SGNB RELEASE CONFIRM message.
 Upon successful completion of the procedure, the MeNB shall start counting time, so that information regarding time since Secondary Node Release may be transferred towards the MME as specified in TS 36.413 [4].
 8.7.10.3	Unsuccessful Operation
@@ -2631,6 +2636,14 @@ O
 UE Context Kept Indicator
 9.2.85
 Indicates that the WT has acknowledged to keep the UE context
+YES
+ignore
+E-RABs transferred to MeNB
+O
+
+E-RAB List
+9.2.28
+In case of EN-DC, indicates that SN Status is needed for the listed E-RABs from the SgNB..
 YES
 ignore
 
@@ -5316,6 +5329,13 @@ NR neighbours
 
 YES
 ignore
+>>Interface Instance Indication
+O
+
+9.2.143
+NOTE: In the current version of this specification this IE is not included in the Initiating Node Type IE.
+YES
+reject
 >en-gNB
 
 
@@ -10432,6 +10452,14 @@ OCTET STRING
 Includes the CG-ConfigInfo message as defined in TS 38.331 [31].
 YES
 reject
+E-RABs transferred to MeNB
+O
+
+E-RAB List
+9.2.28
+Indicates the target MeNB reconfigured the listed E-RABs as MN-terminated bearers.
+YES
+ignore
 
 
 9.1.4.12	SGNB RELEASE REQUEST ACKNOWLEDGE
@@ -10539,7 +10567,7 @@ Allocated at the MeNB.
 YES
 ignore
 SgNB UE X2AP ID
-O
+M
 
 en-gNB UE X2AP ID
 9.2.100
@@ -10646,6 +10674,13 @@ RLC Mode
 Indicates the RLC mode at the en-gNB for PDCP transfer to MeNB.
 –
 
+SgNB to MeNB Container
+O
+
+OCTET STRING
+Includes the NR CG-Config message as defined in TS 38.331 [31].
+YES
+ignore
 
 
 9.1.4.15	SGNB RELEASE CONFIRM
@@ -18045,7 +18080,7 @@ FROM X2AP-Containers
 	id-additionalPLMNs-Item,
 	id-InterfaceInstanceIndication,
 	id-BPLMN-ID-Info-NR,
-
+	id-ERABs-transferred-to-MeNB,
 
 	maxCellineNB,
 	maxnoofBearers,
@@ -18200,7 +18235,8 @@ HandoverRequestAcknowledge-IEs X2AP-PROTOCOL-IES ::= {
 	{ ID id-SeNB-UE-X2AP-ID-Extension					CRITICALITY ignore	TYPE UE-X2AP-ID-Extension	PRESENCE optional}-- The id-SeNB-UE-X2AP-ID-Extension shall not be sent shall not be sent and shall be ignored, if received.--|
 	{ ID id-Old-eNB-UE-X2AP-ID-Extension				CRITICALITY ignore	TYPE UE-X2AP-ID-Extension	PRESENCE optional}|
 	{ ID id-New-eNB-UE-X2AP-ID-Extension				CRITICALITY reject	TYPE UE-X2AP-ID-Extension	PRESENCE optional}|
-	{ ID id-WT-UE-ContextKeptIndicator					CRITICALITY ignore	TYPE UE-ContextKeptIndicator	PRESENCE optional},
+	{ ID id-WT-UE-ContextKeptIndicator					CRITICALITY ignore	TYPE UE-ContextKeptIndicator	PRESENCE optional}|
+	{ ID id-ERABs-transferred-to-MeNB					CRITICALITY ignore	TYPE E-RAB-List			PRESENCE optional},
 	...
 }
 
@@ -20781,7 +20817,8 @@ SgNBReleaseRequest-IEs X2AP-PROTOCOL-IES ::= {
 	{ ID id-E-RABs-ToBeReleased-SgNBRelReqList		CRITICALITY ignore	TYPE E-RABs-ToBeReleased-SgNBRelReqList		PRESENCE optional}|
 	{ ID id-UE-ContextKeptIndicator					CRITICALITY ignore	TYPE UE-ContextKeptIndicator						PRESENCE optional}|
 	{ ID id-MeNB-UE-X2AP-ID-Extension				CRITICALITY reject	TYPE UE-X2AP-ID-Extension							PRESENCE optional}|
-	{ ID id-MeNBtoSgNBContainer						CRITICALITY reject	TYPE MeNBtoSgNBContainer								PRESENCE optional},
+	{ ID id-MeNBtoSgNBContainer						CRITICALITY reject	TYPE MeNBtoSgNBContainer								PRESENCE optional}|
+	{ ID id-ERABs-transferred-to-MeNB				CRITICALITY ignore	TYPE E-RAB-List										PRESENCE optional},
 	...
 }
 
@@ -20904,7 +20941,8 @@ SgNBReleaseRequired-IEs X2AP-PROTOCOL-IES ::= {
 	{ ID id-SgNB-UE-X2AP-ID							CRITICALITY reject	TYPE SgNB-UE-X2AP-ID										PRESENCE mandatory}|
 	{ ID id-Cause									CRITICALITY ignore	TYPE Cause												PRESENCE mandatory}|
 	{ ID id-MeNB-UE-X2AP-ID-Extension				CRITICALITY reject	TYPE UE-X2AP-ID-Extension								PRESENCE optional }|
-	{ ID id-E-RABs-ToBeReleased-SgNBRelReqdList		CRITICALITY ignore	TYPE E-RABs-ToBeReleased-SgNBRelReqdList			PRESENCE optional },
+	{ ID id-E-RABs-ToBeReleased-SgNBRelReqdList		CRITICALITY ignore	TYPE E-RABs-ToBeReleased-SgNBRelReqdList			PRESENCE optional }|
+	{ ID id-SgNBtoMeNBContainer						CRITICALITY ignore	TYPE SgNBtoMeNBContainer								PRESENCE optional },
 	...
 }
 
@@ -21163,7 +21201,8 @@ ENDCX2SetupRequest ::= SEQUENCE {
 }
 
 ENDCX2SetupRequest-IEs X2AP-PROTOCOL-IES ::= {
-	{ ID id-InitiatingNodeType-EndcX2Setup			CRITICALITY reject	TYPE InitiatingNodeType-EndcX2Setup		PRESENCE mandatory},
+	{ ID id-InitiatingNodeType-EndcX2Setup			CRITICALITY reject	TYPE InitiatingNodeType-EndcX2Setup		PRESENCE mandatory}|
+	{ ID id-InterfaceInstanceIndication				CRITICALITY reject 	TYPE InterfaceInstanceIndication			PRESENCE optional},
 	...
 }
 
@@ -21177,6 +21216,7 @@ ENB-ENDCX2SetupReqIEs X2AP-PROTOCOL-IES ::= {
 	{ ID id-GlobalENB-ID								CRITICALITY reject	TYPE GlobalENB-ID										PRESENCE mandatory}|
 	{ ID id-ServedEUTRAcellsENDCX2ManagementList		CRITICALITY reject	TYPE ServedEUTRAcellsENDCX2ManagementList		PRESENCE mandatory}|
 	{ ID id-InterfaceInstanceIndication				CRITICALITY reject 	TYPE InterfaceInstanceIndication					PRESENCE optional},
+-- NOTE: In the current version of this specification the Interface Instance Indication IE is not included in the Initiating NodeType IE --
 	...
 }
 
@@ -25206,6 +25246,7 @@ id-InterfaceInstanceIndication												ProtocolIE-ID ::= 335
 id-BPLMN-ID-Info-EUTRA														ProtocolIE-ID ::= 336
 id-BPLMN-ID-Info-NR															ProtocolIE-ID ::= 337
 id-NBIoT-UL-DL-AlignmentOffset												ProtocolIE-ID ::= 338
+id-ERABs-transferred-to-MeNB												ProtocolIE-ID ::= 339
 
 END
 -- ASN1STOP
@@ -27507,4 +27548,52 @@ RP-192169
 F
 Non IP bearer support for Dual Connectivity
 15.7.0
+2019-12
+RP-86
+RP-192916
+1346
+3
+F
+Critical correction to the presence of the SgNB UE X2AP ID in the SgNB Release Request Reject
+15.8.0
+2019-12
+RP-86
+RP-192916
+1364
+3
+F
+Correction to SN Status Transfer considering EN-DC operations
+15.8.0
+2019-12
+RP-86
+RP-192916
+1380
+2
+F
+SN Status Transfer for bearer reconfiguration during HO with EN-DC
+15.8.0
+2019-12
+RP-86
+RP-192915
+1398
+-
+F
+Correction on the DL forwarding for MeNB terminated bearer in SgNB initiated SgNB Release
+15.8.0
+2019-12
+RP-86
+RP-192916
+1410
+1
+F
+CR36.423 for correction on EN-DC X2 SETUP REQUEST message
+15.8.0
+2019-12
+RP-86
+RP-192916
+1415
+2
+F
+Support of delta configuration in EN-DC
+15.8.0
 

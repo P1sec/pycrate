@@ -14,863 +14,773 @@ from pycrate_asn1rt.asnobj_class     import *
 from pycrate_asn1rt.asnobj_ext       import *
 from pycrate_asn1rt.init             import init_modules
 
-class E1AP_CommonDataTypes:
+class E1AP_PDU_Descriptions:
 
-    _name_  = u'E1AP-CommonDataTypes'
-    _oid_   = [0, 4, 0, 0, 22, 3, 5, 1, 3]
+    _name_  = u'E1AP-PDU-Descriptions'
+    _oid_   = [0, 4, 0, 0, 22, 3, 5, 1, 0]
     
     _obj_ = [
-        u'maxPrivateIEs',
-        u'maxProtocolExtensions',
-        u'maxProtocolIEs',
-        u'Criticality',
-        u'Presence',
-        u'PrivateIE-ID',
-        u'ProcedureCode',
-        u'ProtocolExtensionID',
-        u'ProtocolIE-ID',
-        u'TriggeringMessage',
+        u'E1AP-ELEMENTARY-PROCEDURE',
+        u'E1AP-PDU',
+        u'InitiatingMessage',
+        u'SuccessfulOutcome',
+        u'UnsuccessfulOutcome',
+        u'E1AP-ELEMENTARY-PROCEDURES',
+        u'E1AP-ELEMENTARY-PROCEDURES-CLASS-1',
+        u'E1AP-ELEMENTARY-PROCEDURES-CLASS-2',
+        u'reset',
+        u'errorIndication',
+        u'gNB-CU-UP-E1Setup',
+        u'gNB-CU-CP-E1Setup',
+        u'gNB-CU-UP-ConfigurationUpdate',
+        u'gNB-CU-CP-ConfigurationUpdate',
+        u'e1Release',
+        u'bearerContextSetup',
+        u'bearerContextModification',
+        u'bearerContextModificationRequired',
+        u'bearerContextRelease',
+        u'bearerContextReleaseRequest',
+        u'bearerContextInactivityNotification',
+        u'dLDataNotification',
+        u'uLDataNotification',
+        u'dataUsageReport',
+        u'gNB-CU-UP-CounterCheck',
+        u'gNB-CU-UP-StatusIndication',
+        u'privateMessage',
+        u'mRDC-DataUsageReport',
         ]
     _type_ = [
-        u'Criticality',
-        u'Presence',
-        u'PrivateIE-ID',
-        u'ProcedureCode',
-        u'ProtocolExtensionID',
-        u'ProtocolIE-ID',
-        u'TriggeringMessage',
+        u'E1AP-ELEMENTARY-PROCEDURE',
+        u'E1AP-PDU',
+        u'InitiatingMessage',
+        u'SuccessfulOutcome',
+        u'UnsuccessfulOutcome',
         ]
     _set_ = [
+        u'E1AP-ELEMENTARY-PROCEDURES',
+        u'E1AP-ELEMENTARY-PROCEDURES-CLASS-1',
+        u'E1AP-ELEMENTARY-PROCEDURES-CLASS-2',
         ]
     _val_ = [
-        u'maxPrivateIEs',
-        u'maxProtocolExtensions',
-        u'maxProtocolIEs',
+        u'reset',
+        u'errorIndication',
+        u'gNB-CU-UP-E1Setup',
+        u'gNB-CU-CP-E1Setup',
+        u'gNB-CU-UP-ConfigurationUpdate',
+        u'gNB-CU-CP-ConfigurationUpdate',
+        u'e1Release',
+        u'bearerContextSetup',
+        u'bearerContextModification',
+        u'bearerContextModificationRequired',
+        u'bearerContextRelease',
+        u'bearerContextReleaseRequest',
+        u'bearerContextInactivityNotification',
+        u'dLDataNotification',
+        u'uLDataNotification',
+        u'dataUsageReport',
+        u'gNB-CU-UP-CounterCheck',
+        u'gNB-CU-UP-StatusIndication',
+        u'privateMessage',
+        u'mRDC-DataUsageReport',
         ]
     _class_ = [
+        u'E1AP-ELEMENTARY-PROCEDURE',
+        u'E1AP-ELEMENTARY-PROCEDURES',
+        u'E1AP-ELEMENTARY-PROCEDURES-CLASS-1',
+        u'E1AP-ELEMENTARY-PROCEDURES-CLASS-2',
+        u'reset',
+        u'errorIndication',
+        u'gNB-CU-UP-E1Setup',
+        u'gNB-CU-CP-E1Setup',
+        u'gNB-CU-UP-ConfigurationUpdate',
+        u'gNB-CU-CP-ConfigurationUpdate',
+        u'e1Release',
+        u'bearerContextSetup',
+        u'bearerContextModification',
+        u'bearerContextModificationRequired',
+        u'bearerContextRelease',
+        u'bearerContextReleaseRequest',
+        u'bearerContextInactivityNotification',
+        u'dLDataNotification',
+        u'uLDataNotification',
+        u'dataUsageReport',
+        u'gNB-CU-UP-CounterCheck',
+        u'gNB-CU-UP-StatusIndication',
+        u'privateMessage',
+        u'mRDC-DataUsageReport',
         ]
     _param_ = [
         ]
     
-    #-----< maxPrivateIEs >-----#
-    maxPrivateIEs = INT(name=u'maxPrivateIEs', mode=MODE_VALUE)
-    maxPrivateIEs._val = 65535
-    
-    #-----< maxProtocolExtensions >-----#
-    maxProtocolExtensions = INT(name=u'maxProtocolExtensions', mode=MODE_VALUE)
-    maxProtocolExtensions._val = 65535
-    
-    #-----< maxProtocolIEs >-----#
-    maxProtocolIEs = INT(name=u'maxProtocolIEs', mode=MODE_VALUE)
-    maxProtocolIEs._val = 65535
-    
-    #-----< Criticality >-----#
-    Criticality = ENUM(name=u'Criticality', mode=MODE_TYPE)
-    Criticality._cont = ASN1Dict([(u'reject', 0), (u'ignore', 1), (u'notify', 2)])
-    Criticality._ext = None
-    
-    #-----< Presence >-----#
-    Presence = ENUM(name=u'Presence', mode=MODE_TYPE)
-    Presence._cont = ASN1Dict([(u'optional', 0), (u'conditional', 1), (u'mandatory', 2)])
-    Presence._ext = None
-    
-    #-----< PrivateIE-ID >-----#
-    PrivateIE_ID = CHOICE(name=u'PrivateIE-ID', mode=MODE_TYPE)
-    _PrivateIE_ID_local = INT(name=u'local', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _PrivateIE_ID_local._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _PrivateIE_ID_global_ = OID(name=u'global', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    PrivateIE_ID._cont = ASN1Dict([
-        (u'local', _PrivateIE_ID_local),
-        (u'global', _PrivateIE_ID_global_),
+    #-----< E1AP-ELEMENTARY-PROCEDURE >-----#
+    E1AP_ELEMENTARY_PROCEDURE = CLASS(name=u'E1AP-ELEMENTARY-PROCEDURE', mode=MODE_TYPE)
+    _E1AP_ELEMENTARY_PROCEDURE_InitiatingMessage = OPEN(name=u'InitiatingMessage', mode=MODE_TYPE)
+    _E1AP_ELEMENTARY_PROCEDURE_SuccessfulOutcome = OPEN(name=u'SuccessfulOutcome', mode=MODE_TYPE, opt=True)
+    _E1AP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome = OPEN(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, opt=True)
+    _E1AP_ELEMENTARY_PROCEDURE_procedureCode = INT(name=u'procedureCode', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')), uniq=True)
+    _E1AP_ELEMENTARY_PROCEDURE_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'Criticality')), default=u'ignore')
+    E1AP_ELEMENTARY_PROCEDURE._cont = ASN1Dict([
+        (u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURE_InitiatingMessage),
+        (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURE_SuccessfulOutcome),
+        (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome),
+        (u'procedureCode', _E1AP_ELEMENTARY_PROCEDURE_procedureCode),
+        (u'criticality', _E1AP_ELEMENTARY_PROCEDURE_criticality),
         ])
-    PrivateIE_ID._ext = None
     
-    #-----< ProcedureCode >-----#
-    ProcedureCode = INT(name=u'ProcedureCode', mode=MODE_TYPE)
-    ProcedureCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    #-----< E1AP-PDU >-----#
+    E1AP_PDU = CHOICE(name=u'E1AP-PDU', mode=MODE_TYPE)
+    _E1AP_PDU_initiatingMessage = SEQ(name=u'initiatingMessage', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'InitiatingMessage')))
+    _E1AP_PDU_successfulOutcome = SEQ(name=u'successfulOutcome', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'SuccessfulOutcome')))
+    _E1AP_PDU_unsuccessfulOutcome = SEQ(name=u'unsuccessfulOutcome', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'UnsuccessfulOutcome')))
+    E1AP_PDU._cont = ASN1Dict([
+        (u'initiatingMessage', _E1AP_PDU_initiatingMessage),
+        (u'successfulOutcome', _E1AP_PDU_successfulOutcome),
+        (u'unsuccessfulOutcome', _E1AP_PDU_unsuccessfulOutcome),
+        ])
+    E1AP_PDU._ext = []
     
-    #-----< ProtocolExtensionID >-----#
-    ProtocolExtensionID = INT(name=u'ProtocolExtensionID', mode=MODE_TYPE)
-    ProtocolExtensionID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
+    #-----< InitiatingMessage >-----#
+    InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE)
+    _InitiatingMessage_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
+    __InitiatingMessage_procedureCode_tab = CLASS(name='_tab_E1AP-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'Reset')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ResetAcknowledge')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdate')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateAcknowledge')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_3 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdate')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateAcknowledge')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_6 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequired')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationConfirm')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseCommand')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseComplete')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ErrorIndication')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextInactivityNotification')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DLDataNotification')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ULDataNotification')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DataUsageReport')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_16 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-CounterCheckRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_17 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-StatusIndication')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_18 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'MRDC-DataUsageReport')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_19 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'PrivateMessage')))
+    __InitiatingMessage_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_2), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_3), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_3), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_4), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_5), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_6), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_7), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_8), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_9), (u'procedureCode', 11), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_11), (u'procedureCode', 12), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_12), (u'procedureCode', 13), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_13), (u'procedureCode', 14), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_14), (u'procedureCode', 18), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_15), (u'procedureCode', 15), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_16), (u'procedureCode', 16), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_17), (u'procedureCode', 17), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_18), (u'procedureCode', 19), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_19), (u'procedureCode', 2), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
+    _InitiatingMessage_procedureCode._const_tab = __InitiatingMessage_procedureCode_tab
+    _InitiatingMessage_procedureCode._const_tab_at = None
+    _InitiatingMessage_procedureCode._const_tab_id = u'procedureCode'
+    _InitiatingMessage_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE'), [u'criticality']))
+    _InitiatingMessage_criticality._const_tab = __InitiatingMessage_procedureCode_tab
+    _InitiatingMessage_criticality._const_tab_at = ('..', u'procedureCode')
+    _InitiatingMessage_criticality._const_tab_id = u'criticality'
+    _InitiatingMessage_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE'), [u'InitiatingMessage']))
+    _InitiatingMessage_value._const_tab = __InitiatingMessage_procedureCode_tab
+    _InitiatingMessage_value._const_tab_at = ('..', u'procedureCode')
+    _InitiatingMessage_value._const_tab_id = u'InitiatingMessage'
+    InitiatingMessage._cont = ASN1Dict([
+        (u'procedureCode', _InitiatingMessage_procedureCode),
+        (u'criticality', _InitiatingMessage_criticality),
+        (u'value', _InitiatingMessage_value),
+        ])
+    InitiatingMessage._ext = None
     
-    #-----< ProtocolIE-ID >-----#
-    ProtocolIE_ID = INT(name=u'ProtocolIE-ID', mode=MODE_TYPE)
-    ProtocolIE_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
+    #-----< SuccessfulOutcome >-----#
+    SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE)
+    _SuccessfulOutcome_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
+    __SuccessfulOutcome_procedureCode_tab = CLASS(name='_tab_E1AP-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'Reset')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ResetAcknowledge')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdate')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateAcknowledge')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdate')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateAcknowledge')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequired')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationConfirm')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseCommand')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseComplete')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ErrorIndication')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextInactivityNotification')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DLDataNotification')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ULDataNotification')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DataUsageReport')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-CounterCheckRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-StatusIndication')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'MRDC-DataUsageReport')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'PrivateMessage')))
+    __SuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9), (u'procedureCode', 11), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11), (u'procedureCode', 12), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12), (u'procedureCode', 13), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13), (u'procedureCode', 14), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14), (u'procedureCode', 18), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15), (u'procedureCode', 15), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16), (u'procedureCode', 16), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17), (u'procedureCode', 17), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18), (u'procedureCode', 19), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19), (u'procedureCode', 2), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
+    _SuccessfulOutcome_procedureCode._const_tab = __SuccessfulOutcome_procedureCode_tab
+    _SuccessfulOutcome_procedureCode._const_tab_at = None
+    _SuccessfulOutcome_procedureCode._const_tab_id = u'procedureCode'
+    _SuccessfulOutcome_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE'), [u'criticality']))
+    _SuccessfulOutcome_criticality._const_tab = __SuccessfulOutcome_procedureCode_tab
+    _SuccessfulOutcome_criticality._const_tab_at = ('..', u'procedureCode')
+    _SuccessfulOutcome_criticality._const_tab_id = u'criticality'
+    _SuccessfulOutcome_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE'), [u'SuccessfulOutcome']))
+    _SuccessfulOutcome_value._const_tab = __SuccessfulOutcome_procedureCode_tab
+    _SuccessfulOutcome_value._const_tab_at = ('..', u'procedureCode')
+    _SuccessfulOutcome_value._const_tab_id = u'SuccessfulOutcome'
+    SuccessfulOutcome._cont = ASN1Dict([
+        (u'procedureCode', _SuccessfulOutcome_procedureCode),
+        (u'criticality', _SuccessfulOutcome_criticality),
+        (u'value', _SuccessfulOutcome_value),
+        ])
+    SuccessfulOutcome._ext = None
     
-    #-----< TriggeringMessage >-----#
-    TriggeringMessage = ENUM(name=u'TriggeringMessage', mode=MODE_TYPE)
-    TriggeringMessage._cont = ASN1Dict([(u'initiating-message', 0), (u'successful-outcome', 1), (u'unsuccessful-outcome', 2)])
-    TriggeringMessage._ext = None
+    #-----< UnsuccessfulOutcome >-----#
+    UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE)
+    _UnsuccessfulOutcome_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
+    __UnsuccessfulOutcome_procedureCode_tab = CLASS(name='_tab_E1AP-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'Reset')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ResetAcknowledge')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdate')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateAcknowledge')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdate')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateAcknowledge')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequired')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationConfirm')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseCommand')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseComplete')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ErrorIndication')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextInactivityNotification')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DLDataNotification')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ULDataNotification')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DataUsageReport')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-CounterCheckRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-StatusIndication')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'MRDC-DataUsageReport')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'PrivateMessage')))
+    __UnsuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9), (u'procedureCode', 11), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11), (u'procedureCode', 12), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12), (u'procedureCode', 13), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13), (u'procedureCode', 14), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14), (u'procedureCode', 18), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15), (u'procedureCode', 15), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16), (u'procedureCode', 16), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17), (u'procedureCode', 17), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18), (u'procedureCode', 19), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19), (u'procedureCode', 2), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
+    _UnsuccessfulOutcome_procedureCode._const_tab = __UnsuccessfulOutcome_procedureCode_tab
+    _UnsuccessfulOutcome_procedureCode._const_tab_at = None
+    _UnsuccessfulOutcome_procedureCode._const_tab_id = u'procedureCode'
+    _UnsuccessfulOutcome_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE'), [u'criticality']))
+    _UnsuccessfulOutcome_criticality._const_tab = __UnsuccessfulOutcome_procedureCode_tab
+    _UnsuccessfulOutcome_criticality._const_tab_at = ('..', u'procedureCode')
+    _UnsuccessfulOutcome_criticality._const_tab_id = u'criticality'
+    _UnsuccessfulOutcome_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE'), [u'UnsuccessfulOutcome']))
+    _UnsuccessfulOutcome_value._const_tab = __UnsuccessfulOutcome_procedureCode_tab
+    _UnsuccessfulOutcome_value._const_tab_at = ('..', u'procedureCode')
+    _UnsuccessfulOutcome_value._const_tab_id = u'UnsuccessfulOutcome'
+    UnsuccessfulOutcome._cont = ASN1Dict([
+        (u'procedureCode', _UnsuccessfulOutcome_procedureCode),
+        (u'criticality', _UnsuccessfulOutcome_criticality),
+        (u'value', _UnsuccessfulOutcome_value),
+        ])
+    UnsuccessfulOutcome._ext = None
+    
+    #-----< E1AP-ELEMENTARY-PROCEDURES >-----#
+    E1AP_ELEMENTARY_PROCEDURES = CLASS(name=u'E1AP-ELEMENTARY-PROCEDURES', mode=MODE_SET, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'Reset')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ResetAcknowledge')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupRequest')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupResponse')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupFailure')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupRequest')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupResponse')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupFailure')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdate')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateAcknowledge')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_3 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateFailure')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdate')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateAcknowledge')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateFailure')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseRequest')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseResponse')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupRequest')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupResponse')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_6 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupFailure')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequest')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationResponse')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationFailure')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequired')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationConfirm')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseCommand')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseComplete')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ErrorIndication')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseRequest')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextInactivityNotification')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DLDataNotification')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ULDataNotification')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DataUsageReport')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_16 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-CounterCheckRequest')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_17 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-StatusIndication')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_18 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'MRDC-DataUsageReport')))
+    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_19 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'PrivateMessage')))
+    E1AP_ELEMENTARY_PROCEDURES._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_2), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_3), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_3), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_4), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_5), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_6), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_7), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_8), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_9), (u'procedureCode', 11), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_11), (u'procedureCode', 12), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_12), (u'procedureCode', 13), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_13), (u'procedureCode', 14), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_14), (u'procedureCode', 18), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_15), (u'procedureCode', 15), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_16), (u'procedureCode', 16), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_17), (u'procedureCode', 17), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_18), (u'procedureCode', 19), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_19), (u'procedureCode', 2), (u'criticality', u'ignore')])], rr=[], ev=[], er=[])
+    
+    #-----< E1AP-ELEMENTARY-PROCEDURES-CLASS-1 >-----#
+    E1AP_ELEMENTARY_PROCEDURES_CLASS_1 = CLASS(name=u'E1AP-ELEMENTARY-PROCEDURES-CLASS-1', mode=MODE_SET, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'Reset')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ResetAcknowledge')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupRequest')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupResponse')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupFailure')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupRequest')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupResponse')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupFailure')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdate')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateAcknowledge')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_3 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateFailure')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdate')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateAcknowledge')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateFailure')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseRequest')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseResponse')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupRequest')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupResponse')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_6 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupFailure')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequest')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationResponse')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationFailure')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequired')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationConfirm')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseCommand')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseComplete')))
+    E1AP_ELEMENTARY_PROCEDURES_CLASS_1._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_3), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_3), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_3), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_4), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_4), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_5), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_5), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_6), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_6), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_7), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_7), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_8), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_8), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_9), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_9), (u'procedureCode', 11), (u'criticality', u'reject')])], rr=[], ev=[], er=[])
+    
+    #-----< E1AP-ELEMENTARY-PROCEDURES-CLASS-2 >-----#
+    E1AP_ELEMENTARY_PROCEDURES_CLASS_2 = CLASS(name=u'E1AP-ELEMENTARY-PROCEDURES-CLASS-2', mode=MODE_SET, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ErrorIndication')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseRequest')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextInactivityNotification')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DLDataNotification')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ULDataNotification')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DataUsageReport')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-CounterCheckRequest')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-StatusIndication')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'MRDC-DataUsageReport')))
+    _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'PrivateMessage')))
+    E1AP_ELEMENTARY_PROCEDURES_CLASS_2._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1), (u'procedureCode', 12), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2), (u'procedureCode', 13), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3), (u'procedureCode', 14), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4), (u'procedureCode', 18), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5), (u'procedureCode', 15), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_6), (u'procedureCode', 16), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_7), (u'procedureCode', 17), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_8), (u'procedureCode', 19), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_9), (u'procedureCode', 2), (u'criticality', u'ignore')])], rr=[], ev=[], er=[])
+    
+    #-----< reset >-----#
+    reset = CLASS(name=u'reset', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    _reset_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'Reset')))
+    _reset_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ResetAcknowledge')))
+    reset._val = dict([(u'InitiatingMessage', _reset_val_InitiatingMessage), (u'SuccessfulOutcome', _reset_val_SuccessfulOutcome), (u'procedureCode', 0), (u'criticality', u'reject')])
+    
+    #-----< errorIndication >-----#
+    errorIndication = CLASS(name=u'errorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    _errorIndication_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ErrorIndication')))
+    errorIndication._val = dict([(u'InitiatingMessage', _errorIndication_val_InitiatingMessage), (u'procedureCode', 1), (u'criticality', u'ignore')])
+    
+    #-----< gNB-CU-UP-E1Setup >-----#
+    gNB_CU_UP_E1Setup = CLASS(name=u'gNB-CU-UP-E1Setup', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    _gNB_CU_UP_E1Setup_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupRequest')))
+    _gNB_CU_UP_E1Setup_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupResponse')))
+    _gNB_CU_UP_E1Setup_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupFailure')))
+    gNB_CU_UP_E1Setup._val = dict([(u'InitiatingMessage', _gNB_CU_UP_E1Setup_val_InitiatingMessage), (u'SuccessfulOutcome', _gNB_CU_UP_E1Setup_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _gNB_CU_UP_E1Setup_val_UnsuccessfulOutcome), (u'procedureCode', 3), (u'criticality', u'reject')])
+    
+    #-----< gNB-CU-CP-E1Setup >-----#
+    gNB_CU_CP_E1Setup = CLASS(name=u'gNB-CU-CP-E1Setup', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    _gNB_CU_CP_E1Setup_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupRequest')))
+    _gNB_CU_CP_E1Setup_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupResponse')))
+    _gNB_CU_CP_E1Setup_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupFailure')))
+    gNB_CU_CP_E1Setup._val = dict([(u'InitiatingMessage', _gNB_CU_CP_E1Setup_val_InitiatingMessage), (u'SuccessfulOutcome', _gNB_CU_CP_E1Setup_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _gNB_CU_CP_E1Setup_val_UnsuccessfulOutcome), (u'procedureCode', 4), (u'criticality', u'reject')])
+    
+    #-----< gNB-CU-UP-ConfigurationUpdate >-----#
+    gNB_CU_UP_ConfigurationUpdate = CLASS(name=u'gNB-CU-UP-ConfigurationUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    _gNB_CU_UP_ConfigurationUpdate_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdate')))
+    _gNB_CU_UP_ConfigurationUpdate_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateAcknowledge')))
+    _gNB_CU_UP_ConfigurationUpdate_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateFailure')))
+    gNB_CU_UP_ConfigurationUpdate._val = dict([(u'InitiatingMessage', _gNB_CU_UP_ConfigurationUpdate_val_InitiatingMessage), (u'SuccessfulOutcome', _gNB_CU_UP_ConfigurationUpdate_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _gNB_CU_UP_ConfigurationUpdate_val_UnsuccessfulOutcome), (u'procedureCode', 5), (u'criticality', u'reject')])
+    
+    #-----< gNB-CU-CP-ConfigurationUpdate >-----#
+    gNB_CU_CP_ConfigurationUpdate = CLASS(name=u'gNB-CU-CP-ConfigurationUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    _gNB_CU_CP_ConfigurationUpdate_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdate')))
+    _gNB_CU_CP_ConfigurationUpdate_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateAcknowledge')))
+    _gNB_CU_CP_ConfigurationUpdate_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateFailure')))
+    gNB_CU_CP_ConfigurationUpdate._val = dict([(u'InitiatingMessage', _gNB_CU_CP_ConfigurationUpdate_val_InitiatingMessage), (u'SuccessfulOutcome', _gNB_CU_CP_ConfigurationUpdate_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _gNB_CU_CP_ConfigurationUpdate_val_UnsuccessfulOutcome), (u'procedureCode', 6), (u'criticality', u'reject')])
+    
+    #-----< e1Release >-----#
+    e1Release = CLASS(name=u'e1Release', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    _e1Release_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseRequest')))
+    _e1Release_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseResponse')))
+    e1Release._val = dict([(u'InitiatingMessage', _e1Release_val_InitiatingMessage), (u'SuccessfulOutcome', _e1Release_val_SuccessfulOutcome), (u'procedureCode', 7), (u'criticality', u'reject')])
+    
+    #-----< bearerContextSetup >-----#
+    bearerContextSetup = CLASS(name=u'bearerContextSetup', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    _bearerContextSetup_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupRequest')))
+    _bearerContextSetup_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupResponse')))
+    _bearerContextSetup_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupFailure')))
+    bearerContextSetup._val = dict([(u'InitiatingMessage', _bearerContextSetup_val_InitiatingMessage), (u'SuccessfulOutcome', _bearerContextSetup_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _bearerContextSetup_val_UnsuccessfulOutcome), (u'procedureCode', 8), (u'criticality', u'reject')])
+    
+    #-----< bearerContextModification >-----#
+    bearerContextModification = CLASS(name=u'bearerContextModification', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    _bearerContextModification_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequest')))
+    _bearerContextModification_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationResponse')))
+    _bearerContextModification_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationFailure')))
+    bearerContextModification._val = dict([(u'InitiatingMessage', _bearerContextModification_val_InitiatingMessage), (u'SuccessfulOutcome', _bearerContextModification_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _bearerContextModification_val_UnsuccessfulOutcome), (u'procedureCode', 9), (u'criticality', u'reject')])
+    
+    #-----< bearerContextModificationRequired >-----#
+    bearerContextModificationRequired = CLASS(name=u'bearerContextModificationRequired', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    _bearerContextModificationRequired_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequired')))
+    _bearerContextModificationRequired_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationConfirm')))
+    bearerContextModificationRequired._val = dict([(u'InitiatingMessage', _bearerContextModificationRequired_val_InitiatingMessage), (u'SuccessfulOutcome', _bearerContextModificationRequired_val_SuccessfulOutcome), (u'procedureCode', 10), (u'criticality', u'reject')])
+    
+    #-----< bearerContextRelease >-----#
+    bearerContextRelease = CLASS(name=u'bearerContextRelease', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    _bearerContextRelease_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseCommand')))
+    _bearerContextRelease_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseComplete')))
+    bearerContextRelease._val = dict([(u'InitiatingMessage', _bearerContextRelease_val_InitiatingMessage), (u'SuccessfulOutcome', _bearerContextRelease_val_SuccessfulOutcome), (u'procedureCode', 11), (u'criticality', u'reject')])
+    
+    #-----< bearerContextReleaseRequest >-----#
+    bearerContextReleaseRequest = CLASS(name=u'bearerContextReleaseRequest', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    _bearerContextReleaseRequest_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseRequest')))
+    bearerContextReleaseRequest._val = dict([(u'InitiatingMessage', _bearerContextReleaseRequest_val_InitiatingMessage), (u'procedureCode', 12), (u'criticality', u'ignore')])
+    
+    #-----< bearerContextInactivityNotification >-----#
+    bearerContextInactivityNotification = CLASS(name=u'bearerContextInactivityNotification', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    _bearerContextInactivityNotification_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextInactivityNotification')))
+    bearerContextInactivityNotification._val = dict([(u'InitiatingMessage', _bearerContextInactivityNotification_val_InitiatingMessage), (u'procedureCode', 13), (u'criticality', u'ignore')])
+    
+    #-----< dLDataNotification >-----#
+    dLDataNotification = CLASS(name=u'dLDataNotification', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    _dLDataNotification_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DLDataNotification')))
+    dLDataNotification._val = dict([(u'InitiatingMessage', _dLDataNotification_val_InitiatingMessage), (u'procedureCode', 14), (u'criticality', u'ignore')])
+    
+    #-----< uLDataNotification >-----#
+    uLDataNotification = CLASS(name=u'uLDataNotification', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    _uLDataNotification_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ULDataNotification')))
+    uLDataNotification._val = dict([(u'InitiatingMessage', _uLDataNotification_val_InitiatingMessage), (u'procedureCode', 18), (u'criticality', u'ignore')])
+    
+    #-----< dataUsageReport >-----#
+    dataUsageReport = CLASS(name=u'dataUsageReport', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    _dataUsageReport_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DataUsageReport')))
+    dataUsageReport._val = dict([(u'InitiatingMessage', _dataUsageReport_val_InitiatingMessage), (u'procedureCode', 15), (u'criticality', u'ignore')])
+    
+    #-----< gNB-CU-UP-CounterCheck >-----#
+    gNB_CU_UP_CounterCheck = CLASS(name=u'gNB-CU-UP-CounterCheck', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    _gNB_CU_UP_CounterCheck_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-CounterCheckRequest')))
+    gNB_CU_UP_CounterCheck._val = dict([(u'InitiatingMessage', _gNB_CU_UP_CounterCheck_val_InitiatingMessage), (u'procedureCode', 16), (u'criticality', u'ignore')])
+    
+    #-----< gNB-CU-UP-StatusIndication >-----#
+    gNB_CU_UP_StatusIndication = CLASS(name=u'gNB-CU-UP-StatusIndication', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    _gNB_CU_UP_StatusIndication_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-StatusIndication')))
+    gNB_CU_UP_StatusIndication._val = dict([(u'InitiatingMessage', _gNB_CU_UP_StatusIndication_val_InitiatingMessage), (u'procedureCode', 17), (u'criticality', u'ignore')])
+    
+    #-----< privateMessage >-----#
+    privateMessage = CLASS(name=u'privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    _privateMessage_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'PrivateMessage')))
+    privateMessage._val = dict([(u'InitiatingMessage', _privateMessage_val_InitiatingMessage), (u'procedureCode', 2), (u'criticality', u'ignore')])
+    
+    #-----< mRDC-DataUsageReport >-----#
+    mRDC_DataUsageReport = CLASS(name=u'mRDC-DataUsageReport', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
+    _mRDC_DataUsageReport_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'MRDC-DataUsageReport')))
+    mRDC_DataUsageReport._val = dict([(u'InitiatingMessage', _mRDC_DataUsageReport_val_InitiatingMessage), (u'procedureCode', 19), (u'criticality', u'ignore')])
     
     _all_ = [
-        maxPrivateIEs,
-        maxProtocolExtensions,
-        maxProtocolIEs,
-        Criticality,
-        Presence,
-        _PrivateIE_ID_local,
-        _PrivateIE_ID_global_,
-        PrivateIE_ID,
-        ProcedureCode,
-        ProtocolExtensionID,
-        ProtocolIE_ID,
-        TriggeringMessage,
-    ]
-
-class E1AP_Constants:
-
-    _name_  = u'E1AP-Constants'
-    _oid_   = [0, 4, 0, 0, 22, 3, 5, 1, 4]
-    
-    _obj_ = [
-        u'id-reset',
-        u'id-errorIndication',
-        u'id-privateMessage',
-        u'id-gNB-CU-UP-E1Setup',
-        u'id-gNB-CU-CP-E1Setup',
-        u'id-gNB-CU-UP-ConfigurationUpdate',
-        u'id-gNB-CU-CP-ConfigurationUpdate',
-        u'id-e1Release',
-        u'id-bearerContextSetup',
-        u'id-bearerContextModification',
-        u'id-bearerContextModificationRequired',
-        u'id-bearerContextRelease',
-        u'id-bearerContextReleaseRequest',
-        u'id-bearerContextInactivityNotification',
-        u'id-dLDataNotification',
-        u'id-dataUsageReport',
-        u'id-gNB-CU-UP-CounterCheck',
-        u'id-gNB-CU-UP-StatusIndication',
-        u'id-uLDataNotification',
-        u'id-mRDC-DataUsageReport',
-        u'maxnoofErrors',
-        u'maxnoofSPLMNs',
-        u'maxnoofSliceItems',
-        u'maxnoofIndividualE1ConnectionsToReset',
-        u'maxnoofEUTRANQOSParameters',
-        u'maxnoofNGRANQOSParameters',
-        u'maxnoofDRBs',
-        u'maxnoofNRCGI',
-        u'maxnoofPDUSessionResource',
-        u'maxnoofQoSFlows',
-        u'maxnoofUPParameters',
-        u'maxnoofCellGroups',
-        u'maxnooftimeperiods',
-        u'maxnoofTNLAssociations',
-        u'id-Cause',
-        u'id-CriticalityDiagnostics',
-        u'id-gNB-CU-CP-UE-E1AP-ID',
-        u'id-gNB-CU-UP-UE-E1AP-ID',
-        u'id-ResetType',
-        u'id-UE-associatedLogicalE1-ConnectionItem',
-        u'id-UE-associatedLogicalE1-ConnectionListResAck',
-        u'id-gNB-CU-UP-ID',
-        u'id-gNB-CU-UP-Name',
-        u'id-gNB-CU-CP-Name',
-        u'id-CNSupport',
-        u'id-SupportedPLMNs',
-        u'id-TimeToWait',
-        u'id-SecurityInformation',
-        u'id-UEDLAggregateMaximumBitRate',
-        u'id-System-BearerContextSetupRequest',
-        u'id-System-BearerContextSetupResponse',
-        u'id-BearerContextStatusChange',
-        u'id-System-BearerContextModificationRequest',
-        u'id-System-BearerContextModificationResponse',
-        u'id-System-BearerContextModificationConfirm',
-        u'id-System-BearerContextModificationRequired',
-        u'id-DRB-Status-List',
-        u'id-ActivityNotificationLevel',
-        u'id-ActivityInformation',
-        u'id-Data-Usage-Report-List',
-        u'id-New-UL-TNL-Information-Required',
-        u'id-GNB-CU-CP-TNLA-To-Add-List',
-        u'id-GNB-CU-CP-TNLA-To-Remove-List',
-        u'id-GNB-CU-CP-TNLA-To-Update-List',
-        u'id-GNB-CU-CP-TNLA-Setup-List',
-        u'id-GNB-CU-CP-TNLA-Failed-To-Setup-List',
-        u'id-DRB-To-Setup-List-EUTRAN',
-        u'id-DRB-To-Modify-List-EUTRAN',
-        u'id-DRB-To-Remove-List-EUTRAN',
-        u'id-DRB-Required-To-Modify-List-EUTRAN',
-        u'id-DRB-Required-To-Remove-List-EUTRAN',
-        u'id-DRB-Setup-List-EUTRAN',
-        u'id-DRB-Failed-List-EUTRAN',
-        u'id-DRB-Modified-List-EUTRAN',
-        u'id-DRB-Failed-To-Modify-List-EUTRAN',
-        u'id-DRB-Confirm-Modified-List-EUTRAN',
-        u'id-PDU-Session-Resource-To-Setup-List',
-        u'id-PDU-Session-Resource-To-Modify-List',
-        u'id-PDU-Session-Resource-To-Remove-List',
-        u'id-PDU-Session-Resource-Required-To-Modify-List',
-        u'id-PDU-Session-Resource-Setup-List',
-        u'id-PDU-Session-Resource-Failed-List',
-        u'id-PDU-Session-Resource-Modified-List',
-        u'id-PDU-Session-Resource-Failed-To-Modify-List',
-        u'id-PDU-Session-Resource-Confirm-Modified-List',
-        u'id-DRB-To-Setup-Mod-List-EUTRAN',
-        u'id-DRB-Setup-Mod-List-EUTRAN',
-        u'id-DRB-Failed-Mod-List-EUTRAN',
-        u'id-PDU-Session-Resource-Setup-Mod-List',
-        u'id-PDU-Session-Resource-Failed-Mod-List',
-        u'id-PDU-Session-Resource-To-Setup-Mod-List',
-        u'id-TransactionID',
-        u'id-Serving-PLMN',
-        u'id-UE-Inactivity-Timer',
-        u'id-System-GNB-CU-UP-CounterCheckRequest',
-        u'id-DRBs-Subject-To-Counter-Check-List-EUTRAN',
-        u'id-DRBs-Subject-To-Counter-Check-List-NG-RAN',
-        u'id-PPI',
-        u'id-gNB-CU-UP-Capacity',
-        u'id-GNB-CU-UP-OverloadInformation',
-        u'id-UEDLMaximumIntegrityProtectedDataRate',
-        u'id-PDU-Session-To-Notify-List',
-        u'id-PDU-Session-Resource-Data-Usage-List',
-        u'id-SNSSAI',
-        u'id-DataDiscardRequired',
-        ]
-    _type_ = [
-        ]
-    _set_ = [
-        ]
-    _val_ = [
-        u'id-reset',
-        u'id-errorIndication',
-        u'id-privateMessage',
-        u'id-gNB-CU-UP-E1Setup',
-        u'id-gNB-CU-CP-E1Setup',
-        u'id-gNB-CU-UP-ConfigurationUpdate',
-        u'id-gNB-CU-CP-ConfigurationUpdate',
-        u'id-e1Release',
-        u'id-bearerContextSetup',
-        u'id-bearerContextModification',
-        u'id-bearerContextModificationRequired',
-        u'id-bearerContextRelease',
-        u'id-bearerContextReleaseRequest',
-        u'id-bearerContextInactivityNotification',
-        u'id-dLDataNotification',
-        u'id-dataUsageReport',
-        u'id-gNB-CU-UP-CounterCheck',
-        u'id-gNB-CU-UP-StatusIndication',
-        u'id-uLDataNotification',
-        u'id-mRDC-DataUsageReport',
-        u'maxnoofErrors',
-        u'maxnoofSPLMNs',
-        u'maxnoofSliceItems',
-        u'maxnoofIndividualE1ConnectionsToReset',
-        u'maxnoofEUTRANQOSParameters',
-        u'maxnoofNGRANQOSParameters',
-        u'maxnoofDRBs',
-        u'maxnoofNRCGI',
-        u'maxnoofPDUSessionResource',
-        u'maxnoofQoSFlows',
-        u'maxnoofUPParameters',
-        u'maxnoofCellGroups',
-        u'maxnooftimeperiods',
-        u'maxnoofTNLAssociations',
-        u'id-Cause',
-        u'id-CriticalityDiagnostics',
-        u'id-gNB-CU-CP-UE-E1AP-ID',
-        u'id-gNB-CU-UP-UE-E1AP-ID',
-        u'id-ResetType',
-        u'id-UE-associatedLogicalE1-ConnectionItem',
-        u'id-UE-associatedLogicalE1-ConnectionListResAck',
-        u'id-gNB-CU-UP-ID',
-        u'id-gNB-CU-UP-Name',
-        u'id-gNB-CU-CP-Name',
-        u'id-CNSupport',
-        u'id-SupportedPLMNs',
-        u'id-TimeToWait',
-        u'id-SecurityInformation',
-        u'id-UEDLAggregateMaximumBitRate',
-        u'id-System-BearerContextSetupRequest',
-        u'id-System-BearerContextSetupResponse',
-        u'id-BearerContextStatusChange',
-        u'id-System-BearerContextModificationRequest',
-        u'id-System-BearerContextModificationResponse',
-        u'id-System-BearerContextModificationConfirm',
-        u'id-System-BearerContextModificationRequired',
-        u'id-DRB-Status-List',
-        u'id-ActivityNotificationLevel',
-        u'id-ActivityInformation',
-        u'id-Data-Usage-Report-List',
-        u'id-New-UL-TNL-Information-Required',
-        u'id-GNB-CU-CP-TNLA-To-Add-List',
-        u'id-GNB-CU-CP-TNLA-To-Remove-List',
-        u'id-GNB-CU-CP-TNLA-To-Update-List',
-        u'id-GNB-CU-CP-TNLA-Setup-List',
-        u'id-GNB-CU-CP-TNLA-Failed-To-Setup-List',
-        u'id-DRB-To-Setup-List-EUTRAN',
-        u'id-DRB-To-Modify-List-EUTRAN',
-        u'id-DRB-To-Remove-List-EUTRAN',
-        u'id-DRB-Required-To-Modify-List-EUTRAN',
-        u'id-DRB-Required-To-Remove-List-EUTRAN',
-        u'id-DRB-Setup-List-EUTRAN',
-        u'id-DRB-Failed-List-EUTRAN',
-        u'id-DRB-Modified-List-EUTRAN',
-        u'id-DRB-Failed-To-Modify-List-EUTRAN',
-        u'id-DRB-Confirm-Modified-List-EUTRAN',
-        u'id-PDU-Session-Resource-To-Setup-List',
-        u'id-PDU-Session-Resource-To-Modify-List',
-        u'id-PDU-Session-Resource-To-Remove-List',
-        u'id-PDU-Session-Resource-Required-To-Modify-List',
-        u'id-PDU-Session-Resource-Setup-List',
-        u'id-PDU-Session-Resource-Failed-List',
-        u'id-PDU-Session-Resource-Modified-List',
-        u'id-PDU-Session-Resource-Failed-To-Modify-List',
-        u'id-PDU-Session-Resource-Confirm-Modified-List',
-        u'id-DRB-To-Setup-Mod-List-EUTRAN',
-        u'id-DRB-Setup-Mod-List-EUTRAN',
-        u'id-DRB-Failed-Mod-List-EUTRAN',
-        u'id-PDU-Session-Resource-Setup-Mod-List',
-        u'id-PDU-Session-Resource-Failed-Mod-List',
-        u'id-PDU-Session-Resource-To-Setup-Mod-List',
-        u'id-TransactionID',
-        u'id-Serving-PLMN',
-        u'id-UE-Inactivity-Timer',
-        u'id-System-GNB-CU-UP-CounterCheckRequest',
-        u'id-DRBs-Subject-To-Counter-Check-List-EUTRAN',
-        u'id-DRBs-Subject-To-Counter-Check-List-NG-RAN',
-        u'id-PPI',
-        u'id-gNB-CU-UP-Capacity',
-        u'id-GNB-CU-UP-OverloadInformation',
-        u'id-UEDLMaximumIntegrityProtectedDataRate',
-        u'id-PDU-Session-To-Notify-List',
-        u'id-PDU-Session-Resource-Data-Usage-List',
-        u'id-SNSSAI',
-        u'id-DataDiscardRequired',
-        ]
-    _class_ = [
-        ]
-    _param_ = [
-        ]
-    
-    #-----< id-reset >-----#
-    id_reset = INT(name=u'id-reset', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
-    id_reset._val = 0
-    
-    #-----< id-errorIndication >-----#
-    id_errorIndication = INT(name=u'id-errorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
-    id_errorIndication._val = 1
-    
-    #-----< id-privateMessage >-----#
-    id_privateMessage = INT(name=u'id-privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
-    id_privateMessage._val = 2
-    
-    #-----< id-gNB-CU-UP-E1Setup >-----#
-    id_gNB_CU_UP_E1Setup = INT(name=u'id-gNB-CU-UP-E1Setup', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
-    id_gNB_CU_UP_E1Setup._val = 3
-    
-    #-----< id-gNB-CU-CP-E1Setup >-----#
-    id_gNB_CU_CP_E1Setup = INT(name=u'id-gNB-CU-CP-E1Setup', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
-    id_gNB_CU_CP_E1Setup._val = 4
-    
-    #-----< id-gNB-CU-UP-ConfigurationUpdate >-----#
-    id_gNB_CU_UP_ConfigurationUpdate = INT(name=u'id-gNB-CU-UP-ConfigurationUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
-    id_gNB_CU_UP_ConfigurationUpdate._val = 5
-    
-    #-----< id-gNB-CU-CP-ConfigurationUpdate >-----#
-    id_gNB_CU_CP_ConfigurationUpdate = INT(name=u'id-gNB-CU-CP-ConfigurationUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
-    id_gNB_CU_CP_ConfigurationUpdate._val = 6
-    
-    #-----< id-e1Release >-----#
-    id_e1Release = INT(name=u'id-e1Release', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
-    id_e1Release._val = 7
-    
-    #-----< id-bearerContextSetup >-----#
-    id_bearerContextSetup = INT(name=u'id-bearerContextSetup', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
-    id_bearerContextSetup._val = 8
-    
-    #-----< id-bearerContextModification >-----#
-    id_bearerContextModification = INT(name=u'id-bearerContextModification', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
-    id_bearerContextModification._val = 9
-    
-    #-----< id-bearerContextModificationRequired >-----#
-    id_bearerContextModificationRequired = INT(name=u'id-bearerContextModificationRequired', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
-    id_bearerContextModificationRequired._val = 10
-    
-    #-----< id-bearerContextRelease >-----#
-    id_bearerContextRelease = INT(name=u'id-bearerContextRelease', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
-    id_bearerContextRelease._val = 11
-    
-    #-----< id-bearerContextReleaseRequest >-----#
-    id_bearerContextReleaseRequest = INT(name=u'id-bearerContextReleaseRequest', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
-    id_bearerContextReleaseRequest._val = 12
-    
-    #-----< id-bearerContextInactivityNotification >-----#
-    id_bearerContextInactivityNotification = INT(name=u'id-bearerContextInactivityNotification', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
-    id_bearerContextInactivityNotification._val = 13
-    
-    #-----< id-dLDataNotification >-----#
-    id_dLDataNotification = INT(name=u'id-dLDataNotification', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
-    id_dLDataNotification._val = 14
-    
-    #-----< id-dataUsageReport >-----#
-    id_dataUsageReport = INT(name=u'id-dataUsageReport', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
-    id_dataUsageReport._val = 15
-    
-    #-----< id-gNB-CU-UP-CounterCheck >-----#
-    id_gNB_CU_UP_CounterCheck = INT(name=u'id-gNB-CU-UP-CounterCheck', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
-    id_gNB_CU_UP_CounterCheck._val = 16
-    
-    #-----< id-gNB-CU-UP-StatusIndication >-----#
-    id_gNB_CU_UP_StatusIndication = INT(name=u'id-gNB-CU-UP-StatusIndication', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
-    id_gNB_CU_UP_StatusIndication._val = 17
-    
-    #-----< id-uLDataNotification >-----#
-    id_uLDataNotification = INT(name=u'id-uLDataNotification', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
-    id_uLDataNotification._val = 18
-    
-    #-----< id-mRDC-DataUsageReport >-----#
-    id_mRDC_DataUsageReport = INT(name=u'id-mRDC-DataUsageReport', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
-    id_mRDC_DataUsageReport._val = 19
-    
-    #-----< maxnoofErrors >-----#
-    maxnoofErrors = INT(name=u'maxnoofErrors', mode=MODE_VALUE)
-    maxnoofErrors._val = 256
-    
-    #-----< maxnoofSPLMNs >-----#
-    maxnoofSPLMNs = INT(name=u'maxnoofSPLMNs', mode=MODE_VALUE)
-    maxnoofSPLMNs._val = 12
-    
-    #-----< maxnoofSliceItems >-----#
-    maxnoofSliceItems = INT(name=u'maxnoofSliceItems', mode=MODE_VALUE)
-    maxnoofSliceItems._val = 1024
-    
-    #-----< maxnoofIndividualE1ConnectionsToReset >-----#
-    maxnoofIndividualE1ConnectionsToReset = INT(name=u'maxnoofIndividualE1ConnectionsToReset', mode=MODE_VALUE)
-    maxnoofIndividualE1ConnectionsToReset._val = 65536
-    
-    #-----< maxnoofEUTRANQOSParameters >-----#
-    maxnoofEUTRANQOSParameters = INT(name=u'maxnoofEUTRANQOSParameters', mode=MODE_VALUE)
-    maxnoofEUTRANQOSParameters._val = 256
-    
-    #-----< maxnoofNGRANQOSParameters >-----#
-    maxnoofNGRANQOSParameters = INT(name=u'maxnoofNGRANQOSParameters', mode=MODE_VALUE)
-    maxnoofNGRANQOSParameters._val = 256
-    
-    #-----< maxnoofDRBs >-----#
-    maxnoofDRBs = INT(name=u'maxnoofDRBs', mode=MODE_VALUE)
-    maxnoofDRBs._val = 32
-    
-    #-----< maxnoofNRCGI >-----#
-    maxnoofNRCGI = INT(name=u'maxnoofNRCGI', mode=MODE_VALUE)
-    maxnoofNRCGI._val = 512
-    
-    #-----< maxnoofPDUSessionResource >-----#
-    maxnoofPDUSessionResource = INT(name=u'maxnoofPDUSessionResource', mode=MODE_VALUE)
-    maxnoofPDUSessionResource._val = 256
-    
-    #-----< maxnoofQoSFlows >-----#
-    maxnoofQoSFlows = INT(name=u'maxnoofQoSFlows', mode=MODE_VALUE)
-    maxnoofQoSFlows._val = 64
-    
-    #-----< maxnoofUPParameters >-----#
-    maxnoofUPParameters = INT(name=u'maxnoofUPParameters', mode=MODE_VALUE)
-    maxnoofUPParameters._val = 8
-    
-    #-----< maxnoofCellGroups >-----#
-    maxnoofCellGroups = INT(name=u'maxnoofCellGroups', mode=MODE_VALUE)
-    maxnoofCellGroups._val = 4
-    
-    #-----< maxnooftimeperiods >-----#
-    maxnooftimeperiods = INT(name=u'maxnooftimeperiods', mode=MODE_VALUE)
-    maxnooftimeperiods._val = 2
-    
-    #-----< maxnoofTNLAssociations >-----#
-    maxnoofTNLAssociations = INT(name=u'maxnoofTNLAssociations', mode=MODE_VALUE)
-    maxnoofTNLAssociations._val = 32
-    
-    #-----< id-Cause >-----#
-    id_Cause = INT(name=u'id-Cause', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_Cause._val = 0
-    
-    #-----< id-CriticalityDiagnostics >-----#
-    id_CriticalityDiagnostics = INT(name=u'id-CriticalityDiagnostics', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_CriticalityDiagnostics._val = 1
-    
-    #-----< id-gNB-CU-CP-UE-E1AP-ID >-----#
-    id_gNB_CU_CP_UE_E1AP_ID = INT(name=u'id-gNB-CU-CP-UE-E1AP-ID', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_gNB_CU_CP_UE_E1AP_ID._val = 2
-    
-    #-----< id-gNB-CU-UP-UE-E1AP-ID >-----#
-    id_gNB_CU_UP_UE_E1AP_ID = INT(name=u'id-gNB-CU-UP-UE-E1AP-ID', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_gNB_CU_UP_UE_E1AP_ID._val = 3
-    
-    #-----< id-ResetType >-----#
-    id_ResetType = INT(name=u'id-ResetType', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_ResetType._val = 4
-    
-    #-----< id-UE-associatedLogicalE1-ConnectionItem >-----#
-    id_UE_associatedLogicalE1_ConnectionItem = INT(name=u'id-UE-associatedLogicalE1-ConnectionItem', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_UE_associatedLogicalE1_ConnectionItem._val = 5
-    
-    #-----< id-UE-associatedLogicalE1-ConnectionListResAck >-----#
-    id_UE_associatedLogicalE1_ConnectionListResAck = INT(name=u'id-UE-associatedLogicalE1-ConnectionListResAck', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_UE_associatedLogicalE1_ConnectionListResAck._val = 6
-    
-    #-----< id-gNB-CU-UP-ID >-----#
-    id_gNB_CU_UP_ID = INT(name=u'id-gNB-CU-UP-ID', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_gNB_CU_UP_ID._val = 7
-    
-    #-----< id-gNB-CU-UP-Name >-----#
-    id_gNB_CU_UP_Name = INT(name=u'id-gNB-CU-UP-Name', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_gNB_CU_UP_Name._val = 8
-    
-    #-----< id-gNB-CU-CP-Name >-----#
-    id_gNB_CU_CP_Name = INT(name=u'id-gNB-CU-CP-Name', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_gNB_CU_CP_Name._val = 9
-    
-    #-----< id-CNSupport >-----#
-    id_CNSupport = INT(name=u'id-CNSupport', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_CNSupport._val = 10
-    
-    #-----< id-SupportedPLMNs >-----#
-    id_SupportedPLMNs = INT(name=u'id-SupportedPLMNs', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_SupportedPLMNs._val = 11
-    
-    #-----< id-TimeToWait >-----#
-    id_TimeToWait = INT(name=u'id-TimeToWait', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_TimeToWait._val = 12
-    
-    #-----< id-SecurityInformation >-----#
-    id_SecurityInformation = INT(name=u'id-SecurityInformation', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_SecurityInformation._val = 13
-    
-    #-----< id-UEDLAggregateMaximumBitRate >-----#
-    id_UEDLAggregateMaximumBitRate = INT(name=u'id-UEDLAggregateMaximumBitRate', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_UEDLAggregateMaximumBitRate._val = 14
-    
-    #-----< id-System-BearerContextSetupRequest >-----#
-    id_System_BearerContextSetupRequest = INT(name=u'id-System-BearerContextSetupRequest', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_System_BearerContextSetupRequest._val = 15
-    
-    #-----< id-System-BearerContextSetupResponse >-----#
-    id_System_BearerContextSetupResponse = INT(name=u'id-System-BearerContextSetupResponse', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_System_BearerContextSetupResponse._val = 16
-    
-    #-----< id-BearerContextStatusChange >-----#
-    id_BearerContextStatusChange = INT(name=u'id-BearerContextStatusChange', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_BearerContextStatusChange._val = 17
-    
-    #-----< id-System-BearerContextModificationRequest >-----#
-    id_System_BearerContextModificationRequest = INT(name=u'id-System-BearerContextModificationRequest', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_System_BearerContextModificationRequest._val = 18
-    
-    #-----< id-System-BearerContextModificationResponse >-----#
-    id_System_BearerContextModificationResponse = INT(name=u'id-System-BearerContextModificationResponse', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_System_BearerContextModificationResponse._val = 19
-    
-    #-----< id-System-BearerContextModificationConfirm >-----#
-    id_System_BearerContextModificationConfirm = INT(name=u'id-System-BearerContextModificationConfirm', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_System_BearerContextModificationConfirm._val = 20
-    
-    #-----< id-System-BearerContextModificationRequired >-----#
-    id_System_BearerContextModificationRequired = INT(name=u'id-System-BearerContextModificationRequired', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_System_BearerContextModificationRequired._val = 21
-    
-    #-----< id-DRB-Status-List >-----#
-    id_DRB_Status_List = INT(name=u'id-DRB-Status-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_DRB_Status_List._val = 22
-    
-    #-----< id-ActivityNotificationLevel >-----#
-    id_ActivityNotificationLevel = INT(name=u'id-ActivityNotificationLevel', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_ActivityNotificationLevel._val = 23
-    
-    #-----< id-ActivityInformation >-----#
-    id_ActivityInformation = INT(name=u'id-ActivityInformation', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_ActivityInformation._val = 24
-    
-    #-----< id-Data-Usage-Report-List >-----#
-    id_Data_Usage_Report_List = INT(name=u'id-Data-Usage-Report-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_Data_Usage_Report_List._val = 25
-    
-    #-----< id-New-UL-TNL-Information-Required >-----#
-    id_New_UL_TNL_Information_Required = INT(name=u'id-New-UL-TNL-Information-Required', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_New_UL_TNL_Information_Required._val = 26
-    
-    #-----< id-GNB-CU-CP-TNLA-To-Add-List >-----#
-    id_GNB_CU_CP_TNLA_To_Add_List = INT(name=u'id-GNB-CU-CP-TNLA-To-Add-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_GNB_CU_CP_TNLA_To_Add_List._val = 27
-    
-    #-----< id-GNB-CU-CP-TNLA-To-Remove-List >-----#
-    id_GNB_CU_CP_TNLA_To_Remove_List = INT(name=u'id-GNB-CU-CP-TNLA-To-Remove-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_GNB_CU_CP_TNLA_To_Remove_List._val = 28
-    
-    #-----< id-GNB-CU-CP-TNLA-To-Update-List >-----#
-    id_GNB_CU_CP_TNLA_To_Update_List = INT(name=u'id-GNB-CU-CP-TNLA-To-Update-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_GNB_CU_CP_TNLA_To_Update_List._val = 29
-    
-    #-----< id-GNB-CU-CP-TNLA-Setup-List >-----#
-    id_GNB_CU_CP_TNLA_Setup_List = INT(name=u'id-GNB-CU-CP-TNLA-Setup-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_GNB_CU_CP_TNLA_Setup_List._val = 30
-    
-    #-----< id-GNB-CU-CP-TNLA-Failed-To-Setup-List >-----#
-    id_GNB_CU_CP_TNLA_Failed_To_Setup_List = INT(name=u'id-GNB-CU-CP-TNLA-Failed-To-Setup-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_GNB_CU_CP_TNLA_Failed_To_Setup_List._val = 31
-    
-    #-----< id-DRB-To-Setup-List-EUTRAN >-----#
-    id_DRB_To_Setup_List_EUTRAN = INT(name=u'id-DRB-To-Setup-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_DRB_To_Setup_List_EUTRAN._val = 32
-    
-    #-----< id-DRB-To-Modify-List-EUTRAN >-----#
-    id_DRB_To_Modify_List_EUTRAN = INT(name=u'id-DRB-To-Modify-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_DRB_To_Modify_List_EUTRAN._val = 33
-    
-    #-----< id-DRB-To-Remove-List-EUTRAN >-----#
-    id_DRB_To_Remove_List_EUTRAN = INT(name=u'id-DRB-To-Remove-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_DRB_To_Remove_List_EUTRAN._val = 34
-    
-    #-----< id-DRB-Required-To-Modify-List-EUTRAN >-----#
-    id_DRB_Required_To_Modify_List_EUTRAN = INT(name=u'id-DRB-Required-To-Modify-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_DRB_Required_To_Modify_List_EUTRAN._val = 35
-    
-    #-----< id-DRB-Required-To-Remove-List-EUTRAN >-----#
-    id_DRB_Required_To_Remove_List_EUTRAN = INT(name=u'id-DRB-Required-To-Remove-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_DRB_Required_To_Remove_List_EUTRAN._val = 36
-    
-    #-----< id-DRB-Setup-List-EUTRAN >-----#
-    id_DRB_Setup_List_EUTRAN = INT(name=u'id-DRB-Setup-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_DRB_Setup_List_EUTRAN._val = 37
-    
-    #-----< id-DRB-Failed-List-EUTRAN >-----#
-    id_DRB_Failed_List_EUTRAN = INT(name=u'id-DRB-Failed-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_DRB_Failed_List_EUTRAN._val = 38
-    
-    #-----< id-DRB-Modified-List-EUTRAN >-----#
-    id_DRB_Modified_List_EUTRAN = INT(name=u'id-DRB-Modified-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_DRB_Modified_List_EUTRAN._val = 39
-    
-    #-----< id-DRB-Failed-To-Modify-List-EUTRAN >-----#
-    id_DRB_Failed_To_Modify_List_EUTRAN = INT(name=u'id-DRB-Failed-To-Modify-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_DRB_Failed_To_Modify_List_EUTRAN._val = 40
-    
-    #-----< id-DRB-Confirm-Modified-List-EUTRAN >-----#
-    id_DRB_Confirm_Modified_List_EUTRAN = INT(name=u'id-DRB-Confirm-Modified-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_DRB_Confirm_Modified_List_EUTRAN._val = 41
-    
-    #-----< id-PDU-Session-Resource-To-Setup-List >-----#
-    id_PDU_Session_Resource_To_Setup_List = INT(name=u'id-PDU-Session-Resource-To-Setup-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_PDU_Session_Resource_To_Setup_List._val = 42
-    
-    #-----< id-PDU-Session-Resource-To-Modify-List >-----#
-    id_PDU_Session_Resource_To_Modify_List = INT(name=u'id-PDU-Session-Resource-To-Modify-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_PDU_Session_Resource_To_Modify_List._val = 43
-    
-    #-----< id-PDU-Session-Resource-To-Remove-List >-----#
-    id_PDU_Session_Resource_To_Remove_List = INT(name=u'id-PDU-Session-Resource-To-Remove-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_PDU_Session_Resource_To_Remove_List._val = 44
-    
-    #-----< id-PDU-Session-Resource-Required-To-Modify-List >-----#
-    id_PDU_Session_Resource_Required_To_Modify_List = INT(name=u'id-PDU-Session-Resource-Required-To-Modify-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_PDU_Session_Resource_Required_To_Modify_List._val = 45
-    
-    #-----< id-PDU-Session-Resource-Setup-List >-----#
-    id_PDU_Session_Resource_Setup_List = INT(name=u'id-PDU-Session-Resource-Setup-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_PDU_Session_Resource_Setup_List._val = 46
-    
-    #-----< id-PDU-Session-Resource-Failed-List >-----#
-    id_PDU_Session_Resource_Failed_List = INT(name=u'id-PDU-Session-Resource-Failed-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_PDU_Session_Resource_Failed_List._val = 47
-    
-    #-----< id-PDU-Session-Resource-Modified-List >-----#
-    id_PDU_Session_Resource_Modified_List = INT(name=u'id-PDU-Session-Resource-Modified-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_PDU_Session_Resource_Modified_List._val = 48
-    
-    #-----< id-PDU-Session-Resource-Failed-To-Modify-List >-----#
-    id_PDU_Session_Resource_Failed_To_Modify_List = INT(name=u'id-PDU-Session-Resource-Failed-To-Modify-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_PDU_Session_Resource_Failed_To_Modify_List._val = 49
-    
-    #-----< id-PDU-Session-Resource-Confirm-Modified-List >-----#
-    id_PDU_Session_Resource_Confirm_Modified_List = INT(name=u'id-PDU-Session-Resource-Confirm-Modified-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_PDU_Session_Resource_Confirm_Modified_List._val = 50
-    
-    #-----< id-DRB-To-Setup-Mod-List-EUTRAN >-----#
-    id_DRB_To_Setup_Mod_List_EUTRAN = INT(name=u'id-DRB-To-Setup-Mod-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_DRB_To_Setup_Mod_List_EUTRAN._val = 51
-    
-    #-----< id-DRB-Setup-Mod-List-EUTRAN >-----#
-    id_DRB_Setup_Mod_List_EUTRAN = INT(name=u'id-DRB-Setup-Mod-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_DRB_Setup_Mod_List_EUTRAN._val = 52
-    
-    #-----< id-DRB-Failed-Mod-List-EUTRAN >-----#
-    id_DRB_Failed_Mod_List_EUTRAN = INT(name=u'id-DRB-Failed-Mod-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_DRB_Failed_Mod_List_EUTRAN._val = 53
-    
-    #-----< id-PDU-Session-Resource-Setup-Mod-List >-----#
-    id_PDU_Session_Resource_Setup_Mod_List = INT(name=u'id-PDU-Session-Resource-Setup-Mod-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_PDU_Session_Resource_Setup_Mod_List._val = 54
-    
-    #-----< id-PDU-Session-Resource-Failed-Mod-List >-----#
-    id_PDU_Session_Resource_Failed_Mod_List = INT(name=u'id-PDU-Session-Resource-Failed-Mod-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_PDU_Session_Resource_Failed_Mod_List._val = 55
-    
-    #-----< id-PDU-Session-Resource-To-Setup-Mod-List >-----#
-    id_PDU_Session_Resource_To_Setup_Mod_List = INT(name=u'id-PDU-Session-Resource-To-Setup-Mod-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_PDU_Session_Resource_To_Setup_Mod_List._val = 56
-    
-    #-----< id-TransactionID >-----#
-    id_TransactionID = INT(name=u'id-TransactionID', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_TransactionID._val = 57
-    
-    #-----< id-Serving-PLMN >-----#
-    id_Serving_PLMN = INT(name=u'id-Serving-PLMN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_Serving_PLMN._val = 58
-    
-    #-----< id-UE-Inactivity-Timer >-----#
-    id_UE_Inactivity_Timer = INT(name=u'id-UE-Inactivity-Timer', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_UE_Inactivity_Timer._val = 59
-    
-    #-----< id-System-GNB-CU-UP-CounterCheckRequest >-----#
-    id_System_GNB_CU_UP_CounterCheckRequest = INT(name=u'id-System-GNB-CU-UP-CounterCheckRequest', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_System_GNB_CU_UP_CounterCheckRequest._val = 60
-    
-    #-----< id-DRBs-Subject-To-Counter-Check-List-EUTRAN >-----#
-    id_DRBs_Subject_To_Counter_Check_List_EUTRAN = INT(name=u'id-DRBs-Subject-To-Counter-Check-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_DRBs_Subject_To_Counter_Check_List_EUTRAN._val = 61
-    
-    #-----< id-DRBs-Subject-To-Counter-Check-List-NG-RAN >-----#
-    id_DRBs_Subject_To_Counter_Check_List_NG_RAN = INT(name=u'id-DRBs-Subject-To-Counter-Check-List-NG-RAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_DRBs_Subject_To_Counter_Check_List_NG_RAN._val = 62
-    
-    #-----< id-PPI >-----#
-    id_PPI = INT(name=u'id-PPI', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_PPI._val = 63
-    
-    #-----< id-gNB-CU-UP-Capacity >-----#
-    id_gNB_CU_UP_Capacity = INT(name=u'id-gNB-CU-UP-Capacity', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_gNB_CU_UP_Capacity._val = 64
-    
-    #-----< id-GNB-CU-UP-OverloadInformation >-----#
-    id_GNB_CU_UP_OverloadInformation = INT(name=u'id-GNB-CU-UP-OverloadInformation', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_GNB_CU_UP_OverloadInformation._val = 65
-    
-    #-----< id-UEDLMaximumIntegrityProtectedDataRate >-----#
-    id_UEDLMaximumIntegrityProtectedDataRate = INT(name=u'id-UEDLMaximumIntegrityProtectedDataRate', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_UEDLMaximumIntegrityProtectedDataRate._val = 66
-    
-    #-----< id-PDU-Session-To-Notify-List >-----#
-    id_PDU_Session_To_Notify_List = INT(name=u'id-PDU-Session-To-Notify-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_PDU_Session_To_Notify_List._val = 67
-    
-    #-----< id-PDU-Session-Resource-Data-Usage-List >-----#
-    id_PDU_Session_Resource_Data_Usage_List = INT(name=u'id-PDU-Session-Resource-Data-Usage-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_PDU_Session_Resource_Data_Usage_List._val = 68
-    
-    #-----< id-SNSSAI >-----#
-    id_SNSSAI = INT(name=u'id-SNSSAI', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_SNSSAI._val = 69
-    
-    #-----< id-DataDiscardRequired >-----#
-    id_DataDiscardRequired = INT(name=u'id-DataDiscardRequired', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
-    id_DataDiscardRequired._val = 70
-    
-    _all_ = [
-        id_reset,
-        id_errorIndication,
-        id_privateMessage,
-        id_gNB_CU_UP_E1Setup,
-        id_gNB_CU_CP_E1Setup,
-        id_gNB_CU_UP_ConfigurationUpdate,
-        id_gNB_CU_CP_ConfigurationUpdate,
-        id_e1Release,
-        id_bearerContextSetup,
-        id_bearerContextModification,
-        id_bearerContextModificationRequired,
-        id_bearerContextRelease,
-        id_bearerContextReleaseRequest,
-        id_bearerContextInactivityNotification,
-        id_dLDataNotification,
-        id_dataUsageReport,
-        id_gNB_CU_UP_CounterCheck,
-        id_gNB_CU_UP_StatusIndication,
-        id_uLDataNotification,
-        id_mRDC_DataUsageReport,
-        maxnoofErrors,
-        maxnoofSPLMNs,
-        maxnoofSliceItems,
-        maxnoofIndividualE1ConnectionsToReset,
-        maxnoofEUTRANQOSParameters,
-        maxnoofNGRANQOSParameters,
-        maxnoofDRBs,
-        maxnoofNRCGI,
-        maxnoofPDUSessionResource,
-        maxnoofQoSFlows,
-        maxnoofUPParameters,
-        maxnoofCellGroups,
-        maxnooftimeperiods,
-        maxnoofTNLAssociations,
-        id_Cause,
-        id_CriticalityDiagnostics,
-        id_gNB_CU_CP_UE_E1AP_ID,
-        id_gNB_CU_UP_UE_E1AP_ID,
-        id_ResetType,
-        id_UE_associatedLogicalE1_ConnectionItem,
-        id_UE_associatedLogicalE1_ConnectionListResAck,
-        id_gNB_CU_UP_ID,
-        id_gNB_CU_UP_Name,
-        id_gNB_CU_CP_Name,
-        id_CNSupport,
-        id_SupportedPLMNs,
-        id_TimeToWait,
-        id_SecurityInformation,
-        id_UEDLAggregateMaximumBitRate,
-        id_System_BearerContextSetupRequest,
-        id_System_BearerContextSetupResponse,
-        id_BearerContextStatusChange,
-        id_System_BearerContextModificationRequest,
-        id_System_BearerContextModificationResponse,
-        id_System_BearerContextModificationConfirm,
-        id_System_BearerContextModificationRequired,
-        id_DRB_Status_List,
-        id_ActivityNotificationLevel,
-        id_ActivityInformation,
-        id_Data_Usage_Report_List,
-        id_New_UL_TNL_Information_Required,
-        id_GNB_CU_CP_TNLA_To_Add_List,
-        id_GNB_CU_CP_TNLA_To_Remove_List,
-        id_GNB_CU_CP_TNLA_To_Update_List,
-        id_GNB_CU_CP_TNLA_Setup_List,
-        id_GNB_CU_CP_TNLA_Failed_To_Setup_List,
-        id_DRB_To_Setup_List_EUTRAN,
-        id_DRB_To_Modify_List_EUTRAN,
-        id_DRB_To_Remove_List_EUTRAN,
-        id_DRB_Required_To_Modify_List_EUTRAN,
-        id_DRB_Required_To_Remove_List_EUTRAN,
-        id_DRB_Setup_List_EUTRAN,
-        id_DRB_Failed_List_EUTRAN,
-        id_DRB_Modified_List_EUTRAN,
-        id_DRB_Failed_To_Modify_List_EUTRAN,
-        id_DRB_Confirm_Modified_List_EUTRAN,
-        id_PDU_Session_Resource_To_Setup_List,
-        id_PDU_Session_Resource_To_Modify_List,
-        id_PDU_Session_Resource_To_Remove_List,
-        id_PDU_Session_Resource_Required_To_Modify_List,
-        id_PDU_Session_Resource_Setup_List,
-        id_PDU_Session_Resource_Failed_List,
-        id_PDU_Session_Resource_Modified_List,
-        id_PDU_Session_Resource_Failed_To_Modify_List,
-        id_PDU_Session_Resource_Confirm_Modified_List,
-        id_DRB_To_Setup_Mod_List_EUTRAN,
-        id_DRB_Setup_Mod_List_EUTRAN,
-        id_DRB_Failed_Mod_List_EUTRAN,
-        id_PDU_Session_Resource_Setup_Mod_List,
-        id_PDU_Session_Resource_Failed_Mod_List,
-        id_PDU_Session_Resource_To_Setup_Mod_List,
-        id_TransactionID,
-        id_Serving_PLMN,
-        id_UE_Inactivity_Timer,
-        id_System_GNB_CU_UP_CounterCheckRequest,
-        id_DRBs_Subject_To_Counter_Check_List_EUTRAN,
-        id_DRBs_Subject_To_Counter_Check_List_NG_RAN,
-        id_PPI,
-        id_gNB_CU_UP_Capacity,
-        id_GNB_CU_UP_OverloadInformation,
-        id_UEDLMaximumIntegrityProtectedDataRate,
-        id_PDU_Session_To_Notify_List,
-        id_PDU_Session_Resource_Data_Usage_List,
-        id_SNSSAI,
-        id_DataDiscardRequired,
+        _E1AP_ELEMENTARY_PROCEDURE_InitiatingMessage,
+        _E1AP_ELEMENTARY_PROCEDURE_SuccessfulOutcome,
+        _E1AP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome,
+        _E1AP_ELEMENTARY_PROCEDURE_procedureCode,
+        _E1AP_ELEMENTARY_PROCEDURE_criticality,
+        E1AP_ELEMENTARY_PROCEDURE,
+        _E1AP_PDU_initiatingMessage,
+        _E1AP_PDU_successfulOutcome,
+        _E1AP_PDU_unsuccessfulOutcome,
+        E1AP_PDU,
+        __InitiatingMessage_procedureCode_tab,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1,
+        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_2,
+        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_2,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_3,
+        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_3,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_4,
+        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_4,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_5,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_6,
+        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_6,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7,
+        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_7,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_8,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_9,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_11,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_12,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_13,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_14,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_15,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_16,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_17,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_18,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_19,
+        _InitiatingMessage_procedureCode,
+        _InitiatingMessage_criticality,
+        _InitiatingMessage_value,
+        InitiatingMessage,
+        __SuccessfulOutcome_procedureCode_tab,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1,
+        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2,
+        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3,
+        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4,
+        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6,
+        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7,
+        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19,
+        _SuccessfulOutcome_procedureCode,
+        _SuccessfulOutcome_criticality,
+        _SuccessfulOutcome_value,
+        SuccessfulOutcome,
+        __UnsuccessfulOutcome_procedureCode_tab,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19,
+        _UnsuccessfulOutcome_procedureCode,
+        _UnsuccessfulOutcome_criticality,
+        _UnsuccessfulOutcome_value,
+        UnsuccessfulOutcome,
+        E1AP_ELEMENTARY_PROCEDURES,
+        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0,
+        _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0,
+        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1,
+        _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1,
+        _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1,
+        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2,
+        _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_2,
+        _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_2,
+        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3,
+        _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_3,
+        _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_3,
+        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4,
+        _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_4,
+        _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_4,
+        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5,
+        _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_5,
+        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6,
+        _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_6,
+        _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_6,
+        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7,
+        _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7,
+        _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_7,
+        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8,
+        _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_8,
+        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9,
+        _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_9,
+        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10,
+        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_11,
+        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_12,
+        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_13,
+        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_14,
+        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_15,
+        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_16,
+        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_17,
+        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_18,
+        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_19,
+        E1AP_ELEMENTARY_PROCEDURES_CLASS_1,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_3,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_3,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_3,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_4,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_4,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_4,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_5,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_5,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_6,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_6,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_6,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_7,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_7,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_7,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_8,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_8,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_9,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_9,
+        E1AP_ELEMENTARY_PROCEDURES_CLASS_2,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_6,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_7,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_8,
+        _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_9,
+        reset,
+        _reset_val_InitiatingMessage,
+        _reset_val_SuccessfulOutcome,
+        errorIndication,
+        _errorIndication_val_InitiatingMessage,
+        gNB_CU_UP_E1Setup,
+        _gNB_CU_UP_E1Setup_val_InitiatingMessage,
+        _gNB_CU_UP_E1Setup_val_SuccessfulOutcome,
+        _gNB_CU_UP_E1Setup_val_UnsuccessfulOutcome,
+        gNB_CU_CP_E1Setup,
+        _gNB_CU_CP_E1Setup_val_InitiatingMessage,
+        _gNB_CU_CP_E1Setup_val_SuccessfulOutcome,
+        _gNB_CU_CP_E1Setup_val_UnsuccessfulOutcome,
+        gNB_CU_UP_ConfigurationUpdate,
+        _gNB_CU_UP_ConfigurationUpdate_val_InitiatingMessage,
+        _gNB_CU_UP_ConfigurationUpdate_val_SuccessfulOutcome,
+        _gNB_CU_UP_ConfigurationUpdate_val_UnsuccessfulOutcome,
+        gNB_CU_CP_ConfigurationUpdate,
+        _gNB_CU_CP_ConfigurationUpdate_val_InitiatingMessage,
+        _gNB_CU_CP_ConfigurationUpdate_val_SuccessfulOutcome,
+        _gNB_CU_CP_ConfigurationUpdate_val_UnsuccessfulOutcome,
+        e1Release,
+        _e1Release_val_InitiatingMessage,
+        _e1Release_val_SuccessfulOutcome,
+        bearerContextSetup,
+        _bearerContextSetup_val_InitiatingMessage,
+        _bearerContextSetup_val_SuccessfulOutcome,
+        _bearerContextSetup_val_UnsuccessfulOutcome,
+        bearerContextModification,
+        _bearerContextModification_val_InitiatingMessage,
+        _bearerContextModification_val_SuccessfulOutcome,
+        _bearerContextModification_val_UnsuccessfulOutcome,
+        bearerContextModificationRequired,
+        _bearerContextModificationRequired_val_InitiatingMessage,
+        _bearerContextModificationRequired_val_SuccessfulOutcome,
+        bearerContextRelease,
+        _bearerContextRelease_val_InitiatingMessage,
+        _bearerContextRelease_val_SuccessfulOutcome,
+        bearerContextReleaseRequest,
+        _bearerContextReleaseRequest_val_InitiatingMessage,
+        bearerContextInactivityNotification,
+        _bearerContextInactivityNotification_val_InitiatingMessage,
+        dLDataNotification,
+        _dLDataNotification_val_InitiatingMessage,
+        uLDataNotification,
+        _uLDataNotification_val_InitiatingMessage,
+        dataUsageReport,
+        _dataUsageReport_val_InitiatingMessage,
+        gNB_CU_UP_CounterCheck,
+        _gNB_CU_UP_CounterCheck_val_InitiatingMessage,
+        gNB_CU_UP_StatusIndication,
+        _gNB_CU_UP_StatusIndication_val_InitiatingMessage,
+        privateMessage,
+        _privateMessage_val_InitiatingMessage,
+        mRDC_DataUsageReport,
+        _mRDC_DataUsageReport_val_InitiatingMessage,
     ]
 
 class E1AP_Containers:
@@ -1005,6 +915,109 @@ class E1AP_Containers:
         E1AP_PRIVATE_IES,
     ]
 
+class E1AP_CommonDataTypes:
+
+    _name_  = u'E1AP-CommonDataTypes'
+    _oid_   = [0, 4, 0, 0, 22, 3, 5, 1, 3]
+    
+    _obj_ = [
+        u'maxPrivateIEs',
+        u'maxProtocolExtensions',
+        u'maxProtocolIEs',
+        u'Criticality',
+        u'Presence',
+        u'PrivateIE-ID',
+        u'ProcedureCode',
+        u'ProtocolExtensionID',
+        u'ProtocolIE-ID',
+        u'TriggeringMessage',
+        ]
+    _type_ = [
+        u'Criticality',
+        u'Presence',
+        u'PrivateIE-ID',
+        u'ProcedureCode',
+        u'ProtocolExtensionID',
+        u'ProtocolIE-ID',
+        u'TriggeringMessage',
+        ]
+    _set_ = [
+        ]
+    _val_ = [
+        u'maxPrivateIEs',
+        u'maxProtocolExtensions',
+        u'maxProtocolIEs',
+        ]
+    _class_ = [
+        ]
+    _param_ = [
+        ]
+    
+    #-----< maxPrivateIEs >-----#
+    maxPrivateIEs = INT(name=u'maxPrivateIEs', mode=MODE_VALUE)
+    maxPrivateIEs._val = 65535
+    
+    #-----< maxProtocolExtensions >-----#
+    maxProtocolExtensions = INT(name=u'maxProtocolExtensions', mode=MODE_VALUE)
+    maxProtocolExtensions._val = 65535
+    
+    #-----< maxProtocolIEs >-----#
+    maxProtocolIEs = INT(name=u'maxProtocolIEs', mode=MODE_VALUE)
+    maxProtocolIEs._val = 65535
+    
+    #-----< Criticality >-----#
+    Criticality = ENUM(name=u'Criticality', mode=MODE_TYPE)
+    Criticality._cont = ASN1Dict([(u'reject', 0), (u'ignore', 1), (u'notify', 2)])
+    Criticality._ext = None
+    
+    #-----< Presence >-----#
+    Presence = ENUM(name=u'Presence', mode=MODE_TYPE)
+    Presence._cont = ASN1Dict([(u'optional', 0), (u'conditional', 1), (u'mandatory', 2)])
+    Presence._ext = None
+    
+    #-----< PrivateIE-ID >-----#
+    PrivateIE_ID = CHOICE(name=u'PrivateIE-ID', mode=MODE_TYPE)
+    _PrivateIE_ID_local = INT(name=u'local', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PrivateIE_ID_local._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
+    _PrivateIE_ID_global_ = OID(name=u'global', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    PrivateIE_ID._cont = ASN1Dict([
+        (u'local', _PrivateIE_ID_local),
+        (u'global', _PrivateIE_ID_global_),
+        ])
+    PrivateIE_ID._ext = None
+    
+    #-----< ProcedureCode >-----#
+    ProcedureCode = INT(name=u'ProcedureCode', mode=MODE_TYPE)
+    ProcedureCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    
+    #-----< ProtocolExtensionID >-----#
+    ProtocolExtensionID = INT(name=u'ProtocolExtensionID', mode=MODE_TYPE)
+    ProtocolExtensionID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
+    
+    #-----< ProtocolIE-ID >-----#
+    ProtocolIE_ID = INT(name=u'ProtocolIE-ID', mode=MODE_TYPE)
+    ProtocolIE_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
+    
+    #-----< TriggeringMessage >-----#
+    TriggeringMessage = ENUM(name=u'TriggeringMessage', mode=MODE_TYPE)
+    TriggeringMessage._cont = ASN1Dict([(u'initiating-message', 0), (u'successful-outcome', 1), (u'unsuccessful-outcome', 2)])
+    TriggeringMessage._ext = None
+    
+    _all_ = [
+        maxPrivateIEs,
+        maxProtocolExtensions,
+        maxProtocolIEs,
+        Criticality,
+        Presence,
+        _PrivateIE_ID_local,
+        _PrivateIE_ID_global_,
+        PrivateIE_ID,
+        ProcedureCode,
+        ProtocolExtensionID,
+        ProtocolIE_ID,
+        TriggeringMessage,
+    ]
+
 class E1AP_IEs:
 
     _name_  = u'E1AP-IEs'
@@ -1026,9 +1039,10 @@ class E1AP_IEs:
         u'Cell-Group-Information',
         u'Cell-Group-Information-Item',
         u'Cell-Group-Information-Item-ExtIEs',
-        u'Cell-Gorup-ID',
+        u'Cell-Group-ID',
         u'CipheringAlgorithm',
         u'CNSupport',
+        u'CommonNetworkInstance',
         u'ConfidentialityProtectionIndication',
         u'ConfidentialityProtectionResult',
         u'CP-TNL-Information',
@@ -1039,8 +1053,8 @@ class E1AP_IEs:
         u'CriticalityDiagnostics-IE-List-ExtIEs',
         u'Data-Forwarding-Information-Request',
         u'Data-Forwarding-Information-Request-ExtIEs',
-        u'Data-Forwarding-Information-Response',
-        u'Data-Forwarding-Information-Response-ExtIEs',
+        u'Data-Forwarding-Information',
+        u'Data-Forwarding-Information-ExtIEs',
         u'Data-Forwarding-Request',
         u'Data-Usage-per-PDU-Session-Report',
         u'Data-Usage-per-PDU-Session-Report-ExtIEs',
@@ -1152,6 +1166,8 @@ class E1AP_IEs:
         u'Dynamic5QIDescriptor-ExtIEs',
         u'DataDiscardRequired',
         u'EncryptionKey',
+        u'Endpoint-IP-address-and-port',
+        u'Endpoint-IP-address-and-port-ExtIEs',
         u'EUTRANAllocationAndRetentionPriority',
         u'EUTRANAllocationAndRetentionPriority-ExtIEs',
         u'EUTRAN-QoS-Support-List',
@@ -1178,6 +1194,8 @@ class E1AP_IEs:
         u'GNB-CU-CP-TNLA-To-Remove-Item-ExtIEs',
         u'GNB-CU-CP-TNLA-To-Update-Item',
         u'GNB-CU-CP-TNLA-To-Update-Item-ExtIEs',
+        u'GNB-CU-UP-TNLA-To-Remove-Item',
+        u'GNB-CU-UP-TNLA-To-Remove-Item-ExtIEs',
         u'GBR-QosInformation',
         u'GBR-QosInformation-ExtIEs',
         u'GBR-QoSFlowInformation',
@@ -1186,6 +1204,7 @@ class E1AP_IEs:
         u'GTPTunnel',
         u'GTPTunnel-ExtIEs',
         u'GNB-CU-UP-OverloadInformation',
+        u'GNB-DU-ID',
         u'HFN',
         u'IntegrityProtectionIndication',
         u'IntegrityProtectionAlgorithm',
@@ -1285,6 +1304,7 @@ class E1AP_IEs:
         u'PDU-Session-To-Notify-Item-ExtIEs',
         u'PDU-Session-Type',
         u'PLMN-Identity',
+        u'PortNumber',
         u'PPI',
         u'PriorityLevel',
         u'Pre-emptionCapability',
@@ -1311,6 +1331,7 @@ class E1AP_IEs:
         u'QoS-Flow-QoS-Parameter-Item-ExtIEs',
         u'QoSFlowLevelQoSParameters',
         u'QoSFlowLevelQoSParameters-ExtIEs',
+        u'RANUEID',
         u'RAT-Type',
         u'RLC-Mode',
         u'ROHC-Parameters',
@@ -1370,16 +1391,17 @@ class E1AP_IEs:
         u'CauseTransport',
         u'Cell-Group-Information',
         u'Cell-Group-Information-Item',
-        u'Cell-Gorup-ID',
+        u'Cell-Group-ID',
         u'CipheringAlgorithm',
         u'CNSupport',
+        u'CommonNetworkInstance',
         u'ConfidentialityProtectionIndication',
         u'ConfidentialityProtectionResult',
         u'CP-TNL-Information',
         u'CriticalityDiagnostics',
         u'CriticalityDiagnostics-IE-List',
         u'Data-Forwarding-Information-Request',
-        u'Data-Forwarding-Information-Response',
+        u'Data-Forwarding-Information',
         u'Data-Forwarding-Request',
         u'Data-Usage-per-PDU-Session-Report',
         u'Data-Usage-per-QoS-Flow-List',
@@ -1456,6 +1478,7 @@ class E1AP_IEs:
         u'Dynamic5QIDescriptor',
         u'DataDiscardRequired',
         u'EncryptionKey',
+        u'Endpoint-IP-address-and-port',
         u'EUTRANAllocationAndRetentionPriority',
         u'EUTRAN-QoS-Support-List',
         u'EUTRAN-QoS-Support-Item',
@@ -1473,11 +1496,13 @@ class E1AP_IEs:
         u'GNB-CU-CP-TNLA-To-Add-Item',
         u'GNB-CU-CP-TNLA-To-Remove-Item',
         u'GNB-CU-CP-TNLA-To-Update-Item',
+        u'GNB-CU-UP-TNLA-To-Remove-Item',
         u'GBR-QosInformation',
         u'GBR-QoSFlowInformation',
         u'GTP-TEID',
         u'GTPTunnel',
         u'GNB-CU-UP-OverloadInformation',
+        u'GNB-DU-ID',
         u'HFN',
         u'IntegrityProtectionIndication',
         u'IntegrityProtectionAlgorithm',
@@ -1549,6 +1574,7 @@ class E1AP_IEs:
         u'PDU-Session-To-Notify-Item',
         u'PDU-Session-Type',
         u'PLMN-Identity',
+        u'PortNumber',
         u'PPI',
         u'PriorityLevel',
         u'Pre-emptionCapability',
@@ -1568,6 +1594,7 @@ class E1AP_IEs:
         u'QoS-Flow-QoS-Parameter-List',
         u'QoS-Flow-QoS-Parameter-Item',
         u'QoSFlowLevelQoSParameters',
+        u'RANUEID',
         u'RAT-Type',
         u'RLC-Mode',
         u'ROHC-Parameters',
@@ -1607,7 +1634,7 @@ class E1AP_IEs:
         u'CriticalityDiagnostics-ExtIEs',
         u'CriticalityDiagnostics-IE-List-ExtIEs',
         u'Data-Forwarding-Information-Request-ExtIEs',
-        u'Data-Forwarding-Information-Response-ExtIEs',
+        u'Data-Forwarding-Information-ExtIEs',
         u'Data-Usage-per-PDU-Session-Report-ExtIEs',
         u'Data-Usage-per-QoS-Flow-Item-ExtIEs',
         u'Data-Usage-Report-ItemExtIEs',
@@ -1643,6 +1670,7 @@ class E1AP_IEs:
         u'DRB-To-Setup-Mod-Item-NG-RAN-ExtIEs',
         u'DRB-Usage-Report-Item-ExtIEs',
         u'Dynamic5QIDescriptor-ExtIEs',
+        u'Endpoint-IP-address-and-port-ExtIEs',
         u'EUTRANAllocationAndRetentionPriority-ExtIEs',
         u'EUTRAN-QoS-Support-Item-ExtIEs',
         u'EUTRAN-QoS-ExtIEs',
@@ -1652,6 +1680,7 @@ class E1AP_IEs:
         u'GNB-CU-CP-TNLA-To-Add-Item-ExtIEs',
         u'GNB-CU-CP-TNLA-To-Remove-Item-ExtIEs',
         u'GNB-CU-CP-TNLA-To-Update-Item-ExtIEs',
+        u'GNB-CU-UP-TNLA-To-Remove-Item-ExtIEs',
         u'GBR-QosInformation-ExtIEs',
         u'GBR-QosFlowInformation-ExtIEs',
         u'GTPTunnel-ExtIEs',
@@ -1716,7 +1745,7 @@ class E1AP_IEs:
         u'CriticalityDiagnostics-ExtIEs',
         u'CriticalityDiagnostics-IE-List-ExtIEs',
         u'Data-Forwarding-Information-Request-ExtIEs',
-        u'Data-Forwarding-Information-Response-ExtIEs',
+        u'Data-Forwarding-Information-ExtIEs',
         u'Data-Usage-per-PDU-Session-Report-ExtIEs',
         u'Data-Usage-per-QoS-Flow-Item-ExtIEs',
         u'Data-Usage-Report-ItemExtIEs',
@@ -1752,6 +1781,7 @@ class E1AP_IEs:
         u'DRB-To-Setup-Mod-Item-NG-RAN-ExtIEs',
         u'DRB-Usage-Report-Item-ExtIEs',
         u'Dynamic5QIDescriptor-ExtIEs',
+        u'Endpoint-IP-address-and-port-ExtIEs',
         u'EUTRANAllocationAndRetentionPriority-ExtIEs',
         u'EUTRAN-QoS-Support-Item-ExtIEs',
         u'EUTRAN-QoS-ExtIEs',
@@ -1761,6 +1791,7 @@ class E1AP_IEs:
         u'GNB-CU-CP-TNLA-To-Add-Item-ExtIEs',
         u'GNB-CU-CP-TNLA-To-Remove-Item-ExtIEs',
         u'GNB-CU-CP-TNLA-To-Update-Item-ExtIEs',
+        u'GNB-CU-UP-TNLA-To-Remove-Item-ExtIEs',
         u'GBR-QosInformation-ExtIEs',
         u'GBR-QosFlowInformation-ExtIEs',
         u'GTPTunnel-ExtIEs',
@@ -1950,7 +1981,7 @@ class E1AP_IEs:
     
     #-----< Cell-Group-Information-Item >-----#
     Cell_Group_Information_Item = SEQ(name=u'Cell-Group-Information-Item', mode=MODE_TYPE)
-    _Cell_Group_Information_Item_cell_Group_ID = INT(name=u'cell-Group-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Cell-Gorup-ID')))
+    _Cell_Group_Information_Item_cell_Group_ID = INT(name=u'cell-Group-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Cell-Group-ID')))
     _Cell_Group_Information_Item_uL_Configuration = ENUM(name=u'uL-Configuration', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'UL-Configuration')), opt=True)
     _Cell_Group_Information_Item_dL_TX_Stop = ENUM(name=u'dL-TX-Stop', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'DL-TX-Stop')), opt=True)
     _Cell_Group_Information_Item_rAT_Type = ENUM(name=u'rAT-Type', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'RAT-Type')), opt=True)
@@ -1995,9 +2026,9 @@ class E1AP_IEs:
     Cell_Group_Information_Item_ExtIEs = CLASS(name=u'Cell-Group-Information-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
     Cell_Group_Information_Item_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
-    #-----< Cell-Gorup-ID >-----#
-    Cell_Gorup_ID = INT(name=u'Cell-Gorup-ID', mode=MODE_TYPE)
-    Cell_Gorup_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=3)], ev=[], er=[])
+    #-----< Cell-Group-ID >-----#
+    Cell_Group_ID = INT(name=u'Cell-Group-ID', mode=MODE_TYPE)
+    Cell_Group_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=3)], ev=[], er=[])
     
     #-----< CipheringAlgorithm >-----#
     CipheringAlgorithm = ENUM(name=u'CipheringAlgorithm', mode=MODE_TYPE)
@@ -2008,6 +2039,9 @@ class E1AP_IEs:
     CNSupport = ENUM(name=u'CNSupport', mode=MODE_TYPE)
     CNSupport._cont = ASN1Dict([(u'c-epc', 0), (u'c-5gc', 1), (u'both', 2)])
     CNSupport._ext = []
+    
+    #-----< CommonNetworkInstance >-----#
+    CommonNetworkInstance = OCT_STR(name=u'CommonNetworkInstance', mode=MODE_TYPE)
     
     #-----< ConfidentialityProtectionIndication >-----#
     ConfidentialityProtectionIndication = ENUM(name=u'ConfidentialityProtectionIndication', mode=MODE_TYPE)
@@ -2025,20 +2059,17 @@ class E1AP_IEs:
     _CP_TNL_Information_choice_extension = SEQ(name=u'choice-extension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-Containers', 'ProtocolIE-SingleContainer')))
     __CP_TNL_Information_choice_extension_id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-IES'), [u'id']))
     ___CP_TNL_Information_choice_extension_id_tab = CLASS(name='_tab_E1AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-IES')))
-    ___CP_TNL_Information_choice_extension_id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____CP_TNL_Information_choice_extension_id_tab_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'Endpoint-IP-address-and-port')))
+    ___CP_TNL_Information_choice_extension_id_tab._val = ASN1Set(rv=[dict([(u'id', 74), (u'criticality', u'reject'), (u'Value', ____CP_TNL_Information_choice_extension_id_tab_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     __CP_TNL_Information_choice_extension_id._const_tab = ___CP_TNL_Information_choice_extension_id_tab
     __CP_TNL_Information_choice_extension_id._const_tab_at = None
     __CP_TNL_Information_choice_extension_id._const_tab_id = u'id'
     __CP_TNL_Information_choice_extension_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-IES'), [u'criticality']))
-    ___CP_TNL_Information_choice_extension_criticality_tab = CLASS(name='_tab_E1AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-IES')))
-    ___CP_TNL_Information_choice_extension_criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
-    __CP_TNL_Information_choice_extension_criticality._const_tab = ___CP_TNL_Information_choice_extension_criticality_tab
+    __CP_TNL_Information_choice_extension_criticality._const_tab = ___CP_TNL_Information_choice_extension_id_tab
     __CP_TNL_Information_choice_extension_criticality._const_tab_at = ('..', u'id')
     __CP_TNL_Information_choice_extension_criticality._const_tab_id = u'criticality'
     __CP_TNL_Information_choice_extension_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-IES'), [u'Value']))
-    ___CP_TNL_Information_choice_extension_value_tab = CLASS(name='_tab_E1AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-IES')))
-    ___CP_TNL_Information_choice_extension_value_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
-    __CP_TNL_Information_choice_extension_value._const_tab = ___CP_TNL_Information_choice_extension_value_tab
+    __CP_TNL_Information_choice_extension_value._const_tab = ___CP_TNL_Information_choice_extension_id_tab
     __CP_TNL_Information_choice_extension_value._const_tab_at = ('..', u'id')
     __CP_TNL_Information_choice_extension_value._const_tab_id = u'Value'
     _CP_TNL_Information_choice_extension._cont = ASN1Dict([
@@ -2055,7 +2086,8 @@ class E1AP_IEs:
     
     #-----< CP-TNL-Information-ExtIEs >-----#
     CP_TNL_Information_ExtIEs = CLASS(name=u'CP-TNL-Information-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-IES')))
-    CP_TNL_Information_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    _CP_TNL_Information_ExtIEs_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'Endpoint-IP-address-and-port')))
+    CP_TNL_Information_ExtIEs._val = ASN1Set(rv=[dict([(u'id', 74), (u'criticality', u'reject'), (u'Value', _CP_TNL_Information_ExtIEs_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< CriticalityDiagnostics >-----#
     CriticalityDiagnostics = SEQ(name=u'CriticalityDiagnostics', mode=MODE_TYPE)
@@ -2197,48 +2229,48 @@ class E1AP_IEs:
     Data_Forwarding_Information_Request_ExtIEs = CLASS(name=u'Data-Forwarding-Information-Request-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
     Data_Forwarding_Information_Request_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
-    #-----< Data-Forwarding-Information-Response >-----#
-    Data_Forwarding_Information_Response = SEQ(name=u'Data-Forwarding-Information-Response', mode=MODE_TYPE)
-    _Data_Forwarding_Information_Response_uL_Data_Forwarding = CHOICE(name=u'uL-Data-Forwarding', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'UP-TNL-Information')), opt=True)
-    _Data_Forwarding_Information_Response_dL_Data_Forwarding = CHOICE(name=u'dL-Data-Forwarding', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'UP-TNL-Information')), opt=True)
-    _Data_Forwarding_Information_Response_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionContainer')), opt=True)
-    __Data_Forwarding_Information_Response_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionField')))
-    ___Data_Forwarding_Information_Response_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'id']))
-    ____Data_Forwarding_Information_Response_iE_Extensions__item__id_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____Data_Forwarding_Information_Response_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
-    ___Data_Forwarding_Information_Response_iE_Extensions__item__id._const_tab = ____Data_Forwarding_Information_Response_iE_Extensions__item__id_tab
-    ___Data_Forwarding_Information_Response_iE_Extensions__item__id._const_tab_at = None
-    ___Data_Forwarding_Information_Response_iE_Extensions__item__id._const_tab_id = u'id'
-    ___Data_Forwarding_Information_Response_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____Data_Forwarding_Information_Response_iE_Extensions__item__criticality_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____Data_Forwarding_Information_Response_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
-    ___Data_Forwarding_Information_Response_iE_Extensions__item__criticality._const_tab = ____Data_Forwarding_Information_Response_iE_Extensions__item__criticality_tab
-    ___Data_Forwarding_Information_Response_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
-    ___Data_Forwarding_Information_Response_iE_Extensions__item__criticality._const_tab_id = u'criticality'
-    ___Data_Forwarding_Information_Response_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____Data_Forwarding_Information_Response_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____Data_Forwarding_Information_Response_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
-    ___Data_Forwarding_Information_Response_iE_Extensions__item__extensionValue._const_tab = ____Data_Forwarding_Information_Response_iE_Extensions__item__extensionValue_tab
-    ___Data_Forwarding_Information_Response_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
-    ___Data_Forwarding_Information_Response_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
-    __Data_Forwarding_Information_Response_iE_Extensions__item_._cont = ASN1Dict([
-        (u'id', ___Data_Forwarding_Information_Response_iE_Extensions__item__id),
-        (u'criticality', ___Data_Forwarding_Information_Response_iE_Extensions__item__criticality),
-        (u'extensionValue', ___Data_Forwarding_Information_Response_iE_Extensions__item__extensionValue),
+    #-----< Data-Forwarding-Information >-----#
+    Data_Forwarding_Information = SEQ(name=u'Data-Forwarding-Information', mode=MODE_TYPE)
+    _Data_Forwarding_Information_uL_Data_Forwarding = CHOICE(name=u'uL-Data-Forwarding', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'UP-TNL-Information')), opt=True)
+    _Data_Forwarding_Information_dL_Data_Forwarding = CHOICE(name=u'dL-Data-Forwarding', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'UP-TNL-Information')), opt=True)
+    _Data_Forwarding_Information_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    __Data_Forwarding_Information_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionField')))
+    ___Data_Forwarding_Information_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'id']))
+    ____Data_Forwarding_Information_iE_Extensions__item__id_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
+    ____Data_Forwarding_Information_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Data_Forwarding_Information_iE_Extensions__item__id._const_tab = ____Data_Forwarding_Information_iE_Extensions__item__id_tab
+    ___Data_Forwarding_Information_iE_Extensions__item__id._const_tab_at = None
+    ___Data_Forwarding_Information_iE_Extensions__item__id._const_tab_id = u'id'
+    ___Data_Forwarding_Information_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'criticality']))
+    ____Data_Forwarding_Information_iE_Extensions__item__criticality_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
+    ____Data_Forwarding_Information_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Data_Forwarding_Information_iE_Extensions__item__criticality._const_tab = ____Data_Forwarding_Information_iE_Extensions__item__criticality_tab
+    ___Data_Forwarding_Information_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___Data_Forwarding_Information_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___Data_Forwarding_Information_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'Extension']))
+    ____Data_Forwarding_Information_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
+    ____Data_Forwarding_Information_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Data_Forwarding_Information_iE_Extensions__item__extensionValue._const_tab = ____Data_Forwarding_Information_iE_Extensions__item__extensionValue_tab
+    ___Data_Forwarding_Information_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___Data_Forwarding_Information_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
+    __Data_Forwarding_Information_iE_Extensions__item_._cont = ASN1Dict([
+        (u'id', ___Data_Forwarding_Information_iE_Extensions__item__id),
+        (u'criticality', ___Data_Forwarding_Information_iE_Extensions__item__criticality),
+        (u'extensionValue', ___Data_Forwarding_Information_iE_Extensions__item__extensionValue),
         ])
-    __Data_Forwarding_Information_Response_iE_Extensions__item_._ext = None
-    _Data_Forwarding_Information_Response_iE_Extensions._cont = __Data_Forwarding_Information_Response_iE_Extensions__item_
-    _Data_Forwarding_Information_Response_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
-    Data_Forwarding_Information_Response._cont = ASN1Dict([
-        (u'uL-Data-Forwarding', _Data_Forwarding_Information_Response_uL_Data_Forwarding),
-        (u'dL-Data-Forwarding', _Data_Forwarding_Information_Response_dL_Data_Forwarding),
-        (u'iE-Extensions', _Data_Forwarding_Information_Response_iE_Extensions),
+    __Data_Forwarding_Information_iE_Extensions__item_._ext = None
+    _Data_Forwarding_Information_iE_Extensions._cont = __Data_Forwarding_Information_iE_Extensions__item_
+    _Data_Forwarding_Information_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
+    Data_Forwarding_Information._cont = ASN1Dict([
+        (u'uL-Data-Forwarding', _Data_Forwarding_Information_uL_Data_Forwarding),
+        (u'dL-Data-Forwarding', _Data_Forwarding_Information_dL_Data_Forwarding),
+        (u'iE-Extensions', _Data_Forwarding_Information_iE_Extensions),
         ])
-    Data_Forwarding_Information_Response._ext = []
+    Data_Forwarding_Information._ext = []
     
-    #-----< Data-Forwarding-Information-Response-ExtIEs >-----#
-    Data_Forwarding_Information_Response_ExtIEs = CLASS(name=u'Data-Forwarding-Information-Response-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    Data_Forwarding_Information_Response_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    #-----< Data-Forwarding-Information-ExtIEs >-----#
+    Data_Forwarding_Information_ExtIEs = CLASS(name=u'Data-Forwarding-Information-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
+    Data_Forwarding_Information_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< Data-Forwarding-Request >-----#
     Data_Forwarding_Request = ENUM(name=u'Data-Forwarding-Request', mode=MODE_TYPE)
@@ -3089,7 +3121,7 @@ class E1AP_IEs:
     DRB_Setup_Item_EUTRAN = SEQ(name=u'DRB-Setup-Item-EUTRAN', mode=MODE_TYPE)
     _DRB_Setup_Item_EUTRAN_dRB_ID = INT(name=u'dRB-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'DRB-ID')))
     _DRB_Setup_Item_EUTRAN_s1_DL_UP_TNL_Information = CHOICE(name=u's1-DL-UP-TNL-Information', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'UP-TNL-Information')))
-    _DRB_Setup_Item_EUTRAN_data_Forwarding_Information_Response = SEQ(name=u'data-Forwarding-Information-Response', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Data-Forwarding-Information-Response')), opt=True)
+    _DRB_Setup_Item_EUTRAN_data_Forwarding_Information_Response = SEQ(name=u'data-Forwarding-Information-Response', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Data-Forwarding-Information')), opt=True)
     _DRB_Setup_Item_EUTRAN_uL_UP_Transport_Parameters = SEQ_OF(name=u'uL-UP-Transport-Parameters', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'UP-Parameters')))
     _DRB_Setup_Item_EUTRAN_s1_DL_UP_Unchanged = ENUM(name=u's1-DL-UP-Unchanged', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _DRB_Setup_Item_EUTRAN_s1_DL_UP_Unchanged._cont = ASN1Dict([(u'true', 0)])
@@ -3146,7 +3178,7 @@ class E1AP_IEs:
     DRB_Setup_Mod_Item_EUTRAN = SEQ(name=u'DRB-Setup-Mod-Item-EUTRAN', mode=MODE_TYPE)
     _DRB_Setup_Mod_Item_EUTRAN_dRB_ID = INT(name=u'dRB-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'DRB-ID')))
     _DRB_Setup_Mod_Item_EUTRAN_s1_DL_UP_TNL_Information = CHOICE(name=u's1-DL-UP-TNL-Information', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'UP-TNL-Information')))
-    _DRB_Setup_Mod_Item_EUTRAN_data_Forwarding_Information_Response = SEQ(name=u'data-Forwarding-Information-Response', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Data-Forwarding-Information-Response')), opt=True)
+    _DRB_Setup_Mod_Item_EUTRAN_data_Forwarding_Information_Response = SEQ(name=u'data-Forwarding-Information-Response', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Data-Forwarding-Information')), opt=True)
     _DRB_Setup_Mod_Item_EUTRAN_uL_UP_Transport_Parameters = SEQ_OF(name=u'uL-UP-Transport-Parameters', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'UP-Parameters')))
     _DRB_Setup_Mod_Item_EUTRAN_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __DRB_Setup_Mod_Item_EUTRAN_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionField')))
@@ -3198,7 +3230,7 @@ class E1AP_IEs:
     #-----< DRB-Setup-Item-NG-RAN >-----#
     DRB_Setup_Item_NG_RAN = SEQ(name=u'DRB-Setup-Item-NG-RAN', mode=MODE_TYPE)
     _DRB_Setup_Item_NG_RAN_dRB_ID = INT(name=u'dRB-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'DRB-ID')))
-    _DRB_Setup_Item_NG_RAN_dRB_data_Forwarding_Information_Response = SEQ(name=u'dRB-data-Forwarding-Information-Response', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Data-Forwarding-Information-Response')), opt=True)
+    _DRB_Setup_Item_NG_RAN_dRB_data_Forwarding_Information_Response = SEQ(name=u'dRB-data-Forwarding-Information-Response', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Data-Forwarding-Information')), opt=True)
     _DRB_Setup_Item_NG_RAN_uL_UP_Transport_Parameters = SEQ_OF(name=u'uL-UP-Transport-Parameters', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'UP-Parameters')))
     _DRB_Setup_Item_NG_RAN_flow_Setup_List = SEQ_OF(name=u'flow-Setup-List', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'QoS-Flow-List')))
     _DRB_Setup_Item_NG_RAN_flow_Failed_List = SEQ_OF(name=u'flow-Failed-List', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'QoS-Flow-Failed-List')), opt=True)
@@ -3253,7 +3285,7 @@ class E1AP_IEs:
     #-----< DRB-Setup-Mod-Item-NG-RAN >-----#
     DRB_Setup_Mod_Item_NG_RAN = SEQ(name=u'DRB-Setup-Mod-Item-NG-RAN', mode=MODE_TYPE)
     _DRB_Setup_Mod_Item_NG_RAN_dRB_ID = INT(name=u'dRB-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'DRB-ID')))
-    _DRB_Setup_Mod_Item_NG_RAN_dRB_data_Forwarding_Information_Response = SEQ(name=u'dRB-data-Forwarding-Information-Response', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Data-Forwarding-Information-Response')), opt=True)
+    _DRB_Setup_Mod_Item_NG_RAN_dRB_data_Forwarding_Information_Response = SEQ(name=u'dRB-data-Forwarding-Information-Response', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Data-Forwarding-Information')), opt=True)
     _DRB_Setup_Mod_Item_NG_RAN_uL_UP_Transport_Parameters = SEQ_OF(name=u'uL-UP-Transport-Parameters', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'UP-Parameters')))
     _DRB_Setup_Mod_Item_NG_RAN_flow_Setup_List = SEQ_OF(name=u'flow-Setup-List', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'QoS-Flow-List')))
     _DRB_Setup_Mod_Item_NG_RAN_flow_Failed_List = SEQ_OF(name=u'flow-Failed-List', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'QoS-Flow-Failed-List')), opt=True)
@@ -3460,7 +3492,7 @@ class E1AP_IEs:
     _DRB_To_Modify_Item_EUTRAN_pDCP_Configuration = SEQ(name=u'pDCP-Configuration', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'PDCP-Configuration')), opt=True)
     _DRB_To_Modify_Item_EUTRAN_eUTRAN_QoS = SEQ(name=u'eUTRAN-QoS', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'EUTRAN-QoS')), opt=True)
     _DRB_To_Modify_Item_EUTRAN_s1_UL_UP_TNL_Information = CHOICE(name=u's1-UL-UP-TNL-Information', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'UP-TNL-Information')), opt=True)
-    _DRB_To_Modify_Item_EUTRAN_data_Forwarding_Information_Request = SEQ(name=u'data-Forwarding-Information-Request', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Data-Forwarding-Information-Request')), opt=True)
+    _DRB_To_Modify_Item_EUTRAN_data_Forwarding_Information = SEQ(name=u'data-Forwarding-Information', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Data-Forwarding-Information')), opt=True)
     _DRB_To_Modify_Item_EUTRAN_pDCP_SN_Status_Request = ENUM(name=u'pDCP-SN-Status-Request', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'PDCP-SN-Status-Request')), opt=True)
     _DRB_To_Modify_Item_EUTRAN_pDCP_SN_Status_Information = SEQ(name=u'pDCP-SN-Status-Information', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'PDCP-SN-Status-Information')), opt=True)
     _DRB_To_Modify_Item_EUTRAN_dL_UP_Parameters = SEQ_OF(name=u'dL-UP-Parameters', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'UP-Parameters')), opt=True)
@@ -3501,7 +3533,7 @@ class E1AP_IEs:
         (u'pDCP-Configuration', _DRB_To_Modify_Item_EUTRAN_pDCP_Configuration),
         (u'eUTRAN-QoS', _DRB_To_Modify_Item_EUTRAN_eUTRAN_QoS),
         (u's1-UL-UP-TNL-Information', _DRB_To_Modify_Item_EUTRAN_s1_UL_UP_TNL_Information),
-        (u'data-Forwarding-Information-Request', _DRB_To_Modify_Item_EUTRAN_data_Forwarding_Information_Request),
+        (u'data-Forwarding-Information', _DRB_To_Modify_Item_EUTRAN_data_Forwarding_Information),
         (u'pDCP-SN-Status-Request', _DRB_To_Modify_Item_EUTRAN_pDCP_SN_Status_Request),
         (u'pDCP-SN-Status-Information', _DRB_To_Modify_Item_EUTRAN_pDCP_SN_Status_Information),
         (u'dL-UP-Parameters', _DRB_To_Modify_Item_EUTRAN_dL_UP_Parameters),
@@ -3528,7 +3560,7 @@ class E1AP_IEs:
     _DRB_To_Modify_Item_NG_RAN_dRB_ID = INT(name=u'dRB-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'DRB-ID')))
     _DRB_To_Modify_Item_NG_RAN_sDAP_Configuration = SEQ(name=u'sDAP-Configuration', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'SDAP-Configuration')), opt=True)
     _DRB_To_Modify_Item_NG_RAN_pDCP_Configuration = SEQ(name=u'pDCP-Configuration', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'PDCP-Configuration')), opt=True)
-    _DRB_To_Modify_Item_NG_RAN_dRB_Data_Forwarding_Information_Response = SEQ(name=u'dRB-Data-Forwarding-Information-Response', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Data-Forwarding-Information-Response')), opt=True)
+    _DRB_To_Modify_Item_NG_RAN_dRB_Data_Forwarding_Information = SEQ(name=u'dRB-Data-Forwarding-Information', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Data-Forwarding-Information')), opt=True)
     _DRB_To_Modify_Item_NG_RAN_pDCP_SN_Status_Request = ENUM(name=u'pDCP-SN-Status-Request', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'PDCP-SN-Status-Request')), opt=True)
     _DRB_To_Modify_Item_NG_RAN_pdcp_SN_Status_Information = SEQ(name=u'pdcp-SN-Status-Information', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'PDCP-SN-Status-Information')), opt=True)
     _DRB_To_Modify_Item_NG_RAN_dL_UP_Parameters = SEQ_OF(name=u'dL-UP-Parameters', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'UP-Parameters')), opt=True)
@@ -3541,20 +3573,18 @@ class E1AP_IEs:
     __DRB_To_Modify_Item_NG_RAN_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionField')))
     ___DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'id']))
     ____DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__id_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__id_tab_val_Extension_0 = SEQ_OF(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'QoS-Flow-List')))
+    _____DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__id_tab_val_Extension_1 = SEQ(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'QoSFlowLevelQoSParameters')))
+    ____DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 71), (u'criticality', u'reject'), (u'Extension', _____DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__id_tab_val_Extension_0), (u'presence', u'optional')]), dict([(u'id', 72), (u'criticality', u'ignore'), (u'Extension', _____DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__id_tab_val_Extension_1), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__id._const_tab = ____DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__id_tab
     ___DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__id._const_tab_at = None
     ___DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__id._const_tab_id = u'id'
     ___DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__criticality_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
-    ___DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__criticality._const_tab = ____DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__criticality_tab
+    ___DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__criticality._const_tab = ____DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__id_tab
     ___DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
-    ___DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__extensionValue._const_tab = ____DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__extensionValue_tab
+    ___DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__extensionValue._const_tab = ____DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__id_tab
     ___DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __DRB_To_Modify_Item_NG_RAN_iE_Extensions__item_._cont = ASN1Dict([
@@ -3569,7 +3599,7 @@ class E1AP_IEs:
         (u'dRB-ID', _DRB_To_Modify_Item_NG_RAN_dRB_ID),
         (u'sDAP-Configuration', _DRB_To_Modify_Item_NG_RAN_sDAP_Configuration),
         (u'pDCP-Configuration', _DRB_To_Modify_Item_NG_RAN_pDCP_Configuration),
-        (u'dRB-Data-Forwarding-Information-Response', _DRB_To_Modify_Item_NG_RAN_dRB_Data_Forwarding_Information_Response),
+        (u'dRB-Data-Forwarding-Information', _DRB_To_Modify_Item_NG_RAN_dRB_Data_Forwarding_Information),
         (u'pDCP-SN-Status-Request', _DRB_To_Modify_Item_NG_RAN_pDCP_SN_Status_Request),
         (u'pdcp-SN-Status-Information', _DRB_To_Modify_Item_NG_RAN_pdcp_SN_Status_Information),
         (u'dL-UP-Parameters', _DRB_To_Modify_Item_NG_RAN_dL_UP_Parameters),
@@ -3584,7 +3614,9 @@ class E1AP_IEs:
     
     #-----< DRB-To-Modify-Item-NG-RAN-ExtIEs >-----#
     DRB_To_Modify_Item_NG_RAN_ExtIEs = CLASS(name=u'DRB-To-Modify-Item-NG-RAN-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    DRB_To_Modify_Item_NG_RAN_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    _DRB_To_Modify_Item_NG_RAN_ExtIEs_val_Extension_0 = SEQ_OF(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'QoS-Flow-List')))
+    _DRB_To_Modify_Item_NG_RAN_ExtIEs_val_Extension_1 = SEQ(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'QoSFlowLevelQoSParameters')))
+    DRB_To_Modify_Item_NG_RAN_ExtIEs._val = ASN1Set(rv=[dict([(u'id', 71), (u'criticality', u'reject'), (u'Extension', _DRB_To_Modify_Item_NG_RAN_ExtIEs_val_Extension_0), (u'presence', u'optional')]), dict([(u'id', 72), (u'criticality', u'ignore'), (u'Extension', _DRB_To_Modify_Item_NG_RAN_ExtIEs_val_Extension_1), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< DRB-To-Remove-List-EUTRAN >-----#
     DRB_To_Remove_List_EUTRAN = SEQ_OF(name=u'DRB-To-Remove-List-EUTRAN', mode=MODE_TYPE)
@@ -3922,20 +3954,17 @@ class E1AP_IEs:
     __DRB_To_Setup_Item_NG_RAN_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionField')))
     ___DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'id']))
     ____DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__id_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__id_tab_val_Extension_0 = SEQ(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'QoSFlowLevelQoSParameters')))
+    ____DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 72), (u'criticality', u'ignore'), (u'Extension', _____DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__id_tab_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__id._const_tab = ____DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__id_tab
     ___DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__id._const_tab_at = None
     ___DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__id._const_tab_id = u'id'
     ___DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__criticality_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
-    ___DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__criticality._const_tab = ____DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__criticality_tab
+    ___DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__criticality._const_tab = ____DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__id_tab
     ___DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
-    ___DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__extensionValue._const_tab = ____DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__extensionValue_tab
+    ___DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__extensionValue._const_tab = ____DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__id_tab
     ___DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __DRB_To_Setup_Item_NG_RAN_iE_Extensions__item_._cont = ASN1Dict([
@@ -3961,7 +3990,8 @@ class E1AP_IEs:
     
     #-----< DRB-To-Setup-Item-NG-RAN-ExtIEs >-----#
     DRB_To_Setup_Item_NG_RAN_ExtIEs = CLASS(name=u'DRB-To-Setup-Item-NG-RAN-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    DRB_To_Setup_Item_NG_RAN_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    _DRB_To_Setup_Item_NG_RAN_ExtIEs_val_Extension_0 = SEQ(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'QoSFlowLevelQoSParameters')))
+    DRB_To_Setup_Item_NG_RAN_ExtIEs._val = ASN1Set(rv=[dict([(u'id', 72), (u'criticality', u'ignore'), (u'Extension', _DRB_To_Setup_Item_NG_RAN_ExtIEs_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< DRB-To-Setup-Mod-List-NG-RAN >-----#
     DRB_To_Setup_Mod_List_NG_RAN = SEQ_OF(name=u'DRB-To-Setup-Mod-List-NG-RAN', mode=MODE_TYPE)
@@ -3978,26 +4008,22 @@ class E1AP_IEs:
     _DRB_To_Setup_Mod_Item_NG_RAN_flow_Mapping_Information = SEQ_OF(name=u'flow-Mapping-Information', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'QoS-Flow-QoS-Parameter-List')))
     _DRB_To_Setup_Mod_Item_NG_RAN_dRB_Data_Forwarding_Information_Request = SEQ(name=u'dRB-Data-Forwarding-Information-Request', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Data-Forwarding-Information-Request')), opt=True)
     _DRB_To_Setup_Mod_Item_NG_RAN_dRB_Inactivity_Timer = INT(name=u'dRB-Inactivity-Timer', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Inactivity-Timer')), opt=True)
-    _DRB_To_Setup_Mod_Item_NG_RAN_pDCP_UL_Count = SEQ(name=u'pDCP-UL-Count', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'PDCP-Count')), opt=True)
-    _DRB_To_Setup_Mod_Item_NG_RAN_pDCP_DL_Count = SEQ(name=u'pDCP-DL-Count', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'PDCP-Count')), opt=True)
-    _DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _DRB_To_Setup_Mod_Item_NG_RAN_pDCP_SN_Status_Information = SEQ(name=u'pDCP-SN-Status-Information', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'PDCP-SN-Status-Information')), opt=True)
+    _DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionField')))
     ___DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'id']))
     ____DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__id_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__id_tab_val_Extension_0 = SEQ(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'QoSFlowLevelQoSParameters')))
+    ____DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 72), (u'criticality', u'ignore'), (u'Extension', _____DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__id_tab_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__id._const_tab = ____DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__id_tab
     ___DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__id._const_tab_at = None
     ___DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__id._const_tab_id = u'id'
     ___DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__criticality_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
-    ___DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__criticality._const_tab = ____DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__criticality_tab
+    ___DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__criticality._const_tab = ____DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__id_tab
     ___DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
-    ___DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__extensionValue._const_tab = ____DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__extensionValue_tab
+    ___DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__extensionValue._const_tab = ____DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__id_tab
     ___DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item_._cont = ASN1Dict([
@@ -4016,15 +4042,15 @@ class E1AP_IEs:
         (u'flow-Mapping-Information', _DRB_To_Setup_Mod_Item_NG_RAN_flow_Mapping_Information),
         (u'dRB-Data-Forwarding-Information-Request', _DRB_To_Setup_Mod_Item_NG_RAN_dRB_Data_Forwarding_Information_Request),
         (u'dRB-Inactivity-Timer', _DRB_To_Setup_Mod_Item_NG_RAN_dRB_Inactivity_Timer),
-        (u'pDCP-UL-Count', _DRB_To_Setup_Mod_Item_NG_RAN_pDCP_UL_Count),
-        (u'pDCP-DL-Count', _DRB_To_Setup_Mod_Item_NG_RAN_pDCP_DL_Count),
+        (u'pDCP-SN-Status-Information', _DRB_To_Setup_Mod_Item_NG_RAN_pDCP_SN_Status_Information),
         (u'iE-Extensions', _DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions),
         ])
     DRB_To_Setup_Mod_Item_NG_RAN._ext = []
     
     #-----< DRB-To-Setup-Mod-Item-NG-RAN-ExtIEs >-----#
     DRB_To_Setup_Mod_Item_NG_RAN_ExtIEs = CLASS(name=u'DRB-To-Setup-Mod-Item-NG-RAN-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    DRB_To_Setup_Mod_Item_NG_RAN_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    _DRB_To_Setup_Mod_Item_NG_RAN_ExtIEs_val_Extension_0 = SEQ(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'QoSFlowLevelQoSParameters')))
+    DRB_To_Setup_Mod_Item_NG_RAN_ExtIEs._val = ASN1Set(rv=[dict([(u'id', 72), (u'criticality', u'ignore'), (u'Extension', _DRB_To_Setup_Mod_Item_NG_RAN_ExtIEs_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< DRB-Usage-Report-List >-----#
     DRB_Usage_Report_List = SEQ_OF(name=u'DRB-Usage-Report-List', mode=MODE_TYPE)
@@ -4151,6 +4177,49 @@ class E1AP_IEs:
     
     #-----< EncryptionKey >-----#
     EncryptionKey = OCT_STR(name=u'EncryptionKey', mode=MODE_TYPE)
+    
+    #-----< Endpoint-IP-address-and-port >-----#
+    Endpoint_IP_address_and_port = SEQ(name=u'Endpoint-IP-address-and-port', mode=MODE_TYPE)
+    _Endpoint_IP_address_and_port_endpoint_IP_Address = BIT_STR(name=u'endpoint-IP-Address', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'TransportLayerAddress')))
+    _Endpoint_IP_address_and_port_portNumber = BIT_STR(name=u'portNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'PortNumber')))
+    _Endpoint_IP_address_and_port_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    __Endpoint_IP_address_and_port_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionField')))
+    ___Endpoint_IP_address_and_port_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'id']))
+    ____Endpoint_IP_address_and_port_iE_Extensions__item__id_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
+    ____Endpoint_IP_address_and_port_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Endpoint_IP_address_and_port_iE_Extensions__item__id._const_tab = ____Endpoint_IP_address_and_port_iE_Extensions__item__id_tab
+    ___Endpoint_IP_address_and_port_iE_Extensions__item__id._const_tab_at = None
+    ___Endpoint_IP_address_and_port_iE_Extensions__item__id._const_tab_id = u'id'
+    ___Endpoint_IP_address_and_port_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'criticality']))
+    ____Endpoint_IP_address_and_port_iE_Extensions__item__criticality_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
+    ____Endpoint_IP_address_and_port_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Endpoint_IP_address_and_port_iE_Extensions__item__criticality._const_tab = ____Endpoint_IP_address_and_port_iE_Extensions__item__criticality_tab
+    ___Endpoint_IP_address_and_port_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___Endpoint_IP_address_and_port_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___Endpoint_IP_address_and_port_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'Extension']))
+    ____Endpoint_IP_address_and_port_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
+    ____Endpoint_IP_address_and_port_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Endpoint_IP_address_and_port_iE_Extensions__item__extensionValue._const_tab = ____Endpoint_IP_address_and_port_iE_Extensions__item__extensionValue_tab
+    ___Endpoint_IP_address_and_port_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___Endpoint_IP_address_and_port_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
+    __Endpoint_IP_address_and_port_iE_Extensions__item_._cont = ASN1Dict([
+        (u'id', ___Endpoint_IP_address_and_port_iE_Extensions__item__id),
+        (u'criticality', ___Endpoint_IP_address_and_port_iE_Extensions__item__criticality),
+        (u'extensionValue', ___Endpoint_IP_address_and_port_iE_Extensions__item__extensionValue),
+        ])
+    __Endpoint_IP_address_and_port_iE_Extensions__item_._ext = None
+    _Endpoint_IP_address_and_port_iE_Extensions._cont = __Endpoint_IP_address_and_port_iE_Extensions__item_
+    _Endpoint_IP_address_and_port_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
+    Endpoint_IP_address_and_port._cont = ASN1Dict([
+        (u'endpoint-IP-Address', _Endpoint_IP_address_and_port_endpoint_IP_Address),
+        (u'portNumber', _Endpoint_IP_address_and_port_portNumber),
+        (u'iE-Extensions', _Endpoint_IP_address_and_port_iE_Extensions),
+        ])
+    Endpoint_IP_address_and_port._ext = None
+    
+    #-----< Endpoint-IP-address-and-port-ExtIEs >-----#
+    Endpoint_IP_address_and_port_ExtIEs = CLASS(name=u'Endpoint-IP-address-and-port-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
+    Endpoint_IP_address_and_port_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< EUTRANAllocationAndRetentionPriority >-----#
     EUTRANAllocationAndRetentionPriority = SEQ(name=u'EUTRANAllocationAndRetentionPriority', mode=MODE_TYPE)
@@ -4309,7 +4378,7 @@ class E1AP_IEs:
     
     #-----< GNB-CU-UP-CellGroupRelatedConfiguration-Item >-----#
     GNB_CU_UP_CellGroupRelatedConfiguration_Item = SEQ(name=u'GNB-CU-UP-CellGroupRelatedConfiguration-Item', mode=MODE_TYPE)
-    _GNB_CU_UP_CellGroupRelatedConfiguration_Item_cell_Group_ID = INT(name=u'cell-Group-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Cell-Gorup-ID')))
+    _GNB_CU_UP_CellGroupRelatedConfiguration_Item_cell_Group_ID = INT(name=u'cell-Group-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Cell-Group-ID')))
     _GNB_CU_UP_CellGroupRelatedConfiguration_Item_uP_TNL_Information = CHOICE(name=u'uP-TNL-Information', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'UP-TNL-Information')))
     _GNB_CU_UP_CellGroupRelatedConfiguration_Item_uL_Configuration = ENUM(name=u'uL-Configuration', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'UL-Configuration')), opt=True)
     _GNB_CU_UP_CellGroupRelatedConfiguration_Item_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionContainer')), opt=True)
@@ -4498,20 +4567,17 @@ class E1AP_IEs:
     __GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionField')))
     ___GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'id']))
     ____GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__id_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__id_tab_val_Extension_0 = CHOICE(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'CP-TNL-Information')))
+    ____GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 75), (u'criticality', u'reject'), (u'Extension', _____GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__id_tab_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__id._const_tab = ____GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__id_tab
     ___GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__id._const_tab_at = None
     ___GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
-    ___GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__criticality._const_tab = ____GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__criticality_tab
+    ___GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__criticality._const_tab = ____GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__id_tab
     ___GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
-    ___GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__extensionValue._const_tab = ____GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__extensionValue_tab
+    ___GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__extensionValue._const_tab = ____GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__id_tab
     ___GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -4530,7 +4596,8 @@ class E1AP_IEs:
     
     #-----< GNB-CU-CP-TNLA-To-Remove-Item-ExtIEs >-----#
     GNB_CU_CP_TNLA_To_Remove_Item_ExtIEs = CLASS(name=u'GNB-CU-CP-TNLA-To-Remove-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    GNB_CU_CP_TNLA_To_Remove_Item_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    _GNB_CU_CP_TNLA_To_Remove_Item_ExtIEs_val_Extension_0 = CHOICE(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'CP-TNL-Information')))
+    GNB_CU_CP_TNLA_To_Remove_Item_ExtIEs._val = ASN1Set(rv=[dict([(u'id', 75), (u'criticality', u'reject'), (u'Extension', _GNB_CU_CP_TNLA_To_Remove_Item_ExtIEs_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< GNB-CU-CP-TNLA-To-Update-Item >-----#
     GNB_CU_CP_TNLA_To_Update_Item = SEQ(name=u'GNB-CU-CP-TNLA-To-Update-Item', mode=MODE_TYPE)
@@ -4574,6 +4641,49 @@ class E1AP_IEs:
     #-----< GNB-CU-CP-TNLA-To-Update-Item-ExtIEs >-----#
     GNB_CU_CP_TNLA_To_Update_Item_ExtIEs = CLASS(name=u'GNB-CU-CP-TNLA-To-Update-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
     GNB_CU_CP_TNLA_To_Update_Item_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    
+    #-----< GNB-CU-UP-TNLA-To-Remove-Item >-----#
+    GNB_CU_UP_TNLA_To_Remove_Item = SEQ(name=u'GNB-CU-UP-TNLA-To-Remove-Item', mode=MODE_TYPE)
+    _GNB_CU_UP_TNLA_To_Remove_Item_tNLAssociationTransportLayerAddress = CHOICE(name=u'tNLAssociationTransportLayerAddress', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'CP-TNL-Information')))
+    _GNB_CU_UP_TNLA_To_Remove_Item_tNLAssociationTransportLayerAddressgNBCUCP = CHOICE(name=u'tNLAssociationTransportLayerAddressgNBCUCP', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'CP-TNL-Information')), opt=True)
+    _GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    __GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionField')))
+    ___GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'id']))
+    ____GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__id_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
+    ____GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__id._const_tab = ____GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__id_tab
+    ___GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__id._const_tab_at = None
+    ___GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__id._const_tab_id = u'id'
+    ___GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'criticality']))
+    ____GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
+    ____GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__criticality._const_tab = ____GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__criticality_tab
+    ___GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'Extension']))
+    ____GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
+    ____GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__extensionValue._const_tab = ____GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__extensionValue_tab
+    ___GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
+    __GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item_._cont = ASN1Dict([
+        (u'id', ___GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__id),
+        (u'criticality', ___GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__criticality),
+        (u'extensionValue', ___GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__extensionValue),
+        ])
+    __GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item_._ext = None
+    _GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions._cont = __GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item_
+    _GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
+    GNB_CU_UP_TNLA_To_Remove_Item._cont = ASN1Dict([
+        (u'tNLAssociationTransportLayerAddress', _GNB_CU_UP_TNLA_To_Remove_Item_tNLAssociationTransportLayerAddress),
+        (u'tNLAssociationTransportLayerAddressgNBCUCP', _GNB_CU_UP_TNLA_To_Remove_Item_tNLAssociationTransportLayerAddressgNBCUCP),
+        (u'iE-Extensions', _GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions),
+        ])
+    GNB_CU_UP_TNLA_To_Remove_Item._ext = None
+    
+    #-----< GNB-CU-UP-TNLA-To-Remove-Item-ExtIEs >-----#
+    GNB_CU_UP_TNLA_To_Remove_Item_ExtIEs = CLASS(name=u'GNB-CU-UP-TNLA-To-Remove-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
+    GNB_CU_UP_TNLA_To_Remove_Item_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< GBR-QosInformation >-----#
     GBR_QosInformation = SEQ(name=u'GBR-QosInformation', mode=MODE_TYPE)
@@ -4724,6 +4834,10 @@ class E1AP_IEs:
     GNB_CU_UP_OverloadInformation = ENUM(name=u'GNB-CU-UP-OverloadInformation', mode=MODE_TYPE)
     GNB_CU_UP_OverloadInformation._cont = ASN1Dict([(u'overloaded', 0), (u'not-overloaded', 1)])
     GNB_CU_UP_OverloadInformation._ext = None
+    
+    #-----< GNB-DU-ID >-----#
+    GNB_DU_ID = INT(name=u'GNB-DU-ID', mode=MODE_TYPE)
+    GNB_DU_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=68719476735)], ev=None, er=[])
     
     #-----< HFN >-----#
     HFN = INT(name=u'HFN', mode=MODE_TYPE)
@@ -5589,7 +5703,7 @@ class E1AP_IEs:
     #-----< PDU-Session-Resource-Failed-Item >-----#
     PDU_Session_Resource_Failed_Item = SEQ(name=u'PDU-Session-Resource-Failed-Item', mode=MODE_TYPE)
     _PDU_Session_Resource_Failed_Item_pDU_Session_ID = INT(name=u'pDU-Session-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'PDU-Session-ID')))
-    _PDU_Session_Resource_Failed_Item_casue = CHOICE(name=u'casue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Cause')))
+    _PDU_Session_Resource_Failed_Item_cause = CHOICE(name=u'cause', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Cause')))
     _PDU_Session_Resource_Failed_Item_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __PDU_Session_Resource_Failed_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionField')))
     ___PDU_Session_Resource_Failed_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'id']))
@@ -5620,7 +5734,7 @@ class E1AP_IEs:
     _PDU_Session_Resource_Failed_Item_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     PDU_Session_Resource_Failed_Item._cont = ASN1Dict([
         (u'pDU-Session-ID', _PDU_Session_Resource_Failed_Item_pDU_Session_ID),
-        (u'casue', _PDU_Session_Resource_Failed_Item_casue),
+        (u'cause', _PDU_Session_Resource_Failed_Item_cause),
         (u'iE-Extensions', _PDU_Session_Resource_Failed_Item_iE_Extensions),
         ])
     PDU_Session_Resource_Failed_Item._ext = []
@@ -5638,7 +5752,7 @@ class E1AP_IEs:
     #-----< PDU-Session-Resource-Failed-Mod-Item >-----#
     PDU_Session_Resource_Failed_Mod_Item = SEQ(name=u'PDU-Session-Resource-Failed-Mod-Item', mode=MODE_TYPE)
     _PDU_Session_Resource_Failed_Mod_Item_pDU_Session_ID = INT(name=u'pDU-Session-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'PDU-Session-ID')))
-    _PDU_Session_Resource_Failed_Mod_Item_casue = CHOICE(name=u'casue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Cause')))
+    _PDU_Session_Resource_Failed_Mod_Item_cause = CHOICE(name=u'cause', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Cause')))
     _PDU_Session_Resource_Failed_Mod_Item_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __PDU_Session_Resource_Failed_Mod_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionField')))
     ___PDU_Session_Resource_Failed_Mod_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'id']))
@@ -5669,7 +5783,7 @@ class E1AP_IEs:
     _PDU_Session_Resource_Failed_Mod_Item_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     PDU_Session_Resource_Failed_Mod_Item._cont = ASN1Dict([
         (u'pDU-Session-ID', _PDU_Session_Resource_Failed_Mod_Item_pDU_Session_ID),
-        (u'casue', _PDU_Session_Resource_Failed_Mod_Item_casue),
+        (u'cause', _PDU_Session_Resource_Failed_Mod_Item_cause),
         (u'iE-Extensions', _PDU_Session_Resource_Failed_Mod_Item_iE_Extensions),
         ])
     PDU_Session_Resource_Failed_Mod_Item._ext = []
@@ -5687,7 +5801,7 @@ class E1AP_IEs:
     #-----< PDU-Session-Resource-Failed-To-Modify-Item >-----#
     PDU_Session_Resource_Failed_To_Modify_Item = SEQ(name=u'PDU-Session-Resource-Failed-To-Modify-Item', mode=MODE_TYPE)
     _PDU_Session_Resource_Failed_To_Modify_Item_pDU_Session_ID = INT(name=u'pDU-Session-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'PDU-Session-ID')))
-    _PDU_Session_Resource_Failed_To_Modify_Item_casue = CHOICE(name=u'casue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Cause')))
+    _PDU_Session_Resource_Failed_To_Modify_Item_cause = CHOICE(name=u'cause', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Cause')))
     _PDU_Session_Resource_Failed_To_Modify_Item_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __PDU_Session_Resource_Failed_To_Modify_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionField')))
     ___PDU_Session_Resource_Failed_To_Modify_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'id']))
@@ -5718,7 +5832,7 @@ class E1AP_IEs:
     _PDU_Session_Resource_Failed_To_Modify_Item_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     PDU_Session_Resource_Failed_To_Modify_Item._cont = ASN1Dict([
         (u'pDU-Session-ID', _PDU_Session_Resource_Failed_To_Modify_Item_pDU_Session_ID),
-        (u'casue', _PDU_Session_Resource_Failed_To_Modify_Item_casue),
+        (u'cause', _PDU_Session_Resource_Failed_To_Modify_Item_cause),
         (u'iE-Extensions', _PDU_Session_Resource_Failed_To_Modify_Item_iE_Extensions),
         ])
     PDU_Session_Resource_Failed_To_Modify_Item._ext = []
@@ -5738,7 +5852,7 @@ class E1AP_IEs:
     _PDU_Session_Resource_Modified_Item_pDU_Session_ID = INT(name=u'pDU-Session-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'PDU-Session-ID')))
     _PDU_Session_Resource_Modified_Item_nG_DL_UP_TNL_Information = CHOICE(name=u'nG-DL-UP-TNL-Information', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'UP-TNL-Information')), opt=True)
     _PDU_Session_Resource_Modified_Item_securityResult = SEQ(name=u'securityResult', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'SecurityResult')), opt=True)
-    _PDU_Session_Resource_Modified_Item_pDU_Session_Data_Forwarding_Information_Response = SEQ(name=u'pDU-Session-Data-Forwarding-Information-Response', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Data-Forwarding-Information-Response')), opt=True)
+    _PDU_Session_Resource_Modified_Item_pDU_Session_Data_Forwarding_Information_Response = SEQ(name=u'pDU-Session-Data-Forwarding-Information-Response', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Data-Forwarding-Information')), opt=True)
     _PDU_Session_Resource_Modified_Item_dRB_Setup_List_NG_RAN = SEQ_OF(name=u'dRB-Setup-List-NG-RAN', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'DRB-Setup-List-NG-RAN')), opt=True)
     _PDU_Session_Resource_Modified_Item_dRB_Failed_List_NG_RAN = SEQ_OF(name=u'dRB-Failed-List-NG-RAN', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'DRB-Failed-List-NG-RAN')), opt=True)
     _PDU_Session_Resource_Modified_Item_dRB_Modified_List_NG_RAN = SEQ_OF(name=u'dRB-Modified-List-NG-RAN', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'DRB-Modified-List-NG-RAN')), opt=True)
@@ -5852,7 +5966,7 @@ class E1AP_IEs:
     _PDU_Session_Resource_Setup_Item_pDU_Session_ID = INT(name=u'pDU-Session-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'PDU-Session-ID')))
     _PDU_Session_Resource_Setup_Item_securityResult = SEQ(name=u'securityResult', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'SecurityResult')), opt=True)
     _PDU_Session_Resource_Setup_Item_nG_DL_UP_TNL_Information = CHOICE(name=u'nG-DL-UP-TNL-Information', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'UP-TNL-Information')))
-    _PDU_Session_Resource_Setup_Item_pDU_Session_Data_Forwarding_Information_Response = SEQ(name=u'pDU-Session-Data-Forwarding-Information-Response', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Data-Forwarding-Information-Response')), opt=True)
+    _PDU_Session_Resource_Setup_Item_pDU_Session_Data_Forwarding_Information_Response = SEQ(name=u'pDU-Session-Data-Forwarding-Information-Response', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Data-Forwarding-Information')), opt=True)
     _PDU_Session_Resource_Setup_Item_nG_DL_UP_Unchanged = ENUM(name=u'nG-DL-UP-Unchanged', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _PDU_Session_Resource_Setup_Item_nG_DL_UP_Unchanged._cont = ASN1Dict([(u'true', 0)])
     _PDU_Session_Resource_Setup_Item_nG_DL_UP_Unchanged._ext = []
@@ -5913,7 +6027,7 @@ class E1AP_IEs:
     _PDU_Session_Resource_Setup_Mod_Item_pDU_Session_ID = INT(name=u'pDU-Session-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'PDU-Session-ID')))
     _PDU_Session_Resource_Setup_Mod_Item_securityResult = SEQ(name=u'securityResult', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'SecurityResult')), opt=True)
     _PDU_Session_Resource_Setup_Mod_Item_nG_DL_UP_TNL_Information = CHOICE(name=u'nG-DL-UP-TNL-Information', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'UP-TNL-Information')))
-    _PDU_Session_Resource_Setup_Mod_Item_pDU_Session_Data_Forwarding_Information_Response = SEQ(name=u'pDU-Session-Data-Forwarding-Information-Response', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Data-Forwarding-Information-Response')), opt=True)
+    _PDU_Session_Resource_Setup_Mod_Item_pDU_Session_Data_Forwarding_Information_Response = SEQ(name=u'pDU-Session-Data-Forwarding-Information-Response', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Data-Forwarding-Information')), opt=True)
     _PDU_Session_Resource_Setup_Mod_Item_dRB_Setup_Mod_List_NG_RAN = SEQ_OF(name=u'dRB-Setup-Mod-List-NG-RAN', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'DRB-Setup-Mod-List-NG-RAN')))
     _PDU_Session_Resource_Setup_Mod_Item_dRB_Failed_Mod_List_NG_RAN = SEQ_OF(name=u'dRB-Failed-Mod-List-NG-RAN', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'DRB-Failed-Mod-List-NG-RAN')), opt=True)
     _PDU_Session_Resource_Setup_Mod_Item_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionContainer')), opt=True)
@@ -5972,7 +6086,7 @@ class E1AP_IEs:
     _PDU_Session_Resource_To_Modify_Item_pDU_Session_Resource_DL_AMBR = INT(name=u'pDU-Session-Resource-DL-AMBR', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'BitRate')), opt=True)
     _PDU_Session_Resource_To_Modify_Item_nG_UL_UP_TNL_Information = CHOICE(name=u'nG-UL-UP-TNL-Information', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'UP-TNL-Information')), opt=True)
     _PDU_Session_Resource_To_Modify_Item_pDU_Session_Data_Forwarding_Information_Request = SEQ(name=u'pDU-Session-Data-Forwarding-Information-Request', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Data-Forwarding-Information-Request')), opt=True)
-    _PDU_Session_Resource_To_Modify_Item_pDU_Session_Data_Forwarding_Information_Response = SEQ(name=u'pDU-Session-Data-Forwarding-Information-Response', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Data-Forwarding-Information-Response')), opt=True)
+    _PDU_Session_Resource_To_Modify_Item_pDU_Session_Data_Forwarding_Information = SEQ(name=u'pDU-Session-Data-Forwarding-Information', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Data-Forwarding-Information')), opt=True)
     _PDU_Session_Resource_To_Modify_Item_pDU_Session_Inactivity_Timer = INT(name=u'pDU-Session-Inactivity-Timer', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Inactivity-Timer')), opt=True)
     _PDU_Session_Resource_To_Modify_Item_networkInstance = INT(name=u'networkInstance', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'NetworkInstance')), opt=True)
     _PDU_Session_Resource_To_Modify_Item_dRB_To_Setup_List_NG_RAN = SEQ_OF(name=u'dRB-To-Setup-List-NG-RAN', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'DRB-To-Setup-List-NG-RAN')), opt=True)
@@ -5983,7 +6097,8 @@ class E1AP_IEs:
     ___PDU_Session_Resource_To_Modify_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'id']))
     ____PDU_Session_Resource_To_Modify_Item_iE_Extensions__item__id_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
     _____PDU_Session_Resource_To_Modify_Item_iE_Extensions__item__id_tab_val_Extension_0 = SEQ(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'SNSSAI')))
-    ____PDU_Session_Resource_To_Modify_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 69), (u'criticality', u'reject'), (u'Extension', _____PDU_Session_Resource_To_Modify_Item_iE_Extensions__item__id_tab_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    _____PDU_Session_Resource_To_Modify_Item_iE_Extensions__item__id_tab_val_Extension_1 = OCT_STR(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'CommonNetworkInstance')))
+    ____PDU_Session_Resource_To_Modify_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 69), (u'criticality', u'reject'), (u'Extension', _____PDU_Session_Resource_To_Modify_Item_iE_Extensions__item__id_tab_val_Extension_0), (u'presence', u'optional')]), dict([(u'id', 78), (u'criticality', u'ignore'), (u'Extension', _____PDU_Session_Resource_To_Modify_Item_iE_Extensions__item__id_tab_val_Extension_1), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___PDU_Session_Resource_To_Modify_Item_iE_Extensions__item__id._const_tab = ____PDU_Session_Resource_To_Modify_Item_iE_Extensions__item__id_tab
     ___PDU_Session_Resource_To_Modify_Item_iE_Extensions__item__id._const_tab_at = None
     ___PDU_Session_Resource_To_Modify_Item_iE_Extensions__item__id._const_tab_id = u'id'
@@ -6009,7 +6124,7 @@ class E1AP_IEs:
         (u'pDU-Session-Resource-DL-AMBR', _PDU_Session_Resource_To_Modify_Item_pDU_Session_Resource_DL_AMBR),
         (u'nG-UL-UP-TNL-Information', _PDU_Session_Resource_To_Modify_Item_nG_UL_UP_TNL_Information),
         (u'pDU-Session-Data-Forwarding-Information-Request', _PDU_Session_Resource_To_Modify_Item_pDU_Session_Data_Forwarding_Information_Request),
-        (u'pDU-Session-Data-Forwarding-Information-Response', _PDU_Session_Resource_To_Modify_Item_pDU_Session_Data_Forwarding_Information_Response),
+        (u'pDU-Session-Data-Forwarding-Information', _PDU_Session_Resource_To_Modify_Item_pDU_Session_Data_Forwarding_Information),
         (u'pDU-Session-Inactivity-Timer', _PDU_Session_Resource_To_Modify_Item_pDU_Session_Inactivity_Timer),
         (u'networkInstance', _PDU_Session_Resource_To_Modify_Item_networkInstance),
         (u'dRB-To-Setup-List-NG-RAN', _PDU_Session_Resource_To_Modify_Item_dRB_To_Setup_List_NG_RAN),
@@ -6022,7 +6137,8 @@ class E1AP_IEs:
     #-----< PDU-Session-Resource-To-Modify-Item-ExtIEs >-----#
     PDU_Session_Resource_To_Modify_Item_ExtIEs = CLASS(name=u'PDU-Session-Resource-To-Modify-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
     _PDU_Session_Resource_To_Modify_Item_ExtIEs_val_Extension_0 = SEQ(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'SNSSAI')))
-    PDU_Session_Resource_To_Modify_Item_ExtIEs._val = ASN1Set(rv=[dict([(u'id', 69), (u'criticality', u'reject'), (u'Extension', _PDU_Session_Resource_To_Modify_Item_ExtIEs_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    _PDU_Session_Resource_To_Modify_Item_ExtIEs_val_Extension_1 = OCT_STR(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'CommonNetworkInstance')))
+    PDU_Session_Resource_To_Modify_Item_ExtIEs._val = ASN1Set(rv=[dict([(u'id', 69), (u'criticality', u'reject'), (u'Extension', _PDU_Session_Resource_To_Modify_Item_ExtIEs_val_Extension_0), (u'presence', u'optional')]), dict([(u'id', 78), (u'criticality', u'ignore'), (u'Extension', _PDU_Session_Resource_To_Modify_Item_ExtIEs_val_Extension_1), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< PDU-Session-Resource-To-Remove-List >-----#
     PDU_Session_Resource_To_Remove_List = SEQ_OF(name=u'PDU-Session-Resource-To-Remove-List', mode=MODE_TYPE)
@@ -6037,20 +6153,17 @@ class E1AP_IEs:
     __PDU_Session_Resource_To_Remove_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionField')))
     ___PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'id']))
     ____PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__id_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__id_tab_val_Extension_0 = CHOICE(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'Cause')))
+    ____PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'ignore'), (u'Extension', _____PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__id_tab_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__id._const_tab = ____PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__id_tab
     ___PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__id._const_tab_at = None
     ___PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
-    ___PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__criticality._const_tab = ____PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__criticality_tab
+    ___PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__criticality._const_tab = ____PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__id_tab
     ___PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
-    ___PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__extensionValue._const_tab = ____PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__extensionValue_tab
+    ___PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__extensionValue._const_tab = ____PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__id_tab
     ___PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __PDU_Session_Resource_To_Remove_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -6069,7 +6182,8 @@ class E1AP_IEs:
     
     #-----< PDU-Session-Resource-To-Remove-Item-ExtIEs >-----#
     PDU_Session_Resource_To_Remove_Item_ExtIEs = CLASS(name=u'PDU-Session-Resource-To-Remove-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    PDU_Session_Resource_To_Remove_Item_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    _PDU_Session_Resource_To_Remove_Item_ExtIEs_val_Extension_0 = CHOICE(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'Cause')))
+    PDU_Session_Resource_To_Remove_Item_ExtIEs._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'ignore'), (u'Extension', _PDU_Session_Resource_To_Remove_Item_ExtIEs_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< PDU-Session-Resource-To-Setup-List >-----#
     PDU_Session_Resource_To_Setup_List = SEQ_OF(name=u'PDU-Session-Resource-To-Setup-List', mode=MODE_TYPE)
@@ -6094,20 +6208,17 @@ class E1AP_IEs:
     __PDU_Session_Resource_To_Setup_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionField')))
     ___PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'id']))
     ____PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__id_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__id_tab_val_Extension_0 = OCT_STR(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'CommonNetworkInstance')))
+    ____PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 78), (u'criticality', u'ignore'), (u'Extension', _____PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__id_tab_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__id._const_tab = ____PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__id_tab
     ___PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__id._const_tab_at = None
     ___PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
-    ___PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__criticality._const_tab = ____PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__criticality_tab
+    ___PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__criticality._const_tab = ____PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__id_tab
     ___PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
-    ___PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__extensionValue._const_tab = ____PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__extensionValue_tab
+    ___PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__extensionValue._const_tab = ____PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__id_tab
     ___PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __PDU_Session_Resource_To_Setup_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -6136,7 +6247,8 @@ class E1AP_IEs:
     
     #-----< PDU-Session-Resource-To-Setup-Item-ExtIEs >-----#
     PDU_Session_Resource_To_Setup_Item_ExtIEs = CLASS(name=u'PDU-Session-Resource-To-Setup-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    PDU_Session_Resource_To_Setup_Item_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    _PDU_Session_Resource_To_Setup_Item_ExtIEs_val_Extension_0 = OCT_STR(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'CommonNetworkInstance')))
+    PDU_Session_Resource_To_Setup_Item_ExtIEs._val = ASN1Set(rv=[dict([(u'id', 78), (u'criticality', u'ignore'), (u'Extension', _PDU_Session_Resource_To_Setup_Item_ExtIEs_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< PDU-Session-Resource-To-Setup-Mod-List >-----#
     PDU_Session_Resource_To_Setup_Mod_List = SEQ_OF(name=u'PDU-Session-Resource-To-Setup-Mod-List', mode=MODE_TYPE)
@@ -6159,20 +6271,18 @@ class E1AP_IEs:
     __PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionField')))
     ___PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'id']))
     ____PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__id_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__id_tab_val_Extension_0 = INT(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'NetworkInstance')))
+    _____PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__id_tab_val_Extension_1 = OCT_STR(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'CommonNetworkInstance')))
+    ____PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 79), (u'criticality', u'ignore'), (u'Extension', _____PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__id_tab_val_Extension_0), (u'presence', u'optional')]), dict([(u'id', 78), (u'criticality', u'ignore'), (u'Extension', _____PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__id_tab_val_Extension_1), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__id._const_tab = ____PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__id_tab
     ___PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__id._const_tab_at = None
     ___PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
-    ___PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__criticality._const_tab = ____PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__criticality_tab
+    ___PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__criticality._const_tab = ____PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__id_tab
     ___PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
-    ___PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__extensionValue._const_tab = ____PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__extensionValue_tab
+    ___PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__extensionValue._const_tab = ____PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__id_tab
     ___PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -6199,7 +6309,9 @@ class E1AP_IEs:
     
     #-----< PDU-Session-Resource-To-Setup-Mod-Item-ExtIEs >-----#
     PDU_Session_Resource_To_Setup_Mod_Item_ExtIEs = CLASS(name=u'PDU-Session-Resource-To-Setup-Mod-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    PDU_Session_Resource_To_Setup_Mod_Item_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    _PDU_Session_Resource_To_Setup_Mod_Item_ExtIEs_val_Extension_0 = INT(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'NetworkInstance')))
+    _PDU_Session_Resource_To_Setup_Mod_Item_ExtIEs_val_Extension_1 = OCT_STR(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'CommonNetworkInstance')))
+    PDU_Session_Resource_To_Setup_Mod_Item_ExtIEs._val = ASN1Set(rv=[dict([(u'id', 79), (u'criticality', u'ignore'), (u'Extension', _PDU_Session_Resource_To_Setup_Mod_Item_ExtIEs_val_Extension_0), (u'presence', u'optional')]), dict([(u'id', 78), (u'criticality', u'ignore'), (u'Extension', _PDU_Session_Resource_To_Setup_Mod_Item_ExtIEs_val_Extension_1), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< PDU-Session-To-Notify-List >-----#
     PDU_Session_To_Notify_List = SEQ_OF(name=u'PDU-Session-To-Notify-List', mode=MODE_TYPE)
@@ -6258,6 +6370,10 @@ class E1AP_IEs:
     #-----< PLMN-Identity >-----#
     PLMN_Identity = OCT_STR(name=u'PLMN-Identity', mode=MODE_TYPE)
     PLMN_Identity._const_sz = ASN1Set(rv=[3], rr=[], ev=None, er=[])
+    
+    #-----< PortNumber >-----#
+    PortNumber = BIT_STR(name=u'PortNumber', mode=MODE_TYPE)
+    PortNumber._const_sz = ASN1Set(rv=[16], rr=[], ev=None, er=[])
     
     #-----< PPI >-----#
     PPI = INT(name=u'PPI', mode=MODE_TYPE)
@@ -6339,20 +6455,17 @@ class E1AP_IEs:
     __QoS_Flow_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionField')))
     ___QoS_Flow_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'id']))
     ____QoS_Flow_Item_iE_Extensions__item__id_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____QoS_Flow_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____QoS_Flow_Item_iE_Extensions__item__id_tab_val_Extension_0 = ENUM(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'QoS-Flow-Mapping-Indication')))
+    ____QoS_Flow_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 80), (u'criticality', u'ignore'), (u'Extension', _____QoS_Flow_Item_iE_Extensions__item__id_tab_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___QoS_Flow_Item_iE_Extensions__item__id._const_tab = ____QoS_Flow_Item_iE_Extensions__item__id_tab
     ___QoS_Flow_Item_iE_Extensions__item__id._const_tab_at = None
     ___QoS_Flow_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___QoS_Flow_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____QoS_Flow_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____QoS_Flow_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
-    ___QoS_Flow_Item_iE_Extensions__item__criticality._const_tab = ____QoS_Flow_Item_iE_Extensions__item__criticality_tab
+    ___QoS_Flow_Item_iE_Extensions__item__criticality._const_tab = ____QoS_Flow_Item_iE_Extensions__item__id_tab
     ___QoS_Flow_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___QoS_Flow_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___QoS_Flow_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____QoS_Flow_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_E1AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    ____QoS_Flow_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
-    ___QoS_Flow_Item_iE_Extensions__item__extensionValue._const_tab = ____QoS_Flow_Item_iE_Extensions__item__extensionValue_tab
+    ___QoS_Flow_Item_iE_Extensions__item__extensionValue._const_tab = ____QoS_Flow_Item_iE_Extensions__item__id_tab
     ___QoS_Flow_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___QoS_Flow_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __QoS_Flow_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -6371,7 +6484,8 @@ class E1AP_IEs:
     
     #-----< QoS-Flow-Item-ExtIEs >-----#
     QoS_Flow_Item_ExtIEs = CLASS(name=u'QoS-Flow-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
-    QoS_Flow_Item_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    _QoS_Flow_Item_ExtIEs_val_Extension_0 = ENUM(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'QoS-Flow-Mapping-Indication')))
+    QoS_Flow_Item_ExtIEs._val = ASN1Set(rv=[dict([(u'id', 80), (u'criticality', u'ignore'), (u'Extension', _QoS_Flow_Item_ExtIEs_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< QoS-Flow-Failed-List >-----#
     QoS_Flow_Failed_List = SEQ_OF(name=u'QoS-Flow-Failed-List', mode=MODE_TYPE)
@@ -6382,7 +6496,7 @@ class E1AP_IEs:
     #-----< QoS-Flow-Failed-Item >-----#
     QoS_Flow_Failed_Item = SEQ(name=u'QoS-Flow-Failed-Item', mode=MODE_TYPE)
     _QoS_Flow_Failed_Item_qoS_Flow_Identifier = INT(name=u'qoS-Flow-Identifier', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'QoS-Flow-Identifier')))
-    _QoS_Flow_Failed_Item_casue = CHOICE(name=u'casue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Cause')))
+    _QoS_Flow_Failed_Item_cause = CHOICE(name=u'cause', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Cause')))
     _QoS_Flow_Failed_Item_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __QoS_Flow_Failed_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionField')))
     ___QoS_Flow_Failed_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'id']))
@@ -6413,7 +6527,7 @@ class E1AP_IEs:
     _QoS_Flow_Failed_Item_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     QoS_Flow_Failed_Item._cont = ASN1Dict([
         (u'qoS-Flow-Identifier', _QoS_Flow_Failed_Item_qoS_Flow_Identifier),
-        (u'casue', _QoS_Flow_Failed_Item_casue),
+        (u'cause', _QoS_Flow_Failed_Item_cause),
         (u'iE-Extensions', _QoS_Flow_Failed_Item_iE_Extensions),
         ])
     QoS_Flow_Failed_Item._ext = []
@@ -6633,6 +6747,10 @@ class E1AP_IEs:
     #-----< QoSFlowLevelQoSParameters-ExtIEs >-----#
     QoSFlowLevelQoSParameters_ExtIEs = CLASS(name=u'QoSFlowLevelQoSParameters-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION')))
     QoSFlowLevelQoSParameters_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    
+    #-----< RANUEID >-----#
+    RANUEID = OCT_STR(name=u'RANUEID', mode=MODE_TYPE)
+    RANUEID._const_sz = ASN1Set(rv=[8], rr=[], ev=None, er=[])
     
     #-----< RAT-Type >-----#
     RAT_Type = ENUM(name=u'RAT-Type', mode=MODE_TYPE)
@@ -7190,7 +7308,7 @@ class E1AP_IEs:
     #-----< UP-Parameters-Item >-----#
     UP_Parameters_Item = SEQ(name=u'UP-Parameters-Item', mode=MODE_TYPE)
     _UP_Parameters_Item_uP_TNL_Information = CHOICE(name=u'uP-TNL-Information', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'UP-TNL-Information')))
-    _UP_Parameters_Item_cell_Group_ID = INT(name=u'cell-Group-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Cell-Gorup-ID')))
+    _UP_Parameters_Item_cell_Group_ID = INT(name=u'cell-Group-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-IEs', 'Cell-Group-ID')))
     _UP_Parameters_Item_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __UP_Parameters_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-Containers', 'ProtocolExtensionField')))
     ___UP_Parameters_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-Containers', 'E1AP-PROTOCOL-EXTENSION'), [u'id']))
@@ -7410,21 +7528,22 @@ class E1AP_IEs:
         _Cell_Group_Information_Item_iE_Extensions,
         Cell_Group_Information_Item,
         Cell_Group_Information_Item_ExtIEs,
-        Cell_Gorup_ID,
+        Cell_Group_ID,
         CipheringAlgorithm,
         CNSupport,
+        CommonNetworkInstance,
         ConfidentialityProtectionIndication,
         ConfidentialityProtectionResult,
         _CP_TNL_Information_endpoint_IP_Address,
         ___CP_TNL_Information_choice_extension_id_tab,
+        ____CP_TNL_Information_choice_extension_id_tab_val_Value_0,
         __CP_TNL_Information_choice_extension_id,
-        ___CP_TNL_Information_choice_extension_criticality_tab,
         __CP_TNL_Information_choice_extension_criticality,
-        ___CP_TNL_Information_choice_extension_value_tab,
         __CP_TNL_Information_choice_extension_value,
         _CP_TNL_Information_choice_extension,
         CP_TNL_Information,
         CP_TNL_Information_ExtIEs,
+        _CP_TNL_Information_ExtIEs_val_Value_0,
         _CriticalityDiagnostics_procedureCode,
         _CriticalityDiagnostics_triggeringMessage,
         _CriticalityDiagnostics_procedureCriticality,
@@ -7466,18 +7585,18 @@ class E1AP_IEs:
         _Data_Forwarding_Information_Request_iE_Extensions,
         Data_Forwarding_Information_Request,
         Data_Forwarding_Information_Request_ExtIEs,
-        _Data_Forwarding_Information_Response_uL_Data_Forwarding,
-        _Data_Forwarding_Information_Response_dL_Data_Forwarding,
-        ____Data_Forwarding_Information_Response_iE_Extensions__item__id_tab,
-        ___Data_Forwarding_Information_Response_iE_Extensions__item__id,
-        ____Data_Forwarding_Information_Response_iE_Extensions__item__criticality_tab,
-        ___Data_Forwarding_Information_Response_iE_Extensions__item__criticality,
-        ____Data_Forwarding_Information_Response_iE_Extensions__item__extensionValue_tab,
-        ___Data_Forwarding_Information_Response_iE_Extensions__item__extensionValue,
-        __Data_Forwarding_Information_Response_iE_Extensions__item_,
-        _Data_Forwarding_Information_Response_iE_Extensions,
-        Data_Forwarding_Information_Response,
-        Data_Forwarding_Information_Response_ExtIEs,
+        _Data_Forwarding_Information_uL_Data_Forwarding,
+        _Data_Forwarding_Information_dL_Data_Forwarding,
+        ____Data_Forwarding_Information_iE_Extensions__item__id_tab,
+        ___Data_Forwarding_Information_iE_Extensions__item__id,
+        ____Data_Forwarding_Information_iE_Extensions__item__criticality_tab,
+        ___Data_Forwarding_Information_iE_Extensions__item__criticality,
+        ____Data_Forwarding_Information_iE_Extensions__item__extensionValue_tab,
+        ___Data_Forwarding_Information_iE_Extensions__item__extensionValue,
+        __Data_Forwarding_Information_iE_Extensions__item_,
+        _Data_Forwarding_Information_iE_Extensions,
+        Data_Forwarding_Information,
+        Data_Forwarding_Information_ExtIEs,
         Data_Forwarding_Request,
         _Data_Usage_per_PDU_Session_Report_secondaryRATType,
         __Data_Usage_per_PDU_Session_Report_pDU_session_Timed_Report_List__item_,
@@ -7836,7 +7955,7 @@ class E1AP_IEs:
         _DRB_To_Modify_Item_EUTRAN_pDCP_Configuration,
         _DRB_To_Modify_Item_EUTRAN_eUTRAN_QoS,
         _DRB_To_Modify_Item_EUTRAN_s1_UL_UP_TNL_Information,
-        _DRB_To_Modify_Item_EUTRAN_data_Forwarding_Information_Request,
+        _DRB_To_Modify_Item_EUTRAN_data_Forwarding_Information,
         _DRB_To_Modify_Item_EUTRAN_pDCP_SN_Status_Request,
         _DRB_To_Modify_Item_EUTRAN_pDCP_SN_Status_Information,
         _DRB_To_Modify_Item_EUTRAN_dL_UP_Parameters,
@@ -7859,7 +7978,7 @@ class E1AP_IEs:
         _DRB_To_Modify_Item_NG_RAN_dRB_ID,
         _DRB_To_Modify_Item_NG_RAN_sDAP_Configuration,
         _DRB_To_Modify_Item_NG_RAN_pDCP_Configuration,
-        _DRB_To_Modify_Item_NG_RAN_dRB_Data_Forwarding_Information_Response,
+        _DRB_To_Modify_Item_NG_RAN_dRB_Data_Forwarding_Information,
         _DRB_To_Modify_Item_NG_RAN_pDCP_SN_Status_Request,
         _DRB_To_Modify_Item_NG_RAN_pdcp_SN_Status_Information,
         _DRB_To_Modify_Item_NG_RAN_dL_UP_Parameters,
@@ -7869,15 +7988,17 @@ class E1AP_IEs:
         _DRB_To_Modify_Item_NG_RAN_flow_Mapping_Information,
         _DRB_To_Modify_Item_NG_RAN_dRB_Inactivity_Timer,
         ____DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__id_tab,
+        _____DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__id_tab_val_Extension_0,
+        _____DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__id_tab_val_Extension_1,
         ___DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__id,
-        ____DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__criticality_tab,
         ___DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__criticality,
-        ____DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__extensionValue_tab,
         ___DRB_To_Modify_Item_NG_RAN_iE_Extensions__item__extensionValue,
         __DRB_To_Modify_Item_NG_RAN_iE_Extensions__item_,
         _DRB_To_Modify_Item_NG_RAN_iE_Extensions,
         DRB_To_Modify_Item_NG_RAN,
         DRB_To_Modify_Item_NG_RAN_ExtIEs,
+        _DRB_To_Modify_Item_NG_RAN_ExtIEs_val_Extension_0,
+        _DRB_To_Modify_Item_NG_RAN_ExtIEs_val_Extension_1,
         _DRB_To_Remove_List_EUTRAN__item_,
         DRB_To_Remove_List_EUTRAN,
         _DRB_To_Remove_Item_EUTRAN_dRB_ID,
@@ -7984,15 +8105,15 @@ class E1AP_IEs:
         _DRB_To_Setup_Item_NG_RAN_dRB_Inactivity_Timer,
         _DRB_To_Setup_Item_NG_RAN_pDCP_SN_Status_Information,
         ____DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__id_tab,
+        _____DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__id_tab_val_Extension_0,
         ___DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__id,
-        ____DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__criticality_tab,
         ___DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__criticality,
-        ____DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__extensionValue_tab,
         ___DRB_To_Setup_Item_NG_RAN_iE_Extensions__item__extensionValue,
         __DRB_To_Setup_Item_NG_RAN_iE_Extensions__item_,
         _DRB_To_Setup_Item_NG_RAN_iE_Extensions,
         DRB_To_Setup_Item_NG_RAN,
         DRB_To_Setup_Item_NG_RAN_ExtIEs,
+        _DRB_To_Setup_Item_NG_RAN_ExtIEs_val_Extension_0,
         _DRB_To_Setup_Mod_List_NG_RAN__item_,
         DRB_To_Setup_Mod_List_NG_RAN,
         _DRB_To_Setup_Mod_Item_NG_RAN_dRB_ID,
@@ -8002,18 +8123,17 @@ class E1AP_IEs:
         _DRB_To_Setup_Mod_Item_NG_RAN_flow_Mapping_Information,
         _DRB_To_Setup_Mod_Item_NG_RAN_dRB_Data_Forwarding_Information_Request,
         _DRB_To_Setup_Mod_Item_NG_RAN_dRB_Inactivity_Timer,
-        _DRB_To_Setup_Mod_Item_NG_RAN_pDCP_UL_Count,
-        _DRB_To_Setup_Mod_Item_NG_RAN_pDCP_DL_Count,
+        _DRB_To_Setup_Mod_Item_NG_RAN_pDCP_SN_Status_Information,
         ____DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__id_tab,
+        _____DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__id_tab_val_Extension_0,
         ___DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__id,
-        ____DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__criticality_tab,
         ___DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__criticality,
-        ____DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__extensionValue_tab,
         ___DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item__extensionValue,
         __DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions__item_,
         _DRB_To_Setup_Mod_Item_NG_RAN_iE_Extensions,
         DRB_To_Setup_Mod_Item_NG_RAN,
         DRB_To_Setup_Mod_Item_NG_RAN_ExtIEs,
+        _DRB_To_Setup_Mod_Item_NG_RAN_ExtIEs_val_Extension_0,
         _DRB_Usage_Report_List__item_,
         DRB_Usage_Report_List,
         _DRB_Usage_Report_Item_startTimeStamp,
@@ -8050,6 +8170,18 @@ class E1AP_IEs:
         Dynamic5QIDescriptor_ExtIEs,
         DataDiscardRequired,
         EncryptionKey,
+        _Endpoint_IP_address_and_port_endpoint_IP_Address,
+        _Endpoint_IP_address_and_port_portNumber,
+        ____Endpoint_IP_address_and_port_iE_Extensions__item__id_tab,
+        ___Endpoint_IP_address_and_port_iE_Extensions__item__id,
+        ____Endpoint_IP_address_and_port_iE_Extensions__item__criticality_tab,
+        ___Endpoint_IP_address_and_port_iE_Extensions__item__criticality,
+        ____Endpoint_IP_address_and_port_iE_Extensions__item__extensionValue_tab,
+        ___Endpoint_IP_address_and_port_iE_Extensions__item__extensionValue,
+        __Endpoint_IP_address_and_port_iE_Extensions__item_,
+        _Endpoint_IP_address_and_port_iE_Extensions,
+        Endpoint_IP_address_and_port,
+        Endpoint_IP_address_and_port_ExtIEs,
         _EUTRANAllocationAndRetentionPriority_priorityLevel,
         _EUTRANAllocationAndRetentionPriority_pre_emptionCapability,
         _EUTRANAllocationAndRetentionPriority_pre_emptionVulnerability,
@@ -8147,15 +8279,15 @@ class E1AP_IEs:
         GNB_CU_CP_TNLA_To_Add_Item_ExtIEs,
         _GNB_CU_CP_TNLA_To_Remove_Item_tNLAssociationTransportLayerAddress,
         ____GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__id_tab,
+        _____GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__id_tab_val_Extension_0,
         ___GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__id,
-        ____GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__criticality_tab,
         ___GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__criticality,
-        ____GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__extensionValue_tab,
         ___GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item__extensionValue,
         __GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions__item_,
         _GNB_CU_CP_TNLA_To_Remove_Item_iE_Extensions,
         GNB_CU_CP_TNLA_To_Remove_Item,
         GNB_CU_CP_TNLA_To_Remove_Item_ExtIEs,
+        _GNB_CU_CP_TNLA_To_Remove_Item_ExtIEs_val_Extension_0,
         _GNB_CU_CP_TNLA_To_Update_Item_tNLAssociationTransportLayerAddress,
         _GNB_CU_CP_TNLA_To_Update_Item_tNLAssociationUsage,
         ____GNB_CU_CP_TNLA_To_Update_Item_iE_Extensions__item__id_tab,
@@ -8168,6 +8300,18 @@ class E1AP_IEs:
         _GNB_CU_CP_TNLA_To_Update_Item_iE_Extensions,
         GNB_CU_CP_TNLA_To_Update_Item,
         GNB_CU_CP_TNLA_To_Update_Item_ExtIEs,
+        _GNB_CU_UP_TNLA_To_Remove_Item_tNLAssociationTransportLayerAddress,
+        _GNB_CU_UP_TNLA_To_Remove_Item_tNLAssociationTransportLayerAddressgNBCUCP,
+        ____GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__id_tab,
+        ___GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__id,
+        ____GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__criticality_tab,
+        ___GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__criticality,
+        ____GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__extensionValue_tab,
+        ___GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item__extensionValue,
+        __GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions__item_,
+        _GNB_CU_UP_TNLA_To_Remove_Item_iE_Extensions,
+        GNB_CU_UP_TNLA_To_Remove_Item,
+        GNB_CU_UP_TNLA_To_Remove_Item_ExtIEs,
         _GBR_QosInformation_e_RAB_MaximumBitrateDL,
         _GBR_QosInformation_e_RAB_MaximumBitrateUL,
         _GBR_QosInformation_e_RAB_GuaranteedBitrateDL,
@@ -8212,6 +8356,7 @@ class E1AP_IEs:
         GTPTunnel,
         GTPTunnel_ExtIEs,
         GNB_CU_UP_OverloadInformation,
+        GNB_DU_ID,
         HFN,
         IntegrityProtectionIndication,
         IntegrityProtectionAlgorithm,
@@ -8453,7 +8598,7 @@ class E1AP_IEs:
         _PDU_Session_Resource_Failed_List__item_,
         PDU_Session_Resource_Failed_List,
         _PDU_Session_Resource_Failed_Item_pDU_Session_ID,
-        _PDU_Session_Resource_Failed_Item_casue,
+        _PDU_Session_Resource_Failed_Item_cause,
         ____PDU_Session_Resource_Failed_Item_iE_Extensions__item__id_tab,
         ___PDU_Session_Resource_Failed_Item_iE_Extensions__item__id,
         ____PDU_Session_Resource_Failed_Item_iE_Extensions__item__criticality_tab,
@@ -8467,7 +8612,7 @@ class E1AP_IEs:
         _PDU_Session_Resource_Failed_Mod_List__item_,
         PDU_Session_Resource_Failed_Mod_List,
         _PDU_Session_Resource_Failed_Mod_Item_pDU_Session_ID,
-        _PDU_Session_Resource_Failed_Mod_Item_casue,
+        _PDU_Session_Resource_Failed_Mod_Item_cause,
         ____PDU_Session_Resource_Failed_Mod_Item_iE_Extensions__item__id_tab,
         ___PDU_Session_Resource_Failed_Mod_Item_iE_Extensions__item__id,
         ____PDU_Session_Resource_Failed_Mod_Item_iE_Extensions__item__criticality_tab,
@@ -8481,7 +8626,7 @@ class E1AP_IEs:
         _PDU_Session_Resource_Failed_To_Modify_List__item_,
         PDU_Session_Resource_Failed_To_Modify_List,
         _PDU_Session_Resource_Failed_To_Modify_Item_pDU_Session_ID,
-        _PDU_Session_Resource_Failed_To_Modify_Item_casue,
+        _PDU_Session_Resource_Failed_To_Modify_Item_cause,
         ____PDU_Session_Resource_Failed_To_Modify_Item_iE_Extensions__item__id_tab,
         ___PDU_Session_Resource_Failed_To_Modify_Item_iE_Extensions__item__id,
         ____PDU_Session_Resource_Failed_To_Modify_Item_iE_Extensions__item__criticality_tab,
@@ -8572,7 +8717,7 @@ class E1AP_IEs:
         _PDU_Session_Resource_To_Modify_Item_pDU_Session_Resource_DL_AMBR,
         _PDU_Session_Resource_To_Modify_Item_nG_UL_UP_TNL_Information,
         _PDU_Session_Resource_To_Modify_Item_pDU_Session_Data_Forwarding_Information_Request,
-        _PDU_Session_Resource_To_Modify_Item_pDU_Session_Data_Forwarding_Information_Response,
+        _PDU_Session_Resource_To_Modify_Item_pDU_Session_Data_Forwarding_Information,
         _PDU_Session_Resource_To_Modify_Item_pDU_Session_Inactivity_Timer,
         _PDU_Session_Resource_To_Modify_Item_networkInstance,
         _PDU_Session_Resource_To_Modify_Item_dRB_To_Setup_List_NG_RAN,
@@ -8580,6 +8725,7 @@ class E1AP_IEs:
         _PDU_Session_Resource_To_Modify_Item_dRB_To_Remove_List_NG_RAN,
         ____PDU_Session_Resource_To_Modify_Item_iE_Extensions__item__id_tab,
         _____PDU_Session_Resource_To_Modify_Item_iE_Extensions__item__id_tab_val_Extension_0,
+        _____PDU_Session_Resource_To_Modify_Item_iE_Extensions__item__id_tab_val_Extension_1,
         ___PDU_Session_Resource_To_Modify_Item_iE_Extensions__item__id,
         ___PDU_Session_Resource_To_Modify_Item_iE_Extensions__item__criticality,
         ___PDU_Session_Resource_To_Modify_Item_iE_Extensions__item__extensionValue,
@@ -8588,19 +8734,20 @@ class E1AP_IEs:
         PDU_Session_Resource_To_Modify_Item,
         PDU_Session_Resource_To_Modify_Item_ExtIEs,
         _PDU_Session_Resource_To_Modify_Item_ExtIEs_val_Extension_0,
+        _PDU_Session_Resource_To_Modify_Item_ExtIEs_val_Extension_1,
         _PDU_Session_Resource_To_Remove_List__item_,
         PDU_Session_Resource_To_Remove_List,
         _PDU_Session_Resource_To_Remove_Item_pDU_Session_ID,
         ____PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__id_tab,
+        _____PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__id_tab_val_Extension_0,
         ___PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__id,
-        ____PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__criticality_tab,
         ___PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__criticality,
-        ____PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__extensionValue_tab,
         ___PDU_Session_Resource_To_Remove_Item_iE_Extensions__item__extensionValue,
         __PDU_Session_Resource_To_Remove_Item_iE_Extensions__item_,
         _PDU_Session_Resource_To_Remove_Item_iE_Extensions,
         PDU_Session_Resource_To_Remove_Item,
         PDU_Session_Resource_To_Remove_Item_ExtIEs,
+        _PDU_Session_Resource_To_Remove_Item_ExtIEs_val_Extension_0,
         _PDU_Session_Resource_To_Setup_List__item_,
         PDU_Session_Resource_To_Setup_List,
         _PDU_Session_Resource_To_Setup_Item_pDU_Session_ID,
@@ -8615,15 +8762,15 @@ class E1AP_IEs:
         _PDU_Session_Resource_To_Setup_Item_networkInstance,
         _PDU_Session_Resource_To_Setup_Item_dRB_To_Setup_List_NG_RAN,
         ____PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__id_tab,
+        _____PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__id_tab_val_Extension_0,
         ___PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__id,
-        ____PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__criticality_tab,
         ___PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__criticality,
-        ____PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__extensionValue_tab,
         ___PDU_Session_Resource_To_Setup_Item_iE_Extensions__item__extensionValue,
         __PDU_Session_Resource_To_Setup_Item_iE_Extensions__item_,
         _PDU_Session_Resource_To_Setup_Item_iE_Extensions,
         PDU_Session_Resource_To_Setup_Item,
         PDU_Session_Resource_To_Setup_Item_ExtIEs,
+        _PDU_Session_Resource_To_Setup_Item_ExtIEs_val_Extension_0,
         _PDU_Session_Resource_To_Setup_Mod_List__item_,
         PDU_Session_Resource_To_Setup_Mod_List,
         _PDU_Session_Resource_To_Setup_Mod_Item_pDU_Session_ID,
@@ -8636,15 +8783,17 @@ class E1AP_IEs:
         _PDU_Session_Resource_To_Setup_Mod_Item_pDU_Session_Inactivity_Timer,
         _PDU_Session_Resource_To_Setup_Mod_Item_dRB_To_Setup_Mod_List_NG_RAN,
         ____PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__id_tab,
+        _____PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__id_tab_val_Extension_0,
+        _____PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__id_tab_val_Extension_1,
         ___PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__id,
-        ____PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__criticality_tab,
         ___PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__criticality,
-        ____PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__extensionValue_tab,
         ___PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item__extensionValue,
         __PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions__item_,
         _PDU_Session_Resource_To_Setup_Mod_Item_iE_Extensions,
         PDU_Session_Resource_To_Setup_Mod_Item,
         PDU_Session_Resource_To_Setup_Mod_Item_ExtIEs,
+        _PDU_Session_Resource_To_Setup_Mod_Item_ExtIEs_val_Extension_0,
+        _PDU_Session_Resource_To_Setup_Mod_Item_ExtIEs_val_Extension_1,
         _PDU_Session_To_Notify_List__item_,
         PDU_Session_To_Notify_List,
         _PDU_Session_To_Notify_Item_pDU_Session_ID,
@@ -8661,6 +8810,7 @@ class E1AP_IEs:
         PDU_Session_To_Notify_Item_ExtIEs,
         PDU_Session_Type,
         PLMN_Identity,
+        PortNumber,
         PPI,
         PriorityLevel,
         Pre_emptionCapability,
@@ -8682,19 +8832,19 @@ class E1AP_IEs:
         QoS_Flow_List,
         _QoS_Flow_Item_qoS_Flow_Identifier,
         ____QoS_Flow_Item_iE_Extensions__item__id_tab,
+        _____QoS_Flow_Item_iE_Extensions__item__id_tab_val_Extension_0,
         ___QoS_Flow_Item_iE_Extensions__item__id,
-        ____QoS_Flow_Item_iE_Extensions__item__criticality_tab,
         ___QoS_Flow_Item_iE_Extensions__item__criticality,
-        ____QoS_Flow_Item_iE_Extensions__item__extensionValue_tab,
         ___QoS_Flow_Item_iE_Extensions__item__extensionValue,
         __QoS_Flow_Item_iE_Extensions__item_,
         _QoS_Flow_Item_iE_Extensions,
         QoS_Flow_Item,
         QoS_Flow_Item_ExtIEs,
+        _QoS_Flow_Item_ExtIEs_val_Extension_0,
         _QoS_Flow_Failed_List__item_,
         QoS_Flow_Failed_List,
         _QoS_Flow_Failed_Item_qoS_Flow_Identifier,
-        _QoS_Flow_Failed_Item_casue,
+        _QoS_Flow_Failed_Item_cause,
         ____QoS_Flow_Failed_Item_iE_Extensions__item__id_tab,
         ___QoS_Flow_Failed_Item_iE_Extensions__item__id,
         ____QoS_Flow_Failed_Item_iE_Extensions__item__criticality_tab,
@@ -8765,6 +8915,7 @@ class E1AP_IEs:
         _QoSFlowLevelQoSParameters_iE_Extensions,
         QoSFlowLevelQoSParameters,
         QoSFlowLevelQoSParameters_ExtIEs,
+        RANUEID,
         RAT_Type,
         RLC_Mode,
         _ROHC_Parameters_rOHC,
@@ -8963,6 +9114,832 @@ class E1AP_IEs:
         UplinkOnlyROHC_ExtIEs,
     ]
 
+class E1AP_Constants:
+
+    _name_  = u'E1AP-Constants'
+    _oid_   = [0, 4, 0, 0, 22, 3, 5, 1, 4]
+    
+    _obj_ = [
+        u'id-reset',
+        u'id-errorIndication',
+        u'id-privateMessage',
+        u'id-gNB-CU-UP-E1Setup',
+        u'id-gNB-CU-CP-E1Setup',
+        u'id-gNB-CU-UP-ConfigurationUpdate',
+        u'id-gNB-CU-CP-ConfigurationUpdate',
+        u'id-e1Release',
+        u'id-bearerContextSetup',
+        u'id-bearerContextModification',
+        u'id-bearerContextModificationRequired',
+        u'id-bearerContextRelease',
+        u'id-bearerContextReleaseRequest',
+        u'id-bearerContextInactivityNotification',
+        u'id-dLDataNotification',
+        u'id-dataUsageReport',
+        u'id-gNB-CU-UP-CounterCheck',
+        u'id-gNB-CU-UP-StatusIndication',
+        u'id-uLDataNotification',
+        u'id-mRDC-DataUsageReport',
+        u'maxnoofErrors',
+        u'maxnoofSPLMNs',
+        u'maxnoofSliceItems',
+        u'maxnoofIndividualE1ConnectionsToReset',
+        u'maxnoofEUTRANQOSParameters',
+        u'maxnoofNGRANQOSParameters',
+        u'maxnoofDRBs',
+        u'maxnoofNRCGI',
+        u'maxnoofPDUSessionResource',
+        u'maxnoofQoSFlows',
+        u'maxnoofUPParameters',
+        u'maxnoofCellGroups',
+        u'maxnooftimeperiods',
+        u'maxnoofTNLAssociations',
+        u'id-Cause',
+        u'id-CriticalityDiagnostics',
+        u'id-gNB-CU-CP-UE-E1AP-ID',
+        u'id-gNB-CU-UP-UE-E1AP-ID',
+        u'id-ResetType',
+        u'id-UE-associatedLogicalE1-ConnectionItem',
+        u'id-UE-associatedLogicalE1-ConnectionListResAck',
+        u'id-gNB-CU-UP-ID',
+        u'id-gNB-CU-UP-Name',
+        u'id-gNB-CU-CP-Name',
+        u'id-CNSupport',
+        u'id-SupportedPLMNs',
+        u'id-TimeToWait',
+        u'id-SecurityInformation',
+        u'id-UEDLAggregateMaximumBitRate',
+        u'id-System-BearerContextSetupRequest',
+        u'id-System-BearerContextSetupResponse',
+        u'id-BearerContextStatusChange',
+        u'id-System-BearerContextModificationRequest',
+        u'id-System-BearerContextModificationResponse',
+        u'id-System-BearerContextModificationConfirm',
+        u'id-System-BearerContextModificationRequired',
+        u'id-DRB-Status-List',
+        u'id-ActivityNotificationLevel',
+        u'id-ActivityInformation',
+        u'id-Data-Usage-Report-List',
+        u'id-New-UL-TNL-Information-Required',
+        u'id-GNB-CU-CP-TNLA-To-Add-List',
+        u'id-GNB-CU-CP-TNLA-To-Remove-List',
+        u'id-GNB-CU-CP-TNLA-To-Update-List',
+        u'id-GNB-CU-CP-TNLA-Setup-List',
+        u'id-GNB-CU-CP-TNLA-Failed-To-Setup-List',
+        u'id-DRB-To-Setup-List-EUTRAN',
+        u'id-DRB-To-Modify-List-EUTRAN',
+        u'id-DRB-To-Remove-List-EUTRAN',
+        u'id-DRB-Required-To-Modify-List-EUTRAN',
+        u'id-DRB-Required-To-Remove-List-EUTRAN',
+        u'id-DRB-Setup-List-EUTRAN',
+        u'id-DRB-Failed-List-EUTRAN',
+        u'id-DRB-Modified-List-EUTRAN',
+        u'id-DRB-Failed-To-Modify-List-EUTRAN',
+        u'id-DRB-Confirm-Modified-List-EUTRAN',
+        u'id-PDU-Session-Resource-To-Setup-List',
+        u'id-PDU-Session-Resource-To-Modify-List',
+        u'id-PDU-Session-Resource-To-Remove-List',
+        u'id-PDU-Session-Resource-Required-To-Modify-List',
+        u'id-PDU-Session-Resource-Setup-List',
+        u'id-PDU-Session-Resource-Failed-List',
+        u'id-PDU-Session-Resource-Modified-List',
+        u'id-PDU-Session-Resource-Failed-To-Modify-List',
+        u'id-PDU-Session-Resource-Confirm-Modified-List',
+        u'id-DRB-To-Setup-Mod-List-EUTRAN',
+        u'id-DRB-Setup-Mod-List-EUTRAN',
+        u'id-DRB-Failed-Mod-List-EUTRAN',
+        u'id-PDU-Session-Resource-Setup-Mod-List',
+        u'id-PDU-Session-Resource-Failed-Mod-List',
+        u'id-PDU-Session-Resource-To-Setup-Mod-List',
+        u'id-TransactionID',
+        u'id-Serving-PLMN',
+        u'id-UE-Inactivity-Timer',
+        u'id-System-GNB-CU-UP-CounterCheckRequest',
+        u'id-DRBs-Subject-To-Counter-Check-List-EUTRAN',
+        u'id-DRBs-Subject-To-Counter-Check-List-NG-RAN',
+        u'id-PPI',
+        u'id-gNB-CU-UP-Capacity',
+        u'id-GNB-CU-UP-OverloadInformation',
+        u'id-UEDLMaximumIntegrityProtectedDataRate',
+        u'id-PDU-Session-To-Notify-List',
+        u'id-PDU-Session-Resource-Data-Usage-List',
+        u'id-SNSSAI',
+        u'id-DataDiscardRequired',
+        u'id-OldQoSFlowMap-ULendmarkerexpected',
+        u'id-DRB-QoS',
+        u'id-GNB-CU-UP-TNLA-To-Remove-List',
+        u'id-endpoint-IP-Address-and-Port',
+        u'id-TNLAssociationTransportLayerAddressgNBCUUP',
+        u'id-RANUEID',
+        u'id-GNB-DU-ID',
+        u'id-CommonNetworkInstance',
+        u'id-NetworkInstance',
+        u'id-QoSFlowMappingIndication',
+        ]
+    _type_ = [
+        ]
+    _set_ = [
+        ]
+    _val_ = [
+        u'id-reset',
+        u'id-errorIndication',
+        u'id-privateMessage',
+        u'id-gNB-CU-UP-E1Setup',
+        u'id-gNB-CU-CP-E1Setup',
+        u'id-gNB-CU-UP-ConfigurationUpdate',
+        u'id-gNB-CU-CP-ConfigurationUpdate',
+        u'id-e1Release',
+        u'id-bearerContextSetup',
+        u'id-bearerContextModification',
+        u'id-bearerContextModificationRequired',
+        u'id-bearerContextRelease',
+        u'id-bearerContextReleaseRequest',
+        u'id-bearerContextInactivityNotification',
+        u'id-dLDataNotification',
+        u'id-dataUsageReport',
+        u'id-gNB-CU-UP-CounterCheck',
+        u'id-gNB-CU-UP-StatusIndication',
+        u'id-uLDataNotification',
+        u'id-mRDC-DataUsageReport',
+        u'maxnoofErrors',
+        u'maxnoofSPLMNs',
+        u'maxnoofSliceItems',
+        u'maxnoofIndividualE1ConnectionsToReset',
+        u'maxnoofEUTRANQOSParameters',
+        u'maxnoofNGRANQOSParameters',
+        u'maxnoofDRBs',
+        u'maxnoofNRCGI',
+        u'maxnoofPDUSessionResource',
+        u'maxnoofQoSFlows',
+        u'maxnoofUPParameters',
+        u'maxnoofCellGroups',
+        u'maxnooftimeperiods',
+        u'maxnoofTNLAssociations',
+        u'id-Cause',
+        u'id-CriticalityDiagnostics',
+        u'id-gNB-CU-CP-UE-E1AP-ID',
+        u'id-gNB-CU-UP-UE-E1AP-ID',
+        u'id-ResetType',
+        u'id-UE-associatedLogicalE1-ConnectionItem',
+        u'id-UE-associatedLogicalE1-ConnectionListResAck',
+        u'id-gNB-CU-UP-ID',
+        u'id-gNB-CU-UP-Name',
+        u'id-gNB-CU-CP-Name',
+        u'id-CNSupport',
+        u'id-SupportedPLMNs',
+        u'id-TimeToWait',
+        u'id-SecurityInformation',
+        u'id-UEDLAggregateMaximumBitRate',
+        u'id-System-BearerContextSetupRequest',
+        u'id-System-BearerContextSetupResponse',
+        u'id-BearerContextStatusChange',
+        u'id-System-BearerContextModificationRequest',
+        u'id-System-BearerContextModificationResponse',
+        u'id-System-BearerContextModificationConfirm',
+        u'id-System-BearerContextModificationRequired',
+        u'id-DRB-Status-List',
+        u'id-ActivityNotificationLevel',
+        u'id-ActivityInformation',
+        u'id-Data-Usage-Report-List',
+        u'id-New-UL-TNL-Information-Required',
+        u'id-GNB-CU-CP-TNLA-To-Add-List',
+        u'id-GNB-CU-CP-TNLA-To-Remove-List',
+        u'id-GNB-CU-CP-TNLA-To-Update-List',
+        u'id-GNB-CU-CP-TNLA-Setup-List',
+        u'id-GNB-CU-CP-TNLA-Failed-To-Setup-List',
+        u'id-DRB-To-Setup-List-EUTRAN',
+        u'id-DRB-To-Modify-List-EUTRAN',
+        u'id-DRB-To-Remove-List-EUTRAN',
+        u'id-DRB-Required-To-Modify-List-EUTRAN',
+        u'id-DRB-Required-To-Remove-List-EUTRAN',
+        u'id-DRB-Setup-List-EUTRAN',
+        u'id-DRB-Failed-List-EUTRAN',
+        u'id-DRB-Modified-List-EUTRAN',
+        u'id-DRB-Failed-To-Modify-List-EUTRAN',
+        u'id-DRB-Confirm-Modified-List-EUTRAN',
+        u'id-PDU-Session-Resource-To-Setup-List',
+        u'id-PDU-Session-Resource-To-Modify-List',
+        u'id-PDU-Session-Resource-To-Remove-List',
+        u'id-PDU-Session-Resource-Required-To-Modify-List',
+        u'id-PDU-Session-Resource-Setup-List',
+        u'id-PDU-Session-Resource-Failed-List',
+        u'id-PDU-Session-Resource-Modified-List',
+        u'id-PDU-Session-Resource-Failed-To-Modify-List',
+        u'id-PDU-Session-Resource-Confirm-Modified-List',
+        u'id-DRB-To-Setup-Mod-List-EUTRAN',
+        u'id-DRB-Setup-Mod-List-EUTRAN',
+        u'id-DRB-Failed-Mod-List-EUTRAN',
+        u'id-PDU-Session-Resource-Setup-Mod-List',
+        u'id-PDU-Session-Resource-Failed-Mod-List',
+        u'id-PDU-Session-Resource-To-Setup-Mod-List',
+        u'id-TransactionID',
+        u'id-Serving-PLMN',
+        u'id-UE-Inactivity-Timer',
+        u'id-System-GNB-CU-UP-CounterCheckRequest',
+        u'id-DRBs-Subject-To-Counter-Check-List-EUTRAN',
+        u'id-DRBs-Subject-To-Counter-Check-List-NG-RAN',
+        u'id-PPI',
+        u'id-gNB-CU-UP-Capacity',
+        u'id-GNB-CU-UP-OverloadInformation',
+        u'id-UEDLMaximumIntegrityProtectedDataRate',
+        u'id-PDU-Session-To-Notify-List',
+        u'id-PDU-Session-Resource-Data-Usage-List',
+        u'id-SNSSAI',
+        u'id-DataDiscardRequired',
+        u'id-OldQoSFlowMap-ULendmarkerexpected',
+        u'id-DRB-QoS',
+        u'id-GNB-CU-UP-TNLA-To-Remove-List',
+        u'id-endpoint-IP-Address-and-Port',
+        u'id-TNLAssociationTransportLayerAddressgNBCUUP',
+        u'id-RANUEID',
+        u'id-GNB-DU-ID',
+        u'id-CommonNetworkInstance',
+        u'id-NetworkInstance',
+        u'id-QoSFlowMappingIndication',
+        ]
+    _class_ = [
+        ]
+    _param_ = [
+        ]
+    
+    #-----< id-reset >-----#
+    id_reset = INT(name=u'id-reset', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
+    id_reset._val = 0
+    
+    #-----< id-errorIndication >-----#
+    id_errorIndication = INT(name=u'id-errorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
+    id_errorIndication._val = 1
+    
+    #-----< id-privateMessage >-----#
+    id_privateMessage = INT(name=u'id-privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
+    id_privateMessage._val = 2
+    
+    #-----< id-gNB-CU-UP-E1Setup >-----#
+    id_gNB_CU_UP_E1Setup = INT(name=u'id-gNB-CU-UP-E1Setup', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
+    id_gNB_CU_UP_E1Setup._val = 3
+    
+    #-----< id-gNB-CU-CP-E1Setup >-----#
+    id_gNB_CU_CP_E1Setup = INT(name=u'id-gNB-CU-CP-E1Setup', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
+    id_gNB_CU_CP_E1Setup._val = 4
+    
+    #-----< id-gNB-CU-UP-ConfigurationUpdate >-----#
+    id_gNB_CU_UP_ConfigurationUpdate = INT(name=u'id-gNB-CU-UP-ConfigurationUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
+    id_gNB_CU_UP_ConfigurationUpdate._val = 5
+    
+    #-----< id-gNB-CU-CP-ConfigurationUpdate >-----#
+    id_gNB_CU_CP_ConfigurationUpdate = INT(name=u'id-gNB-CU-CP-ConfigurationUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
+    id_gNB_CU_CP_ConfigurationUpdate._val = 6
+    
+    #-----< id-e1Release >-----#
+    id_e1Release = INT(name=u'id-e1Release', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
+    id_e1Release._val = 7
+    
+    #-----< id-bearerContextSetup >-----#
+    id_bearerContextSetup = INT(name=u'id-bearerContextSetup', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
+    id_bearerContextSetup._val = 8
+    
+    #-----< id-bearerContextModification >-----#
+    id_bearerContextModification = INT(name=u'id-bearerContextModification', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
+    id_bearerContextModification._val = 9
+    
+    #-----< id-bearerContextModificationRequired >-----#
+    id_bearerContextModificationRequired = INT(name=u'id-bearerContextModificationRequired', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
+    id_bearerContextModificationRequired._val = 10
+    
+    #-----< id-bearerContextRelease >-----#
+    id_bearerContextRelease = INT(name=u'id-bearerContextRelease', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
+    id_bearerContextRelease._val = 11
+    
+    #-----< id-bearerContextReleaseRequest >-----#
+    id_bearerContextReleaseRequest = INT(name=u'id-bearerContextReleaseRequest', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
+    id_bearerContextReleaseRequest._val = 12
+    
+    #-----< id-bearerContextInactivityNotification >-----#
+    id_bearerContextInactivityNotification = INT(name=u'id-bearerContextInactivityNotification', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
+    id_bearerContextInactivityNotification._val = 13
+    
+    #-----< id-dLDataNotification >-----#
+    id_dLDataNotification = INT(name=u'id-dLDataNotification', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
+    id_dLDataNotification._val = 14
+    
+    #-----< id-dataUsageReport >-----#
+    id_dataUsageReport = INT(name=u'id-dataUsageReport', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
+    id_dataUsageReport._val = 15
+    
+    #-----< id-gNB-CU-UP-CounterCheck >-----#
+    id_gNB_CU_UP_CounterCheck = INT(name=u'id-gNB-CU-UP-CounterCheck', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
+    id_gNB_CU_UP_CounterCheck._val = 16
+    
+    #-----< id-gNB-CU-UP-StatusIndication >-----#
+    id_gNB_CU_UP_StatusIndication = INT(name=u'id-gNB-CU-UP-StatusIndication', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
+    id_gNB_CU_UP_StatusIndication._val = 17
+    
+    #-----< id-uLDataNotification >-----#
+    id_uLDataNotification = INT(name=u'id-uLDataNotification', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
+    id_uLDataNotification._val = 18
+    
+    #-----< id-mRDC-DataUsageReport >-----#
+    id_mRDC_DataUsageReport = INT(name=u'id-mRDC-DataUsageReport', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')))
+    id_mRDC_DataUsageReport._val = 19
+    
+    #-----< maxnoofErrors >-----#
+    maxnoofErrors = INT(name=u'maxnoofErrors', mode=MODE_VALUE)
+    maxnoofErrors._val = 256
+    
+    #-----< maxnoofSPLMNs >-----#
+    maxnoofSPLMNs = INT(name=u'maxnoofSPLMNs', mode=MODE_VALUE)
+    maxnoofSPLMNs._val = 12
+    
+    #-----< maxnoofSliceItems >-----#
+    maxnoofSliceItems = INT(name=u'maxnoofSliceItems', mode=MODE_VALUE)
+    maxnoofSliceItems._val = 1024
+    
+    #-----< maxnoofIndividualE1ConnectionsToReset >-----#
+    maxnoofIndividualE1ConnectionsToReset = INT(name=u'maxnoofIndividualE1ConnectionsToReset', mode=MODE_VALUE)
+    maxnoofIndividualE1ConnectionsToReset._val = 65536
+    
+    #-----< maxnoofEUTRANQOSParameters >-----#
+    maxnoofEUTRANQOSParameters = INT(name=u'maxnoofEUTRANQOSParameters', mode=MODE_VALUE)
+    maxnoofEUTRANQOSParameters._val = 256
+    
+    #-----< maxnoofNGRANQOSParameters >-----#
+    maxnoofNGRANQOSParameters = INT(name=u'maxnoofNGRANQOSParameters', mode=MODE_VALUE)
+    maxnoofNGRANQOSParameters._val = 256
+    
+    #-----< maxnoofDRBs >-----#
+    maxnoofDRBs = INT(name=u'maxnoofDRBs', mode=MODE_VALUE)
+    maxnoofDRBs._val = 32
+    
+    #-----< maxnoofNRCGI >-----#
+    maxnoofNRCGI = INT(name=u'maxnoofNRCGI', mode=MODE_VALUE)
+    maxnoofNRCGI._val = 512
+    
+    #-----< maxnoofPDUSessionResource >-----#
+    maxnoofPDUSessionResource = INT(name=u'maxnoofPDUSessionResource', mode=MODE_VALUE)
+    maxnoofPDUSessionResource._val = 256
+    
+    #-----< maxnoofQoSFlows >-----#
+    maxnoofQoSFlows = INT(name=u'maxnoofQoSFlows', mode=MODE_VALUE)
+    maxnoofQoSFlows._val = 64
+    
+    #-----< maxnoofUPParameters >-----#
+    maxnoofUPParameters = INT(name=u'maxnoofUPParameters', mode=MODE_VALUE)
+    maxnoofUPParameters._val = 8
+    
+    #-----< maxnoofCellGroups >-----#
+    maxnoofCellGroups = INT(name=u'maxnoofCellGroups', mode=MODE_VALUE)
+    maxnoofCellGroups._val = 4
+    
+    #-----< maxnooftimeperiods >-----#
+    maxnooftimeperiods = INT(name=u'maxnooftimeperiods', mode=MODE_VALUE)
+    maxnooftimeperiods._val = 2
+    
+    #-----< maxnoofTNLAssociations >-----#
+    maxnoofTNLAssociations = INT(name=u'maxnoofTNLAssociations', mode=MODE_VALUE)
+    maxnoofTNLAssociations._val = 32
+    
+    #-----< id-Cause >-----#
+    id_Cause = INT(name=u'id-Cause', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Cause._val = 0
+    
+    #-----< id-CriticalityDiagnostics >-----#
+    id_CriticalityDiagnostics = INT(name=u'id-CriticalityDiagnostics', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_CriticalityDiagnostics._val = 1
+    
+    #-----< id-gNB-CU-CP-UE-E1AP-ID >-----#
+    id_gNB_CU_CP_UE_E1AP_ID = INT(name=u'id-gNB-CU-CP-UE-E1AP-ID', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_gNB_CU_CP_UE_E1AP_ID._val = 2
+    
+    #-----< id-gNB-CU-UP-UE-E1AP-ID >-----#
+    id_gNB_CU_UP_UE_E1AP_ID = INT(name=u'id-gNB-CU-UP-UE-E1AP-ID', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_gNB_CU_UP_UE_E1AP_ID._val = 3
+    
+    #-----< id-ResetType >-----#
+    id_ResetType = INT(name=u'id-ResetType', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_ResetType._val = 4
+    
+    #-----< id-UE-associatedLogicalE1-ConnectionItem >-----#
+    id_UE_associatedLogicalE1_ConnectionItem = INT(name=u'id-UE-associatedLogicalE1-ConnectionItem', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_UE_associatedLogicalE1_ConnectionItem._val = 5
+    
+    #-----< id-UE-associatedLogicalE1-ConnectionListResAck >-----#
+    id_UE_associatedLogicalE1_ConnectionListResAck = INT(name=u'id-UE-associatedLogicalE1-ConnectionListResAck', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_UE_associatedLogicalE1_ConnectionListResAck._val = 6
+    
+    #-----< id-gNB-CU-UP-ID >-----#
+    id_gNB_CU_UP_ID = INT(name=u'id-gNB-CU-UP-ID', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_gNB_CU_UP_ID._val = 7
+    
+    #-----< id-gNB-CU-UP-Name >-----#
+    id_gNB_CU_UP_Name = INT(name=u'id-gNB-CU-UP-Name', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_gNB_CU_UP_Name._val = 8
+    
+    #-----< id-gNB-CU-CP-Name >-----#
+    id_gNB_CU_CP_Name = INT(name=u'id-gNB-CU-CP-Name', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_gNB_CU_CP_Name._val = 9
+    
+    #-----< id-CNSupport >-----#
+    id_CNSupport = INT(name=u'id-CNSupport', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_CNSupport._val = 10
+    
+    #-----< id-SupportedPLMNs >-----#
+    id_SupportedPLMNs = INT(name=u'id-SupportedPLMNs', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_SupportedPLMNs._val = 11
+    
+    #-----< id-TimeToWait >-----#
+    id_TimeToWait = INT(name=u'id-TimeToWait', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_TimeToWait._val = 12
+    
+    #-----< id-SecurityInformation >-----#
+    id_SecurityInformation = INT(name=u'id-SecurityInformation', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_SecurityInformation._val = 13
+    
+    #-----< id-UEDLAggregateMaximumBitRate >-----#
+    id_UEDLAggregateMaximumBitRate = INT(name=u'id-UEDLAggregateMaximumBitRate', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_UEDLAggregateMaximumBitRate._val = 14
+    
+    #-----< id-System-BearerContextSetupRequest >-----#
+    id_System_BearerContextSetupRequest = INT(name=u'id-System-BearerContextSetupRequest', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_System_BearerContextSetupRequest._val = 15
+    
+    #-----< id-System-BearerContextSetupResponse >-----#
+    id_System_BearerContextSetupResponse = INT(name=u'id-System-BearerContextSetupResponse', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_System_BearerContextSetupResponse._val = 16
+    
+    #-----< id-BearerContextStatusChange >-----#
+    id_BearerContextStatusChange = INT(name=u'id-BearerContextStatusChange', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_BearerContextStatusChange._val = 17
+    
+    #-----< id-System-BearerContextModificationRequest >-----#
+    id_System_BearerContextModificationRequest = INT(name=u'id-System-BearerContextModificationRequest', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_System_BearerContextModificationRequest._val = 18
+    
+    #-----< id-System-BearerContextModificationResponse >-----#
+    id_System_BearerContextModificationResponse = INT(name=u'id-System-BearerContextModificationResponse', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_System_BearerContextModificationResponse._val = 19
+    
+    #-----< id-System-BearerContextModificationConfirm >-----#
+    id_System_BearerContextModificationConfirm = INT(name=u'id-System-BearerContextModificationConfirm', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_System_BearerContextModificationConfirm._val = 20
+    
+    #-----< id-System-BearerContextModificationRequired >-----#
+    id_System_BearerContextModificationRequired = INT(name=u'id-System-BearerContextModificationRequired', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_System_BearerContextModificationRequired._val = 21
+    
+    #-----< id-DRB-Status-List >-----#
+    id_DRB_Status_List = INT(name=u'id-DRB-Status-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_DRB_Status_List._val = 22
+    
+    #-----< id-ActivityNotificationLevel >-----#
+    id_ActivityNotificationLevel = INT(name=u'id-ActivityNotificationLevel', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_ActivityNotificationLevel._val = 23
+    
+    #-----< id-ActivityInformation >-----#
+    id_ActivityInformation = INT(name=u'id-ActivityInformation', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_ActivityInformation._val = 24
+    
+    #-----< id-Data-Usage-Report-List >-----#
+    id_Data_Usage_Report_List = INT(name=u'id-Data-Usage-Report-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Data_Usage_Report_List._val = 25
+    
+    #-----< id-New-UL-TNL-Information-Required >-----#
+    id_New_UL_TNL_Information_Required = INT(name=u'id-New-UL-TNL-Information-Required', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_New_UL_TNL_Information_Required._val = 26
+    
+    #-----< id-GNB-CU-CP-TNLA-To-Add-List >-----#
+    id_GNB_CU_CP_TNLA_To_Add_List = INT(name=u'id-GNB-CU-CP-TNLA-To-Add-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_GNB_CU_CP_TNLA_To_Add_List._val = 27
+    
+    #-----< id-GNB-CU-CP-TNLA-To-Remove-List >-----#
+    id_GNB_CU_CP_TNLA_To_Remove_List = INT(name=u'id-GNB-CU-CP-TNLA-To-Remove-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_GNB_CU_CP_TNLA_To_Remove_List._val = 28
+    
+    #-----< id-GNB-CU-CP-TNLA-To-Update-List >-----#
+    id_GNB_CU_CP_TNLA_To_Update_List = INT(name=u'id-GNB-CU-CP-TNLA-To-Update-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_GNB_CU_CP_TNLA_To_Update_List._val = 29
+    
+    #-----< id-GNB-CU-CP-TNLA-Setup-List >-----#
+    id_GNB_CU_CP_TNLA_Setup_List = INT(name=u'id-GNB-CU-CP-TNLA-Setup-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_GNB_CU_CP_TNLA_Setup_List._val = 30
+    
+    #-----< id-GNB-CU-CP-TNLA-Failed-To-Setup-List >-----#
+    id_GNB_CU_CP_TNLA_Failed_To_Setup_List = INT(name=u'id-GNB-CU-CP-TNLA-Failed-To-Setup-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_GNB_CU_CP_TNLA_Failed_To_Setup_List._val = 31
+    
+    #-----< id-DRB-To-Setup-List-EUTRAN >-----#
+    id_DRB_To_Setup_List_EUTRAN = INT(name=u'id-DRB-To-Setup-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_DRB_To_Setup_List_EUTRAN._val = 32
+    
+    #-----< id-DRB-To-Modify-List-EUTRAN >-----#
+    id_DRB_To_Modify_List_EUTRAN = INT(name=u'id-DRB-To-Modify-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_DRB_To_Modify_List_EUTRAN._val = 33
+    
+    #-----< id-DRB-To-Remove-List-EUTRAN >-----#
+    id_DRB_To_Remove_List_EUTRAN = INT(name=u'id-DRB-To-Remove-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_DRB_To_Remove_List_EUTRAN._val = 34
+    
+    #-----< id-DRB-Required-To-Modify-List-EUTRAN >-----#
+    id_DRB_Required_To_Modify_List_EUTRAN = INT(name=u'id-DRB-Required-To-Modify-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_DRB_Required_To_Modify_List_EUTRAN._val = 35
+    
+    #-----< id-DRB-Required-To-Remove-List-EUTRAN >-----#
+    id_DRB_Required_To_Remove_List_EUTRAN = INT(name=u'id-DRB-Required-To-Remove-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_DRB_Required_To_Remove_List_EUTRAN._val = 36
+    
+    #-----< id-DRB-Setup-List-EUTRAN >-----#
+    id_DRB_Setup_List_EUTRAN = INT(name=u'id-DRB-Setup-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_DRB_Setup_List_EUTRAN._val = 37
+    
+    #-----< id-DRB-Failed-List-EUTRAN >-----#
+    id_DRB_Failed_List_EUTRAN = INT(name=u'id-DRB-Failed-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_DRB_Failed_List_EUTRAN._val = 38
+    
+    #-----< id-DRB-Modified-List-EUTRAN >-----#
+    id_DRB_Modified_List_EUTRAN = INT(name=u'id-DRB-Modified-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_DRB_Modified_List_EUTRAN._val = 39
+    
+    #-----< id-DRB-Failed-To-Modify-List-EUTRAN >-----#
+    id_DRB_Failed_To_Modify_List_EUTRAN = INT(name=u'id-DRB-Failed-To-Modify-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_DRB_Failed_To_Modify_List_EUTRAN._val = 40
+    
+    #-----< id-DRB-Confirm-Modified-List-EUTRAN >-----#
+    id_DRB_Confirm_Modified_List_EUTRAN = INT(name=u'id-DRB-Confirm-Modified-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_DRB_Confirm_Modified_List_EUTRAN._val = 41
+    
+    #-----< id-PDU-Session-Resource-To-Setup-List >-----#
+    id_PDU_Session_Resource_To_Setup_List = INT(name=u'id-PDU-Session-Resource-To-Setup-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_PDU_Session_Resource_To_Setup_List._val = 42
+    
+    #-----< id-PDU-Session-Resource-To-Modify-List >-----#
+    id_PDU_Session_Resource_To_Modify_List = INT(name=u'id-PDU-Session-Resource-To-Modify-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_PDU_Session_Resource_To_Modify_List._val = 43
+    
+    #-----< id-PDU-Session-Resource-To-Remove-List >-----#
+    id_PDU_Session_Resource_To_Remove_List = INT(name=u'id-PDU-Session-Resource-To-Remove-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_PDU_Session_Resource_To_Remove_List._val = 44
+    
+    #-----< id-PDU-Session-Resource-Required-To-Modify-List >-----#
+    id_PDU_Session_Resource_Required_To_Modify_List = INT(name=u'id-PDU-Session-Resource-Required-To-Modify-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_PDU_Session_Resource_Required_To_Modify_List._val = 45
+    
+    #-----< id-PDU-Session-Resource-Setup-List >-----#
+    id_PDU_Session_Resource_Setup_List = INT(name=u'id-PDU-Session-Resource-Setup-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_PDU_Session_Resource_Setup_List._val = 46
+    
+    #-----< id-PDU-Session-Resource-Failed-List >-----#
+    id_PDU_Session_Resource_Failed_List = INT(name=u'id-PDU-Session-Resource-Failed-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_PDU_Session_Resource_Failed_List._val = 47
+    
+    #-----< id-PDU-Session-Resource-Modified-List >-----#
+    id_PDU_Session_Resource_Modified_List = INT(name=u'id-PDU-Session-Resource-Modified-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_PDU_Session_Resource_Modified_List._val = 48
+    
+    #-----< id-PDU-Session-Resource-Failed-To-Modify-List >-----#
+    id_PDU_Session_Resource_Failed_To_Modify_List = INT(name=u'id-PDU-Session-Resource-Failed-To-Modify-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_PDU_Session_Resource_Failed_To_Modify_List._val = 49
+    
+    #-----< id-PDU-Session-Resource-Confirm-Modified-List >-----#
+    id_PDU_Session_Resource_Confirm_Modified_List = INT(name=u'id-PDU-Session-Resource-Confirm-Modified-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_PDU_Session_Resource_Confirm_Modified_List._val = 50
+    
+    #-----< id-DRB-To-Setup-Mod-List-EUTRAN >-----#
+    id_DRB_To_Setup_Mod_List_EUTRAN = INT(name=u'id-DRB-To-Setup-Mod-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_DRB_To_Setup_Mod_List_EUTRAN._val = 51
+    
+    #-----< id-DRB-Setup-Mod-List-EUTRAN >-----#
+    id_DRB_Setup_Mod_List_EUTRAN = INT(name=u'id-DRB-Setup-Mod-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_DRB_Setup_Mod_List_EUTRAN._val = 52
+    
+    #-----< id-DRB-Failed-Mod-List-EUTRAN >-----#
+    id_DRB_Failed_Mod_List_EUTRAN = INT(name=u'id-DRB-Failed-Mod-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_DRB_Failed_Mod_List_EUTRAN._val = 53
+    
+    #-----< id-PDU-Session-Resource-Setup-Mod-List >-----#
+    id_PDU_Session_Resource_Setup_Mod_List = INT(name=u'id-PDU-Session-Resource-Setup-Mod-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_PDU_Session_Resource_Setup_Mod_List._val = 54
+    
+    #-----< id-PDU-Session-Resource-Failed-Mod-List >-----#
+    id_PDU_Session_Resource_Failed_Mod_List = INT(name=u'id-PDU-Session-Resource-Failed-Mod-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_PDU_Session_Resource_Failed_Mod_List._val = 55
+    
+    #-----< id-PDU-Session-Resource-To-Setup-Mod-List >-----#
+    id_PDU_Session_Resource_To_Setup_Mod_List = INT(name=u'id-PDU-Session-Resource-To-Setup-Mod-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_PDU_Session_Resource_To_Setup_Mod_List._val = 56
+    
+    #-----< id-TransactionID >-----#
+    id_TransactionID = INT(name=u'id-TransactionID', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_TransactionID._val = 57
+    
+    #-----< id-Serving-PLMN >-----#
+    id_Serving_PLMN = INT(name=u'id-Serving-PLMN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Serving_PLMN._val = 58
+    
+    #-----< id-UE-Inactivity-Timer >-----#
+    id_UE_Inactivity_Timer = INT(name=u'id-UE-Inactivity-Timer', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_UE_Inactivity_Timer._val = 59
+    
+    #-----< id-System-GNB-CU-UP-CounterCheckRequest >-----#
+    id_System_GNB_CU_UP_CounterCheckRequest = INT(name=u'id-System-GNB-CU-UP-CounterCheckRequest', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_System_GNB_CU_UP_CounterCheckRequest._val = 60
+    
+    #-----< id-DRBs-Subject-To-Counter-Check-List-EUTRAN >-----#
+    id_DRBs_Subject_To_Counter_Check_List_EUTRAN = INT(name=u'id-DRBs-Subject-To-Counter-Check-List-EUTRAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_DRBs_Subject_To_Counter_Check_List_EUTRAN._val = 61
+    
+    #-----< id-DRBs-Subject-To-Counter-Check-List-NG-RAN >-----#
+    id_DRBs_Subject_To_Counter_Check_List_NG_RAN = INT(name=u'id-DRBs-Subject-To-Counter-Check-List-NG-RAN', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_DRBs_Subject_To_Counter_Check_List_NG_RAN._val = 62
+    
+    #-----< id-PPI >-----#
+    id_PPI = INT(name=u'id-PPI', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_PPI._val = 63
+    
+    #-----< id-gNB-CU-UP-Capacity >-----#
+    id_gNB_CU_UP_Capacity = INT(name=u'id-gNB-CU-UP-Capacity', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_gNB_CU_UP_Capacity._val = 64
+    
+    #-----< id-GNB-CU-UP-OverloadInformation >-----#
+    id_GNB_CU_UP_OverloadInformation = INT(name=u'id-GNB-CU-UP-OverloadInformation', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_GNB_CU_UP_OverloadInformation._val = 65
+    
+    #-----< id-UEDLMaximumIntegrityProtectedDataRate >-----#
+    id_UEDLMaximumIntegrityProtectedDataRate = INT(name=u'id-UEDLMaximumIntegrityProtectedDataRate', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_UEDLMaximumIntegrityProtectedDataRate._val = 66
+    
+    #-----< id-PDU-Session-To-Notify-List >-----#
+    id_PDU_Session_To_Notify_List = INT(name=u'id-PDU-Session-To-Notify-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_PDU_Session_To_Notify_List._val = 67
+    
+    #-----< id-PDU-Session-Resource-Data-Usage-List >-----#
+    id_PDU_Session_Resource_Data_Usage_List = INT(name=u'id-PDU-Session-Resource-Data-Usage-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_PDU_Session_Resource_Data_Usage_List._val = 68
+    
+    #-----< id-SNSSAI >-----#
+    id_SNSSAI = INT(name=u'id-SNSSAI', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_SNSSAI._val = 69
+    
+    #-----< id-DataDiscardRequired >-----#
+    id_DataDiscardRequired = INT(name=u'id-DataDiscardRequired', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_DataDiscardRequired._val = 70
+    
+    #-----< id-OldQoSFlowMap-ULendmarkerexpected >-----#
+    id_OldQoSFlowMap_ULendmarkerexpected = INT(name=u'id-OldQoSFlowMap-ULendmarkerexpected', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_OldQoSFlowMap_ULendmarkerexpected._val = 71
+    
+    #-----< id-DRB-QoS >-----#
+    id_DRB_QoS = INT(name=u'id-DRB-QoS', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_DRB_QoS._val = 72
+    
+    #-----< id-GNB-CU-UP-TNLA-To-Remove-List >-----#
+    id_GNB_CU_UP_TNLA_To_Remove_List = INT(name=u'id-GNB-CU-UP-TNLA-To-Remove-List', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_GNB_CU_UP_TNLA_To_Remove_List._val = 73
+    
+    #-----< id-endpoint-IP-Address-and-Port >-----#
+    id_endpoint_IP_Address_and_Port = INT(name=u'id-endpoint-IP-Address-and-Port', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_endpoint_IP_Address_and_Port._val = 74
+    
+    #-----< id-TNLAssociationTransportLayerAddressgNBCUUP >-----#
+    id_TNLAssociationTransportLayerAddressgNBCUUP = INT(name=u'id-TNLAssociationTransportLayerAddressgNBCUUP', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_TNLAssociationTransportLayerAddressgNBCUUP._val = 75
+    
+    #-----< id-RANUEID >-----#
+    id_RANUEID = INT(name=u'id-RANUEID', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_RANUEID._val = 76
+    
+    #-----< id-GNB-DU-ID >-----#
+    id_GNB_DU_ID = INT(name=u'id-GNB-DU-ID', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_GNB_DU_ID._val = 77
+    
+    #-----< id-CommonNetworkInstance >-----#
+    id_CommonNetworkInstance = INT(name=u'id-CommonNetworkInstance', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_CommonNetworkInstance._val = 78
+    
+    #-----< id-NetworkInstance >-----#
+    id_NetworkInstance = INT(name=u'id-NetworkInstance', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_NetworkInstance._val = 79
+    
+    #-----< id-QoSFlowMappingIndication >-----#
+    id_QoSFlowMappingIndication = INT(name=u'id-QoSFlowMappingIndication', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_QoSFlowMappingIndication._val = 80
+    
+    _all_ = [
+        id_reset,
+        id_errorIndication,
+        id_privateMessage,
+        id_gNB_CU_UP_E1Setup,
+        id_gNB_CU_CP_E1Setup,
+        id_gNB_CU_UP_ConfigurationUpdate,
+        id_gNB_CU_CP_ConfigurationUpdate,
+        id_e1Release,
+        id_bearerContextSetup,
+        id_bearerContextModification,
+        id_bearerContextModificationRequired,
+        id_bearerContextRelease,
+        id_bearerContextReleaseRequest,
+        id_bearerContextInactivityNotification,
+        id_dLDataNotification,
+        id_dataUsageReport,
+        id_gNB_CU_UP_CounterCheck,
+        id_gNB_CU_UP_StatusIndication,
+        id_uLDataNotification,
+        id_mRDC_DataUsageReport,
+        maxnoofErrors,
+        maxnoofSPLMNs,
+        maxnoofSliceItems,
+        maxnoofIndividualE1ConnectionsToReset,
+        maxnoofEUTRANQOSParameters,
+        maxnoofNGRANQOSParameters,
+        maxnoofDRBs,
+        maxnoofNRCGI,
+        maxnoofPDUSessionResource,
+        maxnoofQoSFlows,
+        maxnoofUPParameters,
+        maxnoofCellGroups,
+        maxnooftimeperiods,
+        maxnoofTNLAssociations,
+        id_Cause,
+        id_CriticalityDiagnostics,
+        id_gNB_CU_CP_UE_E1AP_ID,
+        id_gNB_CU_UP_UE_E1AP_ID,
+        id_ResetType,
+        id_UE_associatedLogicalE1_ConnectionItem,
+        id_UE_associatedLogicalE1_ConnectionListResAck,
+        id_gNB_CU_UP_ID,
+        id_gNB_CU_UP_Name,
+        id_gNB_CU_CP_Name,
+        id_CNSupport,
+        id_SupportedPLMNs,
+        id_TimeToWait,
+        id_SecurityInformation,
+        id_UEDLAggregateMaximumBitRate,
+        id_System_BearerContextSetupRequest,
+        id_System_BearerContextSetupResponse,
+        id_BearerContextStatusChange,
+        id_System_BearerContextModificationRequest,
+        id_System_BearerContextModificationResponse,
+        id_System_BearerContextModificationConfirm,
+        id_System_BearerContextModificationRequired,
+        id_DRB_Status_List,
+        id_ActivityNotificationLevel,
+        id_ActivityInformation,
+        id_Data_Usage_Report_List,
+        id_New_UL_TNL_Information_Required,
+        id_GNB_CU_CP_TNLA_To_Add_List,
+        id_GNB_CU_CP_TNLA_To_Remove_List,
+        id_GNB_CU_CP_TNLA_To_Update_List,
+        id_GNB_CU_CP_TNLA_Setup_List,
+        id_GNB_CU_CP_TNLA_Failed_To_Setup_List,
+        id_DRB_To_Setup_List_EUTRAN,
+        id_DRB_To_Modify_List_EUTRAN,
+        id_DRB_To_Remove_List_EUTRAN,
+        id_DRB_Required_To_Modify_List_EUTRAN,
+        id_DRB_Required_To_Remove_List_EUTRAN,
+        id_DRB_Setup_List_EUTRAN,
+        id_DRB_Failed_List_EUTRAN,
+        id_DRB_Modified_List_EUTRAN,
+        id_DRB_Failed_To_Modify_List_EUTRAN,
+        id_DRB_Confirm_Modified_List_EUTRAN,
+        id_PDU_Session_Resource_To_Setup_List,
+        id_PDU_Session_Resource_To_Modify_List,
+        id_PDU_Session_Resource_To_Remove_List,
+        id_PDU_Session_Resource_Required_To_Modify_List,
+        id_PDU_Session_Resource_Setup_List,
+        id_PDU_Session_Resource_Failed_List,
+        id_PDU_Session_Resource_Modified_List,
+        id_PDU_Session_Resource_Failed_To_Modify_List,
+        id_PDU_Session_Resource_Confirm_Modified_List,
+        id_DRB_To_Setup_Mod_List_EUTRAN,
+        id_DRB_Setup_Mod_List_EUTRAN,
+        id_DRB_Failed_Mod_List_EUTRAN,
+        id_PDU_Session_Resource_Setup_Mod_List,
+        id_PDU_Session_Resource_Failed_Mod_List,
+        id_PDU_Session_Resource_To_Setup_Mod_List,
+        id_TransactionID,
+        id_Serving_PLMN,
+        id_UE_Inactivity_Timer,
+        id_System_GNB_CU_UP_CounterCheckRequest,
+        id_DRBs_Subject_To_Counter_Check_List_EUTRAN,
+        id_DRBs_Subject_To_Counter_Check_List_NG_RAN,
+        id_PPI,
+        id_gNB_CU_UP_Capacity,
+        id_GNB_CU_UP_OverloadInformation,
+        id_UEDLMaximumIntegrityProtectedDataRate,
+        id_PDU_Session_To_Notify_List,
+        id_PDU_Session_Resource_Data_Usage_List,
+        id_SNSSAI,
+        id_DataDiscardRequired,
+        id_OldQoSFlowMap_ULendmarkerexpected,
+        id_DRB_QoS,
+        id_GNB_CU_UP_TNLA_To_Remove_List,
+        id_endpoint_IP_Address_and_Port,
+        id_TNLAssociationTransportLayerAddressgNBCUUP,
+        id_RANUEID,
+        id_GNB_DU_ID,
+        id_CommonNetworkInstance,
+        id_NetworkInstance,
+        id_QoSFlowMappingIndication,
+    ]
+
 class E1AP_PDU_Contents:
 
     _name_  = u'E1AP-PDU-Contents'
@@ -8999,6 +9976,7 @@ class E1AP_PDU_Contents:
         u'GNB-CU-CP-E1SetupFailureIEs',
         u'GNB-CU-UP-ConfigurationUpdate',
         u'GNB-CU-UP-ConfigurationUpdateIEs',
+        u'GNB-CU-UP-TNLA-To-Remove-List',
         u'GNB-CU-UP-ConfigurationUpdateAcknowledge',
         u'GNB-CU-UP-ConfigurationUpdateAcknowledgeIEs',
         u'GNB-CU-UP-ConfigurationUpdateFailure',
@@ -9103,6 +10081,7 @@ class E1AP_PDU_Contents:
         u'GNB-CU-CP-E1SetupResponse',
         u'GNB-CU-CP-E1SetupFailure',
         u'GNB-CU-UP-ConfigurationUpdate',
+        u'GNB-CU-UP-TNLA-To-Remove-List',
         u'GNB-CU-UP-ConfigurationUpdateAcknowledge',
         u'GNB-CU-UP-ConfigurationUpdateFailure',
         u'GNB-CU-CP-ConfigurationUpdate',
@@ -9832,7 +10811,8 @@ class E1AP_PDU_Contents:
     _____GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id_tab_val_Value_2 = STR_PRINT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'GNB-CU-UP-Name')))
     _____GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id_tab_val_Value_3 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'SupportedPLMNs-List')))
     _____GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id_tab_val_Value_4 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'GNB-CU-UP-Capacity')))
-    ____GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 57), (u'criticality', u'reject'), (u'Value', _____GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'reject'), (u'Value', _____GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _____GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 11), (u'criticality', u'reject'), (u'Value', _____GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 64), (u'criticality', u'ignore'), (u'Value', _____GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    _____GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id_tab_val_Value_5 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-TNLA-To-Remove-List')))
+    ____GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 57), (u'criticality', u'reject'), (u'Value', _____GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'reject'), (u'Value', _____GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _____GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 11), (u'criticality', u'reject'), (u'Value', _____GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 64), (u'criticality', u'ignore'), (u'Value', _____GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 73), (u'criticality', u'reject'), (u'Value', _____GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id_tab_val_Value_5), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id._const_tab = ____GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id_tab
     ___GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id._const_tab_at = None
     ___GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id._const_tab_id = u'id'
@@ -9864,7 +10844,14 @@ class E1AP_PDU_Contents:
     _GNB_CU_UP_ConfigurationUpdateIEs_val_Value_2 = STR_PRINT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'GNB-CU-UP-Name')))
     _GNB_CU_UP_ConfigurationUpdateIEs_val_Value_3 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'SupportedPLMNs-List')))
     _GNB_CU_UP_ConfigurationUpdateIEs_val_Value_4 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'GNB-CU-UP-Capacity')))
-    GNB_CU_UP_ConfigurationUpdateIEs._val = ASN1Set(rv=[dict([(u'id', 57), (u'criticality', u'reject'), (u'Value', _GNB_CU_UP_ConfigurationUpdateIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'reject'), (u'Value', _GNB_CU_UP_ConfigurationUpdateIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _GNB_CU_UP_ConfigurationUpdateIEs_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 11), (u'criticality', u'reject'), (u'Value', _GNB_CU_UP_ConfigurationUpdateIEs_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 64), (u'criticality', u'ignore'), (u'Value', _GNB_CU_UP_ConfigurationUpdateIEs_val_Value_4), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    _GNB_CU_UP_ConfigurationUpdateIEs_val_Value_5 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-TNLA-To-Remove-List')))
+    GNB_CU_UP_ConfigurationUpdateIEs._val = ASN1Set(rv=[dict([(u'id', 57), (u'criticality', u'reject'), (u'Value', _GNB_CU_UP_ConfigurationUpdateIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'reject'), (u'Value', _GNB_CU_UP_ConfigurationUpdateIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _GNB_CU_UP_ConfigurationUpdateIEs_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 11), (u'criticality', u'reject'), (u'Value', _GNB_CU_UP_ConfigurationUpdateIEs_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 64), (u'criticality', u'ignore'), (u'Value', _GNB_CU_UP_ConfigurationUpdateIEs_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 73), (u'criticality', u'reject'), (u'Value', _GNB_CU_UP_ConfigurationUpdateIEs_val_Value_5), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    
+    #-----< GNB-CU-UP-TNLA-To-Remove-List >-----#
+    GNB_CU_UP_TNLA_To_Remove_List = SEQ_OF(name=u'GNB-CU-UP-TNLA-To-Remove-List', mode=MODE_TYPE)
+    _GNB_CU_UP_TNLA_To_Remove_List__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'GNB-CU-UP-TNLA-To-Remove-Item')))
+    GNB_CU_UP_TNLA_To_Remove_List._cont = _GNB_CU_UP_TNLA_To_Remove_List__item_
+    GNB_CU_UP_TNLA_To_Remove_List._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
     
     #-----< GNB-CU-UP-ConfigurationUpdateAcknowledge >-----#
     GNB_CU_UP_ConfigurationUpdateAcknowledge = SEQ(name=u'GNB-CU-UP-ConfigurationUpdateAcknowledge', mode=MODE_TYPE)
@@ -10200,7 +11187,9 @@ class E1AP_PDU_Contents:
     _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_6 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'Inactivity-Timer')))
     _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_7 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'BearerContextStatusChange')))
     _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_8 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'System-BearerContextSetupRequest')))
-    ____BearerContextSetupRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 13), (u'criticality', u'reject'), (u'Value', _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 14), (u'criticality', u'reject'), (u'Value', _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 66), (u'criticality', u'reject'), (u'Value', _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 58), (u'criticality', u'ignore'), (u'Value', _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'mandatory')]), dict([(u'id', 23), (u'criticality', u'reject'), (u'Value', _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_5), (u'presence', u'mandatory')]), dict([(u'id', 59), (u'criticality', u'reject'), (u'Value', _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_6), (u'presence', u'optional')]), dict([(u'id', 17), (u'criticality', u'reject'), (u'Value', _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_7), (u'presence', u'optional')]), dict([(u'id', 15), (u'criticality', u'reject'), (u'Value', _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_8), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
+    _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_9 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'RANUEID')))
+    _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_10 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'GNB-DU-ID')))
+    ____BearerContextSetupRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 13), (u'criticality', u'reject'), (u'Value', _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 14), (u'criticality', u'reject'), (u'Value', _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 66), (u'criticality', u'reject'), (u'Value', _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 58), (u'criticality', u'ignore'), (u'Value', _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'mandatory')]), dict([(u'id', 23), (u'criticality', u'reject'), (u'Value', _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_5), (u'presence', u'mandatory')]), dict([(u'id', 59), (u'criticality', u'reject'), (u'Value', _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_6), (u'presence', u'optional')]), dict([(u'id', 17), (u'criticality', u'reject'), (u'Value', _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_7), (u'presence', u'optional')]), dict([(u'id', 15), (u'criticality', u'reject'), (u'Value', _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_8), (u'presence', u'mandatory')]), dict([(u'id', 76), (u'criticality', u'ignore'), (u'Value', _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_9), (u'presence', u'optional')]), dict([(u'id', 77), (u'criticality', u'ignore'), (u'Value', _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_10), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___BearerContextSetupRequest_protocolIEs__item__id._const_tab = ____BearerContextSetupRequest_protocolIEs__item__id_tab
     ___BearerContextSetupRequest_protocolIEs__item__id._const_tab_at = None
     ___BearerContextSetupRequest_protocolIEs__item__id._const_tab_id = u'id'
@@ -10236,7 +11225,9 @@ class E1AP_PDU_Contents:
     _BearerContextSetupRequestIEs_val_Value_6 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'Inactivity-Timer')))
     _BearerContextSetupRequestIEs_val_Value_7 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'BearerContextStatusChange')))
     _BearerContextSetupRequestIEs_val_Value_8 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'System-BearerContextSetupRequest')))
-    BearerContextSetupRequestIEs._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _BearerContextSetupRequestIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 13), (u'criticality', u'reject'), (u'Value', _BearerContextSetupRequestIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 14), (u'criticality', u'reject'), (u'Value', _BearerContextSetupRequestIEs_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 66), (u'criticality', u'reject'), (u'Value', _BearerContextSetupRequestIEs_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 58), (u'criticality', u'ignore'), (u'Value', _BearerContextSetupRequestIEs_val_Value_4), (u'presence', u'mandatory')]), dict([(u'id', 23), (u'criticality', u'reject'), (u'Value', _BearerContextSetupRequestIEs_val_Value_5), (u'presence', u'mandatory')]), dict([(u'id', 59), (u'criticality', u'reject'), (u'Value', _BearerContextSetupRequestIEs_val_Value_6), (u'presence', u'optional')]), dict([(u'id', 17), (u'criticality', u'reject'), (u'Value', _BearerContextSetupRequestIEs_val_Value_7), (u'presence', u'optional')]), dict([(u'id', 15), (u'criticality', u'reject'), (u'Value', _BearerContextSetupRequestIEs_val_Value_8), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
+    _BearerContextSetupRequestIEs_val_Value_9 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'RANUEID')))
+    _BearerContextSetupRequestIEs_val_Value_10 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'GNB-DU-ID')))
+    BearerContextSetupRequestIEs._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _BearerContextSetupRequestIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 13), (u'criticality', u'reject'), (u'Value', _BearerContextSetupRequestIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 14), (u'criticality', u'reject'), (u'Value', _BearerContextSetupRequestIEs_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 66), (u'criticality', u'reject'), (u'Value', _BearerContextSetupRequestIEs_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 58), (u'criticality', u'ignore'), (u'Value', _BearerContextSetupRequestIEs_val_Value_4), (u'presence', u'mandatory')]), dict([(u'id', 23), (u'criticality', u'reject'), (u'Value', _BearerContextSetupRequestIEs_val_Value_5), (u'presence', u'mandatory')]), dict([(u'id', 59), (u'criticality', u'reject'), (u'Value', _BearerContextSetupRequestIEs_val_Value_6), (u'presence', u'optional')]), dict([(u'id', 17), (u'criticality', u'reject'), (u'Value', _BearerContextSetupRequestIEs_val_Value_7), (u'presence', u'optional')]), dict([(u'id', 15), (u'criticality', u'reject'), (u'Value', _BearerContextSetupRequestIEs_val_Value_8), (u'presence', u'mandatory')]), dict([(u'id', 76), (u'criticality', u'ignore'), (u'Value', _BearerContextSetupRequestIEs_val_Value_9), (u'presence', u'optional')]), dict([(u'id', 77), (u'criticality', u'ignore'), (u'Value', _BearerContextSetupRequestIEs_val_Value_10), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< System-BearerContextSetupRequest >-----#
     System_BearerContextSetupRequest = CHOICE(name=u'System-BearerContextSetupRequest', mode=MODE_TYPE)
@@ -10538,7 +11529,10 @@ class E1AP_PDU_Contents:
     _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_7 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'Inactivity-Timer')))
     _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_8 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'DataDiscardRequired')))
     _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_9 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'System-BearerContextModificationRequest')))
-    ____BearerContextModificationRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 3), (u'criticality', u'reject'), (u'Value', _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 13), (u'criticality', u'reject'), (u'Value', _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 14), (u'criticality', u'reject'), (u'Value', _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 66), (u'criticality', u'reject'), (u'Value', _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 17), (u'criticality', u'reject'), (u'Value', _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_5), (u'presence', u'optional')]), dict([(u'id', 26), (u'criticality', u'reject'), (u'Value', _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_6), (u'presence', u'optional')]), dict([(u'id', 59), (u'criticality', u'reject'), (u'Value', _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_7), (u'presence', u'optional')]), dict([(u'id', 70), (u'criticality', u'ignore'), (u'Value', _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_8), (u'presence', u'optional')]), dict([(u'id', 18), (u'criticality', u'reject'), (u'Value', _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_9), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_10 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'RANUEID')))
+    _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_11 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'GNB-DU-ID')))
+    _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_12 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'ActivityNotificationLevel')))
+    ____BearerContextModificationRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 3), (u'criticality', u'reject'), (u'Value', _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 13), (u'criticality', u'reject'), (u'Value', _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 14), (u'criticality', u'reject'), (u'Value', _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 66), (u'criticality', u'reject'), (u'Value', _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 17), (u'criticality', u'reject'), (u'Value', _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_5), (u'presence', u'optional')]), dict([(u'id', 26), (u'criticality', u'reject'), (u'Value', _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_6), (u'presence', u'optional')]), dict([(u'id', 59), (u'criticality', u'reject'), (u'Value', _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_7), (u'presence', u'optional')]), dict([(u'id', 70), (u'criticality', u'ignore'), (u'Value', _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_8), (u'presence', u'optional')]), dict([(u'id', 18), (u'criticality', u'reject'), (u'Value', _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_9), (u'presence', u'optional')]), dict([(u'id', 76), (u'criticality', u'ignore'), (u'Value', _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_10), (u'presence', u'optional')]), dict([(u'id', 77), (u'criticality', u'ignore'), (u'Value', _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_11), (u'presence', u'optional')]), dict([(u'id', 23), (u'criticality', u'ignore'), (u'Value', _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_12), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___BearerContextModificationRequest_protocolIEs__item__id._const_tab = ____BearerContextModificationRequest_protocolIEs__item__id_tab
     ___BearerContextModificationRequest_protocolIEs__item__id._const_tab_at = None
     ___BearerContextModificationRequest_protocolIEs__item__id._const_tab_id = u'id'
@@ -10575,7 +11569,10 @@ class E1AP_PDU_Contents:
     _BearerContextModificationRequestIEs_val_Value_7 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'Inactivity-Timer')))
     _BearerContextModificationRequestIEs_val_Value_8 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'DataDiscardRequired')))
     _BearerContextModificationRequestIEs_val_Value_9 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'System-BearerContextModificationRequest')))
-    BearerContextModificationRequestIEs._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _BearerContextModificationRequestIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 3), (u'criticality', u'reject'), (u'Value', _BearerContextModificationRequestIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 13), (u'criticality', u'reject'), (u'Value', _BearerContextModificationRequestIEs_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 14), (u'criticality', u'reject'), (u'Value', _BearerContextModificationRequestIEs_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 66), (u'criticality', u'reject'), (u'Value', _BearerContextModificationRequestIEs_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 17), (u'criticality', u'reject'), (u'Value', _BearerContextModificationRequestIEs_val_Value_5), (u'presence', u'optional')]), dict([(u'id', 26), (u'criticality', u'reject'), (u'Value', _BearerContextModificationRequestIEs_val_Value_6), (u'presence', u'optional')]), dict([(u'id', 59), (u'criticality', u'reject'), (u'Value', _BearerContextModificationRequestIEs_val_Value_7), (u'presence', u'optional')]), dict([(u'id', 70), (u'criticality', u'ignore'), (u'Value', _BearerContextModificationRequestIEs_val_Value_8), (u'presence', u'optional')]), dict([(u'id', 18), (u'criticality', u'reject'), (u'Value', _BearerContextModificationRequestIEs_val_Value_9), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    _BearerContextModificationRequestIEs_val_Value_10 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'RANUEID')))
+    _BearerContextModificationRequestIEs_val_Value_11 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'GNB-DU-ID')))
+    _BearerContextModificationRequestIEs_val_Value_12 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'ActivityNotificationLevel')))
+    BearerContextModificationRequestIEs._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _BearerContextModificationRequestIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 3), (u'criticality', u'reject'), (u'Value', _BearerContextModificationRequestIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 13), (u'criticality', u'reject'), (u'Value', _BearerContextModificationRequestIEs_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 14), (u'criticality', u'reject'), (u'Value', _BearerContextModificationRequestIEs_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 66), (u'criticality', u'reject'), (u'Value', _BearerContextModificationRequestIEs_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 17), (u'criticality', u'reject'), (u'Value', _BearerContextModificationRequestIEs_val_Value_5), (u'presence', u'optional')]), dict([(u'id', 26), (u'criticality', u'reject'), (u'Value', _BearerContextModificationRequestIEs_val_Value_6), (u'presence', u'optional')]), dict([(u'id', 59), (u'criticality', u'reject'), (u'Value', _BearerContextModificationRequestIEs_val_Value_7), (u'presence', u'optional')]), dict([(u'id', 70), (u'criticality', u'ignore'), (u'Value', _BearerContextModificationRequestIEs_val_Value_8), (u'presence', u'optional')]), dict([(u'id', 18), (u'criticality', u'reject'), (u'Value', _BearerContextModificationRequestIEs_val_Value_9), (u'presence', u'optional')]), dict([(u'id', 76), (u'criticality', u'ignore'), (u'Value', _BearerContextModificationRequestIEs_val_Value_10), (u'presence', u'optional')]), dict([(u'id', 77), (u'criticality', u'ignore'), (u'Value', _BearerContextModificationRequestIEs_val_Value_11), (u'presence', u'optional')]), dict([(u'id', 23), (u'criticality', u'ignore'), (u'Value', _BearerContextModificationRequestIEs_val_Value_12), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< System-BearerContextModificationRequest >-----#
     System_BearerContextModificationRequest = CHOICE(name=u'System-BearerContextModificationRequest', mode=MODE_TYPE)
@@ -11250,7 +12247,8 @@ class E1AP_PDU_Contents:
     _____BearerContextReleaseRequest_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'GNB-CU-CP-UE-E1AP-ID')))
     _____BearerContextReleaseRequest_protocolIEs__item__id_tab_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'GNB-CU-UP-UE-E1AP-ID')))
     _____BearerContextReleaseRequest_protocolIEs__item__id_tab_val_Value_2 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DRB-Status-List')))
-    ____BearerContextReleaseRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _____BearerContextReleaseRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 3), (u'criticality', u'reject'), (u'Value', _____BearerContextReleaseRequest_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 22), (u'criticality', u'ignore'), (u'Value', _____BearerContextReleaseRequest_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    _____BearerContextReleaseRequest_protocolIEs__item__id_tab_val_Value_3 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'Cause')))
+    ____BearerContextReleaseRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _____BearerContextReleaseRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 3), (u'criticality', u'reject'), (u'Value', _____BearerContextReleaseRequest_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 22), (u'criticality', u'ignore'), (u'Value', _____BearerContextReleaseRequest_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _____BearerContextReleaseRequest_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     ___BearerContextReleaseRequest_protocolIEs__item__id._const_tab = ____BearerContextReleaseRequest_protocolIEs__item__id_tab
     ___BearerContextReleaseRequest_protocolIEs__item__id._const_tab_at = None
     ___BearerContextReleaseRequest_protocolIEs__item__id._const_tab_id = u'id'
@@ -11280,7 +12278,8 @@ class E1AP_PDU_Contents:
     _BearerContextReleaseRequestIEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'GNB-CU-CP-UE-E1AP-ID')))
     _BearerContextReleaseRequestIEs_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'GNB-CU-UP-UE-E1AP-ID')))
     _BearerContextReleaseRequestIEs_val_Value_2 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DRB-Status-List')))
-    BearerContextReleaseRequestIEs._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _BearerContextReleaseRequestIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 3), (u'criticality', u'reject'), (u'Value', _BearerContextReleaseRequestIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 22), (u'criticality', u'ignore'), (u'Value', _BearerContextReleaseRequestIEs_val_Value_2), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    _BearerContextReleaseRequestIEs_val_Value_3 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-IEs', 'Cause')))
+    BearerContextReleaseRequestIEs._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _BearerContextReleaseRequestIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 3), (u'criticality', u'reject'), (u'Value', _BearerContextReleaseRequestIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 22), (u'criticality', u'ignore'), (u'Value', _BearerContextReleaseRequestIEs_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _BearerContextReleaseRequestIEs_val_Value_3), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< DRB-Status-List >-----#
     DRB_Status_List = SEQ_OF(name=u'DRB-Status-List', mode=MODE_TYPE)
@@ -11905,6 +12904,7 @@ class E1AP_PDU_Contents:
         _____GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id_tab_val_Value_2,
         _____GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id_tab_val_Value_3,
         _____GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id_tab_val_Value_4,
+        _____GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id_tab_val_Value_5,
         ___GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__id,
         ___GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__criticality,
         ___GNB_CU_UP_ConfigurationUpdate_protocolIEs__item__value,
@@ -11917,6 +12917,9 @@ class E1AP_PDU_Contents:
         _GNB_CU_UP_ConfigurationUpdateIEs_val_Value_2,
         _GNB_CU_UP_ConfigurationUpdateIEs_val_Value_3,
         _GNB_CU_UP_ConfigurationUpdateIEs_val_Value_4,
+        _GNB_CU_UP_ConfigurationUpdateIEs_val_Value_5,
+        _GNB_CU_UP_TNLA_To_Remove_List__item_,
+        GNB_CU_UP_TNLA_To_Remove_List,
         ____GNB_CU_UP_ConfigurationUpdateAcknowledge_protocolIEs__item__id_tab,
         _____GNB_CU_UP_ConfigurationUpdateAcknowledge_protocolIEs__item__id_tab_val_Value_0,
         _____GNB_CU_UP_ConfigurationUpdateAcknowledge_protocolIEs__item__id_tab_val_Value_1,
@@ -12037,6 +13040,8 @@ class E1AP_PDU_Contents:
         _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_6,
         _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_7,
         _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_8,
+        _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_9,
+        _____BearerContextSetupRequest_protocolIEs__item__id_tab_val_Value_10,
         ___BearerContextSetupRequest_protocolIEs__item__id,
         ___BearerContextSetupRequest_protocolIEs__item__criticality,
         ___BearerContextSetupRequest_protocolIEs__item__value,
@@ -12053,6 +13058,8 @@ class E1AP_PDU_Contents:
         _BearerContextSetupRequestIEs_val_Value_6,
         _BearerContextSetupRequestIEs_val_Value_7,
         _BearerContextSetupRequestIEs_val_Value_8,
+        _BearerContextSetupRequestIEs_val_Value_9,
+        _BearerContextSetupRequestIEs_val_Value_10,
         ____System_BearerContextSetupRequest_e_UTRAN_BearerContextSetupRequest__item__id_tab,
         _____System_BearerContextSetupRequest_e_UTRAN_BearerContextSetupRequest__item__id_tab_val_Value_0,
         ___System_BearerContextSetupRequest_e_UTRAN_BearerContextSetupRequest__item__id,
@@ -12152,6 +13159,9 @@ class E1AP_PDU_Contents:
         _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_7,
         _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_8,
         _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_9,
+        _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_10,
+        _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_11,
+        _____BearerContextModificationRequest_protocolIEs__item__id_tab_val_Value_12,
         ___BearerContextModificationRequest_protocolIEs__item__id,
         ___BearerContextModificationRequest_protocolIEs__item__criticality,
         ___BearerContextModificationRequest_protocolIEs__item__value,
@@ -12169,6 +13179,9 @@ class E1AP_PDU_Contents:
         _BearerContextModificationRequestIEs_val_Value_7,
         _BearerContextModificationRequestIEs_val_Value_8,
         _BearerContextModificationRequestIEs_val_Value_9,
+        _BearerContextModificationRequestIEs_val_Value_10,
+        _BearerContextModificationRequestIEs_val_Value_11,
+        _BearerContextModificationRequestIEs_val_Value_12,
         ____System_BearerContextModificationRequest_e_UTRAN_BearerContextModificationRequest__item__id_tab,
         _____System_BearerContextModificationRequest_e_UTRAN_BearerContextModificationRequest__item__id_tab_val_Value_0,
         _____System_BearerContextModificationRequest_e_UTRAN_BearerContextModificationRequest__item__id_tab_val_Value_1,
@@ -12391,6 +13404,7 @@ class E1AP_PDU_Contents:
         _____BearerContextReleaseRequest_protocolIEs__item__id_tab_val_Value_0,
         _____BearerContextReleaseRequest_protocolIEs__item__id_tab_val_Value_1,
         _____BearerContextReleaseRequest_protocolIEs__item__id_tab_val_Value_2,
+        _____BearerContextReleaseRequest_protocolIEs__item__id_tab_val_Value_3,
         ___BearerContextReleaseRequest_protocolIEs__item__id,
         ___BearerContextReleaseRequest_protocolIEs__item__criticality,
         ___BearerContextReleaseRequest_protocolIEs__item__value,
@@ -12401,6 +13415,7 @@ class E1AP_PDU_Contents:
         _BearerContextReleaseRequestIEs_val_Value_0,
         _BearerContextReleaseRequestIEs_val_Value_1,
         _BearerContextReleaseRequestIEs_val_Value_2,
+        _BearerContextReleaseRequestIEs_val_Value_3,
         _DRB_Status_List__item_,
         DRB_Status_List,
         ____BearerContextInactivityNotification_protocolIEs__item__id_tab,
@@ -12538,773 +13553,4 @@ class E1AP_PDU_Contents:
         PrivateMessage_IEs,
     ]
 
-class E1AP_PDU_Descriptions:
-
-    _name_  = u'E1AP-PDU-Descriptions'
-    _oid_   = [0, 4, 0, 0, 22, 3, 5, 1, 0]
-    
-    _obj_ = [
-        u'E1AP-ELEMENTARY-PROCEDURE',
-        u'E1AP-PDU',
-        u'InitiatingMessage',
-        u'SuccessfulOutcome',
-        u'UnsuccessfulOutcome',
-        u'E1AP-ELEMENTARY-PROCEDURES',
-        u'E1AP-ELEMENTARY-PROCEDURES-CLASS-1',
-        u'E1AP-ELEMENTARY-PROCEDURES-CLASS-2',
-        u'reset',
-        u'errorIndication',
-        u'gNB-CU-UP-E1Setup',
-        u'gNB-CU-CP-E1Setup',
-        u'gNB-CU-UP-ConfigurationUpdate',
-        u'gNB-CU-CP-ConfigurationUpdate',
-        u'e1Release',
-        u'bearerContextSetup',
-        u'bearerContextModification',
-        u'bearerContextModificationRequired',
-        u'bearerContextRelease',
-        u'bearerContextReleaseRequest',
-        u'bearerContextInactivityNotification',
-        u'dLDataNotification',
-        u'uLDataNotification',
-        u'dataUsageReport',
-        u'gNB-CU-UP-CounterCheck',
-        u'gNB-CU-UP-StatusIndication',
-        u'privateMessage',
-        u'mRDC-DataUsageReport',
-        ]
-    _type_ = [
-        u'E1AP-ELEMENTARY-PROCEDURE',
-        u'E1AP-PDU',
-        u'InitiatingMessage',
-        u'SuccessfulOutcome',
-        u'UnsuccessfulOutcome',
-        ]
-    _set_ = [
-        u'E1AP-ELEMENTARY-PROCEDURES',
-        u'E1AP-ELEMENTARY-PROCEDURES-CLASS-1',
-        u'E1AP-ELEMENTARY-PROCEDURES-CLASS-2',
-        ]
-    _val_ = [
-        u'reset',
-        u'errorIndication',
-        u'gNB-CU-UP-E1Setup',
-        u'gNB-CU-CP-E1Setup',
-        u'gNB-CU-UP-ConfigurationUpdate',
-        u'gNB-CU-CP-ConfigurationUpdate',
-        u'e1Release',
-        u'bearerContextSetup',
-        u'bearerContextModification',
-        u'bearerContextModificationRequired',
-        u'bearerContextRelease',
-        u'bearerContextReleaseRequest',
-        u'bearerContextInactivityNotification',
-        u'dLDataNotification',
-        u'uLDataNotification',
-        u'dataUsageReport',
-        u'gNB-CU-UP-CounterCheck',
-        u'gNB-CU-UP-StatusIndication',
-        u'privateMessage',
-        u'mRDC-DataUsageReport',
-        ]
-    _class_ = [
-        u'E1AP-ELEMENTARY-PROCEDURE',
-        u'E1AP-ELEMENTARY-PROCEDURES',
-        u'E1AP-ELEMENTARY-PROCEDURES-CLASS-1',
-        u'E1AP-ELEMENTARY-PROCEDURES-CLASS-2',
-        u'reset',
-        u'errorIndication',
-        u'gNB-CU-UP-E1Setup',
-        u'gNB-CU-CP-E1Setup',
-        u'gNB-CU-UP-ConfigurationUpdate',
-        u'gNB-CU-CP-ConfigurationUpdate',
-        u'e1Release',
-        u'bearerContextSetup',
-        u'bearerContextModification',
-        u'bearerContextModificationRequired',
-        u'bearerContextRelease',
-        u'bearerContextReleaseRequest',
-        u'bearerContextInactivityNotification',
-        u'dLDataNotification',
-        u'uLDataNotification',
-        u'dataUsageReport',
-        u'gNB-CU-UP-CounterCheck',
-        u'gNB-CU-UP-StatusIndication',
-        u'privateMessage',
-        u'mRDC-DataUsageReport',
-        ]
-    _param_ = [
-        ]
-    
-    #-----< E1AP-ELEMENTARY-PROCEDURE >-----#
-    E1AP_ELEMENTARY_PROCEDURE = CLASS(name=u'E1AP-ELEMENTARY-PROCEDURE', mode=MODE_TYPE)
-    _E1AP_ELEMENTARY_PROCEDURE_InitiatingMessage = OPEN(name=u'InitiatingMessage', mode=MODE_TYPE)
-    _E1AP_ELEMENTARY_PROCEDURE_SuccessfulOutcome = OPEN(name=u'SuccessfulOutcome', mode=MODE_TYPE, opt=True)
-    _E1AP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome = OPEN(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, opt=True)
-    _E1AP_ELEMENTARY_PROCEDURE_procedureCode = INT(name=u'procedureCode', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'ProcedureCode')), uniq=True)
-    _E1AP_ELEMENTARY_PROCEDURE_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-CommonDataTypes', 'Criticality')), default=u'ignore')
-    E1AP_ELEMENTARY_PROCEDURE._cont = ASN1Dict([
-        (u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURE_InitiatingMessage),
-        (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURE_SuccessfulOutcome),
-        (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome),
-        (u'procedureCode', _E1AP_ELEMENTARY_PROCEDURE_procedureCode),
-        (u'criticality', _E1AP_ELEMENTARY_PROCEDURE_criticality),
-        ])
-    
-    #-----< E1AP-PDU >-----#
-    E1AP_PDU = CHOICE(name=u'E1AP-PDU', mode=MODE_TYPE)
-    _E1AP_PDU_initiatingMessage = SEQ(name=u'initiatingMessage', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'InitiatingMessage')))
-    _E1AP_PDU_successfulOutcome = SEQ(name=u'successfulOutcome', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'SuccessfulOutcome')))
-    _E1AP_PDU_unsuccessfulOutcome = SEQ(name=u'unsuccessfulOutcome', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'UnsuccessfulOutcome')))
-    E1AP_PDU._cont = ASN1Dict([
-        (u'initiatingMessage', _E1AP_PDU_initiatingMessage),
-        (u'successfulOutcome', _E1AP_PDU_successfulOutcome),
-        (u'unsuccessfulOutcome', _E1AP_PDU_unsuccessfulOutcome),
-        ])
-    E1AP_PDU._ext = []
-    
-    #-----< InitiatingMessage >-----#
-    InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE)
-    _InitiatingMessage_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
-    __InitiatingMessage_procedureCode_tab = CLASS(name='_tab_E1AP-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'Reset')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ResetAcknowledge')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdate')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateAcknowledge')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_3 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdate')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateAcknowledge')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_6 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequired')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationConfirm')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseCommand')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseComplete')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ErrorIndication')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextInactivityNotification')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DLDataNotification')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ULDataNotification')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DataUsageReport')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_16 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-CounterCheckRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_17 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-StatusIndication')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_18 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'MRDC-DataUsageReport')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_19 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'PrivateMessage')))
-    __InitiatingMessage_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_2), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_3), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_3), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_4), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_5), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_6), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_7), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_8), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_9), (u'procedureCode', 11), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_11), (u'procedureCode', 12), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_12), (u'procedureCode', 13), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_13), (u'procedureCode', 14), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_14), (u'procedureCode', 18), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_15), (u'procedureCode', 15), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_16), (u'procedureCode', 16), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_17), (u'procedureCode', 17), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_18), (u'procedureCode', 19), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_19), (u'procedureCode', 2), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
-    _InitiatingMessage_procedureCode._const_tab = __InitiatingMessage_procedureCode_tab
-    _InitiatingMessage_procedureCode._const_tab_at = None
-    _InitiatingMessage_procedureCode._const_tab_id = u'procedureCode'
-    _InitiatingMessage_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE'), [u'criticality']))
-    _InitiatingMessage_criticality._const_tab = __InitiatingMessage_procedureCode_tab
-    _InitiatingMessage_criticality._const_tab_at = ('..', u'procedureCode')
-    _InitiatingMessage_criticality._const_tab_id = u'criticality'
-    _InitiatingMessage_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE'), [u'InitiatingMessage']))
-    _InitiatingMessage_value._const_tab = __InitiatingMessage_procedureCode_tab
-    _InitiatingMessage_value._const_tab_at = ('..', u'procedureCode')
-    _InitiatingMessage_value._const_tab_id = u'InitiatingMessage'
-    InitiatingMessage._cont = ASN1Dict([
-        (u'procedureCode', _InitiatingMessage_procedureCode),
-        (u'criticality', _InitiatingMessage_criticality),
-        (u'value', _InitiatingMessage_value),
-        ])
-    InitiatingMessage._ext = None
-    
-    #-----< SuccessfulOutcome >-----#
-    SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE)
-    _SuccessfulOutcome_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
-    __SuccessfulOutcome_procedureCode_tab = CLASS(name='_tab_E1AP-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'Reset')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ResetAcknowledge')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdate')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateAcknowledge')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdate')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateAcknowledge')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequired')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationConfirm')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseCommand')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseComplete')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ErrorIndication')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextInactivityNotification')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DLDataNotification')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ULDataNotification')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DataUsageReport')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-CounterCheckRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-StatusIndication')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'MRDC-DataUsageReport')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'PrivateMessage')))
-    __SuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9), (u'procedureCode', 11), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11), (u'procedureCode', 12), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12), (u'procedureCode', 13), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13), (u'procedureCode', 14), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14), (u'procedureCode', 18), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15), (u'procedureCode', 15), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16), (u'procedureCode', 16), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17), (u'procedureCode', 17), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18), (u'procedureCode', 19), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19), (u'procedureCode', 2), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
-    _SuccessfulOutcome_procedureCode._const_tab = __SuccessfulOutcome_procedureCode_tab
-    _SuccessfulOutcome_procedureCode._const_tab_at = None
-    _SuccessfulOutcome_procedureCode._const_tab_id = u'procedureCode'
-    _SuccessfulOutcome_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE'), [u'criticality']))
-    _SuccessfulOutcome_criticality._const_tab = __SuccessfulOutcome_procedureCode_tab
-    _SuccessfulOutcome_criticality._const_tab_at = ('..', u'procedureCode')
-    _SuccessfulOutcome_criticality._const_tab_id = u'criticality'
-    _SuccessfulOutcome_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE'), [u'SuccessfulOutcome']))
-    _SuccessfulOutcome_value._const_tab = __SuccessfulOutcome_procedureCode_tab
-    _SuccessfulOutcome_value._const_tab_at = ('..', u'procedureCode')
-    _SuccessfulOutcome_value._const_tab_id = u'SuccessfulOutcome'
-    SuccessfulOutcome._cont = ASN1Dict([
-        (u'procedureCode', _SuccessfulOutcome_procedureCode),
-        (u'criticality', _SuccessfulOutcome_criticality),
-        (u'value', _SuccessfulOutcome_value),
-        ])
-    SuccessfulOutcome._ext = None
-    
-    #-----< UnsuccessfulOutcome >-----#
-    UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE)
-    _UnsuccessfulOutcome_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
-    __UnsuccessfulOutcome_procedureCode_tab = CLASS(name='_tab_E1AP-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'Reset')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ResetAcknowledge')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdate')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateAcknowledge')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdate')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateAcknowledge')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequired')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationConfirm')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseCommand')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseComplete')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ErrorIndication')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextInactivityNotification')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DLDataNotification')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ULDataNotification')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DataUsageReport')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-CounterCheckRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-StatusIndication')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'MRDC-DataUsageReport')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'PrivateMessage')))
-    __UnsuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9), (u'procedureCode', 11), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11), (u'procedureCode', 12), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12), (u'procedureCode', 13), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13), (u'procedureCode', 14), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14), (u'procedureCode', 18), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15), (u'procedureCode', 15), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16), (u'procedureCode', 16), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17), (u'procedureCode', 17), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18), (u'procedureCode', 19), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19), (u'procedureCode', 2), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
-    _UnsuccessfulOutcome_procedureCode._const_tab = __UnsuccessfulOutcome_procedureCode_tab
-    _UnsuccessfulOutcome_procedureCode._const_tab_at = None
-    _UnsuccessfulOutcome_procedureCode._const_tab_id = u'procedureCode'
-    _UnsuccessfulOutcome_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE'), [u'criticality']))
-    _UnsuccessfulOutcome_criticality._const_tab = __UnsuccessfulOutcome_procedureCode_tab
-    _UnsuccessfulOutcome_criticality._const_tab_at = ('..', u'procedureCode')
-    _UnsuccessfulOutcome_criticality._const_tab_id = u'criticality'
-    _UnsuccessfulOutcome_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE'), [u'UnsuccessfulOutcome']))
-    _UnsuccessfulOutcome_value._const_tab = __UnsuccessfulOutcome_procedureCode_tab
-    _UnsuccessfulOutcome_value._const_tab_at = ('..', u'procedureCode')
-    _UnsuccessfulOutcome_value._const_tab_id = u'UnsuccessfulOutcome'
-    UnsuccessfulOutcome._cont = ASN1Dict([
-        (u'procedureCode', _UnsuccessfulOutcome_procedureCode),
-        (u'criticality', _UnsuccessfulOutcome_criticality),
-        (u'value', _UnsuccessfulOutcome_value),
-        ])
-    UnsuccessfulOutcome._ext = None
-    
-    #-----< E1AP-ELEMENTARY-PROCEDURES >-----#
-    E1AP_ELEMENTARY_PROCEDURES = CLASS(name=u'E1AP-ELEMENTARY-PROCEDURES', mode=MODE_SET, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'Reset')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ResetAcknowledge')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupRequest')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupResponse')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupFailure')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupRequest')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupResponse')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupFailure')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdate')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateAcknowledge')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_3 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateFailure')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdate')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateAcknowledge')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateFailure')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseRequest')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseResponse')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupRequest')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupResponse')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_6 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupFailure')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequest')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationResponse')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationFailure')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequired')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationConfirm')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseCommand')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseComplete')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ErrorIndication')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseRequest')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextInactivityNotification')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DLDataNotification')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ULDataNotification')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DataUsageReport')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_16 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-CounterCheckRequest')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_17 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-StatusIndication')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_18 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'MRDC-DataUsageReport')))
-    _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_19 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'PrivateMessage')))
-    E1AP_ELEMENTARY_PROCEDURES._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_2), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_3), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_3), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_4), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_5), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_6), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_7), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_8), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_9), (u'procedureCode', 11), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_11), (u'procedureCode', 12), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_12), (u'procedureCode', 13), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_13), (u'procedureCode', 14), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_14), (u'procedureCode', 18), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_15), (u'procedureCode', 15), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_16), (u'procedureCode', 16), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_17), (u'procedureCode', 17), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_18), (u'procedureCode', 19), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_19), (u'procedureCode', 2), (u'criticality', u'ignore')])], rr=[], ev=[], er=[])
-    
-    #-----< E1AP-ELEMENTARY-PROCEDURES-CLASS-1 >-----#
-    E1AP_ELEMENTARY_PROCEDURES_CLASS_1 = CLASS(name=u'E1AP-ELEMENTARY-PROCEDURES-CLASS-1', mode=MODE_SET, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'Reset')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ResetAcknowledge')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupRequest')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupResponse')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupFailure')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupRequest')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupResponse')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupFailure')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdate')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateAcknowledge')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_3 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateFailure')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdate')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateAcknowledge')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateFailure')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseRequest')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseResponse')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupRequest')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupResponse')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_6 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupFailure')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequest')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationResponse')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationFailure')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequired')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationConfirm')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseCommand')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseComplete')))
-    E1AP_ELEMENTARY_PROCEDURES_CLASS_1._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_3), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_3), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_3), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_4), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_4), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_5), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_5), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_6), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_6), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_7), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_7), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_8), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_8), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_9), (u'SuccessfulOutcome', _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_9), (u'procedureCode', 11), (u'criticality', u'reject')])], rr=[], ev=[], er=[])
-    
-    #-----< E1AP-ELEMENTARY-PROCEDURES-CLASS-2 >-----#
-    E1AP_ELEMENTARY_PROCEDURES_CLASS_2 = CLASS(name=u'E1AP-ELEMENTARY-PROCEDURES-CLASS-2', mode=MODE_SET, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ErrorIndication')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseRequest')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextInactivityNotification')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DLDataNotification')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ULDataNotification')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DataUsageReport')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-CounterCheckRequest')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-StatusIndication')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'MRDC-DataUsageReport')))
-    _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'PrivateMessage')))
-    E1AP_ELEMENTARY_PROCEDURES_CLASS_2._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1), (u'procedureCode', 12), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2), (u'procedureCode', 13), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3), (u'procedureCode', 14), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4), (u'procedureCode', 18), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5), (u'procedureCode', 15), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_6), (u'procedureCode', 16), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_7), (u'procedureCode', 17), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_8), (u'procedureCode', 19), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_9), (u'procedureCode', 2), (u'criticality', u'ignore')])], rr=[], ev=[], er=[])
-    
-    #-----< reset >-----#
-    reset = CLASS(name=u'reset', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    _reset_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'Reset')))
-    _reset_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ResetAcknowledge')))
-    reset._val = dict([(u'InitiatingMessage', _reset_val_InitiatingMessage), (u'SuccessfulOutcome', _reset_val_SuccessfulOutcome), (u'procedureCode', 0), (u'criticality', u'reject')])
-    
-    #-----< errorIndication >-----#
-    errorIndication = CLASS(name=u'errorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    _errorIndication_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ErrorIndication')))
-    errorIndication._val = dict([(u'InitiatingMessage', _errorIndication_val_InitiatingMessage), (u'procedureCode', 1), (u'criticality', u'ignore')])
-    
-    #-----< gNB-CU-UP-E1Setup >-----#
-    gNB_CU_UP_E1Setup = CLASS(name=u'gNB-CU-UP-E1Setup', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    _gNB_CU_UP_E1Setup_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupRequest')))
-    _gNB_CU_UP_E1Setup_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupResponse')))
-    _gNB_CU_UP_E1Setup_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-E1SetupFailure')))
-    gNB_CU_UP_E1Setup._val = dict([(u'InitiatingMessage', _gNB_CU_UP_E1Setup_val_InitiatingMessage), (u'SuccessfulOutcome', _gNB_CU_UP_E1Setup_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _gNB_CU_UP_E1Setup_val_UnsuccessfulOutcome), (u'procedureCode', 3), (u'criticality', u'reject')])
-    
-    #-----< gNB-CU-CP-E1Setup >-----#
-    gNB_CU_CP_E1Setup = CLASS(name=u'gNB-CU-CP-E1Setup', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    _gNB_CU_CP_E1Setup_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupRequest')))
-    _gNB_CU_CP_E1Setup_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupResponse')))
-    _gNB_CU_CP_E1Setup_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-E1SetupFailure')))
-    gNB_CU_CP_E1Setup._val = dict([(u'InitiatingMessage', _gNB_CU_CP_E1Setup_val_InitiatingMessage), (u'SuccessfulOutcome', _gNB_CU_CP_E1Setup_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _gNB_CU_CP_E1Setup_val_UnsuccessfulOutcome), (u'procedureCode', 4), (u'criticality', u'reject')])
-    
-    #-----< gNB-CU-UP-ConfigurationUpdate >-----#
-    gNB_CU_UP_ConfigurationUpdate = CLASS(name=u'gNB-CU-UP-ConfigurationUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    _gNB_CU_UP_ConfigurationUpdate_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdate')))
-    _gNB_CU_UP_ConfigurationUpdate_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateAcknowledge')))
-    _gNB_CU_UP_ConfigurationUpdate_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-ConfigurationUpdateFailure')))
-    gNB_CU_UP_ConfigurationUpdate._val = dict([(u'InitiatingMessage', _gNB_CU_UP_ConfigurationUpdate_val_InitiatingMessage), (u'SuccessfulOutcome', _gNB_CU_UP_ConfigurationUpdate_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _gNB_CU_UP_ConfigurationUpdate_val_UnsuccessfulOutcome), (u'procedureCode', 5), (u'criticality', u'reject')])
-    
-    #-----< gNB-CU-CP-ConfigurationUpdate >-----#
-    gNB_CU_CP_ConfigurationUpdate = CLASS(name=u'gNB-CU-CP-ConfigurationUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    _gNB_CU_CP_ConfigurationUpdate_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdate')))
-    _gNB_CU_CP_ConfigurationUpdate_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateAcknowledge')))
-    _gNB_CU_CP_ConfigurationUpdate_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-CP-ConfigurationUpdateFailure')))
-    gNB_CU_CP_ConfigurationUpdate._val = dict([(u'InitiatingMessage', _gNB_CU_CP_ConfigurationUpdate_val_InitiatingMessage), (u'SuccessfulOutcome', _gNB_CU_CP_ConfigurationUpdate_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _gNB_CU_CP_ConfigurationUpdate_val_UnsuccessfulOutcome), (u'procedureCode', 6), (u'criticality', u'reject')])
-    
-    #-----< e1Release >-----#
-    e1Release = CLASS(name=u'e1Release', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    _e1Release_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseRequest')))
-    _e1Release_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'E1ReleaseResponse')))
-    e1Release._val = dict([(u'InitiatingMessage', _e1Release_val_InitiatingMessage), (u'SuccessfulOutcome', _e1Release_val_SuccessfulOutcome), (u'procedureCode', 7), (u'criticality', u'reject')])
-    
-    #-----< bearerContextSetup >-----#
-    bearerContextSetup = CLASS(name=u'bearerContextSetup', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    _bearerContextSetup_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupRequest')))
-    _bearerContextSetup_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupResponse')))
-    _bearerContextSetup_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextSetupFailure')))
-    bearerContextSetup._val = dict([(u'InitiatingMessage', _bearerContextSetup_val_InitiatingMessage), (u'SuccessfulOutcome', _bearerContextSetup_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _bearerContextSetup_val_UnsuccessfulOutcome), (u'procedureCode', 8), (u'criticality', u'reject')])
-    
-    #-----< bearerContextModification >-----#
-    bearerContextModification = CLASS(name=u'bearerContextModification', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    _bearerContextModification_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequest')))
-    _bearerContextModification_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationResponse')))
-    _bearerContextModification_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationFailure')))
-    bearerContextModification._val = dict([(u'InitiatingMessage', _bearerContextModification_val_InitiatingMessage), (u'SuccessfulOutcome', _bearerContextModification_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _bearerContextModification_val_UnsuccessfulOutcome), (u'procedureCode', 9), (u'criticality', u'reject')])
-    
-    #-----< bearerContextModificationRequired >-----#
-    bearerContextModificationRequired = CLASS(name=u'bearerContextModificationRequired', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    _bearerContextModificationRequired_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationRequired')))
-    _bearerContextModificationRequired_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextModificationConfirm')))
-    bearerContextModificationRequired._val = dict([(u'InitiatingMessage', _bearerContextModificationRequired_val_InitiatingMessage), (u'SuccessfulOutcome', _bearerContextModificationRequired_val_SuccessfulOutcome), (u'procedureCode', 10), (u'criticality', u'reject')])
-    
-    #-----< bearerContextRelease >-----#
-    bearerContextRelease = CLASS(name=u'bearerContextRelease', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    _bearerContextRelease_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseCommand')))
-    _bearerContextRelease_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseComplete')))
-    bearerContextRelease._val = dict([(u'InitiatingMessage', _bearerContextRelease_val_InitiatingMessage), (u'SuccessfulOutcome', _bearerContextRelease_val_SuccessfulOutcome), (u'procedureCode', 11), (u'criticality', u'reject')])
-    
-    #-----< bearerContextReleaseRequest >-----#
-    bearerContextReleaseRequest = CLASS(name=u'bearerContextReleaseRequest', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    _bearerContextReleaseRequest_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextReleaseRequest')))
-    bearerContextReleaseRequest._val = dict([(u'InitiatingMessage', _bearerContextReleaseRequest_val_InitiatingMessage), (u'procedureCode', 12), (u'criticality', u'ignore')])
-    
-    #-----< bearerContextInactivityNotification >-----#
-    bearerContextInactivityNotification = CLASS(name=u'bearerContextInactivityNotification', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    _bearerContextInactivityNotification_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'BearerContextInactivityNotification')))
-    bearerContextInactivityNotification._val = dict([(u'InitiatingMessage', _bearerContextInactivityNotification_val_InitiatingMessage), (u'procedureCode', 13), (u'criticality', u'ignore')])
-    
-    #-----< dLDataNotification >-----#
-    dLDataNotification = CLASS(name=u'dLDataNotification', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    _dLDataNotification_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DLDataNotification')))
-    dLDataNotification._val = dict([(u'InitiatingMessage', _dLDataNotification_val_InitiatingMessage), (u'procedureCode', 14), (u'criticality', u'ignore')])
-    
-    #-----< uLDataNotification >-----#
-    uLDataNotification = CLASS(name=u'uLDataNotification', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    _uLDataNotification_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'ULDataNotification')))
-    uLDataNotification._val = dict([(u'InitiatingMessage', _uLDataNotification_val_InitiatingMessage), (u'procedureCode', 18), (u'criticality', u'ignore')])
-    
-    #-----< dataUsageReport >-----#
-    dataUsageReport = CLASS(name=u'dataUsageReport', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    _dataUsageReport_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'DataUsageReport')))
-    dataUsageReport._val = dict([(u'InitiatingMessage', _dataUsageReport_val_InitiatingMessage), (u'procedureCode', 15), (u'criticality', u'ignore')])
-    
-    #-----< gNB-CU-UP-CounterCheck >-----#
-    gNB_CU_UP_CounterCheck = CLASS(name=u'gNB-CU-UP-CounterCheck', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    _gNB_CU_UP_CounterCheck_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-CounterCheckRequest')))
-    gNB_CU_UP_CounterCheck._val = dict([(u'InitiatingMessage', _gNB_CU_UP_CounterCheck_val_InitiatingMessage), (u'procedureCode', 16), (u'criticality', u'ignore')])
-    
-    #-----< gNB-CU-UP-StatusIndication >-----#
-    gNB_CU_UP_StatusIndication = CLASS(name=u'gNB-CU-UP-StatusIndication', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    _gNB_CU_UP_StatusIndication_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'GNB-CU-UP-StatusIndication')))
-    gNB_CU_UP_StatusIndication._val = dict([(u'InitiatingMessage', _gNB_CU_UP_StatusIndication_val_InitiatingMessage), (u'procedureCode', 17), (u'criticality', u'ignore')])
-    
-    #-----< privateMessage >-----#
-    privateMessage = CLASS(name=u'privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    _privateMessage_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'PrivateMessage')))
-    privateMessage._val = dict([(u'InitiatingMessage', _privateMessage_val_InitiatingMessage), (u'procedureCode', 2), (u'criticality', u'ignore')])
-    
-    #-----< mRDC-DataUsageReport >-----#
-    mRDC_DataUsageReport = CLASS(name=u'mRDC-DataUsageReport', mode=MODE_VALUE, typeref=ASN1RefType(('E1AP-PDU-Descriptions', 'E1AP-ELEMENTARY-PROCEDURE')))
-    _mRDC_DataUsageReport_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('E1AP-PDU-Contents', 'MRDC-DataUsageReport')))
-    mRDC_DataUsageReport._val = dict([(u'InitiatingMessage', _mRDC_DataUsageReport_val_InitiatingMessage), (u'procedureCode', 19), (u'criticality', u'ignore')])
-    
-    _all_ = [
-        _E1AP_ELEMENTARY_PROCEDURE_InitiatingMessage,
-        _E1AP_ELEMENTARY_PROCEDURE_SuccessfulOutcome,
-        _E1AP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome,
-        _E1AP_ELEMENTARY_PROCEDURE_procedureCode,
-        _E1AP_ELEMENTARY_PROCEDURE_criticality,
-        E1AP_ELEMENTARY_PROCEDURE,
-        _E1AP_PDU_initiatingMessage,
-        _E1AP_PDU_successfulOutcome,
-        _E1AP_PDU_unsuccessfulOutcome,
-        E1AP_PDU,
-        __InitiatingMessage_procedureCode_tab,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1,
-        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_2,
-        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_2,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_3,
-        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_3,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_4,
-        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_4,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_5,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_6,
-        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_6,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7,
-        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_7,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_8,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_9,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_11,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_12,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_13,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_14,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_15,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_16,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_17,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_18,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_19,
-        _InitiatingMessage_procedureCode,
-        _InitiatingMessage_criticality,
-        _InitiatingMessage_value,
-        InitiatingMessage,
-        __SuccessfulOutcome_procedureCode_tab,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1,
-        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2,
-        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3,
-        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4,
-        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6,
-        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7,
-        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19,
-        _SuccessfulOutcome_procedureCode,
-        _SuccessfulOutcome_criticality,
-        _SuccessfulOutcome_value,
-        SuccessfulOutcome,
-        __UnsuccessfulOutcome_procedureCode_tab,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19,
-        _UnsuccessfulOutcome_procedureCode,
-        _UnsuccessfulOutcome_criticality,
-        _UnsuccessfulOutcome_value,
-        UnsuccessfulOutcome,
-        E1AP_ELEMENTARY_PROCEDURES,
-        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0,
-        _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0,
-        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1,
-        _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1,
-        _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1,
-        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2,
-        _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_2,
-        _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_2,
-        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3,
-        _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_3,
-        _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_3,
-        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4,
-        _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_4,
-        _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_4,
-        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5,
-        _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_5,
-        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6,
-        _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_6,
-        _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_6,
-        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7,
-        _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7,
-        _E1AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_7,
-        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8,
-        _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_8,
-        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9,
-        _E1AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_9,
-        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10,
-        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_11,
-        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_12,
-        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_13,
-        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_14,
-        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_15,
-        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_16,
-        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_17,
-        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_18,
-        _E1AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_19,
-        E1AP_ELEMENTARY_PROCEDURES_CLASS_1,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_3,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_3,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_3,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_4,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_4,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_4,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_5,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_5,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_6,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_6,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_6,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_7,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_7,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_7,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_8,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_8,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_9,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_9,
-        E1AP_ELEMENTARY_PROCEDURES_CLASS_2,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_6,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_7,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_8,
-        _E1AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_9,
-        reset,
-        _reset_val_InitiatingMessage,
-        _reset_val_SuccessfulOutcome,
-        errorIndication,
-        _errorIndication_val_InitiatingMessage,
-        gNB_CU_UP_E1Setup,
-        _gNB_CU_UP_E1Setup_val_InitiatingMessage,
-        _gNB_CU_UP_E1Setup_val_SuccessfulOutcome,
-        _gNB_CU_UP_E1Setup_val_UnsuccessfulOutcome,
-        gNB_CU_CP_E1Setup,
-        _gNB_CU_CP_E1Setup_val_InitiatingMessage,
-        _gNB_CU_CP_E1Setup_val_SuccessfulOutcome,
-        _gNB_CU_CP_E1Setup_val_UnsuccessfulOutcome,
-        gNB_CU_UP_ConfigurationUpdate,
-        _gNB_CU_UP_ConfigurationUpdate_val_InitiatingMessage,
-        _gNB_CU_UP_ConfigurationUpdate_val_SuccessfulOutcome,
-        _gNB_CU_UP_ConfigurationUpdate_val_UnsuccessfulOutcome,
-        gNB_CU_CP_ConfigurationUpdate,
-        _gNB_CU_CP_ConfigurationUpdate_val_InitiatingMessage,
-        _gNB_CU_CP_ConfigurationUpdate_val_SuccessfulOutcome,
-        _gNB_CU_CP_ConfigurationUpdate_val_UnsuccessfulOutcome,
-        e1Release,
-        _e1Release_val_InitiatingMessage,
-        _e1Release_val_SuccessfulOutcome,
-        bearerContextSetup,
-        _bearerContextSetup_val_InitiatingMessage,
-        _bearerContextSetup_val_SuccessfulOutcome,
-        _bearerContextSetup_val_UnsuccessfulOutcome,
-        bearerContextModification,
-        _bearerContextModification_val_InitiatingMessage,
-        _bearerContextModification_val_SuccessfulOutcome,
-        _bearerContextModification_val_UnsuccessfulOutcome,
-        bearerContextModificationRequired,
-        _bearerContextModificationRequired_val_InitiatingMessage,
-        _bearerContextModificationRequired_val_SuccessfulOutcome,
-        bearerContextRelease,
-        _bearerContextRelease_val_InitiatingMessage,
-        _bearerContextRelease_val_SuccessfulOutcome,
-        bearerContextReleaseRequest,
-        _bearerContextReleaseRequest_val_InitiatingMessage,
-        bearerContextInactivityNotification,
-        _bearerContextInactivityNotification_val_InitiatingMessage,
-        dLDataNotification,
-        _dLDataNotification_val_InitiatingMessage,
-        uLDataNotification,
-        _uLDataNotification_val_InitiatingMessage,
-        dataUsageReport,
-        _dataUsageReport_val_InitiatingMessage,
-        gNB_CU_UP_CounterCheck,
-        _gNB_CU_UP_CounterCheck_val_InitiatingMessage,
-        gNB_CU_UP_StatusIndication,
-        _gNB_CU_UP_StatusIndication_val_InitiatingMessage,
-        privateMessage,
-        _privateMessage_val_InitiatingMessage,
-        mRDC_DataUsageReport,
-        _mRDC_DataUsageReport_val_InitiatingMessage,
-    ]
-
-init_modules(E1AP_CommonDataTypes, E1AP_Constants, E1AP_Containers, E1AP_IEs, E1AP_PDU_Contents, E1AP_PDU_Descriptions)
+init_modules(E1AP_PDU_Descriptions, E1AP_Containers, E1AP_CommonDataTypes, E1AP_IEs, E1AP_Constants, E1AP_PDU_Contents)

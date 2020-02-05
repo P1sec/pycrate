@@ -464,5 +464,6 @@ id-InterfaceInstanceIndication												ProtocolIE-ID ::= 335
 id-BPLMN-ID-Info-EUTRA														ProtocolIE-ID ::= 336
 id-BPLMN-ID-Info-NR															ProtocolIE-ID ::= 337
 id-NBIoT-UL-DL-AlignmentOffset												ProtocolIE-ID ::= 338
+id-ERABs-transferred-to-MeNB												ProtocolIE-ID ::= 339
 
 END

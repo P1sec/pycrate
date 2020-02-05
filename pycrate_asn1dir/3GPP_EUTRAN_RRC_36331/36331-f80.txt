@@ -1,4 +1,4 @@
-﻿3GPP TS 36.331 V15.7.0 (2019-09)
+﻿3GPP TS 36.331 V15.8.0 (2019-12)
 Technical Specification
 3rd Generation Partnership Project;
 Technical Specification Group Radio Access Network;
@@ -57,6 +57,7 @@ Foreword	22
 5.1	General	41
 5.1.1	Introduction	41
 5.1.2	General requirements	42
+5.1.3	Requirements for UE in MR-DC	43
 5.2	System information	43
 5.2.1	Introduction	43
 5.2.1.1	General	43
@@ -174,7 +175,7 @@ Foreword	22
 5.3.8.2	Initiation	134
 5.3.8.3	Reception of the RRCConnectionRelease by the UE	134
 5.3.8.4	T320 expiry	137
-5.3.8.5	T322 expiry	137
+5.3.8.5	T322 expiry or stop	137
 5.3.8.6	UE actions upon receiving the expiry of DataInactivityTimer	137
 5.3.8.7	UE actions upon entering RRC_INACTIVE	137
 5.3.9	RRC connection release requested by upper layers	138
@@ -303,7 +304,7 @@ Foreword	22
 5.5.4.9	Event C1 (CSI-RS resource becomes better than threshold)	211
 5.5.4.10	Event C2 (CSI-RS resource becomes offset better than reference CSI-RS resource)	211
 5.5.4.11	Event W1 (WLAN becomes better than a threshold)	212
-5.5.4.12	Event W2 (All WLAN inside WLAN mobility set becomes worse than threshold1 and a WLAN outside WLAN mobility set becomes better than threshold2)	212
+5.5.4.12	Event W2 (All WLAN inside WLAN mobility set becomes worse than threshold1 and a WLAN outside WLAN mobility set becomes better than threshold2)	213
 5.5.4.13	Event W3 (All WLAN inside WLAN mobility set becomes worse than a threshold)	213
 5.5.4.14	Event V1 (The channel busy ratio is above a threshold)	214
 5.5.4.15	Event V2 (The channel busy ratio is below a threshold)	214
@@ -319,842 +320,857 @@ Foreword	22
 5.5.7	Inter-frequency RSTD measurement indication	225
 5.5.7.1	General	225
 5.5.7.2	Initiation	225
-5.5.7.3	Actions related to transmission of InterFreqRSTDMeasurementIndication message	225
+5.5.7.3	Actions related to transmission of InterFreqRSTDMeasurementIndication message	226
 5.6	Other	226
 5.6.0	General	226
-5.6.1	DL information transfer	226
-5.6.1.1	General	226
+5.6.1	DL information transfer	227
+5.6.1.1	General	227
 5.6.1.2	Initiation	227
 5.6.1.3	Reception of the DLInformationTransfer by the UE	227
-5.6.2	UL information transfer	227
-5.6.2.1	General	227
-5.6.2.2	Initiation	227
+5.6.2	UL information transfer	228
+5.6.2.1	General	228
+5.6.2.2	Initiation	228
 5.6.2.3	Actions related to transmission of ULInformationTransfer message	228
 5.6.2.4	Failure to deliver ULInformationTransfer message	228
-5.6.2a	UL information transfer for MR-DC	228
-5.6.2a.1	General	228
-5.6.2a.2	Initiation	228
+5.6.2a	UL information transfer for MR-DC	229
+5.6.2a.1	General	229
+5.6.2a.2	Initiation	229
 5.6.2a.3	Actions related to transmission of ULInformationTransferMRDC message	229
-5.6.2a.4	Void	229
-5.6.3	UE capability transfer	229
-5.6.3.1	General	229
-5.6.3.2	Initiation	229
-5.6.3.3	Reception of the UECapabilityEnquiry by the UE	229
+5.6.2a.4	Void	230
+5.6.3	UE capability transfer	230
+5.6.3.1	General	230
+5.6.3.2	Initiation	230
+5.6.3.3	Reception of the UECapabilityEnquiry by the UE	230
 5.6.4	CSFB to 1x Parameter transfer	234
 5.6.4.1	General	234
-5.6.4.2	Initiation	234
-5.6.4.3	Actions related to transmission of CSFBParametersRequestCDMA2000 message	234
-5.6.4.4	Reception of the CSFBParametersResponseCDMA2000 message	234
-5.6.5	UE Information	234
-5.6.5.1	General	234
+5.6.4.2	Initiation	235
+5.6.4.3	Actions related to transmission of CSFBParametersRequestCDMA2000 message	235
+5.6.4.4	Reception of the CSFBParametersResponseCDMA2000 message	235
+5.6.5	UE Information	235
+5.6.5.1	General	235
 5.6.5.2	Initiation	235
 5.6.5.3	Reception of the UEInformationRequest message	235
-5.6.6	Logged Measurement Configuration	236
-5.6.6.1	General	236
+5.6.6	Logged Measurement Configuration	237
+5.6.6.1	General	237
 5.6.6.2	Initiation	237
-5.6.6.3	Reception of the LoggedMeasurementConfiguration by the UE	237
-5.6.6.4	T330 expiry	237
+5.6.6.3	Reception of the LoggedMeasurementConfiguration by the UE	238
+5.6.6.4	T330 expiry	238
 5.6.7	Release of Logged Measurement Configuration	238
 5.6.7.1	General	238
 5.6.7.2	Initiation	238
-5.6.8	Measurements logging	238
-5.6.8.1	General	238
-5.6.8.2	Initiation	238
-5.6.9	In-device coexistence indication	241
-5.6.9.1	General	241
-5.6.9.2	Initiation	241
-5.6.9.3	Actions related to transmission of InDeviceCoexIndication message	242
+5.6.8	Measurements logging	239
+5.6.8.1	General	239
+5.6.8.2	Initiation	239
+5.6.9	In-device coexistence indication	242
+5.6.9.1	General	242
+5.6.9.2	Initiation	242
+5.6.9.3	Actions related to transmission of InDeviceCoexIndication message	243
 5.6.10	UE Assistance Information	244
 5.6.10.1	General	244
-5.6.10.2	Initiation	244
-5.6.10.3	Actions related to transmission of UEAssistanceInformation message	245
+5.6.10.2	Initiation	245
+5.6.10.3	Actions related to transmission of UEAssistanceInformation message	246
 5.6.11	Mobility history information	247
 5.6.11.1	General	247
-5.6.11.2	Initiation	247
-5.6.12	RAN-assisted WLAN interworking	247
-5.6.12.1	General	247
+5.6.11.2	Initiation	248
+5.6.12	RAN-assisted WLAN interworking	248
+5.6.12.1	General	248
 5.6.12.2	Dedicated WLAN offload configuration	248
 5.6.12.3	WLAN offload RAN evaluation	248
-5.6.12.4	T350 expiry or stop	248
-5.6.12.5	Cell selection/ re-selection while T350 is running	248
+5.6.12.4	T350 expiry or stop	249
+5.6.12.5	Cell selection/ re-selection while T350 is running	249
 5.6.13	SCG failure information	249
 5.6.13.1	General	249
 5.6.13.2	Initiation	249
-5.6.13.3	Actions related to transmission of SCGFailureInformation message	249
-5.6.13.4	Failure type determination in NE-DC	250
-5.6.13.5	Setting the contents of MeasResultSCG-FailureMRDC	250
-5.6.13a	NR SCG failure information	251
-5.6.13a.1	General	251
-5.6.13a.2	Initiation	251
-5.6.13a.3	Actions related to transmission of SCGFailureInformationNR message	251
+5.6.13.3	Actions related to transmission of SCGFailureInformation message	250
+5.6.13.4	Failure type determination in NE-DC	251
+5.6.13.5	Setting the contents of MeasResultSCG-FailureMRDC	251
+5.6.13a	NR SCG failure information	252
+5.6.13a.1	General	252
+5.6.13a.2	Initiation	252
+5.6.13a.3	Actions related to transmission of SCGFailureInformationNR message	252
 5.6.14	LTE-WLAN Aggregation	252
 5.6.14.1	Introduction	252
-5.6.14.2	Reception of LWA configuration	252
-5.6.14.3	Release of LWA configuration	252
-5.6.15	WLAN connection management	253
-5.6.15.1	Introduction	253
-5.6.15.2	WLAN connection status reporting	253
-5.6.15.2.1	General	253
-5.6.15.2.2	Initiation	253
-5.6.15.2.3	Actions related to transmission of WLANConnectionStatusReport message	254
-5.6.15.3	T351 Expiry (WLAN connection attempt timeout)	254
-5.6.15.4	WLAN status monitoring	254
-5.6.16	RAN controlled LTE-WLAN interworking	255
-5.6.16.1	General	255
-5.6.16.2	WLAN traffic steering command	255
+5.6.14.2	Reception of LWA configuration	253
+5.6.14.3	Release of LWA configuration	253
+5.6.15	WLAN connection management	254
+5.6.15.1	Introduction	254
+5.6.15.2	WLAN connection status reporting	254
+5.6.15.2.1	General	254
+5.6.15.2.2	Initiation	254
+5.6.15.2.3	Actions related to transmission of WLANConnectionStatusReport message	255
+5.6.15.3	T351 Expiry (WLAN connection attempt timeout)	255
+5.6.15.4	WLAN status monitoring	255
+5.6.16	RAN controlled LTE-WLAN interworking	256
+5.6.16.1	General	256
+5.6.16.2	WLAN traffic steering command	256
 5.6.17	LTE-WLAN aggregation with IPsec tunnel	256
 5.6.17.1	General	256
-5.6.17.2	LWIP reconfiguration	256
-5.6.17.3	LWIP release	256
-5.6.18	Void	257
-5.6.19	Application layer measurement reporting	257
-5.6.19.1	General	257
-5.6.19.2	Initiation	257
-5.6.20	IDLE Mode Measurements	257
-5.6.20.1	General	257
-5.6.20.2	Initiation	257
-5.6.20.3	T331 expiry or stop	258
-5.6.21	Failure information	258
-5.6.21.1	General	258
+5.6.17.2	LWIP reconfiguration	257
+5.6.17.3	LWIP release	257
+5.6.18	Void	258
+5.6.19	Application layer measurement reporting	258
+5.6.19.1	General	258
+5.6.19.2	Initiation	258
+5.6.20	IDLE Mode Measurements	258
+5.6.20.1	General	258
+5.6.20.2	Initiation	258
+5.6.20.3	T331 expiry or stop	259
+5.6.21	Failure information	259
+5.6.21.1	General	259
 5.6.21.2	Initiation	259
-5.6.21.3	Actions related to transmission of FailureInformation message	259
-5.7	Generic error handling	259
-5.7.1	General	259
-5.7.2	ASN.1 violation or encoding error	259
-5.7.3	Field set to a not comprehended value	259
-5.7.4	Mandatory field missing	260
-5.7.5	Not comprehended field	261
-5.8	MBMS	261
-5.8.1	Introduction	261
-5.8.1.1	General	261
+5.6.21.3	Actions related to transmission of FailureInformation message	260
+5.7	Generic error handling	260
+5.7.1	General	260
+5.7.2	ASN.1 violation or encoding error	260
+5.7.3	Field set to a not comprehended value	260
+5.7.4	Mandatory field missing	261
+5.7.5	Not comprehended field	262
+5.8	MBMS	262
+5.8.1	Introduction	262
+5.8.1.1	General	262
 5.8.1.2	Scheduling	262
-5.8.1.3	MCCH information validity and notification of changes	262
-5.8.2	MCCH information acquisition	263
-5.8.2.1	General	263
-5.8.2.2	Initiation	263
-5.8.2.3	MCCH information acquisition by the UE	263
-5.8.2.4	Actions upon reception of the MBSFNAreaConfiguration message	264
-5.8.2.5	Actions upon reception of the MBMSCountingRequest message	264
-5.8.3	MBMS PTM radio bearer configuration	264
-5.8.3.1	General	264
-5.8.3.2	Initiation	264
-5.8.3.3	MRB establishment	264
-5.8.3.4	MRB release	264
+5.8.1.3	MCCH information validity and notification of changes	263
+5.8.2	MCCH information acquisition	264
+5.8.2.1	General	264
+5.8.2.2	Initiation	264
+5.8.2.3	MCCH information acquisition by the UE	264
+5.8.2.4	Actions upon reception of the MBSFNAreaConfiguration message	265
+5.8.2.5	Actions upon reception of the MBMSCountingRequest message	265
+5.8.3	MBMS PTM radio bearer configuration	265
+5.8.3.1	General	265
+5.8.3.2	Initiation	265
+5.8.3.3	MRB establishment	265
+5.8.3.4	MRB release	265
 5.8.4	MBMS Counting Procedure	265
 5.8.4.1	General	265
-5.8.4.2	Initiation	265
-5.8.4.3	Reception of the MBMSCountingRequest message by the UE	265
-5.8.5	MBMS interest indication	266
-5.8.5.1	General	266
-5.8.5.2	Initiation	266
-5.8.5.3	Determine MBMS frequencies of interest	267
-5.8.5.4	Actions related to transmission of MBMSInterestIndication message	268
-5.8a	SC-PTM	269
-5.8a.1	Introduction	269
-5.8a.1.1	General	269
-5.8a.1.2	SC-MCCH scheduling	269
-5.8a.1.3	SC-MCCH information validity and notification of changes	269
-5.8a.1.4	Procedures	270
-5.8a.2	SC-MCCH information acquisition	270
-5.8a.2.1	General	270
-5.8a.2.2	Initiation	270
-5.8a.2.3	SC-MCCH information acquisition by the UE	270
-5.8a.2.4	Actions upon reception of the SCPTMConfiguration message	271
-5.8a.3	SC-PTM radio bearer configuration	271
-5.8a.3.1	General	271
-5.8a.3.2	Initiation	271
-5.8a.3.3	SC-MRB establishment	271
-5.8a.3.4	SC-MRB release	272
-5.9	RN procedures	272
-5.9.1	RN reconfiguration	272
-5.9.1.1	General	272
-5.9.1.2	Initiation	272
-5.9.1.3	Reception of the RNReconfiguration by the RN	272
-5.10	Sidelink	273
-5.10.1	Introduction	273
-5.10.1a	Conditions for sidelink communication operation	273
-5.10.1d	Conditions for V2X sidelink communication operation	274
-5.10.2	Sidelink UE information	274
-5.10.2.1	General	274
-5.10.2.2	Initiation	275
-5.10.2.3	Actions related to transmission of SidelinkUEInformation message	280
-5.10.3	Sidelink communication monitoring	282
-5.10.4	Sidelink communication transmission	284
-5.10.5	Sidelink discovery monitoring	285
-5.10.6	Sidelink discovery announcement	286
-5.10.6a	Sidelink discovery announcement pool selection	289
-5.10.6b	Sidelink discovery announcement reference carrier selection	289
-5.10.7	Sidelink synchronisation information transmission	290
-5.10.7.1	General	290
-5.10.7.2	Initiation	291
-5.10.7.3	Transmission of SLSS	293
-5.10.7.4	Transmission of MasterInformationBlock-SL or MasterInformationBlock-SL-V2X message	295
-5.10.7.5	Void	296
-5.10.8	Sidelink synchronisation reference	296
-5.10.8.1	General	296
-5.10.8.2	Selection and reselection of synchronisation reference	296
-5.10.8a	Selection and reselection of synchronisation carrier frequency	299
-5.10.9	Sidelink common control information	302
-5.10.9.1	General	302
-5.10.9.2	Actions related to reception of MasterInformationBlock-SL/ MasterInformationBlock-SL-V2X message	302
-5.10.10	Sidelink relay UE operation	302
-5.10.10.1	General	302
-5.10.10.2	AS-conditions for relay related sidelink communication transmission by sidelink relay UE	303
-5.10.10.3	AS-conditions for relay PS related sidelink discovery transmission by sidelink relay UE	303
-5.10.10.4	Sidelink relay UE threshold conditions	303
-5.10.11	Sidelink remote UE operation	303
-5.10.11.1	General	303
-5.10.11.2	AS-conditions for relay related sidelink communication transmission by sidelink remote UE	304
-5.10.11.3	AS-conditions for relay PS related sidelink discovery transmission by sidelink remote UE	304
-5.10.11.4	Selection and reselection of sidelink relay UE	304
-5.10.11.5	Sidelink remote UE threshold conditions	305
-5.10.12	V2X sidelink communication monitoring	305
-5.10.13	V2X sidelink communication transmission	306
-5.10.13.1	Transmission of V2X sidelink communication	306
-5.10.13.1a	Transmission of P2X related V2X sidelink communication	308
-5.10.13.2	V2X sidelink communication transmission pool selection	309
-5.10.13.3	V2X sidelink communication transmission reference cell selection	310
-5.10.14	DFN derivation from GNSS	311
-6	Protocol data units, formats and parameters (tabular & ASN.1)	311
-6.1	General	311
-6.2	RRC messages	313
-6.2.1	General message structure	313
-–	EUTRA-RRC-Definitions	313
-–	BCCH-BCH-Message	313
-–	BCCH-BCH-Message-MBMS	313
-–	BCCH-DL-SCH-Message	314
-–	BCCH-DL-SCH-Message-BR	314
-–	BCCH-DL-SCH-Message-MBMS	314
-–	MCCH-Message	315
-–	PCCH-Message	315
-–	DL-CCCH-Message	315
-–	DL-DCCH-Message	316
-–	UL-CCCH-Message	316
-–	UL-DCCH-Message	317
-–	SC-MCCH-Message	317
-6.2.2	Message definitions	318
-–	CounterCheck	318
-–	CounterCheckResponse	319
-–	CSFBParametersRequestCDMA2000	320
-–	CSFBParametersResponseCDMA2000	320
-–	DLInformationTransfer	321
-–	FailureInformation	322
-–	HandoverFromEUTRAPreparationRequest (CDMA2000)	322
-–	InDeviceCoexIndication	324
-–	InterFreqRSTDMeasurementIndication	326
-–	LoggedMeasurementConfiguration	328
-–	MasterInformationBlock	330
-–	MasterInformationBlock-MBMS	331
-–	MBMSCountingRequest	331
-–	MBMSCountingResponse	332
-–	MBMSInterestIndication	333
-–	MBSFNAreaConfiguration	334
-–	MeasReportAppLayer	335
-–	MeasurementReport	335
-–	MobilityFromEUTRACommand	336
-–	Paging	339
-–	ProximityIndication	340
-–	RNReconfiguration	341
-–	RNReconfigurationComplete	342
-–	RRCConnectionReconfiguration	342
-–	RRCConnectionReconfigurationComplete	351
-–	RRCConnectionReestablishment	352
-–	RRCConnectionReestablishmentComplete	353
-–	RRCConnectionReestablishmentReject	354
-–	RRCConnectionReestablishmentRequest	355
-–	RRCConnectionReject	355
-–	RRCConnectionRelease	356
-–	RRCConnectionRequest	362
-–	RRCConnectionResume	363
-–	RRCConnectionResumeComplete	364
-–	RRCConnectionResumeRequest	365
-–	RRCConnectionSetup	366
-–	RRCConnectionSetupComplete	366
-–	RRCEarlyDataComplete	369
-–	RRCEarlyDataRequest	370
-–	SCGFailureInformation	371
-–	SCGFailureInformationNR	372
-–	SCPTMConfiguration	373
-–	SCPTMConfiguration-BR	373
-–	SecurityModeCommand	374
-–	SecurityModeComplete	374
-–	SecurityModeFailure	375
-–	SidelinkUEInformation	375
-–	SystemInformation	379
-–	SystemInformationBlockType1	380
-–	SystemInformationBlockType1-MBMS	388
-–	UEAssistanceInformation	390
-–	UECapabilityEnquiry	394
-–	UECapabilityInformation	395
-–	UEInformationRequest	396
-–	UEInformationResponse	397
-–	ULHandoverPreparationTransfer (CDMA2000)	403
-–	ULInformationTransfer	404
-–	ULInformationTransferMRDC	405
-–	WLANConnectionStatusReport	405
-6.3	RRC information elements	406
-6.3.1	System information blocks	406
-–	SystemInformationBlockPos	406
-–	SystemInformationBlockType2	406
-–	SystemInformationBlockType3	412
-–	SystemInformationBlockType4	415
-–	SystemInformationBlockType5	416
-–	SystemInformationBlockType6	421
-–	SystemInformationBlockType7	424
-–	SystemInformationBlockType8	425
-–	SystemInformationBlockType9	429
-–	SystemInformationBlockType10	430
-–	SystemInformationBlockType11	430
-–	SystemInformationBlockType12	431
-–	SystemInformationBlockType13	432
-–	SystemInformationBlockType14	432
-–	SystemInformationBlockType15	433
-–	SystemInformationBlockType16	434
-–	SystemInformationBlockType17	435
-–	SystemInformationBlockType18	436
-–	SystemInformationBlockType19	437
-–	SystemInformationBlockType20	440
-–	SystemInformationBlockType21	443
-–	SystemInformationBlockType24	444
-–	SystemInformationBlockType25	447
-–	SystemInformationBlockType26	448
-6.3.2	Radio resource control information elements	449
-–	AntennaInfo	449
-–	AntennaInfoUL	452
-–	AUL-Config	452
-–	CQI-ReportAperiodic	453
-–	CQI-ReportBoth	457
-–	CQI-ReportConfig	458
-–	CQI-ReportPeriodic	461
-–	CQI-ReportPeriodicProcExtId	465
-–	CrossCarrierSchedulingConfig	465
-–	CSI-IM-Config	466
-–	CSI-IM-ConfigId	467
-–	CSI-Process	467
-–	CSI-ProcessId	468
-–	CSI-RS-Config	469
-–	CSI-RS-ConfigBeamformed	470
-–	CSI-RS-ConfigEMIMO	471
-–	CSI-RS-ConfigNonPrecoded	472
-–	CSI-RS-ConfigNZP	473
-–	CSI-RS-ConfigNZPId	475
-–	CSI-RS-ConfigZP	475
-–	CSI-RS-ConfigZPId	475
-–	DataInactivityTimer	476
-–	DMRS-Config	476
-–	DRB-Identity	476
-–	EPDCCH-Config	476
-–	EIMTA-MainConfig	479
-–	LogicalChannelConfig	479
-–	LWA-Configuration	481
-–	LWIP-Configuration	482
-–	MAC-MainConfig	482
-–	P-C-AndCBSR	488
-–	PDCCH-ConfigSCell	489
-–	PDCP-Config	490
-–	PDSCH-Config	494
-–	PDSCH-RE-MappingQCL-ConfigId	498
-–	PerCC-GapIndicationList	498
-–	PHICH-Config	499
-–	PhysicalConfigDedicated	499
-–	P-Max	510
-–	PRACH-Config	511
-–	PresenceAntennaPort1	514
-–	PUCCH-Config	514
-–	PUSCH-Config	519
-–	RACH-ConfigCommon	525
-–	RACH-ConfigDedicated	528
-–	RadioResourceConfigCommon	528
-–	RadioResourceConfigDedicated	534
-–	RCLWI-Configuration	543
-–	RLC-Config	543
-–	RLF-TimersAndConstants	546
-–	RN-SubframeConfig	547
-–	SchedulingRequestConfig	549
-–	SlotOrSubslotPDSCH-Config	550
-–	SlotOrSubslotPUSCH-Config	551
-–	SoundingRS-UL-Config	552
-–	SPDCCH-Config	555
-–	SPS-Config	557
-–	SPUCCH-Config	563
-–	SRS-TPC-PDCCH-Config	564
-–	TDD-Config	565
-–	TimeAlignmentTimer	566
-–	TimeReferenceInfo	566
-–	TPC-PDCCH-Config	567
-–	TunnelConfigLWIP	568
-–	UplinkPowerControl	568
-–	WLAN-Id-List	573
-–	WLAN-MobilityConfig	573
-6.3.3	Security control information elements	575
-–	NextHopChainingCount	575
-–	SecurityAlgorithmConfig	575
-–	ShortMAC-I	575
-6.3.4	Mobility control information elements	576
-–	AdditionalSpectrumEmission	576
-–	AdditionalSpectrumEmissionNR	576
-–	ARFCN-ValueCDMA2000	576
-–	ARFCN-ValueEUTRA	576
-–	ARFCN-ValueGERAN	577
-–	ARFCN-ValueNR	577
-–	ARFCN-ValueUTRA	577
-–	BandclassCDMA2000	577
-–	BandIndicatorGERAN	578
-–	CarrierFreqCDMA2000	578
-–	CarrierFreqGERAN	578
-–	CarrierFreqsGERAN	578
-–	CarrierFreqListMBMS	579
-–	CDMA2000-Type	579
-–	CellIdentity	580
-–	CellIndexList	580
-–	CellReselectionPriority	580
-–	CellSelectionInfoCE	580
-–	CellSelectionInfoCE1	581
-–	CellReselectionSubPriority	581
-–	CSFB-RegistrationParam1XRTT	581
-–	CellGlobalIdEUTRA	582
-–	CellGlobalIdUTRA	583
-–	CellGlobalIdGERAN	583
-–	CellGlobalIdCDMA2000	583
-–	CellSelectionInfoNFreq	584
-–	CSG-Identity	584
-–	FreqBandIndicator	584
-–	FreqBandIndicatorNR	585
-–	MobilityControlInfo	585
-–	MobilityParametersCDMA2000 (1xRTT)	588
-–	MobilityStateParameters	589
-–	MultiBandInfoList	589
-–	MultiFrequencyBandListNR	589
-–	NS-PmaxList	590
-–	NS-PmaxListNR	590
-–	PhysCellId	590
-–	PhysCellIdRange	591
-–	PhysCellIdRangeUTRA-FDDList	591
-–	PhysCellIdCDMA2000	591
-–	PhysCellIdGERAN	592
-–	PhysCellIdNR	592
-–	PhysCellIdUTRA-FDD	592
-–	PhysCellIdUTRA-TDD	592
-–	PLMN-Identity	593
-–	PLMN-IdentityList3	593
-–	PmaxNR	593
-–	PreRegistrationInfoHRPD	594
-–	Q-QualMin	594
-–	Q-RxLevMin	594
-–	Q-OffsetRange	595
-–	Q-OffsetRangeInterRAT	595
-–	ReselectionThreshold	595
-–	ReselectionThresholdQ	595
-–	SCellIndex	595
-–	ServCellIndex	596
-–	SpeedStateScaleFactors	596
-–	SystemInfoListGERAN	596
-–	SystemTimeInfoCDMA2000	597
-–	ThresholdNR	597
-–	TrackingAreaCode	598
-–	T-Reselection	598
-–	T-ReselectionEUTRA-CE	598
-6.3.5	Measurement information elements	598
-–	AllowedMeasBandwidth	598
-–	BT-NameList	599
-–	CSI-RSRP-Range	599
-–	Hysteresis	599
-–	LocationInfo	600
-–	LogMeasResultListBT	601
-–	LogMeasResultListWLAN	601
-–	MaxRS-IndexCellQualNR	601
-–	MBSFN-RSRQ-Range	602
-–	MeasConfig	602
-–	MeasDS-Config	604
-–	MeasGapConfig	605
-–	MeasGapConfigDensePRS	606
-–	MeasGapConfigPerCC-List	607
-–	MeasGapSharingConfig	607
-–	MeasId	608
-–	MeasIdleConfig	608
-–	MeasIdToAddModList	609
-–	MeasObjectCDMA2000	610
-–	MeasObjectEUTRA	610
-–	MeasObjectGERAN	614
-–	MeasObjectId	614
-–	MeasObjectNR	615
-–	MeasObjectToAddModList	616
-–	MeasObjectUTRA	617
-–	MeasObjectWLAN	618
-–	MeasResults	618
-–	MeasResultSCG-FailureMRDC	627
-–	MeasScaleFactor	628
-–	MeasSensing-Config	628
-–	MTC-SSB-NR	628
-–	QuantityConfig	629
-–	ReportConfigEUTRA	630
-–	ReportConfigId	635
-–	ReportConfigInterRAT	636
-–	ReportConfigToAddModList	639
-–	ReportInterval	639
-–	RS-IndexNR	640
-–	RSRP-Range	640
-–	RSRP-RangeNR	640
-–	RSRQ-Range	641
-–	RSRQ-RangeNR	641
-–	RSRQ-Type	641
-–	RS-SINR-Range	642
-–	RS-SINR-RangeNR	642
-–	RSSI-Range-r13	642
-–	SS-RSSI-Measurement	642
-–	SSB-ToMeasure	643
-–	TimeToTrigger	643
-–	UL-DelayConfig	643
-–	WLAN-CarrierInfo	644
-–	WLAN-NameList	644
-–	WLAN-RSSI-Range	645
-–	WLAN-RTT	645
-–	 WLAN-Status	645
-–	WLAN-SuspendConfig	646
-6.3.6	Other information elements	646
-–	AbsoluteTimeInfo	646
-–	AMF-Identifier	646
-–	AreaConfiguration	647
-–	C-RNTI	647
-–	DedicatedInfoCDMA2000	648
-–	DedicatedInfoNAS	648
-–	FilterCoefficient	648
-–	FlightPathInfoReportConfig	648
-–	GNSS-ID	649
-–	I-RNTI	649
-–	LoggingDuration	649
-–	LoggingInterval	649
-–	MeasSubframePattern	650
-–	MMEC	650
-–	NeighCellConfig	650
-–	NG-5G-S-TMSI	651
-–	OtherConfig	651
-–	RAN-AreaCode	654
-–	RAND-CDMA2000 (1xRTT)	654
-–	RAT-Type	654
-–	ResumeIdentity	654
-–	RRC-TransactionIdentifier	654
-–	SBAS-ID	655
-–	ShortI-RNTI	655
-–	S-NSSAI	655
-–	S-TMSI	655
-–	TraceReference	656
-–	UE-CapabilityRAT-ContainerList	656
-–	UE-EUTRA-Capability	657
-–	UE-RadioPagingInfo	718
-–	UE-TimersAndConstants	718
-–	VisitedCellInfoList	719
-–	WLAN-OffloadConfig	720
-6.3.7	MBMS information elements	721
-–	MBMS-NotificationConfig	722
-–	MBMS-ServiceList	722
-–	MBSFN-AreaId	722
-–	MBSFN-AreaInfoList	723
-–	MBSFN-SubframeConfig	724
-–	PMCH-InfoList	725
-6.3.7a	SC-PTM information elements	727
-–	SC-MTCH-InfoList	727
-–	SC-MTCH-InfoList-BR	728
-–	SCPTM-NeighbourCellList	730
-6.3.8	Sidelink information elements	731
-–	SL-AnchorCarrierFreqList-V2X	731
-–	SL-CBR-CommonTxConfigList	731
-–	SL-CBR-PPPP-TxConfigList	732
-–	SL-CommConfig	733
-–	SL-CommResourcePool	734
-–	SL-CommTxPoolSensingConfig	738
-–	SL-CP-Len	739
-–	SL-DiscConfig	739
-–	SL-DiscResourcePool	742
-–	SL-DiscSysInfoReport	743
-–	SL-DiscTxPowerInfo	744
-–	SL-GapConfig	744
-–	SL-GapRequest	745
-–	SL-HoppingConfig	745
-–	SL-InterFreqInfoListV2X	746
-–	SL-V2X-UE-ConfigList	747
-–	SL-OffsetIndicator	748
-–	SL-P2X-ResourceSelectionConfig	749
-–	SL-PeriodComm	749
-–	SL-Priority	749
-–	SL-PSSCH-TxConfigList	749
-–	SL-RestrictResourceReservationPeriodList	751
-–	SLSSID	751
-–	SL-SyncAllowed	751
-–	SL-SyncConfig	752
-–	SL-TF-ResourceConfig	754
-–	SL-TxPower	755
-–	SL-TypeTxSync	755
-–	SL-ThresPSSCH-RSRP-List	755
-–	SL-TxParameters	756
-–	SL-TxPoolIdentity	756
-–	SL-TxPoolToReleaseList	757
-–	SL-V2X-ConfigDedicated	757
-–	SL-V2X-FreqSelectionConfigList	759
-–	SL-V2X-PacketDuplicationConfig	759
-–	SL-V2X-SyncFreqList	760
-–	SL-ZoneConfig	760
-6.4	RRC multiplicity and type constraint values	760
-–	Multiplicity and type constraint definitions	760
-–	End of EUTRA-RRC-Definitions	764
-6.5	PC5 RRC messages	764
-6.5.1	General message structure	764
-–	PC5-RRC-Definitions	764
-–	SBCCH-SL-BCH-Message	764
-–	SBCCH-SL-BCH-Message-V2X	765
-6.5.2	Message definitions	765
-–	MasterInformationBlock-SL	765
-–	MasterInformationBlock-SL-V2X	766
-–	End of PC5-RRC-Definitions	766
-6.6	Direct Indication Information	766
-6.6a	Direct Indication FeMBMS	767
-6.7	NB-IoT RRC messages	767
-6.7.1	General NB-IoT message structure	767
-–	BCCH-BCH-Message-NB	768
-–	BCCH-BCH-Message-TDD-NB	768
-–	BCCH-DL-SCH-Message-NB	769
-–	PCCH-Message-NB	769
-–	DL-CCCH-Message-NB	769
-–	DL-DCCH-Message-NB	770
-–	UL-CCCH-Message-NB	770
-–	SC-MCCH-Message-NB	770
-–	UL-DCCH-Message-NB	771
-6.7.2	NB-IoT Message definitions	771
-–	DLInformationTransfer-NB	771
-–	MasterInformationBlock-NB	772
-–	MasterInformationBlock-TDD-NB	773
-–	Paging-NB	776
-–	RRCConnectionReconfiguration-NB	777
-–	RRCConnectionReconfigurationComplete-NB	777
-–	RRCConnectionReestablishment-NB	778
-–	RRCConnectionReestablishmentComplete-NB	779
-–	RRCConnectionReestablishmentRequest-NB	779
-–	RRCConnectionReject-NB	780
-–	RRCConnectionRelease-NB	781
-–	RRCConnectionRequest-NB	783
-–	RRCConnectionResume-NB	783
-–	RRCConnectionResumeComplete-NB	784
-–	RRCConnectionResumeRequest-NB	785
-–	RRCConnectionSetup-NB	786
-–	RRCConnectionSetupComplete-NB	786
-–	RRCEarlyDataComplete-NB	787
-–	RRCEarlyDataRequest-NB	788
-–	SCPTMConfiguration-NB	788
-–	SystemInformation-NB	789
-–	SystemInformationBlockType1-NB	789
-–	UECapabilityEnquiry-NB	793
-–	UECapabilityInformation-NB	794
-–	ULInformationTransfer-NB	795
-6.7.3	NB-IoT information elements	795
-6.7.3.1	NB-IoT System information blocks	795
-–	SystemInformationBlockType2-NB	795
-–	SystemInformationBlockType3-NB	796
-–	SystemInformationBlockType4-NB	798
-–	SystemInformationBlockType5-NB	799
-–	SystemInformationBlockType14-NB	801
-–	SystemInformationBlockType15-NB	801
-–	SystemInformationBlockType16-NB	802
-–	SystemInformationBlockType20-NB	802
-–	SystemInformationBlockType22-NB	804
-–	SystemInformationBlockType23-NB	807
-6.7.3.2	NB-IoT Radio resource control information elements	808
-–	CarrierConfigDedicated-NB	808
-–	CarrierFreq-NB	810
-–	DL-Bitmap-NB	811
-–	DL-CarrierConfigCommon-NB	811
-–	DL-GapConfig-NB	813
-–	LogicalChannelConfig-NB	813
-–	MAC-MainConfig-NB	814
-–	NPDCCH-ConfigDedicated-NB	815
-–	NPDSCH-ConfigCommon-NB	816
-–	NPRACH-ConfigSIB-NB	816
-–	NPUSCH-Config-NB	822
-–	PDCP-Config-NB	823
-–	PhysicalConfigDedicated-NB	824
-–	RACH-ConfigCommon-NB	825
-–	RadioResourceConfigCommonSIB-NB	826
-–	RadioResourceConfigDedicated-NB	827
-–	RLC-Config-NB	829
-–	RLF-TimersAndConstants-NB	829
-–	SchedulingRequestConfig-NB	830
-–	UplinkPowerControl-NB	832
-–	WUS-Config-NB	833
-6.7.3.3	NB-IoT Security control information elements	834
-6.7.3.4	NB-IoT Mobility control information elements	834
-–	AdditionalBandInfoList-NB	834
-–	FreqBandIndicator-NB	834
-–	MultiBandInfoList-NB	834
-–	NS-PmaxList-NB	835
-–	T-Reselection-NB	835
-6.7.3.5	NB-IoT Measurement information elements	835
-–	CQI-NPDCCH-NB	835
-–	CQI-NPDCCH-Short-NB	836
-–	MeasResultServCell-NB	836
-–	NSSS-RRM-Config-NB	837
-6.7.3.6	NB-IoT Other information elements	837
-–	EstablishmentCause-NB	837
-–	UE-Capability-NB	837
-–	UE-RadioPagingInfo-NB	841
-–	UE-TimersAndConstants-NB	842
-6.7.3.7	NB-IoT MBMS information elements	843
-6.7.3.7a	NB-IoT SC-PTM information elements	843
-–	SC-MTCH-InfoList-NB	843
-–	SCPTM-NeighbourCellList-NB	844
-6.7.4	NB-IoT RRC multiplicity and type constraint values	845
-–	Multiplicity and type constraint definitions	845
-–	End of NBIOT-RRC-Definitions	845
-6.7.5	Direct Indication Information	845
-7	Variables and constants	846
-7.1	UE variables	846
-–	EUTRA-UE-Variables	846
-–	VarConnEstFailReport	847
-–	VarLogMeasConfig	847
-–	VarLogMeasReport	848
-–	VarMeasConfig	848
-–	VarMeasIdleConfig	849
-–	VarMeasIdleReport	849
-–	VarMeasReportList	849
-–	VarMobilityHistoryReport	850
-–	VarPendingRnaUpdate	850
-–	VarRLF-Report	850
-–	VarShortINACTIVE-MAC-Input	850
-–	VarShortMAC-Input	851
-–	VarShortResumeMAC-Input	851
-–	VarWLAN-MobilityConfig	852
-–	VarWLAN-Status	852
-–	Multiplicity and type constraint definitions	852
-–	End of EUTRA-UE-Variables	853
-7.1a	NB-IoT UE variables	853
-–	NBIOT-UE-Variables	853
-–	End of NBIOT-UE-Variables	853
-7.2	Counters	853
-7.3	Timers	854
-7.3.1	Timers (Informative)	854
-7.3.2	Timer handling	858
-7.4	Constants	858
-8	Protocol data unit abstract syntax	858
-8.1	General	858
-8.2	Structure of encoded RRC messages	859
-8.3	Basic production	859
-8.4	Extension	859
-8.5	Padding	859
-9	Specified and default radio configurations	860
-9.1	Specified configurations	860
-9.1.1	Logical channel configurations	860
-9.1.1.1	BCCH configuration	860
-9.1.1.2	CCCH configuration	860
-9.1.1.3	PCCH configuration	861
-9.1.1.4	MCCH and MTCH configuration	861
-9.1.1.5	SBCCH configuration	861
-9.1.1.6	STCH configuration	861
-9.1.1.7	SC-MCCH and SC-MTCH configuration	862
-9.1.1.8	BR-BCCH configuration	862
-9.1.2	SRB configurations	862
-9.1.2.1	SRB1	862
-9.1.2.1a	SRB1bis	863
-9.1.2.2	SRB2	863
-9.1.2.3	SRB4	863
-9.2	Default radio configurations	863
-9.2.1	SRB configurations	864
-9.2.1.1	SRB1	864
-9.2.1.2	SRB2	864
-9.2.2	Default MAC main configuration	865
-9.2.3	Default semi-persistent scheduling configuration	865
-9.2.4	Default physical channel configuration	865
-9.2.5	Default values timers and constants	866
-9.3	Sidelink pre-configured parameters	867
-9.3.1	Specified parameters	867
-9.3.2	Pre-configurable parameters	867
-–	SL-Preconfiguration	868
-–	SL-V2X-Preconfiguration	870
-10	Radio information related interactions between network nodes	874
-10.1	General	874
-10.2	Inter-node RRC messages	874
-10.2.1	General	874
-–	EUTRA-InterNodeDefinitions	874
-10.2.2	Message definitions	875
-–	HandoverCommand	875
-–	HandoverPreparationInformation	876
-–	SCG-Config	878
-–	SCG-ConfigInfo	879
-–	UEPagingCoverageInformation	882
-–	UERadioAccessCapabilityInformation	883
-–	UERadioPagingInformation	883
-10.3	Inter-node RRC information element definitions	884
-–	AS-Config	884
-–	AS-Context	886
-–	ReestablishmentInfo	887
-–	RRM-Config	888
-10.4	Inter-node RRC multiplicity and type constraint values	889
-–	Multiplicity and type constraints definitions	889
-–	End of EUTRA-InterNodeDefinitions	889
-10.5	Mandatory information in AS-Config	889
-10.6	Inter-node NB-IoT messages	890
-10.6.1	General	890
-–	NB-IoT-InterNodeDefinitions	890
-10.6.2	Message definitions	890
-–	HandoverPreparationInformation-NB	890
-–	UEPagingCoverageInformation-NB	891
-–	UERadioAccessCapabilityInformation-NB	892
-–	UERadioPagingInformation-NB	892
-10.7	Inter-node NB-IoT RRC information element definitions	893
-–	AS-Config-NB	893
-–	AS-Context-NB	893
-–	ReestablishmentInfo-NB	894
-–	RRM-Config-NB	894
-10.8	Inter-node RRC multiplicity and type constraint values	895
-–	Multiplicity and type constraints definitions	895
-–	End of NB-IoT-InterNodeDefinitions	895
-10.9	Mandatory information in AS-Config-NB	895
-11	UE capability related constraints and performance requirements	895
-11.1	UE capability related constraints	895
-11.2	Processing delay requirements for RRC procedures	896
-11.3	Void	899
-Annex A (informative):	Guidelines, mainly on use of ASN.1	899
-A.1	Introduction	899
-A.2	Procedural specification	899
-A.2.1	General principles	899
-A.2.2	More detailed aspects	900
-A.3	PDU specification	900
-A.3.1	General principles	900
-A.3.1.1	ASN.1 sections	900
-A.3.1.2	ASN.1 identifier naming conventions	900
-A.3.1.3	Text references using ASN.1 identifiers	902
-A.3.2	High-level message structure	902
-A.3.3	Message definition	903
-A.3.4	Information elements	904
-A.3.5	Fields with optional presence	905
-A.3.6	Fields with conditional presence	906
-A.3.7	Guidelines on use of lists with elements of SEQUENCE type	906
-A.4	Extension of the PDU specifications	907
-A.4.1	General principles to ensure compatibility	907
-A.4.2	Critical extension of messages and fields	907
-A.4.3	Non-critical extension of messages	909
-A.4.3.1	General principles	909
-A.4.3.2	Further guidelines	909
-A.4.3.3	Typical example of evolution of IE with local extensions	910
-A.4.3.4	Typical examples of non critical extension at the end of a message	911
-A.4.3.5	Examples of non-critical extensions not placed at the default extension location	912
-–	ParentIE-WithEM	912
-–	ChildIE1-WithoutEM	912
-–	ChildIE2-WithoutEM	913
-A.5	Guidelines regarding inclusion of transaction identifiers in RRC messages	914
-A.6	Protection of RRC messages (informative)	914
-A.7	Miscellaneous	916
-Annex B (normative):	Release 8 and 9 AS feature handling	917
-B.1	Feature group indicators	917
-B.2	CSG support	927
-Annex C (normative):	Release 10 AS feature handling	928
-C.1	Feature group indicators	928
-Annex D (informative):	Descriptive background information	932
-D.1	Signalling of Multiple Frequency Band Indicators (Multiple FBI)	932
-D.1.1	Mapping between frequency band indicator and multiple frequency band indicator	932
-D.1.2	Mapping between inter-frequency neighbour list and multiple frequency band indicator	932
-D.1.3	Mapping between UTRA FDD frequency list and multiple frequency band indicator	933
-Annex E (normative):	TDD/FDD differentiation of FGIs/capabilities in TDD-FDD CA	935
-Annex F (normative):	UE requirements on ASN.1 comprehension	936
-Annex G (normative):	List of CRs Containing Early Implementable Features and Corrections	937
-Annex H (informative):	Change history	938
+5.8.4.2	Initiation	266
+5.8.4.3	Reception of the MBMSCountingRequest message by the UE	266
+5.8.5	MBMS interest indication	267
+5.8.5.1	General	267
+5.8.5.2	Initiation	267
+5.8.5.3	Determine MBMS frequencies of interest	268
+5.8.5.3a	Determine MBMS services of interest	269
+5.8.5.4	Actions related to transmission of MBMSInterestIndication message	269
+5.8a	SC-PTM	270
+5.8a.1	Introduction	270
+5.8a.1.1	General	270
+5.8a.1.2	SC-MCCH scheduling	270
+5.8a.1.3	SC-MCCH information validity and notification of changes	270
+5.8a.1.4	Procedures	271
+5.8a.2	SC-MCCH information acquisition	271
+5.8a.2.1	General	271
+5.8a.2.2	Initiation	271
+5.8a.2.3	SC-MCCH information acquisition by the UE	271
+5.8a.2.4	Actions upon reception of the SCPTMConfiguration message	272
+5.8a.3	SC-PTM radio bearer configuration	272
+5.8a.3.1	General	272
+5.8a.3.2	Initiation	272
+5.8a.3.3	SC-MRB establishment	272
+5.8a.3.4	SC-MRB release	273
+5.9	RN procedures	273
+5.9.1	RN reconfiguration	273
+5.9.1.1	General	273
+5.9.1.2	Initiation	273
+5.9.1.3	Reception of the RNReconfiguration by the RN	273
+5.10	Sidelink	274
+5.10.1	Introduction	274
+5.10.1a	Conditions for sidelink communication operation	274
+5.10.1b	Conditions for PS related sidelink discovery operation	275
+5.10.1c	Conditions for non-PS related sidelink discovery operation	275
+5.10.1d	Conditions for V2X sidelink communication operation	275
+5.10.2	Sidelink UE information	275
+5.10.2.1	General	275
+5.10.2.2	Initiation	276
+5.10.2.3	Actions related to transmission of SidelinkUEInformation message	281
+5.10.3	Sidelink communication monitoring	283
+5.10.4	Sidelink communication transmission	285
+5.10.5	Sidelink discovery monitoring	286
+5.10.6	Sidelink discovery announcement	287
+5.10.6a	Sidelink discovery announcement pool selection	290
+5.10.6b	Sidelink discovery announcement reference carrier selection	290
+5.10.7	Sidelink synchronisation information transmission	291
+5.10.7.1	General	291
+5.10.7.2	Initiation	292
+5.10.7.3	Transmission of SLSS	294
+5.10.7.4	Transmission of MasterInformationBlock-SL or MasterInformationBlock-SL-V2X message	296
+5.10.7.5	Void	297
+5.10.8	Sidelink synchronisation reference	297
+5.10.8.1	General	297
+5.10.8.2	Selection and reselection of synchronisation reference	297
+5.10.8a	Selection and reselection of synchronisation carrier frequency	300
+5.10.9	Sidelink common control information	303
+5.10.9.1	General	303
+5.10.9.2	Actions related to reception of MasterInformationBlock-SL/ MasterInformationBlock-SL-V2X message	303
+5.10.10	Sidelink relay UE operation	303
+5.10.10.1	General	303
+5.10.10.2	AS-conditions for relay related sidelink communication transmission by sidelink relay UE	304
+5.10.10.3	AS-conditions for relay PS related sidelink discovery transmission by sidelink relay UE	304
+5.10.10.4	Sidelink relay UE threshold conditions	304
+5.10.11	Sidelink remote UE operation	304
+5.10.11.1	General	304
+5.10.11.2	AS-conditions for relay related sidelink communication transmission by sidelink remote UE	305
+5.10.11.3	AS-conditions for relay PS related sidelink discovery transmission by sidelink remote UE	305
+5.10.11.4	Selection and reselection of sidelink relay UE	305
+5.10.11.5	Sidelink remote UE threshold conditions	306
+5.10.12	V2X sidelink communication monitoring	306
+5.10.13	V2X sidelink communication transmission	307
+5.10.13.1	Transmission of V2X sidelink communication	307
+5.10.13.1a	Transmission of P2X related V2X sidelink communication	309
+5.10.13.2	V2X sidelink communication transmission pool selection	310
+5.10.13.3	V2X sidelink communication transmission reference cell selection	311
+5.10.14	DFN derivation from GNSS	312
+6	Protocol data units, formats and parameters (tabular & ASN.1)	312
+6.1	General	312
+6.2	RRC messages	314
+6.2.1	General message structure	314
+–	EUTRA-RRC-Definitions	314
+–	BCCH-BCH-Message	314
+–	BCCH-BCH-Message-MBMS	314
+–	BCCH-DL-SCH-Message	315
+–	BCCH-DL-SCH-Message-BR	315
+–	BCCH-DL-SCH-Message-MBMS	315
+–	MCCH-Message	316
+–	PCCH-Message	316
+–	DL-CCCH-Message	316
+–	DL-DCCH-Message	317
+–	UL-CCCH-Message	317
+–	UL-DCCH-Message	318
+–	SC-MCCH-Message	318
+6.2.2	Message definitions	319
+–	CounterCheck	319
+–	CounterCheckResponse	320
+–	CSFBParametersRequestCDMA2000	321
+–	CSFBParametersResponseCDMA2000	321
+–	DLInformationTransfer	322
+–	FailureInformation	323
+–	HandoverFromEUTRAPreparationRequest (CDMA2000)	323
+–	InDeviceCoexIndication	325
+–	InterFreqRSTDMeasurementIndication	327
+–	LoggedMeasurementConfiguration	329
+–	MasterInformationBlock	331
+–	MasterInformationBlock-MBMS	332
+–	MBMSCountingRequest	332
+–	MBMSCountingResponse	333
+–	MBMSInterestIndication	334
+–	MBSFNAreaConfiguration	335
+–	MeasReportAppLayer	336
+–	MeasurementReport	336
+–	MobilityFromEUTRACommand	337
+–	Paging	340
+–	ProximityIndication	341
+–	RNReconfiguration	342
+–	RNReconfigurationComplete	343
+–	RRCConnectionReconfiguration	343
+–	RRCConnectionReconfigurationComplete	352
+–	RRCConnectionReestablishment	353
+–	RRCConnectionReestablishmentComplete	354
+–	RRCConnectionReestablishmentReject	355
+–	RRCConnectionReestablishmentRequest	356
+–	RRCConnectionReject	356
+–	RRCConnectionRelease	357
+–	RRCConnectionRequest	363
+–	RRCConnectionResume	364
+–	RRCConnectionResumeComplete	365
+–	RRCConnectionResumeRequest	366
+–	RRCConnectionSetup	367
+–	RRCConnectionSetupComplete	368
+–	RRCEarlyDataComplete	370
+–	RRCEarlyDataRequest	371
+–	SCGFailureInformation	372
+–	SCGFailureInformationNR	373
+–	SCPTMConfiguration	374
+–	SCPTMConfiguration-BR	374
+–	SecurityModeCommand	375
+–	SecurityModeComplete	375
+–	SecurityModeFailure	376
+–	SidelinkUEInformation	376
+–	SystemInformation	380
+–	SystemInformationBlockType1	381
+–	SystemInformationBlockType1-MBMS	389
+–	UEAssistanceInformation	391
+–	UECapabilityEnquiry	395
+–	UECapabilityInformation	396
+–	UEInformationRequest	397
+–	UEInformationResponse	398
+–	ULHandoverPreparationTransfer (CDMA2000)	404
+–	ULInformationTransfer	405
+–	ULInformationTransferMRDC	406
+–	WLANConnectionStatusReport	406
+6.3	RRC information elements	407
+6.3.1	System information blocks	407
+–	SystemInformationBlockPos	407
+–	SystemInformationBlockType2	407
+–	SystemInformationBlockType3	413
+–	SystemInformationBlockType4	416
+–	SystemInformationBlockType5	417
+–	SystemInformationBlockType6	422
+–	SystemInformationBlockType7	425
+–	SystemInformationBlockType8	426
+–	SystemInformationBlockType9	430
+–	SystemInformationBlockType10	431
+–	SystemInformationBlockType11	431
+–	SystemInformationBlockType12	432
+–	SystemInformationBlockType13	433
+–	SystemInformationBlockType14	433
+–	SystemInformationBlockType15	434
+–	SystemInformationBlockType16	435
+–	SystemInformationBlockType17	436
+–	SystemInformationBlockType18	437
+–	SystemInformationBlockType19	438
+–	SystemInformationBlockType20	441
+–	SystemInformationBlockType21	444
+–	SystemInformationBlockType24	445
+–	SystemInformationBlockType25	448
+–	SystemInformationBlockType26	449
+6.3.2	Radio resource control information elements	450
+–	AntennaInfo	450
+–	AntennaInfoUL	453
+–	AUL-Config	453
+–	CQI-ReportAperiodic	454
+–	CQI-ReportBoth	458
+–	CQI-ReportConfig	459
+–	CQI-ReportPeriodic	462
+–	CQI-ReportPeriodicProcExtId	466
+–	CrossCarrierSchedulingConfig	466
+–	CSI-IM-Config	467
+–	CSI-IM-ConfigId	468
+–	CSI-Process	468
+–	CSI-ProcessId	469
+–	CSI-RS-Config	470
+–	CSI-RS-ConfigBeamformed	471
+–	CSI-RS-ConfigEMIMO	472
+–	CSI-RS-ConfigNonPrecoded	473
+–	CSI-RS-ConfigNZP	474
+–	CSI-RS-ConfigNZPId	476
+–	CSI-RS-ConfigZP	476
+–	CSI-RS-ConfigZPId	476
+–	DataInactivityTimer	477
+–	DMRS-Config	477
+–	DRB-Identity	477
+–	EPDCCH-Config	477
+–	EIMTA-MainConfig	480
+–	LogicalChannelConfig	480
+–	LWA-Configuration	482
+–	LWIP-Configuration	483
+–	MAC-MainConfig	483
+–	P-C-AndCBSR	489
+–	PDCCH-ConfigSCell	490
+–	PDCP-Config	491
+–	PDSCH-Config	495
+–	PDSCH-RE-MappingQCL-ConfigId	499
+–	PerCC-GapIndicationList	499
+–	PHICH-Config	500
+–	PhysicalConfigDedicated	500
+–	P-Max	511
+–	PRACH-Config	512
+–	PresenceAntennaPort1	515
+–	PUCCH-Config	515
+–	PUSCH-Config	520
+–	RACH-ConfigCommon	526
+–	RACH-ConfigDedicated	529
+–	RadioResourceConfigCommon	529
+–	RadioResourceConfigDedicated	535
+–	RCLWI-Configuration	544
+–	RLC-Config	544
+–	RLF-TimersAndConstants	547
+–	RN-SubframeConfig	548
+–	RSS-Config	550
+–	SchedulingRequestConfig	550
+–	SlotOrSubslotPDSCH-Config	551
+–	SlotOrSubslotPUSCH-Config	552
+–	SoundingRS-UL-Config	553
+–	SPDCCH-Config	556
+–	SPS-Config	558
+–	SPUCCH-Config	564
+–	SRS-TPC-PDCCH-Config	565
+–	TDD-Config	566
+–	TimeAlignmentTimer	567
+–	TimeReferenceInfo	567
+–	TPC-PDCCH-Config	568
+–	TunnelConfigLWIP	569
+–	UplinkPowerControl	569
+–	WLAN-Id-List	574
+–	WLAN-MobilityConfig	574
+–	WUS-Config	575
+6.3.3	Security control information elements	576
+–	NextHopChainingCount	576
+–	SecurityAlgorithmConfig	576
+–	ShortMAC-I	576
+6.3.4	Mobility control information elements	577
+–	AdditionalSpectrumEmission	577
+–	AdditionalSpectrumEmissionNR	577
+–	ARFCN-ValueCDMA2000	577
+–	ARFCN-ValueEUTRA	577
+–	ARFCN-ValueGERAN	578
+–	ARFCN-ValueNR	578
+–	ARFCN-ValueUTRA	578
+–	BandclassCDMA2000	578
+–	BandIndicatorGERAN	579
+–	CarrierFreqCDMA2000	579
+–	CarrierFreqGERAN	579
+–	CarrierFreqsGERAN	579
+–	CarrierFreqListMBMS	580
+–	CDMA2000-Type	580
+–	CellIdentity	581
+–	CellIndexList	581
+–	CellReselectionPriority	581
+–	CellSelectionInfoCE	581
+–	CellSelectionInfoCE1	582
+–	CellReselectionSubPriority	582
+–	CSFB-RegistrationParam1XRTT	582
+–	CellGlobalIdEUTRA	583
+–	CellGlobalIdUTRA	584
+–	CellGlobalIdGERAN	584
+–	CellGlobalIdCDMA2000	584
+–	CellSelectionInfoNFreq	585
+–	CSG-Identity	585
+–	FreqBandIndicator	585
+–	FreqBandIndicatorNR	586
+–	MobilityControlInfo	586
+–	MobilityParametersCDMA2000 (1xRTT)	589
+–	MobilityStateParameters	590
+–	MultiBandInfoList	590
+–	MultiFrequencyBandListNR	590
+–	NS-PmaxList	591
+–	NS-PmaxListNR	591
+–	PhysCellId	591
+–	PhysCellIdRange	592
+–	PhysCellIdRangeUTRA-FDDList	592
+–	PhysCellIdCDMA2000	592
+–	PhysCellIdGERAN	593
+–	PhysCellIdNR	593
+–	PhysCellIdUTRA-FDD	593
+–	PhysCellIdUTRA-TDD	593
+–	PLMN-Identity	594
+–	PLMN-IdentityList3	594
+–	PmaxNR	594
+–	PreRegistrationInfoHRPD	595
+–	Q-QualMin	595
+–	Q-RxLevMin	595
+–	Q-OffsetRange	596
+–	Q-OffsetRangeInterRAT	596
+–	ReselectionThreshold	596
+–	ReselectionThresholdQ	596
+–	SCellIndex	596
+–	ServCellIndex	597
+–	SpeedStateScaleFactors	597
+–	SystemInfoListGERAN	597
+–	SystemTimeInfoCDMA2000	598
+–	ThresholdNR	598
+–	TrackingAreaCode	599
+–	T-Reselection	599
+–	T-ReselectionEUTRA-CE	599
+6.3.5	Measurement information elements	599
+–	AllowedMeasBandwidth	599
+–	BT-NameList	600
+–	CSI-RSRP-Range	600
+–	Hysteresis	600
+–	LocationInfo	601
+–	LogMeasResultListBT	602
+–	LogMeasResultListWLAN	602
+–	MaxRS-IndexCellQualNR	602
+–	MBSFN-RSRQ-Range	603
+–	MeasConfig	603
+–	MeasDS-Config	605
+–	MeasGapConfig	606
+–	MeasGapConfigDensePRS	607
+–	MeasGapConfigPerCC-List	608
+–	MeasGapSharingConfig	608
+–	MeasId	609
+–	MeasIdleConfig	609
+–	MeasIdToAddModList	610
+–	MeasObjectCDMA2000	611
+–	MeasObjectEUTRA	611
+–	MeasObjectGERAN	615
+–	MeasObjectId	615
+–	MeasObjectNR	616
+–	MeasObjectToAddModList	617
+–	MeasObjectUTRA	618
+–	MeasObjectWLAN	619
+–	MeasResults	619
+–	MeasResultCellSFTD	627
+–	MeasResultSCG-FailureMRDC	628
+–	MeasResultSSTD	628
+–	MeasScaleFactor	629
+–	MeasSensing-Config	629
+–	MTC-SSB-NR	629
+–	QuantityConfig	630
+–	ReportConfigEUTRA	631
+–	ReportConfigId	636
+–	ReportConfigInterRAT	637
+–	ReportConfigToAddModList	640
+–	ReportInterval	640
+–	RS-IndexNR	641
+–	RSRP-Range	641
+–	RSRP-RangeNR	641
+–	RSRQ-Range	642
+–	RSRQ-RangeNR	642
+–	RSRQ-Type	642
+–	RS-SINR-Range	643
+–	RS-SINR-RangeNR	643
+–	RSSI-Range-r13	643
+–	SS-RSSI-Measurement	643
+–	SSB-ToMeasure	644
+–	TimeToTrigger	644
+–	UL-DelayConfig	644
+–	WLAN-CarrierInfo	645
+–	WLAN-NameList	645
+–	WLAN-RSSI-Range	646
+–	WLAN-RTT	646
+–	WLAN-Status	646
+–	WLAN-SuspendConfig	647
+6.3.6	Other information elements	647
+–	AbsoluteTimeInfo	647
+–	AMF-Identifier	647
+–	AreaConfiguration	648
+–	BandCombinationList	648
+–	C-RNTI	648
+–	DedicatedInfoCDMA2000	649
+–	DedicatedInfoNAS	649
+–	FilterCoefficient	649
+–	FlightPathInfoReportConfig	649
+–	GNSS-ID	650
+–	I-RNTI	650
+–	LoggingDuration	650
+–	LoggingInterval	650
+–	MeasSubframePattern	651
+–	MMEC	651
+–	NeighCellConfig	651
+–	NG-5G-S-TMSI	652
+–	OtherConfig	652
+–	RAN-AreaCode	655
+–	RAND-CDMA2000 (1xRTT)	655
+–	RAT-Type	655
+–	ResumeIdentity	655
+–	RRC-TransactionIdentifier	655
+–	SBAS-ID	656
+–	ShortI-RNTI	656
+–	S-NSSAI	656
+–	S-TMSI	656
+–	TraceReference	657
+–	UE-CapabilityRAT-ContainerList	657
+–	UE-EUTRA-Capability	658
+–	UE-RadioPagingInfo	719
+–	UE-TimersAndConstants	720
+–	VisitedCellInfoList	721
+–	WLAN-OffloadConfig	721
+6.3.7	MBMS information elements	723
+–	MBMS-NotificationConfig	724
+–	MBMS-ServiceList	724
+–	MBSFN-AreaId	724
+–	MBSFN-AreaInfoList	725
+–	MBSFN-SubframeConfig	726
+–	PMCH-InfoList	727
+6.3.7a	SC-PTM information elements	729
+–	SC-MTCH-InfoList	729
+–	SC-MTCH-InfoList-BR	730
+–	SCPTM-NeighbourCellList	732
+6.3.8	Sidelink information elements	733
+–	SL-AnchorCarrierFreqList-V2X	733
+–	SL-CBR-CommonTxConfigList	733
+–	SL-CBR-PPPP-TxConfigList	734
+–	SL-CommConfig	735
+–	SL-CommResourcePool	736
+–	SL-CommTxPoolSensingConfig	740
+–	SL-CP-Len	741
+–	SL-DiscConfig	741
+–	SL-DiscResourcePool	744
+–	SL-DiscSysInfoReport	745
+–	SL-DiscTxPowerInfo	746
+–	SL-GapConfig	746
+–	SL-GapRequest	747
+–	SL-HoppingConfig	747
+–	SL-InterFreqInfoListV2X	748
+–	SL-V2X-UE-ConfigList	749
+–	SL-OffsetIndicator	750
+–	SL-P2X-ResourceSelectionConfig	751
+–	SL-PeriodComm	751
+–	SL-Priority	751
+–	SL-PSSCH-TxConfigList	751
+–	SL-Reliability	752
+–	SL-RestrictResourceReservationPeriodList	753
+–	SLSSID	753
+–	SL-SyncAllowed	753
+–	SL-SyncConfig	754
+–	SL-TF-ResourceConfig	756
+–	SL-TxPower	757
+–	SL-TypeTxSync	757
+–	SL-ThresPSSCH-RSRP-List	757
+–	SL-TxParameters	758
+–	SL-TxPoolIdentity	758
+–	SL-TxPoolToReleaseList	759
+–	SL-V2X-ConfigDedicated	759
+–	SL-V2X-FreqSelectionConfigList	761
+–	SL-V2X-PacketDuplicationConfig	761
+–	SL-V2X-SyncFreqList	762
+–	SL-ZoneConfig	762
+6.4	RRC multiplicity and type constraint values	762
+–	Multiplicity and type constraint definitions	762
+–	End of EUTRA-RRC-Definitions	766
+6.5	PC5 RRC messages	766
+6.5.1	General message structure	766
+–	PC5-RRC-Definitions	766
+–	SBCCH-SL-BCH-Message	766
+–	SBCCH-SL-BCH-Message-V2X	767
+6.5.2	Message definitions	767
+–	MasterInformationBlock-SL	767
+–	MasterInformationBlock-SL-V2X	768
+–	End of PC5-RRC-Definitions	768
+6.6	Direct Indication Information	768
+6.6a	Direct Indication FeMBMS	769
+6.7	NB-IoT RRC messages	769
+6.7.1	General NB-IoT message structure	769
+–	BCCH-BCH-Message-NB	770
+–	BCCH-BCH-Message-TDD-NB	770
+–	BCCH-DL-SCH-Message-NB	771
+–	PCCH-Message-NB	771
+–	DL-CCCH-Message-NB	771
+–	DL-DCCH-Message-NB	772
+–	UL-CCCH-Message-NB	772
+–	SC-MCCH-Message-NB	772
+–	UL-DCCH-Message-NB	773
+6.7.2	NB-IoT Message definitions	773
+–	DLInformationTransfer-NB	773
+–	MasterInformationBlock-NB	774
+–	MasterInformationBlock-TDD-NB	775
+–	Paging-NB	778
+–	RRCConnectionReconfiguration-NB	779
+–	RRCConnectionReconfigurationComplete-NB	779
+–	RRCConnectionReestablishment-NB	780
+–	RRCConnectionReestablishmentComplete-NB	781
+–	RRCConnectionReestablishmentRequest-NB	781
+–	RRCConnectionReject-NB	782
+–	RRCConnectionRelease-NB	783
+–	RRCConnectionRequest-NB	785
+–	RRCConnectionResume-NB	785
+–	RRCConnectionResumeComplete-NB	786
+–	RRCConnectionResumeRequest-NB	787
+–	RRCConnectionSetup-NB	788
+–	RRCConnectionSetupComplete-NB	788
+–	RRCEarlyDataComplete-NB	789
+–	RRCEarlyDataRequest-NB	790
+–	SCPTMConfiguration-NB	790
+–	SystemInformation-NB	791
+–	SystemInformationBlockType1-NB	791
+–	UECapabilityEnquiry-NB	795
+–	UECapabilityInformation-NB	796
+–	ULInformationTransfer-NB	797
+6.7.3	NB-IoT information elements	797
+6.7.3.1	NB-IoT System information blocks	797
+–	SystemInformationBlockType2-NB	797
+–	SystemInformationBlockType3-NB	798
+–	SystemInformationBlockType4-NB	800
+–	SystemInformationBlockType5-NB	801
+–	SystemInformationBlockType14-NB	803
+–	SystemInformationBlockType15-NB	803
+–	SystemInformationBlockType16-NB	804
+–	SystemInformationBlockType20-NB	804
+–	SystemInformationBlockType22-NB	806
+–	SystemInformationBlockType23-NB	809
+6.7.3.2	NB-IoT Radio resource control information elements	810
+–	CarrierConfigDedicated-NB	810
+–	CarrierFreq-NB	812
+–	ChannelRasterOffset-NB	813
+–	DL-Bitmap-NB	813
+–	DL-CarrierConfigCommon-NB	813
+–	DL-GapConfig-NB	815
+–	LogicalChannelConfig-NB	815
+–	MAC-MainConfig-NB	816
+–	NPDCCH-ConfigDedicated-NB	817
+–	NPDSCH-ConfigCommon-NB	818
+–	NPRACH-ConfigSIB-NB	818
+–	NPUSCH-Config-NB	824
+–	PDCP-Config-NB	825
+–	PhysicalConfigDedicated-NB	826
+–	RACH-ConfigCommon-NB	827
+–	RadioResourceConfigCommonSIB-NB	828
+–	RadioResourceConfigDedicated-NB	830
+–	RLC-Config-NB	831
+–	RLF-TimersAndConstants-NB	832
+–	SchedulingRequestConfig-NB	833
+–	TDD-Config-NB	834
+–	TDD-UL-DL-AlignmentOffset-NB	835
+–	UplinkPowerControl-NB	835
+–	WUS-Config-NB	835
+6.7.3.3	NB-IoT Security control information elements	836
+6.7.3.4	NB-IoT Mobility control information elements	836
+–	AdditionalBandInfoList-NB	836
+–	FreqBandIndicator-NB	837
+–	MultiBandInfoList-NB	837
+–	NS-PmaxList-NB	837
+–	ReselectionThreshold-NB	837
+–	T-Reselection-NB	837
+6.7.3.5	NB-IoT Measurement information elements	838
+–	CQI-NPDCCH-NB	838
+–	CQI-NPDCCH-Short-NB	838
+–	MeasResultServCell-NB	838
+–	NRSRP-Range-NB	838
+–	NRSRQ-Range-NB	839
+–	NSSS-RRM-Config-NB	839
+6.7.3.6	NB-IoT Other information elements	839
+–	EstablishmentCause-NB	839
+–	UE-Capability-NB	840
+–	UE-RadioPagingInfo-NB	843
+–	UE-TimersAndConstants-NB	844
+6.7.3.7	NB-IoT MBMS information elements	845
+6.7.3.7a	NB-IoT SC-PTM information elements	845
+–	SC-MTCH-InfoList-NB	845
+–	SCPTM-NeighbourCellList-NB	846
+6.7.4	NB-IoT RRC multiplicity and type constraint values	847
+–	Multiplicity and type constraint definitions	847
+–	End of NBIOT-RRC-Definitions	847
+6.7.5	Direct Indication Information	847
+7	Variables and constants	848
+7.1	UE variables	848
+–	EUTRA-UE-Variables	848
+–	VarConnEstFailReport	849
+–	VarLogMeasConfig	849
+–	VarLogMeasReport	850
+–	VarMeasConfig	850
+–	VarMeasIdleConfig	851
+–	VarMeasIdleReport	851
+–	VarMeasReportList	851
+–	VarMobilityHistoryReport	852
+–	VarPendingRnaUpdate	852
+–	VarRLF-Report	852
+–	VarShortINACTIVE-MAC-Input	852
+–	VarShortMAC-Input	853
+–	VarShortResumeMAC-Input	853
+–	VarWLAN-MobilityConfig	854
+–	VarWLAN-Status	854
+–	Multiplicity and type constraint definitions	854
+–	End of EUTRA-UE-Variables	855
+7.1a	NB-IoT UE variables	855
+–	NBIOT-UE-Variables	855
+–	End of NBIOT-UE-Variables	855
+7.2	Counters	855
+7.3	Timers	856
+7.3.1	Timers (Informative)	856
+7.3.2	Timer handling	860
+7.4	Constants	860
+8	Protocol data unit abstract syntax	861
+8.1	General	861
+8.2	Structure of encoded RRC messages	861
+8.3	Basic production	861
+8.4	Extension	861
+8.5	Padding	862
+9	Specified and default radio configurations	862
+9.1	Specified configurations	862
+9.1.1	Logical channel configurations	862
+9.1.1.1	BCCH configuration	862
+9.1.1.2	CCCH configuration	863
+9.1.1.3	PCCH configuration	863
+9.1.1.4	MCCH and MTCH configuration	863
+9.1.1.5	SBCCH configuration	863
+9.1.1.6	STCH configuration	864
+9.1.1.7	SC-MCCH and SC-MTCH configuration	864
+9.1.1.8	BR-BCCH configuration	864
+9.1.2	SRB configurations	865
+9.1.2.1	SRB1	865
+9.1.2.1a	SRB1bis	865
+9.1.2.2	SRB2	865
+9.1.2.3	SRB4	865
+9.2	Default radio configurations	865
+9.2.1	SRB configurations	866
+9.2.1.1	SRB1	866
+9.2.1.2	SRB2	866
+9.2.2	Default MAC main configuration	867
+9.2.3	Default semi-persistent scheduling configuration	867
+9.2.4	Default physical channel configuration	867
+9.2.5	Default values timers and constants	869
+9.3	Sidelink pre-configured parameters	869
+9.3.1	Specified parameters	869
+9.3.2	Pre-configurable parameters	869
+–	SL-Preconfiguration	870
+–	SL-V2X-Preconfiguration	872
+10	Radio information related interactions between network nodes	876
+10.1	General	876
+10.2	Inter-node RRC messages	876
+10.2.1	General	876
+–	EUTRA-InterNodeDefinitions	876
+10.2.2	Message definitions	877
+–	HandoverCommand	877
+–	HandoverPreparationInformation	878
+–	SCG-Config	880
+–	SCG-ConfigInfo	881
+–	UEPagingCoverageInformation	884
+–	UERadioAccessCapabilityInformation	885
+–	UERadioPagingInformation	885
+10.3	Inter-node RRC information element definitions	886
+–	AS-Config	886
+–	AS-Context	888
+–	ReestablishmentInfo	889
+–	RRM-Config	890
+10.4	Inter-node RRC multiplicity and type constraint values	891
+–	Multiplicity and type constraints definitions	891
+–	End of EUTRA-InterNodeDefinitions	891
+10.5	Mandatory information in AS-Config	891
+10.6	Inter-node NB-IoT messages	892
+10.6.1	General	892
+–	NB-IoT-InterNodeDefinitions	892
+10.6.2	Message definitions	892
+–	HandoverPreparationInformation-NB	892
+–	UEPagingCoverageInformation-NB	893
+–	UERadioAccessCapabilityInformation-NB	894
+–	UERadioPagingInformation-NB	894
+10.7	Inter-node NB-IoT RRC information element definitions	895
+–	AS-Config-NB	895
+–	AS-Context-NB	895
+–	ReestablishmentInfo-NB	896
+–	RRM-Config-NB	896
+10.8	Inter-node RRC multiplicity and type constraint values	897
+–	Multiplicity and type constraints definitions	897
+–	End of NB-IoT-InterNodeDefinitions	897
+10.9	Mandatory information in AS-Config-NB	897
+11	UE capability related constraints and performance requirements	897
+11.1	UE capability related constraints	897
+11.2	Processing delay requirements for RRC procedures	898
+11.3	Void	901
+Annex A (informative):	Guidelines, mainly on use of ASN.1	901
+A.1	Introduction	901
+A.2	Procedural specification	901
+A.2.1	General principles	901
+A.2.2	More detailed aspects	902
+A.3	PDU specification	902
+A.3.1	General principles	902
+A.3.1.1	ASN.1 sections	902
+A.3.1.2	ASN.1 identifier naming conventions	902
+A.3.1.3	Text references using ASN.1 identifiers	904
+A.3.2	High-level message structure	904
+A.3.3	Message definition	905
+A.3.4	Information elements	906
+A.3.5	Fields with optional presence	907
+A.3.6	Fields with conditional presence	908
+A.3.7	Guidelines on use of lists with elements of SEQUENCE type	908
+A.4	Extension of the PDU specifications	909
+A.4.1	General principles to ensure compatibility	909
+A.4.2	Critical extension of messages and fields	909
+A.4.3	Non-critical extension of messages	911
+A.4.3.1	General principles	911
+A.4.3.2	Further guidelines	911
+A.4.3.3	Typical example of evolution of IE with local extensions	912
+A.4.3.4	Typical examples of non critical extension at the end of a message	913
+A.4.3.5	Examples of non-critical extensions not placed at the default extension location	914
+–	ParentIE-WithEM	914
+–	ChildIE1-WithoutEM	914
+–	ChildIE2-WithoutEM	915
+A.5	Guidelines regarding inclusion of transaction identifiers in RRC messages	916
+A.6	Protection of RRC messages (informative)	916
+A.7	Miscellaneous	918
+Annex B (normative):	Release 8 and 9 AS feature handling	919
+B.1	Feature group indicators	919
+B.2	CSG support	929
+Annex C (normative):	Release 10 AS feature handling	930
+C.1	Feature group indicators	930
+Annex D (informative):	Descriptive background information	934
+D.1	Signalling of Multiple Frequency Band Indicators (Multiple FBI)	934
+D.1.1	Mapping between frequency band indicator and multiple frequency band indicator	934
+D.1.2	Mapping between inter-frequency neighbour list and multiple frequency band indicator	934
+D.1.3	Mapping between UTRA FDD frequency list and multiple frequency band indicator	935
+Annex E (normative): TDD/FDD differentiation of FGIs/capabilities in TDD-FDD CA	937
+Annex F (normative):	UE requirements on ASN.1 comprehension	938
+Annex G (normative): List of CRs Containing Early Implementable Features and Corrections	939
+Annex H (informative): Change history	940
 
 Foreword
 This Technical Specification has been produced by the 3rd Generation Partnership Project (3GPP).
@@ -1649,7 +1665,7 @@ For NB-IoT, mobility between E-UTRA and UTRAN, GERAN and between E-UTRA and CDMA
 In downlink piggybacking of NAS messages is used only for one dependant (i.e. with joint success/ failure) procedure: bearer establishment/ modification/ release. In uplink NAS message piggybacking is used only for transferring the initial NAS message during connection setup.
 NOTE 1:	The NAS messages transferred via SRB2 are also contained in RRC messages, which however do not include any RRC protocol control information.
 Once security is activated, all RRC messages on SRB1, SRB2 and SRB4, including those containing NAS or non-3GPP messages, are integrity protected and ciphered by PDCP. NAS independently applies integrity protection and ciphering to the NAS messages.
-For a UE configured with DC, all RRC messages, regardless of the SRB used and both in downlink and uplink, are transferred via the MCG. In case of EN-DC, after connection establishment NR PDCP may be configured for both SRB1 and SRB2 and if so, these SRBs may be configured as split SRB. In case of NE-DC, NR PDCP is always configured. For a split SRB, the UE receives RRC messages via both MCG and NR SCG i.e. handles out of order and duplicate PDUs as specified in TS 38.323 [83]. For a split SRB, the network configures via which cell group(s) the UE sends uplink RRC messages.
+For a UE configured with DC, all RRC messages, regardless of the SRB used and both in downlink and uplink, are transferred via the MCG. In case of EN-DC, after connection establishment NR PDCP may be configured for both SRB1 and SRB2 and if so, these SRBs may be configured as split SRB. In case of NGEN-DC and NE-DC, NR PDCP is always configured. For a split SRB, the UE receives RRC messages via both MCG and NR SCG i.e. handles out of order and duplicate PDUs as specified in TS 38.323 [83]. For a split SRB, the network configures via which cell group(s) the UE sends uplink RRC messages.
 NOTE 2:	In case of (NG)EN-DC, SRB3 may be configured for the transfer of some NR RRC messages between UE and SgNB via the NR radio interface, see TS 38.331 [82].
 An SRB can be configured with PDCP duplication, either by two logical channels within the same CG (CA duplication) or by two logical channels each within a different CG (DC duplication).
 4.3	Services
@@ -2100,7 +2116,7 @@ Upon receiving SystemInformationBlockType5, the UE shall:
 5>	apply the p-Max;
 3>	else:
 4>	apply the p-Max;
-1>	if in RRC_IDLE and UE has stored VarMeasIdleConfig and SIB5 includes the measIdleConfigSIB and the UE is capable of IDLE mode measurements for CA:
+1>	if in RRC_IDLE or RRC_INACTIVE and UE has stored VarMeasIdleConfig and SIB5 includes the measIdleConfigSIB and the UE is capable of IDLE mode measurements for CA:
 2>	if T331 is running and VarMeasIdleConfig does not contain measIdleCarrierListEUTRA received from the RRCConnectionRelease message:
 3>	store or replace the measIdleCarrierListEUTRA of measIdleConfigSIB within VarMeasIdleConfig;
 2>	perform idle mode measurements as specified in 5.6.20;
@@ -2329,14 +2345,14 @@ In case of (NG)EN-DC, there are three types of NR SCG reconfigurations:
 -	Regular NR SCG reconfiguration neither involving refresh of NR SCG security, nor RA to the PSCell, NR MAC reset or NR RLC re-establishment;
 The network is only required to use the NR SCG reconfiguration with sync and key change in case the NR SCG security key changes (i.e. handover, change of SNs, S-KgNB refresh). Further details are specified in NR RRC TS 38.331 [82].
 NOTE 2:	In case of MR-DC, E-UTRA RRC configuration parameters should only affect E-UTRA operation. E.g., s-Measure only affects measurements configured by parameters defined in this specification. Should an E-UTRA RRC configuration change require a change of NR RRC configuration, the network should indicate such NR change by NR RRC signalling. E.g. a specific indication is used to trigger RLC re-establishment upon reconfigurations changing the CG(s) used for transmission (in DL or UL) that otherwise would only involve NR RRC signalling.
-In this release of the specification, change between DC and MR-DC as well as change between DC and E-UTRA configured with SN terminated DRB without SCG are not supported (i.e. neither the direct reconfiguration nor specific measurement events). Likewise, the direct transition between MR-DC and NR DC is not supported in this release of the specification.
+In this release of the specification, change between DC and MR-DC as well as change between DC and E-UTRA configured with SN terminated DRB without SCG are not supported (i.e. neither the direct reconfiguration nor specific measurement events). Likewise, the direct transition between (NG)EN-DC and NR DC or NE-DC is not supported in this release of the specification.
 The release of the RRC connection normally is initiated by E-UTRAN. The procedure may be used to re-direct the UE to an E-UTRA frequency or an inter-RAT carrier frequency. Only in exceptional cases, as specified within this specification, TS 36.300 [9], TS 36.304 [4] or TS 24.301 [35], may the UE abort the RRC connection, i.e. move to RRC_IDLE without notifying E-UTRAN.
 The suspension of the RRC connection is initiated by E-UTRAN. When the RRC connection is suspended, the UE stores the UE AS context and the resumeIdentity, and transitions to RRC_IDLE state. The RRC message to suspend the RRC connection is integrity protected and ciphered. Suspension can only be performed when at least 1 DRB is successfully established.
 The resumption of a suspended RRC connection is initiated by upper layers when the UE has a stored UE AS context, RRC connection resume is permitted by E-UTRAN and the UE needs to transit from RRC_IDLE state to RRC_CONNECTED state. When the RRC connection is resumed, RRC configures the UE according to the RRC connection resume procedure based on the stored UE AS context and any RRC configuration received from E-UTRAN. The RRC connection resume procedure re-activates security and re-establishes SRB(s) and DRB(s). The request to resume the RRC connection includes the resumeIdentity. The request is not ciphered, but protected with a message authentication code.
 In response to a request to resume the RRC connection, E-UTRAN may resume the suspended RRC connection, reject the request to resume and instruct the UE to either keep or discard the stored context, or setup a new RRC connection.
 In case of CP-EDT, the data are appended in the RRCEarlyDataRequest and RRCEarlyDataComplete messages, if available, and sent over SRB0. In case of UP-EDT, security is re-activated prior to transmission of RRC message using the nextHopChainingCount provided in the RRCConnectionRelease message with suspend indication during the preceding suspend procedure and the radio bearers are re-established. The uplink data are transmitted ciphered on DTCH multiplexed with the RRCConnectionResumeRequest message on CCCH. In the downlink, the data, if available, are transmitted on DTCH multiplexed with the RRCConnectionRelease message on DCCH. In response to a request for EDT, E-UTRAN may also choose to establish or resume the RRC connection.
-A UE in RRC_CONNECTED enters RRC_INACTIVE when the network indicates RRC connection suspension in RRCConnectionRelease message. When entering RRC_INACTIVE, the UE stores the UE AS context and any RRC configuration received from the network.
-The resumption of an RRC connection from RRC_INACTIVE is initiated by upper layers when the UE needs to transit from RRC_INACTIVE state to RRC_CONNECTED state or by RRC layer for, e.g. RNAU or reception of RAN paging. When the RRC connection is resumed, network configures the UE according to the RRC connection resume procedure based on the stored UE AS context and any RRC configuration received from the network. The RRC connection resume procedure re-activates security and re-establishes SRB(s) and DRB(s).
+A UE in RRC_CONNECTED enters RRC_INACTIVE when the network indicates RRC connection suspension in RRCConnectionRelease message. When entering RRC_INACTIVE, the UE stores the UE Inactive AS context and any RRC configuration received from the network.
+The resumption of an RRC connection from RRC_INACTIVE is initiated by upper layers when the UE needs to transit from RRC_INACTIVE state to RRC_CONNECTED state or by RRC layer for, e.g. RNAU or reception of RAN paging. When the RRC connection is resumed, network configures the UE according to the RRC connection resume procedure based on the stored UE Inactive AS context and any RRC configuration received from the network. The RRC connection resume procedure re-activates security and re-establishes SRB(s) and DRB(s).
 In response to a request to resume the RRC connection from RRC_INACTIVE, the network may resume the suspended RRC connection and UE enters to RRC_CONNECTED, or reject the request to resume using RRC message without security protection and send UE to RRC_INACTIVE with wait time, or directly re-suspend the RRC connection and send UE to RRC_INACTIVE, or directly release the RRC connection and send UE to RRC_IDLE, or instruct the UE to initiate NAS level recovery.
 5.3.1.2	Security
 AS security comprises of the integrity protection of RRC signalling (SRBs) as well as the ciphering of RRC signalling (SRBs) and user data (DRBs).
@@ -2457,7 +2473,7 @@ NOTE:	If the UE is in CE, it is up to UE implementation when to start acquiring 
 2>	re-acquire SystemInformationBlockType1 immediately, i.e., without waiting until the next system information modification period boundary as specified in 5.2.1.6;
 2>	re-acquire SystemInformationBlockType14 using the system information acquisition procedure as specified in 5.2.2.4;
 1>	if in RRC_IDLE, the redistributionIndication is included and the UE is redistribution capable:
-2>	Perform E-UTRAN inter-frequency redistribution procedure as specified in TS 36.304 [4], clause 5.2.4.10;
+2>	perform E-UTRAN inter-frequency redistribution procedure as specified in TS 36.304 [4], clause 5.2.4.10;
 5.3.3	RRC connection establishment
 5.3.3.1	General
 
@@ -2628,6 +2644,9 @@ Except for NB-IoT, upon initiating the procedure, if connected to EPC or 5GC, th
 1>	if the UE is resuming an RRC connection from a suspended RRC connection or from RRC_INACTIVE:
 2>	if the UE was configured with (NG)EN-DC:
 3>	perform MR-DC release, as specified in TS 38.331 [82], clause 5.3.5.10;
+3>	release p-MaxEUTRA, if configured;
+3>	release p-MaxUE-FR1, if configured;
+3>	release tdm-PatternConfig, if configured;
 2>	release the MCG SCell(s), if configured, in accordance with 5.3.10.3a;
 2>	release powerPrefIndicationConfig, if configured and stop timer T340, if running;
 2>	release reportProximityConfig and clear any associated proximity status reporting timer;
@@ -2656,7 +2675,8 @@ NOTE 1a:	The parameters and configurations are released from the UE Inactive AS 
 2>	set the variable pendingRnaUpdate to 'FALSE';
 2>	initiate transmission of the RRCConnectionResumeRequest message in accordance with 5.3.3.3a;
 1>	else:
-2>	if stored, discard the UE AS context and resumeIdentity;
+2>	if stored, discard the UE AS context, UE Inactive AS context and resumeIdentity;
+2>	release rrc-InactiveConfig, if configured;
 2>	if the UE is initiating CP-EDT in accordance with conditions in 5.3.3.1b:
 3>	initiate transmission of the RRCEarlyDataRequest message in accordance with 5.3.3.3b;
 2>	else:
@@ -2769,7 +2789,7 @@ If the UE is resuming the RRC connection from RRC_INACTIVE, the UE shall set the
 3>	set the fullI-RNTI to the stored fullI-RNTI value provided in suspend;
 2>	else:
 3>	set the shortI-RNTI to the stored shortI-RNTI value provided in suspend;
-2>	restore the RRC configuration and the KeNB and KRRCint keys from the UE Inactive AS context except physical layer, MAC configuration and NR pdcp-Config;
+2>	restore the RRC configuration, RoHC state, the stored QoS flow to DRB mapping rules and the KeNB and KRRCint keys from the UE Inactive AS context except physical layer, MAC configuration and NR pdcp-Config;
 2>	set the shortResumeMAC-I to the 16 least significant bits of the MAC-I calculated:
 3>	over the ASN.1 encoded as per clause 8 (i.e., a multiple of 8 bits) VarShortINACTIVE-MAC-Input;
 3>	with the KRRCint key in the UE Inactive AS Context and the previously configured integrity protection algorithm; and
@@ -2817,6 +2837,7 @@ The UE shall:
 1>	if the RRCConnectionSetup is received in response to an RRCConnectionResumeRequest from RRC_INACTIVE:
 2>	stop T380 if running;
 2>	discard the stored UE Inactive AS context;
+2> release rrc-InactiveConfig, if configured;
 2>	discard any current AS security context including the KRRCenc key, the KRRCint key, the KUPint key and the KUPenc key;
 2>	release radio resources for all established RBs except SRB0, including release of the RLC entities, of the associated PDCP entities and of SDAP entities;
 2>	release the RRC configuration except for the default L1 parameter values, default MAC main configuration and CCCH;
@@ -3654,7 +3675,9 @@ NOTE 4:	The UE is not required to determine the SFN of the target PCell by acqui
 The UE shall:
 1>	if the UE is unable to comply with (part of) the configuration included in the RRCConnectionReconfiguration message:
 2>	continue using the configuration used prior to the reception of RRCConnectionReconfiguration message;
-2>	if security has not been activated:
+2>	if the UE is in NE-DC:
+3>	perform the actions as specified in TS 38.331 [82], clause 5.3.7;
+2>	else if security has not been activated:
 3>	perform the actions upon leaving RRC_CONNECTED as specified in 5.3.12, with release cause other;
 2>	else:
 3>	initiate the connection re-establishment procedure as specified in 5.3.7, upon which the connection reconfiguration procedure ends;
@@ -4069,9 +4092,9 @@ The UE shall:
 1>	if T320 expires:
 2>	if stored, discard the cell reselection priority information provided by the idleModeMobilityControlInfo or inherited from another RAT;
 2>	apply the cell reselection priority information broadcast in the system information;
-5.3.8.5	T322 expiry
+5.3.8.5	T322 expiry or stop
 The UE shall:
-1>	if T322 expires:
+1>	if T322 expires or is stopped:
 2>	discard the redirectedCarrierOffsetDedicated provided in RRCConnectionRelease message;
 5.3.8.6	UE actions upon receiving the expiry of DataInactivityTimer
 Upon receiving the expiry of DataInactivityTimer from lower layers while in RRC_CONNECTED, the UE shall:
@@ -4095,7 +4118,7 @@ Upon entering RRC_INACTIVE, the UE shall:
 3>	replace the cellIdentity with the cellIdentity of the PCell at the time the UE has received the RRCConnectionRelease message;
 3>	replace the previously stored physical cell identity with the physical cell identity of the PCell at the time the UE has received the RRCConnectionRelease message;
 1>	else:
-2>	in the UE Inactive AS Context, the current KeNB and KRRCint keys, the ROHC state, the C-RNTI used in the source PCell, the cellIdentity and the physical cell identity of the source PCell, and all other parameters configured;
+2>	store in the UE Inactive AS Context, the current KeNB and KRRCint keys, the ROHC state, the stored QoS flow to DRB mapping rules, the C-RNTI used in the source PCell, the cellIdentity and the physical cell identity of the source PCell, and all other parameters configured;
 1>	if the periodic-RNAU-timer is included:
 2>	start timer T380, with the timer value set to the periodic-RNAU-timer;
 1>	suspend all SRB(s) and DRB(s), except SRB0;
@@ -4888,8 +4911,9 @@ NOTE 1:	Except for UP-EDT, ciphering is not applied for the subsequent RRCConnec
 1>	else:
 2>	upon leaving RRC_INACTIVE:
 3>	discard the UE Inactive AS context;
+3>	release rrc-InactiveConfig, if configured;
 3>	discard the KeNB, the KRRCenc key, the KRRCint and the KUPenc key;
-2>	release the rrc-InactiveConfig, if configured;
+2>	release rrc-InactiveConfig, if configured;
 2>	release all radio resources, including release of the MAC configuration, the RLC entity and the associated PDCP entity and SDAP (if any) for all established RBs;
 2>	indicate the release of the RRC connection to upper layers together with the release cause;
 1>	if leaving RRC_CONNECTED was triggered neither by reception of the MobilityFromEUTRACommand message nor by selecting an inter-RAT cell while T311 was running; or
@@ -5756,7 +5780,7 @@ where
 Mn is the latest received measurement result from the physical layer;
 Fn is the updated filtered measurement result, that is used for evaluation of reporting criteria or for measurement reporting;
 Fn-1 is the old filtered measurement result, where F0 is set to M1 when the first measurement result from the physical layer is received; and
-a = 1/2(k/4), where k is the filterCoefficient for the corresponding measurement quantity received by the quantityConfig;
+except for NR, a = 1/2(k/4), where k is the filterCoefficient for the corresponding measurement quantity received by the quantityConfig; for NR, a = 1/2(ki/4), where ki is the filterCoefficient for the corresponding measurement quantity of the i:th QuantityConfigNR in quantityConfigNRList, and i is indicated by quantityConfigSet in MeasObjectNR;
 2>	adapt the filter such that the time characteristics of the filter are preserved at different input rates, observing that the filterCoefficient k assumes a sample rate equal to 200 ms;
 NOTE 2:	If k is set to 0, no layer 3 filtering is applicable.
 NOTE 3:	The filtering is performed in the same domain as used for evaluation of reporting criteria or for measurement reporting, i.e., logarithmic filtering for logarithmic measurements.
@@ -7277,6 +7301,7 @@ A UE capable of application layer measurement reporting in RRC_CONNECTED may ini
 Upon initiating the procedure, the UE shall:
 1>	if configured with application layer measurement, and SRB4 is configured, and the UE has received application layer measurement report information from upper layers:
 2>	set the measReportAppLayerContainer in the MeasReportAppLayer message to the value of the application layer measurement report information;
+2>	set the serviceType in the MeasReportAppLayer message to the type of the application layer measurement report information;
 2>	submit the MeasReportAppLayer message to lower layers for transmission via SRB4.
 5.6.20	IDLE Mode Measurements
 5.6.20.1	General
@@ -9639,7 +9664,7 @@ MeasReportAppLayer-r15 ::=		SEQUENCE {
 
 MeasReportAppLayer-r15-IEs ::=		SEQUENCE {
 	measReportAppLayerContainer-r15		OCTET STRING (SIZE(1..8000))			OPTIONAL,
-	serviceType							ENUMERATED {qoe, qoemtsi, spare6, spare5, spare4, spare3, spare2, spare1}		OPTIONAL,
+	serviceType-r15						ENUMERATED {qoe, qoemtsi, spare6, spare5, spare4, spare3, spare2, spare1}		OPTIONAL,
 	nonCriticalExtension				SEQUENCE {}						OPTIONAL
 }
 
@@ -10505,7 +10530,7 @@ Indicates the common configuration for the SCell group.
 sCellGroupIndex
 Indicates the identity of SCell groups for which a common configuration is provided.
 sCellIndex
-In case of DC, the SCellIndex is unique within the scope of the UE i.e. an SCG cell can not use the same value as used for an MCG cell. For pSCellToAddMod, if sCellIndex-r13 is present the UE shall ignore sCellIndex-r12. sCellIndex-r13 in sCellToAddModListExt-r13 shall not have same values as sCellIndex-r10 in sCellToAddModList-r10.
+The sCellIndex is unique within the scope of the UE. In case of DC, an SCG cell can not use the same value as used for an MCG cell. For pSCellToAddMod, if sCellIndex-r13 is present the UE shall ignore sCellIndex-r12.
 sCellGroupToAddModList, sCellGroupToAddModListSCG
 Indicates the SCell group to be added or modified. E-UTRAN only configures at most 4 SCell groups per UE over all cell groups. SCell groups can only be configured for LTE SCells, and all SCells in an SCell group must belong to the same cell group.
 sCellGroupToReleaseList
@@ -10513,11 +10538,13 @@ Indicates the SCell group to be released.
 sCellState
 A one-shot field that indicates whether the SCell shall be considered to be in activated or dormant state upon SCell configuration.
 sCellToAddModList, sCellToAddModListExt
-Indicates the SCell to be added or modified. Field sCellToAddModList is used to add the first 4 SCells for a UE with sCellIndex-r10 while sCellToAddModListExt is used to add the rest. If E-UTRAN includes sCellToAddModListExt-v1430 it includes the same number of entries, and listed in the same order, as in sCellToAddModListExt-r13. If E-UTRAN includes sCellToAddModList-v10l0 it includes the same number of entries, and listed in the same order, as in sCellToAddModList-r10. If E-UTRAN includes sCellToAddModListExt-v1370 it includes the same number of entries, and listed in the same order, as in sCellToAddModListExt-r13. If E-UTRAN includes sCellToAddModListExt-v13c0 it includes the same number of entries, and listed in the same order, as in sCellToAddModListExt-r13.
+Indicates the SCell to be added or modified. E-UTRAN uses field sCellToAddModList-r10 to add or modify SCells (with sCellIndex-r10) for a UE that does not support carrier aggregation with more than 5 component carriers. If E-UTRAN includes sCellToAddModListExt-v1430 it includes the same number of entries, and listed in the same order, as in sCellToAddModListExt-r13. If E-UTRAN includes sCellToAddModList-v10l0 it includes the same number of entries, and listed in the same order, as in sCellToAddModList-r10. If E-UTRAN includes sCellToAddModListExt-v1370 it includes the same number of entries, and listed in the same order, as in sCellToAddModListExt-r13. If E-UTRAN includes sCellToAddModListExt-v13c0 it includes the same number of entries, and listed in the same order, as in sCellToAddModListExt-r13.
 sCellToAddModListSCG, sCellToAddModListSCG-Ext
-Indicates the SCG cell to be added or modified. The field is used for SCG cells other than the PSCell (which is added/ modified by field pSCellToAddMod). Field sCellToAddModListSCG is used to add the first 4 SCells for a UE with sCellIndex-r10 while sCellToAddModListSCG-Ext is used to add the rest. If E-UTRAN includes sCellToAddModListSCG-v10l0 it includes the same number of entries, and listed in the same order, as in sCellToAddModListSCG-r12. If E-UTRAN includes sCellToAddModListSCG-Ext-v1370 it includes the same number of entries, and listed in the same order, as in sCellToAddModListSCG-Ext-r13. If E-UTRAN includes sCellToAddModListSCG-Ext-v13c0 it includes the same number of entries, and listed in the same order, as in sCellToAddModListSCG-Ext-r13.
+Indicates the SCG cell to be added or modified. The field is used for SCG cells other than the PSCell (which is added/ modified by field pSCellToAddMod). E-UTRAN uses field sCellToAddModListSCG-r12 to add or modify SCells (with sCellIndex-r10) for a UE that does not support carrier aggregation with more than 5 component carriers. If E-UTRAN includes sCellToAddModListSCG-v10l0 it includes the same number of entries, and listed in the same order, as in sCellToAddModListSCG-r12. If E-UTRAN includes sCellToAddModListSCG-Ext-v1370 it includes the same number of entries, and listed in the same order, as in sCellToAddModListSCG-Ext-r13. If E-UTRAN includes sCellToAddModListSCG-Ext-v13c0 it includes the same number of entries, and listed in the same order, as in sCellToAddModListSCG-Ext-r13.
+sCellToReleaseList, sCellToReleaseListExt
+Indicates the SCell to be released. E-UTRAN uses field sCellToReleaseList-r10 to release SCells for a UE that does not support carrier aggregation with more than 5 component carriers.
 sCellToReleaseListSCG, sCellToReleaseListSCG-Ext
-Indicates the SCG cell to be released. The field is also used to release the PSCell e.g. upon change of PSCell, upon system information change for the PSCell.
+Indicates the SCG cell to be released. The field is also used to release the PSCell e.g. upon change of PSCell, upon system information change for the PSCell. E-UTRAN uses field sCellToReleaseListSCG-r12 to release SCells for a UE that does not support carrier aggregation with more than 5 component carriers.
 scg-Configuration
 Covers the SCG configuration as used in case of DC and NE-DC. When the UE is configured with NE-DC, E-UTRAN neither applies value release nor configures scg-ConfigPartMCG.
 scg-Counter
@@ -10525,7 +10552,7 @@ A counter used upon initial configuration of SCG security as well as upon refres
 securityConfigHO
 This field contains the parameters required to update the security keys at handover. If E-UTRAN includes the securityConfigHO (i.e., without suffix), the choice intraLTE is used for handover within E-UTRA/EPC while the choice interRAT is used for handover from GERAN or UTRAN to E-UTRA/EPC. If E-UTRAN includes the securityConfigHO-v1530 (i.e., with suffix), the choice intra5GC is used for handover from NR or E-UTRA/5GC to E-UTRA/5GC while the choice fivegc-ToEPC is used for inter-system handover from NR or E-UTRA/5GC to E-UTRA/EPC and the choice epc-To5GC is used for inter-system handover from E-UTRA/EPC to E-UTRA/5GC.
 sk-Counter
-A one-shot counter used upon initial configuration of S-KgNB as well as upon refresh of S-KgNB. E-UTRAN provides this field upon configuring (NG)EN-DC, to facilitate configuration of SRB3, or upon configuring an (SN terminated) RB using S-KgNB.
+A one-shot counter used upon initial configuration of S-KgNB as well as upon refresh of S-KgNB. E-UTRAN always provides this field either upon initial configuration of an NR SCG, or upon configuration of the first (SN terminated) RB using S-KgNB, whichever happens first.
 sl-V2X-ConfigDedicated
 Indicates sidelink configuration for non-P2X related V2X sidelink communication as well as P2X related V2X sidelink communication.
 smtc
@@ -10981,7 +11008,7 @@ RRC-InactiveConfig-r15::=		SEQUENCE {
 	periodic-RNAU-timer-r15			ENUMERATED {min5, min10, min20, min30, min60,
 											min120, min360, min720}		OPTIONAL,	--Need OR
 	nextHopChainingCount-r15		NextHopChainingCount		OPTIONAL,	--Cond INACTIVE
-	nonCriticalExtension			SEQUENCE{}		OPTIONAL
+	dummy							SEQUENCE{}		OPTIONAL
 }
 
 RAN-NotificationAreaInfo-r15	::= CHOICE {
@@ -11154,6 +11181,8 @@ cn-Type
 The cn-Type is used to indicate that the UE is redirected from 5GC to EPC or 5GC when redirectedCarrierInfo indicates E-UTRA frequency.
 drb-ContinueROHC
 This field indicates whether to continue or reset the header compression protocol context for the DRBs configured with the header compression protocol. Presence of the field indicates that the header compression protocol context continues when UE initiates UP-EDT in the same cell, while absence indicates that the header compression protocol context is reset. 
+dummy
+This field is not used in the specification. If received it shall be ignored by the UE.
 extendedWaitTime
 Value in seconds for the wait time for Delay Tolerant access requests.
 freqPriorityListX
@@ -11551,7 +11580,7 @@ RRCConnectionSetupComplete-v1530-IEs ::= SEQUENCE {
 }
 
 RRCConnectionSetupComplete-v1540-IEs ::= SEQUENCE {
-	gummei-Type-v1540					ENUMERATED {mappedFrom5G}		OPTIONAL,
+	gummei-Type-v1540					ENUMERATED {mappedFrom5G-v1540}	OPTIONAL,
 	guami-Type-r15						ENUMERATED {native, mapped}		OPTIONAL,
 	nonCriticalExtension				SEQUENCE {}						OPTIONAL
 }
@@ -11670,7 +11699,7 @@ RRCEarlyDataRequest-r15 ::=		SEQUENCE {
 
 RRCEarlyDataRequest-r15-IEs ::=	SEQUENCE {
 	s-TMSI-r15						S-TMSI,
-	establishmentCause-r15			ENUMERATED {	mo-Data-r15, delayTolerantAccess-r15},
+	establishmentCause-r15			ENUMERATED {mo-Data, delayTolerantAccess},
 	dedicatedInfoNAS-r15				DedicatedInfoNAS,
 	nonCriticalExtension				SEQUENCE {}			OPTIONAL
 }
@@ -12479,8 +12508,8 @@ cellBarred-5GC, cellBarred-5GC-CRS
 barred means the cell is barred for connectivity to 5GC, as defined in TS 36.304 [4]. 
 cellIdentity
 Indicates the cell identity. NOTE 2.
-cellId-index
-the index of the cell ID in the PLMN lists for EPC, indicates UE the corresponding cell ID is used for 5GC. Value 1 indicates the cell ID of the 1st PLMN list for EPC in the SIB1. Value 2 indicates the cell ID of the 2nd PLMN list for EPC, and so on.
+cellId-Index
+The index of the cell ID in the PLMN lists for EPC, indicates UE the corresponding cell ID is used for 5GC. Value 1 indicates the cell ID of the 1st PLMN list for EPC in the SIB1. Value 2 indicates the cell ID of the 2nd PLMN list for EPC, and so on.
 cellReservedForOperatorUse, cellReservedForOperatorUse-CRS
 As defined in TS 36.304 [4].
 cellSelectionInfoCE
@@ -12533,8 +12562,8 @@ multiBandInfoList-v10j0
 A list of additionalPmax and additionalSpectrumEmission values, as defined in TS 36.101 [42], table 6.2.4-1, for UEs neither in CE nor BL UEs and TS 36.101 [42], table 6.2.4E-1, for UEs in CE or BL UEs, for the frequency bands in multiBandInfoList (i.e. without suffix) and multiBandInfoList-v9e0. If E-UTRAN includes multiBandInfoList-v10j0, it includes the same number of entries, and listed in the same order, as in multiBandInfoList (i.e. without suffix). If E-UTRAN includes multiBandInfoList-v10l0 it includes the same number of entries, and listed in the same order, as in multiBandInfoList-v10j0.
 plmn-IdentityList
 List of PLMN identities. The first listed PLMN-Identity is the primary PLMN. If plmn-IdentityList-v1530 is included, E-UTRAN includes the same number of entries, and listed in the same order, as in plmn-IdentityList (without suffix). NOTE 2.
-plmn-index
-Index of the PLMN in the plmn-IdentityList fields included in SIB1for EPC, indicating the same PLMN ID is connected to 5GC too. 1 if the 1st PLMN is from the 1st plmn-IdentityList included in SIB1, 2 if the 2nd PLMN is from the same plmn-IdentityList, or when no more PLMN are present within the same plmn-IdentityList, then the PLMN listed 1st in the subsequent plmn-IdentityList within the same SIB1 and so on. NOTE 6.
+plmn-Index
+Index of the PLMN in the plmn-IdentityList fields included in SIB1 for EPC, indicating the same PLMN ID is connected to 5GC. Value 1 indicates the 1st PLMN in the 1st plmn-IdentityList included in SIB1, value 2 indicates the 2nd PLMN in the same plmn-IdentityList, or when no more PLMNs are present within the same plmn-IdentityList, then the PLMN listed 1st in the subsequent plmn-IdentityList within the same SIB1 and so on. NOTE 6.
 p-Max
 Value applicable for the cell. If absent the UE applies the maximum power according to its capability as specified in TS 36.101 [42], clause 6.2.2. NOTE 2.
 posSIB-MappingInfo
@@ -12607,7 +12636,7 @@ NOTE 2:	E-UTRAN sets this field to the same value for all instances of SIB1 mess
 NOTE 3:	E-UTRAN configures this field only in the BR version of SIB1 message.
 NOTE 4:	E-UTRAN configures at most 6 EPC PLMNs in total (i.e. across all the PLMN lists except for PLMN lists in cellAccessRelatedInfoList-5GC in SIB1). E-UTRAN configures at most 6 5GC PLMNs in total (i.e. across all the PLMN lists in cellAccessRelatedInfoList-5GC in SIB1).
 NOTE 5:	E-UTRAN configures only one value for this parameter per PLMN.
-NOTE 6:	E-UTRAN configures plmn-index only if the cellBarred is set to notBarred
+NOTE 6:	E-UTRAN configures plmn-Index only if the cellBarred is set to notBarred.
 
 Conditional presence
 Explanation
@@ -12965,7 +12994,7 @@ Indicates the maximum number of CCs for which the UE is requested to provide sup
 requestReducedIntNonContComb
 Indicates that the UE shall explicitly exclude supported intra-band non-contiguous CA band combinations other than included in capability signalling as specified in TS 36.306 [5], clause 4.3.5.21. 
 requestSTTI-SPT-Capability
-Indicates that the UE shall include all the short TTI and SPT capabilities in capability signalling. 
+Indicates that the UE is requested to provide its supported short TTI and SPT capabilities in capability signalling. 
 
 –	UECapabilityInformation
 The UECapabilityInformation message is used to transfer of UE radio access capabilities requested by the E‑UTRAN.
@@ -15914,19 +15943,19 @@ AUL C-RNTI, see TS 36.321 [6].
 aul-HARQ-Processes
 This field indicates which HARQ process IDs are configured for AUL operation as described in TS 36.321 [6]. In case tm1 is configured for the transmissionModeUL-AUL the number of configured HARQ processes equals to field value. In case tm2 is configured for the transmissionModeUL-AUL the number of configured HARQ processes equals to double of the field value. The largest value of the HARQ process ID is equal to the number of configured HARQ processes.
 aul-RetransmissionTimer
-This timer is used to restrict both new transmission and retransmission for the same HARQ process for AUL operation as described in TS 36.321 [6]. Value psf4 corresponds to 4 PDCCH subframes etc, 
-aul-StartingFullBW-InsideCOT
-This field indicates the AUL-specific set of PUSCH starting offset values for the AUL transmission inside of eNB obtained MCOT when a UE configured with AUL configuration is allocated to occupy the full channel bandwidth as described in TS 36.213 [23], clause 8.0. The left most bit corresponds to value 34, second bit corresponds to value 43, third bit corresponds to value 52, fourth bit corresponds to value 61 and last bit corresponds to value OS#1. 
-aul-StartingFullBW-OutsideCOT
-This field indicates the AUL-specific set of PUSCH starting offset values for the AUL transmission outside of eNB obtained MCOT when a UE configured with AUL configuration is allocated to occupy the full channel bandwidth as described in TS 36.213 [23], clause 8.0. The left most bit corresponds to value 16, second bit corresponds to value 25, third bit corresponds to value 34, fourth bit corresponds to value 43, fifth bit corresponds to value 52, sixth bit corresponds to value 61 and last bit corresponds to value OS#1.
-aul-StartingPartialBW-InsideCOT
-This field indicates the exact AUL-specific PUSCH starting offset value for the AUL transmission inside of eNB obtained MCOT when a UE configured with AUL configuration is allocated to occupy partial channel bandwidth as described in TS 36.213 [23], clause 8.0. The value o34 corresponds to 34 and the value o43 corresponds to 43 and so on.
+This timer is used to restrict both new transmission and retransmission for the same HARQ process for AUL operation as described in TS 36.321 [6]. Value psf4 corresponds to 4 PDCCH subframes etc.
+aul-StartingFullBW-InsideMCOT
+This field indicates the AUL-specific set of PUSCH starting offset values for the AUL transmission inside of eNB obtained MCOT when a UE configured with AUL configuration is allocated to occupy the full channel bandwidth as described in TS 36.213 [23], clause 8.0. The first/leftmost bit corresponds to value 34, second bit corresponds to value 43, third bit corresponds to value 52, fourth bit corresponds to value 61 and last bit corresponds to value OS#1. 
+aul-StartingFullBW-OutsideMCOT
+This field indicates the AUL-specific set of PUSCH starting offset values for the AUL transmission outside of eNB obtained MCOT when a UE configured with AUL configuration is allocated to occupy the full channel bandwidth as described in TS 36.213 [23], clause 8.0. The first/leftmost bit corresponds to value 16, second bit corresponds to value 25, third bit corresponds to value 34, fourth bit corresponds to value 43, fifth bit corresponds to value 52, sixth bit corresponds to value 61 and last bit corresponds to value OS#1.
+aul-StartingPartialBW-InsideMCOT
+This field indicates the exact AUL-specific PUSCH starting offset value for the AUL transmission inside of eNB obtained MCOT when a UE configured with AUL configuration is allocated to occupy partial channel bandwidth as described in TS 36.213 [23], clause 8.0. The value o34 corresponds to 34, and the value o43 corresponds to 43 and so on.
 aul-StartingPartialBW-OutsideCOT
-This field indicates the exact AUL-specific PUSCH starting offset value for the AUL transmission outside of eNB obtained MCOT when a UE configured with AUL configuration is allocated to occupy partial channel bandwidth as described in TS 36.213 [23], clause 8.0. The value o16 corresponds to 16 and the value o25 corresponds to 25 and so on.
+This field indicates the exact AUL-specific PUSCH starting offset value for the AUL transmission outside of eNB obtained MCOT when a UE configured with AUL configuration is allocated to occupy partial channel bandwidth as described in TS 36.213 [23], clause 8.0. The value o16 corresponds to 16, the value o25 corresponds to 25 and so on.
 aul-Subframes
-This field indicates which subframes are allowed for AUL operation as described in TS 36.321 [6]. The first/leftmost bit corresponds to the subframe #0 of the radio frame satisfying SFN mod 4 = 0. Value 0 in the bitmap indicates that the corresponding subframe not allowed for AUL. Value 1 in the bitmap indicates that the corresponding subframe is allowed for AUL.
+This field indicates which subframes are allowed for AUL operation as described in TS 36.321 [6]. The first/leftmost bit corresponds to the subframe #0 of the radio frame satisfying SFN mod 4 = 0. Value 0 in the bitmap indicates that the corresponding subframe is not allowed for AUL. Value 1 in the bitmap indicates that the corresponding subframe is allowed for AUL.
 contentionWindowSizeTimer
-This field indicates contention window size adjustment timer as described in TS 37.213 [94], clause 4.2.2. The value n0 corresponds to 0ms, value n5 corresponds to 5ms, value 10 corresponds to 10ms. The value is set to n0 or n5 if the absence of other technologies on the same carrier cannot be guaranteed. The value is set to n0 or n10 if the absence of other technologies on the same carrier can be guaranteed.
+This field indicates contention window size adjustment timer as described in TS 37.213 [94], clause 4.2.2. The value n0 corresponds to 0ms, value n5 corresponds to 5ms, value n10 corresponds to 10ms. The value is set to n0 or n5 if the absence of other technologies on the same carrier cannot be guaranteed. The value is set to n0 or n10 if the absence of other technologies on the same carrier can be guaranteed.
 endingSymbolAUL
 This field indicates PUSCH ending symbol of the last AUL subframe in an AUL burst as described in TS 36.211 [21], clause 4.1.3.
 subframeOffsetCOT-Sharing
@@ -20372,29 +20401,34 @@ NOTE 1:	It is up to eNB to ensure that the field indicating LWA bearer type is s
 
 Conditional presence
 Explanation
-UL-LWA
-The field is optionally present, need ON if ul-LWA-Config-r14 is present. Otherwise the field is not present.
 CRSIM
 The field is optionally present, need ON, if neighCellsCRS-Info-r11 is not present; otherwise it is not present.
 DRB-Setup
 The field is mandatory present if the corresponding DRB is being set up and the UE is connected to EPC; otherwise it is not present.
 DRB-SetupM
 The field is:
--	mandatory present upon setup of MCG or split DRB;
+-	mandatory present:
+-	for the UE without SCG: upon setup of MCG DRB;
+-	for E-UTRA DC, upon setup of MCG or split DRB;
+-	for (NG)EN-DC:
+-	upon setup of MCG RLC bearer;
 -	optionally present, Need ON:
--	upon change from SCG to MCG DRB;
--	for EN-DC:
--	upon change of keyToUse for a DRB configured with an MCG RLC bearer;
+-	for E-UTRA DC, upon change from SCG to MCG DRB;
+-	for (NG)EN-DC:
+-	upon change of keyToUse, as defined in TS 38.331 [82], for a DRB configured with an MCG RLC bearer;
 -	when configured with MCG RLC bearer, upon change of S-KgNB without handover;
 -	not present otherwise.
 DRB-SetupS
 The field is:
 -	mandatory present:
+-	for E-UTRA DC:
 -	upon setup of SCG or split DRB;
 -	upon change from MCG to split DRB;
+-	for NE-DC:
+-	upon setup of SCG RLC bearer;
 -	optionally present, Need ON:
--	upon change from MCG to SCG DRB;
--	for NE-DC, upon change of keyToUse for a DRB configured with an SCG RLC bearer;
+-	for E-UTRA DC, upon change from MCG to SCG DRB;
+-	for NE-DC, upon change of keyToUse, as defined in TS 38.331 [82], for a DRB configured with an SCG RLC bearer;
 -	not present otherwise.
 HO-Conn
 The field is mandatory present in case of handover to E-UTRA or when the fullConfig is included in the RRCConnectionReconfiguration message or in case of RRC connection establishment (excluding RRConnectionResume); otherwise the field is optionally present, need ON. Upon connection establishment/ re-establishment only SRB1 is applicable (excluding RRConnectionResume).
@@ -20406,11 +20440,17 @@ In case of RRC connection establishment (excluding RRConnectionResume); and RRC 
 HO-toEUTRA2
 The field is mandatory present in case of handover to E-UTRA or when the fullConfig is included in the RRCConnectionReconfiguration message; otherwise the field is optionally present, need ON.
 LWIP
-The field is optionally present, Need ON, if drbTypeLWIP-r13 is not set to eutran; otherwise it is not present and the UE shall delete any existing value for this field.
+The field is optionally present, Need ON, if drb-TypeLWIP-r13 is configured and not set to eutran; otherwise it is not present and the UE shall delete any existing value for this field.
 NR-PDCP
 The field is optional present, Need ON, when the SRB is configured with NR-PDCP prior to reception of this reconfiguration message. Otherwise it is not present.
 PDCP
-For the bearers configured with E-UTRA PDCP, the field is mandatory present if the corresponding DRB is being setup; the field is optionally present, need ON, upon reconfiguration of the corresponding split DRB or LWA DRB, upon the corresponding DRB type change from split to MCG bearer, upon the corresponding DRB type change from MCG to split bearer or LWA bearer, upon the corresponding DRB type change from LWA to LTE only bearer, upon handover within E-UTRA and upon the first reconfiguration after re-establishment but in all these cases only when fullConfig is not included in the RRCConnectionReconfiguration message; otherwise it is not present.
+The field is mandatory present:
+- when connected to E-UTRA/EPC:
+- for the bearers configured with E-UTRA PDCP, if the corresponding DRB is being setup;
+the field is optionally present, need ON: :
+- when connected to E-UTRA/EPC:
+- for the bearers configured with E-UTRA PDCP, upon reconfiguration of the corresponding split DRB or LWA DRB, upon the corresponding DRB type change from split to MCG bearer, upon the corresponding DRB type change from MCG to split bearer or LWA bearer, upon the corresponding DRB type change from LWA to LTE only bearer, upon handover within E-UTRA and upon the first reconfiguration after re-establishment but in all these cases only when fullConfig is not included in the RRCConnectionReconfiguration message;
+otherwise it is not present.
 PDCP-S
 The field is mandatory present if the corresponding DRB is being setup; the field is optionally present, need ON, upon SCG change; otherwise it is not present.
 RLC-Setup
@@ -20422,13 +20462,27 @@ The field is mandatory present if the corresponding SRB/DRB is being setup; othe
 SetupM
 The field is mandatory present upon setup of an MCG or split DRB, or upon setup of MCG RLC bearer; otherwise the field is optionally present, need ON.
 SetupS
-The field is mandatory present upon setup of an SCG or split DRB, as well as upon change from MCG to split DRB; otherwise the field is optionally present, need ON.
+The field is mandatory present:
+-	for E-UTRA DC:
+-	upon setup of an SCG or split DRB,
+-	upon change from MCG to split DRB;
+-	for NE-DC, upon setup of SCG RLC bearer;
+otherwise the field is optionally present, need ON.
 SetupS2
-The field is mandatory present upon setup of an SCG or split DRB, as well as upon change from MCG to split or SCG DRB. For an SCG DRB the field is optionally present, need ON. Otherwise the field is not present.
+The field is:
+- mandatory present:
+- for E-UTRA DC:
+- upon setup of an SCG or split DRB, as well as upon change from MCG to split or SCG DRB.
+- optionally present, need ON:
+- for E-UTRA DC:
+- for an SCG DRB
+otherwise the field is not present.
 SPS
 The field is optionally present, need ON, if sps-Config (without suffix) is not configured; otherwise it is not present.
 SPS2
 The field is optionally present, need ON, if sps-Config-r12 is not configured; otherwise it is not present.
+UL-LWA
+The field is optionally present, need ON if ul-LWA-Config-r14 is present. Otherwise the field is not present.
 
 –	RCLWI-Configuration
 The IE RCLWI-Configuration is used to add, modify or release the RCLWI configuration.
@@ -20637,7 +20691,7 @@ Indicates the RLC LI field size. Value TRUE means that 15 bit LI length shall be
 maxRetxThreshold
 Parameter for RLC AM in TS 36.322 [7]. Value t1 corresponds to 1 retransmission, t2 to 2 retransmissions and so on.
 reestablishRLC
-Indicates that RLC shall be re-established. For a UE configured with (NG)EN-DC, E-UTRAN may sets include this field for the (primary) RLC entity of an MCG RLC bearer of a DRB (used upon change from SN terminated split to MN terminated MCG RLC bearer). For a UE configured with NE-DC, E-UTRAN may include this field for the (primary) RLC entity of an SCG RLC bearer of a DRB or of an SRB (used upon key refresh for MN terminated split RB).
+Indicates that RLC shall be re-established. For a UE configured with (NG)EN-DC, E-UTRAN may include this field for the (primary) RLC entity of an MCG RLC bearer of a DRB (used upon change from SN terminated split to MN terminated MCG RLC bearer). For a UE configured with NE-DC, E-UTRAN may include this field for the (primary) RLC entity of an SCG RLC bearer of a DRB or of an SRB (used upon key refresh for MN terminated split RB).
 pollByte
 Parameter for RLC AM in TS 36.322 [7]. Value kB25 corresponds to 25 kBytes, kB50 to 50 kBytes and so on. kBInfinity corresponds to an infinite amount of kBytes. In case pollByte-r14 is signalled, the UE shall ignore pollByte (i.e. without suffix).
 pollPDU
@@ -20653,7 +20707,7 @@ Timer for reordering in TS 36.322 [7], in milliseconds. Value ms0 means 0ms and 
 t-StatusProhibit
 Timer for status reporting in TS 36.322 [7], in milliseconds. Value ms0 means 0ms and behaviour as specified in 7.3.2 applies, ms5 means 5ms and so on. EUTRAN configures values msX-v1310 (with suffix) only if UE supports operation in CE.
 ul-extended-RLC-AM-SN, dl-extended-RLC-AM-SN
-Indicates whether or not the UE shall use the exteneded SN and SO length for AM bearer. Value TRUE means that 16 bit SN length and 16 bit SO length shall be used, otherwise 10 bit SN length and 15 bit SO length shall be used; see TS 36.322 [7].
+Indicates whether or not the UE shall use the extended SN and SO length for AM bearer. Value TRUE means that 16 bit SN length and 16 bit SO length shall be used, otherwise 10 bit SN length and 15 bit SO length shall be used; see TS 36.322 [7].
 
 –	RLF-TimersAndConstants
 The IE RLF-TimersAndConstants contains UE specific timers and constants applicable for UEs in RRC_CONNECTED.
@@ -23770,7 +23824,7 @@ Indicates the duration for performing measurements during RRC_IDLE or RRC_INACTI
 qualityThreshold
 Indicates the quality thresholds for reporting the measured cells for IDLE mode measurements. If absent, PCell and up to maxCellMeasIdle strongest identified cells are considered for idle mode measurement reporting.
 reportQuantities
-Indicates which measurment quantities UE is requested to report in the idle mode measurement report.
+Indicates which measurement quantities UE is requested to report in the idle mode measurement report. In this version of the specification, E-UTRAN always configures the value 'both'.
 measCellList
 Indicates the list of cells which the UE is requested to measure and report for IDLE mode measurements.
 validityArea
@@ -25663,7 +25717,7 @@ This field specifies the Units for the fields rttValue and rttAccuracy. The avai
 rttAccuracy
 This field provides the estimated accuracy of the provided rttValue expressed as the standard deviation in units given by the field rttUnits as defined in TS 36.355 [54].
 
-–		WLAN-Status
+–	WLAN-Status
 The IE WLAN-Status indicates the current status of WLAN connection. The values are set as described in clause 5.6.15.2 and 5.6.15.4.
 WLAN-Status information element
 -- ASN1START
@@ -25954,7 +26008,7 @@ OtherConfig-r9 ::= SEQUENCE	{
 			release					NULL,
 			setup					SEQUENCE{
 				measConfigAppLayerContainer-r15		OCTET STRING (SIZE(1..1000)),
-				serviceType							ENUMERATED {qoe, qoemtsi, spare6, spare5, spare4, spare3, spare2, spare1}
+				serviceType-r15						ENUMERATED {qoe, qoemtsi, spare6, spare5, spare4, spare3, spare2, spare1}
 			}
 		}	OPTIONAL,	-- Need ON	
 		ailc-BitConfig-r15				BOOLEAN							OPTIONAL,	-- Need ON
@@ -28743,7 +28797,7 @@ Indicates whether the UE supports unicast reception in subframes with empty unic
 No
 en-DC
 Indicates whether the UE supports EN-DC.
-No
+-
 endingDwPTS
 Indicates whether the UE supports reception ending with a subframe occupied for a DwPTS-duration as described in TS 36.211 [21] and TS 36.213 [23]. This field can be included only if downlinkLAA is included.
 -
@@ -28802,7 +28856,7 @@ Indicates whether the UE supports handover between E-UTRA/EPC and E-UTRA/5GC.
 Yes
 eventB2
 Indicates whether the UE supports event B2. A UE supporting NR SA operation shall set this bit to supported.
-No
+-
 extendedFreqPriorities
 Indicates whether the UE supports extended E-UTRA frequency priorities indicated by cellReselectionSubPriority field. A UE supporting NR SA operation shall set this bit to supported.
 -
@@ -29145,7 +29199,7 @@ multiNS-Pmax
 Indicates whether the UE supports the mechanisms defined for cells broadcasting NS-PmaxList.
 -
 multipleCellsMeasExtension
-Indicates whether UE supports numberOfTriggeringCells in the report configuration.
+Indicates whether the UE supports numberOfTriggeringCells in the report configuration.
 -
 multipleTimingAdvance
 Indicates whether the UE supports multiple timing advances for each band combination listed in supportedBandCombination. If the band combination comprised of more than one band entry (i.e., inter-band or intra-band non-contiguous band combination), the field indicates that the same or different timing advances on different band entries are supported. If the band combination comprised of one band entry (i.e., intra-band contiguous band combination), the field indicates that the same or different timing advances across component carriers of the band entry are supported.
@@ -29395,7 +29449,7 @@ reportCGI-NR-NoEN-DC
 Indicates whether the UE supports Inter-RAT report CGI procedure towards NR cell when it is not configured with (NG)EN-DC.
 Yes
 srs-CapabilityPerBandPairList
-Indicates, for a particular pair of bands, the SRS carrier switching parameters when switching between the band pair to transmit SRS on a PUSCH-less SCell as specified in 36.212 [22] and 36.213 [23]. If included, the UE shall include a number of entries as indicated in the following, and listed in the same order, as in bandParameterList for the concerned band combination:
+Indicates, for a particular pair of bands, the SRS carrier switching parameters when switching between the band pair to transmit SRS on a PUSCH-less SCell as specified in TS 36.212 [22] and TS 36.213 [23]. If included, the UE shall include a number of entries as indicated in the following, and listed in the same order, as in bandParameterList for the concerned band combination:
 -	For the first band, the UE shall include the same number of entries as in bandParameterList i.e. first entry corresponds to first band in bandParameterList and so on,
 -	For the second band, the UE shall include one entry less i.e. first entry corresponds to the second band in bandParameterList and so on
 -	And so on.
@@ -29664,11 +29718,11 @@ SupportedBandListHRPD
 One entry corresponding to each supported CDMA2000 HRPD band class.
 -
 SupportedBandListNR-SA
-Includes the NR bands supported by the UE in NR-SA (for handover and redirection). The field is included in case the UE supports NR SA as specified in TS 38.331 [32] and not otherwise. The presence of this field also indicates that the UE can perform both NR SS-RSRP and SS-RSRQ measurement in the included NR band(s) as specified in TS 38.215 [36].
+Includes the NR bands supported by the UE in NR-SA (for handover and redirection). The field is included in case the UE supports NR SA as specified in TS 38.331 [32] and not otherwise. The presence of this field also indicates that the UE can perform both NR SS-RSRP and SS-RSRQ measurement in the included NR band(s) as specified in TS 38.215 [89].
 No
-SupportedBandListEN-DC
-Includes the NR bands supported by the UE in (NG)EN-DC. The field is included in case the parameter en-DC-r15 or ng-EN-DC is present and set to supported and not otherwise. The presence of this field also indicates that the UE can perform both NR SS-RSRP and SS-RSRQ measurement in the included NR band(s) as specified in TS 38.215 [36].
-No
+supportedBandListEN-DC
+Includes the NR bands supported by the UE in (NG)EN-DC. The field is included in case the parameter en-DC or ng-EN-DC is present and set to supported and not otherwise. The presence of this field also indicates that the UE can perform both NR SS-RSRP and SS-RSRQ measurement in the included NR band(s) as specified in TS 38.215 [89].
+-
 supportedBandListWLAN
 Indicates the supported WLAN bands by the UE.
 -
@@ -29822,7 +29876,7 @@ ue-CategorySL-C-RX
 UE SL category for V2X reception as defined in TS 36.306 [5]. Set to values 1 to 4 in this version of the specification.
 -
 ue-CategoryUL
-UE UL category as defined in TS 36.306 [5]. Value n14 corresponds to UE category 14, value m1 corresponds to UE category M1, value oneBis corresponds to UE category 1bis, value n21 corresponds to UE category 21. The field ue-CategoryUL is set to values m1, 0, oneBis, 3, 5, 7, 8, 13, n14, 15 to 20, n21 or 22 to 26 in this version of the specification.
+UE UL category as defined in TS 36.306 [5]. Value n14 corresponds to UE category 14, value n16 corresponds to UE category 16 and so on. Value m1 corresponds to UE category M1, value m2 corresponds to UE category M2, value oneBis corresponds to UE category 1bis. The field ue-CategoryUL is set to values m1, m2, 0, oneBis, 3, 5, 7, 8, 13, n14, 15, n16 to n21 or 22 to 26 in this version of the specification.
 -
 ue-CA-PowerClass-N
 Indicates whether the UE supports UE power class N in the E-UTRA band combination, see TS 36.101 [42] and TS 36.307 [78]. If ue-CA-PowerClass-N is not included, UE supports the default UE power class in the E-UTRA band combination, see TS 36.101 [42].
@@ -29882,7 +29936,7 @@ Indicates whether the UE supports UL PDCP Packet Delay per QCI measurement as sp
 -
 ul-powerControlEnhancements
 Indicates whether UE supports UplinkPowerControlDedicated.
-
+-
 uplinkLAA
 Presence of the field indicates that the UE supports uplink LAA operation.
 -
@@ -33609,8 +33663,7 @@ RRCEarlyDataRequest-NB-r15 ::=		SEQUENCE {
 
 RRCEarlyDataRequest-NB-r15-IEs ::=	SEQUENCE {
 	s-TMSI-r15							S-TMSI,
-	establishmentCause-r15				ENUMERATED {mo-Data-r15, mo-ExceptionData-r15,
-											delayTolerantAccess-r15, spare1},
+	establishmentCause-r15				ENUMERATED {mo-Data, mo-ExceptionData, delayTolerantAccess, spare1},
 	cqi-NPDCCH-r15						CQI-NPDCCH-NB-r14 			OPTIONAL,
 	dedicatedInfoNAS-r15				DedicatedInfoNAS,
 	nonCriticalExtension				SEQUENCE {}					OPTIONAL
@@ -35332,8 +35385,9 @@ NOTE:
 -	If the field is absent in the entry in nprach-ParametersListEDT, the value of the same field in the corresponding entry of nprach-ParametersList on the same UL carrier applies, if present. Otherwise, the value of the same field in the corresponding entry of nprach-ParametersList in SystemInformationBlockType2-NB applies.
 -	If the field is absent in an entry of nprach-ParametersListTDD in SystemInformationBlockType22-NB, the value of the same field in the corresponding entry of nprach-ParametersListTDD in SystemInformationBlockType2-NB applies. The field is mandatory present in nprach-ParametersListTDD in SystemInformationBlockType2-NB.
 -	If the field is absent in an entry of nprach-ParametersListFmt2 in SystemInformationBlockType23-NB, the value of the same field, if present, in the corresponding entry of nprach-ParametersListFmt2 in SystemInformationBlockType2-NB applies. Otherwise the value of the same field, if present, in the corresponding entry of the first occurence of nprach-ParametersListFmt2 in the non anchor carrier list applies. Otherwise, the value of the same field in the corresponding entry of nprach-ParametersList in SystemInformationBlockType2-NB applies.
+-	If the field is absent in an entry of nprach-ParametersListFmt2 in SystemInformationBlockType2-NB, the value of the same field in the corresponding entry of nprach-ParametersList in SystemInformationBlockType2-NB applies.
 -	If the field is absent in an entry of nprach-ParametersListFmt2EDT in SystemInformationBlockType23-NB, the value of the same field, if present, in the corresponding entry of nprach-ParametersListFmt2 on the same UL carrier applies. Otherwise, the value of the same field, if present, in the corresponding entry of nprach-ParametersListFmt2 in SystemInformationBlockType2-NB applies. Otherwise the value of the same field, if present, in the corresponding entry of the first occurence of nprach-ParametersListFmt2 in the non anchor carrier list applies. Otherwise, the value of the same field in the corresponding entry of nprach-ParametersList in SystemInformationBlockType2-NB applies.
-
+-	If the field is absent in an entry of nprach-ParametersListFmt2EDT in SystemInformationBlockType2-NB, the value of the same field, if present, in the corresponding entry of nprach-ParametersListFmt2 in SystemInformationBlockType2-NB applies. Otherwise the value of the same field in the corresponding entry of nprach-ParametersList in SystemInformationBlockType2-NB applies.
 Conditional presence
 Explanation
 EDT1
@@ -37148,7 +37202,7 @@ Initiate the measurement reporting procedure, stop performing the related measur
 T322
 NOTE1
 Upon receiving redirectedCarrierOffsetDedicated included in RedirectedCarrierInfo
-Upon entering RRC_CONNECTED, when PLMN selection is performed on request by NAS, or upon cell (re)selection to another RAT, or upon reception of RRCEarlyDataComplete or RRCConnectionRelease for UP-EDT
+Upon entering RRC_CONNECTED, when PLMN selection is performed on request by NAS, or upon cell (re)selection to another frequency or RAT, or upon reception of RRCEarlyDataComplete or RRCConnectionRelease for UP-EDT
 Release redirectedCarrierOffsetDedicated.
 T325
 Timer (re)started upon receiving RRCConnectionReject message with deprioritisationTimer.
@@ -39088,7 +39142,7 @@ Including information used for handling the IDC problems.
 reestablishmentInfo
 Including information needed for the RRC connection re-establishment.
 sourceContextEN-DC
-(NG)EN-DC related context information, in particular regarding the UE capability coordination, as defined by the SCG-ConfigRestrictInfoSCG IE specified in TS 38.331 [82].
+(NG)EN-DC related context information, in particular regarding the UE capability coordination, as defined by the ConfigRestrictInfoSCG IE specified in TS 38.331 [82].
 selectedBandCombinationInfoEN-DC
 Including the BandCombinationInfoSN IE specified in TS 38.331 [82]. See NOTE 1.
 
@@ -41633,6 +41687,11 @@ Release 13
 RP-192195 : Correction on handling of SCell(s) during Make Before Break handover
 3986
 3
+Release 14
+
+RP-192940: Stop using redirectedCarrierOffsetDedicated after reselection to another frequency
+4144
+1
 Release 14
 
 NOTE 1: 	In case a CR has mirror CR(s), the mirror CR(s) are not listed.
@@ -53898,4 +53957,140 @@ RP-192193
 F
 MR-DC measurement gap pattern capability
 15.7.0
+12/2019
+RP-86
+RP-192940
+4113
+1
+A
+Correction on T322
+15.8.0
+
+RP-86
+RP-192935
+4115
+1
+F
+Reconfiguration failure in NE-DC
+15.8.0
+
+RP-86
+RP-192936
+4117
+3
+F
+Miscellaneuous corrections for late drop
+15.8.0
+
+RP-86
+RP-192934
+4119
+2
+F
+Corrections to power limitations in (NG)EN-DC
+15.8.0
+
+RP-86
+RP-192941
+4120
+4
+F
+Correction to SIB5 acquisition for idle mode measurements
+15.8.0
+
+RP-86
+RP-192938
+4128
+2
+F
+Correction to field conditions in NE-DC
+15.8.0
+
+RP-86
+RP-192941
+4142
+1
+F
+Corrections to Application layer measurement reporting and UE capability signalling
+15.8.0
+
+RP-86
+RP-192941
+4143
+1
+F
+Allow Delta Configuration of ParametersListFmt2 and ParametersListEDTFmt2 in SIB2-NB
+15.8.0
+
+RP-86
+RP-192940
+4144
+1
+F
+Stop using redirectedCarrierOffsetDedicated after reselection to another frequency.
+15.8.0
+
+RP-86
+RP-192937
+4145
+1
+F
+Correction to AS security key update
+15.8.0
+
+RP-86
+RP-192936
+4148
+1
+F
+On performing L3 filtering of NR related measurements
+15.8.0
+
+RP-86
+RP-192941
+4150
+-
+F
+Correction to nonCriticalExtension of RRCConnectionRelease
+15.8.0
+
+RP-86
+RP-192939
+4160
+2
+A
+Clarification on sCellIndex and SCell lists
+15.8.0
+
+RP-86
+RP-192941
+4161
+2
+F
+Correction to early measurement reporting results
+15.8.0
+
+RP-86
+RP-192941
+4177
+2
+F
+Clarification on UE Inactive AS context
+15.8.0
+
+RP-86
+RP-192941
+4183
+-
+F
+Restoring SDAP and RoHC contexts during Resumption 
+15.8.0
+
+RP-86
+RP-192936
+4185
+-
+F
+Correction for the establishment of LTE RLC bearers for (NG)EN-DC and NE-DC
+15.8.0
 
