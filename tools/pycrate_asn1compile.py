@@ -88,10 +88,10 @@ def main():
     
     parser = argparse.ArgumentParser(description='compile ASN.1 input file(s) for the pycrate ASN.1 runtime')
     #
-    parser.add_argument('-i', dest='input', type=str, nargs='+',
-                        help='ASN.1 input file(s) or directory')
     parser.add_argument('-s', dest='spec', type=str,
                         help='provide a specification shortname, instead of ASN.1 input file(s)')
+    parser.add_argument('-i', dest='input', type=str, nargs='+',
+                        help='ASN.1 input file(s) or directory')
     parser.add_argument('-o', dest='output', type=str, default='out',
                         help='compiled output Python (and json) source file(s)')
     parser.add_argument('-j', dest='json', action='store_true',
