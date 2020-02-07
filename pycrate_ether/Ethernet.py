@@ -4,6 +4,7 @@
 # * Version : 0.4
 # *
 # * Copyright 2016. Benoit Michau. ANSSI.
+# * Copyright 2020. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -33,8 +34,10 @@ from pycrate_core.base import *
 from pycrate_core.repr import *
 
 # EthernetPacket decoder requires basic L2 / L3 objects for decoding
-from .IP import IPv4, ICMP, IPv6, UDP, TCP
-from .ARP import ARP
+from .IP    import IPv4, ICMP, IPv6, UDP, TCP
+from .SCTP  import SCTP
+from .ARP   import ARP
+
 
 EtherType_dict = {
     0x0800 : 'IPv4',
@@ -127,24 +130,31 @@ class VLAN(Envelope):
 #                  /IPv4 /ICMP
 #                        /UDP
 #                        /TCP
+#                        /SCTP
 #                  /IPv6 /UDP
 #                        /TCP
+#                        /SCTP
 
 class EthernetPacket(Envelope):
+    
     _GEN = (
         Ethernet(),
         )
+    
     def _from_char(self, char):
         self.__init__()
+        # Ethernet layer
         self[0]._from_char(char)
         typ = self[0][2].get_val()
         hier = 1
+        # potential VLAN layer
         if typ == 0x8100:
             vlan = VLAN(hier=hier)
             hier += 1
             vlan._from_char(char)
             self.append(vlan)
             typ = vlan[3]._val
+        # ARP or IP layer
         if typ == 0x0806:
             arp = ARP(hier=hier)
             hier += 1
@@ -162,6 +172,7 @@ class EthernetPacket(Envelope):
         ip._from_char(char)
         self.append(ip)
         typ = typ._val
+        # ICMP, UDP, TCP or SCTP layer
         if typ == 1:
             icmp = ICMP(hier=hier)
             hier += 1
@@ -178,8 +189,21 @@ class EthernetPacket(Envelope):
             hier += 1
             udp._from_char(char)
             self.append(udp)
-        data = Buf('Data', hier=hier)
-        hier += 1
-        data._from_char(char)
-        self.append(data)
+        elif typ == 132:
+            sctp = SCTP(hier=hier)
+            hier += 1
+            sctp._from_char(char)
+            self.append(sctp)
+        # remaining higher layer undecoded data
+        if char.len_byte():
+            data = Buf('Data', hier=hier)
+            hier += 1
+            data._from_char(char)
+            if isinstance(self[-1], IPv4):
+                # remove the proto field automation
+                self[-1]['proto'].set_valauto(None)
+            elif isinstance(self[-1], IPv6):
+                # remove the next field automation
+                self[-1]['next'].set_valauto(None)
+            self.append(data)
 

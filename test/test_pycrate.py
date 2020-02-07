@@ -89,7 +89,7 @@ class TestPycrate(unittest.TestCase):
     # fmt_ip objects
     def test_ether(self):
         print('[<>] testing pycrate_ether')
-        test_ip(eth_frames)
+        test_ether(eth_frames)
     
     # asn1c
     def test_asn1c(self):
