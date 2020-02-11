@@ -36,6 +36,29 @@ from pycrate_asn1dir.TCAP_MAPv2v3   import GLOBAL as GLOBAL_MAPv2v3
 Operations      = GLOBAL_MAPv2v3.MOD['MAPv2v3-Protocol']['Supported-MAP-Operations']
 OperationPkgs   = GLOBAL_MAPv2v3.MOD['MAPv2v3-Application']['Supported-MAP-OperationPackages']
 ApplicationCtxs = GLOBAL_MAPv2v3.MOD['MAPv2v3-Application']['Supported-MAP-ApplicationContexts']
+Errors_v2       = GLOBAL_MAPv2v3.MOD['MAPv2-Errors']
+Errors_v3       = GLOBAL_MAPv2v3.MOD['MAP-Errors']
+
+Errors = {}
+for errname in Errors_v3['_val_']:
+    errval  = Errors_v3[errname]._val
+    errcode = errval['errorCode'][1]
+    Errors[errcode] = [errval]
+
+for errname in Errors_v2['_val_']:
+    errval  = Errors_v2[errname]._val
+    errcode = errval['errorCode'][1]
+    if errcode in Errors:
+        Errors[errcode].append(errval)
+    else:
+        Errors[errcode] = [errval]
+
+
+def get_error(errcode):
+    """returns the list of defined MAP errors for the given error code
+    There is a single MAP error per errcode per MAP version (v1, v2, v3)
+    """
+    return Errors.get(errcode, [])
 
 
 def get_operation(opcode):
