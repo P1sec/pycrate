@@ -95,7 +95,7 @@ TypeMGMT_dict = {
     }
 
 # SIGTRAN TRANS message type
-TRANS_DATA = 2
+TRANS_DATA = 1
 
 TypeTRANS_dict = {
     TRANS_DATA : 'Payload data'
