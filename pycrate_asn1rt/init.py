@@ -71,7 +71,7 @@ def init_modules(*args, **kwargs):
         for Obj in Mod._all_:
             #
             # useful for debugging...
-            Obj._mod = Mod.__name__
+            Obj._mod = Mod._name_
             #
             # setting additional attributes
             if Obj.TYPE == TYPE_INT:
