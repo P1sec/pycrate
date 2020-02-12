@@ -4184,20 +4184,10 @@ class Alt(Element):
         elif self.__class__.DEFAULT_ALT:
             self.DEFAULT_ALT = self.__class__.DEFAULT_ALT.clone()
         
-        # content is populated with clones from GEN in a lazy way
-        # through calling get_alt()
-        # however, during clone(), content is used to duplicate an existing
-        # instance
-        if 'content' in kw:
-            self._content = kw['content']
-        else:
-            self._content = {}
-        
         if self._SAFE_STAT:
             self._chk_hier()
             self._chk_trans()
             self._chk_gen(self._GEN)
-            self._chk_gen(self._content)
             if self.DEFAULT_ALT is not None and \
             not isinstance(self.DEFAULT_ALT, Element):
                 raise(EltErr('{0} [__init__]: invalid DEFAULT element'\
@@ -4490,11 +4480,9 @@ class Alt(Element):
             kw['hier'] = self._hier
         if self._trans != self.__class__._trans:
             kw['trans'] = self._trans
-        if self._content:
-            kw['content'] = {i: e.clone() for (i, e) in self._content.items()}
-        # substitute the Envelope generator with clones of the current 
-        # envelope's content
-        return self.__class__(self._name, **kw)
+        clone = self.__class__(self._name, **kw)
+        clone.insert(self.get_sel(), self.get_alt().clone())
+        return clone
     
     #--------------------------------------------------------------------------#
     # Python list / dict methods emulation
