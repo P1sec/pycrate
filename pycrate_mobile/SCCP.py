@@ -441,19 +441,21 @@ _ProtClass_dict = {
     3 : 'Class 3 (connection-oriented)'
     }
 
-_ProtConLess_dict = {
-    0 : 'no special options',
-    8 : 'return message on error'
-    }
+_ProtCon_dict = {i: 'spare' for i in range(16)}
+_ProtConLess_dict = {i: 'spare' for i in range(16)}
+_ProtConLess_dict[0] = 'no special options'
+_ProtConLess_dict[8] = 'return message on error'
+
 
 class ProtocolClass(Envelope):
     _GEN = (
-        Uint('spare', bl=4),
+        Uint('Handling', bl=4),
         Uint('Class', bl=4, dic=_ProtClass_dict)
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[0].set_dicauto(lambda: _ProtConLess_dict if self[1].get_val() < 2 else {})
+        self[0].set_dicauto(lambda: _ProtConLess_dict if self[1].get_val() < 2 else _ProtCon_dict)
 
 
 #------------------------------------------------------------------------------#
