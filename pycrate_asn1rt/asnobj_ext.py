@@ -103,11 +103,9 @@ Single value: Python 2-tuple
     
     _ASN_RE = re.compile('(?:\'([\s01]{0,})\'B)|(?:\'([\s0-9A-F]{0,})\'H)')
     
-    _val_ref_type = str_types + (tuple, )
-    
     def _get_val_obj(self, ref):
-        if isinstance(ref, self._val_ref_type):
-            const_tr = self._get_const_tr()
+        const_tr = self._get_const_tr()
+        if isinstance(ref, str_types):
             if ref in const_tr:
                 return const_tr[ref]
             elif ref in _ASN1ObjBasicLUT:
@@ -115,12 +113,18 @@ Single value: Python 2-tuple
             else:
                 raise(ASN1ObjErr('{0}: invalid object reference, {1!r}'\
                       .format(self.fullname(), ref)))
+        elif isinstance(ref, (tuple, list)):
+            if ref in const_tr:
+                return const_tr[ref]
+            else:
+                try:
+                    return GLOBAL.MOD[ref[0]][ref[1]]
+                except Exception:
+                    raise(ASN1ObjErr('{0}: invalid object reference, {1!r}'\
+                          .format(self.fullname(), ref)))
         else:
-            try:
-                return GLOBAL.MOD[ref[0]][ref[1]]
-            except Exception:
-                raise(ASN1ObjErr('{0}: invalid object reference, {1!r}'\
-                      .format(self.fullname(), ref)))
+            raise(ASN1ObjErr('{0}: invalid object reference, {1!r}'\
+                  .format(self.fullname(), ref)))
     
     def _get_const_tr(self):
         if hasattr(self, '__const_tr__'):
