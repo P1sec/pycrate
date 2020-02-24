@@ -300,6 +300,11 @@ Specific attribute:
         else:
             self._safechk_val_int(val)
     
+    def _safechk_bnd(self, val):
+        # only check bound when an integer is set as value
+        if isinstance(val, integer_types):
+            ASN1Obj._safechk_bnd(self, val)
+    
     def get_name(self):
         """Returns the NamedNumber corresponding to the internal value
         """
