@@ -1083,21 +1083,36 @@ class ASN1Obj(Element):
         self.set_val(newval)
     
     def set_val(self, val):
+        """sets the given value `val' into self
+        """
         self._val = val
         if self._SAFE_VAL:
             self._safechk_val(self._val)
         if self._SAFE_BND:
             self._safechk_bnd(self._val)
     
+    def unset_val(self):
+        """reset internal values corresponding to self._val and its impacted 
+        sub-components
+        """
+        #done = set()
+        for path, val in self.get_val_paths()[::-1]:
+            for path_ind in range(len(path), 0, -1):
+                Obj = self.get_at(path[:path_ind])
+                #if Obj not in done and Obj._val is not None:
+                if Obj._val is not None:
+                    del Obj._val
+                #    done.add(Obj)
+        del self._val
+    
     def reset_val(self):
-        """reset all internal values
+        """reset all internal values into self and all its sub-components
         """
         if hasattr(self, '_reset'):
             # avoid recursion
             return
         else:
             self._reset = True
-            #print('[reset_val] %s: %r' % (self.fullname(), self._val))
             if '_val' in self.__dict__:
                 # a specific value is set within the instance: delete it
                 del self._val
