@@ -1095,14 +1095,11 @@ class ASN1Obj(Element):
         """reset internal values corresponding to self._val and its impacted 
         sub-components
         """
-        #done = set()
         for path, val in self.get_val_paths()[::-1]:
             for path_ind in range(len(path), 0, -1):
                 Obj = self.get_at(path[:path_ind])
-                #if Obj not in done and Obj._val is not None:
                 if Obj._val is not None:
                     del Obj._val
-                #    done.add(Obj)
         del self._val
     
     def reset_val(self):
