@@ -1089,6 +1089,30 @@ class ASN1Obj(Element):
         if self._SAFE_BND:
             self._safechk_bnd(self._val)
     
+    def reset_val(self):
+        """reset all internal values
+        """
+        if hasattr(self, '_reset'):
+            # avoid recursion
+            return
+        else:
+            self._reset = True
+            #print('[reset_val] %s: %r' % (self.fullname(), self._val))
+            if '_val' in self.__dict__:
+                # a specific value is set within the instance: delete it
+                del self._val
+            if self.TYPE in (TYPE_BIT_STR, TYPE_OCT_STR) and self._const_cont is not None:
+                self._const_cont.reset_val()
+            elif self.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
+                self._cont.reset_val()
+            elif self.TYPE in (TYPE_CHOICE, TYPE_SEQ, TYPE_SET):
+                for Comp in self._cont.values():
+                    Comp.reset_val()
+            elif self.TYPE == TYPE_OPEN:
+                for Obj in self._get_const_tr().values():
+                    Obj.reset_val()
+            del self._reset
+    
     def convert_named_val(self):
         """convert all INTEGER and BIT STRING values within self to named values and
         sets of named bits when possible

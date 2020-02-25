@@ -1712,6 +1712,8 @@ def _test_lteran():
     for p in pkts_s1ap:
         S1PDU.from_aper(p)
         val = S1PDU()
+        S1PDU.reset_val()
+        S1PDU.set_val(val)
         ret = S1PDU.to_aper()
         assert( ret == p )
         S1PDU.from_aper_ws(p)
@@ -1734,6 +1736,8 @@ def _test_lteran():
     for p in pkts_x2ap:
         X2PDU.from_aper(p)
         val = X2PDU()
+        X2PDU.reset_val()
+        X2PDU.set_val(val)
         ret = X2PDU.to_aper()
         assert( ret == p )
         X2PDU.from_aper_ws(p)
@@ -1779,6 +1783,8 @@ def _test_tcap_map():
     for p in pkts_tcap_map:
         M.from_ber(p)
         val = M()
+        M.reset_val()
+        M.set_val(val)
         ret = M.to_ber()
         # hopefully here, BER re-encoding does not diverge from the original packet
         assert( ret == p )
@@ -1830,6 +1836,8 @@ def _test_tcap_cap():
     for p in pkts_tcap_cap:
         M.from_ber(p)
         val = M()
+        M.reset_val()
+        M.set_val(val)
         ret = M.to_ber()
         # hopefully here, BER re-encoding does not diverge from the original packet
         assert( ret == p )
@@ -1912,17 +1920,17 @@ def test_perf_asn1rt():
     
     _load_lteran()
     print('[+] LTE S1AP and X2AP encoding / decoding (APER)')
-    Tc = timeit(_test_lteran, number=10)
+    Tc = timeit(_test_lteran, number=3)
     print('test_lteran: {0:.4f}'.format(Tc))
     
     _load_tcap_map()
     print('[+] TCAP MAP encoding / decoding (BER)')
-    Td = timeit(_test_tcap_map, number=10)
+    Td = timeit(_test_tcap_map, number=3)
     print('test_tcap_map: {0:.4f}'.format(Td))
     
     _load_tcap_cap()
     print('[+] TCAP CAP encoding / decoding (BER)')
-    Te = timeit(_test_tcap_cap, number=5)
+    Te = timeit(_test_tcap_cap, number=3)
     print('test_tcap_cap: {0:.4f}'.format(Te))
     
     _load_X509()
