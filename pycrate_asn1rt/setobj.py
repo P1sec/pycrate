@@ -683,48 +683,61 @@ class ASN1Set(object):
     
     _CONTAIN_WEXT = False # use extension to test for containment
     
-    def __init__(self, rv=[], rr=[], ev=None, er=[]):
+    def __init__(self, rv=[], rr=[], ev=None, er=[], name=b''):
         self._rr = reduce_rangelist(rr)
         self._rv = []
+        sort_root, sort_ext = True, True
         for v in rv:
-            if not any([v in _rr for _rr in self._rr]):
+            if isinstance(v, dict):
+                # dictionnary of heterogeneous values:
+                # not comparable neither sortable
+                self._rv.append(v)
+                sort_root = False
+            elif not any([v in _rr for _rr in self._rr]):
                 self._rv.append(v)
         if ev is not None:
             self._er = reduce_rangelist(er)
             self._ev = []
             for v in ev:
-                if not any([v in _er for _er in self._er]):
+                if isinstance(v, dict):
+                    # dictionnary of heterogeneous values:
+                    # not comparable neither sortable
+                    self._ev.append(ev)
+                    sort_ext = False
+                elif not any([v in _er for _er in self._er]):
                     self._ev.append(v)
         else:
             self._er = []
             self._ev = None
-        self._init()
+        self._init(sort_root, sort_ext)
     
-    def _init(self):
+    def _init(self, sort_root, sort_ext):
         """
         creates the `root' and `ext' attributes which lists all values and 
         ranges of their domain in order
         """
-        if self._rv:
-            try:
-                self._rv.sort()
-            except:
-                pass
-        if self._rr:
-            try:
-                self._rr.sort()
-            except:
-                pass
-        if self._ev:
-            try:
-                self._ev.sort()
-            except:
-                pass
-        if self._er:
-            try:
-                self._er.sort()
-            except:
-                pass
+        if sort_root:
+            if self._rv:
+                try:
+                    self._rv.sort()
+                except:
+                    pass
+            if self._rr:
+                try:
+                    self._rr.sort()
+                except:
+                    pass
+        if sort_ext:
+            if self._ev:
+                try:
+                    self._ev.sort()
+                except:
+                    pass
+            if self._er:
+                try:
+                    self._er.sort()
+                except:
+                    pass
         #
         self.root = []
         if self._rv and isinstance(self._rv[0], str_types) or \
