@@ -2027,6 +2027,9 @@ class _CONSTRUCT_OF(ASN1Obj):
             raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'\
                   .format(self.fullname(), txt)))
         txt, self._val = txt[1:].strip(), []
+        if txt[0:1] == '}':
+            # empty value
+            return txt[1:].strip()
         _par = self._cont._parent
         self._cont._parent = self
         while True:
@@ -2051,8 +2054,8 @@ class _CONSTRUCT_OF(ASN1Obj):
             val.append('  %s,\n' % self._cont._to_asn1().replace('\n', '\n  '))
         self._cont._parent = _par
         if val:
-            val[-1] = val[-1][:-2]
-        return '{\n' + ''.join(val) + '\n}'
+            val[-1] = val[-1][:-2] + '\n'
+        return '{\n' + ''.join(val) + '}'
     
     ###
     # conversion between internal value and ASN.1 PER encoding
