@@ -702,7 +702,7 @@ class ASN1Set(object):
                 if isinstance(v, dict):
                     # dictionnary of heterogeneous values:
                     # not comparable neither sortable
-                    self._ev.append(ev)
+                    self._ev.append(v)
                     sort_ext = False
                 elif not any([v in _er for _er in self._er]):
                     self._ev.append(v)
@@ -720,23 +720,23 @@ class ASN1Set(object):
             if self._rv:
                 try:
                     self._rv.sort()
-                except:
+                except Exception:
                     pass
             if self._rr:
                 try:
                     self._rr.sort()
-                except:
+                except Exception:
                     pass
         if sort_ext:
             if self._ev:
                 try:
                     self._ev.sort()
-                except:
+                except Exception:
                     pass
             if self._er:
                 try:
                     self._er.sort()
-                except:
+                except Exception:
                     pass
         #
         self.root = []
