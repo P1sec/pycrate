@@ -158,27 +158,45 @@ def print_operation_infos(args):
         oc = args.o[:]
     for i in oc:
         vals = Op.get('operationCode', ('local', i))
-        if vals[0] == 'U':
-            print()
-            print('-'*80)
-            print('-'*25, ' operationCode: (local, %.2i) ' % i, '-'*25)
-            print('-'*80)
-            val = vals[1]
-            show_infos(val, args.e, args.x)
-        elif vals[0] == 'M':
-            print()
-            print('-'*80)
-            print('-'*25, ' operationCode: (local, %.2i) ' % i, '-'*25)
-            print('-'*80)
-            for val in vals[1]:
+        if args.l:
+            if vals[0] == 'U':
+                if 'ArgumentType' in vals[1]:
+                    Arg = vals[1]['ArgumentType'].get_typeref()
+                    print('MAP operation code (local, %.2i): %s.%s'\
+                          % (i, Arg._mod, Arg._name))
+                else:
+                    print('MAP operation code (local, %.2i): no argument' % i)
+            elif vals[0] == 'M':
+                for v in vals[1]:
+                    if 'ArgumentType' in v:
+                        Arg = v['ArgumentType'].get_typeref()
+                        print('MAP operation code (local, %.2i): %s.%s'\
+                              % (i, Arg._mod, Arg._name))
+                    else:
+                        print('MAP operation code (local, %.2i): no argument' % i)
+        else:
+            if vals[0] == 'U':
+                print()
+                print('-'*80)
+                print('-'*25, ' operationCode: (local, %.2i) ' % i, '-'*25)
+                print('-'*80)
+                val = vals[1]
                 show_infos(val, args.e, args.x)
-        show_appctx(i)
+            elif vals[0] == 'M':
+                print()
+                print('-'*80)
+                print('-'*25, ' operationCode: (local, %.2i) ' % i, '-'*25)
+                print('-'*80)
+                for val in vals[1]:
+                    show_infos(val, args.e, args.x)
+            show_appctx(i)
 
 
 def main():
     parser = argparse.ArgumentParser(description='print information related to MAP '\
         'procedures providing their operation code integral value')
     parser.add_argument('-o', type=int, nargs='+', help='MAP operation code', default=[])
+    parser.add_argument('-l', action='store_true', help='only list MAP argument name associated to operation codes')
     parser.add_argument('-e', action='store_true', help='add procedure-related errors')
     parser.add_argument('-x', action='store_true', help='add extended data structures')
     args = parser.parse_args()
