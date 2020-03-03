@@ -2046,16 +2046,20 @@ class _CONSTRUCT_OF(ASN1Obj):
                       .format(self.fullname(), txt)))
     
     def _to_asn1(self):
-        val = []
-        _par = self._cont._parent
-        self._cont._parent = self
-        for v in self._val:
-            self._cont._val = v
-            val.append('  %s,\n' % self._cont._to_asn1().replace('\n', '\n  '))
-        self._cont._parent = _par
-        if val:
-            val[-1] = val[-1][:-2] + '\n'
-        return '{\n' + ''.join(val) + '}'
+        if not self._val:
+            # empty list
+            return '{ }'
+        else:
+            val = []
+            _par = self._cont._parent
+            self._cont._parent = self
+            for v in self._val:
+                self._cont._val = v
+                val.append('  %s,\n' % self._cont._to_asn1().replace('\n', '\n  '))
+            self._cont._parent = _par
+            if val:
+                val[-1] = val[-1][:-2]
+            return '{\n' + ''.join(val) + '\n}'
     
     ###
     # conversion between internal value and ASN.1 PER encoding
