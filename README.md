@@ -176,6 +176,7 @@ The modules provided here implement Ethernet and IP-oriented protocols and forma
 * *Ethernet* with structures for Ethernet and VLAN headers
 * *ARP* simply providing the structure for ARP
 * *IP* with structures for IPv4, IPv6, ICMP, UDP and TCP
+* *SCTP* with structures for SCTP headers and various chunks
 * *PCAP* with structures for the PCAP global header and the record header
 
 
