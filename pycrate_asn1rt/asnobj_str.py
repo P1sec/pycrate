@@ -170,7 +170,7 @@ Specific constraints attributes:
             # self._val has not the correct format
             return names
         for off, bit in enumerate(uint_to_bitstr(self._val[0], self._val[1])):
-            if bit == '1':
+            if bit == '1' and off in self._cont_rev:
                 names.add(self._cont_rev[off])
         return names
     
