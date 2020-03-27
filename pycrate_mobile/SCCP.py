@@ -749,15 +749,16 @@ class _Ptr(UintLE):
             #
             # get the length of following pointers
             for ptr in self._env._content[1+self._env.index(self):]:
-                val += ptr.get_len()
+                val += ptr._bl//8
+            #
             # get the length of following fields, up to self._field
-            ind = 1+self._env._env.index(self._env)
+            ind = 1 + self._env._env.index(self._env)
             for field in self._env._env._content[ind:]:
                 if field._name == self._field:
                     break
                 else:
                     val += field.get_len()
-            return min(self._max, 1+val)
+            return min(self._max, (self._bl//8)+val)
     
     _valauto = _make_val
 
@@ -810,7 +811,8 @@ class SCCPMessage(Envelope):
         for e in self._content:
             e._from_char(char)
             if e._name == 'Pointers':
-                start = 1+self.index(e)
+                # e: envelope containing all Ptr8 or Ptr16 values
+                start = 1 + self.index(e)
                 break
         if not start:
             return
@@ -821,7 +823,7 @@ class SCCPMessage(Envelope):
             if ptr._field == 'Opt' and ptr._val == 0:
                 break
             # update the charpy cursor
-            char._cur = ccur + 8*ptr.get_val() - (numptr-ind)*ptr._bl
+            char._cur = ccur + 8 * ptr.get_val() - (numptr-ind) * ptr._bl
             # select the corresponding field
             f = self._content[start+ind]
             f._from_char(char)
