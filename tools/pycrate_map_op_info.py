@@ -1,10 +1,11 @@
-#!/usr/bin/python3
-# −*− coding: UTF−8 −*−
+#!/usr/bin/env python3
+
+# -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.4.0
+# * Version : 0.4
 # *
-# * Copyright © 2018. Benoit Michau. P1sec
+# * Copyright 2018. Benoit Michau. P1sec
 # *
 # * This program is free software: you can redistribute it and/or modify
 # * it under the terms of the GNU General Public License version 2 as published
