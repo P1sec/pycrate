@@ -76,7 +76,7 @@ def main():
         try:
             buf = unhexlify(args.stream)
         except:
-            print('%s, args error: invalid hex stream' % (sys.argv[0], args.stream))
+            print('%s, args error: invalid hex stream %s' % (sys.argv[0], args.stream))
             return 0
     else:
         print('%s, args error: missing input encoded object' % sys.argv[0])
