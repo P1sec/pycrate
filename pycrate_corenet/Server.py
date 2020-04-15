@@ -77,6 +77,7 @@ class CorenetServer(object):
                   'errclo': True,
                   'GTPU'  : '10.1.1.1'}
     #SERVER_HNB = {} # disabling HNB server
+    #
     # S1AP server
     SERVER_ENB = {'INET'  : socket.AF_INET,
                   'IP'    : '10.2.1.1',
@@ -85,6 +86,15 @@ class CorenetServer(object):
                   'errclo': True,
                   'GTPU'  : '10.2.1.1'}
     #SERVER_ENB = {} # disabling S1AP server
+    #
+    # NGAP Server
+    SERVER_GNB = {'INET'  : socket.AF_INET,
+                  'IP'    : '10.3.1.1'
+                  'port'  : 38412,
+                  'MAXCLI': SERVER_MAXCLI,
+                  'errclo': True,
+                  'GTPU'  : '10.3.1.1'}
+    #SERVER_GNB = {} # disable NGAP Server
     #
     # Server scheduler resolution:
     # This is the timeout on the main select() loop.

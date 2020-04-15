@@ -1166,12 +1166,12 @@ class S1APPathSwitchRequest(S1APNonUESigProc):
         }
 
 
-class S1APHandoverCancel(S1APNonUESigProc):
+class S1APHandoverCancel(S1APSigProc):
     """Handover Cancellation: TS 36.413, section 8.4.5
     
     eNB-initiated
     request-response
-    non-UE-associated signalling procedure
+    UE-associated signalling procedure
     
     InitiatingMessage:
       IEs:

@@ -68,15 +68,18 @@ Element._SAFE_DYN  = True
 
 log('CorenetServer: loading all ASN.1 and NAS modules, be patient...')
 # import ASN.1 modules
+# to drive gNodeB and ng-eNodeB
+from pycrate_asn1dir import NGAP
 # to drive eNodeB and Home-eNodeB
 from pycrate_asn1dir import S1AP
 # to drive Home-NodeB
 from pycrate_asn1dir import HNBAP
 from pycrate_asn1dir import RUA
 from pycrate_asn1dir import RANAP
-# to decode UE 3G and LTE radio capability
+# to decode UE 3G, LTE and NR radio capability
 from pycrate_asn1dir import RRC3G
 from pycrate_asn1dir import RRCLTE
+from pycrate_asn1dir import RRCNR
 # to handle SS messages
 from pycrate_asn1dir import SS
 #
@@ -98,6 +101,10 @@ from pycrate_mobile  import TS24008_SM
 from pycrate_mobile  import TS24301_EMM
 from pycrate_mobile  import TS24301_ESM
 #
+# to drive 5G UE
+from pycrate_mobile  import TS24501_FGMM
+from pycrate_mobile  import TS24501_FGSM
+#
 from pycrate_mobile  import TS24007
 from pycrate_mobile  import NAS
 
@@ -110,6 +117,7 @@ from pycrate_mobile  import NAS
 ASN_GLOBAL = S1AP.GLOBAL.MOD
 
 # ASN.1 PDU encoders / decoders
+PDU_NGAP  = NGAP.NGAP_PDU_Descriptions.NGAP_PDU
 PDU_S1AP  = S1AP.S1AP_PDU_Descriptions.S1AP_PDU
 PDU_HNBAP = HNBAP.HNBAP_PDU_Descriptions.HNBAP_PDU
 PDU_RUA   = RUA.RUA_PDU_Descriptions.RUA_PDU
@@ -120,16 +128,34 @@ PDU_SS_Facility = SS.SS_Facility.Facility
 # objects' value will be mixed in case a thread ctxt switch occurs between 
 # the fg interpreter and the bg CorenetServer loop, and both accesses the same
 # ASN.1 modules / objects
+ASN_READY_NGAP  = Event()
 ASN_READY_S1AP  = Event()
 ASN_READY_HNBAP = Event()
 ASN_READY_RUA   = Event()
 ASN_READY_RANAP = Event()
+ASN_READY_NGAP.set()
 ASN_READY_S1AP.set()
 ASN_READY_HNBAP.set()
 ASN_READY_RUA.set()
 ASN_READY_RANAP.set()
 
 ASN_ACQUIRE_TO = 0.01 # in sec
+
+def asn_ngap_acquire():
+    if ASN_READY_NGAP.is_set():
+        ASN_READY_NGAP.clear()
+        return True
+    else:
+        ready = ASN_READY_NGAP.wait(ASN_ACQUIRE_TO)
+        if not ready:
+            # timeout, module is still locked
+            return False
+        else:
+            ASN_READY_NGAP.clear()
+            return True
+
+def asn_ngap_release():
+    ASN_READY_NGAP.set()
 
 def asn_s1ap_acquire():
     if ASN_READY_S1AP.is_set():
@@ -356,17 +382,20 @@ def threadit(f, *args, **kwargs):
 RAT_GERA  = 'GERAN'
 RAT_UTRA  = 'UTRAN'
 RAT_EUTRA = 'E-UTRAN'
+RAT_NR    = 'NR'
 
 # SCTP payload protocol identifiers
 SCTP_PPID_HNBAP = 20
 SCTP_PPID_RUA   = 19
 SCTP_PPID_S1AP  = 18
+SCTP_PPID_NGAP  = 60
 
 # HNB / ENB protocol identifiers
 PROTO_HNBAP = 'HNBAP'
 PROTO_RUA   = 'RUA'
 PROTO_RANAP = 'RANAP'
 PROTO_S1AP  = 'S1AP'
+PROTO_NGAP  = 'NGAP'
 
 
 #------------------------------------------------------------------------------#

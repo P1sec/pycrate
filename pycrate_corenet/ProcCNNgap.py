@@ -1,0 +1,1194 @@
+# -*- coding: UTF-8 -*-
+#/**
+# * Software Name : pycrate
+# * Version : 0.4
+# *
+# * Copyright 2020. Benoit Michau. P1Sec.
+# *
+# * This library is free software; you can redistribute it and/or
+# * modify it under the terms of the GNU Lesser General Public
+# * License as published by the Free Software Foundation; either
+# * version 2.1 of the License, or (at your option) any later version.
+# *
+# * This library is distributed in the hope that it will be useful,
+# * but WITHOUT ANY WARRANTY; without even the implied warranty of
+# * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# * Lesser General Public License for more details.
+# *
+# * You should have received a copy of the GNU Lesser General Public
+# * License along with this library; if not, write to the Free Software
+# * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, 
+# * MA 02110-1301  USA
+# *
+# *--------------------------------------------------------
+# * File Name : pycrate_corenet/ProcCNNgap.py
+# * Created : 2020-04-15
+# * Authors : Benoit Michau 
+# *--------------------------------------------------------
+#*/
+
+#__all__ = [
+#    'NGAPSigProc',
+#    'NGAPNonUESigProc',
+#    #
+#    
+#    ]
+
+from .utils     import *
+from .ProcProto import *
+
+
+#------------------------------------------------------------------------------#
+# NGAP signalling procedure
+# TS 38.413, version g10
+# Core Network side
+#------------------------------------------------------------------------------#
+
+
+class NGAPSigProc(LinkSigProc):
+    """NGAP UE-associated signalling procedure handler
+    
+    instance attributes:
+        - Name  : procedure name
+        - N2    : reference to the N2d instance running this procedure
+        - GNB   : reference to the GNBd instance connected by N2
+        - Server: reference to the CorenetServer instance handling the gNB
+        - UE    : reference to the UEd instance connected by N2
+        - Desc  : ASN.1 procedure description
+        - Code  : procedure code
+        - Crit  : procedure criticality
+        - Cont  : ASN.1 procedure PDU(s) content
+        - Encod : custom PDU encoders with fixed values
+        - Decod : custom PDU decoders with transform functions
+    """
+    
+    TRACK_PDU = True
+    
+    # for UE-related signalling
+    UE = None
+    
+    def __init__(self, n2d):
+        #
+        self.Name   = self.__class__.__name__
+        self.N2     = n2d
+        self.GNB    = n2d.GNB
+        self.Server = n2d.GNB.Server
+        if n2d.UE:
+            self.UE = n2d.UE
+        else:
+            self._log('WNG', 'no UEd instance attached')
+        #
+        # to store PDU traces
+        self._pdu = []
+        # list of PDU to be sent to the gNB
+        self._pdu_tx = []
+        # enable NAS procedure to set callback to .postprocess() before self terminates
+        self._cb = None
+        #
+        self._log('DBG', 'instantiating procedure')
+    
+    def _log(self, logtype, msg):
+        self.N2._log(logtype, '[%s] %s' % (self.Name, msg))
+    
+    def _recv(self, pdu):
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'UL', pdu) )
+        self.errcause, self.UEInfo = None, {}
+        try:
+            self.decode_pdu(pdu, self.UEInfo)
+        except Exception as err:
+            self._err = err
+            self._log('ERR', 'decode_pdu (%s), sending error indication' % err)
+            self.errcause = ('protocol', 'abstract-syntax-error-reject')
+    
+    def recv(self, pdu):
+        self._recv(pdu)
+        self._log('ERR', 'recv() not implemented')
+    
+    def _send(self):
+        if self.TRACK_PDU:
+            for pdu in self._pdu_tx:
+                self._pdu.append( (time(), 'DL', pdu) )
+        return self._pdu_tx
+    
+    def send(self):
+        self._log('ERR', 'send() not implemented')
+        return self._send()
+    
+    def trigger(self):
+        return []
+    
+    def abort(self):
+        if self.Code in self.N2.Proc:
+            del self.N2.Proc[self.Code]
+        self._log('INF', 'aborting')
+
+
+class NGAPNonUESigProc(LinkSigProc):
+    """NGAP non-UE-associated signalling procedure handler
+    
+    instance attributes:
+        - Name  : procedure name
+        - GNB   : reference to the GNBd instance connected by N2
+        - Server: reference to the CorenetServer instance handling the gNB
+        - Desc  : ASN.1 procedure description
+        - Code  : procedure code
+        - Crit  : procedure criticality
+        - Cont  : ASN.1 procedure PDU(s) content
+        - Encod : custom PDU encoders with fixed values
+        - Decod : custom PDU decoders with transform functions
+    """
+    
+    TRACK_PDU = True
+    
+    def __init__(self, gnbd):
+        #
+        self.Name   = self.__class__.__name__
+        self.GNB    = gnbd
+        self.Server = gnbd.Server
+        #
+        # to store PDU traces
+        self._pdu = []
+        # list of PDU to be sent to the HNB
+        self._pdu_tx = []
+        #
+        self._log('DBG', 'instantiating procedure')
+    
+    def _log(self, logtype, msg):
+        self.GNB._log(logtype, '[%s] %s' % (self.Name, msg))
+    
+    def _recv(self, pdu):
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'UL', pdu) )
+        self.errcause, self.GNBInfo = None, {}
+        try:
+            self.decode_pdu(pdu, self.GNBInfo)
+        except Exception as err:
+            self._err = err
+            self._log('ERR', 'decode_pdu (%s), sending error indication' % err)
+            self.errcause = ('protocol', 'abstract-syntax-error-reject')
+    
+    def recv(self, pdu):
+        self._recv(pdu)
+        self._log('ERR', 'recv() not implemented')
+    
+    def _send(self):
+        if self.TRACK_PDU:
+            for pdu in self._pdu_tx:
+                self._pdu.append( (time(), 'DL', pdu) )
+        return self._pdu_tx
+    
+    def send(self):
+        self._log('ERR', 'send() not implemented')
+        return self._send()
+    
+    def trigger(self):
+        return []
+    
+    def abort(self):
+        if self.Code in self.GNB.Proc:
+            del self.GNB.Proc[self.Code]
+        self._log('INF', 'aborting')
+
+
+#------------------------------------------------------------------------------#
+# PDU Session Management Procedures
+# TS 38.413, section 8.2
+#------------------------------------------------------------------------------#
+
+class NGAPPDUSessResSetup(NGAPSigProc):
+    """PDU Session Resource Setup: TS 38.413, section 8.2.1
+    
+    CN-initiated
+    request-response
+    UE-associated signalling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 38: NAS_PDU (O)
+      - 74: PDUSessionResourceSetupListSUReq (M)
+      - 83: RANPagingPriority (O)
+      - 85: RAN_UE_NGAP_ID (M)
+      - 110: UEAggregateMaximumBitRate (O)
+    SuccessfulOutcome:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 19: CriticalityDiagnostics (O)
+      - 58: PDUSessionResourceFailedToSetupListSURes (O)
+      - 75: PDUSessionResourceSetupListSURes (O)
+      - 85: RAN_UE_NGAP_ID (M)
+    """
+    
+    # ASN.1 procedure description
+    Desc = NGAP.NGAP_PDU_Descriptions.pDUSessionResourceSetup
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': ({}, {}),
+        'uns': None
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': ({}, {}),
+        'uns': None
+        }
+
+
+class NGAPPDUSessResRelease(NGAPSigProc):
+    """PDU Session Resource Release: TS 38.413, section 8.2.2
+    
+    CN-initiated
+    request-response
+    UE-associated signalling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 38: NAS_PDU (O)
+      - 79: PDUSessionResourceToReleaseListRelCmd (M)
+      - 83: RANPagingPriority (O)
+      - 85: RAN_UE_NGAP_ID (M)
+    SuccessfulOutcome:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 19: CriticalityDiagnostics (O)
+      - 70: PDUSessionResourceReleasedListRelRes (M)
+      - 85: RAN_UE_NGAP_ID (M)
+      - 121: UserLocationInformation (O)
+    """
+    
+    # ASN.1 procedure description
+    Desc = NGAP.NGAP_PDU_Descriptions.pDUSessionResourceRelease
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': ({}, {}),
+        'uns': None
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': ({}, {}),
+        'uns': None
+        }
+
+
+class NGAPPDUSessResModify(NGAPSigProc):
+    """PDU Session Resource Modify: TS 38.413, section 8.2.3
+    
+    CN-initiated
+    request-response
+    UE-associated signalling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 64: PDUSessionResourceModifyListModReq (M)
+      - 83: RANPagingPriority (O)
+      - 85: RAN_UE_NGAP_ID (M)
+    SuccessfulOutcome:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 19: CriticalityDiagnostics (O)
+      - 54: PDUSessionResourceFailedToModifyListModRes (O)
+      - 65: PDUSessionResourceModifyListModRes (O)
+      - 85: RAN_UE_NGAP_ID (M)
+      - 121: UserLocationInformation (O)
+    """
+    
+    # ASN.1 procedure description
+    Desc = NGAP.NGAP_PDU_Descriptions.pDUSessionResourceModify
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': ({}, {}),
+        'uns': None
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': ({}, {}),
+        'uns': None
+        }
+
+
+class NGAPPDUSessResNotify(NGAPSigProc):
+    """PDU Session Resource Notify: TS 38.413, section 8.2.4
+    
+    gNB-initiated
+    request only
+    UE-associated signalling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 66: PDUSessionResourceNotifyList (O)
+      - 67: PDUSessionResourceReleasedListNot (O)
+      - 85: RAN_UE_NGAP_ID (M)
+      - 121: UserLocationInformation (O)
+    """
+    
+    # ASN.1 procedure description
+    Desc = NGAP.NGAP_PDU_Descriptions.pDUSessionResourceNotify
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+
+
+class NGAPPDUSessResModifyInd(NGAPSigProc):
+    """PDU Session Resource Modify Indication: TS 38.413, section 8.2.5
+    
+    gNB-initiated
+    request-response
+    UE-associated signalling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 63: PDUSessionResourceModifyListModInd (M)
+      - 85: RAN_UE_NGAP_ID (M)
+    SuccessfulOutcome:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 19: CriticalityDiagnostics (O)
+      - 62: PDUSessionResourceModifyListModCfm (M)
+      - 85: RAN_UE_NGAP_ID (M)
+      - 131: PDUSessionResourceFailedToModifyListModCfm (O)
+    """
+    
+    # ASN.1 procedure description
+    Desc = NGAP.NGAP_PDU_Descriptions.pDUSessionResourceModifyIndication
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': ({}, {}),
+        'uns': None
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': ({}, {}),
+        'uns': None
+        }
+
+
+#------------------------------------------------------------------------------#
+# UE Context Management Procedures
+# TS 38.413, section 8.3
+#------------------------------------------------------------------------------#
+
+class NGAPInitialContextSetup(NGAPSigProc):
+    """Initial Context Setup: TS 38.413, section 8.3.1
+    
+    CN-initiated
+    request-reponse
+    UE-associated signalling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 0: AllowedNSSAI (M)
+      - 10: AMF_UE_NGAP_ID (M)
+      - 18: CoreNetworkAssistanceInformationForInactive (O)
+      - 24: EmergencyFallbackIndicator (O)
+      - 28: GUAMI (M)
+      - 31: IndexToRFSP (O)
+      - 33: LocationReportingRequestType (O)
+      - 34: MaskedIMEISV (O)
+      - 36: MobilityRestrictionList (O)
+      - 38: NAS_PDU (O)
+      - 48: AMFName (O)
+      - 71: PDUSessionResourceSetupListCxtReq (O)
+      - 85: RAN_UE_NGAP_ID (M)
+      - 91: RRCInactiveTransitionReportRequest (O)
+      - 94: SecurityKey (M)
+      - 108: TraceActivation (O)
+      - 110: UEAggregateMaximumBitRate (C)
+      - 117: UERadioCapability (O)
+      - 118: UERadioCapabilityForPaging (O)
+      - 119: UESecurityCapabilities (M)
+      - 146: RedirectionVoiceFallback (O)
+      - 165: CNAssistedRANTuning (O)
+    SuccessfulOutcome:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 19: CriticalityDiagnostics (O)
+      - 55: PDUSessionResourceFailedToSetupListCxtRes (O)
+      - 72: PDUSessionResourceSetupListCxtRes (O)
+      - 85: RAN_UE_NGAP_ID (M)
+    UnsuccessfulOutcome:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 15: Cause (M)
+      - 19: CriticalityDiagnostics (O)
+      - 85: RAN_UE_NGAP_ID (M)
+      - 132: PDUSessionResourceFailedToSetupListCxtFail (O)
+    """
+    
+    # ASN.1 procedure description
+    Desc = NGAP.NGAP_PDU_Descriptions.initialContextSetup
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': ({}, {}),
+        'uns': ({}, {})
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': ({}, {}),
+        'uns': ({}, {})
+        }
+
+
+class NGAPUEContextReleaseRequest(NGAPSigProc):
+    """UE Context Release Request: TS 38.413, section 8.3.2
+    
+    gNB-initiated
+    request only
+    UE-associated signalling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 15: Cause (M)
+      - 85: RAN_UE_NGAP_ID (M)
+      - 133: PDUSessionResourceListCxtRelReq (O)
+    """
+    
+    # ASN.1 procedure description
+    Desc = NGAP.NGAP_PDU_Descriptions.uEContextReleaseRequest
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+
+
+class NGAPUEContextRelease(NGAPSigProc):
+    """Initial Context Setup: TS 38.413, section 8.3.3
+    
+    CN-initiated
+    request-reponse
+    UE-associated signalling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 15: Cause (M)
+      - 114: UE_NGAP_IDs (M)
+    SuccessfulOutcome:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 19: CriticalityDiagnostics (O)
+      - 32: InfoOnRecommendedCellsAndRANNodesForPaging (O)
+      - 60: PDUSessionResourceListCxtRelCpl (O)
+      - 85: RAN_UE_NGAP_ID (M)
+      - 121: UserLocationInformation (O)
+    """
+    
+    # ASN.1 procedure description
+    Desc = NGAP.NGAP_PDU_Descriptions.uEContextRelease
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': ({}, {}),
+        'uns': None
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': ({}, {}),
+        'uns': None
+        }
+
+
+class NGAPUEContextModification(NGAPSigProc):
+    """UE Context Modification: TS 38.413, section 8.3.4
+    
+    CN-initiated
+    request-reponse
+    UE-associated signalling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 18: CoreNetworkAssistanceInformationForInactive (O)
+      - 24: EmergencyFallbackIndicator (O)
+      - 31: IndexToRFSP (O)
+      - 40: AMF_UE_NGAP_ID (O)
+      - 83: RANPagingPriority (O)
+      - 85: RAN_UE_NGAP_ID (M)
+      - 91: RRCInactiveTransitionReportRequest (O)
+      - 94: SecurityKey (O)
+      - 110: UEAggregateMaximumBitRate (O)
+      - 119: UESecurityCapabilities (O)
+      - 162: GUAMI (O)
+      - 165: CNAssistedRANTuning (O)
+    SuccessfulOutcome:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 19: CriticalityDiagnostics (O)
+      - 85: RAN_UE_NGAP_ID (M)
+      - 92: RRCState (O)
+      - 121: UserLocationInformation (O)
+    UnsuccessfulOutcome:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 15: Cause (M)
+      - 19: CriticalityDiagnostics (O)
+      - 85: RAN_UE_NGAP_ID (M)
+    """
+    
+    # ASN.1 procedure description
+    Desc = NGAP.NGAP_PDU_Descriptions.uEContextModification
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': ({}, {}),
+        'uns': ({}, {})
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': ({}, {}),
+        'uns': ({}, {})
+        }
+
+
+class NGAPRRCInactiveTransitionReport(NGAPSigProc):
+    """RRC Inactive Transition Report: TS 38.413, section 8.3.5
+    
+    gNB-initiated
+    request only
+    UE-associated signalling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 85: RAN_UE_NGAP_ID (M)
+      - 92: RRCState (M)
+      - 121: UserLocationInformation (M)
+    """
+    
+    # ASN.1 procedure description
+    Desc = NGAP.NGAP_PDU_Descriptions.rRCInactiveTransitionReport
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+
+
+#------------------------------------------------------------------------------#
+# UE Mobility Management Procedures
+# TS 38.413, section 8.4
+#------------------------------------------------------------------------------#
+
+class NGAPHandoverPreparation(NGAPNonUESigProc):
+    """Handover Preparation: TS 38.413, section 8.4.1
+    
+    gNB-initiated
+    request-reponse
+    non-UE-associated signalling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 15: Cause (M)
+      - 22: DirectForwardingPathAvailability (O)
+      - 29: HandoverType (M)
+      - 61: PDUSessionResourceListHORqd (M)
+      - 85: RAN_UE_NGAP_ID (M)
+      - 101: SourceToTarget_TransparentContainer (M)
+      - 105: TargetID (M)
+    SuccessfulOutcome:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 19: CriticalityDiagnostics (O)
+      - 29: HandoverType (M)
+      - 39: NASSecurityParametersFromNGRAN (C)
+      - 59: PDUSessionResourceHandoverList (O)
+      - 78: PDUSessionResourceToReleaseListHOCmd (O)
+      - 85: RAN_UE_NGAP_ID (M)
+      - 106: TargetToSource_TransparentContainer (M)
+    UnsuccessfulOutcome:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 15: Cause (M)
+      - 19: CriticalityDiagnostics (O)
+      - 85: RAN_UE_NGAP_ID (M)
+    """
+    
+    # ASN.1 procedure description
+    Desc = NGAP.NGAP_PDU_Descriptions.handoverPreparation
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': ({}, {}),
+        'uns': ({}, {})
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': ({}, {}),
+        'uns': ({}, {})
+        }
+
+
+class NGAPHandoverResourceAllocation(NGAPNonUESigProc):
+    """Handover Resource Allocation: TS 38.413, section 8.4.2
+    
+    CN-initiated
+    request-reponse
+    non-UE-associated signalling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 0: AllowedNSSAI (M)
+      - 10: AMF_UE_NGAP_ID (M)
+      - 15: Cause (M)
+      - 18: CoreNetworkAssistanceInformationForInactive (O)
+      - 28: GUAMI (M)
+      - 29: HandoverType (M)
+      - 33: LocationReportingRequestType (O)
+      - 34: MaskedIMEISV (O)
+      - 36: MobilityRestrictionList (O)
+      - 37: NAS_PDU (O)
+      - 41: NewSecurityContextInd (O)
+      - 73: PDUSessionResourceSetupListHOReq (M)
+      - 91: RRCInactiveTransitionReportRequest (O)
+      - 93: SecurityContext (M)
+      - 101: SourceToTarget_TransparentContainer (M)
+      - 108: TraceActivation (O)
+      - 110: UEAggregateMaximumBitRate (M)
+      - 119: UESecurityCapabilities (M)
+      - 146: RedirectionVoiceFallback (O)
+      - 165: CNAssistedRANTuning (O)
+    SuccessfulOutcome:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 19: CriticalityDiagnostics (O)
+      - 53: PDUSessionResourceAdmittedList (M)
+      - 56: PDUSessionResourceFailedToSetupListHOAck (O)
+      - 85: RAN_UE_NGAP_ID (M)
+      - 106: TargetToSource_TransparentContainer (M)
+    UnsuccessfulOutcome:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 15: Cause (M)
+      - 19: CriticalityDiagnostics (O)
+    """
+    
+    # ASN.1 procedure description
+    Desc = NGAP.NGAP_PDU_Descriptions.handoverResourceAllocation
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': ({}, {}),
+        'uns': ({}, {})
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': ({}, {}),
+        'uns': ({}, {})
+        }
+
+
+class NGAPHandoverNotification(NGAPNonUESigProc):
+    """Handover Notification: TS 38.413, section 8.4.3
+    
+    gNB-initiated
+    request only
+    non-UE-associated signalling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 85: RAN_UE_NGAP_ID (M)
+      - 121: UserLocationInformation (M)
+    """
+    
+    # ASN.1 procedure description
+    Desc = NGAP.NGAP_PDU_Descriptions.handoverNotification
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+
+
+class NGAPPathSwitchRequest(NGAPNonUESigProc):
+    """Path Switch Request: TS 38.413, section 8.4.4
+    
+    gNB-initiated
+    request-reponse
+    non-UE-associated signalling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 57: PDUSessionResourceFailedToSetupListPSReq (O)
+      - 76: PDUSessionResourceToBeSwitchedDLList (M)
+      - 85: RAN_UE_NGAP_ID (M)
+      - 100: AMF_UE_NGAP_ID (M)
+      - 119: UESecurityCapabilities (M)
+      - 121: UserLocationInformation (M)
+    SuccessfulOutcome:
+      IEs:
+      - 0: AllowedNSSAI (M)
+      - 10: AMF_UE_NGAP_ID (M)
+      - 18: CoreNetworkAssistanceInformationForInactive (O)
+      - 19: CriticalityDiagnostics (O)
+      - 41: NewSecurityContextInd (O)
+      - 68: PDUSessionResourceReleasedListPSAck (O)
+      - 77: PDUSessionResourceSwitchedList (M)
+      - 85: RAN_UE_NGAP_ID (M)
+      - 91: RRCInactiveTransitionReportRequest (O)
+      - 93: SecurityContext (M)
+      - 119: UESecurityCapabilities (O)
+      - 146: RedirectionVoiceFallback (O)
+      - 165: CNAssistedRANTuning (O)
+    UnsuccessfulOutcome:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 19: CriticalityDiagnostics (O)
+      - 69: PDUSessionResourceReleasedListPSFail (M)
+      - 85: RAN_UE_NGAP_ID (M)
+    """
+    
+    # ASN.1 procedure description
+    Desc = NGAP.NGAP_PDU_Descriptions.pathSwitchRequest
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': ({}, {}),
+        'uns': ({}, {})
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': ({}, {}),
+        'uns': ({}, {})
+        }
+
+
+class NGAPHandoverCancel(NGAPSigProc):
+    """Handover Cancellation: TS 38.413, section 8.4.5
+    
+    gNB-initiated
+    request-reponse
+    UE-associated signalling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 15: Cause (M)
+      - 85: RAN_UE_NGAP_ID (M)
+    SuccessfulOutcome:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 19: CriticalityDiagnostics (O)
+      - 85: RAN_UE_NGAP_ID (M)
+    """
+    
+    # ASN.1 procedure description
+    Desc = NGAP.NGAP_PDU_Descriptions.handoverCancel
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': ({}, {}),
+        'uns': None
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': ({}, {}),
+        'uns': None
+        }
+
+
+class NGAPUplinkRANStatusTransfer(NGAPSigProc):
+    """Uplink RAN Status Transfer: TS 38.413, section 8.4.6
+    
+    gNB-initiated
+    request only
+    UE-associated signalling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 84: RANStatusTransfer_TransparentContainer (M)
+      - 85: RAN_UE_NGAP_ID (M)
+    """
+    
+    # ASN.1 procedure description
+    Desc = NGAP.NGAP_PDU_Descriptions.uplinkRANStatusTransfer
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+
+
+class NGAPDownlinkRANStatusTransfer(NGAPSigProc):
+    """Downlink RAN Status Transfer: TS 38.413, section 8.4.7
+    
+    CN-initiated
+    request only
+    UE-associated signalling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 84: RANStatusTransfer_TransparentContainer (M)
+      - 85: RAN_UE_NGAP_ID (M)
+    """
+    
+    # ASN.1 procedure description
+    Desc = NGAP.NGAP_PDU_Descriptions.downlinkRANStatusTransfer
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+
+
+#------------------------------------------------------------------------------#
+# Paging Procedures
+# TS 38.413, section 8.5
+#------------------------------------------------------------------------------#
+
+class NGAPPaging(NGAPNonUESigProc):
+    """Paging: TS 38.413, section 8.5.1
+    
+    CN-initiated
+    request only
+    non-UE-associated signalling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 11: AssistanceDataForPaging (O)
+      - 50: PagingDRX (O)
+      - 51: PagingOrigin (O)
+      - 52: PagingPriority (O)
+      - 103: TAIListForPaging (M)
+      - 115: UEPagingIdentity (M)
+      - 118: UERadioCapabilityForPaging (O)
+    """
+    
+    # ASN.1 procedure description
+    Desc = NGAP.NGAP_PDU_Descriptions.paging
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+
+
+#------------------------------------------------------------------------------#
+# Transport of NAS Messages Procedures
+# TS 38.413, section 8.6
+#------------------------------------------------------------------------------#
+
+class NGAPInitialUEMessage(NGAPSigProc):
+    """Initial UE Message: TS 38.413, section 8.6.1
+    
+    gNB-initiated
+    request only
+    UE-associated signalling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 0: AllowedNSSAI (O)
+      - 3: AMFSetID (O)
+      - 26: FiveG_S_TMSI (O)
+      - 38: NAS_PDU (M)
+      - 85: RAN_UE_NGAP_ID (M)
+      - 90: RRCEstablishmentCause (M)
+      - 112: UEContextRequest (O)
+      - 121: UserLocationInformation (M)
+      - 171: SourceToTarget_AMFInformationReroute (O)
+    """
+    
+    # ASN.1 procedure description
+    Desc = NGAP.NGAP_PDU_Descriptions.initialUEMessage
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+
+
+class NGAPDownlinkNASTransport(NGAPSigProc):
+    """Downlink NAS Transport: TS 38.413, section 8.6.2
+    
+    CN-initiated
+    request only
+    UE-associated signalling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 0: AllowedNSSAI (O)
+      - 10: AMF_UE_NGAP_ID (M)
+      - 31: IndexToRFSP (O)
+      - 36: MobilityRestrictionList (O)
+      - 38: NAS_PDU (M)
+      - 48: AMFName (O)
+      - 83: RANPagingPriority (O)
+      - 85: RAN_UE_NGAP_ID (M)
+      - 110: UEAggregateMaximumBitRate (O)
+    """
+    
+    # ASN.1 procedure description
+    Desc = NGAP.NGAP_PDU_Descriptions.downlinkNASTransport
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+
+
+class NGAPUplinkNASTransport(NGAPSigProc):
+    """Uplink NAS Transport: TS 38.413, section 8.6.3
+    
+    gNB-initiated
+    request only
+    UE-associated signalling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 38: NAS_PDU (M)
+      - 85: RAN_UE_NGAP_ID (M)
+      - 121: UserLocationInformation (M)
+    """
+    
+    # ASN.1 procedure description
+    Desc = NGAP.NGAP_PDU_Descriptions.uplinkNASTransport
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+
+
+class NGAPNASNonDeliveryInd(NGAPSigProc):
+    """NAS Non Delivery Indication: TS 38.413, section 8.6.4
+    
+    gNB-initiated
+    request only
+    UE-associated signalling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 10: AMF_UE_NGAP_ID (M)
+      - 15: Cause (M)
+      - 38: NAS_PDU (M)
+      - 85: RAN_UE_NGAP_ID (M)
+    """
+    
+    # ASN.1 procedure description
+    Desc = NGAP.NGAP_PDU_Descriptions.nASNonDeliveryIndication
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+
+
+class NGAPRerouteNASRequest(NGAPSigProc):
+    """Reroute NAS Request: TS 38.413, section 8.6.5
+    
+    CN-initiated
+    request only
+    UE-associated signalling procedure
+    
+    InitiatingMessage:
+      IEs:
+      - 0: AllowedNSSAI (O)
+      - 3: AMFSetID (M)
+      - 10: AMF_UE_NGAP_ID (O)
+      - 42: [OCTET STRING] (M)
+      - 85: RAN_UE_NGAP_ID (M)
+      - 171: SourceToTarget_AMFInformationReroute (O)
+    """
+    
+    # ASN.1 procedure description
+    Desc = NGAP.NGAP_PDU_Descriptions.rerouteNASRequest
+    
+    # Custom decoders
+    Decod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+    
+    # Custom encoders
+    Encod = {
+        'ini': ({}, {}),
+        'suc': None,
+        'uns': None
+        }
+
+
+#------------------------------------------------------------------------------#
+# Interface Management Procedures
+# TS 38.413, section 8.7
+#------------------------------------------------------------------------------#
+
+# TODO: TBC
+
+
+
+
+
+
+NGAPPDUSessResSetup.init()
+NGAPPDUSessResRelease.init()
+NGAPPDUSessResModify.init()
+NGAPPDUSessResNotify.init()
+NGAPPDUSessResModifyInd.init()
+NGAPInitialContextSetup.init()
+NGAPUEContextReleaseRequest.init()
+NGAPUEContextRelease.init()
+NGAPUEContextModification.init()
+NGAPRRCInactiveTransitionReport.init()
+NGAPHandoverPreparation.init()
+NGAPHandoverResourceAllocation.init()
+NGAPHandoverNotification.init()
+NGAPPathSwitchRequest.init()
+NGAPHandoverCancel.init()
+NGAPUplinkRANStatusTransfer.init()
+NGAPDownlinkRANStatusTransfer.init()
+NGAPPaging.init()
+NGAPInitialUEMessage.init()
+NGAPDownlinkNASTransport.init()
+NGAPUplinkNASTransport.init()
+NGAPNASNonDeliveryInd.init()
+NGAPRerouteNASRequest.init()
+
+
