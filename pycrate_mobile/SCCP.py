@@ -700,6 +700,7 @@ class Importance(Envelope):
 
 class LongData(Envelope):
     _GEN = (
+        # WNG: Q.713 does say if it is in BE or LE, we guess LE similarly to Ptr16
         Uint16LE('Len'),
         Buf('Value', val=b'', rep=REPR_HEX)
         )
@@ -747,18 +748,27 @@ class _Ptr(UintLE):
             if self._field == 'Opt' and all([o.get_trans() for o in self._env._env['Opt']._content]):
                 return val
             #
-            # get the length of following pointers
-            for ptr in self._env._content[1+self._env.index(self):]:
+            # get the length of the following pointers (including self) within the Pointers envelope
+            ind = self._env._content.index(self)
+            for ptr in self._env._content[ind:]:
                 val += ptr._bl//8
+                #print('%s: %s, %i' % (self._name, ptr._name, val))
+            if self._bl == 16:
+                # see Q.713, section 2.3:
+                # pointer value is between the MSB (LE) of the pointer and the parameter
+                # hence removing 1 bytes for Ptr16
+                val -= 1
             #
-            # get the length of following fields, up to self._field
-            ind = 1 + self._env._env.index(self._env)
+            # get the length of the fields after the Pointers field, up to self._field
+            ind = 1 + self._env._env._content.index(self._env)
             for field in self._env._env._content[ind:]:
                 if field._name == self._field:
                     break
                 else:
                     val += field.get_len()
-            return min(self._max, (self._bl//8)+val)
+                #print('%s: %s, %i' % (self._name, field._name, val))
+            #
+            return min(self._max, val)
     
     _valauto = _make_val
 
@@ -819,15 +829,23 @@ class SCCPMessage(Envelope):
         # parse the variable-length and optional content according to the pointers
         # this is done non-sequentially
         ccur, numptr = char._cur, len(e._content)
+        # ccur: cursor at the end of the Pointers field
+        # numptr: number of pointers
         for ind, ptr in enumerate(e._content):
             if ptr._field == 'Opt' and ptr._val == 0:
                 break
             # update the charpy cursor
-            char._cur = ccur + 8 * ptr.get_val() - (numptr-ind) * ptr._bl
+            char._cur = ccur + (8 * ptr.get_val()) - ((numptr-ind) * ptr._bl)
+            if ptr._bl == 16:
+                # see Q.713, section 2.3:
+                # pointer value is between the MSB (LE) of the pointer and the parameter
+                # hence removing 1 bytes for Ptr16
+                char._cur += 8
             # select the corresponding field
-            f = self._content[start+ind]
-            f._from_char(char)
-
+            field = self._content[start+ind]
+            #print('%s: %s, %i' % (ptr._name, field._name, char._cur))
+            field._from_char(char)
+    
     def is_valid(self):
         """Ensures an SCCP message has a valid layout,
         i.e. its mandatory parameters with variable length (those with pointers) 
