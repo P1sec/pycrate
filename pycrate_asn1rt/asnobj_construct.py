@@ -1131,7 +1131,7 @@ class _CONSTRUCT(ASN1Obj):
                     self._val[ident] = Comp._val
                     del val_cp[ident]
             if val_cp:
-                for ident, comp_val in val_cp:
+                for ident, comp_val in val_cp.items():
                     self._val['_ext_%s' % ident] = comp_val
         
         def _to_jval(self):
