@@ -589,12 +589,13 @@ class _CONSTRUCT(ASN1Obj):
     
     # this class implements the methods that are common to SEQ and SET
     
-    def _safechk_val(self, val):
+    def _safechk_val(self, val, rec=True):
         if not isinstance(val, dict):
             raise(ASN1ObjErr('{0}: invalid value, {1!r}'.format(self.fullname(), val)))
         for k in val:
             if k in self._cont:
-                self._cont[k]._safechk_val(val[k])
+                if rec:
+                    self._cont[k]._safechk_val(val[k])
             elif not re.match('_ext_[0-9]{1,}', k) or not isinstance(val[k], bytes_types):
                 raise(ASN1ObjErr('{0}: invalid value, {1!r}'.format(self.fullname(), val)))
         self._safechk_valcompl(val)
@@ -1133,6 +1134,11 @@ class _CONSTRUCT(ASN1Obj):
             if val_cp:
                 for ident, comp_val in val_cp.items():
                     self._val['_ext_%s' % ident] = comp_val
+            try:
+                self._safechk_val(self._val, rec=False)
+            except Exception as err:
+                raise(ASN1JERDecodeErr('{0}: invalid json value, {1}'\
+                      .format(self.fullname(), err)))
         
         def _to_jval(self):
             if not self._val:
