@@ -441,7 +441,5 @@ id-EN-DCSONConfigurationTransfer-MCT				ProtocolIE-ID ::= 295
 id-IMSvoiceEPSfallbackfrom5G						ProtocolIE-ID ::= 296
 id-TimeSinceSecondaryNodeRelease					ProtocolIE-ID ::= 297
 id-RequestTypeAdditionalInfo						ProtocolIE-ID ::= 298
-id-AdditionalRRMPriorityIndex						ProtocolIE-ID ::= 299
-id-ContextatSource									ProtocolIE-ID ::= 300
 
 END

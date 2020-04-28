@@ -14,7 +14,7 @@ else:
 
 
 dirpath = './'
-path = dirpath + '36413-f80.txt'
+path = dirpath + '36413-g10.txt'
 
 # ASN.1 modules are described within specific sections
 sections = [

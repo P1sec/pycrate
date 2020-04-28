@@ -15,7 +15,6 @@ BEGIN
 IMPORTS
 	id-E-RABInformationListItem,
 	id-E-RABItem,
-	id-GUMMEIType,
 	id-Bearers-SubjectToStatusTransfer-Item,
 	id-Time-Synchronisation-Info,
 	id-x2TNLConfigurationInfo,
@@ -70,8 +69,6 @@ IMPORTS
 	id-PSCellInformation,
 	id-IMSvoiceEPSfallbackfrom5G,
 	id-RequestTypeAdditionalInfo,
-	id-AdditionalRRMPriorityIndex,
-	id-ContextatSource,
 	maxnoofCSGs,
 	maxnoofE-RABs,
 	maxnoofErrors,
@@ -144,8 +141,6 @@ Additional-GUTI::= SEQUENCE {
 Additional-GUTI-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 	...
 }
-
-AdditionalRRMPriorityIndex ::= BIT STRING (SIZE(32))
 
 AerialUEsubscriptionInformation ::= ENUMERATED { 
 	allowed,
@@ -584,17 +579,6 @@ ConnectedengNBItem ::= SEQUENCE {
 }
 
 ConnectedengNBItem-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-ContextatSource ::= SEQUENCE {
-	sourceNG-RAN-node-ID				Global-RAN-NODE-ID,
-	rAN-UE-NGAP-ID						RAN-UE-NGAP-ID,
-	iE-Extensions		ProtocolExtensionContainer { {ContextatSource-ExtIEs} }	OPTIONAL,
-	...
-}
-
-ContextatSource-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
@@ -1833,8 +1817,6 @@ QCI						::= INTEGER (0..255)
 
 -- R
 
-RAN-UE-NGAP-ID ::= INTEGER (0..4294967295)
-
 ReceiveStatusofULPDCPSDUs ::= BIT STRING (SIZE(4096))
 
 ReceiveStatusOfULPDCPSDUsExtended ::= BIT STRING (SIZE(1..16384))
@@ -2169,11 +2151,9 @@ SourceeNB-ToTargeteNB-TransparentContainer		::= SEQUENCE {
 }
 
 SourceeNB-ToTargeteNB-TransparentContainer-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
-	{ID id-MobilityInformation				CRITICALITY ignore	EXTENSION MobilityInformation						PRESENCE optional}|
+	{ID id-MobilityInformation				CRITICALITY ignore	EXTENSION MobilityInformation					PRESENCE optional}|
 	{ID id-uE-HistoryInformationFromTheUE	CRITICALITY ignore	EXTENSION UE-HistoryInformationFromTheUE		PRESENCE optional}|
-	{ID id-IMSvoiceEPSfallbackfrom5G		CRITICALITY ignore	EXTENSION IMSvoiceEPSfallbackfrom5G				PRESENCE optional}|
-	{ID id-AdditionalRRMPriorityIndex		CRITICALITY ignore	EXTENSION AdditionalRRMPriorityIndex				PRESENCE optional}|
-	{ID id-ContextatSource					CRITICALITY ignore	EXTENSION ContextatSource							PRESENCE optional},
+	{ID id-IMSvoiceEPSfallbackfrom5G			CRITICALITY ignore	EXTENSION IMSvoiceEPSfallbackfrom5G			PRESENCE optional},
 	...
 }
 
@@ -2195,7 +2175,6 @@ ServedGUMMEIsItem ::= SEQUENCE {
 }
 
 ServedGUMMEIsItem-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
-	{ID id-GUMMEIType		CRITICALITY ignore	EXTENSION GUMMEIType		PRESENCE optional},
 	...
 }
 
