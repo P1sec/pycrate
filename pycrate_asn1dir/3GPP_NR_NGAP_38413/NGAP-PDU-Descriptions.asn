@@ -103,7 +103,10 @@ FROM NGAP-CommonDataTypes
 	UplinkRANStatusTransfer,
 	UplinkUEAssociatedNRPPaTransport,
 	WriteReplaceWarningRequest,
-	WriteReplaceWarningResponse
+	WriteReplaceWarningResponse,
+	UplinkRIMInformationTransfer,
+	DownlinkRIMInformationTransfer
+
 FROM NGAP-PDU-Contents
 
 	id-AMFConfigurationUpdate,
@@ -158,7 +161,10 @@ FROM NGAP-PDU-Contents
 	id-UplinkRANConfigurationTransfer,
 	id-UplinkRANStatusTransfer,
 	id-UplinkUEAssociatedNRPPaTransport,
-	id-WriteReplaceWarning
+	id-WriteReplaceWarning,
+	id-UplinkRIMInformationTransfer,
+	id-DownlinkRIMInformationTransfer
+
 FROM NGAP-Constants;
 
 -- **************************************************************
@@ -282,7 +288,9 @@ NGAP-ELEMENTARY-PROCEDURES-CLASS-2 NGAP-ELEMENTARY-PROCEDURE ::= {
 	uplinkNonUEAssociatedNRPPaTransport	|
 	uplinkRANConfigurationTransfer	|
 	uplinkRANStatusTransfer			|
-	uplinkUEAssociatedNRPPaTransport
+	uplinkUEAssociatedNRPPaTransport				|
+	uplinkRIMInformationTransfer					|
+	downlinkRIMInformationTransfer
 }
 
 -- **************************************************************
@@ -633,6 +641,18 @@ writeReplaceWarning NGAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME		WriteReplaceWarningResponse
 	PROCEDURE CODE			id-WriteReplaceWarning
 	CRITICALITY				reject
+}
+
+uplinkRIMInformationTransfer NGAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		UplinkRIMInformationTransfer
+	PROCEDURE CODE			id-UplinkRIMInformationTransfer
+	CRITICALITY				ignore
+}
+
+downlinkRIMInformationTransfer NGAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		DownlinkRIMInformationTransfer
+	PROCEDURE CODE			id-DownlinkRIMInformationTransfer
+	CRITICALITY				ignore
 }
 
 END

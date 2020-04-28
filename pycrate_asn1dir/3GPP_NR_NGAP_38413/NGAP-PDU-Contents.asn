@@ -54,6 +54,7 @@ IMPORTS
 	IMSVoiceSupportIndicator,
 	IndexToRFSP,
 	InfoOnRecommendedCellsAndRANNodesForPaging,
+	LAI,
 	LocationReportingRequestType,
 	MaskedIMEISV,
 	MessageIdentifier,
@@ -127,6 +128,7 @@ IMPORTS
 	SONConfigurationTransfer,
 	SourceToTarget-TransparentContainer,
 	SourceToTarget-AMFInformationReroute,
+	SRVCCOperationPossible,
 	SupportedTAList,
 	TAIListForPaging,
 	TAIListForRestart,
@@ -153,7 +155,8 @@ IMPORTS
 	WarningAreaList,
 	WarningMessageContents,
 	WarningSecurityInfo,
-	WarningType
+	WarningType,
+	RIMInformationTransfer
 
 FROM NGAP-IEs
 
@@ -283,6 +286,7 @@ FROM NGAP-Containers
 	id-SourceAMF-UE-NGAP-ID,
 	id-SourceToTarget-TransparentContainer,
 	id-SourceToTarget-AMFInformationReroute,
+	id-SRVCCOperationPossible,
 	id-SupportedTAList,
 	id-TAIListForPaging,
 	id-TAIListForRestart,
@@ -307,7 +311,8 @@ FROM NGAP-Containers
 	id-WarningAreaList,
 	id-WarningMessageContents,
 	id-WarningSecurityInfo,
-	id-WarningType
+	id-WarningType,
+	id-RIMInformationTransfer
 
 FROM NGAP-Constants;
 
@@ -505,7 +510,8 @@ PDUSessionResourceModifyIndication ::= SEQUENCE {
 PDUSessionResourceModifyIndicationIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-AMF-UE-NGAP-ID							CRITICALITY reject	TYPE AMF-UE-NGAP-ID									PRESENCE mandatory	}|
 	{ ID id-RAN-UE-NGAP-ID							CRITICALITY reject	TYPE RAN-UE-NGAP-ID									PRESENCE mandatory	}|
-	{ ID id-PDUSessionResourceModifyListModInd		CRITICALITY reject	TYPE PDUSessionResourceModifyListModInd		PRESENCE mandatory	},
+	{ ID id-PDUSessionResourceModifyListModInd		CRITICALITY reject	TYPE PDUSessionResourceModifyListModInd		PRESENCE mandatory	}|
+	{ ID id-UserLocationInformation					CRITICALITY ignore	TYPE UserLocationInformation						PRESENCE optional		},
 	...
 }
 
@@ -574,7 +580,8 @@ InitialContextSetupRequestIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-UERadioCapabilityForPaging				CRITICALITY ignore	TYPE UERadioCapabilityForPaging						PRESENCE optional		}|
 	{ ID id-RedirectionVoiceFallback				CRITICALITY ignore	TYPE RedirectionVoiceFallback						PRESENCE optional		}|
 	{ ID id-LocationReportingRequestType			CRITICALITY ignore	TYPE LocationReportingRequestType					PRESENCE optional		}|
-	{ ID id-CNAssistedRANTuning						CRITICALITY ignore	TYPE CNAssistedRANTuning								PRESENCE optional		},
+	{ ID id-CNAssistedRANTuning						CRITICALITY ignore	TYPE CNAssistedRANTuning								PRESENCE optional		}|
+	{ ID id-SRVCCOperationPossible					CRITICALITY ignore	TYPE SRVCCOperationPossible							PRESENCE optional		},
 	...
 }
 
@@ -705,7 +712,7 @@ UEContextModificationRequest ::= SEQUENCE {
 	...
 }
 
-UEContextModificationRequestIEs NGAP-PROTOCOL-IES ::= {	
+UEContextModificationRequestIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-AMF-UE-NGAP-ID							CRITICALITY reject	TYPE AMF-UE-NGAP-ID									PRESENCE mandatory	}|
 	{ ID id-RAN-UE-NGAP-ID							CRITICALITY reject	TYPE RAN-UE-NGAP-ID									PRESENCE mandatory	}|
 	{ ID id-RANPagingPriority						CRITICALITY ignore	TYPE RANPagingPriority								PRESENCE optional		}|
@@ -718,7 +725,8 @@ UEContextModificationRequestIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-NewAMF-UE-NGAP-ID						CRITICALITY reject	TYPE AMF-UE-NGAP-ID									PRESENCE optional		}|
 	{ ID id-RRCInactiveTransitionReportRequest		CRITICALITY ignore	TYPE RRCInactiveTransitionReportRequest		PRESENCE optional		}|
 	{ ID id-NewGUAMI								CRITICALITY reject	TYPE GUAMI											PRESENCE optional		}|
-	{ ID id-CNAssistedRANTuning						CRITICALITY ignore	TYPE CNAssistedRANTuning							PRESENCE optional		},
+	{ ID id-CNAssistedRANTuning						CRITICALITY ignore	TYPE CNAssistedRANTuning							PRESENCE optional		}|
+	{ ID id-SRVCCOperationPossible					CRITICALITY ignore	TYPE SRVCCOperationPossible						PRESENCE optional		},
 	...
 }
 
@@ -831,7 +839,7 @@ HandoverCommandIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-RAN-UE-NGAP-ID								CRITICALITY reject	TYPE RAN-UE-NGAP-ID											PRESENCE mandatory	}|
 	{ ID id-HandoverType								CRITICALITY reject	TYPE HandoverType											PRESENCE mandatory	}|
 	{ ID id-NASSecurityParametersFromNGRAN				CRITICALITY reject	TYPE NASSecurityParametersFromNGRAN					PRESENCE conditional	}|
-	-- This IE shall be present if HandoverType IE is set to value "5GStoEPPS" --
+	-- This IE shall be present if HandoverType IE is set to value "5GStoEPPS" or “5GStoUTRAN” --
 	{ ID id-PDUSessionResourceHandoverList				CRITICALITY ignore	TYPE PDUSessionResourceHandoverList					PRESENCE optional	}|
 	{ ID id-PDUSessionResourceToReleaseListHOCmd		CRITICALITY ignore	TYPE PDUSessionResourceToReleaseListHOCmd			PRESENCE optional		}|
 	{ ID id-TargetToSource-TransparentContainer			CRITICALITY reject	TYPE TargetToSource-TransparentContainer			PRESENCE mandatory	}|
@@ -896,7 +904,8 @@ HandoverRequestIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-RRCInactiveTransitionReportRequest		CRITICALITY ignore	TYPE RRCInactiveTransitionReportRequest		PRESENCE optional		}|
 	{ ID id-GUAMI									CRITICALITY reject	TYPE GUAMI											PRESENCE mandatory	}|
 	{ ID id-RedirectionVoiceFallback				CRITICALITY ignore	TYPE RedirectionVoiceFallback					PRESENCE optional		}|
-	{ ID id-CNAssistedRANTuning						CRITICALITY ignore	TYPE CNAssistedRANTuning							PRESENCE optional		},
+	{ ID id-CNAssistedRANTuning						CRITICALITY ignore	TYPE CNAssistedRANTuning							PRESENCE optional		}|
+	{ ID id-SRVCCOperationPossible					CRITICALITY ignore	TYPE SRVCCOperationPossible						PRESENCE optional},
 	...
 }
 
@@ -1016,7 +1025,8 @@ PathSwitchRequestAcknowledgeIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-RRCInactiveTransitionReportRequest			CRITICALITY ignore	TYPE RRCInactiveTransitionReportRequest			PRESENCE optional		}|
 	{ ID id-CriticalityDiagnostics						CRITICALITY ignore	TYPE CriticalityDiagnostics							PRESENCE optional		}|
 	{ ID id-RedirectionVoiceFallback					CRITICALITY ignore	TYPE RedirectionVoiceFallback						PRESENCE optional		}|
-	{ ID id-CNAssistedRANTuning							CRITICALITY ignore	TYPE CNAssistedRANTuning								PRESENCE optional		},
+	{ ID id-CNAssistedRANTuning							CRITICALITY ignore	TYPE CNAssistedRANTuning								PRESENCE optional		}|
+	{ ID id-SRVCCOperationPossible						CRITICALITY ignore	TYPE SRVCCOperationPossible							PRESENCE optional},
 	...
 }
 
@@ -1208,7 +1218,8 @@ DownlinkNASTransport-IEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-MobilityRestrictionList			CRITICALITY ignore	TYPE MobilityRestrictionList		PRESENCE optional		}|
 	{ ID id-IndexToRFSP						CRITICALITY ignore	TYPE IndexToRFSP					PRESENCE optional		}|
 	{ ID id-UEAggregateMaximumBitRate		CRITICALITY ignore	TYPE UEAggregateMaximumBitRate		PRESENCE optional		}|
-	{ ID id-AllowedNSSAI					CRITICALITY reject	TYPE AllowedNSSAI					PRESENCE optional		},
+	{ ID id-AllowedNSSAI					CRITICALITY reject	TYPE AllowedNSSAI					PRESENCE optional		}|
+	{ ID id-SRVCCOperationPossible			CRITICALITY ignore	TYPE SRVCCOperationPossible			PRESENCE optional		},
 	...
 }
 
@@ -2135,5 +2146,42 @@ SecondaryRATDataUsageReportIEs NGAP-PROTOCOL-IES ::= {
 	...
 }
 
+-- **************************************************************
+--
+-- RIM INFORMATION TRANSFER ELEMENTARY PROCEDURES
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- UPLINK RIM INFORMATION TRANSFER
+--
+-- **************************************************************
+
+UplinkRIMInformationTransfer ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container		{ {UplinkRIMInformationTransferIEs} },
+	...
+}
+
+UplinkRIMInformationTransferIEs NGAP-PROTOCOL-IES ::= {
+	{ ID id-RIMInformationTransfer	CRITICALITY ignore	TYPE RIMInformationTransfer	PRESENCE optional	},
+	...
+}
+-- **************************************************************
+--
+-- DOWNLINK RIM INFORMATION TRANSFER
+--
+-- **************************************************************
+
+DownlinkRIMInformationTransfer ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container		{ {DownlinkRIMInformationTransferIEs} },
+	...
+}
+
+DownlinkRIMInformationTransferIEs NGAP-PROTOCOL-IES ::= {
+	{ ID id-RIMInformationTransfer	CRITICALITY ignore	TYPE RIMInformationTransfer	PRESENCE optional	},
+
+	...
+}
 
 END

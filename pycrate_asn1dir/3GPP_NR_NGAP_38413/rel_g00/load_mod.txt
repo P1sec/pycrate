@@ -1,6 +1,0 @@
-NGAP-CommonDataTypes.asn
-NGAP-PDU-Descriptions.asn
-NGAP-IEs.asn
-NGAP-Containers.asn
-NGAP-PDU-Contents.asn
-NGAP-Constants.asn

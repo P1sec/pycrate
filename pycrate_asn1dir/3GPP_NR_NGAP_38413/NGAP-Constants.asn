@@ -85,6 +85,8 @@ id-UplinkRANStatusTransfer					ProcedureCode ::= 49
 id-UplinkUEAssociatedNRPPaTransport			ProcedureCode ::= 50
 id-WriteReplaceWarning						ProcedureCode ::= 51
 id-SecondaryRATDataUsageReport				ProcedureCode ::= 52
+id-UplinkRIMInformationTransfer				ProcedureCode ::= 53
+id-DownlinkRIMInformationTransfer			ProcedureCode ::= 54
 
 -- **************************************************************
 --
@@ -324,6 +326,14 @@ maxProtocolIEs							INTEGER ::= 65535
 	id-SourceToTarget-AMFInformationReroute					ProtocolIE-ID ::= 171
 	id-AdditionalULForwardingUPTNLInformation				ProtocolIE-ID ::= 172
 	id-SCTP-TLAs											ProtocolIE-ID ::= 173
-
+	id-DataForwardingResponseERABList						ProtocolIE-ID ::= 174
+	id-RIMInformationTransfer								ProtocolIE-ID ::= 175
+	id-GUAMIType						ProtocolIE-ID ::= 176
+	id-SRVCCOperationPossible								ProtocolIE-ID ::= 177
+	id-TargetRNC-ID											ProtocolIE-ID ::= 178
+	id-RAT-Information										ProtocolIE-ID ::= 179
+	id-ExtendedRATRestrictionInformation						ProtocolIE-ID ::= 180
+	id-QosMonitoringRequest									ProtocolIE-ID ::= 181
+	id-SgNB-UE-X2AP-ID										ProtocolIE-ID ::= 182
 
 END
