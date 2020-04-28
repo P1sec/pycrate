@@ -111,7 +111,7 @@ def get_spec_files(spec_dir):
             fd.close()
     if not load:
         try:
-            load = [fn for fn in os.listdir(spec_dir) if fn[-4:] == '.asn']
+            load = [fn for fn in sorted(os.listdir(spec_dir)) if fn[-4:] == '.asn']
         except Exception as err:
             asnlog('[proc] unable to list {0}'.format(spec_dir))
     if not load:
