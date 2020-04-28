@@ -113,14 +113,6 @@ def main():
     if args.fverifwarn:
         ckw['verifwarn'] = True
     #
-    try:
-        ofd = open(args.output + '.py', 'w')
-    except:
-        print('%s, args error: unable to create output file %s' % (sys.argv[0], args.output))
-        return 0
-    else:
-        ofd.close()
-    
     if args.spec:
         if args.spec not in ASN_SPECS:
             print('%s, args error: invalid specification name %s' % (sys.argv[0], args.spec))
@@ -160,6 +152,15 @@ def main():
         GLOBAL.clear()
     #
     elif args.input:
+        #
+        try:
+            ofd = open(args.output + '.py', 'w')
+        except:
+            print('%s, args error: unable to create output file %s' % (sys.argv[0], args.output))
+            return 0
+        else:
+            ofd.close()
+        #
         files = []
         for i in args.input:
             if os.path.isdir(i):
