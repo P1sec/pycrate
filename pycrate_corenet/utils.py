@@ -4,6 +4,7 @@
 # * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
+# * Copyright 2020. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -576,6 +577,31 @@ def inet_ntoa_cn(pdntype, buf, dom='EPS'):
                 log('WNG: IPv4v6 PDP buffer conversion error, %s' % hexlify(buf).decode('ascii'))
     else:
         return (pdntype, buf)
+
+
+def ngranid_to_hum(cho):
+    if cho[0] == 'globalGNB-ID':
+        # std gNB-ID
+        return (
+            plmn_buf_to_str(cho[1]['pLMNIdentity']),
+            cho[1]['gNB-ID'][0],
+            cho[1]['gNB-ID'][1]
+            )
+    elif cho[0] == 'globalNgENB-ID':
+        # std ng-eNB-ID
+        return (
+            plmn_buf_to_str(cho[1]['pLMNIdentity']),
+            cho[1]['ngENB-ID'][0],
+            cho[1]['ngENB-ID'][1]
+            )
+    elif cho[0] == 'globalN3IWF-ID':
+        return (
+            plmn_buf_to_str(cho[1]['pLMNIdentity']),
+            cho[1]['n3IWF-ID'][0],
+            cho[1]['n3IWF-ID'][1]
+            )
+    return None
+
 
 #------------------------------------------------------------------------------#
 # ASN.1 object handling facilities
