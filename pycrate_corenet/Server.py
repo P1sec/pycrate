@@ -92,7 +92,7 @@ class CorenetServer(object):
     #
     # NGAP Server
     SERVER_GNB = {'INET'  : socket.AF_INET,
-                  'IP'    : '10.3.1.1'
+                  'IP'    : '10.3.1.1',
                   'port'  : 38412,
                   'MAXCLI': SERVER_MAXCLI,
                   'errclo': True,
