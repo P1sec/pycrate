@@ -1225,7 +1225,7 @@ class NGAPRerouteNASRequest(NGAPSigProc):
 class NGAPNGSetup(NGAPNonUESigProc):
     """NG Setup : TS 38.413, section 8.7.1
     
-    eNB-initiated
+    gNB-initiated
     request-response
     non-UE-associated signalling procedure
     
@@ -1256,7 +1256,11 @@ class NGAPNGSetup(NGAPNonUESigProc):
     
     # Custom decoders
     Decod = {
-        'ini': ({}, {}),
+        'ini': ({
+            'GlobalRANNodeID': ngranid_to_hum,
+            'SupportedTAList': supptalist_to_hum,
+            },
+            {}),
         'suc': ({}, {}),
         'uns': ({}, {})
         }
@@ -1267,6 +1271,28 @@ class NGAPNGSetup(NGAPNonUESigProc):
         'suc': ({}, {}),
         'uns': ({}, {})
         }
+    
+    def recv(self, pdu):
+        # recv the NGSetupRequest
+        self._recv(pdu)
+        if self.errcause:
+            # procedure unsuccessful outcome
+            self.encode_pdu('uns', Cause=self.errcause)
+            self._log('INF', 'gNB NG not setup successfully')
+        else:
+            self.GNB.Config = cpdict(self.GNBInfo)
+            tais = []
+            for (tac, bcastplmnlist) in self.GNBInfo['SupportedTAList']:
+                for (plmn, _) in bcastplmnlist:
+                    tais.append( (plmn, tac) )
+            self.GNB.Config['TAIs'] = tais
+            self.GNB.ID = self.GNBInfo['GlobalRANNodeID']
+            # prepare the SNGSetupResponse
+            IEs = self.GNB.get_ngsetup_ies_from_cfg()
+            self.encode_pdu('suc', **IEs)
+            self._log('INF', 'gNB NG setup successfully')
+    
+    send = NGAPNonUESigProc._send
 
 
 class NGAPRANConfigUpdate(NGAPNonUESigProc):
@@ -1458,6 +1484,14 @@ class NGAPErrorIndNonUECN(NGAPNonUESigProc):
         'suc': None,
         'uns': None
         }
+    
+    errcause = None
+    
+    def recv(self, pdu):
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'UL', pdu) )
+    
+    send = NGAPNonUESigProc._send
 
 
 class NGAPErrorIndNonUERAN(NGAPNonUESigProc):
@@ -1491,6 +1525,25 @@ class NGAPErrorIndNonUERAN(NGAPNonUESigProc):
         'suc': None,
         'uns': None
         }
+    
+    def recv(self, pdu):
+        self._recv(pdu)
+        if not self.errcause:
+            self._log('WNG', 'error ind received: %r' % (self.GNBInfo['Cause'], ))
+            # if it corresponds to a said-unknown UE ID, disconnect the UE instance
+            if self.GNBInfo['Cause'] == ('radioNetwork', 'unknown-local-UE-NGAP-ID') \
+            and 'AMF_UE_NGAP_ID' in self.GNBInfo \
+            and self.GNBInfo['AMF_UE_NGAP_ID'] in self.GNB.UE:
+                ue = self.GNB.UE[self.GNBInfo['AMF_UE_NGAP_ID']]
+                if ue.NG.is_connected():
+                    self._log('INF', 'UE %s to be disconnected' % ue.IMSI)
+                    ue.NG.unset_ran()
+            # if it corresponds to a previously CN-initiated class 1 procedure
+            # abort it
+            try:
+                self.GNB.Proc[self.GNB.ProcLast].abort()
+            except:
+                pass
 
 
 class NGAPErrorIndCN(NGAPSigProc):
@@ -1524,6 +1577,14 @@ class NGAPErrorIndCN(NGAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    errcause = None
+    
+    def recv(self, pdu):
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'UL', pdu) )
+    
+    send = NGAPSigProc._send
 
 
 class NGAPErrorIndRAN(NGAPSigProc):
@@ -1557,6 +1618,17 @@ class NGAPErrorIndRAN(NGAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    def recv(self, pdu):
+        self._recv(pdu)
+        if not self.errcause:
+            self._log('WNG', 'error ind received: %s.%i' % self.UEInfo['Cause'])
+            # if it corresponds to a previously CN-initiated class 1 procedure
+            # abort it
+            try:
+                self.NG.Proc[self.NG.ProcLast].abort()
+            except:
+                pass
 
 
 class NGAPAMFStatusInd(NGAPNonUESigProc):

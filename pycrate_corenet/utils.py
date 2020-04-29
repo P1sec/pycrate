@@ -44,12 +44,12 @@ from struct    import pack, unpack
 from socket    import AF_INET, AF_INET6, AF_PACKET, ntohl, htonl, ntohs, htons, \
                       inet_aton, inet_ntoa, inet_pton, inet_ntop
 
-# SCTP support for S1AP / RUA interfaces
+# SCTP support for NGAP / S1AP / HNBAP / RUA interfaces
 try:
     import sctp
 except ImportError as err:
     print('pysctp library required for CorenetServer')
-    print('check on github: pysctp from philpraxis for python2, from lilydjwg for python3')
+    print('check on github: https://github.com/P1sec/pysctp')
     raise(err)
 
 # conversion function for security context
@@ -58,6 +58,7 @@ try:
                                       conv_A2, conv_A3, conv_A4, conv_A7
 except ImportError as err:
     print('CryptoMobile library required for CorenetServer')
+    print('check on github: https://github.com/P1sec/CryptoMobile')
     raise(err)
 
 from pycrate_core.utils import *
@@ -67,7 +68,7 @@ from pycrate_core.base  import Buf, Uint8
 Element._SAFE_STAT = True
 Element._SAFE_DYN  = True
 
-log('CorenetServer: loading all ASN.1 and NAS modules, be patient...')
+log('pycrate_corenet: loading all ASN.1 and NAS modules, be patient...')
 # import ASN.1 modules
 # to drive gNodeB and ng-eNodeB
 from pycrate_asn1dir import NGAP
@@ -579,7 +580,14 @@ def inet_ntoa_cn(pdntype, buf, dom='EPS'):
         return (pdntype, buf)
 
 
+# routines for dealing with structures for NGAP
+
 def ngranid_to_hum(cho):
+    """returns a 3-tuple:
+    - plmn id (str)
+    - node type (str)
+    - node id (bit-str value, 2-tuple of int)
+    """
     if cho[0] == 'globalGNB-ID':
         # std gNB-ID
         return (
@@ -601,6 +609,45 @@ def ngranid_to_hum(cho):
             cho[1]['n3IWF-ID'][1]
             )
     return None
+
+def bcastplmn_to_hum(seq):
+    """returns a 2-tuple:
+    - plmn id (str)
+    - list 1 or 2-tuple corresponding to an snssai value with SST (uint8) and an optional SD (uint24)
+    """
+    return (
+        plmn_buf_to_str(seq['pLMNIdentity']),
+        [(bytes_to_uint(snssai['s-NSSAI']['sST'], 8), bytes_to_uint(snssai['s-NSSAI']['sD'], 24)) \
+            if len(snssai['s-NSSAI']) > 1 else \
+         (bytes_to_uint(snssai['s-NSSAI']['sST'], 8), ) \
+            for snssai in seq['tAISliceSupportList']]
+        )
+
+def supptalist_to_hum(seqof):
+    """returns a list of 2-tuple, each 2-tuple is:
+    - TAC (uint24, was uint16 in S1AP)
+    - list of broadcasted PLMN 2-tuple (see bcastplmn_to_hum)
+    """
+    return [(
+        bytes_to_uint(seq['tAC'], 24),
+        [bcastplmn_to_hum(bcastplmn) for bcastplmn in seq['broadcastPLMNList']]) \
+        for seq in seqof]
+
+def supptalist_to_asn(supptalist):
+    return [
+        {'tAC': uint_to_bytes(tac, bitlen=24),
+         'broadcastPLMNList': [{
+            'pLMNIdentity': plmn_str_to_buf(plmn),
+            'tAISliceSupportList': [
+                {'s-NSSAI': {
+                    'sST': uint_to_bytes(snssai[0], 8),
+                    'sD' : uint_to_bytes(snssai[1], 24)}} if len(snssai) > 1 else \
+                {'s-NSSAI': {
+                    'sST': uint_to_bytes(snssai[0], 8)}} \
+                for snssai in snssailist]
+            } for (plmn, snssailist) in bcastplmnlist]}
+         for (tac, bcastplmnlist) in supptalist
+         ]
 
 
 #------------------------------------------------------------------------------#

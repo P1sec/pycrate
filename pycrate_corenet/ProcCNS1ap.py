@@ -1855,7 +1855,7 @@ class S1APErrorIndENB(S1APSigProc):
     
     def recv(self, pdu):
         self._recv(pdu)
-        if not self.errcause is None:
+        if not self.errcause:
             self._log('WNG', 'error ind received: %s.%i' % self.UEInfo['Cause'])
             # if it corresponds to a previously CN-initiated class 1 procedure
             # abort it

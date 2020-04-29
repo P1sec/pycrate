@@ -4,6 +4,7 @@
 # * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
+# * Copyright 2020. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -31,6 +32,7 @@ from .utils      import *
 from .HdlrUEIuCS import *
 from .HdlrUEIuPS import *
 from .HdlrUES1   import *
+from .HdlrUENG   import *
 
 
 class UEd(SigStack):
@@ -58,6 +60,10 @@ class UEd(SigStack):
     TRACE_NAS_EPS      = False
     # to log UE NAS containing SMS for all UE
     TRACE_NAS_SMS      = False
+    # to log UE 5G NAS (potentially) encrypted signalling for all UE
+    TRACE_NAS_5GS_SEC  = False
+    # to log UE 5G NAS clear-text signalling for all UE
+    TRACE_NAS_5GS      = False
     
     
     #--------------------------------------------------------------------------#
@@ -84,18 +90,19 @@ class UEd(SigStack):
     #--------------------------------------------------------------------------#
     # 
     # Radio Access Technology (str)
-    RAT = None
-    # specific Iu / S1 signaling handler
+    RAT  = None
+    # specific Iu / S1 / NG signaling handler
     IuCS = None
     IuPS = None
     S1   = None
+    NG   = None
     #
     # location parameters
     PLMN = None # string of digits
     LAC  = None # uint16
     RAC  = None # uint8
     SAC  = None # uintX
-    TAC  = None # uintX
+    TAC  = None # uint16 (S1) or uint24 (NG)
     
     def _log(self, logtype, msg):
         if logtype[:3] == 'TRA':
@@ -123,6 +130,7 @@ class UEd(SigStack):
         self.IuCS = UEIuCSd(self)
         self.IuPS = UEIuPSd(self)
         self.S1   = UES1d(self)
+        self.NG   = UENGd(self)
         self._last_ran = None
         #
         if 'config' in kw:
@@ -168,6 +176,8 @@ class UEd(SigStack):
                 apncfg['RAB'] = cpdict(self.S1.ESM.RABConfig[apn])
                 apncfg['RAB']['QCI'] = apncfg['QCI']
                 self.S1.ESM.PDNConfig[apn] = apncfg
+        #
+        # TODO: initialize 5G SM config
     
     def set_ran(self, ran, ctx_id, sid=None, dom=None):
         # UE going connected
@@ -176,6 +186,8 @@ class UEd(SigStack):
             if self.S1.is_connected():
                 # error: already linked with another ran
                 raise(CorenetErr('UE already connected through a S1 link'))
+            elif self.NG.is_connected():
+                raise(CorenetErr('UE already connected through a NG link'))
             #
             if dom != 'PS':
                 # IuCS stack
@@ -204,6 +216,8 @@ class UEd(SigStack):
             if self.IuCS.is_connected() or self.IuPS.is_connected():
                 # error: already linked with another ran
                 raise(CorenetErr('UE already connected through an Iu link'))
+            elif self.NG.is_connected():
+                raise(CorenetErr('UE already connected through a NG link'))
             #
             # S1 stack
             if not self.S1.is_connected():
@@ -215,6 +229,25 @@ class UEd(SigStack):
                 # error: already linked with another ENB
                 raise(CorenetErr('UE already connected through another S1 link'))
             self._last_ran = self.S1
+        #
+        elif ran.__class__.__name__ == 'GNBd':
+            #
+            if self.IuCS.is_connected() or self.IuPS.is_connected():
+                # error: already linked with another ran
+                raise(CorenetErr('UE already connected through an Iu link'))
+            elif self.S1.is_connected():
+                raise(CorenetErr('UE already connected through a S1 link'))
+            #
+            # NG stack
+            if not self.NG.is_connected():
+                self.NG.set_ran(ran)
+                self.NG.set_ctx(ctx_id, sid)
+            elif self.NG.GNB == ran:
+                self.NG.set_ctx(ctx_id, sid)
+            else:
+                # error: already linked with another GNB
+                raise(CorenetErr('UE already connected through another NG link'))
+            self._last_ran = self.NG
         #
         else:
             assert()
@@ -232,6 +265,9 @@ class UEd(SigStack):
         if self.S1.is_connected():
             self.S1.unset_ran()
             self.S1.unset_ctx()
+        if self.NG.is_connected():
+            self.NG.unset_ran()
+            self.NG.unset_ctx()
         del self.RAT
     
     def merge_cs_handler(self, iucsd):
@@ -316,6 +352,10 @@ class UEd(SigStack):
         s1d.SMS.UE = self
         return True
     
+    def merge_5gs_handler(self, ngd):
+        # TODO
+        pass
+    
     #--------------------------------------------------------------------------#
     # UE identity
     #--------------------------------------------------------------------------#
@@ -399,6 +439,8 @@ class UEd(SigStack):
         # update the Server LUT
         self.Server.MTMSI[mtmsi] = self.IMSI
     
+    # TODO: handle 5G NAS identities
+    
     #--------------------------------------------------------------------------#
     # UE location
     #--------------------------------------------------------------------------#
@@ -421,7 +463,7 @@ class UEd(SigStack):
     def set_tac(self, tac):
         if tac != self.TAC:
             self.TAC = tac
-            self._log('INF', 'track on TAC %.4x' % self.TAC)
+            self._log('INF', 'track on TAC %.6x' % self.TAC)
     
     def set_lai(self, plmn, lac):
         self.set_plmn(plmn)

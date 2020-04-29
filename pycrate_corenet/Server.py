@@ -54,6 +54,12 @@ DEBUG_SK = False
 
 
 class CorenetServer(object):
+    """Complete control-plane and user-plane server to handle:
+    - Home-NodeB, over HNBAP and RUA / RANAP
+    - eNodeB, over S1AP
+    - gNodeB, over NGAP
+    And UE connecting through them for data connection (over GTP-U) and SMS
+    """
     
     #--------------------------------------------------------------------------#
     # debug and tracing level
@@ -138,15 +144,15 @@ class CorenetServer(object):
     # list of PLMN and slices supported
     # a sliceSupportList is basically a Sequence of S-NSSAI
     AMF_SNSSAI = {
-        1  : {'sST': b'\x01'},
-        2  : {'sST': b'\x02'}, 
-        21 : {'sST': b'\x02', 'sD': b'\0\0\x01'},
+        0  : (0x00, ), # default S-NSSAI
+        1  : (0x01, ),
+        2  : (0x02, ),
+        21 : (0x02, 0x000001),
         }
     AMF_PLMNSupp = [
-        #{'pLMNIdentity': $plmn1,
-        # 'sliceSupportList': [{'s-NSSAI': AMF_SNSSAI[1]}]},
-        #{'pLMNIdentity': $plmn2,
-        # 'sliceSupportList': [{'s-NSSAI': AMF_SNSSAI[2]}, {'s-NSSAI': AMF_SNSSAI[21]}]},
+        (PLMN, [AMF_SNSSAI[0]]),
+        #($plmn1, [AMF_SNSSAI[1]]),
+        #($plmn2, [AMF_SNSSAI[2], AMF_SNSSAI[21]])
         ]
     #
     # MME GroupID and Code
@@ -163,10 +169,15 @@ class CorenetServer(object):
     #    ({'Marine', 'Mountain'}, '112113')]
     EMERG_NUMS = None
     #
-    # N2 connection AMF parameters
-    ConfigN2    = {
+    # NG connection AMF parameters
+    ConfigNG    = {
         'AMFName'            : 'CorenetAMF',
-        'PLMNSupportList'    : AMF_PLMNSupp,
+        'PLMNSupportList'    : [
+            {'pLMNIdentity': plmn_str_to_buf(plmn),
+             'sliceSupportList': [
+                {'s-NSSAI': {'sST': uint_to_bytes(snssai[0], 8), 'sD': uint_to_bytes(snssai[1], 24)}} if len(snssai) > 1 else \
+                {'s-NSSAI': {'sST': uint_to_bytes(snssai[0], 8)}} for snssai in snssais],
+            } for (plmn, snssais) in AMF_PLMNSupp],
         'RelativeAMFCapacity': 10,
         'ServedGUAMIList'    : [
             {'gUAMI': {
@@ -325,7 +336,7 @@ class CorenetServer(object):
         
         DEBUG logtype: 'ERR', 'WNG', 'INF', 'DBG'
         TRACE logtype: 'TRACE_SK_[UL|DL]',
-                       'TRACE_ASN_[HNBAP|RUA|S1AP]_[UL|DL]',
+                       'TRACE_ASN_[HNBAP|RUA|S1AP|NGAP]_[UL|DL]',
         """
         if logtype[:3] == 'TRA':
             if logtype[6:8] == 'SK':
@@ -399,13 +410,14 @@ class CorenetServer(object):
     
     def _start_server(self):
         self.SCTPServ = []
-        for (cfg, attr) in ((self.SERVER_HNB, '_sk_hnb',
-                            (self.SERVER_ENB, '_sk_enb',
+        for (cfg, attr) in ((self.SERVER_HNB, '_sk_hnb'),
+                            (self.SERVER_ENB, '_sk_enb'),
                             (self.SERVER_GNB, '_sk_gnb')):
             if 'INET' not in cfg or 'IP' not in cfg \
             or 'port' not in cfg or 'MAXCLI' not in cfg:
                 setattr(self, attr, None)
                 continue
+            #
             try:
                 sk   = sctp.sctpsocket_tcp(cfg['INET'])
                 addr = (cfg['IP'], cfg['port'])
@@ -417,9 +429,15 @@ class CorenetServer(object):
                 sk.bind(addr)
             except Exception as err:
                 raise(CorenetErr('cannot bind SCTP socket on addr %r: %s' % (addr, err)))
+            try:
+                sk.listen(cfg['MAXCLI'])
+            except Exception as err:
+                raise(CorenetErr('cannot listen to SCTP connection: {1}'.format(err)))
+            #
             self._log('INF', 'SCTP %s server started on address %r' % (srv, addr))
             setattr(self, attr, sk)
             self.SCTPServ.append(sk)
+        #
         self.SCTPServ = tuple(self.SCTPServ)
     
     def _serve(self):
@@ -482,9 +500,12 @@ class CorenetServer(object):
         self.SCTPCli.clear()
         #
         # stop sub-servers
-        self.AUCd.stop()
-        self.GTPUd.stop()
-        self.SMSd.stop()
+        try:
+            self.AUCd.stop()
+            self.GTPUd.stop()
+            self.SMSd.stop()
+        except Exception:
+            pass
     
     def sctp_handle_notif(self, sk, notif):
         self._log('DBG', 'SCTP notification: type %i, flags %i' % (notif.type, notif.flags))
@@ -752,151 +773,7 @@ class CorenetServer(object):
         return self._write_sk(gnb.SK, buf, ppid=SCTP_PPID_NGAP, stream=sid)
     
     #--------------------------------------------------------------------------#
-    # gNodeB connection
-    #--------------------------------------------------------------------------#
-    
-    def _parse_ngsetup(self, pdu):
-        if pdu[0] != 'initiatingMessage' or pdu[1]['procedureCode'] != 21:
-            # not initiating / NGSetup
-            self._log('WNG', 'invalid NGAP PDU for setting up the gNB NGAP link')
-            return
-        #
-        pIEs, plmn, ranid = pdu[1]['value'][1], None, None
-        IEs = pIEs['protocolIEs']
-        if 'protocolExtensions' in pIEs:
-            Exts = pIEs['protocolExtensions']
-        else:
-            Exts = []
-        for ie in IEs:
-            if ie['id'] == 27:
-                # GlobalRANNodeID:
-                # PLMN,
-                # ID type (gNB-ID, macroNgENB-ID, shortMacroNgENB-ID, longMacroNgENB-ID or n3IWF-ID),
-                # ID bit-string value 
-                ranid = ngranid_to_hum(ie['value'][1])
-                plmn  = ranid[0]
-                ranid = ranid[1:]
-                break
-        if plmn is None or ranid is None:
-            self._log('WNG', 'invalid NGAP PDU for setting up the gNB NGAP link: '\
-                      'missing PLMN and RAN-ID')
-            return
-        # decode PLMN and CellID
-        return plmn, ranid
-    
-    def _send_ngsetuprej(self, sk, cause):
-        IEs = [{'criticality': 'ignore',
-                'id': 15, # id-Cause
-                'value': (('NGAP-IEs', 'Cause'), cause)}]
-        pdu = ('unsuccessfulOutcome',
-               {'criticality': 'ignore',
-                'procedureCode': 21,
-                'value': (('NGAP-PDU-Contents', 'NGSetupFailure'),
-                          {'protocolIEs' : IEs})})
-        if not asn_ngap_acquire():
-            self._log('ERR', 'unable to acquire the NGAP module')
-        else:
-            PDU_NGAP.set_val(pdu)
-            if GNBd.TRACE_ASN_NGAP:
-                self._log('TRACE_ASN_NGAP_DL', PDU_NGAP.to_asn1())
-            self._write_sk(sk, PDU_NGAP.to_aper(), ppid=SCTP_PPID_NGAP, stream=0)
-            asn_ngap_release()
-        if self.SERVER_GNB['errclo']:
-            sk.close()
-    
-    def handle_new_gnb(self):
-        sk, addr = self._sk_gnb.accept()
-        self._log('DBG', 'New gNB client from address %r' % (addr, ))
-        #
-        buf, notif = self._read_sk(sk)
-        if not buf:
-            # WNG: maybe required to handle SCTP notification, at some point
-            return
-        # verifying SCTP Payload Protocol ID and setting stream ID for 
-        # non-UE-associated trafic
-        ppid, sid = ntohl(notif.ppid), notif.stream
-        if ppid != SCTP_PPID_NGAP:
-            self._log('ERR', 'invalid NGAP PPID, %i' % ppid)
-            if self.SERVER_GNB['errclo']:
-                sk.close()
-            return
-        #
-        if not asn_ngap_acquire():
-            self._log('ERR', 'unable to acquire the NGAP module')
-            return
-        try:
-            PDU_NGAP.from_aper(buf)
-        except:
-            self._log('WNG', 'invalid NGAP PDU transfer-syntax: %s'\
-                      % hexlify(buf).decode('ascii'))
-            # return nothing, no need to bother
-            return
-        if GNBd.TRACE_ASN_NGAP:
-            self._log('TRACE_ASN_NGAP_UL', PDU_NGAP.to_asn1())
-        pdu_rx = PDU_NGAP()
-        asn_ngap_release()
-        #
-        GNBId = self._parse_ngsetup(pdu_rx)
-        if GNBId is None:
-            # send NGSetupReject
-            self._send_ngsetuprej(sk, cause=('protocol', 'abstract-syntax-error-reject'))
-            return
-        elif GNBId not in self.RAN:
-            if not self.RAN_CONNECT_ANY:
-                self._log('ERR', 'gNB %r not allowed to connect' % (GNBId,))
-                # send NGSetupReject
-                self._send_ngsetuprej(sk, cause=('radioNetwork', 'unspecified'))
-                return
-            elif GNBId[0] not in self.RAN_ALLOWED_PLMN:
-                self._log('ERR', 'gNB %r not allowed to connect, bad PLMN' % (GNBId,))
-                self._send_ngsetuprej(sk, cause=('radioNetwork', 'unspecified'))
-                return
-            else:
-                # creating an entry for this gNB
-                gnb = GNBd(self, sk, sid)
-                self.RAN[GNBId] = gnb
-        else:
-            if self.RAN[GNBId] is None:
-                # gNB allowed, but not yet connected
-                gnb = GNBd(self, sk, sid)
-                self.RAN[GNBId] = gnb
-            elif not self.RAN[GNBId].is_connected():
-                # gNB already connected and disconnected in the past
-                gnb = self.RAN[GNBId]
-                gnb.__init__(self, sk, sid)
-            else:
-                # gNB already connected
-                self._log('ERR', 'gNB %r already connected from address %r'\
-                          % (GNBId, self.RAN[GNBId].SK.getpeername()))
-                if self.SERVER_GNB['errclo']:
-                    sk.close()
-                return
-        #
-        # process the initial PDU
-        pdu_tx = gnb.process_ngap_pdu(pdu_rx)
-        # keep track of the client
-        self.SCTPCli[sk] = GNBId
-        # add the gnb TAI to the Server location tables
-        if gnb.Config:
-            self._set_gnb_loc(gnb)
-        #
-        # send available PDU(s) back
-        if not asn_ngap_acquire():
-           gnb._log('ERR', 'unable to acquire the NGAP module')
-           return
-        for pdu in pdu_tx:
-            PDU_NGAP.set_val(pdu)
-            if GNBd.TRACE_ASN_S1AP:
-                gnb._log('TRACE_ASN_NGAP_DL', PDU_NGAP.to_asn1())
-            self._write_sk(sk, PDU_NGAP.to_aper(), ppid=SCTP_PPID_NGAP, stream=sid)
-        asn_ngap_release()
-    
-    # in 5G, gNB are dealing with TA more or less in the same way as in 4G
-    _set_gnb_loc    = _set_enb_loc
-    _unset_gnb_loc  = _unset_enb_loc
-    
-    #--------------------------------------------------------------------------#
-    # eNodeB connection
+    # eNodeB connection (4G)
     #--------------------------------------------------------------------------#
     
     def _parse_s1setup(self, pdu):
@@ -1053,7 +930,151 @@ class CorenetServer(object):
                 self._log('ERR', 'RAN node %r not referenced into the TAI table' % (enb.ID,))
     
     #--------------------------------------------------------------------------#
-    # Home-NodeB connection
+    # gNodeB connection (5G)
+    #--------------------------------------------------------------------------#
+    
+    def _parse_ngsetup(self, pdu):
+        if pdu[0] != 'initiatingMessage' or pdu[1]['procedureCode'] != 21:
+            # not initiating / NGSetup
+            self._log('WNG', 'invalid NGAP PDU for setting up the gNB NGAP link')
+            return
+        #
+        pIEs, plmn, ranid = pdu[1]['value'][1], None, None
+        IEs = pIEs['protocolIEs']
+        if 'protocolExtensions' in pIEs:
+            Exts = pIEs['protocolExtensions']
+        else:
+            Exts = []
+        for ie in IEs:
+            if ie['id'] == 27:
+                # GlobalRANNodeID:
+                # PLMN,
+                # ID type (gNB-ID, macroNgENB-ID, shortMacroNgENB-ID, longMacroNgENB-ID or n3IWF-ID),
+                # ID bit-string value 
+                ranid = ngranid_to_hum(ie['value'][1])
+                plmn  = ranid[0]
+                ranid = ranid[1:]
+                break
+        if plmn is None or ranid is None:
+            self._log('WNG', 'invalid NGAP PDU for setting up the gNB NGAP link: '\
+                      'missing PLMN and RAN-ID')
+            return
+        # decode PLMN and CellID
+        return plmn, ranid
+    
+    def _send_ngsetuprej(self, sk, cause):
+        IEs = [{'criticality': 'ignore',
+                'id': 15, # id-Cause
+                'value': (('NGAP-IEs', 'Cause'), cause)}]
+        pdu = ('unsuccessfulOutcome',
+               {'criticality': 'ignore',
+                'procedureCode': 21,
+                'value': (('NGAP-PDU-Contents', 'NGSetupFailure'),
+                          {'protocolIEs' : IEs})})
+        if not asn_ngap_acquire():
+            self._log('ERR', 'unable to acquire the NGAP module')
+        else:
+            PDU_NGAP.set_val(pdu)
+            if GNBd.TRACE_ASN_NGAP:
+                self._log('TRACE_ASN_NGAP_DL', PDU_NGAP.to_asn1())
+            self._write_sk(sk, PDU_NGAP.to_aper(), ppid=SCTP_PPID_NGAP, stream=0)
+            asn_ngap_release()
+        if self.SERVER_GNB['errclo']:
+            sk.close()
+    
+    def handle_new_gnb(self):
+        sk, addr = self._sk_gnb.accept()
+        self._log('DBG', 'New gNB client from address %r' % (addr, ))
+        #
+        buf, notif = self._read_sk(sk)
+        if not buf:
+            # WNG: maybe required to handle SCTP notification, at some point
+            return
+        # verifying SCTP Payload Protocol ID and setting stream ID for 
+        # non-UE-associated trafic
+        ppid, sid = ntohl(notif.ppid), notif.stream
+        if ppid != SCTP_PPID_NGAP:
+            self._log('ERR', 'invalid NGAP PPID, %i' % ppid)
+            if self.SERVER_GNB['errclo']:
+                sk.close()
+            return
+        #
+        if not asn_ngap_acquire():
+            self._log('ERR', 'unable to acquire the NGAP module')
+            return
+        try:
+            PDU_NGAP.from_aper(buf)
+        except:
+            self._log('WNG', 'invalid NGAP PDU transfer-syntax: %s'\
+                      % hexlify(buf).decode('ascii'))
+            # return nothing, no need to bother
+            return
+        if GNBd.TRACE_ASN_NGAP:
+            self._log('TRACE_ASN_NGAP_UL', PDU_NGAP.to_asn1())
+        pdu_rx = PDU_NGAP()
+        asn_ngap_release()
+        #
+        GNBId = self._parse_ngsetup(pdu_rx)
+        if GNBId is None:
+            # send NGSetupReject
+            self._send_ngsetuprej(sk, cause=('protocol', 'abstract-syntax-error-reject'))
+            return
+        elif GNBId not in self.RAN:
+            if not self.RAN_CONNECT_ANY:
+                self._log('ERR', 'gNB %r not allowed to connect' % (GNBId,))
+                # send NGSetupReject
+                self._send_ngsetuprej(sk, cause=('radioNetwork', 'unspecified'))
+                return
+            elif GNBId[0] not in self.RAN_ALLOWED_PLMN:
+                self._log('ERR', 'gNB %r not allowed to connect, bad PLMN' % (GNBId,))
+                self._send_ngsetuprej(sk, cause=('radioNetwork', 'unspecified'))
+                return
+            else:
+                # creating an entry for this gNB
+                gnb = GNBd(self, sk, sid)
+                self.RAN[GNBId] = gnb
+        else:
+            if self.RAN[GNBId] is None:
+                # gNB allowed, but not yet connected
+                gnb = GNBd(self, sk, sid)
+                self.RAN[GNBId] = gnb
+            elif not self.RAN[GNBId].is_connected():
+                # gNB already connected and disconnected in the past
+                gnb = self.RAN[GNBId]
+                gnb.__init__(self, sk, sid)
+            else:
+                # gNB already connected
+                self._log('ERR', 'gNB %r already connected from address %r'\
+                          % (GNBId, self.RAN[GNBId].SK.getpeername()))
+                if self.SERVER_GNB['errclo']:
+                    sk.close()
+                return
+        #
+        # process the initial PDU
+        pdu_tx = gnb.process_ngap_pdu(pdu_rx)
+        # keep track of the client
+        self.SCTPCli[sk] = GNBId
+        # add the gnb TAI to the Server location tables
+        if gnb.Config:
+            self._set_gnb_loc(gnb)
+        #
+        # send available PDU(s) back
+        if not asn_ngap_acquire():
+           gnb._log('ERR', 'unable to acquire the NGAP module')
+           return
+        for pdu in pdu_tx:
+            PDU_NGAP.set_val(pdu)
+            if GNBd.TRACE_ASN_NGAP:
+                gnb._log('TRACE_ASN_NGAP_DL', PDU_NGAP.to_asn1())
+            self._write_sk(sk, PDU_NGAP.to_aper(), ppid=SCTP_PPID_NGAP, stream=sid)
+        asn_ngap_release()
+    
+    # in 5G, gNB are dealing with TA more or less in the same way as in 4G
+    _set_gnb_loc    = _set_enb_loc
+    _unset_gnb_loc  = _unset_enb_loc
+    
+    #--------------------------------------------------------------------------#
+    # Home-NodeB connection (3G)
     #--------------------------------------------------------------------------#
     
     def _parse_hnbregreq(self, pdu):
