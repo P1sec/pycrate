@@ -118,7 +118,7 @@ class LinkSigProc(SigProc):
                             mand.append( ident )
                         try:
                             pyname = pythonize_name(cont_ies[ident]['Value']._tr._name)
-                        except:
+                        except Exception:
                             pass
                         else:
                             if pyname in encod[0]:
@@ -137,7 +137,7 @@ class LinkSigProc(SigProc):
                             mand.append( ident )
                         try:
                             pyname = pythonize_name(cont_exts[ident]['Extension']._tr._name)
-                        except:
+                        except Exception:
                             pass
                         else:
                             if pyname in encod[1]:
@@ -203,7 +203,7 @@ class LinkSigProc(SigProc):
                 ident = ie['id']
                 try:
                     IE = IEs[ident]
-                except:
+                except Exception:
                     # unknown IE, c'est pas grave...
                     self._log('INF', 'decode_pdu: unknown IE ident in PDU, %r' % ie)
                     ret['id_%i' % ident] = ie['value']
@@ -233,7 +233,7 @@ class LinkSigProc(SigProc):
                 ident = ie['id']
                 try:
                     IE = Extensions[ident]
-                except:
+                except Exception:
                     # unknown Extension, c'est pas grave non plus...
                     self._log('INF', 'decode_pdu: unknown Ext ident in PDU, %r' % ie)
                     ret['idext_%i' % ident] = ie['extensionValue']
@@ -588,7 +588,7 @@ class NASSigProc(SigProc):
             return
         try:
             Decod = self.Decod[(pd, typ)]
-        except:
+        except Exception:
             self._log('WNG', 'decode_msg: no decoder dict found')
             Decod = {}
         #
@@ -618,7 +618,7 @@ class NASSigProc(SigProc):
         # get the instance encoder
         try:
             Encod = self.Encod[mid]
-        except:
+        except Exception:
             self._log('WNG', 'encode_msg: no encoder dict found')
             Encod = {}
         # get the class encoder and update the instance's one
@@ -660,7 +660,7 @@ class NASSigProc(SigProc):
         # select the encoder and duplicate it
         try:
             Encod = self.Encod[(pd, typ)]
-        except:
+        except Exception:
             return
         Encod.update(kw)
     

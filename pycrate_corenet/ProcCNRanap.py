@@ -334,7 +334,7 @@ class RANAPRABAssignment(RANAPSigProc):
         self._recv(pdu)
         try:
             del self.Iu.Proc[self.Code]
-        except:
+        except Exception:
             pass
         #
         if self.errcause:
@@ -581,7 +581,7 @@ class RANAPIuRelease(RANAPSigProc):
         # remove from the Iu RANAP procedure stack
         try:
             del self.Iu.Proc[self.Code]
-        except:
+        except Exception:
             pass
         self._release_iu()
     
@@ -589,7 +589,7 @@ class RANAPIuRelease(RANAPSigProc):
         # remove from the Iu RANAP procedure stack
         try:
             del self.Iu.Proc[self.Code]
-        except:
+        except Exception:
             pass
         self._log('INF', 'aborting')
         self._release_iu()
@@ -883,7 +883,7 @@ class RANAPSRNSContextTransfer(RANAPSigProc):
         self._recv(pdu)
         try:
             del self.Iu.Proc[self.Code]
-        except:
+        except Exception:
             pass
         if not self.errcause:
             # TODO: do something with the list of RAB contexts
@@ -1119,7 +1119,7 @@ class RANAPCNInvokeTrace(RANAPSigProc):
     def send(self):
         try:
             tracerefl = '0x%s' % hexlify(self.TraceReference).decode('ascii')
-        except:
+        except Exception:
             tracerefl = repr(self.TraceReference)
         self._log('INF', 'sent with trace reference %s' % tracerefl)
         return self._send()
@@ -1177,7 +1177,7 @@ class RANAPSecurityModeControl(RANAPSigProc):
         self._recv(pdu)
         try:
             del self.Iu.Proc[self.Code]
-        except:
+        except Exception:
             pass
         #
         if self.errcause:
@@ -1187,7 +1187,7 @@ class RANAPSecurityModeControl(RANAPSigProc):
         elif pdu[0] == 'unsuccessfulOutcome':
             try:
                 self._log('WNG', 'failure, rejected with cause %r' % (self.UEInfo['Cause'], ))
-            except:
+            except Exception:
                 self._log('WNG', 'failure, rejected without cause')
             self.success = False
             self.Iu.reset_sec_ctx()
@@ -1198,13 +1198,13 @@ class RANAPSecurityModeControl(RANAPSigProc):
             try:
                 secctx['UEA'] = self.UEInfo['ChosenEncryptionAlgorithm']
                 uea = secctx['UEA']
-            except:
+            except Exception:
                 secctx['UEA'] = None
                 uea = 0
             try:
                 secctx['UIA'] = self.UEInfo['ChosenIntegrityProtectionAlgorithm']
                 uia = 1 + secctx['UIA'] # UIA1 -> uia = 1, UIA2 -> uia = 2
-            except:
+            except Exception:
                 secctx['UIA'] = None
                 uia = 0
             self._log('INF', 'accepted with UEA%i / UIA%i' % (uea, uia))
@@ -1370,7 +1370,7 @@ class RANAPLocationReport(RANAPSigProc):
             if 'PositionData' in ueinfo:
                 try:
                     desc.extend( self._get_position_data(ueinfo['PositionData']) )
-                except:
+                except Exception:
                     pass
                 else:
                     del ueinfo['PositionData']
@@ -1462,7 +1462,7 @@ class RANAPDataVolumeReport(RANAPSigProc):
         self._recv(pdu)
         try:
             del self.Iu.Proc[self.Code]
-        except:
+        except Exception:
             pass
         if not self.errcause:
             # TODO: do something with the data volume report
@@ -1824,7 +1824,7 @@ class RANAPResetCN(RANAPConlessSigProc):
         self._recv(pdu)
         try:
             del self.RNC.ProcRanap[self.Code]
-        except:
+        except Exception:
             pass
         if not self.errcause:
             self._log('INF', 'success')
@@ -1990,7 +1990,7 @@ class RANAPErrorIndConlessRNC(RANAPConlessSigProc):
             # abort it
             try:
                 self.RNC.ProcRanap[self.RNC.ProcRanapLast].abort()
-            except:
+            except Exception:
                 pass
 
 
@@ -2081,7 +2081,7 @@ class RANAPErrorIndRNC(RANAPSigProc):
             # abort it
             try:
                 self.Iu.Proc[self.Iu.ProcLast].abort()
-            except:
+            except Exception:
                 pass
 
 
@@ -2120,7 +2120,7 @@ class RANAPCNDeactivateTrace(RANAPSigProc):
     def send(self):
         try:
             tracerefl = '0x%s' % hexlify(self.TraceReference)
-        except:
+        except Exception:
             tracerefl = repr(self.TraceReference)
         self._log('INF', 'sent with trace reference %s' % tracerefl)
         return self._send()
@@ -2176,7 +2176,7 @@ class RANAPResetResourceCN(RANAPConlessSigProc):
         self._recv(pdu)
         try:
             del self.RNC.ProcRanap[self.Code]
-        except:
+        except Exception:
             pass
         if not self.errcause:
             self._log('INF', 'success')
@@ -2237,7 +2237,7 @@ class RANAPResetResourceRNC(RANAPConlessSigProc):
                 RResList = RReslist[0]
                 for RRes in RResList:
                     RResIds.append(RRes['value'][1]['iuSigConId'][0])
-            except:
+            except Exception:
                 self._log('WNG', 'unexpected formatting of ResetResourceList')
             #
             # reset all UE connections handled by the RNC handler self.RNC in the
@@ -2246,7 +2246,7 @@ class RANAPResetResourceRNC(RANAPConlessSigProc):
                 for rres in RResIds:
                     try:
                         ue = self.RNC.UE_IuPS[rres]
-                    except:
+                    except Exception:
                         pass
                     else:
                         ue.IuPS.SM.pdp_suspend()
@@ -2259,7 +2259,7 @@ class RANAPResetResourceRNC(RANAPConlessSigProc):
                 for rres in RResIds:
                     try:
                         ue = self.RNC.UE_IuCS[rres]
-                    except:
+                    except Exception:
                         pass
                     else:
                         if ue.IuCS.MM.state != 'INACTIVE':
@@ -2378,7 +2378,7 @@ class RANAPLocationRelatedData(RANAPSigProc):
         self._recv(pdu)
         try:
             del self.Iu.Proc[self.Code]
-        except:
+        except Exception:
             pass
         #
         if self.errcause:
@@ -2387,7 +2387,7 @@ class RANAPLocationRelatedData(RANAPSigProc):
             self.success = False
             try:
                 self._log('WNG', 'failure, rejected with cause %r' % (self.UEInfo['Cause'], ))
-            except:
+            except Exception:
                 self._log('WNG', 'failure, rejected without cause')
         else:
             self.success = True

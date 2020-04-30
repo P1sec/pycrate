@@ -135,7 +135,7 @@ class GMMSigProc(NASSigProc):
         try:
             if self.GMM.Proc[-1] == self:
                 del self.GMM.Proc[-1]
-        except:
+        except Exception:
             self._log('WNG', 'GMM stack corrupted')
         else:
             if self._gmm_preempt:
@@ -383,7 +383,7 @@ class GMMAttach(GMMSigProc):
             # we remove it from the Server's provisory dict of UE
             try:
                 del self.UE.Server._UEpre[self.UE.PTMSI]
-            except:
+            except Exception:
                 pass
             #
             if self.UEInfo['ID'][0] == 1:
@@ -805,7 +805,7 @@ class GMMRoutingAreaUpdating(GMMSigProc):
             # we remove it from the Server's provisory dict of UE
             try:
                 del self.UE.Server._UEpre[self.UE.PTMSI]
-            except:
+            except Exception:
                 pass
             # need to request the IMSI, prepare an id request procedure
             return self._ret_req_imsi()

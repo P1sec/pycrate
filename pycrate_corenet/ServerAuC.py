@@ -246,7 +246,7 @@ class AuC:
         # lookup db for authentication Key and counter for IMSI
         try:
             K_ALG2_SQN_OP = self.db[IMSI]
-        except:
+        except Exception:
             self._log('WNG', '[make_3g_vector] IMSI %s not present in AuC.db' % IMSI)
             return None
         #
@@ -305,7 +305,7 @@ class AuC:
         # lookup db for authentication Key and counter for IMSI
         try:
             K_ALG2_SQN_OP = self.db[IMSI]
-        except:
+        except Exception:
             self._log('WNG', '[make_4g_vector] IMSI %s not present in AuC.db' % IMSI)
             return None
         #
@@ -360,7 +360,7 @@ class AuC:
         # lookup db for authentication Key and counter for IMSI
         try:
             K_ALG2_SQN_OP = self.db[IMSI]
-        except:
+        except Exception:
             self._log('WNG', '[synch_sqn] IMSI %s not present in AuC.db' % IMSI)
             return None
         #

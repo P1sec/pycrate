@@ -83,7 +83,7 @@ class CMSMSProc(NASSigProc):
     def rm_from_sms_stack(self):
         try:
             del self.SMS.Proc[self.TID]
-        except:
+        except Exception:
             pass
     
     def init_timer(self):

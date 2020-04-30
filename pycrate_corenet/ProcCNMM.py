@@ -139,7 +139,7 @@ class MMSigProc(NASSigProc):
         try:
             if self.MM.Proc[-1] == self:
                 del self.MM.Proc[-1]
-        except:
+        except Exception:
             self._log('WNG', 'MM stack corrupted')
         else:
             if self._mm_preempt:
@@ -760,7 +760,7 @@ class MMLocationUpdating(MMSigProc):
             # we remove it from the Server's provisory dict of UE
             try:
                 del self.UE.Server._UEpre[self.UE.TMSI]
-            except:
+            except Exception:
                 pass
             #
             if self.UEInfo['ID'][0] == 1:

@@ -116,7 +116,7 @@ class ESMSigProc(NASSigProc):
         # select the encoder and duplicate it
         try:
             Encod = self.Encod[(pd, typ)]
-        except:
+        except Exception:
             return
         ESMHeader = {}
         if 'EPSBearerId' in kw:
@@ -163,7 +163,7 @@ class ESMSigProc(NASSigProc):
             ProcStack = self.ESM.Proc[self._ebi]
             if ProcStack[-1] == self:
                 del ProcStack[-1]
-        except:
+        except Exception:
             self._log('WNG', 'ESM stack corrupted')
     
     def init_timer(self):

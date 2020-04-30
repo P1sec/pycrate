@@ -147,7 +147,7 @@ class EMMSigProc(NASSigProc):
         try:
             if self.EMM.Proc[-1] == self:
                 del self.EMM.Proc[-1]
-        except:
+        except Exception:
             self._log('WNG', 'EMM stack corrupted')
         else:
             if self._emm_preempt:
@@ -903,7 +903,7 @@ class EMMAttach(EMMSigProc):
             # -> we need to get its IMSI before continuing
             try:
                 del self.UE.Server._UEpre[self.UE.MTMSI]
-            except:
+            except Exception:
                 pass
             #
             if self.UEInfo['EPSID'][0] == 1:
@@ -924,7 +924,7 @@ class EMMAttach(EMMSigProc):
             try:
                 secctx = self.S1.SEC[self.S1.SEC['KSI']]
                 secctx['UL_enb'] = self._nas_rx._ulcnt
-            except:
+            except Exception:
                 pass
             if self.EMM.require_smc(self):
                 return self._ret_smc(self.UEInfo['NAS_KSI'])
@@ -966,7 +966,7 @@ class EMMAttach(EMMSigProc):
                 try:
                     secctx = self.S1.SEC[self.S1.SEC['KSI']]
                     secctx['UL_enb'] = self._nas_rx._ulcnt
-                except:
+                except Exception:
                     pass
                 if self.EMM.require_smc(self):
                     return self._ret_smc(self.UEInfo['NAS_KSI'])
@@ -1147,7 +1147,7 @@ class EMMDetachUE(EMMSigProc):
                 # just delete it
                 try:
                     del self.UE.Server._UEpre[self.UE.MTMSI]
-                except:
+                except Exception:
                     pass
     
     def process(self, pdu):
@@ -1378,7 +1378,7 @@ class EMMTrackingAreaUpdate(EMMSigProc):
             # -> we need to get its IMSI before continuing
             try:
                 del self.UE.Server._UEpre[self.UE.MTMSI]
-            except:
+            except Exception:
                 pass
             # need to request the IMSI, prepare an id request procedure
             return self._ret_req_imsi()
@@ -1391,7 +1391,7 @@ class EMMTrackingAreaUpdate(EMMSigProc):
             try:
                 secctx = self.S1.SEC[self.S1.SEC['KSI']]
                 secctx['UL_enb'] = self._nas_rx._ulcnt
-            except:
+            except Exception:
                 pass
             if self.EMM.require_smc(self):
                 return self._ret_smc(self.UEInfo['NAS_KSI'])
@@ -1426,7 +1426,7 @@ class EMMTrackingAreaUpdate(EMMSigProc):
                 try:
                     secctx = self.S1.SEC[self.S1.SEC['KSI']]
                     secctx['UL_enb'] = self._nas_rx._ulcnt
-                except:
+                except Exception:
                     pass
                 if self.EMM.require_smc(self):
                     return self._ret_smc(self.UEInfo['NAS_KSI'])
@@ -1617,7 +1617,7 @@ class EMMServiceRequest(EMMSigProc):
             # -> we need to get its IMSI before continuing
             try:
                 del self.UE.Server._UEpre[self.UE.MTMSI]
-            except:
+            except Exception:
                 pass
             # need to request the IMSI, prepare an id request procedure
             return self._ret_req_imsi()
@@ -1630,7 +1630,7 @@ class EMMServiceRequest(EMMSigProc):
             try:
                 secctx = self.S1.SEC[self.S1.SEC['KSI']]
                 secctx['UL_enb'] = self._nas_rx._ulcnt
-            except:
+            except Exception:
                 pass
             if self.EMM.require_smc(self) and self.EMM.SER_SMC_ALW:
                 return self._ret_smc((0, self.UEInfo['KSI'].get_val()))
@@ -1655,7 +1655,7 @@ class EMMServiceRequest(EMMSigProc):
                 try:
                     secctx = self.S1.SEC[self.S1.SEC['KSI']]
                     secctx['UL_enb'] = self._nas_rx._ulcnt
-                except:
+                except Exception:
                     pass
                 if self.EMM.require_smc(self) and self.EMM.SER_SMC_ALW:
                     return self._ret_smc((0, self.UEInfo['KSI'].get_val()))

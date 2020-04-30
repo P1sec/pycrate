@@ -524,7 +524,7 @@ class S1APInitialContextSetup(S1APSigProc):
         self._recv(pdu)
         try:
             del self.S1.Proc[self.Code]
-        except:
+        except Exception:
             pass
         #
         if self.errcause:
@@ -537,7 +537,7 @@ class S1APInitialContextSetup(S1APSigProc):
         elif pdu[0] == 'unsuccessfulOutcome':
             try:
                 self._log('WNG', 'failure, rejected with cause %r' % (self.UEInfo['Cause'], ))
-            except:
+            except Exception:
                 self._log('WNG', 'failure, rejected without cause')
             self.success = False
             if hasattr(self, '_gtp_add_mobile_ebi'):
@@ -683,7 +683,7 @@ class S1APUEContextRelease(S1APSigProc):
         # remove from the S1AP procedure stack
         try:
             del self.S1.Proc[self.Code]
-        except:
+        except Exception:
             pass
         self._release_s1()
     
@@ -691,7 +691,7 @@ class S1APUEContextRelease(S1APSigProc):
         # remove from the S1AP procedure stack
         try:
             del self.S1.Proc[self.Code]
-        except:
+        except Exception:
             pass
         self._log('INF', 'aborting')
         self._release_s1()
@@ -1609,7 +1609,7 @@ class S1APResetCN(S1APNonUESigProc):
         self._recv(pdu)
         try:
             del self.ENB.Proc[self.Code]
-        except:
+        except Exception:
             pass
         if not self.errcause:
             self._log('INF', 'success')
@@ -1776,7 +1776,7 @@ class S1APErrorIndNonUEENB(S1APNonUESigProc):
             # abort it
             try:
                 self.ENB.Proc[self.ENB.ProcLast].abort()
-            except:
+            except Exception:
                 pass
 
 
@@ -1861,7 +1861,7 @@ class S1APErrorIndENB(S1APSigProc):
             # abort it
             try:
                 self.S1.Proc[self.S1.ProcLast].abort()
-            except:
+            except Exception:
                 pass
 
 
@@ -2581,7 +2581,7 @@ class S1APWriteReplaceWarning(S1APNonUESigProc):
         self._recv(pdu)
         try:
             del self.ENB.Proc[self.Code]
-        except:
+        except Exception:
             pass
         if not self.errcause:
             msgid, sernum = self.ENBInfo['MessageIdentifier'][0], self.ENBInfo['SerialNumber'][0]
@@ -2640,7 +2640,7 @@ class S1APKill(S1APNonUESigProc):
         self._recv(pdu)
         try:
             del self.ENB.Proc[self.Code]
-        except:
+        except Exception:
             pass
         if not self.errcause:
             self._log('INF', 'stopped broadcasting warning message')

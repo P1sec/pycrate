@@ -615,7 +615,7 @@ class GTPUd(object):
             else:
                 self._log('WNG', 'invalid IP packet from UE, dropping it')
                 return
-        except:
+        except Exception:
             self._log('WNG', 'invalid GTP / IP packet from RAN / UE, dropping it')
             return
         #
@@ -722,7 +722,7 @@ class GTPUd(object):
         #
         try:
             stats = self.stats[ipsrc]
-        except:
+        except Exception:
             stats = self.init_stats(ipsrc)
         #
         if ipvers == 4:
@@ -862,7 +862,7 @@ class GTPUd(object):
                     # add the sk_int within ran_info
                     sk_int   = self.sk_int[self._sk_int_ind[ran_ip[0]]]
                     ran_info = (ran_ip[0], ran_ip[1], sk_int)
-                except:
+                except Exception:
                     self._log('ERR', 'invalid RAN IP, %r' % ran_ip)
                     ran_info = None
             else:
@@ -890,7 +890,7 @@ class GTPUd(object):
                     # add the sk_int within ran_info
                     sk_int   = self.sk_int[self._sk_int_ind[ran_ip[0]]]
                     ran_info = (ran_ip[0], ran_ip[1], sk_int)
-                except:
+                except Exception:
                     self._log('ERR', 'invalid RAN IP, %r' % ran_ip)
                     ran_info = None
             else:
@@ -913,7 +913,7 @@ class GTPUd(object):
                     ipv4addr = inet_ntoa(ipv4buf)
                     try:
                         del self._mobiles_addr[ipv4buf]
-                    except:
+                    except Exception:
                         pass
                 else:
                     ipv4addr = None
@@ -921,7 +921,7 @@ class GTPUd(object):
                     ipv6addr = inet_ntop(AF_INET6, self.IPV6_NET_PREF + ipv6buf)
                     try:
                         del self._mobiles_addr[ipv6buf]
-                    except:
+                    except Exception:
                         pass
                 else:
                     ipv6addr = None

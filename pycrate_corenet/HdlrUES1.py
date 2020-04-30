@@ -526,7 +526,7 @@ class UEEMMd(SigStack):
     def set_sec_ctx_smc(self, ksi):
         try:
             secctx = self.S1.SEC[ksi]
-        except:
+        except Exception:
             pass
         else:
             secctx['EEA'], secctx['EIA'] = self._get_sec_eea(), self._get_sec_eia()
@@ -639,7 +639,7 @@ class UEEMMd(SigStack):
         Proc = self.init_proc(ProcClass, encod={ProcClass.Init: IEs}, emm_preempt=True, sec=sec)
         try:
             S1apTxProc = Proc.output()
-        except:
+        except Exception:
             self._log('ERR', 'invalid IEs for network-initiated procedure %s' % Proc.Name)
             Proc.abort()
             return False, Proc
@@ -953,7 +953,7 @@ class UEESMd(SigStack):
         """
         try:
             trans = self.Trans[trans_id]
-        except:
+        except Exception:
             # err cause 47: PTI mismatch
             return None, 47
         #
@@ -1308,7 +1308,7 @@ class UES1d(SigStack):
             # eNB-initiated procedure, instantiate it
             try:
                 Proc = S1APProcEnbDispatcher[pdu_rx[1]['procedureCode']](self)
-            except:
+            except Exception:
                 self._log('ERR', 'invalid S1AP PDU, initiatingMessage, code %i'\
                           % pdu_rx[1]['procedureCode'])
                 errcause = ('protocol', 'abstract-syntax-error-reject')
@@ -1340,7 +1340,7 @@ class UES1d(SigStack):
             # CN-initiated procedure, transfer the PDU to it
             try:
                 Proc = self.Proc[pdu_rx[1]['procedureCode']]
-            except:
+            except Exception:
                 self._log('ERR', 'invalid S1AP PDU, %s, code %i'\
                           % (pdu_rx[0], pdu_rx[1]['procedureCode']))
                 errcause = ('protocol', 'message-not-compatible-with-receiver-state')
@@ -1385,7 +1385,7 @@ class UES1d(SigStack):
             return None
         try:
             Proc = ProcClass(self)
-        except:
+        except Exception:
             # no active S1 link
             self._log('ERR', 'no active S1 link to initialize the S1AP procedure %s'\
                       % ProcClass.__name__)
@@ -1755,7 +1755,7 @@ class UES1d(SigStack):
                     if sh == 2:
                         NasTxSec.encrypt(secctx['Knasenc'], 1, secctx['EEA'], sqnmsb)
                     NasTxSec.mac_compute(secctx['Knasint'], 1, secctx['EIA'], sqnmsb)
-                except:
+                except Exception:
                     self._log('ERR', 'NAS SEC DL: unable to protect the NAS message %s' % NasTx._name)
                     #self.reset_sec_ctx()
                     return None
@@ -1869,7 +1869,7 @@ class UES1d(SigStack):
         tai = (self.UE.PLMN, self.UE.TAC)
         try:
             enbs = [self.Server.RAN[enbid] for enbid in self.Server.TAI[tai]]
-        except:
+        except Exception:
             self._log('ERR', 'paging: no eNB serving the UE TAI %s.%.4x' % tai)
             return
         #
@@ -1895,7 +1895,7 @@ class UES1d(SigStack):
         tai = (self.UE.PLMN, self.UE.TAC)
         try:
             enbs = [self.Server.RAN[enbid] for enbid in self.Server.TAI[tai]]
-        except:
+        except Exception:
             self._log('ERR', 'paging: no eNB serving the UE TAI %s.%.4x' % tai)
             return False
         #

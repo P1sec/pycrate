@@ -1542,7 +1542,7 @@ class NGAPErrorIndNonUERAN(NGAPNonUESigProc):
             # abort it
             try:
                 self.GNB.Proc[self.GNB.ProcLast].abort()
-            except:
+            except Exception:
                 pass
 
 
@@ -1627,7 +1627,7 @@ class NGAPErrorIndRAN(NGAPSigProc):
             # abort it
             try:
                 self.NG.Proc[self.NG.ProcLast].abort()
-            except:
+            except Exception:
                 pass
 
 

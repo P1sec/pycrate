@@ -475,7 +475,7 @@ class HNBAPErrorIndHNB(HNBAPSigProc):
             # abort it
             try:
                 self.ProcHnbap[self.HNB.ProcHnbapLast].abort()
-            except:
+            except Exception:
                 pass
 
 

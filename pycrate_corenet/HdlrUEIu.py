@@ -156,7 +156,7 @@ class UEIuSigStack(SigStack):
             return []
         try:
             PDU_RANAP.from_aper(buf)
-        except:
+        except Exception:
             asn_ranap_release()
             self._log('WNG', 'invalid RANAP PDU transfer-syntax: %s'\
                       % hexlify(buf).decode('ascii'))
@@ -178,7 +178,7 @@ class UEIuSigStack(SigStack):
             # RNC-initiated procedure, instantiate it
             try:
                 Proc = RANAPProcRncDispatcher[pdu_rx[1]['procedureCode']](self)
-            except:
+            except Exception:
                 self._log('ERR', 'invalid RANAP PDU, initiatingMessage, code %i'\
                           % pdu_rx[1]['procedureCode'])
                 # error cause: protocol, abstract-syntax-error-reject
@@ -209,7 +209,7 @@ class UEIuSigStack(SigStack):
             # CN-initiated procedure, transfer the PDU to it
             try:
                 Proc = self.Proc[pdu_rx[1]['procedureCode']]
-            except:
+            except Exception:
                 self._log('ERR', 'invalid RANAP PDU, %s, code %i'\
                           % (pdu_rx[0], pdu_rx[1]['procedureCode']))
                 # error cause: protocol, message-not-compatible-with-receiver-state
@@ -244,7 +244,7 @@ class UEIuSigStack(SigStack):
             return None
         try:
             Proc = ProcClass(self)
-        except:
+        except Exception:
             # no active Iu link
             self._log('ERR', 'no active Iu link to initialize the RANAP procedure %s'\
                       % ProcClass.__name__)

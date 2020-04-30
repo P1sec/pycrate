@@ -148,7 +148,7 @@ class UEFGMMd(SigStack):
         Proc = self.init_proc(ProcClass, encod={ProcClass.Init: IEs}, fgmm_preempt=True, sec=sec)
         try:
             NgapTxProc = Proc.output()
-        except:
+        except Exception:
             self._log('ERR', 'invalid IEs for network-initiated procedure %s' % Proc.Name)
             Proc.abort()
             return False, Proc

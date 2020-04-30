@@ -228,7 +228,7 @@ def decode_ue_rad_cap(buf):
     UERadCap = RRCLTE.EUTRA_InterNodeDefinitions.UERadioAccessCapabilityInformation
     try:
         UERadCap.from_uper(buf)
-    except:
+    except Exception:
         return None
     uecapinfo = {}
     try:
@@ -241,7 +241,7 @@ def decode_ue_rad_cap(buf):
                                            'criticalExtensions',
                                            'c1',
                                            'ueCapabilityInformation-r8'))
-    except:
+    except Exception:
         return UERadCap._val, uecapinfo
     # decode each ueCapabilityRAT-Container
     for caprat in radcapinfo['ue-CapabilityRAT-ContainerList']:
@@ -250,7 +250,7 @@ def decode_ue_rad_cap(buf):
             UEEUTRACap = RRCLTE.EUTRA_RRC_Definitions.UE_EUTRA_Capability
             try:
                 UEEUTRACap.from_uper(caprat['ueCapabilityRAT-Container'])
-            except:
+            except Exception:
                 uecapinfo[rattype] = caprat['ueCapabilityRAT-Container']
             else:
                 uecapinfo[rattype] = UEEUTRACap._val
@@ -258,7 +258,7 @@ def decode_ue_rad_cap(buf):
             UEUTRACap  = RRC3G.PDU_definitions.InterRATHandoverInfo
             try:
                 UEUTRACap.from_uper(caprat['ueCapabilityRAT-Container'])
-            except:
+            except Exception:
                 uecapinfo[rattype] = caprat['ueCapabilityRAT-Container']
             else:
                 uecapinfo[rattype] = UEUTRACap._val
@@ -275,7 +275,7 @@ def decode_ue_rad_cap(buf):
                 try:
                     m2.from_bytes(buf_m2)
                     m3.from_bytes(buf_m3)
-                except:
+                except Exception:
                     uecapinfo[rattype] = caprat['ueCapabilityRAT-Container']
                 else:
                     uecapinfo[rattype] = (m2, m3)
@@ -283,7 +283,7 @@ def decode_ue_rad_cap(buf):
             mrc = NAS.ms_ra_capability_value_part.clone()
             try:
                 mrc.from_bytes(caprat['ueCapabilityRAT-Container'])
-            except:
+            except Exception:
                 uecapinfo[rattype] = caprat['ueCapabilityRAT-Container']
             else:
                 uecapinfo[rattype] = mrc
@@ -505,7 +505,7 @@ def inet_aton_cn(*pdnaddr, **kw):
         # IPv4 address
         try:
             return inet_aton(pdnaddr[1])
-        except:
+        except Exception:
             log('WNG: IPv4 address conversion error, %r' % pdnaddr[1])
             return pdnaddr[1]
     elif pdnaddr[0] == 2:
@@ -517,7 +517,7 @@ def inet_aton_cn(*pdnaddr, **kw):
         else:
             try:
                 return inet_pton(AF_INET6, ipaddr)
-            except:
+            except Exception:
                 log('WNG: IPv6 address conversion error, %r' % pdnaddr[1])
                 return ipaddr
     elif pdnaddr[0] == 3:
@@ -526,14 +526,14 @@ def inet_aton_cn(*pdnaddr, **kw):
             # PDN address
             try:
                 return inet_aton_cn(2, pdnaddr[2]) + inet_aton_cn(1, pdnaddr[1])
-            except:
+            except Exception:
                 log('WNG: IPv4v6 PDN address conversion error, %r' % pdnaddr[1])
                 return pdnaddr[1]
         else:
             # PDP address
             try:
                 return inet_aton_cn(1, pdnaddr[1]) + inet_aton_cn(2, pdnaddr[2])
-            except:
+            except Exception:
                 log('WNG: IPv4v6 PDP address conversion error, %r' % pdnaddr[1])
                 return pdnaddr[1]
     else:
@@ -550,7 +550,7 @@ def inet_ntoa_cn(pdntype, buf, dom='EPS'):
         # IPv4 address
         try:
             return (1, inet_ntoa(buf))
-        except:
+        except Exception:
             log('WNG: IPv4 buffer conversion error, %s' % hexlify(buf).decode('ascii'))
             return None
     elif pdntype == 2:
@@ -560,7 +560,7 @@ def inet_ntoa_cn(pdntype, buf, dom='EPS'):
         else:
             try:
                 return (2, inet_ntop(AF_INET6, buf))
-            except:
+            except Exception:
                 log('WNG: IPv6 buffer conversion error, %s' % hexlify(buf).decode('ascii'))
                 return None
     elif pdntype == 3:
@@ -568,13 +568,13 @@ def inet_ntoa_cn(pdntype, buf, dom='EPS'):
             # PDN address
             try:
                 return (3, inet_ntoa(buf[8:12]), inet_ntoa_cn(2, buf[:8])[1])
-            except:
+            except Exception:
                 log('WNG: IPv4v6 PDN buffer conversion error, %s' % hexlify(buf).decode('ascii'))
         else:
             # PDP address
             try:
                 return (3, inet_ntoa(buf[:4]), inet_ntop(AF_INET6, buf[4:20]))
-            except:
+            except Exception:
                 log('WNG: IPv4v6 PDP buffer conversion error, %s' % hexlify(buf).decode('ascii'))
     else:
         return (pdntype, buf)
@@ -670,7 +670,7 @@ def print_pduies(desc):
                                % (ident,
                                   pythonize_name(ies('id', ident)['Value']._tr._name),
                                   ies('id', ident)['presence'][0].upper())
-                    except:
+                    except Exception:
                         info = '  - %i: [%s] (%s)'\
                                % (ident,
                                   ies('id', ident)['Value'].TYPE,
@@ -692,7 +692,7 @@ def print_pduies(desc):
                                % (ident,
                                   pythonize_name(ies('id', ident)['Extension']._tr._name),
                                   ies('id', ident)['presence'][0].upper())
-                    except:
+                    except Exception:
                         info = '  - %i: [%s] (%s)'\
                                % (ident,
                                   pythonize_name(ies('id', ident)['Extension'].TYPE),
