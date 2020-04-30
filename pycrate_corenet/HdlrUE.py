@@ -408,7 +408,7 @@ class UEd(SigStack):
         if self.TMSI is not None:
             try:
                 del self.Server.TMSI[self.TMSI]
-            except:
+            except Exception:
                 pass
         # set the new TMSI
         self.TMSI = tmsi
@@ -420,7 +420,7 @@ class UEd(SigStack):
         if self.PTMSI is not None:
             try:
                 del self.Server.PTMSI[self.PTMSI]
-            except:
+            except Exception:
                 pass
         # set the new PTMSI
         self.PTMSI = ptmsi
@@ -432,7 +432,7 @@ class UEd(SigStack):
         if self.MTMSI is not None:
             try:
                 del self.Server.MTMSI[self.MTMSI]
-            except:
+            except Exception:
                 pass
         # set the new PTMSI
         self.MTMSI = mtmsi
@@ -725,7 +725,7 @@ class UEd(SigStack):
         """
         try:
             from IPython.lib.pretty import pretty
-        except:
+        except Exception:
             pretty = repr
         else:
             txt = []

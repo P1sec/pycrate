@@ -622,7 +622,7 @@ class CorenetServer(object):
                 return
             try:
                 PDU_HNBAP.from_aper(buf)
-            except:
+            except Exception:
                 asn_hnbap_release()
                 hnb._log('WNG', 'invalid HNBAP PDU transfer-syntax: %s'\
                          % hexlify(buf).decode('ascii'))
@@ -647,7 +647,7 @@ class CorenetServer(object):
                 return
             try:
                 PDU_RUA.from_aper(buf)
-            except:
+            except Exception:
                 asn_rua_release()
                 self._log('WNG', 'invalid RUA PDU transfer-syntax: %s'\
                           % hexlify(buf).decode('ascii'))
@@ -672,7 +672,7 @@ class CorenetServer(object):
                 return
             try:
                 PDU_S1AP.from_aper(buf)
-            except:
+            except Exception:
                 asn_s1ap_release()
                 enb._log('WNG', 'invalid S1AP PDU transfer-syntax: %s'\
                          % hexlify(buf).decode('ascii'))
@@ -701,7 +701,7 @@ class CorenetServer(object):
                 return
             try:
                 PDU_NGAP.from_aper(buf)
-            except:
+            except Exception:
                 asn_ngap_release()
                 gnb._log('WNG', 'invalid NGAP PDU transfer-syntax: %s'\
                          % hexlify(buf).decode('ascii'))
@@ -804,7 +804,7 @@ class CorenetServer(object):
             PLMN   = plmn_buf_to_str(plmn)
             CellID = cellid_bstr_to_str(cellid)
             return PLMN, CellID
-        except:
+        except Exception:
             return None
     
     def _send_s1setuprej(self, sk, cause):
@@ -849,7 +849,7 @@ class CorenetServer(object):
             return
         try:
             PDU_S1AP.from_aper(buf)
-        except:
+        except Exception:
             self._log('WNG', 'invalid S1AP PDU transfer-syntax: %s'\
                       % hexlify(buf).decode('ascii'))
             # return nothing, no need to bother
@@ -926,7 +926,7 @@ class CorenetServer(object):
         for tai in enb.Config['TAIs']:
             try:
                 self.TAI[tai].remove(enb.ID)
-            except:
+            except Exception:
                 self._log('ERR', 'RAN node %r not referenced into the TAI table' % (enb.ID,))
     
     #--------------------------------------------------------------------------#
@@ -1004,7 +1004,7 @@ class CorenetServer(object):
             return
         try:
             PDU_NGAP.from_aper(buf)
-        except:
+        except Exception:
             self._log('WNG', 'invalid NGAP PDU transfer-syntax: %s'\
                       % hexlify(buf).decode('ascii'))
             # return nothing, no need to bother
@@ -1103,7 +1103,7 @@ class CorenetServer(object):
             PLMN   = plmn_buf_to_str(plmn)
             CellID = cellid_bstr_to_str(cellid)
             return PLMN, CellID
-        except:
+        except Exception:
             return None
     
     def _send_hnbregrej(self, sk, cause):
@@ -1147,7 +1147,7 @@ class CorenetServer(object):
             return
         try:
             PDU_HNBAP.from_aper(buf)
-        except:
+        except Exception:
             self._log('WNG', 'invalid HNBAP PDU transfer-syntax: %s'\
                       % hexlify(buf).decode('ascii'))
             # return nothing, no need to bother
@@ -1232,11 +1232,11 @@ class CorenetServer(object):
         rai = lai + (hnb.Config['RAC'], )
         try:
             self.LAI[lai].remove(hnb.ID)
-        except:
+        except Exception:
             self._log('ERR', 'HNB not referenced into the LAI table')
         try:
             self.RAI[rai].remove(hnb.ID)
-        except:
+        except Exception:
             self._log('ERR', 'HNB not referenced into the RAI table')
     
     #--------------------------------------------------------------------------#

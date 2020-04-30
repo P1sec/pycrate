@@ -123,7 +123,7 @@ class ENBd(object):
             # eNB-initiated procedure, instantiate it
             try:
                 Proc = S1APNonUEProcEnbDispatcher[pdu_rx[1]['procedureCode']](self)
-            except:
+            except Exception:
                 self._log('ERR', 'invalid S1AP PDU, initiatingMessage, code %i'\
                           % pdu_rx[1]['procedureCode'])
                 errcause = ('protocol', 'abstract-syntax-error-reject')
@@ -151,7 +151,7 @@ class ENBd(object):
             # CN-initiated procedure, transfer the PDU to it
             try:
                 Proc = self.Proc[pdu_rx[1]['procedureCode']]
-            except:
+            except Exception:
                 self._log('ERR', 'invalid S1AP PDU, %s, code %i'\
                           % (pdu_rx[0], pdu_rx[1]['procedureCode']))
                 errcause = ('protocol', 'message-not-compatible-with-receiver-state')
@@ -255,7 +255,7 @@ class ENBd(object):
         else:
             try:
                 ue = self.UE[ctx_id]
-            except:
+            except Exception:
                 self._log('ERR', 'invalid eNB UE context id provided')
                 errcause = ('radioNetwork', 'unknown-enb-ue-s1ap-id')
                 Proc = self.init_s1ap_proc(S1APErrorIndNonUECN, Cause=errcause)
@@ -271,7 +271,7 @@ class ENBd(object):
     def unset_ue_s1(self, ctx_id):
         try:
             del self.UE[ctx_id]
-        except:
+        except Exception:
             self._log('WNG', 'no UE with S1 context-id %i to unset' % ctx_id)
     
     def get_ued(self, pdu_rx):
@@ -466,7 +466,7 @@ class ENBd(object):
             else:
                 try:
                     del self.WARN[msgid]
-                except:
+                except Exception:
                     pass
             return True
     

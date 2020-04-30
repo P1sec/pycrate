@@ -125,7 +125,7 @@ class GNBd(object):
             # gNB-initiated procedure, instantiate it
             try:
                 Proc = NGAPNonUEProcRANDispatcher[pdu_rx[1]['procedureCode']](self)
-            except:
+            except Exception:
                 self._log('ERR', 'invalid NGAP PDU, initiatingMessage, code %i'\
                           % pdu_rx[1]['procedureCode'])
                 errcause = ('protocol', 'abstract-syntax-error-reject')
@@ -153,7 +153,7 @@ class GNBd(object):
             # CN-initiated procedure, transfer the PDU to it
             try:
                 Proc = self.Proc[pdu_rx[1]['procedureCode']]
-            except:
+            except Exception:
                 self._log('ERR', 'invalid NGAP PDU, %s, code %i'\
                           % (pdu_rx[0], pdu_rx[1]['procedureCode']))
                 errcause = ('protocol', 'message-not-compatible-with-receiver-state')
