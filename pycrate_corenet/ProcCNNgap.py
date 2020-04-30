@@ -1257,7 +1257,7 @@ class NGAPNGSetup(NGAPNonUESigProc):
     # Custom decoders
     Decod = {
         'ini': ({
-            'GlobalRANNodeID': ngranid_to_hum,
+            'GlobalRANNodeID': globranid_to_hum,
             'SupportedTAList': supptalist_to_hum,
             },
             {}),
@@ -1282,12 +1282,12 @@ class NGAPNGSetup(NGAPNonUESigProc):
         else:
             self.GNB.Config = cpdict(self.GNBInfo)
             tais = []
-            for (tac, bcastplmnlist) in self.GNBInfo['SupportedTAList']:
+            for (tac, bcastplmnlist) in self.GNBInfo['SupportedTAList'].items():
                 for (plmn, _) in bcastplmnlist:
                     tais.append( (plmn, tac) )
             self.GNB.Config['TAIs'] = tais
             self.GNB.ID = self.GNBInfo['GlobalRANNodeID']
-            # prepare the SNGSetupResponse
+            # prepare the NGSetupResponse
             IEs = self.GNB.get_ngsetup_ies_from_cfg()
             self.encode_pdu('suc', **IEs)
             self._log('INF', 'gNB NG setup successfully')

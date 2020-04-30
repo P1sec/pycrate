@@ -215,11 +215,12 @@ class GNBd(object):
     def get_ngsetup_ies_from_cfg(self):
         """return the dict of IEs for the NGSetupResponse from the Config dict
         """
-        ies = {'AMFName'            : self.Server.ConfigNG['AMFName'],
-               'PLMNSupportList'    : cplist(self.Server.ConfigNG['PLMNSupportList']),
-               'RelativeAMFCapacity': self.Server.ConfigNG['RelativeAMFCapacity'],
-               'ServedGUAMIList'    : cplist(self.Server.ConfigNG['ServedGUAMIList']),
-               }
+        ies = {
+            'AMFName'            : self.Server.ConfigNG['AMFName'],
+            'PLMNSupportList'    : plmnsupplist_to_asn(self.Server.AMF_PLMNSupp),
+            'RelativeAMFCapacity': self.Server.ConfigNG['RelativeAMFCapacity'],
+            'ServedGUAMIList'    : guamilist_to_asn(self.Server.AMF_GUAMI),
+            }
         if 'UERetentionInformation' in self.Server.ConfigNG:
             ies['UERetentionInformation'] = self.Server.ConfigNG['UERetentionInformation']
         return ies

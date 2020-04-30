@@ -133,31 +133,44 @@ class CorenetServer(object):
     #
     # main PLMN served
     PLMN = '00101'
-    # equivalent PLMNs served, used for Iu and S1 interface
-    # None or list of PLMNs ['30124', '763326', ...]
-    EQUIV_PLMN = None
+    
+    
+    ### AMF-related config
     #
-    # AMF RegionID, SetID and Pointer
-    AMF_RID  = 1
-    AMF_SID  = 1
-    AMF_PTR  = 0
-    # list of PLMN and slices supported
-    # a sliceSupportList is basically a Sequence of S-NSSAI
+    # AMF ID for each served PLMN
+    # PLMN (str): AMF ID 3-tuple (RegionID uint8, SetID uint10, Pointer uint6)
+    AMF_GUAMI = {
+        PLMN: (1, 1, 0),
+        }
+    #
+    # arbitrary dict of indexed slices identifiers
+    # S-NSSAI is at least an SST (uint8) and eventually an SD (uint24)
     AMF_SNSSAI = {
         0  : (0x00, ), # default S-NSSAI
         1  : (0x01, ),
         2  : (0x02, ),
         21 : (0x02, 0x000001),
         }
-    AMF_PLMNSupp = [
-        (PLMN, [AMF_SNSSAI[0]]),
-        #($plmn1, [AMF_SNSSAI[1]]),
-        #($plmn2, [AMF_SNSSAI[2], AMF_SNSSAI[21]])
-        ]
+    # list of slice supported for each served PLMN
+    AMF_PLMNSupp = {
+        PLMN: [AMF_SNSSAI[0]],
+        #$plmn1: [AMF_SNSSAI[1]],
+        #$plmn2: [AMF_SNSSAI[2], AMF_SNSSAI[21]],
+        }
     #
-    # MME GroupID and Code
-    MME_GID  = 1
-    MME_CODE = 1
+    # NG connection AMF parameters
+    ConfigNG    = {
+        'AMFName'            : 'CorenetAMF',
+        'RelativeAMFCapacity': 10,
+        #'UERetentionInformation': 'ues-retained',
+        }
+    
+    
+    ### IuCS, IuPS and S1 common parameters
+    #
+    # equivalent PLMNs served, used for Iu and S1 interface
+    # None or list of PLMNs ['30124', '763326', ...]
+    EQUIV_PLMN = None
     #
     # emergency number lists
     # None or list of 2-tuple [(number_category, number), ...]
@@ -168,26 +181,13 @@ class CorenetServer(object):
     #    ({'Police', 'Ambulance', 'Fire'}, '112112'),
     #    ({'Marine', 'Mountain'}, '112113')]
     EMERG_NUMS = None
+    
+    
+    ### MME-related config
     #
-    # NG connection AMF parameters
-    ConfigNG    = {
-        'AMFName'            : 'CorenetAMF',
-        'PLMNSupportList'    : [
-            {'pLMNIdentity': plmn_str_to_buf(plmn),
-             'sliceSupportList': [
-                {'s-NSSAI': {'sST': uint_to_bytes(snssai[0], 8), 'sD': uint_to_bytes(snssai[1], 24)}} if len(snssai) > 1 else \
-                {'s-NSSAI': {'sST': uint_to_bytes(snssai[0], 8)}} for snssai in snssais],
-            } for (plmn, snssais) in AMF_PLMNSupp],
-        'RelativeAMFCapacity': 10,
-        'ServedGUAMIList'    : [
-            {'gUAMI': {
-                'pLMNIdentity': plmn_str_to_buf(PLMN),
-                'aMFRegionID' : (AMF_RID, 8),
-                'aMFSetID'    : (AMF_SID, 10),
-                'aMFPointer'  : (AMF_PTR, 6)}},
-            ],
-        #'UERetentionInformation': 'ues-retained',
-        }
+    # MME GroupID and Code
+    MME_GID  = 1
+    MME_CODE = 1
     #
     # S1 connection MME parameters
     ConfigS1    = {
@@ -201,6 +201,9 @@ class CorenetServer(object):
         'EquivPLMNList' : EQUIV_PLMN,
         'EmergNumList'  : EMERG_NUMS,
         }
+    
+    
+    ### MSC/VLR/SGSN-related config
     #
     # HNBAP connection GW parameters (keep it empty)
     ConfigHNBAP = {}
@@ -218,18 +221,21 @@ class CorenetServer(object):
         }
     
     #--------------------------------------------------------------------------#
-    # HNB and ENB parameters
+    # HNB, ENB and GNB parameters
     #--------------------------------------------------------------------------#
     #
-    # Home-NodeB and eNodeB, indexed by (PLMN, CellId)
-    # the RAN dict can be initialized with {(PLMN, CellId): None} at setup
-    # this provide a whitelist of allowed basestations.
+    # Connection from RAN equipments:
+    # Home-NodeB, eNodeB and gNodeB indexed by their global ID
+    # (PLMN, CellId) for home-NodeB and eNodeB
+    # (PLMN, CellType, CellId) for gNodeB
+    # the RAN dict can be initialized with {(PLMN, *Cell*): None} here
+    # this provides a whitelist of allowed basestations.
     RAN = {}
     #
     # Otherwise, this is a flag to allow any RAN equipment to connect the server
     # in case its PLMN is in the RAN_ALLOWED_PLMN list.
     # If enabled, RAN dict will be populated at runtime
-    # If disabled, RAN keys (PLMN, CellId) needs to be setup by configuration
+    # If disabled, RAN keys (PLMN, *Cell*) needs to be setup by configuration (see above)
     RAN_CONNECT_ANY = True
     #
     # This is the list of accepted PLMN for RAN equipment connecting, 
@@ -709,16 +715,16 @@ class CorenetServer(object):
                                          Cause=('protocol', 'transfer-syntax-error'))
                 pdu_tx = Err.send()
             else:
-                pdu_rx = PDU_S1AP()
-                if enb.TRACE_ASN_NGAP:
-                    enb._log('TRACE_ASN_NGAP_UL', PDU_NGAP.to_asn1())
+                pdu_rx = PDU_NGAP()
+                if gnb.TRACE_ASN_NGAP:
+                    gnb._log('TRACE_ASN_NGAP_UL', PDU_NGAP.to_asn1())
                 asn_ngap_release()
                 if sid == gnb.SKSid:
                     # non-UE-associated signalling
                     pdu_tx = gnb.process_ngap_pdu(pdu_rx)
                 else:
                     # UE-associated signalling
-                    pdu_tx = enb.process_ngap_ue_pdu(pdu_rx, sid)
+                    pdu_tx = gnb.process_ngap_ue_pdu(pdu_rx, sid)
             for pdu in pdu_tx:
                 self.send_ngap_pdu(gnb, pdu, sid)
         #
@@ -951,16 +957,13 @@ class CorenetServer(object):
                 # PLMN,
                 # ID type (gNB-ID, macroNgENB-ID, shortMacroNgENB-ID, longMacroNgENB-ID or n3IWF-ID),
                 # ID bit-string value 
-                ranid = ngranid_to_hum(ie['value'][1])
-                plmn  = ranid[0]
-                ranid = ranid[1:]
+                ranid = globranid_to_hum(ie['value'][1])
                 break
-        if plmn is None or ranid is None:
+        if ranid is None:
             self._log('WNG', 'invalid NGAP PDU for setting up the gNB NGAP link: '\
                       'missing PLMN and RAN-ID')
             return
-        # decode PLMN and CellID
-        return plmn, ranid
+        return ranid
     
     def _send_ngsetuprej(self, sk, cause):
         IEs = [{'criticality': 'ignore',

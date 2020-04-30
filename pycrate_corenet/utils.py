@@ -582,7 +582,7 @@ def inet_ntoa_cn(pdntype, buf, dom='EPS'):
 
 # routines for dealing with structures for NGAP
 
-def ngranid_to_hum(cho):
+def globranid_to_hum(cho):
     """returns a 3-tuple:
     - plmn id (str)
     - node type (str)
@@ -610,6 +610,29 @@ def ngranid_to_hum(cho):
             )
     return None
 
+def globranid_to_asn(granid):
+    if granid[1] == 'gNB-ID':
+        return (
+            'globalGNB-ID', {
+                'pLMNIdentity'  : plmn_str_to_buf(granid[0]),
+                'gNB-ID'        : (granid[1], granid[2])
+                }
+            )
+    elif granid[1] == 'n3IWF-ID':
+        return (
+            'globalN3IWF-ID', {
+                'pLMNIdentity'  : plmn_str_to_buf(granid[0]),
+                'n3IWF-ID'      : (granid[1], granid[2])
+                }
+            )
+    else:
+        return (
+            'globalNgENB-ID', {
+                'pLMNIdentity'  : plmn_str_to_buf(granid[0]),
+                'ngENB-ID'      : (granid[1], granid[2])
+                }
+            )
+
 def bcastplmn_to_hum(seq):
     """returns a 2-tuple:
     - plmn id (str)
@@ -628,10 +651,12 @@ def supptalist_to_hum(seqof):
     - TAC (uint24, was uint16 in S1AP)
     - list of broadcasted PLMN 2-tuple (see bcastplmn_to_hum)
     """
-    return [(
-        bytes_to_uint(seq['tAC'], 24),
-        [bcastplmn_to_hum(bcastplmn) for bcastplmn in seq['broadcastPLMNList']]) \
-        for seq in seqof]
+    # warning: in case of duplicate TAC, this will override GNB TAC of the first one(s)
+    return {
+        bytes_to_uint(seq['tAC'], 24) : [
+            bcastplmn_to_hum(bcastplmn) for bcastplmn in seq['broadcastPLMNList']] \
+        for seq in seqof
+        }
 
 def supptalist_to_asn(supptalist):
     return [
@@ -645,10 +670,51 @@ def supptalist_to_asn(supptalist):
                 {'s-NSSAI': {
                     'sST': uint_to_bytes(snssai[0], 8)}} \
                 for snssai in snssailist]
-            } for (plmn, snssailist) in bcastplmnlist]}
-         for (tac, bcastplmnlist) in supptalist
-         ]
+            } for (plmn, snssailist) in bcastplmnlist]
+        } for (tac, bcastplmnlist) in sorted(supptalist.items())
+        ]
 
+def guamilist_to_hum(seqof):
+    # warning: in case of duplicate PLMN, this will override AMF ID of the first one(s)
+    return {
+        plmn_buf_to_str(guami['gUAMI']['pLMNIdentity']): (
+            guami['gUAMI']['aMFRegionID'][0],
+            guami['gUAMI']['aMFSetID'][0],
+            guami['gUAMI']['aMFPointer'][0]
+            ) for guami in seqof
+        }
+
+def guamilist_to_asn(guamilist):
+    return [
+        {'gUAMI': {
+            'pLMNIdentity': plmn_str_to_buf(plmn),
+            'aMFRegionID' : (rid, 8),
+            'aMFSetID'    : (sid, 10),
+            'aMFPointer'  : (ptr, 6)
+            }
+        } for (plmn, (rid, sid, ptr)) in sorted(guamilist.items())
+        ]
+
+def plmnsupplist_to_hum(seqof):
+    # warning: in case of duplicate PLMN, this will override S-NSSAI of the first one(s)
+    return {
+        plmn_buf_to_str(seq['pLMNIdentity']): [
+            (bytes_to_uint(snssai['s-NSSAI']['sST'], 8), bytes_to_uint(snssai['s-NSSAI']['sD'], 24)) \
+                if len(snssai['s-NSSAI']) > 1 else \
+            (bytes_to_uint(snssai['s-NSSAI']['sST'], 8), ) \
+                for snssai in seq['sliceSupportList']
+            ]
+        for seq in seqof
+        }
+
+def plmnsupplist_to_asn(plmnsupplist):
+    return [
+        {'pLMNIdentity': plmn_str_to_buf(plmn),
+         'sliceSupportList': [
+            {'s-NSSAI': {'sST': uint_to_bytes(snssai[0], 8), 'sD': uint_to_bytes(snssai[1], 24)}} if len(snssai) > 1 else \
+            {'s-NSSAI': {'sST': uint_to_bytes(snssai[0], 8)}} for snssai in snssais],
+        } for (plmn, snssais) in sorted(plmnsupplist.items())
+        ]
 
 #------------------------------------------------------------------------------#
 # ASN.1 object handling facilities
