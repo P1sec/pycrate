@@ -227,23 +227,25 @@ Single value: Python 2-tuple
                 ASN1NotSuppErr('{0}: reference parsing unsupported'.format(self.fullname()))
     
     def _to_asn1(self):
-        if self._val[0][:5] == '_unk_':
-            # HSTRING
-            if python_version >= 3:
-                return '\'%s\'H' % hexlify(self._val[1]).decode('ascii').upper()
+        if isinstance(self._val[0], str_types):
+            if self._val[0][:5] == '_unk_':
+                # HSTRING
+                if python_version >= 3:
+                    return '\'%s\'H' % hexlify(self._val[1]).decode('ascii').upper()
+                else:
+                    return '\'%s\'H' % hexlify(self._val[1]).upper()
             else:
-                return '\'%s\'H' % hexlify(self._val[1]).upper()
-        else:
-            if isinstance(self._val[0], str_types):
                 ident = self._val[0]
-            elif isinstance(self._val[0], tuple):
-                ident = '.'.join(self._val[0])
-            else:
-                # self._val[0] is an ASN1Obj instance
-                ident = '%s.%s' % (self._val[0]._mod, self._val[0]._name)
-            Obj = self._get_val_obj(self._val[0])
-            Obj._val = self._val[1]
-            return '%s: %s' % (ident, Obj.to_asn1())
+                Obj   = self._get_val_obj(self._val[0])
+        elif isinstance(self._val[0], tuple):
+            ident = '.'.join(self._val[0])
+            Obj   = self._get_val_obj(self._val[0])
+        else:
+            # self._val[0] is an ASN1Obj instance
+            ident = '%s.%s' % (self._val[0]._mod, self._val[0]._name)
+            Obj   = self._val[0]
+        Obj._val = self._val[1]
+        return '%s: %s' % (ident, Obj.to_asn1())
     
     ###
     # conversion between internal value and ASN.1 PER encoding
