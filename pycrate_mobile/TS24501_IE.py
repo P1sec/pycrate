@@ -417,7 +417,7 @@ class SUPI_IMSI(Envelope):
             2 : SUCI_ECIESProfB()
             },
             DEFAULT=Buf('SUCI_UnkProf', rep=REPR_HEX),
-            sel=lambda self: self.get_env()[2].get_val()) 
+            sel=lambda self: self.get_env()[3].get_val()) 
         )
 
 
