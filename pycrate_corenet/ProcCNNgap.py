@@ -1278,7 +1278,7 @@ class NGAPNGSetup(NGAPNonUESigProc):
         if self.errcause:
             # procedure unsuccessful outcome
             self.encode_pdu('uns', Cause=self.errcause)
-            self._log('INF', 'gNB NG not setup successfully')
+            self._log('INF', 'gNB NG Setup unsuccessful')
         else:
             self.GNB.Config = cpdict(self.GNBInfo)
             tais = []
@@ -1290,7 +1290,7 @@ class NGAPNGSetup(NGAPNonUESigProc):
             # prepare the NGSetupResponse
             IEs = self.GNB.get_ngsetup_ies_from_cfg()
             self.encode_pdu('suc', **IEs)
-            self._log('INF', 'gNB NG setup successfully')
+            self._log('INF', 'gNB NG Setup successful')
     
     send = NGAPNonUESigProc._send
 
@@ -1335,6 +1335,33 @@ class NGAPRANConfigUpdate(NGAPNonUESigProc):
         'suc': ({}, {}),
         'uns': ({}, {})
         }
+
+    def recv(self, pdu):
+        # recv the NGSetupRequest
+        self._recv(pdu)
+        if self.errcause:
+            # procedure unsuccessful outcome
+            self.encode_pdu('uns', Cause=self.errcause)
+            self._log('INF', 'gNB Config Update unsuccessful')
+        else:
+            gnbcfg = cpdict(self.GNBInfo)
+            if 'NGRAN_TNLAssociationToRemoveList' in gnbcfg:
+                del gnbcfg['NGRAN_TNLAssociationToRemoveList']
+            self.GNB.Config.update(gnbcfg)
+            if 'SupportedTAList' in gnbcfg:
+                tais = []
+                for (tac, bcastplmnlist) in self.GNBInfo['SupportedTAList'].items():
+                    for (plmn, _) in bcastplmnlist:
+                        tais.append( (plmn, tac) )
+                self.GNB.Config['TAIs'] = tais
+            if 'GlobalRANNodeID' in gnbcfg:
+                self.GNB.ID = self.GNBInfo['GlobalRANNodeID']
+            # TODO: process NGRAN_TNLAssociationToRemoveList
+            # prepare the ConfigUpdateResponse
+            self.encode_pdu('suc')
+            self._log('INF', 'gNB Config Update successful')
+    
+    send = NGAPNonUESigProc._send
 
 
 class NGAPAMFConfigUpdate(NGAPNonUESigProc):
@@ -1381,6 +1408,18 @@ class NGAPAMFConfigUpdate(NGAPNonUESigProc):
         'suc': ({}, {}),
         'uns': ({}, {})
         }
+    
+    def recv(self, pdu):
+        # receive the AMFConfigUpdate response
+        self._recv(pdu)
+        try:
+            del self.GNB.Proc[self.Code]
+        except Exception:
+            pass
+        if not self.errcause:
+            self._log('INF', 'success')
+    
+    send = NGAPNonUESigProc._send
 
 
 class NGAPNGResetCN(NGAPNonUESigProc):
