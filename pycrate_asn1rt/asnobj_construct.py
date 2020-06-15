@@ -2054,7 +2054,7 @@ class _CONSTRUCT_OF(ASN1Obj):
     def _to_asn1(self):
         if not self._val:
             # empty list
-            return '{ }'
+            return '{ }'
         else:
             val = []
             _par = self._cont._parent
