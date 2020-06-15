@@ -931,7 +931,9 @@ class BufUD(Buf):
     _ENC_BL = 0
     
     def set_val(self, val):
-        if isinstance(val, bytes_types):
+        if val is None:
+            self._val = None
+        elif isinstance(val, bytes_types):
             Buf.set_val(self, val)
             if self.get_dcs() == DCS_7B:
                 self._ENC_BL = 8*len(val)
