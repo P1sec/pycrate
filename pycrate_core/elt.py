@@ -738,7 +738,7 @@ class Element(object):
             try:
                 val = val[self._name]
             except Exception:
-                raise(EltErr('{0} [_from_jval]: invalid value, {1!r}'.format(self._name, val)))
+                raise(EltErr('{0} [_from_jval]: invalid value, {1!r}'.format(self._name, val)))
             else:
                 self._from_jval(val)
         
@@ -4120,9 +4120,9 @@ class Alt(Element):
     
     # Warning:
     # When setting the selection callback as class attribute _sel, prototype is
-    # lambda a, b: ... both a & b being self when instantiated
+    # lambda a, b: ..., both a & b being self, when instantiated
     # When setting the selection callback during / after initialization, prototype is
-    # lambda a: ... a being self
+    # lambda a: ..., a being self
     
     __attrs__ = ('_env',
                  '_name',

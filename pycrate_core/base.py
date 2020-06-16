@@ -215,7 +215,7 @@ class Buf(Atom):
 
 
 # BufAuto is used when a Buf requires to have its length automatically computed
-# (i.e. in get_bl()) also when building the value (i.e. calling get_val())
+# (i.e. in get_bl()) also when building the value (i.e. calling get_val())
 # and not only at parsing (i.e. in _from_char())
 class BufAuto(Buf):
     
@@ -355,10 +355,10 @@ class String(Atom):
     # format routines
     #--------------------------------------------------------------------------#
     # Warning: there is no specific processing against fixed bit / byte length
-    # because it is highly improbable to have such encoded string with fixed
-    # length.
-    # However, in case some fixed length is applied to such type, things could
-    # fail silently...
+    # because it is highly improbable to have such encoded string with fixed
+    # length.
+    # however, in case some fixed length is applied to such type, things could
+    # fail silently...
     
     def _get_bl_from_val(self):
         return 8 * len(self.get_val().encode(self.CODEC))

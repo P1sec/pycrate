@@ -3,7 +3,7 @@
 # * Software Name : pycrate 
 # * Version : 0.4
 # *
-# * Copyright © 2013. Benoit Michau. ANSSI.
+# * Copyright 2013. Benoit Michau. ANSSI.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public

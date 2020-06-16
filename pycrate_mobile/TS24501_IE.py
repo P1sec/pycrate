@@ -325,14 +325,12 @@ class FGSIDType(Envelope):
 # TS 24.501, 9.11.3.4
 #------------------------------------------------------------------------------#
 
-FGSIDType_dict = {
-    0 : 'No identity',
-    1 : 'SUCI',
-    2 : '5G-GUTI',
-    3 : 'IMEI',
-    4 : '5G-S-TMSI',
-    5 : 'IMEISV',
-    6 : 'MAC address'
+FGSIDFMT_IMSI    = 0
+FGSIDFMT_NAI     = 1
+
+FGSIDFmt_dict    = {
+    0 : 'IMSI',
+    1 : 'NAI'
     }
 
 FGSIDTYPE_NO     = 0
@@ -343,6 +341,15 @@ FGSIDTYPE_TMSI   = 4
 FGSIDTYPE_IMEISV = 5
 FGSIDTYPE_MAC    = 6
 
+FGSIDType_dict   = {
+    0 : 'No identity',
+    1 : 'SUCI',
+    2 : '5G-GUTI',
+    3 : 'IMEI',
+    4 : '5G-S-TMSI',
+    5 : 'IMEISV',
+    6 : 'MAC address'
+    }
 
 _ProtSchemeID_dict = {
     0 : 'Null scheme',
@@ -424,12 +431,14 @@ class SUPI_IMSI(Envelope):
 class SUPI_NAI(UTF8String):
     pass
 
+FGSIDFMT_IMSI    = 0
+FGSIDFMT_NAI     = 1
 
 class FGSIDSUPI(Envelope):
     _name = '5GSIDSUPI'
     _GEN = (
         Uint('spare', bl=1),
-        Uint('Fmt', bl=3, dic={0:'IMSI', 1:'NAI'}),
+        Uint('Fmt', val=FGSIDFMT_IMSI, bl=3, dic=FGSIDFmt_dict),
         Uint('spare', bl=1),
         Uint('Type', val=FGSIDTYPE_SUPI, bl=3, dic=FGSIDType_dict),
         Alt('Value', GEN={

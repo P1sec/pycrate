@@ -932,7 +932,7 @@ Specific attribute:
                 else:
                     return {'base10Value': '%s' % (self._val[0]*(2**self._val[2]))}
             else:
-                #self._val[1] == 10
+                #self._val[1] == 10
                 # TODO: some constraints on the mantissa / base / exponent should
                 # lead to an integer encoding instead of this scientific notation
                 return {'base10Value': '%ie%i' % (self._val[0], self._val[2])}
