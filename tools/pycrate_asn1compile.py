@@ -32,7 +32,9 @@
 import os
 import sys
 import argparse
+import inspect
 
+from pycrate_asn1c.generator import _Generator
 from pycrate_asn1c.asnproc import (
     compile_text, compile_spec, compile_all, \
     generate_modules, PycrateGenerator, JSONDepGraphGenerator,
@@ -85,7 +87,7 @@ def get_mod_wl(fn):
 
 
 def main():
-    
+
     parser = argparse.ArgumentParser(description='compile ASN.1 input file(s) for the pycrate ASN.1 runtime')
     #
     parser.add_argument('-s', dest='spec', type=str,
@@ -94,6 +96,8 @@ def main():
                         help='ASN.1 input file(s) or directory')
     parser.add_argument('-o', dest='output', type=str, default='out',
                         help='compiled output Python (and json) source file(s)')
+    parser.add_argument('-g', '--generator', dest='generator_path', type=str, default=None,
+                        help='provide an alternative python generator file path')
     parser.add_argument('-j', dest='json', action='store_true',
                         help='output a json file with information on ASN.1 objects dependency')
     parser.add_argument('-fautotags', action='store_true',
@@ -105,6 +109,8 @@ def main():
     #
     args = parser.parse_args()
     #
+
+    generator_class = PycrateGenerator
     ckw = {}
     if args.fautotags:
         ckw['autotags'] = True
@@ -112,6 +118,9 @@ def main():
         ckw['extimpl'] = True
     if args.fverifwarn:
         ckw['verifwarn'] = True
+    if args.generator_path:
+        generator_class = import_generator_from_file(args.generator_path)
+
     #
     if args.spec:
         if args.spec not in ASN_SPECS:
@@ -145,7 +154,7 @@ def main():
                 print('%s file created' % objname)
         # generate python and json files
         destname = os.path.abspath(specdir + os.path.sep + '..') + os.path.sep + args.spec
-        generate_modules(PycrateGenerator, destname + '.py')
+        generate_modules(generator_class, destname + '.py')
         print('%s file created' % (destname + '.py', ))
         generate_modules(JSONDepGraphGenerator, destname + '.json')
         print('%s file created' % (destname + '.json', ))
@@ -208,7 +217,7 @@ def main():
                     fd.close()
         compile_text(txt, **ckw)
         #
-        generate_modules(PycrateGenerator, args.output + '.py')
+        generate_modules(generator_class, args.output + '.py')
         if args.json:
             generate_modules(JSONDepGraphGenerator, args.output + '.json')
     #
@@ -216,6 +225,34 @@ def main():
         print('%s, args error: missing ASN.1 input(s) or specification name' % sys.argv[0])
     #
     return 0
+
+
+def import_generator_from_file(path):
+    if not os.path.isfile(path):
+        raise ValueError('{0} is not a file'.format(path))
+
+    module_dir = os.path.dirname(path)
+    sys.path.append(module_dir)
+    module_name = path.split(os.path.sep)[-1][:-3:]
+    python_module = __import__(module_name)
+    generator_class = find_class_in_module(python_module, mother=_Generator)
+    if not generator_class:
+        raise RuntimeError('Could not find an implementation of Abstract class _Generator in {0} module'.format(python_module))
+    return generator_class
+
+def find_class_in_module(python_module, mother=_Generator):
+    found_class = None
+    for name, obj in inspect.getmembers(python_module, inspect.isclass):
+        if obj != mother and issubclass(obj, mother):
+            found_class = obj
+            break
+
+    if found_class:
+        child = find_class_in_module(python_module, mother=found_class)
+        if child:
+            found_class = child
+
+    return found_class
 
 if __name__ == '__main__':
     sys.exit(main())
