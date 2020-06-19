@@ -431,8 +431,6 @@ class SUPI_IMSI(Envelope):
 class SUPI_NAI(UTF8String):
     pass
 
-FGSIDFMT_IMSI    = 0
-FGSIDFMT_NAI     = 1
 
 class FGSIDSUPI(Envelope):
     _name = '5GSIDSUPI'
