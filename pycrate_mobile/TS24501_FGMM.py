@@ -249,7 +249,7 @@ class FGMMRegistrationRequest(Layer3):
         Type1TV('PayloadContainerType', val={'T':0x8, 'V':1}, dic=PayloadContainerType_dict),
         Type6TLVE('PayloadContainer', val={'T':0x7B, 'V':b'\0'}),
         Type1TV('NetSlicingInd', val={'T':0x9, 'V':0}, IE=NetSlicingInd()),
-        Type4TLV('5GSUpdateType', val={'T':0x43, 'V':b'\0'}, IE=FGSUpdateType()),
+        Type4TLV('5GSUpdateType', val={'T':0x53, 'V':b'\0'}, IE=FGSUpdateType()),
         Type4TLV('MSCm2', val={'T':0x41, 'V':b'@\0\0'}, IE=MSCm2()),
         Type4TLV('SuppCodecs', val={'T':0x42, 'V':b'\0\x01\0'}, IE=SuppCodecList()),
         Type6TLVE('NASContainer', val={'T':0x71, 'V':b'\0\0'}),
