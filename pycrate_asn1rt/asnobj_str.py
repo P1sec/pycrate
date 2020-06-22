@@ -536,6 +536,8 @@ Specific constraints attributes:
                 # empty bit string
                 self._val = (0, 0)
     
+    # TODO: _to_per_ws() does not copy the structure of a potential wrapped
+    # object into self._struct
     def _to_per_ws(self):
         if isinstance(self._val, set):
             self._names_to_val()
