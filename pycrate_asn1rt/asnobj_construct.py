@@ -916,22 +916,29 @@ class _CONSTRUCT(ASN1Obj):
             _gen_ext, Bm, cnt = [], [], 1
             for ident in self._ext_nest:
                 if isinstance(ident, list):
-                    if ident[1] in self._val:
-                        # group of extension present in the encoding
-                        gid = self._ext_ident[ident[1]]
+                    # group of extension
+                    grp_val, gid = {}, None
+                    for ident_inner in ident:
+                        if ident_inner in self._val:
+                            grp_val[ident_inner] = self._val[ident_inner]
+                            if gid is None:
+                                gid = self._ext_ident[ident_inner]
+                    if grp_val:
+                        # group present in the encoding
                         Comp = self._ext_group_obj[gid]
-                        Comp._val = {k: self._val[k] for k in self._ext_group[gid]}
+                        Comp._val = grp_val
                         _gen_ext.extend( ASN1CodecPER.encode_unconst_open_ws(Comp) )
                         Bm.append(cnt)
-                elif ident in self._val:
-                    # single extension present in the encoding
-                    Comp = self._cont[ident]
-                    _par = Comp._parent
-                    Comp._parent = self
-                    Comp._val = self._val[ident]
-                    _gen_ext.extend( ASN1CodecPER.encode_unconst_open_ws(Comp) )
-                    Comp._parent = _par
-                    Bm.append(cnt)
+                else:
+                    if ident in self._val:
+                        # single extension present in the encoding
+                        Comp = self._cont[ident]
+                        _par = Comp._parent
+                        Comp._parent = self
+                        Comp._val = self._val[ident]
+                        _gen_ext.extend( ASN1CodecPER.encode_unconst_open_ws(Comp) )
+                        Comp._parent = _par
+                        Bm.append(cnt)
                 cnt += 1
             #
             # generate the structure for all unknown present extension
