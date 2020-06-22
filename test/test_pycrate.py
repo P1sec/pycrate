@@ -134,6 +134,7 @@ class TestPycrate(unittest.TestCase):
         test_rt_base()
         test_rrc3g()
         test_lteran()
+        test_nrran()
         test_tcap_map()
         test_tcap_cap()
         test_X509()
