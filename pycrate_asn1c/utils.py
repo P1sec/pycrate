@@ -309,7 +309,7 @@ SYNT_RE_WORD = re.compile(
 SYNT_RE_IDENT = re.compile(
     '(?:^|\s{1})(%s)' % _RE_IDENT)
 SYNT_RE_TYPE = re.compile(
-    '(?:^|\s{1})(%s)(?:$|[^a-z^A-Z^\-]{1,})' % _RE_NATIVE_TYPES)
+    '(?:^|\s{1})(%s)(?:$|[^0-9^a-z^A-Z^\-]{1,})' % _RE_NATIVE_TYPES)
 SYNT_RE_TYPEREF = re.compile(
     '(?:^|\s{1})(%s)' % _RE_TYPEREF)
 SYNT_RE_CLASSREF = re.compile(
