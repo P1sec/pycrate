@@ -1724,7 +1724,7 @@ class ASN1Obj(Element):
     ###
     # conversion between internal value and ASN.1 JER encoding
     ###
-    
+
     if _with_json:
         
         def _from_jval(self, val):
@@ -1755,6 +1755,58 @@ class ASN1Obj(Element):
         # align API with pycrate_core
         to_json   = to_jer
         from_json = from_jer
+
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _from_oer(self, char):
+        raise (ASN1NotSuppErr(self.fullname()))
+
+    def _to_oer(self):
+        raise (ASN1NotSuppErr(self.fullname()))
+
+    def from_oer(self, buf):
+        # ASN1CodecOER.CANONICAL = False
+
+        if isinstance(buf, bytes_types):
+            char = Charpy(buf)
+        else:
+            char = buf
+
+        self._from_oer(char)
+
+        if self._SAFE_BND:
+            self._safechk_bnd(self._val)
+
+    def to_oer(self, val=None):
+        ASN1CodecOER.CANONICAL = False
+        if val is not None:
+            self.set_val(val)
+        if self._val is not None:
+            ret = pack_val(*self._to_oer())[0]
+            if ret:
+                return ret
+            else:
+                return b'\0'
+        else:
+            return None
+
+    def from_coer(self, buf):
+        self.from_oer(buf)
+
+    def to_coer(self, val=None):
+        ASN1CodecOER.CANONICAL = True
+        if val is not None:
+            self.set_val(val)
+        if self._val is not None:
+            ret = pack_val(*self._to_oer())[0]
+            if ret:
+                return ret
+            else:
+                return b'\0'
+        else:
+            return None
 
 
 def _save_ber_params():

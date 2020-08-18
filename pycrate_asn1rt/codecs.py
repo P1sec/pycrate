@@ -1660,3 +1660,107 @@ class ASN1CodecGSER(ASN1Codec):
     # TODO: implement this
     pass
 
+
+class ASN1CodecOER(ASN1Codec):
+
+    # canonicity is used to decide whether to encode default values or not in
+    # constructed object
+    CANONICAL = True
+
+    TRUE = 0xFF
+    FALSE = 0x00
+
+    @classmethod
+    def encode_length_determinant(cls, length):
+        # Always canonical (implementing non-canonical doesn't make sense)
+        determinant = []
+        if length > 127:
+            # long determinant
+            dl = uint_bytelen(length)
+            determinant.extend([(T_UINT, 1, 1),
+                                (T_UINT, dl, 7),
+                                (T_UINT, length, dl*8)
+                                ])
+        else:
+            # short determinant
+            determinant.append((T_UINT, length, 8))
+
+        return determinant
+
+    @classmethod
+    def decode_length_determinant(cls, char):
+        long_form = char.get_uint(1)
+        length = char.get_uint(7)
+        if long_form:
+            length = char.get_uint(length*8)
+        return length
+
+    @classmethod
+    def encode_intunconst(cls, val, signed=True):
+        if val < 0: signed = True
+        vl = int_bytelen(val) if signed else uint_bytelen(val)
+        GEN = cls.encode_length_determinant(vl)
+        vt = T_INT if signed else T_UINT
+        GEN.append((vt, val, vl * 8))
+        return GEN
+
+    @classmethod
+    def decode_intunconst(cls, char, signed=True):
+        vl = cls.decode_length_determinant(char)
+        if signed:
+            return char.get_int(vl*8)
+        else:
+            return char.get_uint(vl*8)
+
+    @classmethod
+    def encode_intconst(cls, val, const_val):
+        if const_val.lb is not None:
+            if const_val.lb >= 0:
+                # 10.3 a ~ d Check on the upper bound
+                if const_val.ub is not None:
+                    ubl = round_p2(uint_bytelen(const_val.ub))
+                    if ubl <= 8:
+                        return [(T_UINT, val, ubl*8)]
+                # No other conditions are fulfilled
+                return cls.encode_intunconst(val, signed=False)
+            else:
+                # 10.4 a ~ d
+                if const_val.ub is not None:
+                    dbl = round_p2(max(int_bytelen(const_val.lb),
+                                       int_bytelen(const_val.ub)))
+                    if dbl <= 8:
+                        return [(T_INT, val, dbl*8)]
+                # No upper bound etc.
+                return cls.encode_intunconst(val)
+        else:
+            # No lower bound -> encode with length determinant
+            return cls.encode_intunconst(val)
+
+    @classmethod
+    def decode_intconst(cls, char, const_val):
+        if const_val.lb is not None:
+            if const_val.lb >= 0:
+                # 10.3 a ~ d Check on the upper bound
+                if const_val.ub is not None:
+                    ubl = round_p2(uint_bytelen(const_val.ub))
+                    if ubl <= 8:
+                        return char.get_uint(ubl*8)
+                # No other conditions are fulfilled
+                return cls.decode_intunconst(char, signed=False)
+            else:
+                # 10.4 a ~ d
+                if const_val.ub is not None:
+                    dbl = round_p2(max(int_bytelen(const_val.lb),
+                                       int_bytelen(const_val.ub)))
+                    if dbl <= 8:
+                        return char.get_int(dbl*8)
+                # No upper bound etc.
+                return cls.decode_intunconst(char)
+        else:
+            # No lower bound -> encode with length determinant
+            return cls.decode_intunconst(char)
+
+
+
+
+

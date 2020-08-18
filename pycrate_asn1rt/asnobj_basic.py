@@ -136,6 +136,16 @@ Single value: int 0
         def _to_jval(self):
             return None
 
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _from_oer(self, char):
+        self._from_per(char)
+
+    def _to_oer(self):
+        return self._to_per()
+
 
 class BOOL(ASN1Obj):
     __doc__ = """
@@ -263,7 +273,18 @@ Single value: Python bool
         
         def _to_jval(self):
             return self._val
-    
+
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _from_oer(self, char):
+        self._val = (char.get_uint(8) > ASN1CodecOER.FALSE)
+
+    def _to_oer(self):
+        # actually, COER only
+        val = ASN1CodecOER.TRUE if (self._val is True) else ASN1CodecOER.FALSE
+        return [(T_UINT, val, 8)]
 
 #------------------------------------------------------------------------------#
 # INTEGER and REAL
@@ -543,6 +564,38 @@ Specific attribute:
             if isinstance(self._val, set):
                 self._names_to_val()
             return self._val
+
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _to_oer(self):
+        if self._const_val:
+            # Constraints defined
+            if self._const_val.ext is not None:
+                # Extensible OER-visible constraints are encoded as integer
+                # type with no bounds
+                return ASN1CodecOER.encode_intunconst(self._val)
+
+            # Constrained
+            return ASN1CodecOER.encode_intconst(self._val, self._const_val)
+        else:
+            # Unconstrained
+            return ASN1CodecOER.encode_intunconst(self._val)
+
+    def _from_oer(self, char):
+        if self._const_val:
+            if self._const_val.ext is not None:
+                self._val = ASN1CodecOER.decode_intunconst(char)
+                return
+
+            # Constrained
+            self._val = ASN1CodecOER.decode_intconst(char, self._const_val)
+            return
+        else:
+            # Unconstrained
+            self._val = ASN1CodecOER.decode_intunconst(char)
+            return
 
 
 class REAL(ASN1Obj):
