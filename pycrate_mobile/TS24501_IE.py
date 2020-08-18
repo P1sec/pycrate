@@ -44,7 +44,7 @@ from pycrate_core.charpy import Charpy
 from pycrate_ether.Ethernet     import EtherType_dict
 from pycrate_ether.IP           import IPProt_dict
 from pycrate_mobile.TS24008_IE  import (
-    BufBCD, PLMN, GPRSTimer3, APN, TFT, 
+    BufBCD, PLMN, GPRSTimer3, APN, TFT, TimeZoneTime,
     )
 from pycrate_mobile.TS24301_IE import (
     EPSQoS, ExtEPSQoS, APN_AMBR, ExtAPN_AMBR, 
@@ -842,6 +842,20 @@ class Add5GSecInfo(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# Additional information requested
+# TS 24.501, 9.11.3.12A
+#------------------------------------------------------------------------------#
+
+class AddInfoReq(Envelope):
+    _GEN = (
+        Uint('spare', bl=7),
+        Uint('CipherKey', bl=1, dic={
+            0:'ciphering keys for ciphered broadcast assistance data not requested',
+            1:'ciphering keys for ciphered broadcast assistance data requested'})
+        )
+
+
+#------------------------------------------------------------------------------#
 # Allowed PDU session status
 # TS 24.501, 9.11.3.13
 #------------------------------------------------------------------------------#
@@ -859,6 +873,65 @@ class ConfigUpdateInd(Envelope):
         Uint('RED', bl=1, dic={0:'registration not requested', 1:'registration requested'}),
         Uint('ACK', bl=1, dic={0:'ACK not requested', 1:'ACK requested'})
         )
+
+
+#------------------------------------------------------------------------------#
+# CAG information list
+# TS 24.501, 9.11.3.18A
+#------------------------------------------------------------------------------#
+
+class CAGInfo(Envelope):
+    _GEN = (
+        Uint8('Len'),
+        PLMN(),
+        Array('CAGIDList', GEN=Uint32('CAGID', rep=REPR_HEX))
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: 3 + self[2].get_len())
+        self[2].set_blauto(lambda: (self[0].get_val()-3)<<3)
+
+
+class CAGInfoList(Sequence):
+    _GEN = CAGInfo()
+
+
+#------------------------------------------------------------------------------#
+# Ciphering key data
+# TS 24.501, 9.11.3.18C
+#------------------------------------------------------------------------------#
+
+class CipheringDataSet(Envelope):
+    _GEN = (
+        Uint16('CipheringSetID'),
+        Buf('CipheringKey', bl=128, rep=REPR_HEX),
+        Uint('spare', bl=3),
+        Uint('C0Len', bl=5),
+        Buf('C0', rep=REPR_HEX),
+        Uint('spare', bl=4),
+        Uint('EUTRAposSIBLen', bl=4),
+        Buf('EUTRAposSIB', rep=REPR_HEX), # actually list of flags
+        Uint('spare', bl=4),
+        Uint('NRposSIBLen', bl=4),
+        Buf('NRposSIB', rep=REPR_HEX),
+        TimeZoneTime('ValidityStartTime'),
+        Uint32('ValidityDuration'),
+        FGSTAIList()
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['C0Len'].set_valauto(lambda: self['C0'].get_len())
+        self['C0'].set_blauto(lambda: self['C0Len'].get_val()<<3)
+        self['EUTRAposSIBLen'].set_valauto(lambda: self['EUTRAposSIB'].get_len())
+        self['EUTRAposSIB'].set_blauto(lambda: self['EUTRAposSIBLen'].get_val()<<3)
+        self['NRposSIBLen'].set_valauto(lambda: self['NRposSIB'].get_len())
+        self['NRposSIB'].set_blauto(lambda: self['NRposSIBLen'].get_val()<<3)
+
+
+class CipheringKeyData(Sequence):
+    _GEN = CipheringDataSet()
 
 
 #------------------------------------------------------------------------------#
@@ -1590,28 +1663,6 @@ MAPDUSessInfo_dict = {
 
 
 #------------------------------------------------------------------------------#
-# CAG information list
-# TS 24.501, 9.11.3.64
-#------------------------------------------------------------------------------#
-
-class CAGInfo(Envelope):
-    _GEN = (
-        Uint8('Len'),
-        PLMN(),
-        Array('CAGIDList', GEN=Uint32('CAGID', rep=REPR_HEX))
-        )
-    
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self[0].set_valauto(lambda: 3 + self[2].get_len())
-        self[2].set_blauto(lambda: (self[0].get_val()-3)<<3)
-
-
-class CAGInfoList(Sequence):
-    _GEN = CAGInfo()
-
-
-#------------------------------------------------------------------------------#
 # Control plane service type
 # TS 24.501, 9.11.3.65
 #------------------------------------------------------------------------------#
@@ -1684,6 +1735,54 @@ class UERadioCapIDDelInd(Envelope):
     _GEN = (
         Uint('spare', bl=1),
         Uint('DelRequest', bl=3, dic=_DelRequest_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Truncated 5G-S-TMSI configuration
+# TS 24.501, 9.11.3.70
+#------------------------------------------------------------------------------#
+
+class Trunc5GSTMSIConfig(Envelope):
+    _GEN = (
+        Uint('TruncAMFSetID', bl=4),
+        Uint('TruncAMFPtr', bl=4)
+        )
+
+
+#------------------------------------------------------------------------------#
+# NB-N1 mode DRX parameters
+# TS 24.501, 9.11.3.73
+#------------------------------------------------------------------------------#
+
+_NBN1ModeDRXParam_dict = {
+    0 : 'DRX value not specified',
+    1 : 'DRX cycle parameter T = 32',
+    2 : 'DRX cycle parameter T = 64',
+    3 : 'DRX cycle parameter T = 128',
+    4 : 'DRX cycle parameter T = 256',
+    5 : 'DRX cycle parameter T = 512',
+    6 : 'DRX cycle parameter T = 1024',
+    }
+
+class NBN1ModeDRXParam(Envelope):
+    _GEN = (
+        Uint('spare', bl=4),
+        Uint('Value', bl=4, dic=_NBN1ModeDRXParam_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Additional configuration indication
+# TS 24.501, 9.11.3.74
+#------------------------------------------------------------------------------#
+
+class AddConfigInd(Envelope):
+    _GEN = (
+        Uint('spare', bl=3),
+        Uint('SCMR', bl=1, dic={
+            0:'no additional information',
+            1:'release of N1 NAS signalling connection not required'})
         )
 
 
