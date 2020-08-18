@@ -633,21 +633,23 @@ class NASSigProc(SigProc):
         # add potential unspecified extension
         ext = [k for k in Encod.keys() if k[:3] == '_T_']
         if ext:
-            if isinstance(self._nas_tx, Layer3):
+            if isinstance(self._nas_tx, Layer3E):
                 for k in ext:
                     tag = int(k[3:])
                     if tag & 0x80:
-                        self._nas_tx.append( Type2(k, val=[tag]) )
+                        self._nas_tx.append(
+                            Type1TV(k, val={'T':tag>>4, 'V':tag&0xf}) )
+                    elif tag & 0x70 == 0x70:
+                        self._nas_tx.append( Type6TLVE(k, val={'T':tag, 'V':Encod[k]}) )
                     else:
                         self._nas_tx.append( Type4TLV(k, val={'T':tag, 'V':Encod[k]}) )
             else:
-                #isinstance(self._nas_tx, Layer3EPS)
+                #isinstance(self._nas_tx, Layer3)
                 for k in ext:
                     tag = int(k[3:])
                     if tag & 0x80:
-                        self._nas_tx.append( Type2(k, val=[tag]) )
-                    elif tag & 0x70 == 0x70:
-                        self._nas_tx.append( Type6TLVE(k, val={'T':tag, 'V':Encod[k]}) )
+                        self._nas_tx.append(
+                            Type1TV(k, val={'T':tag>>4, 'V':tag&0xf}) )
                     else:
                         self._nas_tx.append( Type4TLV(k, val={'T':tag, 'V':Encod[k]}) )
     
