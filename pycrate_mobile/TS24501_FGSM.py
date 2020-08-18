@@ -94,7 +94,7 @@ class FGSMHeader(Envelope):
 # TS 24.501, section 8.3.1
 #------------------------------------------------------------------------------#
 
-class FGSMPDUSessionEstabRequest(Layer3):
+class FGSMPDUSessionEstabRequest(Layer3E):
     _name = '5GSMPDUSessionEstabRequest'
     _GEN = (
         FGSMHeader(val={'Type':193}),
@@ -117,7 +117,7 @@ class FGSMPDUSessionEstabRequest(Layer3):
 # TS 24.501, section 8.3.2
 #------------------------------------------------------------------------------#
 
-class FGSMPDUSessionEstabAccept(Layer3):
+class FGSMPDUSessionEstabAccept(Layer3E):
     _name = '5GSMPDUSessionEstabAccept'
     _GEN = (
         FGSMHeader(val={'Type':194}),
@@ -149,7 +149,7 @@ class FGSMPDUSessionEstabAccept(Layer3):
 # TS 24.501, section 8.3.3
 #------------------------------------------------------------------------------#
 
-class FGSMPDUSessionEstabReject(Layer3):
+class FGSMPDUSessionEstabReject(Layer3E):
     _name = '5GSMPDUSessionEstabReject'
     _GEN = (
         FGSMHeader(val={'Type':195}),
@@ -168,7 +168,7 @@ class FGSMPDUSessionEstabReject(Layer3):
 # TS 24.501, section 8.3.4
 #------------------------------------------------------------------------------#
 
-class FGSMPDUSessionAuthentCommand(Layer3):
+class FGSMPDUSessionAuthentCommand(Layer3E):
     _name = '5GSMPDUSessionAuthentCommand'
     _GEN = (
         FGSMHeader(val={'Type':197}),
@@ -182,7 +182,7 @@ class FGSMPDUSessionAuthentCommand(Layer3):
 # TS 24.501, section 8.3.5
 #------------------------------------------------------------------------------#
 
-class FGSMPDUSessionAuthentComplete(Layer3):
+class FGSMPDUSessionAuthentComplete(Layer3E):
     _name = '5GSMPDUSessionAuthentComplete'
     _GEN = (
         FGSMHeader(val={'Type':198}),
@@ -196,7 +196,7 @@ class FGSMPDUSessionAuthentComplete(Layer3):
 # TS 24.501, section 8.3.6
 #------------------------------------------------------------------------------#
 
-class FGSMPDUSessionAuthentResult(Layer3):
+class FGSMPDUSessionAuthentResult(Layer3E):
     _name = '5GSMPDUSessionAuthentResult'
     _GEN = (
         FGSMHeader(val={'Type':199}),
@@ -210,7 +210,7 @@ class FGSMPDUSessionAuthentResult(Layer3):
 # TS 24.501, section 8.3.7
 #------------------------------------------------------------------------------#
 
-class FGSMPDUSessionModifRequest(Layer3):
+class FGSMPDUSessionModifRequest(Layer3E):
     _name = '5GSMPDUSessionModifRequest'
     _GEN = (
         FGSMHeader(val={'Type':201}),
@@ -232,7 +232,7 @@ class FGSMPDUSessionModifRequest(Layer3):
 # TS 24.501, section 8.3.8
 #------------------------------------------------------------------------------#
 
-class FGSMPDUSessionModifReject(Layer3):
+class FGSMPDUSessionModifReject(Layer3E):
     _name = '5GSMPDUSessionModifReject'
     _GEN = (
         FGSMHeader(val={'Type':202}),
@@ -249,7 +249,7 @@ class FGSMPDUSessionModifReject(Layer3):
 # TS 24.501, section 8.3.9
 #------------------------------------------------------------------------------#
 
-class FGSMPDUSessionModifCommand(Layer3):
+class FGSMPDUSessionModifCommand(Layer3E):
     _name = '5GSMPDUSessionModifCommand'
     _GEN = (
         FGSMHeader(val={'Type':203}),
@@ -273,7 +273,7 @@ class FGSMPDUSessionModifCommand(Layer3):
 # TS 24.501, section 8.3.10
 #------------------------------------------------------------------------------#
 
-class FGSMPDUSessionModifComplete(Layer3):
+class FGSMPDUSessionModifComplete(Layer3E):
     _name = '5GSMPDUSessionModifComplete'
     _GEN = (
         FGSMHeader(val={'Type':204}),
@@ -287,7 +287,7 @@ class FGSMPDUSessionModifComplete(Layer3):
 # TS 24.501, section 8.3.11
 #------------------------------------------------------------------------------#
 
-class FGSMPDUSessionModifCommandReject(Layer3):
+class FGSMPDUSessionModifCommandReject(Layer3E):
     _name = '5GSMPDUSessionModifCommandReject'
     _GEN = (
         FGSMHeader(val={'Type':205}),
@@ -301,7 +301,7 @@ class FGSMPDUSessionModifCommandReject(Layer3):
 # TS 24.501, section 8.3.12
 #------------------------------------------------------------------------------#
 
-class FGSMPDUSessionReleaseRequest(Layer3):
+class FGSMPDUSessionReleaseRequest(Layer3E):
     _name = '5GSMPDUSessionReleaseRequest'
     _GEN = (
         FGSMHeader(val={'Type':209}),
@@ -315,7 +315,7 @@ class FGSMPDUSessionReleaseRequest(Layer3):
 # TS 24.501, section 8.3.13
 #------------------------------------------------------------------------------#
 
-class FGSMPDUSessionReleaseReject(Layer3):
+class FGSMPDUSessionReleaseReject(Layer3E):
     _name = '5GSMPDUSessionReleaseReject'
     _GEN = (
         FGSMHeader(val={'Type':210}),
@@ -329,7 +329,7 @@ class FGSMPDUSessionReleaseReject(Layer3):
 # TS 24.501, section 8.3.14
 #------------------------------------------------------------------------------#
 
-class FGSMPDUSessionReleaseCommand(Layer3):
+class FGSMPDUSessionReleaseCommand(Layer3E):
     _name = '5GSMPDUSessionReleaseCommand'
     _GEN = (
         FGSMHeader(val={'Type':211}),
@@ -346,7 +346,7 @@ class FGSMPDUSessionReleaseCommand(Layer3):
 # TS 24.501, section 8.3.15
 #------------------------------------------------------------------------------#
 
-class FGSMPDUSessionReleaseComplete(Layer3):
+class FGSMPDUSessionReleaseComplete(Layer3E):
     _name = '5GSMPDUSessionReleaseComplete'
     _GEN = (
         FGSMHeader(val={'Type':212}),
@@ -360,7 +360,7 @@ class FGSMPDUSessionReleaseComplete(Layer3):
 # TS 24.501, section 8.3.16
 #------------------------------------------------------------------------------#
 
-class FGSMStatus(Layer3):
+class FGSMStatus(Layer3E):
     _name = '5GSMStatus'
     _GEN = (
         FGSMHeader(val={'Type':214}),

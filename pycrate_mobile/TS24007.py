@@ -29,7 +29,7 @@
 
 __all__ = [
     'Layer3',
-    'Layer3EPS',
+    'Layer3E',
     'IE',
     'Type1V',
     'Type1TV',
@@ -185,16 +185,16 @@ class Layer3(Envelope):
     
     def _dec_unk_ie(self, T8, char):
         if T8 & 0x80:
-            # 1 byte IE
-            log('%s, _dec_unk_ie: unknown Type2 IE, 0x%x' % (self._name, T8))
-            self.append( Type2('_T_%i' % T8, val=[T8]) )
+            # Type1TV IE, could also be a Type2 IE
+            log('%s, _dec_unk_ie: unknown Type1TV IE, 0x%.2x' % (self._name, T8))
+            self.append( Type1TV('_T_%X' % (T8>>4), val={'T':T8>>4, 'V':T8&0xf}) )
         else:
             # Type4TLV IE
             L = char.get_uint(8)
             V = char.get_bytes(8*L)
-            log('%s, _dec_unk_ie: unknown Type4TLV IE, T: 0x%x, V: 0x%s' \
+            log('%s, _dec_unk_ie: unknown Type4TLV IE, T: 0x%.2x, V: 0x%s' \
                 % (self._name, T8, hexlify(V).decode('ascii')))
-            self.append( Type4TLV('_T_%i' % T8, val=[T8, L, V]) )
+            self.append( Type4TLV('_T_%X' % T8, val=[T8, L, V]) )
     
     def repr(self):
         # element transparency
@@ -214,27 +214,27 @@ class Layer3(Envelope):
     __repr__ = repr
 
 
-class Layer3EPS(Layer3):
+class Layer3E(Layer3):
     
     def _dec_unk_ie(self, T8, char):
         if T8 & 0x80:
-            # 1 byte IE
-            log('%s, _dec_unk_ie: unknown Type2 IE, 0x%x' % (self._name, T8))
-            self.append( Type2('_T_%i' % T8, val=[T8]) )
+            # Type1TV IE, could also be a Type2 IE
+            log('%s, _dec_unk_ie: unknown Type1TV IE, 0x%.2x' % (self._name, T8))
+            self.append( Type1TV('_T_%X' % (T8>>4), val={'T':T8>>4, 'V':T8&0xf}) )
         elif T8 & 0x70 == 0x70:
-            # Type6 TLV IE
+            # Type6TLV IE
             L = char.get_uint(16)
             V = char.get_bytes(8*L)
-            log('%s, _dec_unk_ie: unknown Type6TLVE IE, T: 0x%x, V: 0x%s' \
+            log('%s, _dec_unk_ie: unknown Type6TLVE IE, T: 0x%.2x, V: 0x%s' \
                 % (self._name, T8, hexlify(V)))
             self.append( Type6TLVE('_T_%i' % T8, val=[T8, L, V]) )
         else:
             # Type4TLV IE
             L = char.get_uint(8)
             V = char.get_bytes(8*L)
-            log('%s, _dec_unk_ie: unknown Type4TLV IE, T: 0x%x, V: 0x%s' \
-                % (self._name, T8, hexlify(V)))
-            self.append( Type4TLV('_T_%i' % T8, val=[T8, L, V]) )
+            log('%s, _dec_unk_ie: unknown Type4TLV IE, T: 0x%.2x, V: 0x%s' \
+                % (self._name, T8, hexlify(V).decode('ascii')))
+            self.append( Type4TLV('_T_%X' % T8, val=[T8, L, V]) )
 
 
 class IE(Envelope):

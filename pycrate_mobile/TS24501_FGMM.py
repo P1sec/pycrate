@@ -153,7 +153,7 @@ class FGMMHeaderSec(Envelope):
 # TS 24.501, section 8.2.1
 #------------------------------------------------------------------------------#
 
-class FGMMAuthenticationRequest(Layer3):
+class FGMMAuthenticationRequest(Layer3E):
     _name = '5GMMAuthenticationRequest'
     _GEN = (
         FGMMHeader(val={'Type':86}),
@@ -171,7 +171,7 @@ class FGMMAuthenticationRequest(Layer3):
 # TS 24.501, section 8.2.2
 #------------------------------------------------------------------------------#
 
-class FGMMAuthenticationResponse(Layer3):
+class FGMMAuthenticationResponse(Layer3E):
     _name = '5GMMAuthenticationResponse'
     _GEN = (
         FGMMHeader(val={'Type':87}),
@@ -185,7 +185,7 @@ class FGMMAuthenticationResponse(Layer3):
 # TS 24.501, section 8.2.3
 #------------------------------------------------------------------------------#
 
-class FGMMAuthenticationResult(Layer3):
+class FGMMAuthenticationResult(Layer3E):
     _name = '5GMMAuthenticationResult'
     _GEN = (
         FGMMHeader(val={'Type':90}),
@@ -201,7 +201,7 @@ class FGMMAuthenticationResult(Layer3):
 # TS 24.501, section 8.2.4
 #------------------------------------------------------------------------------#
 
-class FGMMAuthenticationFailure(Layer3):
+class FGMMAuthenticationFailure(Layer3E):
     _name = '5GMMAuthenticationFailure'
     _GEN = (
         FGMMHeader(val={'Type':89}),
@@ -215,7 +215,7 @@ class FGMMAuthenticationFailure(Layer3):
 # TS 24.501, section 8.2.5
 #------------------------------------------------------------------------------#
 
-class FGMMAuthenticationReject(Layer3):
+class FGMMAuthenticationReject(Layer3E):
     _name = '5GMMAuthenticationReject'
     _GEN = (
         FGMMHeader(val={'Type':88}),
@@ -228,7 +228,7 @@ class FGMMAuthenticationReject(Layer3):
 # TS 24.501, section 8.2.6
 #------------------------------------------------------------------------------#
 
-class FGMMRegistrationRequest(Layer3):
+class FGMMRegistrationRequest(Layer3E):
     _name = '5GMMRegistrationRequest'
     _GEN = (
         FGMMHeader(val={'Type':65}),
@@ -275,7 +275,7 @@ class FGMMRegistrationRequest(Layer3):
 # TS 24.501, section 8.2.7
 #------------------------------------------------------------------------------#
 
-class FGMMRegistrationAccept(Layer3):
+class FGMMRegistrationAccept(Layer3E):
     _name = '5GMMRegistrationAccept'
     _GEN = (
         FGMMHeader(val={'Type':66}),
@@ -293,7 +293,7 @@ class FGMMRegistrationAccept(Layer3):
         Type6TLVE('LADNInfo', val={'T':0x79, 'V':9*b'\0'}, IE=LADNInfo()),
         Type1TV('MICOInd', val={'T':0xB, 'V':0}, IE=MICOInd()),
         Type1TV('NetSlicingInd', val={'T':0x9, 'V':0}, IE=NetSlicingInd()),
-        Type6TLVE('SAList', val={'T':0x27, 'V':b'\0\0\0'}, IE=SAList()),
+        Type4TLV('SAList', val={'T':0x27, 'V':b'\0\0\0'}, IE=SAList()),
         Type4TLV('T3512', val={'T':0x5E, 'V':b'\0'}, IE=GPRSTimer3()),
         Type4TLV('Non3GPPDeregTimer', val={'T':0x5D, 'V':b'\0'}, IE=GPRSTimer()),
         Type4TLV('T3502', val={'T':0x16, 'V':b'\0'}, IE=GPRSTimer()),
@@ -326,7 +326,7 @@ class FGMMRegistrationAccept(Layer3):
 # TS 24.501, section 8.2.8
 #------------------------------------------------------------------------------#
 
-class FGMMRegistrationComplete(Layer3):
+class FGMMRegistrationComplete(Layer3E):
     _name = '5GMMRegistrationComplete'
     _GEN = (
         FGMMHeader(val={'Type':67}),
@@ -339,7 +339,7 @@ class FGMMRegistrationComplete(Layer3):
 # TS 24.501, section 8.2.9
 #------------------------------------------------------------------------------#
 
-class FGMMRegistrationReject(Layer3):
+class FGMMRegistrationReject(Layer3E):
     _name = '5GMMRegistrationReject'
     _GEN = (
         FGMMHeader(val={'Type':68}),
@@ -357,7 +357,7 @@ class FGMMRegistrationReject(Layer3):
 # TS 24.501, section 8.2.10
 #------------------------------------------------------------------------------#
 
-class FGMMULNASTransport(Layer3):
+class FGMMULNASTransport(Layer3E):
     _name = '5GMMULNASTransport'
     _GEN = (
         FGMMHeader(val={'Type':103}),
@@ -380,7 +380,7 @@ class FGMMULNASTransport(Layer3):
 # TS 24.501, section 8.2.11
 #------------------------------------------------------------------------------#
 
-class FGMMDLNASTransport(Layer3):
+class FGMMDLNASTransport(Layer3E):
     _name = '5GMMDLNASTransport'
     _GEN = (
         FGMMHeader(val={'Type':104}),
@@ -399,7 +399,7 @@ class FGMMDLNASTransport(Layer3):
 # TS 24.501, section 8.2.12
 #------------------------------------------------------------------------------#
 
-class FGMMMODeregistrationRequest(Layer3):
+class FGMMMODeregistrationRequest(Layer3E):
     _name = '5GMMMODeregistrationRequest'
     _GEN = (
         FGMMHeader(val={'Type':69}),
@@ -414,7 +414,7 @@ class FGMMMODeregistrationRequest(Layer3):
 # TS 24.501, section 8.2.13
 #------------------------------------------------------------------------------#
 
-class FGMMMODeregistrationAccept(Layer3):
+class FGMMMODeregistrationAccept(Layer3E):
     _name = '5GMMMODeregistrationAccept'
     _GEN = (
         FGMMHeader(val={'Type':70}),
@@ -426,7 +426,7 @@ class FGMMMODeregistrationAccept(Layer3):
 # TS 24.501, section 8.2.14
 #------------------------------------------------------------------------------#
 
-class FGMMMTDeregistrationRequest(Layer3):
+class FGMMMTDeregistrationRequest(Layer3E):
     _name = '5GMMMTDeregistrationRequest'
     _GEN = (
         FGMMHeader(val={'Type':71}),
@@ -443,7 +443,7 @@ class FGMMMTDeregistrationRequest(Layer3):
 # TS 24.501, section 8.2.15
 #------------------------------------------------------------------------------#
 
-class FGMMMTDeregistrationAccept(Layer3):
+class FGMMMTDeregistrationAccept(Layer3E):
     _name = '5GMMMTDeregistrationAccept'
     _GEN = (
         FGMMHeader(val={'Type':71}),
@@ -455,7 +455,7 @@ class FGMMMTDeregistrationAccept(Layer3):
 # TS 24.501, section 8.2.16
 #------------------------------------------------------------------------------#
 
-class FGMMServiceRequest(Layer3):
+class FGMMServiceRequest(Layer3E):
     _name = '5GMMServiceRequest'
     _GEN = (
         FGMMHeader(val={'Type':76}),
@@ -474,7 +474,7 @@ class FGMMServiceRequest(Layer3):
 # TS 24.501, section 8.2.17
 #------------------------------------------------------------------------------#
 
-class FGMMServiceAccept(Layer3):
+class FGMMServiceAccept(Layer3E):
     _name = '5GMMServiceAccept'
     _GEN = (
         FGMMHeader(val={'Type':78}),
@@ -491,7 +491,7 @@ class FGMMServiceAccept(Layer3):
 # TS 24.501, section 8.2.18
 #------------------------------------------------------------------------------#
 
-class FGMMServiceReject(Layer3):
+class FGMMServiceReject(Layer3E):
     _name = '5GMMServiceAccept'
     _GEN = (
         FGMMHeader(val={'Type':77}),
@@ -509,7 +509,7 @@ class FGMMServiceReject(Layer3):
 # TS 24.501, section 8.2.19
 #------------------------------------------------------------------------------#
 
-class FGMMConfigurationUpdateCommand(Layer3):
+class FGMMConfigurationUpdateCommand(Layer3E):
     _name = '5GMMConfigurationUpdateCommand'
     _GEN = (
         FGMMHeader(val={'Type':84}),
@@ -517,7 +517,7 @@ class FGMMConfigurationUpdateCommand(Layer3):
         Type6TLVE('5GSID', val={'T':0x77, 'V':b'\0\0\0\0'}, IE=FGSID()),
         Type4TLV('5GSTAIList', val={'T':0x54, 'V':7*b'\0'}, IE=FGSTAIList()),
         Type4TLV('AllowedNSSAI', val={'T':0x15, 'V':b'\0\0'}, IE=NSSAI()),
-        Type6TLVE('SAList', val={'T':0x27, 'V':b'\0\0\0'}, IE=SAList()),
+        Type4TLV('SAList', val={'T':0x27, 'V':b'\0\0\0'}, IE=SAList()),
         Type4TLV('NetFullName', val={'T':0x43, 'V':b'\0'}, IE=NetworkName()),
         Type4TLV('NetShortName', val={'T':0x45, 'V':b'\0'}, IE=NetworkName()),
         Type3TV('LocalTimeZone', val={'T':0x46, 'V':b'\0'}, bl={'V':8}, IE=TimeZone()),
@@ -545,7 +545,7 @@ class FGMMConfigurationUpdateCommand(Layer3):
 # TS 24.501, section 8.2.20
 #------------------------------------------------------------------------------#
 
-class FGMMConfigurationUpdateComplete(Layer3):
+class FGMMConfigurationUpdateComplete(Layer3E):
     _name = '5GMMConfigurationUpdateComplete'
     _GEN = (
         FGMMHeader(val={'Type':85}),
@@ -557,7 +557,7 @@ class FGMMConfigurationUpdateComplete(Layer3):
 # TS 24.501, section 8.2.21
 #------------------------------------------------------------------------------#
 
-class FGMMIdentityRequest(Layer3):
+class FGMMIdentityRequest(Layer3E):
     _name = '5GMMIdentityRequest'
     _GEN = (
         FGMMHeader(val={'Type':91}),
@@ -571,7 +571,7 @@ class FGMMIdentityRequest(Layer3):
 # TS 24.501, section 8.2.22
 #------------------------------------------------------------------------------#
 
-class FGMMIdentityResponse(Layer3):
+class FGMMIdentityResponse(Layer3E):
     _name = '5GMMIdentityResponse'
     _GEN = (
         FGMMHeader(val={'Type':92}),
@@ -584,7 +584,7 @@ class FGMMIdentityResponse(Layer3):
 # TS 24.501, section 8.2.23
 #------------------------------------------------------------------------------#
 
-class FGMMNotification(Layer3):
+class FGMMNotification(Layer3E):
     _name = '5GMMNotification'
     _GEN = (
         FGMMHeader(val={'Type':101}),
@@ -598,7 +598,7 @@ class FGMMNotification(Layer3):
 # TS 24.501, section 8.2.24
 #------------------------------------------------------------------------------#
 
-class FGMMNotificationResponse(Layer3):
+class FGMMNotificationResponse(Layer3E):
     _name = '5GMMNotificationResponse'
     _GEN = (
         FGMMHeader(val={'Type':102}),
@@ -611,7 +611,7 @@ class FGMMNotificationResponse(Layer3):
 # TS 24.501, section 8.2.25
 #------------------------------------------------------------------------------#
 
-class FGMMSecurityModeCommand(Layer3):
+class FGMMSecurityModeCommand(Layer3E):
     _name = '5GMMSecurityModeCommand'
     _GEN = (
         FGMMHeader(val={'Type':93}),
@@ -633,7 +633,7 @@ class FGMMSecurityModeCommand(Layer3):
 # TS 24.501, section 8.2.26
 #------------------------------------------------------------------------------#
 
-class FGMMSecurityModeComplete(Layer3):
+class FGMMSecurityModeComplete(Layer3E):
     _name = '5GMMSecurityModeComplete'
     _GEN = (
         FGMMHeader(val={'Type':94}),
@@ -648,7 +648,7 @@ class FGMMSecurityModeComplete(Layer3):
 # TS 24.501, section 8.2.27
 #------------------------------------------------------------------------------#
 
-class FGMMSecurityModeReject(Layer3):
+class FGMMSecurityModeReject(Layer3E):
     _name = '5GMMSecurityModeReject'
     _GEN = (
         FGMMHeader(val={'Type':95}),
@@ -663,7 +663,7 @@ class FGMMSecurityModeReject(Layer3):
 
 if _with_cm:
     
-    class FGMMSecProtNASMessage(Layer3):
+    class FGMMSecProtNASMessage(Layer3E):
         _name = '5GMMSecProtNASMessage'
         _GEN = (
             FGMMHeaderSec(),
@@ -798,7 +798,7 @@ if _with_cm:
     
 else:
     
-    class FGMMSecProtNASMessage(Layer3):
+    class FGMMSecProtNASMessage(Layer3E):
         _name = '5GMMSecProtNASMessage'
         _GEN = (
             FGMMHeaderSec(),
@@ -813,7 +813,7 @@ else:
 # TS 24.501, section 8.2.29
 #------------------------------------------------------------------------------#
 
-class FGMMStatus(Layer3):
+class FGMMStatus(Layer3E):
     _name = '5GMMStatus'
     _GEN = (
         FGMMHeader(val={'Type':100}),
@@ -826,7 +826,7 @@ class FGMMStatus(Layer3):
 # TS 24.501, section 8.2.30
 #------------------------------------------------------------------------------#
 
-class FGMMControlPlaneServiceRequest(Layer3):
+class FGMMControlPlaneServiceRequest(Layer3E):
     _name = '5GMMControlPlaneServiceRequest'
     _GEN = (
         FGMMHeader(val={'Type':79}),
@@ -849,7 +849,7 @@ class FGMMControlPlaneServiceRequest(Layer3):
 # TS 24.501, section 8.2.31
 #------------------------------------------------------------------------------#
 
-class FGMMNetworkSliceSpecAuthCommand(Layer3):
+class FGMMNetworkSliceSpecAuthCommand(Layer3E):
     _name = '5GMMNetworkSliceSpecAuthCommand'
     _GEN = (
         FGMMHeader(val={'Type':80}),
@@ -863,7 +863,7 @@ class FGMMNetworkSliceSpecAuthCommand(Layer3):
 # TS 24.501, section 8.2.31
 #------------------------------------------------------------------------------#
 
-class FGMMNetworkSliceSpecAuthComplete(Layer3):
+class FGMMNetworkSliceSpecAuthComplete(Layer3E):
     _name = '5GMMNetworkSliceSpecAuthComplete'
     _GEN = (
         FGMMHeader(val={'Type':81}),
@@ -877,7 +877,7 @@ class FGMMNetworkSliceSpecAuthComplete(Layer3):
 # TS 24.501, section 8.2.31
 #------------------------------------------------------------------------------#
 
-class FGMMNetworkSliceSpecAuthResult(Layer3):
+class FGMMNetworkSliceSpecAuthResult(Layer3E):
     _name = '5GMMNetworkSliceSpecAuthResult'
     _GEN = (
         FGMMHeader(val={'Type':82}),
