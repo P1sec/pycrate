@@ -1,0 +1,33 @@
+# Ordered list of Supplementary Services modules
+# to be loaded sequentially
+Remote-Operations-Information-Objects.asn
+SS-Errors.asn
+#
+# following modules required for MAP-CommonDataTypes.asn, MAP-SS-DataTypes.asn
+MAP-BS-Code.asn
+MAP-SS-Code.asn
+MAP-TS-Code.asn
+MAP-ExtensionDataTypes.asn
+MAP-CommonDataTypes.asn
+MAP-SS-DataTypes.asn
+#
+# following modules required for MAP-MS-DataTypes.asn
+MAP-ER-DataTypes.asn
+MAP-OM-DataTypes.asn
+MAP-MS-DataTypes.asn
+#
+# following module required for MAP-LCS-DataTypes.asn
+MAP-SM-DataTypes.asn
+MAP-LCS-DataTypes.asn
+#
+SS-DataTypes.asn
+#
+# following modules required for SS-Operations.asn, SS-Protocol.asn
+MAP-Errors.asn
+MAP-MobileServiceOperations.asn
+MAP-SupplementaryServiceOperations.asn
+SS-Operations.asn
+SS-Protocol.asn
+#
+# hand made asn.1 module for 24.080 Facility support
+SS-Facility.asn

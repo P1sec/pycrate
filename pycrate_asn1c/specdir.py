@@ -139,7 +139,7 @@ ASN_SPECS_CORE = {
     # old ETSI spec
     'MAPv2'     : 'ETSI_MAP_0902',
     # custom built spec from ETSI / 3GPP 29.002 and 24.080 standards
-    'SS'        : '3GPP_SS_24080-c00',
+    'SS'        : '3GPP_SS_24080-g10',
     # GSMA spec
     'TAP3'      : 'GSMA_TAP3_17102014',
     # Pycrate TCAP-specific modules
