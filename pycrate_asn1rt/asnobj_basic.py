@@ -143,8 +143,14 @@ Single value: int 0
     def _from_oer(self, char):
         self._from_per(char)
 
+    def _from_oer_ws(self, char):
+        self._from_per_ws()
+
     def _to_oer(self):
         return self._to_per()
+
+    def _to_oer_ws(self):
+        return self._to_per_ws()
 
 
 class BOOL(ASN1Obj):
@@ -162,6 +168,8 @@ Single value: Python bool
     _ASN_LUT  = {'FALSE': False, 'TRUE': True, False: 'FALSE', True: 'TRUE'}
     _PER_LUT  = {0: False, 1: True}
     _PER_LUTR = {False: 0, True: 1}
+    _OER_LUT = {ASN1CodecOER.TRUE: True, ASN1CodecOER.FALSE: False}
+    _OER_LUTS = {ASN1CodecOER.FALSE: 'FALSE', ASN1CodecOER.TRUE: 'TRUE'}
     
     def _safechk_val(self, val):
         if not isinstance(val, bool):
@@ -281,10 +289,23 @@ Single value: Python bool
     def _from_oer(self, char):
         self._val = (char.get_uint(8) > ASN1CodecOER.FALSE)
 
+    def _from_oer_ws(self, char):
+        self._struct = Envelope(self._name, GEN=(
+            Uint('V', bl=8, dic=self._OER_LUTS), ))
+        self._struct._from_char(char)
+        self._val = self._OER_LUT[self._struct[0]._val]
+
     def _to_oer(self):
         # actually, COER only
         val = ASN1CodecOER.TRUE if (self._val is True) else ASN1CodecOER.FALSE
         return [(T_UINT, val, 8)]
+
+    def _to_oer_ws(self):
+        # actually, COER only
+        val = ASN1CodecOER.TRUE if (self._val is True) else ASN1CodecOER.FALSE
+        self._struct = Envelope(self._name, GEN=(
+            Uint('V', bl=8, val=val, dic=self._OER_LUTS), ))
+        return self._struct
 
 #------------------------------------------------------------------------------#
 # INTEGER and REAL
@@ -583,6 +604,31 @@ Specific attribute:
             # Unconstrained
             return ASN1CodecOER.encode_intunconst(self._val)
 
+    def _to_oer_ws(self):
+        if self._const_val:
+            # Constraints defined
+            if self._const_val.ext is not None:
+                # Extensible OER-visible constraints are encoded as integer
+                # type with no bounds
+                self._struct = Envelope(
+                    self._name,
+                    GEN=ASN1CodecOER.encode_intunconst_ws(self._val))
+                return self._struct
+
+            # Constrained
+            self._struct = Envelope(
+                self._name,
+                GEN=ASN1CodecOER.encode_intconst_ws(self._val, self._const_val)
+            )
+            return self._struct
+        else:
+            # Unconstrained
+            self._struct = Envelope(
+                self._name,
+                GEN=ASN1CodecOER.encode_intunconst_ws(self._val)
+            )
+            return self._struct
+
     def _from_oer(self, char):
         if self._const_val:
             if self._const_val.ext is not None:
@@ -596,6 +642,21 @@ Specific attribute:
             # Unconstrained
             self._val = ASN1CodecOER.decode_intunconst(char)
             return
+
+    def _from_oer_ws(self, char):
+        if self._const_val:
+            if self._const_val.ext is not None:
+                self._val, _gen = ASN1CodecOER.decode_intunconst_ws(char)
+                self._struct = Envelope(self._name, GEN=_gen)
+                return
+
+            # Constrained
+            self._val, _gen = ASN1CodecOER.decode_intconst_ws(char, self._const_val)
+            self._struct = Envelope(self._name, GEN=_gen)
+        else:
+            # Unconstrained
+            self._val, _gen = ASN1CodecOER.decode_intunconst_ws(char)
+            self._struct = Envelope(self._name, GEN=_gen)
 
 
 class REAL(ASN1Obj):

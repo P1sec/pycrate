@@ -1670,6 +1670,8 @@ class ASN1CodecOER(ASN1Codec):
     TRUE = 0xFF
     FALSE = 0x00
 
+    LenFormLUT = {0: 'short', 1: 'long'}
+
     @classmethod
     def encode_length_determinant(cls, length):
         # Always canonical (implementing non-canonical doesn't make sense)
@@ -1688,6 +1690,26 @@ class ASN1CodecOER(ASN1Codec):
         return determinant
 
     @classmethod
+    def encode_length_determinant_ws(cls, length):
+        # Always canonical (implementing non-canonical doesn't make sense)
+        if length > 127:
+            # long determinant
+            dl = uint_bytelen(length)
+            determinant = (
+                Uint('Form', val=1, bl=1, dic=cls.LenFormLUT),
+                Uint('Len', val=dl, bl=7),
+                Uint('Val', val=length, bl=dl*8)
+            )
+        else:
+            # short determinant
+            determinant = (
+                Uint('Form', val=0, bl=1, dic=cls.LenFormLUT),
+                Uint('Val', val=length, bl=7)
+            )
+
+        return Envelope('L', GEN=determinant)
+
+    @classmethod
     def decode_length_determinant(cls, char):
         long_form = char.get_uint(1)
         length = char.get_uint(7)
@@ -1696,13 +1718,41 @@ class ASN1CodecOER(ASN1Codec):
         return length
 
     @classmethod
+    def decode_length_determinant_ws(cls, char):
+        length = Envelope('L', GEN=(
+            Uint('Form', bl=1, dic=cls.LenFormLUT),
+            Uint('Val', bl=7)
+        ))
+        length._from_char(char)
+        long_form = length[0].get_val()
+        ll = length[1].get_val()
+        if long_form:
+            length[1]._name = "Len"
+            val = Uint('Val', bl=8*ll)
+            val._from_char(char)
+            ll = val.get_val()
+            length.append(val)
+        return ll, length
+
+    @classmethod
     def encode_intunconst(cls, val, signed=True):
-        if val < 0: signed = True
+        if val < 0:
+            signed = True
         vl = int_bytelen(val) if signed else uint_bytelen(val)
         GEN = cls.encode_length_determinant(vl)
         vt = T_INT if signed else T_UINT
         GEN.append((vt, val, vl * 8))
         return GEN
+
+    @classmethod
+    def encode_intunconst_ws(cls, val, signed=True):
+        if val < 0:
+            signed = True
+        vl = int_bytelen(val) if signed else uint_bytelen(val)
+        GEN = cls.encode_length_determinant_ws(vl)
+        vt = Int if signed else Uint
+        GEN.append(vt('V', val=val, bl=vl*8))
+        return (GEN,)
 
     @classmethod
     def decode_intunconst(cls, char, signed=True):
@@ -1711,6 +1761,14 @@ class ASN1CodecOER(ASN1Codec):
             return char.get_int(vl*8)
         else:
             return char.get_uint(vl*8)
+
+    @classmethod
+    def decode_intunconst_ws(cls, char, signed=True):
+        vl, det_st = cls.decode_length_determinant_ws(char)
+        vt = Int if signed else Uint
+        val = vt('V', bl=vl * 8)
+        val._from_char(char)
+        return val.get_val(), (det_st, val)
 
     @classmethod
     def encode_intconst(cls, val, const_val):
@@ -1737,6 +1795,30 @@ class ASN1CodecOER(ASN1Codec):
             return cls.encode_intunconst(val)
 
     @classmethod
+    def encode_intconst_ws(cls, val, const_val):
+        if const_val.lb is not None:
+            if const_val.lb >= 0:
+                # 10.3 a ~ d Check on the upper bound
+                if const_val.ub is not None:
+                    ubl = round_p2(uint_bytelen(const_val.ub))
+                    if ubl <= 8:
+                        return (Uint('V', val=val, bl=ubl*8),)
+                # No other conditions are fulfilled
+                return cls.encode_intunconst_ws(val, signed=False)
+            else:
+                # 10.4 a ~ d
+                if const_val.ub is not None:
+                    dbl = round_p2(max(int_bytelen(const_val.lb),
+                                       int_bytelen(const_val.ub)))
+                    if dbl <= 8:
+                        return (Int('V', val=val, bl=dbl*8),)
+                # No upper bound etc.
+                return cls.encode_intunconst_ws(val)
+        else:
+            # No lower bound -> encode with length determinant
+            return cls.encode_intunconst_ws(val)
+
+    @classmethod
     def decode_intconst(cls, char, const_val):
         if const_val.lb is not None:
             if const_val.lb >= 0:
@@ -1760,7 +1842,33 @@ class ASN1CodecOER(ASN1Codec):
             # No lower bound -> encode with length determinant
             return cls.decode_intunconst(char)
 
-
+    @classmethod
+    def decode_intconst_ws(cls, char, const_val):
+        if const_val.lb is not None:
+            if const_val.lb >= 0:
+                # 10.3 a ~ d Check on the upper bound
+                if const_val.ub is not None:
+                    ubl = round_p2(uint_bytelen(const_val.ub))
+                    if ubl <= 8:
+                        val = Uint('V', bl=ubl*8)
+                        val._from_char(char)
+                        return val.get_val(), (val,)
+                # No other conditions are fulfilled
+                return cls.decode_intunconst_ws(char, signed=False)
+            else:
+                # 10.4 a ~ d
+                if const_val.ub is not None:
+                    dbl = round_p2(max(int_bytelen(const_val.lb),
+                                       int_bytelen(const_val.ub)))
+                    if dbl <= 8:
+                        val = Int('V', bl=dbl*8)
+                        val._from_char(char)
+                        return val.get_val(), (val,)
+                # No upper bound etc.
+                return cls.decode_intunconst_ws(char)
+        else:
+            # No lower bound -> encode with length determinant
+            return cls.decode_intunconst_ws(char)
 
 
 

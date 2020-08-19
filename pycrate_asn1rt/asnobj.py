@@ -1763,18 +1763,35 @@ class ASN1Obj(Element):
     def _from_oer(self, char):
         raise (ASN1NotSuppErr(self.fullname()))
 
+    def _from_oer_ws(self, char):
+        raise (ASN1NotSuppErr(self.fullname()))
+
     def _to_oer(self):
+        raise (ASN1NotSuppErr(self.fullname()))
+
+    def _to_oer_ws(self):
         raise (ASN1NotSuppErr(self.fullname()))
 
     def from_oer(self, buf):
         # ASN1CodecOER.CANONICAL = False
-
         if isinstance(buf, bytes_types):
             char = Charpy(buf)
         else:
             char = buf
 
         self._from_oer(char)
+
+        if self._SAFE_BND:
+            self._safechk_bnd(self._val)
+
+    def from_oer_ws(self, buf):
+        # ASN1CodecOER.CANONICAL = False
+        if isinstance(buf, bytes_types):
+            char = Charpy(buf)
+        else:
+            char = buf
+
+        self._from_oer_ws(char)
 
         if self._SAFE_BND:
             self._safechk_bnd(self._val)
@@ -1792,8 +1809,25 @@ class ASN1Obj(Element):
         else:
             return None
 
+    def to_oer_ws(self, val=None):
+        ASN1CodecOER.CANONICAL = False
+        if val is not None:
+            self.set_val(val)
+        if self._val is not None:
+            _struct = self._to_oer_ws()
+            ret = _struct.to_bytes()
+            if ret:
+                return ret
+            else:
+                return b'\0'
+        else:
+            return None
+
     def from_coer(self, buf):
         self.from_oer(buf)
+
+    def from_coer_ws(self, buf):
+        self.from_oer_ws(buf)
 
     def to_coer(self, val=None):
         ASN1CodecOER.CANONICAL = True
@@ -1801,6 +1835,20 @@ class ASN1Obj(Element):
             self.set_val(val)
         if self._val is not None:
             ret = pack_val(*self._to_oer())[0]
+            if ret:
+                return ret
+            else:
+                return b'\0'
+        else:
+            return None
+
+    def to_coer_ws(self, val=None):
+        ASN1CodecOER.CANONICAL = True
+        if val is not None:
+            self.set_val(val)
+        if self._val is not None:
+            _struct = self._to_oer_ws()
+            ret = _struct.to_bytes()
             if ret:
                 return ret
             else:

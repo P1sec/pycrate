@@ -77,7 +77,8 @@ def _test_rt_base():
     assert( Boo01.to_ber() == Boo01.to_ber_ws() == b'\x01\x01\xff' )
     assert( Boo01.to_cer() == Boo01.to_cer_ws() == b'\x01\x01\xff' )
     assert( Boo01.to_der() == Boo01.to_der_ws() == b'\x01\x01\xff' )
-    assert( Boo01.to_coer() == Boo01.to_oer() == b'\xff' )
+    assert( Boo01.to_oer() == Boo01.to_oer_ws() == b'\xff' )
+    assert( Boo01.to_coer() == Boo01.to_coer_ws() == b'\xff' )
     # decoding
     Boo01.from_aper(b'\x80')
     assert( Boo01._val == True )
@@ -105,9 +106,13 @@ def _test_rt_base():
         Boo01.from_jer( 'true' )
         assert( Boo01._val == True )
 
+    Boo01.from_oer(b'\xff')
+    assert( Boo01._val == True )
+    Boo01.from_oer_ws(b'\xff')
+    assert( Boo01._val == True )
     Boo01.from_coer(b'\xff')
     assert( Boo01._val == True )
-    Boo01.from_oer(b'\xff')
+    Boo01.from_coer_ws(b'\xff')
     assert( Boo01._val == True )
 
     # Int01 ::= INTEGER
@@ -120,8 +125,8 @@ def _test_rt_base():
     assert( Int01.to_ber() == Int01.to_ber_ws() == b'\x02\x01\x00' )
     assert( Int01.to_cer() == Int01.to_cer_ws() == b'\x02\x01\x00' )
     assert( Int01.to_der() == Int01.to_der_ws() == b'\x02\x01\x00' )
-    assert( Int01.to_oer() == b'\x01\x00' )
-    assert( Int01.to_coer() == b'\x01\x00' )
+    assert( Int01.to_oer() == Int01.to_oer_ws() == b'\x01\x00' )
+    assert( Int01.to_coer() == Int01.to_coer_ws() == b'\x01\x00' )
     # decoding
     Int01.from_aper(b'\x01\x00')
     assert( Int01._val == 0 )
@@ -151,8 +156,13 @@ def _test_rt_base():
     # OER/COER
     Int01.from_oer(b'\x01\x00')
     assert( Int01._val == 0 )
+    Int01.from_oer_ws(b'\x01\x00')
+    assert( Int01._val == 0 )
     Int01.from_coer(b'\x01\x00')
     assert( Int01._val == 0 )
+    Int01.from_coer_ws(b'\x01\x00')
+    assert( Int01._val == 0 )
+    #
     Int01.from_asn1('4096')
     # encoding
     assert( Int01.to_aper() == Int01.to_aper_ws() == b'\x02\x10\x00' )
@@ -160,8 +170,8 @@ def _test_rt_base():
     assert( Int01.to_ber() == Int01.to_ber_ws() == b'\x02\x02\x10\x00' )
     assert( Int01.to_cer() == Int01.to_cer_ws() == b'\x02\x02\x10\x00' )
     assert( Int01.to_der() == Int01.to_der_ws() == b'\x02\x02\x10\x00' )
-    assert( Int01.to_oer() == b'\x02\x10\x00' )
-    assert( Int01.to_coer() == b'\x02\x10\x00' )
+    assert( Int01.to_oer() == Int01.to_oer_ws() == b'\x02\x10\x00' )
+    assert( Int01.to_coer() == Int01.to_coer_ws() == b'\x02\x10\x00' )
     # decoding
     Int01.from_aper(b'\x02\x10\x00')
     assert( Int01._val == 4096 )
@@ -191,7 +201,11 @@ def _test_rt_base():
     # OER/COER
     Int01.from_oer(b'\x02\x10\x00')
     assert( Int01._val == 4096 )
+    Int01.from_oer_ws(b'\x02\x10\x00')
+    assert( Int01._val == 4096 )
     Int01.from_coer(b'\x02\x10\x00')
+    assert( Int01._val == 4096 )
+    Int01.from_coer_ws(b'\x02\x10\x00')
     assert( Int01._val == 4096 )
 
     # Int02 ::= INTEGER (MIN..65535)
@@ -203,8 +217,8 @@ def _test_rt_base():
     assert( Int02.to_ber() == Int02.to_ber_ws() == b'\x02\x01\x7f' )
     assert( Int02.to_cer() == Int02.to_cer_ws() == b'\x02\x01\x7f' )
     assert( Int02.to_der() == Int02.to_der_ws() == b'\x02\x01\x7f' )
-    assert( Int02.to_oer() == b'\x01\x7f' )
-    assert( Int02.to_coer() == b'\x01\x7f' )
+    assert( Int02.to_oer() == Int02.to_oer_ws() == b'\x01\x7f' )
+    assert( Int02.to_coer() == Int02.to_coer_ws() == b'\x01\x7f' )
     # decoding
     Int02.from_aper(b'\x01\x7f')
     assert( Int02._val == 127 )
@@ -234,7 +248,11 @@ def _test_rt_base():
     # OER/COER
     Int02.from_oer(b'\x01\x7f')
     assert( Int02._val == 127 )
+    Int02.from_oer_ws(b'\x01\x7f')
+    assert( Int02._val == 127 )
     Int02.from_coer(b'\x01\x7f')
+    assert( Int02._val == 127 )
+    Int02.from_coer_ws(b'\x01\x7f')
     assert( Int02._val == 127 )
     #
     Int02.from_asn1('-128')
@@ -244,8 +262,8 @@ def _test_rt_base():
     assert( Int02.to_ber() == Int02.to_ber_ws() == b'\x02\x01\x80' )
     assert( Int02.to_cer() == Int02.to_cer_ws() == b'\x02\x01\x80' )
     assert( Int02.to_der() == Int02.to_der_ws() == b'\x02\x01\x80' )
-    assert( Int02.to_oer() == b'\x01\x80' )
-    assert( Int02.to_coer() == b'\x01\x80' )
+    assert( Int02.to_oer() == Int02.to_oer_ws() == b'\x01\x80' )
+    assert( Int02.to_coer() == Int02.to_coer_ws() == b'\x01\x80' )
     # decoding
     Int02.from_aper(b'\x01\x80')
     assert( Int02._val == -128 )
@@ -275,7 +293,11 @@ def _test_rt_base():
     # OER/COER
     Int02.from_oer(b'\x01\x80')
     assert( Int02._val == -128 )
+    Int02.from_oer_ws(b'\x01\x80')
+    assert( Int02._val == -128 )
     Int02.from_coer(b'\x01\x80')
+    assert( Int02._val == -128 )
+    Int02.from_coer_ws(b'\x01\x80')
     assert( Int02._val == -128 )
     #
     Int02.from_asn1('128')
@@ -285,8 +307,8 @@ def _test_rt_base():
     assert( Int02.to_ber() == Int02.to_ber_ws() == b'\x02\x02\x00\x80' )
     assert( Int02.to_cer() == Int02.to_cer_ws() == b'\x02\x02\x00\x80' )
     assert( Int02.to_der() == Int02.to_der_ws() == b'\x02\x02\x00\x80' )
-    assert( Int02.to_oer() == b'\x02\x00\x80' )
-    assert( Int02.to_coer() == b'\x02\x00\x80' )
+    assert( Int02.to_oer() == Int02.to_oer_ws() == b'\x02\x00\x80' )
+    assert( Int02.to_coer() == Int02.to_coer_ws() == b'\x02\x00\x80' )
     # decoding
     Int02.from_aper(b'\x02\x00\x80')
     assert( Int02._val == 128 )
@@ -310,7 +332,11 @@ def _test_rt_base():
     assert( Int02._val == 128 )
     Int02.from_oer(b'\x02\x00\x80')
     assert( Int02._val == 128 )
+    Int02.from_oer_ws(b'\x02\x00\x80')
+    assert( Int02._val == 128 )
     Int02.from_coer(b'\x02\x00\x80')
+    assert( Int02._val == 128 )
+    Int02.from_coer_ws(b'\x02\x00\x80')
     assert( Int02._val == 128 )
 
     # Int03 ::= INTEGER (-1..MAX)
@@ -322,8 +348,8 @@ def _test_rt_base():
     assert( Int03.to_ber() == Int03.to_ber_ws() == b'\x02\x02\x10\x00' )
     assert( Int03.to_cer() == Int03.to_cer_ws() == b'\x02\x02\x10\x00' )
     assert( Int03.to_der() == Int03.to_der_ws() == b'\x02\x02\x10\x00' )
-    assert( Int03.to_oer() == b'\x02\x10\x00' )
-    assert( Int03.to_coer() == b'\x02\x10\x00' )
+    assert( Int03.to_oer() == Int03.to_oer_ws() == b'\x02\x10\x00' )
+    assert( Int03.to_coer() == Int03.to_coer_ws() == b'\x02\x10\x00' )
     # decoding
     Int03.from_aper(b'\x02\x10\x01')
     assert( Int03._val == 4096 )
@@ -353,7 +379,11 @@ def _test_rt_base():
     # OER/COER
     Int03.from_oer(b'\x02\x10\x00')
     assert( Int03._val == 4096 )
+    Int03.from_oer_ws(b'\x02\x10\x00')
+    assert( Int03._val == 4096 )
     Int03.from_coer(b'\x02\x10\x00')
+    assert( Int03._val == 4096 )
+    Int03.from_coer_ws(b'\x02\x10\x00')
     assert( Int03._val == 4096 )
 
     # Int04 ::= INTEGER (1..MAX)
@@ -366,8 +396,8 @@ def _test_rt_base():
     assert( Int04.to_ber() == Int04.to_ber_ws() == b'\x02\x01\x01' )
     assert( Int04.to_cer() == Int04.to_cer_ws() == b'\x02\x01\x01' )
     assert( Int04.to_der() == Int04.to_der_ws() == b'\x02\x01\x01' )
-    assert( Int04.to_oer() == b'\x01\x01' )
-    assert( Int04.to_coer() == b'\x01\x01' )
+    assert( Int04.to_oer() == Int04.to_oer_ws() == b'\x01\x01' )
+    assert( Int04.to_coer() == Int04.to_coer_ws() == b'\x01\x01' )
     # decoding
     Int04.from_aper(b'\x01\x00')
     assert( Int04._val == 1)
@@ -397,7 +427,11 @@ def _test_rt_base():
     # OER/COER
     Int04.from_oer(b'\x01\x01')
     assert( Int04._val == 1)
+    Int04.from_oer_ws(b'\x01\x01')
+    assert( Int04._val == 1)
     Int04.from_coer(b'\x01\x01')
+    assert( Int04._val == 1 )
+    Int04.from_coer_ws(b'\x01\x01')
     assert( Int04._val == 1 )
     #
     Int04.from_asn1('127')
@@ -407,8 +441,8 @@ def _test_rt_base():
     assert( Int04.to_ber() == Int04.to_ber_ws() == b'\x02\x01\x7f' )
     assert( Int04.to_cer() == Int04.to_cer_ws() == b'\x02\x01\x7f' )
     assert( Int04.to_der() == Int04.to_der_ws() == b'\x02\x01\x7f' )
-    assert( Int04.to_oer() == b'\x01\x7f' )
-    assert( Int04.to_coer() == b'\x01\x7f' )
+    assert( Int04.to_oer() == Int04.to_oer_ws() == b'\x01\x7f' )
+    assert( Int04.to_coer() == Int04.to_coer_ws() == b'\x01\x7f' )
     # decoding
     Int04.from_aper(b'\x01~')
     assert( Int04._val == 127 )
@@ -438,7 +472,11 @@ def _test_rt_base():
     # OER/COER
     Int04.from_oer(b'\x01\x7f')
     assert( Int04._val == 127)
+    Int04.from_oer_ws(b'\x01\x7f')
+    assert( Int04._val == 127)
     Int04.from_coer(b'\x01\x7f')
+    assert( Int04._val == 127 )
+    Int04.from_coer_ws(b'\x01\x7f')
     assert( Int04._val == 127 )
 
     # Int05 ::= INTEGER (0..MAX)
@@ -450,8 +488,8 @@ def _test_rt_base():
     assert( Int05.to_ber() == Int05.to_ber_ws() == b'\x02\x02\x00\x80' )
     assert( Int05.to_cer() == Int05.to_cer_ws() == b'\x02\x02\x00\x80' )
     assert( Int05.to_der() == Int05.to_der_ws() == b'\x02\x02\x00\x80' )
-    assert( Int05.to_oer() == b'\x01\x80' )
-    assert( Int05.to_coer() == b'\x01\x80' )
+    assert( Int05.to_oer() == Int05.to_oer_ws() == b'\x01\x80' )
+    assert( Int05.to_coer() == Int05.to_coer_ws() == b'\x01\x80' )
     # decoding
     Int05.from_aper(b'\x01\x80')
     assert( Int05._val == 128 )
@@ -481,7 +519,11 @@ def _test_rt_base():
     # OER/COER
     Int05.from_oer(b'\x01\x80')
     assert( Int05._val == 128 )
+    Int05.from_oer_ws(b'\x01\x80')
+    assert( Int05._val == 128 )
     Int05.from_coer(b'\x01\x80')
+    assert( Int05._val == 128 )
+    Int05.from_coer_ws(b'\x01\x80')
     assert( Int05._val == 128 )
 
     # Int06 ::= INTEGER (3..6)
@@ -493,8 +535,8 @@ def _test_rt_base():
     assert( Int06.to_ber() == Int06.to_ber_ws() == b'\x02\x01\x03' )
     assert( Int06.to_cer() == Int06.to_cer_ws() == b'\x02\x01\x03' )
     assert( Int06.to_der() == Int06.to_der_ws() == b'\x02\x01\x03' )
-    assert( Int06.to_oer() == b'\x03' )
-    assert( Int06.to_coer() == b'\x03' )
+    assert( Int06.to_oer() == Int06.to_oer_ws() == b'\x03' )
+    assert( Int06.to_coer() == Int06.to_coer_ws() == b'\x03' )
     # decoding
     Int06.from_aper(b'\x00')
     assert( Int06._val == 3 )
@@ -518,7 +560,11 @@ def _test_rt_base():
     assert( Int06._val == 3 )
     Int06.from_oer(b'\x03')
     assert( Int06._val == 3 )
+    Int06.from_oer_ws(b'\x03')
+    assert( Int06._val == 3 )
     Int06.from_coer(b'\x03')
+    assert( Int06._val == 3 )
+    Int06.from_coer_ws(b'\x03')
     assert( Int06._val == 3 )
     #
     Int06.from_asn1('6')
@@ -528,8 +574,8 @@ def _test_rt_base():
     assert( Int06.to_ber() == Int06.to_ber_ws() == b'\x02\x01\x06' )
     assert( Int06.to_cer() == Int06.to_cer_ws() == b'\x02\x01\x06' )
     assert( Int06.to_der() == Int06.to_der_ws() == b'\x02\x01\x06' )
-    assert( Int06.to_oer() == b'\x06' )
-    assert( Int06.to_coer() == b'\x06' )
+    assert( Int06.to_oer() == Int06.to_oer_ws() == b'\x06' )
+    assert( Int06.to_coer() == Int06.to_coer_ws() == b'\x06' )
     # decoding
     Int06.from_aper(b'\xc0')
     assert( Int06._val == 6 )
@@ -553,7 +599,11 @@ def _test_rt_base():
     assert( Int06._val == 6 )
     Int06.from_oer(b'\x06')
     assert( Int06._val == 6 )
+    Int06.from_oer_ws(b'\x06')
+    assert( Int06._val == 6 )
     Int06.from_coer(b'\x06')
+    assert( Int06._val == 6 )
+    Int06.from_coer_ws(b'\x06')
     assert( Int06._val == 6 )
 
     # Int07 ::= INTEGER (4000..4254)
@@ -565,8 +615,8 @@ def _test_rt_base():
     assert( Int07.to_ber() == Int07.to_ber_ws() == b'\x02\x02\x0f\xa2' )
     assert( Int07.to_cer() == Int07.to_cer_ws() == b'\x02\x02\x0f\xa2' )
     assert( Int07.to_der() == Int07.to_der_ws() == b'\x02\x02\x0f\xa2' )
-    assert( Int07.to_oer() == b'\x0f\xa2' )
-    assert( Int07.to_coer() == b'\x0f\xa2' )
+    assert( Int07.to_oer() == Int07.to_oer_ws() == b'\x0f\xa2' )
+    assert( Int07.to_coer() == Int07.to_coer_ws() == b'\x0f\xa2' )
     # decoding
     Int07.from_aper(b'\x02')
     assert( Int07._val == 4002 )
@@ -590,7 +640,11 @@ def _test_rt_base():
     assert( Int07._val == 4002 )
     Int07.from_oer(b'\x0f\xa2')
     assert( Int07._val == 4002 )
+    Int07.from_oer_ws(b'\x0f\xa2')
+    assert( Int07._val == 4002 )
     Int07.from_coer(b'\x0f\xa2')
+    assert( Int07._val == 4002 )
+    Int07.from_coer_ws(b'\x0f\xa2')
     assert( Int07._val == 4002 )
     #
     Int07.from_asn1('4129')
@@ -600,8 +654,8 @@ def _test_rt_base():
     assert( Int07.to_ber() == Int07.to_ber_ws() == b'\x02\x02\x10!' )
     assert( Int07.to_cer() == Int07.to_cer_ws() == b'\x02\x02\x10!' )
     assert( Int07.to_der() == Int07.to_der_ws() == b'\x02\x02\x10!' )
-    assert( Int07.to_oer() == b'\x10!' )
-    assert( Int07.to_coer() == b'\x10!' )
+    assert( Int07.to_oer() == Int07.to_oer_ws() == b'\x10!' )
+    assert( Int07.to_coer() == Int07.to_coer_ws() == b'\x10!' )
     # decoding
     Int07.from_aper(b'\x81')
     assert( Int07._val == 4129 )
@@ -625,7 +679,11 @@ def _test_rt_base():
     assert( Int07._val == 4129 )
     Int07.from_oer(b'\x10!')
     assert( Int07._val == 4129 )
+    Int07.from_oer_ws(b'\x10!')
+    assert( Int07._val == 4129 )
     Int07.from_coer(b'\x10!')
+    assert( Int07._val == 4129 )
+    Int07.from_coer_ws(b'\x10!')
     assert( Int07._val == 4129 )
 
     # Int08 ::= INTEGER (4000..4255)
@@ -637,8 +695,8 @@ def _test_rt_base():
     assert( Int08.to_ber() == Int08.to_ber_ws() == b'\x02\x02\x10\x9f' )
     assert( Int08.to_cer() == Int08.to_cer_ws() == b'\x02\x02\x10\x9f' )
     assert( Int08.to_der() == Int08.to_der_ws() == b'\x02\x02\x10\x9f' )
-    assert( Int08.to_oer() == b'\x10\x9f' )
-    assert( Int08.to_coer() == b'\x10\x9f' )
+    assert( Int08.to_oer() == Int08.to_oer_ws() == b'\x10\x9f' )
+    assert( Int08.to_coer() == Int08.to_coer_ws() == b'\x10\x9f' )
     # decoding
     Int08.from_aper(b'\xff')
     assert( Int08._val == 4255 )
@@ -662,7 +720,11 @@ def _test_rt_base():
     assert( Int08._val == 4255 )
     Int08.from_oer(b'\x10\x9f')
     assert( Int08._val == 4255 )
+    Int08.from_oer_ws(b'\x10\x9f')
+    assert( Int08._val == 4255 )
     Int08.from_coer(b'\x10\x9f')
+    assert( Int08._val == 4255 )
+    Int08.from_coer_ws(b'\x10\x9f')
     assert( Int08._val == 4255 )
 
     # Int09 ::= INTEGER (0..32000)
@@ -674,8 +736,8 @@ def _test_rt_base():
     assert( Int09.to_ber() == Int09.to_ber_ws() == b'\x02\x02y\x18' )
     assert( Int09.to_cer() == Int09.to_cer_ws() == b'\x02\x02y\x18' )
     assert( Int09.to_der() == Int09.to_der_ws() == b'\x02\x02y\x18' )
-    assert( Int09.to_oer() == b'y\x18' )
-    assert( Int09.to_coer() == b'y\x18' )
+    assert( Int09.to_oer() == Int09.to_oer_ws() == b'y\x18' )
+    assert( Int09.to_coer() == Int09.to_coer_ws() == b'y\x18' )
     # decoding
     Int09.from_aper(b'y\x18')
     assert( Int09._val == 31000 )
@@ -699,7 +761,11 @@ def _test_rt_base():
     assert( Int09._val == 31000 )
     Int09.from_oer(b'y\x18')
     assert( Int09._val == 31000 )
+    Int09.from_oer_ws(b'y\x18')
+    assert( Int09._val == 31000 )
     Int09.from_coer(b'y\x18')
+    assert( Int09._val == 31000 )
+    Int09.from_coer_ws(b'y\x18')
     assert( Int09._val == 31000 )
 
     # Int10 ::= INTEGER (1..65538)
@@ -711,8 +777,8 @@ def _test_rt_base():
     assert( Int10.to_ber() == Int10.to_ber_ws() == b'\x02\x01\x01' )
     assert( Int10.to_cer() == Int10.to_cer_ws() == b'\x02\x01\x01' )
     assert( Int10.to_der() == Int10.to_der_ws() == b'\x02\x01\x01' )
-    assert( Int10.to_oer() == b'\x00\x00\x00\x01' )
-    assert( Int10.to_coer() == b'\x00\x00\x00\x01' )
+    assert( Int10.to_oer() == Int10.to_oer_ws() == b'\x00\x00\x00\x01' )
+    assert( Int10.to_coer() == Int10.to_coer_ws() == b'\x00\x00\x00\x01' )
     # decoding
     Int10.from_aper(b'\x00\x00')
     assert( Int10._val == 1 )
@@ -736,7 +802,11 @@ def _test_rt_base():
     assert( Int10._val == 1 )
     Int10.from_oer(b'\x00\x00\x00\x01')
     assert( Int10._val == 1 )
+    Int10.from_oer_ws(b'\x00\x00\x00\x01')
+    assert( Int10._val == 1 )
     Int10.from_coer(b'\x00\x00\x00\x01')
+    assert( Int10._val == 1 )
+    Int10.from_coer_ws(b'\x00\x00\x00\x01')
     assert( Int10._val == 1 )
     #
     Int10.from_asn1('257')
@@ -746,8 +816,8 @@ def _test_rt_base():
     assert( Int10.to_ber() == Int10.to_ber_ws() == b'\x02\x02\x01\x01' )
     assert( Int10.to_cer() == Int10.to_cer_ws() == b'\x02\x02\x01\x01' )
     assert( Int10.to_der() == Int10.to_der_ws() == b'\x02\x02\x01\x01' )
-    assert( Int10.to_oer() == b'\x00\x00\x01\x01' )
-    assert( Int10.to_coer() == b'\x00\x00\x01\x01' )
+    assert( Int10.to_oer() == Int10.to_oer_ws() == b'\x00\x00\x01\x01' )
+    assert( Int10.to_coer() == Int10.to_coer_ws() == b'\x00\x00\x01\x01' )
     # decoding
     Int10.from_aper(b'@\x01\x00')
     assert( Int10._val == 257 )
@@ -771,7 +841,11 @@ def _test_rt_base():
     assert( Int10._val == 257 )
     Int10.from_oer(b'\x00\x00\x01\x01')
     assert( Int10._val == 257 )
+    Int10.from_oer_ws(b'\x00\x00\x01\x01')
+    assert( Int10._val == 257 )
     Int10.from_coer(b'\x00\x00\x01\x01')
+    assert( Int10._val == 257 )
+    Int10.from_coer_ws(b'\x00\x00\x01\x01')
     assert( Int10._val == 257 )
     #
     Int10.from_asn1('65538')
@@ -781,8 +855,8 @@ def _test_rt_base():
     assert( Int10.to_ber() == Int10.to_ber_ws() == b'\x02\x03\x01\x00\x02' )
     assert( Int10.to_cer() == Int10.to_cer_ws() == b'\x02\x03\x01\x00\x02' )
     assert( Int10.to_der() == Int10.to_der_ws() == b'\x02\x03\x01\x00\x02' )
-    assert( Int10.to_oer() == b'\x00\x01\x00\x02' )
-    assert( Int10.to_coer() == b'\x00\x01\x00\x02' )
+    assert( Int10.to_oer() == Int10.to_oer_ws() == b'\x00\x01\x00\x02' )
+    assert( Int10.to_coer() == Int10.to_coer_ws() == b'\x00\x01\x00\x02' )
     # decoding
     Int10.from_aper(b'\x80\x01\x00\x01')
     assert( Int10._val == 65538 )
@@ -806,7 +880,11 @@ def _test_rt_base():
     assert( Int10._val == 65538 )
     Int10.from_oer(b'\x00\x01\x00\x02')
     assert( Int10._val == 65538 )
+    Int10.from_oer_ws(b'\x00\x01\x00\x02')
+    assert( Int10._val == 65538 )
     Int10.from_coer(b'\x00\x01\x00\x02')
+    assert( Int10._val == 65538 )
+    Int10.from_coer_ws(b'\x00\x01\x00\x02')
     assert( Int10._val == 65538 )
 
     # Int12 ::= INTEGER (-1..MAX, ...)
@@ -818,8 +896,8 @@ def _test_rt_base():
     assert( Int12.to_ber() == Int12.to_ber_ws() == b'\x02\x01\x9c' )
     assert( Int12.to_cer() == Int12.to_cer_ws() == b'\x02\x01\x9c' )
     assert( Int12.to_der() == Int12.to_der_ws() == b'\x02\x01\x9c' )
-    assert( Int12.to_oer() == b'\x01\x9c' )
-    assert( Int12.to_coer() == b'\x01\x9c' )
+    assert( Int12.to_oer() == Int12.to_oer_ws() == b'\x01\x9c' )
+    assert( Int12.to_coer() == Int12.to_coer_ws() == b'\x01\x9c' )
     # decoding
     Int12.from_aper(b'\x80\x01\x9c')
     assert( Int12._val == -100 )
@@ -849,7 +927,11 @@ def _test_rt_base():
     # OER/COER
     Int12.from_oer(b'\x01\x9c')
     assert( Int12._val == -100 )
+    Int12.from_oer_ws(b'\x01\x9c')
+    assert( Int12._val == -100 )
     Int12.from_coer(b'\x01\x9c')
+    assert( Int12._val == -100 )
+    Int12.from_coer_ws(b'\x01\x9c')
     assert( Int12._val == -100 )
 
     # Int13 ::= INTEGER (3..6, ...)
@@ -862,8 +944,8 @@ def _test_rt_base():
     assert( Int13.to_ber() == Int13.to_ber_ws() == b'\x02\x11\x03\xa0\xc9 u\xc0\xdb\xf3\xb8\xac\xbc_\x96\xce?\n\xd2' )
     assert( Int13.to_cer() == Int13.to_cer_ws() == b'\x02\x11\x03\xa0\xc9 u\xc0\xdb\xf3\xb8\xac\xbc_\x96\xce?\n\xd2' )
     assert( Int13.to_der() == Int13.to_der_ws() == b'\x02\x11\x03\xa0\xc9 u\xc0\xdb\xf3\xb8\xac\xbc_\x96\xce?\n\xd2' )
-    assert( Int13.to_oer() == b'\x11\x03\xa0\xc9 u\xc0\xdb\xf3\xb8\xac\xbc_\x96\xce?\n\xd2' )
-    assert( Int13.to_coer() == b'\x11\x03\xa0\xc9 u\xc0\xdb\xf3\xb8\xac\xbc_\x96\xce?\n\xd2' )
+    assert( Int13.to_oer() == Int13.to_oer_ws() == b'\x11\x03\xa0\xc9 u\xc0\xdb\xf3\xb8\xac\xbc_\x96\xce?\n\xd2' )
+    assert( Int13.to_coer() == Int13.to_coer_ws() == b'\x11\x03\xa0\xc9 u\xc0\xdb\xf3\xb8\xac\xbc_\x96\xce?\n\xd2' )
     # decoding
     Int13.from_aper(b'\x80\x11\x03\xa0\xc9 u\xc0\xdb\xf3\xb8\xac\xbc_\x96\xce?\n\xd2')
     assert( Int13._val == 1234567890123456789012345678901234567890 )
@@ -893,7 +975,11 @@ def _test_rt_base():
     # OER/COER
     Int13.from_oer(b'\x11\x03\xa0\xc9 u\xc0\xdb\xf3\xb8\xac\xbc_\x96\xce?\n\xd2')
     assert( Int13._val == 1234567890123456789012345678901234567890 )
+    Int13.from_oer_ws(b'\x11\x03\xa0\xc9 u\xc0\xdb\xf3\xb8\xac\xbc_\x96\xce?\n\xd2')
+    assert( Int13._val == 1234567890123456789012345678901234567890 )
     Int13.from_coer(b'\x11\x03\xa0\xc9 u\xc0\xdb\xf3\xb8\xac\xbc_\x96\xce?\n\xd2')
+    assert( Int13._val == 1234567890123456789012345678901234567890 )
+    Int13.from_coer_ws(b'\x11\x03\xa0\xc9 u\xc0\xdb\xf3\xb8\xac\xbc_\x96\xce?\n\xd2')
     assert( Int13._val == 1234567890123456789012345678901234567890 )
 
     # Rea01 ::= REAL
