@@ -2463,7 +2463,7 @@ class ReattemptInd(Envelope):
 # TS 24.501, 9.11.4.18
 #------------------------------------------------------------------------------#
 
-class FGSNetFeat(Envelope):
+class FGSMNetFeat(Envelope):
     _name = '5GSMNetFeat'
     _GEN = (
         Uint('spare', bl=7),
@@ -2497,7 +2497,7 @@ class SessTMBR(SessAMBR):
 
 #------------------------------------------------------------------------------#
 # Re-attempt indicator
-# TS 24.501, 9.11.4.17
+# TS 24.501, 9.11.4.21
 #------------------------------------------------------------------------------#
 
 class CongestReattemptInd(Envelope):
@@ -2520,5 +2520,18 @@ class CtrlPlaneOnlyInd(Envelope):
         )
 
 
+#------------------------------------------------------------------------------#
+# Ethernet header compression configuration
+# TS 24.501, 9.11.4.28
+#------------------------------------------------------------------------------#
+
+class EthHdrCompConfig(Envelope):
+    _GEN = (
+        Uint('spare', bl=6),
+        Uint('CIDLen', bl=2, dic={
+            0:'Ethernet header compression not used',
+            1:'7 bits',
+            2:'15 bits'})
+        )
 
 

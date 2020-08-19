@@ -39,14 +39,16 @@ from pycrate_core.utils import *
 from pycrate_core.elt   import *
 from pycrate_core.base  import *
 
-from .TS24007    import *
-from .TS24008_IE import (
+from .TS24007           import *
+from .TS24008_IE        import (
     ProtConfig, GPRSTimer,
     )
-from .TS24301_IE import (
-    HdrCompConfig, ServingPLMNRateCtrl, 
+from .TS24301_IE        import (
+    HdrCompConfig as IPHdrCompConfig, ServingPLMNRateCtrl, 
     )
-from .TS24501_IE import *
+from .TS24501_IE        import *
+from .TS24193_ATSSS     import *
+
 
 #------------------------------------------------------------------------------#
 # 5GS Session Management header
@@ -106,9 +108,11 @@ class FGSMPDUSessionEstabRequest(Layer3E):
         Type1TV('AlwaysOnPDUSessReq', val={'T':0xB, 'V':0}, IE=AlwaysOnPDUSessReq()),
         Type4TLV('SMPDUDNReqContainer', val={'T':0x39, 'V':b'\0'}, IE=SMPDUDNReqContainer()),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
-        Type4TLV('HdrCompConfig', val={'T':0x66, 'V':b'\0\0\0'}, IE=HdrCompConfig()),
-        #Type4TLV('DSTTEthernetMAC', val={'T':0x00, 'V':6*b'\0'}), # WNG: tag is undefined in current TS
-        #Type4TLV('DSTTResidenceTime', val={'T':0x00, 'V':8*b'\0'}), # WNG: tag is undefined in current TS
+        Type4TLV('IPHdrCompConfig', val={'T':0x66, 'V':b'\0\0\0'}, IE=IPHdrCompConfig()),
+        Type4TLV('DSTTEthernetMAC', val={'T':0x6E, 'V':6*b'\0'}),
+        Type4TLV('UEDSTTResidenceTime', val={'T':0x6F, 'V':8*b'\0'}),
+        Type6TLVE('PortMgmtInfoContainer', val={'T':0x7C, 'V':b'\0'}), # see TS 24.519
+        Type4TLV('EthHdrCompConfig', val={'T':0x1F, 'V':b'\0'}, IE=EthHdrCompConfig()) 
         )
 
 
@@ -135,12 +139,12 @@ class FGSMPDUSessionEstabAccept(Layer3E):
         Type6TLVE('QoSFlowDesc', val={'T':0x79, 'V':b'\0\0\0'}, IE=QoSFlowDesc()),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
         Type4TLV('DNN', val={'T':0x25, 'V':b'\0'}, IE=APN('DNN')),
-        #Type4TLV('5GSMNetFeat', val={'T':0x00, 'V':b'\0'}, IE=FGSMNetFeat()), # WNG: tag is undefined in current TS
-        #Type4TLV('SessTMBR', val={'T':0x00, 'V':6*b'\0'}, IE=SessTMBR()), # WNG: tag is undefined in current TS
-        #Type4TLV('ServingPLMNRateCtrl', val={'T':0x00, 'V':b'\0\0'}, IE=ServingPLMNRateCtrl()), # WNG: tag is undefined in current TS
-        #Type6TLVE('ATSSSContainer', val={'T':0x00, 'B':b''}), # WNG: tag is undefined in current TS
-        #Type1TV('CtrlPlaneOnlyInd', val={'T':0x0, 'V':1}, IE=CtrlPlaneOnlyInd()), # WNG: tag is undefined in current TS
-        Type4TLV('HdrCompConfig', val={'T':0x66, 'V':b'\0\0\0'}, IE=HdrCompConfig())
+        Type4TLV('5GSMNetFeat', val={'T':0x17, 'V':b'\0'}, IE=FGSMNetFeat()),
+        Type4TLV('ServingPLMNRateCtrl', val={'T':0x18, 'V':b'\0\0'}, IE=ServingPLMNRateCtrl()),
+        Type6TLVE('ATSSSContainer', val={'T':0x77, 'V':b''}, IE=ATSSSParams()),
+        Type1TV('CtrlPlaneOnlyInd', val={'T':0xC, 'V':1}, IE=CtrlPlaneOnlyInd()),
+        Type4TLV('IPHdrCompConfig', val={'T':0x66, 'V':b'\0\0\0'}, IE=IPHdrCompConfig()),
+        Type4TLV('EthHdrCompConfig', val={'T':0x1F, 'V':b'\0'}, IE=EthHdrCompConfig()) 
         )
 
 
@@ -158,7 +162,7 @@ class FGSMPDUSessionEstabReject(Layer3E):
         Type1TV('AllowedSSCMode', val={'T':0xF, 'V':0}, IE=AllowedSSCMode()),
         Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
-        #Type4TLV('ReattemptInd', val={'V':0x00, 'V':b'\0'}, IE=ReattemptInd()), # WNG: tag is undefined in current TS
+        Type4TLV('ReattemptInd', val={'V':0x1D, 'V':b'\0'}, IE=ReattemptInd()),
         Type4TLV('CongestReattemptInd', val={'T':0x61, 'V':b'\0'}, IE=CongestReattemptInd())
         )
 
@@ -201,7 +205,7 @@ class FGSMPDUSessionAuthentResult(Layer3E):
     _GEN = (
         FGSMHeader(val={'Type':199}),
         Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
-        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
 
@@ -218,12 +222,14 @@ class FGSMPDUSessionModifRequest(Layer3E):
         Type3TV('5GSMCause', val={'T':0x59, 'V':b'\x1a'}, bl={'V':8}, IE=FGSMCause()),
         Type3TV('MaxPktFilters', val={'T':0x55, 'V':b'\x02\x20'}, bl={'V':16}, IE=MaxPktFilters()),
         Type1TV('AlwaysOnPDUSessReq', val={'T':0xB, 'V':0}, IE=AlwaysOnPDUSessReq()),
-        Type3TV('IntegrityProtMaxDataRate', val={'V':b'\0\0'}, bl={'V':16}, IE=IntegrityProtMaxDataRate()),
+        Type3TV('IntegrityProtMaxDataRate', val={'T':0x13, 'V':b'\0\0'}, bl={'V':16}, IE=IntegrityProtMaxDataRate()),
         Type6TLVE('QoSRules', val={'T':0x7A, 'V':b'\0\0\0\0'}, IE=QoSRules()),
         Type6TLVE('QoSFlowDesc', val={'T':0x79, 'V':b'\0\0\0'}, IE=QoSFlowDesc()),
         Type6TLVE('MappedEPSBearerCtxt', val={'T':0x75, 'V':b'\0\0\0\0'}, IE=MappedEPSBearerCtxt()),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
-        #Type6TLVE('PortMgmtInfoContainer', val={'T':0x00, 'V':b'\0'}), # WNG: tag is undefined in current TS
+        Type6TLVE('PortMgmtInfoContainer', val={'T':0x7C, 'V':b''}), # see TS 24.519
+        Type4TLV('IPHdrCompConfig', val={'T':0x66, 'V':b'\0\0\0'}, IE=IPHdrCompConfig()),
+        Type4TLV('EthHdrCompConfig', val={'T':0x1F, 'V':b'\0'}, IE=EthHdrCompConfig()) 
         )
 
 
@@ -239,7 +245,7 @@ class FGSMPDUSessionModifReject(Layer3E):
         Type3V('5GSMCause', val={'V':b'\x1a'}, bl={'V':8}, IE=FGSMCause()),
         Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer3()),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
-        #Type4TLV('ReattemptInd', val={'V':0x00, 'V':b'\0'}, IE=ReattemptInd()), # WNG: tag is undefined in current TS
+        Type4TLV('ReattemptInd', val={'V':0x1D, 'V':b'\0'}, IE=ReattemptInd()),
         Type4TLV('CongestReattemptInd', val={'T':0x61, 'V':b'\0'}, IE=CongestReattemptInd())
         )
 
@@ -261,10 +267,11 @@ class FGSMPDUSessionModifCommand(Layer3E):
         Type6TLVE('MappedEPSBearerCtxt', val={'T':0x75, 'V':b'\0\0\0\0'}, IE=MappedEPSBearerCtxt()),
         Type6TLVE('QoSFlowDesc', val={'T':0x79, 'V':b'\0\0\0'}, IE=QoSFlowDesc()),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
-        #Type4TLV('SessTMBR', val={'T':0x00, 'V':6*b'\0'}, IE=SessTMBR()), # WNG: tag is undefined in current TS
-        #Type6TLVE('ATSSSContainer', val={'T':0x00, 'B':b''}), # WNG: tag is undefined in current TS
-        Type4TLV('HdrCompConfig', val={'T':0x66, 'V':b'\0\0\0'}, IE=HdrCompConfig()),
-        #Type6TLVE('PortMgmtInfoContainer', val={'T':0x00, 'V':b'\0'}), # WNG: tag is undefined in current TS
+        Type6TLVE('ATSSSContainer', val={'T':0x77, 'V':b''}, IE=ATSSSParams()),
+        Type4TLV('IPHdrCompConfig', val={'T':0x66, 'V':b'\0\0\0'}, IE=IPHdrCompConfig()),
+        Type6TLVE('PortMgmtInfoContainer', val={'T':0x7C, 'V':b''}), # see TS 24.519
+        Type4TLV('ServingPLMNRateCtrl', val={'T':0x1E, 'V':b'\0\0'}, IE=ServingPLMNRateCtrl()),
+        Type4TLV('EthHdrCompConfig', val={'T':0x1F, 'V':b'\0'}, IE=EthHdrCompConfig()) 
         )
 
 
@@ -278,7 +285,7 @@ class FGSMPDUSessionModifComplete(Layer3E):
     _GEN = (
         FGSMHeader(val={'Type':204}),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
-        #Type6TLVE('PortMgmtInfoContainer', val={'T':0x00, 'V':b'\0'}), # WNG: tag is undefined in current TS
+        Type6TLVE('PortMgmtInfoContainer', val={'T':0x7C, 'V':b''}) # see TS 24.519
         )
 
 
@@ -337,7 +344,8 @@ class FGSMPDUSessionReleaseCommand(Layer3E):
         Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer3()),
         Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
         Type4TLV('CongestReattemptInd', val={'T':0x61, 'V':b'\0'}, IE=CongestReattemptInd()),
-        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
+        Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
+        Type1TV('AccessType', val={'T':0xD, 'V':1}, IE=AccessType())
         )
 
 
