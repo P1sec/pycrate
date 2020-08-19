@@ -4106,7 +4106,7 @@ class Alt(Element):
     
     # default element in case of invalid selection value
     # if set to None, each invalid selection will raise an EltErr
-    DEFAULT_ALT = Envelope('none')
+    DEFAULT = Envelope('none')
     
     # default attributes value
     _env       = None
@@ -4180,16 +4180,18 @@ class Alt(Element):
         
         # default alternative
         if 'DEFAULT' in kw:
-            self.DEFAULT_ALT = kw['DEFAULT']
-        elif self.__class__.DEFAULT_ALT:
-            self.DEFAULT_ALT = self.__class__.DEFAULT_ALT.clone()
+            self.DEFAULT = kw['DEFAULT']
+            #self.DEFAULT.set_env(self.get_env())
+        elif self.__class__.DEFAULT:
+            self.DEFAULT = self.__class__.DEFAULT.clone()
+            #self.DEFAULT.set_env(self.get_env())
         
         if self._SAFE_STAT:
             self._chk_hier()
             self._chk_trans()
             self._chk_gen(self._GEN)
-            if self.DEFAULT_ALT is not None and \
-            not isinstance(self.DEFAULT_ALT, Element):
+            if self.DEFAULT is not None and \
+            not isinstance(self.DEFAULT, Element):
                 raise(EltErr('{0} [__init__]: invalid DEFAULT element'\
                       .format(self._name)))
         
@@ -4262,7 +4264,7 @@ class Alt(Element):
             elt : selected alternative element
         
         Raises:
-            EltErr : if the selection value is invalid and no DEFAULT_ALT is set
+            EltErr : if the selection value is invalid and no DEFAULT is set
         """
         sv = self.get_sel()
         if sv in self._content:
@@ -4271,8 +4273,10 @@ class Alt(Element):
             elt = self._GEN[sv].clone()
             self.insert(sv, elt)
             return elt
-        elif self.DEFAULT_ALT is not None:
-            return self.DEFAULT_ALT
+        elif self.DEFAULT is not None:
+            if self.DEFAULT._env is None:
+                self.DEFAULT.set_env(self.get_env())
+            return self.DEFAULT
         else:
             raise(EltErr('{0} [set_val]: invalid selection value {1!r}'\
                   .format(self._name, sv)))
@@ -4471,7 +4475,7 @@ class Alt(Element):
         """
         kw = {
             'GEN': self._GEN,
-            'DEFAULT': self.DEFAULT_ALT.clone(),
+            'DEFAULT': self.DEFAULT.clone(),
             'sel': self._sel
             }
         if self._desc != self.__class__._desc:
@@ -4492,7 +4496,7 @@ class Alt(Element):
         """Updates the dict of alternatives element with the content of `elt_alt'
         
         Args:
-            elt_alt (dict of {selection valud: element}) : dict of alternatives
+            elt_alt (dict of {selection value: element}) : dict of alternatives
                 to update self._content with
         
         Returns:
