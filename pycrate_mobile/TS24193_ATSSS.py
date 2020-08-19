@@ -41,14 +41,8 @@ from pycrate_core.utils import *
 from pycrate_core.elt   import *
 from pycrate_core.base  import *
 
-#from .TS24007       import *
 from .TS24526_UEPOL import TrafficDescComp
 
-
-#------------------------------------------------------------------------------#
-# PDUs and parameters specific to the present document
-# TS 24.193, section 6
-#------------------------------------------------------------------------------#
 
 #------------------------------------------------------------------------------#
 # Encoding of ATSSS rules
