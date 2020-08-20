@@ -1027,6 +1027,8 @@ def _test_rt_base():
     assert( Rea01.to_ber() == Rea01.to_ber_ws() == b'\t\x04\x80\xd1\x07\x89' )
     assert( Rea01.to_cer() == Rea01.to_cer_ws() == b'\t\x04\x80\xd1\x07\x89' )
     assert( Rea01.to_der() == Rea01.to_der_ws() == b'\t\x04\x80\xd1\x07\x89' )
+    assert( Rea01.to_oer() == Rea01.to_oer_ws() == b'\x06\t\x04\x80\xd1\x07\x89' )
+    assert( Rea01.to_coer() == Rea01.to_coer_ws() == b'\x06\t\x04\x80\xd1\x07\x89' )
     # decoding
     Rea01.from_aper(b'\x04\x80\xd1\x07\x89')
     assert( Rea01._val == (1929, 2, -47) )
@@ -1054,7 +1056,17 @@ def _test_rt_base():
         assert( Rea01._to_jval() == {'base10Value': '1.3706369372812333e-11'} )
         Rea01.from_jer( '{"base10Value": "1.3706369372812333e-11"}' )
         assert( Rea01._val == (13706369372812333, 10, -27) )
-    
+
+    # OER/COER
+    Rea01.from_oer(b'\x06\t\x04\x80\xd1\x07\x89')
+    assert( Rea01._val == (1929, 2, -47) )
+    Rea01.from_oer_ws(b'\x06\t\x04\x80\xd1\x07\x89')
+    assert( Rea01._val == (1929, 2, -47) )
+    Rea01.from_coer(b'\x06\t\x04\x80\xd1\x07\x89')
+    assert( Rea01._val == (1929, 2, -47) )
+    Rea01.from_coer_ws(b'\x06\t\x04\x80\xd1\x07\x89')
+    assert( Rea01._val == (1929, 2, -47) )
+
     # Enu01 ::= ENUMERATED {cheese, cake, coffee, tea}
     Enu01 = Mod['Enu01']
     Enu01.from_asn1('coffee')

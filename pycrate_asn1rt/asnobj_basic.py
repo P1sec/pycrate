@@ -1051,6 +1051,167 @@ Specific attribute:
                 # lead to an integer encoding instead of this scientific notation
                 return {'base10Value': '%ie%i' % (self._val[0], self._val[2])}
 
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _from_oer_ws(self, char):
+        # Assuming pycrate takes care of constraints
+        if ((self._const_val is not None) and
+                (not self._const_val.in_root(None)) and
+                (self._const_val.ext is None)):
+            # Check for constraints
+            lb = self._const_val.root[0].lb
+            ub = self._const_val.root[0].ub
+            if lb[1] == ub[1] == 2:  # Automatically excludes +/- Inf
+                if (((min(lb[3], ub[3]) >=
+                      ASN1CodecOER.REAL_IEEE754_32_EXP_MIN) and
+                     (max(lb[3], ub[3]) <=
+                      ASN1CodecOER.REAL_IEEE754_32_EXP_MAX)) and
+                        ((min(lb[0], ub[0]) >=
+                          ASN1CodecOER.REAL_IEEE754_32_MANTIS_MIN) and
+                         (max(lb[3], ub[3]) <=
+                          ASN1CodecOER.REAL_IEEE754_32_MANTIS_MAX))):
+                    buf = Buf('V', bl=32)
+                    buf._from_char(char)
+                    self._struct = Envelope(self._name, GEN=(buf,))
+                    self._val = decode_ieee754_32(Charpy(buf.to_bytes()))
+                    return
+
+                if (((min(lb[3], ub[3]) >=
+                      ASN1CodecOER.REAL_IEEE754_64_EXP_MIN) and
+                     (max(lb[3], ub[3]) <=
+                      ASN1CodecOER.REAL_IEEE754_64_EXP_MAX)) and
+                        ((min(lb[0], ub[0]) >=
+                          ASN1CodecOER.REAL_IEEE754_64_MANTIS_MIN) and
+                         (max(lb[3], ub[3]) <=
+                          ASN1CodecOER.REAL_IEEE754_64_MANTIS_MAX))):
+                    buf = Buf('V', bl=64)
+                    buf._from_char(char)
+                    self._struct = Envelope(self._name, GEN=(buf,))
+                    self._val = decode_ieee754_64(Charpy(buf.to_bytes()))
+                    return
+
+        # else DER
+        l_val, _gen = ASN1CodecOER.decode_length_determinant_ws(char)
+        buf = Buf('V', bl=l_val*8)
+        buf._from_char(char)
+        _gen.append(buf)
+        self._struct = Envelope(self._name, GEN=(_gen,))
+        self.from_der(buf.to_bytes())
+
+    def _from_oer(self, char):
+        # Assuming pycrate takes care of constraints
+        if ((self._const_val is not None) and
+                (not self._const_val.in_root(None)) and
+                (self._const_val.ext is None)):
+            # Check for constraints
+            lb = self._const_val.root[0].lb
+            ub = self._const_val.root[0].ub
+            if lb[1] == ub[1] == 2:  # Automatically excludes +/- Inf
+                if (((min(lb[3], ub[3]) >=
+                      ASN1CodecOER.REAL_IEEE754_32_EXP_MIN) and
+                     (max(lb[3], ub[3]) <=
+                      ASN1CodecOER.REAL_IEEE754_32_EXP_MAX)) and
+                        ((min(lb[0], ub[0]) >=
+                          ASN1CodecOER.REAL_IEEE754_32_MANTIS_MIN) and
+                         (max(lb[3], ub[3]) <=
+                          ASN1CodecOER.REAL_IEEE754_32_MANTIS_MAX))):
+                    self._val = decode_ieee754_32(char)
+                    return
+
+                if (((min(lb[3], ub[3]) >=
+                      ASN1CodecOER.REAL_IEEE754_64_EXP_MIN) and
+                     (max(lb[3], ub[3]) <=
+                      ASN1CodecOER.REAL_IEEE754_64_EXP_MAX)) and
+                        ((min(lb[0], ub[0]) >=
+                          ASN1CodecOER.REAL_IEEE754_64_MANTIS_MIN) and
+                         (max(lb[3], ub[3]) <=
+                          ASN1CodecOER.REAL_IEEE754_64_MANTIS_MAX))):
+                    self._val = decode_ieee754_64(char)
+                    return
+
+        # else DER
+        l_val = ASN1CodecOER.decode_length_determinant(char)
+        val = char.get_bytes(l_val*8)
+        self.from_der(val)
+
+    def _to_oer_ws(self):
+        # Assuming pycrate takes care of constraints
+        if ((self._const_val is not None) and
+                (not self._const_val.in_root(None)) and
+                (self._const_val.ext is None)):
+            # Check for constraints
+            lb = self._const_val.root[0].lb
+            ub = self._const_val.root[0].ub
+            if lb[1] == ub[1] == 2:  # Automatically excludes +/- Inf
+                if (((min(lb[3], ub[3]) >=
+                      ASN1CodecOER.REAL_IEEE754_32_EXP_MIN) and
+                     (max(lb[3], ub[3]) <=
+                      ASN1CodecOER.REAL_IEEE754_32_EXP_MAX)) and
+                        ((min(lb[0], ub[0]) >=
+                          ASN1CodecOER.REAL_IEEE754_32_MANTIS_MIN) and
+                         (max(lb[3], ub[3]) <=
+                          ASN1CodecOER.REAL_IEEE754_32_MANTIS_MAX))):
+                    _gen = (Buf('V', val=encode_ieee754_32(self._val), bl=32),)
+                    self._struct = Envelope(self._name, GEN=_gen)
+                    return self._struct
+
+                if (((min(lb[3], ub[3]) >=
+                      ASN1CodecOER.REAL_IEEE754_64_EXP_MIN) and
+                     (max(lb[3], ub[3]) <=
+                      ASN1CodecOER.REAL_IEEE754_64_EXP_MAX)) and
+                        ((min(lb[0], ub[0]) >=
+                          ASN1CodecOER.REAL_IEEE754_64_MANTIS_MIN) and
+                         (max(lb[3], ub[3]) <=
+                          ASN1CodecOER.REAL_IEEE754_64_MANTIS_MAX))):
+                    _gen = (Buf('V', val=encode_ieee754_64(self._val), bl=64),)
+                    self._struct = Envelope(self._name, GEN=_gen)
+                    return self._struct
+
+        # else DER
+        val = self.to_der()  # not to_det_ws!!!, we are only interested in buf
+        l_val = len(val)
+        _gen = ASN1CodecOER.encode_length_determinant_ws(len(val))
+        _gen.append(Buf('V', val=val, bl=l_val*8))
+        self._struct = Envelope(self._name, GEN=(_gen,))
+        return self._struct
+
+    def _to_oer(self):
+        # Assuming pycrate takes care of constraints
+        if ((self._const_val is not None) and
+                (not self._const_val.in_root(None)) and
+                (self._const_val.ext is None)):
+            # Check for constraints
+            lb = self._const_val.root[0].lb
+            ub = self._const_val.root[0].ub
+            if lb[1] == ub[1] == 2:  # Automatically excludes +/- Inf
+                if (((min(lb[3], ub[3]) >=
+                      ASN1CodecOER.REAL_IEEE754_32_EXP_MIN) and
+                     (max(lb[3], ub[3]) <=
+                      ASN1CodecOER.REAL_IEEE754_32_EXP_MAX)) and
+                    ((min(lb[0], ub[0]) >=
+                      ASN1CodecOER.REAL_IEEE754_32_MANTIS_MIN) and
+                     (max(lb[3], ub[3]) <=
+                      ASN1CodecOER.REAL_IEEE754_32_MANTIS_MAX))):
+                    return [(T_BYTES, encode_ieee754_32(self._val), 32)]
+
+                if (((min(lb[3], ub[3]) >=
+                      ASN1CodecOER.REAL_IEEE754_64_EXP_MIN) and
+                     (max(lb[3], ub[3]) <=
+                      ASN1CodecOER.REAL_IEEE754_64_EXP_MAX)) and
+                    ((min(lb[0], ub[0]) >=
+                      ASN1CodecOER.REAL_IEEE754_64_MANTIS_MIN) and
+                     (max(lb[3], ub[3]) <=
+                      ASN1CodecOER.REAL_IEEE754_64_MANTIS_MAX))):
+                    return [(T_BYTES, encode_ieee754_64(self._val), 64)]
+
+        # else DER
+        val = self.to_der()
+        l_val = len(val)
+        GEN = ASN1CodecOER.encode_length_determinant(len(val))
+        GEN.append((T_BYTES, val, l_val*8))
+        return GEN
 
 #------------------------------------------------------------------------------#
 # ENUMERATED, OID and RELATIVE-OID

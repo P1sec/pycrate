@@ -1671,6 +1671,14 @@ class ASN1CodecOER(ASN1Codec):
     FALSE = 0x00
 
     LenFormLUT = {0: 'short', 1: 'long'}
+    REAL_IEEE754_32_MANTIS_MIN = -2 ** 24 + 1
+    REAL_IEEE754_32_MANTIS_MAX = 2 ** 24 - 1
+    REAL_IEEE754_64_MANTIS_MIN = -2 ** 53 - 1
+    REAL_IEEE754_64_MANTIS_MAX = 2 ** 53 - 1
+    REAL_IEEE754_32_EXP_MIN = -126
+    REAL_IEEE754_32_EXP_MAX = 127
+    REAL_IEEE754_64_EXP_MIN = -1022
+    REAL_IEEE754_64_EXP_MAX = 1023
 
     @classmethod
     def encode_length_determinant(cls, length):
@@ -1869,6 +1877,13 @@ class ASN1CodecOER(ASN1Codec):
         else:
             # No lower bound -> encode with length determinant
             return cls.decode_intunconst_ws(char)
+
+
+    @classmethod
+    def encode_ieee754_32(cls, val):
+        GEN = [
+            (T_UINT, )
+        ]
 
 
 
