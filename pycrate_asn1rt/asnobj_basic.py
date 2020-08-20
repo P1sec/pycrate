@@ -1587,8 +1587,6 @@ Specific attribute:
         return ASN1CodecOER.encode_enumerated(self._get_index())
 
 
-
-
 class _OID(ASN1Obj):
     
     # this class implements the methods that are common to OID and REL_OID    
@@ -1707,6 +1705,35 @@ class _OID(ASN1Obj):
         
         def _to_jval(self):
             return '.'.join(map(str, self._val))
+
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+    def _to_oer(self):
+        _, l_val, _gen = self._encode_ber_cont()
+        det = ASN1CodecOER.encode_length_determinant(l_val)
+        det.extend(_gen)
+        return det
+
+    def _to_oer_ws(self):
+        _, l_val, _gen = self._encode_ber_cont_ws()
+        det = ASN1CodecOER.encode_length_determinant_ws(l_val)
+        det.append(_gen)
+        self._struct = Envelope(self._name, GEN=tuple(det))
+        return self._struct
+
+    def _from_oer(self, char):
+        l_val = ASN1CodecOER.decode_length_determinant(char)
+        buf = char.get_bytes(l_val * 8)
+        self._decode_cont(buf)
+
+    def _from_oer_ws(self, char):
+        l_val, det = ASN1CodecOER.decode_length_determinant_ws(char)
+        buf = Buf('V', bl=l_val*8)
+        buf._from_char(char)
+        det.append(buf)
+        self._decode_cont(buf.to_bytes())
+        return Envelope(self._name, GEN=tuple(det))
 
 
 class OID(_OID):

@@ -1164,6 +1164,8 @@ def _test_rt_base():
     assert( Oid01.to_ber() == Oid01.to_ber_ws() == b'\x06\x04*\x81z\x01' )
     assert( Oid01.to_cer() == Oid01.to_cer_ws() == b'\x06\x04*\x81z\x01' )
     assert( Oid01.to_der() == Oid01.to_der_ws() == b'\x06\x04*\x81z\x01' )
+    assert( Oid01.to_oer() == Oid01.to_oer_ws() == b'\x04*\x81z\x01' )
+    assert( Oid01.to_coer() == Oid01.to_coer_ws() == b'\x04*\x81z\x01' )
     # decoding
     Oid01.from_aper(b'\x04*\x81z\x01')
     assert( Oid01._val == (1, 2, 250, 1) )
@@ -1190,7 +1192,16 @@ def _test_rt_base():
         assert( Oid01.to_jer() == '"1.2.250.1"' )
         Oid01.from_jer('"1.2.250.1"')
         assert( Oid01._val == (1, 2, 250, 1) )
-    
+    # OER/COER
+    Oid01.from_oer(b'\x04*\x81z\x01')
+    assert( Oid01._val == (1, 2, 250, 1) )
+    Oid01.from_oer_ws(b'\x04*\x81z\x01')
+    assert( Oid01._val == (1, 2, 250, 1) )
+    Oid01.from_coer(b'\x04*\x81z\x01')
+    assert( Oid01._val == (1, 2, 250, 1) )
+    Oid01.from_coer_ws(b'\x04*\x81z\x01')
+    assert( Oid01._val == (1, 2, 250, 1) )
+
     # Oid02 ::= RELATIVE-OID
     Oid02 = Mod['Oid02']
     Oid02.from_asn1('{43 12 20 7}')
@@ -1200,6 +1211,8 @@ def _test_rt_base():
     assert( Oid02.to_ber() == Oid02.to_ber_ws() == b'\r\x04+\x0c\x14\x07' )
     assert( Oid02.to_cer() == Oid02.to_cer_ws() == b'\r\x04+\x0c\x14\x07' )
     assert( Oid02.to_der() == Oid02.to_der_ws() == b'\r\x04+\x0c\x14\x07' )
+    assert( Oid02.to_oer() == Oid02.to_oer_ws() == b'\x04+\x0c\x14\x07' )
+    assert( Oid02.to_coer() == Oid02.to_coer_ws() == b'\x04+\x0c\x14\x07' )
     # decoding
     Oid02.from_aper(b'\x04+\x0c\x14\x07')
     assert( Oid02._val == (43, 12, 20, 7) )
@@ -1221,7 +1234,15 @@ def _test_rt_base():
     assert( Oid02._val == (43, 12, 20, 7) )
     Oid02.from_der_ws(b'\r\x04+\x0c\x14\x07')
     assert( Oid02._val == (43, 12, 20, 7) )
-    
+    Oid02.from_oer(b'\x04+\x0c\x14\x07')
+    assert( Oid02._val == (43, 12, 20, 7) )
+    Oid02.from_oer_ws(b'\x04+\x0c\x14\x07')
+    assert( Oid02._val == (43, 12, 20, 7) )
+    Oid02.from_coer(b'\x04+\x0c\x14\x07')
+    assert( Oid02._val == (43, 12, 20, 7) )
+    Oid02.from_coer_ws(b'\x04+\x0c\x14\x07')
+    assert( Oid02._val == (43, 12, 20, 7) )
+
     # Bst01 ::= BIT STRING
     Bst01 = Mod['Bst01']
     Bst01.from_asn1('\'001111001001011010\'B')
