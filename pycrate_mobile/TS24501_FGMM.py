@@ -288,7 +288,7 @@ class FGMMRegistrationAccept(Layer3E):
         Type4TLV('ConfiguredNSSAI', val={'T':0x31, 'V':b'\0\0'}, IE=NSSAI()),
         Type4TLV('5GSNetFeat', val={'T':0x21, 'V':b'\0'}, IE=FGSNetFeat()),
         Type4TLV('PDUSessStat', val={'T':0x50, 'V':b'\0\0'}, IE=PDUSessStat()),
-        Type4TLV('PDUSessStatReactResult', val={'T':0x26, 'V':b'\0\0'}, IE=PDUSessStat()),
+        Type4TLV('PDUSessReactResult', val={'T':0x26, 'V':b'\0\0'}, IE=PDUSessStat()),
         Type6TLVE('PDUSessReactResultErr', val={'T':0x72, 'V':b'\0\0'}, IE=PDUSessReactResultErr()),
         Type6TLVE('LADNInfo', val={'T':0x79, 'V':9*b'\0'}, IE=LADNInfo()),
         Type1TV('MICOInd', val={'T':0xB, 'V':0}, IE=MICOInd()),
@@ -299,7 +299,7 @@ class FGMMRegistrationAccept(Layer3E):
         Type4TLV('T3502', val={'T':0x16, 'V':b'\0'}, IE=GPRSTimer()),
         Type4TLV('EmergNumList', val={'T':0x34, 'V':b'\x02\x01\0'}, IE=EmergNumList()),
         Type6TLVE('ExtEmergNumList', val={'T':0x7A, 'V':b'\0\0\0\0'}, IE=ExtEmergNumList()),
-        Type6TLVE('SORTransparentContainer', val={'T':0x73, 'V':17*b'\0'}, IE=SORTransparentContainer()),
+        Type6TLVE('SORTransContainer', val={'T':0x73, 'V':17*b'\0'}, IE=SORTransContainer()),
         Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
         Type1TV('NSSAIInclMode', val={'T':0xA, 'V':0}, IE=NSSAIInclMode()),
         Type6TLVE('OperatorAccessCatDefs', val={'T':0x76, 'V':b''}, IE=OperatorAccessCatDefs()),
@@ -330,7 +330,7 @@ class FGMMRegistrationComplete(Layer3E):
     _name = '5GMMRegistrationComplete'
     _GEN = (
         FGMMHeader(val={'Type':67}),
-        Type6TLVE('SORTransparentContainer', val={'T':0x73, 'V':17*b'\0'}, IE=SORTransparentContainer())
+        Type6TLVE('SORTransContainer', val={'T':0x73, 'V':17*b'\0'}, IE=SORTransContainer())
         )
 
 
@@ -479,7 +479,7 @@ class FGMMServiceAccept(Layer3E):
     _GEN = (
         FGMMHeader(val={'Type':78}),
         Type4TLV('PDUSessStat', val={'T':0x50, 'V':b'\0\0'}, IE=PDUSessStat()),
-        Type4TLV('PDUSessStatReactResult', val={'T':0x26, 'V':b'\0\0'}, IE=PDUSessStat()),
+        Type4TLV('PDUSessReactResult', val={'T':0x26, 'V':b'\0\0'}, IE=PDUSessStat()),
         Type6TLVE('PDUSessReactResultErr', val={'T':0x72, 'V':b'\0\0'}, IE=PDUSessReactResultErr()),
         Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
         Type4TLV('T3448', val={'T':0x6B, 'V':b'\0'}, IE=GPRSTimer())

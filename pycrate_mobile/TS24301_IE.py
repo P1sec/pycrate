@@ -2033,7 +2033,7 @@ class HdrCompConfig(Envelope):
         Uint('P0x0002', bl=1),
         Uint16('MAX_CID'),
         Uint8('ParamsType', dic=_HdrCompConfPType_dict, trans=True),
-        Buf('ParamsContainer', trans=True, rep=REPR_HEX)
+        Buf('ParamsContainer', val=b'', rep=REPR_HEX, trans=True)
         )
     
     def set_val(self, vals):
