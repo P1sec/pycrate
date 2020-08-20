@@ -85,3 +85,8 @@ class ASN1JERDecodeErr(ASN1CodecErr):
 #class ASN1GSERDecodeErr(ASN1CodecErr):
 #    pass
 
+class ASN1OERDecodeErr(ASN1CodecErr):
+    pass
+
+class ASN1OEREncodeErr(ASN1CodecErr):
+    pass

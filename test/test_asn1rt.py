@@ -1076,6 +1076,8 @@ def _test_rt_base():
     assert( Enu01.to_ber() == Enu01.to_ber_ws() == b'\n\x01\x02' )
     assert( Enu01.to_cer() == Enu01.to_cer_ws() == b'\n\x01\x02' )
     assert( Enu01.to_der() == Enu01.to_der_ws() == b'\n\x01\x02' )
+    assert( Enu01.to_oer() == Enu01.to_oer_ws() == b'\x02' )
+    assert( Enu01.to_coer() == Enu01.to_coer_ws() == b'\x02' )
     # decoding
     Enu01.from_aper(b'\x80')
     assert( Enu01._val == 'coffee' )
@@ -1102,7 +1104,16 @@ def _test_rt_base():
         assert( Enu01.to_jer() == '"coffee"' )
         Enu01.from_jer('"coffee"')
         assert( Enu01._val == 'coffee' )
-    
+    # OER/COER
+    Enu01.from_oer(b'\x02')
+    assert( Enu01._val == 'coffee' )
+    Enu01.from_oer_ws(b'\x02')
+    assert( Enu01._val == 'coffee' )
+    Enu01.from_coer(b'\x02')
+    assert( Enu01._val == 'coffee' )
+    Enu01.from_coer_ws(b'\x02')
+    assert( Enu01._val == 'coffee' )
+
     # Enu04 ::= ENUMERATED {cheese, ..., cake, coffee, tea}
     Enu04 = Mod['Enu04']
     Enu04.from_asn1('tea')
@@ -1112,6 +1123,8 @@ def _test_rt_base():
     assert( Enu04.to_ber() == Enu04.to_ber_ws() == b'\n\x01\x03' )
     assert( Enu04.to_cer() == Enu04.to_cer_ws() == b'\n\x01\x03' )
     assert( Enu04.to_der() == Enu04.to_der_ws() == b'\n\x01\x03' )
+    assert( Enu04.to_oer() == Enu04.to_oer_ws() == b'\x03' )
+    assert( Enu04.to_coer() == Enu04.to_coer_ws() == b'\x03' )
     # decoding
     Enu04.from_aper(b'\x82')
     assert( Enu04._val == 'tea' )
@@ -1133,7 +1146,15 @@ def _test_rt_base():
     assert( Enu04._val == 'tea' )
     Enu04.from_der_ws(b'\n\x01\x03')
     assert( Enu04._val == 'tea' )
-    
+    Enu04.from_oer(b'\x03')
+    assert( Enu04._val == 'tea' )
+    Enu04.from_oer_ws(b'\x03')
+    assert( Enu04._val == 'tea' )
+    Enu04.from_coer(b'\x03')
+    assert( Enu04._val == 'tea' )
+    Enu04.from_coer_ws(b'\x03')
+    assert( Enu04._val == 'tea' )
+
     # Oid01 ::= OBJECT IDENTIFIER
     Oid01 = Mod['Oid01']
     Oid01.from_asn1('{iso member-body(2) fr(250) type-org(1)}')

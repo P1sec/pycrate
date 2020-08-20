@@ -1529,6 +1529,65 @@ Specific attribute:
         def _to_jval(self):
             return self._val
 
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _get_index(self):
+        try:
+            ind = self._cont[self._val]
+        except KeyError:
+            if self._ext is not None:
+                # Just try to convert the value into an index
+                try:
+                    ind = int(self._val)
+                except ValueError:
+                    try:
+                        # The pycrate "_ext_" format
+                        ind = int(self._val[5:])
+                    except ValueError:
+                        raise ASN1OEREncodeErr(
+                            "{0}: invalid ENUMERATED value, {1}".format(
+                                self.fullname(),
+                                self._val))
+        return ind
+
+    def _get_index_value(self, index):
+        try:
+            val = self._cont_rev[index]
+        except (KeyError):
+            if self._ext is not None:
+                if not self._SILENT:
+                    asnlog('ENUM._from_oer: %s, unknown extension value %r' \
+                           % (self._name, index))
+                # Just try to convert the value into an index
+                val = '_ext_%r' % index
+            else:
+                raise (ASN1OERDecodeErr(
+                    '{0}: invalid ENUMERATED value, {1}'.format(self.fullname(),
+                                                               index)))
+
+        return val
+
+    def _from_oer_ws(self, char):
+        index, _gen = ASN1CodecOER.decode_enumerated_ws(char)
+        self._val = self._get_index_value(index)
+        self._struct = Envelope(self._name, GEN=tuple(_gen))
+
+    def _from_oer(self, char):
+        self._val = self._get_index_value(ASN1CodecOER.decode_enumerated(char))
+
+    def _to_oer_ws(self):
+        self._struct = Envelope(self._name, GEN=(
+            ASN1CodecOER.encode_enumerated_ws(self._get_index()),
+        ))
+        return self._struct
+
+    def _to_oer(self):
+        return ASN1CodecOER.encode_enumerated(self._get_index())
+
+
+
 
 class _OID(ASN1Obj):
     

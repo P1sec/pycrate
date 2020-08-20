@@ -1878,12 +1878,63 @@ class ASN1CodecOER(ASN1Codec):
             # No lower bound -> encode with length determinant
             return cls.decode_intunconst_ws(char)
 
+    @classmethod
+    def encode_enumerated(cls, val):
+        # Always canonical (implementing non-canonical doesn't make sense)
+        _gen = []
+        if 0 <= val <= 127:
+            # short form
+            _gen.append((T_UINT, val, 8))
+        else:
+            # long form
+            dl = int_bytelen(val)
+            _gen.extend([(T_UINT, 1, 1),
+                         (T_UINT, dl, 7),
+                         (T_INT, val, dl * 8)
+                         ])
+
+        return _gen
 
     @classmethod
-    def encode_ieee754_32(cls, val):
-        GEN = [
-            (T_UINT, )
-        ]
+    def encode_enumerated_ws(cls, val):
+        if 0 <= val <= 127:
+            # short form
+            _gen = (
+                Uint('Form', val=0, bl=1, dic=cls.LenFormLUT),
+                Uint('Val', val=val, bl=7)
+            )
+        else:
+            # long form
+            dl = int_bytelen(val)
+            _gen = (
+                Uint('Form', val=1, bl=1, dic=cls.LenFormLUT),
+                Uint('Len', val=dl, bl=7),
+                Int('Val', val=val, bl=dl*8)
+            )
 
+        return Envelope('L', GEN=_gen)
 
+    @classmethod
+    def decode_enumerated(cls, char):
+        long_form = char.get_uint(1)
+        val = char.get_uint(7)
+        if long_form:
+            val = char.get_int(val*8)
+        return val
 
+    @classmethod
+    def decode_enumerated_ws(cls, char):
+        t_enum = Envelope('L', GEN=(
+            Uint('Form', bl=1, dic=cls.LenFormLUT),
+            Uint('Val', bl=7)
+        ))
+        t_enum._from_char(char)
+        long_form = t_enum[0].get_val()
+        enum_val = t_enum[1].get_val()
+        if long_form:
+            t_enum[1]._name = "Len"
+            val = Int('Val', bl=8*enum_val)
+            val._from_char(char)
+            enum_val = val.get_val()
+            t_enum.append(val)
+        return enum_val, t_enum
