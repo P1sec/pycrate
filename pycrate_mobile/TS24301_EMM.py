@@ -71,7 +71,7 @@ __all__ = [
 
 #------------------------------------------------------------------------------#
 # 3GPP TS 24.301: NAS protocol for EPS
-# release 13 (da0)
+# release 13 (g51)
 #------------------------------------------------------------------------------#
 
 from pycrate_core.utils import *
@@ -218,7 +218,7 @@ class EMMAttachAccept(Layer3E):
         Type6TLVE('ExtEmergNumList', val={'T':0x7A, 'V':b'\0\0\0\0'}, IE=ExtEmergNumList()),
         Type6TLVE('CipherKeyData', val={'T':0x7C, 'V':32*b'\0'}, IE=CipherKeyData()),
         Type4TLV('UERadioCapID', val={'T':0x66, 'V':b'\0'}, IE=UERadioCapID()),
-        Type1TV('UERadioCapIDDelInd', val={'T':0xB, 'V':0}, IE=UERadioCapIDDelInd())
+        Type1TV('UERadioCapIDDelInd', val={'T':0xB, 'V':0}, IE=UERadioCapIDDelInd()),
         )
 
 
@@ -464,7 +464,9 @@ class EMMGUTIReallocCommand(Layer3E):
         EMMHeader(val={'Type':80}),
         Type4LV('GUTI', val={'V':b'\xf6'+10*b'\0'}, IE=EPSID()),
         Type4TLV('TAIList', val={'T':0x54, 'V':6*b'\0'}, IE=TAIList()),
-        Type4TLV('DCNID', val={'T':0x65, 'V':b'\0\0'}, IE=DCNID())
+        Type4TLV('DCNID', val={'T':0x65, 'V':b'\0\0'}, IE=DCNID()),
+        Type4TLV('UERadioCapID', val={'T':0x66, 'V':b'\0'}, IE=UERadioCapID()),
+        Type1TV('UERadioCapIDDelInd', val={'T':0xB, 'V':0}, IE=UERadioCapIDDelInd()),
         )
 
 
