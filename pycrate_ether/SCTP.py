@@ -30,7 +30,7 @@
 from binascii   import *
 from struct     import pack
 try:
-    raise(ImportError)
+    #raise(ImportError)
     # try to import external LGPL CRC32C Python module
     # https://github.com/ICRAR/crc32c
     from crc32c import crc32 as _crc32c
