@@ -32,6 +32,7 @@ from pycrate_core.utils import *
 from .TS24501_FGMM  import FGMMTypeClasses, FGMMSecProtNASMessage
 from .TS24501_FGSM  import FGSMTypeClasses
 from .TS24501_UEPOL import FGUEPOLTypeClasses
+from .TS24519_TSNAF import FGTSNAFEthPortTypeClasses, FGTSNAFBridgeTypeClasses
 from .TS24011_PPSMS import PPSMSCPTypeClasses
 
 
@@ -111,90 +112,154 @@ def parse_NAS5G(buf, inner=True, sec_hdr=True):
         # error 96, invalid mandatory info
         return None, 96
     #
-    if inner and pd == 126:
-        if typ in (65, 76, 79, 94):
-            nasc = Msg['NASContainer']
-            if not nasc.get_trans():
-                # NAS Container present in Msg
-                cont, err = parse_NAS5G(nasc[-1].get_val(), inner=inner)
-                if err == 0:
-                    nasc.replace(nasc[-1], cont)
+    if inner:
+        if pd == 126:
+            if typ in (65, 76, 79, 94):
+                nasc = Msg['NASContainer']
+                if not nasc.get_trans():
+                    # NAS Container present in Msg
+                    Cont, err = parse_NAS5G(nasc[-1].get_val(), inner=inner)
+                    if err == 0:
+                        nasc.replace(nasc['V'], Cont)
+            #
+            if typ in (65, 79, 103, 104):
+                payct, payc = Msg['PayloadContainerType'], Msg['PayloadContainer']
+                if not payct.get_trans() and not payc.get_trans():
+                    # Payload container present in Msg
+                    conttype, contbuf = payct['V'].get_val(), payc['V'].get_val()
+                    Cont, err = parse_PayCont(conttype, contbuf)
+                    if err == 0:
+                        payc.replace(payc['V'], Cont)
         #
-        if typ in (65, 79, 103, 104):
-            payct, payc = Msg['PayloadContainerType'], Msg['PayloadContainer']
-            if not payct.get_trans() and not payc.get_trans():
-                # Payload container present in Msg
-                conttype, contbuf = payct['V'].get_val(), payc['V'].get_val()
-                cont = parse_NAS5GPayCont(conttype, contbuf)
-                if cont:
-                    payc.replace(payc['V'], cont)
+        elif pd == 46:
+            if typ in (193, 201, 203, 204):
+                ethc = Msg['PortMgmtInfoContainer']
+                if not ethc.get_trans():
+                    # PortMgmtInfoContainer present in Msg
+                    Cont, err = parse_PortMgmtInfoCont(ethc['V'].get_val())
+                    if err == 0:
+                        ethc.replace(ethc['V'], Cont)
     #
     return Msg, 0
 
 
-def parse_NAS5GPayCont(conttype, buf):
+def parse_PayCont(conttype, buf):
+    
     if conttype == 1 and len(buf) >= 2:
         # 5GSM
-        cont, err = parse_NAS5G(buf, inner=True)
-        if err == 0:
-            return cont
+        return parse_NAS5G(buf, inner=True)
+    
     elif conttype == 2 and len(buf) >= 2:
         # SMS PP
         pd, typ = unpack('>BB', buf[:2])
         pd &= 0xF
         if pd == 9 and typ in (1, 4, 16):
-            cont = PPSMSCPTypeClasses[typ]()
+            Cont = PPSMSCPTypeClasses[typ]()
             try:
-                cont.from_bytes(buf)
+                Cont.from_bytes(buf)
             except Exception:
-                pass
+                # error 96, invalid mandatory info
+                return None, 96
             else:
-                return cont
+                return Cont, 0
+        else:
+            # error 97, Message type non-existent or not implemented
+            return None, 97
+    
     elif conttype == 3:
         # LPP, TODO
         pass
+    
     elif conttype == 4 and len(buf) >= 17:
         # SOR
-        cont = SORTransparentContainer()
+        Cont = SORTransContainer()
         try:
-            cont.from_bytes(buf)
+            Cont.from_bytes(buf)
         except Exception:
-            pass
+            # error 96, invalid mandatory info
+            return None, 96
         else:
-            return cont
+            return Cont, 0
+    
     elif conttype == 5 and len(buf) >= 2:
         # UE policy
         _, typ = unpack('>BB', buf[:2])
         if 1 <= typ <= 4:
-            cont = FGUEPOLTypeClasses[typ]()
+            Cont = FGUEPOLTypeClasses[typ]()
             try:
-                cont.from_bytes(buf)
+                Cont.from_bytes(buf)
             except Exception:
-                pass
+                # error 96, invalid mandatory info
+                return None, 96
             else:
-                return cont
-    elif conttype == 6:
-        # UE params update, TODO
-        pass
+                return Cont, 0
+        else:
+            # error 97, Message type non-existent or not implemented
+            return None, 97
+    
+    elif conttype == 6 and len(buf) >= 17:
+        # UPU
+        Cont = UPUTransContainer()
+        try:
+            Cont.from_bytes(buf)
+        except Exception:
+            # error 96, invalid mandatory info
+            return None, 96
+        else:
+            return Cont, 0
+    
     elif conttype == 7:
-        # Loc services, TODO
+        # LCS, TODO
         pass
-    elif conttype == 8:
-        # CIoT, TODO
-        pass
+    
+    elif conttype == 8 and len(buf) >= 1:
+        # CIoT
+        Cont = CIoTSmallDataContainer()
+        try:
+            Cont.from_bytes(buf)
+        except Exception:
+            # error 96, invalid mandatory info
+            return None, 96
+        else:
+            return Cont, 0
+    
     elif conttype == 15 and len(buf) >= 1:
         # multi
-        cont = PayloadContainerMult()
+        Cont = PayloadContainerMult()
         try:
-            cont.from_bytes(buf)
+            Cont.from_bytes(buf)
         except Exception:
-            pass
+            # error 96, invalid mandatory info
+            return None, 96
         else:
             # parse each entry
             for entry in cont['Entries']:
-                econttype, ebuf = cont['Type'].get_val(), cont['Cont'].get_val()
-                econt = parse_NAS5GPayCont(econttype, ebuf)
-                if econt:
-                    entry.replace(entr['Cont'], econt)
-    return None
-        
+                e_conttype, e_buf = Cont['Type'].get_val(), Cont['Cont'].get_val()
+                e_cont, e_err = parse_NAS5GPayCont(e_conttype, e_buf)
+                if e_err == 0:
+                    entry.replace(entry['Cont'], e_cont)
+    
+    # error 96, invalid mandatory info
+    return None, 96
+
+
+def parse_PortMgmtInfoCont(buf):
+    try:
+        # this corresponds actually only to the layout of the 5GMM header
+        typ = unpack('>B', buf[:1])
+    except Exception:
+        # error 96, invalid mandatory info
+        return None, 96
+    if 1 <= typ <= 6:
+        Cont = FGTSNAFEthPortTypeClasses[typ]()
+        try:
+            Cont.from_bytes(buf)
+        except Exception:
+            # error 96, invalid mandatory info
+            return None, 96
+        else:
+            return Cont, 0
+    else:
+        # error 97, Message type non-existent or not implemented
+        return None, 97
+

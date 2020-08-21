@@ -70,7 +70,9 @@ class Layer3(Envelope):
     ENV_SEL_TRANS = False
     
     # this is to break the decoding routine when an unknown IE is encountered
+    # this needs to be set to True for 2G RR signaling message (due to rest octets)
     DEC_BREAK_ON_UNK_IE = False
+    
     
     
     def __init__(self, *args, **kw):
@@ -102,30 +104,38 @@ class Layer3(Envelope):
                     self._rest = ie
         else:
             for ie in self._content:
+                '''
                 if isinstance(ie, (Type1V, Type1TV)):
                     rawtype = integer_types
                 else:
                     rawtype = bytes_types
+                '''
                 if isinstance(ie, (Type1V, Type3V, Type4LV, Type6LVE)) and ie._name in val:
                     # setting value for non-optional IE
+                    ie.set_val({'V': val[ie._name]})
+                    '''
                     if isinstance(val[ie._name], rawtype):
                         # setting raw value
                         ie['V'].set_val(val[ie._name])
                     else:
                         # setting embedded IE structure
                         ie.set_IE(val=val[ie._name])
+                    '''
                 elif isinstance(ie, (Type1TV, Type3TV, Type4TLV, Type6TLVE)):
                     # optional IE
                     T = ie[0]
                     self._opts.append( (T.get_bl(), T(), ie) )
                     if ie._name in val:
                         ie._trans = False
+                        ie.set_val({'V': val[ie._name]})
+                        '''
                         if isinstance(val[ie._name], rawtype):
                             # setting raw value
                             ie['V'].set_val(val[ie._name])
                         else:
                             # setting embedded IE structure
                             ie.set_IE(val=val[ie._name])
+                        '''
                 elif isinstance(ie, Type2):
                     # optional Tag-only IE
                     self._opts.append( (8, ie[0](), ie) )
@@ -269,20 +279,25 @@ class IE(Envelope):
         elif isinstance(vals, (tuple, list)):
             for ind, elt in enumerate(self.__iter__()):
                 val = vals[ind]
-                if elt._name == 'V' and not isinstance(val, bytes_types):
+                if elt._name == 'V' and not isinstance(val, elt.TYPES):
+                    # keep value for setting the inner IE
                     ie_val = val
                 else:
+                    # set raw V value
                     elt.set_val(val)
         elif isinstance(vals, dict):
             for key, val in vals.items():
-                if key == 'V' and not isinstance(val, bytes_types):
+                if key == 'V' and not isinstance(val, self['V'].TYPES):
+                    # keep value for setting the inner IE
                     ie_val = val
                 else:
+                    # set raw V value
                     self.__setitem__(key, val)
         elif self._SAFE_STAT:
             raise(EltErr('{0} [set_val]: vals type is {1}, expecting None, tuple, list or dict'\
                   .format(self._name, type(vals).__name__)))
         if ie_val is not None:
+            # set the value to the inner IE
             self.set_IE(val=ie_val)
     
     def _from_char(self, char):

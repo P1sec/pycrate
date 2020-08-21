@@ -186,6 +186,8 @@ class SNSSAI(Envelope):
     
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         l = char.len_bit()
         if l == 8:
             self[1].set_trans(True)
@@ -683,6 +685,9 @@ _EMF_dict = {
 
 
 class FGSNetFeat(Envelope):
+    
+    ENV_SEL_TRANS = False
+    
     _name = '5GSNetFeat'
     _GEN = (
         Uint('MPSI', bl=1),
@@ -710,9 +715,9 @@ class FGSNetFeat(Envelope):
             return
         l = char.len_bit()
         if l <= 8:
-            self.disable_from(8)
+            self.disable_from('5G-UP-CIoT')
         elif l <= 16:
-            self.disable_from(13)
+            self.disable_from('spare')
         elif l > 24:
             # enables some spare bits at the end
             self[-1]._bl = l-24
@@ -1883,6 +1888,9 @@ class AddConfigInd(Envelope):
 #------------------------------------------------------------------------------#
 
 class FGSMCap(Envelope):
+    
+    ENV_SEL_TRANS = False
+    
     _name = '5GSMCap'
     _GEN = (
         Uint('TPMIC', bl=1),

@@ -105,7 +105,7 @@ class EthPortParam(Envelope):
     _GEN = (
         Uint16('Name', val=1, dic=EthPortParamName_dict),
         Uint16('Len'),
-        Buf('Value', val='', rep=REPR_HEX)
+        Buf('Value', val=b'', rep=REPR_HEX)
         )
     
     def __init__(self, *args, **kwargs):
@@ -253,7 +253,7 @@ class BridgeParam(Envelope):
     _GEN = (
         Uint16('Name', val=1, dic=BridgeParamName_dict),
         Uint16('Len'),
-        Buf('Value', val='', rep=REPR_HEX)
+        Buf('Value', val=b'', rep=REPR_HEX)
         )
     
     def __init__(self, *args, **kwargs):
@@ -291,7 +291,7 @@ class BridgeMgmtList(Sequence):
 #------------------------------------------------------------------------------#
 
 class BridgeMgmtCap(Array):
-    _GEN = Uint16('ParamName', val=1, dic=BridgeParamName_dict),
+    _GEN = Uint16('ParamName', val=1, dic=BridgeParamName_dict)
 
 
 #------------------------------------------------------------------------------#
@@ -359,7 +359,7 @@ class BridgeUpdRes(Envelope):
 class ManageEthPortCommand(Layer3E):
     _GEN = (
         Uint8('Type', val=1, dic=TSNAFEthPortMsgType_dict),
-        Type6LVE('EthPortMgmtList', val={'V':b''}, IE=EthPortMgmtList()
+        Type6LVE('EthPortMgmtList', val={'V':b''}, IE=EthPortMgmtList())
         )
 
 
