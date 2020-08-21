@@ -49,6 +49,9 @@ Currently none. Only the Python builtins and few internal modules of Python
 (e.g. os, system, re, struct) are required for most of the features. The json internal
 module is required for supporting the JSON API.
 
+The pycrate_ether/SCTP module can optionally use the external crc32c module from 
+ICRAR.
+
 The pycrate_mobile/TS24301_EMM and pycrate_mobile/TS24501_FGMM modules use 
 CryptoMobile as optional dependency to cipher / decipher LTE and 5G NAS messages.
 
