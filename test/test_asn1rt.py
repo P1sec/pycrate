@@ -1346,6 +1346,8 @@ def _test_rt_base():
     assert( Ost01.to_ber() == Ost01.to_ber_ws() == b'\x04\x10\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
     assert( Ost01.to_cer() == Ost01.to_cer_ws() == b'\x04\x10\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
     assert( Ost01.to_der() == Ost01.to_der_ws() == b'\x04\x10\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
+    assert( Ost01.to_oer() == Ost01.to_oer_ws() == b'\x10\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
+    assert( Ost01.to_coer() == Ost01.to_coer_ws() == b'\x10\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
     # decoding
     Ost01.from_aper(b'\x10\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10')
     assert( Ost01._val == b'\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
@@ -1372,7 +1374,16 @@ def _test_rt_base():
         assert( Ost01.to_jer() == '"0123456789abcdeffedcba9876543210"' )
         Ost01.from_jer('"0123456789abcdeffedcba9876543210"')
         assert(  Ost01._val == b'\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
-    
+    # OER/COER
+    Ost01.from_oer(b'\x10\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10')
+    assert( Ost01._val == b'\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
+    Ost01.from_oer_ws(b'\x10\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10')
+    assert( Ost01._val == b'\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
+    Ost01.from_coer(b'\x10\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10')
+    assert( Ost01._val == b'\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
+    Ost01.from_coer_ws(b'\x10\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10')
+    assert( Ost01._val == b'\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
+
     # Nus01 ::= NumericString
     Nus01 = Mod['Nus01']
     Nus01.from_asn1('"01 02 03 04 05"')

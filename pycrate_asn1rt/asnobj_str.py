@@ -1803,6 +1803,117 @@ Specific constraints attributes:
                 else:
                     return {Cont.TYPE: val}
 
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _from_oer(self, char):
+        if self._const_sz:
+            if (self._const_sz._ev is None) and (self._const_sz.ra == 1):
+                # Fixed
+                self._val = char.get_bytes(self._const_sz.lb * 8)
+                return
+        elif self._const_cont:
+            # Contained by constraint
+            Cont = self._get_val_obj(self._const_cont._typeref.called)
+            Cont.from_oer(char)
+            self._val = (self._const_cont._typeref.called, Cont._val)
+            return
+
+        # Variable size constraint
+        l_val = ASN1CodecOER.decode_length_determinant(char)
+        self._val = char.get_bytes(l_val * 8)
+
+    def _from_oer_ws(self, char):
+        if self._const_sz:
+            if (self._const_sz._ev is None) and (self._const_sz.ra == 1):
+                # Fixed
+                val = Buf('V', bl=self._const_sz.lb * 8)
+                val._from_char(char)
+                self._val = val.get_val()
+                self._struct = Envelope(self._name, GEN=(val,))
+                return
+        elif self._const_cont:
+            # Contained by constraint
+            Cont = self._get_val_obj(self._const_cont._typeref.called)
+            Cont.from_oer_ws(char)
+            _gen = Cont._struct
+            self._val = (self._const_cont._typeref.called, Cont._val)
+            self._struct = Envelope(self._name, GEN=(_gen,))
+            return
+
+        # Variable size constraints
+        l_val, _gen = ASN1CodecOER.decode_length_determinant_ws(char)
+        val = Buf('V', bl=8 * l_val)
+        val._from_char(char)
+        _gen.append(val)
+        self._val = val.get_val()
+        self._struct = Envelope(self._name, GEN=(_gen,))
+
+    def __to_coer_buf(self):
+        Cont = self._get_val_obj(self._val[0])
+        if Cont == self._const_cont and self._const_cont_enc is not None:
+            # TODO: different codec to be used
+            raise (
+                ASN1NotSuppErr('{0}: specific CONTAINING encoder unhandled' \
+                               .format(self.fullname())))
+        Cont._val = self._val[1]
+        buf = Cont.to_coer()
+        return buf, Cont
+
+    def __to_coer_ws_buf(self):
+        Cont = self._get_val_obj(self._val[0])
+        if Cont == self._const_cont and self._const_cont_enc is not None:
+            # TODO: different codec to be used
+            raise (
+                ASN1NotSuppErr('{0}: specific CONTAINING encoder unhandled' \
+                               .format(self.fullname())))
+        Cont._val = self._val[1]
+        buf = Cont.to_coer_ws()
+        return buf, Cont
+
+    def _to_oer(self):
+        if not isinstance(self._val, bytes_types):
+            buf, wrapped = self.__to_coer_buf()
+        else:
+            buf, wrapped = self._val, None
+
+        try:
+            if (((self._const_sz._ev is None) and
+                    (self._const_sz.lb == self._const_sz.ub)) or
+                    (self._const_cont is not None)):
+                return [(T_BYTES, buf, len(buf)*8)]
+        except AttributeError:
+            pass
+
+        # Means that it has variable constraint or no constraint
+        GEN = ASN1CodecOER.encode_length_determinant(len(buf))
+        GEN.append((T_BYTES, buf, len(buf) * 8))
+        return GEN
+
+    def _to_oer_ws(self):
+        if not isinstance(self._val, bytes_types):
+            buf, wrapped = self.__to_coer_ws_buf()
+        else:
+            buf, wrapped = self._val, None
+
+        _gen = Buf('V', val=buf, bl=len(buf)*8)
+
+        try:
+            if (((self._const_sz._ev is None) and
+                 (self._const_sz.lb == self._const_sz.ub)) or
+                    (self._const_cont)):
+                self._struct = Envelope(self._name,
+                                        GEN=(_gen,))
+                return self._struct
+        except AttributeError:
+            pass
+
+        # Means that it has variable constraint or no constraint
+        GEN = ASN1CodecOER.encode_length_determinant_ws(len(buf))
+        GEN.append(_gen)
+        self._struct = Envelope(self._name, GEN=(GEN,))
+        return self._struct
 
 #------------------------------------------------------------------------------#
 # All *String
