@@ -1252,6 +1252,8 @@ def _test_rt_base():
     assert( Bst01.to_ber() == Bst01.to_ber_ws() == b'\x03\x04\x06<\x96\x80' )
     assert( Bst01.to_cer() == Bst01.to_cer_ws() == b'\x03\x04\x06<\x96\x80' )
     assert( Bst01.to_der() == Bst01.to_der_ws() == b'\x03\x04\x06<\x96\x80' )
+    assert( Bst01.to_oer() == Bst01.to_oer_ws() == b'\x04\x06<\x96\x80' )
+    assert( Bst01.to_coer() == Bst01.to_coer_ws() == b'\x04\x06<\x96\x80' )
     # decoding
     Bst01.from_aper(b'\x12<\x96\x80')
     assert( Bst01._val == (62042, 18) )
@@ -1278,7 +1280,16 @@ def _test_rt_base():
         assert( Bst01._to_jval() == {'length': 18, 'value': '3c9680'} )
         Bst01.from_jer('{"length": 18, "value": "3c9680"}')
         assert(  Bst01._val == (62042, 18) )
-    
+    # OER/COER
+    Bst01.from_oer(b'\x04\x06<\x96\x80')
+    assert( Bst01._val == (62042, 18) )
+    Bst01.from_oer_ws(b'\x04\x06<\x96\x80')
+    assert( Bst01._val == (62042, 18) )
+    Bst01.from_coer(b'\x04\x06<\x96\x80')
+    assert( Bst01._val == (62042, 18) )
+    Bst01.from_coer_ws(b'\x04\x06<\x96\x80')
+    assert( Bst01._val == (62042, 18) )
+
     # Bst03 ::= BIT STRING (SIZE (0..24, ...))
     Bst03 = Mod['Bst03']
     Bst03.from_asn1('\'00111100100101101010010100001111\'B')
@@ -1288,6 +1299,8 @@ def _test_rt_base():
     assert( Bst03.to_ber() == Bst03.to_ber_ws() == b'\x03\x05\x00<\x96\xa5\x0f' )
     assert( Bst03.to_cer() == Bst03.to_cer_ws() == b'\x03\x05\x00<\x96\xa5\x0f' )
     assert( Bst03.to_der() == Bst03.to_der_ws() == b'\x03\x05\x00<\x96\xa5\x0f' )
+    assert( Bst03.to_oer() == Bst03.to_oer_ws() == b'\x05\x00<\x96\xa5\x0f' )
+    assert( Bst03.to_coer() == Bst03.to_coer_ws() == b'\x05\x00<\x96\xa5\x0f' )
     # decoding
     Bst03.from_aper(b'\x80 <\x96\xa5\x0f')
     assert( Bst03._val == (1016505615, 32) )
@@ -1314,7 +1327,16 @@ def _test_rt_base():
         assert( Bst03._to_jval() == {'length': 32, 'value': '3c96a50f'} )
         Bst03.from_jer('{"length": 32, "value": "3c96a50f"}')
         assert( Bst03._val == (1016505615, 32) )
-    
+    # OER/COER
+    Bst03.from_oer(b'\x05\x00<\x96\xa5\x0f')
+    assert( Bst03._val == (1016505615, 32) )
+    Bst03.from_oer_ws(b'\x05\x00<\x96\xa5\x0f')
+    assert( Bst03._val == (1016505615, 32) )
+    Bst03.from_coer(b'\x05\x00<\x96\xa5\x0f')
+    assert( Bst03._val == (1016505615, 32) )
+    Bst03.from_coer_ws(b'\x05\x00<\x96\xa5\x0f')
+    assert( Bst03._val == (1016505615, 32) )
+
     # Ost01 ::= OCTET STRING
     Ost01 = Mod['Ost01']
     Ost01.from_asn1('\'0123456789ABCDEFFEDCBA9876543210\'H')
