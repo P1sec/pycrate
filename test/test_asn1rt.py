@@ -1337,6 +1337,53 @@ def _test_rt_base():
     Bst03.from_coer_ws(b'\x05\x00<\x96\xa5\x0f')
     assert( Bst03._val == (1016505615, 32) )
 
+    # Bst06 ::= BIT STRING (SIZE (16))
+    Bst06 = Mod['Bst06']
+    Bst06.from_asn1('\'0011110010010110\'B')
+    # encoding
+    assert( Bst06.to_aper() == Bst06.to_aper_ws() == b'<\x96' )
+    assert( Bst06.to_uper() == Bst06.to_uper_ws() == b'<\x96' )
+    assert( Bst06.to_ber() == Bst06.to_ber_ws() == b'\x03\x03\x00<\x96')
+    assert( Bst06.to_cer() == Bst06.to_cer_ws() == b'\x03\x03\x00<\x96' )
+    assert( Bst06.to_der() == Bst06.to_der_ws() == b'\x03\x03\x00<\x96')
+    assert( Bst06.to_oer() == Bst06.to_oer_ws() == b'<\x96' )
+    assert( Bst06.to_coer() == Bst06.to_coer_ws() == b'<\x96' )
+    # decoding
+    Bst06.from_aper(b'<\x96')
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_aper_ws(b'<\x96')
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_uper(b'<\x96')
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_uper_ws(b'<\x96')
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_ber(b'\x03\x03\x00<\x96')
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_ber_ws(b'\x03\x03\x00<\x96')
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_cer(b'\x03\x03\x00<\x96')
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_cer_ws(b'\x03\x03\x00<\x96')
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_der(b'\x03\x03\x00<\x96')
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_der_ws(b'\x03\x03\x00<\x96')
+    assert( Bst06._val == (15510, 16) )
+    # jer
+    if _with_json:
+        assert( Bst06._to_jval() == "'3c96'" )
+        Bst06.from_jer("'3c96'")
+        assert( Bst06._val == (15510, 16) )
+    # OER/COER
+    Bst06.from_oer(b'<\x96' )
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_oer_ws(b'<\x96' )
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_coer(b'<\x96' )
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_coer_ws(b'<\x96' )
+    assert( Bst06._val == (15510, 16) )
+
     # Ost01 ::= OCTET STRING
     Ost01 = Mod['Ost01']
     Ost01.from_asn1('\'0123456789ABCDEFFEDCBA9876543210\'H')
@@ -1383,6 +1430,53 @@ def _test_rt_base():
     assert( Ost01._val == b'\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
     Ost01.from_coer_ws(b'\x10\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10')
     assert( Ost01._val == b'\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
+
+    # Ost06 ::= OCTET STRING (SIZE (16))
+    Ost06 = Mod['Ost06']
+    Ost06.from_asn1('\'01234567890123456789012345678901\'H')
+    # encoding
+    assert( Ost06.to_aper() == Ost06.to_aper_ws() == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06.to_uper() == Ost06.to_uper_ws() == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01' )
+    assert( Ost06.to_ber() == Ost06.to_ber_ws() == b'\x04\x10\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06.to_cer() == Ost06.to_cer_ws() == b'\x04\x10\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06.to_der() == Ost06.to_der_ws() == b'\x04\x10\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01' )
+    assert( Ost06.to_oer() == Ost06.to_oer_ws() == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01' )
+    assert( Ost06.to_coer() == Ost06.to_coer_ws() == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01' )
+    # decoding
+    Ost06.from_aper(b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_aper_ws(b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_uper(b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_uper_ws(b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_ber(b'\x04\x10\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_ber_ws(b'\x04\x10\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_cer(b'\x04\x10\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_cer_ws(b'\x04\x10\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_der(b'\x04\x10\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_der_ws(b'\x04\x10\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    # jer
+    if _with_json:
+        assert( Ost06.to_jer() == '"01234567890123456789012345678901"')
+        Ost06.from_jer('"01234567890123456789012345678901"')
+        assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    # OER/COER
+    Ost06.from_oer(b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_oer_ws(b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_coer(b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_coer_ws(b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
 
     # Nus01 ::= NumericString
     Nus01 = Mod['Nus01']

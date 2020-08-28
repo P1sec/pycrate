@@ -1078,7 +1078,7 @@ Specific constraints attributes:
         if self._const_sz:
             if (self._const_sz._ev is None) and (self._const_sz.ra == 1):
                 # Fixed size constrains
-                return buf
+                return _gen
 
         # Variable size constrains
         GEN = ASN1CodecOER.encode_length_determinant(len(buf)+1)
