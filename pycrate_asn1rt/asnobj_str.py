@@ -2740,6 +2740,108 @@ Virtual parent for any ASN.1 *String object
         def _to_jval(self):
             return self._val
 
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _from_oer(self, char):
+        try:
+            if ((self._const_sz.rdyn == 0) and
+                    (self._const_sz._ev is None) and
+                    (self._clen is not None)):
+                # Fixed size
+                b_len = round_p2(self._clen) * self._const_sz.lb
+                self._val = self._decode_oer_cont(char.get_bytes(b_len))
+                return
+        except AttributeError:
+            pass
+
+        # All other variants
+        l_det = ASN1CodecOER.decode_length_determinant(char)
+        self._val = self._decode_oer_cont(char.get_bytes(l_det * 8))
+
+    def _from_oer_ws(self, char):
+        try:
+            if ((self._const_sz.rdyn == 0) and
+                    (self._const_sz._ev is None) and
+                    (self._clen is not None)):
+                # Fixed size
+                b_len = round_p2(self._clen) * self._const_sz.lb
+                buf = Buf('V', bl=b_len)
+                buf._from_char(char)
+                self._struct = Envelope(self._name, GEN=(buf,))
+                self._val = self._decode_oer_cont(buf.to_bytes())
+                return
+        except AttributeError:
+            pass
+
+        # All other variants
+        l_det, _gen = ASN1CodecOER.decode_length_determinant_ws(char)
+        buf = Buf('V', bl=l_det*8)
+        buf._from_char(char)
+        self._struct = Envelope(self._name, GEN=(_gen,))
+        self._val = self._decode_oer_cont(buf.to_bytes())
+
+    def _decode_oer_cont(self, content_bytes):
+        if self._codec is None:
+            raise(ASN1NotSuppErr('{0}: ISO 2022 codec not supported' \
+                                 .format(self.fullname())))
+        try:
+            return content_bytes.decode(self._codec)
+        except Exception as err:
+            raise(ASN1OERDecodeErr('{0}: invalid character, Python codec error, {1}' \
+                                   .format(self.fullname(), err)))
+
+    def _encode_oer_cont(self):
+        if self._codec is None:
+            raise(ASN1NotSuppErr('{0}: ISO 2022 codec not supported' \
+                                 .format(self.fullname())))
+        try:
+            return self._val.encode(self._codec)
+        except Exception as err:
+            raise(ASN1OEREncodeErr('{0}: invalid character, Python codec error, {1}' \
+                                   .format(self.fullname(), err)))
+
+    def _to_oer(self):
+        buf = self._encode_oer_cont()
+        l_buf = len(buf)
+        buf = [(T_BYTES, buf, l_buf * 8)]
+
+        try:
+            if ((self._const_sz.rdyn == 0) and
+                    (self._const_sz._ev is None) and
+                    (self._clen is not None)):
+                # Fixed size
+                return buf
+        except AttributeError:
+            pass
+
+        # All other variants
+        GEN = ASN1CodecOER.encode_length_determinant(l_buf)
+        GEN.extend(buf)
+        return GEN
+
+    def _to_oer_ws(self):
+        buf = self._encode_oer_cont()
+        l_buf = len(buf)
+        buf = Buf('V', val=buf, bl=l_buf * 8)
+
+        try:
+            if ((self._const_sz.rdyn == 0) and
+                    (self._const_sz._ev is None) and
+                    (self._clen is not None)):
+                # Fixed size
+                self._struct = Envelope(self._name, GEN=(buf,))
+                return self._struct
+        except AttributeError:
+            pass
+
+        # All other variants
+        GEN = ASN1CodecOER.encode_length_determinant_ws(l_buf)
+        GEN.append(buf)
+        self._struct = Envelope(self._name, GEN=(GEN,))
+        return self._struct
+
 
 # Python does not provide a complete support for ISO2022 encoding
 # so here, we use iso2022_jp_2004

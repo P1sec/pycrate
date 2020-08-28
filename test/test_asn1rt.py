@@ -1487,6 +1487,8 @@ def _test_rt_base():
     assert( Nus01.to_ber() == Nus01.to_ber_ws() == b'\x12\x0e01 02 03 04 05' )
     assert( Nus01.to_cer() == Nus01.to_cer_ws() == b'\x12\x0e01 02 03 04 05' )
     assert( Nus01.to_der() == Nus01.to_der_ws() == b'\x12\x0e01 02 03 04 05' )
+    assert( Nus01.to_oer() == Nus01.to_oer_ws() == b'\x0e01 02 03 04 05' )
+    assert( Nus01.to_coer() == Nus01.to_coer_ws() == b'\x0e01 02 03 04 05' )
     # decoding
     Nus01.from_aper(b'\x0e\x12\x010\x14\x01P\x16')
     assert( Nus01._val == '01 02 03 04 05' )
@@ -1513,7 +1515,16 @@ def _test_rt_base():
         assert( Nus01.to_jer() == '"01 02 03 04 05"' )
         Nus01.from_jer('"01 02 03 04 05"')
         assert( Nus01._val == '01 02 03 04 05' )
-    
+    # OER/COER
+    Nus01.from_oer(b'\x0e01 02 03 04 05')
+    assert( Nus01._val == '01 02 03 04 05' )
+    Nus01.from_oer_ws(b'\x0e01 02 03 04 05')
+    assert( Nus01._val == '01 02 03 04 05' )
+    Nus01.from_coer(b'\x0e01 02 03 04 05')
+    assert( Nus01._val == '01 02 03 04 05' )
+    Nus01.from_coer_ws(b'\x0e01 02 03 04 05')
+    assert( Nus01._val == '01 02 03 04 05' )
+
     # Nus02 ::= NumericString (FROM ("0123"))
     Nus02 = Mod['Nus02']
     Nus02.from_asn1('"00113322"')
@@ -1523,6 +1534,8 @@ def _test_rt_base():
     assert( Nus02.to_ber() == Nus02.to_ber_ws() == b'\x12\x0800113322' )
     assert( Nus02.to_cer() == Nus02.to_cer_ws() == b'\x12\x0800113322' )
     assert( Nus02.to_der() == Nus02.to_der_ws() == b'\x12\x0800113322' )
+    assert( Nus02.to_oer() == Nus02.to_oer_ws() == b'\x0800113322' )
+    assert( Nus02.to_coer() == Nus02.to_coer_ws() == b'\x0800113322' )
     # decoding
     Nus02.from_aper(b'\x08\x05\xfa')
     assert( Nus02._val == '00113322' )
@@ -1543,8 +1556,16 @@ def _test_rt_base():
     Nus02.from_der(b'\x12\x0800113322')
     assert( Nus02._val == '00113322' )
     Nus02.from_der_ws(b'\x12\x0800113322')
-    assert( Nus02._val == '00113322' ) 
-    
+    assert( Nus02._val == '00113322' )
+    Nus02.from_oer(b'\x0800113322')
+    assert( Nus02._val == '00113322' )
+    Nus02.from_oer_ws(b'\x0800113322')
+    assert( Nus02._val == '00113322' )
+    Nus02.from_coer(b'\x0800113322')
+    assert( Nus02._val == '00113322' )
+    Nus02.from_coer_ws(b'\x0800113322')
+    assert( Nus02._val == '00113322' )
+
     # Prs01 ::= PrintableString
     Prs01 = Mod['Prs01']
     Prs01.from_asn1('"ambiguite"')
@@ -1554,6 +1575,8 @@ def _test_rt_base():
     assert( Prs01.to_ber() == Prs01.to_ber_ws() == b'\x13\tambiguite' )
     assert( Prs01.to_cer() == Prs01.to_cer_ws() == b'\x13\tambiguite' )
     assert( Prs01.to_der() == Prs01.to_der_ws() == b'\x13\tambiguite' )
+    assert( Prs01.to_oer() == Prs01.to_oer_ws() == b'\tambiguite' )
+    assert( Prs01.to_coer() == Prs01.to_coer_ws() == b'\tambiguite' )
     # decoding
     Prs01.from_aper(b'\tambiguite')
     assert( Prs01._val == 'ambiguite' )
@@ -1574,8 +1597,16 @@ def _test_rt_base():
     Prs01.from_der(b'\x13\tambiguite')
     assert( Prs01._val == 'ambiguite' )
     Prs01.from_der_ws(b'\x13\tambiguite')
-    assert( Prs01._val == 'ambiguite' ) 
-    
+    assert( Prs01._val == 'ambiguite' )
+    Prs01.from_oer(b'\tambiguite')
+    assert( Prs01._val == 'ambiguite' )
+    Prs01.from_oer_ws(b'\tambiguite')
+    assert( Prs01._val == 'ambiguite' )
+    Prs01.from_coer(b'\tambiguite')
+    assert( Prs01._val == 'ambiguite' )
+    Prs01.from_coer_ws(b'\tambiguite')
+    assert( Prs01._val == 'ambiguite' )
+
     # Prs02 ::= PrintableString (FROM ("ATCG"))
     Prs02 = Mod['Prs02']
     Prs02.from_asn1('"ATCGATTGAGCTCTAGCG"')
@@ -1585,6 +1616,8 @@ def _test_rt_base():
     assert( Prs02.to_ber() == Prs02.to_ber_ws() == b'\x13\x12ATCGATTGAGCTCTAGCG' )
     assert( Prs02.to_cer() == Prs02.to_cer_ws() == b'\x13\x12ATCGATTGAGCTCTAGCG' )
     assert( Prs02.to_der() == Prs02.to_der_ws() == b'\x13\x12ATCGATTGAGCTCTAGCG' )
+    assert( Prs02.to_oer() == Prs02.to_oer_ws() == b'\x12ATCGATTGAGCTCTAGCG' )
+    assert( Prs02.to_coer() == Prs02.to_coer_ws() == b'\x12ATCGATTGAGCTCTAGCG' )
     # decoding
     Prs02.from_aper(b"\x126>'r`")
     assert( Prs02._val == 'ATCGATTGAGCTCTAGCG' )
@@ -1606,7 +1639,15 @@ def _test_rt_base():
     assert( Prs02._val == 'ATCGATTGAGCTCTAGCG' )
     Prs02.from_der_ws(b'\x13\x12ATCGATTGAGCTCTAGCG')
     assert( Prs02._val == 'ATCGATTGAGCTCTAGCG' )
-    
+    Prs02.from_oer(b'\x12ATCGATTGAGCTCTAGCG')
+    assert( Prs02._val == 'ATCGATTGAGCTCTAGCG' )
+    Prs02.from_oer_ws(b'\x12ATCGATTGAGCTCTAGCG')
+    assert( Prs02._val == 'ATCGATTGAGCTCTAGCG' )
+    Prs02.from_coer(b'\x12ATCGATTGAGCTCTAGCG')
+    assert( Prs02._val == 'ATCGATTGAGCTCTAGCG' )
+    Prs02.from_coer_ws(b'\x12ATCGATTGAGCTCTAGCG')
+    assert( Prs02._val == 'ATCGATTGAGCTCTAGCG' )
+
     # Ias01 ::= IA5String
     Ias01 = Mod['Ias01']
     Ias01.from_asn1('"ambiguite"')
@@ -1616,6 +1657,8 @@ def _test_rt_base():
     assert( Ias01.to_ber() == Ias01.to_ber_ws() == b'\x16\tambiguite' )
     assert( Ias01.to_cer() == Ias01.to_cer_ws() == b'\x16\tambiguite' )
     assert( Ias01.to_der() == Ias01.to_der_ws() == b'\x16\tambiguite' )
+    assert( Ias01.to_oer() == Ias01.to_oer_ws() == b'\tambiguite' )
+    assert( Ias01.to_coer() == Ias01.to_coer_ws() == b'\tambiguite' )
     # decoding
     Ias01.from_aper(b'\tambiguite')
     assert( Ias01._val == 'ambiguite' )
@@ -1637,7 +1680,56 @@ def _test_rt_base():
     assert( Ias01._val == 'ambiguite' )
     Ias01.from_der_ws(b'\x16\tambiguite')
     assert( Ias01._val == 'ambiguite' )
-    
+    Ias01.from_oer(b'\tambiguite')
+    assert( Ias01._val == 'ambiguite' )
+    Ias01.from_oer_ws(b'\tambiguite')
+    assert( Ias01._val == 'ambiguite' )
+    Ias01.from_coer(b'\tambiguite')
+    assert( Ias01._val == 'ambiguite' )
+    Ias01.from_coer_ws(b'\tambiguite')
+    assert( Ias01._val == 'ambiguite' )
+
+    # Ias04 ::= IA5String (SIZE (32))
+    Ias04 = Mod['Ias04']
+    Ias04.from_asn1('"This is a sentence of 32 chars:)"')
+    # encoding
+    assert( Ias04.to_aper() == Ias04.to_aper_ws() == b'This is a sentence of 32 chars:)' )
+    assert( Ias04.to_uper() == Ias04.to_uper_ws() == b'\xa9\xa3O4\x1ay\xa0\xc2\x83\x9e]\xdd2\xee\xc7\x95\x06\xfc\xc8\x19\xb2A\x8fF\x1e\\\xdd)' )
+    assert( Ias04.to_ber() == Ias04.to_ber_ws() == b'\x16 This is a sentence of 32 chars:)' )
+    assert( Ias04.to_cer() == Ias04.to_cer_ws() == b'\x16 This is a sentence of 32 chars:)' )
+    assert( Ias04.to_der() == Ias04.to_der_ws() == b'\x16 This is a sentence of 32 chars:)' )
+    assert( Ias04.to_oer() == Ias04.to_oer_ws() == b'This is a sentence of 32 chars:)')
+    assert( Ias04.to_coer() == Ias04.to_coer_ws() == b'This is a sentence of 32 chars:)')
+    # decoding
+    Ias04.from_aper(b'This is a sentence of 32 chars:)')
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_aper_ws(b'This is a sentence of 32 chars:)')
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_uper(b'\xa9\xa3O4\x1ay\xa0\xc2\x83\x9e]\xdd2\xee\xc7\x95\x06\xfc\xc8\x19\xb2A\x8fF\x1e\\\xdd)')
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_uper_ws(b'\xa9\xa3O4\x1ay\xa0\xc2\x83\x9e]\xdd2\xee\xc7\x95\x06\xfc\xc8\x19\xb2A\x8fF\x1e\\\xdd)')
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_ber(b'\x16 This is a sentence of 32 chars:)' )
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_ber_ws(b'\x16 This is a sentence of 32 chars:)' )
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_cer(b'\x16 This is a sentence of 32 chars:)' )
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_cer_ws(b'\x16 This is a sentence of 32 chars:)' )
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_der(b'\x16 This is a sentence of 32 chars:)' )
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_der_ws(b'\x16 This is a sentence of 32 chars:)' )
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_oer(b'This is a sentence of 32 chars:)')
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_oer_ws(b'This is a sentence of 32 chars:)')
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_coer(b'This is a sentence of 32 chars:)')
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_coer_ws(b'This is a sentence of 32 chars:)')
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+
     # U8s01 ::= UTF8String
     U8s01 = Mod['U8s01']
     U8s01.from_asn1(u'"ambiguïté"')
@@ -1647,6 +1739,8 @@ def _test_rt_base():
     assert( U8s01.to_ber() == U8s01.to_ber_ws() == b'\x0c\x0bambigu\xc3\xaft\xc3\xa9' )
     assert( U8s01.to_cer() == U8s01.to_cer_ws() == b'\x0c\x0bambigu\xc3\xaft\xc3\xa9' )
     assert( U8s01.to_der() == U8s01.to_der_ws() == b'\x0c\x0bambigu\xc3\xaft\xc3\xa9' )
+    assert( U8s01.to_oer() == U8s01.to_oer_ws() == b'\x0bambigu\xc3\xaft\xc3\xa9' )
+    assert( U8s01.to_coer() == U8s01.to_coer_ws() == b'\x0bambigu\xc3\xaft\xc3\xa9' )
     # decoding
     U8s01.from_aper(b'\x0bambigu\xc3\xaft\xc3\xa9')
     assert( U8s01._val == u'ambiguïté' )
@@ -1673,7 +1767,16 @@ def _test_rt_base():
         assert( U8s01.to_jer() == '"ambigu\\u00eft\\u00e9"' )
         U8s01.from_jer('"ambigu\\u00eft\\u00e9"')
         assert( U8s01._val == u'ambiguïté' )
-    
+    # OER/COER
+    U8s01.from_oer(b'\x0bambigu\xc3\xaft\xc3\xa9')
+    assert( U8s01._val == u'ambiguïté' )
+    U8s01.from_oer_ws(b'\x0bambigu\xc3\xaft\xc3\xa9')
+    assert( U8s01._val == u'ambiguïté' )
+    U8s01.from_coer(b'\x0bambigu\xc3\xaft\xc3\xa9')
+    assert( U8s01._val == u'ambiguïté' )
+    U8s01.from_coer_ws(b'\x0bambigu\xc3\xaft\xc3\xa9')
+    assert( U8s01._val == u'ambiguïté' )
+
     # Uns01 ::= UniversalString
     Uns01 = Mod['Uns01']
     Uns01.from_asn1(u'"ambiguïté"')
@@ -1683,6 +1786,8 @@ def _test_rt_base():
     assert( Uns01.to_ber() == Uns01.to_ber_ws() == b'\x1c$\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9' )
     assert( Uns01.to_cer() == Uns01.to_cer_ws() == b'\x1c$\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9' )
     assert( Uns01.to_der() == Uns01.to_der_ws() == b'\x1c$\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9' )
+    assert( Uns01.to_oer() == Uns01.to_oer_ws() == b'$\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9' )
+    assert( Uns01.to_coer() == Uns01.to_coer_ws() == b'$\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9' )
     # decoding
     Uns01.from_aper(b'\t\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9')
     assert( Uns01._val == u'ambiguïté' )
@@ -1704,7 +1809,15 @@ def _test_rt_base():
     assert( Uns01._val == u'ambiguïté' )
     Uns01.from_der_ws(b'\x1c$\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9')
     assert( Uns01._val == u'ambiguïté' )
-    
+    Uns01.from_oer(b'$\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9')
+    assert( Uns01._val == u'ambiguïté' )
+    Uns01.from_oer_ws(b'$\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9')
+    assert( Uns01._val == u'ambiguïté' )
+    Uns01.from_coer(b'$\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9')
+    assert( Uns01._val == u'ambiguïté' )
+    Uns01.from_coer_ws(b'$\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9')
+    assert( Uns01._val == u'ambiguïté' )
+
     # Uti01 ::= UTCTime
     Uti01 = Mod['Uti01']
     Uti01.from_asn1('"1705181130Z"')
