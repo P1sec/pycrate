@@ -580,6 +580,122 @@ Specific attributes:
                 ret = {ident[5:] : self._val[1]}
             return ret
 
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _to_oer(self):
+        if self._val[0][:5] == '_ext_':
+            # unknown extension re-encoding
+            cl, _, tval = int(self._val[0][5:6]), int(self._val[0][6:7]), int(self._val[0][7:])
+            try:
+                return ASN1CodecOER.encode_open_type(
+                    ASN1CodecOER.TagClassLUT[cl], tval, self._val[1])
+            except KeyError:
+                ASN1OEREncodeErr("Unknown tag class: {0}".format(cl))
+        else:
+            # Known choice
+            try:
+                tag_class, tag = next(t for t, ident in self._cont_tags.items()
+                                      if ident == self._val[0])
+                tag_class = ASN1CodecOER.TagClassLUT[tag_class]
+            except StopIteration:
+                raise ASN1OEREncodeErr("Unknown tags for item {0}".format(
+                    self._val[0]))
+            except KeyError:
+                ASN1OEREncodeErr("Unknown tag class: {0}".format(tag_class))
+
+            # Tag
+            temp = ASN1CodecOER.encode_tag(tag, tag_class)
+
+            # Value
+            Cho = self._cont[self._val[0]]
+            Cho._val = self._val[1]
+            temp.extend(Cho._to_oer())
+            return temp
+
+    def _to_oer_ws(self):
+        if self._val[0][:5] == '_ext_':
+            # unknown extension re-encoding
+            cl, _, tval = int(self._val[0][5:6]), int(self._val[0][6:7]), int(self._val[0][7:])
+            try:
+                _gen= ASN1CodecOER.encode_open_type_ws(
+                    ASN1CodecOER.TagClassLUT[cl], tval, self._val[1])
+                return Envelope(self._name, GEN=(_gen,))
+            except KeyError:
+                ASN1OEREncodeErr("Unknown tag class: {0}".format(cl))
+        else:
+            # Known choice
+            try:
+                tag_class, tag = next(t for t, ident in self._cont_tags.items()
+                                      if ident == self._val[0])
+                tag_class = ASN1CodecOER.TagClassLUT[tag_class]
+            except StopIteration:
+                raise ASN1OEREncodeErr("Unknown tags for item {0}".format(
+                    self._val[0]))
+            except KeyError:
+                ASN1OEREncodeErr("Unknown tag class: {0}".format(tag_class))
+
+            # Tag
+            temp = ASN1CodecOER.encode_tag_ws(tag, tag_class)
+
+            # Value
+            Cho = self._cont[self._val[0]]
+            Cho._val = self._val[1]
+            temp.extend(Cho._to_oer_ws())
+            return Envelope(self._name, GEN=tuple(temp))
+
+    def _from_oer(self, char):
+        tag_class, tag = ASN1CodecOER.decode_tag(char)
+        tag_class = ASN1CodecOER.TagClassLUT[tag_class]
+        try:
+            ident = self._cont_tags[(tag_class, tag)]
+            Cho = self._cont[ident]
+            _par = Cho._parent
+            Cho._parent = self
+            Cho.from_oer(char)
+            Cho._parent = _par
+            self._val = (ident, Cho._val)
+            return
+        except KeyError:
+            if self._ext is not None:
+                # It's extension type
+                # NOTE: There is no way how to resolve the primitive/constructed
+                #       flag in OER, as far as I understand it.
+                ident = "_ext_{0}{1}{2}".format(tag_class, 0, tag)
+                l_val = ASN1CodecOER.decode_length_determinant(char)
+                val_bytes = char.get_bytes(l_val*8)
+                self._val = (ident, val_bytes)
+
+    def _from_oer_ws(self, char):
+        tag_class, tag, tag_struct = ASN1CodecOER.decode_tag_ws(char)
+        tag_class = ASN1CodecOER.TagClassLUT[tag_class]
+        _gen = [tag_struct]
+        try:
+            ident = self._cont_tags[(tag_class, tag)]
+            Cho = self._cont[ident]
+            _par = Cho._parent
+            Cho._parent = self
+            Cho.from_oer_ws(char)
+            Cho._parent = _par
+            _gen.extend(Cho._struct)
+            self._struct = Envelope(self._name, GEN=tuple(_gen) )
+            self._val = (ident, Cho._val)
+            return
+        except KeyError:
+            if self._ext is not None:
+                # It's extension type
+                # NOTE: There is no way how to resolve the primitive/constructed
+                #       flag in OER, as far as I understand it.
+                ident = "_ext_{0}{1}{2}".format(tag_class, 0, tag)
+                l_val, l_struct = ASN1CodecOER.decode_length_determinant_ws(char)
+                _gen.append(l_struct)
+                val_struct = Buf('V', bl=l_val * 8)
+                val_struct._from_char(char)
+                _gen.append(val_struct)
+                val = val_struct.get_val()
+                self._struct = Envelope(self._name, GEN=tuple(_gen))
+                self._val = (ident, val)
 
 #------------------------------------------------------------------------------#
 # SEQUENCE and SET

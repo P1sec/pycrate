@@ -1889,6 +1889,8 @@ def _test_rt_base():
     assert( Cho01.to_ber() == Cho01.to_ber_ws() == b'\xaa\x07\x7fP\x04\x02\x02\x07\xd0' )
     assert( Cho01.to_cer() == Cho01.to_cer_ws() == b'\xaa\x80\x7fP\x80\x02\x02\x07\xd0\x00\x00\x00\x00' )
     assert( Cho01.to_der() == Cho01.to_der_ws() == b'\xaa\x07\x7fP\x04\x02\x02\x07\xd0' )
+    assert( Cho01.to_oer() == Cho01.to_oer_ws() == b'\x8a\x02\x07\xd0' )
+    assert( Cho01.to_coer() == Cho01.to_coer_ws() == b'\x8a\x02\x07\xd0' )
     # decoding
     Cho01.from_aper(b' \x02\x07\xcf')
     assert( Cho01._val == ('int', 2000) )
@@ -1915,7 +1917,16 @@ def _test_rt_base():
         assert( Cho01._to_jval() == {'int': 2000} )
         Cho01.from_jer('{"int": 2000}')
         assert( Cho01._val == ('int', 2000) )
-    
+    # OER/COER
+    Cho01.from_oer(b'\x8a\x02\x07\xd0')
+    assert( Cho01._val == ('int', 2000) )
+    Cho01.from_oer_ws(b'\x8a\x02\x07\xd0')
+    assert( Cho01._val == ('int', 2000) )
+    Cho01.from_coer(b'\x8a\x02\x07\xd0')
+    assert( Cho01._val == ('int', 2000) )
+    Cho01.from_coer_ws(b'\x8a\x02\x07\xd0')
+    assert( Cho01._val == ('int', 2000) )
+
     # Seq01 ::= SEQUENCE { --check test_asn1rt_mod.asn file-- }
     Seq01 = Mod['Seq01']
     Seq01.from_asn1('{boo FALSE, int 1024, enu cake}')
