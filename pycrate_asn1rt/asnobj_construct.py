@@ -600,7 +600,7 @@ Specific attributes:
                                       if ident == self._val[0])
                 tag_class = ASN1CodecOER.TagClassLUT[tag_class]
             except StopIteration:
-                raise ASN1OEREncodeErr("Unknown tags for item {0}".format(
+                raise ASN1OEREncodeErr("Unknown tag for item {0}".format(
                     self._val[0]))
             except KeyError:
                 ASN1OEREncodeErr("Unknown tag class: {0}".format(tag_class))
@@ -631,7 +631,7 @@ Specific attributes:
                                       if ident == self._val[0])
                 tag_class = ASN1CodecOER.TagClassLUT[tag_class]
             except StopIteration:
-                raise ASN1OEREncodeErr("Unknown tags for item {0}".format(
+                raise ASN1OEREncodeErr("Unknown tag for item {0}".format(
                     self._val[0]))
             except KeyError:
                 ASN1OEREncodeErr("Unknown tag class: {0}".format(tag_class))
@@ -660,6 +660,9 @@ Specific attributes:
         except KeyError:
             if self._ext is not None:
                 # It's extension type
+                if not self._SILENT:
+                    asnlog('CHOICE._from_oer: %s, unknown extension tag %r' \
+                           % (self.fullname(), (tag_class, tag)))
                 # NOTE: There is no way how to resolve the primitive/constructed
                 #       flag in OER, as far as I understand it.
                 ident = "_ext_{0}{1}{2}".format(tag_class, 0, tag)
@@ -685,6 +688,9 @@ Specific attributes:
         except KeyError:
             if self._ext is not None:
                 # It's extension type
+                if not self._SILENT:
+                    asnlog('CHOICE._from_oer_ws: %s, unknown extension tag %r' \
+                           % (self.fullname(), (tag_class, tag)))
                 # NOTE: There is no way how to resolve the primitive/constructed
                 #       flag in OER, as far as I understand it.
                 ident = "_ext_{0}{1}{2}".format(tag_class, 0, tag)
