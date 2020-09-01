@@ -585,7 +585,15 @@ class TCAPPackage:
     Invoke = SEQ(name=u'Invoke', mode=MODE_TYPE, param=True)
     
     #-----< ReturnResult >-----#
-    ReturnResult = SEQ(name=u'ReturnResult', mode=MODE_TYPE, param=True)
+    ReturnResult = SEQ(name=u'ReturnResult', mode=MODE_TYPE)
+    _ReturnResult_componentID = OCT_STR(name=u'componentID', mode=MODE_TYPE, tag=(15, TAG_PRIVATE, TAG_IMPLICIT))
+    _ReturnResult_componentID._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
+    _ReturnResult_parameter = OPEN(name=u'parameter', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'OPERATION'), [u'ResultType']), opt=True)
+    ReturnResult._cont = ASN1Dict([
+        (u'componentID', _ReturnResult_componentID),
+        (u'parameter', _ReturnResult_parameter),
+        ])
+    ReturnResult._ext = None
     
     #-----< ReturnError >-----#
     ReturnError = SEQ(name=u'ReturnError', mode=MODE_TYPE, param=True)
@@ -696,6 +704,9 @@ class TCAPPackage:
         __ComponentSequence__item__returnResultNotLast,
         _ComponentSequence__item_,
         ComponentSequence,
+        _ReturnResult_componentID,
+        _ReturnResult_parameter,
+        ReturnResult,
         _Reject_componentID,
         _Reject_rejectProblem,
         __Reject_parameter_paramSequence,

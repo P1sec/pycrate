@@ -332,10 +332,28 @@ class H235_SECURITY_MESSAGES:
     SIGNED = SEQ(name=u'SIGNED', mode=MODE_TYPE, param=True)
     
     #-----< ENCRYPTED >-----#
-    ENCRYPTED = SEQ(name=u'ENCRYPTED', mode=MODE_TYPE, param=True)
+    ENCRYPTED = SEQ(name=u'ENCRYPTED', mode=MODE_TYPE)
+    _ENCRYPTED_algorithmOID = OID(name=u'algorithmOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ENCRYPTED_paramS = SEQ(name=u'paramS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
+    _ENCRYPTED_encryptedData = OCT_STR(name=u'encryptedData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ENCRYPTED._cont = ASN1Dict([
+        (u'algorithmOID', _ENCRYPTED_algorithmOID),
+        (u'paramS', _ENCRYPTED_paramS),
+        (u'encryptedData', _ENCRYPTED_encryptedData),
+        ])
+    ENCRYPTED._ext = None
     
     #-----< HASHED >-----#
-    HASHED = SEQ(name=u'HASHED', mode=MODE_TYPE, param=True)
+    HASHED = SEQ(name=u'HASHED', mode=MODE_TYPE)
+    _HASHED_algorithmOID = OID(name=u'algorithmOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _HASHED_paramS = SEQ(name=u'paramS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
+    _HASHED_hash = BIT_STR(name=u'hash', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    HASHED._cont = ASN1Dict([
+        (u'algorithmOID', _HASHED_algorithmOID),
+        (u'paramS', _HASHED_paramS),
+        (u'hash', _HASHED_hash),
+        ])
+    HASHED._ext = None
     
     #-----< IV8 >-----#
     IV8 = OCT_STR(name=u'IV8', mode=MODE_TYPE)
@@ -670,6 +688,14 @@ class H235_SECURITY_MESSAGES:
         _Element_name,
         _Element_flag,
         Element,
+        _ENCRYPTED_algorithmOID,
+        _ENCRYPTED_paramS,
+        _ENCRYPTED_encryptedData,
+        ENCRYPTED,
+        _HASHED_algorithmOID,
+        _HASHED_paramS,
+        _HASHED_hash,
+        HASHED,
         IV8,
         IV16,
         _Params_ranInt,
