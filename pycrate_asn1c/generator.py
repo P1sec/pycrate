@@ -473,6 +473,12 @@ class PycrateGenerator(_Generator):
             self._allobj_[InstSeq._pyname] = InstSeq
             return
         #
+        # 3bis) in case of parameterized object with no referrers
+        # need to consider it as a standard object
+        if Obj._param and \
+        sum([len(param['ref']) for param in Obj._param.values()]) == 0:
+            Obj._param = None
+        #
         # 4) initialize the object Python instance
         self.wrl('{0} = {1}({2})'.format(Obj._pyname,
                                          Obj.__class__.__name__,
