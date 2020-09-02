@@ -1371,8 +1371,8 @@ def _test_rt_base():
     assert( Bst06._val == (15510, 16) )
     # jer
     if _with_json:
-        assert( Bst06._to_jval() == "'3c96'" )
-        Bst06.from_jer("'3c96'")
+        assert( Bst06._to_jval() == '3c96' )
+        Bst06.from_jer('"3c96"')
         assert( Bst06._val == (15510, 16) )
     # OER/COER
     Bst06.from_oer(b'<\x96' )
