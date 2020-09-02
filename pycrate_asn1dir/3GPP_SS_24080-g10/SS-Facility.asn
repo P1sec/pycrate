@@ -1,0 +1,112 @@
+-- **************************************************************
+--
+-- SS-Facility
+-- handmade ASN.1 definition for encoding / decoding 
+-- the L3Mobile Facility Information Element
+--
+-- **************************************************************
+
+SS-Facility DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+IMPORTS
+    absentSubscriber,
+    bearerServiceNotProvisioned,
+    callBarred,
+    dataMissing,
+    facilityNotSupported,
+    illegalEquipment,
+    illegalSS-Operation,
+    illegalSubscriber,
+    longTermDenial,
+    negativePW-Check,
+    numberOfPW-AttemptsViolation,
+    pw-RegistrationFailure,
+    shortTermDenial,
+    ss-ErrorStatus,
+    ss-Incompatibility,
+    ss-NotAvailable,
+    ss-SubscriptionViolation,
+    systemFailure,
+    teleserviceNotProvisioned,
+    unexpectedDataValue,
+    unknownAlphabet,
+    unknownSubscriber,
+    ussd-Busy
+    FROM MAP-Errors
+    
+    resourcesNotAvailable,
+    maxNumberOfMPTY-ParticipantsExceeded,
+    invalidDeflectedToNumber,
+    specialServiceCode,
+    deflectionToServedSubscriber,
+    rejectedByNetwork,
+    rejectedByUser
+    FROM SS-Errors
+    
+    OPERATION,
+    ERROR
+    FROM Remote-Operations-Information-Objects
+    
+    Supported-SS-Operations
+    FROM SS-Protocol ;
+    
+
+InvokeID ::= INTEGER
+LinkedID ::= INTEGER
+--OperationCode ::= INTEGER
+--ErrorCode ::= INTEGER
+ProblemCode ::= INTEGER
+
+Supported-SS-Errors ERROR ::= {
+absentSubscriber | bearerServiceNotProvisioned | callBarred | dataMissing |
+deflectionToServedSubscriber | facilityNotSupported | illegalEquipment |
+illegalSS-Operation | illegalSubscriber | invalidDeflectedToNumber |
+longTermDenial | maxNumberOfMPTY-ParticipantsExceeded | negativePW-Check |
+numberOfPW-AttemptsViolation | pw-RegistrationFailure | rejectedByNetwork |
+rejectedByUser | resourcesNotAvailable | shortTermDenial | specialServiceCode |
+ss-ErrorStatus | ss-Incompatibility | ss-NotAvailable |
+ss-SubscriptionViolation | systemFailure | teleserviceNotProvisioned |
+unexpectedDataValue | unknownAlphabet | unknownSubscriber | ussd-Busy 
+}
+
+
+Invoke ::= SEQUENCE {
+    invokeID InvokeID,
+    linkedID [0] LinkedID OPTIONAL,
+    operationCode OPERATION.&operationCode ({Supported-SS-Operations}),
+    parameters OPERATION.&ArgumentType ({Supported-SS-Operations}{@operationCode}) OPTIONAL
+    }
+
+-- pycrate: change {@operationCode} to {@.operationCode} 
+ReturnResult ::= SEQUENCE {
+    invokeID InvokeID,
+    sequence SEQUENCE {
+        operationCode OPERATION.&operationCode ({Supported-SS-Operations}),
+        parameters OPERATION.&ResultType ({Supported-SS-Operations}{@.operationCode})
+        } OPTIONAL
+    }
+
+ReturnError ::= SEQUENCE {
+    invokeID InvokeID,
+    errorCode ERROR.&errorCode ({Supported-SS-Errors}),
+    parameters ERROR.&ParameterType ({Supported-SS-Errors}{@errorCode}) OPTIONAL
+    }
+
+Reject ::= SEQUENCE {
+    id CHOICE {
+        invokeID InvokeID,
+        null NULL
+        },
+    problemCode ProblemCode
+    }
+
+Facility ::= CHOICE {
+    invoke [1] Invoke,
+    returnResult [2] ReturnResult,
+    returnError [3] ReturnError,
+    reject [4] Reject
+    }
+
+END

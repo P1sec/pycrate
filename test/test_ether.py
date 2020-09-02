@@ -81,7 +81,7 @@ def test_ether(eth_frames=eth_frames):
 
 def test_perf_ether(eth_frames=eth_frames):
     
-    print('[+] decoding and re-encoding Ethernet / IP frames')
+    print('[+] decoding and re-encoding Ethernet / IP / UDP, TCP, SCTP frames')
     Ta = timeit(test_ether, number=100)
     print('test_ether: {0:.4f}'.format(Ta))
 

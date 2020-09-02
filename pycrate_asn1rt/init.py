@@ -519,12 +519,12 @@ def build_classset_dict(Obj):
         return
     # check the key (UNIQUE) component
     Obj._lut = {'__key__': key}
-    __build_classet_dict(Obj, key, Obj._val.root)
+    __build_classset_dict(Obj, key, Obj._val.root)
     if Obj._val.ext:
-        __build_classet_dict(Obj, key, Obj._val.ext)
+        __build_classset_dict(Obj, key, Obj._val.ext)
 
 
-def __build_classet_dict(Obj, key, valset):
+def __build_classset_dict(Obj, key, valset):
     for val in valset:
         if key in val:
             keyval = val[key]

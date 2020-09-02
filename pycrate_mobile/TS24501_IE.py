@@ -44,11 +44,13 @@ from pycrate_core.charpy import Charpy
 from pycrate_ether.Ethernet     import EtherType_dict
 from pycrate_ether.IP           import IPProt_dict
 from pycrate_mobile.TS24008_IE  import (
-    BufBCD, PLMN, GPRSTimer3, APN, TFT, 
+    BufBCD, PLMN, GPRSTimer3, APN, TFT, TimeZoneTime,
     )
-from pycrate_mobile.TS24301_IE import (
-    EPSQoS, ExtEPSQoS, APN_AMBR, ExtAPN_AMBR, 
+from pycrate_mobile.TS24301_IE  import (
+    EPSQoS, ExtEPSQoS, APN_AMBR, ExtAPN_AMBR, NAS_KSI,
+    _DDX_dict as RelAssist_DDXDict,
     )
+from pycrate_mobile.TS31115     import PacketCmdSMSPP
 
 _str_reserved = 'reserved'
 _str_mnospec  = 'operator-specific'
@@ -69,8 +71,20 @@ SecHdrType_dict = {
 
 
 #------------------------------------------------------------------------------#
-# DNN
+# Access type
 # TS 24.501, 9.11.2.1A
+#------------------------------------------------------------------------------#
+
+class AccessType(Envelope):
+    _GEN = (
+        Uint('spare', bl=2),
+        Uint('Value', bl=2, dic={1:'3GPP access', 2:'non-3GPP access'})
+        )
+
+
+#------------------------------------------------------------------------------#
+# DNN
+# TS 24.501, 9.11.2.1B
 #------------------------------------------------------------------------------#
 
 class DNN(Envelope):
@@ -82,14 +96,55 @@ class DNN(Envelope):
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: self[1].get_len())
-        #self[1].set_blauto(lambda: self[0].get_val()<<3)
+        self[1].set_blauto(lambda: self[0].get_val()<<3)
+
+
+#------------------------------------------------------------------------------#
+# Intra N1 mode NAS transparent container
+# TS 24.501, 9.11.2.6
+#------------------------------------------------------------------------------#
+
+_NASCiphAlgo_dict = {
+    0 : '5G encryption algorithm 5G-EA0 (null)',
+    1 : '5G encryption algorithm 128-5G-EA1 (SNOW)',
+    2 : '5G encryption algorithm 128-5G-EA2 (AES)',
+    3 : '5G encryption algorithm 128-5G-EA3 (ZUC)',
+    4 : '5G encryption algorithm 5G-EA4',
+    5 : '5G encryption algorithm 5G-EA5',
+    6 : '5G encryption algorithm 5G-EA6',
+    7 : '5G encryption algorithm 5G-EA7'
+    }
+
+_NASIntegAlgo_dict = {
+    0 : '5G integrity algorithm 5G-IA0 (null)',
+    1 : '5G integrity algorithm 128-5G-IA1 (SNOW)',
+    2 : '5G integrity algorithm 128-5G-IA2 (AES)',
+    3 : '5G integrity algorithm 128-5G-IA3 (ZUC)',
+    4 : '5G integrity algorithm 5G-IA4',
+    5 : '5G integrity algorithm 5G-IA5',
+    6 : '5G integrity algorithm 5G-IA6',
+    7 : '5G integrity algorithm 5G-IA7'
+    }
+
+
+class IntraN1ModeNASTransContainer(Envelope):
+    _GEN = (
+        Buf('MAC', val=b'\0\0\0\0', bl=32, rep=REPR_HEX),
+        Uint('CiphAlgo', bl=4, dic=_NASCiphAlgo_dict),
+        Uint('IntegAlgo', bl=4, dic=_NASIntegAlgo_dict),
+        Uint('spare', bl=3),
+        Uint('KACF', bl=1, dic={
+            0:'new KAMF has not been calculated by the network',
+            1:'new KAMF has been calculated by the network'}),
+        NAS_KSI(),
+        Uint8('Seqn'),
+        )
 
 
 #------------------------------------------------------------------------------#
 # S-NSSAI
 # TS 24.501, 9.11.2.8
 #------------------------------------------------------------------------------#
-
 
 class SNSSAI(Envelope):
     
@@ -131,6 +186,8 @@ class SNSSAI(Envelope):
     
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         l = char.len_bit()
         if l == 8:
             self[1].set_trans(True)
@@ -165,6 +222,23 @@ class L_SNSSAI(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# S1 mode to N1 mode NAS transparent container
+# TS 24.501, 9.11.2.9
+#------------------------------------------------------------------------------#
+
+class S1ModeN1ModeNASTransContainer(Envelope):
+    _GEN = (
+        Buf('MAC', val=b'\0\0\0\0', bl=32, rep=REPR_HEX),
+        Uint('CiphAlgo', bl=4, dic=_NASCiphAlgo_dict),
+        Uint('IntegAlgo', bl=4, dic=_NASIntegAlgo_dict),
+        Uint('spare', bl=1),
+        Uint('NCC', bl=3),
+        NAS_KSI(),
+        Buf('spare', bl=16),
+        )
+
+
+#------------------------------------------------------------------------------#
 # 5GMM capability
 # TS 24.501, 9.11.3.1
 #------------------------------------------------------------------------------#
@@ -182,7 +256,7 @@ class FGMMCap(Envelope):
         Uint('RestrictEC', bl=1),
         Uint('LPP', bl=1),
         Uint('HOAttach', bl=1),
-        Uint('S1Mode', bl=1),
+        Uint('S1Mode', bl=1), # end of octet 1
         Uint('RACS', bl=1),
         Uint('NSSAA', bl=1),
         Uint('5G-LCS', bl=1),
@@ -191,6 +265,11 @@ class FGMMCap(Envelope):
         Uint('V2X', bl=1),
         Uint('5G-UP-CIoT', bl=1),
         Uint('5GSRVCC', bl=1), # end of octet 2
+        Uint('spare', bl=4),
+        Uint('5G-EHC-CP-CIoT', bl=1),
+        Uint('MultipleUP', bl=1),
+        Uint('WUSA', bl=1),
+        Uint('CAG', bl=1), # end of octet 3
         Buf('spare', val=b'', rep=REPR_HEX)
         )
     
@@ -198,12 +277,13 @@ class FGMMCap(Envelope):
         if self.get_trans():
             return
         l = char.len_bit()
-        if l <= 16:
-            # disable all elements after bit l
-            self.disable_from(l)
-        elif l > 16:
+        if l <= 8:
+            self.disable_from(8)
+        elif l <= 16:
+            self.disable_from(16)
+        elif l > 24:
             # enables some spare bits at the end
-            self[-1]._bl = l-16
+            self[-1]._bl = l-24
         Envelope._from_char(self, char)
     
     def disable_from(self, ind):
@@ -259,6 +339,7 @@ _FGMMCause_dict = {
     74 : 'Temporarily not authorized for this SNPN',
     75 : 'Permanently not authorized for this SNPN',
     76 : 'Not authorized for this CAG or authorized for CAG cells only',
+    77 : 'Wireline access area not allowed',
     90 : 'Payload was not forwarded',
     91 : 'DNN not supported or not subscribed in the slice',
     92 : 'Insufficient user-plane resources for the PDU session',
@@ -309,7 +390,8 @@ _FGSIDType_dict = {
     3 : 'IMEI',
     4 : '5G-S-TMSI',
     5 : 'IMEISV',
-    6 : 'MAC address'
+    6 : 'MAC address',
+    7 : 'EUI-64'
     }
 
 class FGSIDType(Envelope):
@@ -330,7 +412,9 @@ FGSIDFMT_NAI     = 1
 
 FGSIDFmt_dict    = {
     0 : 'IMSI',
-    1 : 'NAI'
+    1 : 'Network specific identifier',
+    2 : 'GCI',
+    3 : 'GLI'
     }
 
 FGSIDTYPE_NO     = 0
@@ -340,6 +424,7 @@ FGSIDTYPE_IMEI   = 3
 FGSIDTYPE_TMSI   = 4
 FGSIDTYPE_IMEISV = 5
 FGSIDTYPE_MAC    = 6
+FGSIDTYPE_EUI64  = 7
 
 FGSIDType_dict   = {
     0 : 'No identity',
@@ -348,7 +433,8 @@ FGSIDType_dict   = {
     3 : 'IMEI',
     4 : '5G-S-TMSI',
     5 : 'IMEISV',
-    6 : 'MAC address'
+    6 : 'MAC address',
+    7 : 'EUI-64'
     }
 
 _ProtSchemeID_dict = {
@@ -411,7 +497,7 @@ class SUCI_ECIESProfB(Envelope):
         self[2]._from_char(char)
 
 
-class SUPI_IMSI(Envelope):
+class SUCI_IMSI(Envelope):
     _GEN = (
         PLMN(),
         BufBCD('RoutingInd', bl=16),
@@ -428,7 +514,7 @@ class SUPI_IMSI(Envelope):
         )
 
 
-class SUPI_NAI(UTF8String):
+class SUCI_NAI(UTF8String):
     pass
 
 
@@ -440,8 +526,10 @@ class FGSIDSUPI(Envelope):
         Uint('spare', bl=1),
         Uint('Type', val=FGSIDTYPE_SUPI, bl=3, dic=FGSIDType_dict),
         Alt('Value', GEN={
-            0: SUPI_IMSI(),
-            1: SUPI_NAI()},
+            0: SUCI_IMSI(),
+            1: SUCI_NAI(),
+            2: SUCI_NAI(),
+            3: SUCI_NAI()},
             DEFAULT=Buf('SUPI_Unk', rep=REPR_HEX),
             sel=lambda self: self.get_env()[1].get_val()),
         )
@@ -464,7 +552,6 @@ class FGSIDGUTI(Envelope):
 
 # for IMEI and IMEISV
 class FGSIDDigit(Envelope):
-    _name = '5GSIDDigit'
     _GEN = (
         Uint('Digit1', val=0xF, bl=4, rep=REPR_HEX),
         Uint('Odd', bl=1),
@@ -497,42 +584,34 @@ class FGSIDNone(Envelope):
 class FGSIDMAC(Envelope):
     _name = '5GSIDMAC'
     _GEN = (
-        Uint('spare', bl=5, rep=REPR_HEX),
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('MAURI', bl=1),
         Uint('Type', val=FGSIDTYPE_MAC, bl=3, dic=FGSIDType_dict),
         Buf('MAC', bl=48, rep=REPR_HEX)
         )
 
 
-class FGSIDUnk(Envelope):
-    _name = '5GSIDUnk'
+class FGSIDEUI64(Envelope):
+    _name = '5GSIDEUI64'
     _GEN = (
         Uint('spare', bl=5, rep=REPR_HEX),
-        Uint('Type', val=FGSIDTYPE_MAC, bl=3, dic=FGSIDType_dict),
-        Buf('unk', rep=REPR_HEX)
+        Uint('Type', val=FGSIDTYPE_EUI64, bl=3, dic=FGSIDType_dict),
+        Buf('EUI64', bl=64, rep=REPR_HEX)
         )
 
 
 class FGSID(Envelope):
     _name = '5GSID'
     
-    # FGSIDTYPE_NO (0) -> FGSIDNone
-    # FGSIDTYPE_SUPI (1) -> FGSIDSUPI
-    # FGSIDTYPE_GUTI (2) -> FGSIDGUTI
-    # FGSIDTYPE_IMEI (3) -> FGSIDDigit
-    # FGSIDTYPE_TMSI (4) -> FGSIDTMSI
-    # FGSIDTYPE_IMEISV (5) -> FGSIDDigit
-    # FGSIDTYPE_MAC (6) -> FGSIDMAC
-    # (7) -> FGSIDUnk
-    
     _ID_LUT = {
         FGSIDTYPE_NO     : FGSIDNone(),
         FGSIDTYPE_SUPI   : FGSIDSUPI(),
         FGSIDTYPE_GUTI   : FGSIDGUTI(),
-        FGSIDTYPE_IMEI   : FGSIDDigit(),
+        FGSIDTYPE_IMEI   : FGSIDDigit('5GSIDIMEI'),
         FGSIDTYPE_TMSI   : FGSIDTMSI(),
-        FGSIDTYPE_IMEISV : FGSIDDigit(),
+        FGSIDTYPE_IMEISV : FGSIDDigit('5GSIDIMEISV'),
         FGSIDTYPE_MAC    : FGSIDMAC(),
-        7                : FGSIDUnk()
+        FGSIDTYPE_EUI64  : FGSIDEUI64()
         }
     
     def set_val(self, vals):
@@ -567,7 +646,7 @@ class FGSID(Envelope):
         FGSIDTYPE_TMSI (4)   -> FGSIDTMSI
         FGSIDTYPE_IMEISV (5) -> FGSIDDigit
         FGSIDTYPE_MAC (6)    -> FGSIDMAC
-        7 (undefined)        -> FGSIDUnk
+        FGSIDTYPE_EUI64 (7)  -> FGSIDEUI64
         """
         if not isinstance(type, integer_types) or not 0 <= type <= 7:
             raise(PycrateErr('invalid 5GS identity type: %r' % type))
@@ -590,23 +669,44 @@ class FGSID(Envelope):
 # TS 24.501, 9.11.3.5
 #------------------------------------------------------------------------------#
 
+_EMC_dict = {
+    0 : 'Emergency services not supported',
+    1 : 'Emergency services supported in NR connected to 5GCN only',
+    2 : 'Emergency services supported in E-UTRA connected to 5GCN only',
+    3 : 'Emergency services supported in NR connected to 5GCN and E-UTRA connected to 5GCN'
+    }
+
+_EMF_dict = {
+    0 : 'Emergency services fallback not supported',
+    1 : 'Emergency services fallback supported in NR connected to 5GCN only',
+    2 : 'Emergency services fallback supported in E-UTRA connected to 5GCN only',
+    3 : 'Emergency services fallback supported in NR connected to 5GCN and E-UTRA connected to 5GCN'
+    }
+
+
 class FGSNetFeat(Envelope):
+    
+    ENV_SEL_TRANS = False
+    
     _name = '5GSNetFeat'
     _GEN = (
         Uint('MPSI', bl=1),
         Uint('IWK_N26', bl=1),
-        Uint('EMF', bl=1),
-        Uint('EMC', bl=3),
+        Uint('EMF', bl=2, dic=_EMF_dict),
+        Uint('EMC', bl=2, dic=_EMC_dict),
         Uint('IMS-VoPS-N3GPP', bl=1),
 	    Uint('IMS-VoPS-3GPP', bl=1), # end of octet 1
-	    Uint('5G-LCS', bl=1),
         Uint('5G-UP-CIoT', bl=1),
         Uint('5G-HC-CP-CIoT', bl=1),
         Uint('N3Data', bl=1),
-        Uint('5G-CP-CIoT', bl=1),
-        Uint('RestrictEC', bl=1),
+        Uint('5G-IPHC-CP-CIoT', bl=1),
+        Uint('RestrictEC', bl=2),
         Uint('MCSI', bl=1),
         Uint('EMCN3', bl=1), # end of octet 2
+        Uint('spare', bl=5),
+        Uint('5G-EHC-CP-CIoT', bl=1),
+        Uint('ATS-IND', bl=1),
+        Uint('5G-LCS', bl=1), # end of octet 3
         Buf('spare', val=b'', rep=REPR_HEX)
         )
     
@@ -615,11 +715,12 @@ class FGSNetFeat(Envelope):
             return
         l = char.len_bit()
         if l <= 8:
-            # disable all elements after bit l
-            self.disable_from('5G-LCS')
-        elif l > 16:
+            self.disable_from('5G-UP-CIoT')
+        elif l <= 16:
+            self.disable_from('spare')
+        elif l > 24:
             # enables some spare bits at the end
-            self[-1]._bl = l-16
+            self[-1]._bl = l-24
         Envelope._from_char(self, char)
     
     def disable_from(self, ind):
@@ -653,7 +754,8 @@ _FGSRegResult_dict = {
 class FGSRegResult(Envelope):
     _name = '5GSRegResult'
     _GEN = (
-        Uint('spare', bl=3),
+        Uint('spare', bl=2),
+        Uint('Emergency', bl=1),
         Uint('NSSAAPerformed', bl=1),
         Uint('SMSAllowed', bl=1),
         Uint('Value', bl=3, dic=_FGSRegResult_dict)
@@ -815,18 +917,6 @@ class FGSUpdateType(Envelope):
 
 
 #------------------------------------------------------------------------------#
-# Access type
-# TS 24.501, 9.11.3.11
-#------------------------------------------------------------------------------#
-
-class AccessType(Envelope):
-    _GEN = (
-        Uint('spare', bl=2),
-        Uint('Value', bl=2, dic={1:'3GPP access', 2:'non-3GPP access'})
-        )
-
-
-#------------------------------------------------------------------------------#
 # Additional 5G security information
 # TS 24.501, 9.11.3.12
 #------------------------------------------------------------------------------#
@@ -837,7 +927,23 @@ class Add5GSecInfo(Envelope):
         Uint('RINMR', bl=1, dic={
             0:'retransmission of the initial NAS message not requested',
             1:'retransmission of the initial NAS message requested'}),
-        Uint('HDP', bl=1, dic={0:'K_AMF derivation not required', 1:'K_AMF derivation required'})
+        Uint('HDP', bl=1, dic={
+            0:'K_AMF derivation not required',
+            1:'K_AMF derivation required'})
+        )
+
+
+#------------------------------------------------------------------------------#
+# Additional information requested
+# TS 24.501, 9.11.3.12A
+#------------------------------------------------------------------------------#
+
+class AddInfoReq(Envelope):
+    _GEN = (
+        Uint('spare', bl=7),
+        Uint('CipherKey', bl=1, dic={
+            0:'ciphering keys for ciphered broadcast assistance data not requested',
+            1:'ciphering keys for ciphered broadcast assistance data requested'})
         )
 
 
@@ -858,6 +964,150 @@ class ConfigUpdateInd(Envelope):
         Uint('spare', bl=2),
         Uint('RED', bl=1, dic={0:'registration not requested', 1:'registration requested'}),
         Uint('ACK', bl=1, dic={0:'ACK not requested', 1:'ACK requested'})
+        )
+
+
+#------------------------------------------------------------------------------#
+# CAG information list
+# TS 24.501, 9.11.3.18A
+#------------------------------------------------------------------------------#
+
+class CAGInfo(Envelope):
+    _GEN = (
+        Uint8('Len'),
+        PLMN(),
+        Array('CAGIDList', GEN=Uint32('CAGID', rep=REPR_HEX))
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: 3 + self[2].get_len())
+        self[2].set_blauto(lambda: (self[0].get_val()-3)<<3)
+
+
+class CAGInfoList(Sequence):
+    _GEN = CAGInfo()
+
+
+#------------------------------------------------------------------------------#
+# CIoT small data container
+# TS 24.501, 9.11.3.18B
+#------------------------------------------------------------------------------#
+
+_CIoTDataType_dict = {
+    0 : 'Control plane user data',
+    1 : 'SMS',
+    2 : 'Location services message container'
+    }
+
+_CIoTDDX_dict = {
+    0 : 'No information available',
+    1 : 'No further uplink or downlink data transmission subsequent to the uplink data transmission is expected',
+    2 : 'Only a single downlink data transmission and no further uplink data transmission subsequent to the uplink data transmission is expected',
+    3 : _str_reserved
+    }
+
+
+class _CIoTSmallData_CPUD(Envelope):
+    _GEN = (
+        Uint('DDX', bl=2, dic=_CIoTDDX_dict),
+        Uint('PDUSessID', bl=3, dic={0:'No PDU session identity assigned'}),
+        Buf('Data', val=b'', rep=REPR_HEX)
+        )
+
+
+class _CIoTSmallData_SMS(Envelope):
+    _GEN = (
+        Uint('spare', bl=5),
+        Buf('Data', val=b'', rep=REPR_HEX)
+        )
+
+
+class _CIoTSmallData_LCS(Envelope):
+    _GEN = (
+        Uint('DDX', bl=2, dic=_CIoTDDX_dict),
+        Uint('spare', bl=3),
+        Uint8('AddInfoLen'),
+        Buf('AddInfo', val=b'', rep=REPR_HEX),
+        Buf('Data', val=b'', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[2].set_valauto(lambda: self[3].get_len())
+        self[3].set_blauto(lambda: self[2].get_val()<<3)
+
+
+class CIoTSmallDataContainer(Envelope):
+    _GEN = (
+        Uint('DataType', bl=3, dic=_CIoTDataType_dict),
+        Alt('Cont', GEN={
+            0: _CIoTSmallData_CPUD('CPUD'),
+            1: _CIoTSmallData_SMS('SMS'),
+            2: _CIoTSmallData_LCS('LCS'),
+            },
+            DEFAULT=Buf('unk', val=b'', rep=REPR_HEX),
+            sel=lambda self: self.get_env()[0].get_val())
+        )
+
+
+#------------------------------------------------------------------------------#
+# Ciphering key data
+# TS 24.501, 9.11.3.18C
+#------------------------------------------------------------------------------#
+
+class CipheringDataSet(Envelope):
+    _GEN = (
+        Uint16('CipheringSetID'),
+        Buf('CipheringKey', bl=128, rep=REPR_HEX),
+        Uint('spare', bl=3),
+        Uint('C0Len', bl=5),
+        Buf('C0', rep=REPR_HEX),
+        Uint('spare', bl=4),
+        Uint('EUTRAposSIBLen', bl=4),
+        Buf('EUTRAposSIB', rep=REPR_HEX), # actually list of flags
+        Uint('spare', bl=4),
+        Uint('NRposSIBLen', bl=4),
+        Buf('NRposSIB', rep=REPR_HEX),
+        TimeZoneTime('ValidityStartTime'),
+        Uint32('ValidityDuration'),
+        FGSTAIList()
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['C0Len'].set_valauto(lambda: self['C0'].get_len())
+        self['C0'].set_blauto(lambda: self['C0Len'].get_val()<<3)
+        self['EUTRAposSIBLen'].set_valauto(lambda: self['EUTRAposSIB'].get_len())
+        self['EUTRAposSIB'].set_blauto(lambda: self['EUTRAposSIBLen'].get_val()<<3)
+        self['NRposSIBLen'].set_valauto(lambda: self['NRposSIB'].get_len())
+        self['NRposSIB'].set_blauto(lambda: self['NRposSIBLen'].get_val()<<3)
+
+
+class CipheringKeyData(Sequence):
+    _GEN = CipheringDataSet()
+
+
+#------------------------------------------------------------------------------#
+# Control plane service type
+# TS 24.501, 9.11.3.18D
+#------------------------------------------------------------------------------#
+
+_CtrlPlaneServType_dict = {
+    0 : 'mobile originating request',
+    1 : 'mobile terminating request',
+    2 : 'data',
+    3 : 'unused - mobile originating request',
+    4 : 'unused - mobile originating request',
+    5 : 'unused - mobile originating request',
+    6 : 'unused - mobile originating request',
+    7 : 'unused - mobile originating request'
+    }
+
+class CtrlPlaneServiceType(Envelope):
+    _GEN = (
+        Uint('spare', bl=1),
+        Uint('Value', bl=3, dic=_CtrlPlaneServType_dict)
         )
 
 
@@ -919,31 +1169,19 @@ class MICOInd(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# MA PDU session information
+# TS 24.501, 9.11.3.31A
+#------------------------------------------------------------------------------#
+
+MAPDUSessInfo_dict = {
+    1 : 'MA PDU session network upgrade is allowed'
+    }
+
+
+#------------------------------------------------------------------------------#
 # NAS security algorithms
 # TS 24.501, 9.11.3.34
 #------------------------------------------------------------------------------#
-
-_NASCiphAlgo_dict = {
-    0 : '5G encryption algorithm 5G-EA0 (null)',
-    1 : '5G encryption algorithm 128-5G-EA1 (SNOW)',
-    2 : '5G encryption algorithm 128-5G-EA2 (AES)',
-    3 : '5G encryption algorithm 128-5G-EA3 (ZUC)',
-    4 : '5G encryption algorithm 5G-EA4',
-    5 : '5G encryption algorithm 5G-EA5',
-    6 : '5G encryption algorithm 5G-EA6',
-    7 : '5G encryption algorithm 5G-EA7'
-    }
-
-_NASIntegAlgo_dict = {
-    0 : '5G integrity algorithm 5G-IA0 (null)',
-    1 : '5G integrity algorithm 128-5G-IA1 (SNOW)',
-    2 : '5G integrity algorithm 128-5G-IA2 (AES)',
-    3 : '5G integrity algorithm 128-5G-IA3 (ZUC)',
-    4 : '5G integrity algorithm 5G-IA4',
-    5 : '5G integrity algorithm 5G-IA5',
-    6 : '5G integrity algorithm 5G-IA6',
-    7 : '5G integrity algorithm 5G-IA7'
-    }
 
 class NASSecAlgo(Envelope):
     _GEN = (
@@ -1093,6 +1331,13 @@ class OperatorAccessCatDefs(Sequence):
 
 
 #------------------------------------------------------------------------------#
+# Payload container
+# TS 24.501, 9.11.3.39
+#------------------------------------------------------------------------------#
+# see EOF
+
+
+#------------------------------------------------------------------------------#
 # Payload container type
 # TS 24.501, 9.11.3.40
 #------------------------------------------------------------------------------#
@@ -1109,6 +1354,7 @@ PayloadContainerType_dict = {
     15: 'Multiple payloads'
     }
 
+
 #------------------------------------------------------------------------------#
 # PDU session identity 2
 # TS 24.501, 9.11.3.41
@@ -1116,99 +1362,6 @@ PayloadContainerType_dict = {
 
 class PDUSessID(Uint8):
     _dic = {0: 'no PDU session ID assigned'}
-
-
-#------------------------------------------------------------------------------#
-# Request type
-# TS 24.501, 9.11.3.47
-#------------------------------------------------------------------------------#
-
-_RequestType_dict = {
-    1 : 'initial request',
-    2 : 'existing PDU session',
-    3 : 'initial emergency request',
-    4 : 'existing emergency PDU session',
-    5 : 'modification request',
-    6 : 'MA PDU request',
-    7 : _str_reserved
-    }
-
-class RequestType(Envelope):
-    _GEN = (
-        Uint('spare', bl=1),
-        Uint('Value', bl=3, dic=_RequestType_dict)
-        )
-
-
-#------------------------------------------------------------------------------#
-# Payload container
-# TS 24.501, 9.11.3.39
-#------------------------------------------------------------------------------#
-
-_PayContOptType_dict = {
-    12 : 'PDU session ID',
-    24 : 'Additional information',
-    58 : '5GMM cause',
-    37 : 'Back-off timer value',
-    59 : 'Old PDU session ID',
-    80 : 'Request type',
-    22 : 'S-NSSAI',
-    25 : 'DNN'
-    }
-
-
-class _PayContOpt(Envelope):
-    _GEN = (
-        Uint8('Type', dic=_PayContOptType_dict),
-        Uint8('Len'),
-        Alt('Val', GEN={
-            12 : PDUSessID(),
-            24 : Buf('AdditionalInfo', rep=REPR_HEX),
-            58 : FGMMCause(),
-            37 : GPRSTimer3('BackOffTimer'),
-            59 : PDUSessID('OldPDUSessID'),
-            80 : Uint8('RequestType', dic=_RequestType_dict),
-            22 : SNSSAI(),
-            25 : Buf('DNN')
-            },
-            DEFAULT=Buf('Val'),
-            sel=lambda self: self.get_env()[0].get_val()
-            )
-        )
-    
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self[1].set_valauto(lambda: self[2].get_len())
-        self[2].set_blauto(lambda: self[1].get_val()<<3)
-
-
-class _PayContEntry(Envelope):
-    _GEN = (
-        Uint16('Len'),
-        Uint('OptNum', bl=4),
-        Uint('Type', bl=4, dic=PayloadContainerType_dict),
-        Sequence('Opts', GEN=_PayContOpt('Opt')),
-        Buf('Cont', val=b'', rep=REPR_HEX)
-        )
-    
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self[0].set_valauto(lambda: 1 + self[3].get_len() + self[4].get_len())
-        self[1].set_valauto(lambda: self[3].get_num())
-        self[3].set_numauto(lambda: self[1].get_val())
-        self[4].set_blauto(lambda: (self[0].get_val()-1-self[3].get_len())<<3)
-
-
-class PayloadContainerMult(Envelope):
-    _GEN = (
-        Uint8('Num'),
-        Sequence('Entries', GEN=_PayContEntry('Entry'))
-        )
-    
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self[0].set_valauto(lambda: self[1].get_num())
-        self[1].set_numauto(lambda: self[0].get_val())
 
 
 #------------------------------------------------------------------------------#
@@ -1307,6 +1460,28 @@ class RejectedNSSAI(Sequence):
 
 
 #------------------------------------------------------------------------------#
+# Request type
+# TS 24.501, 9.11.3.47
+#------------------------------------------------------------------------------#
+
+_RequestType_dict = {
+    1 : 'initial request',
+    2 : 'existing PDU session',
+    3 : 'initial emergency request',
+    4 : 'existing emergency PDU session',
+    5 : 'modification request',
+    6 : 'MA PDU request',
+    7 : _str_reserved
+    }
+
+class RequestType(Envelope):
+    _GEN = (
+        Uint('spare', bl=1),
+        Uint('Value', bl=3, dic=_RequestType_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
 # Service area list
 # TS 24.501, 9.11.3.49
 #------------------------------------------------------------------------------#
@@ -1314,7 +1489,6 @@ class RejectedNSSAI(Sequence):
 class _PTAIList3(Envelope):
     """All TAI belonging to a given PLMN
     """
-    
     _GEN = (
         Uint('Num', val=0, bl=5),
         PLMN(),
@@ -1387,7 +1561,9 @@ ServiceType_dict = {
 class SMSInd(Envelope):
     _GEN = (
         Uint('spare', bl=3),
-        Uint('Value', bl=1, dic={0:'SMS over NAS not available', 1:'SMS over NAS available'})
+        Uint('Value', bl=1, dic={
+            0:'SMS over NAS not available',
+            1:'SMS over NAS available'})
         )
 
 
@@ -1420,53 +1596,102 @@ _SORAck_dict = {
 class SORHeader(Envelope):
     _GEN = (
         Uint('spare', bl=4, rep=REPR_HEX),
-        Uint('ACK', bl=1, dic=_SORAck_dict),
-        Uint('ListType', bl=1, dic=_SORListType_dict),
-        Uint('ListInd', bl=1, dic=_SORListInd_dict),
+        Uint('ACK', bl=1, dic=_SORAck_dict),           # only for DataType 0, otherwise spare
+        Uint('ListType', bl=1, dic=_SORListType_dict), # only for DataType 0, otherwise spare
+        Uint('ListInd', bl=1, dic=_SORListInd_dict),   # only for DataType 0, otherwise spare
         Uint('DataType', bl=1, dic=_SORDataType_dict)
         )
 
 
-class _SORTransCont00(Envelope):
+class SORReq(Envelope):
     _GEN = (
         Buf('SOR_MACI_AUSF', bl=128, rep=REPR_HEX),
         Uint16('CntSOR'),
-        Buf('SecuredPkt', rep=REPR_HEX)
-        )
-
-
-class _SORTransCont01(Envelope):
-    _GEN = (
-        Buf('SOR_MACI_AUSF', bl=128, rep=REPR_HEX),
-        Uint16('CntSOR'),
-        Sequence('PLMNATList', GEN=Envelope('PLMNAT', GEN=(
-            PLMN(),
-            Uint16('AccessTechno')))
+        Alt('Data', GEN={
+            0: PacketCmdSMSPP(), # STK request
+            1: Sequence('PLMNATList', GEN=Envelope('PLMNAT', GEN=(
+                PLMN(),
+                Uint16('AccessTechno')))
+                )},
+            sel=lambda self: self.get_env().get_env()[0][2].get_val()
             )
         )
 
 
-class _SORTransCont1(Envelope):
+class SORResp(Envelope):
     _GEN = (
         Buf('SOR_MACI_UE', bl=128, rep=REPR_HEX),
         )
 
 
-def get_sor_types(cont):
-    hdr = cont.get_env()['SORHeader']
-    return hdr['DataType'].get_val(), hdr['ListType'].get_val()
-    
-
-class SORTransparentContainer(Envelope):
+class SORTransContainer(Envelope):
     _GEN = (
         SORHeader(),
         Alt('Cont', GEN={
-            (0, 0): _SORTransCont00('SORSecuredPkt'),
-            (0, 1): _SORTransCont01('SORPLMNList'),
-            (1, 0): _SORTransCont1('SORACK'),
-            (1, 1): _SORTransCont1('SORACK')},
-            sel=lambda self: get_sor_types(self)
+            0: SORReq(),
+            1: SORResp()},
+            sel=lambda self: self.get_env()[0][4].get_val()
             )
+        )
+
+
+#------------------------------------------------------------------------------#
+# UE parameters update transparent container
+# TS 24.501, 9.11.3.53A
+#------------------------------------------------------------------------------#
+
+class UPUHeader(Envelope):
+    _GEN = (
+        Uint('spare', bl=5),
+        Uint('REG', bl=1), # only for DataType 0, otherwise spare
+        Uint('ACK', bl=1), # only for DataType 0, otherwise spare
+        Uint('DataType', bl=1, dic={
+            0:'carries a UE parameters update list',
+            1:'carries an acknowledgement of successful reception of a UE parameters update list'})
+        )
+
+
+class UPUComp(Envelope):
+    _GEN = (
+        Uint('spare', bl=4),
+        Uint('DataSetType', val=1, bl=4, dic={
+            1: 'Routing indicator update data',
+            2: 'Default configured NSSAI update data'}),
+        Uint16('DataSetLen'),
+        Alt('DataSet', GEN={
+            1: PacketCmdSMSPP(), # STK request
+            2: NSSAI()},
+            DEFAULT=Buf('unk', val=b'', rep=REPR_HEX),
+            sel=lambda self: self.get_env()[1].get_val())
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[2].set_valauto(lambda: self[3].get_len())
+        self[3].set_blauto(lambda: self[2].get_val()<<3)
+
+
+class UPUReq(Envelope):
+    _GEN = (
+        Buf('UPU_MACI_AUSF', bl=128, rep=REPR_HEX),
+        Uint16('CntUPU'),
+        Sequence('UPUList', GEN=UPUComp())
+        )
+
+
+class UPUResp(Envelope):
+    _GEN = (
+        Buf('UPU_MACI_UE', bl=128, rep=REPR_HEX),
+        )
+
+
+class UPUTransContainer(Envelope):
+    _GEN = (
+        UPUHeader(),
+        Alt('Cont', GEN={
+            0: UPUReq(),
+            1: UPUResp()},
+            sel=lambda self: self.get_env()[0][3].get_val())
         )
 
 
@@ -1565,8 +1790,12 @@ class UEUsage(Envelope):
 class UEStatus(Envelope):
     _GEN = (
         Uint('spare', bl=6, rep=REPR_HEX),
-        Uint('N1ModeReg', bl=1, dic={0:'UE not in 5GMM-REGISTERED state', 1:'UE in 5GMM-REGISTERED state'}),
-        Uint('S1ModeReg', bl=1, dic={0:'UE not in EMM-REGISTERED state', 1:'UE in EMM-REGISTERED state'})
+        Uint('N1ModeReg', bl=1, dic={
+            0:'UE not in 5GMM-REGISTERED state',
+            1:'UE in 5GMM-REGISTERED state'}),
+        Uint('S1ModeReg', bl=1, dic={
+            0:'UE not in EMM-REGISTERED state',
+            1:'UE in EMM-REGISTERED state'})
         )
 
 
@@ -1577,88 +1806,6 @@ class UEStatus(Envelope):
 
 class ULDataStat(PDUSessStat):
     pass
-
-
-#------------------------------------------------------------------------------#
-# MA PDU session information
-# TS 24.501, 9.11.3.63
-#------------------------------------------------------------------------------#
-
-MAPDUSessInfo_dict = {
-    1 : 'MA PDU session network upgrade is allowed'
-    }
-
-
-#------------------------------------------------------------------------------#
-# CAG information list
-# TS 24.501, 9.11.3.64
-#------------------------------------------------------------------------------#
-
-class CAGInfo(Envelope):
-    _GEN = (
-        Uint8('Len'),
-        PLMN(),
-        Array('CAGIDList', GEN=Uint32('CAGID', rep=REPR_HEX))
-        )
-    
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self[0].set_valauto(lambda: 3 + self[2].get_len())
-        self[2].set_blauto(lambda: (self[0].get_val()-3)<<3)
-
-
-class CAGInfoList(Sequence):
-    _GEN = CAGInfo()
-
-
-#------------------------------------------------------------------------------#
-# Control plane service type
-# TS 24.501, 9.11.3.65
-#------------------------------------------------------------------------------#
-
-_CtrlPlaneServType_dict = {
-    0 : 'mobile originating request',
-    1 : 'mobile terminating request',
-    2 : 'data',
-    3 : 'unused - mobile originating request',
-    4 : 'unused - mobile originating request',
-    5 : 'unused - mobile originating request',
-    6 : 'unused - mobile originating request',
-    7 : 'unused - mobile originating request'
-    }
-
-class CtrlPlaneServiceType(Envelope):
-    _GEN = (
-        Uint('spare', bl=1),
-        Uint('Value', bl=3, dic=_CtrlPlaneServType_dict)
-        )
-
-
-#------------------------------------------------------------------------------#
-# CIoT small data container
-# TS 24.501, 9.11.3.67
-#------------------------------------------------------------------------------#
-
-_CIoTDataType_dict = {
-    1 : 'Control plane user data',
-    2 : 'SMS'
-    }
-
-_CIoTDDX_dict = {
-    0 : 'No information available',
-    1 : 'No further uplink or downlink data transmission subsequent to the uplink data transmission is expected',
-    2 : 'Only a single downlink data transmission and no further uplink data transmission subsequent to the uplink data transmission is expected',
-    3 : _str_reserved
-    }
-
-
-class CIoTSmallDataContainer(Envelope):
-    _GEN = (
-        Uint('DataType', bl=3, dic=_CIoTDataType_dict),
-        Uint('DDX', bl=2, dic=_CIoTDDX_dict),
-        Uint('PDUSessID', bl=3, dic={0:'No PDU session identity assigned'}),
-        Buf('Data', rep=REPR_HEX)
-        )
 
 
 #------------------------------------------------------------------------------#
@@ -1688,17 +1835,66 @@ class UERadioCapIDDelInd(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# Truncated 5G-S-TMSI configuration
+# TS 24.501, 9.11.3.70
+#------------------------------------------------------------------------------#
+
+class Trunc5GSTMSIConfig(Envelope):
+    _GEN = (
+        Uint('TruncAMFSetID', bl=4),
+        Uint('TruncAMFPtr', bl=4)
+        )
+
+
+#------------------------------------------------------------------------------#
+# NB-N1 mode DRX parameters
+# TS 24.501, 9.11.3.73
+#------------------------------------------------------------------------------#
+
+_NBN1ModeDRXParam_dict = {
+    0 : 'DRX value not specified',
+    1 : 'DRX cycle parameter T = 32',
+    2 : 'DRX cycle parameter T = 64',
+    3 : 'DRX cycle parameter T = 128',
+    4 : 'DRX cycle parameter T = 256',
+    5 : 'DRX cycle parameter T = 512',
+    6 : 'DRX cycle parameter T = 1024',
+    }
+
+class NBN1ModeDRXParam(Envelope):
+    _GEN = (
+        Uint('spare', bl=4),
+        Uint('Value', bl=4, dic=_NBN1ModeDRXParam_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Additional configuration indication
+# TS 24.501, 9.11.3.74
+#------------------------------------------------------------------------------#
+
+class AddConfigInd(Envelope):
+    _GEN = (
+        Uint('spare', bl=3),
+        Uint('SCMR', bl=1, dic={
+            0:'no additional information',
+            1:'release of N1 NAS signalling connection not required'})
+        )
+
+
+#------------------------------------------------------------------------------#
 # 5GSM capability
 # TS 24.501, 9.11.4.1
 #------------------------------------------------------------------------------#
 
 class FGSMCap(Envelope):
+    
+    ENV_SEL_TRANS = False
+    
     _name = '5GSMCap'
     _GEN = (
-        Uint('spare', bl=2),
         Uint('TPMIC', bl=1),
-        Uint('MPTCP', bl=1),
-        Uint('ATS-LL', bl=1),
+        Uint('ATSSS-ST', bl=4),
         Uint('EPT-S1', bl=1),
         Uint('MH6-PDU', bl=1),
         Uint('RQoS', bl=1),
@@ -1707,7 +1903,7 @@ class FGSMCap(Envelope):
     
     #def _from_char(self, char):
     #    Envelope._from_char(self, char)
-        
+    
     def disable_from(self, ind):
         """disables all elements from index `ind' excluded (integer -bit offset- 
         or element name)
@@ -1739,7 +1935,6 @@ _FGSMCause_dict = {
     31 : 'Request rejected, unspecified',
     32 : 'Service option not supported',
     33 : 'Requested service option not subscribed',
-    34 : 'Service option temporarily out of order',
     35 : 'PTI already in use',
     36 : 'Regular deactivation',
     38 : 'Network failure',
@@ -1754,6 +1949,10 @@ _FGSMCause_dict = {
     50 : 'PDU session type IPv4 only allowed',
     51 : 'PDU session type IPv6 only allowed',
     54 : 'PDU session does not exist',
+    57 : 'PDU session type IPv4v6 only allowed',
+    58 : 'PDU session type Unstructured only allowed',
+    59 : 'Unsupported 5QI value',
+    60 : 'PDU session type Ethernet only allowed',
     67 : 'Insufficient resources for specific slice and DNN',
     68 : 'Not supported SSC mode',
     69 : 'Insufficient resources for specific slice',
@@ -1823,6 +2022,7 @@ class AllowedSSCMode(Envelope):
 
 _IntegrityProtMaxDataRate_dict = {
     0    : '64 kbps',
+    1    : 'NULL',
     0xff : 'full data rate'
     }
 
@@ -1845,14 +2045,14 @@ _EPSBearerCtxtOC_dict = {
     3 : 'Modify new EPS bearer'
     }
 
-_EPSBearerCtxtEDict_sel = {
+_EPSBearerCtxtEDict_dict = {
     1 : {
-        0 : 'parameters not included',
-        1 : 'parameters included'
+        0 : 'parameters list not included',
+        1 : 'parameters list included'
         },
     2 : {
-        0 : 'previously provided parameters extension',
-        1 : 'previously provided parameters replacement'
+        0 : 'extension of previously provided parameters list',
+        1 : 'replacement of all previously provided parameters list'
         },
     3 : { # TS unclear there !
         }
@@ -1863,7 +2063,7 @@ _EPSParamType_dict = {
     2 : 'Mapped extended EPS QoS parameters',
     3 : 'Traffic flow template',
     4 : 'APN-AMBR',
-    5 : 'extended APN-AMBR',
+    5 : 'Extended APN-AMBR',
     }
 
 
@@ -1879,7 +2079,7 @@ class EPSParam(Envelope):
             5 : ExtAPN_AMBR()
             },
             DEFAULT=Buf('unk', val=b'', rep=REPR_HEX),
-            sel=lambda self: self.get_env()['Type'].get_val())
+            sel=lambda self: self.get_env()[0].get_val())
         )
     
     def __init__(self, *args, **kwargs):
@@ -1897,15 +2097,15 @@ class EPSBearerCtxt(Envelope):
         Uint('spare', bl=2),
         Uint('E', bl=1),
         Uint('Num', bl=3),
-        Sequence('EPSParams', GEN=EPSParam())
+        Sequence('EPSParamList', GEN=EPSParam())
         )
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self['Len'].set_valauto(lambda: 1 + self['EPSParams'].get_len()) # TS does not define which length it is...
-        self['E'].set_dicauto(lambda: _EPSBearerCtxtEDict_sel[self['OpCode'].get_val()])
-        self['Num'].set_valauto(lambda: self['EPSParams'].get_num())
-        self['EPSParams'].set_numauto(lambda: self['Num'].get_val())
+        self['E'].set_dicauto(lambda: _EPSBearerCtxtEDict_dict.get(self['OpCode'].get_val(), {}))
+        self['Num'].set_valauto(lambda: self['EPSParamList'].get_num())
+        self['EPSParamList'].set_numauto(lambda: self['Num'].get_val())
 
 
 class MappedEPSBearerCtxt(Sequence):
@@ -1920,7 +2120,7 @@ class MappedEPSBearerCtxt(Sequence):
  
 class MaxPktFilters(Envelope):
     _GEN = (
-        Uint('Value', bl=11),
+        Uint('Value', bl=11), # should be 17 <= X <= 1024
         Uint('spare', bl=5)
         )
 
@@ -1941,7 +2141,7 @@ class PDUAddress(Envelope):
                     Buf('IPv4', bl=32, rep=REPR_HEX),
                     Buf('IPv6', bl=128, rep=REPR_HEX)))},
             DEFAULT=Buf('unk', rep=REPR_HEX),
-            sel=lambda self: self.get_env()['Type'].get_val()
+            sel=lambda self: self.get_env()[1].get_val()
             )
         )
 
@@ -2060,7 +2260,7 @@ class QoSFlowParam(Envelope):
             7 : _QoSFlowParamEBI('EBI')
             },
             DEFAULT=Buf('unk', val=b'', rep=REPR_HEX),
-            sel=lambda self: self.get_env()['Type'].get_val())
+            sel=lambda self: self.get_env()[0].get_val())
         )
     
     def __init__(self, *args, **kwargs):
@@ -2257,7 +2457,7 @@ class QoSRule(Envelope):
                 4 : PktFilterAdd(),
                 5 : PktFilterDel(),
                 6 : Buf('empty', bl=0)},
-                DEFAULT=Buf('none', bl=0, rep=REPR_HEX),
+                DEFAULT=Buf('unk', bl=0, rep=REPR_HEX),
                 sel=lambda self: self.get_env().get_env()['OpCode'].get_val())
             ),
         Uint8('Precedence', trans=True), # optional
@@ -2274,6 +2474,19 @@ class QoSRule(Envelope):
         self[4].set_valauto(lambda: self[5].get_num())
         self[5].set_numauto(lambda: self[4].get_val())
     
+    def set_val(self, vals):
+        if isinstance(vals, dict):
+            if 'Precedence' in vals:
+                self['Precedence'].set_trans(False)
+            if 'Flow' in vals:
+                self['Flow'].set_trans(False)
+        elif isinstance(vals, (tuple, list)):
+            if len(vals) > 5:
+                self['Precedence'].set_trans(False)
+            if len(vals) > 6:
+                self['Flow'].set_trans(False)
+        Envelope.set_val(self, vals)
+        
     def _from_char(self, char):
         if self.get_trans():
             return
@@ -2364,7 +2577,7 @@ class ReattemptInd(Envelope):
 # TS 24.501, 9.11.4.18
 #------------------------------------------------------------------------------#
 
-class FGSNetFeat(Envelope):
+class FGSMNetFeat(Envelope):
     _name = '5GSMNetFeat'
     _GEN = (
         Uint('spare', bl=7),
@@ -2388,17 +2601,8 @@ class FGSNetFeat(Envelope):
 
 
 #------------------------------------------------------------------------------#
-# Session-TMBR
-# TS 24.501, 9.11.4.19
-#------------------------------------------------------------------------------#
-
-class SessTMBR(SessAMBR):
-    pass
-
-
-#------------------------------------------------------------------------------#
 # Re-attempt indicator
-# TS 24.501, 9.11.4.17
+# TS 24.501, 9.11.4.21
 #------------------------------------------------------------------------------#
 
 class CongestReattemptInd(Envelope):
@@ -2421,5 +2625,91 @@ class CtrlPlaneOnlyInd(Envelope):
         )
 
 
+#------------------------------------------------------------------------------#
+# Ethernet header compression configuration
+# TS 24.501, 9.11.4.28
+#------------------------------------------------------------------------------#
+
+class EthHdrCompConfig(Envelope):
+    _GEN = (
+        Uint('spare', bl=6),
+        Uint('CIDLen', bl=2, dic={
+            0:'Ethernet header compression not used',
+            1:'7 bits',
+            2:'15 bits'})
+        )
+
+
+#------------------------------------------------------------------------------#
+# Payload container
+# TS 24.501, 9.11.3.39
+#------------------------------------------------------------------------------#
+
+_PayContOptType_dict = {
+    12 : 'PDU session ID',
+    24 : 'Additional information',
+    58 : '5GMM cause',
+    37 : 'Back-off timer value',
+    59 : 'Old PDU session ID',
+    80 : 'Request type',
+    22 : 'S-NSSAI',
+    25 : 'DNN'
+    }
+
+
+class _PayContOpt(Envelope):
+    _GEN = (
+        Uint8('Type', dic=_PayContOptType_dict),
+        Uint8('Len'),
+        Alt('Val', GEN={
+            0x12 : PDUSessID(),
+            0x24 : Buf('AdditionalInfo', rep=REPR_HEX),
+            0x58 : FGMMCause(),
+            0x37 : GPRSTimer3('BackOffTimer'),
+            0x59 : PDUSessID('OldPDUSessID'),
+            0x80 : Uint8('RequestType', dic=_RequestType_dict),
+            0x22 : SNSSAI(),
+            0x25 : DNN(),
+            0xF0 : Uint8('ReleaseAssistInd', dic=RelAssist_DDXDict),
+            0xA0 : Uint8('MAPDUSessInfo', dic=MAPDUSessInfo_dict)
+            },
+            DEFAULT=Buf('Val'),
+            sel=lambda self: self.get_env()[0].get_val()
+            )
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[1].set_valauto(lambda: self[2].get_len())
+        self[2].set_blauto(lambda: self[1].get_val()<<3)
+
+
+class _PayContEntry(Envelope):
+    _GEN = (
+        Uint16('Len'),
+        Uint('OptNum', bl=4),
+        Uint('Type', bl=4, dic=PayloadContainerType_dict),
+        Sequence('Opts', GEN=_PayContOpt('Opt')),
+        Buf('Cont', val=b'', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: 1 + self[3].get_len() + self[4].get_len())
+        self[1].set_valauto(lambda: self[3].get_num())
+        self[3].set_numauto(lambda: self[1].get_val())
+        self[4].set_blauto(lambda: (self[0].get_val()-1-self[3].get_len())<<3)
+
+
+class PayloadContainerMult(Envelope):
+    _GEN = (
+        Uint8('Num'),
+        Sequence('Entries', GEN=_PayContEntry('Entry'))
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_num())
+        self[1].set_numauto(lambda: self[0].get_val())
 
 

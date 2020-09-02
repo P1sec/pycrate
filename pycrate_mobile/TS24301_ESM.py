@@ -133,7 +133,7 @@ class ESMHeader(Envelope):
 # TS 24.301, section 8.3.1
 #------------------------------------------------------------------------------#
 
-class ESMActDediEPSBearerCtxtAccept(Layer3):
+class ESMActDediEPSBearerCtxtAccept(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':198}),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
@@ -147,7 +147,7 @@ class ESMActDediEPSBearerCtxtAccept(Layer3):
 # TS 24.301, section 8.3.2
 #------------------------------------------------------------------------------#
 
-class ESMActDediEPSBearerCtxtReject(Layer3):
+class ESMActDediEPSBearerCtxtReject(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':199}),
         Type3V('ESMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=ESMCause()),
@@ -162,7 +162,7 @@ class ESMActDediEPSBearerCtxtReject(Layer3):
 # TS 24.301, section 8.3.3
 #------------------------------------------------------------------------------#
 
-class ESMActDediEPSBearerCtxtRequest(Layer3):
+class ESMActDediEPSBearerCtxtRequest(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':197}),
         Uint('spare', bl=4),
@@ -187,7 +187,7 @@ class ESMActDediEPSBearerCtxtRequest(Layer3):
 # TS 24.301, section 8.3.4
 #------------------------------------------------------------------------------#
 
-class ESMActDefaultEPSBearerCtxtAccept(Layer3):
+class ESMActDefaultEPSBearerCtxtAccept(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':194}),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
@@ -200,7 +200,7 @@ class ESMActDefaultEPSBearerCtxtAccept(Layer3):
 # TS 24.301, section 8.3.5
 #------------------------------------------------------------------------------#
 
-class ESMActDefaultEPSBearerCtxtReject(Layer3):
+class ESMActDefaultEPSBearerCtxtReject(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':195}),
         Type3V('ESMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=ESMCause()),
@@ -214,7 +214,7 @@ class ESMActDefaultEPSBearerCtxtReject(Layer3):
 # TS 24.301, section 8.3.6
 #------------------------------------------------------------------------------#
 
-class ESMActDefaultEPSBearerCtxtRequest(Layer3):
+class ESMActDefaultEPSBearerCtxtRequest(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':193}),
         Type4LV('EPSQoS', val={'V':b'\x09'}, IE=EPSQoS()),
@@ -244,7 +244,7 @@ class ESMActDefaultEPSBearerCtxtRequest(Layer3):
 # TS 24.301, section 8.3.7
 #------------------------------------------------------------------------------#
 
-class ESMBearerResourceAllocReject(Layer3):
+class ESMBearerResourceAllocReject(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':213}),
         Type3V('ESMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=ESMCause()),
@@ -261,7 +261,7 @@ class ESMBearerResourceAllocReject(Layer3):
 # TS 24.301, section 8.3.8
 #------------------------------------------------------------------------------#
 
-class ESMBearerResourceAllocRequest(Layer3):
+class ESMBearerResourceAllocRequest(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':212}),
         Uint('spare', bl=4),
@@ -281,7 +281,7 @@ class ESMBearerResourceAllocRequest(Layer3):
 # TS 24.301, section 8.3.9
 #------------------------------------------------------------------------------#
 
-class ESMBearerResourceModifReject(Layer3):
+class ESMBearerResourceModifReject(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':215}),
         Type3V('ESMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=ESMCause()),
@@ -298,7 +298,7 @@ class ESMBearerResourceModifReject(Layer3):
 # TS 24.301, section 8.3.10
 #------------------------------------------------------------------------------#
 
-class ESMBearerResourceModifRequest(Layer3):
+class ESMBearerResourceModifRequest(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':214}),
         Uint('spare', bl=4),
@@ -320,7 +320,7 @@ class ESMBearerResourceModifRequest(Layer3):
 # TS 24.301, section 8.3.11
 #------------------------------------------------------------------------------#
 
-class ESMDeactEPSBearerCtxtAccept(Layer3):
+class ESMDeactEPSBearerCtxtAccept(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':206}),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
@@ -333,7 +333,7 @@ class ESMDeactEPSBearerCtxtAccept(Layer3):
 # TS 24.301, section 8.3.12
 #------------------------------------------------------------------------------#
 
-class ESMDeactEPSBearerCtxtRequest(Layer3):
+class ESMDeactEPSBearerCtxtRequest(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':205}),
         Type3V('ESMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=ESMCause()),
@@ -350,7 +350,7 @@ class ESMDeactEPSBearerCtxtRequest(Layer3):
 # TS 24.301, section 8.3.12A
 #------------------------------------------------------------------------------#
 
-class ESMDummyMessage(Layer3):
+class ESMDummyMessage(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':220}),
         )
@@ -361,7 +361,7 @@ class ESMDummyMessage(Layer3):
 # TS 24.301, section 8.3.13
 #------------------------------------------------------------------------------#
 
-class ESMInformationRequest(Layer3):
+class ESMInformationRequest(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':217}),
         )
@@ -372,7 +372,7 @@ class ESMInformationRequest(Layer3):
 # TS 24.301, section 8.3.14
 #------------------------------------------------------------------------------#
 
-class ESMInformationResponse(Layer3):
+class ESMInformationResponse(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':218}),
         Type4TLV('APN', val={'T':0x28, 'V':b'\0'}, IE=APN()),
@@ -386,7 +386,7 @@ class ESMInformationResponse(Layer3):
 # TS 24.301, section 8.3.15
 #------------------------------------------------------------------------------#
 
-class ESMStatus(Layer3):
+class ESMStatus(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':232}),
         Type3V('ESMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=ESMCause())
@@ -398,7 +398,7 @@ class ESMStatus(Layer3):
 # TS 24.301, section 8.3.16
 #------------------------------------------------------------------------------#
 
-class ESMModifyEPSBearerCtxtAccept(Layer3):
+class ESMModifyEPSBearerCtxtAccept(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':202}),
         Type4TLV('ProtConfig', val={'T':0x27, 'V':b'\x80'}, IE=ProtConfig()),
@@ -412,7 +412,7 @@ class ESMModifyEPSBearerCtxtAccept(Layer3):
 # TS 24.301, section 8.3.17
 #------------------------------------------------------------------------------#
 
-class ESMModifyEPSBearerCtxtReject(Layer3):
+class ESMModifyEPSBearerCtxtReject(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':203}),
         Type3V('ESMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=ESMCause()),
@@ -427,7 +427,7 @@ class ESMModifyEPSBearerCtxtReject(Layer3):
 # TS 24.301, section 8.3.18
 #------------------------------------------------------------------------------#
 
-class ESMModifyEPSBearerCtxtRequest(Layer3):
+class ESMModifyEPSBearerCtxtRequest(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':201}),
         Type4TLV('EPSQoS', val={'T':0x5B, 'V':b'\x09'}, IE=EPSQoS()),
@@ -452,7 +452,7 @@ class ESMModifyEPSBearerCtxtRequest(Layer3):
 # TS 24.301, section 8.3.18A
 #------------------------------------------------------------------------------#
 
-class ESMNotification(Layer3):
+class ESMNotification(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':219}),
         Type4LV('NotificationInd', val={'V':b'\0'}, IE=NotificationInd()),
@@ -464,7 +464,7 @@ class ESMNotification(Layer3):
 # TS 24.301, section 8.3.19
 #------------------------------------------------------------------------------#
 
-class ESMPDNConnectivityReject(Layer3):
+class ESMPDNConnectivityReject(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':209}),
         Type3V('ESMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=ESMCause()),
@@ -481,7 +481,7 @@ class ESMPDNConnectivityReject(Layer3):
 # TS 24.301, section 8.3.20
 #------------------------------------------------------------------------------#
 
-class ESMPDNConnectivityRequest(Layer3):
+class ESMPDNConnectivityRequest(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':208}),
         Type1V('PDNType', dic=PDNType_dict),
@@ -501,7 +501,7 @@ class ESMPDNConnectivityRequest(Layer3):
 # TS 24.301, section 8.3.21
 #------------------------------------------------------------------------------#
 
-class ESMPDNDisconnectReject(Layer3):
+class ESMPDNDisconnectReject(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':211}),
         Type3V('ESMCause', val={'V':b'\x6f'}, bl={'V':8}, IE=ESMCause()),
@@ -516,7 +516,7 @@ class ESMPDNDisconnectReject(Layer3):
 # TS 24.301, section 8.3.22
 #------------------------------------------------------------------------------#
 
-class ESMPDNDisconnectRequest(Layer3):
+class ESMPDNDisconnectRequest(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':210}),
         Uint('spare', bl=4),
@@ -531,7 +531,7 @@ class ESMPDNDisconnectRequest(Layer3):
 # TS 24.301, section 8.3.23
 #------------------------------------------------------------------------------#
 
-class ESMRemoteUEReport(Layer3):
+class ESMRemoteUEReport(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':233}),
         Type6TLVE('RemoteUEConnected', val={'T':0x79, 'V':b''}, IE=RemoteUECtxtList()),
@@ -545,7 +545,7 @@ class ESMRemoteUEReport(Layer3):
 # TS 24.301, section 8.3.24
 #------------------------------------------------------------------------------#
 
-class ESMRemoteUEResponse(Layer3):
+class ESMRemoteUEResponse(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':234}),
         )
@@ -556,7 +556,7 @@ class ESMRemoteUEResponse(Layer3):
 # TS 24.301, section 8.3.25
 #------------------------------------------------------------------------------#
 
-class ESMDataTransport(Layer3):
+class ESMDataTransport(Layer3E):
     _GEN = (
         ESMHeader(val={'Type':235}),
         Type6LVE('UserData', val={'V':b''}),

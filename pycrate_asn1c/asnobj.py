@@ -48,6 +48,7 @@ _DEBUG_PARAM_PT    = False
 _DEBUG_PARAM_VAL   = False
 _DEBUG_PARAM_SET   = False
 _DEBUG_PARAM_TYPE  = False
+#
 _DEBUG_SYNTAX_GRP  = False
 _DEBUG_SYNTAX_OGRP = False
 
@@ -1530,7 +1531,7 @@ class ASN1Obj(object):
     
     # methods specific to constructed components or CLASS fields
     def is_opt(self):
-        if self._flag:
+        if self._flag is not None:
             return FLAG_OPT in self._flag or FLAG_DEF in self._flag
         else:
             return False
@@ -2885,7 +2886,7 @@ class ASN1Obj(object):
             objects.append( Obj )
         #
         if _DEBUG_PARAM_TYPE:
-            asnlog('DBG: __parameterize_type({0}), {2}.{3}'.format(
+            asnlog('DBG: __parameterize_type({0}), {1}.{2}'.format(
                    typedef,
                    GLOBAL.COMP['NS']['mod'],
                    GLOBAL.COMP['NS']['name']))
@@ -2894,12 +2895,12 @@ class ASN1Obj(object):
                    GLOBAL.COMP['NS']['setdisp'],
                    GLOBAL.COMP['NS']['setpar']))
             asnlog('    referrers: {0!r}'.format(self._pathes))
-            asnlog('    objects  : {0!r}'.format(objval))
+            asnlog('    objects  : {0!r}'.format(objects))
     
     def __parameterize_transfer_obj(self, OldObj, NewObj, clone=False, ClassRef=None):
         # transfer existing flags, constraints and tag from OldObj to NewObj
         cloned = False
-        if OldObj._flag:
+        if OldObj._flag is not None:
             assert(NewObj._flag is None)
             if clone:
                 NewObj = NewObj.copy()
@@ -4425,11 +4426,12 @@ class ASN1Obj(object):
             if cont[ident].is_opt():
                 const['_pre'].append(ident)
         for ident in absent:
-            if FLAG_OPT not in cont[ident]._flag or FLAG_DEF in cont[ident]._flag:
+            if cont[ident]._flag is not None and \
+            (FLAG_OPT not in cont[ident]._flag or FLAG_DEF in cont[ident]._flag):
                 raise(ASN1ProcTextErr('{0}: invalid ABSENT component, {1}'\
                       .format(self.fullname(), ident)))
             else:
-                const['_abs'].append(ident) 
+                const['_abs'].append(ident)
     
     def _parse_const_regexp(self, const):
         const_index = len(self._const)

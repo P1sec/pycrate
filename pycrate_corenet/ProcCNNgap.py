@@ -1281,11 +1281,11 @@ class NGAPNGSetup(NGAPNonUESigProc):
             self._log('INF', 'gNB NG Setup unsuccessful')
         else:
             self.GNB.Config = cpdict(self.GNBInfo)
-            tais = []
+            tais = set()
             for (tac, bcastplmnlist) in self.GNBInfo['SupportedTAList'].items():
                 for (plmn, _) in bcastplmnlist:
-                    tais.append( (plmn, tac) )
-            self.GNB.Config['TAIs'] = tais
+                    tais.add( (plmn, tac) )
+            self.GNB.Config['TAIs'] = tuple(tais)
             self.GNB.ID = self.GNBInfo['GlobalRANNodeID']
             # prepare the NGSetupResponse
             IEs = self.GNB.get_ngsetup_ies_from_cfg()
@@ -1324,7 +1324,11 @@ class NGAPRANConfigUpdate(NGAPNonUESigProc):
     
     # Custom decoders
     Decod = {
-        'ini': ({}, {}),
+        'ini': ({
+            'GlobalRANNodeID': globranid_to_hum,
+            'SupportedTAList': supptalist_to_hum,
+            },
+            {}),
         'suc': ({}, {}),
         'uns': ({}, {})
         }
@@ -1349,11 +1353,11 @@ class NGAPRANConfigUpdate(NGAPNonUESigProc):
                 del gnbcfg['NGRAN_TNLAssociationToRemoveList']
             self.GNB.Config.update(gnbcfg)
             if 'SupportedTAList' in gnbcfg:
-                tais = []
+                tais = set()
                 for (tac, bcastplmnlist) in self.GNBInfo['SupportedTAList'].items():
                     for (plmn, _) in bcastplmnlist:
-                        tais.append( (plmn, tac) )
-                self.GNB.Config['TAIs'] = tais
+                        tais.add( (plmn, tac) )
+                self.GNB.Config['TAIs'] = tuple(tais)
             if 'GlobalRANNodeID' in gnbcfg:
                 self.GNB.ID = self.GNBInfo['GlobalRANNodeID']
             # TODO: process NGRAN_TNLAssociationToRemoveList

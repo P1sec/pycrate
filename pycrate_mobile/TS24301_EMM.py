@@ -71,7 +71,7 @@ __all__ = [
 
 #------------------------------------------------------------------------------#
 # 3GPP TS 24.301: NAS protocol for EPS
-# release 13 (da0)
+# release 13 (g51)
 #------------------------------------------------------------------------------#
 
 from pycrate_core.utils import *
@@ -189,7 +189,7 @@ class EMMHeaderServ(Envelope):
 # TS 24.301, section 8.2.1
 #------------------------------------------------------------------------------#
 
-class EMMAttachAccept(Layer3):
+class EMMAttachAccept(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':66}),
         Uint('spare', bl=4),
@@ -218,7 +218,7 @@ class EMMAttachAccept(Layer3):
         Type6TLVE('ExtEmergNumList', val={'T':0x7A, 'V':b'\0\0\0\0'}, IE=ExtEmergNumList()),
         Type6TLVE('CipherKeyData', val={'T':0x7C, 'V':32*b'\0'}, IE=CipherKeyData()),
         Type4TLV('UERadioCapID', val={'T':0x66, 'V':b'\0'}, IE=UERadioCapID()),
-        Type1TV('UERadioCapIDDelInd', val={'T':0xB, 'V':0}, IE=UERadioCapIDDelInd())
+        Type1TV('UERadioCapIDDelInd', val={'T':0xB, 'V':0}, IE=UERadioCapIDDelInd()),
         )
 
 
@@ -227,7 +227,7 @@ class EMMAttachAccept(Layer3):
 # TS 24.301, section 8.2.2
 #------------------------------------------------------------------------------#
 
-class EMMAttachComplete(Layer3):
+class EMMAttachComplete(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':67}),
         Type6LVE('ESMContainer', val={'V':b'\0\0\0'}),
@@ -239,7 +239,7 @@ class EMMAttachComplete(Layer3):
 # TS 24.301, section 8.2.3
 #------------------------------------------------------------------------------#
 
-class EMMAttachReject(Layer3):
+class EMMAttachReject(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':68}),
         Type3V('EMMCause', val={'V':b'\x11'}, bl={'V':8}, IE=EMMCause()),
@@ -255,7 +255,7 @@ class EMMAttachReject(Layer3):
 # TS 24.301, section 8.2.4
 #------------------------------------------------------------------------------#
 
-class EMMAttachRequest(Layer3):
+class EMMAttachRequest(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':65}),
         Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
@@ -295,7 +295,7 @@ class EMMAttachRequest(Layer3):
 # TS 24.301, section 8.2.5
 #------------------------------------------------------------------------------#
 
-class EMMAuthenticationFailure(Layer3):
+class EMMAuthenticationFailure(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':92}),
         Type3V('EMMCause', val={'V':b'\x11'}, bl={'V':8}, IE=EMMCause()),
@@ -308,7 +308,7 @@ class EMMAuthenticationFailure(Layer3):
 # TS 24.301, section 8.2.6
 #------------------------------------------------------------------------------#
 
-class EMMAuthenticationReject(Layer3):
+class EMMAuthenticationReject(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':84}),
         )
@@ -319,7 +319,7 @@ class EMMAuthenticationReject(Layer3):
 # TS 24.301, section 8.2.7
 #------------------------------------------------------------------------------#
 
-class EMMAuthenticationRequest(Layer3):
+class EMMAuthenticationRequest(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':82}),
         Uint('spare', bl=4),
@@ -334,7 +334,7 @@ class EMMAuthenticationRequest(Layer3):
 # TS 24.301, section 8.2.8
 #------------------------------------------------------------------------------#
 
-class EMMAuthenticationResponse(Layer3):
+class EMMAuthenticationResponse(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':83}),
         Type4LV('RES', val={'V':8*b'\0'})
@@ -346,7 +346,7 @@ class EMMAuthenticationResponse(Layer3):
 # TS 24.301, section 8.2.9
 #------------------------------------------------------------------------------#
 
-class EMMCSServiceNotification(Layer3):
+class EMMCSServiceNotification(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':100}),
         Type3V('PagingIdentity', val={'V':b'\x01'}, bl={'V':8}, IE=PagingIdentity()),
@@ -362,7 +362,7 @@ class EMMCSServiceNotification(Layer3):
 # TS 24.301, 8.2.10
 #------------------------------------------------------------------------------#
 
-class EMMDetachAccept(Layer3):
+class EMMDetachAccept(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':70}),
         )
@@ -373,7 +373,7 @@ class EMMDetachAccept(Layer3):
 # TS 24.301, section 8.2.11.1
 #------------------------------------------------------------------------------#
 
-class EMMDetachRequestMO(Layer3):
+class EMMDetachRequestMO(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':69}),
         Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
@@ -387,7 +387,7 @@ class EMMDetachRequestMO(Layer3):
 # TS 24.301, section 8.2.11.2
 #------------------------------------------------------------------------------#
 
-class EMMDetachRequestMT(Layer3):
+class EMMDetachRequestMT(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':69}),
         Uint('spare', bl=4),
@@ -401,7 +401,7 @@ class EMMDetachRequestMT(Layer3):
 # TS 24.301, section 8.2.12
 #------------------------------------------------------------------------------#
 
-class EMMDLNASTransport(Layer3):
+class EMMDLNASTransport(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':98}),
         Type4LV('NASContainer', val={'V':b'\0\0'})
@@ -413,7 +413,7 @@ class EMMDLNASTransport(Layer3):
 # TS 24.301, section 8.2.13
 #------------------------------------------------------------------------------#
 
-class EMMInformation(Layer3):
+class EMMInformation(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':97}),
         Type4TLV('NetFullName', val={'T':0x43, 'V':b'\0'}, IE=NetworkName()),
@@ -430,7 +430,7 @@ class EMMInformation(Layer3):
 # TS 24.301, section 8.2.14
 #------------------------------------------------------------------------------#
 
-class EMMStatus(Layer3):
+class EMMStatus(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':96}),
         Type3V('EMMCause', val={'V':b'\x11'}, bl={'V':8}, IE=EMMCause())
@@ -442,7 +442,7 @@ class EMMStatus(Layer3):
 # TS 24.301, section 8.2.15
 #------------------------------------------------------------------------------#
 
-class EMMExtServiceRequest(Layer3):
+class EMMExtServiceRequest(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':76}),
         Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
@@ -459,12 +459,14 @@ class EMMExtServiceRequest(Layer3):
 # TS 24.301, section 8.2.16
 #------------------------------------------------------------------------------#
 
-class EMMGUTIReallocCommand(Layer3):
+class EMMGUTIReallocCommand(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':80}),
         Type4LV('GUTI', val={'V':b'\xf6'+10*b'\0'}, IE=EPSID()),
         Type4TLV('TAIList', val={'T':0x54, 'V':6*b'\0'}, IE=TAIList()),
-        Type4TLV('DCNID', val={'T':0x65, 'V':b'\0\0'}, IE=DCNID())
+        Type4TLV('DCNID', val={'T':0x65, 'V':b'\0\0'}, IE=DCNID()),
+        Type4TLV('UERadioCapID', val={'T':0x66, 'V':b'\0'}, IE=UERadioCapID()),
+        Type1TV('UERadioCapIDDelInd', val={'T':0xB, 'V':0}, IE=UERadioCapIDDelInd()),
         )
 
 
@@ -473,7 +475,7 @@ class EMMGUTIReallocCommand(Layer3):
 # TS 24.301, section 8.2.17
 #------------------------------------------------------------------------------#
 
-class EMMGUTIReallocComplete(Layer3):
+class EMMGUTIReallocComplete(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':81}),
         )
@@ -484,7 +486,7 @@ class EMMGUTIReallocComplete(Layer3):
 # TS 24.301, section 8.2.18
 #------------------------------------------------------------------------------#
 
-class EMMIdentityRequest(Layer3):
+class EMMIdentityRequest(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':85}),
         Uint('spare', bl=4),
@@ -497,7 +499,7 @@ class EMMIdentityRequest(Layer3):
 # TS 24.301, section 8.2.19
 #------------------------------------------------------------------------------#
 
-class EMMIdentityResponse(Layer3):
+class EMMIdentityResponse(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':86}),
         Type4LV('ID', val={'V':b'\xf4\0\0\0\0'}, IE=ID())
@@ -509,7 +511,7 @@ class EMMIdentityResponse(Layer3):
 # TS 24.301, section 8.2.20
 #------------------------------------------------------------------------------#
 
-class EMMSecurityModeCommand(Layer3):
+class EMMSecurityModeCommand(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':93}),
         Type3V('NASSecAlgo', val={'V':b'\x11'}, bl={'V':8}, IE=NASSecAlgo()),
@@ -530,7 +532,7 @@ class EMMSecurityModeCommand(Layer3):
 # TS 24.301, section 8.2.21
 #------------------------------------------------------------------------------#
 
-class EMMSecurityModeComplete(Layer3):
+class EMMSecurityModeComplete(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':94}),
         Type4TLV('IMEISV', val={'T':0x23, 'V':b'\x03\0\0\0\0\0\0\0\xf0'}, IE=ID()),
@@ -544,7 +546,7 @@ class EMMSecurityModeComplete(Layer3):
 # TS 24.301, section 8.2.22
 #------------------------------------------------------------------------------#
 
-class EMMSecurityModeReject(Layer3):
+class EMMSecurityModeReject(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':95}),
         Type3V('EMMCause', val={'V':b'\x11'}, bl={'V':8}, IE=EMMCause())
@@ -558,7 +560,7 @@ class EMMSecurityModeReject(Layer3):
 
 if _with_cm:
     
-    class EMMSecProtNASMessage(Layer3):
+    class EMMSecProtNASMessage(Layer3E):
         _GEN = (
             EMMHeaderSec(),
             Buf('MAC', val=b'\0\0\0\0', bl=32, rep=REPR_HEX),
@@ -691,7 +693,7 @@ if _with_cm:
 
 else:
     
-    class EMMSecProtNASMessage(Layer3):
+    class EMMSecProtNASMessage(Layer3E):
         _GEN = (
             EMMHeaderSec(),
             Buf('MAC', val=b'\0\0\0\0', bl=32, rep=REPR_HEX),
@@ -705,7 +707,7 @@ else:
 # TS 24.301, section 8.2.24
 #------------------------------------------------------------------------------#
 
-class EMMServiceReject(Layer3):
+class EMMServiceReject(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':78}),
         Type3V('EMMCause', val={'V':b'\x11'}, bl={'V':8}, IE=EMMCause()),
@@ -722,7 +724,7 @@ class EMMServiceReject(Layer3):
 
 if _with_cm:
     
-    class EMMServiceRequest(Layer3):
+    class EMMServiceRequest(Layer3E):
         _GEN = (
             EMMHeaderServ(val={'SecHdr': 12}),
             Uint('KSI', bl=3, dic={7:'no key available'}),
@@ -785,7 +787,7 @@ if _with_cm:
 
 else:
     
-    class EMMServiceRequest(Layer3):
+    class EMMServiceRequest(Layer3E):
         _GEN = (
             EMMHeaderServ(val={'SecHdr': 12}),
             Uint('KSI', bl=3, dic={7:'no key available'}),
@@ -799,7 +801,7 @@ else:
 # TS 24.301, section 8.2.26
 #------------------------------------------------------------------------------#
 
-class EMMTrackingAreaUpdateAccept(Layer3):
+class EMMTrackingAreaUpdateAccept(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':73}),
         Uint('spare', bl=4),
@@ -839,7 +841,7 @@ class EMMTrackingAreaUpdateAccept(Layer3):
 # TS 24.301, section 8.2.27
 #------------------------------------------------------------------------------#
 
-class EMMTrackingAreaUpdateComplete(Layer3):
+class EMMTrackingAreaUpdateComplete(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':74}),
         )
@@ -850,7 +852,7 @@ class EMMTrackingAreaUpdateComplete(Layer3):
 # TS 24.301, section 8.2.28
 #------------------------------------------------------------------------------#
 
-class EMMTrackingAreaUpdateReject(Layer3):
+class EMMTrackingAreaUpdateReject(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':75}),
         Type3V('EMMCause', val={'V':b'\x11'}, bl={'V':8}, IE=EMMCause()),
@@ -864,7 +866,7 @@ class EMMTrackingAreaUpdateReject(Layer3):
 # TS 24.301, section 8.2.29
 #------------------------------------------------------------------------------#
 
-class EMMTrackingAreaUpdateRequest(Layer3):
+class EMMTrackingAreaUpdateRequest(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':72}),
         Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
@@ -908,7 +910,7 @@ class EMMTrackingAreaUpdateRequest(Layer3):
 # TS 24.301, section 8.2.30
 #------------------------------------------------------------------------------#
 
-class EMMULNASTransport(Layer3):
+class EMMULNASTransport(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':99}),
         Type4LV('NASContainer', val={'V':b'\0\0'})
@@ -920,7 +922,7 @@ class EMMULNASTransport(Layer3):
 # TS 24.301, section 8.2.31
 #------------------------------------------------------------------------------#
 
-class EMMDLGenericNASTransport(Layer3):
+class EMMDLGenericNASTransport(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':104}),
         Type3V('GenericContType', val={'V':b'\0'}, bl={'V':8}, IE=GenericContType()),
@@ -934,7 +936,7 @@ class EMMDLGenericNASTransport(Layer3):
 # TS 24.301, section 8.2.32
 #------------------------------------------------------------------------------#
 
-class EMMULGenericNASTransport(Layer3):
+class EMMULGenericNASTransport(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':105}),
         Type3V('GenericContType', val={'V':b'\0'}, bl={'V':8}, IE=GenericContType()),
@@ -948,7 +950,7 @@ class EMMULGenericNASTransport(Layer3):
 # TS 24.301, section 8.2.33
 #------------------------------------------------------------------------------#
 
-class EMMCPServiceRequest(Layer3):
+class EMMCPServiceRequest(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':77}),
         Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
@@ -965,7 +967,7 @@ class EMMCPServiceRequest(Layer3):
 # TS 24.301, section 8.2.34
 #------------------------------------------------------------------------------#
 
-class EMMServiceAccept(Layer3):
+class EMMServiceAccept(Layer3E):
     _GEN = (
         EMMHeader(val={'Type':79}),
         Type4TLV('EPSBearerCtxtStat', val={'T':0x57, 'V':b'\0\0'}, IE=EPSBearerCtxtStat()),

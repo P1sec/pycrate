@@ -302,3 +302,5 @@ def parse_NASLTE_MT(buf, inner=True, sec_hdr=True):
         #
         return Msg, 0
 
+# TODO: handle decoding of NAS Generic Container (for LCS or LPP)
+# see 24.301, 9.9.3.42 and 43
