@@ -2146,7 +2146,7 @@ class MMContext(Alt):
         107: MMContext_EPSSecContextQuadruplets(),
         108: MMContext_UMTSKeyQuadrupletsQuintuplets()
         }
-    DEFAULT_ALT = Buf('MMContext')
+    DEFAULT = Buf('MMContext')
     _sel = lambda a, b: b.get_env()[0][0].get_val() # GTPCIEHdr['Type']
 
 
