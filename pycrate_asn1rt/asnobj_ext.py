@@ -643,6 +643,107 @@ Single value: Python 2-tuple
             Obj._val = self._val[1]
             return Obj._to_jval()
 
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _from_oer(self, char):
+        # try to get a defined object from a table constraint
+        if self._TAB_LUT and self._const_tab and self._const_tab_at:
+            const_obj_type, const_obj = self._get_tab_obj()
+            if const_obj_type == CLASET_NONE:
+                if not self._SILENT:
+                    asnlog('OPEN._from_oer: %s, unable to retrieve a table-looked up object' \
+                           % (self.fullname()))
+                Obj = None
+            elif const_obj_type == CLASET_UNIQ:
+                Obj = const_obj
+            else:
+                # const_obj_type == CLASET_MULT
+                # with PER, no tag to select a given object
+                Obj = const_obj[0]
+        else:
+            # TODO: another way to provide a (set of) potential defined object(s)
+            # is to look into value constraint self._const_val
+            # if we have multiple, then we would have to bruteforce the decoding
+            # until a correct one is found !!!
+            Obj = None
+        #
+        val_bytes = ASN1CodecOER.decode_open_type(char)
+        val = Obj.from_oer(val_bytes) if (Obj is not None) else val_bytes
+
+        if Obj is None:
+            if self._const_val:
+                asnlog('OPEN._from_per: %s, potential type constraint(s) available but unused' \
+                       % self.fullname())
+            assert( isinstance(val, bytes_types) )
+            self._val = ('_unk_004', val)
+        else:
+            if Obj._typeref is not None:
+                self._val = (Obj._typeref.called[1], val)
+            else:
+                self._val = (Obj.TYPE, val)
+        return
+
+    def _from_oer_ws(self, char):
+        # try to get a defined object from a table constraint
+        if self._TAB_LUT and self._const_tab and self._const_tab_at:
+            const_obj_type, const_obj = self._get_tab_obj()
+            if const_obj_type == CLASET_NONE:
+                if not self._SILENT:
+                    asnlog('OPEN._from_per_ws: %s, unable to retrieve a table-looked up object' \
+                           % (self.fullname()))
+                Obj = None
+            elif const_obj_type == CLASET_UNIQ:
+                Obj = const_obj
+            else:
+                # const_obj_type == CLASET_MULT
+                # with PER, no tag to select a given object
+                Obj = const_obj[0]
+        else:
+            # TODO: another way to provide a (set of) potential defined object(s)
+            # is to look into value constraint self._const_val
+            # if we have multiple, then we would have to bruteforce the decoding
+            # until a correct one is found !!!
+            Obj = None
+        #
+        val_bytes, GEN = ASN1CodecOER.decode_open_type_ws(char)
+        if Obj is None:
+            if self._const_val:
+                asnlog('OPEN._from_per_ws: %s, potential type constraint(s) available but unused' \
+                       % self.fullname())
+            self._val = ('_unk_004', val_bytes)
+        else:
+            val = Obj.from_oer(val_bytes)
+            if Obj._typeref is not None:
+                self._val = (Obj._typeref.called[1], val)
+            else:
+                self._val = (Obj.TYPE, val)
+        self._struct = Envelope(self._name, GEN=tuple(GEN))
+
+    def _to_oer(self):
+        if isinstance(self._val[0], ASN1Obj):
+            Obj = self._val[0]
+        else:
+            if self._val[0][:5] == '_unk_':
+                return ASN1CodecOER.encode_open_type(self._val[1])
+            Obj = self._get_val_obj(self._val[0])
+        Obj._val = self._val[1]
+        return ASN1CodecOER.encode_open_type(Obj.to_oer())
+
+    def _to_oer_ws(self):
+        if isinstance(self._val[0], ASN1Obj):
+            Obj = self._val[0]
+        else:
+            if self._val[0][:5] == '_unk_':
+                _gen = ASN1CodecOER.encode_open_type_ws(self._val[1])
+                return Envelope(self._name, GEN=(_gen,))
+            Obj = self._get_val_obj(self._val[0])
+        Obj._val = self._val[1]
+        _gen = ASN1CodecOER.encode_open_type_ws(Obj.to_oer())
+        self._struct = Envelope(self._name, GEN=(_gen,))
+        return self._struct
+
 
 class ANY(OPEN):
     
