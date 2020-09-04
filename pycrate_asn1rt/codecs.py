@@ -2070,43 +2070,35 @@ class ASN1CodecOER(ASN1Codec):
         return enum_val, t_enum
 
     @classmethod
-    def encode_open_type(cls, tag_class, tag, value_bytes):
+    def encode_open_type(cls, value_bytes):
         # The standard is quite unclear to me about this. But tested on CHOICE
         # with extension type using ASN1 Playground, it seems it is the correct
         # implementation.
-        tmp = cls.encode_tag(tag, tag_class)
         l_val = len(value_bytes)
-        tmp.extend(cls.encode_length_determinant(l_val))
+        tmp = (cls.encode_length_determinant(l_val))
         tmp.append((T_BYTES, value_bytes, l_val*8))
-
         return tmp
 
     @classmethod
-    def encode_open_type_ws(cls, tag_class, tag, value_bytes):
-        _gen = [cls.encode_tag_ws(tag, tag_class),]
+    def encode_open_type_ws(cls, value_bytes):
         l_val = len(value_bytes)
-        _gen.append(cls.encode_length_determinant_ws(l_val))
+        _gen = [cls.encode_length_determinant_ws(l_val)]
         _gen.append(Buf('V', val=value_bytes, bl=l_val*8))
         return Envelope("Open-Type", GEN=tuple(_gen))
 
     @classmethod
     def decode_open_type(cls, char):
-        tag_class, tag = cls.decode_tag(char)
         l_val = cls.decode_length_determinant(char)
         val_bytes = char.get_bytes(l_val * 8)
-
-        return tag_class, tag, val_bytes
+        return val_bytes
 
     @classmethod
     def decode_open_type_ws(cls, char):
-        tag_class, tag_val, tag_struct = cls.decode_tag_ws(char)
-        _gen = [tag_struct]
         l_val, l_struct = cls.decode_length_determinant_ws(char)
-        _gen.append(l_struct)
+        _gen = [l_struct]
         val_struct = Buf('V', bl=l_val*8)
         val_struct._from_char(char)
         _gen.append(val_struct)
-        val = val_struct.get_val()
-
-        return tag_class, tag_val, val, Envelope("Open-Type", GEN=tuple(_gen))
+        val_bytes = val_struct.get_val()
+        return val_bytes, Envelope("Open-Type", GEN=tuple(_gen))
 
