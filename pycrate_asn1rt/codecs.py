@@ -2071,6 +2071,9 @@ class ASN1CodecOER(ASN1Codec):
 
     @classmethod
     def encode_open_type(cls, tag_class, tag, value_bytes):
+        # The standard is quite unclear to me about this. But tested on CHOICE
+        # with extension type using ASN1 Playground, it seems it is the correct
+        # implementation.
         tmp = cls.encode_tag(tag, tag_class)
         l_val = len(value_bytes)
         tmp.extend(cls.encode_length_determinant(l_val))
