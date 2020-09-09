@@ -1062,18 +1062,24 @@ Specific constraints attributes:
             Cont._val = self._val[1]
             buf = Cont.to_oer()
             l_val = len(buf) * 8
+            pad_bits = 0
             _gen = [(T_BYTES, buf, l_val)]
             if Cont == self._const_cont:
                 return _gen
         else:
             # 2) value is the standard (uint, bit length)
             if self._val[1]:
-                buf, l_val = uint_to_bytes(self._val[0], self._val[1]), self._val[1]
+                l_val = self._val[1]
+                _gen = [(T_UINT, self._val[0], l_val)]
+                # padding bits
+                pad_bits = (l_val % 8)
+                pad_bits = (8 - pad_bits) if pad_bits else 0
+                _gen.append((T_UINT, 0, pad_bits))
             else:
                 # empty bit string
-                buf = b''
+                pad_bits = 0
                 l_val = 0
-            _gen = [(T_BYTES, buf, len(buf)*8)]
+                _gen = [(T_BYTES, b'', l_val)]
 
         if self._const_sz:
             if (self._const_sz._ev is None) and (self._const_sz.ra == 1):
@@ -1081,8 +1087,9 @@ Specific constraints attributes:
                 return _gen
 
         # Variable size constrains
-        GEN = ASN1CodecOER.encode_length_determinant(len(buf)+1)
-        GEN.append((T_UINT, (len(buf) * 8) - l_val, 8))  # Initial octet
+        GEN = ASN1CodecOER.encode_length_determinant(((l_val + pad_bits) // 8)
+                                                     + 1)
+        GEN.append((T_UINT, pad_bits, 8))  # Initial octet
         GEN.extend(_gen)
         return GEN
 
@@ -1102,40 +1109,49 @@ Specific constraints attributes:
             Cont._val = self._val[1]
             buf = Cont.to_oer()
             l_val = len(buf) * 8
-            _gen = (Buf('V', val=buf, bl=l_val),)
+            pad_bits = 0
+            _gen = [Buf('V', val=buf, bl=l_val)]
             if Cont == self._const_cont:
-                self._struct = Envelope(self._name, GEN=_gen)
+                self._struct = Envelope(self._name, GEN=tuple(_gen))
                 return self._struct
         else:
             # 2) value is the standard (uint, bit length)
             if self._val[1]:
-                buf, l_val = uint_to_bytes(self._val[0], self._val[1]), \
-                             self._val[1]
+                l_val = self._val[1]
+                _gen = [Uint('V', val=self._val[0], bl=l_val)]
+                # padding bits
+                pad_bits = (l_val % 8)
+                pad_bits = (8 - pad_bits) if pad_bits else 0
+                _gen.append(Uint('Zero-pad', val=0, bl=pad_bits))
             else:
                 # empty bit string
-                buf = b''
+                pad_bits = 0
                 l_val = 0
-            _gen = (Buf('V', val=buf, bl=len(buf)*8),)
+                _gen = [Buf('V', b'', l_val)]
 
         if self._const_sz:
             if (self._const_sz._ev is None) and (self._const_sz.ra == 1):
                 # Fixed size constrains
-                self._struct = Envelope(self._name, GEN=_gen)
+                self._struct = Envelope(self._name, GEN=tuple(_gen))
                 return self._struct
 
         # Variable size constrains
-        GEN = ASN1CodecOER.encode_length_determinant_ws(len(buf) + 1)
-        GEN.append(Uint('Initial octet', val=(len(buf) * 8) - l_val, bl=8))
+        GEN = [ASN1CodecOER.encode_length_determinant_ws(
+            ((l_val + pad_bits) // 8) + 1)]
+        GEN.append(Uint('Initial octet', val=pad_bits, bl=8))
         GEN.extend(_gen)
-        self._struct = Envelope(self._name, GEN=(GEN,))
+        self._struct = Envelope(self._name, GEN=tuple(GEN))
         return self._struct
 
     def _from_oer(self, char):
         if self._const_sz:
             if (self._const_sz._ev is None) and (self._const_sz.ra == 1):
                 # Fixed
-                buf = char.get_uint(self._const_sz.lb)
-                self._val = (buf, self._const_sz.lb)
+                l_val = self._const_sz.lb
+                pad_bits = (l_val % 8)
+                pad_bits = (8 - pad_bits) if pad_bits else 0
+                buf = char.get_uint(l_val+pad_bits)
+                self._val = (buf >> pad_bits, l_val)
                 return
         elif self._const_cont:
             # Contained by constraint
@@ -1146,18 +1162,23 @@ Specific constraints attributes:
 
         # Variable size constraints
         l_det = ASN1CodecOER.decode_length_determinant(char)
-        i_oct = char.get_uint(8)
-        l_val = 8*(l_det - 1) - i_oct
-        self._val = (char.get_uint(l_val), l_val)
+        pad_bits = char.get_uint(8)
+        l_val = 8*(l_det - 1) - pad_bits
+        self._val = (char.get_uint(l_val+pad_bits) >> pad_bits, l_val)
 
     def _from_oer_ws(self, char):
         if self._const_sz:
             if (self._const_sz._ev is None) and (self._const_sz.ra == 1):
                 # Fixed
-                val = Uint('V', bl=self._const_sz.lb)
+                l_val = self._const_sz.lb
+                pad_bits = (l_val % 8)
+                pad_bits = (8 - pad_bits) if pad_bits else 0
+                val = Uint('V', bl=l_val)
                 val._from_char(char)
+                zero_pad = Uint('Zero-pad', bl=pad_bits)
+                zero_pad._from_char(char)
                 self._val = (val.get_val(), val.get_bl())
-                self._struct = Envelope(self._name, GEN=(val,))
+                self._struct = Envelope(self._name, GEN=(val, zero_pad))
                 return
         elif self._const_cont:
             # Contained by constraint
@@ -1169,14 +1190,19 @@ Specific constraints attributes:
             return
 
         # Variable size constraints
-        l_val, _gen = ASN1CodecOER.decode_length_determinant_ws(char)
+        l_det, _gen = ASN1CodecOER.decode_length_determinant_ws(char)
+        _gen = [_gen]
         i_oct = Uint('Initial octet', bl=8)
         i_oct._from_char(char)
-        val = Uint('V', bl=8*(l_val - 1) - i_oct.get_val())
+        pad_bits = i_oct.get_val()
+        l_val = 8*(l_det - 1) - pad_bits
+        val = Uint('V', bl=l_val)
         val._from_char(char)
-        _gen.extend((i_oct, val))
+        zero_pad = Uint('Zero-pad', bl=pad_bits)
+        zero_pad._from_char(char)
+        _gen.extend((i_oct, val, zero_pad))
         self._val = (val.get_val(), val.get_bl())
-        self._struct = Envelope(self._name, GEN=(_gen,))
+        self._struct = Envelope(self._name, GEN=tuple(_gen))
 
 
 class OCT_STR(ASN1Obj):
