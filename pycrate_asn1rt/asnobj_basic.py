@@ -1572,7 +1572,7 @@ Specific attribute:
     def _from_oer_ws(self, char):
         index, _gen = ASN1CodecOER.decode_enumerated_ws(char)
         self._val = self._get_index_value(index)
-        self._struct = Envelope(self._name, GEN=tuple(_gen))
+        self._struct = Envelope(self._name, GEN=(_gen,))
 
     def _from_oer(self, char):
         self._val = self._get_index_value(ASN1CodecOER.decode_enumerated(char))
