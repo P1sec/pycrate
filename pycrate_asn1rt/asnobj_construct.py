@@ -1619,7 +1619,7 @@ class _CONSTRUCT(ASN1Obj):
                 Comp._from_oer(char)
                 self._val[ident] = Comp._val
                 Comp._parent = _par
-            elif Comp._def is not None:
+            elif Comp._def is not None and ASN1CodecOER.GET_DEFVAL:
                 # component absent of the encoding, but with default value
                 self._val[ident] = Comp._def
 
@@ -1710,7 +1710,7 @@ class _CONSTRUCT(ASN1Obj):
                 self._val[ident] = Comp._val
                 GEN.append(Comp._struct)
                 Comp._parent = _par
-            elif Comp._def is not None:
+            elif Comp._def is not None and ASN1CodecOER.GET_DEFVAL:
                 # component absent of the encoding, but with default value
                 self._val[ident] = Comp._def
 

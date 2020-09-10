@@ -1690,6 +1690,8 @@ class ASN1CodecOER(ASN1Codec):
                    TAG_CONTEXT_SPEC: 0b10,
                    TAG_PRIVATE: 0b11}
 
+    GET_DEFVAL = True
+
     @classmethod
     def encode_tag(cls, tag, tag_class=TAG_CONTEXT_SPEC):
         try:
