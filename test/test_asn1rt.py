@@ -2006,24 +2006,24 @@ def test_perf_asn1rt():
     _load_nrran()
     print('[+] NR RRC inter-node encoding / decoding (UPER)')
     Tc = timeit(_test_nrran, number=3)
-    print('test_lteran: {0:.4f}'.format(Td))
+    print('test_lteran: {0:.4f}'.format(Tc))
     
     _load_tcap_map()
     print('[+] TCAP MAP encoding / decoding (BER)')
     Td = timeit(_test_tcap_map, number=3)
-    print('test_tcap_map: {0:.4f}'.format(Te))
+    print('test_tcap_map: {0:.4f}'.format(Td))
     
     _load_tcap_cap()
     print('[+] TCAP CAP encoding / decoding (BER)')
     Te = timeit(_test_tcap_cap, number=3)
-    print('test_tcap_cap: {0:.4f}'.format(Tf))
+    print('test_tcap_cap: {0:.4f}'.format(Te))
     
     _load_X509()
     print('[+] X.509 encoding / decoding (DER)')
     Tf = timeit(_test_X509, number=4)
-    print('test_x509: {0:.4f}'.format(Tg))
+    print('test_x509: {0:.4f}'.format(Tf))
     
-    print('[+] test_asn1rt total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te+Tf+Tg))
+    print('[+] test_asn1rt total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te+Tf))
 
 if __name__ == '__main__':
     test_perf_asn1rt()
