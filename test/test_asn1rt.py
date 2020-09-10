@@ -1986,6 +1986,8 @@ def _test_rt_base():
     assert( Seq02.to_ber() == Seq02.to_ber_ws() == b'0\x18\x16\x02un\x16\x04gros\x16\x0cpterodactyle' )
     assert( Seq02.to_cer() == Seq02.to_cer_ws() ==  b'0\x80\x16\x02un\x16\x04gros\x16\x0cpterodactyle\x00\x00' )
     assert( Seq02.to_der() == Seq02.to_der_ws() == b'0\x18\x16\x02un\x16\x04gros\x16\x0cpterodactyle' )
+    assert( Seq02.to_oer() == Seq02.to_oer_ws() == b'\x01\x03\x02un\x04gros\x0cpterodactyle' )
+    assert( Seq02.to_coer() == Seq02.to_coer_ws() == b'\x01\x03\x02un\x04gros\x0cpterodactyle' )
     # decoding
     Seq02.from_aper(b'Dun gros`pterodactyle')
     assert( Seq02._val == S_val )
@@ -2012,7 +2014,16 @@ def _test_rt_base():
         assert( Seq02._to_jval() == ['un', 'gros', 'pterodactyle'] )
         Seq02.from_jer('["un", "gros", "pterodactyle"]')
         assert( Seq02._val == S_val )
-    
+    # OER/COER
+    Seq02.from_oer(b'\x01\x03\x02un\x04gros\x0cpterodactyle')
+    assert( Seq02._val == S_val )
+    Seq02.from_oer_ws(b'\x01\x03\x02un\x04gros\x0cpterodactyle')
+    assert( Seq02._val == S_val )
+    Seq02.from_coer(b'\x01\x03\x02un\x04gros\x0cpterodactyle')
+    assert( Seq02._val == S_val )
+    Seq02.from_coer_ws(b'\x01\x03\x02un\x04gros\x0cpterodactyle')
+    assert( Seq02._val == S_val )
+
     # Set01 ::= SET { --check test_asn1rt_mod.asn file-- }
     Set01 = Mod['Set01']
     Set01.from_asn1('{enu cheese, boo TRUE, int 5565, cho enu: cake}')

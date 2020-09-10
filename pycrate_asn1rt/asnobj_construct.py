@@ -3181,6 +3181,92 @@ class _CONSTRUCT_OF(ASN1Obj):
                 self._cont._parent = _par
                 return ret
 
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _to_oer(self):
+        GEN, ldet = [], len(self._val)
+        l_size = uint_bytelen(ldet)
+        GEN.extend(ASN1CodecOER.encode_length_determinant(l_size))
+        GEN.append( (T_UINT, ldet, l_size*8) )
+
+        # Iterate over items
+        Comp = self._cont
+        _par = Comp._parent
+        Comp._parent = self
+
+        for val in self._val:
+            Comp._val = val
+            GEN.extend(Comp._to_oer())
+
+        Comp._parent = _par
+
+        return GEN
+
+    def _to_oer_ws(self):
+        GEN, ldet = [], len(self._val)
+        l_size = uint_bytelen(ldet)
+        GEN.append(ASN1CodecOER.encode_length_determinant_ws(l_size))
+        GEN.append(Uint('Quantity', val=ldet, bl=l_size * 8))
+
+        GEN = [Envelope('Quantity-field', GEN=tuple(GEN))]
+
+        # Iterate over items
+        Comp = self._cont
+        _par = Comp._parent
+        Comp._parent = self
+
+        for val in self._val:
+            Comp._val = val
+            GEN.append(Comp._to_oer_ws())
+
+        Comp._parent = _par
+
+        self._struct = Envelope(self._name, GEN=tuple(GEN))
+        return self._struct
+
+    def _from_oer(self, char):
+        l_size = ASN1CodecOER.decode_length_determinant(char)
+        ldet = char.get_uint(l_size*8)
+
+        Comp = self._cont
+        _par = Comp._parent
+        Comp._parent = self
+        val = []
+        for i in range(ldet):
+            Comp._from_oer(char)
+            val.append(Comp._val)
+
+        Comp._parent = _par
+
+        self._val = val
+
+    def _from_oer_ws(self, char):
+        GEN = []
+        l_size, l_size_struct = ASN1CodecOER.decode_length_determinant_ws(char)
+        GEN.append(l_size_struct)
+        ldet_struct = Uint('Quantity', bl=l_size*8)
+        ldet_struct._from_char(char)
+        ldet = ldet_struct.get_val()
+        GEN.append(ldet_struct)
+
+        GEN = [Envelope('Quantity-field', GEN=tuple(GEN))]
+
+        Comp = self._cont
+        _par = Comp._parent
+        Comp._parent = self
+        val = []
+        for i in range(ldet):
+            Comp._from_oer_ws(char)
+            GEN.append(Comp._struct)
+            val.append(Comp._val)
+
+        Comp._parent = _par
+
+        self._struct = Envelope(self._name, GEN=tuple(GEN))
+        self._val = val
+
 
 class SEQ_OF(_CONSTRUCT_OF):
     __doc__ = """
