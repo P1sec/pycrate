@@ -126,7 +126,7 @@ class AuC:
                     K      = unhexlify( fields[1].encode('ascii') )
                     ALG2   = int( fields[2] )
                     SQN    = int( fields[3] )
-                    if len(fields) > 4 and len(fields) == 32:
+                    if len(fields) > 4 and len(fields[4]) == 32:
                         OP = unhexlify( fields[4].encode('ascii') )
                     else:
                         OP = None
