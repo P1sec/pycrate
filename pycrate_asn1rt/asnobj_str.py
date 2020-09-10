@@ -2803,9 +2803,11 @@ Virtual parent for any ASN.1 *String object
 
         # All other variants
         l_det, _gen = ASN1CodecOER.decode_length_determinant_ws(char)
+        _gen = [_gen]
         buf = Buf('V', bl=l_det*8)
         buf._from_char(char)
-        self._struct = Envelope(self._name, GEN=(_gen,))
+        _gen.append(buf)
+        self._struct = Envelope(self._name, GEN=tuple(_gen))
         self._val = self._decode_oer_cont(buf.to_bytes())
 
     def _decode_oer_cont(self, content_bytes):
@@ -2863,9 +2865,9 @@ Virtual parent for any ASN.1 *String object
             pass
 
         # All other variants
-        GEN = ASN1CodecOER.encode_length_determinant_ws(l_buf)
+        GEN = [ASN1CodecOER.encode_length_determinant_ws(l_buf)]
         GEN.append(buf)
-        self._struct = Envelope(self._name, GEN=(GEN,))
+        self._struct = Envelope(self._name, GEN=tuple(GEN))
         return self._struct
 
 
