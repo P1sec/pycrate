@@ -811,9 +811,15 @@ class PycrateGenerator(_Generator):
         if not [C for C in Obj._const if C['type'] == CONST_VAL]:
             return
         # value constraint: reducing all value constraint to a single one
-        Consts_val = [C for C in Obj.get_const() if C['type'] == CONST_VAL]
+        Consts_val = [C for C in Obj.get_const() if C['type'] == CONST_VAL \
+                      and ('excl' not in C or C['excl'] == False)]
+        Consts_val_excl = [C for C in Obj.get_const() if C['type'] == CONST_VAL \
+                           and ('excl' in C and C['excl'] == True)]
         if Consts_val:
             Sval = reduce_setdicts(Consts_val)
+            if Consts_val_excl:
+                # TODO: support removing excluded values
+                pass
             self.wrl('{0}._const_val = {1}'.format(Obj._pyname, set_to_defin(Sval, Obj, self)))
     
     def gen_const_table(self, Obj):
@@ -880,7 +886,19 @@ class PycrateGenerator(_Generator):
                 self.gen_type(Const['obj'])
                 # now link it to the Obj constraint
                 self.wrl('{0}._const_cont = {1}'.format(Obj._pyname, Const['obj']._pyname))
-
+    
+    def gen_const_comps(self, Obj):
+        # WITH COMPONENTS constraint: processing only a single constraint
+        Consts_comps = [C for C in Obj._const if C['type'] == CONST_COMPS]
+        if Consts_comps:
+            if len(Consts_comps) > 1:
+                asnlog('WNG, {0}.{1}: multiple WITH COMPONENTS constraint, compiling '\
+                       'only the first'.format(self._mod_name, Obj._name))
+            Const = Consts_comps[0]
+            # TODO: duplicate in Obj._cont the content of the referred object
+            # and apply the constraint to it
+        
+        
 #------------------------------------------------------------------------------#
 # JSON graph dependency generator
 #------------------------------------------------------------------------------#
