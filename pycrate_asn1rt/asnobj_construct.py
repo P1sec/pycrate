@@ -1317,16 +1317,16 @@ class _CONSTRUCT(ASN1Obj):
             return GEN
 
         extended = False
+        ext_bit = 0
         if self._ext is not None:
             # check if some extended components are provided
             for k in self._val:
                 if k in self._ext or k[:5] == '_ext_':
                     extended = True
                     break
-            if extended:
-                GEN.append( (T_UINT, 1, 1) )
-            else:
-                GEN.append( (T_UINT, 0, 1) )
+
+            GEN.append((T_UINT, (1 if extended else 0), 1))
+            ext_bit = 1
 
         # generate the bitmap preambule for optional / default components of the root part
         opt_len = 0
@@ -1351,7 +1351,6 @@ class _CONSTRUCT(ASN1Obj):
             opt_idents = []
 
         # Padding bits
-        ext_bit = 1 if extended else 0
         pad_bits = 8 - ((opt_len + ext_bit) % 8)
         pad_bits = 0 if (pad_bits == 8) else pad_bits
         Bv = Bv << pad_bits
@@ -1448,14 +1447,16 @@ class _CONSTRUCT(ASN1Obj):
             return GEN
 
         extended = False
+        ext_bit = 0
         if self._ext is not None:
             # check if some extended components are provided
             for k in self._val:
                 if k in self._ext or k[:5] == '_ext_':
                     extended = True
                     break
-            ext_bit = 1 if extended else 0
-            GEN.append(Uint('Extension', val=ext_bit, bl=1))
+
+            GEN.append(Uint('Extension', val=(1 if extended else 0), bl=1))
+            ext_bit = 1
 
         # generate the bitmap preambule for optional / default components of the root part
         opt_len = 0
@@ -1480,7 +1481,6 @@ class _CONSTRUCT(ASN1Obj):
             opt_idents = []
 
         # Padding bits
-        ext_bit = 1 if extended else 0
         pad_bits = 8 - ((opt_len + ext_bit) % 8)
         pad_bits = 0 if (pad_bits == 8) else pad_bits
         Bv = Bv << pad_bits
@@ -1586,8 +1586,10 @@ class _CONSTRUCT(ASN1Obj):
             return
 
         extended = False
+        ext_bit = 0
         if self._ext is not None:
             extended = (1 == char.get_uint(1))
+            ext_bit = 1
 
         # get the bitmap preambule for optional / default components of the root part
         if self._root_opt:
@@ -1599,7 +1601,6 @@ class _CONSTRUCT(ASN1Obj):
             opt_idents = []
 
         # Get the padding bits
-        ext_bit = 1 if extended else 0
         pad_bits = 8 - ((opt_len + ext_bit) % 8)
         pad_bits = 0 if (pad_bits == 8) else pad_bits
         char.get_uint(pad_bits)
@@ -1669,15 +1670,16 @@ class _CONSTRUCT(ASN1Obj):
             return
 
         extended = False
+        ext_bit = 0
         if self._ext is not None:
             extension = Uint('Extension', bl=1)
             extension._from_char(char)
             GEN.append(extension)
             extended = (1 == extension.get_val())
+            ext_bit = 1
 
         # get the bitmap preambule for optional / default components of the root part
         opt_len = len(self._root_opt) if self._root_opt else 0
-        ext_bit = 1 if extended else 0
         pad_bits = 8 - ((opt_len + ext_bit) % 8)
         pad_bits = 0 if (pad_bits == 8) else pad_bits
 
@@ -3234,9 +3236,10 @@ class _CONSTRUCT_OF(ASN1Obj):
         _par = Comp._parent
         Comp._parent = self
         val = []
-        for i in range(ldet):
-            Comp._from_oer(char)
-            val.append(Comp._val)
+        if ldet:
+            for i in range(ldet):
+                Comp._from_oer(char)
+                val.append(Comp._val)
 
         Comp._parent = _par
 
@@ -3257,10 +3260,11 @@ class _CONSTRUCT_OF(ASN1Obj):
         _par = Comp._parent
         Comp._parent = self
         val = []
-        for i in range(ldet):
-            Comp._from_oer_ws(char)
-            GEN.append(Comp._struct)
-            val.append(Comp._val)
+        if ldet:
+            for i in range(ldet):
+                Comp._from_oer_ws(char)
+                GEN.append(Comp._struct)
+                val.append(Comp._val)
 
         Comp._parent = _par
 

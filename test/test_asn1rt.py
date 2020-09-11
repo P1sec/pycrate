@@ -1937,8 +1937,8 @@ def _test_rt_base():
     assert( Seq01.to_ber() == Seq01.to_ber_ws() == b'0\x0e\x01\x01\x00\xbf\x81\x00\x04\x02\x02\x04\x00\n\x01\x01' )
     assert( Seq01.to_cer() == Seq01.to_cer_ws() == b'0\x80\x01\x01\x00\xbf\x81\x00\x80\x02\x02\x04\x00\x00\x00\n\x01\x01\x00\x00' )
     assert( Seq01.to_der() == Seq01.to_der_ws() == b'0\x0e\x01\x01\x00\xbf\x81\x00\x04\x02\x02\x04\x00\n\x01\x01' )
-    assert( Seq01.to_oer() == Seq01.to_oer_ws() == b'`\x00\x01\x02\x00\x00\x80' )
-    assert( Seq01.to_coer() == Seq01.to_coer_ws() == b'`\x00\x01\x02\x00\x00\x80' )
+    assert( Seq01.to_oer() == Seq01.to_oer_ws() == b'`\x00\x02\x04\x00\x01' )
+    assert( Seq01.to_coer() == Seq01.to_coer_ws() == b'`\x00\x02\x04\x00\x01' )
 
     # decoding
     Seq01.from_aper(b'`\x02\x03\xff@')
@@ -1967,13 +1967,13 @@ def _test_rt_base():
         Seq01.from_jer('{"boo": false, "enu": "cake", "int": 1024}')
         assert( Seq01._val == S_val )
     # OER/COER
-    Seq01.from_oer(b'`\x00\x01\x02\x00\x00\x80')
+    Seq01.from_oer(b'`\x00\x02\x04\x00\x01')
     assert( Seq01._val == S_val )
-    Seq01.from_oer_ws(b'`\x00\x01\x02\x00\x00\x80')
+    Seq01.from_oer_ws(b'`\x00\x02\x04\x00\x01')
     assert( Seq01._val == S_val )
-    Seq01.from_coer(b'`\x00\x01\x02\x00\x00\x80')
+    Seq01.from_coer(b'`\x00\x02\x04\x00\x01')
     assert( Seq01._val == S_val )
-    Seq01.from_coer_ws(b'`\x00\x01\x02\x00\x00\x80')
+    Seq01.from_coer_ws(b'`\x00\x02\x04\x00\x01')
     assert( Seq01._val == S_val )
 
     # Seq02 ::= SEQUENCE (SIZE (2..5)) OF Ias02
@@ -2034,8 +2034,8 @@ def _test_rt_base():
     assert( Set01.to_ber() == Set01.to_ber_ws() == b'1\x0e\x01\x01\xff\n\x01\x00\x82\x01\x01\x9f@\x02\x15\xbd' )
     assert( Set01.to_cer() == Set01.to_cer_ws() == b'1\x80\x01\x01\xff\n\x01\x00\x82\x01\x01\x9f@\x02\x15\xbd\x00\x00' )
     assert( Set01.to_der() == Set01.to_der_ws() == b'1\x0e\x01\x01\xff\n\x01\x00\x82\x01\x01\x9f@\x02\x15\xbd' )
-    assert( Set01.to_oer() == Set01.to_oer_ws() == b'`\x7f\x80A\x00\x81\n\xde\x80' )
-    assert( Set01.to_coer() == Set01.to_coer_ws() == b'`\x7f\x80A\x00\x81\n\xde\x80' )
+    assert( Set01.to_oer() == Set01.to_oer_ws() == b'`\xff\x00\x82\x01\x02\x15\xbd' )
+    assert( Set01.to_coer() == Set01.to_coer_ws() == b'`\xff\x00\x82\x01\x02\x15\xbd' )
     # decoding
     Set01.from_aper(b'r@\x02\x15\xbc')
     assert( Set01._val == S_val )
@@ -2063,13 +2063,13 @@ def _test_rt_base():
         Set01.from_jer('{"boo": true, "cho": {"enu": "cake"}, "enu": "cheese", "int": 5565}')
         assert( Set01._val == S_val )
     # OER/COER
-    Set01.from_oer(b'`\x7f\x80A\x00\x81\n\xde\x80')
+    Set01.from_oer(b'`\xff\x00\x82\x01\x02\x15\xbd')
     assert( Set01._val == S_val )
-    Set01.from_oer_ws(b'`\x7f\x80A\x00\x81\n\xde\x80')
+    Set01.from_oer_ws(b'`\xff\x00\x82\x01\x02\x15\xbd')
     assert( Set01._val == S_val )
-    Set01.from_coer(b'`\x7f\x80A\x00\x81\n\xde\x80')
+    Set01.from_coer(b'`\xff\x00\x82\x01\x02\x15\xbd')
     assert( Set01._val == S_val )
-    Set01.from_coer_ws(b'`\x7f\x80A\x00\x81\n\xde\x80')
+    Set01.from_coer_ws(b'`\xff\x00\x82\x01\x02\x15\xbd')
     assert( Set01._val == S_val )
 
     return 0
