@@ -1241,7 +1241,7 @@ def generate_all(dic=ASN_SPECS, destpath=None):
         destpath = os.path.dirname(_asn1c.__file__) + os.path.sep + '..' + \
                    os.path.sep + _ASN1DIR_PATH
     #
-    for item in dic.items():
+    for item in sorted(dic.items()):
         asnlog('[GEN] {0}'.format(item[0]))
         kwargs = {}
         if isinstance(item[1], tuple):
@@ -1262,7 +1262,7 @@ def generate_all(dic=ASN_SPECS, destpath=None):
     dest = destpath + '__init__.py'
     fd = open(dest, 'w')
     fd.write('__all__ = [')
-    for name in dic:
+    for name in sorted(dic):
         fd.write('\'%s\', ' % name)
     fd.write(']\n')
     fd.close()
