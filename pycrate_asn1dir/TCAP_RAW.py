@@ -74,7 +74,7 @@ class DialoguePDUs:
     
     #-----< AARQ-apdu >-----#
     AARQ_apdu = SEQ(name=u'AARQ-apdu', mode=MODE_TYPE, tag=(0, TAG_APPLICATION, TAG_IMPLICIT))
-    _AARQ_apdu_protocol_version = BIT_STR(name=u'protocol-version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=(1, 0))
+    _AARQ_apdu_protocol_version = BIT_STR(name=u'protocol-version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=(1, 1))
     _AARQ_apdu_protocol_version._cont = ASN1Dict([(u'version1', 0)])
     _AARQ_apdu_application_context_name = OID(name=u'application-context-name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _AARQ_apdu_user_information = SEQ_OF(name=u'user-information', mode=MODE_TYPE, tag=(30, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
@@ -89,7 +89,7 @@ class DialoguePDUs:
     
     #-----< AARE-apdu >-----#
     AARE_apdu = SEQ(name=u'AARE-apdu', mode=MODE_TYPE, tag=(1, TAG_APPLICATION, TAG_IMPLICIT))
-    _AARE_apdu_protocol_version = BIT_STR(name=u'protocol-version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=(1, 0))
+    _AARE_apdu_protocol_version = BIT_STR(name=u'protocol-version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=(1, 1))
     _AARE_apdu_protocol_version._cont = ASN1Dict([(u'version1', 0)])
     _AARE_apdu_application_context_name = OID(name=u'application-context-name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _AARE_apdu_result = INT(name=u'result', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DialoguePDUs', 'Associate-result')))
@@ -247,7 +247,7 @@ class UnidialoguePDUs:
     
     #-----< AUDT-apdu >-----#
     AUDT_apdu = SEQ(name=u'AUDT-apdu', mode=MODE_TYPE, tag=(0, TAG_APPLICATION, TAG_IMPLICIT))
-    _AUDT_apdu_protocol_version = BIT_STR(name=u'protocol-version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=(1, 0))
+    _AUDT_apdu_protocol_version = BIT_STR(name=u'protocol-version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=(1, 1))
     _AUDT_apdu_protocol_version._cont = ASN1Dict([(u'version1', 0)])
     _AUDT_apdu_application_context_name = OID(name=u'application-context-name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _AUDT_apdu_user_information = SEQ_OF(name=u'user-information', mode=MODE_TYPE, tag=(30, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
