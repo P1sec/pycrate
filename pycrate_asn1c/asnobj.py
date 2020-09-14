@@ -4957,15 +4957,32 @@ class ASN1Obj(object):
               .format(self.fullname(), text)))
         
     def __parse_value_bitstr_offsets(self, val):
+        # val: set of offsets
         # returns the integral value and the minimum number of bits 
         # for the set of offsets
-        # TODO: take SIZE constraint into account ?
         if val is None:
             # null length bit string
             val = [0, 0]
         else:
-            blen = max(val)
-            val = [sum([1<<(blen-i) for i in val]), blen]
+            moff = max(val)
+            val  = [sum([1<<(moff-i) for i in val]), 1+moff]
+        # take potential SIZE constraint into account
+        Consts_sz = [C for C in self.get_const() if C['type'] == CONST_SIZE]
+        if Consts_sz:
+            # size is a set of INTEGER values
+            Const_sz = reduce_setdicts(Consts_sz)
+            # check if there is a root lower bound, without defined extension
+            if Const_sz.root and Const_sz.ext is None:
+                lb = Const_sz.root[0]
+                # lb can be a single int value or an ASN1RangeInt
+                if hasattr(lb, 'lb'):
+                    lb = lb.lb
+                if lb is None:
+                    lb = 0
+                assert( isinstance(lb, integer_types) and lb >= 0 )
+                if val[1] < lb:
+                    diff = lb - val[1]
+                    val = [val[0] << diff, val[1] + diff]
         self.select_set(_path_cur(), val)
     
     def _parse_value_octstr(self, text):
