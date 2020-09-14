@@ -831,7 +831,7 @@ class ASN1Set(object):
     def __get_root_bnd(self, bnd='lb'):
         bnd_ind = {'lb':0, 'ub':-1}[bnd]
         if isinstance(self.root[bnd_ind], (ASN1RangeInt, ASN1RangeStr)):
-            return getattr(self.root[bnd_ind], bnd) 
+            return getattr(self.root[bnd_ind], bnd)
         elif isinstance(self.root[bnd_ind], integer_types):
             return self.root[bnd_ind]
         elif isinstance(self.root[bnd_ind], str_types) and len(self.root[bnd_ind]) == 1:

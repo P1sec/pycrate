@@ -4407,8 +4407,6 @@ class ASN1Obj(object):
         if not partial:
             # ensure all mandatory components have been constrained
             if not all([ident in done for ident in self.get_root_mand()]):
-                asnlog('WNG: {0}.{1}, missing mandatory components in WITH COMPONENTS'\
-                       .format(GLOBAL.COMP['NS']['mod'], self.fullname()))
                 raise(ASN1ProcTextErr(
                       '{0}: missing mandatory components in WITH COMPONENTS'\
                       .format(self.fullname())))
