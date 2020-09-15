@@ -18905,6 +18905,18 @@ class IVI:
     _GicPart_roadSignCodes._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=[], er=[])
     _GicPart_extraText = SEQ_OF(name=u'extraText', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __GicPart_extraText__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('IVI', 'Text')))
+    ___GicPart_extraText__item__layoutComponentId = INT(name=u'layoutComponentId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___GicPart_extraText__item__layoutComponentId._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=[], er=[])
+    ___GicPart_extraText__item__language = BIT_STR(name=u'language', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___GicPart_extraText__item__language._const_sz = ASN1Set(rv=[10], rr=[], ev=None, er=[])
+    ___GicPart_extraText__item__textContent = STR_UTF8(name=u'textContent', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___GicPart_extraText__item__textContent._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    __GicPart_extraText__item_._cont = ASN1Dict([
+        (u'layoutComponentId', ___GicPart_extraText__item__layoutComponentId),
+        (u'language', ___GicPart_extraText__item__language),
+        (u'textContent', ___GicPart_extraText__item__textContent),
+        ])
+    __GicPart_extraText__item_._ext = None
     _GicPart_extraText._cont = __GicPart_extraText__item_
     _GicPart_extraText._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=[], er=[])
     GicPart._cont = ASN1Dict([
@@ -19375,7 +19387,7 @@ class IVI:
     
     #-----< Text >-----#
     Text = SEQ(name=u'Text', mode=MODE_TYPE)
-    _Text_layoutComponentId = INT(name=u'layoutComponentId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Text_layoutComponentId = INT(name=u'layoutComponentId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _Text_layoutComponentId._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=[], er=[])
     _Text_language = BIT_STR(name=u'language', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _Text_language._const_sz = ASN1Set(rv=[10], rr=[], ev=None, er=[])
@@ -19412,14 +19424,61 @@ class IVI:
     TrailerCharacteristics = SEQ(name=u'TrailerCharacteristics', mode=MODE_TYPE)
     _TrailerCharacteristics_equalTo = SEQ_OF(name=u'equalTo', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __TrailerCharacteristics_equalTo__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('IVI', 'VehicleCharacteristicsFixValues')))
+    ___TrailerCharacteristics_equalTo__item__simpleVehicleType = INT(name=u'simpleVehicleType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'StationType')))
+    ___TrailerCharacteristics_equalTo__item__euVehicleCategoryCode = CHOICE(name=u'euVehicleCategoryCode', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('ElectronicRegistrationIdentificationVehicleDataModule', 'EuVehicleCategoryCode')))
+    ___TrailerCharacteristics_equalTo__item__iso3833VehicleType = INT(name=u'iso3833VehicleType', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ElectronicRegistrationIdentificationVehicleDataModule', 'Iso3833VehicleType')))
+    ___TrailerCharacteristics_equalTo__item__loadType = SEQ(name=u'loadType', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('IVI', 'LoadType')))
+    ___TrailerCharacteristics_equalTo__item__usage = ENUM(name=u'usage', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'VehicleRole')))
+    __TrailerCharacteristics_equalTo__item_._cont = ASN1Dict([
+        (u'simpleVehicleType', ___TrailerCharacteristics_equalTo__item__simpleVehicleType),
+        (u'euVehicleCategoryCode', ___TrailerCharacteristics_equalTo__item__euVehicleCategoryCode),
+        (u'iso3833VehicleType', ___TrailerCharacteristics_equalTo__item__iso3833VehicleType),
+        (u'loadType', ___TrailerCharacteristics_equalTo__item__loadType),
+        (u'usage', ___TrailerCharacteristics_equalTo__item__usage),
+        ])
+    __TrailerCharacteristics_equalTo__item_._ext = []
     _TrailerCharacteristics_equalTo._cont = __TrailerCharacteristics_equalTo__item_
     _TrailerCharacteristics_equalTo._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=[], er=[])
     _TrailerCharacteristics_notEqualTo = SEQ_OF(name=u'notEqualTo', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __TrailerCharacteristics_notEqualTo__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('IVI', 'VehicleCharacteristicsFixValues')))
+    ___TrailerCharacteristics_notEqualTo__item__simpleVehicleType = INT(name=u'simpleVehicleType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'StationType')))
+    ___TrailerCharacteristics_notEqualTo__item__euVehicleCategoryCode = CHOICE(name=u'euVehicleCategoryCode', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('ElectronicRegistrationIdentificationVehicleDataModule', 'EuVehicleCategoryCode')))
+    ___TrailerCharacteristics_notEqualTo__item__iso3833VehicleType = INT(name=u'iso3833VehicleType', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ElectronicRegistrationIdentificationVehicleDataModule', 'Iso3833VehicleType')))
+    ___TrailerCharacteristics_notEqualTo__item__loadType = SEQ(name=u'loadType', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('IVI', 'LoadType')))
+    ___TrailerCharacteristics_notEqualTo__item__usage = ENUM(name=u'usage', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'VehicleRole')))
+    __TrailerCharacteristics_notEqualTo__item_._cont = ASN1Dict([
+        (u'simpleVehicleType', ___TrailerCharacteristics_notEqualTo__item__simpleVehicleType),
+        (u'euVehicleCategoryCode', ___TrailerCharacteristics_notEqualTo__item__euVehicleCategoryCode),
+        (u'iso3833VehicleType', ___TrailerCharacteristics_notEqualTo__item__iso3833VehicleType),
+        (u'loadType', ___TrailerCharacteristics_notEqualTo__item__loadType),
+        (u'usage', ___TrailerCharacteristics_notEqualTo__item__usage),
+        ])
+    __TrailerCharacteristics_notEqualTo__item_._ext = []
     _TrailerCharacteristics_notEqualTo._cont = __TrailerCharacteristics_notEqualTo__item_
     _TrailerCharacteristics_notEqualTo._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=[], er=[])
     _TrailerCharacteristics_ranges = SEQ_OF(name=u'ranges', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __TrailerCharacteristics_ranges__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('IVI', 'VehicleCharacteristicsRanges')))
+    ___TrailerCharacteristics_ranges__item__comparisonOperator = INT(name=u'comparisonOperator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('IVI', 'ComparisonOperator')))
+    ___TrailerCharacteristics_ranges__item__limits = CHOICE(name=u'limits', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    ____TrailerCharacteristics_ranges__item__limits_numberOfAxles = INT(name=u'numberOfAxles', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____TrailerCharacteristics_ranges__item__limits_numberOfAxles._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=7)], ev=None, er=[])
+    ____TrailerCharacteristics_ranges__item__limits_vehicleDimensions = SEQ(name=u'vehicleDimensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('EfcDsrcApplication', 'VehicleDimensions')))
+    ____TrailerCharacteristics_ranges__item__limits_vehicleWeightLimits = SEQ(name=u'vehicleWeightLimits', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('EfcDsrcApplication', 'VehicleWeightLimits')))
+    ____TrailerCharacteristics_ranges__item__limits_axleWeightLimits = SEQ(name=u'axleWeightLimits', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('EfcDsrcApplication', 'AxleWeightLimits')))
+    ____TrailerCharacteristics_ranges__item__limits_passengerCapacity = SEQ(name=u'passengerCapacity', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('EfcDsrcApplication', 'PassengerCapacity')))
+    ___TrailerCharacteristics_ranges__item__limits._cont = ASN1Dict([
+        (u'numberOfAxles', ____TrailerCharacteristics_ranges__item__limits_numberOfAxles),
+        (u'vehicleDimensions', ____TrailerCharacteristics_ranges__item__limits_vehicleDimensions),
+        (u'vehicleWeightLimits', ____TrailerCharacteristics_ranges__item__limits_vehicleWeightLimits),
+        (u'axleWeightLimits', ____TrailerCharacteristics_ranges__item__limits_axleWeightLimits),
+        (u'passengerCapacity', ____TrailerCharacteristics_ranges__item__limits_passengerCapacity),
+        ])
+    ___TrailerCharacteristics_ranges__item__limits._ext = []
+    __TrailerCharacteristics_ranges__item_._cont = ASN1Dict([
+        (u'comparisonOperator', ___TrailerCharacteristics_ranges__item__comparisonOperator),
+        (u'limits', ___TrailerCharacteristics_ranges__item__limits),
+        ])
+    __TrailerCharacteristics_ranges__item_._ext = None
     _TrailerCharacteristics_ranges._cont = __TrailerCharacteristics_ranges__item_
     _TrailerCharacteristics_ranges._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=[], er=[])
     TrailerCharacteristics._cont = ASN1Dict([
@@ -19495,18 +19554,12 @@ class IVI:
     __VehicleCharacteristicsRanges_limits_vehicleWeightLimits = SEQ(name=u'vehicleWeightLimits', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('EfcDsrcApplication', 'VehicleWeightLimits')))
     __VehicleCharacteristicsRanges_limits_axleWeightLimits = SEQ(name=u'axleWeightLimits', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('EfcDsrcApplication', 'AxleWeightLimits')))
     __VehicleCharacteristicsRanges_limits_passengerCapacity = SEQ(name=u'passengerCapacity', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('EfcDsrcApplication', 'PassengerCapacity')))
-    __VehicleCharacteristicsRanges_limits_exhaustEmissionValues = SEQ(name=u'exhaustEmissionValues', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('EfcDsrcApplication', 'ExhaustEmissionValues')))
-    __VehicleCharacteristicsRanges_limits_dieselEmissionValues = SEQ(name=u'dieselEmissionValues', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('EfcDsrcApplication', 'DieselEmissionValues')))
-    __VehicleCharacteristicsRanges_limits_soundLevel = SEQ(name=u'soundLevel', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('EfcDsrcApplication', 'SoundLevel')))
     _VehicleCharacteristicsRanges_limits._cont = ASN1Dict([
         (u'numberOfAxles', __VehicleCharacteristicsRanges_limits_numberOfAxles),
         (u'vehicleDimensions', __VehicleCharacteristicsRanges_limits_vehicleDimensions),
         (u'vehicleWeightLimits', __VehicleCharacteristicsRanges_limits_vehicleWeightLimits),
         (u'axleWeightLimits', __VehicleCharacteristicsRanges_limits_axleWeightLimits),
         (u'passengerCapacity', __VehicleCharacteristicsRanges_limits_passengerCapacity),
-        (u'exhaustEmissionValues', __VehicleCharacteristicsRanges_limits_exhaustEmissionValues),
-        (u'dieselEmissionValues', __VehicleCharacteristicsRanges_limits_dieselEmissionValues),
-        (u'soundLevel', __VehicleCharacteristicsRanges_limits_soundLevel),
         ])
     _VehicleCharacteristicsRanges_limits._ext = []
     VehicleCharacteristicsRanges._cont = ASN1Dict([
@@ -19812,6 +19865,9 @@ class IVI:
         _GicPart_preStoredlayoutId,
         __GicPart_roadSignCodes__item_,
         _GicPart_roadSignCodes,
+        ___GicPart_extraText__item__layoutComponentId,
+        ___GicPart_extraText__item__language,
+        ___GicPart_extraText__item__textContent,
         __GicPart_extraText__item_,
         _GicPart_extraText,
         GicPart,
@@ -19963,10 +20019,27 @@ class IVI:
         __TractorCharacteristics_ranges__item_,
         _TractorCharacteristics_ranges,
         TractorCharacteristics,
+        ___TrailerCharacteristics_equalTo__item__simpleVehicleType,
+        ___TrailerCharacteristics_equalTo__item__euVehicleCategoryCode,
+        ___TrailerCharacteristics_equalTo__item__iso3833VehicleType,
+        ___TrailerCharacteristics_equalTo__item__loadType,
+        ___TrailerCharacteristics_equalTo__item__usage,
         __TrailerCharacteristics_equalTo__item_,
         _TrailerCharacteristics_equalTo,
+        ___TrailerCharacteristics_notEqualTo__item__simpleVehicleType,
+        ___TrailerCharacteristics_notEqualTo__item__euVehicleCategoryCode,
+        ___TrailerCharacteristics_notEqualTo__item__iso3833VehicleType,
+        ___TrailerCharacteristics_notEqualTo__item__loadType,
+        ___TrailerCharacteristics_notEqualTo__item__usage,
         __TrailerCharacteristics_notEqualTo__item_,
         _TrailerCharacteristics_notEqualTo,
+        ___TrailerCharacteristics_ranges__item__comparisonOperator,
+        ____TrailerCharacteristics_ranges__item__limits_numberOfAxles,
+        ____TrailerCharacteristics_ranges__item__limits_vehicleDimensions,
+        ____TrailerCharacteristics_ranges__item__limits_vehicleWeightLimits,
+        ____TrailerCharacteristics_ranges__item__limits_axleWeightLimits,
+        ____TrailerCharacteristics_ranges__item__limits_passengerCapacity,
+        ___TrailerCharacteristics_ranges__item__limits,
         __TrailerCharacteristics_ranges__item_,
         _TrailerCharacteristics_ranges,
         TrailerCharacteristics,
@@ -19995,9 +20068,6 @@ class IVI:
         __VehicleCharacteristicsRanges_limits_vehicleWeightLimits,
         __VehicleCharacteristicsRanges_limits_axleWeightLimits,
         __VehicleCharacteristicsRanges_limits_passengerCapacity,
-        __VehicleCharacteristicsRanges_limits_exhaustEmissionValues,
-        __VehicleCharacteristicsRanges_limits_dieselEmissionValues,
-        __VehicleCharacteristicsRanges_limits_soundLevel,
         _VehicleCharacteristicsRanges_limits,
         VehicleCharacteristicsRanges,
         _Weight_value,
@@ -21819,14 +21889,6 @@ class _IMPL_:
     #-----< EXTERNAL >-----#
     EXTERNAL = SEQ(name='EXTERNAL', mode=MODE_TYPE)
     _EXTERNAL_identification = CHOICE(name='identification', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __EXTERNAL_identification_syntaxes = SEQ(name='syntaxes', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    ___EXTERNAL_identification_syntaxes_abstract = OID(name='abstract', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    ___EXTERNAL_identification_syntaxes_transfer = OID(name='transfer', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __EXTERNAL_identification_syntaxes._cont = ASN1Dict([
-        ('abstract', ___EXTERNAL_identification_syntaxes_abstract),
-        ('transfer', ___EXTERNAL_identification_syntaxes_transfer),
-        ])
-    __EXTERNAL_identification_syntaxes._ext = None
     __EXTERNAL_identification_syntax = OID(name='syntax', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     __EXTERNAL_identification_presentation_context_id = INT(name='presentation-context-id', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     __EXTERNAL_identification_context_negotiation = SEQ(name='context-negotiation', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
@@ -21837,15 +21899,10 @@ class _IMPL_:
         ('transfer-syntax', ___EXTERNAL_identification_context_negotiation_transfer_syntax),
         ])
     __EXTERNAL_identification_context_negotiation._ext = None
-    __EXTERNAL_identification_transfer_syntax = OID(name='transfer-syntax', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __EXTERNAL_identification_fixed = NULL(name='fixed', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _EXTERNAL_identification._cont = ASN1Dict([
-        ('syntaxes', __EXTERNAL_identification_syntaxes),
         ('syntax', __EXTERNAL_identification_syntax),
         ('presentation-context-id', __EXTERNAL_identification_presentation_context_id),
         ('context-negotiation', __EXTERNAL_identification_context_negotiation),
-        ('transfer-syntax', __EXTERNAL_identification_transfer_syntax),
-        ('fixed', __EXTERNAL_identification_fixed),
         ])
     _EXTERNAL_identification._ext = None
     _EXTERNAL_data_value_descriptor = OBJ_DESC(name='data-value-descriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
@@ -21889,11 +21946,9 @@ class _IMPL_:
         ('fixed', __EMBEDDED_PDV_identification_fixed),
         ])
     _EMBEDDED_PDV_identification._ext = None
-    _EMBEDDED_PDV_data_value_descriptor = OBJ_DESC(name='data-value-descriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
     _EMBEDDED_PDV_data_value = OCT_STR(name='data-value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     EMBEDDED_PDV._cont = ASN1Dict([
         ('identification', _EMBEDDED_PDV_identification),
-        ('data-value-descriptor', _EMBEDDED_PDV_data_value_descriptor),
         ('data-value', _EMBEDDED_PDV_data_value),
         ])
     EMBEDDED_PDV._ext = None
@@ -21963,16 +22018,11 @@ class _IMPL_:
         _REAL_base,
         _REAL_exponent,
         REAL,
-        ___EXTERNAL_identification_syntaxes_abstract,
-        ___EXTERNAL_identification_syntaxes_transfer,
-        __EXTERNAL_identification_syntaxes,
         __EXTERNAL_identification_syntax,
         __EXTERNAL_identification_presentation_context_id,
         ___EXTERNAL_identification_context_negotiation_presentation_context_id,
         ___EXTERNAL_identification_context_negotiation_transfer_syntax,
         __EXTERNAL_identification_context_negotiation,
-        __EXTERNAL_identification_transfer_syntax,
-        __EXTERNAL_identification_fixed,
         _EXTERNAL_identification,
         _EXTERNAL_data_value_descriptor,
         _EXTERNAL_data_value,
@@ -21988,7 +22038,6 @@ class _IMPL_:
         __EMBEDDED_PDV_identification_transfer_syntax,
         __EMBEDDED_PDV_identification_fixed,
         _EMBEDDED_PDV_identification,
-        _EMBEDDED_PDV_data_value_descriptor,
         _EMBEDDED_PDV_data_value,
         EMBEDDED_PDV,
         ___CHARACTER_STRING_identification_syntaxes_abstract,

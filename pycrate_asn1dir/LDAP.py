@@ -238,6 +238,16 @@ class Lightweight_Directory_Access_Protocol_V3:
     
     #-----< Attribute >-----#
     Attribute = SEQ(name=u'Attribute', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'PartialAttribute')))
+    _Attribute_type = OCT_STR(name=u'type', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeDescription')))
+    _Attribute_vals = SET_OF(name=u'vals', mode=MODE_TYPE)
+    __Attribute_vals_value = OCT_STR(name=u'value', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeValue')))
+    _Attribute_vals._cont = __Attribute_vals_value
+    _Attribute_vals._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
+    Attribute._cont = ASN1Dict([
+        (u'type', _Attribute_type),
+        (u'vals', _Attribute_vals),
+        ])
+    Attribute._ext = []
     
     #-----< MatchingRuleId >-----#
     MatchingRuleId = OCT_STR(name=u'MatchingRuleId', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPString')))
@@ -626,6 +636,9 @@ class Lightweight_Directory_Access_Protocol_V3:
         __PartialAttribute_vals_value,
         _PartialAttribute_vals,
         PartialAttribute,
+        _Attribute_type,
+        __Attribute_vals_value,
+        _Attribute_vals,
         Attribute,
         MatchingRuleId,
         _LDAPResult_resultCode,

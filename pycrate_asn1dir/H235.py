@@ -411,6 +411,39 @@ class H235_SECURITY_MESSAGES:
     
     #-----< PwdCertToken >-----#
     PwdCertToken = SEQ(name=u'PwdCertToken', mode=MODE_TYPE, typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ClearToken')))
+    _PwdCertToken_tokenOID = OID(name=u'tokenOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PwdCertToken_timeStamp = INT(name=u'timeStamp', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'TimeStamp')))
+    _PwdCertToken_password = STR_BMP(name=u'password', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Password')), opt=True)
+    _PwdCertToken_dhkey = SEQ(name=u'dhkey', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'DHset')), opt=True)
+    _PwdCertToken_challenge = OCT_STR(name=u'challenge', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ChallengeString')), opt=True)
+    _PwdCertToken_random = INT(name=u'random', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'RandomVal')), opt=True)
+    _PwdCertToken_certificate = SEQ(name=u'certificate', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'TypedCertificate')), opt=True)
+    _PwdCertToken_generalID = STR_BMP(name=u'generalID', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Identifier')))
+    _PwdCertToken_nonStandard = SEQ(name=u'nonStandard', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'NonStandardParameter')), opt=True)
+    _PwdCertToken_eckasdhkey = CHOICE(name=u'eckasdhkey', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ECKASDH')), opt=True)
+    _PwdCertToken_sendersID = STR_BMP(name=u'sendersID', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Identifier')), opt=True)
+    _PwdCertToken_h235Key = CHOICE(name=u'h235Key', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'H235Key')), opt=True)
+    _PwdCertToken_profileInfo = SEQ_OF(name=u'profileInfo', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __PwdCertToken_profileInfo__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ProfileElement')))
+    _PwdCertToken_profileInfo._cont = __PwdCertToken_profileInfo__item_
+    _PwdCertToken_dhkeyext = SEQ(name=u'dhkeyext', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'DHsetExt')), opt=True)
+    PwdCertToken._cont = ASN1Dict([
+        (u'tokenOID', _PwdCertToken_tokenOID),
+        (u'timeStamp', _PwdCertToken_timeStamp),
+        (u'password', _PwdCertToken_password),
+        (u'dhkey', _PwdCertToken_dhkey),
+        (u'challenge', _PwdCertToken_challenge),
+        (u'random', _PwdCertToken_random),
+        (u'certificate', _PwdCertToken_certificate),
+        (u'generalID', _PwdCertToken_generalID),
+        (u'nonStandard', _PwdCertToken_nonStandard),
+        (u'eckasdhkey', _PwdCertToken_eckasdhkey),
+        (u'sendersID', _PwdCertToken_sendersID),
+        (u'h235Key', _PwdCertToken_h235Key),
+        (u'profileInfo', _PwdCertToken_profileInfo),
+        (u'dhkeyext', _PwdCertToken_dhkeyext),
+        ])
+    PwdCertToken._ext = [u'eckasdhkey', u'sendersID', u'h235Key', u'profileInfo', u'dhkeyext']
     
     #-----< EncodedPwdCertToken >-----#
     EncodedPwdCertToken = OPEN(name=u'EncodedPwdCertToken', mode=MODE_TYPE, typeref=ASN1RefClassField(('_IMPL_', u'TYPE-IDENTIFIER'), [u'Type']))
@@ -739,6 +772,21 @@ class H235_SECURITY_MESSAGES:
         Params,
         _EncodedGeneralToken_val_0,
         EncodedGeneralToken,
+        _PwdCertToken_tokenOID,
+        _PwdCertToken_timeStamp,
+        _PwdCertToken_password,
+        _PwdCertToken_dhkey,
+        _PwdCertToken_challenge,
+        _PwdCertToken_random,
+        _PwdCertToken_certificate,
+        _PwdCertToken_generalID,
+        _PwdCertToken_nonStandard,
+        _PwdCertToken_eckasdhkey,
+        _PwdCertToken_sendersID,
+        _PwdCertToken_h235Key,
+        __PwdCertToken_profileInfo__item_,
+        _PwdCertToken_profileInfo,
+        _PwdCertToken_dhkeyext,
         PwdCertToken,
         _EncodedPwdCertToken_val_0,
         EncodedPwdCertToken,
@@ -846,14 +894,6 @@ class _IMPL_:
     #-----< EXTERNAL >-----#
     EXTERNAL = SEQ(name='EXTERNAL', mode=MODE_TYPE)
     _EXTERNAL_identification = CHOICE(name='identification', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __EXTERNAL_identification_syntaxes = SEQ(name='syntaxes', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    ___EXTERNAL_identification_syntaxes_abstract = OID(name='abstract', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    ___EXTERNAL_identification_syntaxes_transfer = OID(name='transfer', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __EXTERNAL_identification_syntaxes._cont = ASN1Dict([
-        ('abstract', ___EXTERNAL_identification_syntaxes_abstract),
-        ('transfer', ___EXTERNAL_identification_syntaxes_transfer),
-        ])
-    __EXTERNAL_identification_syntaxes._ext = None
     __EXTERNAL_identification_syntax = OID(name='syntax', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     __EXTERNAL_identification_presentation_context_id = INT(name='presentation-context-id', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     __EXTERNAL_identification_context_negotiation = SEQ(name='context-negotiation', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
@@ -864,15 +904,10 @@ class _IMPL_:
         ('transfer-syntax', ___EXTERNAL_identification_context_negotiation_transfer_syntax),
         ])
     __EXTERNAL_identification_context_negotiation._ext = None
-    __EXTERNAL_identification_transfer_syntax = OID(name='transfer-syntax', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __EXTERNAL_identification_fixed = NULL(name='fixed', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _EXTERNAL_identification._cont = ASN1Dict([
-        ('syntaxes', __EXTERNAL_identification_syntaxes),
         ('syntax', __EXTERNAL_identification_syntax),
         ('presentation-context-id', __EXTERNAL_identification_presentation_context_id),
         ('context-negotiation', __EXTERNAL_identification_context_negotiation),
-        ('transfer-syntax', __EXTERNAL_identification_transfer_syntax),
-        ('fixed', __EXTERNAL_identification_fixed),
         ])
     _EXTERNAL_identification._ext = None
     _EXTERNAL_data_value_descriptor = OBJ_DESC(name='data-value-descriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
@@ -916,11 +951,9 @@ class _IMPL_:
         ('fixed', __EMBEDDED_PDV_identification_fixed),
         ])
     _EMBEDDED_PDV_identification._ext = None
-    _EMBEDDED_PDV_data_value_descriptor = OBJ_DESC(name='data-value-descriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
     _EMBEDDED_PDV_data_value = OCT_STR(name='data-value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     EMBEDDED_PDV._cont = ASN1Dict([
         ('identification', _EMBEDDED_PDV_identification),
-        ('data-value-descriptor', _EMBEDDED_PDV_data_value_descriptor),
         ('data-value', _EMBEDDED_PDV_data_value),
         ])
     EMBEDDED_PDV._ext = None
@@ -990,16 +1023,11 @@ class _IMPL_:
         _REAL_base,
         _REAL_exponent,
         REAL,
-        ___EXTERNAL_identification_syntaxes_abstract,
-        ___EXTERNAL_identification_syntaxes_transfer,
-        __EXTERNAL_identification_syntaxes,
         __EXTERNAL_identification_syntax,
         __EXTERNAL_identification_presentation_context_id,
         ___EXTERNAL_identification_context_negotiation_presentation_context_id,
         ___EXTERNAL_identification_context_negotiation_transfer_syntax,
         __EXTERNAL_identification_context_negotiation,
-        __EXTERNAL_identification_transfer_syntax,
-        __EXTERNAL_identification_fixed,
         _EXTERNAL_identification,
         _EXTERNAL_data_value_descriptor,
         _EXTERNAL_data_value,
@@ -1015,7 +1043,6 @@ class _IMPL_:
         __EMBEDDED_PDV_identification_transfer_syntax,
         __EMBEDDED_PDV_identification_fixed,
         _EMBEDDED_PDV_identification,
-        _EMBEDDED_PDV_data_value_descriptor,
         _EMBEDDED_PDV_data_value,
         EMBEDDED_PDV,
         ___CHARACTER_STRING_identification_syntaxes_abstract,
