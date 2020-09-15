@@ -599,9 +599,10 @@ class PycrateGenerator(_Generator):
         self.gen_const_val(Obj)
     
     def gen_type_real(self, Obj):
+        # components constraint
+        self.gen_const_comps(Obj)
         # value constraint
         self.gen_const_val(Obj)
-        # TODO: apply CONST_COMPS if exists
     
     def gen_type_enum(self, Obj):
         # enum content
@@ -654,9 +655,10 @@ class PycrateGenerator(_Generator):
         self.gen_const_val(Obj)
     
     def gen_type_choice(self, Obj):
+        # components constraint
+        self.gen_const_comps(Obj)
         # content: ASN1Dict of {name: ASN1Obj}
         if Obj._cont is not None:
-            # TODO: apply CONST_COMPS if exists
             # create all objects of the content first
             links = ASN1Dict()
             for name in Obj._cont:
@@ -678,9 +680,10 @@ class PycrateGenerator(_Generator):
         self.gen_const_val(Obj)
     
     def gen_type_seq(self, Obj):
+        # components constraint
+        self.gen_const_comps(Obj)
         # content: ASN1Dict of {name: ASN1Obj}
         if Obj._cont is not None:
-            # TODO: apply CONST_COMPS if exists
             # create all objects of the content first
             links = ASN1Dict()
             for name in Obj._cont:
@@ -702,9 +705,10 @@ class PycrateGenerator(_Generator):
         self.gen_const_val(Obj)
     
     def gen_type_seqof(self, Obj):
+        # component constraint (need to add support for WITH COMPONENT in the compiler)
+        #self.gen_const_comp(Obj)
         # content: ASN1Obj
         if Obj._cont is not None:
-            # TODO: apply CONST_COMP if exists
             # create the object of the content first
             Cont = Obj._cont
             Cont._pyname = '_{0}_{1}'.format(Obj._pyname, name_to_defin(Cont._name))
@@ -887,18 +891,78 @@ class PycrateGenerator(_Generator):
                 # now link it to the Obj constraint
                 self.wrl('{0}._const_cont = {1}'.format(Obj._pyname, Const['obj']._pyname))
     
+    def gen_const_comp(self, Obj):
+        # WITH COMPONENT constraint: processing only a single constraint
+        Consts_comp = [C for C in Obj._const if C['type'] == CONST_COMP]
+        if Consts_comp:
+            if len(Consts_comp) > 1 or Consts_comp[0]['ext'] is not None \
+            or len(Consts_comp[0]['root']) > 1:
+                asnlog('WNG, {0}.{1}: multiple WITH COMPONENT constraints, compiling '\
+                       'only the first'.format(self._mod_name, Obj._name))
+            Const = Consts_comp[0]['root'][0]
+            #print('>>> applying WITH COMPONENT constraint to %s (%s): %r' % (Obj._name, Obj.TYPE, Const))
+            # 1) eventually duplicate and clone the content of the referred object
+            tr = Obj
+            while Obj._cont is None:
+                tr = tr.get_typeref()
+                if tr._cont is not None:
+                    Obj._cont = tr._cont.__class__(Obj._cont)
+            # 2) apply additional constraint on the component
+            assert()
+            Obj._cont._const.extend(Const[ident]['const'])
+    
     def gen_const_comps(self, Obj):
         # WITH COMPONENTS constraint: processing only a single constraint
         Consts_comps = [C for C in Obj._const if C['type'] == CONST_COMPS]
         if Consts_comps:
-            if len(Consts_comps) > 1:
-                asnlog('WNG, {0}.{1}: multiple WITH COMPONENTS constraint, compiling '\
+            if len(Consts_comps) > 1 or Consts_comps[0]['ext'] is not None \
+            or len(Consts_comps[0]['root']) > 1:
+                asnlog('WNG, {0}.{1}: multiple WITH COMPONENTS constraints, compiling '\
                        'only the first'.format(self._mod_name, Obj._name))
-            Const = Consts_comps[0]
-            # TODO: duplicate in Obj._cont the content of the referred object
-            # and apply the constraint to it
-        
-        
+            Const = Consts_comps[0]['root'][0]
+            #print('>>> applying WITH COMPONENTS constraint to %s (%s): %r' % (Obj._name, Obj.TYPE, Const))
+            # 1) duplicate and clone the content of the referred object or local content
+            if not Obj._cont:
+                tr = Obj
+                while Obj._cont is None:
+                    tr = tr.get_typeref()
+                    if tr._cont is not None:
+                        Obj._cont = tr._cont.copy()
+                        if tr._ext is not None:
+                            Obj._ext = list(tr._ext)
+                        for ident in Obj._cont:
+                            Obj._cont[ident] = Obj._cont[ident].__class__(Obj._cont[ident])
+            else:
+                Obj._cont = Obj._cont.copy()
+                for ident in Obj._cont:
+                    Obj._cont[ident] = Obj._cont[ident].__class__(Obj._cont[ident])
+            # 2) handle absent / present components
+            for ident in Const['_abs']:
+                # remove the component
+                del Obj._cont[ident]
+            if Const['_pre']:
+                if Obj.TYPE == TYPE_CHOICE:
+                    # for CHOICE object, a component marked PRESENT is the only 
+                    # selectable one: removing all others
+                    assert( len(Const['_pre']) == 1 )
+                    for ident in Obj._cont:
+                        if ident != Const['_pre'][0]:
+                            del Obj._cont[ident]
+            else:
+                # SEQUENCE-like object
+                for ident in Const['_pre']:
+                    # make the component mandatory
+                    if FLAG_OPT in Obj._cont[ident]._flag:
+                        del Obj._cont[ident]._flag[FLAG_OPT]
+
+            idents = set(Const.keys())
+            idents.remove('_pre')
+            idents.remove('_abs')
+            # 3) apply additional constraint on components
+            for ident in idents:
+                Obj._cont[ident]._const.extend(Const[ident]['const'])
+
+
 #------------------------------------------------------------------------------#
 # JSON graph dependency generator
 #------------------------------------------------------------------------------#
