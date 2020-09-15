@@ -43,14 +43,17 @@ from .dictobj import *
 #------------------------------------------------------------------------------#
 #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////////////////////////#
 
-_DEBUG_PARAM       = False
-_DEBUG_PARAM_PT    = False
-_DEBUG_PARAM_VAL   = False
-_DEBUG_PARAM_SET   = False
-_DEBUG_PARAM_TYPE  = False
+_DEBUG_PARAM        = False
+_DEBUG_PARAM_PT     = False
+_DEBUG_PARAM_VAL    = False
+_DEBUG_PARAM_SET    = False
+_DEBUG_PARAM_TYPE   = False
 #
-_DEBUG_SYNTAX_GRP  = False
-_DEBUG_SYNTAX_OGRP = False
+_DEBUG_SYNTAX_GRP   = False
+_DEBUG_SYNTAX_OGRP  = False
+#
+_DEBUG_SET_VAL      = False
+
 
 # method tracer, to be used as a decorator
 #_TRACE_NAME = ['ROS', ]
@@ -5780,9 +5783,10 @@ class ASN1Obj(object):
                 # because parse_value() is used and cannot implement such control
                 if len(val[dom]) >= 2 and len(val[dom]) == len_val + 1 \
                 and val[dom][-1] in val[dom][:-1]:
-                    print('WNG: {0}.{1}, duplicated value in {2} set: {3}'\
-                          .format(GLOBAL.COMP['NS']['mod'], self.fullname(), dom,
-                                  repr(val[dom][-1]).replace('\n', '')))
+                    if _DEBUG_SET_VAL:
+                        asnlog('DBG: {0}.{1}, duplicated value in {2} set: {3}'\
+                               .format(GLOBAL.COMP['NS']['mod'], self.fullname(), dom,
+                                       repr(val[dom][-1]).replace('\n', '')))
                     del val[dom][-1]
             # 
             self.__parse_set_comp_path_unconfig()
@@ -5816,9 +5820,10 @@ class ASN1Obj(object):
                 # because parse_value() is used and cannot implement such control
                 if len(val[dom]) >= 2 and len(val[dom]) == len_val + 1 \
                 and val[dom][-1] in val[dom][:-1]:
-                    print('WNG: {0}.{1}, duplicated value in {2} set: {3}'\
-                          .format(GLOBAL.COMP['NS']['mod'], self.fullname(), dom,
-                                  repr(val[dom][-1]).replace('\n', '')))
+                    if _DEBUG_SET_VAL:
+                        asnlog('DBG: {0}.{1}, duplicated value in {2} set: {3}'\
+                               .format(GLOBAL.COMP['NS']['mod'], self.fullname(), dom,
+                                       repr(val[dom][-1]).replace('\n', '')))
                     del val[dom][-1]
             #
             self.__parse_set_comp_path_unconfig()

@@ -1218,7 +1218,7 @@ def _verify_seq_const_tab(Obj, open_name, const_tab, modname, objname, obj_index
                 val_key.append( val[id_key] )
                 val_all.append( val )
     if ret:
-        asnlog('WNG: {0}.{1}: internal object {2}, non-unique key subvalue ({3!r}) '\
+        asnlog('WNG: {0}.{1}: internal object {2}, non-unique key subvalue {3!r} '\
                'within a table constraint'.format(modname, objname, obj_index, ret))
     return True if ret else False
 
