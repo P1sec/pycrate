@@ -27,6 +27,8 @@
 # *--------------------------------------------------------
 #*/
 
+import copy
+
 from .utils  import *
 from .glob   import *
 from .setobj import *
@@ -705,8 +707,8 @@ class PycrateGenerator(_Generator):
         self.gen_const_val(Obj)
     
     def gen_type_seqof(self, Obj):
-        # component constraint (need to add support for WITH COMPONENT in the compiler)
-        #self.gen_const_comp(Obj)
+        # component constraint
+        self.gen_const_comp(Obj)
         # content: ASN1Obj
         if Obj._cont is not None:
             # create the object of the content first
@@ -892,24 +894,11 @@ class PycrateGenerator(_Generator):
                 self.wrl('{0}._const_cont = {1}'.format(Obj._pyname, Const['obj']._pyname))
     
     def gen_const_comp(self, Obj):
-        # WITH COMPONENT constraint: processing only a single constraint
+        # WITH COMPONENT constraint
         Consts_comp = [C for C in Obj._const if C['type'] == CONST_COMP]
         if Consts_comp:
-            if len(Consts_comp) > 1 or Consts_comp[0]['ext'] is not None \
-            or len(Consts_comp[0]['root']) > 1:
-                asnlog('WNG: {0}.{1}: multiple WITH COMPONENT constraints, compiling '\
-                       'only the first'.format(self._mod_name, Obj._name))
-            Const = Consts_comp[0]['root'][0]
-            #print('>>> applying WITH COMPONENT constraint to %s (%s): %r' % (Obj._name, Obj.TYPE, Const))
-            # 1) eventually duplicate and clone the content of the referred object
-            tr = Obj
-            while Obj._cont is None:
-                tr = tr.get_typeref()
-                if tr._cont is not None:
-                    Obj._cont = tr._cont.__class__(Obj._cont)
-            # 2) apply additional constraint on the component
-            assert()
-            Obj._cont._const.extend(Const[ident]['const'])
+            # TODO: need to add support for WITH COMPONENT in the compiler
+            pass
     
     def gen_const_comps(self, Obj):
         # WITH COMPONENTS constraint: processing only a single constraint
@@ -927,21 +916,14 @@ class PycrateGenerator(_Generator):
                 asnlog('WNG: {0}.{1}: multiple root parts in WITH COMPONENTS constraint, '\
                        'only stacking presence'.format(self._mod_name, Obj._name))
             #
-            # 1) duplicate and clone the content of the referred object or local content
+            # 1) duplicate the content structure of the object
             if not Obj._cont:
-                tr = Obj
-                while Obj._cont is None:
-                    tr = tr.get_typeref()
-                    if tr._cont is not None:
-                        Obj._cont = tr._cont.copy()
-                        if tr._ext is not None:
-                            Obj._ext = list(tr._ext)
-                        for ident in Obj._cont:
-                            Obj._cont[ident] = Obj._cont[ident].__class__(Obj._cont[ident])
+                cont, Obj._ext = Obj.get_cont(wext=True)
+                Obj._cont = cont.copy()
             else:
                 Obj._cont = Obj._cont.copy()
-                for ident in Obj._cont:
-                    Obj._cont[ident] = Obj._cont[ident].__class__(Obj._cont[ident])
+            for ident, Comp in Obj._cont.items():
+                Obj._cont[ident] = Comp.__class__(Comp)
             #
             # 2) handle absent / present components
             # gathering present / absent components
@@ -949,8 +931,8 @@ class PycrateGenerator(_Generator):
             for Const in Consts_comps[0]['root']:
                 pres.update(Const['_pre'])
                 abse.update(Const['_abs'])
-            # for components that are said to be both present or absent (yes, that exists...)
-            # simply leave them as OPTIONAL
+            # for components that are said to be both present in 1 case 
+            # or absent on 1 anther, simply leave them as OPTIONAL
             rem = pres.intersection(abse)
             pres.difference_update(rem)
             abse.difference_update(rem)
@@ -980,7 +962,9 @@ class PycrateGenerator(_Generator):
                 Const_kw.remove('_pre')
                 Const_kw.remove('_abs')
                 for ident in Const_kw:
+                    Obj._cont[ident]._const = list(Obj._cont[ident]._const)
                     Obj._cont[ident]._const.extend(Const[ident]['const'])
+                    #print('%s.%s: %r' % (Obj._name, ident, Obj._cont[ident]._const))
 
 
 #------------------------------------------------------------------------------#
