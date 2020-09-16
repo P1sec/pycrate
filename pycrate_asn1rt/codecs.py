@@ -1660,3 +1660,447 @@ class ASN1CodecGSER(ASN1Codec):
     # TODO: implement this
     pass
 
+
+class ASN1CodecOER(ASN1Codec):
+
+    # canonicity is used to decide whether to encode default values or not in
+    # constructed object
+    CANONICAL = True
+
+    TRUE = 0xFF
+    FALSE = 0x00
+
+    LenFormLUT = {0: 'short', 1: 'long'}
+    REAL_IEEE754_32_MANTIS_MIN = -2 ** 24 + 1
+    REAL_IEEE754_32_MANTIS_MAX = 2 ** 24 - 1
+    REAL_IEEE754_64_MANTIS_MIN = -2 ** 53 - 1
+    REAL_IEEE754_64_MANTIS_MAX = 2 ** 53 - 1
+    REAL_IEEE754_32_EXP_MIN = -126
+    REAL_IEEE754_32_EXP_MAX = 127
+    REAL_IEEE754_64_EXP_MIN = -1022
+    REAL_IEEE754_64_EXP_MAX = 1023
+
+    # tag classes
+    TagClassLUT = {0b00: TAG_UNIVERSAL,
+                   0b01: TAG_APPLICATION,
+                   0b10: TAG_CONTEXT_SPEC,
+                   0b11: TAG_PRIVATE,
+                   TAG_UNIVERSAL: 0b00,
+                   TAG_APPLICATION: 0b01,
+                   TAG_CONTEXT_SPEC: 0b10,
+                   TAG_PRIVATE: 0b11}
+
+    GET_DEFVAL = True
+
+    @classmethod
+    def encode_tag(cls, tag, tag_class=TAG_CONTEXT_SPEC):
+        try:
+            tag_enc = [(T_UINT, cls.TagClassLUT[tag_class], 2)]
+        except KeyError:
+            ASN1OEREncodeErr("Unknown tag class: {0}".format(tag_class))
+
+        if tag < 63:
+            # Tag encoded in 6b:
+            tag_enc.append((T_UINT, tag, 6))
+        else:
+            # Multi-octet tag encoding
+            tag_enc.append((T_UINT, 0b111111, 6))  # Initial octet
+            tag_temp = []
+            # Last byte (going in reverse)
+            tag_temp.append((T_UINT, tag & 0b1111111, 7))
+            tag_temp.append((T_UINT, 0, 1))
+            tag = tag >> 7
+
+            # All the other bytes
+            while tag.bit_length() > 0:
+                tag_temp.append((T_UINT, tag & 0b1111111, 7))
+                tag_temp.append((T_UINT, 1, 1))
+                tag = tag >> 7
+
+            tag_enc.extend(tag_temp[::-1])
+
+        return tag_enc
+
+    @classmethod
+    def encode_tag_ws(cls, tag, tag_class=TAG_CONTEXT_SPEC):
+        try:
+            tag_enc = [Uint('Class', val=cls.TagClassLUT[tag_class], bl=2)]
+        except KeyError:
+            ASN1OEREncodeErr("Unknown tag class: {0}".format(tag_class))
+
+        if tag < 63:
+            # Tag encoded in 6b:
+            tag_enc.append(Uint('Val', val=tag, bl=6))
+        else:
+            # Multi-octet tag encoding
+            tag_enc.append(Uint('Multi-octet', val=0b111111, bl=6))  # Initial octet
+            tag_temp = []
+            # Last byte (going in reverse)
+            tag_temp.append(Uint('Val', val=tag & 0b1111111, bl=7))
+            tag_temp.append(Uint('Cont',val=0, bl=1))
+            tag = tag >> 7
+
+            # All the other bytes
+            while tag.bit_length() > 0:
+                tag_temp.append(Uint('Val', val=tag & 0b1111111, bl=7))
+                tag_temp.append(Uint('Cont', val=1, bl=1))
+                tag = tag >> 7
+
+            tag_enc.extend(tag_temp[::-1])
+
+        return Envelope('T', GEN=tuple(tag_enc))
+
+    @classmethod
+    def decode_tag(cls, char):
+        tag_class = char.get_uint(2)
+        try:
+            tag_class = cls.TagClassLUT[tag_class]
+        except KeyError:
+            ASN1OEREncodeErr("Unknown tag class: {0}".format(tag_class))
+
+        first_octet = char.get_uint(6)
+        if first_octet < 63:
+            # Tag encoded in 6b:
+            tag_val = first_octet
+        else:
+            # Multi-octet tag encoding
+            tag_val = []
+            while True:
+                val_cont = char.get_uint(1)
+                tag_val.extend(char.get_bitlist(7))
+                if not val_cont:
+                    break
+
+            tag_val = bitlist_to_uint(tag_val)
+
+        return tag_class, tag_val
+
+    @classmethod
+    def decode_tag_ws(cls, char):
+        tag_class = Uint('Class', bl=2)
+        tag_class._from_char(char)
+        try:
+            tag_class_val = cls.TagClassLUT[tag_class.get_val()]
+        except KeyError:
+            ASN1OEREncodeErr("Unknown tag class: {0}".format(tag_class.get_val()))
+
+        tag_struct = [tag_class]
+
+        first_val = Uint('Val', bl=6)
+        first_val._from_char(char)
+        tag_struct.append(first_val)
+
+        if first_val.get_val() < 63:
+            # Tag encoded in 6b:
+            tag_val = first_val.get_val()
+        else:
+            first_val._name = 'Multi-octet'
+            tag_val = 0
+            while True:
+                tmp_cont = Uint('Cont', bl=1)
+                tmp_cont._from_char(char)
+                tmp_val = Uint('Val', bl=7)
+                tmp_val._from_char(char)
+
+                tag_val = tag_val << 7
+                tag_val = tag_val | tmp_val.get_val()
+                tag_struct.append(tmp_cont)
+                tag_struct.append(tmp_val)
+
+                if not tmp_cont.get_val():
+                    break
+
+        return tag_class_val, tag_val, Envelope('T', GEN=tuple(tag_struct))
+
+    @classmethod
+    def encode_length_determinant(cls, length):
+        # Always canonical (implementing non-canonical doesn't make sense)
+        determinant = []
+        if length > 127:
+            # long determinant
+            dl = uint_bytelen(length)
+            determinant.extend([(T_UINT, 1, 1),
+                                (T_UINT, dl, 7),
+                                (T_UINT, length, dl*8)
+                                ])
+        else:
+            # short determinant
+            determinant.append((T_UINT, length, 8))
+
+        return determinant
+
+    @classmethod
+    def encode_length_determinant_ws(cls, length):
+        # Always canonical (implementing non-canonical doesn't make sense)
+        if length > 127:
+            # long determinant
+            dl = uint_bytelen(length)
+            determinant = (
+                Uint('Form', val=1, bl=1, dic=cls.LenFormLUT),
+                Uint('Len', val=dl, bl=7),
+                Uint('Val', val=length, bl=dl*8)
+            )
+        else:
+            # short determinant
+            determinant = (
+                Uint('Form', val=0, bl=1, dic=cls.LenFormLUT),
+                Uint('Val', val=length, bl=7)
+            )
+
+        return Envelope('L', GEN=determinant)
+
+    @classmethod
+    def decode_length_determinant(cls, char):
+        long_form = char.get_uint(1)
+        length = char.get_uint(7)
+        if long_form:
+            length = char.get_uint(length*8)
+        return length
+
+    @classmethod
+    def decode_length_determinant_ws(cls, char):
+        length = Envelope('L', GEN=(
+            Uint('Form', bl=1, dic=cls.LenFormLUT),
+            Uint('Val', bl=7)
+        ))
+        length._from_char(char)
+        long_form = length[0].get_val()
+        ll = length[1].get_val()
+        if long_form:
+            length[1]._name = "Len"
+            val = Uint('Val', bl=8*ll)
+            val._from_char(char)
+            ll = val.get_val()
+            length.append(val)
+        return ll, length
+
+    @classmethod
+    def encode_intunconst(cls, val, signed=True):
+        if val < 0:
+            signed = True
+        vl = int_bytelen(val) if signed else uint_bytelen(val)
+        GEN = cls.encode_length_determinant(vl)
+        vt = T_INT if signed else T_UINT
+        GEN.append((vt, val, vl * 8))
+        return GEN
+
+    @classmethod
+    def encode_intunconst_ws(cls, val, signed=True):
+        if val < 0:
+            signed = True
+        vl = int_bytelen(val) if signed else uint_bytelen(val)
+        GEN = cls.encode_length_determinant_ws(vl)
+        vt = Int if signed else Uint
+        GEN.append(vt('V', val=val, bl=vl*8))
+        return (GEN,)
+
+    @classmethod
+    def decode_intunconst(cls, char, signed=True):
+        vl = cls.decode_length_determinant(char)
+        if signed:
+            return char.get_int(vl*8)
+        else:
+            return char.get_uint(vl*8)
+
+    @classmethod
+    def decode_intunconst_ws(cls, char, signed=True):
+        vl, det_st = cls.decode_length_determinant_ws(char)
+        vt = Int if signed else Uint
+        val = vt('V', bl=vl * 8)
+        val._from_char(char)
+        return val.get_val(), (det_st, val)
+
+    @classmethod
+    def encode_intconst(cls, val, const_val):
+        if const_val.lb is not None:
+            if const_val.lb >= 0:
+                # 10.3 a ~ d Check on the upper bound
+                if const_val.ub is not None:
+                    ubl = round_p2(uint_bytelen(const_val.ub))
+                    if ubl <= 8:
+                        return [(T_UINT, val, ubl*8)]
+                # No other conditions are fulfilled
+                return cls.encode_intunconst(val, signed=False)
+            else:
+                # 10.4 a ~ d
+                if const_val.ub is not None:
+                    dbl = round_p2(max(int_bytelen(const_val.lb),
+                                       int_bytelen(const_val.ub)))
+                    if dbl <= 8:
+                        return [(T_INT, val, dbl*8)]
+                # No upper bound etc.
+                return cls.encode_intunconst(val)
+        else:
+            # No lower bound -> encode with length determinant
+            return cls.encode_intunconst(val)
+
+    @classmethod
+    def encode_intconst_ws(cls, val, const_val):
+        if const_val.lb is not None:
+            if const_val.lb >= 0:
+                # 10.3 a ~ d Check on the upper bound
+                if const_val.ub is not None:
+                    ubl = round_p2(uint_bytelen(const_val.ub))
+                    if ubl <= 8:
+                        return (Uint('V', val=val, bl=ubl*8),)
+                # No other conditions are fulfilled
+                return cls.encode_intunconst_ws(val, signed=False)
+            else:
+                # 10.4 a ~ d
+                if const_val.ub is not None:
+                    dbl = round_p2(max(int_bytelen(const_val.lb),
+                                       int_bytelen(const_val.ub)))
+                    if dbl <= 8:
+                        return (Int('V', val=val, bl=dbl*8),)
+                # No upper bound etc.
+                return cls.encode_intunconst_ws(val)
+        else:
+            # No lower bound -> encode with length determinant
+            return cls.encode_intunconst_ws(val)
+
+    @classmethod
+    def decode_intconst(cls, char, const_val):
+        if const_val.lb is not None:
+            if const_val.lb >= 0:
+                # 10.3 a ~ d Check on the upper bound
+                if const_val.ub is not None:
+                    ubl = round_p2(uint_bytelen(const_val.ub))
+                    if ubl <= 8:
+                        return char.get_uint(ubl*8)
+                # No other conditions are fulfilled
+                return cls.decode_intunconst(char, signed=False)
+            else:
+                # 10.4 a ~ d
+                if const_val.ub is not None:
+                    dbl = round_p2(max(int_bytelen(const_val.lb),
+                                       int_bytelen(const_val.ub)))
+                    if dbl <= 8:
+                        return char.get_int(dbl*8)
+                # No upper bound etc.
+                return cls.decode_intunconst(char)
+        else:
+            # No lower bound -> encode with length determinant
+            return cls.decode_intunconst(char)
+
+    @classmethod
+    def decode_intconst_ws(cls, char, const_val):
+        if const_val.lb is not None:
+            if const_val.lb >= 0:
+                # 10.3 a ~ d Check on the upper bound
+                if const_val.ub is not None:
+                    ubl = round_p2(uint_bytelen(const_val.ub))
+                    if ubl <= 8:
+                        val = Uint('V', bl=ubl*8)
+                        val._from_char(char)
+                        return val.get_val(), (val,)
+                # No other conditions are fulfilled
+                return cls.decode_intunconst_ws(char, signed=False)
+            else:
+                # 10.4 a ~ d
+                if const_val.ub is not None:
+                    dbl = round_p2(max(int_bytelen(const_val.lb),
+                                       int_bytelen(const_val.ub)))
+                    if dbl <= 8:
+                        val = Int('V', bl=dbl*8)
+                        val._from_char(char)
+                        return val.get_val(), (val,)
+                # No upper bound etc.
+                return cls.decode_intunconst_ws(char)
+        else:
+            # No lower bound -> encode with length determinant
+            return cls.decode_intunconst_ws(char)
+
+    @classmethod
+    def encode_enumerated(cls, val):
+        # Always canonical (implementing non-canonical doesn't make sense)
+        _gen = []
+        if 0 <= val <= 127:
+            # short form
+            _gen.append((T_UINT, val, 8))
+        else:
+            # long form
+            dl = int_bytelen(val)
+            _gen.extend([(T_UINT, 1, 1),
+                         (T_UINT, dl, 7),
+                         (T_INT, val, dl * 8)
+                         ])
+
+        return _gen
+
+    @classmethod
+    def encode_enumerated_ws(cls, val):
+        if 0 <= val <= 127:
+            # short form
+            _gen = (
+                Uint('Form', val=0, bl=1, dic=cls.LenFormLUT),
+                Uint('Val', val=val, bl=7)
+            )
+        else:
+            # long form
+            dl = int_bytelen(val)
+            _gen = (
+                Uint('Form', val=1, bl=1, dic=cls.LenFormLUT),
+                Uint('Len', val=dl, bl=7),
+                Int('Val', val=val, bl=dl*8)
+            )
+
+        return Envelope('L', GEN=_gen)
+
+    @classmethod
+    def decode_enumerated(cls, char):
+        long_form = char.get_uint(1)
+        val = char.get_uint(7)
+        if long_form:
+            val = char.get_int(val*8)
+        return val
+
+    @classmethod
+    def decode_enumerated_ws(cls, char):
+        t_enum = Envelope('L', GEN=(
+            Uint('Form', bl=1, dic=cls.LenFormLUT),
+            Uint('Val', bl=7)
+        ))
+        t_enum._from_char(char)
+        long_form = t_enum[0].get_val()
+        enum_val = t_enum[1].get_val()
+        if long_form:
+            t_enum[1]._name = "Len"
+            val = Int('Val', bl=8*enum_val)
+            val._from_char(char)
+            enum_val = val.get_val()
+            t_enum.append(val)
+        return enum_val, t_enum
+
+    @classmethod
+    def encode_open_type(cls, value_bytes):
+        # The standard is quite unclear to me about this. But tested on CHOICE
+        # with extension type using ASN1 Playground, it seems it is the correct
+        # implementation.
+        l_val = len(value_bytes)
+        tmp = (cls.encode_length_determinant(l_val))
+        tmp.append((T_BYTES, value_bytes, l_val*8))
+        return tmp
+
+    @classmethod
+    def encode_open_type_ws(cls, value_bytes):
+        l_val = len(value_bytes)
+        _gen = [cls.encode_length_determinant_ws(l_val)]
+        _gen.append(Buf('V', val=value_bytes, bl=l_val*8))
+        return Envelope("Open-Type", GEN=tuple(_gen))
+
+    @classmethod
+    def decode_open_type(cls, char):
+        l_val = cls.decode_length_determinant(char)
+        val_bytes = char.get_bytes(l_val * 8)
+        return val_bytes
+
+    @classmethod
+    def decode_open_type_ws(cls, char):
+        l_val, l_struct = cls.decode_length_determinant_ws(char)
+        _gen = [l_struct]
+        val_struct = Buf('V', bl=l_val*8)
+        val_struct._from_char(char)
+        _gen.append(val_struct)
+        val_bytes = val_struct.get_val()
+        return val_bytes, Envelope("Open-Type", GEN=tuple(_gen))
+
