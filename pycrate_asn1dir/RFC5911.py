@@ -4893,8 +4893,8 @@ class PKIX1Implicit_2009:
     
     #-----< PrivateKeyUsagePeriod >-----#
     PrivateKeyUsagePeriod = SEQ(name=u'PrivateKeyUsagePeriod', mode=MODE_TYPE)
-    _PrivateKeyUsagePeriod_notBefore = TIME_GEN(name=u'notBefore', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _PrivateKeyUsagePeriod_notAfter = TIME_GEN(name=u'notAfter', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PrivateKeyUsagePeriod_notBefore = TIME_GEN(name=u'notBefore', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _PrivateKeyUsagePeriod_notAfter = TIME_GEN(name=u'notAfter', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     PrivateKeyUsagePeriod._cont = ASN1Dict([
         (u'notBefore', _PrivateKeyUsagePeriod_notBefore),
         (u'notAfter', _PrivateKeyUsagePeriod_notAfter),

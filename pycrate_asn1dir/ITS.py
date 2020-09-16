@@ -19554,12 +19554,18 @@ class IVI:
     __VehicleCharacteristicsRanges_limits_vehicleWeightLimits = SEQ(name=u'vehicleWeightLimits', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('EfcDsrcApplication', 'VehicleWeightLimits')))
     __VehicleCharacteristicsRanges_limits_axleWeightLimits = SEQ(name=u'axleWeightLimits', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('EfcDsrcApplication', 'AxleWeightLimits')))
     __VehicleCharacteristicsRanges_limits_passengerCapacity = SEQ(name=u'passengerCapacity', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('EfcDsrcApplication', 'PassengerCapacity')))
+    __VehicleCharacteristicsRanges_limits_exhaustEmissionValues = SEQ(name=u'exhaustEmissionValues', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('EfcDsrcApplication', 'ExhaustEmissionValues')))
+    __VehicleCharacteristicsRanges_limits_dieselEmissionValues = SEQ(name=u'dieselEmissionValues', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('EfcDsrcApplication', 'DieselEmissionValues')))
+    __VehicleCharacteristicsRanges_limits_soundLevel = SEQ(name=u'soundLevel', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('EfcDsrcApplication', 'SoundLevel')))
     _VehicleCharacteristicsRanges_limits._cont = ASN1Dict([
         (u'numberOfAxles', __VehicleCharacteristicsRanges_limits_numberOfAxles),
         (u'vehicleDimensions', __VehicleCharacteristicsRanges_limits_vehicleDimensions),
         (u'vehicleWeightLimits', __VehicleCharacteristicsRanges_limits_vehicleWeightLimits),
         (u'axleWeightLimits', __VehicleCharacteristicsRanges_limits_axleWeightLimits),
         (u'passengerCapacity', __VehicleCharacteristicsRanges_limits_passengerCapacity),
+        (u'exhaustEmissionValues', __VehicleCharacteristicsRanges_limits_exhaustEmissionValues),
+        (u'dieselEmissionValues', __VehicleCharacteristicsRanges_limits_dieselEmissionValues),
+        (u'soundLevel', __VehicleCharacteristicsRanges_limits_soundLevel),
         ])
     _VehicleCharacteristicsRanges_limits._ext = []
     VehicleCharacteristicsRanges._cont = ASN1Dict([
@@ -20068,6 +20074,9 @@ class IVI:
         __VehicleCharacteristicsRanges_limits_vehicleWeightLimits,
         __VehicleCharacteristicsRanges_limits_axleWeightLimits,
         __VehicleCharacteristicsRanges_limits_passengerCapacity,
+        __VehicleCharacteristicsRanges_limits_exhaustEmissionValues,
+        __VehicleCharacteristicsRanges_limits_dieselEmissionValues,
+        __VehicleCharacteristicsRanges_limits_soundLevel,
         _VehicleCharacteristicsRanges_limits,
         VehicleCharacteristicsRanges,
         _Weight_value,

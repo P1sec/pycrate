@@ -6362,8 +6362,8 @@ class IPAddrAndASCertExtn_2010:
     
     #-----< ASIdentifiers >-----#
     ASIdentifiers = SEQ(name=u'ASIdentifiers', mode=MODE_TYPE)
-    _ASIdentifiers_asnum = CHOICE(name=u'asnum', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('IPAddrAndASCertExtn-2010', 'ASIdentifierChoice')))
-    _ASIdentifiers_rdi = CHOICE(name=u'rdi', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('IPAddrAndASCertExtn-2010', 'ASIdentifierChoice')))
+    _ASIdentifiers_asnum = CHOICE(name=u'asnum', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('IPAddrAndASCertExtn-2010', 'ASIdentifierChoice')), opt=True)
+    _ASIdentifiers_rdi = CHOICE(name=u'rdi', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('IPAddrAndASCertExtn-2010', 'ASIdentifierChoice')), opt=True)
     ASIdentifiers._cont = ASN1Dict([
         (u'asnum', _ASIdentifiers_asnum),
         (u'rdi', _ASIdentifiers_rdi),
@@ -8774,8 +8774,8 @@ class PKIX1Implicit_2009:
     
     #-----< PrivateKeyUsagePeriod >-----#
     PrivateKeyUsagePeriod = SEQ(name=u'PrivateKeyUsagePeriod', mode=MODE_TYPE)
-    _PrivateKeyUsagePeriod_notBefore = TIME_GEN(name=u'notBefore', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _PrivateKeyUsagePeriod_notAfter = TIME_GEN(name=u'notAfter', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PrivateKeyUsagePeriod_notBefore = TIME_GEN(name=u'notBefore', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _PrivateKeyUsagePeriod_notAfter = TIME_GEN(name=u'notAfter', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     PrivateKeyUsagePeriod._cont = ASN1Dict([
         (u'notBefore', _PrivateKeyUsagePeriod_notBefore),
         (u'notAfter', _PrivateKeyUsagePeriod_notAfter),
