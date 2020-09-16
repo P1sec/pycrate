@@ -109,8 +109,6 @@ def main():
     #
     args = parser.parse_args()
     #
-
-    generator_class = PycrateGenerator
     ckw = {}
     if args.fautotags:
         ckw['autotags'] = True
@@ -118,9 +116,12 @@ def main():
         ckw['extimpl'] = True
     if args.fverifwarn:
         ckw['verifwarn'] = True
+    #
+    generator_class = PycrateGenerator
     if args.generator_path:
-        generator_class = import_generator_from_file(args.generator_path)
-
+        generator_class, err = import_generator_from_file(args.generator_path)
+        if err:
+            return 0
     #
     if args.spec:
         if args.spec not in ASN_SPECS:
@@ -190,7 +191,7 @@ def main():
             else:
                 print('%s, args warning: invalid input %s' % (sys.argv[0], i))
         if not files:
-            print('%s, args error: no ASN.1 inputs found')
+            print('%s, args error: no ASN.1 inputs found' % sys.argv[0])
             return 0
         else:
             #print(files)
@@ -229,30 +230,38 @@ def main():
 
 def import_generator_from_file(path):
     if not os.path.isfile(path):
-        raise ValueError('{0} is not a file'.format(path))
-
+        print('%s, args error: generator must be a file, %s is not' % (sys.argv[0], path))
+        return None, 1
+    # set the directory of the path in the Python module path
     module_dir = os.path.dirname(path)
     sys.path.append(module_dir)
-    module_name = path.split(os.path.sep)[-1][:-3:]
+    # get the filename and strip its suffix to get the corresponding module name
+    # and load it
+    module_name = '.'.join(path.split(os.path.sep)[-1].split('.')[0:-1])
     python_module = __import__(module_name)
+    # ensure we have an ASN.1 generator
     generator_class = find_class_in_module(python_module, mother=_Generator)
-    if not generator_class:
-        raise RuntimeError('Could not find an implementation of Abstract class _Generator in {0} module'.format(python_module))
-    return generator_class
+    if generator_class is None:
+        print('%s, args error: generator file does not contain a _Generator class in module %s'\
+               % (sys.argv[0], python_module))
+        return None, 1
+    return generator_class, 0
+
 
 def find_class_in_module(python_module, mother=_Generator):
+    # look for the 1st _Generator subclass in the module
     found_class = None
     for name, obj in inspect.getmembers(python_module, inspect.isclass):
         if obj != mother and issubclass(obj, mother):
             found_class = obj
             break
-
+    # potentially look for a subclass of the found class
     if found_class:
         child = find_class_in_module(python_module, mother=found_class)
         if child:
             found_class = child
-
     return found_class
+
 
 if __name__ == '__main__':
     sys.exit(main())
