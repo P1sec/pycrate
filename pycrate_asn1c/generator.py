@@ -914,7 +914,7 @@ class PycrateGenerator(_Generator):
                 return
             if len(Consts_comps[0]['root']) > 1:
                 asnlog('WNG: {0}.{1}: multiple root parts in WITH COMPONENTS constraint, '\
-                       'only stacking presence'.format(self._mod_name, Obj._name))
+                       'processing only the common components'.format(self._mod_name, Obj._name))
             #
             # 1) duplicate the content structure of the object
             if not Obj._cont:
@@ -926,36 +926,26 @@ class PycrateGenerator(_Generator):
                 Obj._cont[ident] = Comp.__class__(Comp)
             #
             # 2) handle absent / present components
-            # gathering present / absent components
-            pres, abse = set(), set()
-            for Const in Consts_comps[0]['root']:
-                pres.update(Const['_pre'])
-                abse.update(Const['_abs'])
-            # for components that are said to be both present in 1 case 
-            # or absent on 1 anther, simply leave them as OPTIONAL
-            rem = pres.intersection(abse)
-            pres.difference_update(rem)
-            abse.difference_update(rem)
+            # gathering present / absent components from the potentially 
+            # multiple possibilities, and keeping only the ones in common
+            pres, abse = set(Consts_comps[0]['root'][0]['_pre']), set(Consts_comps[0]['root'][0]['_abs'])
+            for Const in Consts_comps[0]['root'][1:]:
+                pres.intersection_update(Const['_pre'])
+                abse.intersection_update(Const['_abs'])
             for ident in abse:
                 # remove the component
                 del Obj._cont[ident]
-            if pres:
-                if Obj.TYPE == TYPE_CHOICE:
-                    # CHOICE object: a component marked PRESENT is the only 
-                    # selectable one, removing all others
-                    assert( len(pres) == 1 )
-                    pres = pres.pop()
-                    for ident in Obj._cont:
-                        if ident != pres:
-                            del Obj._cont[ident]
-                else:
-                    # SEQUENCE-like object: make the component mandatory
-                    for ident in pres:
-                        if FLAG_OPT in Obj._cont[ident]._flag:
-                            del Obj._cont[ident]._flag[FLAG_OPT]
+            if Obj.TYPE != TYPE_CHOICE:
+                # for CHOICE, the constraint parsing takes care to set in _abs
+                # all components to be removed, when a component is set in _pre
+                # therefore, present components only need to be set as non optional
+                # for SEQUENCE
+                for ident in pres:
+                    if FLAG_OPT in Obj._cont[ident]._flag:
+                        del Obj._cont[ident]._flag[FLAG_OPT]
             #
             # 3) apply additional constraint on components
-            # only if single constraint
+            # only if we have a single root component in the constraint
             if len(Consts_comps[0]['root']) == 1:
                 Const    = Consts_comps[0]['root'][0]
                 Const_kw = set(Const.keys())
