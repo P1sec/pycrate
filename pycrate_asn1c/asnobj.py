@@ -28,7 +28,7 @@
 #*/
 
 from binascii  import hexlify, unhexlify
-  
+
 from .utils   import *
 from .utils   import _RE_IDENT, _RE_TYPEREF, _RE_WORD
 from .err     import *
@@ -374,8 +374,8 @@ class ASN1Obj(object):
     %s
     """ % (ASN1Obj_docstring, ASN1SyntaxForm_docstring)
     
-    # to cache internal structures, enable it only after the compilation stage
-    # has ended
+    # to cache internal structures
+    # enable it only after the compilation stage has ended
     _CACHE_ENABLED = False
     
     # content parser dispatcher
@@ -443,15 +443,18 @@ class ASN1Obj(object):
     # WNG: for _String types, only ascii characters are supported
     _RANGE_TYPE_STR = (TYPE_STR_IA5, TYPE_STR_PRINT, TYPE_STR_VIS)
     _RANGE_TYPE     = (TYPE_INT, TYPE_REAL) + _RANGE_TYPE_STR
-                   
+    
     
     # the following keywords are used to identify all ASN.1 object attributes
-    KW = ('name', 'mode', 'parnum', 'param', 'tag', 'type', 'typeref', 'cont',
-          'ext', 'const', 'val', 'ref', 'parent', 'flag', 'group', 'msg')
-    
-    # error reporting
-    def _raise(self, error, msg=''):
-        raise(error('{0}: {1}'.format(self.fullname(), msg)))
+    KW = ('name', 'mode',
+          'parnum', 'param',
+          'tag', 'type', 'typeref',
+          'cont', 'ext', 'parent',
+          'const', 
+          'val',
+          'flag', 'group',
+          'ref', 'msg'
+          'cache')
         
     #--------------------------------------------------------------------------#
     # initialization and generation methods
@@ -1265,25 +1268,41 @@ class ASN1Obj(object):
         """
         raise(ASN1NotSuppErr())
     
-    def get_cont(self):
+    def get_cont(self, wext=False):
         """
         returns the content of self
         """
         if self._cont is not None:
             # 1) get local content if exists
-            return self._cont
-        elif self._CACHE_ENABLED and 'cont' in self._cache:
-            return self._cache['cont']
-        else:
-            # 2) or inherited content if exists
-            tr = self.get_typeref()
-            if tr is None:
-                cont = None
+            if wext:
+                return self._cont, self._ext
             else:
-                self._verif_typeref()
-                # 3) get the content from typeref
-                cont = tr.get_cont()
-            self._cache['cont'] = cont
+                return self._cont
+        #
+        elif self._CACHE_ENABLED:
+            # 2) get cached content if already set
+            if wext and 'cont' in self._cache and 'ext' in self._cache:
+                return self._cache['cont'], self._cache['ext']
+            elif 'cont' in self._cache:
+                return self._cache['cont']
+        #
+        # 3) or inherited content if exists
+        tr = self.get_typeref()
+        if tr is None:
+            cont = None
+        else:
+            self._verif_typeref()
+            # 3) get the content from typeref
+            if wext:
+                cont, ext = tr.get_cont(wext)
+                self._cache['cont'] = cont
+                self._cache['ext']  = ext
+            else:
+                cont = tr.get_cont(wext)
+                self._cache['cont'] = cont
+        if wext:
+            return cont, ext
+        else:
             return cont
     
     def get_cont_tags(self):
