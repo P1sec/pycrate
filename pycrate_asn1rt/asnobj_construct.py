@@ -580,6 +580,146 @@ Specific attributes:
                 ret = {ident[5:] : self._val[1]}
             return ret
 
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _oer_tag_class(self):
+        try:
+            tag_class, tag = next(t for t, ident in self._cont_tags.items()
+                                  if ident == self._val[0])
+        except StopIteration:
+            if self._val[0][:5] == '_ext_':
+                # unknown extension re-encoding
+                tag_class, _, tag = int(self._val[0][5:6]), int(
+                    self._val[0][6:7]), int(self._val[0][7:])
+            else:
+                raise ASN1OEREncodeErr("Unknown tag for item {0}".format(
+                    self._val[0]))
+        try:
+            tag_class = ASN1CodecOER.TagClassLUT[tag_class]
+        except KeyError:
+            ASN1OEREncodeErr("Unknown tag class: {0}".format(tag_class))
+
+        return tag_class, tag
+
+    def _to_oer(self):
+        tag_class, tag = self._oer_tag_class()
+
+        # Tag
+        temp = ASN1CodecOER.encode_tag(tag, tag_class)
+
+        if self._val[0] in self._root:
+            # Normal encoding
+            # Value
+            Cho = self._cont[self._val[0]]
+            Cho._val = self._val[1]
+            temp.extend(Cho._to_oer())
+
+        elif self._ext is not None:
+            # Extensible type
+            if self._val[0] in self._ext:
+                Cho = self._cont[self._val[0]]
+                Cho._val = self._val[1]
+                temp.extend(ASN1CodecOER.encode_open_type(Cho.to_oer()))
+            else:
+                temp.extend(ASN1CodecOER.encode_open_type(self._val[1]))
+
+        return temp
+
+    def _to_oer_ws(self):
+        tag_class, tag = self._oer_tag_class()
+
+        # Tag
+        temp = [ASN1CodecOER.encode_tag_ws(tag, tag_class)]
+
+        if self._val[0] in self._root:
+            # Normal encoding
+            # Value
+            Cho = self._cont[self._val[0]]
+            Cho._val = self._val[1]
+            temp.append(Cho._to_oer_ws())
+        elif self._ext is not None:
+            # Extensible type
+            if self._val[0] in self._ext:
+                Cho = self._cont[self._val[0]]
+                Cho._val = self._val[1]
+                temp.append(ASN1CodecOER.encode_open_type_ws(Cho.to_oer()))
+            else:
+                temp.append(ASN1CodecOER.encode_open_type_ws(self._val[1]))
+
+        self._struct = Envelope(self._name, GEN=tuple(temp))
+        return self._struct
+
+    def _from_oer(self, char):
+        tag_class, tag = ASN1CodecOER.decode_tag(char)
+        try:
+            tag_class = ASN1CodecOER.TagClassLUT[tag_class]
+        except KeyError:
+            ASN1OEREncodeErr("Unknown tag class: {0}".format(tag_class))
+
+        try:
+            ident = self._cont_tags[(tag_class, tag)]
+            Cho = self._cont[ident]
+            _par = Cho._parent
+            Cho._parent = self
+            if self._ext and (ident in self._ext):
+                val_bytes = ASN1CodecOER.decode_open_type(char)
+                Cho.from_oer(val_bytes)
+            if ident in self._root:
+                Cho.from_oer(char)
+            Cho._parent = _par
+            self._val = (ident, Cho._val)
+        except KeyError:
+            if self._ext is not None:
+                # It's extension type
+                if not self._SILENT:
+                    asnlog('CHOICE._from_oer: %s, unknown extension tag %r' \
+                           % (self.fullname(), (tag_class, tag)))
+                # NOTE: There is no way how to resolve the primitive/constructed
+                #       flag in OER, as far as I understand it.
+                ident = "_ext_{0}{1}{2}".format(tag_class, 0, tag)
+                val_bytes = ASN1CodecOER.decode_open_type(char)
+                self._val = (ident, val_bytes)
+
+    def _from_oer_ws(self, char):
+        tag_class, tag, tag_struct = ASN1CodecOER.decode_tag_ws(char)
+        try:
+            tag_class = ASN1CodecOER.TagClassLUT[tag_class]
+        except KeyError:
+            ASN1OEREncodeErr("Unknown tag class: {0}".format(tag_class))
+
+        _gen = [tag_struct]
+        try:
+            ident = self._cont_tags[(tag_class, tag)]
+            Cho = self._cont[ident]
+            _par = Cho._parent
+            Cho._parent = self
+            if self._ext and (ident in self._ext):
+                val_bytes, val_struct = ASN1CodecOER.decode_open_type_ws(char)
+                _gen.append(val_struct)
+                Cho.from_oer_ws(val_bytes)
+            if ident in self._root:
+                Cho.from_oer_ws(char)
+                _gen.extend(Cho._struct)
+            Cho._parent = _par
+            self._struct = Envelope(self._name, GEN=tuple(_gen) )
+            self._val = (ident, Cho._val)
+            return
+        except KeyError:
+            if self._ext is not None:
+                # It's extension type
+                if not self._SILENT:
+                    asnlog('CHOICE._from_oer_ws: %s, unknown extension tag %r' \
+                           % (self.fullname(), (tag_class, tag)))
+                # NOTE: There is no way how to resolve the primitive/constructed
+                #       flag in OER, as far as I understand it.
+                ident = "_ext_{0}{1}{2}".format(tag_class, 0, tag)
+                val_bytes, val_struct = ASN1CodecOER.decode_open_type_ws(char)
+                _gen.append(val_struct)
+                val = val_struct.get_val()
+                self._struct = Envelope(self._name, GEN=tuple(_gen))
+                self._val = (ident, val)
 
 #------------------------------------------------------------------------------#
 # SEQUENCE and SET
@@ -1165,6 +1305,471 @@ class _CONSTRUCT(ASN1Obj):
                     for ident, comp_val in val.items():
                         ret['_ext_%s' % ident] = comp_val
                 return ret
+
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _to_oer(self):
+        GEN = []
+        if not self._cont and self._ext is None:
+            # empty sequence
+            return GEN
+
+        extended = False
+        ext_bit = 0
+        if self._ext is not None:
+            # check if some extended components are provided
+            for k in self._val:
+                if k in self._ext or k[:5] == '_ext_':
+                    extended = True
+                    break
+
+            GEN.append((T_UINT, (1 if extended else 0), 1))
+            ext_bit = 1
+
+        # generate the bitmap preambule for optional / default components of the root part
+        opt_len = 0
+        Bv = 0
+        if self._root_opt:
+            opt_len, opt_idents = len(self._root_opt), []
+            for i in range(opt_len):
+                ident = self._root_opt[i]
+                if ident in self._val:
+                    if self._val[ident] == self._cont[ident]._def:
+                        # the value provided equals the default one
+                        # hence will not be encoded
+                        if not self._SILENT:
+                            asnlog('_CONSTRUCT._to_per: %s.%s, removing value equal ' \
+                                   'to the default one' % (self.fullname(), ident))
+                        del self._val[ident]
+                    else:
+                        # component present in the encoding
+                        Bv += 1<<(opt_len-1-i)
+                        opt_idents.append(ident)
+        else:
+            opt_idents = []
+
+        # Padding bits
+        pad_bits = 8 - ((opt_len + ext_bit) % 8)
+        pad_bits = 0 if (pad_bits == 8) else pad_bits
+        Bv = Bv << pad_bits
+        GEN.append( (T_UINT, Bv, opt_len + pad_bits) )
+
+        # encode components in the root part
+        if self.TYPE == TYPE_SET:
+            root_canon = self._root_canon
+        else:
+            root_canon = self._root
+        for ident in root_canon:
+            if ident in self._val:
+                # component present in the encoding
+                Comp = self._cont[ident]
+                _par = Comp._parent
+                Comp._parent = self
+                Comp._val = self._val[ident]
+                GEN.extend( Comp._to_oer() )
+                Comp._parent = _par
+
+        # encode components in the extension part
+        if extended:
+            # generate the structure for all known present extension
+            _gen_ext, Bm, cnt = [], [], 1
+            for ident in self._ext_nest:
+                if isinstance(ident, list):
+                    # group of extension
+                    grp_val, gid = {}, None
+                    for ident_inner in ident:
+                        if ident_inner in self._val:
+                            grp_val[ident_inner] = self._val[ident_inner]
+                            if gid is None:
+                                gid = self._ext_ident[ident_inner]
+                    if grp_val:
+                        # group present in the encoding
+                        Comp = self._ext_group_obj[gid]
+                        Comp._val = grp_val
+                        _gen_ext.extend( ASN1CodecOER.encode_open_type(
+                            Comp.to_oer() ))
+                        Bm.append(cnt)
+                else:
+                    if ident in self._val:
+                        # single extension
+                        Comp = self._cont[ident]
+                        _par = Comp._parent
+                        Comp._parent = self
+                        Comp._val = self._val[ident]
+                        _gen_ext.extend( ASN1CodecOER.encode_open_type(
+                            Comp.to_oer()))
+                        Comp._parent = _par
+                        Bm.append(cnt)
+                cnt += 1
+
+            # generate the structure for all unknown present extension
+            unk_idents = [i for i in self._val if i[:5] == '_ext_']
+            if unk_idents:
+                # sort by index set to the ident
+                unk_idents.sort(key=lambda x:int(x[5:]))
+                for ident in unk_idents:
+                    ind = int(ident[5:])
+                    if ind >= cnt and ind not in Bm:
+                        _gen_ext.extend( ASN1CodecOER.encode_open_type(
+                            self._val[ident]) )
+                        Bm.append(ind)
+                    elif not self._SILENT:
+                        asnlog('_CONSTRUCT._to_oer: %s.%s, '
+                               'invalid unknown extension index' \
+                               % (self.fullname(), ident))
+
+            if not Bm:
+                return GEN
+
+            # generate the bitmap preambule for extended (group of) components
+            # bitmap length is encoded with a normally small value
+            ldet = max(max(Bm), len(self._ext_nest))
+            ext_bitmap = 0
+            for i in Bm:
+                ext_bitmap = ext_bitmap | (1<<(ldet-i))
+            pad_bits = uint_bytelen(ext_bitmap)*8 - ldet
+            ext_bitmap = ext_bitmap << pad_bits
+            ext_bmp_len = pad_bits + ldet
+            GEN.extend(ASN1CodecOER.encode_length_determinant(1 +
+                                                              ext_bmp_len//8))
+            GEN.append( (T_UINT, pad_bits, 8) )
+            GEN.append( (T_UINT, ext_bitmap, ext_bmp_len) )
+            GEN.extend(_gen_ext)
+
+        return GEN
+
+    def _to_oer_ws(self):
+        GEN = []
+        if not self._cont and self._ext is None:
+            # empty sequence
+            return GEN
+
+        extended = False
+        ext_bit = 0
+        if self._ext is not None:
+            # check if some extended components are provided
+            for k in self._val:
+                if k in self._ext or k[:5] == '_ext_':
+                    extended = True
+                    break
+
+            GEN.append(Uint('Extension', val=(1 if extended else 0), bl=1))
+            ext_bit = 1
+
+        # generate the bitmap preambule for optional / default components of the root part
+        opt_len = 0
+        Bv = 0
+        if self._root_opt:
+            opt_len, opt_idents = len(self._root_opt), []
+            for i in range(opt_len):
+                ident = self._root_opt[i]
+                if ident in self._val:
+                    if self._val[ident] == self._cont[ident]._def:
+                        # the value provided equals the default one
+                        # hence will not be encoded
+                        if not self._SILENT:
+                            asnlog('_CONSTRUCT._to_per: %s.%s, removing value equal ' \
+                                   'to the default one' % (self.fullname(), ident))
+                        del self._val[ident]
+                    else:
+                        # component present in the encoding
+                        Bv += 1<<(opt_len-1-i)
+                        opt_idents.append(ident)
+        else:
+            opt_idents = []
+
+        # Padding bits
+        pad_bits = 8 - ((opt_len + ext_bit) % 8)
+        pad_bits = 0 if (pad_bits == 8) else pad_bits
+        Bv = Bv << pad_bits
+        GEN.append( Uint('Root-Bmp', val=Bv, bl=opt_len + pad_bits) )
+
+        GEN = [Envelope('Preamble', GEN=tuple(GEN))]
+
+        # encode components in the root part
+        if self.TYPE == TYPE_SET:
+            root_canon = self._root_canon
+        else:
+            root_canon = self._root
+        for ident in root_canon:
+            if ident in self._val:
+                # component present in the encoding
+                Comp = self._cont[ident]
+                _par = Comp._parent
+                Comp._parent = self
+                Comp._val = self._val[ident]
+                GEN.append( Comp._to_oer_ws() )
+                Comp._parent = _par
+
+        # encode components in the extension part
+        if extended:
+            # generate the structure for all known present extension
+            _gen_ext, Bm, cnt = [], [], 1
+            for ident in self._ext_nest:
+                if isinstance(ident, list):
+                    # group of extension
+                    grp_val, gid = {}, None
+                    for ident_inner in ident:
+                        if ident_inner in self._val:
+                            grp_val[ident_inner] = self._val[ident_inner]
+                            if gid is None:
+                                gid = self._ext_ident[ident_inner]
+                    if grp_val:
+                        # group present in the encoding
+                        Comp = self._ext_group_obj[gid]
+                        Comp._val = grp_val
+                        _gen_ext.append( ASN1CodecOER.encode_open_type_ws(
+                            Comp.to_oer() ))
+                        Bm.append(cnt)
+                else:
+                    if ident in self._val:
+                        # single extension
+                        Comp = self._cont[ident]
+                        _par = Comp._parent
+                        Comp._parent = self
+                        Comp._val = self._val[ident]
+                        _gen_ext.append( ASN1CodecOER.encode_open_type_ws(
+                            Comp.to_oer()))
+                        Comp._parent = _par
+                        Bm.append(cnt)
+                cnt += 1
+
+            # generate the structure for all unknown present extension
+            unk_idents = [i for i in self._val if i[:5] == '_ext_']
+            if unk_idents:
+                # sort by index set to the ident
+                unk_idents.sort(key=lambda x:int(x[5:]))
+                for ident in unk_idents:
+                    ind = int(ident[5:])
+                    if ind >= cnt and ind not in Bm:
+                        _gen_ext.append( ASN1CodecOER.encode_open_type_ws(
+                            self._val[ident]) )
+                        Bm.append(ind)
+                    elif not self._SILENT:
+                        asnlog('_CONSTRUCT._to_oer: %s.%s, '
+                               'invalid unknown extension index' \
+                               % (self.fullname(), ident))
+
+            if not Bm:
+                self._struct = Envelope(self._name, GEN=tuple(GEN))
+                return self._struct
+
+            # generate the bitmap preambule for extended (group of) components
+            # bitmap length is encoded with a normally small value
+            ldet = max(max(Bm), len(self._ext_nest))
+            ext_bitmap = 0
+            for i in Bm:
+                ext_bitmap = ext_bitmap | (1<<(ldet-i))
+            pad_bits = uint_bytelen(ext_bitmap)*8 - ldet
+            ext_bitmap = ext_bitmap << pad_bits
+            ext_bmp_len = pad_bits + ldet
+            ext_bmp_struct = []
+            ext_bmp_struct.append(ASN1CodecOER.encode_length_determinant_ws(1 +
+                                                              ext_bmp_len//8))
+            ext_bmp_struct.append( Uint('Initial-octet', val=pad_bits, bl=8) )
+            ext_bmp_struct.append( Uint('Bitmap', val=ext_bitmap,
+                                        bl=ext_bmp_len) )
+            ext_bmp_struct = Envelope('Extension-bmp',
+                                      GEN=tuple(ext_bmp_struct))
+            GEN.append(ext_bmp_struct)
+            GEN.extend(_gen_ext)
+
+        self._struct = Envelope(self._name, GEN=tuple(GEN))
+        return self._struct
+
+    def _from_oer(self, char):
+        GEN, self._val = [], {}
+        if not self._cont and self._ext is None:
+            # empty sequence
+            return
+
+        extended = False
+        ext_bit = 0
+        if self._ext is not None:
+            extended = (1 == char.get_uint(1))
+            ext_bit = 1
+
+        # get the bitmap preambule for optional / default components of the root part
+        if self._root_opt:
+            opt_len = len(self._root_opt)
+            Bv = char.get_uint(opt_len)
+            opt_idents = [self._root_opt[i] for i in range(opt_len) if Bv & (1<<(opt_len-1-i))]
+        else:
+            opt_len = 0
+            opt_idents = []
+
+        # Get the padding bits
+        pad_bits = 8 - ((opt_len + ext_bit) % 8)
+        pad_bits = 0 if (pad_bits == 8) else pad_bits
+        char.get_uint(pad_bits)
+
+        # decode components in the root part
+        # for SET, use self._root_canon which is the canonical order of root components
+        if self.TYPE == TYPE_SET:
+            root_canon = self._root_canon
+        else:
+            root_canon = self._root
+        for ident in root_canon:
+            Comp = self._cont[ident]
+            if ident in self._root_mand or ident in opt_idents:
+                # component present in the encoding
+                _par = Comp._parent
+                Comp._parent = self
+                Comp._from_oer(char)
+                self._val[ident] = Comp._val
+                Comp._parent = _par
+            elif Comp._def is not None and ASN1CodecOER.GET_DEFVAL:
+                # component absent of the encoding, but with default value
+                self._val[ident] = Comp._def
+
+        # decode components in the extension part
+        if extended:
+            # get the bitmap preambule for extended (group of) components
+            ldet = ASN1CodecOER.decode_length_determinant(char)
+            pad_bits = char.get_uint(8)
+            ldet = (ldet - 1) * 8
+            Bv = char.get_uint(ldet)
+            Bv = Bv >> pad_bits
+            ldet = ldet - pad_bits
+
+            for i in range(ldet):
+                if Bv & (1<<(ldet-1-i)):
+                    # extension present
+                    if i < len(self._ext_nest):
+                        # known extension
+                        ext = self._ext_nest[i]
+                        if isinstance(ext, list):
+                            # grouped extension
+                            Comp = self._ext_group_obj[self._ext_ident[ext[0]]]
+                            val_bytes = ASN1CodecOER.decode_open_type(char)
+                            if Comp:
+                                Comp.from_oer(val_bytes)
+                                self._val.update(Comp._val)
+                            else:
+                                self._val.update(val_bytes)
+                        else:
+                            # single extension, ident == ext
+                            Comp = self._cont[ext]
+                            _par = Comp._parent
+                            Comp._parent = self
+                            Comp.from_oer(ASN1CodecOER.decode_open_type(char))
+                            self._val[ext] = Comp._val
+                            Comp._parent = _par
+                    else:
+                        # unknown extension
+                        self._val['_ext_%r' % i] = \
+                            ASN1CodecOER.decode_open_type(char)
+        return
+
+    def _from_oer_ws(self, char):
+        GEN, self._val = [], {}
+        if not self._cont and self._ext is None:
+            # empty sequence
+            return
+
+        extended = False
+        ext_bit = 0
+        if self._ext is not None:
+            extension = Uint('Extension', bl=1)
+            extension._from_char(char)
+            GEN.append(extension)
+            extended = (1 == extension.get_val())
+            ext_bit = 1
+
+        # get the bitmap preambule for optional / default components of the root part
+        opt_len = len(self._root_opt) if self._root_opt else 0
+        pad_bits = 8 - ((opt_len + ext_bit) % 8)
+        pad_bits = 0 if (pad_bits == 8) else pad_bits
+
+        root_bmp = Uint('Root-bmp', bl=opt_len+pad_bits)
+        root_bmp._from_char(char)
+        GEN.append(root_bmp)
+
+        if self._root_opt:
+            Bv = root_bmp.get_val() >> pad_bits
+            opt_idents = [self._root_opt[i] for i in range(opt_len) if Bv & (1<<(opt_len-1-i))]
+        else:
+            opt_len = 0
+            opt_idents = []
+
+        GEN = [Envelope('Preamble', GEN=tuple(GEN))]
+
+        # decode components in the root part
+        # for SET, use self._root_canon which is the canonical order of root components
+        if self.TYPE == TYPE_SET:
+            root_canon = self._root_canon
+        else:
+            root_canon = self._root
+        for ident in root_canon:
+            Comp = self._cont[ident]
+            if ident in self._root_mand or ident in opt_idents:
+                # component present in the encoding
+                _par = Comp._parent
+                Comp._parent = self
+                Comp._from_oer_ws(char)
+                self._val[ident] = Comp._val
+                GEN.append(Comp._struct)
+                Comp._parent = _par
+            elif Comp._def is not None and ASN1CodecOER.GET_DEFVAL:
+                # component absent of the encoding, but with default value
+                self._val[ident] = Comp._def
+
+        # decode components in the extension part
+        if extended:
+            # get the bitmap preambule for extended (group of) components
+            ldet, ldet_struct = ASN1CodecOER.decode_length_determinant_ws(char)
+            i_oct = Uint('Initial-octet', bl=8)
+            i_oct._from_char(char)
+            pad_bits = i_oct.get_val()
+            ldet = (ldet - 1) * 8
+            ext_bmp = Uint('Bitmap', bl=ldet)
+            ext_bmp._from_char(char)
+            Bv = ext_bmp.get_val()
+            Bv = Bv >> pad_bits
+            ldet = ldet - pad_bits
+
+            GEN.append(Envelope('Extension-bmp',
+                                GEN=(ldet_struct, i_oct, ext_bmp)))
+
+            for i in range(ldet):
+                if Bv & (1<<(ldet-1-i)):
+                    # extension present
+                    if i < len(self._ext_nest):
+                        # known extension
+                        ext = self._ext_nest[i]
+                        if isinstance(ext, list):
+                            # grouped extension
+                            Comp = self._ext_group_obj[self._ext_ident[ext[0]]]
+                            val_bytes, _struct = \
+                                ASN1CodecOER.decode_open_type_ws(char)
+                            if Comp:
+                                Comp.from_oer(val_bytes)
+                                self._val.update(Comp._val)
+                            else:
+                                self._val.update(val_bytes)
+                            GEN.append(_struct)
+                        else:
+                            # single extension, ident == ext
+                            Comp = self._cont[ext]
+                            _par = Comp._parent
+                            Comp._parent = self
+                            val_bytes, _struct = \
+                                ASN1CodecOER.decode_open_type_ws(char)
+                            Comp.from_oer(val_bytes)
+                            self._val[ext] = Comp._val
+                            Comp._parent = _par
+                            GEN.append(_struct)
+                    else:
+                        # unknown extension
+                        val_bytes, _struct = \
+                            ASN1CodecOER.decode_open_type_ws(char)
+                        self._val['_ext_%r' % i] = val_bytes
+                        GEN.append(_struct)
+
+        self._struct = Envelope(self._name, GEN=tuple(GEN))
+        return
 
 
 class SEQ(_CONSTRUCT):
@@ -2577,6 +3182,94 @@ class _CONSTRUCT_OF(ASN1Obj):
                     ret.append( self._cont._to_jval() )
                 self._cont._parent = _par
                 return ret
+
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _to_oer(self):
+        GEN, ldet = [], len(self._val)
+        l_size = uint_bytelen(ldet)
+        GEN.extend(ASN1CodecOER.encode_length_determinant(l_size))
+        GEN.append( (T_UINT, ldet, l_size*8) )
+
+        # Iterate over items
+        Comp = self._cont
+        _par = Comp._parent
+        Comp._parent = self
+
+        for val in self._val:
+            Comp._val = val
+            GEN.extend(Comp._to_oer())
+
+        Comp._parent = _par
+
+        return GEN
+
+    def _to_oer_ws(self):
+        GEN, ldet = [], len(self._val)
+        l_size = uint_bytelen(ldet)
+        GEN.append(ASN1CodecOER.encode_length_determinant_ws(l_size))
+        GEN.append(Uint('Quantity', val=ldet, bl=l_size * 8))
+
+        GEN = [Envelope('Quantity-field', GEN=tuple(GEN))]
+
+        # Iterate over items
+        Comp = self._cont
+        _par = Comp._parent
+        Comp._parent = self
+
+        for val in self._val:
+            Comp._val = val
+            GEN.append(Comp._to_oer_ws())
+
+        Comp._parent = _par
+
+        self._struct = Envelope(self._name, GEN=tuple(GEN))
+        return self._struct
+
+    def _from_oer(self, char):
+        l_size = ASN1CodecOER.decode_length_determinant(char)
+        ldet = char.get_uint(l_size*8)
+
+        Comp = self._cont
+        _par = Comp._parent
+        Comp._parent = self
+        val = []
+        if ldet:
+            for i in range(ldet):
+                Comp._from_oer(char)
+                val.append(Comp._val)
+
+        Comp._parent = _par
+
+        self._val = val
+
+    def _from_oer_ws(self, char):
+        GEN = []
+        l_size, l_size_struct = ASN1CodecOER.decode_length_determinant_ws(char)
+        GEN.append(l_size_struct)
+        ldet_struct = Uint('Quantity', bl=l_size*8)
+        ldet_struct._from_char(char)
+        ldet = ldet_struct.get_val()
+        GEN.append(ldet_struct)
+
+        GEN = [Envelope('Quantity-field', GEN=tuple(GEN))]
+
+        Comp = self._cont
+        _par = Comp._parent
+        Comp._parent = self
+        val = []
+        if ldet:
+            for i in range(ldet):
+                Comp._from_oer_ws(char)
+                GEN.append(Comp._struct)
+                val.append(Comp._val)
+
+        Comp._parent = _par
+
+        self._struct = Envelope(self._name, GEN=tuple(GEN))
+        self._val = val
 
 
 class SEQ_OF(_CONSTRUCT_OF):

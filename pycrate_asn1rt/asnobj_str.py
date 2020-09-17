@@ -1043,6 +1043,167 @@ Specific constraints attributes:
                     else:
                         return {'value': uint_to_hex(val, bl), 'length': bl}
 
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _to_oer(self):
+        if isinstance(self._val, set):
+            self._names_to_val()
+
+        ## Now check if the value is contained object or just number
+        if not isinstance(self._val[0], integer_types):
+            # 1) value is for a contained object to be encoded
+            Cont = self._get_val_obj(self._val[0])
+            if Cont == self._const_cont and self._const_cont_enc is not None:
+                # TODO: different codec to be used
+                raise(ASN1NotSuppErr('{0}: specific CONTAINING encoder unhandled' \
+                                     .format(self.fullname())))
+            Cont._val = self._val[1]
+            buf = Cont.to_oer()
+            l_val = len(buf) * 8
+            pad_bits = 0
+            _gen = [(T_BYTES, buf, l_val)]
+            if Cont == self._const_cont:
+                return _gen
+        else:
+            # 2) value is the standard (uint, bit length)
+            if self._val[1]:
+                l_val = self._val[1]
+                _gen = [(T_UINT, self._val[0], l_val)]
+                # padding bits
+                pad_bits = (l_val % 8)
+                pad_bits = (8 - pad_bits) if pad_bits else 0
+                _gen.append((T_UINT, 0, pad_bits))
+            else:
+                # empty bit string
+                pad_bits = 0
+                l_val = 0
+                _gen = [(T_BYTES, b'', l_val)]
+
+        if self._const_sz:
+            if (self._const_sz._ev is None) and (self._const_sz.ra == 1):
+                # Fixed size constrains
+                return _gen
+
+        # Variable size constrains
+        GEN = ASN1CodecOER.encode_length_determinant(((l_val + pad_bits) // 8)
+                                                     + 1)
+        GEN.append((T_UINT, pad_bits, 8))  # Initial octet
+        GEN.extend(_gen)
+        return GEN
+
+    def _to_oer_ws(self):
+        if isinstance(self._val, set):
+            self._names_to_val()
+
+        ## Now check if the value is contained object or just number
+        if not isinstance(self._val[0], integer_types):
+            # 1) value is for a contained object to be encoded
+            Cont = self._get_val_obj(self._val[0])
+            if Cont == self._const_cont and self._const_cont_enc is not None:
+                # TODO: different codec to be used
+                raise (
+                    ASN1NotSuppErr('{0}: specific CONTAINING encoder unhandled' \
+                                   .format(self.fullname())))
+            Cont._val = self._val[1]
+            buf = Cont.to_oer()
+            l_val = len(buf) * 8
+            pad_bits = 0
+            _gen = [Buf('V', val=buf, bl=l_val)]
+            if Cont == self._const_cont:
+                self._struct = Envelope(self._name, GEN=tuple(_gen))
+                return self._struct
+        else:
+            # 2) value is the standard (uint, bit length)
+            if self._val[1]:
+                l_val = self._val[1]
+                _gen = [Uint('V', val=self._val[0], bl=l_val)]
+                # padding bits
+                pad_bits = (l_val % 8)
+                pad_bits = (8 - pad_bits) if pad_bits else 0
+                _gen.append(Uint('Zero-pad', val=0, bl=pad_bits))
+            else:
+                # empty bit string
+                pad_bits = 0
+                l_val = 0
+                _gen = [Buf('V', b'', l_val)]
+
+        if self._const_sz:
+            if (self._const_sz._ev is None) and (self._const_sz.ra == 1):
+                # Fixed size constrains
+                self._struct = Envelope(self._name, GEN=tuple(_gen))
+                return self._struct
+
+        # Variable size constrains
+        GEN = [ASN1CodecOER.encode_length_determinant_ws(
+            ((l_val + pad_bits) // 8) + 1)]
+        GEN.append(Uint('Initial octet', val=pad_bits, bl=8))
+        GEN.extend(_gen)
+        self._struct = Envelope(self._name, GEN=tuple(GEN))
+        return self._struct
+
+    def _from_oer(self, char):
+        if self._const_sz:
+            if (self._const_sz._ev is None) and (self._const_sz.ra == 1):
+                # Fixed
+                l_val = self._const_sz.lb
+                pad_bits = (l_val % 8)
+                pad_bits = (8 - pad_bits) if pad_bits else 0
+                buf = char.get_uint(l_val+pad_bits)
+                self._val = (buf >> pad_bits, l_val)
+                return
+        elif self._const_cont:
+            # Contained by constraint
+            Cont = self._get_val_obj(self._const_cont._typeref.called)
+            Cont.from_oer(char)
+            self._val = (self._const_cont._typeref.called, Cont._val)
+            return
+
+        # Variable size constraints
+        l_det = ASN1CodecOER.decode_length_determinant(char)
+        pad_bits = char.get_uint(8)
+        l_val = 8*(l_det - 1) - pad_bits
+        self._val = (char.get_uint(l_val+pad_bits) >> pad_bits, l_val)
+
+    def _from_oer_ws(self, char):
+        if self._const_sz:
+            if (self._const_sz._ev is None) and (self._const_sz.ra == 1):
+                # Fixed
+                l_val = self._const_sz.lb
+                pad_bits = (l_val % 8)
+                pad_bits = (8 - pad_bits) if pad_bits else 0
+                val = Uint('V', bl=l_val)
+                val._from_char(char)
+                zero_pad = Uint('Zero-pad', bl=pad_bits)
+                zero_pad._from_char(char)
+                self._val = (val.get_val(), val.get_bl())
+                self._struct = Envelope(self._name, GEN=(val, zero_pad))
+                return
+        elif self._const_cont:
+            # Contained by constraint
+            Cont = self._get_val_obj(self._const_cont._typeref.called)
+            Cont.from_oer_ws(char)
+            _gen = Cont._struct
+            self._val = (self._const_cont._typeref.called, Cont._val)
+            self._struct = Envelope(self._name, GEN=(_gen,))
+            return
+
+        # Variable size constraints
+        l_det, _gen = ASN1CodecOER.decode_length_determinant_ws(char)
+        _gen = [_gen]
+        i_oct = Uint('Initial octet', bl=8)
+        i_oct._from_char(char)
+        pad_bits = i_oct.get_val()
+        l_val = 8*(l_det - 1) - pad_bits
+        val = Uint('V', bl=l_val)
+        val._from_char(char)
+        zero_pad = Uint('Zero-pad', bl=pad_bits)
+        zero_pad._from_char(char)
+        _gen.extend((i_oct, val, zero_pad))
+        self._val = (val.get_val(), val.get_bl())
+        self._struct = Envelope(self._name, GEN=tuple(_gen))
+
 
 class OCT_STR(ASN1Obj):
     __doc__ = """
@@ -1668,6 +1829,117 @@ Specific constraints attributes:
                 else:
                     return {Cont.TYPE: val}
 
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _from_oer(self, char):
+        if self._const_sz:
+            if (self._const_sz._ev is None) and (self._const_sz.ra == 1):
+                # Fixed
+                self._val = char.get_bytes(self._const_sz.lb * 8)
+                return
+        elif self._const_cont:
+            # Contained by constraint
+            Cont = self._get_val_obj(self._const_cont._typeref.called)
+            Cont.from_oer(char)
+            self._val = (self._const_cont._typeref.called, Cont._val)
+            return
+
+        # Variable size constraint
+        l_val = ASN1CodecOER.decode_length_determinant(char)
+        self._val = char.get_bytes(l_val * 8)
+
+    def _from_oer_ws(self, char):
+        if self._const_sz:
+            if (self._const_sz._ev is None) and (self._const_sz.ra == 1):
+                # Fixed
+                val = Buf('V', bl=self._const_sz.lb * 8)
+                val._from_char(char)
+                self._val = val.get_val()
+                self._struct = Envelope(self._name, GEN=(val,))
+                return
+        elif self._const_cont:
+            # Contained by constraint
+            Cont = self._get_val_obj(self._const_cont._typeref.called)
+            Cont.from_oer_ws(char)
+            _gen = Cont._struct
+            self._val = (self._const_cont._typeref.called, Cont._val)
+            self._struct = Envelope(self._name, GEN=(_gen,))
+            return
+
+        # Variable size constraints
+        l_val, _gen = ASN1CodecOER.decode_length_determinant_ws(char)
+        val = Buf('V', bl=8 * l_val)
+        val._from_char(char)
+        _gen.append(val)
+        self._val = val.get_val()
+        self._struct = Envelope(self._name, GEN=(_gen,))
+
+    def __to_coer_buf(self):
+        Cont = self._get_val_obj(self._val[0])
+        if Cont == self._const_cont and self._const_cont_enc is not None:
+            # TODO: different codec to be used
+            raise (
+                ASN1NotSuppErr('{0}: specific CONTAINING encoder unhandled' \
+                               .format(self.fullname())))
+        Cont._val = self._val[1]
+        buf = Cont.to_coer()
+        return buf, Cont
+
+    def __to_coer_ws_buf(self):
+        Cont = self._get_val_obj(self._val[0])
+        if Cont == self._const_cont and self._const_cont_enc is not None:
+            # TODO: different codec to be used
+            raise (
+                ASN1NotSuppErr('{0}: specific CONTAINING encoder unhandled' \
+                               .format(self.fullname())))
+        Cont._val = self._val[1]
+        buf = Cont.to_coer_ws()
+        return buf, Cont
+
+    def _to_oer(self):
+        if not isinstance(self._val, bytes_types):
+            buf, wrapped = self.__to_coer_buf()
+        else:
+            buf, wrapped = self._val, None
+
+        try:
+            if (((self._const_sz._ev is None) and
+                    (self._const_sz.lb == self._const_sz.ub)) or
+                    (self._const_cont is not None)):
+                return [(T_BYTES, buf, len(buf)*8)]
+        except AttributeError:
+            pass
+
+        # Means that it has variable constraint or no constraint
+        GEN = ASN1CodecOER.encode_length_determinant(len(buf))
+        GEN.append((T_BYTES, buf, len(buf) * 8))
+        return GEN
+
+    def _to_oer_ws(self):
+        if not isinstance(self._val, bytes_types):
+            buf, wrapped = self.__to_coer_ws_buf()
+        else:
+            buf, wrapped = self._val, None
+
+        _gen = Buf('V', val=buf, bl=len(buf)*8)
+
+        try:
+            if (((self._const_sz._ev is None) and
+                 (self._const_sz.lb == self._const_sz.ub)) or
+                    (self._const_cont)):
+                self._struct = Envelope(self._name,
+                                        GEN=(_gen,))
+                return self._struct
+        except AttributeError:
+            pass
+
+        # Means that it has variable constraint or no constraint
+        GEN = ASN1CodecOER.encode_length_determinant_ws(len(buf))
+        GEN.append(_gen)
+        self._struct = Envelope(self._name, GEN=(GEN,))
+        return self._struct
 
 #------------------------------------------------------------------------------#
 # All *String
@@ -2493,6 +2765,110 @@ Virtual parent for any ASN.1 *String object
         
         def _to_jval(self):
             return self._val
+
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _from_oer(self, char):
+        try:
+            if ((self._const_sz.rdyn == 0) and
+                    (self._const_sz._ev is None) and
+                    (self._clen is not None)):
+                # Fixed size
+                b_len = round_p2(self._clen) * self._const_sz.lb
+                self._val = self._decode_oer_cont(char.get_bytes(b_len))
+                return
+        except AttributeError:
+            pass
+
+        # All other variants
+        l_det = ASN1CodecOER.decode_length_determinant(char)
+        self._val = self._decode_oer_cont(char.get_bytes(l_det * 8))
+
+    def _from_oer_ws(self, char):
+        try:
+            if ((self._const_sz.rdyn == 0) and
+                    (self._const_sz._ev is None) and
+                    (self._clen is not None)):
+                # Fixed size
+                b_len = round_p2(self._clen) * self._const_sz.lb
+                buf = Buf('V', bl=b_len)
+                buf._from_char(char)
+                self._struct = Envelope(self._name, GEN=(buf,))
+                self._val = self._decode_oer_cont(buf.to_bytes())
+                return
+        except AttributeError:
+            pass
+
+        # All other variants
+        l_det, _gen = ASN1CodecOER.decode_length_determinant_ws(char)
+        _gen = [_gen]
+        buf = Buf('V', bl=l_det*8)
+        buf._from_char(char)
+        _gen.append(buf)
+        self._struct = Envelope(self._name, GEN=tuple(_gen))
+        self._val = self._decode_oer_cont(buf.to_bytes())
+
+    def _decode_oer_cont(self, content_bytes):
+        if self._codec is None:
+            raise(ASN1NotSuppErr('{0}: ISO 2022 codec not supported' \
+                                 .format(self.fullname())))
+        try:
+            return content_bytes.decode(self._codec)
+        except Exception as err:
+            raise(ASN1OERDecodeErr('{0}: invalid character, Python codec error, {1}' \
+                                   .format(self.fullname(), err)))
+
+    def _encode_oer_cont(self):
+        if self._codec is None:
+            raise(ASN1NotSuppErr('{0}: ISO 2022 codec not supported' \
+                                 .format(self.fullname())))
+        try:
+            return self._val.encode(self._codec)
+        except Exception as err:
+            raise(ASN1OEREncodeErr('{0}: invalid character, Python codec error, {1}' \
+                                   .format(self.fullname(), err)))
+
+    def _to_oer(self):
+        buf = self._encode_oer_cont()
+        l_buf = len(buf)
+        buf = [(T_BYTES, buf, l_buf * 8)]
+
+        try:
+            if ((self._const_sz.rdyn == 0) and
+                    (self._const_sz._ev is None) and
+                    (self._clen is not None)):
+                # Fixed size
+                return buf
+        except AttributeError:
+            pass
+
+        # All other variants
+        GEN = ASN1CodecOER.encode_length_determinant(l_buf)
+        GEN.extend(buf)
+        return GEN
+
+    def _to_oer_ws(self):
+        buf = self._encode_oer_cont()
+        l_buf = len(buf)
+        buf = Buf('V', val=buf, bl=l_buf * 8)
+
+        try:
+            if ((self._const_sz.rdyn == 0) and
+                    (self._const_sz._ev is None) and
+                    (self._clen is not None)):
+                # Fixed size
+                self._struct = Envelope(self._name, GEN=(buf,))
+                return self._struct
+        except AttributeError:
+            pass
+
+        # All other variants
+        GEN = [ASN1CodecOER.encode_length_determinant_ws(l_buf)]
+        GEN.append(buf)
+        self._struct = Envelope(self._name, GEN=tuple(GEN))
+        return self._struct
 
 
 # Python does not provide a complete support for ISO2022 encoding

@@ -44,14 +44,16 @@ BEGIN
   Bst03 ::= BIT STRING (SIZE (0..24, ...))
   Bst04 ::= BIT STRING (SIZE (65536..16777216))
   Bst05 ::= BIT STRING (CONTAINING Enu01)
-  
+  Bst06 ::= BIT STRING (SIZE (16))
+
   -- OCTET STRING
   Ost01 ::= OCTET STRING
   Ost02 ::= OCTET STRING (SIZE (0..24))
   Ost03 ::= OCTET STRING (SIZE (0..24, ...))
   Ost04 ::= OCTET STRING (SIZE (65536..16777216))
   Ost05 ::= OCTET STRING (CONTAINING Enu01)
-  
+  Ost06 ::= OCTET STRING (SIZE (16))
+
   -- String
   Nus01 ::= NumericString
   Nus02 ::= NumericString (FROM ("0123"))
@@ -60,6 +62,7 @@ BEGIN
   Ias01 ::= IA5String
   Ias02 ::= IA5String (SIZE (0..24))
   Ias03 ::= IA5String (SIZE (0..65535, ...))
+  Ias04 ::= IA5String (SIZE (32))
   U8s01 ::= UTF8String
   U8s02 ::= UTF8String (SIZE (0..24))
   U8s03 ::= UTF8String (SIZE (0..65535, ...))
