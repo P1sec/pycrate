@@ -681,6 +681,10 @@ Specific attributes:
                 ident = "_ext_{0}{1}{2}".format(tag_class, 0, tag)
                 val_bytes = ASN1CodecOER.decode_open_type(char)
                 self._val = (ident, val_bytes)
+            else:
+                raise ASN1OERDecodeErr(
+                    'CHOICE._from_oer: %s, unknown extension tag %r' \
+                           % (self.fullname(), (tag_class, tag)))
 
     def _from_oer_ws(self, char):
         tag_class, tag, tag_struct = ASN1CodecOER.decode_tag_ws(char)
@@ -720,6 +724,10 @@ Specific attributes:
                 val = val_struct.get_val()
                 self._struct = Envelope(self._name, GEN=tuple(_gen))
                 self._val = (ident, val)
+            else:
+                raise ASN1OERDecodeErr(
+                    'CHOICE._from_oer_ws: %s, unknown extension tag %r' \
+                    % (self.fullname(), (tag_class, tag)))
 
 #------------------------------------------------------------------------------#
 # SEQUENCE and SET
