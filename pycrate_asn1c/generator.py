@@ -905,16 +905,18 @@ class PycrateGenerator(_Generator):
         Consts_comps = [C for C in Obj._const if C['type'] == CONST_COMPS]
         if Consts_comps:
             if len(Consts_comps) > 1:
-                asnlog('WNG: {0}.{1}: multiple WITH COMPONENTS constraints, compiling '\
-                       'only the first'.format(self._mod_name, Obj._name))
+                asnlog('WNG: {0}.{1}: multiple WITH COMPONENTS constraints, '\
+                       'generating only the first'.format(self._mod_name, Obj._name))
             if Consts_comps[0]['ext'] is not None:
-                asnlog('INF: {0}.{1}: extensible WITH COMPONENTS constraint, not compiling '\
-                       'extension'.format(self._mod_name, Obj._name))
+                asnlog('INF: {0}.{1}: extensible WITH COMPONENTS constraint, '\
+                       'not generating extension'.format(self._mod_name, Obj._name))
             if not Consts_comps[0]['root']:
                 return
+            '''
             if len(Consts_comps[0]['root']) > 1:
                 asnlog('WNG: {0}.{1}: multiple root parts in WITH COMPONENTS constraint, '\
                        'processing only the common components'.format(self._mod_name, Obj._name))
+            '''
             #
             # 1) duplicate the content structure of the object
             if not Obj._cont:
@@ -924,6 +926,13 @@ class PycrateGenerator(_Generator):
                 Obj._cont = Obj._cont.copy()
             for ident, Comp in Obj._cont.items():
                 Obj._cont[ident] = Comp.__class__(Comp)
+            #
+            '''
+            # TODO: components need actually to stay there, and be kept OPTIONAL
+            # this is required for proper encoding (mainly PER, OER)
+            # These COMPONENTS constraints need actually to be checked at runtime 
+            # in addition to existing ones, without impacting the structure
+            # of objects content.
             #
             # 2) handle absent / present components
             # gathering present / absent components from the potentially 
@@ -943,18 +952,23 @@ class PycrateGenerator(_Generator):
                 for ident in pres:
                     if FLAG_OPT in Obj._cont[ident]._flag:
                         del Obj._cont[ident]._flag[FLAG_OPT]
+            '''
+            #
+            if len(Consts_comps[0]['root']) > 1:
+                asnlog('WNG: {0}.{1}: multiple root parts in WITH COMPONENTS constraint, '\
+                       'unable to compile them'.format(self._mod_name, Obj._name))
+                return
             #
             # 3) apply additional constraint on components
             # only if we have a single root component in the constraint
-            if len(Consts_comps[0]['root']) == 1:
-                Const    = Consts_comps[0]['root'][0]
-                Const_kw = set(Const.keys())
-                Const_kw.remove('_pre')
-                Const_kw.remove('_abs')
-                for ident in Const_kw:
-                    Obj._cont[ident]._const = list(Obj._cont[ident]._const)
-                    Obj._cont[ident]._const.extend(Const[ident]['const'])
-                    #print('%s.%s: %r' % (Obj._name, ident, Obj._cont[ident]._const))
+            Const    = Consts_comps[0]['root'][0]
+            Const_kw = set(Const.keys())
+            Const_kw.remove('_pre')
+            Const_kw.remove('_abs')
+            for ident in Const_kw:
+                Obj._cont[ident]._const = list(Obj._cont[ident]._const)
+                Obj._cont[ident]._const.extend(Const[ident]['const'])
+                #print('%s.%s: %r' % (Obj._name, ident, Obj._cont[ident]._const))
 
 
 #------------------------------------------------------------------------------#
