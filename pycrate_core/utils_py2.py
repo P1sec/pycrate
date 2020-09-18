@@ -2152,3 +2152,61 @@ def pack_val(*val):
     #
     # 7) return the length in bits and bytes buffer
     return b''.join(concat), len_bit
+
+# OER related REAL handling
+
+
+def decode_ieee754_32(char):
+    """ Converts IEE754 single precision float to a pycrate REAL tuple:
+    """
+    sign = (-1) ** char.get_uint(1)
+    exponent = char.get_uint(8) - 127
+    fraction = char.get_uint(23)
+    lsb = 0
+    ifrac = 1
+    for i in range(23):
+        lb = fraction & 1
+        if lb and (lsb == 0):
+            lsb = 23 - i
+        ifrac += 2 ** (-(23 - i)) * lb
+        fraction = fraction >> 1
+
+    # Convert the normalized mantissa (1.xxx) to a integer mantissa by multiplying 2
+    ifrac = int((sign * ifrac) * (2 ** lsb))
+    return (ifrac, 2, exponent - lsb)
+
+
+def encode_ieee754_32(val):
+    """ Converts pycrate REAL tuple into IEEE754 single precision value.
+    """
+    # There is of course a more efficient method going straight from mantissa,
+    # but sorry, no time. This at least works for arbitrary base.
+    return pack('>f', val[0] * (val[1] ** val[2]))
+
+
+def decode_ieee754_64(char):
+    """ Converts IEE754 single precision float to a pycrate REAL tuple:
+    """
+    sign = (-1) ** char.get_uint(1)
+    exponent = char.get_uint(11) - 1023
+    fraction = char.get_uint(52)
+    lsb = 0
+    ifrac = 1
+    for i in range(52):
+        lb = fraction & 1
+        if lb and (lsb == 0):
+            lsb = 53 - i
+        ifrac += 2 ** (-(52 - i)) * lb
+        fraction = fraction >> 1
+
+    # Convert the normalized mantissa (1.xxx) to a integer mantissa by multiplying 2
+    ifrac = int((sign * ifrac) * (2 ** lsb))
+    return (ifrac, 2, exponent - lsb)
+
+
+def encode_ieee754_64(val):
+    """ Converts pycrate REAL tuple into IEEE754 single precision value.
+    """
+    # There is of course a more efficient method going straight from mantissa,
+    # but sorry, no time. This at least works for arbitrary base.
+    return pack('>d', val[0] * (val[1] ** val[2]))

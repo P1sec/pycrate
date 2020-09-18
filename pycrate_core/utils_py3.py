@@ -2116,6 +2116,7 @@ def pack_val(*val):
 
 # OER related REAL handling
 
+
 def decode_ieee754_32(char):
     """ Converts IEE754 single precision float to a pycrate REAL tuple:
     """
