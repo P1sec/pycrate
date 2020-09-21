@@ -105,7 +105,7 @@ def _test_rt_base():
         assert( Boo01.to_jer() == 'true' )
         Boo01.from_jer( 'true' )
         assert( Boo01._val == True )
-
+    # OER/COER
     Boo01.from_oer(b'\xff')
     assert( Boo01._val == True )
     Boo01.from_oer_ws(b'\xff')
@@ -117,7 +117,6 @@ def _test_rt_base():
 
     # Int01 ::= INTEGER
     Int01 = Mod['Int01']
-    #
     Int01.from_asn1('0')
     # encoding
     assert( Int01.to_aper() == Int01.to_aper_ws() == b'\x01\x00' )
@@ -207,7 +206,7 @@ def _test_rt_base():
     assert( Int01._val == 4096 )
     Int01.from_coer_ws(b'\x02\x10\x00')
     assert( Int01._val == 4096 )
-
+    
     # Int02 ::= INTEGER (MIN..65535)
     Int02 = Mod['Int02']
     Int02.from_asn1('127')
@@ -338,7 +337,7 @@ def _test_rt_base():
     assert( Int02._val == 128 )
     Int02.from_coer_ws(b'\x02\x00\x80')
     assert( Int02._val == 128 )
-
+    
     # Int03 ::= INTEGER (-1..MAX)
     Int03 = Mod['Int03']
     Int03.from_asn1('4096')
@@ -385,10 +384,9 @@ def _test_rt_base():
     assert( Int03._val == 4096 )
     Int03.from_coer_ws(b'\x02\x10\x00')
     assert( Int03._val == 4096 )
-
+    
     # Int04 ::= INTEGER (1..MAX)
     Int04 = Mod['Int04']
-    #
     Int04.from_asn1('1')
     # encoding
     assert( Int04.to_aper() == Int04.to_aper_ws() == b'\x01\x00' )
@@ -478,7 +476,7 @@ def _test_rt_base():
     assert( Int04._val == 127 )
     Int04.from_coer_ws(b'\x01\x7f')
     assert( Int04._val == 127 )
-
+    
     # Int05 ::= INTEGER (0..MAX)
     Int05 = Mod['Int05']
     Int05.from_asn1('128')
@@ -525,7 +523,7 @@ def _test_rt_base():
     assert( Int05._val == 128 )
     Int05.from_coer_ws(b'\x01\x80')
     assert( Int05._val == 128 )
-
+    
     # Int06 ::= INTEGER (3..6)
     Int06 = Mod['Int06']
     Int06.from_asn1('3')
@@ -605,7 +603,7 @@ def _test_rt_base():
     assert( Int06._val == 6 )
     Int06.from_coer_ws(b'\x06')
     assert( Int06._val == 6 )
-
+    
     # Int07 ::= INTEGER (4000..4254)
     Int07 = Mod['Int07']
     Int07.from_asn1('4002')
@@ -685,7 +683,7 @@ def _test_rt_base():
     assert( Int07._val == 4129 )
     Int07.from_coer_ws(b'\x10!')
     assert( Int07._val == 4129 )
-
+    
     # Int08 ::= INTEGER (4000..4255)
     Int08 = Mod['Int08']
     Int08.from_asn1('4255')
@@ -726,7 +724,7 @@ def _test_rt_base():
     assert( Int08._val == 4255 )
     Int08.from_coer_ws(b'\x10\x9f')
     assert( Int08._val == 4255 )
-
+    
     # Int09 ::= INTEGER (0..32000)
     Int09 = Mod['Int09']
     Int09.from_asn1('31000')
@@ -767,7 +765,7 @@ def _test_rt_base():
     assert( Int09._val == 31000 )
     Int09.from_coer_ws(b'y\x18')
     assert( Int09._val == 31000 )
-
+    
     # Int10 ::= INTEGER (1..65538)
     Int10 = Mod['Int10']
     Int10.from_asn1('1')
@@ -886,7 +884,7 @@ def _test_rt_base():
     assert( Int10._val == 65538 )
     Int10.from_coer_ws(b'\x00\x01\x00\x02')
     assert( Int10._val == 65538 )
-
+    
     # Int12 ::= INTEGER (-1..MAX, ...)
     Int12 = Mod['Int12']
     Int12.from_asn1('-100')
@@ -933,7 +931,7 @@ def _test_rt_base():
     assert( Int12._val == -100 )
     Int12.from_coer_ws(b'\x01\x9c')
     assert( Int12._val == -100 )
-
+    
     # Int13 ::= INTEGER (3..6, ...)
     # encoding untested against commercial tools (often bound to 32 bits integers)
     Int13 = Mod['Int13']
@@ -981,7 +979,7 @@ def _test_rt_base():
     assert( Int13._val == 1234567890123456789012345678901234567890 )
     Int13.from_coer_ws(b'\x11\x03\xa0\xc9 u\xc0\xdb\xf3\xb8\xac\xbc_\x96\xce?\n\xd2')
     assert( Int13._val == 1234567890123456789012345678901234567890 )
-
+    
     # Rea01 ::= REAL
     Rea01 = Mod['Rea01']
     Rea01.from_asn1('8.56323e215')
@@ -1056,7 +1054,6 @@ def _test_rt_base():
         assert( Rea01._to_jval() == {'base10Value': '1.3706369372812333e-11'} )
         Rea01.from_jer( '{"base10Value": "1.3706369372812333e-11"}' )
         assert( Rea01._val == (13706369372812333, 10, -27) )
-
     # OER/COER
     Rea01.from_oer(b'\x06\t\x04\x80\xd1\x07\x89')
     assert( Rea01._val == (1929, 2, -47) )
@@ -1066,7 +1063,7 @@ def _test_rt_base():
     assert( Rea01._val == (1929, 2, -47) )
     Rea01.from_coer_ws(b'\x06\t\x04\x80\xd1\x07\x89')
     assert( Rea01._val == (1929, 2, -47) )
-
+    
     # Enu01 ::= ENUMERATED {cheese, cake, coffee, tea}
     Enu01 = Mod['Enu01']
     Enu01.from_asn1('coffee')
@@ -1113,7 +1110,7 @@ def _test_rt_base():
     assert( Enu01._val == 'coffee' )
     Enu01.from_coer_ws(b'\x02')
     assert( Enu01._val == 'coffee' )
-
+    
     # Enu04 ::= ENUMERATED {cheese, ..., cake, coffee, tea}
     Enu04 = Mod['Enu04']
     Enu04.from_asn1('tea')
@@ -1154,7 +1151,7 @@ def _test_rt_base():
     assert( Enu04._val == 'tea' )
     Enu04.from_coer_ws(b'\x03')
     assert( Enu04._val == 'tea' )
-
+    
     # Oid01 ::= OBJECT IDENTIFIER
     Oid01 = Mod['Oid01']
     Oid01.from_asn1('{iso member-body(2) fr(250) type-org(1)}')
@@ -1201,7 +1198,7 @@ def _test_rt_base():
     assert( Oid01._val == (1, 2, 250, 1) )
     Oid01.from_coer_ws(b'\x04*\x81z\x01')
     assert( Oid01._val == (1, 2, 250, 1) )
-
+    
     # Oid02 ::= RELATIVE-OID
     Oid02 = Mod['Oid02']
     Oid02.from_asn1('{43 12 20 7}')
@@ -1242,7 +1239,7 @@ def _test_rt_base():
     assert( Oid02._val == (43, 12, 20, 7) )
     Oid02.from_coer_ws(b'\x04+\x0c\x14\x07')
     assert( Oid02._val == (43, 12, 20, 7) )
-
+    
     # Bst01 ::= BIT STRING
     Bst01 = Mod['Bst01']
     Bst01.from_asn1('\'001111001001011010\'B')
@@ -1289,7 +1286,7 @@ def _test_rt_base():
     assert( Bst01._val == (62042, 18) )
     Bst01.from_coer_ws(b'\x04\x06<\x96\x80')
     assert( Bst01._val == (62042, 18) )
-
+    
     # Bst03 ::= BIT STRING (SIZE (0..24, ...))
     Bst03 = Mod['Bst03']
     Bst03.from_asn1('\'00111100100101101010010100001111\'B')
@@ -1336,7 +1333,7 @@ def _test_rt_base():
     assert( Bst03._val == (1016505615, 32) )
     Bst03.from_coer_ws(b'\x05\x00<\x96\xa5\x0f')
     assert( Bst03._val == (1016505615, 32) )
-
+    
     # Bst06 ::= BIT STRING (SIZE (16))
     Bst06 = Mod['Bst06']
     Bst06.from_asn1('\'0011110010010110\'B')
@@ -1383,7 +1380,7 @@ def _test_rt_base():
     assert( Bst06._val == (15510, 16) )
     Bst06.from_coer_ws(b'<\x96' )
     assert( Bst06._val == (15510, 16) )
-
+    
     # Ost01 ::= OCTET STRING
     Ost01 = Mod['Ost01']
     Ost01.from_asn1('\'0123456789ABCDEFFEDCBA9876543210\'H')
@@ -1430,7 +1427,7 @@ def _test_rt_base():
     assert( Ost01._val == b'\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
     Ost01.from_coer_ws(b'\x10\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10')
     assert( Ost01._val == b'\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
-
+    
     # Ost06 ::= OCTET STRING (SIZE (16))
     Ost06 = Mod['Ost06']
     Ost06.from_asn1('\'01234567890123456789012345678901\'H')
@@ -1477,7 +1474,7 @@ def _test_rt_base():
     assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
     Ost06.from_coer_ws(b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
     assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
-
+    
     # Nus01 ::= NumericString
     Nus01 = Mod['Nus01']
     Nus01.from_asn1('"01 02 03 04 05"')
@@ -1524,7 +1521,7 @@ def _test_rt_base():
     assert( Nus01._val == '01 02 03 04 05' )
     Nus01.from_coer_ws(b'\x0e01 02 03 04 05')
     assert( Nus01._val == '01 02 03 04 05' )
-
+    
     # Nus02 ::= NumericString (FROM ("0123"))
     Nus02 = Mod['Nus02']
     Nus02.from_asn1('"00113322"')
@@ -1565,7 +1562,7 @@ def _test_rt_base():
     assert( Nus02._val == '00113322' )
     Nus02.from_coer_ws(b'\x0800113322')
     assert( Nus02._val == '00113322' )
-
+    
     # Prs01 ::= PrintableString
     Prs01 = Mod['Prs01']
     Prs01.from_asn1('"ambiguite"')
@@ -1606,7 +1603,7 @@ def _test_rt_base():
     assert( Prs01._val == 'ambiguite' )
     Prs01.from_coer_ws(b'\tambiguite')
     assert( Prs01._val == 'ambiguite' )
-
+    
     # Prs02 ::= PrintableString (FROM ("ATCG"))
     Prs02 = Mod['Prs02']
     Prs02.from_asn1('"ATCGATTGAGCTCTAGCG"')
@@ -1647,7 +1644,7 @@ def _test_rt_base():
     assert( Prs02._val == 'ATCGATTGAGCTCTAGCG' )
     Prs02.from_coer_ws(b'\x12ATCGATTGAGCTCTAGCG')
     assert( Prs02._val == 'ATCGATTGAGCTCTAGCG' )
-
+    
     # Ias01 ::= IA5String
     Ias01 = Mod['Ias01']
     Ias01.from_asn1('"ambiguite"')
@@ -1688,7 +1685,7 @@ def _test_rt_base():
     assert( Ias01._val == 'ambiguite' )
     Ias01.from_coer_ws(b'\tambiguite')
     assert( Ias01._val == 'ambiguite' )
-
+    
     # Ias04 ::= IA5String (SIZE (32))
     Ias04 = Mod['Ias04']
     Ias04.from_asn1('"This is a sentence of 32 chars:)"')
@@ -1729,7 +1726,7 @@ def _test_rt_base():
     assert( Ias04._val == 'This is a sentence of 32 chars:)' )
     Ias04.from_coer_ws(b'This is a sentence of 32 chars:)')
     assert( Ias04._val == 'This is a sentence of 32 chars:)' )
-
+    
     # U8s01 ::= UTF8String
     U8s01 = Mod['U8s01']
     U8s01.from_asn1(u'"ambiguïté"')
@@ -1776,7 +1773,7 @@ def _test_rt_base():
     assert( U8s01._val == u'ambiguïté' )
     U8s01.from_coer_ws(b'\x0bambigu\xc3\xaft\xc3\xa9')
     assert( U8s01._val == u'ambiguïté' )
-
+    
     # Uns01 ::= UniversalString
     Uns01 = Mod['Uns01']
     Uns01.from_asn1(u'"ambiguïté"')
@@ -1817,7 +1814,7 @@ def _test_rt_base():
     assert( Uns01._val == u'ambiguïté' )
     Uns01.from_coer_ws(b'$\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9')
     assert( Uns01._val == u'ambiguïté' )
-
+    
     # Uti01 ::= UTCTime
     Uti01 = Mod['Uti01']
     Uti01.from_asn1('"1705181130Z"')
@@ -1926,7 +1923,7 @@ def _test_rt_base():
     assert( Cho01._val == ('int', 2000) )
     Cho01.from_coer_ws(b'\x8a\x02\x07\xd0')
     assert( Cho01._val == ('int', 2000) )
-
+    
     # Seq01 ::= SEQUENCE { --check test_asn1rt_mod.asn file-- }
     Seq01 = Mod['Seq01']
     Seq01.from_asn1('{boo FALSE, int 1024, enu cake}')
@@ -1939,7 +1936,6 @@ def _test_rt_base():
     assert( Seq01.to_der() == Seq01.to_der_ws() == b'0\x0e\x01\x01\x00\xbf\x81\x00\x04\x02\x02\x04\x00\n\x01\x01' )
     assert( Seq01.to_oer() == Seq01.to_oer_ws() == b'`\x00\x02\x04\x00\x01' )
     assert( Seq01.to_coer() == Seq01.to_coer_ws() == b'`\x00\x02\x04\x00\x01' )
-
     # decoding
     Seq01.from_aper(b'`\x02\x03\xff@')
     assert( Seq01._val == S_val )
@@ -1975,7 +1971,7 @@ def _test_rt_base():
     assert( Seq01._val == S_val )
     Seq01.from_coer_ws(b'`\x00\x02\x04\x00\x01')
     assert( Seq01._val == S_val )
-
+    
     # Seq02 ::= SEQUENCE (SIZE (2..5)) OF Ias02
     Seq02 = Mod['Seq02']
     Seq02.from_asn1('{"un", "gros", "pterodactyle"}')
@@ -2023,7 +2019,7 @@ def _test_rt_base():
     assert( Seq02._val == S_val )
     Seq02.from_coer_ws(b'\x01\x03\x02un\x04gros\x0cpterodactyle')
     assert( Seq02._val == S_val )
-
+    
     # Set01 ::= SET { --check test_asn1rt_mod.asn file-- }
     Set01 = Mod['Set01']
     Set01.from_asn1('{enu cheese, boo TRUE, int 5565, cho enu: cake}')
@@ -2071,7 +2067,7 @@ def _test_rt_base():
     assert( Set01._val == S_val )
     Set01.from_coer_ws(b'`\xff\x00\x82\x01\x02\x15\xbd')
     assert( Set01._val == S_val )
-
+    
     return 0
 
 def test_rt_base():
@@ -2549,7 +2545,7 @@ def test_X509():
 def test_perf_asn1rt():
     
     _load_rt_base()
-    print('[+] ASN.1 base type encoding / decoding (BER, CER, DER, UPER, APER)')
+    print('[+] ASN.1 base type encoding / decoding (BER, CER, DER, UPER, APER, OER, COER)')
     Ta = timeit(_test_rt_base, number=10)
     print('test_rt_base: {0:.4f}'.format(Ta))
     
