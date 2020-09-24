@@ -1278,7 +1278,7 @@ Specific constraints attributes:
             if self._const_cont._typeref:
                 ident = self._const_cont._typeref.called[1]
             else:
-                ident = self._const_cont.TYPE 
+                ident = self._const_cont.TYPE
             if val[0] != ident:
                 raise(ASN1ObjErr('{0}: value out of containing constraint, {1!r}'\
                       .format(self.fullname(), val)))
@@ -1839,16 +1839,21 @@ Specific constraints attributes:
                 # Fixed
                 self._val = char.get_bytes(self._const_sz.lb * 8)
                 return
-        elif self._const_cont:
-            # Contained by constraint
-            Cont = self._get_val_obj(self._const_cont._typeref.called)
-            Cont.from_oer(char)
-            self._val = (self._const_cont._typeref.called, Cont._val)
-            return
 
         # Variable size constraint
         l_val = ASN1CodecOER.decode_length_determinant(char)
-        self._val = char.get_bytes(l_val * 8)
+        val = char.get_bytes(l_val * 8)
+
+        if self._const_cont:
+            # Contained by constraint
+            Cont = self._get_val_obj(self._const_cont._typeref.called)
+            _const_cont_par = Cont._parent
+            Cont._parent = self._parent
+            Cont.from_oer(val)
+            Cont._parent = _const_cont_par
+            self._val = (self._const_cont._typeref.called[1], Cont._val)
+        else:
+            self._val = val
 
     def _from_oer_ws(self, char):
         if self._const_sz:
@@ -1859,21 +1864,25 @@ Specific constraints attributes:
                 self._val = val.get_val()
                 self._struct = Envelope(self._name, GEN=(val,))
                 return
-        elif self._const_cont:
-            # Contained by constraint
-            Cont = self._get_val_obj(self._const_cont._typeref.called)
-            Cont.from_oer_ws(char)
-            _gen = Cont._struct
-            self._val = (self._const_cont._typeref.called, Cont._val)
-            self._struct = Envelope(self._name, GEN=(_gen,))
-            return
 
         # Variable size constraints
         l_val, _gen = ASN1CodecOER.decode_length_determinant_ws(char)
         val = Buf('V', bl=8 * l_val)
         val._from_char(char)
-        _gen.append(val)
-        self._val = val.get_val()
+
+        if self._const_cont:
+            # Contained by constraint
+            Cont = self._get_val_obj(self._const_cont._typeref.called)
+            _const_cont_par = Cont._parent
+            Cont._parent = self._parent
+            Cont.from_oer_ws(val.get_val())
+            Cont._parent = _const_cont_par
+            _gen.append(Cont._struct)
+            self._val = (self._const_cont._typeref.called[1], Cont._val)
+        else:
+            _gen.append(val)
+            self._val = val.get_val()
+
         self._struct = Envelope(self._name, GEN=(_gen,))
 
     def __to_coer_buf(self):
@@ -1905,9 +1914,8 @@ Specific constraints attributes:
             buf, wrapped = self._val, None
 
         try:
-            if (((self._const_sz._ev is None) and
-                    (self._const_sz.lb == self._const_sz.ub)) or
-                    (self._const_cont is not None)):
+            if ((self._const_sz._ev is None) and
+                    (self._const_sz.lb == self._const_sz.ub)):
                 return [(T_BYTES, buf, len(buf)*8)]
         except AttributeError:
             pass
@@ -1926,11 +1934,9 @@ Specific constraints attributes:
         _gen = Buf('V', val=buf, bl=len(buf)*8)
 
         try:
-            if (((self._const_sz._ev is None) and
-                 (self._const_sz.lb == self._const_sz.ub)) or
-                    (self._const_cont)):
-                self._struct = Envelope(self._name,
-                                        GEN=(_gen,))
+            if ((self._const_sz._ev is None) and
+                    (self._const_sz.lb == self._const_sz.ub)):
+                self._struct = Envelope(self._name, GEN=(_gen,))
                 return self._struct
         except AttributeError:
             pass
