@@ -934,6 +934,8 @@ class ASN1CodecPER(ASN1Codec):
             GEN.extend( cla.encode_count_ws(ldet) )
             if cla.ALIGNED:
                 cla._off[-1] += 8*ldet
+            if wrapped._typeref is not None:
+                wrapped._struct._name = wrapped._tr._name
             GEN.append( wrapped._struct )
         return GEN
     
