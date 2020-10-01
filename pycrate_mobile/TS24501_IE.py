@@ -146,12 +146,21 @@ class IntraN1ModeNASTransContainer(Envelope):
 # TS 24.501, 9.11.2.8
 #------------------------------------------------------------------------------#
 
+# TS 23.501, 5.15.2.2
+_SST_dict = {
+    1: 'eMBB',
+    2: 'URLLC',
+    3: 'MIoT',
+    4: 'V2X',
+    }
+
+
 class SNSSAI(Envelope):
     
     ENV_SEL_TRANS = False
     
     _GEN = (
-        Uint8('SST'),
+        Uint8('SST', dic=_SST_dict),
         Uint24('SD', trans=True),
         Uint8('MappedHPLMNSST', trans=True),
         Uint24('MappedHPLMNSD', trans=True)
