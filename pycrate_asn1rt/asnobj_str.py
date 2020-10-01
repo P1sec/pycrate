@@ -330,7 +330,7 @@ Specific constraints attributes:
                     self.__from_per_ws_szunconst(char, GEN)
                     return
                 else:
-                    ldet, _gen = ASN1CodecPER.decode_intconst_ws(char, self._const_sz)
+                    ldet, _gen = ASN1CodecPER.decode_intconst_ws(char, self._const_sz, name='C')
                     GEN.extend(_gen)
                     if ASN1CodecPER.ALIGNED:
                         # realignment
