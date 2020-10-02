@@ -1348,7 +1348,7 @@ class _CONSTRUCT(ASN1Obj):
                         # the value provided equals the default one
                         # hence will not be encoded
                         if not self._SILENT:
-                            asnlog('_CONSTRUCT._to_per: %s.%s, removing value equal ' \
+                            asnlog('_CONSTRUCT._to_oer: %s.%s, removing value equal ' \
                                    'to the default one' % (self.fullname(), ident))
                         del self._val[ident]
                     else:
@@ -1478,7 +1478,7 @@ class _CONSTRUCT(ASN1Obj):
                         # the value provided equals the default one
                         # hence will not be encoded
                         if not self._SILENT:
-                            asnlog('_CONSTRUCT._to_per: %s.%s, removing value equal ' \
+                            asnlog('_CONSTRUCT._to_oer: %s.%s, removing value equal ' \
                                    'to the default one' % (self.fullname(), ident))
                         del self._val[ident]
                     else:
