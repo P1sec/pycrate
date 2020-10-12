@@ -672,15 +672,16 @@ if _with_cm:
             Buf('NASMessage', rep=REPR_HEX)
             )
         
-        def mac_verify(self, key=16*b'\0', dir=0, fgia=0, seqnoff=0):
+        def mac_verify(self, key=16*b'\0', dir=0, fgia=0, seqnoff=0, bearer=1):
             """compute the MAC of the NASMessage using Seqn plus seqnoff, key, 
-            direction and fgia, and verify against the embedded MAC value
+            direction, bearer and fgia, and verify against the embedded MAC value
             
             Args:
                 key: 16 bytes buffer, K_nas_int
                 dir: 0 for uplink, 1 for downlink
-                fgia: 0 to 3, reference to 5G-IA algorithm
-                seqnoff: 0 to 2^32 - 2^8, NAS count offset to add to Seqn
+                fgia: 0 to 3, reference to the 5G-IA algorithm
+                seqnoff: uint16, NAS OVERFLOW offset to add to the uint8 Seqn in the header
+                bearer: 1 for NAS over 3GPP access, 2 for NAS over non-3GPP access
             
             Returns:
                 True if embedded MAC is correct, False otherwise
@@ -696,22 +697,23 @@ if _with_cm:
                 except KeyError:
                     raise(PycrateErr('5GMMSecProtNASMessage.mac_verify(): invalid 5G-IA identifier, {0}'\
                           .format(fgia)))
-                mac = FGIA(key, seqnoff + self[2].get_val(), 0, dir, self[2].to_bytes() + self[3].get_val())
+                mac = FGIA(key, seqnoff + self[2].get_val(), bearer, dir, self[2].to_bytes() + self[3].get_val())
                 return mac == self[1].get_val()
             else:
                 #raise(PycrateErr('5GMMSecProtNASMessage.mac_verify(): invalid sec hdr value, {0}'\
                 #      .format(shdr)))
                 return False
         
-        def mac_compute(self, key=16*b'\0', dir=0, fgia=0, seqnoff=0):
+        def mac_compute(self, key=16*b'\0', dir=0, fgia=0, seqnoff=0, bearer=1):
             """compute the MAC of the NASMessage using Seqn plus seqnoff, key, 
-            direction and fgia, and set the embedded MAC value with it
+            direction, bearer and fgia, and set the embedded MAC value with it
             
             Args:
                 key: 16 bytes buffer, K_nas_int
                 dir: 0 for uplink, 1 for downlink
-                fgia: 0 to 3, reference to 5G-IA algorithm
-                seqnoff: 0 to 2^32 - 2^8, NAS count offset to add to Seqn
+                fgia: 0 to 3, reference to the 5G-IA algorithm
+                seqnoff: uint16, NAS OVERFLOW offset to add to the uint8 Seqn in the header
+                bearer: 1 for NAS over 3GPP access, 2 for NAS over non-3GPP access
             
             Returns:
                 None
@@ -728,21 +730,22 @@ if _with_cm:
                 except KeyError:
                     raise(PycrateErr('5GMMSecProtNASMessage.mac_compute(): invalid 5G-IA identifier, {0}'\
                           .format(fgia)))
-                mac = FGIA(key, seqnoff + self[2].get_val(), 0, dir, self[2].to_bytes() + self[3].get_val())
+                mac = FGIA(key, seqnoff + self[2].get_val(), bearer, dir, self[2].to_bytes() + self[3].get_val())
                 self[1].set_val(mac)
             else:
                 raise(PycrateErr('5GMMSecProtNASMessage.mac_compute(): invalid sec hdr value, {0}'\
                       .format(shdr)))
         
-        def encrypt(self, key=16*b'\0', dir=0, fgea=0, seqnoff=0):
+        def encrypt(self, key=16*b'\0', dir=0, fgea=0, seqnoff=0, bearer=1):
             """encrypt the NASMessage in place using Seqn plus seqnoff, key, 
-            direction and fgea
+            direction, bearer and fgea
             
             Args:
                 key: 16 bytes buffer, K_nas_enc
                 dir: 0 for uplink, 1 for downlink
-                fgea: 0 to 3, reference to 5G-EA algorithm
-                seqnoff: 0 to 2^24 by step of 0x100
+                fgea: 0 to 3, reference to the 5G-EA algorithm
+                seqnoff: uint16, NAS OVERFLOW offset to add to the uint8 Seqn in the header
+                bearer: 1 for NAS over 3GPP access, 2 for NAS over non-3GPP access
             
             Returns:
                 None
@@ -759,21 +762,22 @@ if _with_cm:
                     raise(PycrateErr('5GMMSecProtNASMessage.encrypt(): invalid 5G-EA identifier, {0}'\
                           .format(fgea)))
                 self._dec_msg = self[3].to_bytes()
-                self._enc_msg = FGEA(key, seqnoff + self[2].get_val(), 0, dir, self._dec_msg)
+                self._enc_msg = FGEA(key, seqnoff + self[2].get_val(), bearer, dir, self._dec_msg)
                 self[3].set_val(self._enc_msg)
             else:
                 raise(PycrateErr('5GMMSecProtNASMessage.encrypt(): invalid sec hdr value, {0}'\
                       .format(shdr)))
         
-        def decrypt(self, key=16*b'\0', dir=0, fgea=0, seqnoff=0):
+        def decrypt(self, key=16*b'\0', dir=0, fgea=0, seqnoff=0, bearer=1):
             """decrypt the NASMessage in place using Seqn plus seqnoff, key, 
-            direction and fgea
+            direction, bearer and fgea
             
             Args:
                 key: 16 bytes buffer, K_nas_enc
                 dir: 0 for uplink, 1 for downlink
-                fgea: 0 to 3, reference to 5G-EA algorithm
-                seqnoff: 0 to 2^24 by step of 0x100
+                fgea: 0 to 3, reference to the 5G-EA algorithm
+                seqnoff: uint16, NAS OVERFLOW offset to add to the uint8 Seqn in the header
+                bearer: 1 for NAS over 3GPP access, 2 for NAS over non-3GPP access
             
             Returns:
                 None
@@ -790,7 +794,7 @@ if _with_cm:
                     raise(PycrateErr('5GMMSecProtNASMessage.decrypt(): invalid 5G-EA identifier, {0}'\
                           .format(fgea)))
                 self._enc_msg = self[3].to_bytes()
-                self._dec_msg = FGEA(key, seqnoff + self[2].get_val(), 0, dir, self._enc_msg)
+                self._dec_msg = FGEA(key, seqnoff + self[2].get_val(), bearer, dir, self._enc_msg)
                 self[3].set_val(self._dec_msg)
             else:
                 raise(PycrateErr('5GMMSecProtNASMessage.decrypt(): invalid sec hdr value, {0}'\
