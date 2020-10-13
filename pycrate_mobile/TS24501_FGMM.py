@@ -700,9 +700,9 @@ if _with_cm:
                 mac = FGIA(key, seqnoff + self[2].get_val(), bearer, dir, self[2].to_bytes() + self[3].get_val())
                 return mac == self[1].get_val()
             else:
-                #raise(PycrateErr('5GMMSecProtNASMessage.mac_verify(): invalid sec hdr value, {0}'\
-                #      .format(shdr)))
-                return False
+                raise(PycrateErr('5GMMSecProtNASMessage.mac_verify(): invalid sec hdr value, {0}'\
+                      .format(shdr)))
+                #return False
         
         def mac_compute(self, key=16*b'\0', dir=0, fgia=0, seqnoff=0, bearer=1):
             """compute the MAC of the NASMessage using Seqn plus seqnoff, key, 
@@ -752,7 +752,7 @@ if _with_cm:
             """
             if fgea == 0:
                 return
-            shdr = self[0][0].get_val()
+            shdr = self[0][2].get_val()
             if shdr in (0, 1, 3):
                 return
             elif shdr in (2, 4):
@@ -784,7 +784,7 @@ if _with_cm:
             """
             if fgea == 0:
                 return
-            shdr = self[0][0].get_val()
+            shdr = self[0][2].get_val()
             if shdr in (0, 1, 3):
                 return
             elif shdr in (2, 4):
