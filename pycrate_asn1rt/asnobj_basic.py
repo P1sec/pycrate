@@ -1595,6 +1595,10 @@ class _OID(ASN1Obj):
     _ASN_RE_COMP = re.compile(
     '([0-9]{1,})|(?:([a-zA-Z]{1}[a-zA-Z0-9\-]{0,})\s{0,}(?:\(([0-9]{1,})\)){0,1})')
     
+    # _ASN_WASC potentially add the name of the OID in ascii in comment
+    # when returned by _to_asn1() 
+    _ASN_WASC = True
+    
     def _safechk_val(self, val):
         if not isinstance(val, tuple) or \
         not all([isinstance(i, integer_types) for i in val]):
@@ -1633,7 +1637,7 @@ class _OID(ASN1Obj):
                   .format(self.fullname(), txt)))
     
     def _to_asn1(self):
-        if self.TYPE == TYPE_OID and self._val in GLOBAL.OID:
+        if self.TYPE == TYPE_OID and self._ASN_WASC and self._val in GLOBAL.OID:
             return '{%s} -- %s --' % (' '.join(map(str, self._val)), GLOBAL.OID[self._val])
         else:
             return '{%s}' % ' '.join(map(str, self._val))
