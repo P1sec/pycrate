@@ -33,7 +33,7 @@ try:
     #raise(ImportError)
     # try to import external LGPL CRC32C Python module
     # https://github.com/ICRAR/crc32c
-    from crc32c import crc32 as _crc32c
+    from crc32c import crc32c as _crc32c
     def crc32c_cs(buf):
         """Return computed CRC-32c checksum"""
         return pack('<I', _crc32c(buf))
