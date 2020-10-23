@@ -19,6 +19,7 @@ setup(
               "pycrate_diameter",
               "pycrate_corenet",
               "pycrate_sys",
+              "pycrate_crypto",
               ],
     test_suite="test.test_pycrate",
     
