@@ -169,6 +169,12 @@ sccp_pdu = tuple(map(unhexlify, (
     '098003101b0d120600710421435503483814710b120700120419530218522066626448046d5307026b1e281c060700118605010101a011600f80020780a1090607040000010001036c3ca13a0201000201023032040821431589431915f4810791195302185220040791195302185220a60880020780850205e0ad0a80086835613051868427', # SCCP UDT anonymized
     )))
 
+# ISUP messages
+isup_pdu = tuple(map(unhexlify, (
+    '6201060214012c01fb3601090c08849000811619290339042c90369000', # ISUP Address Complete
+    'ad03010060010a00020a0884100081066153010a0884130061002099091d038090a3310200643f0884930031750740090801003a06430001ff0000390631d03ad03fc000', # ISUP Initial Address
+    )))
+
 # GTPv1-U messages
 gtpu_pdu = tuple(map(unhexlify, (
     '30ff003c04cec0bb4500003c22cb000080019bad0aa002ff481e268c0800995a0300b1016162636465666768696a6b6c6d6e6f7071727374757677616263646566676869', # GPDU (wireshark bug tracker)
@@ -292,6 +298,25 @@ def test_sccp(sccp_pdu=sccp_pdu):
     m[4].get_gt().set_addr_bcd(calling)
     assert( m[3].get_gt().get_addr() == called )
     assert( m[4].get_gt().get_addr() == calling )
+
+
+def test_isup(isup_pdu=isup_pdu):
+    for pdu in isup_pdu:
+        m, e = parse_ISUP(pdu)
+        assert( e == 0 )
+        v = m.get_val()
+        m.reautomate()
+        assert( m.get_val() == v )
+        #m.__init__()
+        m.set_val(v)
+        assert( m.to_bytes() == pdu)
+        #
+        if _with_json:
+            t = m.to_json()
+            m.from_json(t)
+            assert( m.get_val() == v )
+    #
+    # TODO: verify Num specific methods
 
 
 def test_gtpu(gtpu_pdu=gtpu_pdu):
