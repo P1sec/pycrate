@@ -35,7 +35,12 @@ from pycrate_core.elt    import *
 from pycrate_core.base   import *
 from pycrate_core.charpy import *
 
-from .SCCP import SCCPBufBCD, Ptr8, Ptr16, Optional, SCCPMessage as ISUPMessage, SCCPOpt as ISUPOpt
+from .SCCP import (
+    Ptr8, Ptr16,
+    SCCPBufBCD as ISUPBufBCD,
+    SCCPOpt as ISUPOpt,
+    SCCPMessage as ISUPMessage
+    )
 from .TS24008_IE import BufBCD
 
 
@@ -76,7 +81,6 @@ class ExtByte(Envelope):
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self['ext'].set_valauto(lambda: 0 if isinstance(self.get_next(), self.__class__) else 1)
 
 
 class ExtSeq(Sequence):
@@ -106,10 +110,14 @@ class ExtSeq(Sequence):
             self._content.append(byte)
 
 
-def make_ext(Obj):
+def make_ext(Obj, ext=None):
     """Wraps a 7-bit object Obj into an extensible object ExtByte
     """
-    ext = ExtByte()
+    if ext in (0, 1):
+        # overwrite next value automation
+        ext = ExtByte(val={'ext': ext})
+    else:
+        ext = ExtByte()
     ext.replace(ext['cont'], Obj)
     return ext
 
@@ -120,6 +128,24 @@ def make_ext(Obj):
 #------------------------------------------------------------------------------#
 
 ISUPType_dict = {
+    0x06 : 'Address complete',
+    0x09 : 'Answer',
+    0x41 : 'Application transport',
+    0x13 : 'Blocking',
+    0x15 : 'Blocking acknowledgement',
+    0x2c : 'Call progress',
+    0x18 : 'Circuit group blocking',
+    0x1a : 'Circuit group blocking acknowledgement',
+    0x2a : 'Circuit group query (national use)',
+    0x2b : 'Circuit group query response (national use)',
+    0x17 : 'Circuit group reset',
+    0x29 : 'Circuit group reset acknowledgement',
+    0x19 : 'Circuit group unblocking',
+    0x1b : 'Circuit group unblocking acknowledgement',
+    0x31 : 'Charge information (national use)',
+    0x2f : 'Confusion',
+    0x07 : 'Connect',
+    0x05 : 'Continuity',
     0x11 : 'Continuity check request',
     0x33 : 'Facility',
     0x20 : 'Facility accepted',
@@ -150,7 +176,7 @@ ISUPType_dict = {
     0x2e : 'Unequipped CIC (national use)',
     0x35 : 'User Part available',
     0x34 : 'User Part test',
-    0x2d : 'User-to-user information',
+    0x2d : 'User-to-user information'
     }
 
 
@@ -260,6 +286,46 @@ ISUPParam_dict = {
     0x2a : 'User-to-user indicators',
     0x20 : 'User-to-user information'
     }
+
+
+def Variable(param):
+    """prefix the parameter element `param' with an uint8 as len
+    """
+    class Variable(Envelope):
+        _GEN = (
+            Uint8('Len'),
+            param
+            )
+        def __init__(self, *args, **kwargs):
+            Envelope.__init__(self, *args, **kwargs)
+            self[0].set_valauto(lambda: self[1].get_len())
+            self[1].set_blauto(lambda: self[0].get_val()<<3)
+    w = Variable(param._name)
+    return w
+
+
+def Optional(param, name):
+    """prefix the parameter element `param' with an uint8 as name and an uint8 
+    as len, and make it transparent by default
+    """
+    if param._name == 'EOO':
+        w = Envelope(param._name, GEN=(param, ), trans=True)
+    else:
+        # wrap with name and length prefix
+        class Option(Envelope):
+            _GEN = (
+                Uint8('Name', val=name, dic=ISUPParam_dict),
+                Uint8('Len'),
+                param
+                )
+            def __init__(self, *args, **kwargs):
+                Envelope.__init__(self, *args, **kwargs)
+                self[1].set_valauto(lambda: self[2].get_len())
+                if not hasattr(param, '_bl') or param._bl is None:
+                    self[2].set_blauto(lambda: self[1].get_val()<<3)
+                self.set_trans(True)
+        w = Option(param._name)
+    return w
 
 
 #------------------------------------------------------------------------------#
@@ -570,7 +636,7 @@ class CalledPartyNum(ISUPNum):
         Uint('INN', bl=1, dic=_NumINN_dict),
         Uint('NumPlan', bl=3, dic=_NumPlan_dict),
         Uint('spare', bl=4, rep=REPR_HEX),
-        SCCPBufBCD('Num', val=b'')
+        ISUPBufBCD('Num', val=b'')
         )
 
 
@@ -607,7 +673,7 @@ class CallingPartyNum(ISUPNum):
         Uint('NumPlan', bl=3, dic=_NumPlan_dict),
         Uint('AddrPresInd', bl=2, dic=_AddrPresInd_dict),
         Uint('ScreeningInd', bl=2, dic=_ScreeningInd_dict),
-        SCCPBufBCD('Num', val=b'')
+        ISUPBufBCD('Num', val=b'')
         )
 
 
@@ -863,10 +929,7 @@ class CircuitStateInd(Array):
 
 class ClosedUserGroupInterlockCode(Envelope):
     _GEN = (
-        Uint('NIDigit1', bl=4),
-        Uint('NIDigit2', bl=4),
-        Uint('NIDigit3', bl=4),
-        Uint('NIDigit4', bl=4),
+        Uint16('NetworkIdent', rep=REPR_HEX),
         Uint16('Code', rep=REPR_HEX)
         )
 
@@ -884,7 +947,7 @@ class ConnectedNum(ISUPNum):
         Uint('NumPlan', bl=3, dic=_NumPlan_dict),
         Uint('AddrPresInd', bl=2, dic=_AddrPresInd_dict),
         Uint('ScreeningInd', bl=2, dic=_ScreeningInd_dict),
-        SCCPBufBCD('Num', val=b'')
+        ISUPBufBCD('Num', val=b'')
         )
 
 
@@ -1024,6 +1087,11 @@ _InternatCallInd_dict = {
     1 : 'call to be treated as an international call'
     }
 
+_ISDNAccessInd2_dict = {
+    0 : 'originating access non-ISDN',
+    1 : 'originating access ISDN',
+    }
+
 
 class ForwardCallInd(Envelope):
     _GEN = (
@@ -1036,7 +1104,7 @@ class ForwardCallInd(Envelope):
         Uint('ReservedNationalUse', bl=4),
         Uint('spare', bl=1),
         Uint('SCCPMethodInd', bl=2, dic=_SCCPMethodInd_dict),
-        Uint('ISDNAccessInd', bl=1, dic=_ISDNAccessInd_dict)
+        Uint('ISDNAccessInd', bl=1, dic=_ISDNAccessInd2_dict)
         )
 
 
@@ -1148,7 +1216,7 @@ class GenericNum(ISUPNum):
         Uint('NumPlan', bl=3, dic=_NumPlan_dict),
         Uint('AddrPresInd', bl=2, dic=_AddrPresInd_dict),
         Uint('ScreeningInd', bl=2, dic=_ScreeningInd2_dict),
-        SCCPBufBCD('Num', val=b'')
+        ISUPBufBCD('Num', val=b'')
         )
 
 
@@ -1251,7 +1319,7 @@ class LocationNum(ISUPNum):
         Uint('NumPlan', bl=3, dic=_NumPlan_dict),
         Uint('AddrPresInd', bl=2, dic=_AddrPresInd_dict),
         Uint('ScreeningInd', bl=2, dic=_ScreeningInd_dict),
-        SCCPBufBCD('Num', val=b'')
+        ISUPBufBCD('Num', val=b'')
         )
 
 
@@ -1375,10 +1443,7 @@ class MLPPPrecedence(Envelope):
         Uint('LFB', bl=2, dic=_LFB_dict),
         Uint('spare', bl=1),
         Uint('PrecedenceLevel', bl=4, dic=_PrecedenceLevel_dict),
-        Uint('NIDigit1', bl=4),
-        Uint('NIDigit2', bl=4),
-        Uint('NIDigit3', bl=4),
-        Uint('NIDigit4', bl=4),
+        Uint16('NetworkIdent', rep=REPR_HEX),
         Uint24('MLPPServiceDom', rep=REPR_HEX)
         )
 
@@ -1517,7 +1582,7 @@ class OriginalCalledNum(ISUPNum):
         Uint('NumPlan', bl=3, dic=_NumPlan_dict),
         Uint('AddrPresInd', bl=2, dic=_AddrPresInd_dict),
         Uint('spare', bl=2),
-        SCCPBufBCD('Num', val=b'')
+        ISUPBufBCD('Num', val=b'')
         )
 
 
@@ -1548,26 +1613,37 @@ _DiscardParamInd_dict = {
     }
 
 
-
-class _ParameterIns(Envelope):
+class _ParameterIns0(Envelope):
     _GEN = (
-        Uint('ext', val=0, bl=1),
         Uint('PassOnNotPossibleInd', bl=2, dic=_PassOnNotPossibleInd2_dict),
         Uint('DiscardParamInd', bl=1, dic=_DiscardParamInd_dict),
         Uint('DiscardMessageInd', bl=1, dic=_DiscardMessageInd_dict),
         Uint('SendNotifInd', bl=1, dic=_SendNotifInd_dict),
         Uint('ReleaseCallInd', bl=1, dic=_ReleaseCallInd_dict),
         Uint('TransitAtIntermedExchInd', bl=1, dic=_TransitAtIntermedExchInd_dict),
-        Uint('ext', val=1, bl=1),
+        )
+
+
+class _ParameterIns1(Envelope):
+    _GEN = (
         Uint('spare', bl=5, rep=REPR_HEX),
         Uint('BroadbandNarrowbandInterworkInd', bl=2, dic=_BroadbandNarrowbandInterworkInd_dict),
+        )
+
+
+class _ParameterIns(Envelope):
+    ENV_SEL_TRANS = False
+    _GEN = (
+        make_ext(_ParameterIns0('Ins0'), ext=0),
+        make_ext(_ParameterIns1('Ins1'), ext=1),
         ExtSeq('MoreIns')
         )
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self['MoreIns'].set_transauto(lambda: True if self[7].get_val() else False)
-
+        self[1].set_transauto(lambda: True if self[0].get_val() else False)
+        self[2].set_transauto(lambda: True if self[1].get_trans() or self[1].get_val() else False)
+    
 
 class _ParameterCompat(Envelope):
     _GEN = (
@@ -1743,7 +1819,7 @@ class SubsequentNum(ISUPNum):
     _GEN = (
         Uint('OE', bl=1, dic=_NumOE_dict),
         Uint('spare', bl=7, rep=REPR_HEX),
-        SCCPBufBCD('Num', val=b'')
+        ISUPBufBCD('Num', val=b'')
         )
 
 
@@ -1782,7 +1858,7 @@ class TransitNetworkSel(ISUPNum):
         Uint('OE', bl=1, dic=_NumOE_dict),
         Uint('TypeOfNetworkIdent', val=1, bl=3, dic=_TypeOfNetwork_dict),
         Uint('NetworkIdentPlan', val=6, bl=4),
-        SCCPBufBCD('Num', val=b'')
+        ISUPBufBCD('Num', val=b'')
         )
     
     def __init__(self, *args, **kwargs):
@@ -1878,15 +1954,42 @@ class TransmissionMediumUsed(TransmissionMediumReqPrime):
 # User service information
 # ITU-T Q.763, section 3.57
 #------------------------------------------------------------------------------#
+# see Q.931 Bearer capability information element
+ 
+_InfoTransferCap_dict = {
+    0 : 'Speech',
+    8 : 'Unrestricted digital information',
+    9 : 'Restricted digital information',
+    16 : '3.1 kHz audio',
+    17 : 'Unrestricted digital information with tones/announcements',
+    24 : 'Video'
+    }
+
+_TransferMode_dict = {
+    0 : 'Circuit mode',
+    1 : 'Packet mode'
+    }
+
+_InfoTransferRate_dict = {
+    0 : 'packet-mode call',
+    16 : '64 kbit/s',
+    17 : '2 × 64 kbit/s',
+    19 : '384 kbit/s',
+    21 : '1536 kbit/s',
+    23 : '1920 kbit/s',
+    24 : 'Multirate (64 kbit/s base rate)'
+    }
+
 
 class UserServiceInfo(Envelope):
+    ENV_SEL_TRANS = False
     _GEN = (
         Uint('ext', val=1, bl=1),
         Uint('CodingStd', bl=2, dic=_CodingStd_dict),
-        Uint('InfoTransferCap', bl=5),
+        Uint('InfoTransferCap', bl=5, dic=_InfoTransferCap_dict),
         Uint('ext', val=1, bl=1),
-        Uint('TransferMode', bl=2),
-        Uint('InfoTransferRate', bl=5),
+        Uint('TransferMode', bl=2, dic=_TransferMode_dict),
+        Uint('InfoTransferRate', bl=5, dic=_InfoTransferRate_dict),
         Uint8('RateMultiplier'),
         Uint('ext', val=1, bl=1),
         Uint('LayerIdent1', bl=2),
@@ -1901,7 +2004,38 @@ class UserServiceInfo(Envelope):
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self['RateMultiplier'].set_transauto(lambda: True if self[3].get_val() else False)
+        self['RateMultiplier'].set_transauto(lambda: True if self['InfoTransferRate'].get_val() != 24 else False)
+    
+    def _from_char(self, char):
+        if self.get_trans():
+            return
+        # truncate char if length automation is set
+        if self._blauto is not None:
+            char_lb = char._len_bit
+            char._len_bit = char._cur + self._blauto()
+            if char._len_bit > char_lb:
+                raise(EltErr('{0} [_from_char]: bit length overflow'.format(self._name)))
+        #
+        for i in range(0, 7):
+            self[i]._from_char(char)
+        clen = char.len_byte()
+        if clen < 3:
+            self[13].set_trans(True)
+            self[14].set_trans(True)
+            self[15].set_trans(True)
+        if clen < 2:
+            self[10].set_trans(True)
+            self[11].set_trans(True)
+            self[12].set_trans(True)
+        if clen == 0:
+            self[7].set_trans(True)
+            self[8].set_trans(True)
+            self[9].set_trans(True)
+        for i in range(7, 16):
+            self[i]._from_char(char)
+        #
+        if self._blauto is not None:
+            char._len_bit = char_lb
 
 
 #------------------------------------------------------------------------------#
@@ -2065,7 +2199,7 @@ class CallTransferNum(ISUPNum):
         Uint('NumPlan', bl=3, dic=_NumPlan_dict),
         Uint('AddrPresInd', bl=2, dic=_AddrPresInd_dict),
         Uint('ScreeningInd', bl=2, dic=_ScreeningInd2_dict),
-        SCCPBufBCD('Num', val=b'')
+        ISUPBufBCD('Num', val=b'')
         )
 
 
@@ -2088,7 +2222,7 @@ class _ForwardGVNS_Num(ISUPNum):
         Uint('OE', bl=1, dic=_NumOE_dict),
         Uint('spare', bl=3),
         Uint('Len', bl=4),
-        SCCPBufBCD('Num', val=b'')
+        ISUPBufBCD('Num', val=b'')
         )
     
     def __init__(self, *args, **kwargs):
@@ -2112,7 +2246,7 @@ class _TRNR(ISUPNum):
         Uint('Len', bl=4),
         Uint('spare', bl=1),
         Uint('NAI', val=1, bl=7, dic=_NumNAI_dict),
-        SCCPBufBCD('Num', val=b'')
+        ISUPBufBCD('Num', val=b'')
         )
     
     def __init__(self, *args, **kwargs):
@@ -2524,7 +2658,7 @@ class CalledDirectoryNum(ISUPNum):
         Uint('INN', bl=1, dic=_NumINN_dict),
         Uint('NumPlan', bl=3, dic=_NumPlan_dict),
         Uint('spare', bl=4, rep=REPR_HEX),
-        SCCPBufBCD('Num', val=b'')
+        ISUPBufBCD('Num', val=b'')
         )
 
 
@@ -2675,7 +2809,7 @@ class HTRInfo(ISUPNum):
         Uint('spare', bl=1),
         Uint('NumPlan', bl=3, dic=_NumPlan_dict),
         Uint('spare', bl=4, rep=REPR_HEX),
-        SCCPBufBCD('Num', val=b'')
+        ISUPBufBCD('Num', val=b'')
         )
 
 
@@ -2698,7 +2832,7 @@ class NetworkRoutingNum(ISUPNum):
         Uint('OE', bl=1, dic=_NumOE_dict),
         Uint('NumPlan', bl=3, dic=_NumPlan_dict),
         Uint('NAI', val=1, bl=4, dic=_NumNAI2_dict),
-        SCCPBufBCD('Num', val=b'')
+        ISUPBufBCD('Num', val=b'')
         )
 
 
@@ -2838,6 +2972,18 @@ class RedirectCap(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# Redirect counter (national use)
+# ITU-T Q.763, section 3.97
+#------------------------------------------------------------------------------#
+
+class RedirectCounter(Envelope):
+    _GEN = (
+        Uint('spare', bl=3, rep=REPR_HEX),
+        Uint('Value', bl=5)
+        )
+
+
+#------------------------------------------------------------------------------#
 # Redirect status (national use)
 # ITU-T Q.763, section 3.98
 #------------------------------------------------------------------------------#
@@ -2947,11 +3093,1144 @@ class NumPortabilityForwardInfo(Envelope):
 # ITU-T Q.763, section 4
 #------------------------------------------------------------------------------#
 
+class AddressComplete(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x6, dic=ISUPType_dict),
+        BackwardCallInd(),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='Opt'),
+            )),
+        ISUPOpt('Opt', GEN=(
+            Optional(OptBackwardCallInd(), 41),
+            Optional(CallReference(), 1),
+            Optional(CauseInd(), 18),
+            Optional(UserToUserInd(), 42),
+            Optional(UserToUserInfo(), 32),
+            Optional(AccessTransport(), 3),
+            Optional(GenericNotifInd(), 44),
+            Optional(TransmissionMediumUsed(), 53),
+            Optional(EchoControlInfo(), 55),
+            Optional(AccessDeliveryInfo(), 46),
+            Optional(RedirectionNum(), 12),
+            Optional(ParameterCompatInfo(), 57),
+            Optional(CallDiversionInfo(), 54),
+            Optional(NetworkSpecificFacility(), 47),
+            Optional(RemoteOperations(), 50),
+            Optional(ServiceActivation(), 51),
+            Optional(RedirectNumRestriction(), 64),
+            Optional(ConferenceTreatmentInd(), 114),
+            Optional(UIDActionInd(), 116),
+            Optional(AppTransportParam(), 120),
+            Optional(CCNRPossibleInd(), 122),
+            Optional(HTRInfo(), 130),
+            Optional(PivotRoutingBackwardInfo(), 137),
+            Optional(RedirectStatus(), 138),
+            Optional(EOO(), 0),
+            ))
+        )
+        
+
+class Answer(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x9, dic=ISUPType_dict),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='Opt'),
+            )),
+        ISUPOpt('Opt', GEN=(
+            Optional(BackwardCallInd(), 17),
+            Optional(OptBackwardCallInd(), 41),
+            Optional(CallReference(), 1),
+            Optional(UserToUserInd(), 42),
+            Optional(UserToUserInfo(), 32),
+            Optional(ConnectedNum(), 33),
+            Optional(AccessTransport(), 3),
+            Optional(AccessDeliveryInfo(), 46),
+            Optional(GenericNotifInd(), 44),
+            Optional(ParameterCompatInfo(), 57),
+            Optional(BackwardGVNS(), 77),
+            Optional(CallHistoryInfo(), 45),
+            Optional(GenericNum(), 192),
+            Optional(TransmissionMediumUsed(), 53),
+            Optional(NetworkSpecificFacility(), 47),
+            Optional(RemoteOperations(), 50),
+            Optional(RedirectionNum(), 12),
+            Optional(ServiceActivation(), 51),
+            Optional(EchoControlInfo(), 55),
+            Optional(RedirectNumRestriction(), 64),
+            Optional(DisplayInfo(), 115),
+            Optional(ConferenceTreatmentInd(), 114),
+            Optional(AppTransportParam(), 120),
+            Optional(PivotRoutingBackwardInfo(), 137),
+            Optional(RedirectStatus(), 138),
+            Optional(EOO(), 0),
+            ))
+        )
 
 
+class CallProgress(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x2c, dic=ISUPType_dict),
+        EventInfo(),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='Opt'),
+            )),
+        ISUPOpt('Opt', GEN=(
+            Optional(CauseInd(), 18),
+            Optional(CallReference(), 1),
+            Optional(BackwardCallInd(), 17),
+            Optional(OptBackwardCallInd(), 41),
+            Optional(AccessTransport(), 3),
+            Optional(UserToUserInd(), 42),
+            Optional(RedirectionNum(), 12),
+            Optional(UserToUserInfo(), 32),
+            Optional(GenericNotifInd(), 44),
+            Optional(NetworkSpecificFacility(), 47),
+            Optional(RemoteOperations(), 50),
+            Optional(TransmissionMediumUsed(), 53),
+            Optional(AccessDeliveryInfo(), 46),
+            Optional(ParameterCompatInfo(), 57),
+            Optional(CallDiversionInfo(), 54),
+            Optional(ServiceActivation(), 51),
+            Optional(RedirectNumRestriction(), 64),
+            Optional(CallTransferNum(), 69),
+            Optional(EchoControlInfo(), 55),
+            Optional(ConnectedNum(), 33),
+            Optional(BackwardGVNS(), 77),
+            Optional(GenericNum(), 192),
+            Optional(CallHistoryInfo(), 45),
+            Optional(ConferenceTreatmentInd(), 114),
+            Optional(UIDActionInd(), 116),
+            Optional(AppTransportParam(), 120),
+            Optional(CCNRPossibleInd(), 122),
+            Optional(PivotRoutingBackwardInfo(), 137),
+            Optional(RedirectStatus(), 138),
+            Optional(EOO(), 0),
+            ))
+        )
 
 
+class CircuitGroupQueryResp(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x2b, dic=ISUPType_dict),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='RangeStatus'),
+            Ptr8('Ptr1', field='CircuitStateInd'),
+            )),
+        Variable(RangeStatus()),
+        Variable(CircuitStateInd()),
+        )
 
 
+class CircuitGroupResetAck(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x29, dic=ISUPType_dict),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='RangeStatus'),
+            )),
+        Variable(RangeStatus()),
+        )
 
 
+class Confusion(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x2f, dic=ISUPType_dict),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='CauseInd'),
+            Ptr8('Ptr1', field='Opt'),
+            )),
+        Variable(CauseInd()),
+        ISUPOpt('Opt', GEN=(
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class Connect(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x7, dic=ISUPType_dict),
+        BackwardCallInd(),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='Opt'),
+            )),
+        ISUPOpt('Opt', GEN=(
+            Optional(OptBackwardCallInd(), 41),
+            Optional(BackwardGVNS(), 77),
+            Optional(ConnectedNum(), 33),
+            Optional(CallReference(), 1),
+            Optional(UserToUserInd(), 42),
+            Optional(UserToUserInfo(), 32),
+            Optional(AccessTransport(), 3),
+            Optional(NetworkSpecificFacility(), 47),
+            Optional(GenericNotifInd(), 44),
+            Optional(RemoteOperations(), 50),
+            Optional(TransmissionMediumUsed(), 53),
+            Optional(EchoControlInfo(), 55),
+            Optional(AccessDeliveryInfo(), 46),
+            Optional(CallHistoryInfo(), 45),
+            Optional(ParameterCompatInfo(), 57),
+            Optional(ServiceActivation(), 51),
+            Optional(GenericNum(), 192),
+            Optional(RedirectNumRestriction(), 64),
+            Optional(ConferenceTreatmentInd(), 114),
+            Optional(AppTransportParam(), 120),
+            Optional(HTRInfo(), 130),
+            Optional(PivotRoutingBackwardInfo(), 137),
+            Optional(RedirectStatus(), 138),
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class Continuity(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x5, dic=ISUPType_dict),
+        ContinuityInd(),
+        )
+
+
+class FacilityReject(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x21, dic=ISUPType_dict),
+        FacilityInd(),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='CauseInd'),
+            Ptr8('Ptr1', field='Opt'),
+            )),
+        Variable(CauseInd()),
+        ISUPOpt('Opt', GEN=(
+            Optional(UserToUserInd(), 42),
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class Information(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x4, dic=ISUPType_dict),
+        InformationInd(),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='Opt'),
+            )),
+        ISUPOpt('Opt', GEN=(
+            Optional(CallingPartyCat(), 9),
+            Optional(CallingPartyNum(), 10),
+            Optional(CallReference(), 1),
+            Optional(ConnectionReq(), 13),
+            Optional(ParameterCompatInfo(), 57),
+            Optional(NetworkSpecificFacility(), 47),
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class InformationReq(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x3, dic=ISUPType_dict),
+        InformationReqInd(),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='Opt'),
+            )),
+        ISUPOpt('Opt', GEN=(
+            Optional(CallReference(), 1),
+            Optional(NetworkSpecificFacility(), 47),
+            Optional(ParameterCompatInfo(), 57),
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class InitialAddress(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x1, dic=ISUPType_dict),
+        NatureConnectionInd(),
+        ForwardCallInd(),
+        CallingPartyCat(),
+        TransmissionMediumReq(),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='CalledPartyNum'),
+            Ptr8('Ptr1', field='Opt'),
+            )),
+        Variable(CalledPartyNum()),
+        ISUPOpt('Opt', GEN=(
+            Optional(TransitNetworkSel(), 35),
+            Optional(CallReference(), 1),
+            Optional(CallingPartyNum(), 10),
+            Optional(OptForwardCallInd(), 8),
+            Optional(RedirectingNum(), 11),
+            Optional(RedirectionInfo(), 19),
+            Optional(ClosedUserGroupInterlockCode(), 26),
+            Optional(ConnectionReq(), 13),
+            Optional(OriginalCalledNum(), 40),
+            Optional(UserToUserInfo(), 32),
+            Optional(AccessTransport(), 3),
+            Optional(UserServiceInfo(), 29),
+            Optional(UserToUserInd(), 42),
+            Optional(GenericNum(), 192),
+            Optional(PropagationDelayCounter(), 49),
+            Optional(UserServiceInfoPrime(), 48),
+            Optional(NetworkSpecificFacility(), 47),
+            Optional(GenericDigits(), 193),
+            Optional(OriginISCPointCode(), 43),
+            Optional(UserTeleserviceInfo(), 52),
+            Optional(RemoteOperations(), 50),
+            Optional(ParameterCompatInfo(), 57),
+            Optional(GenericNotifInd(), 44),
+            Optional(ServiceActivation(), 51),
+            Optional(MLPPPrecedence(), 58),
+            Optional(TransmissionMediumReqPrime(), 62),
+            Optional(LocationNum(), 63),
+            Optional(ForwardGVNS(), 76),
+            Optional(CCSS(), 75),
+            Optional(NetworkMgmtControls(), 91),
+            Optional(CircuitAssignMap(), 37),
+            Optional(CorrelationID(), 101),
+            Optional(CallDiversionTreatmentInd(), 110),
+            Optional(CalledINNum(), 111),
+            Optional(CallOfferingTreatmentInd(), 112),
+            Optional(ConferenceTreatmentInd(), 114),
+            Optional(ScfID(), 102),
+            Optional(UIDCapInd(), 117),
+            Optional(EchoControlInfo(), 55),
+            Optional(HopCounter(), 61),
+            Optional(CollectCallReq(), 121),
+            Optional(AppTransportParam(), 120),
+            Optional(PivotCap(), 123),
+            Optional(CalledDirectoryNum(), 125),
+            Optional(OriginalCalledINNum(), 127),
+            Optional(CallingGeodeticLocation(), 129),
+            Optional(NetworkRoutingNum(), 132),
+            Optional(QueryOnReleaseCap(), 133),
+            Optional(PivotCounter(), 135),
+            Optional(PivotRoutingForwardInfo(), 136),
+            Optional(RedirectCap(), 78),
+            Optional(RedirectCounter(), 119),
+            Optional(RedirectStatus(), 138),
+            Optional(RedirectForwardInfo(), 139),
+            Optional(NumPortabilityForwardInfo(), 141),
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class Release(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0xc, dic=ISUPType_dict),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='CauseInd'),
+            Ptr8('Ptr1', field='Opt'),
+            )),
+        Variable(CauseInd()),
+        ISUPOpt('Opt', GEN=(
+            Optional(RedirectionInfo(), 19),
+            Optional(RedirectionNum(), 12),
+            Optional(AccessTransport(), 3),
+            Optional(SignallingPointCode(), 30),
+            Optional(UserToUserInfo(), 32),
+            Optional(AutomaticCongestionLevel(), 39),
+            Optional(NetworkSpecificFacility(), 47),
+            Optional(AccessDeliveryInfo(), 46),
+            Optional(ParameterCompatInfo(), 57),
+            Optional(UserToUserInd(), 42),
+            Optional(DisplayInfo(), 115),
+            Optional(RemoteOperations(), 50),
+            Optional(HTRInfo(), 130),
+            Optional(RedirectCounter(), 119),
+            Optional(RedirectBackwardInfo(), 140),
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class ReleaseComplete(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x10, dic=ISUPType_dict),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='Opt'),
+            )),
+        ISUPOpt('Opt', GEN=(
+            Optional(CauseInd(), 18),
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class SubsequentAddr(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x2, dic=ISUPType_dict),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='SubsequentNum'),
+            Ptr8('Ptr1', field='Opt'),
+            )),
+        Variable(SubsequentNum()),
+        ISUPOpt('Opt', GEN=(
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class UserToUserInfo(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x2d, dic=ISUPType_dict),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='UserToUserInfo'),
+            Ptr8('Ptr1', field='Opt'),
+            )),
+        Variable(UserToUserInfo()),
+        ISUPOpt('Opt', GEN=(
+            Optional(AccessTransport(), 3),
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class ForwardTransfer(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x8, dic=ISUPType_dict),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='Opt'),
+            )),
+        ISUPOpt('Opt', GEN=(
+            Optional(CallReference(), 1),
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class Resume(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0xe, dic=ISUPType_dict),
+        SuspendResumeInd(),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='Opt'),
+            )),
+        ISUPOpt('Opt', GEN=(
+            Optional(CallReference(), 1),
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class Suspend(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0xd, dic=ISUPType_dict),
+        SuspendResumeInd(),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='Opt'),
+            )),
+        ISUPOpt('Opt', GEN=(
+            Optional(CallReference(), 1),
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class Blocking(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x13, dic=ISUPType_dict)
+        )
+
+
+class BlockingAck(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x15, dic=ISUPType_dict)
+        )
+
+
+class ContinuityCheckReq(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x11, dic=ISUPType_dict)
+        )
+
+
+class LoopbackAck(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x24, dic=ISUPType_dict)
+        )
+
+
+class Overload(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x30, dic=ISUPType_dict)
+        )
+
+
+class ResetCircuit(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x12, dic=ISUPType_dict)
+        )
+
+
+class Unblocking(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x14, dic=ISUPType_dict)
+        )
+
+
+class UnblockingAck(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x16, dic=ISUPType_dict)
+        )
+
+
+class UnequippedCIC(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x2e, dic=ISUPType_dict)
+        )
+
+
+class CircuitGroupBlocking(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x18, dic=ISUPType_dict),
+        CircuitGroupSupervis(),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='RangeStatus'),
+            )),
+        Variable(RangeStatus()),
+        )
+
+
+class CircuitGroupBlockingAck(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x1a, dic=ISUPType_dict),
+        CircuitGroupSupervis(),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='RangeStatus'),
+            )),
+        Variable(RangeStatus()),
+        )
+
+
+class CircuitGroupUnblocking(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x19, dic=ISUPType_dict),
+        CircuitGroupSupervis(),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='RangeStatus'),
+            )),
+        Variable(RangeStatus()),
+        )
+
+
+class CircuitGroupUnblockingAck(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x1b, dic=ISUPType_dict),
+        CircuitGroupSupervis(),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='RangeStatus'),
+            )),
+        Variable(RangeStatus()),
+        )
+
+
+class CircuitGroupReset(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x17, dic=ISUPType_dict),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='RangeStatus'),
+            )),
+        Variable(RangeStatus()),
+        )
+
+
+class CircuitGroupQuery(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x2a, dic=ISUPType_dict),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='RangeStatus'),
+            )),
+        Variable(RangeStatus()),
+        )
+
+              
+class FacilityAccept(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x20, dic=ISUPType_dict),
+        FacilityInd(),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='Opt'),
+            )),
+        ISUPOpt('Opt', GEN=(
+            Optional(UserToUserInd(), 42),
+            Optional(CallReference(), 1),
+            Optional(ConnectionReq(), 13),
+            Optional(ParameterCompatInfo(), 57),
+            Optional(EOO(), 0),
+            ))
+        )
+              
+              
+class FacilityReq(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x1f, dic=ISUPType_dict),
+        FacilityInd(),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='Opt'),
+            )),
+        ISUPOpt('Opt', GEN=(
+            Optional(UserToUserInd(), 42),
+            Optional(CallReference(), 1),
+            Optional(ConnectionReq(), 13),
+            Optional(ParameterCompatInfo(), 57),
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class PassAlong(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x28, dic=ISUPType_dict)
+        )
+
+
+class UserPartTest(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x34, dic=ISUPType_dict),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='Opt'),
+            )),
+        ISUPOpt('Opt', GEN=(
+            Optional(ParameterCompatInfo(), 57),
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class UserPartAvail(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x35, dic=ISUPType_dict),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='Opt'),
+            )),
+        ISUPOpt('Opt', GEN=(
+            Optional(ParameterCompatInfo(), 57),
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class Facility(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x33, dic=ISUPType_dict),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='Opt'),
+            )),
+        ISUPOpt('Opt', GEN=(
+            Optional(MessageCompatInfo(), 56),
+            Optional(ParameterCompatInfo(), 57),
+            Optional(RemoteOperations(), 50),
+            Optional(ServiceActivation(), 51),
+            Optional(CallTransferNum(), 69),
+            Optional(AccessTransport(), 3),
+            Optional(GenericNotifInd(), 44),
+            Optional(RedirectionNum(), 12),
+            Optional(PivotRoutingInd(), 124),
+            Optional(PivotStatus(), 134),
+            Optional(PivotCounter(), 135),
+            Optional(PivotRoutingBackwardInfo(), 137),
+            Optional(RedirectStatus(), 138),
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class NetworkResourceMgmt(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x32, dic=ISUPType_dict),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='Opt'),
+            )),
+        ISUPOpt('Opt', GEN=(
+            Optional(MessageCompatInfo(), 56),
+            Optional(ParameterCompatInfo(), 57),
+            Optional(EchoControlInfo(), 55),
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class IdentificationReq(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x36, dic=ISUPType_dict),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='Opt'),
+            )),
+        ISUPOpt('Opt', GEN=(
+            Optional(MCIDReqInd(), 59),
+            Optional(MessageCompatInfo(), 56),
+            Optional(ParameterCompatInfo(), 57),
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class IdentificationResp(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x37, dic=ISUPType_dict),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='Opt'),
+            )),
+        ISUPOpt('Opt', GEN=(
+            Optional(MCIDRespInd(), 60),
+            Optional(MessageCompatInfo(), 56),
+            Optional(ParameterCompatInfo(), 57),
+            Optional(CallingPartyNum(), 10),
+            Optional(AccessTransport(), 3),
+            Optional(GenericNum(), 192),
+            Optional(ChargedPartyIdent(), 113),
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class Segmentation(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x38, dic=ISUPType_dict),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='Opt'),
+            )),
+        ISUPOpt('Opt', GEN=(
+            Optional(AccessTransport(), 3),
+            Optional(UserToUserInfo(), 32),
+            Optional(MessageCompatInfo(), 56),
+            Optional(GenericDigits(), 193),
+            Optional(GenericNotifInd(), 44),
+            Optional(GenericNum(), 192),
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class LoopPrevention(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x40, dic=ISUPType_dict),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='Opt'),
+            )),
+        ISUPOpt('Opt', GEN=(
+            Optional(MessageCompatInfo(), 56),
+            Optional(ParameterCompatInfo(), 57),
+            Optional(CallTransferRef(), 67),
+            Optional(LoopPreventionInd(), 68),
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class ApplicationTransport(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x41, dic=ISUPType_dict),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='Opt'),
+            )),
+        ISUPOpt('Opt', GEN=(
+            Optional(MessageCompatInfo(), 56),
+            Optional(ParameterCompatInfo(), 57),
+            Optional(AppTransportParam(), 120),
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class PreReleaseInfo(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x42, dic=ISUPType_dict),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='Opt'),
+            )),
+        ISUPOpt('Opt', GEN=(
+            Optional(MessageCompatInfo(), 56),
+            Optional(ParameterCompatInfo(), 57),
+            Optional(OptForwardCallInd(), 8),
+            Optional(OptBackwardCallInd(), 41),
+            Optional(AppTransportParam(), 120),
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+class SubsequentDirectoryNum(ISUPMessage):
+    _GEN = (
+        Uint16LE('CIC'),
+        Uint8('Type', val=0x43, dic=ISUPType_dict),
+        Envelope('Pointers', GEN=(
+            Ptr8('Ptr0', field='Opt'),
+            )),
+        ISUPOpt('Opt', GEN=(
+            Optional(SubsequentNum(), 5),
+            Optional(MessageCompatInfo(), 56),
+            Optional(EOO(), 0),
+            ))
+        )
+
+
+#------------------------------------------------------------------------------#
+# ISUP Message dispatcher
+#------------------------------------------------------------------------------#
+
+ISUPTypeClasses = {
+    1  : InitialAddress,
+    2  : SubsequentAddr,
+    3  : InformationReq,
+    4  : Information,
+    5  : Continuity,
+    6  : AddressComplete,
+    7  : Connect,
+    8  : ForwardTransfer,
+    9  : Answer,
+    12 : Release,
+    13 : Suspend,
+    14 : Resume,
+    16 : ReleaseComplete,
+    17 : ContinuityCheckReq,
+    18 : ResetCircuit,
+    19 : Blocking,
+    20 : Unblocking,
+    21 : BlockingAck,
+    22 : UnblockingAck,
+    23 : CircuitGroupReset,
+    24 : CircuitGroupBlocking,
+    25 : CircuitGroupUnblocking,
+    26 : CircuitGroupBlockingAck,
+    27 : CircuitGroupUnblockingAck,
+    31 : FacilityReq,
+    32 : FacilityAccept,
+    33 : FacilityReject,
+    36 : LoopbackAck,
+    40 : PassAlong,
+    41 : CircuitGroupResetAck,
+    42 : CircuitGroupQuery,
+    43 : CircuitGroupQueryResp,
+    44 : CallProgress,
+    45 : UserToUserInfo,
+    46 : UnequippedCIC,
+    47 : Confusion,
+    48 : Overload,
+    50 : NetworkResourceMgmt,
+    51 : Facility,
+    52 : UserPartTest,
+    53 : UserPartAvail,
+    54 : IdentificationReq,
+    55 : IdentificationResp,
+    56 : Segmentation,
+    64 : LoopPrevention,
+    65 : ApplicationTransport,
+    66 : PreReleaseInfo,
+    67 : SubsequentDirectoryNum,
+    }
+
+def get_isup_msg_instances():
+    return {k: ISUPTypeClasses[k]() for k in ISUPTypeClasses}
+
+
+#------------------------------------------------------------------------------#
+# SCPP Message parser
+#------------------------------------------------------------------------------#
+
+def parse_ISUP(buf):
+    """Parses an ISUP message bytes' buffer
+    
+    Args:
+        buf: ISUP message bytes' buffer
+    
+    Returns:
+        element, err: 2-tuple
+            element: Element instance, if err is null (no error)
+            element: None, if err is not null
+            err: 0 no error, 1 invalid message type, 2 message parsing failed
+    """
+    if len(buf) < 3:
+        return None, 1
+    if python_version < 3:
+        try:
+            Msg = ISUPTypeClasses[ord(buf[2])]()
+        except:
+            return None, 1
+    else:
+        try:
+            Msg = ISUPTypeClasses[buf[2]]()
+        except:
+            return None, 1
+    try:
+        Msg.from_bytes(buf)
+    except:
+        return None, 2
+    #
+    return Msg, 0
+
+
+'''
+# this is to extract pycrate structure from PDF table from section 4
+
+ISUPType_LUT = {
+    0x6  : ('Address complete', AddressComplete),
+    0x9  : ('Answer', Answer),
+    0x41 : ('Application transport', ApplicationTransport),
+    0x13 : ('Blocking', Blocking),
+    0x15 : ('Blocking acknowledgement', BlockingAck),
+    0x2c : ('Call progress', CallProgress),
+    0x18 : ('Circuit group blocking', CircuitGroupBlocking),
+    0x1a : ('Circuit group blocking acknowledgement', CircuitGroupBlockingAck),
+    0x2a : ('Circuit group query (national use)', CircuitGroupQuery),
+    0x2b : ('Circuit group query response (national use)', CircuitGroupQueryResp),
+    0x17 : ('Circuit group reset', CircuitGroupReset),
+    0x29 : ('Circuit group reset acknowledgement', CircuitGroupResetAck),
+    0x19 : ('Circuit group unblocking', CircuitGroupUnblocking),
+    0x1b : ('Circuit group unblocking acknowledgement', CircuitGroupUnblockingAck),
+#    0x31 : ('Charge information (national use)', None)
+    0x2f : ('Confusion', Confusion),
+    0x07 : ('Connect', Connect),
+    0x05 : ('Continuity', Continuity),
+    0x11 : ('Continuity check request', ContinuityCheckReq),
+    0x33 : ('Facility', Facility),
+    0x20 : ('Facility accepted', FacilityAccept),
+    0x21 : ('Facility reject', FacilityReject),
+    0x1f : ('Facility request', FacilityReq),
+    0x8  : ('Forward transfer', ForwardTransfer),
+    0x36 : ('Identification request', IdentificationReq),
+    0x37 : ('Identification response', IdentificationResp),
+    0x4  : ('Information (national use)', Information),
+    0x3  : ('Information request (national use)', InformationReq),
+    0x1  : ('Initial address', InitialAddress),
+    0x24 : ('Loop back acknowledgement (national use)', LoopbackAck),
+    0x40 : ('Loop prevention', LoopPrevention),
+    0x32 : ('Network resource management', NetworkResourceMgmt),
+    0x30 : ('Overload (national use)', Overload),
+    0x28 : ('Pass-along (national use)', PassAlong),
+    0x42 : ('Pre-release information', PreReleaseInfo),
+    0xc  : ('Release', Release),
+    0x10 : ('Release complete', ReleaseComplete),
+    0x12 : ('Reset circuit', ResetCircuit),
+    0xe  : ('Resume', Resume),
+    0x38 : ('Segmentation', Segmentation),
+    0x2  : ('Subsequent address', SubsequentAddr),
+    0x43 : ('Subsequent Directory Number (national use)', SubsequentDirectoryNum),
+    0xd  : ('Suspend', Suspend),
+    0x14 : ('Unblocking', Unblocking),
+    0x16 : ('Unblocking acknowledgement', UnblockingAck),
+    0x2e : ('Unequipped CIC (national use)', UnequippedCIC),
+    0x35 : ('User Part available', UserPartAvail),
+    0x34 : ('User Part test', UserPartTest),
+    0x2d : ('User-to-user information', UserToUserInfo),
+    }
+
+
+ISUPParam_LUT = {
+    0x2e : ('Access delivery information', AccessDeliveryInfo),
+    0x3  : ('Access transport', AccessTransport),
+    0x78 : ('Application transport parameter', AppTransportParam),
+    0x27 : ('Automatic congestion level', AutomaticCongestionLevel),
+    0x11 : ('Backward call indicators', BackwardCallInd),
+    0x4d : ('Backward GVNS', BackwardGVNS),
+    0x36 : ('Call diversion information', CallDiversionInfo),
+    0x6e : ('Call diversion treatment indicators', CallDiversionTreatmentInd),
+    0x2d : ('Call history information', CallHistoryInfo),
+    0x70 : ('Call offering treatment indicators', CallOfferingTreatmentInd),
+    0x1  : ('Call reference (national use)', CallReference),
+    0x45 : ('Call transfer number', CallTransferNum),
+    0x43 : ('Call transfer reference', CallTransferRef),
+    0x6f : ('Called IN number', CalledINNum),
+    0x7d : ('Called directory number (national use)', CalledDirectoryNum),
+    0x4  : ('Called party number', CalledPartyNum),
+    0x81 : ('Calling geodetic location', CallingGeodeticLocation),
+    0xa  : ('Calling party number', CallingPartyNum),
+    0x9  : ('Calling party\'s category', CallingPartyCat),
+    0x12 : ('Cause indicators', CauseInd),
+    0x7a : ('CCNR possible indicator', CCNRPossibleInd),
+    0x4b : ('CCSS', CCSS),
+    0x71 : ('Charged party identification (national use)', ChargedPartyIdent),
+    0x25 : ('Circuit assignment map', CircuitAssignMap),
+    0x15 : ('Circuit group supervision message type', CircuitGroupSupervis),
+    0x26 : ('Circuit state indicator (national use)', CircuitStateInd),
+    0x1a : ('Closed user group interlock code', ClosedUserGroupInterlockCode),
+    0x79 : ('Collect call request', CollectCallReq),
+    0x72 : ('Conference treatment indicators', ConferenceTreatmentInd),
+    0x21 : ('Connected number', ConnectedNum),
+    0xd  : ('Connection request', ConnectionReq),
+    0x10 : ('Continuity indicators', ContinuityInd),
+    0x65 : ('Correlation id', CorrelationID),
+    0x73 : ('Display information', DisplayInfo),
+    0x37 : ('Echo control information', EchoControlInfo),
+    0x0  : ('End of optional parameters', EOO),
+    0x24 : ('Event information', EventInfo),
+    0x18 : ('Facility indicator', FacilityInd),
+    0x7  : ('Forward call indicators', ForwardCallInd),
+    0x4c : ('Forward GVNS', ForwardGVNS),
+    0xc1 : ('Generic digits (national use)', GenericDigits),
+    0x2c : ('Generic notification indicator', GenericNotifInd),
+    0xc0 : ('Generic number', GenericNum),
+    0x82 : ('HTR information', HTRInfo),
+    0x3d : ('Hop counter', HopCounter),
+    0xf  : ('Information indicators (national use)', InformationInd),
+    0xe  : ('Information request indicators (national use)', InformationReqInd),
+    0x3f : ('Location number', LocationNum),
+    0x44 : ('Loop prevention indicators', LoopPreventionInd),
+    0x3b : ('MCID request indicators', MCIDReqInd),
+    0x3c : ('MCID response indicators', MCIDRespInd),
+    0x38 : ('Message compatibility information', MessageCompatInfo),
+    0x3a : ('MLPP precedence', MLPPPrecedence),
+    0x6  : ('Nature of connection indicators', NatureConnectionInd),
+    0x5b : ('Network management controls', NetworkMgmtControls),
+    0x84 : ('Network routing number (national use)', NetworkRoutingNum),
+    0x2f : ('Network specific facility (national use)', NetworkSpecificFacility),
+    0x8d : ('Number portability forward information (network option)', NumPortabilityForwardInfo),
+    0x29 : ('Optional backward call indicators', OptBackwardCallInd),
+    0x8  : ('Optional forward call indicators', OptForwardCallInd),
+    0x28 : ('Original called number', OriginalCalledNum),
+    0x7f : ('Original called IN number', OriginalCalledINNum),
+    0x2b : ('Origination ISC point code', OriginISCPointCode),
+    0x39 : ('Parameter compatibility information', ParameterCompatInfo),
+    0x7b : ('Pivot capability', PivotCap),
+    0x87 : ('Pivot counter', PivotCounter),
+    0x89 : ('Pivot routing backward information', PivotRoutingBackwardInfo),
+    0x88 : ('Pivot routing forward information', PivotRoutingForwardInfo),
+    0x7c : ('Pivot routing indicators', PivotRoutingInd),
+    0x86 : ('Pivot status (national use)', PivotStatus),
+    0x31 : ('Propagation delay counter', PropagationDelayCounter),
+    0x85 : ('Query on release capability (network option)', QueryOnReleaseCap),
+    0x16 : ('Range and status', RangeStatus),
+    0x8c : ('Redirect backward information (national use)', RedirectBackwardInfo),
+    0x4e : ('Redirect capability (national use)', RedirectCap),
+    0x77 : ('Redirect counter (national use)', RedirectCounter),
+    0x8b : ('Redirect forward information (national use)', RedirectForwardInfo),
+    0x8a : ('Redirect status (national use)', RedirectStatus),
+    0xb  : ('Redirecting number', RedirectingNum),
+    0x13 : ('Redirection information', RedirectionInfo),
+    0xc  : ('Redirection number', RedirectionNum),
+    0x40 : ('Redirection number restriction', RedirectNumRestriction),
+    0x32 : ('Remote operations (national use)', RemoteOperations),
+    0x66 : ('SCF id', ScfID),
+    0x33 : ('Service activation', ServiceActivation),
+    0x1e : ('Signalling point code (national use)', SignallingPointCode),
+    0x5  : ('Subsequent number', SubsequentNum),
+    0x22 : ('Suspend/Resume indicators', SuspendResumeInd),
+    0x23 : ('Transit network selection (national use)', TransitNetworkSel),
+    0x2  : ('Transmission medium requirement', TransmissionMediumReq),
+    0x3e : ('Transmission medium requirement prime', TransmissionMediumReqPrime),
+    0x35 : ('Transmission medium used', TransmissionMediumUsed),
+    0x74 : ('UID action indicators', UIDActionInd),
+    0x75 : ('UID capability indicators', UIDCapInd),
+    0x1d : ('User service information', UserServiceInfo),
+    0x30 : ('User service information prime', UserServiceInfoPrime),
+    0x34 : ('User teleservice information', UserTeleserviceInfo),
+    0x2a : ('User-to-user indicators', UserToUserInd),
+    0x20 : ('User-to-user information', UserToUserInfo),
+    }
+
+
+import re
+SPLIT = r'[ ]{6,}'
+
+def norm_name(name):
+    # dedup spaces and go lower case
+    name = re.sub('[ ]{2,}', ' ', name.lower())
+    # remove parenthesis
+    name = name.split('(')[0].strip()
+    #
+    return name
+
+def convert_table(text):
+    #
+    F, V, O = [], [], []
+    #
+    prmlut = {}
+    for k, v in ISUPParam_LUT.items(): 
+        prmlut[norm_name(v[0])] = (v[1].__name__, k)
+    #
+    F.append('Uint16LE(\'CIC\'),')
+    for line in text.split('\n'):
+        line = line.strip()
+        if not line:
+            continue
+        name, cla, typ, le = re.split(SPLIT, line)
+        #print(name, cla, typ, le)
+        name = norm_name(name)
+        if name == 'message type':
+            F.append('Uint8(\'Type\', val=0x, dic=ISUPType_dict),')
+        else:
+            if typ == 'F':
+                F.append('%s(),' % prmlut[name][0])
+            elif typ == 'V':
+                # variable length
+                V.append(prmlut[name][0])
+            elif typ == 'O':
+                O.append(prmlut[name])
+    #
+    print('class (ISUPMessage):')
+    print('    _GEN = (')
+    # fixed
+    for p in F:
+        print('        %s' % p)
+    if not V and not O:
+        print('        )')
+        return
+    # pointers
+    print('        Envelope(\'Pointers\', GEN=(')
+    for i, p in enumerate(V):
+        print('            Ptr8(\'Ptr%i\', field=\'%s\'),' % (i, p))
+    if O:
+        if not V:
+            i = 0
+        else:
+            i += 1
+        print('            Ptr8(\'Ptr%i\', field=\'Opt\'),' % i)
+    print('            )),')
+    # variable
+    for p in V:
+        print('        %s(),' % p)
+    # options
+    if O:
+        print('        ISUPOpt(\'Opt\', GEN=(')
+        for p in O:
+            print('            Optional(%s(), %s),' % p)
+        print('            ))')
+    print('        )')
+    #
+    #return F, V, O          
+'''
