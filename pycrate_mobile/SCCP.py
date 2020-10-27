@@ -409,13 +409,7 @@ class SCCPPartyAddr(Envelope):
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: self[1].get_len())
-    
-    def _from_char(self, char):
-        self[0]._from_char(char)
-        clen = char._len_bit
-        char._len_bit = char._cur + 8*self[0].get_val()
-        self[1]._from_char(char)
-        char._len_bit = clen
+        self[1].set_blauto(lambda: self[0].get_val()<<3)
     
     def get_gt(self):
         return self[1][3].get_alt()
@@ -643,18 +637,13 @@ class RefCause(Uint8):
 class Data(Envelope):
     _GEN = (
         Uint8('Len'),
-        Buf('Value')
+        Buf('Value', val=b'', rep=REPR_HEX)
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: self[1].get_len())
-    
-    def _from_char(self, char):
-        self[0]._from_char(char)
-        clen = char._len_bit
-        char._len_bit = char._cur + 8*self[0].get_val()
-        self[1]._from_char(char)
-        char._len_bit = clen
+        self[1].set_blauto(lambda: self[0].get_val()<<3)
 
 
 #------------------------------------------------------------------------------#
@@ -700,20 +689,16 @@ class Importance(Envelope):
 
 class LongData(Envelope):
     _GEN = (
-        # WNG: Q.713 does say if it is in BE or LE, we guess LE similarly to Ptr16
+        # WNG: Q.713 does not say if it is in BE or LE, we guess LE similarly to Ptr16
         Uint16LE('Len'),
         Buf('Value', val=b'', rep=REPR_HEX)
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: self[1].get_len())
-    
-    def _from_char(self, char):
-        self[0]._from_char(char)
-        clen = char._len_bit
-        char._len_bit = char._cur + 8*self[0].get_val()
-        self[1]._from_char(char)
-        char._len_bit = clen
+        self[1].set_blauto(lambda: self[0].get_val()<<3)
+
 
 #------------------------------------------------------------------------------#
 # SCCP messages and codes
@@ -782,7 +767,7 @@ class Ptr16(_Ptr):
 
 
 # constructor for an optional parameter wrapper
-def Optional(param, name, trans=True):
+def Optional(param, name):
     """prefix the parameter element `param' with an uint8 as name, and eventually
     an uint8 as len, and make it transparent by default
     """
@@ -804,6 +789,8 @@ def Optional(param, name, trans=True):
             def __init__(self, *args, **kwargs):
                 Envelope.__init__(self, *args, **kwargs)
                 self[1].set_valauto(lambda: self[2].get_len())
+                if not hasattr(param, '_bl') or param._bl is None:
+                    self[2].set_blauto(lambda: self[1].get_val()<<3)
                 self.set_trans(True)
         w = Option(param._name)
     return w
@@ -816,6 +803,8 @@ class SCCPMessage(Envelope):
     """
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         # parse the fixed content up the the pointers
         start = 0
         for e in self._content:
@@ -898,6 +887,8 @@ class SCCPOpt(Envelope):
         self._opts = {e[0]._val: e for e in self._content}
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         # parse the different options in the given order
         ind = 0
         while char.len_bit() >= 8:
@@ -905,18 +896,21 @@ class SCCPOpt(Envelope):
             if name not in self._opts:
                 #raise(PycrateErr('SCCP option: invalid identifier %i' % name))
                 # unknown option
-                opt = Optional(Buf('_unk_%i' % name), name)
-                # automate the length of Buf() to its Len() prefix
-                opt[2].set_blauto(lambda: opt[1].get_val()<<3)
+                opt = Optional(Buf('_unk_%i' % name, rep=REPR_HEX), name)
+                unk = True
             else:
                 opt = self._opts[name]
-                opt.set_trans(False)
+                unk = False
+            opt.set_trans(False)
             opt[0].set_val(name)
             # parse the rest of the option
             for e in opt._content[1:]:
                 e._from_char(char)
-            # eventually reorder the optional fields
-            if self.index(opt) != ind:
+            if unk:
+                # insert unknown optional field
+                self.insert(ind, opt)
+            elif self.index(opt) != ind:
+                # reorder optional field
                 self.remove(opt)
                 self.insert(ind, opt)
             ind += 1
