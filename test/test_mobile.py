@@ -171,8 +171,12 @@ sccp_pdu = tuple(map(unhexlify, (
 
 # ISUP messages
 isup_pdu = tuple(map(unhexlify, (
-    '6201060214012c01fb3601090c08849000811619290339042c90369000', # ISUP Address Complete
     'ad03010060010a00020a0884100081066153010a0884130061002099091d038090a3310200643f0884930031750740090801003a06430001ff0000390631d03ad03fc000', # ISUP Initial Address
+    '6201060214012c01fb3601090c08849000811619290339042c90369000', # ISUP Address Complete
+    '0b022c01011102163429010b00', # ISUP Call Progress
+    '4c020901110202012d02006439022dc000', # ISUP Answer
+    '7c020c0200028090', # ISUP Release
+    'bf081000', # ISUP Release Complete
     )))
 
 # GTPv1-U messages
@@ -315,8 +319,6 @@ def test_isup(isup_pdu=isup_pdu):
             t = m.to_json()
             m.from_json(t)
             assert( m.get_val() == v )
-    #
-    # TODO: verify Num specific methods
 
 
 def test_gtpu(gtpu_pdu=gtpu_pdu):
