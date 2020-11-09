@@ -1341,7 +1341,8 @@ class NGAPRANConfigUpdate(NGAPNonUESigProc):
         }
 
     def recv(self, pdu):
-        # recv the NGSetupRequest
+        # recv the RANConfigUpdate, which provides similar configuration 
+        # information as the NGSetup message
         self._recv(pdu)
         if self.errcause:
             # procedure unsuccessful outcome
