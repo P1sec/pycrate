@@ -620,182 +620,264 @@ class ASN1Obj(Element):
             const['tab_at']   = self._const_tab_at
         return const
     
-    def get_proto(self, w_open=True, print_recurs=False, blacklist=set()):
+    def get_proto(self, w_open=True, w_opt=False, print_recurs=False, blacklist=set()):
         """
         returns the prototype of the object
         
         Args:
             w_open      : bool,
-                          if True, returns the potential content of OPEN objects
+                          if True, inspect the content of OPEN objects
+            w_opt       : bool
+                          if True, add (OPT) to every optional component name
             print_recurs: bool,
                           if True, prints paths that lead to recursion
             blacklist   : set of str,
-                          list of blacklisted constructed object names, that won't be expanded
+                          list of blacklisted constructed object names, that won't 
+                          be expanded
         
         Returns:
             type: str if self is of basic type, 
                   2-tuple (type_str, content_dict) if self is of constructed type
         """
-        if not hasattr(self, '_proto_fields'):
+        if not hasattr(self, '_proto_recur'):
             root = True
-            self._proto_fields = [self._name]
-        elif self._name == '_item_':
-            # no recursion possible with SEQ OF / SET OF
-            root = False
-        elif self._name in self._proto_fields:
-            # recursion detected, stop inspecting the content
-            # can happen also in case different components at different levels have the same name
-            if print_recurs:
-                asnlog('[+] recursion suspected: %s, %r' % (self._name, self._proto_fields))
-            return self.TYPE
+            self._proto_recur = [id(self)]
+            self._proto_path  = []
         else:
             root = False
-            self._proto_fields.append( self._name )
         #
-        if self.TYPE == TYPE_OPEN:
+        if self.TYPE in (TYPE_OPEN, TYPE_ANY):
             if w_open and self._name not in blacklist:
                 cont = ASN1Dict()
                 for (ident, Comp) in self._get_const_tr().items():
-                    Comp._proto_fields = self._proto_fields
-                    cont[ident] = Comp.get_proto(w_open, print_recurs, blacklist)
-                    self._proto_fields = Comp._proto_fields
-                    del Comp._proto_fields
+                    if isinstance(ident, str_types):
+                        continue
+                    if id(Comp) in self._proto_recur:
+                        if print_recurs:
+                            asnlog('[+] recursion detected: %s, at path %r'\
+                                   % (Comp._name, self._proto_path + [ident]))
+                        cont[ident] = Comp.TYPE
+                    else:
+                        Comp._proto_recur = self._proto_recur + [id(Comp)]
+                        Comp._proto_path  = self._proto_path  + [ident]
+                        cont[ident] = Comp.get_proto(
+                            w_open,
+                            w_opt,
+                            print_recurs,
+                            blacklist)
+                        del Comp._proto_recur, Comp._proto_path
                 ret = (self.TYPE, cont)
             else:
                 ret = self.TYPE
         #
-        elif self.TYPE in TYPES_BASIC + TYPES_EXT:
-            # TODO: should check self._const_cont for BIT STRING and OCTET STRING
-            ret = self.TYPE
-        #
-        elif self.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
-            self._cont._proto_fields = self._proto_fields
-            ret = (self.TYPE, self._cont.get_proto(w_open, print_recurs, blacklist))
-            self._proto_fields = self._cont._proto_fields
-            del self._cont._proto_fields
-        #
         elif self.TYPE in (TYPE_CHOICE, TYPE_SEQ, TYPE_SET, TYPE_CLASS):
-            if self._name in blacklist:
-                ret = self.TYPE
-            else:
-                # TODO: add information on fields with OPTIONAL or DEFAULT flag
+            if self._name not in blacklist:
                 cont = ASN1Dict()
                 for (ident, Comp) in self._cont.items():
-                    Comp._proto_fields = self._proto_fields
-                    cont[ident] = Comp.get_proto(w_open, print_recurs, blacklist)
-                    self._proto_fields = Comp._proto_fields
-                    del Comp._proto_fields
+                    if hasattr(self, '_root_mand') and ident not in self._root_mand:
+                        ident_ret = '%s (OPT)' % ident
+                    else:
+                        ident_ret = ident
+                    if id(Comp) in self._proto_recur:
+                        if print_recurs:
+                            asnlog('[+] recursion detected: %s, at path %r'\
+                                   % (Comp._name, self._proto_path + [ident]))
+                        cont[ident_ret] = Comp.TYPE
+                    else:
+                        Comp._proto_recur = self._proto_recur + [id(Comp)]
+                        Comp._proto_path  = self._proto_path  + [ident]
+                        cont[ident_ret] = Comp.get_proto(
+                            w_open,
+                            w_opt,
+                            print_recurs,
+                            blacklist)
+                        del Comp._proto_recur, Comp._proto_path
                 ret = (self.TYPE, cont)
-        #
-        else:
-            assert()
-        #
-        if root:
-            del self._proto_fields
-        elif self._name != '_item_':
-            del self._proto_fields[-1]
-        return ret
-    
-    # experimental: to be improved
-    def iter_cont(self):
-        if self.TYPE == TYPE_OPEN:
-            cont = ASN1Dict()
-            for (ident, Comp) in self._get_const_tr().items():
-                Comp.iter_cont()
-        #
-        elif self.TYPE in TYPES_BASIC + TYPES_EXT:
-            print('%s: %s, %r' % (self._name, self.TYPE, self.get_const()))
+            else:
+                ret = self.TYPE
         #
         elif self.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
-            self._cont.iter_cont()
+            Comp = self._cont
+            if id(Comp) in self._proto_recur:
+                if print_recurs:
+                    asnlog('[+] recursion detected: %s, at path %r'\
+                           % (Comp._name, self._proto_path + [None]))
+                ret = self.TYPE
+            else:
+                Comp._proto_recur = self._proto_recur + [id(Comp)]
+                Comp._proto_path  = self._proto_path  + [None]
+                ret = (
+                    self.TYPE,
+                    self._cont.get_proto(
+                        w_open,
+                        w_opt,
+                        print_recurs,
+                        blacklist)
+                    )
+                del Comp._proto_recur, Comp._proto_path
         #
-        elif self.TYPE in (TYPE_CHOICE, TYPE_SEQ, TYPE_SET, TYPE_CLASS):
-            cont = ASN1Dict()
-            for (ident, Comp) in self._cont.items():
-                Comp.iter_cont()
+        elif self.TYPE in (TYPE_BIT_STR, TYPE_OCT_STR) and self._const_cont:
+            Comp = self._const_cont
+            if id(Comp) in self._proto_recur:
+                if print_recurs:
+                    asnlog('[+] recursion detected: %s, at path %r'\
+                           % (Comp._name, self._proto_path + [None]))
+                ret = self.TYPE
+            else:
+                Comp._proto_recur = self._proto_recur + [id(Comp)]
+                Comp._proto_path  = self._proto_path  + [None]
+                ret = (
+                    self.TYPE,
+                    self._const_cont.get_proto(
+                        w_open,
+                        w_opt,
+                        print_recurs,
+                        blacklist)
+                    )
+                del Comp._proto_recur, Comp._proto_path
         #
         else:
-            assert()
+            assert( self.TYPE in TYPES_BASIC + TYPES_EXT )
+            ret = self.TYPE
+        #
+        if root:
+            del self._proto_recur, self._proto_path
+        return ret
     
-    def get_complexity(self, w_open=True, print_recurs=False):
+    def get_complexity(self, w_open=True, w_opt=True, print_recurs=False, blacklist=set()):
         """
-        returns the number of basic types referenced from self,
-        and the maximum depth possible within self
+        returns the number of basic types objects referenced from self,
+        the maximum depth possible within self,
+        and the list of paths that lead to recursion
         
         Args:
             w_open      : bool,
                           if True, inspects the potential content of OPEN objects
+            w_opt       : bool
+                          if True, inspect optional components to count into the 
+                          complexity
             print_recurs: bool,
                           if True, prints paths that lead to recursion
+            blacklist   : set of str,
+                          list of blacklisted constructed object names, that won't 
+                          account into the complexity
         
         Returns:
             num, depth: uint, uint
         """
-        num, depth = 0, 0
+        num, depth, recur = 0, 0, []
         #
-        if not hasattr(self, '_proto_fields'):
+        if not hasattr(self, '_proto_recur'):
             root = True
-            self._proto_fields = [self._name]
-        elif self._name == '_item_':
-            # no recursion possible with SEQ OF / SET OF
-            root = False
-        elif self._name in self._proto_fields:
-            # recursion detected, stop inspecting the content
-            if print_recurs:
-                asnlog('[+] recursion detected: %s, %r' % (self._name, self._proto_fields))
-            return 0, 0
+            self._proto_recur = [id(self)]
+            self._proto_path  = []
         else:
             root = False
-            self._proto_fields.append( self._name )
         #
         if self.TYPE == TYPE_OPEN:
-            if w_open:
+            if w_open and self._name not in blacklist:
                 loc_depth = []
                 for (ident, Comp) in self._get_const_tr().items():
-                    Comp._proto_fields = self._proto_fields
-                    comp_num, comp_depth = Comp.get_complexity(w_open, print_recurs)
-                    self._proto_fields = Comp._proto_fields
-                    del Comp._proto_fields
-                    num += comp_num
-                    loc_depth.append(comp_depth)
+                    if isinstance(ident, str_types):
+                        continue
+                    if id(Comp) in self._proto_recur:
+                        recur_path = self._proto_path + [ident]
+                        if print_recurs:
+                            asnlog('[+] recursion detected: %s, at path %r'\
+                                   % (Comp._name, recur_path))
+                        recur.append( recur_path )
+                    else:
+                        Comp._proto_recur = self._proto_recur + [id(Comp)]
+                        Comp._proto_path  = self._proto_path  + [ident]
+                        comp_num, comp_depth, comp_recur = Comp.get_complexity(
+                            w_open,
+                            w_opt,
+                            print_recurs,
+                            blacklist)
+                        del Comp._proto_recur, Comp._proto_path
+                        num += comp_num
+                        loc_depth.append( comp_depth )
+                        recur.extend( comp_recur )
                 if loc_depth:
                     depth += 1 + max(loc_depth)
             else:
                 num += 1
         #
-        elif self.TYPE in TYPES_BASIC + TYPES_EXT:
-            # TODO: should check self._const_cont for BIT STRING and OCTET STRING
-            num += 1
+        elif self.TYPE in (TYPE_CHOICE, TYPE_SEQ, TYPE_SET, TYPE_CLASS):
+            if self._name not in blacklist:
+                loc_depth = []
+                for (ident, Comp) in self._cont.items():
+                    if id(Comp) in self._proto_recur:
+                        recur_path = self._proto_path + [ident]
+                        if print_recurs:
+                            asnlog('[+] recursion detected: %s, at path %r'\
+                                   % (Comp._name, recur_path))
+                        recur.append( recur_path )
+                    elif w_opt or not hasattr(self, '_root_mand') \
+                    or Comp._name in self._root_mand:
+                        Comp._proto_recur = self._proto_recur + [id(Comp)]
+                        Comp._proto_path  = self._proto_path  + [ident]
+                        comp_num, comp_depth, comp_recur = Comp.get_complexity(
+                            w_open,
+                            w_opt,
+                            print_recurs,
+                            blacklist)
+                        del Comp._proto_recur, Comp._proto_path
+                        num += comp_num
+                        loc_depth.append( comp_depth )
+                        recur.extend( comp_recur )
+                if loc_depth:
+                    depth += 1 + max(loc_depth)
         #
         elif self.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
-            self._cont._proto_fields = self._proto_fields
-            comp_num, comp_depth = self._cont.get_complexity(w_open, print_recurs)
-            num += comp_num
-            depth += 1 + comp_depth
-            self._proto_fields = self._cont._proto_fields
-            del self._cont._proto_fields
-        #
-        elif self.TYPE in (TYPE_CHOICE, TYPE_SEQ, TYPE_SET, TYPE_CLASS):
-            # TODO: add information on fields with OPTIONAL or DEFAULT flag
-            loc_depth = []
-            for (ident, Comp) in self._cont.items():
-                Comp._proto_fields = self._proto_fields
-                comp_num, comp_depth = Comp.get_complexity(w_open, print_recurs)
-                self._proto_fields = Comp._proto_fields
-                del Comp._proto_fields
+            Comp = self._cont
+            if id(Comp) in self._proto_recur:
+                recur_path = self._proto_path + [None]
+                if print_recurs:
+                    asnlog('[+] recursion detected: %s, at path %r'\
+                           % (Comp._name, recur_path))
+                recur.append( recur_path )
+            else:
+                Comp._proto_recur = self._proto_recur + [id(Comp)]
+                Comp._proto_path  = self._proto_path  + [None]
+                comp_num, comp_depth, comp_recur = Comp.get_complexity(
+                    w_open,
+                    w_opt,
+                    print_recurs,
+                    blacklist)
+                del Comp._proto_recur, Comp._proto_path
                 num += comp_num
-                loc_depth.append(comp_depth)
-            if loc_depth:
-                depth += 1 + max(loc_depth)
+                depth += 1 + comp_depth
+                recur.extend( comp_recur )
+        #
+        elif self.TYPE in (TYPE_BIT_STR, TYPE_OCT_STR) and self._const_cont:
+            Comp = self._const_cont
+            if id(Comp) in self._proto_recur:
+                recur_path = self._proto_path + [None]
+                if print_recurs:
+                    asnlog('[+] recursion detected: %s, at path %r'\
+                           % (Comp._name, recur_path))
+                recur.append( recur_path )
+            else:
+                Comp._proto_recur = self._proto_recur + [id(Comp)]
+                Comp._proto_path  = self._proto_path  + [None]
+                comp_num, comp_depth, compr_recur = Comp.get_complexity(
+                    w_open,
+                    w_opt,
+                    print_recurs,
+                    blacklist)
+                del Comp._proto_recur, Comp._proto_path
+                num += comp_num
+                depth += 1 + comp_depth
+                recur.extend( comp_recur )
         #
         else:
-            assert()
+            assert( self.TYPE in TYPES_BASIC + TYPES_EXT )
+            num += 1
         #
         if root:
-            del self._proto_fields
-        elif self._name != '_item_':
-            del self._proto_fields[-1]
-        return num, depth
+            del self._proto_recur, self._proto_path
+        return num, depth, recur
     
     def _get_obj_by_path(self, path):
         # this is used for solving table constraint lookups
@@ -890,7 +972,7 @@ class ASN1Obj(Element):
                     if p[:5] == '_unk_':
                         break
                     else:
-                        Obj = Obj._get_const_tr()[p]
+                        Obj = Obj._get_val_obj(p)
                 elif Obj.TYPE in (TYPE_BIT_STR, TYPE_OCT_STR) \
                 and Obj._const_cont is not None:
                     # p is not used
