@@ -47,6 +47,11 @@ from .HdlrGNB    import GNBd
 from .HdlrUE     import UEd
 from .ServerAuC  import AuC
 from .ServerGTPU import ARPd, GTPUd, BLACKHOLE_LAN, BLACKHOLE_WAN
+#
+from .ProcCNHnbap   import HNBAPErrorIndGW
+from .ProcCNRua     import RUAErrorInd
+from .ProcCNS1ap    import S1APErrorIndNonUECN
+from .ProcCNNgap    import NGAPErrorIndNonUECN
 
 
 # to log all the SCTP socket send() / recv() calls
@@ -632,7 +637,7 @@ class CorenetServer(object):
                 asn_hnbap_release()
                 hnb._log('WNG', 'invalid HNBAP PDU transfer-syntax: %s'\
                          % hexlify(buf).decode('ascii'))
-                Err = hnb.init_hnbap_proc(HNBAPErrorIndCN,
+                Err = hnb.init_hnbap_proc(HNBAPErrorIndGW,
                                           Cause=('protocol', 'transfer-syntax-error'))
                 Err.recv(buf)
                 pdu_tx = Err.send()
