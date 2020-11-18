@@ -861,7 +861,7 @@ class ASN1Obj(Element):
             else:
                 Comp._proto_recur = self._proto_recur + [id(Comp)]
                 Comp._proto_path  = self._proto_path  + [None]
-                comp_num, comp_depth, compr_recur = Comp.get_complexity(
+                comp_num, comp_depth, comp_recur = Comp.get_complexity(
                     w_open,
                     w_opt,
                     print_recurs,
