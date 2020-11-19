@@ -1762,7 +1762,7 @@ class S1APErrorIndNonUEENB(S1APNonUESigProc):
     
     def recv(self, pdu):
         self._recv(pdu)
-        if not self.errcause:
+        if not self.errcause and 'Cause' in self.ENBInfo:
             self._log('WNG', 'error ind received: %r' % (self.ENBInfo['Cause'], ))
             # if it corresponds to an said-unknown UE ID, disconnect the UE instance
             if self.ENBInfo['Cause'] == ('radioNetwork', 'unknown-enb-ue-s1ap-id') \

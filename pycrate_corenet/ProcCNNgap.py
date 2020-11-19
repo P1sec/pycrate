@@ -1572,7 +1572,7 @@ class NGAPErrorIndNonUERAN(NGAPNonUESigProc):
     
     def recv(self, pdu):
         self._recv(pdu)
-        if not self.errcause:
+        if not self.errcause and 'Cause' in self.GNBInfo:
             self._log('WNG', 'error ind received: %r' % (self.GNBInfo['Cause'], ))
             # if it corresponds to a said-unknown UE ID, disconnect the UE instance
             if self.GNBInfo['Cause'] == ('radioNetwork', 'unknown-local-UE-NGAP-ID') \

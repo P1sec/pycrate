@@ -469,7 +469,7 @@ class HNBAPErrorIndHNB(HNBAPSigProc):
     
     def recv(self, pdu_rx):
         self._recv(pdu_rx)
-        if not self.errcause:
+        if not self.errcause and 'Cause' in self.HNBInfo:
             self._log('WNG', 'error ind received: %s.%s' % self.HNBInfo['Cause'])
             # if it corresponds to a previously CN-initiated class 1 procedure
             # abort it
