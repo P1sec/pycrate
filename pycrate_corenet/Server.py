@@ -81,6 +81,10 @@ class CorenetServer(object):
     #
     # SCTP sockets recv() buffer length
     SERVER_BUFLEN = 16384
+    # for extended socket buffering,
+    # configure /proc/sys/net/core/rmem_max and /proc/sys/net/core/wmem_max accordingly
+    #SERVER_BUFLEN = 1048576
+    #
     SERVER_MAXCLI = 16
     #
     # HNBAP server
@@ -567,7 +571,9 @@ class CorenetServer(object):
             if self.TRACE_SK:
                 self._log('TRACE_SK_UL', buf)
             if not flags & sctp.FLAG_EOR:
-                self._log('WNG', 'SCTP message truncated') 
+                self._log('WNG', 'SCTP message truncated')
+                # TODO: store all fragments from the peer until the next msg with FLAG_EOR
+                return None, None
         return buf, notif
     
     def _rem_sk(self, sk):
@@ -646,7 +652,16 @@ class CorenetServer(object):
                 if hnb.TRACE_ASN_HNBAP:
                     hnb._log('TRACE_ASN_HNBAP_UL', PDU_HNBAP.to_asn1())
                 asn_hnbap_release()
-                pdu_tx = hnb.process_hnbap_pdu(pdu_rx)
+                if not isinstance(pdu_rx[1], dict):
+                    # invalid PDU, undefined extension
+                    hnb._log('WNG', 'invalid HNBAP PDU transfer-syntax: %s'\
+                             % hexlify(buf).decode('ascii'))
+                    Err = hnb.init_hnbap_proc(HNBAPErrorIndGW,
+                                              Cause=('protocol', 'transfer-syntax-error'))
+                    Err.recv(pdu_rx)
+                    pdu_tx = Err.send()
+                else:
+                    pdu_tx = hnb.process_hnbap_pdu(pdu_rx)
             for pdu in pdu_tx:
                 self.send_hnbap_pdu(hnb, pdu)
         #
@@ -671,7 +686,16 @@ class CorenetServer(object):
                 if hnb.TRACE_ASN_RUA:
                     hnb._log('TRACE_ASN_RUA_UL', PDU_HNBAP.to_asn1())
                 asn_rua_release()
-                pdu_tx = hnb.process_rua_pdu(pdu_rx)
+                if not isinstance(pdu_rx[1], dict):
+                    # invalid PDU, undefined extension
+                    self._log('WNG', 'invalid RUA PDU transfer-syntax: %s'\
+                              % hexlify(buf).decode('ascii'))
+                    Err = hnb.init_rua_proc(RUAErrorInd,
+                                            Cause=('protocol', 'transfer-syntax-error'))
+                    Err.recv(pdu_rx)
+                    pdu_tx = Err.send()
+                else:
+                    pdu_tx = hnb.process_rua_pdu(pdu_rx)
             for pdu in pdu_tx:
                 self.send_rua_pdu(hnb, pdu)
         #
@@ -689,18 +713,28 @@ class CorenetServer(object):
                          % hexlify(buf).decode('ascii'))
                 Err = enb.init_s1ap_proc(S1APErrorIndNonUECN,
                                          Cause=('protocol', 'transfer-syntax-error'))
+                Err.recv(buf)
                 pdu_tx = Err.send()
             else:
                 pdu_rx = PDU_S1AP()
                 if enb.TRACE_ASN_S1AP:
                     enb._log('TRACE_ASN_S1AP_UL', PDU_S1AP.to_asn1())
                 asn_s1ap_release()
-                if sid == enb.SKSid:
-                    # non-UE-associated signalling
-                    pdu_tx = enb.process_s1ap_pdu(pdu_rx)
+                if not isinstance(pdu_rx[1], dict):
+                    # invalid PDU, undefined extension
+                    enb._log('WNG', 'invalid S1AP PDU transfer-syntax: %s'\
+                             % hexlify(buf).decode('ascii'))
+                    Err = enb.init_s1ap_proc(S1APErrorIndNonUECN,
+                                             Cause=('protocol', 'transfer-syntax-error'))
+                    Err.recv(pdu_rx)
+                    pdu_tx = Err.send()
                 else:
-                    # UE-associated signalling
-                    pdu_tx = enb.process_s1ap_ue_pdu(pdu_rx, sid)
+                    if sid == enb.SKSid:
+                        # non-UE-associated signalling
+                        pdu_tx = enb.process_s1ap_pdu(pdu_rx)
+                    else:
+                        # UE-associated signalling
+                        pdu_tx = enb.process_s1ap_ue_pdu(pdu_rx, sid)
             for pdu in pdu_tx:
                 self.send_s1ap_pdu(enb, pdu, sid)
         #
@@ -718,18 +752,28 @@ class CorenetServer(object):
                          % hexlify(buf).decode('ascii'))
                 Err = gnb.init_ngap_proc(NGAPErrorIndNonUECN,
                                          Cause=('protocol', 'transfer-syntax-error'))
+                Err.recv(buf)
                 pdu_tx = Err.send()
             else:
                 pdu_rx = PDU_NGAP()
                 if gnb.TRACE_ASN_NGAP:
                     gnb._log('TRACE_ASN_NGAP_UL', PDU_NGAP.to_asn1())
                 asn_ngap_release()
-                if sid == gnb.SKSid:
-                    # non-UE-associated signalling
-                    pdu_tx = gnb.process_ngap_pdu(pdu_rx)
+                if not isinstance(pdu_rx[1], dict):
+                    # invalid PDU, undefined extension
+                    gnb._log('WNG', 'invalid NGAP PDU transfer-syntax: %s'\
+                             % hexlify(buf).decode('ascii'))
+                    Err = gnb.init_ngap_proc(NGAPErrorIndNonUECN,
+                                             Cause=('protocol', 'transfer-syntax-error'))
+                    Err.recv(pdu_rx)
+                    pdu_tx = Err.send()
                 else:
-                    # UE-associated signalling
-                    pdu_tx = gnb.process_ngap_ue_pdu(pdu_rx, sid)
+                    if sid == gnb.SKSid:
+                        # non-UE-associated signalling
+                        pdu_tx = gnb.process_ngap_pdu(pdu_rx)
+                    else:
+                        # UE-associated signalling
+                        pdu_tx = gnb.process_ngap_ue_pdu(pdu_rx, sid)
             for pdu in pdu_tx:
                 self.send_ngap_pdu(gnb, pdu, sid)
         #
@@ -863,6 +907,7 @@ class CorenetServer(object):
         except Exception:
             self._log('WNG', 'invalid S1AP PDU transfer-syntax: %s'\
                       % hexlify(buf).decode('ascii'))
+            asn_s1ap_release()
             # return nothing, no need to bother
             return
         if ENBd.TRACE_ASN_S1AP:
@@ -1015,6 +1060,7 @@ class CorenetServer(object):
         except Exception:
             self._log('WNG', 'invalid NGAP PDU transfer-syntax: %s'\
                       % hexlify(buf).decode('ascii'))
+            asn_ngap_release()
             # return nothing, no need to bother
             return
         if GNBd.TRACE_ASN_NGAP:
@@ -1158,6 +1204,7 @@ class CorenetServer(object):
         except Exception:
             self._log('WNG', 'invalid HNBAP PDU transfer-syntax: %s'\
                       % hexlify(buf).decode('ascii'))
+            asn_hnbap_release()
             # return nothing, no need to bother
             return
         if HNBd.TRACE_ASN_HNBAP:
