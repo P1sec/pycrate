@@ -159,7 +159,7 @@ class LinkSigProc(SigProc):
         
         select the expected content in self.Cont, according to the pdu type
         select the potential decoders in self.Decod
-        raise HNBAPErr if an error requiring procedure rejection is found
+        raise Exception if an error requiring procedure rejection is found
         
         when unknown identifiers are encountered:
         IE buffer value is set with key 'id_%id',
@@ -170,7 +170,7 @@ class LinkSigProc(SigProc):
         """
         # 1) select the correct PDU and content
         ptype = pdu[0][:3]
-        if ptype == 'out':  
+        if ptype == 'out':
             # some 3G RAN procedure have only 'outcome' pdu
             # which are changed to 'suc'
             ptype = 'suc'
@@ -188,8 +188,8 @@ class LinkSigProc(SigProc):
         #    self._log('WNG', 'decode_pdu: incorrect PDU criticality, %s' % val['criticality'])
         #
         # 3) ensure the PDU content has been properly decoded
-        if not isinstance(val['value'], tuple) or \
-        val['value'][0] != Cont._tr._name:
+        if not isinstance(val, dict) or 'value' not in val \
+        or not isinstance(val['value'], tuple) or val['value'][0] != Cont._tr._name:
             raise(CorenetErr('invalid PDU content'))
         #
         # 4) get the value part of the PDU with IEs and Extensions,
