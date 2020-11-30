@@ -674,8 +674,14 @@ class Int(Atom):
     
     if _with_json:
         
-        _from_jval = Uint._from_jval
-        _to_jval   = Uint._to_jval
+        def _from_jval(self, val):
+            try:
+                self.set_val(val)
+            except Exception:
+                raise(EltErr('{0} [_from_jval]: invalid format, {1!r}'.format(self._name, val)))
+        
+        def _to_jval(self):
+            return self.get_val()
 
 
 class Int8(Int):
@@ -788,8 +794,14 @@ class UintLE(Atom):
     
     if _with_json:
         
-        _from_jval = Uint._from_jval
-        _to_jval   = Uint._to_jval
+        def _from_jval(self, val):
+            try:
+                self.set_val(val)
+            except Exception:
+                raise(EltErr('{0} [_from_jval]: invalid format, {1!r}'.format(self._name, val)))
+        
+        def _to_jval(self):
+            return self.get_val()
 
 
 class Uint8LE(UintLE):
@@ -902,8 +914,14 @@ class IntLE(Atom):
     
     if _with_json:
         
-        _from_jval = Uint._from_jval
-        _to_jval   = Uint._to_jval
+        def _from_jval(self, val):
+            try:
+                self.set_val(val)
+            except Exception:
+                raise(EltErr('{0} [_from_jval]: invalid format, {1!r}'.format(self._name, val)))
+        
+        def _to_jval(self):
+            return self.get_val()
 
 
 class Int8LE(IntLE):
