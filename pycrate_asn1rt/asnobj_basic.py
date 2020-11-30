@@ -1044,7 +1044,7 @@ Specific attribute:
                 if self._val[2] >= 0:
                     return self._val[0] * (2<<self._val[2])
                 else:
-                    return {'base10Value': '%s' % (self._val[0]*(2**self._val[2]))}
+                    return {'base10Value': '%.16e' % (self._val[0]*(2**self._val[2]))}
             else:
                 #self._val[1] == 10
                 # TODO: some constraints on the mantissa / base / exponent should
