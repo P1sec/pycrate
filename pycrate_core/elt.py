@@ -33,13 +33,18 @@ __all__ = ['EltErr', 'REPR_RAW', 'REPR_HEX', 'REPR_BIN', 'REPR_HD', 'REPR_HUM',
 
 
 try:
-    from json import JSONEncoder, JSONDecoder, JSONDecodeError
+    from json import JSONEncoder, JSONDecoder
 except ImportError:
     _with_json = False
 else:
     _with_json = True
     JsonEnc = JSONEncoder(sort_keys=True, indent=1)
     JsonDec = JSONDecoder()
+    try:
+        import JSONDecodeError
+    except ImportError:
+        # it seems Python2.7 removed support for JSONDecodeError at some point
+        JSONDecodeError = ValueError
 
 from .utils  import *
 from .charpy import Charpy, CharpyErr
