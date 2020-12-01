@@ -628,6 +628,19 @@ class FGSID(Envelope):
             type = vals['Type']
             del vals['Type']
             self.encode(type, **vals)
+        elif isinstance(vals, (tuple, list)):
+            if len(vals) >= 4 and vals[3] == FGSIDTYPE_SUPI:
+                self.encode(vals[3])
+            elif len(vals) >= 3 and vals[2] in (
+                FGSIDTYPE_GUTI,
+                FGSIDTYPE_IMEI,
+                FGSIDTYPE_IMEISV,
+                FGSIDTYPE_TMSI,
+                FGSIDTYPE_MAC):
+                self.encode(vals[2])
+            elif len(vals) >= 2 and vals[1] in (FGSIDTYPE_EUI64, FGSIDTYPE_NO):
+                self.encode(vals[1])
+            Envelope.set_val(self, vals)
         else:
             Envelope.set_val(self, vals)
     
