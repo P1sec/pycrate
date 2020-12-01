@@ -236,6 +236,9 @@ class PLMN(Buf):
     _rep = REPR_HUM
     _dic = MNC_dict
     
+    # default to PLMN 001.01
+    DEFAULT_VAL = b'\x00\xf1\x10'
+    
     def __init__(self, *args, **kw):
         # element name in kw, or first args
         if len(args):
