@@ -231,7 +231,7 @@ class GNBd(object):
     # TODO
     
     def process_ngap_ue_pdu(self, pdu_rx, sid):
-        pass
+        return []
     
 
 
