@@ -997,6 +997,9 @@ class Atom(Element):
         else:
             return self.DEFAULT_VAL
     
+    # for atomic element, no dict to be returned, but just the standard value
+    get_val_d = get_val
+    
     def set_bl(self, bl=None):
         """Set the raw length in bits of self
         
@@ -1644,6 +1647,22 @@ class Envelope(Element):
             EltErr : if one element within the content raises
         """
         return [elt() for elt in self.__iter__()]
+    
+    def get_val_d(self):
+        """Returns the dict of element names and values of the content of self
+        Wanrning: in case several elements have the same name, the returned value 
+        won't be complete.
+        
+        Args:
+            None
+        
+        Returns:
+            value (dict) : dict of names and values
+        
+        Raises:
+            EltErr : if one element within the content raises
+        """
+        return {elt._name: elt.get_val_d() for elt in self.__iter__()}
     
     def set_bl(self, bl):
         """Set the raw bit length to the given elements of the content of self
@@ -2475,6 +2494,9 @@ class Array(Element):
             value (list) : array of values
         """
         return self._val
+    
+    # for array element, no dict to be returned, but just the standard list of values
+    get_val_d = get_val
     
     def set_num(self, num=None):
         """Set the raw number of iteration of the template in the array's value
@@ -3385,6 +3407,9 @@ class Sequence(Element):
             value (list) : list of values computed
         """
         return [elt() for elt in self._content]  
+    
+    # for array element, no dict to be returned, but just the standard list of values
+    get_val_d = get_val
     
     def set_num(self, num=None):
         """Set the raw number of iteration of the template in the sequence's 
@@ -4323,6 +4348,14 @@ class Alt(Element):
     
     def get_val(self):
         return self.get_alt().get_val()
+    
+    # for alt element, no dict to be returned, but just the standard list of values
+    def get_val_d(self):
+        alt = self.get_alt()
+        if isinstance(alt, Envelope):
+            return alt.get_val_d()
+        else:
+            return alt.get_val()
     
     def set_bl(self, bl=None):
         self.get_alt().set_bl(bl)
