@@ -417,13 +417,15 @@ class FGSIDType(Envelope):
 #------------------------------------------------------------------------------#
 
 FGSIDFMT_IMSI    = 0
-FGSIDFMT_NAI     = 1
+FGSIDFMT_NSI     = 1
+FGSIDFMT_GCI     = 2
+FGSIDFMT_GLI     = 3
 
 FGSIDFmt_dict    = {
-    0 : 'IMSI',
-    1 : 'Network specific identifier',
-    2 : 'GCI',
-    3 : 'GLI'
+    0 : 'IMSI', # 15 or 16 BCD
+    1 : 'Network specific identifier', # NAI: username@domainname
+    2 : 'GCI',  # NAI: username@domainname
+    3 : 'GLI'   # NAI: username@domainname
     }
 
 FGSIDTYPE_NO     = 0
