@@ -26,6 +26,7 @@ setup(
     scripts=["tools/pycrate_asn1compile.py",
              "tools/pycrate_berdecode.py",
              "tools/pycrate_showmedia.py",
+             "tools/pycrate_shownas.py",
              "tools/pycrate_map_op_info.py",
              ],
     
@@ -62,6 +63,6 @@ setup(
     description="A software suite to handle various data formats",
     long_description=open("README.md", "r").read(),
     url="https://github.com/P1sec/pycrate/",
-    keywords="protocol format asn1 compiler csn1 encoder decoder mobile core network Diameter NAS S1AP TCAP MAP",
+    keywords="protocol format asn1 compiler csn1 encoder decoder mobile core network Diameter NAS S1AP NGAP TCAP MAP",
     license="LGPL v2.1+",
     )
