@@ -4,7 +4,7 @@
 <registry xmlns="http://www.iana.org/assignments" id="radius-types">
   <title>RADIUS Types</title>
   <category>Radius Types</category>
-  <updated>2019-06-20</updated>
+  <updated>2019-11-12</updated>
   <note>The RFC "Remote Authentication Dial In User Service (RADIUS)"
 <xref type="rfc" data="rfc2865"/> defines a Packet Type Code and an Attribute Type 
 Code.  The IANA registry of these codes and subordinate
@@ -1256,19 +1256,19 @@ allocated from within the long extended space. See section 10.3.4 of <xref type=
       <value>241.9</value>
       <description>Softwire46-Configuration</description>
       <datatype>tlv</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.1</xref>
     </record>
     <record date="2019-06-18">
       <value>241.10</value>
       <description>Softwire46-Priority</description>
       <datatype>tlv</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.2</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.2</xref>
     </record>
     <record date="2019-06-18">
       <value>241.11</value>
       <description>Softwire46-Multicast</description>
       <datatype>tlv</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.3</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.3</xref>
     </record>
     <record>
       <value>241.{12-25}</value>
@@ -3167,139 +3167,139 @@ IEEE 802.22, Work in Progress.</xref>
   
   <registry id="softwire46-configuration-multicast-attributes">
     <title>RADIUS Softwire46 Configuration and Multicast Attributes</title>
-    <xref type="draft" data="RFC-ietf-softwire-map-radius-26"/>
+    <xref type="rfc" data="rfc8658"/>
     <registration_rule>Standards Action</registration_rule>
     <record date="2019-06-18">
       <value>0</value>
       <description>Reserved</description>
       <datatype/>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26"/>
+      <xref type="rfc" data="rfc8658"/>
     </record>
     <record date="2019-06-18">
       <value>1</value>
       <description>Softwire46-MAP-E</description>
       <datatype>tlv</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.1.1</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.1.1.1</xref>
     </record>
     <record date="2019-06-18">
       <value>2</value>
       <description>Softwire46-MAP-T</description>
       <datatype>tlv</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.1.2</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.1.1.2</xref>
     </record>
     <record date="2019-06-18">
       <value>3</value>
       <description>Softwire46-Lightweight-4over6</description>
       <datatype>tlv</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.1.3</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.1.1.3</xref>
     </record>
     <record date="2019-06-18">
       <value>4</value>
       <description>Softwire46-Rule (BMR)</description>
       <datatype>tlv</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.3.1</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.1.3.1</xref>
     </record>
     <record date="2019-06-18">
       <value>5</value>
       <description>Softwire46-Rule (FMR)</description>
       <datatype>tlv</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.3.1</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.1.3.1</xref>
     </record>
     <record date="2019-06-18">
       <value>6</value>
       <description>Softwire46-BR</description>
       <datatype>ipv6addr</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.3.2</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.1.3.2</xref>
     </record>
     <record date="2019-06-18">
       <value>7</value>
       <description>Softwire46-DMR</description>
       <datatype>ipv6prefix</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.3.3</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.1.3.3</xref>
     </record>
     <record date="2019-06-18">
       <value>8</value>
       <description>Softwire46-V4V6Bind</description>
       <datatype>tlv</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.3.4</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.1.3.4</xref>
     </record>
     <record date="2019-06-18">
       <value>9</value>
       <description>Softwire46-PORTPARAMS</description>
       <datatype>tlv</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.3.5</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.1.3.5</xref>
     </record>
     <record date="2019-06-18">
       <value>10</value>
       <description>Rule-IPv6-Prefix</description>
       <datatype>ipv6prefix</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.4.1</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.1.4.1</xref>
     </record>
     <record date="2019-06-18">
       <value>11</value>
       <description>Rule-IPv4-Prefix</description>
       <datatype>ipv4prefix</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.4.2</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.1.4.2</xref>
     </record>
     <record date="2019-06-18">
       <value>12</value>
       <description>EA-Length</description>
       <datatype>integer</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.4.3</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.1.4.3</xref>
     </record>
     <record date="2019-06-18">
       <value>13</value>
       <description>IPv4-Address</description>
       <datatype>ipv4addr</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.5.1</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.1.5.1</xref>
     </record>
     <record date="2019-06-18">
       <value>14</value>
       <description>Bind-IPv6-Prefix</description>
       <datatype>ipv6prefix</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.5.2</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.1.5.2</xref>
     </record>
     <record date="2019-06-18">
       <value>15</value>
       <description>PSID-Offset</description>
       <datatype>integer</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.6.1</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.1.6.1</xref>
     </record>
     <record date="2019-06-18">
       <value>16</value>
       <description>PSID-Len</description>
       <datatype>integer</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.6.2</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.1.6.2</xref>
     </record>
     <record date="2019-06-18">
       <value>17</value>
       <description>PSID</description>
       <datatype>integer</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.1.6.3</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.1.6.3</xref>
     </record>
     <record date="2019-06-18">
       <value>18</value>
       <description>Softwire46-Option-Code</description>
       <datatype>integer</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.2.1</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.2.1</xref>
     </record>
     <record date="2019-06-18">
       <value>19</value>
       <description>ASM-Prefix64</description>
       <datatype>ipv6prefix</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.3.1</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.3.1</xref>
     </record>
     <record date="2019-06-18">
       <value>20</value>
       <description>SSM-Prefix64</description>
       <datatype>ipv6prefix</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.3.2</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.3.2</xref>
     </record>
     <record date="2019-06-18">
       <value>21</value>
       <description>U-Prefix64</description>
       <datatype>ipv6prefix</datatype>
-      <xref type="draft" data="RFC-ietf-softwire-map-radius-26">RFC-ietf-softwire-map-radius-26, Section 3.3.3</xref>
+      <xref type="rfc" data="rfc8658">RFC8658, Section 3.3.3</xref>
     </record>
     <record>
       <value>22-255</value>
@@ -3310,7 +3310,7 @@ IEEE 802.22, Work in Progress.</xref>
   
   <registry id="option-codes-softwire46-priority-attribute">
     <title>Option Codes Permitted in the Softwire46-Priority Attribute</title>
-    <xref type="draft" data="RFC-ietf-softwire-map-radius-26"/>
+    <xref type="rfc" data="rfc8658"/>
     <registration_rule>IETF Review</registration_rule>
     <record date="2019-06-18">
       <value>1</value>

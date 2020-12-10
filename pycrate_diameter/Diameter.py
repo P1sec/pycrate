@@ -72,18 +72,8 @@ from pycrate_core.utils import *
 from pycrate_core.elt   import *
 from pycrate_core.base  import *
 from pycrate_core.repr  import *
-
-try:
-    from .parse_iana_diameter_xml import *
-    AVPRadCodes_dict = build_dict_from_xml(FILENAME_radius_types)
-    AppID_dict, Cmd_dict, AVPDiamCodes_dict, AVPSpecVal_dict = build_dict_from_xml(FILENAME_aaa_parameters)
-    AddrFamNums_dict = build_dict_from_xml(FILENAME_address_family_numbers)
-    AVPCodes_dict = dict(AVPRadCodes_dict)
-    AVPCodes_dict.update(AVPDiamCodes_dict)
-except Exception as err:
-    log('warning: unable to extract Diameter dict from xml files, %s' % err)
-    AppID_dict, Cmd_dict, AVPCodes_dict, AVPSpecVal_dict = {}, {}, {}, {}
-    AddrFamNums_dict = {}
+#
+from pycrate_diameter.iana_diameter_dicts import *
 
 
 #------------------------------------------------------------------------------#

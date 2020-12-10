@@ -45,15 +45,15 @@ setup(
     # to be installed 
     # only compiled .py modules are installed by default
     # for pycrate_diameter:
-    # .xml files are required as they are transformed into Python dict when the
-    # module is loaded
+    # .xml files are converted to Python dicts and may be updated from time to 
+    # time
     # for pycrate_corenet:
     # the AuC.db file is the mobile subscriber authentication database 
     # containing Ki and is required at runtime when using corenet
     package_data={
         #"pycrate_asn1dir"  : ["*.asn", "*.json"],
         #"pycrate_csn1dir"  : ["*.csn"],
-        "pycrate_diameter" : ["*.xml"],
+        #"pycrate_diameter" : ["*.xml"],
         "pycrate_corenet"  : ["AuC.db"],
         },
     #include_package_data=False,

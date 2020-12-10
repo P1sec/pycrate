@@ -3,7 +3,7 @@
 <?oxygen RNGSchema="address-family-numbers.rng" type="xml"?>
 <registry xmlns="http://www.iana.org/assignments" id="address-family-numbers">
   <title>Address Family Numbers</title>
-  <updated>2018-04-02</updated>
+  <updated>2020-05-12</updated>
   <registry id="address-family-numbers-2">
     <title>Address Family Numbers</title>
     <xref type="rfc" data="rfc2453"/>
@@ -278,8 +278,20 @@ must be updated as defined in <xref type="rfc" data="rfc8294"/>.
       <xref type="rfc" data="rfc7455"/>
       <registration>2014-09-02</registration>
     </record>
+    <record date="2019-11-04">
+      <value>16397</value>
+      <description>Universally Unique Identifier (UUID)</description>
+      <xref type="person" data="Nischal_Sheth"/>
+      <registration>2019-11-04</registration>
+    </record>
+    <record date="2020-05-12">
+      <value>16398</value>
+      <description>Routing Policy AFI</description>
+      <xref type="draft" data="draft-ietf-idr-rpd-02"/>
+      <registration>2020-05-12</registration>
+    </record>
     <record>
-      <value>16397-65534</value>
+      <value>16399-65534</value>
       <description>Unassigned</description>
       
       <registration/>
@@ -320,6 +332,11 @@ must be updated as defined in <xref type="rfc" data="rfc8294"/>.
       <name>Mike Saul</name>
       <uri>mailto:mike&amp;nentat.com</uri>
       <updated>2000-09</updated>
+    </person>
+    <person id="Nischal_Sheth">
+      <name>Nischal Sheth</name>
+      <uri>mailto:nischal.sheth&amp;gmail.com</uri>
+      <updated>2019-11-04</updated>
     </person>
     <person id="Subra_Hegde">
       <name>Subra Hegde</name>

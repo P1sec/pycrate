@@ -5,7 +5,7 @@
   <title>Authentication, Authorization, and Accounting (AAA) Parameters</title>
   <category>Authentication, Authorization, and Accounting (AAA) Parameters</category>
   <created>2003-04-08</created>
-  <updated>2019-07-12</updated>
+  <updated>2019-08-28</updated>
   
   
   <registry id="aaa-parameters-1">
@@ -1720,27 +1720,27 @@
     <record date="2017-03-24">
       <code>648</code>
       <name>OC-Peer-Algo</name>
-      <xref type="draft" data="RFC-ietf-dime-agent-overload-11"/>
+      <xref type="rfc" data="rfc8581"/>
     </record>
     <record date="2017-03-24">
       <code>649</code>
       <name>SourceID</name>
-      <xref type="draft" data="RFC-ietf-dime-agent-overload-11"/>
+      <xref type="rfc" data="rfc8581"/>
     </record>
     <record date="2017-03-24">
       <code>650</code>
       <name>Load</name>
-      <xref type="draft" data="RFC-ietf-dime-load-09"/>
+      <xref type="rfc" data="rfc8583"/>
     </record>
     <record date="2017-03-24">
       <code>651</code>
       <name>Load-Type</name>
-      <xref type="draft" data="RFC-ietf-dime-load-09"/>
+      <xref type="rfc" data="rfc8583"/>
     </record>
     <record date="2017-03-24">
       <code>652</code>
       <name>Load-Value</name>
-      <xref type="draft" data="RFC-ietf-dime-load-09"/>
+      <xref type="rfc" data="rfc8583"/>
     </record>
     <record date="2018-08-29">
       <code>653</code>
@@ -1830,7 +1830,7 @@
     <record date="2019-02-27">
       <code>670</code>
       <name>OC-Maximum-Rate</name>
-      <xref type="draft" data="RFC-ietf-dime-doic-rate-control-11"/>
+      <xref type="rfc" data="rfc8582"/>
     </record>
     <record>
       <code>671-16777215</code>
@@ -3555,7 +3555,7 @@
       <record date="2019-02-27">
         <value>0x0000000000000004</value>
         <name>OLR_RATE_ALGORITHM</name>
-        <xref type="draft" data="RFC-ietf-dime-doic-rate-control-11"/>
+        <xref type="rfc" data="rfc8582"/>
       </record>
       <record>
         <value>0x0000000000000008</value>
@@ -3564,7 +3564,7 @@
       <record date="2019-04-10">
         <value>0x0000000000000010</value>
         <name>OC_PEER_REPORT</name>
-        <xref type="draft" data="RFC-ietf-dime-agent-overload-11"/>
+        <xref type="rfc" data="rfc8581"/>
       </record>
       <record>
         <value>0x0000000000000020-0xFFFFFFFFFFFFFFFF</value>
@@ -3589,7 +3589,7 @@
       <record date="2019-04-10">
         <value>2</value>
         <name>PEER_REPORT</name>
-        <xref type="draft" data="RFC-ietf-dime-agent-overload-11"/>
+        <xref type="rfc" data="rfc8581"/>
       </record>
       <record>
         <value>3-4294967295</value>
@@ -4529,8 +4529,14 @@ Authorization</name>
       <name>Ericsson Charging - SBI Policy</name>
       <xref type="person" data="S.Dhanalakshmi"/>
     </record>
+    <record date="2019-08-28">
+      <value>16777360</value>
+      <name>GSMA-DESS</name>
+	  <xref type="uri" data="https://infocentre2.gsma.com">GSMA PRD FS.19</xref>
+      <xref type="person" data="Wayne_Cutler"/>
+    </record>
     <record>
-      <value>16777360-4294967294</value>
+      <value>16777361-4294967294</value>
       <name>Unassigned</name>
     </record>
     <record>
@@ -5514,8 +5520,20 @@ Authorization</name>
       <xref type="uri" data="http://www.3gpp.org/ftp/Specs/">3GPP TS 29.154</xref>
       <xref type="person" data="Kimmo_Kymalainen"/>
     </record>
+    <record date="2019-08-28">
+      <value>8388737</value>
+      <name>DESS-DTLS-Handshake-Client-Request/Response</name>
+      <xref type="uri" data="https://infocentre2.gsma.com">GSMA PRD FS.19</xref>
+      <xref type="person" data="Wayne_Cutler"/>
+    </record>
+    <record date="2019-08-28">
+      <value>8388738</value>
+      <name>DESS-DTLS-Handshake-Server-Request/Response</name>
+      <xref type="uri" data="https://infocentre2.gsma.com">GSMA PRD FS.19</xref>
+      <xref type="person" data="Wayne_Cutler"/>
+    </record>
     <record>
-      <value>8388737-16777213</value>
+      <value>8388739-16777213</value>
       <name>Unassigned</name>
     </record>
     <record>
@@ -5944,6 +5962,11 @@ Authorization</name>
       <name>Vitaly Dzhitenov</name>
       <uri>mailto:vitaly&amp;juniper.net</uri>
       <updated>2014-10-29</updated>
+    </person>
+    <person id="Wayne_Cutler">
+      <name>Wayne Cutler</name>
+      <uri>mailto:wcutler&amp;gsma.com</uri>
+      <updated>2019-08-28</updated>
     </person>
     <person id="Yoni_Eitan">
       <name>Yoni Eitan</name>

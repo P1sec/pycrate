@@ -27,5 +27,5 @@
 # *--------------------------------------------------------
 #*/
 #
-__all__ = ['Diameter', 'DiameterIETF', 'Diameter3GPP']
+__all__ = ['Diameter', 'DiameterIETF', 'Diameter3GPP', 'iana_diameter_dicts']
 __version__ = '0.4.0'
