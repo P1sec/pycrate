@@ -620,7 +620,9 @@ class ASN1Obj(Element):
             const['tab_at']   = self._const_tab_at
         return const
     
-    def get_proto(self, w_open=True, w_opt=False, print_recurs=False, blacklist=set()):
+    def get_proto(self, w_open=True, w_opt=False, w_enum=False,
+                        print_recurs=False,
+                        blacklist=set()):
         """
         returns the prototype of the object
         
@@ -629,6 +631,8 @@ class ASN1Obj(Element):
                           if True, inspect the content of OPEN objects
             w_opt       : bool
                           if True, add (OPT) to every optional component name
+            w_enum      : bool
+                          if True, lists the content of the ENUMERATED
             print_recurs: bool,
                           if True, prints paths that lead to recursion
             blacklist   : set of str,
@@ -663,6 +667,7 @@ class ASN1Obj(Element):
                         cont[ident] = Comp.get_proto(
                             w_open,
                             w_opt,
+                            w_enum,
                             print_recurs,
                             blacklist)
                         del Comp._proto_recur, Comp._proto_path
@@ -689,6 +694,7 @@ class ASN1Obj(Element):
                         cont[ident_ret] = Comp.get_proto(
                             w_open,
                             w_opt,
+                            w_enum,
                             print_recurs,
                             blacklist)
                         del Comp._proto_recur, Comp._proto_path
@@ -711,6 +717,7 @@ class ASN1Obj(Element):
                     self._cont.get_proto(
                         w_open,
                         w_opt,
+                        w_enum,
                         print_recurs,
                         blacklist)
                     )
@@ -731,10 +738,18 @@ class ASN1Obj(Element):
                     self._const_cont.get_proto(
                         w_open,
                         w_opt,
+                        w_enum,
                         print_recurs,
                         blacklist)
                     )
                 del Comp._proto_recur, Comp._proto_path
+        #
+        elif self.TYPE == TYPE_ENUM and w_enum:
+            enum = self._root[:]
+            if self._ext is not None:
+                enum.append('...')
+                enum.extend(self._ext)
+            ret = (self.TYPE, enum)
         #
         else:
             assert( self.TYPE in TYPES_BASIC + TYPES_EXT )
