@@ -44,8 +44,8 @@ from pycrate_mobile.TS29002_MAPAppCtx   import *
 # but call get_proto() for SEQUENCE / SET inner components
 PRINT_PROTO_EXTCONTAINER = False
 
+SPACE_MARGIN    = '    '
 SPACE_CONSTRUCT = '    '
-SPACE_ERR       = SPACE_CONSTRUCT + '  '
 
 TYPE_CONSTRUCT = {
     TYPE_SEQ,
@@ -62,41 +62,48 @@ def get_error_info(err, info, wext=True):
     if 'ParameterType' in err:
         par = err['ParameterType']
         info.append('    ParameterType: %s (%s)' % (par._typeref.called[1], par.TYPE))
-        get_construct_info(par, info, wext=wext, space=SPACE_ERR)
+        get_construct_info(par, info, wext=wext, space=SPACE_CONSTRUCT)
     info.append('')
 
 
-def get_construct_info(seq, info, wext=True, space=SPACE_CONSTRUCT):
+def get_construct_info(obj, info, wext=True, space=SPACE_CONSTRUCT):
     if PRINT_PROTO_EXTCONTAINER:
         bl = set()
     else:
         bl = set(('extensionContainer', ))
     #
-    if seq.TYPE in (TYPE_SEQ, TYPE_SET):
-        for c in seq._cont.values():
-            info.append(space + '- %s (%s)' % (c._name, c.TYPE))
+    if obj.TYPE in (TYPE_SEQ, TYPE_SET):
+        for c in obj._cont.values():
+            info.append(SPACE_MARGIN + '- %s (%s)' % (c._name, c.TYPE))
             if wext and c.TYPE in TYPE_CONSTRUCT and \
             (c._name != 'extensionContainer' or PRINT_PROTO_EXTCONTAINER):
-                info.append( 2*space + pp.pformat(
+                info.append( SPACE_MARGIN + space + pp.pformat(
                     c.get_proto(w_open=wext, w_opt=wext, w_enum=wext, blacklist=bl)[1]
-                    ).replace('\n', '\n    ' + space) )
-        info.append(space + 'mandatory : %s' % ', '.join(seq._root_mand))
+                    ).replace('\n', '\n' + SPACE_MARGIN + space) )
+        info.append(space + 'mandatory : %s' % ', '.join(obj._root_mand))
     #
-    elif seq.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
-        c = seq._cont
-        info.append(space + '- %s (%s)' % (c._typeref.called[1], c.TYPE))
+    elif obj.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
+        c = obj._cont
+        info.append(SPACE_MARGIN + '- %s (%s)' % (c._typeref.called[1], c.TYPE))
         if wext and c.TYPE in TYPE_CONSTRUCT:
-            info.append( 2*space + pp.pformat(
+            info.append( SPACE_MARGIN + space + pp.pformat(
                 c.get_proto(w_open=wext, w_opt=wext, w_enum=wext, blacklist=bl)[1]
-                ).replace('\n', '\n    ' + space) )
+                ).replace('\n', '\n' + SPACE_MARGIN + space) )
     #
-    elif seq.TYPE == TYPE_CHOICE:
-        for c in seq._cont.values():
-            info.append(space + '- %s (%s)' % (c._name, c.TYPE))
+    elif obj.TYPE == TYPE_CHOICE:
+        for c in obj._cont.values():
+            info.append(SPACE_MARGIN + '- %s (%s)' % (c._name, c.TYPE))
             if wext and c.TYPE in TYPE_CONSTRUCT:
-                info.append( 2*space + pp.pformat(
+                info.append( SPACE_MARGIN + space + pp.pformat(
                     c.get_proto(w_open=wext, w_opt=wext, w_enum=wext, blacklist=bl)[1]
-                    ).replace('\n', '\n    ' + space) )
+                    ).replace('\n', '\n' + SPACE_MARGIN + space) )
+    #
+    elif obj.TYPE == TYPE_ENUM and wext:
+        cont = obj._root[:]
+        if obj._ext is not None:
+            cont.append('...')
+            cont.extend(obj._ext)
+        info.append( SPACE_MARGIN + space + repr(cont) )
 
 
 def show_infos(val, werr, wext):
