@@ -27,8 +27,46 @@
 # *--------------------------------------------------------
 #*/
 
-#__all__ = [
-#    ]
+__all__ = [
+    "FGMMHeader",
+    "FGMMHeaderSec",
+    "FGMMAuthenticationRequest",
+    "FGMMAuthenticationResponse",
+    "FGMMAuthenticationResult",
+    "FGMMAuthenticationFailure",
+    "FGMMAuthenticationReject",
+    "FGMMRegistrationRequest",
+    "FGMMRegistrationAccept",
+    "FGMMRegistrationComplete",
+    "FGMMRegistrationReject",
+    "FGMMULNASTransport",
+    "FGMMDLNASTransport",
+    "FGMMMODeregistrationRequest",
+    "FGMMMODeregistrationAccept",
+    "FGMMMTDeregistrationRequest",
+    "FGMMMTDeregistrationAccept",
+    "FGMMServiceRequest",
+    "FGMMServiceAccept",
+    "FGMMServiceReject",
+    "FGMMConfigurationUpdateCommand",
+    "FGMMConfigurationUpdateComplete",
+    "FGMMIdentityRequest",
+    "FGMMIdentityResponse",
+    "FGMMNotification",
+    "FGMMNotificationResponse",
+    "FGMMSecurityModeCommand",
+    "FGMMSecurityModeComplete",
+    "FGMMSecurityModeReject",
+    "FGMMSecProtNASMessage",
+    "FGMMSecProtNASMessage",
+    "FGMMStatus",
+    "FGMMControlPlaneServiceRequest",
+    "FGMMNetworkSliceSpecAuthCommand",
+    "FGMMNetworkSliceSpecAuthComplete",
+    "FGMMNetworkSliceSpecAuthResult",
+    "FGMMTypeClasses",
+    "get_5gmm_msg_instances"
+    ]
 
 #------------------------------------------------------------------------------#
 # 3GPP TS 24.501: NAS protocol for 5G
@@ -219,7 +257,7 @@ class FGMMAuthenticationReject(Layer3E):
     _name = '5GMMAuthenticationReject'
     _GEN = (
         FGMMHeader(val={'Type':88}),
-        Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'})
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'})
         )
 
 
