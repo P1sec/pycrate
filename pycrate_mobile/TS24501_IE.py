@@ -1761,7 +1761,7 @@ class UESecCap(Envelope):
         Uint('EIA5', bl=1),
         Uint('EIA6', bl=1),
         Uint('EIA7', bl=1), # end of octet 4 (optional part)
-        Buf('spare', val=b'', rep=REPR_HEX)
+        Buf('spare', val=b'', rep=REPR_HEX, trans=True)
         )
     
     def _from_char(self, char):
@@ -1952,6 +1952,8 @@ class FGSMCap(Envelope):
 
 _FGSMCause_dict = {
     8 : 'Operator determined barring',
+    23 : 'UE security capabilities mismatch', # for NAS Security Mode Reject
+    24 : 'Security mode rejected, unspecified', # for NAS Security Mode Reject
     26 : 'Insufficient resources',
     27 : 'Missing or unknown DNN',
     28 : 'Unknown PDU session type',
