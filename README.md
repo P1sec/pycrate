@@ -46,19 +46,22 @@ Dependencies
 ------------
 
 Currently none. Only the Python builtins and few internal modules of Python 
-(e.g. os, system, re, struct) are required for most of the features. The json internal
-module is required for supporting the JSON API.
+(e.g. os, system, re, struct, datetime) are required for most of the features. 
+The json internal module is required for supporting the JSON API.
 
-The pycrate_ether/SCTP module can optionally use the external crc32c module from 
-ICRAR.
+The _pycrate\_ether/SCTP_ module can optionally use the external 
+[crc32c](https://pypi.org/project/crc32c/) module from ICRAR.
 
-The pycrate_mobile/TS24301_EMM and pycrate_mobile/TS24501_FGMM modules use 
-CryptoMobile as optional dependency to cipher / decipher LTE and 5G NAS messages.
+The _pycrate\_mobile/TS24301\_EMM_ and _pycrate\_mobile/TS24501\_FGMM_ modules use 
+[CryptoMobile](https://github.com/p1sec/CryptoMobile) as optional dependency to 
+cipher / decipher LTE and 5G NAS messages.
 
-The pycrate_diameter part uses lxml as optional dependency to translate xml files
-from IANA as Python dictionnaries when the diameter module is loaded.
+The _pycrate\_diameter/parse\_iana\_diameter\_xml.py_ file uses 
+[lxml](https://pypi.org/project/lxml/) to translate xml files from IANA to Python 
+dictionnaries ; this is however not required for standard runtime.
 
-The pycrate_corenet part requires pysctp and CryptoMobile to run.
+The _pycrate\_corenet_ part requires [pysctp](https://pypi.org/project/pysctp/) 
+and [CryptoMobile](https://github.com/p1sec/CryptoMobile) to run.
 
 
 Automatic installation
@@ -70,6 +73,10 @@ It installs the library within your Python package directory:
 ```
 python setup.py install
 ```
+
+Run it as superuser for a system-wide install, or as-is for a user home-directory 
+level install. You can also run _develop_ instead of _install_ if you want a 
+developer-friendly installation.
 
 It is also possible to test the library before installing it
 (this will create two local directories *./test_asn/* and *./pycrate.egg-info/* that
@@ -93,8 +100,8 @@ should have been compiled with the latest version of the compiler):
 python -m pycrate_asn1c.asnproc
 ```
 
-More generally, installation is not required, and simply having all pycrate_* subdirectories
-into the PYTHONPATH enables to use the complete library.
+More generally, installation is not required, and simply having all _pycrate\_*_ 
+subdirectories into the PYTHONPATH enables to use the entire library.
 
 
 Contributing
@@ -304,6 +311,8 @@ pycrate_diameter
 ----------------
 
 This subdirectory contains the following modules:
+* *parse_iana_diameter_xml*: to translate XML Diameter structures from IANA to Python
+* *iana_diameter_dicts.py*: that is automatically created by the former, containing Diameter Python dicts
 * *Diameter*: a generic Diameter module which implements DiameterGeneric and AVPGeneric structures
 * *DiameterIETF*: a Diameter module which relies on AVP types provided in all IETF RFC
 * *Diameter3GPP*: a Diameter module which relies on AVP types provided in all 3GPP TS
@@ -330,8 +339,9 @@ Usage
 Most of the modules have doc strings. I try also to write readable sources and to
 comment them as much as possible for understanding them easily (and to allow also
 myself to understand my own code years after...).
-A wiki is provided and extended from time to time, to bring examples and methods on 
-how to use the different modules (any contribution on this would be very welcome, too).
+A [wiki](https://github.com/p1sec/pycrate/wiki/The-pycrate-wiki) is provided 
+and extended from time to time, to bring examples and methods on how to use the 
+different modules (any contribution on this would be very welcome, too).
 Finally, the code provided in the *test/* subdirectory is also representative on
 how to use the different modules.
 
@@ -376,7 +386,7 @@ Four different tools are provided (yet):
 * *pycrate_berdecode.py* parses any BER/CER/DER encoded binary value of ASN.1 
    objects and prints the corresponding structure.
 * *pycrate_map_op_info.py* prints prototypes and various information related to
-   MAP (Mobile Application Part) operations and application-contexts.
+   TCAP and MAP (Mobile Application Part) operations and application-contexts.
 
 
 Examples
@@ -463,19 +473,31 @@ choice.
 
 ```console
 $ ./tools/pycrate_asn1compile.py --help
-usage: pycrate_asn1compile.py [-h] [-i INPUT [INPUT ...]] [-o OUTPUT]
-                              [-fautotags] [-fextimpl] [-fverifwarn]
+usage: pycrate_asn1compile.py [-h] [-s SPEC] [-i INPUT [INPUT ...]] [-o OUTPUT] [-g GENERATOR_PATH] [-j] [-fautotags] [-fextimpl] [-fverifwarn]
 
 compile ASN.1 input file(s) for the pycrate ASN.1 runtime
 
 optional arguments:
   -h, --help            show this help message and exit
+  -s SPEC               provide a specification shortname, instead of ASN.1 input file(s)
   -i INPUT [INPUT ...]  ASN.1 input file(s) or directory
-  -o OUTPUT             compiled output Python source file
+  -o OUTPUT             compiled output Python (and json) source file(s)
+  -g GENERATOR_PATH, --generator GENERATOR_PATH
+                        provide an alternative python generator file path
+  -j                    output a json file with information on ASN.1 objects dependency
   -fautotags            force AUTOMATIC TAGS for all ASN.1 modules
   -fextimpl             force EXTENSIBILITY IMPLIED for all ASN.1 modules
-  -fverifwarn           force warning instead of raising during the
-                        verification stage
+  -fverifwarn           force warning instead of raising during the verification stage
+
+$ ./tools/pycrate_asn1compile.py -i ./test/res/Hardcore.asn -o Hardcore
+[proc] [./test/res/Hardcore.asn] module HardcoreSyntax (oid: []): 116 ASN.1 assignments found
+--- compilation cycle ---
+--- compilation cycle ---
+--- compilation cycle ---
+--- verifications ---
+[proc] ASN.1 modules processed: ['HardcoreSyntax']
+[proc] ASN.1 objects compiled: 75 types, 3 sets, 37 values
+[proc] done
 ```
 
 After compiling a module, it is possible to load it in Python and use it for
@@ -485,47 +507,48 @@ encoding / decoding any objects defined in it.
 Python 3.4.3 (default, Nov 17 2016, 01:08:31) 
 [GCC 4.8.4] on linux
 Type "help", "copyright", "credits" or "license" for more information.
+>>> from Hardcore import HardcoreSyntax
 >>> HardcoreSyntax # this is the only ASN.1 module provided in Hardcore.asn
 <class 'Hardcore.HardcoreSyntax'>
 >>> Final = HardcoreSyntax.Final # this is the Final object defined at line 115
 >>> Final
 <Final (SEQUENCE)>
 >>> Final.get_proto() # warning: this can return very laaaaaaarge definitions
-{
-w1: {
- r10: {
+('SEQUENCE', {
+w1: ('SEQUENCE', {
+ r10: ('SEQUENCE', {
   low: 'INTEGER',
   high: 'INTEGER',
   bool: 'BOOLEAN',
-  null: 'NULL'
-  },
- r90: {
+  null (OPT): 'NULL'
+  }),
+ r90: ('SEQUENCE', {
   low: 'INTEGER',
   high: 'INTEGER',
   bool: 'BOOLEAN',
-  null: 'NULL'
-  }
- },
-w2: {
- r10: {
+  null (OPT): 'NULL'
+  })
+ }),
+w2: ('SEQUENCE', {
+ r10: ('SEQUENCE', {
   low: 'INTEGER',
   high: 'INTEGER',
   bool: 'BOOLEAN',
-  null: 'NULL'
-  },
- r90: {
+  null (OPT): 'NULL'
+  }),
+ r90: ('SEQUENCE', {
   low: 'INTEGER',
   high: 'INTEGER',
   bool: 'BOOLEAN',
-  null: 'NULL'
-  }
- },
+  null (OPT): 'NULL'
+  })
+ }),
 bool: 'BOOLEAN'
-}
->>> V = { \
-... 'w1':{'r10':{'low':5, 'high':50, 'bool':False}, 'r90':{'low':50, 'high':95, 'bool':False, 'null':0}}, \
-... 'w2':{'r10':{'low':1, 'high':10, 'bool':False}, 'r90':{'low':90, 'high':100, 'bool':True}}, \
-... 'bool': True})
+})
+>>> V = {
+... 'w1':{'r10':{'low':5, 'high':50, 'bool':False}, 'r90':{'low':50, 'high':95, 'bool':False, 'null':0}},
+... 'w2':{'r10':{'low':1, 'high':10, 'bool':False}, 'r90':{'low':90, 'high':100, 'bool':True}},
+... 'bool': True}
 >>> Final.set_val(V)
 >>> print(Final.to_asn1()) # .to_asn1() returns a printable ASN.1 representation of the value
 {
@@ -573,4 +596,4 @@ True
 
 For more information about the API exposed for each ASN.1 object, you can check
 the docstrings of all ASN.1 objects, and also read the source file *pycrate_asn1rt/asnobj.py*.
-Do not forget to have a look at the Wiki, too!
+Do not forget to have a look at the [wiki](https://github.com/p1sec/pycrate/wiki/The-pycrate-wiki), too!
