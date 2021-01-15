@@ -1,11 +1,12 @@
 What is pycrate
 ===============
 
-Pycrate is a french word for qualifying bad wine.
-The present software library has nothing to do with bad wine, it is simply a
-Python library for manipulating various digital formats in an easy way.
+Pycrate is a french word for qualifying bad wine (when it's close to vinegar !).
+The present software library has nothing to do with wine (except it is developped in France), 
+it is simply a Python library for manipulating various digital formats in an easy way,
+with a funny name.
 It is the glorious successor of [libmich](https://github.com/mitshell/libmich), 
-which was started 8 years ago and served well.
+which was started back in 2009, served well and retired in 2017.
 
 It provides basically a runtime for encoding and decoding data structures, including
 CSN.1 and ASN.1. Additionally, it features a 3G and LTE mobile core network.
@@ -504,8 +505,8 @@ After compiling a module, it is possible to load it in Python and use it for
 encoding / decoding any objects defined in it.
 
 ```python
-Python 3.4.3 (default, Nov 17 2016, 01:08:31) 
-[GCC 4.8.4] on linux
+Python 3.8.5 (default, Jul 28 2020, 12:59:40) 
+[GCC 9.3.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>> from Hardcore import HardcoreSyntax
 >>> HardcoreSyntax # this is the only ASN.1 module provided in Hardcore.asn
