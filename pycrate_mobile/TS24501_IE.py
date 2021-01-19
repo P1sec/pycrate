@@ -432,7 +432,7 @@ FGSIDTYPE_NO     = 0
 FGSIDTYPE_SUPI   = 1
 FGSIDTYPE_GUTI   = 2
 FGSIDTYPE_IMEI   = 3
-FGSIDTYPE_TMSI   = 4
+FGSIDTYPE_STMSI  = 4
 FGSIDTYPE_IMEISV = 5
 FGSIDTYPE_MAC    = 6
 FGSIDTYPE_EUI64  = 7
@@ -571,13 +571,12 @@ class FGSIDDigit(Envelope):
         )
 
 
-class FGSIDTMSI(Envelope):
-    _name = '5GSIDTMSI'
+class FGSIDSTMSI(Envelope):
+    _name = '5GSIDSTMSI'
     _GEN = (
         Uint('ind', val=0xf, bl=4, rep=REPR_HEX),
         Uint('spare', bl=1),
-        Uint('Type', val=FGSIDTYPE_TMSI, bl=3, dic=FGSIDType_dict),
-        Uint8('AMFRegionID'),
+        Uint('Type', val=FGSIDTYPE_STMSI, bl=3, dic=FGSIDType_dict),
         Uint('AMFSetID', bl=10),
         Uint('AMFPtr', bl=6),
         Uint32('5GTMSI', rep=REPR_HEX)
@@ -619,7 +618,7 @@ class FGSID(Envelope):
         FGSIDTYPE_SUPI   : FGSIDSUPI(),
         FGSIDTYPE_GUTI   : FGSIDGUTI(),
         FGSIDTYPE_IMEI   : FGSIDDigit('5GSIDIMEI'),
-        FGSIDTYPE_TMSI   : FGSIDTMSI(),
+        FGSIDTYPE_STMSI  : FGSIDSTMSI(),
         FGSIDTYPE_IMEISV : FGSIDDigit('5GSIDIMEISV'),
         FGSIDTYPE_MAC    : FGSIDMAC(),
         FGSIDTYPE_EUI64  : FGSIDEUI64()
@@ -637,7 +636,7 @@ class FGSID(Envelope):
                 FGSIDTYPE_GUTI,
                 FGSIDTYPE_IMEI,
                 FGSIDTYPE_IMEISV,
-                FGSIDTYPE_TMSI,
+                FGSIDTYPE_STMSI,
                 FGSIDTYPE_MAC):
                 self.encode(vals[2])
             elif len(vals) >= 2 and vals[1] in (FGSIDTYPE_EUI64, FGSIDTYPE_NO):
@@ -667,7 +666,7 @@ class FGSID(Envelope):
         FGSIDTYPE_SUPI (1)   -> FGSIDSUPI
         FGSIDTYPE_GUTI (2)   -> FGSIDGUTI
         FGSIDTYPE_IMEI (3)   -> FGSIDDigit
-        FGSIDTYPE_TMSI (4)   -> FGSIDTMSI
+        FGSIDTYPE_STMSI (4)  -> FGSIDSTMSI
         FGSIDTYPE_IMEISV (5) -> FGSIDDigit
         FGSIDTYPE_MAC (6)    -> FGSIDMAC
         FGSIDTYPE_EUI64 (7)  -> FGSIDEUI64
