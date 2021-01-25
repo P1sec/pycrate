@@ -73,8 +73,6 @@ class Layer3(Envelope):
     # this needs to be set to True for 2G RR signaling message (due to rest octets)
     DEC_BREAK_ON_UNK_IE = False
     
-    
-    
     def __init__(self, *args, **kw):
         if 'val' in kw:
             val = kw['val']
@@ -104,23 +102,9 @@ class Layer3(Envelope):
                     self._rest = ie
         else:
             for ie in self._content:
-                '''
-                if isinstance(ie, (Type1V, Type1TV)):
-                    rawtype = integer_types
-                else:
-                    rawtype = bytes_types
-                '''
                 if isinstance(ie, (Type1V, Type3V, Type4LV, Type6LVE)) and ie._name in val:
                     # setting value for non-optional IE
                     ie.set_val({'V': val[ie._name]})
-                    '''
-                    if isinstance(val[ie._name], rawtype):
-                        # setting raw value
-                        ie['V'].set_val(val[ie._name])
-                    else:
-                        # setting embedded IE structure
-                        ie.set_IE(val=val[ie._name])
-                    '''
                 elif isinstance(ie, (Type1TV, Type3TV, Type4TLV, Type6TLVE)):
                     # optional IE
                     T = ie[0]
@@ -128,14 +112,6 @@ class Layer3(Envelope):
                     if ie._name in val:
                         ie._trans = False
                         ie.set_val({'V': val[ie._name]})
-                        '''
-                        if isinstance(val[ie._name], rawtype):
-                            # setting raw value
-                            ie['V'].set_val(val[ie._name])
-                        else:
-                            # setting embedded IE structure
-                            ie.set_IE(val=val[ie._name])
-                        '''
                 elif isinstance(ie, Type2):
                     # optional Tag-only IE
                     self._opts.append( (8, ie[0](), ie) )
