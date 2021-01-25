@@ -292,7 +292,7 @@ class ENBd(object):
         if enb_ue_id is None or not nas_pdu or not tai:
             # missing mandatory IE
             return None, enb_ue_id
-        plmn = plmn_buf_to_str(tai['pLMNidentity'])
+        #plmn = plmn_buf_to_str(tai['pLMNidentity'])
         if s_tmsi:
             # use the S1AP S-TMSI
             return self.Server.get_ued(mtmsi=bytes_to_uint(s_tmsi['m-TMSI'], 32)), enb_ue_id

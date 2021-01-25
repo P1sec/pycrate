@@ -53,6 +53,9 @@ from .NASLTE        import *
 
 # WNG if trying to import 24501_IE, as some IE in 5G may have same name but not
 # same structure as in 4G
+from .TS24501_IE    import FGSID
+from .TS24501_FGMM  import *
+#from .TS24501_FGSM  import *
 from .NAS5G         import *
 
 
