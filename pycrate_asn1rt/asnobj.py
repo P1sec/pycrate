@@ -679,7 +679,7 @@ class ASN1Obj(Element):
             if self._name not in blacklist:
                 cont = ASN1Dict()
                 for (ident, Comp) in self._cont.items():
-                    if hasattr(self, '_root_mand') and ident not in self._root_mand:
+                    if w_opt and hasattr(self, '_root_mand') and ident not in self._root_mand:
                         ident_ret = '%s (OPT)' % ident
                     else:
                         ident_ret = ident
