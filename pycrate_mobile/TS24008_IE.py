@@ -1174,6 +1174,19 @@ class MMTimer(Envelope):
         Uint('Unit', bl=3, dic=_MMTimerUnit_dict),
         Uint('Value', bl=5)
         )
+    
+    def get_time(self):
+        """returns the timer set in seconds
+        """
+        unit, val = self.get_val()
+        if unit == 0:
+            return val*2
+        elif unit == 1:
+            return val*60
+        elif unit == 2:
+            return val*360
+        else:
+            return 0
 
 
 #------------------------------------------------------------------------------#
@@ -3610,6 +3623,19 @@ class GPRSTimer(Envelope):
         Uint('Unit', bl=3, dic=_GPRSTimerUnit_dict),
         Uint('Value', bl=5)
         )
+    
+    def get_time(self):
+        """returns the timer set in seconds
+        """
+        unit, val = self.get_val()
+        if unit == 0:
+            return val*2
+        elif unit == 1:
+            return val*60
+        elif unit == 2:
+            return val*360
+        else:
+            return 0
 
 
 #------------------------------------------------------------------------------#
@@ -3628,11 +3654,29 @@ _GPRSTimer3Unit_dict = {
     7 : 'timer deactivated'
     }
 
+_GPRSTimer3Unit_mult = {
+    0 : 600,
+    1 : 3600,
+    2 : 36000,
+    3 : 2,
+    4 : 30,
+    5 : 60,
+    6 : 1152000,
+    7 : 0
+    }
+
+
 class GPRSTimer3(Envelope):
     _GEN = (
         Uint('Unit', bl=3, dic=_GPRSTimer3Unit_dict),
         Uint('Value', bl=5)
         )
+    
+    def get_time(self):
+        """returns the timer set in seconds
+        """
+        unit, val = self.get_val()
+        return val * _GPRSTimer3Unit_mult[unit]
 
 
 #------------------------------------------------------------------------------#
