@@ -267,7 +267,19 @@ class FGMMAuthenticationReject(Layer3E):
 #------------------------------------------------------------------------------#
 
 class FGMMRegistrationRequest(Layer3E):
+    # clear-text IEs, 24.501, section 4.4.6
+    _ies_ct = {
+        'NAS_KSI',
+        '5GSRegType',
+        '5GSID',
+        'UESecCap',
+        'UEStatus',
+        'AddGUTI',
+        'EPSNASContainer'
+        }
+    #
     _name = '5GMMRegistrationRequest'
+    #
     _GEN = (
         FGMMHeader(val={'Type':65}),
         Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
@@ -494,7 +506,15 @@ class FGMMMTDeregistrationAccept(Layer3E):
 #------------------------------------------------------------------------------#
 
 class FGMMServiceRequest(Layer3E):
+    # clear-text IEs, 24.501, section 4.4.6
+    _ies_ct = {
+        'ServiceType',
+        'NAS_KSI',
+        '5GSID'
+        }
+    #
     _name = '5GMMServiceRequest'
+    #
     _GEN = (
         FGMMHeader(val={'Type':76}),
         Type1V('ServiceType', val={'V':0}, dic=ServiceType_dict),
@@ -869,7 +889,14 @@ class FGMMStatus(Layer3E):
 #------------------------------------------------------------------------------#
 
 class FGMMControlPlaneServiceRequest(Layer3E):
+    # clear-text IEs, 24.501, section 4.4.6
+    _ies_ct = {
+        'NAS_KSI',
+        'CtrlPlaneServiceType'
+        }
+    #
     _name = '5GMMControlPlaneServiceRequest'
+    #
     _GEN = (
         FGMMHeader(val={'Type':79}),
         Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
