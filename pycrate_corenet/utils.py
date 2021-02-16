@@ -54,8 +54,7 @@ except ImportError as err:
 
 # conversion function for security context
 try:
-    from CryptoMobile.Milenage import conv_C2, conv_C3, conv_C4, conv_C5, \
-                                      conv_A2, conv_A3, conv_A4, conv_A7
+    from CryptoMobile.conv import *
 except ImportError as err:
     print('CryptoMobile library required for CorenetServer')
     print('check on github: https://github.com/P1sec/CryptoMobile')
