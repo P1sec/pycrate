@@ -123,19 +123,14 @@ class AuC:
     #PLMN_FILTER = ['20869']
     PLMN_FILTER = None
     
-    # SIDF ECIES private keys
+    # SIDF ECIES private keys dict, for decrypting SUCI
+    # index: private key id (0..255), corresponding to the Home Network Public Key Identifier 
+    #        from TS 31.102, section 4.4.11.8
+    # value: 2-tuple with Protection Scheme Identifier (profile 'A' or 'B') and 
+    #        corresponding Home Network Private Key value
     SIDF_ECIES_K = {
-        # private keys for ECIES profile A (protection scheme index 1),
-        # each key indexed by an uint8
-        1 : {},
-        # private keys for ECIES profile B (protection scheme index 2),
-        # each key indexed by an uint8
-        2 : {},
-        }
-    # ECIES profile indexes
-    _SIDF_ECIES_PROF = {
-        1 : 'A',
-        2 : 'B',
+        # 0 : ('A', unhexlify('12...ef')), # CryptoMobile.ECIES X25519 privkey is 32 bytes
+        # 1 : ('B', unhexlify('12...ef')), # CryptoMobile.ECIES secp256r1 privkey is around 140 bytes
         }
     
     def __init__(self):
@@ -184,18 +179,9 @@ class AuC:
         self._log('DBG', 'AuC / ARPF / SIDF started')
     
     def _init_sidf(self):
-        self.SIDF_ECIES = {}
-        for prof in (1, 2):
-            # only support std ECIES profile A and B
-            if prof not in self.SIDF_ECIES_K:
-                continue
-            self.SIDF_ECIES[prof] = {}
-            for ind, privk in self.SIDF_ECIES_K[prof].items():
-                # it will raise in case the key is invalid
-                self.SIDF_ECIES[prof][ind] = ECIES_HN(
-                    privk,
-                    self._SIDF_ECIES_PROF[prof]
-                    )
+        self._SIDF_ECIES = {}
+        for ind, (prof, key) in self.SIDF_ECIES_K.items():
+            self._SIDF_ECIES[ind] = ECIES_HN(hn_priv_key=key, profile=prof)
     
     def _log(self, logtype='DBG', msg=''):
         if logtype in self.DEBUG:
@@ -590,22 +576,22 @@ class AuC:
         self._log('DBG', '[synch_sqn] IMSI %s, SQN resynchronized to %i' % (IMSI, K_ALG_SQN_OP[2]))
         return 0
     
-    def sidf_unconceal(self, prof, hnprivkid, ephpubk, cipht, mac):
+    def sidf_unconceal(self, hnkid, ephpubk, cipht, mac):
         """
-        unconceal the cipher text `cipht` according to ECIES `prof` 1 (profile A)
-        or 2 (profile B), home network private key index `hnprivkid`, ephemeral 
-        public key `ephpubk`, after verifying the `mac`.
+        unconceal the cipher text `cipht` according to ECIES profile A or B (which
+        is implicitly depending on `hnkid`).
+        Use the home network private key index `hnkid`, ephemeral public key 
+        `ephpubk`, after verifying the `mac`. All parameters are part of the
+        SUCI.
         
         return None on error or the unconceal clear-text value bytes buffer (i.e.
         the clear-text 5G subscriber identity)
         """
-        if prof not in (1, 2) or hnprivkid not in self.SIDF_ECIES[prof] \
-        or not 32 <= len(ephpubk) <= 33 or len(mac) != 8:
+        if hnkid not in self._SIDF_ECIES or not 32 <= len(ephpubk) <= 33 or len(mac) != 8:
             self._log('WNG', '[sidf_unconceal] invalid parameter')
             return None
         #
-        ecies_hn = self.SIDF_ECIES[prof][hnprivkid]
-        return ecies_hn.unprotect(ephpubk, cipht, mac)
+        return self._SIDF_ECIES[hnkid].unprotect(ephpubk, cipht, mac)
 
 
 def test():
@@ -713,10 +699,11 @@ def test():
     #
     # SIDF
     # set a HN private key for profile A
-    AuC.SIDF_ECIES_K[1][0] = b'0\xfd\xa5\x0321y\xbe\xb2#\x8d\xbb\x85\x84\xe4\xb3\xffb\xb9\xdd\x85\xf3\x18N\x89!7\x15\xd3\x7f2X'
+    AuC.SIDF_ECIES_K[0] = ('A', b'0\xfd\xa5\x0321y\xbe\xb2#\x8d\xbb\x85\x84\xe4\xb3\xffb\xb9\xdd\x85\xf3\x18N\x89!7\x15\xd3\x7f2X')
     auc = AuC()
     assert(
-        auc.sidf_unconceal(1, 0,
+        auc.sidf_unconceal(
+            0,
             b'\x82\xcb\xb7\xb5\x00u\xc5/\xbd\xd8\xa4.\xbc|\x9ad,\x17\xa8(\xfdu\xd1\x7f\x01[::\xea\x97\xfay',
             b'\xb8\xc3c{\xe4',
             b'\xac\xeeXw\xca!\x04\xc6') == b'\x00\x00\x00\x00\x10'
