@@ -325,7 +325,7 @@ class ENBd(object):
                 if ident[0] == NAS.IDTYPE_IMSI:
                     return self.Server.get_ued(imsi=ident[1]), enb_ue_id
                 elif ident[0] == NAS.IDTYPE_GUTI:
-                    # ensure PLMN, MME group, MMEC correspond
+                    # TODO: ensure PLMN, MME group, MMEC correspond
                     return self.Server.get_ued(mtmsi=ident[4]), enb_ue_id
                 else:
                     return None, enb_ue_id

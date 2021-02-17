@@ -112,10 +112,10 @@ class NGAPSigProc(LinkSigProc):
     
     instance attributes:
         - Name  : procedure name
-        - N2    : reference to the N2d instance running this procedure
-        - GNB   : reference to the GNBd instance connected by N2
+        - NG    : reference to the UENGd instance running this procedure
+        - GNB   : reference to the GNBd instance connected by NG
         - Server: reference to the CorenetServer instance handling the gNB
-        - UE    : reference to the UEd instance connected by N2
+        - UE    : reference to the UEd instance connected by NG
         - Desc  : ASN.1 procedure description
         - Code  : procedure code
         - Crit  : procedure criticality
@@ -129,14 +129,14 @@ class NGAPSigProc(LinkSigProc):
     # for UE-related signalling
     UE = None
     
-    def __init__(self, n2d):
+    def __init__(self, ngd):
         #
         self.Name   = self.__class__.__name__
-        self.N2     = n2d
-        self.GNB    = n2d.GNB
-        self.Server = n2d.GNB.Server
-        if n2d.UE:
-            self.UE = n2d.UE
+        self.NG     = ngd
+        self.GNB    = ngd.GNB
+        self.Server = ngd.GNB.Server
+        if ngd.UE:
+            self.UE = ngd.UE
         else:
             self._log('WNG', 'no UEd instance attached')
         #
@@ -150,7 +150,7 @@ class NGAPSigProc(LinkSigProc):
         self._log('DBG', 'instantiating procedure')
     
     def _log(self, logtype, msg):
-        self.N2._log(logtype, '[%s] %s' % (self.Name, msg))
+        self.NG._log(logtype, '[%s] %s' % (self.Name, msg))
     
     def _recv(self, pdu):
         if self.TRACK_PDU:
@@ -181,8 +181,8 @@ class NGAPSigProc(LinkSigProc):
         return []
     
     def abort(self):
-        if self.Code in self.N2.Proc:
-            del self.N2.Proc[self.Code]
+        if self.Code in self.NG.Proc:
+            del self.NG.Proc[self.Code]
         self._log('INF', 'aborting')
 
 
@@ -191,7 +191,7 @@ class NGAPNonUESigProc(LinkSigProc):
     
     instance attributes:
         - Name  : procedure name
-        - GNB   : reference to the GNBd instance connected by N2
+        - GNB   : reference to the GNBd instance connected by NG
         - Server: reference to the CorenetServer instance handling the gNB
         - Desc  : ASN.1 procedure description
         - Code  : procedure code
@@ -328,7 +328,9 @@ class NGAPPDUSessResRelease(NGAPSigProc):
     
     # Custom decoders
     Decod = {
-        'ini': ({}, {}),
+        'ini': ({
+            'UserLocationInformation': lambda x: ngap_userloc_to_hum(x)
+            }, {}),
         'suc': ({}, {}),
         'uns': None
         }
@@ -403,7 +405,9 @@ class NGAPPDUSessResNotify(NGAPSigProc):
     
     # Custom decoders
     Decod = {
-        'ini': ({}, {}),
+        'ini': ({
+            'UserLocationInformation': lambda x: ngap_userloc_to_hum(x)
+            }, {}),
         'suc': None,
         'uns': None
         }
@@ -584,7 +588,9 @@ class NGAPUEContextRelease(NGAPSigProc):
     
     # Custom decoders
     Decod = {
-        'ini': ({}, {}),
+        'ini': ({
+            'UserLocationInformation': lambda x: ngap_userloc_to_hum(x)
+            }, {}),
         'suc': ({}, {}),
         'uns': None
         }
@@ -639,7 +645,9 @@ class NGAPUEContextModification(NGAPSigProc):
     
     # Custom decoders
     Decod = {
-        'ini': ({}, {}),
+        'ini': ({
+            'UserLocationInformation': lambda x: ngap_userloc_to_hum(x)
+            }, {}),
         'suc': ({}, {}),
         'uns': ({}, {})
         }
@@ -672,7 +680,9 @@ class NGAPRRCInactiveTransitionReport(NGAPSigProc):
     
     # Custom decoders
     Decod = {
-        'ini': ({}, {}),
+        'ini': ({
+            'UserLocationInformation': lambda x: ngap_userloc_to_hum(x)
+            }, {}),
         'suc': None,
         'uns': None
         }
@@ -824,7 +834,9 @@ class NGAPHandoverNotification(NGAPNonUESigProc):
     
     # Custom decoders
     Decod = {
-        'ini': ({}, {}),
+        'ini': ({
+            'UserLocationInformation': lambda x: ngap_userloc_to_hum(x)
+            }, {}),
         'suc': None,
         'uns': None
         }
@@ -880,7 +892,9 @@ class NGAPPathSwitchRequest(NGAPNonUESigProc):
     
     # Custom decoders
     Decod = {
-        'ini': ({}, {}),
+        'ini': ({
+            'UserLocationInformation': lambda x: ngap_userloc_to_hum(x)
+            }, {}),
         'suc': ({}, {}),
         'uns': ({}, {})
         }
@@ -1065,7 +1079,9 @@ class NGAPInitialUEMessage(NGAPSigProc):
     
     # Custom decoders
     Decod = {
-        'ini': ({}, {}),
+        'ini': ({
+            'UserLocationInformation': lambda x: ngap_userloc_to_hum(x)
+            }, {}),
         'suc': None,
         'uns': None
         }
@@ -1076,6 +1092,35 @@ class NGAPInitialUEMessage(NGAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    def recv(self, pdu_rx):
+        self._recv(pdu_rx)
+        if not self.errcause:
+            # verification of UserLocInfo against GNBd parameters:
+            err = False
+            userloc = self.UEInfo['UserLocationInformation']
+            tai = userloc['TAI']
+            if 'NR-CGI' in userloc:
+                cgi = userloc['NR-CGI']
+            else:
+                cgi = userloc['EUTRA-CGI']
+            if cgi[0] != self.GNB.ID[0] or cgi[1][0] != self.GNB.ID[2][0]:
+                self._log('WNG', 'invalid Cell Global-ID, %s.%.9x' % (cgi[0], cgi[1][0]))
+                err = True
+            elif tai not in self.GNB.Config['TAIs']:
+                self._log('WNG', 'invalid TAI, %s.%.6x' % tai)
+                err = True
+            if err:
+                self.errcause = ('protocol', 'message-not-compatible-with-receiver-state')
+        #
+        if not self.errcause:
+            self.NG.FGMM.state = 'ACTIVE'
+            self._log('INF', 'RRC establishment cause: %s' % self.UEInfo['RRCEstablishmentCause'])
+            self.UE.set_tai(*tai)
+            self._ret = self.NG.process_nas(self.UEInfo['NAS_PDU'])
+    
+    def trigger(self):
+        return self._ret
 
 
 class NGAPDownlinkNASTransport(NGAPSigProc):
@@ -1114,6 +1159,8 @@ class NGAPDownlinkNASTransport(NGAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    send = NGAPSigProc._send
 
 
 class NGAPUplinkNASTransport(NGAPSigProc):
@@ -1136,7 +1183,9 @@ class NGAPUplinkNASTransport(NGAPSigProc):
     
     # Custom decoders
     Decod = {
-        'ini': ({}, {}),
+        'ini': ({
+            'UserLocationInformation': lambda x: ngap_userloc_to_hum(x)
+            }, {}),
         'suc': None,
         'uns': None
         }
@@ -1147,6 +1196,21 @@ class NGAPUplinkNASTransport(NGAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    def recv(self, pdu_rx):
+        self._recv(pdu_rx)
+        if not self.errcause:
+            # verification of UserLocInfo against GNBd parameters:
+            err = False
+            # TODO
+            if err:
+                self.errcause = ('protocol', 'message-not-compatible-with-receiver-state')
+        #
+        if not self.errcause:
+            self._ret = self.NG.process_nas(self.UEInfo['NAS_PDU'])
+    
+    def trigger(self):
+        return self._ret
 
 
 class NGAPNASNonDeliveryInd(NGAPSigProc):
@@ -2347,7 +2411,9 @@ class NGAPLocationReport(NGAPSigProc):
     
     # Custom decoders
     Decod = {
-        'ini': ({}, {}),
+        'ini': ({
+            'UserLocationInformation': lambda x: ngap_userloc_to_hum(x)
+            }, {}),
         'suc': None,
         'uns': None
         }
@@ -2498,7 +2564,9 @@ class NGAPSecondaryRATDataUsageReport(NGAPSigProc):
     
     # Custom decoders
     Decod = {
-        'ini': ({}, {}),
+        'ini': ({
+            'UserLocationInformation': lambda x: ngap_userloc_to_hum(x)
+            }, {}),
         'suc': None,
         'uns': None
         }

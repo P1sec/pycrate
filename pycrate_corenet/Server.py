@@ -149,7 +149,7 @@ class CorenetServer(object):
     # AMF ID for each served PLMN
     # PLMN (str): AMF ID 3-tuple (RegionID uint8, SetID uint10, Pointer uint6)
     AMF_GUAMI = {
-        PLMN: (1, 1, 0),
+        PLMN: (0x01, 0x001, 0x00),
         }
     #
     # arbitrary dict of indexed slices identifiers
@@ -268,8 +268,10 @@ class CorenetServer(object):
         #         'USIM'  : $milenage_supported -bool-}
         # PDP type: 0:PPP, 1:IPv4, 2: IPv6 /64 local if, 3: IPv4v6 (-> 1 IPv4 + 1 IPv6 local if)
         # PDN type: 1:IPv4, 2:IPv6 /64 local if, 3:IPv4v6 (-> 1 IPv4 + 1 IPv6 local if)
+        # PDU type: TODO
         '*': {'PDP'   : [('*', 1, '192.168.1.199')],
               'PDN'   : [('*', 1, '192.168.1.199')],
+              'PDU'   : [], # TODO
               'MSISDN': '0123456789',
               'USIM'  : True
               },
@@ -277,6 +279,7 @@ class CorenetServer(object):
                                        ('corenet', 1, '192.168.1.201')],
                             'PDN'   : [('*', 3, '192.168.1.201', '0:1:0:c9'),
                                        ('corenet', 1, '192.168.1.201')],
+                            'PDU'   : [], # TODO
                             'MSISDN': '100001',
                             'USIM'  : True
                             },
@@ -284,6 +287,7 @@ class CorenetServer(object):
                                        ('corenet', 1, '192.168.1.202')],
                             'PDN'   : [('*', 3, '192.168.1.202', '0:1:0:ca'),
                                        ('corenet', 1, '192.168.1.202')],
+                            'PDU'   : [], # TODO
                             'MSISDN': '100002',
                             'USIM'  : True
                             }
@@ -320,6 +324,16 @@ class CorenetServer(object):
             'DNS': ((1, '8.8.8.8'),
                     (1, '8.8.4.4')),
             'MTU': (None, None),
+            },
+        }
+    #
+    # PDU Sessions config for 5GS, per DNN
+    ConfigPDU = {
+        '*': {
+            # TODO
+            },
+        'corenet': {
+            # TODO
             },
         }
     #

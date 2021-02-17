@@ -336,16 +336,6 @@ def meas_params_to_asn1_restore():
 class CorenetErr(PycrateErr):
     pass
 
-class HNBAPErr(CorenetErr):
-    pass
-
-class RUAErr(CorenetErr):
-    pass
-
-class RANAPErr(CorenetErr):
-    pass
-
-
 # coloured logs
 TRACE_COLOR_START = '\x1b[94m'
 TRACE_COLOR_END = '\x1b[0m'
@@ -714,6 +704,33 @@ def plmnsupplist_to_asn(plmnsupplist):
             {'s-NSSAI': {'sST': uint_to_bytes(snssai[0], 8)}} for snssai in snssais],
         } for (plmn, snssais) in sorted(plmnsupplist.items())
         ]
+
+def ngap_userloc_to_hum(cho):
+    if cho[0] == 'userLocationInformationNR':
+        # return NR-CGI and TAI
+        return {
+            'TAI': (
+                plmn_buf_to_str(cho[1]['tAI']['pLMNIdentity']),
+                bytes_to_uint(cho[1]['tAI']['tAC'], 24)
+                ),
+            'NR-CGI': (
+                plmn_buf_to_str(cho[1]['nR-CGI']['pLMNIdentity']),
+                cho[1]['nR-CGI']['nRCellIdentity']
+                )
+            }
+    elif cho[0] == 'userLocationInformationEUTRA':
+        # return EUTRA-CGI and TAI
+        return {
+            'TAI': (
+                plmn_buf_to_str(cho[1]['tAI']['pLMNIdentity']),
+                bytes_to_uint(cho[1]['tAI']['tAC'], 16)
+                ),
+            'EUTRA-CGI': (
+                plmn_buf_to_str(cho[1]['eUTRA-CGI']['pLMNIdentity']),
+                cho[1]['eUTRA-CGI']['eUTRACellIdentity']
+                )
+            }
+
 
 #------------------------------------------------------------------------------#
 # ASN.1 object handling facilities

@@ -27,8 +27,23 @@
 # *--------------------------------------------------------
 #*/
 
-from .utils import *
-from .ProcCNNgap import *
+from .utils                     import *
+from .ProcCNNgap                import *
+
+from pycrate_mobile.TS24501_IE  import (
+    FGSIDTYPE_NO, # 0
+    FGSIDTYPE_SUPI,
+    FGSIDTYPE_GUTI,
+    FGSIDTYPE_IMEI,
+    FGSIDTYPE_STMSI,
+    FGSIDTYPE_IMEISV,
+    FGSIDTYPE_MAC,
+    FGSIDTYPE_EUI64, # 7
+    FGSIDFMT_IMSI, # 0
+    FGSIDFMT_NSI,
+    FGSIDFMT_GCI,
+    FGSIDFMT_GLI, # 3
+    )
 
 
 class GNBd(object):
@@ -228,10 +243,147 @@ class GNBd(object):
     #--------------------------------------------------------------------------#
     # handling of UE-associated NGAP signalling procedures
     #--------------------------------------------------------------------------#
-    # TODO
     
     def process_ngap_ue_pdu(self, pdu_rx, sid):
+        """process an NGAP PDU sent by the gNB for UE-associated signalling with
+        a given SCTP stream id
+        and return a list of NGAP PDU(s) to be sent back to it
+        """
+        if pdu_rx[0] == 'initiatingMessage' and pdu_rx[1]['procedureCode'] == 15:
+            # initialUEMessage, retrieve / create the UE instance 
+            ue, ctx_id = self.get_ued(pdu_rx)
+            if ue is None:
+                self._log('ERR', 'unknown UE trying to connect')
+                errcause = ('protocol', 'abstract-syntax-error-reject')
+                Proc = self.init_s1ap_proc(S1APErrorIndNonUECN, Cause=errcause)
+                Proc.recv( pdu_rx )
+                self.ProcLast = Proc.Code
+                return Proc.send()
+            else:
+                self.set_ue_ng(ue, ctx_id)
+                try:
+                    ue.set_ran(self, ctx_id, sid)
+                except Exception as err:
+                    self._log('ERR', 'UE connected to several RAN, %r' % err)
+                    return []
+        else:
+            ctx_id = self.get_gnb_ue_ctx_id(pdu_rx)
+        if ctx_id is None:
+            self._log('ERR', 'no gNB UE context id provided')
+            errcause = ('protocol', 'abstract-syntax-error-reject')
+            Proc = self.init_ngap_proc(NGAPErrorIndNonUECN, Cause=errcause)
+            Proc.recv( pdu_rx )
+            self.ProcLast = Proc.Code
+            return Proc.send()
+        else:
+            try:
+                ue = self.UE[ctx_id]
+            except Exception:
+                self._log('ERR', 'invalid gNB UE context id provided')
+                errcause = ('radioNetwork', 'unknown-local-UE-NGAP-ID')
+                Proc = self.init_ngap_proc(NGAPErrorIndNonUECN, Cause=errcause)
+                Proc.recv( pdu_rx )
+                self.ProcLast = Proc.Code
+                return Proc.send()
+            else:
+                return ue.NG.process_ngap_pdu(pdu_rx)
+        
         return []
     
-
+    
+    def set_ue_ng(self, ued, ctx_id):
+        self.UE[ctx_id] = ued
+    
+    def unset_ue_ng(self, ctx_id):
+        try:
+            del self.UE[ctx_id]
+        except Exception:
+            self._log('WNG', 'no UE with NG context-id %i to unset' % ctx_id)
+    
+    def get_ued(self, pdu_rx):
+        ran_ue_id, nas_pdu, tai, s_tmsi = None, None, None, None
+        for ie in pdu_rx[1]['value'][1]['protocolIEs']:
+            if ie['id'] == 26:
+                # S-TMSI
+                s_tmsi = ie['value'][1]
+            elif ie['id'] == 38:
+                # NAS-PDU
+                nas_pdu = ie['value'][1]
+            elif ie['id'] == 85:
+                # RAN-UE-NGAP-ID
+                ran_ue_id = ie['value'][1]
+        if ran_ue_id is None or not nas_pdu:
+            # missing mandatory IE
+            self._log('WNG', 'Unable to get UE id from NAS message, missing mandatory IE')
+            return None, ran_ue_id
+        if s_tmsi:
+            # use the NGAP S-TMSI
+            return self.Server.get_ued(mtmsi=bytes_to_uint(s_tmsi['fiveG-TMSI'], 32)), ran_ue_id
+        else:
+            # use the FGSID within the NAS PDU
+            TS24007.IE.DECODE_INNER = False
+            NasRx, err = NAS.parse_NAS5G(nas_pdu, inner=False)
+            TS24007.IE.DECODE_INNER = True
+            if err:
+                return None, ran_ue_id
+            sh = NasRx[0]['SecHdr'].get_val()
+            if sh != 0:
+                # in 5G, initial NAS message have directly a reduced list of clear-text IEs
+                # therefore a security header there is invalid
+                self._log('WNG', 'Unable to get UE id from NAS message, invalid initial '\
+                          'NAS message with security')
+                return None, ran_ue_id
+            else:
+                # clear-text NAS PDU
+                if '5GSID' in NasRx._by_name and not NasRx['5GSID'].get_trans():
+                    fgsid = NasRx['5GSID'][-1].get_val()
+                else:
+                    self._log('WNG', 'Unable to get UE id from NAS message, missing 5GSID IE')
+                    return None, ran_ue_id
+                FgsId = NAS.FGSID()
+                FgsId.from_bytes(fgsid)
+                FgsIdType = FgsId['Type'].get_val()
+                if FgsIdType == FGSIDTYPE_SUPI and FgsId['Fmt'].get_val() == FGSIDFMT_IMSI:
+                    psid = FgsId['Value']['ProtSchemeID'].get_val()
+                    if psid == 0:
+                        # clear-text IMSI
+                        imsi = FgsId['Value']['PLMN'].decode() + \
+                               FgsId['Value']['Output'].get_alt().decode()
+                        return self.Server.get_ued(imsi=imsi), ran_ue_id
+                    elif psid in (1, 2):
+                        # std ECIES protection, use the AuC-SIDF to decrypt it
+                        hnpkid = FgsId['Value']['HNPKID'].get_val()
+                        ephpubk, cipht, mac = ephFgsId['Value']['Output'].get_val()
+                        msin = self.Server.AUCd.sidf_unconceal(hnpkid, ephpubk, cipht, mac)
+                        if msin is None:
+                            # invalid SUCI
+                            self._log('WNG', 'Unable to get UE id from NAS message, invalid SUCI')
+                            return None, ran_ue_id
+                        else:
+                            imsi = FgsId['Value']['PLMN'].decode() + decode_bcd(msin)
+                            return self.Server.get_ued(imsi=imsi), ran_ue_id
+                    else:
+                        return None, ran_ue_id
+                elif FgsIdType == FGSIDTYPE_GUTI:
+                    # TODO: should ensure PLMN and AMF identifiers correspond
+                    return self.Server.get_ued(mtmsi=FgsId['5GTMSI'].get_val()), ran_ue_id 
+                else:
+                    self._log('WNG', 'Unable to get UE id from NAS message, 5GSID of '\
+                              'unexpected type %i' % FgsIdType)
+                    return None, ran_ue_id
+    
+    def get_gnb_ue_ctx_id(self, pdu_rx):
+        gnb_ue_id = None
+        for ie in pdu_rx[1]['value'][1]['protocolIEs']:
+            if ie['id'] == 85:
+                # RAN-UE-NGAP-ID
+                gnb_ue_id = ie['value'][1]
+                break
+        return gnb_ue_id
+    
+    #--------------------------------------------------------------------------#
+    # CN-initiated non-UE-associated S1AP signalling procedures
+    #--------------------------------------------------------------------------#
+    
+    # TODO: page(), send_error_ind()
 

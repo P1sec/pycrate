@@ -46,10 +46,11 @@ class UEd(SigStack):
     #
     # verbosity level
     DEBUG              = ('ERR', 'WNG', 'INF', 'DBG')
-    # to log UE-related RANAP and S1AP for all UE
+    # to log UE-related RANAP, S1AP and NGAP for all UE
     TRACE_ASN_RANAP_CS = False
     TRACE_ASN_RANAP_PS = False
     TRACE_ASN_S1AP     = False
+    TRACE_ASN_NGAP     = False
     # to log UE NAS over IuCS (except SMS) for all UE
     TRACE_NAS_CS       = False
     # to log UE NAS over IuPS for all UE
@@ -74,10 +75,10 @@ class UEd(SigStack):
     IMSI   = None
     IMEI   = None
     IMEISV = None
-    # temporary identities (TMSI / PTMSI are uint32)
-    TMSI   = None
-    PTMSI  = None
-    MTMSI  = None
+    # temporary identities (TMSI / PTMSI / MTMSI are uint32)
+    TMSI   = None # CS domain
+    PTMSI  = None # PS domain
+    MTMSI  = None # EPS / 5GS domains
     
     #--------------------------------------------------------------------------#
     # CorenetServer reference
@@ -177,7 +178,10 @@ class UEd(SigStack):
                 apncfg['RAB']['QCI'] = apncfg['QCI']
                 self.S1.ESM.PDNConfig[apn] = apncfg
         #
-        # TODO: initialize 5G SM config
+        self.NG.FGSM.PDUConfig = {}
+        for pduconfig in config['PDU']:
+            # TODO: initialize 5G SM config with allowed PDU Sessions
+            pass
     
     def set_ran(self, ran, ctx_id, sid=None, dom=None):
         # UE going connected
@@ -448,22 +452,22 @@ class UEd(SigStack):
     def set_plmn(self, plmn):
         if plmn != self.PLMN:
             self.PLMN = plmn
-            self._log('INF', 'locate on PLMN %s' % self.PLMN)
+            self._log('INF', 'located in PLMN %s' % self.PLMN)
     
     def set_lac(self, lac):
         if lac != self.LAC:
             self.LAC = lac
-            self._log('INF', 'locate on LAC %.4x' % self.LAC)
+            self._log('INF', 'located in LAC %.4x' % self.LAC)
     
     def set_rac(self, rac):
         if rac != self.RAC:
             self.RAC = rac
-            self._log('INF', 'route on RAC %.2x' % self.RAC)
+            self._log('INF', 'routed in RAC %.2x' % self.RAC)
     
     def set_tac(self, tac):
         if tac != self.TAC:
             self.TAC = tac
-            self._log('INF', 'track on TAC %.6x' % self.TAC)
+            self._log('INF', 'tracked in TAC %.6x' % self.TAC)
     
     def set_lai(self, plmn, lac):
         self.set_plmn(plmn)

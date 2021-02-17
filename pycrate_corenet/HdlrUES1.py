@@ -1788,14 +1788,14 @@ class UES1d(SigStack):
             if buf is None:
                 return self._s1ap_nas_sec_err()
             IEs['NAS_PDU'] = buf
-            S1apProc = self.init_s1ap_proc(S1APDownlinkNASTransport, **IEs)
+            NgapProc = self.init_ngap_proc(NGAPDownlinkNASTransport, **IEs)
             if S1apProc:
                 return [S1apProc]
             else:
                 return []
     
     def _s1ap_nas_sec_err(self):
-        # TODO: maybe shutdown the S1 link ?
+        # TODO: maybe release the S1-UE link ?
         return []
     
     def clear_nas_proc(self):
