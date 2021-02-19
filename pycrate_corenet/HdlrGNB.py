@@ -255,7 +255,7 @@ class GNBd(object):
             if ue is None:
                 self._log('ERR', 'unknown UE trying to connect')
                 errcause = ('protocol', 'abstract-syntax-error-reject')
-                Proc = self.init_s1ap_proc(S1APErrorIndNonUECN, Cause=errcause)
+                Proc = self.init_ngap_proc(NGAPErrorIndNonUECN, Cause=errcause)
                 Proc.recv( pdu_rx )
                 self.ProcLast = Proc.Code
                 return Proc.send()
@@ -353,14 +353,14 @@ class GNBd(object):
                     elif psid in (1, 2):
                         # std ECIES protection, use the AuC-SIDF to decrypt it
                         hnpkid = FgsId['Value']['HNPKID'].get_val()
-                        ephpubk, cipht, mac = ephFgsId['Value']['Output'].get_val()
+                        ephpubk, cipht, mac = FgsId['Value']['Output'].get_val() 
                         msin = self.Server.AUCd.sidf_unconceal(hnpkid, ephpubk, cipht, mac)
                         if msin is None:
                             # invalid SUCI
                             self._log('WNG', 'Unable to get UE id from NAS message, invalid SUCI')
                             return None, ran_ue_id
                         else:
-                            imsi = FgsId['Value']['PLMN'].decode() + decode_bcd(msin)
+                            imsi = FgsId['Value']['PLMN'].decode() + NAS.decode_bcd(msin)
                             return self.Server.get_ued(imsi=imsi), ran_ue_id
                     else:
                         return None, ran_ue_id

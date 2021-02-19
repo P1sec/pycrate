@@ -603,7 +603,15 @@ class AuC:
             self._log('WNG', '[sidf_unconceal] invalid parameter')
             return None
         #
-        return self._SIDF_ECIES[hnkid].unprotect(ephpubk, cipht, mac)
+        try:
+            cleart = self._SIDF_ECIES[hnkid].unprotect(ephpubk, cipht, mac)
+        except Exception as err:
+            self._log('ERR', '[sidf_unconceal] EC processing error: %s' % err)
+            return None
+        else:
+            self._log('DBG', '[sidf_unconceal] SUCI ciphertext %s decrypted to %s'\
+                      % (hexlify(cipht).decode('ascii'), hexlify(cleart).decode('ascii')))
+            return cleart
 
 
 def test():
