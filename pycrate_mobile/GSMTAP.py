@@ -300,7 +300,7 @@ class gsmtap_hdr(Envelope):
         )
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[9].set_dicauto(self._set_subtype_dic)
+        self['sub_type'].set_dicauto(self._set_subtype_dic)
     
     def _set_subtype_dic(self):
         return SubTypeDictLU_dict.get(self[2].get_val(), {})
