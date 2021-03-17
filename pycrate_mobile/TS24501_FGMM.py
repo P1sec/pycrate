@@ -315,7 +315,7 @@ class FGMMRegistrationRequest(Layer3E):
         Type4TLV('MappedNSSAI', val={'T':0x35, 'V':b'\0'}, IE=NSSAI('MappedNSSAI')),
         Type4TLV('AddInfoReq', val={'T':0x48, 'V':b'\0'}, IE=AddInfoReq()),
         Type4TLV('WUSAssistInfo', val={'T':0x1A, 'V':b'\0'}),
-        #Type2('N5GCInd', val={'T':0x00}), # WNG: tag is undefined in current TS
+        Type2('N5GCInd', val={'T':0xA}),
         Type4TLV('NBN1ModeDRXParam', val={'T':0x30, 'V':b'\0'}, IE=NBN1ModeDRXParam())
         )
 
@@ -361,7 +361,6 @@ class FGMMRegistrationAccept(Layer3E):
         Type4TLV('T3448', val={'T':0x6B, 'V':b'\0'}, IE=GPRSTimer()),
         Type4TLV('T3324', val={'T':0x6A, 'V':b'\0'}, IE=GPRSTimer()),
         Type4TLV('UERadioCapID', val={'T':0x67, 'V':b'\0'}, IE=UERadioCapID()),
-        #Type1TV('UERadioCapIDDelInd', val={'T':0xB, 'V':0}, IE=UERadioCapIDDelInd()) # WNG: tag or fmt is invalid in current TS
         Type4TLV('PendingNSSAI', val={'T':0x39, 'V':b'\0\0'}, IE=NSSAI()),
         Type6TLVE('CipheringKeyData', val={'T':0x74, 'V':31*b'\0'}, IE=CipheringKeyData()),
         Type6TLVE('CAGInfoList', val={'T':0x75, 'V':b''}, IE=CAGInfoList()),
@@ -572,7 +571,7 @@ class FGMMConfigurationUpdateCommand(Layer3E):
     _GEN = (
         FGMMHeader(val={'Type':84}),
         Type1TV('ConfigUpdateInd', val={'T':0xD, 'V':0}, IE=ConfigUpdateInd()),
-        Type6TLVE('5GSID', val={'T':0x77, 'V':b'\0\0\0\0'}, IE=FGSID()),
+        Type6TLVE('GUTI', val={'T':0x77, 'V':b'\0\0\0\0'}, IE=FGSID()),
         Type4TLV('5GSTAIList', val={'T':0x54, 'V':7*b'\0'}, IE=FGSTAIList()),
         Type4TLV('AllowedNSSAI', val={'T':0x15, 'V':b'\0\0'}, IE=NSSAI()),
         Type4TLV('SAList', val={'T':0x27, 'V':b'\0\0\0'}, IE=SAList()),
