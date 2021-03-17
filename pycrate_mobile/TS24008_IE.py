@@ -2678,6 +2678,7 @@ class _APNItem(Envelope):
         Uint8('Len'),
         Buf('Value')
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(self[1].get_len)
@@ -2686,6 +2687,19 @@ class _APNItem(Envelope):
 
 class APN(Sequence):
     _GEN = _APNItem('APNItem')
+    
+    def set_val(self, val):
+        if isinstance(val, str_types):
+            self.encode(val)
+        else:
+            Sequence.set_val(self, val)
+    
+    def encode(self, val):
+        apn_items = val.split('.')
+        Sequence.set_val(self, [{'Value': apn_item} for apn_item in apn_items])
+    
+    def decode(self, val):
+        return '.'.join([apn_item[1] for apn_item in self.get_val()])
 
 
 #------------------------------------------------------------------------------#
