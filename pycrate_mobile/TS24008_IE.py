@@ -32,7 +32,7 @@
 # release 13 (d90)
 #------------------------------------------------------------------------------#
 
-from binascii import unhexlify
+from binascii import hexlify, unhexlify
 from time     import struct_time
 
 from pycrate_core.utils  import *
@@ -287,18 +287,28 @@ class PLMN(Buf):
                 b = ord(c)
                 plmn.append(b>>4)
                 plmn.append(b&0xf)
-            if plmn[2] == 0xf:
-                return u'%i%i%i%i%i' % (plmn[1], plmn[0], plmn[3], plmn[5], plmn[4])
-            else:
-                return u'%i%i%i%i%i%i' % (plmn[1], plmn[0], plmn[3], plmn[5], plmn[4], plmn[2])
+            try:
+                if plmn[2] == 0xf:
+                    return u'%i%i%i%i%i' % (plmn[1], plmn[0], plmn[3], plmn[5], plmn[4])
+                else:
+                    return u'%i%i%i%i%i%i' % (plmn[1], plmn[0], plmn[3], plmn[5], plmn[4], plmn[2])
+            except IndexError:
+                # an invalid value has been set, _SAFE_STAT / DYN is probably disabled
+                # for e.g. fuzzing purpose, but there is still need to not break here
+                return '0x%s' % hexlify(self.to_bytes()).decode('ascii')
         else:
             for b in self.get_val():
                 plmn.append(b>>4)
                 plmn.append(b&0xf)
-            if plmn[2] == 0xf:
-                return '%i%i%i%i%i' % (plmn[1], plmn[0], plmn[3], plmn[5], plmn[4])
-            else:
-                return '%i%i%i%i%i%i' % (plmn[1], plmn[0], plmn[3], plmn[5], plmn[4], plmn[2])
+            try:
+                if plmn[2] == 0xf:
+                    return '%i%i%i%i%i' % (plmn[1], plmn[0], plmn[3], plmn[5], plmn[4])
+                else:
+                    return '%i%i%i%i%i%i' % (plmn[1], plmn[0], plmn[3], plmn[5], plmn[4], plmn[2])
+            except IndexError:
+                # an invalid value has been set, _SAFE_STAT / DYN is probably disabled
+                # for e.g. fuzzing purpose, but there is still need to not break here
+                return '0x%s' % hexlify(self.to_bytes()).decode('ascii')
     
     def encode(self, plmn=u'00101'):
         """encode the given PLMN string and store the resulting buffer in 
