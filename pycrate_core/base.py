@@ -297,6 +297,8 @@ class BufAuto(Buf):
     __call__ = get_val
 
 
+# Null terminated string
+# only different from Buf when consuming a buffer at parsing
 class NullTermStr(Buf):
     
     def _from_char(self, char):

@@ -32,6 +32,8 @@ __all__ = ['EltErr', 'REPR_RAW', 'REPR_HEX', 'REPR_BIN', 'REPR_HD', 'REPR_HUM',
            'Element', 'Atom', 'Envelope', 'Array', 'Sequence', 'Alt']
 
 
+from binascii import hexlify
+
 try:
     from json import JSONEncoder, JSONDecoder
 except ImportError:
@@ -660,7 +662,13 @@ class Element(object):
         Returns:
             uint (int) : unsigned integer
         """
-        return bytes_to_uint(self.to_bytes(), self.get_bl())
+        try:
+            return bytes_to_uint(self.to_bytes(), self.get_bl())
+        except PycrateErr:
+            # an invalid value has been set, _SAFE_STAT / DYN is probably disabled
+            # for e.g. fuzzing purpose, but there is still need to not break here
+            b = self.to_bytes()
+            return bytes_to_uint(b, len(b)<<3)
     
     def from_int(self, integ, bl=None):
         """Consume a signed integer or charpy instance `integ' and sets the 
@@ -698,7 +706,13 @@ class Element(object):
         Returns:
             integ (int) : signed integer
         """
-        return bytes_to_int(self.to_bytes(), self.get_bl())
+        try:
+            return bytes_to_int(self.to_bytes(), self.get_bl())
+        except PycrateErr:
+            # an invalid value has been set, _SAFE_STAT / DYN is probably disabled
+            # for e.g. fuzzing purpose, but there is still need to not break here
+            b = self.to_bytes()
+            return bytes_to_int(b, len(b)<<3)
     
     if python_version < 3:
         __str__ = to_bytes
@@ -725,7 +739,12 @@ class Element(object):
         if bl == 0:
             return ''
         else:
-            return uint_to_hex(bytes_to_uint(self.to_bytes(), bl), bl)
+            try:
+                return uint_to_hex(bytes_to_uint(self.to_bytes(), bl), bl)
+            except PycrateErr:
+                # an invalid value has been set, _SAFE_STAT / DYN is probably disabled
+                # for e.g. fuzzing purpose, but there is still need to not break here
+                return hexlify(self.to_bytes()).decode('ascii')
     
     __bin__ = bin
     __hex__ = hex
