@@ -97,6 +97,19 @@ class DNN(Envelope):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: self[1].get_len())
         self[1].set_blauto(lambda: self[0].get_val()<<3)
+    
+    def set_val(self, val):
+        if isinstance(val, str_types):
+            self.encode(val)
+        else:
+            Envelope.set_val(self, val)
+    
+    def encode(self, val):
+        apn_items = val.split('.')
+        self['APN'].set_val(self, [{'Value': apn_item} for apn_item in apn_items])
+    
+    def decode(self, val):
+        return '.'.join([apn_item[1] for apn_item in self['APN'].get_val()])
 
 
 #------------------------------------------------------------------------------#
@@ -192,7 +205,6 @@ class SNSSAI(Envelope):
             if 'MappedHPLMNSD' in val:
                 self[3].set_trans(False)
         Envelope.set_val(self, val)
-    
     
     def _from_char(self, char):
         if self.get_trans():
@@ -619,7 +631,7 @@ class FGSID(Envelope):
         FGSIDTYPE_GUTI   : FGSIDGUTI(),
         FGSIDTYPE_IMEI   : FGSIDDigit('5GSIDIMEI'),
         FGSIDTYPE_STMSI  : FGSIDSTMSI(),
-        FGSIDTYPE_IMEISV : FGSIDDigit('5GSIDIMEISV'),
+        FGSIDTYPE_IMEISV : FGSIDDigit('5GSIDIMEISV', val={'Type': FGSIDTYPE_IMEISV}),
         FGSIDTYPE_MAC    : FGSIDMAC(),
         FGSIDTYPE_EUI64  : FGSIDEUI64()
         }
@@ -1006,10 +1018,19 @@ class CAGInfo(Envelope):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: 3 + self[2].get_len())
         self[2].set_blauto(lambda: (self[0].get_val()-3)<<3)
+    
+    def decode(self):
+        return {
+            'PLMN'      : self['PLMN'].decode(),
+            'CAGIDList' : self['CAGIDList'].get_val()
+            }
 
 
 class CAGInfoList(Sequence):
     _GEN = CAGInfo()
+    
+    def decode(self):
+        return [caginfo.decode() for caginfo in self]
 
 
 #------------------------------------------------------------------------------#
@@ -1160,6 +1181,9 @@ class DeregistrationType(Envelope):
 
 class LADNInd(Sequence):
     _GEN = DNN()
+    
+    def decode(self):
+        return [dnn.decode() for dnn in self]
 
 
 #------------------------------------------------------------------------------#
@@ -1172,10 +1196,16 @@ class LADN(Envelope):
         DNN(),
         FGSTAIList()
         )
+    
+    def decode(self):
+        return self['DNN'].decode(), self['5GSTAIList'].get_tai()
 
 
 class LADNInfo(Sequence):
     _GEN = LADN()
+    
+    def decode(self):
+        return [ladn.decode() for ladn in self]
 
 
 #------------------------------------------------------------------------------#
@@ -1237,6 +1267,9 @@ class NetSlicingInd(Envelope):
 
 class NSSAI(Sequence):
     _GEN = L_SNSSAI()
+    
+    def decode(self):
+        return [snssai[1].get_val_d() for snssai in self]
 
 
 #------------------------------------------------------------------------------#
@@ -1476,10 +1509,16 @@ class RejectedSNSSAI(Envelope):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: self[2].get_len())
         self[2].set_blauto(lambda: self[0].get_val()<<3)
+    
+    def decode(self):
+        return {'Cause': self['Cause'].get_val(), 'SNSSAI': self['SNSSAI'].get_val_d()}
 
 
 class RejectedNSSAI(Sequence):
     _GEN = RejectedSNSSAI()
+    
+    def decode(self):
+        return [rej_snssai.decode() for rej_snssai in self]
 
 
 #------------------------------------------------------------------------------#
@@ -1762,6 +1801,12 @@ class UESecCap(Envelope):
         Uint('EIA7', bl=1), # end of octet 4 (optional part)
         Buf('spare', val=b'', rep=REPR_HEX, trans=True)
         )
+    
+    def set_val(self, val):
+        Envelope.set_val(self, val)
+        # in case no 4G sec cap are set, we disable them
+        if not any([seccap.get_val() == 1 for seccap in self._content[16:32]]):
+            self.disable_from(16)
     
     def _from_char(self, char):
         if self.get_trans():
