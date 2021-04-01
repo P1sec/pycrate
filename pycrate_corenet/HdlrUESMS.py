@@ -49,7 +49,12 @@ class UESMSd(SigStack):
     
     # CP ack / err timer
     TC1star = 2
-     
+    
+    # maximum Transaction Identifier value
+    #   0x7f correspond to using the extended TI structure
+    #   otherwise set it to 0x06 to always use the basic TI structure
+    TI_MAX_VAL = 0x7f
+    
     
     def _log(self, logtype, msg):
         self.RAN._log(logtype, '[SMS] %s' % msg)
@@ -142,12 +147,12 @@ class UESMSd(SigStack):
         while tid in self.Proc:
             tid  += 1
             step += 1
-            if step == 0x7f:
+            if step == self.TI_MAX_VAL:
                 # no TID available
                 return None
-            if tid > 0x7f:
+            if tid > self.TI_MAX_VAL:
                 tid = 0
-        if tid == 0x7f:
+        if tid == self.TI_MAX_VAL:
             self._tid = 0
         else:
             self._tid = 1 + tid
