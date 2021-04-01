@@ -27,8 +27,23 @@
 # *--------------------------------------------------------
 #*/
 
-from pycrate_mobile.TS24007 import *
-from .utils import *
+from pycrate_mobile.TS24007     import *
+from pycrate_corenet.utils_fmt  import *
+
+
+#------------------------------------------------------------------------------#
+# wrapping classes
+#------------------------------------------------------------------------------#
+
+# Signaling stack handler (e.g. for HNBd, ENBd, GNBd, UEd)
+class SigStack(object):
+    pass
+
+
+# Signaling procedure handler
+class SigProc(object):
+    pass
+
 
 #------------------------------------------------------------------------------#
 # RAN-supported procedures (HNBAP, RUA, RANAP, S1AP)
