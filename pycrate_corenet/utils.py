@@ -475,32 +475,52 @@ def print_pduies(desc):
                 print('  None')
 
 
-def print_nasies(nasmsg):
+def print_nasies(nasmsg, indent=''):
     # go after the header (last field: Type), and print IE type, tag if defined,
     # and name
     # WNG: Type1V (Uint4), Type2 (Uint8), Type3V(Buf) are not wrapped
     hdr = nasmsg[0]
     if 'ProtDisc' in hdr._by_name:
         pd = hdr['ProtDisc'].get_val()
+    elif 'EPD' in hdr._by_name:
+        pd = hdr['EPD'].get_val()
     else:
         pd = hdr[0]['ProtDisc'].get_val()
     typ = hdr['Type'].get_val()
-    print('%s (PD %i, Type %i), IEs:' % (nasmsg._name, pd, typ))
+    print('%s%s (PD %i, Type %i), IEs:' % (indent, nasmsg._name, pd, typ))
     #
     if len(nasmsg._content) == 1:
-        print('  None')
+        print('%s  None' % indent)
     else:
         for ie in nasmsg._content[1:]:
             if ie.get_trans():
                 # optional IE
-                print('- %-9s : %s (T: %i)'\
-                      % (ie.__class__.__name__, ie._name, ie[0].get_val()))
+                print('%s- %-9s : %s (T: %i)'\
+                      % (indent, ie.__class__.__name__, ie._name, ie[0].get_val()))
             elif isinstance(ie, TS24007.IE):
                 # mandatory IE
-                print('- %-9s : %s' % (ie.__class__.__name__, ie._name))
+                print('%s- %-9s : %s' % (indent, ie.__class__.__name__, ie._name))
             elif ie.get_bl() == 4:
                 # uint / spare bits
-                print('- %-9s : %s' % ('Type1V', 'spare'))
+                print('%s- %-9s : %s' % (indent, 'Type1V', 'spare'))
             else:
                 assert()
+
+
+def print_nasproc_docs(nasproc):
+    msgcn, msgue = nasproc.Cont
+    print('CN message:')
+    if msgcn is None:
+        print('    None')
+    else:
+        for m in msgcn:
+            print_nasies(m(), indent='    ')
+            print('    ')
+    print('UE message:')
+    if msgue is None:
+        print('    None')
+    else:
+        for m in msgue:
+            print_nasies(m(), indent='    ')
+            print('    ')
 

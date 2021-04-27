@@ -28,11 +28,11 @@
 # *--------------------------------------------------------
 #*/
 
-from .utils      import *
 from .HdlrUEIuCS import *
 from .HdlrUEIuPS import *
 from .HdlrUES1   import *
 from .HdlrUENG   import *
+from .utils      import *
 
 
 class UEd(SigStack):
@@ -75,10 +75,11 @@ class UEd(SigStack):
     IMSI   = None
     IMEI   = None
     IMEISV = None
-    # temporary identities (TMSI / PTMSI / MTMSI are uint32)
+    # temporary identities (TMSI / PTMSI / MTMSI / FGTMSI are uint32)
     TMSI   = None # CS domain
     PTMSI  = None # PS domain
-    MTMSI  = None # EPS / 5GS domains
+    MTMSI  = None # EPS domain
+    FGTMSI = None # 5GS domain
     
     #--------------------------------------------------------------------------#
     # CorenetServer reference
@@ -118,11 +119,17 @@ class UEd(SigStack):
         if imsi:
             self.IMSI = imsi
         elif 'tmsi' in kw:
+            # CS domain, 3G
             self.TMSI = kw['tmsi']
         elif 'ptmsi' in kw:
+            # PS domain, 3G
             self.PTMSI = kw['ptmsi']
         elif 'mtmsi' in kw:
+            # EPS domain, 4G
             self.MTMSI = kw['mtmsi']
+        elif 'fgtmsi' in kw:
+            # 5GS domain, 5G
+            self.FGTMSI = kw['fgtmsi']
         #
         # init capabilities
         self.Cap = {}
@@ -405,6 +412,8 @@ class UEd(SigStack):
     
     def get_new_tmsi(self):
         # use the Python random generator
+        # WARNING: not good for randomness, but good enough for corenet
+        # and at least with some good uniqueness 
         return random.getrandbits(32)
     
     def set_tmsi(self, tmsi):
@@ -438,12 +447,23 @@ class UEd(SigStack):
                 del self.Server.MTMSI[self.MTMSI]
             except Exception:
                 pass
-        # set the new PTMSI
+        # set the new MTMSI
         self.MTMSI = mtmsi
         # update the Server LUT
         self.Server.MTMSI[mtmsi] = self.IMSI
     
-    # TODO: handle 5G NAS identities
+    def set_fgtmsi(self, fgtmsi):
+        # delete current 5GTMSI from the Server LUT
+        if self.FGTMSI is not None:
+            try:
+                del self.Server.FGTMSI[self.FGTMSI]
+            except Exception:
+                pass
+        # set the new 5G TMSI
+        self.FGTMSI = fgtmsi
+        # update the Server LUT
+        self.Server.FGTMSI[fgtmsi] = self.FGTMSI
+    
     
     #--------------------------------------------------------------------------#
     # UE location
@@ -771,3 +791,4 @@ class UEd(SigStack):
                 return '\n\n'.join(txt)
             else:
                 return ''
+

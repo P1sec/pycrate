@@ -68,17 +68,18 @@ class UEEMMd(SigStack):
     
     # list of EMM message types that do not require NAS security to be
     # activated to be processed
-    SEC_NOTNEED = {'EMMAttachRequest',
-                   'EMMIdentityResponse', # only for IMSI
-                   'EMMAuthenticationResponse',
-                   'EMMAuthenticationFailure',
-                   'EMMSecurityModeReject',
-                   'EMMDetachRequestMO', # if sent before security activation
-                   'EMMDetachAccept',
-                   'EMMTrackingAreaUpdateRequest',
-                   'EMMServiceRequest',
-                   'EMMExtServiceRequest'
-                   }
+    SEC_NOTNEED = {
+        'EMMAttachRequest',
+        'EMMIdentityResponse', # only for IMSI
+        'EMMAuthenticationResponse',
+        'EMMAuthenticationFailure',
+        'EMMSecurityModeReject',
+        'EMMDetachRequestMO', # if sent before security activation
+        'EMMDetachAccept',
+        'EMMTrackingAreaUpdateRequest',
+        'EMMServiceRequest',
+        'EMMExtServiceRequest'
+       }
     # to disable completely the check for secured NAS message
     SEC_DISABLED = False
     

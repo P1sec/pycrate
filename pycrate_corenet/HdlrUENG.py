@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.4
 # *
-# * Copyright 2020. Benoit Michau. ANSSI.
+# * Copyright 2020. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -29,9 +29,9 @@
 
 from .utils      import *
 from .ProcCNNgap import *
-# load all required 5GS NAS protocol handlers and SMS handler
-#from .ProcCNFGMM import *
-#from .HdlrUESMS  import *
+from .ProcCNFGMM import *
+from .ProcCNFGSM import *
+from .HdlrUESMS  import *
 
 
 class UEFGMMd(SigStack):
@@ -55,16 +55,26 @@ class UEFGMMd(SigStack):
     # additional time for letting background task happen in priority
     _WAIT_ADD = 0.005
     
-    # list of 5GMM message types that do not require NAS security to be
-    # activated to be processed
-    SEC_NOTNEED = {}
-    # to disable completely the check for secured NAS message
-    SEC_DISABLED = False
+    
+    #--------------------------------------------------------------------------#
+    # FGMM timers
+    #--------------------------------------------------------------------------#
+    
+    # MT Deregistration
+    T3522   = 1
+    # Registration
+    T3550   = 1
+    # UE Config Update
+    T3555   = 2
+    # AKA, SMC
+    T3560   = 2
+    # Identification
+    T3570   = 1
+    # NSSAI Auth
+    T3575   = 2
     
     
     
-    
-        
     
     def _log(self, logtype, msg):
         self.NG._log(logtype, '[5GMM] %s' % msg)
@@ -89,13 +99,11 @@ class UEFGMMd(SigStack):
         """process a NAS 5GMM message (NasRx) sent by the UE,
         and return a list (possibly empty) of NGAP procedure(s) to be sent back 
         to the gNB
-        
-        NasRx has 2 additional attributes (_sec [bool], _ulcnt [uint])
         """
         # TODO
         return []
     
-    def init_proc(self, ProcClass, encod=None, fgmm_preempt=False, sec=True):
+    def init_proc(self, ProcClass, encod=None, fgmm_preempt=False):
         """initialize a CN-initiated 5GMM procedure of class `ProcClass' and 
         given encoder(s), and return the procedure
         """
@@ -133,7 +141,7 @@ class UEFGMMd(SigStack):
         else:
             return True
     
-    def run_proc(self, ProcClass, sec=True, **IEs):
+    def run_proc(self, ProcClass, **IEs):
         """run a network-initiated procedure ProcClass in the context of the 5GMM stack,
         after setting the given IEs in the NAS message to be sent to the UE
         
@@ -147,7 +155,7 @@ class UEFGMMd(SigStack):
         if not self._net_init_con():
             return False, None
         #
-        Proc = self.init_proc(ProcClass, encod={ProcClass.Init: IEs}, fgmm_preempt=True, sec=sec)
+        Proc = self.init_proc(ProcClass, encod={ProcClass.Init: IEs}, fgmm_preempt=True)
         try:
             NgapTxProc = Proc.output()
         except Exception:
@@ -190,15 +198,6 @@ class UEFGSMd(SigStack):
     # to bypass the process() server loop with a custom NAS PDU handler
     RX_HOOK = None
     
-    # list of ESM message types that do not require NAS security to be
-    # activated to be processed
-    SEC_NOTNEED = {
-                   }
-    # to disable completely the check for secured NAS message
-    SEC_DISABLED = False
-    
-    
-    
     
     def _log(self, logtype, msg):
         self.NG._log(logtype, '[5GSM] %s' % msg)
@@ -223,8 +222,6 @@ class UEFGSMd(SigStack):
         """process a NAS 5GSM message (NasRx) sent by the UE,
         and return a list (possibly empty) of NGAP procedure(s) to be sent back 
         to the gNB
-        
-        NasRx has 2 additional attributes (_sec [bool], _ulcnt [uint])
         
         FGMMProc [FMMSigProc or None], indicates if the NAS FGSM message is handled in 
         the context of an FGMM procedure 
@@ -361,6 +358,7 @@ class UENGd(SigStack):
         self.reset_sec_ctx()
         #
         self.connected = Event()
+        self.nasinit   = Event() # state for initial NAS message 
         if gnbd is not None:
             self.set_ran(gnbd)
         else:
@@ -369,12 +367,13 @@ class UENGd(SigStack):
         # init 5GMM and 5GSM sig stacks
         self.FGMM = UEFGMMd(ued, self)
         self.FGSM = UEFGSMd(ued, self)
-        #self.SMS  = UESMSd(ued, self)
+        self.SMS  = UESMSd(ued, self)
     
     def set_ran(self, gnbd):
         self.SEC['KSI'] = None
         self.GNB = gnbd
         self.connected.set()
+        self.nasinit.set()
     
     def unset_ran(self):
         self.GNB.unset_ue_ng(self.CtxId)
@@ -382,6 +381,7 @@ class UENGd(SigStack):
         self.SEC['KSI'] = None
         self.clear()
         self.connected.clear()
+        self.nasinit.clear()
     
     def set_ran_unconnected(self, gnbd):
         # required for paging
@@ -575,13 +575,15 @@ class UENGd(SigStack):
             return self.ret_ngap_dnt(NAS.FGMMStatus(val={'5GMMCause':err}, sec=False))
         #
         # 5GS NAS security handling
+        
+        
         sh, pd = NasRxSec[0]['SecHdr'].get_val(), NasRxSec[0]['EPD'].get_val()
         if sh == 0:
             # clear-text NAS message
             NasRxSec._sec   = False
             NasRxSec._ulcnt = 0
-            if self.UE.TRACE_NAS_EPS:
-                self._log('TRACE_NAS_5G_UL', '\n' + NasRxSec.show())
+            if self.UE.TRACE_NAS_5GS:
+                self._log('TRACE_NAS_5GS_UL', '\n' + NasRxSec.show())
             if pd == 126:
                 NgapTxProc = self.FGMM.process(NasRxSec)
             else:
@@ -707,7 +709,6 @@ class UENGd(SigStack):
             else:
                 return []
     
-    
     def _ngap_nas_sec_err(self):
         # TODO: maybe release the NG-UE link ?
         return []
@@ -716,6 +717,7 @@ class UENGd(SigStack):
         # clears all NAS EPS procedures
         self.FGMM.clear()
         self.FGSM.clear()
+        self.SMS.clear()
     
     #--------------------------------------------------------------------------#
     # network-initiated method (fg task, to be used from the interpreter)
