@@ -1867,9 +1867,10 @@ class UES1d(SigStack):
             self._log('DBG', 'paging: UE already connected')
             return
         # get the set of eNBs serving the UE TAI
+        # eNB id is 2-tuple whereas gNB id is 3-tuple
         tai = (self.UE.PLMN, self.UE.TAC)
         try:
-            enbs = [self.Server.RAN[enbid] for enbid in self.Server.TAI[tai]]
+            enbs = [self.Server.RAN[enbid] for enbid in self.Server.TAI[tai] if len(enbid) == 2]
         except Exception:
             self._log('ERR', 'paging: no eNB serving the UE TAI %s.%.4x' % tai)
             return
@@ -1879,7 +1880,7 @@ class UES1d(SigStack):
             self._log('ERR', 'paging: missing basic information')
             return
         #
-        # start an S1APPaging procedure on all RNCs
+        # start an S1APPaging procedure on all eNBs
         for enb in enbs:
             enb.page(**IEs)
         self._log('INF', 'paging: ongoing')
@@ -1893,9 +1894,10 @@ class UES1d(SigStack):
             self._log('DBG', 'paging: UE already connected')
             return True
         # get the set of eNBs serving the UE TAI
+        # eNB id is 2-tuple whereas gNB id is 3-tuple
         tai = (self.UE.PLMN, self.UE.TAC)
         try:
-            enbs = [self.Server.RAN[enbid] for enbid in self.Server.TAI[tai]]
+            enbs = [self.Server.RAN[enbid] for enbid in self.Server.TAI[tai] if len(enbid) == 2]
         except Exception:
             self._log('ERR', 'paging: no eNB serving the UE TAI %s.%.4x' % tai)
             return False

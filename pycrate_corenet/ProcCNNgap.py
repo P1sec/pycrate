@@ -560,10 +560,24 @@ class NGAPUEContextReleaseRequest(NGAPSigProc):
         'suc': None,
         'uns': None
         }
+    
+    recv = NGAPSigProc._recv
+    
+    def trigger(self):
+        # copy the cause signaled by the gNB
+        Proc = self.NG.init_ngap_proc(NGAPUEContextRelease,
+                                      Cause=self.UEInfo['Cause'],
+                                      UE_NGAP_IDs=('uE-NGAP-ID-pair',
+                                                   {'aMF-UE-NGAP-ID': self.NG.CtxId,
+                                                    'rAN-UE-NGAP-ID': self.NG.CtxId}))
+        if Proc:
+            return [Proc]
+        else:
+            return []
 
 
 class NGAPUEContextRelease(NGAPSigProc):
-    """Initial Context Setup: TS 38.413, section 8.3.3
+    """UE Context Release: TS 38.413, section 8.3.3
     
     CN-initiated
     request-reponse
@@ -588,10 +602,10 @@ class NGAPUEContextRelease(NGAPSigProc):
     
     # Custom decoders
     Decod = {
-        'ini': ({
+        'ini': ({}, {}),
+        'suc': ({
             'UserLocationInformation': lambda x: ngap_userloc_to_hum(x)
             }, {}),
-        'suc': ({}, {}),
         'uns': None
         }
     
@@ -601,6 +615,39 @@ class NGAPUEContextRelease(NGAPSigProc):
         'suc': ({}, {}),
         'uns': None
         }
+    
+    send = NGAPSigProc._send
+    
+    def _release_ng(self):
+        # TODO: suspend all PDU sessions
+        #self.NG.FGSM.pdu_suspend()
+        # update mobility state
+        if self.NG.FGMM.state != 'INACTIVE':
+            self.NG.FGMM.state = 'IDLE'
+        self._log('INF', 'UE disconnected, cause %r' % (self._NetInfo['Cause'], ))
+        #
+        # disconnect the NG interface to the gNB for the UE
+        self.NG.unset_ran()
+        self.NG.unset_ctx()
+    
+    def recv(self, pdu):
+        # recv the NGAPUEContextRelease response
+        self._recv(pdu)
+        # remove from the NGAP procedure stack
+        try:
+            del self.NG.Proc[self.Code]
+        except Exception:
+            pass
+        self._release_ng()
+    
+    def abort(self):
+        # remove from the NGAP procedure stack
+        try:
+            del self.NG.Proc[self.Code]
+        except Exception:
+            pass
+        self._log('INF', 'aborting')
+        self._release_ng()
 
 
 class NGAPUEContextModification(NGAPSigProc):
@@ -1202,7 +1249,18 @@ class NGAPUplinkNASTransport(NGAPSigProc):
         if not self.errcause:
             # verification of UserLocInfo against GNBd parameters:
             err = False
-            # TODO
+            userloc = self.UEInfo['UserLocationInformation']
+            tai = userloc['TAI']
+            if 'NR-CGI' in userloc:
+                cgi = userloc['NR-CGI']
+            else:
+                cgi = userloc['EUTRA-CGI']
+            if cgi[0] != self.GNB.ID[0] or cgi[1][0] != self.GNB.ID[2][0]:
+                self._log('WNG', 'invalid Cell Global-ID, %s.%.9x' % (cgi[0], cgi[1][0]))
+                err = True
+            elif tai not in self.GNB.Config['TAIs']:
+                self._log('WNG', 'invalid TAI, %s.%.6x' % tai)
+                err = True
             if err:
                 self.errcause = ('protocol', 'message-not-compatible-with-receiver-state')
         #

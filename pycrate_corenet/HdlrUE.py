@@ -45,7 +45,7 @@ class UEd(SigStack):
     #--------------------------------------------------------------------------#
     #
     # verbosity level
-    DEBUG              = ('ERR', 'WNG', 'INF', 'DBG')
+    DEBUG              = ('VLN', 'ERR', 'WNG', 'INF', 'DBG')
     # to log UE-related RANAP, S1AP and NGAP for all UE
     TRACE_ASN_RANAP_CS = False
     TRACE_ASN_RANAP_PS = False
