@@ -28,7 +28,7 @@
 #*/
 
 
-from enum import Enum
+from enum import IntEnum
 
 from pycrate_core.utils import *
 from pycrate_core.elt   import *
@@ -75,7 +75,7 @@ class Attribute(Envelope):
         )
 
 
-class IKEv2TransType(Enum):
+class IKEv2TransType(IntEnum):
     ENCR = 1
     PRF = 2
     INTEG = 3
@@ -84,7 +84,7 @@ class IKEv2TransType(Enum):
 
 IKEv2TransType_dict = {e.value: e.name for e in IKEv2TransType}
 
-class IKEv2TransENCR(Enum):
+class IKEv2TransENCR(IntEnum):
     ENCR_DES_IV64 = 1
     ENCR_DES = 2
     ENCR_3DES = 3
@@ -121,7 +121,7 @@ class IKEv2TransENCR(Enum):
 
 IKEv2TransENCR_dict = {e.value: e.name for e in IKEv2TransENCR}
 
-class IKEv2TransPRF(Enum):
+class IKEv2TransPRF(IntEnum):
     PRF_HMAC_MD5 = 1
     PRF_HMAC_SHA1 = 2
     PRF_HMAC_TIGER = 3
@@ -134,7 +134,7 @@ class IKEv2TransPRF(Enum):
 
 IKEv2TransPRF_dict = {e.value: e.name for e in IKEv2TransPRF}
 
-class IKEv2TransAUTH(Enum):
+class IKEv2TransAUTH(IntEnum):
     NONE = 0
     AUTH_HMAC_MD5_96 = 1
     AUTH_HMAC_SHA1_96 = 2
@@ -153,7 +153,7 @@ class IKEv2TransAUTH(Enum):
 
 IKEv2TransAUTH_dict = {e.value: e.name for e in IKEv2TransAUTH}
 
-class IKEv2TransDH(Enum):
+class IKEv2TransDH(IntEnum):
     NONE = 0
     MODP_Group_768 = 1
     MODP_Group_1024 = 2
@@ -182,7 +182,7 @@ class IKEv2TransDH(Enum):
 
 IKEv2TransDH_dict = {e.value: e.name for e in IKEv2TransDH}
 
-class IKEv2TransESN(Enum):
+class IKEv2TransESN(IntEnum):
     NO_ESN = 0
     ESN = 1
 
@@ -216,7 +216,7 @@ class Transform(Envelope):
         self['Attributes'].set_blauto(lambda: (self['Len'].get_val() - 8)<<3)
 
 
-class IKEv2ProtID(Enum):
+class IKEv2ProtID(IntEnum):
     IKE = 1
     AH  = 2
     ESP = 3
@@ -271,7 +271,7 @@ class PayKE(Envelope):
 # section 3.5
 #------------------------------------------------------------------------------#
 
-class IKEv2IDType(Enum):
+class IKEv2IDType(IntEnum):
     ID_IPV4_ADDR = 1
     ID_FQDN = 2
     ID_RFC822_ADDR = 3
@@ -300,7 +300,7 @@ class PayID(Envelope):
 # section 3.7
 #------------------------------------------------------------------------------#
 
-class IKEv2CertEncoding(Enum):
+class IKEv2CertEncoding(IntEnum):
     PKCS7_wrapped_X509_Cert = 1
     PGP_Cert = 2
     DNS_Signed_Key = 3
@@ -331,7 +331,7 @@ class PayCert(Envelope):
 # section 3.8
 #------------------------------------------------------------------------------#
 
-class IKEv2AuthMethod(Enum):
+class IKEv2AuthMethod(IntEnum):
     RSA_Digital_Signature = 1
     Shared_Key_Message_Integrity_Code = 2
     DSS_Digital_Signature = 3
@@ -370,7 +370,7 @@ class PayNonce(Envelope):
 #------------------------------------------------------------------------------#
 
 # error notifications
-class IKEv2NotifTypeErr(Enum):
+class IKEv2NotifTypeErr(IntEnum):
     UNSUPPORTED_CRITICAL_PAYLOAD = 1
     INVALID_IKE_SPI = 4
     INVALID_MAJOR_VERSION = 5
@@ -397,7 +397,7 @@ class IKEv2NotifTypeErr(Enum):
 IKEv2NotifTypeErr_dict = {e.value: e.name for e in IKEv2NotifTypeErr}
 
 # status notifications
-class IKEv2NotifTypeStat(Enum):
+class IKEv2NotifTypeStat(IntEnum):
     INITIAL_CONTACT = 16384
     SET_WINDOW_SIZE = 16385
     ADDITIONAL_TS_POSSIBLE = 16386
@@ -520,7 +520,7 @@ class PayVID(Envelope):
 # section 3.13
 #------------------------------------------------------------------------------#
 
-class IKEv2TSType(Enum):
+class IKEv2TSType(IntEnum):
     IPV4_ADDR_RANGE = 7
     IPV6_ADDR_RANGE = 8
 
@@ -663,7 +663,7 @@ class PayEncr(Envelope):
 # section 3.15
 #------------------------------------------------------------------------------#
 
-class IKEv2AttrType(Enum):
+class IKEv2AttrType(IntEnum):
     INTERNAL_IP4_ADDRESS = 1
     INTERNAL_IP4_NETMASK = 2
     INTERNAL_IP4_DNS = 3
@@ -705,7 +705,7 @@ class IKEv2Attr(Envelope):
         self['Value'].set_blauto(lambda: self['Len'].get_val()<<3)
 
 
-class IKEv2ConfigType(Enum):
+class IKEv2ConfigType(IntEnum):
     CFG_REQUEST = 1
     CFG_REPLY   = 2
     CFG_SET     = 3
@@ -739,7 +739,7 @@ class PayEAP(Envelope):
 # section 3.2
 #------------------------------------------------------------------------------#
 
-class IKEv2PayType(Enum):
+class IKEv2PayType(IntEnum):
     NoNextPayload               = 0
     SecurityAssociation         = 33
     KeyExchange                 = 34
@@ -839,7 +839,7 @@ class IKEv2Pay(Envelope):
 # section 3.1
 #------------------------------------------------------------------------------#
 
-class IKEv2ExchType(Enum):
+class IKEv2ExchType(IntEnum):
     IKE_SA_INIT         = 34
     IKE_AUTH            = 35
     CREATE_CHILD_SA     = 36

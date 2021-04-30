@@ -28,7 +28,7 @@
 #*/
 
 
-from enum import Enum
+from enum import IntEnum
 
 from pycrate_core.utils import *
 from pycrate_core.elt   import *
@@ -48,7 +48,7 @@ from pycrate_core.repr  import *
 # section 4 - EAP Packet Format
 #------------------------------------------------------------------------------#
 
-class EAPPacketCode(Enum):
+class EAPPacketCode(IntEnum):
     Request     = 1
     Response    = 2
     Success     = 3
@@ -59,7 +59,7 @@ class EAPPacketCode(Enum):
 EAPPacketCode_dict = {e.value: e.name for e in EAPPacketCode}
 
 
-class EAPPacketType(Enum):
+class EAPPacketType(IntEnum):
     Identity = 1
     Notification = 2
     Legacy_Nak = 3
