@@ -3427,8 +3427,21 @@ class Sequence(Element):
         """
         return [elt() for elt in self._content]  
     
-    # for array element, no dict to be returned, but just the standard list of values
-    get_val_d = get_val
+    def get_val_d(self):
+        """Returns the list of values obtained with get_val_d() from the content of self
+        Wanrning: in case several elements have the same name, the returned value 
+        won't be complete.
+        
+        Args:
+            None
+        
+        Returns:
+            value (list) : list of values obtained with get_val_d()
+        
+        Raises:
+            EltErr : if one element within the content raises
+        """
+        return [elt.get_val_d() for elt in self._content]
     
     def set_num(self, num=None):
         """Set the raw number of iteration of the template in the sequence's 
