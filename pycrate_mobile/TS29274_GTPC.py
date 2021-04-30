@@ -2414,11 +2414,14 @@ class GTPCIE(Envelope):
     def init_mand(self):
         """initialize all IEs that are mandatory
         """
+        # TODO
         pass
     
     def init_opt(self):
         """initialize all IEs that are optional
         """
+        # TODO
+        pass
     
 
 class GTPCIEs(Sequence):
@@ -5362,7 +5365,7 @@ class MBMSSessionStopResponse(GTPCMsg):
 
 
 #------------------------------------------------------------------------------#
-# General
+# General parser    
 # TS 29.274, section 6
 #------------------------------------------------------------------------------#
 
@@ -5459,6 +5462,10 @@ ERR_GTPC_TYPE_NONEXIST = 3
 
 
 def parse_GTPC(buf):
+    """parses the buffer `buf' for GTP-C message and returns a 2-tuple:
+    - GTP-C message structure, or None if parsing failed
+    - parsing error code, 0 if parsing succeeded, > 0 otherwise
+    """
     if len(buf) < 8:
         return None, ERR_GTPC_BUF_TOO_SHORT
     if python_version < 3:
