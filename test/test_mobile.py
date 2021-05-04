@@ -37,8 +37,10 @@ from pycrate_mobile.GSMTAP          import *
 from pycrate_mobile.NAS             import *
 from pycrate_mobile.SIGTRAN         import *
 from pycrate_mobile.SCCP            import *
+from pycrate_mobile.ISUP            import *
 from pycrate_mobile.TS29281_GTPU    import *
 from pycrate_mobile.TS29274_GTPC    import *
+from pycrate_mobile.TS29244_PFCP    import *
 from pycrate_diameter.Diameter      import DiameterGeneric
 from pycrate_diameter.DiameterIETF  import DiameterIETF
 from pycrate_diameter.Diameter3GPP  import Diameter3GPP
@@ -211,6 +213,21 @@ diam_pdu = tuple(map(unhexlify, (
     '010001384000013e010000230dde9cb98415e2e8000001074000002d6d6d652e6c6f63616c646f6d61696e3b313536303935303834393b31373b6170705f73366100000000000585c0000090000028af00000586c0000084000028af000005a7c000001c000028af1bfb50b4ccdade9bc64c0e79a48c52ae000005a8c0000014000028afee84e634eb3b2d25000005a9c000001c000028af738dfd83971680003f2c75b0b8c3ff6c000005aac000002c000028af7fedfc639da901b42de6c7dea5f1867568d5e0a264b4c2e2915fd5b0a376122e00000108400000176873732e6c6f63616c646f6d61696e0000000128400000136c6f63616c646f6d61696e000000010c4000000c000007d1000001154000000c0000000100000104400000200000010a4000000c000028af000001024000000c01000023', # AIA (nextepc project)
     )))
 
+# PFCP messages
+pfcp_pdu = tuple(map(unhexlify, (
+    # PFCP Heartbeat (open5gs)
+    '2401000c0000bd0000600004e42eaecf',
+    '2002000c00007c0000600004e42eaecf',
+    # PFCP Assoc Setup (open5gs)
+    '2005001a00000100003c000500c0a8386900600004e4296d960059000100',
+    '2006009b00000100003c00050203757067001300010100600004e4296caa002b00060001000000000074000f2900ac10000108696e7465726e65748002006048f9767070207632312e30312e302d31337e67656565386361393037206275696c742062792074726176656c70696e67206f6e2074726176656c70696e672d5669727475616c426f7820617420323032312d30342d31335431393a30393a3337',
+    '2005001b00000300003c000500c0a814fa00600004e367dc2d002b00021001',
+    '2006001a00000300003c000500c0a81403001300010100600004e367dc46',
+    # PFCP Sess Estab (open5gs)
+    '2132006e000000000000000000000100003c000500c0a814030039000d020000000000002710c0a8140300010029003800020001001d0004000003e80002000a00140001030015000105005f000100006c00040000000100030017006c000400000001002c0002020000040005002a000100',
+    '213300110000000000000000000001000013000141'
+    )))
+
 
 def test_nas_mo(nas_pdu=nas_pdu_mo):
     for pdu in nas_pdu:
@@ -372,6 +389,23 @@ def test_diameter(diam_pdu=diam_pdu):
                 assert( dm.get_val() == v )
 
 
+def test_pfcp(pfcp_pdu=pfcp_pdu):
+    for pdu in pfcp_pdu:
+        m, e = parse_PFCP(pdu)
+        assert( e == 0 )
+        v = m.get_val()
+        m.reautomate()
+        assert( m.get_val() == v )
+        m.__init__()
+        m.set_val(v)
+        assert( m.to_bytes() == pdu )
+        #
+        if _with_json:
+            t = m.to_json()
+            m.from_json(t)
+            assert( m.get_val() == v )
+
+
 def test_perf_mobile():
     
     print('[+] NAS MO decoding and re-encoding')
@@ -394,19 +428,27 @@ def test_perf_mobile():
     Te = timeit(test_sccp, number=130)
     print('test_sccp: {0:.4f}'.format(Te))
     
+    print('[+] ISUP decoding and re-encoding')
+    Tj = timeit(test_isup, number=60)
+    print('test_isup: {0:.4f}'.format(Tj))
+    
     print('[+] GTPv1-U decoding and re-encoding')
     Tf = timeit(test_gtpu, number=600)
     print('test_gtpu: {0:.4f}'.format(Tf))
     
     print('[+] GTPv2-C decoding and re-encoding')
-    Tg = timeit(test_gtpc, number=20)
+    Tg = timeit(test_gtpc, number=25)
     print('test_gtpc: {0:.4f}'.format(Tg))
     
     print('[+] Diameter decoding and re-encoding')
     Th = timeit(test_diameter, number=5)
     print('test_diameter: {0:.4f}'.format(Th))
     
-    print('[+] test_mobile total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te+Tf+Tg+Th))
+    print('[+] PFCP decoding and re-encoding')
+    Ti = timeit(test_pfcp, number=60)
+    print('test_pfcp: {0:.4f}'.format(Ti))
+    
+    print('[+] test_mobile total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te+Tf+Tg+Th+Ti+Tj))
 
 
 if __name__ == '__main__':
