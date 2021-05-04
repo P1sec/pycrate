@@ -4686,12 +4686,12 @@ class Alt(Element):
             #
             alts = alt.show()
             if alts[:4] == '### ':
+                # when the alternative is a constructed element
                 return alts.replace('### ', '### %s%s%s : %r -> ' % (self._name, desc, trans, sv), 1)
             else:
-                # case when the selected alternative is a base element
+                # when the alternative is a base element
                 spaces = self.get_hier_abs() * '    '
-                return '%s### %s%s%s : %r ###\n %s%s'\
-                        % (spaces, self._name, desc, trans, sv, spaces, alts)
+                return '%s### %s%s%s : %r ###\n %s' % (spaces, self._name, desc, trans, sv, alts)
         else:
             alt = self.get_alt()
             _hier = alt._hier
