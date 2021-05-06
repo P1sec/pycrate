@@ -164,11 +164,11 @@ class BufBCD(Buf):
         ret = []
         for o in num:
             msb, lsb = o>>4, o&0xf
-            if lsb == 0xF:
+            if lsb == self._filler:
                 break
             else:
                 ret.append( self._chars[lsb] )
-            if msb == 0xF:
+            if msb == self._filler:
                 break
             else:
                 ret.append( self._chars[msb] )
