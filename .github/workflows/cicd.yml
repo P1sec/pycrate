@@ -2,6 +2,8 @@ name: "CI/CD"
 on:
   - push
   - pull_request
+env:
+  DEFAULT_PYTHON: 3.9
 jobs:
   test:
     strategy:
@@ -23,3 +25,23 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: pip install tox tox-gh-actions
       - run: tox
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        distribution:
+          - sdist
+          - wheel
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.DEFAULT_PYTHON }}
+      - run: pip install build
+      - run: python -m build $DISTRIBUTION
+        env:
+          DISTRIBUTION: ${{ matrix.distribution }}
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.distribution }}
+          path: dist/
