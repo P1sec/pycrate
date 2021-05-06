@@ -42,18 +42,18 @@
 import re
 from enum   import IntEnum
 
-
 from pycrate_core.utils     import *
 from pycrate_core.elt       import *
 from pycrate_core.base      import *
 from pycrate_core.charpy    import *
 
-'''some L3 IE may be required
-from pycrate_mobile.TS24501_IE  import 
-from pycrate_mobile.TS24301_IE  import 
-from pycrate_mobile.TS24008_IE  import 
-'''
+from pycrate_ether.Ethernet     import EtherType_dict
+from pycrate_mobile.TS24008_IE  import PLMN
 
+
+#------------------------------------------------------------------------------#
+# some utilities and generic structures
+#------------------------------------------------------------------------------#
 
 def strip_name(s):
     # change 3GPP starting str with TGPP
@@ -61,6 +61,106 @@ def strip_name(s):
     # remove unneeded chars
     s = re.sub('[\s\(\)\'-/]', '', s).strip()
     return s
+
+
+class BitFlags(Envelope):
+    """Envelope containing a list of 1-byte structures
+    
+    Those structures eventually get set to transparent when decoding a shorter buffer
+    and encoding a shorter list of values 
+    """
+    
+    ENV_SEL_TRANS = False
+    
+    def set_val(self, vals):
+        vals_inner = None
+        if isinstance(vals, (list, tuple)):
+            l = len(vals)
+            if l < len(self._content)-1:
+                # set last Octets as transparent
+                [o.set_trans(True) for o in self._content[l:]]
+        elif isinstance(vals, dict):
+            # when a key is not identifying a direct OctetX sub-structure
+            # we take it appart for setting it afterwards
+            vals_inner = {}
+            for k, v in vals.items():
+                if k not in self._by_name:
+                    vals_inner[k] = v
+                    del vals[k]
+        Envelope.set_val(self, vals)
+        if vals_inner:
+            # iterate over each OctetX and check if a bit flag is to be set
+            for i, o in enumerate(self._content):
+                for k, v in vals_inner.items():
+                    if hasattr(o, '_by_name') and k in o._by_name:
+                        o[k].set_val(v)
+                        del vals_inner[k]
+                if not vals_inner:
+                    break
+            for o in self._content[:1+i]:
+                    o.set_trans(False)
+    
+    def _from_char(self, char):
+        if self.get_trans():
+            return
+        # check if some 1-byte structures need to be set transparent
+        if self._blauto is not None:
+            l = self._blauto() >> 3
+        else:
+            l = char.len_byte()
+        if l < len(self._content)-1:
+            [o.set_trans(True) for o in self._content[l:]]
+        Envelope._from_char(self, char)
+
+
+class _IEExtUint32(Envelope):
+    _GEN = (
+        Uint32('Val'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+class _LU8V(Envelope):
+    _GEN = (
+        Uint8('Len'),
+        Buf('Val', val=b'')
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['Len'].set_valauto(lambda: self['Val'].get_len())
+        self['Val'].set_blauto(lambda: self['Len'].get_val()<<3)
+        if 'rep' in kwargs:
+            self['Val']._rep = kwargs['rep']
+
+
+class _LU16V(Envelope):
+    _GEN = (
+        Uint16('Len'),
+        Buf('Val', val=b'')
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['Len'].set_valauto(lambda: self['Val'].get_len())
+        self['Val'].set_blauto(lambda: self['Len'].get_val()<<3)
+        if 'rep' in kwargs:
+            self['Val']._rep = kwargs['rep']
+
+
+class _LU16LU16V(Envelope):
+    _GEN = (
+        Uint16('Len'),
+        Sequence('Vals', GEN=_LU16V())
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['Len'].set_valauto(lambda: self['Vals'].get_len())
+        self['Vals'].set_blauto(lambda: self['Len'].get_val()<<3)
+        self['Vals']._tmpl._name = self._name
+        if 'rep' in kwargs:
+            self['Vals']._tmpl['Val']._rep = kwargs['rep']
 
 
 #------------------------------------------------------------------------------#
@@ -179,7 +279,7 @@ PFCPIEType_dict = {
     108 : 'FAR ID',
     109 : 'QER ID',
     110 : 'OCI Flags',
-    111 : 'PFCP Association Release Request',
+    111 : 'Association Release Request',
     112 : 'Graceful Release Period',
     113 : 'PDN Type',
     114 : 'Failed Rule ID',
@@ -201,7 +301,7 @@ PFCPIEType_dict = {
     130 : 'Remove Traffic Endpoint',
     131 : 'Traffic Endpoint ID',
     132 : 'Ethernet Packet Filter',
-    133 : 'MAC address',
+    133 : 'MAC Address',
     134 : 'C-TAG',
     135 : 'S-TAG',
     136 : 'Ethertype',
@@ -276,9 +376,9 @@ PFCPIEType_dict = {
     205 : 'Clock Drift Report',
     206 : 'TSN Time Domain Number',
     207 : 'Time Offset Threshold',
-    208 : 'Cumulative rateRatio Threshold',
+    208 : 'Cumulative RateRatio Threshold',
     209 : 'Time Offset Measurement',
-    210 : 'Cumulative rateRatio Measurement',
+    210 : 'Cumulative RateRatio Measurement',
     211 : 'Remove SRR ',
     212 : 'Create SRR ',
     213 : 'Update SRR',
@@ -383,13 +483,6 @@ class PFCPIE(Envelope):
             t = char.to_uint(16)
             if t in PFCPIELUT:
                 self.set_ie_class(t)
-                # TODO: 
-                # When the Data structure is extensible (Envelope ending with a Buf('ext'))
-                # and the buffer `char' is not as long as the expected Data structure
-                # we should support truncating the structure to see if the buffer can fit OK...
-                # otherwise, the decoding of PFCPIEs could stop before the end of the
-                # buffer due to a CharpyErr
-                # That would ultimately lead to mis-decoded messages (with missing IE in PFCPIEs)
         Envelope._from_char(self, char)
     
     def set_ie_class(self, t):
@@ -498,7 +591,7 @@ class ClockDriftControlInformation(PFCPIEs):
     OPT  = (
         PFCPIEType.TSNTimeDomainNumber.value,
         PFCPIEType.TimeOffsetThreshold.value,
-        PFCPIEType.CumulativerateRatioThreshold.value
+        PFCPIEType.CumulativeRateRatioThreshold.value
         )
 
 
@@ -570,7 +663,7 @@ class ClockDriftReport(PFCPIEs):
         )
     OPT  = (
         PFCPIEType.TimeOffsetMeasurement.value,
-        PFCPIEType.CumulativerateRatioMeasurement.value,
+        PFCPIEType.CumulativeRateRatioMeasurement.value,
         PFCPIEType.TimeStamp.value
         )
 
@@ -666,7 +759,7 @@ class EthernetPacketFilter(PFCPIEs):
     OPT  = (
         PFCPIEType.EthernetFilterID.value,
         PFCPIEType.EthernetFilterProperties.value,
-        PFCPIEType.MACaddress.value,
+        PFCPIEType.MACAddress.value,
         PFCPIEType.Ethertype.value,
         PFCPIEType.CTAG.value,
         PFCPIEType.STAG.value,
@@ -1705,7 +1798,7 @@ class TSCManagementInformationSessionReportRequest(PFCPIEs):
 # TS 29.244, section 7.5.8.6: Session Report IE within PFCP Session Report Request
 #------------------------------------------------------------------------------#
 
-# IE Type: 218
+# IE Type: 214
 class SessionReport(PFCPIEs):
     MAND = (
         PFCPIEType.SRRID.value,
@@ -1713,6 +1806,13 @@ class SessionReport(PFCPIEs):
     OPT  = (
         PFCPIEType.AccessAvailabilityReport.value,
         PFCPIEType.QoSMonitoringReport.value,
+        )
+    
+
+# IE Type: 218
+class AccessAvailabilityReport(PFCPIEs):
+    MAND = (
+        PFCPIEType.AccessAvailabilityInformation
         )
 
 
@@ -1815,7 +1915,7 @@ class FTEID(Envelope):
         Uint('CHID', bl=1),
         Uint('CH', bl=1),
         Uint('V6', bl=1),
-        Uint('V4', val=1, bl=1),
+        Uint('V4', bl=1),
         Uint32('TEID'),
         Buf('IPv4Addr', bl=32, rep=REPR_HEX),
         Buf('IPv6Addr', bl=128, rep=REPR_HEX),
@@ -1843,20 +1943,6 @@ class NetworkInstance(Buf):
 #------------------------------------------------------------------------------#
 # TS 29.244, section 8.2.5: SDF Filter
 #------------------------------------------------------------------------------#
-
-class _LU16V(Envelope):
-    _GEN = (
-        Uint16('Len'),
-        Buf('Val', val=b'')
-        )
-    
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self['Len'].set_valauto(lambda: self['Val'].get_len())
-        self['Val'].set_blauto(lambda: self['Len'].get_val()<<3)
-        if 'rep' in kwargs:
-            self['Val']._rep = kwargs['rep']
-
 
 # IE Type: 23
 class SDFFilter(Envelope):
@@ -1940,13 +2026,6 @@ class GBR(_ULDLBR):
 #------------------------------------------------------------------------------#
 # TS 29.244, section 8.2.10: QER Correlation ID
 #------------------------------------------------------------------------------#
-
-class _IEExtUint32(Envelope):
-    _GEN = (
-        Uint32('Val'),
-        Buf('ext', val=b'', rep=REPR_HEX)
-        )
-
 
 # IE Type: 28
 class QERCorrelationID(_IEExtUint32):
@@ -2055,26 +2134,29 @@ class InactivityDetectionTime(_IEExtUint32):
 #------------------------------------------------------------------------------#
 
 # IE Type: 37
-class ReportingTriggers(Envelope):
+class ReportingTriggers(BitFlags):
     _GEN = (
-        Uint('LIUSA', bl=1),
-        Uint('DROTH', bl=1),
-        Uint('STOPT', bl=1),
-        Uint('START', bl=1),
-        Uint('QUHTI', bl=1),
-        Uint('TIMTH', bl=1),
-        Uint('VOLTH', bl=1),
-        Uint('PERIO', bl=1), # EOB
-        Uint('QUVTI', bl=1),
-        Uint('IPMJL', bl=1),
-        Uint('EVEQU', bl=1),
-        Uint('EVETH', bl=1),
-        Uint('MACAR', bl=1),
-        Uint('ENVCL', bl=1),
-        Uint('TIMQU', bl=1),
-        Uint('VOLQU', bl=1), # EOB
-        Uint('spare', bl=7, rep=REPR_HEX),
-        Uint('REEMR', bl=1), # EOB
+        Envelope('Octet1', GEN=(
+            Uint('LIUSA', bl=1),
+            Uint('DROTH', bl=1),
+            Uint('STOPT', bl=1),
+            Uint('START', bl=1),
+            Uint('QUHTI', bl=1),
+            Uint('TIMTH', bl=1),
+            Uint('VOLTH', bl=1),
+            Uint('PERIO', bl=1))),
+        Envelope('Octet2', GEN=(
+            Uint('QUVTI', bl=1),
+            Uint('IPMJL', bl=1),
+            Uint('EVEQU', bl=1),
+            Uint('EVETH', bl=1),
+            Uint('MACAR', bl=1),
+            Uint('ENVCL', bl=1),
+            Uint('TIMQU', bl=1),
+            Uint('VOLQU', bl=1))),
+        Envelope('Octet3', GEN=( 
+            Uint('spare', bl=7, rep=REPR_HEX),
+            Uint('REEMR', bl=1))),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
 
@@ -2195,10 +2277,7 @@ class DestinationInterface(Envelope):
 #------------------------------------------------------------------------------#
 
 # IE Type: 43
-class UPFunctionFeatures(Envelope):
-    
-    ENV_SEL_TRANS = False
-    
+class UPFunctionFeatures(BitFlags):
     _GEN = (
         Envelope('Octet1', GEN=(
             Uint('TREU', bl=1),
@@ -2258,45 +2337,6 @@ class UPFunctionFeatures(Envelope):
             ),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
-    
-    def set_val(self, vals):
-        if vals is None:
-            [elt.set_trans(False) for elt in self._content]
-            [elt.set_val(None) for elt in self._content]
-        elif isinstance(vals, (tuple, list)):
-            for i, val in enumerate(vals):
-                self._content[i].set_trans(False)
-                self._content[i].set_val(val)
-                if i > len(self._content):
-                    break
-            if i < len(self._content)-1:
-                [elt.set_trans(True) for elt in self._content[1+i:]]
-        elif isinstance(vals, dict):
-            off = 0
-            for name, val in vals.items():
-                if name[:5] == 'Octet':
-                    try:
-                        off = max(off, int(name[5:]))
-                    except Exception:
-                        pass
-                elif name == 'ext':
-                    off = len(self._content)
-                try:
-                    self.__setitem__(name, val)
-                except Exception:
-                    pass
-            [elt.set_trans(False) for elt in self._content[:off]]
-            if off < len(self._content)-1:
-                [elt.set_trans(True) for elt in self._content[off:]]
-        elif self._SAFE_STAT:
-            raise(EltErr('{0} [set_val]: vals type is {1}, expecting None, '\
-                  'tuple, list or dict'.format(self._name, type(vals).__name__)))
-    
-    def _from_char(self, char):
-        l = char.len_byte()
-        if l < 6:
-            [elt.set_trans(True) for elt in self._content[l:]]
-        Envelope._from_char(self, char)
 
 
 #------------------------------------------------------------------------------#
@@ -2304,20 +2344,22 @@ class UPFunctionFeatures(Envelope):
 #------------------------------------------------------------------------------#
 
 # IE Type: 44
-class ApplyAction(Envelope):
+class ApplyAction(BitFlags):
     _GEN = (
-        Uint('DFRT', bl=1),
-        Uint('IPMD', bl=1),
-        Uint('IPMA', bl=1),
-        Uint('DUPL', bl=1),
-        Uint('NOCP', bl=1),
-        Uint('BUFF', bl=1),
-        Uint('FORW', bl=1),
-        Uint('DROP', bl=1),
-        Uint('spare', bl=5, rep=REPR_HEX),
-        Uint('DDPN', bl=1),
-        Uint('BDPN', bl=1),
-        Uint('EDRT', bl=1),
+        Envelope('Octet1', GEN=(
+            Uint('DFRT', bl=1),
+            Uint('IPMD', bl=1),
+            Uint('IPMA', bl=1),
+            Uint('DUPL', bl=1),
+            Uint('NOCP', bl=1),
+            Uint('BUFF', bl=1),
+            Uint('FORW', bl=1),
+            Uint('DROP', bl=1))),
+        Envelope('Octet2', GEN=(
+            Uint('spare', bl=5, rep=REPR_HEX),
+            Uint('DDPN', bl=1),
+            Uint('BDPN', bl=1),
+            Uint('EDRT', bl=1))),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
 
@@ -2429,7 +2471,7 @@ class PFCPSMReqFlags(Envelope):
 class PFCPSRRspFlags(Envelope):
     _GEN = (
         Uint('spare', bl=7, rep=REPR_HEX),
-        Uint('DROBU', bl=1),
+        Uint('DROBU', val=1, bl=1),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
 
@@ -2485,7 +2527,7 @@ class FSEID(Envelope):
     _GEN = (
         Uint('spare', bl=6, rep=REPR_HEX),
         Uint('V4', bl=1),
-        Uint('V6', val=1, bl=1),
+        Uint('V6', bl=1),
         Uint64('SEID'),
         Buf('IPv4Addr', bl=32, rep=REPR_HEX),
         Buf('IPv6Addr', bl=128, rep=REPR_HEX),
@@ -2508,20 +2550,9 @@ NodeIDType_dict = {
     2 : 'FQDN'
     }
 
-class _Label(Envelope):
-    _GEN=(
-        Uint8('Len'),
-        Buf('Val', val=b'')
-        )
-    
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self['Len'].set_valauto(lambda: self['Val'].get_len())
-        self['Val'].set_blauto(lambda: self['Len'].get_val()<<3)
-
 
 class _FQDN(Sequence):
-    _GEN = _Label('Label')
+    _GEN = _LU8V('Label')
 
 
 # IE Type: 60
@@ -2543,21 +2574,6 @@ class NodeID(Envelope):
 #------------------------------------------------------------------------------#
 # TS 29.244, section 8.2.39: PFD Contents
 #------------------------------------------------------------------------------#
-
-class _LU16LU16V(Envelope):
-    _GEN = (
-        Uint16('Len'),
-        Sequence('Vals', GEN=_LU16V())
-        )
-    
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self['Len'].set_valauto(lambda: self['Vals'].get_len())
-        self['Vals'].set_blauto(lambda: self['Len'].get_val()<<3)
-        self['Vals']._tmpl._name = self._name
-        if 'rep' in kwargs:
-            self['Vals']._tmpl['Val']._rep = kwargs['rep']
-
 
 # IE Type: 61
 class PFDContents(Envelope):
@@ -2617,30 +2633,33 @@ class MeasurementMethod(Envelope):
 #------------------------------------------------------------------------------#
 
 # IE Type: 63
-class UsageReportTrigger(Envelope):
+class UsageReportTrigger(BitFlags):
     _GEN = (
-        Uint('IMMER', bl=1),
-        Uint('DROTH', bl=1),
-        Uint('STOPT', bl=1),
-        Uint('START', bl=1),
-        Uint('QUHTI', bl=1),
-        Uint('TIMTH', bl=1),
-        Uint('VOLTH', bl=1),
-        Uint('PERIO', bl=1), # EOB1
-        Uint('EVETH', bl=1),
-        Uint('MACAR', bl=1),
-        Uint('ENVCL', bl=1),
-        Uint('MONIT', bl=1),
-        Uint('TERMR', bl=1),
-        Uint('LIUSA', bl=1),
-        Uint('TIMQU', bl=1),
-        Uint('VOLQU', bl=1), # EOB2
-        Uint('spare', bl=3, rep=REPR_HEX),
-        Uint('EMRRE', bl=1),
-        Uint('QUVTI', bl=1),
-        Uint('IPMJL', bl=1),
-        Uint('TEBUR', bl=1),
-        Uint('EVEQU', bl=1), # EOB3
+        Envelope('Octet1', GEN=(
+            Uint('IMMER', bl=1),
+            Uint('DROTH', bl=1),
+            Uint('STOPT', bl=1),
+            Uint('START', bl=1),
+            Uint('QUHTI', bl=1),
+            Uint('TIMTH', bl=1),
+            Uint('VOLTH', bl=1),
+            Uint('PERIO', bl=1))),
+        Envelope('Octet2', GEN=(
+            Uint('EVETH', bl=1),
+            Uint('MACAR', bl=1),
+            Uint('ENVCL', bl=1),
+            Uint('MONIT', bl=1),
+            Uint('TERMR', bl=1),
+            Uint('LIUSA', bl=1),
+            Uint('TIMQU', bl=1),
+            Uint('VOLQU', bl=1))),
+        Envelope('Octet3', GEN=(
+            Uint('spare', bl=3, rep=REPR_HEX),
+            Uint('EMRRE', bl=1),
+            Uint('QUVTI', bl=1),
+            Uint('IPMJL', bl=1),
+            Uint('TEBUR', bl=1),
+            Uint('EVEQU', bl=1))),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
 
@@ -2893,18 +2912,20 @@ class BARID(Envelope):
 #------------------------------------------------------------------------------#
 
 # IE Type: 89
-class CPFunctionFeatures(Envelope):
+class CPFunctionFeatures(BitFlags):
     _GEN = (
-        Uint('UIAUR', bl=1),
-        Uint('ARDR', bl=1),
-        Uint('MPAS', bl=1),
-        Uint('BUNDL', bl=1),
-        Uint('SSET', bl=1),
-        Uint('EPFAR', bl=1),
-        Uint('OVRL', bl=1),
-        Uint('LOAD', bl=1),
-        Uint('spare', bl=7, rep=REPR_HEX),
-        Uint('PSUCC', bl=1),
+        Envelope('Octet1', GEN=(
+            Uint('UIAUR', bl=1),
+            Uint('ARDR', bl=1),
+            Uint('MPAS', bl=1),
+            Uint('BUNDL', bl=1),
+            Uint('SSET', bl=1),
+            Uint('EPFAR', bl=1),
+            Uint('OVRL', bl=1),
+            Uint('LOAD', bl=1))),
+        Envelope('Octet2', GEN=(
+            Uint('spare', bl=7, rep=REPR_HEX),
+            Uint('PSUCC', bl=1))),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
 
@@ -3076,8 +3097,9 @@ class OuterHeaderRemoval(Envelope):
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self['GTPUExtHdrDel'].set_transauto(lambda: False if self['Desc'].get_val() in (0, 1, 6) else True)
-        
+        # Warning: spec is really unclear about to have GTPUExtHdrDel or not
+        self['GTPUExtHdrDel'].set_transauto(lambda: False if self['Desc'].get_val() == 6 else True)
+
 
 #------------------------------------------------------------------------------#
 # TS 29.244, section 8.2.65: Recovery Time Stamp
@@ -3113,10 +3135,847 @@ class DLFlowLevelMarking(Envelope):
 # TS 29.244, section 8.2.67: Header Enrichment
 #------------------------------------------------------------------------------#
 
-class _HeaderFieldName(Envelope):
+# IE Type: 98
+class HeaderEnrichment(Envelope):
     _GEN = (
-        Uint8('Len'),
-        Buf('Val', val=b'')
+        Uint('spare', bl=3, rep=REPR_HEX),
+        Uint('Type', bl=5, dic={0: 'HTTP'}),
+        _LU8V('HeaderFieldName'),
+        _LU16V('HeaderFieldValue'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.68: Measurement Information
+#------------------------------------------------------------------------------#
+
+# IE Type: 100
+class MeasurementInformation(Envelope):
+    _GEN = (
+        Uint('spare', bl=1),
+        Uint('ASPOC', bl=1),
+        Uint('SSPOC', bl=1),
+        Uint('MNOP', bl=1),
+        Uint('ISTM', bl=1),
+        Uint('RADI', bl=1),
+        Uint('INAM', bl=1),
+        Uint('MBQE', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.69: Node Report Type
+#------------------------------------------------------------------------------#
+
+# IE Type: 101
+class NodeReportType(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('GPQR', bl=1),
+        Uint('CKDR', bl=1),
+        Uint('UPRR', bl=1),
+        Uint('UPFR', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.70:  Remote GTP-U Peer
+#------------------------------------------------------------------------------#
+
+# IE Type: 103
+class RemoteGTPUPeer(Envelope):
+    _GEN = (
+        Uint('spare', bl=4),
+        Uint('NI', bl=1),
+        Uint('DI', bl=1),
+        Uint('V4', bl=1),
+        Uint('V6', bl=1),
+        Buf('IPv4Addr', bl=32, rep=REPR_HEX),
+        Buf('IPv6Addr', bl=128, rep=REPR_HEX),
+        _LU16V('DestinationInterface'),
+        _LU16V('NetworkInstance'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['IPv4Addr'].set_transauto(lambda: False if self['V4'].get_val() else True)
+        self['IPv6Addr'].set_transauto(lambda: False if self['V6'].get_val() else True)
+        self['DestinationInterface'].set_transauto(lambda: False if self['DI'].get_val() else True)
+        self['NetworkInstance'].set_transauto(lambda: False if self['NI'].get_val() else True)
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.71: UR-SEQN
+#------------------------------------------------------------------------------#
+
+# IE Type: 104
+class URSEQN(Uint32):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.72: Activate Predefined Rules
+#------------------------------------------------------------------------------#
+
+# IE Type: 106
+class ActivatePredefinedRules(Buf):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.73: Deactivate Predefined Rules
+#------------------------------------------------------------------------------#
+
+# IE Type: 107
+class DeactivatePredefinedRules(Buf):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.74: FAR ID
+#------------------------------------------------------------------------------#
+
+# IE Type: 108
+class FARID(Envelope):
+    _GEN = (
+        Uint32('Val'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.75: QER ID
+#------------------------------------------------------------------------------#
+
+# IE Type: 109
+class QERID(Envelope):
+    _GEN = (
+        Uint32('Val'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.76: OCI Flags
+#------------------------------------------------------------------------------#
+
+# IE Type: 110
+class OCIFlags(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('AOCI', val=1, bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.77: PFCP Association Release Request
+#------------------------------------------------------------------------------#
+
+# IE Type: 111
+class AssociationReleaseRequest(Envelope):
+    _GEN = (
+        Uint('spare', bl=6, rep=REPR_HEX),
+        Uint('URSS', bl=1),
+        Uint('SARR', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.78: Graceful Release Period
+#------------------------------------------------------------------------------#
+
+# IE Type: 112
+class GracefulReleasePeriod(_Timer):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.79: PDN Type
+#------------------------------------------------------------------------------#
+
+PDNType_dict = {
+    1 : 'IPv4',
+    2 : 'IPv6',
+    3 : 'IPv4v6',
+    4 : 'Non-IP',
+    5 : 'Ethernet'
+    }
+
+# IE Type: 113
+class PDNType(Envelope):
+    _GEN = (
+        Uint('spare', bl=5, rep=REPR_HEX),
+        Uint('Val', bl=3, dic=PDNType_dict),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.80: Failed Rule ID
+#------------------------------------------------------------------------------#
+
+RuleIDType_dict = {
+    0 : 'PDR',
+    1 : 'FAR',
+    2 : 'QER',
+    3 : 'URR',
+    4 : 'BAR',
+    5 : 'MAR',
+    6 : 'SRR',
+    }
+
+# IE Type: 114
+class FailedRuleID(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('RuleIDType', bl=4, dic=RuleIDType_dict),
+        Alt('RuleIDVal', GEN={
+            0 : Uint16('PDRID'),
+            1 : Uint32('FARID'),
+            2 : Uint32('QERID'),
+            3 : Uint32('URRID'),
+            4 : Uint8('BARID'),
+            5 : Uint16('MARID'),
+            6 : Uint8('SRRID')
+            },
+            DEFAULT=Buf('unk', val=b'', rep=REPR_HEX),
+            sel=lambda self: self.get_env()['RuleIDType'].get_val()
+            ),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.81: Time Quota Mechanism
+#------------------------------------------------------------------------------#
+
+# IE Type: 115
+class TimeQuotaMechanism(Envelope):
+    _GEN = (
+        Uint('spare', bl=6, rep=REPR_HEX),
+        Uint('BTIT', bl=2, dic={0: 'CTP', 1: 'DTP'}),
+        Uint32('BaseTimeInterval'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.83: User Plane Inactivity Timer
+#------------------------------------------------------------------------------#
+
+# IE Type: 117
+class UserPlaneInactivityTimer(_IEExtUint32):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.84: Multiplier
+#------------------------------------------------------------------------------#
+
+# IE Type: 119
+class Multiplier(Envelope):
+    _GEN = (
+        Int64('ValueDigits'),
+        Int32('Exponent')
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.85: Aggregated URR ID IE
+#------------------------------------------------------------------------------#
+
+# IE Type: 120
+class AggregatedURRID(Uint32):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.86: Subsequent Volume Quota
+#------------------------------------------------------------------------------#
+
+# IE Type: 121
+class SubsequentVolumeQuota(_Volume):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.87: Subsequent Time Quota
+#------------------------------------------------------------------------------#
+
+# IE Type: 122
+class SubsequentTimeQuota(_IEExtUint32):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.88: RQI
+#------------------------------------------------------------------------------#
+
+# IE Type: 123
+class RQI(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('RQI', val=1, bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.89: QFI
+#------------------------------------------------------------------------------#
+
+# IE Type: 124
+class QFI(Envelope):
+    _GEN = (
+        Uint('spare', bl=2, rep=REPR_HEX),
+        Uint('QFI', val=1, bl=6),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.90: Query URR Reference
+#------------------------------------------------------------------------------#
+
+# IE Type: 125
+class QueryURRReference(_IEExtUint32):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.91: Additional Usage Reports Information
+#------------------------------------------------------------------------------#
+
+# IE Type: 126
+class AdditionalUsageReportsInformation(Envelope):
+    _GEN = (
+        Uint('AURI', bl=1),
+        Uint('Num', bl=15),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.92: Traffic Endpoint ID
+#------------------------------------------------------------------------------#
+
+# IE Type: 131
+class TrafficEndpointID(Envelope):
+    _GEN = (
+        Uint8('Val'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.93: MAC address
+#------------------------------------------------------------------------------#
+
+# IE Type: 133
+class MACAddress(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('UDES', bl=1),
+        Uint('USOU', bl=1),
+        Uint('DEST', bl=1),
+        Uint('SOUR', bl=1),
+        Buf('SrcMACAddr', bl=48, rep=REPR_HEX),
+        Buf('DstMACAddr', bl=48, rep=REPR_HEX),
+        Buf('UpperSrcMACAddr', bl=48, rep=REPR_HEX),
+        Buf('UpperDstMACAddr', bl=48, rep=REPR_HEX),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['SrcMACAddr'].set_transauto(lambda: False if self['SOUR'].get_val() else True)
+        self['DstMACAddr'].set_transauto(lambda: False if self['DEST'].get_val() else True)
+        self['UpperSrcMACAddr'].set_transauto(lambda: False if self['USOU'].get_val() else True)
+        self['UpperDstMACAddr'].set_transauto(lambda: False if self['UDES'].get_val() else True)
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.94: C-TAG (Customer-VLAN tag)
+#------------------------------------------------------------------------------#
+
+class _VLANTAG(Envelope):
+    _GEN = (
+        Uint('spare', bl=5, rep=REPR_HEX),
+        Uint('VID', bl=1),
+        Uint('DEI', bl=1),
+        Uint('PCP', bl=1),
+        Uint('CVID_MSB', bl=4),
+        Uint('DEIFlag', bl=1),
+        Uint('PCPValue', bl=1),
+        Uint8('CVID_LSB'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+# IE Type: 134
+class CTAG(_VLANTAG):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.95: S-TAG (Service-VLAN tag)
+#------------------------------------------------------------------------------#
+
+# IE Type: 135
+class STAG(_VLANTAG):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.96: Ethertype
+#------------------------------------------------------------------------------#
+
+# IE Type: 136
+class Ethertype(Envelope):
+    _GEN = (
+        Uint16('Val', rep=REPR_HEX, dic=EtherType_dict),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.97: Proxying
+#------------------------------------------------------------------------------#
+
+# IE Type: 137
+class Proxying(Envelope):
+    _GEN = (
+        Uint('spare', bl=6, rep=REPR_HEX),
+        Uint('INS', bl=1),
+        Uint('ARP', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.98: Ethernet Filter ID
+#------------------------------------------------------------------------------#
+
+# IE Type: 138
+class EthernetFilterID(_IEExtUint32):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.99: Ethernet Filter Properties
+#------------------------------------------------------------------------------#
+
+# IE Type: 139
+class EthernetFilterProperties(Envelope):
+    _GEN = (
+        Uint('spare', bl=7),
+        Uint('BIDE', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.100: Suggested Buffering Packets Count
+#------------------------------------------------------------------------------#
+
+# IE Type: 140
+class SuggestedBufferingPacketsCount(Envelope):
+    _GEN = (
+        Uint8('Val'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.101: User ID
+#------------------------------------------------------------------------------#
+
+# IE Type: 141
+class UserID(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('NAIF', bl=1),
+        Uint('MSISDNF', bl=1),
+        Uint('IMEIF', bl=1),
+        Uint('IMSIF', bl=1),
+        _LU8V('IMSI'),
+        _LU8V('IMEI'),
+        _LU8V('MSISDN'),
+        _LU8V('NAI'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['IMSI'].set_transauto(lambda: False if self['IMSIF'].get_val() else True)
+        self['IMEI'].set_transauto(lambda: False if self['IMEIF'].get_val() else True)
+        self['MSISDN'].set_transauto(lambda: False if self['MSISDNF'].get_val() else True)
+        self['NAI'].set_transauto(lambda: False if self['NAIF'].get_val() else True)
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.102: Ethernet PDU Session Information
+#------------------------------------------------------------------------------#
+
+# IE Type: 142
+class EthernetPDUSessionInformation(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('ETHI', val=1, bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+    
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.103: MAC Addresses Detected
+#------------------------------------------------------------------------------#
+
+class _MACAddresses(Envelope):
+    _GEN = (
+        Uint8('NumAddrs'),
+        Sequence('Addrs', GEN=Buf('MACAddr', bl=48, rep=REPR_HEX)),
+        _LU8V('CTAG', rep=REPR_HEX),
+        _LU8V('STAG', rep=REPR_HEX),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['NumAddrs'].set_valauto(lambda: self['Addrs'].get_num())
+        self['Addrs'].set_numauto(lambda: self['NumAddrs'].get_val())
+
+
+# IE Type: 144
+class MACAddressesDetected(_MACAddresses):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.104: MAC Addresses Removed
+#------------------------------------------------------------------------------#
+
+# IE Type: 145
+class MACAddressesRemoved(_MACAddresses):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.105: Ethernet Inactivity Timer
+#------------------------------------------------------------------------------#
+
+# IE Type: 146
+class EthernetInactivityTimer(_IEExtUint32):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.106: Subsequent Event Quota
+#------------------------------------------------------------------------------#
+
+# IE Type: 150
+class SubsequentEventQuota(_IEExtUint32):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.107: Subsequent Event Threshold
+#------------------------------------------------------------------------------#
+
+# IE Type: 151
+class SubsequentEventThreshold(_IEExtUint32):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.108: Trace Information
+#------------------------------------------------------------------------------#
+
+# IE Type: 152
+class TraceInformation(Envelope):
+    _GEN = (
+        PLMN(),
+        Uint24('TraceID'),
+        _LU8V('TriggeringEvents', rep=REPR_HEX),
+        Uint8('SessionTraceDepth'),
+        _LU8V('ListOfInterfaces', rep=REPR_HEX),
+        _LU8V('IPAdressOfTraceCollectionEntity', rep=REPR_HEX),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.109: Framed-Route
+#------------------------------------------------------------------------------#
+
+# IE Type: 153
+class FramedRoute(Buf):
+    _rep = REPR_HEX
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.110: Framed-Routing
+#------------------------------------------------------------------------------#
+
+# IE Type: 154
+class FramedRouting(Uint32):
+    _dic = {
+        0 : 'None',
+        1 : 'Send routing packets',
+        2 : 'Listen for routing packets',
+        3 : 'Send and Listen'
+        }
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.111: Framed-IPv6-Route
+#------------------------------------------------------------------------------#
+
+# IE Type: 155
+class FramedIPv6Route(Buf):
+    _rep = REPR_HEX
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.112: Event Quota
+#------------------------------------------------------------------------------#
+
+# IE Type: 148
+class EventQuota(_IEExtUint32):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.113: Event Threshold
+#------------------------------------------------------------------------------#
+
+# IE Type: 149
+class EventThreshold(_IEExtUint32):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.114: Time Stamp
+#------------------------------------------------------------------------------#
+
+# IE Type: 156
+class TimeStamp(_IEExtUint32):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.115: Averaging Window
+#------------------------------------------------------------------------------#
+
+# IE Type: 157
+class AveragingWindow(_IEExtUint32):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.116: Paging Policy Indicator (PPI)
+#------------------------------------------------------------------------------#
+
+# IE Type: 158
+class PagingPolicyIndicator(Envelope):
+    _GEN = (
+        Uint('spare', bl=5, rep=REPR_HEX),
+        Uint('PPI', bl=3),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.117: APN/DNN
+#------------------------------------------------------------------------------#
+
+# IE Type: 159
+class APNDNN(_FQDN):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.118: 3GPP Interface Type
+#------------------------------------------------------------------------------#
+
+TGPPInterfaceType_dict = {
+    0 : 'S1-U',
+    1 : 'S5 /S8-U',
+    2 : 'S4-U',
+    3 : 'S11-U',
+    4 : 'S12',
+    5 : 'Gn/Gp-U',
+    6 : 'S2a-U',
+    7 : 'S2b-U',
+    8 : 'eNodeB GTP-U interface for DL data forwarding',
+    9 : 'eNodeB GTP-U interface for UL data forwarding',
+    10 : 'SGW/UPF GTP-U interface for DL data forwarding',
+    11 : 'N3 3GPP Access',
+    12 : 'N3 Trusted Non-3GPP Access',
+    13 : 'N3 Untrusted Non-3GPP Access',
+    14 : 'N3 for data forwarding',
+    15 : 'N9',
+    16 : 'SGi',
+    17 : 'N6',
+    18 : 'N19',
+    19 : 'S8-U',
+    20 : 'Gp-U',
+    21 : 'N9 for roaming',
+    22 : 'Iu-U',
+    23 : 'N9 for data forwarding',
+    24 : 'Sxa-U',
+    25 : 'Sxb-U',
+    26 : 'Sxc-U',
+    27 : 'N4-U',
+    28 : 'SGW/UPF GTP-U interface for UL data forwarding',
+    }
+
+
+# IE Type: 160
+class TGPPInterfaceType(Envelope):
+    _GEN = (
+        Uint('spare', bl=2, rep=REPR_HEX),
+        Uint('Val', bl=6, dic=TGPPInterfaceType_dict),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.119: PFCPSRReq-Flags
+#------------------------------------------------------------------------------#
+
+# IE Type: 161
+class PFCPSRReqFlags(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('PSDBU', val=1, bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.120: PFCPAUReq-Flags
+#------------------------------------------------------------------------------#
+
+# IE Type: 162
+class PFCPAUReqFlags(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('PARPS', val=1, bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.121: Activation Time
+#------------------------------------------------------------------------------#
+
+# IE Type: 163
+class ActivationTime(_IEExtUint32):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.122: Deactivation Time
+#------------------------------------------------------------------------------#
+
+# IE Type: 164
+class DeactivationTime(_IEExtUint32):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.123: MAR ID
+#------------------------------------------------------------------------------#
+
+# IE Type: 170
+class MARID(Envelope):
+    _GEN = (
+        Uint16('Val'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.124: Steering Functionality
+#------------------------------------------------------------------------------#
+
+# IE Type: 171
+class SteeringFunctionality(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('Val', bl=4, dic={0: 'ATSSS-LL', 1: 'MPTCP'}),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.125: Steering Mode
+#------------------------------------------------------------------------------#
+
+SteeringMode_dict = {
+    0 : 'Active-Standby',
+    1 : 'Smallest Delay',
+    2 : 'Load Balancing',
+    3 : 'Priority-based'
+    }
+
+
+# IE Type: 172
+class SteeringMode(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('Val', bl=4, dic=SteeringMode_dict),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.126: Weight
+#------------------------------------------------------------------------------#
+
+# IE Type: 173
+class Weight(Uint8):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.127: Priority
+#------------------------------------------------------------------------------#
+
+Priority_dict = {
+    0 : 'Active',
+    1 : 'Standby',
+    2 : 'No Standby',
+    3 : 'High',
+    4 : 'Low',
+    }
+
+
+# IE Type: 174
+class Priority(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('Val', bl=4, dic=Priority_dict),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.128: UE IP address Pool Identity
+#------------------------------------------------------------------------------#
+
+# IE Type: 177
+class UEIPAddressPoolIdentity(Envelope):
+    _GEN = (
+        Uint16('Len'),
+        Buf('Val'),
+        Buf('ext', val=b'', rep=REPR_HEX)
         )
     
     def __init__(self, *args, **kwargs):
@@ -3125,18 +3984,876 @@ class _HeaderFieldName(Envelope):
         self['Val'].set_blauto(lambda: self['Len'].get_val()<<3)
 
 
-# IE Type: 98
-class HeaderEnrichment(Envelope):
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.129: Alternative SMF IP Address
+#------------------------------------------------------------------------------#
+
+# IE Type: 178
+class AlternativeSMFIPAddress(Envelope):
     _GEN = (
-        Uint('spare', bl=3, rep=REPR_HEX),
-        Uint('Type', bl=5, dic={0: 'HTTP'}),
-        _HeaderFieldName('HeaderFieldName'),
-        _LU16V('HeaderFieldValue'),
+        Uint('spare', bl=6, rep=REPR_HEX),
+        Uint('V4', bl=1),
+        Uint('V6', bl=1),
+        Buf('IPv4Addr', bl=32, rep=REPR_HEX),
+        Buf('IPv6Addr', bl=128, rep=REPR_HEX),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['IPv4Addr'].set_transauto(lambda: False if self['V4'].get_val() else True)
+        self['IPv6Addr'].set_transauto(lambda: False if self['V6'].get_val() else True)
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.130: Packet Replication and Detection Carry-On Information
+#------------------------------------------------------------------------------#
+
+# IE Type: 179
+class PacketReplicationandDetectionCarryOnInformation(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('DCARONI', bl=1),
+        Uint('PRIN6I', bl=1),
+        Uint('PRIN19I', bl=1),
+        Uint('PRIUEAI', bl=1),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
 
 
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.131: SMF Set ID
+#------------------------------------------------------------------------------#
 
+# IE Type: 180
+class SMFSetID(Envelope):
+    _GEN = (
+        Uint8('spare'),
+        _FQDN('FQDN'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.132: Quota Validity Time
+#------------------------------------------------------------------------------#
+
+# IE Type: 181
+class QuotaValidityTime(_IEExtUint32):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.133: Number of Reports
+#------------------------------------------------------------------------------#
+
+# IE Type: 182
+class NumberofReports(Uint16):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.134: PFCPASRsp-Flags
+#------------------------------------------------------------------------------#
+
+# IE Type: 184
+class PFCPASRspFlags(Envelope):
+    _GEN = (
+        Uint('spare', bl=6, rep=REPR_HEX),
+        Uint('UUPSI', bl=1),
+        Uint('PSREI', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.135: CP PFCP Entity IP Address
+#------------------------------------------------------------------------------#
+
+# IE Type: 185
+class CPPFCPEntityIPAddress(Envelope):
+    _GEN = (
+        Uint('spare', bl=6, rep=REPR_HEX),
+        Uint('V4', bl=1),
+        Uint('V6', bl=1),
+        Buf('IPv4Addr', bl=32, rep=REPR_HEX),
+        Buf('IPv6Addr', bl=128, rep=REPR_HEX),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['IPv4Addr'].set_transauto(lambda: False if self['V4'].get_val() else True)
+        self['IPv6Addr'].set_transauto(lambda: False if self['V6'].get_val() else True)
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.136: PFCPSEReq-Flags
+#------------------------------------------------------------------------------#
+
+# IE Type: 186
+class PFCPSEReqFlags(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('RESTI', val=1, bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.137: IP Multicast Address
+#------------------------------------------------------------------------------#
+
+# IE Type: 191
+class IPMulticastAddress(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('A', bl=1),
+        Uint('R', bl=1),
+        Uint('V4', bl=1),
+        Uint('V6', bl=1),
+        Buf('IPv4Addr', bl=32, rep=REPR_HEX),
+        Buf('IPv6Addr', bl=128, rep=REPR_HEX),
+        Buf('IPv4AddrEnd', bl=32, rep=REPR_HEX),
+        Buf('IPv6AddrEnd', bl=128, rep=REPR_HEX),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['IPv4Addr'].set_transauto(lambda:
+            False if not self['A'].get_val() and self['V4'].get_val() else True)
+        self['IPv6Addr'].set_transauto(lambda:
+            False if not self['A'].get_val() and self['V6'].get_val() else True)
+        self['IPv4AddrEnd'].set_transauto(lambda:
+            False if not self['A'].get_val() and self['R'].get_val() and self['V4'].get_val() else True)
+        self['IPv6AddrEnd'].set_transauto(lambda:
+            False if not self['A'].get_val() and self['R'].get_val() and self['V6'].get_val() else True)
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.138: Source IP Address
+#------------------------------------------------------------------------------#
+
+# IE Type: 192
+class SourceIPAddress(Envelope):
+    _GEN = (
+        Uint('spare', bl=5, rep=REPR_HEX),
+        Uint('MPL', bl=1),
+        Uint('V4', bl=1),
+        Uint('V6', bl=1),
+        Buf('IPv4Addr', bl=32, rep=REPR_HEX),
+        Buf('IPv6Addr', bl=128, rep=REPR_HEX),
+        Uint8('MaskPrefLen'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['IPv4Addr'].set_transauto(lambda: False if self['V4'].get_val() else True)
+        self['IPv6Addr'].set_transauto(lambda: False if self['V6'].get_val() else True)
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.139: Packet Rate Status
+#------------------------------------------------------------------------------#
+
+# IE Type: 193
+class PacketRateStatus(Envelope):
+    _GEN = (
+        Uint('spare', bl=5, rep=REPR_HEX),
+        Uint('APR', bl=1),
+        Uint('DL', bl=1),
+        Uint('UL', bl=1),
+        Uint16('NumRemainUplinkPacketsAllowed'),
+        Uint16('NumRemainAddUplinkPacketsAllowed'),
+        Uint16('NumRemainDownlinkPacketsAllowed'),
+        Uint16('NumRemainAddDownlinkPacketsAllowed'),
+        Uint64('RateCtrlStatusValidityTime'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['NumRemainUplinkPacketsAllowed'].set_transauto(lambda:
+            False if self['UL'].get_val() else True)
+        self['NumRemainAddUplinkPacketsAllowed'].set_transauto(lambda:
+            False if self['UL'].get_val() and self['APR'].get_val() else True)
+        self['NumRemainDownlinkPacketsAllowed'].set_transauto(lambda:
+            False if self['DL'].get_val() else True)
+        self['NumRemainAddDownlinkPacketsAllowed'].set_transauto(lambda:
+            False if self['DL'].get_val() and self['APR'].get_val() else True)
+        self['RateCtrlStatusValidityTime'].set_transauto(lambda:
+            False if self['UL'].get_val() or self['DL'].get_val() else True)
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.140: Create Bridge Info for TSC IE
+#------------------------------------------------------------------------------#
+
+# IE Type: 194
+class CreateBridgeInfoforTSC(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('BII', val=1, bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.141: DS-TT Port Number
+#------------------------------------------------------------------------------#
+
+# IE Type: 196
+class DSTTPortNumber(Uint32):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.142: NW-TT Port Number
+#------------------------------------------------------------------------------#
+
+# IE Type: 197
+class NWTTPortNumber(Uint32):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.143: TSN Bridge ID
+#------------------------------------------------------------------------------#
+
+# IE Type: 198
+class TSNBridgeID(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('BID', val=1, bl=1),
+        Uint64('BridgeID'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['BridgeID'].set_transauto(lambda: False if self['BID'].get_val() else True)
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.144: Port Management Information Container
+#------------------------------------------------------------------------------#
+
+# IE Type: 202
+class PortManagementInformationContainer(Buf):
+    _rep = REPR_HEX
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.145: Requested Clock Drift Information
+#------------------------------------------------------------------------------#
+
+# IE Type: 204
+class RequestedClockDriftInformation(Envelope):
+    _GEN = (
+        Uint('spare', bl=6, rep=REPR_HEX),
+        Uint('RRCR', bl=1),
+        Uint('RRTO', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.146: TSN Time Domain Number
+#------------------------------------------------------------------------------#
+
+# IE Type: 206
+class TSNTimeDomainNumber(Envelope):
+    _GEN = (
+        Uint8('Val'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.147: Time Offset Threshold
+#------------------------------------------------------------------------------#
+
+# IE Type: 207
+class TimeOffsetThreshold(Envelope):
+    _GEN = (
+        Int64('Val', desc='nanoseconds'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.148: Cumulative rateRatio Threshold
+#------------------------------------------------------------------------------#
+
+# IE Type: 208
+class  CumulativeRateRatioThreshold(Envelope):
+    _GEN = (
+        Int32('Val'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.149: Time Offset Measurement
+#------------------------------------------------------------------------------#
+
+# IE Type: 209
+class TimeOffsetMeasurement(Envelope):
+    _GEN = (
+        Int64('Val'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.150: Cumulative rateRatio Measurement
+#------------------------------------------------------------------------------#
+
+# IE Type: 210
+class CumulativeRateRatioMeasurement(Envelope):
+    _GEN = (
+        Int32('Val'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.151: SRR ID
+#------------------------------------------------------------------------------#
+
+# IE Type: 215
+class SRRID(Envelope):
+    _GEN = (
+        Uint8('Val'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.152: Requested Access Availability Information
+#------------------------------------------------------------------------------#
+
+# IE Type: 217
+class RequestedAccessAvailabilityInformation(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('RRCA', val=1, bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.153: Access Availability Information
+#------------------------------------------------------------------------------#
+
+# IE Type: 219
+class AccessAvailabilityInformation(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('AvailabilityStatus', bl=2, dic={0: 'Access unavailable', 1: 'Access available'}),
+        Uint('AccessType', bl=2, dic={0: '3GPP access type', 1: 'Non-3GPP access type'}),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.154: MPTCP Control Information
+#------------------------------------------------------------------------------#
+
+# IE Type: 222
+class MPTCPControlInformation(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('TCI', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.155: ATSSS-LL Control Information
+#------------------------------------------------------------------------------#
+
+# IE Type: 223
+class ATSSSLLControlInformation(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('LLI', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.156: PMF Control Information
+#------------------------------------------------------------------------------#
+
+# IE Type: 224
+class PMFControlInformation(Envelope):
+    _GEN = (
+        Uint('spare', bl=6, rep=REPR_HEX),
+        Uint('DRTTI', bl=1),
+        Uint('PMFI', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.157: MPTCP Address Information
+#------------------------------------------------------------------------------#
+
+# IE Type: 228
+class MPTCPAddressInformation(Envelope):
+    _GEN = (
+        Uint('spare', bl=6, rep=REPR_HEX),
+        Uint('V4', bl=1),
+        Uint('V6', bl=1),
+        Uint8('ProxyType'),
+        Uint16('ProxyPort'),
+        Buf('ProxyIPv4Addr', bl=32, rep=REPR_HEX),
+        Buf('ProxyIPv6Addr', bl=128, rep=REPR_HEX),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['ProxyIPv4Addr'].set_transauto(lambda: False if self['V4'].get_val() else True)
+        self['ProxyIPv6Addr'].set_transauto(lambda: False if self['V6'].get_val() else True)
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.158: UE Link-Specific IP Address
+#------------------------------------------------------------------------------#
+
+# IE Type: 229
+class UELinkSpecificIPAddress(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('NV6', bl=1),
+        Uint('NV4', bl=1),
+        Uint('V6', bl=1),
+        Uint('V4', bl=1),
+        Buf('IPv4Addr', bl=32, rep=REPR_HEX),
+        Buf('IPv6Addr', bl=128, rep=REPR_HEX),
+        Buf('IPv4AddrNon3GPP', bl=32, rep=REPR_HEX),
+        Buf('IPv6AddrNon3GPP', bl=128, rep=REPR_HEX),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['IPv4Addr'].set_transauto(lambda: False if self['V4'].get_val() else True)
+        self['IPv6Addr'].set_transauto(lambda: False if self['V6'].get_val() else True)
+        self['IPv4AddrNon3GPP'].set_transauto(lambda: False if self['NV4'].get_val() else True)
+        self['IPv6AddrNon3GPP'].set_transauto(lambda: False if self['NV6'].get_val() else True)
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.159: PMF Address Information
+#------------------------------------------------------------------------------#
+
+# IE Type: 230
+class PMFAddressInformation(Envelope):
+    _GEN = (
+        Uint('spare', bl=5, rep=REPR_HEX),
+        Uint('MAC', bl=1),
+        Uint('V6', bl=1),
+        Uint('V4', bl=1),
+        Buf('IPv4Addr', bl=32, rep=REPR_HEX),
+        Buf('IPv6Addr', bl=128, rep=REPR_HEX),
+        Uint16('Port3GPP'),
+        Uint16('PortNon3GPP'),
+        Buf('MAC3GPP', bl=48, rep=REPR_HEX),
+        Buf('MACNon3GPP', bl=48, rep=REPR_HEX),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['IPv4Addr'].set_transauto(lambda: False if self['V4'].get_val() else True)
+        self['IPv6Addr'].set_transauto(lambda: False if self['V6'].get_val() else True)
+        self['Port3GPP'].set_transauto(lambda: False if (self['V4'].get_val() or self['V6'].get_val()) else True)
+        self['PortNon3GPP'].set_transauto(lambda: False if (self['V4'].get_val() or self['V6'].get_val()) else True)
+        self['MAC3GPP'].set_transauto(lambda: False if self['MAC'].get_val() else True)
+        self['MACNon3GPP'].set_transauto(lambda: False if self['MAC'].get_val() else True)
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.160: ATSSS-LL Information
+#------------------------------------------------------------------------------#
+
+# IE Type: 231
+class ATSSSLLInformation(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('LLI', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.161: Data Network Access Identifier
+#------------------------------------------------------------------------------#
+
+# IE Type: 232
+class DataNetworkAccessIdentifier(Buf):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.162: Average Packet Delay
+#------------------------------------------------------------------------------#
+
+# IE Type: 234
+class AveragePacketDelay(_IEExtUint32):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.163: Minimum Packet Delay
+#------------------------------------------------------------------------------#
+
+# IE Type: 235
+class MinimumPacketDelay(_IEExtUint32):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.164: Maximum Packet Delay
+#------------------------------------------------------------------------------#
+
+# IE Type: 236
+class MaximumPacketDelay(_IEExtUint32):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.165: QoS Report Trigger
+#------------------------------------------------------------------------------#
+
+# IE Type: 237
+class QoSReportTrigger(Envelope):
+    _GEN = (
+        Uint('spare', bl=5, rep=REPR_HEX),
+        Uint('IRE', bl=1),
+        Uint('THR', bl=1),
+        Uint('PER', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.166: GTP-U Path Interface Type
+#------------------------------------------------------------------------------#
+
+# IE Type: 241
+class GTPUPathInterfaceType(Envelope):
+    _GEN = (
+        Uint('spare', bl=6, rep=REPR_HEX),
+        Uint('N3', bl=1),
+        Uint('N9', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.167: Requested Qos Monitoring
+#------------------------------------------------------------------------------#
+
+# IE Type: 243
+class RequestedQoSMonitoring(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('GTPUPM', bl=1),
+        Uint('RP', bl=1),
+        Uint('UL', bl=1),
+        Uint('DL', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.168: Reporting Frequency
+#------------------------------------------------------------------------------#
+
+# IE Type: 244
+class ReportingFrequency(Envelope):
+    _GEN = (
+        Uint('spare', bl=5, rep=REPR_HEX),
+        Uint('SESRL', bl=1),
+        Uint('PERIO', bl=1),
+        Uint('EVETT', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.169: Packet Delay Thresholds
+#------------------------------------------------------------------------------#
+
+# IE Type: 245
+class PacketDelayThresholds(Envelope):
+    _GEN = (
+        Uint('spare', bl=5, rep=REPR_HEX),
+        Uint('RP', bl=1),
+        Uint('UL', bl=1),
+        Uint('DL', bl=1),
+        Uint32('DownlinkPacketDelayThreshold'),
+        Uint32('UplinkPacketDelayThreshold'),
+        Uint32('RoundTripPacketDelayThreshold'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['DownlinkPacketDelayThreshold'].set_transauto(lambda: False if self['DL'].get_val() else True)
+        self['UplinkPacketDelayThreshold'].set_transauto(lambda: False if self['UL'].get_val() else True)
+        self['RoundTripPacketDelayThreshold'].set_transauto(lambda: False if self['RP'].get_val() else True)
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.170: Minimum Wait Time
+#------------------------------------------------------------------------------#
+
+# IE Type: 246
+class MinimumWaitTime(_IEExtUint32):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.171: QoS Monitoring Measurement
+#------------------------------------------------------------------------------#
+
+# IE Type: 248
+class QoSMonitoringMeasurement(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('PLMF', bl=1),
+        Uint('RP', bl=1),
+        Uint('UL', bl=1),
+        Uint('DL', bl=1),
+        Uint32('DownlinkPacketDelay'),
+        Uint32('UplinkPacketDelay'),
+        Uint32('RoundTripPacketDelay'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['DownlinkPacketDelay'].set_transauto(lambda: False if self['DL'].get_val() else True)
+        self['UplinkPacketDelay'].set_transauto(lambda: False if self['UL'].get_val() else True)
+        self['RoundTripPacketDelay'].set_transauto(lambda: False if self['RP'].get_val() else True)
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.172: MT-EDT Control Information
+#------------------------------------------------------------------------------#
+
+# IE Type: 249
+class MTEDTControlInformation(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('RDSI', val=1, bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.173: DL Data Packets Size
+#------------------------------------------------------------------------------#
+
+# IE Type: 250
+class DLDataPacketsSize(Envelope):
+    _GEN = (
+        Uint16('Val'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.174: QER Control Indications
+#------------------------------------------------------------------------------#
+
+# IE Type: 251
+class QERControlIndications(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('RCSR', val=1, bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.175: NF Instance ID
+#------------------------------------------------------------------------------#
+
+# IE Type: 253
+class NFInstanceID(Buf):
+    _bl = 128
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.176: S-NSSAI
+#------------------------------------------------------------------------------#
+
+# IE Type: 257
+class SNSSAI(Envelope):
+    _GEN = (
+        Uint8('SST'),
+        Uint24('SD')
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.177: IP version
+#------------------------------------------------------------------------------#
+
+# IE Type: 258
+class IPversion(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('V6', bl=1),
+        Uint('V4', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.178: PFCPASReq-Flags
+#------------------------------------------------------------------------------#
+
+# IE Type: 259
+class PFCPASReqFlags(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('UUPSI', val=1, bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+        
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.179: Data Status
+#------------------------------------------------------------------------------#
+
+# IE Type: 260
+class DataStatus(Envelope):
+    _GEN = (
+        Uint('spare', bl=6, rep=REPR_HEX),
+        Uint('BUFF', bl=1),
+        Uint('DROP', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.180: RDS Configuration Information
+#------------------------------------------------------------------------------#
+
+# IE Type: 262
+class RDSConfigurationInformation(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('RDS', val=1, bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.181: MPTCP Applicable Indication
+#------------------------------------------------------------------------------#
+
+# IE Type: 265
+class MPTCPApplicableIndication(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('MAI', val=1, bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.182: Bridge Management Information Container
+#------------------------------------------------------------------------------#
+
+# IE Type: 266
+class BridgeManagementInformationContainer(Buf):
+    _rep = REPR_HEX
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.183: Number of UE IP Addresses
+#------------------------------------------------------------------------------#
+
+# IE Type: 268
+class NumberofUEIPAddresses(Envelope):
+    _GEN = (
+        Uint('spare', bl=6, rep=REPR_HEX),
+        Uint('IPv6', bl=1),
+        Uint('IPv4', bl=1),
+        Uint32('NumOfUEIPv4Addrs'),
+        Uint32('NumOfUEIPv6Addrs'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['NumOfUEIPv4Addrs'].set_transauto(lambda: False if self['IPv4'].get_val() else True)
+        self['NumOfUEIPv6Addrs'].set_transauto(lambda: False if self['IPv6'].get_val() else True)
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.184: Validity Timer
+#------------------------------------------------------------------------------#
+
+# IE Type: 269
+class ValidityTimer(Envelope):
+    _GEN = (
+        Uint16('Val'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.185: Offending IE Information
+#------------------------------------------------------------------------------#
+
+# IE Type: 274
+class OffendingIEInformation(Envelope):
+    _GEN = (
+        Uint16('Type'),
+        Buf('Val', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.244, section 8.2.186: RAT Type
+#------------------------------------------------------------------------------#
+
+RATType_dict = {
+    0 : 'reserved',
+    1 : 'UTRAN',
+    2 : 'GERAN',
+    3 : 'WLAN',
+    4 : 'GAN',
+    5 : 'HSPA Evolution',
+    6 : 'EUTRAN (WB-E-UTRAN)',
+    7 : 'Virtual',
+    8 : 'EUTRAN-NB-IoT',
+    9 : 'LTE-M',
+    10 : 'NR',
+    }
+
+# IE Type: 275
+class RATType(Envelope):
+    _GEN = (
+        Uint8('Val', dic=RATType_dict),
+        Buf('Val', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# The Grand PFCP IE Lookup Table
+#------------------------------------------------------------------------------#
 
 PFCPIELUT = {
     1 : CreatePDR,
@@ -3237,67 +4954,192 @@ PFCPIELUT = {
     96 : RecoveryTimeStamp,
     97 : DLFlowLevelMarking,
     98 : HeaderEnrichment,
-    
-    
-    
     99 : ErrorIndicationReport,
+    100 : MeasurementInformation,
+    101 : NodeReportType,
     102 : UserPlanePathFailureReport,
+    103 : RemoteGTPUPeer,
+    104 : URSEQN,
     105 : UpdateDuplicatingParameters,
+    106 : ActivatePredefinedRules,
+    107 : DeactivatePredefinedRules,
+    108 : FARID,
+    109 : QERID,
+    110 : OCIFlags,
+    111 : AssociationReleaseRequest,
+    112 : GracefulReleasePeriod,
+    113 : PDNType,
+    114 : FailedRuleID,
+    115 : TimeQuotaMechanism,
+    117 : UserPlaneInactivityTimer,
     118 : AggregatedURRs,
+    119 : Multiplier,
+    120 : AggregatedURRID,
+    121 : SubsequentVolumeQuota,
+    122 : SubsequentTimeQuota,
+    123 : RQI,
+    124 : QFI,
+    125 : QueryURRReference,
+    126 : AdditionalUsageReportsInformation,
     127 : CreateTrafficEndpoint,
     128 : CreatedTrafficEndpoint,
     129 : UpdateTrafficEndpoint,
     130 : RemoveTrafficEndpoint,
+    131 : TrafficEndpointID,
     132 : EthernetPacketFilter,
+    133 : MACAddress,
+    134 : CTAG,
+    135 : STAG,
+    136 : Ethertype,
+    137 : Proxying,
+    138 : EthernetFilterID,
+    139 : EthernetFilterProperties,
+    140 : SuggestedBufferingPacketsCount,
+    141 : UserID,
+    142 : EthernetPDUSessionInformation,
     143 : EthernetTrafficInformation,
+    144 : MACAddressesDetected,
+    145 : MACAddressesRemoved,
+    146 : EthernetInactivityTimer,
     147 : AdditionalMonitoringTime,
+    148 : EventQuota,
+    149 : EventThreshold,
+    150 : SubsequentEventQuota,
+    151 : SubsequentEventThreshold,
+    152 : TraceInformation,
+    153 : FramedRoute,
+    154 : FramedRouting,
+    155 : FramedIPv6Route,
+    156 : TimeStamp,
+    157 : AveragingWindow,
+    158 : PagingPolicyIndicator,
+    159 : APNDNN,
+    160 : TGPPInterfaceType,
+    161 : PFCPSRReqFlags,
+    162 : PFCPAUReqFlags,
+    163 : ActivationTime,
+    164 : DeactivationTime,
     165 : CreateMAR,
     166 : TGPPAccessForwardingActionInformation,
     167 : Non3GPPAccessForwardingActionInformation,
     168 : RemoveMAR,
     169 : UpdateMAR,
+    170 : MARID,
+    171 : SteeringFunctionality,
+    172 : SteeringMode,
+    173 : Weight,
+    174 : Priority,
     175 : Update3GPPAccessForwardingActionInformation,
     176 : UpdateNon3GPPAccessForwardingActionInformation,
+    177 : UEIPAddressPoolIdentity,
+    178 : AlternativeSMFIPAddress,
+    179 : PacketReplicationandDetectionCarryOnInformation,
+    180 : SMFSetID,
+    181 : QuotaValidityTime,
+    182 : NumberofReports,
     183 : SessionRetentionInformation,
+    184 : PFCPASRspFlags,
+    185 : CPPFCPEntityIPAddress,
+    186 : PFCPSEReqFlags,
     187 : UserPlanePathRecoveryReport,
     188 : IPMulticastAddressingInfo,
     189 : JoinIPMulticastInformation,
     190 : LeaveIPMulticastInformation,
+    191 : IPMulticastAddress,
+    192 : SourceIPAddress,
+    193 : PacketRateStatus,
+    194 : CreateBridgeInfoforTSC,
     195 : CreatedBridgeInfoforTSC,
+    196 : DSTTPortNumber,
+    197 : NWTTPortNumber,
+    198 : TSNBridgeID,
     199 : TSCManagementInformationSessionModificationRequest,
     200 : TSCManagementInformationSessionModificationResponse,
     201 : TSCManagementInformationSessionReportRequest,
+    202 : PortManagementInformationContainer,
     203 : ClockDriftControlInformation,
+    204 : RequestedClockDriftInformation,
     205 : ClockDriftReport,
+    206 : TSNTimeDomainNumber,
+    207 : TimeOffsetThreshold,
+    208 : CumulativeRateRatioThreshold,
+    209 : TimeOffsetMeasurement,
+    210 : CumulativeRateRatioMeasurement,
     211 : RemoveSRR,
     212 : CreateSRR,
     213 : UpdateSRR,
     214 : SessionReport,
+    215 : SRRID,
     216 : AccessAvailabilityControlInformation,
+    217 : RequestedAccessAvailabilityInformation,
+    218 : AccessAvailabilityReport,
+    219 : AccessAvailabilityInformation,
     220 : ProvideATSSSControlInformation,
     221 : ATSSSControlParameters,
+    222 : MPTCPControlInformation,
+    223 : ATSSSLLControlInformation,
+    224 : PMFControlInformation,
     225 : MPTCPParameters,
     226 : ATSSSLLParameters,
     227 : PMFParameters,
+    228 : MPTCPAddressInformation,
+    229 : UELinkSpecificIPAddress,
+    230 : PMFAddressInformation,
+    231 : ATSSSLLInformation,
+    232 : DataNetworkAccessIdentifier,
     233 : UEIPAddressPoolInformation,
+    234 : AveragePacketDelay,
+    235 : MinimumPacketDelay,
+    236 : MaximumPacketDelay,
+    237 : QoSReportTrigger,
     238 : GTPUPathQoSControlInformation,
     239 : GTPUPathQoSReport,
     240 : QoSInformation,
+    241 : GTPUPathInterfaceType,
     242 : QoSMonitoringperQoSflowControlInformation,
+    243 : RequestedQoSMonitoring,
+    244 : ReportingFrequency,
+    245 : PacketDelayThresholds,
+    246 : MinimumWaitTime,
     247 : QoSMonitoringReport,
+    248 : QoSMonitoringMeasurement,
+    249 : MTEDTControlInformation,
+    250 : DLDataPacketsSize,
+    251 : QERControlIndications,
     252 : PacketRateStatusReport,
+    253 : NFInstanceID,
     254 : EthernetContextInformation,
     255 : RedundantTransmissionDetectionParameters,
     256 : UpdatedPDR,
+    257 : SNSSAI,
+    258 : IPversion,
+    259 : PFCPASReqFlags,
+    260 : DataStatus,
     261 : ProvideRDSConfigurationInformation,
+    262 : RDSConfigurationInformation,
     263 : QueryPacketRateStatus,
     264 : PacketRateStatusReportSessionModificationResponse,
+    265 : MPTCPApplicableIndication,
+    266 : BridgeManagementInformationContainer,
     267 : UEIPAddressUsageInformation,
+    268 : NumberofUEIPAddresses,
+    269 : ValidityTimer,
     270 : RedundantTransmissionForwardingParameters,
     271 : TransportDelayReporting,
     272 : PartialFailureInformationSessionEstablishmentResponse,
-    273 : PartialFailureInformationSessionModificationResponse
+    273 : PartialFailureInformationSessionModificationResponse,
+    274 : OffendingIEInformation,
+    275 : RATType
     }
+
+
+def _chk_ies():
+    for ie in PFCPIEType: 
+        if ie.value not in PFCPIELUT: 
+            print('missing IE in LUT: %s %i' % (ie.name, ie.value)) 
+        else:
+            if PFCPIELUT[ie.value].__name__ != ie.name: 
+                print('mismatching IE name: %i, %s - %s' % (ie.value, ie.name, PFCPIELUT[ie.value].__name__)) 
 
 
 #------------------------------------------------------------------------------#
@@ -3503,7 +5345,7 @@ class PFCPAssociationUpdateRequest(PFCPMsg):
             opt=[
                 PFCPIEType.UPFunctionFeatures.value,
                 PFCPIEType.CPFunctionFeatures.value,
-                PFCPIEType.PFCPAssociationReleaseRequest.value,
+                PFCPIEType.AssociationReleaseRequest.value,
                 PFCPIEType.GracefulReleasePeriod.value,
                 PFCPIEType.PFCPAUReqFlags.value,
                 PFCPIEType.AlternativeSMFIPAddress.value,
