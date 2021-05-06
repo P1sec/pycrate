@@ -159,9 +159,11 @@ class TestPycrate(unittest.TestCase):
         test_nas_5g()
         test_sigtran()
         test_sccp()
+        test_isup()
         test_gtpu()
         test_gtpc()
         test_diameter()
+        test_pfcp()
     
     # mobile / GSM RR
     def test_gsmrr(self):
