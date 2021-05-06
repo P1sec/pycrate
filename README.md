@@ -18,7 +18,7 @@ License
 The whole library is licensed under LGPL v2.1 and is compatible with more recent 
 version of the LGPL: all licensed files have an header making it self-explanatory.
 For more details, please report to the 
-[license.txt](https://github.com/p1sec/pycrate/license.txt) file.
+[license.txt](https://github.com/P1sec/pycrate/blob/master/license.txt) file.
 
 
 Wiki
@@ -278,18 +278,18 @@ This subdirectory implements most of the 3GPP NAS protocol formats:
 * *PPP*: structures for NCP and LCP protocols used for PPP connection estabishment
 * *SCCP*: structures for SCCP user-data and management messages
 * *SIGTRAN*: structures for SIGTRAN (mostly M2PA and M3UA) messages
-* *TS102225*: structures for SIM card's Secured Packets
-* *TS23038*: structures and routines for SMS encoding
-* *TS23040_SMS*: structures for the SMS transport protocol
-* *TS23041_CBS*: structures for the Cell Broadcast Service protocol
+* *TS102225*: structures for SIM card's Secured Packets from ETSI TS 102.225
+* *TS23038*: structures and routines for SMS encoding from TS 23.038
+* *TS23040_SMS*: structures for the SMS transport protocol from TS 23.040
+* *TS23041_CBS*: structures for the Cell Broadcast Service protocol from TS 23.041
 * *TS24007*: basic structures from the TS 24.007 specification, reused in most of the NAS protocols
 * *TS24008_CC* : structures for call control messages from TS 24.008
 * *TS24008_GMM*: structures for GPRS mobility management messages from TS 24.008
 * *TS24008_IE*: structures for many information elements from TS 24.008
 * *TS24008_MM*: structures for mobility management messages from TS 24.008
 * *TS24008_SM*: structures for GPRS session management messages from TS 24.008
-* *TS24011_PPSMS*: structures for the SMS point-to-point protocol
-* *TS24080_SS*: structures for the Supplementary Services protocol, wrapping some MAP ASN.1 objects
+* *TS24011_PPSMS*: structures for the SMS point-to-point protocol from TS 24.011
+* *TS24080_SS*: structures for the Supplementary Services protocol from TS 24.080, wrapping some MAP ASN.1 objects
 * *TS24301_EMM*: structures for the EPS mobility management messages from TS 24.301
 * *TS24301_ESM*: structures for the EPS session management messages from TS 24.301
 * *TS24301_IE*: structures for many information elements from TS 24.301
@@ -298,11 +298,12 @@ This subdirectory implements most of the 3GPP NAS protocol formats:
 * *TS24501_IE*: structures for many information elements from TS 24.501
 * *TS24501_UEPOL*, *TS24526_UEPOL* and *TS24588_UEPOL*: structures for the 5G UE policy protocol from TS 24.501, 526 and 588
 * *TS29002_MAPAppCtx*: functions that relies on the Pycrate_TCAP_MAPv2v3 ASN.1 module, dealing mostly with MAP application-contexts
-* *TS29002_MAPIE*: structure for the MAP AddressString object
+* *TS29002_MAPIE*: structure for the MAP AddressString object from TS 29.002
+* *TS29244_PFCP*: structure for PFCP messages from TS 29.244
 * *TS29274_GTPC*: structures for LTE/EPC GTP-C messages from TS 29.274
 * *TS29281_GTPU*: structures for LTE/EPC GTP-U messages from TS 29.281
-* *TS31111_SAT*: basic structures and dict for the SIM application toolkit
-* *TS31115*: structures for SIM card's Secured Packets over SMS
+* *TS31111_SAT*: basic structures and dict for the SIM application toolkit from TS 31.111
+* *TS31115*: structures for SIM card's Secured Packets over SMS from TS 31.115
 * *TS44018_GTTP*: structure for the single GSM GTTP message from TS 44.018
 * *TS44018_IE*: structures for many information elements from TS 44.018
 * *TS44018_RR*: structures for the GSM and GPRS radio ressources messages from TS 44.018
