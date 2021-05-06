@@ -38,9 +38,9 @@ jobs:
         with:
           python-version: ${{ env.DEFAULT_PYTHON }}
       - run: pip install build
-      - run: python -m build $DISTRIBUTION
+      - run: python -m build --$DIST
         env:
-          DISTRIBUTION: ${{ matrix.distribution }}
+          DIST: ${{ matrix.distribution }}
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.distribution }}
