@@ -366,7 +366,7 @@ class GNBd(object):
                         return None, ran_ue_id
                 elif FgsIdType == FGSIDTYPE_GUTI:
                     # TODO: should ensure PLMN and AMF identifiers correspond
-                    return self.Server.get_ued(mtmsi=FgsId['5GTMSI'].get_val()), ran_ue_id 
+                    return self.Server.get_ued(fgtmsi=FgsId['5GTMSI'].get_val()), ran_ue_id 
                 else:
                     self._log('WNG', 'Unable to get UE id from NAS message, 5GSID of '\
                               'unexpected type %i' % FgsIdType)
@@ -382,8 +382,18 @@ class GNBd(object):
         return gnb_ue_id
     
     #--------------------------------------------------------------------------#
-    # CN-initiated non-UE-associated S1AP signalling procedures
+    # CN-initiated non-UE-associated NGAP signalling procedures
     #--------------------------------------------------------------------------#
     
-    # TODO: page(), send_error_ind()
-
+    def page(self, **IEs):
+        """send a NGAP Paging message to the gNB
+        """
+        # TODO
+        pass
+    
+    def send_err(self, **IEs):
+        """send a NGAP Error Indication to the gNB
+        """
+        # TODO
+        pass
+    

@@ -342,10 +342,11 @@ class CorenetServer(object):
     # UE, indexed by TMSI when the IMSI is unknown (at attachment), 
     # and their UEd handler instance are set in ._UEpre, created at init
     #
-    # TMSI / P-TMSI / M-TMSI to IMSI conversion
-    TMSI  = {}
-    PTMSI = {}
-    MTMSI = {}
+    # TMSI / P-TMSI / M-TMSI / 5G-TMSI to IMSI conversion
+    TMSI   = {}
+    PTMSI  = {}
+    MTMSI  = {}
+    FGTMSI = {}
     #
     # This is a filter which enables the potential attachment of non-preconfigured 
     # UE to the CorenetServer
@@ -1315,7 +1316,7 @@ class CorenetServer(object):
     def get_ued(self, **kw):
         """return a UEd instance or None, according to the UE identity provided
         
-        kw: imsi (digit-str), tmsi (uint32), ptmsi (uint32) or mtmsi (uint32)
+        kw: imsi (digit-str), tmsi (uint32), ptmsi (uint32), mtmsi (uint32) or fgtmsi (uint32)
         
         If an imsi is provided, returns the UEd instance in case the IMSI is allowed
         If a tmsi or ptmsi is provided, returns
@@ -1333,7 +1334,7 @@ class CorenetServer(object):
                 return self.UE[imsi]
             elif self.UE_ATTACH_FILTER and re.match(self.UE_ATTACH_FILTER, imsi) and \
             '*' in self.ConfigUE:
-                self._log('WNG', 'attaching an UE without dedicated configuration, IMSI %s' % imsi)
+                self._log('WNG', 'attaching a UE without dedicated configuration, IMSI %s' % imsi)
                 self.UE[imsi] = UEd(self, imsi, config=self.ConfigUE['*'])
                 return self.UE[imsi]
             else:
@@ -1359,6 +1360,13 @@ class CorenetServer(object):
             else:
                 # creating a UEd instance which will request IMSI
                 return self.create_dummy_ue(mtmsi=mtmsi)
+        elif 'fgtmsi' in kw:
+            fgtmsi = kw['fgtmsi']
+            if fgtmsi in self.FGTMSI:
+                return self.UE[self.FGTMSI[fgtmsi]]
+            else:
+                # creating a UEd instance which will request SUPI
+                return self.create_dummy_ue(fgtmsi=fgtmsi)
         return None
     
     def create_dummy_ue(self, **kw):
@@ -1390,18 +1398,20 @@ class CorenetServer(object):
         # go over all UE and abort() NAS signalling procedures in timeout
         T = time()
         for ue in self.UE.values():
+            
             if ue.IuCS is not None:
+                
                 if ue.IuCS.MM.Proc:
                     for P in ue.IuCS.MM.Proc:
                         if hasattr(P, 'TimerStop') and T > P.TimerStop:
                             P._log('WNG', 'timeout: aborting')
                             P.abort()
                 
-                #if ue.IuCS.CC.Proc:
-                #    for P in ue.IuCS.CC.Proc.values():
-                #        if hasattr(P, 'TimerStop') and T > P.TimerStop:
-                #            P._log('WNG', 'timeout: aborting')
-                #            P.abort()
+                if ue.IuCS.CC.Proc:
+                    for P in ue.IuCS.CC.Proc.values():
+                        if hasattr(P, 'TimerStop') and T > P.TimerStop:
+                            P._log('WNG', 'timeout: aborting')
+                            P.abort()
                 
                 if ue.IuCS.SMS.Proc:
                     for P in tuple(ue.IuCS.SMS.Proc.values()):
@@ -1409,11 +1419,11 @@ class CorenetServer(object):
                             P._log('WNG', 'timeout: aborting')
                             P.abort()
                 
-                #if ue.IuCS.SS.Proc:
-                #    for P in ue.IuCS.SS.Proc.values():
-                #        if hasattr(P, 'TimerStop') and T > P.TimerStop:
-                #            P._log('WNG', 'timeout: aborting')
-                #            P.abort()
+                if ue.IuCS.SS.Proc:
+                    for P in ue.IuCS.SS.Proc.values():
+                        if hasattr(P, 'TimerStop') and T > P.TimerStop:
+                            P._log('WNG', 'timeout: aborting')
+                            P.abort()
             
             
             if ue.IuPS is not None:
@@ -1424,11 +1434,11 @@ class CorenetServer(object):
                             P._log('WNG', 'timeout: aborting')
                             P.abort()
                 
-                #if ue.IuPS.SM.Proc:
-                #    for P in tuple(ue.IuPS.SM.Proc.values()):
-                #        if hasattr(P, 'TimerStop') and T > P.TimerStop:
-                #            P._log('WNG', 'timeout: aborting')
-                #            P.abort()
+                if ue.IuPS.SM.Proc:
+                    for P in tuple(ue.IuPS.SM.Proc.values()):
+                        if hasattr(P, 'TimerStop') and T > P.TimerStop:
+                            P._log('WNG', 'timeout: aborting')
+                            P.abort()
             
             if ue.S1 is not None:
             
@@ -1446,6 +1456,26 @@ class CorenetServer(object):
                 
                 if ue.S1.SMS.Proc:
                     for P in tuple(ue.S1.SMS.Proc.values()):
+                        if hasattr(P, 'TimerStop') and T > P.TimerStop:
+                            P._log('WNG', 'timeout: aborting')
+                            P.abort()
+            
+            if ue.NG is not None:
+                
+                if ue.NG.FGMM.Proc:
+                    for P in ue.NG.FGMM.Proc:
+                        if hasattr(P, 'TimerStop') and T > P.TimerStop:
+                            P._log('WNG', 'timeout: aborting')
+                            P.abort()
+                
+                if ue.NG.FGSM.Proc:
+                    for P in tuple(ue.NG.FGSM.Proc.values()):
+                        if hasattr(P, 'TimerStop') and T > P.TimerStop:
+                            P._log('WNG', 'timeout: aborting')
+                            P.abort()
+                
+                if ue.NG.SMS.Proc:
+                    for P in tuple(ue.NG.SMS.Proc.values()):
                         if hasattr(P, 'TimerStop') and T > P.TimerStop:
                             P._log('WNG', 'timeout: aborting')
                             P.abort()

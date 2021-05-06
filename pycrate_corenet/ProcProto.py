@@ -489,8 +489,10 @@ class NASSigProc(SigProc):
                 mhdr = msg[0]
                 if mhdr[0]._name == 'TIPD':
                     mid = (mhdr[0]['ProtDisc'].get_val(), mhdr['Type'].get_val())
-                else:
+                elif 'ProtDisc' in mhdr._by_name:
                     mid = (mhdr['ProtDisc'].get_val(), mhdr['Type'].get_val())
+                else:
+                    mid = (mhdr['EPD'].get_val(), mhdr['Type'].get_val())
                 mies = msg[1:]
                 ContLUT[mid] = (0, i)
                 if mid not in cls.Encod:
@@ -520,8 +522,10 @@ class NASSigProc(SigProc):
                 mhdr = msg[0]
                 if mhdr[0]._name == 'TIPD':
                     mid = (mhdr[0]['ProtDisc'].get_val(), mhdr['Type'].get_val())
-                else:
+                elif 'ProtDisc' in mhdr._by_name:
                     mid = (mhdr['ProtDisc'].get_val(), mhdr['Type'].get_val())
+                else:
+                    mid = (mhdr['EPD'].get_val(), mhdr['Type'].get_val())
                 mies = msg[1:]
                 ContLUT[mid] = (1, i)
                 if mid not in cls.Encod:
@@ -553,8 +557,10 @@ class NASSigProc(SigProc):
                 mhdr = msg[0]
                 if mhdr[0]._name == 'TIPD':
                     mid = (mhdr[0]['ProtDisc'].get_val(), mhdr['Type'].get_val())
-                else:
+                elif 'ProtDisc' in mhdr._by_name:
                     mid = (mhdr['ProtDisc'].get_val(), mhdr['Type'].get_val())
+                else:
+                    mid = (mhdr['EPD'].get_val(), mhdr['Type'].get_val())
                 Filter.add(mid)
                 FilterStr.add(msg._name)
         if Filter:

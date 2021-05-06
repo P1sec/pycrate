@@ -1017,7 +1017,7 @@ class EBI(Envelope):
     _GEN = (
         Uint('spare', bl=4),
         Uint('Value', val=5, bl=4),
-        Buf('ext', rep=REPR_HEX)
+        Buf('ext', val=b'', rep=REPR_HEX)
         )
 
 
@@ -1124,7 +1124,7 @@ class Ind(Envelope):
         Envelope('Octet8', GEN=(
             Uint('spare', bl=7),
             Uint('ETHPDN', bl=1))),
-        Buf('ext', rep=REPR_HEX)
+        Buf('ext', val=b'', rep=REPR_HEX)
         )
     
     def set_val(self, vals):
@@ -1214,7 +1214,7 @@ class BearerQoS(Envelope):
         Uint('MaxBitRateDL', val=10000, bl=40),
         Uint('GuaranteedBitRateUL', bl=40),
         Uint('GuaranteedBitRateDL', bl=40),
-        Buf('ext', rep=REPR_HEX)
+        Buf('ext', val=b'', rep=REPR_HEX)
         )
 
 
@@ -1230,7 +1230,7 @@ class FlowQoS(Envelope):
         Uint('MaxBitRateDL', val=10000, bl=40),
         Uint('GuaranteedBitRateUL', bl=40),
         Uint('GuaranteedBitRateDL', bl=40),
-        Buf('ext', rep=REPR_HEX)
+        Buf('ext', val=b'', rep=REPR_HEX)
         )
 
 
@@ -1256,7 +1256,7 @@ RATType_dict = {
 class RATType(Envelope):
     _GEN = (
         Uint8('Value', val=6, dic=RATType_dict),
-        Buf('ext', rep=REPR_HEX)
+        Buf('ext', val=b'', rep=REPR_HEX)
         )
 
 
@@ -1268,7 +1268,7 @@ class RATType(Envelope):
 class ServingNetwork(Envelope):
     _GEN = (
         PLMN(),
-        Buf('ext', rep=REPR_HEX)
+        Buf('ext', val=b'', rep=REPR_HEX)
         )
 
 
@@ -1410,7 +1410,7 @@ class ULI(Envelope):
         LAI(),
         MacroENBID(),
         ExtMacroENBID(),
-        Buf('ext', rep=REPR_HEX)
+        Buf('ext', val=b'', rep=REPR_HEX)
         )
     
     def __init__(self, *args, **kwargs):
@@ -1485,7 +1485,7 @@ class FTEID(Envelope):
         Uint32('TEID/GREKey'),
         Buf('IPv4Addr', bl=32, rep=REPR_HEX),
         Buf('IPv6Addr', bl=128, rep=REPR_HEX),
-        Buf('ext')
+        Buf('ext', val=b'', rep=REPR_HEX)
         )
     
     def __init__(self, *args, **kwargs):
@@ -1543,7 +1543,7 @@ class BearerContext(Buf):
 class ChargingID(Envelope):
     _GEN = (
         Uint32('Value', rep=REPR_HEX),
-        Buf('ext')
+        Buf('ext', val=b'', rep=REPR_HEX)
         )
 
 
@@ -1555,7 +1555,7 @@ class ChargingID(Envelope):
 class ChargingCharacteristics(Envelope):
     _GEN = (
         Uint16('Value', rep=REPR_HEX),
-        Buf('ext')
+        Buf('ext', val=b'', rep=REPR_HEX)
         )
 
 
@@ -1588,7 +1588,7 @@ class BearerFlags(Envelope):
         Uint('Vind', bl=1),
         Uint('VB', bl=1),
         Uint('PPC', bl=1),
-        Buf('ext')
+        Buf('ext', val=b'', rep=REPR_HEX)
         )
 
 
@@ -1612,7 +1612,7 @@ class PDNType(Envelope):
 class PTI(Envelope):
     _GEN = (
         Uint8('Value'),
-        Buf('ext')
+        Buf('ext', val=b'', rep=REPR_HEX)
         )
 
 
@@ -1880,7 +1880,7 @@ class MMContext_GSMKeyTriplets(Envelope):
         Uint('GENA', bl=1),
         Uint('UNA', bl=1),
         MMContextVoiceDomPref(),
-        Buf('ext', rep=REPR_HEX)
+        Buf('ext', val=b'', rep=REPR_HEX)
         )
     
     def __init__(self, *args, **kwargs):
@@ -1928,7 +1928,7 @@ class MMContext_UMTSKeyUsedCipherQuintuplets(Envelope):
         MMContextVoiceDomPref(),
         MMContextHigherBitRate(),
         Uint8('IOVUpdateCounter'),
-        Buf('ext', rep=REPR_HEX)
+        Buf('ext', val=b'', rep=REPR_HEX)
         )
     
     def __init__(self, *args, **kwargs):
@@ -1971,7 +1971,7 @@ class MMContext_GSMKeyUsedCipherQuintuplets(Envelope):
         Uint('UNA', bl=1),
         MMContextVoiceDomPref(),
         MMContextHigherBitRate(),
-        Buf('ext', rep=REPR_HEX)
+        Buf('ext', val=b'', rep=REPR_HEX)
         )
     
     def __init__(self, *args, **kwargs):
@@ -2019,7 +2019,7 @@ class MMContext_UMTSKeyQuintuplets(Envelope):
         MMContextHigherBitRate(),
         Uint8('IOVUpdatesCounter'),
         MMContextExtAccessRestrictData(),
-        Buf('ext', rep=REPR_HEX)
+        Buf('ext', val=b'', rep=REPR_HEX)
         )
     
     def __init__(self, *args, **kwargs):
@@ -2080,7 +2080,7 @@ class MMContext_EPSSecContextQuadruplets(Envelope):
         MMContextUEAddSecCap(),
         MMContextUENRSecCap(),
         MMContextAPNRateCtrlStats(),
-        Buf('ext', rep=REPR_HEX)
+        Buf('ext', val=b'', rep=REPR_HEX)
         )
     
     def __init__(self, *args, **kwargs):
@@ -2126,7 +2126,7 @@ class MMContext_UMTSKeyQuadrupletsQuintuplets(Envelope):
         Uint('UNA', bl=1),
         MMContextVoiceDomPref(),
         MMContextAPNRateCtrlStats(),
-        Buf('ext', rep=REPR_HEX)
+        Buf('ext', val=b'', rep=REPR_HEX)
         )
     
     def __init__(self, *args, **kwargs):
@@ -2414,11 +2414,14 @@ class GTPCIE(Envelope):
     def init_mand(self):
         """initialize all IEs that are mandatory
         """
+        # TODO
         pass
     
     def init_opt(self):
         """initialize all IEs that are optional
         """
+        # TODO
+        pass
     
 
 class GTPCIEs(Sequence):
@@ -5362,7 +5365,7 @@ class MBMSSessionStopResponse(GTPCMsg):
 
 
 #------------------------------------------------------------------------------#
-# General
+# General parser    
 # TS 29.274, section 6
 #------------------------------------------------------------------------------#
 
@@ -5459,6 +5462,10 @@ ERR_GTPC_TYPE_NONEXIST = 3
 
 
 def parse_GTPC(buf):
+    """parses the buffer `buf' for GTP-C message and returns a 2-tuple:
+    - GTP-C message structure, or None if parsing failed
+    - parsing error code, 0 if parsing succeeded, > 0 otherwise
+    """
     if len(buf) < 8:
         return None, ERR_GTPC_BUF_TOO_SHORT
     if python_version < 3:

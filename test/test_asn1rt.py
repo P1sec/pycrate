@@ -2546,22 +2546,22 @@ def test_perf_asn1rt():
     
     _load_rt_base()
     print('[+] ASN.1 base type encoding / decoding (BER, CER, DER, UPER, APER, OER, COER)')
-    Ta = timeit(_test_rt_base, number=10)
+    Ta = timeit(_test_rt_base, number=20)
     print('test_rt_base: {0:.4f}'.format(Ta))
     
     _load_rrc3g()
     print('[+] RRC 3G encoding / decoding (UPER)')
-    Tb = timeit(_test_rrc3g, number=3)
+    Tb = timeit(_test_rrc3g, number=10)
     print('test_rrc3g: {0:.4f}'.format(Tb))
     
     _load_lteran()
     print('[+] LTE S1AP and X2AP encoding / decoding (APER)')
-    Tc = timeit(_test_lteran, number=3)
+    Tc = timeit(_test_lteran, number=2)
     print('test_lteran: {0:.4f}'.format(Tc))
     
     _load_nrran()
     print('[+] NR RRC inter-node encoding / decoding (UPER)')
-    Td = timeit(_test_nrran, number=3)
+    Td = timeit(_test_nrran, number=20)
     print('test_lteran: {0:.4f}'.format(Td))
     
     _load_tcap_map()
@@ -2571,12 +2571,12 @@ def test_perf_asn1rt():
     
     _load_tcap_cap()
     print('[+] TCAP CAP encoding / decoding (BER)')
-    Tf = timeit(_test_tcap_cap, number=3)
+    Tf = timeit(_test_tcap_cap, number=10)
     print('test_tcap_cap: {0:.4f}'.format(Tf))
     
     _load_X509()
     print('[+] X.509 encoding / decoding (DER)')
-    Tg = timeit(_test_X509, number=4)
+    Tg = timeit(_test_X509, number=10)
     print('test_x509: {0:.4f}'.format(Tg))
     
     print('[+] test_asn1rt total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te+Tf+Tg))
