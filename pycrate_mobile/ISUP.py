@@ -41,7 +41,6 @@ from .SCCP import (
     SCCPOpt as ISUPOpt,
     SCCPMessage as ISUPMessage
     )
-from .TS24008_IE import BufBCD
 
 
 #------------------------------------------------------------------------------#
