@@ -35,20 +35,48 @@
 #------------------------------------------------------------------------------#
 # 3GPP TS 29.274: Evolved General Packet Radio Service (GPRS) Tunnelling Protocol 
 # for Control plane (GTPv2-C)
-# release 16 (00)
+# release 17.1.1 (h11)
 #------------------------------------------------------------------------------#
 
-from pycrate_core.utils     import *
-from pycrate_core.elt       import *
-from pycrate_core.base      import *
-from pycrate_core.charpy    import *
+from pycrate_core.utils import *
+from pycrate_core.elt   import *
+from pycrate_core.base  import *
 
-from pycrate_mobile.TS24301_IE  import TAI, UENetCap
-from pycrate_mobile.TS24008_IE  import (
-    BufBCD, ProtConfig, APN, PLMN, TFT, RAI, LAI, DRXParam, VoiceDomPref
+from pycrate_mobile.TS29244_PFCP    import (
+    BitFlags,
+    FQCSID,
+    _FQDN,
+    TimerUnit_dict,
+    _Timer,
     )
-from pycrate_csn1dir.ms_network_capability_value_part import (
-    ms_network_capability_value_part
+from pycrate_mobile.TS24301_IE      import (
+    TAI,
+    UENetCap,
+    )
+from pycrate_mobile.TS24008_IE      import (
+    BufBCD,
+    ProtConfig,
+    PLMN,
+    APN,
+    TFT,
+    RAI,
+    LAI,
+    DRXParam,
+    VoiceDomPref,
+    TimeZone,
+    DLSavingTime,
+    TMGI as _TMGI,
+    MSCm2,
+    classmark_3_value_part,
+    ms_network_capability_value_part,
+    SuppCodecList
+    )
+from pycrate_mobile.TS44018_IE      import (
+    ChanNeeded,
+    )
+from pycrate_mobile.TS24007         import (
+    Type4LV,
+    TI,
     )
 
 
@@ -145,7 +173,7 @@ GTPCType_dict = {
     137 : 'Forward Access Context Notification',
     138 : 'Forward Access Context Acknowledge',
     # S10, N26 (SGSN to MME, MME to SGSN, MME to AMF, AMF to MME)
-    141 : 'Configuration Transfer Tunnel Message',
+    141 : 'Configuration Transfer Tunnel',
     # S3, S16 (MME to MME, SGSN to SGSN)
     152 : 'RAN Information Relay',
     # S3 (SGSN to MME, MME to SGSN)
@@ -194,7 +222,7 @@ GTPCType_dict = {
     }
 
 
-# GTP-C v2 requests / responses
+# GTP-C v2 requests / responses (success, error)
 GTPCReqResp = {
     1   : (2, 3),
     4   : (5, ),
@@ -219,9 +247,9 @@ GTPCReqResp = {
     71  : (None, ),
     72  : (None, ),
     73  : (None, ),
-    95  : (95, 96), # unsure of the responses
-    97  : (97, 98), # unsure of the responses
-    99  : (99, 100), # unsure of the responses
+    95  : (96, ),
+    97  : (98, ),
+    99  : (100, ),
     101 : (102, ),
     103 : (104, ),
     128 : (129, ),
@@ -251,6 +279,7 @@ GTPCReqResp = {
     233 : (234, ),
     235 : (236, )
 }
+
 
 # GTP-C v2 interfaces and allowed message types
 GTPC_IF_S101    = set((4, 5, 6, 7))
@@ -323,14 +352,10 @@ class GTPCHdr(Envelope):
 # TS 29.274, section 8
 #------------------------------------------------------------------------------#
 
-# extracted from Table 8.1-1: Information Element types for GTPv2
+# We define everything as Buf(), then overwrite with proper IE
+# When all IEs are defined, we can get rid of these default Buf definitions
 class AMBR(Buf):
     pass
-
-
-# this is imported from TS24008_IE
-#class APN(Buf):
-#    pass
 
 
 class APNAndRelativeCapacity(Buf):
@@ -474,10 +499,6 @@ class FCause(Buf):
 
 
 class FContainer(Buf):
-    pass
-
-
-class FQCSID(Buf):
     pass
 
 
@@ -785,10 +806,6 @@ class TAD(Buf):
     pass
 
 
-class TI(Buf):
-    pass
-
-
 class TMGI(Buf):
     pass
 
@@ -848,6 +865,8 @@ class UPFunctionSelectionIndFlags(Buf):
 class WLANOffloadabilityInd(Buf):
     pass
 
+
+# Following are all proper IE definitions
 
 #------------------------------------------------------------------------------#
 # IMSI
@@ -948,13 +967,14 @@ Cause_dict = {
     126 : 'Multiple accesses to a PDN connection not allowed',
     127 : 'Request rejected due to UE capability',
     128 : 'S1-U Path Failure. See NOTE 8.',
-    129 : '5GC not allowed'
+    129 : '5GC not allowed',
+    130 : 'PGW mismatch with network slice subscribed by the UE',
     }
 
 
 class Cause(Envelope):
     _GEN = (
-        Uint8('Value', dic=Cause_dict),
+        Uint8('Val', dic=Cause_dict),
         Uint('spare', bl=5),
         Uint('PCE', bl=1, dic={1: 'error in the PDN Connection IE'}),
         Uint('BCE', bl=1, dic={1: 'error in the Bearer Context IE'}),
@@ -964,7 +984,7 @@ class Cause(Envelope):
             Uint16('Len'),
             Uint('spare', bl=4),
             Uint('Inst', bl=4)
-            ), trans=True)
+            ))
         )
     
     def _from_char(self, char):
@@ -974,7 +994,6 @@ class Cause(Envelope):
             # the IE length is long enough
             self[5].set_trans(False)
         Envelope._from_char(self, char)
-        
 
 
 #------------------------------------------------------------------------------#
@@ -992,7 +1011,7 @@ class Recovery(Uint8):
 #------------------------------------------------------------------------------#
 
 # imported from TS24008_IE
-#class APN(Buf):
+#class APN(APN):
 #    pass
 
 
@@ -1016,7 +1035,7 @@ class AMBR(Envelope):
 class EBI(Envelope):
     _GEN = (
         Uint('spare', bl=4),
-        Uint('Value', val=5, bl=4),
+        Uint('Val', val=5, bl=4),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
 
@@ -1053,10 +1072,7 @@ class MSISDN(BufBCD):
 # TS 29.274, 8.12
 #------------------------------------------------------------------------------#
 
-class Ind(Envelope):
-    
-    ENV_SEL_TRANS = False
-    
+class Ind(BitFlags):
     _GEN = (
         Envelope('Octet1', GEN=(
             Uint('DAF', bl=1),
@@ -1122,49 +1138,25 @@ class Ind(Envelope):
             Uint('ENBCRSI', bl=1),
             Uint('TSPCMI', bl=1))),
         Envelope('Octet8', GEN=(
-            Uint('spare', bl=7),
+            Uint('CSRMFI', bl=1),
+            Uint('MTEDTN', bl=1),
+            Uint('MTEDTA', bl=1),
+            Uint('N5GNMI', bl=1),
+            Uint('5GCNRS', bl=1),
+            Uint('5GCNRI', bl=1),
+            Uint('5SRHOI', bl=1),
             Uint('ETHPDN', bl=1))),
-        Buf('ext', val=b'', rep=REPR_HEX)
+        Envelope('Octet9', GEN=(
+            Uint('spare', bl=1),
+            Uint('PGWRNSI', bl=1),
+            Uint('RPPCSI', bl=1),
+            Uint('PGWCHI', bl=1),
+            Uint('SISSME', bl=1),
+            Uint('NSENBI', bl=1),
+            Uint('IDFUPF', bl=1),
+            Uint('EMCI', bl=1))),
+        Buf('ext', rep=REPR_HEX)
         )
-    
-    def set_val(self, vals):
-        if vals is None:
-            [elt.set_trans(False) for elt in self._content]
-            [elt.set_val(None) for elt in self._content]
-        elif isinstance(vals, (tuple, list)):
-            for i, val in enumerate(vals):
-                self._content[i].set_trans(False)
-                self._content[i].set_val(val)
-                if i > len(self._content):
-                    break
-            if i < len(self._content)-1:
-                [elt.set_trans(True) for elt in self._content[1+i:]]
-        elif isinstance(vals, dict):
-            off = 0
-            for name, val in vals.items():
-                if name[:5] == 'Octet':
-                    try:
-                        off = max(off, int(name[5:]))
-                    except Exception:
-                        pass
-                elif name == 'ext':
-                    off = len(self._content)
-                try:
-                    self.__setitem__(name, val)
-                except Exception:
-                    pass
-            [elt.set_trans(False) for elt in self._content[:off]]
-            if off < len(self._content)-1:
-                [elt.set_trans(True) for elt in self._content[off:]]
-        elif self._SAFE_STAT:
-            raise(EltErr('{0} [set_val]: vals type is {1}, expecting None, '\
-                  'tuple, list or dict'.format(self._name, type(vals).__name__)))
-    
-    def _from_char(self, char):
-        l = char.len_byte()
-        if l < 9:
-            [elt.set_trans(True) for elt in self._content[l:]]
-        Envelope._from_char(self, char)
 
 
 #------------------------------------------------------------------------------#
@@ -1214,7 +1206,7 @@ class BearerQoS(Envelope):
         Uint('MaxBitRateDL', val=10000, bl=40),
         Uint('GuaranteedBitRateUL', bl=40),
         Uint('GuaranteedBitRateDL', bl=40),
-        Buf('ext', val=b'', rep=REPR_HEX)
+        Buf('ext', rep=REPR_HEX)
         )
 
 
@@ -1230,7 +1222,7 @@ class FlowQoS(Envelope):
         Uint('MaxBitRateDL', val=10000, bl=40),
         Uint('GuaranteedBitRateUL', bl=40),
         Uint('GuaranteedBitRateDL', bl=40),
-        Buf('ext', val=b'', rep=REPR_HEX)
+        Buf('ext', rep=REPR_HEX)
         )
 
 
@@ -1255,8 +1247,8 @@ RATType_dict = {
 
 class RATType(Envelope):
     _GEN = (
-        Uint8('Value', val=6, dic=RATType_dict),
-        Buf('ext', val=b'', rep=REPR_HEX)
+        Uint8('Val', val=6, dic=RATType_dict),
+        Buf('ext', rep=REPR_HEX)
         )
 
 
@@ -1268,7 +1260,7 @@ class RATType(Envelope):
 class ServingNetwork(Envelope):
     _GEN = (
         PLMN(),
-        Buf('ext', val=b'', rep=REPR_HEX)
+        Buf('ext', rep=REPR_HEX)
         )
 
 
@@ -1410,7 +1402,7 @@ class ULI(Envelope):
         LAI(),
         MacroENBID(),
         ExtMacroENBID(),
-        Buf('ext', val=b'', rep=REPR_HEX)
+        Buf('ext', rep=REPR_HEX)
         )
     
     def __init__(self, *args, **kwargs):
@@ -1482,10 +1474,10 @@ class FTEID(Envelope):
         Uint('V4', val=1, bl=1),
         Uint('V6', bl=1),
         Uint('IF', bl=6, dic=FTEIDIF_dict),
-        Uint32('TEID/GREKey'),
+        Uint32('TEID_GREKey', rep=REPR_HEX),
         Buf('IPv4Addr', bl=32, rep=REPR_HEX),
         Buf('IPv6Addr', bl=128, rep=REPR_HEX),
-        Buf('ext', val=b'', rep=REPR_HEX)
+        Buf('ext')
         )
     
     def __init__(self, *args, **kwargs):
@@ -1513,7 +1505,7 @@ class TMSI(Uint32):
 class GlobalCNId(Envelope):
     _GEN = (
         PLMN(),
-        Uint('CNId', rep=REPR_HEX)
+        Buf('CNId', val=b'\0\0', rep=REPR_HEX)
         )
     
     encode = Envelope.set_val
@@ -1522,7 +1514,52 @@ class GlobalCNId(Envelope):
         return (self[0].decode(), self[1].get_val())
 
 
-# TODO: 8.25, 8.26, 8.27
+#------------------------------------------------------------------------------#
+# S103 PDN Data Forwarding Info (S103PDF)
+# TS 29.274, 8.25
+#------------------------------------------------------------------------------#
+
+class S103PDF(Envelope):
+    _GEN = (
+        Uint8('HSGWAddrLen'),
+        Buf('HSGWAddr', val=4*b'\0', rep=REPR_HEX), # IPv4 or v6
+        Uint32('GREKey', rep=REPR_HEX),
+        Uint8('EBINum'),
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('EBI', val=5, bl=4)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['HSGWAddrLen'].set_valauto(lambda: self['HSGWAddr'].get_len())
+        self['HSGWAddr'].set_blauto(lambda: self['HSGWAddrLen'].get_val()<<3)
+
+
+#------------------------------------------------------------------------------#
+# S1-U Data Forwarding (S1UDF)
+# TS 29.274, 8.26
+#------------------------------------------------------------------------------#
+
+class S1UDF(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('EBI', val=5, bl=4),
+        Uint8('SGWAddrLen'),
+        Buf('SGWAddr', val=4*b'\0', rep=REPR_HEX), # IPv4 or v6
+        Uint32('TEID', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Delay Value
+# TS 29.274, 8.27
+#------------------------------------------------------------------------------#
+
+class DelayValue(Envelope):
+    _GEN = (
+        Uint8('Val', desc='50 ms multiple'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -1542,7 +1579,7 @@ class BearerContext(Buf):
 
 class ChargingID(Envelope):
     _GEN = (
-        Uint32('Value', rep=REPR_HEX),
+        Uint32('Val', rep=REPR_HEX),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
 
@@ -1554,25 +1591,25 @@ class ChargingID(Envelope):
 
 class ChargingCharacteristics(Envelope):
     _GEN = (
-        Uint16('Value', rep=REPR_HEX),
+        Uint16('Val', rep=REPR_HEX),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
 
 
 #------------------------------------------------------------------------------#
-# Trace ID
+# Trace Information
 # TS 29.274, 8.31
 #------------------------------------------------------------------------------#
 
-class TraceID(Envelope):
+class TraceInfo(Envelope):
     _GEN = (
         PLMN(),
-        Uint16('TraceID', rep=REPR_HEX),
+        Uint24('TraceID', rep=REPR_HEX),
         Uint64('TriggeringEvents', rep=REPR_HEX),
         Uint16('ListOfNETypes', rep=REPR_HEX),
         Uint8('SessionTraceDepth'),
         Buf('ListOfInterfaces', bl=96, rep=REPR_HEX),
-        Buf('IPAddrForCollection', rep=REPR_HEX)
+        Buf('IPAddrForCollection', val=4*b'\0', rep=REPR_HEX)
         )
 
 
@@ -1600,7 +1637,7 @@ class BearerFlags(Envelope):
 class PDNType(Envelope):
     _GEN = (
         Uint('spare', bl=5),
-        Uint('Value', val=1, bl=3, dic=PDNType_dict)
+        Uint('Val', val=1, bl=3, dic=PDNType_dict)
         )
 
 
@@ -1611,7 +1648,7 @@ class PDNType(Envelope):
 
 class PTI(Envelope):
     _GEN = (
-        Uint8('Value'),
+        Uint8('Val'),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
 
@@ -2150,11 +2187,959 @@ class MMContext(Alt):
     _sel = lambda a, b: b.get_env()[0][0].get_val() # GTPCIEHdr['Type']
 
 
-# some more missing
-# UETimeZone, APNRestriction, SelectionMode, 
+#------------------------------------------------------------------------------#
+# PDN Connection
+# TS 29.274, 8.39
+#------------------------------------------------------------------------------#
+# PDN Connection is a grouped IE that is always defined locally for each GTPCMsg
+
+class PDNConnection(Buf):
+    _rep = REPR_HEX
 
 
+#------------------------------------------------------------------------------#
+# PDU Numbers
+# TS 29.274, 8.40
+#------------------------------------------------------------------------------#
 
+class PDUNumbers(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('NSAPI', bl=4),
+        Uint16('DLGTPUSeqn'),
+        Uint16('ULGTPUSeqn'),
+        Uint16('SendNPDUNum'),
+        Uint16('RecvNFPUNum'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Packet TMSI (P-TMSI)
+# TS 29.274, 8.41
+#------------------------------------------------------------------------------#
+
+class PTMSI(Uint32):
+    _rep = REPR_HEX
+
+
+#------------------------------------------------------------------------------#
+# P-TMSI Signature
+# TS 29.274, 8.42
+#------------------------------------------------------------------------------#
+
+class PTMSISignature(Buf):
+    _rep = REPR_HEX
+
+
+#------------------------------------------------------------------------------#
+# Hop Counter
+# TS 29.274, 8.43
+#------------------------------------------------------------------------------#
+
+class HopCounter(Envelope):
+    _GEN = (
+        Uint8('Val'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# UE Time Zone
+# TS 29.274, 8.44
+#------------------------------------------------------------------------------#
+
+class UETimeZone(Envelope):
+    _GEN = (
+        TimeZone(),
+        DLSavingTime(),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Trace Reference
+# TS 29.274, 8.45
+#------------------------------------------------------------------------------#
+
+class TraceReference(Envelope):
+    _GEN = (
+        PLMN(),
+        Uint24('TraceID', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Complete Request Message
+# TS 29.274, 8.46
+#------------------------------------------------------------------------------#
+
+class CompleteRequestMessage(Envelope):
+    _GEN = (
+        Uint8('MsgType', dic={0: 'Attach Request', 1: 'TAU Request'}),
+        Buf('Msg', rep=REPR_HEX)
+        )
+        
+
+#------------------------------------------------------------------------------#
+# GUTI
+# TS 29.274, 8.47
+#------------------------------------------------------------------------------#
+
+class GUTI(Envelope):
+    _GEN = (
+        PLMN(),
+        Uint16('MMEGroupID', rep=REPR_HEX),
+        Uint8('MMECode', rep=REPR_HEX),
+        Uint32('MTMSI', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Fully Qualified Container (F-Container)
+# TS 29.274, 8.48
+#------------------------------------------------------------------------------#
+
+FContainerType_dict = {
+    1 : 'UTRAN Transparent Container',
+    2 : 'BSS Container',
+    3 : 'E-UTRAN Transparent Container',
+    4 : 'NBIFOM Container',
+    5 : 'EN-DC Container',
+    }
+
+class FContainer(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('Type', bl=4, dic=FContainerType_dict),
+        Buf('Cont', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Fully Qualified Cause (F-Cause)
+# TS 29.274, 8.49
+#------------------------------------------------------------------------------#
+
+FCauseType_dict = {
+    0 : 'Radio Network Layer',
+    1 : 'Transport Layer',
+    2 : 'NAS',
+    3 : 'Protocol',
+    4 : 'Miscellaneous',
+    }
+
+class FCause(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('Type', bl=4, dic=FCauseType_dict),
+        Buf('Cause', val=b'\x6f', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# PLMN ID
+# TS 29.274, 8.50
+#------------------------------------------------------------------------------#
+
+class PLMNID(PLMN):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# Target Identification
+# TS 29.274, 8.51
+#------------------------------------------------------------------------------#
+
+TargetIdType_dict = {
+    0 : 'RNC ID',
+    1 : 'Macro eNodeB ID',
+    2 : 'Cell Identifier',
+    3 : 'Home eNodeB ID',
+    4 : 'Extended Macro eNodeB ID',
+    5 : 'gNodeB ID',
+    6 : 'Macro ng-eNodeB ID',
+    7 : 'Extended ng-eNodeB ID',
+    8 : 'en-gNB ID',
+    }
+
+
+class RNCID(Envelope):
+    _GEN = (
+        PLMN(),
+        Uint16('LAC', rep=REPR_HEX),
+        Uint8('RAC', rep=REPR_HEX),
+        Uint16('RNCID', rep=REPR_HEX),
+        Buf('ExtRNCID', val=b'', rep=REPR_HEX)
+        )
+
+
+class MacroENBID(Envelope):
+    _GEN = (
+        PLMN(),
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('MacroENBID', bl=20, rep=REPR_HEX),
+        Uint16('TAC', rep=REPR_HEX)
+        )
+
+
+class HENBID(Envelope):
+    _GEN = (
+        PLMN(),
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('HENBID', bl=28, rep=REPR_HEX),
+        Uint16('TAC', rep=REPR_HEX)
+        )
+
+
+class ExtMacroENBID(Envelope):
+    _GEN = (
+        PLMN(),
+        Uint('SMeNB', bl=1),
+        Alt('ENBID', GEN={
+            0 : Envelope('Long', GEN=(
+                Uint('spare', bl=2, rep=REPR_HEX),
+                Uint('MacroENBID', bl=21, rep=REPR_HEX))),
+            1 : Envelope('Short', GEN=(
+                Uint('spare', bl=5, rep=REPR_HEX),
+                Uint('MacroENBID', bl=18, rep=REPR_HEX)))},
+            sel=lambda self: self.get_env()['SMeNB'].get_val()),
+        Uint16('TAC', rep=REPR_HEX)
+        )
+
+
+class CellID(Envelope):
+    _GEN = (
+        PLMN(),
+        Uint16('LAC', rep=REPR_HEX),
+        Uint8('RAC', rep=REPR_HEX),
+        Uint16('CellID', rep=REPR_HEX)
+        )
+
+
+class GNBID(Envelope):
+    _GEN = (
+        PLMN(),
+        Uint('spare', bl=2, rep=REPR_HEX),
+        Uint('GNBIDLen', val=32, bl=6), # 24 or 32, where MSB of GNBID are to be set to 0 if 24
+        Uint32('GNBID', rep=REPR_HEX),
+        Uint24('5GSTAC', rep=REPR_HEX)
+        )
+
+
+class MacroNGENBID(Envelope):
+    _GEN = (
+        PLMN(),
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('MacroENBID', bl=20, rep=REPR_HEX),
+        Uint24('5GSTAC', rep=REPR_HEX)
+        )
+
+
+class ExtNGENBID(Envelope):
+    _GEN = (
+        PLMN(),
+        Uint('SMeNB', bl=1),
+        Alt('ENBID', GEN={
+            0 : Envelope('Long', GEN=(
+                Uint('spare', bl=2, rep=REPR_HEX),
+                Uint('MacroENBID', bl=21, rep=REPR_HEX))),
+            1 : Envelope('Short', GEN=(
+                Uint('spare', bl=5, rep=REPR_HEX),
+                Uint('MacroENBID', bl=18, rep=REPR_HEX)))},
+            sel=lambda self: self.get_env()['SMeNB'].get_val()),
+        Uint24('5GSTAC', rep=REPR_HEX)
+        )
+
+
+class ENGNBID(Envelope):
+    _GEN = (
+        PLMN(),
+        Uint('5TAC', val=1, bl=1),
+        Uint('ETAC', bl=1),
+        Uint('GNBIDLen', val=32, bl=6), # 24 or 32, where MSB of GNBID are to be set to 0 if 24
+        Uint32('GNBID', rep=REPR_HEX),
+        Uint16('TAC', rep=REPR_HEX),
+        Uint24('5GSTAC', rep=REPR_HEX),
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['TAC'].set_transauto(lambda: self['ETAC'].get_val() == 0)
+        self['5GSTAC'].set_transauto(lambda: self['5TAC'].get_val() == 0)
+
+
+class TargetIdentification(Envelope):
+    _GEN = (
+        Uint8('Type', dic=TargetIdType_dict),
+        Alt('Id', GEN={
+            0 : RNCID(),
+            1 : MacroENBID(),
+            2 : CellID(),
+            3 : HENBID(),
+            4 : ExtMacroENBID(),
+            5 : GNBID(),
+            6 : MacroNGENBID(),
+            7 : ExtNGENBID(),
+            8 : ENGNBID()},
+            DEFAULT=Buf('unk', val=b'', rep=REPR_HEX),
+            sel=lambda self: self.get_env()['Type'].get_val())
+        )
+
+
+#------------------------------------------------------------------------------#
+# Packet Flow ID
+# TS 29.274, 8.53
+#------------------------------------------------------------------------------#
+
+class PacketFlowID(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('EBI', val=5, bl=4),
+        Buf('Val', val=b'\0\0\0\0', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# RAB Context
+# TS 29.274, 8.54
+#------------------------------------------------------------------------------#
+
+class RABContext(Envelope):
+    _GEN = (
+        Uint('ULPSI', bl=1),
+        Uint('DLPSI', bl=1),
+        Uint('ULGSI', bl=1),
+        Uint('DLGSI', bl=1),
+        Uint('NSAPI', bl=4),
+        Uint16('DLGTPUSeqn'),
+        Uint16('ULGTPUSeqn'),
+        Uint16('DLPDCPSeqn'),
+        Uint16('ULPDCPSeqn'),
+        )
+
+
+#------------------------------------------------------------------------------#
+# Source RNC PDCP context info
+# TS 29.274, 8.55
+#------------------------------------------------------------------------------#
+
+class SourceRNCPDCPContextInfo(Buf):
+    _rep = REPR_HEX
+
+
+#------------------------------------------------------------------------------#
+# Port Number
+# TS 29.274, 8.56
+#------------------------------------------------------------------------------#
+
+class PortNumber(Envelope):
+    _GEN = (
+        Uint16('Val'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# APN Restriction
+# TS 29.274, 8.57
+#------------------------------------------------------------------------------#
+
+class APNRestriction(Envelope):
+    _GEN = (
+        Uint8('Val'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Selection Mode
+# TS 29.274, 8.58
+#------------------------------------------------------------------------------#
+
+SelectionMode_dict = {
+    0 : 'MS or network provided APN, subscription verified',
+    1 : 'MS provided APN, subscription not verified',
+    2 : 'Network provided APN, subscription not verified',
+    }
+
+class SelectionMode(Envelope):
+    _GEN = (
+        Uint('spare', bl=6),
+        Uint('Val', bl=2, dic=SelectionMode_dict),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Source Identification
+# TS 29.274, 8.59
+#------------------------------------------------------------------------------#
+
+class SourceIdentification(Envelope):
+    _GEN = (
+        CellID('TargetCellID'),
+        Uint8('SourceType', dic={0: 'CellID', 1: 'RNCID'}),
+        Alt('SourceID', GEN={
+            0 : CellID(),
+            1 : Buf('RNCID', rep=REPR_HEX), # ASN.1 APER encoded RANAP IE 
+            },
+            DEFAULT=Buf('unk', val=b'', rep=REPR_HEX),
+            sel=lambda self: self.get_env()['SourceType'].get_val()
+            )
+        )
+
+
+#------------------------------------------------------------------------------#
+# Change Reporting Action
+# TS 29.274, 8.61
+#------------------------------------------------------------------------------#
+
+class ChangeReportingAction(Uint8):
+    _dic = {
+        0 : 'Stop Reporting',
+        1 : 'Start Reporting CGI/SAI',
+        2 : 'Start Reporting RAI',
+        3 : 'Start Reporting TAI',
+        4 : 'Start Reporting ECGI',
+        5 : 'Start Reporting CGI/SAI and RAI',
+        6 : 'Start Reporting TAI and ECGI',
+        7 : 'Start Reporting Macro eNodeB ID and Extended Macro eNodeB ID',
+        8 : 'Start Reporting TAI, Macro eNodeB ID and Extended Macro eNodeB ID'
+        }
+
+
+#------------------------------------------------------------------------------#
+# Fully qualified PDN Connection Set Identifier (FQ-CSID)
+# TS 29.274, 8.62
+#------------------------------------------------------------------------------#
+
+# imported from TS29244_PFCP
+#class FQCSID(FQCSID):
+#    pass
+
+
+#------------------------------------------------------------------------------#
+# Channel Needed
+# TS 29.274, 8.63
+#------------------------------------------------------------------------------#
+
+class ChannelNeeded(Envelope):
+    _GEN = (
+        Uint('IEI', val=0xe, rep=REPR_HEX),
+        ) + tuple(ChanNeeded()._content)
+
+
+#------------------------------------------------------------------------------#
+# eMLPP Priority
+# TS 29.274, 8.64
+#------------------------------------------------------------------------------#
+# TODO: eMLPP-Priority IE defined in 3GPP TS 48.008
+
+class EMLPPPriority(Buf):
+    _rep = REPR_HEX
+
+
+#------------------------------------------------------------------------------#
+# Node Type
+# TS 29.274, 8.65
+#------------------------------------------------------------------------------#
+
+class NodeType(Envelope):
+    _GEN = (
+        Uint8('Val', dic={0: 'MME', 1: 'SGSN'}),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+    
+
+#------------------------------------------------------------------------------#
+# Fully Qualified Domain Name (FQDN)
+# TS 29.274, 8.66
+#------------------------------------------------------------------------------#
+
+class FQDN(_FQDN):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# Private Extension
+# TS 29.274, 8.67
+#------------------------------------------------------------------------------#
+
+class PrivExt(Envelope):
+    _GEN = (
+        Uint16('EnterpriseID'),
+        Buf('Val', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Transaction Identifier
+# TS 29.274, 8.68
+#------------------------------------------------------------------------------#
+
+# imported from TS24007
+#class TI(TI):
+#    pass
+
+
+#------------------------------------------------------------------------------#
+# MBMS Session Duration
+# TS 29.274, 8.69
+#------------------------------------------------------------------------------#
+
+class MBMSSessionDuration(Envelope):
+    _GEN = (
+        Uint24('Val'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# MBMS Service Area
+# TS 29.274, 8.70
+#------------------------------------------------------------------------------#
+
+class MBMSServiceArea(Envelope):
+    _GEN = (
+        Uint8('Num'),
+        Sequence('MBMSServiceAreaCodes', GEN=Uint16('Code'))
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['Num'].set_valauto(lambda: self['MBMSServiceAreaCodes'].get_num())
+        self['MBMSServiceAreaCodes'].set_numauto(lambda: self['Num'].get_val())
+
+
+#------------------------------------------------------------------------------#
+# MBMS Session Identifier
+# TS 29.274, 8.71
+#------------------------------------------------------------------------------#
+
+class MBMSSessionIdent(Envelope):
+    _GEN = (
+        Uint8('Val'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# MBMS Flow Identifier
+# TS 29.274, 8.72
+#------------------------------------------------------------------------------#
+
+class MBMSFlowIdent(Envelope):
+    _GEN = (
+        Uint16('Val'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# MBMS IP Multicast Distribution
+# TS 29.274, 8.73
+#------------------------------------------------------------------------------#
+
+class MulticastAddr(Envelope):
+    _GEN = (
+        Uint('Type', val=0, bl=2, dic={0: 'V4', 1: 'V6'}),
+        Uint('Len', bl=6),
+        Alt('Addr', GEN={
+            0: Buf('IPv4Addr', bl=32, rep=REPR_HEX),
+            1: Buf('IPv6Addr', bl=128, rep=REPR_HEX)},
+            DEFAULT=Buf('unk', val=b'', rep=REPR_HEX),
+            sel=lambda self: self.get_env()['Type'].get_val())
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['Len'].set_valauto(lambda: self['Addr'].get_len())
+        self['Addr'].set_blauto(lambda: self['Len'].get_val()<<3)
+
+
+class MBMSIPMulticastDistribution(Envelope):
+    _GEN = (
+        Uint32('CommonTEID', rep=REPR_HEX),
+        MulticastAddr('DistribAddr'),
+        MulticastAddr('SourceAddr'),
+        Uint8('MBMSHCInd'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )   
+
+
+#------------------------------------------------------------------------------#
+# MBMS Distribution Acknowledge
+# TS 29.274, 8.74
+#------------------------------------------------------------------------------#
+
+MBMSDistribInd_dict = {
+    0 : 'No RNCs have accepted IP multicast distribution',
+    1 : 'All RNCs have accepted IP multicast distribution',
+    2 : 'Some RNCs have accepted IP multicast distribution',
+    }
+
+class MBMSDistributionAcknowledge(Envelope):
+    _GEN = (
+        Uint('spare', bl=6, rep=REPR_HEX),
+        Uint('Ind', bl=2, dic=MBMSDistribInd_dict),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# User CSG Information
+# TS 29.274, 8.75
+#------------------------------------------------------------------------------#
+
+class UCI(Envelope):
+    _GEN = (
+        PLMN(),
+        Uint('spare', bl=5, rep=REPR_HEX),
+        Uint('CSGID', bl=27, rep=REPR_HEX),
+        Uint('AccessMode', bl=2, dic={0: 'Closed mode', 1: 'Hybrid mode'}),
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('LCSG', bl=1),
+        Uint('CMI', bl=1, dic={0: 'Non-CSG membership', 1: 'CSG membership'}),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# CSG Information Reporting Action
+# TS 29.274, 8.76
+#------------------------------------------------------------------------------#
+
+class CSGInfoReportingAction(Envelope):
+    _GEN = (
+        Uint('spare', bl=5, rep=REPR_HEX),
+        Uint('UCIUHC', bl=1),
+        Uint('UCISHC', bl=1),
+        Uint('UCICSG', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# RFSP Index
+# TS 29.274, 8.77
+#------------------------------------------------------------------------------#
+
+class RFSPIndex(Uint16):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# CSG ID
+# TS 29.274, 8.78
+#------------------------------------------------------------------------------#
+
+class CSGID(Envelope):
+    _GEN = (
+        Uint('spare', bl=5, rep=REPR_HEX),
+        Uint('Val', bl=27, rep=REPR_HEX),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# CSG Membership Indication (CMI)
+# TS 29.274, 8.79
+#------------------------------------------------------------------------------#
+
+class CMI(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('CMI', bl=1, dic={0: 'Non-CSG membership', 1: 'CSG membership'}),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Service indicator
+# TS 29.274, 8.80
+#------------------------------------------------------------------------------#
+
+class ServiceIndicator(Uint8):
+    _dic = {
+        1 : 'CS call indicator',
+        2 : 'SMS indicator'
+        }
+
+
+#------------------------------------------------------------------------------#
+# Detach Type
+# TS 29.274, 8.81
+#------------------------------------------------------------------------------#
+
+class DetachType(Uint8):
+    _dic = {
+        1 : 'PS Detach',
+        2 : 'Combined PS/CS Detach'
+        }
+
+
+#------------------------------------------------------------------------------#
+# Local Distinguished Name (LDN)
+# TS 29.274, 8.82
+#------------------------------------------------------------------------------#
+
+class LDN(Buf):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# Node Features
+# TS 29.274, 8.83
+#------------------------------------------------------------------------------#
+
+class NodeFeat(Envelope):
+    _GEN = (
+        Uint('spare', bl=1),
+        Uint('MTEDT', bl=1),
+        Uint('ETH', bl=1),
+        Uint('S1UN', bl=1),
+        Uint('CIOT', bl=1),
+        Uint('NTSR', bl=1),
+        Uint('MABR', bl=1),
+        Uint('PRN', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# MBMS Time to Data Transfer
+# TS 29.274, 8.84
+#------------------------------------------------------------------------------#
+
+class MBMSTimeToDataTransfer(Envelope):
+    _GEN = (
+        Uint8('Val'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Throttling
+# TS 29.274, 8.85
+#------------------------------------------------------------------------------#
+
+class Throttling(Envelope):
+    _GEN = (
+        Uint('DelayUnit', bl=3, dic=TimerUnit_dict),
+        Uint('DelayVal', bl=5),
+        Uint8('Factor'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+        
+
+#------------------------------------------------------------------------------#
+# Allocation/Retention Priority (ARP)
+# TS 29.274, 8.86
+#------------------------------------------------------------------------------#
+
+class ARP(Envelope):
+    _GEN = (
+        Uint('spare', bl=1),
+        Uint('PCI', bl=1),
+        Uint('PL', bl=4),
+        Uint('spare', bl=1),
+        Uint('PVI', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# EPC Timer
+# TS 29.274, 8.87
+#------------------------------------------------------------------------------#
+
+class EPCTimer(_Timer):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# Signalling Priority Indication
+# TS 29.274, 8.88
+#------------------------------------------------------------------------------#
+
+class SignallingPriorityInd(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('LAPI', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Temporary Mobile Group Identity
+# TS 29.274, 8.89
+#------------------------------------------------------------------------------#
+
+# _TMGI imported from TS24008_IE
+class TMGI(Envelope):
+    _GEN = tuple(_TMGI()._content) + (
+        Buf('ext', val=b'', rep=REPR_HEX),
+        )
+
+
+#------------------------------------------------------------------------------#
+# Additional MM context for SRVCC
+# TS 29.274, 8.90
+#------------------------------------------------------------------------------#
+
+class AdditionalMMContextForSRVCC(Envelope):
+    _GEN = (
+        Type4LV('MSCm2', val={'V':b'@\0\0'}, IE=MSCm2()),
+        Type4LV('MSCm3', val={'V': b''}, IE=classmark_3_value_part),
+        Type4LV('SuppCodecs', val={'V': b'\0\x01\0'}, IE=SuppCodecList()),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Additional flags for SRVCC
+# TS 29.274, 8.91
+#------------------------------------------------------------------------------#
+
+class AdditionalFlagsForSRVCC(Envelope):
+    _GEN = (
+        Uint('spare', bl=6, rep=REPR_HEX),
+        Uint('VF', bl=1),
+        Uint('ICS', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# MDT Configuration
+# TS 29.274, 8.93
+#------------------------------------------------------------------------------#
+
+class MDTConfiguration(Envelope):
+    _GEN = (
+        Uint8('JobType'),
+        Uint32('ListOfMeasurements'),
+        Uint8('ReportingTrigger'),
+        Uint8('ReportInterval'),
+        Uint8('ReportAmount'),
+        Uint8('EventThresholdRSRP'),
+        Uint8('EventThresholdRSRQ'),
+        Uint8('LenAreaScope'),
+        Buf('AreaScope', rep=REPR_HEX),
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('PLI', bl=1),
+        Uint('PMI', bl=1),
+        Uint('MPI', bl=1),
+        Uint('CRRMI', bl=1),
+        Uint8('CollectionPeriod'),
+        Uint8('MeasurementPeriod'),
+        Uint8('PositioningMethod'),
+        Uint8('MDTPLMNsNum'),
+        Sequence('MDTPLMNs', GEN=PLMN()),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['LenAreaScope'].set_valauto(lambda: self['AreaScope'].get_len())
+        self['AreaScope'].set_blauto(lambda: self['LenAreaScope'].get_val()<<3)
+        self['MDTPLMNsNum'].set_valauto(lambda: self['MDTPLMNs'].get_num())
+        self['MDTPLMNs'].set_numauto(lambda: self['MDTPLMNsNum'].get_val())
+
+
+#------------------------------------------------------------------------------#
+# Additional Protocol Configuration Options (APCO)
+# TS 29.274, 8.94
+#------------------------------------------------------------------------------#
+
+class AdditionalPCO(ProtConfig):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# Absolute Time of MBMS Data Transfer
+# TS 29.274, 8.95
+#------------------------------------------------------------------------------#
+
+class AbsoluteTimeOfMBMSDataTransfer(Envelope):
+    _GEN = (
+        Uint64('Val'),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# H(e)NB Information Reporting
+# TS 29.274, 8.96
+#------------------------------------------------------------------------------#
+
+class HeNBInfoReporting(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('FTI', val=1, bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# IPv4 Configuration Parameters (IP4CP)
+# TS 29.274, 8.97
+#------------------------------------------------------------------------------#
+
+class IPv4ConfigurationParameters(Envelope):
+    _GEN = (
+        Uint8('SubnetPrefLen'),
+        Buf('IPv4DefaultRouterAddr', bl=32, rep=REPR_HEX),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Change to Report Flags
+# TS 29.274, 8.98
+#------------------------------------------------------------------------------#
+
+class ChangeToReportFlags(Envelope):
+    _GEN = (
+        Uint('spare', bl=6, rep=REPR_HEX),
+        Uint('TZCR', bl=1),
+        Uint('SNCR', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Action Indication
+# TS 29.274, 8.99
+#------------------------------------------------------------------------------#
+
+ActionInd_dict = {
+    0 : 'No Action',
+    1 : 'Deactivation Indication',
+    2 : 'Paging Indication',
+    3 : 'Paging Stop Indication'
+    }
+
+class ActionInd(Envelope):
+    _GEN = (
+        Uint('spare', bl=5, rep=REPR_HEX),
+        Uint('Val', bl=3, dic=ActionInd_dict),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+# TODO: to be continued...
+#------------------------------------------------------------------------------#
+# 
+# TS 29.274, 8.
+#------------------------------------------------------------------------------#
+
+
+#------------------------------------------------------------------------------#
+# 
+# TS 29.274, 8.
+#------------------------------------------------------------------------------#
 
 
 
