@@ -14,14 +14,14 @@ jobs:
           - windows-latest
           - macos-latest
         python-version:
-          # TODO: Refactor test suite to allow running under py27
-          # - 2.7
+          - 2.7
           - 3.5
           - 3.6
           - 3.7
           - 3.8
           - 3.9
     runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.python-version == 2.7 }}
     steps:
       - name: checkout
         uses: actions/checkout@v2
