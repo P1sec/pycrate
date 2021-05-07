@@ -15,7 +15,6 @@ jobs:
         python-version:
           # TODO: Refactor test suite to allow running under py27
           # - 2.7
-          - 3.4
           - 3.5
           - 3.6
           - 3.7
