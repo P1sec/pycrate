@@ -5177,6 +5177,21 @@ PFCPMsgType_dict = {
 
 PFCPMsgType = IntEnum('PFCPMsgType', {strip_name(v) : k for k, v in PFCPMsgType_dict.items()})
 
+# PFCP Request / Response (success, error)
+PFCPReqResp = {
+    1 : (2, ),
+    3 : (4, ),
+    5 : (6, 11),
+    7 : (8, ),
+    9 : (10, ),
+    12 : (13, ),
+    14 : (15, ),
+    50 : (51, ),
+    52 : (53, ),
+    54 : (55, ),
+    56 : (57, ),
+    }
+
 
 #------------------------------------------------------------------------------#
 # TS 29.244, section 7.2: Message Format
