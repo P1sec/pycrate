@@ -33,6 +33,9 @@ jobs:
       - name: install pysctp dependencies
         if: startsWith(matrix.os, 'ubuntu')
         run: sudo apt install libsctp-dev
+      - name: install c++ compiler
+        if: ${{ startsWith(matrix.os, 'windows') && matrix.python-version == 2.7 }}
+        run: choco install vcpython27 -f -y
       - name: run test suite
         run: tox
         env:
