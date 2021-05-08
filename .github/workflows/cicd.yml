@@ -21,7 +21,6 @@ jobs:
           - 3.8
           - 3.9
     runs-on: ${{ matrix.os }}
-    continue-on-error: ${{ matrix.python-version == 2.7 }}
     steps:
       - name: checkout
         uses: actions/checkout@v2
@@ -31,8 +30,13 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: install test runner
         run: pip install tox tox-gh-actions
+      - name: install pysctp dependencies
+        if: startsWith(matrix.os, 'ubuntu')
+        run: sudo apt install libsctp-dev
       - name: run test suite
         run: tox
+        env:
+          TOX_OS: ${{ matrix.os }}
   build:
     runs-on: ubuntu-latest
     strategy:
