@@ -33,6 +33,8 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: install test runner
         run: pip install tox tox-gh-actions
+      - name: update build tools
+        run: pip install --update setuptools pip
       - name: install pysctp dependencies
         if: startsWith(matrix.os, 'ubuntu')
         run: sudo apt install libsctp-dev
