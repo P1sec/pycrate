@@ -93,10 +93,9 @@ jobs:
           password: ${{ secrets.TEST_PYPI_TOKEN }}
           repository_url: https://test.pypi.org/legacy/
           skip_existing: true
-      # TODO: resolve pycrate name conflict on PyPI
-      # - name: publish built artifacts to pypi.org
-      #   if: ${{ startsWith(github.ref, 'refs/tag') }}
-      #   uses: pypa/gh-action-pypi-publish@release/v1
-      #   with:
-      #     user: __token__
-      #     password: ${{ secrets.PYPI_TOKEN }}
+      - name: publish built artifacts to pypi.org
+        if: ${{ startsWith(github.ref, 'refs/tag') }}
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_TOKEN }}
