@@ -1,17 +1,19 @@
 # -*- coding: UTF−8 -*-
 
 import os
-
 from setuptools import setup, find_packages
 
+# get long description from the README.md and the version from VERSION
+with open(os.path.join(os.path.dirname(__file__), "README.md")) as fd:
+    long_description = fd.read()
 
-with open(os.path.join(os.path.dirname(__file__), "README.md")) as f:
-    long_description = f.read()
+with open(os.path.join(os.path.dirname(__file__), "VERSION")) as fd:
+    version = fd.read()
 
 
 setup(
     name="pycrate",
-    version="0.4",
+    version=version,
     
     #packages=find_packages(),
     packages=["pycrate_core",
@@ -43,6 +45,7 @@ setup(
     # optional dependencies
     extras_require={
         "NASLTE"  : ["CryptoMobile"],
+        "NAS5G"   : ["CryptoMobile"],
         "corenet" : ["pysctp", "CryptoMobile"],
         "diameter_dict" : ["lxml"],
         },
