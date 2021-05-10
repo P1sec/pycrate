@@ -84,7 +84,7 @@ It is also possible to test the library before installing it
 you can just delete afterwards):
 
 ```
-python setup.py test
+python -m unittest test.test_pycrate
 ```
 
 Or to build the library without installing it in the system:
