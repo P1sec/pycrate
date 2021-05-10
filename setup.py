@@ -3,41 +3,45 @@
 import os
 from setuptools import setup, find_packages
 
-# get long description from the README.md and the version from VERSION
+# Pycrate Version
+VERSION = "0.4.1"
+
+
+# get long description from the README.md
 with open(os.path.join(os.path.dirname(__file__), "README.md")) as fd:
     long_description = fd.read()
-
-with open(os.path.join(os.path.dirname(__file__), "VERSION")) as fd:
-    version = fd.read()
 
 
 setup(
     name="pycrate",
-    version=version,
+    version=VERSION,
     
     #packages=find_packages(),
-    packages=["pycrate_core",
-              "pycrate_ether",
-              "pycrate_media",
-              "pycrate_asn1c",
-              "pycrate_asn1dir",
-              "pycrate_asn1rt",
-              "pycrate_csn1",
-              "pycrate_csn1dir",
-              "pycrate_mobile",
-              "pycrate_diameter",
-              "pycrate_corenet",
-              "pycrate_sys",
-              "pycrate_crypto",
-              ],
+    packages=[
+        "pycrate_core",
+        "pycrate_ether",
+        "pycrate_media",
+        "pycrate_asn1c",
+        "pycrate_asn1dir",
+        "pycrate_asn1rt",
+        "pycrate_csn1",
+        "pycrate_csn1dir",
+        "pycrate_mobile",
+        "pycrate_diameter",
+        "pycrate_corenet",
+        "pycrate_sys",
+        "pycrate_crypto",
+        ],
+    
     test_suite="test.test_pycrate",
     
-    scripts=["tools/pycrate_asn1compile.py",
-             "tools/pycrate_berdecode.py",
-             "tools/pycrate_showmedia.py",
-             "tools/pycrate_shownas.py",
-             "tools/pycrate_map_op_info.py",
-             ],
+    scripts=[
+        "tools/pycrate_asn1compile.py",
+        "tools/pycrate_berdecode.py",
+        "tools/pycrate_showmedia.py",
+        "tools/pycrate_shownas.py",
+        "tools/pycrate_map_op_info.py",
+        ],
     
     # no mandatory dependency
     install_requires=[],
@@ -51,12 +55,10 @@ setup(
         },
     
     # for pycrate_asn1dir and pycrate_csn1dir:
-    # .asn, .csn, .txt and .json files from asn1dir and csn1dir are not required
-    # to be installed 
+    # .asn, .csn, .txt and .json files from asn1dir and csn1dir are not required to be installed 
     # only compiled .py modules are installed by default
     # for pycrate_diameter:
-    # .xml files are converted to Python dicts and may be updated from time to 
-    # time
+    # .xml files are converted to Python dicts and may be updated from time to time
     # for pycrate_corenet:
     # the AuC.db file is the mobile subscriber authentication database 
     # containing Ki and is required at runtime when using corenet
@@ -74,6 +76,6 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/P1sec/pycrate/",
-    keywords="protocol format asn1 compiler csn1 encoder decoder mobile core network Diameter NAS S1AP NGAP TCAP MAP",
+    keywords="protocol format ASN.1 CSN.1 compiler encoder decoder mobile core network Diameter NAS S1AP NGAP TCAP MAP GTP-C PFCP",
     license="LGPL v2.1+",
     )
