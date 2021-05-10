@@ -1,9 +1,13 @@
 # pycrate ASN.1 temporary test directory
 test_asn/
 test_asn_todelete/
+.tox/
 
 # special files
 cythonize_pycrate.py
+
+# development venv
+.venv/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
