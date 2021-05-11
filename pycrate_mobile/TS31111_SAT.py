@@ -32,9 +32,10 @@
 #
 # also use parts of ETSI TS 101.220 (numbering) and 102.223 (CAT)
 
-from pycrate_core.base import *
-from pycrate_core.elt  import *
-from pycrate_core.repr import *
+from pycrate_core.base  import *
+from pycrate_core.elt   import *
+from pycrate_core.repr  import *
+from pycrate_core.utils import PycrateErr
 
 
 # well known TAR (Toolkit Application Reference)
