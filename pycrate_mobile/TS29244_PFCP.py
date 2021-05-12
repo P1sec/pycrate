@@ -2442,9 +2442,9 @@ class DLBufferingSuggestedPacketCount(Uint):
     # when a value is set
     def set_val(self, val):
         self._bl = val.bit_length()
-        while self._bl % 8:
-            # need to increase bl
-            self._bl += 1
+        if self._bl % 8:
+            # need to increase the bl to the next multiple of 8 bits
+            self._bl += 8 - (self._bl % 8)
         Uint.set_val(self, val)
 
 
