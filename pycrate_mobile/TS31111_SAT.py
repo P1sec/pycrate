@@ -320,6 +320,8 @@ class BERLen(Envelope):
         else:
             return self.DEFAULT_VAL
     
+    __call__ = get_val
+    
     def _from_char(self, char):
         if self.get_trans():
             return
