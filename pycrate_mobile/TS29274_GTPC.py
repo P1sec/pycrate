@@ -566,7 +566,7 @@ class MSISDN(BufBCD):
 # TS 29.274, 8.12
 #------------------------------------------------------------------------------#
 
-class Ind(BitFlags):
+class Indication(BitFlags):
     _GEN = (
         Envelope('Octet1', GEN=(
             Uint('DAF', bl=1),
@@ -1063,16 +1063,6 @@ class DelayValue(Envelope):
 
 
 #------------------------------------------------------------------------------#
-# Bearer Context
-# TS 29.274, 8.28
-#------------------------------------------------------------------------------#
-# Bearer Context is a grouped IE that is always defined locally for each GTPCMsg
-
-class BearerContext(Buf):
-    _rep = REPR_HEX
-
-
-#------------------------------------------------------------------------------#
 # Charging ID
 # TS 29.274, 8.29
 #------------------------------------------------------------------------------#
@@ -1101,7 +1091,7 @@ class ChargingCharacteristics(Envelope):
 # TS 29.274, 8.31
 #------------------------------------------------------------------------------#
 
-class TraceInfo(Envelope):
+class TraceInformation(Envelope):
     _GEN = (
         PLMN(),
         Uint24('TraceID', rep=REPR_HEX),
@@ -2217,7 +2207,7 @@ class MBMSServiceArea(Envelope):
 # TS 29.274, 8.71
 #------------------------------------------------------------------------------#
 
-class MBMSSessionIdent(Envelope):
+class MBMSSessionIdentifier(Envelope):
     _GEN = (
         Uint8('Val'),
         Buf('ext', val=b'', rep=REPR_HEX)
@@ -2229,7 +2219,7 @@ class MBMSSessionIdent(Envelope):
 # TS 29.274, 8.72
 #------------------------------------------------------------------------------#
 
-class MBMSFlowIdent(Envelope):
+class MBMSFlowIdentifier(Envelope):
     _GEN = (
         Uint16('Val'),
         Buf('ext', val=b'', rep=REPR_HEX)
@@ -2310,7 +2300,7 @@ class UCI(Envelope):
 # TS 29.274, 8.76
 #------------------------------------------------------------------------------#
 
-class CSGInfoReportingAction(Envelope):
+class CSGInformationReportingAction(Envelope):
     _GEN = (
         Uint('spare', bl=5, rep=REPR_HEX),
         Uint('UCIUHC', bl=1),
@@ -2393,7 +2383,7 @@ class LDN(Buf):
 # TS 29.274, 8.83
 #------------------------------------------------------------------------------#
 
-class NodeFeat(Envelope):
+class NodeFeatures(Envelope):
     _GEN = (
         Uint('spare', bl=1),
         Uint('MTEDT', bl=1),
@@ -2463,7 +2453,7 @@ class EPCTimer(_Timer):
 # TS 29.274, 8.88
 #------------------------------------------------------------------------------#
 
-class SignallingPriorityInd(Envelope):
+class SignallingPriorityIndication(Envelope):
     _GEN = (
         Uint('spare', bl=7, rep=REPR_HEX),
         Uint('LAPI', bl=1),
@@ -2553,7 +2543,7 @@ class MDTConfiguration(Envelope):
 # TS 29.274, 8.94
 #------------------------------------------------------------------------------#
 
-class AdditionalPCO(ProtConfig):
+class APCO(ProtConfig):
     pass
 
 
@@ -2574,7 +2564,7 @@ class AbsoluteTimeOfMBMSDataTransfer(Envelope):
 # TS 29.274, 8.96
 #------------------------------------------------------------------------------#
 
-class HeNBInfoReporting(Envelope):
+class HeNBInformationReporting(Envelope):
     _GEN = (
         Uint('spare', bl=7, rep=REPR_HEX),
         Uint('FTI', val=1, bl=1),
@@ -2587,7 +2577,7 @@ class HeNBInfoReporting(Envelope):
 # TS 29.274, 8.97
 #------------------------------------------------------------------------------#
 
-class IPv4ConfigurationParameters(Envelope):
+class IP4CP(Envelope):
     _GEN = (
         Uint8('SubnetPrefLen'),
         Buf('IPv4DefaultRouterAddr', bl=32, rep=REPR_HEX),
@@ -2614,17 +2604,17 @@ class ChangeToReportFlags(Envelope):
 # TS 29.274, 8.99
 #------------------------------------------------------------------------------#
 
-ActionInd_dict = {
+ActionIndication_dict = {
     0 : 'No Action',
     1 : 'Deactivation Indication',
     2 : 'Paging Indication',
     3 : 'Paging Stop Indication'
     }
 
-class ActionInd(Envelope):
+class ActionIndication(Envelope):
     _GEN = (
         Uint('spare', bl=5, rep=REPR_HEX),
-        Uint('Val', bl=3, dic=ActionInd_dict),
+        Uint('Val', bl=3, dic=ActionIndication_dict),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
 
@@ -2665,7 +2655,7 @@ class _LogicalAccessID(Envelope):
         self['CircuitID'].set_blauto(lambda: self['CircuitIDLen'].get_val()<<3)
 
 
-class TWANIdent(Envelope):
+class TWANIdentifier(Envelope):
     _GEN = (
         Uint('spare', bl=3, rep=REPR_HEX),
         Uint('LAII', bl=1),
@@ -2768,7 +2758,7 @@ class CNOperatorSelectionEntity(Envelope):
 # TS 29.274, 8.105
 #------------------------------------------------------------------------------#
 
-class TWMI(Envelope):
+class TrustedWLANModeIndication(Envelope):
     _GEN = (
         Uint('spare', bl=6, rep=REPR_HEX),
         Uint('MCM', bl=1),
@@ -2800,7 +2790,7 @@ class NodeNumber(Envelope):
 # TS 29.274, 8.106
 #------------------------------------------------------------------------------#
 
-class NodeIdent(Envelope):
+class NodeIdentifier(Envelope):
     _GEN = (
         _LU8V('NodeName'),
         _LU8V('NodeRealm'),
@@ -2893,7 +2883,7 @@ class _PRA(Envelope):
         )
 
 
-class PresenceReportingAreaInfo(Envelope):
+class PresenceReportingAreaInformation(Envelope):
     _GEN = (
         _PRA('PRA'),
         Sequence('AdditionalPRAs', GEN=_PRA('AddPRA')),
@@ -2906,7 +2896,7 @@ class PresenceReportingAreaInfo(Envelope):
 # TS 29.274, 8.110
 #------------------------------------------------------------------------------#
 
-class TWANIdentTimestamp(_IEExtUint32):
+class TWANIdentifierTimestamp(_IEExtUint32):
     pass
 
 
@@ -2952,7 +2942,7 @@ class APNAndRelativeCapacity(Envelope):
 # TS 29.274, 8.116
 #------------------------------------------------------------------------------#
 
-class WLANOffloadabilityInd(Envelope):
+class WLANOffloadabilityIndication(Envelope):
     _GEN = (
         Uint('spare', bl=6, rep=REPR_HEX),
         Uint('EUTRANInd', bl=1),
@@ -2966,7 +2956,7 @@ class WLANOffloadabilityInd(Envelope):
 # TS 29.274, 8.117
 #------------------------------------------------------------------------------#
 
-class PagingAndServiceInfo(Envelope):
+class PagingAndServiceInformation(Envelope):
     _GEN = (
         Uint('spare', bl=4, rep=REPR_HEX),
         Uint('EBI', val=5, bl=4),
@@ -3017,7 +3007,7 @@ class MillisecondTimeStamp(Envelope):
 # TS 29.274, 8.120
 #------------------------------------------------------------------------------#
 
-class MonitoringEventInfo(Envelope):
+class MonitoringEventInformation(Envelope):
     _GEN = (
         Uint32('SCEFRefID', rep=REPR_HEX),
         _LU8V('SCEFID'),
@@ -3066,7 +3056,7 @@ class RemoteUserID(Envelope):
 # TS 29.274, 8.124
 #------------------------------------------------------------------------------#
 
-class RemoteUEIPInfo(Buf):
+class RemoteUEIPInformation(Buf):
     _rep = REPR_HEX
 
 
@@ -3075,7 +3065,7 @@ class RemoteUEIPInfo(Buf):
 # TS 29.274, 8.125
 #------------------------------------------------------------------------------#
 
-class CIoTOptimizationsSupportInd(Envelope):
+class CIoTOptimizationsSupportIndication(Envelope):
     _GEN = (
         Uint('spare', bl=4, rep=REPR_HEX),
         Uint('IHCSI', bl=1),
@@ -3172,7 +3162,7 @@ class SecondaryRATUsageDataReport(Envelope):
 # TS 29.274, 8.133
 #------------------------------------------------------------------------------#
 
-class UPFunctionSelectionIndFlags(Envelope):
+class UPFunctionSelectionIndicationFlags(Envelope):
     _GEN = (
         Uint('spare', bl=7, rep=REPR_HEX),
         Uint('DCNR', bl=1),
@@ -3227,7 +3217,7 @@ class APNRateControlStatus(Envelope):
 # TS 29.274, 8.136
 #------------------------------------------------------------------------------#
 
-class ExtendedTraceInfo(Envelope):
+class ExtendedTraceInformation(Envelope):
     _GEN = (
         PLMN(),
         Uint24('TraceID', rep=REPR_HEX),
@@ -3245,7 +3235,7 @@ class ExtendedTraceInfo(Envelope):
 # TS 29.274, 8.137
 #------------------------------------------------------------------------------#
 
-class MonitoringEventExtInfo(Envelope):
+class MonitoringEventExtensionInformation(Envelope):
     _GEN = (
         Uint('spare', bl=7, rep=REPR_HEX),
         Uint('LRTP', bl=1),
@@ -3265,7 +3255,7 @@ class MonitoringEventExtInfo(Envelope):
 # TS 29.274, 8.138
 #------------------------------------------------------------------------------#
 
-class AddRRMPolicyIndex(Uint32):
+class AdditionalRRMPolicyIndex(Uint32):
     _rep = REPR_HEX
 
 
@@ -3317,7 +3307,7 @@ class PC5QoSFlow(Envelope):
 # TS 29.274, 8.144
 #------------------------------------------------------------------------------#
 
-class SGiPtPTunnelAddr(Envelope):
+class SGiPtPTunnelAddress(Envelope):
     _GEN = (
         Uint('spare', bl=5, rep=REPR_HEX),
         Uint('P', bl=1),
@@ -3353,7 +3343,11 @@ class PGWSetFQDN(Envelope):
 # additional dummy IEs
 #------------------------------------------------------------------------------#
 
-class SpecialIETypeForIETypeExt(Buf):
+class SpecialIETypeForIETypeExtension(Buf):
+    _rep = REPR_HEX
+
+
+class PrivateExtension(Buf):
     _rep = REPR_HEX
 
 
@@ -3374,7 +3368,7 @@ GTPCIETags_dict = {
     74 : (IPAddress, -1, 'IP Address'),
     75 : (MEI, -1, 'Mobile Equipment Identity (MEI)'),
     76 : (MSISDN, -1, 'MSISDN'),
-    77 : (Ind, 2, 'Indication'),
+    77 : (Indication, 2, 'Indication'),
     78 : (PCO, -1, 'Protocol Configuration Options (PCO)'),
     79 : (PAA, -1, 'PDN Address Allocation (PAA)'),
     80 : (BearerQoS, 22, 'Bearer Level Quality of Service (Bearer QoS)'),
@@ -3390,10 +3384,9 @@ GTPCIETags_dict = {
     90 : (S103PDF, -1, 'S103 PDN Data Forwarding Info (S103PDF)'),
     91 : (S1UDF, -1, 'S1-U Data Forwarding Info (S1UDF)'),
     92 : (DelayValue, 1, 'Delay Value'),
-    93 : (BearerContext, -1, 'Bearer Context'),
     94 : (ChargingID, 4, 'Charging ID'),
     95 : (ChargingCharacteristics, 2, 'Charging Characteristics'),
-    96 : (TraceInfo, -1, 'Trace Information'),
+    96 : (TraceInformation, -1, 'Trace Information'),
     97 : (BearerFlags, 1, 'Bearer Flags'),
     99 : (PDNType, 1, 'PDN Type'),
     100: (PTI, 1, 'Procedure Transaction ID'),
@@ -3432,76 +3425,76 @@ GTPCIETags_dict = {
     137: (TI, -1, 'Transaction Identifier (TI)'),
     138: (MBMSSessionDuration, 3, 'MBMS Session Duration'),
     139: (MBMSServiceArea, -1, 'MBMS Service Area'),
-    140: (MBMSSessionIdent, 1, 'MBMS Session Identifier'),
-    141: (MBMSFlowIdent, 2, 'MBMS Flow Identifier'),
+    140: (MBMSSessionIdentifier, 1, 'MBMS Session Identifier'),
+    141: (MBMSFlowIdentifier, 2, 'MBMS Flow Identifier'),
     142: (MBMSIPMulticastDistribution, -1, 'MBMS IP Multicast Distribution'),
     143: (MBMSDistributionAcknowledge, 1, 'MBMS Distribution Acknowledge'),
     144: (RFSPIndex, 2, 'RFSP Index'),
     145: (UCI, 8, 'User CSG Information (UCI)'),
-    146: (CSGInfoReportingAction, 1, 'CSG Information Reporting Action'),
+    146: (CSGInformationReportingAction, 1, 'CSG Information Reporting Action'),
     147: (CSGID, 4, 'CSG ID'),
     148: (CMI, 1, 'CSG Membership Indication (CMI)'),
     149: (ServiceIndicator, 1, 'Service indicator'),
     150: (DetachType, 1, 'Detach Type'),
     151: (LDN, -1, 'Local Distinguished Name (LDN)'),
-    152: (NodeFeat, 1, 'Node Features'),
+    152: (NodeFeatures, 1, 'Node Features'),
     153: (MBMSTimeToDataTransfer, 1, 'MBMS Time to Data Transfer'),
     154: (Throttling, 2, 'Throttling'),
     155: (ARP, 1, 'Allocation/Retention Priority (ARP)'),
     156: (EPCTimer, 1, 'EPC Timer'),
-    157: (SignallingPriorityInd, 1, 'Signalling Priority Indication'),
+    157: (SignallingPriorityIndication, 1, 'Signalling Priority Indication'),
     158: (TMGI, 6, 'Temporary Mobile Group Identity (TMGI)'),
     159: (AdditionalMMContextForSRVCC, -1, 'Additional MM context for SRVCC'),
     160: (AdditionalFlagsForSRVCC, 1, 'Additional flags for SRVCC'),
     162: (MDTConfiguration, -1, 'MDT Configuration'),
-    163: (AdditionalPCO, -1, 'Additional Protocol Configuration Options (APCO)'),
+    163: (APCO, -1, 'Additional Protocol Configuration Options (APCO)'),
     164: (AbsoluteTimeOfMBMSDataTransfer, 8, 'Absolute Time of MBMS Data Transfer'),
-    165: (HeNBInfoReporting, 1, 'H(e)NB Information Reporting'),
-    166: (IPv4ConfigurationParameters, 5, 'IPv4 Configuration Parameters (IP4CP)'),
+    165: (HeNBInformationReporting, 1, 'H(e)NB Information Reporting'),
+    166: (IP4CP, 5, 'IPv4 Configuration Parameters (IP4CP)'),
     167: (ChangeToReportFlags, 1, 'Change to Report Flags'),
-    168: (ActionInd, 1, 'Action Indication'),
-    169: (TWANIdent, -1, 'TWAN Identifier'),
+    168: (ActionIndication, 1, 'Action Indication'),
+    169: (TWANIdentifier, -1, 'TWAN Identifier'),
     170: (ULITimestamp, 4, 'ULI Timestamp'),
     171: (MBMSFlags, 1, 'MBMS Flags'),
     172: (RANNASCause, -1, 'RAN/NAS Cause'),
     173: (CNOperatorSelectionEntity, 1, 'CN Operator Selection Entity'),
-    174: (TWMI, 1, 'Trusted WLAN Mode Indication'),
+    174: (TrustedWLANModeIndication, 1, 'Trusted WLAN Mode Indication'),
     175: (NodeNumber, -1, 'Node Number'),
-    176: (NodeIdent, -1, 'Node Identifier'),
+    176: (NodeIdentifier, -1, 'Node Identifier'),
     177: (PresenceReportingAreaAction, -1, 'Presence Reporting Area Action'),
-    178: (PresenceReportingAreaInfo, 4, 'Presence Reporting Area Information'),
-    179: (TWANIdentTimestamp, 4, 'TWAN Identifier Timestamp'),
+    178: (PresenceReportingAreaInformation, 4, 'Presence Reporting Area Information'),
+    179: (TWANIdentifierTimestamp, 4, 'TWAN Identifier Timestamp'),
     182: (Metric, 1, 'Metric'),
     183: (SequenceNumber, 4, 'Sequence Number'),
     184: (APNAndRelativeCapacity, -1, 'APN and Relative Capacity'),
-    185: (WLANOffloadabilityInd, 1, 'WLAN Offloadability Indication'),
-    186: (PagingAndServiceInfo, -1, 'Paging and Service Information'),
+    185: (WLANOffloadabilityIndication, 1, 'WLAN Offloadability Indication'),
+    186: (PagingAndServiceInformation, -1, 'Paging and Service Information'),
     187: (IntegerNumber, -1, 'Integer Number'),
     188: (MillisecondTimeStamp, 6, 'Millisecond Time Stamp'),
-    189: (MonitoringEventInfo, -1, 'Monitoring Event Information'),
+    189: (MonitoringEventInformation, -1, 'Monitoring Event Information'),
     190: (ECGIList, -1, 'ECGI List'),
     192: (RemoteUserID, -1, 'Remote User ID'),
-    193: (RemoteUEIPInfo, -1, 'Remote UE IP information'),
-    194: (CIoTOptimizationsSupportInd, 1, 'CIoT Optimizations Support Indication'),
+    193: (RemoteUEIPInformation, -1, 'Remote UE IP information'),
+    194: (CIoTOptimizationsSupportIndication, 1, 'CIoT Optimizations Support Indication'),
     196: (HeaderCompressionConfiguration, 4, 'Header Compression Configuration'),
     197: (EPCO, -1, 'Extended Protocol Configuration Options (ePCO)'),
     198: (ServingPLMNRateControl, 4, 'Serving PLMN Rate Control'),
     199: (Counter, 5, 'Counter'),
     200: (MappedUEUsageType, 2, 'Mapped UE Usage Type'),
     201: (SecondaryRATUsageDataReport, 27, 'Secondary RAT Usage Data Report'),
-    202: (UPFunctionSelectionIndFlags, 1, 'UP Function Selection Indication Flags'),
+    202: (UPFunctionSelectionIndicationFlags, 1, 'UP Function Selection Indication Flags'),
     203: (MaximumPacketLossRate, 1, 'Maximum Packet Loss Rate'),
     204: (APNRateControlStatus, 20, 'APN Rate Control Status'),
-    205: (ExtendedTraceInfo, -1, 'Extended Trace Information'),
-    206: (MonitoringEventExtInfo, -1, 'Monitoring Event Extension Information'),
-    207: (AddRRMPolicyIndex, 4, 'Additional RRM Policy Index'),
+    205: (ExtendedTraceInformation, -1, 'Extended Trace Information'),
+    206: (MonitoringEventExtensionInformation, -1, 'Monitoring Event Extension Information'),
+    207: (AdditionalRRMPolicyIndex, 4, 'Additional RRM Policy Index'),
     210: (ServicesAuthorized, 2, 'Services Authorized'),
     211: (BitRate, 4, 'Bit Rate'),
     212: (PC5QoSFlow, 11, 'PC5 QoS Flow'),
-    213: (SGiPtPTunnelAddr, 1, 'SGi PtP Tunnel Address'),
+    213: (SGiPtPTunnelAddress, 1, 'SGi PtP Tunnel Address'),
     215: (PGWSetFQDN, -1, 'PGW Set FQDN'),
-    254: (SpecialIETypeForIETypeExt, -1, 'Special IE type for IE Type Extension'),
-    255: (PrivExt, -1, 'Private Extension'),
+    254: (SpecialIETypeForIETypeExtension, -1, 'Special IE type for IE Type Extension'),
+    255: (PrivateExtension, -1, 'Private Extension'),
     }
 
 GTPCIETagDesc_dict = {k: v[2] for k, v in GTPCIETags_dict.items()}
@@ -3718,14 +3711,14 @@ class GTPCMsg(Envelope):
         char._len_bit = char_lb
 
 
-# extracted from Table 7.1.1-1: Information Elements in Echo Request
+# Table 7.1.1-1: Information Elements in Echo Request
 class EchoRequestIEs(GTPCIEs):
     MAND = {
         (3, 0)   : (Recovery, 'Recovery'),
         }
     OPT  = {
-        (152, 0) : (NodeFeat, 'SendingNodeFeat'),
-        255      : (PrivExt, 'PrivExt'),
+        (152, 0) : (NodeFeatures, 'SendingNodeFeatures'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -3736,14 +3729,14 @@ class EchoRequest(GTPCMsg):
         )
 
 
-# extracted from Table 7.1.2-1: Information Elements in Echo Response
+# Table 7.1.2-1: Information Elements in Echo Response
 class EchoResponseIEs(GTPCIEs):
     MAND = {
         (3, 0)   : (Recovery, 'Recovery'),
         }
     OPT  = {
-        (152, 0) : (NodeFeat, 'SendingNodeFeat'),
-        255      : (PrivExt, 'PrivExt'),
+        (152, 0) : (NodeFeatures, 'SendingNodeFeatures'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -3754,29 +3747,28 @@ class EchoResponse(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.1-5: Remote UE Context Connected within Create Session Request
+# Table 7.2.1-5: Remote UE Context Connected within Create Session Request
+# IE Type: 191
 class CreateSessionRequest_RemoteUEContextConnected(GTPCIEs):
     MAND = {
         (192, 0) : (RemoteUserID, 'RemoteUserID'),
-        (193, 0) : (RemoteUEIPInfo, 'RemoteUEIPInfo'),
-        }
-    OPT  = {
+        (193, 0) : (RemoteUEIPInformation, 'RemoteUEIPInformation'),
         }
 
 
-# extracted from Table 7.2.1-4: Overload Control Information within Create Session Request
-class CreateSessionRequest_OverloadControlInfo(GTPCIEs):
+# Table 7.2.1-4: Overload Control Information within Create Session Request
+# IE Type: 180
+class CreateSessionRequest_OverloadControlInformation(GTPCIEs):
     MAND = {
-        (156, 0) : (EPCTimer, 'PeriodOfValidity'),
+        (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
         (183, 0) : (SequenceNumber, 'OverloadControlSequenceNumber'),
         }
-    OPT  = {
-        }
 
 
-# extracted from Table 7.2.1-3: Bearer Context to be removed within Create Session Request
-class CreateSessionRequest_BearerContextToBeRemoved(GTPCIEs):
+# Table 7.2.1-3: Bearer Context to be removed within Create Session Request
+# IE Type: 93
+class CreateSessionRequest_BearerContexttoberemoved(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
         }
@@ -3785,95 +3777,96 @@ class CreateSessionRequest_BearerContextToBeRemoved(GTPCIEs):
         }
 
 
-# extracted from Table 7.2.1-2: Bearer Context to be created within Create Session Request
-class CreateSessionRequest_BearerContextToBeCreated(GTPCIEs):
+# Table 7.2.1-2: Bearer Context to be created within Create Session Request
+# IE Type: 93
+class CreateSessionRequest_BearerContexttobecreated(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
         (80, 0)  : (BearerQoS, 'BearerLevelQoS'),
         }
     OPT  = {
         (84, 0)  : (BearerTFT, 'TFT'),
-        (87, 4)  : (FTEID, 'S12RNCFTEID'),
-        (87, 3)  : (FTEID, 'S5S8UPGWFTEID'),
-        (87, 5)  : (FTEID, 'S2bUEPDGFTEID'),
-        (87, 0)  : (FTEID, 'S1UENodeBFTEID'),
+        (87, 0)  : (FTEID, 'S1UeNodeBFTEID'),
         (87, 1)  : (FTEID, 'S4USGSNFTEID'),
+        (87, 2)  : (FTEID, 'S5S8USGWFTEID'),
+        (87, 3)  : (FTEID, 'S5S8UPGWFTEID'),
+        (87, 4)  : (FTEID, 'S12RNCFTEID'),
+        (87, 5)  : (FTEID, 'S2bUePDGFTEID'),
         (87, 6)  : (FTEID, 'S2aUTWANFTEID'),
         (87, 7)  : (FTEID, 'S11UMMEFTEID'),
-        (87, 2)  : (FTEID, 'S5S8USGWFTEID'),
         }
 
 
-# extracted from Table 7.2.1-1: Information Elements in a Create Session Request
+# Table 7.2.1-1: Information Elements in a Create Session Request
 class CreateSessionRequestIEs(GTPCIEs):
     MAND = {
-        (71, 0)  : (APN, 'AccessPointName'),
+        (71, 0)  : (APN, 'APN'),
         (82, 0)  : (RATType, 'RATType'),
-        (87, 0)  : (FTEID, 'SenderFTEIDForControlPlane'),
-        (93, 0)  : (CreateSessionRequest_BearerContextToBeCreated, 'BearerContextsToBeCreated'),
+        (87, 0)  : (FTEID, 'SenderFTEIDforControlPlane'),
+        (93, 0)  : (CreateSessionRequest_BearerContexttobecreated, 'BearerContexttobecreated'),
         }
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
         (3, 0)   : (Recovery, 'Recovery'),
         (72, 0)  : (AMBR, 'AggregateMaximumBitRate'),
         (73, 0)  : (EBI, 'LinkedEPSBearerID'),
-        (74, 1)  : (IPAddress, 'HeNBLocalIPAddress'),
-        (74, 2)  : (IPAddress, 'MMES4SGSNIdent'),
-        (74, 3)  : (IPAddress, 'EPDGIPAddress'),
         (74, 0)  : (IPAddress, 'UELocalIPAddress'),
-        (75, 0)  : (MEI, 'MEIdentity'),
+        (74, 1)  : (IPAddress, 'HeNBLocalIPAddress'),
+        (74, 2)  : (IPAddress, 'MMES4SGSNIdentifier'),
+        (74, 3)  : (IPAddress, 'ePDGIPAddress'),
+        (75, 0)  : (MEI, 'MEI'),
         (76, 0)  : (MSISDN, 'MSISDN'),
-        (77, 0)  : (Ind, 'IndFlags'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
         (78, 0)  : (PCO, 'PCO'),
-        (79, 0)  : (PAA, 'PDNAddressAllocation'),
+        (79, 0)  : (PAA, 'PAA'),
         (83, 0)  : (ServingNetwork, 'ServingNetwork'),
-        (86, 0)  : (ULI, 'UserLocationInfo'),
-        (86, 1)  : (ULI, 'UserLocationInfoForSGW'),
-        (87, 1)  : (FTEID, 'PGWS5S8AddressForControlPlaneOrPMIP'),
-        (93, 1)  : (CreateSessionRequest_BearerContextToBeRemoved, 'BearerContextsToBeRemoved'),
+        (86, 0)  : (ULI, 'ULI'),
+        (86, 1)  : (ULI, 'UserLocationInformationforSGW'),
+        (87, 1)  : (FTEID, 'PGWS5S8AddressforControlPlaneorPMIP'),
+        (93, 1)  : (CreateSessionRequest_BearerContexttoberemoved, 'BearerContexttoberemoved'),
         (95, 0)  : (ChargingCharacteristics, 'ChargingCharacteristics'),
-        (96, 0)  : (TraceInfo, 'TraceInfo'),
+        (96, 0)  : (TraceInformation, 'TraceInformation'),
         (99, 0)  : (PDNType, 'PDNType'),
         (114, 0) : (UETimeZone, 'UETimeZone'),
         (118, 0) : (FContainer, 'NBIFOMContainer'),
         (126, 0) : (PortNumber, 'UEUDPPort'),
-        (126, 2) : (PortNumber, 'UETCPPort'),
         (126, 1) : (PortNumber, 'HeNBUDPPort'),
+        (126, 2) : (PortNumber, 'UETCPPort'),
         (127, 0) : (APNRestriction, 'MaximumAPNRestriction'),
         (128, 0) : (SelectionMode, 'SelectionMode'),
         (132, 0) : (FQCSID, 'MMEFQCSID'),
         (132, 1) : (FQCSID, 'SGWFQCSID'),
-        (132, 2) : (FQCSID, 'EPDGFQCSID'),
+        (132, 2) : (FQCSID, 'ePDGFQCSID'),
         (132, 3) : (FQCSID, 'TWANFQCSID'),
-        (136, 0) : (FQDN, 'SGWUNodeName'),
-        (145, 0) : (UCI, 'UserCSGInfo'),
-        (151, 3) : (LDN, 'TWANLDN'),
-        (151, 2) : (LDN, 'EPDGLDN'),
-        (151, 1) : (LDN, 'SGWLDN'),
+        (136, 0) : (FQDN, 'SGWUnodename'),
+        (145, 0) : (UCI, 'UCI'),
         (151, 0) : (LDN, 'MMES4SGSNLDN'),
-        (157, 0) : (SignallingPriorityInd, 'SignallingPriorityInd'),
-        (163, 0) : (AdditionalPCO, 'AdditionalPCO'),
-        (169, 1) : (TWANIdent, 'WLANLocationInfo'),
-        (169, 0) : (TWANIdent, 'TWANIdent'),
+        (151, 1) : (LDN, 'SGWLDN'),
+        (151, 2) : (LDN, 'ePDGLDN'),
+        (151, 3) : (LDN, 'TWANLDN'),
+        (157, 0) : (SignallingPriorityIndication, 'SignallingPriorityIndication'),
+        (163, 0) : (APCO, 'APCO'),
+        (169, 0) : (TWANIdentifier, 'TWANIdentifier'),
+        (169, 1) : (TWANIdentifier, 'WLANLocationInformation'),
         (173, 0) : (CNOperatorSelectionEntity, 'CNOperatorSelectionEntity'),
-        (174, 0) : (TWMI, 'TWMI'),
-        (176, 0) : (NodeIdent, '3GPPAAAServerIdent'),
-        (178, 0) : (PresenceReportingAreaInfo, 'PresenceReportingAreaInfo'),
-        (179, 0) : (TWANIdentTimestamp, 'WLANLocationTimestamp'),
-        (180, 2) : (CreateSessionRequest_OverloadControlInfo, 'TWANePDGsOverloadControlInfo'),
-        (180, 0) : (CreateSessionRequest_OverloadControlInfo, 'MMES4SGSNsOverloadControlInfo'),
-        (180, 1) : (CreateSessionRequest_OverloadControlInfo, 'SGWsOverloadControlInfo'),
+        (174, 0) : (TrustedWLANModeIndication, 'TrustedWLANModeIndication'),
+        (176, 0) : (NodeIdentifier, '3GPPAAAServerIdentifier'),
+        (178, 0) : (PresenceReportingAreaInformation, 'PresenceReportingAreaInformation'),
+        (179, 0) : (TWANIdentifierTimestamp, 'WLANLocationTimestamp'),
+        (180, 0) : (CreateSessionRequest_OverloadControlInformation, 'MMES4SGSNsOverloadControlInformation'),
+        (180, 1) : (CreateSessionRequest_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (180, 2) : (CreateSessionRequest_OverloadControlInformation, 'TWANePDGsOverloadControlInformation'),
         (187, 0) : (IntegerNumber, 'MaximumWaitTime'),
         (188, 0) : (MillisecondTimeStamp, 'OriginationTimeStamp'),
         (191, 0) : (CreateSessionRequest_RemoteUEContextConnected, 'RemoteUEContextConnected'),
-        (197, 0) : (EPCO, 'ExtendedPCO'),
+        (197, 0) : (EPCO, 'ExtendedProtocolConfigurationOptions'),
         (198, 0) : (ServingPLMNRateControl, 'ServingPLMNRateControl'),
         (199, 0) : (Counter, 'MOExceptionDataCounter'),
         (200, 0) : (MappedUEUsageType, 'MappedUEUsageType'),
         (201, 0) : (SecondaryRATUsageDataReport, 'SecondaryRATUsageDataReport'),
-        (202, 0) : (UPFunctionSelectionIndFlags, 'UPFunctionSelectionIndFlags'),
+        (202, 0) : (UPFunctionSelectionIndicationFlags, 'UPFunctionSelectionIndicationFlags'),
         (204, 0) : (APNRateControlStatus, 'APNRateControlStatus'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -3884,40 +3877,51 @@ class CreateSessionRequest(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.2-5: Overload Control Information within Create Session Response
-class CreateSessionResponse_OverloadControlInfo(GTPCIEs):
+# Table 7.2.2-6: PGW Change Info within Create Session Response
+# IE Type: 214
+class CreateSessionResponse_PGWChangeInfo(GTPCIEs):
+    OPT  = {
+        (74, 0)  : (IPAddress, 'AlternativePGWCSMFIPAddress'),
+        (215, 0) : (PGWSetFQDN, 'PGWSetFQDN'),
+        }
+
+
+# Table 7.2.2-5: Overload Control Information within Create Session Response
+# IE Type: 180
+class CreateSessionResponse_OverloadControlInformation(GTPCIEs):
     MAND = {
-        (156, 0) : (EPCTimer, 'PeriodOfValidity'),
+        (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
         (183, 0) : (SequenceNumber, 'OverloadControlSequenceNumber'),
         }
     OPT  = {
-        (71, 0)  : (APN, 'ListOfAccessPointName'),
+        (71, 0)  : (APN, 'APN'),
         }
 
 
-# extracted from Table 7.2.2-4: Load Control Information within Create Session Response
-class CreateSessionResponse_LoadControlInfo(GTPCIEs):
+# Table 7.2.2-4: Load Control Information within Create Session Response
+# IE Type: 181
+class CreateSessionResponse_LoadControlInformation(GTPCIEs):
     MAND = {
         (182, 0) : (Metric, 'LoadMetric'),
         (183, 0) : (SequenceNumber, 'LoadControlSequenceNumber'),
         }
     OPT  = {
-        (184, 0) : (APNAndRelativeCapacity, 'ListOfAPNAndRelativeCapacity'),
+        (184, 0) : (APNAndRelativeCapacity, 'ListofAPNAndRelativeCapacity'),
         }
 
 
-# extracted from Table 7.2.2-3: Bearer Context marked for removal within a Create Session Response
-class CreateSessionResponse_BearerContextMarkedForRemoval(GTPCIEs):
+# Table 7.2.2-3: Bearer Context marked for removal within a Create Session Response
+# IE Type: 93
+class CreateSessionResponse_BearerContextmarkedforremoval(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'EPSBearerID'),
         }
-    OPT  = {
-        }
 
 
-# extracted from Table 7.2.2-2: Bearer Context Created within Create Session Response
+# Table 7.2.2-2: Bearer Context Created within Create Session Response
+# IE Type: 93
 class CreateSessionResponse_BearerContextCreated(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
@@ -3925,35 +3929,36 @@ class CreateSessionResponse_BearerContextCreated(GTPCIEs):
         }
     OPT  = {
         (80, 0)  : (BearerQoS, 'BearerLevelQoS'),
-        (87, 4)  : (FTEID, 'S2bUPGWFTEID'),
-        (87, 3)  : (FTEID, 'S12SGWFTEID'),
-        (87, 5)  : (FTEID, 'S2aUPGWFTEID'),
         (87, 0)  : (FTEID, 'S1USGWFTEID'),
         (87, 1)  : (FTEID, 'S4USGWFTEID'),
-        (87, 6)  : (FTEID, 'S11USGWFTEID'),
         (87, 2)  : (FTEID, 'S5S8UPGWFTEID'),
+        (87, 3)  : (FTEID, 'S12SGWFTEID'),
+        (87, 4)  : (FTEID, 'S2bUPGWFTEID'),
+        (87, 5)  : (FTEID, 'S2aUPGWFTEID'),
+        (87, 6)  : (FTEID, 'S11USGWFTEID'),
         (94, 0)  : (ChargingID, 'ChargingID'),
         (97, 0)  : (BearerFlags, 'BearerFlags'),
         }
 
 
-# extracted from Table 7.2.2-1: Information Elements in a Create Session Response
+# Table 7.2.2-1: Information Elements in a Create Session Response
 class CreateSessionResponseIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
-        (93, 0)  : (CreateSessionResponse_BearerContextCreated, 'BearerContextsCreated'),
+        (93, 0)  : (CreateSessionResponse_BearerContextCreated, 'BearerContextcreated'),
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
         (72, 0)  : (AMBR, 'AggregateMaximumBitRate'),
         (73, 0)  : (EBI, 'LinkedEPSBearerID'),
         (74, 0)  : (IPAddress, 'ChargingGatewayAddress'),
-        (77, 0)  : (Ind, 'IndFlags'),
+        (74, 1)  : (IPAddress, 'AlternativePGWCSMFIPAddress'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
         (78, 0)  : (PCO, 'PCO'),
-        (79, 0)  : (PAA, 'PDNAddressAllocation'),
-        (87, 1)  : (FTEID, 'PGWS5S8S2aS2bFTEIDForPMIPBasedInterfaceOrForGTPBasedControlPlaneInterface'),
-        (87, 0)  : (FTEID, 'SenderFTEIDForControlPlane'),
-        (93, 1)  : (CreateSessionResponse_BearerContextMarkedForRemoval, 'BearerContextsMarkedForRemoval'),
+        (79, 0)  : (PAA, 'PAA'),
+        (87, 0)  : (FTEID, 'SenderFTEIDforControlPlane'),
+        (87, 1)  : (FTEID, 'PGWS5S8S2aS2bFTEIDforPMIPbasedinterfaceorforGTPbasedControlPlaneinterface'),
+        (93, 1)  : (CreateSessionResponse_BearerContextmarkedforremoval, 'BearerContextmarkedforremoval'),
         (94, 0)  : (ChargingID, 'PDNConnectionChargingID'),
         (118, 0) : (FContainer, 'NBIFOMContainer'),
         (127, 0) : (APNRestriction, 'APNRestriction'),
@@ -3961,21 +3966,25 @@ class CreateSessionResponseIEs(GTPCIEs):
         (132, 0) : (FQCSID, 'PGWFQCSID'),
         (132, 1) : (FQCSID, 'SGWFQCSID'),
         (136, 0) : (FQDN, 'ChargingGatewayName'),
-        (146, 0) : (CSGInfoReportingAction, 'CSGInfoReportingAction'),
+        (136, 1) : (FQDN, 'PGWnodename'),
+        (136, 3) : (FQDN, 'AlternativePGWCSMFFQDN'),
+        (146, 0) : (CSGInformationReportingAction, 'CSGInformationReportingAction'),
         (151, 0) : (LDN, 'SGWLDN'),
         (151, 1) : (LDN, 'PGWLDN'),
         (156, 0) : (EPCTimer, 'PGWBackOffTime'),
-        (163, 0) : (AdditionalPCO, 'AdditionalPCO'),
-        (165, 0) : (HeNBInfoReporting, 'HeNBInfoReporting'),
-        (166, 0) : (IPv4ConfigurationParameters, 'TrustedWLANIPv4Parameters'),
+        (163, 0) : (APCO, 'APCO'),
+        (165, 0) : (HeNBInformationReporting, 'HeNBInformationReporting'),
+        (166, 0) : (IP4CP, 'TrustedWLANIPv4Parameters'),
         (177, 0) : (PresenceReportingAreaAction, 'PresenceReportingAreaAction'),
-        (180, 0) : (CreateSessionResponse_OverloadControlInfo, 'PGWsOverloadControlInfo'),
-        (180, 1) : (CreateSessionResponse_OverloadControlInfo, 'SGWsOverloadControlInfo'),
-        (181, 2) : (CreateSessionResponse_LoadControlInfo, 'SGWsNodeLevelLoadControlInfo'),
-        (181, 1) : (CreateSessionResponse_LoadControlInfo, 'PGWsAPNLevelLoadControlInfo'),
-        (181, 0) : (CreateSessionResponse_LoadControlInfo, 'PGWsNodeLevelLoadControlInfo'),
-        (197, 0) : (EPCO, 'ExtendedPCO'),
-        255      : (PrivExt, 'PrivExt'),
+        (180, 0) : (CreateSessionResponse_OverloadControlInformation, 'PGWsOverloadControlInformation'),
+        (180, 1) : (CreateSessionResponse_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (181, 0) : (CreateSessionResponse_LoadControlInformation, 'PGWsnodelevelLoadControlInformation'),
+        (181, 1) : (CreateSessionResponse_LoadControlInformation, 'PGWsAPNlevelLoadControlInformation'),
+        (181, 2) : (CreateSessionResponse_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
+        (197, 0) : (EPCO, 'ExtendedProtocolConfigurationOptions'),
+        (213, 0) : (SGiPtPTunnelAddress, 'SGiPtPTunnelAddress'),
+        (214, 0) : (CreateSessionResponse_PGWChangeInfo, 'PGWChangeInfo'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -3986,30 +3995,43 @@ class CreateSessionResponse(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.3-4: Overload Control Information within Create Bearer Request
-class CreateBearerRequest_OverloadControlInfo(GTPCIEs):
+# Table 7.2.3-5: PGW Change Info within Create Bearer Request
+# IE Type: 214
+class CreateBearerRequest_PGWChangeInfo(GTPCIEs):
+    OPT  = {
+        (74, 0)  : (IPAddress, 'AlternativePGWCSMFIPAddress'),
+        (74, 1)  : (IPAddress, 'NewPGWCSMFIPAddress'),
+        (215, 0) : (PGWSetFQDN, 'PGWSetFQDN'),
+        }
+
+
+# Table 7.2.3-4: Overload Control Information within Create Bearer Request
+# IE Type: 181
+class CreateBearerRequest_OverloadControlInformation(GTPCIEs):
     MAND = {
-        (156, 0) : (EPCTimer, 'PeriodOfValidity'),
+        (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
         (183, 0) : (SequenceNumber, 'OverloadControlSequenceNumber'),
         }
     OPT  = {
-        (71, 0)  : (APN, 'ListOfAccessPointName'),
+        (71, 0)  : (APN, 'APN'),
         }
 
 
-# extracted from Table 7.2.3-3: Load Control Information within Create Bearer Request
-class CreateBearerRequest_LoadControlInfo(GTPCIEs):
+# Table 7.2.3-3: Load Control Information within Create Bearer Request
+# IE Type: 181
+class CreateBearerRequest_LoadControlInformation(GTPCIEs):
     MAND = {
         (182, 0) : (Metric, 'LoadMetric'),
         (183, 0) : (SequenceNumber, 'LoadControlSequenceNumber'),
         }
     OPT  = {
-        (184, 0) : (APNAndRelativeCapacity, 'ListOfAPNAndRelativeCapacity'),
+        (184, 0) : (APNAndRelativeCapacity, 'ListofAPNAndRelativeCapacity'),
         }
 
 
-# extracted from Table 7.2.3-2: Bearer Context within Create Bearer Request
+# Table 7.2.3-2: Bearer Context within Create Bearer Request
+# IE Type: 93
 class CreateBearerRequest_BearerContext(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
@@ -4018,42 +4040,43 @@ class CreateBearerRequest_BearerContext(GTPCIEs):
         }
     OPT  = {
         (78, 0)  : (PCO, 'PCO'),
-        (87, 4)  : (FTEID, 'S2bUPGWFTEID'),
-        (87, 3)  : (FTEID, 'S4USGWFTEID'),
-        (87, 5)  : (FTEID, 'S2aUPGWFTEID'),
         (87, 0)  : (FTEID, 'S1USGWFTEID'),
         (87, 1)  : (FTEID, 'S58UPGWFTEID'),
         (87, 2)  : (FTEID, 'S12SGWFTEID'),
+        (87, 3)  : (FTEID, 'S4USGWFTEID'),
+        (87, 4)  : (FTEID, 'S2bUPGWFTEID'),
+        (87, 5)  : (FTEID, 'S2aUPGWFTEID'),
         (94, 0)  : (ChargingID, 'ChargingID'),
         (97, 0)  : (BearerFlags, 'BearerFlags'),
-        (197, 0) : (EPCO, 'ExtendedPCO'),
+        (197, 0) : (EPCO, 'ExtendedProtocolConfigurationOptions'),
         (203, 0) : (MaximumPacketLossRate, 'MaximumPacketLossRate'),
         }
 
 
-# extracted from Table 7.2.3-1: Information Elements in a Create Bearer Request
+# Table 7.2.3-1: Information Elements in a Create Bearer Request
 class CreateBearerRequestIEs(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'LinkedEPSBearerID'),
-        (93, 0)  : (CreateBearerRequest_BearerContext, 'BearerContexts'),
+        (93, 0)  : (CreateBearerRequest_BearerContext, 'BearerContext'),
         }
     OPT  = {
-        (77, 0)  : (Ind, 'IndFlags'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
         (78, 0)  : (PCO, 'PCO'),
         (100, 0) : (PTI, 'PTI'),
         (118, 0) : (FContainer, 'NBIFOMContainer'),
         (131, 0) : (ChangeReportingAction, 'ChangeReportingAction'),
         (132, 0) : (FQCSID, 'PGWFQCSID'),
         (132, 1) : (FQCSID, 'SGWFQCSID'),
-        (146, 0) : (CSGInfoReportingAction, 'CSGInfoReportingAction'),
-        (165, 0) : (HeNBInfoReporting, 'HeNBInfoReporting'),
+        (146, 0) : (CSGInformationReportingAction, 'CSGInformationReportingAction'),
+        (165, 0) : (HeNBInformationReporting, 'HeNBInformationReporting'),
         (177, 0) : (PresenceReportingAreaAction, 'PresenceReportingAreaAction'),
-        (180, 0) : (CreateBearerRequest_OverloadControlInfo, 'PGWsOverloadControlInfo'),
-        (180, 1) : (CreateBearerRequest_OverloadControlInfo, 'SGWsOverloadControlInfo'),
-        (181, 0) : (CreateBearerRequest_LoadControlInfo, 'PGWsNodeLevelLoadControlInfo'),
-        (181, 1) : (CreateBearerRequest_LoadControlInfo, 'PGWsAPNLevelLoadControlInfo'),
-        (181, 2) : (CreateBearerRequest_LoadControlInfo, 'SGWsNodeLevelLoadControlInfo'),
-        255      : (PrivExt, 'PrivExt'),
+        (181, 0) : (CreateBearerRequest_LoadControlInformation, 'PGWsnodelevelLoadControlInformation'),
+        (181, 1) : (CreateBearerRequest_LoadControlInformation, 'PGWsAPNlevelLoadControlInformation'),
+        (181, 2) : (CreateBearerRequest_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
+        (181, 0) : (CreateBearerRequest_OverloadControlInformation, 'PGWsOverloadControlInformation'),
+        (181, 1) : (CreateBearerRequest_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (214, 0) : (CreateBearerRequest_PGWChangeInfo, 'PGWChangeInfo'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -4064,18 +4087,18 @@ class CreateBearerRequest(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.4-3: Overload Control Information within Create Bearer Response
-class CreateBearerResponse_OverloadControlInfo(GTPCIEs):
+# Table 7.2.4-3: Overload Control Information within Create Bearer Response
+# IE Type: 180
+class CreateBearerResponse_OverloadControlInformation(GTPCIEs):
     MAND = {
-        (156, 0) : (EPCTimer, 'PeriodOfValidity'),
+        (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
         (183, 0) : (SequenceNumber, 'OverloadControlSequenceNumber'),
         }
-    OPT  = {
-        }
 
 
-# extracted from Table 7.2.4-2: Bearer Context within Create Bearer Response
+# Table 7.2.4-2: Bearer Context within Create Bearer Response
+# IE Type: 93
 class CreateBearerResponse_BearerContext(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
@@ -4083,50 +4106,51 @@ class CreateBearerResponse_BearerContext(GTPCIEs):
         }
     OPT  = {
         (78, 0)  : (PCO, 'PCO'),
+        (87, 0)  : (FTEID, 'S1UeNodeBFTEID'),
+        (87, 1)  : (FTEID, 'S1USGWFTEID'),
+        (87, 2)  : (FTEID, 'S58USGWFTEID'),
+        (87, 3)  : (FTEID, 'S58UPGWFTEID'),
         (87, 4)  : (FTEID, 'S12RNCFTEID'),
         (87, 5)  : (FTEID, 'S12SGWFTEID'),
-        (87, 10) : (FTEID, 'S2aUTWANFTEID'),
-        (87, 11) : (FTEID, 'S2aUPGWFTEID'),
-        (87, 8)  : (FTEID, 'S2bUEPDGFTEID'),
-        (87, 2)  : (FTEID, 'S58USGWFTEID'),
-        (87, 9)  : (FTEID, 'S2bUPGWFTEID'),
-        (87, 3)  : (FTEID, 'S58UPGWFTEID'),
-        (87, 0)  : (FTEID, 'S1UENodeBFTEID'),
-        (87, 1)  : (FTEID, 'S1USGWFTEID'),
         (87, 6)  : (FTEID, 'S4USGSNFTEID'),
         (87, 7)  : (FTEID, 'S4USGWFTEID'),
+        (87, 8)  : (FTEID, 'S2bUePDGFTEID'),
+        (87, 9)  : (FTEID, 'S2bUPGWFTEID'),
+        (87, 10) : (FTEID, 'S2aUTWANFTEID'),
+        (87, 11) : (FTEID, 'S2aUPGWFTEID'),
         (172, 0) : (RANNASCause, 'RANNASCause'),
-        (197, 0) : (EPCO, 'ExtendedPCO'),
+        (197, 0) : (EPCO, 'ExtendedProtocolConfigurationOptions'),
         }
 
 
-# extracted from Table 7.2.4-1: Information Elements in a Create Bearer Response
+# Table 7.2.4-1: Information Elements in a Create Bearer Response
 class CreateBearerResponseIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
-        (93, 0)  : (CreateBearerResponse_BearerContext, 'BearerContexts'),
+        (93, 0)  : (CreateBearerResponse_BearerContext, 'BearerContext'),
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
+        (74, 0)  : (IPAddress, 'MMES4SGSNIdentifier'),
         (74, 0)  : (IPAddress, 'UELocalIPAddress'),
         (78, 0)  : (PCO, 'PCO'),
-        (86, 0)  : (ULI, 'UserLocationInfo'),
+        (86, 0)  : (ULI, 'ULI'),
         (114, 0) : (UETimeZone, 'UETimeZone'),
         (118, 0) : (FContainer, 'NBIFOMContainer'),
-        (126, 1) : (PortNumber, 'UETCPPort'),
         (126, 0) : (PortNumber, 'UEUDPPort'),
-        (132, 3) : (FQCSID, 'TWANFQCSID'),
-        (132, 2) : (FQCSID, 'EPDGFQCSID'),
-        (132, 1) : (FQCSID, 'SGWFQCSID'),
+        (126, 1) : (PortNumber, 'UETCPPort'),
         (132, 0) : (FQCSID, 'MMEFQCSID'),
-        (169, 0) : (TWANIdent, 'TWANIdent'),
-        (169, 1) : (TWANIdent, 'WLANLocationInfo'),
-        (178, 0) : (PresenceReportingAreaInfo, 'PresenceReportingAreaInfo'),
-        (179, 1) : (TWANIdentTimestamp, 'WLANLocationTimestamp'),
-        (180, 2) : (CreateBearerResponse_OverloadControlInfo, 'TWANePDGsOverloadControlInfo'),
-        (180, 1) : (CreateBearerResponse_OverloadControlInfo, 'SGWsOverloadControlInfo'),
-        (180, 0) : (CreateBearerResponse_OverloadControlInfo, 'MMES4SGSNsOverloadControlInfo'),
-        255      : (PrivExt, 'PrivExt'),
+        (132, 1) : (FQCSID, 'SGWFQCSID'),
+        (132, 2) : (FQCSID, 'ePDGFQCSID'),
+        (132, 3) : (FQCSID, 'TWANFQCSID'),
+        (169, 0) : (TWANIdentifier, 'TWANIdentifier'),
+        (169, 1) : (TWANIdentifier, 'WLANLocationInformation'),
+        (178, 0) : (PresenceReportingAreaInformation, 'PresenceReportingAreaInformation'),
+        (179, 1) : (TWANIdentifierTimestamp, 'WLANLocationTimestamp'),
+        (180, 0) : (CreateBearerResponse_OverloadControlInformation, 'MMES4SGSNsOverloadControlInformation'),
+        (180, 1) : (CreateBearerResponse_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (180, 2) : (CreateBearerResponse_OverloadControlInformation, 'TWANePDGsOverloadControlInformation'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -4137,41 +4161,40 @@ class CreateBearerResponse(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.5-2: Overload Control Information within Bearer Resource Command
-class BearerResourceCommand_OverloadControlInfo(GTPCIEs):
+# Table 7.2.5-2: Overload Control Information within Bearer Resource Command
+# IE Type: 180
+class BearerResourceCommand_OverloadControlInformation(GTPCIEs):
     MAND = {
-        (156, 0) : (EPCTimer, 'PeriodOfValidity'),
+        (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
         (183, 0) : (SequenceNumber, 'OverloadControlSequenceNumber'),
         }
-    OPT  = {
-        }
 
 
-# extracted from Table 7.2.5-1: Information Elements in a Bearer Resource Command
+# Table 7.2.5-1: Information Elements in a Bearer Resource Command
 class BearerResourceCommandIEs(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'LinkedEPSBearerID'),
-        (85, 0)  : (TAD, 'TrafficAggregateDescription'),
+        (85, 0)  : (TAD, 'TAD'),
         (100, 0) : (PTI, 'PTI'),
         }
     OPT  = {
         (73, 1)  : (EBI, 'EPSBearerID'),
-        (77, 0)  : (Ind, 'IndFlags'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
         (78, 0)  : (PCO, 'PCO'),
-        (81, 0)  : (FlowQoS, 'FlowQualityOfService'),
+        (81, 0)  : (FlowQoS, 'FlowQoS'),
         (82, 0)  : (RATType, 'RATType'),
         (83, 0)  : (ServingNetwork, 'ServingNetwork'),
-        (86, 0)  : (ULI, 'UserLocationInfo'),
-        (87, 2)  : (FTEID, 'SenderFTEIDForControlPlane'),
+        (86, 0)  : (ULI, 'ULI'),
         (87, 0)  : (FTEID, 'S4USGSNFTEID'),
         (87, 1)  : (FTEID, 'S12RNCFTEID'),
+        (87, 2)  : (FTEID, 'SenderFTEIDforControlPlane'),
         (118, 0) : (FContainer, 'NBIFOMContainer'),
-        (157, 0) : (SignallingPriorityInd, 'SignallingPriorityInd'),
-        (180, 1) : (BearerResourceCommand_OverloadControlInfo, 'SGWsOverloadControlInfo'),
-        (180, 0) : (BearerResourceCommand_OverloadControlInfo, 'MMES4SGSNsOverloadControlInfo'),
-        (197, 0) : (EPCO, 'ExtendedPCO'),
-        255      : (PrivExt, 'PrivExt'),
+        (157, 0) : (SignallingPriorityIndication, 'SignallingPriorityIndication'),
+        (180, 0) : (BearerResourceCommand_OverloadControlInformation, 'MMES4SGSNsOverloadControlInformation'),
+        (180, 1) : (BearerResourceCommand_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (197, 0) : (EPCO, 'ExtendedProtocolConfigurationOptions'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -4182,19 +4205,20 @@ class BearerResourceCommand(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.6-2: Overload Control Information within Bearer Resource Failure Indication
-class BearerResourceFailureIndication_OverloadControlInfo(GTPCIEs):
+# Table 7.2.6-2: Overload Control Information within Bearer Resource Failure Indication
+# IE Type: 180
+class BearerResourceFailureIndication_OverloadControlInformation(GTPCIEs):
     MAND = {
-        (156, 0) : (EPCTimer, 'PeriodOfValidity'),
+        (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
         (183, 0) : (SequenceNumber, 'OverloadControlSequenceNumber'),
         }
     OPT  = {
-        (71, 0)  : (APN, 'ListOfAccessPointName'),
+        (71, 0)  : (APN, 'APN'),
         }
 
 
-# extracted from Table 7.2.6-1: Information Elements in a Bearer Resource Failure Indication
+# Table 7.2.6-1: Information Elements in a Bearer Resource Failure Indication
 class BearerResourceFailureIndicationIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
@@ -4203,11 +4227,11 @@ class BearerResourceFailureIndicationIEs(GTPCIEs):
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
-        (77, 0)  : (Ind, 'IndFlags'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
         (118, 0) : (FContainer, 'NBIFOMContainer'),
-        (180, 1) : (BearerResourceFailureIndication_OverloadControlInfo, 'SGWsOverloadControlInfo'),
-        (180, 0) : (BearerResourceFailureIndication_OverloadControlInfo, 'PGWsOverloadControlInfo'),
-        255      : (PrivExt, 'PrivExt'),
+        (180, 0) : (BearerResourceFailureIndication_OverloadControlInformation, 'PGWsOverloadControlInformation'),
+        (180, 1) : (BearerResourceFailureIndication_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -4218,80 +4242,77 @@ class BearerResourceFailureIndication(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.7-4: Overload Control Information within Modify Bearer Request
-class ModifyBearerRequest_OverloadControlInfo(GTPCIEs):
+# Table 7.2.7-4: Overload Control Information within Modify Bearer Request
+# IE Type: 180
+class ModifyBearerRequest_OverloadControlInformation(GTPCIEs):
     MAND = {
-        (156, 0) : (EPCTimer, 'PeriodOfValidity'),
+        (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
         (183, 0) : (SequenceNumber, 'OverloadControlSequenceNumber'),
         }
-    OPT  = {
+
+
+# Table 7.2.7-3: Bearer Context to be removed within Modify Bearer Request
+# IE Type: 93
+class ModifyBearerRequest_BearerContexttoberemoved(GTPCIEs):
+    MAND = {
+        (73, 0)  : (EBI, 'EPSBearerID'),
         }
 
 
-# extracted from Table 7.2.7-3: Bearer Context to be removed within Modify Bearer Request
-class ModifyBearerRequest_BearerContextToBeRemoved(GTPCIEs):
+# Table 7.2.7-2: Bearer Context to be modified within Modify Bearer Request
+# IE Type: 93
+class ModifyBearerRequest_BearerContexttobemodified(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
         }
     OPT  = {
-        }
-
-
-# extracted from Table 7.2.7-2: Bearer Context to be modified within Modify Bearer Request
-class ModifyBearerRequest_BearerContextToBeModified(GTPCIEs):
-    MAND = {
-        (73, 0)  : (EBI, 'EPSBearerID'),
-        }
-    OPT  = {
-        (87, 4)  : (FTEID, 'S11UMMEFTEID'),
-        (87, 3)  : (FTEID, 'S4USGSNFTEID'),
-        (87, 0)  : (FTEID, 'S1ENodeBFTEID'),
-        (87, 2)  : (FTEID, 'S12RNCFTEID'),
+        (87, 0)  : (FTEID, 'S1eNodeBFTEID'),
         (87, 1)  : (FTEID, 'S58USGWFTEID'),
+        (87, 2)  : (FTEID, 'S12RNCFTEID'),
+        (87, 3)  : (FTEID, 'S4USGSNFTEID'),
+        (87, 4)  : (FTEID, 'S11UMMEFTEID'),
         }
 
 
-# extracted from Table 7.2.7-1 : Information Elements in a Modify Bearer Request
+# Table 7.2.7-1: Information Elements in a Modify Bearer Request
 class ModifyBearerRequestIEs(GTPCIEs):
-    MAND = {
-        }
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
         (3, 0)   : (Recovery, 'Recovery'),
         (72, 0)  : (AMBR, 'AggregateMaximumBitRate'),
         (74, 1)  : (IPAddress, 'UELocalIPAddress'),
         (74, 0)  : (IPAddress, 'HeNBLocalIPAddress'),
-        (74, 2)  : (IPAddress, 'MMES4SGSNIdent'),
-        (75, 0)  : (MEI, 'MEIdentity'),
-        (77, 0)  : (Ind, 'IndFlags'),
+        (74, 2)  : (IPAddress, 'MMES4SGSNIdentifier'),
+        (75, 0)  : (MEI, 'MEI'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
         (82, 0)  : (RATType, 'RATType'),
         (83, 0)  : (ServingNetwork, 'ServingNetwork'),
-        (86, 0)  : (ULI, 'UserLocationInfo'),
-        (86, 1)  : (ULI, 'UserLocationInfoForSGW'),
-        (87, 0)  : (FTEID, 'SenderFTEIDForControlPlane'),
+        (86, 0)  : (ULI, 'ULI'),
+        (86, 1)  : (ULI, 'UserLocationInformationforSGW'),
+        (87, 0)  : (FTEID, 'SenderFTEIDforControlPlane'),
         (92, 0)  : (DelayValue, 'DelayDownlinkPacketNotificationRequest'),
-        (93, 0)  : (ModifyBearerRequest_BearerContextToBeModified, 'BearerContextsToBeModified'),
-        (93, 1)  : (ModifyBearerRequest_BearerContextToBeRemoved, 'BearerContextsToBeRemoved'),
+        (93, 0)  : (ModifyBearerRequest_BearerContexttobemodified, 'BearerContexttobemodified'),
+        (93, 1)  : (ModifyBearerRequest_BearerContexttoberemoved, 'BearerContexttoberemoved'),
         (114, 0) : (UETimeZone, 'UETimeZone'),
-        (126, 0) : (PortNumber, 'HeNBUDPPort'),
         (126, 1) : (PortNumber, 'UEUDPPort'),
+        (126, 0) : (PortNumber, 'HeNBUDPPort'),
         (132, 0) : (FQCSID, 'MMEFQCSID'),
         (132, 1) : (FQCSID, 'SGWFQCSID'),
-        (145, 0) : (UCI, 'UserCSGInfo'),
+        (145, 0) : (UCI, 'UCI'),
         (151, 0) : (LDN, 'MMES4SGSNLDN'),
         (151, 1) : (LDN, 'SGWLDN'),
-        (169, 0) : (TWANIdent, 'WLANLocationInfo'),
+        (169, 0) : (TWANIdentifier, 'WLANLocationInformation'),
         (173, 0) : (CNOperatorSelectionEntity, 'CNOperatorSelectionEntity'),
-        (178, 0) : (PresenceReportingAreaInfo, 'PresenceReportingAreaInfo'),
-        (179, 0) : (TWANIdentTimestamp, 'WLANLocationTimestamp'),
-        (180, 0) : (ModifyBearerRequest_OverloadControlInfo, 'MMES4SGSNsOverloadControlInfo'),
-        (180, 2) : (ModifyBearerRequest_OverloadControlInfo, 'EPDGsOverloadControlInfo'),
-        (180, 1) : (ModifyBearerRequest_OverloadControlInfo, 'SGWsOverloadControlInfo'),
+        (178, 0) : (PresenceReportingAreaInformation, 'PresenceReportingAreaInformation'),
+        (179, 0) : (TWANIdentifierTimestamp, 'WLANLocationTimestamp'),
+        (180, 0) : (ModifyBearerRequest_OverloadControlInformation, 'MMES4SGSNsOverloadControlInformation'),
+        (180, 1) : (ModifyBearerRequest_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (180, 2) : (ModifyBearerRequest_OverloadControlInformation, 'ePDGsOverloadControlInformation'),
         (198, 0) : (ServingPLMNRateControl, 'ServingPLMNRateControl'),
         (199, 0) : (Counter, 'MOExceptionDataCounter'),
         (201, 0) : (SecondaryRATUsageDataReport, 'SecondaryRATUsageDataReport'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -4302,56 +4323,67 @@ class ModifyBearerRequest(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.8-5: Overload Control Information within Modify Bearer Response
-class ModifyBearerResponse_OverloadControlInfo(GTPCIEs):
+# Table 7.2.8-6: PGW Change Info within Modify Bearer Response
+# IE Type: 214
+class ModifyBearerResponse_PGWChangeInfo(GTPCIEs):
+    OPT  = {
+        (74, 0)  : (IPAddress, 'AlternativePGWCSMFIPAddress'),
+        (215, 0) : (PGWSetFQDN, 'PGWSetFQDN'),
+        }
+
+
+# Table 7.2.8-5: Overload Control Information within Modify Bearer Response
+# IE Type: 180
+class ModifyBearerResponse_OverloadControlInformation(GTPCIEs):
     MAND = {
-        (156, 0) : (EPCTimer, 'PeriodOfValidity'),
+        (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
         (183, 0) : (SequenceNumber, 'OverloadControlSequenceNumber'),
         }
     OPT  = {
-        (71, 0)  : (APN, 'ListOfAccessPointName'),
+        (71, 0)  : (APN, 'APN'),
         }
 
 
-# extracted from Table 7.2.8-4: Load Control Information within Modify Bearer Response
-class ModifyBearerResponse_LoadControlInfo(GTPCIEs):
+# Table 7.2.8-4: Load Control Information within Modify Bearer Response
+# IE Type: 181
+class ModifyBearerResponse_LoadControlInformation(GTPCIEs):
     MAND = {
         (182, 0) : (Metric, 'LoadMetric'),
         (183, 0) : (SequenceNumber, 'LoadControlSequenceNumber'),
         }
     OPT  = {
-        (184, 0) : (APNAndRelativeCapacity, 'ListOfAPNAndRelativeCapacity'),
+        (184, 0) : (APNAndRelativeCapacity, 'ListofAPNAndRelativeCapacity'),
         }
 
 
-# extracted from Table 7.2.8-3: Bearer Context marked for removal within Modify Bearer Response
-class ModifyBearerResponse_BearerContextMarkedForRemoval(GTPCIEs):
+# Table 7.2.8-3: Bearer Context marked for removal within Modify Bearer Response
+# IE Type: 93
+class ModifyBearerResponse_BearerContextmarkedforremoval(GTPCIEs):
+    MAND = {
+        (2, 0)   : (Cause, 'Cause'),
+        (73, 0)  : (EBI, 'EPSBearerID'),
+        }
+
+
+# Table 7.2.8-2: Bearer Context modified within Modify Bearer Response
+# IE Type: 93
+class ModifyBearerResponse_BearerContextmodified(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'EPSBearerID'),
         }
     OPT  = {
-        }
-
-
-# extracted from Table 7.2.8-2: Bearer Context modified within Modify Bearer Response
-class ModifyBearerResponse_BearerContextModified(GTPCIEs):
-    MAND = {
-        (2, 0)   : (Cause, 'Cause'),
-        (73, 0)  : (EBI, 'EPSBearerID'),
-        }
-    OPT  = {
-        (87, 3)  : (FTEID, 'S11USGWFTEID'),
         (87, 0)  : (FTEID, 'S1USGWFTEID'),
         (87, 1)  : (FTEID, 'S12SGWFTEID'),
         (87, 2)  : (FTEID, 'S4USGWFTEID'),
+        (87, 3)  : (FTEID, 'S11USGWFTEID'),
         (94, 0)  : (ChargingID, 'ChargingID'),
         (97, 0)  : (BearerFlags, 'BearerFlags'),
         }
 
 
-# extracted from Table 7.2.8-1: Information Elements in a Modify Bearer Response
+# Table 7.2.8-1: Information Elements in a Modify Bearer Response
 class ModifyBearerResponseIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
@@ -4361,27 +4393,28 @@ class ModifyBearerResponseIEs(GTPCIEs):
         (73, 0)  : (EBI, 'LinkedEPSBearerID'),
         (74, 0)  : (IPAddress, 'ChargingGatewayAddress'),
         (76, 0)  : (MSISDN, 'MSISDN'),
-        (77, 0)  : (Ind, 'IndFlags'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
         (78, 0)  : (PCO, 'PCO'),
-        (93, 0)  : (ModifyBearerResponse_BearerContextModified, 'BearerContextsModified'),
-        (93, 1)  : (ModifyBearerResponse_BearerContextMarkedForRemoval, 'BearerContextsMarkedForRemoval'),
+        (93, 0)  : (ModifyBearerResponse_BearerContextmodified, 'BearerContextmodified'),
+        (93, 1)  : (ModifyBearerResponse_BearerContextmarkedforremoval, 'BearerContextmarkedforremoval'),
         (94, 0)  : (ChargingID, 'PDNConnectionChargingID'),
         (127, 0) : (APNRestriction, 'APNRestriction'),
         (131, 0) : (ChangeReportingAction, 'ChangeReportingAction'),
         (132, 0) : (FQCSID, 'PGWFQCSID'),
         (132, 1) : (FQCSID, 'SGWFQCSID'),
         (136, 0) : (FQDN, 'ChargingGatewayName'),
-        (146, 0) : (CSGInfoReportingAction, 'CSGInfoReportingAction'),
-        (151, 1) : (LDN, 'PGWLDN'),
+        (146, 0) : (CSGInformationReportingAction, 'CSGInformationReportingAction'),
         (151, 0) : (LDN, 'SGWLDN'),
-        (165, 0) : (HeNBInfoReporting, 'HeNBInfoReporting'),
+        (151, 1) : (LDN, 'PGWLDN'),
+        (165, 0) : (HeNBInformationReporting, 'HeNBInformationReporting'),
         (177, 0) : (PresenceReportingAreaAction, 'PresenceReportingAreaAction'),
-        (180, 0) : (ModifyBearerResponse_OverloadControlInfo, 'PGWsOverloadControlInfo'),
-        (180, 1) : (ModifyBearerResponse_OverloadControlInfo, 'SGWsOverloadControlInfo'),
-        (181, 1) : (ModifyBearerResponse_LoadControlInfo, 'PGWsAPNLevelLoadControlInfo'),
-        (181, 0) : (ModifyBearerResponse_LoadControlInfo, 'PGWsNodeLevelLoadControlInfo'),
-        (181, 2) : (ModifyBearerResponse_LoadControlInfo, 'SGWsNodeLevelLoadControlInfo'),
-        255      : (PrivExt, 'PrivExt'),
+        (180, 0) : (ModifyBearerResponse_OverloadControlInformation, 'PGWsOverloadControlInformation'),
+        (180, 1) : (ModifyBearerResponse_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (181, 0) : (ModifyBearerResponse_LoadControlInformation, 'PGWsnodelevelLoadControlInformation'),
+        (181, 1) : (ModifyBearerResponse_LoadControlInformation, 'PGWsAPNlevelLoadControlInformation'),
+        (181, 2) : (ModifyBearerResponse_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
+        (214, 0) : (ModifyBearerResponse_PGWChangeInfo, 'PGWChangeInfo'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -4392,45 +4425,42 @@ class ModifyBearerResponse(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.9.1-2: Overload Control Information within Delete Session Request
-class DeleteSessionRequest_OverloadControlInfo(GTPCIEs):
+# Table 7.2.9.1-2: Overload Control Information within Delete Session Request
+# IE Type: 180
+class DeleteSessionRequest_OverloadControlInformation(GTPCIEs):
     MAND = {
-        (156, 0) : (EPCTimer, 'PeriodOfValidity'),
+        (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
         (183, 0) : (SequenceNumber, 'OverloadControlSequenceNumber'),
         }
-    OPT  = {
-        }
 
 
-# extracted from Table 7.2.9.1-1: Information Elements in a Delete Session Request
+# Table 7.2.9.1-1: Information Elements in a Delete Session Request
 class DeleteSessionRequestIEs(GTPCIEs):
-    MAND = {
-        }
     OPT  = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'LinkedEPSBearerID'),
         (74, 0)  : (IPAddress, 'UELocalIPAddress'),
-        (77, 0)  : (Ind, 'IndFlags'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
         (78, 0)  : (PCO, 'PCO'),
-        (86, 0)  : (ULI, 'UserLocationInfo'),
-        (87, 0)  : (FTEID, 'SenderFTEIDForControlPlane'),
+        (86, 0)  : (ULI, 'ULI'),
+        (87, 0)  : (FTEID, 'SenderFTEIDforControlPlane'),
         (114, 0) : (UETimeZone, 'UETimeZone'),
         (126, 0) : (PortNumber, 'UEUDPPort'),
         (126, 1) : (PortNumber, 'UETCPPort'),
         (135, 0) : (NodeType, 'OriginatingNode'),
-        (169, 0) : (TWANIdent, 'TWANIdent'),
-        (169, 1) : (TWANIdent, 'WLANLocationInfo'),
+        (169, 0) : (TWANIdentifier, 'TWANIdentifier'),
+        (169, 1) : (TWANIdentifier, 'WLANLocationInformation'),
         (170, 0) : (ULITimestamp, 'ULITimestamp'),
         (172, 0) : (RANNASCause, 'RANNASReleaseCause'),
-        (179, 1) : (TWANIdentTimestamp, 'WLANLocationTimestamp'),
-        (179, 0) : (TWANIdentTimestamp, 'TWANIdentTimestamp'),
-        (180, 2) : (DeleteSessionRequest_OverloadControlInfo, 'TWANePDGsOverloadControlInfo'),
-        (180, 0) : (DeleteSessionRequest_OverloadControlInfo, 'MMES4SGSNsOverloadControlInfo'),
-        (180, 1) : (DeleteSessionRequest_OverloadControlInfo, 'SGWsOverloadControlInfo'),
-        (197, 0) : (EPCO, 'ExtendedPCO'),
+        (179, 0) : (TWANIdentifierTimestamp, 'TWANIdentifierTimestamp'),
+        (179, 1) : (TWANIdentifierTimestamp, 'WLANLocationTimestamp'),
+        (180, 0) : (DeleteSessionRequest_OverloadControlInformation, 'MMES4SGSNsOverloadControlInformation'),
+        (180, 1) : (DeleteSessionRequest_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (180, 2) : (DeleteSessionRequest_OverloadControlInformation, 'TWANePDGsOverloadControlInformation'),
+        (197, 0) : (EPCO, 'ExtendedProtocolConfigurationOptions'),
         (201, 0) : (SecondaryRATUsageDataReport, 'SecondaryRATUsageDataReport'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -4441,62 +4471,72 @@ class DeleteSessionRequest(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.9-4: Overload Control Information within Delete Bearer Request
-class DeleteBearerRequest_OverloadControlInfo(GTPCIEs):
+# Table 7.2.9.2-5: PGW Set Change within Delete Bearer Request
+# IE Type: 214
+class DeleteBearerRequest_PGWSetChange(GTPCIEs):
+    OPT  = {
+        (74, 0)  : (IPAddress, 'AlternativePGWCSMFIPAddress'),
+        (74, 1)  : (IPAddress, 'NewPGWCSMFIPAddress'),
+        (215, 0) : (PGWSetFQDN, 'PGWSetFQDN'),
+        }
+
+
+# Table 7.2.9.2-4: Overload Control Information within Delete Bearer Request
+# IE Type: 180
+class DeleteBearerRequest_OverloadControlInformation(GTPCIEs):
     MAND = {
-        (156, 0) : (EPCTimer, 'PeriodOfValidity'),
+        (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
         (183, 0) : (SequenceNumber, 'OverloadControlSequenceNumber'),
         }
     OPT  = {
-        (71, 0)  : (APN, 'ListOfAccessPointName'),
+        (71, 0)  : (APN, 'APN'),
         }
 
 
-# extracted from Table 7.2.9-3: Load Control Information within Delete Bearer Request
-class DeleteBearerRequest_LoadControlInfo(GTPCIEs):
+# Table 7.2.9.2-3: Load Control Information within Delete Bearer Request
+# IE Type: 181
+class DeleteBearerRequest_LoadControlInformation(GTPCIEs):
     MAND = {
         (182, 0) : (Metric, 'LoadMetric'),
         (183, 0) : (SequenceNumber, 'LoadControlSequenceNumber'),
         }
     OPT  = {
-        (184, 0) : (APNAndRelativeCapacity, 'ListOfAPNAndRelativeCapacity'),
+        (184, 0) : (APNAndRelativeCapacity, 'ListofAPNAndRelativeCapacity'),
         }
 
 
-# extracted from Table 7.2.9.2-2: Bearer Context within Delete Bearer Request
+# Table 7.2.9.2-2: Bearer Context within Delete Bearer Request
+# IE Type: 93
 class DeleteBearerRequest_BearerContext(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'EPSBearerID'),
         }
-    OPT  = {
-        }
 
 
-# extracted from Table 7.2.9.2-1: Information Elements in a Delete Bearer Request
+# Table 7.2.9.2-1: Information Elements in a Delete Bearer Request
 class DeleteBearerRequestIEs(GTPCIEs):
-    MAND = {
-        }
     OPT  = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'LinkedEPSBearerID'),
         (73, 1)  : (EBI, 'EPSBearerIDs'),
-        (77, 0)  : (Ind, 'IndFlags'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
         (78, 0)  : (PCO, 'PCO'),
-        (93, 0)  : (DeleteBearerRequest_BearerContext, 'FailedBearerContexts'),
+        (93, 0)  : (DeleteBearerRequest_BearerContext, 'FailedBearerContext'),
         (100, 0) : (PTI, 'PTI'),
         (118, 0) : (FContainer, 'NBIFOMContainer'),
-        (132, 1) : (FQCSID, 'SGWFQCSID'),
         (132, 0) : (FQCSID, 'PGWFQCSID'),
-        (180, 0) : (DeleteBearerRequest_OverloadControlInfo, 'PGWsOverloadControlInfo'),
-        (180, 1) : (DeleteBearerRequest_OverloadControlInfo, 'SGWsOverloadControlInfo'),
-        (181, 0) : (DeleteBearerRequest_LoadControlInfo, 'PGWsNodeLevelLoadControlInfo'),
-        (181, 1) : (DeleteBearerRequest_LoadControlInfo, 'PGWsAPNLevelLoadControlInfo'),
-        (181, 2) : (DeleteBearerRequest_LoadControlInfo, 'SGWsNodeLevelLoadControlInfo'),
-        (197, 0) : (EPCO, 'ExtendedPCO'),
+        (132, 1) : (FQCSID, 'SGWFQCSID'),
+        (180, 0) : (DeleteBearerRequest_OverloadControlInformation, 'PGWsOverloadControlInformation'),
+        (180, 1) : (DeleteBearerRequest_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (181, 0) : (DeleteBearerRequest_LoadControlInformation, 'PGWsnodelevelLoadControlInformation'),
+        (181, 1) : (DeleteBearerRequest_LoadControlInformation, 'PGWsAPNlevelLoadControlInformation'),
+        (181, 2) : (DeleteBearerRequest_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
+        (197, 0) : (EPCO, 'ExtendedProtocolConfigurationOptions'),
         (204, 0) : (APNRateControlStatus, 'APNRateControlStatus'),
-        255      : (PrivExt, 'PrivExt'),
+        (214, 0) : (DeleteBearerRequest_PGWSetChange, 'PGWChangeInfo'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -4507,46 +4547,48 @@ class DeleteBearerRequest(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.10.1-3: Overload Control Information within Delete Session Response
-class DeleteSessionResponse_OverloadControlInfo(GTPCIEs):
+# Table 7.2.10.1-3: Overload Control Information within Delete Session Response
+# IE Type: 180
+class DeleteSessionResponse_OverloadControlInformation(GTPCIEs):
     MAND = {
-        (156, 0) : (EPCTimer, 'PeriodOfValidity'),
+        (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
         (183, 0) : (SequenceNumber, 'OverloadControlSequenceNumber'),
         }
     OPT  = {
-        (71, 0)  : (APN, 'ListOfAccessPointName'),
+        (71, 0)  : (APN, 'APN'),
         }
 
 
-# extracted from Table 7.2.10.1-2: Load Control Information within Delete Session Response
-class DeleteSessionResponse_LoadControlInfo(GTPCIEs):
+# Table 7.2.10.1-2: Load Control Information within Delete Session Response
+# IE Type: 181
+class DeleteSessionResponse_LoadControlInformation(GTPCIEs):
     MAND = {
         (182, 0) : (Metric, 'LoadMetric'),
         (183, 0) : (SequenceNumber, 'LoadControlSequenceNumber'),
         }
     OPT  = {
-        (184, 0) : (APNAndRelativeCapacity, 'ListOfAPNAndRelativeCapacity'),
+        (184, 0) : (APNAndRelativeCapacity, 'ListofAPNAndRelativeCapacity'),
         }
 
 
-# extracted from Table 7.2.10.1-1: Information Elements in a Delete Session Response
+# Table 7.2.10.1-1: Information Elements in a Delete Session Response
 class DeleteSessionResponseIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
-        (77, 0)  : (Ind, 'IndFlags'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
         (78, 0)  : (PCO, 'PCO'),
-        (180, 1) : (DeleteSessionResponse_OverloadControlInfo, 'SGWsOverloadControlInfo'),
-        (180, 0) : (DeleteSessionResponse_OverloadControlInfo, 'PGWsOverloadControlInfo'),
-        (181, 0) : (DeleteSessionResponse_LoadControlInfo, 'PGWsNodeLevelLoadControlInfo'),
-        (181, 1) : (DeleteSessionResponse_LoadControlInfo, 'PGWsAPNLevelLoadControlInfo'),
-        (181, 2) : (DeleteSessionResponse_LoadControlInfo, 'SGWsNodeLevelLoadControlInfo'),
-        (197, 0) : (EPCO, 'ExtendedPCO'),
+        (180, 0) : (DeleteSessionResponse_OverloadControlInformation, 'PGWsOverloadControlInformation'),
+        (180, 1) : (DeleteSessionResponse_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (181, 0) : (DeleteSessionResponse_LoadControlInformation, 'PGWsnodelevelLoadControlInformation'),
+        (181, 1) : (DeleteSessionResponse_LoadControlInformation, 'PGWsAPNlevelLoadControlInformation'),
+        (181, 2) : (DeleteSessionResponse_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
+        (197, 0) : (EPCO, 'ExtendedProtocolConfigurationOptions'),
         (204, 0) : (APNRateControlStatus, 'APNRateControlStatus'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -4557,18 +4599,18 @@ class DeleteSessionResponse(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.10.2-3: Overload Control Information within Delete Bearer Response
-class DeleteBearerResponse_OverloadControlInfo(GTPCIEs):
+# Table 7.2.10.2-3: Overload Control Information within Delete Bearer Response
+# IE Type: 180
+class DeleteBearerResponse_OverloadControlInformation(GTPCIEs):
     MAND = {
-        (156, 0) : (EPCTimer, 'PeriodOfValidity'),
+        (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
         (183, 0) : (SequenceNumber, 'OverloadControlSequenceNumber'),
         }
-    OPT  = {
-        }
 
 
-# extracted from Table 7.2.10.2-2: Bearer Context within Delete Bearer Response
+# Table 7.2.10.2-2: Bearer Context within Delete Bearer Response
+# IE Type: 93
 class DeleteBearerResponse_BearerContext(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
@@ -4577,11 +4619,11 @@ class DeleteBearerResponse_BearerContext(GTPCIEs):
     OPT  = {
         (78, 0)  : (PCO, 'PCO'),
         (172, 0) : (RANNASCause, 'RANNASCause'),
-        (197, 0) : (EPCO, 'ExtendedPCO'),
+        (197, 0) : (EPCO, 'ExtendedProtocolConfigurationOptions'),
         }
 
 
-# extracted from Table 7.2.10.2-1: Information Elements in Delete Bearer Response
+# Table 7.2.10.2-1: Information Elements in Delete Bearer Response
 class DeleteBearerResponseIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
@@ -4589,28 +4631,29 @@ class DeleteBearerResponseIEs(GTPCIEs):
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
         (73, 0)  : (EBI, 'LinkedEPSBearerID'),
+        (74, 0)  : (IPAddress, 'MMES4SGSNIdentifier'),
         (74, 0)  : (IPAddress, 'UELocalIPAddress'),
         (78, 0)  : (PCO, 'PCO'),
-        (86, 0)  : (ULI, 'UserLocationInfo'),
-        (93, 0)  : (DeleteBearerResponse_BearerContext, 'BearerContexts'),
+        (86, 0)  : (ULI, 'ULI'),
+        (93, 0)  : (DeleteBearerResponse_BearerContext, 'BearerContext'),
         (114, 0) : (UETimeZone, 'UETimeZone'),
         (118, 0) : (FContainer, 'NBIFOMContainer'),
         (126, 0) : (PortNumber, 'UEUDPPort'),
         (126, 1) : (PortNumber, 'UETCPPort'),
-        (132, 2) : (FQCSID, 'EPDGFQCSID'),
         (132, 0) : (FQCSID, 'MMEFQCSID'),
-        (132, 3) : (FQCSID, 'TWANFQCSID'),
         (132, 1) : (FQCSID, 'SGWFQCSID'),
-        (169, 0) : (TWANIdent, 'TWANIdent'),
-        (169, 1) : (TWANIdent, 'WLANLocationInfo'),
+        (132, 2) : (FQCSID, 'ePDGFQCSID'),
+        (132, 3) : (FQCSID, 'TWANFQCSID'),
+        (169, 0) : (TWANIdentifier, 'TWANIdentifier'),
+        (169, 1) : (TWANIdentifier, 'WLANLocationInformation'),
         (170, 0) : (ULITimestamp, 'ULITimestamp'),
-        (179, 1) : (TWANIdentTimestamp, 'WLANLocationTimestamp'),
-        (179, 0) : (TWANIdentTimestamp, 'TWANIdentTimestamp'),
-        (180, 2) : (DeleteBearerResponse_OverloadControlInfo, 'TWANePDGsOverloadControlInfo'),
-        (180, 0) : (DeleteBearerResponse_OverloadControlInfo, 'MMES4SGSNsOverloadControlInfo'),
-        (180, 1) : (DeleteBearerResponse_OverloadControlInfo, 'SGWsOverloadControlInfo'),
+        (179, 0) : (TWANIdentifierTimestamp, 'TWANIdentifierTimestamp'),
+        (179, 1) : (TWANIdentifierTimestamp, 'WLANLocationTimestamp'),
+        (180, 0) : (DeleteBearerResponse_OverloadControlInformation, 'MMES4SGSNsOverloadControlInformation'),
+        (180, 1) : (DeleteBearerResponse_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (180, 2) : (DeleteBearerResponse_OverloadControlInformation, 'TWANePDGsOverloadControlInformation'),
         (201, 0) : (SecondaryRATUsageDataReport, 'SecondaryRATUsageDataReport'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -4621,42 +4664,39 @@ class DeleteBearerResponse(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.11.1-3: Overload Control Information within Downlink Data Notification
-class DownlinkDataNotification_OverloadControlInfo(GTPCIEs):
+# Table 7.2.11.1-3: Overload Control Information within Downlink Data Notification
+# IE Type: 180
+class DownlinkDataNotification_OverloadControlInformation(GTPCIEs):
     MAND = {
-        (156, 0) : (EPCTimer, 'PeriodOfValidity'),
+        (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
         (183, 0) : (SequenceNumber, 'OverloadControlSequenceNumber'),
         }
-    OPT  = {
-        }
 
 
-# extracted from Table 7.2.11.1-2: Load Control Information within Downlink Data Notification
-class DownlinkDataNotification_LoadControlInfo(GTPCIEs):
+# Table 7.2.11.1-2: Load Control Information within Downlink Data Notification
+# IE Type: 181
+class DownlinkDataNotification_LoadControlInformation(GTPCIEs):
     MAND = {
         (182, 0) : (Metric, 'LoadMetric'),
         (183, 0) : (SequenceNumber, 'LoadControlSequenceNumber'),
         }
-    OPT  = {
-        }
 
 
-# extracted from Table 7.2.11.1-1: Information Elements in a Downlink Data Notification
+# Table 7.2.11.1-1: Information Elements in a Downlink Data Notification
 class DownlinkDataNotificationIEs(GTPCIEs):
-    MAND = {
-        }
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'EPSBearerID'),
-        (77, 0)  : (Ind, 'IndFlags'),
-        (87, 0)  : (FTEID, 'SenderFTEIDForControlPlane'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
+        (87, 0)  : (FTEID, 'SenderFTEIDforControlPlane'),
         (155, 0) : (ARP, 'AllocationRetentionPriority'),
-        (180, 0) : (DownlinkDataNotification_OverloadControlInfo, 'SGWsOverloadControlInfo'),
-        (181, 0) : (DownlinkDataNotification_LoadControlInfo, 'SGWsNodeLevelLoadControlInfo'),
-        (186, 0) : (PagingAndServiceInfo, 'PagingAndServiceInfo'),
-        255      : (PrivExt, 'PrivExt'),
+        (180, 0) : (DownlinkDataNotification_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (181, 0) : (DownlinkDataNotification_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
+        (186, 0) : (PagingAndServiceInformation, 'PagingAndServiceInformation'),
+        (187, 0) : (IntegerNumber, 'DLDataPacketsSize'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -4667,7 +4707,7 @@ class DownlinkDataNotification(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.11.2-1: Information Elements in a Downlink Data Notification Acknowledge
+# Table 7.2.11.2-1: Information Elements in a Downlink Data Notification Acknowledge
 class DownlinkDataNotificationAcknowledgeIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
@@ -4676,10 +4716,10 @@ class DownlinkDataNotificationAcknowledgeIEs(GTPCIEs):
         (1, 0)   : (IMSI, 'IMSI'),
         (3, 0)   : (Recovery, 'Recovery'),
         (92, 0)  : (DelayValue, 'DataNotificationDelay'),
-        (154, 0) : (Throttling, 'DLLowPriorityTrafficThrottling'),
+        (154, 0) : (Throttling, 'DLlowprioritytrafficThrottling'),
         (156, 0) : (EPCTimer, 'DLBufferingDuration'),
         (187, 0) : (IntegerNumber, 'DLBufferingSuggestedPacketCount'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -4690,7 +4730,7 @@ class DownlinkDataNotificationAcknowledge(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.11.3-1: Information Elements in a Downlink Data Notification Failure Indication
+# Table 7.2.11.3-1: Information Elements in a Downlink Data Notification Failure Indication
 class DownlinkDataNotificationFailureIndicationIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
@@ -4698,7 +4738,7 @@ class DownlinkDataNotificationFailureIndicationIEs(GTPCIEs):
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
         (135, 0) : (NodeType, 'OriginatingNode'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -4709,12 +4749,10 @@ class DownlinkDataNotificationFailureIndication(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.12-1: Information Element in Delete Indirect Data Forwarding Tunnel Request
+# Table 7.2.12-1: Information Element in Delete Indirect Data Forwarding Tunnel Request
 class DeleteIndirectDataForwardingTunnelRequestIEs(GTPCIEs):
-    MAND = {
-        }
     OPT  = {
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -4725,14 +4763,14 @@ class DeleteIndirectDataForwardingTunnelRequest(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.13-1: Information Element in Delete Indirect Data Forwarding Tunnel Response
+# Table 7.2.13-1: Information Element in Delete Indirect Data Forwarding Tunnel Response
 class DeleteIndirectDataForwardingTunnelResponseIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -4743,18 +4781,18 @@ class DeleteIndirectDataForwardingTunnelResponse(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.14-3: Overload Control Information within Modify Bearer Command
-class ModifyBearerCommand_OverloadControlInfo(GTPCIEs):
+# Table 7.2.14-3: Overload Control Information within Modify Bearer Command
+# IE Type: 181
+class ModifyBearerCommand_OverloadControlInformation(GTPCIEs):
     MAND = {
-        (156, 0) : (EPCTimer, 'PeriodOfValidity'),
+        (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
         (183, 0) : (SequenceNumber, 'OverloadControlSequenceNumber'),
         }
-    OPT  = {
-        }
 
 
-# extracted from Table 7.2.14.1-2: Bearer Context within Modify Bearer Command
+# Table 7.2.14.1-2: Bearer Context within Modify Bearer Command
+# IE Type: 93
 class ModifyBearerCommand_BearerContext(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
@@ -4764,18 +4802,18 @@ class ModifyBearerCommand_BearerContext(GTPCIEs):
         }
 
 
-# extracted from Table 7.2.14.1-1: Information Elements in a Modify Bearer Command
+# Table 7.2.14.1-1: Information Elements in a Modify Bearer Command
 class ModifyBearerCommandIEs(GTPCIEs):
     MAND = {
         (72, 0)  : (AMBR, 'APNAggregateMaximumBitRate'),
         (93, 0)  : (ModifyBearerCommand_BearerContext, 'BearerContext'),
         }
     OPT  = {
-        (87, 0)  : (FTEID, 'SenderFTEIDForControlPlane'),
-        (180, 2) : (ModifyBearerCommand_OverloadControlInfo, 'TWANePDGsOverloadControlInfo'),
-        (180, 1) : (ModifyBearerCommand_OverloadControlInfo, 'SGWsOverloadControlInfo'),
-        (180, 0) : (ModifyBearerCommand_OverloadControlInfo, 'MMES4SGSNsOverloadControlInfo'),
-        255      : (PrivExt, 'PrivExt'),
+        (87, 0)  : (FTEID, 'SenderFTEIDforControlPlane'),
+        (181, 0) : (ModifyBearerCommand_OverloadControlInformation, 'MMES4SGSNsOverloadControlInformation'),
+        (181, 1) : (ModifyBearerCommand_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (181, 2) : (ModifyBearerCommand_OverloadControlInformation, 'TWANePDGsOverloadControlInformation'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -4786,29 +4824,30 @@ class ModifyBearerCommand(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.14-2: Overload Control Information within Modify Bearer Failure Indication
-class ModifyBearerFailureIndication_OverloadControlInfo(GTPCIEs):
+# Table 7.2.14-2: Overload Control Information within Modify Bearer Failure Indication
+# IE Type: 180
+class ModifyBearerFailureIndication_OverloadControlInformation(GTPCIEs):
     MAND = {
-        (156, 0) : (EPCTimer, 'PeriodOfValidity'),
+        (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
         (183, 0) : (SequenceNumber, 'OverloadControlSequenceNumber'),
         }
     OPT  = {
-        (71, 0)  : (APN, 'ListOfAccessPointName'),
+        (71, 0)  : (APN, 'APN'),
         }
 
 
-# extracted from Table 7.2.14.2-1: Information Elements in a Modify Bearer Failure Indication
+# Table 7.2.14.2-1: Information Elements in a Modify Bearer Failure Indication
 class ModifyBearerFailureIndicationIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
-        (77, 0)  : (Ind, 'IndFlags'),
-        (180, 1) : (ModifyBearerFailureIndication_OverloadControlInfo, 'SGWsOverloadControlInfo'),
-        (180, 0) : (ModifyBearerFailureIndication_OverloadControlInfo, 'PGWsOverloadControlInfo'),
-        255      : (PrivExt, 'PrivExt'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
+        (180, 0) : (ModifyBearerFailureIndication_OverloadControlInformation, 'PGWsOverloadControlInformation'),
+        (180, 1) : (ModifyBearerFailureIndication_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -4819,30 +4858,43 @@ class ModifyBearerFailureIndication(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.15-4: Overload Control Information within Update Bearer Request
-class UpdateBearerRequest_OverloadControlInfo(GTPCIEs):
+# Table 7.2.15-5: PGW Change Info within Update Bearer Request
+# IE Type: 214
+class UpdateBearerRequest_PGWChangeInfo(GTPCIEs):
+    OPT  = {
+        (74, 0)  : (IPAddress, 'AlternativePGWCSMFIPAddress'),
+        (74, 1)  : (IPAddress, 'NewPGWCSMFIPAddress'),
+        (215, 0) : (PGWSetFQDN, 'PGWSetFQDN'),
+        }
+
+
+# Table 7.2.15-4: Overload Control Information within Update Bearer Request
+# IE Type: 180
+class UpdateBearerRequest_OverloadControlInformation(GTPCIEs):
     MAND = {
-        (156, 0) : (EPCTimer, 'PeriodOfValidity'),
+        (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
         (183, 0) : (SequenceNumber, 'OverloadControlSequenceNumber'),
         }
     OPT  = {
-        (71, 0)  : (APN, 'ListOfAccessPointName'),
+        (71, 0)  : (APN, 'APN'),
         }
 
 
-# extracted from Table 7.2.15-3: Load Control Information within Update Bearer Request
-class UpdateBearerRequest_LoadControlInfo(GTPCIEs):
+# Table 7.2.15-3: Load Control Information within Update Bearer Request
+# IE Type: 181
+class UpdateBearerRequest_LoadControlInformation(GTPCIEs):
     MAND = {
         (182, 0) : (Metric, 'LoadMetric'),
         (183, 0) : (SequenceNumber, 'LoadControlSequenceNumber'),
         }
     OPT  = {
-        (184, 0) : (APNAndRelativeCapacity, 'ListOfAPNAndRelativeCapacity'),
+        (184, 0) : (APNAndRelativeCapacity, 'ListofAPNAndRelativeCapacity'),
         }
 
 
-# extracted from Table 7.2.15-2: Bearer Context within Update Bearer Request
+# Table 7.2.15-2: Bearer Context within Update Bearer Request
+# IE Type: 93
 class UpdateBearerRequest_BearerContext(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
@@ -4852,35 +4904,36 @@ class UpdateBearerRequest_BearerContext(GTPCIEs):
         (80, 0)  : (BearerQoS, 'BearerLevelQoS'),
         (84, 0)  : (BearerTFT, 'TFT'),
         (97, 0)  : (BearerFlags, 'BearerFlags'),
-        (163, 0) : (AdditionalPCO, 'AdditionalPCO'),
-        (197, 0) : (EPCO, 'ExtendedPCO'),
+        (163, 0) : (APCO, 'APCO'),
+        (197, 0) : (EPCO, 'ExtendedProtocolConfigurationOptions'),
         (203, 0) : (MaximumPacketLossRate, 'MaximumPacketLossRate'),
         }
 
 
-# extracted from Table 7.2.15-1: Information Elements in an Update Bearer Request
+# Table 7.2.15-1: Information Elements in an Update Bearer Request
 class UpdateBearerRequestIEs(GTPCIEs):
     MAND = {
         (72, 0)  : (AMBR, 'AggregateMaximumBitRate'),
-        (93, 0)  : (UpdateBearerRequest_BearerContext, 'BearerContexts'),
+        (93, 0)  : (UpdateBearerRequest_BearerContext, 'BearerContext'),
         }
     OPT  = {
-        (77, 0)  : (Ind, 'IndFlags'),
+        (77, 0)  : (Indication, 'Indicationflags'),
         (78, 0)  : (PCO, 'PCO'),
         (100, 0) : (PTI, 'PTI'),
         (118, 0) : (FContainer, 'NBIFOMContainer'),
         (131, 0) : (ChangeReportingAction, 'ChangeReportingAction'),
-        (132, 1) : (FQCSID, 'SGWFQCSID'),
         (132, 0) : (FQCSID, 'PGWFQCSID'),
-        (146, 0) : (CSGInfoReportingAction, 'CSGInfoReportingAction'),
-        (165, 0) : (HeNBInfoReporting, 'HeNBInfoReporting'),
+        (132, 1) : (FQCSID, 'SGWFQCSID'),
+        (146, 0) : (CSGInformationReportingAction, 'CSGInformationReportingAction'),
+        (165, 0) : (HeNBInformationReporting, 'HeNBInformationReporting'),
         (177, 0) : (PresenceReportingAreaAction, 'PresenceReportingAreaAction'),
-        (180, 0) : (UpdateBearerRequest_OverloadControlInfo, 'PGWsOverloadControlInfo'),
-        (180, 1) : (UpdateBearerRequest_OverloadControlInfo, 'SGWsOverloadControlInfo'),
-        (181, 0) : (UpdateBearerRequest_LoadControlInfo, 'PGWsNodeLevelLoadControlInfo'),
-        (181, 1) : (UpdateBearerRequest_LoadControlInfo, 'PGWsAPNLevelLoadControlInfo'),
-        (181, 2) : (UpdateBearerRequest_LoadControlInfo, 'SGWsNodeLevelLoadControlInfo'),
-        255      : (PrivExt, 'PrivExt'),
+        (180, 0) : (UpdateBearerRequest_OverloadControlInformation, 'PGWsOverloadControlInformation'),
+        (180, 1) : (UpdateBearerRequest_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (181, 0) : (UpdateBearerRequest_LoadControlInformation, 'PGWsnodelevelLoadControlInformation'),
+        (181, 1) : (UpdateBearerRequest_LoadControlInformation, 'PGWsAPNlevelLoadControlInformation'),
+        (181, 2) : (UpdateBearerRequest_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
+        (214, 0) : (UpdateBearerRequest_PGWChangeInfo, 'PGWChangeInfo'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -4891,18 +4944,18 @@ class UpdateBearerRequest(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.16-3: Overload Control Information within Update Bearer Response
-class UpdateBearerResponse_OverloadControlInfo(GTPCIEs):
+# Table 7.2.16-3: Overload Control Information within Update Bearer Response
+# IE Type: 180
+class UpdateBearerResponse_OverloadControlInformation(GTPCIEs):
     MAND = {
-        (156, 0) : (EPCTimer, 'PeriodOfValidity'),
+        (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
         (183, 0) : (SequenceNumber, 'OverloadControlSequenceNumber'),
         }
-    OPT  = {
-        }
 
 
-# extracted from Table 7.2.16-2: Bearer Context within Update Bearer Response
+# Table 7.2.16-2: Bearer Context within Update Bearer Response
+# IE Type: 93
 class UpdateBearerResponse_BearerContext(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
@@ -4913,38 +4966,39 @@ class UpdateBearerResponse_BearerContext(GTPCIEs):
         (87, 0)  : (FTEID, 'S4USGSNFTEID'),
         (87, 1)  : (FTEID, 'S12RNCFTEID'),
         (172, 0) : (RANNASCause, 'RANNASCause'),
-        (197, 0) : (EPCO, 'ExtendedPCO'),
+        (197, 0) : (EPCO, 'ExtendedProtocolConfigurationOptions'),
         }
 
 
-# extracted from Table 7.2.16-1: Information Elements in an Update Bearer Response
+# Table 7.2.16-1: Information Elements in an Update Bearer Response
 class UpdateBearerResponseIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
-        (93, 0)  : (UpdateBearerResponse_BearerContext, 'BearerContexts'),
+        (93, 0)  : (UpdateBearerResponse_BearerContext, 'BearerContext'),
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
+        (74, 0)  : (IPAddress, 'MMES4SGSNIdentifier'),
         (74, 0)  : (IPAddress, 'UELocalIPAddress'),
-        (77, 0)  : (Ind, 'IndFlags'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
         (78, 0)  : (PCO, 'PCO'),
-        (86, 0)  : (ULI, 'UserLocationInfo'),
+        (86, 0)  : (ULI, 'ULI'),
         (114, 0) : (UETimeZone, 'UETimeZone'),
         (118, 0) : (FContainer, 'NBIFOMContainer'),
-        (126, 1) : (PortNumber, 'UETCPPort'),
         (126, 0) : (PortNumber, 'UEUDPPort'),
-        (132, 3) : (FQCSID, 'TWANFQCSID'),
-        (132, 2) : (FQCSID, 'EPDGFQCSID'),
-        (132, 1) : (FQCSID, 'SGWFQCSID'),
+        (126, 1) : (PortNumber, 'UETCPPort'),
         (132, 0) : (FQCSID, 'MMEFQCSID'),
-        (169, 0) : (TWANIdent, 'TWANIdent'),
-        (169, 1) : (TWANIdent, 'WLANLocationInfo'),
-        (178, 0) : (PresenceReportingAreaInfo, 'PresenceReportingAreaInfo'),
-        (179, 1) : (TWANIdentTimestamp, 'WLANLocationTimestamp'),
-        (180, 2) : (UpdateBearerResponse_OverloadControlInfo, 'TWANePDGsOverloadControlInfo'),
-        (180, 1) : (UpdateBearerResponse_OverloadControlInfo, 'SGWsOverloadControlInfo'),
-        (180, 0) : (UpdateBearerResponse_OverloadControlInfo, 'MMES4SGSNsOverloadControlInfo'),
-        255      : (PrivExt, 'PrivExt'),
+        (132, 1) : (FQCSID, 'SGWFQCSID'),
+        (132, 2) : (FQCSID, 'ePDGFQCSID'),
+        (132, 3) : (FQCSID, 'TWANFQCSID'),
+        (169, 0) : (TWANIdentifier, 'TWANIdentifier'),
+        (169, 1) : (TWANIdentifier, 'WLANLocationInformation'),
+        (178, 0) : (PresenceReportingAreaInformation, 'PresenceReportingAreaInformation'),
+        (179, 1) : (TWANIdentifierTimestamp, 'WLANLocationTimestamp'),
+        (180, 0) : (UpdateBearerResponse_OverloadControlInformation, 'MMES4SGSNsOverloadControlInformation'),
+        (180, 1) : (UpdateBearerResponse_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (180, 2) : (UpdateBearerResponse_OverloadControlInformation, 'TWANePDGsOverloadControlInformation'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -4955,18 +5009,18 @@ class UpdateBearerResponse(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.17.1-3: Overload Control Information within Delete Bearer Command
-class DeleteBearerCommand_OverloadControlInfo(GTPCIEs):
+# Table 7.2.17.1-3: Overload Control Information within Delete Bearer Command
+# IE Type: 180
+class DeleteBearerCommand_OverloadControlInformation(GTPCIEs):
     MAND = {
-        (156, 0) : (EPCTimer, 'PeriodOfValidity'),
+        (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
         (183, 0) : (SequenceNumber, 'OverloadControlSequenceNumber'),
         }
-    OPT  = {
-        }
 
 
-# extracted from Table 7.2.17.1-2: Bearer Context within Delete Bearer Command
+# Table 7.2.17.1-2: Bearer Context within Delete Bearer Command
+# IE Type: 93
 class DeleteBearerCommand_BearerContext(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
@@ -4977,20 +5031,20 @@ class DeleteBearerCommand_BearerContext(GTPCIEs):
         }
 
 
-# extracted from Table 7.2.17.1-1: Information Elements in Delete Bearer Command
+# Table 7.2.17.1-1: Information Elements in Delete Bearer Command
 class DeleteBearerCommandIEs(GTPCIEs):
     MAND = {
-        (93, 0)  : (DeleteBearerCommand_BearerContext, 'BearerContexts'),
+        (93, 0)  : (DeleteBearerCommand_BearerContext, 'BearerContext'),
         }
     OPT  = {
-        (86, 0)  : (ULI, 'UserLocationInfo'),
-        (87, 0)  : (FTEID, 'SenderFTEIDForControlPlane'),
+        (86, 0)  : (ULI, 'ULI'),
+        (87, 0)  : (FTEID, 'SenderFTEIDforControlPlane'),
         (114, 0) : (UETimeZone, 'UETimeZone'),
         (170, 0) : (ULITimestamp, 'ULITimestamp'),
-        (180, 1) : (DeleteBearerCommand_OverloadControlInfo, 'SGWsOverloadControlInfo'),
-        (180, 0) : (DeleteBearerCommand_OverloadControlInfo, 'MMES4SGSNsOverloadControlInfo'),
+        (180, 0) : (DeleteBearerCommand_OverloadControlInformation, 'MMES4SGSNsOverloadControlInformation'),
+        (180, 1) : (DeleteBearerCommand_OverloadControlInformation, 'SGWsOverloadControlInformation'),
         (201, 0) : (SecondaryRATUsageDataReport, 'SecondaryRATUsageDataReport'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5001,29 +5055,29 @@ class DeleteBearerCommand(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.17-3: Overload Control Information within Delete Bearer Failure Indication
-class DeleteBearerFailureIndication_OverloadControlInfo(GTPCIEs):
+# Table 7.2.17-3: Overload Control Information within Delete Bearer Failure Indication
+# IE Type: 180
+class DeleteBearerFailureIndication_OverloadControlInformation(GTPCIEs):
     MAND = {
-        (156, 0) : (EPCTimer, 'PeriodOfValidity'),
+        (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
         (183, 0) : (SequenceNumber, 'OverloadControlSequenceNumber'),
         }
     OPT  = {
-        (71, 0)  : (APN, 'ListOfAccessPointName'),
+        (71, 0)  : (APN, 'APN'),
         }
 
 
-# extracted from Table 7.2.17.2-2: Bearer Context within Delete Bearer Failure Indication
+# Table 7.2.17.2-2: Bearer Context within Delete Bearer Failure Indication
+# IE Type: 93
 class DeleteBearerFailureIndication_BearerContext(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'EPSBearerID'),
         }
-    OPT  = {
-        }
 
 
-# extracted from Table 7.2.17.2-1: Information Elements in a Delete Bearer Failure Indication
+# Table 7.2.17.2-1: Information Elements in a Delete Bearer Failure Indication
 class DeleteBearerFailureIndicationIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
@@ -5031,10 +5085,10 @@ class DeleteBearerFailureIndicationIEs(GTPCIEs):
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
-        (77, 0)  : (Ind, 'IndFlags'),
-        (180, 1) : (DeleteBearerFailureIndication_OverloadControlInfo, 'SGWsOverloadControlInfo'),
-        (180, 0) : (DeleteBearerFailureIndication_OverloadControlInfo, 'PGWsOverloadControlInfo'),
-        255      : (PrivExt, 'PrivExt'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
+        (180, 0) : (DeleteBearerFailureIndication_OverloadControlInformation, 'PGWsOverloadControlInformation'),
+        (180, 1) : (DeleteBearerFailureIndication_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5045,34 +5099,35 @@ class DeleteBearerFailureIndication(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.18-2: Bearer Context within Create Indirect Data Forwarding Tunnel Request
+# Table 7.2.18-2: Bearer Context within Create Indirect Data Forwarding Tunnel Request
+# IE Type: 93
 class CreateIndirectDataForwardingTunnelRequest_BearerContext(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
         }
     OPT  = {
-        (87, 4)  : (FTEID, 'ENodeBFTEIDForULDataForwarding'),
-        (87, 3)  : (FTEID, 'RNCFTEIDForDLDataForwarding'),
-        (87, 5)  : (FTEID, 'SGWFTEIDForULDataForwarding'),
-        (87, 0)  : (FTEID, 'ENodeBFTEIDForDLDataForwarding'),
-        (87, 1)  : (FTEID, 'SGWUPFFTEIDForDLDataForwarding'),
-        (87, 6)  : (FTEID, 'MMEFTEIDForDLDataForwarding'),
-        (87, 2)  : (FTEID, 'SGSNFTEIDForDLDataForwarding'),
+        (87, 0)  : (FTEID, 'eNodeBFTEIDforDLdataforwarding'),
+        (87, 1)  : (FTEID, 'SGWUPFFTEIDforDLdataforwarding'),
+        (87, 2)  : (FTEID, 'SGSNFTEIDforDLdataforwarding'),
+        (87, 3)  : (FTEID, 'RNCFTEIDforDLdataforwarding'),
+        (87, 4)  : (FTEID, 'eNodeBFTEIDforULdataforwarding'),
+        (87, 5)  : (FTEID, 'SGWFTEIDforULdataforwarding'),
+        (87, 6)  : (FTEID, 'MMEFTEIDforDLdataforwarding'),
         }
 
 
-# extracted from Table 7.2.18-1: Information Elements in a Create Indirect Data Forwarding Tunnel Request
+# Table 7.2.18-1: Information Elements in a Create Indirect Data Forwarding Tunnel Request
 class CreateIndirectDataForwardingTunnelRequestIEs(GTPCIEs):
     MAND = {
-        (93, 0)  : (CreateIndirectDataForwardingTunnelRequest_BearerContext, 'BearerContexts'),
+        (93, 0)  : (CreateIndirectDataForwardingTunnelRequest_BearerContext, 'BearerContext'),
         }
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
         (3, 0)   : (Recovery, 'Recovery'),
-        (75, 0)  : (MEI, 'MEIdentity'),
-        (77, 0)  : (Ind, 'IndFlags'),
-        (87, 0)  : (FTEID, 'SenderFTEIDForControlPlane'),
-        255      : (PrivExt, 'PrivExt'),
+        (75, 0)  : (MEI, 'MEI'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
+        (87, 0)  : (FTEID, 'SenderFTEIDforControlPlane'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5083,32 +5138,33 @@ class CreateIndirectDataForwardingTunnelRequest(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.19-2: Bearer Context within Create Indirect Data Forwarding Tunnel Response
+# Table 7.2.19-2: Bearer Context within Create Indirect Data Forwarding Tunnel Response
+# IE Type: 93
 class CreateIndirectDataForwardingTunnelResponse_BearerContext(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'EPSBearerID'),
         }
     OPT  = {
-        (87, 4)  : (FTEID, 'S1USGWFTEIDForULDataForwarding'),
-        (87, 3)  : (FTEID, 'SGWFTEIDForDLDataForwarding'),
-        (87, 5)  : (FTEID, 'SGWFTEIDForULDataForwarding'),
-        (87, 0)  : (FTEID, 'S1USGWFTEIDForDLDataForwarding'),
-        (87, 1)  : (FTEID, 'S12SGWFTEIDForDLDataForwarding'),
-        (87, 2)  : (FTEID, 'S4USGWFTEIDForDLDataForwarding'),
+        (87, 0)  : (FTEID, 'S1USGWFTEIDforDLdataforwarding'),
+        (87, 1)  : (FTEID, 'S12SGWFTEIDforDLdataforwarding'),
+        (87, 2)  : (FTEID, 'S4USGWFTEIDforDLdataforwarding'),
+        (87, 3)  : (FTEID, 'SGWFTEIDforDLdataforwarding'),
+        (87, 4)  : (FTEID, 'S1USGWFTEIDforULdataforwarding'),
+        (87, 5)  : (FTEID, 'SGWFTEIDforULdataforwarding'),
         }
 
 
-# extracted from Table 7.2.19-1: Information Elements in a Create Indirect Data Forwarding Tunnel Response
+# Table 7.2.19-1: Information Elements in a Create Indirect Data Forwarding Tunnel Response
 class CreateIndirectDataForwardingTunnelResponseIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
-        (93, 0)  : (CreateIndirectDataForwardingTunnelResponse_BearerContext, 'BearerContexts'),
+        (93, 0)  : (CreateIndirectDataForwardingTunnelResponse_BearerContext, 'BearerContext'),
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
-        (87, 0)  : (FTEID, 'SenderFTEIDForControlPlane'),
-        255      : (PrivExt, 'PrivExt'),
+        (87, 0)  : (FTEID, 'SenderFTEIDforControlPlane'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5119,16 +5175,14 @@ class CreateIndirectDataForwardingTunnelResponse(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.21-1: Information Element in Release Access Bearers Request
+# Table 7.2.21-1: Information Element in Release Access Bearers Request
 class ReleaseAccessBearersRequestIEs(GTPCIEs):
-    MAND = {
-        }
     OPT  = {
-        (73, 0)  : (EBI, 'ListOfRABs'),
-        (77, 0)  : (Ind, 'IndFlags'),
+        (73, 0)  : (EBI, 'ListofRABs'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
         (135, 0) : (NodeType, 'OriginatingNode'),
         (201, 0) : (SecondaryRATUsageDataReport, 'SecondaryRATUsageDataReport'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5139,38 +5193,36 @@ class ReleaseAccessBearersRequest(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.22-3: Overload Control Information within Release Access Bearers Response
-class ReleaseAccessBearersResponse_OverloadControlInfo(GTPCIEs):
+# Table 7.2.22-3: Overload Control Information within Release Access Bearers Response
+# IE Type: 180
+class ReleaseAccessBearersResponse_OverloadControlInformation(GTPCIEs):
     MAND = {
-        (156, 0) : (EPCTimer, 'PeriodOfValidity'),
+        (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
         (183, 0) : (SequenceNumber, 'OverloadControlSequenceNumber'),
         }
-    OPT  = {
-        }
 
 
-# extracted from Table 7.2.22-2: Load Control Information within Release Access Bearers Response
-class ReleaseAccessBearersResponse_LoadControlInfo(GTPCIEs):
+# Table 7.2.22-2: Load Control Information within Release Access Bearers Response
+# IE Type: 181
+class ReleaseAccessBearersResponse_LoadControlInformation(GTPCIEs):
     MAND = {
         (182, 0) : (Metric, 'LoadMetric'),
         (183, 0) : (SequenceNumber, 'LoadControlSequenceNumber'),
         }
-    OPT  = {
-        }
 
 
-# extracted from Table 7.2.22-1: Information Element in Release Access Bearers Response
+# Table 7.2.22-1: Information Element in Release Access Bearers Response
 class ReleaseAccessBearersResponseIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
-        (77, 0)  : (Ind, 'IndFlags'),
-        (180, 0) : (ReleaseAccessBearersResponse_OverloadControlInfo, 'SGWsOverloadControlInfo'),
-        (181, 0) : (ReleaseAccessBearersResponse_LoadControlInfo, 'SGWsNodeLevelLoadControlInfo'),
-        255      : (PrivExt, 'PrivExt'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
+        (180, 0) : (ReleaseAccessBearersResponse_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (181, 0) : (ReleaseAccessBearersResponse_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5181,13 +5233,11 @@ class ReleaseAccessBearersResponse(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.23-1: Information Elements in a Stop Paging Indication
+# Table 7.2.23-1: Information Elements in a Stop Paging Indication
 class StopPagingIndicationIEs(GTPCIEs):
-    MAND = {
-        }
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5198,39 +5248,37 @@ class StopPagingIndication(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.24-3: Bearer Context to be removed within Modify Access Bearers Request
-class ModifyAccessBearersRequest_BearerContextToBeRemoved(GTPCIEs):
+# Table 7.2.24-3: Bearer Context to be removed within Modify Access Bearers Request
+# IE Type: 93
+class ModifyAccessBearersRequest_BearerContexttoberemoved(GTPCIEs):
+    MAND = {
+        (73, 0)  : (EBI, 'EPSBearerID'),
+        }
+
+
+# Table 7.2.24-2: Bearer Context to be modified within Modify Access Bearers Request
+# IE Type: 93
+class ModifyAccessBearersRequest_BearerContexttobemodified(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
         }
     OPT  = {
-        }
-
-
-# extracted from Table 7.2.24-2: Bearer Context to be modified within Modify Access Bearers Request
-class ModifyAccessBearersRequest_BearerContextToBeModified(GTPCIEs):
-    MAND = {
-        (73, 0)  : (EBI, 'EPSBearerID'),
-        }
-    OPT  = {
-        (87, 0)  : (FTEID, 'S1UENodeBFTEID'),
+        (87, 0)  : (FTEID, 'S1UeNodeBFTEID'),
         (87, 1)  : (FTEID, 'S11UMMEFTEID'),
         }
 
 
-# extracted from Table 7.2.24-1 : Information Elements in a Modify Access Bearers Request
+# Table 7.2.24-1: Information Elements in a Modify Access Bearers Request
 class ModifyAccessBearersRequestIEs(GTPCIEs):
-    MAND = {
-        }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
-        (77, 0)  : (Ind, 'IndFlags'),
-        (87, 0)  : (FTEID, 'SenderFTEIDForControlPlane'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
+        (87, 0)  : (FTEID, 'SenderFTEIDforControlPlane'),
         (92, 0)  : (DelayValue, 'DelayDownlinkPacketNotificationRequest'),
-        (93, 1)  : (ModifyAccessBearersRequest_BearerContextToBeRemoved, 'BearerContextsToBeRemoved'),
-        (93, 0)  : (ModifyAccessBearersRequest_BearerContextToBeModified, 'BearerContextsToBeModified'),
+        (93, 0)  : (ModifyAccessBearersRequest_BearerContexttobemodified, 'BearerContexttobemodified'),
+        (93, 1)  : (ModifyAccessBearersRequest_BearerContexttoberemoved, 'BearerContexttoberemoved'),
         (201, 0) : (SecondaryRATUsageDataReport, 'SecondaryRATUsageDataReport'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5241,39 +5289,37 @@ class ModifyAccessBearersRequest(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.25-5: Overload Control Information within Modify Access Bearers Response
-class ModifyAccessBearersResponse_OverloadControlInfo(GTPCIEs):
+# Table 7.2.25-5: Overload Control Information within Modify Access Bearers Response
+# IE Type: 180
+class ModifyAccessBearersResponse_OverloadControlInformation(GTPCIEs):
     MAND = {
-        (156, 0) : (EPCTimer, 'PeriodOfValidity'),
+        (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
         (183, 0) : (SequenceNumber, 'OverloadControlSequenceNumber'),
         }
-    OPT  = {
-        }
 
 
-# extracted from Table 7.2.25-4: Load Control Information within Modify Access Bearers Response
-class ModifyAccessBearersResponse_LoadControlInfo(GTPCIEs):
+# Table 7.2.25-4: Load Control Information within Modify Access Bearers Response
+# IE Type: 181
+class ModifyAccessBearersResponse_LoadControlInformation(GTPCIEs):
     MAND = {
         (182, 0) : (Metric, 'LoadMetric'),
         (183, 0) : (SequenceNumber, 'LoadControlSequenceNumber'),
         }
-    OPT  = {
-        }
 
 
-# extracted from Table 7.2.25-3: Bearer Context marked for removal within Modify Access Bearers Response
-class ModifyAccessBearersResponse_BearerContextMarkedForRemoval(GTPCIEs):
+# Table 7.2.25-3: Bearer Context marked for removal within Modify Access Bearers Response
+# IE Type: 93
+class ModifyAccessBearersResponse_BearerContextmarkedforremoval(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'EPSBearerID'),
         }
-    OPT  = {
-        }
 
 
-# extracted from Table 7.2.25-2: Bearer Context modified within Modify Access Bearers Response
-class ModifyAccessBearersResponse_BearerContextModified(GTPCIEs):
+# Table 7.2.25-2: Bearer Context modified within Modify Access Bearers Response
+# IE Type: 93
+class ModifyAccessBearersResponse_BearerContextmodified(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'EPSBearerID'),
@@ -5284,19 +5330,19 @@ class ModifyAccessBearersResponse_BearerContextModified(GTPCIEs):
         }
 
 
-# extracted from Table 7.2.25-1: Information Elements in a Modify Access Bearers Response
+# Table 7.2.25-1: Information Elements in a Modify Access Bearers Response
 class ModifyAccessBearersResponseIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
-        (77, 0)  : (Ind, 'IndFlags'),
-        (93, 1)  : (ModifyAccessBearersResponse_BearerContextMarkedForRemoval, 'BearerContextsMarkedForRemoval'),
-        (93, 0)  : (ModifyAccessBearersResponse_BearerContextModified, 'BearerContextsModified'),
-        (180, 0) : (ModifyAccessBearersResponse_OverloadControlInfo, 'SGWsOverloadControlInfo'),
-        (181, 0) : (ModifyAccessBearersResponse_LoadControlInfo, 'SGWsNodeLevelLoadControlInfo'),
-        255      : (PrivExt, 'PrivExt'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
+        (93, 0)  : (ModifyAccessBearersResponse_BearerContextmodified, 'BearerContextmodified'),
+        (93, 1)  : (ModifyAccessBearersResponse_BearerContextmarkedforremoval, 'BearerContextmarkedforremoval'),
+        (180, 0) : (ModifyAccessBearersResponse_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (181, 0) : (ModifyAccessBearersResponse_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5307,33 +5353,29 @@ class ModifyAccessBearersResponse(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.26-2: Remote UE Context Connected within Remote UE Report Notification
-class RemoteUEReportNotification_RemoteUEContextConnected(GTPCIEs):
-    MAND = {
-        (192, 0) : (RemoteUserID, 'RemoteUserID'),
-        (193, 0) : (RemoteUEIPInfo, 'RemoteUEIPInfo'),
-        }
-    OPT  = {
-        }
-
-
-# extracted from Table 7.2.26-3: Remote UE Context Disconnected with Remote UE Report Notification 
+# Table 7.2.26-3: Remote UE Context Disconnected with Remote UE Report Notification
+# IE Type: 191
 class RemoteUEReportNotification_RemoteUEContextDisconnected(GTPCIEs):
     MAND = {
         (192, 0) : (RemoteUserID, 'RemoteUserID'),
         }
-    OPT  = {
-        }
 
 
-# extracted from Table 7.2.26-1: Information Elements in Remote UE Report Notification
-class RemoteUEReportNotificationIEs(GTPCIEs):
+# Table 7.2.26-2: Remote UE Context Connected within Remote UE Report Notification
+# IE Type: 191
+class RemoteUEReportNotification_RemoteUEContextConnected(GTPCIEs):
     MAND = {
+        (192, 0) : (RemoteUserID, 'RemoteUserID'),
+        (193, 0) : (RemoteUEIPInformation, 'RemoteUEIPInformation'),
         }
+
+
+# Table 7.2.26-1: Information Elements in Remote UE Report Notification
+class RemoteUEReportNotificationIEs(GTPCIEs):
     OPT  = {
         (191, 0) : (RemoteUEReportNotification_RemoteUEContextConnected, 'RemoteUEContextConnected'),
         (191, 1) : (RemoteUEReportNotification_RemoteUEContextDisconnected, 'RemoteUEContextDisconnected'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5344,12 +5386,13 @@ class RemoteUEReportNotification(GTPCMsg):
         )
 
 
-# extracted from Table 7.2.27-1: Information Elements in Remote UE Report Acknowledge
+# Table 7.2.27-1: Information Elements in Remote UE Report Acknowledge
 class RemoteUEReportAcknowledgeIEs(GTPCIEs):
     MAND = {
+        (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5360,129 +5403,161 @@ class RemoteUEReportAcknowledge(GTPCMsg):
         )
 
 
-# extracted from Table 7.3.1-5: MME UE SCEF PDN Connections within Forward Relocation Request
+# Table 7.3.1-8: PGW Change Info with Forward Relocation Request
+# IE Type: 214
+class ForwardRelocationRequest_PGWChangeInfo(GTPCIEs):
+    OPT  = {
+        (74, 0)  : (IPAddress, 'AlternativePGWCSMFIPAddress'),
+        (215, 0) : (PGWSetFQDN, 'PGWSetFQDN'),
+        }
+
+
+# Table 7.3.1-7: PC5 QoS Parameters within Forward Relocation Request
+# IE Type: 209
+class ForwardRelocationRequest_PC5QoSParameters(GTPCIEs):
+    MAND = {
+        (212, 0) : (PC5QoSFlow, 'PC5QoSFlows'),
+        }
+    OPT  = {
+        (211, 0) : (BitRate, 'PC5LinkAggregatedBitRates'),
+        }
+
+
+# Table 7.3.1-6: Subscribed V2X Information within Forward Relocation Request
+# IE Type: 208
+class ForwardRelocationRequest_SubscribedV2XInformation(GTPCIEs):
+    OPT  = {
+        (209, 0) : (ForwardRelocationRequest_PC5QoSParameters, 'PC5QoSParameters'),
+        (210, 0) : (ServicesAuthorized, 'LTEV2XServicesAuthorized'),
+        (210, 1) : (ServicesAuthorized, 'NRV2XServicesAuthorized'),
+        (211, 0) : (BitRate, 'LTEUESidelinkAggregateMaximumBitRate'),
+        (211, 1) : (BitRate, 'NRUESidelinkAggregateMaximumBitRate'),
+        }
+
+
+# Table 7.3.1-5: MME UE SCEF PDN Connections within Forward Relocation Request
+# IE Type: 195
 class ForwardRelocationRequest_MMEUESCEFPDNConnections(GTPCIEs):
     MAND = {
         (71, 0)  : (APN, 'APN'),
         (73, 0)  : (EBI, 'DefaultEPSBearerID'),
-        (176, 0) : (NodeIdent, 'SCEFID'),
-        }
-    OPT  = {
+        (176, 0) : (NodeIdentifier, 'SCEFID'),
         }
 
 
-# extracted from Table 7.3.1-4: Remote UE Context Connected within MME/SGSN UE EPS PDN Connections within Forward Relocation Request
+# Table 7.3.1-4: Remote UE Context Connected within MME/SGSN UE EPS PDN Connections within Forward Relocation Request
+# IE Type: 191
 class ForwardRelocationRequest_MMESGSNUEEPSPDNConnections_RemoteUEContextConnected(GTPCIEs):
     MAND = {
         (192, 0) : (RemoteUserID, 'RemoteUserID'),
-        (193, 0) : (RemoteUEIPInfo, 'RemoteUEIPInfo'),
-        }
-    OPT  = {
+        (193, 0) : (RemoteUEIPInformation, 'RemoteUEIPInformation'),
         }
 
 
-# extracted from Table 7.3.1-3: Bearer Context within MME/SGSN/AMF UE EPS PDN Connections within Forward Relocation Request
+# Table 7.3.1-3: Bearer Context within MME/SGSN/AMF UE EPS PDN Connections within Forward Relocation Request
+# IE Type: 93
 class ForwardRelocationRequest_MMESGSNAMFUEEPSPDNConnections_BearerContext(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
         (80, 0)  : (BearerQoS, 'BearerLevelQoS'),
-        (87, 0)  : (FTEID, 'SGWS1S4S12IPAddressAndTEIDForUserPlane'),
+        (87, 0)  : (FTEID, 'SGWS1S4S12IPAddressandTEIDforuserplane'),
         }
     OPT  = {
         (84, 0)  : (BearerTFT, 'TFT'),
-        (87, 1)  : (FTEID, 'PGWS5S8IPAddressAndTEIDForUserPlane'),
-        (87, 2)  : (FTEID, 'SGWS11IPAddressAndTEIDForUserPlane'),
+        (87, 1)  : (FTEID, 'PGWS5S8IPAddressandTEIDforuserplane'),
+        (87, 2)  : (FTEID, 'SGWS11IPAddressandTEIDforuserplane'),
         (97, 0)  : (BearerFlags, 'BearerFlags'),
         (118, 0) : (FContainer, 'BSSContainer'),
-        (137, 0) : (TI, 'TransactionIdent'),
+        (137, 0) : (TI, 'TransactionIdentifier'),
         }
 
 
-# extracted from Table 7.3.1-2: MME/SGSN/AMF UE EPS PDN Connections within Forward Relocation Request
+# Table 7.3.1-2: MME/SGSN/AMF UE EPS PDN Connections within Forward Relocation Request
+# IE Type: 109
 class ForwardRelocationRequest_MMESGSNAMFUEEPSPDNConnections(GTPCIEs):
     MAND = {
         (71, 0)  : (APN, 'APN'),
         (72, 0)  : (AMBR, 'AggregateMaximumBitRate'),
         (73, 0)  : (EBI, 'LinkedEPSBearerID'),
-        (87, 0)  : (FTEID, 'PGWS5S8IPAddressForControlPlaneOrPMIP'),
+        (87, 0)  : (FTEID, 'PGWS5S8IPAddressforControlPlaneorPMIP'),
         }
     OPT  = {
-        (74, 1)  : (IPAddress, 'IPv6Address'),
         (74, 0)  : (IPAddress, 'IPv4Address'),
-        (77, 0)  : (Ind, 'IndFlags'),
-        (93, 0)  : (ForwardRelocationRequest_MMESGSNAMFUEEPSPDNConnections_BearerContext, 'BearerContexts'),
+        (74, 1)  : (IPAddress, 'IPv6Address'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
+        (93, 0)  : (ForwardRelocationRequest_MMESGSNAMFUEEPSPDNConnections_BearerContext, 'BearerContext'),
         (95, 0)  : (ChargingCharacteristics, 'ChargingCharacteristics'),
         (99, 0)  : (PDNType, 'PDNType'),
         (127, 0) : (APNRestriction, 'APNRestriction'),
         (128, 0) : (SelectionMode, 'SelectionMode'),
         (131, 0) : (ChangeReportingAction, 'ChangeReportingAction'),
-        (136, 0) : (FQDN, 'PGWNodeName'),
+        (136, 0) : (FQDN, 'PGWnodename'),
         (136, 1) : (FQDN, 'LocalHomeNetworkID'),
-        (146, 0) : (CSGInfoReportingAction, 'CSGInfoReportingAction'),
-        (157, 0) : (SignallingPriorityInd, 'SignallingPriorityInd'),
-        (165, 0) : (HeNBInfoReporting, 'HeNBInfoReporting'),
+        (146, 0) : (CSGInformationReportingAction, 'CSGInformationReportingAction'),
+        (157, 0) : (SignallingPriorityIndication, 'SignallingPriorityIndication'),
+        (165, 0) : (HeNBInformationReporting, 'HeNBInformationReporting'),
         (167, 0) : (ChangeToReportFlags, 'ChangeToReportFlags'),
         (177, 0) : (PresenceReportingAreaAction, 'PresenceReportingAreaAction'),
-        (185, 0) : (WLANOffloadabilityInd, 'WLANOffloadabilityInd'),
+        (185, 0) : (WLANOffloadabilityIndication, 'WLANOffloadabilityIndication'),
         (191, 0) : (ForwardRelocationRequest_MMESGSNUEEPSPDNConnections_RemoteUEContextConnected, 'RemoteUEContextConnected'),
         (196, 0) : (HeaderCompressionConfiguration, 'HeaderCompressionConfiguration'),
+        (214, 0) : (ForwardRelocationRequest_PGWChangeInfo, 'PGWChangeInfo'),
         }
 
 
-# extracted from Table 7.3.1-1: Information Elements in a Forward Relocation Request
+# Table 7.3.1-1: Information Elements in a Forward Relocation Request
 class ForwardRelocationRequestIEs(GTPCIEs):
     MAND = {
-        (87, 0)  : (FTEID, 'SendersFTEIDForControlPlane'),
+        (87, 0)  : (FTEID, 'SendersFTEIDforControlPlane'),
         (103, 0) : (MMContext, 'MMESGSNAMFUEMMContext'),
-        (104, 0) : (MMContext, 'MMESGSNAMFUEMMContext'),
-        (105, 0) : (MMContext, 'MMESGSNAMFUEMMContext'),
-        (106, 0) : (MMContext, 'MMESGSNAMFUEMMContext'),
-        (107, 0) : (MMContext, 'MMESGSNAMFUEMMContext'),
-        (108, 0) : (MMContext, 'MMESGSNAMFUEMMContext'),
         }
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
         (3, 0)   : (Recovery, 'Recovery'),
         (51, 0)  : (STNSR, 'STNSR'),
-        (74, 1)  : (IPAddress, '1xIWSS102IPAddress'),
-        (74, 0)  : (IPAddress, 'HRPDAccessNodeS101IPAddress'),
-        (76, 1)  : (MSISDN, 'MSISDN'),
+        (74, 0)  : (IPAddress, 'HRPDaccessnodeS101IPaddress'),
+        (74, 1)  : (IPAddress, '1xIWSS102IPaddress'),
         (76, 0)  : (MSISDN, 'CMSISDN'),
-        (77, 0)  : (Ind, 'IndFlags'),
+        (76, 1)  : (MSISDN, 'MSISDN'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
         (83, 0)  : (ServingNetwork, 'ServingNetwork'),
-        (87, 1)  : (FTEID, 'SGWS11S4IPAddressAndTEIDForControlPlane'),
-        (96, 0)  : (TraceInfo, 'TraceInfo'),
+        (87, 1)  : (FTEID, 'SGWS11S4IPAddressandTEIDforControlPlane'),
+        (96, 0)  : (TraceInformation, 'TraceInformation'),
         (109, 0) : (ForwardRelocationRequest_MMESGSNAMFUEEPSPDNConnections, 'MMESGSNAMFUEEPSPDNConnections'),
         (114, 0) : (UETimeZone, 'UETimeZone'),
-        (118, 2) : (FContainer, 'BSSContainer'),
-        (118, 1) : (FContainer, 'UTRANTransparentContainer'),
         (118, 0) : (FContainer, 'EUTRANTransparentContainer'),
-        (119, 2) : (FCause, 'BSSGPCause'),
+        (118, 1) : (FContainer, 'UTRANTransparentContainer'),
+        (118, 2) : (FContainer, 'BSSContainer'),
         (119, 0) : (FCause, 'S1APCause'),
         (119, 1) : (FCause, 'RANAPCause'),
+        (119, 2) : (FCause, 'BSSGPCause'),
         (120, 0) : (PLMNID, 'SelectedPLMNID'),
         (121, 0) : (TargetIdentification, 'TargetIdentification'),
         (126, 0) : (PortNumber, 'SourceUDPPortNumber'),
         (129, 0) : (SourceIdentification, 'SourceIdentification'),
-        (136, 2) : (FQDN, 'MMENodeName'),
-        (136, 0) : (FQDN, 'SGWNodeName'),
-        (136, 1) : (FQDN, 'SGSNNodeName'),
+        (136, 0) : (FQDN, 'SGWnodename'),
+        (136, 1) : (FQDN, 'SGSNnodename'),
+        (136, 2) : (FQDN, 'MMEnodename'),
         (144, 0) : (RFSPIndex, 'SubscribedRFSPIndex'),
-        (144, 1) : (RFSPIndex, 'RFSPIndexInUse'),
-        (145, 0) : (UCI, 'UserCSGInfo'),
+        (144, 1) : (RFSPIndex, 'RFSPIndexinUse'),
+        (145, 0) : (UCI, 'UCI'),
         (147, 0) : (CSGID, 'CSGID'),
-        (148, 0) : (CMI, 'CSGMembershipInd'),
+        (148, 0) : (CMI, 'CSGMembershipIndication'),
         (151, 0) : (LDN, 'MMES4SGSNLDN'),
         (159, 0) : (AdditionalMMContextForSRVCC, 'AdditionalMMContextForSRVCC'),
         (160, 0) : (AdditionalFlagsForSRVCC, 'AdditionalFlagsForSRVCC'),
         (162, 0) : (MDTConfiguration, 'MDTConfiguration'),
+        (176, 0) : (NodeIdentifier, 'IWKSCEFIDforMonitoringEvent'),
         (187, 0) : (IntegerNumber, 'UEUsageType'),
-        (189, 0) : (MonitoringEventInfo, 'MonitoringEventInfo'),
+        (189, 0) : (MonitoringEventInformation, 'MonitoringEventInformation'),
         (195, 0) : (ForwardRelocationRequest_MMEUESCEFPDNConnections, 'MMESGSNUESCEFPDNConnections'),
         (198, 0) : (ServingPLMNRateControl, 'ServingPLMNRateControl'),
-        (205, 0) : (ExtendedTraceInfo, 'ExtendedTraceInfo'),
-        (206, 0) : (MonitoringEventExtInfo, 'MonitoringEventExtInfo'),
-        255      : (PrivExt, 'PrivExt'),
+        (205, 0) : (ExtendedTraceInformation, 'ExtendedTraceInformation'),
+        (206, 0) : (MonitoringEventExtensionInformation, 'MonitoringEventExtensionInformation'),
+        (207, 0) : (AdditionalRRMPolicyIndex, 'SubscribedAdditionalRRMPolicyIndex'),
+        (207, 1) : (AdditionalRRMPolicyIndex, 'AdditionalRRMPolicyIndexinUse'),
+        (208, 0) : (ForwardRelocationRequest_SubscribedV2XInformation, 'SubscribedV2XInformation'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5493,34 +5568,49 @@ class ForwardRelocationRequest(GTPCMsg):
         )
 
 
-# extracted from Table 7.3.2-1: Information Elements in a Forward Relocation Response
+# Table 7.3.2-2: Bearer Context within Forward Relocation Response
+# IE Type: 93
+class ForwardRelocationResponse_BearerContext(GTPCIEs):
+    OPT  = {
+        (73, 0)  : (EBI, 'EPSBearerID'),
+        (87, 0)  : (FTEID, 'eNodeBFTEIDforDLdataforwarding'),
+        (87, 1)  : (FTEID, 'eNodeBFTEIDforULdataforwarding'),
+        (87, 2)  : (FTEID, 'SGWUPFFTEIDforDLdataforwarding'),
+        (87, 3)  : (FTEID, 'RNCFTEIDforDLdataforwarding'),
+        (87, 4)  : (FTEID, 'SGSNFTEIDforDLdataforwarding'),
+        (87, 5)  : (FTEID, 'SGWFTEIDforULdataforwarding'),
+        (123, 0) : (PacketFlowID, 'PacketFlowID'),
+        }
+
+
+# Table 7.3.2-1: Information Elements in a Forward Relocation Response
 class ForwardRelocationResponseIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
-        (77, 0)  : (Ind, 'IndFlags'),
-        (87, 0)  : (FTEID, 'SendersFTEIDForControlPlane'),
-        (93, 2)  : (BearerContext, 'ListOfSetupPFCs'),
-        (93, 0)  : (BearerContext, 'ListOfSetupBearers'),
-        (93, 1)  : (BearerContext, 'ListOfSetupRABs'),
-        (93, 3)  : (BearerContext, 'ListOfSetupBearersForSCEFPDNConnections'),
-        (118, 2) : (FContainer, 'BSSContainer'),
-        (118, 1) : (FContainer, 'UTRANTransparentContainer'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
+        (87, 0)  : (FTEID, 'SendersFTEIDforControlPlane'),
+        (93, 0)  : (ForwardRelocationResponse_BearerContext, 'ListofSetupBearers'),
+        (93, 1)  : (ForwardRelocationResponse_BearerContext, 'ListofSetupRABs'),
+        (93, 2)  : (ForwardRelocationResponse_BearerContext, 'ListofSetupPFCs'),
+        (93, 3)  : (ForwardRelocationResponse_BearerContext, 'ListofSetupBearersforSCEFPDNConnections'),
         (118, 0) : (FContainer, 'EUTRANTransparentContainer'),
-        (119, 2) : (FCause, 'BSSGPCause'),
-        (119, 1) : (FCause, 'RANAPCause'),
+        (118, 1) : (FContainer, 'UTRANTransparentContainer'),
+        (118, 2) : (FContainer, 'BSSContainer'),
         (119, 0) : (FCause, 'S1APCause'),
-        (136, 0) : (FQDN, 'SGSNNodeName'),
-        (136, 1) : (FQDN, 'MMENodeName'),
+        (119, 1) : (FCause, 'RANAPCause'),
+        (119, 2) : (FCause, 'BSSGPCause'),
+        (136, 0) : (FQDN, 'SGSNnodename'),
+        (136, 1) : (FQDN, 'MMEnodename'),
         (151, 0) : (LDN, 'MMES4SGSNLDN'),
         (175, 0) : (NodeNumber, 'SGSNNumber'),
-        (175, 1) : (NodeNumber, 'MMENumberForMTSMS'),
-        (176, 3) : (NodeIdent, 'MMEIdentForMTSMS'),
-        (176, 1) : (NodeIdent, 'MMEIdent'),
-        (176, 2) : (NodeIdent, 'SGSNIdentForMTSMS'),
-        (176, 0) : (NodeIdent, 'SGSNIdent'),
-        255      : (PrivExt, 'PrivExt'),
+        (175, 1) : (NodeNumber, 'MMEnumberforMTSMS'),
+        (176, 0) : (NodeIdentifier, 'SGSNIdentifier'),
+        (176, 1) : (NodeIdentifier, 'MMEIdentifier'),
+        (176, 2) : (NodeIdentifier, 'SGSNIdentifierforMTSMS'),
+        (176, 3) : (NodeIdentifier, 'MMEIdentifierforMTSMS'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5531,13 +5621,11 @@ class ForwardRelocationResponse(GTPCMsg):
         )
 
 
-# extracted from Table 7.3.3-1: Information Elements in a Forward Relocation Complete Notification
+# Table 7.3.3-1: Information Elements in a Forward Relocation Complete Notification
 class ForwardRelocationCompleteNotificationIEs(GTPCIEs):
-    MAND = {
-        }
     OPT  = {
-        (77, 0)  : (Ind, 'IndFlags'),
-        255      : (PrivExt, 'PrivExt'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5548,7 +5636,7 @@ class ForwardRelocationCompleteNotification(GTPCMsg):
         )
 
 
-# extracted from Table 7.3.4-1: Information Elements in a Forward Relocation Complete Acknowledge
+# Table 7.3.4-1: Information Elements in a Forward Relocation Complete Acknowledge
 class ForwardRelocationCompleteAcknowledgeIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
@@ -5556,7 +5644,7 @@ class ForwardRelocationCompleteAcknowledgeIEs(GTPCIEs):
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
         (201, 0) : (SecondaryRATUsageDataReport, 'SecondaryRATUsageDataReport'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5567,31 +5655,29 @@ class ForwardRelocationCompleteAcknowledge(GTPCMsg):
         )
 
 
-# extracted from Table 7.3.5-1: Information Elements in a Context Request
+# Table 7.3.5-1: Information Elements in a Context Request
 class ContextRequestIEs(GTPCIEs):
-    MAND = {
-        }
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
-        (77, 0)  : (Ind, 'Ind'),
+        (77, 0)  : (Indication, 'Indication'),
         (82, 0)  : (RATType, 'RATType'),
         (83, 0)  : (ServingNetwork, 'TargetPLMNID'),
         (86, 0)  : (ULI, 'RouteingAreaIdentity'),
-        (87, 0)  : (FTEID, 'S3S16S10N26AddressAndTEIDForControlPlane'),
-        (111, 0) : (PTMSI, 'PacketTMSI'),
+        (87, 0)  : (FTEID, 'S3S16S10N26AddressandTEIDforControlPlane'),
+        (111, 0) : (PTMSI, 'PTMSI'),
         (112, 0) : (PTMSISignature, 'PTMSISignature'),
         (113, 0) : (HopCounter, 'HopCounter'),
-        (116, 0) : (CompleteRequestMessage, 'CompleteTAURequestMessage'),
+        (116, 0) : (CompleteRequestMessage, 'CompleteTAUrequestmessage'),
         (117, 0) : (GUTI, 'GUTI'),
         (126, 0) : (PortNumber, 'UDPSourcePortNumber'),
-        (136, 1) : (FQDN, 'MMENodeName'),
-        (136, 0) : (FQDN, 'SGSNNodeName'),
+        (136, 0) : (FQDN, 'SGSNnodename'),
+        (136, 1) : (FQDN, 'MMEnodename'),
         (151, 0) : (LDN, 'MMES4SGSNLDN'),
         (175, 0) : (NodeNumber, 'SGSNNumber'),
-        (176, 0) : (NodeIdent, 'SGSNIdent'),
-        (176, 1) : (NodeIdent, 'MMEIdent'),
-        (194, 0) : (CIoTOptimizationsSupportInd, 'CIoTOptimizationsSupportInd'),
-        255      : (PrivExt, 'PrivExt'),
+        (176, 0) : (NodeIdentifier, 'SGSNIdentifier'),
+        (176, 1) : (NodeIdentifier, 'MMEIdentifier'),
+        (194, 0) : (CIoTOptimizationsSupportIndication, 'CIoTOptimizationsSupportIndication'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5602,28 +5688,36 @@ class ContextRequest(GTPCMsg):
         )
 
 
-# extracted from Table 7.3.6-5: MME/SGSN UE SCEF PDN Connections within Context Response
+# Table 7.3.1-6: PGW Change Info with Context Response // misnumbered table
+# IE Type: 214
+class ContextResponse_PGWChangeInfo(GTPCIEs):
+    OPT  = {
+        (74, 0)  : (IPAddress, 'AlternativePGWCSMFIPAddress'),
+        (215, 0) : (PGWSetFQDN, 'PGWSetFQDN'),
+        }
+
+
+# Table 7.3.6-5: MME/SGSN UE SCEF PDN Connections within Context Response
+# IE Type: x // guessing it's like ForwardRelocationRequestIEs
 class ContextResponse_MMESGSNUESCEFPDNConnections(GTPCIEs):
     MAND = {
         (71, 0)  : (APN, 'APN'),
         (73, 0)  : (EBI, 'DefaultEPSBearerID'),
-        (176, 0) : (NodeIdent, 'SCEFID'),
-        }
-    OPT  = {
+        (176, 0) : (NodeIdentifier, 'SCEFID'),
         }
 
 
-# extracted from Table 7.3.6-4: Remote UE Context Connected within MME/SGSN UE EPS PDN Connections within Context Response
+# Table 7.3.6-4: Remote UE Context Connected within MME/SGSN UE EPS PDN Connections within Context Response
+# IE Type: 191
 class ContextResponse_MMESGSNUEEPSPDNConnections_RemoteUEContextConnected(GTPCIEs):
     MAND = {
         (192, 0) : (RemoteUserID, 'RemoteUserID'),
-        (193, 0) : (RemoteUEIPInfo, 'RemoteUEIPInfo'),
-        }
-    OPT  = {
+        (193, 0) : (RemoteUEIPInformation, 'RemoteUEIPInformation'),
         }
 
 
-# extracted from Table 7.3.6-3: Bearer Context within MME/SGSN/AMF UE EPS PDN Connections within Context Response
+# Table 7.3.6-3: Bearer Context within MME/SGSN/AMF UE EPS PDN Connections within Context Response
+# IE Type: 93
 class ContextResponse_MMESGSNAMFUEEPSPDNConnections_BearerContext(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
@@ -5631,84 +5725,84 @@ class ContextResponse_MMESGSNAMFUEEPSPDNConnections_BearerContext(GTPCIEs):
         }
     OPT  = {
         (84, 0)  : (BearerTFT, 'TFT'),
-        (87, 0)  : (FTEID, 'SGWS1S4S12S11IPAddressAndTEIDForUserPlane'),
-        (87, 1)  : (FTEID, 'PGWS5S8IPAddressAndTEIDForUserPlane'),
-        (87, 2)  : (FTEID, 'SGWS11IPAddressAndTEIDForUserPlane'),
+        (87, 0)  : (FTEID, 'SGWS1S4S12S11IPAddressandTEIDforuserplane'),
+        (87, 1)  : (FTEID, 'PGWS5S8IPAddressandTEIDforuserplane'),
+        (87, 2)  : (FTEID, 'SGWS11IPAddressandTEIDforuserplane'),
         (118, 0) : (FContainer, 'BSSContainer'),
-        (137, 0) : (TI, 'TransactionIdent'),
+        (137, 0) : (TI, 'TransactionIdentifier'),
         }
 
 
-# extracted from Table 7.3.6-2: MME/SGSN/AMF UE EPS PDN Connections within Context Response
+# Table 7.3.6-2: MME/SGSN/AMF UE EPS PDN Connections within Context Response
+# IE Type: 109
 class ContextResponse_MMESGSNAMFUEEPSPDNConnections(GTPCIEs):
     MAND = {
         (71, 0)  : (APN, 'APN'),
         (72, 0)  : (AMBR, 'AggregateMaximumBitRate'),
         (73, 0)  : (EBI, 'LinkedEPSBearerID'),
-        (87, 0)  : (FTEID, 'PGWS5S8IPAddressForControlPlaneOrPMIP'),
-        (93, 0)  : (ContextResponse_MMESGSNAMFUEEPSPDNConnections_BearerContext, 'BearerContexts'),
+        (87, 0)  : (FTEID, 'PGWS5S8IPAddressforControlPlaneorPMIP'),
+        (93, 0)  : (ContextResponse_MMESGSNAMFUEEPSPDNConnections_BearerContext, 'BearerContext'),
         }
     OPT  = {
-        (74, 1)  : (IPAddress, 'IPv6Address'),
         (74, 0)  : (IPAddress, 'IPv4Address'),
-        (77, 0)  : (Ind, 'IndFlags'),
+        (74, 1)  : (IPAddress, 'IPv6Address'),
+        (77, 0)  : (Indication, 'Indicationflags'),
         (95, 0)  : (ChargingCharacteristics, 'ChargingCharacteristics'),
         (99, 0)  : (PDNType, 'PDNType'),
         (127, 0) : (APNRestriction, 'APNRestriction'),
         (128, 0) : (SelectionMode, 'SelectionMode'),
         (131, 0) : (ChangeReportingAction, 'ChangeReportingAction'),
-        (136, 0) : (FQDN, 'PGWNodeName'),
+        (136, 0) : (FQDN, 'PGWnodename'),
         (136, 1) : (FQDN, 'LocalHomeNetworkID'),
-        (146, 0) : (CSGInfoReportingAction, 'CSGInfoReportingAction'),
-        (157, 0) : (SignallingPriorityInd, 'SignallingPriorityInd'),
-        (165, 0) : (HeNBInfoReporting, 'HeNBInfoReporting'),
+        (146, 0) : (CSGInformationReportingAction, 'CSGInformationReportingAction'),
+        (157, 0) : (SignallingPriorityIndication, 'SignallingPriorityIndication'),
+        (165, 0) : (HeNBInformationReporting, 'HeNBInformationReporting'),
         (167, 0) : (ChangeToReportFlags, 'ChangeToReportFlags'),
         (177, 0) : (PresenceReportingAreaAction, 'PresenceReportingAreaAction'),
-        (185, 0) : (WLANOffloadabilityInd, 'WLANOffloadabilityInd'),
+        (185, 0) : (WLANOffloadabilityIndication, 'WLANOffloadabilityIndication'),
         (191, 0) : (ContextResponse_MMESGSNUEEPSPDNConnections_RemoteUEContextConnected, 'RemoteUEContextConnected'),
         (196, 0) : (HeaderCompressionConfiguration, 'HeaderCompressionConfiguration'),
+        (215, 0) : (ContextResponse_PGWChangeInfo, 'PGWChangeInfo'),
         }
 
 
-# extracted from Table 7.3.6-1: Information Elements in a Context Response
+# Table 7.3.6-1: Information Elements in a Context Response
 class ContextResponseIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
-        (74, 1)  : (IPAddress, '1xIWSS102IPAddress'),
-        (74, 0)  : (IPAddress, 'HRPDAccessNodeS101IPAddress'),
-        (77, 0)  : (Ind, 'IndFlags'),
+        (74, 0)  : (IPAddress, 'HRPDaccessnodeS101IPaddress'),
+        (74, 1)  : (IPAddress, '1xIWSS102IPaddress'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
         (82, 0)  : (RATType, 'RATType'),
-        (87, 1)  : (FTEID, 'SGWS11S4IPAddressAndTEIDForControlPlane'),
-        (87, 0)  : (FTEID, 'SenderFTEIDForControlPlane'),
-        (96, 0)  : (TraceInfo, 'TraceInfo'),
+        (87, 0)  : (FTEID, 'SenderFTEIDforControlPlane'),
+        (87, 1)  : (FTEID, 'SGWS11S4IPAddressandTEIDforControlPlane'),
+        (96, 0)  : (TraceInformation, 'TraceInformation'),
         (103, 0) : (MMContext, 'MMESGSNAMFUEMMContext'),
-        (104, 0) : (MMContext, 'MMESGSNAMFUEMMContext'),
-        (105, 0) : (MMContext, 'MMESGSNAMFUEMMContext'),
-        (106, 0) : (MMContext, 'MMESGSNAMFUEMMContext'),
-        (107, 0) : (MMContext, 'MMESGSNAMFUEMMContext'),
-        (108, 0) : (MMContext, 'MMESGSNAMFUEMMContext'),
         (109, 0) : (ContextResponse_MMESGSNAMFUEEPSPDNConnections, 'MMESGSNAMFUEEPSPDNConnections'),
         (114, 0) : (UETimeZone, 'UETimeZone'),
-        (136, 2) : (FQDN, 'MMENodeName'),
-        (136, 0) : (FQDN, 'SGWNodeName'),
-        (136, 1) : (FQDN, 'SGSNNodeName'),
+        (136, 0) : (FQDN, 'SGWnodename'),
+        (136, 1) : (FQDN, 'SGSNnodename'),
+        (136, 2) : (FQDN, 'MMEnodename'),
         (144, 0) : (RFSPIndex, 'SubscribedRFSPIndex'),
-        (144, 1) : (RFSPIndex, 'RFSPIndexInUse'),
-        (145, 0) : (UCI, 'UserCSGInfo'),
+        (144, 1) : (RFSPIndex, 'RFSPIndexinUse'),
+        (145, 0) : (UCI, 'UCI'),
         (151, 0) : (LDN, 'MMES4SGSNLDN'),
         (162, 0) : (MDTConfiguration, 'MDTConfiguration'),
+        (176, 0) : (NodeIdentifier, 'IWKSCEFIDforMonitoringEvent'),
         (187, 0) : (IntegerNumber, 'UEUsageType'),
         (187, 1) : (IntegerNumber, 'RemainingRunningServiceGapTimer'),
-        (189, 0) : (MonitoringEventInfo, 'MonitoringEventInfo'),
+        (189, 0) : (MonitoringEventInformation, 'MonitoringEventInformation'),
         (195, 0) : (ContextResponse_MMESGSNUESCEFPDNConnections, 'MMESGSNUESCEFPDNConnections'),
         (198, 0) : (ServingPLMNRateControl, 'ServingPLMNRateControl'),
         (199, 0) : (Counter, 'MOExceptionDataCounter'),
-        (205, 0) : (ExtendedTraceInfo, 'ExtendedTraceInfo'),
-        (206, 0) : (MonitoringEventExtInfo, 'MonitoringEventExtInfo'),
-        255      : (PrivExt, 'PrivExt'),
+        (205, 0) : (ExtendedTraceInformation, 'ExtendedTraceInformation'),
+        (206, 0) : (MonitoringEventExtensionInformation, 'MonitoringEventExtensionInformation'),
+        (207, 0) : (AdditionalRRMPolicyIndex, 'SubscribedAdditionalRRMPolicyIndex'),
+        (207, 1) : (AdditionalRRMPolicyIndex, 'AdditionalRRMPolicyIndexinUse'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5719,30 +5813,29 @@ class ContextResponse(GTPCMsg):
         )
 
 
-# extracted from Table 7.3.7-2: Bearer Context within Context Acknowledge
+# Table 7.3.7-2: Bearer Context within Context Acknowledge
+# IE Type: 93
 class ContextAcknowledge_BearerContext(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
         (87, 0)  : (FTEID, 'ForwardingFTEID'),
         }
-    OPT  = {
-        }
 
 
-# extracted from Table 7.3.7-1: Information Elements in a Context Acknowledge
+# Table 7.3.7-1: Information Elements in a Context Acknowledge
 class ContextAcknowledgeIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
-        (77, 0)  : (Ind, 'IndFlags'),
+        (77, 0)  : (Indication, 'Indicationflags'),
         (87, 0)  : (FTEID, 'ForwardingFTEID'),
-        (93, 0)  : (ContextAcknowledge_BearerContext, 'BearerContexts'),
+        (93, 0)  : (ContextAcknowledge_BearerContext, 'BearerContext'),
         (175, 0) : (NodeNumber, 'SGSNNumber'),
-        (175, 1) : (NodeNumber, 'MMENumberForMTSMS'),
-        (176, 1) : (NodeIdent, 'MMEIdentForMTSMS'),
-        (176, 0) : (NodeIdent, 'SGSNIdentForMTSMS'),
-        255      : (PrivExt, 'PrivExt'),
+        (175, 1) : (NodeNumber, 'MMEnumberforMTSMS'),
+        (176, 0) : (NodeIdentifier, 'SGSNIdentifierforMTSMS'),
+        (176, 1) : (NodeIdentifier, 'MMEIdentifierforMTSMS'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5753,21 +5846,19 @@ class ContextAcknowledge(GTPCMsg):
         )
 
 
-# extracted from Table 7.3.8-1: Information Elements in an Identification Request
+# Table 7.3.8-1: Information Elements in an Identification Request
 class IdentificationRequestIEs(GTPCIEs):
-    MAND = {
-        }
     OPT  = {
-        (74, 0)  : (IPAddress, 'AddressForControlPlane'),
+        (74, 0)  : (IPAddress, 'AddressforControlPlane'),
         (83, 0)  : (ServingNetwork, 'TargetPLMNID'),
         (86, 0)  : (ULI, 'RouteingAreaIdentity'),
-        (111, 0) : (PTMSI, 'PacketTMSI'),
+        (111, 0) : (PTMSI, 'PTMSI'),
         (112, 0) : (PTMSISignature, 'PTMSISignature'),
         (113, 0) : (HopCounter, 'HopCounter'),
         (116, 0) : (CompleteRequestMessage, 'CompleteAttachRequestMessage'),
         (117, 0) : (GUTI, 'GUTI'),
         (126, 0) : (PortNumber, 'UDPSourcePortNumber'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5778,25 +5869,20 @@ class IdentificationRequest(GTPCMsg):
         )
 
 
-# extracted from Table 7.3.9-1: Information Elements in an Identification Response
+# Table 7.3.9-1: Information Elements in an Identification Response
 class IdentificationResponseIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
-        (96, 0)  : (TraceInfo, 'TraceInfo'),
+        (96, 0)  : (TraceInformation, 'TraceInformation'),
         (103, 0) : (MMContext, 'MMESGSNUEMMContext'),
-        (104, 0) : (MMContext, 'MMESGSNUEMMContext'),
-        (105, 0) : (MMContext, 'MMESGSNUEMMContext'),
-        (106, 0) : (MMContext, 'MMESGSNUEMMContext'),
-        (107, 0) : (MMContext, 'MMESGSNUEMMContext'),
-        (108, 0) : (MMContext, 'MMESGSNUEMMContext'),
         (187, 0) : (IntegerNumber, 'UEUsageType'),
-        (189, 0) : (MonitoringEventInfo, 'MonitoringEventInfo'),
-        (205, 0) : (ExtendedTraceInfo, 'ExtendedTraceInfo'),
-        (206, 0) : (MonitoringEventExtInfo, 'MonitoringEventExtInfo'),
-        255      : (PrivExt, 'PrivExt'),
+        (189, 0) : (MonitoringEventInformation, 'MonitoringEventInformation'),
+        (205, 0) : (ExtendedTraceInformation, 'ExtendedTraceInformation'),
+        (206, 0) : (MonitoringEventExtensionInformation, 'MonitoringEventExtensionInformation'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5807,16 +5893,15 @@ class IdentificationResponse(GTPCMsg):
         )
 
 
-# extracted from Table 7.3.10-1: Information Elements in a Forward Access Context Notification
+# Table 7.3.10-1: Information Elements in a Forward Access Context Notification
 class ForwardAccessContextNotificationIEs(GTPCIEs):
-    MAND = {
-        }
     OPT  = {
         (110, 0) : (PDUNumbers, 'PDUNumbers'),
         (118, 0) : (FContainer, 'EUTRANTransparentContainer'),
+        (118, 1) : (FContainer, 'EUTRANTransparentContainer'),
         (124, 0) : (RABContext, 'RABContexts'),
         (125, 0) : (SourceRNCPDCPContextInfo, 'SourceRNCPDCPContextInfo'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5827,13 +5912,13 @@ class ForwardAccessContextNotification(GTPCMsg):
         )
 
 
-# extracted from Table 7.3.11-1: Information Elements in a Forward Access Context Acknowledge
+# Table 7.3.11-1: Information Elements in a Forward Access Context Acknowledge
 class ForwardAccessContextAcknowledgeIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5844,14 +5929,14 @@ class ForwardAccessContextAcknowledge(GTPCMsg):
         )
 
 
-# extracted from Table 7.3.12-1: Information Elements in a Detach Notification
+# Table 7.3.12-1: Information Elements in a Detach Notification
 class DetachNotificationIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
         (150, 0) : (DetachType, 'DetachType'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5862,14 +5947,14 @@ class DetachNotification(GTPCMsg):
         )
 
 
-# extracted from Table 7.3.13-1: Information Elements in a Detach Acknowledge
+# Table 7.3.13-1: Information Elements in a Detach Acknowledge
 class DetachAcknowledgeIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5880,7 +5965,7 @@ class DetachAcknowledge(GTPCMsg):
         )
 
 
-# extracted from Table 7.3.14-1: Information Element in Change Notification Request
+# Table 7.3.14-1: Information Element in Change Notification Request
 class ChangeNotificationRequestIEs(GTPCIEs):
     MAND = {
         (82, 0)  : (RATType, 'RATType'),
@@ -5889,14 +5974,14 @@ class ChangeNotificationRequestIEs(GTPCIEs):
         (1, 0)   : (IMSI, 'IMSI'),
         (73, 0)  : (EBI, 'LBI'),
         (74, 0)  : (IPAddress, 'PGWS5S8GTPCIPAddress'),
-        (75, 0)  : (MEI, 'MEIdentity'),
-        (77, 0)  : (Ind, 'IndFlags'),
-        (86, 0)  : (ULI, 'UserLocationInfo'),
-        (145, 0) : (UCI, 'UserCSGInfo'),
-        (178, 0) : (PresenceReportingAreaInfo, 'PresenceReportingAreaInfo'),
+        (75, 0)  : (MEI, 'MEI'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
+        (86, 0)  : (ULI, 'ULI'),
+        (145, 0) : (UCI, 'UCI'),
+        (178, 0) : (PresenceReportingAreaInformation, 'PresenceReportingAreaInformation'),
         (199, 0) : (Counter, 'MOExceptionDataCounter'),
         (201, 0) : (SecondaryRATUsageDataReport, 'SecondaryRATUsageDataReport'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5907,18 +5992,18 @@ class ChangeNotificationRequest(GTPCMsg):
         )
 
 
-# extracted from Table 7.3.15-1: Information Element in Change Notification Response
+# Table 7.3.15-1: Information Element in Change Notification Response
 class ChangeNotificationResponseIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
-        (75, 0)  : (MEI, 'MEIdentity'),
+        (75, 0)  : (MEI, 'MEI'),
         (131, 0) : (ChangeReportingAction, 'ChangeReportingAction'),
-        (146, 0) : (CSGInfoReportingAction, 'CSGInfoReportingAction'),
+        (146, 0) : (CSGInformationReportingAction, 'CSGInformationReportingAction'),
         (177, 0) : (PresenceReportingAreaAction, 'PresenceReportingAreaAction'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5929,16 +6014,14 @@ class ChangeNotificationResponse(GTPCMsg):
         )
 
 
-# extracted from Table 7.3.16-1: Information Elements in Relocation Cancel Request
+# Table 7.3.16-1: Information Elements in Relocation Cancel Request
 class RelocationCancelRequestIEs(GTPCIEs):
-    MAND = {
-        }
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
-        (75, 0)  : (MEI, 'MEIdentity'),
-        (77, 0)  : (Ind, 'IndFlags'),
+        (75, 0)  : (MEI, 'MEI'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
         (119, 0) : (FCause, 'RANAPCause'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5949,13 +6032,13 @@ class RelocationCancelRequest(GTPCMsg):
         )
 
 
-# extracted from Table 7.3.17-1: Information Elements in Relocation Cancel Response
+# Table 7.3.17-1: Information Elements in Relocation Cancel Response
 class RelocationCancelResponseIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -5966,14 +6049,14 @@ class RelocationCancelResponse(GTPCMsg):
         )
 
 
-# extracted from Table 7.3.18-1: Information Elements in a Configuration Transfer Tunnel Message
+# Table 7.3.18-1: Information Elements in a Configuration Transfer Tunnel Message
 class ConfigurationTransferTunnelMessageIEs(GTPCIEs):
     MAND = {
         (118, 0) : (FContainer, 'EUTRANTransparentContainerENDCContainer'),
-        (121, 0) : (TargetIdentification, 'TargetENodeBIDEngNBID'),
+        (121, 0) : (TargetIdentification, 'TargeteNodeBIDengNBID'),
         }
     OPT  = {
-        (121, 1) : (TargetIdentification, 'ConnectedTargetENodeBID'),
+        (121, 1) : (TargetIdentification, 'ConnectedTargeteNodeBID'),
         }
 
 
@@ -5984,14 +6067,14 @@ class ConfigurationTransferTunnelMessage(GTPCMsg):
         )
 
 
-# extracted from Table 7.3.19-1: Information Elements in a RAN Information Relay
+# Table 7.3.19-1: Information Elements in a RAN Information Relay
 class RANInformationRelayIEs(GTPCIEs):
     MAND = {
         (118, 0) : (FContainer, 'BSSContainer'),
         }
     OPT  = {
         (121, 0) : (TargetIdentification, 'RIMRoutingAddress'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6002,13 +6085,13 @@ class RANInformationRelay(GTPCMsg):
         )
 
 
-# extracted from Table 7.3.20-1: Information Elements in an ISR Status Indication
+# Table 7.3.20-1: Information Elements in an ISR Status Indication
 class ISRStatusIndicationIEs(GTPCIEs):
     MAND = {
-        (168, 0) : (ActionInd, 'ActionInd'),
+        (168, 0) : (ActionIndication, 'ActionIndication'),
         }
     OPT  = {
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6019,13 +6102,13 @@ class ISRStatusIndication(GTPCMsg):
         )
 
 
-# extracted from Table 7.3.21-1: Information Elements in UE Registration Query Request
+# Table 7.3.21-1: Information Elements in UE Registration Query Request
 class UERegistrationQueryRequestIEs(GTPCIEs):
     MAND = {
         (1, 0)   : (IMSI, 'IMSI'),
         }
     OPT  = {
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6036,14 +6119,15 @@ class UERegistrationQueryRequest(GTPCMsg):
         )
 
 
-# extracted from Table 7.3.22-1: Information Elements in UE Registration Query Response
+# Table 7.3.22-1: Information Elements in UE Registration Query Response
 class UERegistrationQueryResponseIEs(GTPCIEs):
     MAND = {
         (1, 0)   : (IMSI, 'IMSI'),
-        (120, 0) : (PLMNID, 'SelectedCoreNetworkOperatorIdent'),
+        (2, 0)   : (Cause, 'Cause'),
+        (120, 0) : (PLMNID, 'SelectedCoreNetworkOperatorIdentifier'),
         }
     OPT  = {
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6054,21 +6138,19 @@ class UERegistrationQueryResponse(GTPCMsg):
         )
 
 
-# extracted from Table 7.4.1-1: Information Element in Suspend Notification
+# Table 7.4.1-1: Information Element in Suspend Notification
 class SuspendNotificationIEs(GTPCIEs):
-    MAND = {
-        }
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
         (73, 0)  : (EBI, 'LinkedEPSBearerID'),
-        (74, 0)  : (IPAddress, 'AddressForControlPlane'),
+        (74, 0)  : (IPAddress, 'AddressforControlPlane'),
         (86, 0)  : (ULI, 'RouteingAreaIdentity'),
-        (87, 0)  : (FTEID, 'SenderFTEIDForControlPlane'),
-        (111, 0) : (PTMSI, 'PacketTMSI'),
+        (87, 0)  : (FTEID, 'SenderFTEIDforControlPlane'),
+        (111, 0) : (PTMSI, 'PTMSI'),
         (113, 0) : (HopCounter, 'HopCounter'),
         (126, 0) : (PortNumber, 'UDPSourcePortNumber'),
         (135, 0) : (NodeType, 'OriginatingNode'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6079,13 +6161,13 @@ class SuspendNotification(GTPCMsg):
         )
 
 
-# extracted from Table 7.4.2-1: Information Element in Suspend Acknowledge
+# Table 7.4.2-1: Information Element in Suspend Acknowledge
 class SuspendAcknowledgeIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6096,16 +6178,16 @@ class SuspendAcknowledge(GTPCMsg):
         )
 
 
-# extracted from Table 7.4.3-1: Information Element in Resume Notification
+# Table 7.4.3-1: Information Element in Resume Notification
 class ResumeNotificationIEs(GTPCIEs):
     MAND = {
         (1, 0)   : (IMSI, 'IMSI'),
         }
     OPT  = {
         (73, 0)  : (EBI, 'LinkedEPSBearerID'),
-        (87, 0)  : (FTEID, 'SenderFTEIDForControlPlane'),
+        (87, 0)  : (FTEID, 'SenderFTEIDforControlPlane'),
         (135, 0) : (NodeType, 'OriginatingNode'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6116,13 +6198,13 @@ class ResumeNotification(GTPCMsg):
         )
 
 
-# extracted from Table 7.4.4-1: Information Element in Resume Acknowledge
+# Table 7.4.4-1: Information Element in Resume Acknowledge
 class ResumeAcknowledgeIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6133,20 +6215,20 @@ class ResumeAcknowledge(GTPCMsg):
         )
 
 
-# extracted from Table 7.4.5-1: Information Element in CS Paging Indication
+# Table 7.4.5-1: Information Element in CS Paging Indication
 class CSPagingIndicationIEs(GTPCIEs):
     MAND = {
         (1, 0)   : (IMSI, 'IMSI'),
         (136, 0) : (FQDN, 'VLRName'),
         }
     OPT  = {
-        (86, 0)  : (ULI, 'LocationAreaIdent'),
+        (86, 0)  : (ULI, 'Locationareaidentifier'),
         (88, 0)  : (TMSI, 'TMSI'),
         (89, 0)  : (GlobalCNId, 'GlobalCNId'),
         (133, 0) : (ChannelNeeded, 'ChannelNeeded'),
         (134, 0) : (EMLPPPriority, 'EMLPPPriority'),
         (149, 0) : (ServiceIndicator, 'ServiceIndicator'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6157,12 +6239,10 @@ class CSPagingIndication(GTPCMsg):
         )
 
 
-# extracted from Table 7.4.6-1: Information Element in Alert MME Notification
+# Table 7.4.6-1: Information Element in Alert MME Notification
 class AlertMMENotificationIEs(GTPCIEs):
-    MAND = {
-        }
     OPT  = {
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6173,13 +6253,13 @@ class AlertMMENotification(GTPCMsg):
         )
 
 
-# extracted from Table 7.4.7-1: Information Elements in Alert MME Acknowledge
+# Table 7.4.7-1: Information Elements in Alert MME Acknowledge
 class AlertMMEAcknowledgeIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6190,12 +6270,10 @@ class AlertMMEAcknowledge(GTPCMsg):
         )
 
 
-# extracted from Table 7.4.8-1: Information Element in UE Activity Notification
+# Table 7.4.8-1: Information Element in UE Activity Notification
 class UEActivityNotificationIEs(GTPCIEs):
-    MAND = {
-        }
     OPT  = {
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6206,13 +6284,13 @@ class UEActivityNotification(GTPCMsg):
         )
 
 
-# extracted from Table 7.4.z-1: Information Elements in UE Activity Acknowledge
+# Table 7.4.z-1: Information Elements in UE Activity Acknowledge
 class UEActivityAcknowledgeIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6223,13 +6301,13 @@ class UEActivityAcknowledge(GTPCMsg):
         )
 
 
-# extracted from Table 7.5.1-1: Information Elements in a Create Forwarding Tunnel Request
+# Table 7.5.1-1: Information Elements in a Create Forwarding Tunnel Request
 class CreateForwardingTunnelRequestIEs(GTPCIEs):
     MAND = {
         (90, 0)  : (S103PDF, 'S103PDNDataForwardingInfo'),
         }
     OPT  = {
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6240,14 +6318,14 @@ class CreateForwardingTunnelRequest(GTPCMsg):
         )
 
 
-# extracted from Table 7.5.2-1: Information Elements in a Create Forwarding Tunnel Response
+# Table 7.5.2-1: Information Elements in a Create Forwarding Tunnel Response
 class CreateForwardingTunnelResponseIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
         (91, 0)  : (S1UDF, 'S1UDataForwardingInfo'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6258,17 +6336,15 @@ class CreateForwardingTunnelResponse(GTPCMsg):
         )
 
 
-# extracted from Table 7.9.1-1: Information Elements in a Delete PDN Connection Set Request
+# Table 7.9.1-1: Information Elements in a Delete PDN Connection Set Request
 class DeletePDNConnectionSetRequestIEs(GTPCIEs):
-    MAND = {
-        }
     OPT  = {
-        (132, 3) : (FQCSID, 'EPDGFQCSID'),
-        (132, 2) : (FQCSID, 'PGWFQCSID'),
-        (132, 4) : (FQCSID, 'TWANFQCSID'),
-        (132, 1) : (FQCSID, 'SGWFQCSID'),
         (132, 0) : (FQCSID, 'MMEFQCSID'),
-        255      : (PrivExt, 'PrivExt'),
+        (132, 1) : (FQCSID, 'SGWFQCSID'),
+        (132, 2) : (FQCSID, 'PGWFQCSID'),
+        (132, 3) : (FQCSID, 'ePDGFQCSID'),
+        (132, 4) : (FQCSID, 'TWANFQCSID'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6279,14 +6355,14 @@ class DeletePDNConnectionSetRequest(GTPCMsg):
         )
 
 
-# extracted from Table 7.9.2: Information Elements in a Delete PDN Connection Set Response
+# Table 7.9.2: Information Elements in a Delete PDN Connection Set Response
 class DeletePDNConnectionSetResponseIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6297,14 +6373,12 @@ class DeletePDNConnectionSetResponse(GTPCMsg):
         )
 
 
-# extracted from Table 7.9.3-1: Information Elements in a Update PDN Connection Set Request
+# Table 7.9.3-1: Information Elements in a Update PDN Connection Set Request
 class UpdatePDNConnectionSetRequestIEs(GTPCIEs):
-    MAND = {
-        }
     OPT  = {
-        (132, 1) : (FQCSID, 'SGWFQCSID'),
         (132, 0) : (FQCSID, 'MMEFQCSID'),
-        255      : (PrivExt, 'PrivExt'),
+        (132, 1) : (FQCSID, 'SGWFQCSID'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6315,7 +6389,7 @@ class UpdatePDNConnectionSetRequest(GTPCMsg):
         )
 
 
-# extracted from Table 7.9.4-1: Information Elements in a Update PDN Connection Set Response
+# Table 7.9.4-1: Information Elements in a Update PDN Connection Set Response
 class UpdatePDNConnectionSetResponseIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
@@ -6323,7 +6397,7 @@ class UpdatePDNConnectionSetResponseIEs(GTPCIEs):
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
         (132, 0) : (FQCSID, 'PGWFQCSID'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6334,15 +6408,15 @@ class UpdatePDNConnectionSetResponse(GTPCMsg):
         )
 
 
-# extracted from Table 7.9.5-1: Information Elements in PGW Restart Notification
+# Table 7.9.5-1: Information Elements in PGW Restart Notification
 class PGWRestartNotificationIEs(GTPCIEs):
     MAND = {
-        (74, 0)  : (IPAddress, 'PGWS5S8IPAddressForControlPlaneOrPMIP'),
-        (74, 1)  : (IPAddress, 'SGWS11S4IPAddressForControlPlane'),
+        (74, 0)  : (IPAddress, 'PGWS5S8IPAddressforControlPlaneorPMIP'),
+        (74, 1)  : (IPAddress, 'SGWS11S4IPAddressforControlPlane'),
         }
     OPT  = {
         (2, 0)   : (Cause, 'Cause'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6353,13 +6427,13 @@ class PGWRestartNotification(GTPCMsg):
         )
 
 
-# extracted from Table 7.9.6-1: Information Elements in PGW Restart Notification Acknowledge
+# Table 7.9.6-1: Information Elements in PGW Restart Notification Acknowledge
 class PGWRestartNotificationAcknowledgeIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6370,15 +6444,15 @@ class PGWRestartNotificationAcknowledge(GTPCMsg):
         )
 
 
-# extracted from Table 7.9.7-1: Information Elements in PGW Downlink Triggering Notification
+# Table 7.9.7-1: Information Elements in PGW Downlink Triggering Notification
 class PGWDownlinkTriggeringNotificationIEs(GTPCIEs):
     MAND = {
         (1, 0)   : (IMSI, 'IMSI'),
         }
     OPT  = {
-        (74, 0)  : (IPAddress, 'MMES4SGSNIdent'),
-        (87, 0)  : (FTEID, 'PGWS5FTEIDForGTPOrPMIPControlPlane'),
-        255      : (PrivExt, 'PrivExt'),
+        (74, 0)  : (IPAddress, 'MMES4SGSNidentifier'),
+        (87, 0)  : (FTEID, 'PGWS5FTEIDforGTPorPMIPControlPlane'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6389,15 +6463,15 @@ class PGWDownlinkTriggeringNotification(GTPCMsg):
         )
 
 
-# extracted from Table 7.9.8-1: Information Elements in PGW Downlink Triggering Acknowledge
+# Table 7.9.8-1: Information Elements in PGW Downlink Triggering Acknowledge
 class PGWDownlinkTriggeringAcknowledgeIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
-        (74, 0)  : (IPAddress, 'MMES4SGSNIdent'),
-        255      : (PrivExt, 'PrivExt'),
+        (74, 0)  : (IPAddress, 'MMES4SGSNidentifier'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6408,14 +6482,14 @@ class PGWDownlinkTriggeringAcknowledge(GTPCMsg):
         )
 
 
-# extracted from Table 7.12.1-1: Information Elements in a Trace Session Activation
+# Table 7.12.1-1: Information Elements in a Trace Session Activation
 class TraceSessionActivationIEs(GTPCIEs):
     MAND = {
-        (96, 0)  : (TraceInfo, 'TraceInfo'),
+        (96, 0)  : (TraceInformation, 'TraceInformation'),
         }
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
-        (75, 0)  : (MEI, 'MEIdentity'),
+        (75, 0)  : (MEI, 'MEI'),
         }
 
 
@@ -6426,12 +6500,10 @@ class TraceSessionActivation(GTPCMsg):
         )
 
 
-# extracted from Table 7.12.2-1: Information Elements in a Trace Session Deactivation
+# Table 7.12.2-1: Information Elements in a Trace Session Deactivation
 class TraceSessionDeactivationIEs(GTPCIEs):
     MAND = {
         (115, 0) : (TraceReference, 'TraceReference'),
-        }
-    OPT  = {
         }
 
 
@@ -6442,26 +6514,26 @@ class TraceSessionDeactivation(GTPCMsg):
         )
 
 
-# extracted from Table 7.13.1-1: Information Elements in a MBMS Session Start Request
+# Table 7.13.1-1: Information Elements in a MBMS Session Start Request
 class MBMSSessionStartRequestIEs(GTPCIEs):
     MAND = {
-        (80, 0)  : (BearerQoS, 'QoSProfile'),
-        (87, 0)  : (FTEID, 'SenderFTEIDForControlPlane'),
+        (80, 0)  : (BearerQoS, 'QoSprofile'),
+        (87, 0)  : (FTEID, 'SenderFTEIDforControlPlane'),
         (138, 0) : (MBMSSessionDuration, 'MBMSSessionDuration'),
         (139, 0) : (MBMSServiceArea, 'MBMSServiceArea'),
         (142, 0) : (MBMSIPMulticastDistribution, 'MBMSIPMulticastDistribution'),
-        (158, 0) : (TMGI, 'TemporaryMobileGroupIdentity'),
+        (158, 0) : (TMGI, 'TMGI'),
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
-        (140, 0) : (MBMSSessionIdent, 'MBMSSessionIdent'),
-        (141, 0) : (MBMSFlowIdent, 'MBMSFlowIdent'),
+        (140, 0) : (MBMSSessionIdentifier, 'MBMSSessionIdentifier'),
+        (141, 0) : (MBMSFlowIdentifier, 'MBMSFlowIdentifier'),
         (142, 1) : (MBMSIPMulticastDistribution, 'MBMSAlternativeIPMulticastDistribution'),
         (153, 0) : (MBMSTimeToDataTransfer, 'MBMSTimeToDataTransfer'),
         (164, 0) : (AbsoluteTimeOfMBMSDataTransfer, 'MBMSDataTransferStart'),
         (171, 0) : (MBMSFlags, 'MBMSFlags'),
         (190, 0) : (ECGIList, 'MBMSCellList'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6472,17 +6544,17 @@ class MBMSSessionStartRequest(GTPCMsg):
         )
 
 
-# extracted from Table 7.13.2-1: Information Elements in a MBMS Session Start Response
+# Table 7.13.2-1: Information Elements in a MBMS Session Start Response
 class MBMSSessionStartResponseIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
-        (87, 0)  : (FTEID, 'SenderFTEIDForControlPlane'),
+        (87, 0)  : (FTEID, 'SenderFTEIDforControlPlane'),
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
         (87, 1)  : (FTEID, 'SnUSGSNFTEID'),
         (143, 0) : (MBMSDistributionAcknowledge, 'MBMSDistributionAcknowledge'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6493,22 +6565,22 @@ class MBMSSessionStartResponse(GTPCMsg):
         )
 
 
-# extracted from Table 7.13.3-1: Information Elements in a MBMS Session Update Request
+# Table 7.13.3-1: Information Elements in a MBMS Session Update Request
 class MBMSSessionUpdateRequestIEs(GTPCIEs):
     MAND = {
-        (80, 0)  : (BearerQoS, 'QoSProfile'),
+        (80, 0)  : (BearerQoS, 'QoSprofile'),
         (138, 0) : (MBMSSessionDuration, 'MBMSSessionDuration'),
-        (158, 0) : (TMGI, 'TemporaryMobileGroupIdentity'),
+        (158, 0) : (TMGI, 'TMGI'),
         }
     OPT  = {
-        (87, 0)  : (FTEID, 'SenderFTEIDForControlPlane'),
+        (87, 0)  : (FTEID, 'SenderFTEIDforControlPlane'),
         (139, 0) : (MBMSServiceArea, 'MBMSServiceArea'),
-        (140, 0) : (MBMSSessionIdent, 'MBMSSessionIdent'),
-        (141, 0) : (MBMSFlowIdent, 'MBMSFlowIdent'),
+        (140, 0) : (MBMSSessionIdentifier, 'MBMSSessionIdentifier'),
+        (141, 0) : (MBMSFlowIdentifier, 'MBMSFlowIdentifier'),
         (153, 0) : (MBMSTimeToDataTransfer, 'MBMSTimeToDataTransfer'),
         (164, 0) : (AbsoluteTimeOfMBMSDataTransfer, 'MBMSDataTransferStartUpdateStop'),
         (190, 0) : (ECGIList, 'MBMSCellList'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6519,7 +6591,7 @@ class MBMSSessionUpdateRequest(GTPCMsg):
         )
 
 
-# extracted from Table 7.13.4-1: Information Elements in a MBMS Session Update Response
+# Table 7.13.4-1: Information Elements in a MBMS Session Update Response
 class MBMSSessionUpdateResponseIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
@@ -6528,7 +6600,7 @@ class MBMSSessionUpdateResponseIEs(GTPCIEs):
         (3, 0)   : (Recovery, 'Recovery'),
         (87, 0)  : (FTEID, 'SnUSGSNFTEID'),
         (143, 0) : (MBMSDistributionAcknowledge, 'MBMSDistributionAcknowledge'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6539,15 +6611,13 @@ class MBMSSessionUpdateResponse(GTPCMsg):
         )
 
 
-# extracted from Table 7.13.5-1: Information Elements in a MBMS Session Stop Request
+# Table 7.13.5-1: Information Elements in a MBMS Session Stop Request
 class MBMSSessionStopRequestIEs(GTPCIEs):
-    MAND = {
-        }
     OPT  = {
-        (141, 0) : (MBMSFlowIdent, 'MBMSFlowIdent'),
+        (141, 0) : (MBMSFlowIdentifier, 'MBMSFlowIdentifier'),
         (164, 0) : (AbsoluteTimeOfMBMSDataTransfer, 'MBMSDataTransferStop'),
         (171, 0) : (MBMSFlags, 'MBMSFlags'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
@@ -6558,14 +6628,14 @@ class MBMSSessionStopRequest(GTPCMsg):
         )
 
 
-# extracted from Table 7.13.6-1: Information Elements in a MBMS Session Stop Response
+# Table 7.13.6-1: Information Elements in a MBMS Session Stop Response
 class MBMSSessionStopResponseIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
-        255      : (PrivExt, 'PrivExt'),
+        255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
