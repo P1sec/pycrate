@@ -38,5 +38,3 @@ __all__ = ['GSMTAP', 'MCC_MNC', 'PPP', 'SIGTRAN', 'SCCP', 'ISUP',
            'TS29002_MAPAppCtx', 'TS29002_MAPIE', 'TS29274_GTPC', 'TS29281_GTPU',
            'TS29244_PFCP',
            'TS44018_IE', 'TS44018_RR', 'TS44018_GTTP', 'TS48058_Abis']
-__version__ = '0.4.0'
-

@@ -31,4 +31,3 @@ __all__ = ['utils', 'err', 'glob',
            'dictobj', 'setobj', 'refobj', 'asnobj',
            'extractor', 'specdir', 'proc', 'generator'
            ]
-__version__ = '0.4.0'

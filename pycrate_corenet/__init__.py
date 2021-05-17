@@ -33,4 +33,3 @@ __all__ = ['utils', 'Server', 'ServerAuC', 'ServerGTPU',
            'ProcProto', 'ProcCNHnbap', 'ProcCNRua', 'ProcCNRanap', 'ProcCNS1ap',
            'ProcCNMM', 'ProcCNGMM', 'ProcCNEMM', 'ProcCNESM',
            ]
-__version__ = '0.4.0'

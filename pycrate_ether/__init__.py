@@ -28,4 +28,3 @@
 #*/
 #
 __all__ = ['Ethernet', 'ARP', 'IP', 'SCTP', 'PCAP']
-__version__ = '0.4.0'

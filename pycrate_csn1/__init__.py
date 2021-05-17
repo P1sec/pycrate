@@ -28,5 +28,3 @@
 #*/
 
 __all__ = ['utils', 'trans', 'csnobj']
-__version__ = '0.4.0'
-

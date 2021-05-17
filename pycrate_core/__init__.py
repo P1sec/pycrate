@@ -28,4 +28,3 @@
 #*/
 #
 __all__ = ['utils', 'charpy', 'repr', 'elt', 'base']
-__version__ = '0.4.0'

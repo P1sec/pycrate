@@ -28,4 +28,3 @@
 #*/
 #
 __all__ = ['BMP', 'PNG', 'JPEG', 'TIFF', 'GIF', 'MPEG4', 'MP3']
-__version__ = '0.4.0'
