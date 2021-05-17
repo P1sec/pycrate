@@ -861,8 +861,8 @@ Specific constraints attributes:
                 Obj._parent = self._parent
                 try:
                     Obj.from_ber(char, single=False)
-                except Exception:
-                    if not self._SILENT:
+                except Exception as e:
+                    if not self._SILENT and not isinstance(e, TableLookupFieldNotFoundOpt):
                         asnlog('BIT_STR.__from_ber_buf: %s, CONTAINING object decoding failed'\
                                % self._name)
                     if bl:

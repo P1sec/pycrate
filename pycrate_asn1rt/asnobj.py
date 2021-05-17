@@ -363,8 +363,13 @@ class ASN1Obj(Element):
         except Exception:
             return ret
         cla_val_type, cla_val = self._const_tab.get(IndIdent, IndVal)
-        if cla_val_type == CLASET_UNIQ and self._const_tab_id in cla_val:
-            return (CLASET_UNIQ, cla_val[self._const_tab_id])
+        if cla_val_type == CLASET_UNIQ:
+            if self._const_tab_id in cla_val:
+                return (CLASET_UNIQ, cla_val[self._const_tab_id])
+            elif self._const_tab._cont[self._const_tab_id]._opt:
+                raise TableLookupFieldNotFoundOpt(self._const_tab_id)
+            else:
+                raise TableLookupFieldNotFoundMand(self._const_tab_id)
         elif cla_val_type == CLASET_MULT:
             # filter cla_val for the given tab_id
             cla_val = [val[self._const_tab_id] for val in cla_val if self._const_tab_id in val]
@@ -372,6 +377,8 @@ class ASN1Obj(Element):
                 return (CLASET_MULT, cla_val)
             elif cla_val:
                 return (CLASET_UNIQ, cla_val[0])
+            else:
+                raise TableLookupFieldNotFound(self._const_tab_id)
         return ret
     
     def _get_tab_obj_uniq(self):
@@ -1990,3 +1997,14 @@ def _restore_ber_params():
     ASN1CodecBER.ENC_TIME_CANON = __ber_enc_time_canon
     ASN1CodecBER.ENC_DEF_CANON  = __ber_enc_def_canon
 
+
+class TableLookupFieldNotFound(Exception):
+    """The named field was not found on the LUT entry."""
+
+
+class TableLookupFieldNotFoundOpt(TableLookupFieldNotFound):
+    """The optional field was now found on the LUT entry."""
+
+
+class TableLookupFieldNotFoundMand(TableLookupFieldNotFound):
+    """The mandatory field was not found on the LUT entry."""
