@@ -410,8 +410,9 @@ Specific constraints attributes:
                         self._const_cont.from_aper_ws(char)
                     else:
                         self._const_cont.from_uper_ws(char)
-                except Exception:
-                    if not self._SILENT:
+                except Exception as e:
+                    if not self._SILENT and \
+                            not isinstance(e, (ASN1PERDecodeErr, TableLookupFieldNotFoundOpt)):
                         asnlog('BIT_STR.__from_per_ws_buf: %s, CONTAINING object decoding failed'\
                                % self._name)
                     self._val = (bytes_to_uint(buf, bl), bl)
@@ -514,8 +515,9 @@ Specific constraints attributes:
                         self._const_cont.from_aper(char)
                     else:
                         self._const_cont.from_uper(char)
-                except Exception:
-                    if not self._SILENT:
+                except Exception as e:
+                    if not self._SILENT and \
+                            not isinstance(e, (ASN1PERDecodeErr, TableLookupFieldNotFoundOpt)):
                         asnlog('BIT_STR.__from_per_buf: %s, CONTAINING object decoding failed'\
                                % self._name)
                     if bl:
@@ -862,7 +864,8 @@ Specific constraints attributes:
                 try:
                     Obj.from_ber(char, single=False)
                 except Exception as e:
-                    if not self._SILENT and not isinstance(e, TableLookupFieldNotFoundOpt):
+                    if not self._SILENT and \
+                            not isinstance(e, (ASN1BERDecodeErr, TableLookupFieldNotFoundOpt)):
                         asnlog('BIT_STR.__from_ber_buf: %s, CONTAINING object decoding failed'\
                                % self._name)
                     if bl:
@@ -1706,8 +1709,9 @@ Specific constraints attributes:
                 Obj._parent = self._parent
                 try:
                     Obj.from_ber(char, single=False)
-                except Exception:
-                    if not self._SILENT:
+                except Exception as e:
+                    if not self._SILENT and \
+                            not isinstance(e, (ASN1BERDecodeErr, TableLookupFieldNotFoundOpt)):
                         asnlog('OCT_STR.__from_ber_buf: %s, CONTAINING object decoding failed'\
                                % self._name)
                     Obj._parent = _const_cont_par
