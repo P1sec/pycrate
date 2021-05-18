@@ -49,20 +49,22 @@ Dependencies
 Currently none. Only the Python builtins and few internal modules of Python 
 (e.g. os, system, re, struct, datetime) are required for most of the features. 
 The json internal module is required for supporting the JSON API.
+If you want to run pycrate in Python2 (which is bad !), you will however need to
+install the [enum34](https://pypi.org/project/enum34/) package.
 
 The _pycrate\_ether/SCTP_ module can optionally use the external 
 [crc32c](https://pypi.org/project/crc32c/) module from ICRAR.
 
 The _pycrate\_mobile/TS24301\_EMM_ and _pycrate\_mobile/TS24501\_FGMM_ modules use 
 [CryptoMobile](https://github.com/p1sec/CryptoMobile) as optional dependency to 
-cipher / decipher LTE and 5G NAS messages.
+encrypt and decrypt LTE and 5G NAS messages.
+
+The _pycrate\_corenet_ part requires also [pysctp](https://pypi.org/project/pysctp/) 
+and [CryptoMobile](https://github.com/p1sec/CryptoMobile) to run.
 
 The _pycrate\_diameter/parse\_iana\_diameter\_xml.py_ file uses 
 [lxml](https://pypi.org/project/lxml/) to translate xml files from IANA to Python 
 dictionnaries ; this is however not required for standard runtime.
-
-The _pycrate\_corenet_ part requires [pysctp](https://pypi.org/project/pysctp/) 
-and [CryptoMobile](https://github.com/p1sec/CryptoMobile) to run.
 
 
 Automatic installation

@@ -1,10 +1,19 @@
 # -*- coding: UTF−8 -*-
 
 import os
+import sys
 from setuptools import setup, find_packages
 
 # Pycrate Version
 VERSION = "0.4.1"
+
+
+# get dependencies according to the Python version
+if sys.version_info[0] == 2:
+    # Python2 requires enum34
+    install_reqs = ['enum34']
+else:
+    install_reqs = []
 
 
 # get long description from the README.md
@@ -43,8 +52,8 @@ setup(
         "tools/pycrate_map_op_info.py",
         ],
     
-    # no mandatory dependency
-    install_requires=[],
+    # potential dependencies
+    install_requires=install_reqs,
     
     # optional dependencies
     extras_require={
