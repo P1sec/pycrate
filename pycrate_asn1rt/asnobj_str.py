@@ -309,6 +309,20 @@ Specific constraints attributes:
     # conversion between internal value and ASN.1 unaligned PER encoding
     ###
     
+    def __val_from_buf(self, buf, bl):
+        if bl:
+            self._val = (bytes_to_uint(buf, bl), bl)
+        else:
+            # empty BIT STRING
+            self._val = (0, 0)
+    
+    def __val_from_buf_struct(self, Buf):
+        if Buf._bl:
+            self._val = (Buf.to_uint(), Buf.get_bl())
+        else:
+            # empty BIT STRING
+            self._val = (0, 0)
+    
     def _from_per_ws(self, char):
         GEN, ldet = [], None
         if self._const_sz:
@@ -398,10 +412,7 @@ Specific constraints attributes:
                 if not self._SILENT:
                     asnlog('BIT_STR.__from_per_ws_buf: %s, specific CONTAINING encoder unhandled'\
                            % self._name)
-                if Buf._bl:
-                    self._val = (Buf.to_uint(), Buf.get_bl())
-                else:
-                    self._val = (0, 0)
+                self.__val_from_buf_struct(Buf)
             else:
                 char = Charpy(Buf())
                 char._len_bit = Buf.get_bl()
@@ -414,7 +425,8 @@ Specific constraints attributes:
                     if not self._SILENT:
                         asnlog('BIT_STR.__from_per_ws_buf: %s, CONTAINING object decoding failed'\
                                % self._name)
-                    self._val = (bytes_to_uint(buf, bl), bl)
+                    #
+                    self.__val_from_buf_struct(Buf)
                 else:
                     if self._const_cont._typeref:
                         ident = self._const_cont._typeref.called[1]
@@ -422,10 +434,7 @@ Specific constraints attributes:
                         ident = self._const_cont.TYPE
                     self._val = (ident, self._const_cont._val)
         else:
-            if Buf._bl:
-                self._val = (Buf.to_uint(), Buf.get_bl())
-            else:
-                self._val = (0, 0)
+            self.__val_from_buf_struct(Buf)
     
     def _from_per(self, char):
         ldet = None
@@ -501,11 +510,7 @@ Specific constraints attributes:
                 if not self._SILENT:
                     asnlog('BIT_STR.__from_per_buf: %s, specific CONTAINING encoder unhandled'\
                            % self._name)
-                if bl:
-                    self._val = (bytes_to_uint(buf, bl), bl)
-                else:
-                    # empty bit string
-                    self._val = (0, 0)
+                self.__val_from_buf(buf, bl)
             else:
                 char = Charpy(buf)
                 char._len_bit = bl
@@ -518,11 +523,7 @@ Specific constraints attributes:
                     if not self._SILENT:
                         asnlog('BIT_STR.__from_per_buf: %s, CONTAINING object decoding failed'\
                                % self._name)
-                    if bl:
-                        self._val = (bytes_to_uint(buf, bl), bl)
-                    else:
-                        # empty bit string
-                        self._val = (0, 0)
+                    self.__val_from_buf(buf, bl)
                 else:
                     if self._const_cont._typeref:
                         ident = self._const_cont._typeref.called[1]
@@ -530,11 +531,7 @@ Specific constraints attributes:
                         ident = self._const_cont.TYPE 
                     self._val = (ident, self._const_cont._val)
         else:
-            if bl:
-                self._val = (bytes_to_uint(buf, bl), bl)
-            else:
-                # empty bit string
-                self._val = (0, 0)
+            self.__val_from_buf(buf, bl)
     
     # TODO: _to_per_ws() does not copy the structure of a potential wrapped
     # object into self._struct
@@ -849,11 +846,7 @@ Specific constraints attributes:
                 if not self._SILENT:
                     asnlog('BIT_STR.__from_ber_buf: %s, specific CONTAINING encoder unhandled'\
                            % self._name)
-                if bl:
-                    self._val = (bytes_to_uint(buf, bl), bl)
-                else:
-                    # empty bit string
-                    self._val = (0, 0)
+                self.__val_from_buf(buf, bl)
             else:
                 Obj, char = self._const_cont, Charpy(buf)
                 char._len_bit = bl
@@ -865,23 +858,22 @@ Specific constraints attributes:
                     if not self._SILENT:
                         asnlog('BIT_STR.__from_ber_buf: %s, CONTAINING object decoding failed'\
                                % self._name)
-                    if bl:
-                        self._val = (bytes_to_uint(buf, bl), bl)
-                    else:
-                        # empty bit string
-                        self._val = (0, 0)
+                    Obj._parent = _const_cont_par
+                    self.__val_from_buf(buf, bl)
                 else:
-                    if Obj._typeref:
-                        ident = Obj._typeref.called[1]
+                    Obj._parent = _const_cont_par
+                    #
+                    if Obj.TYPE == TYPE_OPEN and Obj._val[0].startswith('_unk'):
+                        # content was decoded to an unknown BER TLV
+                        # here we prefer to fallback to the standard BIT STRING value
+                        self.__val_from_buf(buf, bl)
                     else:
-                        ident = Obj.TYPE
-                    self._val = (ident, self._const_cont._val)
+                        if Obj._typeref is not None:
+                            self._val = (Obj._typeref.called[1], Obj._val)
+                        else:
+                            self._val = (Obj.TYPE, Obj._val)
         else:
-            if bl:
-                self._val = (bytes_to_uint(buf, bl), bl)
-            else:
-                # empty bit string
-                self._val = (0, 0)
+            self.__val_from_buf(buf, bl)
     
     def _encode_ber_cont_ws(self):
         if isinstance(self._val, set):
@@ -1714,10 +1706,16 @@ Specific constraints attributes:
                     self._val = buf
                 else:
                     Obj._parent = _const_cont_par
-                    if Obj._typeref is not None:
-                        self._val = (Obj._typeref.called[1], Obj._val)
+                    #
+                    if Obj.TYPE == TYPE_OPEN and Obj._val[0].startswith('_unk'):
+                        # content was decoded to an unknown BER TLV
+                        # here we prefer to fallback to the standard OCTET STRING value
+                        self._val = buf
                     else:
-                        self._val = (Obj.TYPE, Obj._val)
+                        if Obj._typeref is not None:
+                            self._val = (Obj._typeref.called[1], Obj._val)
+                        else:
+                            self._val = (Obj.TYPE, Obj._val)
         else:
             self._val = buf
     
