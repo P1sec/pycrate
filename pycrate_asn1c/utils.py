@@ -334,8 +334,8 @@ SYNT_RE_MODULEDEF = re.compile(
 SYNT_RE_MODULEREF = re.compile(
     '(?:^|\s{1})(%s){1}\s{0,}(\{[\s\-a-zA-Z0-9\(\)]{1,}\}){0,1}' % _RE_TYPEREF)
 SYNT_RE_MODULEFROM = re.compile(
-    '(?:FROM\s{1,})(%s)[ \t]{0,}' \
-    '(?:(\{[\s\-a-zA-Z0-9\(\)]{1,}\})|(%s)(?:\s{1,}%s|\s{0,};)){0,1}' \
+    '(?:FROM\s{1,})(%s)\s{1,}' \
+    '(?:(\{[\s\-a-zA-Z0-9\(\)]{1,}\})|(%s)(?:\s{1,}%s\s{1,}(?:,|FROM)|\s{0,}$)){0,1}' \
     % (_RE_TYPEREF, _RE_IDENT, _RE_WORD))
 SYNT_RE_MODULEEXP = re.compile(
     '(?:^|\s{1})EXPORTS((.|\n)*?);')
