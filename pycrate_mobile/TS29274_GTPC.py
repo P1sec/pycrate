@@ -1859,7 +1859,7 @@ class RNCID(Envelope):
         PLMN(),
         Uint16('LAC', rep=REPR_HEX),
         Uint8('RAC', rep=REPR_HEX),
-        Uint16('RNCID', rep=REPR_HEX),
+        Buf('RNCID', bl=16, rep=REPR_HEX), # TS 25.413 ASN.1 APER encoded RANAP IE: INTEGER (0..4095)
         Buf('ExtRNCID', val=b'', rep=REPR_HEX)
         )
 
@@ -2072,7 +2072,7 @@ class SourceIdentification(Envelope):
         Uint8('SourceType', dic={0: 'CellID', 1: 'RNCID'}),
         Alt('SourceID', GEN={
             0 : CellID(),
-            1 : Buf('RNCID', rep=REPR_HEX), # ASN.1 APER encoded RANAP IE 
+            1 : Buf('RNCID', bl=16, rep=REPR_HEX), # TS 25.413 ASN.1 APER encoded RANAP IE: INTEGER (0..4095)
             },
             DEFAULT=Buf('unk', val=b'', rep=REPR_HEX),
             sel=lambda self: self.get_env()['SourceType'].get_val()
@@ -3338,6 +3338,290 @@ class PGWSetFQDN(Envelope):
         )
 
 
+#------------------------------------------------------------------------------#
+# HRPD Sector ID
+# TS 29.276, 7.5.5
+#------------------------------------------------------------------------------#
+# see 3GPP2 C.S0024-B section 13.9
+
+class HRPDSectorID(Buf):
+    _bl  = 128
+    _rep = REPR_HEX
+
+
+#------------------------------------------------------------------------------#
+# S101 Transparent Container
+# TS 29.276, 7.5.6
+#------------------------------------------------------------------------------#
+
+class S101TransparentContainer(Buf):
+    _rep = REPR_HEX
+
+
+#------------------------------------------------------------------------------#
+# Handover Indicator
+# TS 29.276, 7.5.6
+#------------------------------------------------------------------------------#
+
+class HandoverIndicator(Uint8):
+    _dic = {
+        0 : 'Not Used',
+        1 : 'HO Ready',
+        2 : 'HO Failure',
+        3 : 'HO Complete',
+        4 : 'Redirection',
+        5 : 'HO Required',
+        }
+
+
+#------------------------------------------------------------------------------#
+# PDN GW PMIP GRE Tunnel Info
+# TS 29.276, 7.5.9
+#------------------------------------------------------------------------------#
+
+class PDNGWPMIPGRETunnelInfo(Envelope):
+    _GEN = (
+        Uint8('PDNIdentLen'),
+        APN('PDNIdent'),
+        Uint8('PDNGWIPAddrLen'),
+        Buf('PDNGWIPAddr', rep=REPR_HEX),
+        Uint32('PDNGWGREKey', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['PDNIdentLen'].set_valauto(lambda: self['PDNIdent'].get_len())
+        self['PDNIdent'].set_blauto(lambda: self['PDNIdentLen'].get_val()<<3)
+        self['PDNGWIPAddrLen'].set_valauto(lambda: self['PDNGWIPAddr'].get_len())
+        self['PDNGWIPAddr'].set_blauto(lambda: self['PDNGWIPAddrLen'].get_val()<<3)
+
+
+#------------------------------------------------------------------------------#
+# S103 GRE Tunnel Info
+# TS 29.276, 7.5.10
+#------------------------------------------------------------------------------#
+
+class S103GRETunnelInfo(Envelope):
+    _GEN = (
+        Uint8('PDNIdentLen'),
+        APN('PDNIdent'),
+        Uint32('HSGWGREKey', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['PDNIdentLen'].set_valauto(lambda: self['PDNIdent'].get_len())
+        self['PDNIdent'].set_blauto(lambda: self['PDNIdentLen'].get_val()<<3)
+
+
+#------------------------------------------------------------------------------#
+# S103 HSGW IP Address
+# TS 29.276, 7.5.11
+#------------------------------------------------------------------------------#
+
+class S103HSGWIPAddress(Buf):
+    _rep = REPR_HEX
+
+
+#------------------------------------------------------------------------------#
+# Unauthenticated IMSI
+# TS 29.276, 7.5.13
+#------------------------------------------------------------------------------#
+
+class UnauthenticatedIMSI(BufBCD):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# S121 Transparent Container
+# TS 29.276, 7.5.14
+#------------------------------------------------------------------------------#
+
+class EUTRANRoundTripDelay(Buf):
+    _rep = REPR_HEX
+
+
+#------------------------------------------------------------------------------#
+# EUTRAN Round Trip Delay
+# TS 29.276, 7A.5.2
+#------------------------------------------------------------------------------#
+
+class S121TransparentContainer(Buf):
+    _rep = REPR_HEX
+
+
+#------------------------------------------------------------------------------#
+# RIM Routing Address
+# TS 29.276, 7A.5.3
+#------------------------------------------------------------------------------#
+
+RIMRoutingAddressType_dict = {
+    0 : 'Macro eNodeB ID',
+    1 : 'Home eNodeB ID',
+    2 : 'HRPD Sector Identifier',
+    }
+
+
+class RIMRoutingAddress(Envelope):
+    _GEN = (
+        Uint8('Type', dic=RIMRoutingAddressType_dict),
+        Buf('Addr', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Source to Target Transparent Container
+# TS 29.280, 6.3
+#------------------------------------------------------------------------------#
+
+class SourcetoTargetTransparentContainer(_LU8V):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# Target to Source Transparent Container
+# TS 29.280, 6.4
+#------------------------------------------------------------------------------#
+
+class TargettoSourceTransparentContainer(_LU8V):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# MM Context for E-UTRAN (v)SRVCC
+# TS 29.280, 6.5
+#------------------------------------------------------------------------------#
+
+class MMContextforEUTRANSRVCC(Envelope):
+    _GEN = (
+        Uint('spare', bl=5, rep=REPR_HEX),
+        Uint('eKSI', bl=3),
+        Buf('CK_SRVCC', bl=128, rep=REPR_HEX),
+        Buf('IK_SRVCC', bl=128, rep=REPR_HEX),
+        Type4LV('MSCm2', val={'V':b'@\0\0'}, IE=MSCm2()),
+        Type4LV('MSCm3', val={'V': b''}, IE=classmark_3_value_part),
+        Type4LV('SuppCodecs', val={'V': b'\0\x01\0'}, IE=SuppCodecList()),
+        )
+
+
+#------------------------------------------------------------------------------#
+# MM Context for UTRAN SRVCC
+# TS 29.280, 6.6
+#------------------------------------------------------------------------------#
+
+class MMContextforUTRANSRVCC(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('KSIp_CS', bl=4),
+        Buf('CKp_SRVCC', bl=128, rep=REPR_HEX),
+        Buf('IKp_SRVCC', bl=128, rep=REPR_HEX),
+        Buf('Kcp', bl=64, rep=REPR_HEX),
+        Uint8('CKSNp_CS'),
+        Type4LV('MSCm2', val={'V':b'@\0\0'}, IE=MSCm2()),
+        Type4LV('MSCm3', val={'V': b''}, IE=classmark_3_value_part),
+        Type4LV('SuppCodecs', val={'V': b'\0\x01\0'}, IE=SuppCodecList()),
+        )
+
+
+#------------------------------------------------------------------------------#
+# SRVCC Cause
+# TS 29.280, 6.7
+#------------------------------------------------------------------------------#
+
+SRVCCCause_dict = {
+    0 : 'Reserved',
+    1 : 'Unspecified',
+    2 : 'Handover/Relocation cancelled by source system ',
+    3 : 'Handover/Relocation Failure with Target system',
+    4 : 'Handover/Relocation Target not allowed',
+    5 : 'Unknown Target ID',
+    6 : 'Target Cell not available',
+    7 : 'No Radio Resources Available in Target Cell',
+    8 : 'Failure in Radio Interface Procedure',
+    9 : 'Permanent session leg establishment error',
+    10 : 'Temporary session leg establishment error',
+    }
+
+class SRVCCCause(Uint8):
+    _dic = SRVCCCause_dict
+    _val = 1
+
+
+#------------------------------------------------------------------------------#
+# Target RNC ID
+# TS 29.280, 6.8
+#------------------------------------------------------------------------------#
+
+# TS 25.413 ASN.1 APER encoded RANAP IE: INTEGER (0..4095)
+class TargetRNCID(Buf):
+    _bl  = 16
+    _rep = REPR_HEX
+
+
+#------------------------------------------------------------------------------#
+# Target Global Cell ID
+# TS 29.280, 6.9
+#------------------------------------------------------------------------------#
+
+class TargetGlobalCellID(Uint16):
+    _rep = REPR_HEX
+
+
+#------------------------------------------------------------------------------#
+# TEID-C
+# TS 29.280, 6.10
+#------------------------------------------------------------------------------#
+
+class TEIDC(Envelope):
+    _GEN = (
+        Uint32('TEIDC', rep=REPR_HEX),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Sv Flags
+# TS 29.280, 6.11
+#------------------------------------------------------------------------------#
+
+class SvFlags(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('VHO', bl=1),
+        Uint('STI', bl=1),
+        Uint('ICS', bl=1),
+        Uint('EmInd', bl=1),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Service Area Identifier
+# TS 29.280, 6.12
+#------------------------------------------------------------------------------#
+
+class ServiceAreaIdentifier(Envelope):
+    _GEN = (
+        SAI(),
+        Buf('ext', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# MM Context for CS to PS SRVCC
+# TS 29.280, 6.13
+#------------------------------------------------------------------------------#
+
+class MMContextforCStoPSSRVCC(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('KSIpCS', bl=4),
+        Buf('CKp_PS', bl=128, rep=REPR_HEX),
+        Buf('IKp_PS', bl=128, rep=REPR_HEX),
+        Buf('Kcp_PS', bl=64, rep=REPR_HEX),
+        Uint8('CKSNp_PS'),
+        )
+
 
 #------------------------------------------------------------------------------#
 # additional dummy IEs
@@ -3361,7 +3645,28 @@ GTPCIETags_dict = {
     1  : (IMSI, -1, 'International Mobile Subscriber Identity (IMSI)'),
     2  : (Cause, -1, 'Cause'),
     3  : (Recovery, -1, 'Recovery (Restart Counter)'),
+    4  : (HRPDSectorID, 16, 'HRPD Sector ID'),
+    5  : (S101TransparentContainer, -1, 'S101 Transparent Container'),
+    6  : (HandoverIndicator, 1, 'Handover Indicator'),
+    7  : (PDNGWPMIPGRETunnelInfo, -1, 'PDN GW PMIP GRE Tunnel Info'),
+    8  : (S103GRETunnelInfo, -1, 'S103 GRE Tunnel Info'),
+    9  : (S103HSGWIPAddress, -1, 'S103 HSGW IP Address'),
+    12 : (UnauthenticatedIMSI, -1, 'Unauthenticated IMSI'),
+    14 : (EUTRANRoundTripDelay, 2, 'EUTRAN Round Trip Delay'),
+    35 : (S121TransparentContainer, -1, 'S121 Transparent Container'),
+    36 : (RIMRoutingAddress, -1, 'RIM Routing Address'),
     51 : (STNSR, -1, 'STN-SR'),
+    52 : (SourcetoTargetTransparentContainer, -1, 'Source to Target Transparent Container'),
+    53 : (TargettoSourceTransparentContainer, -1, 'Target to Source Transparent Container'),
+    54 : (MMContextforEUTRANSRVCC, -1, 'MM Context for E-UTRAN (v)SRVCC'),
+    55 : (MMContextforUTRANSRVCC, -1, 'MM Context for UTRAN SRVCC'),
+    56 : (SRVCCCause, 1, 'SRVCC Cause'),
+    57 : (TargetRNCID, -1, 'Target RNC ID'),
+    58 : (TargetGlobalCellID, -1, 'Target Global Cell ID'),
+    59 : (TEIDC, 4, 'TEID-C'),
+    60 : (SvFlags, 1, 'Sv Flags'),
+    61 : (ServiceAreaIdentifier, 7, 'Service Area Identifier'),
+    62 : (MMContextforCStoPSSRVCC, 42, 'MM Context for CS to PS SRVCC'),
     71 : (APN, -1, 'Access Point Name (APN)'),
     72 : (AMBR, 8, 'Aggregate Maximum Bit Rate (AMBR)'),
     73 : (EBI, 1, 'EPS Bearer ID (EBI)'),
@@ -6647,11 +6952,380 @@ class MBMSSessionStopResponse(GTPCMsg):
 
 
 #------------------------------------------------------------------------------#
+# TS 29.276, section 7.3 and 7A.3
+#------------------------------------------------------------------------------#
+
+# Table 7.3.2-1: Information Elements in a Direct Transfer Request
+class DirectTransferRequestIEs(GTPCIEs):
+    MAND = {
+        (5, 0)   : (S101TransparentContainer, 'S101 Transparent Container'),
+        }
+    OPT  = {
+        (1, 0)   : (IMSI, 'SessionID'),
+        (3, 0)   : (Recovery, 'Recovery'),
+        (4, 0)   : (HRPDSectorID, 'HRPDSectorID'),
+        (6, 0)   : (HandoverIndicator, 'Handover Indicator'),
+        (7, 0)   : (PDNGWPMIPGRETunnelInfo, 'PDN GW PMIP GRE Tunnel Info'),
+        (8, 0)   : (S103GRETunnelInfo, 'S103 GRE Tunnel Info'),
+        (9, 0)   : (S103HSGWIPAddress, 'S103 HSGW IP Address'),
+        (12, 0)  : (UnauthenticatedIMSI, 'Unauthenticated IMSI'),
+        (14, 0)  : (EUTRANRoundTripDelay, 'EUTRAN Round Trip Delay'),
+        (75, 0)  : (MEI, 'SessionID2'),
+        255      : (PrivateExtension, 'PrivateExtension'),
+        }
+
+
+class DirectTransferRequest(GTPCMsg):
+    _GEN = (
+        GTPCHdr(val={'Type': 4}),
+        DirectTransferRequestIEs(hier=1)
+        )
+
+
+# Table 7.3.3-1: Information Elements in a Direct Transfer Response message
+class DirectTransferResponseIEs(GTPCIEs):
+    MAND = {
+        (2, 0)   : (Cause, 'Cause'),
+        }
+    OPT  = {
+        (1, 0)   : (IMSI, 'SessionID'),
+        (3, 0)   : (Recovery, 'Recovery'),
+        (75, 0)  : (MEI, 'SessionID2'),
+        255      : (PrivateExtension, 'PrivateExtension'),
+        }
+
+
+class DirectTransferResponse(GTPCMsg):
+    _GEN = (
+        GTPCHdr(val={'Type': 5}),
+        DirectTransferResponseIEs(hier=1)
+        )
+
+
+# Table 7.3.4-1: Information Elements in a Notification Request
+class NotificationRequestIEs(GTPCIEs):
+    OPT  = {
+        (1, 0)   : (IMSI, 'SessionID'),
+        (3, 0)   : (Recovery, 'Recovery'),
+        (6, 0)   : (HandoverIndicator, 'Handover Indicator'),
+        (75, 0)  : (MEI, 'SessionID2'),
+        255      : (PrivateExtension, 'PrivateExtension'),
+        }
+
+
+class NotificationRequest(GTPCMsg):
+    _GEN = (
+        GTPCHdr(val={'Type': 6}),
+        NotificationRequestIEs(hier=1)
+        )
+
+
+# Table 7.3.5-1: Information Elements in a Notification Response message
+class NotificationResponseIEs(GTPCIEs):
+    MAND = {
+        (2, 0)   : (Cause, 'Cause'),
+        }
+    OPT  = {
+        (1, 0)   : (IMSI, 'SessionID'),
+        (3, 0)   : (Recovery, 'Recovery'),
+        (75, 0)  : (MEI, 'SessionID2'),
+        255      : (PrivateExtension, 'PrivateExtension'),
+        }
+
+
+class NotificationResponse(GTPCMsg):
+    _GEN = (
+        GTPCHdr(val={'Type': 7}),
+        NotificationResponseIEs(hier=1)
+        )
+
+
+# Table 7A.3.2-1: Information Elements in a RIM Information Transfer
+class RIMInformationTransferIEs(GTPCIEs):
+    MAND = {
+        (35, 0)  : (S121TransparentContainer, 'S121 Transparent Container'),
+        (36, 0)  : (RIMRoutingAddress, 'RIM Routing Address'),
+        }
+    OPT  = {
+        255      : (PrivateExtension, 'PrivateExtension'),
+        }
+
+
+class RIMInformationTransfer(GTPCMsg):
+    _GEN = (
+        GTPCHdr(val={'Type': 17}),
+        RIMInformationTransferIEs(hier=1)
+        )
+
+
+#------------------------------------------------------------------------------#
+# TS 29.280, section 5.2
+#------------------------------------------------------------------------------#
+
+# Table 5.2.2: Information Elements in a SRVCC PS to CS Request
+class SRVCCPStoCSRequestIEs(GTPCIEs):
+    MAND = {
+        (52, 0)  : (SourcetoTargetTransparentContainer, 'SourcetoTargetTransparentContainer'),
+        (59, 0)  : (TEIDC, 'MMESGSNSvTEIDforControlPlane'),
+        (74, 0)  : (IPAddress, 'MMESGSNSvAddressforControlPlane'),
+        }
+    OPT  = {
+        (1, 0)   : (IMSI, 'IMSI'),
+        (51, 0)  : (STNSR, 'STNSR'),
+        (54, 0)  : (MMContextforEUTRANSRVCC, 'MMContextforEUTRAN(v)SRVCC'),
+        (55, 0)  : (MMContextforUTRANSRVCC, 'MMContextforUTRANSRVCC'),
+        (57, 0)  : (TargetRNCID, 'TargetRNCID'),
+        (58, 0)  : (TargetGlobalCellID, 'TargetCellID'),
+        (60, 0)  : (SvFlags, 'SvFlags'),
+        (61, 0)  : (ServiceAreaIdentifier, 'SourceSAI'),
+        (75, 0)  : (MEI, 'MEI'),
+        (76, 0)  : (MSISDN, 'CMSISDN'),
+        (120, 0) : (PLMNID, 'AnchorPLMNID'),
+        (155, 0) : (ARP, 'AllocationRetentionPriority'),
+        255      : (PrivateExtension, 'PrivateExtension'),
+        }
+
+
+class SRVCCPStoCSRequest(GTPCMsg):
+    _GEN = (
+        GTPCHdr(val={'Type': 25}),
+        SRVCCPStoCSRequestIEs(hier=1)
+        )
+
+
+# Table 5.2.3: Information Elements in a SRVCC PS to CS Response
+class SRVCCPStoCSResponseIEs(GTPCIEs):
+    MAND = {
+        (2, 0)   : (Cause, 'Cause'),
+        }
+    OPT  = {
+        (53, 0)  : (TargettoSourceTransparentContainer, 'TargettoSourceTransparentContainer'),
+        (56, 0)  : (SRVCCCause, '(v)SRVCCrejectedCause'),
+        (59, 0)  : (TEIDC, 'MSCServerSvTEIDforControlPlane'),
+        (74, 0)  : (IPAddress, 'MSCServerSvAddressforControlPlane'),
+        255      : (PrivateExtension, 'PrivateExtension'),
+        }
+
+
+class SRVCCPStoCSResponse(GTPCMsg):
+    _GEN = (
+        GTPCHdr(val={'Type': 26}),
+        SRVCCPStoCSResponseIEs(hier=1)
+        )
+
+
+# Table 5.2.4: Information Elements in a SRVCC PS to CS Complete Notification
+class SRVCCPStoCSCompleteNotificationIEs(GTPCIEs):
+    OPT  = {
+        (1, 0)   : (IMSI, 'IMSI'),
+        (56, 0)  : (SRVCCCause, 'SRVCCpostfailureCause'),
+        255      : (PrivateExtension, 'PrivateExtension'),
+        }
+
+
+class SRVCCPStoCSCompleteNotification(GTPCMsg):
+    _GEN = (
+        GTPCHdr(val={'Type': 27}),
+        SRVCCPStoCSCompleteNotificationIEs(hier=1)
+        )
+
+
+# Table 5.2.5: Information Elements in a SRVCC PS to CS Complete Acknowledge
+class SRVCCPStoCSCompleteAcknowledgeIEs(GTPCIEs):
+    MAND = {
+        (2, 0)   : (Cause, 'Cause'),
+        }
+    OPT  = {
+        255      : (PrivateExtension, 'PrivateExtension'),
+        }
+
+
+class SRVCCPStoCSCompleteAcknowledge(GTPCMsg):
+    _GEN = (
+        GTPCHdr(val={'Type': 28}),
+        SRVCCPStoCSCompleteAcknowledgeIEs(hier=1)
+        )
+
+
+# Table 5.2.6: Information Elements in a SRVCC PS to CS Cancel Notification
+class SRVCCPStoCSCancelNotificationIEs(GTPCIEs):
+    MAND = {
+        (56, 0)  : (SRVCCCause, 'CancelCause'),
+        }
+    OPT  = {
+        (1, 0)   : (IMSI, 'IMSI'),
+        (75, 0)  : (MEI, 'MEI'),
+        255      : (PrivateExtension, 'PrivateExtension'),
+        }
+
+
+class SRVCCPStoCSCancelNotification(GTPCMsg):
+    _GEN = (
+        GTPCHdr(val={'Type': 29}),
+        SRVCCPStoCSCancelNotificationIEs(hier=1)
+        )
+
+
+# Table 5.2.7: Information Elements in a SRVCC PS to CS Cancel Acknowledge
+class SRVCCPStoCSCancelAcknowledgeIEs(GTPCIEs):
+    MAND = {
+        (2, 0)   : (Cause, 'Cause'),
+        }
+    OPT  = {
+        (60, 0)  : (SvFlags, 'SvFlags'),
+        255      : (PrivateExtension, 'PrivateExtension'),
+        }
+
+
+class SRVCCPStoCSCancelAcknowledge(GTPCMsg):
+    _GEN = (
+        GTPCHdr(val={'Type': 30}),
+        SRVCCPStoCSCancelAcknowledgeIEs(hier=1)
+        )
+
+
+# Table 5.2.8: Information Elements in a SRVCC CS to PS Request
+class SRVCCCStoPSRequestIEs(GTPCIEs):
+    MAND = {
+        (52, 0)  : (SourcetoTargetTransparentContainer, 'SourcetoTargetTransparentContainer'),
+        (59, 0)  : (TEIDC, 'MSCServerSvTEIDforControlPlane'),
+        (62, 0)  : (MMContextforCStoPSSRVCC, 'MMContextforCStoPSSRVCC'),
+        (74, 0)  : (IPAddress, 'MSCServerSvAddressforControlPlane'),
+        (121, 0) : (TargetIdentification, 'TargetIdentification'),
+        }
+    OPT  = {
+        (1, 0)   : (IMSI, 'IMSI'),
+        (75, 0)  : (MEI, 'MEI'),
+        (86, 0)  : (ULI, 'SourceRAI'),
+        (111, 0) : (PTMSI, 'PTMSI'),
+        (112, 0) : (PTMSISignature, 'PTMSISignature'),
+        (117, 0) : (GUTI, 'GUTI'),
+        255      : (PrivateExtension, 'PrivateExtension'),
+        }
+
+
+class SRVCCCStoPSRequest(GTPCMsg):
+    _GEN = (
+        GTPCHdr(val={'Type': 31}),
+        SRVCCCStoPSRequestIEs(hier=1)
+        )
+
+
+# Table 5.2.9: Information Elements in a SRVCC CS to PS Response
+class SRVCCCStoPSResponseIEs(GTPCIEs):
+    MAND = {
+        (2, 0)   : (Cause, 'Cause'),
+        }
+    OPT  = {
+        (53, 0)  : (TargettoSourceTransparentContainer, 'TargettoSourceTransparentContainer'),
+        (56, 0)  : (SRVCCCause, 'SRVCCrejectedCause'),
+        (59, 0)  : (TEIDC, 'MMESGSNSvTEIDforControlPlane'),
+        (74, 0)  : (IPAddress, 'MMESGSNSvAddressforControlPlane'),
+        255      : (PrivateExtension, 'PrivateExtension'),
+        }
+
+
+class SRVCCCStoPSResponse(GTPCMsg):
+    _GEN = (
+        GTPCHdr(val={'Type': 240}),
+        SRVCCCStoPSResponseIEs(hier=1)
+        )
+
+
+# Table 5.2.10: Information Elements in a SRVCC CS to PS Complete Notification
+class SRVCCCStoPSCompleteNotificationIEs(GTPCIEs):
+    OPT  = {
+        (56, 0)  : (SRVCCCause, 'SRVCCfailureCause'),
+        255      : (PrivateExtension, 'PrivateExtension'),
+        }
+
+
+class SRVCCCStoPSCompleteNotification(GTPCMsg):
+    _GEN = (
+        GTPCHdr(val={'Type': 241}),
+        SRVCCCStoPSCompleteNotificationIEs(hier=1)
+        )
+
+
+# Table 5.2.11: Information Elements in a SRVCC CS to PS Complete Acknowledge
+class SRVCCCStoPSCompleteAcknowledgeIEs(GTPCIEs):
+    MAND = {
+        (2, 0)   : (Cause, 'Cause'),
+        }
+    OPT  = {
+        255      : (PrivateExtension, 'PrivateExtension'),
+        }
+
+
+class SRVCCCStoPSCompleteAcknowledge(GTPCMsg):
+    _GEN = (
+        GTPCHdr(val={'Type': 242}),
+        SRVCCCStoPSCompleteAcknowledgeIEs(hier=1)
+        )
+
+
+# Table 5.2.12: Information Elements in a SRVCC CS to PS Cancel Notification
+class SRVCCCStoPSCancelNotificationIEs(GTPCIEs):
+    MAND = {
+        (56, 0)  : (SRVCCCause, 'CancelCause'),
+        }
+    OPT  = {
+        (1, 0)   : (IMSI, 'IMSI'),
+        (75, 0)  : (MEI, 'MEI'),
+        255      : (PrivateExtension, 'PrivateExtension'),
+        }
+
+
+class SRVCCCStoPSCancelNotification(GTPCMsg):
+    _GEN = (
+        GTPCHdr(val={'Type': 243}),
+        SRVCCCStoPSCancelNotificationIEs(hier=1)
+        )
+
+
+# Table 5.2.13: Information Elements in a SRVCC CS to PS Cancel Acknowledge
+class SRVCCCStoPSCancelAcknowledgeIEs(GTPCIEs):
+    MAND = {
+        (2, 0)   : (Cause, 'Cause'),
+        }
+    OPT  = {
+        255      : (PrivateExtension, 'PrivateExtension'),
+        }
+
+
+class SRVCCCStoPSCancelAcknowledge(GTPCMsg):
+    _GEN = (
+        GTPCHdr(val={'Type': 244}),
+        SRVCCCStoPSCancelAcknowledgeIEs(hier=1)
+        )
+
+
+'''
+# TODO: missing
+
+    # Sv (SRVCC mobility), # TS 29.280
+    25  : 'SRVCC PS to CS Request',
+    26  : 'SRVCC PS to CS Response',
+    27  : 'SRVCC PS to CS Complete Notification',
+    28  : 'SRVCC PS to CS Complete Acknowledge',
+    29  : 'SRVCC PS to CS Cancel Notification',
+    30  : 'SRVCC PS to CS Cancel Acknowledge',
+    31  : 'SRVCC CS to PS Request',
+    240 : 'SRVCC CS to PS Response',
+    241 : 'SRVCC CS to PS Complete Notification',
+    242 : 'SRVCC CS to PS Complete Acknowledge',
+    243 : 'SRVCC CS to PS Cancel Notification',
+    244 : 'SRVCC CS to PS Cancel Acknowledge',
+'''
+
+
+#------------------------------------------------------------------------------#
 # General parser    
 # TS 29.274, section 6
 #------------------------------------------------------------------------------#
 
 GTPCDispatcher = {
+    # TS 29.274
     1  : EchoRequest,
     2  : EchoResponse,
     32 : CreateSessionRequest,
@@ -6735,6 +7409,25 @@ GTPCDispatcher = {
     234: MBMSSessionUpdateResponse,
     235: MBMSSessionStopRequest,
     236: MBMSSessionStopResponse,
+    # TS 29.276
+    4   : DirectTransferRequest,
+    5   : DirectTransferResponse,
+    6   : NotificationRequest,
+    7   : NotificationResponse,
+    17  : RIMInformationTransfer,
+    # TS 29.280
+    25  : SRVCCPStoCSRequest,
+    26  : SRVCCPStoCSResponse,
+    27  : SRVCCPStoCSCompleteNotification,
+    28  : SRVCCPStoCSCompleteAcknowledge,
+    29  : SRVCCPStoCSCancelNotification,
+    30  : SRVCCPStoCSCancelAcknowledge,
+    31  : SRVCCCStoPSRequest,
+    240 : SRVCCCStoPSResponse,
+    241 : SRVCCCStoPSCompleteNotification,
+    242 : SRVCCCStoPSCompleteAcknowledge,
+    243 : SRVCCCStoPSCancelNotification,
+    244 : SRVCCCStoPSCancelAcknowledge,
     }
 
 
