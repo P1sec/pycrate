@@ -71,7 +71,7 @@ class PacketRespSMSPP(Envelope):
         Uint24('TAR', rep=REPR_HEX, dic=TAR_dict),
         Uint('CNTR', bl=40),
         Uint8('PCNTR'),
-        Uint8('Status'),
+        Uint8('Status', dic=RespStatus_dict),
         Buf('IntegrityCheck', rep=REPR_HEX),
         Buf('Data', rep=REPR_HEX),
         )
