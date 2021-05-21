@@ -31,17 +31,12 @@
 # ASN.1 runtime errors
 #------------------------------------------------------------------------------#
 
-try:
-    from pycrate_core.utils import PycrateErr
-except:
-    print('pycrate_core not found, ASN1Err will not inherit from PycrateErr')
-    # generic ASN.1 error
-    class ASN1Err(Exception):
-        pass
-else:
-    # generic ASN.1 error
-    class ASN1Err(PycrateErr):
-        pass
+from pycrate_core.utils import PycrateErr
+
+
+# generic ASN.1 error
+class ASN1Err(PycrateErr):
+    pass
 
 # error when manipulating an existing ASN1 object
 class ASN1ObjErr(ASN1Err):
