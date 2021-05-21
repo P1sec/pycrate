@@ -30,18 +30,19 @@
 from socket import inet_aton, inet_ntoa, AF_INET, AF_INET6
 from struct import pack
 from array import array
+
+from pycrate_core.utils import reverse_dict, log
+from pycrate_core.elt   import Envelope, Sequence, REPR_RAW, REPR_HEX, REPR_BIN
+from pycrate_core.base  import *
+from pycrate_core.repr  import *
+
 try:
     from socket import inet_pton, inet_ntop
 except ImportError:
     try:
         from win_inet_pton import inet_pton, inet_ntop
     except ImportError:
-        print('[pycrate_ether/IP.py] inet_pton() and inet_ntop() not available')
-
-from pycrate_core.utils import reverse_dict
-from pycrate_core.elt import Envelope, Sequence, REPR_RAW, REPR_HEX, REPR_BIN
-from pycrate_core.base import *
-from pycrate_core.repr import *
+        log('pycrate_ether/IP.py: inet_pton() and inet_ntop() not available')
 
 
 #------------------------------------------------------------------------------#
