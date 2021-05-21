@@ -6007,11 +6007,6 @@ class ASN1Obj(object):
                     else:
                         objval = ObjProxy_val
                     #
-                    
-                    if self._name == 'Supported-MAP-Operations':
-                        print(objval)
-                    
-                    
                     # 3.4.4) dispatch the root / ext values from objval into self within val
                     if objval['root']:
                         self.__parse_set_insert(val[dom], objval['root'], dom)
