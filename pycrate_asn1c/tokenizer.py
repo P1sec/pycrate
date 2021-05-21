@@ -941,7 +941,7 @@ def test():
     import os
     from pycrate_asn1c.specdir import ASN_SPECS
     
-    p = '/home/user/pycrate/pycrate_asn1dir/'
+    p = os.path.dirname(__file__) + os.path.sep + '..' + os.path.sep + 'pycrate_asn1dir' + os.path.sep
     M = ASN1Dict()
     
     for S in ASN_SPECS.values():
