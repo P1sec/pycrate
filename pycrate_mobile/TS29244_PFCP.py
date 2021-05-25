@@ -2870,7 +2870,7 @@ class OuterHeaderCreation(Envelope):
         Uint('spare', bl=6, rep=REPR_HEX),
         Uint('N6', bl=1),
         Uint('N19', bl=1),
-        Uint32('TEID', bl=1),
+        Uint32('TEID'),
         Buf('IPv4Addr', bl=32, rep=REPR_HEX),
         Buf('IPv6Addr', bl=128, rep=REPR_HEX),
         Uint16('Port'),
