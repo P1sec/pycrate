@@ -7300,25 +7300,6 @@ class SRVCCCStoPSCancelAcknowledge(GTPCMsg):
         )
 
 
-'''
-# TODO: missing
-
-    # Sv (SRVCC mobility), # TS 29.280
-    25  : 'SRVCC PS to CS Request',
-    26  : 'SRVCC PS to CS Response',
-    27  : 'SRVCC PS to CS Complete Notification',
-    28  : 'SRVCC PS to CS Complete Acknowledge',
-    29  : 'SRVCC PS to CS Cancel Notification',
-    30  : 'SRVCC PS to CS Cancel Acknowledge',
-    31  : 'SRVCC CS to PS Request',
-    240 : 'SRVCC CS to PS Response',
-    241 : 'SRVCC CS to PS Complete Notification',
-    242 : 'SRVCC CS to PS Complete Acknowledge',
-    243 : 'SRVCC CS to PS Cancel Notification',
-    244 : 'SRVCC CS to PS Cancel Acknowledge',
-'''
-
-
 #------------------------------------------------------------------------------#
 # General parser    
 # TS 29.274, section 6
