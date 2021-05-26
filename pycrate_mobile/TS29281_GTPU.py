@@ -61,6 +61,8 @@ __all__ = [
 # release 15 (f50)
 #------------------------------------------------------------------------------#
 
+from enum import IntEnum
+
 from pycrate_core.utils import *
 from pycrate_core.elt   import *
 from pycrate_core.base  import *
@@ -316,19 +318,30 @@ GTPUType_dict = {
     2   : 'Echo Response',
     26  : 'Error Indication',
     31  : 'Supported Extension Headers Notification',
+    253 : 'Tunnel Status',
     254 : 'End Marker',
     255 : 'G-PDU'
     }
 
+class GTPUType(IntEnum):
+    EchoRequest     = 1
+    EchoResponse    = 2
+    ErrorIndication = 26
+    SupportedExtensionHeadersNotification = 31
+    TunnelStatus    = 253
+    EndMarker       = 254
+    GPDU            = 255
+
+
 class GTPUHdr(Envelope):
     _GEN = (
         Uint('Version', val=1, bl=3),
-        Uint('PT', val=1, bl=1, dic=ProtType_dict),
+        Uint('PT', val=0, bl=1, dic=ProtType_dict),
         Uint('spare', bl=1),
         Uint('E', bl=1),
         Uint('S', bl=1),
         Uint('PN', bl=1),
-        Uint8('Type', dic=GTPUType_dict),
+        Uint8('Type', val=GTPUType.EchoRequest.value, dic=GTPUType_dict),
         Uint16('Len'),
         Uint32('TEID', rep=REPR_HEX),
         GTPUHdrOpt(hier=1),
@@ -540,6 +553,18 @@ class GTPUErrorInd(GTPUMsg):
 class GTPUEndMarker(GTPUMsg):
     _GEN = (
         GTPUHdr(val={'Type': 254}),
+        GTPUIEPrivateExt(hier=1, trans=True) # optional
+        )
+
+
+#------------------------------------------------------------------------------#
+# Tunnel Status
+# TS 29.281, section 7.3.3
+#------------------------------------------------------------------------------#
+
+class GTPUTunnelStatus(GTPUMsg):
+    _GEN = (
+        GTPUHdr(val={'Type': 253}),
         GTPUIEPrivateExt(hier=1, trans=True) # optional
         )
 
