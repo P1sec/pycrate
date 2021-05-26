@@ -137,6 +137,7 @@ ASN_SPECS_CORE = {
     'CAP'       : '3GPP_CAP_29078',
     'CDR'       : '3GPP_CDR_32298',
     'LI3GPP'    : '3GPP_LI_33108',
+    'LIX3GPP'   : '3GPP_LIX_33128',
     'LIETSI'    : 'ETSI_LI_101671',
     # old ETSI spec
     'MAPv2'     : 'ETSI_MAP_0902',
