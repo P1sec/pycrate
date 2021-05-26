@@ -1,0 +1,1212 @@
+UmtsHI2Operations {itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulintercept(2) threeGPP(4) hi2(1) r16 (16) version-1 (1)}
+
+DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+IMPORTS
+
+
+		LawfulInterceptionIdentifier,
+		TimeStamp,
+		Network-Identifier,
+		National-Parameters,
+		National-HI2-ASN1parameters,
+		DataNodeAddress,
+		IPAddress,
+		IP-value,
+		X25Address
+
+			FROM HI2Operations
+			{itu-t(0) identified-organization(4) etsi(0) securityDomain(2)
+ 				  lawfulIntercept(2) hi2(1) version18(18)}; -- Imported from TS 101 671 v3.14.1
+			
+
+-- Object Identifier Definitions
+
+-- Security DomainId
+lawfulInterceptDomainId OBJECT IDENTIFIER ::= {itu-t(0) identified-organization(4) etsi(0)
+securityDomain(2) lawfulIntercept(2)}
+
+-- Security Subdomains
+threeGPPSUBDomainId OBJECT IDENTIFIER ::= {lawfulInterceptDomainId threeGPP(4)}
+hi2DomainId OBJECT IDENTIFIER	::= {threeGPPSUBDomainId hi2(1) r16 (16) version-1 (1)}
+
+UmtsIRIsContent		::= CHOICE
+{
+	umtsiRIContent			UmtsIRIContent,
+	umtsIRISequence			UmtsIRISequence
+}
+
+UmtsIRISequence		::= SEQUENCE OF UmtsIRIContent
+
+-- Aggregation of UmtsIRIContent is an optional feature.
+-- It may be applied in cases when at a given point in time
+-- several IRI records are available for delivery to the same LEA destination.
+-- As a general rule, records created at any event shall be sent
+-- immediately and not withheld in the DF or MF in order to
+-- apply aggragation.
+-- When aggregation is not to be applied,
+-- UmtsIRIContent needs to be chosen.
+
+
+UmtsIRIContent		::= CHOICE
+{
+	iRI-Begin-record		[1] IRI-Parameters,	-- include at least one optional parameter
+	iRI-End-record			[2] IRI-Parameters,
+	iRI-Continue-record		[3] IRI-Parameters,	-- include at least one optional parameter
+	iRI-Report-record		[4] IRI-Parameters	-- include at least one optional parameter
+}
+
+-- Parameters having the same tag numbers have to be identical in Rel-5 and onwards modules.
+IRI-Parameters		::= SEQUENCE
+{
+	hi2DomainId				[0]	OBJECT IDENTIFIER,  -- 3GPP HI2 domain
+	iRIversion				[23] ENUMERATED
+	{
+		version2 (2),
+		...,
+		version3 (3),
+		version4 (4),
+			-- note that version5 (5) cannot be used as it was missed in the version 5 of this
+			-- ASN.1 module.
+		version6 (6),
+			-- vesion7(7) was ommited to align with ETSI TS 101 671.
+		lastVersion (8)	} OPTIONAL,
+		-- Optional parameter "iRIversion" (tag 23) was always redundant in 33.108, because
+		-- the object identifier "hi2DomainId" was introduced into "IRI Parameters" in the
+		-- initial version of 33.108v5.0.0. In order to keep backward compatibility, even when
+		-- the version of the "hi2DomainId" parameter will be incremented it is recommended
+		-- to always send to LEMF the same: enumeration value "lastVersion(8)".
+		-- if not present, it means version 1 is handled
+	lawfulInterceptionIdentifier	[1] LawfulInterceptionIdentifier,
+		-- This identifier is associated to the target.
+	timeStamp				[3] TimeStamp,
+		-- date and time of the event triggering the report.)
+	initiator 				[4] ENUMERATED
+	{
+		not-Available		(0),
+		originating-Target	(1),
+			-- in case of GPRS, this indicates that the PDP context activation, modification
+			-- or deactivation is MS requested
+		terminating-Target	(2),
+			-- in case of GPRS, this indicates that the PDP context activation, modification or
+			-- deactivation is network initiated
+	...
+	} OPTIONAL,
+
+	locationOfTheTarget		[8] Location OPTIONAL,
+		-- location of the target
+		-- or cell site location
+	partyInformation 		[9] SET SIZE (1..10) OF PartyInformation OPTIONAL,
+		-- This parameter provides the concerned party, the identiy(ies) of the party
+		--)and all the information provided by the party.
+
+	serviceCenterAddress	[13] PartyInformation OPTIONAL,
+		-- e.g. in case of SMS message this parameter provides the address of  the relevant
+		-- server
+	sMS						[14] SMS-report OPTIONAL,
+		-- this parameter provides the SMS content and associated information
+
+	national-Parameters		[16] National-Parameters OPTIONAL,
+	gPRSCorrelationNumber	[18] GPRSCorrelationNumber OPTIONAL,
+	gPRSevent 				[20] GPRSEvent OPTIONAL,
+		-- This information is used to provide particular action of the target
+		-- such as attach/detach
+	sgsnAddress 			[21] DataNodeAddress OPTIONAL,
+	gPRSOperationErrorCode 	[22] GPRSOperationErrorCode OPTIONAL,
+	ggsnAddress 			[24] DataNodeAddress OPTIONAL,
+	qOS						[25] UmtsQos OPTIONAL,
+	networkIdentifier		[26] Network-Identifier OPTIONAL,
+	sMSOriginatingAddress 	[27] DataNodeAddress OPTIONAL,
+	sMSTerminatingAddress 	[28] DataNodeAddress OPTIONAL,
+	iMSevent				[29] IMSevent OPTIONAL,
+	sIPMessage				[30] OCTET STRING  OPTIONAL,
+	servingSGSN-number		[31] OCTET STRING (SIZE (1..20))	OPTIONAL,
+                               -- Coded according to 3GPP TS 29.002 [4] and 3GPP TS 23.003 25].
+	servingSGSN-address		[32] OCTET STRING (SIZE (5..17)) 	OPTIONAL,
+	-- Octets are coded according to 3GPP TS 23.003 [25]
+	...,
+ 			-- Tag			[33] was taken into use by ETSI module in TS 101 671v2.13.1
+	ldiEvent	 			[34] LDIevent OPTIONAL,
+	correlation 			[35] CorrelationValues OPTIONAL,
+	mediaDecryption-info	[36] MediaDecryption-info OPTIONAL,
+	servingS4-SGSN-address	[37] OCTET STRING OPTIONAL,
+	-- Diameter Origin-Host and Origin-Realm of the S4-SGSN based on the TS 29.272 [59].
+	-- Only the data fields from the Diameter AVPs are provided concatenated
+	-- with a semicolon to populate this field.
+    sipMessageHeaderOffer   [38] OCTET STRING OPTIONAL,
+    sipMessageHeaderAnswer  [39] OCTET STRING OPTIONAL,
+    sdpOffer                [40] OCTET STRING OPTIONAL,
+    sdpAnswer               [41] OCTET STRING OPTIONAL,
+    uLITimestamp            [42] OCTET STRING (SIZE (8)) OPTIONAL,
+    -- Coded according to 3GPP TS 29.060 [17]; The upper 4  octets shall carry the ULI Timestamp
+    -- value; The lower 4 octets are undefined and shall be ignored by the receiver
+
+	packetDataHeaderInformation		 [43] PacketDataHeaderInformation	OPTIONAL,
+	mediaSecFailureIndication       [44] MediaSecFailureIndication OPTIONAL,
+	pANI-Header-Info		[45] SEQUENCE OF PANI-Header-Info		OPTIONAL,
+    -- information extracted from P-Access-Network-Info headers of SIP message;
+	-- described in TS 24.229 7.2A.4 [76]
+    imsVoIP					[46] IMS-VoIP-Correlation	OPTIONAL,
+	xCAPmessage				[47] OCTET STRING OPTIONAL,	
+	-- The entire HTTP contents of any of the target's IMS supplementary service setting
+	-- management or manipulation XCAP messages, mainly made through the Ut
+	-- interface defined in the 3GPP TS 24 623 [77].
+	ccUnavailableReason		[48] PrintableString	OPTIONAL,
+	carrierSpecificData					[49] OCTET STRING OPTIONAL,
+	-- Copy of raw data specified by the CSP or his vendor related to HSS.
+	current-Previous-Systems			[50] Current-Previous-Systems OPTIONAL,
+	change-Of-Target-Identity				[51] Change-Of-Target-Identity OPTIONAL,
+	requesting-Network-Identifier		[52] OCTET STRING OPTIONAL,
+	-- the requesting network identifier PLMN id (Mobile Country Code and Mobile Network Country,
+	-- defined in E212 [87]).
+	requesting-Node-Type					[53] Requesting-Node-Type OPTIONAL,
+	serving-System-Identifier				[54] OCTET STRING OPTIONAL,
+	-- the requesting network identifier (Mobile Country Code and Mobile Network Country,
+	-- defined in E212 [87]).
+	extendedLocParameters 	[55] 	ExtendedLocParameters OPTIONAL, -- LALS extended parameters
+	locationErrorCode		[56]	LocationErrorCode OPTIONAL,	-- LALS error code
+	cSREvent				[57]	CSREvent OPTIONAL,
+	ptc						[58]	PTC OPTIONAL,  -- PTC Events
+	ptcEncryption			[59]	PTCEncryptionInfo OPTIONAL,
+	-- PTC Security Information
+
+	national-HI2-ASN1parameters	[255]	National-HI2-ASN1parameters	OPTIONAL
+}
+-- Parameters having the same tag numbers have to be identical in Rel-5 and onwards modules
+
+-- PARAMETERS FORMATS
+
+PANI-Header-Info::= SEQUENCE
+{
+    access-Type 		[1] OCTET STRING 		OPTIONAL,
+    -- ASCII chain '3GPP-GERAN',... : see TS 24.229 7.2A.4 [76]
+    access-Class  		[2] OCTET STRING		OPTIONAL,
+    -- ASCII chain'3GPP-GERAN',... : see TS 24.229 7.2A.4 [76]
+    network-Provided	[3] NULL				OPTIONAL,
+    -- present if provided by the network
+    pANI-Location		[4] PANI-Location 		OPTIONAL,
+    ...
+}
+
+PANI-Location  ::= SEQUENCE
+{
+    raw-Location     [1] OCTET STRING	OPTIONAL,
+    -- raw copy of the location string from the P-Access-Network-Info header
+    location          [2] Location     	OPTIONAL,
+
+    ...
+}
+
+
+PartyInformation 			::= SEQUENCE
+{
+	party-Qualifier 	[0]  ENUMERATED
+	{
+		gPRS-Target(3),
+		...
+	},
+	partyIdentity 		[1] SEQUENCE
+	{
+		imei					[1] OCTET STRING (SIZE (8)) OPTIONAL,
+			-- See MAP format [4]
+
+		imsi					[3] OCTET STRING (SIZE (3..8)) OPTIONAL,
+			-- See MAP format [4] International Mobile
+			-- Station Identity E.212 number beginning with Mobile Country Code
+
+		msISDN					[6] OCTET STRING (SIZE (1..9)) OPTIONAL,
+			-- MSISDN of the target, encoded in the same format as the AddressString
+			-- parameters defined in MAP format document TS 29.002 [4]
+
+		e164-Format				[7] OCTET STRING    (SIZE (1 .. 25)) OPTIONAL,
+			-- E164 address of the node in international format. Coded in the same format as
+			-- the calling party number  parameter of the ISUP (parameter part:[29])
+
+		sip-uri					[8] OCTET STRING 	OPTIONAL,
+			-- See [26]
+
+		...,
+		tel-uri					[9] OCTET STRING 	OPTIONAL,
+			-- See [67]
+		x-3GPP-Asserted-Identity [10] OCTET STRING 	OPTIONAL,	
+		-- X-3GPP-Asserted-Identity header (3GPP TS 24.109 [79]) of the target, used in
+		-- some XCAP transactions. This information complement SIP URI or Tel URI of the target.
+		xUI						[11] OCTET STRING 	OPTIONAL
+		-- XCAP User Identifier (XUI)is a string, valid as a path element in an XCAP URI, that
+		-- may be associated with each user served by a XCAP resource server. Defined in IETF
+		-- RFC 4825[80]. This information may complement SIP URI or Tel URI of the target.
+
+	},
+	services-Data-Information 	[4] Services-Data-Information OPTIONAL,
+		-- This parameter is used to transmit all the information concerning the
+		-- complementary information associated to the basic data call
+	...
+}
+
+Location	::= SEQUENCE
+{
+	e164-Number         [1] OCTET STRING (SIZE (1..25)) OPTIONAL,
+        -- Coded in the same format as the ISUP location number (parameter
+        -- field) of the ISUP (see EN 300 356 [30]).    
+	globalCellID		[2] GlobalCellID	OPTIONAL,
+		--see MAP format (see [4])	
+	rAI					[4] Rai		OPTIONAL,
+		-- the Routeing Area Identifier in the current  SGSN is coded in accordance with the
+		--  10.5.5.15 of document [9] without the Routing Area Identification IEI
+		-- (only the last 6 octets are used)
+	gsmLocation			[5] GSMLocation OPTIONAL,
+ 	umtsLocation		[6] UMTSLocation OPTIONAL,
+	sAI					[7] Sai	OPTIONAL,
+		-- format:	PLMN-ID	3 octets (no. 1 - 3)
+		--			LAC		2 octets (no. 4 - 5)
+		--			SAC		2 octets (no. 6 - 7)
+		--			(according to 3GPP TS 25.413 [62])
+	...,
+	oldRAI				[8] Rai		OPTIONAL,
+		-- the Routeing Area Identifier in the old SGSN is coded in accordance with the
+		--  10.5.5.15 of document [9] without the Routing Area Identification IEI
+		-- (only the last 6 octets are used).
+	tAI					[9] OCTET STRING (SIZE (6))	OPTIONAL,
+		-- The TAI is coded according to the TS 29.118 [64] without the TAI IEI.
+		-- The tAI parameter is applicable only to the CS traffic cases where
+		-- the available location information is the one received from the the MME.
+	eCGI				[10] OCTET STRING (SIZE (8)) OPTIONAL,
+		-- the ECGI is coded according to the TS 29.118 [64] without the ECGI IEI.
+		-- The eCGI parameter is applicable only to the CS traffic cases where
+		-- the available location information is the one received from the the MME.
+	civicAddress		[11] CivicAddress OPTIONAL,
+		-- Every elements that describe civicAddress are based on IETF RFC 4776 or IETF
+		-- 5139, ISO.3166-1 and -2, ISO 639-1, UPU SB42-4 ([71]to [75]) Such element is to
+		-- enrich IRI
+		-- Messages to LEMF by civic elements on the location of a H(e)NodeB or a WLAN hotspot,
+		-- instead of geographical location  of the target or any geo-coordinates. Please, look
+		-- at the 5.11 location information of TS 33.106 and 4 functional architecture of TS
+		-- 33.107 on how such element can be used.
+	operatorSpecificInfo	[12]	OCTET STRING OPTIONAL,
+    	-- other CSP specific information.
+	uELocationTimestamp		[13]	CHOICE
+	{
+		timestamp			[0]	TimeStamp,
+		timestampUnknown	[1]	NULL,
+		...
+	} OPTIONAL
+		-- Date/time of the UE location
+}
+
+GlobalCellID	::= OCTET STRING  (SIZE (5..7))
+Rai				::= OCTET STRING (SIZE (6))
+Sai				::=	OCTET STRING (SIZE (7))
+
+GSMLocation 	::= CHOICE
+{
+	geoCoordinates 	[1] SEQUENCE	
+	{
+		latitude		[1]	PrintableString (SIZE(7..10)),
+							-- format : 	XDDMMSS.SS
+		longitude		[2]	PrintableString (SIZE(8..11)),
+							-- format : 	XDDDMMSS.SS
+		mapDatum		[3]	MapDatum DEFAULT wGS84,
+		...,
+		azimuth			[4]	INTEGER (0..359) OPTIONAL
+			-- The azimuth is the bearing, relative to true north.
+	},
+		-- format : 	XDDDMMSS.SS
+		-- 				X 			: N(orth), S(outh), E(ast), W(est)
+		--				DD or DDD 	: degrees (numeric characters)
+		--				MM			: minutes (numeric characters)
+		--				SS.SS 		: seconds, the second part (.SS) is optionnal
+		-- Example :
+		--			latitude short form		N502312
+		--			longitude long form		E1122312.18
+
+	utmCoordinates	[2] SEQUENCE	
+	{
+		utm-East 		[1] PrintableString (SIZE(10)),		
+		utm-North 		[2] PrintableString (SIZE(7)),	
+			-- example	utm-East	32U0439955
+			--			utm-North	5540736
+		mapDatum		[3]	MapDatum DEFAULT wGS84,
+		...,
+		azimuth			[4] INTEGER (0..359) OPTIONAL
+			-- The azimuth is the bearing, relative to true north.
+ 	},
+
+	utmRefCoordinates  	[3] SEQUENCE
+	{
+		utmref-string		PrintableString (SIZE(13)),
+		mapDatum			MapDatum DEFAULT wGS84,
+		...
+	},
+		-- example	32UPU91294045		
+
+	wGS84Coordinates  	[4] OCTET STRING
+		-- format is as defined in [37].
+}
+
+MapDatum ::= ENUMERATED
+{	
+	wGS84,
+	wGS72,
+	eD50, 	-- European Datum 50
+	...
+}
+
+UMTSLocation ::= CHOICE {
+	point					[1]	GA-Point,
+	pointWithUnCertainty	[2]	GA-PointWithUnCertainty,
+	polygon					[3]	GA-Polygon
+}
+
+GeographicalCoordinates ::= SEQUENCE {
+	latitudeSign			ENUMERATED { north, south },
+	latitude				INTEGER (0..8388607),
+	longitude				INTEGER (-8388608..8388607),
+	...
+}
+
+GA-Point ::= SEQUENCE {
+	geographicalCoordinates		GeographicalCoordinates,
+	...
+}
+
+GA-PointWithUnCertainty ::=SEQUENCE {
+	geographicalCoordinates		GeographicalCoordinates,
+	uncertaintyCode				INTEGER (0..127)
+}
+
+maxNrOfPoints						INTEGER ::= 15
+
+GA-Polygon ::= SEQUENCE (SIZE (1..maxNrOfPoints)) OF
+	SEQUENCE {
+		geographicalCoordinates		GeographicalCoordinates,
+		...
+	}
+
+CivicAddress ::= CHOICE {
+    detailedCivicAddress        SET OF DetailedCivicAddress,
+	xmlCivicAddress				XmlCivicAddress,
+	...
+}
+
+XmlCivicAddress ::= UTF8String
+     -- Must conform to the February 2008 version of the XML format on the representation of
+     -- civic location described in IETF RFC 5139[72].
+
+DetailedCivicAddress ::= SEQUENCE {
+	building			[1] UTF8String OPTIONAL,
+		-- Building (structure), for example Hope Theatre
+	room				[2] UTF8String OPTIONAL,
+		-- Unit (apartment, suite), for example 12a
+	placeType			[3] UTF8String OPTIONAL,
+		-- Place-type, for example office
+	postalCommunityName	[4] UTF8String OPTIONAL,
+		-- Postal Community Name, for example Leonia
+	additionalCode	[5] UTF8String OPTIONAL,
+		-- Additional Code, for example 13203000003
+	seat				[6] UTF8String OPTIONAL,
+		-- Seat, desk, or cubicle, workstation, for example WS 181
+	primaryRoad		[7] UTF8String OPTIONAL,
+		-- RD is the primary road name, for example Broadway
+	primaryRoadDirection   [8] UTF8String OPTIONAL,
+		-- PRD is the leading road direction, for example N or North
+	trailingStreetSuffix [9] UTF8String OPTIONAL,
+		-- POD or trailing street suffix, for example SW or South West
+	streetSuffix		[10] UTF8String OPTIONAL,
+		-- Street suffix or type, for example Avenue or Platz or Road
+	houseNumber			[11] UTF8String OPTIONAL,
+		-- House number, for example 123
+	houseNumberSuffix	[12] UTF8String OPTIONAL,
+		-- House number suffix, for example A or Ter
+	landmarkAddress		[13] UTF8String OPTIONAL,
+		-- Landmark or vanity address, for example Columbia University
+	additionalLocation	[114] UTF8String OPTIONAL,
+		-- Additional location, for example South Wing
+	name 			[15] UTF8String OPTIONAL,
+		-- Residence and office occupant, for example Joe's Barbershop
+	floor 			[16] UTF8String OPTIONAL,
+		-- Floor, for example 4th floor
+	primaryStreet	[17] UTF8String OPTIONAL,
+		-- Primary street name, for example Broadway
+	primaryStreetDirection   [18] UTF8String OPTIONAL,
+		-- PSD is the leading street direction, for example N or North
+	roadSection		[19] UTF8String OPTIONAL,
+		-- Road section, for example 14
+	roadBranch    	[20] UTF8String OPTIONAL,
+		-- Road branch, for example Lane 7
+	roadSubBranch  	[21] UTF8String OPTIONAL,
+		-- Road sub-branch, for example Alley 8
+	roadPreModifier [22] UTF8String OPTIONAL,
+		-- Road pre-modifier, for example Old
+	roadPostModifier [23] UTF8String OPTIONAL,
+		-- Road post-modifier, for example Extended
+	postalCode		[24]UTF8String OPTIONAL,
+		-- Postal/zip code, for example 10027-1234
+	town			[25] UTF8String OPTIONAL,
+	county			[26] UTF8String OPTIONAL,
+		-- An administrative sub-section, often defined in ISO.3166-2[74]  International
+		-- Organization for Standardization, "Codes for the representation of names of
+		-- countries and their subdivisions -  Part 2: Country subdivision code"
+	country			[27] UTF8String,
+		-- Defined in ISO.3166-1 [39] International Organization for Standardization, "Codes for
+		-- the representation of names of countries and their subdivisions - Part 1: Country
+		-- codes". Such definition is not optional in case of civic address. It is the
+		-- minimum information needed to qualify and describe a civic address, when a
+		-- regulation of a specific country requires such information
+	language		[28] UTF8String,
+		-- Language defined in the IANA registry according to the assignments found
+		-- in the standard ISO 639 Part 1, "ISO 639-1:2002[75], Codes for the representation of
+		-- names of languages - Part 1: Alpha-2 code" or using assignments subsequently made
+		-- by the ISO 639 Part 1 maintenance agency
+	...
+}
+
+SMS-report		::= SEQUENCE
+{
+	sMS-Contents	[3] SEQUENCE
+	{
+		sms-initiator		[1] ENUMERATED 	-- party which sent the  SMS
+		{
+			target			(0),
+			server			(1),
+			undefined-party	(2),
+			...
+		},
+		transfer-status		[2] ENUMERATED
+		{
+			succeed-transfer	(0), 		-- the transfer of the SMS message succeeds
+			not-succeed-transfer(1),
+			undefined			(2),
+			...
+		} OPTIONAL,
+		other-message		[3] ENUMERATED 	-- in case of terminating call, indicates if
+											-- the server will send other SMS
+		{
+			yes			(0),
+			no			(1),
+			undefined	(2),
+			...
+		} OPTIONAL,
+		content				[4] OCTET STRING (SIZE (1 .. 270)) OPTIONAL,
+									-- Encoded in the format defined for the SMS mobile
+		...
+	}	
+}
+
+GPRSCorrelationNumber ::= OCTET STRING (SIZE(8..20))
+CorrelationValues ::= CHOICE {
+		
+		iri-to-CC 	[0]		IRI-to-CC-Correlation, -- correlates IRI to Content(s)
+		iri-to-iri	[1]		IRI-to-IRI-Correlation, -- correlates IRI to IRI
+		both-IRI-CC	[2]		SEQUENCE { -- correlates IRI to IRI and IRI to Content(s)
+								iri-CC	[0]	IRI-to-CC-Correlation,
+								iri-IRI	[1]	IRI-to-IRI-Correlation}
+}
+
+
+IMS-VoIP-Correlation ::= SET OF SEQUENCE {
+			ims-iri		[0]		IRI-to-IRI-Correlation,
+			ims-cc		[1]		IRI-to-CC-Correlation 		OPTIONAL
+}
+
+IRI-to-CC-Correlation ::= SEQUENCE { -- correlates IRI to Content
+			cc 		[0] SET OF 	OCTET STRING,-- correlates IRI to multiple CCs
+			iri 	[1] 		OCTET STRING OPTIONAL
+									-- correlates IRI to CC with signaling
+}
+IRI-to-IRI-Correlation ::= OCTET STRING -- correlates IRI to IRI
+
+
+GPRSEvent ::= ENUMERATED
+{
+	pDPContextActivation 					(1),
+	startOfInterceptionWithPDPContextActive	(2),
+	pDPContextDeactivation					(4),
+	gPRSAttach 								(5),
+	gPRSDetach 								(6),
+	locationInfoUpdate 						(10),
+	sMS 									(11),
+	pDPContextModification					(13),
+	servingSystem							(14),
+	... ,
+	startOfInterceptionWithMSAttached		(15),
+	packetDataHeaderInformation				(16) ,	hSS-Subscriber-Record-Change			(17),
+	registration-Termination				(18),
+	-- FFS
+	location-Up-Date						(19),
+	-- FFS
+	cancel-Location							(20),
+	register-Location						(21),
+	location-Information-Request			(22)
+
+}
+-- see [19]
+
+CSREvent ::= ENUMERATED
+{ 
+	cSREventMessage	 					(1),	
+...
+}
+
+IMSevent ::= ENUMERATED
+{
+	unfilteredSIPmessage (1),
+		-- This value indicates to LEMF that the whole SIP message is sent , i.e. without filtering
+        -- CC; location information is removed by the DF2/MF if not required to be sent.
+
+	...,
+	sIPheaderOnly (2),
+		-- If warrant requires only IRI then specific content in a 'sIPMessage'
+		-- (e.g. 'Message', etc.) has been deleted before sending it to LEMF.
+
+    decryptionKeysAvailable (3) ,
+		-- This value indicates to LEMF that the IRI carries CC decryption keys for the session
+        -- under interception.
+
+    startOfInterceptionForIMSEstablishedSession  (4) ,
+        -- This value indicates to LEMF that the IRI carries information related to
+                -- interception started on an already established IMS session.
+	xCAPRequest (5),
+		-- This value indicates to LEMF that the XCAP request is sent.
+	xCAPResponse (6) ,
+		-- This value indicates to LEMF that the XCAP response is sent.
+	ccUnavailable (7)
+	-- This value indicates to LEMF that the media is not available for interception for intercept
+	-- orders that requires media interception.
+}
+
+Current-Previous-Systems ::= SEQUENCE
+{
+	serving-System-Identifier			[1] OCTET STRING OPTIONAL,
+	-- VPLMN id (Mobile Country Code and Mobile Network Country, E. 212 number [87]).
+	current-Serving-SGSN-Number			[2] OCTET STRING OPTIONAL,
+	-- E.164 number of the current serving SGSN.
+	current-Serving-SGSN-Address		[3] OCTET STRING OPTIONAL,
+																									-- The IP address of the current serving SGSN or its Diameter Origin-Host and Origin-Realm.
+																									current-Serving-S4-SGSN-Address			[4]OCTET STRING OPTIONAL,
+																									-- The Diameter Origin-Host and Origin-Realm of the current serving S4 SGSN.
+																									previous-Serving-System-Identifier		[5] OCTET STRING OPTIONAL,
+																									-- VPLMN id (Mobile Country Code and Mobile Network Country, defined in E212 [87]).
+																									previous-Serving-SGSN-Number				[6] OCTET STRING OPTIONAL,
+																									-- The E.164 number of the previous serving SGCN.
+																									previous-Serving-SGSN-Address			[7] OCTET STRING OPTIONAL,
+																									-- The IP address of the previous serving SGCN or its Diameter Origin-Host and Origin-Realm.
+																									previous-Serving-S4-SGSN-Address			[8]OCTET STRING OPTIONAL,
+																									-- The Diameter Origin-Host and Origin-Realm of the previous serving S4 SGSN.
+...
+}
+
+Change-Of-Target-Identity ::= SEQUENCE
+{
+			new-MSISDN								[1] PartyInformation OPTIONAL,
+			-- new MSISDN of the target, encoded in the same format as the AddressString
+																										-- parameters defined in MAP format document TS 29.002 [4]
+																										old-MSISDN				[2] PartyInformation OPTIONAL,
+			-- new MSISDN of the target, encoded in the same format as the AddressString
+																										-- parameters defined in MAP format document TS 29.002 [4]
+			new-IMSI 								[3] PartyInformation OPTIONAL,
+					-- See MAP format [4] International Mobile
+																											-- Station Identity E.212 number beginning with Mobile Country Code
+			old-IMSI 								[4] PartyInformation OPTIONAL,
+					-- See MAP format [4] International Mobile
+																											-- Station Identity E.212 number beginning with Mobile Country Code
+			new-IMEI 								[5] PartyInformation OPTIONAL,
+					-- See MAP format [4] International Mobile
+																											-- Equipement Identity defined in MAP format document TS 29.002 [4]
+			old-IMEI 								[6] PartyInformation OPTIONAL,
+					-- See MAP format [4] International Mobile
+																											-- Equipement Identity defined in MAP format document TS 29.002 [4]
+...,
+	new-IMPI							[7] PartyInformation OPTIONAL,
+	old-IMPI							[8] PartyInformation OPTIONAL,
+	new-SIP-URI							[9]	PartyInformation OPTIONAL,
+	old-SIP-URI							[10] PartyInformation OPTIONAL,
+	new-TEL-URI							[11] PartyInformation OPTIONAL,
+	old-TEL-URI							[12] PartyInformation OPTIONAL
+}
+																									
+Requesting-Node-Type ::= ENUMERATED
+{
+	mSC				(1),
+	sMS-Centre		(2),
+	gMLC			(3),
+	mME				(4),
+	sGSN			(5),
+	...
+}
+
+Services-Data-Information ::= SEQUENCE
+{
+	gPRS-parameters [1] GPRS-parameters OPTIONAL,
+	...
+}
+
+GPRS-parameters ::= SEQUENCE
+{
+	pDP-address-allocated-to-the-target 	[1] DataNodeAddress OPTIONAL,
+	aPN 					[2] OCTET STRING (SIZE(1..100)) OPTIONAL,
+	-- The Access Point Name (APN) is coded in accordance with
+		-- 3GPP TS 24.008 [9] without the APN IEI (only the last 100 octets are used).
+		-- Octets are coded according to 3GPP TS 23.003 [25].
+	pDP-type 				[3] OCTET STRING (SIZE(2)) OPTIONAL,
+    -- Include either Octets 3 and 4 of the Packet Data Protocol Address information element of
+    -- 3GPP TS 24.008 [9]or Octets 4 and 5 of the End User Address IE of 3GPP TS 29.060 [17].
+
+	-- when PDP-type is IPv4 or IPv6, the IP address is carried by parameter
+	-- pDP-address-allocated-to-the-target
+	-- when PDP-type is IPv4v6, the additional IP address is carried by parameter
+	-- additionalIPaddress
+	...,
+	nSAPI					[4] OCTET STRING (SIZE (1)) OPTIONAL,
+    -- Include either Octet 2 of the NSAPI IE of 3GPP TS 24.008 [9] or Octet 2 of the NSAPI IE of
+    -- 3GPP TS 29.060 [17].
+	additionalIPaddress		[5] DataNodeAddress OPTIONAL
+}
+
+GPRSOperationErrorCode ::= OCTET STRING
+-- The parameter shall carry the GMM cause value or the SM cause value, as defined in the
+-- standard [9], without the IEI.
+
+
+LDIevent ::= ENUMERATED
+{
+	targetEntersIA 			(1),
+	targetLeavesIA			(2),
+	...
+}
+
+UmtsQos ::= CHOICE
+{
+	qosMobileRadio [1] OCTET STRING,
+		-- The qosMobileRadio parameter shall be coded in accordance with the  10.5.6.5 of
+		-- document [9] without the Quality of service IEI and Length of
+		-- quality of service IE (. That is, first
+		-- two octets carrying 'Quality of service IEI' and 'Length of quality of service
+ 		-- IE' shall be excluded).
+	qosGn [2] OCTET STRING
+		-- qosGn parameter shall be coded in accordance with  7.7.34 of document [17]
+}
+
+MediaDecryption-info ::= SEQUENCE OF CCKeyInfo
+		-- One or more key can be available for decryption, one for each media streams of the
+        -- intercepted session.
+
+CCKeyInfo ::= SEQUENCE
+{
+	cCCSID	 [1]	OCTET STRING,	
+		-- the parameter uniquely mapping the key to the encrypted stream.
+	cCDecKey [2]	OCTET STRING,
+	cCSalt   [3]    OCTET STRING OPTIONAL,
+        -- The field reports the value from the CS_ID field in the ticket exchange headers as
+        -- defined in IETF RFC 6043 [61].
+	...
+}
+
+MediaSecFailureIndication  ::= ENUMERATED
+{
+    genericFailure  (0),
+    ...
+}
+
+PacketDataHeaderInformation ::= CHOICE
+{
+
+	packetDataHeader		[1]	PacketDataHeaderReport,
+	packetDataSummary	[2]	PacketDataSummaryReport,
+...
+}
+
+PacketDataHeaderReport ::= CHOICE
+{
+
+	packetDataHeaderMapped	[1]	PacketDataHeaderMapped,
+	packetDataHeaderCopy	[2]	PacketDataHeaderCopy,
+...
+}
+
+PacketDataHeaderMapped ::= SEQUENCE
+{
+	sourceIPAddress			[1] IPAddress,
+	sourcePortNumber		[2] INTEGER (0..65535) OPTIONAL,	
+	destinationIPAddress	[3] IPAddress,
+	destinationPortNumber	[4] INTEGER (0..65535) OPTIONAL,
+	transportProtocol		[5] INTEGER,
+	-- For IPv4, report the "Protocol" field and for IPv6 report "Next Header" field.
+	-- Assigned Internet Protocol Numbers can be found at
+	-- http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xml
+	packetsize				[6] INTEGER OPTIONAL,
+	flowLabel				[7] INTEGER OPTIONAL,
+	packetCount				[8] INTEGER OPTIONAL,
+	direction				[9] TPDU-direction,
+...
+}
+
+
+TPDU-direction ::= ENUMERATED
+{
+	from-target 	(1),
+	to-target 		(2),
+	unknown 		(3)
+}
+
+PacketDataHeaderCopy ::= SEQUENCE
+{
+	direction				[1] TPDU-direction,
+	headerCopy				[2] OCTET STRING,	-- includes a copy of the packet header at the IP
+				-- network layer and above including extension headers, but excluding contents.
+...
+}
+
+
+PacketDataSummaryReport ::= SEQUENCE OF PacketFlowSummary
+
+PacketFlowSummary ::= SEQUENCE
+{
+
+	sourceIPAddress			[1] IPAddress,
+	sourcePortNumber		[2] INTEGER (0..65535) OPTIONAL,	
+	destinationIPAddress	[3] IPAddress,
+	destinationPortNumber	[4] INTEGER (0..65535) OPTIONAL,
+	transportProtocol		[5] INTEGER,
+	-- For IPv4, report the "Protocol" field and for IPv6 report "Next Header" field.
+	-- Assigned Internet Protocol Numbers can be found at
+	-- http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xml
+	flowLabel				[6] INTEGER OPTIONAL,
+	summaryPeriod			[7] ReportInterval,
+	packetCount				[8] INTEGER,
+	sumOfPacketSizes		[9] INTEGER,
+	packetDataSummaryReason	[10] ReportReason,
+...
+}
+
+ReportReason ::= ENUMERATED
+{
+	timerExpired			(0),	
+	countThresholdHit		(1),
+	pDPComtextDeactivated   (2),
+	pDPContextModification	(3),
+	otherOrUnknown		(4),
+	...
+}
+
+ReportInterval ::= SEQUENCE
+{
+	firstPacketTimeStamp	[0] TimeStamp,
+	lastPacketTimeStamp		[1] TimeStamp,
+	...
+}
+
+-- LALS extended location parameters are mapped from the MLP pos element parameters 
+-- and attributes defined in [88], version 3.4. For details see specific [88] clauses refered below. 
+ExtendedLocParameters ::= SEQUENCE
+{
+	posMethod		[0]		PrintableString OPTIONAL, -- clause 5.3.72.1
+	mapData			[1] 								-- clause 5.2.2.3
+					CHOICE 		{base64Map 	[0] PrintableString, 	-- clause 5.3.11
+								url 		[1] PrintableString 	-- clause 5.3.135
+								} OPTIONAL,
+	altitude		[2]	
+					SEQUENCE 	{alt PrintableString, -- clause 5.3.4
+								alt-uncertainty PrintableString OPTIONAL -- clause 5.3.6
+								} OPTIONAL,
+	speed			[3] 	PrintableString OPTIONAL, -- clause 5.3.116
+	direction		[4]		PrintableString OPTIONAL, -- clause 5.3.25
+	level-conf		[5]		PrintableString OPTIONAL, -- clause 5.3.51
+	qOS-not-met		[6] 	BOOLEAN OPTIONAL, -- clause 5.3.94
+	motionStateList [7] 								-- clause 5.2.2.3
+					SEQUENCE	{primaryMotionState 	[0] PrintableString, -- clause 5.3.23
+								secondaryMotionState 	[1] SEQUENCE OF PrintableString OPTIONAL,
+								confidence 				[2] PrintableString -- clause 5.3.68
+								} OPTIONAL,
+	floor    		[8] 
+					SEQUENCE 	{floor-number PrintableString, -- clause 5.3.38
+								floor-number-uncertainty PrintableString OPTIONAL
+								-- clause 5.3.39
+								} OPTIONAL, 
+	additional-info	[9] PrintableString OPTIONAL, -- clause 5.3.1
+
+-- The following parameter contains a copy of the unparsed XML code of
+-- MLP response message, i.e. the entire XML document containing
+-- a <slia> (described in [88], clause 5.2.3.2.2) or
+-- a <slirep> (described in [88], clause 5.2.3.2.3) MLP message.
+-- This parameter is present when the LI-LCS client cannot fully map
+-- the MLP response message into an ASN.1 Location object.
+    
+	lALS-rawMLPPosData	[10] UTF8String OPTIONAL, 
+
+	...
+}
+
+LocationErrorCode ::= INTEGER (1..699)
+-- LALS location error codes are the OMA MLP result identifiers defined in [88], Clause 5.4 
+
+PTCEncryptionInfo ::= SEQUENCE {
+
+	cipher					[1]	UTF8String,
+	cryptoContext			[2] UTF8String OPTIONAL,
+	key						[3] UTF8String,
+	keyEncoding				[4] UTF8String,
+	salt					[5] UTF8String OPTIONAL,
+	pTCOther				[6] UTF8String OPTIONAL,
+	...
+}
+
+PTC ::= SEQUENCE {
+	abandonCause				[1] UTF8String OPTIONAL, 
+	accessPolicyFailure		[2] UTF8String	OPTIONAL,
+	accessPolicyType			[3] AccessPolicyType OPTIONAL,
+	alertIndicator				[5] AlertIndicator OPTIONAL,
+	associatePresenceStatus	[6] AssociatePresenceStatus OPTIONAL,
+	bearer-capability			[7] UTF8String OPTIONAL,
+		-- identifies the Bearer capability information element (value part)
+	broadcastIndicator			[8] BOOLEAN	OPTIONAL,
+	-- default False, true indicates this is a braodcast to a group
+	contactID  					[9] UTF8String OPTIONAL,
+	emergency 					[10] Emergency OPTIONAL,
+	emergencyGroupState		[11] EmergencyGroupState OPTIONAL,
+	timeStamp					[12] TimeStamp,
+	pTCType						[13] PTCType OPTIONAL,
+	failureCode					[14] UTF8String	OPTIONAL,
+	floorActivity				[15] FloorActivity OPTIONAL,
+	floorSpeakerID				[16] PTCAddress OPTIONAL,
+	groupAdSender				[17] UTF8String OPTIONAL,
+	-- Identifies the group administrator who was the originator of the group call. 
+	-- tag [18] was used in r15 (15) version-4 (4)
+	groupAuthRule				[19] GroupAuthRule OPTIONAL,
+	groupCharacteristics		[20] UTF8String OPTIONAL,
+	holdRetrieveInd				[21] BOOLEAN OPTIONAL, 
+	-- true indicates target is placed on hold, false indicates target was retrived from hold.
+	-- tag [22] was used in r15 (15) version-4 (4)
+	imminentPerilInd 			[23] ImminentPerilInd OPTIONAL,
+	implicitFloorReq			[24] ImplicitFloorReq OPTIONAL,
+	initiationCause				[25] InitiationCause OPTIONAL,
+	invitationCause				[26] UTF8String OPTIONAL,
+	iPAPartyID					[27] UTF8String OPTIONAL,
+	iPADirection				[28] IPADirection OPTIONAL,
+	listManagementAction		[29] ListManagementAction OPTIONAL,
+	listManagementFailure		[30] UTF8String OPTIONAL,
+	listManagementType			[31] ListManagementType OPTIONAL,
+	maxTBTime					[32] UTF8String OPTIONAL,  -- defined in seconds.
+	mCPTTGroupID				[33] UTF8String OPTIONAL,	
+	mCPTTID						[34] UTF8String OPTIONAL,
+	mCPTTInd					[35] BOOLEAN OPTIONAL,
+	-- default False indicates to associate from target, true indicates to the target.
+	location					[36] Location OPTIONAL,
+	mCPTTOrganizationName		[37] UTF8String OPTIONAL,
+	mediaStreamAvail 			[38] BOOLEAN OPTIONAL, 
+	-- True indicates available for media, false indicates not able to accept media.
+	priority-Level				[40] Priority-Level OPTIONAL,
+	preEstSessionID				[41] UTF8String OPTIONAL,
+	preEstStatus				[42] PreEstStatus OPTIONAL,
+	pTCGroupID					[43] UTF8String OPTIONAL,
+	pTCIDList					[44] UTF8String OPTIONAL,
+	pTCMediaCapability			[45] UTF8String OPTIONAL,
+	pTCOriginatingId   		[46] UTF8String OPTIONAL,
+	pTCOther					[47] UTF8String OPTIONAL,
+	pTCParticipants  			[48] UTF8String OPTIONAL,
+	pTCParty					[49] UTF8String OPTIONAL,
+	pTCPartyDrop				[50] UTF8String OPTIONAL, 
+	pTCSessionInfo   			[51] UTF8String OPTIONAL,
+	pTCServerURI				[52] UTF8String OPTIONAL,
+	pTCUserAccessPolicy		[53] UTF8String OPTIONAL,
+	pTCAddress					[54] PTCAddress OPTIONAL,
+	queuedFloorControl			[55] BOOLEAN OPTIONAL, 
+	--Default FALSE,send TRUE if Queued floor control is used.
+	queuedPosition				[56] UTF8String OPTIONAL,
+	-- indicates the queued position of the Speaker (Target or associate) who has the 
+	-- right to speak.
+	registrationRequest		[57] RegistrationRequest OPTIONAL,
+	registrationOutcome		[58] RegistrationOutcome OPTIONAL,
+	retrieveID					[59] UTF8String OPTIONAL, 
+	rTPSetting					[60] RTPSetting OPTIONAL,
+	talkBurstPriority			[61] Priority-Level	OPTIONAL,
+	talkBurstReason				[62] Talk-burst-reason-code OPTIONAL,
+	-- Talk-burst-reason-code Defined according to the rules and procedures
+	-- in (OMA-PoC-AD [97])
+	talkburstControlSetting	[63] TalkburstControlSetting OPTIONAL,
+	targetPresenceStatus		[64] UTF8String OPTIONAL,
+	port-Number					[65] INTEGER (0..65535) OPTIONAL,
+	...
+}
+
+AccessPolicyType  ::= SEQUENCE
+{
+	userAccessPolicyAttempt 			[1] BOOLEAN,
+	-- default False, true indicates Target has accessed.
+	groupAuthorizationRulesAttempt		[2] BOOLEAN,
+	-- default False, true indicates Target has accessed.
+	userAccessPolicyQuery				[3] BOOLEAN,
+	-- default False, true indicates Target has accessed.
+	groupAuthorizationRulesQuery		[4] BOOLEAN,
+	-- default False, true indicates Target has accessed.
+	userAccessPolicyResult				[5] UTF8String,
+	groupAuthorizationRulesResult		[6] UTF8String,
+	...
+}
+
+AlertIndicator ::= ENUMERATED
+{
+	-- indicates the group call alert condition.
+									sent	(1),
+								received	(2),
+								cancelled	(3),
+	...
+	}
+
+AssociatePresenceStatus ::=	SEQUENCE
+{
+	presenceID		[1] UTF8String,
+		-- identity of PTC Client(s)or the PTC group 
+	presenceType	[2] PresenceType,
+	presenceStatus	[3] BOOLEAN, 
+		-- default false, true indicates connected.
+...
+}
+
+PresenceType	::= ENUMERATED
+{
+	pTCClient		(1),
+	pTCGroup		(2),
+	-- identifies the type of presenceID given [PTC Client(s) or PTC group].
+	...
+}
+
+Emergency 		::= ENUMERATED
+{
+	-- MCPTT services indication of peril condition. 
+	imminent  (1),
+	peril	  (2),
+	cancel	  (3),
+	...
+}
+
+EmergencyGroupState		::= SEQUENCE
+{
+	-- indicates the state of the call, at least one of these information 
+	-- elements shall be present.
+	clientEmergencyState [1] ENUMERATED
+{
+		-- in case of MCPTT call, indicates the response for the client
+		inform			 (1),
+		response		 (2),
+		cancelInform 	 (3),
+		cancelResponse	 (4),
+		...
+} OPTIONAL,
+	groupEmergencyState	 [2] ENUMERATED	
+{
+		-- in case of MCPTT group call, indicates if there is a group emergency or 
+		-- a response from the Target to indicate current Client state of emergency.
+		inForm			(1),
+		reSponse		(2),
+		cancelInform 	(3),
+		cancelResponse	(4),
+		...
+	},
+	...
+}
+
+
+PTCType					::= ENUMERATED
+{
+	pTCStartofInterception  					(1),
+	pTCServinSystem								(2),
+	pTCSessionInitiation						(3),
+	pTCSessionAbandonEndRecord					(4),
+	pTCSessionStartContinueRecord				(5),
+	pTCSessionEndRecord 						(6),
+	pTCPre-EstablishedSessionSessionRecord		(7),
+	pTCInstantPersonalAlert						(8),
+	pTCPartyJoin								(9),
+	pTCPartyDrop								(10),
+	pTCPartyHold-RetrieveRecord					(11),
+	pTCMediaModification						(12),
+	pTCGroupAdvertizement						(13),
+	pTCFloorConttrol							(14),
+	pTCTargetPressence							(15),
+	pTCAssociatePressence						(16),
+	pTCListManagementEvents						(17),
+	pTCAccessPolicyEvents						(18),
+	pTCMediaTypeNotification					(19),
+	pTCGroupCallRequest							(20),
+	pTCGroupCallCancel							(21),
+	pTCGroupCallResponse						(22),
+	pTCGroupCallInterrogate						(23),
+	pTCMCPTTImminentGroupCall					(24),
+	pTCCC										(25),
+	pTCRegistration								(26),
+	pTCEncryption								(27),
+	...
+}
+
+FloorActivity	::= SEQUENCE
+{
+	tBCP-Request	[1] BOOLEAN,
+		-- default False, true indicates Granted.
+	tBCP-Granted	[2] BOOLEAN,
+		-- default False, true indicates Granted permission to talk. 
+	tBCP-Deny		[3] BOOLEAN,
+		-- default True, False indicates permission granted. 
+	tBCP-Queued 	[4] BOOLEAN,
+		-- default False, true indicates the request to talk is in queue. 
+	tBCP-Release	[5] BOOLEAN,
+		-- default True, true indicates the Request to talk is completed, 
+		-- False indicates PTC Client has the request to talk.
+	tBCP-Revoke		[6] BOOLEAN,
+		-- default False, true indicates the privilege to talk is canceld from the 
+		-- PTC server. 
+	tBCP-Taken		[7] BOOLEAN,
+		-- default True, false indicates another PTC Client has the permission to talk. 
+	tBCP-Idle		[8]	BOOLEAN,
+		-- default True, False indicates the Talk Burst Protocol is taken.
+...
+}
+
+GroupAuthRule ::= ENUMERATED
+{
+	allow-Initiating-PtcSession			(0),
+	block-Initiating-PtcSession			(1),
+	allow-Joining-PtcSession				(2),
+	block-Joining-PtcSession				(3),
+	allow-Add-Participants					(4),
+	block-Add-Participants					(5),
+	allow-Subscription-PtcSession-State	(6),
+	block-Subscription-PtcSession-State	(7),
+	allow-Anonymity							(8),
+	forbid-Anonymity						(9),
+...
+}
+
+ImminentPerilInd 		::= ENUMERATED
+{
+	request			(1),
+	response		(2),
+	cancel			(3),
+	-- when the MCPTT Imminent Peril Group Call Request, Response or Cancel is detected
+...
+}
+
+ImplicitFloorReq		::= ENUMERATED
+{
+	join			(1),
+	rejoin			(2),
+	release			(3),
+	-- group Call request to join, rejoin, or release of the group call
+...
+}
+
+InitiationCause			::= ENUMERATED
+{
+	requests				(1),
+	received				(2),
+	pTCOriginatingId		(3),
+	-- requests or receives a session initiation from the network or another 
+	-- party to initiate a PTC session. Identify the originating PTC party, if known.
+...
+}
+
+IPADirection			::= ENUMERATED
+{
+	toTarget		(0),
+	fromTarget		(1),
+...
+}
+
+ListManagementAction	::= ENUMERATED
+{
+	create 		(1),
+	modify 		(2),
+	retrieve 	(3),
+	delete 		(4),
+	notify 		(5),
+...
+}
+
+
+ListManagementType		::= ENUMERATED
+{
+	contactListManagementAttempt	(1),
+	groupListManagementAttempt		(2),
+	contactListManagementResult		(3),
+	groupListManagementResult		(4),
+	requestSuccessful				(5),
+...
+}
+
+Priority-Level			::= ENUMERATED
+{
+	pre-emptive			(0),
+	high-priority		(1),
+	normal-priority		(2),
+	listen-only			(3),
+...
+}
+
+PreEstStatus			::= ENUMERATED
+{
+	established		(1),
+	modify			(2),
+	released		(3),
+...
+}
+
+PTCAddress				::= SEQUENCE
+{
+	uri					[0] UTF8String,
+	-- The set of URIs defined in [RFC3261] and related SIP RFCs.
+	privacy-setting		[1] BOOLEAN, 
+	-- Default FALSE, send TRUE if privacy is used.
+	privacy-alias		[2] VisibleString	OPTIONAL,
+	-- if privacy is used, the PTC Server creates an anonymous PTC Address of the form
+	-- <sip:anonymous@anonymous.invalid>. In addition to  anonymity, the anonymous PTC
+	-- Addresses SHALL be unique within a PTC Session. In case more than one anonymous
+	-- PTC Addresses are used in the same PTC Session, for the second Anonymous PTC
+	-- Session and thereafter, the PTC Server SHOULD use the form
+	-- sip:anonymous-n@anonymous.invalid where n is an integer number. 
+	nickname 			[3] UTF8String 	OPTIONAL,
+...
+}
+
+
+RegistrationRequest		::= ENUMERATED
+{
+	register		(1),
+	re-register		(2),
+	de-register		(3),
+...
+}
+
+RegistrationOutcome		::= ENUMERATED
+{
+	success		(0),
+	failure		(1),
+...
+}
+
+RTPSetting				::= SEQUENCE
+{
+	ip-address  [0] IPAddress,
+	port-number [1] Port-Number,
+	-- the IP address and port number at the PTC Server for the RTP Session
+...
+}
+
+Port-Number ::= INTEGER (0..65535)
+
+
+TalkburstControlSetting	::= SEQUENCE
+{ 
+	talk-BurstControlProtocol	[1] UTF8String,
+	talk-Burst-parameters		[2] SET OF VisibleString,
+	-- selected by the PTC Server from those contained in the original SDP offer in the 
+	-- incoming SIP INVITE request from the PTC Client
+	tBCP-PortNumber 			[3] INTEGER (0..65535),
+	-- PTC Server's port number to be used for the Talk Burst Control Protocol 
+	...
+}
+
+Talk-burst-reason-code ::= VisibleString
+
+
+END

@@ -1,0 +1,95 @@
+Umts-HI3-PS {itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulintercept(2) threeGPP(4) hi3(2) r7(7) version-0(0)}
+
+DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+IMPORTS
+		
+GPRSCorrelationNumber
+	FROM UmtsHI2Operations
+	{itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulintercept(2) threeGPP(4) 	hi2(1) r7(7) version-2(2)}    -- Imported from TS 33.108v7.2.0
+
+LawfulInterceptionIdentifier,
+	
+TimeStamp
+	FROM HI2Operations
+	{itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulIntercept(2) hi2(1) 	version9(9)};  -- from ETSI HI2Operations TS 101 671v2.13.1
+
+-- Object Identifier Definitions
+
+-- Security DomainId
+lawfulInterceptDomainId OBJECT IDENTIFIER ::= {itu-t(0) identified-organization(4) etsi(0)
+securityDomain(2) lawfulIntercept(2)}
+
+-- Security Subdomains
+threeGPPSUBDomainId OBJECT IDENTIFIER ::= {lawfulInterceptDomainId threeGPP(4)}
+hi3DomainId OBJECT IDENTIFIER  ::= {threeGPPSUBDomainId hi3(2) r7(7) version-0(0)}
+
+CC-PDU	::= SEQUENCE
+{
+ 	uLIC-header		[1] ULIC-header,
+	payload			[2] OCTET STRING
+}
+
+ULIC-header ::= SEQUENCE
+{
+	hi3DomainId				[0]	OBJECT IDENTIFIER,  -- 3GPP HI3 Domain
+	version					[1]	Version,
+	lIID					[2] LawfulInterceptionIdentifier OPTIONAL,
+	correlation-Number		[3]	GPRSCorrelationNumber,
+	timeStamp				[4]	TimeStamp OPTIONAL,
+	sequence-number			[5]	INTEGER (0..65535),
+	t-PDU-direction			[6] TPDU-direction,
+	...,
+	national-HI3-ASN1parameters		[7] National-HI3-ASN1parameters OPTIONAL,
+	--  encoded per national requirements
+	ice-type				[8] ICE-type OPTIONAL
+		-- The ICE-type indicates the applicable Intercepting Control Element(see ref [19]) in which
+		-- the T-PDU is intercepted.
+}
+
+Version ::= ENUMERATED
+{
+	version1(1),
+	...,
+	version3(3) ,
+		-- versions 4-7 were omitted to align with UmtsHI2Operations.
+	lastVersion(8)
+		-- Mandatory parameter "version" (tag 1) was always redundant in 33.108, because
+		-- the object identifier "hi3DomainId" was introduced into "ULIC-headerV in the initial
+		-- version of 33.108v5.0.0 In order to keep backward compatibility, even when the
+		-- version of the "hi3DomainId" parameter will be incremented it is recommended to
+		-- always send to LEMF the same: enumeration value "lastVersion(8)".
+}
+
+TPDU-direction ::= ENUMERATED
+{
+	from-target 	(1),
+	to-target 		(2),
+	unknown 		(3)
+}
+
+National-HI3-ASN1parameters	::= SEQUENCE
+{
+	countryCode		[1] PrintableString (SIZE (2)),
+		-- Country Code according to ISO 3166-1 [39],
+		-- the country to which the parameters inserted after the extension marker apply
+	...
+		-- In case a given country wants to use additional national parameters according to its law,
+		-- these national parameters should be defined using the ASN.1 syntax and added after the
+		-- extension marker (...).
+		-- It is recommended that "version parameter" and "vendor identification parameter" are
+		-- included in the national parameters definition. Vendor identifications can be
+		-- retrieved from IANA web site. It is recommended to avoid
+		-- using tags from 240 to 255 in a formal type definition.
+}
+
+ICE-type ::= ENUMERATED
+{
+	sgsn			(1),
+	ggsn			(2),
+	...
+}
+
+END

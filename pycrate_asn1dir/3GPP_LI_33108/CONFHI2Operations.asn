@@ -1,0 +1,222 @@
+CONFHI2Operations {itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulintercept(2) threeGPP(4) hi2conf(10)  r16 (16) version-0 (0)}
+
+DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+IMPORTS
+
+
+		LawfulInterceptionIdentifier,
+		TimeStamp,
+		Network-Identifier,
+		National-Parameters,
+		National-HI2-ASN1parameters
+
+			FROM HI2Operations
+			{itu-t(0) identified-organization(4) etsi(0) securityDomain(2)
+ 				  lawfulIntercept(2) hi2(1) version18 (18)} -- Imported from TS 101 671, version 3.12.1
+
+
+		CorrelationValues,
+		IMS-VoIP-Correlation
+	
+			FROM UmtsHI2Operations
+			{itu-t(0) identified-organization(4) etsi(0) securityDomain(2)
+ 				  lawfulIntercept(2) threeGPP(4) hi2(1)  r16 (16) version-1(1)}; -- Imported from PS
+				-- ASN.1 Portion of this standard
+
+			
+
+-- Object Identifier Definitions
+
+-- Security DomainId
+lawfulInterceptDomainId OBJECT IDENTIFIER ::= {itu-t(0) identified-organization(4) etsi(0)
+securityDomain(2) lawfulIntercept(2)}
+
+-- Security Subdomains
+threeGPPSUBDomainId OBJECT IDENTIFIER ::= {lawfulInterceptDomainId threeGPP(4)}
+hi2confDomainId OBJECT IDENTIFIER	::= {threeGPPSUBDomainId hi2conf(10) r16 (16) version-0 (0)}
+
+ConfIRIsContent		::= CHOICE
+{
+	confiRIContent			ConfIRIContent,
+	confIRISequence			ConfIRISequence
+}
+
+ConfIRISequence		::= SEQUENCE OF ConfIRIContent
+
+-- Aggregation of ConfIRIContent is an optional feature.
+-- It may be applied in cases when at a given point in time
+-- several IRI records are available for delivery to the same LEA destination.
+-- As a general rule, records created at any event shall be sent
+-- immediately and not withheld in the DF or MF in order to
+-- apply aggragation.
+-- When aggregation is not to be applied,
+-- ConfIRIContent needs to be chosen.
+ConfIRIContent		::= CHOICE
+{
+	iRI-Begin-record		[1] IRI-Parameters,	-- include at least one optional parameter
+	iRI-End-record			[2] IRI-Parameters,
+	iRI-Continue-record		[3] IRI-Parameters,	-- include at least one optional parameter
+	iRI-Report-record		[4] IRI-Parameters,	-- include at least one optional parameter
+   ...
+}
+
+IRI-Parameters		::= SEQUENCE
+{
+	hi2confDomainId				[0]	OBJECT IDENTIFIER,  -- 3GPP HI2 Conf domain
+	lawfulInterceptionIdentifier	[1] LawfulInterceptionIdentifier,
+		-- This identifier is associated to the target.
+	timeStamp				[2] TimeStamp,
+		-- date and time of the event triggering the report.
+
+	partyInformation 		[3] SET SIZE (1..10) OF PartyIdentity OPTIONAL,
+		-- This is the identity of the target.
+        -- The sender shall only use one instance of PartyIdentity, the "SET SIZE" structure is
+        -- kept for ASN.1 backward compatibility reasons only.
+
+	national-Parameters		[4] National-Parameters OPTIONAL,
+	networkIdentifier		[5] Network-Identifier OPTIONAL,
+	confEvent				[6] ConfEvent,	
+	correlation				[7] ConfCorrelation OPTIONAL,
+	confID					[8] IMSIdentity	  OPTIONAL,
+	tempConfID				[9] IMSIdentity	  OPTIONAL,
+	listOfPotConferees		[10] SET OF PartyIdentity 	OPTIONAL,
+	listOfConferees			[11] SET OF ConfPartyInformation 	OPTIONAL,
+	joinPartyID				[12] ConfPartyInformation	OPTIONAL,
+	leavePartyID			[13] ConfPartyInformation	OPTIONAL,
+	listOfBearerAffectedParties		[14] SET OF ConfPartyInformation	OPTIONAL,
+	confEventInitiator		[15] ConfEventInitiator	OPTIONAL,
+	confEventFailureReason	[16] ConfEventFailureReason	OPTIONAL,
+	confEndReason			[17] Reason	OPTIONAL,
+	potConfStartInfo		[18] TimeStamp  OPTIONAL,
+	potConfEndInfo			[19] TimeStamp  OPTIONAL,
+	recurrenceInfo			[20] RecurrenceInfo  OPTIONAL,
+	confControllerIDs		[21] SET OF PartyIdentity 	OPTIONAL,
+	mediamodification		[23] MediaModification OPTIONAL,
+	bearerModifyPartyID		[24] ConfPartyInformation OPTIONAL,
+    listOfWaitConferees		[25] SET OF ConfPartyInformation OPTIONAL,
+
+...
+
+}
+
+
+-- PARAMETERS FORMATS
+
+ConfEvent ::= ENUMERATED
+{
+	confStartSuccessfull 					(1),
+	confStartUnsuccessfull					(2),
+	startOfInterceptionConferenceActive		(3),
+	confPartyJoinSuccessfull				(4),
+	confPartyJoinUnsuccessfull				(5),
+	confPartyLeaveSuccessfull				(6),
+	confPartyLeaveUnsuccessfull				(7),
+	confPartyBearerModifySuccessfull		(8),
+	confPartyBearerModifyUnsuccessfull		(9),
+	confEndSuccessfull 						(10),
+	confEndUnsuccessfull					(11),
+	confServCreation 						(12),
+	confServUpdate	 						(13),
+	...
+}
+
+ConfPartyInformation ::= SEQUENCE
+{
+		partyIdentity			[1] PartyIdentity OPTIONAL,
+
+		supportedmedia			[2] SupportedMedia OPTIONAL,
+			
+	...
+}
+
+ConfCorrelation ::= CHOICE
+
+{
+	correlationValues [1] CorrelationValues,
+	correlationNumber [2] OCTET STRING,
+	imsVoIP			  [3] IMS-VoIP-Correlation,
+	...
+}
+
+PartyIdentity ::= SEQUENCE
+{
+		
+		iMPU			[3]	SET OF IMSIdentity  OPTIONAL,
+
+		iMPI			[4]	SET OF IMSIdentity  OPTIONAL,
+		
+	...
+}
+
+IMSIdentity ::= SEQUENCE
+{
+		sip-uri					[1] OCTET STRING 	OPTIONAL,
+			-- See [REF 26 of 33.108]
+
+		tel-uri					[2] OCTET STRING 	OPTIONAL,
+			-- See [REF 67 of 33.108]
+
+	...
+}
+
+SupportedMedia ::= SEQUENCE
+{
+		confServerSideSDP		[1] OCTET STRING 	OPTIONAL,  -- include SDP information
+			-- describing Conf Server Side characteristics.
+
+		confUserSideSDP			[2] OCTET STRING 	OPTIONAL,  -- include SDP information
+			-- describing Conf User Side characteristics
+
+	...
+}
+
+MediaModification ::= ENUMERATED
+{
+		add (1),
+		remove (2),
+		change (3),
+		unknown (4),
+	...
+}
+
+ConfEventFailureReason ::= CHOICE
+{
+		failedConfStartReason		[1] Reason,
+
+		failedPartyJoinReason		[2] Reason,
+
+		failedPartyLeaveReason		[3] Reason,
+
+		failedBearerModifyReason	[4] Reason,
+
+		failedConfEndReason			[5] Reason,
+
+	...
+}
+
+ConfEventInitiator ::= CHOICE
+{
+		confServer		[1] NULL,
+			
+		confTargetID	[2] PartyIdentity,
+
+		confPartyID		[3] PartyIdentity,
+	...
+}
+
+RecurrenceInfo ::= SEQUENCE
+{
+	recurrenceStartDateAndTime			 	[1] TimeStamp OPTIONAL,
+	recurrenceEndDateAndTime				[2] TimeStamp OPTIONAL,
+	recurrencePattern						[3] UTF8String OPTIONAL, -- includes a description of
+               -- the recurrence pattern, for example, "Yearly, on Jan 23" or "Weekly, on Monday"
+	
+	...
+}
+
+Reason ::= OCTET STRING
+
+END

@@ -1,0 +1,76 @@
+UMTS-HI3CircuitLIOperations
+{itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulintercept(2) threeGPP(4) hi3CS(4) r16(16) version0(0)}
+
+DEFINITIONS IMPLICIT TAGS ::=
+
+-- The following operations are used to transmit user data, which can be exchanged via the DSS1,
+-- ISUP or MAP signalling (e.g. UUS).
+
+BEGIN
+
+IMPORTS 
+
+
+
+	LawfulInterceptionIdentifier,
+	CommunicationIdentifier,
+	TimeStamp,
+	OperationErrors,
+	Supplementary-Services
+
+		FROM HI2Operations
+			{itu-t(0) identified-organization(4) etsi(0) securityDomain(2)
+lawfulIntercept(2) hi2(1) version18(18)} -- Imported from TS 101 671 v3.12.1
+
+SMS-report
+		FROM UmtsHI2Operations
+			{itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulintercept(2)
+threeGPP(4) hi2(1) r16 (16) version-0(0)};
+
+-- Object Identifier Definitions
+
+-- Security DomainId
+
+lawfulInterceptDomainId OBJECT IDENTIFIER ::= {itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulIntercept(2)}
+
+-- Security Subdomains
+threeGPPSUBDomainId OBJECT IDENTIFIER ::= {lawfulInterceptDomainId threeGPP(4)}
+hi3CSDomainId OBJECT IDENTIFIER  ::= {threeGPPSUBDomainId hi3CS(4) r16 (16) version-0(0)}
+
+UMTS-Content-Report		::= SEQUENCE
+{
+	hi3CSDomainId 					[0] OBJECT IDENTIFIER OPTIONAL, -- 3GPP HI3 CS Domain.
+		--  When FTP is used this parametr shall be sent to LEMF.
+	version							[23] ENUMERATED
+	{
+		version1(1),
+		... ,
+		-- versions 2-7 were omitted to align with UmtsHI2Operations.
+		version8(8)
+	} OPTIONAL,
+		-- Optional parameter "version" (tag 23) became redundant starting from
+		-- 33.108v6.8.0, where the object identifier "hi3CSDomainId" was introduced into
+		-- "UMTS-Content-Report". In order to keep backward compatibility, even when the
+		-- version of the "hi3CSDomainId" parameter will be incremented it is recommended to
+		-- always send to LEMF the same: enumeration value "lastVersion(8)".
+	lawfulInterceptionIdentifier	[6] LawfulInterceptionIdentifier OPTIONAL,
+	communicationIdentifier			[1] CommunicationIdentifier,
+		-- Used to uniquely identify an intercepted call: the same as used for the relevant IRI.
+		-- Called "callIdentifier" in edition 1 ES 201 671.
+	timeStamp						[2] TimeStamp,
+	initiator						[3] ENUMERATED
+	{
+		originating-party(0),
+		terminating-party(1),
+		forwarded-to-party(2),
+		undefined-party(3),
+		...
+	} OPTIONAL,
+	content							[4] Supplementary-Services OPTIONAL,
+		-- UUI are encoded in the format defined for the User-to-user information parameter
+		-- of the ISUP protocol (see EN 300 356 [30]). Only one UUI parameter is sent per message.
+	sMS-report						[5] SMS-report OPTIONAL,
+	...
+}
+
+END

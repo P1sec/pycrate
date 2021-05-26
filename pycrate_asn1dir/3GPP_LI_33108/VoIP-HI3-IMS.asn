@@ -1,0 +1,110 @@
+VoIP-HI3-IMS {itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulIntercept(2) threeGPP(4) hi3voip(12)  r15 (15) version-1 (1)}
+
+DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+IMPORTS
+
+LawfulInterceptionIdentifier,
+TimeStamp,
+Network-Identifier
+	FROM HI2Operations
+	{itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulIntercept(2) hi2(1) version18(18)}-- from ETSI HI2Operations TS 101 671, version 3.12.1
+
+
+National-HI3-ASN1parameters
+
+FROM Eps-HI3-PS {itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulintercept(2) threeGPP(4) hi3eps(9) r14 (14) version-0 (0)};
+
+
+-- Object Identifier Definitions
+
+-- Security DomainId
+lawfulInterceptDomainId OBJECT IDENTIFIER ::= {itu-t(0) identified-organization(4) etsi(0)
+securityDomain(2) lawfulIntercept(2)}
+
+-- Security Subdomains
+threeGPPSUBDomainId OBJECT IDENTIFIER ::= {lawfulInterceptDomainId threeGPP(4)}
+hi3voipDomainId OBJECT IDENTIFIER  ::= {threeGPPSUBDomainId hi3voip(12)  r15 (15) version-1 (1)}
+
+Voip-CC-PDU	::= SEQUENCE
+{
+ 	voipLIC-header		[1] VoipLIC-header,
+	payload				[2] OCTET STRING
+}
+
+VoipLIC-header ::= SEQUENCE
+{
+	hi3voipDomainId			[0]	OBJECT IDENTIFIER,  -- 3GPP VoIP HI3 Domain
+	lIID					[2] LawfulInterceptionIdentifier OPTIONAL,
+	voipCorrelationNumber	[3]	VoipCorrelationNumber, 
+							  -- For VoIP, contains the same contents as the
+                              -- cc parameter contained within an IRI-to-CC-Correlation parameter
+                              -- which is contained in the IMS-VoIP-Correlation parameter in the
+                              -- IRI [HI2]; For PTC, contains the same contents as the cc parameter
+                              -- contained within an IRI-to-CC-Correlation parameter which is
+							  -- contained in the CorrelationValues parameter in the IRI [HI2]
+
+	timeStamp				[4]	TimeStamp OPTIONAL,
+	sequence-number			[5]	INTEGER (0..65535),
+	t-PDU-direction			[6] TPDU-direction,
+	national-HI3-ASN1parameters		[7] National-HI3-ASN1parameters OPTIONAL,
+	--  encoded per national requirements
+	ice-type				[8] ICE-type OPTIONAL,
+		-- The ICE-type indicates the applicable Intercepting Control Element in which
+		-- the VoIP CC is intercepted.
+	...,
+	payload-description		[9] Payload-description OPTIONAL,
+		-- When this option is implemented, shall be used to provide the RTP payload description
+        -- as soon as it is available at DF3 (initial one or each time the DF3 is notified of a
+        -- change)
+	networkIdentifier		[10] Network-Identifier OPTIONAL, 
+		-- Mandatory when used for PTC
+		-- Identifies the network element that is reporting the CC
+	pTCSessionInfo      	[11] UTF8String OPTIONAL
+		-- Mandatory when used for PTC
+		-- Identifies the PTC Session. Together with the 'voipCorrelationNumber', uniquely
+    	-- identifies a specific PTC talk burst.
+}
+
+VoipCorrelationNumber ::= OCTET STRING
+
+TPDU-direction ::= ENUMERATED
+{
+	from-target 	(1),
+	to-target 		(2),
+	combined		(3), -- Indicates that combined CC (i.e., from/to-target)delivery is used.
+	unknown			(4)
+}				
+
+ICE-type ::= ENUMERATED {
+	ggsn			(1),
+	pDN-GW          (2),
+    aGW 			(3),
+	trGW			(4),
+	mGW				(5),
+    other			(6),
+	unknown			(7),			
+	... ,
+	mRF				(8),
+	lmISF			(9),
+	sGW				(10)
+}				
+
+Payload-description ::= SEQUENCE
+{
+	copyOfSDPdescription		[1] OCTET STRING OPTIONAL,
+		-- Copy of the SDP. Format as per RFC 4566 [94].
+		-- used for VoIP
+	..., 
+	mediaFormat					[2]	INTEGER (0..127) OPTIONAL,
+        -- as defined in RFC 3551 [93]
+        -- used with IP-based delivery for CS
+	mediaAttributes				[3]	OCTET STRING OPTIONAL
+		-- as defined in RFC 4566 [94]
+        -- used with IP-based delivery for CS
+
+}
+
+END

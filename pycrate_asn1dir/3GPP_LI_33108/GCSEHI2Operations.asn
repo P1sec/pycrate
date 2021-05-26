@@ -1,0 +1,233 @@
+GCSEHI2Operations {itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulintercept(2) threeGPP(4) hi2gcse(13)  r16 (16) version-0 (0)}
+
+DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+IMPORTS
+
+
+		LawfulInterceptionIdentifier,
+		TimeStamp,
+		Network-Identifier,
+		National-Parameters,
+		National-HI2-ASN1parameters,
+		IPAddress
+
+			FROM HI2Operations
+			{itu-t(0) identified-organization(4) etsi(0) securityDomain(2)
+ 				  lawfulIntercept(2) hi2(1) version18 (18)} -- Imported from TS 101 671
+
+
+				
+		EPSLocation
+	
+			FROM EpsHI2Operations
+			{itu-t(0) identified-organization(4) etsi(0) securityDomain(2)
+ 				  lawfulIntercept(2) threeGPP(4) hi2eps(8) r16 (16) version-0(0)};
+				-- Imported from EPS ASN.1 Portion of this standard
+				
+
+			
+
+-- Object Identifier Definitions
+
+-- Security DomainId
+lawfulInterceptDomainId OBJECT IDENTIFIER ::= {itu-t(0) identified-organization(4) etsi(0)
+securityDomain(2) lawfulIntercept(2)}
+
+-- Security Subdomains
+threeGPPSUBDomainId OBJECT IDENTIFIER ::= {lawfulInterceptDomainId threeGPP(4)}
+hi2gcseDomainId OBJECT IDENTIFIER	::= {threeGPPSUBDomainId hi2gcse(13) r16 (16) version-0(0)}
+
+GcseIRIsContent		::= CHOICE
+{
+	gcseiRIContent			GcseIRIContent,
+	gcseIRISequence			GcseIRISequence
+}
+
+GcseIRISequence		::= SEQUENCE OF GcseIRIContent
+
+-- Aggregation of GCSEIRIContent is an optional feature.
+-- It may be applied in cases when at a given point in time
+-- several IRI records are available for delivery to the same LEA destination.
+-- As a general rule, records created at any event shall be sent
+-- immediately and not withheld in the DF or MF in order to
+-- apply aggragation.
+-- When aggregation is not to be applied,
+-- GCSEIRIContent needs to be chosen.
+GcseIRIContent		::= CHOICE
+{
+	iRI-Begin-record		[1] IRI-Parameters,	-- include at least one optional parameter
+	iRI-End-record			[2] IRI-Parameters,
+	iRI-Continue-record		[3] IRI-Parameters,	-- include at least one optional parameter
+	iRI-Report-record		[4] IRI-Parameters,	-- include at least one optional parameter
+   ...
+}
+
+IRI-Parameters		::= SEQUENCE
+{
+	hi2gcseDomainId				[0]	OBJECT IDENTIFIER,  -- 3GPP HI2 GCSE domain
+	lawfulInterceptionIdentifier	[1] LawfulInterceptionIdentifier,
+		-- This identifier is associated with the target.
+	timeStamp				[2] TimeStamp,
+		-- date and time of the event triggering the report.
+
+	partyInformation 		[3] SET OF GcsePartyIdentity,
+		-- This is the identity of the target.
+
+	national-Parameters		[4] National-Parameters OPTIONAL,
+	networkIdentifier		[5] Network-Identifier,
+	gcseEvent				[6] GcseEvent,	
+	correlation				[7] GcseCorrelation OPTIONAL,
+	targetConnectionMethod	[8] TargetConnectionMethod	  OPTIONAL,
+	gcseGroupMembers		[9] GcseGroup	  OPTIONAL,
+	gcseGroupParticipants	[10] GcseGroup	OPTIONAL,
+	gcseGroupID				[11] GcseGroupID	OPTIONAL,
+	gcseGroupCharacteristics[12] GcseGroupCharacteristics	OPTIONAL,
+	reservedTMGI			[13] ReservedTMGI	OPTIONAL,
+	tMGIReservationDuration	[14] TMGIReservationDuration	OPTIONAL,
+	visitedNetworkID		[15] VisitedNetworkID	 OPTIONAL,
+	addedUserID				[16] GcsePartyIdentity	OPTIONAL,
+	droppedUserID			[17] GcsePartyIdentity	OPTIONAL,
+	reasonForCommsEnd		[18] Reason	OPTIONAL,
+	gcseLocationOfTheTarget	[19] EPSLocation OPTIONAL,
+	
+
+
+...
+
+}
+
+
+-- PARAMETERS FORMATS
+
+GcseEvent ::= ENUMERATED
+{
+	activationOfGcseGroupComms				(1),
+	startOfInterceptionGcseGroupComms		(2),
+	userAdded								(3),
+	userDropped								(4),
+	targetConnectionModification			(5),
+	targetdropped							(6),
+	deactivationOfGcseGroupComms			(7),
+	...
+}
+
+GcseCorrelation ::= OCTET STRING
+
+
+GcsePartyIdentity ::= SEQUENCE
+{
+		imei					[1] OCTET STRING (SIZE (8)) OPTIONAL,
+			-- See MAP format [4]
+
+		imsi					[2] OCTET STRING (SIZE (3..8)) OPTIONAL,
+			-- See MAP format [4] International Mobile
+			-- Station Identity E.212 number beginning with Mobile Country Code
+		
+		iMPU			[3]	SET OF IMSIdentity  OPTIONAL,
+
+		iMPI			[4]	SET OF IMSIdentity  OPTIONAL,
+
+		proseUEID		[6] SET OF ProSeUEID OPTIONAL,
+
+		otherID			[7] OtherIdentity OPTIONAL,
+		
+	...
+}
+
+IMSIdentity ::= SEQUENCE
+{
+		sip-uri					[1] OCTET STRING 	OPTIONAL,
+			-- See [REF 26 of 33.108]
+
+		tel-uri					[2] OCTET STRING 	OPTIONAL,
+			-- See [REF 67 of 33.108]
+
+	...
+}
+
+OtherIdentity ::= SEQUENCE
+{
+		otherIdentityEncoding	[1] UTF8String 	OPTIONAL, -- Specifies the encoding format of
+            -- the contents included within the parameter otherIDInfo.
+
+		otherIDInfo				[2] OCTET STRING 	OPTIONAL,
+	...
+}
+
+GcseGroup ::= SEQUENCE OF GcsePartyIdentity
+
+GcseGroupID ::= GcsePartyIdentity
+
+
+ProSeUEID ::= OCTET STRING --coded with the 3 octets corresponding to the Source L2 ID of the MAC
+                           --PDU in TS 25.321[85].
+
+
+GcseGroupCharacteristics ::= SEQUENCE
+{
+		characteristicsEncoding	[1] UTF8String 	OPTIONAL, -- Specifies the encoding format of
+            -- the contents included within the parameter characteristics.
+
+		characteristics			[2] OCTET STRING 	OPTIONAL,
+	...
+}
+
+
+TargetConnectionMethod ::= SEQUENCE
+{
+		connectionStatus [1] BOOLEAN, -- True indicates connected, false indicates not connected.
+		upstream	     [2] Upstream 	OPTIONAL, -- Specifies the encoding format of
+		downstream	     [3] Downstream 	OPTIONAL, -- Specifies the encoding format of
+           -- upstream and downstream parameters are omitted if connectionStatus indicates false.
+	...
+}
+
+
+Upstream ::= SEQUENCE
+{
+		accessType [1] AccessType,
+		accessId   [2] AccessID, 	
+	...
+}
+
+
+Downstream ::= SEQUENCE
+{
+		accessType [1] AccessType,
+		accessId   [2] AccessID, 	
+	...
+} -- it may be possible for the UE to receive in multiple ways (e.g. via normal EPS as well
+  -- as mulitcast.
+
+AccessType ::= ENUMERATED
+{
+		ePS-Unicast   (1),
+		ePS-Multicast (2), 	
+	...
+}
+
+
+AccessID ::= CHOICE
+{
+		tMGI 		 [1] ReservedTMGI,
+		uEIPAddress  [2] IPAddress, 	
+	...
+} -- it may be possible for the UE to receive in multiple ways (e.g. via normal EPS as well
+  -- as mulitcast.
+
+VisitedNetworkID ::= UTF8String -- contains the PLMN ID of the PLMN serving the UE, cooded
+       -- according to [53]
+
+
+ReservedTMGI ::= OCTET STRING -- Shall be coded with the MBMS-Session-Duration attribute
+                              -- specified in TS 29.468.
+
+TMGIReservationDuration ::= OCTET STRING -- Shall be coded with the TMGI attribute specified
+                                         -- in TS 29.468.
+
+Reason ::= UTF8String
+
+END

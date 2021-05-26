@@ -1,0 +1,255 @@
+UmtsCS-HI2Operations
+{itu-t (0) identified-organization (4) etsi (0) securityDomain (2) lawfulIntercept (2) threeGPP(4) hi2CS (3)  r16 (16) version-0 (0)}
+
+DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+IMPORTS
+
+
+	LawfulInterceptionIdentifier,
+	TimeStamp,
+	Intercepted-Call-State,
+	PartyInformation,
+	CallContentLinkCharacteristics,
+	CommunicationIdentifier,
+	CC-Link-Identifier,
+	National-Parameters,
+	National-HI2-ASN1parameters
+
+	FROM HI2Operations
+		{itu-t(0) identified-organization(4) etsi(0) securityDomain(2)
+			lawfulIntercept(2) hi2(1) version9(9)} -- Imported from TS 101 671 v2.13.1
+
+	Location,
+	SMS-report,
+	ExtendedLocParameters,
+	LocationErrorCode
+
+	FROM UmtsHI2Operations
+		{itu-t(0) identified-organization(4) etsi(0) securityDomain(2)
+			lawfulintercept(2) threeGPP(4) hi2(1) r16 (16) version-0(0)};
+
+
+-- Object Identifier Definitions
+
+-- Security DomainId
+lawfulInterceptDomainId OBJECT IDENTIFIER ::= {itu-t(0) identified-organization(4) etsi(0)
+securityDomain(2) lawfulIntercept(2)}
+
+-- Security Subdomains
+threeGPPSUBDomainId OBJECT IDENTIFIER ::= {lawfulInterceptDomainId threeGPP(4)}
+hi2CSDomainId OBJECT IDENTIFIER ::= {threeGPPSUBDomainId hi2CS(3)  r16 (16) version-0 (0)}
+
+
+UmtsCS-IRIsContent		::= CHOICE
+{
+	iRIContent			UmtsCS-IRIContent,
+	iRISequence			UmtsCS-IRISequence
+}
+
+UmtsCS-IRISequence		::= SEQUENCE OF UmtsCS-IRIContent
+	-- Aggregation of UmtsCS-IRIContent is an optional feature.
+	-- It may be applied in cases when at a given point in time several IRI records are
+	-- available for delivery to the same LEA destination.
+	-- As a general rule, records created at any event shall be sent immediately and shall
+	-- not held in the DF or MF in order to apply aggregation.
+-- When aggregation is not to be applied, UmtsCS-IRIContent needs to be chosen.
+		
+UmtsCS-IRIContent		::= CHOICE
+{
+	iRI-Begin-record		[1] IRI-Parameters,
+		--at least one optional parameter has to be included within the iRI-Begin-Record
+	iRI-End-record			[2] IRI-Parameters,
+	iRI-Continue-record		[3] IRI-Parameters,
+		--at least one optional parameter has to be included within the iRI-Continue-Record
+	iRI-Report-record		[4] IRI-Parameters,
+		--at least one optional parameter has to be included within the iRI-Report-Record
+	...
+}
+
+IRI-Parameters		::= SEQUENCE
+{
+	hi2CSDomainId						[0]	OBJECT IDENTIFIER, -- 3GPP HI2 CS domain
+
+	iRIversion							[23] ENUMERATED
+	{
+		version1(1),
+		...,
+		version2(2),
+		version3(3),
+		-- versions 4-7 were ommited to align with UmtsHI2Operations.
+		lastVersion(8)
+	} OPTIONAL,
+		-- Optional parameter "iRIversion" (tag 23) was always redundant in 33.108, because
+		-- the object identifier "hi2CSDomainId" was introduced into "IRI Parameters" with the
+		-- initial HI2 CS domain module in 33.108v6.1.0. In order to keep backward compatibility,
+		-- even when the version of the "hi2CSDomainId" parameter will be incremented it is
+		-- recommended to always send to LEMF the same: enumeration value "lastVersion(8)".
+		-- if not present, it means version 1 is handled
+	lawfulInterceptionIdentifier		[1] LawfulInterceptionIdentifier,
+		-- This identifier is associated to the target.
+	communicationIdentifier				[2] CommunicationIdentifier,
+		-- used to uniquely identify an intercepted call.
+
+	timeStamp							[3] TimeStamp,
+		-- date and time of the event triggering the report.
+	intercepted-Call-Direct 			[4] ENUMERATED
+	{
+		not-Available(0),
+		originating-Target(1),
+		terminating-Target(2),
+	...
+	} OPTIONAL,
+	intercepted-Call-State 				[5] Intercepted-Call-State OPTIONAL,
+		-- Not required for UMTS. May be included for backwards compatibility to GSM
+	ringingDuration 					[6] OCTET STRING (SIZE (3)) OPTIONAL,
+		-- Duration in seconds. BCD coded : HHMMSS
+		-- Not required for UMTS. May be included for backwards compatibility to GSM
+	conversationDuration 				[7] OCTET STRING (SIZE (3)) OPTIONAL,
+		-- Duration in seconds. BCD coded : HHMMSS
+		-- Not required for UMTS. May be included for backwards compatibility to GSM
+	locationOfTheTarget					[8] Location OPTIONAL,
+		-- location of the target
+	partyInformation 					[9] SET SIZE (1..10) OF PartyInformation OPTIONAL,
+		-- This parameter provides the concerned party (Originating, Terminating or forwarded
+		-- party), the identity(ies) of the party and all the information provided by the party.
+	callContentLinkInformation			[10] SEQUENCE
+	{
+		cCLink1Characteristics		[1] CallContentLinkCharacteristics OPTIONAL,
+			-- information concerning the Content of Communication Link Tx channel established
+			-- toward the LEMF (or the sum signal channel, in case of mono mode).
+		cCLink2Characteristics		[2] CallContentLinkCharacteristics OPTIONAL,
+			-- information concerning the Content of Communication Link Rx channel established
+			-- toward the LEMF.
+		...
+	} OPTIONAL,
+	release-Reason-Of-Intercepted-Call	[11] OCTET STRING (SIZE (2)) OPTIONAL,
+		-- Release cause coded in [31] format.
+		-- This parameter indicates the reason why the
+		-- intercepted call cannot be established or why the intercepted call has been
+		-- released after the active phase.
+	nature-Of-The-intercepted-call		[12] ENUMERATED
+	{
+		--Not required for UMTS. May be included for backwards compatibility to GSM
+		--Nature of the intercepted "call":
+		gSM-ISDN-PSTN-circuit-call(0),
+			-- the possible UUS content is sent through the HI2 or HI3 "data" interface
+			-- the possible call content call is established through the HI3 "circuit" interface
+		gSM-SMS-Message(1),
+			-- the SMS content is sent through the HI2 or HI3 "data" interface
+		uUS4-Messages(2),
+			-- the UUS content is sent through the HI2 or HI3 "data" interface
+		tETRA-circuit-call(3),
+			-- the possible call content call is established through the HI3 "circuit" interface
+			-- the possible data are sent through the HI3 "data" interface
+		teTRA-Packet-Data(4),
+			-- the data are sent through the HI3 "data" interface
+		gPRS-Packet-Data(5),
+			-- the data are sent through the HI3 "data" interface
+		...
+	} OPTIONAL,
+	serviceCenterAddress				[13] PartyInformation OPTIONAL,
+		-- e.g. in case of SMS message this parameter provides the address of  the relevant
+		-- server within the calling (if server is originating) or called
+		-- (if server is terminating) party address parameters
+	sMS									[14] SMS-report OPTIONAL,
+		-- this parameter provides the SMS content and associated information
+	cC-Link-Identifier					[15] CC-Link-Identifier OPTIONAL,
+		-- Depending on a network option, this parameter may be used to identify a CC link
+		-- in case of multiparty calls.
+	national-Parameters					[16] National-Parameters OPTIONAL,
+	...,
+	umts-Cs-Event						[33] Umts-Cs-Event OPTIONAL,
+	-- Care should be taken to ensure additional parameter numbering does not conflict with
+	-- ETSI TS 101 671 or Annex B.3 of this document (PS HI2).
+	serving-System-Identifier			[34] OCTET STRING OPTIONAL,
+		-- the serving network identifier PLMN id (MNC, Mobile Country Code and MNC, Mobile Network
+		
+	 		-- Country, defined in E212 [87]) and 3GPP TR 21.905 [38].
+	carrierSpecificData					[35] OCTET STRING OPTIONAL,
+	-- Copy of raw data specified by the CSP or his vendor related to HLR.
+	current-Previous-Systems			[36] Current-Previous-Systems OPTIONAL,
+	change-Of-Target-Identity			[37] Change-Of-Target-Identity OPTIONAL,
+																									requesting-Network-Identifier		[38] OCTET STRING OPTIONAL,
+		-- the requesting network identifier PLMN id (Mobile Country Code and Mobile Network Country,
+		-- defined in E212 [87]).
+																									requesting-Node-Type					[39] Requesting-Node-Type OPTIONAL,
+		extendedLocParameters 	 [40] 	ExtendedLocParameters OPTIONAL, -- LALS extended parameters
+																									locationErrorCode		  [41]	LocationErrorCode OPTIONAL,	-- LALS error code
+	national-HI2-ASN1parameters			[255]	National-HI2-ASN1parameters	OPTIONAL
+
+}
+
+Umts-Cs-Event ::= ENUMERATED
+{
+	call-establishment				(1),
+	answer							(2),
+	supplementary-Service			(3),
+	handover						(4),
+	release							(5),
+	sMS								(6),
+	location-update					(7),
+	subscriber-Controlled-Input 	(8),
+	...,
+	hLR-Subscriber-Record-Change	(9),
+	serving-System					(10),
+	cancel-Location					(11),
+	register-Location				(12),
+	location-Information-Request	(13)
+}
+
+Requesting-Node-Type ::= ENUMERATED
+{
+	mSC				(1),
+	sMS-Centre		(2),
+	gMLC			(3),
+	mME				(4),
+	sGSN			(5),
+	...
+}
+
+Change-Of-Target-Identity ::= SEQUENCE
+{
+	new-MSISDN								[1] PartyInformation OPTIONAL,
+	-- new MSISDN of the target, encoded in the same format as the AddressString
+	-- parameters defined in MAP format document TS 29.002 [4]
+	old-MSISDN				[2] PartyInformation OPTIONAL,
+	-- new MSISDN of the target, encoded in the same format as the AddressString
+	-- parameters defined in MAP format document TS 29.002 [4]
+	new-IMSI 								[3] PartyInformation OPTIONAL,
+			-- See MAP format [4] International Mobile
+		-- Station Identity E.212 number beginning with Mobile Country Code
+	old-IMSI 								[4] PartyInformation OPTIONAL,
+			-- See MAP format [4] International Mobile
+		-- Station Identity E.212 number beginning with Mobile Country Code
+
+	...,
+	new-IMEI 								[5] PartyInformation OPTIONAL,
+			-- See MAP format [4] International Mobile
+		-- Equipement Identity defined in MAP format document TS 29.002 [4]
+	old-IMEI 								[6] PartyInformation OPTIONAL
+			-- See MAP format [4] International Mobile
+		-- Equipement Identity defined in MAP format document TS 29.002 [4]
+}
+
+Current-Previous-Systems ::= SEQUENCE
+{
+	current-Serving-System-Identifier			[1] OCTET STRING OPTIONAL,
+	-- VPLMN id (Mobile Country Code and Mobile Network Country, E. 212 number [87]).
+	current-Serving-MSC-Number					[2] OCTET STRING OPTIONAL,
+	-- E.164 number of the serving MSC.
+	current-Serving-MSC-Address				[3] OCTET STRING OPTIONAL,
+	-- The IP address of the serving MSC or its Diameter Origin-Host and Origin-Realm.	previous-
+	previous-Serving-System-Identifier			[4] OCTET STRING OPTIONAL,
+	-- VPLMN id (Mobile Country Code and Mobile Network Country, defined in E212 [87]).
+	previous-Serving-MSC-Number				[5] OCTET STRING OPTIONAL,
+	-- The E.164 number of the previous serving MSC.
+	previous-Serving-MSC-Address				[6] OCTET STRING OPTIONAL,
+	-- The IP address of the previous serving MSC or its Diameter Origin-Host and Origin-Realm.
+...
+}
+
+
+END

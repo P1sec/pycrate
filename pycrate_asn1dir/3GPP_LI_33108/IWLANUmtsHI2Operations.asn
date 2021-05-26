@@ -1,0 +1,286 @@
+IWLANUmtsHI2Operations {itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulintercept(2) threeGPP(4) hi2wlan(6)  r16 (16) version-0 (0)}
+
+DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+IMPORTS
+
+
+		LawfulInterceptionIdentifier,
+		TimeStamp,
+		Network-Identifier,
+		National-Parameters,
+		National-HI2-ASN1parameters,
+		DataNodeAddress,
+		IPAddress
+
+			FROM HI2Operations
+			{itu-t(0) identified-organization(4) etsi(0) securityDomain(2)
+ 				  lawfulIntercept(2) hi2(1) version18 (18)} -- Imported from TS 101 671 v.12.1
+		
+		GeographicalCoordinates,
+		CivicAddress
+
+			FROM UmtsHI2Operations
+    		{itu-t(0) identified-organization(4) etsi(0) securityDomain(2)
+   				lawfulintercept(2) threeGPP(4) hi2(1)  r16 (16) version-0 (0)};
+    			-- Imported from 3GPP TS 33.108, UMTS PS HI2
+	
+
+-- Object Identifier Definitions
+
+-- Security DomainId
+lawfulInterceptDomainId OBJECT IDENTIFIER ::= {itu-t(0) identified-organization(4) etsi(0)
+securityDomain(2) lawfulIntercept(2)}
+
+-- Security Subdomains
+threeGPPSUBDomainId OBJECT IDENTIFIER ::= {lawfulInterceptDomainId threeGPP(4)}
+hi2wlanDomainId OBJECT IDENTIFIER	::= {threeGPPSUBDomainId hi2wlan(6)  r16 (16) version-1 (1)}
+
+IWLANUmtsIRIsContent		::= CHOICE
+{
+	iWLANumtsiRIContent			IWLANUmtsIRIContent,
+	iWLANumtsIRISequence		IWLANUmtsIRISequence
+}
+
+IWLANUmtsIRISequence		::= SEQUENCE OF IWLANUmtsIRIContent
+
+-- Aggregation of IWLANUmtsIRIContent is an optional feature.
+-- It may be applied in cases when at a given point in time
+-- several IRI records are available for delivery to the same LEA destination.
+-- As a general rule, records created at any event shall be sent
+-- immediately and not withheld in the DF or MF in order to
+-- apply aggragation.
+-- When aggregation is not to be applied,
+-- IWLANUmtsIRIContent needs to be chosen.
+
+IWLANUmtsIRIContent		::= CHOICE
+{
+	iRI-Begin-record		[1] IRI-Parameters,	
+	iRI-End-record			[2] IRI-Parameters,
+	iRI-Report-record		[3] IRI-Parameters,	
+   ...
+}
+
+IRI-Parameters		::= SEQUENCE
+{
+	hi2iwlanDomainId				[0]	OBJECT IDENTIFIER,  -- 3GPP HI2 WLAN domain
+	lawfulInterceptionIdentifier	[2] LawfulInterceptionIdentifier,
+		-- This identifier is associated to the target.
+	timeStamp				[3] TimeStamp,
+		-- date and time of the event triggering the report.
+	initiator 				[4] ENUMERATED
+	{
+		not-Available		(0),
+		originating-Target	(1),
+			-- in case of I-WLAN, this indicates that the I-WLAN tunnel disconnect is WLAN UE
+			-- requested.
+		terminating-Target	(2),
+			-- in case of I-WLAN, this indicates that the I-WLAN tunnel disconnect is network
+			-- initiated.
+	...
+	} OPTIONAL,
+
+	partyInformation 		[5] SET SIZE (1..10) OF PartyInformation OPTIONAL,
+		-- This parameter provides the concerned party, the identiy(ies) of the party
+		-- and all the information provided by the party.
+
+	national-Parameters		[6] National-Parameters OPTIONAL,
+	networkIdentifier		[7] Network-Identifier OPTIONAL,
+	i-WLANevent				[8] I-WLANEvent	OPTIONAL,
+	correlationNumber		[9] CorrelationNumber OPTIONAL,
+	i-WLANOperationErrorCode[10] I-WLANOperationErrorCode 	OPTIONAL,
+	
+	i-wLANinformation		[11] I-WLANinformation OPTIONAL,
+	visitedPLMNID			[12] VisitedPLMNID 	OPTIONAL,
+	national-HI2-ASN1parameters	[255]	National-HI2-ASN1parameters	OPTIONAL,
+...,
+	nSAPI					[13] OCTET STRING (SIZE (1)) OPTIONAL,
+    -- Include either Octet 2 of the NSAPI IE of 3GPP TS 24.008 [9]
+    -- or Octet 2 of the NSAPI IE of 3GPP TS 29.060 [17].
+ 	packetDataHeaderInformation		[14] PacketDataHeaderInformation	OPTIONAL
+}
+
+
+-- PARAMETERS FORMATS
+
+PartyInformation 			::= SEQUENCE
+{
+	party-Qualifier 	[0]  ENUMERATED
+	{
+		iWLAN-Target(1),
+	...
+	},
+	partyIdentity 		[1] SEQUENCE
+	{
+		imsi					[2] OCTET STRING (SIZE (3..8)) OPTIONAL,
+			-- See MAP format [4] International Mobile
+			-- Station Identity E.212 number beginning with Mobile Country Code
+
+		msISDN					[3] OCTET STRING (SIZE (1..9)) OPTIONAL,
+			-- MSISDN of the target, encoded in the same format as the AddressString
+			-- parameters defined in MAP format document TS 29.002 [4]
+
+		nai						[7]  OCTET STRING  OPTIONAL,
+			-- NAI of the target, encoded in the same format as
+			-- defined in 3GPP TS 29.234 [41].
+	...
+
+	},
+
+	services-Data-Information 	[2] Services-Data-Information OPTIONAL,
+		-- This parameter is used to transmit all the information concerning the
+		-- complementary information associated to the basic data call
+	...
+}
+
+CorrelationNumber ::= OCTET STRING (SIZE(8..20))
+
+I-WLANEvent ::= ENUMERATED
+{
+	i-WLANAccessInitiation 					(1),
+	i-WLANAccessTermination					(2),
+	i-WLANTunnelEstablishment				(3),
+	i-WLANTunnelDisconnect					(4),
+	startOfInterceptionCommunicationActive	(5),
+	...,
+	packetDataHeaderInformation				(6)
+
+}
+-- see [19]
+
+Services-Data-Information ::= SEQUENCE
+{
+	i-WLAN-parameters [1] I-WLAN-parameters OPTIONAL,
+	...
+
+}
+
+I-WLAN-parameters ::= SEQUENCE
+{
+	wlan-local-IP-address-of-the-target 	[1] DataNodeAddress OPTIONAL,
+	w-APN 									[2] OCTET STRING (SIZE(1..100))	OPTIONAL,
+	-- The Access Point Name (APN) is coded in accordance with
+		-- 3GPP TS 24.008 [9] without the APN IEI (only the last 100 octets are used).
+		-- Octets are coded according to 3GPP TS 23.003 [25].
+	wlan-remote-IP-address-of-the-target 	[3] DataNodeAddress 	OPTIONAL,
+	...
+}
+
+I-WLANOperationErrorCode ::= OCTET STRING
+-- The parameter shall carry the I-WLAN failed tunnel establishment reason, the I-WLAN Failed
+-- Access
+-- Initiation reason or the I-WLAN session termination reason.
+
+
+I-WLANinformation ::= SEQUENCE
+{
+	wLANOperatorName 					[1] OCTET STRING 		OPTIONAL,
+	wLANLocationData					[2] OCTET STRING		OPTIONAL,
+	wLANLocationInformation 			[3] OCTET STRING		OPTIONAL,
+	nASIPIPv6Address					[4]	IPAddress			OPTIONAL,
+	wLANMACAddress						[5]	OCTET STRING		OPTIONAL,
+	sessionAliveTimer					[6]	SessionAliveTime	OPTIONAL,
+	...,
+--These parameters are defined in 3GPP TS 29.234.
+  	geographicalCoordinates 			[7] GeographicalCoordinates OPTIONAL,
+   	civicAddress						[8] CivicAddress OPTIONAL
+}
+
+VisitedPLMNID ::= OCTET STRING
+-- The parameter shall carry the VisitedPLMNID as defined in 3GPP TS 29.234.
+
+
+SessionAliveTime ::= OCTET STRING
+--The parameter shall carry the SessionAliveTime as defined in 3GPP TS 29.234.
+
+
+PacketDataHeaderInformation ::= CHOICE
+{
+
+	packetDataHeader		[1]	PacketDataHeaderReport,
+	packetDataSummary	[2]	PacketDataSummaryReport,
+...
+}
+
+PacketDataHeaderReport ::= CHOICE
+{
+
+	packetDataHeaderMapped	[1]	PacketDataHeaderMapped,
+	packetDataHeaderCopy	[2]	PacketDataHeaderCopy,
+...
+}
+
+PacketDataHeaderMapped ::= SEQUENCE
+{
+	sourceIPAddress			[1] IPAddress	OPTIONAL,
+	sourcePortNumber		[2] INTEGER (0..65535) OPTIONAL,	
+	destinationIPAddress	[3] IPAddress	OPTIONAL,
+	destinationPortNumber	[4] INTEGER (0..65535) OPTIONAL,
+	transportProtocol		[5] INTEGER  OPTIONAL,
+	-- For IPv4, report the "Protocol" field and for IPv6 report "Next Header" field.
+	-- Assigned Internet Protocol Numbers can be found at
+	-- http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xml
+	packetsize				[6] INTEGER OPTIONAL,
+	flowLabel				[7] INTEGER OPTIONAL,
+	packetCount				[8] INTEGER OPTIONAL,
+	direction				[9] TPDU-direction,
+...
+}
+
+TPDU-direction ::= ENUMERATED
+{
+	from-target 	(1),
+	to-target 		(2),
+	unknown 		(3)
+}
+
+PacketDataHeaderCopy ::= SEQUENCE
+{
+	direction				[1] TPDU-direction,
+	headerCopy				[2] OCTET STRING,	-- includes a copy of the packet header at the IP
+				-- network layer and above including extension headers, but excluding contents.
+...
+}
+
+
+PacketDataSummaryReport ::= SEQUENCE OF PacketFlowSummary
+
+PacketFlowSummary ::= SEQUENCE
+{
+
+	sourceIPAddress			[1] IPAddress,
+	sourcePortNumber		[2] INTEGER (0..65535) OPTIONAL,	
+	destinationIPAddress	[3] IPAddress,
+	destinationPortNumber	[4] INTEGER (0..65535) OPTIONAL,
+	transportProtocol		[5] INTEGER,
+	-- For IPv4, report the "Protocol" field and for IPv6 report "Next Header" field.
+	-- Assigned Internet Protocol Numbers can be found at
+	-- http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xml
+	flowLabel				[6] INTEGER OPTIONAL,
+	summaryPeriod			[7] ReportInterval,
+	packetCount				[8] INTEGER,
+	sumOfPacketSizes		[9] INTEGER,
+	packetDataSummaryReason	[10] ReportReason,
+...
+}
+
+ReportReason ::= ENUMERATED
+{
+	timerExpired			(0),	
+	countThresholdHit		(1),
+	pDPComtextDeactivated   (2),
+	pDPContextModification	(3),
+	otherOrUnknown		(4),
+	...
+}
+
+ReportInterval ::= SEQUENCE
+{
+	firstPacketTimeStamp	[0] TimeStamp,
+	lastPacketTimeStamp		[1] TimeStamp,
+	...
+}
+
+END

@@ -1,0 +1,90 @@
+CONF-HI3-IMS {itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulIntercept(2) threeGPP(4) hi3conf(11)  r13 (13) version-0 (0)}
+
+DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+
+
+IMPORTS
+
+LawfulInterceptionIdentifier,
+	
+TimeStamp
+	FROM HI2Operations
+	{itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulIntercept(2) hi2(1)  version18(18)}-- from ETSI HI2Operations TS 101 671, version 3.12.1
+
+ConfCorrelation,
+
+ConfPartyInformation
+	
+	FROM CONFHI2Operations
+	{itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulintercept(2)
+    threeGPP(4) hi2conf(10)   r13 (13) version-0 (0)}
+    -- Imported from Conf HI2 Operations part of this standard
+
+National-HI3-ASN1parameters
+    FROM Eps-HI3-PS
+    {itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulintercept(2) threeGPP(4) hi3eps(9)  r12(12) version-55 (55)};
+-- Imported form EPS HI3 part of this standard
+
+-- Object Identifier Definitions
+
+-- Security DomainId
+lawfulInterceptDomainId OBJECT IDENTIFIER ::= {itu-t(0) identified-organization(4) etsi(0)
+securityDomain(2) lawfulIntercept(2)}
+
+-- Security Subdomains
+threeGPPSUBDomainId OBJECT IDENTIFIER ::= {lawfulInterceptDomainId threeGPP(4)}
+hi3confDomainId OBJECT IDENTIFIER  ::= {threeGPPSUBDomainId hi3conf(11)  r13 (13) version-0 (0)}
+
+Conf-CC-PDU	::= SEQUENCE
+{
+ 	confLIC-header		[1] ConfLIC-header,
+	payload			[2] OCTET STRING
+}
+
+ConfLIC-header ::= SEQUENCE
+{
+	hi3DomainId				[0]	OBJECT IDENTIFIER,  -- 3GPP HI3 Domain
+	lIID					[2] LawfulInterceptionIdentifier OPTIONAL,
+	correlation				[3]	ConfCorrelation,
+	timeStamp				[4]	TimeStamp OPTIONAL,
+	sequence-number			[5]	INTEGER (0..65535),
+	t-PDU-direction			[6] TPDU-direction,
+	national-HI3-ASN1parameters		[7] National-HI3-ASN1parameters OPTIONAL,
+	--  encoded per national requirements
+	mediaID			[9] MediaID  OPTIONAL,
+		-- Identifies the media being exchanged by parties on the conference.
+...
+	
+}
+
+MediaID ::= SEQUENCE
+{
+		sourceUserID	[1] ConfPartyInformation	OPTIONAL,  -- include SDP information
+			-- describing Conf Server Side characteristics.
+
+		streamID		[2] OCTET STRING 	OPTIONAL,  -- include streamID from SDP information.
+			
+	...
+}
+
+TPDU-direction ::= ENUMERATED
+{
+	from-target 	(1),
+	to-target 		(2),
+	unknown 		(3),
+	conftarget      (4),
+      -- When the conference is the target (4) is used to denote there is no
+      -- directionality.
+	from-mixer		(5),
+	  -- Indicates the stream sent from the conference server towards the conference party.
+	to-mixer		(6),
+	  -- Indicates the stream sent from the conference party towards the conference party server.
+	combined		(7)
+	  -- Indicates that combined CC delivery is used.
+
+}
+
+END
