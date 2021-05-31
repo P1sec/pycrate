@@ -361,11 +361,11 @@ def extract_charstr(text=''):
                            re.subn('\s{0,}\n\s{0,}', '', text[1:cur])[0]
 
 
-printable_str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'\
-                '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ \t\n\r\x0b\x0c'
+_printable_str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'\
+                 '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ \t\n\r\x0b\x0c'
 
 def is_printable(w):
-    return all(c in printable_str for c in w)
+    return all(c in _printable_str for c in w)
 
 #------------------------------------------------------------------------------#
 # integer factorization and rounding routine
