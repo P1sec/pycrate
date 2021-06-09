@@ -286,7 +286,7 @@ Specific constraints attributes:
                     else:
                         s = uint_to_bytes(self._val[0], self._val[1]).decode('ascii')
                     if is_printable(s):
-                        return ret + ' -- %r --' % s
+                        return ret + ' -- %s --' % repr(s)[1:-1]
                     else:
                         return ret
                 except Exception:
@@ -1325,7 +1325,7 @@ Specific constraints attributes:
                 try:
                     s = self._val.decode('ascii')
                     if is_printable(s):
-                        return ret + ' -- %r --' % s
+                        return ret + ' -- %s --' % repr(s)[1:-1]
                     else:
                         return ret
                 except Exception:
