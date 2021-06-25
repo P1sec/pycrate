@@ -3912,18 +3912,6 @@ class GTPCIE(Envelope):
         else:
             return ie_class(hier=1), ie_desc
     
-    def init_mand(self):
-        """initialize all IEs that are mandatory
-        """
-        # TODO
-        pass
-    
-    def init_opt(self):
-        """initialize all IEs that are optional
-        """
-        # TODO
-        pass
-    
 
 class GTPCIEs(Sequence):
     """GTPv2-C Grouped Information Element
@@ -3974,15 +3962,46 @@ class GTPCIEs(Sequence):
                       .format(self._name, ', '.join(sorted(self._ie_mand)))))
     
     def add_ie(self, ie_type, ie_inst=0, val=None):
+        """add the IE of given type `ie_type` and instance `ie_inst` and sets the
+        value `val` (raw bytes buffer or structured data) into its data part
+        """
         self.set_val({self.get_num(): {'GTPCIEHdr': {'Type': ie_type, 'Inst': ie_inst}}})
         if val is not None:
             self[-1][1].set_val(val)
     
     def rem_ie(self, ie_type, ie_inst=0):
+        """remove the IE of given type `ie_type` and instance `ie_inst`
+        """
         for ie in self._content[::-1]:
             if (ie[0]['Type'].get_val(), ie[0]['Inst'].get_val()) == (ie_type, ie_inst):
                 self._content.remove(ie)
                 break
+        
+    def init_ies(self, wopt=False, wpriv=False):
+        """initialize all IEs that are mandatory,
+        adding optional ones if `wopt` is set,
+        adding the private extension if `wpriv` is set
+        
+        This is called recursively on all internal GroupedIEs, too.
+        """
+        # clear the content first
+        self.clear()
+        # init all mandatory IEs
+        for ie_type, ie_inst in self.MAND:
+            self.add_ie(ie_type, ie_inst)
+            if isinstance(self[-1][1], GTPCIEs):
+                self[-1][1].init_ies(wopt, wpriv)
+        # then optional IEs
+        if wopt:
+            for ie_type in self.OPT:
+                if isinstance(ie_type, tuple):
+                    ie_type, ie_inst = ie_type
+                    self.add_ie(ie_type, ie_inst)
+                    if isinstance(self[-1][1], GTPCIEs):
+                        self[-1][1].init_ies(wopt, wpriv)
+        # then private extension
+        if wpriv and 255 in self.OPT:
+            self.add_ie(255)
 
 
 #------------------------------------------------------------------------------#
