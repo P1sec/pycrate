@@ -6,8 +6,14 @@
 import codecs
 import re
 
+import sys
+if sys.platform == 'win32':
+    eollen = 2
+else:
+    eollen = 1
+
 dirpath = './'
-path = dirpath + '38413-g10.txt'
+path = dirpath + '38413-g50.txt'
 
 # ASN.1 modules are described within specific sections
 sections = [
@@ -33,11 +39,11 @@ def main():
     module_name = None
     
     for line in speclines:
-        if line[:-1] in sections:
+        if line[:-eollen] in sections:
             if inside:
                 raise(Exception('ASN.1 extraction failed: %s' % line))
             inside, start = True, True
-        elif line[:-1] == 'END':
+        elif line[:-eollen] == 'END':
             module.append(line)
             inside = False
             print('%s.asn' % module_name)

@@ -1,0 +1,6 @@
+XnAP-CommonDataTypes.asn
+XnAP-Constants.asn
+XnAP-IEs.asn
+XnAP-PDU-Descriptions.asn
+XnAP-Containers.asn
+XnAP-PDU-Contents.asn

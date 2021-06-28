@@ -76,7 +76,23 @@ FROM XnAP-CommonDataTypes
 	ResetRequest,
 	ResetResponse,
 	ErrorIndication,
-	PrivateMessage
+	PrivateMessage,
+	DeactivateTrace,
+	TraceStart,
+	HandoverSuccess,
+	ConditionalHandoverCancel,
+	EarlyStatusTransfer,
+	FailureIndication,
+	HandoverReport,
+	ResourceStatusRequest,
+	ResourceStatusResponse,
+	ResourceStatusFailure,
+	ResourceStatusUpdate,
+	MobilityChangeRequest,
+	MobilityChangeAcknowledge,
+	MobilityChangeFailure,
+	AccessAndMobilityIndication
+
 
 FROM XnAP-PDU-Contents
 
@@ -106,7 +122,18 @@ FROM XnAP-PDU-Contents
 	id-cellActivation,
 	id-reset,
 	id-errorIndication,
-	id-privateMessage
+	id-privateMessage,
+	id-deactivateTrace,
+	id-traceStart,
+	id-handoverSuccess,
+	id-conditionalHandoverCancel,
+	id-earlyStatusTransfer,
+	id-failureIndication,
+	id-handoverReport,
+	id-resourceStatusReportingInitiation,
+	id-resourceStatusReporting,
+	id-mobilitySettingsChange,
+	id-accessAndMobilityIndication
 
 FROM XnAP-Constants;
 
@@ -188,7 +215,9 @@ XNAP-ELEMENTARY-PROCEDURES-CLASS-1 XNAP-ELEMENTARY-PROCEDURE ::= {
 	nGRANnodeConfigurationUpdate							|
 	e-UTRA-NR-CellResourceCoordination						|
 	cellActivation											|
-	reset													,
+	reset													|
+	resourceStatusReportingInitiation						|
+	mobilitySettingsChange									,
 	...
 }
 
@@ -205,7 +234,16 @@ XNAP-ELEMENTARY-PROCEDURES-CLASS-2 XNAP-ELEMENTARY-PROCEDURE ::= {
 	privateMessage							|
 	notificationControl						|
 	activityNotification					|
-	secondaryRATDataUsageReport	,
+	secondaryRATDataUsageReport 			|
+	deactivateTrace							|
+	traceStart								|
+	handoverSuccess							|
+	conditionalHandoverCancel				|
+	earlyStatusTransfer						|
+	failureIndication						|
+	handoverReport							|
+	resourceStatusReporting					|
+	accessAndMobilityIndication				,
 	...
 
 }
@@ -426,6 +464,77 @@ secondaryRATDataUsageReport	XNAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		SecondaryRATDataUsageReport
 	PROCEDURE CODE			id-secondaryRATDataUsageReport
 	CRITICALITY				reject
+}
+
+deactivateTrace XNAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		DeactivateTrace
+	PROCEDURE CODE			id-deactivateTrace
+	CRITICALITY				ignore
+}
+
+traceStart XNAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		TraceStart
+	PROCEDURE CODE			id-traceStart
+	CRITICALITY				ignore
+}
+
+handoverSuccess			XNAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		HandoverSuccess
+	PROCEDURE CODE			id-handoverSuccess
+	CRITICALITY				ignore
+}
+
+conditionalHandoverCancel	XNAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ConditionalHandoverCancel
+	PROCEDURE CODE			id-conditionalHandoverCancel
+	CRITICALITY				ignore
+}
+
+earlyStatusTransfer		XNAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		EarlyStatusTransfer
+	PROCEDURE CODE			id-earlyStatusTransfer
+	CRITICALITY				ignore
+}
+
+failureIndication XNAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		FailureIndication
+	PROCEDURE CODE			id-failureIndication
+	CRITICALITY				ignore
+}
+
+handoverReport XNAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		HandoverReport
+	PROCEDURE CODE			id-handoverReport
+	CRITICALITY				ignore
+}
+
+resourceStatusReportingInitiation	XNAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE				ResourceStatusRequest
+	SUCCESSFUL OUTCOME				ResourceStatusResponse
+	UNSUCCESSFUL OUTCOME			ResourceStatusFailure
+	PROCEDURE CODE					id-resourceStatusReportingInitiation
+	CRITICALITY						reject
+}
+
+resourceStatusReporting XNAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ResourceStatusUpdate
+	PROCEDURE CODE			id-resourceStatusReporting
+	CRITICALITY				ignore
+}
+
+mobilitySettingsChange	XNAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE				MobilityChangeRequest
+	SUCCESSFUL OUTCOME				MobilityChangeAcknowledge
+	UNSUCCESSFUL OUTCOME			MobilityChangeFailure
+PROCEDURE CODE					id-mobilitySettingsChange
+	CRITICALITY						reject
+}
+
+
+accessAndMobilityIndication XNAP-ELEMENTARY-PROCEDURE ::={
+	INITIATING MESSAGE 		AccessAndMobilityIndication
+	PROCEDURE CODE			id-accessAndMobilityIndication
+	CRITICALITY 				ignore
 }
 
 END
