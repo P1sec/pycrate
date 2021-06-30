@@ -305,26 +305,8 @@ class LinkSigProc(SigProc):
             #for (ident, IE) in IEs.items():
             for ident in ord_ies:
                 IE = IEs[ident]
-                name, val = IE['Value']._tr._name, None
-                pyname, idname = pythonize_name(name), 'id_%i' % ident
-                if pyname in Encod[0]:
-                    # static object value provided
-                    val = (IE['Value']._tr._name, Encod[0][pyname])
-                    if pyname in kw:
-                        del kw[pyname]
-                elif idname in Encod[0]:
-                    # static buffer value provided
-                    val = Encod[0][idname]
-                    if idname in kw:
-                        del kw[idname]
-                elif pyname in kw:
-                    # object value provided at runtime
-                    val = (IE['Value']._tr._name, kw[pyname])
-                    del kw[pyname]
-                elif idname in kw:
-                    # buffer value provided at runtime
-                    val = kw[idname]
-                    del kw[idname]
+                idname = 'id_%i' % ident
+                val = self._get_ie_val(idname, IE, Encod[0], kw)
                 if val is not None:
                     pdu_ies.append({'id': ident,
                                     'criticality': IE['criticality'],
@@ -339,26 +321,8 @@ class LinkSigProc(SigProc):
             #for (ident, IE) in Extensions.items():
             for ident in ord_exts:
                 IE = Extensions[ident]
-                name, val = IE['Extension']._tr._name, None
-                pyname, idname = pythonize_name(name), 'idext_%i' % ident
-                if pyname in Encod[1]:
-                    # static object value provided
-                    val = (IE['Value']._tr._name, Encod[1][pyname])
-                    if pyname in kw:
-                        del kw[pyname]
-                elif idname in Encod[0]:
-                    # static buffer value provided
-                    val = Encod[0][idname]
-                    if idname in kw:
-                        del kw[idname]
-                elif pyname in kw:
-                    # object value provided at runtime
-                    val = (IE['Value']._tr._name, kw[pyname])
-                    del val[pyname]
-                elif idname in kw:
-                    # buffer value provided at runtime
-                    val = kw[idname]
-                    del kw[idname]
+                idname = 'idext_%i' % ident
+                val = self._get_ie_val(idname, IE, Encod[1], kw)
                 if val is not None:
                     pdu_exts.append({'id': ident,
                                      'criticality': IE['criticality'],
@@ -401,6 +365,38 @@ class LinkSigProc(SigProc):
                               {'procedureCode': self.Code,
                                'criticality': self.Crit,
                                'value': (Cont._tr._name, val)}) )
+    
+    
+    def _get_ie_val(self, idname, IE, Encod, kw):
+        val = None
+        if IE['Value']._tr is not None:
+            # IE refers to a sub object, that can be assigned by name
+            iename = IE['Value']._tr._name
+            pyname = pythonize_name(iename)
+            if pyname in Encod:
+                # static object value provided at the procedure class level
+                # referred by its name
+                val = (iename, Encod[pyname])
+                if pyname in kw:
+                    del kw[pyname]
+            elif pyname in kw:
+                # object value provided at runtime
+                # referred by its name
+                val = (iename, kw[pyname])
+                del kw[pyname]
+        if val is None:
+            if idname in Encod:
+                # static object value provided at the procedure class level
+                # referred by its ident
+                val = Encod[idname]
+                if idname in kw:
+                    del kw[idname]
+            elif idname in kw:
+                # object value provided at runtime
+                # referred by its ident
+                val = kw[idname]
+                del kw[idname]
+        return val
     
     #--------------------------------------------------------------------------#
     
