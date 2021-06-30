@@ -288,7 +288,7 @@ class FGMMRegistrationRequest(Layer3E):
         Type1TV('NonCurrentNativeNAS_KSI', val={'T':0xC, 'V':0}, IE=NAS_KSI()),
         Type4TLV('5GMMCap', val={'T':0x10, 'V':b'\0'}, IE=FGMMCap()),
         Type4TLV('UESecCap', val={'T':0x2E, 'V':b'\0\0'}, IE=UESecCap()),
-        Type4TLV('NSSAI', val={'T':0x2F, 'V':b'\0\0'}, IE=NSSAI()),
+        Type4TLV('NSSAI', val={'T':0x2F, 'V':b'\x01\x01'}, IE=NSSAI()),
         Type3TV('TAI', val={'T':0x52, 'V':6*b'\0'}, bl={'V':48}, IE=FGSTAI()),
         Type4TLV('EPSUENetCap', val={'T':0x17, 'V':b'\0\0'}, IE=EPSUENetCap()),
         Type4TLV('ULDataStat', val={'T':0x40, 'V':b'\0\0'}, IE=ULDataStat()),
@@ -333,9 +333,9 @@ class FGMMRegistrationAccept(Layer3E):
         Type6TLVE('GUTI', val={'T': 0x77, 'V':b'\0\0\0\0'}, IE=FGSID()),
         Type4TLV('EquivPLMNList', val={'T':0x4A, 'V':3*b'\0'}, IE=PLMNList()),
         Type4TLV('5GSTAIList', val={'T':0x54, 'V':7*b'\0'}, IE=FGSTAIList()),
-        Type4TLV('AllowedNSSAI', val={'T':0x15, 'V':b'\0\0'}, IE=NSSAI()),
-        Type4TLV('RejectedNSSAI', val={'T':0x11, 'V':b'\0\0'}, IE=RejectedNSSAI()),
-        Type4TLV('ConfiguredNSSAI', val={'T':0x31, 'V':b'\0\0'}, IE=NSSAI()),
+        Type4TLV('AllowedNSSAI', val={'T':0x15, 'V':b'\x01\x01'}, IE=NSSAI()),
+        Type4TLV('RejectedNSSAI', val={'T':0x11, 'V':b'\x10\x01'}, IE=RejectedNSSAI()),
+        Type4TLV('ConfiguredNSSAI', val={'T':0x31, 'V':b'\x01\x01'}, IE=NSSAI()),
         Type4TLV('5GSNetFeat', val={'T':0x21, 'V':b'\0'}, IE=FGSNetFeat()),
         Type4TLV('PDUSessStat', val={'T':0x50, 'V':b'\0\0'}, IE=PDUSessStat()),
         Type4TLV('PDUSessReactResult', val={'T':0x26, 'V':b'\0\0'}, IE=PDUSessStat()),
@@ -361,7 +361,7 @@ class FGMMRegistrationAccept(Layer3E):
         Type4TLV('T3448', val={'T':0x6B, 'V':b'\0'}, IE=GPRSTimer()),
         Type4TLV('T3324', val={'T':0x6A, 'V':b'\0'}, IE=GPRSTimer()),
         Type4TLV('UERadioCapID', val={'T':0x67, 'V':b'\0'}, IE=UERadioCapID()),
-        Type4TLV('PendingNSSAI', val={'T':0x39, 'V':b'\0\0'}, IE=NSSAI()),
+        Type4TLV('PendingNSSAI', val={'T':0x39, 'V':b'\x01\x01'}, IE=NSSAI()),
         Type6TLVE('CipheringKeyData', val={'T':0x74, 'V':31*b'\0'}, IE=CipheringKeyData()),
         Type6TLVE('CAGInfoList', val={'T':0x75, 'V':b''}, IE=CAGInfoList()),
         Type4TLV('Trunc5GSTMSIConfig', val={'T':0x1B, 'V':b'\0'}, IE=Trunc5GSTMSIConfig()),
@@ -396,7 +396,7 @@ class FGMMRegistrationReject(Layer3E):
         Type4TLV('T3346', val={'T':0x5F, 'V':b'\0'}, IE=GPRSTimer()),
         Type4TLV('T3502', val={'T':0x16, 'V':b'\0'}, IE=GPRSTimer()),
         Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
-        Type4TLV('RejectedNSSAI', val={'T':0x69, 'V':b'\0\0'}, IE=RejectedNSSAI()),
+        Type4TLV('RejectedNSSAI', val={'T':0x69, 'V':b'\x10\x01'}, IE=RejectedNSSAI()),
         Type6TLVE('CAGInfoList', val={'T':0x75, 'V':b''}, IE=CAGInfoList())
         )
 
@@ -416,7 +416,7 @@ class FGMMULNASTransport(Layer3E):
         Type3TV('PDUSessID', val={'T':0x12, 'V':b'\0'}, bl={'V':8}, IE=PDUSessID()),
         Type3TV('OldPDUSessID', val={'T':0x59, 'V':b'\0'}, bl={'V':8}, IE=PDUSessID()),
         Type1TV('RequestType', val={'T':0x8, 'V':0}, IE=RequestType()),
-        Type4TLV('SNSSAI', val={'T':0x22, 'V':b'\0'}, IE=SNSSAI()),
+        Type4TLV('SNSSAI', val={'T':0x22, 'V':b'\x01'}, IE=SNSSAI()),
         Type4TLV('DNN', val={'T':0x25, 'V':b'\0'}, IE=APN('DNN')),
         Type4TLV('AddInfo', val={'T':0x24, 'V':b'\0'}),
         Type1TV('MAPDUSessInfo', val={'T':0xA, 'V':1}, dic=MAPDUSessInfo_dict),
@@ -483,7 +483,7 @@ class FGMMMTDeregistrationRequest(Layer3E):
         Type1V('DeregistrationType', val={'V':1}, IE=DeregistrationType()),
         Type3TV('5GMMCause', val={'T':0x58, 'V':b'\x16'}, bl={'V':8}, IE=FGMMCause()),
         Type4TLV('T3346', val={'T':0x5F, 'V':b'\0'}, IE=GPRSTimer()),
-        Type4TLV('RejectedNSSAI', val={'T':0x6D, 'V':b'\0\0'}, IE=RejectedNSSAI())
+        Type4TLV('RejectedNSSAI', val={'T':0x6D, 'V':b'\x10\x01'}, IE=RejectedNSSAI())
         )
 
 
@@ -573,7 +573,7 @@ class FGMMConfigurationUpdateCommand(Layer3E):
         Type1TV('ConfigUpdateInd', val={'T':0xD, 'V':0}, IE=ConfigUpdateInd()),
         Type6TLVE('GUTI', val={'T':0x77, 'V':b'\0\0\0\0'}, IE=FGSID()),
         Type4TLV('5GSTAIList', val={'T':0x54, 'V':7*b'\0'}, IE=FGSTAIList()),
-        Type4TLV('AllowedNSSAI', val={'T':0x15, 'V':b'\0\0'}, IE=NSSAI()),
+        Type4TLV('AllowedNSSAI', val={'T':0x15, 'V':b'\x01\x01'}, IE=NSSAI()),
         Type4TLV('SAList', val={'T':0x27, 'V':b'\0\0\0'}, IE=SAList()),
         Type4TLV('NetFullName', val={'T':0x43, 'V':b'\0'}, IE=NetworkName()),
         Type4TLV('NetShortName', val={'T':0x45, 'V':b'\0'}, IE=NetworkName()),
@@ -583,8 +583,8 @@ class FGMMConfigurationUpdateCommand(Layer3E):
         Type6TLVE('LADNInfo', val={'T':0x79, 'V':9*b'\0'}, IE=LADNInfo()),
         Type1TV('MICOInd', val={'T':0xB, 'V':0}, IE=MICOInd()),
         Type1TV('NetSlicingInd', val={'T':0x9, 'V':0}, IE=NetSlicingInd()),
-        Type4TLV('ConfiguredNSSAI', val={'T':0x31, 'V':b'\0\0'}, IE=NSSAI()),
-        Type4TLV('RejectedNSSAI', val={'T':0x11, 'V':b'\0\0'}, IE=RejectedNSSAI()),
+        Type4TLV('ConfiguredNSSAI', val={'T':0x31, 'V':b'\x01\x01'}, IE=NSSAI()),
+        Type4TLV('RejectedNSSAI', val={'T':0x11, 'V':b'\x10\x01'}, IE=RejectedNSSAI()),
         Type6TLVE('OperatorAccessCatDefs', val={'T':0x76, 'V':b''}, IE=OperatorAccessCatDefs()),
         Type1TV('SMSInd', val={'T':0xF, 'V':0}, IE=SMSInd()),
         Type4TLV('T3447', val={'T':0x6C, 'V':b'\0'}, IE=GPRSTimer3()),
@@ -921,7 +921,7 @@ class FGMMNetworkSliceSpecAuthCommand(Layer3E):
     _name = '5GMMNetworkSliceSpecAuthCommand'
     _GEN = (
         FGMMHeader(val={'Type':80}),
-        Type4LV('SNSSAI', val={'V':b'\0'}, IE=SNSSAI()),
+        Type4LV('SNSSAI', val={'V':b'\x01'}, IE=SNSSAI()),
         Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'})
         )
 
@@ -935,7 +935,7 @@ class FGMMNetworkSliceSpecAuthComplete(Layer3E):
     _name = '5GMMNetworkSliceSpecAuthComplete'
     _GEN = (
         FGMMHeader(val={'Type':81}),
-        Type4LV('SNSSAI', val={'V':b'\0'}, IE=SNSSAI()),
+        Type4LV('SNSSAI', val={'V':b'\x01'}, IE=SNSSAI()),
         Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'})
         )
 
@@ -949,7 +949,7 @@ class FGMMNetworkSliceSpecAuthResult(Layer3E):
     _name = '5GMMNetworkSliceSpecAuthResult'
     _GEN = (
         FGMMHeader(val={'Type':82}),
-        Type4LV('SNSSAI', val={'V':b'\0'}, IE=SNSSAI()),
+        Type4LV('SNSSAI', val={'V':b'\x01'}, IE=SNSSAI()),
         Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'})
         )
 

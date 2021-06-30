@@ -174,9 +174,9 @@ class SNSSAI(Envelope):
     
     _GEN = (
         Uint8('SST', dic=_SST_dict),
-        Uint24('SD', trans=True),
+        Uint24('SD', rep=REPR_HEX, trans=True),
         Uint8('MappedHPLMNSST', trans=True),
-        Uint24('MappedHPLMNSD', trans=True)
+        Uint24('MappedHPLMNSD', rep=REPR_HEX, trans=True)
         )
     
     def set_val(self, val):
@@ -239,7 +239,15 @@ class L_SNSSAI(Envelope):
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: self[1].get_len())
-        self[1].set_blauto(lambda: self[0].get_val()<<3)    
+    
+    def _from_char(self, char):
+        if self.get_trans():
+            return
+        self[0]._from_char(char)
+        char_lb = char._len_bit
+        char._len_bit = char._cur + 8*self[0].get_val()
+        self[1]._from_char(char)
+        char._len_bit = char_lb
 
 
 #------------------------------------------------------------------------------#
@@ -1508,7 +1516,16 @@ class RejectedSNSSAI(Envelope):
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: self[2].get_len())
-        self[2].set_blauto(lambda: self[0].get_val()<<3)
+    
+    def _from_char(self, char):
+        if self.get_trans():
+            return
+        self[0]._from_char(char)
+        self[1]._from_char(char)
+        char_lb = char._len_bit
+        char._len_bit = char._cur + 8*self[0].get_val()
+        self[2]._from_char(char)
+        char._len_bit = char_lb
     
     def decode(self):
         return {'Cause': self['Cause'].get_val(), 'SNSSAI': self['SNSSAI'].get_val_d()}
