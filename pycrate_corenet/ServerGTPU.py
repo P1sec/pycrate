@@ -51,9 +51,9 @@ else:
     print('[ERR] ServerGTPU : you\'re not on *nix system. It\'s not going to work:\n'\
           'You need PF_PACKET socket')
 
-from .utils           import *
 from pycrate_core.elt import Envelope
 from pycrate_ether.IP import *
+from .utils           import *
 
 #------------------------------------------------------------------------------#
 # setting / unsetting ethernet IF in promiscuous mode                          #
