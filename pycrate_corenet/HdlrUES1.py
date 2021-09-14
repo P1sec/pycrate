@@ -482,7 +482,7 @@ class UEEMMd(SigStack):
                 snid = plmn_str_to_buf(self.AUTH_PLMN)
             else:
                 snid = plmn_str_to_buf(self.UE.PLMN)
-            Kasme  = conv_A2(vect[3], vect[4], snid, vect[2][:6])
+            Kasme  = conv_401_A2(vect[3], vect[4], snid, vect[2][:6])
             secctx = {'VEC'  : vect,
                       'CTX'  : ctx,
                       'CK'   : vect[3],
@@ -490,12 +490,12 @@ class UEEMMd(SigStack):
                       'Kasme': Kasme}
         elif ctx == 2:
             # WNG: this is undefined / illegal and won't work (hopefully)
-            CK, IK = conv_C4(vect[2]), conv_C5(vect[2])
+            CK, IK = conv_102_C4(vect[2]), conv_102_C5(vect[2])
             if self.AUTH_PLMN:
                 snid = plmn_str_to_buf(self.AUTH_PLMN)
             else:
                 snid = plmn_str_to_buf(self.UE.PLMN)
-            Kasme  = conv_A2(CK, IK, snid, b'\0\0\0\0\0\0')
+            Kasme  = conv_401_A2(CK, IK, snid, b'\0\0\0\0\0\0')
             secctx = {'VEC'  : vect,
                       'CTX'  : ctx,
                       'Kc'   : vect[2],
@@ -531,8 +531,8 @@ class UEEMMd(SigStack):
             pass
         else:
             secctx['EEA'], secctx['EIA'] = self._get_sec_eea(), self._get_sec_eia()
-            secctx['Knasenc'] = conv_A7(secctx['Kasme'], 1, secctx['EEA'])[16:32]
-            secctx['Knasint'] = conv_A7(secctx['Kasme'], 2, secctx['EIA'])[16:32]
+            secctx['Knasenc'] = conv_401_A7(secctx['Kasme'], 1, secctx['EEA'])[16:32]
+            secctx['Knasint'] = conv_401_A7(secctx['Kasme'], 2, secctx['EIA'])[16:32]
     
     def set_sec_cap(self):
         # build UESecCap from UENetCap
@@ -2163,10 +2163,10 @@ class UES1d(SigStack):
         if secctx and 'UESecCap' in self.UE.Cap:
             # create the KeNB
             self._log('DBG', 'NAS UL count for Kenb derivation, %i' % secctx['UL_enb'])
-            Kenb, UESecCap = conv_A3(secctx['Kasme'], secctx['UL_enb']), self.UE.Cap['UESecCap'][1]
+            Kenb, UESecCap = conv_401_A3(secctx['Kasme'], secctx['UL_enb']), self.UE.Cap['UESecCap'][1]
             secctx['Kenb'] = Kenb
             secctx['NCC']  = 0
-            secctx['NH']   = conv_A4(secctx['Kasme'], Kenb)
+            secctx['NH']   = conv_401_A4(secctx['Kasme'], Kenb)
         else:
             self._log('WNG', 'no active NAS security context, using the null AS security context')
             Kenb, UESecCap = self.SECAS_NULL_CTX

@@ -268,10 +268,10 @@ class EMMSigProc(NASSigProc):
         if secctx and 'UESecCap' in self.UE.Cap:
             # create the KeNB
             self._log('DBG', 'NAS UL count for Kenb derivation, %i' % secctx['UL_enb'])
-            Kenb, UESecCap = conv_A3(secctx['Kasme'], secctx['UL_enb']), self.UE.Cap['UESecCap'][1]
+            Kenb, UESecCap = conv_401_A3(secctx['Kasme'], secctx['UL_enb']), self.UE.Cap['UESecCap'][1]
             secctx['Kenb'] = Kenb
             secctx['NCC']  = 0
-            secctx['NH']   = conv_A4(secctx['Kasme'], Kenb)
+            secctx['NH']   = conv_401_A4(secctx['Kasme'], Kenb)
         else:
             self._log('WNG', 'no active NAS security context, using the null AS security context')
             Kenb, UESecCap = self.S1.SECAS_NULL_CTX

@@ -351,7 +351,7 @@ class UEIuSigStack(SigStack):
         else:
             # ctx == 2, 2G sec ctx
             # convert 2G Kc to 3G Ck, Ik
-            CK, IK = conv_C4(vect[2]), conv_C5(vect[2])
+            CK, IK = conv_102_C4(vect[2]), conv_102_C5(vect[2])
             secctx = {'VEC': vect,
                       'CTX': ctx,
                       'Kc' : vect[2],

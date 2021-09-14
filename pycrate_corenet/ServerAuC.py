@@ -516,7 +516,7 @@ class AuC:
         XRESstar = conv_501_A4(CK, IK, SNName, RAND, XRES)
         #
         # return auth vector
-        self._log('DBG', '[make_4g_vector] IMSI %s, SQN %i, SNName %s: RAND %s, XRES* %s, AUTN %s, KASME %s'\
+        self._log('DBG', '[make_5g_vector] IMSI %s, SQN %i, SNName %s: RAND %s, XRES* %s, AUTN %s, KAUSF %s'\
                   % (IMSI, SQN, hexlify(SNName).decode('ascii'), hexlify(RAND).decode('ascii'), 
                      hexlify(XRESstar).decode('ascii'), hexlify(AUTN).decode('ascii'), 
                      hexlify(KAUSF).decode('ascii')))
