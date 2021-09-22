@@ -1,6 +1,0 @@
-X2AP-CommonDataTypes.asn
-X2AP-Constants.asn
-X2AP-Containers.asn
-X2AP-IEs.asn
-X2AP-PDU-Contents.asn
-X2AP-PDU-Descriptions.asn

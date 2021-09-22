@@ -4,11 +4,11 @@
 --
 -- **************************************************************
 
-XwAP-PDU-Contents { 
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+XwAP-PDU-Contents {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 eps-Access (21) modules (3) xwap (8) version1 (1) xwap-PDU-Contents (1) }
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -116,7 +116,7 @@ FROM XwAP-Containers
 	id-ReportCharacteristics,
 	id-ReportingPeriodicity,
 	id-UE-Identity,
-	id-WLANIdentifier-List, 
+	id-WLANIdentifier-List,
 	id-WLANIdentifiersToAdd-List,
 	id-WLANIdentifiersToDelete-List,
 	id-WLANIdentifiersToDeleteExtension-List,
@@ -128,7 +128,7 @@ FROM XwAP-Containers
 	id-WT-UE-XwAP-ID,
 	id-TimeToWait,
 	id-LWIP-SeGWSecurityInfo,
-	id-eNBGTPtunnelEndpoint, 
+	id-eNBGTPtunnelEndpoint,
 	id-LWIP-SeGWGTPtunnelEndpoint,
 	maxnoofBearers
 FROM XwAP-Constants;
@@ -201,7 +201,7 @@ XwSetupFailureIEs XWAP-PROTOCOL-IES ::= {
 
 -- **************************************************************
 --
--- WT Configuration Update 
+-- WT Configuration Update
 --
 -- **************************************************************
 
@@ -262,7 +262,7 @@ WTConfigurationUpdateFailureIEs XWAP-PROTOCOL-IES ::= {
 
 -- **************************************************************
 --
--- WT Status Request 
+-- WT Status Request
 --
 -- **************************************************************
 
@@ -604,7 +604,7 @@ E-RABs-ToBeReleased-ModReqItemIEs XWAP-PROTOCOL-IES ::= {
 }
 
 E-RABs-ToBeReleased-ModReqItem ::= SEQUENCE {
-	e-RAB-ID						E-RAB-ID, 
+	e-RAB-ID						E-RAB-ID,
 	dL-GTPtunnelEndpoint			GTPtunnelEndpoint															OPTIONAL,
 	iE-Extensions					ProtocolExtensionContainer { {E-RABs-ToBeReleased-ModReqItemExtIEs} } 	OPTIONAL,
 	...
@@ -800,7 +800,7 @@ E-RABs-Confirmed-ToBeReleased-ModReqdItemIEs XWAP-PROTOCOL-IES ::= {
 }
 
 E-RABs-Confirmed-ToBeReleased-ModReqdItem ::= SEQUENCE {
-	e-RAB-ID						E-RAB-ID, 
+	e-RAB-ID						E-RAB-ID,
 	dL-GTPtunnelEndpoint			GTPtunnelEndpoint															OPTIONAL,
 	iE-Extensions					ProtocolExtensionContainer { {E-RABs-Confirmed-ToBeReleased-ModReqdItemExtIEs} } 	OPTIONAL,
 	...
@@ -818,7 +818,7 @@ E-RABs-Confirmed-ToBeModified-ModReqdItemIEs XWAP-PROTOCOL-IES ::= {
 }
 
 E-RABs-Confirmed-ToBeModified-ModReqdItem ::= SEQUENCE {
-	e-RAB-ID						E-RAB-ID, 
+	e-RAB-ID						E-RAB-ID,
 	iE-Extensions					ProtocolExtensionContainer { {E-RABs-Confirmed-ToBeModified-ModReqdItemExtIEs} } 	OPTIONAL,
 	...
 }
@@ -962,7 +962,7 @@ E-RABs-ToBeReleased-RelConfItemExtIEs XWAP-PROTOCOL-EXTENSION ::= {
 
 -- **************************************************************
 --
--- WT Association Confirmation 
+-- WT Association Confirmation
 --
 -- **************************************************************
 

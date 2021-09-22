@@ -1017,6 +1017,7 @@ RNSAP-Constants.id-Downlink-TPC-enhancements-Reconf
 RNSAP-Constants.id-TPC-slot-position
 RNSAP-Constants.id-DL-TBS
 RNSAP-Constants.id-Selected-PLMN-Identity
+RNSAP-Constants.id-Dual-Cell-EDCH-Enhancements-Information
 RNSAP-Constants.id-SpeechVersion
 RNSAP-Constants.id-SourceID
 RNSAP-Constants.id-TargetID
@@ -1314,6 +1315,7 @@ RNSAP-IEs.DTX-Information-ExtIEs
 RNSAP-IEs.DTX-Information2-ExtIEs
 RNSAP-IEs.DTX-Information-to-Modify
 RNSAP-IEs.DTX-Information-to-Modify-Items-ExtIEs
+RNSAP-IEs.Dual-Cell-EDCH-Enhancements-Information-ExtIEs
 RNSAP-IEs.EARFCN
 RNSAP-IEs.EARFCN-Extended
 RNSAP-IEs.Extension-EARFCN-InformationIE
@@ -1372,6 +1374,9 @@ RNSAP-IEs.EDCH-MACdFlow-Specific-InfoToModifyList
 RNSAP-IEs.EDCH-MACdFlow-Specific-InfoToModifyItem-ExtIEs
 RNSAP-IEs.EDCH-MACdFlows-To-Delete
 RNSAP-IEs.EDCH-MACdFlows-To-Delete-Item-ExtIEs
+RNSAP-IEs.EDCH-Reference-E-TFCI-Information
+RNSAP-IEs.EDCH-Reference-E-TFCI-Information-Item-ExtIEs
+RNSAP-IEs.EDCH-Reference-E-TFCI-PO
 RNSAP-IEs.EDCH-RL-Indication
 RNSAP-IEs.E-DCH-Non-Scheduled-Transmission-Grant-Items-ExtIEs
 RNSAP-IEs.E-DCH-TFCI-Table-Index
@@ -3382,6 +3387,7 @@ RNSAP-IEs.DTX-Cycle-10ms-to-Modify-Items
 RNSAP-IEs.DTX-Information
 RNSAP-IEs.DTX-Information2
 RNSAP-IEs.DTX-Information-to-Modify-Items
+RNSAP-IEs.Dual-Cell-EDCH-Enhancements-Information
 RNSAP-IEs.Extension-EARFCN-Information
 RNSAP-IEs.E-AGCH-DRX-Parameters-Response
 RNSAP-IEs.E-AGCH-DRX-Parameters
@@ -3405,6 +3411,7 @@ RNSAP-IEs.EDCH-MACdFlows-Information
 RNSAP-IEs.EDCH-MACdFlow-Specific-InfoItem
 RNSAP-IEs.EDCH-MACdFlow-Specific-InfoToModifyItem
 RNSAP-IEs.EDCH-MACdFlows-To-Delete-Item
+RNSAP-IEs.EDCH-Reference-E-TFCI-Information-Item
 RNSAP-IEs.E-DCH-Non-Scheduled-Transmission-Grant-Items
 RNSAP-IEs.E-DCH-Serving-cell-change-informationResponse
 RNSAP-IEs.E-DCH-serving-cell-change-successful
@@ -4276,6 +4283,7 @@ RNSAP-IEs.GANSS-Additional-UTC-Models
 RNSAP-IEs.GANSS-Almanac
 RNSAP-IEs.IPDLParameters
 RNSAP-IEs.MeasurementIncreaseDecreaseThreshold
+RNSAP-IEs.MeasurementThreshold
 RNSAP-IEs.Extension-MeasurementThreshold
 RNSAP-IEs.ReportCharacteristics
 RNSAP-IEs.UEMeasurementReportCharacteristics
@@ -4334,4 +4342,3 @@ RNSAP-PDU-Descriptions.InitiatingMessage
 RNSAP-PDU-Descriptions.SuccessfulOutcome
 RNSAP-PDU-Descriptions.UnsuccessfulOutcome
 RNSAP-PDU-Descriptions.Outcome
-RNSAP-IEs.MeasurementThreshold

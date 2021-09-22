@@ -14,6 +14,134 @@ from pycrate_asn1rt.asnobj_class     import *
 from pycrate_asn1rt.asnobj_ext       import *
 from pycrate_asn1rt.init             import init_modules
 
+class LPP_Broadcast_Definitions:
+
+    _name_  = u'LPP-Broadcast-Definitions'
+    _oid_   = []
+    
+    _obj_ = [
+        u'AssistanceDataSIBelement-r15',
+        u'CipheringKeyData-r15',
+        u'SegmentationInfo-r15',
+        u'OTDOA-UE-Assisted-r15',
+        u'NR-UEB-TRP-LocationData-r16',
+        u'NR-UEB-TRP-RTD-Info-r16',
+        ]
+    _type_ = [
+        u'AssistanceDataSIBelement-r15',
+        u'CipheringKeyData-r15',
+        u'SegmentationInfo-r15',
+        u'OTDOA-UE-Assisted-r15',
+        u'NR-UEB-TRP-LocationData-r16',
+        u'NR-UEB-TRP-RTD-Info-r16',
+        ]
+    _set_ = [
+        ]
+    _val_ = [
+        ]
+    _class_ = [
+        ]
+    _param_ = [
+        ]
+    
+    #-----< AssistanceDataSIBelement-r15 >-----#
+    AssistanceDataSIBelement_r15 = SEQ(name=u'AssistanceDataSIBelement-r15', mode=MODE_TYPE)
+    _AssistanceDataSIBelement_r15_valueTag_r15 = INT(name=u'valueTag-r15', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _AssistanceDataSIBelement_r15_valueTag_r15._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=None, er=[])
+    _AssistanceDataSIBelement_r15_expirationTime_r15 = TIME_UTC(name=u'expirationTime-r15', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _AssistanceDataSIBelement_r15_cipheringKeyData_r15 = SEQ(name=u'cipheringKeyData-r15', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-Broadcast-Definitions', 'CipheringKeyData-r15')), opt=True)
+    _AssistanceDataSIBelement_r15_segmentationInfo_r15 = SEQ(name=u'segmentationInfo-r15', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-Broadcast-Definitions', 'SegmentationInfo-r15')), opt=True)
+    _AssistanceDataSIBelement_r15_assistanceDataElement_r15 = OCT_STR(name=u'assistanceDataElement-r15', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    AssistanceDataSIBelement_r15._cont = ASN1Dict([
+        (u'valueTag-r15', _AssistanceDataSIBelement_r15_valueTag_r15),
+        (u'expirationTime-r15', _AssistanceDataSIBelement_r15_expirationTime_r15),
+        (u'cipheringKeyData-r15', _AssistanceDataSIBelement_r15_cipheringKeyData_r15),
+        (u'segmentationInfo-r15', _AssistanceDataSIBelement_r15_segmentationInfo_r15),
+        (u'assistanceDataElement-r15', _AssistanceDataSIBelement_r15_assistanceDataElement_r15),
+        ])
+    AssistanceDataSIBelement_r15._ext = []
+    
+    #-----< CipheringKeyData-r15 >-----#
+    CipheringKeyData_r15 = SEQ(name=u'CipheringKeyData-r15', mode=MODE_TYPE)
+    _CipheringKeyData_r15_cipherSetID_r15 = INT(name=u'cipherSetID-r15', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CipheringKeyData_r15_cipherSetID_r15._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
+    _CipheringKeyData_r15_d0_r15 = BIT_STR(name=u'd0-r15', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CipheringKeyData_r15_d0_r15._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
+    CipheringKeyData_r15._cont = ASN1Dict([
+        (u'cipherSetID-r15', _CipheringKeyData_r15_cipherSetID_r15),
+        (u'd0-r15', _CipheringKeyData_r15_d0_r15),
+        ])
+    CipheringKeyData_r15._ext = []
+    
+    #-----< SegmentationInfo-r15 >-----#
+    SegmentationInfo_r15 = SEQ(name=u'SegmentationInfo-r15', mode=MODE_TYPE)
+    _SegmentationInfo_r15_segmentationOption_r15 = ENUM(name=u'segmentationOption-r15', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SegmentationInfo_r15_segmentationOption_r15._cont = ASN1Dict([(u'pseudo-seg', 0), (u'octet-string-seg', 1)])
+    _SegmentationInfo_r15_segmentationOption_r15._ext = None
+    _SegmentationInfo_r15_assistanceDataSegmentType_r15 = ENUM(name=u'assistanceDataSegmentType-r15', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SegmentationInfo_r15_assistanceDataSegmentType_r15._cont = ASN1Dict([(u'notLastSegment', 0), (u'lastSegment', 1)])
+    _SegmentationInfo_r15_assistanceDataSegmentType_r15._ext = None
+    _SegmentationInfo_r15_assistanceDataSegmentNumber_r15 = INT(name=u'assistanceDataSegmentNumber-r15', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SegmentationInfo_r15_assistanceDataSegmentNumber_r15._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=None, er=[])
+    SegmentationInfo_r15._cont = ASN1Dict([
+        (u'segmentationOption-r15', _SegmentationInfo_r15_segmentationOption_r15),
+        (u'assistanceDataSegmentType-r15', _SegmentationInfo_r15_assistanceDataSegmentType_r15),
+        (u'assistanceDataSegmentNumber-r15', _SegmentationInfo_r15_assistanceDataSegmentNumber_r15),
+        ])
+    SegmentationInfo_r15._ext = []
+    
+    #-----< OTDOA-UE-Assisted-r15 >-----#
+    OTDOA_UE_Assisted_r15 = SEQ(name=u'OTDOA-UE-Assisted-r15', mode=MODE_TYPE)
+    _OTDOA_UE_Assisted_r15_otdoa_ReferenceCellInfo_r15 = SEQ(name=u'otdoa-ReferenceCellInfo-r15', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'OTDOA-ReferenceCellInfo')))
+    _OTDOA_UE_Assisted_r15_otdoa_NeighbourCellInfo_r15 = SEQ_OF(name=u'otdoa-NeighbourCellInfo-r15', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'OTDOA-NeighbourCellInfoList')))
+    OTDOA_UE_Assisted_r15._cont = ASN1Dict([
+        (u'otdoa-ReferenceCellInfo-r15', _OTDOA_UE_Assisted_r15_otdoa_ReferenceCellInfo_r15),
+        (u'otdoa-NeighbourCellInfo-r15', _OTDOA_UE_Assisted_r15_otdoa_NeighbourCellInfo_r15),
+        ])
+    OTDOA_UE_Assisted_r15._ext = []
+    
+    #-----< NR-UEB-TRP-LocationData-r16 >-----#
+    NR_UEB_TRP_LocationData_r16 = SEQ(name=u'NR-UEB-TRP-LocationData-r16', mode=MODE_TYPE)
+    _NR_UEB_TRP_LocationData_r16_nr_trp_LocationInfo_r16 = SEQ_OF(name=u'nr-trp-LocationInfo-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-TRP-LocationInfo-r16')))
+    _NR_UEB_TRP_LocationData_r16_nr_dl_prs_BeamInfo_r16 = SEQ_OF(name=u'nr-dl-prs-BeamInfo-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-BeamInfo-r16')), opt=True)
+    NR_UEB_TRP_LocationData_r16._cont = ASN1Dict([
+        (u'nr-trp-LocationInfo-r16', _NR_UEB_TRP_LocationData_r16_nr_trp_LocationInfo_r16),
+        (u'nr-dl-prs-BeamInfo-r16', _NR_UEB_TRP_LocationData_r16_nr_dl_prs_BeamInfo_r16),
+        ])
+    NR_UEB_TRP_LocationData_r16._ext = []
+    
+    #-----< NR-UEB-TRP-RTD-Info-r16 >-----#
+    NR_UEB_TRP_RTD_Info_r16 = SEQ(name=u'NR-UEB-TRP-RTD-Info-r16', mode=MODE_TYPE)
+    _NR_UEB_TRP_RTD_Info_r16_nr_rtd_Info_r16 = SEQ(name=u'nr-rtd-Info-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-RTD-Info-r16')))
+    NR_UEB_TRP_RTD_Info_r16._cont = ASN1Dict([
+        (u'nr-rtd-Info-r16', _NR_UEB_TRP_RTD_Info_r16_nr_rtd_Info_r16),
+        ])
+    NR_UEB_TRP_RTD_Info_r16._ext = []
+    
+    _all_ = [
+        _AssistanceDataSIBelement_r15_valueTag_r15,
+        _AssistanceDataSIBelement_r15_expirationTime_r15,
+        _AssistanceDataSIBelement_r15_cipheringKeyData_r15,
+        _AssistanceDataSIBelement_r15_segmentationInfo_r15,
+        _AssistanceDataSIBelement_r15_assistanceDataElement_r15,
+        AssistanceDataSIBelement_r15,
+        _CipheringKeyData_r15_cipherSetID_r15,
+        _CipheringKeyData_r15_d0_r15,
+        CipheringKeyData_r15,
+        _SegmentationInfo_r15_segmentationOption_r15,
+        _SegmentationInfo_r15_assistanceDataSegmentType_r15,
+        _SegmentationInfo_r15_assistanceDataSegmentNumber_r15,
+        SegmentationInfo_r15,
+        _OTDOA_UE_Assisted_r15_otdoa_ReferenceCellInfo_r15,
+        _OTDOA_UE_Assisted_r15_otdoa_NeighbourCellInfo_r15,
+        OTDOA_UE_Assisted_r15,
+        _NR_UEB_TRP_LocationData_r16_nr_trp_LocationInfo_r16,
+        _NR_UEB_TRP_LocationData_r16_nr_dl_prs_BeamInfo_r16,
+        NR_UEB_TRP_LocationData_r16,
+        _NR_UEB_TRP_RTD_Info_r16_nr_rtd_Info_r16,
+        NR_UEB_TRP_RTD_Info_r16,
+    ]
+
 class LPP_PDU_Definitions:
 
     _name_  = u'LPP-PDU-Definitions'
@@ -47,9 +175,6 @@ class LPP_PDU_Definitions:
         u'ARFCN-ValueEUTRA',
         u'ARFCN-ValueEUTRA-v9a0',
         u'ARFCN-ValueEUTRA-r14',
-        u'maxEARFCN',
-        u'maxEARFCN-Plus1',
-        u'maxEARFCN2',
         u'ARFCN-ValueNR-r15',
         u'ARFCN-ValueUTRA',
         u'CarrierFreq-NB-r14',
@@ -70,6 +195,7 @@ class LPP_PDU_Definitions:
         u'EPDU-ID',
         u'EPDU-Name',
         u'EPDU-Body',
+        u'FreqBandIndicatorNR-r16',
         u'HighAccuracyEllipsoidPointWithUncertaintyEllipse-r15',
         u'HighAccuracyEllipsoidPointWithAltitudeAndUncertaintyEllipsoid-r15',
         u'HorizontalVelocity',
@@ -78,6 +204,7 @@ class LPP_PDU_Definitions:
         u'HorizontalWithVerticalVelocityAndUncertainty',
         u'LocationCoordinateTypes',
         u'NCGI-r15',
+        u'NR-PhysCellID-r16',
         u'PeriodicAssistanceDataControlParameters-r15',
         u'PeriodicSessionID-r15',
         u'UpdateCapabilities-r15',
@@ -114,6 +241,69 @@ class LPP_PDU_Definitions:
         u'LocationSource-r13',
         u'CommonIEsAbort',
         u'CommonIEsError',
+        u'DL-PRS-ID-Info-r16',
+        u'NR-AdditionalPathList-r16',
+        u'NR-AdditionalPath-r16',
+        u'NR-DL-PRS-AssistanceData-r16',
+        u'NR-DL-PRS-AssistanceDataPerFreq-r16',
+        u'NR-DL-PRS-AssistanceDataPerTRP-r16',
+        u'NR-DL-PRS-PositioningFrequencyLayer-r16',
+        u'NR-DL-PRS-SFN0-Offset-r16',
+        u'NR-DL-PRS-BeamInfo-r16',
+        u'NR-DL-PRS-BeamInfoPerFreqLayer-r16',
+        u'NR-DL-PRS-BeamInfoPerTRP-r16',
+        u'DL-PRS-BeamInfoSet-r16',
+        u'DL-PRS-BeamInfoResourceSet-r16',
+        u'DL-PRS-BeamInfoElement-r16',
+        u'LCS-GCS-TranslationParameter-r16',
+        u'NR-DL-PRS-Info-r16',
+        u'NR-DL-PRS-ResourceSet-r16',
+        u'DL-PRS-MutingOption1-r16',
+        u'DL-PRS-MutingOption2-r16',
+        u'NR-MutingPattern-r16',
+        u'NR-DL-PRS-Resource-r16',
+        u'DL-PRS-QCL-Info-r16',
+        u'NR-DL-PRS-Periodicity-and-ResourceSetSlotOffset-r16',
+        u'NR-DL-PRS-ProcessingCapability-r16',
+        u'PRS-ProcessingCapabilityPerBand-r16',
+        u'NR-DL-PRS-QCL-ProcessingCapability-r16',
+        u'DL-PRS-QCL-ProcessingCapabilityPerBand-r16',
+        u'NR-DL-PRS-ResourceID-r16',
+        u'NR-DL-PRS-ResourcesCapability-r16',
+        u'DL-PRS-ResourcesCapabilityPerBand-r16',
+        u'DL-PRS-ResourcesBandCombinationList-r16',
+        u'DL-PRS-ResourcesBandCombination-r16',
+        u'NR-DL-PRS-ResourceSetID-r16',
+        u'NR-PositionCalculationAssistance-r16',
+        u'NR-RTD-Info-r16',
+        u'ReferenceTRP-RTD-Info-r16',
+        u'RTD-InfoList-r16',
+        u'RTD-InfoListPerFreqLayer-r16',
+        u'RTD-InfoElement-r16',
+        u'NR-SelectedDL-PRS-IndexList-r16',
+        u'NR-SelectedDL-PRS-PerFreq-r16',
+        u'NR-SelectedDL-PRS-IndexPerTRP-r16',
+        u'DL-SelectedPRS-ResourceSetIndex-r16',
+        u'DL-SelectedPRS-ResourceIndex-r16',
+        u'NR-SSB-Config-r16',
+        u'NR-TimeStamp-r16',
+        u'NR-TimingQuality-r16',
+        u'NR-TRP-LocationInfo-r16',
+        u'NR-TRP-LocationInfoPerFreqLayer-r16',
+        u'TRP-LocationInfoElement-r16',
+        u'DL-PRS-ResourceSets-TRP-Element-r16',
+        u'DL-PRS-Resource-ARP-Element-r16',
+        u'NR-UL-SRS-Capability-r16',
+        u'SRS-CapabilityPerBand-r16',
+        u'OLPC-SRS-Pos-r16',
+        u'SpatialRelationsSRS-Pos-r16',
+        u'SRS-PosResourcesPerBand-r16',
+        u'ReferencePoint-r16',
+        u'RelativeLocation-r16',
+        u'Delta-Latitude-r16',
+        u'Delta-Longitude-r16',
+        u'Delta-Height-r16',
+        u'LocationUncertainty-r16',
         u'OTDOA-ProvideAssistanceData',
         u'OTDOA-ReferenceCellInfo',
         u'maxAddPRSconfig-r14',
@@ -171,17 +361,24 @@ class LPP_PDU_Definitions:
         u'GNSS-ReferenceLocation',
         u'GNSS-IonosphericModel',
         u'KlobucharModelParameter',
+        u'KlobucharModel2Parameter-r16',
         u'NeQuickModelParameter',
         u'GNSS-EarthOrientationParameters',
         u'GNSS-RTK-ReferenceStationInfo-r15',
         u'AntennaDescription-r15',
         u'AntennaReferencePointUnc-r15',
         u'PhysicalReferenceStationInfo-r15',
+        u'EqualIntegerAmbiguityLevel-r16',
+        u'ReferenceStationList-r16',
         u'GNSS-RTK-CommonObservationInfo-r15',
         u'GNSS-RTK-AuxiliaryStationData-r15',
         u'AuxiliaryStationList-r15',
         u'AuxiliaryStationElement-r15',
         u'Aux-ARP-Unc-r15',
+        u'GNSS-SSR-CorrectionPoints-r16',
+        u'GNSS-SSR-ListOfCorrectionPoints-r16',
+        u'RelativeLocationElement-r16',
+        u'GNSS-SSR-ArrayOfCorrectionPoints-r16',
         u'GNSS-TimeModelList',
         u'GNSS-TimeModelElement',
         u'GNSS-DifferentialCorrections',
@@ -201,12 +398,16 @@ class LPP_PDU_Definitions:
         u'GLONASS-ClockModel',
         u'SBAS-ClockModel',
         u'BDS-ClockModel-r12',
+        u'BDS-ClockModel2-r16',
+        u'NavIC-ClockModel-r16',
         u'NavModelKeplerianSet',
         u'NavModelNAV-KeplerianSet',
         u'NavModelCNAV-KeplerianSet',
         u'NavModel-GLONASS-ECEF',
         u'NavModel-SBAS-ECEF',
         u'NavModel-BDS-KeplerianSet-r12',
+        u'NavModel-BDS-KeplerianSet2-r16',
+        u'NavModel-NavIC-KeplerianSet-r16',
         u'GNSS-RealTimeIntegrity',
         u'GNSS-BadSignalList',
         u'BadSignalElement',
@@ -228,6 +429,7 @@ class LPP_PDU_Definitions:
         u'AlmanacGLONASS-AlmanacSet',
         u'AlmanacECEF-SBAS-AlmanacSet',
         u'AlmanacBDS-AlmanacSet-r12',
+        u'AlmanacNavIC-AlmanacSet-r16',
         u'GNSS-UTC-Model',
         u'UTC-ModelSet1',
         u'UTC-ModelSet2',
@@ -239,6 +441,8 @@ class LPP_PDU_Definitions:
         u'GNSS-ID-GPS-SatElement',
         u'GNSS-ID-GLONASS',
         u'GNSS-ID-GLONASS-SatElement',
+        u'GNSS-ID-BDS-r16',
+        u'GNSS-ID-BDS-SatElement-r16',
         u'BDS-DifferentialCorrections-r12',
         u'BDS-SgnTypeList-r12',
         u'BDS-SgnTypeElement-r12',
@@ -275,6 +479,31 @@ class LPP_PDU_Definitions:
         u'SSR-CodeBiasSatElement-r15',
         u'SSR-CodeBiasSignalList-r15',
         u'SSR-CodeBiasSignalElement-r15',
+        u'GNSS-SSR-URA-r16',
+        u'SSR-URA-SatList-r16',
+        u'SSR-URA-SatElement-r16',
+        u'GNSS-SSR-PhaseBias-r16',
+        u'SSR-PhaseBiasSatList-r16',
+        u'SSR-PhaseBiasSatElement-r16',
+        u'SSR-PhaseBiasSignalList-r16',
+        u'SSR-PhaseBiasSignalElement-r16',
+        u'GNSS-SSR-STEC-Correction-r16',
+        u'STEC-SatList-r16',
+        u'STEC-SatElement-r16',
+        u'GNSS-SSR-GriddedCorrection-r16',
+        u'GridList-r16',
+        u'GridElement-r16',
+        u'TropospericDelayCorrection-r16',
+        u'STEC-ResidualSatList-r16',
+        u'STEC-ResidualSatElement-r16',
+        u'NavIC-DifferentialCorrections-r16',
+        u'NavIC-CorrectionListAutoNav-r16',
+        u'NavIC-CorrectionElementAutoNav-r16',
+        u'NavIC-EDC-r16',
+        u'NavIC-CDC-r16',
+        u'NavIC-GridModelParameter-r16',
+        u'RegionIgpList-r16',
+        u'RegionIgpElement-r16',
         u'A-GNSS-RequestAssistanceData',
         u'GNSS-CommonAssistDataReq',
         u'GNSS-GenericAssistDataReq',
@@ -286,6 +515,7 @@ class LPP_PDU_Definitions:
         u'GNSS-EarthOrientationParametersReq',
         u'GNSS-RTK-ReferenceStationInfoReq-r15',
         u'GNSS-RTK-AuxiliaryStationDataReq-r15',
+        u'GNSS-SSR-CorrectionPointsReq-r16',
         u'GNSS-TimeModelListReq',
         u'GNSS-TimeModelElementReq',
         u'GNSS-DifferentialCorrectionsReq',
@@ -314,6 +544,12 @@ class LPP_PDU_Definitions:
         u'GNSS-SSR-OrbitCorrectionsReq-r15',
         u'GNSS-SSR-ClockCorrectionsReq-r15',
         u'GNSS-SSR-CodeBiasReq-r15',
+        u'GNSS-SSR-URA-Req-r16',
+        u'GNSS-SSR-PhaseBiasReq-r16',
+        u'GNSS-SSR-STEC-CorrectionReq-r16',
+        u'GNSS-SSR-GriddedCorrectionReq-r16',
+        u'NavIC-DifferentialCorrectionsReq-r16',
+        u'NavIC-GridModelReq-r16',
         u'A-GNSS-ProvideLocationInformation',
         u'GNSS-SignalMeasurementInformation',
         u'MeasurementReferenceTime',
@@ -358,6 +594,12 @@ class LPP_PDU_Definitions:
         u'GNSS-SSR-OrbitCorrectionsSupport-r15',
         u'GNSS-SSR-ClockCorrectionsSupport-r15',
         u'GNSS-SSR-CodeBiasSupport-r15',
+        u'GNSS-SSR-URA-Support-r16',
+        u'GNSS-SSR-PhaseBiasSupport-r16',
+        u'GNSS-SSR-STEC-CorrectionSupport-r16',
+        u'GNSS-SSR-GriddedCorrectionSupport-r16',
+        u'NavIC-DifferentialCorrectionsSupport-r16',
+        u'NavIC-GridModelSupport-r16',
         u'A-GNSS-RequestCapabilities',
         u'A-GNSS-Error',
         u'GNSS-LocationServerErrorCauses',
@@ -403,7 +645,6 @@ class LPP_PDU_Definitions:
         u'TBS-AssistanceDataList-r14',
         u'MBS-AssistanceDataList-r14',
         u'MBS-AssistanceDataElement-r14',
-        u'maxMBS-r14',
         u'MBS-AlmanacAssistance-r14',
         u'MBS-AcquisitionAssistance-r14',
         u'TBS-RequestAssistanceData-r14',
@@ -435,7 +676,6 @@ class LPP_PDU_Definitions:
         u'WLAN-MeasurementElement-r13',
         u'WLAN-AP-Identifier-r13',
         u'WLAN-RTT-r13',
-        u'maxWLAN-AP-r13',
         u'WLAN-RequestLocationInformation-r13',
         u'WLAN-ProvideCapabilities-r13',
         u'WLAN-RequestCapabilities-r13',
@@ -443,28 +683,117 @@ class LPP_PDU_Definitions:
         u'WLAN-LocationServerErrorCauses-r13',
         u'WLAN-TargetDeviceErrorCauses-r13',
         u'WLAN-ProvideAssistanceData-r14',
-        u'maxWLAN-DataSets-r14',
         u'WLAN-DataSet-r14',
         u'SupportedChannels-11a-r14',
         u'SupportedChannels-11bg-r14',
-        u'maxWLAN-AP-r14',
         u'WLAN-AP-Data-r14',
         u'WLAN-AP-Location-r14',
         u'LocationDataLCI-r14',
         u'WLAN-RequestAssistanceData-r14',
-        u'maxVisibleAPs-r14',
-        u'maxKnownAPs-r14',
         u'BT-ProvideLocationInformation-r13',
         u'BT-MeasurementInformation-r13',
         u'BT-MeasurementList-r13',
         u'BT-MeasurementElement-r13',
-        u'maxBT-Beacon-r13',
         u'BT-RequestLocationInformation-r13',
         u'BT-ProvideCapabilities-r13',
         u'BT-RequestCapabilities-r13',
         u'BT-Error-r13',
         u'BT-LocationServerErrorCauses-r13',
         u'BT-TargetDeviceErrorCauses-r13',
+        u'NR-UL-ProvideCapabilities-r16',
+        u'NR-UL-RequestCapabilities-r16',
+        u'NR-ECID-ProvideLocationInformation-r16',
+        u'NR-ECID-SignalMeasurementInformation-r16',
+        u'NR-MeasuredResultsList-r16',
+        u'NR-MeasuredResultsElement-r16',
+        u'MeasQuantityResults-r16',
+        u'ResultsPerSSB-IndexList-r16',
+        u'ResultsPerSSB-Index-r16',
+        u'ResultsPerCSI-RS-IndexList-r16',
+        u'ResultsPerCSI-RS-Index-r16',
+        u'NR-ECID-RequestLocationInformation-r16',
+        u'NR-ECID-ProvideCapabilities-r16',
+        u'NR-ECID-RequestCapabilities-r16',
+        u'NR-ECID-Error-r16',
+        u'NR-ECID-LocationServerErrorCauses-r16',
+        u'NR-ECID-TargetDeviceErrorCauses-r16',
+        u'NR-DL-TDOA-ProvideAssistanceData-r16',
+        u'NR-DL-TDOA-RequestAssistanceData-r16',
+        u'NR-DL-TDOA-ProvideLocationInformation-r16',
+        u'NR-DL-TDOA-SignalMeasurementInformation-r16',
+        u'NR-DL-TDOA-MeasList-r16',
+        u'NR-DL-TDOA-MeasElement-r16',
+        u'NR-DL-TDOA-AdditionalMeasurements-r16',
+        u'NR-DL-TDOA-AdditionalMeasurementElement-r16',
+        u'NR-DL-TDOA-LocationInformation-r16',
+        u'NR-DL-TDOA-RequestLocationInformation-r16',
+        u'NR-DL-TDOA-ReportConfig-r16',
+        u'NR-DL-TDOA-ProvideCapabilities-r16',
+        u'NR-DL-TDOA-MeasurementCapability-r16',
+        u'NR-DL-TDOA-RequestCapabilities-r16',
+        u'NR-DL-TDOA-Error-r16',
+        u'NR-DL-TDOA-LocationServerErrorCauses-r16',
+        u'NR-DL-TDOA-TargetDeviceErrorCauses-r16',
+        u'NR-DL-AoD-ProvideAssistanceData-r16',
+        u'NR-DL-AoD-RequestAssistanceData-r16',
+        u'NR-DL-AoD-ProvideLocationInformation-r16',
+        u'NR-DL-AoD-SignalMeasurementInformation-r16',
+        u'NR-DL-AoD-MeasList-r16',
+        u'NR-DL-AoD-MeasElement-r16',
+        u'NR-DL-AoD-AdditionalMeasurements-r16',
+        u'NR-DL-AoD-AdditionalMeasurementElement-r16',
+        u'NR-DL-AoD-LocationInformation-r16',
+        u'NR-DL-AoD-RequestLocationInformation-r16',
+        u'NR-DL-AoD-ReportConfig-r16',
+        u'NR-DL-AoD-ProvideCapabilities-r16',
+        u'NR-DL-AoD-MeasurementCapability-r16',
+        u'DL-AoD-MeasCapabilityPerBand-r16',
+        u'NR-DL-AoD-RequestCapabilities-r16',
+        u'NR-DL-AoD-Error-r16',
+        u'NR-DL-AoD-LocationServerErrorCauses-r16',
+        u'NR-DL-AoD-TargetDeviceErrorCauses-r16',
+        u'NR-Multi-RTT-ProvideAssistanceData-r16',
+        u'NR-Multi-RTT-RequestAssistanceData-r16',
+        u'NR-Multi-RTT-ProvideLocationInformation-r16',
+        u'NR-Multi-RTT-SignalMeasurementInformation-r16',
+        u'NR-Multi-RTT-MeasList-r16',
+        u'NR-Multi-RTT-MeasElement-r16',
+        u'NR-Multi-RTT-AdditionalMeasurements-r16',
+        u'NR-Multi-RTT-AdditionalMeasurementElement-r16',
+        u'NR-Multi-RTT-RequestLocationInformation-r16',
+        u'NR-Multi-RTT-ReportConfig-r16',
+        u'NR-Multi-RTT-ProvideCapabilities-r16',
+        u'NR-Multi-RTT-MeasurementCapability-r16',
+        u'NR-Multi-RTT-RequestCapabilities-r16',
+        u'NR-Multi-RTT-Error-r16',
+        u'NR-Multi-RTT-LocationServerErrorCauses-r16',
+        u'NR-Multi-RTT-TargetDeviceErrorCauses-r16',
+        u'maxEARFCN',
+        u'maxEARFCN-Plus1',
+        u'maxEARFCN2',
+        u'maxMBS-r14',
+        u'maxWLAN-AP-r13',
+        u'maxKnownAPs-r14',
+        u'maxVisibleAPs-r14',
+        u'maxWLAN-AP-r14',
+        u'maxWLAN-DataSets-r14',
+        u'maxBT-Beacon-r13',
+        u'nrMaxBands-r16',
+        u'nrMaxFreqLayers-r16',
+        u'nrMaxFreqLayers-1-r16',
+        u'nrMaxNumDL-PRS-ResourcesPerSet-1-r16',
+        u'nrMaxNumDL-PRS-ResourceSetsPerTRP-1-r16',
+        u'nrMaxResourceIDs-r16',
+        u'nrMaxResourceOffsetValue-1-r16',
+        u'nrMaxResourcesPerSet-r16',
+        u'nrMaxSetsPerTrpPerFreqLayer-r16',
+        u'nrMaxSetsPerTrpPerFreqLayer-1-r16',
+        u'nrMaxTRPs-r16',
+        u'nrMaxTRPsPerFreq-r16',
+        u'nrMaxTRPsPerFreq-1-r16',
+        u'maxSimultaneousBands-r16',
+        u'maxBandComb-r16',
+        u'nrMaxConfiguredBands-r16',
         ]
     _type_ = [
         u'LPP-Message',
@@ -513,6 +842,7 @@ class LPP_PDU_Definitions:
         u'EPDU-ID',
         u'EPDU-Name',
         u'EPDU-Body',
+        u'FreqBandIndicatorNR-r16',
         u'HighAccuracyEllipsoidPointWithUncertaintyEllipse-r15',
         u'HighAccuracyEllipsoidPointWithAltitudeAndUncertaintyEllipsoid-r15',
         u'HorizontalVelocity',
@@ -521,6 +851,7 @@ class LPP_PDU_Definitions:
         u'HorizontalWithVerticalVelocityAndUncertainty',
         u'LocationCoordinateTypes',
         u'NCGI-r15',
+        u'NR-PhysCellID-r16',
         u'PeriodicAssistanceDataControlParameters-r15',
         u'PeriodicSessionID-r15',
         u'UpdateCapabilities-r15',
@@ -557,6 +888,69 @@ class LPP_PDU_Definitions:
         u'LocationSource-r13',
         u'CommonIEsAbort',
         u'CommonIEsError',
+        u'DL-PRS-ID-Info-r16',
+        u'NR-AdditionalPathList-r16',
+        u'NR-AdditionalPath-r16',
+        u'NR-DL-PRS-AssistanceData-r16',
+        u'NR-DL-PRS-AssistanceDataPerFreq-r16',
+        u'NR-DL-PRS-AssistanceDataPerTRP-r16',
+        u'NR-DL-PRS-PositioningFrequencyLayer-r16',
+        u'NR-DL-PRS-SFN0-Offset-r16',
+        u'NR-DL-PRS-BeamInfo-r16',
+        u'NR-DL-PRS-BeamInfoPerFreqLayer-r16',
+        u'NR-DL-PRS-BeamInfoPerTRP-r16',
+        u'DL-PRS-BeamInfoSet-r16',
+        u'DL-PRS-BeamInfoResourceSet-r16',
+        u'DL-PRS-BeamInfoElement-r16',
+        u'LCS-GCS-TranslationParameter-r16',
+        u'NR-DL-PRS-Info-r16',
+        u'NR-DL-PRS-ResourceSet-r16',
+        u'DL-PRS-MutingOption1-r16',
+        u'DL-PRS-MutingOption2-r16',
+        u'NR-MutingPattern-r16',
+        u'NR-DL-PRS-Resource-r16',
+        u'DL-PRS-QCL-Info-r16',
+        u'NR-DL-PRS-Periodicity-and-ResourceSetSlotOffset-r16',
+        u'NR-DL-PRS-ProcessingCapability-r16',
+        u'PRS-ProcessingCapabilityPerBand-r16',
+        u'NR-DL-PRS-QCL-ProcessingCapability-r16',
+        u'DL-PRS-QCL-ProcessingCapabilityPerBand-r16',
+        u'NR-DL-PRS-ResourceID-r16',
+        u'NR-DL-PRS-ResourcesCapability-r16',
+        u'DL-PRS-ResourcesCapabilityPerBand-r16',
+        u'DL-PRS-ResourcesBandCombinationList-r16',
+        u'DL-PRS-ResourcesBandCombination-r16',
+        u'NR-DL-PRS-ResourceSetID-r16',
+        u'NR-PositionCalculationAssistance-r16',
+        u'NR-RTD-Info-r16',
+        u'ReferenceTRP-RTD-Info-r16',
+        u'RTD-InfoList-r16',
+        u'RTD-InfoListPerFreqLayer-r16',
+        u'RTD-InfoElement-r16',
+        u'NR-SelectedDL-PRS-IndexList-r16',
+        u'NR-SelectedDL-PRS-PerFreq-r16',
+        u'NR-SelectedDL-PRS-IndexPerTRP-r16',
+        u'DL-SelectedPRS-ResourceSetIndex-r16',
+        u'DL-SelectedPRS-ResourceIndex-r16',
+        u'NR-SSB-Config-r16',
+        u'NR-TimeStamp-r16',
+        u'NR-TimingQuality-r16',
+        u'NR-TRP-LocationInfo-r16',
+        u'NR-TRP-LocationInfoPerFreqLayer-r16',
+        u'TRP-LocationInfoElement-r16',
+        u'DL-PRS-ResourceSets-TRP-Element-r16',
+        u'DL-PRS-Resource-ARP-Element-r16',
+        u'NR-UL-SRS-Capability-r16',
+        u'SRS-CapabilityPerBand-r16',
+        u'OLPC-SRS-Pos-r16',
+        u'SpatialRelationsSRS-Pos-r16',
+        u'SRS-PosResourcesPerBand-r16',
+        u'ReferencePoint-r16',
+        u'RelativeLocation-r16',
+        u'Delta-Latitude-r16',
+        u'Delta-Longitude-r16',
+        u'Delta-Height-r16',
+        u'LocationUncertainty-r16',
         u'OTDOA-ProvideAssistanceData',
         u'OTDOA-ReferenceCellInfo',
         u'PRS-Info',
@@ -604,17 +998,24 @@ class LPP_PDU_Definitions:
         u'GNSS-ReferenceLocation',
         u'GNSS-IonosphericModel',
         u'KlobucharModelParameter',
+        u'KlobucharModel2Parameter-r16',
         u'NeQuickModelParameter',
         u'GNSS-EarthOrientationParameters',
         u'GNSS-RTK-ReferenceStationInfo-r15',
         u'AntennaDescription-r15',
         u'AntennaReferencePointUnc-r15',
         u'PhysicalReferenceStationInfo-r15',
+        u'EqualIntegerAmbiguityLevel-r16',
+        u'ReferenceStationList-r16',
         u'GNSS-RTK-CommonObservationInfo-r15',
         u'GNSS-RTK-AuxiliaryStationData-r15',
         u'AuxiliaryStationList-r15',
         u'AuxiliaryStationElement-r15',
         u'Aux-ARP-Unc-r15',
+        u'GNSS-SSR-CorrectionPoints-r16',
+        u'GNSS-SSR-ListOfCorrectionPoints-r16',
+        u'RelativeLocationElement-r16',
+        u'GNSS-SSR-ArrayOfCorrectionPoints-r16',
         u'GNSS-TimeModelList',
         u'GNSS-TimeModelElement',
         u'GNSS-DifferentialCorrections',
@@ -634,12 +1035,16 @@ class LPP_PDU_Definitions:
         u'GLONASS-ClockModel',
         u'SBAS-ClockModel',
         u'BDS-ClockModel-r12',
+        u'BDS-ClockModel2-r16',
+        u'NavIC-ClockModel-r16',
         u'NavModelKeplerianSet',
         u'NavModelNAV-KeplerianSet',
         u'NavModelCNAV-KeplerianSet',
         u'NavModel-GLONASS-ECEF',
         u'NavModel-SBAS-ECEF',
         u'NavModel-BDS-KeplerianSet-r12',
+        u'NavModel-BDS-KeplerianSet2-r16',
+        u'NavModel-NavIC-KeplerianSet-r16',
         u'GNSS-RealTimeIntegrity',
         u'GNSS-BadSignalList',
         u'BadSignalElement',
@@ -661,6 +1066,7 @@ class LPP_PDU_Definitions:
         u'AlmanacGLONASS-AlmanacSet',
         u'AlmanacECEF-SBAS-AlmanacSet',
         u'AlmanacBDS-AlmanacSet-r12',
+        u'AlmanacNavIC-AlmanacSet-r16',
         u'GNSS-UTC-Model',
         u'UTC-ModelSet1',
         u'UTC-ModelSet2',
@@ -672,6 +1078,8 @@ class LPP_PDU_Definitions:
         u'GNSS-ID-GPS-SatElement',
         u'GNSS-ID-GLONASS',
         u'GNSS-ID-GLONASS-SatElement',
+        u'GNSS-ID-BDS-r16',
+        u'GNSS-ID-BDS-SatElement-r16',
         u'BDS-DifferentialCorrections-r12',
         u'BDS-SgnTypeList-r12',
         u'BDS-SgnTypeElement-r12',
@@ -708,6 +1116,31 @@ class LPP_PDU_Definitions:
         u'SSR-CodeBiasSatElement-r15',
         u'SSR-CodeBiasSignalList-r15',
         u'SSR-CodeBiasSignalElement-r15',
+        u'GNSS-SSR-URA-r16',
+        u'SSR-URA-SatList-r16',
+        u'SSR-URA-SatElement-r16',
+        u'GNSS-SSR-PhaseBias-r16',
+        u'SSR-PhaseBiasSatList-r16',
+        u'SSR-PhaseBiasSatElement-r16',
+        u'SSR-PhaseBiasSignalList-r16',
+        u'SSR-PhaseBiasSignalElement-r16',
+        u'GNSS-SSR-STEC-Correction-r16',
+        u'STEC-SatList-r16',
+        u'STEC-SatElement-r16',
+        u'GNSS-SSR-GriddedCorrection-r16',
+        u'GridList-r16',
+        u'GridElement-r16',
+        u'TropospericDelayCorrection-r16',
+        u'STEC-ResidualSatList-r16',
+        u'STEC-ResidualSatElement-r16',
+        u'NavIC-DifferentialCorrections-r16',
+        u'NavIC-CorrectionListAutoNav-r16',
+        u'NavIC-CorrectionElementAutoNav-r16',
+        u'NavIC-EDC-r16',
+        u'NavIC-CDC-r16',
+        u'NavIC-GridModelParameter-r16',
+        u'RegionIgpList-r16',
+        u'RegionIgpElement-r16',
         u'A-GNSS-RequestAssistanceData',
         u'GNSS-CommonAssistDataReq',
         u'GNSS-GenericAssistDataReq',
@@ -719,6 +1152,7 @@ class LPP_PDU_Definitions:
         u'GNSS-EarthOrientationParametersReq',
         u'GNSS-RTK-ReferenceStationInfoReq-r15',
         u'GNSS-RTK-AuxiliaryStationDataReq-r15',
+        u'GNSS-SSR-CorrectionPointsReq-r16',
         u'GNSS-TimeModelListReq',
         u'GNSS-TimeModelElementReq',
         u'GNSS-DifferentialCorrectionsReq',
@@ -747,6 +1181,12 @@ class LPP_PDU_Definitions:
         u'GNSS-SSR-OrbitCorrectionsReq-r15',
         u'GNSS-SSR-ClockCorrectionsReq-r15',
         u'GNSS-SSR-CodeBiasReq-r15',
+        u'GNSS-SSR-URA-Req-r16',
+        u'GNSS-SSR-PhaseBiasReq-r16',
+        u'GNSS-SSR-STEC-CorrectionReq-r16',
+        u'GNSS-SSR-GriddedCorrectionReq-r16',
+        u'NavIC-DifferentialCorrectionsReq-r16',
+        u'NavIC-GridModelReq-r16',
         u'A-GNSS-ProvideLocationInformation',
         u'GNSS-SignalMeasurementInformation',
         u'MeasurementReferenceTime',
@@ -791,6 +1231,12 @@ class LPP_PDU_Definitions:
         u'GNSS-SSR-OrbitCorrectionsSupport-r15',
         u'GNSS-SSR-ClockCorrectionsSupport-r15',
         u'GNSS-SSR-CodeBiasSupport-r15',
+        u'GNSS-SSR-URA-Support-r16',
+        u'GNSS-SSR-PhaseBiasSupport-r16',
+        u'GNSS-SSR-STEC-CorrectionSupport-r16',
+        u'GNSS-SSR-GriddedCorrectionSupport-r16',
+        u'NavIC-DifferentialCorrectionsSupport-r16',
+        u'NavIC-GridModelSupport-r16',
         u'A-GNSS-RequestCapabilities',
         u'A-GNSS-Error',
         u'GNSS-LocationServerErrorCauses',
@@ -891,13 +1337,78 @@ class LPP_PDU_Definitions:
         u'BT-Error-r13',
         u'BT-LocationServerErrorCauses-r13',
         u'BT-TargetDeviceErrorCauses-r13',
+        u'NR-UL-ProvideCapabilities-r16',
+        u'NR-UL-RequestCapabilities-r16',
+        u'NR-ECID-ProvideLocationInformation-r16',
+        u'NR-ECID-SignalMeasurementInformation-r16',
+        u'NR-MeasuredResultsList-r16',
+        u'NR-MeasuredResultsElement-r16',
+        u'MeasQuantityResults-r16',
+        u'ResultsPerSSB-IndexList-r16',
+        u'ResultsPerSSB-Index-r16',
+        u'ResultsPerCSI-RS-IndexList-r16',
+        u'ResultsPerCSI-RS-Index-r16',
+        u'NR-ECID-RequestLocationInformation-r16',
+        u'NR-ECID-ProvideCapabilities-r16',
+        u'NR-ECID-RequestCapabilities-r16',
+        u'NR-ECID-Error-r16',
+        u'NR-ECID-LocationServerErrorCauses-r16',
+        u'NR-ECID-TargetDeviceErrorCauses-r16',
+        u'NR-DL-TDOA-ProvideAssistanceData-r16',
+        u'NR-DL-TDOA-RequestAssistanceData-r16',
+        u'NR-DL-TDOA-ProvideLocationInformation-r16',
+        u'NR-DL-TDOA-SignalMeasurementInformation-r16',
+        u'NR-DL-TDOA-MeasList-r16',
+        u'NR-DL-TDOA-MeasElement-r16',
+        u'NR-DL-TDOA-AdditionalMeasurements-r16',
+        u'NR-DL-TDOA-AdditionalMeasurementElement-r16',
+        u'NR-DL-TDOA-LocationInformation-r16',
+        u'NR-DL-TDOA-RequestLocationInformation-r16',
+        u'NR-DL-TDOA-ReportConfig-r16',
+        u'NR-DL-TDOA-ProvideCapabilities-r16',
+        u'NR-DL-TDOA-MeasurementCapability-r16',
+        u'NR-DL-TDOA-RequestCapabilities-r16',
+        u'NR-DL-TDOA-Error-r16',
+        u'NR-DL-TDOA-LocationServerErrorCauses-r16',
+        u'NR-DL-TDOA-TargetDeviceErrorCauses-r16',
+        u'NR-DL-AoD-ProvideAssistanceData-r16',
+        u'NR-DL-AoD-RequestAssistanceData-r16',
+        u'NR-DL-AoD-ProvideLocationInformation-r16',
+        u'NR-DL-AoD-SignalMeasurementInformation-r16',
+        u'NR-DL-AoD-MeasList-r16',
+        u'NR-DL-AoD-MeasElement-r16',
+        u'NR-DL-AoD-AdditionalMeasurements-r16',
+        u'NR-DL-AoD-AdditionalMeasurementElement-r16',
+        u'NR-DL-AoD-LocationInformation-r16',
+        u'NR-DL-AoD-RequestLocationInformation-r16',
+        u'NR-DL-AoD-ReportConfig-r16',
+        u'NR-DL-AoD-ProvideCapabilities-r16',
+        u'NR-DL-AoD-MeasurementCapability-r16',
+        u'DL-AoD-MeasCapabilityPerBand-r16',
+        u'NR-DL-AoD-RequestCapabilities-r16',
+        u'NR-DL-AoD-Error-r16',
+        u'NR-DL-AoD-LocationServerErrorCauses-r16',
+        u'NR-DL-AoD-TargetDeviceErrorCauses-r16',
+        u'NR-Multi-RTT-ProvideAssistanceData-r16',
+        u'NR-Multi-RTT-RequestAssistanceData-r16',
+        u'NR-Multi-RTT-ProvideLocationInformation-r16',
+        u'NR-Multi-RTT-SignalMeasurementInformation-r16',
+        u'NR-Multi-RTT-MeasList-r16',
+        u'NR-Multi-RTT-MeasElement-r16',
+        u'NR-Multi-RTT-AdditionalMeasurements-r16',
+        u'NR-Multi-RTT-AdditionalMeasurementElement-r16',
+        u'NR-Multi-RTT-RequestLocationInformation-r16',
+        u'NR-Multi-RTT-ReportConfig-r16',
+        u'NR-Multi-RTT-ProvideCapabilities-r16',
+        u'NR-Multi-RTT-MeasurementCapability-r16',
+        u'NR-Multi-RTT-RequestCapabilities-r16',
+        u'NR-Multi-RTT-Error-r16',
+        u'NR-Multi-RTT-LocationServerErrorCauses-r16',
+        u'NR-Multi-RTT-TargetDeviceErrorCauses-r16',
         ]
     _set_ = [
         ]
     _val_ = [
-        u'maxEARFCN',
-        u'maxEARFCN-Plus1',
-        u'maxEARFCN2',
         u'maxEPDU',
         u'maxAddPRSconfig-r14',
         u'maxAvailNarrowBands-Minus1-r14',
@@ -909,13 +1420,32 @@ class LPP_PDU_Definitions:
         u'maxFBI',
         u'maxFBI-Plus1',
         u'maxFBI2',
+        u'maxEARFCN',
+        u'maxEARFCN-Plus1',
+        u'maxEARFCN2',
         u'maxMBS-r14',
         u'maxWLAN-AP-r13',
-        u'maxWLAN-DataSets-r14',
-        u'maxWLAN-AP-r14',
-        u'maxVisibleAPs-r14',
         u'maxKnownAPs-r14',
+        u'maxVisibleAPs-r14',
+        u'maxWLAN-AP-r14',
+        u'maxWLAN-DataSets-r14',
         u'maxBT-Beacon-r13',
+        u'nrMaxBands-r16',
+        u'nrMaxFreqLayers-r16',
+        u'nrMaxFreqLayers-1-r16',
+        u'nrMaxNumDL-PRS-ResourcesPerSet-1-r16',
+        u'nrMaxNumDL-PRS-ResourceSetsPerTRP-1-r16',
+        u'nrMaxResourceIDs-r16',
+        u'nrMaxResourceOffsetValue-1-r16',
+        u'nrMaxResourcesPerSet-r16',
+        u'nrMaxSetsPerTrpPerFreqLayer-r16',
+        u'nrMaxSetsPerTrpPerFreqLayer-1-r16',
+        u'nrMaxTRPs-r16',
+        u'nrMaxTRPsPerFreq-r16',
+        u'nrMaxTRPsPerFreq-1-r16',
+        u'maxSimultaneousBands-r16',
+        u'maxBandComb-r16',
+        u'nrMaxConfiguredBands-r16',
         ]
     _class_ = [
         ]
@@ -1059,6 +1589,11 @@ class LPP_PDU_Definitions:
     _RequestCapabilities_r9_IEs_tbs_RequestCapabilities_r13 = SEQ(name=u'tbs-RequestCapabilities-r13', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'TBS-RequestCapabilities-r13')), opt=True, group=0)
     _RequestCapabilities_r9_IEs_wlan_RequestCapabilities_r13 = SEQ(name=u'wlan-RequestCapabilities-r13', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'WLAN-RequestCapabilities-r13')), opt=True, group=0)
     _RequestCapabilities_r9_IEs_bt_RequestCapabilities_r13 = SEQ(name=u'bt-RequestCapabilities-r13', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'BT-RequestCapabilities-r13')), opt=True, group=0)
+    _RequestCapabilities_r9_IEs_nr_ECID_RequestCapabilities_r16 = SEQ(name=u'nr-ECID-RequestCapabilities-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-ECID-RequestCapabilities-r16')), opt=True, group=1)
+    _RequestCapabilities_r9_IEs_nr_Multi_RTT_RequestCapabilities_r16 = SEQ(name=u'nr-Multi-RTT-RequestCapabilities-r16', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-Multi-RTT-RequestCapabilities-r16')), opt=True, group=1)
+    _RequestCapabilities_r9_IEs_nr_DL_AoD_RequestCapabilities_r16 = SEQ(name=u'nr-DL-AoD-RequestCapabilities-r16', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-AoD-RequestCapabilities-r16')), opt=True, group=1)
+    _RequestCapabilities_r9_IEs_nr_DL_TDOA_RequestCapabilities_r16 = SEQ(name=u'nr-DL-TDOA-RequestCapabilities-r16', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-TDOA-RequestCapabilities-r16')), opt=True, group=1)
+    _RequestCapabilities_r9_IEs_nr_UL_RequestCapabilities_r16 = SEQ(name=u'nr-UL-RequestCapabilities-r16', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-UL-RequestCapabilities-r16')), opt=True, group=1)
     RequestCapabilities_r9_IEs._cont = ASN1Dict([
         (u'commonIEsRequestCapabilities', _RequestCapabilities_r9_IEs_commonIEsRequestCapabilities),
         (u'a-gnss-RequestCapabilities', _RequestCapabilities_r9_IEs_a_gnss_RequestCapabilities),
@@ -1069,8 +1604,13 @@ class LPP_PDU_Definitions:
         (u'tbs-RequestCapabilities-r13', _RequestCapabilities_r9_IEs_tbs_RequestCapabilities_r13),
         (u'wlan-RequestCapabilities-r13', _RequestCapabilities_r9_IEs_wlan_RequestCapabilities_r13),
         (u'bt-RequestCapabilities-r13', _RequestCapabilities_r9_IEs_bt_RequestCapabilities_r13),
+        (u'nr-ECID-RequestCapabilities-r16', _RequestCapabilities_r9_IEs_nr_ECID_RequestCapabilities_r16),
+        (u'nr-Multi-RTT-RequestCapabilities-r16', _RequestCapabilities_r9_IEs_nr_Multi_RTT_RequestCapabilities_r16),
+        (u'nr-DL-AoD-RequestCapabilities-r16', _RequestCapabilities_r9_IEs_nr_DL_AoD_RequestCapabilities_r16),
+        (u'nr-DL-TDOA-RequestCapabilities-r16', _RequestCapabilities_r9_IEs_nr_DL_TDOA_RequestCapabilities_r16),
+        (u'nr-UL-RequestCapabilities-r16', _RequestCapabilities_r9_IEs_nr_UL_RequestCapabilities_r16),
         ])
-    RequestCapabilities_r9_IEs._ext = [u'sensor-RequestCapabilities-r13', u'tbs-RequestCapabilities-r13', u'wlan-RequestCapabilities-r13', u'bt-RequestCapabilities-r13']
+    RequestCapabilities_r9_IEs._ext = [u'sensor-RequestCapabilities-r13', u'tbs-RequestCapabilities-r13', u'wlan-RequestCapabilities-r13', u'bt-RequestCapabilities-r13', u'nr-ECID-RequestCapabilities-r16', u'nr-Multi-RTT-RequestCapabilities-r16', u'nr-DL-AoD-RequestCapabilities-r16', u'nr-DL-TDOA-RequestCapabilities-r16', u'nr-UL-RequestCapabilities-r16']
     
     #-----< ProvideCapabilities >-----#
     ProvideCapabilities = SEQ(name=u'ProvideCapabilities', mode=MODE_TYPE)
@@ -1112,6 +1652,11 @@ class LPP_PDU_Definitions:
     _ProvideCapabilities_r9_IEs_tbs_ProvideCapabilities_r13 = SEQ(name=u'tbs-ProvideCapabilities-r13', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'TBS-ProvideCapabilities-r13')), opt=True, group=0)
     _ProvideCapabilities_r9_IEs_wlan_ProvideCapabilities_r13 = SEQ(name=u'wlan-ProvideCapabilities-r13', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'WLAN-ProvideCapabilities-r13')), opt=True, group=0)
     _ProvideCapabilities_r9_IEs_bt_ProvideCapabilities_r13 = SEQ(name=u'bt-ProvideCapabilities-r13', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'BT-ProvideCapabilities-r13')), opt=True, group=0)
+    _ProvideCapabilities_r9_IEs_nr_ECID_ProvideCapabilities_r16 = SEQ(name=u'nr-ECID-ProvideCapabilities-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-ECID-ProvideCapabilities-r16')), opt=True, group=1)
+    _ProvideCapabilities_r9_IEs_nr_Multi_RTT_ProvideCapabilities_r16 = SEQ(name=u'nr-Multi-RTT-ProvideCapabilities-r16', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-Multi-RTT-ProvideCapabilities-r16')), opt=True, group=1)
+    _ProvideCapabilities_r9_IEs_nr_DL_AoD_ProvideCapabilities_r16 = SEQ(name=u'nr-DL-AoD-ProvideCapabilities-r16', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-AoD-ProvideCapabilities-r16')), opt=True, group=1)
+    _ProvideCapabilities_r9_IEs_nr_DL_TDOA_ProvideCapabilities_r16 = SEQ(name=u'nr-DL-TDOA-ProvideCapabilities-r16', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-TDOA-ProvideCapabilities-r16')), opt=True, group=1)
+    _ProvideCapabilities_r9_IEs_nr_UL_ProvideCapabilities_r16 = SEQ(name=u'nr-UL-ProvideCapabilities-r16', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-UL-ProvideCapabilities-r16')), opt=True, group=1)
     ProvideCapabilities_r9_IEs._cont = ASN1Dict([
         (u'commonIEsProvideCapabilities', _ProvideCapabilities_r9_IEs_commonIEsProvideCapabilities),
         (u'a-gnss-ProvideCapabilities', _ProvideCapabilities_r9_IEs_a_gnss_ProvideCapabilities),
@@ -1122,8 +1667,13 @@ class LPP_PDU_Definitions:
         (u'tbs-ProvideCapabilities-r13', _ProvideCapabilities_r9_IEs_tbs_ProvideCapabilities_r13),
         (u'wlan-ProvideCapabilities-r13', _ProvideCapabilities_r9_IEs_wlan_ProvideCapabilities_r13),
         (u'bt-ProvideCapabilities-r13', _ProvideCapabilities_r9_IEs_bt_ProvideCapabilities_r13),
+        (u'nr-ECID-ProvideCapabilities-r16', _ProvideCapabilities_r9_IEs_nr_ECID_ProvideCapabilities_r16),
+        (u'nr-Multi-RTT-ProvideCapabilities-r16', _ProvideCapabilities_r9_IEs_nr_Multi_RTT_ProvideCapabilities_r16),
+        (u'nr-DL-AoD-ProvideCapabilities-r16', _ProvideCapabilities_r9_IEs_nr_DL_AoD_ProvideCapabilities_r16),
+        (u'nr-DL-TDOA-ProvideCapabilities-r16', _ProvideCapabilities_r9_IEs_nr_DL_TDOA_ProvideCapabilities_r16),
+        (u'nr-UL-ProvideCapabilities-r16', _ProvideCapabilities_r9_IEs_nr_UL_ProvideCapabilities_r16),
         ])
-    ProvideCapabilities_r9_IEs._ext = [u'sensor-ProvideCapabilities-r13', u'tbs-ProvideCapabilities-r13', u'wlan-ProvideCapabilities-r13', u'bt-ProvideCapabilities-r13']
+    ProvideCapabilities_r9_IEs._ext = [u'sensor-ProvideCapabilities-r13', u'tbs-ProvideCapabilities-r13', u'wlan-ProvideCapabilities-r13', u'bt-ProvideCapabilities-r13', u'nr-ECID-ProvideCapabilities-r16', u'nr-Multi-RTT-ProvideCapabilities-r16', u'nr-DL-AoD-ProvideCapabilities-r16', u'nr-DL-TDOA-ProvideCapabilities-r16', u'nr-UL-ProvideCapabilities-r16']
     
     #-----< RequestAssistanceData >-----#
     RequestAssistanceData = SEQ(name=u'RequestAssistanceData', mode=MODE_TYPE)
@@ -1163,6 +1713,9 @@ class LPP_PDU_Definitions:
     _RequestAssistanceData_r9_IEs_sensor_RequestAssistanceData_r14 = SEQ(name=u'sensor-RequestAssistanceData-r14', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'Sensor-RequestAssistanceData-r14')), opt=True, group=0)
     _RequestAssistanceData_r9_IEs_tbs_RequestAssistanceData_r14 = SEQ(name=u'tbs-RequestAssistanceData-r14', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'TBS-RequestAssistanceData-r14')), opt=True, group=0)
     _RequestAssistanceData_r9_IEs_wlan_RequestAssistanceData_r14 = SEQ(name=u'wlan-RequestAssistanceData-r14', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'WLAN-RequestAssistanceData-r14')), opt=True, group=0)
+    _RequestAssistanceData_r9_IEs_nr_Multi_RTT_RequestAssistanceData_r16 = SEQ(name=u'nr-Multi-RTT-RequestAssistanceData-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-Multi-RTT-RequestAssistanceData-r16')), opt=True, group=1)
+    _RequestAssistanceData_r9_IEs_nr_DL_AoD_RequestAssistanceData_r16 = SEQ(name=u'nr-DL-AoD-RequestAssistanceData-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-AoD-RequestAssistanceData-r16')), opt=True, group=1)
+    _RequestAssistanceData_r9_IEs_nr_DL_TDOA_RequestAssistanceData_r16 = SEQ(name=u'nr-DL-TDOA-RequestAssistanceData-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-TDOA-RequestAssistanceData-r16')), opt=True, group=1)
     RequestAssistanceData_r9_IEs._cont = ASN1Dict([
         (u'commonIEsRequestAssistanceData', _RequestAssistanceData_r9_IEs_commonIEsRequestAssistanceData),
         (u'a-gnss-RequestAssistanceData', _RequestAssistanceData_r9_IEs_a_gnss_RequestAssistanceData),
@@ -1171,8 +1724,11 @@ class LPP_PDU_Definitions:
         (u'sensor-RequestAssistanceData-r14', _RequestAssistanceData_r9_IEs_sensor_RequestAssistanceData_r14),
         (u'tbs-RequestAssistanceData-r14', _RequestAssistanceData_r9_IEs_tbs_RequestAssistanceData_r14),
         (u'wlan-RequestAssistanceData-r14', _RequestAssistanceData_r9_IEs_wlan_RequestAssistanceData_r14),
+        (u'nr-Multi-RTT-RequestAssistanceData-r16', _RequestAssistanceData_r9_IEs_nr_Multi_RTT_RequestAssistanceData_r16),
+        (u'nr-DL-AoD-RequestAssistanceData-r16', _RequestAssistanceData_r9_IEs_nr_DL_AoD_RequestAssistanceData_r16),
+        (u'nr-DL-TDOA-RequestAssistanceData-r16', _RequestAssistanceData_r9_IEs_nr_DL_TDOA_RequestAssistanceData_r16),
         ])
-    RequestAssistanceData_r9_IEs._ext = [u'sensor-RequestAssistanceData-r14', u'tbs-RequestAssistanceData-r14', u'wlan-RequestAssistanceData-r14']
+    RequestAssistanceData_r9_IEs._ext = [u'sensor-RequestAssistanceData-r14', u'tbs-RequestAssistanceData-r14', u'wlan-RequestAssistanceData-r14', u'nr-Multi-RTT-RequestAssistanceData-r16', u'nr-DL-AoD-RequestAssistanceData-r16', u'nr-DL-TDOA-RequestAssistanceData-r16']
     
     #-----< ProvideAssistanceData >-----#
     ProvideAssistanceData = SEQ(name=u'ProvideAssistanceData', mode=MODE_TYPE)
@@ -1212,6 +1768,9 @@ class LPP_PDU_Definitions:
     _ProvideAssistanceData_r9_IEs_sensor_ProvideAssistanceData_r14 = SEQ(name=u'sensor-ProvideAssistanceData-r14', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'Sensor-ProvideAssistanceData-r14')), opt=True, group=0)
     _ProvideAssistanceData_r9_IEs_tbs_ProvideAssistanceData_r14 = SEQ(name=u'tbs-ProvideAssistanceData-r14', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'TBS-ProvideAssistanceData-r14')), opt=True, group=0)
     _ProvideAssistanceData_r9_IEs_wlan_ProvideAssistanceData_r14 = SEQ(name=u'wlan-ProvideAssistanceData-r14', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'WLAN-ProvideAssistanceData-r14')), opt=True, group=0)
+    _ProvideAssistanceData_r9_IEs_nr_Multi_RTT_ProvideAssistanceData_r16 = SEQ(name=u'nr-Multi-RTT-ProvideAssistanceData-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-Multi-RTT-ProvideAssistanceData-r16')), opt=True, group=1)
+    _ProvideAssistanceData_r9_IEs_nr_DL_AoD_ProvideAssistanceData_r16 = SEQ(name=u'nr-DL-AoD-ProvideAssistanceData-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-AoD-ProvideAssistanceData-r16')), opt=True, group=1)
+    _ProvideAssistanceData_r9_IEs_nr_DL_TDOA_ProvideAssistanceData_r16 = SEQ(name=u'nr-DL-TDOA-ProvideAssistanceData-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-TDOA-ProvideAssistanceData-r16')), opt=True, group=1)
     ProvideAssistanceData_r9_IEs._cont = ASN1Dict([
         (u'commonIEsProvideAssistanceData', _ProvideAssistanceData_r9_IEs_commonIEsProvideAssistanceData),
         (u'a-gnss-ProvideAssistanceData', _ProvideAssistanceData_r9_IEs_a_gnss_ProvideAssistanceData),
@@ -1220,8 +1779,11 @@ class LPP_PDU_Definitions:
         (u'sensor-ProvideAssistanceData-r14', _ProvideAssistanceData_r9_IEs_sensor_ProvideAssistanceData_r14),
         (u'tbs-ProvideAssistanceData-r14', _ProvideAssistanceData_r9_IEs_tbs_ProvideAssistanceData_r14),
         (u'wlan-ProvideAssistanceData-r14', _ProvideAssistanceData_r9_IEs_wlan_ProvideAssistanceData_r14),
+        (u'nr-Multi-RTT-ProvideAssistanceData-r16', _ProvideAssistanceData_r9_IEs_nr_Multi_RTT_ProvideAssistanceData_r16),
+        (u'nr-DL-AoD-ProvideAssistanceData-r16', _ProvideAssistanceData_r9_IEs_nr_DL_AoD_ProvideAssistanceData_r16),
+        (u'nr-DL-TDOA-ProvideAssistanceData-r16', _ProvideAssistanceData_r9_IEs_nr_DL_TDOA_ProvideAssistanceData_r16),
         ])
-    ProvideAssistanceData_r9_IEs._ext = [u'sensor-ProvideAssistanceData-r14', u'tbs-ProvideAssistanceData-r14', u'wlan-ProvideAssistanceData-r14']
+    ProvideAssistanceData_r9_IEs._ext = [u'sensor-ProvideAssistanceData-r14', u'tbs-ProvideAssistanceData-r14', u'wlan-ProvideAssistanceData-r14', u'nr-Multi-RTT-ProvideAssistanceData-r16', u'nr-DL-AoD-ProvideAssistanceData-r16', u'nr-DL-TDOA-ProvideAssistanceData-r16']
     
     #-----< RequestLocationInformation >-----#
     RequestLocationInformation = SEQ(name=u'RequestLocationInformation', mode=MODE_TYPE)
@@ -1263,6 +1825,10 @@ class LPP_PDU_Definitions:
     _RequestLocationInformation_r9_IEs_tbs_RequestLocationInformation_r13 = SEQ(name=u'tbs-RequestLocationInformation-r13', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'TBS-RequestLocationInformation-r13')), opt=True, group=0)
     _RequestLocationInformation_r9_IEs_wlan_RequestLocationInformation_r13 = SEQ(name=u'wlan-RequestLocationInformation-r13', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'WLAN-RequestLocationInformation-r13')), opt=True, group=0)
     _RequestLocationInformation_r9_IEs_bt_RequestLocationInformation_r13 = SEQ(name=u'bt-RequestLocationInformation-r13', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'BT-RequestLocationInformation-r13')), opt=True, group=0)
+    _RequestLocationInformation_r9_IEs_nr_ECID_RequestLocationInformation_r16 = SEQ(name=u'nr-ECID-RequestLocationInformation-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-ECID-RequestLocationInformation-r16')), opt=True, group=1)
+    _RequestLocationInformation_r9_IEs_nr_Multi_RTT_RequestLocationInformation_r16 = SEQ(name=u'nr-Multi-RTT-RequestLocationInformation-r16', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-Multi-RTT-RequestLocationInformation-r16')), opt=True, group=1)
+    _RequestLocationInformation_r9_IEs_nr_DL_AoD_RequestLocationInformation_r16 = SEQ(name=u'nr-DL-AoD-RequestLocationInformation-r16', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-AoD-RequestLocationInformation-r16')), opt=True, group=1)
+    _RequestLocationInformation_r9_IEs_nr_DL_TDOA_RequestLocationInformation_r16 = SEQ(name=u'nr-DL-TDOA-RequestLocationInformation-r16', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-TDOA-RequestLocationInformation-r16')), opt=True, group=1)
     RequestLocationInformation_r9_IEs._cont = ASN1Dict([
         (u'commonIEsRequestLocationInformation', _RequestLocationInformation_r9_IEs_commonIEsRequestLocationInformation),
         (u'a-gnss-RequestLocationInformation', _RequestLocationInformation_r9_IEs_a_gnss_RequestLocationInformation),
@@ -1273,8 +1839,12 @@ class LPP_PDU_Definitions:
         (u'tbs-RequestLocationInformation-r13', _RequestLocationInformation_r9_IEs_tbs_RequestLocationInformation_r13),
         (u'wlan-RequestLocationInformation-r13', _RequestLocationInformation_r9_IEs_wlan_RequestLocationInformation_r13),
         (u'bt-RequestLocationInformation-r13', _RequestLocationInformation_r9_IEs_bt_RequestLocationInformation_r13),
+        (u'nr-ECID-RequestLocationInformation-r16', _RequestLocationInformation_r9_IEs_nr_ECID_RequestLocationInformation_r16),
+        (u'nr-Multi-RTT-RequestLocationInformation-r16', _RequestLocationInformation_r9_IEs_nr_Multi_RTT_RequestLocationInformation_r16),
+        (u'nr-DL-AoD-RequestLocationInformation-r16', _RequestLocationInformation_r9_IEs_nr_DL_AoD_RequestLocationInformation_r16),
+        (u'nr-DL-TDOA-RequestLocationInformation-r16', _RequestLocationInformation_r9_IEs_nr_DL_TDOA_RequestLocationInformation_r16),
         ])
-    RequestLocationInformation_r9_IEs._ext = [u'sensor-RequestLocationInformation-r13', u'tbs-RequestLocationInformation-r13', u'wlan-RequestLocationInformation-r13', u'bt-RequestLocationInformation-r13']
+    RequestLocationInformation_r9_IEs._ext = [u'sensor-RequestLocationInformation-r13', u'tbs-RequestLocationInformation-r13', u'wlan-RequestLocationInformation-r13', u'bt-RequestLocationInformation-r13', u'nr-ECID-RequestLocationInformation-r16', u'nr-Multi-RTT-RequestLocationInformation-r16', u'nr-DL-AoD-RequestLocationInformation-r16', u'nr-DL-TDOA-RequestLocationInformation-r16']
     
     #-----< ProvideLocationInformation >-----#
     ProvideLocationInformation = SEQ(name=u'ProvideLocationInformation', mode=MODE_TYPE)
@@ -1316,6 +1886,10 @@ class LPP_PDU_Definitions:
     _ProvideLocationInformation_r9_IEs_tbs_ProvideLocationInformation_r13 = SEQ(name=u'tbs-ProvideLocationInformation-r13', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'TBS-ProvideLocationInformation-r13')), opt=True, group=0)
     _ProvideLocationInformation_r9_IEs_wlan_ProvideLocationInformation_r13 = SEQ(name=u'wlan-ProvideLocationInformation-r13', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'WLAN-ProvideLocationInformation-r13')), opt=True, group=0)
     _ProvideLocationInformation_r9_IEs_bt_ProvideLocationInformation_r13 = SEQ(name=u'bt-ProvideLocationInformation-r13', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'BT-ProvideLocationInformation-r13')), opt=True, group=0)
+    _ProvideLocationInformation_r9_IEs_nr_ECID_ProvideLocationInformation_r16 = SEQ(name=u'nr-ECID-ProvideLocationInformation-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-ECID-ProvideLocationInformation-r16')), opt=True, group=1)
+    _ProvideLocationInformation_r9_IEs_nr_Multi_RTT_ProvideLocationInformation_r16 = SEQ(name=u'nr-Multi-RTT-ProvideLocationInformation-r16', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-Multi-RTT-ProvideLocationInformation-r16')), opt=True, group=1)
+    _ProvideLocationInformation_r9_IEs_nr_DL_AoD_ProvideLocationInformation_r16 = SEQ(name=u'nr-DL-AoD-ProvideLocationInformation-r16', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-AoD-ProvideLocationInformation-r16')), opt=True, group=1)
+    _ProvideLocationInformation_r9_IEs_nr_DL_TDOA_ProvideLocationInformation_r16 = SEQ(name=u'nr-DL-TDOA-ProvideLocationInformation-r16', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-TDOA-ProvideLocationInformation-r16')), opt=True, group=1)
     ProvideLocationInformation_r9_IEs._cont = ASN1Dict([
         (u'commonIEsProvideLocationInformation', _ProvideLocationInformation_r9_IEs_commonIEsProvideLocationInformation),
         (u'a-gnss-ProvideLocationInformation', _ProvideLocationInformation_r9_IEs_a_gnss_ProvideLocationInformation),
@@ -1326,8 +1900,12 @@ class LPP_PDU_Definitions:
         (u'tbs-ProvideLocationInformation-r13', _ProvideLocationInformation_r9_IEs_tbs_ProvideLocationInformation_r13),
         (u'wlan-ProvideLocationInformation-r13', _ProvideLocationInformation_r9_IEs_wlan_ProvideLocationInformation_r13),
         (u'bt-ProvideLocationInformation-r13', _ProvideLocationInformation_r9_IEs_bt_ProvideLocationInformation_r13),
+        (u'nr-ECID-ProvideLocationInformation-r16', _ProvideLocationInformation_r9_IEs_nr_ECID_ProvideLocationInformation_r16),
+        (u'nr-Multi-RTT-ProvideLocationInformation-r16', _ProvideLocationInformation_r9_IEs_nr_Multi_RTT_ProvideLocationInformation_r16),
+        (u'nr-DL-AoD-ProvideLocationInformation-r16', _ProvideLocationInformation_r9_IEs_nr_DL_AoD_ProvideLocationInformation_r16),
+        (u'nr-DL-TDOA-ProvideLocationInformation-r16', _ProvideLocationInformation_r9_IEs_nr_DL_TDOA_ProvideLocationInformation_r16),
         ])
-    ProvideLocationInformation_r9_IEs._ext = [u'sensor-ProvideLocationInformation-r13', u'tbs-ProvideLocationInformation-r13', u'wlan-ProvideLocationInformation-r13', u'bt-ProvideLocationInformation-r13']
+    ProvideLocationInformation_r9_IEs._ext = [u'sensor-ProvideLocationInformation-r13', u'tbs-ProvideLocationInformation-r13', u'wlan-ProvideLocationInformation-r13', u'bt-ProvideLocationInformation-r13', u'nr-ECID-ProvideLocationInformation-r16', u'nr-Multi-RTT-ProvideLocationInformation-r16', u'nr-DL-AoD-ProvideLocationInformation-r16', u'nr-DL-TDOA-ProvideLocationInformation-r16']
     
     #-----< Abort >-----#
     Abort = SEQ(name=u'Abort', mode=MODE_TYPE)
@@ -1412,18 +1990,6 @@ class LPP_PDU_Definitions:
     #-----< ARFCN-ValueEUTRA-r14 >-----#
     ARFCN_ValueEUTRA_r14 = INT(name=u'ARFCN-ValueEUTRA-r14', mode=MODE_TYPE)
     ARFCN_ValueEUTRA_r14._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=262143)], ev=None, er=[])
-    
-    #-----< maxEARFCN >-----#
-    maxEARFCN = INT(name=u'maxEARFCN', mode=MODE_VALUE)
-    maxEARFCN._val = 65535
-    
-    #-----< maxEARFCN-Plus1 >-----#
-    maxEARFCN_Plus1 = INT(name=u'maxEARFCN-Plus1', mode=MODE_VALUE)
-    maxEARFCN_Plus1._val = 65536
-    
-    #-----< maxEARFCN2 >-----#
-    maxEARFCN2 = INT(name=u'maxEARFCN2', mode=MODE_VALUE)
-    maxEARFCN2._val = 262143
     
     #-----< ARFCN-ValueNR-r15 >-----#
     ARFCN_ValueNR_r15 = INT(name=u'ARFCN-ValueNR-r15', mode=MODE_TYPE)
@@ -1728,6 +2294,10 @@ class LPP_PDU_Definitions:
     #-----< EPDU-Body >-----#
     EPDU_Body = OCT_STR(name=u'EPDU-Body', mode=MODE_TYPE)
     
+    #-----< FreqBandIndicatorNR-r16 >-----#
+    FreqBandIndicatorNR_r16 = INT(name=u'FreqBandIndicatorNR-r16', mode=MODE_TYPE)
+    FreqBandIndicatorNR_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1024)], ev=None, er=[])
+    
     #-----< HighAccuracyEllipsoidPointWithUncertaintyEllipse-r15 >-----#
     HighAccuracyEllipsoidPointWithUncertaintyEllipse_r15 = SEQ(name=u'HighAccuracyEllipsoidPointWithUncertaintyEllipse-r15', mode=MODE_TYPE)
     _HighAccuracyEllipsoidPointWithUncertaintyEllipse_r15_degreesLatitude_r15 = INT(name=u'degreesLatitude-r15', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
@@ -1900,6 +2470,10 @@ class LPP_PDU_Definitions:
         (u'nr-cellidentity-r15', _NCGI_r15_nr_cellidentity_r15),
         ])
     NCGI_r15._ext = None
+    
+    #-----< NR-PhysCellID-r16 >-----#
+    NR_PhysCellID_r16 = INT(name=u'NR-PhysCellID-r16', mode=MODE_TYPE)
+    NR_PhysCellID_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1007)], ev=None, er=[])
     
     #-----< PeriodicAssistanceDataControlParameters-r15 >-----#
     PeriodicAssistanceDataControlParameters_r15 = SEQ(name=u'PeriodicAssistanceDataControlParameters-r15', mode=MODE_TYPE)
@@ -2282,7 +2856,7 @@ class LPP_PDU_Definitions:
     
     #-----< LocationSource-r13 >-----#
     LocationSource_r13 = BIT_STR(name=u'LocationSource-r13', mode=MODE_TYPE)
-    LocationSource_r13._cont = ASN1Dict([(u'a-gnss', 0), (u'wlan', 1), (u'bt', 2), (u'tbs', 3), (u'sensor', 4), (u'ha-gnss-v1510', 5), (u'motion-sensor-v1550', 6)])
+    LocationSource_r13._cont = ASN1Dict([(u'a-gnss', 0), (u'wlan', 1), (u'bt', 2), (u'tbs', 3), (u'sensor', 4), (u'ha-gnss-v1510', 5), (u'motion-sensor-v1550', 6), (u'dl-tdoa-r16', 7), (u'dl-aod-r16', 8)])
     LocationSource_r13._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
     
     #-----< CommonIEsAbort >-----#
@@ -2304,6 +2878,1318 @@ class LPP_PDU_Definitions:
         (u'errorCause', _CommonIEsError_errorCause),
         ])
     CommonIEsError._ext = None
+    
+    #-----< DL-PRS-ID-Info-r16 >-----#
+    DL_PRS_ID_Info_r16 = SEQ(name=u'DL-PRS-ID-Info-r16', mode=MODE_TYPE)
+    _DL_PRS_ID_Info_r16_dl_PRS_ID_r16 = INT(name=u'dl-PRS-ID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DL_PRS_ID_Info_r16_dl_PRS_ID_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    _DL_PRS_ID_Info_r16_nr_DL_PRS_ResourceID_List_r16 = SEQ_OF(name=u'nr-DL-PRS-ResourceID-List-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __DL_PRS_ID_Info_r16_nr_DL_PRS_ResourceID_List_r16__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ResourceID-r16')))
+    _DL_PRS_ID_Info_r16_nr_DL_PRS_ResourceID_List_r16._cont = __DL_PRS_ID_Info_r16_nr_DL_PRS_ResourceID_List_r16__item_
+    _DL_PRS_ID_Info_r16_nr_DL_PRS_ResourceID_List_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    _DL_PRS_ID_Info_r16_nr_DL_PRS_ResourceSetID_r16 = INT(name=u'nr-DL-PRS-ResourceSetID-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ResourceSetID-r16')), opt=True)
+    DL_PRS_ID_Info_r16._cont = ASN1Dict([
+        (u'dl-PRS-ID-r16', _DL_PRS_ID_Info_r16_dl_PRS_ID_r16),
+        (u'nr-DL-PRS-ResourceID-List-r16', _DL_PRS_ID_Info_r16_nr_DL_PRS_ResourceID_List_r16),
+        (u'nr-DL-PRS-ResourceSetID-r16', _DL_PRS_ID_Info_r16_nr_DL_PRS_ResourceSetID_r16),
+        ])
+    DL_PRS_ID_Info_r16._ext = None
+    
+    #-----< NR-AdditionalPathList-r16 >-----#
+    NR_AdditionalPathList_r16 = SEQ_OF(name=u'NR-AdditionalPathList-r16', mode=MODE_TYPE)
+    _NR_AdditionalPathList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-AdditionalPath-r16')))
+    NR_AdditionalPathList_r16._cont = _NR_AdditionalPathList_r16__item_
+    NR_AdditionalPathList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=2)], ev=None, er=[])
+    
+    #-----< NR-AdditionalPath-r16 >-----#
+    NR_AdditionalPath_r16 = SEQ(name=u'NR-AdditionalPath-r16', mode=MODE_TYPE)
+    _NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16 = CHOICE(name=u'nr-RelativeTimeDifference-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k0_r16 = INT(name=u'k0-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k0_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=16351)], ev=None, er=[])
+    __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k1_r16 = INT(name=u'k1-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k1_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=8176)], ev=None, er=[])
+    __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k2_r16 = INT(name=u'k2-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k2_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4088)], ev=None, er=[])
+    __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k3_r16 = INT(name=u'k3-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k3_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2044)], ev=None, er=[])
+    __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k4_r16 = INT(name=u'k4-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k4_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1022)], ev=None, er=[])
+    __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k5_r16 = INT(name=u'k5-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k5_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
+    _NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16._cont = ASN1Dict([
+        (u'k0-r16', __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k0_r16),
+        (u'k1-r16', __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k1_r16),
+        (u'k2-r16', __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k2_r16),
+        (u'k3-r16', __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k3_r16),
+        (u'k4-r16', __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k4_r16),
+        (u'k5-r16', __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k5_r16),
+        ])
+    _NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16._ext = []
+    _NR_AdditionalPath_r16_nr_PathQuality_r16 = SEQ(name=u'nr-PathQuality-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-TimingQuality-r16')), opt=True)
+    NR_AdditionalPath_r16._cont = ASN1Dict([
+        (u'nr-RelativeTimeDifference-r16', _NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16),
+        (u'nr-PathQuality-r16', _NR_AdditionalPath_r16_nr_PathQuality_r16),
+        ])
+    NR_AdditionalPath_r16._ext = []
+    
+    #-----< NR-DL-PRS-AssistanceData-r16 >-----#
+    NR_DL_PRS_AssistanceData_r16 = SEQ(name=u'NR-DL-PRS-AssistanceData-r16', mode=MODE_TYPE)
+    _NR_DL_PRS_AssistanceData_r16_nr_DL_PRS_ReferenceInfo_r16 = SEQ(name=u'nr-DL-PRS-ReferenceInfo-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'DL-PRS-ID-Info-r16')))
+    _NR_DL_PRS_AssistanceData_r16_nr_DL_PRS_AssistanceDataList_r16 = SEQ_OF(name=u'nr-DL-PRS-AssistanceDataList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_AssistanceData_r16_nr_DL_PRS_AssistanceDataList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-AssistanceDataPerFreq-r16')))
+    _NR_DL_PRS_AssistanceData_r16_nr_DL_PRS_AssistanceDataList_r16._cont = __NR_DL_PRS_AssistanceData_r16_nr_DL_PRS_AssistanceDataList_r16__item_
+    _NR_DL_PRS_AssistanceData_r16_nr_DL_PRS_AssistanceDataList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _NR_DL_PRS_AssistanceData_r16_nr_SSB_Config_r16 = SEQ_OF(name=u'nr-SSB-Config-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __NR_DL_PRS_AssistanceData_r16_nr_SSB_Config_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-SSB-Config-r16')))
+    _NR_DL_PRS_AssistanceData_r16_nr_SSB_Config_r16._cont = __NR_DL_PRS_AssistanceData_r16_nr_SSB_Config_r16__item_
+    _NR_DL_PRS_AssistanceData_r16_nr_SSB_Config_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=256)], ev=None, er=[])
+    NR_DL_PRS_AssistanceData_r16._cont = ASN1Dict([
+        (u'nr-DL-PRS-ReferenceInfo-r16', _NR_DL_PRS_AssistanceData_r16_nr_DL_PRS_ReferenceInfo_r16),
+        (u'nr-DL-PRS-AssistanceDataList-r16', _NR_DL_PRS_AssistanceData_r16_nr_DL_PRS_AssistanceDataList_r16),
+        (u'nr-SSB-Config-r16', _NR_DL_PRS_AssistanceData_r16_nr_SSB_Config_r16),
+        ])
+    NR_DL_PRS_AssistanceData_r16._ext = []
+    
+    #-----< NR-DL-PRS-AssistanceDataPerFreq-r16 >-----#
+    NR_DL_PRS_AssistanceDataPerFreq_r16 = SEQ(name=u'NR-DL-PRS-AssistanceDataPerFreq-r16', mode=MODE_TYPE)
+    _NR_DL_PRS_AssistanceDataPerFreq_r16_nr_DL_PRS_PositioningFrequencyLayer_r16 = SEQ(name=u'nr-DL-PRS-PositioningFrequencyLayer-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-PositioningFrequencyLayer-r16')))
+    _NR_DL_PRS_AssistanceDataPerFreq_r16_nr_DL_PRS_AssistanceDataPerFreq_r16 = SEQ_OF(name=u'nr-DL-PRS-AssistanceDataPerFreq-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_AssistanceDataPerFreq_r16_nr_DL_PRS_AssistanceDataPerFreq_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-AssistanceDataPerTRP-r16')))
+    _NR_DL_PRS_AssistanceDataPerFreq_r16_nr_DL_PRS_AssistanceDataPerFreq_r16._cont = __NR_DL_PRS_AssistanceDataPerFreq_r16_nr_DL_PRS_AssistanceDataPerFreq_r16__item_
+    _NR_DL_PRS_AssistanceDataPerFreq_r16_nr_DL_PRS_AssistanceDataPerFreq_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    NR_DL_PRS_AssistanceDataPerFreq_r16._cont = ASN1Dict([
+        (u'nr-DL-PRS-PositioningFrequencyLayer-r16', _NR_DL_PRS_AssistanceDataPerFreq_r16_nr_DL_PRS_PositioningFrequencyLayer_r16),
+        (u'nr-DL-PRS-AssistanceDataPerFreq-r16', _NR_DL_PRS_AssistanceDataPerFreq_r16_nr_DL_PRS_AssistanceDataPerFreq_r16),
+        ])
+    NR_DL_PRS_AssistanceDataPerFreq_r16._ext = []
+    
+    #-----< NR-DL-PRS-AssistanceDataPerTRP-r16 >-----#
+    NR_DL_PRS_AssistanceDataPerTRP_r16 = SEQ(name=u'NR-DL-PRS-AssistanceDataPerTRP-r16', mode=MODE_TYPE)
+    _NR_DL_PRS_AssistanceDataPerTRP_r16_dl_PRS_ID_r16 = INT(name=u'dl-PRS-ID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_PRS_AssistanceDataPerTRP_r16_dl_PRS_ID_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    _NR_DL_PRS_AssistanceDataPerTRP_r16_nr_PhysCellID_r16 = INT(name=u'nr-PhysCellID-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-PhysCellID-r16')), opt=True)
+    _NR_DL_PRS_AssistanceDataPerTRP_r16_nr_CellGlobalID_r16 = SEQ(name=u'nr-CellGlobalID-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NCGI-r15')), opt=True)
+    _NR_DL_PRS_AssistanceDataPerTRP_r16_nr_ARFCN_r16 = INT(name=u'nr-ARFCN-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'ARFCN-ValueNR-r15')), opt=True)
+    _NR_DL_PRS_AssistanceDataPerTRP_r16_nr_DL_PRS_SFN0_Offset_r16 = SEQ(name=u'nr-DL-PRS-SFN0-Offset-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-SFN0-Offset-r16')))
+    _NR_DL_PRS_AssistanceDataPerTRP_r16_nr_DL_PRS_ExpectedRSTD_r16 = INT(name=u'nr-DL-PRS-ExpectedRSTD-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_PRS_AssistanceDataPerTRP_r16_nr_DL_PRS_ExpectedRSTD_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-3841, ub=3841)], ev=None, er=[])
+    _NR_DL_PRS_AssistanceDataPerTRP_r16_nr_DL_PRS_ExpectedRSTD_Uncertainty_r16 = INT(name=u'nr-DL-PRS-ExpectedRSTD-Uncertainty-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_PRS_AssistanceDataPerTRP_r16_nr_DL_PRS_ExpectedRSTD_Uncertainty_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=246)], ev=None, er=[])
+    _NR_DL_PRS_AssistanceDataPerTRP_r16_nr_DL_PRS_Info_r16 = SEQ(name=u'nr-DL-PRS-Info-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-Info-r16')))
+    NR_DL_PRS_AssistanceDataPerTRP_r16._cont = ASN1Dict([
+        (u'dl-PRS-ID-r16', _NR_DL_PRS_AssistanceDataPerTRP_r16_dl_PRS_ID_r16),
+        (u'nr-PhysCellID-r16', _NR_DL_PRS_AssistanceDataPerTRP_r16_nr_PhysCellID_r16),
+        (u'nr-CellGlobalID-r16', _NR_DL_PRS_AssistanceDataPerTRP_r16_nr_CellGlobalID_r16),
+        (u'nr-ARFCN-r16', _NR_DL_PRS_AssistanceDataPerTRP_r16_nr_ARFCN_r16),
+        (u'nr-DL-PRS-SFN0-Offset-r16', _NR_DL_PRS_AssistanceDataPerTRP_r16_nr_DL_PRS_SFN0_Offset_r16),
+        (u'nr-DL-PRS-ExpectedRSTD-r16', _NR_DL_PRS_AssistanceDataPerTRP_r16_nr_DL_PRS_ExpectedRSTD_r16),
+        (u'nr-DL-PRS-ExpectedRSTD-Uncertainty-r16', _NR_DL_PRS_AssistanceDataPerTRP_r16_nr_DL_PRS_ExpectedRSTD_Uncertainty_r16),
+        (u'nr-DL-PRS-Info-r16', _NR_DL_PRS_AssistanceDataPerTRP_r16_nr_DL_PRS_Info_r16),
+        ])
+    NR_DL_PRS_AssistanceDataPerTRP_r16._ext = []
+    
+    #-----< NR-DL-PRS-PositioningFrequencyLayer-r16 >-----#
+    NR_DL_PRS_PositioningFrequencyLayer_r16 = SEQ(name=u'NR-DL-PRS-PositioningFrequencyLayer-r16', mode=MODE_TYPE)
+    _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_SubcarrierSpacing_r16 = ENUM(name=u'dl-PRS-SubcarrierSpacing-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_SubcarrierSpacing_r16._cont = ASN1Dict([(u'kHz15', 0), (u'kHz30', 1), (u'kHz60', 2), (u'kHz120', 3)])
+    _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_SubcarrierSpacing_r16._ext = []
+    _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_ResourceBandwidth_r16 = INT(name=u'dl-PRS-ResourceBandwidth-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_ResourceBandwidth_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=63)], ev=None, er=[])
+    _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_StartPRB_r16 = INT(name=u'dl-PRS-StartPRB-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_StartPRB_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2176)], ev=None, er=[])
+    _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_PointA_r16 = INT(name=u'dl-PRS-PointA-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'ARFCN-ValueNR-r15')))
+    _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_CombSizeN_r16 = ENUM(name=u'dl-PRS-CombSizeN-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_CombSizeN_r16._cont = ASN1Dict([(u'n2', 0), (u'n4', 1), (u'n6', 2), (u'n12', 3)])
+    _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_CombSizeN_r16._ext = []
+    _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_CyclicPrefix_r16 = ENUM(name=u'dl-PRS-CyclicPrefix-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_CyclicPrefix_r16._cont = ASN1Dict([(u'normal', 0), (u'extended', 1)])
+    _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_CyclicPrefix_r16._ext = []
+    NR_DL_PRS_PositioningFrequencyLayer_r16._cont = ASN1Dict([
+        (u'dl-PRS-SubcarrierSpacing-r16', _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_SubcarrierSpacing_r16),
+        (u'dl-PRS-ResourceBandwidth-r16', _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_ResourceBandwidth_r16),
+        (u'dl-PRS-StartPRB-r16', _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_StartPRB_r16),
+        (u'dl-PRS-PointA-r16', _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_PointA_r16),
+        (u'dl-PRS-CombSizeN-r16', _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_CombSizeN_r16),
+        (u'dl-PRS-CyclicPrefix-r16', _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_CyclicPrefix_r16),
+        ])
+    NR_DL_PRS_PositioningFrequencyLayer_r16._ext = []
+    
+    #-----< NR-DL-PRS-SFN0-Offset-r16 >-----#
+    NR_DL_PRS_SFN0_Offset_r16 = SEQ(name=u'NR-DL-PRS-SFN0-Offset-r16', mode=MODE_TYPE)
+    _NR_DL_PRS_SFN0_Offset_r16_sfn_Offset_r16 = INT(name=u'sfn-Offset-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_PRS_SFN0_Offset_r16_sfn_Offset_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1023)], ev=None, er=[])
+    _NR_DL_PRS_SFN0_Offset_r16_integerSubframeOffset_r16 = INT(name=u'integerSubframeOffset-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_PRS_SFN0_Offset_r16_integerSubframeOffset_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=9)], ev=None, er=[])
+    NR_DL_PRS_SFN0_Offset_r16._cont = ASN1Dict([
+        (u'sfn-Offset-r16', _NR_DL_PRS_SFN0_Offset_r16_sfn_Offset_r16),
+        (u'integerSubframeOffset-r16', _NR_DL_PRS_SFN0_Offset_r16_integerSubframeOffset_r16),
+        ])
+    NR_DL_PRS_SFN0_Offset_r16._ext = []
+    
+    #-----< NR-DL-PRS-BeamInfo-r16 >-----#
+    NR_DL_PRS_BeamInfo_r16 = SEQ_OF(name=u'NR-DL-PRS-BeamInfo-r16', mode=MODE_TYPE)
+    _NR_DL_PRS_BeamInfo_r16__item_ = SEQ_OF(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-BeamInfoPerFreqLayer-r16')))
+    NR_DL_PRS_BeamInfo_r16._cont = _NR_DL_PRS_BeamInfo_r16__item_
+    NR_DL_PRS_BeamInfo_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    
+    #-----< NR-DL-PRS-BeamInfoPerFreqLayer-r16 >-----#
+    NR_DL_PRS_BeamInfoPerFreqLayer_r16 = SEQ_OF(name=u'NR-DL-PRS-BeamInfoPerFreqLayer-r16', mode=MODE_TYPE)
+    _NR_DL_PRS_BeamInfoPerFreqLayer_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-BeamInfoPerTRP-r16')))
+    NR_DL_PRS_BeamInfoPerFreqLayer_r16._cont = _NR_DL_PRS_BeamInfoPerFreqLayer_r16__item_
+    NR_DL_PRS_BeamInfoPerFreqLayer_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    
+    #-----< NR-DL-PRS-BeamInfoPerTRP-r16 >-----#
+    NR_DL_PRS_BeamInfoPerTRP_r16 = SEQ(name=u'NR-DL-PRS-BeamInfoPerTRP-r16', mode=MODE_TYPE)
+    _NR_DL_PRS_BeamInfoPerTRP_r16_dl_PRS_ID_r16 = INT(name=u'dl-PRS-ID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_PRS_BeamInfoPerTRP_r16_dl_PRS_ID_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    _NR_DL_PRS_BeamInfoPerTRP_r16_nr_PhysCellID_r16 = INT(name=u'nr-PhysCellID-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-PhysCellID-r16')), opt=True)
+    _NR_DL_PRS_BeamInfoPerTRP_r16_nr_CellGlobalID_r16 = SEQ(name=u'nr-CellGlobalID-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NCGI-r15')), opt=True)
+    _NR_DL_PRS_BeamInfoPerTRP_r16_nr_ARFCN_r16 = INT(name=u'nr-ARFCN-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'ARFCN-ValueNR-r15')), opt=True)
+    _NR_DL_PRS_BeamInfoPerTRP_r16_associated_DL_PRS_ID_r16 = INT(name=u'associated-DL-PRS-ID-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_DL_PRS_BeamInfoPerTRP_r16_associated_DL_PRS_ID_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    _NR_DL_PRS_BeamInfoPerTRP_r16_lcs_GCS_TranslationParameter_r16 = SEQ(name=u'lcs-GCS-TranslationParameter-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'LCS-GCS-TranslationParameter-r16')), opt=True)
+    _NR_DL_PRS_BeamInfoPerTRP_r16_dl_PRS_BeamInfoSet_r16 = SEQ_OF(name=u'dl-PRS-BeamInfoSet-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'DL-PRS-BeamInfoSet-r16')), opt=True)
+    NR_DL_PRS_BeamInfoPerTRP_r16._cont = ASN1Dict([
+        (u'dl-PRS-ID-r16', _NR_DL_PRS_BeamInfoPerTRP_r16_dl_PRS_ID_r16),
+        (u'nr-PhysCellID-r16', _NR_DL_PRS_BeamInfoPerTRP_r16_nr_PhysCellID_r16),
+        (u'nr-CellGlobalID-r16', _NR_DL_PRS_BeamInfoPerTRP_r16_nr_CellGlobalID_r16),
+        (u'nr-ARFCN-r16', _NR_DL_PRS_BeamInfoPerTRP_r16_nr_ARFCN_r16),
+        (u'associated-DL-PRS-ID-r16', _NR_DL_PRS_BeamInfoPerTRP_r16_associated_DL_PRS_ID_r16),
+        (u'lcs-GCS-TranslationParameter-r16', _NR_DL_PRS_BeamInfoPerTRP_r16_lcs_GCS_TranslationParameter_r16),
+        (u'dl-PRS-BeamInfoSet-r16', _NR_DL_PRS_BeamInfoPerTRP_r16_dl_PRS_BeamInfoSet_r16),
+        ])
+    NR_DL_PRS_BeamInfoPerTRP_r16._ext = []
+    
+    #-----< DL-PRS-BeamInfoSet-r16 >-----#
+    DL_PRS_BeamInfoSet_r16 = SEQ_OF(name=u'DL-PRS-BeamInfoSet-r16', mode=MODE_TYPE)
+    _DL_PRS_BeamInfoSet_r16__item_ = SEQ_OF(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'DL-PRS-BeamInfoResourceSet-r16')))
+    DL_PRS_BeamInfoSet_r16._cont = _DL_PRS_BeamInfoSet_r16__item_
+    DL_PRS_BeamInfoSet_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=2)], ev=None, er=[])
+    
+    #-----< DL-PRS-BeamInfoResourceSet-r16 >-----#
+    DL_PRS_BeamInfoResourceSet_r16 = SEQ_OF(name=u'DL-PRS-BeamInfoResourceSet-r16', mode=MODE_TYPE)
+    _DL_PRS_BeamInfoResourceSet_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'DL-PRS-BeamInfoElement-r16')))
+    DL_PRS_BeamInfoResourceSet_r16._cont = _DL_PRS_BeamInfoResourceSet_r16__item_
+    DL_PRS_BeamInfoResourceSet_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    
+    #-----< DL-PRS-BeamInfoElement-r16 >-----#
+    DL_PRS_BeamInfoElement_r16 = SEQ(name=u'DL-PRS-BeamInfoElement-r16', mode=MODE_TYPE)
+    _DL_PRS_BeamInfoElement_r16_dl_PRS_Azimuth_r16 = INT(name=u'dl-PRS-Azimuth-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DL_PRS_BeamInfoElement_r16_dl_PRS_Azimuth_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=359)], ev=None, er=[])
+    _DL_PRS_BeamInfoElement_r16_dl_PRS_Azimuth_fine_r16 = INT(name=u'dl-PRS-Azimuth-fine-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DL_PRS_BeamInfoElement_r16_dl_PRS_Azimuth_fine_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=9)], ev=None, er=[])
+    _DL_PRS_BeamInfoElement_r16_dl_PRS_Elevation_r16 = INT(name=u'dl-PRS-Elevation-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DL_PRS_BeamInfoElement_r16_dl_PRS_Elevation_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=180)], ev=None, er=[])
+    _DL_PRS_BeamInfoElement_r16_dl_PRS_Elevation_fine_r16 = INT(name=u'dl-PRS-Elevation-fine-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DL_PRS_BeamInfoElement_r16_dl_PRS_Elevation_fine_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=9)], ev=None, er=[])
+    DL_PRS_BeamInfoElement_r16._cont = ASN1Dict([
+        (u'dl-PRS-Azimuth-r16', _DL_PRS_BeamInfoElement_r16_dl_PRS_Azimuth_r16),
+        (u'dl-PRS-Azimuth-fine-r16', _DL_PRS_BeamInfoElement_r16_dl_PRS_Azimuth_fine_r16),
+        (u'dl-PRS-Elevation-r16', _DL_PRS_BeamInfoElement_r16_dl_PRS_Elevation_r16),
+        (u'dl-PRS-Elevation-fine-r16', _DL_PRS_BeamInfoElement_r16_dl_PRS_Elevation_fine_r16),
+        ])
+    DL_PRS_BeamInfoElement_r16._ext = []
+    
+    #-----< LCS-GCS-TranslationParameter-r16 >-----#
+    LCS_GCS_TranslationParameter_r16 = SEQ(name=u'LCS-GCS-TranslationParameter-r16', mode=MODE_TYPE)
+    _LCS_GCS_TranslationParameter_r16_alpha_r16 = INT(name=u'alpha-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _LCS_GCS_TranslationParameter_r16_alpha_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=359)], ev=None, er=[])
+    _LCS_GCS_TranslationParameter_r16_alpha_fine_r16 = INT(name=u'alpha-fine-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _LCS_GCS_TranslationParameter_r16_alpha_fine_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=9)], ev=None, er=[])
+    _LCS_GCS_TranslationParameter_r16_beta_r16 = INT(name=u'beta-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _LCS_GCS_TranslationParameter_r16_beta_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=359)], ev=None, er=[])
+    _LCS_GCS_TranslationParameter_r16_beta_fine_r16 = INT(name=u'beta-fine-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _LCS_GCS_TranslationParameter_r16_beta_fine_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=9)], ev=None, er=[])
+    _LCS_GCS_TranslationParameter_r16_gamma_r16 = INT(name=u'gamma-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _LCS_GCS_TranslationParameter_r16_gamma_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=359)], ev=None, er=[])
+    _LCS_GCS_TranslationParameter_r16_gamma_fine_r16 = INT(name=u'gamma-fine-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _LCS_GCS_TranslationParameter_r16_gamma_fine_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=9)], ev=None, er=[])
+    LCS_GCS_TranslationParameter_r16._cont = ASN1Dict([
+        (u'alpha-r16', _LCS_GCS_TranslationParameter_r16_alpha_r16),
+        (u'alpha-fine-r16', _LCS_GCS_TranslationParameter_r16_alpha_fine_r16),
+        (u'beta-r16', _LCS_GCS_TranslationParameter_r16_beta_r16),
+        (u'beta-fine-r16', _LCS_GCS_TranslationParameter_r16_beta_fine_r16),
+        (u'gamma-r16', _LCS_GCS_TranslationParameter_r16_gamma_r16),
+        (u'gamma-fine-r16', _LCS_GCS_TranslationParameter_r16_gamma_fine_r16),
+        ])
+    LCS_GCS_TranslationParameter_r16._ext = []
+    
+    #-----< NR-DL-PRS-Info-r16 >-----#
+    NR_DL_PRS_Info_r16 = SEQ(name=u'NR-DL-PRS-Info-r16', mode=MODE_TYPE)
+    _NR_DL_PRS_Info_r16_nr_DL_PRS_ResourceSetList_r16 = SEQ_OF(name=u'nr-DL-PRS-ResourceSetList-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Info_r16_nr_DL_PRS_ResourceSetList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ResourceSet-r16')))
+    _NR_DL_PRS_Info_r16_nr_DL_PRS_ResourceSetList_r16._cont = __NR_DL_PRS_Info_r16_nr_DL_PRS_ResourceSetList_r16__item_
+    _NR_DL_PRS_Info_r16_nr_DL_PRS_ResourceSetList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=2)], ev=None, er=[])
+    NR_DL_PRS_Info_r16._cont = ASN1Dict([
+        (u'nr-DL-PRS-ResourceSetList-r16', _NR_DL_PRS_Info_r16_nr_DL_PRS_ResourceSetList_r16),
+        ])
+    NR_DL_PRS_Info_r16._ext = []
+    
+    #-----< NR-DL-PRS-ResourceSet-r16 >-----#
+    NR_DL_PRS_ResourceSet_r16 = SEQ(name=u'NR-DL-PRS-ResourceSet-r16', mode=MODE_TYPE)
+    _NR_DL_PRS_ResourceSet_r16_nr_DL_PRS_ResourceSetID_r16 = INT(name=u'nr-DL-PRS-ResourceSetID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ResourceSetID-r16')))
+    _NR_DL_PRS_ResourceSet_r16_dl_PRS_Periodicity_and_ResourceSetSlotOffset_r16 = CHOICE(name=u'dl-PRS-Periodicity-and-ResourceSetSlotOffset-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-Periodicity-and-ResourceSetSlotOffset-r16')))
+    _NR_DL_PRS_ResourceSet_r16_dl_PRS_ResourceRepetitionFactor_r16 = ENUM(name=u'dl-PRS-ResourceRepetitionFactor-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_DL_PRS_ResourceSet_r16_dl_PRS_ResourceRepetitionFactor_r16._cont = ASN1Dict([(u'n2', 0), (u'n4', 1), (u'n6', 2), (u'n8', 3), (u'n16', 4), (u'n32', 5)])
+    _NR_DL_PRS_ResourceSet_r16_dl_PRS_ResourceRepetitionFactor_r16._ext = []
+    _NR_DL_PRS_ResourceSet_r16_dl_PRS_ResourceTimeGap_r16 = ENUM(name=u'dl-PRS-ResourceTimeGap-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_DL_PRS_ResourceSet_r16_dl_PRS_ResourceTimeGap_r16._cont = ASN1Dict([(u's1', 0), (u's2', 1), (u's4', 2), (u's8', 3), (u's16', 4), (u's32', 5)])
+    _NR_DL_PRS_ResourceSet_r16_dl_PRS_ResourceTimeGap_r16._ext = []
+    _NR_DL_PRS_ResourceSet_r16_dl_PRS_NumSymbols_r16 = ENUM(name=u'dl-PRS-NumSymbols-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_PRS_ResourceSet_r16_dl_PRS_NumSymbols_r16._cont = ASN1Dict([(u'n2', 0), (u'n4', 1), (u'n6', 2), (u'n12', 3)])
+    _NR_DL_PRS_ResourceSet_r16_dl_PRS_NumSymbols_r16._ext = []
+    _NR_DL_PRS_ResourceSet_r16_dl_PRS_MutingOption1_r16 = SEQ(name=u'dl-PRS-MutingOption1-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'DL-PRS-MutingOption1-r16')), opt=True)
+    _NR_DL_PRS_ResourceSet_r16_dl_PRS_MutingOption2_r16 = SEQ(name=u'dl-PRS-MutingOption2-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'DL-PRS-MutingOption2-r16')), opt=True)
+    _NR_DL_PRS_ResourceSet_r16_dl_PRS_ResourcePower_r16 = INT(name=u'dl-PRS-ResourcePower-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_PRS_ResourceSet_r16_dl_PRS_ResourcePower_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-60, ub=50)], ev=None, er=[])
+    _NR_DL_PRS_ResourceSet_r16_dl_PRS_ResourceList_r16 = SEQ_OF(name=u'dl-PRS-ResourceList-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_ResourceSet_r16_dl_PRS_ResourceList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-Resource-r16')))
+    _NR_DL_PRS_ResourceSet_r16_dl_PRS_ResourceList_r16._cont = __NR_DL_PRS_ResourceSet_r16_dl_PRS_ResourceList_r16__item_
+    _NR_DL_PRS_ResourceSet_r16_dl_PRS_ResourceList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    NR_DL_PRS_ResourceSet_r16._cont = ASN1Dict([
+        (u'nr-DL-PRS-ResourceSetID-r16', _NR_DL_PRS_ResourceSet_r16_nr_DL_PRS_ResourceSetID_r16),
+        (u'dl-PRS-Periodicity-and-ResourceSetSlotOffset-r16', _NR_DL_PRS_ResourceSet_r16_dl_PRS_Periodicity_and_ResourceSetSlotOffset_r16),
+        (u'dl-PRS-ResourceRepetitionFactor-r16', _NR_DL_PRS_ResourceSet_r16_dl_PRS_ResourceRepetitionFactor_r16),
+        (u'dl-PRS-ResourceTimeGap-r16', _NR_DL_PRS_ResourceSet_r16_dl_PRS_ResourceTimeGap_r16),
+        (u'dl-PRS-NumSymbols-r16', _NR_DL_PRS_ResourceSet_r16_dl_PRS_NumSymbols_r16),
+        (u'dl-PRS-MutingOption1-r16', _NR_DL_PRS_ResourceSet_r16_dl_PRS_MutingOption1_r16),
+        (u'dl-PRS-MutingOption2-r16', _NR_DL_PRS_ResourceSet_r16_dl_PRS_MutingOption2_r16),
+        (u'dl-PRS-ResourcePower-r16', _NR_DL_PRS_ResourceSet_r16_dl_PRS_ResourcePower_r16),
+        (u'dl-PRS-ResourceList-r16', _NR_DL_PRS_ResourceSet_r16_dl_PRS_ResourceList_r16),
+        ])
+    NR_DL_PRS_ResourceSet_r16._ext = []
+    
+    #-----< DL-PRS-MutingOption1-r16 >-----#
+    DL_PRS_MutingOption1_r16 = SEQ(name=u'DL-PRS-MutingOption1-r16', mode=MODE_TYPE)
+    _DL_PRS_MutingOption1_r16_dl_prs_MutingBitRepetitionFactor_r16 = ENUM(name=u'dl-prs-MutingBitRepetitionFactor-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DL_PRS_MutingOption1_r16_dl_prs_MutingBitRepetitionFactor_r16._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2), (u'n8', 3)])
+    _DL_PRS_MutingOption1_r16_dl_prs_MutingBitRepetitionFactor_r16._ext = []
+    _DL_PRS_MutingOption1_r16_nr_option1_muting_r16 = CHOICE(name=u'nr-option1-muting-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-MutingPattern-r16')))
+    DL_PRS_MutingOption1_r16._cont = ASN1Dict([
+        (u'dl-prs-MutingBitRepetitionFactor-r16', _DL_PRS_MutingOption1_r16_dl_prs_MutingBitRepetitionFactor_r16),
+        (u'nr-option1-muting-r16', _DL_PRS_MutingOption1_r16_nr_option1_muting_r16),
+        ])
+    DL_PRS_MutingOption1_r16._ext = []
+    
+    #-----< DL-PRS-MutingOption2-r16 >-----#
+    DL_PRS_MutingOption2_r16 = SEQ(name=u'DL-PRS-MutingOption2-r16', mode=MODE_TYPE)
+    _DL_PRS_MutingOption2_r16_nr_option2_muting_r16 = CHOICE(name=u'nr-option2-muting-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-MutingPattern-r16')))
+    DL_PRS_MutingOption2_r16._cont = ASN1Dict([
+        (u'nr-option2-muting-r16', _DL_PRS_MutingOption2_r16_nr_option2_muting_r16),
+        ])
+    DL_PRS_MutingOption2_r16._ext = []
+    
+    #-----< NR-MutingPattern-r16 >-----#
+    NR_MutingPattern_r16 = CHOICE(name=u'NR-MutingPattern-r16', mode=MODE_TYPE)
+    _NR_MutingPattern_r16_po2_r16 = BIT_STR(name=u'po2-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_MutingPattern_r16_po2_r16._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
+    _NR_MutingPattern_r16_po4_r16 = BIT_STR(name=u'po4-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_MutingPattern_r16_po4_r16._const_sz = ASN1Set(rv=[4], rr=[], ev=None, er=[])
+    _NR_MutingPattern_r16_po6_r16 = BIT_STR(name=u'po6-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_MutingPattern_r16_po6_r16._const_sz = ASN1Set(rv=[6], rr=[], ev=None, er=[])
+    _NR_MutingPattern_r16_po8_r16 = BIT_STR(name=u'po8-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_MutingPattern_r16_po8_r16._const_sz = ASN1Set(rv=[8], rr=[], ev=None, er=[])
+    _NR_MutingPattern_r16_po16_r16 = BIT_STR(name=u'po16-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_MutingPattern_r16_po16_r16._const_sz = ASN1Set(rv=[16], rr=[], ev=None, er=[])
+    _NR_MutingPattern_r16_po32_r16 = BIT_STR(name=u'po32-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_MutingPattern_r16_po32_r16._const_sz = ASN1Set(rv=[32], rr=[], ev=None, er=[])
+    NR_MutingPattern_r16._cont = ASN1Dict([
+        (u'po2-r16', _NR_MutingPattern_r16_po2_r16),
+        (u'po4-r16', _NR_MutingPattern_r16_po4_r16),
+        (u'po6-r16', _NR_MutingPattern_r16_po6_r16),
+        (u'po8-r16', _NR_MutingPattern_r16_po8_r16),
+        (u'po16-r16', _NR_MutingPattern_r16_po16_r16),
+        (u'po32-r16', _NR_MutingPattern_r16_po32_r16),
+        ])
+    NR_MutingPattern_r16._ext = []
+    
+    #-----< NR-DL-PRS-Resource-r16 >-----#
+    NR_DL_PRS_Resource_r16 = SEQ(name=u'NR-DL-PRS-Resource-r16', mode=MODE_TYPE)
+    _NR_DL_PRS_Resource_r16_nr_DL_PRS_ResourceID_r16 = INT(name=u'nr-DL-PRS-ResourceID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ResourceID-r16')))
+    _NR_DL_PRS_Resource_r16_dl_PRS_SequenceID_r16 = INT(name=u'dl-PRS-SequenceID-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_PRS_Resource_r16_dl_PRS_SequenceID_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4095)], ev=None, er=[])
+    _NR_DL_PRS_Resource_r16_dl_PRS_CombSizeN_AndReOffset_r16 = CHOICE(name=u'dl-PRS-CombSizeN-AndReOffset-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __NR_DL_PRS_Resource_r16_dl_PRS_CombSizeN_AndReOffset_r16_n2_r16 = INT(name=u'n2-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Resource_r16_dl_PRS_CombSizeN_AndReOffset_r16_n2_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1)], ev=None, er=[])
+    __NR_DL_PRS_Resource_r16_dl_PRS_CombSizeN_AndReOffset_r16_n4_r16 = INT(name=u'n4-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Resource_r16_dl_PRS_CombSizeN_AndReOffset_r16_n4_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=3)], ev=None, er=[])
+    __NR_DL_PRS_Resource_r16_dl_PRS_CombSizeN_AndReOffset_r16_n6_r16 = INT(name=u'n6-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Resource_r16_dl_PRS_CombSizeN_AndReOffset_r16_n6_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=5)], ev=None, er=[])
+    __NR_DL_PRS_Resource_r16_dl_PRS_CombSizeN_AndReOffset_r16_n12_r16 = INT(name=u'n12-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Resource_r16_dl_PRS_CombSizeN_AndReOffset_r16_n12_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=11)], ev=None, er=[])
+    _NR_DL_PRS_Resource_r16_dl_PRS_CombSizeN_AndReOffset_r16._cont = ASN1Dict([
+        (u'n2-r16', __NR_DL_PRS_Resource_r16_dl_PRS_CombSizeN_AndReOffset_r16_n2_r16),
+        (u'n4-r16', __NR_DL_PRS_Resource_r16_dl_PRS_CombSizeN_AndReOffset_r16_n4_r16),
+        (u'n6-r16', __NR_DL_PRS_Resource_r16_dl_PRS_CombSizeN_AndReOffset_r16_n6_r16),
+        (u'n12-r16', __NR_DL_PRS_Resource_r16_dl_PRS_CombSizeN_AndReOffset_r16_n12_r16),
+        ])
+    _NR_DL_PRS_Resource_r16_dl_PRS_CombSizeN_AndReOffset_r16._ext = []
+    _NR_DL_PRS_Resource_r16_dl_PRS_ResourceSlotOffset_r16 = INT(name=u'dl-PRS-ResourceSlotOffset-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_PRS_Resource_r16_dl_PRS_ResourceSlotOffset_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
+    _NR_DL_PRS_Resource_r16_dl_PRS_ResourceSymbolOffset_r16 = INT(name=u'dl-PRS-ResourceSymbolOffset-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_PRS_Resource_r16_dl_PRS_ResourceSymbolOffset_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=12)], ev=None, er=[])
+    _NR_DL_PRS_Resource_r16_dl_PRS_QCL_Info_r16 = CHOICE(name=u'dl-PRS-QCL-Info-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'DL-PRS-QCL-Info-r16')), opt=True)
+    NR_DL_PRS_Resource_r16._cont = ASN1Dict([
+        (u'nr-DL-PRS-ResourceID-r16', _NR_DL_PRS_Resource_r16_nr_DL_PRS_ResourceID_r16),
+        (u'dl-PRS-SequenceID-r16', _NR_DL_PRS_Resource_r16_dl_PRS_SequenceID_r16),
+        (u'dl-PRS-CombSizeN-AndReOffset-r16', _NR_DL_PRS_Resource_r16_dl_PRS_CombSizeN_AndReOffset_r16),
+        (u'dl-PRS-ResourceSlotOffset-r16', _NR_DL_PRS_Resource_r16_dl_PRS_ResourceSlotOffset_r16),
+        (u'dl-PRS-ResourceSymbolOffset-r16', _NR_DL_PRS_Resource_r16_dl_PRS_ResourceSymbolOffset_r16),
+        (u'dl-PRS-QCL-Info-r16', _NR_DL_PRS_Resource_r16_dl_PRS_QCL_Info_r16),
+        ])
+    NR_DL_PRS_Resource_r16._ext = []
+    
+    #-----< DL-PRS-QCL-Info-r16 >-----#
+    DL_PRS_QCL_Info_r16 = CHOICE(name=u'DL-PRS-QCL-Info-r16', mode=MODE_TYPE)
+    _DL_PRS_QCL_Info_r16_ssb_r16 = SEQ(name=u'ssb-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DL_PRS_QCL_Info_r16_ssb_r16_pci_r16 = INT(name=u'pci-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-PhysCellID-r16')))
+    __DL_PRS_QCL_Info_r16_ssb_r16_ssb_Index_r16 = INT(name=u'ssb-Index-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DL_PRS_QCL_Info_r16_ssb_r16_ssb_Index_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=None, er=[])
+    __DL_PRS_QCL_Info_r16_ssb_r16_rs_Type_r16 = ENUM(name=u'rs-Type-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DL_PRS_QCL_Info_r16_ssb_r16_rs_Type_r16._cont = ASN1Dict([(u'typeC', 0), (u'typeD', 1), (u'typeC-plus-typeD', 2)])
+    __DL_PRS_QCL_Info_r16_ssb_r16_rs_Type_r16._ext = None
+    _DL_PRS_QCL_Info_r16_ssb_r16._cont = ASN1Dict([
+        (u'pci-r16', __DL_PRS_QCL_Info_r16_ssb_r16_pci_r16),
+        (u'ssb-Index-r16', __DL_PRS_QCL_Info_r16_ssb_r16_ssb_Index_r16),
+        (u'rs-Type-r16', __DL_PRS_QCL_Info_r16_ssb_r16_rs_Type_r16),
+        ])
+    _DL_PRS_QCL_Info_r16_ssb_r16._ext = None
+    _DL_PRS_QCL_Info_r16_dl_PRS_r16 = SEQ(name=u'dl-PRS-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DL_PRS_QCL_Info_r16_dl_PRS_r16_qcl_DL_PRS_ResourceID_r16 = INT(name=u'qcl-DL-PRS-ResourceID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ResourceID-r16')))
+    __DL_PRS_QCL_Info_r16_dl_PRS_r16_qcl_DL_PRS_ResourceSetID_r16 = INT(name=u'qcl-DL-PRS-ResourceSetID-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ResourceSetID-r16')))
+    _DL_PRS_QCL_Info_r16_dl_PRS_r16._cont = ASN1Dict([
+        (u'qcl-DL-PRS-ResourceID-r16', __DL_PRS_QCL_Info_r16_dl_PRS_r16_qcl_DL_PRS_ResourceID_r16),
+        (u'qcl-DL-PRS-ResourceSetID-r16', __DL_PRS_QCL_Info_r16_dl_PRS_r16_qcl_DL_PRS_ResourceSetID_r16),
+        ])
+    _DL_PRS_QCL_Info_r16_dl_PRS_r16._ext = None
+    DL_PRS_QCL_Info_r16._cont = ASN1Dict([
+        (u'ssb-r16', _DL_PRS_QCL_Info_r16_ssb_r16),
+        (u'dl-PRS-r16', _DL_PRS_QCL_Info_r16_dl_PRS_r16),
+        ])
+    DL_PRS_QCL_Info_r16._ext = None
+    
+    #-----< NR-DL-PRS-Periodicity-and-ResourceSetSlotOffset-r16 >-----#
+    NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16 = CHOICE(name=u'NR-DL-PRS-Periodicity-and-ResourceSetSlotOffset-r16', mode=MODE_TYPE)
+    _NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16 = CHOICE(name=u'scs15-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n4_r16 = INT(name=u'n4-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n4_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=3)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n5_r16 = INT(name=u'n5-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n5_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n8_r16 = INT(name=u'n8-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n8_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=7)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n10_r16 = INT(name=u'n10-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n10_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=9)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n16_r16 = INT(name=u'n16-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n16_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n20_r16 = INT(name=u'n20-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n20_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=19)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n32_r16 = INT(name=u'n32-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n32_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=31)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n40_r16 = INT(name=u'n40-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n40_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=39)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n64_r16 = INT(name=u'n64-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n64_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n80_r16 = INT(name=u'n80-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n80_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=79)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n160_r16 = INT(name=u'n160-r16', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n160_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=159)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n320_r16 = INT(name=u'n320-r16', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n320_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=319)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n640_r16 = INT(name=u'n640-r16', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n640_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=639)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n1280_r16 = INT(name=u'n1280-r16', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n1280_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1279)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n2560_r16 = INT(name=u'n2560-r16', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n2560_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2559)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n5120_r16 = INT(name=u'n5120-r16', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n5120_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=5119)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n10240_r16 = INT(name=u'n10240-r16', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n10240_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=10239)], ev=None, er=[])
+    _NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16._cont = ASN1Dict([
+        (u'n4-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n4_r16),
+        (u'n5-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n5_r16),
+        (u'n8-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n8_r16),
+        (u'n10-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n10_r16),
+        (u'n16-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n16_r16),
+        (u'n20-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n20_r16),
+        (u'n32-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n32_r16),
+        (u'n40-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n40_r16),
+        (u'n64-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n64_r16),
+        (u'n80-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n80_r16),
+        (u'n160-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n160_r16),
+        (u'n320-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n320_r16),
+        (u'n640-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n640_r16),
+        (u'n1280-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n1280_r16),
+        (u'n2560-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n2560_r16),
+        (u'n5120-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n5120_r16),
+        (u'n10240-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n10240_r16),
+        ])
+    _NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16._ext = []
+    _NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16 = CHOICE(name=u'scs30-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n8_r16 = INT(name=u'n8-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n8_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=7)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n10_r16 = INT(name=u'n10-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n10_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=9)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n16_r16 = INT(name=u'n16-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n16_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n20_r16 = INT(name=u'n20-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n20_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=19)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n32_r16 = INT(name=u'n32-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n32_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=31)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n40_r16 = INT(name=u'n40-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n40_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=39)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n64_r16 = INT(name=u'n64-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n64_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n80_r16 = INT(name=u'n80-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n80_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=79)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n128_r16 = INT(name=u'n128-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n128_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n160_r16 = INT(name=u'n160-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n160_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=159)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n320_r16 = INT(name=u'n320-r16', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n320_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=319)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n640_r16 = INT(name=u'n640-r16', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n640_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=639)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n1280_r16 = INT(name=u'n1280-r16', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n1280_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1279)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n2560_r16 = INT(name=u'n2560-r16', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n2560_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2559)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n5120_r16 = INT(name=u'n5120-r16', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n5120_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=5119)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n10240_r16 = INT(name=u'n10240-r16', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n10240_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=10239)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n20480_r16 = INT(name=u'n20480-r16', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n20480_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=20479)], ev=None, er=[])
+    _NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16._cont = ASN1Dict([
+        (u'n8-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n8_r16),
+        (u'n10-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n10_r16),
+        (u'n16-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n16_r16),
+        (u'n20-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n20_r16),
+        (u'n32-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n32_r16),
+        (u'n40-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n40_r16),
+        (u'n64-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n64_r16),
+        (u'n80-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n80_r16),
+        (u'n128-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n128_r16),
+        (u'n160-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n160_r16),
+        (u'n320-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n320_r16),
+        (u'n640-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n640_r16),
+        (u'n1280-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n1280_r16),
+        (u'n2560-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n2560_r16),
+        (u'n5120-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n5120_r16),
+        (u'n10240-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n10240_r16),
+        (u'n20480-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n20480_r16),
+        ])
+    _NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16._ext = []
+    _NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16 = CHOICE(name=u'scs60-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n16_r16 = INT(name=u'n16-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n16_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n20_r16 = INT(name=u'n20-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n20_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=19)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n32_r16 = INT(name=u'n32-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n32_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=31)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n40_r16 = INT(name=u'n40-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n40_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=39)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n64_r16 = INT(name=u'n64-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n64_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n80_r16 = INT(name=u'n80-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n80_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=79)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n128_r16 = INT(name=u'n128-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n128_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n160_r16 = INT(name=u'n160-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n160_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=159)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n256_r16 = INT(name=u'n256-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n256_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n320_r16 = INT(name=u'n320-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n320_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=319)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n640_r16 = INT(name=u'n640-r16', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n640_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=639)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n1280_r16 = INT(name=u'n1280-r16', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n1280_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1279)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n2560_r16 = INT(name=u'n2560-r16', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n2560_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2559)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n5120_r16 = INT(name=u'n5120-r16', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n5120_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=5119)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n10240_r16 = INT(name=u'n10240-r16', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n10240_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=10239)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n20480_r16 = INT(name=u'n20480-r16', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n20480_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=20479)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n40960_r16 = INT(name=u'n40960-r16', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n40960_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=40959)], ev=None, er=[])
+    _NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16._cont = ASN1Dict([
+        (u'n16-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n16_r16),
+        (u'n20-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n20_r16),
+        (u'n32-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n32_r16),
+        (u'n40-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n40_r16),
+        (u'n64-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n64_r16),
+        (u'n80-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n80_r16),
+        (u'n128-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n128_r16),
+        (u'n160-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n160_r16),
+        (u'n256-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n256_r16),
+        (u'n320-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n320_r16),
+        (u'n640-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n640_r16),
+        (u'n1280-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n1280_r16),
+        (u'n2560-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n2560_r16),
+        (u'n5120-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n5120_r16),
+        (u'n10240-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n10240_r16),
+        (u'n20480-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n20480_r16),
+        (u'n40960-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n40960_r16),
+        ])
+    _NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16._ext = []
+    _NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16 = CHOICE(name=u'scs120-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n32_r16 = INT(name=u'n32-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n32_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=31)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n40_r16 = INT(name=u'n40-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n40_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=39)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n64_r16 = INT(name=u'n64-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n64_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n80_r16 = INT(name=u'n80-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n80_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=79)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n128_r16 = INT(name=u'n128-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n128_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n160_r16 = INT(name=u'n160-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n160_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=159)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n256_r16 = INT(name=u'n256-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n256_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n320_r16 = INT(name=u'n320-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n320_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=319)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n512_r16 = INT(name=u'n512-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n512_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n640_r16 = INT(name=u'n640-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n640_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=639)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n1280_r16 = INT(name=u'n1280-r16', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n1280_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1279)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n2560_r16 = INT(name=u'n2560-r16', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n2560_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2559)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n5120_r16 = INT(name=u'n5120-r16', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n5120_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=5119)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n10240_r16 = INT(name=u'n10240-r16', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n10240_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=10239)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n20480_r16 = INT(name=u'n20480-r16', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n20480_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=20479)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n40960_r16 = INT(name=u'n40960-r16', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n40960_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=40959)], ev=None, er=[])
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n81920_r16 = INT(name=u'n81920-r16', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n81920_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=81919)], ev=None, er=[])
+    _NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16._cont = ASN1Dict([
+        (u'n32-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n32_r16),
+        (u'n40-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n40_r16),
+        (u'n64-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n64_r16),
+        (u'n80-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n80_r16),
+        (u'n128-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n128_r16),
+        (u'n160-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n160_r16),
+        (u'n256-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n256_r16),
+        (u'n320-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n320_r16),
+        (u'n512-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n512_r16),
+        (u'n640-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n640_r16),
+        (u'n1280-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n1280_r16),
+        (u'n2560-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n2560_r16),
+        (u'n5120-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n5120_r16),
+        (u'n10240-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n10240_r16),
+        (u'n20480-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n20480_r16),
+        (u'n40960-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n40960_r16),
+        (u'n81920-r16', __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n81920_r16),
+        ])
+    _NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16._ext = []
+    NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16._cont = ASN1Dict([
+        (u'scs15-r16', _NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16),
+        (u'scs30-r16', _NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16),
+        (u'scs60-r16', _NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16),
+        (u'scs120-r16', _NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16),
+        ])
+    NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16._ext = []
+    
+    #-----< NR-DL-PRS-ProcessingCapability-r16 >-----#
+    NR_DL_PRS_ProcessingCapability_r16 = SEQ(name=u'NR-DL-PRS-ProcessingCapability-r16', mode=MODE_TYPE)
+    _NR_DL_PRS_ProcessingCapability_r16_prs_ProcessingCapabilityBandList_r16 = SEQ_OF(name=u'prs-ProcessingCapabilityBandList-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_ProcessingCapability_r16_prs_ProcessingCapabilityBandList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'PRS-ProcessingCapabilityPerBand-r16')))
+    _NR_DL_PRS_ProcessingCapability_r16_prs_ProcessingCapabilityBandList_r16._cont = __NR_DL_PRS_ProcessingCapability_r16_prs_ProcessingCapabilityBandList_r16__item_
+    _NR_DL_PRS_ProcessingCapability_r16_prs_ProcessingCapabilityBandList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1024)], ev=None, er=[])
+    _NR_DL_PRS_ProcessingCapability_r16_maxSupportedFreqLayers_r16 = INT(name=u'maxSupportedFreqLayers-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_PRS_ProcessingCapability_r16_maxSupportedFreqLayers_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _NR_DL_PRS_ProcessingCapability_r16_simulLTE_NR_PRS_r16 = ENUM(name=u'simulLTE-NR-PRS-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_DL_PRS_ProcessingCapability_r16_simulLTE_NR_PRS_r16._cont = ASN1Dict([(u'supported', 0)])
+    _NR_DL_PRS_ProcessingCapability_r16_simulLTE_NR_PRS_r16._ext = None
+    NR_DL_PRS_ProcessingCapability_r16._cont = ASN1Dict([
+        (u'prs-ProcessingCapabilityBandList-r16', _NR_DL_PRS_ProcessingCapability_r16_prs_ProcessingCapabilityBandList_r16),
+        (u'maxSupportedFreqLayers-r16', _NR_DL_PRS_ProcessingCapability_r16_maxSupportedFreqLayers_r16),
+        (u'simulLTE-NR-PRS-r16', _NR_DL_PRS_ProcessingCapability_r16_simulLTE_NR_PRS_r16),
+        ])
+    NR_DL_PRS_ProcessingCapability_r16._ext = []
+    
+    #-----< PRS-ProcessingCapabilityPerBand-r16 >-----#
+    PRS_ProcessingCapabilityPerBand_r16 = SEQ(name=u'PRS-ProcessingCapabilityPerBand-r16', mode=MODE_TYPE)
+    _PRS_ProcessingCapabilityPerBand_r16_freqBandIndicatorNR_r16 = INT(name=u'freqBandIndicatorNR-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'FreqBandIndicatorNR-r16')))
+    _PRS_ProcessingCapabilityPerBand_r16_supportedBandwidthPRS_r16 = CHOICE(name=u'supportedBandwidthPRS-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __PRS_ProcessingCapabilityPerBand_r16_supportedBandwidthPRS_r16_fr1 = ENUM(name=u'fr1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __PRS_ProcessingCapabilityPerBand_r16_supportedBandwidthPRS_r16_fr1._cont = ASN1Dict([(u'mhz5', 0), (u'mhz10', 1), (u'mhz20', 2), (u'mhz40', 3), (u'mhz50', 4), (u'mhz80', 5), (u'mhz100', 6)])
+    __PRS_ProcessingCapabilityPerBand_r16_supportedBandwidthPRS_r16_fr1._ext = None
+    __PRS_ProcessingCapabilityPerBand_r16_supportedBandwidthPRS_r16_fr2 = ENUM(name=u'fr2', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __PRS_ProcessingCapabilityPerBand_r16_supportedBandwidthPRS_r16_fr2._cont = ASN1Dict([(u'mhz50', 0), (u'mhz100', 1), (u'mhz200', 2), (u'mhz400', 3)])
+    __PRS_ProcessingCapabilityPerBand_r16_supportedBandwidthPRS_r16_fr2._ext = None
+    _PRS_ProcessingCapabilityPerBand_r16_supportedBandwidthPRS_r16._cont = ASN1Dict([
+        (u'fr1', __PRS_ProcessingCapabilityPerBand_r16_supportedBandwidthPRS_r16_fr1),
+        (u'fr2', __PRS_ProcessingCapabilityPerBand_r16_supportedBandwidthPRS_r16_fr2),
+        ])
+    _PRS_ProcessingCapabilityPerBand_r16_supportedBandwidthPRS_r16._ext = []
+    _PRS_ProcessingCapabilityPerBand_r16_dl_PRS_BufferType_r16 = ENUM(name=u'dl-PRS-BufferType-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PRS_ProcessingCapabilityPerBand_r16_dl_PRS_BufferType_r16._cont = ASN1Dict([(u'type1', 0), (u'type2', 1)])
+    _PRS_ProcessingCapabilityPerBand_r16_dl_PRS_BufferType_r16._ext = []
+    _PRS_ProcessingCapabilityPerBand_r16_durationOfPRS_Processing_r16 = SEQ(name=u'durationOfPRS-Processing-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __PRS_ProcessingCapabilityPerBand_r16_durationOfPRS_Processing_r16_durationOfPRS_ProcessingSymbols_r16 = ENUM(name=u'durationOfPRS-ProcessingSymbols-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __PRS_ProcessingCapabilityPerBand_r16_durationOfPRS_Processing_r16_durationOfPRS_ProcessingSymbols_r16._cont = ASN1Dict([(u'nDot125', 0), (u'nDot25', 1), (u'nDot5', 2), (u'n1', 3), (u'n2', 4), (u'n4', 5), (u'n6', 6), (u'n8', 7), (u'n12', 8), (u'n16', 9), (u'n20', 10), (u'n25', 11), (u'n30', 12), (u'n32', 13), (u'n35', 14), (u'n40', 15), (u'n45', 16), (u'n50', 17)])
+    __PRS_ProcessingCapabilityPerBand_r16_durationOfPRS_Processing_r16_durationOfPRS_ProcessingSymbols_r16._ext = None
+    __PRS_ProcessingCapabilityPerBand_r16_durationOfPRS_Processing_r16_durationOfPRS_ProcessingSymbolsInEveryTms_r16 = ENUM(name=u'durationOfPRS-ProcessingSymbolsInEveryTms-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __PRS_ProcessingCapabilityPerBand_r16_durationOfPRS_Processing_r16_durationOfPRS_ProcessingSymbolsInEveryTms_r16._cont = ASN1Dict([(u'n8', 0), (u'n16', 1), (u'n20', 2), (u'n30', 3), (u'n40', 4), (u'n80', 5), (u'n160', 6), (u'n320', 7), (u'n640', 8), (u'n1280', 9)])
+    __PRS_ProcessingCapabilityPerBand_r16_durationOfPRS_Processing_r16_durationOfPRS_ProcessingSymbolsInEveryTms_r16._ext = None
+    _PRS_ProcessingCapabilityPerBand_r16_durationOfPRS_Processing_r16._cont = ASN1Dict([
+        (u'durationOfPRS-ProcessingSymbols-r16', __PRS_ProcessingCapabilityPerBand_r16_durationOfPRS_Processing_r16_durationOfPRS_ProcessingSymbols_r16),
+        (u'durationOfPRS-ProcessingSymbolsInEveryTms-r16', __PRS_ProcessingCapabilityPerBand_r16_durationOfPRS_Processing_r16_durationOfPRS_ProcessingSymbolsInEveryTms_r16),
+        ])
+    _PRS_ProcessingCapabilityPerBand_r16_durationOfPRS_Processing_r16._ext = []
+    _PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16 = SEQ(name=u'maxNumOfDL-PRS-ResProcessedPerSlot-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16_scs15_r16 = ENUM(name=u'scs15-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16_scs15_r16._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2), (u'n8', 3), (u'n16', 4), (u'n24', 5), (u'n32', 6), (u'n48', 7), (u'n64', 8)])
+    __PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16_scs15_r16._ext = None
+    __PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16_scs30_r16 = ENUM(name=u'scs30-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16_scs30_r16._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2), (u'n8', 3), (u'n16', 4), (u'n24', 5), (u'n32', 6), (u'n48', 7), (u'n64', 8)])
+    __PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16_scs30_r16._ext = None
+    __PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16_scs60_r16 = ENUM(name=u'scs60-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16_scs60_r16._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2), (u'n8', 3), (u'n16', 4), (u'n24', 5), (u'n32', 6), (u'n48', 7), (u'n64', 8)])
+    __PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16_scs60_r16._ext = None
+    __PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16_scs120_r16 = ENUM(name=u'scs120-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16_scs120_r16._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2), (u'n8', 3), (u'n16', 4), (u'n24', 5), (u'n32', 6), (u'n48', 7), (u'n64', 8)])
+    __PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16_scs120_r16._ext = None
+    _PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16._cont = ASN1Dict([
+        (u'scs15-r16', __PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16_scs15_r16),
+        (u'scs30-r16', __PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16_scs30_r16),
+        (u'scs60-r16', __PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16_scs60_r16),
+        (u'scs120-r16', __PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16_scs120_r16),
+        ])
+    _PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16._ext = []
+    PRS_ProcessingCapabilityPerBand_r16._cont = ASN1Dict([
+        (u'freqBandIndicatorNR-r16', _PRS_ProcessingCapabilityPerBand_r16_freqBandIndicatorNR_r16),
+        (u'supportedBandwidthPRS-r16', _PRS_ProcessingCapabilityPerBand_r16_supportedBandwidthPRS_r16),
+        (u'dl-PRS-BufferType-r16', _PRS_ProcessingCapabilityPerBand_r16_dl_PRS_BufferType_r16),
+        (u'durationOfPRS-Processing-r16', _PRS_ProcessingCapabilityPerBand_r16_durationOfPRS_Processing_r16),
+        (u'maxNumOfDL-PRS-ResProcessedPerSlot-r16', _PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16),
+        ])
+    PRS_ProcessingCapabilityPerBand_r16._ext = []
+    
+    #-----< NR-DL-PRS-QCL-ProcessingCapability-r16 >-----#
+    NR_DL_PRS_QCL_ProcessingCapability_r16 = SEQ(name=u'NR-DL-PRS-QCL-ProcessingCapability-r16', mode=MODE_TYPE)
+    _NR_DL_PRS_QCL_ProcessingCapability_r16_dl_PRS_QCL_ProcessingCapabilityBandList_r16 = SEQ_OF(name=u'dl-PRS-QCL-ProcessingCapabilityBandList-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_QCL_ProcessingCapability_r16_dl_PRS_QCL_ProcessingCapabilityBandList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'DL-PRS-QCL-ProcessingCapabilityPerBand-r16')))
+    _NR_DL_PRS_QCL_ProcessingCapability_r16_dl_PRS_QCL_ProcessingCapabilityBandList_r16._cont = __NR_DL_PRS_QCL_ProcessingCapability_r16_dl_PRS_QCL_ProcessingCapabilityBandList_r16__item_
+    _NR_DL_PRS_QCL_ProcessingCapability_r16_dl_PRS_QCL_ProcessingCapabilityBandList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1024)], ev=None, er=[])
+    NR_DL_PRS_QCL_ProcessingCapability_r16._cont = ASN1Dict([
+        (u'dl-PRS-QCL-ProcessingCapabilityBandList-r16', _NR_DL_PRS_QCL_ProcessingCapability_r16_dl_PRS_QCL_ProcessingCapabilityBandList_r16),
+        ])
+    NR_DL_PRS_QCL_ProcessingCapability_r16._ext = []
+    
+    #-----< DL-PRS-QCL-ProcessingCapabilityPerBand-r16 >-----#
+    DL_PRS_QCL_ProcessingCapabilityPerBand_r16 = SEQ(name=u'DL-PRS-QCL-ProcessingCapabilityPerBand-r16', mode=MODE_TYPE)
+    _DL_PRS_QCL_ProcessingCapabilityPerBand_r16_freqBandIndicatorNR_r16 = INT(name=u'freqBandIndicatorNR-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'FreqBandIndicatorNR-r16')))
+    _DL_PRS_QCL_ProcessingCapabilityPerBand_r16_ssb_FromNeighCellAsQCL_r16 = ENUM(name=u'ssb-FromNeighCellAsQCL-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DL_PRS_QCL_ProcessingCapabilityPerBand_r16_ssb_FromNeighCellAsQCL_r16._cont = ASN1Dict([(u'supported', 0)])
+    _DL_PRS_QCL_ProcessingCapabilityPerBand_r16_ssb_FromNeighCellAsQCL_r16._ext = None
+    _DL_PRS_QCL_ProcessingCapabilityPerBand_r16_prs_FromServNeighCellAsQCL_r16 = ENUM(name=u'prs-FromServNeighCellAsQCL-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DL_PRS_QCL_ProcessingCapabilityPerBand_r16_prs_FromServNeighCellAsQCL_r16._cont = ASN1Dict([(u'supported', 0)])
+    _DL_PRS_QCL_ProcessingCapabilityPerBand_r16_prs_FromServNeighCellAsQCL_r16._ext = None
+    DL_PRS_QCL_ProcessingCapabilityPerBand_r16._cont = ASN1Dict([
+        (u'freqBandIndicatorNR-r16', _DL_PRS_QCL_ProcessingCapabilityPerBand_r16_freqBandIndicatorNR_r16),
+        (u'ssb-FromNeighCellAsQCL-r16', _DL_PRS_QCL_ProcessingCapabilityPerBand_r16_ssb_FromNeighCellAsQCL_r16),
+        (u'prs-FromServNeighCellAsQCL-r16', _DL_PRS_QCL_ProcessingCapabilityPerBand_r16_prs_FromServNeighCellAsQCL_r16),
+        ])
+    DL_PRS_QCL_ProcessingCapabilityPerBand_r16._ext = []
+    
+    #-----< NR-DL-PRS-ResourceID-r16 >-----#
+    NR_DL_PRS_ResourceID_r16 = INT(name=u'NR-DL-PRS-ResourceID-r16', mode=MODE_TYPE)
+    NR_DL_PRS_ResourceID_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=None, er=[])
+    
+    #-----< NR-DL-PRS-ResourcesCapability-r16 >-----#
+    NR_DL_PRS_ResourcesCapability_r16 = SEQ(name=u'NR-DL-PRS-ResourcesCapability-r16', mode=MODE_TYPE)
+    _NR_DL_PRS_ResourcesCapability_r16_maxNrOfDL_PRS_ResourceSetPerTrpPerFrequencyLayer_r16 = INT(name=u'maxNrOfDL-PRS-ResourceSetPerTrpPerFrequencyLayer-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_PRS_ResourcesCapability_r16_maxNrOfDL_PRS_ResourceSetPerTrpPerFrequencyLayer_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=2)], ev=None, er=[])
+    _NR_DL_PRS_ResourcesCapability_r16_maxNrOfTRP_AcrossFreqs_r16 = ENUM(name=u'maxNrOfTRP-AcrossFreqs-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_PRS_ResourcesCapability_r16_maxNrOfTRP_AcrossFreqs_r16._cont = ASN1Dict([(u'n4', 0), (u'n6', 1), (u'n12', 2), (u'n16', 3), (u'n32', 4), (u'n64', 5), (u'n128', 6), (u'n256', 7)])
+    _NR_DL_PRS_ResourcesCapability_r16_maxNrOfTRP_AcrossFreqs_r16._ext = []
+    _NR_DL_PRS_ResourcesCapability_r16_maxNrOfPosLayer_r16 = INT(name=u'maxNrOfPosLayer-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_PRS_ResourcesCapability_r16_maxNrOfPosLayer_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _NR_DL_PRS_ResourcesCapability_r16_dl_PRS_ResourcesCapabilityBandList_r16 = SEQ_OF(name=u'dl-PRS-ResourcesCapabilityBandList-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_PRS_ResourcesCapability_r16_dl_PRS_ResourcesCapabilityBandList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'DL-PRS-ResourcesCapabilityPerBand-r16')))
+    _NR_DL_PRS_ResourcesCapability_r16_dl_PRS_ResourcesCapabilityBandList_r16._cont = __NR_DL_PRS_ResourcesCapability_r16_dl_PRS_ResourcesCapabilityBandList_r16__item_
+    _NR_DL_PRS_ResourcesCapability_r16_dl_PRS_ResourcesCapabilityBandList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1024)], ev=None, er=[])
+    _NR_DL_PRS_ResourcesCapability_r16_dl_PRS_ResourcesBandCombinationList_r16 = SEQ_OF(name=u'dl-PRS-ResourcesBandCombinationList-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'DL-PRS-ResourcesBandCombinationList-r16')))
+    NR_DL_PRS_ResourcesCapability_r16._cont = ASN1Dict([
+        (u'maxNrOfDL-PRS-ResourceSetPerTrpPerFrequencyLayer-r16', _NR_DL_PRS_ResourcesCapability_r16_maxNrOfDL_PRS_ResourceSetPerTrpPerFrequencyLayer_r16),
+        (u'maxNrOfTRP-AcrossFreqs-r16', _NR_DL_PRS_ResourcesCapability_r16_maxNrOfTRP_AcrossFreqs_r16),
+        (u'maxNrOfPosLayer-r16', _NR_DL_PRS_ResourcesCapability_r16_maxNrOfPosLayer_r16),
+        (u'dl-PRS-ResourcesCapabilityBandList-r16', _NR_DL_PRS_ResourcesCapability_r16_dl_PRS_ResourcesCapabilityBandList_r16),
+        (u'dl-PRS-ResourcesBandCombinationList-r16', _NR_DL_PRS_ResourcesCapability_r16_dl_PRS_ResourcesBandCombinationList_r16),
+        ])
+    NR_DL_PRS_ResourcesCapability_r16._ext = []
+    
+    #-----< DL-PRS-ResourcesCapabilityPerBand-r16 >-----#
+    DL_PRS_ResourcesCapabilityPerBand_r16 = SEQ(name=u'DL-PRS-ResourcesCapabilityPerBand-r16', mode=MODE_TYPE)
+    _DL_PRS_ResourcesCapabilityPerBand_r16_freqBandIndicatorNR_r16 = INT(name=u'freqBandIndicatorNR-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'FreqBandIndicatorNR-r16')))
+    _DL_PRS_ResourcesCapabilityPerBand_r16_maxNrOfDL_PRS_ResourcesPerResourceSet_r16 = ENUM(name=u'maxNrOfDL-PRS-ResourcesPerResourceSet-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DL_PRS_ResourcesCapabilityPerBand_r16_maxNrOfDL_PRS_ResourcesPerResourceSet_r16._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2), (u'n8', 3), (u'n16', 4), (u'n32', 5), (u'n64', 6)])
+    _DL_PRS_ResourcesCapabilityPerBand_r16_maxNrOfDL_PRS_ResourcesPerResourceSet_r16._ext = []
+    _DL_PRS_ResourcesCapabilityPerBand_r16_maxNrOfDL_PRS_ResourcesPerPositioningFrequencylayer_r16 = ENUM(name=u'maxNrOfDL-PRS-ResourcesPerPositioningFrequencylayer-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DL_PRS_ResourcesCapabilityPerBand_r16_maxNrOfDL_PRS_ResourcesPerPositioningFrequencylayer_r16._cont = ASN1Dict([(u'n6', 0), (u'n24', 1), (u'n32', 2), (u'n64', 3), (u'n96', 4), (u'n128', 5), (u'n256', 6), (u'n512', 7), (u'n1024', 8)])
+    _DL_PRS_ResourcesCapabilityPerBand_r16_maxNrOfDL_PRS_ResourcesPerPositioningFrequencylayer_r16._ext = []
+    DL_PRS_ResourcesCapabilityPerBand_r16._cont = ASN1Dict([
+        (u'freqBandIndicatorNR-r16', _DL_PRS_ResourcesCapabilityPerBand_r16_freqBandIndicatorNR_r16),
+        (u'maxNrOfDL-PRS-ResourcesPerResourceSet-r16', _DL_PRS_ResourcesCapabilityPerBand_r16_maxNrOfDL_PRS_ResourcesPerResourceSet_r16),
+        (u'maxNrOfDL-PRS-ResourcesPerPositioningFrequencylayer-r16', _DL_PRS_ResourcesCapabilityPerBand_r16_maxNrOfDL_PRS_ResourcesPerPositioningFrequencylayer_r16),
+        ])
+    DL_PRS_ResourcesCapabilityPerBand_r16._ext = []
+    
+    #-----< DL-PRS-ResourcesBandCombinationList-r16 >-----#
+    DL_PRS_ResourcesBandCombinationList_r16 = SEQ_OF(name=u'DL-PRS-ResourcesBandCombinationList-r16', mode=MODE_TYPE)
+    _DL_PRS_ResourcesBandCombinationList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'DL-PRS-ResourcesBandCombination-r16')))
+    DL_PRS_ResourcesBandCombinationList_r16._cont = _DL_PRS_ResourcesBandCombinationList_r16__item_
+    DL_PRS_ResourcesBandCombinationList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1024)], ev=None, er=[])
+    
+    #-----< DL-PRS-ResourcesBandCombination-r16 >-----#
+    DL_PRS_ResourcesBandCombination_r16 = SEQ(name=u'DL-PRS-ResourcesBandCombination-r16', mode=MODE_TYPE)
+    _DL_PRS_ResourcesBandCombination_r16_bandList_r16 = SEQ_OF(name=u'bandList-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DL_PRS_ResourcesBandCombination_r16_bandList_r16__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'FreqBandIndicatorNR-r16')))
+    _DL_PRS_ResourcesBandCombination_r16_bandList_r16._cont = __DL_PRS_ResourcesBandCombination_r16_bandList_r16__item_
+    _DL_PRS_ResourcesBandCombination_r16_bandList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16 = CHOICE(name=u'maxNrOfDL-PRS-ResourcesAcrossAllFL-TRP-ResourceSet-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr1_Only_r16 = ENUM(name=u'fr1-Only-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr1_Only_r16._cont = ASN1Dict([(u'n6', 0), (u'n24', 1), (u'n64', 2), (u'n128', 3), (u'n192', 4), (u'n256', 5), (u'n512', 6), (u'n1024', 7), (u'n2048', 8)])
+    __DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr1_Only_r16._ext = None
+    __DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr2_Only_r16 = ENUM(name=u'fr2-Only-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr2_Only_r16._cont = ASN1Dict([(u'n24', 0), (u'n64', 1), (u'n96', 2), (u'n128', 3), (u'n192', 4), (u'n256', 5), (u'n512', 6), (u'n1024', 7), (u'n2048', 8)])
+    __DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr2_Only_r16._ext = None
+    __DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr1_FR2Mix_r16 = SEQ(name=u'fr1-FR2Mix-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr1_FR2Mix_r16_fr1_r16 = ENUM(name=u'fr1-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr1_FR2Mix_r16_fr1_r16._cont = ASN1Dict([(u'n6', 0), (u'n24', 1), (u'n64', 2), (u'n96', 3), (u'n128', 4), (u'n192', 5), (u'n256', 6), (u'n512', 7), (u'n1024', 8), (u'n2048', 9)])
+    ___DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr1_FR2Mix_r16_fr1_r16._ext = None
+    ___DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr1_FR2Mix_r16_fr2_r16 = ENUM(name=u'fr2-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr1_FR2Mix_r16_fr2_r16._cont = ASN1Dict([(u'n24', 0), (u'n64', 1), (u'n96', 2), (u'n128', 3), (u'n192', 4), (u'n256', 5), (u'n512', 6), (u'n1024', 7), (u'n2048', 8)])
+    ___DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr1_FR2Mix_r16_fr2_r16._ext = None
+    __DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr1_FR2Mix_r16._cont = ASN1Dict([
+        (u'fr1-r16', ___DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr1_FR2Mix_r16_fr1_r16),
+        (u'fr2-r16', ___DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr1_FR2Mix_r16_fr2_r16),
+        ])
+    __DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr1_FR2Mix_r16._ext = []
+    _DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16._cont = ASN1Dict([
+        (u'fr1-Only-r16', __DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr1_Only_r16),
+        (u'fr2-Only-r16', __DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr2_Only_r16),
+        (u'fr1-FR2Mix-r16', __DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr1_FR2Mix_r16),
+        ])
+    _DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16._ext = []
+    DL_PRS_ResourcesBandCombination_r16._cont = ASN1Dict([
+        (u'bandList-r16', _DL_PRS_ResourcesBandCombination_r16_bandList_r16),
+        (u'maxNrOfDL-PRS-ResourcesAcrossAllFL-TRP-ResourceSet-r16', _DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16),
+        ])
+    DL_PRS_ResourcesBandCombination_r16._ext = []
+    
+    #-----< NR-DL-PRS-ResourceSetID-r16 >-----#
+    NR_DL_PRS_ResourceSetID_r16 = INT(name=u'NR-DL-PRS-ResourceSetID-r16', mode=MODE_TYPE)
+    NR_DL_PRS_ResourceSetID_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=7)], ev=None, er=[])
+    
+    #-----< NR-PositionCalculationAssistance-r16 >-----#
+    NR_PositionCalculationAssistance_r16 = SEQ(name=u'NR-PositionCalculationAssistance-r16', mode=MODE_TYPE)
+    _NR_PositionCalculationAssistance_r16_nr_TRP_LocationInfo_r16 = SEQ_OF(name=u'nr-TRP-LocationInfo-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-TRP-LocationInfo-r16')), opt=True)
+    _NR_PositionCalculationAssistance_r16_nr_DL_PRS_BeamInfo_r16 = SEQ_OF(name=u'nr-DL-PRS-BeamInfo-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-BeamInfo-r16')), opt=True)
+    _NR_PositionCalculationAssistance_r16_nr_RTD_Info_r16 = SEQ(name=u'nr-RTD-Info-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-RTD-Info-r16')), opt=True)
+    NR_PositionCalculationAssistance_r16._cont = ASN1Dict([
+        (u'nr-TRP-LocationInfo-r16', _NR_PositionCalculationAssistance_r16_nr_TRP_LocationInfo_r16),
+        (u'nr-DL-PRS-BeamInfo-r16', _NR_PositionCalculationAssistance_r16_nr_DL_PRS_BeamInfo_r16),
+        (u'nr-RTD-Info-r16', _NR_PositionCalculationAssistance_r16_nr_RTD_Info_r16),
+        ])
+    NR_PositionCalculationAssistance_r16._ext = []
+    
+    #-----< NR-RTD-Info-r16 >-----#
+    NR_RTD_Info_r16 = SEQ(name=u'NR-RTD-Info-r16', mode=MODE_TYPE)
+    _NR_RTD_Info_r16_referenceTRP_RTD_Info_r16 = SEQ(name=u'referenceTRP-RTD-Info-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'ReferenceTRP-RTD-Info-r16')))
+    _NR_RTD_Info_r16_rtd_InfoList_r16 = SEQ_OF(name=u'rtd-InfoList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'RTD-InfoList-r16')))
+    NR_RTD_Info_r16._cont = ASN1Dict([
+        (u'referenceTRP-RTD-Info-r16', _NR_RTD_Info_r16_referenceTRP_RTD_Info_r16),
+        (u'rtd-InfoList-r16', _NR_RTD_Info_r16_rtd_InfoList_r16),
+        ])
+    NR_RTD_Info_r16._ext = []
+    
+    #-----< ReferenceTRP-RTD-Info-r16 >-----#
+    ReferenceTRP_RTD_Info_r16 = SEQ(name=u'ReferenceTRP-RTD-Info-r16', mode=MODE_TYPE)
+    _ReferenceTRP_RTD_Info_r16_dl_PRS_ID_Ref_r16 = INT(name=u'dl-PRS-ID-Ref-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ReferenceTRP_RTD_Info_r16_dl_PRS_ID_Ref_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    _ReferenceTRP_RTD_Info_r16_nr_PhysCellID_Ref_r16 = INT(name=u'nr-PhysCellID-Ref-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-PhysCellID-r16')), opt=True)
+    _ReferenceTRP_RTD_Info_r16_nr_CellGlobalID_Ref_r16 = SEQ(name=u'nr-CellGlobalID-Ref-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NCGI-r15')), opt=True)
+    _ReferenceTRP_RTD_Info_r16_nr_ARFCN_Ref_r16 = INT(name=u'nr-ARFCN-Ref-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'ARFCN-ValueNR-r15')), opt=True)
+    _ReferenceTRP_RTD_Info_r16_refTime_r16 = CHOICE(name=u'refTime-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __ReferenceTRP_RTD_Info_r16_refTime_r16_systemFrameNumber_r16 = BIT_STR(name=u'systemFrameNumber-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ReferenceTRP_RTD_Info_r16_refTime_r16_systemFrameNumber_r16._const_sz = ASN1Set(rv=[10], rr=[], ev=None, er=[])
+    __ReferenceTRP_RTD_Info_r16_refTime_r16_utc_r16 = TIME_UTC(name=u'utc-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ReferenceTRP_RTD_Info_r16_refTime_r16._cont = ASN1Dict([
+        (u'systemFrameNumber-r16', __ReferenceTRP_RTD_Info_r16_refTime_r16_systemFrameNumber_r16),
+        (u'utc-r16', __ReferenceTRP_RTD_Info_r16_refTime_r16_utc_r16),
+        ])
+    _ReferenceTRP_RTD_Info_r16_refTime_r16._ext = []
+    _ReferenceTRP_RTD_Info_r16_rtd_RefQuality_r16 = SEQ(name=u'rtd-RefQuality-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-TimingQuality-r16')), opt=True)
+    ReferenceTRP_RTD_Info_r16._cont = ASN1Dict([
+        (u'dl-PRS-ID-Ref-r16', _ReferenceTRP_RTD_Info_r16_dl_PRS_ID_Ref_r16),
+        (u'nr-PhysCellID-Ref-r16', _ReferenceTRP_RTD_Info_r16_nr_PhysCellID_Ref_r16),
+        (u'nr-CellGlobalID-Ref-r16', _ReferenceTRP_RTD_Info_r16_nr_CellGlobalID_Ref_r16),
+        (u'nr-ARFCN-Ref-r16', _ReferenceTRP_RTD_Info_r16_nr_ARFCN_Ref_r16),
+        (u'refTime-r16', _ReferenceTRP_RTD_Info_r16_refTime_r16),
+        (u'rtd-RefQuality-r16', _ReferenceTRP_RTD_Info_r16_rtd_RefQuality_r16),
+        ])
+    ReferenceTRP_RTD_Info_r16._ext = []
+    
+    #-----< RTD-InfoList-r16 >-----#
+    RTD_InfoList_r16 = SEQ_OF(name=u'RTD-InfoList-r16', mode=MODE_TYPE)
+    _RTD_InfoList_r16__item_ = SEQ_OF(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'RTD-InfoListPerFreqLayer-r16')))
+    RTD_InfoList_r16._cont = _RTD_InfoList_r16__item_
+    RTD_InfoList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    
+    #-----< RTD-InfoListPerFreqLayer-r16 >-----#
+    RTD_InfoListPerFreqLayer_r16 = SEQ_OF(name=u'RTD-InfoListPerFreqLayer-r16', mode=MODE_TYPE)
+    _RTD_InfoListPerFreqLayer_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'RTD-InfoElement-r16')))
+    RTD_InfoListPerFreqLayer_r16._cont = _RTD_InfoListPerFreqLayer_r16__item_
+    RTD_InfoListPerFreqLayer_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    
+    #-----< RTD-InfoElement-r16 >-----#
+    RTD_InfoElement_r16 = SEQ(name=u'RTD-InfoElement-r16', mode=MODE_TYPE)
+    _RTD_InfoElement_r16_dl_PRS_ID_r16 = INT(name=u'dl-PRS-ID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RTD_InfoElement_r16_dl_PRS_ID_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    _RTD_InfoElement_r16_nr_PhysCellID_r16 = INT(name=u'nr-PhysCellID-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-PhysCellID-r16')), opt=True)
+    _RTD_InfoElement_r16_nr_CellGlobalID_r16 = SEQ(name=u'nr-CellGlobalID-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NCGI-r15')), opt=True)
+    _RTD_InfoElement_r16_nr_ARFCN_r16 = INT(name=u'nr-ARFCN-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'ARFCN-ValueNR-r15')), opt=True)
+    _RTD_InfoElement_r16_subframeOffset_r16 = INT(name=u'subframeOffset-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RTD_InfoElement_r16_subframeOffset_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1966079)], ev=None, er=[])
+    _RTD_InfoElement_r16_rtd_Quality_r16 = SEQ(name=u'rtd-Quality-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-TimingQuality-r16')))
+    RTD_InfoElement_r16._cont = ASN1Dict([
+        (u'dl-PRS-ID-r16', _RTD_InfoElement_r16_dl_PRS_ID_r16),
+        (u'nr-PhysCellID-r16', _RTD_InfoElement_r16_nr_PhysCellID_r16),
+        (u'nr-CellGlobalID-r16', _RTD_InfoElement_r16_nr_CellGlobalID_r16),
+        (u'nr-ARFCN-r16', _RTD_InfoElement_r16_nr_ARFCN_r16),
+        (u'subframeOffset-r16', _RTD_InfoElement_r16_subframeOffset_r16),
+        (u'rtd-Quality-r16', _RTD_InfoElement_r16_rtd_Quality_r16),
+        ])
+    RTD_InfoElement_r16._ext = []
+    
+    #-----< NR-SelectedDL-PRS-IndexList-r16 >-----#
+    NR_SelectedDL_PRS_IndexList_r16 = SEQ_OF(name=u'NR-SelectedDL-PRS-IndexList-r16', mode=MODE_TYPE)
+    _NR_SelectedDL_PRS_IndexList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-SelectedDL-PRS-PerFreq-r16')))
+    NR_SelectedDL_PRS_IndexList_r16._cont = _NR_SelectedDL_PRS_IndexList_r16__item_
+    NR_SelectedDL_PRS_IndexList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    
+    #-----< NR-SelectedDL-PRS-PerFreq-r16 >-----#
+    NR_SelectedDL_PRS_PerFreq_r16 = SEQ(name=u'NR-SelectedDL-PRS-PerFreq-r16', mode=MODE_TYPE)
+    _NR_SelectedDL_PRS_PerFreq_r16_nr_SelectedDL_PRS_FrequencyLayerIndex_r16 = INT(name=u'nr-SelectedDL-PRS-FrequencyLayerIndex-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_SelectedDL_PRS_PerFreq_r16_nr_SelectedDL_PRS_FrequencyLayerIndex_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=3)], ev=None, er=[])
+    _NR_SelectedDL_PRS_PerFreq_r16_nr_SelectedDL_PRS_IndexListPerFreq_r16 = SEQ_OF(name=u'nr-SelectedDL-PRS-IndexListPerFreq-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __NR_SelectedDL_PRS_PerFreq_r16_nr_SelectedDL_PRS_IndexListPerFreq_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-SelectedDL-PRS-IndexPerTRP-r16')))
+    _NR_SelectedDL_PRS_PerFreq_r16_nr_SelectedDL_PRS_IndexListPerFreq_r16._cont = __NR_SelectedDL_PRS_PerFreq_r16_nr_SelectedDL_PRS_IndexListPerFreq_r16__item_
+    _NR_SelectedDL_PRS_PerFreq_r16_nr_SelectedDL_PRS_IndexListPerFreq_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    NR_SelectedDL_PRS_PerFreq_r16._cont = ASN1Dict([
+        (u'nr-SelectedDL-PRS-FrequencyLayerIndex-r16', _NR_SelectedDL_PRS_PerFreq_r16_nr_SelectedDL_PRS_FrequencyLayerIndex_r16),
+        (u'nr-SelectedDL-PRS-IndexListPerFreq-r16', _NR_SelectedDL_PRS_PerFreq_r16_nr_SelectedDL_PRS_IndexListPerFreq_r16),
+        ])
+    NR_SelectedDL_PRS_PerFreq_r16._ext = []
+    
+    #-----< NR-SelectedDL-PRS-IndexPerTRP-r16 >-----#
+    NR_SelectedDL_PRS_IndexPerTRP_r16 = SEQ(name=u'NR-SelectedDL-PRS-IndexPerTRP-r16', mode=MODE_TYPE)
+    _NR_SelectedDL_PRS_IndexPerTRP_r16_nr_SelectedTRP_Index_r16 = INT(name=u'nr-SelectedTRP-Index-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_SelectedDL_PRS_IndexPerTRP_r16_nr_SelectedTRP_Index_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=None, er=[])
+    _NR_SelectedDL_PRS_IndexPerTRP_r16_dl_SelectedPRS_ResourceSetIndexList_r16 = SEQ_OF(name=u'dl-SelectedPRS-ResourceSetIndexList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __NR_SelectedDL_PRS_IndexPerTRP_r16_dl_SelectedPRS_ResourceSetIndexList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'DL-SelectedPRS-ResourceSetIndex-r16')))
+    _NR_SelectedDL_PRS_IndexPerTRP_r16_dl_SelectedPRS_ResourceSetIndexList_r16._cont = __NR_SelectedDL_PRS_IndexPerTRP_r16_dl_SelectedPRS_ResourceSetIndexList_r16__item_
+    _NR_SelectedDL_PRS_IndexPerTRP_r16_dl_SelectedPRS_ResourceSetIndexList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=2)], ev=None, er=[])
+    NR_SelectedDL_PRS_IndexPerTRP_r16._cont = ASN1Dict([
+        (u'nr-SelectedTRP-Index-r16', _NR_SelectedDL_PRS_IndexPerTRP_r16_nr_SelectedTRP_Index_r16),
+        (u'dl-SelectedPRS-ResourceSetIndexList-r16', _NR_SelectedDL_PRS_IndexPerTRP_r16_dl_SelectedPRS_ResourceSetIndexList_r16),
+        ])
+    NR_SelectedDL_PRS_IndexPerTRP_r16._ext = []
+    
+    #-----< DL-SelectedPRS-ResourceSetIndex-r16 >-----#
+    DL_SelectedPRS_ResourceSetIndex_r16 = SEQ(name=u'DL-SelectedPRS-ResourceSetIndex-r16', mode=MODE_TYPE)
+    _DL_SelectedPRS_ResourceSetIndex_r16_nr_DL_SelectedPRS_ResourceSetIndex_r16 = INT(name=u'nr-DL-SelectedPRS-ResourceSetIndex-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DL_SelectedPRS_ResourceSetIndex_r16_nr_DL_SelectedPRS_ResourceSetIndex_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1)], ev=None, er=[])
+    _DL_SelectedPRS_ResourceSetIndex_r16_dl_SelectedPRS_ResourceIndexList_r16 = SEQ_OF(name=u'dl-SelectedPRS-ResourceIndexList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __DL_SelectedPRS_ResourceSetIndex_r16_dl_SelectedPRS_ResourceIndexList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'DL-SelectedPRS-ResourceIndex-r16')))
+    _DL_SelectedPRS_ResourceSetIndex_r16_dl_SelectedPRS_ResourceIndexList_r16._cont = __DL_SelectedPRS_ResourceSetIndex_r16_dl_SelectedPRS_ResourceIndexList_r16__item_
+    _DL_SelectedPRS_ResourceSetIndex_r16_dl_SelectedPRS_ResourceIndexList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    DL_SelectedPRS_ResourceSetIndex_r16._cont = ASN1Dict([
+        (u'nr-DL-SelectedPRS-ResourceSetIndex-r16', _DL_SelectedPRS_ResourceSetIndex_r16_nr_DL_SelectedPRS_ResourceSetIndex_r16),
+        (u'dl-SelectedPRS-ResourceIndexList-r16', _DL_SelectedPRS_ResourceSetIndex_r16_dl_SelectedPRS_ResourceIndexList_r16),
+        ])
+    DL_SelectedPRS_ResourceSetIndex_r16._ext = None
+    
+    #-----< DL-SelectedPRS-ResourceIndex-r16 >-----#
+    DL_SelectedPRS_ResourceIndex_r16 = SEQ(name=u'DL-SelectedPRS-ResourceIndex-r16', mode=MODE_TYPE)
+    _DL_SelectedPRS_ResourceIndex_r16_nr_DL_SelectedPRS_ResourceIdIndex_r16 = INT(name=u'nr-DL-SelectedPRS-ResourceIdIndex-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DL_SelectedPRS_ResourceIndex_r16_nr_DL_SelectedPRS_ResourceIdIndex_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=None, er=[])
+    DL_SelectedPRS_ResourceIndex_r16._cont = ASN1Dict([
+        (u'nr-DL-SelectedPRS-ResourceIdIndex-r16', _DL_SelectedPRS_ResourceIndex_r16_nr_DL_SelectedPRS_ResourceIdIndex_r16),
+        ])
+    DL_SelectedPRS_ResourceIndex_r16._ext = []
+    
+    #-----< NR-SSB-Config-r16 >-----#
+    NR_SSB_Config_r16 = SEQ(name=u'NR-SSB-Config-r16', mode=MODE_TYPE)
+    _NR_SSB_Config_r16_nr_PhysCellID_r16 = INT(name=u'nr-PhysCellID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-PhysCellID-r16')))
+    _NR_SSB_Config_r16_nr_ARFCN_r16 = INT(name=u'nr-ARFCN-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'ARFCN-ValueNR-r15')))
+    _NR_SSB_Config_r16_ss_PBCH_BlockPower_r16 = INT(name=u'ss-PBCH-BlockPower-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_SSB_Config_r16_ss_PBCH_BlockPower_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-60, ub=50)], ev=None, er=[])
+    _NR_SSB_Config_r16_halfFrameIndex_r16 = INT(name=u'halfFrameIndex-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_SSB_Config_r16_halfFrameIndex_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1)], ev=None, er=[])
+    _NR_SSB_Config_r16_ssb_periodicity_r16 = ENUM(name=u'ssb-periodicity-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_SSB_Config_r16_ssb_periodicity_r16._cont = ASN1Dict([(u'ms5', 0), (u'ms10', 1), (u'ms20', 2), (u'ms40', 3), (u'ms80', 4), (u'ms160', 5)])
+    _NR_SSB_Config_r16_ssb_periodicity_r16._ext = []
+    _NR_SSB_Config_r16_ssb_PositionsInBurst_r16 = CHOICE(name=u'ssb-PositionsInBurst-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    __NR_SSB_Config_r16_ssb_PositionsInBurst_r16_shortBitmap_r16 = BIT_STR(name=u'shortBitmap-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_SSB_Config_r16_ssb_PositionsInBurst_r16_shortBitmap_r16._const_sz = ASN1Set(rv=[4], rr=[], ev=None, er=[])
+    __NR_SSB_Config_r16_ssb_PositionsInBurst_r16_mediumBitmap_r16 = BIT_STR(name=u'mediumBitmap-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_SSB_Config_r16_ssb_PositionsInBurst_r16_mediumBitmap_r16._const_sz = ASN1Set(rv=[8], rr=[], ev=None, er=[])
+    __NR_SSB_Config_r16_ssb_PositionsInBurst_r16_longBitmap_r16 = BIT_STR(name=u'longBitmap-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_SSB_Config_r16_ssb_PositionsInBurst_r16_longBitmap_r16._const_sz = ASN1Set(rv=[64], rr=[], ev=None, er=[])
+    _NR_SSB_Config_r16_ssb_PositionsInBurst_r16._cont = ASN1Dict([
+        (u'shortBitmap-r16', __NR_SSB_Config_r16_ssb_PositionsInBurst_r16_shortBitmap_r16),
+        (u'mediumBitmap-r16', __NR_SSB_Config_r16_ssb_PositionsInBurst_r16_mediumBitmap_r16),
+        (u'longBitmap-r16', __NR_SSB_Config_r16_ssb_PositionsInBurst_r16_longBitmap_r16),
+        ])
+    _NR_SSB_Config_r16_ssb_PositionsInBurst_r16._ext = None
+    _NR_SSB_Config_r16_ssb_SubcarrierSpacing_r16 = ENUM(name=u'ssb-SubcarrierSpacing-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_SSB_Config_r16_ssb_SubcarrierSpacing_r16._cont = ASN1Dict([(u'kHz15', 0), (u'kHz30', 1), (u'kHz60', 2), (u'kHz120', 3), (u'kHz240', 4)])
+    _NR_SSB_Config_r16_ssb_SubcarrierSpacing_r16._ext = []
+    _NR_SSB_Config_r16_sfn_SSB_Offset_r16 = INT(name=u'sfn-SSB-Offset-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_SSB_Config_r16_sfn_SSB_Offset_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    NR_SSB_Config_r16._cont = ASN1Dict([
+        (u'nr-PhysCellID-r16', _NR_SSB_Config_r16_nr_PhysCellID_r16),
+        (u'nr-ARFCN-r16', _NR_SSB_Config_r16_nr_ARFCN_r16),
+        (u'ss-PBCH-BlockPower-r16', _NR_SSB_Config_r16_ss_PBCH_BlockPower_r16),
+        (u'halfFrameIndex-r16', _NR_SSB_Config_r16_halfFrameIndex_r16),
+        (u'ssb-periodicity-r16', _NR_SSB_Config_r16_ssb_periodicity_r16),
+        (u'ssb-PositionsInBurst-r16', _NR_SSB_Config_r16_ssb_PositionsInBurst_r16),
+        (u'ssb-SubcarrierSpacing-r16', _NR_SSB_Config_r16_ssb_SubcarrierSpacing_r16),
+        (u'sfn-SSB-Offset-r16', _NR_SSB_Config_r16_sfn_SSB_Offset_r16),
+        ])
+    NR_SSB_Config_r16._ext = []
+    
+    #-----< NR-TimeStamp-r16 >-----#
+    NR_TimeStamp_r16 = SEQ(name=u'NR-TimeStamp-r16', mode=MODE_TYPE)
+    _NR_TimeStamp_r16_dl_PRS_ID_r16 = INT(name=u'dl-PRS-ID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_TimeStamp_r16_dl_PRS_ID_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    _NR_TimeStamp_r16_nr_PhysCellID_r16 = INT(name=u'nr-PhysCellID-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-PhysCellID-r16')), opt=True)
+    _NR_TimeStamp_r16_nr_CellGlobalID_r16 = SEQ(name=u'nr-CellGlobalID-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NCGI-r15')), opt=True)
+    _NR_TimeStamp_r16_nr_ARFCN_r16 = INT(name=u'nr-ARFCN-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'ARFCN-ValueNR-r15')), opt=True)
+    _NR_TimeStamp_r16_nr_SFN_r16 = INT(name=u'nr-SFN-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_TimeStamp_r16_nr_SFN_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1023)], ev=None, er=[])
+    _NR_TimeStamp_r16_nr_Slot_r16 = CHOICE(name=u'nr-Slot-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __NR_TimeStamp_r16_nr_Slot_r16_scs15_r16 = INT(name=u'scs15-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_TimeStamp_r16_nr_Slot_r16_scs15_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=9)], ev=None, er=[])
+    __NR_TimeStamp_r16_nr_Slot_r16_scs30_r16 = INT(name=u'scs30-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_TimeStamp_r16_nr_Slot_r16_scs30_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=19)], ev=None, er=[])
+    __NR_TimeStamp_r16_nr_Slot_r16_scs60_r16 = INT(name=u'scs60-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_TimeStamp_r16_nr_Slot_r16_scs60_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=39)], ev=None, er=[])
+    __NR_TimeStamp_r16_nr_Slot_r16_scs120_r16 = INT(name=u'scs120-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_TimeStamp_r16_nr_Slot_r16_scs120_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=79)], ev=None, er=[])
+    _NR_TimeStamp_r16_nr_Slot_r16._cont = ASN1Dict([
+        (u'scs15-r16', __NR_TimeStamp_r16_nr_Slot_r16_scs15_r16),
+        (u'scs30-r16', __NR_TimeStamp_r16_nr_Slot_r16_scs30_r16),
+        (u'scs60-r16', __NR_TimeStamp_r16_nr_Slot_r16_scs60_r16),
+        (u'scs120-r16', __NR_TimeStamp_r16_nr_Slot_r16_scs120_r16),
+        ])
+    _NR_TimeStamp_r16_nr_Slot_r16._ext = None
+    NR_TimeStamp_r16._cont = ASN1Dict([
+        (u'dl-PRS-ID-r16', _NR_TimeStamp_r16_dl_PRS_ID_r16),
+        (u'nr-PhysCellID-r16', _NR_TimeStamp_r16_nr_PhysCellID_r16),
+        (u'nr-CellGlobalID-r16', _NR_TimeStamp_r16_nr_CellGlobalID_r16),
+        (u'nr-ARFCN-r16', _NR_TimeStamp_r16_nr_ARFCN_r16),
+        (u'nr-SFN-r16', _NR_TimeStamp_r16_nr_SFN_r16),
+        (u'nr-Slot-r16', _NR_TimeStamp_r16_nr_Slot_r16),
+        ])
+    NR_TimeStamp_r16._ext = []
+    
+    #-----< NR-TimingQuality-r16 >-----#
+    NR_TimingQuality_r16 = SEQ(name=u'NR-TimingQuality-r16', mode=MODE_TYPE)
+    _NR_TimingQuality_r16_timingQualityValue_r16 = INT(name=u'timingQualityValue-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_TimingQuality_r16_timingQualityValue_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=31)], ev=None, er=[])
+    _NR_TimingQuality_r16_timingQualityResolution_r16 = ENUM(name=u'timingQualityResolution-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_TimingQuality_r16_timingQualityResolution_r16._cont = ASN1Dict([(u'mdot1', 0), (u'm1', 1), (u'm10', 2), (u'm30', 3)])
+    _NR_TimingQuality_r16_timingQualityResolution_r16._ext = []
+    NR_TimingQuality_r16._cont = ASN1Dict([
+        (u'timingQualityValue-r16', _NR_TimingQuality_r16_timingQualityValue_r16),
+        (u'timingQualityResolution-r16', _NR_TimingQuality_r16_timingQualityResolution_r16),
+        ])
+    NR_TimingQuality_r16._ext = []
+    
+    #-----< NR-TRP-LocationInfo-r16 >-----#
+    NR_TRP_LocationInfo_r16 = SEQ_OF(name=u'NR-TRP-LocationInfo-r16', mode=MODE_TYPE)
+    _NR_TRP_LocationInfo_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-TRP-LocationInfoPerFreqLayer-r16')))
+    NR_TRP_LocationInfo_r16._cont = _NR_TRP_LocationInfo_r16__item_
+    NR_TRP_LocationInfo_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    
+    #-----< NR-TRP-LocationInfoPerFreqLayer-r16 >-----#
+    NR_TRP_LocationInfoPerFreqLayer_r16 = SEQ(name=u'NR-TRP-LocationInfoPerFreqLayer-r16', mode=MODE_TYPE)
+    _NR_TRP_LocationInfoPerFreqLayer_r16_referencePoint_r16 = SEQ(name=u'referencePoint-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'ReferencePoint-r16')), opt=True)
+    _NR_TRP_LocationInfoPerFreqLayer_r16_trp_LocationInfoList_r16 = SEQ_OF(name=u'trp-LocationInfoList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_TRP_LocationInfoPerFreqLayer_r16_trp_LocationInfoList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'TRP-LocationInfoElement-r16')))
+    _NR_TRP_LocationInfoPerFreqLayer_r16_trp_LocationInfoList_r16._cont = __NR_TRP_LocationInfoPerFreqLayer_r16_trp_LocationInfoList_r16__item_
+    _NR_TRP_LocationInfoPerFreqLayer_r16_trp_LocationInfoList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    NR_TRP_LocationInfoPerFreqLayer_r16._cont = ASN1Dict([
+        (u'referencePoint-r16', _NR_TRP_LocationInfoPerFreqLayer_r16_referencePoint_r16),
+        (u'trp-LocationInfoList-r16', _NR_TRP_LocationInfoPerFreqLayer_r16_trp_LocationInfoList_r16),
+        ])
+    NR_TRP_LocationInfoPerFreqLayer_r16._ext = []
+    
+    #-----< TRP-LocationInfoElement-r16 >-----#
+    TRP_LocationInfoElement_r16 = SEQ(name=u'TRP-LocationInfoElement-r16', mode=MODE_TYPE)
+    _TRP_LocationInfoElement_r16_dl_PRS_ID_r16 = INT(name=u'dl-PRS-ID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _TRP_LocationInfoElement_r16_dl_PRS_ID_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    _TRP_LocationInfoElement_r16_nr_PhysCellID_r16 = INT(name=u'nr-PhysCellID-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-PhysCellID-r16')), opt=True)
+    _TRP_LocationInfoElement_r16_nr_CellGlobalID_r16 = SEQ(name=u'nr-CellGlobalID-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NCGI-r15')), opt=True)
+    _TRP_LocationInfoElement_r16_nr_ARFCN_r16 = INT(name=u'nr-ARFCN-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'ARFCN-ValueNR-r15')), opt=True)
+    _TRP_LocationInfoElement_r16_associated_DL_PRS_ID_r16 = INT(name=u'associated-DL-PRS-ID-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _TRP_LocationInfoElement_r16_associated_DL_PRS_ID_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    _TRP_LocationInfoElement_r16_trp_Location_r16 = SEQ(name=u'trp-Location-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'RelativeLocation-r16')), opt=True)
+    _TRP_LocationInfoElement_r16_trp_DL_PRS_ResourceSets_r16 = SEQ_OF(name=u'trp-DL-PRS-ResourceSets-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __TRP_LocationInfoElement_r16_trp_DL_PRS_ResourceSets_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'DL-PRS-ResourceSets-TRP-Element-r16')))
+    _TRP_LocationInfoElement_r16_trp_DL_PRS_ResourceSets_r16._cont = __TRP_LocationInfoElement_r16_trp_DL_PRS_ResourceSets_r16__item_
+    _TRP_LocationInfoElement_r16_trp_DL_PRS_ResourceSets_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=2)], ev=None, er=[])
+    TRP_LocationInfoElement_r16._cont = ASN1Dict([
+        (u'dl-PRS-ID-r16', _TRP_LocationInfoElement_r16_dl_PRS_ID_r16),
+        (u'nr-PhysCellID-r16', _TRP_LocationInfoElement_r16_nr_PhysCellID_r16),
+        (u'nr-CellGlobalID-r16', _TRP_LocationInfoElement_r16_nr_CellGlobalID_r16),
+        (u'nr-ARFCN-r16', _TRP_LocationInfoElement_r16_nr_ARFCN_r16),
+        (u'associated-DL-PRS-ID-r16', _TRP_LocationInfoElement_r16_associated_DL_PRS_ID_r16),
+        (u'trp-Location-r16', _TRP_LocationInfoElement_r16_trp_Location_r16),
+        (u'trp-DL-PRS-ResourceSets-r16', _TRP_LocationInfoElement_r16_trp_DL_PRS_ResourceSets_r16),
+        ])
+    TRP_LocationInfoElement_r16._ext = []
+    
+    #-----< DL-PRS-ResourceSets-TRP-Element-r16 >-----#
+    DL_PRS_ResourceSets_TRP_Element_r16 = SEQ(name=u'DL-PRS-ResourceSets-TRP-Element-r16', mode=MODE_TYPE)
+    _DL_PRS_ResourceSets_TRP_Element_r16_dl_PRS_ResourceSetARP_r16 = SEQ(name=u'dl-PRS-ResourceSetARP-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'RelativeLocation-r16')), opt=True)
+    _DL_PRS_ResourceSets_TRP_Element_r16_dl_PRS_Resource_ARP_List_r16 = SEQ_OF(name=u'dl-PRS-Resource-ARP-List-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __DL_PRS_ResourceSets_TRP_Element_r16_dl_PRS_Resource_ARP_List_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'DL-PRS-Resource-ARP-Element-r16')))
+    _DL_PRS_ResourceSets_TRP_Element_r16_dl_PRS_Resource_ARP_List_r16._cont = __DL_PRS_ResourceSets_TRP_Element_r16_dl_PRS_Resource_ARP_List_r16__item_
+    _DL_PRS_ResourceSets_TRP_Element_r16_dl_PRS_Resource_ARP_List_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    DL_PRS_ResourceSets_TRP_Element_r16._cont = ASN1Dict([
+        (u'dl-PRS-ResourceSetARP-r16', _DL_PRS_ResourceSets_TRP_Element_r16_dl_PRS_ResourceSetARP_r16),
+        (u'dl-PRS-Resource-ARP-List-r16', _DL_PRS_ResourceSets_TRP_Element_r16_dl_PRS_Resource_ARP_List_r16),
+        ])
+    DL_PRS_ResourceSets_TRP_Element_r16._ext = []
+    
+    #-----< DL-PRS-Resource-ARP-Element-r16 >-----#
+    DL_PRS_Resource_ARP_Element_r16 = SEQ(name=u'DL-PRS-Resource-ARP-Element-r16', mode=MODE_TYPE)
+    _DL_PRS_Resource_ARP_Element_r16_dl_PRS_Resource_ARP_location_r16 = SEQ(name=u'dl-PRS-Resource-ARP-location-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'RelativeLocation-r16')), opt=True)
+    DL_PRS_Resource_ARP_Element_r16._cont = ASN1Dict([
+        (u'dl-PRS-Resource-ARP-location-r16', _DL_PRS_Resource_ARP_Element_r16_dl_PRS_Resource_ARP_location_r16),
+        ])
+    DL_PRS_Resource_ARP_Element_r16._ext = []
+    
+    #-----< NR-UL-SRS-Capability-r16 >-----#
+    NR_UL_SRS_Capability_r16 = SEQ(name=u'NR-UL-SRS-Capability-r16', mode=MODE_TYPE)
+    _NR_UL_SRS_Capability_r16_srs_CapabilityBandList_r16 = SEQ_OF(name=u'srs-CapabilityBandList-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_UL_SRS_Capability_r16_srs_CapabilityBandList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'SRS-CapabilityPerBand-r16')))
+    _NR_UL_SRS_Capability_r16_srs_CapabilityBandList_r16._cont = __NR_UL_SRS_Capability_r16_srs_CapabilityBandList_r16__item_
+    _NR_UL_SRS_Capability_r16_srs_CapabilityBandList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1024)], ev=None, er=[])
+    _NR_UL_SRS_Capability_r16_srs_PosResourceConfigCA_BandList_r16 = SEQ_OF(name=u'srs-PosResourceConfigCA-BandList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __NR_UL_SRS_Capability_r16_srs_PosResourceConfigCA_BandList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'SRS-PosResourcesPerBand-r16')))
+    _NR_UL_SRS_Capability_r16_srs_PosResourceConfigCA_BandList_r16._cont = __NR_UL_SRS_Capability_r16_srs_PosResourceConfigCA_BandList_r16__item_
+    _NR_UL_SRS_Capability_r16_srs_PosResourceConfigCA_BandList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    _NR_UL_SRS_Capability_r16_maxNumberSRS_PosPathLossEstimateAllServingCells_r16 = ENUM(name=u'maxNumberSRS-PosPathLossEstimateAllServingCells-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_UL_SRS_Capability_r16_maxNumberSRS_PosPathLossEstimateAllServingCells_r16._cont = ASN1Dict([(u'n1', 0), (u'n4', 1), (u'n8', 2), (u'n16', 3)])
+    _NR_UL_SRS_Capability_r16_maxNumberSRS_PosPathLossEstimateAllServingCells_r16._ext = None
+    _NR_UL_SRS_Capability_r16_maxNumberSRS_PosSpatialRelationsAllServingCells_r16 = ENUM(name=u'maxNumberSRS-PosSpatialRelationsAllServingCells-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_UL_SRS_Capability_r16_maxNumberSRS_PosSpatialRelationsAllServingCells_r16._cont = ASN1Dict([(u'n0', 0), (u'n1', 1), (u'n2', 2), (u'n4', 3), (u'n8', 4), (u'n16', 5)])
+    _NR_UL_SRS_Capability_r16_maxNumberSRS_PosSpatialRelationsAllServingCells_r16._ext = None
+    NR_UL_SRS_Capability_r16._cont = ASN1Dict([
+        (u'srs-CapabilityBandList-r16', _NR_UL_SRS_Capability_r16_srs_CapabilityBandList_r16),
+        (u'srs-PosResourceConfigCA-BandList-r16', _NR_UL_SRS_Capability_r16_srs_PosResourceConfigCA_BandList_r16),
+        (u'maxNumberSRS-PosPathLossEstimateAllServingCells-r16', _NR_UL_SRS_Capability_r16_maxNumberSRS_PosPathLossEstimateAllServingCells_r16),
+        (u'maxNumberSRS-PosSpatialRelationsAllServingCells-r16', _NR_UL_SRS_Capability_r16_maxNumberSRS_PosSpatialRelationsAllServingCells_r16),
+        ])
+    NR_UL_SRS_Capability_r16._ext = []
+    
+    #-----< SRS-CapabilityPerBand-r16 >-----#
+    SRS_CapabilityPerBand_r16 = SEQ(name=u'SRS-CapabilityPerBand-r16', mode=MODE_TYPE)
+    _SRS_CapabilityPerBand_r16_freqBandIndicatorNR_r16 = INT(name=u'freqBandIndicatorNR-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'FreqBandIndicatorNR-r16')))
+    _SRS_CapabilityPerBand_r16_olpc_SRS_Pos_r16 = SEQ(name=u'olpc-SRS-Pos-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'OLPC-SRS-Pos-r16')), opt=True)
+    _SRS_CapabilityPerBand_r16_spatialRelationsSRS_Pos_r16 = SEQ(name=u'spatialRelationsSRS-Pos-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'SpatialRelationsSRS-Pos-r16')), opt=True)
+    SRS_CapabilityPerBand_r16._cont = ASN1Dict([
+        (u'freqBandIndicatorNR-r16', _SRS_CapabilityPerBand_r16_freqBandIndicatorNR_r16),
+        (u'olpc-SRS-Pos-r16', _SRS_CapabilityPerBand_r16_olpc_SRS_Pos_r16),
+        (u'spatialRelationsSRS-Pos-r16', _SRS_CapabilityPerBand_r16_spatialRelationsSRS_Pos_r16),
+        ])
+    SRS_CapabilityPerBand_r16._ext = []
+    
+    #-----< OLPC-SRS-Pos-r16 >-----#
+    OLPC_SRS_Pos_r16 = SEQ(name=u'OLPC-SRS-Pos-r16', mode=MODE_TYPE)
+    _OLPC_SRS_Pos_r16_olpc_SRS_PosBasedOnPRS_Serving_r16 = ENUM(name=u'olpc-SRS-PosBasedOnPRS-Serving-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _OLPC_SRS_Pos_r16_olpc_SRS_PosBasedOnPRS_Serving_r16._cont = ASN1Dict([(u'supported', 0)])
+    _OLPC_SRS_Pos_r16_olpc_SRS_PosBasedOnPRS_Serving_r16._ext = None
+    _OLPC_SRS_Pos_r16_olpc_SRS_PosBasedOnSSB_Neigh_r16 = ENUM(name=u'olpc-SRS-PosBasedOnSSB-Neigh-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _OLPC_SRS_Pos_r16_olpc_SRS_PosBasedOnSSB_Neigh_r16._cont = ASN1Dict([(u'supported', 0)])
+    _OLPC_SRS_Pos_r16_olpc_SRS_PosBasedOnSSB_Neigh_r16._ext = None
+    _OLPC_SRS_Pos_r16_olpc_SRS_PosBasedOnPRS_Neigh_r16 = ENUM(name=u'olpc-SRS-PosBasedOnPRS-Neigh-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _OLPC_SRS_Pos_r16_olpc_SRS_PosBasedOnPRS_Neigh_r16._cont = ASN1Dict([(u'supported', 0)])
+    _OLPC_SRS_Pos_r16_olpc_SRS_PosBasedOnPRS_Neigh_r16._ext = None
+    _OLPC_SRS_Pos_r16_maxNumberPathLossEstimatePerServing_r16 = ENUM(name=u'maxNumberPathLossEstimatePerServing-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _OLPC_SRS_Pos_r16_maxNumberPathLossEstimatePerServing_r16._cont = ASN1Dict([(u'n1', 0), (u'n4', 1), (u'n8', 2), (u'n16', 3)])
+    _OLPC_SRS_Pos_r16_maxNumberPathLossEstimatePerServing_r16._ext = None
+    OLPC_SRS_Pos_r16._cont = ASN1Dict([
+        (u'olpc-SRS-PosBasedOnPRS-Serving-r16', _OLPC_SRS_Pos_r16_olpc_SRS_PosBasedOnPRS_Serving_r16),
+        (u'olpc-SRS-PosBasedOnSSB-Neigh-r16', _OLPC_SRS_Pos_r16_olpc_SRS_PosBasedOnSSB_Neigh_r16),
+        (u'olpc-SRS-PosBasedOnPRS-Neigh-r16', _OLPC_SRS_Pos_r16_olpc_SRS_PosBasedOnPRS_Neigh_r16),
+        (u'maxNumberPathLossEstimatePerServing-r16', _OLPC_SRS_Pos_r16_maxNumberPathLossEstimatePerServing_r16),
+        ])
+    OLPC_SRS_Pos_r16._ext = []
+    
+    #-----< SpatialRelationsSRS-Pos-r16 >-----#
+    SpatialRelationsSRS_Pos_r16 = SEQ(name=u'SpatialRelationsSRS-Pos-r16', mode=MODE_TYPE)
+    _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnSSB_Serving_r16 = ENUM(name=u'spatialRelation-SRS-PosBasedOnSSB-Serving-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnSSB_Serving_r16._cont = ASN1Dict([(u'supported', 0)])
+    _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnSSB_Serving_r16._ext = None
+    _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnCSI_RS_Serving_r16 = ENUM(name=u'spatialRelation-SRS-PosBasedOnCSI-RS-Serving-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnCSI_RS_Serving_r16._cont = ASN1Dict([(u'supported', 0)])
+    _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnCSI_RS_Serving_r16._ext = None
+    _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnPRS_Serving_r16 = ENUM(name=u'spatialRelation-SRS-PosBasedOnPRS-Serving-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnPRS_Serving_r16._cont = ASN1Dict([(u'supported', 0)])
+    _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnPRS_Serving_r16._ext = None
+    _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnSRS_r16 = ENUM(name=u'spatialRelation-SRS-PosBasedOnSRS-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnSRS_r16._cont = ASN1Dict([(u'supported', 0)])
+    _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnSRS_r16._ext = None
+    _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnSSB_Neigh_r16 = ENUM(name=u'spatialRelation-SRS-PosBasedOnSSB-Neigh-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnSSB_Neigh_r16._cont = ASN1Dict([(u'supported', 0)])
+    _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnSSB_Neigh_r16._ext = None
+    _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnPRS_Neigh_r16 = ENUM(name=u'spatialRelation-SRS-PosBasedOnPRS-Neigh-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnPRS_Neigh_r16._cont = ASN1Dict([(u'supported', 0)])
+    _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnPRS_Neigh_r16._ext = None
+    SpatialRelationsSRS_Pos_r16._cont = ASN1Dict([
+        (u'spatialRelation-SRS-PosBasedOnSSB-Serving-r16', _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnSSB_Serving_r16),
+        (u'spatialRelation-SRS-PosBasedOnCSI-RS-Serving-r16', _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnCSI_RS_Serving_r16),
+        (u'spatialRelation-SRS-PosBasedOnPRS-Serving-r16', _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnPRS_Serving_r16),
+        (u'spatialRelation-SRS-PosBasedOnSRS-r16', _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnSRS_r16),
+        (u'spatialRelation-SRS-PosBasedOnSSB-Neigh-r16', _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnSSB_Neigh_r16),
+        (u'spatialRelation-SRS-PosBasedOnPRS-Neigh-r16', _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnPRS_Neigh_r16),
+        ])
+    SpatialRelationsSRS_Pos_r16._ext = []
+    
+    #-----< SRS-PosResourcesPerBand-r16 >-----#
+    SRS_PosResourcesPerBand_r16 = SEQ(name=u'SRS-PosResourcesPerBand-r16', mode=MODE_TYPE)
+    _SRS_PosResourcesPerBand_r16_freqBandIndicatorNR_r16 = INT(name=u'freqBandIndicatorNR-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'FreqBandIndicatorNR-r16')))
+    _SRS_PosResourcesPerBand_r16_maxNumberSRS_PosResourceSetsPerBWP_r16 = ENUM(name=u'maxNumberSRS-PosResourceSetsPerBWP-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SRS_PosResourcesPerBand_r16_maxNumberSRS_PosResourceSetsPerBWP_r16._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2), (u'n8', 3), (u'n12', 4), (u'n16', 5)])
+    _SRS_PosResourcesPerBand_r16_maxNumberSRS_PosResourceSetsPerBWP_r16._ext = None
+    _SRS_PosResourcesPerBand_r16_maxNumberSRS_PosResourcesPerBWP_r16 = ENUM(name=u'maxNumberSRS-PosResourcesPerBWP-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SRS_PosResourcesPerBand_r16_maxNumberSRS_PosResourcesPerBWP_r16._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2), (u'n8', 3), (u'n16', 4), (u'n32', 5), (u'n64', 6)])
+    _SRS_PosResourcesPerBand_r16_maxNumberSRS_PosResourcesPerBWP_r16._ext = None
+    _SRS_PosResourcesPerBand_r16_maxNumberPeriodicSRS_PosResourcesPerBWP_r16 = ENUM(name=u'maxNumberPeriodicSRS-PosResourcesPerBWP-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SRS_PosResourcesPerBand_r16_maxNumberPeriodicSRS_PosResourcesPerBWP_r16._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2), (u'n8', 3), (u'n16', 4), (u'n32', 5), (u'n64', 6)])
+    _SRS_PosResourcesPerBand_r16_maxNumberPeriodicSRS_PosResourcesPerBWP_r16._ext = None
+    _SRS_PosResourcesPerBand_r16_maxNumberAP_SRS_PosResourcesPerBWP_r16 = ENUM(name=u'maxNumberAP-SRS-PosResourcesPerBWP-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SRS_PosResourcesPerBand_r16_maxNumberAP_SRS_PosResourcesPerBWP_r16._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2), (u'n8', 3), (u'n16', 4), (u'n32', 5), (u'n64', 6)])
+    _SRS_PosResourcesPerBand_r16_maxNumberAP_SRS_PosResourcesPerBWP_r16._ext = None
+    _SRS_PosResourcesPerBand_r16_maxNumberSP_SRS_PosResourcesPerBWP_r16 = ENUM(name=u'maxNumberSP-SRS-PosResourcesPerBWP-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SRS_PosResourcesPerBand_r16_maxNumberSP_SRS_PosResourcesPerBWP_r16._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2), (u'n8', 3), (u'n16', 4), (u'n32', 5), (u'n64', 6)])
+    _SRS_PosResourcesPerBand_r16_maxNumberSP_SRS_PosResourcesPerBWP_r16._ext = None
+    SRS_PosResourcesPerBand_r16._cont = ASN1Dict([
+        (u'freqBandIndicatorNR-r16', _SRS_PosResourcesPerBand_r16_freqBandIndicatorNR_r16),
+        (u'maxNumberSRS-PosResourceSetsPerBWP-r16', _SRS_PosResourcesPerBand_r16_maxNumberSRS_PosResourceSetsPerBWP_r16),
+        (u'maxNumberSRS-PosResourcesPerBWP-r16', _SRS_PosResourcesPerBand_r16_maxNumberSRS_PosResourcesPerBWP_r16),
+        (u'maxNumberPeriodicSRS-PosResourcesPerBWP-r16', _SRS_PosResourcesPerBand_r16_maxNumberPeriodicSRS_PosResourcesPerBWP_r16),
+        (u'maxNumberAP-SRS-PosResourcesPerBWP-r16', _SRS_PosResourcesPerBand_r16_maxNumberAP_SRS_PosResourcesPerBWP_r16),
+        (u'maxNumberSP-SRS-PosResourcesPerBWP-r16', _SRS_PosResourcesPerBand_r16_maxNumberSP_SRS_PosResourcesPerBWP_r16),
+        ])
+    SRS_PosResourcesPerBand_r16._ext = []
+    
+    #-----< ReferencePoint-r16 >-----#
+    ReferencePoint_r16 = SEQ(name=u'ReferencePoint-r16', mode=MODE_TYPE)
+    _ReferencePoint_r16_referencePointGeographicLocation_r16 = CHOICE(name=u'referencePointGeographicLocation-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __ReferencePoint_r16_referencePointGeographicLocation_r16_location3D_r16 = SEQ(name=u'location3D-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'EllipsoidPointWithAltitudeAndUncertaintyEllipsoid')))
+    __ReferencePoint_r16_referencePointGeographicLocation_r16_ha_location3D_r16 = SEQ(name=u'ha-location3D-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'HighAccuracyEllipsoidPointWithAltitudeAndUncertaintyEllipsoid-r15')))
+    _ReferencePoint_r16_referencePointGeographicLocation_r16._cont = ASN1Dict([
+        (u'location3D-r16', __ReferencePoint_r16_referencePointGeographicLocation_r16_location3D_r16),
+        (u'ha-location3D-r16', __ReferencePoint_r16_referencePointGeographicLocation_r16_ha_location3D_r16),
+        ])
+    _ReferencePoint_r16_referencePointGeographicLocation_r16._ext = []
+    ReferencePoint_r16._cont = ASN1Dict([
+        (u'referencePointGeographicLocation-r16', _ReferencePoint_r16_referencePointGeographicLocation_r16),
+        ])
+    ReferencePoint_r16._ext = []
+    
+    #-----< RelativeLocation-r16 >-----#
+    RelativeLocation_r16 = SEQ(name=u'RelativeLocation-r16', mode=MODE_TYPE)
+    _RelativeLocation_r16_milli_arc_second_units_r16 = ENUM(name=u'milli-arc-second-units-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RelativeLocation_r16_milli_arc_second_units_r16._cont = ASN1Dict([(u'mas0-03', 0), (u'mas0-3', 1), (u'mas3', 2), (u'mas30', 3)])
+    _RelativeLocation_r16_milli_arc_second_units_r16._ext = []
+    _RelativeLocation_r16_height_units_r16 = ENUM(name=u'height-units-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RelativeLocation_r16_height_units_r16._cont = ASN1Dict([(u'mm', 0), (u'cm', 1), (u'm', 2)])
+    _RelativeLocation_r16_height_units_r16._ext = []
+    _RelativeLocation_r16_delta_latitude_r16 = SEQ(name=u'delta-latitude-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'Delta-Latitude-r16')))
+    _RelativeLocation_r16_delta_longitude_r16 = SEQ(name=u'delta-longitude-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'Delta-Longitude-r16')))
+    _RelativeLocation_r16_delta_height_r16 = SEQ(name=u'delta-height-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'Delta-Height-r16')))
+    _RelativeLocation_r16_locationUNC_r16 = SEQ(name=u'locationUNC-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'LocationUncertainty-r16')), opt=True)
+    RelativeLocation_r16._cont = ASN1Dict([
+        (u'milli-arc-second-units-r16', _RelativeLocation_r16_milli_arc_second_units_r16),
+        (u'height-units-r16', _RelativeLocation_r16_height_units_r16),
+        (u'delta-latitude-r16', _RelativeLocation_r16_delta_latitude_r16),
+        (u'delta-longitude-r16', _RelativeLocation_r16_delta_longitude_r16),
+        (u'delta-height-r16', _RelativeLocation_r16_delta_height_r16),
+        (u'locationUNC-r16', _RelativeLocation_r16_locationUNC_r16),
+        ])
+    RelativeLocation_r16._ext = []
+    
+    #-----< Delta-Latitude-r16 >-----#
+    Delta_Latitude_r16 = SEQ(name=u'Delta-Latitude-r16', mode=MODE_TYPE)
+    _Delta_Latitude_r16_delta_Latitude_r16 = INT(name=u'delta-Latitude-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Delta_Latitude_r16_delta_Latitude_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-1024, ub=1023)], ev=None, er=[])
+    _Delta_Latitude_r16_coarse_delta_Latitude_r16 = INT(name=u'coarse-delta-Latitude-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Delta_Latitude_r16_coarse_delta_Latitude_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4095)], ev=None, er=[])
+    Delta_Latitude_r16._cont = ASN1Dict([
+        (u'delta-Latitude-r16', _Delta_Latitude_r16_delta_Latitude_r16),
+        (u'coarse-delta-Latitude-r16', _Delta_Latitude_r16_coarse_delta_Latitude_r16),
+        ])
+    Delta_Latitude_r16._ext = []
+    
+    #-----< Delta-Longitude-r16 >-----#
+    Delta_Longitude_r16 = SEQ(name=u'Delta-Longitude-r16', mode=MODE_TYPE)
+    _Delta_Longitude_r16_delta_Longitude_r16 = INT(name=u'delta-Longitude-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Delta_Longitude_r16_delta_Longitude_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-1024, ub=1023)], ev=None, er=[])
+    _Delta_Longitude_r16_coarse_delta_Longitude_r16 = INT(name=u'coarse-delta-Longitude-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Delta_Longitude_r16_coarse_delta_Longitude_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4095)], ev=None, er=[])
+    Delta_Longitude_r16._cont = ASN1Dict([
+        (u'delta-Longitude-r16', _Delta_Longitude_r16_delta_Longitude_r16),
+        (u'coarse-delta-Longitude-r16', _Delta_Longitude_r16_coarse_delta_Longitude_r16),
+        ])
+    Delta_Longitude_r16._ext = []
+    
+    #-----< Delta-Height-r16 >-----#
+    Delta_Height_r16 = SEQ(name=u'Delta-Height-r16', mode=MODE_TYPE)
+    _Delta_Height_r16_delta_Height_r16 = INT(name=u'delta-Height-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Delta_Height_r16_delta_Height_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-1024, ub=1023)], ev=None, er=[])
+    _Delta_Height_r16_coarse_delta_Height_r16 = INT(name=u'coarse-delta-Height-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Delta_Height_r16_coarse_delta_Height_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4095)], ev=None, er=[])
+    Delta_Height_r16._cont = ASN1Dict([
+        (u'delta-Height-r16', _Delta_Height_r16_delta_Height_r16),
+        (u'coarse-delta-Height-r16', _Delta_Height_r16_coarse_delta_Height_r16),
+        ])
+    Delta_Height_r16._ext = []
+    
+    #-----< LocationUncertainty-r16 >-----#
+    LocationUncertainty_r16 = SEQ(name=u'LocationUncertainty-r16', mode=MODE_TYPE)
+    _LocationUncertainty_r16_horizontalUncertainty_r16 = INT(name=u'horizontalUncertainty-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _LocationUncertainty_r16_horizontalUncertainty_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    _LocationUncertainty_r16_horizontalConfidence_r16 = INT(name=u'horizontalConfidence-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _LocationUncertainty_r16_horizontalConfidence_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=100)], ev=None, er=[])
+    _LocationUncertainty_r16_verticalUncertainty_r16 = INT(name=u'verticalUncertainty-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _LocationUncertainty_r16_verticalUncertainty_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    _LocationUncertainty_r16_verticalConfidence_r16 = INT(name=u'verticalConfidence-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _LocationUncertainty_r16_verticalConfidence_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=100)], ev=None, er=[])
+    LocationUncertainty_r16._cont = ASN1Dict([
+        (u'horizontalUncertainty-r16', _LocationUncertainty_r16_horizontalUncertainty_r16),
+        (u'horizontalConfidence-r16', _LocationUncertainty_r16_horizontalConfidence_r16),
+        (u'verticalUncertainty-r16', _LocationUncertainty_r16_verticalUncertainty_r16),
+        (u'verticalConfidence-r16', _LocationUncertainty_r16_verticalConfidence_r16),
+        ])
+    LocationUncertainty_r16._ext = None
     
     #-----< OTDOA-ProvideAssistanceData >-----#
     OTDOA_ProvideAssistanceData = SEQ(name=u'OTDOA-ProvideAssistanceData', mode=MODE_TYPE)
@@ -3208,6 +5094,7 @@ class LPP_PDU_Definitions:
     _GNSS_CommonAssistData_gnss_RTK_ReferenceStationInfo_r15 = SEQ(name=u'gnss-RTK-ReferenceStationInfo-r15', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-RTK-ReferenceStationInfo-r15')), opt=True, group=0)
     _GNSS_CommonAssistData_gnss_RTK_CommonObservationInfo_r15 = SEQ(name=u'gnss-RTK-CommonObservationInfo-r15', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-RTK-CommonObservationInfo-r15')), opt=True, group=0)
     _GNSS_CommonAssistData_gnss_RTK_AuxiliaryStationData_r15 = SEQ(name=u'gnss-RTK-AuxiliaryStationData-r15', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-RTK-AuxiliaryStationData-r15')), opt=True, group=0)
+    _GNSS_CommonAssistData_gnss_SSR_CorrectionPoints_r16 = SEQ(name=u'gnss-SSR-CorrectionPoints-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-CorrectionPoints-r16')), opt=True, group=1)
     GNSS_CommonAssistData._cont = ASN1Dict([
         (u'gnss-ReferenceTime', _GNSS_CommonAssistData_gnss_ReferenceTime),
         (u'gnss-ReferenceLocation', _GNSS_CommonAssistData_gnss_ReferenceLocation),
@@ -3216,8 +5103,9 @@ class LPP_PDU_Definitions:
         (u'gnss-RTK-ReferenceStationInfo-r15', _GNSS_CommonAssistData_gnss_RTK_ReferenceStationInfo_r15),
         (u'gnss-RTK-CommonObservationInfo-r15', _GNSS_CommonAssistData_gnss_RTK_CommonObservationInfo_r15),
         (u'gnss-RTK-AuxiliaryStationData-r15', _GNSS_CommonAssistData_gnss_RTK_AuxiliaryStationData_r15),
+        (u'gnss-SSR-CorrectionPoints-r16', _GNSS_CommonAssistData_gnss_SSR_CorrectionPoints_r16),
         ])
-    GNSS_CommonAssistData._ext = [u'gnss-RTK-ReferenceStationInfo-r15', u'gnss-RTK-CommonObservationInfo-r15', u'gnss-RTK-AuxiliaryStationData-r15']
+    GNSS_CommonAssistData._ext = [u'gnss-RTK-ReferenceStationInfo-r15', u'gnss-RTK-CommonObservationInfo-r15', u'gnss-RTK-AuxiliaryStationData-r15', u'gnss-SSR-CorrectionPoints-r16']
     
     #-----< GNSS-GenericAssistData >-----#
     GNSS_GenericAssistData = SEQ_OF(name=u'GNSS-GenericAssistData', mode=MODE_TYPE)
@@ -3248,6 +5136,12 @@ class LPP_PDU_Definitions:
     _GNSS_GenericAssistDataElement_gnss_SSR_OrbitCorrections_r15 = SEQ(name=u'gnss-SSR-OrbitCorrections-r15', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-OrbitCorrections-r15')), opt=True, group=1)
     _GNSS_GenericAssistDataElement_gnss_SSR_ClockCorrections_r15 = SEQ(name=u'gnss-SSR-ClockCorrections-r15', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-ClockCorrections-r15')), opt=True, group=1)
     _GNSS_GenericAssistDataElement_gnss_SSR_CodeBias_r15 = SEQ(name=u'gnss-SSR-CodeBias-r15', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-CodeBias-r15')), opt=True, group=1)
+    _GNSS_GenericAssistDataElement_gnss_SSR_URA_r16 = SEQ(name=u'gnss-SSR-URA-r16', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-URA-r16')), opt=True, group=2)
+    _GNSS_GenericAssistDataElement_gnss_SSR_PhaseBias_r16 = SEQ(name=u'gnss-SSR-PhaseBias-r16', mode=MODE_TYPE, tag=(22, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-PhaseBias-r16')), opt=True, group=2)
+    _GNSS_GenericAssistDataElement_gnss_SSR_STEC_Correction_r16 = SEQ(name=u'gnss-SSR-STEC-Correction-r16', mode=MODE_TYPE, tag=(23, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-STEC-Correction-r16')), opt=True, group=2)
+    _GNSS_GenericAssistDataElement_gnss_SSR_GriddedCorrection_r16 = SEQ(name=u'gnss-SSR-GriddedCorrection-r16', mode=MODE_TYPE, tag=(24, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-GriddedCorrection-r16')), opt=True, group=2)
+    _GNSS_GenericAssistDataElement_navic_DifferentialCorrections_r16 = SEQ(name=u'navic-DifferentialCorrections-r16', mode=MODE_TYPE, tag=(25, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NavIC-DifferentialCorrections-r16')), opt=True, group=2)
+    _GNSS_GenericAssistDataElement_navic_GridModel_r16 = SEQ(name=u'navic-GridModel-r16', mode=MODE_TYPE, tag=(26, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NavIC-GridModelParameter-r16')), opt=True, group=2)
     GNSS_GenericAssistDataElement._cont = ASN1Dict([
         (u'gnss-ID', _GNSS_GenericAssistDataElement_gnss_ID),
         (u'sbas-ID', _GNSS_GenericAssistDataElement_sbas_ID),
@@ -3270,8 +5164,14 @@ class LPP_PDU_Definitions:
         (u'gnss-SSR-OrbitCorrections-r15', _GNSS_GenericAssistDataElement_gnss_SSR_OrbitCorrections_r15),
         (u'gnss-SSR-ClockCorrections-r15', _GNSS_GenericAssistDataElement_gnss_SSR_ClockCorrections_r15),
         (u'gnss-SSR-CodeBias-r15', _GNSS_GenericAssistDataElement_gnss_SSR_CodeBias_r15),
+        (u'gnss-SSR-URA-r16', _GNSS_GenericAssistDataElement_gnss_SSR_URA_r16),
+        (u'gnss-SSR-PhaseBias-r16', _GNSS_GenericAssistDataElement_gnss_SSR_PhaseBias_r16),
+        (u'gnss-SSR-STEC-Correction-r16', _GNSS_GenericAssistDataElement_gnss_SSR_STEC_Correction_r16),
+        (u'gnss-SSR-GriddedCorrection-r16', _GNSS_GenericAssistDataElement_gnss_SSR_GriddedCorrection_r16),
+        (u'navic-DifferentialCorrections-r16', _GNSS_GenericAssistDataElement_navic_DifferentialCorrections_r16),
+        (u'navic-GridModel-r16', _GNSS_GenericAssistDataElement_navic_GridModel_r16),
         ])
-    GNSS_GenericAssistDataElement._ext = [u'bds-DifferentialCorrections-r12', u'bds-GridModel-r12', u'gnss-RTK-Observations-r15', u'glo-RTK-BiasInformation-r15', u'gnss-RTK-MAC-CorrectionDifferences-r15', u'gnss-RTK-Residuals-r15', u'gnss-RTK-FKP-Gradients-r15', u'gnss-SSR-OrbitCorrections-r15', u'gnss-SSR-ClockCorrections-r15', u'gnss-SSR-CodeBias-r15']
+    GNSS_GenericAssistDataElement._ext = [u'bds-DifferentialCorrections-r12', u'bds-GridModel-r12', u'gnss-RTK-Observations-r15', u'glo-RTK-BiasInformation-r15', u'gnss-RTK-MAC-CorrectionDifferences-r15', u'gnss-RTK-Residuals-r15', u'gnss-RTK-FKP-Gradients-r15', u'gnss-SSR-OrbitCorrections-r15', u'gnss-SSR-ClockCorrections-r15', u'gnss-SSR-CodeBias-r15', u'gnss-SSR-URA-r16', u'gnss-SSR-PhaseBias-r16', u'gnss-SSR-STEC-Correction-r16', u'gnss-SSR-GriddedCorrection-r16', u'navic-DifferentialCorrections-r16', u'navic-GridModel-r16']
     
     #-----< GNSS-PeriodicAssistData-r15 >-----#
     GNSS_PeriodicAssistData_r15 = SEQ(name=u'GNSS-PeriodicAssistData-r15', mode=MODE_TYPE)
@@ -3283,6 +5183,10 @@ class LPP_PDU_Definitions:
     _GNSS_PeriodicAssistData_r15_gnss_SSR_PeriodicOrbitCorrections_r15 = SEQ(name=u'gnss-SSR-PeriodicOrbitCorrections-r15', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-PeriodicControlParam-r15')), opt=True)
     _GNSS_PeriodicAssistData_r15_gnss_SSR_PeriodicClockCorrections_r15 = SEQ(name=u'gnss-SSR-PeriodicClockCorrections-r15', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-PeriodicControlParam-r15')), opt=True)
     _GNSS_PeriodicAssistData_r15_gnss_SSR_PeriodicCodeBias_r15 = SEQ(name=u'gnss-SSR-PeriodicCodeBias-r15', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-PeriodicControlParam-r15')), opt=True)
+    _GNSS_PeriodicAssistData_r15_gnss_SSR_PeriodicURA_r16 = SEQ(name=u'gnss-SSR-PeriodicURA-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-PeriodicControlParam-r15')), opt=True, group=0)
+    _GNSS_PeriodicAssistData_r15_gnss_SSR_PeriodicPhaseBias_r16 = SEQ(name=u'gnss-SSR-PeriodicPhaseBias-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-PeriodicControlParam-r15')), opt=True, group=0)
+    _GNSS_PeriodicAssistData_r15_gnss_SSR_PeriodicSTEC_Correction_r16 = SEQ(name=u'gnss-SSR-PeriodicSTEC-Correction-r16', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-PeriodicControlParam-r15')), opt=True, group=0)
+    _GNSS_PeriodicAssistData_r15_gnss_SSR_PeriodicGriddedCorrection_r16 = SEQ(name=u'gnss-SSR-PeriodicGriddedCorrection-r16', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-PeriodicControlParam-r15')), opt=True, group=0)
     GNSS_PeriodicAssistData_r15._cont = ASN1Dict([
         (u'gnss-RTK-PeriodicObservations-r15', _GNSS_PeriodicAssistData_r15_gnss_RTK_PeriodicObservations_r15),
         (u'glo-RTK-PeriodicBiasInformation-r15', _GNSS_PeriodicAssistData_r15_glo_RTK_PeriodicBiasInformation_r15),
@@ -3292,8 +5196,12 @@ class LPP_PDU_Definitions:
         (u'gnss-SSR-PeriodicOrbitCorrections-r15', _GNSS_PeriodicAssistData_r15_gnss_SSR_PeriodicOrbitCorrections_r15),
         (u'gnss-SSR-PeriodicClockCorrections-r15', _GNSS_PeriodicAssistData_r15_gnss_SSR_PeriodicClockCorrections_r15),
         (u'gnss-SSR-PeriodicCodeBias-r15', _GNSS_PeriodicAssistData_r15_gnss_SSR_PeriodicCodeBias_r15),
+        (u'gnss-SSR-PeriodicURA-r16', _GNSS_PeriodicAssistData_r15_gnss_SSR_PeriodicURA_r16),
+        (u'gnss-SSR-PeriodicPhaseBias-r16', _GNSS_PeriodicAssistData_r15_gnss_SSR_PeriodicPhaseBias_r16),
+        (u'gnss-SSR-PeriodicSTEC-Correction-r16', _GNSS_PeriodicAssistData_r15_gnss_SSR_PeriodicSTEC_Correction_r16),
+        (u'gnss-SSR-PeriodicGriddedCorrection-r16', _GNSS_PeriodicAssistData_r15_gnss_SSR_PeriodicGriddedCorrection_r16),
         ])
-    GNSS_PeriodicAssistData_r15._ext = []
+    GNSS_PeriodicAssistData_r15._ext = [u'gnss-SSR-PeriodicURA-r16', u'gnss-SSR-PeriodicPhaseBias-r16', u'gnss-SSR-PeriodicSTEC-Correction-r16', u'gnss-SSR-PeriodicGriddedCorrection-r16']
     
     #-----< GNSS-ReferenceTime >-----#
     GNSS_ReferenceTime = SEQ(name=u'GNSS-ReferenceTime', mode=MODE_TYPE)
@@ -3488,11 +5396,13 @@ class LPP_PDU_Definitions:
     GNSS_IonosphericModel = SEQ(name=u'GNSS-IonosphericModel', mode=MODE_TYPE)
     _GNSS_IonosphericModel_klobucharModel = SEQ(name=u'klobucharModel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'KlobucharModelParameter')), opt=True)
     _GNSS_IonosphericModel_neQuickModel = SEQ(name=u'neQuickModel', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NeQuickModelParameter')), opt=True)
+    _GNSS_IonosphericModel_klobucharModel2_r16 = SEQ(name=u'klobucharModel2-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'KlobucharModel2Parameter-r16')), opt=True, group=0)
     GNSS_IonosphericModel._cont = ASN1Dict([
         (u'klobucharModel', _GNSS_IonosphericModel_klobucharModel),
         (u'neQuickModel', _GNSS_IonosphericModel_neQuickModel),
+        (u'klobucharModel2-r16', _GNSS_IonosphericModel_klobucharModel2_r16),
         ])
-    GNSS_IonosphericModel._ext = []
+    GNSS_IonosphericModel._ext = [u'klobucharModel2-r16']
     
     #-----< KlobucharModelParameter >-----#
     KlobucharModelParameter = SEQ(name=u'KlobucharModelParameter', mode=MODE_TYPE)
@@ -3526,6 +5436,39 @@ class LPP_PDU_Definitions:
         (u'beta3', _KlobucharModelParameter_beta3),
         ])
     KlobucharModelParameter._ext = []
+    
+    #-----< KlobucharModel2Parameter-r16 >-----#
+    KlobucharModel2Parameter_r16 = SEQ(name=u'KlobucharModel2Parameter-r16', mode=MODE_TYPE)
+    _KlobucharModel2Parameter_r16_alfa1_r16 = INT(name=u'alfa1-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _KlobucharModel2Parameter_r16_alfa1_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1023)], ev=None, er=[])
+    _KlobucharModel2Parameter_r16_alfa2_r16 = INT(name=u'alfa2-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _KlobucharModel2Parameter_r16_alfa2_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-128, ub=127)], ev=None, er=[])
+    _KlobucharModel2Parameter_r16_alfa3_r16 = INT(name=u'alfa3-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _KlobucharModel2Parameter_r16_alfa3_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    _KlobucharModel2Parameter_r16_alfa4_r16 = INT(name=u'alfa4-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _KlobucharModel2Parameter_r16_alfa4_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    _KlobucharModel2Parameter_r16_alfa5_r16 = INT(name=u'alfa5-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _KlobucharModel2Parameter_r16_alfa5_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    _KlobucharModel2Parameter_r16_alfa6_r16 = INT(name=u'alfa6-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _KlobucharModel2Parameter_r16_alfa6_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-128, ub=127)], ev=None, er=[])
+    _KlobucharModel2Parameter_r16_alfa7_r16 = INT(name=u'alfa7-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _KlobucharModel2Parameter_r16_alfa7_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-128, ub=127)], ev=None, er=[])
+    _KlobucharModel2Parameter_r16_alfa8_r16 = INT(name=u'alfa8-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _KlobucharModel2Parameter_r16_alfa8_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-128, ub=127)], ev=None, er=[])
+    _KlobucharModel2Parameter_r16_alfa9_r16 = INT(name=u'alfa9-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _KlobucharModel2Parameter_r16_alfa9_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-128, ub=127)], ev=None, er=[])
+    KlobucharModel2Parameter_r16._cont = ASN1Dict([
+        (u'alfa1-r16', _KlobucharModel2Parameter_r16_alfa1_r16),
+        (u'alfa2-r16', _KlobucharModel2Parameter_r16_alfa2_r16),
+        (u'alfa3-r16', _KlobucharModel2Parameter_r16_alfa3_r16),
+        (u'alfa4-r16', _KlobucharModel2Parameter_r16_alfa4_r16),
+        (u'alfa5-r16', _KlobucharModel2Parameter_r16_alfa5_r16),
+        (u'alfa6-r16', _KlobucharModel2Parameter_r16_alfa6_r16),
+        (u'alfa7-r16', _KlobucharModel2Parameter_r16_alfa7_r16),
+        (u'alfa8-r16', _KlobucharModel2Parameter_r16_alfa8_r16),
+        (u'alfa9-r16', _KlobucharModel2Parameter_r16_alfa9_r16),
+        ])
+    KlobucharModel2Parameter_r16._ext = []
     
     #-----< NeQuickModelParameter >-----#
     NeQuickModelParameter = SEQ(name=u'NeQuickModelParameter', mode=MODE_TYPE)
@@ -3601,6 +5544,7 @@ class LPP_PDU_Definitions:
     _GNSS_RTK_ReferenceStationInfo_r15_antennaDescription_r15 = SEQ(name=u'antennaDescription-r15', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'AntennaDescription-r15')), opt=True)
     _GNSS_RTK_ReferenceStationInfo_r15_antenna_reference_point_unc_r15 = SEQ(name=u'antenna-reference-point-unc-r15', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'AntennaReferencePointUnc-r15')), opt=True)
     _GNSS_RTK_ReferenceStationInfo_r15_physical_reference_station_info_r15 = SEQ(name=u'physical-reference-station-info-r15', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'PhysicalReferenceStationInfo-r15')), opt=True)
+    _GNSS_RTK_ReferenceStationInfo_r15_equalIntegerAmbiguityLevel_r16 = CHOICE(name=u'equalIntegerAmbiguityLevel-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'EqualIntegerAmbiguityLevel-r16')), opt=True, group=0)
     GNSS_RTK_ReferenceStationInfo_r15._cont = ASN1Dict([
         (u'referenceStationID-r15', _GNSS_RTK_ReferenceStationInfo_r15_referenceStationID_r15),
         (u'referenceStationIndicator-r15', _GNSS_RTK_ReferenceStationInfo_r15_referenceStationIndicator_r15),
@@ -3611,8 +5555,9 @@ class LPP_PDU_Definitions:
         (u'antennaDescription-r15', _GNSS_RTK_ReferenceStationInfo_r15_antennaDescription_r15),
         (u'antenna-reference-point-unc-r15', _GNSS_RTK_ReferenceStationInfo_r15_antenna_reference_point_unc_r15),
         (u'physical-reference-station-info-r15', _GNSS_RTK_ReferenceStationInfo_r15_physical_reference_station_info_r15),
+        (u'equalIntegerAmbiguityLevel-r16', _GNSS_RTK_ReferenceStationInfo_r15_equalIntegerAmbiguityLevel_r16),
         ])
-    GNSS_RTK_ReferenceStationInfo_r15._ext = []
+    GNSS_RTK_ReferenceStationInfo_r15._ext = [u'equalIntegerAmbiguityLevel-r16']
     
     #-----< AntennaDescription-r15 >-----#
     AntennaDescription_r15 = SEQ(name=u'AntennaDescription-r15', mode=MODE_TYPE)
@@ -3669,6 +5614,22 @@ class LPP_PDU_Definitions:
         (u'physical-ARP-unc-r15', _PhysicalReferenceStationInfo_r15_physical_ARP_unc_r15),
         ])
     PhysicalReferenceStationInfo_r15._ext = []
+    
+    #-----< EqualIntegerAmbiguityLevel-r16 >-----#
+    EqualIntegerAmbiguityLevel_r16 = CHOICE(name=u'EqualIntegerAmbiguityLevel-r16', mode=MODE_TYPE)
+    _EqualIntegerAmbiguityLevel_r16_allReferenceStations_r16 = NULL(name=u'allReferenceStations-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _EqualIntegerAmbiguityLevel_r16_referenceStationList_r16 = SEQ_OF(name=u'referenceStationList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'ReferenceStationList-r16')))
+    EqualIntegerAmbiguityLevel_r16._cont = ASN1Dict([
+        (u'allReferenceStations-r16', _EqualIntegerAmbiguityLevel_r16_allReferenceStations_r16),
+        (u'referenceStationList-r16', _EqualIntegerAmbiguityLevel_r16_referenceStationList_r16),
+        ])
+    EqualIntegerAmbiguityLevel_r16._ext = None
+    
+    #-----< ReferenceStationList-r16 >-----#
+    ReferenceStationList_r16 = SEQ_OF(name=u'ReferenceStationList-r16', mode=MODE_TYPE)
+    _ReferenceStationList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-ReferenceStationID-r15')))
+    ReferenceStationList_r16._cont = _ReferenceStationList_r16__item_
+    ReferenceStationList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
     
     #-----< GNSS-RTK-CommonObservationInfo-r15 >-----#
     GNSS_RTK_CommonObservationInfo_r15 = SEQ(name=u'GNSS-RTK-CommonObservationInfo-r15', mode=MODE_TYPE)
@@ -3746,6 +5707,80 @@ class LPP_PDU_Definitions:
         (u'verticalConfidence-r15', _Aux_ARP_Unc_r15_verticalConfidence_r15),
         ])
     Aux_ARP_Unc_r15._ext = []
+    
+    #-----< GNSS-SSR-CorrectionPoints-r16 >-----#
+    GNSS_SSR_CorrectionPoints_r16 = SEQ(name=u'GNSS-SSR-CorrectionPoints-r16', mode=MODE_TYPE)
+    _GNSS_SSR_CorrectionPoints_r16_correctionPointSetID_r16 = INT(name=u'correctionPointSetID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _GNSS_SSR_CorrectionPoints_r16_correctionPointSetID_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=16383)], ev=None, er=[])
+    _GNSS_SSR_CorrectionPoints_r16_correctionPoints_r16 = CHOICE(name=u'correctionPoints-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __GNSS_SSR_CorrectionPoints_r16_correctionPoints_r16_listOfCorrectionPoints_r16 = SEQ(name=u'listOfCorrectionPoints-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-ListOfCorrectionPoints-r16')))
+    __GNSS_SSR_CorrectionPoints_r16_correctionPoints_r16_arrayOfCorrectionPoints_r16 = SEQ(name=u'arrayOfCorrectionPoints-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-ArrayOfCorrectionPoints-r16')))
+    _GNSS_SSR_CorrectionPoints_r16_correctionPoints_r16._cont = ASN1Dict([
+        (u'listOfCorrectionPoints-r16', __GNSS_SSR_CorrectionPoints_r16_correctionPoints_r16_listOfCorrectionPoints_r16),
+        (u'arrayOfCorrectionPoints-r16', __GNSS_SSR_CorrectionPoints_r16_correctionPoints_r16_arrayOfCorrectionPoints_r16),
+        ])
+    _GNSS_SSR_CorrectionPoints_r16_correctionPoints_r16._ext = None
+    GNSS_SSR_CorrectionPoints_r16._cont = ASN1Dict([
+        (u'correctionPointSetID-r16', _GNSS_SSR_CorrectionPoints_r16_correctionPointSetID_r16),
+        (u'correctionPoints-r16', _GNSS_SSR_CorrectionPoints_r16_correctionPoints_r16),
+        ])
+    GNSS_SSR_CorrectionPoints_r16._ext = []
+    
+    #-----< GNSS-SSR-ListOfCorrectionPoints-r16 >-----#
+    GNSS_SSR_ListOfCorrectionPoints_r16 = SEQ(name=u'GNSS-SSR-ListOfCorrectionPoints-r16', mode=MODE_TYPE)
+    _GNSS_SSR_ListOfCorrectionPoints_r16_referencePointLatitude_r16 = INT(name=u'referencePointLatitude-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _GNSS_SSR_ListOfCorrectionPoints_r16_referencePointLatitude_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-16384, ub=16383)], ev=None, er=[])
+    _GNSS_SSR_ListOfCorrectionPoints_r16_referencePointLongitude_r16 = INT(name=u'referencePointLongitude-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _GNSS_SSR_ListOfCorrectionPoints_r16_referencePointLongitude_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-32768, ub=32767)], ev=None, er=[])
+    _GNSS_SSR_ListOfCorrectionPoints_r16_relativeLocationsList_r16 = SEQ_OF(name=u'relativeLocationsList-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __GNSS_SSR_ListOfCorrectionPoints_r16_relativeLocationsList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'RelativeLocationElement-r16')))
+    _GNSS_SSR_ListOfCorrectionPoints_r16_relativeLocationsList_r16._cont = __GNSS_SSR_ListOfCorrectionPoints_r16_relativeLocationsList_r16__item_
+    _GNSS_SSR_ListOfCorrectionPoints_r16_relativeLocationsList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=None, er=[])
+    GNSS_SSR_ListOfCorrectionPoints_r16._cont = ASN1Dict([
+        (u'referencePointLatitude-r16', _GNSS_SSR_ListOfCorrectionPoints_r16_referencePointLatitude_r16),
+        (u'referencePointLongitude-r16', _GNSS_SSR_ListOfCorrectionPoints_r16_referencePointLongitude_r16),
+        (u'relativeLocationsList-r16', _GNSS_SSR_ListOfCorrectionPoints_r16_relativeLocationsList_r16),
+        ])
+    GNSS_SSR_ListOfCorrectionPoints_r16._ext = []
+    
+    #-----< RelativeLocationElement-r16 >-----#
+    RelativeLocationElement_r16 = SEQ(name=u'RelativeLocationElement-r16', mode=MODE_TYPE)
+    _RelativeLocationElement_r16_deltaLatitude_r16 = INT(name=u'deltaLatitude-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RelativeLocationElement_r16_deltaLatitude_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-512, ub=511)], ev=None, er=[])
+    _RelativeLocationElement_r16_deltaLongitude_r16 = INT(name=u'deltaLongitude-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RelativeLocationElement_r16_deltaLongitude_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-1024, ub=1023)], ev=None, er=[])
+    RelativeLocationElement_r16._cont = ASN1Dict([
+        (u'deltaLatitude-r16', _RelativeLocationElement_r16_deltaLatitude_r16),
+        (u'deltaLongitude-r16', _RelativeLocationElement_r16_deltaLongitude_r16),
+        ])
+    RelativeLocationElement_r16._ext = []
+    
+    #-----< GNSS-SSR-ArrayOfCorrectionPoints-r16 >-----#
+    GNSS_SSR_ArrayOfCorrectionPoints_r16 = SEQ(name=u'GNSS-SSR-ArrayOfCorrectionPoints-r16', mode=MODE_TYPE)
+    _GNSS_SSR_ArrayOfCorrectionPoints_r16_referencePointLatitude_r16 = INT(name=u'referencePointLatitude-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _GNSS_SSR_ArrayOfCorrectionPoints_r16_referencePointLatitude_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-16384, ub=16383)], ev=None, er=[])
+    _GNSS_SSR_ArrayOfCorrectionPoints_r16_referencePointLongitude_r16 = INT(name=u'referencePointLongitude-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _GNSS_SSR_ArrayOfCorrectionPoints_r16_referencePointLongitude_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-32768, ub=32767)], ev=None, er=[])
+    _GNSS_SSR_ArrayOfCorrectionPoints_r16_numberOfStepsLatitude_r16 = INT(name=u'numberOfStepsLatitude-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _GNSS_SSR_ArrayOfCorrectionPoints_r16_numberOfStepsLatitude_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=None, er=[])
+    _GNSS_SSR_ArrayOfCorrectionPoints_r16_numberOfStepsLongitude_r16 = INT(name=u'numberOfStepsLongitude-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _GNSS_SSR_ArrayOfCorrectionPoints_r16_numberOfStepsLongitude_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=None, er=[])
+    _GNSS_SSR_ArrayOfCorrectionPoints_r16_stepOfLatitude_r16 = INT(name=u'stepOfLatitude-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _GNSS_SSR_ArrayOfCorrectionPoints_r16_stepOfLatitude_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=511)], ev=None, er=[])
+    _GNSS_SSR_ArrayOfCorrectionPoints_r16_stepOfLongitude_r16 = INT(name=u'stepOfLongitude-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _GNSS_SSR_ArrayOfCorrectionPoints_r16_stepOfLongitude_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1023)], ev=None, er=[])
+    _GNSS_SSR_ArrayOfCorrectionPoints_r16_bitmaskOfGrids_r16 = BIT_STR(name=u'bitmaskOfGrids-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _GNSS_SSR_ArrayOfCorrectionPoints_r16_bitmaskOfGrids_r16._const_sz = ASN1Set(rv=[64], rr=[], ev=None, er=[])
+    GNSS_SSR_ArrayOfCorrectionPoints_r16._cont = ASN1Dict([
+        (u'referencePointLatitude-r16', _GNSS_SSR_ArrayOfCorrectionPoints_r16_referencePointLatitude_r16),
+        (u'referencePointLongitude-r16', _GNSS_SSR_ArrayOfCorrectionPoints_r16_referencePointLongitude_r16),
+        (u'numberOfStepsLatitude-r16', _GNSS_SSR_ArrayOfCorrectionPoints_r16_numberOfStepsLatitude_r16),
+        (u'numberOfStepsLongitude-r16', _GNSS_SSR_ArrayOfCorrectionPoints_r16_numberOfStepsLongitude_r16),
+        (u'stepOfLatitude-r16', _GNSS_SSR_ArrayOfCorrectionPoints_r16_stepOfLatitude_r16),
+        (u'stepOfLongitude-r16', _GNSS_SSR_ArrayOfCorrectionPoints_r16_stepOfLongitude_r16),
+        (u'bitmaskOfGrids-r16', _GNSS_SSR_ArrayOfCorrectionPoints_r16_bitmaskOfGrids_r16),
+        ])
+    GNSS_SSR_ArrayOfCorrectionPoints_r16._ext = []
     
     #-----< GNSS-TimeModelList >-----#
     GNSS_TimeModelList = SEQ_OF(name=u'GNSS-TimeModelList', mode=MODE_TYPE)
@@ -3888,6 +5923,8 @@ class LPP_PDU_Definitions:
     _GNSS_ClockModel_glonass_ClockModel = SEQ(name=u'glonass-ClockModel', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GLONASS-ClockModel')))
     _GNSS_ClockModel_sbas_ClockModel = SEQ(name=u'sbas-ClockModel', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'SBAS-ClockModel')))
     _GNSS_ClockModel_bds_ClockModel_r12 = SEQ(name=u'bds-ClockModel-r12', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'BDS-ClockModel-r12')))
+    _GNSS_ClockModel_bds_ClockModel2_r16 = SEQ(name=u'bds-ClockModel2-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'BDS-ClockModel2-r16')))
+    _GNSS_ClockModel_navic_ClockModel_r16 = SEQ(name=u'navic-ClockModel-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NavIC-ClockModel-r16')))
     GNSS_ClockModel._cont = ASN1Dict([
         (u'standardClockModelList', _GNSS_ClockModel_standardClockModelList),
         (u'nav-ClockModel', _GNSS_ClockModel_nav_ClockModel),
@@ -3895,8 +5932,10 @@ class LPP_PDU_Definitions:
         (u'glonass-ClockModel', _GNSS_ClockModel_glonass_ClockModel),
         (u'sbas-ClockModel', _GNSS_ClockModel_sbas_ClockModel),
         (u'bds-ClockModel-r12', _GNSS_ClockModel_bds_ClockModel_r12),
+        (u'bds-ClockModel2-r16', _GNSS_ClockModel_bds_ClockModel2_r16),
+        (u'navic-ClockModel-r16', _GNSS_ClockModel_navic_ClockModel_r16),
         ])
-    GNSS_ClockModel._ext = [u'bds-ClockModel-r12']
+    GNSS_ClockModel._ext = [u'bds-ClockModel-r12', u'bds-ClockModel2-r16', u'navic-ClockModel-r16']
     
     #-----< GNSS-OrbitModel >-----#
     GNSS_OrbitModel = CHOICE(name=u'GNSS-OrbitModel', mode=MODE_TYPE)
@@ -3906,6 +5945,8 @@ class LPP_PDU_Definitions:
     _GNSS_OrbitModel_glonass_ECEF = SEQ(name=u'glonass-ECEF', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NavModel-GLONASS-ECEF')))
     _GNSS_OrbitModel_sbas_ECEF = SEQ(name=u'sbas-ECEF', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NavModel-SBAS-ECEF')))
     _GNSS_OrbitModel_bds_KeplerianSet_r12 = SEQ(name=u'bds-KeplerianSet-r12', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NavModel-BDS-KeplerianSet-r12')))
+    _GNSS_OrbitModel_bds_KeplerianSet2_r16 = SEQ(name=u'bds-KeplerianSet2-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NavModel-BDS-KeplerianSet2-r16')))
+    _GNSS_OrbitModel_navic_KeplerianSet_r16 = SEQ(name=u'navic-KeplerianSet-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NavModel-NavIC-KeplerianSet-r16')))
     GNSS_OrbitModel._cont = ASN1Dict([
         (u'keplerianSet', _GNSS_OrbitModel_keplerianSet),
         (u'nav-KeplerianSet', _GNSS_OrbitModel_nav_KeplerianSet),
@@ -3913,8 +5954,10 @@ class LPP_PDU_Definitions:
         (u'glonass-ECEF', _GNSS_OrbitModel_glonass_ECEF),
         (u'sbas-ECEF', _GNSS_OrbitModel_sbas_ECEF),
         (u'bds-KeplerianSet-r12', _GNSS_OrbitModel_bds_KeplerianSet_r12),
+        (u'bds-KeplerianSet2-r16', _GNSS_OrbitModel_bds_KeplerianSet2_r16),
+        (u'navic-KeplerianSet-r16', _GNSS_OrbitModel_navic_KeplerianSet_r16),
         ])
-    GNSS_OrbitModel._ext = [u'bds-KeplerianSet-r12']
+    GNSS_OrbitModel._ext = [u'bds-KeplerianSet-r12', u'bds-KeplerianSet2-r16', u'navic-KeplerianSet-r16']
     
     #-----< StandardClockModelList >-----#
     StandardClockModelList = SEQ_OF(name=u'StandardClockModelList', mode=MODE_TYPE)
@@ -4074,6 +6117,51 @@ class LPP_PDU_Definitions:
         (u'bdsTgd1-r12', _BDS_ClockModel_r12_bdsTgd1_r12),
         ])
     BDS_ClockModel_r12._ext = []
+    
+    #-----< BDS-ClockModel2-r16 >-----#
+    BDS_ClockModel2_r16 = SEQ(name=u'BDS-ClockModel2-r16', mode=MODE_TYPE)
+    _BDS_ClockModel2_r16_bdsToc_r16 = INT(name=u'bdsToc-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _BDS_ClockModel2_r16_bdsToc_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2047)], ev=None, er=[])
+    _BDS_ClockModel2_r16_bdsA0_r16 = INT(name=u'bdsA0-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _BDS_ClockModel2_r16_bdsA0_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-16777216, ub=16777215)], ev=None, er=[])
+    _BDS_ClockModel2_r16_bdsA1_r16 = INT(name=u'bdsA1-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _BDS_ClockModel2_r16_bdsA1_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-2097152, ub=2097151)], ev=None, er=[])
+    _BDS_ClockModel2_r16_bdsA2_r16 = INT(name=u'bdsA2-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _BDS_ClockModel2_r16_bdsA2_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-1024, ub=1023)], ev=None, er=[])
+    _BDS_ClockModel2_r16_bdsTgdB1Cp_r16 = INT(name=u'bdsTgdB1Cp-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _BDS_ClockModel2_r16_bdsTgdB1Cp_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-2048, ub=2047)], ev=None, er=[])
+    _BDS_ClockModel2_r16_bdsIscB1Cd_r16 = INT(name=u'bdsIscB1Cd-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _BDS_ClockModel2_r16_bdsIscB1Cd_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-2048, ub=2047)], ev=None, er=[])
+    BDS_ClockModel2_r16._cont = ASN1Dict([
+        (u'bdsToc-r16', _BDS_ClockModel2_r16_bdsToc_r16),
+        (u'bdsA0-r16', _BDS_ClockModel2_r16_bdsA0_r16),
+        (u'bdsA1-r16', _BDS_ClockModel2_r16_bdsA1_r16),
+        (u'bdsA2-r16', _BDS_ClockModel2_r16_bdsA2_r16),
+        (u'bdsTgdB1Cp-r16', _BDS_ClockModel2_r16_bdsTgdB1Cp_r16),
+        (u'bdsIscB1Cd-r16', _BDS_ClockModel2_r16_bdsIscB1Cd_r16),
+        ])
+    BDS_ClockModel2_r16._ext = []
+    
+    #-----< NavIC-ClockModel-r16 >-----#
+    NavIC_ClockModel_r16 = SEQ(name=u'NavIC-ClockModel-r16', mode=MODE_TYPE)
+    _NavIC_ClockModel_r16_navic_Toc_r16 = INT(name=u'navic-Toc-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavIC_ClockModel_r16_navic_Toc_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
+    _NavIC_ClockModel_r16_navic_af2_r16 = INT(name=u'navic-af2-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavIC_ClockModel_r16_navic_af2_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-128, ub=127)], ev=None, er=[])
+    _NavIC_ClockModel_r16_navic_af1_r16 = INT(name=u'navic-af1-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavIC_ClockModel_r16_navic_af1_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-32768, ub=32767)], ev=None, er=[])
+    _NavIC_ClockModel_r16_navic_af0_r16 = INT(name=u'navic-af0-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavIC_ClockModel_r16_navic_af0_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-2097152, ub=2097151)], ev=None, er=[])
+    _NavIC_ClockModel_r16_navic_Tgd_r16 = INT(name=u'navic-Tgd-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavIC_ClockModel_r16_navic_Tgd_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-128, ub=127)], ev=None, er=[])
+    NavIC_ClockModel_r16._cont = ASN1Dict([
+        (u'navic-Toc-r16', _NavIC_ClockModel_r16_navic_Toc_r16),
+        (u'navic-af2-r16', _NavIC_ClockModel_r16_navic_af2_r16),
+        (u'navic-af1-r16', _NavIC_ClockModel_r16_navic_af1_r16),
+        (u'navic-af0-r16', _NavIC_ClockModel_r16_navic_af0_r16),
+        (u'navic-Tgd-r16', _NavIC_ClockModel_r16_navic_Tgd_r16),
+        ])
+    NavIC_ClockModel_r16._ext = []
     
     #-----< NavModelKeplerianSet >-----#
     NavModelKeplerianSet = SEQ(name=u'NavModelKeplerianSet', mode=MODE_TYPE)
@@ -4426,6 +6514,126 @@ class LPP_PDU_Definitions:
         ])
     NavModel_BDS_KeplerianSet_r12._ext = []
     
+    #-----< NavModel-BDS-KeplerianSet2-r16 >-----#
+    NavModel_BDS_KeplerianSet2_r16 = SEQ(name=u'NavModel-BDS-KeplerianSet2-r16', mode=MODE_TYPE)
+    _NavModel_BDS_KeplerianSet2_r16_bdsIODE_r16 = INT(name=u'bdsIODE-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_BDS_KeplerianSet2_r16_bdsIODE_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    _NavModel_BDS_KeplerianSet2_r16_bdsToe_r16 = INT(name=u'bdsToe-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_BDS_KeplerianSet2_r16_bdsToe_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2047)], ev=None, er=[])
+    _NavModel_BDS_KeplerianSet2_r16_bdsDeltaA_r16 = INT(name=u'bdsDeltaA-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_BDS_KeplerianSet2_r16_bdsDeltaA_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-33554432, ub=33554431)], ev=None, er=[])
+    _NavModel_BDS_KeplerianSet2_r16_bdsAdot_r16 = INT(name=u'bdsAdot-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_BDS_KeplerianSet2_r16_bdsAdot_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-16777216, ub=16777216)], ev=None, er=[])
+    _NavModel_BDS_KeplerianSet2_r16_bdsDeltaN0_r16 = INT(name=u'bdsDeltaN0-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_BDS_KeplerianSet2_r16_bdsDeltaN0_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-65536, ub=65535)], ev=None, er=[])
+    _NavModel_BDS_KeplerianSet2_r16_bdsDeltaN0dot_r16 = INT(name=u'bdsDeltaN0dot-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_BDS_KeplerianSet2_r16_bdsDeltaN0dot_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-4194304, ub=4194303)], ev=None, er=[])
+    _NavModel_BDS_KeplerianSet2_r16_bdsM0_r16 = INT(name=u'bdsM0-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_BDS_KeplerianSet2_r16_bdsM0_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-4294967296, ub=4294967295)], ev=None, er=[])
+    _NavModel_BDS_KeplerianSet2_r16_bdsE_r16 = INT(name=u'bdsE-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_BDS_KeplerianSet2_r16_bdsE_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=8589934591)], ev=None, er=[])
+    _NavModel_BDS_KeplerianSet2_r16_bdsOmega_r16 = INT(name=u'bdsOmega-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_BDS_KeplerianSet2_r16_bdsOmega_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-4294967296, ub=4294967295)], ev=None, er=[])
+    _NavModel_BDS_KeplerianSet2_r16_bdsOmega0_r16 = INT(name=u'bdsOmega0-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_BDS_KeplerianSet2_r16_bdsOmega0_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-4294967296, ub=4294967295)], ev=None, er=[])
+    _NavModel_BDS_KeplerianSet2_r16_bdsI0_r16 = INT(name=u'bdsI0-r16', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_BDS_KeplerianSet2_r16_bdsI0_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-4294967296, ub=4294967295)], ev=None, er=[])
+    _NavModel_BDS_KeplerianSet2_r16_bdsOmegaDot_r16 = INT(name=u'bdsOmegaDot-r16', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_BDS_KeplerianSet2_r16_bdsOmegaDot_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-262144, ub=262143)], ev=None, er=[])
+    _NavModel_BDS_KeplerianSet2_r16_bdsI0Dot_r16 = INT(name=u'bdsI0Dot-r16', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_BDS_KeplerianSet2_r16_bdsI0Dot_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-16384, ub=16383)], ev=None, er=[])
+    _NavModel_BDS_KeplerianSet2_r16_bdsCuc_r16 = INT(name=u'bdsCuc-r16', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_BDS_KeplerianSet2_r16_bdsCuc_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-1048576, ub=1048575)], ev=None, er=[])
+    _NavModel_BDS_KeplerianSet2_r16_bdsCus_r16 = INT(name=u'bdsCus-r16', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_BDS_KeplerianSet2_r16_bdsCus_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-1048576, ub=1048575)], ev=None, er=[])
+    _NavModel_BDS_KeplerianSet2_r16_bdsCrc_r16 = INT(name=u'bdsCrc-r16', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_BDS_KeplerianSet2_r16_bdsCrc_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-8388608, ub=8388607)], ev=None, er=[])
+    _NavModel_BDS_KeplerianSet2_r16_bdsCrs_r16 = INT(name=u'bdsCrs-r16', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_BDS_KeplerianSet2_r16_bdsCrs_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-8388608, ub=8388607)], ev=None, er=[])
+    _NavModel_BDS_KeplerianSet2_r16_bdsCic_r16 = INT(name=u'bdsCic-r16', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_BDS_KeplerianSet2_r16_bdsCic_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-32768, ub=32767)], ev=None, er=[])
+    _NavModel_BDS_KeplerianSet2_r16_bdsCis_r16 = INT(name=u'bdsCis-r16', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_BDS_KeplerianSet2_r16_bdsCis_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-32768, ub=32767)], ev=None, er=[])
+    NavModel_BDS_KeplerianSet2_r16._cont = ASN1Dict([
+        (u'bdsIODE-r16', _NavModel_BDS_KeplerianSet2_r16_bdsIODE_r16),
+        (u'bdsToe-r16', _NavModel_BDS_KeplerianSet2_r16_bdsToe_r16),
+        (u'bdsDeltaA-r16', _NavModel_BDS_KeplerianSet2_r16_bdsDeltaA_r16),
+        (u'bdsAdot-r16', _NavModel_BDS_KeplerianSet2_r16_bdsAdot_r16),
+        (u'bdsDeltaN0-r16', _NavModel_BDS_KeplerianSet2_r16_bdsDeltaN0_r16),
+        (u'bdsDeltaN0dot-r16', _NavModel_BDS_KeplerianSet2_r16_bdsDeltaN0dot_r16),
+        (u'bdsM0-r16', _NavModel_BDS_KeplerianSet2_r16_bdsM0_r16),
+        (u'bdsE-r16', _NavModel_BDS_KeplerianSet2_r16_bdsE_r16),
+        (u'bdsOmega-r16', _NavModel_BDS_KeplerianSet2_r16_bdsOmega_r16),
+        (u'bdsOmega0-r16', _NavModel_BDS_KeplerianSet2_r16_bdsOmega0_r16),
+        (u'bdsI0-r16', _NavModel_BDS_KeplerianSet2_r16_bdsI0_r16),
+        (u'bdsOmegaDot-r16', _NavModel_BDS_KeplerianSet2_r16_bdsOmegaDot_r16),
+        (u'bdsI0Dot-r16', _NavModel_BDS_KeplerianSet2_r16_bdsI0Dot_r16),
+        (u'bdsCuc-r16', _NavModel_BDS_KeplerianSet2_r16_bdsCuc_r16),
+        (u'bdsCus-r16', _NavModel_BDS_KeplerianSet2_r16_bdsCus_r16),
+        (u'bdsCrc-r16', _NavModel_BDS_KeplerianSet2_r16_bdsCrc_r16),
+        (u'bdsCrs-r16', _NavModel_BDS_KeplerianSet2_r16_bdsCrs_r16),
+        (u'bdsCic-r16', _NavModel_BDS_KeplerianSet2_r16_bdsCic_r16),
+        (u'bdsCis-r16', _NavModel_BDS_KeplerianSet2_r16_bdsCis_r16),
+        ])
+    NavModel_BDS_KeplerianSet2_r16._ext = []
+    
+    #-----< NavModel-NavIC-KeplerianSet-r16 >-----#
+    NavModel_NavIC_KeplerianSet_r16 = SEQ(name=u'NavModel-NavIC-KeplerianSet-r16', mode=MODE_TYPE)
+    _NavModel_NavIC_KeplerianSet_r16_navic_Toe_r16 = INT(name=u'navic-Toe-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_NavIC_KeplerianSet_r16_navic_Toe_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65536)], ev=None, er=[])
+    _NavModel_NavIC_KeplerianSet_r16_navic_URAI_r16 = INT(name=u'navic-URAI-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_NavIC_KeplerianSet_r16_navic_URAI_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _NavModel_NavIC_KeplerianSet_r16_navic_W_r16 = INT(name=u'navic-W-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_NavIC_KeplerianSet_r16_navic_W_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-2147483648, ub=2147483647)], ev=None, er=[])
+    _NavModel_NavIC_KeplerianSet_r16_navic_DeltaN_r16 = INT(name=u'navic-DeltaN-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_NavIC_KeplerianSet_r16_navic_DeltaN_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-2097152, ub=2097151)], ev=None, er=[])
+    _NavModel_NavIC_KeplerianSet_r16_navic_M0_r16 = INT(name=u'navic-M0-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_NavIC_KeplerianSet_r16_navic_M0_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-2147483648, ub=2147483647)], ev=None, er=[])
+    _NavModel_NavIC_KeplerianSet_r16_navic_OmegaDot_r16 = INT(name=u'navic-OmegaDot-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_NavIC_KeplerianSet_r16_navic_OmegaDot_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-2147483648, ub=2147483647)], ev=None, er=[])
+    _NavModel_NavIC_KeplerianSet_r16_navic_E_r16 = INT(name=u'navic-E-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_NavIC_KeplerianSet_r16_navic_E_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
+    _NavModel_NavIC_KeplerianSet_r16_navic_IDot_r16 = INT(name=u'navic-IDot-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_NavIC_KeplerianSet_r16_navic_IDot_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-8192, ub=8191)], ev=None, er=[])
+    _NavModel_NavIC_KeplerianSet_r16_navic_APowerHalf_r16 = INT(name=u'navic-APowerHalf-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_NavIC_KeplerianSet_r16_navic_APowerHalf_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
+    _NavModel_NavIC_KeplerianSet_r16_navic_I0_r16 = INT(name=u'navic-I0-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_NavIC_KeplerianSet_r16_navic_I0_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-2147483648, ub=2147483647)], ev=None, er=[])
+    _NavModel_NavIC_KeplerianSet_r16_navic_Omega0_r16 = INT(name=u'navic-Omega0-r16', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_NavIC_KeplerianSet_r16_navic_Omega0_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-2147483648, ub=2147483647)], ev=None, er=[])
+    _NavModel_NavIC_KeplerianSet_r16_navic_Crs_r16 = INT(name=u'navic-Crs-r16', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_NavIC_KeplerianSet_r16_navic_Crs_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-32768, ub=32767)], ev=None, er=[])
+    _NavModel_NavIC_KeplerianSet_r16_navic_Cis_r16 = INT(name=u'navic-Cis-r16', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_NavIC_KeplerianSet_r16_navic_Cis_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-32768, ub=32767)], ev=None, er=[])
+    _NavModel_NavIC_KeplerianSet_r16_navic_Cus_r16 = INT(name=u'navic-Cus-r16', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_NavIC_KeplerianSet_r16_navic_Cus_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-32768, ub=32767)], ev=None, er=[])
+    _NavModel_NavIC_KeplerianSet_r16_navic_Crc_r16 = INT(name=u'navic-Crc-r16', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_NavIC_KeplerianSet_r16_navic_Crc_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-32768, ub=32767)], ev=None, er=[])
+    _NavModel_NavIC_KeplerianSet_r16_navic_Cic_r16 = INT(name=u'navic-Cic-r16', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_NavIC_KeplerianSet_r16_navic_Cic_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-32768, ub=32767)], ev=None, er=[])
+    _NavModel_NavIC_KeplerianSet_r16_navic_Cuc_r16 = INT(name=u'navic-Cuc-r16', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavModel_NavIC_KeplerianSet_r16_navic_Cuc_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-32768, ub=32767)], ev=None, er=[])
+    NavModel_NavIC_KeplerianSet_r16._cont = ASN1Dict([
+        (u'navic-Toe-r16', _NavModel_NavIC_KeplerianSet_r16_navic_Toe_r16),
+        (u'navic-URAI-r16', _NavModel_NavIC_KeplerianSet_r16_navic_URAI_r16),
+        (u'navic-W-r16', _NavModel_NavIC_KeplerianSet_r16_navic_W_r16),
+        (u'navic-DeltaN-r16', _NavModel_NavIC_KeplerianSet_r16_navic_DeltaN_r16),
+        (u'navic-M0-r16', _NavModel_NavIC_KeplerianSet_r16_navic_M0_r16),
+        (u'navic-OmegaDot-r16', _NavModel_NavIC_KeplerianSet_r16_navic_OmegaDot_r16),
+        (u'navic-E-r16', _NavModel_NavIC_KeplerianSet_r16_navic_E_r16),
+        (u'navic-IDot-r16', _NavModel_NavIC_KeplerianSet_r16_navic_IDot_r16),
+        (u'navic-APowerHalf-r16', _NavModel_NavIC_KeplerianSet_r16_navic_APowerHalf_r16),
+        (u'navic-I0-r16', _NavModel_NavIC_KeplerianSet_r16_navic_I0_r16),
+        (u'navic-Omega0-r16', _NavModel_NavIC_KeplerianSet_r16_navic_Omega0_r16),
+        (u'navic-Crs-r16', _NavModel_NavIC_KeplerianSet_r16_navic_Crs_r16),
+        (u'navic-Cis-r16', _NavModel_NavIC_KeplerianSet_r16_navic_Cis_r16),
+        (u'navic-Cus-r16', _NavModel_NavIC_KeplerianSet_r16_navic_Cus_r16),
+        (u'navic-Crc-r16', _NavModel_NavIC_KeplerianSet_r16_navic_Crc_r16),
+        (u'navic-Cic-r16', _NavModel_NavIC_KeplerianSet_r16_navic_Cic_r16),
+        (u'navic-Cuc-r16', _NavModel_NavIC_KeplerianSet_r16_navic_Cuc_r16),
+        ])
+    NavModel_NavIC_KeplerianSet_r16._ext = []
+    
     #-----< GNSS-RealTimeIntegrity >-----#
     GNSS_RealTimeIntegrity = SEQ(name=u'GNSS-RealTimeIntegrity', mode=MODE_TYPE)
     _GNSS_RealTimeIntegrity_gnss_BadSignalList = SEQ_OF(name=u'gnss-BadSignalList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-BadSignalList')))
@@ -4568,6 +6776,10 @@ class LPP_PDU_Definitions:
     _GNSS_Almanac_toa_ext_v1240._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=256, ub=1023)], ev=None, er=[])
     _GNSS_Almanac_ioda_ext_v1240 = INT(name=u'ioda-ext-v1240', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
     _GNSS_Almanac_ioda_ext_v1240._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=4, ub=15)], ev=None, er=[])
+    _GNSS_Almanac_weekNumber_ext_r16 = INT(name=u'weekNumber-ext-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
+    _GNSS_Almanac_weekNumber_ext_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=256, ub=8191)], ev=None, er=[])
+    _GNSS_Almanac_toa_ext2_r16 = INT(name=u'toa-ext2-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
+    _GNSS_Almanac_toa_ext2_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=256, ub=65535)], ev=None, er=[])
     GNSS_Almanac._cont = ASN1Dict([
         (u'weekNumber', _GNSS_Almanac_weekNumber),
         (u'toa', _GNSS_Almanac_toa),
@@ -4576,8 +6788,10 @@ class LPP_PDU_Definitions:
         (u'gnss-AlmanacList', _GNSS_Almanac_gnss_AlmanacList),
         (u'toa-ext-v1240', _GNSS_Almanac_toa_ext_v1240),
         (u'ioda-ext-v1240', _GNSS_Almanac_ioda_ext_v1240),
+        (u'weekNumber-ext-r16', _GNSS_Almanac_weekNumber_ext_r16),
+        (u'toa-ext2-r16', _GNSS_Almanac_toa_ext2_r16),
         ])
-    GNSS_Almanac._ext = [u'toa-ext-v1240', u'ioda-ext-v1240']
+    GNSS_Almanac._ext = [u'toa-ext-v1240', u'ioda-ext-v1240', u'weekNumber-ext-r16', u'toa-ext2-r16']
     
     #-----< GNSS-AlmanacList >-----#
     GNSS_AlmanacList = SEQ_OF(name=u'GNSS-AlmanacList', mode=MODE_TYPE)
@@ -4594,6 +6808,7 @@ class LPP_PDU_Definitions:
     _GNSS_AlmanacElement_keplerianGLONASS = SEQ(name=u'keplerianGLONASS', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'AlmanacGLONASS-AlmanacSet')))
     _GNSS_AlmanacElement_ecef_SBAS_Almanac = SEQ(name=u'ecef-SBAS-Almanac', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'AlmanacECEF-SBAS-AlmanacSet')))
     _GNSS_AlmanacElement_keplerianBDS_Almanac_r12 = SEQ(name=u'keplerianBDS-Almanac-r12', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'AlmanacBDS-AlmanacSet-r12')))
+    _GNSS_AlmanacElement_keplerianNavIC_Almanac_r16 = SEQ(name=u'keplerianNavIC-Almanac-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'AlmanacNavIC-AlmanacSet-r16')))
     GNSS_AlmanacElement._cont = ASN1Dict([
         (u'keplerianAlmanacSet', _GNSS_AlmanacElement_keplerianAlmanacSet),
         (u'keplerianNAV-Almanac', _GNSS_AlmanacElement_keplerianNAV_Almanac),
@@ -4602,8 +6817,9 @@ class LPP_PDU_Definitions:
         (u'keplerianGLONASS', _GNSS_AlmanacElement_keplerianGLONASS),
         (u'ecef-SBAS-Almanac', _GNSS_AlmanacElement_ecef_SBAS_Almanac),
         (u'keplerianBDS-Almanac-r12', _GNSS_AlmanacElement_keplerianBDS_Almanac_r12),
+        (u'keplerianNavIC-Almanac-r16', _GNSS_AlmanacElement_keplerianNavIC_Almanac_r16),
         ])
-    GNSS_AlmanacElement._ext = [u'keplerianBDS-Almanac-r12']
+    GNSS_AlmanacElement._ext = [u'keplerianBDS-Almanac-r12', u'keplerianNavIC-Almanac-r16']
     
     #-----< AlmanacKeplerianSet >-----#
     AlmanacKeplerianSet = SEQ(name=u'AlmanacKeplerianSet', mode=MODE_TYPE)
@@ -4869,6 +7085,41 @@ class LPP_PDU_Definitions:
         ])
     AlmanacBDS_AlmanacSet_r12._ext = []
     
+    #-----< AlmanacNavIC-AlmanacSet-r16 >-----#
+    AlmanacNavIC_AlmanacSet_r16 = SEQ(name=u'AlmanacNavIC-AlmanacSet-r16', mode=MODE_TYPE)
+    _AlmanacNavIC_AlmanacSet_r16_svID_r16 = SEQ(name=u'svID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'SV-ID')))
+    _AlmanacNavIC_AlmanacSet_r16_navic_AlmToa_r16 = INT(name=u'navic-AlmToa-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _AlmanacNavIC_AlmanacSet_r16_navic_AlmToa_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
+    _AlmanacNavIC_AlmanacSet_r16_navic_AlmE_r16 = INT(name=u'navic-AlmE-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AlmanacNavIC_AlmanacSet_r16_navic_AlmE_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
+    _AlmanacNavIC_AlmanacSet_r16_navic_AlmOMEGADOT_r16 = INT(name=u'navic-AlmOMEGADOT-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AlmanacNavIC_AlmanacSet_r16_navic_AlmOMEGADOT_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-32768, ub=32767)], ev=None, er=[])
+    _AlmanacNavIC_AlmanacSet_r16_navic_AlmSqrtA_r16 = INT(name=u'navic-AlmSqrtA-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AlmanacNavIC_AlmanacSet_r16_navic_AlmSqrtA_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=16777215)], ev=None, er=[])
+    _AlmanacNavIC_AlmanacSet_r16_navic_AlmOMEGAo_r16 = INT(name=u'navic-AlmOMEGAo-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AlmanacNavIC_AlmanacSet_r16_navic_AlmOMEGAo_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-8388608, ub=8388607)], ev=None, er=[])
+    _AlmanacNavIC_AlmanacSet_r16_navic_AlmOmega_r16 = INT(name=u'navic-AlmOmega-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AlmanacNavIC_AlmanacSet_r16_navic_AlmOmega_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-8388608, ub=8388607)], ev=None, er=[])
+    _AlmanacNavIC_AlmanacSet_r16_navic_AlmMo_r16 = INT(name=u'navic-AlmMo-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AlmanacNavIC_AlmanacSet_r16_navic_AlmMo_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-8388608, ub=8388607)], ev=None, er=[])
+    _AlmanacNavIC_AlmanacSet_r16_navic_Almaf0_r16 = INT(name=u'navic-Almaf0-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AlmanacNavIC_AlmanacSet_r16_navic_Almaf0_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-1024, ub=1023)], ev=None, er=[])
+    _AlmanacNavIC_AlmanacSet_r16_navic_Almaf1_r16 = INT(name=u'navic-Almaf1-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AlmanacNavIC_AlmanacSet_r16_navic_Almaf1_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-1024, ub=1023)], ev=None, er=[])
+    AlmanacNavIC_AlmanacSet_r16._cont = ASN1Dict([
+        (u'svID-r16', _AlmanacNavIC_AlmanacSet_r16_svID_r16),
+        (u'navic-AlmToa-r16', _AlmanacNavIC_AlmanacSet_r16_navic_AlmToa_r16),
+        (u'navic-AlmE-r16', _AlmanacNavIC_AlmanacSet_r16_navic_AlmE_r16),
+        (u'navic-AlmOMEGADOT-r16', _AlmanacNavIC_AlmanacSet_r16_navic_AlmOMEGADOT_r16),
+        (u'navic-AlmSqrtA-r16', _AlmanacNavIC_AlmanacSet_r16_navic_AlmSqrtA_r16),
+        (u'navic-AlmOMEGAo-r16', _AlmanacNavIC_AlmanacSet_r16_navic_AlmOMEGAo_r16),
+        (u'navic-AlmOmega-r16', _AlmanacNavIC_AlmanacSet_r16_navic_AlmOmega_r16),
+        (u'navic-AlmMo-r16', _AlmanacNavIC_AlmanacSet_r16_navic_AlmMo_r16),
+        (u'navic-Almaf0-r16', _AlmanacNavIC_AlmanacSet_r16_navic_Almaf0_r16),
+        (u'navic-Almaf1-r16', _AlmanacNavIC_AlmanacSet_r16_navic_Almaf1_r16),
+        ])
+    AlmanacNavIC_AlmanacSet_r16._ext = []
+    
     #-----< GNSS-UTC-Model >-----#
     GNSS_UTC_Model = CHOICE(name=u'GNSS-UTC-Model', mode=MODE_TYPE)
     _GNSS_UTC_Model_utcModel1 = SEQ(name=u'utcModel1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'UTC-ModelSet1')))
@@ -4935,6 +7186,8 @@ class LPP_PDU_Definitions:
     _UTC_ModelSet2_utcDN._const_sz = ASN1Set(rv=[4], rr=[], ev=None, er=[])
     _UTC_ModelSet2_utcDeltaTlsf = INT(name=u'utcDeltaTlsf', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _UTC_ModelSet2_utcDeltaTlsf._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-128, ub=127)], ev=None, er=[])
+    _UTC_ModelSet2_utcWNlsf_ext_r16 = INT(name=u'utcWNlsf-ext-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _UTC_ModelSet2_utcWNlsf_ext_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=256, ub=8191)], ev=None, er=[])
     UTC_ModelSet2._cont = ASN1Dict([
         (u'utcA0', _UTC_ModelSet2_utcA0),
         (u'utcA1', _UTC_ModelSet2_utcA1),
@@ -4945,8 +7198,9 @@ class LPP_PDU_Definitions:
         (u'utcWNlsf', _UTC_ModelSet2_utcWNlsf),
         (u'utcDN', _UTC_ModelSet2_utcDN),
         (u'utcDeltaTlsf', _UTC_ModelSet2_utcDeltaTlsf),
+        (u'utcWNlsf-ext-r16', _UTC_ModelSet2_utcWNlsf_ext_r16),
         ])
-    UTC_ModelSet2._ext = []
+    UTC_ModelSet2._ext = [u'utcWNlsf-ext-r16']
     
     #-----< UTC-ModelSet3 >-----#
     UTC_ModelSet3 = SEQ(name=u'UTC-ModelSet3', mode=MODE_TYPE)
@@ -5030,11 +7284,13 @@ class LPP_PDU_Definitions:
     GNSS_AuxiliaryInformation = CHOICE(name=u'GNSS-AuxiliaryInformation', mode=MODE_TYPE)
     _GNSS_AuxiliaryInformation_gnss_ID_GPS = SEQ_OF(name=u'gnss-ID-GPS', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-ID-GPS')))
     _GNSS_AuxiliaryInformation_gnss_ID_GLONASS = SEQ_OF(name=u'gnss-ID-GLONASS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-ID-GLONASS')))
+    _GNSS_AuxiliaryInformation_gnss_ID_BDS_r16 = SEQ_OF(name=u'gnss-ID-BDS-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-ID-BDS-r16')), group=0)
     GNSS_AuxiliaryInformation._cont = ASN1Dict([
         (u'gnss-ID-GPS', _GNSS_AuxiliaryInformation_gnss_ID_GPS),
         (u'gnss-ID-GLONASS', _GNSS_AuxiliaryInformation_gnss_ID_GLONASS),
+        (u'gnss-ID-BDS-r16', _GNSS_AuxiliaryInformation_gnss_ID_BDS_r16),
         ])
-    GNSS_AuxiliaryInformation._ext = []
+    GNSS_AuxiliaryInformation._ext = [u'gnss-ID-BDS-r16']
     
     #-----< GNSS-ID-GPS >-----#
     GNSS_ID_GPS = SEQ_OF(name=u'GNSS-ID-GPS', mode=MODE_TYPE)
@@ -5070,6 +7326,23 @@ class LPP_PDU_Definitions:
         (u'channelNumber', _GNSS_ID_GLONASS_SatElement_channelNumber),
         ])
     GNSS_ID_GLONASS_SatElement._ext = []
+    
+    #-----< GNSS-ID-BDS-r16 >-----#
+    GNSS_ID_BDS_r16 = SEQ_OF(name=u'GNSS-ID-BDS-r16', mode=MODE_TYPE)
+    _GNSS_ID_BDS_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-ID-BDS-SatElement-r16')))
+    GNSS_ID_BDS_r16._cont = _GNSS_ID_BDS_r16__item_
+    GNSS_ID_BDS_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    
+    #-----< GNSS-ID-BDS-SatElement-r16 >-----#
+    GNSS_ID_BDS_SatElement_r16 = SEQ(name=u'GNSS-ID-BDS-SatElement-r16', mode=MODE_TYPE)
+    _GNSS_ID_BDS_SatElement_r16_svID_r16 = SEQ(name=u'svID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'SV-ID')))
+    _GNSS_ID_BDS_SatElement_r16_satType_r16 = INT(name=u'satType-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _GNSS_ID_BDS_SatElement_r16_satType_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=3)], ev=None, er=[])
+    GNSS_ID_BDS_SatElement_r16._cont = ASN1Dict([
+        (u'svID-r16', _GNSS_ID_BDS_SatElement_r16_svID_r16),
+        (u'satType-r16', _GNSS_ID_BDS_SatElement_r16_satType_r16),
+        ])
+    GNSS_ID_BDS_SatElement_r16._ext = []
     
     #-----< BDS-DifferentialCorrections-r12 >-----#
     BDS_DifferentialCorrections_r12 = SEQ(name=u'BDS-DifferentialCorrections-r12', mode=MODE_TYPE)
@@ -5544,6 +7817,413 @@ class LPP_PDU_Definitions:
         ])
     SSR_CodeBiasSignalElement_r15._ext = []
     
+    #-----< GNSS-SSR-URA-r16 >-----#
+    GNSS_SSR_URA_r16 = SEQ(name=u'GNSS-SSR-URA-r16', mode=MODE_TYPE)
+    _GNSS_SSR_URA_r16_epochTime_r16 = SEQ(name=u'epochTime-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SystemTime')))
+    _GNSS_SSR_URA_r16_ssrUpdateInterval_r16 = INT(name=u'ssrUpdateInterval-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _GNSS_SSR_URA_r16_ssrUpdateInterval_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _GNSS_SSR_URA_r16_iod_ssr_r16 = INT(name=u'iod-ssr-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _GNSS_SSR_URA_r16_iod_ssr_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _GNSS_SSR_URA_r16_ssr_URA_SatList_r16 = SEQ_OF(name=u'ssr-URA-SatList-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'SSR-URA-SatList-r16')))
+    GNSS_SSR_URA_r16._cont = ASN1Dict([
+        (u'epochTime-r16', _GNSS_SSR_URA_r16_epochTime_r16),
+        (u'ssrUpdateInterval-r16', _GNSS_SSR_URA_r16_ssrUpdateInterval_r16),
+        (u'iod-ssr-r16', _GNSS_SSR_URA_r16_iod_ssr_r16),
+        (u'ssr-URA-SatList-r16', _GNSS_SSR_URA_r16_ssr_URA_SatList_r16),
+        ])
+    GNSS_SSR_URA_r16._ext = []
+    
+    #-----< SSR-URA-SatList-r16 >-----#
+    SSR_URA_SatList_r16 = SEQ_OF(name=u'SSR-URA-SatList-r16', mode=MODE_TYPE)
+    _SSR_URA_SatList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'SSR-URA-SatElement-r16')))
+    SSR_URA_SatList_r16._cont = _SSR_URA_SatList_r16__item_
+    SSR_URA_SatList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    
+    #-----< SSR-URA-SatElement-r16 >-----#
+    SSR_URA_SatElement_r16 = SEQ(name=u'SSR-URA-SatElement-r16', mode=MODE_TYPE)
+    _SSR_URA_SatElement_r16_svID_r16 = SEQ(name=u'svID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'SV-ID')))
+    _SSR_URA_SatElement_r16_ssr_URA_r16 = BIT_STR(name=u'ssr-URA-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SSR_URA_SatElement_r16_ssr_URA_r16._const_sz = ASN1Set(rv=[6], rr=[], ev=None, er=[])
+    SSR_URA_SatElement_r16._cont = ASN1Dict([
+        (u'svID-r16', _SSR_URA_SatElement_r16_svID_r16),
+        (u'ssr-URA-r16', _SSR_URA_SatElement_r16_ssr_URA_r16),
+        ])
+    SSR_URA_SatElement_r16._ext = []
+    
+    #-----< GNSS-SSR-PhaseBias-r16 >-----#
+    GNSS_SSR_PhaseBias_r16 = SEQ(name=u'GNSS-SSR-PhaseBias-r16', mode=MODE_TYPE)
+    _GNSS_SSR_PhaseBias_r16_epochTime_r16 = SEQ(name=u'epochTime-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SystemTime')))
+    _GNSS_SSR_PhaseBias_r16_ssrUpdateInterval_r16 = INT(name=u'ssrUpdateInterval-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _GNSS_SSR_PhaseBias_r16_ssrUpdateInterval_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _GNSS_SSR_PhaseBias_r16_iod_ssr_r16 = INT(name=u'iod-ssr-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _GNSS_SSR_PhaseBias_r16_iod_ssr_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _GNSS_SSR_PhaseBias_r16_ssr_PhaseBiasSatList_r16 = SEQ_OF(name=u'ssr-PhaseBiasSatList-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'SSR-PhaseBiasSatList-r16')))
+    GNSS_SSR_PhaseBias_r16._cont = ASN1Dict([
+        (u'epochTime-r16', _GNSS_SSR_PhaseBias_r16_epochTime_r16),
+        (u'ssrUpdateInterval-r16', _GNSS_SSR_PhaseBias_r16_ssrUpdateInterval_r16),
+        (u'iod-ssr-r16', _GNSS_SSR_PhaseBias_r16_iod_ssr_r16),
+        (u'ssr-PhaseBiasSatList-r16', _GNSS_SSR_PhaseBias_r16_ssr_PhaseBiasSatList_r16),
+        ])
+    GNSS_SSR_PhaseBias_r16._ext = []
+    
+    #-----< SSR-PhaseBiasSatList-r16 >-----#
+    SSR_PhaseBiasSatList_r16 = SEQ_OF(name=u'SSR-PhaseBiasSatList-r16', mode=MODE_TYPE)
+    _SSR_PhaseBiasSatList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'SSR-PhaseBiasSatElement-r16')))
+    SSR_PhaseBiasSatList_r16._cont = _SSR_PhaseBiasSatList_r16__item_
+    SSR_PhaseBiasSatList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    
+    #-----< SSR-PhaseBiasSatElement-r16 >-----#
+    SSR_PhaseBiasSatElement_r16 = SEQ(name=u'SSR-PhaseBiasSatElement-r16', mode=MODE_TYPE)
+    _SSR_PhaseBiasSatElement_r16_svID_r16 = SEQ(name=u'svID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'SV-ID')))
+    _SSR_PhaseBiasSatElement_r16_ssr_PhaseBiasSignalList_r16 = SEQ_OF(name=u'ssr-PhaseBiasSignalList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'SSR-PhaseBiasSignalList-r16')))
+    SSR_PhaseBiasSatElement_r16._cont = ASN1Dict([
+        (u'svID-r16', _SSR_PhaseBiasSatElement_r16_svID_r16),
+        (u'ssr-PhaseBiasSignalList-r16', _SSR_PhaseBiasSatElement_r16_ssr_PhaseBiasSignalList_r16),
+        ])
+    SSR_PhaseBiasSatElement_r16._ext = []
+    
+    #-----< SSR-PhaseBiasSignalList-r16 >-----#
+    SSR_PhaseBiasSignalList_r16 = SEQ_OF(name=u'SSR-PhaseBiasSignalList-r16', mode=MODE_TYPE)
+    _SSR_PhaseBiasSignalList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'SSR-PhaseBiasSignalElement-r16')))
+    SSR_PhaseBiasSignalList_r16._cont = _SSR_PhaseBiasSignalList_r16__item_
+    SSR_PhaseBiasSignalList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    
+    #-----< SSR-PhaseBiasSignalElement-r16 >-----#
+    SSR_PhaseBiasSignalElement_r16 = SEQ(name=u'SSR-PhaseBiasSignalElement-r16', mode=MODE_TYPE)
+    _SSR_PhaseBiasSignalElement_r16_signal_and_tracking_mode_ID_r16 = SEQ(name=u'signal-and-tracking-mode-ID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SignalID')))
+    _SSR_PhaseBiasSignalElement_r16_phaseBias_r16 = INT(name=u'phaseBias-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SSR_PhaseBiasSignalElement_r16_phaseBias_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-16384, ub=16383)], ev=None, er=[])
+    _SSR_PhaseBiasSignalElement_r16_phaseDiscontinuityIndicator_r16 = INT(name=u'phaseDiscontinuityIndicator-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SSR_PhaseBiasSignalElement_r16_phaseDiscontinuityIndicator_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=3)], ev=None, er=[])
+    _SSR_PhaseBiasSignalElement_r16_phaseBiasIntegerIndicator_r16 = INT(name=u'phaseBiasIntegerIndicator-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SSR_PhaseBiasSignalElement_r16_phaseBiasIntegerIndicator_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=3)], ev=None, er=[])
+    SSR_PhaseBiasSignalElement_r16._cont = ASN1Dict([
+        (u'signal-and-tracking-mode-ID-r16', _SSR_PhaseBiasSignalElement_r16_signal_and_tracking_mode_ID_r16),
+        (u'phaseBias-r16', _SSR_PhaseBiasSignalElement_r16_phaseBias_r16),
+        (u'phaseDiscontinuityIndicator-r16', _SSR_PhaseBiasSignalElement_r16_phaseDiscontinuityIndicator_r16),
+        (u'phaseBiasIntegerIndicator-r16', _SSR_PhaseBiasSignalElement_r16_phaseBiasIntegerIndicator_r16),
+        ])
+    SSR_PhaseBiasSignalElement_r16._ext = []
+    
+    #-----< GNSS-SSR-STEC-Correction-r16 >-----#
+    GNSS_SSR_STEC_Correction_r16 = SEQ(name=u'GNSS-SSR-STEC-Correction-r16', mode=MODE_TYPE)
+    _GNSS_SSR_STEC_Correction_r16_epochTime_r16 = SEQ(name=u'epochTime-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SystemTime')))
+    _GNSS_SSR_STEC_Correction_r16_ssrUpdateInterval_r16 = INT(name=u'ssrUpdateInterval-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _GNSS_SSR_STEC_Correction_r16_ssrUpdateInterval_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _GNSS_SSR_STEC_Correction_r16_iod_ssr_r16 = INT(name=u'iod-ssr-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _GNSS_SSR_STEC_Correction_r16_iod_ssr_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _GNSS_SSR_STEC_Correction_r16_correctionPointSetID_r16 = INT(name=u'correctionPointSetID-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _GNSS_SSR_STEC_Correction_r16_correctionPointSetID_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=16383)], ev=None, er=[])
+    _GNSS_SSR_STEC_Correction_r16_stec_SatList_r16 = SEQ_OF(name=u'stec-SatList-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'STEC-SatList-r16')))
+    GNSS_SSR_STEC_Correction_r16._cont = ASN1Dict([
+        (u'epochTime-r16', _GNSS_SSR_STEC_Correction_r16_epochTime_r16),
+        (u'ssrUpdateInterval-r16', _GNSS_SSR_STEC_Correction_r16_ssrUpdateInterval_r16),
+        (u'iod-ssr-r16', _GNSS_SSR_STEC_Correction_r16_iod_ssr_r16),
+        (u'correctionPointSetID-r16', _GNSS_SSR_STEC_Correction_r16_correctionPointSetID_r16),
+        (u'stec-SatList-r16', _GNSS_SSR_STEC_Correction_r16_stec_SatList_r16),
+        ])
+    GNSS_SSR_STEC_Correction_r16._ext = []
+    
+    #-----< STEC-SatList-r16 >-----#
+    STEC_SatList_r16 = SEQ_OF(name=u'STEC-SatList-r16', mode=MODE_TYPE)
+    _STEC_SatList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'STEC-SatElement-r16')))
+    STEC_SatList_r16._cont = _STEC_SatList_r16__item_
+    STEC_SatList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    
+    #-----< STEC-SatElement-r16 >-----#
+    STEC_SatElement_r16 = SEQ(name=u'STEC-SatElement-r16', mode=MODE_TYPE)
+    _STEC_SatElement_r16_svID_r16 = SEQ(name=u'svID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'SV-ID')))
+    _STEC_SatElement_r16_stecQualityIndicator_r16 = BIT_STR(name=u'stecQualityIndicator-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _STEC_SatElement_r16_stecQualityIndicator_r16._const_sz = ASN1Set(rv=[6], rr=[], ev=None, er=[])
+    _STEC_SatElement_r16_stec_C00_r16 = INT(name=u'stec-C00-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _STEC_SatElement_r16_stec_C00_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-8192, ub=8191)], ev=None, er=[])
+    _STEC_SatElement_r16_stec_C01_r16 = INT(name=u'stec-C01-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _STEC_SatElement_r16_stec_C01_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-2048, ub=2047)], ev=None, er=[])
+    _STEC_SatElement_r16_stec_C10_r16 = INT(name=u'stec-C10-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _STEC_SatElement_r16_stec_C10_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-2048, ub=2047)], ev=None, er=[])
+    _STEC_SatElement_r16_stec_C11_r16 = INT(name=u'stec-C11-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _STEC_SatElement_r16_stec_C11_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-512, ub=511)], ev=None, er=[])
+    STEC_SatElement_r16._cont = ASN1Dict([
+        (u'svID-r16', _STEC_SatElement_r16_svID_r16),
+        (u'stecQualityIndicator-r16', _STEC_SatElement_r16_stecQualityIndicator_r16),
+        (u'stec-C00-r16', _STEC_SatElement_r16_stec_C00_r16),
+        (u'stec-C01-r16', _STEC_SatElement_r16_stec_C01_r16),
+        (u'stec-C10-r16', _STEC_SatElement_r16_stec_C10_r16),
+        (u'stec-C11-r16', _STEC_SatElement_r16_stec_C11_r16),
+        ])
+    STEC_SatElement_r16._ext = []
+    
+    #-----< GNSS-SSR-GriddedCorrection-r16 >-----#
+    GNSS_SSR_GriddedCorrection_r16 = SEQ(name=u'GNSS-SSR-GriddedCorrection-r16', mode=MODE_TYPE)
+    _GNSS_SSR_GriddedCorrection_r16_epochTime_r16 = SEQ(name=u'epochTime-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SystemTime')))
+    _GNSS_SSR_GriddedCorrection_r16_ssrUpdateInterval_r16 = INT(name=u'ssrUpdateInterval-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _GNSS_SSR_GriddedCorrection_r16_ssrUpdateInterval_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _GNSS_SSR_GriddedCorrection_r16_iod_ssr_r16 = INT(name=u'iod-ssr-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _GNSS_SSR_GriddedCorrection_r16_iod_ssr_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _GNSS_SSR_GriddedCorrection_r16_troposphericDelayQualityIndicator_r16 = BIT_STR(name=u'troposphericDelayQualityIndicator-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _GNSS_SSR_GriddedCorrection_r16_troposphericDelayQualityIndicator_r16._const_sz = ASN1Set(rv=[6], rr=[], ev=None, er=[])
+    _GNSS_SSR_GriddedCorrection_r16_correctionPointSetID_r16 = INT(name=u'correctionPointSetID-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _GNSS_SSR_GriddedCorrection_r16_correctionPointSetID_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=16383)], ev=None, er=[])
+    _GNSS_SSR_GriddedCorrection_r16_gridList_r16 = SEQ_OF(name=u'gridList-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GridList-r16')))
+    GNSS_SSR_GriddedCorrection_r16._cont = ASN1Dict([
+        (u'epochTime-r16', _GNSS_SSR_GriddedCorrection_r16_epochTime_r16),
+        (u'ssrUpdateInterval-r16', _GNSS_SSR_GriddedCorrection_r16_ssrUpdateInterval_r16),
+        (u'iod-ssr-r16', _GNSS_SSR_GriddedCorrection_r16_iod_ssr_r16),
+        (u'troposphericDelayQualityIndicator-r16', _GNSS_SSR_GriddedCorrection_r16_troposphericDelayQualityIndicator_r16),
+        (u'correctionPointSetID-r16', _GNSS_SSR_GriddedCorrection_r16_correctionPointSetID_r16),
+        (u'gridList-r16', _GNSS_SSR_GriddedCorrection_r16_gridList_r16),
+        ])
+    GNSS_SSR_GriddedCorrection_r16._ext = []
+    
+    #-----< GridList-r16 >-----#
+    GridList_r16 = SEQ_OF(name=u'GridList-r16', mode=MODE_TYPE)
+    _GridList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'GridElement-r16')))
+    GridList_r16._cont = _GridList_r16__item_
+    GridList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    
+    #-----< GridElement-r16 >-----#
+    GridElement_r16 = SEQ(name=u'GridElement-r16', mode=MODE_TYPE)
+    _GridElement_r16_tropospericDelayCorrection_r16 = SEQ(name=u'tropospericDelayCorrection-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'TropospericDelayCorrection-r16')), opt=True)
+    _GridElement_r16_stec_ResidualSatList_r16 = SEQ_OF(name=u'stec-ResidualSatList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'STEC-ResidualSatList-r16')), opt=True)
+    GridElement_r16._cont = ASN1Dict([
+        (u'tropospericDelayCorrection-r16', _GridElement_r16_tropospericDelayCorrection_r16),
+        (u'stec-ResidualSatList-r16', _GridElement_r16_stec_ResidualSatList_r16),
+        ])
+    GridElement_r16._ext = []
+    
+    #-----< TropospericDelayCorrection-r16 >-----#
+    TropospericDelayCorrection_r16 = SEQ(name=u'TropospericDelayCorrection-r16', mode=MODE_TYPE)
+    _TropospericDelayCorrection_r16_tropoHydroStaticVerticalDelay_r16 = INT(name=u'tropoHydroStaticVerticalDelay-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _TropospericDelayCorrection_r16_tropoHydroStaticVerticalDelay_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-256, ub=255)], ev=None, er=[])
+    _TropospericDelayCorrection_r16_tropoWetVerticalDelay_r16 = INT(name=u'tropoWetVerticalDelay-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _TropospericDelayCorrection_r16_tropoWetVerticalDelay_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-128, ub=127)], ev=None, er=[])
+    TropospericDelayCorrection_r16._cont = ASN1Dict([
+        (u'tropoHydroStaticVerticalDelay-r16', _TropospericDelayCorrection_r16_tropoHydroStaticVerticalDelay_r16),
+        (u'tropoWetVerticalDelay-r16', _TropospericDelayCorrection_r16_tropoWetVerticalDelay_r16),
+        ])
+    TropospericDelayCorrection_r16._ext = []
+    
+    #-----< STEC-ResidualSatList-r16 >-----#
+    STEC_ResidualSatList_r16 = SEQ_OF(name=u'STEC-ResidualSatList-r16', mode=MODE_TYPE)
+    _STEC_ResidualSatList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'STEC-ResidualSatElement-r16')))
+    STEC_ResidualSatList_r16._cont = _STEC_ResidualSatList_r16__item_
+    STEC_ResidualSatList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    
+    #-----< STEC-ResidualSatElement-r16 >-----#
+    STEC_ResidualSatElement_r16 = SEQ(name=u'STEC-ResidualSatElement-r16', mode=MODE_TYPE)
+    _STEC_ResidualSatElement_r16_svID_r16 = SEQ(name=u'svID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'SV-ID')))
+    _STEC_ResidualSatElement_r16_stecResidualCorrection_r16 = CHOICE(name=u'stecResidualCorrection-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __STEC_ResidualSatElement_r16_stecResidualCorrection_r16_b7_r16 = INT(name=u'b7-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __STEC_ResidualSatElement_r16_stecResidualCorrection_r16_b7_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-64, ub=63)], ev=None, er=[])
+    __STEC_ResidualSatElement_r16_stecResidualCorrection_r16_b16_r16 = INT(name=u'b16-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __STEC_ResidualSatElement_r16_stecResidualCorrection_r16_b16_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-32768, ub=32767)], ev=None, er=[])
+    _STEC_ResidualSatElement_r16_stecResidualCorrection_r16._cont = ASN1Dict([
+        (u'b7-r16', __STEC_ResidualSatElement_r16_stecResidualCorrection_r16_b7_r16),
+        (u'b16-r16', __STEC_ResidualSatElement_r16_stecResidualCorrection_r16_b16_r16),
+        ])
+    _STEC_ResidualSatElement_r16_stecResidualCorrection_r16._ext = None
+    STEC_ResidualSatElement_r16._cont = ASN1Dict([
+        (u'svID-r16', _STEC_ResidualSatElement_r16_svID_r16),
+        (u'stecResidualCorrection-r16', _STEC_ResidualSatElement_r16_stecResidualCorrection_r16),
+        ])
+    STEC_ResidualSatElement_r16._ext = []
+    
+    #-----< NavIC-DifferentialCorrections-r16 >-----#
+    NavIC_DifferentialCorrections_r16 = SEQ(name=u'NavIC-DifferentialCorrections-r16', mode=MODE_TYPE)
+    _NavIC_DifferentialCorrections_r16_navic_RefTOWC_r16 = INT(name=u'navic-RefTOWC-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavIC_DifferentialCorrections_r16_navic_RefTOWC_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=50400)], ev=None, er=[])
+    _NavIC_DifferentialCorrections_r16_navic_CorrectionListAutoNav_r16 = SEQ_OF(name=u'navic-CorrectionListAutoNav-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NavIC-CorrectionListAutoNav-r16')))
+    NavIC_DifferentialCorrections_r16._cont = ASN1Dict([
+        (u'navic-RefTOWC-r16', _NavIC_DifferentialCorrections_r16_navic_RefTOWC_r16),
+        (u'navic-CorrectionListAutoNav-r16', _NavIC_DifferentialCorrections_r16_navic_CorrectionListAutoNav_r16),
+        ])
+    NavIC_DifferentialCorrections_r16._ext = []
+    
+    #-----< NavIC-CorrectionListAutoNav-r16 >-----#
+    NavIC_CorrectionListAutoNav_r16 = SEQ_OF(name=u'NavIC-CorrectionListAutoNav-r16', mode=MODE_TYPE)
+    _NavIC_CorrectionListAutoNav_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'NavIC-CorrectionElementAutoNav-r16')))
+    NavIC_CorrectionListAutoNav_r16._cont = _NavIC_CorrectionListAutoNav_r16__item_
+    NavIC_CorrectionListAutoNav_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    
+    #-----< NavIC-CorrectionElementAutoNav-r16 >-----#
+    NavIC_CorrectionElementAutoNav_r16 = SEQ(name=u'NavIC-CorrectionElementAutoNav-r16', mode=MODE_TYPE)
+    _NavIC_CorrectionElementAutoNav_r16_svID = SEQ(name=u'svID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'SV-ID')))
+    _NavIC_CorrectionElementAutoNav_r16_navic_Tod_r16 = INT(name=u'navic-Tod-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavIC_CorrectionElementAutoNav_r16_navic_Tod_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
+    _NavIC_CorrectionElementAutoNav_r16_navic_iodec_r16 = INT(name=u'navic-iodec-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavIC_CorrectionElementAutoNav_r16_navic_iodec_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    _NavIC_CorrectionElementAutoNav_r16_navic_UDRAI_r16 = INT(name=u'navic-UDRAI-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavIC_CorrectionElementAutoNav_r16_navic_UDRAI_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-16, ub=15)], ev=None, er=[])
+    _NavIC_CorrectionElementAutoNav_r16_navic_UDRArateI_r16 = INT(name=u'navic-UDRArateI-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavIC_CorrectionElementAutoNav_r16_navic_UDRArateI_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-16, ub=15)], ev=None, er=[])
+    _NavIC_CorrectionElementAutoNav_r16_navic_EDC_r16 = SEQ(name=u'navic-EDC-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NavIC-EDC-r16')))
+    _NavIC_CorrectionElementAutoNav_r16_navic_CDC_r16 = SEQ(name=u'navic-CDC-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NavIC-CDC-r16')))
+    NavIC_CorrectionElementAutoNav_r16._cont = ASN1Dict([
+        (u'svID', _NavIC_CorrectionElementAutoNav_r16_svID),
+        (u'navic-Tod-r16', _NavIC_CorrectionElementAutoNav_r16_navic_Tod_r16),
+        (u'navic-iodec-r16', _NavIC_CorrectionElementAutoNav_r16_navic_iodec_r16),
+        (u'navic-UDRAI-r16', _NavIC_CorrectionElementAutoNav_r16_navic_UDRAI_r16),
+        (u'navic-UDRArateI-r16', _NavIC_CorrectionElementAutoNav_r16_navic_UDRArateI_r16),
+        (u'navic-EDC-r16', _NavIC_CorrectionElementAutoNav_r16_navic_EDC_r16),
+        (u'navic-CDC-r16', _NavIC_CorrectionElementAutoNav_r16_navic_CDC_r16),
+        ])
+    NavIC_CorrectionElementAutoNav_r16._ext = []
+    
+    #-----< NavIC-EDC-r16 >-----#
+    NavIC_EDC_r16 = SEQ(name=u'NavIC-EDC-r16', mode=MODE_TYPE)
+    _NavIC_EDC_r16_navic_AlphaEDC_r16 = INT(name=u'navic-AlphaEDC-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavIC_EDC_r16_navic_AlphaEDC_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-8192, ub=8191)], ev=None, er=[])
+    _NavIC_EDC_r16_navic_BetaEDC_r16 = INT(name=u'navic-BetaEDC-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavIC_EDC_r16_navic_BetaEDC_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-8192, ub=8191)], ev=None, er=[])
+    _NavIC_EDC_r16_navic_GammaEDC_r16 = INT(name=u'navic-GammaEDC-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavIC_EDC_r16_navic_GammaEDC_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-16384, ub=16383)], ev=None, er=[])
+    _NavIC_EDC_r16_navic_AoIcorrection_r16 = INT(name=u'navic-AoIcorrection-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavIC_EDC_r16_navic_AoIcorrection_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-2048, ub=2047)], ev=None, er=[])
+    _NavIC_EDC_r16_navic_AoRAcorrection_r16 = INT(name=u'navic-AoRAcorrection-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavIC_EDC_r16_navic_AoRAcorrection_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-2048, ub=2047)], ev=None, er=[])
+    _NavIC_EDC_r16_navic_SemiMajorcorrection_r16 = INT(name=u'navic-SemiMajorcorrection-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavIC_EDC_r16_navic_SemiMajorcorrection_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-2048, ub=2047)], ev=None, er=[])
+    NavIC_EDC_r16._cont = ASN1Dict([
+        (u'navic-AlphaEDC-r16', _NavIC_EDC_r16_navic_AlphaEDC_r16),
+        (u'navic-BetaEDC-r16', _NavIC_EDC_r16_navic_BetaEDC_r16),
+        (u'navic-GammaEDC-r16', _NavIC_EDC_r16_navic_GammaEDC_r16),
+        (u'navic-AoIcorrection-r16', _NavIC_EDC_r16_navic_AoIcorrection_r16),
+        (u'navic-AoRAcorrection-r16', _NavIC_EDC_r16_navic_AoRAcorrection_r16),
+        (u'navic-SemiMajorcorrection-r16', _NavIC_EDC_r16_navic_SemiMajorcorrection_r16),
+        ])
+    NavIC_EDC_r16._ext = []
+    
+    #-----< NavIC-CDC-r16 >-----#
+    NavIC_CDC_r16 = SEQ(name=u'NavIC-CDC-r16', mode=MODE_TYPE)
+    _NavIC_CDC_r16_navic_ClockBiasCorrection_r16 = INT(name=u'navic-ClockBiasCorrection-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavIC_CDC_r16_navic_ClockBiasCorrection_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-4096, ub=4095)], ev=None, er=[])
+    _NavIC_CDC_r16_navic_ClockDriftCorrection_r16 = INT(name=u'navic-ClockDriftCorrection-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavIC_CDC_r16_navic_ClockDriftCorrection_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-128, ub=127)], ev=None, er=[])
+    NavIC_CDC_r16._cont = ASN1Dict([
+        (u'navic-ClockBiasCorrection-r16', _NavIC_CDC_r16_navic_ClockBiasCorrection_r16),
+        (u'navic-ClockDriftCorrection-r16', _NavIC_CDC_r16_navic_ClockDriftCorrection_r16),
+        ])
+    NavIC_CDC_r16._ext = []
+    
+    #-----< NavIC-GridModelParameter-r16 >-----#
+    NavIC_GridModelParameter_r16 = SEQ(name=u'NavIC-GridModelParameter-r16', mode=MODE_TYPE)
+    _NavIC_GridModelParameter_r16_navic_RefTOWC_r16 = INT(name=u'navic-RefTOWC-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavIC_GridModelParameter_r16_navic_RefTOWC_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=50400)], ev=None, er=[])
+    _NavIC_GridModelParameter_r16_regionMasked_r16 = INT(name=u'regionMasked-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NavIC_GridModelParameter_r16_regionMasked_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1023)], ev=None, er=[])
+    _NavIC_GridModelParameter_r16_regionIgpList_r16 = SEQ_OF(name=u'regionIgpList-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'RegionIgpList-r16')))
+    NavIC_GridModelParameter_r16._cont = ASN1Dict([
+        (u'navic-RefTOWC-r16', _NavIC_GridModelParameter_r16_navic_RefTOWC_r16),
+        (u'regionMasked-r16', _NavIC_GridModelParameter_r16_regionMasked_r16),
+        (u'regionIgpList-r16', _NavIC_GridModelParameter_r16_regionIgpList_r16),
+        ])
+    NavIC_GridModelParameter_r16._ext = []
+    
+    #-----< RegionIgpList-r16 >-----#
+    RegionIgpList_r16 = SEQ_OF(name=u'RegionIgpList-r16', mode=MODE_TYPE)
+    _RegionIgpList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'RegionIgpElement-r16')))
+    RegionIgpList_r16._cont = _RegionIgpList_r16__item_
+    RegionIgpList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    
+    #-----< RegionIgpElement-r16 >-----#
+    RegionIgpElement_r16 = SEQ(name=u'RegionIgpElement-r16', mode=MODE_TYPE)
+    _RegionIgpElement_r16_regionID_r16 = INT(name=u'regionID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_regionID_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _RegionIgpElement_r16_givei1_r16 = INT(name=u'givei1-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givei1_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _RegionIgpElement_r16_givd1_r16 = INT(name=u'givd1-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givd1_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
+    _RegionIgpElement_r16_givei2_r16 = INT(name=u'givei2-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givei2_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _RegionIgpElement_r16_givd2_r16 = INT(name=u'givd2-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givd2_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
+    _RegionIgpElement_r16_givei3_r16 = INT(name=u'givei3-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givei3_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _RegionIgpElement_r16_givd3_r16 = INT(name=u'givd3-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givd3_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
+    _RegionIgpElement_r16_givei4_r16 = INT(name=u'givei4-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givei4_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _RegionIgpElement_r16_givd4_r16 = INT(name=u'givd4-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givd4_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
+    _RegionIgpElement_r16_givei5_r16 = INT(name=u'givei5-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givei5_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _RegionIgpElement_r16_givd5_r16 = INT(name=u'givd5-r16', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givd5_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
+    _RegionIgpElement_r16_givei6_r16 = INT(name=u'givei6-r16', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givei6_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _RegionIgpElement_r16_givd6_r16 = INT(name=u'givd6-r16', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givd6_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
+    _RegionIgpElement_r16_givei7_r16 = INT(name=u'givei7-r16', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givei7_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _RegionIgpElement_r16_givd7_r16 = INT(name=u'givd7-r16', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givd7_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
+    _RegionIgpElement_r16_givei8_r16 = INT(name=u'givei8-r16', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givei8_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _RegionIgpElement_r16_givd8_r16 = INT(name=u'givd8-r16', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givd8_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
+    _RegionIgpElement_r16_givei9_r16 = INT(name=u'givei9-r16', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givei9_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _RegionIgpElement_r16_givd9_r16 = INT(name=u'givd9-r16', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givd9_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
+    _RegionIgpElement_r16_givei10_r16 = INT(name=u'givei10-r16', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givei10_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _RegionIgpElement_r16_givd10_r16 = INT(name=u'givd10-r16', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givd10_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
+    _RegionIgpElement_r16_givei11_r16 = INT(name=u'givei11-r16', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givei11_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _RegionIgpElement_r16_givd11_r16 = INT(name=u'givd11-r16', mode=MODE_TYPE, tag=(22, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givd11_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
+    _RegionIgpElement_r16_givei12_r16 = INT(name=u'givei12-r16', mode=MODE_TYPE, tag=(23, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givei12_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _RegionIgpElement_r16_givd12_r16 = INT(name=u'givd12-r16', mode=MODE_TYPE, tag=(24, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givd12_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
+    _RegionIgpElement_r16_givei13_r16 = INT(name=u'givei13-r16', mode=MODE_TYPE, tag=(25, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givei13_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _RegionIgpElement_r16_givd13_r16 = INT(name=u'givd13-r16', mode=MODE_TYPE, tag=(26, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givd13_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
+    _RegionIgpElement_r16_givei14_r16 = INT(name=u'givei14-r16', mode=MODE_TYPE, tag=(27, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givei14_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _RegionIgpElement_r16_givd14_r16 = INT(name=u'givd14-r16', mode=MODE_TYPE, tag=(28, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givd14_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
+    _RegionIgpElement_r16_givei15_r16 = INT(name=u'givei15-r16', mode=MODE_TYPE, tag=(29, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givei15_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
+    _RegionIgpElement_r16_givd15_r16 = INT(name=u'givd15-r16', mode=MODE_TYPE, tag=(30, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegionIgpElement_r16_givd15_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
+    RegionIgpElement_r16._cont = ASN1Dict([
+        (u'regionID-r16', _RegionIgpElement_r16_regionID_r16),
+        (u'givei1-r16', _RegionIgpElement_r16_givei1_r16),
+        (u'givd1-r16', _RegionIgpElement_r16_givd1_r16),
+        (u'givei2-r16', _RegionIgpElement_r16_givei2_r16),
+        (u'givd2-r16', _RegionIgpElement_r16_givd2_r16),
+        (u'givei3-r16', _RegionIgpElement_r16_givei3_r16),
+        (u'givd3-r16', _RegionIgpElement_r16_givd3_r16),
+        (u'givei4-r16', _RegionIgpElement_r16_givei4_r16),
+        (u'givd4-r16', _RegionIgpElement_r16_givd4_r16),
+        (u'givei5-r16', _RegionIgpElement_r16_givei5_r16),
+        (u'givd5-r16', _RegionIgpElement_r16_givd5_r16),
+        (u'givei6-r16', _RegionIgpElement_r16_givei6_r16),
+        (u'givd6-r16', _RegionIgpElement_r16_givd6_r16),
+        (u'givei7-r16', _RegionIgpElement_r16_givei7_r16),
+        (u'givd7-r16', _RegionIgpElement_r16_givd7_r16),
+        (u'givei8-r16', _RegionIgpElement_r16_givei8_r16),
+        (u'givd8-r16', _RegionIgpElement_r16_givd8_r16),
+        (u'givei9-r16', _RegionIgpElement_r16_givei9_r16),
+        (u'givd9-r16', _RegionIgpElement_r16_givd9_r16),
+        (u'givei10-r16', _RegionIgpElement_r16_givei10_r16),
+        (u'givd10-r16', _RegionIgpElement_r16_givd10_r16),
+        (u'givei11-r16', _RegionIgpElement_r16_givei11_r16),
+        (u'givd11-r16', _RegionIgpElement_r16_givd11_r16),
+        (u'givei12-r16', _RegionIgpElement_r16_givei12_r16),
+        (u'givd12-r16', _RegionIgpElement_r16_givd12_r16),
+        (u'givei13-r16', _RegionIgpElement_r16_givei13_r16),
+        (u'givd13-r16', _RegionIgpElement_r16_givd13_r16),
+        (u'givei14-r16', _RegionIgpElement_r16_givei14_r16),
+        (u'givd14-r16', _RegionIgpElement_r16_givd14_r16),
+        (u'givei15-r16', _RegionIgpElement_r16_givei15_r16),
+        (u'givd15-r16', _RegionIgpElement_r16_givd15_r16),
+        ])
+    RegionIgpElement_r16._ext = []
+    
     #-----< A-GNSS-RequestAssistanceData >-----#
     A_GNSS_RequestAssistanceData = SEQ(name=u'A-GNSS-RequestAssistanceData', mode=MODE_TYPE)
     _A_GNSS_RequestAssistanceData_gnss_CommonAssistDataReq = SEQ(name=u'gnss-CommonAssistDataReq', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-CommonAssistDataReq')), opt=True)
@@ -5564,6 +8244,7 @@ class LPP_PDU_Definitions:
     _GNSS_CommonAssistDataReq_gnss_EarthOrientationParametersReq = SEQ(name=u'gnss-EarthOrientationParametersReq', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-EarthOrientationParametersReq')), opt=True)
     _GNSS_CommonAssistDataReq_gnss_RTK_ReferenceStationInfoReq_r15 = SEQ(name=u'gnss-RTK-ReferenceStationInfoReq-r15', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-RTK-ReferenceStationInfoReq-r15')), opt=True, group=0)
     _GNSS_CommonAssistDataReq_gnss_RTK_AuxiliaryStationDataReq_r15 = SEQ(name=u'gnss-RTK-AuxiliaryStationDataReq-r15', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-RTK-AuxiliaryStationDataReq-r15')), opt=True, group=0)
+    _GNSS_CommonAssistDataReq_gnss_SSR_CorrectionPointsReq_r16 = SEQ(name=u'gnss-SSR-CorrectionPointsReq-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-CorrectionPointsReq-r16')), opt=True, group=1)
     GNSS_CommonAssistDataReq._cont = ASN1Dict([
         (u'gnss-ReferenceTimeReq', _GNSS_CommonAssistDataReq_gnss_ReferenceTimeReq),
         (u'gnss-ReferenceLocationReq', _GNSS_CommonAssistDataReq_gnss_ReferenceLocationReq),
@@ -5571,8 +8252,9 @@ class LPP_PDU_Definitions:
         (u'gnss-EarthOrientationParametersReq', _GNSS_CommonAssistDataReq_gnss_EarthOrientationParametersReq),
         (u'gnss-RTK-ReferenceStationInfoReq-r15', _GNSS_CommonAssistDataReq_gnss_RTK_ReferenceStationInfoReq_r15),
         (u'gnss-RTK-AuxiliaryStationDataReq-r15', _GNSS_CommonAssistDataReq_gnss_RTK_AuxiliaryStationDataReq_r15),
+        (u'gnss-SSR-CorrectionPointsReq-r16', _GNSS_CommonAssistDataReq_gnss_SSR_CorrectionPointsReq_r16),
         ])
-    GNSS_CommonAssistDataReq._ext = [u'gnss-RTK-ReferenceStationInfoReq-r15', u'gnss-RTK-AuxiliaryStationDataReq-r15']
+    GNSS_CommonAssistDataReq._ext = [u'gnss-RTK-ReferenceStationInfoReq-r15', u'gnss-RTK-AuxiliaryStationDataReq-r15', u'gnss-SSR-CorrectionPointsReq-r16']
     
     #-----< GNSS-GenericAssistDataReq >-----#
     GNSS_GenericAssistDataReq = SEQ_OF(name=u'GNSS-GenericAssistDataReq', mode=MODE_TYPE)
@@ -5603,6 +8285,12 @@ class LPP_PDU_Definitions:
     _GNSS_GenericAssistDataReqElement_gnss_SSR_OrbitCorrectionsReq_r15 = SEQ(name=u'gnss-SSR-OrbitCorrectionsReq-r15', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-OrbitCorrectionsReq-r15')), opt=True, group=1)
     _GNSS_GenericAssistDataReqElement_gnss_SSR_ClockCorrectionsReq_r15 = SEQ(name=u'gnss-SSR-ClockCorrectionsReq-r15', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-ClockCorrectionsReq-r15')), opt=True, group=1)
     _GNSS_GenericAssistDataReqElement_gnss_SSR_CodeBiasReq_r15 = SEQ(name=u'gnss-SSR-CodeBiasReq-r15', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-CodeBiasReq-r15')), opt=True, group=1)
+    _GNSS_GenericAssistDataReqElement_gnss_SSR_URA_Req_r16 = SEQ(name=u'gnss-SSR-URA-Req-r16', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-URA-Req-r16')), opt=True, group=2)
+    _GNSS_GenericAssistDataReqElement_gnss_SSR_PhaseBiasReq_r16 = SEQ(name=u'gnss-SSR-PhaseBiasReq-r16', mode=MODE_TYPE, tag=(22, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-PhaseBiasReq-r16')), opt=True, group=2)
+    _GNSS_GenericAssistDataReqElement_gnss_SSR_STEC_CorrectionReq_r16 = SEQ(name=u'gnss-SSR-STEC-CorrectionReq-r16', mode=MODE_TYPE, tag=(23, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-STEC-CorrectionReq-r16')), opt=True, group=2)
+    _GNSS_GenericAssistDataReqElement_gnss_SSR_GriddedCorrectionReq_r16 = SEQ(name=u'gnss-SSR-GriddedCorrectionReq-r16', mode=MODE_TYPE, tag=(24, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-GriddedCorrectionReq-r16')), opt=True, group=2)
+    _GNSS_GenericAssistDataReqElement_navic_DifferentialCorrectionsReq_r16 = SEQ(name=u'navic-DifferentialCorrectionsReq-r16', mode=MODE_TYPE, tag=(25, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NavIC-DifferentialCorrectionsReq-r16')), opt=True, group=2)
+    _GNSS_GenericAssistDataReqElement_navic_GridModelReq_r16 = SEQ(name=u'navic-GridModelReq-r16', mode=MODE_TYPE, tag=(26, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NavIC-GridModelReq-r16')), opt=True, group=2)
     GNSS_GenericAssistDataReqElement._cont = ASN1Dict([
         (u'gnss-ID', _GNSS_GenericAssistDataReqElement_gnss_ID),
         (u'sbas-ID', _GNSS_GenericAssistDataReqElement_sbas_ID),
@@ -5625,8 +8313,14 @@ class LPP_PDU_Definitions:
         (u'gnss-SSR-OrbitCorrectionsReq-r15', _GNSS_GenericAssistDataReqElement_gnss_SSR_OrbitCorrectionsReq_r15),
         (u'gnss-SSR-ClockCorrectionsReq-r15', _GNSS_GenericAssistDataReqElement_gnss_SSR_ClockCorrectionsReq_r15),
         (u'gnss-SSR-CodeBiasReq-r15', _GNSS_GenericAssistDataReqElement_gnss_SSR_CodeBiasReq_r15),
+        (u'gnss-SSR-URA-Req-r16', _GNSS_GenericAssistDataReqElement_gnss_SSR_URA_Req_r16),
+        (u'gnss-SSR-PhaseBiasReq-r16', _GNSS_GenericAssistDataReqElement_gnss_SSR_PhaseBiasReq_r16),
+        (u'gnss-SSR-STEC-CorrectionReq-r16', _GNSS_GenericAssistDataReqElement_gnss_SSR_STEC_CorrectionReq_r16),
+        (u'gnss-SSR-GriddedCorrectionReq-r16', _GNSS_GenericAssistDataReqElement_gnss_SSR_GriddedCorrectionReq_r16),
+        (u'navic-DifferentialCorrectionsReq-r16', _GNSS_GenericAssistDataReqElement_navic_DifferentialCorrectionsReq_r16),
+        (u'navic-GridModelReq-r16', _GNSS_GenericAssistDataReqElement_navic_GridModelReq_r16),
         ])
-    GNSS_GenericAssistDataReqElement._ext = [u'bds-DifferentialCorrectionsReq-r12', u'bds-GridModelReq-r12', u'gnss-RTK-ObservationsReq-r15', u'glo-RTK-BiasInformationReq-r15', u'gnss-RTK-MAC-CorrectionDifferencesReq-r15', u'gnss-RTK-ResidualsReq-r15', u'gnss-RTK-FKP-GradientsReq-r15', u'gnss-SSR-OrbitCorrectionsReq-r15', u'gnss-SSR-ClockCorrectionsReq-r15', u'gnss-SSR-CodeBiasReq-r15']
+    GNSS_GenericAssistDataReqElement._ext = [u'bds-DifferentialCorrectionsReq-r12', u'bds-GridModelReq-r12', u'gnss-RTK-ObservationsReq-r15', u'glo-RTK-BiasInformationReq-r15', u'gnss-RTK-MAC-CorrectionDifferencesReq-r15', u'gnss-RTK-ResidualsReq-r15', u'gnss-RTK-FKP-GradientsReq-r15', u'gnss-SSR-OrbitCorrectionsReq-r15', u'gnss-SSR-ClockCorrectionsReq-r15', u'gnss-SSR-CodeBiasReq-r15', u'gnss-SSR-URA-Req-r16', u'gnss-SSR-PhaseBiasReq-r16', u'gnss-SSR-STEC-CorrectionReq-r16', u'gnss-SSR-GriddedCorrectionReq-r16', u'navic-DifferentialCorrectionsReq-r16', u'navic-GridModelReq-r16']
     
     #-----< GNSS-PeriodicAssistDataReq-r15 >-----#
     GNSS_PeriodicAssistDataReq_r15 = SEQ(name=u'GNSS-PeriodicAssistDataReq-r15', mode=MODE_TYPE)
@@ -5638,6 +8332,10 @@ class LPP_PDU_Definitions:
     _GNSS_PeriodicAssistDataReq_r15_gnss_SSR_PeriodicOrbitCorrectionsReq_r15 = SEQ(name=u'gnss-SSR-PeriodicOrbitCorrectionsReq-r15', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-PeriodicControlParam-r15')), opt=True)
     _GNSS_PeriodicAssistDataReq_r15_gnss_SSR_PeriodicClockCorrectionsReq_r15 = SEQ(name=u'gnss-SSR-PeriodicClockCorrectionsReq-r15', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-PeriodicControlParam-r15')), opt=True)
     _GNSS_PeriodicAssistDataReq_r15_gnss_SSR_PeriodicCodeBiasReq_r15 = SEQ(name=u'gnss-SSR-PeriodicCodeBiasReq-r15', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-PeriodicControlParam-r15')), opt=True)
+    _GNSS_PeriodicAssistDataReq_r15_gnss_SSR_PeriodicURA_Req_r16 = SEQ(name=u'gnss-SSR-PeriodicURA-Req-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-PeriodicControlParam-r15')), opt=True, group=0)
+    _GNSS_PeriodicAssistDataReq_r15_gnss_SSR_PeriodicPhaseBiasReq_r16 = SEQ(name=u'gnss-SSR-PeriodicPhaseBiasReq-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-PeriodicControlParam-r15')), opt=True, group=0)
+    _GNSS_PeriodicAssistDataReq_r15_gnss_SSR_PeriodicSTEC_CorrectionReq_r16 = SEQ(name=u'gnss-SSR-PeriodicSTEC-CorrectionReq-r16', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-PeriodicControlParam-r15')), opt=True, group=0)
+    _GNSS_PeriodicAssistDataReq_r15_gnss_SSR_PeriodicGriddedCorrectionReq_r16 = SEQ(name=u'gnss-SSR-PeriodicGriddedCorrectionReq-r16', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-PeriodicControlParam-r15')), opt=True, group=0)
     GNSS_PeriodicAssistDataReq_r15._cont = ASN1Dict([
         (u'gnss-RTK-PeriodicObservationsReq-r15', _GNSS_PeriodicAssistDataReq_r15_gnss_RTK_PeriodicObservationsReq_r15),
         (u'glo-RTK-PeriodicBiasInformationReq-r15', _GNSS_PeriodicAssistDataReq_r15_glo_RTK_PeriodicBiasInformationReq_r15),
@@ -5647,8 +8345,12 @@ class LPP_PDU_Definitions:
         (u'gnss-SSR-PeriodicOrbitCorrectionsReq-r15', _GNSS_PeriodicAssistDataReq_r15_gnss_SSR_PeriodicOrbitCorrectionsReq_r15),
         (u'gnss-SSR-PeriodicClockCorrectionsReq-r15', _GNSS_PeriodicAssistDataReq_r15_gnss_SSR_PeriodicClockCorrectionsReq_r15),
         (u'gnss-SSR-PeriodicCodeBiasReq-r15', _GNSS_PeriodicAssistDataReq_r15_gnss_SSR_PeriodicCodeBiasReq_r15),
+        (u'gnss-SSR-PeriodicURA-Req-r16', _GNSS_PeriodicAssistDataReq_r15_gnss_SSR_PeriodicURA_Req_r16),
+        (u'gnss-SSR-PeriodicPhaseBiasReq-r16', _GNSS_PeriodicAssistDataReq_r15_gnss_SSR_PeriodicPhaseBiasReq_r16),
+        (u'gnss-SSR-PeriodicSTEC-CorrectionReq-r16', _GNSS_PeriodicAssistDataReq_r15_gnss_SSR_PeriodicSTEC_CorrectionReq_r16),
+        (u'gnss-SSR-PeriodicGriddedCorrectionReq-r16', _GNSS_PeriodicAssistDataReq_r15_gnss_SSR_PeriodicGriddedCorrectionReq_r16),
         ])
-    GNSS_PeriodicAssistDataReq_r15._ext = []
+    GNSS_PeriodicAssistDataReq_r15._ext = [u'gnss-SSR-PeriodicURA-Req-r16', u'gnss-SSR-PeriodicPhaseBiasReq-r16', u'gnss-SSR-PeriodicSTEC-CorrectionReq-r16', u'gnss-SSR-PeriodicGriddedCorrectionReq-r16']
     
     #-----< GNSS-ReferenceTimeReq >-----#
     GNSS_ReferenceTimeReq = SEQ(name=u'GNSS-ReferenceTimeReq', mode=MODE_TYPE)
@@ -5676,11 +8378,13 @@ class LPP_PDU_Definitions:
     _GNSS_IonosphericModelReq_klobucharModelReq = BIT_STR(name=u'klobucharModelReq', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _GNSS_IonosphericModelReq_klobucharModelReq._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     _GNSS_IonosphericModelReq_neQuickModelReq = NULL(name=u'neQuickModelReq', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _GNSS_IonosphericModelReq_klobucharModel2Req_r16 = NULL(name=u'klobucharModel2Req-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
     GNSS_IonosphericModelReq._cont = ASN1Dict([
         (u'klobucharModelReq', _GNSS_IonosphericModelReq_klobucharModelReq),
         (u'neQuickModelReq', _GNSS_IonosphericModelReq_neQuickModelReq),
+        (u'klobucharModel2Req-r16', _GNSS_IonosphericModelReq_klobucharModel2Req_r16),
         ])
-    GNSS_IonosphericModelReq._ext = []
+    GNSS_IonosphericModelReq._ext = [u'klobucharModel2Req-r16']
     
     #-----< GNSS-EarthOrientationParametersReq >-----#
     GNSS_EarthOrientationParametersReq = SEQ(name=u'GNSS-EarthOrientationParametersReq', mode=MODE_TYPE)
@@ -5709,6 +8413,15 @@ class LPP_PDU_Definitions:
         (u'master-referenceStationID-r15', _GNSS_RTK_AuxiliaryStationDataReq_r15_master_referenceStationID_r15),
         ])
     GNSS_RTK_AuxiliaryStationDataReq_r15._ext = []
+    
+    #-----< GNSS-SSR-CorrectionPointsReq-r16 >-----#
+    GNSS_SSR_CorrectionPointsReq_r16 = SEQ(name=u'GNSS-SSR-CorrectionPointsReq-r16', mode=MODE_TYPE)
+    _GNSS_SSR_CorrectionPointsReq_r16_correctionPointSetID_Req_r16 = INT(name=u'correctionPointSetID-Req-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _GNSS_SSR_CorrectionPointsReq_r16_correctionPointSetID_Req_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=16383)], ev=None, er=[])
+    GNSS_SSR_CorrectionPointsReq_r16._cont = ASN1Dict([
+        (u'correctionPointSetID-Req-r16', _GNSS_SSR_CorrectionPointsReq_r16_correctionPointSetID_Req_r16),
+        ])
+    GNSS_SSR_CorrectionPointsReq_r16._ext = []
     
     #-----< GNSS-TimeModelListReq >-----#
     GNSS_TimeModelListReq = SEQ_OF(name=u'GNSS-TimeModelListReq', mode=MODE_TYPE)
@@ -5990,6 +8703,48 @@ class LPP_PDU_Definitions:
         (u'storedNavList-r15', _GNSS_SSR_CodeBiasReq_r15_storedNavList_r15),
         ])
     GNSS_SSR_CodeBiasReq_r15._ext = []
+    
+    #-----< GNSS-SSR-URA-Req-r16 >-----#
+    GNSS_SSR_URA_Req_r16 = SEQ(name=u'GNSS-SSR-URA-Req-r16', mode=MODE_TYPE)
+    GNSS_SSR_URA_Req_r16._cont = ASN1Dict([
+        ])
+    GNSS_SSR_URA_Req_r16._ext = []
+    
+    #-----< GNSS-SSR-PhaseBiasReq-r16 >-----#
+    GNSS_SSR_PhaseBiasReq_r16 = SEQ(name=u'GNSS-SSR-PhaseBiasReq-r16', mode=MODE_TYPE)
+    _GNSS_SSR_PhaseBiasReq_r16_signal_and_tracking_mode_ID_Map_r16 = SEQ(name=u'signal-and-tracking-mode-ID-Map-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SignalIDs')))
+    _GNSS_SSR_PhaseBiasReq_r16_storedNavList_r16 = SEQ_OF(name=u'storedNavList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-NavListInfo-r15')), opt=True)
+    GNSS_SSR_PhaseBiasReq_r16._cont = ASN1Dict([
+        (u'signal-and-tracking-mode-ID-Map-r16', _GNSS_SSR_PhaseBiasReq_r16_signal_and_tracking_mode_ID_Map_r16),
+        (u'storedNavList-r16', _GNSS_SSR_PhaseBiasReq_r16_storedNavList_r16),
+        ])
+    GNSS_SSR_PhaseBiasReq_r16._ext = []
+    
+    #-----< GNSS-SSR-STEC-CorrectionReq-r16 >-----#
+    GNSS_SSR_STEC_CorrectionReq_r16 = SEQ(name=u'GNSS-SSR-STEC-CorrectionReq-r16', mode=MODE_TYPE)
+    GNSS_SSR_STEC_CorrectionReq_r16._cont = ASN1Dict([
+        ])
+    GNSS_SSR_STEC_CorrectionReq_r16._ext = []
+    
+    #-----< GNSS-SSR-GriddedCorrectionReq-r16 >-----#
+    GNSS_SSR_GriddedCorrectionReq_r16 = SEQ(name=u'GNSS-SSR-GriddedCorrectionReq-r16', mode=MODE_TYPE)
+    GNSS_SSR_GriddedCorrectionReq_r16._cont = ASN1Dict([
+        ])
+    GNSS_SSR_GriddedCorrectionReq_r16._ext = []
+    
+    #-----< NavIC-DifferentialCorrectionsReq-r16 >-----#
+    NavIC_DifferentialCorrectionsReq_r16 = SEQ(name=u'NavIC-DifferentialCorrectionsReq-r16', mode=MODE_TYPE)
+    _NavIC_DifferentialCorrectionsReq_r16_dgnss_SignalsReq_r16 = SEQ(name=u'dgnss-SignalsReq-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SignalIDs')))
+    NavIC_DifferentialCorrectionsReq_r16._cont = ASN1Dict([
+        (u'dgnss-SignalsReq-r16', _NavIC_DifferentialCorrectionsReq_r16_dgnss_SignalsReq_r16),
+        ])
+    NavIC_DifferentialCorrectionsReq_r16._ext = []
+    
+    #-----< NavIC-GridModelReq-r16 >-----#
+    NavIC_GridModelReq_r16 = SEQ(name=u'NavIC-GridModelReq-r16', mode=MODE_TYPE)
+    NavIC_GridModelReq_r16._cont = ASN1Dict([
+        ])
+    NavIC_GridModelReq_r16._ext = []
     
     #-----< A-GNSS-ProvideLocationInformation >-----#
     A_GNSS_ProvideLocationInformation = SEQ(name=u'A-GNSS-ProvideLocationInformation', mode=MODE_TYPE)
@@ -6370,7 +9125,7 @@ class LPP_PDU_Definitions:
     #-----< GNSS-IonosphericModelSupport >-----#
     GNSS_IonosphericModelSupport = SEQ(name=u'GNSS-IonosphericModelSupport', mode=MODE_TYPE)
     _GNSS_IonosphericModelSupport_ionoModel = BIT_STR(name=u'ionoModel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _GNSS_IonosphericModelSupport_ionoModel._cont = ASN1Dict([(u'klobuchar', 0), (u'neQuick', 1)])
+    _GNSS_IonosphericModelSupport_ionoModel._cont = ASN1Dict([(u'klobuchar', 0), (u'neQuick', 1), (u'klobuchar2-r16', 2)])
     _GNSS_IonosphericModelSupport_ionoModel._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
     GNSS_IonosphericModelSupport._cont = ASN1Dict([
         (u'ionoModel', _GNSS_IonosphericModelSupport_ionoModel),
@@ -6424,6 +9179,12 @@ class LPP_PDU_Definitions:
     _GNSS_GenericAssistDataSupportElement_gnss_SSR_OrbitCorrectionsSupport_r15 = SEQ(name=u'gnss-SSR-OrbitCorrectionsSupport-r15', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-OrbitCorrectionsSupport-r15')), opt=True, group=1)
     _GNSS_GenericAssistDataSupportElement_gnss_SSR_ClockCorrectionsSupport_r15 = SEQ(name=u'gnss-SSR-ClockCorrectionsSupport-r15', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-ClockCorrectionsSupport-r15')), opt=True, group=1)
     _GNSS_GenericAssistDataSupportElement_gnss_SSR_CodeBiasSupport_r15 = SEQ(name=u'gnss-SSR-CodeBiasSupport-r15', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-CodeBiasSupport-r15')), opt=True, group=1)
+    _GNSS_GenericAssistDataSupportElement_gnss_SSR_URA_Support_r16 = SEQ(name=u'gnss-SSR-URA-Support-r16', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-URA-Support-r16')), opt=True, group=2)
+    _GNSS_GenericAssistDataSupportElement_gnss_SSR_PhaseBiasSupport_r16 = SEQ(name=u'gnss-SSR-PhaseBiasSupport-r16', mode=MODE_TYPE, tag=(22, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-PhaseBiasSupport-r16')), opt=True, group=2)
+    _GNSS_GenericAssistDataSupportElement_gnss_SSR_STEC_CorrectionSupport_r16 = SEQ(name=u'gnss-SSR-STEC-CorrectionSupport-r16', mode=MODE_TYPE, tag=(23, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-STEC-CorrectionSupport-r16')), opt=True, group=2)
+    _GNSS_GenericAssistDataSupportElement_gnss_SSR_GriddedCorrectionSupport_r16 = SEQ(name=u'gnss-SSR-GriddedCorrectionSupport-r16', mode=MODE_TYPE, tag=(24, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SSR-GriddedCorrectionSupport-r16')), opt=True, group=2)
+    _GNSS_GenericAssistDataSupportElement_navic_DifferentialCorrectionsSupport_r16 = SEQ(name=u'navic-DifferentialCorrectionsSupport-r16', mode=MODE_TYPE, tag=(25, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NavIC-DifferentialCorrectionsSupport-r16')), opt=True, group=2)
+    _GNSS_GenericAssistDataSupportElement_navic_GridModelSupport_r16 = SEQ(name=u'navic-GridModelSupport-r16', mode=MODE_TYPE, tag=(26, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NavIC-GridModelSupport-r16')), opt=True, group=2)
     GNSS_GenericAssistDataSupportElement._cont = ASN1Dict([
         (u'gnss-ID', _GNSS_GenericAssistDataSupportElement_gnss_ID),
         (u'sbas-ID', _GNSS_GenericAssistDataSupportElement_sbas_ID),
@@ -6446,8 +9207,14 @@ class LPP_PDU_Definitions:
         (u'gnss-SSR-OrbitCorrectionsSupport-r15', _GNSS_GenericAssistDataSupportElement_gnss_SSR_OrbitCorrectionsSupport_r15),
         (u'gnss-SSR-ClockCorrectionsSupport-r15', _GNSS_GenericAssistDataSupportElement_gnss_SSR_ClockCorrectionsSupport_r15),
         (u'gnss-SSR-CodeBiasSupport-r15', _GNSS_GenericAssistDataSupportElement_gnss_SSR_CodeBiasSupport_r15),
+        (u'gnss-SSR-URA-Support-r16', _GNSS_GenericAssistDataSupportElement_gnss_SSR_URA_Support_r16),
+        (u'gnss-SSR-PhaseBiasSupport-r16', _GNSS_GenericAssistDataSupportElement_gnss_SSR_PhaseBiasSupport_r16),
+        (u'gnss-SSR-STEC-CorrectionSupport-r16', _GNSS_GenericAssistDataSupportElement_gnss_SSR_STEC_CorrectionSupport_r16),
+        (u'gnss-SSR-GriddedCorrectionSupport-r16', _GNSS_GenericAssistDataSupportElement_gnss_SSR_GriddedCorrectionSupport_r16),
+        (u'navic-DifferentialCorrectionsSupport-r16', _GNSS_GenericAssistDataSupportElement_navic_DifferentialCorrectionsSupport_r16),
+        (u'navic-GridModelSupport-r16', _GNSS_GenericAssistDataSupportElement_navic_GridModelSupport_r16),
         ])
-    GNSS_GenericAssistDataSupportElement._ext = [u'bds-DifferentialCorrectionsSupport-r12', u'bds-GridModelSupport-r12', u'gnss-RTK-ObservationsSupport-r15', u'glo-RTK-BiasInformationSupport-r15', u'gnss-RTK-MAC-CorrectionDifferencesSupport-r15', u'gnss-RTK-ResidualsSupport-r15', u'gnss-RTK-FKP-GradientsSupport-r15', u'gnss-SSR-OrbitCorrectionsSupport-r15', u'gnss-SSR-ClockCorrectionsSupport-r15', u'gnss-SSR-CodeBiasSupport-r15']
+    GNSS_GenericAssistDataSupportElement._ext = [u'bds-DifferentialCorrectionsSupport-r12', u'bds-GridModelSupport-r12', u'gnss-RTK-ObservationsSupport-r15', u'glo-RTK-BiasInformationSupport-r15', u'gnss-RTK-MAC-CorrectionDifferencesSupport-r15', u'gnss-RTK-ResidualsSupport-r15', u'gnss-RTK-FKP-GradientsSupport-r15', u'gnss-SSR-OrbitCorrectionsSupport-r15', u'gnss-SSR-ClockCorrectionsSupport-r15', u'gnss-SSR-CodeBiasSupport-r15', u'gnss-SSR-URA-Support-r16', u'gnss-SSR-PhaseBiasSupport-r16', u'gnss-SSR-STEC-CorrectionSupport-r16', u'gnss-SSR-GriddedCorrectionSupport-r16', u'navic-DifferentialCorrectionsSupport-r16', u'navic-GridModelSupport-r16']
     
     #-----< GNSS-TimeModelListSupport >-----#
     GNSS_TimeModelListSupport = SEQ(name=u'GNSS-TimeModelListSupport', mode=MODE_TYPE)
@@ -6468,10 +9235,10 @@ class LPP_PDU_Definitions:
     #-----< GNSS-NavigationModelSupport >-----#
     GNSS_NavigationModelSupport = SEQ(name=u'GNSS-NavigationModelSupport', mode=MODE_TYPE)
     _GNSS_NavigationModelSupport_clockModel = BIT_STR(name=u'clockModel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _GNSS_NavigationModelSupport_clockModel._cont = ASN1Dict([(u'model-1', 0), (u'model-2', 1), (u'model-3', 2), (u'model-4', 3), (u'model-5', 4), (u'model-6', 5)])
+    _GNSS_NavigationModelSupport_clockModel._cont = ASN1Dict([(u'model-1', 0), (u'model-2', 1), (u'model-3', 2), (u'model-4', 3), (u'model-5', 4), (u'model-6', 5), (u'model-7-r16', 6), (u'model-8-r16', 7)])
     _GNSS_NavigationModelSupport_clockModel._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
     _GNSS_NavigationModelSupport_orbitModel = BIT_STR(name=u'orbitModel', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _GNSS_NavigationModelSupport_orbitModel._cont = ASN1Dict([(u'model-1', 0), (u'model-2', 1), (u'model-3', 2), (u'model-4', 3), (u'model-5', 4), (u'model-6', 5)])
+    _GNSS_NavigationModelSupport_orbitModel._cont = ASN1Dict([(u'model-1', 0), (u'model-2', 1), (u'model-3', 2), (u'model-4', 3), (u'model-5', 4), (u'model-6', 5), (u'model-7-r16', 6), (u'model-8-r16', 7)])
     _GNSS_NavigationModelSupport_orbitModel._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
     GNSS_NavigationModelSupport._cont = ASN1Dict([
         (u'clockModel', _GNSS_NavigationModelSupport_clockModel),
@@ -6603,6 +9370,46 @@ class LPP_PDU_Definitions:
         ])
     GNSS_SSR_CodeBiasSupport_r15._ext = []
     
+    #-----< GNSS-SSR-URA-Support-r16 >-----#
+    GNSS_SSR_URA_Support_r16 = SEQ(name=u'GNSS-SSR-URA-Support-r16', mode=MODE_TYPE)
+    GNSS_SSR_URA_Support_r16._cont = ASN1Dict([
+        ])
+    GNSS_SSR_URA_Support_r16._ext = []
+    
+    #-----< GNSS-SSR-PhaseBiasSupport-r16 >-----#
+    GNSS_SSR_PhaseBiasSupport_r16 = SEQ(name=u'GNSS-SSR-PhaseBiasSupport-r16', mode=MODE_TYPE)
+    _GNSS_SSR_PhaseBiasSupport_r16_signal_and_tracking_mode_ID_Sup_r16 = SEQ(name=u'signal-and-tracking-mode-ID-Sup-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SignalIDs')))
+    GNSS_SSR_PhaseBiasSupport_r16._cont = ASN1Dict([
+        (u'signal-and-tracking-mode-ID-Sup-r16', _GNSS_SSR_PhaseBiasSupport_r16_signal_and_tracking_mode_ID_Sup_r16),
+        ])
+    GNSS_SSR_PhaseBiasSupport_r16._ext = []
+    
+    #-----< GNSS-SSR-STEC-CorrectionSupport-r16 >-----#
+    GNSS_SSR_STEC_CorrectionSupport_r16 = SEQ(name=u'GNSS-SSR-STEC-CorrectionSupport-r16', mode=MODE_TYPE)
+    GNSS_SSR_STEC_CorrectionSupport_r16._cont = ASN1Dict([
+        ])
+    GNSS_SSR_STEC_CorrectionSupport_r16._ext = []
+    
+    #-----< GNSS-SSR-GriddedCorrectionSupport-r16 >-----#
+    GNSS_SSR_GriddedCorrectionSupport_r16 = SEQ(name=u'GNSS-SSR-GriddedCorrectionSupport-r16', mode=MODE_TYPE)
+    GNSS_SSR_GriddedCorrectionSupport_r16._cont = ASN1Dict([
+        ])
+    GNSS_SSR_GriddedCorrectionSupport_r16._ext = []
+    
+    #-----< NavIC-DifferentialCorrectionsSupport-r16 >-----#
+    NavIC_DifferentialCorrectionsSupport_r16 = SEQ(name=u'NavIC-DifferentialCorrectionsSupport-r16', mode=MODE_TYPE)
+    _NavIC_DifferentialCorrectionsSupport_r16_gnssSignalIDs_r16 = SEQ(name=u'gnssSignalIDs-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'GNSS-SignalIDs')))
+    NavIC_DifferentialCorrectionsSupport_r16._cont = ASN1Dict([
+        (u'gnssSignalIDs-r16', _NavIC_DifferentialCorrectionsSupport_r16_gnssSignalIDs_r16),
+        ])
+    NavIC_DifferentialCorrectionsSupport_r16._ext = []
+    
+    #-----< NavIC-GridModelSupport-r16 >-----#
+    NavIC_GridModelSupport_r16 = SEQ(name=u'NavIC-GridModelSupport-r16', mode=MODE_TYPE)
+    NavIC_GridModelSupport_r16._cont = ASN1Dict([
+        ])
+    NavIC_GridModelSupport_r16._ext = []
+    
     #-----< A-GNSS-RequestCapabilities >-----#
     A_GNSS_RequestCapabilities = SEQ(name=u'A-GNSS-RequestCapabilities', mode=MODE_TYPE)
     _A_GNSS_RequestCapabilities_gnss_SupportListReq = BOOL(name=u'gnss-SupportListReq', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
@@ -6663,8 +9470,8 @@ class LPP_PDU_Definitions:
     #-----< GNSS-ID >-----#
     GNSS_ID = SEQ(name=u'GNSS-ID', mode=MODE_TYPE)
     _GNSS_ID_gnss_id = ENUM(name=u'gnss-id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _GNSS_ID_gnss_id._cont = ASN1Dict([(u'gps', 0), (u'sbas', 1), (u'qzss', 2), (u'galileo', 3), (u'glonass', 4), (u'bds', 5)])
-    _GNSS_ID_gnss_id._ext = [u'bds']
+    _GNSS_ID_gnss_id._cont = ASN1Dict([(u'gps', 0), (u'sbas', 1), (u'qzss', 2), (u'galileo', 3), (u'glonass', 4), (u'bds', 5), (u'navic-v1610', 6)])
+    _GNSS_ID_gnss_id._ext = [u'bds', u'navic-v1610']
     GNSS_ID._cont = ASN1Dict([
         (u'gnss-id', _GNSS_ID_gnss_id),
         ])
@@ -6673,7 +9480,7 @@ class LPP_PDU_Definitions:
     #-----< GNSS-ID-Bitmap >-----#
     GNSS_ID_Bitmap = SEQ(name=u'GNSS-ID-Bitmap', mode=MODE_TYPE)
     _GNSS_ID_Bitmap_gnss_ids = BIT_STR(name=u'gnss-ids', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _GNSS_ID_Bitmap_gnss_ids._cont = ASN1Dict([(u'gps', 0), (u'sbas', 1), (u'qzss', 2), (u'galileo', 3), (u'glonass', 4), (u'bds', 5)])
+    _GNSS_ID_Bitmap_gnss_ids._cont = ASN1Dict([(u'gps', 0), (u'sbas', 1), (u'qzss', 2), (u'galileo', 3), (u'glonass', 4), (u'bds', 5), (u'navic-v1610', 6)])
     _GNSS_ID_Bitmap_gnss_ids._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
     GNSS_ID_Bitmap._cont = ASN1Dict([
         (u'gnss-ids', _GNSS_ID_Bitmap_gnss_ids),
@@ -7120,10 +9927,6 @@ class LPP_PDU_Definitions:
         ])
     MBS_AssistanceDataElement_r14._ext = []
     
-    #-----< maxMBS-r14 >-----#
-    maxMBS_r14 = INT(name=u'maxMBS-r14', mode=MODE_VALUE)
-    maxMBS_r14._val = 64
-    
     #-----< MBS-AlmanacAssistance-r14 >-----#
     MBS_AlmanacAssistance_r14 = SEQ(name=u'MBS-AlmanacAssistance-r14', mode=MODE_TYPE)
     _MBS_AlmanacAssistance_r14_transmitterID_r14 = INT(name=u'transmitterID-r14', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
@@ -7201,12 +10004,15 @@ class LPP_PDU_Definitions:
         (u'confidence-r14', __Sensor_MeasurementInformation_r13_uncertainty_r14_confidence_r14),
         ])
     _Sensor_MeasurementInformation_r13_uncertainty_r14._ext = None
+    _Sensor_MeasurementInformation_r13_adjustment_r16 = INT(name=u'adjustment-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
+    _Sensor_MeasurementInformation_r13_adjustment_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-5000, ub=5000)], ev=None, er=[])
     Sensor_MeasurementInformation_r13._cont = ASN1Dict([
         (u'measurementReferenceTime-r13', _Sensor_MeasurementInformation_r13_measurementReferenceTime_r13),
         (u'uncompensatedBarometricPressure-r13', _Sensor_MeasurementInformation_r13_uncompensatedBarometricPressure_r13),
         (u'uncertainty-r14', _Sensor_MeasurementInformation_r13_uncertainty_r14),
+        (u'adjustment-r16', _Sensor_MeasurementInformation_r13_adjustment_r16),
         ])
-    Sensor_MeasurementInformation_r13._ext = [u'uncertainty-r14']
+    Sensor_MeasurementInformation_r13._ext = [u'uncertainty-r14', u'adjustment-r16']
     
     #-----< Sensor-MotionInformation-r15 >-----#
     Sensor_MotionInformation_r15 = SEQ(name=u'Sensor-MotionInformation-r15', mode=MODE_TYPE)
@@ -7327,12 +10133,14 @@ class LPP_PDU_Definitions:
     _Sensor_RequestLocationInformation_r13_uncompensatedBarometricPressureReq_r13 = BOOL(name=u'uncompensatedBarometricPressureReq-r13', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _Sensor_RequestLocationInformation_r13_assistanceAvailability_r14 = BOOL(name=u'assistanceAvailability-r14', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
     _Sensor_RequestLocationInformation_r13_sensor_MotionInformationReq_r15 = BOOL(name=u'sensor-MotionInformationReq-r15', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
+    _Sensor_RequestLocationInformation_r13_adjustmentReq_r16 = BOOL(name=u'adjustmentReq-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=2)
     Sensor_RequestLocationInformation_r13._cont = ASN1Dict([
         (u'uncompensatedBarometricPressureReq-r13', _Sensor_RequestLocationInformation_r13_uncompensatedBarometricPressureReq_r13),
         (u'assistanceAvailability-r14', _Sensor_RequestLocationInformation_r13_assistanceAvailability_r14),
         (u'sensor-MotionInformationReq-r15', _Sensor_RequestLocationInformation_r13_sensor_MotionInformationReq_r15),
+        (u'adjustmentReq-r16', _Sensor_RequestLocationInformation_r13_adjustmentReq_r16),
         ])
-    Sensor_RequestLocationInformation_r13._ext = [u'assistanceAvailability-r14', u'sensor-MotionInformationReq-r15']
+    Sensor_RequestLocationInformation_r13._ext = [u'assistanceAvailability-r14', u'sensor-MotionInformationReq-r15', u'adjustmentReq-r16']
     
     #-----< Sensor-ProvideCapabilities-r13 >-----#
     Sensor_ProvideCapabilities_r13 = SEQ(name=u'Sensor-ProvideCapabilities-r13', mode=MODE_TYPE)
@@ -7347,14 +10155,18 @@ class LPP_PDU_Definitions:
     _Sensor_ProvideCapabilities_r13_sensor_MotionInformationSup_r15 = ENUM(name=u'sensor-MotionInformationSup-r15', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
     _Sensor_ProvideCapabilities_r13_sensor_MotionInformationSup_r15._cont = ASN1Dict([(u'true', 0)])
     _Sensor_ProvideCapabilities_r13_sensor_MotionInformationSup_r15._ext = None
+    _Sensor_ProvideCapabilities_r13_adjustmentSupported_r16 = ENUM(name=u'adjustmentSupported-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=2)
+    _Sensor_ProvideCapabilities_r13_adjustmentSupported_r16._cont = ASN1Dict([(u'true', 0)])
+    _Sensor_ProvideCapabilities_r13_adjustmentSupported_r16._ext = None
     Sensor_ProvideCapabilities_r13._cont = ASN1Dict([
         (u'sensor-Modes-r13', _Sensor_ProvideCapabilities_r13_sensor_Modes_r13),
         (u'sensor-AssistanceDataSupportList-r14', _Sensor_ProvideCapabilities_r13_sensor_AssistanceDataSupportList_r14),
         (u'periodicalReportingSupported-r14', _Sensor_ProvideCapabilities_r13_periodicalReportingSupported_r14),
         (u'idleStateForMeasurements-r14', _Sensor_ProvideCapabilities_r13_idleStateForMeasurements_r14),
         (u'sensor-MotionInformationSup-r15', _Sensor_ProvideCapabilities_r13_sensor_MotionInformationSup_r15),
+        (u'adjustmentSupported-r16', _Sensor_ProvideCapabilities_r13_adjustmentSupported_r16),
         ])
-    Sensor_ProvideCapabilities_r13._ext = [u'sensor-AssistanceDataSupportList-r14', u'periodicalReportingSupported-r14', u'idleStateForMeasurements-r14', u'sensor-MotionInformationSup-r15']
+    Sensor_ProvideCapabilities_r13._ext = [u'sensor-AssistanceDataSupportList-r14', u'periodicalReportingSupported-r14', u'idleStateForMeasurements-r14', u'sensor-MotionInformationSup-r15', u'adjustmentSupported-r16']
     
     #-----< Sensor-AssistanceDataSupportList-r14 >-----#
     Sensor_AssistanceDataSupportList_r14 = SEQ(name=u'Sensor-AssistanceDataSupportList-r14', mode=MODE_TYPE)
@@ -7559,10 +10371,6 @@ class LPP_PDU_Definitions:
         ])
     WLAN_RTT_r13._ext = []
     
-    #-----< maxWLAN-AP-r13 >-----#
-    maxWLAN_AP_r13 = INT(name=u'maxWLAN-AP-r13', mode=MODE_VALUE)
-    maxWLAN_AP_r13._val = 64
-    
     #-----< WLAN-RequestLocationInformation-r13 >-----#
     WLAN_RequestLocationInformation_r13 = SEQ(name=u'WLAN-RequestLocationInformation-r13', mode=MODE_TYPE)
     _WLAN_RequestLocationInformation_r13_requestedMeasurements_r13 = BIT_STR(name=u'requestedMeasurements-r13', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
@@ -7654,10 +10462,6 @@ class LPP_PDU_Definitions:
         ])
     WLAN_ProvideAssistanceData_r14._ext = []
     
-    #-----< maxWLAN-DataSets-r14 >-----#
-    maxWLAN_DataSets_r14 = INT(name=u'maxWLAN-DataSets-r14', mode=MODE_VALUE)
-    maxWLAN_DataSets_r14._val = 8
-    
     #-----< WLAN-DataSet-r14 >-----#
     WLAN_DataSet_r14 = SEQ(name=u'WLAN-DataSet-r14', mode=MODE_TYPE)
     _WLAN_DataSet_r14_wlan_AP_List_r14 = SEQ_OF(name=u'wlan-AP-List-r14', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
@@ -7745,10 +10549,6 @@ class LPP_PDU_Definitions:
         ])
     SupportedChannels_11bg_r14._ext = None
     
-    #-----< maxWLAN-AP-r14 >-----#
-    maxWLAN_AP_r14 = INT(name=u'maxWLAN-AP-r14', mode=MODE_VALUE)
-    maxWLAN_AP_r14._val = 128
-    
     #-----< WLAN-AP-Data-r14 >-----#
     WLAN_AP_Data_r14 = SEQ(name=u'WLAN-AP-Data-r14', mode=MODE_TYPE)
     _WLAN_AP_Data_r14_wlan_AP_Identifier_r14 = SEQ(name=u'wlan-AP-Identifier-r14', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'WLAN-AP-Identifier-r13')))
@@ -7814,14 +10614,6 @@ class LPP_PDU_Definitions:
         ])
     WLAN_RequestAssistanceData_r14._ext = []
     
-    #-----< maxVisibleAPs-r14 >-----#
-    maxVisibleAPs_r14 = INT(name=u'maxVisibleAPs-r14', mode=MODE_VALUE)
-    maxVisibleAPs_r14._val = 32
-    
-    #-----< maxKnownAPs-r14 >-----#
-    maxKnownAPs_r14 = INT(name=u'maxKnownAPs-r14', mode=MODE_VALUE)
-    maxKnownAPs_r14._val = 2048
-    
     #-----< BT-ProvideLocationInformation-r13 >-----#
     BT_ProvideLocationInformation_r13 = SEQ(name=u'BT-ProvideLocationInformation-r13', mode=MODE_TYPE)
     _BT_ProvideLocationInformation_r13_bt_MeasurementInformation_r13 = SEQ(name=u'bt-MeasurementInformation-r13', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'BT-MeasurementInformation-r13')), opt=True)
@@ -7859,10 +10651,6 @@ class LPP_PDU_Definitions:
         (u'rssi-r13', _BT_MeasurementElement_r13_rssi_r13),
         ])
     BT_MeasurementElement_r13._ext = []
-    
-    #-----< maxBT-Beacon-r13 >-----#
-    maxBT_Beacon_r13 = INT(name=u'maxBT-Beacon-r13', mode=MODE_VALUE)
-    maxBT_Beacon_r13._val = 32
     
     #-----< BT-RequestLocationInformation-r13 >-----#
     BT_RequestLocationInformation_r13 = SEQ(name=u'BT-RequestLocationInformation-r13', mode=MODE_TYPE)
@@ -7932,6 +10720,1081 @@ class LPP_PDU_Definitions:
         ])
     BT_TargetDeviceErrorCauses_r13._ext = []
     
+    #-----< NR-UL-ProvideCapabilities-r16 >-----#
+    NR_UL_ProvideCapabilities_r16 = SEQ(name=u'NR-UL-ProvideCapabilities-r16', mode=MODE_TYPE)
+    _NR_UL_ProvideCapabilities_r16_nr_UL_SRS_Capability_r16 = SEQ(name=u'nr-UL-SRS-Capability-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-UL-SRS-Capability-r16')))
+    NR_UL_ProvideCapabilities_r16._cont = ASN1Dict([
+        (u'nr-UL-SRS-Capability-r16', _NR_UL_ProvideCapabilities_r16_nr_UL_SRS_Capability_r16),
+        ])
+    NR_UL_ProvideCapabilities_r16._ext = []
+    
+    #-----< NR-UL-RequestCapabilities-r16 >-----#
+    NR_UL_RequestCapabilities_r16 = SEQ(name=u'NR-UL-RequestCapabilities-r16', mode=MODE_TYPE)
+    NR_UL_RequestCapabilities_r16._cont = ASN1Dict([
+        ])
+    NR_UL_RequestCapabilities_r16._ext = []
+    
+    #-----< NR-ECID-ProvideLocationInformation-r16 >-----#
+    NR_ECID_ProvideLocationInformation_r16 = SEQ(name=u'NR-ECID-ProvideLocationInformation-r16', mode=MODE_TYPE)
+    _NR_ECID_ProvideLocationInformation_r16_nr_ECID_SignalMeasurementInformation_r16 = SEQ(name=u'nr-ECID-SignalMeasurementInformation-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-ECID-SignalMeasurementInformation-r16')), opt=True)
+    _NR_ECID_ProvideLocationInformation_r16_nr_ECID_Error_r16 = CHOICE(name=u'nr-ECID-Error-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-ECID-Error-r16')), opt=True)
+    NR_ECID_ProvideLocationInformation_r16._cont = ASN1Dict([
+        (u'nr-ECID-SignalMeasurementInformation-r16', _NR_ECID_ProvideLocationInformation_r16_nr_ECID_SignalMeasurementInformation_r16),
+        (u'nr-ECID-Error-r16', _NR_ECID_ProvideLocationInformation_r16_nr_ECID_Error_r16),
+        ])
+    NR_ECID_ProvideLocationInformation_r16._ext = []
+    
+    #-----< NR-ECID-SignalMeasurementInformation-r16 >-----#
+    NR_ECID_SignalMeasurementInformation_r16 = SEQ(name=u'NR-ECID-SignalMeasurementInformation-r16', mode=MODE_TYPE)
+    _NR_ECID_SignalMeasurementInformation_r16_nr_PrimaryCellMeasuredResults_r16 = SEQ(name=u'nr-PrimaryCellMeasuredResults-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-MeasuredResultsElement-r16')))
+    _NR_ECID_SignalMeasurementInformation_r16_nr_MeasuredResultsList_r16 = SEQ_OF(name=u'nr-MeasuredResultsList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-MeasuredResultsList-r16')), opt=True)
+    NR_ECID_SignalMeasurementInformation_r16._cont = ASN1Dict([
+        (u'nr-PrimaryCellMeasuredResults-r16', _NR_ECID_SignalMeasurementInformation_r16_nr_PrimaryCellMeasuredResults_r16),
+        (u'nr-MeasuredResultsList-r16', _NR_ECID_SignalMeasurementInformation_r16_nr_MeasuredResultsList_r16),
+        ])
+    NR_ECID_SignalMeasurementInformation_r16._ext = []
+    
+    #-----< NR-MeasuredResultsList-r16 >-----#
+    NR_MeasuredResultsList_r16 = SEQ_OF(name=u'NR-MeasuredResultsList-r16', mode=MODE_TYPE)
+    _NR_MeasuredResultsList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-MeasuredResultsElement-r16')))
+    NR_MeasuredResultsList_r16._cont = _NR_MeasuredResultsList_r16__item_
+    NR_MeasuredResultsList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    
+    #-----< NR-MeasuredResultsElement-r16 >-----#
+    NR_MeasuredResultsElement_r16 = SEQ(name=u'NR-MeasuredResultsElement-r16', mode=MODE_TYPE)
+    _NR_MeasuredResultsElement_r16_nr_PhysCellID_r16 = INT(name=u'nr-PhysCellID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-PhysCellID-r16')))
+    _NR_MeasuredResultsElement_r16_nr_ARFCN_r16 = CHOICE(name=u'nr-ARFCN-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __NR_MeasuredResultsElement_r16_nr_ARFCN_r16_ssb_ARFCN_r16 = INT(name=u'ssb-ARFCN-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'ARFCN-ValueNR-r15')))
+    __NR_MeasuredResultsElement_r16_nr_ARFCN_r16_csi_RS_pointA_r16 = INT(name=u'csi-RS-pointA-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'ARFCN-ValueNR-r15')))
+    _NR_MeasuredResultsElement_r16_nr_ARFCN_r16._cont = ASN1Dict([
+        (u'ssb-ARFCN-r16', __NR_MeasuredResultsElement_r16_nr_ARFCN_r16_ssb_ARFCN_r16),
+        (u'csi-RS-pointA-r16', __NR_MeasuredResultsElement_r16_nr_ARFCN_r16_csi_RS_pointA_r16),
+        ])
+    _NR_MeasuredResultsElement_r16_nr_ARFCN_r16._ext = None
+    _NR_MeasuredResultsElement_r16_nr_CellGlobalID_r16 = SEQ(name=u'nr-CellGlobalID-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NCGI-r15')), opt=True)
+    _NR_MeasuredResultsElement_r16_systemFrameNumber_r16 = BIT_STR(name=u'systemFrameNumber-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_MeasuredResultsElement_r16_systemFrameNumber_r16._const_sz = ASN1Set(rv=[10], rr=[], ev=None, er=[])
+    _NR_MeasuredResultsElement_r16_resultsSSB_Cell_r16 = SEQ(name=u'resultsSSB-Cell-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'MeasQuantityResults-r16')), opt=True)
+    _NR_MeasuredResultsElement_r16_resultsCSI_RS_Cell_r16 = SEQ(name=u'resultsCSI-RS-Cell-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'MeasQuantityResults-r16')), opt=True)
+    _NR_MeasuredResultsElement_r16_resultsSSB_Indexes_r16 = SEQ_OF(name=u'resultsSSB-Indexes-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'ResultsPerSSB-IndexList-r16')), opt=True)
+    _NR_MeasuredResultsElement_r16_resultsCSI_RS_Indexes_r16 = SEQ_OF(name=u'resultsCSI-RS-Indexes-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'ResultsPerCSI-RS-IndexList-r16')), opt=True)
+    NR_MeasuredResultsElement_r16._cont = ASN1Dict([
+        (u'nr-PhysCellID-r16', _NR_MeasuredResultsElement_r16_nr_PhysCellID_r16),
+        (u'nr-ARFCN-r16', _NR_MeasuredResultsElement_r16_nr_ARFCN_r16),
+        (u'nr-CellGlobalID-r16', _NR_MeasuredResultsElement_r16_nr_CellGlobalID_r16),
+        (u'systemFrameNumber-r16', _NR_MeasuredResultsElement_r16_systemFrameNumber_r16),
+        (u'resultsSSB-Cell-r16', _NR_MeasuredResultsElement_r16_resultsSSB_Cell_r16),
+        (u'resultsCSI-RS-Cell-r16', _NR_MeasuredResultsElement_r16_resultsCSI_RS_Cell_r16),
+        (u'resultsSSB-Indexes-r16', _NR_MeasuredResultsElement_r16_resultsSSB_Indexes_r16),
+        (u'resultsCSI-RS-Indexes-r16', _NR_MeasuredResultsElement_r16_resultsCSI_RS_Indexes_r16),
+        ])
+    NR_MeasuredResultsElement_r16._ext = []
+    
+    #-----< MeasQuantityResults-r16 >-----#
+    MeasQuantityResults_r16 = SEQ(name=u'MeasQuantityResults-r16', mode=MODE_TYPE)
+    _MeasQuantityResults_r16_nr_RSRP_r16 = INT(name=u'nr-RSRP-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _MeasQuantityResults_r16_nr_RSRP_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
+    _MeasQuantityResults_r16_nr_RSRQ_r16 = INT(name=u'nr-RSRQ-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _MeasQuantityResults_r16_nr_RSRQ_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
+    MeasQuantityResults_r16._cont = ASN1Dict([
+        (u'nr-RSRP-r16', _MeasQuantityResults_r16_nr_RSRP_r16),
+        (u'nr-RSRQ-r16', _MeasQuantityResults_r16_nr_RSRQ_r16),
+        ])
+    MeasQuantityResults_r16._ext = None
+    
+    #-----< ResultsPerSSB-IndexList-r16 >-----#
+    ResultsPerSSB_IndexList_r16 = SEQ_OF(name=u'ResultsPerSSB-IndexList-r16', mode=MODE_TYPE)
+    _ResultsPerSSB_IndexList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'ResultsPerSSB-Index-r16')))
+    ResultsPerSSB_IndexList_r16._cont = _ResultsPerSSB_IndexList_r16__item_
+    ResultsPerSSB_IndexList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    
+    #-----< ResultsPerSSB-Index-r16 >-----#
+    ResultsPerSSB_Index_r16 = SEQ(name=u'ResultsPerSSB-Index-r16', mode=MODE_TYPE)
+    _ResultsPerSSB_Index_r16_ssb_Index_r16 = INT(name=u'ssb-Index-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ResultsPerSSB_Index_r16_ssb_Index_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=None, er=[])
+    _ResultsPerSSB_Index_r16_ssb_Results_r16 = SEQ(name=u'ssb-Results-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'MeasQuantityResults-r16')))
+    ResultsPerSSB_Index_r16._cont = ASN1Dict([
+        (u'ssb-Index-r16', _ResultsPerSSB_Index_r16_ssb_Index_r16),
+        (u'ssb-Results-r16', _ResultsPerSSB_Index_r16_ssb_Results_r16),
+        ])
+    ResultsPerSSB_Index_r16._ext = None
+    
+    #-----< ResultsPerCSI-RS-IndexList-r16 >-----#
+    ResultsPerCSI_RS_IndexList_r16 = SEQ_OF(name=u'ResultsPerCSI-RS-IndexList-r16', mode=MODE_TYPE)
+    _ResultsPerCSI_RS_IndexList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'ResultsPerCSI-RS-Index-r16')))
+    ResultsPerCSI_RS_IndexList_r16._cont = _ResultsPerCSI_RS_IndexList_r16__item_
+    ResultsPerCSI_RS_IndexList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    
+    #-----< ResultsPerCSI-RS-Index-r16 >-----#
+    ResultsPerCSI_RS_Index_r16 = SEQ(name=u'ResultsPerCSI-RS-Index-r16', mode=MODE_TYPE)
+    _ResultsPerCSI_RS_Index_r16_csi_RS_Index_r16 = INT(name=u'csi-RS-Index-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ResultsPerCSI_RS_Index_r16_csi_RS_Index_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=95)], ev=None, er=[])
+    _ResultsPerCSI_RS_Index_r16_csi_RS_Results_r16 = SEQ(name=u'csi-RS-Results-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'MeasQuantityResults-r16')))
+    ResultsPerCSI_RS_Index_r16._cont = ASN1Dict([
+        (u'csi-RS-Index-r16', _ResultsPerCSI_RS_Index_r16_csi_RS_Index_r16),
+        (u'csi-RS-Results-r16', _ResultsPerCSI_RS_Index_r16_csi_RS_Results_r16),
+        ])
+    ResultsPerCSI_RS_Index_r16._ext = None
+    
+    #-----< NR-ECID-RequestLocationInformation-r16 >-----#
+    NR_ECID_RequestLocationInformation_r16 = SEQ(name=u'NR-ECID-RequestLocationInformation-r16', mode=MODE_TYPE)
+    _NR_ECID_RequestLocationInformation_r16_requestedMeasurements_r16 = BIT_STR(name=u'requestedMeasurements-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_ECID_RequestLocationInformation_r16_requestedMeasurements_r16._cont = ASN1Dict([(u'ssrsrpReq', 0), (u'ssrsrqReq', 1), (u'csirsrpReq', 2), (u'csirsrqReq', 3)])
+    _NR_ECID_RequestLocationInformation_r16_requestedMeasurements_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    NR_ECID_RequestLocationInformation_r16._cont = ASN1Dict([
+        (u'requestedMeasurements-r16', _NR_ECID_RequestLocationInformation_r16_requestedMeasurements_r16),
+        ])
+    NR_ECID_RequestLocationInformation_r16._ext = []
+    
+    #-----< NR-ECID-ProvideCapabilities-r16 >-----#
+    NR_ECID_ProvideCapabilities_r16 = SEQ(name=u'NR-ECID-ProvideCapabilities-r16', mode=MODE_TYPE)
+    _NR_ECID_ProvideCapabilities_r16_nr_ECID_MeasSupported_r16 = BIT_STR(name=u'nr-ECID-MeasSupported-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_ECID_ProvideCapabilities_r16_nr_ECID_MeasSupported_r16._cont = ASN1Dict([(u'ssrsrpSup', 0), (u'ssrsrqSup', 1), (u'csirsrpSup', 2), (u'csirsrqSup', 3)])
+    _NR_ECID_ProvideCapabilities_r16_nr_ECID_MeasSupported_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    _NR_ECID_ProvideCapabilities_r16_periodicalReporting_r16 = ENUM(name=u'periodicalReporting-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_ECID_ProvideCapabilities_r16_periodicalReporting_r16._cont = ASN1Dict([(u'supported', 0)])
+    _NR_ECID_ProvideCapabilities_r16_periodicalReporting_r16._ext = None
+    _NR_ECID_ProvideCapabilities_r16_triggeredReporting_r16 = ENUM(name=u'triggeredReporting-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_ECID_ProvideCapabilities_r16_triggeredReporting_r16._cont = ASN1Dict([(u'supported', 0)])
+    _NR_ECID_ProvideCapabilities_r16_triggeredReporting_r16._ext = None
+    NR_ECID_ProvideCapabilities_r16._cont = ASN1Dict([
+        (u'nr-ECID-MeasSupported-r16', _NR_ECID_ProvideCapabilities_r16_nr_ECID_MeasSupported_r16),
+        (u'periodicalReporting-r16', _NR_ECID_ProvideCapabilities_r16_periodicalReporting_r16),
+        (u'triggeredReporting-r16', _NR_ECID_ProvideCapabilities_r16_triggeredReporting_r16),
+        ])
+    NR_ECID_ProvideCapabilities_r16._ext = []
+    
+    #-----< NR-ECID-RequestCapabilities-r16 >-----#
+    NR_ECID_RequestCapabilities_r16 = SEQ(name=u'NR-ECID-RequestCapabilities-r16', mode=MODE_TYPE)
+    NR_ECID_RequestCapabilities_r16._cont = ASN1Dict([
+        ])
+    NR_ECID_RequestCapabilities_r16._ext = []
+    
+    #-----< NR-ECID-Error-r16 >-----#
+    NR_ECID_Error_r16 = CHOICE(name=u'NR-ECID-Error-r16', mode=MODE_TYPE)
+    _NR_ECID_Error_r16_locationServerErrorCauses_r16 = SEQ(name=u'locationServerErrorCauses-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-ECID-LocationServerErrorCauses-r16')))
+    _NR_ECID_Error_r16_targetDeviceErrorCauses_r16 = SEQ(name=u'targetDeviceErrorCauses-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-ECID-TargetDeviceErrorCauses-r16')))
+    NR_ECID_Error_r16._cont = ASN1Dict([
+        (u'locationServerErrorCauses-r16', _NR_ECID_Error_r16_locationServerErrorCauses_r16),
+        (u'targetDeviceErrorCauses-r16', _NR_ECID_Error_r16_targetDeviceErrorCauses_r16),
+        ])
+    NR_ECID_Error_r16._ext = []
+    
+    #-----< NR-ECID-LocationServerErrorCauses-r16 >-----#
+    NR_ECID_LocationServerErrorCauses_r16 = SEQ(name=u'NR-ECID-LocationServerErrorCauses-r16', mode=MODE_TYPE)
+    _NR_ECID_LocationServerErrorCauses_r16_cause_r16 = ENUM(name=u'cause-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_ECID_LocationServerErrorCauses_r16_cause_r16._cont = ASN1Dict([(u'undefined', 0)])
+    _NR_ECID_LocationServerErrorCauses_r16_cause_r16._ext = []
+    NR_ECID_LocationServerErrorCauses_r16._cont = ASN1Dict([
+        (u'cause-r16', _NR_ECID_LocationServerErrorCauses_r16_cause_r16),
+        ])
+    NR_ECID_LocationServerErrorCauses_r16._ext = []
+    
+    #-----< NR-ECID-TargetDeviceErrorCauses-r16 >-----#
+    NR_ECID_TargetDeviceErrorCauses_r16 = SEQ(name=u'NR-ECID-TargetDeviceErrorCauses-r16', mode=MODE_TYPE)
+    _NR_ECID_TargetDeviceErrorCauses_r16_cause_r16 = ENUM(name=u'cause-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_ECID_TargetDeviceErrorCauses_r16_cause_r16._cont = ASN1Dict([(u'undefined', 0), (u'requestedMeasurementNotAvailable', 1), (u'notAllrequestedMeasurementsPossible', 2)])
+    _NR_ECID_TargetDeviceErrorCauses_r16_cause_r16._ext = []
+    _NR_ECID_TargetDeviceErrorCauses_r16_ss_RSRPMeasurementNotPossible_r16 = NULL(name=u'ss-RSRPMeasurementNotPossible-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_ECID_TargetDeviceErrorCauses_r16_ss_RSRQMeasurementNotPossible_r16 = NULL(name=u'ss-RSRQMeasurementNotPossible-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_ECID_TargetDeviceErrorCauses_r16_csi_RSRPMeasurementNotPossible_r16 = NULL(name=u'csi-RSRPMeasurementNotPossible-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_ECID_TargetDeviceErrorCauses_r16_csi_RSRQMeasurementNotPossible_r16 = NULL(name=u'csi-RSRQMeasurementNotPossible-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    NR_ECID_TargetDeviceErrorCauses_r16._cont = ASN1Dict([
+        (u'cause-r16', _NR_ECID_TargetDeviceErrorCauses_r16_cause_r16),
+        (u'ss-RSRPMeasurementNotPossible-r16', _NR_ECID_TargetDeviceErrorCauses_r16_ss_RSRPMeasurementNotPossible_r16),
+        (u'ss-RSRQMeasurementNotPossible-r16', _NR_ECID_TargetDeviceErrorCauses_r16_ss_RSRQMeasurementNotPossible_r16),
+        (u'csi-RSRPMeasurementNotPossible-r16', _NR_ECID_TargetDeviceErrorCauses_r16_csi_RSRPMeasurementNotPossible_r16),
+        (u'csi-RSRQMeasurementNotPossible-r16', _NR_ECID_TargetDeviceErrorCauses_r16_csi_RSRQMeasurementNotPossible_r16),
+        ])
+    NR_ECID_TargetDeviceErrorCauses_r16._ext = []
+    
+    #-----< NR-DL-TDOA-ProvideAssistanceData-r16 >-----#
+    NR_DL_TDOA_ProvideAssistanceData_r16 = SEQ(name=u'NR-DL-TDOA-ProvideAssistanceData-r16', mode=MODE_TYPE)
+    _NR_DL_TDOA_ProvideAssistanceData_r16_nr_DL_PRS_AssistanceData_r16 = SEQ(name=u'nr-DL-PRS-AssistanceData-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-AssistanceData-r16')), opt=True)
+    _NR_DL_TDOA_ProvideAssistanceData_r16_nr_SelectedDL_PRS_IndexList_r16 = SEQ_OF(name=u'nr-SelectedDL-PRS-IndexList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-SelectedDL-PRS-IndexList-r16')), opt=True)
+    _NR_DL_TDOA_ProvideAssistanceData_r16_nr_PositionCalculationAssistance_r16 = SEQ(name=u'nr-PositionCalculationAssistance-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-PositionCalculationAssistance-r16')), opt=True)
+    _NR_DL_TDOA_ProvideAssistanceData_r16_nr_DL_TDOA_Error_r16 = CHOICE(name=u'nr-DL-TDOA-Error-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-TDOA-Error-r16')), opt=True)
+    NR_DL_TDOA_ProvideAssistanceData_r16._cont = ASN1Dict([
+        (u'nr-DL-PRS-AssistanceData-r16', _NR_DL_TDOA_ProvideAssistanceData_r16_nr_DL_PRS_AssistanceData_r16),
+        (u'nr-SelectedDL-PRS-IndexList-r16', _NR_DL_TDOA_ProvideAssistanceData_r16_nr_SelectedDL_PRS_IndexList_r16),
+        (u'nr-PositionCalculationAssistance-r16', _NR_DL_TDOA_ProvideAssistanceData_r16_nr_PositionCalculationAssistance_r16),
+        (u'nr-DL-TDOA-Error-r16', _NR_DL_TDOA_ProvideAssistanceData_r16_nr_DL_TDOA_Error_r16),
+        ])
+    NR_DL_TDOA_ProvideAssistanceData_r16._ext = []
+    
+    #-----< NR-DL-TDOA-RequestAssistanceData-r16 >-----#
+    NR_DL_TDOA_RequestAssistanceData_r16 = SEQ(name=u'NR-DL-TDOA-RequestAssistanceData-r16', mode=MODE_TYPE)
+    _NR_DL_TDOA_RequestAssistanceData_r16_nr_PhysCellID_r16 = INT(name=u'nr-PhysCellID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-PhysCellID-r16')), opt=True)
+    _NR_DL_TDOA_RequestAssistanceData_r16_nr_AdType_r16 = BIT_STR(name=u'nr-AdType-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_TDOA_RequestAssistanceData_r16_nr_AdType_r16._cont = ASN1Dict([(u'dl-prs', 0), (u'posCalc', 1)])
+    _NR_DL_TDOA_RequestAssistanceData_r16_nr_AdType_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    NR_DL_TDOA_RequestAssistanceData_r16._cont = ASN1Dict([
+        (u'nr-PhysCellID-r16', _NR_DL_TDOA_RequestAssistanceData_r16_nr_PhysCellID_r16),
+        (u'nr-AdType-r16', _NR_DL_TDOA_RequestAssistanceData_r16_nr_AdType_r16),
+        ])
+    NR_DL_TDOA_RequestAssistanceData_r16._ext = []
+    
+    #-----< NR-DL-TDOA-ProvideLocationInformation-r16 >-----#
+    NR_DL_TDOA_ProvideLocationInformation_r16 = SEQ(name=u'NR-DL-TDOA-ProvideLocationInformation-r16', mode=MODE_TYPE)
+    _NR_DL_TDOA_ProvideLocationInformation_r16_nr_DL_TDOA_SignalMeasurementInformation_r16 = SEQ(name=u'nr-DL-TDOA-SignalMeasurementInformation-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-TDOA-SignalMeasurementInformation-r16')), opt=True)
+    _NR_DL_TDOA_ProvideLocationInformation_r16_nr_dl_tdoa_LocationInformation_r16 = SEQ(name=u'nr-dl-tdoa-LocationInformation-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-TDOA-LocationInformation-r16')), opt=True)
+    _NR_DL_TDOA_ProvideLocationInformation_r16_nr_DL_TDOA_Error_r16 = CHOICE(name=u'nr-DL-TDOA-Error-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-TDOA-Error-r16')), opt=True)
+    NR_DL_TDOA_ProvideLocationInformation_r16._cont = ASN1Dict([
+        (u'nr-DL-TDOA-SignalMeasurementInformation-r16', _NR_DL_TDOA_ProvideLocationInformation_r16_nr_DL_TDOA_SignalMeasurementInformation_r16),
+        (u'nr-dl-tdoa-LocationInformation-r16', _NR_DL_TDOA_ProvideLocationInformation_r16_nr_dl_tdoa_LocationInformation_r16),
+        (u'nr-DL-TDOA-Error-r16', _NR_DL_TDOA_ProvideLocationInformation_r16_nr_DL_TDOA_Error_r16),
+        ])
+    NR_DL_TDOA_ProvideLocationInformation_r16._ext = []
+    
+    #-----< NR-DL-TDOA-SignalMeasurementInformation-r16 >-----#
+    NR_DL_TDOA_SignalMeasurementInformation_r16 = SEQ(name=u'NR-DL-TDOA-SignalMeasurementInformation-r16', mode=MODE_TYPE)
+    _NR_DL_TDOA_SignalMeasurementInformation_r16_dl_PRS_ReferenceInfo_r16 = SEQ(name=u'dl-PRS-ReferenceInfo-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'DL-PRS-ID-Info-r16')))
+    _NR_DL_TDOA_SignalMeasurementInformation_r16_nr_DL_TDOA_MeasList_r16 = SEQ_OF(name=u'nr-DL-TDOA-MeasList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-TDOA-MeasList-r16')))
+    NR_DL_TDOA_SignalMeasurementInformation_r16._cont = ASN1Dict([
+        (u'dl-PRS-ReferenceInfo-r16', _NR_DL_TDOA_SignalMeasurementInformation_r16_dl_PRS_ReferenceInfo_r16),
+        (u'nr-DL-TDOA-MeasList-r16', _NR_DL_TDOA_SignalMeasurementInformation_r16_nr_DL_TDOA_MeasList_r16),
+        ])
+    NR_DL_TDOA_SignalMeasurementInformation_r16._ext = []
+    
+    #-----< NR-DL-TDOA-MeasList-r16 >-----#
+    NR_DL_TDOA_MeasList_r16 = SEQ_OF(name=u'NR-DL-TDOA-MeasList-r16', mode=MODE_TYPE)
+    _NR_DL_TDOA_MeasList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-TDOA-MeasElement-r16')))
+    NR_DL_TDOA_MeasList_r16._cont = _NR_DL_TDOA_MeasList_r16__item_
+    NR_DL_TDOA_MeasList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=256)], ev=None, er=[])
+    
+    #-----< NR-DL-TDOA-MeasElement-r16 >-----#
+    NR_DL_TDOA_MeasElement_r16 = SEQ(name=u'NR-DL-TDOA-MeasElement-r16', mode=MODE_TYPE)
+    _NR_DL_TDOA_MeasElement_r16_dl_PRS_ID_r16 = INT(name=u'dl-PRS-ID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_TDOA_MeasElement_r16_dl_PRS_ID_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    _NR_DL_TDOA_MeasElement_r16_nr_PhysCellID_r16 = INT(name=u'nr-PhysCellID-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-PhysCellID-r16')), opt=True)
+    _NR_DL_TDOA_MeasElement_r16_nr_CellGlobalID_r16 = SEQ(name=u'nr-CellGlobalID-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NCGI-r15')), opt=True)
+    _NR_DL_TDOA_MeasElement_r16_nr_ARFCN_r16 = INT(name=u'nr-ARFCN-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'ARFCN-ValueNR-r15')), opt=True)
+    _NR_DL_TDOA_MeasElement_r16_nr_DL_PRS_ResourceID_r16 = INT(name=u'nr-DL-PRS-ResourceID-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ResourceID-r16')), opt=True)
+    _NR_DL_TDOA_MeasElement_r16_nr_DL_PRS_ResourceSetID_r16 = INT(name=u'nr-DL-PRS-ResourceSetID-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ResourceSetID-r16')), opt=True)
+    _NR_DL_TDOA_MeasElement_r16_nr_TimeStamp_r16 = SEQ(name=u'nr-TimeStamp-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-TimeStamp-r16')))
+    _NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16 = CHOICE(name=u'nr-RSTD-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k0_r16 = INT(name=u'k0-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k0_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1970049)], ev=None, er=[])
+    __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k1_r16 = INT(name=u'k1-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k1_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=985025)], ev=None, er=[])
+    __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k2_r16 = INT(name=u'k2-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k2_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=492513)], ev=None, er=[])
+    __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k3_r16 = INT(name=u'k3-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k3_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=246257)], ev=None, er=[])
+    __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k4_r16 = INT(name=u'k4-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k4_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=123129)], ev=None, er=[])
+    __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k5_r16 = INT(name=u'k5-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k5_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=61565)], ev=None, er=[])
+    _NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16._cont = ASN1Dict([
+        (u'k0-r16', __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k0_r16),
+        (u'k1-r16', __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k1_r16),
+        (u'k2-r16', __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k2_r16),
+        (u'k3-r16', __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k3_r16),
+        (u'k4-r16', __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k4_r16),
+        (u'k5-r16', __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k5_r16),
+        ])
+    _NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16._ext = []
+    _NR_DL_TDOA_MeasElement_r16_nr_AdditionalPathList_r16 = SEQ_OF(name=u'nr-AdditionalPathList-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-AdditionalPathList-r16')), opt=True)
+    _NR_DL_TDOA_MeasElement_r16_nr_TimingQuality_r16 = SEQ(name=u'nr-TimingQuality-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-TimingQuality-r16')))
+    _NR_DL_TDOA_MeasElement_r16_nr_DL_PRS_RSRP_Result_r16 = INT(name=u'nr-DL-PRS-RSRP-Result-r16', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_DL_TDOA_MeasElement_r16_nr_DL_PRS_RSRP_Result_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=126)], ev=None, er=[])
+    _NR_DL_TDOA_MeasElement_r16_nr_DL_TDOA_AdditionalMeasurements_r16 = SEQ_OF(name=u'nr-DL-TDOA-AdditionalMeasurements-r16', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-TDOA-AdditionalMeasurements-r16')), opt=True)
+    NR_DL_TDOA_MeasElement_r16._cont = ASN1Dict([
+        (u'dl-PRS-ID-r16', _NR_DL_TDOA_MeasElement_r16_dl_PRS_ID_r16),
+        (u'nr-PhysCellID-r16', _NR_DL_TDOA_MeasElement_r16_nr_PhysCellID_r16),
+        (u'nr-CellGlobalID-r16', _NR_DL_TDOA_MeasElement_r16_nr_CellGlobalID_r16),
+        (u'nr-ARFCN-r16', _NR_DL_TDOA_MeasElement_r16_nr_ARFCN_r16),
+        (u'nr-DL-PRS-ResourceID-r16', _NR_DL_TDOA_MeasElement_r16_nr_DL_PRS_ResourceID_r16),
+        (u'nr-DL-PRS-ResourceSetID-r16', _NR_DL_TDOA_MeasElement_r16_nr_DL_PRS_ResourceSetID_r16),
+        (u'nr-TimeStamp-r16', _NR_DL_TDOA_MeasElement_r16_nr_TimeStamp_r16),
+        (u'nr-RSTD-r16', _NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16),
+        (u'nr-AdditionalPathList-r16', _NR_DL_TDOA_MeasElement_r16_nr_AdditionalPathList_r16),
+        (u'nr-TimingQuality-r16', _NR_DL_TDOA_MeasElement_r16_nr_TimingQuality_r16),
+        (u'nr-DL-PRS-RSRP-Result-r16', _NR_DL_TDOA_MeasElement_r16_nr_DL_PRS_RSRP_Result_r16),
+        (u'nr-DL-TDOA-AdditionalMeasurements-r16', _NR_DL_TDOA_MeasElement_r16_nr_DL_TDOA_AdditionalMeasurements_r16),
+        ])
+    NR_DL_TDOA_MeasElement_r16._ext = []
+    
+    #-----< NR-DL-TDOA-AdditionalMeasurements-r16 >-----#
+    NR_DL_TDOA_AdditionalMeasurements_r16 = SEQ_OF(name=u'NR-DL-TDOA-AdditionalMeasurements-r16', mode=MODE_TYPE)
+    _NR_DL_TDOA_AdditionalMeasurements_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-TDOA-AdditionalMeasurementElement-r16')))
+    NR_DL_TDOA_AdditionalMeasurements_r16._cont = _NR_DL_TDOA_AdditionalMeasurements_r16__item_
+    NR_DL_TDOA_AdditionalMeasurements_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=3)], ev=None, er=[])
+    
+    #-----< NR-DL-TDOA-AdditionalMeasurementElement-r16 >-----#
+    NR_DL_TDOA_AdditionalMeasurementElement_r16 = SEQ(name=u'NR-DL-TDOA-AdditionalMeasurementElement-r16', mode=MODE_TYPE)
+    _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_DL_PRS_ResourceID_r16 = INT(name=u'nr-DL-PRS-ResourceID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ResourceID-r16')), opt=True)
+    _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_DL_PRS_ResourceSetID_r16 = INT(name=u'nr-DL-PRS-ResourceSetID-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ResourceSetID-r16')), opt=True)
+    _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_TimeStamp_r16 = SEQ(name=u'nr-TimeStamp-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-TimeStamp-r16')))
+    _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16 = CHOICE(name=u'nr-RSTD-ResultDiff-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k0_r16 = INT(name=u'k0-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k0_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=8191)], ev=None, er=[])
+    __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k1_r16 = INT(name=u'k1-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k1_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4095)], ev=None, er=[])
+    __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k2_r16 = INT(name=u'k2-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k2_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2047)], ev=None, er=[])
+    __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k3_r16 = INT(name=u'k3-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k3_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1023)], ev=None, er=[])
+    __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k4_r16 = INT(name=u'k4-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k4_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
+    __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k5_r16 = INT(name=u'k5-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k5_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16._cont = ASN1Dict([
+        (u'k0-r16', __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k0_r16),
+        (u'k1-r16', __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k1_r16),
+        (u'k2-r16', __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k2_r16),
+        (u'k3-r16', __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k3_r16),
+        (u'k4-r16', __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k4_r16),
+        (u'k5-r16', __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k5_r16),
+        ])
+    _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16._ext = []
+    _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_TimingQuality_r16 = SEQ(name=u'nr-TimingQuality-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-TimingQuality-r16')))
+    _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_DL_PRS_RSRP_ResultDiff_r16 = INT(name=u'nr-DL-PRS-RSRP-ResultDiff-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_DL_PRS_RSRP_ResultDiff_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=61)], ev=None, er=[])
+    _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_AdditionalPathList_r16 = SEQ_OF(name=u'nr-AdditionalPathList-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-AdditionalPathList-r16')), opt=True)
+    NR_DL_TDOA_AdditionalMeasurementElement_r16._cont = ASN1Dict([
+        (u'nr-DL-PRS-ResourceID-r16', _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_DL_PRS_ResourceID_r16),
+        (u'nr-DL-PRS-ResourceSetID-r16', _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_DL_PRS_ResourceSetID_r16),
+        (u'nr-TimeStamp-r16', _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_TimeStamp_r16),
+        (u'nr-RSTD-ResultDiff-r16', _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16),
+        (u'nr-TimingQuality-r16', _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_TimingQuality_r16),
+        (u'nr-DL-PRS-RSRP-ResultDiff-r16', _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_DL_PRS_RSRP_ResultDiff_r16),
+        (u'nr-AdditionalPathList-r16', _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_AdditionalPathList_r16),
+        ])
+    NR_DL_TDOA_AdditionalMeasurementElement_r16._ext = []
+    
+    #-----< NR-DL-TDOA-LocationInformation-r16 >-----#
+    NR_DL_TDOA_LocationInformation_r16 = SEQ(name=u'NR-DL-TDOA-LocationInformation-r16', mode=MODE_TYPE)
+    _NR_DL_TDOA_LocationInformation_r16_measurementReferenceTime_r16 = CHOICE(name=u'measurementReferenceTime-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    __NR_DL_TDOA_LocationInformation_r16_measurementReferenceTime_r16_systemFrameNumber_r16 = SEQ(name=u'systemFrameNumber-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-TimeStamp-r16')))
+    __NR_DL_TDOA_LocationInformation_r16_measurementReferenceTime_r16_utc_time_r16 = TIME_UTC(name=u'utc-time-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_TDOA_LocationInformation_r16_measurementReferenceTime_r16._cont = ASN1Dict([
+        (u'systemFrameNumber-r16', __NR_DL_TDOA_LocationInformation_r16_measurementReferenceTime_r16_systemFrameNumber_r16),
+        (u'utc-time-r16', __NR_DL_TDOA_LocationInformation_r16_measurementReferenceTime_r16_utc_time_r16),
+        ])
+    _NR_DL_TDOA_LocationInformation_r16_measurementReferenceTime_r16._ext = []
+    NR_DL_TDOA_LocationInformation_r16._cont = ASN1Dict([
+        (u'measurementReferenceTime-r16', _NR_DL_TDOA_LocationInformation_r16_measurementReferenceTime_r16),
+        ])
+    NR_DL_TDOA_LocationInformation_r16._ext = []
+    
+    #-----< NR-DL-TDOA-RequestLocationInformation-r16 >-----#
+    NR_DL_TDOA_RequestLocationInformation_r16 = SEQ(name=u'NR-DL-TDOA-RequestLocationInformation-r16', mode=MODE_TYPE)
+    _NR_DL_TDOA_RequestLocationInformation_r16_nr_DL_PRS_RstdMeasurementInfoRequest_r16 = ENUM(name=u'nr-DL-PRS-RstdMeasurementInfoRequest-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_DL_TDOA_RequestLocationInformation_r16_nr_DL_PRS_RstdMeasurementInfoRequest_r16._cont = ASN1Dict([(u'true', 0)])
+    _NR_DL_TDOA_RequestLocationInformation_r16_nr_DL_PRS_RstdMeasurementInfoRequest_r16._ext = None
+    _NR_DL_TDOA_RequestLocationInformation_r16_nr_RequestedMeasurements_r16 = BIT_STR(name=u'nr-RequestedMeasurements-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_TDOA_RequestLocationInformation_r16_nr_RequestedMeasurements_r16._cont = ASN1Dict([(u'prsrsrpReq', 0)])
+    _NR_DL_TDOA_RequestLocationInformation_r16_nr_RequestedMeasurements_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    _NR_DL_TDOA_RequestLocationInformation_r16_nr_AssistanceAvailability_r16 = BOOL(name=u'nr-AssistanceAvailability-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_TDOA_RequestLocationInformation_r16_nr_DL_TDOA_ReportConfig_r16 = SEQ(name=u'nr-DL-TDOA-ReportConfig-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-TDOA-ReportConfig-r16')), opt=True)
+    _NR_DL_TDOA_RequestLocationInformation_r16_additionalPaths_r16 = ENUM(name=u'additionalPaths-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_DL_TDOA_RequestLocationInformation_r16_additionalPaths_r16._cont = ASN1Dict([(u'requested', 0)])
+    _NR_DL_TDOA_RequestLocationInformation_r16_additionalPaths_r16._ext = None
+    NR_DL_TDOA_RequestLocationInformation_r16._cont = ASN1Dict([
+        (u'nr-DL-PRS-RstdMeasurementInfoRequest-r16', _NR_DL_TDOA_RequestLocationInformation_r16_nr_DL_PRS_RstdMeasurementInfoRequest_r16),
+        (u'nr-RequestedMeasurements-r16', _NR_DL_TDOA_RequestLocationInformation_r16_nr_RequestedMeasurements_r16),
+        (u'nr-AssistanceAvailability-r16', _NR_DL_TDOA_RequestLocationInformation_r16_nr_AssistanceAvailability_r16),
+        (u'nr-DL-TDOA-ReportConfig-r16', _NR_DL_TDOA_RequestLocationInformation_r16_nr_DL_TDOA_ReportConfig_r16),
+        (u'additionalPaths-r16', _NR_DL_TDOA_RequestLocationInformation_r16_additionalPaths_r16),
+        ])
+    NR_DL_TDOA_RequestLocationInformation_r16._ext = []
+    
+    #-----< NR-DL-TDOA-ReportConfig-r16 >-----#
+    NR_DL_TDOA_ReportConfig_r16 = SEQ(name=u'NR-DL-TDOA-ReportConfig-r16', mode=MODE_TYPE)
+    _NR_DL_TDOA_ReportConfig_r16_maxDL_PRS_RSTD_MeasurementsPerTRPPair_r16 = INT(name=u'maxDL-PRS-RSTD-MeasurementsPerTRPPair-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_DL_TDOA_ReportConfig_r16_maxDL_PRS_RSTD_MeasurementsPerTRPPair_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _NR_DL_TDOA_ReportConfig_r16_timingReportingGranularityFactor_r16 = INT(name=u'timingReportingGranularityFactor-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_DL_TDOA_ReportConfig_r16_timingReportingGranularityFactor_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=5)], ev=None, er=[])
+    NR_DL_TDOA_ReportConfig_r16._cont = ASN1Dict([
+        (u'maxDL-PRS-RSTD-MeasurementsPerTRPPair-r16', _NR_DL_TDOA_ReportConfig_r16_maxDL_PRS_RSTD_MeasurementsPerTRPPair_r16),
+        (u'timingReportingGranularityFactor-r16', _NR_DL_TDOA_ReportConfig_r16_timingReportingGranularityFactor_r16),
+        ])
+    NR_DL_TDOA_ReportConfig_r16._ext = []
+    
+    #-----< NR-DL-TDOA-ProvideCapabilities-r16 >-----#
+    NR_DL_TDOA_ProvideCapabilities_r16 = SEQ(name=u'NR-DL-TDOA-ProvideCapabilities-r16', mode=MODE_TYPE)
+    _NR_DL_TDOA_ProvideCapabilities_r16_nr_DL_TDOA_Mode_r16 = SEQ(name=u'nr-DL-TDOA-Mode-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'PositioningModes')))
+    _NR_DL_TDOA_ProvideCapabilities_r16_nr_DL_TDOA_PRS_Capability_r16 = SEQ(name=u'nr-DL-TDOA-PRS-Capability-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ResourcesCapability-r16')))
+    _NR_DL_TDOA_ProvideCapabilities_r16_nr_DL_TDOA_MeasurementCapability_r16 = SEQ(name=u'nr-DL-TDOA-MeasurementCapability-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-TDOA-MeasurementCapability-r16')))
+    _NR_DL_TDOA_ProvideCapabilities_r16_nr_DL_PRS_QCL_ProcessingCapability_r16 = SEQ(name=u'nr-DL-PRS-QCL-ProcessingCapability-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-QCL-ProcessingCapability-r16')))
+    _NR_DL_TDOA_ProvideCapabilities_r16_nr_DL_PRS_ProcessingCapability_r16 = SEQ(name=u'nr-DL-PRS-ProcessingCapability-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ProcessingCapability-r16')))
+    _NR_DL_TDOA_ProvideCapabilities_r16_additionalPathsReport_r16 = ENUM(name=u'additionalPathsReport-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_DL_TDOA_ProvideCapabilities_r16_additionalPathsReport_r16._cont = ASN1Dict([(u'supported', 0)])
+    _NR_DL_TDOA_ProvideCapabilities_r16_additionalPathsReport_r16._ext = None
+    _NR_DL_TDOA_ProvideCapabilities_r16_periodicalReporting_r16 = SEQ(name=u'periodicalReporting-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'PositioningModes')), opt=True)
+    NR_DL_TDOA_ProvideCapabilities_r16._cont = ASN1Dict([
+        (u'nr-DL-TDOA-Mode-r16', _NR_DL_TDOA_ProvideCapabilities_r16_nr_DL_TDOA_Mode_r16),
+        (u'nr-DL-TDOA-PRS-Capability-r16', _NR_DL_TDOA_ProvideCapabilities_r16_nr_DL_TDOA_PRS_Capability_r16),
+        (u'nr-DL-TDOA-MeasurementCapability-r16', _NR_DL_TDOA_ProvideCapabilities_r16_nr_DL_TDOA_MeasurementCapability_r16),
+        (u'nr-DL-PRS-QCL-ProcessingCapability-r16', _NR_DL_TDOA_ProvideCapabilities_r16_nr_DL_PRS_QCL_ProcessingCapability_r16),
+        (u'nr-DL-PRS-ProcessingCapability-r16', _NR_DL_TDOA_ProvideCapabilities_r16_nr_DL_PRS_ProcessingCapability_r16),
+        (u'additionalPathsReport-r16', _NR_DL_TDOA_ProvideCapabilities_r16_additionalPathsReport_r16),
+        (u'periodicalReporting-r16', _NR_DL_TDOA_ProvideCapabilities_r16_periodicalReporting_r16),
+        ])
+    NR_DL_TDOA_ProvideCapabilities_r16._ext = []
+    
+    #-----< NR-DL-TDOA-MeasurementCapability-r16 >-----#
+    NR_DL_TDOA_MeasurementCapability_r16 = SEQ(name=u'NR-DL-TDOA-MeasurementCapability-r16', mode=MODE_TYPE)
+    _NR_DL_TDOA_MeasurementCapability_r16_dl_RSTD_MeasurementPerPairOfTRP_FR1_r16 = INT(name=u'dl-RSTD-MeasurementPerPairOfTRP-FR1-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_TDOA_MeasurementCapability_r16_dl_RSTD_MeasurementPerPairOfTRP_FR1_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _NR_DL_TDOA_MeasurementCapability_r16_dl_RSTD_MeasurementPerPairOfTRP_FR2_r16 = INT(name=u'dl-RSTD-MeasurementPerPairOfTRP-FR2-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_TDOA_MeasurementCapability_r16_dl_RSTD_MeasurementPerPairOfTRP_FR2_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _NR_DL_TDOA_MeasurementCapability_r16_supportOfDL_PRS_RSRP_MeasFR1_r16 = ENUM(name=u'supportOfDL-PRS-RSRP-MeasFR1-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_DL_TDOA_MeasurementCapability_r16_supportOfDL_PRS_RSRP_MeasFR1_r16._cont = ASN1Dict([(u'supported', 0)])
+    _NR_DL_TDOA_MeasurementCapability_r16_supportOfDL_PRS_RSRP_MeasFR1_r16._ext = None
+    _NR_DL_TDOA_MeasurementCapability_r16_supportOfDL_PRS_RSRP_MeasFR2_r16 = ENUM(name=u'supportOfDL-PRS-RSRP-MeasFR2-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_DL_TDOA_MeasurementCapability_r16_supportOfDL_PRS_RSRP_MeasFR2_r16._cont = ASN1Dict([(u'supported', 0)])
+    _NR_DL_TDOA_MeasurementCapability_r16_supportOfDL_PRS_RSRP_MeasFR2_r16._ext = None
+    NR_DL_TDOA_MeasurementCapability_r16._cont = ASN1Dict([
+        (u'dl-RSTD-MeasurementPerPairOfTRP-FR1-r16', _NR_DL_TDOA_MeasurementCapability_r16_dl_RSTD_MeasurementPerPairOfTRP_FR1_r16),
+        (u'dl-RSTD-MeasurementPerPairOfTRP-FR2-r16', _NR_DL_TDOA_MeasurementCapability_r16_dl_RSTD_MeasurementPerPairOfTRP_FR2_r16),
+        (u'supportOfDL-PRS-RSRP-MeasFR1-r16', _NR_DL_TDOA_MeasurementCapability_r16_supportOfDL_PRS_RSRP_MeasFR1_r16),
+        (u'supportOfDL-PRS-RSRP-MeasFR2-r16', _NR_DL_TDOA_MeasurementCapability_r16_supportOfDL_PRS_RSRP_MeasFR2_r16),
+        ])
+    NR_DL_TDOA_MeasurementCapability_r16._ext = []
+    
+    #-----< NR-DL-TDOA-RequestCapabilities-r16 >-----#
+    NR_DL_TDOA_RequestCapabilities_r16 = SEQ(name=u'NR-DL-TDOA-RequestCapabilities-r16', mode=MODE_TYPE)
+    NR_DL_TDOA_RequestCapabilities_r16._cont = ASN1Dict([
+        ])
+    NR_DL_TDOA_RequestCapabilities_r16._ext = []
+    
+    #-----< NR-DL-TDOA-Error-r16 >-----#
+    NR_DL_TDOA_Error_r16 = CHOICE(name=u'NR-DL-TDOA-Error-r16', mode=MODE_TYPE)
+    _NR_DL_TDOA_Error_r16_locationServerErrorCauses_r16 = SEQ(name=u'locationServerErrorCauses-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-TDOA-LocationServerErrorCauses-r16')))
+    _NR_DL_TDOA_Error_r16_targetDeviceErrorCauses_r16 = SEQ(name=u'targetDeviceErrorCauses-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-TDOA-TargetDeviceErrorCauses-r16')))
+    NR_DL_TDOA_Error_r16._cont = ASN1Dict([
+        (u'locationServerErrorCauses-r16', _NR_DL_TDOA_Error_r16_locationServerErrorCauses_r16),
+        (u'targetDeviceErrorCauses-r16', _NR_DL_TDOA_Error_r16_targetDeviceErrorCauses_r16),
+        ])
+    NR_DL_TDOA_Error_r16._ext = []
+    
+    #-----< NR-DL-TDOA-LocationServerErrorCauses-r16 >-----#
+    NR_DL_TDOA_LocationServerErrorCauses_r16 = SEQ(name=u'NR-DL-TDOA-LocationServerErrorCauses-r16', mode=MODE_TYPE)
+    _NR_DL_TDOA_LocationServerErrorCauses_r16_cause_r16 = ENUM(name=u'cause-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_TDOA_LocationServerErrorCauses_r16_cause_r16._cont = ASN1Dict([(u'undefined', 0), (u'assistanceDataNotSupportedByServer', 1), (u'assistanceDataSupportedButCurrentlyNotAvailableByServer', 2), (u'notProvidedAssistanceDataNotSupportedByServer', 3)])
+    _NR_DL_TDOA_LocationServerErrorCauses_r16_cause_r16._ext = []
+    NR_DL_TDOA_LocationServerErrorCauses_r16._cont = ASN1Dict([
+        (u'cause-r16', _NR_DL_TDOA_LocationServerErrorCauses_r16_cause_r16),
+        ])
+    NR_DL_TDOA_LocationServerErrorCauses_r16._ext = []
+    
+    #-----< NR-DL-TDOA-TargetDeviceErrorCauses-r16 >-----#
+    NR_DL_TDOA_TargetDeviceErrorCauses_r16 = SEQ(name=u'NR-DL-TDOA-TargetDeviceErrorCauses-r16', mode=MODE_TYPE)
+    _NR_DL_TDOA_TargetDeviceErrorCauses_r16_cause_r16 = ENUM(name=u'cause-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_TDOA_TargetDeviceErrorCauses_r16_cause_r16._cont = ASN1Dict([(u'undefined', 0), (u'assistance-data-missing', 1), (u'unableToMeasureAnyTRP', 2), (u'attemptedButUnableToMeasureSomeNeighbourTRPs', 3), (u'thereWereNotEnoughSignalsReceivedForUeBasedDL-TDOA', 4), (u'locationCalculationAssistanceDataMissing', 5)])
+    _NR_DL_TDOA_TargetDeviceErrorCauses_r16_cause_r16._ext = []
+    NR_DL_TDOA_TargetDeviceErrorCauses_r16._cont = ASN1Dict([
+        (u'cause-r16', _NR_DL_TDOA_TargetDeviceErrorCauses_r16_cause_r16),
+        ])
+    NR_DL_TDOA_TargetDeviceErrorCauses_r16._ext = []
+    
+    #-----< NR-DL-AoD-ProvideAssistanceData-r16 >-----#
+    NR_DL_AoD_ProvideAssistanceData_r16 = SEQ(name=u'NR-DL-AoD-ProvideAssistanceData-r16', mode=MODE_TYPE)
+    _NR_DL_AoD_ProvideAssistanceData_r16_nr_DL_PRS_AssistanceData_r16 = SEQ(name=u'nr-DL-PRS-AssistanceData-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-AssistanceData-r16')), opt=True)
+    _NR_DL_AoD_ProvideAssistanceData_r16_nr_SelectedDL_PRS_IndexList_r16 = SEQ_OF(name=u'nr-SelectedDL-PRS-IndexList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-SelectedDL-PRS-IndexList-r16')), opt=True)
+    _NR_DL_AoD_ProvideAssistanceData_r16_nr_PositionCalculationAssistance_r16 = SEQ(name=u'nr-PositionCalculationAssistance-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-PositionCalculationAssistance-r16')), opt=True)
+    _NR_DL_AoD_ProvideAssistanceData_r16_nr_DL_AoD_Error_r16 = CHOICE(name=u'nr-DL-AoD-Error-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-AoD-Error-r16')), opt=True)
+    NR_DL_AoD_ProvideAssistanceData_r16._cont = ASN1Dict([
+        (u'nr-DL-PRS-AssistanceData-r16', _NR_DL_AoD_ProvideAssistanceData_r16_nr_DL_PRS_AssistanceData_r16),
+        (u'nr-SelectedDL-PRS-IndexList-r16', _NR_DL_AoD_ProvideAssistanceData_r16_nr_SelectedDL_PRS_IndexList_r16),
+        (u'nr-PositionCalculationAssistance-r16', _NR_DL_AoD_ProvideAssistanceData_r16_nr_PositionCalculationAssistance_r16),
+        (u'nr-DL-AoD-Error-r16', _NR_DL_AoD_ProvideAssistanceData_r16_nr_DL_AoD_Error_r16),
+        ])
+    NR_DL_AoD_ProvideAssistanceData_r16._ext = []
+    
+    #-----< NR-DL-AoD-RequestAssistanceData-r16 >-----#
+    NR_DL_AoD_RequestAssistanceData_r16 = SEQ(name=u'NR-DL-AoD-RequestAssistanceData-r16', mode=MODE_TYPE)
+    _NR_DL_AoD_RequestAssistanceData_r16_nr_PhysCellID_r16 = INT(name=u'nr-PhysCellID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-PhysCellID-r16')), opt=True)
+    _NR_DL_AoD_RequestAssistanceData_r16_nr_AdType_r16 = BIT_STR(name=u'nr-AdType-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_AoD_RequestAssistanceData_r16_nr_AdType_r16._cont = ASN1Dict([(u'dl-prs', 0), (u'posCalc', 1)])
+    _NR_DL_AoD_RequestAssistanceData_r16_nr_AdType_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    NR_DL_AoD_RequestAssistanceData_r16._cont = ASN1Dict([
+        (u'nr-PhysCellID-r16', _NR_DL_AoD_RequestAssistanceData_r16_nr_PhysCellID_r16),
+        (u'nr-AdType-r16', _NR_DL_AoD_RequestAssistanceData_r16_nr_AdType_r16),
+        ])
+    NR_DL_AoD_RequestAssistanceData_r16._ext = []
+    
+    #-----< NR-DL-AoD-ProvideLocationInformation-r16 >-----#
+    NR_DL_AoD_ProvideLocationInformation_r16 = SEQ(name=u'NR-DL-AoD-ProvideLocationInformation-r16', mode=MODE_TYPE)
+    _NR_DL_AoD_ProvideLocationInformation_r16_nr_DL_AoD_SignalMeasurementInformation_r16 = SEQ(name=u'nr-DL-AoD-SignalMeasurementInformation-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-AoD-SignalMeasurementInformation-r16')), opt=True)
+    _NR_DL_AoD_ProvideLocationInformation_r16_nr_dl_AoD_LocationInformation_r16 = SEQ(name=u'nr-dl-AoD-LocationInformation-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-AoD-LocationInformation-r16')), opt=True)
+    _NR_DL_AoD_ProvideLocationInformation_r16_nr_DL_AoD_Error_r16 = CHOICE(name=u'nr-DL-AoD-Error-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-AoD-Error-r16')), opt=True)
+    NR_DL_AoD_ProvideLocationInformation_r16._cont = ASN1Dict([
+        (u'nr-DL-AoD-SignalMeasurementInformation-r16', _NR_DL_AoD_ProvideLocationInformation_r16_nr_DL_AoD_SignalMeasurementInformation_r16),
+        (u'nr-dl-AoD-LocationInformation-r16', _NR_DL_AoD_ProvideLocationInformation_r16_nr_dl_AoD_LocationInformation_r16),
+        (u'nr-DL-AoD-Error-r16', _NR_DL_AoD_ProvideLocationInformation_r16_nr_DL_AoD_Error_r16),
+        ])
+    NR_DL_AoD_ProvideLocationInformation_r16._ext = []
+    
+    #-----< NR-DL-AoD-SignalMeasurementInformation-r16 >-----#
+    NR_DL_AoD_SignalMeasurementInformation_r16 = SEQ(name=u'NR-DL-AoD-SignalMeasurementInformation-r16', mode=MODE_TYPE)
+    _NR_DL_AoD_SignalMeasurementInformation_r16_nr_DL_AoD_MeasList_r16 = SEQ_OF(name=u'nr-DL-AoD-MeasList-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-AoD-MeasList-r16')))
+    NR_DL_AoD_SignalMeasurementInformation_r16._cont = ASN1Dict([
+        (u'nr-DL-AoD-MeasList-r16', _NR_DL_AoD_SignalMeasurementInformation_r16_nr_DL_AoD_MeasList_r16),
+        ])
+    NR_DL_AoD_SignalMeasurementInformation_r16._ext = []
+    
+    #-----< NR-DL-AoD-MeasList-r16 >-----#
+    NR_DL_AoD_MeasList_r16 = SEQ_OF(name=u'NR-DL-AoD-MeasList-r16', mode=MODE_TYPE)
+    _NR_DL_AoD_MeasList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-AoD-MeasElement-r16')))
+    NR_DL_AoD_MeasList_r16._cont = _NR_DL_AoD_MeasList_r16__item_
+    NR_DL_AoD_MeasList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=256)], ev=None, er=[])
+    
+    #-----< NR-DL-AoD-MeasElement-r16 >-----#
+    NR_DL_AoD_MeasElement_r16 = SEQ(name=u'NR-DL-AoD-MeasElement-r16', mode=MODE_TYPE)
+    _NR_DL_AoD_MeasElement_r16_dl_PRS_ID_r16 = INT(name=u'dl-PRS-ID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_AoD_MeasElement_r16_dl_PRS_ID_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    _NR_DL_AoD_MeasElement_r16_nr_PhysCellID_r16 = INT(name=u'nr-PhysCellID-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-PhysCellID-r16')), opt=True)
+    _NR_DL_AoD_MeasElement_r16_nr_CellGlobalID_r16 = SEQ(name=u'nr-CellGlobalID-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NCGI-r15')), opt=True)
+    _NR_DL_AoD_MeasElement_r16_nr_ARFCN_r16 = INT(name=u'nr-ARFCN-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'ARFCN-ValueNR-r15')), opt=True)
+    _NR_DL_AoD_MeasElement_r16_nr_DL_PRS_ResourceID_r16 = INT(name=u'nr-DL-PRS-ResourceID-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ResourceID-r16')), opt=True)
+    _NR_DL_AoD_MeasElement_r16_nr_DL_PRS_ResourceSetID_r16 = INT(name=u'nr-DL-PRS-ResourceSetID-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ResourceSetID-r16')), opt=True)
+    _NR_DL_AoD_MeasElement_r16_nr_TimeStamp_r16 = SEQ(name=u'nr-TimeStamp-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-TimeStamp-r16')))
+    _NR_DL_AoD_MeasElement_r16_nr_DL_PRS_RSRP_Result_r16 = INT(name=u'nr-DL-PRS-RSRP-Result-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_AoD_MeasElement_r16_nr_DL_PRS_RSRP_Result_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=126)], ev=None, er=[])
+    _NR_DL_AoD_MeasElement_r16_nr_DL_PRS_RxBeamIndex_r16 = INT(name=u'nr-DL-PRS-RxBeamIndex-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_DL_AoD_MeasElement_r16_nr_DL_PRS_RxBeamIndex_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    _NR_DL_AoD_MeasElement_r16_nr_DL_AoD_AdditionalMeasurements_r16 = SEQ_OF(name=u'nr-DL-AoD-AdditionalMeasurements-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-AoD-AdditionalMeasurements-r16')), opt=True)
+    NR_DL_AoD_MeasElement_r16._cont = ASN1Dict([
+        (u'dl-PRS-ID-r16', _NR_DL_AoD_MeasElement_r16_dl_PRS_ID_r16),
+        (u'nr-PhysCellID-r16', _NR_DL_AoD_MeasElement_r16_nr_PhysCellID_r16),
+        (u'nr-CellGlobalID-r16', _NR_DL_AoD_MeasElement_r16_nr_CellGlobalID_r16),
+        (u'nr-ARFCN-r16', _NR_DL_AoD_MeasElement_r16_nr_ARFCN_r16),
+        (u'nr-DL-PRS-ResourceID-r16', _NR_DL_AoD_MeasElement_r16_nr_DL_PRS_ResourceID_r16),
+        (u'nr-DL-PRS-ResourceSetID-r16', _NR_DL_AoD_MeasElement_r16_nr_DL_PRS_ResourceSetID_r16),
+        (u'nr-TimeStamp-r16', _NR_DL_AoD_MeasElement_r16_nr_TimeStamp_r16),
+        (u'nr-DL-PRS-RSRP-Result-r16', _NR_DL_AoD_MeasElement_r16_nr_DL_PRS_RSRP_Result_r16),
+        (u'nr-DL-PRS-RxBeamIndex-r16', _NR_DL_AoD_MeasElement_r16_nr_DL_PRS_RxBeamIndex_r16),
+        (u'nr-DL-AoD-AdditionalMeasurements-r16', _NR_DL_AoD_MeasElement_r16_nr_DL_AoD_AdditionalMeasurements_r16),
+        ])
+    NR_DL_AoD_MeasElement_r16._ext = []
+    
+    #-----< NR-DL-AoD-AdditionalMeasurements-r16 >-----#
+    NR_DL_AoD_AdditionalMeasurements_r16 = SEQ_OF(name=u'NR-DL-AoD-AdditionalMeasurements-r16', mode=MODE_TYPE)
+    _NR_DL_AoD_AdditionalMeasurements_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-AoD-AdditionalMeasurementElement-r16')))
+    NR_DL_AoD_AdditionalMeasurements_r16._cont = _NR_DL_AoD_AdditionalMeasurements_r16__item_
+    NR_DL_AoD_AdditionalMeasurements_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=7)], ev=None, er=[])
+    
+    #-----< NR-DL-AoD-AdditionalMeasurementElement-r16 >-----#
+    NR_DL_AoD_AdditionalMeasurementElement_r16 = SEQ(name=u'NR-DL-AoD-AdditionalMeasurementElement-r16', mode=MODE_TYPE)
+    _NR_DL_AoD_AdditionalMeasurementElement_r16_nr_DL_PRS_ResourceID_r16 = INT(name=u'nr-DL-PRS-ResourceID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ResourceID-r16')), opt=True)
+    _NR_DL_AoD_AdditionalMeasurementElement_r16_nr_DL_PRS_ResourceSetID_r16 = INT(name=u'nr-DL-PRS-ResourceSetID-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ResourceSetID-r16')), opt=True)
+    _NR_DL_AoD_AdditionalMeasurementElement_r16_nr_TimeStamp_r16 = SEQ(name=u'nr-TimeStamp-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-TimeStamp-r16')))
+    _NR_DL_AoD_AdditionalMeasurementElement_r16_nr_DL_PRS_RSRP_ResultDiff_r16 = INT(name=u'nr-DL-PRS-RSRP-ResultDiff-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_AoD_AdditionalMeasurementElement_r16_nr_DL_PRS_RSRP_ResultDiff_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=30)], ev=None, er=[])
+    _NR_DL_AoD_AdditionalMeasurementElement_r16_nr_DL_PRS_RxBeamIndex_r16 = INT(name=u'nr-DL-PRS-RxBeamIndex-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_DL_AoD_AdditionalMeasurementElement_r16_nr_DL_PRS_RxBeamIndex_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    NR_DL_AoD_AdditionalMeasurementElement_r16._cont = ASN1Dict([
+        (u'nr-DL-PRS-ResourceID-r16', _NR_DL_AoD_AdditionalMeasurementElement_r16_nr_DL_PRS_ResourceID_r16),
+        (u'nr-DL-PRS-ResourceSetID-r16', _NR_DL_AoD_AdditionalMeasurementElement_r16_nr_DL_PRS_ResourceSetID_r16),
+        (u'nr-TimeStamp-r16', _NR_DL_AoD_AdditionalMeasurementElement_r16_nr_TimeStamp_r16),
+        (u'nr-DL-PRS-RSRP-ResultDiff-r16', _NR_DL_AoD_AdditionalMeasurementElement_r16_nr_DL_PRS_RSRP_ResultDiff_r16),
+        (u'nr-DL-PRS-RxBeamIndex-r16', _NR_DL_AoD_AdditionalMeasurementElement_r16_nr_DL_PRS_RxBeamIndex_r16),
+        ])
+    NR_DL_AoD_AdditionalMeasurementElement_r16._ext = []
+    
+    #-----< NR-DL-AoD-LocationInformation-r16 >-----#
+    NR_DL_AoD_LocationInformation_r16 = SEQ(name=u'NR-DL-AoD-LocationInformation-r16', mode=MODE_TYPE)
+    _NR_DL_AoD_LocationInformation_r16_measurementReferenceTime_r16 = CHOICE(name=u'measurementReferenceTime-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    __NR_DL_AoD_LocationInformation_r16_measurementReferenceTime_r16_sfn_time_r16 = SEQ(name=u'sfn-time-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-TimeStamp-r16')))
+    __NR_DL_AoD_LocationInformation_r16_measurementReferenceTime_r16_utc_time_r16 = TIME_UTC(name=u'utc-time-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_AoD_LocationInformation_r16_measurementReferenceTime_r16._cont = ASN1Dict([
+        (u'sfn-time-r16', __NR_DL_AoD_LocationInformation_r16_measurementReferenceTime_r16_sfn_time_r16),
+        (u'utc-time-r16', __NR_DL_AoD_LocationInformation_r16_measurementReferenceTime_r16_utc_time_r16),
+        ])
+    _NR_DL_AoD_LocationInformation_r16_measurementReferenceTime_r16._ext = []
+    NR_DL_AoD_LocationInformation_r16._cont = ASN1Dict([
+        (u'measurementReferenceTime-r16', _NR_DL_AoD_LocationInformation_r16_measurementReferenceTime_r16),
+        ])
+    NR_DL_AoD_LocationInformation_r16._ext = []
+    
+    #-----< NR-DL-AoD-RequestLocationInformation-r16 >-----#
+    NR_DL_AoD_RequestLocationInformation_r16 = SEQ(name=u'NR-DL-AoD-RequestLocationInformation-r16', mode=MODE_TYPE)
+    _NR_DL_AoD_RequestLocationInformation_r16_nr_AssistanceAvailability_r16 = BOOL(name=u'nr-AssistanceAvailability-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_AoD_RequestLocationInformation_r16_nr_DL_AoD_ReportConfig_r16 = SEQ(name=u'nr-DL-AoD-ReportConfig-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-AoD-ReportConfig-r16')))
+    NR_DL_AoD_RequestLocationInformation_r16._cont = ASN1Dict([
+        (u'nr-AssistanceAvailability-r16', _NR_DL_AoD_RequestLocationInformation_r16_nr_AssistanceAvailability_r16),
+        (u'nr-DL-AoD-ReportConfig-r16', _NR_DL_AoD_RequestLocationInformation_r16_nr_DL_AoD_ReportConfig_r16),
+        ])
+    NR_DL_AoD_RequestLocationInformation_r16._ext = []
+    
+    #-----< NR-DL-AoD-ReportConfig-r16 >-----#
+    NR_DL_AoD_ReportConfig_r16 = SEQ(name=u'NR-DL-AoD-ReportConfig-r16', mode=MODE_TYPE)
+    _NR_DL_AoD_ReportConfig_r16_maxDL_PRS_RSRP_MeasurementsPerTRP_r16 = INT(name=u'maxDL-PRS-RSRP-MeasurementsPerTRP-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_DL_AoD_ReportConfig_r16_maxDL_PRS_RSRP_MeasurementsPerTRP_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    NR_DL_AoD_ReportConfig_r16._cont = ASN1Dict([
+        (u'maxDL-PRS-RSRP-MeasurementsPerTRP-r16', _NR_DL_AoD_ReportConfig_r16_maxDL_PRS_RSRP_MeasurementsPerTRP_r16),
+        ])
+    NR_DL_AoD_ReportConfig_r16._ext = []
+    
+    #-----< NR-DL-AoD-ProvideCapabilities-r16 >-----#
+    NR_DL_AoD_ProvideCapabilities_r16 = SEQ(name=u'NR-DL-AoD-ProvideCapabilities-r16', mode=MODE_TYPE)
+    _NR_DL_AoD_ProvideCapabilities_r16_nr_DL_AoD_Mode_r16 = SEQ(name=u'nr-DL-AoD-Mode-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'PositioningModes')))
+    _NR_DL_AoD_ProvideCapabilities_r16_nr_DL_AoD_PRS_Capability_r16 = SEQ(name=u'nr-DL-AoD-PRS-Capability-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ResourcesCapability-r16')))
+    _NR_DL_AoD_ProvideCapabilities_r16_nr_DL_AoD_MeasurementCapability_r16 = SEQ(name=u'nr-DL-AoD-MeasurementCapability-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-AoD-MeasurementCapability-r16')))
+    _NR_DL_AoD_ProvideCapabilities_r16_nr_DL_PRS_QCL_ProcessingCapability_r16 = SEQ(name=u'nr-DL-PRS-QCL-ProcessingCapability-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-QCL-ProcessingCapability-r16')))
+    _NR_DL_AoD_ProvideCapabilities_r16_nr_DL_PRS_ProcessingCapability_r16 = SEQ(name=u'nr-DL-PRS-ProcessingCapability-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ProcessingCapability-r16')))
+    _NR_DL_AoD_ProvideCapabilities_r16_periodicalReporting_r16 = SEQ(name=u'periodicalReporting-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'PositioningModes')), opt=True)
+    NR_DL_AoD_ProvideCapabilities_r16._cont = ASN1Dict([
+        (u'nr-DL-AoD-Mode-r16', _NR_DL_AoD_ProvideCapabilities_r16_nr_DL_AoD_Mode_r16),
+        (u'nr-DL-AoD-PRS-Capability-r16', _NR_DL_AoD_ProvideCapabilities_r16_nr_DL_AoD_PRS_Capability_r16),
+        (u'nr-DL-AoD-MeasurementCapability-r16', _NR_DL_AoD_ProvideCapabilities_r16_nr_DL_AoD_MeasurementCapability_r16),
+        (u'nr-DL-PRS-QCL-ProcessingCapability-r16', _NR_DL_AoD_ProvideCapabilities_r16_nr_DL_PRS_QCL_ProcessingCapability_r16),
+        (u'nr-DL-PRS-ProcessingCapability-r16', _NR_DL_AoD_ProvideCapabilities_r16_nr_DL_PRS_ProcessingCapability_r16),
+        (u'periodicalReporting-r16', _NR_DL_AoD_ProvideCapabilities_r16_periodicalReporting_r16),
+        ])
+    NR_DL_AoD_ProvideCapabilities_r16._ext = []
+    
+    #-----< NR-DL-AoD-MeasurementCapability-r16 >-----#
+    NR_DL_AoD_MeasurementCapability_r16 = SEQ(name=u'NR-DL-AoD-MeasurementCapability-r16', mode=MODE_TYPE)
+    _NR_DL_AoD_MeasurementCapability_r16_maxDL_PRS_RSRP_MeasurementFR1_r16 = INT(name=u'maxDL-PRS-RSRP-MeasurementFR1-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_AoD_MeasurementCapability_r16_maxDL_PRS_RSRP_MeasurementFR1_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    _NR_DL_AoD_MeasurementCapability_r16_maxDL_PRS_RSRP_MeasurementFR2_r16 = INT(name=u'maxDL-PRS-RSRP-MeasurementFR2-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_AoD_MeasurementCapability_r16_maxDL_PRS_RSRP_MeasurementFR2_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    _NR_DL_AoD_MeasurementCapability_r16_dl_AoD_MeasCapabilityBandList_r16 = SEQ_OF(name=u'dl-AoD-MeasCapabilityBandList-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_DL_AoD_MeasurementCapability_r16_dl_AoD_MeasCapabilityBandList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'DL-AoD-MeasCapabilityPerBand-r16')))
+    _NR_DL_AoD_MeasurementCapability_r16_dl_AoD_MeasCapabilityBandList_r16._cont = __NR_DL_AoD_MeasurementCapability_r16_dl_AoD_MeasCapabilityBandList_r16__item_
+    _NR_DL_AoD_MeasurementCapability_r16_dl_AoD_MeasCapabilityBandList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1024)], ev=None, er=[])
+    NR_DL_AoD_MeasurementCapability_r16._cont = ASN1Dict([
+        (u'maxDL-PRS-RSRP-MeasurementFR1-r16', _NR_DL_AoD_MeasurementCapability_r16_maxDL_PRS_RSRP_MeasurementFR1_r16),
+        (u'maxDL-PRS-RSRP-MeasurementFR2-r16', _NR_DL_AoD_MeasurementCapability_r16_maxDL_PRS_RSRP_MeasurementFR2_r16),
+        (u'dl-AoD-MeasCapabilityBandList-r16', _NR_DL_AoD_MeasurementCapability_r16_dl_AoD_MeasCapabilityBandList_r16),
+        ])
+    NR_DL_AoD_MeasurementCapability_r16._ext = []
+    
+    #-----< DL-AoD-MeasCapabilityPerBand-r16 >-----#
+    DL_AoD_MeasCapabilityPerBand_r16 = SEQ(name=u'DL-AoD-MeasCapabilityPerBand-r16', mode=MODE_TYPE)
+    _DL_AoD_MeasCapabilityPerBand_r16_freqBandIndicatorNR_r16 = INT(name=u'freqBandIndicatorNR-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'FreqBandIndicatorNR-r16')))
+    _DL_AoD_MeasCapabilityPerBand_r16_simul_NR_DL_AoD_DL_TDOA_r16 = ENUM(name=u'simul-NR-DL-AoD-DL-TDOA-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DL_AoD_MeasCapabilityPerBand_r16_simul_NR_DL_AoD_DL_TDOA_r16._cont = ASN1Dict([(u'supported', 0)])
+    _DL_AoD_MeasCapabilityPerBand_r16_simul_NR_DL_AoD_DL_TDOA_r16._ext = None
+    _DL_AoD_MeasCapabilityPerBand_r16_simul_NR_DL_AoD_Multi_RTT_r16 = ENUM(name=u'simul-NR-DL-AoD-Multi-RTT-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DL_AoD_MeasCapabilityPerBand_r16_simul_NR_DL_AoD_Multi_RTT_r16._cont = ASN1Dict([(u'supported', 0)])
+    _DL_AoD_MeasCapabilityPerBand_r16_simul_NR_DL_AoD_Multi_RTT_r16._ext = None
+    DL_AoD_MeasCapabilityPerBand_r16._cont = ASN1Dict([
+        (u'freqBandIndicatorNR-r16', _DL_AoD_MeasCapabilityPerBand_r16_freqBandIndicatorNR_r16),
+        (u'simul-NR-DL-AoD-DL-TDOA-r16', _DL_AoD_MeasCapabilityPerBand_r16_simul_NR_DL_AoD_DL_TDOA_r16),
+        (u'simul-NR-DL-AoD-Multi-RTT-r16', _DL_AoD_MeasCapabilityPerBand_r16_simul_NR_DL_AoD_Multi_RTT_r16),
+        ])
+    DL_AoD_MeasCapabilityPerBand_r16._ext = []
+    
+    #-----< NR-DL-AoD-RequestCapabilities-r16 >-----#
+    NR_DL_AoD_RequestCapabilities_r16 = SEQ(name=u'NR-DL-AoD-RequestCapabilities-r16', mode=MODE_TYPE)
+    NR_DL_AoD_RequestCapabilities_r16._cont = ASN1Dict([
+        ])
+    NR_DL_AoD_RequestCapabilities_r16._ext = []
+    
+    #-----< NR-DL-AoD-Error-r16 >-----#
+    NR_DL_AoD_Error_r16 = CHOICE(name=u'NR-DL-AoD-Error-r16', mode=MODE_TYPE)
+    _NR_DL_AoD_Error_r16_locationServerErrorCauses_r16 = SEQ(name=u'locationServerErrorCauses-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-AoD-LocationServerErrorCauses-r16')))
+    _NR_DL_AoD_Error_r16_targetDeviceErrorCauses_r16 = SEQ(name=u'targetDeviceErrorCauses-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-AoD-TargetDeviceErrorCauses-r16')))
+    NR_DL_AoD_Error_r16._cont = ASN1Dict([
+        (u'locationServerErrorCauses-r16', _NR_DL_AoD_Error_r16_locationServerErrorCauses_r16),
+        (u'targetDeviceErrorCauses-r16', _NR_DL_AoD_Error_r16_targetDeviceErrorCauses_r16),
+        ])
+    NR_DL_AoD_Error_r16._ext = []
+    
+    #-----< NR-DL-AoD-LocationServerErrorCauses-r16 >-----#
+    NR_DL_AoD_LocationServerErrorCauses_r16 = SEQ(name=u'NR-DL-AoD-LocationServerErrorCauses-r16', mode=MODE_TYPE)
+    _NR_DL_AoD_LocationServerErrorCauses_r16_cause_r16 = ENUM(name=u'cause-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_AoD_LocationServerErrorCauses_r16_cause_r16._cont = ASN1Dict([(u'undefined', 0), (u'assistanceDataNotSupportedByServer', 1), (u'assistanceDataSupportedButCurrentlyNotAvailableByServer', 2), (u'notProvidedAssistanceDataNotSupportedByServer', 3)])
+    _NR_DL_AoD_LocationServerErrorCauses_r16_cause_r16._ext = []
+    NR_DL_AoD_LocationServerErrorCauses_r16._cont = ASN1Dict([
+        (u'cause-r16', _NR_DL_AoD_LocationServerErrorCauses_r16_cause_r16),
+        ])
+    NR_DL_AoD_LocationServerErrorCauses_r16._ext = []
+    
+    #-----< NR-DL-AoD-TargetDeviceErrorCauses-r16 >-----#
+    NR_DL_AoD_TargetDeviceErrorCauses_r16 = SEQ(name=u'NR-DL-AoD-TargetDeviceErrorCauses-r16', mode=MODE_TYPE)
+    _NR_DL_AoD_TargetDeviceErrorCauses_r16_cause_r16 = ENUM(name=u'cause-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_DL_AoD_TargetDeviceErrorCauses_r16_cause_r16._cont = ASN1Dict([(u'undefined', 0), (u'assistance-data-missing', 1), (u'unableToMeasureAnyTRP', 2), (u'attemptedButUnableToMeasureSomeNeighbourTRPs', 3), (u'thereWereNotEnoughSignalsReceivedForUeBasedDL-AoD', 4), (u'locationCalculationAssistanceDataMissing', 5)])
+    _NR_DL_AoD_TargetDeviceErrorCauses_r16_cause_r16._ext = []
+    NR_DL_AoD_TargetDeviceErrorCauses_r16._cont = ASN1Dict([
+        (u'cause-r16', _NR_DL_AoD_TargetDeviceErrorCauses_r16_cause_r16),
+        ])
+    NR_DL_AoD_TargetDeviceErrorCauses_r16._ext = []
+    
+    #-----< NR-Multi-RTT-ProvideAssistanceData-r16 >-----#
+    NR_Multi_RTT_ProvideAssistanceData_r16 = SEQ(name=u'NR-Multi-RTT-ProvideAssistanceData-r16', mode=MODE_TYPE)
+    _NR_Multi_RTT_ProvideAssistanceData_r16_nr_DL_PRS_AssistanceData_r16 = SEQ(name=u'nr-DL-PRS-AssistanceData-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-AssistanceData-r16')), opt=True)
+    _NR_Multi_RTT_ProvideAssistanceData_r16_nr_SelectedDL_PRS_IndexList_r16 = SEQ_OF(name=u'nr-SelectedDL-PRS-IndexList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-SelectedDL-PRS-IndexList-r16')), opt=True)
+    _NR_Multi_RTT_ProvideAssistanceData_r16_nr_Multi_RTT_Error_r16 = CHOICE(name=u'nr-Multi-RTT-Error-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-Multi-RTT-Error-r16')), opt=True)
+    NR_Multi_RTT_ProvideAssistanceData_r16._cont = ASN1Dict([
+        (u'nr-DL-PRS-AssistanceData-r16', _NR_Multi_RTT_ProvideAssistanceData_r16_nr_DL_PRS_AssistanceData_r16),
+        (u'nr-SelectedDL-PRS-IndexList-r16', _NR_Multi_RTT_ProvideAssistanceData_r16_nr_SelectedDL_PRS_IndexList_r16),
+        (u'nr-Multi-RTT-Error-r16', _NR_Multi_RTT_ProvideAssistanceData_r16_nr_Multi_RTT_Error_r16),
+        ])
+    NR_Multi_RTT_ProvideAssistanceData_r16._ext = []
+    
+    #-----< NR-Multi-RTT-RequestAssistanceData-r16 >-----#
+    NR_Multi_RTT_RequestAssistanceData_r16 = SEQ(name=u'NR-Multi-RTT-RequestAssistanceData-r16', mode=MODE_TYPE)
+    _NR_Multi_RTT_RequestAssistanceData_r16_nr_PhysCellID_r16 = INT(name=u'nr-PhysCellID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-PhysCellID-r16')), opt=True)
+    _NR_Multi_RTT_RequestAssistanceData_r16_nr_AdType_r16 = BIT_STR(name=u'nr-AdType-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_Multi_RTT_RequestAssistanceData_r16_nr_AdType_r16._cont = ASN1Dict([(u'dl-prs', 0), (u'ul-srs', 1)])
+    _NR_Multi_RTT_RequestAssistanceData_r16_nr_AdType_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    NR_Multi_RTT_RequestAssistanceData_r16._cont = ASN1Dict([
+        (u'nr-PhysCellID-r16', _NR_Multi_RTT_RequestAssistanceData_r16_nr_PhysCellID_r16),
+        (u'nr-AdType-r16', _NR_Multi_RTT_RequestAssistanceData_r16_nr_AdType_r16),
+        ])
+    NR_Multi_RTT_RequestAssistanceData_r16._ext = []
+    
+    #-----< NR-Multi-RTT-ProvideLocationInformation-r16 >-----#
+    NR_Multi_RTT_ProvideLocationInformation_r16 = SEQ(name=u'NR-Multi-RTT-ProvideLocationInformation-r16', mode=MODE_TYPE)
+    _NR_Multi_RTT_ProvideLocationInformation_r16_nr_Multi_RTT_SignalMeasurementInformation_r16 = SEQ(name=u'nr-Multi-RTT-SignalMeasurementInformation-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-Multi-RTT-SignalMeasurementInformation-r16')), opt=True)
+    _NR_Multi_RTT_ProvideLocationInformation_r16_nr_Multi_RTT_Error_r16 = CHOICE(name=u'nr-Multi-RTT-Error-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-Multi-RTT-Error-r16')), opt=True)
+    NR_Multi_RTT_ProvideLocationInformation_r16._cont = ASN1Dict([
+        (u'nr-Multi-RTT-SignalMeasurementInformation-r16', _NR_Multi_RTT_ProvideLocationInformation_r16_nr_Multi_RTT_SignalMeasurementInformation_r16),
+        (u'nr-Multi-RTT-Error-r16', _NR_Multi_RTT_ProvideLocationInformation_r16_nr_Multi_RTT_Error_r16),
+        ])
+    NR_Multi_RTT_ProvideLocationInformation_r16._ext = []
+    
+    #-----< NR-Multi-RTT-SignalMeasurementInformation-r16 >-----#
+    NR_Multi_RTT_SignalMeasurementInformation_r16 = SEQ(name=u'NR-Multi-RTT-SignalMeasurementInformation-r16', mode=MODE_TYPE)
+    _NR_Multi_RTT_SignalMeasurementInformation_r16_nr_Multi_RTT_MeasList_r16 = SEQ_OF(name=u'nr-Multi-RTT-MeasList-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-Multi-RTT-MeasList-r16')))
+    _NR_Multi_RTT_SignalMeasurementInformation_r16_nr_NTA_Offset_r16 = ENUM(name=u'nr-NTA-Offset-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_Multi_RTT_SignalMeasurementInformation_r16_nr_NTA_Offset_r16._cont = ASN1Dict([(u'nTA1', 0), (u'nTA2', 1), (u'nTA3', 2), (u'nTA4', 3)])
+    _NR_Multi_RTT_SignalMeasurementInformation_r16_nr_NTA_Offset_r16._ext = []
+    NR_Multi_RTT_SignalMeasurementInformation_r16._cont = ASN1Dict([
+        (u'nr-Multi-RTT-MeasList-r16', _NR_Multi_RTT_SignalMeasurementInformation_r16_nr_Multi_RTT_MeasList_r16),
+        (u'nr-NTA-Offset-r16', _NR_Multi_RTT_SignalMeasurementInformation_r16_nr_NTA_Offset_r16),
+        ])
+    NR_Multi_RTT_SignalMeasurementInformation_r16._ext = []
+    
+    #-----< NR-Multi-RTT-MeasList-r16 >-----#
+    NR_Multi_RTT_MeasList_r16 = SEQ_OF(name=u'NR-Multi-RTT-MeasList-r16', mode=MODE_TYPE)
+    _NR_Multi_RTT_MeasList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-Multi-RTT-MeasElement-r16')))
+    NR_Multi_RTT_MeasList_r16._cont = _NR_Multi_RTT_MeasList_r16__item_
+    NR_Multi_RTT_MeasList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=256)], ev=None, er=[])
+    
+    #-----< NR-Multi-RTT-MeasElement-r16 >-----#
+    NR_Multi_RTT_MeasElement_r16 = SEQ(name=u'NR-Multi-RTT-MeasElement-r16', mode=MODE_TYPE)
+    _NR_Multi_RTT_MeasElement_r16_dl_PRS_ID_r16 = INT(name=u'dl-PRS-ID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_Multi_RTT_MeasElement_r16_dl_PRS_ID_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    _NR_Multi_RTT_MeasElement_r16_nr_PhysCellID_r16 = INT(name=u'nr-PhysCellID-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-PhysCellID-r16')), opt=True)
+    _NR_Multi_RTT_MeasElement_r16_nr_CellGlobalID_r16 = SEQ(name=u'nr-CellGlobalID-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NCGI-r15')), opt=True)
+    _NR_Multi_RTT_MeasElement_r16_nr_ARFCN_r16 = INT(name=u'nr-ARFCN-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'ARFCN-ValueNR-r15')), opt=True)
+    _NR_Multi_RTT_MeasElement_r16_nr_DL_PRS_ResourceID_r16 = INT(name=u'nr-DL-PRS-ResourceID-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ResourceID-r16')), opt=True)
+    _NR_Multi_RTT_MeasElement_r16_nr_DL_PRS_ResourceSetID_r16 = INT(name=u'nr-DL-PRS-ResourceSetID-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ResourceSetID-r16')), opt=True)
+    _NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16 = CHOICE(name=u'nr-UE-RxTxTimeDiff-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k0_r16 = INT(name=u'k0-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k0_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1970049)], ev=None, er=[])
+    __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k1_r16 = INT(name=u'k1-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k1_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=985025)], ev=None, er=[])
+    __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k2_r16 = INT(name=u'k2-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k2_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=492513)], ev=None, er=[])
+    __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k3_r16 = INT(name=u'k3-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k3_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=246257)], ev=None, er=[])
+    __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k4_r16 = INT(name=u'k4-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k4_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=123129)], ev=None, er=[])
+    __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k5_r16 = INT(name=u'k5-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k5_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=61565)], ev=None, er=[])
+    _NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16._cont = ASN1Dict([
+        (u'k0-r16', __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k0_r16),
+        (u'k1-r16', __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k1_r16),
+        (u'k2-r16', __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k2_r16),
+        (u'k3-r16', __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k3_r16),
+        (u'k4-r16', __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k4_r16),
+        (u'k5-r16', __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k5_r16),
+        ])
+    _NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16._ext = []
+    _NR_Multi_RTT_MeasElement_r16_nr_AdditionalPathList_r16 = SEQ_OF(name=u'nr-AdditionalPathList-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-AdditionalPathList-r16')), opt=True)
+    _NR_Multi_RTT_MeasElement_r16_nr_TimeStamp_r16 = SEQ(name=u'nr-TimeStamp-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-TimeStamp-r16')))
+    _NR_Multi_RTT_MeasElement_r16_nr_TimingQuality_r16 = SEQ(name=u'nr-TimingQuality-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-TimingQuality-r16')))
+    _NR_Multi_RTT_MeasElement_r16_nr_DL_PRS_RSRP_Result_r16 = INT(name=u'nr-DL-PRS-RSRP-Result-r16', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_Multi_RTT_MeasElement_r16_nr_DL_PRS_RSRP_Result_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=126)], ev=None, er=[])
+    _NR_Multi_RTT_MeasElement_r16_nr_Multi_RTT_AdditionalMeasurements_r16 = SEQ_OF(name=u'nr-Multi-RTT-AdditionalMeasurements-r16', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-Multi-RTT-AdditionalMeasurements-r16')), opt=True)
+    NR_Multi_RTT_MeasElement_r16._cont = ASN1Dict([
+        (u'dl-PRS-ID-r16', _NR_Multi_RTT_MeasElement_r16_dl_PRS_ID_r16),
+        (u'nr-PhysCellID-r16', _NR_Multi_RTT_MeasElement_r16_nr_PhysCellID_r16),
+        (u'nr-CellGlobalID-r16', _NR_Multi_RTT_MeasElement_r16_nr_CellGlobalID_r16),
+        (u'nr-ARFCN-r16', _NR_Multi_RTT_MeasElement_r16_nr_ARFCN_r16),
+        (u'nr-DL-PRS-ResourceID-r16', _NR_Multi_RTT_MeasElement_r16_nr_DL_PRS_ResourceID_r16),
+        (u'nr-DL-PRS-ResourceSetID-r16', _NR_Multi_RTT_MeasElement_r16_nr_DL_PRS_ResourceSetID_r16),
+        (u'nr-UE-RxTxTimeDiff-r16', _NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16),
+        (u'nr-AdditionalPathList-r16', _NR_Multi_RTT_MeasElement_r16_nr_AdditionalPathList_r16),
+        (u'nr-TimeStamp-r16', _NR_Multi_RTT_MeasElement_r16_nr_TimeStamp_r16),
+        (u'nr-TimingQuality-r16', _NR_Multi_RTT_MeasElement_r16_nr_TimingQuality_r16),
+        (u'nr-DL-PRS-RSRP-Result-r16', _NR_Multi_RTT_MeasElement_r16_nr_DL_PRS_RSRP_Result_r16),
+        (u'nr-Multi-RTT-AdditionalMeasurements-r16', _NR_Multi_RTT_MeasElement_r16_nr_Multi_RTT_AdditionalMeasurements_r16),
+        ])
+    NR_Multi_RTT_MeasElement_r16._ext = []
+    
+    #-----< NR-Multi-RTT-AdditionalMeasurements-r16 >-----#
+    NR_Multi_RTT_AdditionalMeasurements_r16 = SEQ_OF(name=u'NR-Multi-RTT-AdditionalMeasurements-r16', mode=MODE_TYPE)
+    _NR_Multi_RTT_AdditionalMeasurements_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-Multi-RTT-AdditionalMeasurementElement-r16')))
+    NR_Multi_RTT_AdditionalMeasurements_r16._cont = _NR_Multi_RTT_AdditionalMeasurements_r16__item_
+    NR_Multi_RTT_AdditionalMeasurements_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=3)], ev=None, er=[])
+    
+    #-----< NR-Multi-RTT-AdditionalMeasurementElement-r16 >-----#
+    NR_Multi_RTT_AdditionalMeasurementElement_r16 = SEQ(name=u'NR-Multi-RTT-AdditionalMeasurementElement-r16', mode=MODE_TYPE)
+    _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_DL_PRS_ResourceID_r16 = INT(name=u'nr-DL-PRS-ResourceID-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ResourceID-r16')), opt=True)
+    _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_DL_PRS_ResourceSetID_r16 = INT(name=u'nr-DL-PRS-ResourceSetID-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ResourceSetID-r16')), opt=True)
+    _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_DL_PRS_RSRP_ResultDiff_r16 = INT(name=u'nr-DL-PRS-RSRP-ResultDiff-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_DL_PRS_RSRP_ResultDiff_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=61)], ev=None, er=[])
+    _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16 = CHOICE(name=u'nr-UE-RxTxTimeDiffAdditional-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k0_r16 = INT(name=u'k0-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k0_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=8191)], ev=None, er=[])
+    __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k1_r16 = INT(name=u'k1-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k1_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4095)], ev=None, er=[])
+    __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k2_r16 = INT(name=u'k2-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k2_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2047)], ev=None, er=[])
+    __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k3_r16 = INT(name=u'k3-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k3_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1023)], ev=None, er=[])
+    __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k4_r16 = INT(name=u'k4-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k4_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
+    __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k5_r16 = INT(name=u'k5-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k5_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16._cont = ASN1Dict([
+        (u'k0-r16', __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k0_r16),
+        (u'k1-r16', __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k1_r16),
+        (u'k2-r16', __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k2_r16),
+        (u'k3-r16', __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k3_r16),
+        (u'k4-r16', __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k4_r16),
+        (u'k5-r16', __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k5_r16),
+        ])
+    _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16._ext = []
+    _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_TimingQuality_r16 = SEQ(name=u'nr-TimingQuality-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-TimingQuality-r16')))
+    _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_AdditionalPathList_r16 = SEQ_OF(name=u'nr-AdditionalPathList-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-AdditionalPathList-r16')), opt=True)
+    _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_TimeStamp_r16 = SEQ(name=u'nr-TimeStamp-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-TimeStamp-r16')))
+    NR_Multi_RTT_AdditionalMeasurementElement_r16._cont = ASN1Dict([
+        (u'nr-DL-PRS-ResourceID-r16', _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_DL_PRS_ResourceID_r16),
+        (u'nr-DL-PRS-ResourceSetID-r16', _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_DL_PRS_ResourceSetID_r16),
+        (u'nr-DL-PRS-RSRP-ResultDiff-r16', _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_DL_PRS_RSRP_ResultDiff_r16),
+        (u'nr-UE-RxTxTimeDiffAdditional-r16', _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16),
+        (u'nr-TimingQuality-r16', _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_TimingQuality_r16),
+        (u'nr-AdditionalPathList-r16', _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_AdditionalPathList_r16),
+        (u'nr-TimeStamp-r16', _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_TimeStamp_r16),
+        ])
+    NR_Multi_RTT_AdditionalMeasurementElement_r16._ext = []
+    
+    #-----< NR-Multi-RTT-RequestLocationInformation-r16 >-----#
+    NR_Multi_RTT_RequestLocationInformation_r16 = SEQ(name=u'NR-Multi-RTT-RequestLocationInformation-r16', mode=MODE_TYPE)
+    _NR_Multi_RTT_RequestLocationInformation_r16_nr_UE_RxTxTimeDiffMeasurementInfoRequest_r16 = ENUM(name=u'nr-UE-RxTxTimeDiffMeasurementInfoRequest-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_Multi_RTT_RequestLocationInformation_r16_nr_UE_RxTxTimeDiffMeasurementInfoRequest_r16._cont = ASN1Dict([(u'true', 0)])
+    _NR_Multi_RTT_RequestLocationInformation_r16_nr_UE_RxTxTimeDiffMeasurementInfoRequest_r16._ext = None
+    _NR_Multi_RTT_RequestLocationInformation_r16_nr_RequestedMeasurements_r16 = BIT_STR(name=u'nr-RequestedMeasurements-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_Multi_RTT_RequestLocationInformation_r16_nr_RequestedMeasurements_r16._cont = ASN1Dict([(u'prsrsrpReq', 0)])
+    _NR_Multi_RTT_RequestLocationInformation_r16_nr_RequestedMeasurements_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    _NR_Multi_RTT_RequestLocationInformation_r16_nr_AssistanceAvailability_r16 = BOOL(name=u'nr-AssistanceAvailability-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_Multi_RTT_RequestLocationInformation_r16_nr_Multi_RTT_ReportConfig_r16 = SEQ(name=u'nr-Multi-RTT-ReportConfig-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-Multi-RTT-ReportConfig-r16')))
+    _NR_Multi_RTT_RequestLocationInformation_r16_additionalPaths_r16 = ENUM(name=u'additionalPaths-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_Multi_RTT_RequestLocationInformation_r16_additionalPaths_r16._cont = ASN1Dict([(u'requested', 0)])
+    _NR_Multi_RTT_RequestLocationInformation_r16_additionalPaths_r16._ext = None
+    NR_Multi_RTT_RequestLocationInformation_r16._cont = ASN1Dict([
+        (u'nr-UE-RxTxTimeDiffMeasurementInfoRequest-r16', _NR_Multi_RTT_RequestLocationInformation_r16_nr_UE_RxTxTimeDiffMeasurementInfoRequest_r16),
+        (u'nr-RequestedMeasurements-r16', _NR_Multi_RTT_RequestLocationInformation_r16_nr_RequestedMeasurements_r16),
+        (u'nr-AssistanceAvailability-r16', _NR_Multi_RTT_RequestLocationInformation_r16_nr_AssistanceAvailability_r16),
+        (u'nr-Multi-RTT-ReportConfig-r16', _NR_Multi_RTT_RequestLocationInformation_r16_nr_Multi_RTT_ReportConfig_r16),
+        (u'additionalPaths-r16', _NR_Multi_RTT_RequestLocationInformation_r16_additionalPaths_r16),
+        ])
+    NR_Multi_RTT_RequestLocationInformation_r16._ext = []
+    
+    #-----< NR-Multi-RTT-ReportConfig-r16 >-----#
+    NR_Multi_RTT_ReportConfig_r16 = SEQ(name=u'NR-Multi-RTT-ReportConfig-r16', mode=MODE_TYPE)
+    _NR_Multi_RTT_ReportConfig_r16_maxDL_PRS_RxTxTimeDiffMeasPerTRP_r16 = INT(name=u'maxDL-PRS-RxTxTimeDiffMeasPerTRP-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_Multi_RTT_ReportConfig_r16_maxDL_PRS_RxTxTimeDiffMeasPerTRP_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _NR_Multi_RTT_ReportConfig_r16_timingReportingGranularityFactor_r16 = INT(name=u'timingReportingGranularityFactor-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_Multi_RTT_ReportConfig_r16_timingReportingGranularityFactor_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=5)], ev=None, er=[])
+    NR_Multi_RTT_ReportConfig_r16._cont = ASN1Dict([
+        (u'maxDL-PRS-RxTxTimeDiffMeasPerTRP-r16', _NR_Multi_RTT_ReportConfig_r16_maxDL_PRS_RxTxTimeDiffMeasPerTRP_r16),
+        (u'timingReportingGranularityFactor-r16', _NR_Multi_RTT_ReportConfig_r16_timingReportingGranularityFactor_r16),
+        ])
+    NR_Multi_RTT_ReportConfig_r16._ext = None
+    
+    #-----< NR-Multi-RTT-ProvideCapabilities-r16 >-----#
+    NR_Multi_RTT_ProvideCapabilities_r16 = SEQ(name=u'NR-Multi-RTT-ProvideCapabilities-r16', mode=MODE_TYPE)
+    _NR_Multi_RTT_ProvideCapabilities_r16_nr_Multi_RTT_PRS_Capability_r16 = SEQ(name=u'nr-Multi-RTT-PRS-Capability-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ResourcesCapability-r16')))
+    _NR_Multi_RTT_ProvideCapabilities_r16_nr_Multi_RTT_MeasurementCapability_r16 = SEQ(name=u'nr-Multi-RTT-MeasurementCapability-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-Multi-RTT-MeasurementCapability-r16')))
+    _NR_Multi_RTT_ProvideCapabilities_r16_nr_DL_PRS_QCL_ProcessingCapability_r16 = SEQ(name=u'nr-DL-PRS-QCL-ProcessingCapability-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-QCL-ProcessingCapability-r16')))
+    _NR_Multi_RTT_ProvideCapabilities_r16_nr_DL_PRS_ProcessingCapability_r16 = SEQ(name=u'nr-DL-PRS-ProcessingCapability-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-DL-PRS-ProcessingCapability-r16')))
+    _NR_Multi_RTT_ProvideCapabilities_r16_nr_UL_SRS_Capability_r16 = SEQ(name=u'nr-UL-SRS-Capability-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-UL-SRS-Capability-r16')))
+    _NR_Multi_RTT_ProvideCapabilities_r16_additionalPathsReport_r16 = ENUM(name=u'additionalPathsReport-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_Multi_RTT_ProvideCapabilities_r16_additionalPathsReport_r16._cont = ASN1Dict([(u'supported', 0)])
+    _NR_Multi_RTT_ProvideCapabilities_r16_additionalPathsReport_r16._ext = None
+    _NR_Multi_RTT_ProvideCapabilities_r16_periodicalReporting_r16 = ENUM(name=u'periodicalReporting-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_Multi_RTT_ProvideCapabilities_r16_periodicalReporting_r16._cont = ASN1Dict([(u'supported', 0)])
+    _NR_Multi_RTT_ProvideCapabilities_r16_periodicalReporting_r16._ext = None
+    NR_Multi_RTT_ProvideCapabilities_r16._cont = ASN1Dict([
+        (u'nr-Multi-RTT-PRS-Capability-r16', _NR_Multi_RTT_ProvideCapabilities_r16_nr_Multi_RTT_PRS_Capability_r16),
+        (u'nr-Multi-RTT-MeasurementCapability-r16', _NR_Multi_RTT_ProvideCapabilities_r16_nr_Multi_RTT_MeasurementCapability_r16),
+        (u'nr-DL-PRS-QCL-ProcessingCapability-r16', _NR_Multi_RTT_ProvideCapabilities_r16_nr_DL_PRS_QCL_ProcessingCapability_r16),
+        (u'nr-DL-PRS-ProcessingCapability-r16', _NR_Multi_RTT_ProvideCapabilities_r16_nr_DL_PRS_ProcessingCapability_r16),
+        (u'nr-UL-SRS-Capability-r16', _NR_Multi_RTT_ProvideCapabilities_r16_nr_UL_SRS_Capability_r16),
+        (u'additionalPathsReport-r16', _NR_Multi_RTT_ProvideCapabilities_r16_additionalPathsReport_r16),
+        (u'periodicalReporting-r16', _NR_Multi_RTT_ProvideCapabilities_r16_periodicalReporting_r16),
+        ])
+    NR_Multi_RTT_ProvideCapabilities_r16._ext = []
+    
+    #-----< NR-Multi-RTT-MeasurementCapability-r16 >-----#
+    NR_Multi_RTT_MeasurementCapability_r16 = SEQ(name=u'NR-Multi-RTT-MeasurementCapability-r16', mode=MODE_TYPE)
+    _NR_Multi_RTT_MeasurementCapability_r16_maxNrOfRx_TX_MeasFR1_r16 = INT(name=u'maxNrOfRx-TX-MeasFR1-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_Multi_RTT_MeasurementCapability_r16_maxNrOfRx_TX_MeasFR1_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _NR_Multi_RTT_MeasurementCapability_r16_maxNrOfRx_TX_MeasFR2_r16 = INT(name=u'maxNrOfRx-TX-MeasFR2-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_Multi_RTT_MeasurementCapability_r16_maxNrOfRx_TX_MeasFR2_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    _NR_Multi_RTT_MeasurementCapability_r16_supportOfRSRP_MeasFR1_r16 = ENUM(name=u'supportOfRSRP-MeasFR1-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_Multi_RTT_MeasurementCapability_r16_supportOfRSRP_MeasFR1_r16._cont = ASN1Dict([(u'supported', 0)])
+    _NR_Multi_RTT_MeasurementCapability_r16_supportOfRSRP_MeasFR1_r16._ext = None
+    _NR_Multi_RTT_MeasurementCapability_r16_supportOfRSRP_MeasFR2_r16 = ENUM(name=u'supportOfRSRP-MeasFR2-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_Multi_RTT_MeasurementCapability_r16_supportOfRSRP_MeasFR2_r16._cont = ASN1Dict([(u'supported', 0)])
+    _NR_Multi_RTT_MeasurementCapability_r16_supportOfRSRP_MeasFR2_r16._ext = None
+    _NR_Multi_RTT_MeasurementCapability_r16_srs_AssocPRS_MultiLayersFR1_r16 = ENUM(name=u'srs-AssocPRS-MultiLayersFR1-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_Multi_RTT_MeasurementCapability_r16_srs_AssocPRS_MultiLayersFR1_r16._cont = ASN1Dict([(u'supported', 0)])
+    _NR_Multi_RTT_MeasurementCapability_r16_srs_AssocPRS_MultiLayersFR1_r16._ext = None
+    _NR_Multi_RTT_MeasurementCapability_r16_srs_AssocPRS_MultiLayersFR2_r16 = ENUM(name=u'srs-AssocPRS-MultiLayersFR2-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NR_Multi_RTT_MeasurementCapability_r16_srs_AssocPRS_MultiLayersFR2_r16._cont = ASN1Dict([(u'supported', 0)])
+    _NR_Multi_RTT_MeasurementCapability_r16_srs_AssocPRS_MultiLayersFR2_r16._ext = None
+    NR_Multi_RTT_MeasurementCapability_r16._cont = ASN1Dict([
+        (u'maxNrOfRx-TX-MeasFR1-r16', _NR_Multi_RTT_MeasurementCapability_r16_maxNrOfRx_TX_MeasFR1_r16),
+        (u'maxNrOfRx-TX-MeasFR2-r16', _NR_Multi_RTT_MeasurementCapability_r16_maxNrOfRx_TX_MeasFR2_r16),
+        (u'supportOfRSRP-MeasFR1-r16', _NR_Multi_RTT_MeasurementCapability_r16_supportOfRSRP_MeasFR1_r16),
+        (u'supportOfRSRP-MeasFR2-r16', _NR_Multi_RTT_MeasurementCapability_r16_supportOfRSRP_MeasFR2_r16),
+        (u'srs-AssocPRS-MultiLayersFR1-r16', _NR_Multi_RTT_MeasurementCapability_r16_srs_AssocPRS_MultiLayersFR1_r16),
+        (u'srs-AssocPRS-MultiLayersFR2-r16', _NR_Multi_RTT_MeasurementCapability_r16_srs_AssocPRS_MultiLayersFR2_r16),
+        ])
+    NR_Multi_RTT_MeasurementCapability_r16._ext = []
+    
+    #-----< NR-Multi-RTT-RequestCapabilities-r16 >-----#
+    NR_Multi_RTT_RequestCapabilities_r16 = SEQ(name=u'NR-Multi-RTT-RequestCapabilities-r16', mode=MODE_TYPE)
+    NR_Multi_RTT_RequestCapabilities_r16._cont = ASN1Dict([
+        ])
+    NR_Multi_RTT_RequestCapabilities_r16._ext = []
+    
+    #-----< NR-Multi-RTT-Error-r16 >-----#
+    NR_Multi_RTT_Error_r16 = CHOICE(name=u'NR-Multi-RTT-Error-r16', mode=MODE_TYPE)
+    _NR_Multi_RTT_Error_r16_locationServerErrorCauses_r16 = SEQ(name=u'locationServerErrorCauses-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-Multi-RTT-LocationServerErrorCauses-r16')))
+    _NR_Multi_RTT_Error_r16_targetDeviceErrorCauses_r16 = SEQ(name=u'targetDeviceErrorCauses-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPP-PDU-Definitions', 'NR-Multi-RTT-TargetDeviceErrorCauses-r16')))
+    NR_Multi_RTT_Error_r16._cont = ASN1Dict([
+        (u'locationServerErrorCauses-r16', _NR_Multi_RTT_Error_r16_locationServerErrorCauses_r16),
+        (u'targetDeviceErrorCauses-r16', _NR_Multi_RTT_Error_r16_targetDeviceErrorCauses_r16),
+        ])
+    NR_Multi_RTT_Error_r16._ext = []
+    
+    #-----< NR-Multi-RTT-LocationServerErrorCauses-r16 >-----#
+    NR_Multi_RTT_LocationServerErrorCauses_r16 = SEQ(name=u'NR-Multi-RTT-LocationServerErrorCauses-r16', mode=MODE_TYPE)
+    _NR_Multi_RTT_LocationServerErrorCauses_r16_cause_r16 = ENUM(name=u'cause-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_Multi_RTT_LocationServerErrorCauses_r16_cause_r16._cont = ASN1Dict([(u'undefined', 0), (u'assistanceDataNotSupportedByServer', 1), (u'assistanceDataSupportedButCurrentlyNotAvailableByServer', 2)])
+    _NR_Multi_RTT_LocationServerErrorCauses_r16_cause_r16._ext = []
+    NR_Multi_RTT_LocationServerErrorCauses_r16._cont = ASN1Dict([
+        (u'cause-r16', _NR_Multi_RTT_LocationServerErrorCauses_r16_cause_r16),
+        ])
+    NR_Multi_RTT_LocationServerErrorCauses_r16._ext = []
+    
+    #-----< NR-Multi-RTT-TargetDeviceErrorCauses-r16 >-----#
+    NR_Multi_RTT_TargetDeviceErrorCauses_r16 = SEQ(name=u'NR-Multi-RTT-TargetDeviceErrorCauses-r16', mode=MODE_TYPE)
+    _NR_Multi_RTT_TargetDeviceErrorCauses_r16_cause_r16 = ENUM(name=u'cause-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NR_Multi_RTT_TargetDeviceErrorCauses_r16_cause_r16._cont = ASN1Dict([(u'undefined', 0), (u'dl-assistance-data-missing', 1), (u'unableToMeasureAnyTRP', 2), (u'attemptedButUnableToMeasureSomeNeighbourTRPs', 3), (u'ul-srs-configuration-missing', 4), (u'unableToTransmit-ul-srs', 5)])
+    _NR_Multi_RTT_TargetDeviceErrorCauses_r16_cause_r16._ext = []
+    NR_Multi_RTT_TargetDeviceErrorCauses_r16._cont = ASN1Dict([
+        (u'cause-r16', _NR_Multi_RTT_TargetDeviceErrorCauses_r16_cause_r16),
+        ])
+    NR_Multi_RTT_TargetDeviceErrorCauses_r16._ext = []
+    
+    #-----< maxEARFCN >-----#
+    maxEARFCN = INT(name=u'maxEARFCN', mode=MODE_VALUE)
+    maxEARFCN._val = 65535
+    
+    #-----< maxEARFCN-Plus1 >-----#
+    maxEARFCN_Plus1 = INT(name=u'maxEARFCN-Plus1', mode=MODE_VALUE)
+    maxEARFCN_Plus1._val = 65536
+    
+    #-----< maxEARFCN2 >-----#
+    maxEARFCN2 = INT(name=u'maxEARFCN2', mode=MODE_VALUE)
+    maxEARFCN2._val = 262143
+    
+    #-----< maxMBS-r14 >-----#
+    maxMBS_r14 = INT(name=u'maxMBS-r14', mode=MODE_VALUE)
+    maxMBS_r14._val = 64
+    
+    #-----< maxWLAN-AP-r13 >-----#
+    maxWLAN_AP_r13 = INT(name=u'maxWLAN-AP-r13', mode=MODE_VALUE)
+    maxWLAN_AP_r13._val = 64
+    
+    #-----< maxKnownAPs-r14 >-----#
+    maxKnownAPs_r14 = INT(name=u'maxKnownAPs-r14', mode=MODE_VALUE)
+    maxKnownAPs_r14._val = 2048
+    
+    #-----< maxVisibleAPs-r14 >-----#
+    maxVisibleAPs_r14 = INT(name=u'maxVisibleAPs-r14', mode=MODE_VALUE)
+    maxVisibleAPs_r14._val = 32
+    
+    #-----< maxWLAN-AP-r14 >-----#
+    maxWLAN_AP_r14 = INT(name=u'maxWLAN-AP-r14', mode=MODE_VALUE)
+    maxWLAN_AP_r14._val = 128
+    
+    #-----< maxWLAN-DataSets-r14 >-----#
+    maxWLAN_DataSets_r14 = INT(name=u'maxWLAN-DataSets-r14', mode=MODE_VALUE)
+    maxWLAN_DataSets_r14._val = 8
+    
+    #-----< maxBT-Beacon-r13 >-----#
+    maxBT_Beacon_r13 = INT(name=u'maxBT-Beacon-r13', mode=MODE_VALUE)
+    maxBT_Beacon_r13._val = 32
+    
+    #-----< nrMaxBands-r16 >-----#
+    nrMaxBands_r16 = INT(name=u'nrMaxBands-r16', mode=MODE_VALUE)
+    nrMaxBands_r16._val = 1024
+    
+    #-----< nrMaxFreqLayers-r16 >-----#
+    nrMaxFreqLayers_r16 = INT(name=u'nrMaxFreqLayers-r16', mode=MODE_VALUE)
+    nrMaxFreqLayers_r16._val = 4
+    
+    #-----< nrMaxFreqLayers-1-r16 >-----#
+    nrMaxFreqLayers_1_r16 = INT(name=u'nrMaxFreqLayers-1-r16', mode=MODE_VALUE)
+    nrMaxFreqLayers_1_r16._val = 3
+    
+    #-----< nrMaxNumDL-PRS-ResourcesPerSet-1-r16 >-----#
+    nrMaxNumDL_PRS_ResourcesPerSet_1_r16 = INT(name=u'nrMaxNumDL-PRS-ResourcesPerSet-1-r16', mode=MODE_VALUE)
+    nrMaxNumDL_PRS_ResourcesPerSet_1_r16._val = 63
+    
+    #-----< nrMaxNumDL-PRS-ResourceSetsPerTRP-1-r16 >-----#
+    nrMaxNumDL_PRS_ResourceSetsPerTRP_1_r16 = INT(name=u'nrMaxNumDL-PRS-ResourceSetsPerTRP-1-r16', mode=MODE_VALUE)
+    nrMaxNumDL_PRS_ResourceSetsPerTRP_1_r16._val = 7
+    
+    #-----< nrMaxResourceIDs-r16 >-----#
+    nrMaxResourceIDs_r16 = INT(name=u'nrMaxResourceIDs-r16', mode=MODE_VALUE)
+    nrMaxResourceIDs_r16._val = 64
+    
+    #-----< nrMaxResourceOffsetValue-1-r16 >-----#
+    nrMaxResourceOffsetValue_1_r16 = INT(name=u'nrMaxResourceOffsetValue-1-r16', mode=MODE_VALUE)
+    nrMaxResourceOffsetValue_1_r16._val = 511
+    
+    #-----< nrMaxResourcesPerSet-r16 >-----#
+    nrMaxResourcesPerSet_r16 = INT(name=u'nrMaxResourcesPerSet-r16', mode=MODE_VALUE)
+    nrMaxResourcesPerSet_r16._val = 64
+    
+    #-----< nrMaxSetsPerTrpPerFreqLayer-r16 >-----#
+    nrMaxSetsPerTrpPerFreqLayer_r16 = INT(name=u'nrMaxSetsPerTrpPerFreqLayer-r16', mode=MODE_VALUE)
+    nrMaxSetsPerTrpPerFreqLayer_r16._val = 2
+    
+    #-----< nrMaxSetsPerTrpPerFreqLayer-1-r16 >-----#
+    nrMaxSetsPerTrpPerFreqLayer_1_r16 = INT(name=u'nrMaxSetsPerTrpPerFreqLayer-1-r16', mode=MODE_VALUE)
+    nrMaxSetsPerTrpPerFreqLayer_1_r16._val = 1
+    
+    #-----< nrMaxTRPs-r16 >-----#
+    nrMaxTRPs_r16 = INT(name=u'nrMaxTRPs-r16', mode=MODE_VALUE)
+    nrMaxTRPs_r16._val = 256
+    
+    #-----< nrMaxTRPsPerFreq-r16 >-----#
+    nrMaxTRPsPerFreq_r16 = INT(name=u'nrMaxTRPsPerFreq-r16', mode=MODE_VALUE)
+    nrMaxTRPsPerFreq_r16._val = 64
+    
+    #-----< nrMaxTRPsPerFreq-1-r16 >-----#
+    nrMaxTRPsPerFreq_1_r16 = INT(name=u'nrMaxTRPsPerFreq-1-r16', mode=MODE_VALUE)
+    nrMaxTRPsPerFreq_1_r16._val = 63
+    
+    #-----< maxSimultaneousBands-r16 >-----#
+    maxSimultaneousBands_r16 = INT(name=u'maxSimultaneousBands-r16', mode=MODE_VALUE)
+    maxSimultaneousBands_r16._val = 4
+    
+    #-----< maxBandComb-r16 >-----#
+    maxBandComb_r16 = INT(name=u'maxBandComb-r16', mode=MODE_VALUE)
+    maxBandComb_r16._val = 1024
+    
+    #-----< nrMaxConfiguredBands-r16 >-----#
+    nrMaxConfiguredBands_r16 = INT(name=u'nrMaxConfiguredBands-r16', mode=MODE_VALUE)
+    nrMaxConfiguredBands_r16._val = 16
+    
     _all_ = [
         _LPP_Message_transactionID,
         _LPP_Message_endTransaction,
@@ -7984,6 +11847,11 @@ class LPP_PDU_Definitions:
         _RequestCapabilities_r9_IEs_tbs_RequestCapabilities_r13,
         _RequestCapabilities_r9_IEs_wlan_RequestCapabilities_r13,
         _RequestCapabilities_r9_IEs_bt_RequestCapabilities_r13,
+        _RequestCapabilities_r9_IEs_nr_ECID_RequestCapabilities_r16,
+        _RequestCapabilities_r9_IEs_nr_Multi_RTT_RequestCapabilities_r16,
+        _RequestCapabilities_r9_IEs_nr_DL_AoD_RequestCapabilities_r16,
+        _RequestCapabilities_r9_IEs_nr_DL_TDOA_RequestCapabilities_r16,
+        _RequestCapabilities_r9_IEs_nr_UL_RequestCapabilities_r16,
         RequestCapabilities_r9_IEs,
         ___ProvideCapabilities_criticalExtensions_c1_provideCapabilities_r9,
         ___ProvideCapabilities_criticalExtensions_c1_spare3,
@@ -8002,6 +11870,11 @@ class LPP_PDU_Definitions:
         _ProvideCapabilities_r9_IEs_tbs_ProvideCapabilities_r13,
         _ProvideCapabilities_r9_IEs_wlan_ProvideCapabilities_r13,
         _ProvideCapabilities_r9_IEs_bt_ProvideCapabilities_r13,
+        _ProvideCapabilities_r9_IEs_nr_ECID_ProvideCapabilities_r16,
+        _ProvideCapabilities_r9_IEs_nr_Multi_RTT_ProvideCapabilities_r16,
+        _ProvideCapabilities_r9_IEs_nr_DL_AoD_ProvideCapabilities_r16,
+        _ProvideCapabilities_r9_IEs_nr_DL_TDOA_ProvideCapabilities_r16,
+        _ProvideCapabilities_r9_IEs_nr_UL_ProvideCapabilities_r16,
         ProvideCapabilities_r9_IEs,
         ___RequestAssistanceData_criticalExtensions_c1_requestAssistanceData_r9,
         ___RequestAssistanceData_criticalExtensions_c1_spare3,
@@ -8018,6 +11891,9 @@ class LPP_PDU_Definitions:
         _RequestAssistanceData_r9_IEs_sensor_RequestAssistanceData_r14,
         _RequestAssistanceData_r9_IEs_tbs_RequestAssistanceData_r14,
         _RequestAssistanceData_r9_IEs_wlan_RequestAssistanceData_r14,
+        _RequestAssistanceData_r9_IEs_nr_Multi_RTT_RequestAssistanceData_r16,
+        _RequestAssistanceData_r9_IEs_nr_DL_AoD_RequestAssistanceData_r16,
+        _RequestAssistanceData_r9_IEs_nr_DL_TDOA_RequestAssistanceData_r16,
         RequestAssistanceData_r9_IEs,
         ___ProvideAssistanceData_criticalExtensions_c1_provideAssistanceData_r9,
         ___ProvideAssistanceData_criticalExtensions_c1_spare3,
@@ -8034,6 +11910,9 @@ class LPP_PDU_Definitions:
         _ProvideAssistanceData_r9_IEs_sensor_ProvideAssistanceData_r14,
         _ProvideAssistanceData_r9_IEs_tbs_ProvideAssistanceData_r14,
         _ProvideAssistanceData_r9_IEs_wlan_ProvideAssistanceData_r14,
+        _ProvideAssistanceData_r9_IEs_nr_Multi_RTT_ProvideAssistanceData_r16,
+        _ProvideAssistanceData_r9_IEs_nr_DL_AoD_ProvideAssistanceData_r16,
+        _ProvideAssistanceData_r9_IEs_nr_DL_TDOA_ProvideAssistanceData_r16,
         ProvideAssistanceData_r9_IEs,
         ___RequestLocationInformation_criticalExtensions_c1_requestLocationInformation_r9,
         ___RequestLocationInformation_criticalExtensions_c1_spare3,
@@ -8052,6 +11931,10 @@ class LPP_PDU_Definitions:
         _RequestLocationInformation_r9_IEs_tbs_RequestLocationInformation_r13,
         _RequestLocationInformation_r9_IEs_wlan_RequestLocationInformation_r13,
         _RequestLocationInformation_r9_IEs_bt_RequestLocationInformation_r13,
+        _RequestLocationInformation_r9_IEs_nr_ECID_RequestLocationInformation_r16,
+        _RequestLocationInformation_r9_IEs_nr_Multi_RTT_RequestLocationInformation_r16,
+        _RequestLocationInformation_r9_IEs_nr_DL_AoD_RequestLocationInformation_r16,
+        _RequestLocationInformation_r9_IEs_nr_DL_TDOA_RequestLocationInformation_r16,
         RequestLocationInformation_r9_IEs,
         ___ProvideLocationInformation_criticalExtensions_c1_provideLocationInformation_r9,
         ___ProvideLocationInformation_criticalExtensions_c1_spare3,
@@ -8070,6 +11953,10 @@ class LPP_PDU_Definitions:
         _ProvideLocationInformation_r9_IEs_tbs_ProvideLocationInformation_r13,
         _ProvideLocationInformation_r9_IEs_wlan_ProvideLocationInformation_r13,
         _ProvideLocationInformation_r9_IEs_bt_ProvideLocationInformation_r13,
+        _ProvideLocationInformation_r9_IEs_nr_ECID_ProvideLocationInformation_r16,
+        _ProvideLocationInformation_r9_IEs_nr_Multi_RTT_ProvideLocationInformation_r16,
+        _ProvideLocationInformation_r9_IEs_nr_DL_AoD_ProvideLocationInformation_r16,
+        _ProvideLocationInformation_r9_IEs_nr_DL_TDOA_ProvideLocationInformation_r16,
         ProvideLocationInformation_r9_IEs,
         ___Abort_criticalExtensions_c1_abort_r9,
         ___Abort_criticalExtensions_c1_spare3,
@@ -8093,9 +11980,6 @@ class LPP_PDU_Definitions:
         ARFCN_ValueEUTRA,
         ARFCN_ValueEUTRA_v9a0,
         ARFCN_ValueEUTRA_r14,
-        maxEARFCN,
-        maxEARFCN_Plus1,
-        maxEARFCN2,
         ARFCN_ValueNR_r15,
         ARFCN_ValueUTRA,
         _CarrierFreq_NB_r14_carrierFreq_r14,
@@ -8180,6 +12064,7 @@ class LPP_PDU_Definitions:
         EPDU_ID,
         EPDU_Name,
         EPDU_Body,
+        FreqBandIndicatorNR_r16,
         _HighAccuracyEllipsoidPointWithUncertaintyEllipse_r15_degreesLatitude_r15,
         _HighAccuracyEllipsoidPointWithUncertaintyEllipse_r15_degreesLongitude_r15,
         _HighAccuracyEllipsoidPointWithUncertaintyEllipse_r15_uncertaintySemiMajor_r15,
@@ -8232,6 +12117,7 @@ class LPP_PDU_Definitions:
         _NCGI_r15_mnc_r15,
         _NCGI_r15_nr_cellidentity_r15,
         NCGI_r15,
+        NR_PhysCellID_r16,
         _PeriodicAssistanceDataControlParameters_r15_periodicSessionID_r15,
         _PeriodicAssistanceDataControlParameters_r15_updateCapabilities_r15,
         PeriodicAssistanceDataControlParameters_r15,
@@ -8350,6 +12236,392 @@ class LPP_PDU_Definitions:
         CommonIEsAbort,
         _CommonIEsError_errorCause,
         CommonIEsError,
+        _DL_PRS_ID_Info_r16_dl_PRS_ID_r16,
+        __DL_PRS_ID_Info_r16_nr_DL_PRS_ResourceID_List_r16__item_,
+        _DL_PRS_ID_Info_r16_nr_DL_PRS_ResourceID_List_r16,
+        _DL_PRS_ID_Info_r16_nr_DL_PRS_ResourceSetID_r16,
+        DL_PRS_ID_Info_r16,
+        _NR_AdditionalPathList_r16__item_,
+        NR_AdditionalPathList_r16,
+        __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k0_r16,
+        __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k1_r16,
+        __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k2_r16,
+        __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k3_r16,
+        __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k4_r16,
+        __NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16_k5_r16,
+        _NR_AdditionalPath_r16_nr_RelativeTimeDifference_r16,
+        _NR_AdditionalPath_r16_nr_PathQuality_r16,
+        NR_AdditionalPath_r16,
+        _NR_DL_PRS_AssistanceData_r16_nr_DL_PRS_ReferenceInfo_r16,
+        __NR_DL_PRS_AssistanceData_r16_nr_DL_PRS_AssistanceDataList_r16__item_,
+        _NR_DL_PRS_AssistanceData_r16_nr_DL_PRS_AssistanceDataList_r16,
+        __NR_DL_PRS_AssistanceData_r16_nr_SSB_Config_r16__item_,
+        _NR_DL_PRS_AssistanceData_r16_nr_SSB_Config_r16,
+        NR_DL_PRS_AssistanceData_r16,
+        _NR_DL_PRS_AssistanceDataPerFreq_r16_nr_DL_PRS_PositioningFrequencyLayer_r16,
+        __NR_DL_PRS_AssistanceDataPerFreq_r16_nr_DL_PRS_AssistanceDataPerFreq_r16__item_,
+        _NR_DL_PRS_AssistanceDataPerFreq_r16_nr_DL_PRS_AssistanceDataPerFreq_r16,
+        NR_DL_PRS_AssistanceDataPerFreq_r16,
+        _NR_DL_PRS_AssistanceDataPerTRP_r16_dl_PRS_ID_r16,
+        _NR_DL_PRS_AssistanceDataPerTRP_r16_nr_PhysCellID_r16,
+        _NR_DL_PRS_AssistanceDataPerTRP_r16_nr_CellGlobalID_r16,
+        _NR_DL_PRS_AssistanceDataPerTRP_r16_nr_ARFCN_r16,
+        _NR_DL_PRS_AssistanceDataPerTRP_r16_nr_DL_PRS_SFN0_Offset_r16,
+        _NR_DL_PRS_AssistanceDataPerTRP_r16_nr_DL_PRS_ExpectedRSTD_r16,
+        _NR_DL_PRS_AssistanceDataPerTRP_r16_nr_DL_PRS_ExpectedRSTD_Uncertainty_r16,
+        _NR_DL_PRS_AssistanceDataPerTRP_r16_nr_DL_PRS_Info_r16,
+        NR_DL_PRS_AssistanceDataPerTRP_r16,
+        _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_SubcarrierSpacing_r16,
+        _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_ResourceBandwidth_r16,
+        _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_StartPRB_r16,
+        _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_PointA_r16,
+        _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_CombSizeN_r16,
+        _NR_DL_PRS_PositioningFrequencyLayer_r16_dl_PRS_CyclicPrefix_r16,
+        NR_DL_PRS_PositioningFrequencyLayer_r16,
+        _NR_DL_PRS_SFN0_Offset_r16_sfn_Offset_r16,
+        _NR_DL_PRS_SFN0_Offset_r16_integerSubframeOffset_r16,
+        NR_DL_PRS_SFN0_Offset_r16,
+        _NR_DL_PRS_BeamInfo_r16__item_,
+        NR_DL_PRS_BeamInfo_r16,
+        _NR_DL_PRS_BeamInfoPerFreqLayer_r16__item_,
+        NR_DL_PRS_BeamInfoPerFreqLayer_r16,
+        _NR_DL_PRS_BeamInfoPerTRP_r16_dl_PRS_ID_r16,
+        _NR_DL_PRS_BeamInfoPerTRP_r16_nr_PhysCellID_r16,
+        _NR_DL_PRS_BeamInfoPerTRP_r16_nr_CellGlobalID_r16,
+        _NR_DL_PRS_BeamInfoPerTRP_r16_nr_ARFCN_r16,
+        _NR_DL_PRS_BeamInfoPerTRP_r16_associated_DL_PRS_ID_r16,
+        _NR_DL_PRS_BeamInfoPerTRP_r16_lcs_GCS_TranslationParameter_r16,
+        _NR_DL_PRS_BeamInfoPerTRP_r16_dl_PRS_BeamInfoSet_r16,
+        NR_DL_PRS_BeamInfoPerTRP_r16,
+        _DL_PRS_BeamInfoSet_r16__item_,
+        DL_PRS_BeamInfoSet_r16,
+        _DL_PRS_BeamInfoResourceSet_r16__item_,
+        DL_PRS_BeamInfoResourceSet_r16,
+        _DL_PRS_BeamInfoElement_r16_dl_PRS_Azimuth_r16,
+        _DL_PRS_BeamInfoElement_r16_dl_PRS_Azimuth_fine_r16,
+        _DL_PRS_BeamInfoElement_r16_dl_PRS_Elevation_r16,
+        _DL_PRS_BeamInfoElement_r16_dl_PRS_Elevation_fine_r16,
+        DL_PRS_BeamInfoElement_r16,
+        _LCS_GCS_TranslationParameter_r16_alpha_r16,
+        _LCS_GCS_TranslationParameter_r16_alpha_fine_r16,
+        _LCS_GCS_TranslationParameter_r16_beta_r16,
+        _LCS_GCS_TranslationParameter_r16_beta_fine_r16,
+        _LCS_GCS_TranslationParameter_r16_gamma_r16,
+        _LCS_GCS_TranslationParameter_r16_gamma_fine_r16,
+        LCS_GCS_TranslationParameter_r16,
+        __NR_DL_PRS_Info_r16_nr_DL_PRS_ResourceSetList_r16__item_,
+        _NR_DL_PRS_Info_r16_nr_DL_PRS_ResourceSetList_r16,
+        NR_DL_PRS_Info_r16,
+        _NR_DL_PRS_ResourceSet_r16_nr_DL_PRS_ResourceSetID_r16,
+        _NR_DL_PRS_ResourceSet_r16_dl_PRS_Periodicity_and_ResourceSetSlotOffset_r16,
+        _NR_DL_PRS_ResourceSet_r16_dl_PRS_ResourceRepetitionFactor_r16,
+        _NR_DL_PRS_ResourceSet_r16_dl_PRS_ResourceTimeGap_r16,
+        _NR_DL_PRS_ResourceSet_r16_dl_PRS_NumSymbols_r16,
+        _NR_DL_PRS_ResourceSet_r16_dl_PRS_MutingOption1_r16,
+        _NR_DL_PRS_ResourceSet_r16_dl_PRS_MutingOption2_r16,
+        _NR_DL_PRS_ResourceSet_r16_dl_PRS_ResourcePower_r16,
+        __NR_DL_PRS_ResourceSet_r16_dl_PRS_ResourceList_r16__item_,
+        _NR_DL_PRS_ResourceSet_r16_dl_PRS_ResourceList_r16,
+        NR_DL_PRS_ResourceSet_r16,
+        _DL_PRS_MutingOption1_r16_dl_prs_MutingBitRepetitionFactor_r16,
+        _DL_PRS_MutingOption1_r16_nr_option1_muting_r16,
+        DL_PRS_MutingOption1_r16,
+        _DL_PRS_MutingOption2_r16_nr_option2_muting_r16,
+        DL_PRS_MutingOption2_r16,
+        _NR_MutingPattern_r16_po2_r16,
+        _NR_MutingPattern_r16_po4_r16,
+        _NR_MutingPattern_r16_po6_r16,
+        _NR_MutingPattern_r16_po8_r16,
+        _NR_MutingPattern_r16_po16_r16,
+        _NR_MutingPattern_r16_po32_r16,
+        NR_MutingPattern_r16,
+        _NR_DL_PRS_Resource_r16_nr_DL_PRS_ResourceID_r16,
+        _NR_DL_PRS_Resource_r16_dl_PRS_SequenceID_r16,
+        __NR_DL_PRS_Resource_r16_dl_PRS_CombSizeN_AndReOffset_r16_n2_r16,
+        __NR_DL_PRS_Resource_r16_dl_PRS_CombSizeN_AndReOffset_r16_n4_r16,
+        __NR_DL_PRS_Resource_r16_dl_PRS_CombSizeN_AndReOffset_r16_n6_r16,
+        __NR_DL_PRS_Resource_r16_dl_PRS_CombSizeN_AndReOffset_r16_n12_r16,
+        _NR_DL_PRS_Resource_r16_dl_PRS_CombSizeN_AndReOffset_r16,
+        _NR_DL_PRS_Resource_r16_dl_PRS_ResourceSlotOffset_r16,
+        _NR_DL_PRS_Resource_r16_dl_PRS_ResourceSymbolOffset_r16,
+        _NR_DL_PRS_Resource_r16_dl_PRS_QCL_Info_r16,
+        NR_DL_PRS_Resource_r16,
+        __DL_PRS_QCL_Info_r16_ssb_r16_pci_r16,
+        __DL_PRS_QCL_Info_r16_ssb_r16_ssb_Index_r16,
+        __DL_PRS_QCL_Info_r16_ssb_r16_rs_Type_r16,
+        _DL_PRS_QCL_Info_r16_ssb_r16,
+        __DL_PRS_QCL_Info_r16_dl_PRS_r16_qcl_DL_PRS_ResourceID_r16,
+        __DL_PRS_QCL_Info_r16_dl_PRS_r16_qcl_DL_PRS_ResourceSetID_r16,
+        _DL_PRS_QCL_Info_r16_dl_PRS_r16,
+        DL_PRS_QCL_Info_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n4_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n5_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n8_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n10_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n16_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n20_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n32_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n40_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n64_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n80_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n160_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n320_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n640_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n1280_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n2560_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n5120_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16_n10240_r16,
+        _NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs15_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n8_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n10_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n16_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n20_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n32_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n40_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n64_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n80_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n128_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n160_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n320_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n640_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n1280_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n2560_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n5120_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n10240_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16_n20480_r16,
+        _NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs30_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n16_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n20_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n32_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n40_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n64_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n80_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n128_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n160_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n256_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n320_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n640_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n1280_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n2560_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n5120_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n10240_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n20480_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16_n40960_r16,
+        _NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs60_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n32_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n40_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n64_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n80_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n128_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n160_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n256_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n320_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n512_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n640_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n1280_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n2560_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n5120_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n10240_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n20480_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n40960_r16,
+        __NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16_n81920_r16,
+        _NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16_scs120_r16,
+        NR_DL_PRS_Periodicity_and_ResourceSetSlotOffset_r16,
+        __NR_DL_PRS_ProcessingCapability_r16_prs_ProcessingCapabilityBandList_r16__item_,
+        _NR_DL_PRS_ProcessingCapability_r16_prs_ProcessingCapabilityBandList_r16,
+        _NR_DL_PRS_ProcessingCapability_r16_maxSupportedFreqLayers_r16,
+        _NR_DL_PRS_ProcessingCapability_r16_simulLTE_NR_PRS_r16,
+        NR_DL_PRS_ProcessingCapability_r16,
+        _PRS_ProcessingCapabilityPerBand_r16_freqBandIndicatorNR_r16,
+        __PRS_ProcessingCapabilityPerBand_r16_supportedBandwidthPRS_r16_fr1,
+        __PRS_ProcessingCapabilityPerBand_r16_supportedBandwidthPRS_r16_fr2,
+        _PRS_ProcessingCapabilityPerBand_r16_supportedBandwidthPRS_r16,
+        _PRS_ProcessingCapabilityPerBand_r16_dl_PRS_BufferType_r16,
+        __PRS_ProcessingCapabilityPerBand_r16_durationOfPRS_Processing_r16_durationOfPRS_ProcessingSymbols_r16,
+        __PRS_ProcessingCapabilityPerBand_r16_durationOfPRS_Processing_r16_durationOfPRS_ProcessingSymbolsInEveryTms_r16,
+        _PRS_ProcessingCapabilityPerBand_r16_durationOfPRS_Processing_r16,
+        __PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16_scs15_r16,
+        __PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16_scs30_r16,
+        __PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16_scs60_r16,
+        __PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16_scs120_r16,
+        _PRS_ProcessingCapabilityPerBand_r16_maxNumOfDL_PRS_ResProcessedPerSlot_r16,
+        PRS_ProcessingCapabilityPerBand_r16,
+        __NR_DL_PRS_QCL_ProcessingCapability_r16_dl_PRS_QCL_ProcessingCapabilityBandList_r16__item_,
+        _NR_DL_PRS_QCL_ProcessingCapability_r16_dl_PRS_QCL_ProcessingCapabilityBandList_r16,
+        NR_DL_PRS_QCL_ProcessingCapability_r16,
+        _DL_PRS_QCL_ProcessingCapabilityPerBand_r16_freqBandIndicatorNR_r16,
+        _DL_PRS_QCL_ProcessingCapabilityPerBand_r16_ssb_FromNeighCellAsQCL_r16,
+        _DL_PRS_QCL_ProcessingCapabilityPerBand_r16_prs_FromServNeighCellAsQCL_r16,
+        DL_PRS_QCL_ProcessingCapabilityPerBand_r16,
+        NR_DL_PRS_ResourceID_r16,
+        _NR_DL_PRS_ResourcesCapability_r16_maxNrOfDL_PRS_ResourceSetPerTrpPerFrequencyLayer_r16,
+        _NR_DL_PRS_ResourcesCapability_r16_maxNrOfTRP_AcrossFreqs_r16,
+        _NR_DL_PRS_ResourcesCapability_r16_maxNrOfPosLayer_r16,
+        __NR_DL_PRS_ResourcesCapability_r16_dl_PRS_ResourcesCapabilityBandList_r16__item_,
+        _NR_DL_PRS_ResourcesCapability_r16_dl_PRS_ResourcesCapabilityBandList_r16,
+        _NR_DL_PRS_ResourcesCapability_r16_dl_PRS_ResourcesBandCombinationList_r16,
+        NR_DL_PRS_ResourcesCapability_r16,
+        _DL_PRS_ResourcesCapabilityPerBand_r16_freqBandIndicatorNR_r16,
+        _DL_PRS_ResourcesCapabilityPerBand_r16_maxNrOfDL_PRS_ResourcesPerResourceSet_r16,
+        _DL_PRS_ResourcesCapabilityPerBand_r16_maxNrOfDL_PRS_ResourcesPerPositioningFrequencylayer_r16,
+        DL_PRS_ResourcesCapabilityPerBand_r16,
+        _DL_PRS_ResourcesBandCombinationList_r16__item_,
+        DL_PRS_ResourcesBandCombinationList_r16,
+        __DL_PRS_ResourcesBandCombination_r16_bandList_r16__item_,
+        _DL_PRS_ResourcesBandCombination_r16_bandList_r16,
+        __DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr1_Only_r16,
+        __DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr2_Only_r16,
+        ___DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr1_FR2Mix_r16_fr1_r16,
+        ___DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr1_FR2Mix_r16_fr2_r16,
+        __DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16_fr1_FR2Mix_r16,
+        _DL_PRS_ResourcesBandCombination_r16_maxNrOfDL_PRS_ResourcesAcrossAllFL_TRP_ResourceSet_r16,
+        DL_PRS_ResourcesBandCombination_r16,
+        NR_DL_PRS_ResourceSetID_r16,
+        _NR_PositionCalculationAssistance_r16_nr_TRP_LocationInfo_r16,
+        _NR_PositionCalculationAssistance_r16_nr_DL_PRS_BeamInfo_r16,
+        _NR_PositionCalculationAssistance_r16_nr_RTD_Info_r16,
+        NR_PositionCalculationAssistance_r16,
+        _NR_RTD_Info_r16_referenceTRP_RTD_Info_r16,
+        _NR_RTD_Info_r16_rtd_InfoList_r16,
+        NR_RTD_Info_r16,
+        _ReferenceTRP_RTD_Info_r16_dl_PRS_ID_Ref_r16,
+        _ReferenceTRP_RTD_Info_r16_nr_PhysCellID_Ref_r16,
+        _ReferenceTRP_RTD_Info_r16_nr_CellGlobalID_Ref_r16,
+        _ReferenceTRP_RTD_Info_r16_nr_ARFCN_Ref_r16,
+        __ReferenceTRP_RTD_Info_r16_refTime_r16_systemFrameNumber_r16,
+        __ReferenceTRP_RTD_Info_r16_refTime_r16_utc_r16,
+        _ReferenceTRP_RTD_Info_r16_refTime_r16,
+        _ReferenceTRP_RTD_Info_r16_rtd_RefQuality_r16,
+        ReferenceTRP_RTD_Info_r16,
+        _RTD_InfoList_r16__item_,
+        RTD_InfoList_r16,
+        _RTD_InfoListPerFreqLayer_r16__item_,
+        RTD_InfoListPerFreqLayer_r16,
+        _RTD_InfoElement_r16_dl_PRS_ID_r16,
+        _RTD_InfoElement_r16_nr_PhysCellID_r16,
+        _RTD_InfoElement_r16_nr_CellGlobalID_r16,
+        _RTD_InfoElement_r16_nr_ARFCN_r16,
+        _RTD_InfoElement_r16_subframeOffset_r16,
+        _RTD_InfoElement_r16_rtd_Quality_r16,
+        RTD_InfoElement_r16,
+        _NR_SelectedDL_PRS_IndexList_r16__item_,
+        NR_SelectedDL_PRS_IndexList_r16,
+        _NR_SelectedDL_PRS_PerFreq_r16_nr_SelectedDL_PRS_FrequencyLayerIndex_r16,
+        __NR_SelectedDL_PRS_PerFreq_r16_nr_SelectedDL_PRS_IndexListPerFreq_r16__item_,
+        _NR_SelectedDL_PRS_PerFreq_r16_nr_SelectedDL_PRS_IndexListPerFreq_r16,
+        NR_SelectedDL_PRS_PerFreq_r16,
+        _NR_SelectedDL_PRS_IndexPerTRP_r16_nr_SelectedTRP_Index_r16,
+        __NR_SelectedDL_PRS_IndexPerTRP_r16_dl_SelectedPRS_ResourceSetIndexList_r16__item_,
+        _NR_SelectedDL_PRS_IndexPerTRP_r16_dl_SelectedPRS_ResourceSetIndexList_r16,
+        NR_SelectedDL_PRS_IndexPerTRP_r16,
+        _DL_SelectedPRS_ResourceSetIndex_r16_nr_DL_SelectedPRS_ResourceSetIndex_r16,
+        __DL_SelectedPRS_ResourceSetIndex_r16_dl_SelectedPRS_ResourceIndexList_r16__item_,
+        _DL_SelectedPRS_ResourceSetIndex_r16_dl_SelectedPRS_ResourceIndexList_r16,
+        DL_SelectedPRS_ResourceSetIndex_r16,
+        _DL_SelectedPRS_ResourceIndex_r16_nr_DL_SelectedPRS_ResourceIdIndex_r16,
+        DL_SelectedPRS_ResourceIndex_r16,
+        _NR_SSB_Config_r16_nr_PhysCellID_r16,
+        _NR_SSB_Config_r16_nr_ARFCN_r16,
+        _NR_SSB_Config_r16_ss_PBCH_BlockPower_r16,
+        _NR_SSB_Config_r16_halfFrameIndex_r16,
+        _NR_SSB_Config_r16_ssb_periodicity_r16,
+        __NR_SSB_Config_r16_ssb_PositionsInBurst_r16_shortBitmap_r16,
+        __NR_SSB_Config_r16_ssb_PositionsInBurst_r16_mediumBitmap_r16,
+        __NR_SSB_Config_r16_ssb_PositionsInBurst_r16_longBitmap_r16,
+        _NR_SSB_Config_r16_ssb_PositionsInBurst_r16,
+        _NR_SSB_Config_r16_ssb_SubcarrierSpacing_r16,
+        _NR_SSB_Config_r16_sfn_SSB_Offset_r16,
+        NR_SSB_Config_r16,
+        _NR_TimeStamp_r16_dl_PRS_ID_r16,
+        _NR_TimeStamp_r16_nr_PhysCellID_r16,
+        _NR_TimeStamp_r16_nr_CellGlobalID_r16,
+        _NR_TimeStamp_r16_nr_ARFCN_r16,
+        _NR_TimeStamp_r16_nr_SFN_r16,
+        __NR_TimeStamp_r16_nr_Slot_r16_scs15_r16,
+        __NR_TimeStamp_r16_nr_Slot_r16_scs30_r16,
+        __NR_TimeStamp_r16_nr_Slot_r16_scs60_r16,
+        __NR_TimeStamp_r16_nr_Slot_r16_scs120_r16,
+        _NR_TimeStamp_r16_nr_Slot_r16,
+        NR_TimeStamp_r16,
+        _NR_TimingQuality_r16_timingQualityValue_r16,
+        _NR_TimingQuality_r16_timingQualityResolution_r16,
+        NR_TimingQuality_r16,
+        _NR_TRP_LocationInfo_r16__item_,
+        NR_TRP_LocationInfo_r16,
+        _NR_TRP_LocationInfoPerFreqLayer_r16_referencePoint_r16,
+        __NR_TRP_LocationInfoPerFreqLayer_r16_trp_LocationInfoList_r16__item_,
+        _NR_TRP_LocationInfoPerFreqLayer_r16_trp_LocationInfoList_r16,
+        NR_TRP_LocationInfoPerFreqLayer_r16,
+        _TRP_LocationInfoElement_r16_dl_PRS_ID_r16,
+        _TRP_LocationInfoElement_r16_nr_PhysCellID_r16,
+        _TRP_LocationInfoElement_r16_nr_CellGlobalID_r16,
+        _TRP_LocationInfoElement_r16_nr_ARFCN_r16,
+        _TRP_LocationInfoElement_r16_associated_DL_PRS_ID_r16,
+        _TRP_LocationInfoElement_r16_trp_Location_r16,
+        __TRP_LocationInfoElement_r16_trp_DL_PRS_ResourceSets_r16__item_,
+        _TRP_LocationInfoElement_r16_trp_DL_PRS_ResourceSets_r16,
+        TRP_LocationInfoElement_r16,
+        _DL_PRS_ResourceSets_TRP_Element_r16_dl_PRS_ResourceSetARP_r16,
+        __DL_PRS_ResourceSets_TRP_Element_r16_dl_PRS_Resource_ARP_List_r16__item_,
+        _DL_PRS_ResourceSets_TRP_Element_r16_dl_PRS_Resource_ARP_List_r16,
+        DL_PRS_ResourceSets_TRP_Element_r16,
+        _DL_PRS_Resource_ARP_Element_r16_dl_PRS_Resource_ARP_location_r16,
+        DL_PRS_Resource_ARP_Element_r16,
+        __NR_UL_SRS_Capability_r16_srs_CapabilityBandList_r16__item_,
+        _NR_UL_SRS_Capability_r16_srs_CapabilityBandList_r16,
+        __NR_UL_SRS_Capability_r16_srs_PosResourceConfigCA_BandList_r16__item_,
+        _NR_UL_SRS_Capability_r16_srs_PosResourceConfigCA_BandList_r16,
+        _NR_UL_SRS_Capability_r16_maxNumberSRS_PosPathLossEstimateAllServingCells_r16,
+        _NR_UL_SRS_Capability_r16_maxNumberSRS_PosSpatialRelationsAllServingCells_r16,
+        NR_UL_SRS_Capability_r16,
+        _SRS_CapabilityPerBand_r16_freqBandIndicatorNR_r16,
+        _SRS_CapabilityPerBand_r16_olpc_SRS_Pos_r16,
+        _SRS_CapabilityPerBand_r16_spatialRelationsSRS_Pos_r16,
+        SRS_CapabilityPerBand_r16,
+        _OLPC_SRS_Pos_r16_olpc_SRS_PosBasedOnPRS_Serving_r16,
+        _OLPC_SRS_Pos_r16_olpc_SRS_PosBasedOnSSB_Neigh_r16,
+        _OLPC_SRS_Pos_r16_olpc_SRS_PosBasedOnPRS_Neigh_r16,
+        _OLPC_SRS_Pos_r16_maxNumberPathLossEstimatePerServing_r16,
+        OLPC_SRS_Pos_r16,
+        _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnSSB_Serving_r16,
+        _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnCSI_RS_Serving_r16,
+        _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnPRS_Serving_r16,
+        _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnSRS_r16,
+        _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnSSB_Neigh_r16,
+        _SpatialRelationsSRS_Pos_r16_spatialRelation_SRS_PosBasedOnPRS_Neigh_r16,
+        SpatialRelationsSRS_Pos_r16,
+        _SRS_PosResourcesPerBand_r16_freqBandIndicatorNR_r16,
+        _SRS_PosResourcesPerBand_r16_maxNumberSRS_PosResourceSetsPerBWP_r16,
+        _SRS_PosResourcesPerBand_r16_maxNumberSRS_PosResourcesPerBWP_r16,
+        _SRS_PosResourcesPerBand_r16_maxNumberPeriodicSRS_PosResourcesPerBWP_r16,
+        _SRS_PosResourcesPerBand_r16_maxNumberAP_SRS_PosResourcesPerBWP_r16,
+        _SRS_PosResourcesPerBand_r16_maxNumberSP_SRS_PosResourcesPerBWP_r16,
+        SRS_PosResourcesPerBand_r16,
+        __ReferencePoint_r16_referencePointGeographicLocation_r16_location3D_r16,
+        __ReferencePoint_r16_referencePointGeographicLocation_r16_ha_location3D_r16,
+        _ReferencePoint_r16_referencePointGeographicLocation_r16,
+        ReferencePoint_r16,
+        _RelativeLocation_r16_milli_arc_second_units_r16,
+        _RelativeLocation_r16_height_units_r16,
+        _RelativeLocation_r16_delta_latitude_r16,
+        _RelativeLocation_r16_delta_longitude_r16,
+        _RelativeLocation_r16_delta_height_r16,
+        _RelativeLocation_r16_locationUNC_r16,
+        RelativeLocation_r16,
+        _Delta_Latitude_r16_delta_Latitude_r16,
+        _Delta_Latitude_r16_coarse_delta_Latitude_r16,
+        Delta_Latitude_r16,
+        _Delta_Longitude_r16_delta_Longitude_r16,
+        _Delta_Longitude_r16_coarse_delta_Longitude_r16,
+        Delta_Longitude_r16,
+        _Delta_Height_r16_delta_Height_r16,
+        _Delta_Height_r16_coarse_delta_Height_r16,
+        Delta_Height_r16,
+        _LocationUncertainty_r16_horizontalUncertainty_r16,
+        _LocationUncertainty_r16_horizontalConfidence_r16,
+        _LocationUncertainty_r16_verticalUncertainty_r16,
+        _LocationUncertainty_r16_verticalConfidence_r16,
+        LocationUncertainty_r16,
         _OTDOA_ProvideAssistanceData_otdoa_ReferenceCellInfo,
         _OTDOA_ProvideAssistanceData_otdoa_NeighbourCellInfo,
         _OTDOA_ProvideAssistanceData_otdoa_Error,
@@ -8626,6 +12898,7 @@ class LPP_PDU_Definitions:
         _GNSS_CommonAssistData_gnss_RTK_ReferenceStationInfo_r15,
         _GNSS_CommonAssistData_gnss_RTK_CommonObservationInfo_r15,
         _GNSS_CommonAssistData_gnss_RTK_AuxiliaryStationData_r15,
+        _GNSS_CommonAssistData_gnss_SSR_CorrectionPoints_r16,
         GNSS_CommonAssistData,
         _GNSS_GenericAssistData__item_,
         GNSS_GenericAssistData,
@@ -8650,6 +12923,12 @@ class LPP_PDU_Definitions:
         _GNSS_GenericAssistDataElement_gnss_SSR_OrbitCorrections_r15,
         _GNSS_GenericAssistDataElement_gnss_SSR_ClockCorrections_r15,
         _GNSS_GenericAssistDataElement_gnss_SSR_CodeBias_r15,
+        _GNSS_GenericAssistDataElement_gnss_SSR_URA_r16,
+        _GNSS_GenericAssistDataElement_gnss_SSR_PhaseBias_r16,
+        _GNSS_GenericAssistDataElement_gnss_SSR_STEC_Correction_r16,
+        _GNSS_GenericAssistDataElement_gnss_SSR_GriddedCorrection_r16,
+        _GNSS_GenericAssistDataElement_navic_DifferentialCorrections_r16,
+        _GNSS_GenericAssistDataElement_navic_GridModel_r16,
         GNSS_GenericAssistDataElement,
         _GNSS_PeriodicAssistData_r15_gnss_RTK_PeriodicObservations_r15,
         _GNSS_PeriodicAssistData_r15_glo_RTK_PeriodicBiasInformation_r15,
@@ -8659,6 +12938,10 @@ class LPP_PDU_Definitions:
         _GNSS_PeriodicAssistData_r15_gnss_SSR_PeriodicOrbitCorrections_r15,
         _GNSS_PeriodicAssistData_r15_gnss_SSR_PeriodicClockCorrections_r15,
         _GNSS_PeriodicAssistData_r15_gnss_SSR_PeriodicCodeBias_r15,
+        _GNSS_PeriodicAssistData_r15_gnss_SSR_PeriodicURA_r16,
+        _GNSS_PeriodicAssistData_r15_gnss_SSR_PeriodicPhaseBias_r16,
+        _GNSS_PeriodicAssistData_r15_gnss_SSR_PeriodicSTEC_Correction_r16,
+        _GNSS_PeriodicAssistData_r15_gnss_SSR_PeriodicGriddedCorrection_r16,
         GNSS_PeriodicAssistData_r15,
         _GNSS_ReferenceTime_gnss_SystemTime,
         _GNSS_ReferenceTime_referenceTimeUnc,
@@ -8718,6 +13001,7 @@ class LPP_PDU_Definitions:
         GNSS_ReferenceLocation,
         _GNSS_IonosphericModel_klobucharModel,
         _GNSS_IonosphericModel_neQuickModel,
+        _GNSS_IonosphericModel_klobucharModel2_r16,
         GNSS_IonosphericModel,
         _KlobucharModelParameter_dataID,
         _KlobucharModelParameter_alfa0,
@@ -8729,6 +13013,16 @@ class LPP_PDU_Definitions:
         _KlobucharModelParameter_beta2,
         _KlobucharModelParameter_beta3,
         KlobucharModelParameter,
+        _KlobucharModel2Parameter_r16_alfa1_r16,
+        _KlobucharModel2Parameter_r16_alfa2_r16,
+        _KlobucharModel2Parameter_r16_alfa3_r16,
+        _KlobucharModel2Parameter_r16_alfa4_r16,
+        _KlobucharModel2Parameter_r16_alfa5_r16,
+        _KlobucharModel2Parameter_r16_alfa6_r16,
+        _KlobucharModel2Parameter_r16_alfa7_r16,
+        _KlobucharModel2Parameter_r16_alfa8_r16,
+        _KlobucharModel2Parameter_r16_alfa9_r16,
+        KlobucharModel2Parameter_r16,
         _NeQuickModelParameter_ai0,
         _NeQuickModelParameter_ai1,
         _NeQuickModelParameter_ai2,
@@ -8755,6 +13049,7 @@ class LPP_PDU_Definitions:
         _GNSS_RTK_ReferenceStationInfo_r15_antennaDescription_r15,
         _GNSS_RTK_ReferenceStationInfo_r15_antenna_reference_point_unc_r15,
         _GNSS_RTK_ReferenceStationInfo_r15_physical_reference_station_info_r15,
+        _GNSS_RTK_ReferenceStationInfo_r15_equalIntegerAmbiguityLevel_r16,
         GNSS_RTK_ReferenceStationInfo_r15,
         _AntennaDescription_r15_antennaDescriptor_r15,
         _AntennaDescription_r15_antennaSetUpID_r15,
@@ -8772,6 +13067,11 @@ class LPP_PDU_Definitions:
         _PhysicalReferenceStationInfo_r15_physical_ARP_ECEF_Z_r15,
         _PhysicalReferenceStationInfo_r15_physical_ARP_unc_r15,
         PhysicalReferenceStationInfo_r15,
+        _EqualIntegerAmbiguityLevel_r16_allReferenceStations_r16,
+        _EqualIntegerAmbiguityLevel_r16_referenceStationList_r16,
+        EqualIntegerAmbiguityLevel_r16,
+        _ReferenceStationList_r16__item_,
+        ReferenceStationList_r16,
         _GNSS_RTK_CommonObservationInfo_r15_referenceStationID_r15,
         _GNSS_RTK_CommonObservationInfo_r15_clockSteeringIndicator_r15,
         _GNSS_RTK_CommonObservationInfo_r15_externalClockIndicator_r15,
@@ -8796,6 +13096,27 @@ class LPP_PDU_Definitions:
         _Aux_ARP_Unc_r15_verticalUncertainty_r15,
         _Aux_ARP_Unc_r15_verticalConfidence_r15,
         Aux_ARP_Unc_r15,
+        _GNSS_SSR_CorrectionPoints_r16_correctionPointSetID_r16,
+        __GNSS_SSR_CorrectionPoints_r16_correctionPoints_r16_listOfCorrectionPoints_r16,
+        __GNSS_SSR_CorrectionPoints_r16_correctionPoints_r16_arrayOfCorrectionPoints_r16,
+        _GNSS_SSR_CorrectionPoints_r16_correctionPoints_r16,
+        GNSS_SSR_CorrectionPoints_r16,
+        _GNSS_SSR_ListOfCorrectionPoints_r16_referencePointLatitude_r16,
+        _GNSS_SSR_ListOfCorrectionPoints_r16_referencePointLongitude_r16,
+        __GNSS_SSR_ListOfCorrectionPoints_r16_relativeLocationsList_r16__item_,
+        _GNSS_SSR_ListOfCorrectionPoints_r16_relativeLocationsList_r16,
+        GNSS_SSR_ListOfCorrectionPoints_r16,
+        _RelativeLocationElement_r16_deltaLatitude_r16,
+        _RelativeLocationElement_r16_deltaLongitude_r16,
+        RelativeLocationElement_r16,
+        _GNSS_SSR_ArrayOfCorrectionPoints_r16_referencePointLatitude_r16,
+        _GNSS_SSR_ArrayOfCorrectionPoints_r16_referencePointLongitude_r16,
+        _GNSS_SSR_ArrayOfCorrectionPoints_r16_numberOfStepsLatitude_r16,
+        _GNSS_SSR_ArrayOfCorrectionPoints_r16_numberOfStepsLongitude_r16,
+        _GNSS_SSR_ArrayOfCorrectionPoints_r16_stepOfLatitude_r16,
+        _GNSS_SSR_ArrayOfCorrectionPoints_r16_stepOfLongitude_r16,
+        _GNSS_SSR_ArrayOfCorrectionPoints_r16_bitmaskOfGrids_r16,
+        GNSS_SSR_ArrayOfCorrectionPoints_r16,
         _GNSS_TimeModelList__item_,
         GNSS_TimeModelList,
         _GNSS_TimeModelElement_gnss_TimeModelRefTime,
@@ -8843,6 +13164,8 @@ class LPP_PDU_Definitions:
         _GNSS_ClockModel_glonass_ClockModel,
         _GNSS_ClockModel_sbas_ClockModel,
         _GNSS_ClockModel_bds_ClockModel_r12,
+        _GNSS_ClockModel_bds_ClockModel2_r16,
+        _GNSS_ClockModel_navic_ClockModel_r16,
         GNSS_ClockModel,
         _GNSS_OrbitModel_keplerianSet,
         _GNSS_OrbitModel_nav_KeplerianSet,
@@ -8850,6 +13173,8 @@ class LPP_PDU_Definitions:
         _GNSS_OrbitModel_glonass_ECEF,
         _GNSS_OrbitModel_sbas_ECEF,
         _GNSS_OrbitModel_bds_KeplerianSet_r12,
+        _GNSS_OrbitModel_bds_KeplerianSet2_r16,
+        _GNSS_OrbitModel_navic_KeplerianSet_r16,
         GNSS_OrbitModel,
         _StandardClockModelList__item_,
         StandardClockModelList,
@@ -8898,6 +13223,19 @@ class LPP_PDU_Definitions:
         _BDS_ClockModel_r12_bdsA2_r12,
         _BDS_ClockModel_r12_bdsTgd1_r12,
         BDS_ClockModel_r12,
+        _BDS_ClockModel2_r16_bdsToc_r16,
+        _BDS_ClockModel2_r16_bdsA0_r16,
+        _BDS_ClockModel2_r16_bdsA1_r16,
+        _BDS_ClockModel2_r16_bdsA2_r16,
+        _BDS_ClockModel2_r16_bdsTgdB1Cp_r16,
+        _BDS_ClockModel2_r16_bdsIscB1Cd_r16,
+        BDS_ClockModel2_r16,
+        _NavIC_ClockModel_r16_navic_Toc_r16,
+        _NavIC_ClockModel_r16_navic_af2_r16,
+        _NavIC_ClockModel_r16_navic_af1_r16,
+        _NavIC_ClockModel_r16_navic_af0_r16,
+        _NavIC_ClockModel_r16_navic_Tgd_r16,
+        NavIC_ClockModel_r16,
         _NavModelKeplerianSet_keplerToe,
         _NavModelKeplerianSet_keplerW,
         _NavModelKeplerianSet_keplerDeltaN,
@@ -9008,6 +13346,44 @@ class LPP_PDU_Definitions:
         _NavModel_BDS_KeplerianSet_r12_bdsCic_r12,
         _NavModel_BDS_KeplerianSet_r12_bdsCis_r12,
         NavModel_BDS_KeplerianSet_r12,
+        _NavModel_BDS_KeplerianSet2_r16_bdsIODE_r16,
+        _NavModel_BDS_KeplerianSet2_r16_bdsToe_r16,
+        _NavModel_BDS_KeplerianSet2_r16_bdsDeltaA_r16,
+        _NavModel_BDS_KeplerianSet2_r16_bdsAdot_r16,
+        _NavModel_BDS_KeplerianSet2_r16_bdsDeltaN0_r16,
+        _NavModel_BDS_KeplerianSet2_r16_bdsDeltaN0dot_r16,
+        _NavModel_BDS_KeplerianSet2_r16_bdsM0_r16,
+        _NavModel_BDS_KeplerianSet2_r16_bdsE_r16,
+        _NavModel_BDS_KeplerianSet2_r16_bdsOmega_r16,
+        _NavModel_BDS_KeplerianSet2_r16_bdsOmega0_r16,
+        _NavModel_BDS_KeplerianSet2_r16_bdsI0_r16,
+        _NavModel_BDS_KeplerianSet2_r16_bdsOmegaDot_r16,
+        _NavModel_BDS_KeplerianSet2_r16_bdsI0Dot_r16,
+        _NavModel_BDS_KeplerianSet2_r16_bdsCuc_r16,
+        _NavModel_BDS_KeplerianSet2_r16_bdsCus_r16,
+        _NavModel_BDS_KeplerianSet2_r16_bdsCrc_r16,
+        _NavModel_BDS_KeplerianSet2_r16_bdsCrs_r16,
+        _NavModel_BDS_KeplerianSet2_r16_bdsCic_r16,
+        _NavModel_BDS_KeplerianSet2_r16_bdsCis_r16,
+        NavModel_BDS_KeplerianSet2_r16,
+        _NavModel_NavIC_KeplerianSet_r16_navic_Toe_r16,
+        _NavModel_NavIC_KeplerianSet_r16_navic_URAI_r16,
+        _NavModel_NavIC_KeplerianSet_r16_navic_W_r16,
+        _NavModel_NavIC_KeplerianSet_r16_navic_DeltaN_r16,
+        _NavModel_NavIC_KeplerianSet_r16_navic_M0_r16,
+        _NavModel_NavIC_KeplerianSet_r16_navic_OmegaDot_r16,
+        _NavModel_NavIC_KeplerianSet_r16_navic_E_r16,
+        _NavModel_NavIC_KeplerianSet_r16_navic_IDot_r16,
+        _NavModel_NavIC_KeplerianSet_r16_navic_APowerHalf_r16,
+        _NavModel_NavIC_KeplerianSet_r16_navic_I0_r16,
+        _NavModel_NavIC_KeplerianSet_r16_navic_Omega0_r16,
+        _NavModel_NavIC_KeplerianSet_r16_navic_Crs_r16,
+        _NavModel_NavIC_KeplerianSet_r16_navic_Cis_r16,
+        _NavModel_NavIC_KeplerianSet_r16_navic_Cus_r16,
+        _NavModel_NavIC_KeplerianSet_r16_navic_Crc_r16,
+        _NavModel_NavIC_KeplerianSet_r16_navic_Cic_r16,
+        _NavModel_NavIC_KeplerianSet_r16_navic_Cuc_r16,
+        NavModel_NavIC_KeplerianSet_r16,
         _GNSS_RealTimeIntegrity_gnss_BadSignalList,
         GNSS_RealTimeIntegrity,
         _GNSS_BadSignalList__item_,
@@ -9054,6 +13430,8 @@ class LPP_PDU_Definitions:
         _GNSS_Almanac_gnss_AlmanacList,
         _GNSS_Almanac_toa_ext_v1240,
         _GNSS_Almanac_ioda_ext_v1240,
+        _GNSS_Almanac_weekNumber_ext_r16,
+        _GNSS_Almanac_toa_ext2_r16,
         GNSS_Almanac,
         _GNSS_AlmanacList__item_,
         GNSS_AlmanacList,
@@ -9064,6 +13442,7 @@ class LPP_PDU_Definitions:
         _GNSS_AlmanacElement_keplerianGLONASS,
         _GNSS_AlmanacElement_ecef_SBAS_Almanac,
         _GNSS_AlmanacElement_keplerianBDS_Almanac_r12,
+        _GNSS_AlmanacElement_keplerianNavIC_Almanac_r16,
         GNSS_AlmanacElement,
         _AlmanacKeplerianSet_svID,
         _AlmanacKeplerianSet_kepAlmanacE,
@@ -9150,6 +13529,17 @@ class LPP_PDU_Definitions:
         _AlmanacBDS_AlmanacSet_r12_bdsAlmA1_r12,
         _AlmanacBDS_AlmanacSet_r12_bdsSvHealth_r12,
         AlmanacBDS_AlmanacSet_r12,
+        _AlmanacNavIC_AlmanacSet_r16_svID_r16,
+        _AlmanacNavIC_AlmanacSet_r16_navic_AlmToa_r16,
+        _AlmanacNavIC_AlmanacSet_r16_navic_AlmE_r16,
+        _AlmanacNavIC_AlmanacSet_r16_navic_AlmOMEGADOT_r16,
+        _AlmanacNavIC_AlmanacSet_r16_navic_AlmSqrtA_r16,
+        _AlmanacNavIC_AlmanacSet_r16_navic_AlmOMEGAo_r16,
+        _AlmanacNavIC_AlmanacSet_r16_navic_AlmOmega_r16,
+        _AlmanacNavIC_AlmanacSet_r16_navic_AlmMo_r16,
+        _AlmanacNavIC_AlmanacSet_r16_navic_Almaf0_r16,
+        _AlmanacNavIC_AlmanacSet_r16_navic_Almaf1_r16,
+        AlmanacNavIC_AlmanacSet_r16,
         _GNSS_UTC_Model_utcModel1,
         _GNSS_UTC_Model_utcModel2,
         _GNSS_UTC_Model_utcModel3,
@@ -9174,6 +13564,7 @@ class LPP_PDU_Definitions:
         _UTC_ModelSet2_utcWNlsf,
         _UTC_ModelSet2_utcDN,
         _UTC_ModelSet2_utcDeltaTlsf,
+        _UTC_ModelSet2_utcWNlsf_ext_r16,
         UTC_ModelSet2,
         _UTC_ModelSet3_nA,
         _UTC_ModelSet3_tauC,
@@ -9200,6 +13591,7 @@ class LPP_PDU_Definitions:
         UTC_ModelSet5_r12,
         _GNSS_AuxiliaryInformation_gnss_ID_GPS,
         _GNSS_AuxiliaryInformation_gnss_ID_GLONASS,
+        _GNSS_AuxiliaryInformation_gnss_ID_BDS_r16,
         GNSS_AuxiliaryInformation,
         _GNSS_ID_GPS__item_,
         GNSS_ID_GPS,
@@ -9212,6 +13604,11 @@ class LPP_PDU_Definitions:
         _GNSS_ID_GLONASS_SatElement_signalsAvailable,
         _GNSS_ID_GLONASS_SatElement_channelNumber,
         GNSS_ID_GLONASS_SatElement,
+        _GNSS_ID_BDS_r16__item_,
+        GNSS_ID_BDS_r16,
+        _GNSS_ID_BDS_SatElement_r16_svID_r16,
+        _GNSS_ID_BDS_SatElement_r16_satType_r16,
+        GNSS_ID_BDS_SatElement_r16,
         _BDS_DifferentialCorrections_r12_dbds_RefTime_r12,
         _BDS_DifferentialCorrections_r12_bds_SgnTypeList_r12,
         BDS_DifferentialCorrections_r12,
@@ -9361,6 +13758,131 @@ class LPP_PDU_Definitions:
         _SSR_CodeBiasSignalElement_r15_signal_and_tracking_mode_ID_r15,
         _SSR_CodeBiasSignalElement_r15_codeBias_r15,
         SSR_CodeBiasSignalElement_r15,
+        _GNSS_SSR_URA_r16_epochTime_r16,
+        _GNSS_SSR_URA_r16_ssrUpdateInterval_r16,
+        _GNSS_SSR_URA_r16_iod_ssr_r16,
+        _GNSS_SSR_URA_r16_ssr_URA_SatList_r16,
+        GNSS_SSR_URA_r16,
+        _SSR_URA_SatList_r16__item_,
+        SSR_URA_SatList_r16,
+        _SSR_URA_SatElement_r16_svID_r16,
+        _SSR_URA_SatElement_r16_ssr_URA_r16,
+        SSR_URA_SatElement_r16,
+        _GNSS_SSR_PhaseBias_r16_epochTime_r16,
+        _GNSS_SSR_PhaseBias_r16_ssrUpdateInterval_r16,
+        _GNSS_SSR_PhaseBias_r16_iod_ssr_r16,
+        _GNSS_SSR_PhaseBias_r16_ssr_PhaseBiasSatList_r16,
+        GNSS_SSR_PhaseBias_r16,
+        _SSR_PhaseBiasSatList_r16__item_,
+        SSR_PhaseBiasSatList_r16,
+        _SSR_PhaseBiasSatElement_r16_svID_r16,
+        _SSR_PhaseBiasSatElement_r16_ssr_PhaseBiasSignalList_r16,
+        SSR_PhaseBiasSatElement_r16,
+        _SSR_PhaseBiasSignalList_r16__item_,
+        SSR_PhaseBiasSignalList_r16,
+        _SSR_PhaseBiasSignalElement_r16_signal_and_tracking_mode_ID_r16,
+        _SSR_PhaseBiasSignalElement_r16_phaseBias_r16,
+        _SSR_PhaseBiasSignalElement_r16_phaseDiscontinuityIndicator_r16,
+        _SSR_PhaseBiasSignalElement_r16_phaseBiasIntegerIndicator_r16,
+        SSR_PhaseBiasSignalElement_r16,
+        _GNSS_SSR_STEC_Correction_r16_epochTime_r16,
+        _GNSS_SSR_STEC_Correction_r16_ssrUpdateInterval_r16,
+        _GNSS_SSR_STEC_Correction_r16_iod_ssr_r16,
+        _GNSS_SSR_STEC_Correction_r16_correctionPointSetID_r16,
+        _GNSS_SSR_STEC_Correction_r16_stec_SatList_r16,
+        GNSS_SSR_STEC_Correction_r16,
+        _STEC_SatList_r16__item_,
+        STEC_SatList_r16,
+        _STEC_SatElement_r16_svID_r16,
+        _STEC_SatElement_r16_stecQualityIndicator_r16,
+        _STEC_SatElement_r16_stec_C00_r16,
+        _STEC_SatElement_r16_stec_C01_r16,
+        _STEC_SatElement_r16_stec_C10_r16,
+        _STEC_SatElement_r16_stec_C11_r16,
+        STEC_SatElement_r16,
+        _GNSS_SSR_GriddedCorrection_r16_epochTime_r16,
+        _GNSS_SSR_GriddedCorrection_r16_ssrUpdateInterval_r16,
+        _GNSS_SSR_GriddedCorrection_r16_iod_ssr_r16,
+        _GNSS_SSR_GriddedCorrection_r16_troposphericDelayQualityIndicator_r16,
+        _GNSS_SSR_GriddedCorrection_r16_correctionPointSetID_r16,
+        _GNSS_SSR_GriddedCorrection_r16_gridList_r16,
+        GNSS_SSR_GriddedCorrection_r16,
+        _GridList_r16__item_,
+        GridList_r16,
+        _GridElement_r16_tropospericDelayCorrection_r16,
+        _GridElement_r16_stec_ResidualSatList_r16,
+        GridElement_r16,
+        _TropospericDelayCorrection_r16_tropoHydroStaticVerticalDelay_r16,
+        _TropospericDelayCorrection_r16_tropoWetVerticalDelay_r16,
+        TropospericDelayCorrection_r16,
+        _STEC_ResidualSatList_r16__item_,
+        STEC_ResidualSatList_r16,
+        _STEC_ResidualSatElement_r16_svID_r16,
+        __STEC_ResidualSatElement_r16_stecResidualCorrection_r16_b7_r16,
+        __STEC_ResidualSatElement_r16_stecResidualCorrection_r16_b16_r16,
+        _STEC_ResidualSatElement_r16_stecResidualCorrection_r16,
+        STEC_ResidualSatElement_r16,
+        _NavIC_DifferentialCorrections_r16_navic_RefTOWC_r16,
+        _NavIC_DifferentialCorrections_r16_navic_CorrectionListAutoNav_r16,
+        NavIC_DifferentialCorrections_r16,
+        _NavIC_CorrectionListAutoNav_r16__item_,
+        NavIC_CorrectionListAutoNav_r16,
+        _NavIC_CorrectionElementAutoNav_r16_svID,
+        _NavIC_CorrectionElementAutoNav_r16_navic_Tod_r16,
+        _NavIC_CorrectionElementAutoNav_r16_navic_iodec_r16,
+        _NavIC_CorrectionElementAutoNav_r16_navic_UDRAI_r16,
+        _NavIC_CorrectionElementAutoNav_r16_navic_UDRArateI_r16,
+        _NavIC_CorrectionElementAutoNav_r16_navic_EDC_r16,
+        _NavIC_CorrectionElementAutoNav_r16_navic_CDC_r16,
+        NavIC_CorrectionElementAutoNav_r16,
+        _NavIC_EDC_r16_navic_AlphaEDC_r16,
+        _NavIC_EDC_r16_navic_BetaEDC_r16,
+        _NavIC_EDC_r16_navic_GammaEDC_r16,
+        _NavIC_EDC_r16_navic_AoIcorrection_r16,
+        _NavIC_EDC_r16_navic_AoRAcorrection_r16,
+        _NavIC_EDC_r16_navic_SemiMajorcorrection_r16,
+        NavIC_EDC_r16,
+        _NavIC_CDC_r16_navic_ClockBiasCorrection_r16,
+        _NavIC_CDC_r16_navic_ClockDriftCorrection_r16,
+        NavIC_CDC_r16,
+        _NavIC_GridModelParameter_r16_navic_RefTOWC_r16,
+        _NavIC_GridModelParameter_r16_regionMasked_r16,
+        _NavIC_GridModelParameter_r16_regionIgpList_r16,
+        NavIC_GridModelParameter_r16,
+        _RegionIgpList_r16__item_,
+        RegionIgpList_r16,
+        _RegionIgpElement_r16_regionID_r16,
+        _RegionIgpElement_r16_givei1_r16,
+        _RegionIgpElement_r16_givd1_r16,
+        _RegionIgpElement_r16_givei2_r16,
+        _RegionIgpElement_r16_givd2_r16,
+        _RegionIgpElement_r16_givei3_r16,
+        _RegionIgpElement_r16_givd3_r16,
+        _RegionIgpElement_r16_givei4_r16,
+        _RegionIgpElement_r16_givd4_r16,
+        _RegionIgpElement_r16_givei5_r16,
+        _RegionIgpElement_r16_givd5_r16,
+        _RegionIgpElement_r16_givei6_r16,
+        _RegionIgpElement_r16_givd6_r16,
+        _RegionIgpElement_r16_givei7_r16,
+        _RegionIgpElement_r16_givd7_r16,
+        _RegionIgpElement_r16_givei8_r16,
+        _RegionIgpElement_r16_givd8_r16,
+        _RegionIgpElement_r16_givei9_r16,
+        _RegionIgpElement_r16_givd9_r16,
+        _RegionIgpElement_r16_givei10_r16,
+        _RegionIgpElement_r16_givd10_r16,
+        _RegionIgpElement_r16_givei11_r16,
+        _RegionIgpElement_r16_givd11_r16,
+        _RegionIgpElement_r16_givei12_r16,
+        _RegionIgpElement_r16_givd12_r16,
+        _RegionIgpElement_r16_givei13_r16,
+        _RegionIgpElement_r16_givd13_r16,
+        _RegionIgpElement_r16_givei14_r16,
+        _RegionIgpElement_r16_givd14_r16,
+        _RegionIgpElement_r16_givei15_r16,
+        _RegionIgpElement_r16_givd15_r16,
+        RegionIgpElement_r16,
         _A_GNSS_RequestAssistanceData_gnss_CommonAssistDataReq,
         _A_GNSS_RequestAssistanceData_gnss_GenericAssistDataReq,
         _A_GNSS_RequestAssistanceData_gnss_PeriodicAssistDataReq_r15,
@@ -9371,6 +13893,7 @@ class LPP_PDU_Definitions:
         _GNSS_CommonAssistDataReq_gnss_EarthOrientationParametersReq,
         _GNSS_CommonAssistDataReq_gnss_RTK_ReferenceStationInfoReq_r15,
         _GNSS_CommonAssistDataReq_gnss_RTK_AuxiliaryStationDataReq_r15,
+        _GNSS_CommonAssistDataReq_gnss_SSR_CorrectionPointsReq_r16,
         GNSS_CommonAssistDataReq,
         _GNSS_GenericAssistDataReq__item_,
         GNSS_GenericAssistDataReq,
@@ -9395,6 +13918,12 @@ class LPP_PDU_Definitions:
         _GNSS_GenericAssistDataReqElement_gnss_SSR_OrbitCorrectionsReq_r15,
         _GNSS_GenericAssistDataReqElement_gnss_SSR_ClockCorrectionsReq_r15,
         _GNSS_GenericAssistDataReqElement_gnss_SSR_CodeBiasReq_r15,
+        _GNSS_GenericAssistDataReqElement_gnss_SSR_URA_Req_r16,
+        _GNSS_GenericAssistDataReqElement_gnss_SSR_PhaseBiasReq_r16,
+        _GNSS_GenericAssistDataReqElement_gnss_SSR_STEC_CorrectionReq_r16,
+        _GNSS_GenericAssistDataReqElement_gnss_SSR_GriddedCorrectionReq_r16,
+        _GNSS_GenericAssistDataReqElement_navic_DifferentialCorrectionsReq_r16,
+        _GNSS_GenericAssistDataReqElement_navic_GridModelReq_r16,
         GNSS_GenericAssistDataReqElement,
         _GNSS_PeriodicAssistDataReq_r15_gnss_RTK_PeriodicObservationsReq_r15,
         _GNSS_PeriodicAssistDataReq_r15_glo_RTK_PeriodicBiasInformationReq_r15,
@@ -9404,6 +13933,10 @@ class LPP_PDU_Definitions:
         _GNSS_PeriodicAssistDataReq_r15_gnss_SSR_PeriodicOrbitCorrectionsReq_r15,
         _GNSS_PeriodicAssistDataReq_r15_gnss_SSR_PeriodicClockCorrectionsReq_r15,
         _GNSS_PeriodicAssistDataReq_r15_gnss_SSR_PeriodicCodeBiasReq_r15,
+        _GNSS_PeriodicAssistDataReq_r15_gnss_SSR_PeriodicURA_Req_r16,
+        _GNSS_PeriodicAssistDataReq_r15_gnss_SSR_PeriodicPhaseBiasReq_r16,
+        _GNSS_PeriodicAssistDataReq_r15_gnss_SSR_PeriodicSTEC_CorrectionReq_r16,
+        _GNSS_PeriodicAssistDataReq_r15_gnss_SSR_PeriodicGriddedCorrectionReq_r16,
         GNSS_PeriodicAssistDataReq_r15,
         __GNSS_ReferenceTimeReq_gnss_TimeReqPrefList__item_,
         _GNSS_ReferenceTimeReq_gnss_TimeReqPrefList,
@@ -9413,6 +13946,7 @@ class LPP_PDU_Definitions:
         GNSS_ReferenceLocationReq,
         _GNSS_IonosphericModelReq_klobucharModelReq,
         _GNSS_IonosphericModelReq_neQuickModelReq,
+        _GNSS_IonosphericModelReq_klobucharModel2Req_r16,
         GNSS_IonosphericModelReq,
         GNSS_EarthOrientationParametersReq,
         _GNSS_RTK_ReferenceStationInfoReq_r15_antennaDescriptionReq_r15,
@@ -9422,6 +13956,8 @@ class LPP_PDU_Definitions:
         GNSS_RTK_ReferenceStationInfoReq_r15,
         _GNSS_RTK_AuxiliaryStationDataReq_r15_master_referenceStationID_r15,
         GNSS_RTK_AuxiliaryStationDataReq_r15,
+        _GNSS_SSR_CorrectionPointsReq_r16_correctionPointSetID_Req_r16,
+        GNSS_SSR_CorrectionPointsReq_r16,
         _GNSS_TimeModelListReq__item_,
         GNSS_TimeModelListReq,
         _GNSS_TimeModelElementReq_gnss_TO_IDsReq,
@@ -9502,6 +14038,15 @@ class LPP_PDU_Definitions:
         _GNSS_SSR_CodeBiasReq_r15_signal_and_tracking_mode_ID_Map_r15,
         _GNSS_SSR_CodeBiasReq_r15_storedNavList_r15,
         GNSS_SSR_CodeBiasReq_r15,
+        GNSS_SSR_URA_Req_r16,
+        _GNSS_SSR_PhaseBiasReq_r16_signal_and_tracking_mode_ID_Map_r16,
+        _GNSS_SSR_PhaseBiasReq_r16_storedNavList_r16,
+        GNSS_SSR_PhaseBiasReq_r16,
+        GNSS_SSR_STEC_CorrectionReq_r16,
+        GNSS_SSR_GriddedCorrectionReq_r16,
+        _NavIC_DifferentialCorrectionsReq_r16_dgnss_SignalsReq_r16,
+        NavIC_DifferentialCorrectionsReq_r16,
+        NavIC_GridModelReq_r16,
         _A_GNSS_ProvideLocationInformation_gnss_SignalMeasurementInformation,
         _A_GNSS_ProvideLocationInformation_gnss_LocationInformation,
         _A_GNSS_ProvideLocationInformation_gnss_Error,
@@ -9647,6 +14192,12 @@ class LPP_PDU_Definitions:
         _GNSS_GenericAssistDataSupportElement_gnss_SSR_OrbitCorrectionsSupport_r15,
         _GNSS_GenericAssistDataSupportElement_gnss_SSR_ClockCorrectionsSupport_r15,
         _GNSS_GenericAssistDataSupportElement_gnss_SSR_CodeBiasSupport_r15,
+        _GNSS_GenericAssistDataSupportElement_gnss_SSR_URA_Support_r16,
+        _GNSS_GenericAssistDataSupportElement_gnss_SSR_PhaseBiasSupport_r16,
+        _GNSS_GenericAssistDataSupportElement_gnss_SSR_STEC_CorrectionSupport_r16,
+        _GNSS_GenericAssistDataSupportElement_gnss_SSR_GriddedCorrectionSupport_r16,
+        _GNSS_GenericAssistDataSupportElement_navic_DifferentialCorrectionsSupport_r16,
+        _GNSS_GenericAssistDataSupportElement_navic_GridModelSupport_r16,
         GNSS_GenericAssistDataSupportElement,
         GNSS_TimeModelListSupport,
         _GNSS_DifferentialCorrectionsSupport_gnssSignalIDs,
@@ -9681,6 +14232,14 @@ class LPP_PDU_Definitions:
         GNSS_SSR_ClockCorrectionsSupport_r15,
         _GNSS_SSR_CodeBiasSupport_r15_signal_and_tracking_mode_ID_Sup_r15,
         GNSS_SSR_CodeBiasSupport_r15,
+        GNSS_SSR_URA_Support_r16,
+        _GNSS_SSR_PhaseBiasSupport_r16_signal_and_tracking_mode_ID_Sup_r16,
+        GNSS_SSR_PhaseBiasSupport_r16,
+        GNSS_SSR_STEC_CorrectionSupport_r16,
+        GNSS_SSR_GriddedCorrectionSupport_r16,
+        _NavIC_DifferentialCorrectionsSupport_r16_gnssSignalIDs_r16,
+        NavIC_DifferentialCorrectionsSupport_r16,
+        NavIC_GridModelSupport_r16,
         _A_GNSS_RequestCapabilities_gnss_SupportListReq,
         _A_GNSS_RequestCapabilities_assistanceDataSupportListReq,
         _A_GNSS_RequestCapabilities_locationVelocityTypesReq,
@@ -9821,7 +14380,6 @@ class LPP_PDU_Definitions:
         _MBS_AssistanceDataElement_r14_mbs_AlmanacAssistance_r14,
         _MBS_AssistanceDataElement_r14_mbs_AcquisitionAssistance_r14,
         MBS_AssistanceDataElement_r14,
-        maxMBS_r14,
         _MBS_AlmanacAssistance_r14_transmitterID_r14,
         _MBS_AlmanacAssistance_r14_transmitterLatitude_r14,
         _MBS_AlmanacAssistance_r14_transmitterLongitude_r14,
@@ -9845,6 +14403,7 @@ class LPP_PDU_Definitions:
         __Sensor_MeasurementInformation_r13_uncertainty_r14_range_r14,
         __Sensor_MeasurementInformation_r13_uncertainty_r14_confidence_r14,
         _Sensor_MeasurementInformation_r13_uncertainty_r14,
+        _Sensor_MeasurementInformation_r13_adjustment_r16,
         Sensor_MeasurementInformation_r13,
         _Sensor_MotionInformation_r15_refTime_r15,
         _Sensor_MotionInformation_r15_displacementInfoList_r15,
@@ -9882,12 +14441,14 @@ class LPP_PDU_Definitions:
         _Sensor_RequestLocationInformation_r13_uncompensatedBarometricPressureReq_r13,
         _Sensor_RequestLocationInformation_r13_assistanceAvailability_r14,
         _Sensor_RequestLocationInformation_r13_sensor_MotionInformationReq_r15,
+        _Sensor_RequestLocationInformation_r13_adjustmentReq_r16,
         Sensor_RequestLocationInformation_r13,
         _Sensor_ProvideCapabilities_r13_sensor_Modes_r13,
         _Sensor_ProvideCapabilities_r13_sensor_AssistanceDataSupportList_r14,
         _Sensor_ProvideCapabilities_r13_periodicalReportingSupported_r14,
         _Sensor_ProvideCapabilities_r13_idleStateForMeasurements_r14,
         _Sensor_ProvideCapabilities_r13_sensor_MotionInformationSup_r15,
+        _Sensor_ProvideCapabilities_r13_adjustmentSupported_r16,
         Sensor_ProvideCapabilities_r13,
         _Sensor_AssistanceDataSupportList_r14_validityPeriodSupported_v1520,
         _Sensor_AssistanceDataSupportList_r14_validityAreaSupported_v1520,
@@ -9944,7 +14505,6 @@ class LPP_PDU_Definitions:
         _WLAN_RTT_r13_rttUnits_r13,
         _WLAN_RTT_r13_rttAccuracy_r13,
         WLAN_RTT_r13,
-        maxWLAN_AP_r13,
         _WLAN_RequestLocationInformation_r13_requestedMeasurements_r13,
         _WLAN_RequestLocationInformation_r13_assistanceAvailability_r14,
         WLAN_RequestLocationInformation_r13,
@@ -9969,7 +14529,6 @@ class LPP_PDU_Definitions:
         _WLAN_ProvideAssistanceData_r14_wlan_DataSet_r14,
         _WLAN_ProvideAssistanceData_r14_wlan_Error_r14,
         WLAN_ProvideAssistanceData_r14,
-        maxWLAN_DataSets_r14,
         __WLAN_DataSet_r14_wlan_AP_List_r14__item_,
         _WLAN_DataSet_r14_wlan_AP_List_r14,
         _WLAN_DataSet_r14_supportedChannels_11a_r14,
@@ -10007,7 +14566,6 @@ class LPP_PDU_Definitions:
         _SupportedChannels_11bg_r14_ch13_r14,
         _SupportedChannels_11bg_r14_ch14_r14,
         SupportedChannels_11bg_r14,
-        maxWLAN_AP_r14,
         _WLAN_AP_Data_r14_wlan_AP_Identifier_r14,
         _WLAN_AP_Data_r14_wlan_AP_Location_r14,
         WLAN_AP_Data_r14,
@@ -10027,8 +14585,6 @@ class LPP_PDU_Definitions:
         __WLAN_RequestAssistanceData_r14_wlan_AP_StoredData_r14__item_,
         _WLAN_RequestAssistanceData_r14_wlan_AP_StoredData_r14,
         WLAN_RequestAssistanceData_r14,
-        maxVisibleAPs_r14,
-        maxKnownAPs_r14,
         _BT_ProvideLocationInformation_r13_bt_MeasurementInformation_r13,
         _BT_ProvideLocationInformation_r13_bt_Error_r13,
         BT_ProvideLocationInformation_r13,
@@ -10040,7 +14596,6 @@ class LPP_PDU_Definitions:
         _BT_MeasurementElement_r13_btAddr_r13,
         _BT_MeasurementElement_r13_rssi_r13,
         BT_MeasurementElement_r13,
-        maxBT_Beacon_r13,
         _BT_RequestLocationInformation_r13_requestedMeasurements_r13,
         BT_RequestLocationInformation_r13,
         _BT_ProvideCapabilities_r13_bt_Modes_r13,
@@ -10057,6 +14612,321 @@ class LPP_PDU_Definitions:
         _BT_TargetDeviceErrorCauses_r13_cause_r13,
         _BT_TargetDeviceErrorCauses_r13_bt_Beacon_rssiMeasurementNotPossible_r13,
         BT_TargetDeviceErrorCauses_r13,
+        _NR_UL_ProvideCapabilities_r16_nr_UL_SRS_Capability_r16,
+        NR_UL_ProvideCapabilities_r16,
+        NR_UL_RequestCapabilities_r16,
+        _NR_ECID_ProvideLocationInformation_r16_nr_ECID_SignalMeasurementInformation_r16,
+        _NR_ECID_ProvideLocationInformation_r16_nr_ECID_Error_r16,
+        NR_ECID_ProvideLocationInformation_r16,
+        _NR_ECID_SignalMeasurementInformation_r16_nr_PrimaryCellMeasuredResults_r16,
+        _NR_ECID_SignalMeasurementInformation_r16_nr_MeasuredResultsList_r16,
+        NR_ECID_SignalMeasurementInformation_r16,
+        _NR_MeasuredResultsList_r16__item_,
+        NR_MeasuredResultsList_r16,
+        _NR_MeasuredResultsElement_r16_nr_PhysCellID_r16,
+        __NR_MeasuredResultsElement_r16_nr_ARFCN_r16_ssb_ARFCN_r16,
+        __NR_MeasuredResultsElement_r16_nr_ARFCN_r16_csi_RS_pointA_r16,
+        _NR_MeasuredResultsElement_r16_nr_ARFCN_r16,
+        _NR_MeasuredResultsElement_r16_nr_CellGlobalID_r16,
+        _NR_MeasuredResultsElement_r16_systemFrameNumber_r16,
+        _NR_MeasuredResultsElement_r16_resultsSSB_Cell_r16,
+        _NR_MeasuredResultsElement_r16_resultsCSI_RS_Cell_r16,
+        _NR_MeasuredResultsElement_r16_resultsSSB_Indexes_r16,
+        _NR_MeasuredResultsElement_r16_resultsCSI_RS_Indexes_r16,
+        NR_MeasuredResultsElement_r16,
+        _MeasQuantityResults_r16_nr_RSRP_r16,
+        _MeasQuantityResults_r16_nr_RSRQ_r16,
+        MeasQuantityResults_r16,
+        _ResultsPerSSB_IndexList_r16__item_,
+        ResultsPerSSB_IndexList_r16,
+        _ResultsPerSSB_Index_r16_ssb_Index_r16,
+        _ResultsPerSSB_Index_r16_ssb_Results_r16,
+        ResultsPerSSB_Index_r16,
+        _ResultsPerCSI_RS_IndexList_r16__item_,
+        ResultsPerCSI_RS_IndexList_r16,
+        _ResultsPerCSI_RS_Index_r16_csi_RS_Index_r16,
+        _ResultsPerCSI_RS_Index_r16_csi_RS_Results_r16,
+        ResultsPerCSI_RS_Index_r16,
+        _NR_ECID_RequestLocationInformation_r16_requestedMeasurements_r16,
+        NR_ECID_RequestLocationInformation_r16,
+        _NR_ECID_ProvideCapabilities_r16_nr_ECID_MeasSupported_r16,
+        _NR_ECID_ProvideCapabilities_r16_periodicalReporting_r16,
+        _NR_ECID_ProvideCapabilities_r16_triggeredReporting_r16,
+        NR_ECID_ProvideCapabilities_r16,
+        NR_ECID_RequestCapabilities_r16,
+        _NR_ECID_Error_r16_locationServerErrorCauses_r16,
+        _NR_ECID_Error_r16_targetDeviceErrorCauses_r16,
+        NR_ECID_Error_r16,
+        _NR_ECID_LocationServerErrorCauses_r16_cause_r16,
+        NR_ECID_LocationServerErrorCauses_r16,
+        _NR_ECID_TargetDeviceErrorCauses_r16_cause_r16,
+        _NR_ECID_TargetDeviceErrorCauses_r16_ss_RSRPMeasurementNotPossible_r16,
+        _NR_ECID_TargetDeviceErrorCauses_r16_ss_RSRQMeasurementNotPossible_r16,
+        _NR_ECID_TargetDeviceErrorCauses_r16_csi_RSRPMeasurementNotPossible_r16,
+        _NR_ECID_TargetDeviceErrorCauses_r16_csi_RSRQMeasurementNotPossible_r16,
+        NR_ECID_TargetDeviceErrorCauses_r16,
+        _NR_DL_TDOA_ProvideAssistanceData_r16_nr_DL_PRS_AssistanceData_r16,
+        _NR_DL_TDOA_ProvideAssistanceData_r16_nr_SelectedDL_PRS_IndexList_r16,
+        _NR_DL_TDOA_ProvideAssistanceData_r16_nr_PositionCalculationAssistance_r16,
+        _NR_DL_TDOA_ProvideAssistanceData_r16_nr_DL_TDOA_Error_r16,
+        NR_DL_TDOA_ProvideAssistanceData_r16,
+        _NR_DL_TDOA_RequestAssistanceData_r16_nr_PhysCellID_r16,
+        _NR_DL_TDOA_RequestAssistanceData_r16_nr_AdType_r16,
+        NR_DL_TDOA_RequestAssistanceData_r16,
+        _NR_DL_TDOA_ProvideLocationInformation_r16_nr_DL_TDOA_SignalMeasurementInformation_r16,
+        _NR_DL_TDOA_ProvideLocationInformation_r16_nr_dl_tdoa_LocationInformation_r16,
+        _NR_DL_TDOA_ProvideLocationInformation_r16_nr_DL_TDOA_Error_r16,
+        NR_DL_TDOA_ProvideLocationInformation_r16,
+        _NR_DL_TDOA_SignalMeasurementInformation_r16_dl_PRS_ReferenceInfo_r16,
+        _NR_DL_TDOA_SignalMeasurementInformation_r16_nr_DL_TDOA_MeasList_r16,
+        NR_DL_TDOA_SignalMeasurementInformation_r16,
+        _NR_DL_TDOA_MeasList_r16__item_,
+        NR_DL_TDOA_MeasList_r16,
+        _NR_DL_TDOA_MeasElement_r16_dl_PRS_ID_r16,
+        _NR_DL_TDOA_MeasElement_r16_nr_PhysCellID_r16,
+        _NR_DL_TDOA_MeasElement_r16_nr_CellGlobalID_r16,
+        _NR_DL_TDOA_MeasElement_r16_nr_ARFCN_r16,
+        _NR_DL_TDOA_MeasElement_r16_nr_DL_PRS_ResourceID_r16,
+        _NR_DL_TDOA_MeasElement_r16_nr_DL_PRS_ResourceSetID_r16,
+        _NR_DL_TDOA_MeasElement_r16_nr_TimeStamp_r16,
+        __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k0_r16,
+        __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k1_r16,
+        __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k2_r16,
+        __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k3_r16,
+        __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k4_r16,
+        __NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16_k5_r16,
+        _NR_DL_TDOA_MeasElement_r16_nr_RSTD_r16,
+        _NR_DL_TDOA_MeasElement_r16_nr_AdditionalPathList_r16,
+        _NR_DL_TDOA_MeasElement_r16_nr_TimingQuality_r16,
+        _NR_DL_TDOA_MeasElement_r16_nr_DL_PRS_RSRP_Result_r16,
+        _NR_DL_TDOA_MeasElement_r16_nr_DL_TDOA_AdditionalMeasurements_r16,
+        NR_DL_TDOA_MeasElement_r16,
+        _NR_DL_TDOA_AdditionalMeasurements_r16__item_,
+        NR_DL_TDOA_AdditionalMeasurements_r16,
+        _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_DL_PRS_ResourceID_r16,
+        _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_DL_PRS_ResourceSetID_r16,
+        _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_TimeStamp_r16,
+        __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k0_r16,
+        __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k1_r16,
+        __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k2_r16,
+        __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k3_r16,
+        __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k4_r16,
+        __NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16_k5_r16,
+        _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_RSTD_ResultDiff_r16,
+        _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_TimingQuality_r16,
+        _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_DL_PRS_RSRP_ResultDiff_r16,
+        _NR_DL_TDOA_AdditionalMeasurementElement_r16_nr_AdditionalPathList_r16,
+        NR_DL_TDOA_AdditionalMeasurementElement_r16,
+        __NR_DL_TDOA_LocationInformation_r16_measurementReferenceTime_r16_systemFrameNumber_r16,
+        __NR_DL_TDOA_LocationInformation_r16_measurementReferenceTime_r16_utc_time_r16,
+        _NR_DL_TDOA_LocationInformation_r16_measurementReferenceTime_r16,
+        NR_DL_TDOA_LocationInformation_r16,
+        _NR_DL_TDOA_RequestLocationInformation_r16_nr_DL_PRS_RstdMeasurementInfoRequest_r16,
+        _NR_DL_TDOA_RequestLocationInformation_r16_nr_RequestedMeasurements_r16,
+        _NR_DL_TDOA_RequestLocationInformation_r16_nr_AssistanceAvailability_r16,
+        _NR_DL_TDOA_RequestLocationInformation_r16_nr_DL_TDOA_ReportConfig_r16,
+        _NR_DL_TDOA_RequestLocationInformation_r16_additionalPaths_r16,
+        NR_DL_TDOA_RequestLocationInformation_r16,
+        _NR_DL_TDOA_ReportConfig_r16_maxDL_PRS_RSTD_MeasurementsPerTRPPair_r16,
+        _NR_DL_TDOA_ReportConfig_r16_timingReportingGranularityFactor_r16,
+        NR_DL_TDOA_ReportConfig_r16,
+        _NR_DL_TDOA_ProvideCapabilities_r16_nr_DL_TDOA_Mode_r16,
+        _NR_DL_TDOA_ProvideCapabilities_r16_nr_DL_TDOA_PRS_Capability_r16,
+        _NR_DL_TDOA_ProvideCapabilities_r16_nr_DL_TDOA_MeasurementCapability_r16,
+        _NR_DL_TDOA_ProvideCapabilities_r16_nr_DL_PRS_QCL_ProcessingCapability_r16,
+        _NR_DL_TDOA_ProvideCapabilities_r16_nr_DL_PRS_ProcessingCapability_r16,
+        _NR_DL_TDOA_ProvideCapabilities_r16_additionalPathsReport_r16,
+        _NR_DL_TDOA_ProvideCapabilities_r16_periodicalReporting_r16,
+        NR_DL_TDOA_ProvideCapabilities_r16,
+        _NR_DL_TDOA_MeasurementCapability_r16_dl_RSTD_MeasurementPerPairOfTRP_FR1_r16,
+        _NR_DL_TDOA_MeasurementCapability_r16_dl_RSTD_MeasurementPerPairOfTRP_FR2_r16,
+        _NR_DL_TDOA_MeasurementCapability_r16_supportOfDL_PRS_RSRP_MeasFR1_r16,
+        _NR_DL_TDOA_MeasurementCapability_r16_supportOfDL_PRS_RSRP_MeasFR2_r16,
+        NR_DL_TDOA_MeasurementCapability_r16,
+        NR_DL_TDOA_RequestCapabilities_r16,
+        _NR_DL_TDOA_Error_r16_locationServerErrorCauses_r16,
+        _NR_DL_TDOA_Error_r16_targetDeviceErrorCauses_r16,
+        NR_DL_TDOA_Error_r16,
+        _NR_DL_TDOA_LocationServerErrorCauses_r16_cause_r16,
+        NR_DL_TDOA_LocationServerErrorCauses_r16,
+        _NR_DL_TDOA_TargetDeviceErrorCauses_r16_cause_r16,
+        NR_DL_TDOA_TargetDeviceErrorCauses_r16,
+        _NR_DL_AoD_ProvideAssistanceData_r16_nr_DL_PRS_AssistanceData_r16,
+        _NR_DL_AoD_ProvideAssistanceData_r16_nr_SelectedDL_PRS_IndexList_r16,
+        _NR_DL_AoD_ProvideAssistanceData_r16_nr_PositionCalculationAssistance_r16,
+        _NR_DL_AoD_ProvideAssistanceData_r16_nr_DL_AoD_Error_r16,
+        NR_DL_AoD_ProvideAssistanceData_r16,
+        _NR_DL_AoD_RequestAssistanceData_r16_nr_PhysCellID_r16,
+        _NR_DL_AoD_RequestAssistanceData_r16_nr_AdType_r16,
+        NR_DL_AoD_RequestAssistanceData_r16,
+        _NR_DL_AoD_ProvideLocationInformation_r16_nr_DL_AoD_SignalMeasurementInformation_r16,
+        _NR_DL_AoD_ProvideLocationInformation_r16_nr_dl_AoD_LocationInformation_r16,
+        _NR_DL_AoD_ProvideLocationInformation_r16_nr_DL_AoD_Error_r16,
+        NR_DL_AoD_ProvideLocationInformation_r16,
+        _NR_DL_AoD_SignalMeasurementInformation_r16_nr_DL_AoD_MeasList_r16,
+        NR_DL_AoD_SignalMeasurementInformation_r16,
+        _NR_DL_AoD_MeasList_r16__item_,
+        NR_DL_AoD_MeasList_r16,
+        _NR_DL_AoD_MeasElement_r16_dl_PRS_ID_r16,
+        _NR_DL_AoD_MeasElement_r16_nr_PhysCellID_r16,
+        _NR_DL_AoD_MeasElement_r16_nr_CellGlobalID_r16,
+        _NR_DL_AoD_MeasElement_r16_nr_ARFCN_r16,
+        _NR_DL_AoD_MeasElement_r16_nr_DL_PRS_ResourceID_r16,
+        _NR_DL_AoD_MeasElement_r16_nr_DL_PRS_ResourceSetID_r16,
+        _NR_DL_AoD_MeasElement_r16_nr_TimeStamp_r16,
+        _NR_DL_AoD_MeasElement_r16_nr_DL_PRS_RSRP_Result_r16,
+        _NR_DL_AoD_MeasElement_r16_nr_DL_PRS_RxBeamIndex_r16,
+        _NR_DL_AoD_MeasElement_r16_nr_DL_AoD_AdditionalMeasurements_r16,
+        NR_DL_AoD_MeasElement_r16,
+        _NR_DL_AoD_AdditionalMeasurements_r16__item_,
+        NR_DL_AoD_AdditionalMeasurements_r16,
+        _NR_DL_AoD_AdditionalMeasurementElement_r16_nr_DL_PRS_ResourceID_r16,
+        _NR_DL_AoD_AdditionalMeasurementElement_r16_nr_DL_PRS_ResourceSetID_r16,
+        _NR_DL_AoD_AdditionalMeasurementElement_r16_nr_TimeStamp_r16,
+        _NR_DL_AoD_AdditionalMeasurementElement_r16_nr_DL_PRS_RSRP_ResultDiff_r16,
+        _NR_DL_AoD_AdditionalMeasurementElement_r16_nr_DL_PRS_RxBeamIndex_r16,
+        NR_DL_AoD_AdditionalMeasurementElement_r16,
+        __NR_DL_AoD_LocationInformation_r16_measurementReferenceTime_r16_sfn_time_r16,
+        __NR_DL_AoD_LocationInformation_r16_measurementReferenceTime_r16_utc_time_r16,
+        _NR_DL_AoD_LocationInformation_r16_measurementReferenceTime_r16,
+        NR_DL_AoD_LocationInformation_r16,
+        _NR_DL_AoD_RequestLocationInformation_r16_nr_AssistanceAvailability_r16,
+        _NR_DL_AoD_RequestLocationInformation_r16_nr_DL_AoD_ReportConfig_r16,
+        NR_DL_AoD_RequestLocationInformation_r16,
+        _NR_DL_AoD_ReportConfig_r16_maxDL_PRS_RSRP_MeasurementsPerTRP_r16,
+        NR_DL_AoD_ReportConfig_r16,
+        _NR_DL_AoD_ProvideCapabilities_r16_nr_DL_AoD_Mode_r16,
+        _NR_DL_AoD_ProvideCapabilities_r16_nr_DL_AoD_PRS_Capability_r16,
+        _NR_DL_AoD_ProvideCapabilities_r16_nr_DL_AoD_MeasurementCapability_r16,
+        _NR_DL_AoD_ProvideCapabilities_r16_nr_DL_PRS_QCL_ProcessingCapability_r16,
+        _NR_DL_AoD_ProvideCapabilities_r16_nr_DL_PRS_ProcessingCapability_r16,
+        _NR_DL_AoD_ProvideCapabilities_r16_periodicalReporting_r16,
+        NR_DL_AoD_ProvideCapabilities_r16,
+        _NR_DL_AoD_MeasurementCapability_r16_maxDL_PRS_RSRP_MeasurementFR1_r16,
+        _NR_DL_AoD_MeasurementCapability_r16_maxDL_PRS_RSRP_MeasurementFR2_r16,
+        __NR_DL_AoD_MeasurementCapability_r16_dl_AoD_MeasCapabilityBandList_r16__item_,
+        _NR_DL_AoD_MeasurementCapability_r16_dl_AoD_MeasCapabilityBandList_r16,
+        NR_DL_AoD_MeasurementCapability_r16,
+        _DL_AoD_MeasCapabilityPerBand_r16_freqBandIndicatorNR_r16,
+        _DL_AoD_MeasCapabilityPerBand_r16_simul_NR_DL_AoD_DL_TDOA_r16,
+        _DL_AoD_MeasCapabilityPerBand_r16_simul_NR_DL_AoD_Multi_RTT_r16,
+        DL_AoD_MeasCapabilityPerBand_r16,
+        NR_DL_AoD_RequestCapabilities_r16,
+        _NR_DL_AoD_Error_r16_locationServerErrorCauses_r16,
+        _NR_DL_AoD_Error_r16_targetDeviceErrorCauses_r16,
+        NR_DL_AoD_Error_r16,
+        _NR_DL_AoD_LocationServerErrorCauses_r16_cause_r16,
+        NR_DL_AoD_LocationServerErrorCauses_r16,
+        _NR_DL_AoD_TargetDeviceErrorCauses_r16_cause_r16,
+        NR_DL_AoD_TargetDeviceErrorCauses_r16,
+        _NR_Multi_RTT_ProvideAssistanceData_r16_nr_DL_PRS_AssistanceData_r16,
+        _NR_Multi_RTT_ProvideAssistanceData_r16_nr_SelectedDL_PRS_IndexList_r16,
+        _NR_Multi_RTT_ProvideAssistanceData_r16_nr_Multi_RTT_Error_r16,
+        NR_Multi_RTT_ProvideAssistanceData_r16,
+        _NR_Multi_RTT_RequestAssistanceData_r16_nr_PhysCellID_r16,
+        _NR_Multi_RTT_RequestAssistanceData_r16_nr_AdType_r16,
+        NR_Multi_RTT_RequestAssistanceData_r16,
+        _NR_Multi_RTT_ProvideLocationInformation_r16_nr_Multi_RTT_SignalMeasurementInformation_r16,
+        _NR_Multi_RTT_ProvideLocationInformation_r16_nr_Multi_RTT_Error_r16,
+        NR_Multi_RTT_ProvideLocationInformation_r16,
+        _NR_Multi_RTT_SignalMeasurementInformation_r16_nr_Multi_RTT_MeasList_r16,
+        _NR_Multi_RTT_SignalMeasurementInformation_r16_nr_NTA_Offset_r16,
+        NR_Multi_RTT_SignalMeasurementInformation_r16,
+        _NR_Multi_RTT_MeasList_r16__item_,
+        NR_Multi_RTT_MeasList_r16,
+        _NR_Multi_RTT_MeasElement_r16_dl_PRS_ID_r16,
+        _NR_Multi_RTT_MeasElement_r16_nr_PhysCellID_r16,
+        _NR_Multi_RTT_MeasElement_r16_nr_CellGlobalID_r16,
+        _NR_Multi_RTT_MeasElement_r16_nr_ARFCN_r16,
+        _NR_Multi_RTT_MeasElement_r16_nr_DL_PRS_ResourceID_r16,
+        _NR_Multi_RTT_MeasElement_r16_nr_DL_PRS_ResourceSetID_r16,
+        __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k0_r16,
+        __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k1_r16,
+        __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k2_r16,
+        __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k3_r16,
+        __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k4_r16,
+        __NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16_k5_r16,
+        _NR_Multi_RTT_MeasElement_r16_nr_UE_RxTxTimeDiff_r16,
+        _NR_Multi_RTT_MeasElement_r16_nr_AdditionalPathList_r16,
+        _NR_Multi_RTT_MeasElement_r16_nr_TimeStamp_r16,
+        _NR_Multi_RTT_MeasElement_r16_nr_TimingQuality_r16,
+        _NR_Multi_RTT_MeasElement_r16_nr_DL_PRS_RSRP_Result_r16,
+        _NR_Multi_RTT_MeasElement_r16_nr_Multi_RTT_AdditionalMeasurements_r16,
+        NR_Multi_RTT_MeasElement_r16,
+        _NR_Multi_RTT_AdditionalMeasurements_r16__item_,
+        NR_Multi_RTT_AdditionalMeasurements_r16,
+        _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_DL_PRS_ResourceID_r16,
+        _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_DL_PRS_ResourceSetID_r16,
+        _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_DL_PRS_RSRP_ResultDiff_r16,
+        __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k0_r16,
+        __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k1_r16,
+        __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k2_r16,
+        __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k3_r16,
+        __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k4_r16,
+        __NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16_k5_r16,
+        _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_UE_RxTxTimeDiffAdditional_r16,
+        _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_TimingQuality_r16,
+        _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_AdditionalPathList_r16,
+        _NR_Multi_RTT_AdditionalMeasurementElement_r16_nr_TimeStamp_r16,
+        NR_Multi_RTT_AdditionalMeasurementElement_r16,
+        _NR_Multi_RTT_RequestLocationInformation_r16_nr_UE_RxTxTimeDiffMeasurementInfoRequest_r16,
+        _NR_Multi_RTT_RequestLocationInformation_r16_nr_RequestedMeasurements_r16,
+        _NR_Multi_RTT_RequestLocationInformation_r16_nr_AssistanceAvailability_r16,
+        _NR_Multi_RTT_RequestLocationInformation_r16_nr_Multi_RTT_ReportConfig_r16,
+        _NR_Multi_RTT_RequestLocationInformation_r16_additionalPaths_r16,
+        NR_Multi_RTT_RequestLocationInformation_r16,
+        _NR_Multi_RTT_ReportConfig_r16_maxDL_PRS_RxTxTimeDiffMeasPerTRP_r16,
+        _NR_Multi_RTT_ReportConfig_r16_timingReportingGranularityFactor_r16,
+        NR_Multi_RTT_ReportConfig_r16,
+        _NR_Multi_RTT_ProvideCapabilities_r16_nr_Multi_RTT_PRS_Capability_r16,
+        _NR_Multi_RTT_ProvideCapabilities_r16_nr_Multi_RTT_MeasurementCapability_r16,
+        _NR_Multi_RTT_ProvideCapabilities_r16_nr_DL_PRS_QCL_ProcessingCapability_r16,
+        _NR_Multi_RTT_ProvideCapabilities_r16_nr_DL_PRS_ProcessingCapability_r16,
+        _NR_Multi_RTT_ProvideCapabilities_r16_nr_UL_SRS_Capability_r16,
+        _NR_Multi_RTT_ProvideCapabilities_r16_additionalPathsReport_r16,
+        _NR_Multi_RTT_ProvideCapabilities_r16_periodicalReporting_r16,
+        NR_Multi_RTT_ProvideCapabilities_r16,
+        _NR_Multi_RTT_MeasurementCapability_r16_maxNrOfRx_TX_MeasFR1_r16,
+        _NR_Multi_RTT_MeasurementCapability_r16_maxNrOfRx_TX_MeasFR2_r16,
+        _NR_Multi_RTT_MeasurementCapability_r16_supportOfRSRP_MeasFR1_r16,
+        _NR_Multi_RTT_MeasurementCapability_r16_supportOfRSRP_MeasFR2_r16,
+        _NR_Multi_RTT_MeasurementCapability_r16_srs_AssocPRS_MultiLayersFR1_r16,
+        _NR_Multi_RTT_MeasurementCapability_r16_srs_AssocPRS_MultiLayersFR2_r16,
+        NR_Multi_RTT_MeasurementCapability_r16,
+        NR_Multi_RTT_RequestCapabilities_r16,
+        _NR_Multi_RTT_Error_r16_locationServerErrorCauses_r16,
+        _NR_Multi_RTT_Error_r16_targetDeviceErrorCauses_r16,
+        NR_Multi_RTT_Error_r16,
+        _NR_Multi_RTT_LocationServerErrorCauses_r16_cause_r16,
+        NR_Multi_RTT_LocationServerErrorCauses_r16,
+        _NR_Multi_RTT_TargetDeviceErrorCauses_r16_cause_r16,
+        NR_Multi_RTT_TargetDeviceErrorCauses_r16,
+        maxEARFCN,
+        maxEARFCN_Plus1,
+        maxEARFCN2,
+        maxMBS_r14,
+        maxWLAN_AP_r13,
+        maxKnownAPs_r14,
+        maxVisibleAPs_r14,
+        maxWLAN_AP_r14,
+        maxWLAN_DataSets_r14,
+        maxBT_Beacon_r13,
+        nrMaxBands_r16,
+        nrMaxFreqLayers_r16,
+        nrMaxFreqLayers_1_r16,
+        nrMaxNumDL_PRS_ResourcesPerSet_1_r16,
+        nrMaxNumDL_PRS_ResourceSetsPerTRP_1_r16,
+        nrMaxResourceIDs_r16,
+        nrMaxResourceOffsetValue_1_r16,
+        nrMaxResourcesPerSet_r16,
+        nrMaxSetsPerTrpPerFreqLayer_r16,
+        nrMaxSetsPerTrpPerFreqLayer_1_r16,
+        nrMaxTRPs_r16,
+        nrMaxTRPsPerFreq_r16,
+        nrMaxTRPsPerFreq_1_r16,
+        maxSimultaneousBands_r16,
+        maxBandComb_r16,
+        nrMaxConfiguredBands_r16,
     ]
 
-init_modules(LPP_PDU_Definitions)
+init_modules(LPP_Broadcast_Definitions, LPP_PDU_Definitions)

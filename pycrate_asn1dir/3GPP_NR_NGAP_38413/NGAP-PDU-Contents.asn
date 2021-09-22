@@ -5,11 +5,11 @@
 --
 -- **************************************************************
 
-NGAP-PDU-Contents { 
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+NGAP-PDU-Contents {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 ngran-Access (22) modules (3) ngap (1) version1 (1) ngap-PDU-Contents (1) }
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -353,7 +353,7 @@ FROM NGAP-Containers
 	id-RANNodeName,
 	id-RANPagingPriority,
 	id-RANStatusTransfer-TransparentContainer,
-	id-RAN-UE-NGAP-ID, 
+	id-RAN-UE-NGAP-ID,
 	id-RedirectionVoiceFallback,
 	id-RelativeAMFCapacity,
 	id-RepetitionPeriod,
@@ -471,7 +471,7 @@ PDUSessionResourceSetupResponseIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-PDUSessionResourceSetupListSURes			CRITICALITY ignore	TYPE PDUSessionResourceSetupListSURes				PRESENCE optional		}|
 	{ ID id-PDUSessionResourceFailedToSetupListSURes	CRITICALITY ignore	TYPE PDUSessionResourceFailedToSetupListSURes		PRESENCE optional		}|
 	{ ID id-CriticalityDiagnostics						CRITICALITY ignore	TYPE CriticalityDiagnostics								PRESENCE optional		},
-	...	
+	...
 }
 
 
@@ -878,7 +878,7 @@ UEContextResumeFailure ::= SEQUENCE {
 	...
 }
 
-UEContextResumeFailureIEs NGAP-PROTOCOL-IES ::= {	
+UEContextResumeFailureIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-AMF-UE-NGAP-ID				CRITICALITY ignore	TYPE AMF-UE-NGAP-ID				PRESENCE mandatory	}|
 	{ ID id-RAN-UE-NGAP-ID				CRITICALITY ignore	TYPE RAN-UE-NGAP-ID				PRESENCE mandatory	}|
 	{ ID id-Cause						CRITICALITY ignore	TYPE Cause						PRESENCE mandatory	}|
@@ -942,7 +942,7 @@ UEContextSuspendFailure ::= SEQUENCE {
 	...
 }
 
-UEContextSuspendFailureIEs NGAP-PROTOCOL-IES ::= {	
+UEContextSuspendFailureIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-AMF-UE-NGAP-ID				CRITICALITY ignore	TYPE AMF-UE-NGAP-ID				PRESENCE mandatory	}|
 	{ ID id-RAN-UE-NGAP-ID				CRITICALITY ignore	TYPE RAN-UE-NGAP-ID				PRESENCE mandatory	}|
 	{ ID id-Cause						CRITICALITY ignore	TYPE Cause						PRESENCE mandatory	}|
@@ -1004,7 +1004,7 @@ UEContextModificationResponse ::= SEQUENCE {
 	...
 }
 
-UEContextModificationResponseIEs NGAP-PROTOCOL-IES ::= {	
+UEContextModificationResponseIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-AMF-UE-NGAP-ID				CRITICALITY ignore	TYPE AMF-UE-NGAP-ID				PRESENCE mandatory	}|
 	{ ID id-RAN-UE-NGAP-ID				CRITICALITY ignore	TYPE RAN-UE-NGAP-ID				PRESENCE mandatory	}|
 	{ ID id-RRCState					CRITICALITY ignore	TYPE RRCState					PRESENCE optional		}|
@@ -1024,7 +1024,7 @@ UEContextModificationFailure ::= SEQUENCE {
 	...
 }
 
-UEContextModificationFailureIEs NGAP-PROTOCOL-IES ::= {	
+UEContextModificationFailureIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-AMF-UE-NGAP-ID				CRITICALITY ignore	TYPE AMF-UE-NGAP-ID				PRESENCE mandatory	}|
 	{ ID id-RAN-UE-NGAP-ID				CRITICALITY ignore	TYPE RAN-UE-NGAP-ID				PRESENCE mandatory	}|
 	{ ID id-Cause						CRITICALITY ignore	TYPE Cause						PRESENCE mandatory	}|
@@ -1053,7 +1053,7 @@ RRCInactiveTransitionReportIEs NGAP-PROTOCOL-IES ::= {
 
 -- **************************************************************
 --
--- Retrieve UE Information 
+-- Retrieve UE Information
 --
 -- **************************************************************
 
@@ -1132,7 +1132,7 @@ HandoverRequired ::= SEQUENCE {
 	...
 }
 
-HandoverRequiredIEs NGAP-PROTOCOL-IES ::= {	
+HandoverRequiredIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-AMF-UE-NGAP-ID							CRITICALITY reject	TYPE AMF-UE-NGAP-ID									PRESENCE mandatory	}|
 	{ ID id-RAN-UE-NGAP-ID							CRITICALITY reject	TYPE RAN-UE-NGAP-ID									PRESENCE mandatory	}|
 	{ ID id-HandoverType							CRITICALITY reject	TYPE HandoverType									PRESENCE mandatory	}|
@@ -1155,7 +1155,7 @@ HandoverCommand ::= SEQUENCE {
 	...
 }
 
-HandoverCommandIEs NGAP-PROTOCOL-IES ::= {	
+HandoverCommandIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-AMF-UE-NGAP-ID								CRITICALITY reject	TYPE AMF-UE-NGAP-ID											PRESENCE mandatory	}|
 	{ ID id-RAN-UE-NGAP-ID								CRITICALITY reject	TYPE RAN-UE-NGAP-ID											PRESENCE mandatory	}|
 	{ ID id-HandoverType								CRITICALITY reject	TYPE HandoverType											PRESENCE mandatory	}|
@@ -1180,7 +1180,7 @@ HandoverPreparationFailure ::= SEQUENCE {
 	...
 }
 
-HandoverPreparationFailureIEs NGAP-PROTOCOL-IES ::= {	
+HandoverPreparationFailureIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-AMF-UE-NGAP-ID				CRITICALITY ignore	TYPE AMF-UE-NGAP-ID				PRESENCE mandatory	}|
 	{ ID id-RAN-UE-NGAP-ID				CRITICALITY ignore	TYPE RAN-UE-NGAP-ID				PRESENCE mandatory	}|
 	{ ID id-Cause						CRITICALITY ignore	TYPE Cause						PRESENCE mandatory	}|
@@ -1277,7 +1277,7 @@ HandoverFailure ::= SEQUENCE {
 	...
 }
 
-HandoverFailureIEs NGAP-PROTOCOL-IES ::= {	
+HandoverFailureIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-AMF-UE-NGAP-ID				CRITICALITY ignore	TYPE AMF-UE-NGAP-ID				PRESENCE mandatory	}|
 	{ ID id-Cause						CRITICALITY ignore	TYPE Cause						PRESENCE mandatory	}|
 	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional		}|
@@ -1302,7 +1302,7 @@ HandoverNotify ::= SEQUENCE {
 	...
 }
 
-HandoverNotifyIEs NGAP-PROTOCOL-IES ::= {	
+HandoverNotifyIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-AMF-UE-NGAP-ID				CRITICALITY reject	TYPE AMF-UE-NGAP-ID				PRESENCE mandatory	}|
 	{ ID id-RAN-UE-NGAP-ID				CRITICALITY reject	TYPE RAN-UE-NGAP-ID				PRESENCE mandatory	}|
 	{ ID id-UserLocationInformation		CRITICALITY ignore	TYPE UserLocationInformation	PRESENCE mandatory	}|
@@ -1327,7 +1327,7 @@ PathSwitchRequest ::= SEQUENCE {
 	...
 }
 
-PathSwitchRequestIEs NGAP-PROTOCOL-IES ::= {	
+PathSwitchRequestIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-RAN-UE-NGAP-ID								CRITICALITY reject	TYPE RAN-UE-NGAP-ID											PRESENCE mandatory	}|
 	{ ID id-SourceAMF-UE-NGAP-ID						CRITICALITY reject	TYPE AMF-UE-NGAP-ID											PRESENCE mandatory	}|
 	{ ID id-UserLocationInformation						CRITICALITY ignore	TYPE UserLocationInformation							PRESENCE mandatory	}|
@@ -1350,7 +1350,7 @@ PathSwitchRequestAcknowledge ::= SEQUENCE {
 	...
 }
 
-PathSwitchRequestAcknowledgeIEs NGAP-PROTOCOL-IES ::= {	
+PathSwitchRequestAcknowledgeIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-AMF-UE-NGAP-ID								CRITICALITY ignore	TYPE AMF-UE-NGAP-ID										PRESENCE mandatory	}|
 	{ ID id-RAN-UE-NGAP-ID								CRITICALITY ignore	TYPE RAN-UE-NGAP-ID										PRESENCE mandatory	}|
 	{ ID id-UESecurityCapabilities						CRITICALITY reject	TYPE UESecurityCapabilities							PRESENCE optional		}|
@@ -1391,7 +1391,7 @@ PathSwitchRequestFailure ::= SEQUENCE {
 	...
 }
 
-PathSwitchRequestFailureIEs NGAP-PROTOCOL-IES ::= {	
+PathSwitchRequestFailureIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-AMF-UE-NGAP-ID							CRITICALITY ignore	TYPE AMF-UE-NGAP-ID									PRESENCE mandatory	}|
 	{ ID id-RAN-UE-NGAP-ID							CRITICALITY ignore	TYPE RAN-UE-NGAP-ID									PRESENCE mandatory	}|
 	{ ID id-PDUSessionResourceReleasedListPSFail	CRITICALITY ignore	TYPE PDUSessionResourceReleasedListPSFail	PRESENCE mandatory	}|
@@ -1416,7 +1416,7 @@ HandoverCancel ::= SEQUENCE {
 	...
 }
 
-HandoverCancelIEs NGAP-PROTOCOL-IES ::= {	
+HandoverCancelIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-AMF-UE-NGAP-ID		CRITICALITY reject	TYPE AMF-UE-NGAP-ID		PRESENCE mandatory	}|
 	{ ID id-RAN-UE-NGAP-ID		CRITICALITY reject	TYPE RAN-UE-NGAP-ID		PRESENCE mandatory	}|
 	{ ID id-Cause				CRITICALITY ignore	TYPE Cause				PRESENCE mandatory	},
@@ -1434,7 +1434,7 @@ HandoverCancelAcknowledge ::= SEQUENCE {
 	...
 }
 
-HandoverCancelAcknowledgeIEs NGAP-PROTOCOL-IES ::= {	
+HandoverCancelAcknowledgeIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-AMF-UE-NGAP-ID				CRITICALITY ignore	TYPE AMF-UE-NGAP-ID				PRESENCE mandatory	}|
 	{ ID id-RAN-UE-NGAP-ID				CRITICALITY ignore	TYPE RAN-UE-NGAP-ID				PRESENCE mandatory	}|
 	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional		},
@@ -1458,7 +1458,7 @@ HandoverSuccess ::= SEQUENCE {
 	...
 }
 
-HandoverSuccessIEs NGAP-PROTOCOL-IES ::= {	
+HandoverSuccessIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-AMF-UE-NGAP-ID		CRITICALITY reject	TYPE AMF-UE-NGAP-ID		PRESENCE mandatory	}|
 	{ ID id-RAN-UE-NGAP-ID		CRITICALITY reject	TYPE RAN-UE-NGAP-ID		PRESENCE mandatory	},
 	...
@@ -1810,7 +1810,7 @@ NGSetupFailureIEs NGAP-PROTOCOL-IES ::= {
 
 -- **************************************************************
 --
--- RAN CONFIGURATION UPDATE 
+-- RAN CONFIGURATION UPDATE
 --
 -- **************************************************************
 
@@ -1872,7 +1872,7 @@ RANConfigurationUpdateFailureIEs NGAP-PROTOCOL-IES ::= {
 
 -- **************************************************************
 --
--- AMF CONFIGURATION UPDATE 
+-- AMF CONFIGURATION UPDATE
 --
 -- **************************************************************
 
@@ -2028,7 +2028,7 @@ OverloadStart ::= SEQUENCE {
 	...
 }
 
-OverloadStartIEs NGAP-PROTOCOL-IES ::= {	
+OverloadStartIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-AMFOverloadResponse						CRITICALITY reject	TYPE OverloadResponse							PRESENCE optional 	}|
 	{ ID id-AMFTrafficLoadReductionIndication		CRITICALITY ignore	TYPE TrafficLoadReductionIndication		PRESENCE optional		}|
 	{ ID id-OverloadStartNSSAIList					CRITICALITY ignore	TYPE OverloadStartNSSAIList					PRESENCE optional		},
@@ -2046,7 +2046,7 @@ OverloadStop ::= SEQUENCE {
 	...
 }
 
-OverloadStopIEs NGAP-PROTOCOL-IES ::= {	
+OverloadStopIEs NGAP-PROTOCOL-IES ::= {
 	...
 }
 
@@ -2094,7 +2094,7 @@ DownlinkRANConfigurationTransferIEs NGAP-PROTOCOL-IES ::= {
 
 -- **************************************************************
 --
--- WARNING MESSAGE TRANSMISSION ELEMENTARY PROCEDURES 
+-- WARNING MESSAGE TRANSMISSION ELEMENTARY PROCEDURES
 --
 -- **************************************************************
 
@@ -2115,7 +2115,7 @@ WriteReplaceWarningRequest ::= SEQUENCE {
 	...
 }
 
-WriteReplaceWarningRequestIEs NGAP-PROTOCOL-IES ::= {	
+WriteReplaceWarningRequestIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-MessageIdentifier				CRITICALITY reject	TYPE MessageIdentifier					PRESENCE mandatory	}|
 	{ ID id-SerialNumber					CRITICALITY reject	TYPE SerialNumber						PRESENCE mandatory	}|
 	{ ID id-WarningAreaList					CRITICALITY ignore	TYPE WarningAreaList					PRESENCE optional		}|
@@ -2166,7 +2166,7 @@ PWSCancelRequest ::= SEQUENCE {
 	...
 }
 
-PWSCancelRequestIEs NGAP-PROTOCOL-IES ::= {	
+PWSCancelRequestIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-MessageIdentifier			CRITICALITY reject	TYPE MessageIdentifier				PRESENCE mandatory	}|
 	{ ID id-SerialNumber				CRITICALITY reject	TYPE SerialNumber					PRESENCE mandatory	}|
 	{ ID id-WarningAreaList				CRITICALITY ignore	TYPE WarningAreaList				PRESENCE optional	}|
@@ -2530,7 +2530,7 @@ UERadioCapabilityCheckRequest ::= SEQUENCE {
 	...
 }
 
-UERadioCapabilityCheckRequestIEs NGAP-PROTOCOL-IES ::= {	
+UERadioCapabilityCheckRequestIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-AMF-UE-NGAP-ID			CRITICALITY reject	TYPE AMF-UE-NGAP-ID			PRESENCE mandatory	}|
 	{ ID id-RAN-UE-NGAP-ID			CRITICALITY reject	TYPE RAN-UE-NGAP-ID			PRESENCE mandatory	}|
 	{ ID id-UERadioCapability		CRITICALITY ignore	TYPE UERadioCapability		PRESENCE optional	}|
@@ -2549,7 +2549,7 @@ UERadioCapabilityCheckResponse ::= SEQUENCE {
 	...
 }
 
-UERadioCapabilityCheckResponseIEs NGAP-PROTOCOL-IES ::= {	
+UERadioCapabilityCheckResponseIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-AMF-UE-NGAP-ID					CRITICALITY ignore	TYPE AMF-UE-NGAP-ID					PRESENCE mandatory	}|
 	{ ID id-RAN-UE-NGAP-ID					CRITICALITY ignore	TYPE RAN-UE-NGAP-ID					PRESENCE mandatory	}|
 	{ ID id-IMSVoiceSupportIndicator		CRITICALITY reject	TYPE IMSVoiceSupportIndicator		PRESENCE mandatory	}|

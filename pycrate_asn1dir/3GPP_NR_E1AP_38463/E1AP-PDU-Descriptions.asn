@@ -9,7 +9,7 @@ E1AP-PDU-Descriptions {
 itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 ngran-access (22) modules (3) e1ap (5) version1 (1) e1ap-PDU-Descriptions (0) }
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -29,10 +29,10 @@ FROM E1AP-CommonDataTypes
 	ErrorIndication,
 	GNB-CU-UP-E1SetupRequest,
 	GNB-CU-UP-E1SetupResponse,
-	GNB-CU-UP-E1SetupFailure, 
+	GNB-CU-UP-E1SetupFailure,
 	GNB-CU-CP-E1SetupRequest,
 	GNB-CU-CP-E1SetupResponse,
-	GNB-CU-CP-E1SetupFailure, 
+	GNB-CU-CP-E1SetupFailure,
 	GNB-CU-UP-ConfigurationUpdate,
 	GNB-CU-UP-ConfigurationUpdateAcknowledge,
 	GNB-CU-UP-ConfigurationUpdateFailure,
@@ -59,7 +59,19 @@ FROM E1AP-CommonDataTypes
 	GNB-CU-UP-CounterCheckRequest,
 	GNB-CU-UP-StatusIndication,
 	MRDC-DataUsageReport,
-	PrivateMessage
+	DeactivateTrace,
+	TraceStart,
+	PrivateMessage,
+	ResourceStatusRequest,
+	ResourceStatusResponse,
+	ResourceStatusFailure,
+	ResourceStatusUpdate,
+	IAB-UPTNLAddressUpdate,
+	IAB-UPTNLAddressUpdateAcknowledge,
+	IAB-UPTNLAddressUpdateFailure,
+	CellTrafficTrace,
+	EarlyForwardingSNTransfer,
+	GNB-CU-CPMeasurementResultsInformation
 
 FROM E1AP-PDU-Contents
 	id-reset,
@@ -81,7 +93,15 @@ FROM E1AP-PDU-Contents
 	id-gNB-CU-UP-CounterCheck,
 	id-gNB-CU-UP-StatusIndication,
 	id-mRDC-DataUsageReport,
-	id-privateMessage
+	id-DeactivateTrace,
+	id-TraceStart,
+	id-privateMessage,
+	id-resourceStatusReportingInitiation,
+	id-resourceStatusReporting,
+	id-iAB-UPTNLAddressUpdate,
+	id-CellTrafficTrace,
+	id-earlyForwardingSNTransfer,
+	id-gNB-CU-CPMeasurementResultsInformation
 
 FROM E1AP-Constants;
 
@@ -94,7 +114,7 @@ FROM E1AP-Constants;
 E1AP-ELEMENTARY-PROCEDURE ::= CLASS {
 	&InitiatingMessage				,
 	&SuccessfulOutcome							OPTIONAL,
-	
+
 &UnsuccessfulOutcome						OPTIONAL,
 	&procedureCode				ProcedureCode 	UNIQUE,
 	&criticality				Criticality 	DEFAULT ignore
@@ -161,7 +181,9 @@ E1AP-ELEMENTARY-PROCEDURES-CLASS-1 E1AP-ELEMENTARY-PROCEDURE ::= {
 	bearerContextSetup							|
 	bearerContextModification					|
 	bearerContextModificationRequired			|
-	bearerContextRelease						,
+	bearerContextRelease						|
+	resourceStatusReportingInitiation			|
+	iAB-UPTNLAddressUpdate						,
 	...
 }
 
@@ -175,7 +197,13 @@ E1AP-ELEMENTARY-PROCEDURES-CLASS-2 E1AP-ELEMENTARY-PROCEDURE ::= {
 	gNB-CU-UP-CounterCheck					|
 	gNB-CU-UP-StatusIndication			|
 	mRDC-DataUsageReport					|
-	privateMessage							,
+	deactivateTrace							|
+	traceStart								|
+	privateMessage							|
+	cellTrafficTrace						|
+	resourceStatusReporting					|
+	earlyForwardingSNTransfer				|
+	gNB-CU-CPMeasurementResultsInformation,
 	...
 }
 
@@ -315,9 +343,61 @@ privateMessage E1AP-ELEMENTARY-PROCEDURE ::= {
 	CRITICALITY				ignore
 }
 
+gNB-CU-CPMeasurementResultsInformation E1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		GNB-CU-CPMeasurementResultsInformation
+	PROCEDURE CODE			id-gNB-CU-CPMeasurementResultsInformation
+	CRITICALITY				ignore
+}
+
 mRDC-DataUsageReport	E1AP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		MRDC-DataUsageReport
 	PROCEDURE CODE			id-mRDC-DataUsageReport
+	CRITICALITY				ignore
+}
+
+deactivateTrace E1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		DeactivateTrace
+	PROCEDURE CODE			id-DeactivateTrace
+	CRITICALITY				ignore
+}
+
+traceStart E1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		TraceStart
+	PROCEDURE CODE			id-TraceStart
+	CRITICALITY				ignore
+}
+
+resourceStatusReportingInitiation E1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ResourceStatusRequest
+	SUCCESSFUL OUTCOME		ResourceStatusResponse
+	UNSUCCESSFUL OUTCOME	ResourceStatusFailure
+	PROCEDURE CODE			id-resourceStatusReportingInitiation
+	CRITICALITY				reject
+}
+
+resourceStatusReporting E1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ResourceStatusUpdate
+	PROCEDURE CODE			id-resourceStatusReporting
+	CRITICALITY				ignore
+}
+
+iAB-UPTNLAddressUpdate E1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		IAB-UPTNLAddressUpdate
+	SUCCESSFUL OUTCOME		IAB-UPTNLAddressUpdateAcknowledge
+	UNSUCCESSFUL OUTCOME	IAB-UPTNLAddressUpdateFailure
+	PROCEDURE CODE			id-iAB-UPTNLAddressUpdate
+	CRITICALITY				reject
+}
+
+cellTrafficTrace E1AP-ELEMENTARY-PROCEDURE ::={
+	INITIATING MESSAGE CellTrafficTrace
+	PROCEDURE CODE		id-CellTrafficTrace
+	CRITICALITY			ignore
+}
+
+earlyForwardingSNTransfer E1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		EarlyForwardingSNTransfer
+	PROCEDURE CODE			id-earlyForwardingSNTransfer
 	CRITICALITY				ignore
 }
 

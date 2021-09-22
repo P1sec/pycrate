@@ -6,10 +6,10 @@
 -- **************************************************************
 
 X2AP-Constants {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 eps-Access (21) modules (3) x2ap (2) version1 (1) x2ap-Constants (4) }
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -524,8 +524,8 @@ id-SNtriggered																ProtocolIE-ID ::= 379
 id-CSI-RSTransmissionIndication												ProtocolIE-ID ::= 380
 id-DLCarrierList															ProtocolIE-ID ::= 381
 id-TargetCellInNGRAN														ProtocolIE-ID ::= 382
-id-eNB-Measurement-ID-ENDC													ProtocolIE-ID ::= 383
-id-engNB-Measurement-ID-ENDC												ProtocolIE-ID ::= 384
+id-E-UTRAN-Node1-Measurement-ID												ProtocolIE-ID ::= 383
+id-E-UTRAN-Node2-Measurement-ID												ProtocolIE-ID ::= 384
 id-TDDULDLConfigurationCommonNR												ProtocolIE-ID ::= 385
 id-CarrierList																ProtocolIE-ID ::= 386
 id-ULCarrierList															ProtocolIE-ID ::= 387
@@ -547,6 +547,8 @@ id-CellToReport-E-UTRA-ENDC													ProtocolIE-ID ::= 403
 id-CellToReport-E-UTRA-ENDC-Item											ProtocolIE-ID ::= 404
 id-TraceCollectionEntityURI													ProtocolIE-ID ::= 405
 id-SFN-Offset																ProtocolIE-ID ::= 406
+id-CHO-DC-EarlyDataForwarding												ProtocolIE-ID ::= 407
+id-IMSvoiceEPSfallbackfrom5G												ProtocolIE-ID ::= 408
 
 
 END

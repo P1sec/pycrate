@@ -6,10 +6,10 @@
 -- **************************************************************
 
 X2AP-PDU-Contents {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 eps-Access (21) modules (3) x2ap (2) version1 (1) x2ap-PDU-Contents (1) }
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -36,7 +36,7 @@ IMPORTS
 	CSG-Id,
 	DeactivationIndication,
 	DL-Forwarding,
-	DynamicDLTransmissionInformation, 
+	DynamicDLTransmissionInformation,
 	E-RABsSubjectToDLDiscarding-List,
 	E-RABsSubjectToEarlyStatusTransfer-List,
 	ECGI,
@@ -205,6 +205,7 @@ IMPORTS
 	DAPSRequestInfo,
 	DAPSResponseInfo,
 	CandidateCellsToBeCancelledList,
+	CHO-DC-EarlyDataForwarding,
 	CHO-DC-Indicator,
 	Ethernet-Type,
 	NRV2XServicesAuthorized,
@@ -230,7 +231,8 @@ IMPORTS
 	F1CTrafficContainer,
 	IntendedTDD-DL-ULConfiguration-NR,
 	UERadioCapability,
-	SFN-Offset
+	SFN-Offset,
+	IMSvoiceEPSfallbackfrom5G
 
 
 
@@ -255,16 +257,16 @@ FROM X2AP-Containers
 	id-Cause,
 	id-CellInformation,
 	id-CellInformation-Item,
-	id-CellMeasurementResult, 
+	id-CellMeasurementResult,
 	id-CellMeasurementResult-NR-ENDC,
-	id-CellMeasurementResult-Item, 
+	id-CellMeasurementResult-Item,
 	id-CellMeasurementResult-NR-ENDC-Item,
 	id-CellMeasurementResult-E-UTRA-ENDC,
 	id-CellMeasurementResult-E-UTRA-ENDC-Item,
 	id-CellToReport,
 	id-CellToReport-E-UTRA-ENDC,
 	id-CellToReport-NR-ENDC,
-	id-CellToReport-Item, 
+	id-CellToReport-Item,
 	id-CellToReport-E-UTRA-ENDC-Item,
 	id-CellToReport-NR-ENDC-Item,
 	id-CompositeAvailableCapacityGroup,
@@ -284,6 +286,7 @@ FROM X2AP-Containers
 	id-GUGroupIDToDeleteList,
 	id-GUMMEI-ID,
 	id-Masked-IMEISV,
+	id-IMSvoiceEPSfallbackfrom5G,
 	id-InvokeIndication,
 	id-New-eNB-UE-X2AP-ID,
 	id-Old-eNB-UE-X2AP-ID,
@@ -557,14 +560,15 @@ FROM X2AP-Containers
 	id-CandidateCellsToBeCancelledList,
 	id-DAPSResponseInfo,
 	id-ProcedureStage,
+	id-CHO-DC-EarlyDataForwarding,
 	id-CHO-DC-Indicator,
 	id-Ethernet-Type,
 	id-NRV2XServicesAuthorized,
 	id-NRUESidelinkAggregateMaximumBitRate,
 	id-PC5QoSParameters,
 	id-TargetCellInNGRAN,
-	id-eNB-Measurement-ID-ENDC,
-	id-engNB-Measurement-ID-ENDC,
+	id-E-UTRAN-Node1-Measurement-ID,
+	id-E-UTRAN-Node2-Measurement-ID,
 	id-TDDULDLConfigurationCommonNR,
 	id-CarrierList,
 	id-ULCarrierList,
@@ -661,7 +665,8 @@ UE-ContextInformation-ExtIEs X2AP-PROTOCOL-EXTENSION ::= {
 { ID id-EPCHandoverRestrictionListContainer CRITICALITY ignore	EXTENSION EPCHandoverRestrictionListContainer		PRESENCE optional }|
 { ID id-AdditionalRRMPriorityIndex			CRITICALITY ignore	EXTENSION AdditionalRRMPriorityIndex					PRESENCE optional}|
 { ID id-NRUESidelinkAggregateMaximumBitRate	CRITICALITY ignore	EXTENSION NRUESidelinkAggregateMaximumBitRate		PRESENCE optional}|
-{ ID id-UERadioCapabilityID					CRITICALITY reject	EXTENSION UERadioCapabilityID							PRESENCE optional },
+{ ID id-UERadioCapabilityID					CRITICALITY reject	EXTENSION UERadioCapabilityID							PRESENCE optional }|
+{ ID id-IMSvoiceEPSfallbackfrom5G					CRITICALITY ignore	EXTENSION IMSvoiceEPSfallbackfrom5G							PRESENCE optional},
 	...
 }
 
@@ -819,7 +824,7 @@ HandoverReport-IEs X2AP-PROTOCOL-IES ::= {
 
 -- **************************************************************
 --
--- EARLY STATUS TRANSFER 
+-- EARLY STATUS TRANSFER
 --
 -- **************************************************************
 
@@ -895,7 +900,7 @@ E-RABs-SubjectToStatusTransfer-ItemIEs X2AP-PROTOCOL-IES ::= {
 
 E-RABs-SubjectToStatusTransfer-Item ::= SEQUENCE {
 	e-RAB-ID								E-RAB-ID,
-	
+
 	receiveStatusofULPDCPSDUs				ReceiveStatusofULPDCPSDUs			OPTIONAL,
 	uL-COUNTvalue					COUNTvalue,
 	dL-COUNTvalue					COUNTvalue,
@@ -1182,7 +1187,7 @@ ENBConfigurationUpdate-IEs X2AP-PROTOCOL-IES ::= {
 }
 
 ServedCellsToModify::= SEQUENCE (SIZE (1..maxCellineNB)) OF ServedCellsToModify-Item
- 
+
 ServedCellsToModify-Item::= SEQUENCE {
 	old-ecgi						ECGI,
 	servedCellInfo					ServedCell-Information,
@@ -1541,7 +1546,7 @@ CellActivationRequest-IEs X2AP-PROTOCOL-IES ::= {
 }
 
 ServedCellsToActivate::= SEQUENCE (SIZE (1..maxCellineNB)) OF ServedCellsToActivate-Item
- 
+
 ServedCellsToActivate-Item::= SEQUENCE {
 	ecgi						ECGI,
 	iE-Extensions					ProtocolExtensionContainer { {ServedCellsToActivate-Item-ExtIEs} } OPTIONAL,
@@ -1570,7 +1575,7 @@ CellActivationResponse-IEs X2AP-PROTOCOL-IES ::= {
 }
 
 ActivatedCellList ::= SEQUENCE (SIZE (1..maxCellineNB)) OF ActivatedCellList-Item
- 
+
 ActivatedCellList-Item::= SEQUENCE {
 	ecgi								ECGI,
 	iE-Extensions						ProtocolExtensionContainer { {ActivatedCellList-Item-ExtIEs} } OPTIONAL,
@@ -1991,7 +1996,7 @@ E-RABs-ToBeReleased-ModReqItem-SCG-BearerExtIEs X2AP-PROTOCOL-EXTENSION ::= {
 }
 
 E-RABs-ToBeReleased-ModReqItem-Split-Bearer ::= SEQUENCE {
-	e-RAB-ID						E-RAB-ID, 
+	e-RAB-ID						E-RAB-ID,
 	dL-Forwarding-GTPtunnelEndpoint			GTPtunnelEndpoint												OPTIONAL,
 	iE-Extensions					ProtocolExtensionContainer { {E-RABs-ToBeReleased-ModReqItem-Split-BearerExtIEs} } OPTIONAL,
 	...
@@ -2475,8 +2480,8 @@ RetrieveUEContextRequest ::= SEQUENCE {
 RetrieveUEContextRequest-IEs X2AP-PROTOCOL-IES ::= {
 	{ ID id-New-eNB-UE-X2AP-ID					CRITICALITY reject	TYPE UE-X2AP-ID				PRESENCE mandatory}|
 	{ ID id-SeNB-UE-X2AP-ID-Extension			CRITICALITY reject	TYPE UE-X2AP-ID-Extension	PRESENCE optional}|
--- Allocated at the new eNB. 
--- This IE contains an Extended eNB UE X2AP ID, which, together with the New eNB UE X2AP ID IE 
+-- Allocated at the new eNB.
+-- This IE contains an Extended eNB UE X2AP ID, which, together with the New eNB UE X2AP ID IE
 -- represents the eNB UE X2AP ID allocated at the new eNB.
 	{ ID id-resumeID							CRITICALITY reject	TYPE ResumeID				PRESENCE mandatory}|
 	{ ID id-ShortMAC-I							CRITICALITY reject	TYPE ShortMAC-I				PRESENCE mandatory}|
@@ -2539,7 +2544,8 @@ UE-ContextInformationRetrieve-ExtIEs X2AP-PROTOCOL-EXTENSION ::= {
 { ID id-AdditionalRRMPriorityIndex			CRITICALITY ignore	EXTENSION AdditionalRRMPriorityIndex					PRESENCE optional }|
 { ID id-EPCHandoverRestrictionListContainer CRITICALITY ignore	EXTENSION EPCHandoverRestrictionListContainer		PRESENCE optional }|
 { ID id-NRUESidelinkAggregateMaximumBitRate	CRITICALITY ignore	EXTENSION NRUESidelinkAggregateMaximumBitRate		PRESENCE optional}|
-{ ID id-UERadioCapabilityID					CRITICALITY reject	EXTENSION UERadioCapabilityID							PRESENCE optional },
+{ ID id-UERadioCapabilityID					CRITICALITY reject	EXTENSION UERadioCapabilityID							PRESENCE optional }|
+{ ID id-IMSvoiceEPSfallbackfrom5G			CRITICALITY ignore	EXTENSION IMSvoiceEPSfallbackfrom5G					PRESENCE optional },
 	...
 }
 
@@ -2739,7 +2745,7 @@ E-RABs-Admitted-ToBeAdded-SgNBAddReqAck-Item-SgNBPDCPpresent ::= SEQUENCE {
 	s1-DL-GTPtunnelEndpoint					GTPtunnelEndpoint,
 	sgNB-UL-GTP-TEIDatPDCP					GTPtunnelEndpoint																						OPTIONAL,
 -- This IE shall be present if MCG resource IE in the EN-DC Resource Configuration IE is set to “present” --
-	rlc-Mode								RLCMode																									OPTIONAL, 
+	rlc-Mode								RLCMode																									OPTIONAL,
 -- This IE shall be present if MCG resource IE in the EN-DC Resource Configuration IE is set to “present” --
 	dL-Forwarding-GTPtunnelEndpoint			GTPtunnelEndpoint																						OPTIONAL,
 	uL-Forwarding-GTPtunnelEndpoint			GTPtunnelEndpoint																						OPTIONAL,
@@ -3107,7 +3113,7 @@ E-RABs-Admitted-ToBeAdded-SgNBModAck-Item-SgNBPDCPpresent ::= SEQUENCE {
 	s1-DL-GTPtunnelEndpoint					GTPtunnelEndpoint,
 	sgNB-UL-GTP-TEIDatPDCP					GTPtunnelEndpoint																					OPTIONAL,
 -- This IE shall be present if MCG resource IE in the EN-DC Resource Configuration IE are set to “present” --
-	rlc-Mode									RLCMode																								OPTIONAL, 
+	rlc-Mode									RLCMode																								OPTIONAL,
 -- This IE shall be present if MCG resource IE in the EN-DC Resource Configuration IE are set to “present” --
 	dL-Forwarding-GTPtunnelEndpoint			GTPtunnelEndpoint																					OPTIONAL,
 	uL-Forwarding-GTPtunnelEndpoint			GTPtunnelEndpoint																					OPTIONAL,
@@ -3369,7 +3375,7 @@ SgNBModificationConfirm-IEs X2AP-PROTOCOL-IES ::= {
 	...
 }
 
-E-RABs-AdmittedToBeModified-SgNBModConfList ::= SEQUENCE (SIZE (1..maxnoofBearers)) OF ProtocolIE-Single-Container 
+E-RABs-AdmittedToBeModified-SgNBModConfList ::= SEQUENCE (SIZE (1..maxnoofBearers)) OF ProtocolIE-Single-Container
 	{ {E-RABs-AdmittedToBeModified-SgNBModConf-ItemIEs} }
 
 E-RABs-AdmittedToBeModified-SgNBModConf-ItemIEs X2AP-PROTOCOL-IES ::= {
@@ -3522,7 +3528,7 @@ SgNBReleaseRequestAcknowledge-IEs X2AP-PROTOCOL-IES ::= {
 	...
 }
 
-E-RABs-Admitted-ToBeReleased-SgNBRelReqAckList ::= SEQUENCE (SIZE(1..maxnoofBearers)) OF 
+E-RABs-Admitted-ToBeReleased-SgNBRelReqAckList ::= SEQUENCE (SIZE(1..maxnoofBearers)) OF
 										ProtocolIE-Single-Container { {E-RABs-Admitted-ToBeReleased-SgNBRelReqAck-ItemIEs} }
 
 E-RABs-Admitted-ToBeReleased-SgNBRelReqAck-ItemIEs X2AP-PROTOCOL-IES ::= {
@@ -3955,7 +3961,7 @@ CellandCapacityAssistInfo-ExtIEs X2AP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
-CellAssistanceInformation ::= CHOICE {				
+CellAssistanceInformation ::= CHOICE {
 	limited-list				Limited-list,
 	full-list				ENUMERATED {allServedNRcells, ...},
 	...
@@ -4185,7 +4191,7 @@ ENDCCellActivationRequest-IEs X2AP-PROTOCOL-IES ::= {
 }
 
 ServedNRCellsToActivate::= SEQUENCE (SIZE (1.. maxCellinengNB)) OF ServedNRCellsToActivate-Item
- 
+
 ServedNRCellsToActivate-Item::= SEQUENCE {
 	nrCellID						NRCGI,
 	iE-Extensions					ProtocolExtensionContainer { {ServedNRCellsToActivate-Item-ExtIEs} } OPTIONAL,
@@ -4216,7 +4222,7 @@ ENDCCellActivationResponse-IEs X2AP-PROTOCOL-IES ::= {
 }
 
 ActivatedNRCellList ::= SEQUENCE (SIZE (1.. maxCellinengNB)) OF ActivatedNRCellList-Item
- 
+
 ActivatedNRCellList-Item::= SEQUENCE {
 	nrCellID						NRCGI,
 	iE-Extensions						ProtocolExtensionContainer { {ActivatedNRCellList-Item-ExtIEs} } OPTIONAL,
@@ -4258,8 +4264,8 @@ ENDCResourceStatusRequest ::= SEQUENCE {
 }
 
 ENDCResourceStatusRequest-IEs X2AP-PROTOCOL-IES ::= {
-	{ ID id-eNB-Measurement-ID-ENDC			CRITICALITY reject	TYPE Measurement-ID-ENDC			PRESENCE mandatory  }|
-	{ ID id-engNB-Measurement-ID-ENDC		CRITICALITY ignore	TYPE Measurement-ID-ENDC		PRESENCE conditional}| -- The IE shall be present if the Registration Request EN-DC IE is set to “Stop” or to “Add”
+	{ ID id-E-UTRAN-Node1-Measurement-ID			CRITICALITY reject	TYPE Measurement-ID-ENDC			PRESENCE mandatory  }|
+	{ ID id-E-UTRAN-Node2-Measurement-ID		CRITICALITY ignore	TYPE Measurement-ID-ENDC		PRESENCE conditional}| -- The IE shall be present if the Registration Request EN-DC IE is set to “Stop” or to “Add”
 	{ ID id-Registration-Request			CRITICALITY reject	TYPE Registration-Request-ENDC		PRESENCE mandatory  }|
 	{ ID id-ReportingPeriodicity			CRITICALITY ignore	TYPE ReportingPeriodicity-ENDC		PRESENCE optional   }|
 	{ ID id-ReportCharacteristics			CRITICALITY ignore	TYPE ReportCharacteristics-ENDC		PRESENCE conditional}| -- The IE shall be present if the Registration Request EN-DC IE is set to “Start”
@@ -4328,8 +4334,8 @@ ENDCResourceStatusResponse ::= SEQUENCE {
 }
 
 ENDCResourceStatusResponse-IEs X2AP-PROTOCOL-IES ::= {
-	{ ID id-eNB-Measurement-ID-ENDC		CRITICALITY reject	TYPE Measurement-ID-ENDC			PRESENCE mandatory}|
-	{ ID id-engNB-Measurement-ID-ENDC	CRITICALITY reject	TYPE Measurement-ID-ENDC			PRESENCE mandatory}|
+	{ ID id-E-UTRAN-Node1-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID-ENDC			PRESENCE mandatory}|
+	{ ID id-E-UTRAN-Node2-Measurement-ID	CRITICALITY reject	TYPE Measurement-ID-ENDC			PRESENCE mandatory}|
 	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional } |
 	{ ID id-InterfaceInstanceIndication	CRITICALITY reject 	TYPE InterfaceInstanceIndication	PRESENCE optional },
 	...
@@ -4347,8 +4353,8 @@ ENDCResourceStatusFailure ::= SEQUENCE {
 }
 
 ENDCResourceStatusFailure-IEs X2AP-PROTOCOL-IES ::= {
-	{ ID id-eNB-Measurement-ID-ENDC		CRITICALITY reject	TYPE Measurement-ID-ENDC			PRESENCE mandatory}|
-	{ ID id-engNB-Measurement-ID-ENDC	CRITICALITY reject	TYPE Measurement-ID-ENDC			PRESENCE mandatory}|
+	{ ID id-E-UTRAN-Node1-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID-ENDC			PRESENCE mandatory}|
+	{ ID id-E-UTRAN-Node2-Measurement-ID	CRITICALITY reject	TYPE Measurement-ID-ENDC			PRESENCE mandatory}|
 	{ ID id-Cause						CRITICALITY ignore	TYPE Cause							PRESENCE mandatory}|
 	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional }|
 	{ ID id-InterfaceInstanceIndication	CRITICALITY reject 	TYPE InterfaceInstanceIndication	PRESENCE optional },
@@ -4367,8 +4373,8 @@ ENDCResourceStatusUpdate ::= SEQUENCE {
 }
 
 ENDCResourceStatusUpdate-IEs X2AP-PROTOCOL-IES ::= {
-	{ ID id-eNB-Measurement-ID-ENDC				CRITICALITY reject	TYPE Measurement-ID-ENDC							PRESENCE mandatory}|
-	{ ID id-engNB-Measurement-ID-ENDC			CRITICALITY reject	TYPE Measurement-ID-ENDC							PRESENCE mandatory}|
+	{ ID id-E-UTRAN-Node1-Measurement-ID				CRITICALITY reject	TYPE Measurement-ID-ENDC							PRESENCE mandatory}|
+	{ ID id-E-UTRAN-Node2-Measurement-ID			CRITICALITY reject	TYPE Measurement-ID-ENDC							PRESENCE mandatory}|
 	{ ID id-CellMeasurementResult-NR-ENDC		CRITICALITY ignore	TYPE CellMeasurementResult-NR-ENDC-List		PRESENCE optional }|
 	{ ID id-InterfaceInstanceIndication			CRITICALITY reject 	TYPE InterfaceInstanceIndication					PRESENCE optional }|
 	{ ID id-CellMeasurementResult-E-UTRA-ENDC	CRITICALITY ignore	TYPE CellMeasurementResult-E-UTRA-ENDC-List	PRESENCE optional},
@@ -4395,7 +4401,7 @@ CellMeasurementResult-NR-ENDC-Item-ExtIEs X2AP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
-CellMeasurementResult-E-UTRA-ENDC-List ::= SEQUENCE (SIZE (1..maxCellineNB)) 
+CellMeasurementResult-E-UTRA-ENDC-List ::= SEQUENCE (SIZE (1..maxCellineNB))
 														OF ProtocolIE-Single-Container { {CellMeasurementResult-E-UTRA-ENDC-ItemIEs} }
 
 CellMeasurementResult-E-UTRA-ENDC-ItemIEs X2AP-PROTOCOL-IES ::= {
@@ -4492,7 +4498,7 @@ ENDCPartialResetConfirm-IEs X2AP-PROTOCOL-IES ::= {
 
 -- **************************************************************
 --
--- E-UTRA - NR CELL RESOURCE COORDINATION REQUEST 
+-- E-UTRA - NR CELL RESOURCE COORDINATION REQUEST
 --
 -- **************************************************************
 
@@ -4537,7 +4543,7 @@ ListofNRCellsinNRCoordinationReq ::= SEQUENCE (SIZE (0..maxnoNRcellsSpectrumShar
 
 -- **************************************************************
 --
--- E-UTRA - NR CELL RESOURCE COORDINATION RESPONSE 
+-- E-UTRA - NR CELL RESOURCE COORDINATION RESPONSE
 --
 -- **************************************************************
 
@@ -4680,7 +4686,8 @@ DataForwardingAddressIndication-IEs X2AP-PROTOCOL-IES ::= {
 	{ ID id-Old-eNB-UE-X2AP-ID					CRITICALITY ignore	TYPE UE-X2AP-ID									PRESENCE mandatory}|
 	{ ID id-Old-eNB-UE-X2AP-ID-Extension		CRITICALITY ignore	TYPE UE-X2AP-ID-Extension						PRESENCE optional }|
 	{ ID id-E-RABs-DataForwardingAddress-List	CRITICALITY ignore	TYPE E-RABs-DataForwardingAddress-List		PRESENCE mandatory}|
-	{ ID id-CHO-DC-Indicator					CRITICALITY reject	TYPE CHO-DC-Indicator							PRESENCE optional},
+	{ ID id-CHO-DC-Indicator					CRITICALITY reject	TYPE CHO-DC-Indicator							PRESENCE optional}|
+	{ ID id-CHO-DC-EarlyDataForwarding			CRITICALITY ignore	TYPE CHO-DC-EarlyDataForwarding				PRESENCE optional},
 	...
 }
 
@@ -4714,7 +4721,7 @@ GNBStatusIndication ::= SEQUENCE {
 	...
 }
 
-GNBStatusIndicationIEs X2AP-PROTOCOL-IES ::= { 
+GNBStatusIndicationIEs X2AP-PROTOCOL-IES ::= {
 	{ ID id-GNBOverloadInformation			CRITICALITY ignore	TYPE GNBOverloadInformation			PRESENCE mandatory}|
 	{ ID id-InterfaceInstanceIndication		CRITICALITY reject 	TYPE InterfaceInstanceIndication		PRESENCE optional },
 	...
@@ -4826,14 +4833,14 @@ UERadioCapabilityIDMappingRequest::= SEQUENCE {
 	...
 }
 
-UERadioCapabilityIDMappingRequestIEs X2AP-PROTOCOL-IES ::= {	
+UERadioCapabilityIDMappingRequestIEs X2AP-PROTOCOL-IES ::= {
 	{ ID id-UERadioCapabilityID		CRITICALITY reject	TYPE UERadioCapabilityID		PRESENCE mandatory	},
 	...
 }
 
 -- **************************************************************
 --
--- UE RADIO CAPABILITY ID MAPPING RESPONSE 
+-- UE RADIO CAPABILITY ID MAPPING RESPONSE
 --
 -- **************************************************************
 
@@ -4842,7 +4849,7 @@ UERadioCapabilityIDMappingResponse ::= SEQUENCE {
 	...
 }
 
-UERadioCapabilityIDMappingResponseIEs X2AP-PROTOCOL-IES ::= {	
+UERadioCapabilityIDMappingResponseIEs X2AP-PROTOCOL-IES ::= {
 	{ ID id-UERadioCapabilityID				CRITICALITY reject	TYPE UERadioCapabilityID			PRESENCE mandatory }|
 	{ ID id-UERadioCapability				CRITICALITY ignore	TYPE UERadioCapability				PRESENCE mandatory }|
 	{ ID id-CriticalityDiagnostics			CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional  },

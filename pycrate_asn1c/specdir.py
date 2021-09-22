@@ -60,7 +60,7 @@ ASN_SPECS_LTE = {
     'RRCLTE'    : '3GPP_EUTRAN_RRC_36331',
     'S1AP'      : '3GPP_EUTRAN_S1AP_36413',
     'X2AP'      : '3GPP_EUTRAN_X2AP_36423',
-    'LPP'       : '3GPP_EUTRAN_LPP_36355',
+    #'LPP'       : '3GPP_EUTRAN_LPP_36355', # moved to 37355 starting with release 15
     'LPPa'      : '3GPP_EUTRAN_LPPa_36455',
     'M2AP'      : '3GPP_EUTRAN_M2AP_36443',
     'M3AP'      : '3GPP_EUTRAN_M3AP_36444',
@@ -76,6 +76,11 @@ ASN_SPECS_5G = {
     'NRPPa'     : '3GPP_NR_NRPPa_38455',
     'E1AP'      : '3GPP_NR_E1AP_38463',
     'F1AP'      : '3GPP_NR_F1AP_38473'
+    }
+
+# 3GPP multi-techno
+ASN_SPECS_MULT = {
+    'LPP'       : '3GPP_MULT_LPP_37355',
     }
 
 # ITU-T various recommendations
@@ -188,6 +193,7 @@ ASN_SPECS.update( ASN_SPECS_2G )
 ASN_SPECS.update( ASN_SPECS_3G )
 ASN_SPECS.update( ASN_SPECS_LTE )
 ASN_SPECS.update( ASN_SPECS_5G )
+ASN_SPECS.update( ASN_SPECS_MULT )
 ASN_SPECS.update( ASN_SPECS_ITUT )
 ASN_SPECS.update( ASN_SPECS_IETF )
 ASN_SPECS.update( ASN_SPECS_CORE )

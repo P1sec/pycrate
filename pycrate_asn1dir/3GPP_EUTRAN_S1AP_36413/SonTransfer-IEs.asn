@@ -3,11 +3,11 @@
 -- IE definitions for the SON Transfer application
 -- The IEs in this ASN.1 module shall be defined and encoded
 -- using the same rules as applicable for the S1AP-IEs module.
--- 
+--
 -- **************************************************************
 SonTransfer-IEs
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -150,7 +150,7 @@ ReportingCellList ::= SEQUENCE (SIZE(1.. maxnoofIRATReportingCells)) OF Reportin
 
 MultiCellLoadReportingResponse ::= SEQUENCE (SIZE(1.. maxnoofIRATReportingCells)) OF MultiCellLoadReportingResponse-Item
 
-MultiCellLoadReportingResponse-Item ::= CHOICE{ 
+MultiCellLoadReportingResponse-Item ::= CHOICE{
 	eUTRANResponse							EUTRANResponse,
 	uTRANResponse							OCTET STRING,
 	gERANResponse							OCTET STRING,

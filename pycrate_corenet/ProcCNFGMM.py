@@ -219,13 +219,175 @@ class FGMMPrimAKA(FGMMSigProc):
     Init  = (126, 86)
     Timer = 'T3560'
     
-    '''TODO
     def output(self):
-        return []
+        # get a new KSI (0..6)
+        ksi = self.FGMM.get_new_ksi()
+        #
+        EncodReq = self.Encod[self.Init]
+        # in case NAS_KSI is handcrafted, just warn (will certainly fail)
+        if 'NAS_KSI' in EncodReq:
+            self._log('WNG', 'handcrafted NAS_KSI (%r), generated KSI (%i)'\
+                      % (EncodReq['NAS_KSI'], self.ksi))
+        # in case RAND is handcrafted, we use it for generating the auth vector
+        if 'RAND' in EncodReq:
+            RAND = EncodReq['RAND']
+        else:
+            RAND = None
+        #
+        if self.FGMM.AUTH_PLMN:
+            self.snid = make_5g_snn(self.FGMM.AUTH_PLMN)
+        else:
+            self.snid = make_5g_snn(self.UE.Server.PLMN)
+        #
+        if not self.UE.USIM or self.FGMM.AUTH_2G:
+            # WNG: 2G authentication, this is illegal and won't work
+            self._log('WNG', 'trying a 5G authentication with a 2G vector')
+            self.ctx = 2
+            self.ksi = (1, ksi) # mapped ctx
+            # 2G vector: RAND, RES, Kc
+            self.vect = self.UE.Server.AUCd.make_2g_vector(self.UE.IMSI, RAND)
+        elif self.FGMM.AUTH_3G:
+            # WNG: 3g authentication, this is also illegal and should not work
+            self.ctx = 3
+            self.ksi = (1, ksi) # mapped ctx
+            # 3G vector: RAND, XRES, AUTN, CK, IK
+            self.vect = self.UE.Server.AUCd.make_3g_vector(self.UE.IMSI, self.FGMM.AUTH_AMF, RAND)
+        else:
+            # 5G authentication
+            self.ctx = 5
+            self.ksi = (0, ksi) # native ctx
+            # 5G vector: RAND, XRES*, AUTN, KAUSF
+            self.vect = self.UE.Server.AUCd.make_5g_vector(self.UE.IMSI, self.snid, self.FGMM.AUTH_AMF, RAND)
+        #
+        if self.vect is None:
+            # IMSI is not in the AuC db
+            self._log('ERR', 'unable to get an authentication vector from AuC')
+            self.rm_from_fgmm_stack()
+            return []
+        #
+        # prepare IEs
+        if self.ctx == 2:
+            autn = b''
+        else:
+            autn = self.vect[2]
+        if self.FGMM.AUTH_AUTN_EXT:
+            autn += self.FGMM.AUTH_AUTN_EXT
+        #
+        self.set_msg(126, 86, NAS_KSI=self.ksi, ABBA=self.FGMM.AUTH_ABBA, RAND=self.vect[0], AUTN=autn)
+        self.encode_msg(126, 86)
+        if not self._sec:
+            # do not protect NAS DL msg
+            self._nas_tx._sec = False
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'DL', self._nas_tx) )
+        self.init_timer()
+        return self.NG.ret_ngap_dnt(self._nas_tx)
     
     def process(self, pdu):
-        return []
-    '''
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'UL', pdu) )
+        self.UEInfo = {}
+        self.decode_msg(pdu, self.UEInfo)
+        #
+        if pdu._name == 'FGMMAuthenticationResponse':
+            return self._process_resp()
+        else:
+            #pdu._name == 'FGMMAuthenticationFailure'
+            return self._process_fail()
+    
+    def _process_resp(self):
+        # check if the whole UE response is corresponding to the expected one
+        if self.ctx == 2:
+            # 2G auth context
+            if self.UEInfo['RES'][:len(self.vect[1])] != self.vect[1]:
+                self._log('WNG', '2G authentication reject, XRES %s, RES %s'\
+                          % (hexlify(self.vect[1]).decode(),
+                             hexlify(self.UEInfo['RES']).decode()))
+                #self.encode_msg(126, 88)
+                self.success = False
+            else:
+                self._log('WNG', '2G authentication accepted')
+                self.success = True
+                # set a 2G security context
+                self.FGMM.set_sec_ctx(self.ksi, 2, self.vect, self.snid)
+        elif self.ctx == 3:
+            # 3G auth context
+            if self.UEInfo['RES'][:len(self.vect[1])] != self.vect[1]:
+                self._log('WNG', '3G authentication reject, XRES %s, RES %s'\
+                          % (hexlify(self.vect[1]).decode(),
+                             hexlify(self.UEInfo['RES']).decode()))
+                #self.encode_msg(126, 88)
+                self.success = False
+            else:
+                self._log('WNG', '3G authentication accepted')
+                self.success = True
+                # set a 2G security context
+                self.FGMM.set_sec_ctx(self.ksi, 3, self.vect, self.snid)
+        else:
+            # 5G auth context
+            if self.UEInfo['RES'] != self.vect[1]:
+                self._log('WNG', '5G authentication reject, XRES* %s, RES* %s'\
+                          % (hexlify(self.vect[1]).decode(),
+                             hexlify(self.UEInfo['RES']).decode())) 
+                #self.encode_msg(126, 88)
+                self.success = False
+            else:
+                self._log('DBG', '5G authentication accepted' % self.ctx)
+                self.success = True
+                # set the security context
+                self.FGMM.set_sec_ctx(self.ksi, self.ctx, self.vect, self.snid)
+        #
+        self.rm_from_fgmm_stack()
+        if not self.success:
+            if not self._sec:
+                self._nas_tx._sec = False
+            if self.TRACK_PDU:
+                self._pdu.append( (time(), 'DL', self._nas_tx) )
+            return self.NG.ret_ngap_dnt(self._nas_tx)
+        else:
+            return []
+    
+    def _process_fail(self):
+        self.success = False
+        if self.UEInfo['5GMMCause'].get_val() == 21 and 'AUTS' in self.UEInfo:
+            # synch failure
+            ret = self.UE.Server.AUCd.synch_sqn(self.UE.IMSI, self.vect[0], self.UEInfo['AUTS'])
+            #
+            if ret is None:
+                # something did not work
+                self._log('ERR', 'unable to resynchronize SQN in AuC')
+                #self.encode_msg(126, 88)
+                self.rm_from_fgmm_stack()
+                if not self._sec:
+                    self._nas_tx._sec = False 
+                if self.TRACK_PDU:
+                    self._pdu.append( (time(), 'DL', self._nas_tx) )
+                return self.NG.ret_ngap_dnt(self._nas_tx)
+            #
+            elif ret:
+                # USIM did not authenticate correctly
+                self._log('WNG', 'USIM authentication failed for resynch')
+                self.encode_msg(8, 20)
+                self.rm_from_fgmm_stack()
+                if not self._sec:
+                    self._nas_tx._sec = False
+                if self.TRACK_PDU:
+                    self._pdu.append( (time(), 'DL', self._nas_tx) )
+                return self.NG.ret_ngap_dnt(self._nas_tx)
+            #
+            else: 
+                # resynch OK: restart an auth procedure
+                self._log('INF', 'USIM SQN resynchronization done')
+                self.rm_from_fgmm_stack()
+                # restart a new auth procedure
+                NasProc = self.FGMM.init_proc(FGMMPrimAKA)
+                return NasProc.output()
+        #
+        else:
+            # UE refused our auth request...
+            self._log('ERR', 'UE rejected AUTN, %s' % self.UEInfo['5GMMCause'])
+            self.rm_from_fgmm_stack()
+            return []
 
 
 class FGMMSecurityModeControl(FGMMSigProc):
@@ -296,13 +458,32 @@ class FGMMIdentification(FGMMSigProc):
     Init  = (126, 91)
     Timer = 'T3570'
     
-    '''TODO
     def output(self):
-        return []
+        # build the Id Request msg, Id type has to be set by the caller
+        self.encode_msg(126, 91)
+        if not self._sec:
+            self._nas_tx._sec = False
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'DL', self._nas_tx) )
+        self.init_timer()
+        return self.NG.ret_ngap_dnt(self._nas_tx)
     
     def process(self, pdu):
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'UL', pdu) )
+        self.UEInfo = {}
+        self.decode_msg(pdu, self.UEInfo)
+        # get the identity IE value
+        self.IDType = self._nas_tx['5GSIDType'].get_val()
+        #
+        if self.UEInfo['ID'][0] != self.IDType :
+            self._log('WNG', 'identity responded not corresponding to type requested '\
+                      '(%i instead of %i)' % (self.UEInfo['ID'][0], self.IDType))
+        self._log('INF', 'identity responded, %r' % self._nas_rx['ID'][1])
+        self.UE.set_ident_from_ue(*self.UEInfo['ID'], dom='5GS')
+        #
+        self.rm_from_fgmm_stack()
         return []
-    '''
 
 
 class FGMMGenericUEConfigUpdate(FGMMSigProc):
@@ -572,13 +753,39 @@ class FGMMRegistration(FGMMSigProc):
     Init  = (126, 65)
     Timer = 'T3550'
     
-    '''TODO
     def process(self, pdu):
+        # preempt the EMM stack
+        self.fgmm_preempt()
+        if self.TRACK_PDU:
+            self._pdu.append( (time(), 'UL', pdu) )
+        #
+        if pdu._name == '5GMMRegistrationRequest':
+            self.errcause, self.UEInfo = None, {}
+            self.decode_msg(pdu, self.UEInfo)
+            return self._process_req()
+        else:
+            # 5GMMRegistrationComplete
+            self.errcause, self.CompInfo = None, {}
+            self.decode_msg(pdu, self.CompInfo)
+            return self._process_comp()
+    
+    def _process_req(self):
+        reg_for, reg_type = self.UEInfo['5GSRegType'].get_val()
+        # TODO
+        '''
+        1 : 'initial registration',
+        2 : 'mobility registration updating',
+        3 : 'periodic registration updating',
+        4 : 'emergency registration',
+        '''
+        return []
+    
+    def _process_comp(self):
         return []
     
     def output(self):
         return []
-    '''
+    
 
 
 class FGMMMODeregistration(FGMMSigProc):

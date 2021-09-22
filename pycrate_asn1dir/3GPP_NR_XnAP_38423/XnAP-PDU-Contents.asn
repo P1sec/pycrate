@@ -34,6 +34,7 @@ IMPORTS
 	CellAssistanceInfo-NR,
 	CHOinformation-Req,
 	CHOinformation-Ack,
+	CHO-MRDC-EarlyDataForwarding,
 	CHO-MRDC-Indicator,
 	CPTransportLayerInformation,
 	TNLA-To-Add-List,
@@ -86,6 +87,7 @@ IMPORTS
 	NRUESidelinkAggregateMaximumBitRate,
 	NRV2XServicesAuthorized,
 	PagingDRX,
+	PagingeDRXInformation,
 	PagingPriority,
 	PartialListIndicator,
 	PLMN-Identity,
@@ -174,7 +176,9 @@ IMPORTS
 	MobilityParametersModificationRange,
 	RACHReportInformation,
 	IABNodeIndication,
-	SNTriggered
+	SNTriggered,
+	SCGIndicator,
+	UESpecificDRX
 
 
 FROM XnAP-IEs
@@ -239,6 +243,7 @@ FROM XnAP-Containers
 	id-oldNG-RANnodeUEXnAPID,
 	id-OldtoNewNG-RANnodeResumeContainer,
 	id-PagingDRX,
+	id-PagingeDRXInformation,
 	id-PagingPriority,
 	id-PartialListIndicator-EUTRA,
 	id-PartialListIndicator-NR,
@@ -345,6 +350,7 @@ FROM XnAP-Containers
 	id-targetCellsToCancel,
 	id-requestedTargetCellGlobalID,
 	id-DAPSResponseInfo-List,
+	id-CHO-MRDC-EarlyDataForwarding,
 	id-CHO-MRDC-Indicator,
 	id-MobilityInformation,
 	id-InitiatingCondition-FailureIndication,
@@ -372,6 +378,8 @@ FROM XnAP-Containers
 	id-RACHReportInformation,
 	id-IABNodeIndication,
 	id-UERadioCapabilityID,
+	id-SCGIndicator,
+	id-UESpecificDRX,
 
 
 
@@ -649,7 +657,9 @@ RANPaging-IEs XNAP-PROTOCOL-IES ::= {
 	{ ID id-PagingPriority						CRITICALITY ignore		TYPE PagingPriority									PRESENCE optional }|
 	{ ID id-AssistanceDataForRANPaging			CRITICALITY ignore		TYPE AssistanceDataForRANPaging					PRESENCE optional }|
 	{ ID id-UERadioCapabilityForPaging			CRITICALITY ignore		TYPE UERadioCapabilityForPaging					PRESENCE optional }|
-	{ ID id-ExtendedUEIdentityIndexValue		CRITICALITY ignore		TYPE ExtendedUEIdentityIndexValue				PRESENCE optional },
+	{ ID id-ExtendedUEIdentityIndexValue		CRITICALITY ignore		TYPE ExtendedUEIdentityIndexValue				PRESENCE optional }|
+	{ ID id-PagingeDRXInformation				CRITICALITY ignore		TYPE PagingeDRXInformation						PRESENCE optional }|
+	{ ID id-UESpecificDRX						CRITICALITY ignore		TYPE UESpecificDRX									PRESENCE optional },
 	...
 }
 
@@ -713,7 +723,7 @@ RetrieveUEContextFailure ::= SEQUENCE {
 	...
 }
 
-RetrieveUEContextFailure-IEs XNAP-PROTOCOL-IES ::= {	
+RetrieveUEContextFailure-IEs XNAP-PROTOCOL-IES ::= {
 	{ ID id-newNG-RANnodeUEXnAPID					CRITICALITY ignore		TYPE NG-RANnodeUEXnAPID							PRESENCE mandatory}|
 	{ ID id-OldtoNewNG-RANnodeResumeContainer		CRITICALITY ignore		TYPE OCTET STRING									PRESENCE optional }|
 	{ ID id-Cause									CRITICALITY ignore		TYPE Cause											PRESENCE mandatory}|
@@ -736,7 +746,8 @@ XnUAddressIndication-IEs XNAP-PROTOCOL-IES ::= {
 	{ ID id-newNG-RANnodeUEXnAPID					CRITICALITY ignore		TYPE NG-RANnodeUEXnAPID							PRESENCE mandatory}|
 	{ ID id-oldNG-RANnodeUEXnAPID					CRITICALITY ignore		TYPE NG-RANnodeUEXnAPID							PRESENCE mandatory}|
 	{ ID id-XnUAddressInfoperPDUSession-List		CRITICALITY reject		TYPE XnUAddressInfoperPDUSession-List		PRESENCE mandatory}|
-	{ ID id-CHO-MRDC-Indicator						CRITICALITY reject		TYPE CHO-MRDC-Indicator							PRESENCE optional },
+	{ ID id-CHO-MRDC-Indicator						CRITICALITY reject		TYPE CHO-MRDC-Indicator							PRESENCE optional }|
+	{ ID id-CHO-MRDC-EarlyDataForwarding			CRITICALITY ignore		TYPE CHO-MRDC-EarlyDataForwarding				PRESENCE optional },
 	...
 }
 
@@ -790,7 +801,7 @@ PDUSessionToBeAddedAddReq-Item ::= SEQUENCE {
 	sn-terminated			PDUSessionResourceSetupInfo-SNterminated	OPTIONAL,
 	mn-terminated			PDUSessionResourceSetupInfo-MNterminated	OPTIONAL,
 -- NOTE: If neither the PDU Session Resource Setup Info – SN terminated IE
--- nor the PDU Session Resource Setup Info – MN terminated IE is present, 
+-- nor the PDU Session Resource Setup Info – MN terminated IE is present,
 -- abnormal conditions as specified in clause 8.3.1.4 apply.
 	iE-Extension			ProtocolExtensionContainer { {PDUSessionToBeAddedAddReq-Item-ExtIEs} }	OPTIONAL,
 	...
@@ -835,7 +846,7 @@ PDUSessionAdmittedAddedAddReqAck-Item ::= SEQUENCE {
 	sn-terminated			PDUSessionResourceSetupResponseInfo-SNterminated	OPTIONAL,
 	mn-terminated			PDUSessionResourceSetupResponseInfo-MNterminated	OPTIONAL,
 -- NOTE: If neither the PDU Session Resource Setup Response Info – SN terminated IE
--- nor the PDU Session Resource Setup Response Info – MN terminated IE is present, 
+-- nor the PDU Session Resource Setup Response Info – MN terminated IE is present,
 -- abnormal conditions as specified in clause 8.3.1.4 apply.
 	iE-Extension			ProtocolExtensionContainer { {PDUSessionAdmittedAddedAddReqAck-Item-ExtIEs} }	OPTIONAL,
 	...
@@ -1000,7 +1011,7 @@ PDUSessionsToBeAdded-SNModRequest-Item ::= SEQUENCE {
 	sn-terminated			PDUSessionResourceSetupInfo-SNterminated	OPTIONAL,
 	mn-terminated			PDUSessionResourceSetupInfo-MNterminated	OPTIONAL,
 -- NOTE: If neither the PDU Session Resource Setup Info – SN terminated IE
--- nor the PDU Session Resource Setup Info – MN terminated IE is present, 
+-- nor the PDU Session Resource Setup Info – MN terminated IE is present,
 -- abnormal conditions as specified in clause 8.3.3.4 apply.
 	iE-Extension			ProtocolExtensionContainer { {PDUSessionsToBeAdded-SNModRequest-Item-ExtIEs} }	OPTIONAL,
 	...
@@ -1018,7 +1029,7 @@ PDUSessionsToBeModified-SNModRequest-Item ::= SEQUENCE {
 	sn-terminated			PDUSessionResourceModificationInfo-SNterminated	OPTIONAL,
 	mn-terminated			PDUSessionResourceModificationInfo-MNterminated	OPTIONAL,
 -- NOTE: If neither the PDU Session Resource Modification Info – SN terminated IE
--- nor the PDU Session Resource Modification Info – MN terminated IE is present, 
+-- nor the PDU Session Resource Modification Info – MN terminated IE is present,
 -- abnormal conditions as specified in clause 8.3.3.4 apply.
 	iE-Extension			ProtocolExtensionContainer { {PDUSessionsToBeModified-SNModRequest-Item-ExtIEs} }	OPTIONAL,
 	...
@@ -1087,7 +1098,7 @@ PDUSessionAdmittedToBeAddedSNModResponse-Item ::= SEQUENCE {
 	sn-terminated			PDUSessionResourceSetupResponseInfo-SNterminated	OPTIONAL,
 	mn-terminated			PDUSessionResourceSetupResponseInfo-MNterminated	OPTIONAL,
 -- NOTE: If neither the PDU Session Resource Setup Response Info – SN terminated IE
--- nor the PDU Session Resource Setup Response Info – MN terminated IE is present, 
+-- nor the PDU Session Resource Setup Response Info – MN terminated IE is present,
 -- abnormal conditions as specified in clause 8.3.3.4 apply.
 	iE-Extension			ProtocolExtensionContainer { {PDUSessionAdmittedToBeAddedSNModResponse-Item-ExtIEs} }	OPTIONAL,
 	...
@@ -1103,7 +1114,7 @@ PDUSessionAdmittedToBeModifiedSNModResponse-Item ::= SEQUENCE {
 	sn-terminated			PDUSessionResourceModificationResponseInfo-SNterminated	OPTIONAL,
 	mn-terminated			PDUSessionResourceModificationResponseInfo-MNterminated	OPTIONAL,
 -- NOTE: If neither the PDU Session Resource Modification Response Info – SN terminated IE
--- nor the PDU Session Resource Modification Response Info – MN terminated IE is present, 
+-- nor the PDU Session Resource Modification Response Info – MN terminated IE is present,
 -- abnormal conditions as specified in clause 8.3.3.4 apply.
 	iE-Extension			ProtocolExtensionContainer { {PDUSessionAdmittedToBeModifiedSNModResponse-Item-ExtIEs} }	OPTIONAL,
 	...
@@ -1192,7 +1203,8 @@ SNodeModificationRequired-IEs XNAP-PROTOCOL-IES ::= {
 	{ ID id-MR-DC-ResourceCoordinationInfo			CRITICALITY ignore		TYPE MR-DC-ResourceCoordinationInfo			PRESENCE optional }|
 	{ ID id-RRCConfigIndication						CRITICALITY reject		TYPE RRCConfigIndication							PRESENCE optional }|
 	{ ID id-AvailableFastMCGRecoveryViaSRB3			CRITICALITY ignore		TYPE AvailableFastMCGRecoveryViaSRB3			PRESENCE optional }|
-	{ ID id-ReleaseFastMCGRecoveryViaSRB3			CRITICALITY ignore		TYPE ReleaseFastMCGRecoveryViaSRB3				PRESENCE optional },
+	{ ID id-ReleaseFastMCGRecoveryViaSRB3			CRITICALITY ignore		TYPE ReleaseFastMCGRecoveryViaSRB3				PRESENCE optional }|
+	{ ID id-SCGIndicator							CRITICALITY ignore		TYPE SCGIndicator										PRESENCE optional },
 	...
 }
 PDUSessionToBeModifiedSNModRequired::= SEQUENCE (SIZE (1.. maxnoofPDUSessions)) OF 	PDUSessionToBeModifiedSNModRequired-Item
@@ -1202,7 +1214,7 @@ PDUSessionToBeModifiedSNModRequired-Item ::= SEQUENCE {
 	sn-terminated			PDUSessionResourceModRqdInfo-SNterminated	OPTIONAL,
 	mn-terminated			PDUSessionResourceModRqdInfo-MNterminated	OPTIONAL,
 -- NOTE: If neither the PDU Session Resource Modification Required Info – SN terminated IE
--- nor the PDU Session Resource Modification Required Info – MN terminated IE is present, 
+-- nor the PDU Session Resource Modification Required Info – MN terminated IE is present,
 -- abnormal conditions as specified in clause 8.3.4.4 apply.
 	iE-Extension		ProtocolExtensionContainer { {PDUSessionToBeModifiedSNModRequired-Item-ExtIEs} }	OPTIONAL,
 	...
@@ -1253,7 +1265,7 @@ PDUSessionAdmittedModSNModConfirm-Item ::= SEQUENCE {
 	sn-terminated			PDUSessionResourceModConfirmInfo-SNterminated	OPTIONAL,
 	mn-terminated			PDUSessionResourceModConfirmInfo-MNterminated	OPTIONAL,
 -- NOTE: If neither the PDU Session Resource Modification Confirm Info – SN terminated IE
--- nor the PDU Session Resource Modification Confirm Info – MN terminated IE is present, 
+-- nor the PDU Session Resource Modification Confirm Info – MN terminated IE is present,
 -- abnormal conditions as specified in clause 8.3.4.4 apply.
 	iE-Extension			ProtocolExtensionContainer { {PDUSessionAdmittedModSNModConfirm-Item-ExtIEs} }	OPTIONAL,
 	...
@@ -1487,7 +1499,7 @@ PDUSession-SNChangeRequired-Item ::= SEQUENCE {
 	pduSessionId				PDUSession-ID,
 	sn-terminated			PDUSessionResourceChangeRequiredInfo-SNterminated	OPTIONAL,
 	mn-terminated			PDUSessionResourceChangeRequiredInfo-MNterminated	OPTIONAL,
--- NOTE: If the PDU Session Resource Change Required Info – SN terminated IE is not present, 
+-- NOTE: If the PDU Session Resource Change Required Info – SN terminated IE is not present,
 -- abnormal conditions as specified in clause 8.3.5.4 apply.
 	iE-Extension			ProtocolExtensionContainer { {PDUSession-SNChangeRequired-Item-ExtIEs} }	OPTIONAL,
 	...
@@ -1522,7 +1534,7 @@ PDUSession-SNChangeConfirm-Item ::= SEQUENCE {
 	pduSessionId				PDUSession-ID,
 	sn-terminated			PDUSessionResourceChangeConfirmInfo-SNterminated	OPTIONAL,
 	mn-terminated			PDUSessionResourceChangeConfirmInfo-MNterminated	OPTIONAL,
--- NOTE: If the PDU Session Resource Change Confirm Info – SN terminated IE is not present, 
+-- NOTE: If the PDU Session Resource Change Confirm Info – SN terminated IE is not present,
 -- abnormal conditions as specified in clause 8.3.5.4 apply.
 	iE-Extension			ProtocolExtensionContainer { {PDUSession-SNChangeConfirm-Item-ExtIEs} }	OPTIONAL,
 	...
@@ -2279,7 +2291,7 @@ HandoverReport ::= SEQUENCE {
 HandoverReport-IEs XNAP-PROTOCOL-IES ::= {
 	{ ID id-HandoverReportType			CRITICALITY ignore		TYPE HandoverReportType				PRESENCE mandatory}|
 	{ ID id-HandoverCause				CRITICALITY ignore		TYPE Cause							PRESENCE mandatory}|
-	{ ID id-SourceCellCGI				CRITICALITY ignore		TYPE GlobalNG-RANCell-ID			PRESENCE mandatory }| 
+	{ ID id-SourceCellCGI				CRITICALITY ignore		TYPE GlobalNG-RANCell-ID			PRESENCE mandatory }|
 	{ ID id-TargetCellCGI            	CRITICALITY ignore		TYPE GlobalNG-RANCell-ID			PRESENCE mandatory }|
 	{ ID id-ReEstablishmentCellCGI   	CRITICALITY ignore		TYPE GlobalCell-ID					PRESENCE conditional }|
 -- This IE shall be present if the Handover Report Type IE is set to the value "HO to wrong cell"

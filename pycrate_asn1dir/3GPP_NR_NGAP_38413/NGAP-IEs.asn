@@ -6,10 +6,10 @@
 -- **************************************************************
 
 NGAP-IEs {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 ngran-Access (22) modules (3) ngap (1) version1 (1) ngap-IEs (2) }
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -97,6 +97,7 @@ IMPORTS
 	id-TraceCollectionEntityURI,
 	id-TSCTrafficCharacteristics,
 	id-UEHistoryInformationFromTheUE,
+	id-UERadioCapabilityForPaging,
 	id-UERadioCapabilityForPagingOfNB-IoT,
 	id-UL-NGU-UP-TNLInformation,
 	id-UL-NGU-UP-TNLModifyList,
@@ -416,7 +417,7 @@ AssistanceDataForPaging-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
 }
 
 AssistanceDataForRecommendedCells ::= SEQUENCE {
-	recommendedCellsForPaging		RecommendedCellsForPaging, 
+	recommendedCellsForPaging		RecommendedCellsForPaging,
 	iE-Extensions		ProtocolExtensionContainer { {AssistanceDataForRecommendedCells-ExtIEs} }	OPTIONAL,
 	...
 }
@@ -443,7 +444,7 @@ AuthenticatedIndication ::= ENUMERATED {true, ...}
 
 AveragingWindow ::= INTEGER (0..4095, ...)
 
-AreaScopeOfMDT-NR ::= CHOICE {	
+AreaScopeOfMDT-NR ::= CHOICE {
 	cellBased					CellBasedMDT-NR,
 	tABased						TABasedMDT,
 	pLMNWide					NULL,
@@ -455,7 +456,7 @@ AreaScopeOfMDT-NR-ExtIEs NGAP-PROTOCOL-IES ::= {
 	...
 }
 
-AreaScopeOfMDT-EUTRA ::= CHOICE {	
+AreaScopeOfMDT-EUTRA ::= CHOICE {
 	cellBased					CellBasedMDT-EUTRA,
 	tABased						TABasedMDT,
 	pLMNWide					NULL,
@@ -481,7 +482,7 @@ AreaScopeOfNeighCellsItem-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
 
 -- B
 
-BitRate	::= INTEGER (0..4000000000000, ...) 
+BitRate	::= INTEGER (0..4000000000000, ...)
 
 BroadcastCancelledAreaList ::= CHOICE {
 	cellIDCancelledEUTRA				CellIDCancelledEUTRA,
@@ -709,8 +710,8 @@ CauseRadioNetwork ::= ENUMERATED {
 	successful-handover,
 	release-due-to-ngran-generated-reason,
 	release-due-to-5gc-generated-reason,
-	handover-cancelled,	
-	partial-handover,	
+	handover-cancelled,
+	partial-handover,
 	ho-failure-in-target-5GC-ngran-node-or-target-system,
 	ho-target-not-allowed,
 	tngrelocoverall-expiry,
@@ -755,7 +756,8 @@ CauseRadioNetwork ::= ENUMERATED {
 	multiple-location-reporting-reference-ID-instances,
 	rsn-not-available-for-the-up,
 	npn-access-denied,
-	cag-only-access-denied
+	cag-only-access-denied,
+	insufficient-ue-capabilities
 }
 
 CauseTransport ::= ENUMERATED {
@@ -974,7 +976,8 @@ CoreNetworkAssistanceInformationForInactive ::= SEQUENCE {
 
 CoreNetworkAssistanceInformationForInactive-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
 	{ ID id-PagingeDRXInformation				CRITICALITY ignore	EXTENSION PagingeDRXInformation					PRESENCE optional	}|
-	{ ID id-ExtendedUEIdentityIndexValue		CRITICALITY reject	EXTENSION ExtendedUEIdentityIndexValue			PRESENCE optional	},
+	{ ID id-ExtendedUEIdentityIndexValue		CRITICALITY ignore	EXTENSION ExtendedUEIdentityIndexValue			PRESENCE optional	}|
+	{ ID id-UERadioCapabilityForPaging			CRITICALITY ignore	EXTENSION UERadioCapabilityForPaging			PRESENCE optional	},
 	...
 }
 
@@ -1569,7 +1572,7 @@ ExpectedUEMovingTrajectoryItem-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
 
 Extended-AMFName	 ::= SEQUENCE {
 	aMFNameVisibleString		AMFNameVisibleString				OPTIONAL,
-	aMFNameUTF8String			AMFNameUTF8String					OPTIONAL, 
+	aMFNameUTF8String			AMFNameUTF8String					OPTIONAL,
 	iE-Extensions				ProtocolExtensionContainer { { Extended-AMFName-ExtIEs } } OPTIONAL,
 	...
 }
@@ -1583,7 +1586,7 @@ ExtendedPacketDelayBudget ::= INTEGER (1..65535, ...)
 
 Extended-RANNodeName	 ::= SEQUENCE {
 	rANNodeNameVisibleString		RANNodeNameVisibleString					OPTIONAL,
-	rANNodeNameUTF8String			RANNodeNameUTF8String						OPTIONAL, 
+	rANNodeNameUTF8String			RANNodeNameUTF8String						OPTIONAL,
 	iE-Extensions					ProtocolExtensionContainer { { Extended-RANNodeName-ExtIEs } } OPTIONAL,	...
 }
 
@@ -2032,11 +2035,11 @@ IntendedNumberOfPagingAttempts ::= INTEGER (1..16, ...)
 
 InterfacesToTrace ::= BIT STRING (SIZE(8))
 
-ImmediateMDTNr ::= SEQUENCE { 
+ImmediateMDTNr ::= SEQUENCE {
 	measurementsToActivate					MeasurementsToActivate,
-	m1Configuration							M1Configuration						OPTIONAL, 
+	m1Configuration							M1Configuration						OPTIONAL,
 -- The above IE shall be present if the Measurements to Activate IE has the first bit set to “1”
-	m4Configuration							M4Configuration						OPTIONAL, 
+	m4Configuration							M4Configuration						OPTIONAL,
 -- The above IE shall be present if the Measurements to Activate IE has the third bit set to “1”
 	m5Configuration							M5Configuration						OPTIONAL,
 -- The above IE shall be present if the Measurements to Activate IE has the fourth bit set to “1”
@@ -2264,7 +2267,7 @@ LoggedMDTNr-ExtIEs	NGAP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
-LoggingInterval ::= ENUMERATED { 
+LoggingInterval ::= ENUMERATED {
 	ms320, ms640, ms1280, ms2560, ms5120, ms10240, ms20480, ms30720, ms40960, ms61440,
 	infinity,
 	...
@@ -2273,9 +2276,9 @@ LoggingInterval ::= ENUMERATED {
 LoggingDuration ::= ENUMERATED {m10, m20, m40, m60, m90, m120, ...}
 
 Links-to-log ::= ENUMERATED {
-	uplink, 
-	downlink, 
-	both-uplink-and-downlink, 
+	uplink,
+	downlink,
+	both-uplink-and-downlink,
 	...
 }
 
@@ -2339,8 +2342,8 @@ MobilityRestrictionList ::= SEQUENCE {
 	servingPLMN					PLMNIdentity,
 	equivalentPLMNs				EquivalentPLMNs											OPTIONAL,
 	rATRestrictions				RATRestrictions											OPTIONAL,
-	forbiddenAreaInformation	ForbiddenAreaInformation								OPTIONAL, 
-	serviceAreaInformation		ServiceAreaInformation									OPTIONAL, 
+	forbiddenAreaInformation	ForbiddenAreaInformation								OPTIONAL,
+	serviceAreaInformation		ServiceAreaInformation									OPTIONAL,
 	iE-Extensions		ProtocolExtensionContainer { {MobilityRestrictionList-ExtIEs} }	OPTIONAL,
 	...
 }
@@ -2392,7 +2395,7 @@ MDT-Configuration-EUTRA-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
-MDT-Activation 	::= ENUMERATED { 
+MDT-Activation 	::= ENUMERATED {
 	immediate-MDT-only,
 	logged-MDT-only,
 	immediate-MDT-and-Trace,
@@ -2434,7 +2437,7 @@ M1ReportingTrigger ::= ENUMERATED{
 	...
 }
 
-M1ThresholdEventA2 ::= SEQUENCE { 
+M1ThresholdEventA2 ::= SEQUENCE {
 	m1ThresholdType		M1ThresholdType,
 	iE-Extensions		ProtocolExtensionContainer { { M1ThresholdEventA2-ExtIEs} } OPTIONAL,
 	...
@@ -2444,7 +2447,7 @@ M1ThresholdEventA2-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
-M1ThresholdType ::= CHOICE { 
+M1ThresholdType ::= CHOICE {
 	threshold-RSRP				Threshold-RSRP,
 	threshold-RSRQ				Threshold-RSRQ,
 	threshold-SINR				Threshold-SINR,
@@ -2455,7 +2458,7 @@ M1ThresholdType-ExtIEs NGAP-PROTOCOL-IES ::= {
 	...
 }
 
-M1PeriodicReporting ::= SEQUENCE { 
+M1PeriodicReporting ::= SEQUENCE {
 	reportInterval				ReportIntervalMDT,
 	reportAmount				ReportAmountMDT,
 	iE-Extensions		ProtocolExtensionContainer { { M1PeriodicReporting-ExtIEs} } OPTIONAL,
@@ -2477,7 +2480,7 @@ M4Configuration-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
-M4period ::= ENUMERATED {ms1024, ms2048, ms5120, ms10240, min1, ... } 
+M4period ::= ENUMERATED {ms1024, ms2048, ms5120, ms10240, min1, ... }
 
 M5Configuration ::= SEQUENCE {
 	m5period			M5period,
@@ -2490,7 +2493,7 @@ M5Configuration-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
-M5period ::= ENUMERATED {ms1024, ms2048, ms5120, ms10240, min1, ... } 
+M5period ::= ENUMERATED {ms1024, ms2048, ms5120, ms10240, min1, ... }
 
 M6Configuration ::= SEQUENCE {
 	m6report-Interval	M6report-Interval,
@@ -2503,7 +2506,7 @@ M6Configuration-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
-M6report-Interval ::= ENUMERATED { 
+M6report-Interval ::= ENUMERATED {
 	ms120, ms240, ms480, ms640, ms1024, ms2048, ms5120, ms10240, ms20480, ms40960, min1, min6, min12, min30,
 	...
 }
@@ -2550,23 +2553,23 @@ NAS-PDU ::= OCTET STRING
 NASSecurityParametersFromNGRAN ::= OCTET STRING
 
 NB-IoT-DefaultPagingDRX ::= ENUMERATED {
-	rf128, rf256, rf512, rf1024, 
-	... 
+	rf128, rf256, rf512, rf1024,
+	...
 }
 
 NB-IoT-PagingDRX ::= ENUMERATED {
-	rf32, rf64, rf128, rf256, rf512, rf1024, 
-	... 
+	rf32, rf64, rf128, rf256, rf512, rf1024,
+	...
 }
 
 NB-IoT-Paging-eDRXCycle ::= ENUMERATED {
-	hf2, hf4, hf6, hf8, hf10, hf12, hf14, hf16, hf32, hf64, hf128, hf256, hf512, hf1024, 
+	hf2, hf4, hf6, hf8, hf10, hf12, hf14, hf16, hf32, hf64, hf128, hf256, hf512, hf1024,
 	...
 }
 
 NB-IoT-Paging-TimeWindow ::= ENUMERATED {
-	s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, 
-	... 
+	s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16,
+	...
 }
 
 NB-IoT-Paging-eDRXInfo ::= SEQUENCE {
@@ -2776,13 +2779,13 @@ NRV2XServicesAuthorized-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
-VehicleUE ::= ENUMERATED { 
+VehicleUE ::= ENUMERATED {
 	authorized,
 	not-authorized,
 	...
 }
 
-PedestrianUE ::= ENUMERATED { 
+PedestrianUE ::= ENUMERATED {
 	authorized,
 	not-authorized,
 	...
@@ -2850,7 +2853,7 @@ PacketLossRate ::= INTEGER (0..1000, ...)
 
 PagingAssisDataforCEcapabUE ::= SEQUENCE {
 	eUTRA-CGI							EUTRA-CGI,
-	coverageEnhancementLevel			CoverageEnhancementLevel, 
+	coverageEnhancementLevel			CoverageEnhancementLevel,
 	iE-Extensions						ProtocolExtensionContainer { { PagingAssisDataforCEcapabUE-ExtIEs} } OPTIONAL,
 	...
 }
@@ -2910,22 +2913,22 @@ PagingeDRXInformation-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
 }
 
 Paging-eDRX-Cycle ::= ENUMERATED {
-	hfhalf, hf1, hf2, hf4, hf6, 
-	hf8, hf10, hf12, hf14, hf16, 
+	hfhalf, hf1, hf2, hf4, hf6,
+	hf8, hf10, hf12, hf14, hf16,
 	hf32, hf64, hf128, hf256,
 	...
 }
 
 
 Paging-Time-Window ::= ENUMERATED {
-	s1, s2, s3, s4, s5, 
-	s6, s7, s8, s9, s10, 
+	s1, s2, s3, s4, s5,
+	s6, s7, s8, s9, s10,
 	s11, s12, s13, s14, s15, s16,
 	...
 }
 
 PagingProbabilityInformation ::= ENUMERATED {
-	p00, p05, p10, p15, p20, p25, p30, p35, p40, p45, p50, p55, p60, p65, p70, p75, p80, p85, p90, p95, p100, 
+	p00, p05, p10, p15, p20, p25, p30, p35, p40, p45, p50, p55, p60, p65, p70, p75, p80, p85, p90, p95, p100,
 	...
 }
 
@@ -3023,8 +3026,8 @@ PC5FlowBitRates-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
 PCIListForMDT ::= SEQUENCE (SIZE(1.. maxnoofNeighPCIforMDT)) OF NR-PCI
 
 PrivacyIndicator ::= ENUMERATED {
-	immediate-MDT,	
-	logged-MDT,	
+	immediate-MDT,
+	logged-MDT,
 	...
 }
 
@@ -3277,9 +3280,10 @@ PDUSessionResourceModifyRequestTransferIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-CommonNetworkInstance						CRITICALITY ignore	TYPE CommonNetworkInstance						PRESENCE optional		}|
 	{ ID id-AdditionalRedundantUL-NGU-UP-TNLInformation	CRITICALITY ignore	TYPE UPTransportLayerInformationList			PRESENCE optional		}|
 	{ ID id-RedundantCommonNetworkInstance				CRITICALITY ignore	TYPE CommonNetworkInstance						PRESENCE optional		}|
-	{ ID id-RedundantUL-NGU-UP-TNLInformation			CRITICALITY ignore	TYPE UPTransportLayerInformation				PRESENCE optional	 	},
+	{ ID id-RedundantUL-NGU-UP-TNLInformation			CRITICALITY ignore	TYPE UPTransportLayerInformation				PRESENCE optional	 	}|
+	{ ID id-SecurityIndication							CRITICALITY ignore	TYPE SecurityIndication							PRESENCE optional		},
 	...
-}	
+}
 
 PDUSessionResourceModifyResponseTransfer ::= SEQUENCE {
 	dL-NGU-UP-TNLInformation				UPTransportLayerInformation											OPTIONAL,
@@ -3400,7 +3404,7 @@ PDUSessionResourceNotifyReleasedTransfer ::= SEQUENCE {
 	...
 }
 
-PDUSessionResourceNotifyReleasedTransfer-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {	
+PDUSessionResourceNotifyReleasedTransfer-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
 	{ ID id-SecondaryRATUsageInformation		CRITICALITY ignore	EXTENSION SecondaryRATUsageInformation		PRESENCE optional	},
 	...
 }
@@ -3738,7 +3742,7 @@ Periodicity ::= INTEGER (0..640000, ...)
 
 PeriodicRegistrationUpdateTimer ::= BIT STRING (SIZE(8))
 
-PLMNIdentity ::= OCTET STRING (SIZE(3)) 
+PLMNIdentity ::= OCTET STRING (SIZE(3))
 
 PLMNSupportList ::= SEQUENCE (SIZE(1..maxnoofPLMNs)) OF PLMNSupportItem
 
@@ -3941,7 +3945,7 @@ QosFlowParametersList ::= SEQUENCE (SIZE(1..maxnoofQosFlows)) OF QosFlowParamete
 
 QosFlowParametersItem ::= SEQUENCE {
 	qosFlowIdentifier				QosFlowIdentifier,
-	alternativeQoSParaSetList		AlternativeQoSParaSetList							OPTIONAL,	
+	alternativeQoSParaSetList		AlternativeQoSParaSetList							OPTIONAL,
 	iE-Extensions		ProtocolExtensionContainer { {QosFlowParametersItem-ExtIEs} }	OPTIONAL,
 	...
 }
@@ -4166,7 +4170,7 @@ ReportAmountMDT ::= ENUMERATED {
 
 ReportIntervalMDT ::= ENUMERATED {
 	ms120, ms240, ms480, ms640, ms1024, ms2048, ms5120, ms10240, min1, min6, min12, min30, min60
-} 
+}
 
 ResetType ::= CHOICE {
 	nG-Interface			ResetAll,
@@ -4478,7 +4482,7 @@ SONInformationReport-ExtIEs NGAP-PROTOCOL-IES ::= {
 	...
 }
 
-SONInformationRequest ::= ENUMERATED { 
+SONInformationRequest ::= ENUMERATED {
 	xn-TNL-configuration-info,
 	...
 }
@@ -4518,7 +4522,7 @@ SourceRANNodeID-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
 }
 
 SourceToTarget-TransparentContainer ::= OCTET STRING
--- This IE includes a transparent container from the source RAN node to the target RAN node. 
+-- This IE includes a transparent container from the source RAN node to the target RAN node.
 -- The octets of the OCTET STRING are encoded according to the specifications of the target system.
 
 SourceToTarget-AMFInformationReroute ::= SEQUENCE {
@@ -4533,11 +4537,11 @@ SourceToTarget-AMFInformationReroute-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
--- This IE includes information from the source Core node to the target Core node for reroute information provide by NSSF. 
+-- This IE includes information from the source Core node to the target Core node for reroute information provide by NSSF.
 -- The octets of the OCTET STRING are encoded according to the specifications of the Core network.
 
 SRVCCOperationPossible ::= ENUMERATED {
-	possible, 
+	possible,
 	notPossible,
 	...
 }
@@ -4742,14 +4746,14 @@ TargetRNC-ID-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
 }
 
 TargetToSource-TransparentContainer ::= OCTET STRING
--- This IE includes a transparent container from the target RAN node to the source RAN node. 
+-- This IE includes a transparent container from the target RAN node to the source RAN node.
 -- The octets of the OCTET STRING are encoded according to the specifications of the target system.
 
 TargettoSource-Failure-TransparentContainer ::= OCTET STRING
--- This IE includes a transparent container from the target RAN node to the source RAN node. 
+-- This IE includes a transparent container from the target RAN node to the source RAN node.
 -- The octets of the OCTET STRING are encoded according to the specifications of the target system (if applicable).
 
-TimerApproachForGUAMIRemoval ::= ENUMERATED { 
+TimerApproachForGUAMIRemoval ::= ENUMERATED {
 	apply-timer,
 	...
 }
@@ -4762,7 +4766,7 @@ TimeUEStayedInCell ::= INTEGER (0..4095)
 
 TimeUEStayedInCellEnhancedGranularity ::= INTEGER (0..40950)
 
-TNAP-ID ::= OCTET STRING 
+TNAP-ID ::= OCTET STRING
 
 TNGF-ID ::= CHOICE {
 	tNGF-ID				 	BIT STRING (SIZE(32, ...)),
@@ -4788,7 +4792,7 @@ TNLAssociationItem-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
-TNLAssociationUsage ::= ENUMERATED { 
+TNLAssociationUsage ::= ENUMERATED {
 	ue,
 	non-ue,
 	both,
@@ -4822,7 +4826,7 @@ TraceActivation-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
-TraceDepth ::= ENUMERATED { 
+TraceDepth ::= ENUMERATED {
 	minimum,
 	medium,
 	maximum,
@@ -5366,7 +5370,7 @@ WLANMeasConfigNameItem-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
 
 WLANMeasConfig::= ENUMERATED {setup,...}
 
-WLANName ::= OCTET STRING (SIZE (1..32))   
+WLANName ::= OCTET STRING (SIZE (1..32))
 
 WUS-Assistance-Information  ::= SEQUENCE {
 	pagingProbabilityInformation             PagingProbabilityInformation,

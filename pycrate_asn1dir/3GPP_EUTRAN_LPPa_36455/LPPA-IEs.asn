@@ -6,16 +6,19 @@
 -- **************************************************************
 
 LPPA-IEs {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 eps-Access (21) modules (3) lppa (6) version1 (1) lppa-IEs (2) }
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
-IMPORTS	
-	
+IMPORTS
+
 	id-MeasurementQuantities-Item,
+	id-ResultsPerSSB-Index-List,
+	id-ResultsPerSSB-Index-Item,
+	id-NR-CGI,
 	maxCellineNB,
 	maxCellReport,
 	maxNrOfErrors,
@@ -26,6 +29,8 @@ IMPORTS
 	id-WLANMeasurementQuantities-Item,
 	maxGERANMeas,
 	maxUTRANMeas,
+	maxNRmeas,
+	maxResultsPerSSBIndex,
 	maxCellineNB-ext,
 	maxWLANchannels,
 	maxMBSFN-Allocations,
@@ -47,7 +52,7 @@ FROM LPPA-CommonDataTypes
 
 	ProtocolExtensionContainer{},
 	ProtocolIE-Single-Container{},
-	
+
 	LPPA-PROTOCOL-EXTENSION,
 	LPPA-PROTOCOL-IES
 FROM LPPA-Containers;
@@ -89,7 +94,7 @@ AssistanceInformationFailureList-ExtIEs LPPA-PROTOCOL-EXTENSION ::= {
 
 AssistanceInformationMetaData ::= SEQUENCE {
 	encrypted			ENUMERATED {true, ...}	OPTIONAL,
-	gNSSID				ENUMERATED {gps, sbas, gzss, galileo, glonass, bds, ...}	OPTIONAL,
+	gNSSID				ENUMERATED {gps, sbas, gzss, galileo, glonass, bds, ..., navic}	OPTIONAL,
 	sBASID				ENUMERATED {waas, egnos, msas, gagan, ...}				OPTIONAL,
 	iE-Extensions						ProtocolExtensionContainer { { AssistanceInformationMetaData-ExtIEs} }	OPTIONAL,
 	...
@@ -277,7 +282,8 @@ InterRATMeasurementQuantitiesValue-ExtIEs LPPA-PROTOCOL-EXTENSION ::= {
 InterRATMeasurementQuantitiesValue ::= ENUMERATED {
 	geran,
 	utran,
-	...
+	...,
+	nr
 }
 
 InterRATMeasurementResult ::= SEQUENCE (SIZE (1.. maxNoMeas)) OF InterRATMeasuredResultsValue
@@ -285,7 +291,8 @@ InterRATMeasurementResult ::= SEQUENCE (SIZE (1.. maxNoMeas)) OF InterRATMeasure
 InterRATMeasuredResultsValue ::= CHOICE {
 	resultGERAN			ResultGERAN,
 	resultUTRAN			ResultUTRAN,
-	...
+	...,
+	resultNR			ResultNR
 }
 
 -- J
@@ -341,7 +348,7 @@ MeasurementQuantitiesValue ::= ENUMERATED {
 MeasuredResults ::= SEQUENCE (SIZE (1.. maxNoMeas)) OF MeasuredResultsValue
 
 
-MeasuredResultsValue ::= CHOICE { 
+MeasuredResultsValue ::= CHOICE {
 	valueAngleOfArrival				INTEGER (0..719),
 	valueTimingAdvanceType1			INTEGER (0..7690),
 	valueTimingAdvanceType2			INTEGER (0..7690),
@@ -362,6 +369,19 @@ MBSFNsubframeConfigurationValue ::=			SEQUENCE {
 -- N
 
 NarrowBandIndex ::= INTEGER (0..15,...)
+
+NRCellIdentity ::= BIT STRING (SIZE(36))
+
+NR-CGI ::= SEQUENCE {
+	pLMN-Identity		PLMN-Identity,
+	nRCellIdentity		NRCellIdentity,
+	iE-Extensions		ProtocolExtensionContainer { {NR-CGI-ExtIEs} } OPTIONAL,
+	...
+}
+
+NR-CGI-ExtIEs LPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
 
 NPRSConfiguration ::=			SEQUENCE {
 	nPRSSubframePartA			NPRSSubframePartA 		OPTIONAL,
@@ -389,7 +409,7 @@ NPRSSubframePartB ::=			SEQUENCE {
 	startingsubframeoffset		ENUMERATED {zero, one-Eighth, two-Eighths, three-Eighths, four-Eighths, five-Eighths, six-Eighths, seven-Eighths, ...},
 	nPRSMutingConfiguration		NPRSMutingConfiguration 		OPTIONAL,
 	...,
-	sIB1-NB-Subframe-TDD			ENUMERATED {	sf0, sf4, sf0and5, ...} 		OPTIONAL	
+	sIB1-NB-Subframe-TDD			ENUMERATED {	sf0, sf4, sf0and5, ...} 		OPTIONAL
 
 }
 
@@ -417,6 +437,11 @@ NumberOfFrequencyHoppingBands ::= ENUMERATED {
 }
 
 NPRSSequenceInfo ::= INTEGER (0..174,...)
+
+
+NRARFCN ::= INTEGER (0.. 3279165)
+
+NRPCI ::= INTEGER (0..1007)
 
 -- O
 
@@ -470,7 +495,7 @@ OTDOACell-Information-Item ::= CHOICE {
 	tAC							TAC,
 	eARFCN						EARFCN,
 	pRS-Bandwidth				PRS-Bandwidth,
-	pRS-ConfigurationIndex		PRS-Configuration-Index, 
+	pRS-ConfigurationIndex		PRS-Configuration-Index,
 	cPLength					CPLength,
 	numberOfDlFrames			NumberOfDlFrames,
 	numberOfAntennaPorts		NumberOfAntennaPorts,
@@ -487,7 +512,7 @@ OTDOACell-Information-Item ::= CHOICE {
 	nPRSConfiguration			NPRSConfiguration,
 	offsetNBChanneltoEARFCN		OffsetNBChanneltoEARFCN,
 	operationModeInfo			OperationModeInfo,
-	nPRS-ID						INTEGER (0..4095, ...), 
+	nPRS-ID						INTEGER (0..4095, ...),
 	dL-Bandwidth				DL-Bandwidth,
 	pRSOccasionGroup			PRSOccasionGroup,
 	pRSFreqHoppingConfig		PRSFrequencyHoppingConfiguration,
@@ -572,34 +597,38 @@ PosSIB-Segments-ExtIEs LPPA-PROTOCOL-EXTENSION ::= {
 
 
 PosSIB-Type ::= ENUMERATED {
-	posSibType1-1, 
-	posSibType1-2, 
-	posSibType1-3, 
-	posSibType1-4, 
+	posSibType1-1,
+	posSibType1-2,
+	posSibType1-3,
+	posSibType1-4,
 	posSibType1-5,
-	posSibType1-6, 
-	posSibType1-7, 
-	posSibType2-1, 
-	posSibType2-2, 
+	posSibType1-6,
+	posSibType1-7,
+	posSibType2-1,
+	posSibType2-2,
 	posSibType2-3,
-	posSibType2-4, 
-	posSibType2-5, 
-	posSibType2-6, 
-	posSibType2-7, 
+	posSibType2-4,
+	posSibType2-5,
+	posSibType2-6,
+	posSibType2-7,
 	posSibType2-8,
-	posSibType2-9, 
-	posSibType2-10, 
-	posSibType2-11, 
-	posSibType2-12, 
-	posSibType2-13, 
-	posSibType2-14, 
-	posSibType2-15, 
+	posSibType2-9,
+	posSibType2-10,
+	posSibType2-11,
+	posSibType2-12,
+	posSibType2-13,
+	posSibType2-14,
+	posSibType2-15,
 	posSibType2-16,
-	posSibType2-17, 
-	posSibType2-18, 
+	posSibType2-17,
+	posSibType2-18,
 	posSibType2-19,
 	posSibType3-1,
-	...
+	...,
+	posSibType4-1,
+	posSibType5-1,
+	posSibType2-24,
+	posSibType2-25
 }
 
 PRS-Bandwidth ::= ENUMERATED {
@@ -736,7 +765,40 @@ ResultUTRAN-Item-ExtIEs LPPA-PROTOCOL-EXTENSION ::= {
 	...
 }
 
+ResultNR ::= SEQUENCE (SIZE (1.. maxNRmeas)) OF ResultNR-Item
+
+ResultNR-Item ::= SEQUENCE {
+	nRARFCN				NRARFCN,
+	nRPCI				NRPCI,
+	sS-NRRSRP			SS-NRRSRP	OPTIONAL,
+	sS-NRRSRQ			SS-NRRSRQ	OPTIONAL,
+	iE-Extensions		ProtocolExtensionContainer { { ResultNR-Item-ExtIEs} } OPTIONAL,
+	...
+}
+
+ResultNR-Item-ExtIEs LPPA-PROTOCOL-EXTENSION ::= {
+	{ ID id-ResultsPerSSB-Index-List							CRITICALITY ignore	EXTENSION ResultsPerSSB-Index-List					PRESENCE optional}|
+	{ ID id-NR-CGI												CRITICALITY ignore	EXTENSION NR-CGI											PRESENCE optional},
+	...
+}
+
+
+ResultsPerSSB-Index-List ::= SEQUENCE (SIZE(1..maxResultsPerSSBIndex)) OF ResultsPerSSB-Index-Item
+
+ResultsPerSSB-Index-Item ::=SEQUENCE {
+	sSB-Index					SSB-Index,
+	sS-NRRSRPBeamValue			SS-NRRSRP			OPTIONAL,
+	sS-NRRSRQBeamValue			SS-NRRSRQ 				OPTIONAL,
+	iE-Extensions				ProtocolExtensionContainer { { ResultsPerSSB-Index-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+ResultsPerSSB-Index-Item-ExtIEs LPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
 RSSI ::= INTEGER (0..63, ...)
+
 
 -- S
 
@@ -770,6 +832,11 @@ Subframeallocation ::= CHOICE {
 	fourFrames						BIT STRING (SIZE(24))
 }
 
+SS-NRRSRP ::= INTEGER (0..127)
+
+SS-NRRSRQ ::= INTEGER (0..127)
+
+SSB-Index ::= INTEGER (0..63)
 
 SSID ::= OCTET STRING (SIZE(1..32))
 

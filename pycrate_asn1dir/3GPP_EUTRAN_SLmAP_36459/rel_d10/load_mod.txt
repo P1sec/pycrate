@@ -1,6 +1,0 @@
-SLMAP-CommonDataTypes.asn
-SLMAP-Constants.asn
-SLMAP-Containers.asn
-SLMAP-IEs.asn
-SLMAP-PDU-Contents.asn
-SLMAP-PDU-Descriptions.asn

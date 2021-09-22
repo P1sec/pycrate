@@ -1,6 +1,0 @@
-M3AP-CommonDataTypes.asn
-M3AP-Constants.asn
-M3AP-Containers.asn
-M3AP-IEs.asn
-M3AP-PDU-Contents.asn
-M3AP-PDU-Descriptions.asn

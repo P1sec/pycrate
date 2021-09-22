@@ -78,6 +78,9 @@ M2AP-Constants.id-Repetition-PeriodExtended
 M2AP-Constants.id-MCH-Scheduling-PeriodExtended2
 M2AP-Constants.id-Subcarrier-SpacingMBMS
 M2AP-Constants.id-SubframeAllocationExtended
+M2AP-Constants.id-MCCHrelatedBCCH-ExtConfigPerMBSFNArea-Item
+M2AP-Constants.id-MCCHrelatedBCCH-ExtConfigPerMBSFNArea
+M2AP-Constants.id-SubframeAllocationFurtherExtension
 M2AP-Containers.M2AP-PROTOCOL-IES
 M2AP-Containers.M2AP-PROTOCOL-IES-PAIR
 M2AP-Containers.M2AP-PROTOCOL-EXTENSION
@@ -125,6 +128,7 @@ M2AP-Ies.MBSFN-SynchronisationArea-ID
 M2AP-Ies.MBSFN-Subframe-Configuration-ExtIEs
 M2AP-Ies.MCCH-Update-Time
 M2AP-Ies.MCCHrelatedBCCH-ConfigPerMBSFNArea-Item-ExtIEs
+M2AP-Ies.MCCHrelatedBCCH-ExtConfigPerMBSFNArea-Item-ExtIEs
 M2AP-Ies.MCE-ID
 M2AP-Ies.MCE-MBMS-M2AP-ID
 M2AP-Ies.MCEname
@@ -145,6 +149,7 @@ M2AP-Ies.SC-PTM-Information-ExtIEs
 M2AP-Ies.SFN
 M2AP-Ies.Subcarrier-SpacingMBMS
 M2AP-Ies.SubframeAllocationExtended-ExtIEs
+M2AP-Ies.SubframeAllocationFurtherExtension-ExtIEs
 M2AP-Ies.TimeToWait
 M2AP-Ies.TMGI-ExtIEs
 M2AP-Ies.TNL-Information-ExtIEs
@@ -169,6 +174,7 @@ M2AP-PDU-Contents.M2SetupRequest-Ies
 M2AP-PDU-Contents.ENB-MBMS-Configuration-data-ItemIEs
 M2AP-PDU-Contents.M2SetupResponse-Ies
 M2AP-PDU-Contents.MCCHrelatedBCCH-ConfigPerMBSFNArea-ItemIEs
+M2AP-PDU-Contents.MCCHrelatedBCCH-ExtConfigPerMBSFNArea-ItemIEs
 M2AP-PDU-Contents.M2SetupFailure-Ies
 M2AP-PDU-Contents.ENBConfigurationUpdate-Ies
 M2AP-PDU-Contents.ENB-MBMS-Configuration-data-ConfigUpdate-ItemIEs
@@ -235,9 +241,11 @@ M2AP-Ies.MBMSsessionListPerPMCH-Item
 M2AP-Ies.MBMSsessionsToBeSuspendedListPerPMCH-Item
 M2AP-Ies.MBSFN-Subframe-Configuration
 M2AP-Ies.MCCHrelatedBCCH-ConfigPerMBSFNArea-Item
+M2AP-Ies.MCCHrelatedBCCH-ExtConfigPerMBSFNArea-Item
 M2AP-Ies.PMCH-Configuration
 M2AP-Ies.SC-PTM-Information
 M2AP-Ies.SubframeAllocationExtended
+M2AP-Ies.SubframeAllocationFurtherExtension
 M2AP-Ies.TMGI
 M2AP-Ies.TNL-Information
 M2AP-PDU-Contents.SessionStartRequest
@@ -260,6 +268,7 @@ M2AP-PDU-Contents.M2SetupRequest
 M2AP-PDU-Contents.ENB-MBMS-Configuration-data-List
 M2AP-PDU-Contents.M2SetupResponse
 M2AP-PDU-Contents.MCCHrelatedBCCH-ConfigPerMBSFNArea
+M2AP-PDU-Contents.MCCHrelatedBCCH-ExtConfigPerMBSFNArea
 M2AP-PDU-Contents.M2SetupFailure
 M2AP-PDU-Contents.ENBConfigurationUpdate
 M2AP-PDU-Contents.ENB-MBMS-Configuration-data-List-ConfigUpdate

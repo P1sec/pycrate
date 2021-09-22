@@ -73,6 +73,36 @@ class UEFGMMd(SigStack):
     
     
     #--------------------------------------------------------------------------#
+    # FGMMAuthentication policy
+    #--------------------------------------------------------------------------#
+    # this will systematically bypass all authentication procedures
+    AUTH_DISABLED       = False
+    # 5GMM procedure timer for auth and smc
+    T3560               = 2
+    # Authentication Management Field
+    AUTH_AMF            = b'\x80\x00'
+    # Authentication ABBA
+    AUTH_ABBA           = b'\x00\x00'
+    # if AUTH_PLMN is not None, it will be used for building the 5G auth vector
+    # otherwise the main Corenet PLMN will be used
+    AUTH_PLMN           = None
+    # this is to force a 2G or 3G authentication instead of a 5G one
+    AUTH_2G             = False
+    AUTH_3G             = False
+    # this is to extend AUTN with arbitrary data
+    AUTH_AUTN_EXT       = None
+    #
+    # re-authentication policy:
+    # this forces an auth procedure every X 5GMM Reg / Service / Detach procedures 
+    # even if a valid KSI is provided by the UE
+    AUTH_REG            = 1
+    AUTH_SER            = 3
+    AUTH_DET            = 1 # only applied to Detach without UE power off
+    
+    
+    
+    
+    #--------------------------------------------------------------------------#
     # FGMM timers
     #--------------------------------------------------------------------------#
     
@@ -136,7 +166,68 @@ class UEFGMMd(SigStack):
     # SMC and security-related methods
     #--------------------------------------------------------------------------#
     
+    def require_auth(self, Proc, ksi=None):
+        return True
     
+    def require_smc(self, Proc):
+        return True
+    
+    def get_new_ksi(self):
+        for i in range(0, 7):
+            if i not in self.NG.SEC:
+                return i
+        # all native KSI have been used, clear all of them except the current one
+        # if defined
+        cur = self.NG.SEC['KSI']
+        for i in range(0, 7):
+            if i != cur:
+                del self.NG.SEC[i]
+        if cur == 0:
+            return 1
+        else:
+            return 0
+    
+    def set_sec_ctx(self, ksi, ctx, vect, snid):
+        ksi = (ksi[0]<<3) + ksi[1]
+        if ctx == 2:
+            # WNG: this is undefined / illegal and won't work (hopefully)
+            CK, IK = conv_102_C4(vect[2]), conv_102_C5(vect[2])
+            if self.AUTH_PLMN:
+                snid = make_5g_snn(self.AUTH_PLMN)
+            else:
+                snid = make_5g_snn(self.UE.Server.PLMN)
+            Kausf    = conv_501_A2(CK, IK, sn_name, sqnak)
+            secctx = {'VEC'  : vect,
+                      'CTX'  : ctx,
+                      'Kc'   : vect[2],
+                      'CK'   : CK,
+                      'IK'   : IK,
+                      'Kausf': Kausf}
+        elif ctx == 3:
+            # WNG: this is also undefined and shouldn't work
+            if self.AUTH_PLMN:
+                snid = make_5g_snn(self.FGMM.AUTH_PLMN)
+            else:
+                snid = make_5g_snn(self.UE.Server.PLMN)
+            Kausf  = conv_(vect[3], vect[4], snid, vect[2][:6])
+            secctx = {'VEC'  : vect,
+                      'CTX'  : ctx,
+                      'CK'   : vect[3],
+                      'IK'   : vect[4],
+                      'Kausf': Kausf}
+        else:
+            # ctx == 5
+            secctx = {'VEC'  : vect,
+                      'CTX'  : ctx,
+                      'Kausf': vect[3]}
+        #
+        secctx['Kseaf'] = conv_501_A6(kausf, snid)
+        secctx['Kamf']  = conv_501_A7(kseaf, self.UE.IMSI, self.AUTH_ABBA)
+        secctx['UL'], secctx['DL'] = 0, 0
+        # TODO: check if a custom UL counter is still required for gNB key derivation
+        #secctx['UL_gnb'] = 0
+        self.NG.SEC[ksi] = secctx
+        self.NG.SEC['KSI'] = ksi
     
     
     #--------------------------------------------------------------------------#

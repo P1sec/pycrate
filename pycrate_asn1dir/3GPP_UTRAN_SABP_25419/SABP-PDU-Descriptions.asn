@@ -7,10 +7,10 @@
 -- **************************************************************
 
 SABP-PDU-Descriptions {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 umts-Access (20) modules (3) sabp (3) version1 (1) sabp-PDU-Descriptions (0)}
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -70,7 +70,7 @@ SABP-ELEMENTARY-PROCEDURE ::= CLASS {
 }
 WITH SYNTAX {
 	INITIATING MESSAGE		&InitiatingMessage
-	[SUCCESSFUL OUTCOME		
+	[SUCCESSFUL OUTCOME
 
 &SuccessfulOutcome]
 	[UNSUCCESSFUL OUTCOME		&UnsuccessfulOutcome]

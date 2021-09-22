@@ -91,6 +91,7 @@ RANAP-Constants.maxNrOfLAIs
 RANAP-Constants.maxSizeOfIMSInfo
 RANAP-Constants.maxnoofMDTPLMNs
 RANAP-Constants.maxAddPosSet
+RANAP-Constants.maxnoofPLMNs
 RANAP-Constants.id-AreaIdentity
 RANAP-Constants.id-CN-DomainIndicator
 RANAP-Constants.id-Cause
@@ -374,6 +375,12 @@ RANAP-Constants.id-P-TMSI
 RANAP-Constants.id-RANAP-Message
 RANAP-Constants.id-PowerSavingIndicator
 RANAP-Constants.id-UE-Usage-Type
+RANAP-Constants.id-DCN-ID
+RANAP-Constants.id-UE-Application-Layer-Measurement-Configuration
+RANAP-Constants.id-UE-Application-Layer-Measurement-Configuration-For-Relocation
+RANAP-Constants.id-UE-Application-Layer-Measurement-Capability
+RANAP-Constants.id-UeApplicationLayerMeasurementSupportIndication
+RANAP-Constants.id-SRVCCSource
 RANAP-Containers.RANAP-PROTOCOL-IES
 RANAP-Containers.RANAP-PROTOCOL-IES-PAIR
 RANAP-Containers.RANAP-PROTOCOL-EXTENSION
@@ -407,7 +414,11 @@ RANAP-IEs.Alt-RAB-Parameter-MaxBitrateList
 RANAP-IEs.Alt-RAB-Parameter-SupportedMaxBitrateInf-ExtIEs
 RANAP-IEs.Alt-RAB-Parameter-SupportedMaxBitrates
 RANAP-IEs.AlternativeRABConfigurationRequest
+RANAP-IEs.UE-Application-Layer-Measurement-Configuration
+RANAP-IEs.UE-Application-Layer-Measurement-Configuration-For-Relocation
+RANAP-IEs.ServiceType
 RANAP-IEs.APN
+RANAP-IEs.AreaScopeForUEApplicationLayerMeasurementConfiguration
 RANAP-IEs.AreaIdentity
 RANAP-IEs.Ass-RAB-Parameters-ExtIEs
 RANAP-IEs.Ass-RAB-Parameter-ExtendedGuaranteedBitrateList
@@ -457,6 +468,7 @@ RANAP-IEs.DataPDUType
 RANAP-IEs.DataVolumeReference
 RANAP-IEs.DataVolumeReportingIndication
 RANAP-IEs.DCH-ID
+RANAP-IEs.DCN-ID
 RANAP-IEs.DeliveryOfErroneousSDU
 RANAP-IEs.DeliveryOrder
 RANAP-IEs.NewRAListofIdleModeUEs
@@ -613,6 +625,7 @@ RANAP-IEs.LAI-List
 RANAP-IEs.LoggedMDT-ExtIEs
 RANAP-IEs.LoggingInterval
 RANAP-IEs.LoggingDuration
+RANAP-IEs.PLMNBased-ExtIEs
 RANAP-IEs.PLMNidentity
 RANAP-IEs.PLMNs-in-shared-network-ExtIEs
 RANAP-IEs.Port-Number
@@ -709,6 +722,7 @@ RANAP-IEs.SourceBSS-ToTargetBSS-TransparentContainer
 RANAP-IEs.SourceID
 RANAP-IEs.SourceRNC-ID-ExtIEs
 RANAP-IEs.SourceRNC-ToTargetRNC-TransparentContainer-ExtIEs
+RANAP-IEs.SRVCCSource
 RANAP-IEs.IRAT-Measurement-Configuration-ExtIEs
 RANAP-IEs.IRATmeasurementParameters-ExtIEs
 RANAP-IEs.RSRQ-Type
@@ -737,6 +751,7 @@ RANAP-IEs.TargetID
 RANAP-IEs.TargetENB-ID-ExtIEs
 RANAP-IEs.TargetRNC-ID-ExtIEs
 RANAP-IEs.TargetRNC-ToSourceRNC-TransparentContainer-ExtIEs
+RANAP-IEs.UeApplicationLayerMeasurementSupportIndication
 RANAP-IEs.TBCD-STRING
 RANAP-IEs.TemporaryUE-ID
 RANAP-IEs.Time-UE-StayedInCell
@@ -765,6 +780,7 @@ RANAP-IEs.TypeOfError
 RANAP-IEs.UE-AggregateMaximumBitRate
 RANAP-IEs.UE-AggregateMaximumBitRateDownlink
 RANAP-IEs.UE-AggregateMaximumBitRateUplink
+RANAP-IEs.UE-Application-Layer-Measurement-Capability
 RANAP-IEs.UE-History-Information
 RANAP-IEs.UE-ID
 RANAP-IEs.UE-IsNotServed-ExtIEs
@@ -1111,6 +1127,8 @@ RANAP-IEs.Offload-RAB-Parameters
 RANAP-IEs.PeriodicLocationInfo
 RANAP-IEs.LABased
 RANAP-IEs.LoggedMDT
+RANAP-IEs.PLMNBased
+RANAP-IEs.PLMNList
 RANAP-IEs.PLMNs-in-shared-network
 RANAP-IEs.PositionData
 RANAP-IEs.RABased

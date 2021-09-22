@@ -5,10 +5,10 @@
 -- **************************************************************
 
 PCAP-PDU-Contents {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 umts-Access (20) modules (3) pcap(4) version1 (1) pcap-PDU-Contents (1) }
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -35,8 +35,8 @@ IMPORTS
 	HorizontalAccuracyCode,
 	VerticalAccuracyCode,
 	RequestType,
-	UE-PositioningCapability, 
-	UC-ID, 
+	UE-PositioningCapability,
+	UC-ID,
 	ResponseTime,
 	PositioningPriority,
 	ClientType,
@@ -108,7 +108,7 @@ FROM PCAP-Containers
 	id-HorizontalAccuracyCode,
 	id-VerticalAccuracyCode,
 	id-RequestType,
-	id-UE-PositioningCapability, 
+	id-UE-PositioningCapability,
 	id-UC-id,
 	id-ResponseTime,
 	id-PositioningPriority,
@@ -149,7 +149,7 @@ FROM PCAP-Constants;
 
 -- **************************************************************
 --
--- POSITION CALCULATION REQUEST
+-- Position Calculation Request
 --
 -- **************************************************************
 
@@ -183,7 +183,7 @@ PositionCalculationRequestExtensions PCAP-PROTOCOL-EXTENSION ::= {
 
 -- **************************************************************
 --
--- POSITION CALCULATION RESPONSE
+-- Position Calculation Response
 --
 -- **************************************************************
 
@@ -207,7 +207,7 @@ PositionCalculationResponseExtensions PCAP-PROTOCOL-EXTENSION ::= {
 
 -- **************************************************************
 --
--- POSITION CALCULATION FAILURE
+-- Position Calculation Failure
 --
 -- **************************************************************
 
@@ -459,7 +459,7 @@ PositionActivationRequestIEs PCAP-PROTOCOL-IES ::= {
 	...
 }
 
-PositionActivationRequestExtensions PCAP-PROTOCOL-EXTENSION ::= { 
+PositionActivationRequestExtensions PCAP-PROTOCOL-EXTENSION ::= {
 	{ ID id-IncludeVelocity				CRITICALITY ignore	EXTENSION IncludeVelocity				PRESENCE optional } |
 	{ ID id-AmountOfReporting			CRITICALITY ignore	EXTENSION AmountOfReporting				PRESENCE optional } |
 	{ ID id-CellIDPositioning			CRITICALITY ignore	EXTENSION CellIDPositioning				PRESENCE optional }|
@@ -471,7 +471,7 @@ PositionActivationRequestExtensions PCAP-PROTOCOL-EXTENSION ::= {
 -- **************************************************************
 --
 -- POSITION ACTIVATION RESPONSE
--- 
+--
 -- **************************************************************
 
 PositionActivationResponse ::= SEQUENCE {
@@ -482,7 +482,7 @@ PositionActivationResponse ::= SEQUENCE {
 
 PositionActivationResponseIEs PCAP-PROTOCOL-IES ::= {
 	{ ID id-UE-PositionEstimateInfo			CRITICALITY ignore	TYPE UE-PositionEstimateInfo		PRESENCE optional } |
-	{ ID id-GPS-MeasuredResultsList			CRITICALITY reject	TYPE MeasuredResultsList			PRESENCE optional } | 
+	{ ID id-GPS-MeasuredResultsList			CRITICALITY reject	TYPE MeasuredResultsList			PRESENCE optional } |
 	{ ID id-CellId-MeasuredResultsSets		CRITICALITY reject	TYPE CellId-MeasuredResultsSets		PRESENCE optional } |
 	{ ID id-OTDOA-MeasuredResultsSets		CRITICALITY reject	TYPE OTDOA-MeasuredResultsSets		PRESENCE optional } |
 	{ ID id-UTDOA-Group						CRITICALITY reject	TYPE UTDOA-Group					PRESENCE optional },
@@ -611,7 +611,7 @@ InformationExchangeFailureIndication-Extensions PCAP-PROTOCOL-EXTENSION ::= {
 
 -- **************************************************************
 --
--- ERROR INDICATION
+-- Error Indication
 --
 -- **************************************************************
 
@@ -686,7 +686,7 @@ AbortIEs PCAP-PROTOCOL-IES ::= {
 	...
 }
 
-AbortExtensions PCAP-PROTOCOL-EXTENSION ::= { 
+AbortExtensions PCAP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
@@ -707,7 +707,7 @@ PositionPeriodicReport ::= SEQUENCE {
 PositionPeriodicReport-IEs PCAP-PROTOCOL-IES ::= {
 	{ ID id-UE-PositionEstimateInfo			CRITICALITY ignore	TYPE UE-PositionEstimateInfo		PRESENCE optional } |
 	{ ID id-VelocityEstimate				CRITICALITY ignore	TYPE VelocityEstimate				PRESENCE optional } |
-	{ ID id-GPS-MeasuredResultsList			CRITICALITY ignore	TYPE MeasuredResultsList			PRESENCE optional } | 
+	{ ID id-GPS-MeasuredResultsList			CRITICALITY ignore	TYPE MeasuredResultsList			PRESENCE optional } |
 	{ ID id-CellId-MeasuredResultsSets		CRITICALITY ignore	TYPE CellId-MeasuredResultsSets		PRESENCE optional } |
 	{ ID id-OTDOA-MeasuredResultsSets		CRITICALITY ignore	TYPE OTDOA-MeasuredResultsSets		PRESENCE optional } |
 	{ ID id-Cause							CRITICALITY ignore	TYPE Cause							PRESENCE optional } ,
@@ -766,7 +766,7 @@ PositionPeriodicTermination-IEs PCAP-PROTOCOL-IES ::= {
 	...
 }
 
-PositionPeriodicTermination-Extensions PCAP-PROTOCOL-EXTENSION ::= { 
+PositionPeriodicTermination-Extensions PCAP-PROTOCOL-EXTENSION ::= {
 	...
 }
 END

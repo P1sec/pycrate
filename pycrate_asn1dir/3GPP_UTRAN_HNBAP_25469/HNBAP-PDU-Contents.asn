@@ -6,10 +6,10 @@
 -- **************************************************************
 
 HNBAP-PDU-Contents {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 umts-Access (20) modules (3) hnbap(6) version1 (1) hnbap-PDU-Contents (1) }
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -21,7 +21,7 @@ BEGIN
 
 IMPORTS
 	Cause,
-	CriticalityDiagnostics, 
+	CriticalityDiagnostics,
 	CSGMembershipStatus,
 	HNB-Location-Information,
 	HNB-Identity,
@@ -78,7 +78,7 @@ FROM HNBAP-IEs
 FROM HNBAP-Containers
 
 	id-Cause,
-	id-CriticalityDiagnostics, 
+	id-CriticalityDiagnostics,
 	id-CSGMembershipStatus,
 	id-HNB-Location-Information,
 	id-HNB-Identity,
@@ -110,7 +110,7 @@ FROM HNBAP-Containers
 	id-S-RNTIPrefix,
 	id-URAIdentity,
 	id-URAIdentityList,
-	id-NeighbourIdentity, 
+	id-NeighbourIdentity,
 	id-NeighbourCellIdentityList,
 	id-HNBCapacity,
 	id-AdditionalNeighbourInfoList,

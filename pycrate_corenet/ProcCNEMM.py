@@ -514,10 +514,10 @@ class EMMAuthentication(EMMSigProc):
                           % (hexlify(self.vect[1][:4]).decode('ascii'),
                              hexlify(self.UEInfo['RES']).decode('ascii')))
                 self.encode_msg(8, 20)
-                rej = True
+                self.success = False
             else:
                 self._log('WNG', '2G authentication accepted')
-                rej = False
+                self.success = True
                 # set a 2G security context
                 self.EMM.set_sec_ctx(self.ksi, 2, self.vect)
         #

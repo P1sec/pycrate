@@ -35,6 +35,8 @@ LPPA-Constants.maxNrOfPosSImessage
 LPPA-Constants.maxnoAssistInfoFailureListItems
 LPPA-Constants.maxNrOfSegments
 LPPA-Constants.maxNrOfPosSIBs
+LPPA-Constants.maxNRmeas
+LPPA-Constants.maxResultsPerSSBIndex
 LPPA-Constants.id-Cause
 LPPA-Constants.id-CriticalityDiagnostics
 LPPA-Constants.id-E-SMLC-UE-Measurement-ID
@@ -60,6 +62,9 @@ LPPA-Constants.id-WLANMeasurementResult
 LPPA-Constants.id-Assistance-Information
 LPPA-Constants.id-Broadcast
 LPPA-Constants.id-AssistanceInformationFailureList
+LPPA-Constants.id-ResultsPerSSB-Index-List
+LPPA-Constants.id-ResultsPerSSB-Index-Item
+LPPA-Constants.id-NR-CGI
 LPPA-Containers.LPPA-PROTOCOL-IES
 LPPA-Containers.LPPA-PROTOCOL-IES-PAIR
 LPPA-Containers.LPPA-PROTOCOL-EXTENSION
@@ -108,6 +113,8 @@ LPPA-IEs.MeasuredResultsValue
 LPPA-IEs.MBSFNsubframeConfiguration
 LPPA-IEs.MBSFNsubframeConfigurationValue
 LPPA-IEs.NarrowBandIndex
+LPPA-IEs.NRCellIdentity
+LPPA-IEs.NR-CGI-ExtIEs
 LPPA-IEs.NPRSConfiguration
 LPPA-IEs.NPRSMutingConfiguration
 LPPA-IEs.NPRSSubframePartA
@@ -117,6 +124,8 @@ LPPA-IEs.NumberOfDlFrames
 LPPA-IEs.NumberOfDlFrames-Extended
 LPPA-IEs.NumberOfFrequencyHoppingBands
 LPPA-IEs.NPRSSequenceInfo
+LPPA-IEs.NRARFCN
+LPPA-IEs.NRPCI
 LPPA-IEs.OffsetNBChanneltoEARFCN
 LPPA-IEs.OperationModeInfo
 LPPA-IEs.OTDOACells-ExtIEs
@@ -149,11 +158,18 @@ LPPA-IEs.ResultGERAN
 LPPA-IEs.ResultGERAN-Item-ExtIEs
 LPPA-IEs.ResultUTRAN
 LPPA-IEs.ResultUTRAN-Item-ExtIEs
+LPPA-IEs.ResultNR
+LPPA-IEs.ResultNR-Item-ExtIEs
+LPPA-IEs.ResultsPerSSB-Index-List
+LPPA-IEs.ResultsPerSSB-Index-Item-ExtIEs
 LPPA-IEs.RSSI
 LPPA-IEs.SFNInitialisationTime
 LPPA-IEs.SRSConfigurationForAllCells
 LPPA-IEs.SRSConfigurationForOneCell
 LPPA-IEs.Subframeallocation
+LPPA-IEs.SS-NRRSRP
+LPPA-IEs.SS-NRRSRQ
+LPPA-IEs.SSB-Index
 LPPA-IEs.SSID
 LPPA-IEs.SystemInformation-ExtIEs
 LPPA-IEs.TAC
@@ -228,6 +244,7 @@ LPPA-IEs.InterRATMeasurementQuantities
 LPPA-IEs.InterRATMeasurementQuantities-Item
 LPPA-IEs.MeasurementQuantities
 LPPA-IEs.MeasurementQuantities-Item
+LPPA-IEs.NR-CGI
 LPPA-IEs.OTDOACells
 LPPA-IEs.PosSIBs
 LPPA-IEs.PosSIB-Segments
@@ -236,6 +253,8 @@ LPPA-IEs.ResultRSRP-Item
 LPPA-IEs.ResultRSRQ-Item
 LPPA-IEs.ResultGERAN-Item
 LPPA-IEs.ResultUTRAN-Item
+LPPA-IEs.ResultNR-Item
+LPPA-IEs.ResultsPerSSB-Index-Item
 LPPA-IEs.SystemInformation
 LPPA-IEs.TDDConfiguration
 LPPA-IEs.WLANMeasurementQuantities

@@ -41,18 +41,19 @@ from test.test_csn1   import *
 from test.test_asn1rt import *
 from test.test_mobile import *
 from test.test_gsmrr  import *
+from pycrate_asn1c.specdir import ASN_SPECS
 from pycrate_asn1c.asnproc import compile_text, compile_spec, compile_all, \
-    generate_modules, PycrateGenerator, GLOBAL, ASN_SPECS
+    generate_modules, PycrateGenerator, GLOBAL
 from pycrate_asn1rt.asnobj import ASN1Obj
 
 Element._SAFE_STAT = True
 Element._SAFE_DYN  = True
 ASN1Obj._SAFE_INIT = True
 
-# enabling the compilation of all ASN.1 modules from pycrate_asn1dir
-# takes few minutes
-#global TEST_ASN1C_ALL
-TEST_ASN1C_ALL = False
+# enabling the compilation of all ASN.1 modules from pycrate_asn1dir, taking few minutes
+TEST_ASN1C_ALL_COMP = False
+# enabling the loading of all ASN.1 modules from pycrate_asn1dir
+TEST_ASN1C_ALL_LOAD = False
 
 
 class TestPycrate(unittest.TestCase):
@@ -92,7 +93,7 @@ class TestPycrate(unittest.TestCase):
         test_ether(eth_frames)
     
     # asn1c
-    def test_asn1c(self):
+    def test_asn1c(self, test_all_comp=TEST_ASN1C_ALL_COMP, test_all_load=TEST_ASN1C_ALL_LOAD):
         print('[<>] testing pycrate_asn1c')
         # create an "asn" dir for storing compiled specifications
         if 'test_asn_todelete' not in os.listdir('.'):
@@ -107,7 +108,8 @@ class TestPycrate(unittest.TestCase):
         generate_modules(PycrateGenerator, './test_asn_todelete/Hardcore.py')
         GLOBAL.clear()
         fd_init.write('\'Hardcore\', ')
-        if TEST_ASN1C_ALL:
+        if test_all_comp:
+            print(ASN_SPECS)
             # compile and generate all specifications from the asndir
             for sn in ASN_SPECS:
                 compile_spec(shortname=sn)
@@ -121,11 +123,19 @@ class TestPycrate(unittest.TestCase):
         print('[<>] loading all compiled module')
         importlib.import_module('test_asn_todelete.Hardcore')
         del sys.modules['test_asn_todelete.Hardcore']
-        if TEST_ASN1C_ALL:
-            for sn in ASN_SPECS:
-                importlib.import_module('test_asn_todelete.%s' % sn)
-                del sys.modules['test_asn_todelete.%s' % sn]
-        print('[<>] all ASN.1 modules loaded successfully from ./test_asn_delete/')
+        if test_all_load:
+            if test_all_comp:
+                # test loading modules freshly compiled
+                for sn in ASN_SPECS:
+                    importlib.import_module('test_asn_todelete.%s' % sn)
+                    del sys.modules['test_asn_todelete.%s' % sn]
+                    print('  - loaded %s' % sn)
+            else:
+                for sn in ASN_SPECS:
+                    importlib.import_module('pycrate_asn1dir.%s' % sn)
+                    del sys.modules['pycrate_asn1dir.%s' % sn]
+                    print('  - loaded %s' % sn)
+        print('[<>] all ASN.1 modules loaded successfully')
         GLOBAL.clear()
     
     # asn1rt

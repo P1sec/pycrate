@@ -150,6 +150,8 @@ class LPPA_Constants:
         u'maxnoAssistInfoFailureListItems',
         u'maxNrOfSegments',
         u'maxNrOfPosSIBs',
+        u'maxNRmeas',
+        u'maxResultsPerSSBIndex',
         u'id-Cause',
         u'id-CriticalityDiagnostics',
         u'id-E-SMLC-UE-Measurement-ID',
@@ -175,6 +177,9 @@ class LPPA_Constants:
         u'id-Assistance-Information',
         u'id-Broadcast',
         u'id-AssistanceInformationFailureList',
+        u'id-ResultsPerSSB-Index-List',
+        u'id-ResultsPerSSB-Index-Item',
+        u'id-NR-CGI',
         ]
     _type_ = [
         ]
@@ -208,6 +213,8 @@ class LPPA_Constants:
         u'maxnoAssistInfoFailureListItems',
         u'maxNrOfSegments',
         u'maxNrOfPosSIBs',
+        u'maxNRmeas',
+        u'maxResultsPerSSBIndex',
         u'id-Cause',
         u'id-CriticalityDiagnostics',
         u'id-E-SMLC-UE-Measurement-ID',
@@ -233,6 +240,9 @@ class LPPA_Constants:
         u'id-Assistance-Information',
         u'id-Broadcast',
         u'id-AssistanceInformationFailureList',
+        u'id-ResultsPerSSB-Index-List',
+        u'id-ResultsPerSSB-Index-Item',
+        u'id-NR-CGI',
         ]
     _class_ = [
         ]
@@ -347,6 +357,14 @@ class LPPA_Constants:
     maxNrOfPosSIBs = INT(name=u'maxNrOfPosSIBs', mode=MODE_VALUE)
     maxNrOfPosSIBs._val = 32
     
+    #-----< maxNRmeas >-----#
+    maxNRmeas = INT(name=u'maxNRmeas', mode=MODE_VALUE)
+    maxNRmeas._val = 32
+    
+    #-----< maxResultsPerSSBIndex >-----#
+    maxResultsPerSSBIndex = INT(name=u'maxResultsPerSSBIndex', mode=MODE_VALUE)
+    maxResultsPerSSBIndex._val = 64
+    
     #-----< id-Cause >-----#
     id_Cause = INT(name=u'id-Cause', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_Cause._val = 0
@@ -447,6 +465,18 @@ class LPPA_Constants:
     id_AssistanceInformationFailureList = INT(name=u'id-AssistanceInformationFailureList', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_AssistanceInformationFailureList._val = 24
     
+    #-----< id-ResultsPerSSB-Index-List >-----#
+    id_ResultsPerSSB_Index_List = INT(name=u'id-ResultsPerSSB-Index-List', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_ResultsPerSSB_Index_List._val = 25
+    
+    #-----< id-ResultsPerSSB-Index-Item >-----#
+    id_ResultsPerSSB_Index_Item = INT(name=u'id-ResultsPerSSB-Index-Item', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_ResultsPerSSB_Index_Item._val = 26
+    
+    #-----< id-NR-CGI >-----#
+    id_NR_CGI = INT(name=u'id-NR-CGI', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_NR_CGI._val = 27
+    
     _all_ = [
         id_errorIndication,
         id_privateMessage,
@@ -475,6 +505,8 @@ class LPPA_Constants:
         maxnoAssistInfoFailureListItems,
         maxNrOfSegments,
         maxNrOfPosSIBs,
+        maxNRmeas,
+        maxResultsPerSSBIndex,
         id_Cause,
         id_CriticalityDiagnostics,
         id_E_SMLC_UE_Measurement_ID,
@@ -500,6 +532,9 @@ class LPPA_Constants:
         id_Assistance_Information,
         id_Broadcast,
         id_AssistanceInformationFailureList,
+        id_ResultsPerSSB_Index_List,
+        id_ResultsPerSSB_Index_Item,
+        id_NR_CGI,
     ]
 
 class LPPA_Containers:
@@ -736,6 +771,9 @@ class LPPA_IEs:
         u'MBSFNsubframeConfiguration',
         u'MBSFNsubframeConfigurationValue',
         u'NarrowBandIndex',
+        u'NRCellIdentity',
+        u'NR-CGI',
+        u'NR-CGI-ExtIEs',
         u'NPRSConfiguration',
         u'NPRSMutingConfiguration',
         u'NPRSSubframePartA',
@@ -745,6 +783,8 @@ class LPPA_IEs:
         u'NumberOfDlFrames-Extended',
         u'NumberOfFrequencyHoppingBands',
         u'NPRSSequenceInfo',
+        u'NRARFCN',
+        u'NRPCI',
         u'OffsetNBChanneltoEARFCN',
         u'OperationModeInfo',
         u'OTDOACells',
@@ -785,11 +825,20 @@ class LPPA_IEs:
         u'ResultUTRAN',
         u'ResultUTRAN-Item',
         u'ResultUTRAN-Item-ExtIEs',
+        u'ResultNR',
+        u'ResultNR-Item',
+        u'ResultNR-Item-ExtIEs',
+        u'ResultsPerSSB-Index-List',
+        u'ResultsPerSSB-Index-Item',
+        u'ResultsPerSSB-Index-Item-ExtIEs',
         u'RSSI',
         u'SFNInitialisationTime',
         u'SRSConfigurationForAllCells',
         u'SRSConfigurationForOneCell',
         u'Subframeallocation',
+        u'SS-NRRSRP',
+        u'SS-NRRSRQ',
+        u'SSB-Index',
         u'SSID',
         u'SystemInformation',
         u'SystemInformation-ExtIEs',
@@ -861,6 +910,8 @@ class LPPA_IEs:
         u'MBSFNsubframeConfiguration',
         u'MBSFNsubframeConfigurationValue',
         u'NarrowBandIndex',
+        u'NRCellIdentity',
+        u'NR-CGI',
         u'NPRSConfiguration',
         u'NPRSMutingConfiguration',
         u'NPRSSubframePartA',
@@ -870,6 +921,8 @@ class LPPA_IEs:
         u'NumberOfDlFrames-Extended',
         u'NumberOfFrequencyHoppingBands',
         u'NPRSSequenceInfo',
+        u'NRARFCN',
+        u'NRPCI',
         u'OffsetNBChanneltoEARFCN',
         u'OperationModeInfo',
         u'OTDOACells',
@@ -902,11 +955,18 @@ class LPPA_IEs:
         u'ResultGERAN-Item',
         u'ResultUTRAN',
         u'ResultUTRAN-Item',
+        u'ResultNR',
+        u'ResultNR-Item',
+        u'ResultsPerSSB-Index-List',
+        u'ResultsPerSSB-Index-Item',
         u'RSSI',
         u'SFNInitialisationTime',
         u'SRSConfigurationForAllCells',
         u'SRSConfigurationForOneCell',
         u'Subframeallocation',
+        u'SS-NRRSRP',
+        u'SS-NRRSRQ',
+        u'SSB-Index',
         u'SSID',
         u'SystemInformation',
         u'TAC',
@@ -944,6 +1004,7 @@ class LPPA_IEs:
         u'InterRATMeasurementQuantitiesValue-ExtIEs',
         u'MeasurementQuantities-ItemIEs',
         u'MeasurementQuantitiesValue-ExtIEs',
+        u'NR-CGI-ExtIEs',
         u'OTDOACells-ExtIEs',
         u'PosSIBs-ExtIEs',
         u'PosSIB-Segments-ExtIEs',
@@ -952,6 +1013,8 @@ class LPPA_IEs:
         u'ResultRSRQ-Item-ExtIEs',
         u'ResultGERAN-Item-ExtIEs',
         u'ResultUTRAN-Item-ExtIEs',
+        u'ResultNR-Item-ExtIEs',
+        u'ResultsPerSSB-Index-Item-ExtIEs',
         u'SystemInformation-ExtIEs',
         u'TDDConfiguration-ExtIEs',
         u'WLANMeasurementQuantities-ItemIEs',
@@ -972,6 +1035,7 @@ class LPPA_IEs:
         u'InterRATMeasurementQuantitiesValue-ExtIEs',
         u'MeasurementQuantities-ItemIEs',
         u'MeasurementQuantitiesValue-ExtIEs',
+        u'NR-CGI-ExtIEs',
         u'OTDOACells-ExtIEs',
         u'PosSIBs-ExtIEs',
         u'PosSIB-Segments-ExtIEs',
@@ -980,6 +1044,8 @@ class LPPA_IEs:
         u'ResultRSRQ-Item-ExtIEs',
         u'ResultGERAN-Item-ExtIEs',
         u'ResultUTRAN-Item-ExtIEs',
+        u'ResultNR-Item-ExtIEs',
+        u'ResultsPerSSB-Index-Item-ExtIEs',
         u'SystemInformation-ExtIEs',
         u'TDDConfiguration-ExtIEs',
         u'WLANMeasurementQuantities-ItemIEs',
@@ -1132,8 +1198,8 @@ class LPPA_IEs:
     _AssistanceInformationMetaData_encrypted._cont = ASN1Dict([(u'true', 0)])
     _AssistanceInformationMetaData_encrypted._ext = []
     _AssistanceInformationMetaData_gNSSID = ENUM(name=u'gNSSID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _AssistanceInformationMetaData_gNSSID._cont = ASN1Dict([(u'gps', 0), (u'sbas', 1), (u'gzss', 2), (u'galileo', 3), (u'glonass', 4), (u'bds', 5)])
-    _AssistanceInformationMetaData_gNSSID._ext = []
+    _AssistanceInformationMetaData_gNSSID._cont = ASN1Dict([(u'gps', 0), (u'sbas', 1), (u'gzss', 2), (u'galileo', 3), (u'glonass', 4), (u'bds', 5), (u'navic', 6)])
+    _AssistanceInformationMetaData_gNSSID._ext = [u'navic']
     _AssistanceInformationMetaData_sBASID = ENUM(name=u'sBASID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _AssistanceInformationMetaData_sBASID._cont = ASN1Dict([(u'waas', 0), (u'egnos', 1), (u'msas', 2), (u'gagan', 3)])
     _AssistanceInformationMetaData_sBASID._ext = []
@@ -1533,8 +1599,8 @@ class LPPA_IEs:
     
     #-----< InterRATMeasurementQuantitiesValue >-----#
     InterRATMeasurementQuantitiesValue = ENUM(name=u'InterRATMeasurementQuantitiesValue', mode=MODE_TYPE)
-    InterRATMeasurementQuantitiesValue._cont = ASN1Dict([(u'geran', 0), (u'utran', 1)])
-    InterRATMeasurementQuantitiesValue._ext = []
+    InterRATMeasurementQuantitiesValue._cont = ASN1Dict([(u'geran', 0), (u'utran', 1), (u'nr', 2)])
+    InterRATMeasurementQuantitiesValue._ext = [u'nr']
     
     #-----< InterRATMeasurementResult >-----#
     InterRATMeasurementResult = SEQ_OF(name=u'InterRATMeasurementResult', mode=MODE_TYPE)
@@ -1546,11 +1612,13 @@ class LPPA_IEs:
     InterRATMeasuredResultsValue = CHOICE(name=u'InterRATMeasuredResultsValue', mode=MODE_TYPE)
     _InterRATMeasuredResultsValue_resultGERAN = SEQ_OF(name=u'resultGERAN', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ResultGERAN')))
     _InterRATMeasuredResultsValue_resultUTRAN = SEQ_OF(name=u'resultUTRAN', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ResultUTRAN')))
+    _InterRATMeasuredResultsValue_resultNR = SEQ_OF(name=u'resultNR', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ResultNR')))
     InterRATMeasuredResultsValue._cont = ASN1Dict([
         (u'resultGERAN', _InterRATMeasuredResultsValue_resultGERAN),
         (u'resultUTRAN', _InterRATMeasuredResultsValue_resultUTRAN),
+        (u'resultNR', _InterRATMeasuredResultsValue_resultNR),
         ])
-    InterRATMeasuredResultsValue._ext = []
+    InterRATMeasuredResultsValue._ext = [u'resultNR']
     
     #-----< Measurement-ID >-----#
     Measurement_ID = INT(name=u'Measurement-ID', mode=MODE_TYPE)
@@ -1689,6 +1757,53 @@ class LPPA_IEs:
     NarrowBandIndex = INT(name=u'NarrowBandIndex', mode=MODE_TYPE)
     NarrowBandIndex._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=[], er=[])
     
+    #-----< NRCellIdentity >-----#
+    NRCellIdentity = BIT_STR(name=u'NRCellIdentity', mode=MODE_TYPE)
+    NRCellIdentity._const_sz = ASN1Set(rv=[36], rr=[], ev=None, er=[])
+    
+    #-----< NR-CGI >-----#
+    NR_CGI = SEQ(name=u'NR-CGI', mode=MODE_TYPE)
+    _NR_CGI_pLMN_Identity = OCT_STR(name=u'pLMN-Identity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PLMN-Identity')))
+    _NR_CGI_nRCellIdentity = BIT_STR(name=u'nRCellIdentity', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NRCellIdentity')))
+    _NR_CGI_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    __NR_CGI_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
+    ___NR_CGI_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
+    ____NR_CGI_iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    ____NR_CGI_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NR_CGI_iE_Extensions__item__id._const_tab = ____NR_CGI_iE_Extensions__item__id_tab
+    ___NR_CGI_iE_Extensions__item__id._const_tab_at = None
+    ___NR_CGI_iE_Extensions__item__id._const_tab_id = u'id'
+    ___NR_CGI_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
+    ____NR_CGI_iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    ____NR_CGI_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NR_CGI_iE_Extensions__item__criticality._const_tab = ____NR_CGI_iE_Extensions__item__criticality_tab
+    ___NR_CGI_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___NR_CGI_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___NR_CGI_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
+    ____NR_CGI_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    ____NR_CGI_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NR_CGI_iE_Extensions__item__extensionValue._const_tab = ____NR_CGI_iE_Extensions__item__extensionValue_tab
+    ___NR_CGI_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___NR_CGI_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
+    __NR_CGI_iE_Extensions__item_._cont = ASN1Dict([
+        (u'id', ___NR_CGI_iE_Extensions__item__id),
+        (u'criticality', ___NR_CGI_iE_Extensions__item__criticality),
+        (u'extensionValue', ___NR_CGI_iE_Extensions__item__extensionValue),
+        ])
+    __NR_CGI_iE_Extensions__item_._ext = None
+    _NR_CGI_iE_Extensions._cont = __NR_CGI_iE_Extensions__item_
+    _NR_CGI_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
+    NR_CGI._cont = ASN1Dict([
+        (u'pLMN-Identity', _NR_CGI_pLMN_Identity),
+        (u'nRCellIdentity', _NR_CGI_nRCellIdentity),
+        (u'iE-Extensions', _NR_CGI_iE_Extensions),
+        ])
+    NR_CGI._ext = []
+    
+    #-----< NR-CGI-ExtIEs >-----#
+    NR_CGI_ExtIEs = CLASS(name=u'NR-CGI-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    NR_CGI_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    
     #-----< NPRSConfiguration >-----#
     NPRSConfiguration = SEQ(name=u'NPRSConfiguration', mode=MODE_TYPE)
     _NPRSConfiguration_nPRSSubframePartA = SEQ(name=u'nPRSSubframePartA', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NPRSSubframePartA')), opt=True)
@@ -1773,6 +1888,14 @@ class LPPA_IEs:
     #-----< NPRSSequenceInfo >-----#
     NPRSSequenceInfo = INT(name=u'NPRSSequenceInfo', mode=MODE_TYPE)
     NPRSSequenceInfo._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=174)], ev=[], er=[])
+    
+    #-----< NRARFCN >-----#
+    NRARFCN = INT(name=u'NRARFCN', mode=MODE_TYPE)
+    NRARFCN._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=3279165)], ev=None, er=[])
+    
+    #-----< NRPCI >-----#
+    NRPCI = INT(name=u'NRPCI', mode=MODE_TYPE)
+    NRPCI._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1007)], ev=None, er=[])
     
     #-----< OffsetNBChanneltoEARFCN >-----#
     OffsetNBChanneltoEARFCN = ENUM(name=u'OffsetNBChanneltoEARFCN', mode=MODE_TYPE)
@@ -2026,8 +2149,8 @@ class LPPA_IEs:
     
     #-----< PosSIB-Type >-----#
     PosSIB_Type = ENUM(name=u'PosSIB-Type', mode=MODE_TYPE)
-    PosSIB_Type._cont = ASN1Dict([(u'posSibType1-1', 0), (u'posSibType1-2', 1), (u'posSibType1-3', 2), (u'posSibType1-4', 3), (u'posSibType1-5', 4), (u'posSibType1-6', 5), (u'posSibType1-7', 6), (u'posSibType2-1', 7), (u'posSibType2-2', 8), (u'posSibType2-3', 9), (u'posSibType2-4', 10), (u'posSibType2-5', 11), (u'posSibType2-6', 12), (u'posSibType2-7', 13), (u'posSibType2-8', 14), (u'posSibType2-9', 15), (u'posSibType2-10', 16), (u'posSibType2-11', 17), (u'posSibType2-12', 18), (u'posSibType2-13', 19), (u'posSibType2-14', 20), (u'posSibType2-15', 21), (u'posSibType2-16', 22), (u'posSibType2-17', 23), (u'posSibType2-18', 24), (u'posSibType2-19', 25), (u'posSibType3-1', 26)])
-    PosSIB_Type._ext = []
+    PosSIB_Type._cont = ASN1Dict([(u'posSibType1-1', 0), (u'posSibType1-2', 1), (u'posSibType1-3', 2), (u'posSibType1-4', 3), (u'posSibType1-5', 4), (u'posSibType1-6', 5), (u'posSibType1-7', 6), (u'posSibType2-1', 7), (u'posSibType2-2', 8), (u'posSibType2-3', 9), (u'posSibType2-4', 10), (u'posSibType2-5', 11), (u'posSibType2-6', 12), (u'posSibType2-7', 13), (u'posSibType2-8', 14), (u'posSibType2-9', 15), (u'posSibType2-10', 16), (u'posSibType2-11', 17), (u'posSibType2-12', 18), (u'posSibType2-13', 19), (u'posSibType2-14', 20), (u'posSibType2-15', 21), (u'posSibType2-16', 22), (u'posSibType2-17', 23), (u'posSibType2-18', 24), (u'posSibType2-19', 25), (u'posSibType3-1', 26), (u'posSibType4-1', 27), (u'posSibType5-1', 28), (u'posSibType2-24', 29), (u'posSibType2-25', 30)])
+    PosSIB_Type._ext = [u'posSibType4-1', u'posSibType5-1', u'posSibType2-24', u'posSibType2-25']
     
     #-----< PRS-Bandwidth >-----#
     PRS_Bandwidth = ENUM(name=u'PRS-Bandwidth', mode=MODE_TYPE)
@@ -2368,6 +2491,110 @@ class LPPA_IEs:
     ResultUTRAN_Item_ExtIEs = CLASS(name=u'ResultUTRAN-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ResultUTRAN_Item_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
+    #-----< ResultNR >-----#
+    ResultNR = SEQ_OF(name=u'ResultNR', mode=MODE_TYPE)
+    _ResultNR__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ResultNR-Item')))
+    ResultNR._cont = _ResultNR__item_
+    ResultNR._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    
+    #-----< ResultNR-Item >-----#
+    ResultNR_Item = SEQ(name=u'ResultNR-Item', mode=MODE_TYPE)
+    _ResultNR_Item_nRARFCN = INT(name=u'nRARFCN', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NRARFCN')))
+    _ResultNR_Item_nRPCI = INT(name=u'nRPCI', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NRPCI')))
+    _ResultNR_Item_sS_NRRSRP = INT(name=u'sS-NRRSRP', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SS-NRRSRP')), opt=True)
+    _ResultNR_Item_sS_NRRSRQ = INT(name=u'sS-NRRSRQ', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SS-NRRSRQ')), opt=True)
+    _ResultNR_Item_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    __ResultNR_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
+    ___ResultNR_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
+    ____ResultNR_Item_iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    _____ResultNR_Item_iE_Extensions__item__id_tab_val_Extension_0 = SEQ_OF(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ResultsPerSSB-Index-List')))
+    _____ResultNR_Item_iE_Extensions__item__id_tab_val_Extension_1 = SEQ(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'NR-CGI')))
+    ____ResultNR_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'ignore'), (u'Extension', _____ResultNR_Item_iE_Extensions__item__id_tab_val_Extension_0), (u'presence', u'optional')]), dict([(u'id', 27), (u'criticality', u'ignore'), (u'Extension', _____ResultNR_Item_iE_Extensions__item__id_tab_val_Extension_1), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    ___ResultNR_Item_iE_Extensions__item__id._const_tab = ____ResultNR_Item_iE_Extensions__item__id_tab
+    ___ResultNR_Item_iE_Extensions__item__id._const_tab_at = None
+    ___ResultNR_Item_iE_Extensions__item__id._const_tab_id = u'id'
+    ___ResultNR_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
+    ___ResultNR_Item_iE_Extensions__item__criticality._const_tab = ____ResultNR_Item_iE_Extensions__item__id_tab
+    ___ResultNR_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___ResultNR_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___ResultNR_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
+    ___ResultNR_Item_iE_Extensions__item__extensionValue._const_tab = ____ResultNR_Item_iE_Extensions__item__id_tab
+    ___ResultNR_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___ResultNR_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
+    __ResultNR_Item_iE_Extensions__item_._cont = ASN1Dict([
+        (u'id', ___ResultNR_Item_iE_Extensions__item__id),
+        (u'criticality', ___ResultNR_Item_iE_Extensions__item__criticality),
+        (u'extensionValue', ___ResultNR_Item_iE_Extensions__item__extensionValue),
+        ])
+    __ResultNR_Item_iE_Extensions__item_._ext = None
+    _ResultNR_Item_iE_Extensions._cont = __ResultNR_Item_iE_Extensions__item_
+    _ResultNR_Item_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
+    ResultNR_Item._cont = ASN1Dict([
+        (u'nRARFCN', _ResultNR_Item_nRARFCN),
+        (u'nRPCI', _ResultNR_Item_nRPCI),
+        (u'sS-NRRSRP', _ResultNR_Item_sS_NRRSRP),
+        (u'sS-NRRSRQ', _ResultNR_Item_sS_NRRSRQ),
+        (u'iE-Extensions', _ResultNR_Item_iE_Extensions),
+        ])
+    ResultNR_Item._ext = []
+    
+    #-----< ResultNR-Item-ExtIEs >-----#
+    ResultNR_Item_ExtIEs = CLASS(name=u'ResultNR-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    _ResultNR_Item_ExtIEs_val_Extension_0 = SEQ_OF(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ResultsPerSSB-Index-List')))
+    _ResultNR_Item_ExtIEs_val_Extension_1 = SEQ(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'NR-CGI')))
+    ResultNR_Item_ExtIEs._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'ignore'), (u'Extension', _ResultNR_Item_ExtIEs_val_Extension_0), (u'presence', u'optional')]), dict([(u'id', 27), (u'criticality', u'ignore'), (u'Extension', _ResultNR_Item_ExtIEs_val_Extension_1), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    
+    #-----< ResultsPerSSB-Index-List >-----#
+    ResultsPerSSB_Index_List = SEQ_OF(name=u'ResultsPerSSB-Index-List', mode=MODE_TYPE)
+    _ResultsPerSSB_Index_List__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ResultsPerSSB-Index-Item')))
+    ResultsPerSSB_Index_List._cont = _ResultsPerSSB_Index_List__item_
+    ResultsPerSSB_Index_List._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    
+    #-----< ResultsPerSSB-Index-Item >-----#
+    ResultsPerSSB_Index_Item = SEQ(name=u'ResultsPerSSB-Index-Item', mode=MODE_TYPE)
+    _ResultsPerSSB_Index_Item_sSB_Index = INT(name=u'sSB-Index', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SSB-Index')))
+    _ResultsPerSSB_Index_Item_sS_NRRSRPBeamValue = INT(name=u'sS-NRRSRPBeamValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SS-NRRSRP')), opt=True)
+    _ResultsPerSSB_Index_Item_sS_NRRSRQBeamValue = INT(name=u'sS-NRRSRQBeamValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SS-NRRSRQ')), opt=True)
+    _ResultsPerSSB_Index_Item_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    __ResultsPerSSB_Index_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
+    ___ResultsPerSSB_Index_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
+    ____ResultsPerSSB_Index_Item_iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    ____ResultsPerSSB_Index_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ResultsPerSSB_Index_Item_iE_Extensions__item__id._const_tab = ____ResultsPerSSB_Index_Item_iE_Extensions__item__id_tab
+    ___ResultsPerSSB_Index_Item_iE_Extensions__item__id._const_tab_at = None
+    ___ResultsPerSSB_Index_Item_iE_Extensions__item__id._const_tab_id = u'id'
+    ___ResultsPerSSB_Index_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
+    ____ResultsPerSSB_Index_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    ____ResultsPerSSB_Index_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ResultsPerSSB_Index_Item_iE_Extensions__item__criticality._const_tab = ____ResultsPerSSB_Index_Item_iE_Extensions__item__criticality_tab
+    ___ResultsPerSSB_Index_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___ResultsPerSSB_Index_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___ResultsPerSSB_Index_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
+    ____ResultsPerSSB_Index_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    ____ResultsPerSSB_Index_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ResultsPerSSB_Index_Item_iE_Extensions__item__extensionValue._const_tab = ____ResultsPerSSB_Index_Item_iE_Extensions__item__extensionValue_tab
+    ___ResultsPerSSB_Index_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___ResultsPerSSB_Index_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
+    __ResultsPerSSB_Index_Item_iE_Extensions__item_._cont = ASN1Dict([
+        (u'id', ___ResultsPerSSB_Index_Item_iE_Extensions__item__id),
+        (u'criticality', ___ResultsPerSSB_Index_Item_iE_Extensions__item__criticality),
+        (u'extensionValue', ___ResultsPerSSB_Index_Item_iE_Extensions__item__extensionValue),
+        ])
+    __ResultsPerSSB_Index_Item_iE_Extensions__item_._ext = None
+    _ResultsPerSSB_Index_Item_iE_Extensions._cont = __ResultsPerSSB_Index_Item_iE_Extensions__item_
+    _ResultsPerSSB_Index_Item_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
+    ResultsPerSSB_Index_Item._cont = ASN1Dict([
+        (u'sSB-Index', _ResultsPerSSB_Index_Item_sSB_Index),
+        (u'sS-NRRSRPBeamValue', _ResultsPerSSB_Index_Item_sS_NRRSRPBeamValue),
+        (u'sS-NRRSRQBeamValue', _ResultsPerSSB_Index_Item_sS_NRRSRQBeamValue),
+        (u'iE-Extensions', _ResultsPerSSB_Index_Item_iE_Extensions),
+        ])
+    ResultsPerSSB_Index_Item._ext = []
+    
+    #-----< ResultsPerSSB-Index-Item-ExtIEs >-----#
+    ResultsPerSSB_Index_Item_ExtIEs = CLASS(name=u'ResultsPerSSB-Index-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    ResultsPerSSB_Index_Item_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    
     #-----< RSSI >-----#
     RSSI = INT(name=u'RSSI', mode=MODE_TYPE)
     RSSI._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=[], er=[])
@@ -2449,6 +2676,18 @@ class LPPA_IEs:
         (u'fourFrames', _Subframeallocation_fourFrames),
         ])
     Subframeallocation._ext = None
+    
+    #-----< SS-NRRSRP >-----#
+    SS_NRRSRP = INT(name=u'SS-NRRSRP', mode=MODE_TYPE)
+    SS_NRRSRP._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
+    
+    #-----< SS-NRRSRQ >-----#
+    SS_NRRSRQ = INT(name=u'SS-NRRSRQ', mode=MODE_TYPE)
+    SS_NRRSRQ._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
+    
+    #-----< SSB-Index >-----#
+    SSB_Index = INT(name=u'SSB-Index', mode=MODE_TYPE)
+    SSB_Index._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=None, er=[])
     
     #-----< SSID >-----#
     SSID = OCT_STR(name=u'SSID', mode=MODE_TYPE)
@@ -2925,6 +3164,7 @@ class LPPA_IEs:
         InterRATMeasurementResult,
         _InterRATMeasuredResultsValue_resultGERAN,
         _InterRATMeasuredResultsValue_resultUTRAN,
+        _InterRATMeasuredResultsValue_resultNR,
         InterRATMeasuredResultsValue,
         Measurement_ID,
         MeasurementPeriodicity,
@@ -2964,6 +3204,19 @@ class LPPA_IEs:
         _MBSFNsubframeConfigurationValue_subframeAllocation,
         MBSFNsubframeConfigurationValue,
         NarrowBandIndex,
+        NRCellIdentity,
+        _NR_CGI_pLMN_Identity,
+        _NR_CGI_nRCellIdentity,
+        ____NR_CGI_iE_Extensions__item__id_tab,
+        ___NR_CGI_iE_Extensions__item__id,
+        ____NR_CGI_iE_Extensions__item__criticality_tab,
+        ___NR_CGI_iE_Extensions__item__criticality,
+        ____NR_CGI_iE_Extensions__item__extensionValue_tab,
+        ___NR_CGI_iE_Extensions__item__extensionValue,
+        __NR_CGI_iE_Extensions__item_,
+        _NR_CGI_iE_Extensions,
+        NR_CGI,
+        NR_CGI_ExtIEs,
         _NPRSConfiguration_nPRSSubframePartA,
         _NPRSConfiguration_nPRSSubframePartB,
         NPRSConfiguration,
@@ -2986,6 +3239,8 @@ class LPPA_IEs:
         NumberOfDlFrames_Extended,
         NumberOfFrequencyHoppingBands,
         NPRSSequenceInfo,
+        NRARFCN,
+        NRPCI,
         OffsetNBChanneltoEARFCN,
         OperationModeInfo,
         __OTDOACells__item__oTDOACellInfo,
@@ -3165,6 +3420,39 @@ class LPPA_IEs:
         _ResultUTRAN_Item_iE_Extensions,
         ResultUTRAN_Item,
         ResultUTRAN_Item_ExtIEs,
+        _ResultNR__item_,
+        ResultNR,
+        _ResultNR_Item_nRARFCN,
+        _ResultNR_Item_nRPCI,
+        _ResultNR_Item_sS_NRRSRP,
+        _ResultNR_Item_sS_NRRSRQ,
+        ____ResultNR_Item_iE_Extensions__item__id_tab,
+        _____ResultNR_Item_iE_Extensions__item__id_tab_val_Extension_0,
+        _____ResultNR_Item_iE_Extensions__item__id_tab_val_Extension_1,
+        ___ResultNR_Item_iE_Extensions__item__id,
+        ___ResultNR_Item_iE_Extensions__item__criticality,
+        ___ResultNR_Item_iE_Extensions__item__extensionValue,
+        __ResultNR_Item_iE_Extensions__item_,
+        _ResultNR_Item_iE_Extensions,
+        ResultNR_Item,
+        ResultNR_Item_ExtIEs,
+        _ResultNR_Item_ExtIEs_val_Extension_0,
+        _ResultNR_Item_ExtIEs_val_Extension_1,
+        _ResultsPerSSB_Index_List__item_,
+        ResultsPerSSB_Index_List,
+        _ResultsPerSSB_Index_Item_sSB_Index,
+        _ResultsPerSSB_Index_Item_sS_NRRSRPBeamValue,
+        _ResultsPerSSB_Index_Item_sS_NRRSRQBeamValue,
+        ____ResultsPerSSB_Index_Item_iE_Extensions__item__id_tab,
+        ___ResultsPerSSB_Index_Item_iE_Extensions__item__id,
+        ____ResultsPerSSB_Index_Item_iE_Extensions__item__criticality_tab,
+        ___ResultsPerSSB_Index_Item_iE_Extensions__item__criticality,
+        ____ResultsPerSSB_Index_Item_iE_Extensions__item__extensionValue_tab,
+        ___ResultsPerSSB_Index_Item_iE_Extensions__item__extensionValue,
+        __ResultsPerSSB_Index_Item_iE_Extensions__item_,
+        _ResultsPerSSB_Index_Item_iE_Extensions,
+        ResultsPerSSB_Index_Item,
+        ResultsPerSSB_Index_Item_ExtIEs,
         RSSI,
         SFNInitialisationTime,
         _SRSConfigurationForAllCells__item_,
@@ -3189,6 +3477,9 @@ class LPPA_IEs:
         _Subframeallocation_oneFrame,
         _Subframeallocation_fourFrames,
         Subframeallocation,
+        SS_NRRSRP,
+        SS_NRRSRQ,
+        SSB_Index,
         SSID,
         __SystemInformation__item__broadcastPeriodicity,
         __SystemInformation__item__posSIBs,

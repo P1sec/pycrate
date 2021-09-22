@@ -356,3 +356,15 @@ def ngap_userloc_to_hum(cho):
                 )
             }
 
+def make_5g_snn(plmn_id, nid=None):
+    """encodes the 5G Serving Network Name as in TS 24.501, 9.12.1
+    
+    plmn_id: 5 or 6 digit str
+    nid: None or hexa-str
+    """
+    snn = b'5G:mnc%.3i.mcc%.3i.3gppnetwork.org' % (int(mccmnc[3:]), int(mccmnc[:3]))
+    if nid:
+        snn += ":%s" % nid.encode()
+    return snn
+
+

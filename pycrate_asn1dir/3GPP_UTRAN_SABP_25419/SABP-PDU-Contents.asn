@@ -5,10 +5,10 @@
 -- **************************************************************
 
 SABP-PDU-Contents {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
-umts-Access (20) modules (3) sabp (3) version1 (1) sabp-PDU-Contents (1) } 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
+umts-Access (20) modules (3) sabp (3) version1 (1) sabp-PDU-Contents (1) }
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -122,7 +122,7 @@ Write-Replace-Complete-IEs SABP-PROTOCOL-IES ::= {
 	{ ID id-Number-of-Broadcasts-Completed-List
 						CRITICALITY reject	TYPE Number-of-Broadcasts-Completed-List
 															PRESENCE mandatory  }|
-{ ID id-Criticality-Diagnostics	
+{ ID id-Criticality-Diagnostics
 CRITICALITY ignore	TYPE Criticality-Diagnostics	PRESENCE optional },
 	...
 }
@@ -150,7 +150,7 @@ Write-Replace-Failure-IEs SABP-PROTOCOL-IES ::= {
 	{ ID id-Number-of-Broadcasts-Completed-List
 					CRITICALITY ignore	TYPE Number-of-Broadcasts-Completed-List
 												PRESENCE optional  } |
-{ ID id-Criticality-Diagnostics	
+{ ID id-Criticality-Diagnostics
 CRITICALITY ignore	TYPE Criticality-Diagnostics		PRESENCE optional },
 	...
 }
@@ -199,7 +199,7 @@ Kill-Complete-IEs SABP-PROTOCOL-IES ::= {
 	{ ID id-Number-of-Broadcasts-Completed-List
 					CRITICALITY reject		TYPE Number-of-Broadcasts-Completed-List
 															PRESENCE mandatory }|
-{ ID id-Criticality-Diagnostics	
+{ ID id-Criticality-Diagnostics
 CRITICALITY ignore	TYPE Criticality-Diagnostics		PRESENCE optional },
 	...
 }
@@ -227,7 +227,7 @@ Kill-Failure-IEs SABP-PROTOCOL-IES ::= {
 	{ ID id-Number-of-Broadcasts-Completed-List
 						CRITICALITY ignore	TYPE Number-of-Broadcasts-Completed-List
 															PRESENCE optional } |
-{ ID id-Criticality-Diagnostics	
+{ ID id-Criticality-Diagnostics
 CRITICALITY ignore	TYPE Criticality-Diagnostics		PRESENCE optional },
 	...
 }
@@ -270,10 +270,10 @@ Load-Query-Complete ::= SEQUENCE {
 }
 
 Load-Query-Complete-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-Radio-Resource-Loading-List 	
-						CRITICALITY reject	TYPE Radio-Resource-Loading-List  
+	{ ID id-Radio-Resource-Loading-List
+						CRITICALITY reject	TYPE Radio-Resource-Loading-List
 															PRESENCE mandatory }  |
-{ ID id-Criticality-Diagnostics	
+{ ID id-Criticality-Diagnostics
 CRITICALITY ignore	TYPE Criticality-Diagnostics		PRESENCE optional },
 	...
 }
@@ -295,12 +295,12 @@ Load-Query-Failure ::= SEQUENCE {
 }
 
 Load-Query-Failure-IEs SABP-PROTOCOL-IES ::= {
-	
+
 	{ ID id-Failure-List 		CRITICALITY reject	TYPE Failure-List  		PRESENCE mandatory } |
-	{ ID id-Radio-Resource-Loading-List 	
-						CRITICALITY ignore	TYPE Radio-Resource-Loading-List  
+	{ ID id-Radio-Resource-Loading-List
+						CRITICALITY ignore	TYPE Radio-Resource-Loading-List
 												PRESENCE optional  } |
-{ ID id-Criticality-Diagnostics	
+{ ID id-Criticality-Diagnostics
 CRITICALITY ignore	TYPE Criticality-Diagnostics		PRESENCE optional },
 	...
 }
@@ -348,9 +348,9 @@ Message-Status-Query-Complete-IEs SABP-PROTOCOL-IES ::= {
 	{ ID id-Message-Identifier 	CRITICALITY reject	TYPE Message-Identifier 	PRESENCE mandatory } |
 	{ ID id-Old-Serial-Number 	CRITICALITY reject	TYPE Old-Serial-Number 		PRESENCE mandatory } |
 	{ ID id-Number-of-Broadcasts-Completed-List
-						CRITICALITY reject	TYPE Number-of-Broadcasts-Completed-List 
+						CRITICALITY reject	TYPE Number-of-Broadcasts-Completed-List
 															PRESENCE mandatory } |
-{ ID id-Criticality-Diagnostics	
+{ ID id-Criticality-Diagnostics
 CRITICALITY ignore	TYPE Criticality-Diagnostics		PRESENCE optional },
 	...
 }
@@ -376,9 +376,9 @@ Message-Status-Query-Failure-IEs SABP-PROTOCOL-IES ::= {
 	{ ID id-Failure-List 		CRITICALITY reject	TYPE Failure-List  		PRESENCE mandatory } |
 	{ ID id-Old-Serial-Number	CRITICALITY reject	TYPE Old-Serial-Number		PRESENCE mandatory } |
 	{ ID id-Number-of-Broadcasts-Completed-List
-					CRITICALITY ignore	TYPE Number-of-Broadcasts-Completed-List 
+					CRITICALITY ignore	TYPE Number-of-Broadcasts-Completed-List
 															PRESENCE optional  } |
-{ ID id-Criticality-Diagnostics	
+{ ID id-Criticality-Diagnostics
 CRITICALITY ignore	TYPE Criticality-Diagnostics		PRESENCE optional },
 	...
 }
@@ -422,7 +422,7 @@ Reset-Complete ::= SEQUENCE {
 
 Reset-Complete-IEs SABP-PROTOCOL-IES ::= {
 	{ ID id-Service-Areas-List 	CRITICALITY reject	TYPE Service-Areas-List 	PRESENCE mandatory } |
-{ ID id-Criticality-Diagnostics	
+{ ID id-Criticality-Diagnostics
 CRITICALITY ignore	TYPE Criticality-Diagnostics		PRESENCE optional },
 	...
 }
@@ -446,7 +446,7 @@ Reset-Failure ::= SEQUENCE {
 Reset-Failure-IEs SABP-PROTOCOL-IES ::= {
 	{ ID id-Failure-List 		CRITICALITY reject	TYPE Failure-List  		PRESENCE mandatory } |
 	{ ID id-Service-Areas-List 	CRITICALITY reject	TYPE Service-Areas-List 	PRESENCE optional  } |
-{ ID id-Criticality-Diagnostics	
+{ ID id-Criticality-Diagnostics
 CRITICALITY ignore	TYPE Criticality-Diagnostics	PRESENCE optional } ,
 	...
 }
@@ -514,7 +514,7 @@ Error-Indication-IEs SABP-PROTOCOL-IES ::= {
 	{ ID id-Message-Identifier 	CRITICALITY ignore	TYPE Message-Identifier 	PRESENCE optional } |
 	{ ID id-Serial-Number		CRITICALITY ignore	TYPE Serial-Number 		PRESENCE optional  } |
 	{ ID id-Cause			CRITICALITY ignore	TYPE Cause		 		PRESENCE optional  } |
-{ ID id-Criticality-Diagnostics	
+{ ID id-Criticality-Diagnostics
 CRITICALITY ignore	TYPE Criticality-Diagnostics	PRESENCE optional },
 	...
 }

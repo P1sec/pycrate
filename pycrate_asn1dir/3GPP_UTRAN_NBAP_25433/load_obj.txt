@@ -1362,6 +1362,8 @@ NBAP-Constants.id-Downlink-TPC-enhancements-Reconf
 NBAP-Constants.id-TPC-slot-position
 NBAP-Constants.id-E-RNTI-Set
 NBAP-Constants.id-DL-TBS
+NBAP-Constants.id-Dual-Cell-EDCH-Enhancements-Information
+NBAP-Constants.id-HS-SCCH-DRX-InformationFDD
 NBAP-Containers.NBAP-PROTOCOL-IES
 NBAP-Containers.NBAP-PROTOCOL-IES-PAIR
 NBAP-Containers.NBAP-PROTOCOL-EXTENSION
@@ -1377,6 +1379,9 @@ NBAP-IEs.ActivationDelay
 NBAP-IEs.ActivationInformation
 NBAP-IEs.ActivationInformationItem-ExtIEs
 NBAP-IEs.Adaptive-Special-Burst-Power-CapabilityLCR
+NBAP-IEs.EDCH-Reference-E-TFCI-Information
+NBAP-IEs.EDCH-Reference-E-TFCI-Information-Item-ExtIEs
+NBAP-IEs.EDCH-Reference-E-TFCI-PO
 NBAP-IEs.Additional-EDCH-Setup-Info-ExtIEs
 NBAP-IEs.Multicell-EDCH-Transport-Bearer-Mode
 NBAP-IEs.Additional-EDCH-Cell-Information-Setup
@@ -2177,6 +2182,8 @@ NBAP-IEs.HS-serving-cell-change-successful-ExtIEs
 NBAP-IEs.HS-serving-cell-change-unsuccessful-ExtIEs
 NBAP-IEs.HS-DSCH-DRX-Cycle-FACH
 NBAP-IEs.HS-DSCH-RX-Burst-FACH
+NBAP-IEs.HS-SCCH-DRX-Cycle-FACH
+NBAP-IEs.HS-SCCH-RX-Burst-FACH
 NBAP-IEs.HSDSCH-FDD-Update-Information-ExtIEs
 NBAP-IEs.HSDSCH-TDD-Update-Information-ExtIEs
 NBAP-IEs.HSPDSCH-Code-Index
@@ -2361,6 +2368,8 @@ NBAP-IEs.Multicell-EDCH-Restriction
 NBAP-IEs.MIMO-SFMode-For-HSPDSCHDualStream
 NBAP-IEs.Multi-Carrier-EDCH-Info-ExtIEs
 NBAP-IEs.Multicarrier-EDCH-Transport-Bearer-Mode
+NBAP-IEs.Dual-Cell-EDCH-Enhancements-Information-ExtIEs
+NBAP-IEs.HS-SCCH-DRX-InformationFDD-ExtIEs
 NBAP-IEs.Multi-Carrier-EDCH-Information
 NBAP-IEs.Multi-Carrier-EDCH-LCR-InformationItem-ExtIEs
 NBAP-IEs.SNPL-Carrier-Group-Indicator
@@ -2673,6 +2682,7 @@ NBAP-IEs.SynchronisationReportType
 NBAP-IEs.Semi-PersistentScheduling-CapabilityLCR
 NBAP-IEs.T1
 NBAP-IEs.T321
+NBAP-IEs.T333
 NBAP-IEs.T-Cell
 NBAP-IEs.T-RLFAILURE
 NBAP-IEs.T-PROTECT
@@ -4000,6 +4010,7 @@ NBAP-Containers.ProtocolIE-ContainerPairList
 NBAP-Containers.ProtocolExtensionContainer
 NBAP-Containers.PrivateIE-Container
 NBAP-IEs.ActivationInformationItem
+NBAP-IEs.EDCH-Reference-E-TFCI-Information-Item
 NBAP-IEs.Additional-EDCH-Setup-Info
 NBAP-IEs.Additional-EDCH-UL-DPCH-Information-Setup
 NBAP-IEs.Additional-EDCH-F-DPCH-Information
@@ -4381,6 +4392,8 @@ NBAP-IEs.Multicell-EDCH-InformationItemIEs
 NBAP-IEs.Multicell-EDCH-RL-Specific-Information
 NBAP-IEs.Multicell-EDCH-RL-Specific-InformationItemIEs
 NBAP-IEs.Multi-Carrier-EDCH-Info
+NBAP-IEs.Dual-Cell-EDCH-Enhancements-Information
+NBAP-IEs.HS-SCCH-DRX-InformationFDD
 NBAP-IEs.Multi-Carrier-EDCH-LCR-InformationItem
 NBAP-IEs.Multi-Carrier-EDCH-MACdFlows-Specific-Info
 NBAP-IEs.Multi-Carrier-EDCH-Reconfigure

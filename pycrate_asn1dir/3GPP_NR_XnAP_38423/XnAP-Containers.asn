@@ -26,7 +26,7 @@ IMPORTS
 	Criticality,
 	Presence,
 	PrivateIE-ID,
-	ProtocolIE-ID	
+	ProtocolIE-ID
 FROM XnAP-CommonDataTypes;
 
 -- **************************************************************

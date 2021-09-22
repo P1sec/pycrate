@@ -463,6 +463,10 @@ class XnAP_Constants:
         u'id-SFN-Offset',
         u'id-QoSMonitoringDisabled',
         u'id-ExtendedUEIdentityIndexValue',
+        u'id-PagingeDRXInformation',
+        u'id-CHO-MRDC-EarlyDataForwarding',
+        u'id-SCGIndicator',
+        u'id-UESpecificDRX',
         ]
     _type_ = [
         ]
@@ -816,6 +820,10 @@ class XnAP_Constants:
         u'id-SFN-Offset',
         u'id-QoSMonitoringDisabled',
         u'id-ExtendedUEIdentityIndexValue',
+        u'id-PagingeDRXInformation',
+        u'id-CHO-MRDC-EarlyDataForwarding',
+        u'id-SCGIndicator',
+        u'id-UESpecificDRX',
         ]
     _class_ = [
         ]
@@ -2210,6 +2218,22 @@ class XnAP_Constants:
     id_ExtendedUEIdentityIndexValue = INT(name=u'id-ExtendedUEIdentityIndexValue', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_ExtendedUEIdentityIndexValue._val = 244
     
+    #-----< id-PagingeDRXInformation >-----#
+    id_PagingeDRXInformation = INT(name=u'id-PagingeDRXInformation', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_PagingeDRXInformation._val = 245
+    
+    #-----< id-CHO-MRDC-EarlyDataForwarding >-----#
+    id_CHO_MRDC_EarlyDataForwarding = INT(name=u'id-CHO-MRDC-EarlyDataForwarding', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_CHO_MRDC_EarlyDataForwarding._val = 246
+    
+    #-----< id-SCGIndicator >-----#
+    id_SCGIndicator = INT(name=u'id-SCGIndicator', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_SCGIndicator._val = 247
+    
+    #-----< id-UESpecificDRX >-----#
+    id_UESpecificDRX = INT(name=u'id-UESpecificDRX', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_UESpecificDRX._val = 248
+    
     _all_ = [
         id_handoverPreparation,
         id_sNStatusTransfer,
@@ -2558,6 +2582,187 @@ class XnAP_Constants:
         id_SFN_Offset,
         id_QoSMonitoringDisabled,
         id_ExtendedUEIdentityIndexValue,
+        id_PagingeDRXInformation,
+        id_CHO_MRDC_EarlyDataForwarding,
+        id_SCGIndicator,
+        id_UESpecificDRX,
+    ]
+
+class XnAP_Containers:
+
+    _name_  = u'XnAP-Containers'
+    _oid_   = [0, 4, 0, 0, 22, 3, 2, 1, 5]
+    
+    _obj_ = [
+        u'XNAP-PROTOCOL-IES',
+        u'XNAP-PROTOCOL-IES-PAIR',
+        u'XNAP-PROTOCOL-EXTENSION',
+        u'XNAP-PRIVATE-IES',
+        u'ProtocolIE-Container',
+        u'ProtocolIE-Single-Container',
+        u'ProtocolIE-Field',
+        u'ProtocolIE-ContainerPair',
+        u'ProtocolIE-FieldPair',
+        u'ProtocolIE-ContainerList',
+        u'ProtocolIE-ContainerPairList',
+        u'ProtocolExtensionContainer',
+        u'ProtocolExtensionField',
+        u'PrivateIE-Container',
+        u'PrivateIE-Field',
+        ]
+    _type_ = [
+        u'XNAP-PROTOCOL-IES',
+        u'XNAP-PROTOCOL-IES-PAIR',
+        u'XNAP-PROTOCOL-EXTENSION',
+        u'XNAP-PRIVATE-IES',
+        u'ProtocolIE-Container',
+        u'ProtocolIE-Single-Container',
+        u'ProtocolIE-Field',
+        u'ProtocolIE-ContainerPair',
+        u'ProtocolIE-FieldPair',
+        u'ProtocolIE-ContainerList',
+        u'ProtocolIE-ContainerPairList',
+        u'ProtocolExtensionContainer',
+        u'ProtocolExtensionField',
+        u'PrivateIE-Container',
+        u'PrivateIE-Field',
+        ]
+    _set_ = [
+        ]
+    _val_ = [
+        ]
+    _class_ = [
+        u'XNAP-PROTOCOL-IES',
+        u'XNAP-PROTOCOL-IES-PAIR',
+        u'XNAP-PROTOCOL-EXTENSION',
+        u'XNAP-PRIVATE-IES',
+        ]
+    _param_ = [
+        u'ProtocolIE-Container',
+        u'ProtocolIE-Single-Container',
+        u'ProtocolIE-Field',
+        u'ProtocolIE-ContainerPair',
+        u'ProtocolIE-FieldPair',
+        u'ProtocolIE-ContainerList',
+        u'ProtocolIE-ContainerPairList',
+        u'ProtocolExtensionContainer',
+        u'ProtocolExtensionField',
+        u'PrivateIE-Container',
+        u'PrivateIE-Field',
+        ]
+    
+    #-----< XNAP-PROTOCOL-IES >-----#
+    XNAP_PROTOCOL_IES = CLASS(name=u'XNAP-PROTOCOL-IES', mode=MODE_TYPE)
+    _XNAP_PROTOCOL_IES_id = INT(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
+    _XNAP_PROTOCOL_IES_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'Criticality')))
+    _XNAP_PROTOCOL_IES_Value = OPEN(name=u'Value', mode=MODE_TYPE)
+    _XNAP_PROTOCOL_IES_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'Presence')))
+    XNAP_PROTOCOL_IES._cont = ASN1Dict([
+        (u'id', _XNAP_PROTOCOL_IES_id),
+        (u'criticality', _XNAP_PROTOCOL_IES_criticality),
+        (u'Value', _XNAP_PROTOCOL_IES_Value),
+        (u'presence', _XNAP_PROTOCOL_IES_presence),
+        ])
+    
+    #-----< XNAP-PROTOCOL-IES-PAIR >-----#
+    XNAP_PROTOCOL_IES_PAIR = CLASS(name=u'XNAP-PROTOCOL-IES-PAIR', mode=MODE_TYPE)
+    _XNAP_PROTOCOL_IES_PAIR_id = INT(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
+    _XNAP_PROTOCOL_IES_PAIR_firstCriticality = ENUM(name=u'firstCriticality', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'Criticality')))
+    _XNAP_PROTOCOL_IES_PAIR_FirstValue = OPEN(name=u'FirstValue', mode=MODE_TYPE)
+    _XNAP_PROTOCOL_IES_PAIR_secondCriticality = ENUM(name=u'secondCriticality', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'Criticality')))
+    _XNAP_PROTOCOL_IES_PAIR_SecondValue = OPEN(name=u'SecondValue', mode=MODE_TYPE)
+    _XNAP_PROTOCOL_IES_PAIR_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'Presence')))
+    XNAP_PROTOCOL_IES_PAIR._cont = ASN1Dict([
+        (u'id', _XNAP_PROTOCOL_IES_PAIR_id),
+        (u'firstCriticality', _XNAP_PROTOCOL_IES_PAIR_firstCriticality),
+        (u'FirstValue', _XNAP_PROTOCOL_IES_PAIR_FirstValue),
+        (u'secondCriticality', _XNAP_PROTOCOL_IES_PAIR_secondCriticality),
+        (u'SecondValue', _XNAP_PROTOCOL_IES_PAIR_SecondValue),
+        (u'presence', _XNAP_PROTOCOL_IES_PAIR_presence),
+        ])
+    
+    #-----< XNAP-PROTOCOL-EXTENSION >-----#
+    XNAP_PROTOCOL_EXTENSION = CLASS(name=u'XNAP-PROTOCOL-EXTENSION', mode=MODE_TYPE)
+    _XNAP_PROTOCOL_EXTENSION_id = INT(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
+    _XNAP_PROTOCOL_EXTENSION_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'Criticality')))
+    _XNAP_PROTOCOL_EXTENSION_Extension = OPEN(name=u'Extension', mode=MODE_TYPE)
+    _XNAP_PROTOCOL_EXTENSION_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'Presence')))
+    XNAP_PROTOCOL_EXTENSION._cont = ASN1Dict([
+        (u'id', _XNAP_PROTOCOL_EXTENSION_id),
+        (u'criticality', _XNAP_PROTOCOL_EXTENSION_criticality),
+        (u'Extension', _XNAP_PROTOCOL_EXTENSION_Extension),
+        (u'presence', _XNAP_PROTOCOL_EXTENSION_presence),
+        ])
+    
+    #-----< XNAP-PRIVATE-IES >-----#
+    XNAP_PRIVATE_IES = CLASS(name=u'XNAP-PRIVATE-IES', mode=MODE_TYPE)
+    _XNAP_PRIVATE_IES_id = CHOICE(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'PrivateIE-ID')))
+    _XNAP_PRIVATE_IES_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'Criticality')))
+    _XNAP_PRIVATE_IES_Value = OPEN(name=u'Value', mode=MODE_TYPE)
+    _XNAP_PRIVATE_IES_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'Presence')))
+    XNAP_PRIVATE_IES._cont = ASN1Dict([
+        (u'id', _XNAP_PRIVATE_IES_id),
+        (u'criticality', _XNAP_PRIVATE_IES_criticality),
+        (u'Value', _XNAP_PRIVATE_IES_Value),
+        (u'presence', _XNAP_PRIVATE_IES_presence),
+        ])
+    
+    #-----< ProtocolIE-Container >-----#
+    ProtocolIE_Container = SEQ_OF(name=u'ProtocolIE-Container', mode=MODE_TYPE, param=True)
+    
+    #-----< ProtocolIE-Single-Container >-----#
+    ProtocolIE_Single_Container = SEQ(name=u'ProtocolIE-Single-Container', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-Containers', 'ProtocolIE-Field')), param=True)
+    
+    #-----< ProtocolIE-Field >-----#
+    ProtocolIE_Field = SEQ(name=u'ProtocolIE-Field', mode=MODE_TYPE, param=True)
+    
+    #-----< ProtocolIE-ContainerPair >-----#
+    ProtocolIE_ContainerPair = SEQ_OF(name=u'ProtocolIE-ContainerPair', mode=MODE_TYPE, param=True)
+    
+    #-----< ProtocolIE-FieldPair >-----#
+    ProtocolIE_FieldPair = SEQ(name=u'ProtocolIE-FieldPair', mode=MODE_TYPE, param=True)
+    
+    #-----< ProtocolIE-ContainerList >-----#
+    ProtocolIE_ContainerList = SEQ_OF(name=u'ProtocolIE-ContainerList', mode=MODE_TYPE, param=True)
+    
+    #-----< ProtocolIE-ContainerPairList >-----#
+    ProtocolIE_ContainerPairList = SEQ_OF(name=u'ProtocolIE-ContainerPairList', mode=MODE_TYPE, param=True)
+    
+    #-----< ProtocolExtensionContainer >-----#
+    ProtocolExtensionContainer = SEQ_OF(name=u'ProtocolExtensionContainer', mode=MODE_TYPE, param=True)
+    
+    #-----< ProtocolExtensionField >-----#
+    ProtocolExtensionField = SEQ(name=u'ProtocolExtensionField', mode=MODE_TYPE, param=True)
+    
+    #-----< PrivateIE-Container >-----#
+    PrivateIE_Container = SEQ_OF(name=u'PrivateIE-Container', mode=MODE_TYPE, param=True)
+    
+    #-----< PrivateIE-Field >-----#
+    PrivateIE_Field = SEQ(name=u'PrivateIE-Field', mode=MODE_TYPE, param=True)
+    
+    _all_ = [
+        _XNAP_PROTOCOL_IES_id,
+        _XNAP_PROTOCOL_IES_criticality,
+        _XNAP_PROTOCOL_IES_Value,
+        _XNAP_PROTOCOL_IES_presence,
+        XNAP_PROTOCOL_IES,
+        _XNAP_PROTOCOL_IES_PAIR_id,
+        _XNAP_PROTOCOL_IES_PAIR_firstCriticality,
+        _XNAP_PROTOCOL_IES_PAIR_FirstValue,
+        _XNAP_PROTOCOL_IES_PAIR_secondCriticality,
+        _XNAP_PROTOCOL_IES_PAIR_SecondValue,
+        _XNAP_PROTOCOL_IES_PAIR_presence,
+        XNAP_PROTOCOL_IES_PAIR,
+        _XNAP_PROTOCOL_EXTENSION_id,
+        _XNAP_PROTOCOL_EXTENSION_criticality,
+        _XNAP_PROTOCOL_EXTENSION_Extension,
+        _XNAP_PROTOCOL_EXTENSION_presence,
+        XNAP_PROTOCOL_EXTENSION,
+        _XNAP_PRIVATE_IES_id,
+        _XNAP_PRIVATE_IES_criticality,
+        _XNAP_PRIVATE_IES_Value,
+        _XNAP_PRIVATE_IES_presence,
+        XNAP_PRIVATE_IES,
     ]
 
 class XnAP_IEs:
@@ -2668,6 +2873,7 @@ class XnAP_IEs:
         u'CompositeAvailableCapacityGroup-ExtIEs',
         u'CompositeAvailableCapacity',
         u'CompositeAvailableCapacity-ExtIEs',
+        u'CHO-MRDC-EarlyDataForwarding',
         u'CHO-MRDC-Indicator',
         u'CHOtrigger',
         u'CHOinformation-Req',
@@ -3060,6 +3266,10 @@ class XnAP_IEs:
         u'PER-Exponent',
         u'PacketLossRate',
         u'PagingDRX',
+        u'PagingeDRXInformation',
+        u'PagingeDRXInformation-ExtIEs',
+        u'Paging-eDRX-Cycle',
+        u'Paging-Time-Window',
         u'PagingPriority',
         u'PartialListIndicator',
         u'PC5QoSParameters',
@@ -3323,6 +3533,7 @@ class XnAP_IEs:
         u'SecondarydataForwardingInfoFromTarget-Item-ExtIEs',
         u'SecondarydataForwardingInfoFromTarget-List',
         u'SCGConfigurationQuery',
+        u'SCGIndicator',
         u'SecondaryRATUsageInformation',
         u'SecondaryRATUsageInformation-ExtIEs',
         u'SecurityIndication',
@@ -3511,6 +3722,7 @@ class XnAP_IEs:
         u'UERLFReportContainerNR',
         u'UESecurityCapabilities',
         u'UESecurityCapabilities-ExtIEs',
+        u'UESpecificDRX',
         u'ULConfiguration',
         u'ULConfiguration-ExtIEs',
         u'UL-UE-Configuration',
@@ -3609,6 +3821,7 @@ class XnAP_IEs:
         u'Cell-Type-Choice',
         u'CompositeAvailableCapacityGroup',
         u'CompositeAvailableCapacity',
+        u'CHO-MRDC-EarlyDataForwarding',
         u'CHO-MRDC-Indicator',
         u'CHOtrigger',
         u'CHOinformation-Req',
@@ -3875,6 +4088,9 @@ class XnAP_IEs:
         u'PER-Exponent',
         u'PacketLossRate',
         u'PagingDRX',
+        u'PagingeDRXInformation',
+        u'Paging-eDRX-Cycle',
+        u'Paging-Time-Window',
         u'PagingPriority',
         u'PartialListIndicator',
         u'PC5QoSParameters',
@@ -4047,6 +4263,7 @@ class XnAP_IEs:
         u'SecondarydataForwardingInfoFromTarget-Item',
         u'SecondarydataForwardingInfoFromTarget-List',
         u'SCGConfigurationQuery',
+        u'SCGIndicator',
         u'SecondaryRATUsageInformation',
         u'SecurityIndication',
         u'SecurityResult',
@@ -4167,6 +4384,7 @@ class XnAP_IEs:
         u'UERLFReportContainerLTE',
         u'UERLFReportContainerNR',
         u'UESecurityCapabilities',
+        u'UESpecificDRX',
         u'ULConfiguration',
         u'UL-UE-Configuration',
         u'ULForwarding',
@@ -4346,6 +4564,7 @@ class XnAP_IEs:
         u'NRV2XServicesAuthorized-ExtIEs',
         u'NRUESidelinkAggregateMaximumBitRate-ExtIEs',
         u'PacketErrorRate-ExtIEs',
+        u'PagingeDRXInformation-ExtIEs',
         u'PC5QoSParameters-ExtIEs',
         u'PC5QoSFlowItem-ExtIEs',
         u'PC5FlowBitRates-ExtIEs',
@@ -4671,6 +4890,7 @@ class XnAP_IEs:
         u'NRV2XServicesAuthorized-ExtIEs',
         u'NRUESidelinkAggregateMaximumBitRate-ExtIEs',
         u'PacketErrorRate-ExtIEs',
+        u'PagingeDRXInformation-ExtIEs',
         u'PC5QoSParameters-ExtIEs',
         u'PC5QoSFlowItem-ExtIEs',
         u'PC5FlowBitRates-ExtIEs',
@@ -6259,8 +6479,8 @@ class XnAP_IEs:
     #-----< CellToReport-Item >-----#
     CellToReport_Item = SEQ(name=u'CellToReport-Item', mode=MODE_TYPE)
     _CellToReport_Item_cell_ID = SEQ(name=u'cell-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XnAP-IEs', 'GlobalNG-RANCell-ID')))
-    _CellToReport_Item_sSBToReport_List = SEQ_OF(name=u'sSBToReport-List', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XnAP-IEs', 'SSBToReport-List')))
-    _CellToReport_Item_sliceToReport_List = SEQ_OF(name=u'sliceToReport-List', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XnAP-IEs', 'SliceToReport-List')))
+    _CellToReport_Item_sSBToReport_List = SEQ_OF(name=u'sSBToReport-List', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XnAP-IEs', 'SSBToReport-List')), opt=True)
+    _CellToReport_Item_sliceToReport_List = SEQ_OF(name=u'sliceToReport-List', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XnAP-IEs', 'SliceToReport-List')), opt=True)
     _CellToReport_Item_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XnAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __CellToReport_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-Containers', 'ProtocolExtensionField')))
     ___CellToReport_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XnAP-Containers', 'XNAP-PROTOCOL-EXTENSION'), [u'id']))
@@ -6428,6 +6648,11 @@ class XnAP_IEs:
     #-----< CompositeAvailableCapacity-ExtIEs >-----#
     CompositeAvailableCapacity_ExtIEs = CLASS(name=u'CompositeAvailableCapacity-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('XnAP-Containers', 'XNAP-PROTOCOL-EXTENSION')))
     CompositeAvailableCapacity_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    
+    #-----< CHO-MRDC-EarlyDataForwarding >-----#
+    CHO_MRDC_EarlyDataForwarding = ENUM(name=u'CHO-MRDC-EarlyDataForwarding', mode=MODE_TYPE)
+    CHO_MRDC_EarlyDataForwarding._cont = ASN1Dict([(u'stop', 0)])
+    CHO_MRDC_EarlyDataForwarding._ext = []
     
     #-----< CHO-MRDC-Indicator >-----#
     CHO_MRDC_Indicator = ENUM(name=u'CHO-MRDC-Indicator', mode=MODE_TYPE)
@@ -12663,6 +12888,59 @@ class XnAP_IEs:
     PagingDRX._cont = ASN1Dict([(u'v32', 0), (u'v64', 1), (u'v128', 2), (u'v256', 3), (u'v512', 4), (u'v1024', 5)])
     PagingDRX._ext = [u'v512', u'v1024']
     
+    #-----< PagingeDRXInformation >-----#
+    PagingeDRXInformation = SEQ(name=u'PagingeDRXInformation', mode=MODE_TYPE)
+    _PagingeDRXInformation_paging_eDRX_Cycle = ENUM(name=u'paging-eDRX-Cycle', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XnAP-IEs', 'Paging-eDRX-Cycle')))
+    _PagingeDRXInformation_paging_Time_Window = ENUM(name=u'paging-Time-Window', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XnAP-IEs', 'Paging-Time-Window')), opt=True)
+    _PagingeDRXInformation_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XnAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    __PagingeDRXInformation_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-Containers', 'ProtocolExtensionField')))
+    ___PagingeDRXInformation_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XnAP-Containers', 'XNAP-PROTOCOL-EXTENSION'), [u'id']))
+    ____PagingeDRXInformation_iE_Extensions__item__id_tab = CLASS(name='_tab_XNAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('XnAP-Containers', 'XNAP-PROTOCOL-EXTENSION')))
+    ____PagingeDRXInformation_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PagingeDRXInformation_iE_Extensions__item__id._const_tab = ____PagingeDRXInformation_iE_Extensions__item__id_tab
+    ___PagingeDRXInformation_iE_Extensions__item__id._const_tab_at = None
+    ___PagingeDRXInformation_iE_Extensions__item__id._const_tab_id = u'id'
+    ___PagingeDRXInformation_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XnAP-Containers', 'XNAP-PROTOCOL-EXTENSION'), [u'criticality']))
+    ____PagingeDRXInformation_iE_Extensions__item__criticality_tab = CLASS(name='_tab_XNAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('XnAP-Containers', 'XNAP-PROTOCOL-EXTENSION')))
+    ____PagingeDRXInformation_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PagingeDRXInformation_iE_Extensions__item__criticality._const_tab = ____PagingeDRXInformation_iE_Extensions__item__criticality_tab
+    ___PagingeDRXInformation_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___PagingeDRXInformation_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___PagingeDRXInformation_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('XnAP-Containers', 'XNAP-PROTOCOL-EXTENSION'), [u'Extension']))
+    ____PagingeDRXInformation_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_XNAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('XnAP-Containers', 'XNAP-PROTOCOL-EXTENSION')))
+    ____PagingeDRXInformation_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PagingeDRXInformation_iE_Extensions__item__extensionValue._const_tab = ____PagingeDRXInformation_iE_Extensions__item__extensionValue_tab
+    ___PagingeDRXInformation_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___PagingeDRXInformation_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
+    __PagingeDRXInformation_iE_Extensions__item_._cont = ASN1Dict([
+        (u'id', ___PagingeDRXInformation_iE_Extensions__item__id),
+        (u'criticality', ___PagingeDRXInformation_iE_Extensions__item__criticality),
+        (u'extensionValue', ___PagingeDRXInformation_iE_Extensions__item__extensionValue),
+        ])
+    __PagingeDRXInformation_iE_Extensions__item_._ext = None
+    _PagingeDRXInformation_iE_Extensions._cont = __PagingeDRXInformation_iE_Extensions__item_
+    _PagingeDRXInformation_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
+    PagingeDRXInformation._cont = ASN1Dict([
+        (u'paging-eDRX-Cycle', _PagingeDRXInformation_paging_eDRX_Cycle),
+        (u'paging-Time-Window', _PagingeDRXInformation_paging_Time_Window),
+        (u'iE-Extensions', _PagingeDRXInformation_iE_Extensions),
+        ])
+    PagingeDRXInformation._ext = []
+    
+    #-----< PagingeDRXInformation-ExtIEs >-----#
+    PagingeDRXInformation_ExtIEs = CLASS(name=u'PagingeDRXInformation-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('XnAP-Containers', 'XNAP-PROTOCOL-EXTENSION')))
+    PagingeDRXInformation_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    
+    #-----< Paging-eDRX-Cycle >-----#
+    Paging_eDRX_Cycle = ENUM(name=u'Paging-eDRX-Cycle', mode=MODE_TYPE)
+    Paging_eDRX_Cycle._cont = ASN1Dict([(u'hfhalf', 0), (u'hf1', 1), (u'hf2', 2), (u'hf4', 3), (u'hf6', 4), (u'hf8', 5), (u'hf10', 6), (u'hf12', 7), (u'hf14', 8), (u'hf16', 9), (u'hf32', 10), (u'hf64', 11), (u'hf128', 12), (u'hf256', 13)])
+    Paging_eDRX_Cycle._ext = []
+    
+    #-----< Paging-Time-Window >-----#
+    Paging_Time_Window = ENUM(name=u'Paging-Time-Window', mode=MODE_TYPE)
+    Paging_Time_Window._cont = ASN1Dict([(u's1', 0), (u's2', 1), (u's3', 2), (u's4', 3), (u's5', 4), (u's6', 5), (u's7', 6), (u's8', 7), (u's9', 8), (u's10', 9), (u's11', 10), (u's12', 11), (u's13', 12), (u's14', 13), (u's15', 14), (u's16', 15)])
+    Paging_Time_Window._ext = []
+    
     #-----< PagingPriority >-----#
     PagingPriority = ENUM(name=u'PagingPriority', mode=MODE_TYPE)
     PagingPriority._cont = ASN1Dict([(u'priolevel1', 0), (u'priolevel2', 1), (u'priolevel3', 2), (u'priolevel4', 3), (u'priolevel5', 4), (u'priolevel6', 5), (u'priolevel7', 6), (u'priolevel8', 7)])
@@ -17188,6 +17466,11 @@ class XnAP_IEs:
     SCGConfigurationQuery._cont = ASN1Dict([(u'true', 0)])
     SCGConfigurationQuery._ext = []
     
+    #-----< SCGIndicator >-----#
+    SCGIndicator = ENUM(name=u'SCGIndicator', mode=MODE_TYPE)
+    SCGIndicator._cont = ASN1Dict([(u'released', 0)])
+    SCGIndicator._ext = []
+    
     #-----< SecondaryRATUsageInformation >-----#
     SecondaryRATUsageInformation = SEQ(name=u'SecondaryRATUsageInformation', mode=MODE_TYPE)
     _SecondaryRATUsageInformation_pDUSessionUsageReport = SEQ(name=u'pDUSessionUsageReport', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XnAP-IEs', 'PDUSessionUsageReport')), opt=True)
@@ -20480,6 +20763,11 @@ class XnAP_IEs:
     UESecurityCapabilities_ExtIEs = CLASS(name=u'UESecurityCapabilities-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('XnAP-Containers', 'XNAP-PROTOCOL-EXTENSION')))
     UESecurityCapabilities_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
+    #-----< UESpecificDRX >-----#
+    UESpecificDRX = ENUM(name=u'UESpecificDRX', mode=MODE_TYPE)
+    UESpecificDRX._cont = ASN1Dict([(u'v32', 0), (u'v64', 1), (u'v128', 2), (u'v256', 3)])
+    UESpecificDRX._ext = []
+    
     #-----< ULConfiguration >-----#
     ULConfiguration = SEQ(name=u'ULConfiguration', mode=MODE_TYPE)
     _ULConfiguration_uL_PDCP = ENUM(name=u'uL-PDCP', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XnAP-IEs', 'UL-UE-Configuration')))
@@ -21231,6 +21519,7 @@ class XnAP_IEs:
         _CompositeAvailableCapacity_iE_Extensions,
         CompositeAvailableCapacity,
         CompositeAvailableCapacity_ExtIEs,
+        CHO_MRDC_EarlyDataForwarding,
         CHO_MRDC_Indicator,
         CHOtrigger,
         _CHOinformation_Req_cho_trigger,
@@ -22995,6 +23284,20 @@ class XnAP_IEs:
         PER_Exponent,
         PacketLossRate,
         PagingDRX,
+        _PagingeDRXInformation_paging_eDRX_Cycle,
+        _PagingeDRXInformation_paging_Time_Window,
+        ____PagingeDRXInformation_iE_Extensions__item__id_tab,
+        ___PagingeDRXInformation_iE_Extensions__item__id,
+        ____PagingeDRXInformation_iE_Extensions__item__criticality_tab,
+        ___PagingeDRXInformation_iE_Extensions__item__criticality,
+        ____PagingeDRXInformation_iE_Extensions__item__extensionValue_tab,
+        ___PagingeDRXInformation_iE_Extensions__item__extensionValue,
+        __PagingeDRXInformation_iE_Extensions__item_,
+        _PagingeDRXInformation_iE_Extensions,
+        PagingeDRXInformation,
+        PagingeDRXInformation_ExtIEs,
+        Paging_eDRX_Cycle,
+        Paging_Time_Window,
         PagingPriority,
         PartialListIndicator,
         _PC5QoSParameters_pc5QoSFlowList,
@@ -24351,6 +24654,7 @@ class XnAP_IEs:
         _SecondarydataForwardingInfoFromTarget_List__item_,
         SecondarydataForwardingInfoFromTarget_List,
         SCGConfigurationQuery,
+        SCGIndicator,
         _SecondaryRATUsageInformation_pDUSessionUsageReport,
         _SecondaryRATUsageInformation_qosFlowsUsageReportList,
         ____SecondaryRATUsageInformation_iE_Extension__item__id_tab,
@@ -25299,6 +25603,7 @@ class XnAP_IEs:
         _UESecurityCapabilities_iE_Extension,
         UESecurityCapabilities,
         UESecurityCapabilities_ExtIEs,
+        UESpecificDRX,
         _ULConfiguration_uL_PDCP,
         ____ULConfiguration_iE_Extensions__item__id_tab,
         ___ULConfiguration_iE_Extensions__item__id,
@@ -25378,1468 +25683,6 @@ class XnAP_IEs:
         WLANMeasConfig,
         WLANName,
         XnBenefitValue,
-    ]
-
-class XnAP_PDU_Descriptions:
-
-    _name_  = u'XnAP-PDU-Descriptions'
-    _oid_   = [0, 4, 0, 0, 22, 3, 2, 1, 0]
-    
-    _obj_ = [
-        u'XNAP-ELEMENTARY-PROCEDURE',
-        u'XnAP-PDU',
-        u'InitiatingMessage',
-        u'SuccessfulOutcome',
-        u'UnsuccessfulOutcome',
-        u'XNAP-ELEMENTARY-PROCEDURES',
-        u'XNAP-ELEMENTARY-PROCEDURES-CLASS-1',
-        u'XNAP-ELEMENTARY-PROCEDURES-CLASS-2',
-        u'handoverPreparation',
-        u'sNStatusTransfer',
-        u'handoverCancel',
-        u'retrieveUEContext',
-        u'rANPaging',
-        u'xnUAddressIndication',
-        u'uEContextRelease',
-        u'sNGRANnodeAdditionPreparation',
-        u'sNGRANnodeReconfigurationCompletion',
-        u'mNGRANnodeinitiatedSNGRANnodeModificationPreparation',
-        u'sNGRANnodeinitiatedSNGRANnodeModificationPreparation',
-        u'mNGRANnodeinitiatedSNGRANnodeRelease',
-        u'sNGRANnodeinitiatedSNGRANnodeRelease',
-        u'sNGRANnodeCounterCheck',
-        u'sNGRANnodeChange',
-        u'rRCTransfer',
-        u'xnRemoval',
-        u'xnSetup',
-        u'nGRANnodeConfigurationUpdate',
-        u'e-UTRA-NR-CellResourceCoordination',
-        u'cellActivation',
-        u'reset',
-        u'errorIndication',
-        u'notificationControl',
-        u'activityNotification',
-        u'privateMessage',
-        u'secondaryRATDataUsageReport',
-        u'deactivateTrace',
-        u'traceStart',
-        u'handoverSuccess',
-        u'conditionalHandoverCancel',
-        u'earlyStatusTransfer',
-        u'failureIndication',
-        u'handoverReport',
-        u'resourceStatusReportingInitiation',
-        u'resourceStatusReporting',
-        u'mobilitySettingsChange',
-        u'accessAndMobilityIndication',
-        ]
-    _type_ = [
-        u'XNAP-ELEMENTARY-PROCEDURE',
-        u'XnAP-PDU',
-        u'InitiatingMessage',
-        u'SuccessfulOutcome',
-        u'UnsuccessfulOutcome',
-        ]
-    _set_ = [
-        u'XNAP-ELEMENTARY-PROCEDURES',
-        u'XNAP-ELEMENTARY-PROCEDURES-CLASS-1',
-        u'XNAP-ELEMENTARY-PROCEDURES-CLASS-2',
-        ]
-    _val_ = [
-        u'handoverPreparation',
-        u'sNStatusTransfer',
-        u'handoverCancel',
-        u'retrieveUEContext',
-        u'rANPaging',
-        u'xnUAddressIndication',
-        u'uEContextRelease',
-        u'sNGRANnodeAdditionPreparation',
-        u'sNGRANnodeReconfigurationCompletion',
-        u'mNGRANnodeinitiatedSNGRANnodeModificationPreparation',
-        u'sNGRANnodeinitiatedSNGRANnodeModificationPreparation',
-        u'mNGRANnodeinitiatedSNGRANnodeRelease',
-        u'sNGRANnodeinitiatedSNGRANnodeRelease',
-        u'sNGRANnodeCounterCheck',
-        u'sNGRANnodeChange',
-        u'rRCTransfer',
-        u'xnRemoval',
-        u'xnSetup',
-        u'nGRANnodeConfigurationUpdate',
-        u'e-UTRA-NR-CellResourceCoordination',
-        u'cellActivation',
-        u'reset',
-        u'errorIndication',
-        u'notificationControl',
-        u'activityNotification',
-        u'privateMessage',
-        u'secondaryRATDataUsageReport',
-        u'deactivateTrace',
-        u'traceStart',
-        u'handoverSuccess',
-        u'conditionalHandoverCancel',
-        u'earlyStatusTransfer',
-        u'failureIndication',
-        u'handoverReport',
-        u'resourceStatusReportingInitiation',
-        u'resourceStatusReporting',
-        u'mobilitySettingsChange',
-        u'accessAndMobilityIndication',
-        ]
-    _class_ = [
-        u'XNAP-ELEMENTARY-PROCEDURE',
-        u'XNAP-ELEMENTARY-PROCEDURES',
-        u'XNAP-ELEMENTARY-PROCEDURES-CLASS-1',
-        u'XNAP-ELEMENTARY-PROCEDURES-CLASS-2',
-        u'handoverPreparation',
-        u'sNStatusTransfer',
-        u'handoverCancel',
-        u'retrieveUEContext',
-        u'rANPaging',
-        u'xnUAddressIndication',
-        u'uEContextRelease',
-        u'sNGRANnodeAdditionPreparation',
-        u'sNGRANnodeReconfigurationCompletion',
-        u'mNGRANnodeinitiatedSNGRANnodeModificationPreparation',
-        u'sNGRANnodeinitiatedSNGRANnodeModificationPreparation',
-        u'mNGRANnodeinitiatedSNGRANnodeRelease',
-        u'sNGRANnodeinitiatedSNGRANnodeRelease',
-        u'sNGRANnodeCounterCheck',
-        u'sNGRANnodeChange',
-        u'rRCTransfer',
-        u'xnRemoval',
-        u'xnSetup',
-        u'nGRANnodeConfigurationUpdate',
-        u'e-UTRA-NR-CellResourceCoordination',
-        u'cellActivation',
-        u'reset',
-        u'errorIndication',
-        u'notificationControl',
-        u'activityNotification',
-        u'privateMessage',
-        u'secondaryRATDataUsageReport',
-        u'deactivateTrace',
-        u'traceStart',
-        u'handoverSuccess',
-        u'conditionalHandoverCancel',
-        u'earlyStatusTransfer',
-        u'failureIndication',
-        u'handoverReport',
-        u'resourceStatusReportingInitiation',
-        u'resourceStatusReporting',
-        u'mobilitySettingsChange',
-        u'accessAndMobilityIndication',
-        ]
-    _param_ = [
-        ]
-    
-    #-----< XNAP-ELEMENTARY-PROCEDURE >-----#
-    XNAP_ELEMENTARY_PROCEDURE = CLASS(name=u'XNAP-ELEMENTARY-PROCEDURE', mode=MODE_TYPE)
-    _XNAP_ELEMENTARY_PROCEDURE_InitiatingMessage = OPEN(name=u'InitiatingMessage', mode=MODE_TYPE)
-    _XNAP_ELEMENTARY_PROCEDURE_SuccessfulOutcome = OPEN(name=u'SuccessfulOutcome', mode=MODE_TYPE, opt=True)
-    _XNAP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome = OPEN(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, opt=True)
-    _XNAP_ELEMENTARY_PROCEDURE_procedureCode = INT(name=u'procedureCode', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'ProcedureCode')), uniq=True)
-    _XNAP_ELEMENTARY_PROCEDURE_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'Criticality')), default=u'ignore')
-    XNAP_ELEMENTARY_PROCEDURE._cont = ASN1Dict([
-        (u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURE_InitiatingMessage),
-        (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURE_SuccessfulOutcome),
-        (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome),
-        (u'procedureCode', _XNAP_ELEMENTARY_PROCEDURE_procedureCode),
-        (u'criticality', _XNAP_ELEMENTARY_PROCEDURE_criticality),
-        ])
-    
-    #-----< XnAP-PDU >-----#
-    XnAP_PDU = CHOICE(name=u'XnAP-PDU', mode=MODE_TYPE)
-    _XnAP_PDU_initiatingMessage = SEQ(name=u'initiatingMessage', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'InitiatingMessage')))
-    _XnAP_PDU_successfulOutcome = SEQ(name=u'successfulOutcome', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'SuccessfulOutcome')))
-    _XnAP_PDU_unsuccessfulOutcome = SEQ(name=u'unsuccessfulOutcome', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'UnsuccessfulOutcome')))
-    XnAP_PDU._cont = ASN1Dict([
-        (u'initiatingMessage', _XnAP_PDU_initiatingMessage),
-        (u'successfulOutcome', _XnAP_PDU_successfulOutcome),
-        (u'unsuccessfulOutcome', _XnAP_PDU_unsuccessfulOutcome),
-        ])
-    XnAP_PDU._ext = []
-    
-    #-----< InitiatingMessage >-----#
-    InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE)
-    _InitiatingMessage_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
-    __InitiatingMessage_procedureCode_tab = CLASS(name='_tab_XNAP-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequestAcknowledge')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverPreparationFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestAcknowledge')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestReject')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestAcknowledge')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_3 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestReject')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequired')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationConfirm')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRefuse')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequestAcknowledge')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_5 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseReject')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequired')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseConfirm')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRequired')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeConfirm')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRefuse')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_8 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_9 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdate')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_10 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateAcknowledge')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_10 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_11 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_12 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_12 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_13 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_14 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_14 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_15 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeAcknowledge')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_15 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_16 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNStatusTransfer')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_17 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverCancel')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_18 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RANPaging')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_19 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnUAddressIndication')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_20 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'UEContextRelease')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_21 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReconfigurationComplete')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_22 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeCounterCheckRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_23 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RRCTransfer')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_24 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ErrorIndication')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_25 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'PrivateMessage')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_26 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NotificationControlIndication')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_27 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ActivityNotification')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_28 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SecondaryRATDataUsageReport')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_29 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'DeactivateTrace')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_30 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'TraceStart')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_31 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverSuccess')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_32 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ConditionalHandoverCancel')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_33 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'EarlyStatusTransfer')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_34 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'FailureIndication')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_35 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverReport')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_36 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusUpdate')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_37 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'AccessAndMobilityIndication')))
-    __InitiatingMessage_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_2), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_3), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_3), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_4), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_5), (u'procedureCode', 11), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_6), (u'procedureCode', 12), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_7), (u'procedureCode', 14), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_8), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_8), (u'procedureCode', 16), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_9), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_9), (u'procedureCode', 17), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_10), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_10), (u'procedureCode', 18), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_11), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_11), (u'procedureCode', 25), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_12), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_12), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_12), (u'procedureCode', 19), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_13), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_13), (u'procedureCode', 20), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_14), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_14), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_14), (u'procedureCode', 34), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_15), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_15), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_15), (u'procedureCode', 36), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_16), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_17), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_18), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_19), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_20), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_21), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_22), (u'procedureCode', 13), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_23), (u'procedureCode', 15), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_24), (u'procedureCode', 21), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_25), (u'procedureCode', 22), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_26), (u'procedureCode', 23), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_27), (u'procedureCode', 24), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_28), (u'procedureCode', 26), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_29), (u'procedureCode', 27), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_30), (u'procedureCode', 28), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_31), (u'procedureCode', 29), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_32), (u'procedureCode', 30), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_33), (u'procedureCode', 31), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_34), (u'procedureCode', 32), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_35), (u'procedureCode', 33), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_36), (u'procedureCode', 35), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_37), (u'procedureCode', 37), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
-    _InitiatingMessage_procedureCode._const_tab = __InitiatingMessage_procedureCode_tab
-    _InitiatingMessage_procedureCode._const_tab_at = None
-    _InitiatingMessage_procedureCode._const_tab_id = u'procedureCode'
-    _InitiatingMessage_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE'), [u'criticality']))
-    _InitiatingMessage_criticality._const_tab = __InitiatingMessage_procedureCode_tab
-    _InitiatingMessage_criticality._const_tab_at = ('..', u'procedureCode')
-    _InitiatingMessage_criticality._const_tab_id = u'criticality'
-    _InitiatingMessage_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE'), [u'InitiatingMessage']))
-    _InitiatingMessage_value._const_tab = __InitiatingMessage_procedureCode_tab
-    _InitiatingMessage_value._const_tab_at = ('..', u'procedureCode')
-    _InitiatingMessage_value._const_tab_id = u'InitiatingMessage'
-    InitiatingMessage._cont = ASN1Dict([
-        (u'procedureCode', _InitiatingMessage_procedureCode),
-        (u'criticality', _InitiatingMessage_criticality),
-        (u'value', _InitiatingMessage_value),
-        ])
-    InitiatingMessage._ext = None
-    
-    #-----< SuccessfulOutcome >-----#
-    SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE)
-    _SuccessfulOutcome_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
-    __SuccessfulOutcome_procedureCode_tab = CLASS(name='_tab_XNAP-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequestAcknowledge')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverPreparationFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestAcknowledge')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestReject')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestAcknowledge')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestReject')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequired')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationConfirm')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRefuse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequestAcknowledge')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseReject')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequired')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseConfirm')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRequired')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeConfirm')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRefuse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_8 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_9 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdate')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_10 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateAcknowledge')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_10 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_11 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_12 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_12 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_13 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_14 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_14 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_15 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeAcknowledge')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_15 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNStatusTransfer')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverCancel')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RANPaging')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnUAddressIndication')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_20 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'UEContextRelease')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_21 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReconfigurationComplete')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_22 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeCounterCheckRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_23 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RRCTransfer')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_24 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ErrorIndication')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_25 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'PrivateMessage')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_26 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NotificationControlIndication')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_27 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ActivityNotification')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_28 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SecondaryRATDataUsageReport')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_29 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'DeactivateTrace')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_30 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'TraceStart')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_31 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverSuccess')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_32 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ConditionalHandoverCancel')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_33 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'EarlyStatusTransfer')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_34 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'FailureIndication')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_35 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverReport')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_36 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusUpdate')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_37 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'AccessAndMobilityIndication')))
-    __SuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5), (u'procedureCode', 11), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6), (u'procedureCode', 12), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7), (u'procedureCode', 14), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_8), (u'procedureCode', 16), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_9), (u'procedureCode', 17), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_10), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_10), (u'procedureCode', 18), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_11), (u'procedureCode', 25), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_12), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_12), (u'procedureCode', 19), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_13), (u'procedureCode', 20), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_14), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_14), (u'procedureCode', 34), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_15), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_15), (u'procedureCode', 36), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_20), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_21), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_22), (u'procedureCode', 13), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_23), (u'procedureCode', 15), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_24), (u'procedureCode', 21), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_25), (u'procedureCode', 22), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_26), (u'procedureCode', 23), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_27), (u'procedureCode', 24), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_28), (u'procedureCode', 26), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_29), (u'procedureCode', 27), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_30), (u'procedureCode', 28), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_31), (u'procedureCode', 29), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_32), (u'procedureCode', 30), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_33), (u'procedureCode', 31), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_34), (u'procedureCode', 32), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_35), (u'procedureCode', 33), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_36), (u'procedureCode', 35), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_37), (u'procedureCode', 37), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
-    _SuccessfulOutcome_procedureCode._const_tab = __SuccessfulOutcome_procedureCode_tab
-    _SuccessfulOutcome_procedureCode._const_tab_at = None
-    _SuccessfulOutcome_procedureCode._const_tab_id = u'procedureCode'
-    _SuccessfulOutcome_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE'), [u'criticality']))
-    _SuccessfulOutcome_criticality._const_tab = __SuccessfulOutcome_procedureCode_tab
-    _SuccessfulOutcome_criticality._const_tab_at = ('..', u'procedureCode')
-    _SuccessfulOutcome_criticality._const_tab_id = u'criticality'
-    _SuccessfulOutcome_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE'), [u'SuccessfulOutcome']))
-    _SuccessfulOutcome_value._const_tab = __SuccessfulOutcome_procedureCode_tab
-    _SuccessfulOutcome_value._const_tab_at = ('..', u'procedureCode')
-    _SuccessfulOutcome_value._const_tab_id = u'SuccessfulOutcome'
-    SuccessfulOutcome._cont = ASN1Dict([
-        (u'procedureCode', _SuccessfulOutcome_procedureCode),
-        (u'criticality', _SuccessfulOutcome_criticality),
-        (u'value', _SuccessfulOutcome_value),
-        ])
-    SuccessfulOutcome._ext = None
-    
-    #-----< UnsuccessfulOutcome >-----#
-    UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE)
-    _UnsuccessfulOutcome_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
-    __UnsuccessfulOutcome_procedureCode_tab = CLASS(name='_tab_XNAP-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequestAcknowledge')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverPreparationFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestAcknowledge')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestReject')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestAcknowledge')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestReject')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequired')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationConfirm')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRefuse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequestAcknowledge')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseReject')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequired')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseConfirm')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRequired')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeConfirm')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRefuse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_8 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_9 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdate')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_10 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateAcknowledge')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_10 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_11 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_12 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_12 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_13 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_14 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_14 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_15 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeAcknowledge')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_15 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNStatusTransfer')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverCancel')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RANPaging')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnUAddressIndication')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_20 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'UEContextRelease')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_21 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReconfigurationComplete')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_22 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeCounterCheckRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_23 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RRCTransfer')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_24 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ErrorIndication')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_25 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'PrivateMessage')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_26 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NotificationControlIndication')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_27 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ActivityNotification')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_28 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SecondaryRATDataUsageReport')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_29 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'DeactivateTrace')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_30 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'TraceStart')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_31 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverSuccess')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_32 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ConditionalHandoverCancel')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_33 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'EarlyStatusTransfer')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_34 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'FailureIndication')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_35 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverReport')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_36 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusUpdate')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_37 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'AccessAndMobilityIndication')))
-    __UnsuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5), (u'procedureCode', 11), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6), (u'procedureCode', 12), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7), (u'procedureCode', 14), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_8), (u'procedureCode', 16), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_9), (u'procedureCode', 17), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_10), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_10), (u'procedureCode', 18), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_11), (u'procedureCode', 25), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_12), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_12), (u'procedureCode', 19), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_13), (u'procedureCode', 20), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_14), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_14), (u'procedureCode', 34), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_15), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_15), (u'procedureCode', 36), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_20), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_21), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_22), (u'procedureCode', 13), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_23), (u'procedureCode', 15), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_24), (u'procedureCode', 21), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_25), (u'procedureCode', 22), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_26), (u'procedureCode', 23), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_27), (u'procedureCode', 24), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_28), (u'procedureCode', 26), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_29), (u'procedureCode', 27), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_30), (u'procedureCode', 28), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_31), (u'procedureCode', 29), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_32), (u'procedureCode', 30), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_33), (u'procedureCode', 31), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_34), (u'procedureCode', 32), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_35), (u'procedureCode', 33), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_36), (u'procedureCode', 35), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_37), (u'procedureCode', 37), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
-    _UnsuccessfulOutcome_procedureCode._const_tab = __UnsuccessfulOutcome_procedureCode_tab
-    _UnsuccessfulOutcome_procedureCode._const_tab_at = None
-    _UnsuccessfulOutcome_procedureCode._const_tab_id = u'procedureCode'
-    _UnsuccessfulOutcome_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE'), [u'criticality']))
-    _UnsuccessfulOutcome_criticality._const_tab = __UnsuccessfulOutcome_procedureCode_tab
-    _UnsuccessfulOutcome_criticality._const_tab_at = ('..', u'procedureCode')
-    _UnsuccessfulOutcome_criticality._const_tab_id = u'criticality'
-    _UnsuccessfulOutcome_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE'), [u'UnsuccessfulOutcome']))
-    _UnsuccessfulOutcome_value._const_tab = __UnsuccessfulOutcome_procedureCode_tab
-    _UnsuccessfulOutcome_value._const_tab_at = ('..', u'procedureCode')
-    _UnsuccessfulOutcome_value._const_tab_id = u'UnsuccessfulOutcome'
-    UnsuccessfulOutcome._cont = ASN1Dict([
-        (u'procedureCode', _UnsuccessfulOutcome_procedureCode),
-        (u'criticality', _UnsuccessfulOutcome_criticality),
-        (u'value', _UnsuccessfulOutcome_value),
-        ])
-    UnsuccessfulOutcome._ext = None
-    
-    #-----< XNAP-ELEMENTARY-PROCEDURES >-----#
-    XNAP_ELEMENTARY_PROCEDURES = CLASS(name=u'XNAP-ELEMENTARY-PROCEDURES', mode=MODE_SET, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequestAcknowledge')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverPreparationFailure')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextResponse')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextFailure')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestAcknowledge')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestReject')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestAcknowledge')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_3 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestReject')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequired')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationConfirm')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRefuse')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequestAcknowledge')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_5 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseReject')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequired')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseConfirm')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRequired')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeConfirm')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRefuse')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalResponse')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_8 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalFailure')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupResponse')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_9 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupFailure')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdate')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_10 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateAcknowledge')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_10 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateFailure')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_11 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationResponse')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_12 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationResponse')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_12 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationFailure')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_13 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetResponse')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_14 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusResponse')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_14 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusFailure')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_15 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeAcknowledge')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_15 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeFailure')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_16 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNStatusTransfer')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_17 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverCancel')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_18 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RANPaging')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_19 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnUAddressIndication')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_20 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'UEContextRelease')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_21 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReconfigurationComplete')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_22 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeCounterCheckRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_23 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RRCTransfer')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_24 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ErrorIndication')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_25 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'PrivateMessage')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_26 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NotificationControlIndication')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_27 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ActivityNotification')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_28 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SecondaryRATDataUsageReport')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_29 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'DeactivateTrace')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_30 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'TraceStart')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_31 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverSuccess')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_32 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ConditionalHandoverCancel')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_33 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'EarlyStatusTransfer')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_34 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'FailureIndication')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_35 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverReport')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_36 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusUpdate')))
-    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_37 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'AccessAndMobilityIndication')))
-    XNAP_ELEMENTARY_PROCEDURES._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_2), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_3), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_3), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_4), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_5), (u'procedureCode', 11), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_6), (u'procedureCode', 12), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_7), (u'procedureCode', 14), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_8), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_8), (u'procedureCode', 16), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_9), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_9), (u'procedureCode', 17), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_10), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_10), (u'procedureCode', 18), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_11), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_11), (u'procedureCode', 25), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_12), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_12), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_12), (u'procedureCode', 19), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_13), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_13), (u'procedureCode', 20), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_14), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_14), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_14), (u'procedureCode', 34), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_15), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_15), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_15), (u'procedureCode', 36), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_16), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_17), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_18), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_19), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_20), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_21), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_22), (u'procedureCode', 13), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_23), (u'procedureCode', 15), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_24), (u'procedureCode', 21), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_25), (u'procedureCode', 22), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_26), (u'procedureCode', 23), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_27), (u'procedureCode', 24), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_28), (u'procedureCode', 26), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_29), (u'procedureCode', 27), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_30), (u'procedureCode', 28), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_31), (u'procedureCode', 29), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_32), (u'procedureCode', 30), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_33), (u'procedureCode', 31), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_34), (u'procedureCode', 32), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_35), (u'procedureCode', 33), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_36), (u'procedureCode', 35), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_37), (u'procedureCode', 37), (u'criticality', u'ignore')])], rr=[], ev=[], er=[])
-    
-    #-----< XNAP-ELEMENTARY-PROCEDURES-CLASS-1 >-----#
-    XNAP_ELEMENTARY_PROCEDURES_CLASS_1 = CLASS(name=u'XNAP-ELEMENTARY-PROCEDURES-CLASS-1', mode=MODE_SET, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequestAcknowledge')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverPreparationFailure')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextResponse')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextFailure')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestAcknowledge')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestReject')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestAcknowledge')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_3 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestReject')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequired')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationConfirm')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRefuse')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequestAcknowledge')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_5 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseReject')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequired')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseConfirm')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRequired')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeConfirm')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRefuse')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalResponse')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_8 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalFailure')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupResponse')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_9 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupFailure')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdate')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_10 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateAcknowledge')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_10 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateFailure')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_11 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationResponse')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_12 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationResponse')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_12 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationFailure')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_13 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetResponse')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_14 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusResponse')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_14 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusFailure')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_15 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeAcknowledge')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_15 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeFailure')))
-    XNAP_ELEMENTARY_PROCEDURES_CLASS_1._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_3), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_3), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_3), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_4), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_4), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_5), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_5), (u'procedureCode', 11), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_6), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_6), (u'procedureCode', 12), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_7), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_7), (u'procedureCode', 14), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_8), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_8), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_8), (u'procedureCode', 16), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_9), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_9), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_9), (u'procedureCode', 17), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_10), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_10), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_10), (u'procedureCode', 18), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_11), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_11), (u'procedureCode', 25), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_12), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_12), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_12), (u'procedureCode', 19), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_13), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_13), (u'procedureCode', 20), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_14), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_14), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_14), (u'procedureCode', 34), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_15), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_15), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_15), (u'procedureCode', 36), (u'criticality', u'reject')])], rr=[], ev=[], er=[])
-    
-    #-----< XNAP-ELEMENTARY-PROCEDURES-CLASS-2 >-----#
-    XNAP_ELEMENTARY_PROCEDURES_CLASS_2 = CLASS(name=u'XNAP-ELEMENTARY-PROCEDURES-CLASS-2', mode=MODE_SET, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNStatusTransfer')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverCancel')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RANPaging')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnUAddressIndication')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'UEContextRelease')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReconfigurationComplete')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeCounterCheckRequest')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RRCTransfer')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ErrorIndication')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'PrivateMessage')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NotificationControlIndication')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ActivityNotification')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SecondaryRATDataUsageReport')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'DeactivateTrace')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'TraceStart')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverSuccess')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_16 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ConditionalHandoverCancel')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_17 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'EarlyStatusTransfer')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_18 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'FailureIndication')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_19 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverReport')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_20 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusUpdate')))
-    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_21 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'AccessAndMobilityIndication')))
-    XNAP_ELEMENTARY_PROCEDURES_CLASS_2._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_6), (u'procedureCode', 13), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_7), (u'procedureCode', 15), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_8), (u'procedureCode', 21), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_9), (u'procedureCode', 22), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_10), (u'procedureCode', 23), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_11), (u'procedureCode', 24), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_12), (u'procedureCode', 26), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_13), (u'procedureCode', 27), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_14), (u'procedureCode', 28), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_15), (u'procedureCode', 29), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_16), (u'procedureCode', 30), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_17), (u'procedureCode', 31), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_18), (u'procedureCode', 32), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_19), (u'procedureCode', 33), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_20), (u'procedureCode', 35), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_21), (u'procedureCode', 37), (u'criticality', u'ignore')])], rr=[], ev=[], er=[])
-    
-    #-----< handoverPreparation >-----#
-    handoverPreparation = CLASS(name=u'handoverPreparation', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _handoverPreparation_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequest')))
-    _handoverPreparation_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequestAcknowledge')))
-    _handoverPreparation_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverPreparationFailure')))
-    handoverPreparation._val = dict([(u'InitiatingMessage', _handoverPreparation_val_InitiatingMessage), (u'SuccessfulOutcome', _handoverPreparation_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _handoverPreparation_val_UnsuccessfulOutcome), (u'procedureCode', 0), (u'criticality', u'reject')])
-    
-    #-----< sNStatusTransfer >-----#
-    sNStatusTransfer = CLASS(name=u'sNStatusTransfer', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _sNStatusTransfer_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNStatusTransfer')))
-    sNStatusTransfer._val = dict([(u'InitiatingMessage', _sNStatusTransfer_val_InitiatingMessage), (u'procedureCode', 1), (u'criticality', u'ignore')])
-    
-    #-----< handoverCancel >-----#
-    handoverCancel = CLASS(name=u'handoverCancel', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _handoverCancel_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverCancel')))
-    handoverCancel._val = dict([(u'InitiatingMessage', _handoverCancel_val_InitiatingMessage), (u'procedureCode', 2), (u'criticality', u'ignore')])
-    
-    #-----< retrieveUEContext >-----#
-    retrieveUEContext = CLASS(name=u'retrieveUEContext', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _retrieveUEContext_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextRequest')))
-    _retrieveUEContext_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextResponse')))
-    _retrieveUEContext_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextFailure')))
-    retrieveUEContext._val = dict([(u'InitiatingMessage', _retrieveUEContext_val_InitiatingMessage), (u'SuccessfulOutcome', _retrieveUEContext_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _retrieveUEContext_val_UnsuccessfulOutcome), (u'procedureCode', 3), (u'criticality', u'reject')])
-    
-    #-----< rANPaging >-----#
-    rANPaging = CLASS(name=u'rANPaging', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _rANPaging_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RANPaging')))
-    rANPaging._val = dict([(u'InitiatingMessage', _rANPaging_val_InitiatingMessage), (u'procedureCode', 4), (u'criticality', u'reject')])
-    
-    #-----< xnUAddressIndication >-----#
-    xnUAddressIndication = CLASS(name=u'xnUAddressIndication', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _xnUAddressIndication_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnUAddressIndication')))
-    xnUAddressIndication._val = dict([(u'InitiatingMessage', _xnUAddressIndication_val_InitiatingMessage), (u'procedureCode', 5), (u'criticality', u'reject')])
-    
-    #-----< uEContextRelease >-----#
-    uEContextRelease = CLASS(name=u'uEContextRelease', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _uEContextRelease_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'UEContextRelease')))
-    uEContextRelease._val = dict([(u'InitiatingMessage', _uEContextRelease_val_InitiatingMessage), (u'procedureCode', 6), (u'criticality', u'reject')])
-    
-    #-----< sNGRANnodeAdditionPreparation >-----#
-    sNGRANnodeAdditionPreparation = CLASS(name=u'sNGRANnodeAdditionPreparation', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _sNGRANnodeAdditionPreparation_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequest')))
-    _sNGRANnodeAdditionPreparation_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestAcknowledge')))
-    _sNGRANnodeAdditionPreparation_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestReject')))
-    sNGRANnodeAdditionPreparation._val = dict([(u'InitiatingMessage', _sNGRANnodeAdditionPreparation_val_InitiatingMessage), (u'SuccessfulOutcome', _sNGRANnodeAdditionPreparation_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _sNGRANnodeAdditionPreparation_val_UnsuccessfulOutcome), (u'procedureCode', 7), (u'criticality', u'reject')])
-    
-    #-----< sNGRANnodeReconfigurationCompletion >-----#
-    sNGRANnodeReconfigurationCompletion = CLASS(name=u'sNGRANnodeReconfigurationCompletion', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _sNGRANnodeReconfigurationCompletion_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReconfigurationComplete')))
-    sNGRANnodeReconfigurationCompletion._val = dict([(u'InitiatingMessage', _sNGRANnodeReconfigurationCompletion_val_InitiatingMessage), (u'procedureCode', 8), (u'criticality', u'reject')])
-    
-    #-----< mNGRANnodeinitiatedSNGRANnodeModificationPreparation >-----#
-    mNGRANnodeinitiatedSNGRANnodeModificationPreparation = CLASS(name=u'mNGRANnodeinitiatedSNGRANnodeModificationPreparation', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _mNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequest')))
-    _mNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestAcknowledge')))
-    _mNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestReject')))
-    mNGRANnodeinitiatedSNGRANnodeModificationPreparation._val = dict([(u'InitiatingMessage', _mNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_InitiatingMessage), (u'SuccessfulOutcome', _mNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _mNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_UnsuccessfulOutcome), (u'procedureCode', 9), (u'criticality', u'reject')])
-    
-    #-----< sNGRANnodeinitiatedSNGRANnodeModificationPreparation >-----#
-    sNGRANnodeinitiatedSNGRANnodeModificationPreparation = CLASS(name=u'sNGRANnodeinitiatedSNGRANnodeModificationPreparation', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _sNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequired')))
-    _sNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationConfirm')))
-    _sNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRefuse')))
-    sNGRANnodeinitiatedSNGRANnodeModificationPreparation._val = dict([(u'InitiatingMessage', _sNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_InitiatingMessage), (u'SuccessfulOutcome', _sNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _sNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_UnsuccessfulOutcome), (u'procedureCode', 10), (u'criticality', u'reject')])
-    
-    #-----< mNGRANnodeinitiatedSNGRANnodeRelease >-----#
-    mNGRANnodeinitiatedSNGRANnodeRelease = CLASS(name=u'mNGRANnodeinitiatedSNGRANnodeRelease', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _mNGRANnodeinitiatedSNGRANnodeRelease_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequest')))
-    _mNGRANnodeinitiatedSNGRANnodeRelease_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequestAcknowledge')))
-    _mNGRANnodeinitiatedSNGRANnodeRelease_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseReject')))
-    mNGRANnodeinitiatedSNGRANnodeRelease._val = dict([(u'InitiatingMessage', _mNGRANnodeinitiatedSNGRANnodeRelease_val_InitiatingMessage), (u'SuccessfulOutcome', _mNGRANnodeinitiatedSNGRANnodeRelease_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _mNGRANnodeinitiatedSNGRANnodeRelease_val_UnsuccessfulOutcome), (u'procedureCode', 11), (u'criticality', u'reject')])
-    
-    #-----< sNGRANnodeinitiatedSNGRANnodeRelease >-----#
-    sNGRANnodeinitiatedSNGRANnodeRelease = CLASS(name=u'sNGRANnodeinitiatedSNGRANnodeRelease', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _sNGRANnodeinitiatedSNGRANnodeRelease_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequired')))
-    _sNGRANnodeinitiatedSNGRANnodeRelease_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseConfirm')))
-    sNGRANnodeinitiatedSNGRANnodeRelease._val = dict([(u'InitiatingMessage', _sNGRANnodeinitiatedSNGRANnodeRelease_val_InitiatingMessage), (u'SuccessfulOutcome', _sNGRANnodeinitiatedSNGRANnodeRelease_val_SuccessfulOutcome), (u'procedureCode', 12), (u'criticality', u'reject')])
-    
-    #-----< sNGRANnodeCounterCheck >-----#
-    sNGRANnodeCounterCheck = CLASS(name=u'sNGRANnodeCounterCheck', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _sNGRANnodeCounterCheck_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeCounterCheckRequest')))
-    sNGRANnodeCounterCheck._val = dict([(u'InitiatingMessage', _sNGRANnodeCounterCheck_val_InitiatingMessage), (u'procedureCode', 13), (u'criticality', u'reject')])
-    
-    #-----< sNGRANnodeChange >-----#
-    sNGRANnodeChange = CLASS(name=u'sNGRANnodeChange', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _sNGRANnodeChange_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRequired')))
-    _sNGRANnodeChange_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeConfirm')))
-    _sNGRANnodeChange_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRefuse')))
-    sNGRANnodeChange._val = dict([(u'InitiatingMessage', _sNGRANnodeChange_val_InitiatingMessage), (u'SuccessfulOutcome', _sNGRANnodeChange_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _sNGRANnodeChange_val_UnsuccessfulOutcome), (u'procedureCode', 14), (u'criticality', u'reject')])
-    
-    #-----< rRCTransfer >-----#
-    rRCTransfer = CLASS(name=u'rRCTransfer', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _rRCTransfer_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RRCTransfer')))
-    rRCTransfer._val = dict([(u'InitiatingMessage', _rRCTransfer_val_InitiatingMessage), (u'procedureCode', 15), (u'criticality', u'reject')])
-    
-    #-----< xnRemoval >-----#
-    xnRemoval = CLASS(name=u'xnRemoval', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _xnRemoval_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalRequest')))
-    _xnRemoval_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalResponse')))
-    _xnRemoval_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalFailure')))
-    xnRemoval._val = dict([(u'InitiatingMessage', _xnRemoval_val_InitiatingMessage), (u'SuccessfulOutcome', _xnRemoval_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _xnRemoval_val_UnsuccessfulOutcome), (u'procedureCode', 16), (u'criticality', u'reject')])
-    
-    #-----< xnSetup >-----#
-    xnSetup = CLASS(name=u'xnSetup', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _xnSetup_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupRequest')))
-    _xnSetup_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupResponse')))
-    _xnSetup_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupFailure')))
-    xnSetup._val = dict([(u'InitiatingMessage', _xnSetup_val_InitiatingMessage), (u'SuccessfulOutcome', _xnSetup_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _xnSetup_val_UnsuccessfulOutcome), (u'procedureCode', 17), (u'criticality', u'reject')])
-    
-    #-----< nGRANnodeConfigurationUpdate >-----#
-    nGRANnodeConfigurationUpdate = CLASS(name=u'nGRANnodeConfigurationUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _nGRANnodeConfigurationUpdate_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdate')))
-    _nGRANnodeConfigurationUpdate_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateAcknowledge')))
-    _nGRANnodeConfigurationUpdate_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateFailure')))
-    nGRANnodeConfigurationUpdate._val = dict([(u'InitiatingMessage', _nGRANnodeConfigurationUpdate_val_InitiatingMessage), (u'SuccessfulOutcome', _nGRANnodeConfigurationUpdate_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _nGRANnodeConfigurationUpdate_val_UnsuccessfulOutcome), (u'procedureCode', 18), (u'criticality', u'reject')])
-    
-    #-----< e-UTRA-NR-CellResourceCoordination >-----#
-    e_UTRA_NR_CellResourceCoordination = CLASS(name=u'e-UTRA-NR-CellResourceCoordination', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _e_UTRA_NR_CellResourceCoordination_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationRequest')))
-    _e_UTRA_NR_CellResourceCoordination_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationResponse')))
-    e_UTRA_NR_CellResourceCoordination._val = dict([(u'InitiatingMessage', _e_UTRA_NR_CellResourceCoordination_val_InitiatingMessage), (u'SuccessfulOutcome', _e_UTRA_NR_CellResourceCoordination_val_SuccessfulOutcome), (u'procedureCode', 25), (u'criticality', u'reject')])
-    
-    #-----< cellActivation >-----#
-    cellActivation = CLASS(name=u'cellActivation', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _cellActivation_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationRequest')))
-    _cellActivation_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationResponse')))
-    _cellActivation_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationFailure')))
-    cellActivation._val = dict([(u'InitiatingMessage', _cellActivation_val_InitiatingMessage), (u'SuccessfulOutcome', _cellActivation_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _cellActivation_val_UnsuccessfulOutcome), (u'procedureCode', 19), (u'criticality', u'reject')])
-    
-    #-----< reset >-----#
-    reset = CLASS(name=u'reset', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _reset_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetRequest')))
-    _reset_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetResponse')))
-    reset._val = dict([(u'InitiatingMessage', _reset_val_InitiatingMessage), (u'SuccessfulOutcome', _reset_val_SuccessfulOutcome), (u'procedureCode', 20), (u'criticality', u'reject')])
-    
-    #-----< errorIndication >-----#
-    errorIndication = CLASS(name=u'errorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _errorIndication_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ErrorIndication')))
-    errorIndication._val = dict([(u'InitiatingMessage', _errorIndication_val_InitiatingMessage), (u'procedureCode', 21), (u'criticality', u'ignore')])
-    
-    #-----< notificationControl >-----#
-    notificationControl = CLASS(name=u'notificationControl', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _notificationControl_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NotificationControlIndication')))
-    notificationControl._val = dict([(u'InitiatingMessage', _notificationControl_val_InitiatingMessage), (u'procedureCode', 23), (u'criticality', u'ignore')])
-    
-    #-----< activityNotification >-----#
-    activityNotification = CLASS(name=u'activityNotification', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _activityNotification_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ActivityNotification')))
-    activityNotification._val = dict([(u'InitiatingMessage', _activityNotification_val_InitiatingMessage), (u'procedureCode', 24), (u'criticality', u'ignore')])
-    
-    #-----< privateMessage >-----#
-    privateMessage = CLASS(name=u'privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _privateMessage_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'PrivateMessage')))
-    privateMessage._val = dict([(u'InitiatingMessage', _privateMessage_val_InitiatingMessage), (u'procedureCode', 22), (u'criticality', u'ignore')])
-    
-    #-----< secondaryRATDataUsageReport >-----#
-    secondaryRATDataUsageReport = CLASS(name=u'secondaryRATDataUsageReport', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _secondaryRATDataUsageReport_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SecondaryRATDataUsageReport')))
-    secondaryRATDataUsageReport._val = dict([(u'InitiatingMessage', _secondaryRATDataUsageReport_val_InitiatingMessage), (u'procedureCode', 26), (u'criticality', u'reject')])
-    
-    #-----< deactivateTrace >-----#
-    deactivateTrace = CLASS(name=u'deactivateTrace', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _deactivateTrace_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'DeactivateTrace')))
-    deactivateTrace._val = dict([(u'InitiatingMessage', _deactivateTrace_val_InitiatingMessage), (u'procedureCode', 27), (u'criticality', u'ignore')])
-    
-    #-----< traceStart >-----#
-    traceStart = CLASS(name=u'traceStart', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _traceStart_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'TraceStart')))
-    traceStart._val = dict([(u'InitiatingMessage', _traceStart_val_InitiatingMessage), (u'procedureCode', 28), (u'criticality', u'ignore')])
-    
-    #-----< handoverSuccess >-----#
-    handoverSuccess = CLASS(name=u'handoverSuccess', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _handoverSuccess_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverSuccess')))
-    handoverSuccess._val = dict([(u'InitiatingMessage', _handoverSuccess_val_InitiatingMessage), (u'procedureCode', 29), (u'criticality', u'ignore')])
-    
-    #-----< conditionalHandoverCancel >-----#
-    conditionalHandoverCancel = CLASS(name=u'conditionalHandoverCancel', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _conditionalHandoverCancel_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ConditionalHandoverCancel')))
-    conditionalHandoverCancel._val = dict([(u'InitiatingMessage', _conditionalHandoverCancel_val_InitiatingMessage), (u'procedureCode', 30), (u'criticality', u'ignore')])
-    
-    #-----< earlyStatusTransfer >-----#
-    earlyStatusTransfer = CLASS(name=u'earlyStatusTransfer', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _earlyStatusTransfer_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'EarlyStatusTransfer')))
-    earlyStatusTransfer._val = dict([(u'InitiatingMessage', _earlyStatusTransfer_val_InitiatingMessage), (u'procedureCode', 31), (u'criticality', u'ignore')])
-    
-    #-----< failureIndication >-----#
-    failureIndication = CLASS(name=u'failureIndication', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _failureIndication_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'FailureIndication')))
-    failureIndication._val = dict([(u'InitiatingMessage', _failureIndication_val_InitiatingMessage), (u'procedureCode', 32), (u'criticality', u'ignore')])
-    
-    #-----< handoverReport >-----#
-    handoverReport = CLASS(name=u'handoverReport', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _handoverReport_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverReport')))
-    handoverReport._val = dict([(u'InitiatingMessage', _handoverReport_val_InitiatingMessage), (u'procedureCode', 33), (u'criticality', u'ignore')])
-    
-    #-----< resourceStatusReportingInitiation >-----#
-    resourceStatusReportingInitiation = CLASS(name=u'resourceStatusReportingInitiation', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _resourceStatusReportingInitiation_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusRequest')))
-    _resourceStatusReportingInitiation_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusResponse')))
-    _resourceStatusReportingInitiation_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusFailure')))
-    resourceStatusReportingInitiation._val = dict([(u'InitiatingMessage', _resourceStatusReportingInitiation_val_InitiatingMessage), (u'SuccessfulOutcome', _resourceStatusReportingInitiation_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _resourceStatusReportingInitiation_val_UnsuccessfulOutcome), (u'procedureCode', 34), (u'criticality', u'reject')])
-    
-    #-----< resourceStatusReporting >-----#
-    resourceStatusReporting = CLASS(name=u'resourceStatusReporting', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _resourceStatusReporting_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusUpdate')))
-    resourceStatusReporting._val = dict([(u'InitiatingMessage', _resourceStatusReporting_val_InitiatingMessage), (u'procedureCode', 35), (u'criticality', u'ignore')])
-    
-    #-----< mobilitySettingsChange >-----#
-    mobilitySettingsChange = CLASS(name=u'mobilitySettingsChange', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _mobilitySettingsChange_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeRequest')))
-    _mobilitySettingsChange_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeAcknowledge')))
-    _mobilitySettingsChange_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeFailure')))
-    mobilitySettingsChange._val = dict([(u'InitiatingMessage', _mobilitySettingsChange_val_InitiatingMessage), (u'SuccessfulOutcome', _mobilitySettingsChange_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _mobilitySettingsChange_val_UnsuccessfulOutcome), (u'procedureCode', 36), (u'criticality', u'reject')])
-    
-    #-----< accessAndMobilityIndication >-----#
-    accessAndMobilityIndication = CLASS(name=u'accessAndMobilityIndication', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
-    _accessAndMobilityIndication_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'AccessAndMobilityIndication')))
-    accessAndMobilityIndication._val = dict([(u'InitiatingMessage', _accessAndMobilityIndication_val_InitiatingMessage), (u'procedureCode', 37), (u'criticality', u'ignore')])
-    
-    _all_ = [
-        _XNAP_ELEMENTARY_PROCEDURE_InitiatingMessage,
-        _XNAP_ELEMENTARY_PROCEDURE_SuccessfulOutcome,
-        _XNAP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome,
-        _XNAP_ELEMENTARY_PROCEDURE_procedureCode,
-        _XNAP_ELEMENTARY_PROCEDURE_criticality,
-        XNAP_ELEMENTARY_PROCEDURE,
-        _XnAP_PDU_initiatingMessage,
-        _XnAP_PDU_successfulOutcome,
-        _XnAP_PDU_unsuccessfulOutcome,
-        XnAP_PDU,
-        __InitiatingMessage_procedureCode_tab,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0,
-        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1,
-        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_2,
-        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_2,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_3,
-        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_3,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_4,
-        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_4,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_5,
-        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_5,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_6,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7,
-        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_7,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_8,
-        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_8,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_9,
-        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_9,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_10,
-        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_10,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_11,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_11,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_12,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_12,
-        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_12,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_13,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_13,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_14,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_14,
-        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_14,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_15,
-        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_15,
-        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_15,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_16,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_17,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_18,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_19,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_20,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_21,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_22,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_23,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_24,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_25,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_26,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_27,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_28,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_29,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_30,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_31,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_32,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_33,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_34,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_35,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_36,
-        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_37,
-        _InitiatingMessage_procedureCode,
-        _InitiatingMessage_criticality,
-        _InitiatingMessage_value,
-        InitiatingMessage,
-        __SuccessfulOutcome_procedureCode_tab,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0,
-        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1,
-        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2,
-        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3,
-        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4,
-        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5,
-        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7,
-        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8,
-        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_8,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9,
-        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_9,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_10,
-        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_10,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_11,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_12,
-        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_12,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_13,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_14,
-        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_14,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15,
-        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_15,
-        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_15,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_20,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_21,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_22,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_23,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_24,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_25,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_26,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_27,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_28,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_29,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_30,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_31,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_32,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_33,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_34,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_35,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_36,
-        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_37,
-        _SuccessfulOutcome_procedureCode,
-        _SuccessfulOutcome_criticality,
-        _SuccessfulOutcome_value,
-        SuccessfulOutcome,
-        __UnsuccessfulOutcome_procedureCode_tab,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_8,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_9,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_10,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_10,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_11,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_12,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_12,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_13,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_14,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_14,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_15,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_15,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_20,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_21,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_22,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_23,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_24,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_25,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_26,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_27,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_28,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_29,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_30,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_31,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_32,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_33,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_34,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_35,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_36,
-        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_37,
-        _UnsuccessfulOutcome_procedureCode,
-        _UnsuccessfulOutcome_criticality,
-        _UnsuccessfulOutcome_value,
-        UnsuccessfulOutcome,
-        XNAP_ELEMENTARY_PROCEDURES,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0,
-        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0,
-        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1,
-        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1,
-        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2,
-        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_2,
-        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_2,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3,
-        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_3,
-        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_3,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4,
-        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_4,
-        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_4,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5,
-        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_5,
-        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_5,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6,
-        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_6,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7,
-        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7,
-        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_7,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8,
-        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_8,
-        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_8,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9,
-        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_9,
-        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_9,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10,
-        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_10,
-        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_10,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_11,
-        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_11,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_12,
-        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_12,
-        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_12,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_13,
-        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_13,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_14,
-        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_14,
-        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_14,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_15,
-        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_15,
-        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_15,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_16,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_17,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_18,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_19,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_20,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_21,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_22,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_23,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_24,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_25,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_26,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_27,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_28,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_29,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_30,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_31,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_32,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_33,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_34,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_35,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_36,
-        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_37,
-        XNAP_ELEMENTARY_PROCEDURES_CLASS_1,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_3,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_3,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_3,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_4,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_4,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_4,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_5,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_5,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_5,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_6,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_6,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_7,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_7,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_7,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_8,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_8,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_8,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_9,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_9,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_9,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_10,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_10,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_10,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_11,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_11,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_12,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_12,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_12,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_13,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_13,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_14,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_14,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_14,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_15,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_15,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_15,
-        XNAP_ELEMENTARY_PROCEDURES_CLASS_2,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_6,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_7,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_8,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_9,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_10,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_11,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_12,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_13,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_14,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_15,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_16,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_17,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_18,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_19,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_20,
-        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_21,
-        handoverPreparation,
-        _handoverPreparation_val_InitiatingMessage,
-        _handoverPreparation_val_SuccessfulOutcome,
-        _handoverPreparation_val_UnsuccessfulOutcome,
-        sNStatusTransfer,
-        _sNStatusTransfer_val_InitiatingMessage,
-        handoverCancel,
-        _handoverCancel_val_InitiatingMessage,
-        retrieveUEContext,
-        _retrieveUEContext_val_InitiatingMessage,
-        _retrieveUEContext_val_SuccessfulOutcome,
-        _retrieveUEContext_val_UnsuccessfulOutcome,
-        rANPaging,
-        _rANPaging_val_InitiatingMessage,
-        xnUAddressIndication,
-        _xnUAddressIndication_val_InitiatingMessage,
-        uEContextRelease,
-        _uEContextRelease_val_InitiatingMessage,
-        sNGRANnodeAdditionPreparation,
-        _sNGRANnodeAdditionPreparation_val_InitiatingMessage,
-        _sNGRANnodeAdditionPreparation_val_SuccessfulOutcome,
-        _sNGRANnodeAdditionPreparation_val_UnsuccessfulOutcome,
-        sNGRANnodeReconfigurationCompletion,
-        _sNGRANnodeReconfigurationCompletion_val_InitiatingMessage,
-        mNGRANnodeinitiatedSNGRANnodeModificationPreparation,
-        _mNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_InitiatingMessage,
-        _mNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_SuccessfulOutcome,
-        _mNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_UnsuccessfulOutcome,
-        sNGRANnodeinitiatedSNGRANnodeModificationPreparation,
-        _sNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_InitiatingMessage,
-        _sNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_SuccessfulOutcome,
-        _sNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_UnsuccessfulOutcome,
-        mNGRANnodeinitiatedSNGRANnodeRelease,
-        _mNGRANnodeinitiatedSNGRANnodeRelease_val_InitiatingMessage,
-        _mNGRANnodeinitiatedSNGRANnodeRelease_val_SuccessfulOutcome,
-        _mNGRANnodeinitiatedSNGRANnodeRelease_val_UnsuccessfulOutcome,
-        sNGRANnodeinitiatedSNGRANnodeRelease,
-        _sNGRANnodeinitiatedSNGRANnodeRelease_val_InitiatingMessage,
-        _sNGRANnodeinitiatedSNGRANnodeRelease_val_SuccessfulOutcome,
-        sNGRANnodeCounterCheck,
-        _sNGRANnodeCounterCheck_val_InitiatingMessage,
-        sNGRANnodeChange,
-        _sNGRANnodeChange_val_InitiatingMessage,
-        _sNGRANnodeChange_val_SuccessfulOutcome,
-        _sNGRANnodeChange_val_UnsuccessfulOutcome,
-        rRCTransfer,
-        _rRCTransfer_val_InitiatingMessage,
-        xnRemoval,
-        _xnRemoval_val_InitiatingMessage,
-        _xnRemoval_val_SuccessfulOutcome,
-        _xnRemoval_val_UnsuccessfulOutcome,
-        xnSetup,
-        _xnSetup_val_InitiatingMessage,
-        _xnSetup_val_SuccessfulOutcome,
-        _xnSetup_val_UnsuccessfulOutcome,
-        nGRANnodeConfigurationUpdate,
-        _nGRANnodeConfigurationUpdate_val_InitiatingMessage,
-        _nGRANnodeConfigurationUpdate_val_SuccessfulOutcome,
-        _nGRANnodeConfigurationUpdate_val_UnsuccessfulOutcome,
-        e_UTRA_NR_CellResourceCoordination,
-        _e_UTRA_NR_CellResourceCoordination_val_InitiatingMessage,
-        _e_UTRA_NR_CellResourceCoordination_val_SuccessfulOutcome,
-        cellActivation,
-        _cellActivation_val_InitiatingMessage,
-        _cellActivation_val_SuccessfulOutcome,
-        _cellActivation_val_UnsuccessfulOutcome,
-        reset,
-        _reset_val_InitiatingMessage,
-        _reset_val_SuccessfulOutcome,
-        errorIndication,
-        _errorIndication_val_InitiatingMessage,
-        notificationControl,
-        _notificationControl_val_InitiatingMessage,
-        activityNotification,
-        _activityNotification_val_InitiatingMessage,
-        privateMessage,
-        _privateMessage_val_InitiatingMessage,
-        secondaryRATDataUsageReport,
-        _secondaryRATDataUsageReport_val_InitiatingMessage,
-        deactivateTrace,
-        _deactivateTrace_val_InitiatingMessage,
-        traceStart,
-        _traceStart_val_InitiatingMessage,
-        handoverSuccess,
-        _handoverSuccess_val_InitiatingMessage,
-        conditionalHandoverCancel,
-        _conditionalHandoverCancel_val_InitiatingMessage,
-        earlyStatusTransfer,
-        _earlyStatusTransfer_val_InitiatingMessage,
-        failureIndication,
-        _failureIndication_val_InitiatingMessage,
-        handoverReport,
-        _handoverReport_val_InitiatingMessage,
-        resourceStatusReportingInitiation,
-        _resourceStatusReportingInitiation_val_InitiatingMessage,
-        _resourceStatusReportingInitiation_val_SuccessfulOutcome,
-        _resourceStatusReportingInitiation_val_UnsuccessfulOutcome,
-        resourceStatusReporting,
-        _resourceStatusReporting_val_InitiatingMessage,
-        mobilitySettingsChange,
-        _mobilitySettingsChange_val_InitiatingMessage,
-        _mobilitySettingsChange_val_SuccessfulOutcome,
-        _mobilitySettingsChange_val_UnsuccessfulOutcome,
-        accessAndMobilityIndication,
-        _accessAndMobilityIndication_val_InitiatingMessage,
-    ]
-
-class XnAP_Containers:
-
-    _name_  = u'XnAP-Containers'
-    _oid_   = [0, 4, 0, 0, 22, 3, 2, 1, 5]
-    
-    _obj_ = [
-        u'XNAP-PROTOCOL-IES',
-        u'XNAP-PROTOCOL-IES-PAIR',
-        u'XNAP-PROTOCOL-EXTENSION',
-        u'XNAP-PRIVATE-IES',
-        u'ProtocolIE-Container',
-        u'ProtocolIE-Single-Container',
-        u'ProtocolIE-Field',
-        u'ProtocolIE-ContainerPair',
-        u'ProtocolIE-FieldPair',
-        u'ProtocolIE-ContainerList',
-        u'ProtocolIE-ContainerPairList',
-        u'ProtocolExtensionContainer',
-        u'ProtocolExtensionField',
-        u'PrivateIE-Container',
-        u'PrivateIE-Field',
-        ]
-    _type_ = [
-        u'XNAP-PROTOCOL-IES',
-        u'XNAP-PROTOCOL-IES-PAIR',
-        u'XNAP-PROTOCOL-EXTENSION',
-        u'XNAP-PRIVATE-IES',
-        u'ProtocolIE-Container',
-        u'ProtocolIE-Single-Container',
-        u'ProtocolIE-Field',
-        u'ProtocolIE-ContainerPair',
-        u'ProtocolIE-FieldPair',
-        u'ProtocolIE-ContainerList',
-        u'ProtocolIE-ContainerPairList',
-        u'ProtocolExtensionContainer',
-        u'ProtocolExtensionField',
-        u'PrivateIE-Container',
-        u'PrivateIE-Field',
-        ]
-    _set_ = [
-        ]
-    _val_ = [
-        ]
-    _class_ = [
-        u'XNAP-PROTOCOL-IES',
-        u'XNAP-PROTOCOL-IES-PAIR',
-        u'XNAP-PROTOCOL-EXTENSION',
-        u'XNAP-PRIVATE-IES',
-        ]
-    _param_ = [
-        u'ProtocolIE-Container',
-        u'ProtocolIE-Single-Container',
-        u'ProtocolIE-Field',
-        u'ProtocolIE-ContainerPair',
-        u'ProtocolIE-FieldPair',
-        u'ProtocolIE-ContainerList',
-        u'ProtocolIE-ContainerPairList',
-        u'ProtocolExtensionContainer',
-        u'ProtocolExtensionField',
-        u'PrivateIE-Container',
-        u'PrivateIE-Field',
-        ]
-    
-    #-----< XNAP-PROTOCOL-IES >-----#
-    XNAP_PROTOCOL_IES = CLASS(name=u'XNAP-PROTOCOL-IES', mode=MODE_TYPE)
-    _XNAP_PROTOCOL_IES_id = INT(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
-    _XNAP_PROTOCOL_IES_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'Criticality')))
-    _XNAP_PROTOCOL_IES_Value = OPEN(name=u'Value', mode=MODE_TYPE)
-    _XNAP_PROTOCOL_IES_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'Presence')))
-    XNAP_PROTOCOL_IES._cont = ASN1Dict([
-        (u'id', _XNAP_PROTOCOL_IES_id),
-        (u'criticality', _XNAP_PROTOCOL_IES_criticality),
-        (u'Value', _XNAP_PROTOCOL_IES_Value),
-        (u'presence', _XNAP_PROTOCOL_IES_presence),
-        ])
-    
-    #-----< XNAP-PROTOCOL-IES-PAIR >-----#
-    XNAP_PROTOCOL_IES_PAIR = CLASS(name=u'XNAP-PROTOCOL-IES-PAIR', mode=MODE_TYPE)
-    _XNAP_PROTOCOL_IES_PAIR_id = INT(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
-    _XNAP_PROTOCOL_IES_PAIR_firstCriticality = ENUM(name=u'firstCriticality', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'Criticality')))
-    _XNAP_PROTOCOL_IES_PAIR_FirstValue = OPEN(name=u'FirstValue', mode=MODE_TYPE)
-    _XNAP_PROTOCOL_IES_PAIR_secondCriticality = ENUM(name=u'secondCriticality', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'Criticality')))
-    _XNAP_PROTOCOL_IES_PAIR_SecondValue = OPEN(name=u'SecondValue', mode=MODE_TYPE)
-    _XNAP_PROTOCOL_IES_PAIR_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'Presence')))
-    XNAP_PROTOCOL_IES_PAIR._cont = ASN1Dict([
-        (u'id', _XNAP_PROTOCOL_IES_PAIR_id),
-        (u'firstCriticality', _XNAP_PROTOCOL_IES_PAIR_firstCriticality),
-        (u'FirstValue', _XNAP_PROTOCOL_IES_PAIR_FirstValue),
-        (u'secondCriticality', _XNAP_PROTOCOL_IES_PAIR_secondCriticality),
-        (u'SecondValue', _XNAP_PROTOCOL_IES_PAIR_SecondValue),
-        (u'presence', _XNAP_PROTOCOL_IES_PAIR_presence),
-        ])
-    
-    #-----< XNAP-PROTOCOL-EXTENSION >-----#
-    XNAP_PROTOCOL_EXTENSION = CLASS(name=u'XNAP-PROTOCOL-EXTENSION', mode=MODE_TYPE)
-    _XNAP_PROTOCOL_EXTENSION_id = INT(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
-    _XNAP_PROTOCOL_EXTENSION_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'Criticality')))
-    _XNAP_PROTOCOL_EXTENSION_Extension = OPEN(name=u'Extension', mode=MODE_TYPE)
-    _XNAP_PROTOCOL_EXTENSION_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'Presence')))
-    XNAP_PROTOCOL_EXTENSION._cont = ASN1Dict([
-        (u'id', _XNAP_PROTOCOL_EXTENSION_id),
-        (u'criticality', _XNAP_PROTOCOL_EXTENSION_criticality),
-        (u'Extension', _XNAP_PROTOCOL_EXTENSION_Extension),
-        (u'presence', _XNAP_PROTOCOL_EXTENSION_presence),
-        ])
-    
-    #-----< XNAP-PRIVATE-IES >-----#
-    XNAP_PRIVATE_IES = CLASS(name=u'XNAP-PRIVATE-IES', mode=MODE_TYPE)
-    _XNAP_PRIVATE_IES_id = CHOICE(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'PrivateIE-ID')))
-    _XNAP_PRIVATE_IES_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'Criticality')))
-    _XNAP_PRIVATE_IES_Value = OPEN(name=u'Value', mode=MODE_TYPE)
-    _XNAP_PRIVATE_IES_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'Presence')))
-    XNAP_PRIVATE_IES._cont = ASN1Dict([
-        (u'id', _XNAP_PRIVATE_IES_id),
-        (u'criticality', _XNAP_PRIVATE_IES_criticality),
-        (u'Value', _XNAP_PRIVATE_IES_Value),
-        (u'presence', _XNAP_PRIVATE_IES_presence),
-        ])
-    
-    #-----< ProtocolIE-Container >-----#
-    ProtocolIE_Container = SEQ_OF(name=u'ProtocolIE-Container', mode=MODE_TYPE, param=True)
-    
-    #-----< ProtocolIE-Single-Container >-----#
-    ProtocolIE_Single_Container = SEQ(name=u'ProtocolIE-Single-Container', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-Containers', 'ProtocolIE-Field')), param=True)
-    
-    #-----< ProtocolIE-Field >-----#
-    ProtocolIE_Field = SEQ(name=u'ProtocolIE-Field', mode=MODE_TYPE, param=True)
-    
-    #-----< ProtocolIE-ContainerPair >-----#
-    ProtocolIE_ContainerPair = SEQ_OF(name=u'ProtocolIE-ContainerPair', mode=MODE_TYPE, param=True)
-    
-    #-----< ProtocolIE-FieldPair >-----#
-    ProtocolIE_FieldPair = SEQ(name=u'ProtocolIE-FieldPair', mode=MODE_TYPE, param=True)
-    
-    #-----< ProtocolIE-ContainerList >-----#
-    ProtocolIE_ContainerList = SEQ_OF(name=u'ProtocolIE-ContainerList', mode=MODE_TYPE, param=True)
-    
-    #-----< ProtocolIE-ContainerPairList >-----#
-    ProtocolIE_ContainerPairList = SEQ_OF(name=u'ProtocolIE-ContainerPairList', mode=MODE_TYPE, param=True)
-    
-    #-----< ProtocolExtensionContainer >-----#
-    ProtocolExtensionContainer = SEQ_OF(name=u'ProtocolExtensionContainer', mode=MODE_TYPE, param=True)
-    
-    #-----< ProtocolExtensionField >-----#
-    ProtocolExtensionField = SEQ(name=u'ProtocolExtensionField', mode=MODE_TYPE, param=True)
-    
-    #-----< PrivateIE-Container >-----#
-    PrivateIE_Container = SEQ_OF(name=u'PrivateIE-Container', mode=MODE_TYPE, param=True)
-    
-    #-----< PrivateIE-Field >-----#
-    PrivateIE_Field = SEQ(name=u'PrivateIE-Field', mode=MODE_TYPE, param=True)
-    
-    _all_ = [
-        _XNAP_PROTOCOL_IES_id,
-        _XNAP_PROTOCOL_IES_criticality,
-        _XNAP_PROTOCOL_IES_Value,
-        _XNAP_PROTOCOL_IES_presence,
-        XNAP_PROTOCOL_IES,
-        _XNAP_PROTOCOL_IES_PAIR_id,
-        _XNAP_PROTOCOL_IES_PAIR_firstCriticality,
-        _XNAP_PROTOCOL_IES_PAIR_FirstValue,
-        _XNAP_PROTOCOL_IES_PAIR_secondCriticality,
-        _XNAP_PROTOCOL_IES_PAIR_SecondValue,
-        _XNAP_PROTOCOL_IES_PAIR_presence,
-        XNAP_PROTOCOL_IES_PAIR,
-        _XNAP_PROTOCOL_EXTENSION_id,
-        _XNAP_PROTOCOL_EXTENSION_criticality,
-        _XNAP_PROTOCOL_EXTENSION_Extension,
-        _XNAP_PROTOCOL_EXTENSION_presence,
-        XNAP_PROTOCOL_EXTENSION,
-        _XNAP_PRIVATE_IES_id,
-        _XNAP_PRIVATE_IES_criticality,
-        _XNAP_PRIVATE_IES_Value,
-        _XNAP_PRIVATE_IES_presence,
-        XNAP_PRIVATE_IES,
     ]
 
 class XnAP_PDU_Contents:
@@ -28144,7 +26987,9 @@ class XnAP_PDU_Contents:
     _____RANPaging_protocolIEs__item__id_tab_val_Value_5 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-IEs', 'AssistanceDataForRANPaging')))
     _____RANPaging_protocolIEs__item__id_tab_val_Value_6 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-IEs', 'UERadioCapabilityForPaging')))
     _____RANPaging_protocolIEs__item__id_tab_val_Value_7 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-IEs', 'ExtendedUEIdentityIndexValue')))
-    ____RANPaging_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 89), (u'criticality', u'reject'), (u'Value', _____RANPaging_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 90), (u'criticality', u'ignore'), (u'Value', _____RANPaging_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 31), (u'criticality', u'ignore'), (u'Value', _____RANPaging_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 52), (u'criticality', u'reject'), (u'Value', _____RANPaging_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'mandatory')]), dict([(u'id', 53), (u'criticality', u'ignore'), (u'Value', _____RANPaging_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 5), (u'criticality', u'ignore'), (u'Value', _____RANPaging_protocolIEs__item__id_tab_val_Value_5), (u'presence', u'optional')]), dict([(u'id', 122), (u'criticality', u'ignore'), (u'Value', _____RANPaging_protocolIEs__item__id_tab_val_Value_6), (u'presence', u'optional')]), dict([(u'id', 244), (u'criticality', u'ignore'), (u'Value', _____RANPaging_protocolIEs__item__id_tab_val_Value_7), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    _____RANPaging_protocolIEs__item__id_tab_val_Value_8 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-IEs', 'PagingeDRXInformation')))
+    _____RANPaging_protocolIEs__item__id_tab_val_Value_9 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-IEs', 'UESpecificDRX')))
+    ____RANPaging_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 89), (u'criticality', u'reject'), (u'Value', _____RANPaging_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 90), (u'criticality', u'ignore'), (u'Value', _____RANPaging_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 31), (u'criticality', u'ignore'), (u'Value', _____RANPaging_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 52), (u'criticality', u'reject'), (u'Value', _____RANPaging_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'mandatory')]), dict([(u'id', 53), (u'criticality', u'ignore'), (u'Value', _____RANPaging_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 5), (u'criticality', u'ignore'), (u'Value', _____RANPaging_protocolIEs__item__id_tab_val_Value_5), (u'presence', u'optional')]), dict([(u'id', 122), (u'criticality', u'ignore'), (u'Value', _____RANPaging_protocolIEs__item__id_tab_val_Value_6), (u'presence', u'optional')]), dict([(u'id', 244), (u'criticality', u'ignore'), (u'Value', _____RANPaging_protocolIEs__item__id_tab_val_Value_7), (u'presence', u'optional')]), dict([(u'id', 245), (u'criticality', u'ignore'), (u'Value', _____RANPaging_protocolIEs__item__id_tab_val_Value_8), (u'presence', u'optional')]), dict([(u'id', 248), (u'criticality', u'ignore'), (u'Value', _____RANPaging_protocolIEs__item__id_tab_val_Value_9), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___RANPaging_protocolIEs__item__id._const_tab = ____RANPaging_protocolIEs__item__id_tab
     ___RANPaging_protocolIEs__item__id._const_tab_at = None
     ___RANPaging_protocolIEs__item__id._const_tab_id = u'id'
@@ -28179,7 +27024,9 @@ class XnAP_PDU_Contents:
     _RANPaging_IEs_val_Value_5 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-IEs', 'AssistanceDataForRANPaging')))
     _RANPaging_IEs_val_Value_6 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-IEs', 'UERadioCapabilityForPaging')))
     _RANPaging_IEs_val_Value_7 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-IEs', 'ExtendedUEIdentityIndexValue')))
-    RANPaging_IEs._val = ASN1Set(rv=[dict([(u'id', 89), (u'criticality', u'reject'), (u'Value', _RANPaging_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 90), (u'criticality', u'ignore'), (u'Value', _RANPaging_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 31), (u'criticality', u'ignore'), (u'Value', _RANPaging_IEs_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 52), (u'criticality', u'reject'), (u'Value', _RANPaging_IEs_val_Value_3), (u'presence', u'mandatory')]), dict([(u'id', 53), (u'criticality', u'ignore'), (u'Value', _RANPaging_IEs_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 5), (u'criticality', u'ignore'), (u'Value', _RANPaging_IEs_val_Value_5), (u'presence', u'optional')]), dict([(u'id', 122), (u'criticality', u'ignore'), (u'Value', _RANPaging_IEs_val_Value_6), (u'presence', u'optional')]), dict([(u'id', 244), (u'criticality', u'ignore'), (u'Value', _RANPaging_IEs_val_Value_7), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    _RANPaging_IEs_val_Value_8 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-IEs', 'PagingeDRXInformation')))
+    _RANPaging_IEs_val_Value_9 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-IEs', 'UESpecificDRX')))
+    RANPaging_IEs._val = ASN1Set(rv=[dict([(u'id', 89), (u'criticality', u'reject'), (u'Value', _RANPaging_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 90), (u'criticality', u'ignore'), (u'Value', _RANPaging_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 31), (u'criticality', u'ignore'), (u'Value', _RANPaging_IEs_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 52), (u'criticality', u'reject'), (u'Value', _RANPaging_IEs_val_Value_3), (u'presence', u'mandatory')]), dict([(u'id', 53), (u'criticality', u'ignore'), (u'Value', _RANPaging_IEs_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 5), (u'criticality', u'ignore'), (u'Value', _RANPaging_IEs_val_Value_5), (u'presence', u'optional')]), dict([(u'id', 122), (u'criticality', u'ignore'), (u'Value', _RANPaging_IEs_val_Value_6), (u'presence', u'optional')]), dict([(u'id', 244), (u'criticality', u'ignore'), (u'Value', _RANPaging_IEs_val_Value_7), (u'presence', u'optional')]), dict([(u'id', 245), (u'criticality', u'ignore'), (u'Value', _RANPaging_IEs_val_Value_8), (u'presence', u'optional')]), dict([(u'id', 248), (u'criticality', u'ignore'), (u'Value', _RANPaging_IEs_val_Value_9), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< RetrieveUEContextRequest >-----#
     RetrieveUEContextRequest = SEQ(name=u'RetrieveUEContextRequest', mode=MODE_TYPE)
@@ -28342,7 +27189,8 @@ class XnAP_PDU_Contents:
     _____XnUAddressIndication_protocolIEs__item__id_tab_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-IEs', 'NG-RANnodeUEXnAPID')))
     _____XnUAddressIndication_protocolIEs__item__id_tab_val_Value_2 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-IEs', 'XnUAddressInfoperPDUSession-List')))
     _____XnUAddressIndication_protocolIEs__item__id_tab_val_Value_3 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-IEs', 'CHO-MRDC-Indicator')))
-    ____XnUAddressIndication_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 27), (u'criticality', u'ignore'), (u'Value', _____XnUAddressIndication_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 29), (u'criticality', u'ignore'), (u'Value', _____XnUAddressIndication_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 11), (u'criticality', u'reject'), (u'Value', _____XnUAddressIndication_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 165), (u'criticality', u'reject'), (u'Value', _____XnUAddressIndication_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    _____XnUAddressIndication_protocolIEs__item__id_tab_val_Value_4 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-IEs', 'CHO-MRDC-EarlyDataForwarding')))
+    ____XnUAddressIndication_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 27), (u'criticality', u'ignore'), (u'Value', _____XnUAddressIndication_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 29), (u'criticality', u'ignore'), (u'Value', _____XnUAddressIndication_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 11), (u'criticality', u'reject'), (u'Value', _____XnUAddressIndication_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 165), (u'criticality', u'reject'), (u'Value', _____XnUAddressIndication_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 246), (u'criticality', u'ignore'), (u'Value', _____XnUAddressIndication_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___XnUAddressIndication_protocolIEs__item__id._const_tab = ____XnUAddressIndication_protocolIEs__item__id_tab
     ___XnUAddressIndication_protocolIEs__item__id._const_tab_at = None
     ___XnUAddressIndication_protocolIEs__item__id._const_tab_id = u'id'
@@ -28373,7 +27221,8 @@ class XnAP_PDU_Contents:
     _XnUAddressIndication_IEs_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-IEs', 'NG-RANnodeUEXnAPID')))
     _XnUAddressIndication_IEs_val_Value_2 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-IEs', 'XnUAddressInfoperPDUSession-List')))
     _XnUAddressIndication_IEs_val_Value_3 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-IEs', 'CHO-MRDC-Indicator')))
-    XnUAddressIndication_IEs._val = ASN1Set(rv=[dict([(u'id', 27), (u'criticality', u'ignore'), (u'Value', _XnUAddressIndication_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 29), (u'criticality', u'ignore'), (u'Value', _XnUAddressIndication_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 11), (u'criticality', u'reject'), (u'Value', _XnUAddressIndication_IEs_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 165), (u'criticality', u'reject'), (u'Value', _XnUAddressIndication_IEs_val_Value_3), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    _XnUAddressIndication_IEs_val_Value_4 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-IEs', 'CHO-MRDC-EarlyDataForwarding')))
+    XnUAddressIndication_IEs._val = ASN1Set(rv=[dict([(u'id', 27), (u'criticality', u'ignore'), (u'Value', _XnUAddressIndication_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 29), (u'criticality', u'ignore'), (u'Value', _XnUAddressIndication_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 11), (u'criticality', u'reject'), (u'Value', _XnUAddressIndication_IEs_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 165), (u'criticality', u'reject'), (u'Value', _XnUAddressIndication_IEs_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 246), (u'criticality', u'ignore'), (u'Value', _XnUAddressIndication_IEs_val_Value_4), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< SNodeAdditionRequest >-----#
     SNodeAdditionRequest = SEQ(name=u'SNodeAdditionRequest', mode=MODE_TYPE)
@@ -29614,7 +28463,8 @@ class XnAP_PDU_Contents:
     _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_11 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-IEs', 'RRCConfigIndication')))
     _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_12 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'AvailableFastMCGRecoveryViaSRB3')))
     _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_13 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ReleaseFastMCGRecoveryViaSRB3')))
-    ____SNodeModificationRequired_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 23), (u'criticality', u'reject'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 71), (u'criticality', u'reject'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 33), (u'criticality', u'ignore'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 48), (u'criticality', u'ignore'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 51), (u'criticality', u'ignore'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_5), (u'presence', u'optional')]), dict([(u'id', 72), (u'criticality', u'ignore'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_6), (u'presence', u'optional')]), dict([(u'id', 97), (u'criticality', u'ignore'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_7), (u'presence', u'optional')]), dict([(u'id', 98), (u'criticality', u'ignore'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_8), (u'presence', u'optional')]), dict([(u'id', 111), (u'criticality', u'ignore'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_9), (u'presence', u'optional')]), dict([(u'id', 117), (u'criticality', u'ignore'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_10), (u'presence', u'optional')]), dict([(u'id', 61), (u'criticality', u'reject'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_11), (u'presence', u'optional')]), dict([(u'id', 149), (u'criticality', u'ignore'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_12), (u'presence', u'optional')]), dict([(u'id', 151), (u'criticality', u'ignore'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_13), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_14 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-IEs', 'SCGIndicator')))
+    ____SNodeModificationRequired_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 23), (u'criticality', u'reject'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 71), (u'criticality', u'reject'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 33), (u'criticality', u'ignore'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 48), (u'criticality', u'ignore'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 51), (u'criticality', u'ignore'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_5), (u'presence', u'optional')]), dict([(u'id', 72), (u'criticality', u'ignore'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_6), (u'presence', u'optional')]), dict([(u'id', 97), (u'criticality', u'ignore'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_7), (u'presence', u'optional')]), dict([(u'id', 98), (u'criticality', u'ignore'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_8), (u'presence', u'optional')]), dict([(u'id', 111), (u'criticality', u'ignore'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_9), (u'presence', u'optional')]), dict([(u'id', 117), (u'criticality', u'ignore'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_10), (u'presence', u'optional')]), dict([(u'id', 61), (u'criticality', u'reject'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_11), (u'presence', u'optional')]), dict([(u'id', 149), (u'criticality', u'ignore'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_12), (u'presence', u'optional')]), dict([(u'id', 151), (u'criticality', u'ignore'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_13), (u'presence', u'optional')]), dict([(u'id', 247), (u'criticality', u'ignore'), (u'Value', _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_14), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___SNodeModificationRequired_protocolIEs__item__id._const_tab = ____SNodeModificationRequired_protocolIEs__item__id_tab
     ___SNodeModificationRequired_protocolIEs__item__id._const_tab_at = None
     ___SNodeModificationRequired_protocolIEs__item__id._const_tab_id = u'id'
@@ -29655,7 +28505,8 @@ class XnAP_PDU_Contents:
     _SNodeModificationRequired_IEs_val_Value_11 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-IEs', 'RRCConfigIndication')))
     _SNodeModificationRequired_IEs_val_Value_12 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'AvailableFastMCGRecoveryViaSRB3')))
     _SNodeModificationRequired_IEs_val_Value_13 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ReleaseFastMCGRecoveryViaSRB3')))
-    SNodeModificationRequired_IEs._val = ASN1Set(rv=[dict([(u'id', 23), (u'criticality', u'reject'), (u'Value', _SNodeModificationRequired_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 71), (u'criticality', u'reject'), (u'Value', _SNodeModificationRequired_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _SNodeModificationRequired_IEs_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 33), (u'criticality', u'ignore'), (u'Value', _SNodeModificationRequired_IEs_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 48), (u'criticality', u'ignore'), (u'Value', _SNodeModificationRequired_IEs_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 51), (u'criticality', u'ignore'), (u'Value', _SNodeModificationRequired_IEs_val_Value_5), (u'presence', u'optional')]), dict([(u'id', 72), (u'criticality', u'ignore'), (u'Value', _SNodeModificationRequired_IEs_val_Value_6), (u'presence', u'optional')]), dict([(u'id', 97), (u'criticality', u'ignore'), (u'Value', _SNodeModificationRequired_IEs_val_Value_7), (u'presence', u'optional')]), dict([(u'id', 98), (u'criticality', u'ignore'), (u'Value', _SNodeModificationRequired_IEs_val_Value_8), (u'presence', u'optional')]), dict([(u'id', 111), (u'criticality', u'ignore'), (u'Value', _SNodeModificationRequired_IEs_val_Value_9), (u'presence', u'optional')]), dict([(u'id', 117), (u'criticality', u'ignore'), (u'Value', _SNodeModificationRequired_IEs_val_Value_10), (u'presence', u'optional')]), dict([(u'id', 61), (u'criticality', u'reject'), (u'Value', _SNodeModificationRequired_IEs_val_Value_11), (u'presence', u'optional')]), dict([(u'id', 149), (u'criticality', u'ignore'), (u'Value', _SNodeModificationRequired_IEs_val_Value_12), (u'presence', u'optional')]), dict([(u'id', 151), (u'criticality', u'ignore'), (u'Value', _SNodeModificationRequired_IEs_val_Value_13), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    _SNodeModificationRequired_IEs_val_Value_14 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-IEs', 'SCGIndicator')))
+    SNodeModificationRequired_IEs._val = ASN1Set(rv=[dict([(u'id', 23), (u'criticality', u'reject'), (u'Value', _SNodeModificationRequired_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 71), (u'criticality', u'reject'), (u'Value', _SNodeModificationRequired_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _SNodeModificationRequired_IEs_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 33), (u'criticality', u'ignore'), (u'Value', _SNodeModificationRequired_IEs_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 48), (u'criticality', u'ignore'), (u'Value', _SNodeModificationRequired_IEs_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 51), (u'criticality', u'ignore'), (u'Value', _SNodeModificationRequired_IEs_val_Value_5), (u'presence', u'optional')]), dict([(u'id', 72), (u'criticality', u'ignore'), (u'Value', _SNodeModificationRequired_IEs_val_Value_6), (u'presence', u'optional')]), dict([(u'id', 97), (u'criticality', u'ignore'), (u'Value', _SNodeModificationRequired_IEs_val_Value_7), (u'presence', u'optional')]), dict([(u'id', 98), (u'criticality', u'ignore'), (u'Value', _SNodeModificationRequired_IEs_val_Value_8), (u'presence', u'optional')]), dict([(u'id', 111), (u'criticality', u'ignore'), (u'Value', _SNodeModificationRequired_IEs_val_Value_9), (u'presence', u'optional')]), dict([(u'id', 117), (u'criticality', u'ignore'), (u'Value', _SNodeModificationRequired_IEs_val_Value_10), (u'presence', u'optional')]), dict([(u'id', 61), (u'criticality', u'reject'), (u'Value', _SNodeModificationRequired_IEs_val_Value_11), (u'presence', u'optional')]), dict([(u'id', 149), (u'criticality', u'ignore'), (u'Value', _SNodeModificationRequired_IEs_val_Value_12), (u'presence', u'optional')]), dict([(u'id', 151), (u'criticality', u'ignore'), (u'Value', _SNodeModificationRequired_IEs_val_Value_13), (u'presence', u'optional')]), dict([(u'id', 247), (u'criticality', u'ignore'), (u'Value', _SNodeModificationRequired_IEs_val_Value_14), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< PDUSessionToBeModifiedSNModRequired >-----#
     PDUSessionToBeModifiedSNModRequired = SEQ_OF(name=u'PDUSessionToBeModifiedSNModRequired', mode=MODE_TYPE)
@@ -33230,6 +32081,8 @@ class XnAP_PDU_Contents:
         _____RANPaging_protocolIEs__item__id_tab_val_Value_5,
         _____RANPaging_protocolIEs__item__id_tab_val_Value_6,
         _____RANPaging_protocolIEs__item__id_tab_val_Value_7,
+        _____RANPaging_protocolIEs__item__id_tab_val_Value_8,
+        _____RANPaging_protocolIEs__item__id_tab_val_Value_9,
         ___RANPaging_protocolIEs__item__id,
         ___RANPaging_protocolIEs__item__criticality,
         ___RANPaging_protocolIEs__item__value,
@@ -33245,6 +32098,8 @@ class XnAP_PDU_Contents:
         _RANPaging_IEs_val_Value_5,
         _RANPaging_IEs_val_Value_6,
         _RANPaging_IEs_val_Value_7,
+        _RANPaging_IEs_val_Value_8,
+        _RANPaging_IEs_val_Value_9,
         ____RetrieveUEContextRequest_protocolIEs__item__id_tab,
         _____RetrieveUEContextRequest_protocolIEs__item__id_tab_val_Value_0,
         _____RetrieveUEContextRequest_protocolIEs__item__id_tab_val_Value_1,
@@ -33320,6 +32175,7 @@ class XnAP_PDU_Contents:
         _____XnUAddressIndication_protocolIEs__item__id_tab_val_Value_1,
         _____XnUAddressIndication_protocolIEs__item__id_tab_val_Value_2,
         _____XnUAddressIndication_protocolIEs__item__id_tab_val_Value_3,
+        _____XnUAddressIndication_protocolIEs__item__id_tab_val_Value_4,
         ___XnUAddressIndication_protocolIEs__item__id,
         ___XnUAddressIndication_protocolIEs__item__criticality,
         ___XnUAddressIndication_protocolIEs__item__value,
@@ -33331,6 +32187,7 @@ class XnAP_PDU_Contents:
         _XnUAddressIndication_IEs_val_Value_1,
         _XnUAddressIndication_IEs_val_Value_2,
         _XnUAddressIndication_IEs_val_Value_3,
+        _XnUAddressIndication_IEs_val_Value_4,
         ____SNodeAdditionRequest_protocolIEs__item__id_tab,
         _____SNodeAdditionRequest_protocolIEs__item__id_tab_val_Value_0,
         _____SNodeAdditionRequest_protocolIEs__item__id_tab_val_Value_1,
@@ -33800,6 +32657,7 @@ class XnAP_PDU_Contents:
         _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_11,
         _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_12,
         _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_13,
+        _____SNodeModificationRequired_protocolIEs__item__id_tab_val_Value_14,
         ___SNodeModificationRequired_protocolIEs__item__id,
         ___SNodeModificationRequired_protocolIEs__item__criticality,
         ___SNodeModificationRequired_protocolIEs__item__value,
@@ -33821,6 +32679,7 @@ class XnAP_PDU_Contents:
         _SNodeModificationRequired_IEs_val_Value_11,
         _SNodeModificationRequired_IEs_val_Value_12,
         _SNodeModificationRequired_IEs_val_Value_13,
+        _SNodeModificationRequired_IEs_val_Value_14,
         _PDUSessionToBeModifiedSNModRequired__item_,
         PDUSessionToBeModifiedSNModRequired,
         _PDUSessionToBeModifiedSNModRequired_Item_pduSessionId,
@@ -34974,4 +33833,1289 @@ class XnAP_PDU_Contents:
         _AccessAndMobilityIndication_IEs_val_Value_0,
     ]
 
-init_modules(XnAP_CommonDataTypes, XnAP_Constants, XnAP_IEs, XnAP_PDU_Descriptions, XnAP_Containers, XnAP_PDU_Contents)
+class XnAP_PDU_Descriptions:
+
+    _name_  = u'XnAP-PDU-Descriptions'
+    _oid_   = [0, 4, 0, 0, 22, 3, 2, 1, 0]
+    
+    _obj_ = [
+        u'XNAP-ELEMENTARY-PROCEDURE',
+        u'XnAP-PDU',
+        u'InitiatingMessage',
+        u'SuccessfulOutcome',
+        u'UnsuccessfulOutcome',
+        u'XNAP-ELEMENTARY-PROCEDURES',
+        u'XNAP-ELEMENTARY-PROCEDURES-CLASS-1',
+        u'XNAP-ELEMENTARY-PROCEDURES-CLASS-2',
+        u'handoverPreparation',
+        u'sNStatusTransfer',
+        u'handoverCancel',
+        u'retrieveUEContext',
+        u'rANPaging',
+        u'xnUAddressIndication',
+        u'uEContextRelease',
+        u'sNGRANnodeAdditionPreparation',
+        u'sNGRANnodeReconfigurationCompletion',
+        u'mNGRANnodeinitiatedSNGRANnodeModificationPreparation',
+        u'sNGRANnodeinitiatedSNGRANnodeModificationPreparation',
+        u'mNGRANnodeinitiatedSNGRANnodeRelease',
+        u'sNGRANnodeinitiatedSNGRANnodeRelease',
+        u'sNGRANnodeCounterCheck',
+        u'sNGRANnodeChange',
+        u'rRCTransfer',
+        u'xnRemoval',
+        u'xnSetup',
+        u'nGRANnodeConfigurationUpdate',
+        u'e-UTRA-NR-CellResourceCoordination',
+        u'cellActivation',
+        u'reset',
+        u'errorIndication',
+        u'notificationControl',
+        u'activityNotification',
+        u'privateMessage',
+        u'secondaryRATDataUsageReport',
+        u'deactivateTrace',
+        u'traceStart',
+        u'handoverSuccess',
+        u'conditionalHandoverCancel',
+        u'earlyStatusTransfer',
+        u'failureIndication',
+        u'handoverReport',
+        u'resourceStatusReportingInitiation',
+        u'resourceStatusReporting',
+        u'mobilitySettingsChange',
+        u'accessAndMobilityIndication',
+        ]
+    _type_ = [
+        u'XNAP-ELEMENTARY-PROCEDURE',
+        u'XnAP-PDU',
+        u'InitiatingMessage',
+        u'SuccessfulOutcome',
+        u'UnsuccessfulOutcome',
+        ]
+    _set_ = [
+        u'XNAP-ELEMENTARY-PROCEDURES',
+        u'XNAP-ELEMENTARY-PROCEDURES-CLASS-1',
+        u'XNAP-ELEMENTARY-PROCEDURES-CLASS-2',
+        ]
+    _val_ = [
+        u'handoverPreparation',
+        u'sNStatusTransfer',
+        u'handoverCancel',
+        u'retrieveUEContext',
+        u'rANPaging',
+        u'xnUAddressIndication',
+        u'uEContextRelease',
+        u'sNGRANnodeAdditionPreparation',
+        u'sNGRANnodeReconfigurationCompletion',
+        u'mNGRANnodeinitiatedSNGRANnodeModificationPreparation',
+        u'sNGRANnodeinitiatedSNGRANnodeModificationPreparation',
+        u'mNGRANnodeinitiatedSNGRANnodeRelease',
+        u'sNGRANnodeinitiatedSNGRANnodeRelease',
+        u'sNGRANnodeCounterCheck',
+        u'sNGRANnodeChange',
+        u'rRCTransfer',
+        u'xnRemoval',
+        u'xnSetup',
+        u'nGRANnodeConfigurationUpdate',
+        u'e-UTRA-NR-CellResourceCoordination',
+        u'cellActivation',
+        u'reset',
+        u'errorIndication',
+        u'notificationControl',
+        u'activityNotification',
+        u'privateMessage',
+        u'secondaryRATDataUsageReport',
+        u'deactivateTrace',
+        u'traceStart',
+        u'handoverSuccess',
+        u'conditionalHandoverCancel',
+        u'earlyStatusTransfer',
+        u'failureIndication',
+        u'handoverReport',
+        u'resourceStatusReportingInitiation',
+        u'resourceStatusReporting',
+        u'mobilitySettingsChange',
+        u'accessAndMobilityIndication',
+        ]
+    _class_ = [
+        u'XNAP-ELEMENTARY-PROCEDURE',
+        u'XNAP-ELEMENTARY-PROCEDURES',
+        u'XNAP-ELEMENTARY-PROCEDURES-CLASS-1',
+        u'XNAP-ELEMENTARY-PROCEDURES-CLASS-2',
+        u'handoverPreparation',
+        u'sNStatusTransfer',
+        u'handoverCancel',
+        u'retrieveUEContext',
+        u'rANPaging',
+        u'xnUAddressIndication',
+        u'uEContextRelease',
+        u'sNGRANnodeAdditionPreparation',
+        u'sNGRANnodeReconfigurationCompletion',
+        u'mNGRANnodeinitiatedSNGRANnodeModificationPreparation',
+        u'sNGRANnodeinitiatedSNGRANnodeModificationPreparation',
+        u'mNGRANnodeinitiatedSNGRANnodeRelease',
+        u'sNGRANnodeinitiatedSNGRANnodeRelease',
+        u'sNGRANnodeCounterCheck',
+        u'sNGRANnodeChange',
+        u'rRCTransfer',
+        u'xnRemoval',
+        u'xnSetup',
+        u'nGRANnodeConfigurationUpdate',
+        u'e-UTRA-NR-CellResourceCoordination',
+        u'cellActivation',
+        u'reset',
+        u'errorIndication',
+        u'notificationControl',
+        u'activityNotification',
+        u'privateMessage',
+        u'secondaryRATDataUsageReport',
+        u'deactivateTrace',
+        u'traceStart',
+        u'handoverSuccess',
+        u'conditionalHandoverCancel',
+        u'earlyStatusTransfer',
+        u'failureIndication',
+        u'handoverReport',
+        u'resourceStatusReportingInitiation',
+        u'resourceStatusReporting',
+        u'mobilitySettingsChange',
+        u'accessAndMobilityIndication',
+        ]
+    _param_ = [
+        ]
+    
+    #-----< XNAP-ELEMENTARY-PROCEDURE >-----#
+    XNAP_ELEMENTARY_PROCEDURE = CLASS(name=u'XNAP-ELEMENTARY-PROCEDURE', mode=MODE_TYPE)
+    _XNAP_ELEMENTARY_PROCEDURE_InitiatingMessage = OPEN(name=u'InitiatingMessage', mode=MODE_TYPE)
+    _XNAP_ELEMENTARY_PROCEDURE_SuccessfulOutcome = OPEN(name=u'SuccessfulOutcome', mode=MODE_TYPE, opt=True)
+    _XNAP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome = OPEN(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, opt=True)
+    _XNAP_ELEMENTARY_PROCEDURE_procedureCode = INT(name=u'procedureCode', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'ProcedureCode')), uniq=True)
+    _XNAP_ELEMENTARY_PROCEDURE_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-CommonDataTypes', 'Criticality')), default=u'ignore')
+    XNAP_ELEMENTARY_PROCEDURE._cont = ASN1Dict([
+        (u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURE_InitiatingMessage),
+        (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURE_SuccessfulOutcome),
+        (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome),
+        (u'procedureCode', _XNAP_ELEMENTARY_PROCEDURE_procedureCode),
+        (u'criticality', _XNAP_ELEMENTARY_PROCEDURE_criticality),
+        ])
+    
+    #-----< XnAP-PDU >-----#
+    XnAP_PDU = CHOICE(name=u'XnAP-PDU', mode=MODE_TYPE)
+    _XnAP_PDU_initiatingMessage = SEQ(name=u'initiatingMessage', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'InitiatingMessage')))
+    _XnAP_PDU_successfulOutcome = SEQ(name=u'successfulOutcome', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'SuccessfulOutcome')))
+    _XnAP_PDU_unsuccessfulOutcome = SEQ(name=u'unsuccessfulOutcome', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'UnsuccessfulOutcome')))
+    XnAP_PDU._cont = ASN1Dict([
+        (u'initiatingMessage', _XnAP_PDU_initiatingMessage),
+        (u'successfulOutcome', _XnAP_PDU_successfulOutcome),
+        (u'unsuccessfulOutcome', _XnAP_PDU_unsuccessfulOutcome),
+        ])
+    XnAP_PDU._ext = []
+    
+    #-----< InitiatingMessage >-----#
+    InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE)
+    _InitiatingMessage_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
+    __InitiatingMessage_procedureCode_tab = CLASS(name='_tab_XNAP-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequestAcknowledge')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverPreparationFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestAcknowledge')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestReject')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestAcknowledge')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_3 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestReject')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequired')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationConfirm')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRefuse')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequestAcknowledge')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_5 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseReject')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequired')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseConfirm')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRequired')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeConfirm')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRefuse')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_8 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_9 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdate')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_10 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateAcknowledge')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_10 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_11 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_12 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_12 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_13 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_14 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_14 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_15 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeAcknowledge')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_15 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_16 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNStatusTransfer')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_17 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverCancel')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_18 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RANPaging')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_19 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnUAddressIndication')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_20 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'UEContextRelease')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_21 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReconfigurationComplete')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_22 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeCounterCheckRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_23 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RRCTransfer')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_24 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ErrorIndication')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_25 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'PrivateMessage')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_26 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NotificationControlIndication')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_27 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ActivityNotification')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_28 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SecondaryRATDataUsageReport')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_29 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'DeactivateTrace')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_30 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'TraceStart')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_31 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverSuccess')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_32 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ConditionalHandoverCancel')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_33 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'EarlyStatusTransfer')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_34 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'FailureIndication')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_35 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverReport')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_36 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusUpdate')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_37 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'AccessAndMobilityIndication')))
+    __InitiatingMessage_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_2), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_3), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_3), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_4), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_5), (u'procedureCode', 11), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_6), (u'procedureCode', 12), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_7), (u'procedureCode', 14), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_8), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_8), (u'procedureCode', 16), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_9), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_9), (u'procedureCode', 17), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_10), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_10), (u'procedureCode', 18), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_11), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_11), (u'procedureCode', 25), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_12), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_12), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_12), (u'procedureCode', 19), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_13), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_13), (u'procedureCode', 20), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_14), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_14), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_14), (u'procedureCode', 34), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_15), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_15), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_15), (u'procedureCode', 36), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_16), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_17), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_18), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_19), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_20), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_21), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_22), (u'procedureCode', 13), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_23), (u'procedureCode', 15), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_24), (u'procedureCode', 21), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_25), (u'procedureCode', 22), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_26), (u'procedureCode', 23), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_27), (u'procedureCode', 24), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_28), (u'procedureCode', 26), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_29), (u'procedureCode', 27), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_30), (u'procedureCode', 28), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_31), (u'procedureCode', 29), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_32), (u'procedureCode', 30), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_33), (u'procedureCode', 31), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_34), (u'procedureCode', 32), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_35), (u'procedureCode', 33), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_36), (u'procedureCode', 35), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_37), (u'procedureCode', 37), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
+    _InitiatingMessage_procedureCode._const_tab = __InitiatingMessage_procedureCode_tab
+    _InitiatingMessage_procedureCode._const_tab_at = None
+    _InitiatingMessage_procedureCode._const_tab_id = u'procedureCode'
+    _InitiatingMessage_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE'), [u'criticality']))
+    _InitiatingMessage_criticality._const_tab = __InitiatingMessage_procedureCode_tab
+    _InitiatingMessage_criticality._const_tab_at = ('..', u'procedureCode')
+    _InitiatingMessage_criticality._const_tab_id = u'criticality'
+    _InitiatingMessage_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE'), [u'InitiatingMessage']))
+    _InitiatingMessage_value._const_tab = __InitiatingMessage_procedureCode_tab
+    _InitiatingMessage_value._const_tab_at = ('..', u'procedureCode')
+    _InitiatingMessage_value._const_tab_id = u'InitiatingMessage'
+    InitiatingMessage._cont = ASN1Dict([
+        (u'procedureCode', _InitiatingMessage_procedureCode),
+        (u'criticality', _InitiatingMessage_criticality),
+        (u'value', _InitiatingMessage_value),
+        ])
+    InitiatingMessage._ext = None
+    
+    #-----< SuccessfulOutcome >-----#
+    SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE)
+    _SuccessfulOutcome_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
+    __SuccessfulOutcome_procedureCode_tab = CLASS(name='_tab_XNAP-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequestAcknowledge')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverPreparationFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestAcknowledge')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestReject')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestAcknowledge')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestReject')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequired')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationConfirm')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRefuse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequestAcknowledge')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseReject')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequired')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseConfirm')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRequired')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeConfirm')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRefuse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_8 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_9 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdate')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_10 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateAcknowledge')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_10 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_11 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_12 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_12 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_13 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_14 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_14 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_15 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeAcknowledge')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_15 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNStatusTransfer')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverCancel')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RANPaging')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnUAddressIndication')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_20 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'UEContextRelease')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_21 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReconfigurationComplete')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_22 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeCounterCheckRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_23 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RRCTransfer')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_24 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ErrorIndication')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_25 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'PrivateMessage')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_26 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NotificationControlIndication')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_27 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ActivityNotification')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_28 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SecondaryRATDataUsageReport')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_29 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'DeactivateTrace')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_30 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'TraceStart')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_31 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverSuccess')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_32 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ConditionalHandoverCancel')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_33 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'EarlyStatusTransfer')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_34 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'FailureIndication')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_35 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverReport')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_36 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusUpdate')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_37 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'AccessAndMobilityIndication')))
+    __SuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5), (u'procedureCode', 11), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6), (u'procedureCode', 12), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7), (u'procedureCode', 14), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_8), (u'procedureCode', 16), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_9), (u'procedureCode', 17), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_10), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_10), (u'procedureCode', 18), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_11), (u'procedureCode', 25), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_12), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_12), (u'procedureCode', 19), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_13), (u'procedureCode', 20), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_14), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_14), (u'procedureCode', 34), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_15), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_15), (u'procedureCode', 36), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_20), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_21), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_22), (u'procedureCode', 13), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_23), (u'procedureCode', 15), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_24), (u'procedureCode', 21), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_25), (u'procedureCode', 22), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_26), (u'procedureCode', 23), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_27), (u'procedureCode', 24), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_28), (u'procedureCode', 26), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_29), (u'procedureCode', 27), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_30), (u'procedureCode', 28), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_31), (u'procedureCode', 29), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_32), (u'procedureCode', 30), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_33), (u'procedureCode', 31), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_34), (u'procedureCode', 32), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_35), (u'procedureCode', 33), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_36), (u'procedureCode', 35), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_37), (u'procedureCode', 37), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
+    _SuccessfulOutcome_procedureCode._const_tab = __SuccessfulOutcome_procedureCode_tab
+    _SuccessfulOutcome_procedureCode._const_tab_at = None
+    _SuccessfulOutcome_procedureCode._const_tab_id = u'procedureCode'
+    _SuccessfulOutcome_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE'), [u'criticality']))
+    _SuccessfulOutcome_criticality._const_tab = __SuccessfulOutcome_procedureCode_tab
+    _SuccessfulOutcome_criticality._const_tab_at = ('..', u'procedureCode')
+    _SuccessfulOutcome_criticality._const_tab_id = u'criticality'
+    _SuccessfulOutcome_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE'), [u'SuccessfulOutcome']))
+    _SuccessfulOutcome_value._const_tab = __SuccessfulOutcome_procedureCode_tab
+    _SuccessfulOutcome_value._const_tab_at = ('..', u'procedureCode')
+    _SuccessfulOutcome_value._const_tab_id = u'SuccessfulOutcome'
+    SuccessfulOutcome._cont = ASN1Dict([
+        (u'procedureCode', _SuccessfulOutcome_procedureCode),
+        (u'criticality', _SuccessfulOutcome_criticality),
+        (u'value', _SuccessfulOutcome_value),
+        ])
+    SuccessfulOutcome._ext = None
+    
+    #-----< UnsuccessfulOutcome >-----#
+    UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE)
+    _UnsuccessfulOutcome_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
+    __UnsuccessfulOutcome_procedureCode_tab = CLASS(name='_tab_XNAP-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequestAcknowledge')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverPreparationFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestAcknowledge')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestReject')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestAcknowledge')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestReject')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequired')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationConfirm')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRefuse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequestAcknowledge')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseReject')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequired')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseConfirm')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRequired')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeConfirm')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRefuse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_8 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_9 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdate')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_10 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateAcknowledge')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_10 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_11 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_12 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_12 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_13 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_14 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_14 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_15 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeAcknowledge')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_15 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNStatusTransfer')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverCancel')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RANPaging')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnUAddressIndication')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_20 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'UEContextRelease')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_21 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReconfigurationComplete')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_22 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeCounterCheckRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_23 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RRCTransfer')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_24 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ErrorIndication')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_25 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'PrivateMessage')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_26 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NotificationControlIndication')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_27 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ActivityNotification')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_28 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SecondaryRATDataUsageReport')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_29 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'DeactivateTrace')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_30 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'TraceStart')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_31 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverSuccess')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_32 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ConditionalHandoverCancel')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_33 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'EarlyStatusTransfer')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_34 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'FailureIndication')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_35 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverReport')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_36 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusUpdate')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_37 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'AccessAndMobilityIndication')))
+    __UnsuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5), (u'procedureCode', 11), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6), (u'procedureCode', 12), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7), (u'procedureCode', 14), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_8), (u'procedureCode', 16), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_9), (u'procedureCode', 17), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_10), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_10), (u'procedureCode', 18), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_11), (u'procedureCode', 25), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_12), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_12), (u'procedureCode', 19), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_13), (u'procedureCode', 20), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_14), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_14), (u'procedureCode', 34), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_15), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_15), (u'procedureCode', 36), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_20), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_21), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_22), (u'procedureCode', 13), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_23), (u'procedureCode', 15), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_24), (u'procedureCode', 21), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_25), (u'procedureCode', 22), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_26), (u'procedureCode', 23), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_27), (u'procedureCode', 24), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_28), (u'procedureCode', 26), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_29), (u'procedureCode', 27), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_30), (u'procedureCode', 28), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_31), (u'procedureCode', 29), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_32), (u'procedureCode', 30), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_33), (u'procedureCode', 31), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_34), (u'procedureCode', 32), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_35), (u'procedureCode', 33), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_36), (u'procedureCode', 35), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_37), (u'procedureCode', 37), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
+    _UnsuccessfulOutcome_procedureCode._const_tab = __UnsuccessfulOutcome_procedureCode_tab
+    _UnsuccessfulOutcome_procedureCode._const_tab_at = None
+    _UnsuccessfulOutcome_procedureCode._const_tab_id = u'procedureCode'
+    _UnsuccessfulOutcome_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE'), [u'criticality']))
+    _UnsuccessfulOutcome_criticality._const_tab = __UnsuccessfulOutcome_procedureCode_tab
+    _UnsuccessfulOutcome_criticality._const_tab_at = ('..', u'procedureCode')
+    _UnsuccessfulOutcome_criticality._const_tab_id = u'criticality'
+    _UnsuccessfulOutcome_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE'), [u'UnsuccessfulOutcome']))
+    _UnsuccessfulOutcome_value._const_tab = __UnsuccessfulOutcome_procedureCode_tab
+    _UnsuccessfulOutcome_value._const_tab_at = ('..', u'procedureCode')
+    _UnsuccessfulOutcome_value._const_tab_id = u'UnsuccessfulOutcome'
+    UnsuccessfulOutcome._cont = ASN1Dict([
+        (u'procedureCode', _UnsuccessfulOutcome_procedureCode),
+        (u'criticality', _UnsuccessfulOutcome_criticality),
+        (u'value', _UnsuccessfulOutcome_value),
+        ])
+    UnsuccessfulOutcome._ext = None
+    
+    #-----< XNAP-ELEMENTARY-PROCEDURES >-----#
+    XNAP_ELEMENTARY_PROCEDURES = CLASS(name=u'XNAP-ELEMENTARY-PROCEDURES', mode=MODE_SET, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequestAcknowledge')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverPreparationFailure')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextResponse')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextFailure')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestAcknowledge')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestReject')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestAcknowledge')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_3 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestReject')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequired')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationConfirm')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRefuse')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequestAcknowledge')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_5 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseReject')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequired')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseConfirm')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRequired')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeConfirm')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRefuse')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalResponse')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_8 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalFailure')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupResponse')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_9 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupFailure')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdate')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_10 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateAcknowledge')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_10 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateFailure')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_11 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationResponse')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_12 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationResponse')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_12 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationFailure')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_13 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetResponse')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_14 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusResponse')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_14 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusFailure')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_15 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeAcknowledge')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_15 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeFailure')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_16 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNStatusTransfer')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_17 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverCancel')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_18 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RANPaging')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_19 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnUAddressIndication')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_20 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'UEContextRelease')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_21 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReconfigurationComplete')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_22 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeCounterCheckRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_23 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RRCTransfer')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_24 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ErrorIndication')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_25 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'PrivateMessage')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_26 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NotificationControlIndication')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_27 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ActivityNotification')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_28 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SecondaryRATDataUsageReport')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_29 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'DeactivateTrace')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_30 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'TraceStart')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_31 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverSuccess')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_32 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ConditionalHandoverCancel')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_33 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'EarlyStatusTransfer')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_34 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'FailureIndication')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_35 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverReport')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_36 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusUpdate')))
+    _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_37 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'AccessAndMobilityIndication')))
+    XNAP_ELEMENTARY_PROCEDURES._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_2), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_3), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_3), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_4), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_5), (u'procedureCode', 11), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_6), (u'procedureCode', 12), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_7), (u'procedureCode', 14), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_8), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_8), (u'procedureCode', 16), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_9), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_9), (u'procedureCode', 17), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_10), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_10), (u'procedureCode', 18), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_11), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_11), (u'procedureCode', 25), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_12), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_12), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_12), (u'procedureCode', 19), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_13), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_13), (u'procedureCode', 20), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_14), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_14), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_14), (u'procedureCode', 34), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_15), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_15), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_15), (u'procedureCode', 36), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_16), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_17), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_18), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_19), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_20), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_21), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_22), (u'procedureCode', 13), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_23), (u'procedureCode', 15), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_24), (u'procedureCode', 21), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_25), (u'procedureCode', 22), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_26), (u'procedureCode', 23), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_27), (u'procedureCode', 24), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_28), (u'procedureCode', 26), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_29), (u'procedureCode', 27), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_30), (u'procedureCode', 28), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_31), (u'procedureCode', 29), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_32), (u'procedureCode', 30), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_33), (u'procedureCode', 31), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_34), (u'procedureCode', 32), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_35), (u'procedureCode', 33), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_36), (u'procedureCode', 35), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_37), (u'procedureCode', 37), (u'criticality', u'ignore')])], rr=[], ev=[], er=[])
+    
+    #-----< XNAP-ELEMENTARY-PROCEDURES-CLASS-1 >-----#
+    XNAP_ELEMENTARY_PROCEDURES_CLASS_1 = CLASS(name=u'XNAP-ELEMENTARY-PROCEDURES-CLASS-1', mode=MODE_SET, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequestAcknowledge')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverPreparationFailure')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextResponse')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextFailure')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestAcknowledge')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestReject')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestAcknowledge')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_3 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestReject')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequired')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationConfirm')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRefuse')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequestAcknowledge')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_5 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseReject')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequired')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseConfirm')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRequired')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeConfirm')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRefuse')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalResponse')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_8 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalFailure')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_9 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupResponse')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_9 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupFailure')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdate')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_10 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateAcknowledge')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_10 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateFailure')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_11 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationResponse')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_12 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationResponse')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_12 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationFailure')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_13 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetResponse')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_14 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusResponse')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_14 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusFailure')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_15 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeAcknowledge')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_15 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeFailure')))
+    XNAP_ELEMENTARY_PROCEDURES_CLASS_1._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_3), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_3), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_3), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_4), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_4), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_5), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_5), (u'procedureCode', 11), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_6), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_6), (u'procedureCode', 12), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_7), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_7), (u'procedureCode', 14), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_8), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_8), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_8), (u'procedureCode', 16), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_9), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_9), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_9), (u'procedureCode', 17), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_10), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_10), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_10), (u'procedureCode', 18), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_11), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_11), (u'procedureCode', 25), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_12), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_12), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_12), (u'procedureCode', 19), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_13), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_13), (u'procedureCode', 20), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_14), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_14), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_14), (u'procedureCode', 34), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_15), (u'SuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_15), (u'UnsuccessfulOutcome', _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_15), (u'procedureCode', 36), (u'criticality', u'reject')])], rr=[], ev=[], er=[])
+    
+    #-----< XNAP-ELEMENTARY-PROCEDURES-CLASS-2 >-----#
+    XNAP_ELEMENTARY_PROCEDURES_CLASS_2 = CLASS(name=u'XNAP-ELEMENTARY-PROCEDURES-CLASS-2', mode=MODE_SET, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNStatusTransfer')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverCancel')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RANPaging')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnUAddressIndication')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'UEContextRelease')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReconfigurationComplete')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeCounterCheckRequest')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RRCTransfer')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ErrorIndication')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'PrivateMessage')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NotificationControlIndication')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_11 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ActivityNotification')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_12 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SecondaryRATDataUsageReport')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_13 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'DeactivateTrace')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_14 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'TraceStart')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_15 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverSuccess')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_16 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ConditionalHandoverCancel')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_17 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'EarlyStatusTransfer')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_18 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'FailureIndication')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_19 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverReport')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_20 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusUpdate')))
+    _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_21 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'AccessAndMobilityIndication')))
+    XNAP_ELEMENTARY_PROCEDURES_CLASS_2._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5), (u'procedureCode', 8), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_6), (u'procedureCode', 13), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_7), (u'procedureCode', 15), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_8), (u'procedureCode', 21), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_9), (u'procedureCode', 22), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_10), (u'procedureCode', 23), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_11), (u'procedureCode', 24), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_12), (u'procedureCode', 26), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_13), (u'procedureCode', 27), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_14), (u'procedureCode', 28), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_15), (u'procedureCode', 29), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_16), (u'procedureCode', 30), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_17), (u'procedureCode', 31), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_18), (u'procedureCode', 32), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_19), (u'procedureCode', 33), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_20), (u'procedureCode', 35), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_21), (u'procedureCode', 37), (u'criticality', u'ignore')])], rr=[], ev=[], er=[])
+    
+    #-----< handoverPreparation >-----#
+    handoverPreparation = CLASS(name=u'handoverPreparation', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _handoverPreparation_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequest')))
+    _handoverPreparation_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverRequestAcknowledge')))
+    _handoverPreparation_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverPreparationFailure')))
+    handoverPreparation._val = dict([(u'InitiatingMessage', _handoverPreparation_val_InitiatingMessage), (u'SuccessfulOutcome', _handoverPreparation_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _handoverPreparation_val_UnsuccessfulOutcome), (u'procedureCode', 0), (u'criticality', u'reject')])
+    
+    #-----< sNStatusTransfer >-----#
+    sNStatusTransfer = CLASS(name=u'sNStatusTransfer', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _sNStatusTransfer_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNStatusTransfer')))
+    sNStatusTransfer._val = dict([(u'InitiatingMessage', _sNStatusTransfer_val_InitiatingMessage), (u'procedureCode', 1), (u'criticality', u'ignore')])
+    
+    #-----< handoverCancel >-----#
+    handoverCancel = CLASS(name=u'handoverCancel', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _handoverCancel_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverCancel')))
+    handoverCancel._val = dict([(u'InitiatingMessage', _handoverCancel_val_InitiatingMessage), (u'procedureCode', 2), (u'criticality', u'ignore')])
+    
+    #-----< retrieveUEContext >-----#
+    retrieveUEContext = CLASS(name=u'retrieveUEContext', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _retrieveUEContext_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextRequest')))
+    _retrieveUEContext_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextResponse')))
+    _retrieveUEContext_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RetrieveUEContextFailure')))
+    retrieveUEContext._val = dict([(u'InitiatingMessage', _retrieveUEContext_val_InitiatingMessage), (u'SuccessfulOutcome', _retrieveUEContext_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _retrieveUEContext_val_UnsuccessfulOutcome), (u'procedureCode', 3), (u'criticality', u'reject')])
+    
+    #-----< rANPaging >-----#
+    rANPaging = CLASS(name=u'rANPaging', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _rANPaging_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RANPaging')))
+    rANPaging._val = dict([(u'InitiatingMessage', _rANPaging_val_InitiatingMessage), (u'procedureCode', 4), (u'criticality', u'reject')])
+    
+    #-----< xnUAddressIndication >-----#
+    xnUAddressIndication = CLASS(name=u'xnUAddressIndication', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _xnUAddressIndication_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnUAddressIndication')))
+    xnUAddressIndication._val = dict([(u'InitiatingMessage', _xnUAddressIndication_val_InitiatingMessage), (u'procedureCode', 5), (u'criticality', u'reject')])
+    
+    #-----< uEContextRelease >-----#
+    uEContextRelease = CLASS(name=u'uEContextRelease', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _uEContextRelease_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'UEContextRelease')))
+    uEContextRelease._val = dict([(u'InitiatingMessage', _uEContextRelease_val_InitiatingMessage), (u'procedureCode', 6), (u'criticality', u'reject')])
+    
+    #-----< sNGRANnodeAdditionPreparation >-----#
+    sNGRANnodeAdditionPreparation = CLASS(name=u'sNGRANnodeAdditionPreparation', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _sNGRANnodeAdditionPreparation_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequest')))
+    _sNGRANnodeAdditionPreparation_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestAcknowledge')))
+    _sNGRANnodeAdditionPreparation_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeAdditionRequestReject')))
+    sNGRANnodeAdditionPreparation._val = dict([(u'InitiatingMessage', _sNGRANnodeAdditionPreparation_val_InitiatingMessage), (u'SuccessfulOutcome', _sNGRANnodeAdditionPreparation_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _sNGRANnodeAdditionPreparation_val_UnsuccessfulOutcome), (u'procedureCode', 7), (u'criticality', u'reject')])
+    
+    #-----< sNGRANnodeReconfigurationCompletion >-----#
+    sNGRANnodeReconfigurationCompletion = CLASS(name=u'sNGRANnodeReconfigurationCompletion', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _sNGRANnodeReconfigurationCompletion_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReconfigurationComplete')))
+    sNGRANnodeReconfigurationCompletion._val = dict([(u'InitiatingMessage', _sNGRANnodeReconfigurationCompletion_val_InitiatingMessage), (u'procedureCode', 8), (u'criticality', u'reject')])
+    
+    #-----< mNGRANnodeinitiatedSNGRANnodeModificationPreparation >-----#
+    mNGRANnodeinitiatedSNGRANnodeModificationPreparation = CLASS(name=u'mNGRANnodeinitiatedSNGRANnodeModificationPreparation', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _mNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequest')))
+    _mNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestAcknowledge')))
+    _mNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequestReject')))
+    mNGRANnodeinitiatedSNGRANnodeModificationPreparation._val = dict([(u'InitiatingMessage', _mNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_InitiatingMessage), (u'SuccessfulOutcome', _mNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _mNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_UnsuccessfulOutcome), (u'procedureCode', 9), (u'criticality', u'reject')])
+    
+    #-----< sNGRANnodeinitiatedSNGRANnodeModificationPreparation >-----#
+    sNGRANnodeinitiatedSNGRANnodeModificationPreparation = CLASS(name=u'sNGRANnodeinitiatedSNGRANnodeModificationPreparation', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _sNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRequired')))
+    _sNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationConfirm')))
+    _sNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeModificationRefuse')))
+    sNGRANnodeinitiatedSNGRANnodeModificationPreparation._val = dict([(u'InitiatingMessage', _sNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_InitiatingMessage), (u'SuccessfulOutcome', _sNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _sNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_UnsuccessfulOutcome), (u'procedureCode', 10), (u'criticality', u'reject')])
+    
+    #-----< mNGRANnodeinitiatedSNGRANnodeRelease >-----#
+    mNGRANnodeinitiatedSNGRANnodeRelease = CLASS(name=u'mNGRANnodeinitiatedSNGRANnodeRelease', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _mNGRANnodeinitiatedSNGRANnodeRelease_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequest')))
+    _mNGRANnodeinitiatedSNGRANnodeRelease_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequestAcknowledge')))
+    _mNGRANnodeinitiatedSNGRANnodeRelease_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseReject')))
+    mNGRANnodeinitiatedSNGRANnodeRelease._val = dict([(u'InitiatingMessage', _mNGRANnodeinitiatedSNGRANnodeRelease_val_InitiatingMessage), (u'SuccessfulOutcome', _mNGRANnodeinitiatedSNGRANnodeRelease_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _mNGRANnodeinitiatedSNGRANnodeRelease_val_UnsuccessfulOutcome), (u'procedureCode', 11), (u'criticality', u'reject')])
+    
+    #-----< sNGRANnodeinitiatedSNGRANnodeRelease >-----#
+    sNGRANnodeinitiatedSNGRANnodeRelease = CLASS(name=u'sNGRANnodeinitiatedSNGRANnodeRelease', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _sNGRANnodeinitiatedSNGRANnodeRelease_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseRequired')))
+    _sNGRANnodeinitiatedSNGRANnodeRelease_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeReleaseConfirm')))
+    sNGRANnodeinitiatedSNGRANnodeRelease._val = dict([(u'InitiatingMessage', _sNGRANnodeinitiatedSNGRANnodeRelease_val_InitiatingMessage), (u'SuccessfulOutcome', _sNGRANnodeinitiatedSNGRANnodeRelease_val_SuccessfulOutcome), (u'procedureCode', 12), (u'criticality', u'reject')])
+    
+    #-----< sNGRANnodeCounterCheck >-----#
+    sNGRANnodeCounterCheck = CLASS(name=u'sNGRANnodeCounterCheck', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _sNGRANnodeCounterCheck_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeCounterCheckRequest')))
+    sNGRANnodeCounterCheck._val = dict([(u'InitiatingMessage', _sNGRANnodeCounterCheck_val_InitiatingMessage), (u'procedureCode', 13), (u'criticality', u'reject')])
+    
+    #-----< sNGRANnodeChange >-----#
+    sNGRANnodeChange = CLASS(name=u'sNGRANnodeChange', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _sNGRANnodeChange_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRequired')))
+    _sNGRANnodeChange_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeConfirm')))
+    _sNGRANnodeChange_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SNodeChangeRefuse')))
+    sNGRANnodeChange._val = dict([(u'InitiatingMessage', _sNGRANnodeChange_val_InitiatingMessage), (u'SuccessfulOutcome', _sNGRANnodeChange_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _sNGRANnodeChange_val_UnsuccessfulOutcome), (u'procedureCode', 14), (u'criticality', u'reject')])
+    
+    #-----< rRCTransfer >-----#
+    rRCTransfer = CLASS(name=u'rRCTransfer', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _rRCTransfer_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'RRCTransfer')))
+    rRCTransfer._val = dict([(u'InitiatingMessage', _rRCTransfer_val_InitiatingMessage), (u'procedureCode', 15), (u'criticality', u'reject')])
+    
+    #-----< xnRemoval >-----#
+    xnRemoval = CLASS(name=u'xnRemoval', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _xnRemoval_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalRequest')))
+    _xnRemoval_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalResponse')))
+    _xnRemoval_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnRemovalFailure')))
+    xnRemoval._val = dict([(u'InitiatingMessage', _xnRemoval_val_InitiatingMessage), (u'SuccessfulOutcome', _xnRemoval_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _xnRemoval_val_UnsuccessfulOutcome), (u'procedureCode', 16), (u'criticality', u'reject')])
+    
+    #-----< xnSetup >-----#
+    xnSetup = CLASS(name=u'xnSetup', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _xnSetup_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupRequest')))
+    _xnSetup_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupResponse')))
+    _xnSetup_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'XnSetupFailure')))
+    xnSetup._val = dict([(u'InitiatingMessage', _xnSetup_val_InitiatingMessage), (u'SuccessfulOutcome', _xnSetup_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _xnSetup_val_UnsuccessfulOutcome), (u'procedureCode', 17), (u'criticality', u'reject')])
+    
+    #-----< nGRANnodeConfigurationUpdate >-----#
+    nGRANnodeConfigurationUpdate = CLASS(name=u'nGRANnodeConfigurationUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _nGRANnodeConfigurationUpdate_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdate')))
+    _nGRANnodeConfigurationUpdate_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateAcknowledge')))
+    _nGRANnodeConfigurationUpdate_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NGRANNodeConfigurationUpdateFailure')))
+    nGRANnodeConfigurationUpdate._val = dict([(u'InitiatingMessage', _nGRANnodeConfigurationUpdate_val_InitiatingMessage), (u'SuccessfulOutcome', _nGRANnodeConfigurationUpdate_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _nGRANnodeConfigurationUpdate_val_UnsuccessfulOutcome), (u'procedureCode', 18), (u'criticality', u'reject')])
+    
+    #-----< e-UTRA-NR-CellResourceCoordination >-----#
+    e_UTRA_NR_CellResourceCoordination = CLASS(name=u'e-UTRA-NR-CellResourceCoordination', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _e_UTRA_NR_CellResourceCoordination_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationRequest')))
+    _e_UTRA_NR_CellResourceCoordination_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'E-UTRA-NR-CellResourceCoordinationResponse')))
+    e_UTRA_NR_CellResourceCoordination._val = dict([(u'InitiatingMessage', _e_UTRA_NR_CellResourceCoordination_val_InitiatingMessage), (u'SuccessfulOutcome', _e_UTRA_NR_CellResourceCoordination_val_SuccessfulOutcome), (u'procedureCode', 25), (u'criticality', u'reject')])
+    
+    #-----< cellActivation >-----#
+    cellActivation = CLASS(name=u'cellActivation', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _cellActivation_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationRequest')))
+    _cellActivation_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationResponse')))
+    _cellActivation_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'CellActivationFailure')))
+    cellActivation._val = dict([(u'InitiatingMessage', _cellActivation_val_InitiatingMessage), (u'SuccessfulOutcome', _cellActivation_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _cellActivation_val_UnsuccessfulOutcome), (u'procedureCode', 19), (u'criticality', u'reject')])
+    
+    #-----< reset >-----#
+    reset = CLASS(name=u'reset', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _reset_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetRequest')))
+    _reset_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResetResponse')))
+    reset._val = dict([(u'InitiatingMessage', _reset_val_InitiatingMessage), (u'SuccessfulOutcome', _reset_val_SuccessfulOutcome), (u'procedureCode', 20), (u'criticality', u'reject')])
+    
+    #-----< errorIndication >-----#
+    errorIndication = CLASS(name=u'errorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _errorIndication_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ErrorIndication')))
+    errorIndication._val = dict([(u'InitiatingMessage', _errorIndication_val_InitiatingMessage), (u'procedureCode', 21), (u'criticality', u'ignore')])
+    
+    #-----< notificationControl >-----#
+    notificationControl = CLASS(name=u'notificationControl', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _notificationControl_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'NotificationControlIndication')))
+    notificationControl._val = dict([(u'InitiatingMessage', _notificationControl_val_InitiatingMessage), (u'procedureCode', 23), (u'criticality', u'ignore')])
+    
+    #-----< activityNotification >-----#
+    activityNotification = CLASS(name=u'activityNotification', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _activityNotification_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ActivityNotification')))
+    activityNotification._val = dict([(u'InitiatingMessage', _activityNotification_val_InitiatingMessage), (u'procedureCode', 24), (u'criticality', u'ignore')])
+    
+    #-----< privateMessage >-----#
+    privateMessage = CLASS(name=u'privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _privateMessage_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'PrivateMessage')))
+    privateMessage._val = dict([(u'InitiatingMessage', _privateMessage_val_InitiatingMessage), (u'procedureCode', 22), (u'criticality', u'ignore')])
+    
+    #-----< secondaryRATDataUsageReport >-----#
+    secondaryRATDataUsageReport = CLASS(name=u'secondaryRATDataUsageReport', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _secondaryRATDataUsageReport_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'SecondaryRATDataUsageReport')))
+    secondaryRATDataUsageReport._val = dict([(u'InitiatingMessage', _secondaryRATDataUsageReport_val_InitiatingMessage), (u'procedureCode', 26), (u'criticality', u'reject')])
+    
+    #-----< deactivateTrace >-----#
+    deactivateTrace = CLASS(name=u'deactivateTrace', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _deactivateTrace_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'DeactivateTrace')))
+    deactivateTrace._val = dict([(u'InitiatingMessage', _deactivateTrace_val_InitiatingMessage), (u'procedureCode', 27), (u'criticality', u'ignore')])
+    
+    #-----< traceStart >-----#
+    traceStart = CLASS(name=u'traceStart', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _traceStart_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'TraceStart')))
+    traceStart._val = dict([(u'InitiatingMessage', _traceStart_val_InitiatingMessage), (u'procedureCode', 28), (u'criticality', u'ignore')])
+    
+    #-----< handoverSuccess >-----#
+    handoverSuccess = CLASS(name=u'handoverSuccess', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _handoverSuccess_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverSuccess')))
+    handoverSuccess._val = dict([(u'InitiatingMessage', _handoverSuccess_val_InitiatingMessage), (u'procedureCode', 29), (u'criticality', u'ignore')])
+    
+    #-----< conditionalHandoverCancel >-----#
+    conditionalHandoverCancel = CLASS(name=u'conditionalHandoverCancel', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _conditionalHandoverCancel_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ConditionalHandoverCancel')))
+    conditionalHandoverCancel._val = dict([(u'InitiatingMessage', _conditionalHandoverCancel_val_InitiatingMessage), (u'procedureCode', 30), (u'criticality', u'ignore')])
+    
+    #-----< earlyStatusTransfer >-----#
+    earlyStatusTransfer = CLASS(name=u'earlyStatusTransfer', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _earlyStatusTransfer_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'EarlyStatusTransfer')))
+    earlyStatusTransfer._val = dict([(u'InitiatingMessage', _earlyStatusTransfer_val_InitiatingMessage), (u'procedureCode', 31), (u'criticality', u'ignore')])
+    
+    #-----< failureIndication >-----#
+    failureIndication = CLASS(name=u'failureIndication', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _failureIndication_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'FailureIndication')))
+    failureIndication._val = dict([(u'InitiatingMessage', _failureIndication_val_InitiatingMessage), (u'procedureCode', 32), (u'criticality', u'ignore')])
+    
+    #-----< handoverReport >-----#
+    handoverReport = CLASS(name=u'handoverReport', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _handoverReport_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'HandoverReport')))
+    handoverReport._val = dict([(u'InitiatingMessage', _handoverReport_val_InitiatingMessage), (u'procedureCode', 33), (u'criticality', u'ignore')])
+    
+    #-----< resourceStatusReportingInitiation >-----#
+    resourceStatusReportingInitiation = CLASS(name=u'resourceStatusReportingInitiation', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _resourceStatusReportingInitiation_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusRequest')))
+    _resourceStatusReportingInitiation_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusResponse')))
+    _resourceStatusReportingInitiation_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusFailure')))
+    resourceStatusReportingInitiation._val = dict([(u'InitiatingMessage', _resourceStatusReportingInitiation_val_InitiatingMessage), (u'SuccessfulOutcome', _resourceStatusReportingInitiation_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _resourceStatusReportingInitiation_val_UnsuccessfulOutcome), (u'procedureCode', 34), (u'criticality', u'reject')])
+    
+    #-----< resourceStatusReporting >-----#
+    resourceStatusReporting = CLASS(name=u'resourceStatusReporting', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _resourceStatusReporting_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'ResourceStatusUpdate')))
+    resourceStatusReporting._val = dict([(u'InitiatingMessage', _resourceStatusReporting_val_InitiatingMessage), (u'procedureCode', 35), (u'criticality', u'ignore')])
+    
+    #-----< mobilitySettingsChange >-----#
+    mobilitySettingsChange = CLASS(name=u'mobilitySettingsChange', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _mobilitySettingsChange_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeRequest')))
+    _mobilitySettingsChange_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeAcknowledge')))
+    _mobilitySettingsChange_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'MobilityChangeFailure')))
+    mobilitySettingsChange._val = dict([(u'InitiatingMessage', _mobilitySettingsChange_val_InitiatingMessage), (u'SuccessfulOutcome', _mobilitySettingsChange_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _mobilitySettingsChange_val_UnsuccessfulOutcome), (u'procedureCode', 36), (u'criticality', u'reject')])
+    
+    #-----< accessAndMobilityIndication >-----#
+    accessAndMobilityIndication = CLASS(name=u'accessAndMobilityIndication', mode=MODE_VALUE, typeref=ASN1RefType(('XnAP-PDU-Descriptions', 'XNAP-ELEMENTARY-PROCEDURE')))
+    _accessAndMobilityIndication_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('XnAP-PDU-Contents', 'AccessAndMobilityIndication')))
+    accessAndMobilityIndication._val = dict([(u'InitiatingMessage', _accessAndMobilityIndication_val_InitiatingMessage), (u'procedureCode', 37), (u'criticality', u'ignore')])
+    
+    _all_ = [
+        _XNAP_ELEMENTARY_PROCEDURE_InitiatingMessage,
+        _XNAP_ELEMENTARY_PROCEDURE_SuccessfulOutcome,
+        _XNAP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome,
+        _XNAP_ELEMENTARY_PROCEDURE_procedureCode,
+        _XNAP_ELEMENTARY_PROCEDURE_criticality,
+        XNAP_ELEMENTARY_PROCEDURE,
+        _XnAP_PDU_initiatingMessage,
+        _XnAP_PDU_successfulOutcome,
+        _XnAP_PDU_unsuccessfulOutcome,
+        XnAP_PDU,
+        __InitiatingMessage_procedureCode_tab,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0,
+        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1,
+        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_2,
+        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_2,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_3,
+        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_3,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_4,
+        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_4,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_5,
+        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_5,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_6,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7,
+        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_7,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_8,
+        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_8,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_9,
+        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_9,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_10,
+        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_10,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_11,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_11,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_12,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_12,
+        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_12,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_13,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_13,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_14,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_14,
+        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_14,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_15,
+        ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_15,
+        ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_15,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_16,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_17,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_18,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_19,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_20,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_21,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_22,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_23,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_24,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_25,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_26,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_27,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_28,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_29,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_30,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_31,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_32,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_33,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_34,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_35,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_36,
+        ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_37,
+        _InitiatingMessage_procedureCode,
+        _InitiatingMessage_criticality,
+        _InitiatingMessage_value,
+        InitiatingMessage,
+        __SuccessfulOutcome_procedureCode_tab,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0,
+        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1,
+        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2,
+        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3,
+        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4,
+        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5,
+        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7,
+        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8,
+        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_8,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9,
+        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_9,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_10,
+        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_10,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_11,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_12,
+        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_12,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_13,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_14,
+        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_14,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15,
+        ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_15,
+        ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_15,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_20,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_21,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_22,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_23,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_24,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_25,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_26,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_27,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_28,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_29,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_30,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_31,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_32,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_33,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_34,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_35,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_36,
+        ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_37,
+        _SuccessfulOutcome_procedureCode,
+        _SuccessfulOutcome_criticality,
+        _SuccessfulOutcome_value,
+        SuccessfulOutcome,
+        __UnsuccessfulOutcome_procedureCode_tab,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_3,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_8,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_9,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_9,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_10,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_10,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_11,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_11,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_12,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_12,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_12,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_13,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_13,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_14,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_14,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_14,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_15,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_15,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_15,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_16,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_17,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_18,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_19,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_20,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_21,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_22,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_23,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_24,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_25,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_26,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_27,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_28,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_29,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_30,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_31,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_32,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_33,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_34,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_35,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_36,
+        ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_37,
+        _UnsuccessfulOutcome_procedureCode,
+        _UnsuccessfulOutcome_criticality,
+        _UnsuccessfulOutcome_value,
+        UnsuccessfulOutcome,
+        XNAP_ELEMENTARY_PROCEDURES,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0,
+        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0,
+        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1,
+        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1,
+        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2,
+        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_2,
+        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_2,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3,
+        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_3,
+        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_3,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4,
+        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_4,
+        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_4,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5,
+        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_5,
+        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_5,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6,
+        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_6,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7,
+        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7,
+        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_7,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8,
+        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_8,
+        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_8,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9,
+        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_9,
+        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_9,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10,
+        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_10,
+        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_10,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_11,
+        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_11,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_12,
+        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_12,
+        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_12,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_13,
+        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_13,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_14,
+        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_14,
+        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_14,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_15,
+        _XNAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_15,
+        _XNAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_15,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_16,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_17,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_18,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_19,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_20,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_21,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_22,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_23,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_24,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_25,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_26,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_27,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_28,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_29,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_30,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_31,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_32,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_33,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_34,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_35,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_36,
+        _XNAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_37,
+        XNAP_ELEMENTARY_PROCEDURES_CLASS_1,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_3,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_3,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_3,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_4,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_4,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_4,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_5,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_5,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_5,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_6,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_6,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_7,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_7,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_7,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_8,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_8,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_8,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_9,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_9,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_9,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_10,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_10,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_10,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_11,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_11,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_12,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_12,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_12,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_13,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_13,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_14,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_14,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_14,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_15,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_15,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_15,
+        XNAP_ELEMENTARY_PROCEDURES_CLASS_2,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_6,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_7,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_8,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_9,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_10,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_11,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_12,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_13,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_14,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_15,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_16,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_17,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_18,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_19,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_20,
+        _XNAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_21,
+        handoverPreparation,
+        _handoverPreparation_val_InitiatingMessage,
+        _handoverPreparation_val_SuccessfulOutcome,
+        _handoverPreparation_val_UnsuccessfulOutcome,
+        sNStatusTransfer,
+        _sNStatusTransfer_val_InitiatingMessage,
+        handoverCancel,
+        _handoverCancel_val_InitiatingMessage,
+        retrieveUEContext,
+        _retrieveUEContext_val_InitiatingMessage,
+        _retrieveUEContext_val_SuccessfulOutcome,
+        _retrieveUEContext_val_UnsuccessfulOutcome,
+        rANPaging,
+        _rANPaging_val_InitiatingMessage,
+        xnUAddressIndication,
+        _xnUAddressIndication_val_InitiatingMessage,
+        uEContextRelease,
+        _uEContextRelease_val_InitiatingMessage,
+        sNGRANnodeAdditionPreparation,
+        _sNGRANnodeAdditionPreparation_val_InitiatingMessage,
+        _sNGRANnodeAdditionPreparation_val_SuccessfulOutcome,
+        _sNGRANnodeAdditionPreparation_val_UnsuccessfulOutcome,
+        sNGRANnodeReconfigurationCompletion,
+        _sNGRANnodeReconfigurationCompletion_val_InitiatingMessage,
+        mNGRANnodeinitiatedSNGRANnodeModificationPreparation,
+        _mNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_InitiatingMessage,
+        _mNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_SuccessfulOutcome,
+        _mNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_UnsuccessfulOutcome,
+        sNGRANnodeinitiatedSNGRANnodeModificationPreparation,
+        _sNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_InitiatingMessage,
+        _sNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_SuccessfulOutcome,
+        _sNGRANnodeinitiatedSNGRANnodeModificationPreparation_val_UnsuccessfulOutcome,
+        mNGRANnodeinitiatedSNGRANnodeRelease,
+        _mNGRANnodeinitiatedSNGRANnodeRelease_val_InitiatingMessage,
+        _mNGRANnodeinitiatedSNGRANnodeRelease_val_SuccessfulOutcome,
+        _mNGRANnodeinitiatedSNGRANnodeRelease_val_UnsuccessfulOutcome,
+        sNGRANnodeinitiatedSNGRANnodeRelease,
+        _sNGRANnodeinitiatedSNGRANnodeRelease_val_InitiatingMessage,
+        _sNGRANnodeinitiatedSNGRANnodeRelease_val_SuccessfulOutcome,
+        sNGRANnodeCounterCheck,
+        _sNGRANnodeCounterCheck_val_InitiatingMessage,
+        sNGRANnodeChange,
+        _sNGRANnodeChange_val_InitiatingMessage,
+        _sNGRANnodeChange_val_SuccessfulOutcome,
+        _sNGRANnodeChange_val_UnsuccessfulOutcome,
+        rRCTransfer,
+        _rRCTransfer_val_InitiatingMessage,
+        xnRemoval,
+        _xnRemoval_val_InitiatingMessage,
+        _xnRemoval_val_SuccessfulOutcome,
+        _xnRemoval_val_UnsuccessfulOutcome,
+        xnSetup,
+        _xnSetup_val_InitiatingMessage,
+        _xnSetup_val_SuccessfulOutcome,
+        _xnSetup_val_UnsuccessfulOutcome,
+        nGRANnodeConfigurationUpdate,
+        _nGRANnodeConfigurationUpdate_val_InitiatingMessage,
+        _nGRANnodeConfigurationUpdate_val_SuccessfulOutcome,
+        _nGRANnodeConfigurationUpdate_val_UnsuccessfulOutcome,
+        e_UTRA_NR_CellResourceCoordination,
+        _e_UTRA_NR_CellResourceCoordination_val_InitiatingMessage,
+        _e_UTRA_NR_CellResourceCoordination_val_SuccessfulOutcome,
+        cellActivation,
+        _cellActivation_val_InitiatingMessage,
+        _cellActivation_val_SuccessfulOutcome,
+        _cellActivation_val_UnsuccessfulOutcome,
+        reset,
+        _reset_val_InitiatingMessage,
+        _reset_val_SuccessfulOutcome,
+        errorIndication,
+        _errorIndication_val_InitiatingMessage,
+        notificationControl,
+        _notificationControl_val_InitiatingMessage,
+        activityNotification,
+        _activityNotification_val_InitiatingMessage,
+        privateMessage,
+        _privateMessage_val_InitiatingMessage,
+        secondaryRATDataUsageReport,
+        _secondaryRATDataUsageReport_val_InitiatingMessage,
+        deactivateTrace,
+        _deactivateTrace_val_InitiatingMessage,
+        traceStart,
+        _traceStart_val_InitiatingMessage,
+        handoverSuccess,
+        _handoverSuccess_val_InitiatingMessage,
+        conditionalHandoverCancel,
+        _conditionalHandoverCancel_val_InitiatingMessage,
+        earlyStatusTransfer,
+        _earlyStatusTransfer_val_InitiatingMessage,
+        failureIndication,
+        _failureIndication_val_InitiatingMessage,
+        handoverReport,
+        _handoverReport_val_InitiatingMessage,
+        resourceStatusReportingInitiation,
+        _resourceStatusReportingInitiation_val_InitiatingMessage,
+        _resourceStatusReportingInitiation_val_SuccessfulOutcome,
+        _resourceStatusReportingInitiation_val_UnsuccessfulOutcome,
+        resourceStatusReporting,
+        _resourceStatusReporting_val_InitiatingMessage,
+        mobilitySettingsChange,
+        _mobilitySettingsChange_val_InitiatingMessage,
+        _mobilitySettingsChange_val_SuccessfulOutcome,
+        _mobilitySettingsChange_val_UnsuccessfulOutcome,
+        accessAndMobilityIndication,
+        _accessAndMobilityIndication_val_InitiatingMessage,
+    ]
+
+init_modules(XnAP_CommonDataTypes, XnAP_Constants, XnAP_Containers, XnAP_IEs, XnAP_PDU_Contents, XnAP_PDU_Descriptions)

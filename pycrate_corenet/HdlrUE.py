@@ -407,6 +407,8 @@ class UEd(SigStack):
                     self.MTMSI = ident[3]
                 elif ident[3] != self.MTMSI:
                     self._log('WNG', 'incorrect M-TMSI, %s instead of %s' % (ident, self.MTMSI))
+        # TODO: check what we can have within the 5GS domain
+        # as per TS 24.501, 9.11.3.4
         else:
             self._log('INF', 'unhandled identity, type %i, ident %s' % (idtype, ident))
     

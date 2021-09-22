@@ -5,10 +5,10 @@
 -- **************************************************************
 
 XwAP-IEs {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 eps-Access (21) modules (3) xwap (8) version1 (1) xwap-IEs (2) }
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -46,7 +46,7 @@ FROM XwAP-CommonDataTypes
 	XWAP-PROTOCOL-EXTENSION,
 	ProtocolIE-SingleContainer{},
 	XWAP-PROTOCOL-IES
-FROM XwAP-Containers;	
+FROM XwAP-Containers;
 
 -- A
 
@@ -173,8 +173,8 @@ CauseProtocol ::= ENUMERATED {
 }
 
 CauseRadioNetwork ::= ENUMERATED {
-	unknown-eNB-UE-XwAP-ID, 
-	unknown-WT-UE-XwAP-ID, 
+	unknown-eNB-UE-XwAP-ID,
+	unknown-WT-UE-XwAP-ID,
 	unknown-pair-of-UE-XwAP-ID,
 	wLAN-not-available,
 	security-failure,
@@ -495,12 +495,12 @@ TypeOfError ::= ENUMERATED {
 }
 
 TimeToWait ::= ENUMERATED {
-	v1s, 
-	v2s, 
-	v5s, 
-	v10s, 
-	v20s, 
-	v60s, 
+	v1s,
+	v2s,
+	v5s,
+	v10s,
+	v20s,
+	v60s,
 	...
 }
 

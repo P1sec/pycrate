@@ -7,10 +7,10 @@
 -- **************************************************************
 
 RUA-IEs {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 umts-Access (20) modules (3) rua(5) version1 (1) rUA-IEs (2) }
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -29,13 +29,13 @@ FROM RUA-CommonDataTypes
 FROM RUA-Containers;
 
 
-CN-DomainIndicator ::= ENUMERATED { 
-	cs-domain, 
-	ps-domain 
+CN-DomainIndicator ::= ENUMERATED {
+	cs-domain,
+	ps-domain
 }
 
-CSGMembershipStatus ::= ENUMERATED { 
-	member, 
+CSGMembershipStatus ::= ENUMERATED {
+	member,
 	non-member,
 	...
 }
@@ -43,7 +43,7 @@ CSGMembershipStatus ::= ENUMERATED {
 Establishment-Cause		::= ENUMERATED {
 							emergency-call,
 							normal-call,
-							... 
+							...
 							}
 
 

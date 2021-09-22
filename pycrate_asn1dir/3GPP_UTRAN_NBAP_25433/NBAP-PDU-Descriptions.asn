@@ -5,10 +5,10 @@
 -- **************************************************************
 
 NBAP-PDU-Descriptions {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 umts-Access (20) modules (3) nbap (2) version1 (1) nbap-PDU-Descriptions (0) }
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -315,7 +315,7 @@ NBAP-ELEMENTARY-PROCEDURES-CLASS-1 NBAP-ELEMENTARY-PROCEDURE ::= {
 	cellSynchronisationReconfigurationTDD				|
 	cellSynchronisationAdjustmentTDD					|
 	physicalSharedChannelReconfigurationFDD				|
-	ueStatusUpdateConfirmation	
+	ueStatusUpdateConfirmation
 }
 
 NBAP-ELEMENTARY-PROCEDURES-CLASS-2 NBAP-ELEMENTARY-PROCEDURE ::= {
@@ -373,7 +373,7 @@ cellSetupFDD NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME		CellSetupResponse
 	UNSUCCESSFUL OUTCOME	CellSetupFailure
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-cellSetup, ddMode fdd } 
+	PROCEDURE ID 			{ procedureCode id-cellSetup, ddMode fdd }
 	CRITICALITY 			reject
 }
 
@@ -383,7 +383,7 @@ cellSetupTDD NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME		CellSetupResponse
 	UNSUCCESSFUL OUTCOME	CellSetupFailure
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-cellSetup, ddMode tdd } 
+	PROCEDURE ID 			{ procedureCode id-cellSetup, ddMode tdd }
 	CRITICALITY 			reject
 }
 
@@ -393,7 +393,7 @@ cellReconfigurationFDD NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME		CellReconfigurationResponse
 	UNSUCCESSFUL OUTCOME	CellReconfigurationFailure
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-cellReconfiguration, ddMode fdd } 
+	PROCEDURE ID 			{ procedureCode id-cellReconfiguration, ddMode fdd }
 	CRITICALITY 			reject
 }
 
@@ -403,7 +403,7 @@ cellReconfigurationTDD NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME		CellReconfigurationResponse
 	UNSUCCESSFUL OUTCOME	CellReconfigurationFailure
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-cellReconfiguration,	ddMode tdd } 
+	PROCEDURE ID 			{ procedureCode id-cellReconfiguration,	ddMode tdd }
 	CRITICALITY 			reject
 }
 
@@ -412,7 +412,7 @@ cellDeletion NBAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		CellDeletionRequest
 	SUCCESSFUL OUTCOME		CellDeletionResponse
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-cellDeletion, ddMode common } 
+	PROCEDURE ID 			{ procedureCode id-cellDeletion, ddMode common }
 	CRITICALITY 			reject
 }
 
@@ -422,7 +422,7 @@ commonTransportChannelSetupFDD NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME		CommonTransportChannelSetupResponse
 	UNSUCCESSFUL OUTCOME	CommonTransportChannelSetupFailure
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-commonTransportChannelSetup, ddMode fdd } 
+	PROCEDURE ID 			{ procedureCode id-commonTransportChannelSetup, ddMode fdd }
 	CRITICALITY 			reject
 }
 
@@ -432,7 +432,7 @@ commonTransportChannelSetupTDD NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME		CommonTransportChannelSetupResponse
 	UNSUCCESSFUL OUTCOME	CommonTransportChannelSetupFailure
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-commonTransportChannelSetup, ddMode tdd } 
+	PROCEDURE ID 			{ procedureCode id-commonTransportChannelSetup, ddMode tdd }
 	CRITICALITY 			reject
 }
 
@@ -442,7 +442,7 @@ commonTransportChannelReconfigureFDD NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME		CommonTransportChannelReconfigurationResponse
 	UNSUCCESSFUL OUTCOME	CommonTransportChannelReconfigurationFailure
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-commonTransportChannelReconfigure, ddMode fdd } 
+	PROCEDURE ID 			{ procedureCode id-commonTransportChannelReconfigure, ddMode fdd }
 	CRITICALITY 			reject
 }
 
@@ -452,7 +452,7 @@ commonTransportChannelReconfigureTDD NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME		CommonTransportChannelReconfigurationResponse
 	UNSUCCESSFUL OUTCOME	CommonTransportChannelReconfigurationFailure
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-commonTransportChannelReconfigure, ddMode tdd } 
+	PROCEDURE ID 			{ procedureCode id-commonTransportChannelReconfigure, ddMode tdd }
 	CRITICALITY 			reject
 }
 
@@ -461,7 +461,7 @@ commonTransportChannelDelete NBAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		CommonTransportChannelDeletionRequest
 	SUCCESSFUL OUTCOME		CommonTransportChannelDeletionResponse
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-commonTransportChannelDelete, ddMode common } 
+	PROCEDURE ID 			{ procedureCode id-commonTransportChannelDelete, ddMode common }
 	CRITICALITY 			reject
 }
 
@@ -471,7 +471,7 @@ audit NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME		AuditResponse
 	UNSUCCESSFUL OUTCOME	AuditFailure
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-audit, ddMode common } 
+	PROCEDURE ID 			{ procedureCode id-audit, ddMode common }
 	CRITICALITY 			reject
 }
 
@@ -481,7 +481,7 @@ blockResource NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME		BlockResourceResponse
 	UNSUCCESSFUL OUTCOME	BlockResourceFailure
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-blockResource, ddMode common } 
+	PROCEDURE ID 			{ procedureCode id-blockResource, ddMode common }
 	CRITICALITY 			reject
 }
 
@@ -491,7 +491,7 @@ radioLinkSetupFDD NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME		RadioLinkSetupResponseFDD
 	UNSUCCESSFUL OUTCOME	RadioLinkSetupFailureFDD
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-radioLinkSetup, ddMode fdd } 
+	PROCEDURE ID 			{ procedureCode id-radioLinkSetup, ddMode fdd }
 	CRITICALITY 			reject
 }
 
@@ -501,7 +501,7 @@ radioLinkSetupTDD NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME		RadioLinkSetupResponseTDD
 	UNSUCCESSFUL OUTCOME	RadioLinkSetupFailureTDD
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-radioLinkSetup, ddMode tdd } 
+	PROCEDURE ID 			{ procedureCode id-radioLinkSetup, ddMode tdd }
 	CRITICALITY 			reject
 }
 
@@ -511,7 +511,7 @@ systemInformationUpdate NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME		SystemInformationUpdateResponse
 	UNSUCCESSFUL OUTCOME	SystemInformationUpdateFailure
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-systemInformationUpdate, ddMode common } 
+	PROCEDURE ID 			{ procedureCode id-systemInformationUpdate, ddMode common }
 	CRITICALITY 			reject
 }
 
@@ -520,7 +520,7 @@ reset NBAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		ResetRequest
 	SUCCESSFUL OUTCOME		ResetResponse
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-reset, ddMode common } 
+	PROCEDURE ID 			{ procedureCode id-reset, ddMode common }
 	CRITICALITY 			reject
 }
 
@@ -530,7 +530,7 @@ commonMeasurementInitiation NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME		CommonMeasurementInitiationResponse
 	UNSUCCESSFUL OUTCOME	CommonMeasurementInitiationFailure
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-commonMeasurementInitiation,	ddMode common } 
+	PROCEDURE ID 			{ procedureCode id-commonMeasurementInitiation,	ddMode common }
 	CRITICALITY 			reject
 }
 
@@ -540,7 +540,7 @@ radioLinkAdditionFDD NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME		RadioLinkAdditionResponseFDD
 	UNSUCCESSFUL OUTCOME	RadioLinkAdditionFailureFDD
 	MESSAGE DISCRIMINATOR	dedicated
-	PROCEDURE ID 			{ procedureCode id-radioLinkAddition, ddMode fdd } 
+	PROCEDURE ID 			{ procedureCode id-radioLinkAddition, ddMode fdd }
 	CRITICALITY 			reject
 }
 
@@ -550,7 +550,7 @@ radioLinkAdditionTDD NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME		RadioLinkAdditionResponseTDD
 	UNSUCCESSFUL OUTCOME	RadioLinkAdditionFailureTDD
 	MESSAGE DISCRIMINATOR	dedicated
-	PROCEDURE ID 			{ procedureCode id-radioLinkAddition, ddMode tdd } 
+	PROCEDURE ID 			{ procedureCode id-radioLinkAddition, ddMode tdd }
 	CRITICALITY 			reject
 }
 
@@ -569,7 +569,7 @@ synchronisedRadioLinkReconfigurationPreparationFDD NBAP-ELEMENTARY-PROCEDURE ::=
 	SUCCESSFUL OUTCOME		RadioLinkReconfigurationReady
 	UNSUCCESSFUL OUTCOME	RadioLinkReconfigurationFailure
 	MESSAGE DISCRIMINATOR	dedicated
-	PROCEDURE ID 			{ procedureCode id-synchronisedRadioLinkReconfigurationPreparation, ddMode fdd } 
+	PROCEDURE ID 			{ procedureCode id-synchronisedRadioLinkReconfigurationPreparation, ddMode fdd }
 	CRITICALITY 			reject
 }
 
@@ -579,7 +579,7 @@ synchronisedRadioLinkReconfigurationPreparationTDD NBAP-ELEMENTARY-PROCEDURE ::=
 	SUCCESSFUL OUTCOME		RadioLinkReconfigurationReady
 	UNSUCCESSFUL OUTCOME	RadioLinkReconfigurationFailure
 	MESSAGE DISCRIMINATOR	dedicated
-	PROCEDURE ID 			{ procedureCode id-synchronisedRadioLinkReconfigurationPreparation, ddMode tdd } 
+	PROCEDURE ID 			{ procedureCode id-synchronisedRadioLinkReconfigurationPreparation, ddMode tdd }
 	CRITICALITY 			reject
 }
 
@@ -589,7 +589,7 @@ unSynchronisedRadioLinkReconfigurationFDD NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME		RadioLinkReconfigurationResponse
 	UNSUCCESSFUL OUTCOME	RadioLinkReconfigurationFailure
 	MESSAGE DISCRIMINATOR	dedicated
-	PROCEDURE ID 			{ procedureCode id-unSynchronisedRadioLinkReconfiguration, ddMode fdd } 
+	PROCEDURE ID 			{ procedureCode id-unSynchronisedRadioLinkReconfiguration, ddMode fdd }
 	CRITICALITY 			reject
 }
 
@@ -599,7 +599,7 @@ unSynchronisedRadioLinkReconfigurationTDD NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME		RadioLinkReconfigurationResponse
 	UNSUCCESSFUL OUTCOME	RadioLinkReconfigurationFailure
 	MESSAGE DISCRIMINATOR	dedicated
-	PROCEDURE ID 			{ procedureCode id-unSynchronisedRadioLinkReconfiguration, ddMode tdd } 
+	PROCEDURE ID 			{ procedureCode id-unSynchronisedRadioLinkReconfiguration, ddMode tdd }
 	CRITICALITY 			reject
 }
 
@@ -619,7 +619,7 @@ physicalSharedChannelReconfigurationFDD NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME	PhysicalSharedChannelReconfigurationResponse
 	UNSUCCESSFUL OUTCOME	PhysicalSharedChannelReconfigurationFailure
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 	{ procedureCode id-physicalSharedChannelReconfiguration, ddMode fdd } 
+	PROCEDURE ID 	{ procedureCode id-physicalSharedChannelReconfiguration, ddMode fdd }
 	CRITICALITY 	reject
 }
 
@@ -629,7 +629,7 @@ physicalSharedChannelReconfigurationTDD NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME	PhysicalSharedChannelReconfigurationResponse
 	UNSUCCESSFUL OUTCOME	PhysicalSharedChannelReconfigurationFailure
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 	{ procedureCode id-physicalSharedChannelReconfiguration, ddMode tdd } 
+	PROCEDURE ID 	{ procedureCode id-physicalSharedChannelReconfiguration, ddMode tdd }
 	CRITICALITY 	reject
 }
 
@@ -639,7 +639,7 @@ informationExchangeInitiation NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME		InformationExchangeInitiationResponse
 	UNSUCCESSFUL OUTCOME	InformationExchangeInitiationFailure
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-informationExchangeInitiation, ddMode common } 
+	PROCEDURE ID 			{ procedureCode id-informationExchangeInitiation, ddMode common }
 	CRITICALITY 			reject
 }
 
@@ -649,7 +649,7 @@ cellSynchronisationInitiationTDD NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME	CellSynchronisationInitiationResponseTDD
 	UNSUCCESSFUL OUTCOME	CellSynchronisationInitiationFailureTDD
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 	{ procedureCode id-cellSynchronisationInitiation, ddMode tdd } 
+	PROCEDURE ID 	{ procedureCode id-cellSynchronisationInitiation, ddMode tdd }
 	CRITICALITY 	reject
 }
 
@@ -659,7 +659,7 @@ cellSynchronisationReconfigurationTDD NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME	CellSynchronisationReconfigurationResponseTDD
 	UNSUCCESSFUL OUTCOME	CellSynchronisationReconfigurationFailureTDD
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 	{ procedureCode id-cellSynchronisationReconfiguration, ddMode tdd } 
+	PROCEDURE ID 	{ procedureCode id-cellSynchronisationReconfiguration, ddMode tdd }
 	CRITICALITY 	reject
 }
 
@@ -669,7 +669,7 @@ cellSynchronisationAdjustmentTDD NBAP-ELEMENTARY-PROCEDURE ::= {
 	SUCCESSFUL OUTCOME	CellSynchronisationAdjustmentResponseTDD
 	UNSUCCESSFUL OUTCOME	CellSynchronisationAdjustmentFailureTDD
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 	{ procedureCode id-cellSynchronisationAdjustment, ddMode tdd } 
+	PROCEDURE ID 	{ procedureCode id-cellSynchronisationAdjustment, ddMode tdd }
 	CRITICALITY 	reject
 }
 
@@ -678,7 +678,7 @@ ueStatusUpdateConfirmation NBAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		UEStatusUpdateConfirmRequest
 	SUCCESSFUL OUTCOME		UEStatusUpdateConfirmResponse
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-uEStatusUpdateConfirmation, ddMode common } 
+	PROCEDURE ID 			{ procedureCode id-uEStatusUpdateConfirmation, ddMode common }
 	CRITICALITY				reject
 }
 
@@ -688,7 +688,7 @@ ueStatusUpdateConfirmation NBAP-ELEMENTARY-PROCEDURE ::= {
 resourceStatusIndication NBAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		ResourceStatusIndication
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-resourceStatusIndication, ddMode common } 
+	PROCEDURE ID 			{ procedureCode id-resourceStatusIndication, ddMode common }
 	CRITICALITY 			ignore
 }
 
@@ -696,7 +696,7 @@ resourceStatusIndication NBAP-ELEMENTARY-PROCEDURE ::= {
 auditRequired NBAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		AuditRequiredIndication
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-auditRequired, ddMode common } 
+	PROCEDURE ID 			{ procedureCode id-auditRequired, ddMode common }
 	CRITICALITY 			ignore
 }
 
@@ -704,7 +704,7 @@ auditRequired NBAP-ELEMENTARY-PROCEDURE ::= {
 commonMeasurementReport NBAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		CommonMeasurementReport
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-commonMeasurementReport, ddMode common } 
+	PROCEDURE ID 			{ procedureCode id-commonMeasurementReport, ddMode common }
 	CRITICALITY 			ignore
 }
 
@@ -712,7 +712,7 @@ commonMeasurementReport NBAP-ELEMENTARY-PROCEDURE ::= {
 commonMeasurementTermination NBAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		CommonMeasurementTerminationRequest
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-commonMeasurementTermination, ddMode common } 
+	PROCEDURE ID 			{ procedureCode id-commonMeasurementTermination, ddMode common }
 	CRITICALITY 			ignore
 }
 
@@ -720,7 +720,7 @@ commonMeasurementTermination NBAP-ELEMENTARY-PROCEDURE ::= {
 commonMeasurementFailure NBAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		CommonMeasurementFailureIndication
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-commonMeasurementFailure, ddMode common } 
+	PROCEDURE ID 			{ procedureCode id-commonMeasurementFailure, ddMode common }
 	CRITICALITY 			ignore
 }
 
@@ -728,7 +728,7 @@ commonMeasurementFailure NBAP-ELEMENTARY-PROCEDURE ::= {
 synchronisedRadioLinkReconfigurationCommit NBAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		RadioLinkReconfigurationCommit
 	MESSAGE DISCRIMINATOR	dedicated
-	PROCEDURE ID 			{ procedureCode id-synchronisedRadioLinkReconfigurationCommit, ddMode common } 
+	PROCEDURE ID 			{ procedureCode id-synchronisedRadioLinkReconfigurationCommit, ddMode common }
 	CRITICALITY 			ignore
 }
 
@@ -736,7 +736,7 @@ synchronisedRadioLinkReconfigurationCommit NBAP-ELEMENTARY-PROCEDURE ::= {
 synchronisedRadioLinkReconfigurationCancellation NBAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		RadioLinkReconfigurationCancel
 	MESSAGE DISCRIMINATOR	dedicated
-	PROCEDURE ID 			{ procedureCode id-synchronisedRadioLinkReconfigurationCancellation, ddMode common } 
+	PROCEDURE ID 			{ procedureCode id-synchronisedRadioLinkReconfigurationCancellation, ddMode common }
 	CRITICALITY 			ignore
 }
 
@@ -816,7 +816,7 @@ compressedModeCommand NBAP-ELEMENTARY-PROCEDURE ::= {
 unblockResource NBAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		UnblockResourceIndication
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-unblockResource, ddMode common } 
+	PROCEDURE ID 			{ procedureCode id-unblockResource, ddMode common }
 	CRITICALITY 			ignore
 }
 
@@ -880,7 +880,7 @@ privateMessageForCommon NBAP-ELEMENTARY-PROCEDURE ::= {
 informationReporting NBAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		InformationReport
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-informationReporting, ddMode common } 
+	PROCEDURE ID 			{ procedureCode id-informationReporting, ddMode common }
 	CRITICALITY 			ignore
 }
 
@@ -888,7 +888,7 @@ informationReporting NBAP-ELEMENTARY-PROCEDURE ::= {
 informationExchangeTermination NBAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		InformationExchangeTerminationRequest
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-informationExchangeTermination, ddMode common } 
+	PROCEDURE ID 			{ procedureCode id-informationExchangeTermination, ddMode common }
 	CRITICALITY 			ignore
 }
 
@@ -896,7 +896,7 @@ informationExchangeTermination NBAP-ELEMENTARY-PROCEDURE ::= {
 informationExchangeFailure NBAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		InformationExchangeFailureIndication
 	MESSAGE DISCRIMINATOR	common
-	PROCEDURE ID 			{ procedureCode id-informationExchangeFailure, ddMode common } 
+	PROCEDURE ID 			{ procedureCode id-informationExchangeFailure, ddMode common }
 	CRITICALITY 			ignore
 }
 

@@ -6,10 +6,10 @@
 -- **************************************************************
 
 RNA-IEs {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 umts-Access (20) modules (3) rna(7) version1 (1) rna-IEs (2) }
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -157,7 +157,7 @@ HNB-Cell-Identifier	::=	SEQUENCE {
 HNB-Cell-Identifier-ExtIEs RNA-PROTOCOL-EXTENSION ::= {
 	...
 }
-		
+
 
 --I
 
