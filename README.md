@@ -71,7 +71,8 @@ Automatic installation
 ----------------------
 
 An installation script is available.
-It installs the library within your Python package directory:
+As soon as you have cloned or downloaded the repository, you can use it to install
+the library within your Python package directory:
 
 ```
 python setup.py install
@@ -105,6 +106,18 @@ python -m pycrate_asn1c.asnproc
 
 More generally, installation is not required, and simply having all _pycrate\_*_ 
 subdirectories into the PYTHONPATH enables to use the entire library.
+
+
+Installation with pip
+---------------------
+
+Alternatively, you can install the library with the `pip` command:
+```
+pip install pycrate
+```
+
+The install package is available on [pypi](https://pypi.org/project/pycrate/).
+It contains the library from the last tagged release on github.
 
 
 Contributing
