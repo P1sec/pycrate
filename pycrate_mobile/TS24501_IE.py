@@ -584,7 +584,7 @@ class FGSIDGUTI(Envelope):
 # for IMEI and IMEISV
 class FGSIDDigit(Envelope):
     _GEN = (
-        Uint('Digit1', val=0xF, bl=4, rep=REPR_HEX),
+        Uint('Digit1', bl=4),
         Uint('Odd', bl=1),
         Uint('Type', val=FGSIDTYPE_IMEI, bl=3, dic=FGSIDType_dict),
         BufBCD('Digits', val='')
@@ -705,7 +705,9 @@ class FGSID(Envelope):
         type = char.to_uint(8) & 0x7
         self._set_content(type)
         Envelope._from_char(self, char)
-        
+
+# TODO: implement encode(), decode() and repr() as in TS24008_IE.ID()
+
 
 #------------------------------------------------------------------------------#
 # 5GS network feature support
