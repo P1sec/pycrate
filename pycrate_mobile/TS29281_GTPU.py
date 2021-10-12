@@ -336,7 +336,7 @@ class GTPUType(IntEnum):
 class GTPUHdr(Envelope):
     _GEN = (
         Uint('Version', val=1, bl=3),
-        Uint('PT', val=0, bl=1, dic=ProtType_dict),
+        Uint('PT', val=1, bl=1, dic=ProtType_dict),
         Uint('spare', bl=1),
         Uint('E', bl=1),
         Uint('S', bl=1),
