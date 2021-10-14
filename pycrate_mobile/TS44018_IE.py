@@ -193,7 +193,7 @@ class _FreqListRange(Envelope):
         else:
             off = 17
         i = 1
-        while True:
+        while i <= len(self._Layout):
             ccur, wbl = char._cur, self._Layout[i-1]
             if char._len_bit - ccur >= wbl:
                 w = Uint('W_%i' % i, bl=wbl)
@@ -230,13 +230,13 @@ class _FreqListRange(Envelope):
                 J = [j for j in (1, 2, 4, 8, 16, 32, 64, 128, 256) if j <= i].pop()
                 while i > 1:
                     if 2*i < 3*J:
-                        N = 1 + (N + W[self._dec_get_w_ind(i)] + self._Range//J - 2) \
-                                % (2*self._Range//J - 1)
                         i -= J>>1
+                        N = 1 + (N + W[self._dec_get_w_ind(i)] + self._Range//J - 2) \
+                            % (2*self._Range//J - 1)
                     else:
+                        i -= J
                         N = 1 + (N + W[self._dec_get_w_ind(i)] + 2*self._Range//J - 2) \
                                 % (2*self._Range//J - 1)
-                        i -= J
                     J = J//2
                 F.append(N)
         F.sort()
@@ -287,7 +287,7 @@ class _FreqListAlt2(Envelope):
     def decode(self):
         """returns the list of ARFCNs set
         """
-        if self[0].get_val() == 3:
+        if self[0].get_val() == 1 or self[0].get_val() == 2:
             # variable bitmap
             orig_arfcn = self[1].get_val()
             add_orig_arfcn = lambda x: x+orig_arfcn
