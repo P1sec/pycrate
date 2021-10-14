@@ -135,7 +135,11 @@ class SrcLocalRef(Uint24):
 #------------------------------------------------------------------------------#
 
 class SCCPBufBCD(BufBCD):
-    _chars  = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '_', '11', '12', '_', 'ST')
+    # as given in 3.4.2.3.1
+    _chars  = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+               '_spare10_', '_code11_', '_code12_', '_spare13_', '_spare14_', '_ST_')
+    # TODO: make something that can be re-encoded
+    
     _filler = 0x0
 
 
@@ -213,6 +217,12 @@ _NumPlan_dict = {
     7 : 'ISDN/mobile numbering plan (ITU-T E.214)',
     14 : 'private network or network-specific numbering plan'
     }
+
+# kind reminder:
+# from https://en.wikipedia.org/wiki/Global_title
+# E.164 : MSISDN (CC + NDC + SN)
+# E.212 : IMSI (MCC + MNC + MSIN)
+# E.214 : MGT (CC + NDC + MSIN)
 
 _EncScheme_dict = {
     0 : 'unknown',
