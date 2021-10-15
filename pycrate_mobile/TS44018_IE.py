@@ -243,6 +243,8 @@ class _FreqListRange(Envelope):
         return F
     
     def _dec_get_w_ind(self, ind):
+        # this is used for range 128, 256
+        # a different method is used for range 512 and 1024
         return ind
     
     def _encode(self, arfcns):
@@ -269,7 +271,8 @@ class _FreqListRange1024(_FreqListRangeLong):
         """returns the list of ARFCNs set
         """
         if self[0].get_val():
-            return [0] + self._decode
+            # ARFCN 0 part of the set
+            return [0] + self._decode()
         else:
             return self._decode()
     
@@ -282,19 +285,33 @@ class _FreqListRange1024(_FreqListRangeLong):
 
 # _FreqListAlt2, _FreqListAlt1  and _FreqList are parent classes with common 
 # methods used children classes which have different generators
+
+# _FreqListAlt2 has the following generator layout, where the BitmapVar may
+# have different bit length:
+#    _GEN = (
+#        Uint('FmtExt2', bl=2, dic={0: 'range 512', 1: 'range 256', 2: 'range 128', 3: 'variable bit map'}),
+#        Uint('OriginARFCN', val=0, bl=10),
+#        Alt(GEN={
+#            0: FreqListRange512(),
+#            1: FreqListRange256(),
+#            2: FreqListRange128(),
+#            3: FreqListBitmapVar()},
+#            sel=lambda self: self.get_env()[0].get_val())
+#        )
+
 class _FreqListAlt2(Envelope):
     
     def decode(self):
         """returns the list of ARFCNs set
         """
-        if self[0].get_val() == 1 or self[0].get_val() == 2:
+        orig_arfcn = self[1].get_val()
+        add_orig_arfcn = lambda x: orig_arfcn + x
+        if self[0].get_val() == 3:
             # variable bitmap
-            orig_arfcn = self[1].get_val()
-            add_orig_arfcn = lambda x: x+orig_arfcn
-            return list(map(add_orig_arfcn, self[2].get_alt()._decode()))
+            s = []
         else:
-            # range
-            return [self[1].get_val()] + self[2].get_alt()._decode()
+            s = [orig_arfcn]
+        return s + list(map(add_orig_arfcn, self[2].get_alt()._decode()))
     
     def encode(self, arfcns):
         """sets a list of ARFCNs
@@ -308,6 +325,7 @@ class _FreqListAlt2(Envelope):
                 # variable bitmap, update every ARFCNs
                 rem_orig_arfcn = lambda x: x-orig_arfcn
                 arfcns = list(map(rem_orig_arfcn, arfcns))
+            # WARN: this will raise in case of RangeX
             self[2].get_alt()._encode(arfcns)
         except:
             pass
