@@ -226,7 +226,7 @@ class Element(object):
         # get index of self within its envelope
         try:
             ind = self._env.index(self)
-        except IndexError:
+        except Exception:
             return None
         try:
             if self.ENV_SEL_TRANS:
@@ -262,7 +262,7 @@ class Element(object):
         # get index of self within its envelope
         try:
             ind = self._env.index(self)
-        except IndexError:
+        except Exception:
             return None
         try:
             if self.ENV_SEL_TRANS:
@@ -395,7 +395,7 @@ class Element(object):
             while env is not None:
                 try:
                     ind = env.index(elt)
-                except IndexError:
+                except Exception:
                     return None
                 for elt in env[ind-1::-1]:
                     if elt._hier < hier:
@@ -407,7 +407,7 @@ class Element(object):
             while env is not None:
                 try:
                     ind = env.index(elt)
-                except IndexError:
+                except Exception:
                     return None
                 for elt in env[ind-1::-1]:
                     if not elt.get_trans() and elt._hier < hier:
@@ -442,7 +442,7 @@ class Element(object):
             while env is not None:
                 try:
                     ind_start = env.index(elt)
-                except IndexError:
+                except Exception:
                     return None
                 ind = 1+ind_start
                 ind_pay = [None, None]
@@ -465,7 +465,7 @@ class Element(object):
             while env is not None:
                 try:
                     ind_start = env.index(elt)
-                except IndexError:
+                except Exception:
                     return None
                 ind = 1+ind_start
                 ind_pay = [None, None]
@@ -2285,7 +2285,7 @@ class Envelope(Element):
                 if not e.get_trans():
                     try:
                         e._from_jval_wrap(val[i])
-                    except IndexError:
+                    except Exception:
                         break
                     else:
                         i += 1
@@ -2922,7 +2922,7 @@ class Array(Element):
         """
         try:
             return self._val.index(val)
-        except IndexError as err:
+        except Exception as err:
             raise(EltErr('{0} [index]: {1}'.format(self._name, err)))
     
     def insert(self, index, val):
@@ -3008,7 +3008,7 @@ class Array(Element):
         """
         try:
             ind = self._val.index(old)
-        except IndexError as err:
+        except Exception as err:
             raise(EltErr('{0} [replace] invalid old: {1}'.format(self._name, err)))
         # use the template to format the value
         if new != self._tmpl_val:
@@ -3840,7 +3840,7 @@ class Sequence(Element):
         """
         try:
             return self._content.index(elt)
-        except IndexError as err:
+        except Exception as err:
             raise(EltErr('{0} [index]: {1}'.format(self._name, err)))
     
     def insert(self, index, elt):
@@ -3939,7 +3939,7 @@ class Sequence(Element):
         if isinstance(old, Elt):
             try:
                 ind = self._content.index(old)
-            except IndexError as err:
+            except Exception as err:
                 raise(EltErr('{0} [replace] invalid old: {1}'.format(self._name, err)))
         elif isinstance(old, integer_types):
             ind = old
