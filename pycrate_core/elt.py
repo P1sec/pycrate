@@ -264,6 +264,8 @@ class Element(object):
             ind = self._env.index(self)
         except Exception:
             return None
+        if ind-val < 0:
+            return None
         try:
             if self.ENV_SEL_TRANS:
                 return self._env[ind-val]
