@@ -224,7 +224,10 @@ class Element(object):
             return None
         
         # get index of self within its envelope
-        ind = self._env.index(self)
+        try:
+            ind = self._env.index(self)
+        except IndexError:
+            return None
         try:
             if self.ENV_SEL_TRANS:
                 return self._env[ind+val]
@@ -257,7 +260,10 @@ class Element(object):
             return None
         
         # get index of self within its envelope
-        ind = self._env.index(self)
+        try:
+            ind = self._env.index(self)
+        except IndexError:
+            return None
         try:
             if self.ENV_SEL_TRANS:
                 return self._env[ind-val]
@@ -387,7 +393,10 @@ class Element(object):
         #
         if self.ENV_SEL_TRANS:
             while env is not None:
-                ind = env.index(elt)
+                try:
+                    ind = env.index(elt)
+                except IndexError:
+                    return None
                 for elt in env[ind-1::-1]:
                     if elt._hier < hier:
                         return elt
@@ -396,7 +405,10 @@ class Element(object):
                 env  = elt._env
         else:
             while env is not None:
-                ind = env.index(elt)
+                try:
+                    ind = env.index(elt)
+                except IndexError:
+                    return None
                 for elt in env[ind-1::-1]:
                     if not elt.get_trans() and elt._hier < hier:
                         return elt
@@ -428,7 +440,10 @@ class Element(object):
         #
         if self.ENV_SEL_TRANS:
             while env is not None:
-                ind_start = env.index(elt)
+                try:
+                    ind_start = env.index(elt)
+                except IndexError:
+                    return None
                 ind = 1+ind_start
                 ind_pay = [None, None]
                 for elt in env[1+ind_start:]:
@@ -448,7 +463,10 @@ class Element(object):
                     env  = elt._env
         else:
             while env is not None:
-                ind_start = env.index(elt)
+                try:
+                    ind_start = env.index(elt)
+                except IndexError:
+                    return None
                 ind = 1+ind_start
                 ind_pay = [None, None]
                 for elt in env[1+ind_start:]:
@@ -2904,7 +2922,7 @@ class Array(Element):
         """
         try:
             return self._val.index(val)
-        except Exception as err:
+        except IndexError as err:
             raise(EltErr('{0} [index]: {1}'.format(self._name, err)))
     
     def insert(self, index, val):
@@ -2990,7 +3008,7 @@ class Array(Element):
         """
         try:
             ind = self._val.index(old)
-        except Exception:
+        except IndexError as err:
             raise(EltErr('{0} [replace] invalid old: {1}'.format(self._name, err)))
         # use the template to format the value
         if new != self._tmpl_val:
@@ -3822,7 +3840,7 @@ class Sequence(Element):
         """
         try:
             return self._content.index(elt)
-        except Exception as err:
+        except IndexError as err:
             raise(EltErr('{0} [index]: {1}'.format(self._name, err)))
     
     def insert(self, index, elt):
@@ -3921,7 +3939,7 @@ class Sequence(Element):
         if isinstance(old, Elt):
             try:
                 ind = self._content.index(old)
-            except Exception as err:
+            except IndexError as err:
                 raise(EltErr('{0} [replace] invalid old: {1}'.format(self._name, err)))
         elif isinstance(old, integer_types):
             ind = old
