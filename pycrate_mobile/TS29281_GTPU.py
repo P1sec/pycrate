@@ -27,7 +27,6 @@
 # *--------------------------------------------------------
 #*/
 
-'''
 __all__ = [
     # GTPU Messages
     'GTPUEchoRequest',
@@ -43,7 +42,7 @@ __all__ = [
     'ERR_GTPU_BUF_INVALID',
     'ERR_GTPU_TYPE_NONEXIST'
     ]
-'''
+
 
 #------------------------------------------------------------------------------#
 # 3GPP TS 29.281: General Packet Radio System (GPRS) Tunnelling Protocol 
