@@ -132,16 +132,31 @@ check the wiki ; moreover many classes, methods and functions are documented wit
 docstrings, and finally you can have a look at the source code.
 
 If after all those steps, you still have a question or you think you found a bug,
-please open an issue. When filling an issue, please provide precise information
-about your case and the error you potentially encounter.
-
-Specific support requires time and may not be always possible. 
-In case you require such support, please consider also contributing in one way or 
-another (see below).
+please open an issue (see below). Specific support requires time and may not be always 
+possible. In case you require such support, please consider also contributing in one 
+way or another (see below, too).
 
 In case you are using this library in any of your project and you find it useful,
 do not hesitate to send me an email. It is always a pleasure to know where 
 code provided on the Internet can end up...
+
+
+Filling an issue
+---------------
+
+When filling an issue, please provide precise and contextual information about 
+your case and the error you potentially encounter:
+- indicate the version (or commit-level) of pycrate your are using, together with 
+the version of Python.
+- provide a code snippet that leads to the error you are facing, so that it can be
+reproduced.
+- provide the eventual stacktrace you are getting from Python
+- provide additional and contextual information as needed (e.g. a specific ASN.1 
+specification being used...)
+
+This is the bare minimum if you want to get help.
+And when you consider your issue has been addressed, please close it: "A good issue
+is a closed one !" as would have said my great grandmother.
 
 
 Extending the library
