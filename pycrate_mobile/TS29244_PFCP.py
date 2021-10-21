@@ -457,7 +457,7 @@ class PFCPIE(Envelope):
     DECODE_IE_DATA = True
     
     _GEN = (
-        Uint16('Type', dic=PFCPIEType_dict),
+        Uint16('Type', val=0, dic=PFCPIEType_dict),
         Uint16('Len'),
         Uint16('EID', rep=REPR_HEX),
         Buf('Data', rep=REPR_HEX)
@@ -470,11 +470,19 @@ class PFCPIE(Envelope):
         self['Data'].set_blauto(lambda: (self['Len'].get_val() - (2 if self['Type'].get_val() & 0x8000 else 0)) << 3)
     
     def set_val(self, val):
-        if isinstance(val, (tuple, list)) and len(val) == 4:
-            t, d = val[0], val[3]
-        elif isinstance(val, dict) and 'Type' in val and 'Data' in val:
-            t, d = val['Type'], val['Data']
-        if t in PFCPIELUT and not isinstance(d, bytes_types):
+        t, d = None, None
+        if isinstance(val, (tuple, list)):
+            if len(val) > 3:
+                t, d = val[0], val[3]
+            elif val:
+                t = val[0]
+        elif isinstance(val, dict):
+            if 'Type' in val:
+                t = val['Type']
+            if 'Data' in val:
+                d = val['Data']
+        print('t, d: %i, %r' % (t, d))
+        if t and t in PFCPIELUT and not isinstance(d, bytes_types):
             self.set_ie_class(t)
         Envelope.set_val(self, val)
     
@@ -490,9 +498,9 @@ class PFCPIE(Envelope):
         according to the IE Type value `t'
         """
         IE = PFCPIELUT[t]('Data')
-        self.replace(self[3], IE)
         if not hasattr(IE, '_bl') or IE._bl is None:
             IE.set_blauto(lambda: (self['Len'].get_val() - (2 if self['Type'].get_val() & 0x8000 else 0)) << 3)
+        self.replace(self['Data'], IE)
 
 
 class PFCPIEs(Sequence):
