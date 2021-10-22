@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.4
+# * Version : 0.5
 # *
 # * Copyright 2021. Benoit Michau. P1Sec.
 # *
