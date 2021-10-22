@@ -305,13 +305,8 @@ class _FreqListAlt2(Envelope):
         """returns the list of ARFCNs set
         """
         orig_arfcn = self[1].get_val()
-        add_orig_arfcn = lambda x: orig_arfcn + x
-        if self[0].get_val() == 3:
-            # variable bitmap
-            s = []
-        else:
-            s = [orig_arfcn]
-        return s + list(map(add_orig_arfcn, self[2].get_alt()._decode()))
+        return [orig_arfcn] + \
+               list(map(lambda x: orig_arfcn + x, self[2].get_alt()._decode()))
     
     def encode(self, arfcns):
         """sets a list of ARFCNs
