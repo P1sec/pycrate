@@ -481,7 +481,6 @@ class PFCPIE(Envelope):
                 t = val['Type']
             if 'Data' in val:
                 d = val['Data']
-        print('t, d: %i, %r' % (t, d))
         if t and t in PFCPIELUT and not isinstance(d, bytes_types):
             self.set_ie_class(t)
         Envelope.set_val(self, val)
