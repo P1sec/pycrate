@@ -4263,10 +4263,8 @@ class Alt(Element):
         # default alternative
         if 'DEFAULT' in kw:
             self.DEFAULT = kw['DEFAULT']
-            #self.DEFAULT.set_env(self.get_env())
         elif self.__class__.DEFAULT:
             self.DEFAULT = self.__class__.DEFAULT.clone()
-            #self.DEFAULT.set_env(self.get_env())
         
         if self._SAFE_STAT:
             self._chk_hier()
@@ -4336,8 +4334,7 @@ class Alt(Element):
             return None
     
     def get_alt(self):
-        """Gets the selected alternative, if sv is not None, forces the 
-        alternative selected
+        """Gets the selected alternative
         
         Args:
             None
@@ -4350,14 +4347,15 @@ class Alt(Element):
         """
         sv = self.get_sel()
         if sv in self._content:
-            return self._content[sv]
+            elt = self._content[sv]
+            elt.set_env(self.get_env())
+            return elt
         elif sv in self._GEN:
             elt = self._GEN[sv].clone()
             self.insert(sv, elt)
             return elt
         elif self.DEFAULT is not None:
-            if self.DEFAULT._env is None:
-                self.DEFAULT.set_env(self.get_env())
+            self.DEFAULT.set_env(self.get_env())
             return self.DEFAULT
         else:
             raise(EltErr('{0} [set_val]: invalid selection value {1!r}'\
@@ -4705,7 +4703,7 @@ class Alt(Element):
                 desc = ''
             #
             alts = alt.show()
-            if alts[:4] == '### ':
+            if alts.lstrip()[:4] == '### ':
                 # when the alternative is a constructed element
                 return alts.replace('### ', '### %s%s%s : %r -> ' % (self._name, desc, trans, sv), 1)
             else:
