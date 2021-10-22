@@ -27,4 +27,5 @@
 # *--------------------------------------------------------
 #*/
 #
-__all__ = ['Diameter', 'DiameterIETF', 'Diameter3GPP', 'iana_diameter_dicts']
+__all__ = ['Diameter', 'DiameterIETF', 'Diameter3GPP', 'iana_diameter_dicts', 
+           'parse_iana_diameter_xml.py']

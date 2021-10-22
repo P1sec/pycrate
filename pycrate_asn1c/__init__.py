@@ -29,5 +29,5 @@
 #
 __all__ = ['utils', 'err', 'glob',
            'dictobj', 'setobj', 'refobj', 'asnobj',
-           'extractor', 'specdir', 'proc', 'generator'
+           'extractor', 'specdir', 'asnproc', 'generator'
            ]

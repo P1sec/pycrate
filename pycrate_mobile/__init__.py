@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.4
+# * Version : 0.5
 # *
 # * Copyright 2016. Benoit Michau. ANSSI.
 # * Copyright 2019. Benoit Michau. P1Sec.
@@ -29,12 +29,14 @@
 #*/
 #
 __all__ = ['GSMTAP', 'MCC_MNC', 'PPP', 'SIGTRAN', 'SCCP', 'ISUP',
-           'TS24007', 'NAS', 'NASLTE',
+           'TS24007', 'NAS', 'NASLTE', 'NAS5G',
            'TS24008_IE', 'TS24008_MM', 'TS24008_GMM', 'TS24008_CC', 'TS24008_SM',
            'TS23038', 'TS23040_SMS', 'TS23041_CBS', 'TS24011_PPSMS', 'TS24080_SS',
            'TS24301_IE', 'TS24301_EMM', 'TS24301_ESM',
            'TS24501_IE', 'TS24501_FGMM', 'TS24501_FGSM', 'TS24501_UEPOL', 'TS24526_UEPOL',
-           'TS24588_UEPOL', 'TS24519_TSNAF',
+           'TS24588_UEPOL', 'TS24519_TSNAF', 'TS24193_ATSSS',
            'TS29002_MAPAppCtx', 'TS29002_MAPIE', 'TS29274_GTPC', 'TS29281_GTPU',
-           'TS29244_PFCP',
-           'TS44018_IE', 'TS44018_RR', 'TS44018_GTTP', 'TS48058_Abis']
+           'TS38415_PDUSess', 'TS29244_PFCP',
+           'TS44018_IE', 'TS44018_RR', 'TS44018_GTTP', 'TS48058_Abis',
+           'TS102225', 'TS31115', 'TS31111_SAT']
+
