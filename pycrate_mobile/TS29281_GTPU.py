@@ -47,7 +47,7 @@ __all__ = [
 #------------------------------------------------------------------------------#
 # 3GPP TS 29.281: General Packet Radio System (GPRS) Tunnelling Protocol 
 # User Plane (GTPv1-U)
-# release 15 (f50)
+# release 17 (h10)
 #------------------------------------------------------------------------------#
 
 from enum import IntEnum
@@ -55,6 +55,8 @@ from enum import IntEnum
 from pycrate_core.utils import *
 from pycrate_core.elt   import *
 from pycrate_core.base  import *
+
+from pycrate_mobile.TS38415_PDUSess import *
 
 
 #------------------------------------------------------------------------------#
@@ -80,8 +82,10 @@ GTPUNextExtHeader_dict = {
     }
 
 
-# buffer that makes the Ext Header 32-bit-aligned
+# buffer that makes the Extension Header 32-bit-aligned
 class BufAligned(Buf):
+    
+    _rep = REPR_HEX
     
     PAD = b'\0'
     
@@ -96,7 +100,7 @@ class BufAligned(Buf):
 # prototype for the content of a generic Ext Header
 class _GTPUHdrExtCont(Envelope):
     _GEN = (
-        BufAligned('Value', val=b'\0\0', rep=REPR_HEX),
+        BufAligned('Value', val=b'\0\0'),
         )
     
     _ID = 1
@@ -139,8 +143,8 @@ GTPUHdrExtCont_dict = {
     131 : _GTPUHdrExtCont('XwRANContainer', 
             ID=131),
     132 : _GTPUHdrExtCont('NRRANContainer',
-            D=132),
-    133 : _GTPUHdrExtCont('PDUSessionContainer',
+            ID=132),
+    133 : _GTPUHdrExtCont('PDUSessionContainer', GEN=PDUSessInfo._GEN,
             ID=133),
     192 : _GTPUHdrExtCont('PDCPPDUNumber', GEN=(
             Uint('Value', bl=15),
@@ -267,8 +271,8 @@ class GTPUType(IntEnum):
 
 class GTPUHdr(Envelope):
     _GEN = (
-        Uint('Version', val=1, bl=3),
-        Uint('PT', val=1, bl=1, dic=ProtType_dict),
+        Uint('Version', val=1, bl=3),               # 1 for GTP-U
+        Uint('PT', val=1, bl=1, dic=ProtType_dict), # 1 for GTP-U
         Uint('spare', bl=1),
         Uint('E', bl=1),
         Uint('S', bl=1),
