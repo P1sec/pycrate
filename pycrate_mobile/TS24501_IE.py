@@ -1822,6 +1822,8 @@ class UESecCap(Envelope):
         )
     
     def set_val(self, val):
+        if isinstance(val, (tuple, list)) and len(val) < 33:
+            self.disable_from(len(val))
         Envelope.set_val(self, val)
         # in case no 4G sec cap are set, we disable them
         if not any([seccap.get_val() == 1 for seccap in self._content[16:32]]):

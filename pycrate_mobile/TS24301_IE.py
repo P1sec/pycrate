@@ -1084,6 +1084,11 @@ class UESecCap(Envelope):
         Uint('GEA7', bl=1) # end of octet 5
         )
     
+    def set_val(self, val):
+        if isinstance(val, (tuple, list)) and len(val) < 33:
+            self.disable_from(len(val))
+        Envelope.set_val(self, val)
+    
     def _from_char(self, char):
         if self.get_trans():
             return
