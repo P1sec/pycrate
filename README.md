@@ -334,6 +334,7 @@ This subdirectory implements most of the 3GPP NAS protocol formats:
 * *TS29281_GTPU*: structures for LTE/EPC GTP-U messages from TS 29.281
 * *TS31111_SAT*: basic structures and dict for the SIM application toolkit from TS 31.111
 * *TS31115*: structures for SIM card's Secured Packets over SMS from TS 31.115
+* *TS38415_PDUSess*: structure used in 5G user-place traffic (i.e. GTP-U) from TS 38.415
 * *TS44018_GTTP*: structure for the single GSM GTTP message from TS 44.018
 * *TS44018_IE*: structures for many information elements from TS 44.018
 * *TS44018_RR*: structures for the GSM and GPRS radio ressources messages from TS 44.018
