@@ -952,12 +952,12 @@ class PycrateGenerator(_Generator):
                 for ident in pres:
                     if FLAG_OPT in Obj._cont[ident]._flag:
                         del Obj._cont[ident]._flag[FLAG_OPT]
-            '''
             #
             if len(Consts_comps[0]['root']) > 1:
                 asnlog('WNG: {0}.{1}: multiple root parts in WITH COMPONENTS constraint, '\
                        'unable to compile them'.format(self._mod_name, Obj._name))
                 return
+            '''
             #
             # 3) apply additional constraint on components
             # only if we have a single root component in the constraint
@@ -1008,6 +1008,7 @@ def asnmod_build_dep(mods):
                     else:
                         CallerDict[objname] = [ Ref ]
     return CallerDict, CalledDict
+
 
 class JSONDepGraphGenerator(_Generator):
     """

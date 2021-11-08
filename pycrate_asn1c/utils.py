@@ -333,10 +333,28 @@ SYNT_RE_MODULEDEF = re.compile(
     '\s{1,}(DEFINITIONS)\s{1,}')
 SYNT_RE_MODULEREF = re.compile(
     '(?:^|\s{1})(%s){1}\s{0,}(\{[\s\-a-zA-Z0-9\(\)]{1,}\}){0,1}' % _RE_TYPEREF)
+
+'''
+# FROM $ModuleRef $ModuleOIDOrOIDRef{0,1}
 SYNT_RE_MODULEFROM = re.compile(
     '(?:FROM\s{1,})(%s)' \
-    '(?:\s{0,}(\{[\s\-a-zA-Z0-9\(\)]{1,}\})|\s{1,}(%s)(?:\s{1,}%s(?:\s*\{\})?(?:\s{0,},|\s{1,}FROM)|\s{0,}$)){0,1}' \
+    '(?:\s*' \
+        '(\{[\s\-a-zA-Z0-9\(\)]{1,}\})|' \
+        '\s{1,}(%s)(?:\s{1,}%s(?:\s*\{\})?(?:\s*,|\s{1,}FROM)|\s*$)' \
+        '){0,1}' \
+    '(?:\s*WITH\s{1,}(SUCCESSORS|DESCENDANTS)){0,1}' \
     % (_RE_TYPEREF, _RE_IDENT, _RE_WORD))
+    # TODO, catch "WITH SUCCESSORS" / "WITH DESCENDANTS" after the imported module name
+'''
+SYNT_RE_MODULEFROM = re.compile(
+    '(?:FROM\s{1,})(%s)\s*' % _RE_TYPEREF)
+SYNT_RE_MODULEFROM_SYM = re.compile(
+    '(%s)(?:\s*\{\s*\}){0,1}(?:\s*,|\s{1,}FROM)' % _RE_WORD)
+SYNT_RE_MODULEFROM_OID = re.compile(
+    '(%s)\s*|(\{[a-zA-Z0-9\(\)\-\s]{4,}\})\s*' % _RE_IDENT)
+SYNT_RE_MODULEFROM_WIT = re.compile(
+    'WITH\s{1,}(SUCCESSORS|DESCENDANTS)\s*')
+
 SYNT_RE_MODULEEXP = re.compile(
     '(?:^|\s{1})EXPORTS((.|\n)*?);')
 SYNT_RE_MODULEIMP = re.compile(
@@ -804,16 +822,36 @@ def extract_set(text=''):
               .format(valset)))
 
 
-#------------------------------------------------------------------------------#
-# following definitions are (yet) unused
-#------------------------------------------------------------------------------#
+def extract_from_import(text=''):
+    """
+    extracts the module name, reference and / or OID set after a FROM import
+    statement, test `text` argument must start with the FROM keyword
+    
+    returns a 2-tuple with
+        integer: length of the text containing the whole FROM statement
+        dict: with "name", "oid", "oidref" and "with" keys
+    """
+    m = SYNT_RE_MODULEFROM.match(text)
+    assert(m)
+    cur = m.end()
+    ret = {'name': m.group(1), 'oid': None, 'oidref': None, 'with': None}
+    # check if we stop or continue with an OID value or OID reference
+    if SYNT_RE_MODULEFROM_SYM.match(text[cur:]) or not text[cur:]:
+        return cur, ret
+    m = SYNT_RE_MODULEFROM_OID.match(text[cur:])
+    assert(m)
+    cur += m.end()
+    assert(None in m.groups())
+    if m.group(1):
+        ret['oidref'] = m.group(1)
+    else:
+        ret['oid'] = m.group(2)
+    # check if there is a final WITH stmt
+    m = SYNT_RE_MODULEFROM_WIT.match(text[cur:])
+    if m:
+        ret['with'] = m.group(1)
+        cur += m.end()
+    # final control
+    assert(SYNT_RE_MODULEFROM_SYM.match(text[cur:]) or not text[cur:])
+    return cur, ret
 
-#------------------------------------------------------------------------------#
-# class syntax processing routines
-#------------------------------------------------------------------------------#
-
-def class_syntax_gidbl(gidbl, gidcur):
-    for gid in gidbl:
-        if gid == gidcur[:len(gid)]:
-            return True
-    return False

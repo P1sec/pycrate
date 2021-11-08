@@ -312,10 +312,7 @@ def _compile_text_pass(text, with_order, **kwargs):
         m = SYNT_RE_MODULEDEF.search(text)
         if not m:
             break
-        
-        #print(text[:m.start()])
-        #print(text[m.start():m.start()+100])
-        
+        #
         name, oidstr = module_get_name(text[:m.start()], fn)
         module['_name_'] = name
         if oidstr:
@@ -370,8 +367,6 @@ def _compile_text_pass(text, with_order, **kwargs):
         #
         # 5) scan the asnblock for module imports
         imports, cur = module_get_import(asnblock)
-        #if name == 'SUPL-REPORT':
-        #    assert()
         module['_imp_'] = {}
         if cur:
             asnblock = asnblock[cur:]
@@ -663,10 +658,10 @@ def module_get_import(text=''):
         fro = SYNT_RE_MODULEFROM.search(imp)
         while fro:
             # get module name / oid
-            name, oidstr, oidref = fro.groups()
-            # clean-up the oid
-            if oidstr:
-                oidstr = re.sub('\s{1,}', ' ', oidstr).strip()
+            cur_end, import_prm = extract_from_import(imp[fro.start():])
+            # clean-up the OID
+            if import_prm['oid']:
+                oidstr = re.sub('\s{1,}', ' ', import_prm['oid']).strip()
                 OidDummy = OID()
                 _path_stack(['val'])
                 try:
@@ -677,27 +672,29 @@ def module_get_import(text=''):
                 else:
                     oid = OidDummy._val
                 _path_pop()
-                new_imp = imp[fro.end():].strip()
-            elif oidref:
-                oidstr = oidref
+            elif import_prm['oidref']:
+                oidstr = import_prm['oidref']
                 # at this stage, nothing is compiled, so there is no way to
                 # get the OID value referenced
                 oid = []
-                new_imp = imp[fro.regs[-1][1]:].strip()
             else:
                 oidstr = ''
                 oid = []
-                new_imp = imp[fro.end():].strip()
-            # get all ASN.1 objects reference before
-            obj = imp[:fro.start()]
+            next_imp = imp[fro.start() + cur_end:].strip()
+            # get all ASN.1 objects reference before FROM
+            obj = imp[:fro.start()].strip()
             # clean them up and split them to a list
             obj = map(strip, re.sub('\s{1,}', ' ', obj).split(','))
             # remove {} at the end of parameterized objects
             obj = [o[:-2].strip() if o[-2:] == '{}' else o for o in obj] 
             # fill-in the import list
-            l.append({'name':name, 'oidstr':oidstr, 'oid':oid, 'obj':obj})
-            # iterate
-            imp = new_imp
+            l.append({'name':import_prm['name'],
+                      'with':import_prm['with'],
+                      'oidstr':oidstr,
+                      'oid':oid,
+                      'obj':obj})
+            # iterate to next import clause
+            imp = next_imp
             fro = SYNT_RE_MODULEFROM.search(imp)
         return l, m.end()
     else:
