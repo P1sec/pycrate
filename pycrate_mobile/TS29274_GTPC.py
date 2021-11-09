@@ -3207,9 +3207,6 @@ class APNRateControlStatus(Envelope):
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self['MaxPacketLossRateUL'].set_transauto(lambda: self['UL'].get_val() == 0)
-        self['MaxPacketLossRateDL'].set_transauto(lambda: self['DL'].get_val() == 0)
-
 
 
 #------------------------------------------------------------------------------#
