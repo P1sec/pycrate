@@ -4159,6 +4159,11 @@ class ASN1Obj(object):
         # 4) transfer references from ObjProxy to self
         if ObjProxy._ref:
             self._ref.update( ObjProxy._ref )
+        
+        if rest:
+            # may have ", ..." or "^ $other_constraint"
+            asnlog('WNG: remaining text for SIZE constraint, {1}'\
+              .format(self.fullname(), rest))
     
     def _parse_const_alphabet(self, const):
         const_index = len(self._const)
@@ -4211,6 +4216,11 @@ class ASN1Obj(object):
         # 4) transfer references from ObjProxy to self
         if ObjProxy._ref:
             self._ref.update( ObjProxy._ref )
+    
+        if rest:
+            # may have ", ..." or "^ $other_constraint"
+            asnlog('WNG: remaining text for ALPHABET constraint, {1}'\
+              .format(self.fullname(), rest))
     
     def _parse_const_withcomp(self, const):
         const_index = len(self._const)
