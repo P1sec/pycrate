@@ -929,15 +929,16 @@ class CSN1List(CSN1Obj):
     
     def _to_pack_obj(self):
         ret = []
-        for i, val in enumerate(self._val):
-            Obj = self._list[i]
-            # transfer offset and value to Obj
-            obj_off, obj_val = Obj._off, Obj._val
-            Obj._off, Obj._val = self._off, val
-            ret.extend( Obj._to_pack_csn() )
-            # restore offset and value
-            self._off = Obj._off
-            Obj._off, Obj._val = obj_off, obj_val
+        if self._val is not None:
+            for i, val in enumerate(self._val):
+                Obj = self._list[i]
+                # transfer offset and value to Obj
+                obj_off, obj_val = Obj._off, Obj._val
+                Obj._off, Obj._val = self._off, val
+                ret.extend( Obj._to_pack_csn() )
+                # restore offset and value
+                self._off = Obj._off
+                Obj._off, Obj._val = obj_off, obj_val
         return ret
     
     def clone(self):
